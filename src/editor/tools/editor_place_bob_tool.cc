@@ -32,7 +32,7 @@ choses an object to place randomly from all enabled
 and places this on the current field
 ===========
 */
-int Editor_Place_Bob_Tool::handle_click_impl
+int32_t Editor_Place_Bob_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	Editor_Game_Base & editor = parent.editor();

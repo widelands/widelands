@@ -91,7 +91,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 		// This house obviously requests wares and works on them
 		Section::Value* val;
 		while ((val=s->get_next_val(0))) {
-			int idx=tribe().get_ware_index(val->get_name());
+			int32_t idx=tribe().get_ware_index(val->get_name());
 			if (idx == -1)
 				throw wexception("Error in [inputs], ware %s is unknown!",
 					val->get_name());
@@ -128,7 +128,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 			 ++jt)
 			remove_spaces(*jt);
 
-      int amount=1;
+      int32_t amount=1;
 		if (amounts.size() == 2) {
          char *endp;
 			amount = strtol(amounts[1].c_str(), &endp, 0);
@@ -278,7 +278,7 @@ void ProductionSite::calc_statistics()
 			 "%.0f%% %s", percOk, trend.c_str());
 	else snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%", percOk);
 
-	m_last_stat_percent = static_cast<char>(percOk);
+	m_last_stat_percent = static_cast<char>(percOk); //FIXME: ARGH!
 
 	m_statistics_changed = false;
 }
@@ -314,7 +314,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 		if (!m_workers.size()) {
 			const std::vector<ProductionSite_Descr::Worker_Info>* info=descr().get_workers();
          uint32_t i;
-         int j;
+         int32_t j;
          for (i=0; i<info->size(); i++)
             for (j=0; j< ((*info)[i]).how_many; j++)
 					request_worker(((*info)[i]).name.c_str());
@@ -452,7 +452,7 @@ Issue the worker requests
 void ProductionSite::request_worker(const char * const worker_name) {
 	assert(worker_name);
 
-	int wareid = owner().tribe().get_safe_worker_index(worker_name);
+	int32_t wareid = owner().tribe().get_safe_worker_index(worker_name);
 
 	m_worker_requests.push_back(new Request(this, wareid, &ProductionSite::request_worker_callback, this, Request::WORKER));
 }
@@ -466,7 +466,7 @@ Called when our worker arrives.
 ===============
 */
 void ProductionSite::request_worker_callback
-(Game* g, Request* rq, int, Worker* w, void* data)
+(Game* g, Request* rq, int32_t, Worker* w, void* data)
 {
 	ProductionSite* psite = (ProductionSite*)data;
 
@@ -516,7 +516,7 @@ void ProductionSite::act(Game* g, uint32_t data)
 	if
 		(m_program_timer
 		 and
-		 static_cast<int>(g->get_gametime() - m_program_time) >= 0)
+		 static_cast<int32_t>(g->get_gametime() - m_program_time) >= 0)
 	{
 		m_program_timer = false;
 
@@ -614,7 +614,7 @@ void ProductionSite::program_act(Game* g)
 					if (inputs[i].ware_descr().name() == *jt) {
 						WaresQueue* wq = m_input_queues[i];
 						if
-							(static_cast<int>(wq->get_filled())
+							(static_cast<int32_t>(wq->get_filled())
 								>=
 								action->iparam1)
 						{
@@ -662,7 +662,7 @@ void ProductionSite::program_act(Game* g)
 					if (inputs[i].ware_descr().name() == *jt) {
 						WaresQueue* wq = m_input_queues[i];
 						if
-							(static_cast<int>(wq->get_filled())
+							(static_cast<int32_t>(wq->get_filled())
 								>=
 								action->iparam1)
 						{
@@ -705,7 +705,7 @@ void ProductionSite::program_act(Game* g)
 			molog("  Mine '%s'", action->sparam1.c_str());
 
 			res = map.get_world()->get_resource(action->sparam1.c_str());
-			if (static_cast<signed char>(res)==-1)
+			if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!
 				throw wexception("ProductionAction::actMine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
 					" with world!!\n",  action->sparam1.c_str());
 
@@ -713,7 +713,7 @@ void ProductionSite::program_act(Game* g)
 			uint32_t totalres = 0;
 			uint32_t totalchance = 0;
 			uint32_t totalstart = 0;
-			int pick;
+			int32_t pick;
 
 			{
 				MapRegion<Area<FCoords> > mr
@@ -752,7 +752,7 @@ void ProductionSite::program_act(Game* g)
 			}
 
 			// how much is digged
-			int digged_percentage=100;
+			int32_t digged_percentage=100;
 			if (totalstart) digged_percentage = 100 - totalres * 100 / totalstart;
 			if (not totalres) digged_percentage = 100;
 
@@ -1070,7 +1070,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 		} else if (action->type == ProductionAction::actProduce) {
 			if (state->phase == 0)
 			{
-				int wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
+				int32_t wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
 
 				WareInstance* item = new WareInstance(
 						wareid, get_owner()->tribe().get_ware_descr(wareid));

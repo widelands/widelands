@@ -59,8 +59,8 @@ Interactive_Base(e), m_editor(e)
 	fieldclicked.set(this, &Editor_Interactive::map_clicked);
 
    // user interface buttons
-   int x = (get_w() - (7*34)) >> 1;
-   int y = get_h() - 34;
+   int32_t x = (get_w() - (7*34)) >> 1;
+   int32_t y = get_h() - 34;
 
 	new UI::Button<Editor_Interactive>
 		(this,
@@ -165,8 +165,8 @@ void Editor_Interactive::think()
 {
 	Interactive_Base::think();
 
-	int lasttime = m_realtime;
-	int frametime;
+	int32_t lasttime = m_realtime;
+	int32_t frametime;
 
 	m_realtime = WLApplication::get()->get_time();
 	frametime = m_realtime - lasttime;
@@ -256,7 +256,7 @@ void Editor_Interactive::toolsize_menu_btn() {
 }
 
 
-bool Editor_Interactive::handle_key(bool down, int code, char) {
+bool Editor_Interactive::handle_key(bool down, int32_t code, char) {
    if (code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
 
 	if (down) {
@@ -433,7 +433,7 @@ void Editor_Interactive::unreference_player_tribe
 			if (it->object == data) {references.erase(it); --it, --references_end;}
 }
 
-bool Editor_Interactive::is_player_tribe_referenced(int player) {
+bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
 	assert(0 < player);
 	assert    (player <= m_editor.map().get_nrplayers());
 

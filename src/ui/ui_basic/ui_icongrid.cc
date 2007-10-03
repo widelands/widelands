@@ -30,7 +30,7 @@ namespace UI {
 /**
 Initialize the grid
 */
-Icon_Grid::Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint32_t flags, int cols)
+Icon_Grid::Icon_Grid(Panel* parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, uint32_t flags, int32_t cols)
 	: Panel(parent, x, y, 0, 0)
 {
 	m_flags = flags;
@@ -52,7 +52,7 @@ Icon_Grid::Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint32_t
 Add a new icon to the list and resize appropriately.
 Returns the index of the newly added icon.
 */
-int Icon_Grid::add(uint32_t picid, void* data, std::string descr)
+int32_t Icon_Grid::add(uint32_t picid, void* data, std::string descr)
 {
 	Item it;
 
@@ -69,7 +69,7 @@ int Icon_Grid::add(uint32_t picid, void* data, std::string descr)
 	// resize
 	if (get_orientation() == Grid_Horizontal)
 	{
-		int rows = (m_items.size() + m_columns - 1) / m_columns;
+		int32_t rows = (m_items.size() + m_columns - 1) / m_columns;
 
 		if (rows <= 1)
 			set_size(m_cell_width * m_items.size(), m_cell_height + m_font_height);
@@ -78,7 +78,7 @@ int Icon_Grid::add(uint32_t picid, void* data, std::string descr)
 	}
 	else
 	{
-		int cols = (m_items.size() + m_columns - 1) / m_columns;
+		int32_t cols = (m_items.size() + m_columns - 1) / m_columns;
 
 		if (cols <= 1)
 			set_size(m_cell_width, m_cell_height * m_items.size() + m_font_height);
@@ -93,7 +93,7 @@ int Icon_Grid::add(uint32_t picid, void* data, std::string descr)
 /**
 Returns the user-defined data of the icon with the given index.
 */
-void* Icon_Grid::get_data(int idx)
+void* Icon_Grid::get_data(int32_t idx)
 {
 	assert(static_cast<uint32_t>(idx) < m_items.size());
 
@@ -104,7 +104,7 @@ void* Icon_Grid::get_data(int idx)
 /**
 Set the currently selected icon for persistant grids.
 */
-void Icon_Grid::set_selection(int idx)
+void Icon_Grid::set_selection(int32_t idx)
 {
 	assert(is_persistant());
 	assert(static_cast<uint32_t>(idx) < m_items.size());
@@ -131,7 +131,7 @@ Draw the building symbols
 */
 void Icon_Grid::draw(RenderTarget* dst)
 {
-	int x, y;
+	int32_t x, y;
 	bool highlight = false;
 
 	// First of all, draw the highlight
@@ -186,7 +186,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 	}
 
 	if (highlight) {
-      int w, h;
+      int32_t w, h;
       g_fh->get_size(UI_FONT_SMALL,  m_items[m_highlight].descr.c_str(), &w, &h);
       if (w>get_inner_w())
          set_inner_size(w, get_inner_h());
@@ -202,10 +202,10 @@ void Icon_Grid::draw(RenderTarget* dst)
 Return the item index for a given point inside the Icon_Grid.
 Returns -1 if no item is below the point.
 */
-int Icon_Grid::index_for_point(int x, int y)
+int32_t Icon_Grid::index_for_point(int32_t x, int32_t y)
 {
-	int w = m_cell_width;
-	int h = m_cell_height;
+	int32_t w = m_cell_width;
+	int32_t h = m_cell_height;
 
 	if (get_orientation() != Grid_Horizontal) {
 		std::swap(x, y);
@@ -215,7 +215,7 @@ int Icon_Grid::index_for_point(int x, int y)
 	if (x < 0 || x >= m_columns * w || y < 0)
 		return -1;
 
-	const int index = m_columns * (y / h) + (x / w);
+	const int32_t index = m_columns * (y / h) + (x / w);
 
 	if (static_cast<size_t>(index) >= m_items.size()) return -1;
 
@@ -226,7 +226,7 @@ int Icon_Grid::index_for_point(int x, int y)
 /**
 Calculate the upper left corner of the cell with the given index.
 */
-void Icon_Grid::get_cell_position(int idx, int* px, int* py)
+void Icon_Grid::get_cell_position(int32_t idx, int32_t* px, int32_t* py)
 {
 	if (get_orientation() == Grid_Horizontal)
 	{
@@ -244,10 +244,10 @@ void Icon_Grid::get_cell_position(int idx, int* px, int* py)
 /**
 Issue an update() call for the cell with the given idx.
 */
-void Icon_Grid::update_for_index(int idx)
+void Icon_Grid::update_for_index(int32_t idx)
 {
 	if (static_cast<size_t>(idx) < m_items.size()) {
-		int x, y;
+		int32_t x, y;
 
 		get_cell_position(idx, &x, &y);
 		update(x, y, m_cell_width, m_cell_height);
@@ -274,8 +274,8 @@ void Icon_Grid::handle_mousein(bool inside)
 /**
 Update highlight under the mouse and send signals.
 */
-bool Icon_Grid::handle_mousemove(const Uint8, int x, int y, int, int) {
-	int hl = index_for_point(x, y);
+bool Icon_Grid::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
+	int32_t hl = index_for_point(x, y);
 
 	if (hl != m_highlight) {
 		update_for_index(m_highlight);
@@ -293,10 +293,10 @@ bool Icon_Grid::handle_mousemove(const Uint8, int x, int y, int, int) {
 Left mouse down selects the building, left mouse up acknowledges and sends the
 signal.
 */
-bool Icon_Grid::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Icon_Grid::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	const int hl = index_for_point(x, y);
+	const int32_t hl = index_for_point(x, y);
 
 	if (hl >= 0) {
 		grab_mouse(true);
@@ -305,10 +305,10 @@ bool Icon_Grid::handle_mousepress(const Uint8 btn, int x, int y) {
 
 	return true;
 }
-bool Icon_Grid::handle_mouserelease(const Uint8 btn, int x, int y) {
+bool Icon_Grid::handle_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	const int hl = index_for_point(x, y);
+	const int32_t hl = index_for_point(x, y);
 
 	if (m_clicked >= 0) {
 		grab_mouse(false);

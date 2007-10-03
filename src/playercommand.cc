@@ -50,7 +50,7 @@ enum {
 
 /*** class PlayerCommand ***/
 
-PlayerCommand::PlayerCommand (int t, char s) : GameLogicCommand (t)
+PlayerCommand::PlayerCommand (int32_t t, char s) : GameLogicCommand (t)
 {
 	sender = s;
 	cmdserial = 0;
@@ -297,7 +297,7 @@ void Cmd_BuildFlag::Write
 
 /*** class Cmd_BuildRoad ***/
 
-Cmd_BuildRoad::Cmd_BuildRoad (int t, int p, Path & pa) :
+Cmd_BuildRoad::Cmd_BuildRoad (int32_t t, int32_t p, Path & pa) :
 PlayerCommand(t, p),
 path         (&pa),
 start        (pa.get_start()),
@@ -697,7 +697,7 @@ void Cmd_DropSoldier::Read
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
 
 		// Soldier serial
-		int soldierserial=fr.Unsigned32();
+		int32_t soldierserial=fr.Unsigned32();
 		assert(mol.is_object_known(soldierserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		soldier=mol.get_object_by_file_index(soldierserial)->get_serial();
 	} else

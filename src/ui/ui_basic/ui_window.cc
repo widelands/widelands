@@ -62,7 +62,7 @@ namespace UI {
  *       h
  *       title   string to display in the window title
  */
-Window::Window(Panel *parent, int x, int y, uint32_t w, uint32_t h, const char *title) :
+Window::Window(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const char *title) :
 Panel(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2, TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
 _is_minimal(false), _dragging(false),
 _docked_left(false), _docked_right(false), _docked_bottom(false),
@@ -116,19 +116,19 @@ If configured, hang the border off the edge of the panel.
 */
 void Window::move_inside_parent() {
 	if (Panel * const parent = get_parent()) {
-		int px = get_x();
-		int py = get_y();
+		int32_t px = get_x();
+		int32_t py = get_y();
 		if (px < 0) {
 			px = 0;
 			if (parent->get_dock_windows_to_edges() and not _docked_left)
 				dock_left();
-		} else if (px + static_cast<int>(get_w()) > parent->get_inner_w()) {
+		} else if (px + static_cast<int32_t>(get_w()) > parent->get_inner_w()) {
 			px = parent->get_inner_w() - get_w();
 			if (parent->get_dock_windows_to_edges() and not _docked_right)
 				dock_right();
 		}
 		if (py < 0) py = 0;
-		else if (py + static_cast<int>(get_h()) > parent->get_inner_h()) {
+		else if (py + static_cast<int32_t>(get_h()) > parent->get_inner_h()) {
 			py = parent->get_inner_h() - get_h();
 			if
 				(not _is_minimal
@@ -170,11 +170,11 @@ void Window::draw_border(RenderTarget* dst)
 
 	const uint32_t hidden_width_left  = _docked_left  ? VT_B_PIXMAP_THICKNESS : 0;
 	const uint32_t hidden_width_right = _docked_right ? VT_B_PIXMAP_THICKNESS : 0;
-	const int hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN + hidden_width_right;
-	const int hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
+	const int32_t hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN + hidden_width_right;
+	const int32_t hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
 
 	{//  Top border.
-		int pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
+		int32_t pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
 
 		dst->blitrect //  top left corner
 			(Point(0, 0),
@@ -192,7 +192,7 @@ void Window::draw_border(RenderTarget* dst)
 			  HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
-		const int width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
+		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 		assert(0 <= HZ_B_TOTAL_PIXMAP_LEN - width);
 		dst->blitrect
 			(Point(pos, 0),
@@ -211,8 +211,8 @@ void Window::draw_border(RenderTarget* dst)
 			 m_title.c_str(), Align_Center);
 
 	if (not _is_minimal) {
-		const int vt_bar_end = get_h() - (_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
-		const int vt_bar_end_minus_middle = vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
+		const int32_t vt_bar_end = get_h() - (_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
+		const int32_t vt_bar_end_minus_middle = vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
 
 		if (not _docked_left) {
 
@@ -222,7 +222,7 @@ void Window::draw_border(RenderTarget* dst)
 				 m_pic_lborder,
 				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
-			int pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
+			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  left bar
 			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
@@ -235,7 +235,7 @@ void Window::draw_border(RenderTarget* dst)
 				  VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
 
 			//  odd pixels of left bar and left bottom thingy
-			const int height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
+			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
 			dst->blitrect
 				(Point(0, pos),
@@ -254,14 +254,14 @@ void Window::draw_border(RenderTarget* dst)
 			 m_pic_background, Point(0, 0));
 
 		if (not _docked_right) {
-			const int right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
+			const int32_t right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
 
 			dst->blitrect// right top thingy
 				(Point(right_border_x, TP_B_PIXMAP_THICKNESS),
 				 m_pic_rborder,
 				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
-			int pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
+			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  rigt bar
 			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
@@ -274,7 +274,7 @@ void Window::draw_border(RenderTarget* dst)
 				  VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
 
 			// odd pixels of right bar and right bottom thingy
-			const int height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
+			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			dst->blitrect
 				(Point(right_border_x, pos),
 				 m_pic_rborder,
@@ -283,7 +283,7 @@ void Window::draw_border(RenderTarget* dst)
 				  VT_B_PIXMAP_THICKNESS, height));
 		}
 		if (not _docked_bottom) {
-			int pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
+			int32_t pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
 
 			dst->blitrect //  bottom left corner
 				(Point(0, get_h() - BT_B_PIXMAP_THICKNESS),
@@ -300,7 +300,7 @@ void Window::draw_border(RenderTarget* dst)
 				  HZ_B_MIDDLE_PIXMAP_LEN, BT_B_PIXMAP_THICKNESS));
 
 			// odd pixels of bottom bar and bottom right corner
-			const int width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
+			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 			dst->blitrect
 				(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
 				 m_pic_bottom,
@@ -319,7 +319,7 @@ void Window::think() {if (not is_minimal()) Panel::think();}
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool Window::handle_mousepress(const Uint8 btn, int mx, int my) {
+bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
 	const WLApplication & wla = *WLApplication::get();
 	if
 		(((wla.get_key_state(KEY_LCTRL) | wla.get_key_state(KEY_RCTRL))
@@ -344,7 +344,7 @@ bool Window::handle_mousepress(const Uint8 btn, int mx, int my) {
 	}
 	return true;
 }
-bool Window::handle_mouserelease(const Uint8 btn, int, int) {
+bool Window::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT) {
 		grab_mouse(false);
 		_dragging = false;
@@ -420,23 +420,23 @@ inline void Window::undock_bottom() {
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
-bool Window::handle_mousemove(const Uint8, int mx, int my, int, int) {
+bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int32_t) {
 	if (_dragging) {
-		const int mouse_x = get_x() + get_lborder() + mx;
-		const int mouse_y = get_y() + get_tborder() + my;
-		int left = std::max(0, _drag_start_win_x + mouse_x - _drag_start_mouse_x);
-		int top  = std::max(0, _drag_start_win_y + mouse_y - _drag_start_mouse_y);
-		int new_left = left, new_top = top;
+		const int32_t mouse_x = get_x() + get_lborder() + mx;
+		const int32_t mouse_y = get_y() + get_tborder() + my;
+		int32_t left = std::max(0, _drag_start_win_x + mouse_x - _drag_start_mouse_x);
+		int32_t top  = std::max(0, _drag_start_win_y + mouse_y - _drag_start_mouse_y);
+		int32_t new_left = left, new_top = top;
 
 		if (const Panel * const parent = get_parent()) {
-			const int w = get_w();
-			const int h = get_h();
-			const int max_x = parent->get_inner_w();
-			const int max_y = parent->get_inner_h();
+			const int32_t w = get_w();
+			const int32_t h = get_h();
+			const int32_t max_x = parent->get_inner_w();
+			const int32_t max_y = parent->get_inner_h();
 			assert(w <= max_x); //  These assertions will fail when having too
 			assert(h <= max_y); //  low resolution and opening a large window.
-			int max_x_minus_w = max_x - w;
-			int max_y_minus_h = max_y - h;
+			int32_t max_x_minus_w = max_x - w;
+			int32_t max_y_minus_h = max_y - h;
 			left = std::min(max_x_minus_w, left);
 			top  = std::min(max_y_minus_h, top);
 			const uint8_t psnap = parent->get_panel_snap_distance ();
@@ -482,28 +482,28 @@ bool Window::handle_mousemove(const Uint8, int mx, int my, int, int) {
 
 			{//  Snap to other Panels.
 				const bool SOWO = parent->get_snap_windows_only_when_overlapping();
-				const int right = left + w, bot = top + h;
+				const int32_t right = left + w, bot = top + h;
 
 				for (panellist_cit i=parent->get_first_child();
 				     i!=parent->get_last_child();
 				     ++i)
 				{
 					if ((*i) != this and (*i)->is_snap_target()) {
-						const int other_left  = (*i)->get_x();
-						const int other_top   = (*i)->get_y();
-						const int other_right = other_left + (*i)->get_w();
-						const int other_bot   = other_top  + (*i)->get_h();
+						const int32_t other_left  = (*i)->get_x();
+						const int32_t other_top   = (*i)->get_y();
+						const int32_t other_right = other_left + (*i)->get_w();
+						const int32_t other_bot   = other_top  + (*i)->get_h();
 
 						if (other_top <= bot && other_bot >= top) {
 							if (not SOWO || left <= other_right) {
-								const int distance = std::abs(left - other_right);
+								const int32_t distance = std::abs(left - other_right);
 								if (distance < nearest_snap_distance_x) {
 									nearest_snap_distance_x = distance;
 									new_left = other_right;
 								}
 							}
 							if (not SOWO || right >= other_left) {
-								const int distance = std::abs(right - other_left);
+								const int32_t distance = std::abs(right - other_left);
 								if (distance < nearest_snap_distance_x) {
 									nearest_snap_distance_x = distance;
 									new_left = other_left - w;
@@ -512,14 +512,14 @@ bool Window::handle_mousemove(const Uint8, int mx, int my, int, int) {
 						}
 						if (other_left <= right && other_right >= left) {
 							if (not SOWO || top <= other_bot) {
-								const int distance = std::abs(top - other_bot);
+								const int32_t distance = std::abs(top - other_bot);
 								if (distance < nearest_snap_distance_y) {
 									nearest_snap_distance_y = distance;
 									new_top = other_bot;
 								}
 							}
 							if (not SOWO || bot >= other_top) {
-								const int distance = std::abs(bot - other_top);
+								const int32_t distance = std::abs(bot - other_top);
 								if (distance < nearest_snap_distance_y) {
 									nearest_snap_distance_y = distance;
 									new_top = other_top - h;

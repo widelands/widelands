@@ -74,7 +74,7 @@ PlayerImmovable* IdleWorkerSupply::get_position(Game* g)
 /**
  * It's just the one worker.
  */
-int IdleWorkerSupply::get_amount(const int ware) const
+int32_t IdleWorkerSupply::get_amount(const int32_t ware) const
 {
 	if (ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()))
 		return 1;
@@ -83,7 +83,7 @@ int IdleWorkerSupply::get_amount(const int ware) const
 }
 
 
-WareInstance * IdleWorkerSupply::launch_item(Game *, int)
+WareInstance * IdleWorkerSupply::launch_item(Game *, int32_t)
 {
 	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");
 }
@@ -92,7 +92,7 @@ WareInstance * IdleWorkerSupply::launch_item(Game *, int)
 /**
  * No need to explicitly launch the worker.
  */
-Worker* IdleWorkerSupply::launch_worker(Game *, int ware)
+Worker* IdleWorkerSupply::launch_worker(Game *, int32_t ware)
 {
 	assert(m_worker->descr().can_act_as(ware));
 
@@ -100,7 +100,7 @@ Worker* IdleWorkerSupply::launch_worker(Game *, int ware)
 }
 
 
-Soldier* IdleWorkerSupply::launch_soldier(Game *, int, Requeriments * req)
+Soldier* IdleWorkerSupply::launch_soldier(Game *, int32_t, Requeriments * req)
 {
 	assert (m_worker->get_worker_type()==Worker_Descr::SOLDIER);
 
@@ -114,7 +114,7 @@ Soldier* IdleWorkerSupply::launch_soldier(Game *, int, Requeriments * req)
 }
 
 
-int IdleWorkerSupply::get_passing_requeriments(Game *, int, Requeriments * req)
+int32_t IdleWorkerSupply::get_passing_requeriments(Game *, int32_t, Requeriments * req)
 {
 	assert (m_worker->get_worker_type()==Worker_Descr::SOLDIER);
 
@@ -128,7 +128,7 @@ int IdleWorkerSupply::get_passing_requeriments(Game *, int, Requeriments * req)
 }
 
 
-void IdleWorkerSupply::mark_as_used (Game *, int ware, Requeriments * r)
+void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, Requeriments * r)
 {
 	assert(ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()));
 

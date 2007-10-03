@@ -24,7 +24,7 @@
 
 struct Cmd_Incorporate : public GameLogicCommand {
 		Cmd_Incorporate() : GameLogicCommand(0) {} // For savegame loading
-		Cmd_Incorporate (int t, Worker* w): GameLogicCommand(t) {worker=w;}
+		Cmd_Incorporate (int32_t t, Worker* w): GameLogicCommand(t) {worker=w;}
 
 
 		void execute (Game* g) {worker->incorporate(g);}
@@ -39,7 +39,7 @@ struct Cmd_Incorporate : public GameLogicCommand {
 		 Widelands_Map_Map_Object_Loader &);
 
 		/// Get this command ID
-		virtual int get_id() {return QUEUE_CMD_INCORPORATE;}
+		virtual int32_t get_id() {return QUEUE_CMD_INCORPORATE;}
 
 
 private:

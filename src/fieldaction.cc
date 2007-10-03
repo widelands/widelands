@@ -56,19 +56,19 @@ struct BuildGrid : public UI::Icon_Grid {
 	BuildGrid
 		(UI::Panel* parent,
 		 const Tribe_Descr & tribe,
-		 const int x, const int y,
-		 int cols);
+		 const int32_t x, const int32_t y,
+		 int32_t cols);
 
-	UI::Signal1<long> buildclicked;
-	UI::Signal1<long> buildmouseout;
-	UI::Signal1<long> buildmousein;
+	UI::Signal1<int32_t> buildclicked;
+	UI::Signal1<int32_t> buildmouseout;
+	UI::Signal1<int32_t> buildmousein;
 
-	void add(int id);
+	void add(int32_t id);
 
 private:
-	void clickslot(int idx);
-	void mouseoutslot(int idx);
-	void mouseinslot(int idx);
+	void clickslot(int32_t idx);
+	void mouseoutslot(int32_t idx);
+	void mouseinslot(int32_t idx);
 
 private:
 	const Tribe_Descr & m_tribe;
@@ -85,8 +85,8 @@ Initialize the grid
 BuildGrid::BuildGrid
 (UI::Panel* parent,
  const Tribe_Descr & tribe,
- const int x, const int y,
- int cols)
+ const int32_t x, const int32_t y,
+ int32_t cols)
 :
 UI::Icon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols),
 m_tribe(tribe)
@@ -104,7 +104,7 @@ BuildGrid::add
 Add a new building to the list of buildable buildings
 ===============
 */
-void BuildGrid::add(int id)
+void BuildGrid::add(int32_t id)
 {
 	Building_Descr* descr = m_tribe.get_building_descr(id);
 	uint32_t picid = descr->get_buildicon();
@@ -121,9 +121,9 @@ The icon with the given index has been clicked. Figure out which building it
 belongs to and trigger signal buildclicked.
 ===============
 */
-void BuildGrid::clickslot(int idx)
+void BuildGrid::clickslot(int32_t idx)
 {
-	long id = (long)get_data(idx);
+	int32_t id = (int32_t)get_data(idx);
 
 	buildclicked.call(id);
 }
@@ -137,9 +137,9 @@ The mouse pointer has left the icon with the given index. Figure out which
 building it belongs to and trigger signal buildmouseout.
 ===============
 */
-void BuildGrid::mouseoutslot(int idx)
+void BuildGrid::mouseoutslot(int32_t idx)
 {
-  long id = (long)get_data(idx);
+  int32_t id = (int32_t)get_data(idx);
 
 	buildmouseout.call(id);
 }
@@ -153,9 +153,9 @@ The mouse pointer has entered the icon with the given index. Figure out which
 building it belongs to and trigger signal buildmousein.
 ===============
 */
-void BuildGrid::mouseinslot(int idx)
+void BuildGrid::mouseinslot(int32_t idx)
 {
-	long id = (long)get_data(idx);
+	int32_t id = (int32_t)get_data(idx);
 
 	buildmousein.call(id);
 }
@@ -175,7 +175,7 @@ struct FieldActionWindow : public UI::UniqueWindow {
 
 	void init();
 	void add_buttons_auto();
-	void add_buttons_build(int buildcaps);
+	void add_buttons_build(int32_t buildcaps);
 	void add_buttons_road(bool flag);
    void add_buttons_attack();
 
@@ -189,9 +189,9 @@ struct FieldActionWindow : public UI::UniqueWindow {
 	void act_buildroad();
 	void act_abort_buildroad();
 	void act_removeroad();
-	void act_build(long idx);
-	void building_icon_mouse_out(long idx);
-	void building_icon_mouse_in(long idx);
+	void act_build(int32_t idx);
+	void building_icon_mouse_out(int32_t idx);
+	void building_icon_mouse_in(int32_t idx);
 	void act_geologist();
    void act_attack();         /// Launch the attack
    void act_attack_more();    /// Increase the number of soldiers to be launched
@@ -224,7 +224,7 @@ private:
    /// Variables to use with attack dialog
    UI::Textarea* m_text_attackers;
    uint32_t     m_attackers;      // 0 - Number of available soldiers.
-   int      m_attackers_type; // STRONGEST - WEAKEST ...
+   int32_t      m_attackers_type; // STRONGEST - WEAKEST ...
 };
 
 static const char* const pic_tab_buildroad = "pics/menu_tab_buildroad.png";
@@ -390,7 +390,7 @@ void FieldActionWindow::add_buttons_auto()
 		}
 		else
 		{
-			int buildcaps = m_plr->get_buildcaps(m_field);
+			int32_t buildcaps = m_plr->get_buildcaps(m_field);
 
 			// Add house building
 			if ((buildcaps & BUILDCAPS_SIZEMASK) || (buildcaps & BUILDCAPS_MINE))
@@ -478,7 +478,7 @@ FieldActionWindow::add_buttons_build
 Add buttons for house building.
 ===============
 */
-void FieldActionWindow::add_buttons_build(int buildcaps)
+void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 {
 	BuildGrid* bbg_house[3] = {0, 0, 0};
 	BuildGrid* bbg_mine = 0;
@@ -487,7 +487,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 
 	m_fastclick = false;
 
-	for (int id = 0; id < tribe.get_nrbuildings(); id++)
+	for (int32_t id = 0; id < tribe.get_nrbuildings(); id++)
 	{
 		Building_Descr * descr = tribe.get_building_descr(id);
 		BuildGrid** ppgrid;
@@ -512,7 +512,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 			}
 		else
 			{
-			int size = descr->get_size() - BaseImmovable::SMALL;
+			int32_t size = descr->get_size() - BaseImmovable::SMALL;
 
 			if ((buildcaps & BUILDCAPS_SIZEMASK) < (size+1))
 				continue;
@@ -534,7 +534,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 		}
 
 	// Add all necessary tabs
-	for (int i = 0; i < 3; i++)
+	for (int32_t i = 0; i < 3; i++)
 		if (bbg_house[i])
 			m_tabpanel->activate
 				(m_best_tab = add_tab
@@ -783,7 +783,7 @@ FieldActionWindow::act_build
 Start construction of the building with the give description index
 ===============
 */
-void FieldActionWindow::act_build(long idx)
+void FieldActionWindow::act_build(int32_t idx)
 {
 	Editor_Game_Base & egbase = m_iabase->egbase();
 	if (Game * const game = dynamic_cast<Game *>(&egbase))
@@ -805,7 +805,7 @@ FieldActionWindow::building_icon_mouse_out
 The mouse pointer has moved away from the icon for the building with the index idx.
 ===============
 */
-void FieldActionWindow::building_icon_mouse_out(long) {
+void FieldActionWindow::building_icon_mouse_out(int32_t) {
 	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 		m_workarea_preview_job_id = Overlay_Manager::Job_Id::Null();
@@ -820,7 +820,7 @@ FieldActionWindow::building_icon_mouse_in
 The mouse pointer has moved to the icon for the building with the index idx.
 ===============
 */
-void FieldActionWindow::building_icon_mouse_in(long idx) {
+void FieldActionWindow::building_icon_mouse_in(int32_t idx) {
 	if (m_iabase->m_show_workarea_preview) {
 		assert(not m_workarea_preview_job_id);
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
@@ -855,7 +855,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 		for
 			(Workarea_Info::const_iterator it = workarea_info.begin();
 			 it != workarea_info.end(); ++it) {
-			const int radius = it->first;
+			const int32_t radius = it->first;
 			log("Radius: %i\n", radius);
 			const std::set<std::string> & descriptions = it->second;
 			for

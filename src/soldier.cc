@@ -45,15 +45,15 @@ struct IdleSoldierSupply : public Supply {
 	void set_economy(Economy* e);
 
 	virtual PlayerImmovable* get_position(Game* g);
-	virtual int get_amount(const int ware) const;
+	virtual int32_t get_amount(const int32_t ware) const;
 	virtual bool is_active() const throw ();
 
-	virtual WareInstance* launch_item(Game* g, int ware) __attribute__ ((noreturn));
-	virtual Worker* launch_worker(Game* g, int ware);
+	virtual WareInstance* launch_item(Game* g, int32_t ware) __attribute__ ((noreturn));
+	virtual Worker* launch_worker(Game* g, int32_t ware);
 
-	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
-	virtual int get_passing_requeriments(Game* g, int ware, Requeriments* r);
-	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
+	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
+	virtual int32_t get_passing_requeriments(Game* g, int32_t ware, Requeriments* r);
+	virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r);
 private:
 	Soldier * m_soldier;
 	Economy * m_economy;
@@ -127,7 +127,7 @@ IdleSoldierSupply::get_amount
 It's just the one soldier.
 ===============
 */
-int IdleSoldierSupply::get_amount(const int ware) const {
+int32_t IdleSoldierSupply::get_amount(const int32_t ware) const {
 	if (ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()))
 		return 1;
 
@@ -151,7 +151,7 @@ bool IdleSoldierSupply::is_active() const throw () {return true;}
 IdleSoldierSupply::launch_item
 ===============
 */
-WareInstance* IdleSoldierSupply::launch_item(Game *, int)
+WareInstance* IdleSoldierSupply::launch_item(Game *, int32_t)
 {throw wexception("IdleSoldierSupply::launch_item() makes no sense.");}
 
 
@@ -160,7 +160,7 @@ WareInstance* IdleSoldierSupply::launch_item(Game *, int)
 IdleSodlierSupply::launch_worker
 ===============
 */
-Worker* IdleSoldierSupply::launch_worker(Game* g, int ware)
+Worker* IdleSoldierSupply::launch_worker(Game* g, int32_t ware)
 {
 	log ("IdleSoldierSupply::launch_worker() Warning something can go wrong around here.\n");
 
@@ -176,7 +176,7 @@ No need to explicitly launch the soldier.
 ===============
 */
 Soldier * IdleSoldierSupply::launch_soldier
-(Game *, int ware, Requeriments * req)
+(Game *, int32_t ware, Requeriments * req)
 {
 	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
@@ -205,7 +205,7 @@ Soldier * IdleSoldierSupply::launch_soldier
 IdleSodlierSupply::mark_as_used
 ===============
 */
-void IdleSoldierSupply::mark_as_used(Game *, int ware, Requeriments * req) {
+void IdleSoldierSupply::mark_as_used(Game *, int32_t ware, Requeriments * req) {
 	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
 	if (req)
@@ -235,8 +235,8 @@ IdleSodlierSupply::get_passing_requeriments
 No need to explicitly launch the soldier.
 ===============
 */
-int IdleSoldierSupply::get_passing_requeriments
-(Game *, int ware, Requeriments * req)
+int32_t IdleSoldierSupply::get_passing_requeriments
+(Game *, int32_t ware, Requeriments * req)
 {
 	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
@@ -606,7 +606,7 @@ void Soldier::draw
 		assert(2 <= r.h);
 		dst.fill_rect
 				(Rect
-				(r + Point(1, 1), static_cast<int>(fraction * (r.w - 2)), r.h - 2),
+				(r + Point(1, 1), static_cast<int32_t>(fraction * (r.w - 2)), r.h - 2),
 			color);
 
 	// Draw information fields about levels

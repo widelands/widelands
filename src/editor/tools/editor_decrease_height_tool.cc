@@ -26,7 +26,7 @@
 #include "editorinteractive.h"
 
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.
-int Editor_Decrease_Height_Tool::handle_click_impl
+int32_t Editor_Decrease_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	return map.change_height

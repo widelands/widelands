@@ -28,14 +28,14 @@
 /**
 * Check if autosave is not needed.
  */
-void SaveHandler::think(Game *g, int realtime) {
+void SaveHandler::think(Game *g, int32_t realtime) {
 	initialize(realtime);
 
-	int autosaveInterval = g_options.pull_section("global")->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
+	int32_t autosaveInterval = g_options.pull_section("global")->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
 	if (autosaveInterval <= 0)
 		return; // no autosave requested
 
-	int elapsed = (realtime-m_lastSaveTime)/1000;
+	int32_t elapsed = (realtime-m_lastSaveTime)/1000;
 	if (elapsed < autosaveInterval)
 		return;
 
@@ -76,7 +76,7 @@ void SaveHandler::think(Game *g, int realtime) {
 /**
 * Initialize autosave timer
  */
-void SaveHandler::initialize(int currenttime) {
+void SaveHandler::initialize(int32_t currenttime) {
 	if (m_initialized)
 		return;
 

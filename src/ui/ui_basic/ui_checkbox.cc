@@ -37,7 +37,7 @@ Stateboxes start out enabled and unchecked.
 If picid is non-zero, the given picture is used instead of the normal checkbox
 graphics.
 */
-Statebox::Statebox(Panel *parent, int x, int y, uint32_t picid)
+Statebox::Statebox(Panel *parent, int32_t x, int32_t y, uint32_t picid)
 	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
 {
 	if (picid)
@@ -164,14 +164,14 @@ void Statebox::handle_mousein(bool inside)
 /**
  * Left-click: Toggle checkbox state
  */
-bool Statebox::handle_mousepress(const Uint8 btn, int, int) {
+bool Statebox::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_enabled) clicked();
 
 	return true;
 }
-bool Statebox::handle_mouserelease(const Uint8 btn, int, int)
+bool Statebox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {return btn == SDL_BUTTON_LEFT;}
 
 

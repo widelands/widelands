@@ -29,7 +29,7 @@ void Flag::draw
  const FCoords,
  const Point pos)
 {
-	static struct {int x, y;} ware_offsets[8] = {
+	static struct {int32_t x, y;} ware_offsets[8] = {
 		{-5,  1},
 		{-1,  3},
 		{3,  3},

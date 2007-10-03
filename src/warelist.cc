@@ -87,7 +87,7 @@ void WareList::remove(const WareList &wl)
 /**
  * Return the number of wares of a given type stored in this storage.
  */
-int WareList::stock(const size_type id) const {
+int32_t WareList::stock(const size_type id) const {
 	return id < m_wares.size() ? m_wares[id] : 0;
 }
 

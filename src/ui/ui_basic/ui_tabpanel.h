@@ -37,7 +37,7 @@ to the top.
 The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
 */
 struct Tab_Panel : public Panel {
-	Tab_Panel(Panel* parent, int x, int y, uint32_t background);
+	Tab_Panel(Panel* parent, int32_t x, int32_t y, uint32_t background);
 
 	void resize();
 
@@ -53,9 +53,9 @@ private:
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
-	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	void handle_mousein(bool inside);
 
 	struct Tab {
@@ -68,7 +68,7 @@ private:
 	uint32_t             m_active;         ///< index of the currently active tab
 	bool             m_snapparent; ///< if true, resize parent to fit this panel
 
-	int              m_highlight;      ///< index of the highlighted button
+	int32_t              m_highlight;      ///< index of the highlighted button
 
 	uint32_t             m_pic_background; ///< picture used to draw background
 };

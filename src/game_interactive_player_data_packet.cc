@@ -54,8 +54,8 @@ throw (_wexception)
 
 	if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
 		uint8_t player_number = fr.Unsigned8();
-		int x = fr.Unsigned16();
-		int y = fr.Unsigned16();
+		int32_t x = fr.Unsigned16();
+		int32_t y = fr.Unsigned16();
 		uint32_t display_flags = fr.Unsigned32();
 
 		if (packet_version == 1)

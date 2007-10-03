@@ -46,7 +46,7 @@ Texture::Texture
 	char fname[256];
 
 	for (;;) {
-		int nr = m_nrframes;
+		int32_t nr = m_nrframes;
 		char *p;
 
 		// create the file name by reverse-scanning for '?' and replacing
@@ -97,9 +97,9 @@ Texture::Texture
 
 				log("WARNING: %s: using 332 default palette\n", fname);
 
-				for (int r=0;r<8;r++)
-					for (int g=0;g<8;g++)
-						for (int b=0;b<4;b++) {
+				for (int32_t r=0;r<8;r++)
+					for (int32_t g=0;g<8;g++)
+						for (int32_t b=0;b<4;b++) {
 							pal[(r<<5) | (g<<2) | b].r=r<<5;
 							pal[(r<<5) | (g<<2) | b].g=g<<5;
 							pal[(r<<5) | (g<<2) | b].b=b<<6;
@@ -130,7 +130,7 @@ Texture::Texture
 
 		SDL_LockSurface(cv);
 
-		for (int y = 0; y < TEXTURE_HEIGHT; y++)
+		for (int32_t y = 0; y < TEXTURE_HEIGHT; y++)
 			memcpy(m_curframe + y*TEXTURE_WIDTH, (Uint8*)cv->pixels + y*cv->pitch, TEXTURE_WIDTH);
 
 		SDL_UnlockSurface(cv);
@@ -172,7 +172,7 @@ Uint32 Texture::get_minimap_color(const char shade) {
  */
 void Texture::animate(uint32_t time)
 {
-	int frame = (time / m_frametime) % m_nrframes;
+	int32_t frame = (time / m_frametime) % m_nrframes;
 
 	uint8_t* lastframe = m_curframe;
 

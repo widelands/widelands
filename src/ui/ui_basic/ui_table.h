@@ -46,12 +46,12 @@ template <typename T, typename ID> struct IDButton;
 template<typename Entry> struct Table {
 
 	struct Entry_Record {
-		Entry_Record(Entry entry, int picid = -1);
+		Entry_Record(Entry entry, int32_t picid = -1);
 
       // Data Functions
 		void set_string(uint32_t column, const std::string &);
 		std::string & get_string(uint32_t column) const;
-		int  get_picid() const throw ();
+		int32_t  get_picid() const throw ();
 		Entry entry() const throw ();
 		void set_color(const RGBColor);
 
@@ -60,7 +60,7 @@ template<typename Entry> struct Table {
 
 	};
 
-	Table(Panel *parent, int x, int y, uint32_t w, uint32_t h, Align align = Align_Left, const bool up = false);
+	Table(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align = Align_Left, const bool up = false);
 	~Table();
 
 	Signal1<uint32_t> selected;
@@ -82,7 +82,7 @@ template<typename Entry> struct Table {
 
 	Entry_Record & add
 		(void * const entry,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false);
 
 	uint32_t size() const throw ();
@@ -106,19 +106,19 @@ template<typename Entry> struct Table {
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 };
 
 template <> struct Table<void *> : public Panel {
 
 	struct Entry_Record {
-		Entry_Record(void * const entry, int picid = -1);
+		Entry_Record(void * const entry, int32_t picid = -1);
 
       // Data Functions
 		void set_string(uint32_t column, const std::string &);
 		const std::string & get_string(const uint32_t column) const;
-		int  get_picid() const throw () {return m_picid;}
+		int32_t  get_picid() const throw () {return m_picid;}
 		void * entry() const throw () {return m_entry;}
 		void set_color(const  RGBColor c) {
 			use_clr = true;
@@ -133,7 +133,7 @@ template <> struct Table<void *> : public Panel {
 		void *   m_entry;
 		bool     use_clr;
 		RGBColor clr;
-		int      m_picid;
+		int32_t      m_picid;
 		struct _data {std::string d_string;};
       std::vector<_data> m_data;
 	};
@@ -141,7 +141,7 @@ template <> struct Table<void *> : public Panel {
 public:
 	Table
 		(Panel * parent,
-		 int x, int y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 const bool descending = false);
 	~Table();
@@ -167,7 +167,7 @@ public:
 	void set_align(Align align);
 
 	Entry_Record & add
-		(void * const entry = 0, const int picid = -1, const bool select = false);
+		(void * const entry = 0, const int32_t picid = -1, const bool select = false);
 
 	uint32_t size() const throw () {return m_entry_records.size();}
 	void * operator[](const uint32_t i) const throw ()
@@ -201,8 +201,8 @@ public:
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
 	struct Column;
@@ -212,17 +212,17 @@ private:
 		IDButton<Table, Columns::size_type> * btn;
 	};
 
-	static const int ms_darken_value=-20;
-	static const int DOUBLE_CLICK_INTERVAL=500; // half a second //  FIXME such values should not be defined separately for a particular widget type. They should be defined in one place for the whole UI or even better, a variable that is read from system settings (.kde/share/config/kdeglobals:DoubleClickInterval=...)
+	static const int32_t ms_darken_value=-20;
+	static const int32_t DOUBLE_CLICK_INTERVAL=500; // half a second //  FIXME such values should not be defined separately for a particular widget type. They should be defined in one place for the whole UI or even better, a variable that is read from system settings (.kde/share/config/kdeglobals:DoubleClickInterval=...)
 
 	Columns m_columns;
 	uint32_t                m_max_pic_width;
-   int                  m_lineheight;
+   int32_t                  m_lineheight;
 	Align              m_align;
 	Scrollbar        * m_scrollbar;
-	int                m_scrollpos; //  in pixels
+	int32_t                m_scrollpos; //  in pixels
 	uint32_t               m_selection;
-   int                  m_last_click_time;
+   int32_t                  m_last_click_time;
 	uint32_t                  m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;
@@ -230,7 +230,7 @@ private:
 	void header_button_clicked(const Columns::size_type);
 	typedef std::vector<Entry_Record *> Entry_Record_vector;
 	Entry_Record_vector m_entry_records;
-	void set_scrollpos(int pos);
+	void set_scrollpos(int32_t pos);
 };
 
 template <typename Entry>
@@ -239,7 +239,7 @@ template <typename Entry>
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
-		 int x, int y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 const bool descending = false)
 		: Base(parent, x, y, w, h, align, descending)
@@ -247,7 +247,7 @@ template <typename Entry>
 
 	Entry_Record & add
 		(const Entry * const entry = 0,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{
 		return
@@ -268,7 +268,7 @@ template <typename Entry> struct Table<Entry * const> : public Table<void *> {
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
-		 int x, int y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 const bool descending = false)
 		: Base(parent, x, y, w, h, align, descending)
@@ -276,7 +276,7 @@ template <typename Entry> struct Table<Entry * const> : public Table<void *> {
 
 	Entry_Record & add
 		(Entry * const entry = 0,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{return Base::add(entry, picid, select_this);}
 
@@ -294,7 +294,7 @@ template <typename Entry> struct Table<const Entry &> : public Table<void *> {
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
-		 int x, int y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 const bool descending = false)
 		: Base(parent, x, y, w, h, align, descending)
@@ -302,7 +302,7 @@ template <typename Entry> struct Table<const Entry &> : public Table<void *> {
 
 	Entry_Record & add
 		(const Entry & entry,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{return Base::add(&const_cast<Entry &>(entry), picid, select_this);}
 
@@ -323,7 +323,7 @@ template <typename Entry> struct Table<Entry &> : public Table<void *> {
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
-		 int x, int y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 const bool descending = false)
 		: Base(parent, x, y, w, h, align, descending)
@@ -331,7 +331,7 @@ template <typename Entry> struct Table<Entry &> : public Table<void *> {
 
 	Entry_Record & add
 		(Entry & entry,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{return Base::add(&entry, picid, select_this);}
 
@@ -353,7 +353,7 @@ template <> struct Table<intptr_t> : public Table<void *> {
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
-		 int x, int y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 const bool descending = false)
 		: Base(parent, x, y, w, h, align, descending)
@@ -361,7 +361,7 @@ template <> struct Table<intptr_t> : public Table<void *> {
 
 	Entry_Record & add
 		(const intptr_t entry,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{
 		return Base::add
@@ -383,7 +383,7 @@ template <> struct Table<const intptr_t> : public Table<intptr_t> {
 	typedef Table<intptr_t> Base;
 	Table
 		(Panel * parent,
-		 int x, int y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 const bool descending = false)
 		: Table<intptr_t>(parent, x, y, w, h, align, descending)

@@ -64,11 +64,11 @@ m_table
 {
 
    // First, we must decide about the size
-   int spacing=5;
-   int offsx=spacing;
-   int offsy=30;
-   int posx=offsx;
-   int posy=offsy;
+   int32_t spacing=5;
+   int32_t offsx=spacing;
+   int32_t offsy=30;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    // Building list
 	m_table.add_column(_("Name"), 160);
@@ -194,7 +194,7 @@ Building_Statistics_Menu::~Building_Statistics_Menu()
  * Update this statistic
  */
 void Building_Statistics_Menu::think() {
-   int gs = m_parent->get_game()->get_speed();
+   int32_t gs = m_parent->get_game()->get_speed();
 
    if (gs==0) gs = 1;
 
@@ -226,7 +226,7 @@ void Building_Statistics_Menu::draw(RenderTarget* dst) {
 /*
  * validate if this pointer is ok
  */
-int Building_Statistics_Menu::validate_pointer(int* id, int size) {
+int32_t Building_Statistics_Menu::validate_pointer(int32_t* id, int32_t size) {
    if (*id < 0)
       *id = size-1;
    if (*id >= size)
@@ -258,19 +258,19 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		++m_last_building_index;
 		break;
 	case Prev_Construction: {
-            int curindex = m_last_building_index;
+            int32_t curindex = m_last_building_index;
             while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
                if (vec[m_last_building_index].is_constructionsite) break;
 	}
 		break;
 	case Next_Construction: {
-            int curindex = m_last_building_index;
+            int32_t curindex = m_last_building_index;
             while (validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
                if (vec[m_last_building_index].is_constructionsite) break;
 	}
 		break;
 	case Prev_Unproductive: {
-            int curindex = m_last_building_index;
+            int32_t curindex = m_last_building_index;
             found = false;
 		while
 			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
@@ -294,7 +294,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 	}
          break;
 	case Next_Unproductive: {
-            int curindex = m_last_building_index;
+            int32_t curindex = m_last_building_index;
             found = false;
 		while
 			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)

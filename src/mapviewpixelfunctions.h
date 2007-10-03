@@ -28,7 +28,7 @@ struct Map;
 namespace MapviewPixelFunctions {
 
 float calc_brightness
-	(const int l, const int r, const int tl, const int tr, const int bl, const int br);
+	(const int32_t l, const int32_t r, const int32_t tl, const int32_t tr, const int32_t bl, const int32_t br);
 
 uint32_t calc_pix_distance(const Map &, Point a, Point b);
 
@@ -57,16 +57,16 @@ void normalize_pix(const Map &, Point & p);
  * Calculate the on-screen position of the node without taking height into
  * account.
  */
-void get_basepix(const Coords fc, int & px, int & py);
+void get_basepix(const Coords fc, int32_t & px, int32_t & py);
 
 /**
  * Calculate the on-screen position of the node.
  */
-void get_pix(const FCoords fc, int & px, int & py);
+void get_pix(const FCoords fc, int32_t & px, int32_t & py);
 
-void get_pix(const Map &, const Coords c, int & px, int & py);
+void get_pix(const Map &, const Coords c, int32_t & px, int32_t & py);
 
-void get_save_pix(const Map &, const Coords c, int & px, int & py);
+void get_save_pix(const Map &, const Coords c, int32_t & px, int32_t & py);
 }
 
 //  Implementation follows:
@@ -90,14 +90,14 @@ into account.
 ===============
 */
 inline void MapviewPixelFunctions::get_basepix
-(const Coords c, int & px, int & py)
+(const Coords c, int32_t & px, int32_t & py)
 {
 	py = c.y * TRIANGLE_HEIGHT;
 	px = c.x * TRIANGLE_WIDTH + (c.y & 1) * (TRIANGLE_WIDTH / 2);
 }
 
 
-inline void MapviewPixelFunctions::get_pix(const FCoords fc, int & px, int & py)
+inline void MapviewPixelFunctions::get_pix(const FCoords fc, int32_t & px, int32_t & py)
 {
 	get_basepix(fc, px, py);
 	py -= fc.field->get_height() * HEIGHT_FACTOR;
@@ -105,14 +105,14 @@ inline void MapviewPixelFunctions::get_pix(const FCoords fc, int & px, int & py)
 
 inline
 void MapviewPixelFunctions::get_pix
-(const Map & map, const Coords c, int & px, int & py)
+(const Map & map, const Coords c, int32_t & px, int32_t & py)
 {get_pix(map.get_fcoords(c), px, py);}
 
 // fx and fy might be out of range, must be normalized for the field
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
 inline void MapviewPixelFunctions::get_save_pix
-(const Map & map, const Coords c, int & px, int & py)
+(const Map & map, const Coords c, int32_t & px, int32_t & py)
 {
 	Coords c1 = c;
 	map.normalize_coords(&c1);

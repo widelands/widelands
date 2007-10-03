@@ -39,21 +39,21 @@ struct Radiogroup {
 	~Radiogroup();
 
 	Signal changed;
-	Signal1<int> changedto;
+	Signal1<int32_t> changedto;
    Signal clicked; // clicked without things changed
 
-	int add_button
+	int32_t add_button
 		(Panel * parent,
-		 const int x, const int y,
+		 const int32_t x, const int32_t y,
 		 const uint32_t picid, const char * const tooltip = 0);
 
-	inline int get_state() const {return m_state;}
-	void set_state(int state);
+	inline int32_t get_state() const {return m_state;}
+	void set_state(int32_t state);
 
 private:
 	Radiobutton * m_buttons; //  linked list of buttons (not sorted)
-	int           m_highestid;
-	int           m_state;   //  -1: none
+	int32_t           m_highestid;
+	int32_t           m_state;   //  -1: none
 };
 };
 

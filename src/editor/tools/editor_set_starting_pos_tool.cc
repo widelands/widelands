@@ -29,13 +29,13 @@
 
 
 // global variable to pass data from callback to class
-static int m_current_player;
+static int32_t m_current_player;
 
 /*
  * static callback function for overlay calculation
  */
-int Editor_Tool_Set_Starting_Pos_Callback
-(const TCoords<FCoords> c, void * data, int)
+int32_t Editor_Tool_Set_Starting_Pos_Callback
+(const TCoords<FCoords> c, void * data, int32_t)
 {
 	const Map & map = *static_cast<const Map *>(data);
 
@@ -49,7 +49,7 @@ int Editor_Tool_Set_Starting_Pos_Callback
 		last = nr_players;
 	}
 
-	const int caps = c.field->get_caps();
+	const int32_t caps = c.field->get_caps();
    if ((caps&BUILDCAPS_SIZEMASK)==BUILDCAPS_BIG)
       return caps;
 
@@ -63,7 +63,7 @@ Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
 {m_current_player = 0;}
 
 
-int Editor_Set_Starting_Pos_Tool::handle_click_impl
+int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	assert(0 <= center.node.x);
@@ -123,7 +123,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 Player_Number Editor_Set_Starting_Pos_Tool::get_current_player() const throw()
 {return m_current_player;}
 
-void Editor_Set_Starting_Pos_Tool::set_current_player(int i) {
+void Editor_Set_Starting_Pos_Tool::set_current_player(int32_t i) {
       m_current_player=i;
 
       std::string picsname="pics/fsel_editor_set_player_";

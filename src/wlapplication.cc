@@ -56,14 +56,14 @@
 
 #ifdef DEBUG
 #ifndef __WIN32__
-int WLApplication::pid_me=0;
-int WLApplication::pid_peer=0;
-volatile int WLApplication::may_run=0;
+int32_t WLApplication::pid_me=0;
+int32_t WLApplication::pid_peer=0;
+volatile int32_t WLApplication::may_run=0;
 #include <signal.h>
 #endif // WIN32
 #endif // DEBUG
 
-int editor_commandline=0; // Enable the User to start the Editor directly.
+int32_t editor_commandline=0; // Enable the User to start the Editor directly.
 
 //Always specifying namespaces is good, but let's not go too far ;-)
 using std::cout;
@@ -193,7 +193,7 @@ WLApplication *WLApplication::the_singleton=0;
  *
  * \todo Return a reference - the return value is always valid anyway
  */
-WLApplication * const WLApplication::get(const int argc, const char **argv)
+WLApplication * const WLApplication::get(const int32_t argc, const char **argv)
 {
 	if (the_singleton==0) {
 		the_singleton=new WLApplication(argc, argv);
@@ -214,7 +214,7 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-WLApplication::WLApplication(const int argc, const char **argv):
+WLApplication::WLApplication(const int32_t argc, const char **argv):
 		m_commandline(std::map<std::string, std::string>()),
 		journal(0),
 		m_input_grab(false),
@@ -437,8 +437,8 @@ restart:
 			// Implement the throttle to avoid very quick inner mainloops when
 			// recoding a session
 			if (throttle && journal->is_playingback()) {
-				static int lastthrottle = 0;
-				int time = SDL_GetTicks();
+				static int32_t lastthrottle = 0;
+				int32_t time = SDL_GetTicks();
 
 				if (time - lastthrottle < 10)
 					goto restart;
@@ -542,7 +542,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 				break;
 			}
 			if (cb && cb->key) {
-				int c;
+				int32_t c;
 
 				c = ev.key.keysym.unicode;
 				if (c < 32 || c >= 128)
@@ -600,9 +600,9 @@ void WLApplication::handle_input(const InputCallback *cb)
 
 /**
  * Return the current time, in milliseconds
- * \todo Convert return value from int to Uint32, SDL's native time resolution
+ * \todo Convert return value from int32_t to Uint32, SDL's native time resolution
  */
-const int WLApplication::get_time()
+const int32_t WLApplication::get_time()
 {
 	Uint32 time;
 
@@ -659,7 +659,7 @@ void WLApplication::set_mouse_speed(float speed)
  * Set the mouse boundary after a change of resolution
  * This is manually imported by graphic.cc
  */
-void WLApplication::set_max_mouse_coords(const int x, const int y)
+void WLApplication::set_max_mouse_coords(const int32_t x, const int32_t y)
 {
 	m_mouse_maxx = x;
 	m_mouse_maxy = y;
@@ -692,8 +692,8 @@ void WLApplication::do_warp_mouse(const Point p) {
  * \todo Ensure that calling this with active UI elements does barf
  * \todo Document parameters
  */
-void WLApplication::init_graphics(const int w, const int h,
-                                  const int bpp, const bool fullscreen)
+void WLApplication::init_graphics(const int32_t w, const int32_t h,
+                                  const int32_t bpp, const bool fullscreen)
 {
 	if (w == m_gfx_w && h == m_gfx_h && fullscreen == m_gfx_fullscreen)
 		return;
@@ -859,12 +859,12 @@ void WLApplication::shutdown_hardware()
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-void WLApplication::parse_commandline(const int argc, const char **argv)
+void WLApplication::parse_commandline(const int32_t argc, const char **argv)
 {
 	//TODO: EXENAME gets written out on windows!
 	m_commandline["EXENAME"]=argv[0];
 
-	for (int i=1; i<argc; ++i) {
+	for (int32_t i=1; i<argc; ++i) {
 		std::string opt=argv[i];
 		std::string value;
 		SSS_T pos;
@@ -1073,7 +1073,7 @@ void WLApplication::init_double_game ()
 /**
  * On SIGUSR1, allow ourselves to continue running
  */
-void WLApplication::signal_handler(int) {may_run++;}
+void WLApplication::signal_handler(int32_t) {may_run++;}
 
 /**
  * Kill the other instance when exiting
@@ -1174,7 +1174,7 @@ void WLApplication::mainmenu_singleplayer()
 {
 
 	for (bool done = false; not done;) {
-		int code;
+		int32_t code;
 		{
 			Fullscreen_Menu_SinglePlayer single_player_menu;
 			code = single_player_menu.run();
@@ -1252,7 +1252,7 @@ void WLApplication::mainmenu_multiplayer()
 		break;
 	case Fullscreen_Menu_NetSetup::INTERNETGAME: {
 		Fullscreen_Menu_InetServerOptions igo;
-		const int igo_code = igo.run();
+		const int32_t igo_code = igo.run();
 
 		// Get informations here
 		const std::string host   = igo.get_server_name();

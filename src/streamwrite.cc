@@ -40,7 +40,7 @@ void StreamWrite::Printf(const char *fmt, ...)
 	va_list va;
 
 	va_start(va, fmt);
-	int i = vsnprintf(buffer, sizeof(buffer), fmt, va);
+	int32_t i = vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
 	if ((uint32_t)i < sizeof(buffer)) {

@@ -47,7 +47,7 @@ struct WareList {
 		void add(const WareList &wl);
 	void remove(const size_type id, const count_type count = 1);
 		void remove(const WareList &wl);
-	int stock(size_type id) const;
+	int32_t stock(size_type id) const;
 
 	void set_nrwares(const size_type i) {
 			assert(m_wares.size()==0);

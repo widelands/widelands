@@ -441,12 +441,12 @@ Immovable::~Immovable()
 {
 }
 
-int Immovable::get_type() const throw ()
+int32_t Immovable::get_type() const throw ()
 {
 	return IMMOVABLE;
 }
 
-int Immovable::get_size() const throw ()
+int32_t Immovable::get_size() const throw ()
 {
 	return descr().get_size();
 }
@@ -693,7 +693,7 @@ Map_Object::Loader* Immovable::load
 			if (!tribe)
 				throw wexception("Unknown tribe %s!\n", owner);
 
-			int idx = tribe->get_immovable_index(name);
+			int32_t idx = tribe->get_immovable_index(name);
 			if (idx == -1)
 				throw wexception
 						("Unknown tribe-immovable %s in map, asked for tribe: %s!\n",
@@ -702,7 +702,7 @@ Map_Object::Loader* Immovable::load
 			imm = new Immovable(*tribe->get_immovable_descr(idx));
 		} else {
 			// World immovable
-			int idx = eg->map().world().get_immovable_index(name);
+			int32_t idx = eg->map().world().get_immovable_index(name);
 			if (idx == -1)
 				throw wexception("Unknown world immovable %s in map!\n", name);
 

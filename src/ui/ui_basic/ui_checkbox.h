@@ -34,31 +34,31 @@ namespace UI {
  * Serves as base for Checkbox and Radiobutton.
  */
 struct Statebox : public Panel {
-	Statebox(Panel *parent, int x, int y, uint32_t picid = 0);
+	Statebox(Panel *parent, int32_t x, int32_t y, uint32_t picid = 0);
 	~Statebox();
 
 	Signal changed;
 	Signal1<bool> changedto;
-	Signal2<int, bool> changedtoid;
+	Signal2<int32_t, bool> changedtoid;
 
 	void set_enabled(bool enabled);
 
 	inline bool get_state() const {return m_state;}
 	void set_state(bool on);
 
-   inline void set_id(int n) {m_id=n;}
+   inline void set_id(int32_t n) {m_id=n;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
 
 	void handle_mousein(bool inside);
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
 	virtual void clicked() = 0;
 
-   int      m_id;
+   int32_t      m_id;
 
 	bool     m_custom_picture; ///< the statebox displays a custom picture
 	uint32_t     m_pic_graphics;
@@ -80,7 +80,7 @@ private:
 */
 class Checkbox : public Statebox {
 public:
-	Checkbox(Panel *parent, int x, int y, int picid=0) : Statebox(parent, x, y, picid) {}
+	Checkbox(Panel *parent, int32_t x, int32_t y, int32_t picid=0) : Statebox(parent, x, y, picid) {}
 
 private:
 	void clicked();

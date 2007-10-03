@@ -78,7 +78,7 @@ public:
 
 	Player
 		(Editor_Game_Base &,
-		 const int type,
+		 const int32_t type,
 		 const Player_Number plnum,
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
@@ -89,7 +89,7 @@ public:
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
-		inline int get_type() const {return m_type;}
+		inline int32_t get_type() const {return m_type;}
 	Player_Number get_player_number() const throw () {return m_plnum;}
 		inline const RGBColor* get_playercolor() const {return m_playercolor;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &tribe();}
@@ -383,15 +383,15 @@ public:
 	bool is_building_allowed(const Building_Descr::Index i) const throw () {
 		return m_allowed_buildings[i];
 	}
-	void allow_building(int i, bool t);
+	void allow_building(int32_t i, bool t);
 
 	// Player commands
 	// Only to be called indirectly via CmdQueue
 	void build_flag(Coords c);
 	void build_road(const Path & path);
-	void build(Coords c, int idx);
+	void build(Coords c, int32_t idx);
 	void bulldoze(PlayerImmovable* imm);
-	void flagaction(Flag* flag, int action);
+	void flagaction(Flag* flag, int32_t action);
 	void start_stop_building(PlayerImmovable* imm);
 	void enhance_building
 		(Building *, Building_Descr::Index index_of_new_building);
@@ -409,10 +409,10 @@ public:
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable* imm, Soldier* worker);
-	void change_soldier_capacity (PlayerImmovable*, int val);
-	void change_training_options(PlayerImmovable* imm, int atr, int val);
+	void change_soldier_capacity (PlayerImmovable*, int32_t val);
+	void change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val);
 		// Launch an attack
-	void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
+	void enemyflagaction(Flag* flag, int32_t action, int32_t param, int32_t param2, int32_t param3);
 
 	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {
 		assert(player_area.player_number == get_player_number());
@@ -435,10 +435,10 @@ public:
 	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
 
 	// Statistics
-	const Building_Stats_vector & get_building_statistics(const int i) const {
+	const Building_Stats_vector & get_building_statistics(const int32_t i) const {
 		return m_building_stats[i];
 	}
-	const std::vector<uint32_t> * get_ware_production_statistics(const int ware) const;
+	const std::vector<uint32_t> * get_ware_production_statistics(const int32_t ware) const;
 
 	void ReadStatistics(FileRead& fr, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
@@ -463,7 +463,7 @@ private:
 	bool m_see_all;
 	Editor_Game_Base&      m_egbase;
 	bool                   m_view_changed;
-	int                    m_type;
+	int32_t                    m_type;
 	const Player_Number    m_plnum;
 	const Tribe_Descr&     m_tribe; // buildings, wares, workers, sciences
 	RGBColor               m_playercolor[4];

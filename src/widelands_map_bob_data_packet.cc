@@ -66,7 +66,7 @@ void Widelands_Map_Bob_Data_Packet::ReadBob
 		if (subtype != Bob::CRITTER)
 			throw wexception("world bob is not a critter!\n");
 
-		int idx = egbase->get_map()->get_world()->get_bob(name.c_str());
+		int32_t idx = egbase->get_map()->get_world()->get_bob(name.c_str());
 		if (idx == -1)
 			throw wexception
 					("Map defines Bob %s, but world doesn't deliver!\n",
@@ -87,7 +87,7 @@ void Widelands_Map_Bob_Data_Packet::ReadBob
 					 owner.c_str());
 
 		if (subtype == Bob::WORKER) {
-			int idx = tribe->get_worker_index(name.c_str());
+			int32_t idx = tribe->get_worker_index(name.c_str());
 			if (idx == -1)
 				throw wexception
 						("Map defines Bob %s, but tribe %s doesn't deliver!\n",
@@ -99,7 +99,7 @@ void Widelands_Map_Bob_Data_Packet::ReadBob
 			bob->set_position(egbase, coords);
 			bob->init(egbase);
 		} else if (subtype == Bob::CRITTER) {
-			int idx = tribe->get_bob(name.c_str());
+			int32_t idx = tribe->get_bob(name.c_str());
 			if (idx == -1)
 				throw wexception
 						("Map defines Bob %s, but tribe %s doesn't deliver!\n",

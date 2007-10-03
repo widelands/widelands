@@ -170,15 +170,15 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(const Button n) {
 		 ==
 		 m_increase_tool.decrease_tool().get_change_by());
 
-	int change_by = m_increase_tool.get_change_by();
-	int set_to    = m_increase_tool.set_tool().get_set_to();
+	int32_t change_by = m_increase_tool.get_change_by();
+	int32_t set_to    = m_increase_tool.set_tool().get_set_to();
 
 	switch (n) {
 	case Change_By_Increase:
-		change_by += change_by < std::numeric_limits<int>::max(); break;
+		change_by += change_by < std::numeric_limits<int32_t>::max(); break;
 	case Change_By_Decrease: change_by -= 1 < change_by;         break;
 	case    Set_To_Increase:
-		set_to += set_to < std::numeric_limits<int>::max();       break;
+		set_to += set_to < std::numeric_limits<int32_t>::max();       break;
 	case    Set_To_Decrease: set_to    -= 0 < set_to;
 	}
 	m_increase_tool.set_change_by(change_by);
@@ -193,7 +193,7 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(const Button n) {
  * called when a resource has been selected
  */
 void Editor_Tool_Change_Resources_Options_Menu::selected() {
-	const int n = m_radiogroup.get_state();
+	const int32_t n = m_radiogroup.get_state();
 
 	m_increase_tool.set_tool().set_cur_res(n);
 	m_increase_tool.set_cur_res(n);

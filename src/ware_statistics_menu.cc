@@ -300,19 +300,19 @@ static const RGBColor colors[] = {
  * of the graph and it needs a picture
  */
 struct WSM_Checkbox : public UI::Checkbox {
-      WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint32_t picid, RGBColor color);
+      WSM_Checkbox(UI::Panel* parent, int32_t x, int32_t y, int32_t id, uint32_t picid, RGBColor color);
 
       virtual void draw(RenderTarget* dst);
 
 private:
-      int      m_pic;
+      int32_t      m_pic;
       RGBColor m_color;
 };
 
 /*
  * Constructor
  */
-WSM_Checkbox::WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint32_t picid, RGBColor color) :
+WSM_Checkbox::WSM_Checkbox(UI::Panel* parent, int32_t x, int32_t y, int32_t id, uint32_t picid, RGBColor color) :
    UI::Checkbox(parent, x, y, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG)) {
 
    m_pic = picid;
@@ -352,17 +352,17 @@ UI::UniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
    // First, we must decide about the size
-	const int nr_wares = parent.get_player()->tribe().get_nrwares();
+	const int32_t nr_wares = parent.get_player()->tribe().get_nrwares();
 	uint32_t wares_per_row = MIN_WARES_PER_LINE;
    while (nr_wares % wares_per_row && (wares_per_row <= MAX_WARES_PER_LINE)) wares_per_row++;
 	const uint32_t nr_rows =
 		nr_wares / wares_per_row + (nr_wares % wares_per_row ? 1 : 0);
 
-   int spacing=5;
-   int offsx=spacing;
-   int offsy=30;
-   int posx=offsx;
-   int posy=offsy;
+   int32_t spacing=5;
+   int32_t offsx=spacing;
+   int32_t offsy=30;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
 
    set_inner_size(10, (offsy + spacing + PLOT_HEIGHT + spacing +
@@ -375,8 +375,8 @@ m_parent(&parent)
    m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
    // all wares
-   int cur_ware = 0;
-   int dposy = 0;
+   int32_t cur_ware = 0;
+   int32_t dposy = 0;
    posy += PLOT_HEIGHT+ 2*spacing;
 	const Tribe_Descr & tribe = parent.get_player()->tribe();
 	for (uint32_t y = 0; y < nr_rows; ++y) {
@@ -404,7 +404,7 @@ m_parent(&parent)
 
 
    // Buttons
-   int button_size = (get_inner_w()-(spacing*5)) / 4;
+   int32_t button_size = (get_inner_w()-(spacing*5)) / 4;
    posx = spacing;
    posy +=spacing+spacing;
 
@@ -507,6 +507,6 @@ void Ware_Statistics_Menu::clicked_help() {
 /*
  * Cb has been changed to this state
  */
-void Ware_Statistics_Menu::cb_changed_to(int id, bool what) {
+void Ware_Statistics_Menu::cb_changed_to(int32_t id, bool what) {
    m_plot->show_plot(id, what);
 }

@@ -33,7 +33,7 @@ Radiobutton
 struct Radiobutton : public Statebox {
 	friend class Radiogroup;
 
-	Radiobutton(Panel *parent, int x, int y, uint32_t picid, Radiogroup *group, int id);
+	Radiobutton(Panel *parent, int32_t x, int32_t y, uint32_t picid, Radiogroup *group, int32_t id);
 	~Radiobutton();
 
 private:
@@ -41,13 +41,13 @@ private:
 
 	Radiobutton * m_nextbtn;
 	Radiogroup  * m_group;
-	int           m_id;
+	int32_t           m_id;
 };
 
 /**
 Initialize the radiobutton and link it into the group's linked list
 */
-Radiobutton::Radiobutton(Panel *parent, int x, int y, uint32_t picid, Radiogroup *group, int id)
+Radiobutton::Radiobutton(Panel *parent, int32_t x, int32_t y, uint32_t picid, Radiogroup *group, int32_t id)
 	: Statebox(parent, x, y, picid)
 {
 	m_group = group;
@@ -109,9 +109,9 @@ Radiogroup::~Radiogroup() {while (m_buttons) delete m_buttons;}
 Create a new radio button with the given attributes
 Returns the ID of the new button.
 */
-int Radiogroup::add_button
+int32_t Radiogroup::add_button
 (Panel * parent,
- const int x, const int y,
+ const int32_t x, const int32_t y,
  const uint32_t picid, const char * const tooltip)
 {
 	m_highestid++;
@@ -126,7 +126,7 @@ int Radiogroup::add_button
  *
  * Args: state  the ID of the checked button (-1 means don't check any button)
  */
-void Radiogroup::set_state(int state)
+void Radiogroup::set_state(int32_t state)
 {
 	if (state == m_state) {
       clicked.call();

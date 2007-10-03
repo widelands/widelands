@@ -35,7 +35,7 @@ private:
       WUIPlot_Area*       m_plot;
 
 	void clicked_help();
-      void cb_changed_to(int, bool);
+      void cb_changed_to(int32_t, bool);
 };
 
 #endif

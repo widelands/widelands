@@ -28,7 +28,7 @@
  * It automatically creates the colormap for shading.
  */
 Colormap::Colormap (const SDL_Color & pal, const SDL_PixelFormat & format) {
-	int i, j, r, g, b;
+	int32_t i, j, r, g, b;
 
 	memcpy(palette, &pal, sizeof(palette));
 
@@ -37,7 +37,7 @@ Colormap::Colormap (const SDL_Color & pal, const SDL_PixelFormat & format) {
 
 	for (i=0;i<256;i++)
 		for (j=0;j<256;j++) {
-			int shade=(j<128)?j:(j-256);
+			int32_t shade=(j<128)?j:(j-256);
 			shade=256+2*shade;
 
 			r = (palette[i].r*shade)>>8;

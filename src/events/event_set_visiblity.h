@@ -42,10 +42,10 @@ struct Event_Set_Visiblity : public Event {
 	void Read(Section*, Editor_Game_Base*);
 
 private:
-	static const int EVENT_VERSION = 1;
+	static const int32_t EVENT_VERSION = 1;
 
 	std::string v_entry;
-	int v_case;
+	int32_t v_case;
 };
 
 #endif //__S__EVENT_SET_VISIBLITY_H

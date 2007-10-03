@@ -40,7 +40,7 @@ struct Progress_Bar : public Panel {
 	};
 
 public:
-	Progress_Bar(Panel* parent, int x, int y, int w, int h, uint32_t orientation);
+	Progress_Bar(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation);
 
 	uint32_t get_state() {return m_state;}
 	void set_state(uint32_t state);

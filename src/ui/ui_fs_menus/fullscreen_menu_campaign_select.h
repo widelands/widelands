@@ -44,7 +44,7 @@ struct Fullscreen_Menu_CampaignSelect : public Fullscreen_Menu_Base {
 	void campaign_selected(uint32_t);
 	void double_clicked(uint32_t);
 	void fill_list();
-	int get_campaign();
+	int32_t get_campaign();
 
 private:
 	UI::Textarea                                      title;
@@ -56,9 +56,9 @@ private:
 	UI::Textarea                                      label_campdescr;
 	UI::Multiline_Textarea                            tacampdescr;
 	UI::Button<Fullscreen_Menu_CampaignSelect>        b_ok;
-	UI::IDButton<Fullscreen_Menu_CampaignSelect, int> back;
+	UI::IDButton<Fullscreen_Menu_CampaignSelect, int32_t> back;
 // Variables used for exchange between the two Campaign UIs and Game::run_campaign
-	int                                               campaign;
+	int32_t                                               campaign;
 };
 /*
  * UI 2 - Selection of a map
@@ -84,8 +84,8 @@ private:
 	UI::Textarea                                         label_mapdescr;
 	UI::Multiline_Textarea                               tamapdescr;
 	UI::Button<Fullscreen_Menu_CampaignMapSelect>        b_ok;
-	UI::IDButton<Fullscreen_Menu_CampaignMapSelect, int> back;
-	int                                                  campaign;
+	UI::IDButton<Fullscreen_Menu_CampaignMapSelect, int32_t> back;
+	int32_t                                                  campaign;
 	std::string                                          campmapfile;
 
 };

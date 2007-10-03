@@ -39,7 +39,7 @@
 #include "wexception.h"
 
 
-static const int nr_of_events=5;
+static const int32_t nr_of_events=5;
 Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
 	{"message_box", _("Message Box"), _("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user")},
 	{"move_view", _("Move View"), _("This Event centers the Players View on a certain field")},
@@ -87,7 +87,7 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
 	if (!event)
 		event=get_correct_event(id);
 
-	int retval;
+	int32_t retval;
 	std::string str = id;
 
 	if        (str == "message_box")    {

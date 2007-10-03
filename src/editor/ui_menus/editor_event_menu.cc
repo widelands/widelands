@@ -56,12 +56,12 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UI::UniqueWindo
 UI::UniqueWindow(parent, registry, 620, 400, _("Event Menu")),
 m_parent        (parent)
 {
-   const int offsx=5;
-   const int offsy=25;
-   const int spacing=5;
-   int posx=offsx;
-   int posy=offsy;
-   const int ls_width = 200;
+   const int32_t offsx=5;
+   const int32_t offsy=25;
+   const int32_t spacing=5;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
+   const int32_t ls_width = 200;
 
    // EventChain List
    new UI::Textarea(this, posx, offsy, _("Event Chains: "), Align_Left);

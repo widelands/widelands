@@ -80,7 +80,7 @@ throw (_wexception)
 					Tribe_Descr* tribe=egbase->get_tribe(owner);
                if (!tribe)
                   throw wexception("Unknown tribe %s in map!\n", owner);
-               int idx=tribe->get_immovable_index(name);
+               int32_t idx=tribe->get_immovable_index(name);
                if (idx==-1)
                   throw wexception("Unknown tribe-immovable %s in map, asked for tribe: %s!\n", name, owner);
 					ol->register_object
@@ -88,7 +88,7 @@ throw (_wexception)
 				}
 			} else {
             // World immovable
-            int idx=world.get_immovable_index(name);
+            int32_t idx=world.get_immovable_index(name);
             if (idx==-1)
                throw wexception("Unknown world immovable %s in map!\n", name);
 				Immovable & immovable = *egbase->create_immovable(position, idx, 0);

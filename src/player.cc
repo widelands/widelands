@@ -45,7 +45,7 @@ extern Map_Object_Descr g_road_descr;
 //
 Player::Player
 (Editor_Game_Base  & the_egbase,
- const int type,
+ const int32_t type,
  const Player_Number plnum,
  const Tribe_Descr & tribe_descr,
  const std::string & name,
@@ -58,13 +58,13 @@ m_plnum  (plnum),
 m_tribe  (tribe_descr),
 m_fields (0)
 {
-	for (int i = 0; i < 4; i++)
+	for (int32_t i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
 
 	set_name(name);
 
 	// Allow all buildings per default
-	int i;
+	int32_t i;
 	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
 	for (i=0; i<m_tribe.get_nrbuildings(); i++)
 		m_allowed_buildings[i]=true;
@@ -167,7 +167,7 @@ Build a flag, checking that it's legal to do so.
 */
 void Player::build_flag(Coords c)
 {
-	int buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
+	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG) Flag::create(&m_egbase, this, c);
 }
@@ -205,8 +205,8 @@ void Player::build_road(const Path & path) {
 	// Verify ownership of the path
 	FCoords coords = egbase().map().get_fcoords(path.get_start());
 
-	const int laststep = path.get_nsteps() - 1;
-	for (int i = 0; i < laststep; ++i) {
+	const int32_t laststep = path.get_nsteps() - 1;
+	for (int32_t i = 0; i < laststep; ++i) {
 		const Direction dir = path[i];
 		coords = map.get_neighbour(coords, dir);
 
@@ -215,7 +215,7 @@ void Player::build_road(const Path & path) {
 			log("%i: building road, small immovable in the way, type=%d\n", get_player_number(), imm->get_type());
 			return;
 		}
-		int caps = get_buildcaps(coords);
+		int32_t caps = get_buildcaps(coords);
 		if (!(caps & MOVECAPS_WALK)) {
 			log("%i: building road, unwalkable\n", get_player_number());
 			return;
@@ -234,9 +234,9 @@ Player::build
 Place a construction site, checking that it's legal to do so.
 ===============
 */
-void Player::build(Coords c, int idx)
+void Player::build(Coords c, int32_t idx)
 {
-	int buildcaps;
+	int32_t buildcaps;
 	Building_Descr* descr;
 
 	// Validate building type
@@ -385,7 +385,7 @@ Player::flagaction
 Perform an action on the given flag.
 ===============
 */
-void Player::flagaction(Flag* flag, int action)
+void Player::flagaction(Flag* flag, int32_t action)
 {
 	if (Game * const game = dynamic_cast<Game *>(&egbase()))
 		if (flag->get_owner() == this) {// Additional security check.
@@ -409,7 +409,7 @@ void Player::flagaction(Flag* flag, int action)
  *
  * Disable or enable a building for a player
  */
-void Player::allow_building(int i, bool t)
+void Player::allow_building(int32_t i, bool t)
 {
 	assert(i < m_tribe.get_nrbuildings());
 	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
@@ -475,7 +475,7 @@ Player::change_training_options
 Change the training priotity values
 ==========
 */
-void Player::change_training_options(PlayerImmovable* imm, int atr, int val) {
+void Player::change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val) {
 	if (imm->get_owner() != this)
 		return;
 	if (imm->get_type() == Map_Object::BUILDING) {
@@ -508,7 +508,7 @@ void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
 }
 
 //TODO val might (theoretically) be >1 or <-1, but there's always an inc/dec by one
-void Player::change_soldier_capacity (PlayerImmovable* imm, int val) {
+void Player::change_soldier_capacity (PlayerImmovable* imm, int32_t val) {
 	if (imm->get_owner() != this)
 		return;
 	if (imm->get_type() == Map_Object::BUILDING) {
@@ -527,7 +527,7 @@ Player::enemyflagaction
 Perform an action on the given enemy flag.
 ===============
 */
-void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
+void Player::enemyflagaction(Flag* flag, int32_t action, int32_t attacker, int32_t num, int32_t)
 {
 	if (attacker != get_player_number())
 		throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
@@ -684,9 +684,9 @@ void Player::ware_produced(uint32_t wareid)
  * Get current ware production statistics
  */
 const std::vector<uint32_t> * Player::get_ware_production_statistics
-		(const int ware) const
+		(const int32_t ware) const
 {
-	assert(ware < static_cast<int>(m_ware_productions.size()));
+	assert(ware < static_cast<int32_t>(m_ware_productions.size()));
 
 	return &m_ware_productions[ware];
 }

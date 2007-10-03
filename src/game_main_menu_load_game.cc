@@ -47,11 +47,11 @@ Game_Main_Menu_Load_Game::Game_Main_Menu_Load_Game(Interactive_Player* parent, U
 UniqueWindow(parent, registry, 400, 270, _("Load Game")) {
    m_parent=parent;
 
-   int spacing=5;
-   int offsx=spacing;
-   int offsy=30;
-   int posx=offsx;
-   int posy=offsy;
+   int32_t spacing=5;
+   int32_t offsx=spacing;
+   int32_t offsy=30;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    // listselect
 	m_ls = new UI::Listselect<const char *>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
@@ -139,9 +139,9 @@ void Game_Main_Menu_Load_Game::selected(uint32_t) {
    char buf[200];
    uint32_t gametime = gpdp.get_gametime();
 
-   int hours = gametime / 3600000;
+   int32_t hours = gametime / 3600000;
    gametime -= hours * 3600000;
-   int minutes = gametime / 60000;
+   int32_t minutes = gametime / 60000;
 
    sprintf(buf, "%02i:%02i", hours, minutes);
    m_gametime->set_text(buf);

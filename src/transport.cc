@@ -68,15 +68,15 @@ public:
 
 public: // implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
-	virtual int get_amount(const int ware) const;
+	virtual int32_t get_amount(const int32_t ware) const;
 	virtual bool is_active() const throw ();
 
-	virtual WareInstance* launch_item(Game* g, int ware);
-	virtual Worker* launch_worker(Game* g, int ware) __attribute__ ((noreturn));
+	virtual WareInstance* launch_item(Game* g, int32_t ware);
+	virtual Worker* launch_worker(Game* g, int32_t ware) __attribute__ ((noreturn));
 
-	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req) __attribute__ ((noreturn));
-	virtual int get_passing_requeriments (Game* g, int ware, Requeriments* r) __attribute__ ((noreturn));
-	virtual void mark_as_used (Game* g, int ware, Requeriments* r) __attribute__ ((noreturn));
+	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req) __attribute__ ((noreturn));
+	virtual int32_t get_passing_requeriments (Game* g, int32_t ware, Requeriments* r) __attribute__ ((noreturn));
+	virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r) __attribute__ ((noreturn));
 private:
 	WareInstance * m_ware;
 	Economy      * m_economy;
@@ -131,7 +131,7 @@ PlayerImmovable* IdleWareSupply::get_position(Game* g)
 	return 0;
 }
 
-int IdleWareSupply::get_amount(const int ware) const
+int32_t IdleWareSupply::get_amount(const int32_t ware) const
 {
 	return (ware == m_ware->descr_index()) ? 1 : 0;
 }
@@ -144,7 +144,7 @@ bool IdleWareSupply::is_active()  const throw ()
 /**
  * The item is already "launched", so we only need to return it.
 */
-WareInstance* IdleWareSupply::launch_item(Game *, int ware) {
+WareInstance* IdleWareSupply::launch_item(Game *, int32_t ware) {
 	if (ware != m_ware->descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
@@ -155,22 +155,22 @@ WareInstance* IdleWareSupply::launch_item(Game *, int ware) {
 	return m_ware;
 }
 
-Worker* IdleWareSupply::launch_worker(Game *, int)
+Worker* IdleWareSupply::launch_worker(Game *, int32_t)
 {
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
 
-Soldier* IdleWareSupply::launch_soldier(Game *, int, Requeriments *)
+Soldier* IdleWareSupply::launch_soldier(Game *, int32_t, Requeriments *)
 {
 	throw wexception("IdleWareSupply::launch_soldier makes no sense");
 }
 
-int IdleWareSupply::get_passing_requeriments(Game *, int, Requeriments *)
+int32_t IdleWareSupply::get_passing_requeriments(Game *, int32_t, Requeriments *)
 {
 	throw wexception("IdleWareSupply::get_passing_requeriments makes no sense");
 }
 
-void IdleWareSupply::mark_as_used (Game *, int, Requeriments *) {
+void IdleWareSupply::mark_as_used (Game *, int32_t, Requeriments *) {
 	// By now, wares have not need to have this method
 	throw wexception("IdleWareSupply::mark_as_used makes no sense");
 }
@@ -204,7 +204,7 @@ WareInstance::~WareInstance()
 	}
 }
 
-int WareInstance::get_type() const throw ()
+int32_t WareInstance::get_type() const throw ()
 {
 	return WARE;
 }
@@ -493,7 +493,7 @@ Flag::~Flag()
 	if (m_flag_jobs.size())
 		log("Flag: ouch! flagjobs left\n");
 
-	for (int i = 0; i < 6; i++)
+	for (int32_t i = 0; i < 6; i++)
 		if (m_roads[i])
 			log("Flag: ouch! road left\n");
 }
@@ -530,12 +530,12 @@ Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
 	return flag;
 }
 
-int Flag::get_type() const throw ()
+int32_t Flag::get_type() const throw ()
 {
 	return FLAG;
 }
 
-int Flag::get_size() const throw ()
+int32_t Flag::get_size() const throw ()
 {
 	return SMALL;
 }
@@ -562,7 +562,7 @@ void Flag::set_economy(Economy *e)
 
 	PlayerImmovable::set_economy(e);
 
-	for (int i = 0; i < m_item_filled; i++)
+	for (int32_t i = 0; i < m_item_filled; i++)
 		m_items[i].item->set_economy(e);
 
 	if (m_building)
@@ -571,7 +571,7 @@ void Flag::set_economy(Economy *e)
 	for (std::list<FlagJob>::const_iterator it = m_flag_jobs.begin(); it != m_flag_jobs.end(); ++it)
 		it->request->set_economy(e);
 
-	for (int i = 0; i < 6; i++) {
+	for (int32_t i = 0; i < 6; i++) {
 		if (m_roads[i])
 			m_roads[i]->set_economy(e);
 	}
@@ -612,7 +612,7 @@ void Flag::detach_building(Editor_Game_Base *g)
 /**
  * Call this only from the Road init!
 */
-void Flag::attach_road(int dir, Road *road)
+void Flag::attach_road(int32_t dir, Road *road)
 {
 	assert(!m_roads[dir-1] || m_roads[dir-1]==road);
 
@@ -623,7 +623,7 @@ void Flag::attach_road(int dir, Road *road)
 /**
  * Call this only from the Road init!
 */
-void Flag::detach_road(int dir)
+void Flag::detach_road(int32_t dir)
 {
 	assert(m_roads[dir-1]);
 
@@ -636,7 +636,7 @@ void Flag::detach_road(int dir)
 */
 void Flag::get_neighbours(Neighbour_list *neighbours)
 {
-	for (int i = 0; i < 6; i++) {
+	for (int32_t i = 0; i < 6; i++) {
 		Road *road = m_roads[i];
 		if (!road)
 			continue;
@@ -666,7 +666,7 @@ void Flag::get_neighbours(Neighbour_list *neighbours)
 */
 Road *Flag::get_road(Flag *flag)
 {
-	for (int i = 0; i < 6; i++) {
+	for (int32_t i = 0; i < 6; i++) {
 		Road *road = m_roads[i];
 		if (!road)
 			continue;
@@ -717,7 +717,7 @@ void Flag::add_item(Game* g, WareInstance* item)
  * for a  building destination.
 */
 bool Flag::has_pending_item(Game *, Flag * dest) {
-	int i;
+	int32_t i;
 
 	for (i = 0; i < m_item_filled; i++) {
 		if (!m_items[i].pending)
@@ -738,7 +738,7 @@ bool Flag::has_pending_item(Game *, Flag * dest) {
  * \return true if an item is actually waiting for the carrier.
 */
 bool Flag::ack_pending_item(Game *, Flag * destflag) {
-	int i;
+	int32_t i;
 
 	for (i = 0; i < m_item_filled; i++) {
 		if (!m_items[i].pending)
@@ -784,9 +784,9 @@ void Flag::wake_up_capacity_queue(Game* g)
 WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 {
 	WareInstance* item;
-	int best_index = -1;
+	int32_t best_index = -1;
 
-	for (int i = 0; i < m_item_filled; i++) {
+	for (int32_t i = 0; i < m_item_filled; i++) {
 		if (m_items[i].nextstep != dest)
 			continue;
 
@@ -817,7 +817,7 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 */
 void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 {
-	for (int i = 0; i < m_item_filled; i++) {
+	for (int32_t i = 0; i < m_item_filled; i++) {
 		if (m_items[i].item != item)
 			continue;
 
@@ -851,7 +851,7 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 {
 	PendingItem* pi = 0;
-	int i;
+	int32_t i;
 
 	// Find the PendingItem entry
 	for (i = 0; i < m_item_filled; i++) {
@@ -894,7 +894,7 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	// Deal with the normal (flag) case
 	assert(nextstep->get_type() == FLAG);
 
-	for (int dir = 1; dir <= 6; dir++) {
+	for (int32_t dir = 1; dir <= 6; dir++) {
 		Road* road = get_road(dir);
 		Flag* other;
 		Road::FlagId flagid;
@@ -940,7 +940,7 @@ void Flag::update_items(Game* g, Flag* other)
 {
 	m_always_call_for_flag = other;
 
-	for (int i = 0; i < m_item_filled; i++)
+	for (int32_t i = 0; i < m_item_filled; i++)
 		m_items[i].item->update(g);
 
 	m_always_call_for_flag = 0;
@@ -982,7 +982,7 @@ void Flag::cleanup(Editor_Game_Base *g)
 		assert(!m_building);
 	}
 
-	for (int i = 0; i < 6; i++) {
+	for (int32_t i = 0; i < 6; i++) {
 		if (m_roads[i]) {
 			m_roads[i]->remove(g); // immediate death
 			assert(!m_roads[i]);
@@ -1019,7 +1019,7 @@ void Flag::destroy(Editor_Game_Base* g)
  * Add a new flag job to request the worker with the given ID, and to execute
  * the given program once it's completed.
 */
-void Flag::add_flag_job(Game *, int workerware, std::string programname) {
+void Flag::add_flag_job(Game *, int32_t workerware, std::string programname) {
 	FlagJob j;
 
 	j.request = new Request(this, workerware,
@@ -1034,7 +1034,7 @@ void Flag::add_flag_job(Game *, int workerware, std::string programname) {
  * the flag. Give him his job.
 */
 void Flag::flag_job_request_callback
-(Game *, Request * rq, int, Worker * w, void * data)
+(Game *, Request * rq, int32_t, Worker * w, void * data)
 {
 	Flag* flag = (Flag*)data;
 
@@ -1093,7 +1093,7 @@ Road::~Road()
 /**
  * Create a road between the given flags, using the given path.
 */
-Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path)
+Road *Road::create(Editor_Game_Base *g, int32_t type, Flag *start, Flag *end, const Path &path)
 {
 	assert(start->get_position() == path.get_start());
 	assert(end->get_position() == path.get_end());
@@ -1110,12 +1110,12 @@ Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const 
 	return r;
 }
 
-int Road::get_type() const throw ()
+int32_t Road::get_type() const throw ()
 {
 	return ROAD;
 }
 
-int Road::get_size() const throw ()
+int32_t Road::get_size() const throw ()
 {
 	return SMALL;
 }
@@ -1133,7 +1133,7 @@ Flag *Road::get_base_flag()
 /**
  * Return the cost of getting from fromflag to the other flag.
 */
-int Road::get_cost(FlagId fromflag)
+int32_t Road::get_cost(FlagId fromflag)
 {
 	return m_cost[fromflag];
 }
@@ -1331,7 +1331,7 @@ void Road::request_carrier(Game * g) {
  * The carrier has arrived successfully.
 */
 void Road::request_carrier_callback
-(Game *, Request * rq, int, Worker * w, void * data)
+(Game *, Request * rq, int32_t, Worker * w, void * data)
 {
 	assert(w);
 
@@ -1387,7 +1387,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 	// build our new path and the new road's path
 	CoordPath path(g->map(), m_path);
 	CoordPath secondpath(path);
-	int index = path.get_index(flag->get_position());
+	int32_t index = path.get_index(flag->get_position());
 
 	assert(index > 0);
 	assert(static_cast<uint32_t>(index) < path.get_nsteps() - 1);
@@ -1423,7 +1423,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 
 	for (std::vector<Worker*>::const_iterator it = workers.begin(); it != workers.end(); ++it) {
 		Worker* w = *it;
-		int idx = path.get_index(w->get_position());
+		int32_t idx = path.get_index(w->get_position());
 
 		// Careful! If the worker is currently inside the building at our
 		// starting flag, we *must not* reassign him.
@@ -1536,9 +1536,9 @@ Flag * Route::get_flag
 /**
  * Remove the first count steps from the route.
 */
-void Route::starttrim(int count)
+void Route::starttrim(int32_t count)
 {
-	assert(count < static_cast<int>(m_route.size()));
+	assert(count < static_cast<int32_t>(m_route.size()));
 
 	m_route.erase(m_route.begin(), m_route.begin()+count);
 }
@@ -1546,9 +1546,9 @@ void Route::starttrim(int count)
 /**
  * Keep the first count steps, truncate the rest.
 */
-void Route::truncate(int count)
+void Route::truncate(int32_t count)
 {
-	assert(count < static_cast<int>(m_route.size()));
+	assert(count < static_cast<int32_t>(m_route.size()));
 
 	m_route.erase(m_route.begin()+count+1, m_route.end());
 }
@@ -1847,7 +1847,7 @@ Requeriments::Requeriments ()
    m_total.max = 400;
 }
 
-void Requeriments::set (tAttribute at, int min, int max)
+void Requeriments::set (tAttribute at, int32_t min, int32_t max)
 {
 	switch (at) {
 	case atrHP:
@@ -1875,9 +1875,9 @@ void Requeriments::set (tAttribute at, int min, int max)
 	}
 }
 
-bool Requeriments::check (int hp, int attack, int defense, int evade)
+bool Requeriments::check (int32_t hp, int32_t attack, int32_t defense, int32_t evade)
 {
-   int total = hp + attack + defense + evade;
+   int32_t total = hp + attack + defense + evade;
 
 	return
 		m_hp     .min <= hp      and hp      <= m_hp     .max and
@@ -1961,7 +1961,7 @@ Request IMPLEMENTATION
 ==============================================================================
 */
 
-Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbdata, Type w)
+Request::Request(PlayerImmovable *target, int32_t index, callback_t cbfn, void* cbdata, Type w)
 {
 	m_type=w;
    m_target = target;
@@ -2143,9 +2143,9 @@ Flag *Request::get_target_flag()
  * Return the point in time at which we want the item of the given number to
  * be delivered. nr is in the range [0..m_count[
 */
-int Request::get_base_required_time(Editor_Game_Base* g, int nr)
+int32_t Request::get_base_required_time(Editor_Game_Base* g, int32_t nr)
 {
-	int curtime = g->get_gametime();
+	int32_t curtime = g->get_gametime();
 
 	if (!nr || !m_required_interval)
 		return m_required_time;
@@ -2165,7 +2165,7 @@ int Request::get_base_required_time(Editor_Game_Base* g, int nr)
  * Can be in the past, indicating that we have been idling, waiting for the
  * ware.
 */
-int Request::get_required_time()
+int32_t Request::get_required_time()
 {
 	return
 		get_base_required_time(&m_economy->owner().egbase(), m_transfers.size());
@@ -2179,17 +2179,17 @@ int Request::get_required_time()
 /**
  * Return the request priority used to sort requests or -1 to skip request
  */
-int Request::get_priority (int cost)
+int32_t Request::get_priority (int32_t cost)
 {
 	if (is_idle()) {
 		// idle requests are prioritized only by cost
-		int weighted_cost = cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST;
+		int32_t weighted_cost = cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST;
 		return weighted_cost > MAX_IDLE_PRIORITY
 			? 0
 			: MAX_IDLE_PRIORITY - weighted_cost;
 	}
 
-	int modifier = DEFAULT_PRIORITY;
+	int32_t modifier = DEFAULT_PRIORITY;
 	bool is_construction_site = false;
 	const Building * const building =
 		dynamic_cast<const Building *>(get_target());
@@ -2208,15 +2208,15 @@ int Request::get_priority (int cost)
 	if (cost > PRIORITY_MAX_COST)
 		cost = PRIORITY_MAX_COST;
 
-	int wait_time = is_construction_site
+	int32_t wait_time = is_construction_site
 		? g.get_gametime() - get_required_time()
 		: g.get_gametime() - get_last_request_time();
-	int distance = PRIORITY_MAX_COST - cost;
+	int32_t distance = PRIORITY_MAX_COST - cost;
 
 	// priority is higher if building waits for ware a long time
 	// additional factor - cost to deliver, so nearer building
 	// with same priority will get ware first
-	int priority = (wait_time * WAITTIME_WEIGHT_IN_PRIORITY +
+	int32_t priority = (wait_time * WAITTIME_WEIGHT_IN_PRIORITY +
 					distance * COST_WEIGHT_IN_PRIORITY) * modifier
 	               + MAX_IDLE_PRIORITY;
 
@@ -2270,7 +2270,7 @@ void Request::set_idle(bool idle)
 /**
  * Change the number of wares we need.
 */
-void Request::set_count(int count)
+void Request::set_count(int32_t count)
 {
 	bool wasopen = is_open();
 
@@ -2279,7 +2279,7 @@ void Request::set_count(int count)
 	// Cancel unneeded transfers. This should be more clever about which
 	// transfers to cancel. Then again, this loop shouldn't execute during
 	// normal play anyway
-	while (m_count < static_cast<int>(m_transfers.size()))
+	while (m_count < static_cast<int32_t>(m_transfers.size()))
 		cancel_transfer(m_transfers.size() - 1);
 
 	// Update the economy
@@ -2295,7 +2295,7 @@ void Request::set_count(int count)
  * Change the time at which the first item to be delivered is needed.
  * Default is the gametime of the Request creation.
 */
-void Request::set_required_time(int time)
+void Request::set_required_time(int32_t time)
 {
 	m_required_time = time;
 }
@@ -2303,7 +2303,7 @@ void Request::set_required_time(int time)
 /**
  * Change the time between desired delivery of items.
 */
-void Request::set_required_interval(int interval)
+void Request::set_required_interval(int32_t interval)
 {
 	m_required_interval = interval;
 }
@@ -2313,7 +2313,7 @@ void Request::set_required_interval(int interval)
  * This function does not take ownership of route, i.e. the caller is
  * responsible for its deletion.
 */
-void Request::start_transfer(Game* g, Supply* supp, int ware)
+void Request::start_transfer(Game* g, Supply* supp, int32_t ware)
 {
 	assert(is_open());
 	Transfer* t = 0;
@@ -2549,7 +2549,7 @@ WaresQueue::~WaresQueue()
 /**
  * Initialize the queue. This also issues the first request, if necessary.
 */
-void WaresQueue::init(const int ware, const uint32_t size) {
+void WaresQueue::init(const int32_t ware, const uint32_t size) {
 	assert(m_ware == -1);
 
 	m_ware = ware;
@@ -2616,7 +2616,7 @@ void WaresQueue::set_callback(callback_t* fn, void* data)
  * Called when an item arrives at the owning building.
 */
 void WaresQueue::request_callback
-(Game * g, Request *, int ware, Worker * w, void * data)
+(Game * g, Request *, int32_t ware, Worker * w, void * data)
 {
 	WaresQueue* wq = (WaresQueue*)data;
 
@@ -2958,7 +2958,7 @@ public:
 	{
 		uint32_t l = node*2 + 1;
 		uint32_t r = node*2 + 2;
-		if (m_data[node]->mpf_heapindex != static_cast<int>(node)) {
+		if (m_data[node]->mpf_heapindex != static_cast<int32_t>(node)) {
 			fprintf(stderr, "%s: mpf_heapindex integrity!\n", str);
 			abort();
 		}
@@ -3000,7 +3000,7 @@ public:
  *
  * \todo Document parameter wait
 */
-bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int cost_cutoff)
+bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_t cost_cutoff)
 {
 	assert(start->get_economy() == this);
 	assert(end->get_economy() == this);
@@ -3041,8 +3041,8 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int co
 
 		for (uint32_t i = 0; i < neighbours.size(); i++) {
 			Flag *neighbour = neighbours[i].flag;
-			int cost;
-			int wait_cost = 0;
+			int32_t cost;
+			int32_t wait_cost = 0;
 
 			// don't need to find the optimal path if we're just checking connectivity
 			if (neighbour == end && !route)
@@ -3099,7 +3099,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int co
 */
 Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
 {
-	int best_totalcost = -1;
+	int32_t best_totalcost = -1;
 	Warehouse *best_warehouse = 0;
 
 	assert(start->get_economy() == this);
@@ -3174,7 +3174,7 @@ void Economy::do_remove_flag(Flag *flag)
  * This is also called when a ware is added to the economy through trade or
  * a merger.
 */
-void Economy::add_wares(int id, int count)
+void Economy::add_wares(int32_t id, int32_t count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -3182,7 +3182,7 @@ void Economy::add_wares(int id, int count)
 
 	// TODO: add to global player inventory?
 }
-void Economy::add_workers(int id, int count)
+void Economy::add_workers(int32_t id, int32_t count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -3197,7 +3197,7 @@ void Economy::add_workers(int id, int count)
  * This is also called when a ware is removed from the economy through trade or
  * a split of the Economy.
 */
-void Economy::remove_wares(int id, int count)
+void Economy::remove_wares(int32_t id, int32_t count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
 
@@ -3211,7 +3211,7 @@ void Economy::remove_wares(int id, int count)
  * This is also called when a worker is removed from the economy through
  * a split of the Economy.
  */
-void Economy::remove_workers(int id, int count)
+void Economy::remove_workers(int32_t id, int32_t count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_workers.stock(id));
 
@@ -3308,11 +3308,11 @@ void Economy::remove_request(Request* req)
 /**
  * Add a worker_supply to our list of supplies.
 */
-void Economy::add_worker_supply(int ware, Supply* supp)
+void Economy::add_worker_supply(int32_t ware, Supply* supp)
 {
 	//log("add_worker_supply(%i, %p)\n", ware, supp);
 
-	if (ware >= static_cast<int>(m_worker_supplies.size())) m_worker_supplies.resize(ware + 1);
+	if (ware >= static_cast<int32_t>(m_worker_supplies.size())) m_worker_supplies.resize(ware + 1);
 
 	m_worker_supplies[ware].add_supply(supp);
 
@@ -3323,11 +3323,11 @@ void Economy::add_worker_supply(int ware, Supply* supp)
  * \return true if the given worker_supply is registered with the economy, false
  * otherwise
 */
-bool Economy::have_worker_supply(int ware, Supply* supp)
+bool Economy::have_worker_supply(int32_t ware, Supply* supp)
 {
-	if (ware >= static_cast<int>(m_worker_supplies.size())) return false;
+	if (ware >= static_cast<int32_t>(m_worker_supplies.size())) return false;
 
-	for (int i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
+	for (int32_t i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
 		if (m_worker_supplies[ware].get_supply(i) == supp)
 			return true;
 
@@ -3337,7 +3337,7 @@ bool Economy::have_worker_supply(int ware, Supply* supp)
 /**
  * Remove a worker_supply from our list of supplies.
 */
-void Economy::remove_worker_supply(int ware, Supply* supp)
+void Economy::remove_worker_supply(int32_t ware, Supply* supp)
 {
 	//log("remove_worker_supply(%i, %p)\n", ware, supp);
 
@@ -3347,11 +3347,11 @@ void Economy::remove_worker_supply(int ware, Supply* supp)
 /**
  * Add a soldier_supply to our list of supplies.
 */
-void Economy::add_soldier_supply(int ware, Supply* supp)
+void Economy::add_soldier_supply(int32_t ware, Supply* supp)
 {
 	//log("add_soldier_supply(%i, %p)\n", ware, supp);
 
-	if (ware >= static_cast<int>(m_worker_supplies.size())) m_worker_supplies.resize(ware + 1);
+	if (ware >= static_cast<int32_t>(m_worker_supplies.size())) m_worker_supplies.resize(ware + 1);
 
 	m_worker_supplies[ware].add_supply(supp);
 
@@ -3361,10 +3361,10 @@ void Economy::add_soldier_supply(int ware, Supply* supp)
 /**
  * Return true if the given soldier_supply is registered with the economy.
 */
-bool Economy::have_soldier_supply(int ware, Supply* supp, Requeriments *) {
-	if (ware >= static_cast<int>(m_worker_supplies.size())) return false;
+bool Economy::have_soldier_supply(int32_t ware, Supply* supp, Requeriments *) {
+	if (ware >= static_cast<int32_t>(m_worker_supplies.size())) return false;
 
-	for (int i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
+	for (int32_t i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
 		if (m_worker_supplies[ware].get_supply(i) == supp)
 			return true;
 
@@ -3374,7 +3374,7 @@ bool Economy::have_soldier_supply(int ware, Supply* supp, Requeriments *) {
 /**
  * Remove a soldier_supply from our list of supplies.
 */
-void Economy::remove_soldier_supply(int ware, Supply* supp)
+void Economy::remove_soldier_supply(int32_t ware, Supply* supp)
 {
 	//log("remove_soldier_supply(%i, %p)\n", ware, supp);
 
@@ -3384,11 +3384,11 @@ void Economy::remove_soldier_supply(int ware, Supply* supp)
 /**
  * Add a ware_supply to our list of supplies.
 */
-void Economy::add_ware_supply(int ware, Supply* supp)
+void Economy::add_ware_supply(int32_t ware, Supply* supp)
 {
 	//log("add_ware_supply(%i, %p)\n", ware, supp);
 
-	if (ware >= static_cast<int>(m_ware_supplies.size())) m_ware_supplies.resize(ware + 1);
+	if (ware >= static_cast<int32_t>(m_ware_supplies.size())) m_ware_supplies.resize(ware + 1);
 
 	m_ware_supplies[ware].add_supply(supp);
 
@@ -3398,11 +3398,11 @@ void Economy::add_ware_supply(int ware, Supply* supp)
 /**
  * Return true if the given ware_supply is registered with the economy.
 */
-bool Economy::have_ware_supply(int ware, Supply* supp)
+bool Economy::have_ware_supply(int32_t ware, Supply* supp)
 {
-	if (ware >= static_cast<int>(m_ware_supplies.size())) return false;
+	if (ware >= static_cast<int32_t>(m_ware_supplies.size())) return false;
 
-	for (int i = 0; i < m_ware_supplies[ware].get_nrsupplies(); i++)
+	for (int32_t i = 0; i < m_ware_supplies[ware].get_nrsupplies(); i++)
 		if (m_ware_supplies[ware].get_supply(i) == supp)
 			return true;
 
@@ -3412,7 +3412,7 @@ bool Economy::have_ware_supply(int ware, Supply* supp)
 /**
  * Remove a ware_supply from our list of supplies.
 */
-void Economy::remove_ware_supply(int ware, Supply* supp)
+void Economy::remove_ware_supply(int32_t ware, Supply* supp)
 {
    assert(ware>=0);
    //log("remove_ware_supply(%i, %p)\n", ware, supp);
@@ -3428,7 +3428,7 @@ void Economy::remove_ware_supply(int ware, Supply* supp)
 */
 void Economy::do_merge(Economy *e)
 {
-	int i;
+	int32_t i;
 
 	m_rebuilding = true;
 
@@ -3497,10 +3497,10 @@ void Economy::do_split(Flag *f)
 /**
  * Make sure the request timer is running.
 */
-void Economy::start_request_timer(int delta)
+void Economy::start_request_timer(int32_t delta)
 {
 	if (Game * const game = dynamic_cast<Game *>(&m_owner->egbase())) {
-		const int gametime = game->get_gametime();
+		const int32_t gametime = game->get_gametime();
 
 		if (m_request_timer and m_request_timer_time - (gametime + delta) <= 0)
 		return;
@@ -3515,7 +3515,7 @@ void Economy::start_request_timer(int delta)
 	cq->queue
 		(m_request_timer_time,
 		 SENDER_MAPOBJECT, CMD_CALL,
-		 static_cast<long>(&Economy::request_timer_cb),
+		 static_cast<int32_t>(&Economy::request_timer_cb),
 		 m_trackserial,
 		 0);
 #endif
@@ -3527,7 +3527,7 @@ void Economy::start_request_timer(int delta)
  * more advanced ware, etc
  *
  */
-int Economy::get_ware_substitute(Request* req, int ware)
+int32_t Economy::get_ware_substitute(Request* req, int32_t ware)
 {
 	if (req->get_type() == Request::WORKER) {
 		const Tribe_Descr& tribe = req->get_target()->get_owner()->tribe();
@@ -3542,7 +3542,7 @@ int Economy::get_ware_substitute(Request* req, int ware)
  * Find the supply that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
 */
-Supply* Economy::find_best_supply(Game* g, Request* req, int* pware, int* pcost, std::vector<SupplyList>* use_supply)
+Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pware, int32_t* pcost, std::vector<SupplyList>* use_supply)
 {
 	assert(req->is_open());
 	assert(NULL != pware && NULL != pcost);
@@ -3550,23 +3550,23 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int* pware, int* pcost,
 	Route buf_route0, buf_route1;
 	Supply *best_supply = 0;
 	Route *best_route = 0;
-	int best_cost = -1;
+	int32_t best_cost = -1;
 	Flag * const target_flag = req->get_target_flag();
 
 	// Look for matches in all possible supplies in this economy
-	if (*pware >= static_cast<int>(use_supply->size()))
+	if (*pware >= static_cast<int32_t>(use_supply->size()))
 		return false; // tough luck, we have definitely no supplies for this ware
 
 	// if there are no resources of requested ware, try a substitute
 	// (for example, master fisher can work as an ordinary fisher)
-	int substitute = *pware;
+	int32_t substitute = *pware;
 	while (substitute >= 0 and 0 == (*use_supply)[substitute].get_nrsupplies()) {
 		substitute = get_ware_substitute(req, substitute);
 	}
 	if (substitute >= 0)
 		*pware = substitute;
 
-	for (int i = 0; i < (*use_supply)[*pware].get_nrsupplies(); i++) {
+	for (int32_t i = 0; i < (*use_supply)[*pware].get_nrsupplies(); i++) {
 		Supply* supp = (*use_supply)[*pware].get_supply(i);
 		Route* route;
 
@@ -3589,7 +3589,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int* pware, int* pcost,
 		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
 
-		int cost_cutoff = best_cost;
+		int32_t cost_cutoff = best_cost;
 
 		if (!find_route(supp->get_position(g)->get_base_flag(), target_flag, route, false, cost_cutoff)) {
 			if (!best_route)
@@ -3615,10 +3615,10 @@ struct RequestSupplyPair {
    bool                 is_item;
    bool                 is_worker;
    bool                 is_soldier;
-	int               ware;
+	int32_t               ware;
 	TrackPtr<Request> request;
 	TrackPtr<Supply>  supply;
-	int               priority;
+	int32_t               priority;
 
 	struct Compare {
 		bool operator()(const RequestSupplyPair& p1, const RequestSupplyPair& p2) {
@@ -3632,7 +3632,7 @@ typedef std::priority_queue<RequestSupplyPair, std::vector<RequestSupplyPair>,
 
 struct RSPairStruct {
 	RSPairQueue queue;
-	int         nexttimer;
+	int32_t         nexttimer;
 };
 
 /**
@@ -3643,7 +3643,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 	for (RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
 		Request* req = *it;
 		Supply* supp;
-		int cost; // estimated time in milliseconds to fulfill Request
+		int32_t cost; // estimated time in milliseconds to fulfill Request
 
 		// We somehow get desynced request lists that don't trigger desync
 		// alerts, so add info to the sync stream here.
@@ -3652,7 +3652,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		ss.Unsigned8(req->get_index());
 		ss.Unsigned32(req->get_target()->get_serial());
 
-		int ware_index = req->get_index();
+		int32_t ware_index = req->get_index();
 		if (req->get_type()==Request::WARE)
 			supp = find_best_supply(g, req, &ware_index, &cost, &m_ware_supplies);
 		else
@@ -3664,7 +3664,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		if (!req->is_idle() and not supp->is_active()) {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
-			int idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
+			int32_t idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
 			// If the building wouldn't have to idle, we wait with the request
 			if (idletime < -200) {
 				if (s->nexttimer < 0 || s->nexttimer > (-idletime))
@@ -3674,7 +3674,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 			}
 		}
 
-		int priority = req->get_priority (cost);
+		int32_t priority = req->get_priority (cost);
 		if (priority < 0)
 			continue;
 
@@ -3738,15 +3738,15 @@ void Economy::create_requested_workers(Game* g)
 			Request* req = *it;
 
 			if (!req->is_idle() && ((req->get_type()==Request::WORKER) || (req->get_type()==Request::SOLDIER))) {
-				int index = req->get_index();
-				int num_wares = 0;
+				int32_t index = req->get_index();
+				int32_t num_wares = 0;
             Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
 
 				// Ignore it if is a worker that cann't be buildable
 				if (!w_desc->get_buildable())
 					continue;
 
-				for (int i = 0; i < m_worker_supplies[index].get_nrsupplies(); i++) {
+				for (int32_t i = 0; i < m_worker_supplies[index].get_nrsupplies(); i++) {
 					Supply* supp = m_worker_supplies[index].get_supply(i);
 
 					if (not supp->is_active()) {
@@ -3761,7 +3761,7 @@ void Economy::create_requested_workers(Game* g)
 							continue;
 						}
 					} // if (supp->is_active)
-				} // for (int i = 0; i < m_worker_supplies)
+				} // for (int32_t i = 0; i < m_worker_supplies)
 
 				// If there aren't enough supplies...
 				if (num_wares == 0) {

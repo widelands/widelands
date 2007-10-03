@@ -163,7 +163,7 @@ Bob::~Bob()
 {
 	if (m_position.field) {
 		molog("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not called!\n");
-		*(int *)0 = 0;
+		*(int32_t *)0 = 0;
 	}
 }
 
@@ -561,7 +561,7 @@ Bob::Task Bob::taskIdle = {
  *
  * This task always succeeds unless interrupted.
  */
-void Bob::start_task_idle(Game* g, uint32_t anim, int timeout)
+void Bob::start_task_idle(Game* g, uint32_t anim, int32_t timeout)
 {
 	State* state;
 
@@ -626,9 +626,9 @@ Bob::Task Bob::taskMovepath = {
  * \par only_step defines how many steps should be taken, before this
  * returns as a success
  */
-bool Bob::start_task_movepath(Game* g, const Coords dest, int persist,
+bool Bob::start_task_movepath(Game* g, const Coords dest, int32_t persist,
                               const DirAnimations & anims,
-                              const bool forceonlast, const int only_step)
+                              const bool forceonlast, const int32_t only_step)
 {
 	Path* path = new Path;
 	CheckStepDefault cstep_default(get_movecaps());
@@ -661,7 +661,7 @@ bool Bob::start_task_movepath(Game* g, const Coords dest, int persist,
  * Start moving along the given, precalculated path.
  */
 void Bob::start_task_movepath(const Path & path, const DirAnimations & anims,
-							  const bool forceonlast, const int only_step)
+							  const bool forceonlast, const int32_t only_step)
 {
 	assert(path.get_start() == get_position());
 
@@ -683,11 +683,11 @@ void Bob::start_task_movepath(const Path & path, const DirAnimations & anims,
  * the given path index.
  */
 bool Bob::start_task_movepath(const Map & map, const Path & origpath,
-							  const int index, const DirAnimations & anims,
-							  const bool forceonlast, const int only_step)
+							  const int32_t index, const DirAnimations & anims,
+							  const bool forceonlast, const int32_t only_step)
 {
 	CoordPath path(map, origpath);
-	int curidx = path.get_index(get_position());
+	int32_t curidx = path.get_index(get_position());
 
 	if (curidx == -1)
 		throw wexception("MO(%u): start_task_movepath(index): not on path",
@@ -761,7 +761,7 @@ void Bob::movepath_update(Game* g, State* state)
 		forcemove = true;
 	}
 
-	int tdelta = start_walk(g, (WalkingDir)dir,
+	int32_t tdelta = start_walk(g, (WalkingDir)dir,
 	                        state->diranims->get_animation(dir), forcemove);
 
 	if (tdelta < 0) {
@@ -797,7 +797,7 @@ Bob::Task Bob::taskForcemove = {
 /**
  * Move into the given direction, without passability checks.
  */
-void Bob::start_task_forcemove(const int dir, const DirAnimations & anims)
+void Bob::start_task_forcemove(const int32_t dir, const DirAnimations & anims)
 {
 	push_task(taskForcemove);
 	State & state  = top_state();
@@ -809,7 +809,7 @@ void Bob::start_task_forcemove(const int dir, const DirAnimations & anims)
 void Bob::forcemove_update(Game* g, State* state)
 {
 	if (state->diranims) {
-		int tdelta = start_walk(g, (WalkingDir)state->ivar1,
+		int32_t tdelta = start_walk(g, (WalkingDir)state->ivar1,
 		                        state->diranims->get_animation(state->ivar1),
 		                        true);
 
@@ -882,8 +882,8 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 		else if (f > 1)
 			f = 1;
 
-		epos.x = static_cast<int>(f * epos.x + (1 - f) * spos.x);
-		epos.y = static_cast<int>(f * epos.y + (1 - f) * spos.y);
+		epos.x = static_cast<int32_t>(f * epos.x + (1 - f) * spos.x);
+		epos.y = static_cast<int32_t>(f * epos.y + (1 - f) * spos.y);
 	}
 
 	return epos;
@@ -928,7 +928,7 @@ void Bob::set_animation(Editor_Game_Base* g, uint32_t anim)
  * \note Returns a negative value when we can't walk into the requested
  * direction.
  */
-int Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
+int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 {
 	FCoords newf;
 
@@ -952,7 +952,7 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 		return -1;
 
 	// Move is go
-	int tdelta = g->get_map()->calc_cost(m_position, dir);
+	int32_t tdelta = g->get_map()->calc_cost(m_position, dir);
 
 	m_walking = dir;
 	m_walkstart = g->get_gametime();

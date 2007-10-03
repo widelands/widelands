@@ -31,7 +31,7 @@
 
 #include "log.h"
 
-static const int CARRIER_SPAWN_INTERVAL = 2500;
+static const int32_t CARRIER_SPAWN_INTERVAL = 2500;
 
 
 WarehouseSupply::~WarehouseSupply()
@@ -55,12 +55,12 @@ WarehouseSupply::~WarehouseSupply()
  * Inform this supply, how much wares
  * are to be handled
  */
-void WarehouseSupply::set_nrwares(int i) {
+void WarehouseSupply::set_nrwares(int32_t i) {
    assert(m_wares.get_nrwareids()==0);
 
    m_wares.set_nrwares(i);
 }
-void WarehouseSupply::set_nrworkers(int i) {
+void WarehouseSupply::set_nrworkers(int32_t i) {
    assert(m_workers.get_nrwareids()==0);
 
    m_workers.set_nrwares(i);
@@ -121,7 +121,7 @@ WarehouseSupply::add_wares
 Add wares and update the economy.
 ===============
 */
-void WarehouseSupply::add_wares(int id, int count)
+void WarehouseSupply::add_wares(int32_t id, int32_t count)
 {
 	if (!count)
 		return;
@@ -141,7 +141,7 @@ WarehouseSupply::remove_wares
 Remove wares and update the economy.
 ===============
 */
-void WarehouseSupply::remove_wares(int id, int count)
+void WarehouseSupply::remove_wares(int32_t id, int32_t count)
 {
 	if (!count)
 		return;
@@ -161,7 +161,7 @@ Add workers and update the economy.
 
 ===============
 */
-void WarehouseSupply::add_workers(int id, int count)
+void WarehouseSupply::add_workers(int32_t id, int32_t count)
 {
 	if (!count)
 		return;
@@ -183,7 +183,7 @@ Remove workers and update the economy.
 Comments see add_workers
 ===============
 */
-void WarehouseSupply::remove_workers(int id, int count)
+void WarehouseSupply::remove_workers(int32_t id, int32_t count)
 {
 	if (!count)
 		return;
@@ -212,7 +212,7 @@ WarehouseSupply::get_amount
 Return our stock of the given ware.
 ===============
 */
-int WarehouseSupply::get_amount(const int ware) const
+int32_t WarehouseSupply::get_amount(const int32_t ware) const
 {return m_wares.stock(ware);}
 
 
@@ -233,7 +233,7 @@ WarehouseSupply::launch_item
 Launch a ware as item.
 ===============
 */
-WareInstance* WarehouseSupply::launch_item(Game* g, int ware)
+WareInstance* WarehouseSupply::launch_item(Game* g, int32_t ware)
 {
 	assert(m_wares.stock(ware));
 
@@ -248,7 +248,7 @@ WarehouseSupply::launch_worker
 Launch a ware as worker.
 ===============
 */
-Worker* WarehouseSupply::launch_worker(Game* g, int ware)
+Worker* WarehouseSupply::launch_worker(Game* g, int32_t ware)
 {
 	assert(m_workers.stock(ware));
 
@@ -263,7 +263,7 @@ WarehouseSupply::launch_soldier
 Launch a ware as soldier.
 ===============
 */
-Soldier* WarehouseSupply::launch_soldier(Game* g, int ware, Requeriments* req)
+Soldier* WarehouseSupply::launch_soldier(Game* g, int32_t ware, Requeriments* req)
 {
 	assert(m_workers.stock(ware));
 
@@ -277,7 +277,7 @@ WarehouseSupply::get_passing_requeriments
 Launch a ware as soldier.
 ===============
 */
-int WarehouseSupply::get_passing_requeriments(Game* g, int ware, Requeriments* req)
+int32_t WarehouseSupply::get_passing_requeriments(Game* g, int32_t ware, Requeriments* req)
 {
 	assert(m_workers.stock(ware));
 
@@ -289,7 +289,7 @@ int WarehouseSupply::get_passing_requeriments(Game* g, int ware, Requeriments* r
 WarehouseSupply::mark_as_used
 ===============
 */
-void WarehouseSupply::mark_as_used (Game* g, int ware, Requeriments* r)
+void WarehouseSupply::mark_as_used (Game* g, int32_t ware, Requeriments* r)
 {
 	m_warehouse->mark_as_used (g, ware, r);
 }
@@ -403,14 +403,14 @@ void Warehouse::init(Editor_Game_Base* gg)
    m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());
 
 	if (Game * const game = dynamic_cast<Game *>(gg)) {
-      for (int i = 0; i < get_owner()->tribe().get_nrwares(); i++) {
+      for (int32_t i = 0; i < get_owner()->tribe().get_nrwares(); i++) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
          req->set_idle(true);
 
          m_requests.push_back(req);
 		}
-      for (int i = 0; i < get_owner()->tribe().get_nrworkers(); i++) {
+      for (int32_t i = 0; i < get_owner()->tribe().get_nrworkers(); i++) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
 
          req->set_idle(true);
@@ -493,9 +493,9 @@ void Warehouse::act(Game* g, uint32_t data)
 {
 	const Tribe_Descr & tribe = owner().tribe();
 	if (g->get_gametime() - m_next_carrier_spawn >= 0) {
-		const int id = tribe.get_safe_worker_index("carrier");
-		int stock = m_supply->stock_workers(id);
-		int tdelta = CARRIER_SPAWN_INTERVAL;
+		const int32_t id = tribe.get_safe_worker_index("carrier");
+		int32_t stock = m_supply->stock_workers(id);
+		int32_t tdelta = CARRIER_SPAWN_INTERVAL;
 
 		if (stock < 100) {
 			tdelta -= 4*(100 - stock);
@@ -512,7 +512,7 @@ void Warehouse::act(Game* g, uint32_t data)
 
       // Military stuff: Kill the soldiers that are dead
 	if (g->get_gametime() - m_next_military_act >= 0) {
-		const int ware = tribe.get_safe_worker_index("soldier");
+		const int32_t ware = tribe.get_safe_worker_index("soldier");
 		const Worker_Descr & workerdescr = *tribe.get_worker_descr(ware);
 		const std::string & workername = workerdescr.name();
          // Look if we got one in stock of those
@@ -596,7 +596,7 @@ Warehouse::create_wares
 Magically create wares in this warehouse. Updates the economy accordingly.
 ===============
 */
-void Warehouse::insert_wares(int id, int count)
+void Warehouse::insert_wares(int32_t id, int32_t count)
 {
 	assert(get_economy());
 
@@ -611,7 +611,7 @@ Warehouse::destroy_wares
 Magically destroy wares.
 ===============
 */
-void Warehouse::remove_wares(int id, int count)
+void Warehouse::remove_wares(int32_t id, int32_t count)
 {
 	assert(get_economy());
 
@@ -625,7 +625,7 @@ Warehouse::create_workers
 Magically create workers in this warehouse. Updates the economy accordingly.
 ===============
 */
-void Warehouse::insert_workers(int id, int count)
+void Warehouse::insert_workers(int32_t id, int32_t count)
 {
 	assert(get_economy());
 
@@ -640,7 +640,7 @@ Warehouse::destroy_workers
 Magically destroy workers.
 ===============
 */
-void Warehouse::remove_workers(int id, int count)
+void Warehouse::remove_workers(int32_t id, int32_t count)
 {
 	assert(get_economy());
 
@@ -657,7 +657,7 @@ Launch a carrier to fetch an item from our flag.
 */
 bool Warehouse::fetch_from_flag(Game* g)
 {
-	int carrierid;
+	int32_t carrierid;
 
 	carrierid = get_owner()->tribe().get_safe_worker_index("carrier");
 
@@ -677,7 +677,7 @@ Warehouse::launch_worker
 Start a worker of a given type. The worker will be assigned a job by the caller.
 ===============
 */
-Worker* Warehouse::launch_worker(Game* g, int ware)
+Worker* Warehouse::launch_worker(Game* g, int32_t ware)
 {
 	assert(m_supply->stock_workers(ware));
 
@@ -717,7 +717,7 @@ Warehouse::launch_soldier
 Start a soldier or certain level. The soldier will be assigned a job by the caller.
 ===============
 */
-Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
+Soldier* Warehouse::launch_soldier(Game* g, int32_t ware, Requeriments* r)
 {
 	assert(m_supply->stock_workers(ware));
 
@@ -777,7 +777,7 @@ Warehouse::mark_as_used
 Mark a soldier as used by a request.
 ===============
 */
-void Warehouse::mark_as_used(Game* g, int ware, Requeriments* r)
+void Warehouse::mark_as_used(Game* g, int32_t ware, Requeriments* r)
 {
 	assert(m_supply->stock_workers(ware));
 
@@ -835,7 +835,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 {
 	assert(w->get_owner() == get_owner());
 
-	int index = get_owner()->tribe().get_worker_index(w->name().c_str());
+	int32_t index = get_owner()->tribe().get_worker_index(w->name().c_str());
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
    // We remove carrier, but we keep other workers around
@@ -888,7 +888,7 @@ Warehouse::launch_item
 Create an instance of a ware and make sure it gets carried out of the warehouse.
 ===============
 */
-WareInstance* Warehouse::launch_item(Game* g, int ware)
+WareInstance* Warehouse::launch_item(Game* g, int32_t ware)
 {
 	WareInstance* item;
 
@@ -917,7 +917,7 @@ void Warehouse::do_launch_item(Game* g, WareInstance* item)
 {
 	// Create a carrier
 	const Tribe_Descr & tribe = owner().tribe();
-	const int carrierid = tribe.get_worker_index("carrier");
+	const int32_t carrierid = tribe.get_worker_index("carrier");
 	const Worker_Descr & workerdescr = *tribe.get_worker_descr(carrierid);
 
 	Worker & worker = workerdescr.create(*g, owner(), *this, m_position);
@@ -954,7 +954,7 @@ Called when a transfer for one of the idle Requests completes.
 ===============
 */
 void Warehouse::idle_request_cb
-(Game * g, Request *, int ware, Worker * w, void * data)
+(Game * g, Request *, int32_t ware, Worker * w, void * data)
 {
 	Warehouse* wh = (Warehouse*)data;
 
@@ -978,9 +978,9 @@ Building * Warehouse_Descr::create_object() const
 Warehouse::get_soldiers_passing
 ===============
 */
-int Warehouse::get_soldiers_passing (Game* g, int w, Requeriments* r)
+int32_t Warehouse::get_soldiers_passing (Game* g, int32_t w, Requeriments* r)
 {
-	int number = 0;
+	int32_t number = 0;
 
 log ("Warehouse::get_soldiers_passing :");
 
@@ -1036,10 +1036,10 @@ log ("Warehouse::get_soldiers_passing :");
 Warehouse::can_create_worker
 ===============
 */
-bool Warehouse::can_create_worker(Game *, int worker) {
+bool Warehouse::can_create_worker(Game *, int32_t worker) {
 	Worker_Descr *w_desc = 0;
 
-	if (worker >= static_cast<int>(m_supply->get_workers().get_nrwareids())) {
+	if (worker >= static_cast<int32_t>(m_supply->get_workers().get_nrwareids())) {
 		throw wexception ("Worker type %d doesn't exists! (max is %d)", worker,
             m_supply->get_workers().get_nrwareids());
 	}
@@ -1067,7 +1067,7 @@ bool Warehouse::can_create_worker(Game *, int worker) {
 			 ++it)
 		{
 			const char * input_name = it->name.c_str();
-			int id_w = tribe.get_ware_index(input_name);
+			int32_t id_w = tribe.get_ware_index(input_name);
 			if (id_w != -1) {
 				if (m_supply->stock_wares(id_w) < it->amount) {
 					molog
@@ -1097,7 +1097,7 @@ bool Warehouse::can_create_worker(Game *, int worker) {
 Warehouse::create_worker
 +=============
 */
-void Warehouse::create_worker(Game *g, int worker)
+void Warehouse::create_worker(Game *g, int32_t worker)
 {
 	if (!can_create_worker (g, worker))
 		throw wexception ("Warehouse::create_worker WE CANN'T CREATE A %d WORKER", worker);
@@ -1113,7 +1113,7 @@ void Warehouse::create_worker(Game *g, int worker)
 			 ++it)
 		{
 			const char & material_name = *it->name.c_str();
-			int id_w = tribe.get_ware_index(&material_name);
+			int32_t id_w = tribe.get_ware_index(&material_name);
 			if (id_w != -1) remove_wares(id_w, it->amount);
 			else {
 				id_w = tribe.get_safe_worker_index(&material_name);

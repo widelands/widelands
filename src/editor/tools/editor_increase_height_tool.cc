@@ -25,7 +25,7 @@
 
 
 /// Increases the heights by a value. Chages surrounding nodes if necessary.
-int Editor_Increase_Height_Tool::handle_click_impl
+int32_t Editor_Increase_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	return map.change_height

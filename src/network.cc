@@ -76,24 +76,24 @@ private:
 	NetGame * netgame;
 
 public:
-	Cmd_NetCheckSync (int dt, NetGame* ng) : Command (dt) {netgame=ng;}
+	Cmd_NetCheckSync (int32_t dt, NetGame* ng) : Command (dt) {netgame=ng;}
 
 	virtual void execute (Game* g);
 
-	virtual int get_id() {return QUEUE_CMD_NETCHECKSYNC;}
+	virtual int32_t get_id() {return QUEUE_CMD_NETCHECKSYNC;}
 };
 
 
 struct NetStatusWindow : public UI::Window {
 	NetStatusWindow (UI::Panel*);
 
-	void add_player (int);
-	void set_ready (int);
+	void add_player (int32_t);
+	void set_ready (int32_t);
 
 private:
 	struct Entry {
 		UI::Table<void *>::Entry_Record * entry;
-		int                               plnum;
+		int32_t                               plnum;
 	};
 
 	UI::Table<void *> table;
@@ -146,7 +146,7 @@ void NetGame::run ()
 
 void NetGame::begin_game ()
 {
-	int i;
+	int32_t i;
 
 	phase=PH_PREGAME;
 
@@ -189,7 +189,7 @@ uint32_t NetGame::get_max_frametime ()
 	return net_game_time - game_time;
 }
 
-void NetGame::disconnect_player (int plnum)
+void NetGame::disconnect_player (int32_t plnum)
 {
 	log ("[Net_game] Player %d has been disconnected\n", plnum);
 
@@ -201,7 +201,7 @@ void NetGame::disconnect_player (int plnum)
 NetHost::NetHost ()
 {
 	IPaddress myaddr;
-	int i;
+	int32_t i;
 
 	log("[Host] starting up.\n");
 
@@ -260,7 +260,7 @@ void NetHost::update_map ()
 void NetHost::send_player_info ()
 {
 	Player* pl;
-	int i;
+	int32_t i;
 	log("[Host] Broadcasting player info to all players.\n");
         //send player info should also contain tribe.
 	player_enabled=0;
@@ -902,7 +902,7 @@ table(this, 0, 0, 256, 192)
 	table.add_column (_("Status"),  64);
 }
 
-void NetStatusWindow::add_player (int num)
+void NetStatusWindow::add_player (int32_t num)
 {
 	char buffer[64];
 
@@ -915,7 +915,7 @@ void NetStatusWindow::add_player (int num)
 	entries.push_back (entry);
 }
 
-void NetStatusWindow::set_ready (int num)
+void NetStatusWindow::set_ready (int32_t num)
 {
 	uint32_t i;
 
@@ -943,7 +943,7 @@ void Serializer::begin_packet ()
 
 void Serializer::end_packet ()
 {
-	int length=buffer.size();
+	int32_t length=buffer.size();
 
 	assert (length<0x10000);
 
@@ -981,10 +981,10 @@ Deserializer::~Deserializer ()
 {
 }
 
-int Deserializer::read_packet (TCPsocket sock)
+int32_t Deserializer::read_packet (TCPsocket sock)
 {
 	uint8_t buffer[256];
-	int length, amount, i;
+	int32_t length, amount, i;
 
 	// read packet length (including length field)
 	if (SDLNet_TCP_Recv(sock, buffer, 2) < 2)
@@ -1033,9 +1033,9 @@ char Deserializer::getchar()
 	return v;
 }
 
-short Deserializer::getshort ()
+int16_t Deserializer::getshort ()
 {
-	short val;
+	int16_t val;
 
 	val=getchar() << 8;
 	val|=getchar() & 0xFF;
@@ -1043,9 +1043,9 @@ short Deserializer::getshort ()
 	return val;
 }
 
-long Deserializer::getlong ()
+int32_t Deserializer::getlong ()
 {
-	long val;
+	int32_t val;
 
 	val=getchar() << 24;
 	val|=(getchar() & 0xFF) << 16;
@@ -1055,9 +1055,9 @@ long Deserializer::getlong ()
 	return val;
 }
 
-void Deserializer::getstr (char* buffer, int maxlength)
+void Deserializer::getstr (char* buffer, int32_t maxlength)
 {
-	int i;
+	int32_t i;
 
 	for (i=0;(buffer[i]=getchar())!=0;i++)
 		if (i==maxlength)

@@ -37,7 +37,7 @@ Editor_Info_Tool::handle_click()
 show a simple info dialog with infos about this field
 ===========
 */
-int Editor_Info_Tool::handle_click_impl
+int32_t Editor_Info_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	const World & world = map.world();
@@ -73,8 +73,8 @@ int Editor_Info_Tool::handle_click_impl
    sprintf(buf1, " %s: %i\n", _("Owned by").c_str(), f->get_owned_by()); buf+=buf1;
    sprintf(buf1, " %s: %s (TODO! more info)\n", _("Has base immovable").c_str(), f->get_immovable() ? "Yes" : "No"); buf+=buf1;
    sprintf(buf1, " %s: %s (TODO: more informations)\n", _("Has bobs").c_str(), f->get_first_bob() ? "Yes" : "No"); buf+=buf1;
-   int res=f->get_resources();
-   int amount=f->get_resources_amount();
+   int32_t res=f->get_resources();
+   int32_t amount=f->get_resources_amount();
 	if (res or amount)
 		snprintf
 			(buf1, sizeof(buf1),

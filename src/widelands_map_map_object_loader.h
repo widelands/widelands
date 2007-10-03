@@ -36,7 +36,7 @@ struct Widelands_Map_Map_Object_Loader {
 
 	Map_Object* get_object_by_file_index(uint32_t);
 
-	int get_nr_unloaded_objects();
+	int32_t get_nr_unloaded_objects();
 	bool is_object_loaded(Map_Object* obj) {return m_loaded_obj[obj];}
 
 	void mark_object_as_loaded(Map_Object* obj);

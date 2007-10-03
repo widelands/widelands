@@ -39,7 +39,7 @@ struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	void          set_player(const Player_Number n) throw () {m_player = n;}
 	Player_Number get_player() const                throw () {return m_player;}
 
-	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
 
@@ -48,7 +48,7 @@ private:
       UI::UniqueWindow::Registry m_registry;
 };
 
-int Editor_Make_Infrastructure_Tool_Callback
-(const TCoords<FCoords>, void *, int);
+int32_t Editor_Make_Infrastructure_Tool_Callback
+(const TCoords<FCoords>, void *, int32_t);
 
 #endif

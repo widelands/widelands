@@ -87,7 +87,7 @@ Load tribe graphics
 */
 void Tribe_Descr::load_graphics()
 {
-	int i;
+	int32_t i;
 
 	for (i = 0; i < m_workers.get_nitems(); i++)
 		m_workers.get(i)->load_graphics();
@@ -223,15 +223,15 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 	//  m_recursive_workarea_info from every building that can be reached through
 	//  at least 1 sequence of enhancement operations (including the empty
 	//  sequence).
-	for (int i = 0; i < m_buildings.get_nitems(); ++i) {
+	for (int32_t i = 0; i < m_buildings.get_nitems(); ++i) {
 		Workarea_Info & collected_info
 			= get_building_descr(i)->m_recursive_workarea_info;
-		std::set<int> to_consider, considered;
+		std::set<int32_t> to_consider, considered;
 		to_consider.insert(i);
 		while (not to_consider.empty()) {
-			const std::set<int>::iterator consider_now_iterator
+			const std::set<int32_t>::iterator consider_now_iterator
 				= to_consider.begin();
-			const int consider_now = *consider_now_iterator;
+			const int32_t consider_now = *consider_now_iterator;
 			const Building_Descr & considered_building_descr
 				= *get_building_descr(consider_now);
 			to_consider.erase(consider_now_iterator);
@@ -246,7 +246,7 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 					 it != enhancements_end;
 					 ++it)
 				{
-					const int index = m_buildings.get_index(*it);
+					const int32_t index = m_buildings.get_index(*it);
 					if (index < 0) {
 						log
 							("        Warning: building %s (%i) does not exist\n",
@@ -268,7 +268,7 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 					 it != ci_end;
 					 ++it)
 				{
-					const int radius = it->first;
+					const int32_t radius = it->first;
 					const std::set<std::string> & descriptions = it->second;
 					for
 						(std::set<std::string>::const_iterator di =
@@ -474,21 +474,21 @@ void Tribe_Descr::load_warehouse_with_start_wares
 					 it->first.c_str());
 
       char* endp;
-      int hplvl=strtol(list[0].c_str(), &endp, 0);
+      int32_t hplvl=strtol(list[0].c_str(), &endp, 0);
       if (endp && *endp)
          throw wexception("Bad hp level '%s'", list[0].c_str());
-      int attacklvl=strtol(list[1].c_str(), &endp, 0);
+      int32_t attacklvl=strtol(list[1].c_str(), &endp, 0);
       if (endp && *endp)
          throw wexception("Bad attack level '%s'", list[1].c_str());
-      int defenselvl=strtol(list[2].c_str(), &endp, 0);
+      int32_t defenselvl=strtol(list[2].c_str(), &endp, 0);
       if (endp && *endp)
          throw wexception("Bad defense level '%s'", list[2].c_str());
-      int evadelvl=strtol(list[3].c_str(), &endp, 0);
+      int32_t evadelvl=strtol(list[3].c_str(), &endp, 0);
       if (endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
 			if (Game * const game = dynamic_cast<Game *>(&egbase))
-		for (int i = 0; i < it->second; ++i) {
+		for (int32_t i = 0; i < it->second; ++i) {
             Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
 				Soldier & soldier = static_cast<Soldier &>
 					(soldierd->create(*game, wh.owner(), wh, wh.get_position()));
@@ -538,7 +538,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 (const Resource_Descr * const res, const uint32_t amount) const
 {
 	if (not res or not amount) {
-      int idx=get_immovable_index("resi_none");
+      int32_t idx=get_immovable_index("resi_none");
       if (idx==-1)
 	      throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", name().c_str());
       return idx;
@@ -546,8 +546,8 @@ uint32_t Tribe_Descr::get_resource_indicator
 
    char buffer[256];
 
-   int i=1;
-   int num_indicators=0;
+   int32_t i=1;
+   int32_t num_indicators=0;
 	for (;;) {
       sprintf(buffer, "resi_%s%i", res->name().c_str(), i);
       if (get_immovable_index(buffer)==-1)
@@ -563,7 +563,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 			 res->name().c_str());
 
    uint32_t bestmatch = static_cast<uint32_t>((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
-	if (static_cast<int>(amount) < res->get_max_amount())
+	if (static_cast<int32_t>(amount) < res->get_max_amount())
       bestmatch+=1; // Resi start with 1, not 0
 
 	sprintf(buffer, "resi_%s%i", res->name().c_str(), bestmatch);
@@ -579,8 +579,8 @@ uint32_t Tribe_Descr::get_resource_indicator
 /*
  * Return the given ware or die trying
  */
-int Tribe_Descr::get_safe_ware_index(const char * const warename) const {
-   int retval=get_ware_index(warename);
+int32_t Tribe_Descr::get_safe_ware_index(const char * const warename) const {
+   int32_t retval=get_ware_index(warename);
 
    if (retval==-1)
       throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!",
@@ -591,8 +591,8 @@ int Tribe_Descr::get_safe_ware_index(const char * const warename) const {
 /*
  * Return the given worker or die trying
  */
-int Tribe_Descr::get_safe_worker_index(const char * const workername) const {
-   int retval=get_worker_index(workername);
+int32_t Tribe_Descr::get_safe_worker_index(const char * const workername) const {
+   int32_t retval=get_worker_index(workername);
 
    if (retval==-1)
       throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!",
@@ -603,8 +603,8 @@ int Tribe_Descr::get_safe_worker_index(const char * const workername) const {
 /*
  * Return the given building or die trying
  */
-int Tribe_Descr::get_safe_building_index(const char *buildingname) const {
-   int retval=get_building_index(buildingname);
+int32_t Tribe_Descr::get_safe_building_index(const char *buildingname) const {
+   int32_t retval=get_building_index(buildingname);
 
    if (retval==-1)
       throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!",

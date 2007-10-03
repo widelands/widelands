@@ -44,11 +44,11 @@ m_event(event),
 m_parent(parent)
 {
 
-   const int offsx=5;
-   const int offsy=25;
-   const int spacing=5;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=5;
+   const int32_t offsy=25;
+   const int32_t spacing=5;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
    m_nr_buttons=m_event->get_nr_buttons();
    m_ls_selected=0;
 
@@ -148,7 +148,7 @@ m_parent(parent)
 		 &Event_Message_Box_Option_Menu::clicked_ok, this,
 		 _("Ok"));
    posx=(get_inner_w()/2)+spacing;
-	new UI::IDButton<Event_Message_Box_Option_Menu, int>
+	new UI::IDButton<Event_Message_Box_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
 		 1,
@@ -162,11 +162,11 @@ m_parent(parent)
          m_null_triggers.push_back(i);
 	}
 
-	for (int i = 0; i < m_event->get_nr_buttons(); ++i) {
+	for (int32_t i = 0; i < m_event->get_nr_buttons(); ++i) {
       m_buttons[i].name=m_event->get_button_name(i);
 		for (size_t j = 0; j < m_null_triggers.size(); ++j) {
          // Get this triggers index
-         int foundidx = -1;
+         int32_t foundidx = -1;
 			for (MapTriggerManager::Index x = 0; x < nr_triggers; ++x)
 				if (&mtm.get_trigger_by_nr(x) == m_event->get_button_trigger(i)) {
                foundidx = x;
@@ -196,9 +196,9 @@ Event_Message_Box_Option_Menu::~Event_Message_Box_Option_Menu() {
  * we simulate a cancel click
  * We are not draggable.
  */
-bool Event_Message_Box_Option_Menu::handle_mousepress(const Uint8 btn, int, int)
+bool Event_Message_Box_Option_Menu::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int, int)
+bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 
@@ -250,7 +250,7 @@ void Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease() {
 
 void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
             m_buttons[m_ls_selected].trigger++;
-            if (m_buttons[m_ls_selected].trigger>=static_cast<int>(m_null_triggers.size()))
+            if (m_buttons[m_ls_selected].trigger>=static_cast<int32_t>(m_null_triggers.size()))
                m_buttons[m_ls_selected].trigger=-1;
             update();
 }
@@ -302,7 +302,7 @@ void Event_Message_Box_Option_Menu::ls_selected(uint32_t i) {
 /*
  * Button name edit box edited
  */
-void Event_Message_Box_Option_Menu::edit_box_edited(int) {
+void Event_Message_Box_Option_Menu::edit_box_edited(int32_t) {
    m_buttons[m_ls_selected].name= m_button_name->get_text() ;
    update();
 }

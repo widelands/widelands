@@ -398,12 +398,12 @@ void Sound_Handler::load_one_fx
  * \note This function can also be used to check whether a logical coordinate is
  * visible at all
 */
-int Sound_Handler::stereo_position(const Coords position)
+int32_t Sound_Handler::stereo_position(const Coords position)
 {
 	//screen x, y (without clipping applied, might well be invisible)
-	int sx, sy;
+	int32_t sx, sy;
 	//x, y resolutions of game window
-	int xres, yres;
+	int32_t xres, yres;
 	FCoords fposition;
 	Point vp;
 	Interactive_Base *ia;
@@ -435,7 +435,7 @@ int Sound_Handler::stereo_position(const Coords position)
  * \todo What is the selection algorithm? cf class documentation
 */
 bool Sound_Handler::play_or_not
-(const std::string fx_name, const int stereo_pos, const uint32_t priority)
+(const std::string fx_name, const int32_t stereo_pos, const uint32_t priority)
 {
 	bool allow_multiple=false; //convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
@@ -520,7 +520,7 @@ void Sound_Handler::play_fx
  *                         played? (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-(const std::string fx_name, const int stereo_pos, const uint32_t priority)
+(const std::string fx_name, const int32_t stereo_pos, const uint32_t priority)
 {
 	assert(stereo_pos >= -1);
 	assert(stereo_pos <= 254);
@@ -540,7 +540,7 @@ void Sound_Handler::play_fx
 
 	//  retrieve the fx and play it if it's valid
 	if (Mix_Chunk * const m = m_fxs[fx_name]->get_fx()) {
-		const int chan = Mix_PlayChannel(-1, m, 0);
+		const int32_t chan = Mix_PlayChannel(-1, m, 0);
 		if (chan == -1) log("Sound_Handler: Mix_PlayChannel failed\n");
 		else {
 			Mix_SetPanning(chan, 254 - stereo_pos, stereo_pos);
@@ -599,7 +599,7 @@ void Sound_Handler::register_song
  * \ref stop_music()
  * or \ref change_music() this function will block until the fadeout is complete
 */
-void Sound_Handler::start_music(const std::string songset_name, int fadein_ms) {
+void Sound_Handler::start_music(const std::string songset_name, int32_t fadein_ms) {
 	if (get_disable_music())
 		return;
 
@@ -628,7 +628,7 @@ void Sound_Handler::start_music(const std::string songset_name, int fadein_ms) {
  * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms milliseconds
  * starting from now.
 */
-void Sound_Handler::stop_music(int fadeout_ms)
+void Sound_Handler::stop_music(int32_t fadeout_ms)
 {
 	if (get_disable_music())
 		return;
@@ -649,7 +649,7 @@ void Sound_Handler::stop_music(int fadeout_ms)
  * be selected
 */
 void Sound_Handler::change_music
-(const std::string songset_name, int fadeout_ms, int fadein_ms)
+(const std::string songset_name, int32_t fadeout_ms, int32_t fadein_ms)
 {
 	std::string s = songset_name;
 
@@ -667,8 +667,8 @@ void Sound_Handler::change_music
 
 bool Sound_Handler::get_disable_music() const throw () {return m_disable_music;}
 bool Sound_Handler::get_disable_fx   () const throw () {return m_disable_fx;}
-int  Sound_Handler::get_music_volume () const throw () {return m_music_volume;}
-int  Sound_Handler::get_fx_volume    () const throw () {return m_fx_volume;}
+int32_t  Sound_Handler::get_music_volume () const throw () {return m_music_volume;}
+int32_t  Sound_Handler::get_fx_volume    () const throw () {return m_fx_volume;}
 
 
 /** Normal set_* function, but the music must be started/stopped accordingly
@@ -714,7 +714,7 @@ void Sound_Handler::set_disable_fx(bool disable)
  *
  * \param volume The new music volume.
  */
-void Sound_Handler::set_music_volume(int volume) {
+void Sound_Handler::set_music_volume(int32_t volume) {
 	if (not m_lock_audio_disabling) {
 		m_music_volume = volume;
 		Mix_VolumeMusic(volume);
@@ -729,7 +729,7 @@ void Sound_Handler::set_music_volume(int volume) {
  *
  * \param volume The new music volume.
  */
-void Sound_Handler::set_fx_volume(int volume) {
+void Sound_Handler::set_fx_volume(int32_t volume) {
 	if (not m_lock_audio_disabling) {
 		m_fx_volume = volume;
 		Mix_Volume(-1, volume);
@@ -765,7 +765,7 @@ void Sound_Handler::music_finished_callback()
 /** Callback to notify \ref Sound_Handler that a sound effect has finished
  * playing.
 */
-void Sound_Handler::fx_finished_callback(int channel)
+void Sound_Handler::fx_finished_callback(int32_t channel)
 {
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 

@@ -45,10 +45,10 @@ m_parent(parent),
 m_player(m_event->get_player()),
 m_building(-1) //  FIXME negative value!
 {
-   const int offsx=5;
-   const int offsy=25;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=5;
+   const int32_t offsy=25;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    if (m_player<1) m_player=1;
 
@@ -78,14 +78,14 @@ m_building(-1) //  FIXME negative value!
    new UI::Textarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
    m_player_ta=new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
 
-	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Event_Allow_Building_Option_Menu::clicked, this, 15);
 
-	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy, 20, 20,
 		 0,
@@ -97,14 +97,14 @@ m_building(-1) //  FIXME negative value!
    // Building
    new UI::Textarea(this, spacing, posy, 70, 20, _("Building: "), Align_CenterLeft);
 
-	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 70, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Event_Allow_Building_Option_Menu::clicked, this, 23);
 
-	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
 		 0,
@@ -134,7 +134,7 @@ m_building(-1) //  FIXME negative value!
 
    posx=(get_inner_w()/2)+spacing;
 
-	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
 		 1,
@@ -161,10 +161,10 @@ Event_Allow_Building_Option_Menu::~Event_Allow_Building_Option_Menu() {
  * We are not draggable.
  */
 bool Event_Allow_Building_Option_Menu::handle_mousepress
-(const Uint8 btn, int, int)
+(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Event_Allow_Building_Option_Menu::handle_mouserelease
-(const Uint8, int, int)
+(const Uint8, int32_t, int32_t)
 {return false;}
 
 
@@ -184,7 +184,7 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 }
 
 
-void Event_Allow_Building_Option_Menu::clicked(int i) {
+void Event_Allow_Building_Option_Menu::clicked(int32_t i) {
 	switch (i) {
 	case 15: ++m_player;   break;
 	case 16: --m_player;   break;
@@ -204,7 +204,7 @@ void Event_Allow_Building_Option_Menu::update() {
 	if (m_player > nr_players) m_player = nr_players;
 
    if (m_building<0) m_building=0;
-   if (m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
+   if (m_building>=static_cast<int32_t>(m_buildings.size())) m_building=m_buildings.size()-1;
 
    std::string curbuild=_("<invalid player tribe>");
    if (!m_buildings.size()) {

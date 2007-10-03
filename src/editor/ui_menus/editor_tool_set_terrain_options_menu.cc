@@ -53,7 +53,7 @@ m_tool(tool)
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
 
 
-	int check[] = {
+	int32_t check[] = {
       0,                   // "green"
       TERRAIN_DRY,         // "dry"
       TERRAIN_DRY|TERRAIN_MOUNTAIN,   // "mountain"
@@ -174,10 +174,10 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::~Editor_Tool_Set_Terrain_Tool_Options
 }
 
 
-void Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing(int, bool) {}
+void Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing(int32_t, bool) {}
 
 
-void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
+void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked.
 	const bool multiselect =

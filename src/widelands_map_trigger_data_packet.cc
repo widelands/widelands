@@ -56,7 +56,7 @@ throw (_wexception)
 
    Section* s = prof.get_section("global");
 
-	const int packet_version = s->get_int("packet_version");
+	const int32_t packet_version = s->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		while ((s = prof.get_next_section(0))) {
          std::string name = s->get_name();

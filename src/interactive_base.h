@@ -51,10 +51,10 @@ struct Interactive_Base : public Map_View {
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
-	virtual void reference_player_tribe(const int, const void * const) {}
+	virtual void reference_player_tribe(const int32_t, const void * const) {}
 
-		static int get_xres();
-		static int get_yres();
+		static int32_t get_xres();
+		static int32_t get_yres();
 	bool m_show_workarea_preview;
 
 	//  point of view for drawing
@@ -93,7 +93,7 @@ struct Interactive_Base : public Map_View {
       // Road building
 		inline bool is_building_road() const {return m_buildroad;}
 		inline CoordPath *get_build_road() {return m_buildroad;}
-		void start_build_road(Coords start, int player);
+		void start_build_road(Coords start, int32_t player);
 		void abort_build_road();
 		void finish_build_road();
 		bool append_build_road(Coords field);
@@ -117,7 +117,7 @@ private:
 			 Node_and_Triangle<>
 			 (Coords(0, 0), TCoords<>(Coords(0, 0), TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
-			 const int Pic                       = 0,
+			 const int32_t Pic                       = 0,
 			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
 			:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
@@ -127,7 +127,7 @@ private:
 		bool              triangles; //  otherwise nodes
 		Node_and_Triangle<>     pos;
 		uint32_t              radius;
-		int               pic;
+		int32_t               pic;
 		Overlay_Manager::Job_Id jobid;
 	} m_sel;
 
@@ -140,7 +140,7 @@ private:
 	Overlay_Manager::Job_Id m_jobid;
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
 	CoordPath             * m_buildroad;         //  path for the new road
-      int      m_road_build_player;
+      int32_t      m_road_build_player;
 
       UI::UniqueWindow::Registry m_minimap;
 
@@ -148,8 +148,8 @@ protected:
 	void toggle_minimap();
 	void hide_minimap();
 
-      void mainview_move(int x, int y);
-		void minimap_warp(int x, int y);
+      void mainview_move(int32_t x, int32_t y);
+		void minimap_warp(int32_t x, int32_t y);
 
 	virtual void draw_overlay(RenderTarget &);
 

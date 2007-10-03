@@ -85,7 +85,7 @@ throw (_wexception)
 						ware->m_economy = 0;
 
 						const Tribe_Descr & tribe = player_immovable->owner().tribe();
-						if (tribe.get_nrwares() <= static_cast<int>(ware_index_from_file))
+						if (tribe.get_nrwares() <= static_cast<int32_t>(ware_index_from_file))
 							throw wexception
 								("Widelands_Map_Waredata_Data_Packet: ware index out "
 								 "of range: %i\n",
@@ -101,7 +101,7 @@ throw (_wexception)
 					(Worker * const worker = dynamic_cast<Worker *>(location))
 				{
 					const Tribe_Descr & tribe = *worker->get_tribe();
-					if (tribe.get_nrwares() <= static_cast<int>(ware_index_from_file))
+					if (tribe.get_nrwares() <= static_cast<int32_t>(ware_index_from_file))
 						throw wexception
 							("Widelands_Map_Waredata_Data_Packet: ware index out of "
 							 "range: %i\n",
@@ -168,7 +168,7 @@ throw (_wexception)
          BaseImmovable* imm=f->get_immovable();
          if (imm && imm->get_type()==Map_Object::FLAG) {
             Flag* fl=static_cast<Flag*>(imm);
-            for (int i=0; i<fl->m_item_filled; i++) {
+            for (int32_t i=0; i<fl->m_item_filled; i++) {
                assert(os->is_object_known(fl->m_items[i].item));
                write_ware(&fw, egbase, os, fl->m_items[i].item);
 				}

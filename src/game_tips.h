@@ -36,10 +36,10 @@ struct GameTips : public UI::IProgressVisualization {
 private:
 	struct Tip {
 		std::string  text;
-		int          interval;
+		int32_t          interval;
 	};
 
-	void show_tip(int index);
+	void show_tip(int32_t index);
 	const RGBColor color_from_hex(const char * hexcode, const RGBColor & def);
 	const uint32_t colorvalue_from_hex(const char c1, const char c2);
 
@@ -57,7 +57,7 @@ private:
 	uint32_t                 m_pading_r;
 	uint32_t                 m_pading_t;
 	uint32_t                 m_pading_b;
-	int                  m_font_size;
+	int32_t                  m_font_size;
 	RGBColor             m_bgcolor;
 	RGBColor             m_color;
 };

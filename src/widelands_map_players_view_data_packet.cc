@@ -138,7 +138,7 @@ static inline const Map_Object_Descr * read_unseen_immovable
 					(const Tribe_Descr * const owner_tribe =
 					 egbase.get_tribe(tribename))
 				{
-					const int index = owner_tribe->get_immovable_index(type_name);
+					const int32_t index = owner_tribe->get_immovable_index(type_name);
 					if (index == -1)
 						throw wexception
 							("Widelands_Map_Players_View_Data_Packet::Read: player "
@@ -157,7 +157,7 @@ static inline const Map_Object_Descr * read_unseen_immovable
 						 plnum, &immovables_filename, tribename_filepos,
 						 tcoords.x, tcoords.y, tcoords.t, tribename);
 			else {//  it is a world immovable
-				const int index = world.get_immovable_index(type_name);
+				const int32_t index = world.get_immovable_index(type_name);
 				if (index == -1)
 					throw wexception
 						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
@@ -196,7 +196,7 @@ static inline const Map_Object_Descr * read_unseen_immovable
 						 plnum, &immovables_filename, immovables_file.GetPrevPos(),
 						 tcoords.x, tcoords.y, tcoords.t);
 				}
-				const int index = owner_tribe->get_building_index(buildname);
+				const int32_t index = owner_tribe->get_building_index(buildname);
 				if (index == -1)
 					throw wexception
 						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "

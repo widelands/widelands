@@ -40,8 +40,8 @@ struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
       Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive*, TriggerConditional*, EventChain*);
       ~Editor_Event_Menu_Edit_TriggerConditional();
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
       TriggerConditional* get_trigcond() {return m_given_cond;}
 
 private:

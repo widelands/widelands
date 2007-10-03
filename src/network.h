@@ -62,7 +62,7 @@ struct NetGame {
 		return ch;
 	}
 
-	void set_player_description_group (int plnum, PlayerDescriptionGroup* pdg)
+	void set_player_description_group (int32_t plnum, PlayerDescriptionGroup* pdg)
 	{
 		playerdescr[plnum-1]=pdg;
 	}
@@ -90,7 +90,7 @@ struct NetGame {
 	virtual void syncreport (const md5_checksum&)=0;
 
 protected:
-	void disconnect_player (int);
+	void disconnect_player (int32_t);
 
 	enum {
 		PH_SETUP,
@@ -144,7 +144,7 @@ private:
 	struct Client {
 		TCPsocket        sock;
 		Deserializer   * deserializer;
-		int              playernum;
+		int32_t              playernum;
 		std::queue<md5_checksum> syncreports;
 		uint32_t            lag;
 	};
@@ -209,13 +209,13 @@ struct Serializer : public StreamWrite {
 		buffer.push_back (v);
 	}
 
-	void putshort (short v)
+	void putshort (int16_t v)
 	{
 		buffer.push_back (v >> 8);
 		buffer.push_back (v & 0xFF);
 	}
 
-	void putlong (long v)
+	void putlong (int32_t v)
 	{
 		buffer.push_back (v >> 24);
 		buffer.push_back ((v>>16) & 0xFF);
@@ -233,7 +233,7 @@ struct Deserializer : public StreamRead {
 	Deserializer ();
 	~Deserializer ();
 
-	int read_packet (TCPsocket);
+	int32_t read_packet (TCPsocket);
 
 	bool avail ()
 	{return !queue.empty();}
@@ -242,10 +242,10 @@ struct Deserializer : public StreamRead {
 	bool EndOfFile();
 
 	char getchar ();
-	short getshort ();
-	long getlong ();
+	int16_t getshort ();
+	int32_t getlong ();
 
-	void getstr (char*, int);
+	void getstr (char*, int32_t);
 
 private:
 	std::queue<uint8_t> queue;

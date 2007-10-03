@@ -40,9 +40,9 @@ struct Trigger_Time : public Trigger {
 	void Write(Section &) const;
       void Read(Section*, Editor_Game_Base*);
 
-      inline void set_wait_time(int i) {m_wait_time=i;}
-      inline void set_last_start_time(int i) {m_last_start_time = i;}
-	int get_wait_time() const {return m_wait_time;}
+      inline void set_wait_time(int32_t i) {m_wait_time=i;}
+      inline void set_last_start_time(int32_t i) {m_last_start_time = i;}
+	int32_t get_wait_time() const {return m_wait_time;}
 
 private:
       uint32_t m_wait_time; // in seconds

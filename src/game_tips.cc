@@ -129,7 +129,7 @@ const RGBColor GameTips::color_from_hex(
 {
 	if (NULL == hexcode)
 		return def;
-	const int len = strlen(hexcode);
+	const int32_t len = strlen(hexcode);
 	if (len < 3)
 		return def;
 
@@ -181,7 +181,7 @@ void GameTips::stop() {
 	}
 }
 
-void GameTips::show_tip(int index) {
+void GameTips::show_tip(int32_t index) {
 	RenderTarget & rt = *g_gr->get_render_target();
 	const uint32_t xres = g_gr->get_xres();
 	const uint32_t yres = g_gr->get_yres();

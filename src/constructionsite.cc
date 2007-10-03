@@ -36,7 +36,7 @@
 
 #include <stdio.h>
 
-static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
+static const int32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
 
 
 /*
@@ -126,7 +126,7 @@ ConstructionSite::get_size
 Override: construction size is always the same size as the building
 ===============
 */
-int ConstructionSite::get_size() const throw ()
+int32_t ConstructionSite::get_size() const throw ()
 {return m_building->get_size();}
 
 /*
@@ -424,7 +424,7 @@ Called by transfer code when the builder has arrived on site.
 ===============
 */
 void ConstructionSite::request_builder_callback
-(Game *, Request * rq, int, Worker * w, void * data)
+(Game *, Request * rq, int32_t, Worker * w, void * data)
 {
 	assert(w);
 
@@ -470,7 +470,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 
 	// Check if one step has completed
 	if (m_working) {
-		if (static_cast<int>(g->get_gametime() - m_work_steptime) < 0) {
+		if (static_cast<int32_t>(g->get_gametime() - m_work_steptime) < 0) {
 			w->start_task_idle(g, w->get_animation("idle"), m_work_steptime - g->get_gametime());
 			return true;
 		} else {
@@ -528,7 +528,7 @@ Called by WaresQueue code when an item has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback
-(Game * g, WaresQueue *, int, void * data)
+(Game * g, WaresQueue *, int32_t, void * data)
 {
 	ConstructionSite* cs = (ConstructionSite*)data;
 

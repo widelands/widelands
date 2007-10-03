@@ -39,7 +39,7 @@ struct Scrollbar;
  * Use the \ref Listselect template to use arbitrary IDs.
  */
 struct BaseListselect : public Panel {
-	BaseListselect(Panel *parent, int x, int y, uint32_t w, uint32_t h, Align align = Align_Left, bool show_check = false);
+	BaseListselect(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align = Align_Left, bool show_check = false);
 	~BaseListselect();
 
 	Signal1<uint32_t> selected;
@@ -50,7 +50,7 @@ struct BaseListselect : public Panel {
 	void add
 		(const char * const name,
 		 uint32_t value,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false);
 	void remove(const uint32_t i);
 	void remove(const char * const name);
@@ -95,22 +95,22 @@ struct BaseListselect : public Panel {
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
-	static const int DOUBLE_CLICK_INTERVAL = 500; // half a second
+	static const int32_t DOUBLE_CLICK_INTERVAL = 500; // half a second
 
-	void set_scrollpos(const int);
+	void set_scrollpos(const int32_t);
 
 private:
-	static const int ms_darken_value=-20;
+	static const int32_t ms_darken_value=-20;
 
 	struct Entry_Record {
 		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
-		int picid;
+		int32_t picid;
 		char name[1];
 	};
 	typedef std::vector<Entry_Record *> Entry_Record_vector;
@@ -122,17 +122,17 @@ private:
 	Scrollbar* m_scrollbar;
 	uint32_t m_scrollpos;         //  in pixels
 	uint32_t m_selection;
-	int m_last_click_time;
+	int32_t m_last_click_time;
 	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
-	int m_check_picid;
+	int32_t m_check_picid;
 };
 
 template<typename Entry>
 struct Listselect : public BaseListselect {
 	Listselect
 		(Panel * parent,
-		 int x, int y,
+		 int32_t x, int32_t y,
 		 uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 bool show_check = false)
@@ -142,7 +142,7 @@ struct Listselect : public BaseListselect {
 	void add
 		(const char * const name,
 		 Entry value,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{
 		m_entry_cache.push_back(value);
@@ -176,7 +176,7 @@ struct Listselect<Entry&> : public Listselect<Entry*> {
 
 	Listselect
 		(Panel * parent,
-		 int x, int y,
+		 int32_t x, int32_t y,
 		 uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 bool show_check = false)
@@ -186,7 +186,7 @@ struct Listselect<Entry&> : public Listselect<Entry*> {
 	void add
 		(const char * const name,
 		 Entry& value,
-		 const int picid = -1,
+		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{
 		Base::add(name, &value, picid, select_this);

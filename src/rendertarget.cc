@@ -66,23 +66,23 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
 
 	if (m_rect.x < 0) {
 		m_offset.x += m_rect.x;
-		m_rect.w = std::max(static_cast<int>(m_rect.w) + m_rect.x, 0);
+		m_rect.w = std::max(static_cast<int32_t>(m_rect.w) + m_rect.x, 0);
 		m_rect.x = 0;
 	}
 
 	if (m_rect.x + m_rect.w > m_surface->get_w())
 		m_rect.w =
-			std::max(static_cast<int>(m_surface->get_w()) - m_rect.x, 0);
+			std::max(static_cast<int32_t>(m_surface->get_w()) - m_rect.x, 0);
 
 	if (m_rect.y < 0) {
 		m_offset.y += m_rect.y;
-		m_rect.h = std::max(static_cast<int>(m_rect.h) + m_rect.y, 0);
+		m_rect.h = std::max(static_cast<int32_t>(m_rect.h) + m_rect.y, 0);
 		m_rect.y = 0;
 	}
 
 	if (m_rect.y + m_rect.h > m_surface->get_h())
 		m_rect.h =
-			std::max(static_cast<int>(m_surface->get_h()) - m_rect.y, 0);
+			std::max(static_cast<int32_t>(m_surface->get_h()) - m_rect.y, 0);
 }
 
 /**
@@ -120,7 +120,7 @@ bool RenderTarget::enter_window(const Rect& rc, Rect* previous, Point* prevofs)
 /**
  * Returns the true size of the render target (ignoring the window settings).
  */
-int RenderTarget::get_w() const
+int32_t RenderTarget::get_w() const
 {
 	return m_surface->get_w();
 }
@@ -128,7 +128,7 @@ int RenderTarget::get_w() const
 /**
  * Returns the true size of the render target (ignoring the window settings).
  */
-int RenderTarget::get_h() const
+int32_t RenderTarget::get_h() const
 {
 	return m_surface->get_h();
 }
@@ -140,14 +140,14 @@ int RenderTarget::get_h() const
  * This function is still quite slow, since it draws
  * every pixel as a rectangle. So use it with care
  */
-void RenderTarget::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
+void RenderTarget::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGBColor color)
 {
-	int dx=x2-x1;      /* the horizontal distance of the line */
-	int dy=y2-y1;      /* the vertical distance of the line */
+	int32_t dx=x2-x1;      /* the horizontal distance of the line */
+	int32_t dy=y2-y1;      /* the vertical distance of the line */
 	const uint32_t dxabs = abs(dx);
 	const uint32_t dyabs = abs(dy);
-	int sdx= dx < 0 ? -1 : 1;
-	int sdy= dy < 0 ? -1 : 1;
+	int32_t sdx= dx < 0 ? -1 : 1;
+	int32_t sdy= dy < 0 ? -1 : 1;
 	uint32_t x = dyabs / 2;
 	uint32_t y = dxabs / 2;
 	Point p(x1, y1);
@@ -189,7 +189,7 @@ void RenderTarget::fill_rect(Rect r, const RGBColor clr)
 		m_surface->fill_rect(r, clr);
 }
 
-void RenderTarget::brighten_rect(Rect r, const int factor)
+void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 {
 	if (clip(r))
 		m_surface->brighten_rect(r, factor);
@@ -255,7 +255,7 @@ void RenderTarget::tile(Rect r, uint32_t picture, Point ofs)
 
 		while (ty < r.h) {
 			uint32_t tx = 0;
-			int tofsx = ofs.x;
+			int32_t tofsx = ofs.x;
 			Rect srcrc;
 
 			srcrc.y = ofs.y;
@@ -293,8 +293,8 @@ void RenderTarget::tile(Rect r, uint32_t picture, Point ofs)
 	const World           & world           = map.world();                      \
 	const Overlay_Manager & overlay_manager = map.get_overlay_manager();        \
 	const uint32_t              mapwidth        = map.get_width();                  \
-	int minfx, minfy;                                                           \
-	int maxfx, maxfy;                                                           \
+	int32_t minfx, minfy;                                                           \
+	int32_t maxfx, maxfy;                                                           \
                                                                                \
 	/* hack to prevent negative numbers */                                      \
 	minfx = (viewofs.x + (TRIANGLE_WIDTH>>1)) / TRIANGLE_WIDTH - 1;             \
@@ -305,11 +305,11 @@ void RenderTarget::tile(Rect r, uint32_t picture, Point ofs)
 	maxfx +=  1; /* because of big buildings */                                 \
 	maxfy += 10; /* because of heights */                                       \
                                                                                \
-	int dx              = maxfx - minfx + 1;                                    \
-	int dy              = maxfy - minfy + 1;                                    \
-	int linear_fy       = minfy;                                                \
+	int32_t dx              = maxfx - minfx + 1;                                    \
+	int32_t dy              = maxfy - minfy + 1;                                    \
+	int32_t linear_fy       = minfy;                                                \
 	bool row_is_forward = linear_fy & 1;                                        \
-	int b_posy          = linear_fy * TRIANGLE_HEIGHT - viewofs.y;
+	int32_t b_posy          = linear_fy * TRIANGLE_HEIGHT - viewofs.y;
 
 
 /**
@@ -330,18 +330,18 @@ void RenderTarget::rendermap
 	const Time gametime = egbase.get_gametime();
 
 	while (dy--) {
-		const int posy = b_posy;
+		const int32_t posy = b_posy;
 		b_posy += TRIANGLE_HEIGHT;
-		const int linear_fx = minfx;
+		const int32_t linear_fx = minfx;
 		FCoords r(Coords(linear_fx, linear_fy));
 		FCoords br(Coords(linear_fx - not row_is_forward, linear_fy + 1));
-		int r_posx =
+		int32_t r_posx =
 			r.x * TRIANGLE_WIDTH
 			+
 			row_is_forward * (TRIANGLE_WIDTH / 2)
 			-
 			viewofs.x;
-		int br_posx = r_posx - TRIANGLE_WIDTH / 2;
+		int32_t br_posx = r_posx - TRIANGLE_WIDTH / 2;
 
 		// Calculate safe (bounded) field coordinates and get field pointers
 		map.normalize_coords(&r);
@@ -369,7 +369,7 @@ void RenderTarget::rendermap
 			const Player::Field &  f_player_field =  *r_player_field;
 			const Player::Field & bl_player_field = *br_player_field;
 			f = r;
-			const int f_posx = r_posx, bl_posx = br_posx;
+			const int32_t f_posx = r_posx, bl_posx = br_posx;
 			const Texture & l_r_texture = *f_r_texture;
 			move_r(mapwidth, tr, tr_index);
 			move_r(mapwidth,  r,  r_index);
@@ -421,18 +421,18 @@ void RenderTarget::rendermap
 	m_surface->blit(Point(m_rect.x, m_rect.y), m_ground_surface, m_rect);
 
 	{
-		const int dx2        = maxfx - minfx + 1;
-		int dy2              = maxfy - minfy + 1;
-		int linear_fy2       = minfy;
+		const int32_t dx2        = maxfx - minfx + 1;
+		int32_t dy2              = maxfy - minfy + 1;
+		int32_t linear_fy2       = minfy;
 		bool row_is_forward2 = linear_fy2 & 1;
-		int b_posy2          = linear_fy2 * TRIANGLE_HEIGHT - viewofs.y;
+		int32_t b_posy2          = linear_fy2 * TRIANGLE_HEIGHT - viewofs.y;
 
 		while (dy2--) {
-			const int posy = b_posy2;
+			const int32_t posy = b_posy2;
 			b_posy2 += TRIANGLE_HEIGHT;
 
 			{//  Draw things on the node.
-				const int linear_fx = minfx;
+				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
 				FCoords br
 					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
@@ -469,7 +469,7 @@ void RenderTarget::rendermap
 					(r_pos.x - TRIANGLE_WIDTH / 2,
 					 b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
-				int count = dx2;
+				int32_t count = dx2;
 
 				while (count--) {
 					const FCoords l = f, bl = br;
@@ -584,10 +584,10 @@ void RenderTarget::rendermap
 			}
 
 			if (false) {//  Draw things on the R-triangle (nothing to draw yet).
-				const int linear_fx = minfx;
+				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
 				FCoords b(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
-				int posx =
+				int32_t posx =
 					(linear_fx - 1) * TRIANGLE_WIDTH
 					+
 					(row_is_forward2 + 1) * (TRIANGLE_WIDTH / 2)
@@ -602,7 +602,7 @@ void RenderTarget::rendermap
 				r.field = &map[Map::get_index(r, mapwidth)];
 				b.field = &map[Map::get_index(b, mapwidth)];
 
-				int count = dx2;
+				int32_t count = dx2;
 
 				//  One less iteration than for nodes and D-triangles.
 				while (--count) {
@@ -653,11 +653,11 @@ void RenderTarget::rendermap
 			}
 
 			if (false) {//  Draw things on the D-triangle (nothing to draw yet).
-				const int linear_fx = minfx;
+				const int32_t linear_fx = minfx;
 				FCoords f(Coords(linear_fx - 1, linear_fy2));
 				FCoords br
 					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
-				int posx =
+				int32_t posx =
 					(linear_fx - 1) * TRIANGLE_WIDTH
 					+
 					row_is_forward2 * (TRIANGLE_WIDTH / 2)
@@ -672,7 +672,7 @@ void RenderTarget::rendermap
 				f.field  = &map[Map::get_index(f,  mapwidth)];
 				br.field = &map[Map::get_index(br, mapwidth)];
 
-				int count = dx2;
+				int32_t count = dx2;
 
 				while (count--) {
 					const FCoords bl = br;
@@ -731,18 +731,18 @@ void RenderTarget::rendermap
 	RENDERMAP_INITIALIZANTONS;
 
 	while (dy--) {
-		const int posy = b_posy;
+		const int32_t posy = b_posy;
 		b_posy += TRIANGLE_HEIGHT;
-		const int linear_fx = minfx;
+		const int32_t linear_fx = minfx;
 		FCoords r(Coords(linear_fx, linear_fy));
 		FCoords br(Coords(linear_fx - not row_is_forward, linear_fy + 1));
-		int r_posx =
+		int32_t r_posx =
 			r.x * TRIANGLE_WIDTH
 			+
 			row_is_forward * (TRIANGLE_WIDTH / 2)
 			-
 			viewofs.x;
-		int br_posx = r_posx - TRIANGLE_WIDTH / 2;
+		int32_t br_posx = r_posx - TRIANGLE_WIDTH / 2;
 
 		// Calculate safe (bounded) field coordinates and get field pointers
 		map.normalize_coords(&r);
@@ -763,7 +763,7 @@ void RenderTarget::rendermap
 		while (count--) {
 			const FCoords l = f, bl = br;
 			f = r;
-			const int f_posx = r_posx, bl_posx = br_posx;
+			const int32_t f_posx = r_posx, bl_posx = br_posx;
 			const Texture & l_r_texture = *f_r_texture;
 			move_r(mapwidth, tr);
 			move_r(mapwidth,  r,  r_index);
@@ -802,18 +802,18 @@ void RenderTarget::rendermap
 	m_surface->blit(Point(m_rect.x, m_rect.y), m_ground_surface, m_rect);
 
 	{
-		const int dx2 = maxfx - minfx + 1;
-		int dy2 = maxfy - minfy + 1;
-		int linear_fy2 = minfy;
+		const int32_t dx2 = maxfx - minfx + 1;
+		int32_t dy2 = maxfy - minfy + 1;
+		int32_t linear_fy2 = minfy;
 		bool row_is_forward2 = linear_fy2 & 1;
-		int b_posy2 = linear_fy2 * TRIANGLE_HEIGHT - viewofs.y;
+		int32_t b_posy2 = linear_fy2 * TRIANGLE_HEIGHT - viewofs.y;
 
 		while (dy2--) {
-			const int posy = b_posy2;
+			const int32_t posy = b_posy2;
 			b_posy2 += TRIANGLE_HEIGHT;
 
 			{//  Draw things on the node.
-				const int linear_fx = minfx;
+				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
 				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
@@ -844,7 +844,7 @@ void RenderTarget::rendermap
 					(r_pos.x - TRIANGLE_WIDTH / 2,
 					 b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
-				int count = dx2;
+				int32_t count = dx2;
 
 				while (count--) {
 					const FCoords l = f, bl = br;
@@ -934,11 +934,11 @@ void RenderTarget::rendermap
 			}
 
 			{//  Draw things on the R-triangle.
-				const int linear_fx = minfx;
+				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
 				FCoords b
 					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
-				int posx =
+				int32_t posx =
 					(linear_fx - 1) * TRIANGLE_WIDTH
 					+
 					(row_is_forward2 + 1) * (TRIANGLE_WIDTH / 2)
@@ -953,7 +953,7 @@ void RenderTarget::rendermap
 				r.field = &map[Map::get_index(r, mapwidth)];
 				b.field = &map[Map::get_index(b, mapwidth)];
 
-				int count = dx2;
+				int32_t count = dx2;
 
 				//  One less iteration than for nodes and D-triangles.
 				while (--count) {
@@ -1000,10 +1000,10 @@ void RenderTarget::rendermap
 			}
 
 			{//  Draw things on the D-triangle.
-				const int linear_fx = minfx;
+				const int32_t linear_fx = minfx;
 				FCoords f(Coords(linear_fx - 1, linear_fy2));
 				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
-				int posx =
+				int32_t posx =
 					(linear_fx - 1) * TRIANGLE_WIDTH
 					+
 					row_is_forward2 * (TRIANGLE_WIDTH / 2)
@@ -1018,7 +1018,7 @@ void RenderTarget::rendermap
 				f.field  = &map[Map::get_index(f,  mapwidth)];
 				br.field = &map[Map::get_index(br, mapwidth)];
 
-				int count = dx2;
+				int32_t count = dx2;
 
 				while (count--) {
 					const FCoords bl = br;
@@ -1194,7 +1194,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
 	}
 
 	if (r.x + r.w > m_rect.w) {
-		if (static_cast<int>(m_rect.w) <= r.x) return false;
+		if (static_cast<int32_t>(m_rect.w) <= r.x) return false;
 		r.w = m_rect.w - r.x;
 	}
 
@@ -1205,7 +1205,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
 	}
 
 	if (r.y + r.h > m_rect.h) {
-		if (static_cast<int>(m_rect.h) <= r.y) return false;
+		if (static_cast<int32_t>(m_rect.h) <= r.y) return false;
 		r.h = m_rect.h - r.y;
 	}
 
@@ -1236,7 +1236,7 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
 	}
 
 	if (dst.x + srcrc.w > m_rect.w) {
-		if (static_cast<int>(m_rect.w) <= dst.x) return;
+		if (static_cast<int32_t>(m_rect.w) <= dst.x) return;
 		srcrc.w = m_rect.w - dst.x;
 	}
 
@@ -1248,7 +1248,7 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
 	}
 
 	if (dst.y + srcrc.h > m_rect.h) {
-		if (static_cast<int>(m_rect.h) <= dst.y) return;
+		if (static_cast<int32_t>(m_rect.h) <= dst.y) return;
 		srcrc.h = m_rect.h - dst.y;
 	}
 

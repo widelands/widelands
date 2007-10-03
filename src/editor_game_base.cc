@@ -118,7 +118,7 @@ last few cleanups
 ============
 */
 Editor_Game_Base::~Editor_Game_Base() {
-   int i;
+   int32_t i;
 
    for (i = 1; i <= MAX_PLAYERS; i++)
       if (m_players[i-1])
@@ -391,7 +391,7 @@ Editor_Game_Base::remove_player
 Remove the player with the given number
 ===============
 */
-void Editor_Game_Base::remove_player(int plnum)
+void Editor_Game_Base::remove_player(int32_t plnum)
 {
 	assert(1 <= plnum);
 	assert     (plnum <= MAX_PLAYERS);
@@ -412,7 +412,7 @@ the game starts. Similar for remote players.
 */
 Player * Editor_Game_Base::add_player
 (const Player_Number player_number,
- const int type,
+ const int32_t type,
  const std::string & tribe,
  const std::string & name)
 {
@@ -527,7 +527,7 @@ graphics are loaded.
 void Editor_Game_Base::postload()
 {
 	uint32_t id;
-	int pid;
+	int32_t pid;
 
 	// Postload tribes
 	id = 0;
@@ -616,7 +616,7 @@ Create a building site at the given x/y location for the given building type.
 if oldi != -1 this is a constructionsite comming from an enhancing action
 ===============
 */
-Building* Editor_Game_Base::warp_constructionsite(Coords c, char owner, int idx, int old_id)
+Building* Editor_Game_Base::warp_constructionsite(Coords c, int8_t owner, int32_t idx, int32_t old_id)
 {
 	Building_Descr* descr, *old_descr=0;
 	Player & plr = player(owner);
@@ -664,7 +664,7 @@ Does not perform any placability checks.
 ===============
 */
 Immovable *Editor_Game_Base::create_immovable
-(const Coords c, int idx, const Tribe_Descr* tribe)
+(const Coords c, int32_t idx, const Tribe_Descr* tribe)
 {
 	Immovable_Descr *descr;
 
@@ -681,7 +681,7 @@ Immovable *Editor_Game_Base::create_immovable
 Immovable* Editor_Game_Base::create_immovable
 (const Coords c, const std::string & name, const Tribe_Descr* tribe)
 {
-	const int idx =
+	const int32_t idx =
 		tribe ?
 		tribe->get_immovable_index(name.c_str())
 		:
@@ -704,7 +704,7 @@ Battle* Editor_Game_Base::create_battle ()
 }
 
 AttackController* Editor_Game_Base::create_attack_controller
-		(Flag* flag, int attacker, int defender, uint32_t num)
+		(Flag* flag, int32_t attacker, int32_t defender, uint32_t num)
 {
 	uint32_t i;
 	for (i=0;i<m_attack_serials.size();i++) {
@@ -765,7 +765,7 @@ In the game, this is the same as get_player(). If it returns
 zero it means that this player is disabled in the game.
 ================
 */
-Player * Editor_Game_Base::get_safe_player(const int n)
+Player * Editor_Game_Base::get_safe_player(const int32_t n)
 {
 	return get_player(n);
 }
@@ -844,7 +844,7 @@ void Editor_Game_Base::cleanup_for_load
 	if (flush_graphics)
 		g_gr->flush(0);
 
-	int i;
+	int32_t i;
 	for (i=1; i<=MAX_PLAYERS; i++) {
 		if (m_players[i-1]) {
 			remove_player(i);

@@ -96,10 +96,10 @@ void Section::Value::mark_used()
 	m_used = true;
 }
 
-int Section::Value::get_int() const
+int32_t Section::Value::get_int() const
 {
 	char *endp;
-	int i;
+	int32_t i;
 
 	i = strtol(m_value, &endp, 0);
 
@@ -124,7 +124,7 @@ float Section::Value::get_float() const
 
 bool Section::Value::get_bool() const
 {
-	int i;
+	int32_t i;
 	for (i = 0; i < TRUE_WORDS; i++)
 		if (!strcasecmp(m_value, trueWords[i]))
 			return true;
@@ -143,8 +143,8 @@ const char *Section::Value::get_string() const
 Point Section::Value::get_Point() const
 {
 	char * endp = m_value;
-	const long int x = strtol(endp, &endp, 0);
-	const long int y = strtol(endp, &endp, 0);
+	const int32_t x = strtol(endp, &endp, 0);
+	const int32_t y = strtol(endp, &endp, 0);
 	if (*endp) throw wexception("%s: '%s' is not a Point", get_name(), m_value);
 
 	return Point(x, y);
@@ -153,8 +153,8 @@ Point Section::Value::get_Point() const
 Coords Section::Value::get_Coords() const
 {
 	char * endp = m_value;
-	const long int x = strtol(endp, &endp, 0);
-	const long int y = strtol(endp, &endp, 0);
+	const int32_t x = strtol(endp, &endp, 0);
+	const int32_t y = strtol(endp, &endp, 0);
 	if
 		(x <  std::numeric_limits<X_Coordinate>::min() or
 		 x >= std::numeric_limits<X_Coordinate>::max() or
@@ -313,7 +313,7 @@ Section::Value *Section::create_val(const char *name, const char *value, bool du
  * Return the integer value of the given key or throw an exception if a
  * problem arises.
  */
-int Section::get_safe_int(const char *name)
+int32_t Section::get_safe_int(const char *name)
 {
 	Value *v = get_val(name);
 	if (!v)
@@ -371,7 +371,7 @@ Coords Section::get_safe_Coords(const char * const name) {
 	return v->get_Coords();
 }
 
-/** Section::get_int(const char *name, int def)
+/** Section::get_int(const char *name, int32_t def)
  *
  * Returns the integer value of the given key. Falls back to a default value
  * if the key is not found.
@@ -381,7 +381,7 @@ Coords Section::get_safe_Coords(const char * const name) {
  *
  * Returns: the integer value of the key
  */
-int Section::get_int(const char *name, int def)
+int32_t Section::get_int(const char *name, int32_t def)
 {
 	Value *v = get_val(name);
 	if (!v)
@@ -476,7 +476,7 @@ Coords Section::get_Coords(const char * const name, Coords def) {
 	return v->get_Coords();
 }
 
-/** Section::get_next_int(const char *name, int *value)
+/** Section::get_next_int(const char *name, int32_t *value)
  *
  * Retrieve the next unused key with the given name as an integer.
  *
@@ -485,7 +485,7 @@ Coords Section::get_Coords(const char * const name, Coords def) {
  *
  * Returns: the name of the key, or 0 if none has been found
  */
-const char *Section::get_next_int(const char *name, int *value)
+const char *Section::get_next_int(const char *name, int32_t *value)
 {
 	Value *v = get_next_val(name);
 	if (!v)
@@ -511,7 +511,7 @@ const char *Section::get_next_float(const char *name, float *value)
 	return v->get_name();
 }
 
-/** Section::get_next_bool(const char *name, int *value)
+/** Section::get_next_bool(const char *name, int32_t *value)
  *
  * Retrieve the next unused key with the given name as a boolean value.
  *
@@ -531,7 +531,7 @@ const char *Section::get_next_bool(const char *name, bool *value)
 	return v->get_name();
 }
 
-/** Section::get_next_string(const char *name, int *value)
+/** Section::get_next_string(const char *name, int32_t *value)
  *
  * Retrieve the next unused key with the given name.
  *
@@ -569,13 +569,13 @@ const char * Section::get_next_Coords
 	return v->get_name();
 }
 
-/** Section::set_int(const char *name, int value, bool duplicate = false)
+/** Section::set_int(const char *name, int32_t value, bool duplicate = false)
  *
  * Modifies/Creates the given key.
  * If duplicate is true, a duplicate key will be created if the key already
  * exists.
  */
-void Section::set_int(const char *name, int value, bool duplicate)
+void Section::set_int(const char *name, int32_t value, bool duplicate)
 {
 	char buffer[32];
 
@@ -646,22 +646,22 @@ Profile
 ==============================================================================
 */
 
-/** Profile::Profile(int error_level = err_throw)
+/** Profile::Profile(int32_t error_level = err_throw)
  *
  * Create an empty profile
  */
-Profile::Profile(int error_level)
+Profile::Profile(int32_t error_level)
 {
 	m_error_level = error_level;
 }
 
-/** Profile::Profile(const char* filename, const char *global_section = 0, int error_level = err_throw)
+/** Profile::Profile(const char* filename, const char *global_section = 0, int32_t error_level = err_throw)
  *
  * Parses an ini-style file into sections and key-value pairs.
  * If global_section is not null, keys outside of sections are put into a section
  * of that name.
  */
-Profile::Profile(const char* filename, const char *global_section, int error_level)
+Profile::Profile(const char* filename, const char *global_section, int32_t error_level)
 {
 	m_error_level = error_level;
 	read(filename, global_section);

@@ -130,7 +130,7 @@ Bob::Task Carrier::taskTransport = {
 /**
  * Begin the transport task.
  */
-void Carrier::start_task_transport(int fromflag)
+void Carrier::start_task_transport(int32_t fromflag)
 {
 	State* state;
 
@@ -409,7 +409,7 @@ void Carrier::transport_signal(Game * g, State *)
  * (0 = start, 1 = end).
  * \return true if the carrier is going to fetch it.
  */
-bool Carrier::notify_ware(Game* g, int flag)
+bool Carrier::notify_ware(Game* g, int32_t flag)
 {
 	State* state = get_state();
 
@@ -511,13 +511,13 @@ void Carrier::find_pending_item(Game* g)
 /**
  * Find the flag we are closest to (in walking time).
  */
-int Carrier::find_closest_flag(Game* g)
+int32_t Carrier::find_closest_flag(Game* g)
 {
 	Road* road = (Road*)get_location(g);
 	CoordPath startpath(g->map(), road->get_path());
 	CoordPath endpath;
-	int startcost, endcost;
-	int curidx = -1;
+	int32_t startcost, endcost;
+	int32_t curidx = -1;
 
 	curidx = startpath.get_index(get_position());
 
@@ -560,11 +560,11 @@ int Carrier::find_closest_flag(Game* g)
  * \return true if a move task has been started, or false if we're already on
  * the target field.
  */
-bool Carrier::start_task_walktoflag(Game* g, int flag, bool offset)
+bool Carrier::start_task_walktoflag(Game* g, int32_t flag, bool offset)
 {
 	Road* road = (Road*)get_location(g);
 	const Path& path = road->get_path();
-	int idx;
+	int32_t idx;
 
 	if (!flag) {
 		idx = 0;

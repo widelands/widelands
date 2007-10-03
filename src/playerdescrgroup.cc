@@ -50,7 +50,7 @@ void PlayerDescriptionGroup::allow_changes(changemode_t t) {
    m_btnPlayerTribe.set_enabled(t & CHANGE_TRIBE);
 }
 
-PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* parent, int x, int y, Game* game, int plnum, bool highlight)
+PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* parent, int32_t x, int32_t y, Game* game, int32_t plnum, bool highlight)
 :
 UI::Panel(parent, x, y, 450, 20),
 m_game(game),
@@ -211,7 +211,7 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
 void PlayerDescriptionGroup::set_player_name(std::string str)
 {m_plr_name.set_text(str.c_str());}
 
-void PlayerDescriptionGroup::set_player_type(int type)
+void PlayerDescriptionGroup::set_player_type(int32_t type)
 {
 	if (m_playertype==type)
 		return;

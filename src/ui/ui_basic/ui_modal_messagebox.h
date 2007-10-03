@@ -38,8 +38,8 @@ struct Modal_Message_Box : public Window {
 		 const MB_Type);
       ~Modal_Message_Box();
 
-	bool handle_mousepress  (const Uint8 btn, int mx, int my);
-	bool handle_mouserelease(const Uint8 btn, int mx, int my);
+	bool handle_mousepress  (const Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mouserelease(const Uint8 btn, int32_t mx, int32_t my);
 };
 };
 

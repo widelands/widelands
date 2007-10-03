@@ -50,7 +50,7 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 
 private:
 	Game &                                      game;
-	UI::IDButton<Fullscreen_Menu_LoadGame, int> back;
+	UI::IDButton<Fullscreen_Menu_LoadGame, int32_t> back;
 	UI::Button<Fullscreen_Menu_LoadGame>        m_ok;
 	UI::Listselect<const char *>                list;
 	UI::Textarea                                title;

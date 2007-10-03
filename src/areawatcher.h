@@ -39,7 +39,7 @@ struct AreaWatcher : public Map_Object, private Player_Area<> {
 	friend struct Player;
 	friend struct Widelands_Map_Players_AreaWatchers_Data_Packet;
 	AreaWatcher(const Player_Area<>);
-	virtual int get_type() const throw () {return AREAWATCHER;}
+	virtual int32_t get_type() const throw () {return AREAWATCHER;}
 	static AreaWatcher & create(Editor_Game_Base &, const Player_Area<>);
 	virtual void act(Game *, uint32_t data);
 };

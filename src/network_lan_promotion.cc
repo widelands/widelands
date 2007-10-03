@@ -33,12 +33,12 @@ LAN_Base::LAN_Base ()
     // open the socket
     sock=socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
-    int opt=1;
+    int32_t opt=1;
     // the cast to char* is because microsoft wants it that way
     setsockopt (sock, SOL_SOCKET, SO_BROADCAST, (char*) &opt, sizeof(opt));
 
 #ifndef WIN32
-    int i;
+    int32_t i;
 
     // get a list of all local broadcast addresses
     struct if_nameindex* ifnames=if_nameindex();
@@ -217,7 +217,7 @@ void LAN_Game_Finder::run ()
 	LAN_Game_Info info;
 	sockaddr_in addr;
 
-		if (recv(&info, sizeof(info), &addr) < static_cast<int>(sizeof(info))) continue;
+		if (recv(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info))) continue;
 
 	printf ("Received %s packet\n", info.magic);
 
@@ -250,7 +250,7 @@ void LAN_Game_Finder::run ()
 	}
 }
 
-void LAN_Game_Finder::set_callback (void (*cb)(int, const LAN_Open_Game*, void*), void* ud)
+void LAN_Game_Finder::set_callback (void (*cb)(int32_t, const LAN_Open_Game*, void*), void* ud)
 {
     callback=cb;
     userdata=ud;

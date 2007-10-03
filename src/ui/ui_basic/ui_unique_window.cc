@@ -39,7 +39,7 @@ UniqueWindow::Registry::~Registry() {delete window;}
 /**
 Register, position according to the registry information.
 */
-UniqueWindow::UniqueWindow(Panel* parent, UniqueWindow::Registry* reg, int w, int h, std::string title)
+UniqueWindow::UniqueWindow(Panel* parent, UniqueWindow::Registry* reg, int32_t w, int32_t h, std::string title)
 	: Window(parent, 0, 0, w, h, title.c_str())
 {
 	m_registry = reg;

@@ -30,7 +30,7 @@
 #include "profile.h"
 #include "wexception.h"
 
-static const int TRIGGER_VERSION = 2;
+static const int32_t TRIGGER_VERSION = 2;
 
 Trigger_Building::Trigger_Building()
 :
@@ -43,7 +43,7 @@ m_count      (0)
 Trigger_Building::~Trigger_Building() {}
 
 void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
-	const int trigger_version= s->get_safe_int("version");
+	const int32_t trigger_version= s->get_safe_int("version");
 	if (1 <= trigger_version and trigger_version <= TRIGGER_VERSION) {
 		m_player_area = Player_Area<Area<FCoords> >
 			(s->get_safe_int("player"),

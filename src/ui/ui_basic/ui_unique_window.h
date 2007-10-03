@@ -34,13 +34,13 @@ struct UniqueWindow : public Window {
 
 	struct Registry {
 		UniqueWindow * window;
-		int x, y;
+		int32_t x, y;
 
 		Registry() : window(0), x(-1), y(-1) {}
 		~Registry();
 	};
 
-      UniqueWindow(Panel* parent, Registry* reg, int w, int h, std::string title);
+      UniqueWindow(Panel* parent, Registry* reg, int32_t w, int32_t h, std::string title);
       virtual ~UniqueWindow();
 
       inline bool get_usedefaultpos() {return m_usedefaultpos;}

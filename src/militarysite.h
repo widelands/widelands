@@ -38,18 +38,18 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	virtual bool is_only_production_site() const throw () {return false;}
 
 	virtual uint32_t get_conquers() const {return m_conquer_radius;}
-	int get_max_number_of_soldiers () const throw () {return m_num_soldiers;}
-	int get_max_number_of_medics   () const throw () {return m_num_medics;}
-	int get_heal_per_second        () const throw () {return m_heal_per_second;}
-	int get_heal_increase_per_medic() const throw ()
+	int32_t get_max_number_of_soldiers () const throw () {return m_num_soldiers;}
+	int32_t get_max_number_of_medics   () const throw () {return m_num_medics;}
+	int32_t get_heal_per_second        () const throw () {return m_heal_per_second;}
+	int32_t get_heal_increase_per_medic() const throw ()
 	{return m_heal_incr_per_medic;}
 
 private:
-	int m_conquer_radius;
-	int m_num_soldiers;
-	int m_num_medics;
-	int m_heal_per_second;
-	int m_heal_incr_per_medic;
+	int32_t m_conquer_radius;
+	int32_t m_num_soldiers;
+	int32_t m_num_medics;
+	int32_t m_heal_per_second;
+	int32_t m_heal_incr_per_medic;
 };
 
 class MilitarySite : public ProductionSite {
@@ -60,7 +60,7 @@ public:
 	MilitarySite(const MilitarySite_Descr & descr);
 	virtual ~MilitarySite();
 
-	virtual int get_building_type() const throw ()
+	virtual int32_t get_building_type() const throw ()
 	{return Building::MILITARYSITE;}
 	virtual std::string get_statistics_string();
 
@@ -110,12 +110,12 @@ protected:
 
 private:
 	void request_soldier();
-	static void request_soldier_callback(Game* g, Request* rq, int ware,
+	static void request_soldier_callback(Game* g, Request* rq, int32_t ware,
 		Worker* w, void* data);
 
-	void drop_soldier (Game *g, int i);
+	void drop_soldier (Game *g, int32_t i);
 	void call_soldiers();
-	void change_soldier_capacity (int);
+	void change_soldier_capacity (int32_t);
 private:
 	Requeriments m_soldier_requeriments;
 	std::vector<Request*> m_soldier_requests;

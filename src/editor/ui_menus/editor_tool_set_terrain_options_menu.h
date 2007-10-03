@@ -42,8 +42,8 @@ private:
       std::vector<uint32_t> m_surfaces;
 	UI::Textarea                m_cur_selection;
 	Editor_Set_Terrain_Tool   & m_tool;
-      void selected(int, bool);
-      void do_nothing(int, bool);
+      void selected(int32_t, bool);
+      void do_nothing(int32_t, bool);
       std::vector<UI::Checkbox*> m_checkboxes;
 };
 

@@ -37,13 +37,13 @@ struct Event_Move_View_Option_Menu : public UI::Window {
       Event_Move_View_Option_Menu(Editor_Interactive*, Event_Move_View*);
       ~Event_Move_View_Option_Menu();
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       void update();
 	void clicked_ok();
-      void clicked(int);
+      void clicked(int32_t);
 
       Event_Move_View* m_event;
       Editor_Interactive* m_parent;

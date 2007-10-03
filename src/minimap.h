@@ -29,9 +29,9 @@ class Interactive_Base;
 struct MiniMap : public UI::UniqueWindow {
 	MiniMap(Interactive_Base & parent, UI::UniqueWindow::Registry *);
 
-	UI::Signal2<int, int> warpview;
+	UI::Signal2<int32_t, int32_t> warpview;
 
-	void set_view_pos(const int x, const int y) throw ()
+	void set_view_pos(const int32_t x, const int32_t y) throw ()
 	{m_view.set_view_pos(x, y);}
 
 	enum Layers {Terrn = 1, Owner = 2, Flags = 4, Roads = 8, Bldns = 16};
@@ -51,23 +51,23 @@ private:
 	struct View : public UI::Panel {
 		View
 			(UI::Panel & parent,
-			 const  int x, const  int y,
+			 const  int32_t x, const  int32_t y,
 			 const uint32_t w, const uint32_t h,
 			 Interactive_Base &);
 
-		void set_view_pos(const int x, const int y);
+		void set_view_pos(const int32_t x, const int32_t y);
 
 		void draw(RenderTarget* dst);
 
-		bool handle_mousepress  (const Uint8 btn, int x, int y);
-		bool handle_mouserelease(const Uint8 btn, int x, int y);
+		bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+		bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 	private:
 		Interactive_Base & m_iabase;
-		int                m_viewx, m_viewy;
+		int32_t                m_viewx, m_viewy;
 		uint32_t               m_pic_map_spot;
 	public:
-		char flags;
+		int8_t flags;
 	};
 
 	uint32_t number_of_buttons_per_row() const throw ();
@@ -81,7 +81,7 @@ private:
 	UI::IDButton<MiniMap, Layers> button_flags;
 	UI::IDButton<MiniMap, Layers> button_roads;
 	UI::IDButton<MiniMap, Layers> button_bldns;
-   char     m_flags;
+   int8_t     m_flags;
 };
 
 #endif /* MINIMAP_H */

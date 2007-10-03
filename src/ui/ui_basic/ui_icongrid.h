@@ -48,34 +48,34 @@ struct Icon_Grid : public Panel {
 		Grid_Persistant = 2,
 	};
 
-	Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint32_t flags, int cols);
+	Icon_Grid(Panel* parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, uint32_t flags, int32_t cols);
 
-	Signal1<int> clicked;
-	Signal1<int> mouseout;
-	Signal1<int> mousein;
+	Signal1<int32_t> clicked;
+	Signal1<int32_t> mouseout;
+	Signal1<int32_t> mousein;
 
 	bool is_persistant() const {return m_flags & Grid_Persistant;}
 	uint32_t get_orientation() const {return m_flags & Grid_Orientation_Mask;}
 
-	int add(uint32_t picid, void* data, std::string descr = std::string());
-	void* get_data(int idx);
+	int32_t add(uint32_t picid, void* data, std::string descr = std::string());
+	void* get_data(int32_t idx);
 
-	void set_selection(int idx);
-	int get_selection() const {return m_selected;}
+	void set_selection(int32_t idx);
+	int32_t get_selection() const {return m_selected;}
 
 	void set_selectbox_color(RGBColor clr);
 
 protected:
 	void draw(RenderTarget* dst);
 
-	int index_for_point(int x, int y);
-	void get_cell_position(int idx, int* px, int* py);
-	void update_for_index(int idx);
+	int32_t index_for_point(int32_t x, int32_t y);
+	void get_cell_position(int32_t idx, int32_t* px, int32_t* py);
+	void update_for_index(int32_t idx);
 
 	void handle_mousein(bool inside);
-	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
 	struct Item {
@@ -87,19 +87,19 @@ private:
 	uint32_t   m_flags;
 
 	 ///< max # of columns (or rows, depending on orientation) in the grid
-	int m_columns;
+	int32_t m_columns;
 
 	///< currently highlight (mouseover) icon idx (-1 = no highlight)
-	int m_highlight;
+	int32_t m_highlight;
 
-	int m_clicked; ///< icon that was clicked (only while LMB is down)
+	int32_t m_clicked; ///< icon that was clicked (only while LMB is down)
 
 	///< currently selected (persistant) icon idx (-1 = no selection)
-	int m_selected;
+	int32_t m_selected;
 
-	int               m_cell_width; ///< size of one cell
-	int               m_cell_height;
-	int               m_font_height;
+	int32_t               m_cell_width; ///< size of one cell
+	int32_t               m_cell_height;
+	int32_t               m_font_height;
 
 	std::vector<Item> m_items;
 

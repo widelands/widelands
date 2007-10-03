@@ -47,25 +47,25 @@ struct Scrollbar : public Panel {
 	};
 
 public:
-	Scrollbar(Panel *parent, int x, int y, uint32_t w, uint32_t h, bool horiz);
+	Scrollbar(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
 
-	Signal1<int> moved;
+	Signal1<int32_t> moved;
 
-	void set_steps(int steps);
-	void set_pagesize(int pagesize);
-	void set_pos(int pos);
+	void set_steps(int32_t steps);
+	void set_pagesize(int32_t pagesize);
+	void set_pos(int32_t pos);
 
 	uint32_t get_pagesize() const {return m_pagesize;}
 	uint32_t get_pos() const {return m_pos;}
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 
    void set_force_draw(bool t) {m_force_draw=t;}
 
 private:
-	Area get_area_for_point(int x, int y);
-	int get_knob_pos();
-	void set_knob_pos(int p);
+	Area get_area_for_point(int32_t x, int32_t y);
+	int32_t get_knob_pos();
+	void set_knob_pos(int32_t p);
 
 	void action(Area area);
 
@@ -74,9 +74,9 @@ private:
 	void draw(RenderTarget* dst);
 	void think();
 
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mousemove
-		(const Uint8 state, int mx, int my, int xdiff, int ydiff);
+		(const Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
 
 private:
 	bool m_horizontal;
@@ -87,8 +87,8 @@ private:
 	uint32_t m_steps;
 
 	Area m_pressed;        ///< area that the user clicked on (None if mouse is up)
-	int  m_time_nextact;
-	int  m_knob_grabdelta; ///< only while m_pressed == Knob
+	int32_t  m_time_nextact;
+	int32_t  m_knob_grabdelta; ///< only while m_pressed == Knob
 
 	uint32_t m_pic_minus;      ///< left/up
 	uint32_t m_pic_plus;       ///< right/down

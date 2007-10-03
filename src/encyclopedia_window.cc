@@ -80,8 +80,8 @@ EncyclopediaWindow::~EncyclopediaWindow() {
 }
 
 void EncyclopediaWindow::fillWares() {
-   int nrWares = tribe->get_nrwares();
-   int i;
+   int32_t nrWares = tribe->get_nrwares();
+   int32_t i;
    for (i=0;i<nrWares;i++) {
       Item_Ware_Descr* ware = tribe->get_ware_descr(i);
 		wares.add(ware->descname().c_str(), i, ware->get_icon());
@@ -157,8 +157,8 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
       std::map<std::string, WareCondition> waresConsumed;
       std::map<std::string, WareCondition> waresChecked;
 
-      int consumeGroup = 0;
-      int checkGroup = 0;
+      int32_t consumeGroup = 0;
+      int32_t checkGroup = 0;
 
 		const std::vector<ProductionAction>::const_iterator actions_end =
 			actions.end();

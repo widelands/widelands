@@ -25,7 +25,7 @@
  * Set the field's brightness based upon the slopes.
  * Slopes are calulated as this field's height - neighbour's height.
  */
-void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
+void Field::set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br)
 {
 	static float flatbrightness = 0; // HACK to normalize flat terrain to zero brightness
 	if (!flatbrightness)
@@ -39,5 +39,5 @@ void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 
 	if (b < -128) b = -128;
 	else if (b > 127) b = 127;
-	brightness = static_cast<char>(b);
+	brightness = static_cast<int8_t>(b); //FIXME: ARGH !!
 }

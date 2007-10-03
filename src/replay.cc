@@ -51,7 +51,7 @@ public:
 	{
 	}
 
-	int get_id() {return QUEUE_CMD_REPLAYSYNCREAD;}
+	int32_t get_id() {return QUEUE_CMD_REPLAYSYNCREAD;}
 
 	void execute(Game* g)
 	{
@@ -135,7 +135,7 @@ Command* ReplayReader::GetNextCommand(uint32_t time)
 	if (!m_cmdlog)
 		return 0;
 
-	if (static_cast<int>(m_replaytime - time) > 0)
+	if (static_cast<int32_t>(m_replaytime - time) > 0)
 		return 0;
 
 	try {
@@ -201,7 +201,7 @@ class Cmd_ReplaySyncWrite : public Command {
 public:
 	Cmd_ReplaySyncWrite(uint32_t t) : Command(t) {}
 
-	int get_id() {return QUEUE_CMD_REPLAYSYNCWRITE;}
+	int32_t get_id() {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
 	void execute(Game* g) {
 		if (ReplayWriter* rw = g->get_replaywriter()) {

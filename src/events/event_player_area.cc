@@ -31,7 +31,7 @@ void Event_Player_Area::reinitialize(Game *) {}
 #define EVENT_VERSION 2
 
 void Event_Player_Area::Read(Section* s, Editor_Game_Base* egbase) {
-	const int event_version = s->get_safe_int("version");
+	const int32_t event_version = s->get_safe_int("version");
 	if (1 <= event_version and event_version <= EVENT_VERSION) {
 		m_player_area = Player_Area<>
 			(s->get_safe_int("player"),

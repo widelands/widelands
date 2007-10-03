@@ -52,7 +52,7 @@ typedef uint32_t in_addr_t;
 #endif
 
 // This is no typedef on purpose
-#define socklen_t int
+#define socklen_t int32_t
 
 #endif
 

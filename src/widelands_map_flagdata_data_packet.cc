@@ -90,7 +90,7 @@ throw (_wexception)
 					 e.position, ser, e.y, e.h);
 			}
          flag->m_animstart=fr.Unsigned16();
-         int building=fr.Unsigned32();
+         int32_t building=fr.Unsigned32();
 			if (building) {
             assert(ol->is_object_known(building));
             flag->m_building=static_cast<Building*>(ol->get_object_by_file_index(building));
@@ -106,7 +106,7 @@ throw (_wexception)
          flag->m_item_filled=fr.Unsigned32();
 
          // items
-         for (int i=0; i<flag->m_item_filled; i++) {
+         for (int32_t i=0; i<flag->m_item_filled; i++) {
             flag->m_items[i].pending=fr.Unsigned8();
             uint32_t item=fr.Unsigned32();
             assert(ol->is_object_known(item));
@@ -217,7 +217,7 @@ throw (_wexception)
             fw.Unsigned32(flag->m_item_filled);
 
             // items
-            for (int i=0; i<flag->m_item_filled; i++) {
+            for (int32_t i=0; i<flag->m_item_filled; i++) {
                fw.Unsigned8(flag->m_items[i].pending);
                assert(os->is_object_known(flag->m_items[i].item));
                fw.Unsigned32(os->get_object_file_index(flag->m_items[i].item));

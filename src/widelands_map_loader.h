@@ -32,11 +32,11 @@ struct Widelands_Map_Loader : public Map_Loader {
 	Widelands_Map_Loader(FileSystem &, Map*);
       virtual ~Widelands_Map_Loader();
 
-      virtual int get_type() {return Map_Loader::WLML;}
+      virtual int32_t get_type() {return Map_Loader::WLML;}
 
-      virtual int preload_map(bool);
+      virtual int32_t preload_map(bool);
 	void load_world();
-      virtual int load_map_complete(Editor_Game_Base*, bool);
+      virtual int32_t load_map_complete(Editor_Game_Base*, bool);
 
       inline Widelands_Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
 

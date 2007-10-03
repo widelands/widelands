@@ -65,16 +65,16 @@ struct Int_MapVariable : public MapVariable {
 
 	Type get_type() const {return MVT_INT;}
 
-	long get_value() const {return m_value;}
-      void set_value(long t) {m_value = t;}
+	int32_t get_value() const {return m_value;}
+      void set_value(int32_t t) {m_value = t;}
 	std::string get_string_representation() const {
          char buffer[256];
-         sprintf(buffer, "%li", m_value);
+         sprintf(buffer, "%i", m_value);
          return buffer;
 		}
 
 private:
-      long            m_value;
+      int32_t            m_value;
 };
 
 struct String_MapVariable : public MapVariable {

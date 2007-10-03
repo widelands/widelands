@@ -40,9 +40,9 @@ class Worker_Descr : public Bob::Descr
 
 	struct CostItem {
 		std::string name;   // name of ware
-		int         amount; // amount
+		int32_t         amount; // amount
 
-		inline CostItem(const char* iname, int iamount): name   (iname),
+		inline CostItem(const char* iname, int32_t iamount): name   (iname),
 		                                                 amount (iamount)
 		                                                 {}
 	};
@@ -82,11 +82,11 @@ public:
 		virtual Worker_Type get_worker_type() const {return NORMAL;}
 
 		// For leveling
-		int get_max_exp() const throw () {return m_max_experience;}
-		int get_min_exp() const throw () {return m_min_experience;}
+		int32_t get_max_exp() const throw () {return m_max_experience;}
+		int32_t get_min_exp() const throw () {return m_min_experience;}
 		const char * get_becomes() const throw () {return m_becomes.c_str();}
-		int get_becomes_index() const throw ();
-		bool can_act_as(int ware) const;
+		int32_t get_becomes_index() const throw ();
+		bool can_act_as(int32_t ware) const;
 
 	Worker & create
 		(Editor_Game_Base &, Player &, PlayerImmovable &, const Coords) const;
@@ -107,10 +107,10 @@ protected:
 		DirAnimations m_walkload_anims;
 		bool          m_buildable;
 		BuildCost     m_buildcost;      ///< What and how much we need to build this worker
-		int           m_max_experience;
-		int           m_min_experience;
+		int32_t           m_max_experience;
+		int32_t           m_min_experience;
 		std::string   m_becomes;        ///< Workername this worker evolves to, if any
-		mutable int   m_becomes_index;  ///< index in tribe array if any (cached)
+		mutable int32_t   m_becomes_index;  ///< index in tribe array if any (cached)
 		ProgramMap    m_programs;
 };
 

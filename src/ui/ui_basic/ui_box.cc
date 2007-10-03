@@ -27,7 +27,7 @@ namespace UI {
 /**
 Initialize an empty box
 */
-Box::Box(Panel* parent, int x, int y, uint32_t orientation)
+Box::Box(Panel* parent, int32_t x, int32_t y, uint32_t orientation)
 	: Panel(parent, x, y, 0, 0)
 {
 	m_orientation = orientation;
@@ -40,8 +40,8 @@ Adjust all the children and the box's size.
 void Box::resize()
 {
 	uint32_t idx;
-	int totaldepth;
-	int maxbreadth;
+	int32_t totaldepth;
+	int32_t maxbreadth;
 
 	// Adjust out size
 	totaldepth = 0;
@@ -49,7 +49,7 @@ void Box::resize()
 
 	for (idx = 0; idx < m_items.size(); idx++)
 		{
-		int depth, breadth;
+		int32_t depth, breadth;
 
 		get_item_size(idx, &depth, &breadth);
 
@@ -68,7 +68,7 @@ void Box::resize()
 
 	for (idx = 0; idx < m_items.size(); idx++)
 		{
-		int depth;
+		int32_t depth;
 
 		get_item_size(idx, &depth, 0);
 		set_item_pos(idx, totaldepth);
@@ -115,12 +115,12 @@ void Box::add_space(uint32_t space)
 Retrieve the given item's size. depth is the size of the item along the
 orientation axis, breadth is the size perpendicular to the orientation axis.
 */
-void Box::get_item_size(uint32_t idx, int* pdepth, int* pbreadth)
+void Box::get_item_size(uint32_t idx, int32_t* pdepth, int32_t* pbreadth)
 {
 	assert(idx < m_items.size());
 
 	const Item& it = m_items[idx];
-	int depth, breadth;
+	int32_t depth, breadth;
 
 	switch (it.type)
 		{
@@ -158,7 +158,7 @@ Position the given item according to its parameters.
 pos is the position relative to the parent in the direction of the orientation
 axis.
 */
-void Box::set_item_pos(uint32_t idx, int pos)
+void Box::set_item_pos(uint32_t idx, int32_t pos)
 {
 	assert(idx < m_items.size());
 
@@ -166,7 +166,7 @@ void Box::set_item_pos(uint32_t idx, int pos)
 
 	switch (it.type) {
 	case Item::ItemPanel: {
-			int breadth, maxbreadth;
+			int32_t breadth, maxbreadth;
 
 		if (m_orientation == Horizontal) {
 				breadth = it.u.panel.panel->get_h();

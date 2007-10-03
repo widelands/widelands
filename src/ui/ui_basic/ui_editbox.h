@@ -32,21 +32,21 @@ editbox is unfocused, the keyboard released and
 a callback function is called
 */
 struct Edit_Box : private Basic_Button {
-     Edit_Box(Panel *parent, int x, int y, uint32_t w, uint32_t h, uint32_t background, int id);
+     Edit_Box(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, uint32_t background, int32_t id);
      virtual ~Edit_Box();
 
      Signal changed;
-     Signal1<int> changedid;
+     Signal1<int32_t> changedid;
 
      inline const char* get_text() {return m_text.c_str();}
      void set_text(const char* text) {m_lasttext=m_text=text; set_title(text);}
-     void set_maximum_chars(int n) {m_maxchars=n;}
-     int get_maximum_chars() {return m_maxchars;}
+     void set_maximum_chars(int32_t n) {m_maxchars=n;}
+     int32_t get_maximum_chars() {return m_maxchars;}
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
-	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
-     bool handle_key(bool down, int code, char c);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+     bool handle_key(bool down, int32_t code, char c);
      void handle_mousein(bool);
 
 protected:
@@ -56,7 +56,7 @@ private:
      bool m_keyboard_grabbed;
      uint32_t m_maxchars;
      std::string m_text, m_lasttext;
-     int m_id;
+     int32_t m_id;
 };
 };
 

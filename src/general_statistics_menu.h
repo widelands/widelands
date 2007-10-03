@@ -40,12 +40,12 @@ private:
       Interactive_Player* m_parent;
       WUIPlot_Area*       m_plot;
       UI::Radiogroup*       m_radiogroup;
-      int                 m_selected_information;
+      int32_t                 m_selected_information;
       UI::Checkbox*         m_cbs[MAX_PLAYERS];
 
 	void clicked_help();
-      void cb_changed_to(int, bool);
-      void radiogroup_changed(int);
+      void cb_changed_to(int32_t, bool);
+      void radiogroup_changed(int32_t);
 };
 
 #endif

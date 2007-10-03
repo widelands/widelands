@@ -40,48 +40,48 @@ class Slider : public Panel {
 protected:
 	Slider
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
-		 const int min_value, const int max_value, const int value,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const int32_t min_value, const int32_t max_value, const int32_t value,
 		 const uint32_t background_picture_id,
 		 const std::string & tooltip_text,
 		 const uint32_t cursor_size,
 		 const bool enabled,
-		 const int x_gap, const int y_gap, const int bar_size);
+		 const int32_t x_gap, const int32_t y_gap, const int32_t bar_size);
 
 public:
 	bool is_snap_target() const {return true;}
 
-	int get_value() const {return m_value;}
+	int32_t get_value() const {return m_value;}
 
 	void set_enabled(const bool enabled);
 
 
 protected:
 	//  drawing
-	int get_x_gap()    const {return m_x_gap;}
-	int get_y_gap()    const {return m_y_gap;}
-	int get_bar_size() const {return m_bar_size;}
-	void draw_cursor(RenderTarget * dst, int x, int y, int w, int h);
+	int32_t get_x_gap()    const {return m_x_gap;}
+	int32_t get_y_gap()    const {return m_y_gap;}
+	int32_t get_bar_size() const {return m_bar_size;}
+	void draw_cursor(RenderTarget * dst, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	//  mouse events
-	bool handle_mouserelease(const Uint8 btn, int, int);
+	bool handle_mouserelease(const Uint8 btn, int32_t, int32_t);
 	void handle_mousein(bool inside);
-	void cursor_moved(int pointer, int x, int y);
-	void cursor_pressed(int pointer);
-	void bar_pressed(int pointer, int ofs);
+	void cursor_moved(int32_t pointer, int32_t x, int32_t y);
+	void cursor_pressed(int32_t pointer);
+	void bar_pressed(int32_t pointer, int32_t ofs);
 
 private :
 	void send_value_changed();
 
 public:
 	Signal        changed;
-	Signal1<int>  changedto;
+	Signal1<int32_t>  changedto;
 
 private:
-	int m_min_value;          //  cursor values
-	int m_max_value;
-	int m_value;
-	int m_relative_move;
+	int32_t m_min_value;          //  cursor values
+	int32_t m_max_value;
+	int32_t m_value;
+	int32_t m_relative_move;
 
 	bool m_highlighted;       //  mouse over
 	bool m_pressed;           //  the cursor is pressed
@@ -89,13 +89,13 @@ private:
 
 	uint32_t m_pic_background;    //  background texture (picture ID)
 
-	int m_x_gap;              //  draw positions
-	int m_y_gap;
-	int m_bar_size;
+	int32_t m_x_gap;              //  draw positions
+	int32_t m_y_gap;
+	int32_t m_bar_size;
 
 protected:
-	int m_cursor_pos;         //  cursor position
-	int m_cursor_size;        //  cursor width
+	int32_t m_cursor_pos;         //  cursor position
+	int32_t m_cursor_size;        //  cursor width
 };
 
 
@@ -105,8 +105,8 @@ protected:
 struct HorizontalSlider : public Slider {
 	HorizontalSlider
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
-		 const int min_value, const int max_value, const int value,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const int32_t min_value, const int32_t max_value, const int32_t value,
 		 const uint32_t background_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,
@@ -127,8 +127,8 @@ struct HorizontalSlider : public Slider {
 
 protected:
 	void draw(RenderTarget * dst);
-	bool handle_mousemove(const Uint8 btn, int x, int y, int, int);
-	bool handle_mousepress(const Uint8 btn, int x, int y);
+	bool handle_mousemove(const Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
+	bool handle_mousepress(const Uint8 btn, int32_t x, int32_t y);
 };
 
 
@@ -139,8 +139,8 @@ protected:
 struct VerticalSlider : public Slider {
 	VerticalSlider
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
-		 const int min_value, const int max_value, const int value,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const int32_t min_value, const int32_t max_value, const int32_t value,
 		 const uint32_t background_picture_id,
 		 const uint32_t cursor_size = 20,
 		 const std::string & tooltip_text = std::string(),
@@ -161,8 +161,8 @@ struct VerticalSlider : public Slider {
 
 protected:
 	void draw(RenderTarget * dst);
-	bool handle_mousemove(const Uint8 btn, int x, int y, int, int);
-	bool handle_mousepress(const Uint8 btn, int x, int y);
+	bool handle_mousemove(const Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
+	bool handle_mousepress(const Uint8 btn, int32_t x, int32_t y);
 };
 
 };

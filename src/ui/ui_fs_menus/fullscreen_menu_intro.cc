@@ -26,15 +26,15 @@ Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 	: Fullscreen_Menu_Base("splash.jpg")
 {}
 
-bool Fullscreen_Menu_Intro::handle_mousepress(const Uint8, int, int) {
+bool Fullscreen_Menu_Intro::handle_mousepress(const Uint8, int32_t, int32_t) {
 		end_modal(0);
 
 	return true;
 }
-bool Fullscreen_Menu_Intro::handle_mouserelease(const Uint8, int, int)
+bool Fullscreen_Menu_Intro::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return true;}
 
-bool Fullscreen_Menu_Intro::handle_key(bool down, int code, char) {
+bool Fullscreen_Menu_Intro::handle_key(bool down, int32_t code, char) {
 	if (down and code == SDLK_ESCAPE) end_modal(0);
 
 	return true;

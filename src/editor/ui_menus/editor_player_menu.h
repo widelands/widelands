@@ -55,12 +55,12 @@ private:
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];
       std::vector<std::string> m_tribes;
 
-      int m_spt_index;
-      int m_mis_index;
+      int32_t m_spt_index;
+      int32_t m_mis_index;
 
-      int m_posy;
+      int32_t m_posy;
 
-	void name_changed(int);
+	void name_changed(int32_t);
 	void clicked_add_player         ();
 	void clicked_remove_last_player ();
 	void player_tribe_clicked       (const Uint8);

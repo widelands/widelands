@@ -60,7 +60,7 @@ protected:
 	void broadcast (const void*, size_t, uint16_t);
 
 private:
-	int                  sock;
+	int32_t                  sock;
 
 	std::list<in_addr_t> broadcast_addresses;
 };
@@ -91,12 +91,12 @@ struct LAN_Game_Finder:LAN_Base {
 	void reset ();
 	void run ();
 
-	void set_callback (void(*)(int, const LAN_Open_Game*, void*), void*);
+	void set_callback (void(*)(int32_t, const LAN_Open_Game*, void*), void*);
 
 private:
 	std::list<LAN_Open_Game *> opengames;
 
-	void (*callback) (int, const LAN_Open_Game*, void*);
+	void (*callback) (int32_t, const LAN_Open_Game*, void*);
 	void                     * userdata;
 };
 

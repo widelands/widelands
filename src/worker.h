@@ -53,8 +53,8 @@ class Worker : public Bob {
 		};
 
 		execute_t                function;
-		int                      iparam1;
-		int                      iparam2;
+		int32_t                      iparam1;
+		int32_t                      iparam2;
 		std::string              sparam1;
 
 		std::vector<std::string> sparamv;
@@ -108,8 +108,8 @@ public:
 	void create_needed_experience(Game*);
 	// For leveling
 	void gain_experience(Game*);
-	int get_needed_experience() const {return m_needed_exp;}
-	int get_current_experience() const {return m_current_exp;}
+	int32_t get_needed_experience() const {return m_needed_exp;}
+	int32_t get_current_experience() const {return m_current_exp;}
 
 	// debug
 	void log_general_info(Editor_Game_Base*);
@@ -133,7 +133,7 @@ public:
 	void start_task_fugitive(Game* g);
 
 	void start_task_geologist
-			(const int attempts, const int radius,
+			(const int32_t attempts, const int32_t radius,
 			 const std::string & subcommand);
 
 
@@ -214,8 +214,8 @@ private:
 	Economy          * m_economy;      ///< economy this worker is registered in
 	Object_Ptr         m_carried_item; ///< item we are carrying
 	IdleWorkerSupply * m_supply;       ///< supply while gowarehouse and not transfer
-	int                m_needed_exp;   ///< experience for next level
-	int                m_current_exp;  ///< current experience
+	int32_t                m_needed_exp;   ///< experience for next level
+	int32_t                m_current_exp;  ///< current experience
 };
 
 

@@ -55,7 +55,7 @@ throw (_wexception)
 	}
 
    // read packet version
-   int packet_version=fr.Unsigned16();
+   int32_t packet_version=fr.Unsigned16();
 
 		compile_assert(MAX_PLAYERS < 32);
 		Map & map = egbase->map();

@@ -47,7 +47,7 @@ public:
 	void set_openend (bool oe)
 	{openend=oe;}
 
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 //private:
@@ -69,7 +69,7 @@ void Computer_Player::late_initialization ()
 	log ("ComputerPlayer(%d): initializing\n", player_number);
 
 	wares=new WareObserver[tribe->get_nrwares()];
-	for (int i=0; i<tribe->get_nrwares(); i++) {
+	for (int32_t i=0; i<tribe->get_nrwares(); i++) {
 	    wares[i].producers=0;
 	    wares[i].consumers=0;
 	    wares[i].preciousness=0;
@@ -109,7 +109,7 @@ granitmine="marblemine";
 	wares[tribe->get_safe_ware_index(ware4)].preciousness=1;
 
 	// collect information about which buildings our tribe can construct
-	for (int i=0; i<tribe->get_nrbuildings();i++) {
+	for (int32_t i=0; i<tribe->get_nrbuildings();i++) {
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
 
@@ -188,8 +188,8 @@ granitmine="marblemine";
 	Map& map = game().map();
 	std::set<OPtr<PlayerImmovable> > found_immovables;
 
-	for(int y = 0; y < map.get_height(); ++y) {
-		for(int x = 0; x < map.get_width(); ++x) {
+	for(int32_t y = 0; y < map.get_height(); ++y) {
+		for(int32_t x = 0; x < map.get_width(); ++x) {
 			FCoords f = map.get_fcoords(Coords(x,y));
 
 			if (f.field->get_owned_by() != player_number)
@@ -231,7 +231,7 @@ void Computer_Player::think ()
 	if (tribe == 0)
 		late_initialization ();
 
-	const int gametime = game().get_gametime();
+	const int32_t gametime = game().get_gametime();
 
 	// update statistics about buildable fields
 	while
@@ -445,15 +445,15 @@ void Computer_Player::think ()
 
 bool Computer_Player::construct_building ()
 {
-	int spots_avail[4];
+	int32_t spots_avail[4];
 
-	for (int i=0;i<4;i++)
+	for (int32_t i=0;i<4;i++)
 		spots_avail[i]=0;
 
 	for (std::list<BuildableField*>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++)
 		spots_avail[(*i)->coords.field->get_caps() & BUILDCAPS_SIZEMASK]++;
 
-	int expand_factor=1;
+	int32_t expand_factor=1;
 
 	if (spots_avail[BUILDCAPS_BIG]<2)
 		expand_factor++;
@@ -462,8 +462,8 @@ bool Computer_Player::construct_building ()
 	if (spots_avail[BUILDCAPS_SMALL]+spots_avail[BUILDCAPS_MEDIUM]+spots_avail[BUILDCAPS_BIG]<8)
 		expand_factor++;
 
-	int proposed_building=-1;
-	int proposed_priority=0;
+	int32_t proposed_building=-1;
+	int32_t proposed_priority=0;
 	Coords proposed_coords;
 
 	// first scan all buildable fields for regular buildings
@@ -473,8 +473,8 @@ bool Computer_Player::construct_building ()
 		if (!bf->reachable)
 			continue;
 
-		int maxsize=bf->coords.field->get_caps() & BUILDCAPS_SIZEMASK;
-		int prio;
+		int32_t maxsize=bf->coords.field->get_caps() & BUILDCAPS_SIZEMASK;
+		int32_t prio;
 
 		std::list<BuildingObserver>::iterator j;
 		for (j=buildings.begin();j!=buildings.end();j++) {
@@ -564,10 +564,10 @@ bool Computer_Player::construct_building ()
 
 		for (std::list<MineableField*>::iterator j=mineable_fields.begin(); j!=mineable_fields.end(); j++) {
 			MineableField* mf=*j;
-			int prio=-1;
+			int32_t prio=-1;
 
 			if (i->hints->get_need_map_resource()!=0) {
-				int res = world.get_resource(i->hints->get_need_map_resource());
+				int32_t res = world.get_resource(i->hints->get_need_map_resource());
 
 				if (mf->coords.field->get_resources()!=res)
 					continue;
@@ -679,8 +679,8 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
 
-	const int tree_attr=Map_Object_Descr::get_attribute_id("tree");
-	const int stone_attr=Map_Object_Descr::get_attribute_id("stone");
+	const int32_t tree_attr=Map_Object_Descr::get_attribute_id("tree");
+	const int32_t stone_attr=Map_Object_Descr::get_attribute_id("stone");
 
 	map.find_immovables (Area<FCoords>(field->coords, 8), &immovables);
 
@@ -732,7 +732,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 					 dynamic_cast<const MilitarySite_Descr *>(&target_descr))
 				{
 
-					const int v =
+					const int32_t v =
 						target_militarysite_descr->get_conquers()
 						-
 						map.calc_distance(field->coords, immovables[i].coords);
@@ -756,7 +756,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 				(const MilitarySite * const militarysite =
 				 dynamic_cast<const MilitarySite *>(building))
 			{
-				const int v =
+				const int32_t v =
 					militarysite->get_conquers()
 					-
 					map.calc_distance(field->coords, immovables[i].coords);
@@ -951,7 +951,7 @@ bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 		return false;
 
 	// then choose the one closest to the originating flag
-	int closest_distance = std::numeric_limits<int>::max();
+	int32_t closest_distance = std::numeric_limits<int32_t>::max();
 	Coords closest;
 	std::vector<Coords>::const_iterator reachable_end = reachable.end();
 	for
@@ -959,13 +959,13 @@ bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 		 it != reachable_end;
 		 ++it)
 	{
-		const int distance = map.calc_distance(flag->get_position(), *it);
+		const int32_t distance = map.calc_distance(flag->get_position(), *it);
 		if (distance < closest_distance) {
 			closest = *it;
 			closest_distance = distance;
 		}
 	}
-	assert(closest_distance != std::numeric_limits<int>::max());
+	assert(closest_distance != std::numeric_limits<int32_t>::max());
 
 	// if we join a road and there is no flag yet, build one
 	if (dynamic_cast<const Road *> (map[closest].get_immovable()))
@@ -985,10 +985,10 @@ bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 
 struct NearFlag {
 	Flag * flag;
-	long   cost;
-	long   distance;
+	int32_t   cost;
+	int32_t   distance;
 
-    NearFlag (Flag* f, long c, long d)
+    NearFlag (Flag* f, int32_t c, int32_t d)
     {flag=f; cost=c; distance=d;}
 
     bool operator< (const NearFlag& f) const
@@ -1033,7 +1033,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 		if (endflag==nf.flag)
 		    endflag=road->get_flag(Road::FlagEnd);
 
-			long dist =
+			int32_t dist =
 				map.calc_distance(flag->get_position(), endflag->get_position());
 		if (dist > 16) //  out of range
 		    continue;
@@ -1059,7 +1059,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 			 >=
 			 0
 			 and
-			 static_cast<int>(2 * path.get_nsteps() + 2) < nf.cost)
+			 static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost)
 		{
 			game().send_player_build_road (player_number, path);
 			return true;
@@ -1121,7 +1121,7 @@ void Computer_Player::lose_field (const FCoords &) {}
 
 /* CheckStepRoadAI */
 bool CheckStepRoadAI::allowed
-(Map * map, FCoords, FCoords end, int, StepId id) const
+(Map * map, FCoords, FCoords end, int32_t, StepId id) const
 {
 	uint8_t endcaps = player->get_buildcaps(end);
 
@@ -1169,17 +1169,17 @@ struct WalkableSpot {
 	Coords coords;
 	bool   hasflag;
 
-	int    cost;
+	int32_t    cost;
 	void * eco;
 
-	short  from;
-	short  neighbours[6];
+	int16_t  from;
+	int16_t  neighbours[6];
 };
 
 void Computer_Player::construct_roads ()
 {
 	std::vector<WalkableSpot> spots;
-	std::queue<int> queue;
+	std::queue<int32_t> queue;
 	Map & map = game().map();
 
 	for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end(); i++)
@@ -1236,18 +1236,18 @@ void Computer_Player::construct_roads ()
 	}
 
 	const clock_t time_before = clock();
-	int i, j, k;
-	for (i=0;i<static_cast<int>(spots.size());i++)
+	int32_t i, j, k;
+	for (i=0;i<static_cast<int32_t>(spots.size());i++)
 		for (j=0;j<6;j++) {
 		Coords nc;
 
 		map.get_neighbour (spots[i].coords, j + 1, &nc);
 
-			for (k=0;k<static_cast<int>(spots.size());k++)
+			for (k=0;k<static_cast<int32_t>(spots.size());k++)
 		    if (spots[k].coords==nc)
 			break;
 
-			spots[i].neighbours[j]=(k<static_cast<int>(spots.size())) ? k : -1;
+			spots[i].neighbours[j]=(k<static_cast<int32_t>(spots.size())) ? k : -1;
 		}
 
 	log
@@ -1305,7 +1305,7 @@ void Computer_Player::construct_roads ()
 			pc.pop_front();
 
 			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++) {
-					const int n = map.is_neighbour(path.get_end(), *c);
+					const int32_t n = map.is_neighbour(path.get_end(), *c);
 			    assert (n>=1 && n<=6);
 
 				path.append (map, n);

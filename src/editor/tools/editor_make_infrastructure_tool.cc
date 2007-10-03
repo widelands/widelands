@@ -29,8 +29,8 @@
 /*
  * Callback function to calculate correct overlays
  */
-int Editor_Make_Infrastructure_Tool_Callback
-(const TCoords<FCoords> c, void * data, int player)
+int32_t Editor_Make_Infrastructure_Tool_Callback
+(const TCoords<FCoords> c, void * data, int32_t player)
 {
 	return
 		static_cast<const Editor_Game_Base *>(data)->player(player).get_buildcaps(c);
@@ -47,7 +47,7 @@ offer the correct user dialog and act accordingly.
 Obviously, this function ignores the sel radius
 ===========
 */
-int Editor_Make_Infrastructure_Tool::handle_click_impl
+int32_t Editor_Make_Infrastructure_Tool::handle_click_impl
 (Map &, const Node_and_Triangle<>, Editor_Interactive & parent)
 {
 	// Special case for buildings

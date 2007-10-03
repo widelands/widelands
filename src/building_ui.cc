@@ -290,7 +290,7 @@ public:
 	};
 
 public:
-	WaresQueueDisplay(UI::Panel* parent, int x, int y, uint32_t maxw, WaresQueue* queue, Game* g);
+	WaresQueueDisplay(UI::Panel* parent, int32_t x, int32_t y, uint32_t maxw, WaresQueue* queue, Game* g);
 	~WaresQueueDisplay();
 
 	virtual void think();
@@ -320,7 +320,7 @@ Initialize the panel.
 ===============
 */
 WaresQueueDisplay::WaresQueueDisplay
-(UI::Panel * parent, int x, int y, uint32_t maxw, WaresQueue* queue, Game *)
+(UI::Panel * parent, int32_t x, int32_t y, uint32_t maxw, WaresQueue* queue, Game *)
 :
 UI::Panel(parent, x, y, 0, Height),
 m_queue(queue),
@@ -406,7 +406,7 @@ Render the current WaresQueue state.
 */
 void WaresQueueDisplay::draw(RenderTarget* dst)
 {
-	int x;
+	int32_t x;
 
 	if (!m_display_size)
 		return;
@@ -501,7 +501,7 @@ protected:
 	void act_start_stop();
 	void act_enhance(const Building_Descr::Index);
    void act_drop_soldier(uint32_t);
-	void act_change_soldier_capacity(int);
+	void act_change_soldier_capacity(int32_t);
 
 private:
 	UI::Window *                * m_registry;
@@ -634,7 +634,7 @@ Clear the capsbuttons panel and re-setup.
 */
 void Building_Window::setup_capsbuttons()
 {
-	int x;
+	int32_t x;
 
 	assert(m_capsbuttons);
 
@@ -668,7 +668,7 @@ void Building_Window::setup_capsbuttons()
 			 it != buildings_end;
 			 ++it)
 		{
-			const int id = tribe.get_building_index(*it);
+			const int32_t id = tribe.get_building_index(*it);
 			if (id == -1)
 				throw wexception("Should enhance to unknown building: %s", *it);
 
@@ -789,7 +789,7 @@ Do a modification at soldier capacity on military and training sites.
 TODO: Check that building is a military or a training site.
 ===============
 */
-void Building_Window::act_change_soldier_capacity(int value)
+void Building_Window::act_change_soldier_capacity(int32_t value)
 {
 	Game* g = m_player->get_game();
 	if (m_building)
@@ -974,7 +974,7 @@ private:
 private:
 	WaresDisplay       * m_waresdisplay;
    Interactive_Player*  m_parent;
-   int                  m_curpage;
+   int32_t                  m_curpage;
 };
 
 /*
@@ -995,11 +995,11 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 
    set_inner_size(m_waresdisplay->get_w(), 0);
 
-   int spacing = 5;
-   int nr_buttons = 4; // one more, turn page button is bigger
-   int button_w = (get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
-   int posx = spacing;
-   int posy = m_waresdisplay->get_h() + spacing;
+   int32_t spacing = 5;
+   int32_t nr_buttons = 4; // one more, turn page button is bigger
+   int32_t button_w = (get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
+   int32_t posx = spacing;
+   int32_t posy = m_waresdisplay->get_h() + spacing;
    m_curpage = 0;
 
 
@@ -1152,11 +1152,11 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str())
    UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Worker Listing"), Align_Left);
 	tt->set_pos(Point((get_inner_w() - tt->get_w()) / 2, 5));
 
-   int spacing=5;
-   int offsx=spacing;
-   int offsy=30;
-   int posx=offsx;
-   int posy=offsy;
+   int32_t spacing=5;
+   int32_t offsx=spacing;
+   int32_t offsy=30;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    // listselect
    m_ls=new UI::Listselect<Worker*>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
@@ -1265,28 +1265,28 @@ void ProductionSite_Window_ListWorkerWindow::update()
 
 struct PriorityButtonInfo {
 	UI::Basic_Button* button;
-	int picture_enabled;
-	int picture_disabled;
+	int32_t picture_enabled;
+	int32_t picture_disabled;
 
 	PriorityButtonInfo() {}
 
 	PriorityButtonInfo
-		(UI::Basic_Button* btn, int pic_enabled, int pic_disabled)
+		(UI::Basic_Button* btn, int32_t pic_enabled, int32_t pic_disabled)
 		: button(btn), picture_enabled(pic_enabled),
 		  picture_disabled(pic_disabled)
 	{}
 };
 
-struct PriorityButtonHelper : std::map<int, PriorityButtonInfo> {
-	PriorityButtonHelper(ProductionSite * ps, int ware_type, int ware_index);
+struct PriorityButtonHelper : std::map<int32_t, PriorityButtonInfo> {
+	PriorityButtonHelper(ProductionSite * ps, int32_t ware_type, int32_t ware_index);
 
-	void button_clicked (int priority);
+	void button_clicked (int32_t priority);
 	void update_buttons ();
 
 private:
 	ProductionSite * m_ps;
-	int m_ware_type;
-	int m_ware_index;
+	int32_t m_ware_type;
+	int32_t m_ware_index;
 };
 
 class ProductionSite_Window : public Building_Window {
@@ -1311,26 +1311,26 @@ protected:
 
 	UI::Basic_Button* create_priority_button
 		(UI::Box* box, PriorityButtonHelper & helper,
-		 int priority, int x, int y, int w, int h,
+		 int32_t priority, int32_t x, int32_t y, int32_t w, int32_t h,
 		 const char * picture1, const char * picture2,
 		 const std::string & tooltip);
 };
 
 
 PriorityButtonHelper::PriorityButtonHelper
-(ProductionSite * ps, int ware_type, int ware_index)
+(ProductionSite * ps, int32_t ware_type, int32_t ware_index)
 	: m_ps(ps),
 	  m_ware_type(ware_type),
 	  m_ware_index(ware_index)
 {}
 
-void PriorityButtonHelper::button_clicked (int priority) {
+void PriorityButtonHelper::button_clicked (int32_t priority) {
 	m_ps->set_priority (m_ware_type, m_ware_index, priority);
 	update_buttons();
 }
 
 void PriorityButtonHelper::update_buttons () {
-	const int priority = m_ps->get_priority(m_ware_type, m_ware_index, false);
+	const int32_t priority = m_ps->get_priority(m_ware_type, m_ware_index, false);
 	for (iterator it = begin(); it != end(); ++it) {
 		bool enable = it->first != priority;
 		it->second.button->set_enabled(enable);
@@ -1365,18 +1365,18 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 
 UI::Basic_Button * ProductionSite_Window::create_priority_button
 (UI::Box* box, PriorityButtonHelper & helper,
- int priority, int x, int, int w, int h,
+ int32_t priority, int32_t x, int32_t, int32_t w, int32_t h,
  const char * picture1, const char * picture2,
  const std::string & button_tooltip)
 {
-	int pic_enabled = g_gr->get_resized_picture (
+	int32_t pic_enabled = g_gr->get_resized_picture (
 		 g_gr->get_picture(PicMod_Game,  picture1),
 		 w, h, Graphic::ResizeMode_Clip);
-	int pic_disabled = g_gr->get_resized_picture (
+	int32_t pic_disabled = g_gr->get_resized_picture (
 		 g_gr->get_picture(PicMod_Game,  picture2),
 		 w, h, Graphic::ResizeMode_Clip);
-	UI::IDButton<PriorityButtonHelper, int> * button =
-	 new UI::IDButton<PriorityButtonHelper, int>
+	UI::IDButton<PriorityButtonHelper, int32_t> * button =
+	 new UI::IDButton<PriorityButtonHelper, int32_t>
 	  (box,
 	   x, 0, w, h,
 	   4,
@@ -1389,7 +1389,7 @@ UI::Basic_Button * ProductionSite_Window::create_priority_button
 
 void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite * ps, WaresQueue * const wq)
 {
-	const int priority_buttons_width = WaresQueueDisplay::Height / 3;
+	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
 	UI::Box* hbox = new UI::Box (box, 0, 0, UI::Box::Horizontal);
 	WaresQueueDisplay* wqd = new WaresQueueDisplay(hbox, 0, 0,
 												   get_w() - priority_buttons_width,
@@ -1734,7 +1734,7 @@ private:
 	void down_defense_clicked () {act_change_priority (atrDefense, -1);}
 	void down_evade_clicked   () {act_change_priority (atrEvade,   -1);}
 
-	void act_change_priority (int atr, int how);
+	void act_change_priority (int32_t atr, int32_t how);
 
 	void update();
 
@@ -1752,9 +1752,9 @@ private:
 TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps)
 	: UI::Window(parent, 0, 0, 320, 125, _("Training Options").c_str()) {
 
-	int _bs = 22;
-	int _cn = 20;
-	int _cb = 100;
+	int32_t _bs = 22;
+	int32_t _cn = 20;
+	int32_t _cb = 100;
 
 	m_parent=parent;
 	m_trainingsite = ps;
@@ -1871,7 +1871,7 @@ TrainingSite_Options_Window::~TrainingSite_Options_Window()
 {
 }
 
-void TrainingSite_Options_Window::act_change_priority (int atr, int val) {
+void TrainingSite_Options_Window::act_change_priority (int32_t atr, int32_t val) {
 
 	 if ((atr == atrHP) || (atr == atrAttack) || (atr == atrDefense) || (atr == atrEvade))
 		  if (m_trainingsite)

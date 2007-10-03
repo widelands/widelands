@@ -57,7 +57,7 @@ bool NetGGZ::used()
 bool NetGGZ::connect()
 {
 #ifdef HAVE_GGZ
-	int ret;
+	int32_t ret;
 
 	if (!used()) return false;
 
@@ -71,7 +71,7 @@ bool NetGGZ::connect()
 		return false;
 	}
 
-	int fd = ggzmod_get_fd(mod);
+	int32_t fd = ggzmod_get_fd(mod);
 	log("GGZ ## connection fd %i\n", fd);
 	struct timeval timeout;
 	timeout.tv_sec = 0;
@@ -100,7 +100,7 @@ void NetGGZ::ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata)
 	log("GGZ ## ggzmod_server\n");
 	if (e == GGZMOD_EVENT_SERVER)
 	{
-		int fd = *(int*)cbdata;
+		int32_t fd = *(int32_t*)cbdata;
 		ggzobj->m_fd = fd;
 		log("GGZ ## got fd: %i\n", fd);
 		ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
@@ -111,12 +111,12 @@ void NetGGZ::ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata)
 void NetGGZ::data()
 {
 #ifdef HAVE_GGZ
-	int op;
+	int32_t op;
 	char *ipstring;
 	char *greeter;
-	int greeterversion;
-	char ipaddress[17];
-	int fd;
+	int32_t greeterversion;
+	int8_t ipaddress[17];
+	int32_t fd;
 
 	if (!used()) return;
 
@@ -128,7 +128,7 @@ void NetGGZ::data()
 	FD_ZERO(&fdset);
 	FD_SET(fd, &fdset);
 
-	int ret = select(fd + 1, &fdset, NULL, NULL, &timeout);
+	int32_t ret = select(fd + 1, &fdset, NULL, NULL, &timeout);
 	if (ret <= 0) return;
 	log("GGZ ## select() returns: %i for fd %i\n", ret, fd);
 
@@ -170,7 +170,7 @@ void NetGGZ::data()
 bool NetGGZ::host()
 {
 #ifdef HAVE_GGZ
-	int spectator, seat;
+	int32_t spectator, seat;
 
 	if (!used()) return false;
 
@@ -199,7 +199,7 @@ const char *NetGGZ::ip()
 void NetGGZ::initcore(const char *hostname, const char *playername) {
 #ifdef HAVE_GGZ
 	GGZOptions opt;
-	int ret;
+	int32_t ret;
 
 	if (usedcore()) return;
 
@@ -324,8 +324,8 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 	GGZRoom *room;
 	GGZGameType *type;
 	GGZGame *game;
-	int num, i;
-	int joined;
+	int32_t num, i;
+	int32_t joined;
 
 	switch (id) {
 	case GGZ_CONNECTED:
@@ -393,7 +393,7 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 	case GGZ_CHANNEL_FAIL:
 	case GGZ_NET_ERROR:
 	case GGZ_PROTOCOL_ERROR:
-			log("GGZCORE ## -- error! (%s) :(\n", (char*)cbdata);
+			log("GGZCORE ## -- error! (%s) :(\n", (int8_t*)cbdata);
 			ggzcore_login = false;
 		break;
 	}
@@ -403,7 +403,7 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
-	int i, num;
+	int32_t i, num;
 	GGZTable *table;
 	const char *desc;
 
@@ -443,7 +443,7 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 				table = ggzcore_table_new();
 				gametype = ggzcore_room_get_gametype(room);
 				ggzcore_table_init(table, gametype, "test", ggzcore_gametype_get_max_players(gametype));
-				for (int i = 1; i < ggzcore_gametype_get_max_players(gametype); i++)
+				for (int32_t i = 1; i < ggzcore_gametype_get_max_players(gametype); i++)
 					ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, NULL);
 				ggzcore_room_launch_table(room, table);
 				ggzcore_table_free(table);
@@ -463,7 +463,7 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 			break;
 	case GGZ_GAME_LAUNCH_FAIL:
 	case GGZ_GAME_NEGOTIATE_FAIL:
-			log("GGZCORE/game ## -- error! (%s) :(\n", (char*)cbdata);
+			log("GGZCORE/game ## -- error! (%s) :(\n", (int8_t*)cbdata);
 			break;
 	}
 #endif
@@ -479,7 +479,7 @@ void NetGGZ::join(const char *tablename) {
 	GGZRoom *room;
 	GGZGameType *type;
 	GGZGame *game;
-	int i, num;
+	int32_t i, num;
 	GGZTable *table;
 	const char *desc;
 

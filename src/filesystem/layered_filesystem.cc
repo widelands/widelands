@@ -87,7 +87,7 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem * const fs)
  * Returns the number of files found.
  */
 //TODO: return type is wrong
-const int LayeredFileSystem::FindFiles(std::string path,
+const int32_t LayeredFileSystem::FindFiles(std::string path,
                                        const std::string pattern,
                                        filenameset_t *results,
                                        uint32_t depth)
@@ -168,7 +168,7 @@ void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
  * Throws an exception if it fails.
  */
 void LayeredFileSystem::Write(const std::string fname, const void * const data,
-                              const int length)
+                              const int32_t length)
 {
 	for (FileSystem_rit it = m_filesystems.rbegin();
 	      it != m_filesystems.rend(); it++)

@@ -32,7 +32,7 @@
 #include "trigger/trigger_null.h"
 #include "wexception.h"
 
-static const int EVENT_VERSION = 1;
+static const int32_t EVENT_VERSION = 1;
 
 /*
  * Init and cleanup
@@ -69,15 +69,15 @@ void Event_Message_Box::reinitialize(Game *) {}
 /*
  * functions for button handling
  */
-void Event_Message_Box::set_nr_buttons(int i) {
-   int oldsize=m_buttons.size();
+void Event_Message_Box::set_nr_buttons(int32_t i) {
+   int32_t oldsize=m_buttons.size();
    m_buttons.resize(i);
    for (uint32_t j=oldsize; j<m_buttons.size(); j++)
       m_buttons[j].trigger=0;
 }
 
 
-void Event_Message_Box::set_button_trigger(int i, Trigger_Null* t) {
+void Event_Message_Box::set_button_trigger(int32_t i, Trigger_Null* t) {
    assert(i<get_nr_buttons());
    if (m_buttons[i].trigger==t) return;
 
@@ -88,15 +88,15 @@ void Event_Message_Box::set_button_trigger(int i, Trigger_Null* t) {
       reference_trigger(t);
    m_buttons[i].trigger=t;
 }
-Trigger_Null* Event_Message_Box::get_button_trigger(int i) {
+Trigger_Null* Event_Message_Box::get_button_trigger(int32_t i) {
    assert(i<get_nr_buttons());
    return m_buttons[i].trigger;
 }
-void Event_Message_Box::set_button_name(int i, std::string str) {
+void Event_Message_Box::set_button_name(int32_t i, std::string str) {
    assert(i<get_nr_buttons());
    m_buttons[i].name=str;
 }
-const char* Event_Message_Box::get_button_name(int i) {
+const char* Event_Message_Box::get_button_name(int32_t i) {
    assert(i<get_nr_buttons());
    return m_buttons[i].name.c_str();
 }
@@ -105,7 +105,7 @@ const char* Event_Message_Box::get_button_name(int i) {
  * File Read, File Write
  */
 void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
-	const int version = s->get_safe_int("version");
+	const int32_t version = s->get_safe_int("version");
 	if (version == EVENT_VERSION) {
       set_name(s->get_name());
       set_text(s->get_safe_string("text"));
@@ -151,7 +151,7 @@ void Event_Message_Box::Write(Section & s, const Editor_Game_Base &) const {
 	s.set_int   ("posy",              get_posy());
 
    char buf[256];
-	for (int i=0; i < get_nr_buttons(); ++i) {
+	for (int32_t i=0; i < get_nr_buttons(); ++i) {
       sprintf(buf, "button_%02i_name", i);
 		s.set_string(buf, m_buttons[i].name.c_str());
 

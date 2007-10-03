@@ -67,7 +67,7 @@ public:
 		bool is_used() const;
 		void mark_used();
 
-		int get_int() const;
+		int32_t get_int() const;
 		float get_float() const;
 		bool get_bool() const;
 		const char *get_string() const;
@@ -103,26 +103,26 @@ public:
 
 	void check_used();
 
-	int get_int(const char *name, int def = 0);
+	int32_t get_int(const char *name, int32_t def = 0);
 	float get_float(const char *name, float def = 0);
 	bool get_bool(const char *name, bool def = false);
 	const char *get_string(const char *name, const char *def = 0);
 	Point  get_Point (const char * const name, const Point  def = Point (0, 0));
 	Coords get_Coords(const char * const name, const Coords def = Coords(-1, -1));
 
-	int get_safe_int(const char *name);
+	int32_t get_safe_int(const char *name);
 	float get_safe_float(const char *name);
 	bool get_safe_bool(const char *name);
 	const char *get_safe_string(const char *name);
 	Coords get_safe_Coords(const char * const name);
 
-	const char *get_next_int(const char *name, int *value);
+	const char *get_next_int(const char *name, int32_t *value);
 	const char *get_next_float(const char *name, float *value);
 	const char *get_next_bool(const char *name, bool *value);
 	const char *get_next_string(const char *name, const char **value);
 	const char *get_next_Coords(const char * const name, Coords * const value);
 
-	void set_int(const char *name, int value, bool duplicate = false);
+	void set_int(const char *name, int32_t value, bool duplicate = false);
 	void set_float(const char *name, float value, bool duplicate = false);
 	void set_bool(const char *name, bool value, bool duplicate = false);
 	void set_string(const char *name, const char *string, bool duplicate = false);
@@ -152,7 +152,7 @@ class Profile {
 	typedef std::vector<Section> Section_list;
 
 	Section_list m_sections;
-	int m_error_level;
+	int32_t m_error_level;
 
 public:
 	enum {
@@ -161,8 +161,8 @@ public:
 		err_throw
 	};
 
-	Profile(int error_level = err_throw);
-	Profile(const char* filename, const char *global_section = 0, int error_level = err_throw);
+	Profile(int32_t error_level = err_throw);
+	Profile(const char* filename, const char *global_section = 0, int32_t error_level = err_throw);
 	~Profile();
 
 	void error(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));

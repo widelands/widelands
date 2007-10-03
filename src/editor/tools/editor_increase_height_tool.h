@@ -34,12 +34,12 @@ struct Editor_Increase_Height_Tool : public Editor_Tool {
 		m_change_by(1)
 	{}
 
-	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_increase_height.png";}
 
-	int get_change_by() const throw () {return m_change_by;}
-	void set_change_by(const int n) throw () {m_change_by = n;}
+	int32_t get_change_by() const throw () {return m_change_by;}
+	void set_change_by(const int32_t n) throw () {m_change_by = n;}
 
 	Editor_Decrease_Height_Tool & decrease_tool() const throw ()
 	{return m_decrease_tool;}
@@ -48,7 +48,7 @@ struct Editor_Increase_Height_Tool : public Editor_Tool {
 private:
 	Editor_Decrease_Height_Tool & m_decrease_tool;
 	Editor_Set_Height_Tool      & m_set_tool;
-	int                           m_change_by;
+	int32_t                           m_change_by;
 };
 
 #endif

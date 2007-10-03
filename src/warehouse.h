@@ -51,12 +51,12 @@ struct Warehouse_Descr : public Building_Descr {
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual Building * create_object() const;
 
-	inline int get_subtype() const {return m_subtype;}
+	inline int32_t get_subtype() const {return m_subtype;}
 	virtual uint32_t get_conquers() const {return m_conquers;}
 
 private:
-	int m_subtype;
-	int m_conquers; //  HQs conquer
+	int32_t m_subtype;
+	int32_t m_conquers; //  HQs conquer
 };
 
 
@@ -69,7 +69,7 @@ public:
 	Warehouse(const Warehouse_Descr &);
 	virtual ~Warehouse();
 
-	virtual int get_building_type() const throw () {return Building::WAREHOUSE;}
+	virtual int32_t get_building_type() const throw () {return Building::WAREHOUSE;}
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
@@ -79,25 +79,25 @@ public:
 
 	const WareList &get_wares() const;
 	const WareList &get_workers() const;
-	void insert_wares(int id, int count);
-	void remove_wares(int id, int count);
-   void insert_workers(int id, int count);
-   void remove_workers(int id, int count);
+	void insert_wares(int32_t id, int32_t count);
+	void remove_wares(int32_t id, int32_t count);
+   void insert_workers(int32_t id, int32_t count);
+   void remove_workers(int32_t id, int32_t count);
 
 	virtual bool fetch_from_flag(Game* g);
 
-	void mark_as_used (Game* g, int ware, Requeriments* r);
-	Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
-	Worker* launch_worker(Game* g, int ware);
+	void mark_as_used (Game* g, int32_t ware, Requeriments* r);
+	Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
+	Worker* launch_worker(Game* g, int32_t ware);
 	void incorporate_worker(Game *g, Worker *w);
 
-	WareInstance* launch_item(Game* g, int ware);
+	WareInstance* launch_item(Game* g, int32_t ware);
 	void do_launch_item(Game* g, WareInstance* item);
 	void incorporate_item(Game* g, WareInstance* item);
 
-	int get_soldiers_passing (Game*, int, Requeriments*);
-	bool can_create_worker(Game *, int worker);
-	void create_worker(Game *, int worker);
+	int32_t get_soldiers_passing (Game*, int32_t, Requeriments*);
+	bool can_create_worker(Game *, int32_t worker);
+	void create_worker(Game *, int32_t worker);
 
    /// Military stuff
    virtual bool has_soldiers();
@@ -107,14 +107,14 @@ protected:
 	virtual UI::Window *create_options_window(Interactive_Player *plr, UI::Window **registry);
 
 private:
-	static void idle_request_cb(Game* g, Request* rq, int ware, Worker* w, void* data);
+	static void idle_request_cb(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
    void sort_worker_in(Editor_Game_Base*, std::string, Worker*);
 
 	WarehouseSupply       * m_supply;
 	std::vector<Request *>  m_requests; // one idle request per ware type
    std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
-	int                     m_next_carrier_spawn; //  time of next carrier growth
-   int                     m_next_military_act; // time of next military action
+	int32_t                     m_next_carrier_spawn; //  time of next carrier growth
+   int32_t                     m_next_military_act; // time of next military action
 };
 
 /*
@@ -127,30 +127,30 @@ struct WarehouseSupply : public Supply {
 
 	void set_economy(Economy* e);
 
-   void set_nrworkers(int i);
-   void set_nrwares(int i);
+   void set_nrworkers(int32_t i);
+   void set_nrwares(int32_t i);
 
 
 	const WareList &get_wares() const {return m_wares;}
 	const WareList &get_workers() const {return m_workers;}
-	int stock_wares(int id) const {return m_wares.stock(id);}
-	int stock_workers(int id) const {return m_workers.stock(id);}
-	void add_wares(int id, int count);
-	void remove_wares(int id, int count);
-   void add_workers(int id, int count);
-   void remove_workers(int id, int count);
+	int32_t stock_wares(int32_t id) const {return m_wares.stock(id);}
+	int32_t stock_workers(int32_t id) const {return m_workers.stock(id);}
+	void add_wares(int32_t id, int32_t count);
+	void remove_wares(int32_t id, int32_t count);
+   void add_workers(int32_t id, int32_t count);
+   void remove_workers(int32_t id, int32_t count);
 
 	// Supply implementation
 	virtual PlayerImmovable* get_position(Game* g);
-	virtual int get_amount(const int ware) const;
+	virtual int32_t get_amount(const int32_t ware) const;
 	virtual bool is_active() const throw ();
 
-	virtual WareInstance* launch_item(Game* g, int ware);
-	virtual Worker* launch_worker(Game* g, int ware);
+	virtual WareInstance* launch_item(Game* g, int32_t ware);
+	virtual Worker* launch_worker(Game* g, int32_t ware);
 
-	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
-	virtual int get_passing_requeriments(Game* g, int ware, Requeriments* r);
-	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
+	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
+	virtual int32_t get_passing_requeriments(Game* g, int32_t ware, Requeriments* r);
+	virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r);
 private:
 	Economy   * m_economy;
 	WareList    m_wares;

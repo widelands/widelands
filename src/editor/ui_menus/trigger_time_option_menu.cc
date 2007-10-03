@@ -35,16 +35,16 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
 UI::Window(parent, 0, 0, 164, 180, _("Trigger Option Menu").c_str()),
 m_parent(parent)
 {
-   const int offsx=5;
-   const int offsy=25;
-   const int spacing=5;
-   const int width=20;
-   const int height=20;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=5;
+   const int32_t offsy=25;
+   const int32_t spacing=5;
+   const int32_t width=20;
+   const int32_t height=20;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    m_trigger=trigger;
-   int wait_time=trigger->get_wait_time();
+   int32_t wait_time=trigger->get_wait_time();
    m_values[0]=(wait_time/3600)/10; // hours
    m_values[1]=(wait_time/3600)%10;
    wait_time-=(wait_time/3600)*3600;
@@ -62,7 +62,7 @@ m_parent(parent)
 
    // hours, first cipher
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
 		 1,
@@ -71,7 +71,7 @@ m_parent(parent)
 
    m_textareas[0]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy+40, width, height,
 		 1,
@@ -82,7 +82,7 @@ m_parent(parent)
 
    // hours second cipher
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
 		 1,
@@ -91,7 +91,7 @@ m_parent(parent)
 
    m_textareas[1]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy+40, width, height,
 		 1,
@@ -106,7 +106,7 @@ m_parent(parent)
 
    // minutes, first cipher
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
 		 1,
@@ -115,7 +115,7 @@ m_parent(parent)
 
    m_textareas[2]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy+40, width, height,
 		 1,
@@ -126,7 +126,7 @@ m_parent(parent)
 
    // minutes second cipher
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
 		 1,
@@ -135,7 +135,7 @@ m_parent(parent)
 
    m_textareas[3]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy+40, width, height,
 		 1,
@@ -149,7 +149,7 @@ m_parent(parent)
    posx+=spacing+tt->get_w();
    // seconds, first cipher
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
 		 1,
@@ -158,7 +158,7 @@ m_parent(parent)
 
    m_textareas[4]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy+40, width, height,
 		 1,
@@ -168,7 +168,7 @@ m_parent(parent)
    posx+=width+spacing/2;
    // seconds, second cipher
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
 		 1,
@@ -177,7 +177,7 @@ m_parent(parent)
 
    m_textareas[5]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy+40, width, height,
 		 1,
@@ -202,7 +202,7 @@ m_parent(parent)
 
    posx=(get_inner_w()/2)+spacing;
 
-	new UI::IDButton<Trigger_Time_Option_Menu, int>
+	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
 		 1,
@@ -227,17 +227,17 @@ Trigger_Time_Option_Menu::~Trigger_Time_Option_Menu() {
  * we simulate a cancel click
  * We are not draggable.
  */
-bool Trigger_Time_Option_Menu::handle_mousepress(const Uint8 btn, int, int)
+bool Trigger_Time_Option_Menu::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {clicked(0); return true;} return false;}
-bool Trigger_Time_Option_Menu::handle_mouserelease(const Uint8, int, int)
+bool Trigger_Time_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 
 void Trigger_Time_Option_Menu::clicked_ok() {
-      int hours=m_values[0]*10+m_values[1];
-      int minutes=m_values[2]*10+m_values[3];
-      int seconds=m_values[4]*10+m_values[5];
-      int total=hours*3600+minutes*60+seconds;
+      int32_t hours=m_values[0]*10+m_values[1];
+      int32_t minutes=m_values[2]*10+m_values[3];
+      int32_t seconds=m_values[4]*10+m_values[5];
+      int32_t total=hours*3600+minutes*60+seconds;
       m_trigger->set_wait_time(total);
       if (m_name->get_text())
          m_trigger->set_name(m_name->get_text());
@@ -245,8 +245,8 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 }
 
 
-void Trigger_Time_Option_Menu::clicked(int i) {
-   int id=(i-2)/2;
+void Trigger_Time_Option_Menu::clicked(int32_t i) {
+   int32_t id=(i-2)/2;
    m_values[id]= i%2 ?  m_values[id]-1 :  m_values[id]+1;
    if (m_values[id]<0) m_values[id]=0;
    if (!m_values[0] && !m_values[1] && !m_values[2] && !m_values[3] && !m_values[4] && !m_values[5]) m_values[5]=1;

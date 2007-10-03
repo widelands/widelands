@@ -71,23 +71,23 @@ struct Editor_Game_Base {
 	virtual void think();
 
 	// Player commands
-	void remove_player(int plnum);
+	void remove_player(int32_t plnum);
 	Player * add_player
 		(const Player_Number plnum,
-		 const int type,
+		 const int32_t type,
 		 const std::string & tribe,
 		 const std::string & name);
-	Player * get_player(const int n) const {
+	Player * get_player(const int32_t n) const {
 		assert(n >= 1);
 		assert(n <= MAX_PLAYERS);
 		return m_players[n - 1];
 	}
-	Player & player(const int n) const {
+	Player & player(const int32_t n) const {
 		assert(1 <= n);
 		assert     (n <= MAX_PLAYERS);
 		return *m_players[n - 1];
 	}
-	virtual Player * get_safe_player(const int n);
+	virtual Player * get_safe_player(const int32_t n);
 
 	// loading stuff
 	void allocate_player_maps();
@@ -103,26 +103,26 @@ struct Editor_Game_Base {
 		(const Coords,
 		 const Player_Number,
 		 const Building_Descr::Index);
-		Building* warp_constructionsite(Coords c, char owner, int idx, int oldid=-1);
+		Building* warp_constructionsite(Coords c, int8_t owner, int32_t idx, int32_t oldid=-1);
 	Bob * create_bob(const Coords, const Bob::Descr::Index, const Tribe_Descr * const = 0);
-	Immovable* create_immovable(const Coords c, int idx, const Tribe_Descr*);
+	Immovable* create_immovable(const Coords c, int32_t idx, const Tribe_Descr*);
 	Immovable* create_immovable
 		(const Coords c, const std::string & name, const Tribe_Descr*);
 	Battle* create_battle ();
-	AttackController* create_attack_controller(Flag* flag, int attacker, int defender, uint32_t num);
+	AttackController* create_attack_controller(Flag* flag, int32_t attacker, int32_t defender, uint32_t num);
 	AttackController* create_attack_controller();
 	void remove_attack_controller(uint32_t serial);
 	void register_attack_controller(AttackController* ctrl);
 	const std::vector<uint32_t>& get_attack_controller_serials() const {return m_attack_serials;}
 
-	std::vector<int> get_battle_serials() const {return m_battle_serials;}
-	typedef int Time;
+	std::vector<int32_t> get_battle_serials() const {return m_battle_serials;}
+	typedef int32_t Time;
 	static Time     Never  () throw () {return 0xffffffff;}
 	typedef Uint32 Duration;
 	static Duration Forever() throw ()
 	{return std::numeric_limits<Duration>::max();}
 
-	int get_gametime() const {return m_gametime;}
+	int32_t get_gametime() const {return m_gametime;}
 	Interactive_Base * get_iabase() const {return m_iabase;}
 
 	// safe system for storing pointers to non-Map_Object C++ objects
@@ -153,7 +153,7 @@ struct Editor_Game_Base {
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	int* get_game_time_pointer() {return &m_gametime;}
+	int32_t* get_game_time_pointer() {return &m_gametime;}
 	void set_iabase(Interactive_Base* b) {m_iabase=b;}
 
 protected:
@@ -195,7 +195,7 @@ protected:
 private:
 	void cleanup_playerimmovables_area(const Area<FCoords>);
 
-	int m_gametime;
+	int32_t m_gametime;
 	Player                   * m_players[MAX_PLAYERS];
 	Object_Manager             m_objects;
 protected:
@@ -207,7 +207,7 @@ private:
 	uint32_t                       m_lasttrackserial;
 	std::map<uint32_t, void *>     m_trackpointers;
 public:
-	std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
+	std::vector<int32_t>           m_battle_serials;    // The serials of the battles only used to load/save
 	std::vector<uint32_t>          m_attack_serials;
 
 private:

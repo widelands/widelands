@@ -33,10 +33,10 @@ choses an object to place randomly from all enabled
 and places this on the current field
 ===========
 */
-int Editor_Place_Immovable_Tool::handle_click_impl
+int32_t Editor_Place_Immovable_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
-	const int radius = parent.get_sel_radius();
+	const int32_t radius = parent.get_sel_radius();
 	if (not get_nr_enabled()) return radius;
 	Editor_Game_Base & editor = parent.editor();
 	MapRegion<Area<FCoords> > mr

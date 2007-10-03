@@ -37,7 +37,7 @@ Args: parent  parent panel
       align   alignment of text inside the Listselect
 */
 BaseListselect::BaseListselect
-(Panel *parent, int x, int y, uint32_t w, uint32_t h, Align align, bool show_check)
+(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align, bool show_check)
 :
 Panel(parent, x, y, w, h),
 m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
@@ -111,7 +111,7 @@ Args: name   name that will be displayed
 void BaseListselect::add
 (const char * const name,
  uint32_t entry,
- const int picid,
+ const int32_t picid,
  const bool sel)
 {
 	Entry_Record & er = *static_cast<Entry_Record *>
@@ -199,7 +199,7 @@ void BaseListselect::set_align(const Align align)
 /**
 Scroll to the given position, in pixels.
 */
-void BaseListselect::set_scrollpos(const int i)
+void BaseListselect::set_scrollpos(const int32_t i)
 {
 	m_scrollpos = i;
 
@@ -299,7 +299,7 @@ void BaseListselect::draw(RenderTarget* dst)
 	// draw text lines
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
-	int y = 1 + idx*lineheight - m_scrollpos;
+	int32_t y = 1 + idx*lineheight - m_scrollpos;
 
 	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
@@ -317,7 +317,7 @@ void BaseListselect::draw(RenderTarget* dst)
 				 -ms_darken_value);
 		}
 
-		int x;
+		int32_t x;
 		if (m_align & Align_Right)
 			x = get_eff_w() - 1;
 		else if (m_align & Align_HCenter)
@@ -358,24 +358,24 @@ void BaseListselect::draw(RenderTarget* dst)
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool BaseListselect::handle_mousepress(const Uint8 btn, int, int y)
+bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
-	int time=WLApplication::get()->get_time();
+	int32_t time=WLApplication::get()->get_time();
 
 	// This hick hack is needed if any of the
 	// callback functions calls clear to forget the last
 	// clicked time.
-	int real_last_click_time=m_last_click_time;
+	int32_t real_last_click_time=m_last_click_time;
 
 	m_last_selection=m_selection;
 	m_last_click_time=time;
 	play_click();
 
 	y = (y + m_scrollpos) / get_lineheight();
-	if (y >= 0 and y < static_cast<int>(m_entry_records.size()))
+	if (y >= 0 and y < static_cast<int32_t>(m_entry_records.size()))
 		select(y);
 
 	// check if doubleclicked
@@ -390,7 +390,7 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int, int y)
 	return true;
 }
 
-bool BaseListselect::handle_mouserelease(const Uint8 btn, int, int)
+bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
 }

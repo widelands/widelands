@@ -160,7 +160,7 @@ void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game * game)
 		update_game_info(*er, game->info);
 }
 
-void Fullscreen_Menu_NetSetup::discovery_callback (int type, const LAN_Open_Game* game, void* userdata)
+void Fullscreen_Menu_NetSetup::discovery_callback (int32_t type, const LAN_Open_Game* game, void* userdata)
 {
 	switch (type) {
 	case LAN_Game_Finder::GameOpened:

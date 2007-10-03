@@ -86,7 +86,7 @@ char * FileRead::CString(const Pos pos) {
 	return string;
 }
 
-/** FileRead::ReadLine(char *buf, int buflen)
+/** FileRead::ReadLine(char *buf, int32_t buflen)
  *
  * Reads a line from the file into the buffer.
  * The '\\r', '\\n' are consumed, but not stored in buf

@@ -62,9 +62,9 @@ struct ProductionAction {
 	};
 
 	Type        type;
-	int         iparam1;
-	int         iparam2;
-	int         iparam3;
+	int32_t         iparam1;
+	int32_t         iparam2;
+	int32_t         iparam3;
 	std::string sparam1;
 };
 
@@ -78,8 +78,8 @@ struct ProductionProgram {
 	ProductionProgram(const std::string & name);
 
 	std::string get_name() const {return m_name;}
-	int get_size() const {return m_actions.size();}
-	const ProductionAction* get_action(int idx) const {
+	int32_t get_size() const {return m_actions.size();}
+	const ProductionAction* get_action(int32_t idx) const {
 		assert(idx >= 0);
 		assert(static_cast<uint32_t>(idx) < m_actions.size());
 		return &m_actions[idx];

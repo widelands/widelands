@@ -92,9 +92,9 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
       char buf[200];
       uint32_t gametime = gpdp.get_gametime();
 
-      int hours = gametime / 3600000;
+      int32_t hours = gametime / 3600000;
       gametime -= hours * 3600000;
-      int minutes = gametime / 60000;
+      int32_t minutes = gametime / 60000;
 
       sprintf(buf, "%02i:%02i", hours, minutes);
 		tagametime.set_text(buf);

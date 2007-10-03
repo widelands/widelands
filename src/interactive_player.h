@@ -79,7 +79,7 @@ struct Interactive_Player : public Interactive_Base {
 
 	void field_action();
 
-	bool handle_key(bool down, int code, char c);
+	bool handle_key(bool down, int32_t code, char c);
 
 	Game * get_game() const {return m_game;}
 	uint8_t get_player_number() const {return m_player_number;}

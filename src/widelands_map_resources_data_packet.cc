@@ -45,12 +45,12 @@ throw (_wexception)
    fr.Open(fs, "binary/resource");
 
    // read packet version
-   int packet_version=fr.Unsigned16();
+   int32_t packet_version=fr.Unsigned16();
    Map* map=egbase->get_map();
    World* world=egbase->get_map()->get_world();
 
 	if (packet_version == CURRENT_PACKET_VERSION) {
-      int nr_res=fr.Unsigned16();
+      int32_t nr_res=fr.Unsigned16();
 		if (nr_res > world->get_nr_resources())
 			log
 				("WARNING: Number of resources in map (%i) is bigger than in world "
@@ -58,12 +58,12 @@ throw (_wexception)
 				 nr_res, world->get_nr_resources());
 
       // construct ids and map
-      std::map<uint8_t, int> smap;
+      std::map<uint8_t, int32_t> smap;
       char* buffer;
-      for (int i=0; i<nr_res; i++) {
-         int id=fr.Unsigned16();
+      for (int32_t i=0; i<nr_res; i++) {
+         int32_t id=fr.Unsigned16();
          buffer=fr.CString();
-         int res=world->get_resource(buffer);
+         int32_t res=world->get_resource(buffer);
          if (res==-1) throw wexception("Resource '%s' exists in map, not in world!", buffer);
          smap[id]=res;
 		}
@@ -71,14 +71,14 @@ throw (_wexception)
       // Now get all the the resources
       for (uint16_t y=0; y<map->get_height(); y++) {
          for (uint16_t x=0; x<map->get_width(); x++) {
-            int id=fr.Unsigned8();
-            int found_amount=fr.Unsigned8();
-            int start_amount=0;
-            int amount=0;
+            int32_t id=fr.Unsigned8();
+            int32_t found_amount=fr.Unsigned8();
+            int32_t start_amount=0;
+            int32_t amount=0;
             amount=found_amount;
             start_amount=fr.Unsigned8();
 
-            int set_id, set_amount, set_start_amount;
+            int32_t set_id, set_amount, set_start_amount;
             // if amount is zero, theres nothing here
             if (!amount) {
                set_id=0;
@@ -127,12 +127,12 @@ throw (_wexception)
    // (saved like terrains)
    // Write the number of resources
    World* world=egbase->get_map()->get_world();
-   int nr_res=world->get_nr_resources();
+   int32_t nr_res=world->get_nr_resources();
    fw.Unsigned16(nr_res);
 
    // Write all resources names and their id's
    std::map<std::string, uint8_t> smap;
-   for (int i=0; i<nr_res; i++) {
+   for (int32_t i=0; i<nr_res; i++) {
       Resource_Descr* res=world->get_resource(i);
       smap[res->name().c_str()]=i;
       fw.Unsigned16(i);
@@ -145,9 +145,9 @@ throw (_wexception)
    Map* map=egbase->get_map();
    for (uint16_t y=0; y<map->get_height(); y++) {
       for (uint16_t x=0; x<map->get_width(); x++) {
-         int res=map->get_field(Coords(x, y))->get_resources();
-         int amount=map->get_field(Coords(x, y))->get_resources_amount();
-         int start_amount=map->get_field(Coords(x, y))->get_starting_res_amount();
+         int32_t res=map->get_field(Coords(x, y))->get_resources();
+         int32_t amount=map->get_field(Coords(x, y))->get_resources_amount();
+         int32_t start_amount=map->get_field(Coords(x, y))->get_starting_res_amount();
          if (!amount)
             res=0;
          fw.Unsigned8(res);

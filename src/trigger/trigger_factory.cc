@@ -30,7 +30,7 @@
 #include "wexception.h"
 
 
-static const int nr_of_triggers=3;
+static const int32_t nr_of_triggers=3;
 Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
 	{"time", _("Time Trigger"), _("This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events")},
 	{"null", _("Null Trigger"), _("This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers")},
@@ -66,7 +66,7 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
    if (!trig)
       trig=get_correct_trigger(id);
 
-	int retval;
+	int32_t retval;
    std::string str = id;
 	if        (str == "time") {
 		Trigger_Time_Option_Menu t

@@ -41,7 +41,7 @@ Scrollbar
 /**
 Initialize the scrollbar using default values.
 */
-Scrollbar::Scrollbar(Panel *parent, int x, int y, uint32_t w, uint32_t h, bool horiz)
+Scrollbar::Scrollbar(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz)
 	: Panel(parent, x, y, w, h)
 {
 	m_horizontal = horiz;
@@ -76,7 +76,7 @@ Scrollbar::Scrollbar(Panel *parent, int x, int y, uint32_t w, uint32_t h, bool h
 /**
 Change the number of steps of the scrollbar.
 */
-void Scrollbar::set_steps(int steps)
+void Scrollbar::set_steps(int32_t steps)
 {
 	if (steps < 1)
 		steps = 1;
@@ -92,7 +92,7 @@ void Scrollbar::set_steps(int steps)
 /**
 Change the number of steps a pageup/down will scroll.
 */
-void Scrollbar::set_pagesize(int pagesize)
+void Scrollbar::set_pagesize(int32_t pagesize)
 {
 	if (pagesize < 1)
 		pagesize = 1;
@@ -104,7 +104,7 @@ void Scrollbar::set_pagesize(int pagesize)
 /**
 Change the current scrolling position.
 */
-void Scrollbar::set_pos(int pos)
+void Scrollbar::set_pos(int32_t pos)
 {
 	if (pos < 0)
 		pos = 0;
@@ -122,10 +122,10 @@ void Scrollbar::set_pos(int pos)
 /**
 Scrollbar::get_area_for_point
 */
-Scrollbar::Area Scrollbar::get_area_for_point(int x, int y)
+Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 {
-	int extent;
-	int knob;
+	int32_t extent;
+	int32_t knob;
 
 	// Out of panel
 	if (x < 0 || x >= get_w() || y < 0 || y >= get_h())
@@ -164,9 +164,9 @@ Scrollbar::Area Scrollbar::get_area_for_point(int x, int y)
 /**
 Return the center of the knob, in pixels, depending on the current position.
 */
-int Scrollbar::get_knob_pos()
+int32_t Scrollbar::get_knob_pos()
 {
-	int extent;
+	int32_t extent;
 
 	if (m_horizontal)
 		extent = get_w();
@@ -182,9 +182,9 @@ int Scrollbar::get_knob_pos()
 /**
 Change the position according to knob movement.
 */
-void Scrollbar::set_knob_pos(int pos)
+void Scrollbar::set_knob_pos(int32_t pos)
 {
-	int extent;
+	int32_t extent;
 
 	if (m_horizontal)
 		extent = get_w();
@@ -194,7 +194,7 @@ void Scrollbar::set_knob_pos(int pos)
 	extent -= 3 * Size;
 	pos -= 3 * Size / 2;
 
-	pos = (pos * static_cast<int>(m_steps)) / extent;
+	pos = (pos * static_cast<int32_t>(m_steps)) / extent;
 	set_pos(pos);
 }
 
@@ -204,8 +204,8 @@ Perform the action for klicking on the given area.
 */
 void Scrollbar::action(Area area)
 {
-	int diff;
-	int pos;
+	int32_t diff;
+	int32_t pos;
 
 	switch (area) {
 	case Minus: diff = -1; break;
@@ -215,7 +215,7 @@ void Scrollbar::action(Area area)
 	default: return;
 	}
 
-	pos = static_cast<int>(m_pos) + diff;
+	pos = static_cast<int32_t>(m_pos) + diff;
 	set_pos(pos);
 }
 
@@ -357,7 +357,7 @@ void Scrollbar::think()
 }
 
 
-bool Scrollbar::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Scrollbar::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	bool result = false;
 
 	switch (btn) {
@@ -389,7 +389,7 @@ bool Scrollbar::handle_mousepress(const Uint8 btn, int x, int y) {
 	update(0, 0, get_w(), get_h());
 	return result;
 }
-bool Scrollbar::handle_mouserelease(const Uint8 btn, int, int) {
+bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 	bool result = false;
 
 	switch (btn) {
@@ -415,10 +415,10 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int, int) {
 /**
 Move the knob while pressed.
 */
-bool Scrollbar::handle_mousemove(const Uint8, int mx, int my, int, int) {
+bool Scrollbar::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int32_t) {
 	if (m_pressed == Knob)
 	{
-		int pos = m_horizontal ? mx : my;
+		int32_t pos = m_horizontal ? mx : my;
 
 		set_knob_pos(pos - m_knob_grabdelta);
 	}

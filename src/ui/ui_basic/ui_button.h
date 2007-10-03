@@ -33,7 +33,7 @@ namespace UI {
 struct Basic_Button : public Panel {
 	Basic_Button
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const bool enabled, const bool flat,
 		 const uint32_t background_pictute_id,
 		 const uint32_t foreground_picture_id,
@@ -51,8 +51,8 @@ struct Basic_Button : public Panel {
 	void draw(RenderTarget* dst);
 
 	void handle_mousein(bool inside);
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 protected:
 	virtual void send_signal_clicked() const = 0;
@@ -80,7 +80,7 @@ private:
 template <typename T> struct Button : public Basic_Button {
 	Button ///  for textual buttons
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const uint32_t background_pictute_id,
 		 void (T:: * callback_function)(),
 		 T * const callback_argument_this,
@@ -102,7 +102,7 @@ template <typename T> struct Button : public Basic_Button {
 	{}
 	Button ///  for pictoral buttons
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const uint32_t background_pictute_id,
 		 const uint32_t foreground_picture_id,
 		 void (T:: * callback_function)(),
@@ -140,7 +140,7 @@ protected:
 template <typename T, typename ID> struct IDButton : public Basic_Button {
 	IDButton ///  for textual buttons
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const uint32_t background_pictute_id,
 		 void (T:: * callback_function)(ID),
 		 T * const callback_argument_this,
@@ -164,7 +164,7 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 	{}
 	IDButton ///  for pictoral buttons
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const uint32_t background_pictute_id,
 		 const uint32_t foreground_picture_id,
 		 void (T:: * callback_function)(ID),

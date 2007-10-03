@@ -38,8 +38,8 @@ struct Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
 
 private:
 	UI::Textarea                                         title;
-	UI::IDButton<Fullscreen_Menu_InetServerOptions, int> rungame;
-	UI::IDButton<Fullscreen_Menu_InetServerOptions, int> back;
+	UI::IDButton<Fullscreen_Menu_InetServerOptions, int32_t> rungame;
+	UI::IDButton<Fullscreen_Menu_InetServerOptions, int32_t> back;
 	UI::Edit_Box                                         playername;
 	UI::Edit_Box                                         hostname;
 };

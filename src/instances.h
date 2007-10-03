@@ -182,7 +182,7 @@ protected:
 	virtual ~Map_Object() {}
 
 public:
-	virtual int get_type() const throw () = 0;
+	virtual int32_t get_type() const throw () = 0;
 
 	inline uint32_t get_serial() const {return m_serial;}
 	bool has_attribute(const uint32_t attr) const throw ()
@@ -285,7 +285,7 @@ private:
 	Map_Object            (const Map_Object &);
 };
 
-inline int get_reverse_dir(int dir) {return 1 + ((dir-1)+3)%6;}
+inline int32_t get_reverse_dir(int32_t dir) {return 1 + ((dir-1)+3)%6;}
 
 
 /** class Object_Manager
@@ -396,11 +396,11 @@ private:
 
 class Cmd_Destroy_Map_Object : public GameLogicCommand {
 private:
-	int obj_serial;
+	int32_t obj_serial;
 
 public:
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} // For savegame loading
-	Cmd_Destroy_Map_Object (int t, Map_Object* o);
+	Cmd_Destroy_Map_Object (int32_t t, Map_Object* o);
 	virtual void execute (Game* g);
 
 	virtual void Write
@@ -412,17 +412,17 @@ public:
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
-	virtual int get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} // Get this command id
+	virtual int32_t get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} // Get this command id
 };
 
 class Cmd_Act : public GameLogicCommand {
 private:
-	int obj_serial;
-	int arg;
+	int32_t obj_serial;
+	int32_t arg;
 
 public:
 	Cmd_Act() : GameLogicCommand(0) {} // For savegame loading
-	Cmd_Act (int t, Map_Object* o, int a);
+	Cmd_Act (int32_t t, Map_Object* o, int32_t a);
 
 	virtual void execute (Game* g);
 
@@ -435,7 +435,7 @@ public:
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
-	virtual int get_id() {return QUEUE_CMD_ACT;} // Get this command id
+	virtual int32_t get_id() {return QUEUE_CMD_ACT;} // Get this command id
 };
 
 #endif // __S__INSTANCE_H

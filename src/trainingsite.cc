@@ -130,7 +130,7 @@ Building * TrainingSite_Descr::create_object() const
  * \param at the attribute to investigate
  * \return  the minimum level to which this building can downgrade a specified attribute
  */
-int TrainingSite_Descr::get_min_level(const tAttribute at) const {
+int32_t TrainingSite_Descr::get_min_level(const tAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_min_hp;
@@ -150,7 +150,7 @@ int TrainingSite_Descr::get_min_level(const tAttribute at) const {
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
-int TrainingSite_Descr::get_max_level(const tAttribute at) const {
+int32_t TrainingSite_Descr::get_max_level(const tAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_max_hp;
@@ -296,14 +296,14 @@ void TrainingSite::remove_worker(Worker* w)
  * Request exactly one soldier
  */
 void TrainingSite::request_soldier() {
-	int soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
+	int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
 	Request *req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::SOLDIER);
 	Requeriments *r = new Requeriments();
 
 	// set requirements to match this site
-	int totalmax = 0;
-	int totalmin = 0;
+	int32_t totalmax = 0;
+	int32_t totalmin = 0;
 	if (descr().get_train_attack()) {
 		totalmin += descr().get_min_level(atrAttack);
 		totalmax += descr().get_max_level(atrAttack);
@@ -340,7 +340,7 @@ void TrainingSite::request_soldier() {
  */
 // this is a static method
 void TrainingSite::request_soldier_callback
-(Game * g, Request * rq, int, Worker * w, void * data)
+(Game * g, Request * rq, int32_t, Worker * w, void * data)
 {
 	assert(g);
 	assert(rq);
@@ -531,7 +531,7 @@ void TrainingSite::act(Game * g, uint32_t data)
 
 	Building::act(g, data);
 
-	if (m_program_timer && static_cast<int>(g->get_gametime() - m_program_time) >= 0) {
+	if (m_program_timer && static_cast<int32_t>(g->get_gametime() - m_program_time) >= 0) {
 		m_program_timer = false;
 
 		if (!m_program.size()) {
@@ -570,12 +570,12 @@ void TrainingSite::find_and_start_next_program(Game * g)
 		calc_list_upgrades(g);
 
 	if (m_list_upgrades.size()) {
-		int i = m_list_upgrades.size() - 1;
-		int j;
-		int min_level = 0;
-		int max_level = 0;
-		int level = 0;
-		int MAX_level = 0;
+		int32_t i = m_list_upgrades.size() - 1;
+		int32_t j;
+		int32_t min_level = 0;
+		int32_t max_level = 0;
+		int32_t level = 0;
+		int32_t MAX_level = 0;
 		bool done = false;
 		std::vector < std::string > str(split_string(m_list_upgrades[i], "_"));
 
@@ -601,8 +601,8 @@ void TrainingSite::find_and_start_next_program(Game * g)
 
 				while ((min_level < max_level) && (!done)) {
 
-					for (j = 0; j < static_cast<int>(m_soldiers.size()); j++)
-						if (static_cast<int>(m_soldiers[j]->get_level(attrib)) == max_level)
+					for (j = 0; j < static_cast<int32_t>(m_soldiers.size()); j++)
+						if (static_cast<int32_t>(m_soldiers[j]->get_level(attrib)) == max_level)
 							done = true;
 
 					if (!done)
@@ -612,8 +612,8 @@ void TrainingSite::find_and_start_next_program(Game * g)
 
 				while ((min_level < max_level) && (!done)) {
 
-					for (j = 0; j < static_cast<int>(m_soldiers.size()); ++j)
-						if (static_cast<int>(m_soldiers[j]->get_level(attrib)) == min_level)
+					for (j = 0; j < static_cast<int32_t>(m_soldiers.size()); ++j)
+						if (static_cast<int32_t>(m_soldiers[j]->get_level(attrib)) == min_level)
 							done = true;
 
 					if (!done)
@@ -698,7 +698,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 /**
  * Change the priorities for training
  */
-void TrainingSite::modif_priority(enum tAttribute atr, int value)
+void TrainingSite::modif_priority(enum tAttribute atr, int32_t value)
 {
 	switch (atr) {
 	case atrHP:
@@ -808,9 +808,9 @@ void TrainingSite::sub_pri(tAttribute atr)
  * \note Unlike the influence-defining military buildings, a training site can actually be empty of soldiers.
  *
  */
-void TrainingSite::change_soldier_capacity(int how)
+void TrainingSite::change_soldier_capacity(int32_t how)
 {
-	int temp_capacity;
+	int32_t temp_capacity;
 	temp_capacity = m_capacity + how;
 
 	if (temp_capacity < 0)
@@ -848,11 +848,11 @@ void TrainingSite::change_soldier_capacity(int how)
  * \return n/a, the output is in \ref m_list_upgrades
  */
 void TrainingSite::calc_list_upgrades(Game *) {
-	int higher;
-	int r_hp = m_pri_hp;
-	int r_attack = m_pri_attack;
-	int r_defense = m_pri_defense;
-	int r_evade = m_pri_evade;
+	int32_t higher;
+	int32_t r_hp = m_pri_hp;
+	int32_t r_attack = m_pri_attack;
+	int32_t r_defense = m_pri_defense;
+	int32_t r_evade = m_pri_evade;
 	std::vector < std::string > list;
 
 	if (!descr().get_train_hp())
@@ -916,7 +916,7 @@ void TrainingSite::calc_list_upgrades(Game *) {
 	};
 
 	// Invert priorities
-	for (int i = list.size() - 1; i >= 0; i--) {
+	for (int32_t i = list.size() - 1; i >= 0; i--) {
 		m_list_upgrades.push_back(list[i]);
 	}
 }

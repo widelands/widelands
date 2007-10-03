@@ -105,10 +105,10 @@ const char *FileSystem::FS_StripExtension(char * const fname)
  * Basically concatenates the two strings, but removes the filename part
  * of basefile (if any)
  */
-const char *FileSystem::FS_RelativePath(char *buf, const int buflen, const char *basefile, const char *filename)
+const char *FileSystem::FS_RelativePath(char *buf, const int32_t buflen, const char *basefile, const char *filename)
 {
 	const char *p;
-	int endbase;
+	int32_t endbase;
 
 	if (*filename == '/' || *filename == '\\') { // it's an absolute filename
 		snprintf(buf, buflen, "%s", filename);
@@ -367,7 +367,7 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
  * / or \  (or the whole string)
  */
 const char *FileSystem::FS_Filename(const char* buf) {
-	int i=strlen(buf)-1;
+	int32_t i=strlen(buf)-1;
 	while (i>=0) {
 		if (buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
 		--i;

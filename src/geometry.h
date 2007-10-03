@@ -30,11 +30,11 @@
 
 struct Point {
 	Point() throw () {}
-	Point(const int px, const int py) throw () : x(px), y(py) {}
+	Point(const int32_t px, const int32_t py) throw () : x(px), y(py) {}
 
 	static Point invalid() throw () {
 		return Point
-			(std::numeric_limits<int>::max(), std::numeric_limits<int>::max());
+			(std::numeric_limits<int32_t>::max(), std::numeric_limits<int32_t>::max());
 	}
 
 	bool operator==(const Point other) const throw ()
@@ -57,7 +57,7 @@ struct Point {
 		return *this;
 	}
 
-	int x, y;
+	int32_t x, y;
 };
 
 /**
@@ -89,12 +89,12 @@ struct Rect : public Point {
 struct Vertex:public Point {
 	Vertex() throw () : Point (0, 0), b(0), tx(0), ty(0) {}
 	Vertex
-		(const int vx, const int vy, const int vb, const int vtx, const int vty)
+		(const int32_t vx, const int32_t vy, const int32_t vb, const int32_t vtx, const int32_t vty)
 		throw ()
 		: Point(vx, vy), b(vb), tx(vtx), ty(vty)
 	{}
 
-	int b, tx, ty;
+	int32_t b, tx, ty;
 };
 
 

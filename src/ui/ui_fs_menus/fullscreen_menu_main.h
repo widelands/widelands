@@ -30,14 +30,14 @@
  * between different playmodes, exit and so on.
 */
 class Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
-	UI::IDButton<Fullscreen_Menu_Main, int> singleplayer;
-	UI::IDButton<Fullscreen_Menu_Main, int> multiplayer;
-	UI::IDButton<Fullscreen_Menu_Main, int> replay;
-	UI::IDButton<Fullscreen_Menu_Main, int> options;
-	UI::IDButton<Fullscreen_Menu_Main, int> editor;
-	UI::IDButton<Fullscreen_Menu_Main, int> readme;
-	UI::IDButton<Fullscreen_Menu_Main, int> license;
-	UI::IDButton<Fullscreen_Menu_Main, int> exit;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> singleplayer;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> multiplayer;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> replay;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> options;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> editor;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> readme;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> license;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> exit;
 	UI::Textarea                            version;
 	UI::Textarea                            copyright;
 public:

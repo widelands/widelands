@@ -35,20 +35,20 @@ template <class T> struct Descr_Maintainer {
 	{return std::numeric_limits<typename T::Index>::max();}
 
       T* exists(const char* name);
-      int add(T* item);
+      int32_t add(T* item);
 	typename T::Index get_nitems() const throw () {return nitems;}
 
 	struct Nonexistent {};
 
-	int get_index(const char * const name) const throw (Nonexistent)
+	int32_t get_index(const char * const name) const throw (Nonexistent)
 	{
 		for (typename T::Index i = 0; i < nitems; ++i)
 			if (name == items[i]->name()) return i;
 		return -1;
 	}
 
-      T * get(const int idx) const {
-         if (idx >= 0 and idx < static_cast<int>(nitems)) return items[idx];
+      T * get(const int32_t idx) const {
+         if (idx >= 0 and idx < static_cast<int32_t>(nitems)) return items[idx];
          else return 0;
 		}
 
@@ -68,7 +68,7 @@ private:
 
 
 template <class T>
-int Descr_Maintainer<T>::add(T* item) {
+int32_t Descr_Maintainer<T>::add(T* item) {
    nitems++;
 	if (nitems >= capacity) {
       reserve(nitems);

@@ -43,13 +43,13 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UI::UniqueWindow:
    m_parent=parent;
 
    // UI::Buttons
-   const int offsx=15;
-   const int offsy=15;
-   const int spacing=5;
-   const int width=get_inner_w()-offsx*2;
-   const int height=20;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=15;
+   const int32_t offsy=15;
+   const int32_t spacing=5;
+   const int32_t width=get_inner_w()-offsx*2;
+   const int32_t height=20;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
 	new UI::Button<Editor_Main_Menu>
 		(this,

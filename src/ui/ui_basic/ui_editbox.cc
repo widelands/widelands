@@ -35,9 +35,9 @@ constructor
 */
 Edit_Box::Edit_Box
 	(Panel * const parent,
-	 const int x, const int y, const uint32_t w, const uint32_t h,
+	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const uint32_t background,
-	 const int id)
+	 const int32_t id)
 	:
 	Basic_Button
 	(parent,
@@ -74,7 +74,7 @@ Edit_Box::~Edit_Box() {
 /**
 the mouse was clicked on this editbox
 */
-bool Edit_Box::handle_mousepress(const Uint8 btn, int, int) {
+bool Edit_Box::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (not m_keyboard_grabbed) {
@@ -86,13 +86,13 @@ bool Edit_Box::handle_mousepress(const Uint8 btn, int, int) {
 	}
 	return m_keyboard_grabbed;
 }
-bool Edit_Box::handle_mouserelease(const Uint8 btn, int, int)
+bool Edit_Box::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {return btn == SDL_BUTTON_LEFT and m_keyboard_grabbed;}
 
 /**
 a key event must be handled
 */
-bool Edit_Box::handle_key(bool down, int code, char c) {
+bool Edit_Box::handle_key(bool down, int32_t code, char c) {
 	if (down) {
 		switch (code) {
 		case KEY_ESCAPE:
@@ -141,7 +141,7 @@ does not much, suppresses messages when the focus
 is received
 */
 bool Edit_Box::handle_mousemove
-	(const Uint8 state, int x, int y, int xdiff, int ydiff)
+	(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
 	return m_keyboard_grabbed ?
 		true : Basic_Button::handle_mousemove(state, x, y, xdiff, ydiff);

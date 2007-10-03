@@ -43,15 +43,15 @@ m_parent     (parent),
 m_player_area(trigger->m_player_area)
 {
    m_building=-1;
-   const int offsx=5;
-   const int offsy=25;
-   int spacing=5;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=5;
+   const int32_t offsy=25;
+   int32_t spacing=5;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    // Fill the building infos
 	;
-   int i=0;
+   int32_t i=0;
 	if
 		(const Tribe_Descr * const tribe = m_parent->editor().get_tribe
 		 (m_parent->egbase().map()
@@ -77,14 +77,14 @@ m_player_area(trigger->m_player_area)
    new UI::Textarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
    m_player_ta=new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 15);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy, 20, 20,
 		 0,
@@ -96,14 +96,14 @@ m_player_area(trigger->m_player_area)
    // Building
    new UI::Textarea(this, spacing, posy, 70, 20, _("Building: "), Align_CenterLeft);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 70, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 23);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
 		 0,
@@ -118,14 +118,14 @@ m_player_area(trigger->m_player_area)
    new UI::Textarea(this, spacing, posy, 70, 20, _("How many: "), Align_CenterLeft);
    m_count_ta=new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 25);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 130, posy, 20, 20,
 		 0,
@@ -139,42 +139,42 @@ m_player_area(trigger->m_player_area)
    posy+=20+spacing;
    // X
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 3);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 4);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 5);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 6);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 60, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 7);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 60, posy + 40, 20, 20,
 		 0,
@@ -185,45 +185,45 @@ m_player_area(trigger->m_player_area)
    m_x_ta=new UI::Textarea(this, spacing+40, posy + 20, 20, 20, "X: ", Align_CenterLeft);
 
    // Y
-   int oldspacing=spacing;
+   int32_t oldspacing=spacing;
    spacing=get_inner_w()/2+spacing;
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 9);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 10);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 11);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 12);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 13);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy + 40, 20, 20,
 		 0,
@@ -238,42 +238,42 @@ m_player_area(trigger->m_player_area)
    // Area
    new UI::Textarea(this, spacing, posy + 20, 70, 20, _("Area: "), Align_CenterLeft);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 70, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 17);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 70, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 18);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 19);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 20);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Building_Option_Menu::clicked, this, 21);
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy + 40, 20, 20,
 		 0,
@@ -295,7 +295,7 @@ m_player_area(trigger->m_player_area)
 		 _("Ok"));
    posx=(get_inner_w()/2)+spacing;
 
-	new UI::IDButton<Trigger_Building_Option_Menu, int>
+	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
 		 1,
@@ -316,9 +316,9 @@ m_player_area(trigger->m_player_area)
  * we simulate a cancel click
  * We are not draggable.
  */
-bool Trigger_Building_Option_Menu::handle_mousepress(const Uint8 btn, int, int)
+bool Trigger_Building_Option_Menu::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Trigger_Building_Option_Menu::handle_mouserelease(const Uint8, int, int)
+bool Trigger_Building_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 
@@ -339,7 +339,7 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 }
 
 
-void Trigger_Building_Option_Menu::clicked(int i) {
+void Trigger_Building_Option_Menu::clicked(int32_t i) {
 	switch (i) {
 	case  3: m_player_area.x      += 100; break;
 	case  4: m_player_area.x      -= 100; break;
@@ -382,9 +382,9 @@ void Trigger_Building_Option_Menu::update() {
 	const Map & map = m_parent->egbase().map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
-	if (m_player_area.x >= static_cast<int>(mapwidth))
+	if (m_player_area.x >= static_cast<int32_t>(mapwidth))
 		m_player_area.x = mapwidth  - 1;
-	if (m_player_area.y >= static_cast<int>(mapheight))
+	if (m_player_area.y >= static_cast<int32_t>(mapheight))
 		m_player_area.y = mapheight - 1;
 	m_player_area.field = map.get_field(m_player_area);
 
@@ -397,7 +397,7 @@ void Trigger_Building_Option_Menu::update() {
 
    if (m_count<1) m_count=1;
 
-   if (m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
+   if (m_building>=static_cast<int32_t>(m_buildings.size())) m_building=m_buildings.size()-1;
 
    std::string curbuild=_("<invalid player tribe>");
 	if (not m_buildings.size()) {

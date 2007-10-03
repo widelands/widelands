@@ -225,12 +225,12 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
       // Supply
 		const Tribe_Descr & tribe = warehouse.get_owner()->tribe();
 		while (fr.Unsigned8()) {
-			const int id = tribe.get_safe_ware_index(fr.CString());
+			const int32_t id = tribe.get_safe_ware_index(fr.CString());
          warehouse.remove_wares(id, warehouse.m_supply->stock_wares(id));
 			warehouse.insert_wares(id, fr.Unsigned16());
 		}
 		while (fr.Unsigned8()) {
-			const int id = tribe.get_safe_worker_index(fr.CString());
+			const int32_t id = tribe.get_safe_worker_index(fr.CString());
          warehouse.remove_workers(id, warehouse.m_supply->stock_workers(id));
 			warehouse.insert_workers(id, fr.Unsigned16());
 		}
@@ -257,8 +257,8 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
          warehouse.m_incorporated_workers.erase(i);
 		}
       warehouse.m_incorporated_workers.resize(0);
-      int nrworkers=fr.Unsigned16();
-      for (int i=0; i<nrworkers; i++) {
+      int32_t nrworkers=fr.Unsigned16();
+      for (int32_t i=0; i<nrworkers; i++) {
          uint32_t id=fr.Unsigned32();
          std::string name=fr.CString();
          assert(ol->is_object_known(id));

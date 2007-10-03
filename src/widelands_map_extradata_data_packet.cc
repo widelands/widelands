@@ -53,7 +53,7 @@ throw (_wexception)
    Section* s = prof.get_section("global");
 
    // read packet version
-	const int packet_version = s->get_int("packet_version");
+	const int32_t packet_version = s->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
       // Nothing more. But read all pics
 		if (fs.FileExists("pics") and fs.IsDirectory("pics")) {

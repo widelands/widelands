@@ -29,7 +29,7 @@ private:
 
 public:
 	Cmd_CheckEventChain() : GameLogicCommand(0) {} // For savegame loading
-	Cmd_CheckEventChain(int, int);
+	Cmd_CheckEventChain(int32_t, int32_t);
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
@@ -41,7 +41,7 @@ public:
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
-	virtual int get_id() {return QUEUE_CMD_CHECK_EVENTCHAIN;} // Get this command id
+	virtual int32_t get_id() {return QUEUE_CMD_CHECK_EVENTCHAIN;} // Get this command id
 
 	virtual void execute(Game *);
 };

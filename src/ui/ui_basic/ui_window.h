@@ -48,7 +48,7 @@ namespace UI {
  */
 
 struct Window : public Panel {
-	Window(Panel *parent, int x, int y, uint32_t w, uint32_t h, const char *title);
+	Window(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const char *title);
 	~Window();
 
 	void set_title(const char *text);
@@ -67,10 +67,10 @@ struct Window : public Panel {
 
 	void think();
 
-	bool handle_mousepress  (const Uint8 btn, int mx, int my);
-	bool handle_mouserelease(const Uint8 btn, int mx, int my);
+	bool handle_mousepress  (const Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mouserelease(const Uint8 btn, int32_t mx, int32_t my);
 	bool handle_mousemove
-		(const Uint8 state, int mx, int my, int xdiff, int ydiff);
+		(const Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
 
 private:
 	void dock_left();
@@ -82,7 +82,7 @@ private:
 	bool _is_minimal;
 	uint32_t _oldw, _oldh;  // if it is, these are the old formats
 	bool _dragging, _docked_left, _docked_right, _docked_bottom;
-	int _drag_start_win_x, _drag_start_win_y, _drag_start_mouse_x, _drag_start_mouse_y;
+	int32_t _drag_start_win_x, _drag_start_win_y, _drag_start_mouse_x, _drag_start_mouse_y;
 
 	std::string m_title;
 

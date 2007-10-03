@@ -63,7 +63,7 @@ struct Panel : public Object {
 
 	Panel
 		(Panel * const nparent,
-		 const int nx, const int ny, const uint32_t nw, const uint32_t nh,
+		 const int32_t nx, const int32_t ny, const uint32_t nw, const uint32_t nh,
 		 const std::string & tooltip_text = std::string());
 	virtual ~Panel();
 
@@ -74,9 +74,9 @@ struct Panel : public Object {
 	void free_children();
 
 	// Modal
-	static const int dying_code = -1;
-	int run();
-	void end_modal(int code);
+	static const int32_t dying_code = -1;
+	int32_t run();
+	void end_modal(int32_t code);
 
 	virtual void start();
 	virtual void end();
@@ -86,10 +86,10 @@ struct Panel : public Object {
 	void set_pos(const Point);
 	virtual void move_inside_parent();
 
-	inline int get_x() const {return _x;}
-	inline int get_y() const {return _y;}
-	inline int get_w() const {return _w;}
-	inline int get_h() const {return _h;}
+	inline int32_t get_x() const {return _x;}
+	inline int32_t get_y() const {return _y;}
+	inline int32_t get_w() const {return _w;}
+	inline int32_t get_h() const {return _h;}
 
 	virtual bool is_snap_target() const {return false;}
 	uint16_t get_border_snap_distance() const {return _border_snap_distance;}
@@ -109,8 +109,8 @@ struct Panel : public Object {
 	inline uint32_t get_tborder() const {return _tborder;}
 	inline uint32_t get_bborder() const {return _bborder;}
 
-	inline int get_inner_w() const {return _w-(_lborder+_rborder);}
-	inline int get_inner_h() const {return _h-(_tborder+_bborder);}
+	inline int32_t get_inner_w() const {return _w-(_lborder+_rborder);}
+	inline int32_t get_inner_h() const {return _h-(_tborder+_bborder);}
 
 	panellist_cit get_first_child  () const {return m_children.begin();}
 	panellist_cit get_last_child  () const {return m_children.end();}
@@ -124,8 +124,8 @@ struct Panel : public Object {
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_border(RenderTarget* dst);
 	virtual void draw_overlay(RenderTarget & dst);
-	void update(int x, int y, int w, int h);
-	void update_inner(int x, int y, int w, int h);
+	void update(int32_t x, int32_t y, int32_t w, int32_t h);
+	void update_inner(int32_t x, int32_t y, int32_t w, int32_t h);
 	void set_cache(bool enable);
 
 	// Events
@@ -136,11 +136,11 @@ struct Panel : public Object {
 	void center_mouse();
 
 	virtual void handle_mousein(bool inside);
-	virtual bool handle_mousepress  (const Uint8 btn, int x, int y);
-	virtual bool handle_mouserelease(const Uint8 btn, int x, int y);
+	virtual bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove
-		(const Uint8 state, int x, int y, int xdiff, int ydiff);
-	virtual bool handle_key(bool down, int code, char c);
+		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	virtual bool handle_key(bool down, int32_t code, char c);
 
 	void set_handle_mouse(bool yes);
 	inline bool get_handle_mouse() const {return (_flags & pf_handle_mouse) ? true : false;}
@@ -168,12 +168,12 @@ protected:
 private:
 	void do_draw(RenderTarget* dst);
 
-	Panel * child_at_mouse_cursor(int mouse_x, int mouse_y);
+	Panel * child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y);
 	void do_mousein(bool inside);
-	bool do_mousepress  (const Uint8 btn, int x, int y);
-	bool do_mouserelease(const Uint8 btn, int x, int y);
-	bool do_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
-	bool do_key(bool down, int code, char c);
+	bool do_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool do_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool do_key(bool down, int32_t code, char c);
 
 	Panel *_parent;
 	std::list<Panel *> m_children;
@@ -184,13 +184,13 @@ private:
 	uint32_t _cache;
 	bool _needdraw;
 
-	int _x, _y;
+	int32_t _x, _y;
 	uint32_t _w, _h;
 	uint32_t _lborder, _rborder, _tborder, _bborder;
 	uint8_t _border_snap_distance, _panel_snap_distance;
 
 	bool _running;
-	int _retcode;
+	int32_t _retcode;
 
 	char * _tooltip;
 
@@ -202,12 +202,12 @@ public:
 
 
 private:
-	static Panel *ui_trackmouse(int *x, int *y);
-	static void ui_mousepress  (const Uint8 button, int x, int y);
-	static void ui_mouserelease(const Uint8 button, int x, int y);
+	static Panel *ui_trackmouse(int32_t *x, int32_t *y);
+	static void ui_mousepress  (const Uint8 button, int32_t x, int32_t y);
+	static void ui_mouserelease(const Uint8 button, int32_t x, int32_t y);
 	static void ui_mousemove
-		(const Uint8 state, int x, int y, int xdiff, int ydiff);
-	static void ui_key(bool down, int code, char c);
+		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	static void ui_key(bool down, int32_t code, char c);
 
 	static Panel *_modal;
 	static Panel *_g_mousegrab;

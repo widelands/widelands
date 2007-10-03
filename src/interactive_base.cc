@@ -160,12 +160,12 @@ Interactive_Base::get_yres [static]
 Retrieve in-game resolution from g_options.
 ===============
 */
-int Interactive_Base::get_xres()
+int32_t Interactive_Base::get_xres()
 {
 	return g_options.pull_section("global")->get_int("xres", 640);
 }
 
-int Interactive_Base::get_yres()
+int32_t Interactive_Base::get_yres()
 {
 	return g_options.pull_section("global")->get_int("yres", 480);
 }
@@ -275,17 +275,17 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 }
 
 
-/** Interactive_Base::mainview_move(int x, int y)
+/** Interactive_Base::mainview_move(int32_t x, int32_t y)
  *
  * Signal handler for the main view's warpview updates the mini map's
  * viewpos marker position
  */
-void Interactive_Base::mainview_move(int x, int y)
+void Interactive_Base::mainview_move(int32_t x, int32_t y)
 {
 	if (m_minimap.window) {
 		const Map & map = egbase().map();
-		const int maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
-		const int maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
+		const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
+		const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
 
 		x += get_w() >> 1;
       if (x >= maxx) x -= maxx;
@@ -306,7 +306,7 @@ Called whenever the player clicks on a location on the minimap.
 Warps the main mapview position to the clicked location.
 ===============
 */
-void Interactive_Base::minimap_warp(int x, int y)
+void Interactive_Base::minimap_warp(int32_t x, int32_t y)
 {
 	x -= get_w() >> 1;
 	y -= get_h() >> 1;
@@ -326,8 +326,8 @@ Move the mainview to the given position (in field coordinates)
 */
 void Interactive_Base::move_view_to(const Coords c)
 {
-	int x = c.x * TRIANGLE_WIDTH;
-	int y = c.y * TRIANGLE_HEIGHT;
+	int32_t x = c.x * TRIANGLE_WIDTH;
+	int32_t y = c.y * TRIANGLE_HEIGHT;
 
 	if (m_minimap.window) m_mm->set_view_pos(x, y);
 
@@ -437,7 +437,7 @@ Interactive_Base::start_build_road
 Begin building a road
 ===============
 */
-void Interactive_Base::start_build_road(Coords _start, int player)
+void Interactive_Base::start_build_road(Coords _start, int32_t player)
 {
 	// create an empty path
 	assert(not m_buildroad);
@@ -524,7 +524,7 @@ bool Interactive_Base::append_build_road(Coords field)
 
 	Map & map = egbase().map();
 	const Player & player = *egbase().get_player(m_road_build_player);
-	int idx = m_buildroad->get_index(field);
+	int32_t idx = m_buildroad->get_index(field);
 
 	if (idx >= 0) {
 		roadb_remove_overlay();
@@ -633,7 +633,7 @@ void Interactive_Base::roadb_add_overlay()
 			dir = get_reverse_dir(dir);
 		}
 
-		int shift = 2*(dir - Map_Object::WALK_E);
+		int32_t shift = 2*(dir - Map_Object::WALK_E);
 
 		uint8_t set_to = overlay_manager.get_road_overlay(c);
       set_to|=  Road_Normal << shift;
@@ -645,9 +645,9 @@ void Interactive_Base::roadb_add_overlay()
 
 	assert(not m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
-	for (int dir = 1; dir <= 6; dir++) {
+	for (int32_t dir = 1; dir <= 6; dir++) {
 		FCoords neighb;
-		int caps;
+		int32_t caps;
 
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(m_road_build_player).get_buildcaps(neighb);
@@ -669,8 +669,8 @@ void Interactive_Base::roadb_add_overlay()
 		if (m_buildroad->get_index(neighb) >= 0)
 			continue; // the road can't cross itself
 
-		int slope = abs(endpos.field->get_height() - neighb.field->get_height());
-		int icon;
+		int32_t slope = abs(endpos.field->get_height() - neighb.field->get_height());
+		int32_t icon;
 
 		if (slope < 2)
 			icon = 1;

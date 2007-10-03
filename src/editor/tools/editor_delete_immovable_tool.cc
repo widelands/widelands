@@ -32,7 +32,7 @@ Editor_Delete_Immovable_Tool::handle_click_impl()
 deletes the immovable at the given location
 ===========
 */
-int Editor_Delete_Immovable_Tool::handle_click_impl
+int32_t Editor_Delete_Immovable_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	MapRegion<Area<FCoords> > mr

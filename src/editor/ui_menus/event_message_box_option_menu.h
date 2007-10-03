@@ -45,8 +45,8 @@ struct Event_Message_Box_Option_Menu : public UI::Window {
       Event_Message_Box_Option_Menu(Editor_Interactive*, Event_Message_Box*);
       ~Event_Message_Box_Option_Menu();
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       static const uint32_t MAX_BUTTONS=4;
@@ -58,14 +58,14 @@ private:
 	void clicked_trigger_sel_decrease      ();
 	void clicked_trigger_sel_increase      ();
 	void ls_selected    (uint32_t);
-      void edit_box_edited(int);
+      void edit_box_edited(int32_t);
 
       Event_Message_Box* m_event;
       Editor_Interactive* m_parent;
 
 	struct Button_Descr {
          std::string name;
-         int trigger;
+         int32_t trigger;
 	} m_buttons[MAX_BUTTONS];
 
       UI::Checkbox* m_is_modal;
@@ -80,7 +80,7 @@ private:
       UI::Textarea* m_current_trigger_ta;
 	UI::Listselect<void *> * m_buttons_ls;
 
-      std::vector<int> m_null_triggers;
+      std::vector<int32_t> m_null_triggers;
 };
 
 #endif

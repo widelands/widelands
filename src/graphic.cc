@@ -61,14 +61,14 @@ SDL_Surface* LoadImage(const char * const filename)
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic(int w, int h, int bpp, bool fullscreen)
+Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 {
 	m_nr_update_rects = 0;
 	m_update_fullscreen = false;
 	m_roadtextures = 0;
 
 	// Set video mode using SDL
-	int flags = SDL_SWSURFACE;
+	int32_t flags = SDL_SWSURFACE;
 
 	if (fullscreen)
 		flags |= SDL_FULLSCREEN;
@@ -104,7 +104,7 @@ Graphic::~Graphic()
 /**
  * Return the screen x resolution
 */
-int Graphic::get_xres()
+int32_t Graphic::get_xres()
 {
 	return m_screen.get_w();
 }
@@ -112,7 +112,7 @@ int Graphic::get_xres()
 /**
  * Return the screen x resolution
 */
-int Graphic::get_yres()
+int32_t Graphic::get_yres()
 {
 	return m_screen.get_h();
 }
@@ -147,7 +147,7 @@ void Graphic::update_fullscreen()
 /**
  * Mark a rectangle for refreshing
 */
-void Graphic::update_rectangle(int x, int y, int w, int h)
+void Graphic::update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h)
 {
 	if (m_nr_update_rects >= MAX_RECTS) {
 		m_update_fullscreen = true;
@@ -191,7 +191,7 @@ void Graphic::refresh(bool force)
  * If mod is 0, all pictures are flushed.
  * \todo FIXME: this seems to be wrong - sigra
 */
-void Graphic::flush(int mod)
+void Graphic::flush(int32_t mod)
 {
 	uint32_t i;
 
@@ -256,7 +256,7 @@ void Graphic::flush(int mod)
  *
  * \return 0 (a null-picture) if the picture cannot be loaded.
 */
-uint32_t Graphic::get_picture(int mod, const char* fname)
+uint32_t Graphic::get_picture(int32_t mod, const char* fname)
 {
 	std::vector<Picture>::size_type id;
 
@@ -305,7 +305,7 @@ uint32_t Graphic::get_picture(int mod, const char* fname)
 }
 
 uint32_t Graphic::get_picture
-(const int mod, Surface & surf, const char * const fname)
+(const int32_t mod, Surface & surf, const char * const fname)
 {
 	const std::vector<Picture>::size_type id = find_free_picture();
 	Picture & pic = m_pictures[id];
@@ -502,7 +502,7 @@ void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
  * A RenderTarget for the surface can be obtained using get_surface_renderer().
  * \note Surfaces do not belong to a module and must be freed explicitly.
 */
-uint32_t Graphic::create_surface(int w, int h)
+uint32_t Graphic::create_surface(int32_t w, int32_t h)
 {
 	const SDL_PixelFormat & format = m_screen.format();
 	SDL_Surface & surf = *SDL_CreateRGBSurface
@@ -735,7 +735,7 @@ Texture* Graphic::get_maptexture_data(uint32_t id)
 /**
  * \return The road textures
 */
-Surface* Graphic::get_road_texture(int roadtex)
+Surface* Graphic::get_road_texture(int32_t roadtex)
 {
 	if (not m_roadtextures) {
 		// Load the road textures

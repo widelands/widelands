@@ -28,7 +28,7 @@
 #include "profile.h"
 #include "wexception.h"
 
-static const int EVENT_VERSION = 2;
+static const int32_t EVENT_VERSION = 2;
 
 /*
  * Init and cleanup
@@ -50,7 +50,7 @@ void Event_Move_View::reinitialize(Game *) {}
  * File Read, File Write
  */
 void Event_Move_View::Read(Section * s, Editor_Game_Base *) {
-	const int version = s->get_safe_int("version");
+	const int32_t version = s->get_safe_int("version");
 
 	if (1 <= version and version <= EVENT_VERSION) {
 		m_pt =

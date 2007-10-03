@@ -25,7 +25,7 @@
 #include "field.h"
 #include "editorinteractive.h"
 
-int Editor_Set_Height_Tool::handle_click_impl
+int32_t Editor_Set_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	return map.set_height

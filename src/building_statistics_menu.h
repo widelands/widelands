@@ -54,13 +54,13 @@ private:
       uint32_t                m_lastupdate;
       uint32_t                m_end_of_table_y;
 	UI::IDButton<Building_Statistics_Menu, Jump_Targets> * m_btn[6];
-      int                 m_last_building_index;
+      int32_t                 m_last_building_index;
 
 	void clicked_help();
 	void clicked_jump(Jump_Targets);
 	void table_changed(uint32_t);
       void update();
-      int validate_pointer(int*, int);
+      int32_t validate_pointer(int32_t*, int32_t);
 };
 
 #endif

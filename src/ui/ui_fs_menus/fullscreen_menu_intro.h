@@ -31,9 +31,9 @@ struct Fullscreen_Menu_Intro : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Intro();
 
 protected:
-	virtual bool handle_mousepress  (const Uint8 btn, int x, int y);
-	virtual bool handle_mouserelease(const Uint8 btn, int x, int y);
-	virtual bool handle_key(bool down, int code, char c);
+	virtual bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_key(bool down, int32_t code, char c);
 };
 
 #endif // __S__INTRO_H

@@ -51,22 +51,22 @@ struct Resource_Descr {
 	__attribute__ ((deprecated)) const char * get_descrname() const throw () {return m_descrname.c_str();}
 
 	bool is_detectable() const throw () {return m_is_detectable;}
-	int get_max_amount() const throw () {return m_max_amount;}
+	int32_t get_max_amount() const throw () {return m_max_amount;}
 
 	const std::string & get_editor_pic(const uint32_t amount) const;
 
 private:
 	struct Indicator {
 		std::string bobname;
-		int         upperlimit;
+		int32_t         upperlimit;
 	};
 	struct Editor_Pic {
       std::string    picname;
-      int            upperlimit;
+      int32_t            upperlimit;
 	};
 
    bool                    m_is_detectable;
-   int                     m_max_amount;
+   int32_t                     m_max_amount;
 	std::string             m_name;
 	std::string             m_descrname;
 	std::vector<Editor_Pic> m_editor_pics;
@@ -86,22 +86,22 @@ struct Terrain_Descr {
 	uint8_t        get_is     () const throw () {return m_is;}
 	const std::string & name() const throw () {return m_name;}
 	__attribute__ ((deprecated)) const char * get_name   () const throw () {return m_name.c_str();}
-	int resource_value(const Resource_Descr::Index resource) const throw () {
+	int32_t resource_value(const Resource_Descr::Index resource) const throw () {
 		return
 			resource == get_default_resources() or is_resource_valid(resource) ?
 			(get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
 	}
 
-	bool is_resource_valid(const int res) const throw () {
-         int i=0;
+	bool is_resource_valid(const int32_t res) const throw () {
+         int32_t i=0;
          for (i=0; i<m_nr_valid_resources; i++)
             if (m_valid_resources[i]==res) return true;
          return false;
 		}
-	char get_default_resources() const
+	int8_t get_default_resources() const
 		throw ()
 	{return m_default_resources;}
-	int get_default_resources_amount() const throw () {return m_default_amount;}
+	int32_t get_default_resources_amount() const throw () {return m_default_amount;}
 
 private:
 	const std::string m_name;
@@ -111,8 +111,8 @@ private:
 
       uint8_t*   m_valid_resources;
       uint8_t    m_nr_valid_resources;
-      char     m_default_resources;
-      int      m_default_amount;
+      int8_t     m_default_resources;
+      int32_t      m_default_amount;
 	uint32_t    m_texture; //  renderer's texture
 };
 
@@ -150,19 +150,19 @@ struct World {
 	const Terrain_Descr & get_ter(const Terrain_Descr::Index i) const
 	{assert(i < ters.get_nitems()); return *ters.get(i);}
 	const Terrain_Descr * get_ter(const char * const name) const
-	{const int i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
-      inline int get_nr_terrains() const {return ters.get_nitems();}
-      inline int get_bob(const char* l) {return bobs.get_index(l);}
+	{const int32_t i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
+      inline int32_t get_nr_terrains() const {return ters.get_nitems();}
+      inline int32_t get_bob(const char* l) {return bobs.get_index(l);}
       inline Bob::Descr* get_bob_descr(uint16_t index) const {return bobs.get(index);}
-      inline int get_nr_bobs() const {return bobs.get_nitems();}
-      inline int get_immovable_index(const char* l)const {return immovables.get_index(l);}
-      inline int get_nr_immovables() const {return immovables.get_nitems();}
-		inline Immovable_Descr* get_immovable_descr(int index) const {return immovables.get(index);}
+      inline int32_t get_nr_bobs() const {return bobs.get_nitems();}
+      inline int32_t get_immovable_index(const char* l)const {return immovables.get_index(l);}
+      inline int32_t get_nr_immovables() const {return immovables.get_nitems();}
+		inline Immovable_Descr* get_immovable_descr(int32_t index) const {return immovables.get(index);}
 
-	int get_resource(const char * const name) const {return m_resources.get_index(name);}
+	int32_t get_resource(const char * const name) const {return m_resources.get_index(name);}
 	Resource_Descr * get_resource(const Resource_Descr::Index res) const throw ()
 		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
-      inline int get_nr_resources() const {return m_resources.get_nitems();}
+      inline int32_t get_nr_resources() const {return m_resources.get_nitems();}
 
 private:
 	std::string m_basedir; //  base directory, where the main conf file resides

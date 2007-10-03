@@ -34,11 +34,11 @@ Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, T
 UI::Window(parent, 0, 0, 164, 100, _("Null Trigger Options").c_str()),
 m_parent(parent)
 {
-   const int offsx=5;
-   const int offsy=25;
-   const int spacing=5;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=5;
+   const int32_t offsy=25;
+   const int32_t spacing=5;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    m_trigger=trigger;
 
@@ -58,7 +58,7 @@ m_parent(parent)
 
    posx=(get_inner_w()/2)+spacing;
 
-	new UI::IDButton<Trigger_Null_Option_Menu, int>
+	new UI::IDButton<Trigger_Null_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
 		 1,
@@ -83,9 +83,9 @@ Trigger_Null_Option_Menu::~Trigger_Null_Option_Menu() {
  * we simulate a cancel click
  * We are not draggable.
 */
-bool Trigger_Null_Option_Menu::handle_mousepress(const Uint8 btn, int, int)
+bool Trigger_Null_Option_Menu::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int, int)
+bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 /*

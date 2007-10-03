@@ -38,13 +38,13 @@ struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 
       const char* get_dirname() {return m_dirname.c_str();}
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       std::string m_dirname;
       UI::Edit_Box* m_edit;
-      UI::IDButton<Main_Menu_Save_Map_Make_Directory, int> * m_ok_button;
+      UI::IDButton<Main_Menu_Save_Map_Make_Directory, int32_t> * m_ok_button;
       void edit_changed();
 };
 

@@ -37,7 +37,7 @@
  * and always if there is a nonrecoverable error and you have already dealt with
  * it.
  *
- * \todo The idea of writing enums into a file is bad: enums are int and int varies
+ * \todo The idea of writing enums into a file is bad: enums are int32_t and int32_t varies
  * in size (typ. 32/64bit). Our own codes only need 8bit, so we force IO down to
  * this value. The same happens with keyboard events at 32bits. Cutting off bits
  * is not a good solution, but in this case it'll do until a better way comes along.
@@ -91,9 +91,9 @@ protected:
 	 * Returns the position in the playback file
 	 * \return byte offset into the playback file, used with file reading
 	 */
-	const long get_playback_offset() {return m_playbackstream.tellg();}
+	const int32_t get_playback_offset() {return m_playbackstream.tellg();}
 
-	void write(char  v);
+	void write(int8_t  v);
 	void write(uint8_t v);
 	void write(Sint16 v);
 	void write(Uint16 v);
@@ -102,7 +102,7 @@ protected:
 	void write(SDLKey v);
 	void write(SDLMod v);
 
-	void read(char  &v);
+	void read(int8_t  &v);
 	void read(uint8_t &v);
 	void read(Sint16 &v);
 	void read(Uint16 &v);

@@ -39,11 +39,11 @@ UI::Window(parent, 0, 0, 400, 240, _("New Event").c_str()),
 m_parent(parent)
 {
 
-   const int offsx=5;
-   const int offsy=25;
-   const int spacing=5;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=5;
+   const int32_t offsy=25;
+   const int32_t spacing=5;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    // Event List
    new UI::Textarea(this, spacing, offsy, _("Available Events: "), Align_Left);
@@ -76,7 +76,7 @@ m_parent(parent)
 
    posx=(get_inner_w()/2)+spacing;
 
-	new UI::IDButton<Editor_Event_Menu_New_Event, int>
+	new UI::IDButton<Editor_Event_Menu_New_Event, int32_t>
 		(this,
 		 posx, posy, 80, 20,
 		 1,
@@ -101,9 +101,9 @@ Editor_Event_Menu_New_Event::~Editor_Event_Menu_New_Event() {
  * We are not draggable.
  */
 bool Editor_Event_Menu_New_Event::handle_mousepress
-(const Uint8 btn, int, int)
+(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Editor_Event_Menu_New_Event::handle_mouserelease(const Uint8, int, int)
+bool Editor_Event_Menu_New_Event::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 /*

@@ -26,12 +26,12 @@
 #include <cassert>
 
 /**
- * Write a signed char value to the recording file.
+ * Write a signed 8bit value to the recording file.
  * \param v The character to be written
  */
-void Journal::write(char v)
+void Journal::write(int8_t v)
 {
-	m_recordstream.write(&v, sizeof(v));
+	m_recordstream.write((char*)&v, sizeof(v));
 }
 
 /// \overload
@@ -69,7 +69,7 @@ void Journal::write(Uint32 v)
 
 /**
  * \overload
- * SDLKey is an enum, and enums are implemented as int. Consequently, SDLKey
+ * SDLKey is an enum, and enums are implemented as int32_t. Consequently, SDLKey
  * changes size on 64bit machines :-(
  * So we force it to be 32bit, discarding the higher 32 bits (hopefully noone
  * will have so man keys)
@@ -104,9 +104,9 @@ void Journal::write(SDLMod v)
  * Write a signed char value to the recording file.
  * \param v Reference where the read character will be stored.
  */
-void Journal::read(char &v)
+void Journal::read(int8_t &v)
 {
-	m_playbackstream.read(static_cast<char *>(&v), sizeof(char));
+	m_playbackstream.read((char*)&v, sizeof(uint8_t));
 }
 
 /**
@@ -160,7 +160,7 @@ void Journal::read(Uint32 &v)
 void Journal::read(SDLKey &v)
 {
 	//Look at read(SDLKey v) before changing code here!
-	//Additional reminder: SDLKey is an enum which are signed int !
+	//Additional reminder: SDLKey is an enum which are signed int32_t !
 
 	Uint32 vv;
 
@@ -175,7 +175,7 @@ void Journal::read(SDLKey &v)
 void Journal::read(SDLMod &v)
 {
 	//Look at read(SDLMod v) before changing code here!
-	//Additional reminder: SDLKey is an enum which are signed int !
+	//Additional reminder: SDLKey is an enum which are signed int32_t !
 
 	Uint32 vv;
 

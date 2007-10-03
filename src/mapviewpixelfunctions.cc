@@ -29,7 +29,7 @@
  * Calculate brightness based upon the slopes.
  */
 float MapviewPixelFunctions::calc_brightness
-(const int l, const int r, const int tl, const int tr, const int bl, const int br)
+(const int32_t l, const int32_t r, const int32_t tl, const int32_t tr, const int32_t bl, const int32_t br)
 {
 	static Vector sun_vect = Vector(V3, -V3, -V3); //  |sun_vect| = 1
 
@@ -118,7 +118,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 	//  between them goes in the direction of the '/' character. When slash is
 	//  false, the edge goes in the direction of the '\' character.
 	uint16_t screen_y_base = row_number * TRIANGLE_HEIGHT;
-	int upper_screen_dy, lower_screen_dy =
+	int32_t upper_screen_dy, lower_screen_dy =
 		screen_y_base
 		-
 		map.get_field(slash ? right_col : left_col, row_number).get_height()
@@ -169,21 +169,21 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 
 	//  Find out which of the 4 possible triangles (x, y) is in.
 	if (slash) {
-		int Y_a =
+		int32_t Y_a =
 			screen_y_base - TRIANGLE_HEIGHT
 			-
 			map.get_field((right_col == 0 ? mapwidth : right_col) - 1, row_number)
 			.get_height()
 			*
 			HEIGHT_FACTOR;
-		int Y_b =
+		int32_t Y_b =
 			screen_y_base - TRIANGLE_HEIGHT
 			-
 			map.get_field(right_col, row_number).get_height()
 			*
 			HEIGHT_FACTOR;
-		int ldy = Y_b - Y_a, pdy = Y_b - y;
-		int pdx = (col_number + 1) * (TRIANGLE_WIDTH / 2) - x;
+		int32_t ldy = Y_b - Y_a, pdy = Y_b - y;
+		int32_t pdx = (col_number + 1) * (TRIANGLE_WIDTH / 2) - x;
 		assert(pdx > 0);
 		if (pdy * TRIANGLE_WIDTH > ldy * pdx) {
 			//  (x, y) is in the upper triangle.
@@ -228,21 +228,21 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 			}
 		}
 	} else {
-		int Y_a =
+		int32_t Y_a =
 			screen_y_base - TRIANGLE_HEIGHT
 			-
 			map.get_field(left_col, row_number).get_height()
 			*
 			HEIGHT_FACTOR;
-		int Y_b =
+		int32_t Y_b =
 			screen_y_base - TRIANGLE_HEIGHT
 			-
 			map.get_field(left_col + 1 == mapwidth ? 0 : left_col + 1, row_number)
 			.get_height()
 			*
 			HEIGHT_FACTOR;
-		int ldy = Y_b - Y_a, pdy = Y_b - y;
-		int pdx = (col_number + 2) * (TRIANGLE_WIDTH / 2) - x;
+		int32_t ldy = Y_b - Y_a, pdy = Y_b - y;
+		int32_t pdx = (col_number + 2) * (TRIANGLE_WIDTH / 2) - x;
 		assert(pdx > 0);
 		if (pdy * TRIANGLE_WIDTH > ldy * pdx) {
 			//  (x, y) is in the upper triangle.
@@ -301,12 +301,12 @@ Normalize pixel points of the map.
 */
 void MapviewPixelFunctions::normalize_pix(const Map & map, Point & p) {
 	{
-		const int map_end_screen_x = get_map_end_screen_x(map);
+		const int32_t map_end_screen_x = get_map_end_screen_x(map);
 		while (p.x >= map_end_screen_x) p.x -= map_end_screen_x;
 		while (p.x < 0)                 p.x += map_end_screen_x;
 	}
 	{
-		const int map_end_screen_y = get_map_end_screen_y(map);
+		const int32_t map_end_screen_y = get_map_end_screen_y(map);
 		while (p.y >= map_end_screen_y) p.y -= map_end_screen_y;
 		while (p.y < 0)                 p.y += map_end_screen_y;
 	}

@@ -62,8 +62,8 @@ private:
 	UI::Textarea                                title;
 	UI::Button<Fullscreen_Menu_NetSetup>        joingame;
 	UI::Button<Fullscreen_Menu_NetSetup>        hostgame;
-	//UI::IDButton<Fullscreen_Menu_NetSetup, int> playinternet;
-	UI::IDButton<Fullscreen_Menu_NetSetup, int> back;
+	//UI::IDButton<Fullscreen_Menu_NetSetup, int32_t> playinternet;
+	UI::IDButton<Fullscreen_Menu_NetSetup, int32_t> back;
 	UI::Edit_Box                                hostname;
 	UI::Edit_Box                                playername;
 	UI::Table<const LAN_Open_Game * const>      opengames;
@@ -73,7 +73,7 @@ private:
 
 	void game_selected (uint32_t);
 
-		static void discovery_callback (int, const LAN_Open_Game*, void*);
+		static void discovery_callback (int32_t, const LAN_Open_Game*, void*);
 
 		void game_opened (const LAN_Open_Game*);
 		void game_closed (const LAN_Open_Game*);

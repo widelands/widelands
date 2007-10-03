@@ -76,7 +76,7 @@ throw
 	}
 
    // First packet version
-   int packet_version=fr.Unsigned16();
+   int32_t packet_version=fr.Unsigned16();
 
    if (packet_version==CURRENT_PACKET_VERSION) {
       while (1) {
@@ -170,7 +170,7 @@ throw
 
             s->transfer=0;
 
-            int obj=fr.Unsigned32();
+            int32_t obj=fr.Unsigned32();
             if (obj) {
                assert(ol->is_object_known(obj));
                s->objvar1=ol->get_object_by_file_index(obj);
@@ -271,7 +271,7 @@ throw
 }
 
 void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, Critter_Bob*) {
-   int version=fr->Unsigned16();
+   int32_t version=fr->Unsigned16();
 
    if (version==CRITTER_BOB_PACKET_VERSION) {
       // No data for critter bob currently
@@ -280,7 +280,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Ga
 }
 
 void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol, Worker* worker) {
-   int version=fr->Unsigned16();
+   int32_t version=fr->Unsigned16();
 
    if (version==WORKER_BOB_PACKET_VERSION) {
 		if (Soldier * const soldier = dynamic_cast<Soldier *>(worker)) {

@@ -113,7 +113,7 @@ m_parent(&parent)
 	iterate_players_existing_const(p, nr_players, game, player) ++plr_in_game;
 
    posx = spacing;
-   int button_size = (get_inner_w()- (spacing* (plr_in_game+1))) / plr_in_game;
+   int32_t button_size = (get_inner_w()- (spacing* (plr_in_game+1))) / plr_in_game;
 	iterate_players_existing_const(p, nr_players, game, player) {
 		char buffer[36];
 		snprintf(buffer, sizeof(buffer), "pics/genstats_enable_plr_%02u.png", p);
@@ -285,7 +285,7 @@ void General_Statistics_Menu::clicked_help() {
 /*
  * Cb has been changed to this state
  */
-void General_Statistics_Menu::cb_changed_to(int id, bool what) {
+void General_Statistics_Menu::cb_changed_to(int32_t id, bool what) {
    // This represents our player number
    m_plot->show_plot((id-1)* NR_DIFFERENT_DATASETS + m_selected_information, what);
 }
@@ -293,7 +293,7 @@ void General_Statistics_Menu::cb_changed_to(int id, bool what) {
 /*
  * The radiogroup has changed
  */
-void General_Statistics_Menu::radiogroup_changed(int id) {
+void General_Statistics_Menu::radiogroup_changed(int32_t id) {
    for (uint32_t i = 0; i < m_parent->get_game()->get_general_statistics().size(); i++) {
       if (!m_cbs[i]) continue;
 

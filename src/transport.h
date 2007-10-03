@@ -56,7 +56,7 @@ class FileWrite;
 struct Neighbour {
 	Flag * flag;
 	Road * road;
-	int    cost;
+	int32_t    cost;
 };
 typedef std::vector<Neighbour> Neighbour_list;
 
@@ -82,7 +82,7 @@ public:
 		(const Item_Ware_Descr::Index, const Item_Ware_Descr * const);
 	~WareInstance();
 
-	virtual int get_type() const throw ();
+	virtual int32_t get_type() const throw ();
 
 	Map_Object* get_location(Editor_Game_Base* g) {return m_location.get(g);}
 	Economy* get_economy() const throw () {return m_economy;}
@@ -159,8 +159,8 @@ public:
 
 	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords);
 
-	virtual int  get_type    () const throw ();
-	virtual int  get_size    () const throw ();
+	virtual int32_t  get_type    () const throw ();
+	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 
 	virtual Flag *get_base_flag();
@@ -173,9 +173,9 @@ public:
 	void attach_building(Editor_Game_Base *g, Building *building);
 	void detach_building(Editor_Game_Base *g);
 
-	inline Road *get_road(int dir) {return m_roads[dir-1];}
-	void attach_road(int dir, Road *road);
-	void detach_road(int dir);
+	inline Road *get_road(int32_t dir) {return m_roads[dir-1];}
+	void attach_road(int32_t dir, Road *road);
+	void detach_road(int32_t dir);
 
 	void get_neighbours(Neighbour_list *neighbours);
 	Road *get_road(Flag *flag);
@@ -192,7 +192,7 @@ public:
 
 	void remove_item(Editor_Game_Base* g, WareInstance* item);
 
-	void add_flag_job(Game* g, int workerware, std::string programname);
+	void add_flag_job(Game* g, int32_t workerware, std::string programname);
 
    void conquered_by (Player* who) {assert(who); set_owner(who);}
 protected:
@@ -205,19 +205,19 @@ protected:
 
 	void wake_up_capacity_queue(Game* g);
 
-	static void flag_job_request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
+	static void flag_job_request_callback(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
 
 private:
 	Coords                  m_position;
 	uint32_t                    m_anim;
-	int                     m_animstart;
+	int32_t                     m_animstart;
 
 	Building * m_building; //  attached building (replaces road WALK_NW)
 	Road                  * m_roads[6];      //  Map_Object::WALK_xx - 1 as index
-	int                     m_items_pending[6];
+	int32_t                     m_items_pending[6];
 
-	int                     m_item_capacity; //  size of m_items array
-	int m_item_filled; //  number of items currently on the flag
+	int32_t                     m_item_capacity; //  size of m_items array
+	int32_t m_item_filled; //  number of items currently on the flag
 	PendingItem           * m_items;         //  items currently on the flag
 
 	//  call_carrier() will always call a carrier when the destination is the
@@ -230,12 +230,12 @@ private:
 
 	// The following are only used during pathfinding
 	uint32_t                    mpf_cycle;
-	int                     mpf_heapindex;
-	int                     mpf_realcost; //  real cost of getting to this flag
+	int32_t                     mpf_heapindex;
+	int32_t                     mpf_realcost; //  real cost of getting to this flag
 	Flag                  * mpf_backlink; //  flag where we came from
-	int                     mpf_estimate; //  estimate of cost to destination
+	int32_t                     mpf_estimate; //  estimate of cost to destination
 
-	inline int cost() const {return mpf_realcost+mpf_estimate;}
+	inline int32_t cost() const {return mpf_realcost+mpf_estimate;}
 };
 
 /**
@@ -265,21 +265,21 @@ struct Road : public PlayerImmovable {
 	Road();
 	virtual ~Road();
 
-	static Road* create(Editor_Game_Base *g, int type, Flag* start, Flag* end, const Path &path);
+	static Road* create(Editor_Game_Base *g, int32_t type, Flag* start, Flag* end, const Path &path);
 
 	inline Flag* get_flag(FlagId flag) const {return m_flags[flag];}
 
-	virtual int  get_type    () const throw ();
-	virtual int  get_size    () const throw ();
+	virtual int32_t  get_type    () const throw ();
+	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 
 	virtual Flag* get_base_flag();
 
 	virtual void set_economy(Economy *e);
 
-	int get_cost(FlagId fromflag);
+	int32_t get_cost(FlagId fromflag);
 	inline const Path &get_path() const {return m_path;}
-	inline int get_idle_index() const {return m_idle_index;}
+	inline int32_t get_idle_index() const {return m_idle_index;}
 
 	void presplit(Editor_Game_Base *g, Coords split);
 	void postsplit(Editor_Game_Base *g, Flag *flag);
@@ -299,21 +299,21 @@ protected:
 	virtual void cleanup(Editor_Game_Base *g);
 
 	void request_carrier(Game* g);
-	static void request_carrier_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
+	static void request_carrier_callback(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 private:
-	int        m_type;       //  use Field::Road_XXX
+	int32_t        m_type;       //  use Field::Road_XXX
 	Flag     * m_flags  [2]; //  start and end flag
-	int        m_flagidx[2]; //  index of this road in the flag's road array
+	int32_t        m_flagidx[2]; //  index of this road in the flag's road array
 
 	//  cost for walking this road (0 = from start to end, 1 = from end to start)
-	int        m_cost   [2];
+	int32_t        m_cost   [2];
 
 	Path       m_path;       //  path goes from start to end
-	int        m_idle_index; //  index into path where carriers should idle
+	int32_t        m_idle_index; //  index into path where carriers should idle
 
 	//  total # of carriers we want (currently limited to 0 or 1)
 	uint32_t       m_desire_carriers;
@@ -335,13 +335,13 @@ struct Route {
 
 	void clear();
 
-	inline int get_totalcost() const {return m_totalcost;}
-	inline int get_nrsteps() const {return m_route.size()-1;}
+	inline int32_t get_totalcost() const {return m_totalcost;}
+	inline int32_t get_nrsteps() const {return m_route.size()-1;}
 	Flag * get_flag
 		(Editor_Game_Base * const, const std::vector<Flag *>::size_type) const;
 
-	void starttrim(int count);
-	void truncate(int count);
+	void starttrim(int32_t count);
+	void truncate(int32_t count);
 
 	struct LoadData {
 		std::vector<uint32_t> flags;
@@ -352,7 +352,7 @@ struct Route {
 	void save(FileWrite& fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos);
 
 private:
-	int                     m_totalcost;
+	int32_t                     m_totalcost;
 	std::vector<Object_Ptr> m_route; //  includes start and end flags
 };
 
@@ -404,16 +404,16 @@ private:
 
 
 struct MinMax {
-	int min;
-	int max;
+	int32_t min;
+	int32_t max;
 };
 
 struct Requeriments {
 	Requeriments (); //  init to allow all
 
-	void set (tAttribute at, int min, int max);
+	void set (tAttribute at, int32_t min, int32_t max);
 
-	bool check (int hp, int attack, int defense, int evade);
+	bool check (int32_t hp, int32_t attack, int32_t defense, int32_t evade);
 
 	// For Save/Load Games
 	void Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol);
@@ -443,16 +443,16 @@ private:
  */
 struct Supply : public Trackable {
 	virtual PlayerImmovable* get_position(Game* g) = 0;
-	virtual int get_amount(const int ware) const = 0;
+	virtual int32_t get_amount(const int32_t ware) const = 0;
 	virtual bool is_active() const throw () = 0;
 
-	virtual WareInstance* launch_item(Game* g, int ware) = 0;
-	virtual Worker* launch_worker(Game* g, int ware) = 0;
+	virtual WareInstance* launch_item(Game* g, int32_t ware) = 0;
+	virtual Worker* launch_worker(Game* g, int32_t ware) = 0;
 
 	// This is only for Soldier Requests correct use !
-	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req) = 0;
-	virtual int get_passing_requeriments(Game* g, int ware, Requeriments* r) = 0;
-	virtual void mark_as_used (Game* g, int ware, Requeriments* r) = 0;
+	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req) = 0;
+	virtual int32_t get_passing_requeriments(Game* g, int32_t ware, Requeriments* r) = 0;
+	virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r) = 0;
 
 };
 
@@ -467,8 +467,8 @@ struct SupplyList {
 	void add_supply(Supply* supp);
 	void remove_supply(Supply* supp);
 
-	inline int get_nrsupplies() const {return m_supplies.size();}
-	inline Supply* get_supply(int idx) const {return m_supplies[idx];}
+	inline int32_t get_nrsupplies() const {return m_supplies.size();}
+	inline Supply* get_supply(int32_t idx) const {return m_supplies[idx];}
 
 private:
 	std::vector<Supply *> m_supplies;
@@ -490,7 +490,7 @@ struct Request : public Trackable {
 	friend class Economy;
 	friend class RequestList;
 
-	typedef void (*callback_t)(Game*, Request*, int ware, Worker*, void* data);
+	typedef void (*callback_t)(Game*, Request*, int32_t ware, Worker*, void* data);
 
    enum Type {
       WARE = 0,
@@ -498,32 +498,32 @@ struct Request : public Trackable {
 	   SOLDIER = 2
 	};
 
-	Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbdata, Type);
+	Request(PlayerImmovable *target, int32_t index, callback_t cbfn, void* cbdata, Type);
 	~Request();
 
 	PlayerImmovable * get_target() const throw () {return m_target;}
-	int get_index() const {return m_index;}
-   int get_type() const {return m_type;}
+	int32_t get_index() const {return m_index;}
+   int32_t get_type() const {return m_type;}
 	bool is_idle() const {return m_idle;}
-	int get_count() const {return m_count;}
+	int32_t get_count() const {return m_count;}
 	bool is_open() const
-	{return m_idle || m_count > static_cast<int>(m_transfers.size());}
+	{return m_idle || m_count > static_cast<int32_t>(m_transfers.size());}
 	Economy * get_economy() const throw () {return m_economy;}
-	int get_required_time();
-	int get_last_request_time() {return m_last_request_time;}
-	int get_priority(int cost);
+	int32_t get_required_time();
+	int32_t get_last_request_time() {return m_last_request_time;}
+	int32_t get_priority(int32_t cost);
 
 	Flag * get_target_flag();
 
 	void set_economy(Economy* e);
 	void set_idle(bool idle);
-	void set_count(int count);
-	void set_required_time(int time);
-	void set_required_interval(int interval);
+	void set_count(int32_t count);
+	void set_required_time(int32_t time);
+	void set_required_interval(int32_t interval);
 
-	void set_last_request_time(int time) {m_last_request_time = time;}
+	void set_last_request_time(int32_t time) {m_last_request_time = time;}
 
-	void start_transfer(Game *g, Supply* supp, int ware);
+	void start_transfer(Game *g, Supply* supp, int32_t ware);
 
 
    // For savegames
@@ -536,7 +536,7 @@ struct Request : public Trackable {
 	void transfer_fail(Game* g, Transfer* t);
 
 private:
-	int get_base_required_time(Editor_Game_Base* g, int nr);
+	int32_t get_base_required_time(Editor_Game_Base* g, int32_t nr);
 public:
 	void cancel_transfer(uint32_t idx);
 private:
@@ -554,16 +554,16 @@ private:
    Type              m_type;
 	PlayerImmovable * m_target;            //  who requested it?
 	Economy         * m_economy;
-	int               m_index;             //  the index of the ware descr
+	int32_t               m_index;             //  the index of the ware descr
 	bool              m_idle;
-	int               m_count;             //  how many do we need in total
+	int32_t               m_count;             //  how many do we need in total
 
 	callback_t        m_callbackfn;        //  called on request success
 	void            * m_callbackdata;
 
-	int m_required_time; //  when do we need the first ware (can be in the past)
-	int               m_required_interval; //  time between items
-	int m_last_request_time;
+	int32_t m_required_time; //  when do we need the first ware (can be in the past)
+	int32_t               m_required_interval; //  time between items
+	int32_t m_last_request_time;
 
 	TransferList      m_transfers;         //  maximum size is m_count
 
@@ -580,17 +580,17 @@ Note that you must call update() after changing the queue's size or filled
 state using one of the set_*() functions.
 */
 struct WaresQueue {
-	typedef void (callback_t)(Game* g, WaresQueue* wq, int ware, void* data);
+	typedef void (callback_t)(Game* g, WaresQueue* wq, int32_t ware, void* data);
 
 	WaresQueue(PlayerImmovable* bld);
 	~WaresQueue();
 
-	int get_ware() const {return m_ware;}
+	int32_t get_ware() const {return m_ware;}
 	uint32_t get_size            () const throw () {return m_size;}
 	uint32_t get_filled          () const throw () {return m_filled;}
 	uint32_t get_consume_interval() const throw () {return m_consume_interval;}
 
-	void init(const int ware, const uint32_t size);
+	void init(const int32_t ware, const uint32_t size);
 	void cleanup();
 	void update();
 
@@ -610,10 +610,10 @@ struct WaresQueue {
    void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
 private:
-	static void request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
+	static void request_callback(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
 
 	PlayerImmovable * m_owner;
-	int               m_ware; //  ware ID
+	int32_t               m_ware; //  ware ID
 	uint32_t m_size;             // # of items that fit into the queue
 	uint32_t m_filled;           // # of items that are currently in the queue
 	uint32_t m_consume_interval; // time in ms between consumption at full speed
@@ -642,18 +642,18 @@ struct Economy {
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
 
-	bool find_route(Flag *start, Flag *end, Route *route, bool wait, int cost_cutoff = -1);
+	bool find_route(Flag *start, Flag *end, Route *route, bool wait, int32_t cost_cutoff = -1);
 	Warehouse *find_nearest_warehouse(Flag *base, Route *route);
 
-	inline int get_nrflags() const {return m_flags.size();}
+	inline int32_t get_nrflags() const {return m_flags.size();}
 	void add_flag(Flag *flag);
 	void remove_flag(Flag *flag);
 
-	void add_wares(int id, int count = 1);
-	void remove_wares(int id, int count = 1);
+	void add_wares(int32_t id, int32_t count = 1);
+	void remove_wares(int32_t id, int32_t count = 1);
 
-   void add_workers(int id, int count = 1);
-	void remove_workers(int id, int count = 1);
+   void add_workers(int32_t id, int32_t count = 1);
+	void remove_workers(int32_t id, int32_t count = 1);
 
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);
@@ -663,27 +663,27 @@ struct Economy {
 	bool have_request(Request* req);
 	void remove_request(Request* req);
 
-	void add_ware_supply(int ware, Supply* supp);
-	bool have_ware_supply(int ware, Supply* supp);
-	void remove_ware_supply(int ware, Supply* supp);
+	void add_ware_supply(int32_t ware, Supply* supp);
+	bool have_ware_supply(int32_t ware, Supply* supp);
+	void remove_ware_supply(int32_t ware, Supply* supp);
 
-	void add_worker_supply(int worker, Supply* supp);
-	bool have_worker_supply(int worker, Supply* supp);
-	void remove_worker_supply(int worker, Supply* supp);
+	void add_worker_supply(int32_t worker, Supply* supp);
+	bool have_worker_supply(int32_t worker, Supply* supp);
+	void remove_worker_supply(int32_t worker, Supply* supp);
 
 // Soldier stuff
-	void add_soldier_supply(int soldier, Supply* supp);
-	bool have_soldier_supply(int soldier, Supply* supp, Requeriments* r = 0);
-	void remove_soldier_supply(int soldier, Supply* supp);
+	void add_soldier_supply(int32_t soldier, Supply* supp);
+	bool have_soldier_supply(int32_t soldier, Supply* supp, Requeriments* r = 0);
+	void remove_soldier_supply(int32_t soldier, Supply* supp);
 
-   inline bool should_run_balance_check(int gametime) {
+   inline bool should_run_balance_check(int32_t gametime) {
       if (m_request_timer && (gametime == m_request_timer_time)) return true;
       return false;
 	}
 
    // Informations over this economy
-   int stock_ware(int id) {return m_wares.stock(id);}
-   int stock_worker(int id) {return m_workers.stock(id);}
+   int32_t stock_ware(int32_t id) {return m_wares.stock(id);}
+   int32_t stock_worker(int32_t id) {return m_workers.stock(id);}
    const WareList& get_wares() {return m_wares;}
    const WareList& get_workers() {return m_workers;}
 
@@ -698,10 +698,10 @@ private:
 	void do_merge(Economy *e);
 	void do_split(Flag *f);
 
-	void start_request_timer(int delta = 200);
+	void start_request_timer(int32_t delta = 200);
 
-	Supply* find_best_supply(Game* g, Request* req, int* ware, int* pcost, std::vector<SupplyList>*);
-	int  get_ware_substitute(Request* req, int ware);
+	Supply* find_best_supply(Game* g, Request* req, int32_t* ware, int32_t* pcost, std::vector<SupplyList>*);
+	int32_t  get_ware_substitute(Request* req, int32_t ware);
 	void process_requests(Game* g, RSPairStruct* s);
 	void create_requested_workers(Game* g);
 
@@ -723,7 +723,7 @@ private:
 	std::vector<SupplyList>  m_worker_supplies; // supplies by ware id
 
 	bool m_request_timer; //  true if we started the request timer
-	int                      m_request_timer_time;
+	int32_t                      m_request_timer_time;
 
 	uint32_t mpf_cycle;       //  pathfinding cycle, see Flag::mpf_cycle
 };
@@ -731,7 +731,7 @@ private:
 struct Cmd_Call_Economy_Balance : public GameLogicCommand {
       Cmd_Call_Economy_Balance () : GameLogicCommand (0) {} // For load and save
 
-      Cmd_Call_Economy_Balance (int starttime, int player, Economy* economy) :
+      Cmd_Call_Economy_Balance (int32_t starttime, int32_t player, Economy* economy) :
          GameLogicCommand(starttime)
       {
          m_player=player;
@@ -741,7 +741,7 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 
       void execute (Game* g);
 
-      virtual int get_id() {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
+      virtual int32_t get_id() {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
 	virtual void Write
 		(FileWrite             &,
@@ -754,7 +754,7 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 
 private:
       bool     m_force_balance;
-      int      m_player;
+      int32_t      m_player;
       Economy* m_economy;
 };
 

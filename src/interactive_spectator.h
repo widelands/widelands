@@ -43,7 +43,7 @@ public:
 	Game* get_game();
 	Player* get_player() const throw ();
 
-	bool handle_key(bool down, int code, char c);
+	bool handle_key(bool down, int32_t code, char c);
 	void end_of_game();
 
 private:

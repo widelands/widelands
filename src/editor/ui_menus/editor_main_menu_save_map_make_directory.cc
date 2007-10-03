@@ -31,11 +31,11 @@
 Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UI::Panel* parent, const char* dirname) :
 UI::Window(parent, 0, 0, 230, 120, _("Make Directory").c_str())
 {
-   int spacing=5;
-   int offsx=spacing;
-   int offsy=30;
-   int posx=offsx;
-   int posy=offsy;
+   int32_t spacing=5;
+   int32_t offsx=spacing;
+   int32_t offsy=30;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    // Command
    new UI::Textarea(this, spacing, posy, _("Enter Directory Name: "), Align_Left);
@@ -51,7 +51,7 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory").c_str())
    posx=5;
    posy=get_inner_h()-30;
 
-	m_ok_button = new UI::IDButton<Main_Menu_Save_Map_Make_Directory, int>
+	m_ok_button = new UI::IDButton<Main_Menu_Save_Map_Make_Directory, int32_t>
 		(this,
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 0,
@@ -60,7 +60,7 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory").c_str())
 		 std::string(),
 		 m_dirname.size());
 
-	new UI::IDButton<Main_Menu_Save_Map_Make_Directory, int>
+	new UI::IDButton<Main_Menu_Save_Map_Make_Directory, int32_t>
 		(this,
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 1,
@@ -75,10 +75,10 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory").c_str())
  * We are not draggable.
  */
 bool Main_Menu_Save_Map_Make_Directory::handle_mousepress
-(const Uint8 btn, int, int)
+(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
-(const Uint8, int, int)
+(const Uint8, int32_t, int32_t)
 {return false;}
 
 /*

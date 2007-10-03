@@ -74,7 +74,7 @@ const bool RealFSImpl::IsWritable() const
  * cross-platform way of doing this
  */
 // note: the Win32 version may be broken, feel free to fix it
-const int RealFSImpl::FindFiles(std::string path,
+const int32_t RealFSImpl::FindFiles(std::string path,
                                 const std::string pattern,
                                 filenameset_t *results, uint32_t depth)
 #ifdef _WIN32
@@ -82,7 +82,7 @@ const int RealFSImpl::FindFiles(std::string path,
 	std::string buf;
 	struct _finddata_t c_file;
 	long hFile;
-	int count;
+	int32_t count;
 
 	if (path.size())
 		buf = m_directory + '\\' + path + '\\' + pattern;
@@ -107,8 +107,8 @@ const int RealFSImpl::FindFiles(std::string path,
 {
 	std::string buf;
 	glob_t gl;
-	int i, count;
-	int ofs;
+	int32_t i, count;
+	int32_t ofs;
 
 	if (path.size()) {
 		buf = m_directory + '/' + path + '/' + pattern;
@@ -308,7 +308,7 @@ void RealFSImpl::MakeDirectory(const std::string dirname)
 
 	fullname=FS_CanonicalizeName(dirname);
 
-	int retval=0;
+	int32_t retval=0;
 #ifdef WIN32
 	retval=mkdir(fullname.c_str());
 #else
@@ -346,11 +346,11 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		fseek(file, 0, SEEK_END);
 		size_t size;
 		{
-			const long ftell_pos = ftell(file);
+			const int32_t ftell_pos = ftell(file);
 			if (ftell_pos < 0)
 				throw wexception
 					("RealFSImpl::Load: error when loading \"%s\" (\"%s\"): file "
-					 "size calculation yieded negative value %li",
+					 "size calculation yieded negative value %i",
 					 fname.c_str(), fullname.c_str(), ftell_pos);
 			size = ftell_pos;
 		}
@@ -362,7 +362,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 			throw wexception
 				("RealFSImpl::Load: read failed for %s (%s) with size %u",
 				 fname.c_str(), fullname.c_str(), size);
-		((char *)data)[size] = 0;
+		((int8_t *)data)[size] = 0;
 
 		fclose(file);
 		file = 0;
@@ -388,11 +388,11 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
  * Throws an exception if it fails.
  */
 void RealFSImpl::Write(const std::string fname, const void * const data,
-                       const int length)
+                       const int32_t length)
 {
 	std::string fullname;
 	FILE *f;
-	int c;
+	int32_t c;
 
 	fullname=FS_CanonicalizeName(fname);
 

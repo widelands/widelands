@@ -52,9 +52,9 @@ Editor_Tool_Options_Menu
 m_tabpanel(this, 0, 0, 1),
 m_pit     (pit)
 {
-   const int space=5;
-   const int xstart=5;
-   const int ystart=15;
+   const int32_t space=5;
+   const int32_t xstart=5;
+   const int32_t ystart=15;
 	const World & world = parent.egbase().map().world();
 	const Immovable_Descr::Index nr_immovables = world.get_nr_immovables();
 	const uint32_t immovables_in_row = std::min
@@ -65,7 +65,7 @@ m_pit     (pit)
 
 
 	uint32_t width = 0, height = 0;
-   for (int j=0; j<nr_immovables; j++) {
+   for (int32_t j=0; j<nr_immovables; j++) {
 		const Immovable_Descr & descr = *world.get_immovable_descr(j);
 		uint32_t w, h;
 		g_gr->get_picture_size
@@ -78,8 +78,8 @@ m_pit     (pit)
 	const uint32_t tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 
-   int ypos=ystart;
-   int xpos=xstart;
+   int32_t ypos=ystart;
+   int32_t xpos=xstart;
 	uint32_t cur_x = immovables_in_row;
 	for (Immovable_Descr::Index i = 0; i < nr_immovables; ++cur_x, ++i) {
 		UI::Box * box;
@@ -125,7 +125,7 @@ Editor_Tool_Place_Immovable_Options_Menu::~Editor_Tool_Place_Immovable_Options_M
 this is called when one of the state boxes is toggled
 ===========
 */
-void Editor_Tool_Place_Immovable_Options_Menu::clicked(int n, bool t) {
+void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked.
 	const bool multiselect =
@@ -153,4 +153,4 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int n, bool t) {
 }
 
 /* do nothing */
-void Editor_Tool_Place_Immovable_Options_Menu::do_nothing(int, bool) {}
+void Editor_Tool_Place_Immovable_Options_Menu::do_nothing(int32_t, bool) {}

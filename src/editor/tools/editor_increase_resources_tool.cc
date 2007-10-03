@@ -30,15 +30,15 @@
 #include "worlddata.h"
 
 
-int Editor_Change_Resource_Tool_Callback
-(const TCoords<FCoords> c, void * data, int curres)
+int32_t Editor_Change_Resource_Tool_Callback
+(const TCoords<FCoords> c, void * data, int32_t curres)
 {
 	Map & map = *static_cast<Map *>(data);
 	const World & world = map.world();
 	FCoords f = FCoords(c, map.get_field(c));
 
    FCoords f1;
-   int count=0;
+   int32_t count=0;
 
    // This field
 	count += world.terrain_descr(f.field->terrain_r()).resource_value(curres);
@@ -73,7 +73,7 @@ decrease the resources of the current field by one if
 there is not already another resource there.
 ===========
 */
-int Editor_Increase_Resources_Tool::handle_click_impl
+int32_t Editor_Increase_Resources_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	const World & world = map.world();
@@ -82,9 +82,9 @@ int Editor_Increase_Resources_Tool::handle_click_impl
 		(map,
 		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
-		int res        = mr.location().field->get_resources();
-		int amount     = mr.location().field->get_resources_amount();
-      int max_amount = map.get_world()->get_resource(m_cur_res)->get_max_amount();
+		int32_t res        = mr.location().field->get_resources();
+		int32_t amount     = mr.location().field->get_resources_amount();
+      int32_t max_amount = map.get_world()->get_resource(m_cur_res)->get_max_amount();
 
 		amount += m_change_by;
       if (amount>max_amount) amount=max_amount;

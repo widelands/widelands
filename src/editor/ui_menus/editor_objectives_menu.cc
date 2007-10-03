@@ -48,8 +48,8 @@ struct Edit_Objective_Window : public UI::Window {
 		(Editor_Interactive * const parent,
 		 UI::Table<MapObjective &>::Entry_Record &);
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       Editor_Interactive  *m_parent;
@@ -70,8 +70,8 @@ UI::Window(parent, 0, 0, 250, 85, _("Edit Objective").c_str()),
 m_parent  (parent),
 m_te      (te)
 {
-   int spacing = 5;
-   int posy = 5;
+   int32_t spacing = 5;
+   int32_t posy = 5;
 
 	MapObjective & obj = UI::Table<MapObjective &>::get(te);
 
@@ -95,7 +95,7 @@ m_te      (te)
    new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Objective text: "), Align_CenterLeft);
    posy += 20 + spacing;
 
-   const int editbox_height = 140;
+   const int32_t editbox_height = 140;
 	m_descr = new UI::Multiline_Editbox
 		(this,
 		 5, posy, get_inner_w() - 2 * spacing, editbox_height,
@@ -109,7 +109,7 @@ m_te      (te)
 		 &Edit_Objective_Window::clicked_ok, this,
 		 _("Ok"));
 
-	new UI::IDButton<Edit_Objective_Window, int>
+	new UI::IDButton<Edit_Objective_Window, int32_t>
 		(this,
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 1,
@@ -131,9 +131,9 @@ m_te      (te)
  * we simulate a cancel click
  * We are not draggable.
  */
-bool Edit_Objective_Window::handle_mousepress(const Uint8 btn, int, int)
+bool Edit_Objective_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Edit_Objective_Window::handle_mouserelease(const Uint8, int, int)
+bool Edit_Objective_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 /*
@@ -180,7 +180,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 	m_table.double_clicked.set(this, &Editor_Objectives_Menu::table_dblclicked);
 
    // Buttons
-   int posx=spacing;
+   int32_t posx=spacing;
 
    new UI::Button<Editor_Objectives_Menu>
 		(this,

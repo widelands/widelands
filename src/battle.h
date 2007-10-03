@@ -32,8 +32,8 @@ struct Battle : public BaseImmovable {
 
 	Battle();
 	~Battle();
-	virtual int  get_type    () const throw () {return BATTLE;}
-	virtual int  get_size    () const throw () {return SMALL;}
+	virtual int32_t  get_type    () const throw () {return BATTLE;}
+	virtual int32_t  get_size    () const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return false;}
 
 	virtual void draw(const Editor_Game_Base &, RenderTarget &,
@@ -48,8 +48,8 @@ struct Battle : public BaseImmovable {
 private:
 	Soldier* m_first;
 	Soldier* m_second;
-	int      m_last_try;
-	int      m_next_assault;
+	int32_t      m_last_try;
+	int32_t      m_next_assault;
 
 	// Load/save support
 protected:

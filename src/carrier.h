@@ -44,19 +44,19 @@ struct Carrier : public Worker {
 	{}
 		virtual ~Carrier() {};
 
-		bool notify_ware(Game* g, int flag);
+		bool notify_ware(Game* g, int32_t flag);
 
 		void start_task_road();
 		void update_task_road(Game* g);
-		void start_task_transport(int fromflag);
-		bool start_task_walktoflag(Game* g, int flag, bool offset = false);
+		void start_task_transport(int32_t fromflag);
+		bool start_task_walktoflag(Game* g, int32_t flag, bool offset = false);
 
 
 private:
 		MO_DESCR(Descr);
 
 		void find_pending_item(Game* g);
-		int find_closest_flag(Game* g);
+		int32_t find_closest_flag(Game* g);
 
 		// internal task stuff
 		void road_update(Game* g, State* state);
@@ -75,5 +75,5 @@ private:
 		bool swap_or_wait(Game*g, State* s);
 
 		/// -1: no ware acked; 0/1: acked ware for start/end flag of road
-		int m_acked_ware;
+		int32_t m_acked_ware;
 };

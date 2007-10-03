@@ -69,13 +69,13 @@ Map IMPLEMENTATION
  * structure
  */
 struct Map::Pathfield {
-	int    heap_index; //  index of this field in heap, for backlinking
-	int    real_cost;  //  true cost up to this field
-	int    estim_cost; //  estimated cost till goal
+	int32_t    heap_index; //  index of this field in heap, for backlinking
+	int32_t    real_cost;  //  true cost up to this field
+	int32_t    estim_cost; //  estimated cost till goal
 	uint16_t cycle;
 	uint8_t  backlink;   //  how we got here (Map_Object::WALK_*)
 
-	inline int cost() {return real_cost + estim_cost;}
+	inline int32_t cost() {return real_cost + estim_cost;}
 };
 
 
@@ -248,8 +248,8 @@ void Map::recalc_default_resources() {
          f=get_fcoords(Coords(x, y));
          // only on unset fields
          if (f.field->get_resources()!=0 || f.field->get_resources_amount()) continue;
-         std::map<int, int> m;
-         int amount=0;
+         std::map<int32_t, int32_t> m;
+         int32_t amount=0;
 
          // This field
 			{
@@ -268,7 +268,7 @@ void Map::recalc_default_resources() {
          get_neighbour(f, Map_Object::WALK_NW, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
-				const char resr =
+				const int8_t resr =
 					terr.get_default_resources();
 				if
 					(terr.get_is() & TERRAIN_UNPASSABLE
@@ -280,7 +280,7 @@ void Map::recalc_default_resources() {
 			}
 			{
 				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
-				const char resd =
+				const int8_t resd =
 					terd.get_default_resources();
 				if
 					(terd.get_is() & TERRAIN_UNPASSABLE
@@ -295,7 +295,7 @@ void Map::recalc_default_resources() {
          get_neighbour(f, Map_Object::WALK_NE, &f1);
 			{
 				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
-				const char resd =
+				const int8_t resd =
 					terd.get_default_resources();
 				if
 					(terd.get_is() & TERRAIN_UNPASSABLE
@@ -310,7 +310,7 @@ void Map::recalc_default_resources() {
          get_neighbour(f, Map_Object::WALK_W, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
-				const char resr =
+				const int8_t resr =
 					terr.get_default_resources();
 				if
 					(terr.get_is() & TERRAIN_UNPASSABLE
@@ -321,9 +321,9 @@ void Map::recalc_default_resources() {
 				amount += terr.get_default_resources_amount();
 			}
 
-         int lv=0;
-         int res=0;
-         std::map<int, int>::iterator i=m.begin();
+         int32_t lv=0;
+         int32_t res=0;
+         std::map<int32_t, int32_t>::iterator i=m.begin();
 			while (i != m.end()) {
 				if (i->second > lv) {
                lv=i->second;
@@ -972,7 +972,7 @@ Fetch the slopes to neighbours and call the actual logic in Field
 void Map::recalc_brightness(FCoords f)
 {
 	FCoords d;
-   int l, r, tl, tr, bl, br;
+   int32_t l, r, tl, tr, bl, br;
 
    // left
    get_ln(f, &d);
@@ -1144,11 +1144,11 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	const Uint8  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
 
 	// 1b) Collect some information about the neighbours
-	int cnt_unpassable = 0;
-	int cnt_water = 0;
-	int cnt_acid = 0;
-	int cnt_mountain = 0;
-	int cnt_dry = 0;
+	int32_t cnt_unpassable = 0;
+	int32_t cnt_water = 0;
+	int32_t cnt_acid = 0;
+	int32_t cnt_mountain = 0;
+	int32_t cnt_dry = 0;
 
 	if  (tr_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
 	if  (tl_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
@@ -1238,7 +1238,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	for (uint32_t i = 0; i < objectlist.size(); i++) {
 		BaseImmovable *obj = objectlist[i].object;
 		Coords objpos = objectlist[i].coords;
-		int dist = calc_distance(f, objpos);
+		int32_t dist = calc_distance(f, objpos);
 
 		switch (obj->get_size()) {
 		case BaseImmovable::SMALL:
@@ -1281,7 +1281,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	{
 		// 4b) Check the mountain slope
 		if
-			(static_cast<int>(br.field->get_height()) - f.field->get_height()
+			(static_cast<int32_t>(br.field->get_height()) - f.field->get_height()
 			 <
 			 4)
 			caps |= BUILDCAPS_MINE;
@@ -1344,13 +1344,13 @@ end: //  9) That's it, store the collected information.
 uint32_t Map::calc_distance(const Coords a, const Coords b) const
 {
 	uint32_t dist;
-	int dy;
+	int32_t dy;
 
 	// do we fly up or down?
 	dy = b.y - a.y;
-	if (dy > static_cast<int>(m_height >> 1)) //  wrap-around!
+	if (dy > static_cast<int32_t>(m_height >> 1)) //  wrap-around!
 		dy -= m_height;
-	else if (dy < -static_cast<int>(m_height >> 1))
+	else if (dy < -static_cast<int32_t>(m_height >> 1))
 		dy += m_height;
 
 	dist = abs(dy);
@@ -1362,7 +1362,7 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 	// towards b
 	// Hint: (~a.y & 1) is 1 for even rows, 0 for odd rows.
 	// This means we round UP for even rows, and we round DOWN for odd rows.
-	int lx, rx;
+	int32_t lx, rx;
 
 	lx = a.x - ((dist + (~a.y & 1)) >> 1); // div 2
 	rx = lx + dist;
@@ -1371,21 +1371,21 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 	// Yes, the second is an else if; see the above if (dist >= m_width)
 	if (lx < 0)
 		lx += m_width;
-	else if (rx >= static_cast<int>(m_width))
+	else if (rx >= static_cast<int32_t>(m_width))
 		rx -= m_width;
 
 	// Normal, non-wrapping case
 	if (lx <= rx)
 	{
 		if (b.x < lx) {
-			int dx1 = lx - b.x;
-			int dx2 = b.x - (rx - m_width);
+			int32_t dx1 = lx - b.x;
+			int32_t dx2 = b.x - (rx - m_width);
 			dist += std::min(dx1, dx2);
 		}
 		else if (b.x > rx)
 		{
-			int dx1 = b.x - rx;
-			int dx2 = (lx + m_width) - b.x;
+			int32_t dx1 = b.x - rx;
+			int32_t dx2 = (lx + m_width) - b.x;
 			dist += std::min(dx1, dx2);
 		}
 	}
@@ -1394,8 +1394,8 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 		// Reverse case
 		if (b.x > rx && b.x < lx)
 		{
-			int dx1 = b.x - rx;
-			int dx2 = lx - b.x;
+			int32_t dx1 = b.x - rx;
+			int32_t dx2 = lx - b.x;
 			dist += std::min(dx1, dx2);
 		}
 	}
@@ -1412,15 +1412,15 @@ If they aren't, the function returns 0. If they are the same, return -1.
 Otherwise, it returns the direction from start to end
 ===============
 */
-int Map::is_neighbour(const Coords start, const Coords end) const
+int32_t Map::is_neighbour(const Coords start, const Coords end) const
 {
-	int dx, dy;
+	int32_t dx, dy;
 
 	dy = end.y - start.y;
 	dx = end.x - start.x;
-	if (dx > static_cast<int>(m_width >> 1))
+	if (dx > static_cast<int32_t>(m_width >> 1))
 		dx -= m_width;
-	else if (dx < -static_cast<int>(m_width >> 1))
+	else if (dx < -static_cast<int32_t>(m_width >> 1))
 		dx += m_width;
 
 	// end and start are on the same row
@@ -1433,9 +1433,9 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 		}
 	}
 
-	if (dy > static_cast<int>(m_height >> 1))
+	if (dy > static_cast<int32_t>(m_height >> 1))
 		dy -= m_height;
-	else if (dy < -static_cast<int>(m_height >> 1))
+	else if (dy < -static_cast<int32_t>(m_height >> 1))
 		dy += m_height;
 
 	// end is one row below start
@@ -1474,7 +1474,7 @@ Calculates the cost estimate between the two points.
 This function is used mainly for the path-finding estimate.
 ===============
 */
-int Map::calc_cost_estimate(const Coords a, const Coords b) const
+int32_t Map::calc_cost_estimate(const Coords a, const Coords b) const
 {
 	return calc_distance(a, b) * BASE_COST_PER_FIELD;
 }
@@ -1483,7 +1483,7 @@ int Map::calc_cost_estimate(const Coords a, const Coords b) const
 /**
  * \return a lower bound on the time required to walk from \p a to \p b
  */
-int Map::calc_cost_lowerbound(const Coords a, const Coords b) const
+int32_t Map::calc_cost_lowerbound(const Coords a, const Coords b) const
 {
 	return calc_distance(a, b) * calc_cost(-SLOPE_COST_STEPS);
 }
@@ -1510,7 +1510,7 @@ Slope is limited to the range [ -SLOPE_COST_STEPS; +oo [
 */
 #define CALC_COST_D(slope) (((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1))
 
-static int calc_cost_d(int slope)
+static int32_t calc_cost_d(int32_t slope)
 {
 	if (slope < -SLOPE_COST_STEPS)
 		slope = -SLOPE_COST_STEPS;
@@ -1518,9 +1518,9 @@ static int calc_cost_d(int slope)
 	return CALC_COST_D(slope);
 }
 
-int Map::calc_cost(int slope) const
+int32_t Map::calc_cost(int32_t slope) const
 {
-	int f = 2*SLOPE_COST_DIVISOR + calc_cost_d(slope) - CALC_COST_D(0);
+	int32_t f = 2*SLOPE_COST_DIVISOR + calc_cost_d(slope) - CALC_COST_D(0);
 
 	return (BASE_COST_PER_FIELD * f) / (2*SLOPE_COST_DIVISOR);
 }
@@ -1534,11 +1534,11 @@ Return the time it takes to walk the given step from coords in the given
 direction, in milliseconds.
 ===============
 */
-int Map::calc_cost(const Coords coords, const int dir) const
+int32_t Map::calc_cost(const Coords coords, const int32_t dir) const
 {
 	FCoords f;
-	int startheight;
-	int delta;
+	int32_t startheight;
+	int32_t delta;
 
 	// Calculate the height delta
 	f = get_fcoords(coords);
@@ -1558,11 +1558,11 @@ Map::calc_bidi_cost
 Calculate the average cost of walking the given step in both directions.
 ===============
 */
-int Map::calc_bidi_cost(const Coords coords, const int dir) const
+int32_t Map::calc_bidi_cost(const Coords coords, const int32_t dir) const
 {
 	FCoords f;
-	int startheight;
-	int delta;
+	int32_t startheight;
+	int32_t delta;
 
 	// Calculate the height delta
 	f = get_fcoords(coords);
@@ -1584,7 +1584,7 @@ If either of the forward or backward pointers is set, it will be filled in
 with the cost of walking in said direction.
 ===============
 */
-void Map::calc_cost(const Path & path, int *forward, int *backward) const
+void Map::calc_cost(const Path & path, int32_t *forward, int32_t *backward) const
 {
 	Coords coords = path.get_start();
 
@@ -1795,7 +1795,7 @@ public:
 	{
 		uint32_t l = node*2 + 1;
 		uint32_t r = node*2 + 2;
-		if (m_data[node]->heap_index != static_cast<int>(node)) {
+		if (m_data[node]->heap_index != static_cast<int32_t>(node)) {
 			fprintf(stderr, "%s: heap_index integrity!\n", str);
 			exit(-1);
 		}
@@ -1857,17 +1857,17 @@ void Map::increase_pathcycle()
  *
  * \todo Document parameters instart, inend, path, flags
  */
-int Map::findpath
+int32_t Map::findpath
 (Coords instart,
  Coords inend,
- const int persist,
+ const int32_t persist,
  Path & path,
  const CheckStep & checkstep,
  const uint32_t flags)
 {
 	FCoords start;
 	FCoords end;
-	int upper_cost_limit;
+	int32_t upper_cost_limit;
 	FCoords cur;
 
 	normalize_coords(&instart);
@@ -1921,11 +1921,11 @@ int Map::findpath
 			break; // found our target
 
 		// avoid bias by using different orders when pathfinding
-		static const char order1[6] = {Map_Object::WALK_NW, Map_Object::WALK_NE,
+		static const int8_t order1[6] = {Map_Object::WALK_NW, Map_Object::WALK_NE,
 			Map_Object::WALK_E, Map_Object::WALK_SE, Map_Object::WALK_SW, Map_Object::WALK_W};
-		static const char order2[6] = {Map_Object::WALK_NW, Map_Object::WALK_W,
+		static const int8_t order2[6] = {Map_Object::WALK_NW, Map_Object::WALK_W,
 			Map_Object::WALK_SW, Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE};
-		const char *direction;
+		const int8_t *direction;
 
 		direction = (cur.x + cur.y) & 1 ? order1 : order2;
 
@@ -1933,7 +1933,7 @@ int Map::findpath
 		for (uint32_t i = 6; i; i--, direction++) {
 			Pathfield *neighbpf;
 			FCoords neighb;
-			int cost;
+			int32_t cost;
 
 			get_neighbour(cur, *direction, &neighb);
 			neighbpf = m_pathfields + (neighb.field-m_fields);
@@ -1958,7 +1958,7 @@ int Map::findpath
 				continue;
 
 			// Calculate cost
-			const int stepcost = (flags & fpBidiCost) ?
+			const int32_t stepcost = (flags & fpBidiCost) ?
 					calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction);
 
 			cost = curpf->real_cost + stepcost;
@@ -1982,7 +1982,7 @@ int Map::findpath
 		return -1;
 
 	// Now unwind the taken route (even if we couldn't find a complete one!)
-	int retval;
+	int32_t retval;
 
 	if (cur == end)
 		retval = curpf->real_cost;
@@ -2049,7 +2049,7 @@ The fieldcaps need to be recalculated
 returns the radius of changes (which are always 2)
 ===========
 */
-int Map::change_terrain
+int32_t Map::change_terrain
 (const TCoords<FCoords> c, const Terrain_Descr::Index terrain)
 {
 	c.field->set_terrain(c.t, terrain);
@@ -2159,7 +2159,7 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 	assert(m_fields <= coords.field);
 	assert            (coords.field < m_fields + max_index());
 
-   int height = coords.field->get_height();
+   int32_t height = coords.field->get_height();
    bool check[6] = {false, false, false, false, false, false};
 
 	const FCoords n[6] = {
@@ -2173,7 +2173,7 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 
 	for (Uint8 i = 0; i < 6; ++i) {
 		Field & f = *n[i].field;
-		const int diff = height - f.get_height();
+		const int32_t diff = height - f.get_height();
 		if (diff > MAX_FIELD_HEIGHT_DIFF) {
 			++area;
 			f.set_height(height-MAX_FIELD_HEIGHT_DIFF);
@@ -2227,7 +2227,7 @@ BaseImmovable search functors
 
 bool FindImmovableSize::accept(BaseImmovable *imm) const
 {
-	int size = imm->get_size();
+	int32_t size = imm->get_size();
 	return (m_min <= size && size <= m_max);
 }
 
@@ -2336,7 +2336,7 @@ bool FindNodeSizeResource::accept(const Map & map, const FCoords coord) const {
 
 bool FindNodeImmovableSize::accept(const Map &, const FCoords coord) const {
 	BaseImmovable* imm = coord.field->get_immovable();
-	int size = BaseImmovable::NONE;
+	int32_t size = BaseImmovable::NONE;
 
 	if (imm)
 		size = imm->get_size();
@@ -2388,7 +2388,7 @@ CheckStepDefault
 ===============
 */
 bool CheckStepDefault::allowed
-(Map *, FCoords start, FCoords end, int, StepId) const
+(Map *, FCoords start, FCoords end, int32_t, StepId) const
 {
 	uint8_t endcaps = end.field->get_caps();
 
@@ -2426,7 +2426,7 @@ CheckStepWalkOn
 ===============
 */
 bool CheckStepWalkOn::allowed
-(Map *, FCoords start, FCoords end, int, StepId id) const
+(Map *, FCoords start, FCoords end, int32_t, StepId id) const
 {
 	uint8_t startcaps = start.field->get_caps();
 	uint8_t endcaps = end.field->get_caps();
@@ -2463,7 +2463,7 @@ CheckStepRoad
 ===============
 */
 bool CheckStepRoad::allowed
-(Map* map, FCoords start, FCoords end, int, StepId id) const
+(Map* map, FCoords start, FCoords end, int32_t, StepId id) const
 {
 	const Uint8 endcaps = m_player.get_buildcaps(end);
 
@@ -2597,7 +2597,7 @@ After which step does the field appear in this path?
 Return -1 if field is not part of this path.
 ===============
 */
-int CoordPath::get_index(Coords field) const
+int32_t CoordPath::get_index(Coords field) const
 {
 	for (uint32_t i = 0; i < m_coords.size(); i++)
 		if (m_coords[i] == field)

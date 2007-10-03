@@ -34,7 +34,7 @@ enum {
 struct Picture {
 	Picture() : mod(0), surface(0) {u.fname=0;}
 	/// 0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
-	int mod;
+	int32_t mod;
 	Surface* surface;
 
 	//WTF ?!?! A union between char* (to be used as filename) and class* ?!?

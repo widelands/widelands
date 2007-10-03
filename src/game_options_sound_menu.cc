@@ -133,7 +133,7 @@ void GameOptionsSoundMenu::changed_ingame_sound(bool on) {
  *
  * \param value The new music volume.
  */
-void GameOptionsSoundMenu::music_volume_changed(int value) {
+void GameOptionsSoundMenu::music_volume_changed(int32_t value) {
 	g_sound_handler.set_music_volume(value);
 }
 
@@ -143,6 +143,6 @@ void GameOptionsSoundMenu::music_volume_changed(int value) {
  *
  * \param value The new sound volume value.
  */
-void GameOptionsSoundMenu::sound_volume_changed(int value) {
+void GameOptionsSoundMenu::sound_volume_changed(int32_t value) {
 	g_sound_handler.set_fx_volume(value);
 }

@@ -283,7 +283,7 @@ Issue the soldier request
 ===============
 */
 void MilitarySite::request_soldier() {
-   int soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
+   int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
    // TODO: This should be user-configurable through windows options (still nothing is done to support this)
    Requeriments* r = new Requeriments();
@@ -310,7 +310,7 @@ Called when our soldier arrives.
 ===============
 */
 void MilitarySite::request_soldier_callback
-(Game * g, Request * rq, int, Worker * w, void * data)
+(Game * g, Request * rq, int32_t, Worker * w, void * data)
 {
 
    MilitarySite* msite = (MilitarySite*)data;
@@ -442,19 +442,19 @@ molog ("**--Sodier localized!\n");
 
 /*
 ===============
-MilitarySite::drop_soldier (Game *, int)
+MilitarySite::drop_soldier (Game *, int32_t)
 
 Drops a soldier at specific position at its table. SHOULD NOT be called directly.
-Use throught drop_soldier(int)
+Use throught drop_soldier(int32_t)
 ===============
  */
 
-void MilitarySite::drop_soldier (Game *g, int nr)
+void MilitarySite::drop_soldier (Game *g, int32_t nr)
 {
       Soldier *s;
 
       // Check if its out of bounds
-	if (nr < 0 or nr > static_cast<int>(m_soldiers.size())) return;
+	if (nr < 0 or nr > static_cast<int32_t>(m_soldiers.size())) return;
 
       s = m_soldiers.at(nr);
 
@@ -491,7 +491,7 @@ MilitarySite::change_soldier_capacity
 Changes the soldiers capacity.
 ===========
 */
-void MilitarySite::change_soldier_capacity(int how)
+void MilitarySite::change_soldier_capacity(int32_t how)
 {
 	if (how) {
 		if (how > 0) {
@@ -505,7 +505,7 @@ void MilitarySite::change_soldier_capacity(int how)
 		else {
          how = -how;
 
-			if (how >= static_cast<int>(m_capacity)) m_capacity  = 1;
+			if (how >= static_cast<int32_t>(m_capacity)) m_capacity  = 1;
 			else                                     m_capacity -= how;
 
 			while (m_capacity < m_soldiers.size() + m_soldier_requests.size()) {

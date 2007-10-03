@@ -54,8 +54,8 @@ shadowclr_[r, g, b]  color for shadow pixels
 */
 void EncodeData::parse(Section *s)
 {
-	int i;
-	int r, g, b;
+	int32_t i;
+	int32_t r, g, b;
 
 	// Read player color codes
 	for (i = 0; i < 4; i++) {
@@ -90,7 +90,7 @@ void EncodeData::add(const EncodeData *other)
 {
 	if (other->hasplrclrs) {
 		hasplrclrs = true;
-		for (int i = 0; i < 4; i++)
+		for (int32_t i = 0; i < 4; i++)
 			plrclr[i] = other->plrclr[i];
 	}
 }
@@ -188,7 +188,7 @@ uint32_t AnimationManager::get(const char *directory, Section *s, const char *pi
 
 	// Read mapping from frame numbers to sound effect names and load effects
 	// will yield strange results if there is a different number of sfx_frame and sfx_name
-	int framenum;
+	int32_t framenum;
 	const char *fxname;
 	ad->sfx_cues[123456]="dummy";
 	while (s->get_next_int("sfx_frame", &framenum)!=0 && s->get_next_string("sfx_name", &fxname)!=0) {
@@ -204,7 +204,7 @@ uint32_t AnimationManager::get(const char *directory, Section *s, const char *pi
 
 	ad->encdata.parse(s);
 
-	int fps = s->get_int("fps");
+	int32_t fps = s->get_int("fps");
 	if (fps > 0)
 		ad->frametime = 1000 / fps;
 
@@ -348,7 +348,7 @@ void DirAnimations::parse(Map_Object_Descr* b, const char *directory, Profile *p
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.png", sectnamebase);
 	}
 
-	for (int dir = 1; dir <= 6; dir++) {
+	for (int32_t dir = 1; dir <= 6; dir++) {
 		static const char *dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 		char sectname[300];
 		Section *s;

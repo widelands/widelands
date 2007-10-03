@@ -38,19 +38,19 @@ struct Trigger_Time_Option_Menu : public UI::Window {
       Trigger_Time_Option_Menu(Editor_Interactive*, Trigger_Time*);
       ~Trigger_Time_Option_Menu();
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
 	void clicked_ok();
-      void clicked(int);
+      void clicked(int32_t);
       void update();
 
       Trigger_Time* m_trigger;
       Editor_Interactive* m_parent;
       UI::Edit_Box* m_name;
       UI::Textarea* m_textareas[6];
-      int         m_values[6];
+      int32_t         m_values[6];
 };
 
 #endif

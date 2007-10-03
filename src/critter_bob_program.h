@@ -32,8 +32,8 @@ struct Critter_BobAction {
 	};
 
 	execute_t                function;
-	int                      iparam1;
-	int                      iparam2;
+	int32_t                      iparam1;
+	int32_t                      iparam2;
 	std::string              sparam1;
 
 	std::vector<std::string> sparamv;
@@ -53,8 +53,8 @@ struct Critter_BobProgram : public BobProgramBase {
 	virtual ~Critter_BobProgram() {}
 
 	std::string get_name() const {return m_name;}
-	int get_size() const {return m_actions.size();}
-	const Critter_BobAction* get_action(int idx) const {
+	int32_t get_size() const {return m_actions.size();}
+	const Critter_BobAction* get_action(int32_t idx) const {
 		assert(idx >= 0);
 		assert(static_cast<uint32_t>(idx) < m_actions.size());
 		return &m_actions[idx];

@@ -46,8 +46,8 @@ struct Trigger_Building : public Trigger {
 
 	const char* get_building() const {return m_building.c_str();}
       void set_building(const char* b) {m_building=b;}
-      void set_building_count(int n) {m_count=n;}
-	int get_building_count() const {return m_count;}
+      void set_building_count(int32_t n) {m_count=n;}
+	int32_t get_building_count() const {return m_count;}
 
 private:
 	Player_Area<Area<FCoords> > m_player_area;

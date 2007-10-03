@@ -25,7 +25,7 @@
 #include "profile.h"
 #include "wexception.h"
 
-static const int TRIGGER_VERSION = 1;
+static const int32_t TRIGGER_VERSION = 1;
 
 Trigger_Null::Trigger_Null()
 : Trigger(_("Null Trigger")), m_should_toggle(false), m_value(false)
@@ -33,7 +33,7 @@ Trigger_Null::Trigger_Null()
 
 
 void Trigger_Null::Read(Section* s, Editor_Game_Base*) {
-	const int version = s->get_safe_int("version");
+	const int32_t version = s->get_safe_int("version");
 	if (version != TRIGGER_VERSION)
 		throw wexception
 			("Null Trigger with unknown/unhandled version %u in map!", version);

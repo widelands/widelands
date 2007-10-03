@@ -34,17 +34,17 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	virtual void parse(const char *directory, Profile * prof, const EncodeData * encdata);
 	virtual Building * create_object() const;
 
-	int get_max_number_of_soldiers() const throw () {return m_num_soldiers;}
+	int32_t get_max_number_of_soldiers() const throw () {return m_num_soldiers;}
 	bool get_train_hp     () const throw () {return m_train_hp;}
 	bool get_train_attack () const throw () {return m_train_attack;}
 	bool get_train_defense() const throw () {return m_train_defense;}
 	bool get_train_evade  () const throw () {return m_train_evade;}
 
-	int get_min_level(const tAttribute) const;
-	int get_max_level(const tAttribute) const;
+	int32_t get_min_level(const tAttribute) const;
+	int32_t get_max_level(const tAttribute) const;
 private:
 	/** Maximum number of soldiers for a training site*/
-	int m_num_soldiers;
+	int32_t m_num_soldiers;
 	/** Whether this site can train hitpoints*/
 	bool m_train_hp;
 	/** Whether this site can train attack*/
@@ -55,22 +55,22 @@ private:
 	bool m_train_evade;
 
 	/** Minimum hitpoints to which a soldier can drop at this site*/
-	int m_min_hp;
+	int32_t m_min_hp;
 	/** Minimum attacks to which a soldier can drop at this site*/
-	int m_min_attack;
+	int32_t m_min_attack;
 	/** Minimum defense to which a soldier can drop at this site*/
-	int m_min_defense;
+	int32_t m_min_defense;
 	/** Minimum evasion to which a soldier can drop at this site*/
-	int m_min_evade;
+	int32_t m_min_evade;
 
 	/** Maximum hitpoints a soldier can acquire at this site*/
-	int m_max_hp;
+	int32_t m_max_hp;
 	/** Maximum attack a soldier can acquire at this site*/
-	int m_max_attack;
+	int32_t m_max_attack;
 	/** Maximum defense a soldier can acquire at this site*/
-	int m_max_defense;
+	int32_t m_max_defense;
 	/** Maximum evasion a soldier can acquire at this site*/
-	int m_max_evade;
+	int32_t m_max_evade;
 
 	// Re-use of m_inputs to get the resources
 	// TrainingMap m_programs;
@@ -92,7 +92,7 @@ public:
 	 TrainingSite(const TrainingSite_Descr &);
 	 virtual ~ TrainingSite();
 
-	virtual int get_building_type() const throw ()
+	virtual int32_t get_building_type() const throw ()
 	{return Building::TRAININGSITE;}
 	virtual std::string get_statistics_string();
 
@@ -128,12 +128,12 @@ public:
 		change_soldier_capacity(-1);
 	}
 protected:
-	virtual void change_soldier_capacity(int);
+	virtual void change_soldier_capacity(int32_t);
 	virtual UI::Window *create_options_window(Interactive_Player * plr, UI::Window ** registry);
 
 private:
 	void request_soldier();
-	static void request_soldier_callback(Game * g, Request * rq, int ware, Worker * w, void *data);
+	static void request_soldier_callback(Game * g, Request * rq, int32_t ware, Worker * w, void *data);
 
 	void program_start(Game * g, std::string program_name);
 	void program_end(Game * g, bool success);
@@ -144,7 +144,7 @@ private:
 	void drop_soldier(Game * g, uint32_t nr);
 	void drop_unupgradable_soldiers(Game * g);
 
-	void modif_priority(enum tAttribute, int);
+	void modif_priority(enum tAttribute, int32_t);
 private:
 	/** Open requests for soldiers. The soldiers can be under way or unavailable*/
 	std::vector < Request * >m_soldier_requests;
@@ -186,16 +186,16 @@ private:
 
 	/** Modificator for m_pri_hp, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/
-	int m_pri_hp_mod;
+	int32_t m_pri_hp_mod;
 	/** Modificator for m_pri_attack, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/
-	int m_pri_attack_mod;
+	int32_t m_pri_attack_mod;
 	/** Modificator for m_pri_defense, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/
-	int m_pri_defense_mod;
+	int32_t m_pri_defense_mod;
 	/** Modificator for m_pri_evade, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/
-	int m_pri_evade_mod;
+	int32_t m_pri_evade_mod;
 
 	/** Whether the last training program was finished successfully*/
 	bool m_success;

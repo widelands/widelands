@@ -60,7 +60,7 @@ public:
 	virtual void set_sel_pos(Node_and_Triangle<>);
 
       // gets called when a keyboard event occurs
-      bool handle_key(bool down, int code, char c);
+      bool handle_key(bool down, int32_t code, char c);
 
 	struct Tools {
 		Tools()
@@ -106,7 +106,7 @@ public:
       // reference functions
 	void   reference_player_tribe(const Player_Number, const void * const);
 	void unreference_player_tribe(const Player_Number, const void * const);
-      bool is_player_tribe_referenced(int);
+      bool is_player_tribe_referenced(int32_t);
       void set_need_save(bool t) {m_need_save=t;}
 
 private:
@@ -122,13 +122,13 @@ private:
       // State variables
       bool m_need_save;
 	struct Player_References {
-         int player;
+         int32_t player;
          const void *object;
 	};
       std::vector<Player_References> m_player_tribe_references;
       bool m_ctrl_down;
 
-	int m_realtime;
+	int32_t m_realtime;
 
       // UI ownings
 	Editor_Game_Base & m_editor;

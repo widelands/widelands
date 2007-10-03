@@ -94,9 +94,9 @@ const std::string & Resource_Descr::get_editor_pic(const uint32_t amount) const 
 
 	for (uint32_t i = 1; i < m_editor_pics.size(); ++i)
 	{
-		const int diff1 =
-			m_editor_pics[bestmatch].upperlimit - static_cast<int>(amount);
-		const int diff2 = m_editor_pics[i].upperlimit - static_cast<int>(amount);
+		const int32_t diff1 =
+			m_editor_pics[bestmatch].upperlimit - static_cast<int32_t>(amount);
+		const int32_t diff2 = m_editor_pics[i].upperlimit - static_cast<int32_t>(amount);
 
 		// This is a catch-all for high amounts
 		if (m_editor_pics[i].upperlimit < 0)
@@ -193,7 +193,7 @@ Load graphics data here
 */
 void World::load_graphics()
 {
-	int i;
+	int32_t i;
 
 	// Load terrain graphics
 	for (i = 0; i < ters.get_nitems(); i++)
@@ -400,9 +400,9 @@ m_texture           (0)
 	if (str) {
       std::istringstream str1(str);
       std::string resource;
-      int amount;
+      int32_t amount;
 	   str1 >> resource >> amount;
-      int res=resources->get_index(resource.c_str());;
+      int32_t res=resources->get_index(resource.c_str());;
       if (res==-1)
          throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), resource.c_str());
       m_default_resources=res;
@@ -412,7 +412,7 @@ m_texture           (0)
    // Parse valid resources
    std::string str1=s->get_string("resources", "");
 	if (str1 != "") {
-      int nres=1;
+      int32_t nres=1;
 		const std::string::const_iterator str1_end = str1.end();
 		for (std::string::const_iterator it = str1.begin(); it != str1_end; ++it)
 			if (*it == ',') ++nres;
@@ -424,11 +424,11 @@ m_texture           (0)
          m_valid_resources=new uint8_t[nres];
       std::string curres;
 		uint32_t i = 0;
-      int cur_res=0;
+      int32_t cur_res=0;
 		while (i <= str1.size()) {
          if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {++i; continue;}
          if (str1[i]==',' || i==str1.size()) {
-            int res=resources->get_index(curres.c_str());;
+            int32_t res=resources->get_index(curres.c_str());;
             if (res==-1)
                throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());
             m_valid_resources[cur_res++]=res;
@@ -440,7 +440,7 @@ m_texture           (0)
 		}
 	}
 
-	int fps = s->get_int("fps");
+	int32_t fps = s->get_int("fps");
 	if (fps > 0)
 		m_frametime = 1000 / fps;
 

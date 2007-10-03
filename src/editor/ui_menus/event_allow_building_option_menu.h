@@ -41,20 +41,20 @@ struct Event_Allow_Building_Option_Menu : public UI::Window {
       Event_Allow_Building_Option_Menu(Editor_Interactive*, Event_Allow_Building*);
       ~Event_Allow_Building_Option_Menu();
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       void update();
 	void clicked_ok();
-      void clicked(int);
+      void clicked(int32_t);
 
       Event_Allow_Building* m_event;
       Editor_Interactive* m_parent;
       UI::Textarea *m_player_ta, *m_building_ta;
       UI::Checkbox* m_allow;
       UI::Edit_Box* m_name;
-      int         m_player, m_building;
+      int32_t         m_player, m_building;
       std::vector<std::string> m_buildings;
 };
 

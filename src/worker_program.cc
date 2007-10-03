@@ -289,7 +289,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 		} else if (key == "size") {
 			static const struct {
 				const char* name;
-				int val;
+				int32_t val;
 			} sizenames[] = {
 				{"any",    FindNodeSize::sizeAny},
 				{"build",  FindNodeSize::sizeBuild},
@@ -301,7 +301,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 				{0, 0}
 			};
 
-			int index;
+			int32_t index;
 
 			for (index = 0; sizenames[index].name; ++index)
 				if (value == sizenames[index].name)

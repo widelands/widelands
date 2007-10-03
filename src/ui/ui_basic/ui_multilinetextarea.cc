@@ -28,7 +28,7 @@ namespace UI {
 
 Multiline_Textarea::Multiline_Textarea
 	(Panel * const parent,
-	 const int x, const int y, const uint32_t w, const uint32_t h,
+	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const std::string & text,
 	 const Align align,
 	 const bool always_show_scrollbar)
@@ -100,7 +100,7 @@ void Multiline_Textarea::set_align(Align align)
 /**
 Scroll to the given position.
 */
-void Multiline_Textarea::set_scrollpos(int pixels)
+void Multiline_Textarea::set_scrollpos(int32_t pixels)
 {
    m_textpos = pixels;
 
@@ -171,13 +171,13 @@ void Multiline_Textarea::draw_scrollbar() {
 	}
 }
 
-bool Multiline_Textarea::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Multiline_Textarea::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	return btn == SDL_BUTTON_WHEELUP or btn == SDL_BUTTON_WHEELDOWN ?
 		m_scrollbar.handle_mousepress(btn, x, y) : false;
 }
 
-int Multiline_Textarea::get_halign() {
-   int x = 0;
+int32_t Multiline_Textarea::get_halign() {
+   int32_t x = 0;
    // Only HAlignment allowed
    if (m_align & Align_HCenter)
       x += get_w()/2;

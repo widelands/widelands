@@ -93,11 +93,11 @@ void Surface::draw_rect(const Rect rc, const RGBColor clr) {
 
 	const Point bl = rc.bottom_left() - Point(1, 1);
 
-	for (int x = rc.x + 1; x < bl.x; ++x) {
+	for (int32_t x = rc.x + 1; x < bl.x; ++x) {
 		set_pixel(x, rc.y, color);
 		set_pixel(x, bl.y, color);
 	}
-	for (int y = rc.y; y <= bl.y; ++y) {
+	for (int32_t y = rc.y; y <= bl.y; ++y) {
 		set_pixel(rc.x, y, color);
 		set_pixel(bl.x, y, color);
 	}
@@ -131,15 +131,15 @@ Change the brightness of the given rectangle
 This function is slow as hell.
 ===============
 */
-void Surface::brighten_rect(const Rect rc, const int factor) {
+void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
 	const Point bl = rc.bottom_left();
-	for (int y = rc.y; y < bl.y; ++y) for (int x = rc.x; x < bl.x; ++x) {
+	for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
          uint8_t gr, gg, gb;
-         short r, g, b;
+         int16_t r, g, b;
          uint32_t clr = get_pixel(x, y);
          SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
          r = gr + factor;
@@ -374,7 +374,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
    std::vector<Surface*> frames;
 	for (;;) {
       char fname[256];
-      int nr = frames.size();
+      int32_t nr = frames.size();
       char *p;
 
       bool alldone=false;

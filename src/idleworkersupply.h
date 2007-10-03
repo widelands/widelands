@@ -28,20 +28,20 @@ struct IdleWorkerSupply : public Supply {
 
 		void set_economy(Economy* e);
 		virtual PlayerImmovable* get_position(Game* g);
-		virtual int get_amount(const int ware) const;
+		virtual int32_t get_amount(const int32_t ware) const;
 
 		/// Idle workers are always active supplies, because they need to get
 		/// into a Warehouse ASAP.
 		virtual bool is_active() const throw() {return true;}
 
-		virtual WareInstance* launch_item(Game* g, int ware)
+		virtual WareInstance* launch_item(Game* g, int32_t ware)
 				__attribute__ ((noreturn));
 
-		virtual Worker* launch_worker(Game* g, int ware);
-		virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
-		virtual int get_passing_requeriments (Game* g, int ware,
+		virtual Worker* launch_worker(Game* g, int32_t ware);
+		virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
+		virtual int32_t get_passing_requeriments (Game* g, int32_t ware,
 		                                      Requeriments* r);
-		virtual void mark_as_used (Game* g, int ware, Requeriments* r);
+		virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r);
 
 
 private:

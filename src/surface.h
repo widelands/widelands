@@ -40,8 +40,8 @@ class Surface {
 	friend class Font_Handler; // Needs m_surface for SDL_Blitting
 
 	SDL_Surface* m_surface;
-	int m_offsx;
-	int m_offsy;
+	int32_t m_offsx;
+	int32_t m_offsy;
 	uint32_t m_w, m_h;
 
 public:
@@ -80,7 +80,7 @@ public:
 	void clear();
 	void draw_rect(const Rect, const RGBColor);
 	void fill_rect(const Rect, const RGBColor);
-	void brighten_rect(const Rect, const int factor);
+	void brighten_rect(const Rect, const int32_t factor);
 
 	void blit(Point dst, Surface* src, Rect srcrc);
 	void fast_blit(Surface* src);
@@ -97,8 +97,8 @@ public:
 	void draw_field
 		(Rect &,
 		 Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-		 const int posx, const int rposx, const int posy,
-		 const int blposx, const int rblposx, const int blposy,
+		 const int32_t posx, const int32_t rposx, const int32_t posy,
+		 const int32_t blposx, const int32_t rblposx, const int32_t blposy,
 		 uint8_t roads,
 		 Sint8 f_brightness,
 		 Sint8 r_brightness,

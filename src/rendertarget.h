@@ -56,13 +56,13 @@ public:
 	void set_window(const Rect& rc, const Point& ofs);
 	bool enter_window(const Rect& rc, Rect* previous, Point* prevofs);
 
-	int get_w() const;
-	int get_h() const;
+	int32_t get_w() const;
+	int32_t get_h() const;
 
-	void draw_line(int x1, int y1, int x2, int y2, RGBColor color);
+	void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGBColor color);
 	void draw_rect(Rect r, const RGBColor clr);
 	void fill_rect(Rect r, const RGBColor clr);
-	void brighten_rect(Rect r, const int factor);
+	void brighten_rect(Rect r, const int32_t factor);
 	void clear();
 
 	void blit(Point dst, const uint32_t picture);

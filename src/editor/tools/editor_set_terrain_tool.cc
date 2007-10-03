@@ -24,14 +24,14 @@
 #include "maptriangleregion.h"
 
 
-int Editor_Set_Terrain_Tool::handle_click_impl
+int32_t Editor_Set_Terrain_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	assert
 		(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
 	const Uint16 radius = parent.get_sel_radius();
 	if (get_nr_enabled()) {
-		int max = 0;
+		int32_t max = 0;
 		const World & world = map.world();
 		MapTriangleRegion<TCoords<FCoords> > mr
 			(map,

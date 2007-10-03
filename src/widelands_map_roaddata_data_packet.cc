@@ -57,7 +57,7 @@ throw (_wexception)
    FileRead fr;
 	try {fr.Open(fs, "binary/road_data");} catch (...) {return;}
 
-	const int packet_version = fr.Unsigned16();
+	const int32_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION)
 		for (;;) {
          uint32_t ser=fr.Unsigned32();

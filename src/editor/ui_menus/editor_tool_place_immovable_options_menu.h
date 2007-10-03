@@ -41,8 +41,8 @@ private:
       std::vector<UI::Checkbox*> m_checkboxes;
 	UI::Tab_Panel m_tabpanel;
 	Editor_Place_Immovable_Tool & m_pit;
-      void clicked(int, bool);
-      void do_nothing(int, bool);
+      void clicked(int32_t, bool);
+      void do_nothing(int32_t, bool);
 };
 
 #endif

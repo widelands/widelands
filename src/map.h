@@ -97,7 +97,7 @@ struct CheckStep {
 
 	// Return true if moving from start to end (single step in the given
 	// direction) is allowed.
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const = 0;
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const = 0;
 
 	// Return true if the destination field can be reached at all
 	// (e.g. return false for land-based bobs when dest is in water).
@@ -122,7 +122,7 @@ struct FindBobAttribute : public FindBob {
 
 	virtual bool accept(Bob *imm) const;
 
-	int m_attrib;
+	int32_t m_attrib;
    virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 
@@ -263,14 +263,14 @@ struct Map {
 	void get_coords(Field & f, Coords & c) const;
 
 	uint32_t calc_distance(const Coords, const Coords) const;
-	int is_neighbour(const Coords, const Coords) const;
+	int32_t is_neighbour(const Coords, const Coords) const;
 
-	int calc_cost_estimate(const Coords, const Coords) const;
-	int calc_cost_lowerbound(const Coords, const Coords) const;
-	int calc_cost(const int slope) const;
-	int calc_cost(const Coords, const int dir) const;
-	int calc_bidi_cost(const Coords, const int dir) const;
-	void calc_cost(const Path &, int * forward, int * backward) const;
+	int32_t calc_cost_estimate(const Coords, const Coords) const;
+	int32_t calc_cost_lowerbound(const Coords, const Coords) const;
+	int32_t calc_cost(const int32_t slope) const;
+	int32_t calc_cost(const Coords, const int32_t dir) const;
+	int32_t calc_bidi_cost(const Coords, const int32_t dir) const;
+	void calc_cost(const Path &, int32_t * forward, int32_t * backward) const;
 
 	void get_ln (const  Coords,  Coords * const) const;
 	void get_ln (const FCoords, FCoords * const) const;
@@ -303,10 +303,10 @@ struct Map {
 	FCoords get_neighbour(const FCoords f, const Direction dir) const throw ();
 
 	// Pathfinding
-	int findpath
+	int32_t findpath
 		(Coords instart,
 		 Coords inend,
-		 const int persist,
+		 const int32_t persist,
 		 Path &,
 		 const CheckStep &,
 		 const uint32_t flags = 0);
@@ -348,7 +348,7 @@ struct Map {
 	uint32_t set_height(Area<FCoords>, interval<Field::Height> height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
-	int change_terrain
+	int32_t change_terrain
 		(const TCoords<FCoords>, const Terrain_Descr::Index terrain);
 
    /*
@@ -429,20 +429,20 @@ private:
 
 // FindImmovable functor
 struct FindImmovableSize : public FindImmovable {
-	FindImmovableSize(int min, int max) : m_min(min), m_max(max) {}
+	FindImmovableSize(int32_t min, int32_t max) : m_min(min), m_max(max) {}
    virtual ~FindImmovableSize() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
 
-	int m_min, m_max;
+	int32_t m_min, m_max;
 };
 struct FindImmovableType : public FindImmovable {
-	FindImmovableType(int type) : m_type(type) {}
+	FindImmovableType(int32_t type) : m_type(type) {}
    virtual ~FindImmovableType() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
 
-	int m_type;
+	int32_t m_type;
 };
 struct FindImmovableAttribute : public FindImmovable {
 	FindImmovableAttribute(uint32_t attrib) : m_attrib(attrib) {}
@@ -450,7 +450,7 @@ struct FindImmovableAttribute : public FindImmovable {
 
 	virtual bool accept(BaseImmovable *imm) const;
 
-	int m_attrib;
+	int32_t m_attrib;
 };
 struct FindImmovablePlayerImmovable : public FindImmovable {
 	FindImmovablePlayerImmovable() {}
@@ -508,12 +508,12 @@ struct FindNodeSize : public FindNode {
 // Accepts a field for a certain size if it has
 // a valid resource and amount on it
 struct FindNodeSizeResource : public FindNodeSize {
-   FindNodeSizeResource(Size size, int res) : FindNodeSize(size) {m_res=res;}
+   FindNodeSizeResource(Size size, int32_t res) : FindNodeSize(size) {m_res=res;}
    virtual ~FindNodeSizeResource() {}  // make gcc shut up
 
    virtual bool accept(const Map &, const FCoords coord) const;
 
-   int m_res;
+   int32_t m_res;
 };
 
 // Accepts fields based on the size of immovables on the field
@@ -568,7 +568,7 @@ struct CheckStepDefault : public CheckStep {
 	CheckStepDefault(uint8_t movecaps) : m_movecaps(movecaps) {}
 	virtual ~CheckStepDefault() {} //  make gcc shut up
 
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
@@ -587,7 +587,7 @@ struct CheckStepWalkOn : public CheckStep {
 	CheckStepWalkOn(uint8_t movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) {}
 	virtual ~CheckStepWalkOn() {} //  make gcc shut up
 
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
@@ -619,7 +619,7 @@ struct CheckStepRoad : public CheckStep {
 	{}
 	virtual ~CheckStepRoad() {} //  make gcc shut up
 
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
@@ -677,7 +677,7 @@ struct CoordPath {
 	{assert(i < m_path.size()); return m_path[i];}
 	const Step_Vector & steps() const throw () {return m_path;}
 
-	int get_index(Coords field) const;
+	int32_t get_index(Coords field) const;
 
 	void reverse();
 	void truncate (const std::vector<char>::size_type after);
@@ -731,7 +731,7 @@ inline void Map::normalize_coords(Coords * c) const
  * Calculate the field coordates from the pointer
  */
 inline FCoords Map::get_fcoords(Field & f) const {
-	const int i = &f - m_fields;
+	const int32_t i = &f - m_fields;
 	return FCoords(Coords(i % m_width, i / m_width), &f);
 }
 inline void Map::get_coords(Field & f, Coords & c) const {c = get_fcoords(f);}

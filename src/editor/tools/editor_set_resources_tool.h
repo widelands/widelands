@@ -29,7 +29,7 @@ struct Editor_Set_Resources_Tool : public Editor_Tool {
 		: Editor_Tool(*this, *this), m_cur_res(0), m_set_to(0)
 	{}
 
-	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_set_resources.png";}
 

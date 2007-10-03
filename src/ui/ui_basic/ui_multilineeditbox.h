@@ -34,7 +34,7 @@ struct Scrollbar;
  * Shitf + del or Shift + backspace deletes all text
  */
 struct Multiline_Editbox : public Multiline_Textarea {
-      Multiline_Editbox(Panel *parent, int x, int y, uint32_t w, uint32_t h, const char *text);
+      Multiline_Editbox(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const char *text);
       ~Multiline_Editbox();
 
       // Changed event
@@ -42,17 +42,17 @@ struct Multiline_Editbox : public Multiline_Textarea {
 
       // Drawing and event handlers
       void draw(RenderTarget* dst);
-      void set_maximum_chars(int n) {m_maxchars=n;}
-      int get_maximum_chars() {return m_maxchars;}
+      void set_maximum_chars(int32_t n) {m_maxchars=n;}
+      int32_t get_maximum_chars() {return m_maxchars;}
 
       // Event functions
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
-      bool handle_key(bool down, int code, char c);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+      bool handle_key(bool down, int32_t code, char c);
       void set_text(const char* str);
 
 private:
-	   static const int ms_darken_value=-20;
+	   static const int32_t ms_darken_value=-20;
       uint32_t m_cur_pos;
       uint32_t m_char_pos;
       uint32_t m_line_pos;

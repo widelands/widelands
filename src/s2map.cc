@@ -73,7 +73,7 @@ S2_Map_Loader::~S2_Map_Loader() {
  * infos when get_width() or get_nrplayers(),
  * get_author() and so on are called
  */
-int S2_Map_Loader::preload_map(bool scenario) {
+int32_t S2_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
 
    m_map->cleanup();
@@ -133,7 +133,7 @@ void S2_Map_Loader::load_world() {
  * and places all the objects. From now on
  * the Map* can't be set to another one.
  */
-int S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
+int32_t S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
 	assert(get_state() == STATE_WORLD_LOADED);
 
    // Postload the world which provides all the immovables found on a map
@@ -161,12 +161,12 @@ int S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
  * failed.
  * If successful, you must free the returned pointer.
  */
-uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
+uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t height)
 {
    uint16_t dw, dh;
    char buffer[256];
    uint16_t one;
-   long size;
+   int32_t size;
 
    memcpy(buffer, file->Data(6), 6);
 	if
@@ -197,7 +197,7 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
    uint8_t *section = (uint8_t *)malloc(dw * dh);
 
 	try {
-		int y = 0;
+		int32_t y = 0;
 		for (; y < height; ++y) {
 			uint8_t *ptr = (uint8_t*)file->Data(width);
 			memcpy(section + y*width, ptr, width);
@@ -320,7 +320,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
-				switch (static_cast<int>(c)) {
+				switch (static_cast<int32_t>(c)) {
 				case 0x00: c = 0; break;
 				case 0x01: c = 1; break;
 				case 0x02: c = 2; break;
@@ -366,7 +366,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
-				switch (static_cast<int>(c)) {
+				switch (static_cast<int32_t>(c)) {
 				case 0x00: c =  0; break;
 				case 0x01: c =  1; break;
 				case 0x02: c =  2; break;
@@ -480,12 +480,12 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				case 0x08: bobname = "duck";     break;
 					// case 0x09: bobname = "donkey"; break; -> Not implemented, yet.
 				default:
-					cerr << "Unsupported animal: " << static_cast<int>(section[i]) << endl;
+					cerr << "Unsupported animal: " << static_cast<int32_t>(section[i]) << endl;
 						break;
 				}
 
 				if (bobname) {
-					int idx = m_map->m_world->get_bob(bobname);
+					int32_t idx = m_map->m_world->get_bob(bobname);
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
 					for (uint32_t z=0; z<CRITTER_PER_DEFINITION; z++)
@@ -567,7 +567,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		f = m_map->m_fields;
 		pc = section;
       std::string res;
-      int amount=0;
+      int32_t amount=0;
 		for (Y_Coordinate y = 0; y < mapheight; ++y)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
@@ -583,10 +583,10 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
             uint8_t nres=0;
             if (res!="") {
                nres=m_map->get_world()->get_resource(res.c_str());
-               if (static_cast<signed char>(nres)==-1)
+               if (static_cast<uint8_t>(nres)==-1)
                   throw wexception("World doesn't define Resource %s\n, you can't play settler maps here!\n", res.c_str());
 				}
-				const int real_amount = static_cast<int>
+				const int32_t real_amount = static_cast<int32_t>
 					(2.86 * static_cast<float>(amount));
             f->set_resources(nres, real_amount);
             f->set_starting_res_amount(real_amount);
@@ -651,7 +651,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 						default: break;
 					}
 					if (bobname) {
-						int idx = m_map->m_world->get_immovable_index(bobname);
+						int32_t idx = m_map->m_world->get_immovable_index(bobname);
 						if (idx < 0)
 							throw wexception("Missing immovable type %s", bobname);
 						game->create_immovable(Coords(x, y), idx, 0);
@@ -754,7 +754,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				}
 
 				if (bobname) {
-					int idx = m_map->m_world->get_immovable_index(bobname);
+					int32_t idx = m_map->m_world->get_immovable_index(bobname);
 					if (idx < 0)
 						throw wexception("Missing immovable type %s", bobname);
 					game->create_immovable(Coords(x, y), idx, 0);

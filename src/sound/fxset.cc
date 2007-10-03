@@ -66,7 +66,7 @@ void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
  */
 Mix_Chunk *FXset::get_fx()
 {
-	int fxnumber;
+	int32_t fxnumber;
 
 	if (g_sound_handler.get_disable_fx() || m_fxs.empty())
 		return NULL;

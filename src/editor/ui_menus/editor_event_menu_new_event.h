@@ -39,8 +39,8 @@ struct Editor_Event_Menu_New_Event : public UI::Window {
       Editor_Event_Menu_New_Event(Editor_Interactive*);
       ~Editor_Event_Menu_New_Event();
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
 	void clicked_ok();

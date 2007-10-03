@@ -30,7 +30,7 @@
 #include "trigger/trigger_null.h"
 #include "wexception.h"
 
-static const int EVENT_VERSION = 1;
+static const int32_t EVENT_VERSION = 1;
 
 /*
  * Init and cleanup
@@ -56,7 +56,7 @@ void Event_Set_Null_Trigger::reinitialize(Game *) {}
  * File Read, File Write
  */
 void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
-	const int event_version = s->get_safe_int("version");
+	const int32_t event_version = s->get_safe_int("version");
 	if (event_version == EVENT_VERSION) {
 		const std::string triggername = s->get_safe_string("trigger");
 		if

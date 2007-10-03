@@ -27,16 +27,16 @@ class Game;
 #define DEFAULT_AUTOSAVE_INTERVAL 15
 
 class SaveHandler {
-	int m_lastSaveTime;
+	int32_t m_lastSaveTime;
 	bool m_initialized;
 
-	void initialize(int currenttime);
+	void initialize(int32_t currenttime);
 
 protected:
 
 public:
 	SaveHandler() : m_initialized(false) {}
-	void think(Game* g, int currenttime);
+	void think(Game* g, int32_t currenttime);
 	std::string create_file_name(std::string dir, std::string filename);
 	bool save_game (Game* g, std::string filename, std::string *error = NULL);
 

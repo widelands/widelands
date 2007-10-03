@@ -29,13 +29,13 @@ struct Game;
 struct Trigger_Null;
 
 struct Message_Box_Event_Message_Box : public UI::Window {
-      Message_Box_Event_Message_Box(Game*, Event_Message_Box*, int, int, int, int);
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+      Message_Box_Event_Message_Box(Game*, Event_Message_Box*, int32_t, int32_t, int32_t, int32_t);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       Game* m_game;
-      void clicked(int);
+      void clicked(int32_t);
       bool m_is_modal;
       std::vector<Trigger_Null*> m_trigger;
 };

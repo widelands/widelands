@@ -50,7 +50,7 @@ struct WatchWindowView {
 
 class WatchWindow : public UI::Window {
 public:
-	WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords, bool single_window=false);
+	WatchWindow(Interactive_Player *parent, int32_t x, int32_t y, int32_t w, int32_t h, Coords coords, bool single_window=false);
 	~WatchWindow();
 
 	UI::Signal1<Point> warp_mainview;
@@ -65,24 +65,24 @@ public:
 	void show_view(bool first=false);
 	Point calc_coords(Coords coords);
 	void save_coords();
-	void set_view(int index);
+	void set_view(int32_t index);
 	void close_cur_view();
 	void toggle_buttons();
 
 protected:
 	virtual void think();
-	void stop_tracking_by_drag(int x, int y);
+	void stop_tracking_by_drag(int32_t x, int32_t y);
 
 private:
 	Game                           * m_game;
 	Map_View                         m_mapview;
 	bool m_single_window;
 	uint32_t last_visit;
-	int m_cur_index;
+	int32_t m_cur_index;
 	UI::Button<WatchWindow>          m_follow;
 	UI::Button<WatchWindow>          m_goto;
 	std::vector<WatchWindowView> m_views;
-	UI::IDButton<WatchWindow, int> * m_view_btns[NUM_VIEWS];
+	UI::IDButton<WatchWindow, int32_t> * m_view_btns[NUM_VIEWS];
 };
 
 
@@ -95,7 +95,7 @@ WatchWindow::WatchWindow
 Initialize a watch window.
 ===============
 */
-WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords, bool single_window)
+WatchWindow::WatchWindow(Interactive_Player *parent, int32_t x, int32_t y, int32_t w, int32_t h, Coords coords, bool single_window)
 :
 UI::Window(parent, x, y, w, h, _("Watch").c_str()),
 m_game(parent->get_game()),
@@ -124,7 +124,7 @@ m_goto
 {
 	if (m_single_window) {
 		for (Uint8 i = 0; i < NUM_VIEWS; ++i)
-			m_view_btns[i] = new UI::IDButton<WatchWindow, int>
+			m_view_btns[i] = new UI::IDButton<WatchWindow, int32_t>
 				(this,
 				 74 + (17 * i), 200 - 34, 17, 34,
 				 0,
@@ -165,8 +165,8 @@ void WatchWindow::add_view(Coords coords) {
 //Calc point on map from coords
 Point WatchWindow::calc_coords(Coords coords) {
 	// Initial positioning
-	int vx = coords.x * TRIANGLE_WIDTH;
-	int vy = coords.y * TRIANGLE_HEIGHT;
+	int32_t vx = coords.x * TRIANGLE_WIDTH;
+	int32_t vy = coords.y * TRIANGLE_HEIGHT;
 
 
 	return Point(vx - m_mapview.get_w() / 2, vy - m_mapview.get_h() / 2);
@@ -186,7 +186,7 @@ void WatchWindow::next_view(bool first) {
 }
 
 //Sets the current view to index and resets timeout
-void WatchWindow::set_view(int index) {
+void WatchWindow::set_view(int32_t index) {
 	save_coords();
 	m_cur_index = index;
 	last_visit = m_game->get_gametime();
@@ -204,12 +204,12 @@ void WatchWindow::close_cur_view() {
 		return;
 	}
 
-	int old_index = m_cur_index;
+	int32_t old_index = m_cur_index;
 	next_view();
 
 	std::vector<WatchWindowView>::iterator view_it = m_views.begin();
 
-	for (int i=0;i<old_index;i++)
+	for (int32_t i=0;i<old_index;i++)
 		view_it++;
 
 	m_view_btns[m_cur_index]->set_enabled(false);
@@ -271,7 +271,7 @@ void WatchWindow::start_tracking(Point pos)
 		if (map.find_bobs(area, &bobs)) break;
 
 	// Find the bob closest to us
-	int closest_dist = -1;
+	int32_t closest_dist = -1;
 	Bob* closest = 0;
 
 	for (uint32_t i = 0; i < bobs.size(); i++) {
@@ -281,7 +281,7 @@ void WatchWindow::start_tracking(Point pos)
 		MapviewPixelFunctions::get_pix(map, bob->get_position(), p.x, p.y);
 		p = bob->calc_drawpos(*m_game, p);
 
-		const int dist = MapviewPixelFunctions::calc_pix_distance(map, p, pos);
+		const int32_t dist = MapviewPixelFunctions::calc_pix_distance(map, p, pos);
 
 		if (!closest || closest_dist > dist) {
 			closest = bob;
@@ -374,7 +374,7 @@ WatchWindow::stop_tracking_by_drag
 When the user drags the mapview, we stop tracking.
 ===============
 */
-void WatchWindow::stop_tracking_by_drag(int, int) {
+void WatchWindow::stop_tracking_by_drag(int32_t, int32_t) {
 	//Disable switching while dragging
 	if (m_mapview.is_dragging()) {
 		last_visit = m_game->get_gametime();

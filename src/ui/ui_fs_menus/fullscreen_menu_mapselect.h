@@ -57,7 +57,7 @@ class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base
 	UI::Textarea                                 tanplayers;
 	UI::Textarea                                 label_descr;
 	UI::Multiline_Textarea                       tadescr;
-	UI::IDButton<Fullscreen_Menu_MapSelect, int> back;
+	UI::IDButton<Fullscreen_Menu_MapSelect, int32_t> back;
 	UI::Button<Fullscreen_Menu_MapSelect>        m_ok;
 
 	filenameset_t                                m_mapfiles;

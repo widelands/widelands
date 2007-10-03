@@ -37,18 +37,18 @@
 struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 	Editor_Set_Starting_Pos_Tool();
 
-	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return m_current_sel_pic.size() ? m_current_sel_pic.c_str() : 0;}
 
       // tool functions
 	Player_Number get_current_player() const throw ();
-      void set_current_player(int i);
+      void set_current_player(int32_t i);
 
 private:
       std::string m_current_sel_pic;
 };
 
-int Editor_Tool_Set_Starting_Pos_Callback(const TCoords<FCoords>, void *, int);
+int32_t Editor_Tool_Set_Starting_Pos_Callback(const TCoords<FCoords>, void *, int32_t);
 
 #endif

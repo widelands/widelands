@@ -42,14 +42,14 @@ uint32_t getMaxAttackSoldiers(const Editor_Game_Base &, const Flag &, const Play
 struct AttackController : public BaseImmovable {
 	friend class Widelands_Map_Attack_Controller_Data_Packet;
 
-	AttackController(Editor_Game_Base* eg, Flag* flag, int attacker, int defender);
+	AttackController(Editor_Game_Base* eg, Flag* flag, int32_t attacker, int32_t defender);
 	AttackController(Editor_Game_Base &);
 	~AttackController();
 	void launchAttack(uint32_t nrAttackers);
 
 	//Methods inherited by BaseImmovable
-	virtual int  get_type    () const throw () {return ATTACKCONTROLLER;}
-	virtual int  get_size    () const throw () {return SMALL;}
+	virtual int32_t  get_type    () const throw () {return ATTACKCONTROLLER;}
+	virtual int32_t  get_size    () const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return false;}
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
 	virtual void act (Game*, uint32_t);
@@ -61,8 +61,8 @@ struct AttackController : public BaseImmovable {
 	void soldierDied(Soldier* soldier);
 	void soldierWon(Soldier* soldier);
 
-	inline int getAttackingPlayer() {return attackingPlayer;};
-	inline int getDefendingPlayer() {return defendingPlayer;};
+	inline int32_t getAttackingPlayer() {return attackingPlayer;};
+	inline int32_t getDefendingPlayer() {return defendingPlayer;};
 	inline Flag* getFlag() {return flag;};
 	Editor_Game_Base & egbase() {return *m_egbase;}
 
@@ -77,9 +77,9 @@ private:
 	};
 
 	bool battleGroundOccupied(Coords coords);
-	void calcBattleGround(BattleSoldier*, int);
+	void calcBattleGround(BattleSoldier*, int32_t);
 
-	bool launchAllSoldiers(bool attackers, int nrLaunch);
+	bool launchAllSoldiers(bool attackers, int32_t nrLaunch);
 	void launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint32_t nrLaunch, bool attackers);
 	bool moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers);
 
@@ -93,8 +93,8 @@ private:
 	typedef std::set<OPtr<MilitarySite> > MilitarySiteSet;
 	MilitarySiteSet involvedMilitarySites;
 
-	int attackingPlayer;
-	int defendingPlayer;
+	int32_t attackingPlayer;
+	int32_t defendingPlayer;
 	uint32_t totallyLaunched;
 	bool attackedMsEmpty;
 	Flag* flag;

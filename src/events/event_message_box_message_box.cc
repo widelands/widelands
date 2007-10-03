@@ -34,17 +34,17 @@
  * The message box himself
  */
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Game* game, Event_Message_Box* event,
-      int gposx, int gposy, int w, int h) :
+      int32_t gposx, int32_t gposy, int32_t w, int32_t h) :
 UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
 
    m_game = game;
 
    UI::Multiline_Textarea* m_text=0;
-   int spacing=5;
-   int offsy=5;
-   int offsx=spacing;
-   int posx=offsx;
-   int posy=offsy;
+   int32_t spacing=5;
+   int32_t offsy=5;
+   int32_t offsx=spacing;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    set_inner_size(w, h);
    m_text=new UI::Multiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
@@ -53,16 +53,16 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
       m_text->set_text(event->get_text());
 
    // Buttons
-   int but_width=80;
-   int space=get_inner_w()-2*spacing;
+   int32_t but_width=80;
+   int32_t space=get_inner_w()-2*spacing;
    space-=but_width*event->get_nr_buttons();
    space/=event->get_nr_buttons()+1;
    posx=spacing;
    posy=get_inner_h()-30;
    m_trigger.resize(event->get_nr_buttons());
-   for (int i=0; i<event->get_nr_buttons(); i++) {
+   for (int32_t i=0; i<event->get_nr_buttons(); i++) {
       posx+=space;
-		new UI::IDButton<Message_Box_Event_Message_Box, int>
+		new UI::IDButton<Message_Box_Event_Message_Box, int32_t>
 			(this,
 			 posx, posy, but_width, 20,
 			 0,
@@ -92,7 +92,7 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
  *
  * We are not draggable.
  */
-bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int)
+bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT && m_trigger.size() == 1) {
 		play_click();
@@ -103,13 +103,13 @@ bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int)
 }
 
 
-bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int, int)
+bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 /*
  * clicked
  */
-void Message_Box_Event_Message_Box::clicked(int i) {
+void Message_Box_Event_Message_Box::clicked(int32_t i) {
    if (i==-1) {
       // we should end this dialog
       if (m_is_modal) {

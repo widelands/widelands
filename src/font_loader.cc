@@ -47,7 +47,7 @@ Font Loader IMPLEMENTATION
 * Opens a font file and returns a TTF_FONT* pointer.
 */
 
-TTF_Font* Font_Loader::open_font(const std::string& name, int size) {
+TTF_Font* Font_Loader::open_font(const std::string& name, int32_t size) {
 	// Load the TrueType Font
    std::string filename="fonts/";
    filename+=name;
@@ -74,7 +74,7 @@ TTF_Font* Font_Loader::open_font(const std::string& name, int size) {
 * Looks for a font with given name and size in the font cache and returns it.
 * Ohterwise font will be loaded with open_font and chached.
 */
-TTF_Font* Font_Loader::get_font(std::string name, int size) {
+TTF_Font* Font_Loader::get_font(std::string name, int32_t size) {
 	char buffer[5];
 	snprintf(buffer, sizeof(buffer), "%i", size);
 

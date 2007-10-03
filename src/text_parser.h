@@ -30,8 +30,8 @@ struct Text_Block {
 	Text_Block();
 	Text_Block(const Text_Block & src);
 
-	void set_font_size(const int font_size) throw () {m_font_size = font_size;}
-	int get_font_size() const throw () {return m_font_size;}
+	void set_font_size(const int32_t font_size) throw () {m_font_size = font_size;}
+	int32_t get_font_size() const throw () {return m_font_size;}
 
 	void set_font_color(const RGBColor font_color) throw () {m_font_color = font_color;}
 	RGBColor get_font_color() const throw () {return m_font_color;}
@@ -53,9 +53,9 @@ struct Text_Block {
 	{m_font_face = font_face;}
 	const std::string & get_font_face() const throw () {return m_font_face;}
 
-	void set_line_spacing(const int line_spacing) throw ()
+	void set_line_spacing(const int32_t line_spacing) throw ()
 	{m_line_spacing = line_spacing;};
-	int get_line_spacing() const throw () {return m_line_spacing;};
+	int32_t get_line_spacing() const throw () {return m_line_spacing;};
 
 	void set_words(const std::vector<std::string> & words) {m_words = words;}
 	const std::vector<std::string> & get_words() const throw () {return m_words;}
@@ -67,13 +67,13 @@ struct Text_Block {
 		() const throw ()
 	{return m_line_breaks;}
 private:
-	int                      m_font_size;
+	int32_t                      m_font_size;
 		RGBColor m_font_color;
 		std::string m_font_weight;
 		std::string m_font_style;
 		std::string m_font_decoration;
 		std::string m_font_face;
-		int m_line_spacing;
+		int32_t m_line_spacing;
 		std::vector<std::string> m_words;
 	std::vector<std::vector<std::string>::size_type> m_line_breaks;
 };

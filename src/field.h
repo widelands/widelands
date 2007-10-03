@@ -121,7 +121,7 @@ struct Field {
 
 private:
    Height height;
-	char   brightness;
+	int8_t   brightness;
 
 	FieldCaps       caps                    : 7;
 	Buildhelp_Index buildhelp_overlay_index : 3;
@@ -191,8 +191,8 @@ public:
 	const BaseImmovable * get_immovable() const throw () {return immovable;}
 	inline BaseImmovable* get_immovable() {return immovable;}
 
-	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
-   inline char get_brightness() const {return brightness;}
+	void set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
+   inline int8_t get_brightness() const {return brightness;}
 
 	/**
 	 * Does not change the border bit of this or neighbouring fileds. That must
@@ -235,9 +235,9 @@ public:
 	void set_buildhelp_overlay_index(const Buildhelp_Index i)
 	{buildhelp_overlay_index = i;}
 
-	inline int get_roads() const {return roads;}
-	inline int get_road(int dir) const {return (roads >> dir) & Road_Mask;}
-	inline void set_road(int dir, int type) {
+	inline int32_t get_roads() const {return roads;}
+	inline int32_t get_road(int32_t dir) const {return (roads >> dir) & Road_Mask;}
+	inline void set_road(int32_t dir, int32_t type) {
 		roads &= ~(Road_Mask << dir);
 		roads |= type << dir;
 	}
@@ -245,15 +245,15 @@ public:
 	inline uint8_t get_resources() const {return m_resources;}
    inline uint8_t get_resources_amount() const {return m_res_amount;}
 	inline void set_resources(uint8_t res, uint8_t amount) {m_resources = res; m_res_amount=amount;}
-   inline void set_starting_res_amount(int amount) {m_starting_res_amount=amount;}
-   inline int get_starting_res_amount() {return m_starting_res_amount;}
+   inline void set_starting_res_amount(int32_t amount) {m_starting_res_amount=amount;}
+   inline int32_t get_starting_res_amount() {return m_starting_res_amount;}
 
    /** \note you must reset this field's + neighbor's brightness when you change the height
     * Map's change_height does this
     * This function is not private, because the loader will use them directly
     * But realize, most of the times you will need Map::set_field_height()*/
 	void set_height(Height h) {
-		if (static_cast<signed char>(h) < 0) h = 0;
+		if (static_cast<int8_t>(h) < 0) h = 0;
 		if (h > MAX_FIELD_HEIGHT) h = MAX_FIELD_HEIGHT;
 		height = h;
 	}

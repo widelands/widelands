@@ -59,14 +59,14 @@ throw (_wexception)
 	}
    Section* s = prof.get_section("global");
 
-	const int packet_version = s->get_int("packet_version");
+	const int32_t packet_version = s->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		const Player_Number nr_players = egbase->map().get_nrplayers();
       // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
 		if (dynamic_cast<Game *>(egbase))
 			iterate_players_existing(p, nr_players, *egbase, player) {
-					const int nr_buildings = player->tribe().get_nrbuildings();
-					for (int b = 0; b < nr_buildings; ++b)
+					const int32_t nr_buildings = player->tribe().get_nrbuildings();
+					for (int32_t b = 0; b < nr_buildings; ++b)
 						player->allow_building(b, false);
 				}
 
@@ -80,7 +80,7 @@ throw (_wexception)
          // Write for all buildings if it is enabled
 				while (const char * const name = s->get_next_bool(0, 0)) {
             bool allowed = s->get_bool(name);
-					const int index = tribe.get_building_index(name);
+					const int32_t index = tribe.get_building_index(name);
 					if (index == -1)
 						throw wexception
 							("Unknown building found in map (Allowed_Buildings_Data): "

@@ -178,8 +178,8 @@ Interactive_Player* Game::get_ipl()
  */
 bool Game::can_start()
 {
-	int local_num;
-	int i;
+	int32_t local_num;
+	int32_t i;
 
 	if (!get_map())
 		return false;
@@ -276,7 +276,7 @@ bool Game::run_single_player ()
 
 	m_maploader=0;
 	Fullscreen_Menu_LaunchGame lgm(this, 0, &m_maploader);
-	const int code = lgm.run();
+	const int32_t code = lgm.run();
 
 	if (code==0 || get_map()==0)
 	    return false;
@@ -311,8 +311,8 @@ bool Game::run_campaign()
 	m_netgame = 0;
 
 	// set variables
-	int campaign;
-	int loop = 1;
+	int32_t campaign;
+	int32_t loop = 1;
 	std::string campmapfile;
 
 	// Campaign UI - Loop
@@ -381,7 +381,7 @@ bool Game::run_multi_player (NetGame* ng)
 	m_maploader=0;
 	Fullscreen_Menu_LaunchGame lgm(this, m_netgame, &m_maploader);
 	m_netgame->set_launch_menu (&lgm);
-	const int code = lgm.run();
+	const int32_t code = lgm.run();
 	m_netgame->set_launch_menu (0);
 
 	if (code <= 0 || get_map() == 0)
@@ -616,12 +616,12 @@ void Game::think()
 			m_last_stats_update = get_gametime();
 		}
 
-		int frametime = -m_realtime;
+		int32_t frametime = -m_realtime;
 		m_realtime =  WLApplication::get()->get_time();
 		frametime += m_realtime;
 
 		if (m_netgame!=0) {
-			int max_frametime=m_netgame->get_max_frametime();
+			int32_t max_frametime=m_netgame->get_max_frametime();
 
 			if (frametime>max_frametime)
 				frametime = max_frametime; //  wait for the next server message
@@ -669,7 +669,7 @@ void Game::think()
 /**
  * Change the game speed.
  */
-void Game::set_speed(int speed)
+void Game::set_speed(int32_t speed)
 {
 	assert(speed >= 0);
 
@@ -820,22 +820,22 @@ void Game::send_player_bulldoze (PlayerImmovable* pi)
 	send_player_command (new Cmd_Bulldoze(get_gametime(), pi->get_owner()->get_player_number(), pi));
 }
 
-void Game::send_player_build (int pid, const Coords& coords, int id)
+void Game::send_player_build (int32_t pid, const Coords& coords, int32_t id)
 {
 	send_player_command (new Cmd_Build(get_gametime(), pid, coords, id));
 }
 
-void Game::send_player_build_flag (int pid, const Coords& coords)
+void Game::send_player_build_flag (int32_t pid, const Coords& coords)
 {
 	send_player_command (new Cmd_BuildFlag(get_gametime(), pid, coords));
 }
 
-void Game::send_player_build_road (int pid, Path & path)
+void Game::send_player_build_road (int32_t pid, Path & path)
 {
 	send_player_command (new Cmd_BuildRoad(get_gametime(), pid, path));
 }
 
-void Game::send_player_flagaction (Flag* flag, int action)
+void Game::send_player_flagaction (Flag* flag, int32_t action)
 {
 	send_player_command (new Cmd_FlagAction(get_gametime(), flag->get_owner()->get_player_number(), flag, action));
 }
@@ -845,26 +845,26 @@ void Game::send_player_start_stop_building (Building* b)
 	send_player_command (new Cmd_StartStopBuilding(get_gametime(), b->get_owner()->get_player_number(), b));
 }
 
-void Game::send_player_enhance_building (Building* b, int id)
+void Game::send_player_enhance_building (Building* b, int32_t id)
 {
 	assert(id!=-1);
 
 	send_player_command (new Cmd_EnhanceBuilding(get_gametime(), b->get_owner()->get_player_number(), b, id));
 }
 
-void Game::send_player_change_training_options(Building* b, int atr, int val)
+void Game::send_player_change_training_options(Building* b, int32_t atr, int32_t val)
 {
 
 	send_player_command (new Cmd_ChangeTrainingOptions(get_gametime(), b->get_owner()->get_player_number(), b, atr, val));
 }
 
-void Game::send_player_drop_soldier (Building* b, int ser)
+void Game::send_player_drop_soldier (Building* b, int32_t ser)
 {
 	assert(ser != -1);
 	send_player_command (new Cmd_DropSoldier(get_gametime(), b->get_owner()->get_player_number(), b, ser));
 }
 
-void Game::send_player_change_soldier_capacity (Building* b, int val)
+void Game::send_player_change_soldier_capacity (Building* b, int32_t val)
 {
 	send_player_command (new Cmd_ChangeSoldierCapacity(get_gametime(), b->get_owner()->get_player_number(), b, val));
 }
@@ -872,10 +872,10 @@ void Game::send_player_change_soldier_capacity (Building* b, int val)
 /////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction
 (const Flag * const flag,
- const int action,
+ const int32_t action,
  const Player_Number who_attacks,
- const int num_soldiers,
- const int type)
+ const int32_t num_soldiers,
+ const int32_t type)
 {
 	send_player_command (new Cmd_EnemyFlagAction(get_gametime(), who_attacks, flag, action, who_attacks, num_soldiers, type));
 }
@@ -956,9 +956,9 @@ void Game::sample_statistics()
 		for (uint32_t j = 0; plr && j < plr->get_nr_economies(); j++) {
 			Economy* eco = plr->get_economy_by_number(j);
 
-			for (int wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
+			for (int32_t wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
 				wastock += eco->stock_ware(wareid);
-			for (int workerid = 0; workerid < plr->tribe().get_nrworkers(); workerid++) {
+			for (int32_t workerid = 0; workerid < plr->tribe().get_nrworkers(); workerid++) {
 				if (plr->tribe().get_worker_descr(workerid)->get_worker_type() == Worker_Descr::CARRIER)
 					continue;
 				wostock += eco->stock_worker(workerid);

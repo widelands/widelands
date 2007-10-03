@@ -29,7 +29,7 @@ struct Editor_Place_Bob_Tool : public Editor_Tool, public MultiSelect {
 		: Editor_Tool(tool, tool)
 	{}
 
-	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_place_bob.png";}
 };

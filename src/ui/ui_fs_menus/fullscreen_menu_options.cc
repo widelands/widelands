@@ -214,7 +214,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 Options_Ctrl::Options_Ctrl(Section* s) {
 	m_opt_dialog = new Fullscreen_Menu_Options(options_struct(s));
 	m_opt_section = s;
-	int code = m_opt_dialog->run();
+	int32_t code = m_opt_dialog->run();
 	if (code == Fullscreen_Menu_Options::om_ok)
 		save_options();
 }

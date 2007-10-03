@@ -61,9 +61,9 @@ m_remove_last_player
 
 {
    // User Interface
-   int spacing=5;
-   int width=20;
-   int posy= 0;
+   int32_t spacing=5;
+   int32_t width=20;
+   int32_t posy= 0;
 
 	Tribe_Descr::get_all_tribenames(m_tribes);
 
@@ -81,7 +81,7 @@ m_remove_last_player
 
    m_posy=posy;
 
-   int i=0;
+   int32_t i=0;
    for (i=0; i<MAX_PLAYERS; i++) {
       m_plr_names[i]=0;
       m_plr_set_pos_buts[i]=0;
@@ -122,7 +122,7 @@ void Editor_Player_Menu::update() {
    m_nr_of_players_ta->set_text(text.c_str());
 
    // Now remove all the unneeded stuff
-   int i=0;
+   int32_t i=0;
    for (i=nr_players; i<MAX_PLAYERS; i++) {
          delete m_plr_names[i];
          m_plr_names[i]=0;
@@ -137,14 +137,14 @@ void Editor_Player_Menu::update() {
          m_plr_allowed_buildings[i]=0;
 #endif
 	}
-   int posy=m_posy;
-   int spacing=5;
-   int size=20;
+   int32_t posy=m_posy;
+   int32_t spacing=5;
+   int32_t size=20;
 
 
    // And recreate the needed
    for (i=0; i<nr_players; i++) {
-		int posx = spacing;
+		int32_t posx = spacing;
       if (!m_plr_names[i]) {
           m_plr_names[i]=new UI::Edit_Box(this, posx, posy, 140, size, 0, i);
           m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
@@ -328,7 +328,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 /*
  * Player name has changed
  */
-void Editor_Player_Menu::name_changed(int m) {
+void Editor_Player_Menu::name_changed(int32_t m) {
    // Player name has been changed
    std::string text=m_plr_names[m]->get_text();
 	Editor_Interactive & parent =

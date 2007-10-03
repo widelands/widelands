@@ -34,7 +34,7 @@ Initialize a edibox that supports multiline strings.
 */
 Multiline_Editbox::Multiline_Editbox
 	(Panel * parent,
-	 int x, int y, uint32_t w, uint32_t h,
+	 int32_t x, int32_t y, uint32_t w, uint32_t h,
 	 const char * text)
 	:
 	Multiline_Textarea(parent, x, y, w, h, text, Align_Left, true),
@@ -59,7 +59,7 @@ Multiline_Editbox::~Multiline_Editbox() {
 /**
 a key event must be handled
 */
-bool Multiline_Editbox::handle_key(bool down, int code, char c) {
+bool Multiline_Editbox::handle_key(bool down, int32_t code, char c) {
 
    m_needs_update=true;
 
@@ -80,7 +80,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 
 		case KEY_LEFT:
             m_cur_pos-=1;
-            if (static_cast<int>(m_cur_pos)<0) m_cur_pos=0;
+            if (static_cast<int32_t>(m_cur_pos)<0) m_cur_pos=0;
             break;
 
 		case KEY_RIGHT:
@@ -152,7 +152,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 /*
  * handle mousebutton events
  */
-bool Multiline_Editbox::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Multiline_Editbox::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
       focus();
       Multiline_Textarea::set_text(get_text().c_str());
@@ -161,7 +161,7 @@ bool Multiline_Editbox::handle_mousepress(const Uint8 btn, int x, int y) {
 	}
 	return Multiline_Textarea::handle_mousepress(btn, x, y);
 }
-bool Multiline_Editbox::handle_mouserelease(const Uint8, int, int)
+bool Multiline_Editbox::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 /**
@@ -184,7 +184,7 @@ void Multiline_Editbox::draw(RenderTarget* dst)
 			 get_eff_w(),
 			 m_cache_mode,
 			 &m_cache_id,
-			 (has_focus() ? static_cast<int>(m_cur_pos) : -1)); //explicit cast is neccessary to avoid a compiler warning
+			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1)); //explicit cast is neccessary to avoid a compiler warning
       m_cache_mode = Widget_Cache_Use;
 	}
    Multiline_Textarea::draw_scrollbar();

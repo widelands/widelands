@@ -31,7 +31,7 @@
 
 
 Map_View::Map_View
-(UI::Panel * parent, int x, int y, uint32_t w, uint32_t h, Interactive_Base & player)
+(UI::Panel * parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Interactive_Base & player)
 :
 UI::Panel               (parent, x, y, w, h),
 m_intbase               (player),
@@ -139,7 +139,7 @@ void Map_View::stop_dragging() {
  * Right-release: disable dragging
  * Left-press:    field action window
  */
-bool Map_View::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Map_View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		track_sel(Point(x, y));
 
@@ -152,7 +152,7 @@ bool Map_View::handle_mousepress(const Uint8 btn, int x, int y) {
 	}
 	return true;
 }
-bool Map_View::handle_mouserelease(const Uint8 btn, int, int)
+bool Map_View::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT and m_dragging) stop_dragging(); return true;}
 
 
@@ -164,7 +164,7 @@ Scroll the view according to mouse movement.
 ===============
 */
 bool Map_View::handle_mousemove
-(const Uint8 state, int x, int y, int xdiff, int ydiff)
+(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
 	if (m_dragging)
 	{
@@ -182,7 +182,7 @@ bool Map_View::handle_mousemove
 
 /*
 ===============
-Map_View::track_sel(int mx, int my)
+Map_View::track_sel(int32_t mx, int32_t my)
 
 Move the sel to the given mouse position.
 Does not honour sel freeze.

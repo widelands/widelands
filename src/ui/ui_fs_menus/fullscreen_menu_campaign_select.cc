@@ -79,7 +79,7 @@ void Fullscreen_Menu_CampaignSelect::clicked_ok()
 	end_modal(1);
 }
 
-int Fullscreen_Menu_CampaignSelect::get_campaign()
+int32_t Fullscreen_Menu_CampaignSelect::get_campaign()
 {
 	return campaign;
 }
@@ -174,7 +174,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 	Section *c;
 	c = campvis.get_section("campaigns");
 
-	int i = 0;
+	int32_t i = 0;
 
 	// predefine variables, used in while-loop
 	char cname[12];
@@ -381,7 +381,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 	sprintf(csection, "campsect%i", campaign);
 	std::string campsection = s->get_string(csection);
 	std::string mapsection;
-	int i = 0;
+	int32_t i = 0;
 	char number[4];
 
 	// Create the entry we use to load the section of the map

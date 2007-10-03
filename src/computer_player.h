@@ -63,7 +63,7 @@ private:
 		struct BuildableField {
 		FCoords       coords;
 
-		long          next_update_due;
+		int32_t          next_update_due;
 
 		bool          reachable;
 		bool          preferred;
@@ -76,7 +76,7 @@ private:
 		uint8_t tree_consumers_nearby;
 		uint8_t stone_consumers_nearby;
 
-		short         military_influence;
+		int16_t         military_influence;
 
 			BuildableField (const FCoords& fc)
 			{
@@ -93,12 +93,12 @@ private:
 		struct MineableField {
 		FCoords coords;
 
-		long    next_update_due;
+		int32_t    next_update_due;
 
 		bool    reachable;
 		bool    preferred;
 
-		int     mines_nearby;
+		int32_t     mines_nearby;
 
 			MineableField (const FCoords& fc)
 			{
@@ -116,7 +116,7 @@ private:
 
 		struct BuildingObserver {
 		const char                        * name;
-		int                                 id;
+		int32_t                                 id;
 		const Building_Descr              * desc;
 		const BuildingHints               * hints;
 
@@ -133,14 +133,14 @@ private:
 		bool                                need_trees;
 		bool                                need_stones;
 
-		std::vector<short>                  inputs;
-		std::vector<short>                  outputs;
-		short                               production_hint;
+		std::vector<int16_t>                  inputs;
+		std::vector<int16_t>                  outputs;
+		int16_t                               production_hint;
 
-		int                                 cnt_built;
-		int                                 cnt_under_construction;
+		int32_t                                 cnt_built;
+		int32_t                                 cnt_under_construction;
 
-			int get_total_count()
+			int32_t get_total_count()
 			{return cnt_built + cnt_under_construction;}
 		};
 
@@ -161,7 +161,7 @@ private:
 	const Tribe_Descr               * tribe;
 
 	std::list<BuildingObserver>       buildings;
-	int                               total_constructionsites;
+	int32_t                               total_constructionsites;
 
 	std::list<FCoords>                unusable_fields;
 	std::list<BuildableField *>       buildable_fields;
@@ -175,10 +175,10 @@ private:
 
 		EconomyObserver* get_economy_observer (Economy*);
 
-	long                              next_road_due;
-	long                              next_construction_due;
-	long                              next_productionsite_check_due;
-	long                              inhibit_road_building;
+	int32_t                              next_road_due;
+	int32_t                              next_construction_due;
+	int32_t                              next_productionsite_check_due;
+	int32_t                              inhibit_road_building;
 
 		void late_initialization ();
 

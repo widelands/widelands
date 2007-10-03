@@ -46,16 +46,16 @@ UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 {
 
    // UI::Buttons
-   const int offsx=5;
-	const int offsy   = 5;
-   const int spacing=5;
-   const int width=34;
-   const int height=34;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=5;
+	const int32_t offsy   = 5;
+   const int32_t spacing=5;
+   const int32_t width=34;
+   const int32_t height=34;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
 
-   int num_tools=6;
+   int32_t num_tools=6;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
@@ -119,7 +119,7 @@ called when the radiogroup changes or is reclicked
 ===========
 */
 void Editor_Tool_Menu::changed_to() {
-	const int n = m_radioselect.get_state();
+	const int32_t n = m_radioselect.get_state();
 
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());

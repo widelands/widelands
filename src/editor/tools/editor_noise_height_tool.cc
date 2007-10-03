@@ -28,7 +28,7 @@
 #include <stdint.h>
 
 /// Sets the heights to random values. Chages surrounding nodes if necessary.
-int Editor_Noise_Height_Tool::handle_click_impl
+int32_t Editor_Noise_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	uint32_t max = 0;
@@ -42,7 +42,7 @@ int Editor_Noise_Height_Tool::handle_click_impl
 		 (mr.location(),
 		  m_interval.min
 		  +
-		  static_cast<int>
+		  static_cast<int32_t>
 		  (static_cast<double>
 		   (m_interval.min - m_interval.max) * rand() / (RAND_MAX + 1.0))));
 	while (mr.advance(map));

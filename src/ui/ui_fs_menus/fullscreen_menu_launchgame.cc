@@ -74,7 +74,7 @@ m_is_scenario(false)
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	m_ok.set_visible(not ng or ng->is_host());
 // Player settings
-	int y;
+	int32_t y;
 
 	y = 250;
 	for (uint32_t i = 1; i <= MAX_PLAYERS; ++i) {
@@ -162,7 +162,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		}
 
 		if (m_netgame!=0) {
-			int allow=PlayerDescriptionGroup::CHANGE_NOTHING;
+			int32_t allow=PlayerDescriptionGroup::CHANGE_NOTHING;
 
 			if (m_netgame->is_host() && i>0)
 				allow|=PlayerDescriptionGroup::CHANGE_ENABLED;

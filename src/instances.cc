@@ -36,7 +36,7 @@
 #include <stdio.h>
 
 
-Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int t, Map_Object* o)
+Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int32_t t, Map_Object* o)
 	: GameLogicCommand(t)
 {
 	obj_serial = o->get_serial();
@@ -95,7 +95,7 @@ void Cmd_Destroy_Map_Object::Write
 
 }
 
-Cmd_Act::Cmd_Act(int t, Map_Object* o, int a) : GameLogicCommand(t)
+Cmd_Act::Cmd_Act(int32_t t, Map_Object* o, int32_t a) : GameLogicCommand(t)
 {
 	obj_serial = o->get_serial();
 	arg = a;

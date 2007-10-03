@@ -76,7 +76,7 @@ Widelands_Map_Loader::~Widelands_Map_Loader() {
  * Preloads a map so that the map class returns valid data for all it's
  * get_info() functions (_width, _nrplayers..)
  */
-int Widelands_Map_Loader::preload_map(bool scenario) {
+int32_t Widelands_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
 
    m_map->cleanup();
@@ -113,7 +113,7 @@ void Widelands_Map_Loader::load_world() {
 /*
  * Load the complete map and make sure that it runs without problems
  */
-int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scenario) {
+int32_t Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scenario) {
    //This is needed to ensure that world is loaded for multiplayer clients,
    //hosts do world loading while creating the game and the states
    //are not available outside this class to make a conditional load.

@@ -26,7 +26,7 @@
 struct Editor_Delete_Immovable_Tool : public Editor_Tool {
 	Editor_Delete_Immovable_Tool() : Editor_Tool(*this, *this) {}
 
-	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_delete.png";}
 };

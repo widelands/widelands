@@ -54,7 +54,7 @@
  */
 #define MAX_OVERLAYS_PER_NODE 5
 #define MAX_OVERLAYS_PER_TRIANGLE 3
-typedef int (*Overlay_Callback_Function)(const TCoords<FCoords>, void *, int);
+typedef int32_t (*Overlay_Callback_Function)(const TCoords<FCoords>, void *, int32_t);
 struct Overlay_Manager {
 	struct Job_Id { //  Boxing
 		static Job_Id Null() throw ()//  Constant value for no job.
@@ -78,7 +78,7 @@ struct Overlay_Manager {
 	void reset();
 
       // register callback function (see data below for description)
-      void register_overlay_callback_function(Overlay_Callback_Function func, void* data, int iparam1 = 0) {
+      void register_overlay_callback_function(Overlay_Callback_Function func, void* data, int32_t iparam1 = 0) {
          m_callback=func; m_callback_data=data;  m_callback_data_i=iparam1;
 		}
 
@@ -109,13 +109,13 @@ struct Overlay_Manager {
 	 */
 	void register_overlay
 		(const TCoords<>,
-		 const int picid,
-		 const int level,
+		 const int32_t picid,
+		 const int32_t level,
 		 Point        hotspot = Point::invalid(),
 		 const Job_Id jobid = Job_Id::Null());
 
 	//  if picid == -1 remove all overlays
-	void remove_overlay(const TCoords<>, const int picid = -1);
+	void remove_overlay(const TCoords<>, const int32_t picid = -1);
 
 	void remove_overlay(const Job_Id jobid);
 
@@ -146,18 +146,18 @@ private:
 	struct Registered_Overlays {
 		Registered_Overlays
 			(const Job_Id Jobid,
-			 const int Picid,
+			 const int32_t Picid,
 			 const Point  Hotspot,
-			 const int Level)
+			 const int32_t Level)
 			:
 			picid(Picid),
 			hotspot(Hotspot),
 			level(Level)
 		{jobids.insert(Jobid);}
 		std::set<Job_Id> jobids;
-		int picid;
+		int32_t picid;
 		Point            hotspot;
-		int level;
+		int32_t level;
 	};
 
 	struct Registered_Road_Overlays {
@@ -184,7 +184,7 @@ private:
       Overlay_Callback_Function m_callback;           // this callback is used to define we're overlays are set and were not
       // since we only care for map stuff, not for player stuff or editor issues
       void *m_callback_data;
-      int m_callback_data_i;
+      int32_t m_callback_data_i;
 
 	//  No need to initialize m_current_job_id (see comment for get_a_job_id).
 	Job_Id m_current_job_id;

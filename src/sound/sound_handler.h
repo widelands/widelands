@@ -183,38 +183,38 @@ public:
 	 const uint32_t priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 	void play_fx
 	(const std::string fx_name,
-	 const int stereo_position,
+	 const int32_t stereo_position,
 	 const uint32_t priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 
 	void register_song
 	(const std::string dir,
 	 const std::string basename,
 	 const bool recursive = false);
-	void start_music(const std::string songset_name, int fadein_ms = 0);
-	void stop_music(int fadeout_ms = 0);
+	void start_music(const std::string songset_name, int32_t fadein_ms = 0);
+	void stop_music(int32_t fadeout_ms = 0);
 	void change_music
 	(const std::string songset_name = "",
-	 int fadeout_ms = 0,
-	 int fadein_ms = 0);
+	 int32_t fadeout_ms = 0,
+	 int32_t fadein_ms = 0);
 
 	static void music_finished_callback();
-	static void fx_finished_callback(int channel);
+	static void fx_finished_callback(int32_t channel);
 	void handle_channel_finished(uint32_t channel);
 
 	bool get_disable_music() const throw ();
 	bool get_disable_fx   () const throw ();
-	int  get_music_volume () const throw ();
-	int  get_fx_volume    () const throw ();
+	int32_t  get_music_volume () const throw ();
+	int32_t  get_fx_volume    () const throw ();
 	void set_disable_music(bool disable);
 	void set_disable_fx   (bool disable);
-	void set_music_volume (int volume);
-	void set_fx_volume    (int volume);
+	void set_music_volume (int32_t volume);
+	void set_fx_volume    (int32_t volume);
 
 	/**
 	 * Return the max value for volume settings. We use a function to hide
 	 * SDL_mixer constants outside of sound_handler.
 	 */
-	int get_max_volume() const throw () {return MIX_MAX_VOLUME;}
+	int32_t get_max_volume() const throw () {return MIX_MAX_VOLUME;}
 
 	/** The game logic where we can get a mapping from logical to screen
 	 * coordinates and vice vers
@@ -238,10 +238,10 @@ public:
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
 	void load_one_fx(const char * const filename, const std::string fx_name);
-	int stereo_position(const Coords position);
+	int32_t stereo_position(const Coords position);
 	bool play_or_not
 	(const std::string fx_name,
-	 const int stereo_position,
+	 const int32_t stereo_position,
 	 const uint32_t priority);
 
 	/// Whether to disable background music
@@ -249,9 +249,9 @@ protected:
 	/// Whether to disable sound effects
 	bool m_disable_fx;
 	/// Volume of music (from 0 to \ref get_max_volume())
-	int m_music_volume;
+	int32_t m_music_volume;
 	/// Volume of sound effects (from 0 to \ref get_max_volume())
-	int m_fx_volume;
+	int32_t m_fx_volume;
 
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside

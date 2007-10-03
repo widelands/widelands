@@ -43,12 +43,12 @@ UI::Window(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
 m_parent(parent),
 m_event_chain(chain)
 {
-   const int offsx=5;
-   const int offsy=25;
-   const int spacing=5;
-   int posx=offsx;
-   int posy=offsy;
-   const int ls_width = 200;
+   const int32_t offsx=5;
+   const int32_t offsy=25;
+   const int32_t spacing=5;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
+   const int32_t ls_width = 200;
 
    // Name
    new UI::Textarea(this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
@@ -61,7 +61,7 @@ m_event_chain(chain)
    m_morethanonce = new UI::Checkbox(this, posx, posy);
    m_morethanonce->set_state(m_event_chain->get_repeating());
    posy += STATEBOX_HEIGHT + spacing;
-   const int lsoffsy = posy;
+   const int32_t lsoffsy = posy;
 
    // Event List
    new UI::Textarea(this, posx, lsoffsy, _("Events: "), Align_Left);
@@ -158,7 +158,7 @@ m_event_chain(chain)
 
 	posx=(get_inner_w()/2)+spacing;
 
-	new UI::IDButton<Editor_Event_Menu_Edit_EventChain, int>
+	new UI::IDButton<Editor_Event_Menu_Edit_EventChain, int32_t>
 		(this,
 		 posx, posy, 80, 20,
 		 1,
@@ -190,10 +190,10 @@ Editor_Event_Menu_Edit_EventChain::~Editor_Event_Menu_Edit_EventChain() {
  * We are not draggable.
  */
 bool Editor_Event_Menu_Edit_EventChain::handle_mousepress
-(const Uint8 btn, int, int)
+(const Uint8 btn, int32_t, int32_t)
 {if (btn & SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Editor_Event_Menu_Edit_EventChain::handle_mouserelease
-(const Uint8, int, int)
+(const Uint8, int32_t, int32_t)
 {return false;}
 
 

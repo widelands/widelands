@@ -41,7 +41,7 @@ struct Editor_Tool {
 	virtual ~Editor_Tool() {}
 
 	enum Tool_Index {First, Second, Third};
-	int handle_click
+	int32_t handle_click
 		(const Tool_Index i,
 		 Map & map, const Node_and_Triangle<> center,
 		 Editor_Interactive & parent)
@@ -54,7 +54,7 @@ struct Editor_Tool {
 			(i == First ? *this : i == Second ? m_second : m_third).get_sel_impl();
 		}
 
-	virtual int handle_click_impl
+	virtual int32_t handle_click_impl
 		(Map &, const Node_and_Triangle<>, Editor_Interactive & parent) = 0;
 	virtual const char * get_sel_impl() const throw () = 0;
 	virtual bool operates_on_triangles() const {return false;};

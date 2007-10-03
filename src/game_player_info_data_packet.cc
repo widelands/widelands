@@ -50,8 +50,8 @@ throw (_wexception)
 			game->remove_player(i);
 			if (fr.Unsigned8()) {
 				bool see_all = fr.Unsigned8();
-				int type = fr.Signed32();
-				int plnum = fr.Signed32();
+				int32_t type = fr.Signed32();
+				int32_t plnum = fr.Signed32();
 				std::string tribe = fr.CString();
 
 				RGBColor rgb[4];

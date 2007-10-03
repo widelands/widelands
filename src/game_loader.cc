@@ -42,7 +42,7 @@ Game_Loader::~Game_Loader() {}
 /*
  * This function preloads a game
  */
-int Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
+int32_t Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
    // Load elemental data block
    mp->Read(m_fs, m_game, 0);
 
@@ -52,7 +52,7 @@ int Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
 /*
  * Load the complete file
  */
-int Game_Loader::load_game() {
+int32_t Game_Loader::load_game() {
 
    log("Game: Reading Preload Data ... ");
 	{Game_Preload_Data_Packet                     p; p.Read(m_fs, m_game, 0);}

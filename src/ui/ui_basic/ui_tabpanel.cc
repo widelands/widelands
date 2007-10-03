@@ -35,7 +35,7 @@ namespace UI {
 /**
 Initialize an empty Tab_Panel
 */
-Tab_Panel::Tab_Panel(Panel* parent, int x, int y, uint32_t background)
+Tab_Panel::Tab_Panel(Panel* parent, int32_t x, int32_t y, uint32_t background)
 	: Panel(parent, x, y, 0, 0)
 {
 	m_active = 0;
@@ -64,8 +64,8 @@ Resize the parent if snapparent is enabled.
 */
 void Tab_Panel::resize()
 {
-	int w;
-	int h;
+	int32_t w;
+	int32_t h;
 
 	// size of button row
 	w = TP_BUTTON_WIDTH * m_tabs.size();
@@ -149,7 +149,7 @@ Draw the buttons and the tab
 void Tab_Panel::draw(RenderTarget* dst)
 {
 	uint32_t idx;
-	int x;
+	int32_t x;
 
 	// draw the background
 	compile_assert(2 < TP_BUTTON_WIDTH);
@@ -168,7 +168,7 @@ void Tab_Panel::draw(RenderTarget* dst)
 
 	// draw the buttons
 	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
-		if (m_highlight == static_cast<int>(idx))
+		if (m_highlight == static_cast<int32_t>(idx))
 			dst->brighten_rect
 				(Rect(Point(x, 0), TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT),
 				 MOUSE_OVER_BRIGHT_FACTOR);
@@ -243,8 +243,8 @@ void Tab_Panel::handle_mousein(bool inside)
 /**
 Update highlighting
 */
-bool Tab_Panel::handle_mousemove(const Uint8, int x, int y, int, int) {
-	int hl;
+bool Tab_Panel::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
+	int32_t hl;
 
 	if (y < 0 || y >= TP_BUTTON_HEIGHT)
 		hl = -1;
@@ -280,9 +280,9 @@ bool Tab_Panel::handle_mousemove(const Uint8, int x, int y, int, int) {
 /**
 Change the active tab if a tab button has been clicked
 */
-bool Tab_Panel::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Tab_Panel::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		int id;
+		int32_t id;
 
 		if (y >= TP_BUTTON_HEIGHT)
 			return false;
@@ -298,6 +298,6 @@ bool Tab_Panel::handle_mousepress(const Uint8 btn, int x, int y) {
 
 	return false;
 }
-bool Tab_Panel::handle_mouserelease(const Uint8, int, int)
+bool Tab_Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 };

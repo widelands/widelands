@@ -22,7 +22,7 @@
 
 namespace UI {
 
-Textarea::Textarea (Panel * const parent, const int x, const int y,
+Textarea::Textarea (Panel * const parent, const int32_t x, const int32_t y,
 						  const std::string & text, const Align align,
 						  const bool multiline)
 	:
@@ -36,7 +36,7 @@ Textarea::Textarea (Panel * const parent, const int x, const int y,
 	set_font        (UI_FONT_SMALL, UI_FONT_CLR_FG);
 }
 
-Textarea::Textarea (Panel *  const parent, const int x, const int y,
+Textarea::Textarea (Panel *  const parent, const int32_t x, const int32_t y,
 						  const uint32_t w, const uint32_t h, const Align align,
 						  const bool multiline)
 	:
@@ -51,7 +51,7 @@ Textarea::Textarea (Panel *  const parent, const int x, const int y,
 	set_think(false);
 }
 
-Textarea:: Textarea (Panel *  const parent, const int x, const int y,
+Textarea:: Textarea (Panel *  const parent, const int32_t x, const int32_t y,
 							const uint32_t w, const uint32_t h, const std::string & text,
 							const Align align, const bool multiline)
 	:
@@ -113,10 +113,10 @@ void Textarea::draw(RenderTarget* dst)
   */
 void Textarea::collapse()
 {
-   int x = get_x();
-   int y = get_y();
-   int w = get_w();
-   int h = get_h();
+   int32_t x = get_x();
+   int32_t y = get_y();
+   int32_t w = get_w();
+   int32_t h = get_h();
 
 	if (not m_multiline) {
       if (m_align & Align_HCenter)
@@ -143,9 +143,9 @@ void Textarea::expand()
    if (!m_text.length())
       return;
 
-   int x = get_x();
-   int y = get_y();
-   int w, h;
+   int32_t x = get_x();
+   int32_t y = get_y();
+   int32_t w, h;
 
    g_fh->get_size(m_fontname, m_fontsize, m_text.c_str(), &w, &h, m_multiline ? get_w() : -1);
 

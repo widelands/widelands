@@ -44,8 +44,8 @@ struct ImmovableAction {
 	typedef bool (Immovable::*execute_t)(Game* g, bool killable, const ImmovableAction& action);
 
 	execute_t   function;
-	int         iparam1;
-	int         iparam2;
+	int32_t         iparam1;
+	int32_t         iparam2;
 	std::string sparam1;
    std::string sparam2;
 };

@@ -46,7 +46,7 @@
 bool Worker::run_createitem(Game* g, State* state, const Action* action)
 {
 	WareInstance* item;
-	int wareid;
+	int32_t wareid;
 
 	molog("  CreateItem(%s)\n", action->sparam1.c_str());
 
@@ -88,7 +88,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	const Resource_Descr::Index res =
 		map.get_world()->get_resource(action->sparam1.c_str());
-	if (static_cast<signed char>(res)==-1)
+	if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!!
 		throw wexception
 			(" Worker::run_mine: Should mine resource %s, which "
 			 "doesn't exist in world. Tribe is not compatible with "
@@ -97,7 +97,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 	// Select one of the fields randomly
 	uint32_t totalres = 0;
 	uint32_t totalchance = 0;
-	int pick;
+	int32_t pick;
 	MapRegion<Area<FCoords> > mr(map,
 			Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
 	do {
@@ -174,7 +174,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
  */
 bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 {
-	int idx = g->logic_rand() % action->sparamv.size();
+	int32_t idx = g->logic_rand() % action->sparamv.size();
 
 	molog("  SetDescription: %s\n", action->sparamv[idx].c_str());
 
@@ -216,7 +216,7 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
  */
 bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
 {
-	int idx = g->logic_rand() % action->sparamv.size();
+	int32_t idx = g->logic_rand() % action->sparamv.size();
 
 	molog("  SetBobDescription: %s\n", action->sparamv[idx].c_str());
 
@@ -299,7 +299,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 			return true;
 		}
 
-		int sel = g->logic_rand() % list.size();
+		int32_t sel = g->logic_rand() % list.size();
 		state->objvar1 = list[sel].object;
 		molog("  %i found\n", list.size());
 	} else {
@@ -316,7 +316,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 			pop_task();
 			return true;
 		}
-		int sel = g->logic_rand() % list.size();
+		int32_t sel = g->logic_rand() % list.size();
 		state->objvar1 = list[sel];
 		molog("  %i found\n", list.size());
 	}
@@ -357,12 +357,12 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 
 	CheckStepDefault cstep(get_movecaps());
 
-	int res = -1;
+	int32_t res = -1;
 	if (action->sparam1.size())
 		res = w->get_resource(action->sparam1.c_str());
 
 	Area<FCoords> area(map.get_fcoords(get_position()), action->iparam1);
-	int retval = 0;
+	int32_t retval = 0;
 	if (res != -1)
 		retval = map.find_reachable_fields(area, &list, cstep,
                  FindNodeSizeResource((FindNodeSize::Size)action->iparam2, res));
@@ -378,7 +378,7 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 	}
 
 	// Pick a location at random
-	int sel = g->logic_rand() % list.size();
+	int32_t sel = g->logic_rand() % list.size();
 
 	state->coords = list[sel];
 
@@ -406,7 +406,7 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 	bool forceonlast = false;
 	PlayerImmovable* location = get_location(g);
 	Building* owner;
-	int max_steps = -1;
+	int32_t max_steps = -1;
 
 	assert(location);
 	assert(location->get_type() == BUILDING);
@@ -675,7 +675,7 @@ bool Worker::run_geologist_find(Game * g, State * state, const Action *)
 		uint32_t res = position.field->get_resources();
 		uint32_t amount = position.field->get_resources_amount();
 
-		int idx;
+		int32_t idx;
 		Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
 
 		if (rdescr->is_detectable() && amount)
@@ -952,8 +952,8 @@ void Worker::create_needed_experience(Game* g)
 		return;
 	}
 
-	int range = descr().get_max_exp() - descr().get_min_exp();
-	int value = g->logic_rand() % range;
+	int32_t range = descr().get_max_exp() - descr().get_min_exp();
+	int32_t value = g->logic_rand() % range;
 	m_needed_exp = value + descr().get_min_exp();
 	m_current_exp = 0;
 }
@@ -992,7 +992,7 @@ void Worker::level(Game* g)
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
 	assert(get_becomes());
-	int index = descr().get_tribe()->get_worker_index(get_becomes());
+	int32_t index = descr().get_tribe()->get_worker_index(get_becomes());
 	Worker_Descr* new_descr = descr().get_tribe()->get_worker_descr(index);
 
 	// Inform the economy, that something has changed
@@ -1199,7 +1199,7 @@ void Worker::transfer_update(Game* g, State* state)
 		if (nextstep->get_type() == FLAG) {
 			Road* road = (Road*)location;
 			const Path& path = road->get_path();
-			int index;
+			int32_t index;
 
 			if (nextstep == road->get_flag(Road::FlagStart))
 				index = 0;
@@ -2108,7 +2108,7 @@ void Worker::fugitive_update(Game* g, State* state)
 	if (map->find_immovables(Area<FCoords>(map->get_fcoords(get_position()), 15),
 	                         &warehouses, FindImmovableAttribute(WAREHOUSE)))
 	{
-		int bestdist = -1;
+		int32_t bestdist = -1;
 		Warehouse *best = 0;
 
 		molog("[fugitive]: found warehouse(s)\n");
@@ -2120,7 +2120,7 @@ void Worker::fugitive_update(Game* g, State* state)
 			if (wh->get_owner() != get_owner())
 				continue;
 
-			int dist = map->calc_distance(get_position(), warehouses[i].coords);
+			int32_t dist = map->calc_distance(get_position(), warehouses[i].coords);
 
 			if (!best || dist < bestdist) {
 				best = wh;
@@ -2131,7 +2131,7 @@ void Worker::fugitive_update(Game* g, State* state)
 		if (best) {
 			bool use = false;
 
-			if (static_cast<int>((g->logic_rand() % 30)) <= (30 - bestdist))
+			if (static_cast<int32_t>((g->logic_rand() % 30)) <= (30 - bestdist))
 				use = true;
 
 			// okay, move towards the flag of this warehouse
@@ -2185,7 +2185,7 @@ Bob::Task Worker::taskGeologist = {
 };
 
 
-void Worker::start_task_geologist(const int attempts, const int radius,
+void Worker::start_task_geologist(const int32_t attempts, const int32_t radius,
                                   const std::string & subcommand)
 {
 	push_task(taskGeologist);

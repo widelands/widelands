@@ -52,9 +52,9 @@ struct Building_Descr : public Map_Object_Descr {
 
 	struct CostItem {
 		std::string name;   // name of ware
-		int         amount; // amount
+		int32_t         amount; // amount
 
-		inline CostItem(const char* iname, int iamount)
+		inline CostItem(const char* iname, int32_t iamount)
 			: name(iname), amount(iamount) {}
 	};
 	typedef std::vector<CostItem> BuildCost;
@@ -70,7 +70,7 @@ struct Building_Descr : public Map_Object_Descr {
    inline bool get_enhanced_building() const {return m_enhanced_building;}
 	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
 	inline uint32_t get_buildicon() const {return m_buildicon;}
-	int get_size() const throw () {return m_size;}
+	int32_t get_size() const throw () {return m_size;}
 	inline bool get_ismine() const {return m_mine;}
 	virtual uint32_t get_ui_anim() const throw () {return get_animation("idle");}
 
@@ -116,7 +116,7 @@ private:
 	BuildCost    m_buildcost;
 	uint32_t         m_buildicon;       // if buildable: picture in the build dialog
 	char*        m_buildicon_fname; // filename for this icon
-	int          m_size;            // size of the building
+	int32_t          m_size;            // size of the building
 	bool         m_mine;
 	std::vector<char*> m_enhances_to;     // building to enhance to or 0
 	bool         m_enhanced_building; // if it is one, it is bulldozable
@@ -157,10 +157,10 @@ public:
 	Building(const Building_Descr &);
 	virtual ~Building();
 
-	virtual int get_building_type() const throw () = 0;
+	virtual int32_t get_building_type() const throw () = 0;
 
-	virtual int  get_type    () const throw ();
-	virtual int  get_size    () const throw ();
+	virtual int32_t  get_type    () const throw ();
+	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
    virtual uint32_t get_ui_anim () const;
 
@@ -196,12 +196,12 @@ public:
 	bool get_stop() const throw () {return m_stop;}
 	virtual void set_stop(bool stop);
 
-	int get_base_priority() const {return m_priority;}
-	int get_priority(int type, int ware_index, bool adjust = true) const;
-	void set_priority(int new_priority);
-	void set_priority(int type, int ware_index, int new_priority);
+	int32_t get_base_priority() const {return m_priority;}
+	int32_t get_priority(int32_t type, int32_t ware_index, bool adjust = true) const;
+	void set_priority(int32_t new_priority);
+	void set_priority(int32_t type, int32_t ware_index, int32_t new_priority);
 
-	void collect_priorities(std::map<int, std::map<int, int> > & p) const;
+	void collect_priorities(std::map<int32_t, std::map<int32_t, int32_t> > & p) const;
 
 	const std::vector<char *> & enhances_to() const throw ()
 	{return descr().enhances_to();}
@@ -214,7 +214,7 @@ public:
 	virtual void soldier_capacity_down () {}
 
     // Use on training sites only
-   virtual void change_train_priority(uint32_t, int) {};
+   virtual void change_train_priority(uint32_t, int32_t) {};
 	virtual void switch_train_mode () {};
 
    /// Testing stuff
@@ -248,7 +248,7 @@ protected:
 	Flag*     m_flag;
 
 	uint32_t m_anim;
-	int  m_animstart;
+	int32_t  m_animstart;
 
 	typedef std::vector<Object_Ptr> Leave_Queue;
 	Leave_Queue m_leave_queue; //  FIFO queue of workers leaving the building
@@ -259,8 +259,8 @@ protected:
 	//  The player who has defeated this building.
 	Player_Number           m_defeating_player;
 
-	int m_priority; // base priority
-	std::map<int, int> m_ware_priorities;
+	int32_t m_priority; // base priority
+	std::map<int32_t, int32_t> m_ware_priorities;
 };
 
 #endif

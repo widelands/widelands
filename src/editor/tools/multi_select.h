@@ -37,8 +37,8 @@ struct MultiSelect {
       MultiSelect() {m_nr_enabled=0;}
       ~MultiSelect() {}
 
-      void enable(int n, bool t) {
-		if (static_cast<int>(m_enabled.size()) < n + 1)
+      void enable(int32_t n, bool t) {
+		if (static_cast<int32_t>(m_enabled.size()) < n + 1)
             m_enabled.resize(n+1, false);
 
          if (m_enabled[n]==t) return;
@@ -47,24 +47,24 @@ struct MultiSelect {
          else --m_nr_enabled;
          assert(m_nr_enabled>=0);
 		}
-      inline bool is_enabled(int n) {
-		if (static_cast<int>(m_enabled.size()) < n + 1) return false;
+      inline bool is_enabled(int32_t n) {
+		if (static_cast<int32_t>(m_enabled.size()) < n + 1) return false;
          return m_enabled[n];
 		}
-      inline int get_nr_enabled() {return m_nr_enabled;}
-	int get_random_enabled() {
-		const int rand_value = static_cast<int>
+      inline int32_t get_nr_enabled() {return m_nr_enabled;}
+	int32_t get_random_enabled() {
+		const int32_t rand_value = static_cast<int32_t>
 			(static_cast<double>(get_nr_enabled())
 			 *
 			 rand() / (RAND_MAX + 1.0));
-         int i=0;
-         int j=rand_value+1;
+         int32_t i=0;
+         int32_t j=rand_value+1;
          while (j) {if (is_enabled(i)) j--; ++i;}
          return i-1;
 		}
 
 private:
-      int m_nr_enabled;
+      int32_t m_nr_enabled;
       std::vector<bool> m_enabled;
 };
 

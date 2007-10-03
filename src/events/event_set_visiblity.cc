@@ -50,7 +50,7 @@ void Event_Set_Visiblity::reinitialize(Game *) {}
  */
 void Event_Set_Visiblity::Read(Section* s, Editor_Game_Base* egbase)
 {
-	int version = s->get_safe_int("version");
+	int32_t version = s->get_safe_int("version");
 
 	if (version == EVENT_VERSION) {
 		v_entry = s->get_safe_string("entry");

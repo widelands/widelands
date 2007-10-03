@@ -51,8 +51,8 @@
 
 
 // This function is the callback for recalculation of field overlays
-int Int_Player_overlay_callback_function
-(const TCoords<FCoords> c, void* data, int)
+int32_t Int_Player_overlay_callback_function
+(const TCoords<FCoords> c, void* data, int32_t)
 {
 	return
 		static_cast<const Interactive_Player *>(data)->get_player()->
@@ -315,7 +315,7 @@ Space: toggles buildhelp
 F5: reveal map
 ===============
 */
-bool Interactive_Player::handle_key(bool down, int code, char c)
+bool Interactive_Player::handle_key(bool down, int32_t code, char c)
 {
 	if (m_is_typing_msg && down) {
 		if (c & 0x7f) {
@@ -356,7 +356,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 
 	case KEY_PAGEUP:
 		if (down) {
-			int speed = m_game->get_speed();
+			int32_t speed = m_game->get_speed();
 
 			m_game->set_speed(speed + 1);
 		}
@@ -364,7 +364,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 
 	case KEY_PAGEDOWN:
 		if (down) {
-			int speed = m_game->get_speed();
+			int32_t speed = m_game->get_speed();
 
 			m_game->set_speed(std::max(0, speed-1));
 		}

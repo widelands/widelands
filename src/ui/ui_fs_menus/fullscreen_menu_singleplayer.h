@@ -36,10 +36,10 @@ struct Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
 
 private:
 	UI::Textarea                                    title;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> new_game;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> load_game;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> campaign;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> back;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> new_game;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> load_game;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> campaign;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> back;
 };
 
 #endif // __S__SINGLEPMENUE_H

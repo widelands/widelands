@@ -31,7 +31,7 @@
 
 MiniMap::View::View
 (UI::Panel & parent,
- const  int x, const  int y,
+ const  int32_t x, const  int32_t y,
  const uint32_t w, const uint32_t h,
  Interactive_Base & iabase)
 :
@@ -47,13 +47,13 @@ flags         (MiniMap::Terrn)
 }
 
 
-/** MiniMapView::set_view_pos(int x, int y)
+/** MiniMapView::set_view_pos(int32_t x, int32_t y)
  *
  * Set the view point marker to a new position.
  *
  * Args: x, y  new view point coordinates, in screen coordinates
  */
-void MiniMap::View::set_view_pos(const int x, const int y)
+void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 {
 	m_viewx = x / TRIANGLE_WIDTH;
 	m_viewy = y / TRIANGLE_HEIGHT;
@@ -85,7 +85,7 @@ MiniMapView::handle_mouseclick
 Left-press: warp the view point to the new position
 ===============
 */
-bool MiniMap::View::handle_mousepress(const Uint8 btn, int x, int y) {
+bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 		// calculates the coordinates corresponding to the mouse position
@@ -99,7 +99,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int x, int y) {
 
 	return true;
 }
-bool MiniMap::View::handle_mouserelease(const Uint8 btn, int, int)
+bool MiniMap::View::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {return btn == SDL_BUTTON_LEFT;}
 
 

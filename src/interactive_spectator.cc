@@ -48,8 +48,8 @@ Interactive_Spectator::Interactive_Spectator(Game* g) :
 	fieldclicked.set(this, &Interactive_Spectator::field_action);
 
 	// user interface buttons
-	int x = (get_w() - (4*34)) >> 1;
-	int y = get_h() - 34;
+	int32_t x = (get_w() - (4*34)) >> 1;
+	int32_t y = get_h() - 34;
 
 	new UI::Button<Interactive_Spectator>
 		(this,
@@ -172,7 +172,7 @@ void Interactive_Spectator::field_action()
 /**
  * Global in-game keypresses:
  */
-bool Interactive_Spectator::handle_key(bool down, int code, char /* c */)
+bool Interactive_Spectator::handle_key(bool down, int32_t code, char /* c */)
 {
 	switch (code) {
 	case KEY_m:
@@ -197,7 +197,7 @@ bool Interactive_Spectator::handle_key(bool down, int code, char /* c */)
 
 	case KEY_PAGEUP:
 		if (down) {
-			int speed = get_game()->get_speed();
+			int32_t speed = get_game()->get_speed();
 
 			get_game()->set_speed(speed + 1);
 		}
@@ -205,7 +205,7 @@ bool Interactive_Spectator::handle_key(bool down, int code, char /* c */)
 
 	case KEY_PAGEDOWN:
 		if (down) {
-			int speed = get_game()->get_speed();
+			int32_t speed = get_game()->get_speed();
 
 			get_game()->set_speed(std::max(0, speed-1));
 		}

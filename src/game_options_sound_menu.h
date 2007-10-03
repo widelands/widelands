@@ -56,8 +56,8 @@ private:
 	//  calbacks
 	void changed_ingame_music(bool on);
 	void changed_ingame_sound(bool on);
-	void music_volume_changed(int value);
-	void sound_volume_changed(int value);
+	void music_volume_changed(int32_t value);
+	void sound_volume_changed(int32_t value);
 };
 
 #endif

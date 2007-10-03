@@ -35,35 +35,35 @@
 /**
  * \todo Dangerous: casting, assumptions for sizeof(X), bitshifting
  */
-#define FTOFIX(f) (static_cast<int>((f) * 0x10000))
+#define FTOFIX(f) (static_cast<int32_t>((f) * 0x10000))
 #define ITOFIX(i) ((i)<<16)
 #define FIXTOI(f) ((f)>>16)
 
-void get_horiz_linearcomb(int u1, int u2, int v1, int v2,
+void get_horiz_linearcomb(int32_t u1, int32_t u2, int32_t v1, int32_t v2,
 			  float& lambda, float& mu);
 
 template<typename T> static void render_top_triangle
 (Surface & dst,
  const Texture & tex,
  Vertex & p1, Vertex & p2, Vertex & p3,
- int y2)
+ int32_t y2)
 {
-	int y, y1, ix1, ix2, count;
-	int x1, x2, dx1, dx2;
-	int b1, db1, tx1, dtx1, ty1, dty1;
-	int b, tx, ty;
+	int32_t y, y1, ix1, ix2, count;
+	int32_t x1, x2, dx1, dx2;
+	int32_t b1, db1, tx1, dtx1, ty1, dty1;
+	int32_t b, tx, ty;
 	float lambda, mu;
 	uint8_t *texpixels;
 	T *texcolormap;
 
 	get_horiz_linearcomb
 		(p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, lambda, mu);
-	const int db =  FTOFIX((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
-	const int dtx = FTOFIX((p2.tx - p1.tx) * lambda + (p3.tx - p1.tx) * mu);
-	const int dty = FTOFIX((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
+	const int32_t db =  FTOFIX((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
+	const int32_t dtx = FTOFIX((p2.tx - p1.tx) * lambda + (p3.tx - p1.tx) * mu);
+	const int32_t dty = FTOFIX((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
 
-	const int w = dst.get_w();
-	const int h = dst.get_h();
+	const int32_t w = dst.get_w();
+	const int32_t h = dst.get_h();
 
 	texpixels = tex.get_curpixels();
 	texcolormap = static_cast<T *>(tex.get_colormap());
@@ -111,7 +111,7 @@ template<typename T> static void render_top_triangle
 				ix1;
 
 			while (count-->0) {
-				int texel=((tx>>16) & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
+				int32_t texel=((tx>>16) & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
 
 				*scanline++ = texcolormap[texpixels[texel] | ((b >> 8) & 0xFF00)];
 
@@ -133,24 +133,24 @@ template<typename T> static void render_bottom_triangle
 (Surface & dst,
  const Texture & tex,
  Vertex & p1, Vertex & p2, Vertex & p3,
- int y1)
+ int32_t y1)
 {
-	int y, y2, ix1, ix2, count;
-	int x1, x2, dx1, dx2;
-	int b1, db1, tx1, dtx1, ty1, dty1;
-	int b, tx, ty;
+	int32_t y, y2, ix1, ix2, count;
+	int32_t x1, x2, dx1, dx2;
+	int32_t b1, db1, tx1, dtx1, ty1, dty1;
+	int32_t b, tx, ty;
 	float lambda, mu;
 	uint8_t *texpixels;
 	T *texcolormap;
 
 	get_horiz_linearcomb
 		(p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, lambda, mu);
-	const int db  = FTOFIX((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
-	const int dtx = FTOFIX((p2.tx - p1.tx) * lambda + (p3.tx - p1.tx) * mu);
-	const int dty = FTOFIX((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
+	const int32_t db  = FTOFIX((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
+	const int32_t dtx = FTOFIX((p2.tx - p1.tx) * lambda + (p3.tx - p1.tx) * mu);
+	const int32_t dty = FTOFIX((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
 
-	const int w = dst.get_w();
-	const int h = dst.get_h();
+	const int32_t w = dst.get_w();
+	const int32_t h = dst.get_h();
 
 	texpixels = tex.get_curpixels();
 	texcolormap = static_cast<T *>(tex.get_colormap());
@@ -202,7 +202,7 @@ template<typename T> static void render_bottom_triangle
 				ix1;
 
 			while (count-->0) {
-				int texel=((tx>>16) & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
+				int32_t texel=((tx>>16) & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
 
 				*scanline++ = texcolormap[texpixels[texel] | ((b >> 8) & 0xFF00)];
 
@@ -232,7 +232,7 @@ template<typename T> static void render_triangle
 (Surface & dst, Vertex & p1, Vertex & p2, Vertex & p3, const Texture & tex)
 {
 	Vertex * p[3]= {&p1, &p2, &p3};
-	int top, bot, mid, y, ym, i;
+	int32_t top, bot, mid, y, ym, i;
 
 	top=bot=0; // to avoid compiler warning
 
@@ -291,7 +291,7 @@ template<typename T> static void dither_edge_horiz
 	bpixels = btex.get_curpixels();
 	bcolormap = static_cast<T *>(btex.get_colormap());
 
-	int tx, ty, b, dtx, dty, db, tx0, ty0;
+	int32_t tx, ty, b, dtx, dty, db, tx0, ty0;
 
 	tx=ITOFIX(start.tx);
 	ty=ITOFIX(start.ty);
@@ -303,17 +303,17 @@ template<typename T> static void dither_edge_horiz
 	// TODO: seed this depending on field coordinates
 	uint32_t rnd=0;
 
-	const int dstw = dst.get_w();
-	const int dsth = dst.get_h();
+	const int32_t dstw = dst.get_w();
+	const int32_t dsth = dst.get_h();
 
-	int ydiff = ITOFIX(end.y - start.y) / (end.x - start.x);
-	int centery = ITOFIX(start.y);
+	int32_t ydiff = ITOFIX(end.y - start.y) / (end.x - start.x);
+	int32_t centery = ITOFIX(start.y);
 
-	for (int x = start.x; x < end.x; x++, centery += ydiff) {
+	for (int32_t x = start.x; x < end.x; x++, centery += ydiff) {
 		rnd=SIMPLE_RAND(rnd);
 
 		if (x>=0 && x<dstw) {
-			int y = FIXTOI(centery) - DITHER_WIDTH;
+			int32_t y = FIXTOI(centery) - DITHER_WIDTH;
 
 			tx0=tx - DITHER_WIDTH*dty;
 			ty0=ty + DITHER_WIDTH*dtx;
@@ -324,7 +324,7 @@ template<typename T> static void dither_edge_horiz
 			for (uint32_t i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && y>=0 && y<dsth) {
 					T * const pix = (T*) ((uint8_t*)dst.get_pixels() + y*dst.get_pitch()) + x;
-					int texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
+					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
 					*pix = tcolormap[tpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
 
@@ -337,7 +337,7 @@ template<typename T> static void dither_edge_horiz
 			for (uint32_t i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)>=i+DITHER_WIDTH && y>=0 && y<dsth) {
 					T * const pix = (T*) ((uint8_t*)dst.get_pixels() + y*dst.get_pitch()) + x;
-					int texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
+					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
 					*pix = bcolormap[bpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
 
@@ -369,7 +369,7 @@ template<typename T> static void dither_edge_vert
 	rpixels = rtex.get_curpixels();
 	rcolormap = static_cast<T *>(rtex.get_colormap());
 
-	int tx, ty, b, dtx, dty, db, tx0, ty0;
+	int32_t tx, ty, b, dtx, dty, db, tx0, ty0;
 
 	tx=ITOFIX(start.tx);
 	ty=ITOFIX(start.ty);
@@ -381,17 +381,17 @@ template<typename T> static void dither_edge_vert
 	// TODO: seed this depending on field coordinates
 	uint32_t rnd=0;
 
-	const int dstw = dst.get_w();
-	const int dsth = dst.get_h();
+	const int32_t dstw = dst.get_w();
+	const int32_t dsth = dst.get_h();
 
-	int xdiff = ITOFIX(end.x - start.x) / (end.y - start.y);
-	int centerx = ITOFIX(start.x);
+	int32_t xdiff = ITOFIX(end.x - start.x) / (end.y - start.y);
+	int32_t centerx = ITOFIX(start.x);
 
-	for (int y = start.y; y < end.y; y++, centerx += xdiff) {
+	for (int32_t y = start.y; y < end.y; y++, centerx += xdiff) {
 		rnd=SIMPLE_RAND(rnd);
 
 		if (y>=0 && y<dsth) {
-			int x = FIXTOI(centerx) - DITHER_WIDTH;
+			int32_t x = FIXTOI(centerx) - DITHER_WIDTH;
 
 			tx0=tx - DITHER_WIDTH*dty;
 			ty0=ty + DITHER_WIDTH*dtx;
@@ -407,7 +407,7 @@ template<typename T> static void dither_edge_vert
 						 y * dst.get_pitch())
 						+
 						x;
-					int texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
+					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
 					*pix = lcolormap[lpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
 
@@ -425,7 +425,7 @@ template<typename T> static void dither_edge_vert
 						 y * dst.get_pitch())
 						+
 						x;
-					int texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
+					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
 					*pix = rcolormap[rpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
 
@@ -444,19 +444,19 @@ template<typename T> static void dither_edge_vert
 template<typename T> static void render_road_horiz
 (Surface & dst, const Point start, const Point end, const Surface & src)
 {
-	int dstw = dst.get_w();
-	int dsth = dst.get_h();
+	int32_t dstw = dst.get_w();
+	int32_t dsth = dst.get_h();
 
-	int ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
-	int centery = start.y << 16;
+	int32_t ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
+	int32_t centery = start.y << 16;
 
-	for (int x = start.x, sx = 0; x < end.x; x++, centery += ydiff, sx ++) {
+	for (int32_t x = start.x, sx = 0; x < end.x; x++, centery += ydiff, sx ++) {
 		if (x < 0 || x >= dstw)
 			continue;
 
-		int y = (centery >> 16) - 2;
+		int32_t y = (centery >> 16) - 2;
 
-		for (int i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
+		for (int32_t i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
 			*(reinterpret_cast<T *>
 			  (static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 			  +
@@ -474,19 +474,19 @@ template<typename T> static void render_road_horiz
 template<typename T> static void render_road_vert
 (Surface & dst, const Point start, const Point end, const Surface & src)
 {
-	int dstw = dst.get_w();
-	int dsth = dst.get_h();
+	int32_t dstw = dst.get_w();
+	int32_t dsth = dst.get_h();
 
-	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
-	int centerx = start.x << 16;
+	int32_t xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
+	int32_t centerx = start.x << 16;
 
-	for (int y = start.y, sy = 0; y < end.y; y++, centerx += xdiff, sy ++) {
+	for (int32_t y = start.y, sy = 0; y < end.y; y++, centerx += xdiff, sy ++) {
 		if (y < 0 || y >= dsth)
 			continue;
 
-		int x = (centerx >> 16) - 2;
+		int32_t x = (centerx >> 16) - 2;
 
-		for (int i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
+		for (int32_t i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
 			*(reinterpret_cast<T *>
 			  (static_cast<uint8_t *>(dst.get_pixels()) +  y * dst.get_pitch())
 			  +
@@ -507,12 +507,12 @@ template<typename T> static void draw_field_int
  Field * const r,
  Field * const bl,
  Field * const br,
- const int     posx,
- const int     rposx,
- const int     posy,
- const int     blposx,
- const int     rblposx,
- const int     blposy,
+ const int32_t     posx,
+ const int32_t     rposx,
+ const int32_t     posy,
+ const int32_t     blposx,
+ const int32_t     rblposx,
+ const int32_t     blposy,
  uint8_t         roads,
  Sint8            f_brightness,
  Sint8            r_brightness,

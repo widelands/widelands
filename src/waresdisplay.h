@@ -50,10 +50,10 @@ struct WaresDisplay : public UI::Panel {
 
 public:
 	WaresDisplay
-		(UI::Panel * const parent, const int x, const int y, const Tribe_Descr &);
+		(UI::Panel * const parent, const int32_t x, const int32_t y, const Tribe_Descr &);
 	virtual ~WaresDisplay();
 
-	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
+	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
    void add_warelist(const WareList*, wdType);
    void remove_all_warelists();

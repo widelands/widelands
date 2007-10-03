@@ -29,7 +29,7 @@
 #include "profile.h"
 #include "wexception.h"
 
-static const int EVENT_VERSION = 1;
+static const int32_t EVENT_VERSION = 1;
 
 /*
  * Init and cleanup
@@ -52,7 +52,7 @@ void Event_Unhide_Objective::reinitialize(Game *) {}
  * File Read, File Write
  */
 void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
-	const int packet_version = s->get_safe_int("version");
+	const int32_t packet_version = s->get_safe_int("version");
 	if (packet_version == EVENT_VERSION) {
       std::string objectivename = s->get_safe_string("objective");
 		if

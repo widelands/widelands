@@ -265,7 +265,7 @@ Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
 /**
 * index of get_becomes() in tribe array or -1
  */
-int Worker_Descr::get_becomes_index() const throw() {
+int32_t Worker_Descr::get_becomes_index() const throw() {
 	if (m_becomes_index >= -1) // already calculated
 		return m_becomes_index;
 
@@ -281,13 +281,13 @@ int Worker_Descr::get_becomes_index() const throw() {
 /**
 * check if worker can be substitute for a requested worker type
  */
-bool Worker_Descr::can_act_as(int ware) const {
+bool Worker_Descr::can_act_as(int32_t ware) const {
 	if (ware == tribe().get_worker_index(name().c_str()))
 		return true;
 
 	// if requested worker type can be promoted, compare with that type
 	const Worker_Descr *descr = tribe().get_worker_descr(ware);
-	const int becomes = descr->get_becomes_index();
+	const int32_t becomes = descr->get_becomes_index();
 	if (becomes >= 0)
 		return can_act_as(becomes);
 

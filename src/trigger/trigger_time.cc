@@ -25,7 +25,7 @@
 #include "profile.h"
 #include "wexception.h"
 
-static const int TRIGGER_VERSION = 1;
+static const int32_t TRIGGER_VERSION = 1;
 
 /*
  * Init and cleanup
@@ -37,7 +37,7 @@ Trigger_Time::Trigger_Time()
 
 
 void Trigger_Time::Read(Section* s, Editor_Game_Base*) {
-   int version= s->get_safe_int("version");
+   int32_t version= s->get_safe_int("version");
 
    if (version == TRIGGER_VERSION) {
       m_wait_time = s->get_safe_int("wait_time");

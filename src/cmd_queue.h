@@ -70,17 +70,17 @@ class Game;
  */
 class Command {
 private:
-	int m_duetime;
+	int32_t m_duetime;
 
 public:
-	Command (int);
+	Command (int32_t);
 	virtual ~Command ();
 
 	virtual void execute (Game*) = 0;
-	virtual int get_id() = 0;
+	virtual int32_t get_id() = 0;
 
-	int get_duetime() const {return m_duetime;}
-	void set_duetime(int t) {m_duetime = t;}
+	int32_t get_duetime() const {return m_duetime;}
+	void set_duetime(int32_t t) {m_duetime = t;}
 };
 
 
@@ -93,7 +93,7 @@ public:
  */
 class GameLogicCommand : public Command {
 public:
-	GameLogicCommand (int duetime);
+	GameLogicCommand (int32_t duetime);
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
@@ -123,7 +123,7 @@ class Cmd_Queue {
 		 * commands will be executed in the same order on all systems
 		 * independent of details of the priority_queue implementation.
 		 */
-		int category;
+		int32_t category;
 		uint32_t serial;
 
 		bool operator< (const cmditem& c) const
@@ -142,7 +142,7 @@ public:
 	~Cmd_Queue();
 
 	void enqueue (Command*);
-	int run_queue (int interval, int* game_time_var);
+	int32_t run_queue (int32_t interval, int32_t* game_time_var);
 
 	void flush(); // delete all commands in the queue now
 

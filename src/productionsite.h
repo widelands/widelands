@@ -53,7 +53,7 @@ struct ProductionSite_Descr : public Building_Descr {
 
    struct Worker_Info {
       std::string name;
-      int how_many;
+      int32_t how_many;
 	};
 
 	ProductionSite_Descr
@@ -92,9 +92,9 @@ public:
 	virtual ~ProductionSite();
 
 	virtual std::string get_statistics_string();
-   char get_statistics_percent() {return m_last_stat_percent;}
+   int8_t get_statistics_percent() {return m_last_stat_percent;}
 
-	virtual int get_building_type() const throw ()
+	virtual int32_t get_building_type() const throw ()
 	{return Building::PRODUCTIONSITE;}
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
@@ -123,13 +123,13 @@ protected:
 protected:
 	struct State {
 		const ProductionProgram * program; //  currently running program
-		int  ip;    //  instruction pointer
+		int32_t  ip;    //  instruction pointer
 		uint32_t phase; //  micro-step index (instruction dependent)
 		uint32_t flags; //  pfXXX flags
 	};
 
 	void request_worker(const char * const worker_name);
-	static void request_worker_callback(Game* g, Request* rq, int ware,
+	static void request_worker_callback(Game* g, Request* rq, int32_t ware,
 		Worker* w, void* data);
 
 	State* get_current_program() {return m_program.size() ? &*m_program.rbegin() : 0;}
@@ -141,24 +141,24 @@ protected:
 
 	void calc_statistics();
 	bool can_start_working() const throw ();
-	void set_post_timer (int t) {m_post_timer = t;}
+	void set_post_timer (int32_t t) {m_post_timer = t;}
 
 protected:  // TrainingSite must have access to this stuff
    std::vector<Request*> m_worker_requests;
    std::vector<Worker*>  m_workers;
 
-	int m_fetchfromflag; // # of items to fetch from flag
+	int32_t m_fetchfromflag; // # of items to fetch from flag
 
 	std::vector<State>        m_program;       //  program stack
 	bool                     m_program_timer; // execute next instruction based on pointer
-	int                       m_program_time;  //  timer time
-	int                      m_post_timer;    // Time to schedule after ends
+	int32_t                       m_program_time;  //  timer time
+	int32_t                      m_post_timer;    // Time to schedule after ends
 
 	std::vector<WaresQueue*> m_input_queues; //  input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
 	char                     m_statistics_buf[40];
-   char                     m_last_stat_percent;
+   int8_t                     m_last_stat_percent;
 };
 
 /*
@@ -176,7 +176,7 @@ out of a building
 */
 class Input {
 public:
-	Input(Item_Ware_Descr* ware, int max) : m_ware(ware), m_max(max) {}
+	Input(Item_Ware_Descr* ware, int32_t max) : m_ware(ware), m_max(max) {}
 	~Input() {}
 
 	const Item_Ware_Descr & ware_descr() const throw () {return *m_ware;}
@@ -184,7 +184,7 @@ public:
 
 private:
 	Item_Ware_Descr* m_ware;
-	int m_max;
+	int32_t m_max;
 };
 
 

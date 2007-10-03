@@ -39,7 +39,7 @@ Args: parent  parent panel
 */
 Table<void *>::Table
 	(Panel * const parent,
-	 int x, int y, uint32_t w, uint32_t h,
+	 int32_t x, int32_t y, uint32_t w, uint32_t h,
 	 const Align align,
 	 const bool descending)
 :
@@ -164,9 +164,9 @@ Redraw the table
 void Table<void *>::draw(RenderTarget * dst)
 {
    // draw text lines
-   int lineheight = get_lineheight();
+   int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
-   int y = 1 + idx*lineheight - m_scrollpos + m_columns[0].btn->get_h();
+   int32_t y = 1 + idx*lineheight - m_scrollpos + m_columns[0].btn->get_h();
 
 	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
@@ -193,11 +193,11 @@ void Table<void *>::draw(RenderTarget * dst)
 
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
-      int curx=0;
-      int curw;
+      int32_t curx=0;
+      int32_t curw;
 		for (uint32_t i = 0; i < get_nr_columns(); ++i) {
          curw=m_columns[i].btn->get_w();
-         int x;
+         int32_t x;
          if (m_align & Align_Right)
             x = curx + (curw - 1);
          else if (m_align & Align_HCenter)
@@ -233,15 +233,15 @@ void Table<void *>::draw(RenderTarget * dst)
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool Table<void *>::handle_mousepress(const Uint8 btn, int, int y) {
+bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	   int time=WLApplication::get()->get_time();
+	   int32_t time=WLApplication::get()->get_time();
 
       // This hick hack is needed if any of the
       // callback functions calls clear to forget the last
       // clicked time.
-      int real_last_click_time=m_last_click_time;
+      int32_t real_last_click_time=m_last_click_time;
 
       m_last_selection=m_selection;
       m_last_click_time=time;
@@ -260,7 +260,7 @@ bool Table<void *>::handle_mousepress(const Uint8 btn, int, int y) {
 
 	return true;
 }
-bool Table<void *>::handle_mouserelease(const Uint8 btn, int, int)
+bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {return btn == SDL_BUTTON_LEFT;}
 
 /**
@@ -283,9 +283,9 @@ void Table<void *>::select(const uint32_t i)
 Add a new entry to the table.
 */
 Table<void *>::Entry_Record & Table<void *>::add
-	(void * const entry, const int picid, const bool do_select)
+	(void * const entry, const int32_t picid, const bool do_select)
 {
-   int entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
+   int32_t entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
 	if (picid != -1) {
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
@@ -310,7 +310,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 /**
 Scroll to the given position, in pixels.
 */
-void Table<void *>::set_scrollpos(int i)
+void Table<void *>::set_scrollpos(int32_t i)
 {
 	m_scrollpos = i;
 
@@ -370,7 +370,7 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 }
 
 
-Table<void *>::Entry_Record::Entry_Record(void * const e, const int picid) :
+Table<void *>::Entry_Record::Entry_Record(void * const e, const int32_t picid) :
 	m_entry(e), use_clr(false), m_picid(picid)
 {}
 

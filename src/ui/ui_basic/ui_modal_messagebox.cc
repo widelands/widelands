@@ -44,20 +44,20 @@ Modal_Message_Box::Modal_Message_Box
    new Multiline_Textarea(this, 5, 5, get_inner_w()-10, get_inner_h()-70, text.c_str(), Align_Center);
 
 	if (type == OK) {
-		new IDButton<Modal_Message_Box, int>
+		new IDButton<Modal_Message_Box, int32_t>
 			(this,
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
 			 0,
 			 &Modal_Message_Box::end_modal, this, 0,
 			 _("OK"));
 	} else if (type == YESNO) {
-		new IDButton<Modal_Message_Box, int>
+		new IDButton<Modal_Message_Box, int32_t>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
 			 0,
 			 &Modal_Message_Box::end_modal, this, 1,
 			 _("Yes"));
-		new IDButton<Modal_Message_Box, int>
+		new IDButton<Modal_Message_Box, int32_t>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
@@ -78,10 +78,10 @@ Modal_Message_Box::~Modal_Message_Box() {
  * we call end_modal() with NO (=0)
  * We are not draggable.
  */
-bool Modal_Message_Box::handle_mousepress(const Uint8 btn, int, int) {
+bool Modal_Message_Box::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_RIGHT) {play_click(); end_modal(0); return true;}
 	return false;
 }
-bool Modal_Message_Box::handle_mouserelease(const Uint8, int, int)
+bool Modal_Message_Box::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 };

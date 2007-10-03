@@ -41,18 +41,18 @@ struct Textarea : public Panel {
 	 */
 	Textarea
 		(Panel * const parent,
-		 const int x, const int y,
+		 const int32_t x, const int32_t y,
 		 const std::string & text,
 		 const Align align = Align_Left, const bool multiline = false);
 
 	Textarea
 		(Panel *  const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const Align align = Align_Left, const bool multiline = false);
 
 	Textarea
 		(Panel *  const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const std::string & text,
 		 const Align align = Align_Left, const bool multiline = false);
 
@@ -62,7 +62,7 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
 
-	void set_font(const std::string & name, const int size, const RGBColor fg) {
+	void set_font(const std::string & name, const int32_t size, const RGBColor fg) {
 		m_fontname = name;
 		m_fontsize = size;
 		m_fcolor   = fg;
@@ -77,7 +77,7 @@ private:
 	Align       m_align;
 	bool        m_multiline;
    std::string    m_fontname;
-   int            m_fontsize;
+   int32_t            m_fontsize;
    RGBColor       m_fcolor;
 };
 };

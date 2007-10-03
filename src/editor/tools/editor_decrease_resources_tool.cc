@@ -38,15 +38,15 @@ decrease the resources of the current field by one if
 there is not already another resource there.
 ===========
 */
-int Editor_Decrease_Resources_Tool::handle_click_impl
+int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	MapRegion<Area<FCoords> > mr
 		(map,
 		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
-		int res    = mr.location().field->get_resources();
-		int amount = mr.location().field->get_resources_amount();
+		int32_t res    = mr.location().field->get_resources();
+		int32_t amount = mr.location().field->get_resources_amount();
 
 		amount -= m_change_by;
       if (amount<0) amount=0;
@@ -57,7 +57,7 @@ int Editor_Decrease_Resources_Tool::handle_click_impl
 			 and
 			 Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{
-			int picid;
+			int32_t picid;
          // Ok, we're doing something. First remove the current overlays
          std::string str;
 			str = map.world().get_resource(res)->get_editor_pic

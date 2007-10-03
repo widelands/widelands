@@ -70,7 +70,7 @@ throw (_wexception)
 				if (fr.Unsigned8()) {
 					// Ok, now read all the additional data
 					a.player_number = fr.Unsigned8();
-					int serial=fr.Unsigned32();
+					int32_t serial=fr.Unsigned32();
 					const char * const name = fr.CString();
 					bool is_constructionsite=fr.Unsigned8();
 
@@ -81,7 +81,7 @@ throw (_wexception)
 					Player * const player = egbase->get_safe_player(a.player_number);
 					assert(player); // He must be there FIXME Never use assert to validate input!
 					const Tribe_Descr & tribe = player->tribe();
-					int index= tribe.get_building_index(name);
+					int32_t index= tribe.get_building_index(name);
 					if (index==-1)
 						throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n",
 							name, tribe.name().c_str());
@@ -198,8 +198,8 @@ void Widelands_Map_Building_Data_Packet::write_priorities
 {
 	fw.Unsigned32(building.get_base_priority());
 
-	std::map<int, std::map<int, int> > type_to_priorities;
-	std::map<int, std::map<int, int> >::iterator it;
+	std::map<int32_t, std::map<int32_t, int32_t> > type_to_priorities;
+	std::map<int32_t, std::map<int32_t, int32_t> >::iterator it;
 
 	const Tribe_Descr & tribe = building.get_owner()->tribe();
 	building.collect_priorities(type_to_priorities);
@@ -210,15 +210,15 @@ void Widelands_Map_Building_Data_Packet::write_priorities
 			continue;
 
 		// write ware type and priority count
-		const int ware_type = it->first;
+		const int32_t ware_type = it->first;
 		fw.Unsigned8(ware_type);
 		fw.Unsigned8(it->second.size());
 
-		std::map<int, int>::iterator it2;
+		std::map<int32_t, int32_t>::iterator it2;
 		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2)
 		{
 			std::string name;
-			const int ware_index = it2->first;
+			const int32_t ware_index = it2->first;
 			if (Request::WARE == ware_type)
 				name = tribe.get_ware_descr(ware_index)->name();
 			else if (Request::WORKER == ware_type)
@@ -241,13 +241,13 @@ void Widelands_Map_Building_Data_Packet::read_priorities
 	building.set_priority(fr.Unsigned32());
 
 	const Tribe_Descr & tribe = building.get_owner()->tribe();
-	int ware_type = -1;
+	int32_t ware_type = -1;
 	// read ware type
 	while (0xff != (ware_type = fr.Unsigned8())) {
 		// read count of priorities assigned for this ware type
 		const uint8_t count = fr.Unsigned8();
 		for (uint8_t i = 0; i < count; i++) {
-			int idx = -1;
+			int32_t idx = -1;
 			if (Request::WARE == ware_type)
 				idx = tribe.get_safe_ware_index(fr.CString());
 			else if (Request::WORKER == ware_type)

@@ -62,8 +62,8 @@ throw (_wexception)
          ecos.resize(nr_economies);
 
          for (uint32_t j=0; j<plr->m_economies.size(); j++) {
-            int x=fr.Unsigned16();
-            int y=fr.Unsigned16();
+            int32_t x=fr.Unsigned16();
+            int32_t y=fr.Unsigned16();
             Flag* flag=static_cast<Flag*>(map->get_field(Coords(x, y))->get_immovable());
             assert(flag);
             ecos[j]=flag->get_economy();

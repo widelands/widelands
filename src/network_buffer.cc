@@ -134,7 +134,7 @@ void Network_Buffer::put_string(std::string string) {
  *
  * return -1 on error
  */
-int Network_Buffer::fill(TCPsocket sock) {
+int32_t Network_Buffer::fill(TCPsocket sock) {
    // Ok, there is data on this socket. This is assumed
 	if (SDLNet_TCP_Recv(sock, m_buffer, 2) < 2) return -1; // Some error.
 

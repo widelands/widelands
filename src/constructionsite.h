@@ -65,9 +65,9 @@ public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
 	virtual ~ConstructionSite();
 
-	virtual int get_building_type() const throw ()
+	virtual int32_t get_building_type() const throw ()
 	{return Building::CONSTRUCTIONSITE;}
-	virtual int get_size() const throw ();
+	virtual int32_t get_size() const throw ();
 	virtual uint32_t get_playercaps() const throw ();
 	virtual uint32_t get_ui_anim() const;
 	virtual const std::string & census_string() const throw ();
@@ -98,9 +98,9 @@ protected:
 		UI::Window** registry);
 
 	void request_builder(Game* g);
-	static void request_builder_callback(Game* g, Request* rq, int ware,
+	static void request_builder_callback(Game* g, Request* rq, int32_t ware,
 		Worker* w, void* data);
-	static void wares_queue_callback(Game* g, WaresQueue* wq, int ware,
+	static void wares_queue_callback(Game* g, WaresQueue* wq, int32_t ware,
 		void* data);
 
 	virtual void draw
@@ -115,7 +115,7 @@ private:
 
 	std::vector<WaresQueue*> m_wares;
 
-	int m_fetchfromflag; // # of items to fetch from flag
+	int32_t m_fetchfromflag; // # of items to fetch from flag
 
 	bool m_working;        // true if the builder is currently working
 	uint32_t m_work_steptime;  // time when next step is completed

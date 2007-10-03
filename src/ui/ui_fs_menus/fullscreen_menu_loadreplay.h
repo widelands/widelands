@@ -48,7 +48,7 @@ public:
 private:
 	Game* m_game;
 
-	UI::IDButton<Fullscreen_Menu_LoadReplay, int> m_back;
+	UI::IDButton<Fullscreen_Menu_LoadReplay, int32_t> m_back;
 	UI::Button<Fullscreen_Menu_LoadReplay> m_ok;
 	UI::Listselect<std::string> m_list;
 	UI::Textarea m_title;

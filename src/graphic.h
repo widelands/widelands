@@ -59,27 +59,27 @@ SDL_Surface* LoadImage(const char * const filename);
 class Graphic
 {
 public:
-	Graphic(int w, int h, int bpp, bool fullscreen);
+	Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen);
 	~Graphic();
 
-	int get_xres();
-	int get_yres();
+	int32_t get_xres();
+	int32_t get_yres();
 	RenderTarget* get_render_target();
 	void toggle_fullscreen();
 	void update_fullscreen();
-	void update_rectangle(int x, int y, int w, int h);
+	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
 	void update_rectangle(const Rect & rect)
 	{update_rectangle (rect.x, rect.y, rect.w, rect.h);}
 	bool need_update();
 	void refresh(bool force = true);
 
-	void flush(int mod);
-	uint32_t get_picture(int mod, const char* fname);
+	void flush(int32_t mod);
+	uint32_t get_picture(int32_t mod, const char* fname);
 	void get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h);
-	uint32_t get_picture(const int mod, Surface &, const char * const name = 0);
+	uint32_t get_picture(const int32_t mod, Surface &, const char * const name = 0);
 	Surface* get_picture_surface(uint32_t id);
 	void save_png(uint32_t, FileWrite*);
-	uint32_t create_surface(int w, int h);
+	uint32_t create_surface(int32_t w, int32_t h);
 	void free_surface(uint32_t pic);
 	RenderTarget* get_surface_renderer(uint32_t pic);
 
@@ -110,7 +110,7 @@ public:
 	Texture* get_maptexture_data(uint32_t id);
 	AnimationGfx* get_animation(const uint32_t anim) const;
 
-	Surface* get_road_texture(int roadtex);
+	Surface* get_road_texture(int32_t roadtex);
 
 protected:
 	/// Static function for png writing
@@ -125,7 +125,7 @@ protected:
 	Surface m_screen;
 	RenderTarget * m_rendertarget;
 	SDL_Rect m_update_rects[MAX_RECTS];
-	int m_nr_update_rects;
+	int32_t m_nr_update_rects;
 	bool m_update_fullscreen;
 
 	std::vector<Picture> m_pictures;

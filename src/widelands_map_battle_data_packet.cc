@@ -70,11 +70,11 @@ throw (_wexception)
 			for (Uint32 i = 0; i < nr_battles; ++i) {
          Battle* battle = 0;
 
-         int serial = fr.Unsigned32();
-         int next = fr.Unsigned32();
-         int last = fr.Unsigned32();
-         int sol1 = fr.Unsigned32();
-         int sol2 = fr.Unsigned32();
+         int32_t serial = fr.Unsigned32();
+         int32_t next = fr.Unsigned32();
+         int32_t last = fr.Unsigned32();
+         int32_t sol1 = fr.Unsigned32();
+         int32_t sol2 = fr.Unsigned32();
 
          battle = egbase->create_battle ();
 

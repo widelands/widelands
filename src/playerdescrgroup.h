@@ -44,7 +44,7 @@ struct PlayerDescriptionGroup : public UI::Panel {
 		CHANGE_EVERYTHING=3
 	};
 
-	PlayerDescriptionGroup(UI::Panel* parent, int x, int y, Game* game, int plnum, bool highlight=false);
+	PlayerDescriptionGroup(UI::Panel* parent, int32_t x, int32_t y, Game* game, int32_t plnum, bool highlight=false);
 
 	UI::Signal changed;
 
@@ -53,17 +53,17 @@ struct PlayerDescriptionGroup : public UI::Panel {
 	void enable_player(bool on);
 	void set_player_tribe(std::string str);
 	void set_player_name(std::string name);
-	void set_player_type(int);
+	void set_player_type(int32_t);
 
 private:
 	void toggle_playertype();
 	void toggle_playertribe();
 
 	Game       * m_game;
-	int          m_plnum;
+	int32_t          m_plnum;
 
 	bool         m_enabled; //  is this player allowed at all (map-dependent)
-	int          m_playertype;
+	int32_t          m_playertype;
 	uint32_t         m_current_tribe;
 	changemode_t m_allow_changes;
 

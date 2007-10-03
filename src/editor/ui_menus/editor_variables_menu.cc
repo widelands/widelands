@@ -40,8 +40,8 @@
 struct New_Variable_Window : public UI::Window {
       New_Variable_Window(Editor_Interactive*);
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
       MapVariable* get_variable() {return m_variable;}
 
@@ -51,7 +51,7 @@ private:
 	enum Variable_Type {Integer_Type, String_Type};
 	UI::IDButton<New_Variable_Window, const Variable_Type> button_integer;
 	UI::IDButton<New_Variable_Window, const Variable_Type> button_string;
-	UI::IDButton<New_Variable_Window, int>                 button_back;
+	UI::IDButton<New_Variable_Window, int32_t>                 button_back;
 
 	void clicked_new(const Variable_Type);
 };
@@ -95,9 +95,9 @@ button_back
  * we simulate a cancel click
  * We are not draggable.
  */
-bool New_Variable_Window::handle_mousepress(const Uint8 btn, int, int)
+bool New_Variable_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool New_Variable_Window::handle_mouserelease(const Uint8, int, int)
+bool New_Variable_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 /*
@@ -137,8 +137,8 @@ struct Edit_Variable_Window : public UI::Window {
 	Edit_Variable_Window
 		(Editor_Interactive &, UI::Table<MapVariable &>::Entry_Record &);
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive                     & m_parent;
@@ -148,7 +148,7 @@ private:
 	UI::Textarea                             m_label_value;
 	UI::Edit_Box                             m_value;
 	UI::Button<Edit_Variable_Window>         m_ok;
-	UI::IDButton<Edit_Variable_Window, int>  m_back;
+	UI::IDButton<Edit_Variable_Window, int32_t>  m_back;
 
 	void clicked_ok();
 };
@@ -198,9 +198,9 @@ m_back
  * we simulate a cancel click
  * We are not draggable.
  */
-bool Edit_Variable_Window::handle_mousepress(const Uint8 btn, int, int)
+bool Edit_Variable_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Edit_Variable_Window::handle_mouserelease(const Uint8, int, int)
+bool Edit_Variable_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 /*
@@ -215,7 +215,7 @@ void Edit_Variable_Window::clicked_ok() {
 	switch (var.get_type()) {
 	case MapVariable::MVT_INT: {
          char* endp;
-			const long ivar = strtol(m_value.get_text(), &endp, 0);
+			const int32_t ivar = strtol(m_value.get_text(), &endp, 0);
 
 		if (endp and *endp) {
             char buffer[1024];
@@ -230,7 +230,7 @@ void Edit_Variable_Window::clicked_ok() {
             return;
 		}
          char buffer[256];
-         snprintf(buffer, sizeof(buffer), "%li", ivar);
+         snprintf(buffer, sizeof(buffer), "%i", ivar);
 
 			static_cast<Int_MapVariable &>(var).set_value(ivar);
 			m_te.set_string(1, buffer);
@@ -385,7 +385,7 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
 	switch (type) {
 	case MapVariable::MVT_INT: {
          char buffer[256];
-         snprintf(buffer, sizeof(buffer), "%li", static_cast<Int_MapVariable &>(var).get_value());
+         snprintf(buffer, sizeof(buffer), "%i", static_cast<Int_MapVariable &>(var).get_value());
          val = buffer;
 	}
 		break;

@@ -77,31 +77,31 @@ public:
 	void draw_string
 		(RenderTarget &,
 		 const std::string & font,
-		 int size,
+		 int32_t size,
 		 const RGBColor fg, const RGBColor bg,
 		 Point dstpoint,
 		 const std::string & text,
 		 const Align align = Align_CenterLeft,
-		 const int wrap = -1,
+		 const int32_t wrap = -1,
 		 const Widget_Cache widget_cache = Widget_Cache_None,
 		 uint32_t * const widget_cache_id = 0,
-		 const int caret = -1,
+		 const int32_t caret = -1,
 		 bool transparent = true);
 	void get_size
-		(const std::string & fontname, const int size,
+		(const std::string & fontname, const int32_t size,
 		 std::string text,
-		 int *w, int *h, int wrap = -1);
-	int calc_linewidth(TTF_Font &, const std::string & text);
-	uint32_t get_fontheight(const std::string & name, const int size);
+		 int32_t *w, int32_t *h, int32_t wrap = -1);
+	int32_t calc_linewidth(TTF_Font &, const std::string & text);
+	uint32_t get_fontheight(const std::string & name, const int32_t size);
 	std::string remove_first_space(const std::string &text);
 	std::string word_wrap_text
 		(TTF_Font &,
 		 const std::string & unwrapped_text,
-		 const int max_width);
+		 const int32_t max_width);
 	std::string word_wrap_text
-		(const std::string & font, const int size,
-		 const std::string & unwrapped_text, const int max_width);
-	void do_align(Align align, int *dstx, int *dsty, int w, int h);
+		(const std::string & font, const int32_t size,
+		 const std::string & unwrapped_text, const int32_t max_width);
+	void do_align(Align align, int32_t *dstx, int32_t *dsty, int32_t w, int32_t h);
 	// This deletes all cached pictures, it is called
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
@@ -112,7 +112,7 @@ public:
 		 const RGBColor bg,
 		 Point dstpoint,
 		 std::string text,
-		 int wrap,
+		 int32_t wrap,
 		 Widget_Cache widget_cache = Widget_Cache_None,
 		 uint32_t * const widget_cache_id = 0,
 		 bool transparent = true);
@@ -152,40 +152,40 @@ private:
 	uint32_t create_text_surface
 		(TTF_Font &,
 		 const RGBColor fg, const RGBColor bg,
-		 const std::string & text, const Align, const int wrap,
-		 const int caret = -1, bool transparent = true);
+		 const std::string & text, const Align, const int32_t wrap,
+		 const int32_t caret = -1, bool transparent = true);
 	uint32_t convert_sdl_surface
 		(SDL_Surface &, const RGBColor bg, bool transparent = false);
 	SDL_Surface * draw_string_sdl_surface
-		(const std::string & fontname, const int fontsize,
+		(const std::string & fontname, const int32_t fontsize,
 		 const RGBColor fg, const RGBColor bg,
 		 const std::string & text,
-		 const Align align, const int wrap, const int style = TTF_STYLE_NORMAL,
-		 const int line_spacing = 0);
+		 const Align align, const int32_t wrap, const int32_t style = TTF_STYLE_NORMAL,
+		 const int32_t line_spacing = 0);
 	SDL_Surface* create_sdl_text_surface
 		(TTF_Font &, const RGBColor fg, const RGBColor bg,
 		 const std::string & text,
-		 const Align align, const int wrap, const int line_spacing = 0);
+		 const Align align, const int32_t wrap, const int32_t line_spacing = 0);
 	SDL_Surface * create_static_long_text_surface
 		(TTF_Font &, const RGBColor fg, const RGBColor bg,
 		 std::string text,
-		 const Align align, const int wrap, const int line_spacing = 0,
-		 const int caret = -1);
+		 const Align align, const int32_t wrap, const int32_t line_spacing = 0,
+		 const int32_t caret = -1);
 	SDL_Surface* create_single_line_text_surface
 		(TTF_Font &, const RGBColor fg, const RGBColor bg,
 		 std::string text,
-		 const Align align, const int caret = -1);
+		 const Align align, const int32_t caret = -1);
 	SDL_Surface* create_empty_sdl_surface(uint32_t w, uint32_t h);
 	SDL_Surface* join_sdl_surfaces
 		(const uint32_t w, const uint32_t h,
 		 const std::vector<SDL_Surface *> & surfaces,
 		 const RGBColor bg,
 		 const Align align        = Align_Left,
-		 const int spacing        = 0,
+		 const int32_t spacing        = 0,
 		 const bool vertical      = false,
 		 const bool keep_surfaces = false);
 	SDL_Surface* load_image(std::string file);
-	SDL_Surface* render_space(Text_Block &block, RGBColor bg, int style = TTF_STYLE_NORMAL);
+	SDL_Surface* render_space(Text_Block &block, RGBColor bg, int32_t style = TTF_STYLE_NORMAL);
 	void render_caret
 		(TTF_Font &,
 		 SDL_Surface & line,

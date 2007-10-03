@@ -47,10 +47,10 @@ struct Map_Loader {
       Map_Loader(const char* filename, Map* map) {m_s=STATE_INIT; m_map=map; m_map->set_filename(filename);}
       virtual ~Map_Loader() {};
 
-      virtual int get_type() = 0;
-      virtual int preload_map(bool as_scenario)=0;
+      virtual int32_t get_type() = 0;
+      virtual int32_t preload_map(bool as_scenario)=0;
 	virtual void load_world() = 0;
-      virtual int load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
+      virtual int32_t load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
 
       inline Map* get_map() {return m_map;}
 

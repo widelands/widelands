@@ -65,7 +65,7 @@ throw (_wexception)
 	}
 
 	// First packet version
-	int packet_version=fr.Unsigned16();
+	int32_t packet_version=fr.Unsigned16();
 
 	if (packet_version==CURRENT_PACKET_VERSION) {
 		while (1) {

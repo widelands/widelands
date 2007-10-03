@@ -42,12 +42,12 @@ struct Parameter_error : public std::runtime_error {
 struct InputCallback {
 	void (*mouse_press)
 	(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
-	 int x, int y);      //  The coordinates of the mouse at press time.
+	 int32_t x, int32_t y);      //  The coordinates of the mouse at press time.
 	void (*mouse_release)
 	(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
-	 int x, int y);      //  The coordinates of the mouse at release time.
-	void (*mouse_move) (const Uint8 state, int x, int y, int xdiff, int ydiff);
-	void (*key)        (bool down, int code, char c);
+	 int32_t x, int32_t y);      //  The coordinates of the mouse at release time.
+	void (*mouse_move) (const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	void (*key)        (bool down, int32_t code, char c);
 };
 
 /**
@@ -150,7 +150,7 @@ struct InputCallback {
  */
 
 struct WLApplication {
-	static WLApplication * const get(const int argc=0, const char **argv=0);
+	static WLApplication * const get(const int32_t argc=0, const char **argv=0);
 	~WLApplication();
 
 	void run();
@@ -158,11 +158,11 @@ struct WLApplication {
 	/// \warning true if an external entity wants us to quit
 	const bool should_die() {return m_should_die;}
 
-	const int get_time();
+	const int32_t get_time();
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	const bool get_key_state(const int key) const
+	const bool get_key_state(const int32_t key) const
 		{return SDL_GetKeyState(0)[key];}
 
 	//@{
@@ -181,12 +181,12 @@ struct WLApplication {
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 
-	void set_max_mouse_coords(const int x, const int y);
+	void set_max_mouse_coords(const int32_t x, const int32_t y);
 
 	void do_warp_mouse(const Point);
 	//@}
 
-	void init_graphics(const int w, const int h, const int bpp,
+	void init_graphics(const int32_t w, const int32_t h, const int32_t bpp,
 	                   const bool fullscreen);
 
 	void handle_input(const InputCallback *cb);
@@ -201,17 +201,17 @@ struct WLApplication {
 	//a public interface
 	//@{
 	void init_double_game();
-	static void signal_handler (int sig);
+	static void signal_handler (int32_t sig);
 	static void quit_handler();
 	static void yield_double_game();
 	//@}
 
 	// Used for --double
 	//@{
-	static int pid_me;
-	static int pid_peer;
+	static int32_t pid_me;
+	static int32_t pid_peer;
 	///\todo Explain me
-	static volatile int may_run;
+	static volatile int32_t may_run;
 	//@}
 #endif
 #endif
@@ -221,7 +221,7 @@ struct WLApplication {
 	void emergency_save(const std::string & message);
 
 protected:
-	WLApplication(const int argc, const char **argv);
+	WLApplication(const int32_t argc, const char **argv);
 
 	const bool poll_event(SDL_Event *ev, const bool throttle);
 
@@ -231,7 +231,7 @@ protected:
 	const bool init_hardware();
 	void shutdown_hardware();
 
-	void parse_commandline(const int argc, const char **argv);
+	void parse_commandline(const int32_t argc, const char **argv);
 	void handle_commandline_parameters() throw(Parameter_error);
 
 	void setup_searchpaths(std::string argv0);
@@ -264,11 +264,11 @@ protected:
 
 	///Boundary for the internal mouse's movement - identical to m_gfx_w
 	///\todo Remove this in favour of m_gfx_w?
-	int    m_mouse_maxx;
+	int32_t    m_mouse_maxx;
 
 	///Boundary for the internal mouse's movement - identical to m_gfx_y
 	///\todo Remove this in favour of m_gfx_y?
-	int    m_mouse_maxy;
+	int32_t    m_mouse_maxy;
 	bool   m_mouse_locked;
 
 	///the internal mouse position (sub-pixel accuracy for use with mouse
@@ -286,10 +286,10 @@ protected:
 	bool   m_should_die;
 
 	///The Widelands window's width in pixels
-	int    m_gfx_w;
+	int32_t    m_gfx_w;
 
 	///The Widelands window's height in pixels
-	int    m_gfx_h;
+	int32_t    m_gfx_h;
 
 	///If true Widelands is (should be, we never know ;-) running
 	///in a fullscreen window

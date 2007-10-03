@@ -26,10 +26,10 @@
 struct S2MapDescrHeader {
 		  char   magic[10]; // "WORLD_V1.0"
 	char  name  [20];
-	short w;
-	short h;
-	char  uses_world; // 0 = green, 1 =black, 2 = winter
-	char  nplayers;
+	int16_t w;
+	int16_t h;
+	int8_t  uses_world; // 0 = green, 1 =black, 2 = winter
+	int8_t  nplayers;
 	char  author[26];
 	char  bulk[2290]; // unknown
 } /* size 2352 */;
@@ -139,15 +139,15 @@ struct S2_Map_Loader : public Map_Loader {
       S2_Map_Loader(const char*, Map*);
       virtual ~S2_Map_Loader();
 
-      virtual int get_type() {return Map_Loader::S2ML;}
-      virtual int preload_map(bool);
+      virtual int32_t get_type() {return Map_Loader::S2ML;}
+      virtual int32_t preload_map(bool);
 	void load_world();
-      virtual int load_map_complete(Editor_Game_Base*, bool scenario);
+      virtual int32_t load_map_complete(Editor_Game_Base*, bool scenario);
 
 private:
       char  m_filename[256];
 
-      uint8_t *load_s2mf_section(FileRead *, int width, int height);
+      uint8_t *load_s2mf_section(FileRead *, int32_t width, int32_t height);
       void  load_s2mf_header();
       void  load_s2mf(Editor_Game_Base*);
 };

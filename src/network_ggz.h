@@ -79,10 +79,10 @@ private:
 	void event_game(uint32_t id, const void *cbdata);
 
 	bool use_ggz;
-	int m_fd;
-	int channelfd;
-	int gamefd;
-	int tableid;
+	int32_t m_fd;
+	int32_t channelfd;
+	int32_t gamefd;
+	int32_t tableid;
 	char *ip_address;
 	bool ggzcore_login;
 	bool ggzcore_ready;

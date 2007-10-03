@@ -32,7 +32,7 @@
 
 #include "log.h"
 
-static const int EVENT_VERSION = 1;
+static const int32_t EVENT_VERSION = 1;
 
 /*
  * Init and cleanup
@@ -55,9 +55,9 @@ void Event_Allow_Building::reinitialize(Game *) {}
  * File Read, File Write
  */
 void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
-	const int packet_version = s->get_safe_int("version");
+	const int32_t packet_version = s->get_safe_int("version");
 	if (packet_version == EVENT_VERSION) {
-      int player= s->get_safe_int("player");
+      int32_t player= s->get_safe_int("player");
       set_player(player);
       set_building(s->get_safe_string("building"));
       set_allow(s->get_safe_bool("allow"));
@@ -93,7 +93,7 @@ Event::State Event_Allow_Building::run(Game* game) {
    assert(plr);
 
 	const Tribe_Descr & tribe = plr->tribe();
-   int index=tribe.get_building_index(m_building.c_str());
+   int32_t index=tribe.get_building_index(m_building.c_str());
    if (index==-1)
 	   throw wexception("Event Allow Building asks for building: %s, which doesn't exist in tribe %s\n", m_building.c_str(), tribe.name().c_str());
 

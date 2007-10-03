@@ -30,7 +30,7 @@ namespace UI {
  *
  * Use as:
  *      Signal signal;
- *      Signal1<int> signal1;
+ *      Signal1<int32_t> signal1;
  *
  *      foo->signal.set(this, &MyClass::Handler);
  *      signal.call();

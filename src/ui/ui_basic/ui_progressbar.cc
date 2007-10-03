@@ -31,7 +31,7 @@ namespace UI {
 /**
 Initialize the progress bar.
 */
-Progress_Bar::Progress_Bar(Panel* parent, int x, int y, int w, int h, uint32_t orientation)
+Progress_Bar::Progress_Bar(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation)
 	: Panel(parent, x, y, w, h)
 {
 	m_orientation = orientation;

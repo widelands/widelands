@@ -47,7 +47,7 @@ struct WUIPlot_Area : public UI::Panel {
          PLOTMODE_ABSOLUTE
 	};
 
-      WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h);
+      WUIPlot_Area(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
       ~WUIPlot_Area();
 
       // Functions from the User Interface
@@ -62,7 +62,7 @@ struct WUIPlot_Area : public UI::Panel {
       void show_plot(uint32_t id, bool t);
 
       // set plotmode
-      void set_plotmode(int id) {m_plotmode = id;}
+      void set_plotmode(int32_t id) {m_plotmode = id;}
 
 private:
 	struct __plotdata {
@@ -71,9 +71,9 @@ private:
          RGBColor plotcolor;
 	};
       std::vector<__plotdata> m_plotdata;
-      int m_time;  // How much do you want to list
-      int m_sample_rate;
-      int m_plotmode;
+      int32_t m_time;  // How much do you want to list
+      int32_t m_sample_rate;
+      int32_t m_plotmode;
 };
 
 #endif

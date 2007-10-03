@@ -86,7 +86,7 @@ void Cmd_Queue::enqueue (Command* cmd)
 	m_cmds.push(ci);
 }
 
-/** Cmd_Queue::run_queue(int interval)
+/** Cmd_Queue::run_queue(int32_t interval)
  *
  * Run all commands scheduled for the next interval milliseconds, and update the
  * internal time as well.
@@ -94,10 +94,10 @@ void Cmd_Queue::enqueue (Command* cmd)
  * which we must mess around (to run all queued cmd.s) and which we update (add
  * the interval)
  */
-int Cmd_Queue::run_queue(int interval, int* game_time_var)
+int32_t Cmd_Queue::run_queue(int32_t interval, int32_t* game_time_var)
 {
-	int final = *game_time_var + interval;
-	int cnt = 0;
+	int32_t final = *game_time_var + interval;
+	int32_t cnt = 0;
 
 	while (!m_cmds.empty()) {
 		Command* c = m_cmds.top().cmd;
@@ -129,7 +129,7 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 }
 
 
-Command::Command (int t)
+Command::Command (int32_t t)
 {
 	m_duetime = t;
 }
@@ -139,7 +139,7 @@ Command::~Command ()
 }
 
 
-GameLogicCommand::GameLogicCommand (int duetime)
+GameLogicCommand::GameLogicCommand (int32_t duetime)
 	: Command(duetime)
 {
 }

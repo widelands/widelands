@@ -43,7 +43,7 @@
 #include <stdio.h>
 
 
-static const int BUILDING_LEAVE_INTERVAL = 1000;
+static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 
 /*
@@ -383,9 +383,9 @@ Building::get_passable
 Building::get_base_flag
 ===============
 */
-int Building::get_type() const throw () {return BUILDING;}
+int32_t Building::get_type() const throw () {return BUILDING;}
 
-int Building::get_size() const throw () {return descr().get_size();}
+int32_t Building::get_size() const throw () {return descr().get_size();}
 
 bool Building::get_passable() const throw () {return false;}
 
@@ -626,7 +626,7 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
 
 	if (!m_leave_queue.size())
 	{
-		if (static_cast<int>(time - m_leave_time) >= 0) {
+		if (static_cast<int32_t>(time - m_leave_time) >= 0) {
 			m_leave_time = time + BUILDING_LEAVE_INTERVAL;
 			return true;
 		}
@@ -650,7 +650,7 @@ void Building::act(Game* g, uint32_t data)
 {
 	uint32_t time = g->get_gametime();
 
-	if (static_cast<int>(time - m_leave_time) >= 0)
+	if (static_cast<int32_t>(time - m_leave_time) >= 0)
 	{
 		bool wakeup = false;
 
@@ -775,13 +775,13 @@ void Building::set_stop(bool stop) {
 * Get priority of a requested ware.
 * Currently always returns base priority - to be extended later
  */
-int Building::get_priority(int type, int ware_index, bool adjust) const {
-	int priority = m_priority;
+int32_t Building::get_priority(int32_t type, int32_t ware_index, bool adjust) const {
+	int32_t priority = m_priority;
 
 	if (type == Request::WARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
-		std::map<int, int>::const_iterator it = m_ware_priorities.find(ware_index);
+		std::map<int32_t, int32_t>::const_iterator it = m_ware_priorities.find(ware_index);
 		if (it != m_ware_priorities.end())
 			priority = adjust
 				? (priority * it->second / DEFAULT_PRIORITY)
@@ -795,12 +795,12 @@ int Building::get_priority(int type, int ware_index, bool adjust) const {
 * Collect priorities assigned to wares of this building
 * priorities are identified by ware type and index
  */
-void Building::collect_priorities(std::map<int, std::map<int, int> > & p) const
+void Building::collect_priorities(std::map<int32_t, std::map<int32_t, int32_t> > & p) const
 {
 	if (m_ware_priorities.size() == 0)
 		return;
-	std::map<int, int> & ware_priorities = p[Request::WARE];
-	std::map<int, int>::const_iterator it;
+	std::map<int32_t, int32_t> & ware_priorities = p[Request::WARE];
+	std::map<int32_t, int32_t>::const_iterator it;
 	for (it = m_ware_priorities.begin(); it != m_ware_priorities.end(); ++it) {
 		if (it->first == DEFAULT_PRIORITY)
 			continue;
@@ -811,11 +811,11 @@ void Building::collect_priorities(std::map<int, std::map<int, int> > & p) const
 /**
 * Set base priority for this building (applies for all wares)
  */
-void Building::set_priority(int new_priority) {
+void Building::set_priority(int32_t new_priority) {
 	m_priority = new_priority;
 }
 
-void Building::set_priority(int type, int ware_index, int new_priority) {
+void Building::set_priority(int32_t type, int32_t ware_index, int32_t new_priority) {
 	if (type == Request::WARE) {
 		m_ware_priorities[ware_index] = new_priority;
 	}

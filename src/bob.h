@@ -77,9 +77,9 @@ struct Bob : public Map_Object {
 		{}
 
 		const Task           * task;
-		int                    ivar1;
-		int                    ivar2;
-		union                  {int ivar3; Uint32 ui32var3;};
+		int32_t                    ivar1;
+		int32_t                    ivar2;
+		union                  {int32_t ivar3; Uint32 ui32var3;};
 		Object_Ptr             objvar1;
 		std::string            svar1;
 
@@ -134,9 +134,9 @@ struct Bob : public Map_Object {
 	MO_DESCR(Descr);
 
 	uint32_t get_current_anim() const {return m_anim;}
-	int get_animstart() const {return m_animstart;}
+	int32_t get_animstart() const {return m_animstart;}
 
-	virtual int get_type() const throw () {return BOB;}
+	virtual int32_t get_type() const throw () {return BOB;}
 	virtual Type get_bob_type() const throw () = 0;
 	virtual uint32_t get_movecaps() const throw () {return 0;}
 	const std::string & name() const throw () {return descr().name();}
@@ -168,23 +168,23 @@ struct Bob : public Map_Object {
 	// default tasks
 	void reset_tasks(Game*);
 	void send_signal(Game*, std::string sig);
-	void start_task_idle(Game*, uint32_t anim, int timeout);
+	void start_task_idle(Game*, uint32_t anim, int32_t timeout);
 
-	bool start_task_movepath(Game*, const Coords dest, const int persist,
+	bool start_task_movepath(Game*, const Coords dest, const int32_t persist,
 							 const DirAnimations &,
 							 const bool forceonlast = false,
-							 const int only_step = -1);
+							 const int32_t only_step = -1);
 
 	void start_task_movepath(const Path &, const DirAnimations &,
 	                         const bool forceonlast = false,
-	                         const int only_step = -1);
+	                         const int32_t only_step = -1);
 
-	bool start_task_movepath(const Map &, const Path &, const int index,
+	bool start_task_movepath(const Map &, const Path &, const int32_t index,
 	                         const DirAnimations &,
 	                         const bool forceonlast = false,
-	                         const int only_step = -1);
+	                         const int32_t only_step = -1);
 
-	void start_task_forcemove(const int dir, const DirAnimations &);
+	void start_task_forcemove(const int32_t dir, const DirAnimations &);
 
 	// higher level handling (task-based)
 	inline State* get_state()
@@ -211,7 +211,7 @@ struct Bob : public Map_Object {
 
 	// low level animation and walking handling
 	void set_animation(Editor_Game_Base* g, uint32_t anim);
-	int start_walk(Game* g, WalkingDir dir, uint32_t anim, bool force = false);
+	int32_t start_walk(Game* g, WalkingDir dir, uint32_t anim, bool force = false);
 
 	/**
 	 * Call this from your task_act() function that was scheduled after
@@ -246,10 +246,10 @@ private:
 	Bob    * * m_linkpprev;
 	uint32_t       m_actid; // CMD_ACT counter, used to eliminate spurious act()s
 	uint32_t       m_anim;
-	int        m_animstart; ///< gametime when the animation was started
+	int32_t        m_animstart; ///< gametime when the animation was started
 	WalkingDir m_walking;
-	int        m_walkstart; ///< start time (used for interpolation)
-	int        m_walkend;   ///< end time (used for interpolation)
+	int32_t        m_walkstart; ///< start time (used for interpolation)
+	int32_t        m_walkend;   ///< end time (used for interpolation)
 
 	// Task framework variables
 	std::vector<State> m_stack;

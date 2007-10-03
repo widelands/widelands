@@ -97,7 +97,7 @@ AttackController::AttackController(Editor_Game_Base & eg) :
 {
 }
 
-AttackController::AttackController(Editor_Game_Base* eg, Flag* _flag, int _attacker, int _defender) :
+AttackController::AttackController(Editor_Game_Base* eg, Flag* _flag, int32_t _attacker, int32_t _defender) :
 BaseImmovable  (globalAttackControllerDescr),
 attackingPlayer(_attacker),
 defendingPlayer(_defender),
@@ -136,7 +136,7 @@ void AttackController::launchAttack(uint32_t nrAttackers) {
 	}
 }
 
-bool AttackController::launchAllSoldiers(bool attackers, int max) {
+bool AttackController::launchAllSoldiers(bool attackers, int32_t max) {
 	// Use an OPtr instead of a plain pointer because they sort
 	// according to serial numbers and are therefore in sync under
 	// parallel simulation.
@@ -363,7 +363,7 @@ bool AttackController::battleGroundOccupied(Coords coords)
 	return false;
 }
 
-void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldierNr)
+void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int32_t soldierNr)
 {
 	log("Calculating battle ground for soldier\n");
 	if (soldierNr == 0) {
@@ -376,9 +376,9 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
 	FCoords prevCoords = map->get_fcoords(flag->get_position());
 	FCoords newCoords = map->get_fcoords(flag->get_position());
 
-	int walkDir[] = {Map_Object::WALK_NE, Map_Object::WALK_E, Map_Object::WALK_SE,
+	int32_t walkDir[] = {Map_Object::WALK_NE, Map_Object::WALK_E, Map_Object::WALK_SE,
 					Map_Object::WALK_SW, Map_Object::WALK_W};
-	int walkDirIndex = soldierNr % 5;
+	int32_t walkDirIndex = soldierNr % 5;
 
 	CheckStepDefault step(battleSoldier->soldier->get_movecaps());
 

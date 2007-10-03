@@ -56,18 +56,18 @@ struct Event_Message_Box : public Event, public TriggerReferencer {
 	const char * get_window_title() const {return m_window_title.c_str();}
       inline void set_is_modal(bool t) {m_is_modal=t;}
 	bool get_is_modal() const {return m_is_modal;}
-      inline void set_pos(int posx, int posy) {m_posx=posx; m_posy=posy;}
-	int get_posx() const {return m_posx;}
-	int get_posy() const {return m_posy;}
-      inline void set_dimensions(int w, int h) {m_width = w; m_height = h;}
-	int get_w() const {return m_width;}
-	int get_h() const {return m_height;}
-      void set_button_trigger(int i, Trigger_Null* t);
-      Trigger_Null* get_button_trigger(int i);
-      void set_button_name(int i, std::string);
-      const char* get_button_name(int i);
-      void set_nr_buttons(int i);
-	int get_nr_buttons() const {return m_buttons.size();}
+      inline void set_pos(int32_t posx, int32_t posy) {m_posx=posx; m_posy=posy;}
+	int32_t get_posx() const {return m_posx;}
+	int32_t get_posy() const {return m_posy;}
+      inline void set_dimensions(int32_t w, int32_t h) {m_width = w; m_height = h;}
+	int32_t get_w() const {return m_width;}
+	int32_t get_h() const {return m_height;}
+      void set_button_trigger(int32_t i, Trigger_Null* t);
+      Trigger_Null* get_button_trigger(int32_t i);
+      void set_button_name(int32_t i, std::string);
+      const char* get_button_name(int32_t i);
+      void set_nr_buttons(int32_t i);
+	int32_t get_nr_buttons() const {return m_buttons.size();}
 
 	enum {
          Right = 0,
@@ -88,8 +88,8 @@ private:
 
       std::vector<Button_Descr> m_buttons;
       UI::Panel*      m_window;
-      int  m_posx, m_posy;
-      int  m_width, m_height;
+      int32_t  m_posx, m_posy;
+      int32_t  m_width, m_height;
 };
 
 

@@ -34,7 +34,7 @@
 /*
  * Where to draw tics
  */
-static const int how_many_ticks[] = {
+static const int32_t how_many_ticks[] = {
    5,  // 15 Mins
    3,  // 30 Mins
    6,  // 1  H
@@ -44,7 +44,7 @@ static const int how_many_ticks[] = {
    4,  // 16 H
 };
 
-static const int max_x[] = {
+static const int32_t max_x[] = {
    15,
    30,
    60,
@@ -70,7 +70,7 @@ static const uint32_t time_in_ms[] = {
 #define LINE_COLOR RGBColor(0, 0, 0)
 
 
-WUIPlot_Area::WUIPlot_Area(UI::Panel * parent, int x, int y, int w, int h)
+WUIPlot_Area::WUIPlot_Area(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h)
 :
 UI::Panel (parent, x, y, w, h),
 m_time    (TIME_ONE_HOUR),
@@ -91,9 +91,9 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 		(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
 		 g_gr->get_picture(PicMod_Game, BG_PIC), Point(0, 0));
 
-   int spacing = 5;
-   int space_at_bottom=15;
-   int space_at_right=5;
+   int32_t spacing = 5;
+   int32_t space_at_bottom=15;
+   int32_t space_at_right=5;
 
    float xline_length = get_inner_w()-space_at_right-spacing;
    float yline_length = get_inner_h()-space_at_bottom-spacing;
@@ -112,24 +112,24 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    float sub = xline_length / how_many_ticks[m_time];
    float posx = get_inner_w()-space_at_right;
    char buffer[200];
-	for (size_t i = 0; static_cast<int>(i) <= how_many_ticks[m_time]; ++i) {
+	for (size_t i = 0; static_cast<int32_t>(i) <= how_many_ticks[m_time]; ++i) {
 		dst->draw_line
-			(static_cast<int>(posx), get_inner_h() - space_at_bottom,
-			 static_cast<int>(posx), get_inner_h() - space_at_bottom + 3,
+			(static_cast<int32_t>(posx), get_inner_h() - space_at_bottom,
+			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
 			 LINE_COLOR);
 
 		snprintf
 			(buffer, sizeof(buffer),
 			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
 
-      int w, h;
+      int32_t w, h;
       g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
 		g_fh->draw_string
 			(*dst,
 			 UI_FONT_SMALL,
 			 RGBColor(255, 0, 0), RGBColor(255, 255, 255),
 			 Point
-			 (static_cast<int>(posx - w / 2),
+			 (static_cast<int32_t>(posx - w / 2),
 			  get_inner_h() - space_at_bottom + 4),
 			 buffer, Align_CenterLeft, -1,
 			 Widget_Cache_None, 0, -1, false);
@@ -157,7 +157,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
          const std::vector<uint32_t>* dataset = m_plotdata[plot].dataset;
 
          // How many do we take together
-			const int how_many = static_cast<int>
+			const int32_t how_many = static_cast<int32_t>
 				((static_cast<float>(time_in_ms[m_time])
 				  /
 				  static_cast<float>(NR_SAMPLES))
@@ -178,7 +178,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
    // Print the maximal value
    sprintf(buffer, "%i", max);
-   int w, h;
+   int32_t w, h;
    g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
    g_fh->draw_string
 		(*dst,
@@ -204,7 +204,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
       std::vector<uint32_t> m_data;
 		if (m_plotmode == PLOTMODE_RELATIVE) {
          // How many do we take together
-			const int how_many = static_cast<int>
+			const int32_t how_many = static_cast<int32_t>
 				((static_cast<float>(time_in_ms[m_time])
 				  /
 				  static_cast<float>(NR_SAMPLES))
@@ -228,19 +228,19 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
       posx = get_inner_w()-space_at_right;
 
-      int lx = get_inner_w()-space_at_right;
-      int ly = get_inner_h()-space_at_bottom;
-		for (int i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
-         int value = (*dataset)[i];
+      int32_t lx = get_inner_w()-space_at_right;
+      int32_t ly = get_inner_h()-space_at_bottom;
+		for (int32_t i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
+         int32_t value = (*dataset)[i];
 
-			int curx = static_cast<int>(posx);
-         int cury = get_inner_h()-space_at_bottom;
+			int32_t curx = static_cast<int32_t>(posx);
+         int32_t cury = get_inner_h()-space_at_bottom;
 			if (value) {
 				const float length_y =
 					yline_length
 					/
 					(static_cast<float>(max) / static_cast<float>(value));
-				cury -= static_cast<int>(length_y);
+				cury -= static_cast<int32_t>(length_y);
 			}
          dst->draw_line(lx, ly, curx, cury, color);
 

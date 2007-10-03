@@ -31,10 +31,10 @@ Editor_Delete_Bob_Tool::handle_click_impl()
 deletes the bob at the given location
 ===========
 */
-int Editor_Delete_Bob_Tool::handle_click_impl
+int32_t Editor_Delete_Bob_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
-	const int radius = parent.get_sel_radius();
+	const int32_t radius = parent.get_sel_radius();
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(center.node), radius));
 	do if (Bob * const bob = mr.location().field->get_first_bob())

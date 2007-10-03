@@ -30,7 +30,7 @@ Initialize a Basic_Button
 */
 Basic_Button::Basic_Button
 	(Panel * const parent,
-	 const int x, const int y, const uint32_t w, const uint32_t h,
+	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const bool enabled, const bool flat,
 	 const uint32_t background_picture_id,
 	 const uint32_t foreground_picture_id,
@@ -134,8 +134,8 @@ void Basic_Button::draw(RenderTarget* dst)
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
 		dst->blit
 			(Point
-			 (get_w() - static_cast<int>(cpw) >> 1,
-			  get_h() - static_cast<int>(cph) >> 1),
+			 (get_w() - static_cast<int32_t>(cpw) >> 1,
+			  get_h() - static_cast<int32_t>(cph) >> 1),
 			 m_pic_custom);
 		}
 	else if (m_title.length()) // otherwise draw the title string centered
@@ -219,7 +219,7 @@ void Basic_Button::handle_mousein(bool inside)
 /**
 Update the pressed status of the button
 */
-bool Basic_Button::handle_mousepress(const Uint8 btn, int, int) {
+bool Basic_Button::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_enabled) {
@@ -230,7 +230,7 @@ bool Basic_Button::handle_mousepress(const Uint8 btn, int, int) {
 
 	return true;
 }
-bool Basic_Button::handle_mouserelease(const Uint8 btn, int, int) {
+bool Basic_Button::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_pressed) {

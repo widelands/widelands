@@ -45,8 +45,8 @@ struct WorkerProgram : public BobProgramBase {
 	virtual ~WorkerProgram() {}
 
 		std::string get_name() const {return m_name;}
-		int get_size() const {return m_actions.size();}
-		const Worker::Action* get_action(int idx) const {
+		int32_t get_size() const {return m_actions.size();}
+		const Worker::Action* get_action(int32_t idx) const {
 			assert(idx >= 0);
 			assert(static_cast<uint32_t>(idx) < m_actions.size());
 			return &m_actions[idx];

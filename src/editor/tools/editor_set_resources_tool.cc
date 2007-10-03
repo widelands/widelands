@@ -35,7 +35,7 @@ Editor_Set_Resources_Tool::handle_click_impl()
 sets the resources of the current to a fixed value
 ===========
 */
-int Editor_Set_Resources_Tool::handle_click_impl
+int32_t Editor_Set_Resources_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	const World & world = map.world();
@@ -44,9 +44,9 @@ int Editor_Set_Resources_Tool::handle_click_impl
 		(map,
 		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
-		int res        = mr.location().field->get_resources();
-		int amount     = mr.location().field->get_resources_amount();
-		int max_amount = world.get_resource(m_cur_res)->get_max_amount();
+		int32_t res        = mr.location().field->get_resources();
+		int32_t amount     = mr.location().field->get_resources_amount();
+		int32_t max_amount = world.get_resource(m_cur_res)->get_max_amount();
 
       amount=m_set_to;
       if (amount<0) amount=0;
@@ -55,7 +55,7 @@ int Editor_Set_Resources_Tool::handle_click_impl
 		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{
          // Ok, we're doing something. First remove the current overlays
-			int picid = g_gr->get_picture
+			int32_t picid = g_gr->get_picture
 				(PicMod_Menu,
 				 world.get_resource(res)->get_editor_pic
 				 (mr.location().field->get_resources_amount()).c_str());

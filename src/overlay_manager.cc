@@ -150,8 +150,8 @@ void Overlay_Manager::recalc_field_overlays(const FCoords fc) {
  */
 void Overlay_Manager::register_overlay
 (const TCoords<> c,
- const int picid,
- const int level,
+ const int32_t picid,
+ const int32_t level,
  Point            hotspot,
  const Job_Id jobid)
 {
@@ -209,7 +209,7 @@ void Overlay_Manager::register_overlay
 /*
  * remove one (or many) overlays from a node or triangle
  */
-void Overlay_Manager::remove_overlay(const TCoords<> c, const int picid) {
+void Overlay_Manager::remove_overlay(const TCoords<> c, const int32_t picid) {
 	assert(c.t <= 2);
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];

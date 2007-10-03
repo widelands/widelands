@@ -47,7 +47,7 @@ struct FileSystem {
 
 	virtual ~FileSystem() {}
 
-	virtual const int FindFiles(std::string path, const std::string pattern,
+	virtual const int32_t FindFiles(std::string path, const std::string pattern,
 	                            filenameset_t *results, uint32_t depth=0) = 0;
 
 	virtual const bool IsWritable() const = 0;
@@ -56,7 +56,7 @@ struct FileSystem {
 
 	virtual void * Load(const std::string & fname, size_t & length) = 0;
 	virtual void Write(const std::string fname, const void * const data,
-	                   const int length) = 0;
+	                   const int32_t length) = 0;
 	virtual void EnsureDirectoryExists(const std::string dirname) = 0;
 	//TODO: use this only from inside EnsureDirectoryExists()
 	virtual void MakeDirectory(const std::string dirname) = 0;
@@ -106,7 +106,7 @@ struct FileSystem {
 	static const std::string AutoExtension(const std::string filename,
 	                                       const std::string extension);
 	static const char *FS_StripExtension(char * const fname);
-	static const char *FS_RelativePath(char *buf, const int buflen, const char *basefile, const char *filename);
+	static const char *FS_RelativePath(char *buf, const int32_t buflen, const char *basefile, const char *filename);
 	const bool pathIsAbsolute(const std::string path) const;
 	const std::string AbsolutePath(const std::string path) const;
 	const std::vector<std::string> FS_Tokenize(const std::string path) const;

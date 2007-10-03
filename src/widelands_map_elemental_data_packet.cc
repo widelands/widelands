@@ -47,7 +47,7 @@ throw(_wexception)
    prof.read("elemental", 0, fs);
    Section* s = prof.get_section("global");
 
-	const int packet_version = s->get_int("packet_version");
+	const int32_t packet_version = s->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
       map->m_width= s->get_int("map_w");
       map->m_height= s->get_int("map_h");

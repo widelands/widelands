@@ -98,7 +98,7 @@ struct DirAnimations {
 	           const char *sectnametempl, Section *defaults = 0,
 	           const EncodeData *encdefaults = 0);
 
-	uint32_t get_animation(const int dir) const throw ()
+	uint32_t get_animation(const int32_t dir) const throw ()
 			{return m_animations[dir - 1];}
 
 private:

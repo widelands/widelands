@@ -50,7 +50,7 @@ struct Network_Buffer {
       uint8_t* get_data() {return m_buffer;}
 
       // Fill this network buffer with all the incoming data
-      int fill(TCPsocket);
+      int32_t fill(TCPsocket);
       void finish();
 
 private:

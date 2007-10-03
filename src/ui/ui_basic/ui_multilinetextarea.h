@@ -45,7 +45,7 @@ struct Multiline_Textarea : public Panel {
 
 	Multiline_Textarea
 		(Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const std::string & text         = std::string(),
 		 const Align                      = Align_Left,
 		 const bool always_show_scrollbar = false);
@@ -56,21 +56,21 @@ struct Multiline_Textarea : public Panel {
 
 	void set_text(const std::string &text);
       void set_align(Align align);
-      void set_scrollpos(int pixels);
+      void set_scrollpos(int32_t pixels);
       void set_scrollmode(ScrollMode mode);
 
 	uint32_t scrollbar_w() const throw () {return 24;}
 	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
 
-      inline void set_font(std::string name, int size, RGBColor fg) {m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str());}
+      inline void set_font(std::string name, int32_t size, RGBColor fg) {m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str());}
 
       // Drawing and event handlers
       void draw(RenderTarget* dst);
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 
       inline const char* get_font_name() {return m_fontname.c_str();}
-      inline const int get_font_size() {return m_fontsize;}
+      inline const int32_t get_font_size() {return m_fontsize;}
       inline RGBColor& get_font_clr() {return m_fcolor;}
 
 private:
@@ -86,14 +86,14 @@ protected:
 	Widget_Cache m_cache_mode;
 
 		std::string    m_fontname;
-		int            m_fontsize;
+		int32_t            m_fontsize;
 		RGBColor       m_fcolor;
 		uint32_t m_textheight;  ///< total height of wrapped text, in pixels
 		uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
 
-      inline int get_m_textpos() {return m_textpos;}
+      inline int32_t get_m_textpos() {return m_textpos;}
       void draw_scrollbar();
-      int get_halign();
+      int32_t get_halign();
 };
 };
 

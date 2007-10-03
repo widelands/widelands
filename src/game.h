@@ -137,8 +137,8 @@ public:
 	StreamWrite& syncstream();
 	md5_checksum get_sync_hash() const;
 
-	int get_speed() const {return m_speed;}
-	void set_speed(int speed);
+	int32_t get_speed() const {return m_speed;}
+	void set_speed(int32_t speed);
 
 	bool get_allow_cheats();
 
@@ -150,21 +150,21 @@ public:
 	void send_player_command (PlayerCommand*);
 
 	void send_player_bulldoze (PlayerImmovable*);
-	void send_player_build (int, const Coords&, int);
-	void send_player_build_flag (int, const Coords&);
-	void send_player_build_road (int, Path &);
-	void send_player_flagaction (Flag*, int);
+	void send_player_build (int32_t, const Coords&, int32_t);
+	void send_player_build_flag (int32_t, const Coords&);
+	void send_player_build_road (int32_t, Path &);
+	void send_player_flagaction (Flag*, int32_t);
 	void send_player_start_stop_building (Building*);
-	void send_player_enhance_building (Building*, int);
-	void send_player_change_training_options(Building*, int, int);
-	void send_player_drop_soldier(Building*, int);
-	void send_player_change_soldier_capacity(Building*, int);
+	void send_player_enhance_building (Building*, int32_t);
+	void send_player_change_training_options(Building*, int32_t, int32_t);
+	void send_player_drop_soldier(Building*, int32_t);
+	void send_player_change_soldier_capacity(Building*, int32_t);
 	void send_player_enemyflagaction
 		(const Flag * const,
-		 const int action,
+		 const int32_t action,
 		 const Player_Number,
-		 const int num_soldiers,
-		 const int type);
+		 const int32_t num_soldiers,
+		 const int32_t type);
 
 	Interactive_Player* get_ipl();
 
@@ -192,8 +192,8 @@ private:
 
 	NetGame                      * m_netgame;
 
-	int                            m_state;
-	int                            m_speed; //  frametime multiplier
+	int32_t                            m_state;
+	int32_t                            m_speed; //  frametime multiplier
 
 	RNG                            rng;
 
@@ -205,7 +205,7 @@ private:
 	ReplayReader* m_replayreader;
 	ReplayWriter* m_replaywriter;
 
-	int m_realtime; // the real time (including) pauses in milliseconds
+	int32_t m_realtime; // the real time (including) pauses in milliseconds
 
 	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;

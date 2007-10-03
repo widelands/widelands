@@ -43,12 +43,12 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
    m_parent=parent;
 
    // UI::Buttons
-   const int offsx=5;
-   const int offsy=30;
-   const int spacing=3;
-   const int height=20;
-   int posx=offsx;
-   int posy=offsy;
+   const int32_t offsx=5;
+   const int32_t offsy=30;
+   const int32_t spacing=3;
+   const int32_t height=20;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
    UI::Textarea* ta= new UI::Textarea(this, posx, posy-2, _("Map Name:"), Align_Left);
    m_name=new UI::Edit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
    m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
@@ -113,7 +113,7 @@ Main_Menu_Map_Options::changed()
 called when one of the editboxes are changed
 ===========
 */
-void Main_Menu_Map_Options::changed(int id) {
+void Main_Menu_Map_Options::changed(int32_t id) {
    if (id==0) {
       // name
 		m_parent->egbase().map().set_name(m_name->get_text());

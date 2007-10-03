@@ -32,7 +32,7 @@
 
 
 WaresDisplay::WaresDisplay
-(UI::Panel * const parent, const int x, const int y, const Tribe_Descr & tribe)
+(UI::Panel * const parent, const int32_t x, const int32_t y, const Tribe_Descr & tribe)
 :
 UI::Panel(parent, x, y, Width, 0),
 m_tribe (tribe),
@@ -49,7 +49,7 @@ WaresDisplay::~WaresDisplay()
 }
 
 
-bool WaresDisplay::handle_mousemove(const Uint8, int x, int y, int, int) {
+bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
    assert(m_warelists.size());
 
 	const vector_type::size_type index =
@@ -83,7 +83,7 @@ void WaresDisplay::add_warelist(const WareList* wares, wdType type)
    // If you register something twice, it is counted twice. Not my problem
 	m_warelists.push_back(wares);
 
-   int rows, height;
+   int32_t rows, height;
 
    rows = (wares->get_nrwareids() + WaresPerRow - 1) / WaresPerRow;
 	height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
@@ -116,15 +116,15 @@ void WaresDisplay::draw(RenderTarget* dst)
 {
 	Point p(2, 2);
 
-	int number = m_tribe.get_nrwares();
+	int32_t number = m_tribe.get_nrwares();
    bool is_worker = false;
 
 	if (m_type == WORKER) {
 		number = m_tribe.get_nrworkers();
       is_worker = true;
 	}
-   int totid=0;
-	for (int id = 0; id < number; ++id, ++totid) {
+   int32_t totid=0;
+	for (int32_t id = 0; id < number; ++id, ++totid) {
       uint32_t totalstock = 0;
       for (uint32_t i = 0; i < m_warelists.size(); i++)
          totalstock += m_warelists[i]->stock(id);

@@ -61,7 +61,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
    prof.read("player_names", 0, fs);
    Section* s = prof.get_section("global");
 
-   const int packet_version = s->get_int("packet_version");
+   const int32_t packet_version = s->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		const Player_Number nr_players = map->get_nrplayers();
 		iterate_player_numbers(p, nr_players) {

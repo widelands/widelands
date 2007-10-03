@@ -43,7 +43,7 @@ protected:
 private:
 	UI::Textarea                                title;
 	UI::Multiline_Textarea                      textview;
-	UI::IDButton<Fullscreen_Menu_TextView, int> close_button;
+	UI::IDButton<Fullscreen_Menu_TextView, int32_t> close_button;
 };
 
 /**

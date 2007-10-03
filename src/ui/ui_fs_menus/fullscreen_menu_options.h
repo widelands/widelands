@@ -37,9 +37,9 @@ struct Section;
 
 struct Options_Ctrl {
 		struct Options_Struct {
-			int xres;
-			int yres;
-			int depth;
+			int32_t xres;
+			int32_t yres;
+			int32_t depth;
 			bool inputgrab;
 			bool fullscreen;
 			bool single_watchwin;
@@ -49,7 +49,7 @@ struct Options_Ctrl {
          bool music;
          bool fx;
          std::string language;
-			int autosave; // autosave interval in minutes
+			int32_t autosave; // autosave interval in minutes
 		};
 
 		Options_Ctrl(Section *s);
@@ -74,7 +74,7 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	};
 
 private:
-	UI::IDButton<Fullscreen_Menu_Options, int> m_cancel, m_apply;
+	UI::IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;
 	UI::Textarea                      m_title;
 	UI::Checkbox                      m_fullscreen;
 	UI::Textarea                      m_label_fullscreen;
@@ -101,9 +101,9 @@ private:
 	UI::Textarea                      m_label_autosave;
 
 	struct res {
-		int xres;
-		int yres;
-		int depth;
+		int32_t xres;
+		int32_t yres;
+		int32_t depth;
 	};
 	std::vector<res> m_resolutions;
 };

@@ -58,7 +58,7 @@ void Songset::add_song(const std::string filename)
  */
 Mix_Music *Songset::get_song()
 {
-	int songnumber;
+	int32_t songnumber;
 	std::string filename;
 
 	if (g_sound_handler.get_disable_music() || m_songs.empty())

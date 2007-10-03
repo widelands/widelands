@@ -39,7 +39,7 @@ uint32_t Panel::s_default_cursor = 0;
  */
 Panel::Panel
 	(Panel * const nparent,
-	 const int nx, const int ny, const uint32_t nw, const uint32_t nh,
+	 const int32_t nx, const int32_t ny, const uint32_t nw, const uint32_t nh,
 	 const std::string & tooltip_text)
 	:
 _parent(nparent), _mousein(0), _focus(0),
@@ -114,7 +114,7 @@ void Panel::free_children() {
  * will be negative when the event loop was quit in an abnormal way
  * (e.g. the user clicked the window's close button or similar).
  */
-int Panel::run()
+int32_t Panel::run()
 {
 	WLApplication *app=WLApplication::get();
 	Panel *prevmodal = _modal;
@@ -184,7 +184,7 @@ int Panel::run()
 /**
  * Cause run() to return as soon as possible, with the given return code
  */
-void Panel::end_modal(int code)
+void Panel::end_modal(int32_t code)
 {
 	_running = false;
 	_retcode = code;
@@ -323,12 +323,12 @@ void Panel::draw_overlay(RenderTarget &) {}
 /**
  * Mark a part of a panel for updating.
  */
-void Panel::update(int x, int y, int w, int h)
+void Panel::update(int32_t x, int32_t y, int32_t w, int32_t h)
 {
 	if
-		(x >= static_cast<int>(_w) or x + w <= 0
+		(x >= static_cast<int32_t>(_w) or x + w <= 0
 		 or
-		 y >= static_cast<int>(_h) or y + h <= 0)
+		 y >= static_cast<int32_t>(_h) or y + h <= 0)
 		return;
 
 	_needdraw = true;
@@ -361,7 +361,7 @@ void Panel::update(int x, int y, int w, int h)
 /**
  * Mark a part of a panel for updating.
  */
-void Panel::update_inner(int x, int y, int w, int h)
+void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
 {
 	update(x-_lborder, y-_tborder, w, h);
 }
@@ -453,14 +453,14 @@ void Panel::handle_mousein(bool) {}
  *
  * Returns: true if the mouseclick was processed
  */
-bool Panel::handle_mousepress  (const Uint8, int, int) {return false;}
-bool Panel::handle_mouserelease(const Uint8, int, int) {return false;}
+bool Panel::handle_mousepress  (const Uint8, int32_t, int32_t) {return false;}
+bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t) {return false;}
 
 /**
  * Called when the mouse is moved while inside the panel
  *
  */
-bool Panel::handle_mousemove(const Uint8, int, int, int, int) {return _tooltip;}
+bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t) {return _tooltip;}
 
 /**
  * Receive a keypress or keyrelease event.
@@ -469,7 +469,7 @@ bool Panel::handle_mousemove(const Uint8, int, int, int, int) {return _tooltip;}
  *
  * Return true if you processed the key.
 */
-bool Panel::handle_key(bool, int, char) {return false;}
+bool Panel::handle_key(bool, int32_t, char) {return false;}
 
 /**
  *
@@ -630,15 +630,15 @@ void Panel::do_draw(RenderTarget* dst)
 /**
  * \return The child panel that receives mouse events at the given location.
  */
-inline Panel * Panel::child_at_mouse_cursor(int x, int y)
+inline Panel * Panel::child_at_mouse_cursor(int32_t x, int32_t y)
 {
 	for (panellist_it i = m_children.begin(); i!=m_children.end(); ++i) {
 		if (!(*i)->get_handle_mouse() || !(*i)->get_visible())
 			continue;
 
-		if (x < (*i)->_x + static_cast<int>((*i)->_w) and x >= (*i)->_x
+		if (x < (*i)->_x + static_cast<int32_t>((*i)->_w) and x >= (*i)->_x
 		    and
-		    y < (*i)->_y + static_cast<int>((*i)->_h) and y >= (*i)->_y)
+		    y < (*i)->_y + static_cast<int32_t>((*i)->_h) and y >= (*i)->_y)
 			return (*i);
 	}
 
@@ -663,7 +663,7 @@ void Panel::do_mousein(bool inside)
  *
  * \return Whether the event was processed.
  */
-bool Panel::do_mousepress(const Uint8 btn, int x, int y) {
+bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	x -= _lborder;
 	y -= _tborder;
 	if (_flags & pf_top_on_click) move_to_top();
@@ -681,7 +681,7 @@ bool Panel::do_mousepress(const Uint8 btn, int x, int y) {
  *
  * \return Whether the event was processed.
  */
-bool Panel::do_mouserelease(const Uint8 btn, int x, int y) {
+bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this) {
@@ -698,7 +698,7 @@ bool Panel::do_mouserelease(const Uint8 btn, int x, int y) {
  *
  * \return Whether the event was processed.
  */
-bool Panel::do_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff)
+bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
 	x -= _lborder;
 	y -= _tborder;
@@ -727,7 +727,7 @@ bool Panel::do_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff)
  * Pass the key event to the focussed child.
  * If it doesn't process the key, we'll see if we can use the event.
 */
-bool Panel::do_key(bool down, int code, char c)
+bool Panel::do_key(bool down, int32_t code, char c)
 {
 	if (_focus) {
 		if (_focus->do_key(down, code, c))
@@ -743,7 +743,7 @@ bool Panel::do_key(bool down, int code, char c)
  *
  * Returns: the panel which receives the mouse event
  */
-Panel *Panel::ui_trackmouse(int *x, int *y)
+Panel *Panel::ui_trackmouse(int32_t *x, int32_t *y)
 {
 	Panel *mousein;
 	Panel *rcv = 0;
@@ -761,9 +761,9 @@ Panel *Panel::ui_trackmouse(int *x, int *y)
 	}
 
 	if
-		(*x >= 0 and *x < static_cast<int>(mousein->_w)
+		(*x >= 0 and *x < static_cast<int32_t>(mousein->_w)
 		 and
-		 *y >= 0 and *y < static_cast<int>(mousein->_h))
+		 *y >= 0 and *y < static_cast<int32_t>(mousein->_h))
 		rcv = mousein;
 	else
 		mousein = 0;
@@ -784,11 +784,11 @@ Panel *Panel::ui_trackmouse(int *x, int *y)
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
 */
-void Panel::ui_mousepress(const Uint8 button, int x, int y) {
+void Panel::ui_mousepress(const Uint8 button, int32_t x, int32_t y) {
 	if (Panel * const p = ui_trackmouse(&x, &y))
 		p->do_mousepress(button, x, y);
 }
-void Panel::ui_mouserelease(const Uint8 button, int x, int y) {
+void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
 	if (Panel * const p = ui_trackmouse(&x, &y))
 		p->do_mouserelease(button, x, y);
 }
@@ -799,7 +799,7 @@ void Panel::ui_mouserelease(const Uint8 button, int x, int y) {
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
 */
-void Panel::ui_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff) {
+void Panel::ui_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	if (!xdiff && !ydiff)
 		return;
 
@@ -822,7 +822,7 @@ void Panel::ui_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff) 
  *
  * Input callback function. Pass the key event to the currently modal panel
  */
-void Panel::ui_key(bool down, int code, char c)
+void Panel::ui_key(bool down, int32_t code, char c)
 {
 	_modal->do_key(down, code, c);
 }
@@ -842,7 +842,7 @@ void Panel::set_tooltip(const char * const text) {
  */
 void Panel::draw_tooltip(RenderTarget* dst, Panel *lowest)
 {
-	int tip_width, tip_height;
+	int32_t tip_width, tip_height;
 	g_fh->get_size(UI_FONT_TOOLTIP, lowest->tooltip(), &tip_width, &tip_height, 0);
 	tip_width += 4;
 	tip_height += 4;

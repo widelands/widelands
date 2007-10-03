@@ -88,7 +88,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
          act.type = ProductionAction::actConsume;
          act.sparam1 = cmd[1];
-         int how_many=1;
+         int32_t how_many=1;
 			if (cmd.size() == 3) {
             char* endp;
             how_many = strtol(cmd[2].c_str(), &endp, 0);
@@ -117,7 +117,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			}
 			act.type = ProductionAction::actCheck;
 			act.sparam1 = cmd[1];
-         int how_many=1;
+         int32_t how_many=1;
 			if (cmd.size() == 3) {
             char* endp;
             how_many = strtol(cmd[2].c_str(), &endp, 0);
@@ -246,7 +246,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			for (uint32_t i = 1; i < cmd.size(); ++i) {
 				std::string cmdname;
-				int flag;
+				int32_t flag;
 				char c = cmd[i][0];
 
 				cmdname = cmd[i].substr(1);
@@ -289,7 +289,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 					("check_soldier needs 'hp', 'attack', 'defense' or 'evade' "
 					 "parameter");
 
-		  int how_many=1;
+		  int32_t how_many=1;
 		  char* endp;
 		  how_many = strtol(cmd[2].c_str(), &endp, 0);
 		  if (endp && *endp)
@@ -320,7 +320,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 				throw wexception
 					("train needs 'hp', 'attack', 'defense' or 'evade' parameter");
 
-			int how_many=1;
+			int32_t how_many=1;
 			char* endp;
 			how_many = strtol(cmd[2].c_str(), &endp, 0);
 			if (endp && *endp)

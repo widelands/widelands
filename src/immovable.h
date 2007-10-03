@@ -50,7 +50,7 @@ struct BaseImmovable : public Map_Object {
 	BaseImmovable(const Map_Object_Descr &);
 	virtual ~BaseImmovable();
 
-	virtual int  get_size    () const throw () = 0;
+	virtual int32_t  get_size    () const throw () = 0;
 	virtual bool get_passable() const throw () = 0;
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
@@ -80,7 +80,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	const std::string & name() const throw () {return m_name;}
 	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
-	int get_size() const throw () {return m_size;}
+	int32_t get_size() const throw () {return m_size;}
 	inline const char* get_picture() const {return m_picture.c_str();}
 	const ImmovableProgram* get_program(std::string programname) const;
 	inline const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
@@ -96,7 +96,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 protected:
 	std::string m_picture;
 	const std::string         m_name;
-	int           m_size;
+	int32_t           m_size;
 	EncodeData    m_default_encodedata;
 
 	ProgramMap    m_programs;
@@ -116,8 +116,8 @@ public:
 
 	Coords get_position() const {return m_position;}
 
-	virtual int  get_type    () const throw ();
-	virtual int  get_size    () const throw ();
+	virtual int32_t  get_type    () const throw ();
+	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 	const std::string & name() const throw () {return descr().name();}
 	__attribute__ ((deprecated)) std::string get_name() const {return name();}
@@ -148,11 +148,11 @@ protected:
 	Coords                   m_position;
 
 	uint32_t                     m_anim;
-	int                      m_animstart;
+	int32_t                      m_animstart;
 
 	const ImmovableProgram * m_program;
 	uint32_t m_program_ptr; //  index of next instruction to execute
-	int                      m_program_step; //  time of next step
+	int32_t                      m_program_step; //  time of next step
 
 
 	// Load/save support

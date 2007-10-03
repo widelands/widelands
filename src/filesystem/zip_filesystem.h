@@ -33,7 +33,7 @@ struct ZipFilesystem : public FileSystem {
 
 	virtual const bool IsWritable() const;
 
-	virtual const int FindFiles(std::string path, const std::string pattern,
+	virtual const int32_t FindFiles(std::string path, const std::string pattern,
                                     filenameset_t *results, uint32_t depth=0);
 
 	virtual const bool IsDirectory(std::string path);
@@ -41,7 +41,7 @@ struct ZipFilesystem : public FileSystem {
 
 	virtual void * Load(const std::string & fname, size_t & length);
 	virtual void Write(const std::string fname, const void * const data,
-                           const int length);
+                           const int32_t length);
 	virtual void EnsureDirectoryExists(const std::string dirname);
 	virtual void MakeDirectory(const std::string dirname);
 

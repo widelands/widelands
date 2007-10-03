@@ -64,8 +64,8 @@ std::string Campaign_visiblity_save::get_path()
  */
 void Campaign_visiblity_save::make_campvis(std::string savepath)
 {
-	int i = 0;
-	int imap = 0;
+	int32_t i = 0;
+	int32_t imap = 0;
 	char csection[12];
 	char cvisible[12];
 	char number[4];

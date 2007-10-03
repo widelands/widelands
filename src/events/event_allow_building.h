@@ -41,8 +41,8 @@ struct Event_Allow_Building : public Event {
 	void Write(Section &, const Editor_Game_Base &) const;
       void Read(Section*, Editor_Game_Base*);
 
-	int get_player() const {return m_player;}
-      inline void set_player(int i) {m_player=i;}
+	int32_t get_player() const {return m_player;}
+      inline void set_player(int32_t i) {m_player=i;}
       const char* get_building() {return m_building.c_str();}
       void set_building(const char* b) {m_building=b;}
       inline void set_allow(bool t) {m_allow=t;}
@@ -51,7 +51,7 @@ struct Event_Allow_Building : public Event {
 private:
       bool m_allow;
       std::string m_building;
-      int m_player;
+      int32_t m_player;
 };
 
 

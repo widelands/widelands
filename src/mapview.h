@@ -34,10 +34,10 @@ class Interactive_Base;
 struct Map_View : public UI::Panel {
 	Map_View
 		(UI::Panel * const parent,
-		 const int x, const int y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 Interactive_Base &);
 
-	UI::Signal2<int, int> warpview; // x/y in screen coordinates
+	UI::Signal2<int32_t, int32_t> warpview; // x/y in screen coordinates
 	UI::Signal fieldclicked;
 
 	void warp_mouse_to_field(Coords c);
@@ -53,9 +53,9 @@ struct Map_View : public UI::Panel {
 	void draw(RenderTarget* dst);
 
 	// Event handling
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
-	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
 	void track_sel(Point m);
    inline void need_complete_redraw() {m_complete_redraw_needed = true;}

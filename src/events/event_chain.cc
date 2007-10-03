@@ -83,7 +83,7 @@ void EventChain::add_event(Event* ev) {
 /*
  * Check trigger cmd
  */
-Cmd_CheckEventChain::Cmd_CheckEventChain (int t, int tid) : GameLogicCommand (t)
+Cmd_CheckEventChain::Cmd_CheckEventChain (int32_t t, int32_t tid) : GameLogicCommand (t)
 {
 	m_eventchain_id=tid;
 }
@@ -136,7 +136,7 @@ void Cmd_CheckEventChain::execute (Game* g)
 	}
 
 	// recheck next in the time that all eventchains get checked at least once ever 10 seconds
-	const int delay = nr_eventchains ? 1000 / nr_eventchains : 30000;
+	const int32_t delay = nr_eventchains ? 1000 / nr_eventchains : 30000;
 
    g->enqueue_command (new Cmd_CheckEventChain(g->get_gametime() + delay, m_eventchain_id));
 }

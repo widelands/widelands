@@ -229,7 +229,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	// Fill it with all files we find in all directorys
 	g_fs->FindFiles(m_curdir, "*", &m_mapfiles);
 
-	int ndirs=0;
+	int32_t ndirs=0;
 
 	//If we are not at the top of the map directory hierarchy (we're not talking
 	//about the absolute filesystem top!) we manually add ".."

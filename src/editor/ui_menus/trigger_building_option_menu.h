@@ -42,13 +42,13 @@ struct Textarea;
 struct Trigger_Building_Option_Menu : public UI::Window {
       Trigger_Building_Option_Menu(Editor_Interactive*, Trigger_Building*);
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       void update();
 	void clicked_ok();
-      void clicked(int);
+      void clicked(int32_t);
 
       Trigger_Building* m_trigger;
       Editor_Interactive* m_parent;
@@ -58,7 +58,7 @@ private:
 	uint32_t m_count;
 	//Building_Descr::Index m_building;
 	//TODO: line above is type-correct, line below is signedness-correct. Merge them.
-	int m_building;
+	int32_t m_building;
       std::vector<std::string> m_buildings;
 };
 

@@ -54,11 +54,11 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 {
    m_parent=parent;
 
-   int spacing=5;
-   int offsx=spacing;
-   int offsy=30;
-   int posx=offsx;
-   int posy=offsy;
+   int32_t spacing=5;
+   int32_t offsx=spacing;
+   int32_t offsy=30;
+   int32_t posx=offsx;
+   int32_t posy=offsy;
 
    // listselect
    m_ls=new UI::Listselect<const char *>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-40);
