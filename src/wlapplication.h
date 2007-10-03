@@ -250,14 +250,6 @@ protected:
 
 	Point m_mouse_position;
 
-	///Boundary for the internal mouse's movement - identical to m_gfx_w
-	///\todo Remove this in favour of m_gfx_w?
-	int32_t    m_mouse_maxx;
-
-	///Boundary for the internal mouse's movement - identical to m_gfx_y
-	///\todo Remove this in favour of m_gfx_y?
-	int32_t    m_mouse_maxy;
-
 	bool   m_mouse_locked;
 
 	///the internal mouse position (sub-pixel accuracy for use with mouse

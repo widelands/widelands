@@ -220,7 +220,6 @@ WLApplication::WLApplication(const int32_t argc, const char **argv):
 		m_input_grab(false),
 		m_mouse_swapped(false),
 		m_mouse_position(0, 0),
-		m_mouse_maxx(0), m_mouse_maxy(0),
 		m_mouse_locked(0),
 		m_mouse_internal_x(0), m_mouse_internal_y(0),
 		m_mouse_internal_comp_position(0, 0),
@@ -645,16 +644,6 @@ void WLApplication::set_input_grab(bool grab)
 }
 
 /**
- * Set the mouse boundary after a change of resolution
- * This is manually imported by graphic.cc
- */
-void WLApplication::set_max_mouse_coords(const int32_t x, const int32_t y)
-{
-	m_mouse_maxx = x;
-	m_mouse_maxy = y;
-}
-
-/**
  * Warp the SDL mouse cursor to the given position.
  * Store the delta mouse_internal_compx/y, so that the resulting motion
  * event can be eliminated.
@@ -700,7 +689,6 @@ void WLApplication::init_graphics(const int32_t w, const int32_t h,
 	// If we are not to be shut down
 	if (w && h) {
 		g_gr = new Graphic(w, h, bpp, fullscreen);
-		set_max_mouse_coords(w, h);
 	}
 }
 
@@ -725,16 +713,6 @@ const bool WLApplication::init_settings()
 
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
-
-	// Input
-	m_should_die = false;
-	m_input_grab = false;
-	m_mouse_swapped = false;
-	m_mouse_locked = false;
-	m_mouse_position = Point(0, 0);
-	m_mouse_maxx = m_mouse_maxy = 0;
-	m_mouse_internal_x = m_mouse_internal_y = 0;
-	m_mouse_internal_comp_position = Point(0, 0);
 
 	set_input_grab(s->get_bool("inputgrab", false));
 	set_mouse_swap(s->get_bool("swapmouse", false));
