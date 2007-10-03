@@ -123,14 +123,11 @@ struct InputCallback {
  * cursor leaves the window. This means we have to grab the mouse, then relative
  * coords are always available.
  *
- * Mouse: Some mouse functions deal with button mask bits. Bits are simply
+ * Some mouse functions deal with button mask bits. Bits are simply
  * obtained as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right
  * are pressed"
  *
  * \todo Use mousebutton names from SDL instead of hardcoded bitmasks
- *
- * We also implement different mouse speed settings. To make this work, internal
- * mouse position is kept at subpixel resolution.
  *
  * \todo What happens if a playback is canceled? Does the game continue or quit?
  * \todo Can recording be canceled?
@@ -143,7 +140,7 @@ struct InputCallback {
  * essential for playback anyway. Additionally, we'll want several rendering
  * backends (software and OpenGL). Maybe the graphics backend loader code should
  * be in System, while the actual graphics work is done elsewhere.
- * \todo Mouse handling is not documented yet
+ * \todo Mouse handling is not documented very well
  * \todo Refactor the mainloop
  * \todo Sensible use of exceptions (goes for whole game)
  * \todo Default filenames for recording and playback
@@ -255,11 +252,8 @@ protected:
 	///True if left and right mouse button should be swapped
 	bool   m_mouse_swapped;
 
-	///The (internal) mouse speed
-	float  m_mouse_speed;
-
 	///Current state of the mouse buttons
-	///\todo Replace by direct calls to SDL functions???
+
 	Point m_mouse_position;
 
 	///Boundary for the internal mouse's movement - identical to m_gfx_w
@@ -269,6 +263,7 @@ protected:
 	///Boundary for the internal mouse's movement - identical to m_gfx_y
 	///\todo Remove this in favour of m_gfx_y?
 	int32_t    m_mouse_maxy;
+
 	bool   m_mouse_locked;
 
 	///the internal mouse position (sub-pixel accuracy for use with mouse

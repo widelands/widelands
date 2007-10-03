@@ -219,7 +219,6 @@ WLApplication::WLApplication(const int32_t argc, const char **argv):
 		journal(0),
 		m_input_grab(false),
 		m_mouse_swapped(false),
-		m_mouse_speed(0.0),
 		m_mouse_position(0, 0),
 		m_mouse_maxx(0), m_mouse_maxy(0),
 		m_mouse_locked(0),
@@ -600,7 +599,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 
 /**
  * Return the current time, in milliseconds
- * \todo Convert return value from int32_t to Uint32, SDL's native time resolution
+ * \todo Use our internally defined time type
  */
 const int32_t WLApplication::get_time()
 {
@@ -643,16 +642,6 @@ void WLApplication::set_input_grab(bool grab)
 		SDL_WM_GrabInput(SDL_GRAB_OFF);
 		do_warp_mouse(m_mouse_position);
 	}
-}
-
-/**
- * Set a new mouse speed
- */
-void WLApplication::set_mouse_speed(float speed)
-{
-	if (speed <= 0.1 || speed >= 10.0)
-		speed = 1.0;
-	m_mouse_speed = speed;
 }
 
 /**
@@ -742,7 +731,6 @@ const bool WLApplication::init_settings()
 	m_input_grab = false;
 	m_mouse_swapped = false;
 	m_mouse_locked = false;
-	m_mouse_speed = 1.0;
 	m_mouse_position = Point(0, 0);
 	m_mouse_maxx = m_mouse_maxy = 0;
 	m_mouse_internal_x = m_mouse_internal_y = 0;
@@ -750,7 +738,6 @@ const bool WLApplication::init_settings()
 
 	set_input_grab(s->get_bool("inputgrab", false));
 	set_mouse_swap(s->get_bool("swapmouse", false));
-	set_mouse_speed(s->get_float("mousespeed", 1.0));
 
 	m_gfx_fullscreen=s->get_bool("fullscreen", false);
 
