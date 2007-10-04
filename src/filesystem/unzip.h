@@ -43,6 +43,8 @@
 #ifndef _unz_H
 #define _unz_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

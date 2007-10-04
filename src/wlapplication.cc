@@ -663,7 +663,7 @@ void WLApplication::set_input_grab(bool grab)
  * that even with very fast moves inside a very small window, the mouse cannot
  * leave the window (which would be unexpected for the user).
  */
-void set_mouse_lock(const bool locked)
+void WLApplication::set_mouse_lock(const bool locked)
 {
 	m_mouse_locked = locked;
 	set_input_grab(locked);

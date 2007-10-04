@@ -115,7 +115,7 @@ void NetGGZ::data()
 	char *ipstring;
 	char *greeter;
 	int32_t greeterversion;
-	int8_t ipaddress[17];
+	char ipaddress[17];
 	int32_t fd;
 
 	if (!used()) return;

@@ -42,6 +42,7 @@
 // at msdn.microsoft.com
 #include <winsock2.h>
 
+#include <stdint.h>
 #define DATATYPE    char*
 // microsoft doesn't have these
 typedef uint16_t in_port_t;
