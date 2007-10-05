@@ -117,9 +117,7 @@ struct InputCallback {
  * SDL can handle a mouse cursor on it's own, but only in black'n'white. That's
  * not sufficient for a game.
  *
- * So Widelands must paint it's own cursor (even more so as we have \e two
- * cursors: the freefloating hand and the cross that moves on nodes) and hide
- * the system cursor.
+ * So Widelands must paint it's own cursor and hide the system cursor.
  *
  * Ordinarily, relative coordinates break down when the cursor leaves the
  * window. This means we have to grab the mouse, then relative coords are
