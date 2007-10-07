@@ -23,7 +23,6 @@
 #include <SDL.h>
 #include <stdint.h>
 
-
 struct RGBColor : protected SDL_Color {
 	RGBColor() {}
 	RGBColor(const Uint8 R, const Uint8 G, const Uint8 B) throw ()

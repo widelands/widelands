@@ -39,7 +39,7 @@
 
 #include <map>
 
-/*
+/**
  * This is a modal box - The user must end this first
  * before it can return
  */
@@ -56,7 +56,7 @@ private:
 	UI::Table<MapObjective &>::Entry_Record & m_te;
       UI::Edit_Box          *m_name;
       UI::Multiline_Editbox *m_descr;
-      UI::Checkbox          *m_visible;
+      UI::Checkbox          *m_visibleAtBegin;
       UI::Checkbox          *m_optional;
 
 	void clicked_ok();
@@ -82,8 +82,8 @@ m_te      (te)
    posy += 20 + spacing;
 
    new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Visible at Begin: "), Align_CenterLeft);
-   m_visible = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
-	m_visible->set_state(obj.get_is_visible());
+   m_visibleAtBegin = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
+	m_visibleAtBegin->set_state(obj.get_is_visible());
    posy += STATEBOX_HEIGHT+ spacing;
 
    new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Optional Objective: "), Align_CenterLeft);
@@ -145,7 +145,7 @@ void Edit_Objective_Window::clicked_ok() {
 
 	obj.set_name(m_name->get_text());
 	obj.set_is_optional(m_optional->get_state());
-	obj.set_is_visible(m_visible->get_state());
+	obj.set_is_visible(m_visibleAtBegin->get_state());
 	obj.set_descr(m_descr->get_text().c_str());
 	m_te.set_string(0, obj.name());
 	m_te.set_string(1, obj.get_is_optional() ? "Yes" : "No");

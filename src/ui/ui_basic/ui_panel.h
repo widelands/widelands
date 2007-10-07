@@ -37,7 +37,7 @@ class RenderTarget;
 
 namespace UI {
 
-struct Panel; //forward declaration for next two lines
+struct Panel; //forward declaration for next three lines
 typedef std::list<Panel *>::iterator panellist_it;
 typedef std::list<Panel *>::const_iterator panellist_cit;
 typedef std::list<Panel *>::const_reverse_iterator panellist_crit;
@@ -50,16 +50,6 @@ typedef std::list<Panel *>::const_reverse_iterator panellist_crit;
  * Child panel coordinates are always relative to the inner rectangle.
  */
 struct Panel : public Object {
-	enum {
-		pf_handle_mouse = 1, ///< receive mouse events
-		pf_think = 2, ///< call think() function during run
-		pf_top_on_click = 4, ///< bring panel on top when clicked inside it
-		pf_visible = 32, ///< render the panel
-		pf_can_focus = 64, ///< can receive the keyboard focus
-		pf_snap_windows_only_when_overlapping = 128, ///< children should snap only when overlapping the snap target
-		pf_dock_windows_to_edges = 256, ///< children should snap to the edges of this panel
-	}; ///<\todo Turn this into separate bool flags
-
 	Panel
 		(Panel * const nparent,
 		 const int32_t nx, const int32_t ny, const uint32_t nw, const uint32_t nh,
@@ -95,10 +85,10 @@ struct Panel : public Object {
 	void set_border_snap_distance(const uint8_t value) {_border_snap_distance = value;}
 	uint8_t get_panel_snap_distance () const {return _panel_snap_distance;}
 	void set_panel_snap_distance(const uint8_t value) {_panel_snap_distance = value;}
-	bool get_snap_windows_only_when_overlapping() const {return _flags & pf_snap_windows_only_when_overlapping;}
-	void set_snap_windows_only_when_overlapping(const bool on = true);
-	bool get_dock_windows_to_edges() const {return _flags & pf_dock_windows_to_edges;}
-	void set_dock_windows_to_edges(const bool on = true);
+	bool get_snap_windows_only_when_overlapping() const {return m_snap_windows_only_when_overlapping;}
+	void set_snap_windows_only_when_overlapping(const bool snap = true);
+	bool get_dock_windows_to_edges() const {return m_dock_windows_to_edges;}
+	void set_dock_windows_to_edges(const bool dock = true);
 	void set_inner_size(uint32_t nw, uint32_t nh);
 	void fit_inner(Panel* inner);
 	void set_border(uint32_t l, uint32_t r, uint32_t t, uint32_t b);
@@ -117,8 +107,8 @@ struct Panel : public Object {
 	void move_to_top();
 
 	// Drawing, visibility
-	bool get_visible() const {return (_flags & pf_visible) ? true : false;}
-	void set_visible(bool on);
+	bool get_visible() const {return m_visible;}
+	void set_visible(bool visible);
 
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_border(RenderTarget* dst);
@@ -141,23 +131,21 @@ struct Panel : public Object {
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
 
-	void set_handle_mouse(bool yes);
-	bool get_handle_mouse() const {return (_flags & pf_handle_mouse) ? true : false;}
 	void grab_mouse(bool grab);
 
-	void set_can_focus(bool yes);
-	bool get_can_focus() const {return (_flags & pf_can_focus) ? true : false;}
+	void set_can_focus(bool can_focus);
+	bool get_can_focus() const {return m_can_focus;}
 	bool has_focus() const {assert(get_can_focus()); return (_parent->_focus == this);}
 	void focus();
 
-	void set_think(bool yes);
-	bool get_think() const {return (_flags & pf_think) ? true : false;}
+	void set_handle_mouse(bool handle_mouse);
+	bool get_handle_mouse() const {return m_handle_mouse;}
 
-	void set_top_on_click(bool on) {
-		if (on) _flags |= pf_top_on_click;
-		else _flags &= ~pf_top_on_click;
-	}
-	bool get_top_on_click() const {return (_flags & pf_top_on_click) ? true : false;}
+	void set_think(bool can_think);
+	bool get_think() const {return m_think;}
+
+	void set_top_on_click(bool top_on_click) {m_top_on_click=top_on_click;}
+	bool get_top_on_click() const {return m_top_on_click;}
 
 protected:
 	bool keyboard_free() {return !(_focus);}
@@ -179,7 +167,14 @@ private:
 	Panel *_mousein; ///< cache child panel the mouse is in
 	Panel *_focus; ///< keyboard focus
 
-	uint32_t _flags;
+	bool m_handle_mouse; ///< Receive mouse events
+	bool m_think; ///< call think() function during run
+	bool m_top_on_click; ///< bring panel on top when clicked inside it
+	bool m_visible; ///< render the panel
+	bool m_can_focus; ///< can receive the keyboard focus
+	bool m_snap_windows_only_when_overlapping; ///< children should snap only when overlapping the snap target
+	bool m_dock_windows_to_edges; ///< children should snap to the edges of this panel
+
 	uint32_t _cache;
 	bool _needdraw;
 
@@ -214,14 +209,6 @@ private:
 	static uint32_t s_default_cursor;
 };
 
-void Panel::set_snap_windows_only_when_overlapping(const bool on) {
-	_flags &= ~pf_snap_windows_only_when_overlapping;
-	if (on) _flags |= pf_snap_windows_only_when_overlapping;
-}
-void Panel::set_dock_windows_to_edges(const bool on) {
-	_flags &= ~pf_dock_windows_to_edges;
-	if (on) _flags |= pf_dock_windows_to_edges;
-}
 };
 
 #endif

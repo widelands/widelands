@@ -42,11 +42,15 @@ Panel::Panel
 	 const int32_t nx, const int32_t ny, const uint32_t nw, const uint32_t nh,
 	 const std::string & tooltip_text)
 	:
-_parent(nparent), _mousein(0), _focus(0),
-_flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
-_x(nx), _y(ny), _w(nw), _h(nh),
-_lborder(0), _rborder(0), _tborder(0), _bborder(0),
-_border_snap_distance(0), _panel_snap_distance(0),
+	_parent(nparent), _mousein(0), _focus(0),
+	m_handle_mouse(true), m_think(true), m_top_on_click(false),
+	m_visible(true), m_can_focus(false),
+	m_snap_windows_only_when_overlapping(false),
+	m_dock_windows_to_edges(false),
+	_cache(0), _needdraw(false),
+	_x(nx), _y(ny), _w(nw), _h(nh),
+	_lborder(0), _rborder(0), _tborder(0), _bborder(0),
+	_border_snap_distance(0), _panel_snap_distance(0),
 	_tooltip(tooltip_text.size() ? strdup(tooltip_text.c_str()) : 0)
 {
 	assert(nparent != this);
@@ -147,7 +151,7 @@ int32_t Panel::run()
 		app->handle_input(&icb);
 		if (app->should_die()) end_modal(dying_code);
 
-		if (_flags & pf_think)
+		if (m_think)
 			think();
 
 		if (g_gr->need_update()) {
@@ -292,13 +296,9 @@ void Panel::move_to_top()
 /**
  * Makes the panel visible or invisible
  */
-void Panel::set_visible(bool on)
+void Panel::set_visible(bool visible)
 {
-
-   _flags &= ~pf_visible;
-	if (on)
-		_flags |= pf_visible;
-
+	m_visible=visible;
 	update(0, 0, _w, _h);
 }
 
@@ -457,7 +457,7 @@ void Panel::handle_mousein(bool)
  *
  * \return true if the mouseclick was processed, flase otherwise
  */
-bool Panel::handle_mousepress  (const Uint8, int32_t, int32_t)
+bool Panel::handle_mousepress(const Uint8, int32_t, int32_t)
 {
 	return false;
 }
@@ -499,14 +499,11 @@ bool Panel::handle_key(bool, SDL_keysym)
  * Default is enabled. Note that when mouse handling is disabled, child panels
  * don't receive mouse events either.
  *
- * \param yes rue if the panel should receive mouse events
+ * \param handle_mouse True if the panel should receive mouse events
  */
-void Panel::set_handle_mouse(bool yes)
+void Panel::set_handle_mouse(bool handle_mouse)
 {
-	if (yes)
-		_flags |= pf_handle_mouse;
-	else
-		_flags &= ~pf_handle_mouse;
+	m_handle_mouse=handle_mouse;
 }
 
 /**
@@ -530,13 +527,11 @@ void Panel::grab_mouse(bool grab)
 /**
  * Set if this panel can receive the keyboard focus
 */
-void Panel::set_can_focus(bool yes)
+void Panel::set_can_focus(bool can_focus)
 {
+	m_can_focus=can_focus;
 
-	if (yes) _flags |= pf_can_focus;
-	else {
-		_flags &= ~pf_can_focus;
-
+	if (!can_focus) {
 		if (_parent && _parent->_focus == this)
 			_parent->_focus = 0;
 	}
@@ -565,14 +560,19 @@ void Panel::focus()
  * Enables/Disables calling think() during the event loop.
  * The default is enabled.
  *
- * \param yes true if the panel's think function should be called
+ * \param think True if the panel's think() function should be called
  */
-void Panel::set_think(bool yes)
+void Panel::set_think(bool can_think)
 {
-	if (yes)
-		_flags |= pf_think;
-	else
-		_flags &= ~pf_think;
+	m_think=can_think;
+}
+
+void Panel::set_snap_windows_only_when_overlapping(const bool snap) {
+	m_snap_windows_only_when_overlapping=snap;
+}
+
+void Panel::set_dock_windows_to_edges(const bool dock) {
+	m_dock_windows_to_edges=dock;
 }
 
 /**
@@ -689,7 +689,7 @@ void Panel::do_mousein(bool inside)
 bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	x -= _lborder;
 	y -= _tborder;
-	if (_flags & pf_top_on_click) move_to_top();
+	if (m_top_on_click) move_to_top();
 	if (_g_mousegrab != this) {
 		Panel * child = child_at_mouse_cursor(x, y);
 		if (child)
