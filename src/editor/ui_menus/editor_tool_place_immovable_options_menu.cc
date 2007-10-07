@@ -23,8 +23,8 @@
 #include "editor_place_immovable_tool.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "keycodes.h"
 #include "map.h"
+#include <SDL_keysym.h>
 #include <stdint.h>
 #include "wlapplication.h"
 #include "world.h"
@@ -34,14 +34,6 @@
 #include "ui_checkbox.h"
 #include "ui_textarea.h"
 
-
-/*
-===========
-Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu
-
-constructor
-===========
-*/
 Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu
 (Editor_Interactive          & parent,
  Editor_Place_Immovable_Tool & pit,
@@ -112,26 +104,22 @@ m_pit     (pit)
 	m_tabpanel.resize();
 }
 
-/*
+/**
  * Cleanup
  */
 Editor_Tool_Place_Immovable_Options_Menu::~Editor_Tool_Place_Immovable_Options_Menu() {
 }
 
-/*
-===========
-   void Editor_Tool_Place_Immovable_Options_Menu::clicked()
-
-this is called when one of the state boxes is toggled
-===========
+/**
+ * called when one of the state boxes is toggled
 */
 void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked.
 	const bool multiselect =
-		WLApplication::get()->get_key_state(KEY_LCTRL)
+		WLApplication::get()->get_key_state(SDLK_LCTRL)
 		|
-		WLApplication::get()->get_key_state(KEY_RCTRL);
+		WLApplication::get()->get_key_state(SDLK_RCTRL);
 	if (not t and (not multiselect or m_pit.get_nr_enabled() == 1))
 		m_checkboxes[n]->set_state(true);
 	else {
@@ -152,5 +140,5 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 	}
 }
 
-/* do nothing */
-void Editor_Tool_Place_Immovable_Options_Menu::do_nothing(int32_t, bool) {}
+void Editor_Tool_Place_Immovable_Options_Menu::do_nothing(int32_t, bool)
+{}

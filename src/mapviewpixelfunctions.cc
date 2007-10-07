@@ -68,11 +68,9 @@ float MapviewPixelFunctions::calc_brightness
 	return b;
 }
 
-/*
-===============
-Calculate the pixel (currently Manhattan) distance between the two points,
-taking wrap-arounds into account.
-===============
+/**
+ * Calculate the pixel (currently Manhattan) distance between the two points,
+ * taking wrap-arounds into account.
 */
 uint32_t MapviewPixelFunctions::calc_pix_distance
 (const Map & map, Point a, Point b)
@@ -294,10 +292,8 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 }
 
 
-/*
-===============
-Normalize pixel points of the map.
-===============
+/**
+ * Normalize pixel points of the map.
 */
 void MapviewPixelFunctions::normalize_pix(const Map & map, Point & p) {
 	{

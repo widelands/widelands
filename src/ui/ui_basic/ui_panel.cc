@@ -110,6 +110,7 @@ void Panel::free_children() {
 
 /**
  * Enters the event loop; all events will be handled by this panel.
+ *
  * \return the return code passed to end_modal. This return code
  * will be negative when the event loop was quit in an abnormal way
  * (e.g. the user clicked the window's close button or similar).
@@ -131,7 +132,7 @@ int32_t Panel::run()
 	// Loop
 	_running = true;
 
-	// Panel-specific startup code. Note that this might call end_modal()!
+	// Panel-specific startup code. This might call end_modal()!
 	start();
 	g_gr->update_fullscreen();
 	while (_running)
@@ -238,7 +239,7 @@ void Panel::set_pos(const Point n) {
 }
 
 /**
-Do nothing
+ * Do nothing
 */
 void Panel::move_inside_parent() {}
 
@@ -432,10 +433,12 @@ void Panel::set_mouse_pos(const Point p) {
 }
 
 
-/*
+/**
  * Center the mouse on this panel.
 */
-void Panel::center_mouse() {set_mouse_pos(Point(get_w() / 2, get_h() / 2));}
+void Panel::center_mouse() {
+	set_mouse_pos(Point(get_w() / 2, get_h() / 2));
+}
 
 
 /**
@@ -444,40 +447,59 @@ void Panel::center_mouse() {set_mouse_pos(Point(get_w() / 2, get_h() / 2));}
  * position received in handle_mousemove may be negative while the mouse is
  * still inside the panel as far as handle_mousein is concerned.
  */
-void Panel::handle_mousein(bool) {}
+void Panel::handle_mousein(bool)
+{}
 
 /**
- * Called whenever the user presses or releases a mouse button in the panel.
+ * Called whenever the user presses a mouse button in the panel.
  * If the panel doesn't process the mouse-click, it is handed to the panel's
  * parent.
  *
- * Returns: true if the mouseclick was processed
+ * \return true if the mouseclick was processed, flase otherwise
  */
-bool Panel::handle_mousepress  (const Uint8, int32_t, int32_t) {return false;}
-bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t) {return false;}
+bool Panel::handle_mousepress  (const Uint8, int32_t, int32_t)
+{
+	return false;
+}
+
+/**
+ * Called whenever the user releases a mouse button in the panel.
+ * If the panel doesn't process the mouse-click, it is handed to the panel's
+ * parent.
+ *
+ * \return true if the mouseclick was processed, false otherwise
+ */
+bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
+{
+	return false;
+}
 
 /**
  * Called when the mouse is moved while inside the panel
- *
  */
-bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t) {return _tooltip;}
+bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t)
+{
+	return _tooltip;
+}
 
 /**
  * Receive a keypress or keyrelease event.
  * code is one of the KEY_xxx constants, c is the corresponding printable
  * character or 0 for special, unprintable keys.
  *
- * Return true if you processed the key.
+ * \return true if the event was processed, false otherwise
 */
-bool Panel::handle_key(bool, int32_t, char) {return false;}
+bool Panel::handle_key(bool, SDLKey, char)
+{
+	return false;
+}
 
 /**
- *
  * Enable/Disable mouse handling by this panel
  * Default is enabled. Note that when mouse handling is disabled, child panels
  * don't receive mouse events either.
  *
- * Args: yes  true if the panel should receive mouse events
+ * \param yes rue if the panel should receive mouse events
  */
 void Panel::set_handle_mouse(bool yes)
 {
@@ -488,11 +510,12 @@ void Panel::set_handle_mouse(bool yes)
 }
 
 /**
- *
  * Enable/Disable mouse grabbing. If a panel grabs the mouse, all mouse
  * related events will be sent directly to that panel.
  * You should only grab the mouse as a response to a mouse event (e.g.
  * clicking a mouse button)
+ *
+ * \param grab true if the mouse should be grabbed
  */
 void Panel::grab_mouse(bool grab)
 {
@@ -524,11 +547,10 @@ void Panel::set_can_focus(bool yes)
  */
 void Panel::focus()
 {
-
-   // this assert was deleted, because
-   // it happens, that a child can focus, but a parent
-   // can't. but focus is called recursivly
-   // assert(get_can_focus());
+	// this assert was deleted, because
+	// it happens, that a child can focus, but a parent
+	// can't. but focus is called recursivly
+	// assert(get_can_focus());
 
 	if (!_parent || this == _modal)
 		return;
@@ -543,7 +565,7 @@ void Panel::focus()
  * Enables/Disables calling think() during the event loop.
  * The default is enabled.
  *
- * Args: yes  true if the panel's think function should be called
+ * \param yes true if the panel's think function should be called
  */
 void Panel::set_think(bool yes)
 {
@@ -563,11 +585,12 @@ void Panel::play_click()
 }
 
 /**
- * dst is the RenderTarget for the parent Panel.
- * Subset for the border first and draw the border, then subset for the inner area
- * and draw the inner area.
+ * Subset for the border first and draw the border, then subset for the inner
+ * area and draw the inner area.
  * Draw child panels after drawing self.
  * Draw tooltip if required.
+ *
+ * \param dst RenderTarget for the parent Panel
 */
 void Panel::do_draw(RenderTarget* dst)
 {
@@ -727,7 +750,7 @@ bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
  * Pass the key event to the focussed child.
  * If it doesn't process the key, we'll see if we can use the event.
 */
-bool Panel::do_key(bool down, int32_t code, char c)
+bool Panel::do_key(bool down, SDLKey code, char c)
 {
 	if (_focus) {
 		if (_focus->do_key(down, code, c))
@@ -738,10 +761,9 @@ bool Panel::do_key(bool down, int32_t code, char c)
 }
 
 /**
- *
  * Determine which panel is to receive a mouse event.
  *
- * Returns: the panel which receives the mouse event
+ * \return The panel which receives the mouse event
  */
 Panel *Panel::ui_trackmouse(int32_t *x, int32_t *y)
 {
@@ -780,7 +802,6 @@ Panel *Panel::ui_trackmouse(int32_t *x, int32_t *y)
 }
 
 /**
- * [static]
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
 */
@@ -794,8 +815,6 @@ void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
 }
 
 /**
- * [static]
- *
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
 */
@@ -818,11 +837,9 @@ void Panel::ui_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
 }
 
 /**
- * [static]
- *
  * Input callback function. Pass the key event to the currently modal panel
  */
-void Panel::ui_key(bool down, int32_t code, char c)
+void Panel::ui_key(bool down, SDLKey code, char c)
 {
 	_modal->do_key(down, code, c);
 }
@@ -837,7 +854,7 @@ void Panel::set_tooltip(const char * const text) {
 	}
 }
 
-/** [private]
+/**
  * Draw the tooltip.
  */
 void Panel::draw_tooltip(RenderTarget* dst, Panel *lowest)

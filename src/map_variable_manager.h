@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-/*
+/**
  * The Map Variable Manager makes sure that variables
  * in the map are watched accordingly.
  *
@@ -36,7 +36,7 @@
  * buildings of a type should be build before triggering) doesn't use variables
  */
 
-/*
+/**
  * First, the variables
  */
 struct MapVariable {
@@ -90,7 +90,7 @@ private:
       std::string            m_value;
 };
 
-/*
+/**
  * The manager himself.
  * This is mainly a wrapper, the function
  * could have also been implemented directly in the map.
@@ -101,18 +101,18 @@ struct MapVariableManager {
       MapVariableManager();
       ~MapVariableManager();
 
-      /*
+      /**
        * Register a new variable
        */
       bool register_new_variable(MapVariable*);
 
-      /*
+      /**
        * This prevents casting
        */
 	Int_MapVariable    * get_int_variable   (const char * const name) const;
 	String_MapVariable * get_string_variable(const char * const name) const;
 
-      /*
+      /**
        * Get a variable
        */
 	MapVariable* get_variable(const char * const name) const;

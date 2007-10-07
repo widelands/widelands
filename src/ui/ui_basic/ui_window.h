@@ -27,7 +27,6 @@
 
 namespace UI {
 /**
- *
  * Windows are cached by default.
  *
  * The graphics (see m_pic_*) are used in the following manner: (Example)

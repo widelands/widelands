@@ -60,7 +60,7 @@ public:
 	virtual void set_sel_pos(Node_and_Triangle<>);
 
       // gets called when a keyboard event occurs
-      bool handle_key(bool down, int32_t code, char c);
+      bool handle_key(bool down, SDLKey code, char c);
 
 	struct Tools {
 		Tools()

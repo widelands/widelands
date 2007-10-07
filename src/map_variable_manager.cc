@@ -49,7 +49,7 @@ bool MapVariableManager::register_new_variable(MapVariable* mv) {
    return true;
 }
 
-/*
+/**
  * Get variables
  */
 Int_MapVariable * MapVariableManager::get_int_variable
@@ -85,7 +85,7 @@ MapVariable* MapVariableManager::get_variable
    return retval;
 }
 
-/*
+/**
  * Remove a variable
  */
 void MapVariableManager::delete_variable(const char* name) {

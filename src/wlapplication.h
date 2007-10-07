@@ -23,6 +23,7 @@
 #include "geometry.h"
 
 #include <SDL_events.h>
+#include <SDL_keysym.h>
 #include <SDL_types.h>
 #include <map>
 #include <stdexcept>
@@ -47,7 +48,7 @@ struct InputCallback {
 	(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
 	 int32_t x, int32_t y);      //  The coordinates of the mouse at release time.
 	void (*mouse_move) (const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	void (*key)        (bool down, int32_t code, char c);
+	void (*key)        (bool down, SDLKey code, char c);
 };
 
 /**

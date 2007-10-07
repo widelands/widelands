@@ -31,7 +31,6 @@
 #include "graphic.h"
 #include "general_statistics_menu.h"
 #include "i18n.h"
-#include "keycodes.h"
 #include "immovable.h"
 #include "network.h"
 #include "player.h"
@@ -306,90 +305,102 @@ void Interactive_Player::field_action()
 	}
 }
 
-/*
-===============
-Interactive_Player::handle_key
-
-Global in-game keypresses:
-Space: toggles buildhelp
-F5: reveal map
-===============
+/**
+ * Global in-game keypresses:
+ * Space: toggles buildhelp
+ * F5: reveal map
+ *
+ * \todo Typing a message should really be handled differently: by using the
+ * normal UI event handling. Even worse, this approach accepts non-printing
+ * characters as text and discounts some printing non-ASCII.
+ *
+ * \todo Replace SDLKey with SDL_keysym in param code, get rid of param c
 */
-bool Interactive_Player::handle_key(bool down, int32_t code, char c)
+bool Interactive_Player::handle_key(bool down, SDLKey code, unsigned char c)
 {
+	bool handled=false;
+
 	if (m_is_typing_msg && down) {
-		if (c & 0x7f) {
+		if (c>0 && c<=SDLK_DELETE) {
 			m_typed_message.append(1, c);
 			return true;
 		}
 	}
 
 	switch (code) {
-	case KEY_SPACE:
+	case SDLK_SPACE:
 		if (down)
 			toggle_buildhelp();
-		return true;
+		handled=true;
+		break;
 
-	case KEY_m:
+	case SDLK_m:
 		if (down)
 			toggle_minimap();
-		return true;
+		handled=true;
+		break;
 
-	case KEY_c:
+	case SDLK_c:
 		if (down)
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-		return true;
+		handled=true;
+		break;
 
-	case KEY_s:
+	case SDLK_s:
 		if (down)
 			set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-		return true;
+		handled=true;
+		break;
 
-	case KEY_f:
+	case SDLK_f:
 		if (down)
 			g_gr->toggle_fullscreen();
-		return true;
+		handled=true;
+		break;
 
-	case KEY_HOME:
+	case SDLK_HOME:
 		if (down) move_view_to(m_game->map().get_starting_pos(m_player_number));
-		return true;
+		handled=true;
+		break;
 
-	case KEY_PAGEUP:
+	case SDLK_PAGEUP:
 		if (down) {
 			int32_t speed = m_game->get_speed();
 
 			m_game->set_speed(speed + 1);
 		}
-		return true;
+		handled=true;
+		break;
 
-	case KEY_PAGEDOWN:
+	case SDLK_PAGEDOWN:
 		if (down) {
 			int32_t speed = m_game->get_speed();
 
 			m_game->set_speed(std::max(0, speed-1));
 		}
-		return true;
+		handled=true;
+		break;
 
-	case KEY_BACKSPACE:
+	case SDLK_BACKSPACE:
 		if (down) {
 			if (m_is_typing_msg && m_typed_message.size()) {
 				m_typed_message.erase(m_typed_message.begin() + m_typed_message.size() - 1);
-				return true;
+				handled=true;
 			}
 		}
 		break;
 
-	case KEY_ESCAPE:
+	case SDLK_ESCAPE:
 		if (down) {
 			if (m_is_typing_msg) {
 				m_is_typing_msg = false;
 				m_typed_message.clear();
-				return true;
+				handled=true;
 			}
 		}
 		break;
 
-	case KEY_RETURN:
+	case SDLK_RETURN:
 		if (down) {
 			if (m_is_typing_msg && m_typed_message.size()) {
 				if (m_game->get_netgame()) {
@@ -406,21 +417,25 @@ bool Interactive_Player::handle_key(bool down, int32_t code, char c)
 				m_is_typing_msg = true;
 			}
 		}
-		return true;
+		handled=true;
 
 #ifdef DEBUG
 	// Only in debug builds
-	case KEY_F5:
-		if (down) player().set_see_all(not player().see_all());
-		return true;
+	case SDLK_F5:
+		if (down)
+			player().set_see_all(not player().see_all());
+		handled=true;
 #endif
+
+	default:
+		handled=false;
 	}
 
-	return false;
+	return handled;
 }
 
-/*
- * set the player and the visibility to this
+/**
+ * Set the player and the visibility to this
  * player
  */
 void Interactive_Player::set_player_number(uint32_t n) {

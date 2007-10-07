@@ -19,7 +19,7 @@
 
 #include "ui_editbox.h"
 
-#include "keycodes.h"
+#include <SDL_keysym.h>
 
 namespace UI {
 /*
@@ -95,7 +95,7 @@ a key event must be handled
 bool Edit_Box::handle_key(bool down, int32_t code, char c) {
 	if (down) {
 		switch (code) {
-		case KEY_ESCAPE:
+		case SDLK_ESCAPE:
             set_text(m_lasttext.c_str());
 			Basic_Button::handle_mouserelease(0, 0, 0);
             set_can_focus(false);
@@ -103,7 +103,7 @@ bool Edit_Box::handle_key(bool down, int32_t code, char c) {
             grab_mouse(false);
             return true;
 
-		case KEY_RETURN:
+		case SDLK_RETURN:
             m_lasttext=m_text;
 			Basic_Button::handle_mouserelease(0, 0, 0);
             set_can_focus(false);
@@ -113,14 +113,14 @@ bool Edit_Box::handle_key(bool down, int32_t code, char c) {
             changedid.call(m_id);
             return true;
 
-		case KEY_BACKSPACE:
+		case SDLK_BACKSPACE:
 			if (m_text.size()) {
                m_text.erase(m_text.end() - 1);
                set_title(m_text.c_str());
 			}
             return true;
 
-		case KEY_DELETE:
+		case SDLK_DELETE:
             m_text.resize(0);
             set_title(m_text.c_str());
             return true;

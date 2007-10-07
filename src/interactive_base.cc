@@ -26,7 +26,6 @@
 #include "graphic.h"
 #include "immovable.h"
 #include "interactive_player.h"
-#include "keycodes.h"
 #include "maptriangleregion.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
@@ -205,13 +204,13 @@ void Interactive_Base::think()
    WLApplication *app=WLApplication::get();
 
 	if (keyboard_free()) {
-		if (app->get_key_state(KEY_UP))
+		if (app->get_key_state(SDLK_UP))
 			set_rel_viewpoint(Point(0, -scrollval));
-		if (app->get_key_state(KEY_DOWN))
+		if (app->get_key_state(SDLK_DOWN))
 			set_rel_viewpoint(Point(0,  scrollval));
-		if (app->get_key_state(KEY_LEFT))
+		if (app->get_key_state(SDLK_LEFT))
 			set_rel_viewpoint(Point(-scrollval, 0));
-		if (app->get_key_state(KEY_RIGHT))
+		if (app->get_key_state(SDLK_RIGHT))
 			set_rel_viewpoint(Point (scrollval, 0));
 	}
 

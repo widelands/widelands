@@ -31,10 +31,10 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_base.h"
-#include "keycodes.h"
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"
+#include <SDL_keysym.h>
 #include <stdint.h>
 #include "tribe.h"
 #include "ui_button.h"
@@ -256,119 +256,158 @@ void Editor_Interactive::toolsize_menu_btn() {
 }
 
 
-bool Editor_Interactive::handle_key(bool down, int32_t code, char) {
-   if (code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
+bool Editor_Interactive::handle_key(bool down, SDLKey code, char )
+{
+	bool handled=false;
 
-	if (down) {
-      // only on down events
-		switch (code) {
-			// Sel radius
-		case KEY_1:
-			set_sel_radius(0);
-            return true;
-		case KEY_2:
-			set_sel_radius(1);
-            return true;
-		case KEY_3:
-			set_sel_radius(2);
-            return true;
-		case KEY_4:
-			set_sel_radius(3);
-            return true;
-		case KEY_5:
-			set_sel_radius(4);
-            return true;
-		case KEY_6:
-			set_sel_radius(5);
-            return true;
-		case KEY_7:
-			set_sel_radius(6);
-            return true;
-		case KEY_8:
-			set_sel_radius(7);
-            return true;
-		case KEY_9:
-			set_sel_radius(8);
-            return true;
-		case KEY_0:
-			set_sel_radius(9);
-            return true;
+	if ( code==SDLK_LCTRL || code==SDLK_RCTRL ) m_ctrl_down=down;
 
-		case KEY_LSHIFT:
-		case KEY_RSHIFT:
-			if (tools.use_tool == Editor_Tool::First)
-				select_tool(tools.current(), Editor_Tool::Second);
-            return true;
+	if ( down )
+	{
+		// only on down events
+		switch ( code )
+		{
+		// Sel radius
+		case SDLK_1:
+			set_sel_radius ( 0 );
+			handled=true;
+			break;
+		case SDLK_2:
+			set_sel_radius ( 1 );
+			handled=true;
+			break;
+		case SDLK_3:
+			set_sel_radius ( 2 );
+			handled=true;
+			break;
+		case SDLK_4:
+			set_sel_radius ( 3 );
+			handled=true;
+			break;
+		case SDLK_5:
+			set_sel_radius ( 4 );
+			handled=true;
+			break;
+		case SDLK_6:
+			set_sel_radius ( 5 );
+			handled=true;
+			break;
+		case SDLK_7:
+			set_sel_radius ( 6 );
+			handled=true;
+			break;
+		case SDLK_8:
+			set_sel_radius ( 7 );
+			handled=true;
+			break;
+		case SDLK_9:
+			set_sel_radius ( 8 );
+			handled=true;
+			break;
+		case SDLK_0:
+			set_sel_radius ( 9 );
+			handled=true;
+			break;
 
-		case KEY_LALT:
-		case KEY_RALT:
-		case KEY_MODE:
-			if (tools.use_tool == Editor_Tool::First)
-				select_tool(tools.current(), Editor_Tool::Third);
-            return true;
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
+			if ( tools.use_tool == Editor_Tool::First )
+				select_tool ( tools.current(), Editor_Tool::Second );
+			handled=true;
+			break;
 
-		case KEY_SPACE:
-            toggle_buildhelp();
-            return true;
+		case SDLK_LALT:
+		case SDLK_RALT:
+		case SDLK_MODE:
+			if ( tools.use_tool == Editor_Tool::First )
+				select_tool ( tools.current(), Editor_Tool::Third );
+			handled=true;
+			break;
 
-		case KEY_c:
-            set_display_flag(Interactive_Base::dfShowCensus,
-                  !get_display_flag(Interactive_Base::dfShowCensus));
-            return true;
+		case SDLK_SPACE:
+			toggle_buildhelp();
+			handled=true;
+			break;
 
-		case KEY_e:
-            toggle_eventmenu();
-            return true;
+		case SDLK_c:
+			set_display_flag ( Interactive_Base::dfShowCensus,
+			                   !get_display_flag ( Interactive_Base::dfShowCensus ) );
+			handled=true;
+			break;
 
-		case KEY_f:
-            if (down)
-               g_gr->toggle_fullscreen();
-            return true;
+		case SDLK_e:
+			toggle_eventmenu();
+			handled=true;
+			break;
 
-		case KEY_h:
-            toggle_mainmenu();
-            return true;
+		case SDLK_f:
+			if ( down )
+				g_gr->toggle_fullscreen();
+			handled=true;
+			break;
 
-		case KEY_i:
-			select_tool(tools.info, Editor_Tool::First);
-            return true;
+		case SDLK_h:
+			toggle_mainmenu();
+			handled=true;
+			break;
 
-		case KEY_m:
-            toggle_minimap();
-            return true;
+		case SDLK_i:
+			select_tool ( tools.info, Editor_Tool::First );
+			handled=true;
+			break;
 
-		case KEY_l:
-            if (m_ctrl_down)
-               new Main_Menu_Load_Map(this);
-            return true;
+		case SDLK_m:
+			toggle_minimap();
+			handled=true;
+			break;
 
-		case KEY_p:
-            toggle_playermenu();
-            return true;
+		case SDLK_l:
+			if ( m_ctrl_down )
+				new Main_Menu_Load_Map ( this );
+			handled=true;
+			break;
 
-		case KEY_s:
-            if (m_ctrl_down)
-               new Main_Menu_Save_Map(this);
-            return true;
+		case SDLK_p:
+			toggle_playermenu();
+			handled=true;
+			break;
 
-		case KEY_t:
-            tool_menu_btn();
-            return true;
-		}
-	} else {
-      // key up events
-		switch (code) {
-		case KEY_LSHIFT:
-		case KEY_RSHIFT:
-		case KEY_LALT:
-		case KEY_RALT:
-		case KEY_MODE:
-			if (tools.use_tool != Editor_Tool::First)
-				select_tool(tools.current(), Editor_Tool::First);
-            return true;
+		case SDLK_s:
+			if ( m_ctrl_down )
+				new Main_Menu_Save_Map ( this );
+			handled=true;
+			break;
+
+		case SDLK_t:
+			tool_menu_btn();
+			handled=true;
+			break;
+
+		default:
+			break;
+
 		}
 	}
-   return false;
+	else
+	{
+		// key up events
+		switch ( code )
+		{
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
+		case SDLK_LALT:
+		case SDLK_RALT:
+		case SDLK_MODE:
+			if ( tools.use_tool != Editor_Tool::First )
+				select_tool ( tools.current(), Editor_Tool::First );
+			handled=true;
+			break;
+		default:
+			break;
+		}
+	}
+
+	return handled;
 }
 
 

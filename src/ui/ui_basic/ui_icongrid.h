@@ -86,15 +86,15 @@ private:
 
 	uint32_t   m_flags;
 
-	 ///< max # of columns (or rows, depending on orientation) in the grid
+	 ///max # of columns (or rows, depending on orientation) in the grid
 	int32_t m_columns;
 
-	///< currently highlight (mouseover) icon idx (-1 = no highlight)
+	///currently highlight (mouseover) icon idx (-1 = no highlight)
 	int32_t m_highlight;
 
 	int32_t m_clicked; ///< icon that was clicked (only while LMB is down)
 
-	///< currently selected (persistant) icon idx (-1 = no selection)
+	///currently selected (persistant) icon idx (-1 = no selection)
 	int32_t m_selected;
 
 	int32_t               m_cell_width; ///< size of one cell

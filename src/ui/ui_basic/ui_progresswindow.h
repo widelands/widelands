@@ -29,11 +29,11 @@
 namespace UI {
 /// Manages a progress window on the screen.
 struct IProgressVisualization {
-	// perform any visualizations as needed
-	// if repaint is true, ensure previously painted areas are visible
+	///perform any visualizations as needed
+	///if repaint is true, ensure previously painted areas are visible
 	virtual void update(bool repaint) = 0;
 
-	// Progress Window is closing, unregister and cleanup
+	///Progress Window is closing, unregister and cleanup
 	virtual void stop() = 0;
 
 	virtual ~IProgressVisualization() {}

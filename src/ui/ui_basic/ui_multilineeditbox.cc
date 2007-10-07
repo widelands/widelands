@@ -24,8 +24,8 @@
 #include "ui_scrollbar.h"
 #include "constants.h"
 #include "font_handler.h"
-#include "keycodes.h"
 #include "rendertarget.h"
+#include <SDL_keysym.h>
 #include "wlapplication.h"
 
 namespace UI {
@@ -66,29 +66,29 @@ bool Multiline_Editbox::handle_key(bool down, int32_t code, char c) {
 	if (down) {
       std::string txt= g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
 		switch (code) {
-		case KEY_BACKSPACE:
+		case SDLK_BACKSPACE:
 			if (txt.size() and m_cur_pos) --m_cur_pos;
 			else break;
             // Fallthrough
 
-		case KEY_DELETE:
+		case SDLK_DELETE:
 			if (txt.size() and m_cur_pos < txt.size()) {
                txt.erase(txt.begin() + m_cur_pos);
                Multiline_Textarea::set_text(txt.c_str());
 			}
 			break;
 
-		case KEY_LEFT:
+		case SDLK_LEFT:
             m_cur_pos-=1;
             if (static_cast<int32_t>(m_cur_pos)<0) m_cur_pos=0;
             break;
 
-		case KEY_RIGHT:
+		case SDLK_RIGHT:
             m_cur_pos+=1;
             if (m_cur_pos>=txt.size()) m_cur_pos=txt.size();
             break;
 
-		case KEY_DOWN:
+		case SDLK_DOWN:
 			if (m_cur_pos < txt.size() - 1) {
                uint32_t begin_of_line=m_cur_pos;
                if (txt[begin_of_line]=='\n') --begin_of_line;
@@ -111,7 +111,7 @@ bool Multiline_Editbox::handle_key(bool down, int32_t code, char c) {
 				}
 			break;
 
-		case KEY_UP:
+		case SDLK_UP:
 			if (m_cur_pos > 0) {
                uint32_t begin_of_line=m_cur_pos;
                if (txt[begin_of_line]=='\n') --begin_of_line;
@@ -130,7 +130,7 @@ bool Multiline_Editbox::handle_key(bool down, int32_t code, char c) {
 			}
 			break;
 
-		case KEY_RETURN:
+		case SDLK_RETURN:
             c='\n';
             // fallthrough
 		default:

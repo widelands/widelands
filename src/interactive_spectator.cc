@@ -22,15 +22,12 @@
 #include "game.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "keycodes.h"
 
 #include "ui_editbox.h"
 #include "ui_button.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
-
-
 
 struct Interactive_Spectator::Internals {
 	UI::Textarea* label_speed;
@@ -172,46 +169,58 @@ void Interactive_Spectator::field_action()
 /**
  * Global in-game keypresses:
  */
-bool Interactive_Spectator::handle_key(bool down, int32_t code, char /* c */)
+bool Interactive_Spectator::handle_key(bool down, SDLKey code, char /* c */)
 {
+	bool handled=false;
+
 	switch (code) {
-	case KEY_m:
+	case SDLK_m:
 		if (down)
 			toggle_minimap();
-		return true;
+		handled=true;
+		break;
 
-	case KEY_c:
+	case SDLK_c:
 		if (down)
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-		return true;
+		handled=true;
+		break;
 
-	case KEY_s:
+	case SDLK_s:
 		if (down)
 			set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-		return true;
+		handled=true;
+		break;
 
-	case KEY_f:
+	case SDLK_f:
 		if (down)
 			g_gr->toggle_fullscreen();
-		return true;
+		handled=true;
+		break;
 
-	case KEY_PAGEUP:
+	case SDLK_PAGEUP:
 		if (down) {
 			int32_t speed = get_game()->get_speed();
 
 			get_game()->set_speed(speed + 1);
 		}
-		return true;
+		handled=true;
+		break;
 
-	case KEY_PAGEDOWN:
+	case SDLK_PAGEDOWN:
 		if (down) {
 			int32_t speed = get_game()->get_speed();
 
 			get_game()->set_speed(std::max(0, speed-1));
 		}
-		return true;
+		handled=true;
+		break;
+
+	default:
+		handled=false;
+		break;
 	}
 
-	return false;
+	return handled;
 }
 

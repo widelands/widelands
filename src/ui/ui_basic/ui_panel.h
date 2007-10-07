@@ -21,15 +21,14 @@
 #ifndef __S__PANEL_H
 #define __S__PANEL_H
 
+#include <cassert>
 #include "geometry.h"
-#include "ui_object.h"
-
+#include <list>
+#include <SDL_keysym.h>
 #include <SDL_types.h>
 #include <stdint.h>
-
-#include <cassert>
-#include <list>
 #include <string>
+#include "ui_object.h"
 
 class RenderTarget;
 
@@ -59,7 +58,7 @@ struct Panel : public Object {
 		pf_can_focus = 64, ///< can receive the keyboard focus
 		pf_snap_windows_only_when_overlapping = 128, ///< children should snap only when overlapping the snap target
 		pf_dock_windows_to_edges = 256, ///< children should snap to the edges of this panel
-	};
+	}; ///<\todo Turn this into separate bool flags
 
 	Panel
 		(Panel * const nparent,
@@ -140,7 +139,7 @@ struct Panel : public Object {
 	virtual bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	virtual bool handle_key(bool down, int32_t code, char c);
+	virtual bool handle_key(bool down, SDLKey code, char c);
 
 	void set_handle_mouse(bool yes);
 	inline bool get_handle_mouse() const {return (_flags & pf_handle_mouse) ? true : false;}
@@ -173,7 +172,7 @@ private:
 	bool do_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool do_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 	bool do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool do_key(bool down, int32_t code, char c);
+	bool do_key(bool down, SDLKey code, char c);
 
 	Panel *_parent;
 	std::list<Panel *> m_children;
@@ -207,7 +206,7 @@ private:
 	static void ui_mouserelease(const Uint8 button, int32_t x, int32_t y);
 	static void ui_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	static void ui_key(bool down, int32_t code, char c);
+	static void ui_key(bool down, SDLKey code, char c);
 
 	static Panel *_modal;
 	static Panel *_g_mousegrab;

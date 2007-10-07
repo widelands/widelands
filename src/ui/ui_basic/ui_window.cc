@@ -18,16 +18,16 @@
  */
 
 #include <cassert>
+#include "constants.h"
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
+#include <SDL_keysym.h>
 #include "ui_window.h"
-#include "constants.h"
-#include "keycodes.h"
 #include "wlapplication.h"
 
 namespace UI {
-//  Width the horizontal border grapichs must have.
+//  Width the horizontal border graphics must have.
 #define HZ_B_TOTAL_PIXMAP_LEN 100
 
 //  Height the top border must have
@@ -83,7 +83,6 @@ m_pic_background(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
 }
 
 /**
- *
  * Resource cleanup
  */
 Window::~Window()
@@ -101,7 +100,7 @@ void Window::set_title(const char *text)
 }
 
 /**
-Move the window so that it is under the mouse cursor.
+ * Move the window so that it is under the mouse cursor.
 */
 void Window::move_to_mouse() {
 	set_pos(get_mouse_position() - Point(get_w() / 2, get_h() / 2));
@@ -110,9 +109,9 @@ void Window::move_to_mouse() {
 
 
 /**
-Move the window so that it is inside the parent panel.
-We need this, because move_to_mouse is called before the window is resized.
-If configured, hang the border off the edge of the panel.
+ * Move the window so that it is inside the parent panel.
+ * We need this, because move_to_mouse is called before the window is resized.
+ * If configured, hang the border off the edge of the panel.
 */
 void Window::move_inside_parent() {
 	if (Panel * const parent = get_parent()) {
@@ -145,7 +144,7 @@ void Window::move_inside_parent() {
 
 
 /**
-Move the window so that it is centered wrt the parent.
+ * Move the window so that it is centered wrt the parent.
 */
 void Window::center_to_parent()
 {
@@ -161,7 +160,7 @@ void Window::center_to_parent()
 
 
 /**
-Redraw the window frame and background
+ * Redraw the window frame and background
 */
 void Window::draw_border(RenderTarget* dst)
 {
@@ -322,7 +321,7 @@ void Window::think() {if (not is_minimal()) Panel::think();}
 bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
 	const WLApplication & wla = *WLApplication::get();
 	if
-		(((wla.get_key_state(KEY_LCTRL) | wla.get_key_state(KEY_RCTRL))
+		(((wla.get_key_state(SDLK_LCTRL) | wla.get_key_state(SDLK_RCTRL))
 		  and
 		  btn == SDL_BUTTON_LEFT)
 		 or
