@@ -24,7 +24,7 @@
 #include <cassert>
 #include "geometry.h"
 #include <list>
-#include <SDL_keysym.h>
+#include <SDL_keyboard.h>
 #include <SDL_types.h>
 #include <stdint.h>
 #include <string>
@@ -139,7 +139,7 @@ struct Panel : public Object {
 	virtual bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	virtual bool handle_key(bool down, SDLKey code, char c);
+	virtual bool handle_key(bool down, SDL_keysym code);
 
 	void set_handle_mouse(bool yes);
 	inline bool get_handle_mouse() const {return (_flags & pf_handle_mouse) ? true : false;}
@@ -172,7 +172,7 @@ private:
 	bool do_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool do_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 	bool do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool do_key(bool down, SDLKey code, char c);
+	bool do_key(bool down, SDL_keysym code);
 
 	Panel *_parent;
 	std::list<Panel *> m_children;
@@ -206,7 +206,7 @@ private:
 	static void ui_mouserelease(const Uint8 button, int32_t x, int32_t y);
 	static void ui_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	static void ui_key(bool down, SDLKey code, char c);
+	static void ui_key(bool down, SDL_keysym code);
 
 	static Panel *_modal;
 	static Panel *_g_mousegrab;

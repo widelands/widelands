@@ -20,6 +20,7 @@
 #ifndef included_ui_editbox_h
 #define included_ui_editbox_h
 
+#include <SDL_keyboard.h>
 #include <stdint.h>
 #include <string>
 #include "ui_button.h"
@@ -46,7 +47,7 @@ struct Edit_Box : private Basic_Button {
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-     bool handle_key(bool down, int32_t code, char c);
+     bool handle_key(bool down, SDL_keysym code);
      void handle_mousein(bool);
 
 protected:

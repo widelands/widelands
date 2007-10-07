@@ -23,7 +23,7 @@
 #include "geometry.h"
 
 #include <SDL_events.h>
-#include <SDL_keysym.h>
+#include <SDL_keyboard.h>
 #include <SDL_types.h>
 #include <map>
 #include <stdexcept>
@@ -48,7 +48,7 @@ struct InputCallback {
 	(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
 	 int32_t x, int32_t y);      //  The coordinates of the mouse at release time.
 	void (*mouse_move) (const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	void (*key)        (bool down, SDLKey code, char c);
+	void (*key)        (bool down, SDL_keysym code);
 };
 
 /**
@@ -153,7 +153,7 @@ struct WLApplication {
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	const bool get_key_state(const int32_t key) const
+	const bool get_key_state(const SDLKey key) const
 		{return SDL_GetKeyState(0)[key];}
 
 	//@{

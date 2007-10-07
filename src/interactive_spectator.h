@@ -21,7 +21,7 @@
 #define __S__INTERACTIVE_SPECTATOR_H
 
 #include "interactive_base.h"
-#include <SDL_keysym.h>
+#include <SDL_keyboard.h>
 
 class Game;
 
@@ -44,7 +44,7 @@ public:
 	Game* get_game();
 	Player* get_player() const throw ();
 
-	bool handle_key(bool down, SDLKey code, char c);
+	bool handle_key(bool down, SDL_keysym code);
 	void end_of_game();
 
 private:

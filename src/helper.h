@@ -22,6 +22,7 @@
 
 #include "wexception.h"
 
+#include <SDL_keyboard.h>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -59,5 +60,7 @@ std::vector<std::string> split_string
 (const std::string &, const char * const separators);
 void remove_spaces(std::string &);
 void log(const char *fmt, ...);
+
+bool is_printable(SDL_keysym k);
 
 #endif

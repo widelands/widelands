@@ -23,13 +23,14 @@
 #include "building_statistics_menu.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
+#include "encyclopedia_window.h"
 #include "fieldaction.h"
 #include "font_handler.h"
-#include "encyclopedia_window.h"
 #include "game_loader.h"
 #include "game_main_menu.h"
 #include "graphic.h"
 #include "general_statistics_menu.h"
+#include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
 #include "network.h"
@@ -313,21 +314,19 @@ void Interactive_Player::field_action()
  * \todo Typing a message should really be handled differently: by using the
  * normal UI event handling. Even worse, this approach accepts non-printing
  * characters as text and discounts some printing non-ASCII.
- *
- * \todo Replace SDLKey with SDL_keysym in param code, get rid of param c
 */
-bool Interactive_Player::handle_key(bool down, SDLKey code, unsigned char c)
+bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 {
 	bool handled=false;
 
 	if (m_is_typing_msg && down) {
-		if (c>0 && c<=SDLK_DELETE) {
-			m_typed_message.append(1, c);
+		if (is_printable(code)) {
+			m_typed_message.append(1, code.sym);
 			return true;
 		}
 	}
 
-	switch (code) {
+	switch (code.sym) {
 	case SDLK_SPACE:
 		if (down)
 			toggle_buildhelp();

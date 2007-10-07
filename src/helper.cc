@@ -82,4 +82,34 @@ _wexception::~_wexception() throw()
 {
 }
 
-const char *_wexception::what() const throw() {return m_what.c_str();}
+const char *_wexception::what() const throw()
+{
+	return m_what.c_str();
+}
+
+/**
+ * Tell whether a SDL_Keysym is printable.
+ *
+ * \param k SDL_Keysym to be checked for printability
+ *
+ * \return True if k is a printable character
+ *
+ * \todo This is _by_far_ not complete enough
+ * \todo Should be based on k.unicode (already enabled by
+ * WLApplication::init_hardware()) instead of k.sym. Doing so needs to take the
+ * current locale into account; perhaps there already is a fitting gettext
+ * function?
+ */
+bool is_printable(SDL_keysym k)
+{
+	bool printable=false;
+
+	if ((k.sym == SDLK_TAB) ||
+	    ((k.sym >= SDLK_SPACE)&&(k.sym <= SDLK_z)) ||
+	    ((k.sym >= SDLK_WORLD_0)&&(k.sym <= SDLK_WORLD_95)) ||
+	    ((k.sym >= SDLK_KP0)&&(k.sym <= SDLK_KP_EQUALS))
+	   )
+		printable=true;
+
+	return printable;
+}

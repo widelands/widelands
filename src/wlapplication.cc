@@ -538,16 +538,15 @@ void WLApplication::handle_input(const InputCallback *cb)
 				break;
 			}
 			if (cb && cb->key) {
-				int32_t c;
+				int16_t c=ev.key.keysym.unicode;
 
-				c = ev.key.keysym.unicode;
+				//TODO: this kills international characters
 				if (c < 32 || c >= 128)
 					c = 0;
 
 				cb->key
 				(ev.type == SDL_KEYDOWN,
-				 ev.key.keysym.sym,
-				 static_cast<char>(c));
+				 ev.key.keysym);
 			}
 			break;
 		case SDL_MOUSEBUTTONDOWN:
@@ -787,7 +786,7 @@ const bool WLApplication::init_hardware()
 	}
 
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_EnableUNICODE(1); // useful for e.g. chat messages
+	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	uint32_t xres = 800;

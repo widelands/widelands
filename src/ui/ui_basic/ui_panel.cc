@@ -489,7 +489,7 @@ bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t)
  *
  * \return true if the event was processed, false otherwise
 */
-bool Panel::handle_key(bool, SDLKey, char)
+bool Panel::handle_key(bool, SDL_keysym)
 {
 	return false;
 }
@@ -750,14 +750,14 @@ bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
  * Pass the key event to the focussed child.
  * If it doesn't process the key, we'll see if we can use the event.
 */
-bool Panel::do_key(bool down, SDLKey code, char c)
+bool Panel::do_key(bool down, SDL_keysym code)
 {
 	if (_focus) {
-		if (_focus->do_key(down, code, c))
+		if (_focus->do_key(down, code))
 			return true;
 	}
 
-	return handle_key(down, code, c);
+	return handle_key(down, code);
 }
 
 /**
@@ -839,9 +839,9 @@ void Panel::ui_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
 /**
  * Input callback function. Pass the key event to the currently modal panel
  */
-void Panel::ui_key(bool down, SDLKey code, char c)
+void Panel::ui_key(bool down, SDL_keysym code)
 {
-	_modal->do_key(down, code, c);
+	_modal->do_key(down, code);
 }
 
 /**

@@ -17,18 +17,11 @@
  *
  */
 
+#include "helper.h"
+#include <SDL_keysym.h>
 #include "ui_editbox.h"
 
-#include <SDL_keysym.h>
-
 namespace UI {
-/*
-=================================================
-
-class Edit_Box
-
-=================================================
-*/
 
 /**
 constructor
@@ -90,49 +83,58 @@ bool Edit_Box::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {return btn == SDL_BUTTON_LEFT and m_keyboard_grabbed;}
 
 /**
-a key event must be handled
+ * Handle keypress/release events
+ *
+ * \todo Text input works only because code.unicode happens to map to ASCII for
+ * ASCII characters (--> //HERE ). Instead, all user editable strings should be
+ * real unicode.
 */
-bool Edit_Box::handle_key(bool down, int32_t code, char c) {
-	if (down) {
-		switch (code) {
+bool Edit_Box::handle_key(bool down, SDL_keysym code)
+{
+	if ( down )
+	{
+		switch ( code.sym )
+		{
 		case SDLK_ESCAPE:
-            set_text(m_lasttext.c_str());
-			Basic_Button::handle_mouserelease(0, 0, 0);
-            set_can_focus(false);
-            m_keyboard_grabbed=false;
-            grab_mouse(false);
-            return true;
+			set_text ( m_lasttext.c_str() );
+			Basic_Button::handle_mouserelease ( 0, 0, 0 );
+			set_can_focus ( false );
+			m_keyboard_grabbed=false;
+			grab_mouse ( false );
+			return true;
 
 		case SDLK_RETURN:
-            m_lasttext=m_text;
-			Basic_Button::handle_mouserelease(0, 0, 0);
-            set_can_focus(false);
-            m_keyboard_grabbed=false;
-            grab_mouse(false);
-            changed.call();
-            changedid.call(m_id);
-            return true;
+			m_lasttext=m_text;
+			Basic_Button::handle_mouserelease ( 0, 0, 0 );
+			set_can_focus ( false );
+			m_keyboard_grabbed=false;
+			grab_mouse ( false );
+			changed.call();
+			changedid.call ( m_id );
+			return true;
 
 		case SDLK_BACKSPACE:
-			if (m_text.size()) {
-               m_text.erase(m_text.end() - 1);
-               set_title(m_text.c_str());
+			if ( m_text.size() )
+			{
+				m_text.erase ( m_text.end() - 1 );
+				set_title ( m_text.c_str() );
 			}
-            return true;
+			return true;
 
 		case SDLK_DELETE:
-            m_text.resize(0);
-            set_title(m_text.c_str());
-            return true;
+			m_text.resize ( 0 );
+			set_title ( m_text.c_str() );
+			return true;
 
 		default:
-            if (c && m_text.size()<m_maxchars) m_text+=c;
-            set_title(m_text.c_str());
-            return true;
+			if ( is_printable(code) && m_text.size() < m_maxchars )
+				m_text+=code.unicode;
+			set_title ( m_text.c_str() );
+			return true;
 		}
 	}
 
-   return false;
+	return false;
 }
 
 /**

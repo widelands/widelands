@@ -169,11 +169,11 @@ void Interactive_Spectator::field_action()
 /**
  * Global in-game keypresses:
  */
-bool Interactive_Spectator::handle_key(bool down, SDLKey code, char /* c */)
+bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 {
 	bool handled=false;
 
-	switch (code) {
+	switch (code.sym) {
 	case SDLK_m:
 		if (down)
 			toggle_minimap();
