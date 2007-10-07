@@ -67,7 +67,9 @@ struct Point {
  * been unsigned, "((a^b)>>1)+(a&b)" would have worked, but they are signed.
  */
 inline Point middle(const Point a, const Point b) throw ()
-{return Point((a.x + b.x) >> 1, (a.y + b.y) >> 1);}
+{
+	return Point((a.x + b.x) >> 1, (a.y + b.y) >> 1);
+}
 
 
 struct Rect : public Point {

@@ -89,9 +89,9 @@ public:
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
-		inline int32_t get_type() const {return m_type;}
+		int32_t get_type() const {return m_type;}
 	Player_Number get_player_number() const throw () {return m_plnum;}
-		inline const RGBColor* get_playercolor() const {return m_playercolor;}
+		const RGBColor* get_playercolor() const {return m_playercolor;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &tribe();}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 

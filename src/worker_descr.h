@@ -42,7 +42,7 @@ class Worker_Descr : public Bob::Descr
 		std::string name;   // name of ware
 		int32_t         amount; // amount
 
-		inline CostItem(const char* iname, int32_t iamount): name   (iname),
+		CostItem(const char* iname, int32_t iamount): name   (iname),
 		                                                 amount (iamount)
 		                                                 {}
 	};

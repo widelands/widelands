@@ -184,7 +184,7 @@ protected:
 public:
 	virtual int32_t get_type() const throw () = 0;
 
-	inline uint32_t get_serial() const {return m_serial;}
+	uint32_t get_serial() const {return m_serial;}
 	bool has_attribute(const uint32_t attr) const throw ()
 	{return descr().has_attribute(attr);}
 

@@ -49,7 +49,7 @@ struct Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
       // object
 	void Pre_Read(FileSystem &, Map*) throw (_wexception);
 
-      inline uint32_t get_version() {return m_version;}
+      uint32_t get_version() {return m_version;}
 
 private:
       uint32_t m_version;

@@ -27,7 +27,7 @@
 typedef Uint32 Military_Influence; //  FIXME should be Uint16
 
 typedef Uint8  Player_Number; /// 5 bits used, so 0 .. 31
-inline Player_Number Neutral() throw () {return 0;}
+Player_Number Neutral() throw () {return 0;}
 #define iterate_player_numbers(p, nr_players) \
 	for (Player_Number p = 1; p <= nr_players; ++p)
 
@@ -36,9 +36,9 @@ typedef Uint8  Resource_Amount; /// 4 bits used, so 0 .. 15.
 typedef Uint16 Vision;
 
 typedef Sint32 Time; // FIXME should be unsigned
-inline Time Never() throw () {return 0xffffffff;}
+Time Never() throw () {return 0xffffffff;}
 
 typedef Uint32 Duration;
-inline Duration Forever() throw () {return 0xffffffff;}
+Duration Forever() throw () {return 0xffffffff;}
 
 #endif

@@ -50,7 +50,7 @@ struct MapVariable {
 
 	bool is_delete_protected() const {return m_delete_protected;}
 	const char * get_name() const {return m_name.c_str();}
-      inline void set_name(const char* name) {m_name = name;}
+      void set_name(const char* name) {m_name = name;}
 
 	virtual std::string get_string_representation() const = 0;
 	virtual Type get_type() const = 0;

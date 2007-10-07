@@ -38,7 +38,7 @@ struct Widelands_Map_Loader : public Map_Loader {
 	void load_world();
       virtual int32_t load_map_complete(Editor_Game_Base*, bool);
 
-      inline Widelands_Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
+      Widelands_Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
 
       static bool is_widelands_map(std::string filename) {
          if (!strcasecmp(&filename.c_str()[filename.size()-4], WLMF_SUFFIX))

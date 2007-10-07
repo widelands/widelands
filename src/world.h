@@ -151,18 +151,18 @@ struct World {
 	{assert(i < ters.get_nitems()); return *ters.get(i);}
 	const Terrain_Descr * get_ter(const char * const name) const
 	{const int32_t i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
-      inline int32_t get_nr_terrains() const {return ters.get_nitems();}
-      inline int32_t get_bob(const char* l) {return bobs.get_index(l);}
-      inline Bob::Descr* get_bob_descr(uint16_t index) const {return bobs.get(index);}
-      inline int32_t get_nr_bobs() const {return bobs.get_nitems();}
-      inline int32_t get_immovable_index(const char* l)const {return immovables.get_index(l);}
-      inline int32_t get_nr_immovables() const {return immovables.get_nitems();}
-		inline Immovable_Descr* get_immovable_descr(int32_t index) const {return immovables.get(index);}
+      int32_t get_nr_terrains() const {return ters.get_nitems();}
+      int32_t get_bob(const char* l) {return bobs.get_index(l);}
+      Bob::Descr* get_bob_descr(uint16_t index) const {return bobs.get(index);}
+      int32_t get_nr_bobs() const {return bobs.get_nitems();}
+      int32_t get_immovable_index(const char* l)const {return immovables.get_index(l);}
+      int32_t get_nr_immovables() const {return immovables.get_nitems();}
+		Immovable_Descr* get_immovable_descr(int32_t index) const {return immovables.get(index);}
 
 	int32_t get_resource(const char * const name) const {return m_resources.get_index(name);}
 	Resource_Descr * get_resource(const Resource_Descr::Index res) const throw ()
 		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
-      inline int32_t get_nr_resources() const {return m_resources.get_nitems();}
+      int32_t get_nr_resources() const {return m_resources.get_nitems();}
 
 private:
 	std::string m_basedir; //  base directory, where the main conf file resides

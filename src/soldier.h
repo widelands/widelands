@@ -180,7 +180,7 @@ public: // Worker-specific redefinitions
 
    void log_general_info(Editor_Game_Base* egbase);
 
-   inline void set_attack_ctrl(AttackController* ctrl) {m_attack_ctrl = ctrl;};
+   void set_attack_ctrl(AttackController* ctrl) {m_attack_ctrl = ctrl;};
 
 private:
    void moveToBattleUpdate (Game*, State*);

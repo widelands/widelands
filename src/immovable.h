@@ -81,9 +81,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 	const std::string & name() const throw () {return m_name;}
 	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
 	int32_t get_size() const throw () {return m_size;}
-	inline const char* get_picture() const {return m_picture.c_str();}
+	const char* get_picture() const {return m_picture.c_str();}
 	const ImmovableProgram* get_program(std::string programname) const;
-	inline const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
+	const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
 
 	void parse(const char *directory, Profile *s);
 	void parse_program(std::string directory, Profile* prof, std::string programname);
@@ -184,7 +184,7 @@ struct PlayerImmovable : public BaseImmovable {
 	PlayerImmovable(const Map_Object_Descr &);
 	virtual ~PlayerImmovable();
 
-	inline Player *get_owner() const {return m_owner;}
+	Player *get_owner() const {return m_owner;}
 	Player & owner() const {return *m_owner;}
 	Economy * get_economy() const throw () {return m_economy;}
 	Economy & economy() const throw () {return *m_economy;}

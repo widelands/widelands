@@ -58,8 +58,8 @@ protected:
 	}
 
 public:
-	static inline T& get_singleton() {assert(ms); return *ms;}
-	static inline T* get_ptsingleton() {assert(ms); return ms;}
+	static T& get_singleton() {assert(ms); return *ms;}
+	static T* get_ptsingleton() {assert(ms); return ms;}
 };
 
 template <typename T> T* Singleton <T>::ms = 0;

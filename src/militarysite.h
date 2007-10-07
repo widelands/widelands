@@ -98,7 +98,7 @@ public:
    /// Testing stuff
    uint32_t nr_not_marked_soldiers();
    uint32_t nr_attack_soldiers();
-   inline void set_in_battle(bool in_battle) {m_in_battle = in_battle;};
+   void set_in_battle(bool in_battle) {m_in_battle = in_battle;};
 
    virtual bool has_soldiers() {return m_soldiers.size() > 0;}
    virtual MilitarySite* conquered_by (Game*, Player*);

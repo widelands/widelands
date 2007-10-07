@@ -65,28 +65,28 @@ struct Tribe_Descr {
 	__attribute__ ((deprecated)) const std::string & get_name() const throw () {return m_name;}
 	const World & world() const throw () {return m_world;}
 
-		inline int32_t get_nrworkers() const {return m_workers.get_nitems();}
+		int32_t get_nrworkers() const {return m_workers.get_nitems();}
 		Worker_Descr * get_worker_descr(const uint32_t idx) const
 		{return m_workers.get(idx);}
 		int32_t get_worker_index(const char * const workername) const
 		{return m_workers.get_index(workername);}
-		inline int32_t get_nrwares() const {return m_wares.get_nitems();}
+		int32_t get_nrwares() const {return m_wares.get_nitems();}
 		int32_t get_safe_ware_index(const char * const warename) const;
 		int32_t get_ware_index(const char * const warename) const
 		{return m_wares.get_index(warename);}
-      inline Item_Ware_Descr* get_ware_descr(uint32_t idx) const {return m_wares.get(idx);}
+      Item_Ware_Descr* get_ware_descr(uint32_t idx) const {return m_wares.get(idx);}
 		int32_t get_safe_worker_index(const char * const workername) const;
 		int32_t get_nrbuildings() const {return m_buildings.get_nitems();}
 		int32_t get_safe_building_index(const char *name) const;
 	int32_t get_building_index(const char * const buildingname) const
 	{return m_buildings.get_index(buildingname);}
 		Building_Descr *get_building_descr(uint32_t idx) const {return m_buildings.get(idx);}
-      inline int32_t get_immovable_index(const char* l) const {return m_immovables.get_index(l);}
-      inline int32_t get_nr_immovables() {return m_immovables.get_nitems();}
-		inline Immovable_Descr* get_immovable_descr(int32_t index) const {return m_immovables.get(index);}
-      inline int32_t get_bob(const char* l) const {return m_bobs.get_index(l);}
-		inline Bob::Descr* get_bob_descr(uint16_t index) const {return m_bobs.get(index);}
-      inline int32_t get_nr_bobs() {return m_bobs.get_nitems();}
+      int32_t get_immovable_index(const char* l) const {return m_immovables.get_index(l);}
+      int32_t get_nr_immovables() {return m_immovables.get_nitems();}
+		Immovable_Descr* get_immovable_descr(int32_t index) const {return m_immovables.get(index);}
+      int32_t get_bob(const char* l) const {return m_bobs.get_index(l);}
+		Bob::Descr* get_bob_descr(uint16_t index) const {return m_bobs.get(index);}
+      int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 
 	uint32_t get_frontier_anim() const throw () {return m_anim_frontier;}
 	uint32_t get_flag_anim    () const throw () {return m_anim_flag;}

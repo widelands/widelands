@@ -57,9 +57,9 @@ struct Window : public Panel {
 	void center_to_parent();
 
 	bool is_minimal() const throw () {return _is_minimal;}
-   void restore ();
-   void minimize();
-   bool is_snap_target() const {return true;}
+	void restore ();
+	void minimize();
+	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
 	void draw_border(RenderTarget* dst);

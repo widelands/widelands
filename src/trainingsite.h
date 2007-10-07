@@ -100,13 +100,13 @@ public:
 	virtual void cleanup(Editor_Game_Base * g);
 	virtual void act(Game * g, uint32_t data);
 
-	inline bool get_build_heros() {
+	bool get_build_heros() {
 		return m_build_heros;
 	}
-	inline void set_build_heros(bool b_heros) {
+	void set_build_heros(bool b_heros) {
 		m_build_heros = b_heros;
 	}
-	inline void switch_heros() {
+	void switch_heros() {
 		m_build_heros = !m_build_heros;
 		molog("BUILD_HEROS: %s", m_build_heros ? "TRUE" : "FALSE");
 	}

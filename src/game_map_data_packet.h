@@ -44,8 +44,8 @@ struct Game_Map_Data_Packet : public Game_Data_Packet {
 		(FileSystem &, Game*, Widelands_Map_Map_Object_Saver * const = 0)
 		throw (_wexception);
 
-      inline Widelands_Map_Map_Object_Saver* get_map_object_saver() {return m_mos;}
-      inline Widelands_Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
+      Widelands_Map_Map_Object_Saver* get_map_object_saver() {return m_mos;}
+      Widelands_Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
 
 private:
       Widelands_Map_Map_Object_Saver* m_mos;

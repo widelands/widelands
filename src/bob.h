@@ -105,9 +105,9 @@ struct Bob : public Map_Object {
 		Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
 		bool is_world_bob() const {return not m_owner_tribe;}
 
-		inline const char* get_picture() const {return m_picture.c_str();}
+		const char* get_picture() const {return m_picture.c_str();}
 
-		inline const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
+		const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
 
 		const Tribe_Descr * const get_owner_tribe() const throw () {return m_owner_tribe;}
 
@@ -152,7 +152,7 @@ struct Bob : public Map_Object {
 	void set_owner(Player *player);
 	Player * get_owner() const {return m_owner;}
 	void set_position(Editor_Game_Base* g, Coords f);
-	inline const FCoords& get_position() const {return m_position;}
+	const FCoords& get_position() const {return m_position;}
 	Bob * get_next_bob() const throw () {return m_linknext;}
 	bool is_world_bob() const throw () {return descr().is_world_bob();}
 
@@ -187,13 +187,13 @@ struct Bob : public Map_Object {
 	void start_task_forcemove(const int32_t dir, const DirAnimations &);
 
 	// higher level handling (task-based)
-	inline State* get_state()
+	State* get_state()
 			{return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0;}
 
 	State & top_state()
 			{assert(m_stack.size()); return m_stack[m_stack.size() - 1];}
 
-	inline std::string get_signal() {return m_signal;}
+	std::string get_signal() {return m_signal;}
 	State* get_state(Task* task);
 	void push_task(const Task & task);
 	void pop_task();

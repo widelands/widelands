@@ -52,7 +52,7 @@ struct Map_Loader {
 	virtual void load_world() = 0;
       virtual int32_t load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
 
-      inline Map* get_map() {return m_map;}
+      Map* get_map() {return m_map;}
 
 protected:
 	enum State {

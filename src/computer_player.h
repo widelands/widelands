@@ -47,7 +47,7 @@ struct Computer_Player {
 
 	const Game & game() const throw () {return m_game;}
 	Game       & game()       throw () {return m_game;}
-		inline uint8_t get_player_number() {return player_number;}
+		uint8_t get_player_number() {return player_number;}
 	Player * get_player() const {return game().get_player(player_number);}
 
 private:

@@ -107,10 +107,10 @@ public:
 
 	virtual void set_economy(Economy* e);
 
-	inline std::vector<WaresQueue*>* get_warequeues() {
+	std::vector<WaresQueue*>* get_warequeues() {
 		return &m_input_queues;
 	}
-   inline std::vector<Worker*>* get_workers() {
+   std::vector<Worker*>* get_workers() {
       return &m_workers;
 	}
 

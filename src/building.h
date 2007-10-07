@@ -54,7 +54,7 @@ struct Building_Descr : public Map_Object_Descr {
 		std::string name;   // name of ware
 		int32_t         amount; // amount
 
-		inline CostItem(const char* iname, int32_t iamount)
+		CostItem(const char* iname, int32_t iamount)
 			: name(iname), amount(iamount) {}
 	};
 	typedef std::vector<CostItem> BuildCost;
@@ -66,15 +66,15 @@ struct Building_Descr : public Map_Object_Descr {
 	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
 	const std::string & descname() const throw () {return m_descname;}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return m_descname.c_str();}
-	inline bool get_buildable() const {return m_buildable;}
-   inline bool get_enhanced_building() const {return m_enhanced_building;}
+	bool get_buildable() const {return m_buildable;}
+   bool get_enhanced_building() const {return m_enhanced_building;}
 	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
-	inline uint32_t get_buildicon() const {return m_buildicon;}
+	uint32_t get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
-	inline bool get_ismine() const {return m_mine;}
+	bool get_ismine() const {return m_mine;}
 	virtual uint32_t get_ui_anim() const throw () {return get_animation("idle");}
 
-	inline bool get_stopable() const {return m_stopable;}
+	bool get_stopable() const {return m_stopable;}
 	const std::string & get_stop_icon() const throw () {return m_stop_icon;}
 	const std::string & get_continue_icon() const throw ()
 	{return m_continue_icon;}

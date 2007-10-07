@@ -51,7 +51,7 @@ struct Warehouse_Descr : public Building_Descr {
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual Building * create_object() const;
 
-	inline int32_t get_subtype() const {return m_subtype;}
+	int32_t get_subtype() const {return m_subtype;}
 	virtual uint32_t get_conquers() const {return m_conquers;}
 
 private:

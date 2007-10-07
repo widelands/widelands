@@ -165,15 +165,15 @@ public:
 
 	virtual Flag *get_base_flag();
 
-	inline const Coords &get_position() const {return m_position;}
+	const Coords &get_position() const {return m_position;}
 
 	virtual void set_economy(Economy *e);
 
-	inline Building *get_building() {return m_building;}
+	Building *get_building() {return m_building;}
 	void attach_building(Editor_Game_Base *g, Building *building);
 	void detach_building(Editor_Game_Base *g);
 
-	inline Road *get_road(int32_t dir) {return m_roads[dir-1];}
+	Road *get_road(int32_t dir) {return m_roads[dir-1];}
 	void attach_road(int32_t dir, Road *road);
 	void detach_road(int32_t dir);
 
@@ -235,7 +235,7 @@ private:
 	Flag                  * mpf_backlink; //  flag where we came from
 	int32_t                     mpf_estimate; //  estimate of cost to destination
 
-	inline int32_t cost() const {return mpf_realcost+mpf_estimate;}
+	int32_t cost() const {return mpf_realcost+mpf_estimate;}
 };
 
 /**
@@ -267,7 +267,7 @@ struct Road : public PlayerImmovable {
 
 	static Road* create(Editor_Game_Base *g, int32_t type, Flag* start, Flag* end, const Path &path);
 
-	inline Flag* get_flag(FlagId flag) const {return m_flags[flag];}
+	Flag* get_flag(FlagId flag) const {return m_flags[flag];}
 
 	virtual int32_t  get_type    () const throw ();
 	virtual int32_t  get_size    () const throw ();
@@ -278,8 +278,8 @@ struct Road : public PlayerImmovable {
 	virtual void set_economy(Economy *e);
 
 	int32_t get_cost(FlagId fromflag);
-	inline const Path &get_path() const {return m_path;}
-	inline int32_t get_idle_index() const {return m_idle_index;}
+	const Path &get_path() const {return m_path;}
+	int32_t get_idle_index() const {return m_idle_index;}
 
 	void presplit(Editor_Game_Base *g, Coords split);
 	void postsplit(Editor_Game_Base *g, Flag *flag);
@@ -335,8 +335,8 @@ struct Route {
 
 	void clear();
 
-	inline int32_t get_totalcost() const {return m_totalcost;}
-	inline int32_t get_nrsteps() const {return m_route.size()-1;}
+	int32_t get_totalcost() const {return m_totalcost;}
+	int32_t get_nrsteps() const {return m_route.size()-1;}
 	Flag * get_flag
 		(Editor_Game_Base * const, const std::vector<Flag *>::size_type) const;
 
@@ -467,8 +467,8 @@ struct SupplyList {
 	void add_supply(Supply* supp);
 	void remove_supply(Supply* supp);
 
-	inline int32_t get_nrsupplies() const {return m_supplies.size();}
-	inline Supply* get_supply(int32_t idx) const {return m_supplies[idx];}
+	int32_t get_nrsupplies() const {return m_supplies.size();}
+	Supply* get_supply(int32_t idx) const {return m_supplies[idx];}
 
 private:
 	std::vector<Supply *> m_supplies;
@@ -636,7 +636,7 @@ struct Economy {
 	~Economy();
 
 	Player & owner() const throw () {return *m_owner;}
-	inline Player *get_owner() const {return m_owner;}
+	Player *get_owner() const {return m_owner;}
 	uint32_t get_serial() const {return m_trackserial;}
 
 	static void check_merge(Flag *f1, Flag *f2);
@@ -645,7 +645,7 @@ struct Economy {
 	bool find_route(Flag *start, Flag *end, Route *route, bool wait, int32_t cost_cutoff = -1);
 	Warehouse *find_nearest_warehouse(Flag *base, Route *route);
 
-	inline int32_t get_nrflags() const {return m_flags.size();}
+	int32_t get_nrflags() const {return m_flags.size();}
 	void add_flag(Flag *flag);
 	void remove_flag(Flag *flag);
 
@@ -676,7 +676,7 @@ struct Economy {
 	bool have_soldier_supply(int32_t soldier, Supply* supp, Requeriments* r = 0);
 	void remove_soldier_supply(int32_t soldier, Supply* supp);
 
-   inline bool should_run_balance_check(int32_t gametime) {
+   bool should_run_balance_check(int32_t gametime) {
       if (m_request_timer && (gametime == m_request_timer_time)) return true;
       return false;
 	}

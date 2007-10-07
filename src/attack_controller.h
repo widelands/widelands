@@ -61,9 +61,9 @@ struct AttackController : public BaseImmovable {
 	void soldierDied(Soldier* soldier);
 	void soldierWon(Soldier* soldier);
 
-	inline int32_t getAttackingPlayer() {return attackingPlayer;};
-	inline int32_t getDefendingPlayer() {return defendingPlayer;};
-	inline Flag* getFlag() {return flag;};
+	int32_t getAttackingPlayer() {return attackingPlayer;};
+	int32_t getDefendingPlayer() {return defendingPlayer;};
+	Flag* getFlag() {return flag;};
 	Editor_Game_Base & egbase() {return *m_egbase;}
 
 private:

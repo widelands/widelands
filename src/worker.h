@@ -144,7 +144,7 @@ protected:
 	                  const Point) const;
 	virtual void init_auto_task(Game* g);
 
-	inline bool does_carry_ware() {return m_carried_item.is_set();}
+	bool does_carry_ware() {return m_carried_item.is_set();}
 
 	static Task taskTransfer;
 	static Task taskBuildingwork;

@@ -91,8 +91,8 @@ struct Interactive_Base : public Map_View {
 		void set_display_flag(uint32_t flag, bool on);
 
       // Road building
-		inline bool is_building_road() const {return m_buildroad;}
-		inline CoordPath *get_build_road() {return m_buildroad;}
+		bool is_building_road() const {return m_buildroad;}
+		CoordPath *get_build_road() {return m_buildroad;}
 		void start_build_road(Coords start, int32_t player);
 		void abort_build_road();
 		void finish_build_road();

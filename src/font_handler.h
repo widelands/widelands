@@ -132,7 +132,7 @@ private:
 		uint32_t      w;
 		uint32_t      h;
 
-		inline bool operator== (const _Cache_Infos& who) const {
+		bool operator== (const _Cache_Infos& who) const {
 			return (str == who.str &&
 			         f == who.f &&
 			         fg == who.fg &&

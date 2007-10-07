@@ -166,7 +166,7 @@ struct Map {
    ~Map();
 
    // For overlays
-   inline Overlay_Manager* get_overlay_manager() {return m_overlay_manager;}
+   Overlay_Manager* get_overlay_manager() {return m_overlay_manager;}
 	Overlay_Manager & get_overlay_manager() const {return *m_overlay_manager;}
 	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
 	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
@@ -669,7 +669,7 @@ struct CoordPath {
 
 	Coords get_start() const throw () {return m_coords.front();}
 	Coords get_end  () const throw () {return m_coords.back ();}
-	inline const std::vector<Coords> &get_coords() const {return m_coords;}
+	const std::vector<Coords> &get_coords() const {return m_coords;}
 
 	typedef std::vector<Direction> Step_Vector;
 	Step_Vector::size_type get_nsteps() const throw () {return m_path.size();}
