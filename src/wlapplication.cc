@@ -193,7 +193,7 @@ WLApplication *WLApplication::the_singleton=0;
  *
  * \todo Return a reference - the return value is always valid anyway
  */
-WLApplication * const WLApplication::get(const int32_t argc, const char **argv)
+WLApplication * const WLApplication::get(const int argc, const char **argv)
 {
 	if (the_singleton==0) {
 		the_singleton=new WLApplication(argc, argv);
@@ -214,7 +214,7 @@ WLApplication * const WLApplication::get(const int32_t argc, const char **argv)
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-WLApplication::WLApplication(const int32_t argc, const char **argv):
+WLApplication::WLApplication(const int argc, const char **argv):
 		m_commandline(std::map<std::string, std::string>()),
 		journal(0),
 		m_mouse_swapped(false),
@@ -833,12 +833,12 @@ void WLApplication::shutdown_hardware()
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-void WLApplication::parse_commandline(const int32_t argc, const char **argv)
+void WLApplication::parse_commandline(const int argc, const char **argv)
 {
 	//TODO: EXENAME gets written out on windows!
 	m_commandline["EXENAME"]=argv[0];
 
-	for (int32_t i=1; i<argc; ++i) {
+	for (uint32_t i=1; i<argc; ++i) {
 		std::string opt=argv[i];
 		std::string value;
 		SSS_T pos;

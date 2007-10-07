@@ -141,7 +141,7 @@ struct InputCallback {
  */
 
 struct WLApplication {
-	static WLApplication * const get(const int32_t argc=0, const char **argv=0);
+	static WLApplication * const get(const int argc=0, const char **argv=0);
 	~WLApplication();
 
 	void run();
@@ -203,7 +203,7 @@ struct WLApplication {
 	void emergency_save(const std::string & message);
 
 protected:
-	WLApplication(const int32_t argc, const char **argv);
+	WLApplication(const int argc, const char **argv);
 
 	const bool poll_event(SDL_Event *ev, const bool throttle);
 
@@ -213,7 +213,7 @@ protected:
 	const bool init_hardware();
 	void shutdown_hardware();
 
-	void parse_commandline(const int32_t argc, const char **argv);
+	void parse_commandline(const int argc, const char **argv);
 	void handle_commandline_parameters() throw(Parameter_error);
 
 	void setup_searchpaths(std::string argv0);
