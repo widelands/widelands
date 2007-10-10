@@ -246,7 +246,7 @@ void BaseListselect::select(const uint32_t i)
  * \return \c true if an item is select, or \c false if there is no current
  * selection
  */
-bool BaseListselect::has_selection() const throw()
+bool BaseListselect::has_selection() const throw ()
 {
 	return m_selection != no_selection_index();
 }

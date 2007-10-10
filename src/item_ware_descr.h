@@ -53,16 +53,16 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	virtual ~Item_Ware_Descr() {};
 
 	/// \return index to ware's icon inside picture stack
-	const uint32_t get_icon() const throw() {return m_icon;}
+	const uint32_t get_icon() const throw () {return m_icon;}
 
 	/// \return ware's unique name
-	const std::string & name() const throw() {return m_name;}
+	const std::string & name() const throw () {return m_name;}
 
 	/// \return ware's localized short name
-	const std::string & descname() const throw() {return m_descname;}
+	const std::string & descname() const throw () {return m_descname;}
 
 	/// \return ware's localized descriptive text
-	const char * get_helptext() const throw() {return m_helptext.c_str();}
+	const char * get_helptext() const throw () {return m_helptext.c_str();}
 
 	virtual void load_graphics();
 	static Item_Ware_Descr* create_from_dir(const char*, const char*);

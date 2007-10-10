@@ -46,9 +46,10 @@ throw ()
 	     toString(_expectedcode);
 }
 
-BadEvent_error::BadEvent_error(const std::string _filename,
-                               const uint8_t _type) throw()
-		: Journalfile_error(_filename), type(_type)
+BadEvent_error::BadEvent_error
+(const std::string _filename, const uint8_t _type)
+throw ()
+: Journalfile_error(_filename), type(_type)
 {
 	text="Journal file '"+_filename+"' contains record with unknown event type "+
 	     toString(_type);

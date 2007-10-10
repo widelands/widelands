@@ -71,7 +71,7 @@ public:
 
 	uint32_t get_animation(const char * const str) const {return descr().get_animation(str);}
 	uint32_t get_menu_pic() const throw () {return descr().get_menu_pic();}
-	const char* get_becomes() const throw() {return descr().get_becomes ();}
+	const char * get_becomes() const throw () {return descr().get_becomes ();}
 	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}
 	const std::string & descname() const throw () {return descr().descname();}
 

@@ -120,7 +120,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
    return 1;
 }
 
-Player_Number Editor_Set_Starting_Pos_Tool::get_current_player() const throw()
+Player_Number Editor_Set_Starting_Pos_Tool::get_current_player() const throw ()
 {return m_current_player;}
 
 void Editor_Set_Starting_Pos_Tool::set_current_player(int32_t i) {

@@ -93,7 +93,7 @@ struct FileSystem {
 	virtual void Rename(const std::string&, const std::string&) = 0;
 
 	static FileSystem *Create(const std::string root)
-	throw(FileType_error, FileNotFound_error, FileAccessDenied_error);
+	throw (FileType_error, FileNotFound_error, FileAccessDenied_error);
 
 	///Retrieve the filesystem root's name == the mountpoint inside a
 	///LayeredFileSystem

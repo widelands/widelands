@@ -31,7 +31,7 @@ Game_Preload_Data_Packet::~Game_Preload_Data_Packet() {}
 
 void Game_Preload_Data_Packet::Read
 (FileSystem & fs, Game *, Widelands_Map_Map_Object_Loader * const)
-throw(_wexception)
+throw (_wexception)
 {
 
    Profile prof;

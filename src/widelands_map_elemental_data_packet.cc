@@ -38,7 +38,7 @@ Widelands_Map_Elemental_Data_Packet::~Widelands_Map_Elemental_Data_Packet() {
  * Preread function
  */
 void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map* map)
-throw(_wexception)
+throw (_wexception)
 {
     //Load maps textdomain
     i18n::grab_textdomain("maps");

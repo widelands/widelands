@@ -66,7 +66,8 @@ class _wexception implementation
 ==============================================================================
 */
 #undef wexception
-_wexception::_wexception(const char* file, uint32_t line, const char *fmt, ...) throw()
+_wexception::_wexception(const char* file, uint32_t line, const char *fmt, ...)
+throw ()
 {
 	va_list va;
 	char buffer[256];
@@ -78,11 +79,11 @@ _wexception::_wexception(const char* file, uint32_t line, const char *fmt, ...) 
 	m_what = ost.str();
 }
 
-_wexception::~_wexception() throw()
+_wexception::~_wexception() throw ()
 {
 }
 
-const char *_wexception::what() const throw()
+const char *_wexception::what() const throw ()
 {
 	return m_what.c_str();
 }

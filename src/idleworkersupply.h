@@ -32,7 +32,7 @@ struct IdleWorkerSupply : public Supply {
 
 	/// Idle workers are always active supplies, because they need to get
 	/// into a Warehouse ASAP.
-	virtual bool is_active() const throw() {return true;}
+	virtual bool is_active() const throw () {return true;}
 
 	virtual WareInstance * launch_item(Game *, int32_t ware)
 		__attribute__ ((noreturn));

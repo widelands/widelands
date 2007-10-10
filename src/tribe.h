@@ -91,7 +91,7 @@ struct Tribe_Descr {
 	uint32_t get_frontier_anim() const throw () {return m_anim_frontier;}
 	uint32_t get_flag_anim    () const throw () {return m_anim_flag;}
 
-	uint32_t get_bob_vision_range() const throw() {return m_bob_vision_range;}
+	uint32_t get_bob_vision_range() const {return m_bob_vision_range;}
 
 	uint32_t get_resource_indicator
 		(const Resource_Descr * const res, const uint32_t amount) const;

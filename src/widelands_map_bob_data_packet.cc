@@ -120,7 +120,7 @@ void Widelands_Map_Bob_Data_Packet::Read
  Editor_Game_Base* egbase,
  const bool skip,
  Widelands_Map_Map_Object_Loader * const ol)
-throw(_wexception)
+throw (_wexception)
 {
 	FileRead fr;
 	fr.Open(fs, "binary/bob");

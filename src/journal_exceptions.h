@@ -35,12 +35,11 @@
  * Replace with File*_error where appropriate, migrate from runtime_error to
  * logic_error (?)
  */
-class Journalfile_error : public std::runtime_error {
-public:
-	explicit Journalfile_error(const std::string filename) throw();
-	virtual ~Journalfile_error() throw() {}
+struct Journalfile_error : public std::runtime_error {
+	explicit Journalfile_error(const std::string filename) throw ();
+	virtual ~Journalfile_error() throw () {}
 
-	virtual const char *what() const throw() {return text.c_str();}
+	virtual const char *what() const throw () {return text.c_str();}
 
 	std::string text;
 	std::string filename;
@@ -50,21 +49,22 @@ public:
  * Thrown if the journal file contains a bad magic number
  * \todo add offset into journal file
  */
-class BadMagic_error : public Journalfile_error {
-public:
-	explicit BadMagic_error(const std::string filename) throw();
-	virtual ~BadMagic_error() throw() {}
+struct BadMagic_error : public Journalfile_error {
+	explicit BadMagic_error(const std::string filename) throw ();
+	virtual ~BadMagic_error() throw () {}
 };
 
 /**
  * Thrown if the journal file contains a record with an unknown type number
  * \todo add offset into journal file
  */
-class BadRecord_error : public Journalfile_error {
-public:
-	explicit BadRecord_error(const std::string filename, const uint8_t code,
-	                         const uint8_t expectedcode) throw();
-	virtual ~BadRecord_error() throw() {}
+struct BadRecord_error : public Journalfile_error {
+	explicit BadRecord_error
+		(const std::string filename,
+		 const uint8_t     code,
+		 const uint8_t     expectedcode)
+		throw ();
+	virtual ~BadRecord_error() throw () {}
 
 	std::streamoff offset;
 	uint8_t code;
@@ -75,11 +75,10 @@ public:
  * Thrown if the journal file contains an event record with an unknown event type
  * \todo add offset into journal file
  */
-class BadEvent_error : public Journalfile_error {
-public:
-	explicit BadEvent_error(const std::string filename,
-	                        const uint8_t type) throw();
-	virtual ~BadEvent_error() throw() {}
+struct BadEvent_error : public Journalfile_error {
+	explicit BadEvent_error(const std::string filename, const uint8_t type)
+		throw ();
+	virtual ~BadEvent_error() throw () {}
 
 	std::streamoff offset;
 	uint8_t type;

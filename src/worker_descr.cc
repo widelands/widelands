@@ -265,7 +265,7 @@ Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
 /**
 * index of get_becomes() in tribe array or -1
  */
-int32_t Worker_Descr::get_becomes_index() const throw() {
+int32_t Worker_Descr::get_becomes_index() const throw () {
 	if (m_becomes_index >= -1) // already calculated
 		return m_becomes_index;
 

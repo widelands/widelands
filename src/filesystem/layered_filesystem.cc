@@ -73,9 +73,10 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem * const fs)
 {
 	if (m_filesystems.back() == fs) {
 		m_filesystems.pop_back();
-	} else {
-		throw(std::logic_error("LayeredFileSystem::RemoveFileSystem: interspersed add/remove detected!"));
-	}
+	} else
+		throw std::logic_error
+			("LayeredFileSystem::RemoveFileSystem: interspersed add/remove "
+			 "detected!");
 }
 
 /**

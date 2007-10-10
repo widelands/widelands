@@ -227,7 +227,7 @@ uint32_t Building_Descr::get_conquers() const
  * \return the radius (in number of fields) of the area seen by this
  * building.
  */
-uint32_t Building_Descr::vision_range() const throw()
+uint32_t Building_Descr::vision_range() const throw ()
 {
 	if (m_vision_range > 0)
 		return m_vision_range;

@@ -74,10 +74,9 @@ m_egbase(egbase), m_fs(fs), m_mos(0)
 Widelands_Map_Saver::~Widelands_Map_Saver() {delete m_mos;}
 
 
-void Widelands_Map_Saver::save() throw(_wexception) {
-
-      delete m_mos;
-   m_mos=new Widelands_Map_Map_Object_Saver();
+void Widelands_Map_Saver::save() throw (_wexception) {
+	delete m_mos;
+	m_mos = new Widelands_Map_Map_Object_Saver();
 
    // The binary data is saved in an own directory
    // to keep it hidden from the poor debuggers

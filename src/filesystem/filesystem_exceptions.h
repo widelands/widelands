@@ -30,7 +30,7 @@ struct File_error : public std::runtime_error {
 		(const std::string & thrower,
 		 const std::string & filename,
 		 const std::string & message = "problem with file/directory")
-	throw()
+	throw ()
 		:
 		std::runtime_error(thrower+": "+message+": "+filename),
 		m_thrower         (thrower),
@@ -38,7 +38,7 @@ struct File_error : public std::runtime_error {
 		m_message         (message)
 	{}
 
-	virtual ~File_error() throw() {}
+	virtual ~File_error() throw () {}
 
 	std::string m_thrower;
 	std::string m_filename;
@@ -49,13 +49,12 @@ struct File_error : public std::runtime_error {
  * A file/directory could not be found. Either it really does not exist or there
  * are problems with the path, e.g. loops or nonexistent path components
  */
-class FileNotFound_error : public File_error {
-public:
+struct FileNotFound_error : public File_error {
 	explicit FileNotFound_error
 		(const std::string & thrower,
 		 const std::string & filename,
 		 const std::string & message = "could not find file or directory")
-	throw()
+	throw ()
 		: File_error(thrower, filename, message)
 	{}
 };
@@ -63,13 +62,12 @@ public:
 /**
  * The file/directory is of an unexpected type. Reasons can be given via message
  */
-class FileType_error : public File_error {
-public:
+struct FileType_error : public File_error {
 	explicit FileType_error
 		(const std::string & thrower,
 		 const std::string & filename,
 		 const std::string & message = "file or directory has wrong type")
-	throw()
+	throw ()
 		: File_error(thrower, filename, message)
 	{}
 };
@@ -77,13 +75,12 @@ public:
 /**
  * The operating system denied access to the file/directory in question
  */
-class FileAccessDenied_error : public File_error {
-public:
+struct FileAccessDenied_error : public File_error {
 	explicit FileAccessDenied_error
 		(const std::string & thrower,
 		 const std::string & filename,
 		 const std::string & message = "access denied on file or directory")
-	throw()
+	throw ()
 		: File_error(thrower, filename, message)
 	{}
 };

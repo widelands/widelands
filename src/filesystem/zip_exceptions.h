@@ -36,7 +36,7 @@ struct ZipOperation_error : public std::logic_error {
 		 const std::string & filename,
 		 const std::string & zipfilename,
 		 const std::string & message = "problem during zipfile operation")
-	throw()
+	throw ()
 		:
 		std::logic_error
 		(thrower + ": " + message + " (working on '" + filename +
@@ -44,7 +44,7 @@ struct ZipOperation_error : public std::logic_error {
 		m_thrower(thrower), m_filename(filename), m_zipfilename(zipfilename)
 	{}
 
-	virtual ~ZipOperation_error() throw() {}
+	virtual ~ZipOperation_error() throw () {}
 
 	std::string m_thrower;
 	std::string m_filename;

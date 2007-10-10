@@ -120,7 +120,7 @@ struct Panel : public Object {
 	// Events
 	virtual void think();
 
-	Point get_mouse_position() const throw();
+	Point get_mouse_position() const throw ();
 	void set_mouse_pos(const Point);
 	void center_mouse();
 

@@ -39,14 +39,16 @@ class _wexception : public std::exception {
 	std::string m_what;
 
 public:
-	explicit _wexception(const char* file, uint32_t line, const char *fmt, ...) throw() PRINTF_FORMAT(4, 5);
-	virtual ~_wexception() throw();
+	explicit _wexception
+		(const char * file, uint32_t line, const char * fmt, ...)
+		throw () PRINTF_FORMAT(4, 5);
+	virtual ~_wexception() throw ();
 
 	/**
     * The target of the returned pointer remains valid during the lifetime of
 	 * the _wexception object.
 	 */
-	virtual const char *what() const throw();
+	virtual const char * what() const throw ();
 };
 
 #define wexception(...) _wexception(__FILE__, __LINE__, __VA_ARGS__)

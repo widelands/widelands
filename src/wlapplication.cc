@@ -874,7 +874,7 @@ void WLApplication::parse_commandline(const int argc, const char **argv)
  * \return false if there were errors during parsing \e or if "--help" was given,
  * true otherwise.
 */
-void WLApplication::handle_commandline_parameters() throw(Parameter_error)
+void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 {
 	if (m_commandline.count("help")>0 || m_commandline.count("version")>0) {
 		throw Parameter_error(); //no message on purpose

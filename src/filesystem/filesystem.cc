@@ -386,9 +386,8 @@ const char *FileSystem::FS_Filename(const char* buf) {
  * \throw FileTypeError if root is neither a directory or regular file
  * \todo throw FileTypeError if root is not a zipfile (exception from ZipFilesystem)
  */
-FileSystem *FileSystem::Create(std::string root) throw(FileType_error,
-      FileNotFound_error,
-      FileAccessDenied_error)
+FileSystem *FileSystem::Create(std::string root)
+throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 {
 	struct stat statinfo;
 

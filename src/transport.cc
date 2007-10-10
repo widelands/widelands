@@ -2682,7 +2682,7 @@ void WaresQueue::set_size(const uint32_t size) throw ()
  * \warning You must call \ref update() after this!
  * \todo Why not call update from here?
  */
-void WaresQueue::set_filled(const uint32_t filled) throw() {
+void WaresQueue::set_filled(const uint32_t filled) throw () {
 	if (filled > m_filled)
 		m_owner->get_economy()->add_wares(m_ware, filled - m_filled);
 	else if (filled < m_filled)

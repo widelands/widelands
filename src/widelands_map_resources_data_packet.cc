@@ -92,7 +92,7 @@ throw (_wexception)
 
             // NoLog("[Map Loader] Setting resource of (%i, %i) to '%s'\n", x, y, smap[id]->get_name());
             if (set_id==-1)
-               throw("Unkown resource in map file. It is not in world!\n");
+               throw "Unkown resource in map file. It is not in world!\n";
             egbase->get_map()->get_field(Coords(x, y))->set_resources(set_id, set_amount);
             egbase->get_map()->get_field(Coords(x, y))->set_starting_res_amount(set_start_amount);
 			}

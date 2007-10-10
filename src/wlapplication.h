@@ -34,9 +34,11 @@ class Journal;
 
 ///Thrown if a commandline parameter is faulty
 struct Parameter_error : public std::runtime_error {
-	explicit Parameter_error() throw() : std::runtime_error("") {}
-	explicit Parameter_error(std::string text) throw() : std::runtime_error(text) {}
-	virtual ~Parameter_error() throw() {}
+	explicit Parameter_error() throw () : std::runtime_error("") {}
+	explicit Parameter_error(std::string text) throw ()
+		: std::runtime_error(text)
+	{}
+	virtual ~Parameter_error() throw () {}
 };
 
 // input
@@ -214,7 +216,7 @@ protected:
 	void shutdown_hardware();
 
 	void parse_commandline(const int argc, const char **argv);
-	void handle_commandline_parameters() throw(Parameter_error);
+	void handle_commandline_parameters() throw (Parameter_error);
 
 	void setup_searchpaths(std::string argv0);
 
