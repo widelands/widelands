@@ -51,7 +51,7 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		while ((s = prof.get_next_section(0))) {
          std::string type = s->get_safe_string("type");
-			if (type == "int32_t") {
+			if        (type == "int")    {
             Int_MapVariable* v = new Int_MapVariable(s->get_safe_bool("delete_protected"));
             v->set_name(s->get_name());
             v->set_value(s->get_safe_int("value"));
@@ -94,7 +94,7 @@ throw (_wexception)
       s.set_bool("delete_protected", v.is_delete_protected());
 		switch (v.get_type()) {
 		case MapVariable::MVT_INT:
-			s.set_string("type", "int32_t");
+			s.set_string("type", "int");
 			s.set_int("value", static_cast<const Int_MapVariable &>(v).get_value());
          break;
 
