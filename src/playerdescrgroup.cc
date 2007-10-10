@@ -172,7 +172,6 @@ void PlayerDescriptionGroup::toggle_playertribe()
 	m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
 
 	// set the player
-	m_game->remove_player(m_plnum);
 	m_game->add_player
 		(m_plnum,
 		 m_playertype,
@@ -191,7 +190,6 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
          m_current_tribe=i;
 			m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
          // set the player
-         m_game->remove_player(m_plnum);
 			m_game->add_player
 				(m_plnum,
 				 m_playertype,
@@ -222,7 +220,6 @@ void PlayerDescriptionGroup::set_player_type(int32_t type)
 		m_btnPlayerType.set_title
 			(m_playertype == Player::AI ? _("Computer") : _("Human"));
 
-		m_game->remove_player (m_plnum);
 		m_game->add_player
 			(m_plnum, m_playertype,
 			 m_tribes[m_current_tribe],

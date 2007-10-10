@@ -846,12 +846,10 @@ void Editor_Game_Base::cleanup_for_load
 	if (flush_graphics)
 		g_gr->flush(0);
 
-	int32_t i;
-	for (i=1; i<=MAX_PLAYERS; i++) {
-		if (m_players[i-1]) {
-			remove_player(i);
-			m_players[i-1] = 0;
-		}
+	const Player * const & players_end = m_players[MAX_PLAYERS];
+	for (Player * * p = m_players; p < &players_end; ++p) {
+		delete *p;
+		*p = 0;
 	}
 
 	m_map->cleanup();

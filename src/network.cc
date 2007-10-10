@@ -339,7 +339,6 @@ void NetHost::handle_network ()
 		log("[Host] Setting up player for new connection\n");
 
 		std::string tribename = pl->tribe().name();
-		game->remove_player (i);
 		pl = 0;
 
 		game->add_player
