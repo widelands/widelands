@@ -20,25 +20,27 @@
 #ifndef __S__WIDELANDS_H
 #define __S__WIDELANDS_H
 
-#include <SDL.h>
+#include <stdint.h>
 
 //  Type definitions for the game logic.
 
-typedef Uint32 Military_Influence; //  FIXME should be Uint16
+typedef uint8_t Tribe_Index;
 
-typedef Uint8  Player_Number; /// 5 bits used, so 0 .. 31
+typedef uint32_t Military_Influence; //  FIXME should be uint16_t
+
+typedef uint8_t  Player_Number; /// 5 bits used, so 0 .. 31
 inline Player_Number Neutral() throw () {return 0;}
 #define iterate_player_numbers(p, nr_players) \
 	for (Player_Number p = 1; p <= nr_players; ++p)
 
-typedef Uint8  Resource_Amount; /// 4 bits used, so 0 .. 15.
+typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
 
-typedef Uint16 Vision;
+typedef uint16_t Vision;
 
-typedef Sint32 Time; // FIXME should be unsigned
+typedef int32_t Time; // FIXME should be unsigned
 inline Time Never() throw () {return 0xffffffff;}
 
-typedef Uint32 Duration;
+typedef uint32_t Duration;
 inline Duration Forever() throw () {return 0xffffffff;}
 
 #endif
