@@ -43,7 +43,7 @@ void StreamWrite::Printf(const char *fmt, ...)
 	int32_t i = vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if ((uint32_t)i < sizeof(buffer)) {
+	if (static_cast<uint32_t>(i) < sizeof(buffer)) {
 		Data(buffer, i);
 	} else {
 		uint32_t size = sizeof(buffer);
@@ -61,7 +61,7 @@ void StreamWrite::Printf(const char *fmt, ...)
 			va_start(va, fmt);
 			i = vsnprintf(heapbuf, i+1, fmt, va);
 			va_end(va);
-		} while((uint32_t)i >= size);
+		} while (static_cast<uint32_t>(i) >= size);
 
 		Data(heapbuf, i);
 

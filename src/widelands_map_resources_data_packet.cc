@@ -45,10 +45,10 @@ throw (_wexception)
    fr.Open(fs, "binary/resource");
 
    // read packet version
-   int32_t packet_version=fr.Unsigned16();
    Map* map=egbase->get_map();
    World* world=egbase->get_map()->get_world();
 
+   const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
       int32_t nr_res=fr.Unsigned16();
 		if (nr_res > world->get_nr_resources())
@@ -97,9 +97,10 @@ throw (_wexception)
             egbase->get_map()->get_field(Coords(x, y))->set_starting_res_amount(set_start_amount);
 			}
 		}
-      return;
-	}
-   assert(0); // never here
+	} else
+		throw wexception
+			("Unknown version in Widelands_Map_Resources_Data_Packet: %u",
+			 packet_version);
 }
 
 

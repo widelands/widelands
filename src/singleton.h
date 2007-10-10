@@ -27,22 +27,20 @@
  * but the current version probably doesn't really resemble it any more.
  */
 
-/**
- * Singleton class, to be used in
- *
- * class SomeClass : public Singleton<SomeClass> {
- *   etc.
- * };
- *
- * The singleton must be explicitly instantiated using
- *  new SomeClass;
- * and explicitly deleted using
- *  delete SomeClass::get_ptsingleton();
- *
- * \note There is a weakness here because the implementation doesn't
- * enforce that T equals the derived class. Unfortunately, using dynamic_cast
- * (or any other kind of RTTI) in the constructor doesn't work.
- */
+/// Singleton class, to be used in
+///
+/// class SomeClass : public Singleton<SomeClass> {
+///   etc.
+/// };
+///
+/// The singleton must be explicitly instantiated using
+///  new SomeClass;
+/// and explicitly deleted using
+///  delete SomeClass::get_ptsingleton();
+///
+/// \note There is a weakness here because the implementation doesn't
+/// enforce that T equals the derived class. Unfortunately, using dynamic_cast
+/// (or any other kind of RTTI) in the constructor doesn't work.
 template <typename T> class Singleton {
 	static T* ms;
 

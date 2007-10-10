@@ -47,7 +47,6 @@ throw (_wexception)
 
    // read packet version
 	const int32_t packet_version=s->get_int("packet_version");
-
 	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
       // Read all the positions
       // This could bring trouble if one player position
@@ -68,9 +67,10 @@ throw (_wexception)
 				map.set_starting_pos(p, s->get_Coords(buffer));
 			}
 		}
-      return;
-	}
-   assert(0); // never here
+	} else
+		throw wexception
+			("Unknown version in Widelands_Map_Player_Position_Data_Packet: %i",
+			 packet_version);
 }
 
 

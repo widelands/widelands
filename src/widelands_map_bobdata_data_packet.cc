@@ -76,9 +76,8 @@ throw
 	}
 
    // First packet version
-   int32_t packet_version=fr.Unsigned16();
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
+	const uint16_t packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
       while (1) {
          uint32_t reg=fr.Unsigned32();
          if (reg==0xffffffff) break; // No more bobs
@@ -262,12 +261,10 @@ throw
 
          ol->mark_object_as_loaded(bob);
 		}
-      // DONE
-      return;
-	}
-   throw wexception("Unknown version %i in Widelands_Map_Bobdata_Data_Packet!\n", packet_version);
-
-   assert(0); // Never here
+	} else
+		throw wexception
+			("Unknown version %i in Widelands_Map_Bobdata_Data_Packet!",
+			 packet_version);
 }
 
 void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, Critter_Bob*) {

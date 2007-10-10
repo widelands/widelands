@@ -34,7 +34,7 @@
 
 // be compatible to microsoft
 #define closesocket close
-#define DATATYPE    void*
+#define DATATYPE    void
 
 #else
 
@@ -43,7 +43,7 @@
 #include <winsock2.h>
 
 #include <stdint.h>
-#define DATATYPE    char*
+#define DATATYPE    char
 // microsoft doesn't have these
 typedef uint16_t in_port_t;
 typedef uint32_t in_addr_t;

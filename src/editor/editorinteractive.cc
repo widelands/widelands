@@ -256,71 +256,71 @@ void Editor_Interactive::toolsize_menu_btn() {
 }
 
 
-bool Editor_Interactive::handle_key(bool down, SDLKey code, char )
+bool Editor_Interactive::handle_key(bool down, SDLKey code, char)
 {
 	bool handled=false;
 
-	if ( code==SDLK_LCTRL || code==SDLK_RCTRL ) m_ctrl_down=down;
+	if (code==SDLK_LCTRL || code==SDLK_RCTRL) m_ctrl_down = down;
 
-	if ( down )
+	if (down)
 	{
 		// only on down events
-		switch ( code )
+		switch (code)
 		{
 		// Sel radius
 		case SDLK_1:
-			set_sel_radius ( 0 );
+			set_sel_radius (0);
 			handled=true;
 			break;
 		case SDLK_2:
-			set_sel_radius ( 1 );
+			set_sel_radius (1);
 			handled=true;
 			break;
 		case SDLK_3:
-			set_sel_radius ( 2 );
+			set_sel_radius (2);
 			handled=true;
 			break;
 		case SDLK_4:
-			set_sel_radius ( 3 );
+			set_sel_radius (3);
 			handled=true;
 			break;
 		case SDLK_5:
-			set_sel_radius ( 4 );
+			set_sel_radius (4);
 			handled=true;
 			break;
 		case SDLK_6:
-			set_sel_radius ( 5 );
+			set_sel_radius (5);
 			handled=true;
 			break;
 		case SDLK_7:
-			set_sel_radius ( 6 );
+			set_sel_radius (6);
 			handled=true;
 			break;
 		case SDLK_8:
-			set_sel_radius ( 7 );
+			set_sel_radius (7);
 			handled=true;
 			break;
 		case SDLK_9:
-			set_sel_radius ( 8 );
+			set_sel_radius (8);
 			handled=true;
 			break;
 		case SDLK_0:
-			set_sel_radius ( 9 );
+			set_sel_radius (9);
 			handled=true;
 			break;
 
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
-			if ( tools.use_tool == Editor_Tool::First )
-				select_tool ( tools.current(), Editor_Tool::Second );
+			if (tools.use_tool == Editor_Tool::First)
+				select_tool (tools.current(), Editor_Tool::Second);
 			handled=true;
 			break;
 
 		case SDLK_LALT:
 		case SDLK_RALT:
 		case SDLK_MODE:
-			if ( tools.use_tool == Editor_Tool::First )
-				select_tool ( tools.current(), Editor_Tool::Third );
+			if (tools.use_tool == Editor_Tool::First)
+				select_tool (tools.current(), Editor_Tool::Third);
 			handled=true;
 			break;
 
@@ -330,8 +330,9 @@ bool Editor_Interactive::handle_key(bool down, SDLKey code, char )
 			break;
 
 		case SDLK_c:
-			set_display_flag ( Interactive_Base::dfShowCensus,
-			                   !get_display_flag ( Interactive_Base::dfShowCensus ) );
+			set_display_flag
+				(Interactive_Base::dfShowCensus,
+				 !get_display_flag (Interactive_Base::dfShowCensus));
 			handled=true;
 			break;
 
@@ -341,7 +342,7 @@ bool Editor_Interactive::handle_key(bool down, SDLKey code, char )
 			break;
 
 		case SDLK_f:
-			if ( down )
+			if (down)
 				g_gr->toggle_fullscreen();
 			handled=true;
 			break;
@@ -352,7 +353,7 @@ bool Editor_Interactive::handle_key(bool down, SDLKey code, char )
 			break;
 
 		case SDLK_i:
-			select_tool ( tools.info, Editor_Tool::First );
+			select_tool (tools.info, Editor_Tool::First);
 			handled=true;
 			break;
 
@@ -362,8 +363,8 @@ bool Editor_Interactive::handle_key(bool down, SDLKey code, char )
 			break;
 
 		case SDLK_l:
-			if ( m_ctrl_down )
-				new Main_Menu_Load_Map ( this );
+			if (m_ctrl_down)
+				new Main_Menu_Load_Map (this);
 			handled=true;
 			break;
 
@@ -373,8 +374,8 @@ bool Editor_Interactive::handle_key(bool down, SDLKey code, char )
 			break;
 
 		case SDLK_s:
-			if ( m_ctrl_down )
-				new Main_Menu_Save_Map ( this );
+			if (m_ctrl_down)
+				new Main_Menu_Save_Map (this);
 			handled=true;
 			break;
 
@@ -391,15 +392,15 @@ bool Editor_Interactive::handle_key(bool down, SDLKey code, char )
 	else
 	{
 		// key up events
-		switch ( code )
+		switch (code)
 		{
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
 		case SDLK_LALT:
 		case SDLK_RALT:
 		case SDLK_MODE:
-			if ( tools.use_tool != Editor_Tool::First )
-				select_tool ( tools.current(), Editor_Tool::First );
+			if (tools.use_tool != Editor_Tool::First)
+				select_tool (tools.current(), Editor_Tool::First);
 			handled=true;
 			break;
 		default:

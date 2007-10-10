@@ -436,8 +436,10 @@ void NetHost::handle_network ()
 					continue;
 				}
 
-				clients[i].lag=std::max((SDL_GetTicks() - last_ping_sent), (uint32_t)1);
-				pongs_received++;
+				clients[i].lag =
+					std::max
+					((SDL_GetTicks() - last_ping_sent), static_cast<uint32_t>(1));
+				++pongs_received;
 
 				if (pongs_received==clients.size())
 					update_network_delay ();

@@ -644,9 +644,10 @@ inline Panel * Panel::child_at_mouse_cursor(int32_t x, int32_t y)
 		if (!(*i)->get_handle_mouse() || !(*i)->get_visible())
 			continue;
 
-		if (x < (*i)->_x + static_cast<int32_t>((*i)->_w) and x >= (*i)->_x
-		    and
-		    y < (*i)->_y + static_cast<int32_t>((*i)->_h) and y >= (*i)->_y)
+		if
+			(x < (*i)->_x + static_cast<int32_t>((*i)->_w) and x >= (*i)->_x
+			 and
+			 y < (*i)->_y + static_cast<int32_t>((*i)->_h) and y >= (*i)->_y)
 			return (*i);
 	}
 
@@ -725,7 +726,7 @@ bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
 
 		if (child) {
 			if (child->do_mousemove(state, x - child->_x, y - child->_y, xdiff, ydiff))
- 				return true;
+				return true;
 		}
 	}
 	return handle_mousemove(state, x, y, xdiff, ydiff);

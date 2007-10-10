@@ -1651,7 +1651,7 @@ void MilitarySite_Window::think()
 		 or
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
-      		// The Site has been removed. Die quickly.
+		// The Site has been removed. Die quickly.
 		delete this;
 	}
    update();

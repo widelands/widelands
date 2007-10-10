@@ -86,50 +86,50 @@ bool Edit_Box::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
  * Handle keypress/release events
  *
  * \todo Text input works only because code.unicode happens to map to ASCII for
- * ASCII characters (--> //HERE ). Instead, all user editable strings should be
+ * ASCII characters (--> //HERE). Instead, all user editable strings should be
  * real unicode.
 */
 bool Edit_Box::handle_key(bool down, SDL_keysym code)
 {
-	if ( down )
+	if (down)
 	{
-		switch ( code.sym )
+		switch (code.sym)
 		{
 		case SDLK_ESCAPE:
-			set_text ( m_lasttext.c_str() );
-			Basic_Button::handle_mouserelease ( 0, 0, 0 );
-			set_can_focus ( false );
+			set_text (m_lasttext.c_str());
+			Basic_Button::handle_mouserelease (0, 0, 0);
+			set_can_focus (false);
 			m_keyboard_grabbed=false;
-			grab_mouse ( false );
+			grab_mouse (false);
 			return true;
 
 		case SDLK_RETURN:
 			m_lasttext=m_text;
-			Basic_Button::handle_mouserelease ( 0, 0, 0 );
-			set_can_focus ( false );
+			Basic_Button::handle_mouserelease (0, 0, 0);
+			set_can_focus (false);
 			m_keyboard_grabbed=false;
-			grab_mouse ( false );
+			grab_mouse (false);
 			changed.call();
-			changedid.call ( m_id );
+			changedid.call (m_id);
 			return true;
 
 		case SDLK_BACKSPACE:
-			if ( m_text.size() )
+			if (m_text.size())
 			{
-				m_text.erase ( m_text.end() - 1 );
-				set_title ( m_text.c_str() );
+				m_text.erase (m_text.end() - 1);
+				set_title (m_text.c_str());
 			}
 			return true;
 
 		case SDLK_DELETE:
-			m_text.resize ( 0 );
-			set_title ( m_text.c_str() );
+			m_text.resize (0);
+			set_title (m_text.c_str());
 			return true;
 
 		default:
-			if ( is_printable(code) && m_text.size() < m_maxchars )
+			if (is_printable(code) && m_text.size() < m_maxchars)
 				m_text+=code.unicode;
-			set_title ( m_text.c_str() );
+			set_title (m_text.c_str());
 			return true;
 		}
 	}

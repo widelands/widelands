@@ -51,7 +51,7 @@ std::string Campaign_visiblity_save::get_path()
 	savepath += "/campvis";
 
 	// check if campaigns visiblity-save is available
-	if (!(g_fs->FileExists(savepath))){
+	if (!(g_fs->FileExists(savepath))) {
 		make_campvis(savepath);
 	}
 
@@ -139,31 +139,33 @@ void Campaign_visiblity_save::set_visiblity(std::string entry, uint32_t vcase)
 	Profile campvis(savepath.c_str());
 	Section *vis;
 
-	if(vcase <= 1) {
+	if (vcase <= 1) {
 		vis=campvis.pull_section("campaigns");
 
-		if(vcase == 0) {
+		if (vcase == 0) {
 			vis->set_bool(entry.c_str(), true);
 		}
-		if(vcase == 1) {
+		if (vcase == 1) {
 			vis->set_bool(entry.c_str(), false);
 		}
 	}
 
-	if(vcase >= 2) {
+	if (vcase >= 2) {
 		vis=campvis.pull_section("campmaps");
 
-		if(vcase == 2) {
+		if (vcase == 2) {
 			vis->set_bool(entry.c_str(), true);
 		}
-		if(vcase == 3) {
+		if (vcase == 3) {
 			vis->set_bool(entry.c_str(), false);
 
 		}
 	}
 
-	if(vcase >= 4) {
-		throw wexception("Wrong vcase (%i) for entry \"%s\" of campvis", vcase, entry.c_str());
+	if (vcase >= 4) {
+		throw wexception
+			("Wrong vcase (%i) for entry \"%s\" of campvis",
+			 vcase, entry.c_str());
 	}
 
 	campvis.write(savepath.c_str(), false);

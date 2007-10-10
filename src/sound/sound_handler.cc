@@ -63,9 +63,9 @@ m_random_order        (true),
 m_current_songset     ("")
 {}
 
-/** Housekeeping: unset hooks. Audio data will be freed automagically by the
- *\ref Songset and \ref FXset destructors, but not the {song|fx}sets themselves
-*/
+/// Housekeeping: unset hooks. Audio data will be freed automagically by the
+/// \ref Songset and \ref FXset destructors, but not the {song|fx}sets
+/// themselves.
 Sound_Handler::~Sound_Handler()
 {
 	{

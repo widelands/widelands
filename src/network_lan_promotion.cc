@@ -100,12 +100,25 @@ bool LAN_Base::avail ()
 ssize_t LAN_Base::recv (void* buf, size_t len, sockaddr_in* addr)
 {
     socklen_t addrlen=sizeof(sockaddr_in);
-    return recvfrom (sock, (DATATYPE) buf, len, 0, (sockaddr*) addr, &addrlen);
+	return
+		recvfrom
+		(sock,
+		 static_cast<DATATYPE *>(buf),
+		 len,
+		 0,
+		 reinterpret_cast<sockaddr *>(addr),
+		 &addrlen);
 }
 
 void LAN_Base::send (const void* buf, size_t len, const sockaddr_in* addr)
 {
-    sendto (sock, (const DATATYPE) buf, len, 0, (const sockaddr*) addr, sizeof(sockaddr_in));
+	sendto
+		(sock,
+		 static_cast<const DATATYPE *>(buf),
+		 len,
+		 0,
+		 reinterpret_cast<const sockaddr *>(addr),
+		 sizeof(sockaddr_in));
 }
 
 void LAN_Base::broadcast (const void* buf, size_t len, uint16_t port)
@@ -121,7 +134,7 @@ void LAN_Base::broadcast (const void* buf, size_t len, uint16_t port)
 
 		sendto
 			(sock,
-			 static_cast<const DATATYPE>(buf),
+			 static_cast<const DATATYPE *>(buf),
 			 len,
 			 0,
 			 reinterpret_cast<const sockaddr *>(&addr),

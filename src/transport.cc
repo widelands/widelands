@@ -1230,7 +1230,7 @@ void Road::init(Editor_Game_Base *gg)
 {
    PlayerImmovable::init(gg);
 
-	if (m_path.get_nsteps() >=2 ) link_into_flags(gg);
+	if (m_path.get_nsteps() >=2) link_into_flags(gg);
 }
 
 /**
@@ -1589,7 +1589,7 @@ Route::LoadData* Route::load(FileRead& fr)
 void Route::load_pointers(LoadData* data, Widelands_Map_Map_Object_Loader* mol)
 {
 	try {
-		for(uint32_t i = 0; i < data->flags.size(); ++i) {
+		for (uint32_t i = 0; i < data->flags.size(); ++i) {
 			uint32_t idx = data->flags.size();
 			Flag* flag = dynamic_cast<Flag*>(mol->get_object_by_file_index(idx));
 			if (!flag)

@@ -49,9 +49,7 @@ throw (_wexception)
 	FileRead fr;
 	fr.Open(fs, "binary/interactive_player");
 
-	// read packet version
-	const Uint16 packet_version = fr.Unsigned16();
-
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
 		uint8_t player_number = fr.Unsigned8();
 		int32_t x = fr.Unsigned16();
@@ -75,13 +73,10 @@ throw (_wexception)
 				game->ReadStatistics(fr, 0);
 			}
 		}
-
-		// DONE
-		return;
 	} else
-		throw wexception("Unknown version in Game_Interactive_Player_Data_Packet: %i\n", packet_version);
-
-	assert(0); // never here
+		throw wexception
+			("Unknown version in Game_Interactive_Player_Data_Packet: %u",
+			 packet_version);
 }
 
 /*

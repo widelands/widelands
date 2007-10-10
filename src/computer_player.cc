@@ -188,14 +188,14 @@ granitmine="marblemine";
 	Map& map = game().map();
 	std::set<OPtr<PlayerImmovable> > found_immovables;
 
-	for(int32_t y = 0; y < map.get_height(); ++y) {
-		for(int32_t x = 0; x < map.get_width(); ++x) {
-			FCoords f = map.get_fcoords(Coords(x,y));
+	for (Y_Coordinate y = 0; y < map.get_height(); ++y) {
+		for (X_Coordinate x = 0; x < map.get_width(); ++x) {
+			FCoords f = map.get_fcoords(Coords(x, y));
 
 			if (f.field->get_owned_by() != player_number)
 				continue;
 
-			unusable_fields.push_back (map.get_fcoords(Coords(x,y)));
+			unusable_fields.push_back (map.get_fcoords(Coords(x, y)));
 
 			PlayerImmovable* imm = dynamic_cast<PlayerImmovable*>(f.field->get_immovable());
 

@@ -497,7 +497,7 @@ Ware_Statistics_Menu::~Ware_Statistics_Menu()
 {
 }
 
-/** 
+/**
  * Called when the ok button has been clicked
  * \todo Implement help
 */
