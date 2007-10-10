@@ -66,13 +66,13 @@ struct Event {
 	const EventReferencerMap & get_referencers() const throw ()
 	{return m_referencers;}
 
-      inline State get_state() {return m_state;}
+	State get_state() {return m_state;}
 
 protected:
-      State        m_state;
+	State              m_state;
 
 private:
-      std::string                m_name;
+	std::string        m_name;
 	EventReferencerMap m_referencers;
 };
 

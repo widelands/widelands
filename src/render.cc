@@ -190,7 +190,7 @@ void Surface::fast_blit(Surface* src) {
 /*
  * Blend to colors; only needed for calc_minimap_color below
  */
-static inline uint32_t blend_color
+inline static uint32_t blend_color
 (const SDL_PixelFormat & format,
  const uint32_t clr1,
  const Uint8 r2, const Uint8 g2, const Uint8 b2)
@@ -209,7 +209,7 @@ calc_minimap_color
 Return the color to be used in the minimap for the given field.
 ===============
 */
-static inline uint32_t calc_minimap_color
+inline static uint32_t calc_minimap_color
 (const SDL_PixelFormat & format,
  const Editor_Game_Base & egbase,
  const FCoords f,

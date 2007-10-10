@@ -46,7 +46,7 @@ struct Statebox : public Panel {
 	bool get_state() const throw () {return m_state;}
 	void set_state(bool on);
 
-   inline void set_id(int32_t n) {m_id=n;}
+	void set_id(int32_t n) {m_id = n;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);

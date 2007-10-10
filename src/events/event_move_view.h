@@ -40,10 +40,10 @@ struct Event_Move_View : public Event {
 
       // File Functions
 	void Write(Section &, const Editor_Game_Base &) const;
-      void Read(Section*, Editor_Game_Base*);
+	void Read (Section *,       Editor_Game_Base *);
 
-      inline void set_coords(Coords pt) {m_pt=pt;}
-      inline Coords get_coords() {return m_pt;}
+	void set_coords(Coords pt) {m_pt = pt;}
+	Coords get_coords() {return m_pt;}
 
 private:
       Coords m_pt;

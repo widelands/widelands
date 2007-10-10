@@ -40,16 +40,16 @@ struct Event_Unhide_Objective : public Event {
 
       // File Functions
 	void Write(Section &, const Editor_Game_Base &) const;
-      void Read(Section*, Editor_Game_Base*);
+	void Read (Section *,       Editor_Game_Base *);
 
-      inline void set_objective(MapObjective* objective) {m_objective=objective;}
-      inline MapObjective* get_objective() {return m_objective;}
-      inline void set_dounhide(bool t) {m_dounhide=t;}
+	void set_objective(MapObjective * objective) {m_objective = objective;}
+	MapObjective * get_objective() {return m_objective;}
+	void set_dounhide(bool t) {m_dounhide = t;}
 	bool get_dounhide() const {return m_dounhide;}
 
 private:
-      MapObjective* m_objective;
-      bool          m_dounhide;
+	MapObjective * m_objective;
+	bool           m_dounhide;
 };
 
 

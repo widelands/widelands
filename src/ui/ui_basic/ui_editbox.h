@@ -39,10 +39,10 @@ struct Edit_Box : private Basic_Button {
      Signal changed;
      Signal1<int32_t> changedid;
 
-     inline const char* get_text() {return m_text.c_str();}
+	const char* get_text() {return m_text.c_str();}
      void set_text(const char* text) {m_lasttext=m_text=text; set_title(text);}
      void set_maximum_chars(int32_t n) {m_maxchars=n;}
-     int32_t get_maximum_chars() {return m_maxchars;}
+	int32_t get_maximum_chars() const {return m_maxchars;}
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);

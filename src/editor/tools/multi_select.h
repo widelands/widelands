@@ -47,13 +47,14 @@ struct MultiSelect {
          else --m_nr_enabled;
          assert(m_nr_enabled>=0);
 		}
-      inline bool is_enabled(int32_t n) {
+	bool is_enabled(int32_t n) const {
 		if (static_cast<int32_t>(m_enabled.size()) < n + 1) return false;
          return m_enabled[n];
-		}
-      inline int32_t get_nr_enabled() {return m_nr_enabled;}
-	int32_t get_random_enabled() {
-		const int32_t rand_value = static_cast<int32_t>
+	}
+	int32_t get_nr_enabled() const {return m_nr_enabled;}
+	int32_t get_random_enabled() const {
+		const int32_t rand_value =
+			static_cast<int32_t>
 			(static_cast<double>(get_nr_enabled())
 			 *
 			 rand() / (RAND_MAX + 1.0));

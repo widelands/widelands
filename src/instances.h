@@ -118,12 +118,8 @@ created.
 // If you find a better way to do this that doesn't cost a virtual function or additional
 // member variable, go ahead
 #define MO_DESCR(type) \
-public: __attribute__ ((deprecated)) inline const type* get_descr() const {return dynamic_cast<const type *>(m_descr);}\
+public: __attribute__ ((deprecated)) const type* get_descr() const {return dynamic_cast<const type *>(m_descr);}\
 public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);}
-
-// would be necessary for virtual inheritance stuff
-//#define MO_VIRTUAL_DESCR(type)
-//protected: type* m_descr; inline type* get_descr() const {return m_descr;}
 
 class Map_Object {
 	friend class Object_Manager;

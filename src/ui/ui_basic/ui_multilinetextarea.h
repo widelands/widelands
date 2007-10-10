@@ -62,16 +62,21 @@ struct Multiline_Textarea : public Panel {
 	uint32_t scrollbar_w() const throw () {return 24;}
 	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
 
-      inline void set_font(std::string name, int32_t size, RGBColor fg) {m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str());}
+	void set_font(std::string name, int32_t size, RGBColor fg) {
+		m_fontname = name;
+		m_fontsize = size;
+		m_fcolor   = fg;
+		set_text(m_text.c_str());
+	}
 
-      // Drawing and event handlers
-      void draw(RenderTarget* dst);
+	// Drawing and event handlers
+	void draw(RenderTarget *);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 
-      inline const char* get_font_name() {return m_fontname.c_str();}
-      inline const int32_t get_font_size() {return m_fontsize;}
-      inline RGBColor& get_font_clr() {return m_fcolor;}
+	const char *  get_font_name() {return m_fontname.c_str();}
+	const int32_t get_font_size() {return m_fontsize;}
+	RGBColor &    get_font_clr () {return m_fcolor;}
 
 private:
 	std::string  m_text;
@@ -91,9 +96,9 @@ protected:
 		uint32_t m_textheight;  ///< total height of wrapped text, in pixels
 		uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
 
-      inline int32_t get_m_textpos() {return m_textpos;}
-      void draw_scrollbar();
-      int32_t get_halign();
+	int32_t get_m_textpos() const {return m_textpos;}
+	void draw_scrollbar();
+	int32_t get_halign();
 };
 };
 

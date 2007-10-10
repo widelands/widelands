@@ -50,16 +50,16 @@ struct Event_Message_Box : public Event, public TriggerReferencer {
 	void Write(Section &, const Editor_Game_Base &) const;
       void Read(Section*, Editor_Game_Base*);
 
-      inline void set_text(const char* str) {m_text=str;}
+	void set_text(const char * str) {m_text = str;}
 	const char * get_text() const {return m_text.c_str();}
-      inline void set_window_title(const char* str) {m_window_title=str;}
+	void set_window_title(const char* str) {m_window_title = str;}
 	const char * get_window_title() const {return m_window_title.c_str();}
-      inline void set_is_modal(bool t) {m_is_modal=t;}
+	void set_is_modal(bool t) {m_is_modal = t;}
 	bool get_is_modal() const {return m_is_modal;}
-      inline void set_pos(int32_t posx, int32_t posy) {m_posx=posx; m_posy=posy;}
+	void set_pos(int32_t posx, int32_t posy) {m_posx=posx; m_posy=posy;}
 	int32_t get_posx() const {return m_posx;}
 	int32_t get_posy() const {return m_posy;}
-      inline void set_dimensions(int32_t w, int32_t h) {m_width = w; m_height = h;}
+	void set_dimensions(int32_t w, int32_t h) {m_width = w; m_height = h;}
 	int32_t get_w() const {return m_width;}
 	int32_t get_h() const {return m_height;}
       void set_button_trigger(int32_t i, Trigger_Null* t);

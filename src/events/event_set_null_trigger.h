@@ -41,17 +41,17 @@ struct Event_Set_Null_Trigger : public Event, public TriggerReferencer {
 
       // File Functions
 	void Write(Section &, const Editor_Game_Base &) const;
-      void Read(Section*, Editor_Game_Base*);
+	void Read (Section *,       Editor_Game_Base *);
 
-      inline void set_trigger(Trigger_Null* trig) {
-         if (m_trigger)
-            unreference_trigger(m_trigger);
-         if (trig)
-            reference_trigger(trig);
-         m_trigger=trig;
-		}
-      inline Trigger_Null* get_trigger() {return m_trigger;}
-      inline void set_setto(bool t) {m_setto = t;}
+	void set_trigger(Trigger_Null * trig) {
+		 if (m_trigger)
+			 unreference_trigger(m_trigger);
+		 if (trig)
+			 reference_trigger(trig);
+		 m_trigger = trig;
+	}
+	Trigger_Null * get_trigger() const {return m_trigger;}
+	void set_setto(bool t) {m_setto = t;}
 	bool get_setto() const {return m_setto;}
 
       // For Trigger referencer

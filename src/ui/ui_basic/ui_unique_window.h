@@ -41,9 +41,9 @@ struct UniqueWindow : public Window {
 	};
 
       UniqueWindow(Panel* parent, Registry* reg, int32_t w, int32_t h, std::string title);
-      virtual ~UniqueWindow();
+	virtual ~UniqueWindow();
 
-      inline bool get_usedefaultpos() {return m_usedefaultpos;}
+	bool get_usedefaultpos() {return m_usedefaultpos;}
 
 private:
 	Registry * m_registry;

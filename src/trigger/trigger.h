@@ -65,8 +65,8 @@ struct Trigger {
 	{return m_referencers;}
 
 protected:
-      // This is only for child classes to toggle the trigger
-      inline void set_trigger(bool t) {m_is_set=t;}
+	// This is only for child classes to toggle the trigger
+	void set_trigger(bool t) {m_is_set = t;}
 
 private:
       std::string                m_name;

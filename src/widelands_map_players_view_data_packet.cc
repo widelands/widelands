@@ -98,7 +98,7 @@ extern const Map_Object_Descr g_road_descr;
 //  FIXME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //  FIXME make sure that FileRead, FileWrite can not be copied (for example passed by value)
 //  FIXME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-static inline const Map_Object_Descr * read_unseen_immovable
+inline static const Map_Object_Descr * read_unseen_immovable
 (const Editor_Game_Base & egbase,
  const World            & world,
  const Player_Number      plnum,                    //  only for error messages
@@ -758,7 +758,7 @@ throw (_wexception)
 }
 
 
-static inline void write_unseen_immovable
+inline static void write_unseen_immovable
 (const Map_Object_Descr * const map_object_descr,
   BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
 {

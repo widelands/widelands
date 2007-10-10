@@ -59,11 +59,11 @@ struct EventChain : public EventReferencer, public TriggerReferencer {
 	const std::string & name() const throw () {return m_name;}
 	const char * get_type() const {return "EventChain";}
 	void set_name(const std::string & new_name) {m_name = new_name;}
-      inline bool get_repeating() {return m_repeating;}
-      inline TriggerConditional* get_trigcond() {return m_trigconditional;}
-      inline void set_trigcond(TriggerConditional* t) {m_trigconditional = t;}
+	bool get_repeating() const {return m_repeating;}
+	TriggerConditional * get_trigcond() {return m_trigconditional;}
+	void set_trigcond(TriggerConditional * t) {m_trigconditional = t;}
 
-      inline State get_state() {return m_state;}
+	State get_state() const {return m_state;}
 
       // Below is only good idea in editor
       void set_repeating(bool t) {m_repeating = t;}
