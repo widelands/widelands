@@ -1,11 +1,11 @@
 -------- For documentation see doc/README.spurious_source_code_regexps --------
 [	 ]$
 [^	]+[	]
- [,})]
+^([	 ]|[^/].|/[^/])* [,})]
 ^("([^"]|\\")*\"|'(\\[\'nt]|[^\'])'|[^"'])*,[^ ]
-[^	 @]\{
+^([	 ]|[^/].|/[^/])*[^	 @]\{
 \{ +[^ /\\]
-\}[^ ,;}\]
+^([	 ]|[^/].|/[^/])*\}[^ ,;}\]
 \([ ]
 (catch|for|if|switch|while)\(
 [^_a-zA-Z0-9"](TRUE|FALSE)[^_a-zA-Z0-9"]
@@ -13,7 +13,7 @@
 (for|if|while) \((/[^/*]|[^/])*\) (/[^/*]|[^/])*[^){};\\]$
 _cast<const( +[_a-zA-Z][_a-zA-Z0-9]*)* *>
 _cast<( *[_a-zA-Z][_a-zA-Z0-9]*)* *\* *const *>
-\( *(void|float|double|u?(char|short|int)|[US]int(8|16|32)) *\) *[^ :;{)=]
+\(( *const +)? *(void|float|double|u?(char|short|int((8|16|32|64)_t)?)|[US]int(8|16|32|64)) *\) *[^ :;{)=t]
 snprintf *\( *[_a-zA-Z][_a-zA-Z0-9]* *, *[[:digit:]]+
 ^DISABLED_STILL_TOO_MANY_ERRORS	* +.*{$
 assert *\( *0 *\)
