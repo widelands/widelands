@@ -41,7 +41,7 @@ int32_t Editor_Delete_Immovable_Tool::handle_click_impl
 	do if
 		(Immovable * const immovable =
 		 dynamic_cast<Immovable *>(mr.location().field->get_immovable()))
-		immovable->remove(&parent.editor()); //  Delete no buildings or stuff.
+		immovable->remove(&parent.egbase()); //  Delete no buildings or stuff.
 	while (mr.advance(map));
 	return mr.radius() + 2;
 }

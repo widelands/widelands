@@ -86,7 +86,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
       // that there might be already a hq placed somewhere. This needs to be
       // deleted before a starting position change can occure
 		if
-			(parent.editor().get_player(m_current_player)
+			(parent.egbase().get_player(m_current_player)
 			 and
 			 old_sp
 			 and

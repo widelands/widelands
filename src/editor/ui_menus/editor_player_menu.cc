@@ -307,7 +307,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
-	if (parent.editor().get_player(n))
+	if (parent.egbase().get_player(n))
 		if (const Coords sp = map.get_starting_pos(n))
 			if (dynamic_cast<const Building *> (map[sp].get_immovable())) return;
 

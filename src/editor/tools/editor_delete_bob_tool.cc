@@ -38,7 +38,7 @@ int32_t Editor_Delete_Bob_Tool::handle_click_impl
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(center.node), radius));
 	do if (Bob * const bob = mr.location().field->get_first_bob())
-		bob->remove(&parent.editor());
+		bob->remove(&parent.egbase());
 	while (mr.advance(map));
    return radius + 2;
 }

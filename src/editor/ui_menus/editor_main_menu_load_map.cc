@@ -274,10 +274,11 @@ void Main_Menu_Load_Map::fill_list() {
  * Load map complete
  */
 void Main_Menu_Load_Map::load_map(std::string filename) {
-	Map & map = m_parent->editor().map();
+	Editor_Game_Base & egbase = m_parent->egbase();
+	Map              & map    = egbase.map();
 
 	if (filename != "") {
-		m_parent->editor().cleanup_for_load(true, false);
+		egbase.cleanup_for_load(true, false);
 
 		Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 
@@ -286,9 +287,9 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 
 		 loader_ui.step (_("Loading world data"));
 		ml->load_world();
-		ml->load_map_complete(&m_parent->editor(), true);
-		m_parent->editor().postload();
-		m_parent->editor().load_graphics(loader_ui);
+		ml->load_map_complete(&egbase, true);
+		egbase.postload();
+		egbase.load_graphics(loader_ui);
 
       // Now update all the visualisations
       // Player positions

@@ -38,14 +38,14 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 {
 	const int32_t radius = parent.get_sel_radius();
 	if (not get_nr_enabled()) return radius;
-	Editor_Game_Base & editor = parent.editor();
+	Editor_Game_Base & egbase = parent.egbase();
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(center.node), radius));
 	do if
 		(not mr.location().field->get_immovable()
 		 or
 		 mr.location().field->get_immovable()->get_size() == BaseImmovable::NONE)
-		editor.create_immovable(mr.location(), get_random_enabled(), 0);
+		egbase.create_immovable(mr.location(), get_random_enabled(), 0);
 	while (mr.advance(map));
    return radius + 2;
 }

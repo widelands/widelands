@@ -363,7 +363,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       // Make a zipfile
       fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
 	}
-	Widelands_Map_Saver wms(*fs, &m_parent->editor());
+	Widelands_Map_Saver wms(*fs, &m_parent->egbase());
    try {
 		wms.save();
       m_parent->set_need_save(false);

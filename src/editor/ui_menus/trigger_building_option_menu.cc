@@ -53,7 +53,7 @@ m_player_area(trigger->m_player_area)
 	;
    int32_t i=0;
 	if
-		(const Tribe_Descr * const tribe = m_parent->editor().get_tribe
+		(const Tribe_Descr * const tribe = m_parent->egbase().get_tribe
 		 (m_parent->egbase().map()
 		  .get_scenario_player_tribe(m_player_area.player_number).c_str()))
 	{

@@ -35,7 +35,7 @@ and places this on the current field
 int32_t Editor_Place_Bob_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
-	Editor_Game_Base & editor = parent.editor();
+	Editor_Game_Base & editor = parent.egbase();
 	MapRegion<Area<FCoords> > mr
 		(map,
 		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));

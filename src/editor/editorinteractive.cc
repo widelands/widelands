@@ -44,7 +44,7 @@
 
 
 Editor_Interactive::Editor_Interactive(Editor_Game_Base & e) :
-Interactive_Base(e), m_editor(e)
+Interactive_Base(e), m_egbase(e)
 {
 
    // Disable debug. it is no use for editor
@@ -171,9 +171,9 @@ void Editor_Interactive::think()
 	m_realtime = WLApplication::get()->get_time();
 	frametime = m_realtime - lasttime;
 
-	*editor().get_game_time_pointer() += frametime;
+	*egbase().get_game_time_pointer() += frametime;
 
-	g_gr->animate_maptextures(editor().get_gametime());
+	g_gr->animate_maptextures(egbase().get_gametime());
 }
 
 
@@ -441,7 +441,7 @@ void Editor_Interactive::reference_player_tribe
 (const Player_Number player, const void * const data)
 {
 	assert(0 < player);
-	assert    (player <= m_editor.map().get_nrplayers());
+	assert    (player <= egbase().map().get_nrplayers());
 
    Player_References r;
    r.player=player;
@@ -457,7 +457,7 @@ void Editor_Interactive::reference_player_tribe
 void Editor_Interactive::unreference_player_tribe
 (const Player_Number player, const void * const data)
 {
-	assert(player <= m_editor.map().get_nrplayers());
+	assert(player <= egbase().map().get_nrplayers());
    assert(data);
 
 	std::vector<Player_References> & references = m_player_tribe_references;
@@ -475,7 +475,7 @@ void Editor_Interactive::unreference_player_tribe
 
 bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
 	assert(0 < player);
-	assert    (player <= m_editor.map().get_nrplayers());
+	assert    (player <= egbase().map().get_nrplayers());
 
    uint32_t i=0;
    for (i=0; i<m_player_tribe_references.size(); i++)

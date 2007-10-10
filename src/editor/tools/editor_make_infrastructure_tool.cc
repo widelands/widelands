@@ -61,6 +61,6 @@ int32_t Editor_Make_Infrastructure_Tool::handle_click_impl
 */
 
 	show_field_action
-		(&parent, parent.editor().get_player(m_player), &m_registry);
+		(&parent, parent.egbase().get_player(m_player), &m_registry);
    return 5; // Not really needed, since Player Immovables are taken care of while placing on map
 }

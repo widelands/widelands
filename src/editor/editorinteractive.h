@@ -49,8 +49,8 @@ private:
 	~Editor_Interactive();
 
 public:
-	const Editor_Game_Base & editor() const throw () {return m_editor;}
-	Editor_Game_Base       & editor()       throw () {return m_editor;}
+	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
+	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 
 	// leaf functions from base class
 	void start();
@@ -131,7 +131,7 @@ private:
 	int32_t m_realtime;
 
       // UI ownings
-	Editor_Game_Base & m_editor;
+	Editor_Game_Base & m_egbase;
 	UI::UniqueWindow::Registry m_toolmenu;
 	UI::UniqueWindow::Registry m_toolsizemenu;
 	UI::UniqueWindow::Registry m_playermenu;

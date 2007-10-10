@@ -62,7 +62,7 @@ m_parent(parent)
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
-   m_name->set_text(event->get_name());
+	m_name->set_text(event->name().c_str());
    posy+= 20+spacing;
 
    // Modal cb

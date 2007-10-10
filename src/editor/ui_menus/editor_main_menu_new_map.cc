@@ -157,20 +157,20 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 }
 
 void Main_Menu_New_Map::clicked_create_map() {
-	Map & map = m_parent->egbase().map();
-	Editor_Game_Base & editor = m_parent->editor();
+	Editor_Game_Base & egbase = m_parent->egbase();
+	Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 
 	// Clean all the stuff up, so we can load
-	editor.cleanup_for_load(true, false);
+	egbase.cleanup_for_load(true, false);
 
 	map.create_empty_map(MAP_DIMENSIONS[m_w], MAP_DIMENSIONS[m_h], (*m_worlds)[m_currentworld]);
 
 	// Postload the world which provides all the immovables found on a map
-	map.get_world()->postload(&editor);
+	map.get_world()->postload(&egbase);
 
-	editor.postload     ();
-	editor.load_graphics(loader);
+	egbase.postload     ();
+	egbase.load_graphics(loader);
 
 	map.recalc_whole_map();
 
