@@ -18,4 +18,4 @@ snprintf *\( *[_a-zA-Z][_a-zA-Z0-9]* *, *[[:digit:]]+
 ^DISABLED_STILL_TOO_MANY_ERRORS	* +.*{$
 assert *\( *0 *\)
 [^_a-zA-Z0-9]this->[^*]
-	+inline
+^([	 ]|[^/].|/[^/])*[	 ]inline[ $/\]
