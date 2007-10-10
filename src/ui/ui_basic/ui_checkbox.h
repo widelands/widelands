@@ -43,7 +43,7 @@ struct Statebox : public Panel {
 
 	void set_enabled(bool enabled);
 
-	inline bool get_state() const {return m_state;}
+	bool get_state() const throw () {return m_state;}
 	void set_state(bool on);
 
    inline void set_id(int32_t n) {m_id=n;}

@@ -111,8 +111,8 @@ public:
 		 bool);
 
 private:
-	inline void set_subwin(Rect r);
-	inline void unset_subwin();
+	void set_subwin(Rect r);
+	void unset_subwin();
 };
 
 #endif

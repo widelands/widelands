@@ -75,7 +75,7 @@ struct Map::Pathfield {
 	uint16_t cycle;
 	uint8_t  backlink;   //  how we got here (Map_Object::WALK_*)
 
-	inline int32_t cost() {return real_cost + estim_cost;}
+	int32_t cost() const throw () {return real_cost + estim_cost;}
 };
 
 

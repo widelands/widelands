@@ -47,7 +47,7 @@ struct Radiogroup {
 		 const int32_t x, const int32_t y,
 		 const uint32_t picid, const char * const tooltip = 0);
 
-	inline int32_t get_state() const {return m_state;}
+	int32_t get_state() const throw () {return m_state;}
 	void set_state(int32_t state);
 
 private:

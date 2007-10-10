@@ -63,7 +63,7 @@ struct Event {
       void reference(EventReferencer* ref);
       void unreference(EventReferencer* ref);
 	typedef std::map<EventReferencer *, uint32_t> EventReferencerMap;
-	inline const EventReferencerMap & get_referencers() const throw ()
+	const EventReferencerMap & get_referencers() const throw ()
 	{return m_referencers;}
 
       inline State get_state() {return m_state;}

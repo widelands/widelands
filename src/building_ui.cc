@@ -1295,12 +1295,13 @@ private:
 	int32_t m_ware_index;
 };
 
-class ProductionSite_Window : public Building_Window {
-public:
+struct ProductionSite_Window : public Building_Window {
 	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry);
 	virtual ~ProductionSite_Window();
 
-	inline ProductionSite* get_productionsite() {return (ProductionSite*)get_building();}
+	ProductionSite * get_productionsite() {
+		return dynamic_cast<ProductionSite *>(get_building());
+	}
 
 	virtual void think();
 
@@ -1531,12 +1532,13 @@ MilitarySite UI IMPLEMENTATION
 ==============================================================================
 */
 
-class MilitarySite_Window : public Building_Window {
-public:
+struct MilitarySite_Window : public Building_Window {
 	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UI::Window** registry);
 	virtual ~MilitarySite_Window();
 
-	inline MilitarySite* get_militarysite() {return (MilitarySite*)get_building();}
+	MilitarySite * get_militarysite() {
+		return dynamic_cast<MilitarySite *>(get_building());
+	}
 
 	virtual void think();
 private:
@@ -1726,12 +1728,11 @@ UI::Window* MilitarySite::create_options_window(Interactive_Player* plr, UI::Win
 	TrainingSite_Options_Window Implementation
 ====================
 */
-class TrainingSite_Options_Window : public UI::Window {
-public:
+struct TrainingSite_Options_Window : public UI::Window {
 	TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps);
 	virtual ~TrainingSite_Options_Window();
 
-	inline TrainingSite* get_trainingsite() {return m_trainingsite;}
+	TrainingSite * get_trainingsite() throw () {return m_trainingsite;}
 
 	void think();
 private:
@@ -1948,7 +1949,9 @@ struct TrainingSite_Window : public ProductionSite_Window {
 	TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UI::Window** registry);
 	virtual ~TrainingSite_Window();
 
-	inline TrainingSite* get_trainingsite() {return (TrainingSite*)get_building();}
+	TrainingSite * get_trainingsite() {
+		return dynamic_cast<TrainingSite *>(get_building());
+	}
 
 	virtual void think();
 	void options_button_clicked ();

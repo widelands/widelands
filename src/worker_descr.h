@@ -69,7 +69,7 @@ public:
 	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
 	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
 	const std::string & descname() const throw () {return m_descname;}
-	inline std::string get_helptext() const {return m_helptext;}
+	std::string get_helptext() const {return m_helptext;}
 
 	uint32_t get_menu_pic() const throw () {return m_menu_pic;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}

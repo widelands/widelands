@@ -71,7 +71,7 @@ public:
 	void unset() {
       _fn = 0;
 	}
-	inline void call(T1 t1) {if (_fn) (_obj->*_fn)(t1);}
+	void call(T1 t1) {if (_fn) (_obj->*_fn)(t1);}
 };
 
 /**
