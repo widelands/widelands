@@ -222,8 +222,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
                        (m_null_triggers[m_buttons[b].trigger])));
 		} else m_event->set_button_trigger(b, 0);
 	}
-            end_modal(1);
-            return;
+	end_modal(1);
 }
 
 

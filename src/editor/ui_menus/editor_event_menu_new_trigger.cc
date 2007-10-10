@@ -109,13 +109,14 @@ bool Editor_Event_Menu_New_Trigger::handle_mouserelease(const Uint8, int32_t, in
  * a button has been clicked
  */
 void Editor_Event_Menu_New_Trigger::clicked_ok() {
-   // Create new trigger
-	Trigger * const trig = Trigger_Factory::make_trigger_with_option_dialog
-		(m_trigger_list->get_selected().id.c_str(), m_parent, 0);
-	if (not trig) return; //  None created, don't close. Let user choose other.
-	m_parent->egbase().map().get_mtm().register_new_trigger(trig);
-   end_modal(1);
-   return;
+	if
+		(Trigger * const trig =
+		 Trigger_Factory::make_trigger_with_option_dialog
+		 (m_trigger_list->get_selected().id.c_str(), m_parent, 0))
+	{
+		m_parent->egbase().map().get_mtm().register_new_trigger(trig);
+		end_modal(1);
+	}
 }
 
 /*

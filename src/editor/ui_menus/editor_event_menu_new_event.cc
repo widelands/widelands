@@ -110,13 +110,14 @@ bool Editor_Event_Menu_New_Event::handle_mouserelease(const Uint8, int32_t, int3
  * a button has been clicked
  */
 void Editor_Event_Menu_New_Event::clicked_ok() {
-   // Create new event
-	Event * const event = Event_Factory::make_event_with_option_dialog
-		(m_event_list->get_selected().id.c_str(), m_parent, 0);
-	if (not event) return; //  No event created, choose another, user.
-	m_parent->egbase().map().get_mem().register_new_event(event);
-   end_modal(1);
-   return;
+	if
+		(Event * const event =
+		 Event_Factory::make_event_with_option_dialog
+		 (m_event_list->get_selected().id.c_str(), m_parent, 0))
+	{
+		m_parent->egbase().map().get_mem().register_new_event(event);
+		end_modal(1);
+	}
 }
 
 /*
