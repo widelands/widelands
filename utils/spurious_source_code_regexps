@@ -7,7 +7,7 @@
 \{ +[^ /\\]
 ^([	 ]|[^/].|/[^/])*\}[^ ,;}\]
 \([ ]
-(catch|for|if|switch|while)\(
+(catch|for|if|switch|throw|while)\(
 [^_a-zA-Z0-9"](TRUE|FALSE)[^_a-zA-Z0-9"]
 \( *(const)* *void *\)
 (for|if|while) \((/[^/*]|[^/])*\) (/[^/*]|[^/])*[^){};\\]$
