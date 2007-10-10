@@ -80,33 +80,31 @@ void Widelands_Map_Bob_Data_Packet::ReadBob
 		// Make sure that the correct tribe is known and loaded
 		egbase->manually_load_tribe(owner.c_str());
 
-		Tribe_Descr* tribe = egbase->get_tribe(owner.c_str());
-		if (!tribe)
+		if (const Tribe_Descr * const tribe = egbase->get_tribe(owner.c_str())) {
+
+			if        (subtype == Bob::WORKER)  {
+				int32_t idx = tribe->get_worker_index(name.c_str());
+				if (idx != -1) {
+					bob = tribe->get_worker_descr(idx)->create_object();
+					bob->set_position(egbase, coords);
+					bob->init(egbase);
+				} else
+					throw wexception
+						("Map defines Bob %s, but tribe %s doesn't deliver!",
+						 name.c_str(), owner.c_str());
+			} else if (subtype == Bob::CRITTER) {
+				int32_t idx = tribe->get_bob(name.c_str());
+				if (idx != -1)
+					bob = egbase->create_bob(coords, idx, tribe);
+				else
+					throw wexception
+						("Map defines Bob %s, but tribe %s doesn't deliver!",
+						 name.c_str(), owner.c_str());
+			}
+		} else
 			throw wexception
-					("Map asks for Tribe %s, but world doesn't deliver!\n",
-					 owner.c_str());
-
-		if (subtype == Bob::WORKER) {
-			int32_t idx = tribe->get_worker_index(name.c_str());
-			if (idx == -1)
-				throw wexception
-						("Map defines Bob %s, but tribe %s doesn't deliver!\n",
-						 name.c_str(), owner.c_str());
-
-			Worker_Descr* descr = tribe->get_worker_descr(idx);
-
-			bob = descr->create_object();
-			bob->set_position(egbase, coords);
-			bob->init(egbase);
-		} else if (subtype == Bob::CRITTER) {
-			int32_t idx = tribe->get_bob(name.c_str());
-			if (idx == -1)
-				throw wexception
-						("Map defines Bob %s, but tribe %s doesn't deliver!\n",
-						 name.c_str(), owner.c_str());
-
-			bob = egbase->create_bob(coords, idx, tribe);
-		}
+				("Map asks for Tribe %s, but world doesn't deliver!",
+				 owner.c_str());
 	}
 
 	assert(bob);

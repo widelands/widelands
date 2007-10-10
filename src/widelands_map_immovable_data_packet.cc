@@ -77,14 +77,21 @@ throw (_wexception)
 				if (not skip) { //  We do not load player immovables in normal maps.
                // It is a tribe immovable
 					egbase->manually_load_tribe(owner);
-					Tribe_Descr* tribe=egbase->get_tribe(owner);
-               if (!tribe)
-                  throw wexception("Unknown tribe %s in map!\n", owner);
-               int32_t idx=tribe->get_immovable_index(name);
-               if (idx==-1)
-                  throw wexception("Unknown tribe-immovable %s in map, asked for tribe: %s!\n", name, owner);
-					ol->register_object
-						(egbase, reg, egbase->create_immovable(position, idx, tribe));
+					if (const Tribe_Descr * const tribe = egbase->get_tribe(owner))
+					{
+						int32_t idx = tribe->get_immovable_index(name);
+						if (idx != -1)
+							ol->register_object
+								(egbase,
+								 reg,
+								 egbase->create_immovable(position, idx, tribe));
+						else
+							throw wexception
+								("Unknown tribe-immovable %s in map, asked for tribe: "
+								 "%s!",
+								 name, owner);
+					} else
+						throw wexception("Unknown tribe %s in map!", owner);
 				}
 			} else {
             // World immovable
