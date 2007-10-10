@@ -94,15 +94,19 @@ struct DirAnimations {
 		 const uint32_t dir6 = 0);
 	~DirAnimations();
 
-	void parse(Map_Object_Descr* b, const char *directory, Profile *prof,
-	           const char *sectnametempl, Section *defaults = 0,
-	           const EncodeData *encdefaults = 0);
+	void parse
+		(Map_Object_Descr *,
+		 const char       * directory,
+		 Profile          *,
+		 const char       * sectnametempl,
+		 Section          * defaults    = 0,
+		 const EncodeData * encdefaults = 0);
 
 	uint32_t get_animation(const int32_t dir) const throw ()
-			{return m_animations[dir - 1];}
+	{return m_animations[dir - 1];}
 
 private:
-		uint32_t m_animations[6];
+	uint32_t m_animations[6];
 };
 
 extern AnimationManager g_anim;

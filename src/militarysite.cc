@@ -510,15 +510,18 @@ void MilitarySite::change_soldier_capacity(int32_t how)
 
 			while (m_capacity < m_soldiers.size() + m_soldier_requests.size()) {
 				if (m_soldier_requests.size()) {
-	       std::vector<Request*>::iterator it = m_soldier_requests.begin();
-	       for (; it != m_soldier_requests.end() && !(*it)->is_open(); ++it);
+					std::vector<Request*>::iterator it = m_soldier_requests.begin();
+					for
+						(;
+						 it != m_soldier_requests.end() && !(*it)->is_open();
+						 ++it);
 
-	       if (it == m_soldier_requests.end())
-		  (*--it)->cancel_transfer(0);
-	       else
-		  (*it)->get_economy()->remove_request(*it);
+					if (it == m_soldier_requests.end())
+						(*--it)->cancel_transfer(0);
+					else
+						(*it)->get_economy()->remove_request(*it);
 
-	       m_soldier_requests.erase(it, it+1);
+					m_soldier_requests.erase(it, it+1);
 				}
 				else if (m_soldiers.size()) {
                Soldier *s = m_soldiers[m_soldiers.size()-1];

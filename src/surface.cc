@@ -83,13 +83,13 @@ uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
 
 	switch (bytes_per_pixel) {
 	case 1:
-			return *pix; //  Maybe needed for save_png.
+		return *pix; //  Maybe needed for save_png.
 	case 2:
 		return *reinterpret_cast<const Uint16 *>(pix);
 	case 3: //Needed for save_png.
-			//fallthrough
+		//  fallthrough
 	case 4:
-			return *reinterpret_cast<const Uint32 *>(pix);
+		return *reinterpret_cast<const Uint32 *>(pix);
 	}
 	assert(false);
 

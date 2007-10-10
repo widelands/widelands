@@ -55,12 +55,12 @@ Sound_Handler g_sound_handler;
  * \sa Sound_Handler::init()
 */
 Sound_Handler::Sound_Handler():
-		m_nosound(false),
-		m_lock_audio_disabling(false),
-		m_disable_music(false),
-		m_disable_fx(false),
-		m_random_order(true),
-		m_current_songset("")
+m_nosound             (false),
+m_lock_audio_disabling(false),
+m_disable_music       (false),
+m_disable_fx          (false),
+m_random_order        (true),
+m_current_songset     ("")
 {}
 
 /** Housekeeping: unset hooks. Audio data will be freed automagically by the

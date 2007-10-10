@@ -47,7 +47,7 @@ UniqueWindow::UniqueWindow(Panel* parent, UniqueWindow::Registry* reg, int32_t w
 
 	if (m_registry)
 	{
-			delete m_registry->window;
+		delete m_registry->window;
 
 		m_registry->window = this;
 		if (m_registry->x >= 0) {

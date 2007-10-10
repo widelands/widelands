@@ -79,8 +79,8 @@ private:
 };
 
 struct Richtext_Block {
-		Richtext_Block();
-		Richtext_Block(const Richtext_Block &src);
+	Richtext_Block();
+	Richtext_Block(const Richtext_Block & src);
 
 	void set_images(const std::vector<std::string> & images) throw ()
 	{m_images = images;}
@@ -100,10 +100,10 @@ struct Richtext_Block {
 	const std::vector<Text_Block> & get_text_blocks() const throw ()
 	{return m_text_blocks;}
 private:
-		std::vector<std::string> m_images;
-		std::vector<Text_Block> m_text_blocks;
-		Align m_image_align;
-		Align m_text_align;
+	std::vector<std::string> m_images;
+	std::vector<Text_Block>  m_text_blocks;
+	Align                    m_image_align;
+	Align                    m_text_align;
 };
 
 struct Text_Parser {
@@ -114,7 +114,7 @@ struct Text_Parser {
 		 std::vector<Richtext_Block> & blocks,
 		 Varibale_Callback, void * const);
 private:
-		void parse_richtexttext_attributes(std::string format, Richtext_Block *element);
+	void parse_richtexttext_attributes(std::string format, Richtext_Block *);
 	bool parse_textblock
 		(std::string                                       & block,
 		 std::string                                       & block_format,

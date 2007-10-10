@@ -362,16 +362,16 @@ bool Scrollbar::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT:
-			m_pressed = get_area_for_point(x, y);
-			if (m_pressed != None) {
-				grab_mouse(true);
-				if (m_pressed != Knob) {
-					action(m_pressed);
-					m_time_nextact =
-						WLApplication::get()->get_time() + SCROLLBAR_AUTOREPEAT_DELAY;
-				}
-				else m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
+		m_pressed = get_area_for_point(x, y);
+		if (m_pressed != None) {
+			grab_mouse(true);
+			if (m_pressed != Knob) {
+				action(m_pressed);
+				m_time_nextact =
+					WLApplication::get()->get_time() + SCROLLBAR_AUTOREPEAT_DELAY;
 			}
+			else m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
+		}
 		result = true;
 		break;
 

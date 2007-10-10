@@ -122,10 +122,14 @@ m_label_autosave
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
     m_autosave                          .set_state(opt.autosave > 0);
 
-	char str[255];
-	snprintf (str, sizeof(str)/sizeof(str[0]),
-			  ngettext("Autosave game every %d minute", "Autosave game every %d minutes", DEFAULT_AUTOSAVE_INTERVAL), DEFAULT_AUTOSAVE_INTERVAL);
-	m_label_autosave.set_text(str);
+	char buffer[255];
+	snprintf
+		(buffer, sizeof(buffer),
+		 ngettext
+		 ("Autosave game every %d minute", "Autosave game every %d minutes",
+		  DEFAULT_AUTOSAVE_INTERVAL),
+		 DEFAULT_AUTOSAVE_INTERVAL);
+	m_label_autosave.set_text(buffer);
 
 
    // GRAPHIC_TODO: this shouldn't be here List all resolutions

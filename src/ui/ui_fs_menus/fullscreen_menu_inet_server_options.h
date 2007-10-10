@@ -28,13 +28,11 @@
 
 
 struct Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
-		Fullscreen_Menu_InetServerOptions ();
-		~Fullscreen_Menu_InetServerOptions ();
+	Fullscreen_Menu_InetServerOptions ();
+	~Fullscreen_Menu_InetServerOptions ();
 
-		const char* get_player_name()
-	{return playername.get_text();}
-		const char* get_server_name()
-	{return hostname.get_text();}
+	const char * get_player_name() {return playername.get_text();}
+	const char * get_server_name() {return hostname.get_text();}
 
 private:
 	UI::Textarea                                         title;

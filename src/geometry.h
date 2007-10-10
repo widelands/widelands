@@ -136,7 +136,7 @@ typedef Coordinate Y_Coordinate;
 struct Coords {
 	Coords() throw () {}
 	Coords(const X_Coordinate nx, const Y_Coordinate ny) throw ()
-			: x(nx), y(ny)
+		: x(nx), y(ny)
 	{}
 
 	/// Returns a special value indicating invalidity.
@@ -225,7 +225,7 @@ template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 
 	TCoords() throw () {}
 	TCoords(const Coords_type C, const TriangleIndex T = None) throw ()
-			: Coords_type(C), t(T)
+		: Coords_type(C), t(T)
 	{}
 
 	bool operator==(const TCoords other) const throw ()

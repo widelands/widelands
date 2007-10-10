@@ -39,8 +39,8 @@
 #define ITOFIX(i) ((i)<<16)
 #define FIXTOI(f) ((f)>>16)
 
-void get_horiz_linearcomb(int32_t u1, int32_t u2, int32_t v1, int32_t v2,
-			  float& lambda, float& mu);
+void get_horiz_linearcomb
+(int32_t u1, int32_t u2, int32_t v1, int32_t v2, float& lambda, float& mu);
 
 template<typename T> static void render_top_triangle
 (Surface & dst,

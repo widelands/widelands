@@ -39,7 +39,7 @@
  * Initialize the real file-system
  */
 RealFSImpl::RealFSImpl(const std::string Directory)
-		: m_directory(Directory)
+: m_directory(Directory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
 #ifdef __WIN32__

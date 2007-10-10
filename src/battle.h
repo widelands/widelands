@@ -36,8 +36,9 @@ struct Battle : public BaseImmovable {
 	virtual int32_t  get_size    () const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return false;}
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &,
-						const FCoords, const Point) {}
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
+	{}
 
 	void init (Editor_Game_Base*);
 	void init (Editor_Game_Base*, Soldier*, Soldier*);

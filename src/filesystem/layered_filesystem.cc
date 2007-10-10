@@ -133,8 +133,10 @@ const bool LayeredFileSystem::FileExists(const std::string path)
  */
 const bool LayeredFileSystem::IsDirectory(const std::string path)
 {
-	for (FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	for
+		(FileSystem_rit it = m_filesystems.rbegin();
+		 it != m_filesystems.rend();
+		 ++it)
 	{
 		if ((*it)->IsDirectory(path))
 			return true;

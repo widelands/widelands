@@ -114,9 +114,8 @@ public:
 
 protected:
 	/// Static function for png writing
-	static void m_png_write_function(png_structp png_ptr,
-					 png_bytep data,
-					 png_size_t length);
+	static void m_png_write_function
+		(png_structp png_ptr, png_bytep data, png_size_t length);
 
 	std::vector<Picture>::size_type find_free_picture();
 

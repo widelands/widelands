@@ -37,9 +37,10 @@ struct Interactive_Spectator::Internals {
 /**
  * Setup the replay UI for the given game.
  */
-Interactive_Spectator::Interactive_Spectator(Game* g) :
-		Interactive_Base(*g),
-		m(new Internals)
+Interactive_Spectator::Interactive_Spectator(Game* g)
+:
+Interactive_Base(*g),
+m(new Internals)
 {
 	// Setup all screen elements
 	fieldclicked.set(this, &Interactive_Spectator::field_action);

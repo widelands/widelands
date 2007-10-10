@@ -62,17 +62,17 @@ throw (_wexception)
 		const Uint8 nr_players = map.get_nrplayers();
 		const Map::Index max_index = map.max_index();
 	if (packet_version == 1) for (Map::Index i = 0; i < max_index; ++i) {
-			const Uint32 data = fr.Unsigned16();
-			for (Uint8 j = 0; j < nr_players; ++j) {
-				bool see = data & (1 << j);
-				if (Player * const player = egbase->get_player(j+1))
-					player->m_fields[i].vision = see ? 1 : 0;
-				else if (see)
-					log
-						("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: "
-						 "Player %u, which does not exist, sees field %u.\n",
-						 j + 1, i);
-			}
+		const Uint32 data = fr.Unsigned16();
+		for (Uint8 j = 0; j < nr_players; ++j) {
+			bool see = data & (1 << j);
+			if (Player * const player = egbase->get_player(j+1))
+				player->m_fields[i].vision = see ? 1 : 0;
+			else if (see)
+				log
+					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: "
+					 "Player %u, which does not exist, sees field %u.\n",
+					 j + 1, i);
+		}
 	} else if (packet_version == CURRENT_PACKET_VERSION)
 		for (Map::Index i = 0; i < max_index; ++i) {
 			const Uint32 data = fr.Unsigned32();

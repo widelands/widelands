@@ -21,25 +21,25 @@
 
 #include "helper.h"
 
-Journalfile_error::Journalfile_error(const std::string _filename) throw():
-		std::runtime_error("Problem with journal file."),
-		filename(_filename)
+Journalfile_error::Journalfile_error(const std::string _filename) throw ()
+: std::runtime_error("Problem with journal file."), filename(_filename)
 {
 	text="Problem with journal file "+_filename;
 }
 
 ///\todo Say _which_ magic number was found and which was expected
-BadMagic_error::BadMagic_error(const std::string _filename) throw():
-		Journalfile_error(_filename)
+BadMagic_error::BadMagic_error(const std::string _filename) throw ()
+: Journalfile_error(_filename)
 {
 	text="Journal file "+_filename+" starts with bad magic number";
 }
 
-BadRecord_error::BadRecord_error(const std::string _filename,
-                                 const uint8_t _code,
-                                 const uint8_t _expectedcode) throw():
-		Journalfile_error(_filename),
-		code(_code), expectedcode(_expectedcode)
+BadRecord_error::BadRecord_error
+(const std::string _filename,
+ const uint8_t     _code,
+ const uint8_t     _expectedcode)
+throw ()
+: Journalfile_error(_filename), code(_code), expectedcode(_expectedcode)
 {
 	text="Journal file "+_filename+" contains record with type "+
 	     toString(_code)+" instead of the expected type "+

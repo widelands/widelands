@@ -238,8 +238,8 @@ void Edit_Variable_Window::clicked_ok() {
 		break;
 
 	case MapVariable::MVT_STRING: {
-			static_cast<String_MapVariable &>(var).set_value(m_value.get_text());
-			m_te.set_string(1, m_value.get_text());
+		static_cast<String_MapVariable &>(var).set_value(m_value.get_text());
+		m_te.set_string(1, m_value.get_text());
 	}
       break;
 	}

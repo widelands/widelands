@@ -119,8 +119,7 @@ void Message_Box_Event_Message_Box::clicked(int32_t i) {
          delete this;
 		}
 	} else {
-      // One of the buttons has been pressed
-//      NoLog("Button %i has been pressed, nr of buttons: %i!\n", i, event->get_nr_buttons());
+		//  One of the buttons has been pressed
 		if (Trigger_Null * const t = m_trigger[i]) {
          t->set_trigger_manually(true);
          t->check_set_conditions(m_game); // forcefully update this trigger

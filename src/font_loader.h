@@ -36,14 +36,14 @@ class FileRead;
  * this represents a loaded font used by the FontHandler
  */
 struct Font_Loader {
-		Font_Loader() {};
-		~Font_Loader();
-		TTF_Font* open_font(const std::string& name, int32_t size);
-		TTF_Font* get_font(std::string name, int32_t size);
-		void clear_fonts();
+	Font_Loader() {};
+	~Font_Loader();
+	TTF_Font * open_font(const std::string & name, int32_t size);
+	TTF_Font * get_font(std::string name, int32_t size);
+	void clear_fonts();
 private:
-		std::map<std::string, TTF_Font*> m_font_table;
-      std::vector<FileRead*> m_freads;
+	std::map<std::string, TTF_Font *> m_font_table;
+	std::vector<FileRead *> m_freads;
 };
 
 #endif // __S__FONT_LOADER_H

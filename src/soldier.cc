@@ -182,12 +182,12 @@ Soldier * IdleSoldierSupply::launch_soldier
 
 	if (req)
 	{
-		if (req->check (
-				  m_soldier->get_level(atrHP),
-		m_soldier->get_level(atrAttack),
-		m_soldier->get_level(atrDefense),
-		m_soldier->get_level(atrEvade)
-							))
+		if
+			(req->check
+			 (m_soldier->get_level(atrHP),
+			  m_soldier->get_level(atrAttack),
+			  m_soldier->get_level(atrDefense),
+			  m_soldier->get_level(atrEvade)))
 		{
 			// Ensures that this soldier is used now
 			m_soldier->mark (false);
@@ -210,12 +210,12 @@ void IdleSoldierSupply::mark_as_used(Game *, int32_t ware, Requeriments * req) {
 
 	if (req)
 	{
-		if (req->check (
-				  m_soldier->get_level(atrHP),
-		m_soldier->get_level(atrAttack),
-		m_soldier->get_level(atrDefense),
-		m_soldier->get_level(atrEvade)
-							))
+		if
+			(req->check
+			 (m_soldier->get_level(atrHP),
+			  m_soldier->get_level(atrAttack),
+			  m_soldier->get_level(atrDefense),
+			  m_soldier->get_level(atrEvade)))
 		{
 			// Ensures that this soldier has a request now
 			m_soldier->mark (true);
@@ -247,15 +247,14 @@ int32_t IdleSoldierSupply::get_passing_requeriments
 	if (!req)
 		return 1;
 
-	if (req->check (
-			m_soldier->get_level(atrHP),
-	m_soldier->get_level(atrAttack),
-	m_soldier->get_level(atrDefense),
-	m_soldier->get_level(atrEvade)
-						))
-		return 1;
-	else
-		return 0;
+	return
+		req->check
+		(m_soldier->get_level(atrHP),
+		 m_soldier->get_level(atrAttack),
+		 m_soldier->get_level(atrDefense),
+		 m_soldier->get_level(atrEvade))
+		?
+		1 : 0;
 }
 
 
@@ -591,11 +590,10 @@ void Soldier::draw
 		const float fraction = static_cast<float>(m_hp_current) / m_hp_max;
 		//FIXME:
 		//Draw bar in playercolor, should be removed when soldier is correctly painted
-		RGBColor color(
-				get_owner()->get_playercolor()->r(),
-				get_owner()->get_playercolor()->g(),
-				get_owner()->get_playercolor()->b()
-		);
+		RGBColor color
+			(get_owner()->get_playercolor()->r(),
+			 get_owner()->get_playercolor()->g(),
+			 get_owner()->get_playercolor()->b());
 		/*if (fraction <= 0.15)
 			color = RGBColor(255, 0, 0);
 		else if (fraction <= 0.5)

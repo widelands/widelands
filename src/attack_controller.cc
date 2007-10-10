@@ -376,8 +376,13 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int32_t so
 	FCoords prevCoords = map->get_fcoords(flag->get_position());
 	FCoords newCoords = map->get_fcoords(flag->get_position());
 
-	int32_t walkDir[] = {Map_Object::WALK_NE, Map_Object::WALK_E, Map_Object::WALK_SE,
-					Map_Object::WALK_SW, Map_Object::WALK_W};
+	int32_t walkDir[] = {
+		Map_Object::WALK_NE,
+		Map_Object::WALK_E,
+		Map_Object::WALK_SE,
+		Map_Object::WALK_SW,
+		Map_Object::WALK_W
+	};
 	int32_t walkDirIndex = soldierNr % 5;
 
 	CheckStepDefault step(battleSoldier->soldier->get_movecaps());
@@ -498,8 +503,8 @@ void AttackController::Loader::load_pointers()
 
 	for (uint32_t j = 0; j < militarySites.size(); ++j) {
 		MilitarySite* ms =
-				dynamic_cast<MilitarySite*>
-				(mol().get_object_by_file_index(militarySites[j]));
+			dynamic_cast<MilitarySite *>
+			(mol().get_object_by_file_index(militarySites[j]));
 
 		assert(ms);
 		ctrl->involvedMilitarySites.insert(ms);

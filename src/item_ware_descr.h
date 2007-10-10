@@ -46,36 +46,35 @@
  * look differently.
 */
 struct Item_Ware_Descr : public Map_Object_Descr {
-		Item_Ware_Descr(const std::string & ware_name):
-				m_name       (ware_name),
-				m_icon       (0)
-				{}
+	Item_Ware_Descr(const std::string & ware_name)
+		: m_name(ware_name), m_icon(0)
+	{}
 
-		virtual ~Item_Ware_Descr() {};
+	virtual ~Item_Ware_Descr() {};
 
-		/// \return index to ware's icon inside picture stack
-		const uint32_t get_icon() const throw() {return m_icon;}
+	/// \return index to ware's icon inside picture stack
+	const uint32_t get_icon() const throw() {return m_icon;}
 
-		/// \return ware's unique name
-		const std::string & name() const throw() {return m_name;}
+	/// \return ware's unique name
+	const std::string & name() const throw() {return m_name;}
 
-		/// \return ware's localized short name
-		const std::string & descname() const throw() {return m_descname;}
+	/// \return ware's localized short name
+	const std::string & descname() const throw() {return m_descname;}
 
-		/// \return ware's localized descriptive text
-		const char * get_helptext() const throw() {return m_helptext.c_str();}
+	/// \return ware's localized descriptive text
+	const char * get_helptext() const throw() {return m_helptext.c_str();}
 
-		virtual void load_graphics();
-		static Item_Ware_Descr* create_from_dir(const char*, const char*);
+	virtual void load_graphics();
+	static Item_Ware_Descr* create_from_dir(const char*, const char*);
 
 private:
-		void parse(const char *directory, Profile *prof);
+	void parse(const char *directory, Profile *prof);
 
-		std::string m_name;       //< Ware's unique name into tribe
-		std::string m_descname;   //< Short localized name
-		std::string m_helptext;   //< Long descriptive text
-		std::string m_icon_fname; //< Filename of ware's main picture
-		uint32_t        m_icon;       //< Index of ware's picture in picture stack
+	std::string m_name;       //< Ware's unique name into tribe
+	std::string m_descname;   //< Short localized name
+	std::string m_helptext;   //< Long descriptive text
+	std::string m_icon_fname; //< Filename of ware's main picture
+	uint32_t    m_icon;       //< Index of ware's picture in picture stack
 };
 
 

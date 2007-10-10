@@ -54,8 +54,9 @@ ProgressWindow::~ProgressWindow() {
 		(*it)->stop();
 }
 
-void ProgressWindow::draw_background(
-		RenderTarget & rt, const uint32_t xres, const uint32_t yres) {
+void ProgressWindow::draw_background
+	(RenderTarget & rt, const uint32_t xres, const uint32_t yres)
+{
 
 	m_label_center.x = xres / 2;
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
@@ -70,9 +71,9 @@ void ProgressWindow::draw_background(
 	}
 
 	const uint32_t pic_background =
-		g_gr->get_resized_picture(
-			g_gr->get_picture(PicMod_Menu, m_background.c_str()),
-								  xres, yres, Graphic::ResizeMode_Loose);
+		g_gr->get_resized_picture
+		(g_gr->get_picture(PicMod_Menu, m_background.c_str()),
+		 xres, yres, Graphic::ResizeMode_Loose);
 
 	if (pic_background > 0) {
 		uint32_t w = 0;
@@ -158,8 +159,8 @@ void ProgressWindow::stepf(const std::string & format, ...) {
 }
 
 /// Register additional visualization (tips/hints, animation, etc)
-void ProgressWindow::add_visualization(
-		IProgressVisualization * instance) {
+void ProgressWindow::add_visualization(IProgressVisualization * const instance)
+{
 	// just add to collection
 	m_visualizations.push_back(instance);
 }

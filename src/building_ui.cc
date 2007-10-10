@@ -616,7 +616,7 @@ it.
 */
 UI::Panel* Building_Window::create_capsbuttons(UI::Panel* parent)
 {
-		delete m_capsbuttons;
+	delete m_capsbuttons;
 
 	m_capsbuttons = new UI::Panel(parent, 0, 0, Width, 34);
 	setup_capsbuttons();
@@ -883,8 +883,11 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
-	m_progress = new UI::Progress_Bar(box, 0, 0, UI::Progress_Bar::DefaultWidth, UI::Progress_Bar::DefaultHeight,
-							UI::Progress_Bar::Horizontal);
+	m_progress =
+		new UI::Progress_Bar
+		(box,
+		 0, 0, UI::Progress_Bar::DefaultWidth, UI::Progress_Bar::DefaultHeight,
+		 UI::Progress_Bar::Horizontal);
 	m_progress->set_total(1 << 16);
 	box->add(m_progress, UI::Box::AlignCenter);
 
@@ -893,8 +896,9 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); i++)
 	{
-		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
-					cs->get_waresqueue(i), parent->get_game());
+		WaresQueueDisplay* wqd =
+			new WaresQueueDisplay
+			(box, 0, 0, get_w(), cs->get_waresqueue(i), parent->get_game());
 
 		box->add(wqd, UI::Box::AlignLeft);
 	}
@@ -1244,15 +1248,17 @@ void ProductionSite_Window_ListWorkerWindow::update()
 		{
 			// Fill upgrade status
 			char buffer[7];
-			sprintf(buffer, "%i/%i", worker.get_current_experience(),
-							worker.get_needed_experience());
+			snprintf
+				(buffer, sizeof(buffer),
+				 "%i/%i",
+				 worker.get_current_experience(), worker.get_needed_experience());
 			m_experience->set_text(buffer);
 
 			// Get the descriptive name of the ongoing upgrade
-			uint32_t index = worker.get_tribe()->get_safe_worker_index(
-							worker.get_becomes());
-			const Worker_Descr *descr = worker.get_tribe()->get_worker_descr(
-														index);
+			uint32_t index =
+				worker.get_tribe()->get_safe_worker_index(worker.get_becomes());
+			const Worker_Descr *descr =
+				worker.get_tribe()->get_worker_descr(index);
 			m_becomes->set_text(descr->descname());
 
 		} else {
@@ -1391,9 +1397,11 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 {
 	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
 	UI::Box* hbox = new UI::Box (box, 0, 0, UI::Box::Horizontal);
-	WaresQueueDisplay* wqd = new WaresQueueDisplay(hbox, 0, 0,
-												   get_w() - priority_buttons_width,
-												   wq, m_parent->get_game());
+	WaresQueueDisplay* wqd =
+		new WaresQueueDisplay
+		(hbox, 0, 0,
+		 get_w() - priority_buttons_width,
+		 wq, m_parent->get_game());
 
 	hbox->add(wqd, UI::Box::AlignTop);
 
@@ -1404,28 +1412,31 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 		UI::Box* vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
 		// Add priority buttons
 		vbox->add
-			(create_priority_button (vbox, helper, HIGH_PRIORITY, 0, 0,
-									 priority_buttons_width,
-									 priority_buttons_width,
-									 pic_priority_high,
-									 pic_priority_high_on,
-									 _("Highest priority")),
+			(create_priority_button
+			 (vbox, helper, HIGH_PRIORITY, 0, 0,
+			  priority_buttons_width,
+			  priority_buttons_width,
+			  pic_priority_high,
+			  pic_priority_high_on,
+			  _("Highest priority")),
 			 UI::Box::AlignTop);
 		vbox->add
-			(create_priority_button (vbox, helper, DEFAULT_PRIORITY, 0, 0,
-									 priority_buttons_width,
-									 priority_buttons_width,
-									 pic_priority_normal,
-									 pic_priority_normal_on,
-									 _("Normal priority")),
+			(create_priority_button
+			 (vbox, helper, DEFAULT_PRIORITY, 0, 0,
+			  priority_buttons_width,
+			  priority_buttons_width,
+			  pic_priority_normal,
+			  pic_priority_normal_on,
+			  _("Normal priority")),
 			 UI::Box::AlignTop);
 		vbox->add
-			(create_priority_button (vbox, helper, LOW_PRIORITY, 0, 0,
-									 priority_buttons_width,
-									 priority_buttons_width,
-									 pic_priority_low,
-									 pic_priority_low_on,
-									 _("Lowest priority")),
+			(create_priority_button
+			 (vbox, helper, LOW_PRIORITY, 0, 0,
+			  priority_buttons_width,
+			  priority_buttons_width,
+			  pic_priority_low,
+			  pic_priority_low_on,
+			  _("Lowest priority")),
 			 UI::Box::AlignTop);
 
 		hbox->add(vbox, UI::Box::AlignCenter);
@@ -1874,8 +1885,9 @@ TrainingSite_Options_Window::~TrainingSite_Options_Window()
 void TrainingSite_Options_Window::act_change_priority (int32_t atr, int32_t val) {
 
 	 if ((atr == atrHP) || (atr == atrAttack) || (atr == atrDefense) || (atr == atrEvade))
-		  if (m_trainingsite)
-				m_parent->get_game()->send_player_change_training_options((Building*)m_trainingsite, atr, val);
+		 if (m_trainingsite)
+			 m_parent->get_game()->send_player_change_training_options
+			 (m_trainingsite, atr, val);
 }
 
 void TrainingSite_Options_Window::think()

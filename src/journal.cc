@@ -199,17 +199,16 @@ void Journal::ensure_code(uint8_t code)
 /**
  * Standard ctor
  */
-Journal::Journal():
-		m_recordname(""), m_playbackname(""),
-		m_record(false), m_playback(false)
+Journal::Journal()
+:
+m_recordname(""), m_playbackname(""),
+m_record(false),  m_playback(false)
 {
-	m_recordstream.exceptions(std::ifstream::eofbit|
-	                          std::ifstream::failbit|
-	                          std::ifstream::badbit);
+	m_recordstream.exceptions
+		(std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
 
-	m_playbackstream.exceptions(std::ifstream::eofbit|
-	                            std::ifstream::failbit|
-	                            std::ifstream::badbit);
+	m_playbackstream.exceptions
+		(std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
 }
 
 /**

@@ -172,8 +172,9 @@ Critter_Bob_Descr::get_program
 Get a program from the workers description.
 ===============
 */
-const Critter_BobProgram* Critter_Bob_Descr::get_program(std::string programname)
-		const
+const Critter_BobProgram* Critter_Bob_Descr::get_program
+(std::string programname)
+const
 {
 	const ProgramMap::const_iterator it = m_programs.find(programname);
 	if (it == m_programs.end())
@@ -223,7 +224,7 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 		}
 		catch (std::exception& e)
 		{
-				delete prog;
+			delete prog;
 
 			throw wexception("Parse error in program %s: %s", string, e.what());
 		}

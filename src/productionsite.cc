@@ -570,28 +570,28 @@ void ProductionSite::program_act(Game* g)
 	}
 	switch (action->type) {
 	case ProductionAction::actSleep:
-			molog("  Sleep(%i)\n", action->iparam1);
+		molog("  Sleep(%i)\n", action->iparam1);
 
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, action->iparam1);
-			return;
+		program_step();
+		m_program_timer = true;
+		m_program_time = schedule_act(g, action->iparam1);
+		return;
 
 	case ProductionAction::actAnimate:
-			molog("  Animate(%i, %i)\n", action->iparam1, action->iparam2);
+		molog("  Animate(%i, %i)\n", action->iparam1, action->iparam2);
 
-			start_animation(g, action->iparam1);
+		start_animation(g, action->iparam1);
 
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, action->iparam2);
-			return;
+		program_step();
+		m_program_timer = true;
+		m_program_time  = schedule_act(g, action->iparam2);
+		return;
 
 	case ProductionAction::actWorker:
-			molog("  Worker(%s)\n", action->sparam1.c_str());
+		molog("  Worker(%s)\n", action->sparam1.c_str());
 
-			m_workers[0]->update_task_buildingwork(g);  // Always main worker is doing stuff
-			return;
+		m_workers[0]->update_task_buildingwork(g);  // Always main worker is doing stuff
+		return;
 
 	case ProductionAction::actConsume: {
 		bool consumed = false;
@@ -602,45 +602,37 @@ void ProductionSite::program_act(Game* g)
 			 jt != wares_end;
 			 ++jt)
 		{
-				molog("  Consuming(%s)\n", jt->c_str());
-				const std::vector<Input> & inputs = *descr().get_inputs();
-				const std::vector<Input>::size_type inputs_size =
-					inputs.size();
-				for
-					(std::vector<std::string>::size_type i = 0;
-						i < inputs_size;
-						++i)
-				{
-					if (inputs[i].ware_descr().name() == *jt) {
-						WaresQueue* wq = m_input_queues[i];
-						if
-							(static_cast<int32_t>(wq->get_filled())
-								>=
-								action->iparam1)
-						{
-							// Okay
-							wq->set_filled(wq->get_filled()-action->iparam1);
-									wq->update();
-							consumed = true;
-							break;
-						}
+			molog("  Consuming(%s)\n", jt->c_str());
+			const std::vector<Input> & inputs = *descr().get_inputs();
+			const std::vector<Input>::size_type inputs_size = inputs.size();
+			for (std::vector<std::string>::size_type i = 0; i < inputs_size; ++i)
+			{
+				if (inputs[i].ware_descr().name() == *jt) {
+					WaresQueue* wq = m_input_queues[i];
+					if (static_cast<int32_t>(wq->get_filled()) >= action->iparam1) {
+						// Okay
+						wq->set_filled(wq->get_filled()-action->iparam1);
+						wq->update();
+						consumed = true;
+						break;
 					}
 				}
-				if (consumed)
-					break;
 			}
-			if (not consumed) {
-				molog("   Consuming failed, program restart\n");
-				program_end(g, false);
-				return;
-			}
-			molog("  Consume done!\n");
-
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
+			if (consumed)
+				break;
+		}
+		if (not consumed) {
+			molog("   Consuming failed, program restart\n");
+			program_end(g, false);
 			return;
 		}
+		molog("  Consume done!\n");
+
+		program_step();
+		m_program_timer = true;
+		m_program_time  = schedule_act(g, 10);
+		return;
+	}
 
 	case ProductionAction::actCheck: {
 		bool found = false;
@@ -692,28 +684,82 @@ void ProductionSite::program_act(Game* g)
 	}
 
 	case ProductionAction::actProduce: {
-			molog("  Produce(%s)\n", action->sparam1.c_str());
+		molog("  Produce(%s)\n", action->sparam1.c_str());
 
-			m_workers[0]->update_task_buildingwork(g);
-			return;
+		m_workers[0]->update_task_buildingwork(g);
+		return;
 	}
 
 	case ProductionAction::actMine: {
-			Map & map = *g->get_map();
-			uint8_t res;
+		Map & map = *g->get_map();
+		uint8_t res;
 
-			molog("  Mine '%s'", action->sparam1.c_str());
+		molog("  Mine '%s'", action->sparam1.c_str());
 
-			res = map.get_world()->get_resource(action->sparam1.c_str());
-			if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!
-				throw wexception("ProductionAction::actMine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
-					" with world!!\n",  action->sparam1.c_str());
+		res = map.get_world()->get_resource(action->sparam1.c_str());
+		if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!
+			throw wexception
+				("ProductionAction::actMine: Should mine resource %s, which "
+				 "doesn't exist in world. Tribe is not compatible with world!!",
+				 action->sparam1.c_str());
 
-			// Select one of the fields randomly
-			uint32_t totalres = 0;
-			uint32_t totalchance = 0;
-			uint32_t totalstart = 0;
-			int32_t pick;
+		// Select one of the fields randomly
+		uint32_t totalres    = 0;
+		uint32_t totalchance = 0;
+		uint32_t totalstart  = 0;
+		int32_t pick;
+
+		{
+			MapRegion<Area<FCoords> > mr
+				(map,
+				 Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
+			do {
+				uint8_t  fres   = mr.location().field->get_resources();
+				uint32_t amount = mr.location().field->get_resources_amount();
+				uint32_t start_amount =
+					mr.location().field->get_starting_res_amount();
+
+				if (fres != res) {
+					amount       = 0;
+					start_amount = 0;
+				}
+
+				totalres    += amount;
+				totalstart  += start_amount;
+				totalchance += 8 * amount;
+
+				// Add penalty for fields that are running out
+				if (amount == 0)
+					// we already know it's completely empty, so punish is less
+					totalchance += 1;
+				else if (amount <= 2)
+					totalchance += 6;
+				else if (amount <= 4)
+					totalchance += 4;
+				else if (amount <= 6)
+					totalchance += 2;
+			} while (mr.advance(map));
+		}
+
+		// how much is digged
+		int32_t digged_percentage=100;
+		if (totalstart) digged_percentage = 100 - totalres * 100 / totalstart;
+		if (not totalres) digged_percentage = 100;
+
+		molog
+			("  Mine has already digged %i percent (%i/%i)!\n",
+			 digged_percentage, totalres, totalstart);
+
+		if (digged_percentage < action->iparam2) {
+			// Mine can produce normally
+			if (totalres == 0) {
+				molog("  Run out of resources\n");
+				program_end(g, false);
+				return;
+			}
+
+			// Second pass through fields
+			pick = g->logic_rand() % totalchance;
 
 			{
 				MapRegion<Area<FCoords> > mr
@@ -721,254 +767,199 @@ void ProductionSite::program_act(Game* g)
 					 Area<FCoords>
 					 (map.get_fcoords(get_position()), action->iparam1));
 				do {
-					uint8_t fres        = mr.location().field->get_resources();
-					uint32_t amount       = mr.location().field->get_resources_amount();
-					uint32_t start_amount =
-						mr.location().field->get_starting_res_amount();
+					uint8_t  fres   = mr.location().field->get_resources();
+					uint32_t amount = mr.location().field->get_resources_amount();
 
-					// In the future, we might want to support amount = 0 for
-					// fields that can produce an infinite amount of resources.
-					// Rather -1 or something similar. not 0
-					if (fres != res) {
+					if (fres != res)
 						amount = 0;
-						start_amount=0;
+
+					pick -= 8*amount;
+					if (pick < 0) {
+						assert(amount > 0);
+
+						--amount;
+
+						mr.location().field->set_resources(res, amount);
+						break;
 					}
-
-					totalres += amount;
-					totalstart += start_amount;
-					totalchance += 8 * amount;
-
-					// Add penalty for fields that are running out
-					if (amount == 0)
-						// we already know it's completely empty, so punish is less
-						totalchance += 1;
-					else if (amount <= 2)
-						totalchance += 6;
-					else if (amount <= 4)
-						totalchance += 4;
-					else if (amount <= 6)
-						totalchance += 2;
 				} while (mr.advance(map));
 			}
 
-			// how much is digged
-			int32_t digged_percentage=100;
-			if (totalstart) digged_percentage = 100 - totalres * 100 / totalstart;
-			if (not totalres) digged_percentage = 100;
-
-			molog("  Mine has already digged %i percent (%i/%i)!\n", digged_percentage, totalres, totalstart);
-
-			if (digged_percentage<action->iparam2) {
-				// Mine can produce normally
-				if (totalres == 0) {
-					molog("  Run out of resources\n");
-					program_end(g, false);
-					return;
-				}
-
-				// Second pass through fields
-				pick = g->logic_rand() % totalchance;
-
-				{
-					MapRegion<Area<FCoords> > mr
-						(map,
-						 Area<FCoords>
-						 (map.get_fcoords(get_position()), action->iparam1));
-					do {
-						uint8_t fres  = mr.location().field->get_resources();
-						uint32_t amount = mr.location().field->get_resources_amount();
-
-						if (fres != res)
-							amount = 0;
-
-						pick -= 8*amount;
-						if (pick < 0) {
-							assert(amount > 0);
-
-							--amount;
-
-							mr.location().field->set_resources(res, amount);
-							break;
-						}
-					} while (mr.advance(map));
-				}
-
-				if (pick >= 0) {
-					molog("  Not successful this time\n");
-					program_end(g, false);
-					return;
-				}
-
-				molog("  Mined one item\n");
-			} else {
-				// Mine has reached it's limits, still try to produce something
-				// but independant of sourrunding resources. Do not decrease resources further
-				assert(action->iparam3 >= 0);
-				if
-					(g->logic_rand() % 100
-					 >=
-					 static_cast<uint32_t>(action->iparam3))
-				{
-					// Not successfull
-					molog("  Not successful this time in fallback programm\n");
-					program_end(g, false);
-					return;
-				}
+			if (pick >= 0) {
+				molog("  Not successful this time\n");
+				program_end(g, false);
+				return;
 			}
 
-			// Done successfull
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
-			return;
+			molog("  Mined one item\n");
+		} else {
+			// Mine has reached it's limits, still try to produce something
+			// but independant of sourrunding resources. Do not decrease resources further
+			assert(action->iparam3 >= 0);
+			if
+				(g->logic_rand() % 100
+				 >=
+				 static_cast<uint32_t>(action->iparam3))
+			{
+				// Not successfull
+				molog("  Not successful this time in fallback programm\n");
+				program_end(g, false);
+				return;
+			}
+		}
+
+		// Done successfull
+		program_step();
+		m_program_timer = true;
+		m_program_time  = schedule_act(g, 10);
+		return;
 	}
 
 	case ProductionAction::actCall:
-			molog("  Call %s\n", action->sparam1.c_str());
+		molog("  Call %s\n", action->sparam1.c_str());
 
-			program_step();
-			program_start(g, action->sparam1);
-			return;
+		program_step();
+		program_start(g, action->sparam1);
+		return;
 
 	case ProductionAction::actSet:
-			molog("  Set %08X, unset %08X\n", action->iparam1, action->iparam2);
+		molog("  Set %08X, unset %08X\n", action->iparam1, action->iparam2);
 
-			state->flags = (state->flags | action->iparam1) & ~action->iparam2;
+		state->flags = (state->flags | action->iparam1) & ~action->iparam2;
 
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
-			return;
+		program_step();
+		m_program_timer = true;
+		m_program_time = schedule_act(g, 10);
+		return;
 
 	case ProductionAction::actCheckSoldier: {
-			const std::vector<Soldier *> & soldiers = get_soldiers();
-			const std::vector<Soldier *>::const_iterator soldiers_end =
-				soldiers.end();
+		const std::vector<Soldier *> & soldiers = get_soldiers();
+		const std::vector<Soldier *>::const_iterator soldiers_end =
+			soldiers.end();
 
-			molog ("  Checking soldier (%s) level %d)\n",
-				action->sparam1.c_str(), action->iparam1);
+			molog
+			("  Checking soldier (%s) level %d)\n",
+			 action->sparam1.c_str(), action->iparam1);
 
-			for
-				(std::vector<Soldier *>::const_iterator it = soldiers.begin();
-					;
-					++it)
-			{
-				if (it == soldiers_end) {
-					molog("   Checking failed, program restart\n");
-					program_end(g, false);
-					return;
-				}
-				if (action->sparam1 == "hp") {
-					if
-						((*it)->get_hp_level()
-							==
-							static_cast<uint32_t>(action->iparam1))
-						break;
-				} else if (action->sparam1 == "attack") {
-					if
-						((*it)->get_attack_level()
-							==
-							static_cast<uint32_t>(action->iparam1))
-						break;
-				} else if (action->sparam1 == "defense") {
-					if
-						((*it)->get_defense_level()
-							==
-							static_cast<uint32_t>(action->iparam1))
-						break;
-				} else if (action->sparam1 == "evade") {
-					if
-						((*it)->get_evade_level()
-							==
-							static_cast<uint32_t>(action->iparam1))
-						break;
-				}
+		for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it)
+		{
+			if (it == soldiers_end) {
+				molog("   Checking failed, program restart\n");
+				program_end(g, false);
+				return;
 			}
-			molog("    okay\n"); // okay, do nothing
-
-			molog("  Check done!\n");
-
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
-			return;
+			if (action->sparam1 == "hp") {
+				if
+					((*it)->get_hp_level()
+					 ==
+					 static_cast<uint32_t>(action->iparam1))
+					break;
+			} else if (action->sparam1 == "attack") {
+				if
+					((*it)->get_attack_level()
+					 ==
+					 static_cast<uint32_t>(action->iparam1))
+					break;
+			} else if (action->sparam1 == "defense") {
+				if
+					((*it)->get_defense_level()
+					 ==
+					 static_cast<uint32_t>(action->iparam1))
+					break;
+			} else if (action->sparam1 == "evade") {
+				if
+					((*it)->get_evade_level()
+					 ==
+					 static_cast<uint32_t>(action->iparam1))
+					break;
+			}
 		}
+		molog("    okay\n"); // okay, do nothing
+
+		molog("  Check done!\n");
+
+		program_step();
+		m_program_timer = true;
+		m_program_time  = schedule_act(g, 10);
+		return;
+	}
 
 	case ProductionAction::actTrain: {
-			const std::vector<Soldier *> & soldiers = get_soldiers();
-			const std::vector<Soldier *>::const_iterator soldiers_end =
-				soldiers.end();
-			std::vector<Soldier *>::const_iterator it = soldiers.begin();
+		const std::vector<Soldier *> & soldiers = get_soldiers();
+		const std::vector<Soldier *>::const_iterator soldiers_end =
+			soldiers.end();
+		std::vector<Soldier *>::const_iterator it = soldiers.begin();
 
-			molog ("  Training soldier's %s (%d to %d)",
-				action->sparam1.c_str(), action->iparam1, action->iparam2);
+		molog
+			("  Training soldier's %s (%d to %d)",
+			 action->sparam1.c_str(), action->iparam1, action->iparam2);
 
-			for (;; ++it) {
-				if (it == soldiers_end) {
-					molog("   Training failed!!, program restart\n");
-					program_end(g, false);
-					return;
-				}
-				if (action->sparam1 == "hp") {
-					if
-						((*it)->get_hp_level()
-							==
-							static_cast<uint32_t>(action->iparam1))
-						break;
-				} else if (action->sparam1 == "attack") {
-					if
-						((*it)->get_attack_level()
-							==
-							static_cast<uint32_t>(action->iparam1))
-						break;
-				} else if (action->sparam1 == "defense") {
-					if
-						((*it)->get_defense_level()
-							==
-							static_cast<uint32_t>(action->iparam1))
-						break;
-				} else if (action->sparam1 == "evade") {
-					if
-						((*it)->get_evade_level()
-							==
-							static_cast<uint32_t>(action->iparam1))
-						break;
-				}
+		for (;; ++it) {
+			if (it == soldiers_end) {
+				molog("   Training failed!!, program restart\n");
+				program_end(g, false);
+				return;
 			}
-			molog("    okay\n"); // okay, do nothing
-
-			try {
-				if (action->sparam1 == "hp")
-					(*it)->set_hp_level (action->iparam2);
-
-				else if (action->sparam1 == "attack")
-					(*it)->set_attack_level (action->iparam2);
-
-				else if (action->sparam1 == "defense")
-					(*it)->set_defense_level (action->iparam2);
-
-				else if (action->sparam1 == "evade")
-					(*it)->set_evade_level (action->iparam2);
-
-			} catch (...) {
-				throw wexception ("Fail training soldier!!\n");
+			if (action->sparam1 == "hp") {
+				if
+					((*it)->get_hp_level()
+					 ==
+					 static_cast<uint32_t>(action->iparam1))
+					break;
+			} else if (action->sparam1 == "attack") {
+				if
+					((*it)->get_attack_level()
+					 ==
+					 static_cast<uint32_t>(action->iparam1))
+					break;
+			} else if (action->sparam1 == "defense") {
+				if
+					((*it)->get_defense_level()
+					 ==
+					 static_cast<uint32_t>(action->iparam1))
+					break;
+			} else if (action->sparam1 == "evade") {
+				if
+					((*it)->get_evade_level()
+					 ==
+					 static_cast<uint32_t>(action->iparam1))
+					break;
 			}
-			molog("  Training done!\n");
+		}
+		molog("    okay\n"); // okay, do nothing
 
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
-			return;
+		try {
+			if      (action->sparam1 == "hp")
+				(*it)->set_hp_level (action->iparam2);
+
+			else if (action->sparam1 == "attack")
+				(*it)->set_attack_level (action->iparam2);
+
+			else if (action->sparam1 == "defense")
+				(*it)->set_defense_level (action->iparam2);
+
+			else if (action->sparam1 == "evade")
+				(*it)->set_evade_level (action->iparam2);
+
+		} catch (...) {
+			throw wexception ("Fail training soldier!!");
+		}
+		molog("  Training done!\n");
+
+		program_step();
+		m_program_timer = true;
+		m_program_time = schedule_act(g, 10);
+		return;
 	}
 
 	case ProductionAction::actPlayFX: {
-			g_sound_handler.play_fx(action->sparam1, m_position, action->iparam1);
+		g_sound_handler.play_fx(action->sparam1, m_position, action->iparam1);
 
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
-			return;
-		}
+		program_step();
+		m_program_timer = true;
+		m_program_time = schedule_act(g, 10);
+		return;
+	}
 	}
 }
 
@@ -1072,8 +1063,8 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 			{
 				int32_t wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
 
-				WareInstance* item = new WareInstance(
-						wareid, get_owner()->tribe().get_ware_descr(wareid));
+				WareInstance* item = new WareInstance
+					(wareid, get_owner()->tribe().get_ware_descr(wareid));
 				item->init(g);
 
 				// For statistics, inform the player that a ware was produced

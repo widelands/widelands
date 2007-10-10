@@ -500,12 +500,12 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		// Prepare the players (i.e. place HQs)
 		const Player_Number nr_players = map().get_nrplayers();
 		iterate_players_existing(p, nr_players, *this, plr) {
-				step_description += ".";
-				loader_ui.step(step_description);
+			step_description += ".";
+			loader_ui.step(step_description);
 			plr->init(true);
 
 			if (plr->get_type() == Player::Local)
-					get_ipl()->move_view_to(map().get_starting_pos(p));
+				get_ipl()->move_view_to(map().get_starting_pos(p));
 		}
 
 		// Prepare the map, set default textures

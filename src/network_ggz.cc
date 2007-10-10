@@ -145,22 +145,22 @@ void NetGGZ::data()
 
 	switch (op) {
 	case op_greeting:
-			ggz_read_string_alloc(fd, &greeter);
-			ggz_read_int(fd, &greeterversion);
-			log("GGZ ## server is: '%s' '%i'\n", greeter, greeterversion);
-			ggz_free(greeter);
+		ggz_read_string_alloc(fd, &greeter);
+		ggz_read_int(fd, &greeterversion);
+		log("GGZ ## server is: '%s' '%i'\n", greeter, greeterversion);
+		ggz_free(greeter);
 		break;
 	case op_request_ip:
-			log("GGZ ## ip request!\n");
-			snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
-			ggz_write_int(fd, op_reply_ip);
-			ggz_write_string(fd, ipaddress);
+		log("GGZ ## ip request!\n");
+		snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
+		ggz_write_int(fd, op_reply_ip);
+		ggz_write_string(fd, ipaddress);
 		break;
 	case op_broadcast_ip:
-			ggz_read_string_alloc(fd, &ipstring);
-			log("GGZ ## ip broadcast: '%s'\n", ipstring);
-			ip_address = ggz_strdup(ipstring);
-			ggz_free(ipstring);
+		ggz_read_string_alloc(fd, &ipstring);
+		log("GGZ ## ip broadcast: '%s'\n", ipstring);
+		ip_address = ggz_strdup(ipstring);
+		ggz_free(ipstring);
 		break;
 	default: log("GGZ ## opcode unknown!\n");
 	}
@@ -329,62 +329,61 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 
 	switch (id) {
 	case GGZ_CONNECTED:
-			log("GGZCORE ## -- connected\n");
-			break;
+		log("GGZCORE ## -- connected\n");
+		break;
 	case GGZ_NEGOTIATED:
-			log("GGZCORE ## -- negotiated\n");
-			ggzcore_server_login(ggzserver);
+		log("GGZCORE ## -- negotiated\n");
+		ggzcore_server_login(ggzserver);
 		break;
 	case GGZ_LOGGED_IN:
-			log("GGZCORE ## -- logged in\n");
-			ggzcore_server_list_gametypes(ggzserver, 0);
-			ggzcore_server_list_rooms(ggzserver, -1, 1);
+		log("GGZCORE ## -- logged in\n");
+		ggzcore_server_list_gametypes(ggzserver, 0);
+		ggzcore_server_list_rooms(ggzserver, -1, 1);
 		break;
 	case GGZ_ENTERED:
-			log("GGZCORE ## -- entered\n");
-			room = ggzcore_server_get_cur_room(ggzserver);
-			ggzcore_room_add_event_hook(room, GGZ_TABLE_LIST, &NetGGZ::callback_room);
-			ggzcore_room_list_tables(room, -1, 0);
+		log("GGZCORE ## -- entered\n");
+		room = ggzcore_server_get_cur_room(ggzserver);
+		ggzcore_room_add_event_hook(room, GGZ_TABLE_LIST, &NetGGZ::callback_room);
+		ggzcore_room_list_tables(room, -1, 0);
 		break;
 	case GGZ_ROOM_LIST:
-			log("GGZCORE ## -- (room list)\n");
-			num = ggzcore_server_get_num_rooms(ggzserver);
-			joined = 0;
-			for (i = 0; i < num; i++)
+		log("GGZCORE ## -- (room list)\n");
+		num = ggzcore_server_get_num_rooms(ggzserver);
+		joined = 0;
+		for (i = 0; i < num; ++i) {
+			room = ggzcore_server_get_nth_room(ggzserver, i);
+			type = ggzcore_room_get_gametype(room);
+			if (type)
 			{
-				room = ggzcore_server_get_nth_room(ggzserver, i);
-				type = ggzcore_room_get_gametype(room);
-				if (type)
+				if (!strcmp(ggzcore_gametype_get_name(type), "Widelands"))
 				{
-					if (!strcmp(ggzcore_gametype_get_name(type), "Widelands"))
-					{
 #if GGZCORE_VERSION_MICRO < 14
-						ggzcore_server_join_room(ggzserver, i);
+					ggzcore_server_join_room(ggzserver, i);
 #else
-						ggzcore_server_join_room(ggzserver, room);
+					ggzcore_server_join_room(ggzserver, room);
 #endif
-						joined = 1;
-						break;
-					}
+					joined = 1;
+					break;
 				}
 			}
-			if (!joined)
-			{
-				log("GGZCORE ## couldn't find room! :(\n");
-			}
+		}
+		if (!joined)
+		{
+			log("GGZCORE ## couldn't find room! :(\n");
+		}
 		break;
 	case GGZ_TYPE_LIST:
-			log("GGZCORE ## -- (type list)\n");
+		log("GGZCORE ## -- (type list)\n");
 		break;
 	case GGZ_CHANNEL_CONNECTED:
-			log("GGZCORE ## -- channel connected\n");
-			channelfd = ggzcore_server_get_channel(ggzserver);
+		log("GGZCORE ## -- channel connected\n");
+		channelfd = ggzcore_server_get_channel(ggzserver);
 		break;
-		case GGZ_CHANNEL_READY:
-			log("GGZCORE ## -- channel ready\n");
-			game = ggzcore_server_get_cur_game(ggzserver);
-			ggzcore_game_set_server_fd(game, channelfd);
-			channelfd = -1;
+	case GGZ_CHANNEL_READY:
+		log("GGZCORE ## -- channel ready\n");
+		game = ggzcore_server_get_cur_game(ggzserver);
+		ggzcore_game_set_server_fd(game, channelfd);
+		channelfd = -1;
 		break;
 	case GGZ_CONNECT_FAIL:
 	case GGZ_NEGOTIATE_FAIL:
@@ -393,8 +392,8 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 	case GGZ_CHANNEL_FAIL:
 	case GGZ_NET_ERROR:
 	case GGZ_PROTOCOL_ERROR:
-			log("GGZCORE ## -- error! (%s) :(\n", (int8_t*)cbdata);
-			ggzcore_login = false;
+		log("GGZCORE ## -- error! (%s) :(\n", (int8_t*)cbdata);
+		ggzcore_login = false;
 		break;
 	}
 #endif
@@ -409,19 +408,18 @@ void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 
 	switch (id) {
 	case GGZ_TABLE_LIST:
-			log("GGZCORE/room ## -- table list\n");
-			room = ggzcore_server_get_cur_room(ggzserver);
-			num = ggzcore_room_get_num_tables(room);
-			for (i = 0; i < num; i++)
-			{
-				table = ggzcore_room_get_nth_table(room, i);
-				desc = ggzcore_table_get_desc(table);
-				log("GGZCORE/room ## table: %s\n", desc);
-				if (!desc) desc = "(unknown map)";
-				tablelist.push_back(desc);
-			}
-			ggzcore_login = false;
-			ggzcore_ready = true;
+		log("GGZCORE/room ## -- table list\n");
+		room = ggzcore_server_get_cur_room(ggzserver);
+		num = ggzcore_room_get_num_tables(room);
+		for (i = 0; i < num; i++i) {
+			table = ggzcore_room_get_nth_table(room, i);
+			desc = ggzcore_table_get_desc(table);
+			log("GGZCORE/room ## table: %s\n", desc);
+			if (!desc) desc = "(unknown map)";
+			tablelist.push_back(desc);
+		}
+		ggzcore_login = false;
+		ggzcore_ready = true;
 		break;
 	}
 #endif
@@ -436,35 +434,42 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 
 	switch (id) {
 	case GGZ_GAME_PLAYING:
-			log("GGZCORE/game ## -- playing\n");
-			room = ggzcore_server_get_cur_room(ggzserver);
-			if (tableid == -1)
-			{
-				table = ggzcore_table_new();
-				gametype = ggzcore_room_get_gametype(room);
-				ggzcore_table_init(table, gametype, "test", ggzcore_gametype_get_max_players(gametype));
-				for (int32_t i = 1; i < ggzcore_gametype_get_max_players(gametype); i++)
-					ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, NULL);
-				ggzcore_room_launch_table(room, table);
-				ggzcore_table_free(table);
-			}
-			else ggzcore_room_join_table(room, tableid, 0);
-			break;
+		log("GGZCORE/game ## -- playing\n");
+		room = ggzcore_server_get_cur_room(ggzserver);
+		if (tableid == -1)
+		{
+			table = ggzcore_table_new();
+			gametype = ggzcore_room_get_gametype(room);
+			ggzcore_table_init
+				(table,
+				 gametype,
+				 "test",
+				 ggzcore_gametype_get_max_players(gametype));
+			for
+				(int32_t i = 1;
+				 i < ggzcore_gametype_get_max_players(gametype);
+				 ++i)
+				ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, NULL);
+			ggzcore_room_launch_table(room, table);
+			ggzcore_table_free(table);
+		}
+		else ggzcore_room_join_table(room, tableid, 0);
+		break;
 	case GGZ_GAME_LAUNCHED:
-			log("GGZCORE/game ## -- launched\n");
-			game = ggzcore_server_get_cur_game(ggzserver);
-			gamefd = ggzcore_game_get_control_fd(game);
-			init();
-			connect();
-			break;
+		log("GGZCORE/game ## -- launched\n");
+		game = ggzcore_server_get_cur_game(ggzserver);
+		gamefd = ggzcore_game_get_control_fd(game);
+		init();
+		connect();
+		break;
 	case GGZ_GAME_NEGOTIATED:
-			log("GGZCORE/game ## -- negotiated\n");
-			ggzcore_server_create_channel(ggzserver);
-			break;
+		log("GGZCORE/game ## -- negotiated\n");
+		ggzcore_server_create_channel(ggzserver);
+		break;
 	case GGZ_GAME_LAUNCH_FAIL:
 	case GGZ_GAME_NEGOTIATE_FAIL:
-			log("GGZCORE/game ## -- error! (%s) :(\n", (int8_t*)cbdata);
-			break;
+		log("GGZCORE/game ## -- error! (%s) :(\n", static_cast<char *>(cbdata));
+		break;
 	}
 #endif
 }

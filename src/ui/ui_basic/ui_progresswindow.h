@@ -64,9 +64,8 @@ private:
 	VisualizationArray m_visualizations;
 	std::string m_background;
 
-	void draw_background(RenderTarget & rt,
-						 const uint32_t xres,
-						 const uint32_t yres);
+	void draw_background
+		(RenderTarget & rt, const uint32_t xres, const uint32_t yres);
 	void update(bool repaint);
 };
 };

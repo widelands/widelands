@@ -113,7 +113,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 					(PicMod_Menu,
 					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
 				overlay_manager.register_overlay(mr.location(), picid, 4);
-	         map.recalc_for_field_area(Area<FCoords>(mr.location(), 0));
+				map.recalc_for_field_area(Area<FCoords>(mr.location(), 0));
 			}
 		}
 	} while (mr.advance(map));

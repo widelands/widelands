@@ -23,8 +23,8 @@
  * get lambda and mu so that lambda*u+mu*v=(1 0)^T with u=(u1 u2)^T and
  * v=(v1 v2)^T
 */
-void get_horiz_linearcomb (int32_t u1, int32_t u2, int32_t v1, int32_t v2,
-			   float& lambda, float& mu)
+void get_horiz_linearcomb
+(int32_t u1, int32_t u2, int32_t v1, int32_t v2, float& lambda, float& mu)
 {
 	float det;
 

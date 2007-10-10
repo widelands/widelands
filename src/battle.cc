@@ -139,9 +139,11 @@ void Battle::act (Game * g, uint32_t)
 	log (" hit=%d ", hit);
 	//FIXME: correct implementaion
 	if (hit > defender->get_evade()) {
-		uint32_t attack = attacker->get_min_attack() +
-					  (g->logic_rand() % (attacker->get_max_attack() -
-										  attacker->get_min_attack() -1));
+		uint32_t attack =
+			attacker->get_min_attack() +
+			(g->logic_rand()
+			 %
+			 (attacker->get_max_attack() - attacker->get_min_attack() -1));
 
 		uint32_t defend = defender->get_defense();
 		defend = (attack * defend) / 100;

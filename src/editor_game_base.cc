@@ -357,8 +357,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area)
 		(std::vector<ImmovableFound>::const_iterator it = immovables.begin();
 		 it != immovables.end(); ++it)
 	{
-		PlayerImmovable & imm =
-				 *static_cast<PlayerImmovable *>(it->object);
+		PlayerImmovable & imm = dynamic_cast<PlayerImmovable &>(*it->object);
 		if
 			(not m.get_field(it->coords)->is_interior
 			 (imm.get_owner()->get_player_number()))
@@ -750,8 +749,11 @@ void Editor_Game_Base::remove_attack_controller(uint32_t serial)
 
 void Editor_Game_Base::register_attack_controller(AttackController* ctrl)
 {
-	assert(std::find(m_attack_serials.begin(), m_attack_serials.end(), ctrl->get_serial())
-			== m_attack_serials.end());
+	assert
+		(std::find
+		 (m_attack_serials.begin(), m_attack_serials.end(), ctrl->get_serial())
+			==
+		 m_attack_serials.end());
 
 	m_attack_serials.push_back(ctrl->get_serial());
 }

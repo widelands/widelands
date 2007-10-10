@@ -24,7 +24,7 @@
 #include <stdint.h>
 
 struct S2MapDescrHeader {
-		  char   magic[10]; // "WORLD_V1.0"
+	char   magic[10]; // "WORLD_V1.0"
 	char  name  [20];
 	int16_t w;
 	int16_t h;

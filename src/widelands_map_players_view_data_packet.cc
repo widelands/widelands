@@ -811,183 +811,181 @@ throw (_wexception)
 	Field & first_field = map[0]; //  FIXME make this const when FCoords has been templatized so it can have "const Field * field;"
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, *egbase, player)
-			if (const Player::Field * const player_fields = player->m_fields) {
-				FileWrite                   unseen_times_file;
-				BitOutBuffer<2>     node_immovable_kinds_file;
-				FileWrite                node_immovables_file;
-				BitOutBuffer<2>                    roads_file;
-				BitOutBuffer<4>                 terrains_file;
-				BitOutBuffer<2> triangle_immovable_kinds_file;
-				FileWrite            triangle_immovables_file;
-				FileWrite                         owners_file;
-				BitOutBuffer<1>                  surveys_file;
-				BitOutBuffer<4>           survey_amounts_file;
-				FileWrite                   survey_times_file;
-				FileWrite                         vision_file;
-				for
-					(FCoords first_in_row(Coords(0, 0), &first_field);
-					 first_in_row.y < mapheight;
-					 ++first_in_row.y, first_in_row.field += mapwidth)
-				{
-					FCoords  r = first_in_row, br = map.bl_n(r);
-					Map::Index  r_index =  r.field - &first_field;
-					Map::Index br_index = br.field - &first_field;
-					const Player::Field *  r_player_field = player_fields +  r_index;
-					const Player::Field * br_player_field = player_fields + br_index;
-					Vision  r_vision =  r_player_field->vision;
-					Vision br_vision = br_player_field->vision;
-					bool  r_everseen =  r_vision,  r_seen = 1 <  r_vision;
-					bool br_everseen = br_vision, br_seen = 1 < br_vision;
-					do {
-						const Player::Field &  f_player_field =  *r_player_field;
-						const bool f_everseen = r_everseen, bl_everseen = br_everseen;
-						const bool f_seen     = r_seen,     bl_seen     = br_seen;
-						move_r(mapwidth, r, r_index); move_r(mapwidth, br, br_index);
-						r_player_field  = player_fields +  r_index;
-						br_player_field = player_fields + br_index;
-						r_vision  =  r_player_field->vision;
-						br_vision = br_player_field->vision;
-						r_everseen  =  r_vision,  r_seen = 1 <  r_vision;
-						br_everseen = br_vision, br_seen = 1 < br_vision;
+		if (const Player::Field * const player_fields = player->m_fields) {
+			FileWrite                   unseen_times_file;
+			BitOutBuffer<2>     node_immovable_kinds_file;
+			FileWrite                node_immovables_file;
+			BitOutBuffer<2>                    roads_file;
+			BitOutBuffer<4>                 terrains_file;
+			BitOutBuffer<2> triangle_immovable_kinds_file;
+			FileWrite            triangle_immovables_file;
+			FileWrite                         owners_file;
+			BitOutBuffer<1>                  surveys_file;
+			BitOutBuffer<4>           survey_amounts_file;
+			FileWrite                   survey_times_file;
+			FileWrite                         vision_file;
+			for
+				(FCoords first_in_row(Coords(0, 0), &first_field);
+				 first_in_row.y < mapheight;
+				 ++first_in_row.y, first_in_row.field += mapwidth)
+			{
+				FCoords  r = first_in_row, br = map.bl_n(r);
+				Map::Index  r_index =  r.field - &first_field;
+				Map::Index br_index = br.field - &first_field;
+				const Player::Field *  r_player_field = player_fields +  r_index;
+				const Player::Field * br_player_field = player_fields + br_index;
+				Vision  r_vision =  r_player_field->vision;
+				Vision br_vision = br_player_field->vision;
+				bool  r_everseen =  r_vision,  r_seen = 1 <  r_vision;
+				bool br_everseen = br_vision, br_seen = 1 < br_vision;
+				do {
+					const Player::Field &  f_player_field =  *r_player_field;
+					const bool f_everseen = r_everseen, bl_everseen = br_everseen;
+					const bool f_seen     = r_seen,     bl_seen     = br_seen;
+					move_r(mapwidth, r, r_index); move_r(mapwidth, br, br_index);
+					r_player_field  = player_fields +  r_index;
+					br_player_field = player_fields + br_index;
+					r_vision  =  r_player_field->vision;
+					br_vision = br_player_field->vision;
+					r_everseen  =  r_vision,  r_seen = 1 <  r_vision;
+					br_everseen = br_vision, br_seen = 1 < br_vision;
 
-						vision_file.Unsigned32(f_player_field.vision);
+					vision_file.Unsigned32(f_player_field.vision);
 
-						if (not f_seen) {
+					if (not f_seen) {
 
-							if (f_everseen) {//  node
-								unseen_times_file.Unsigned32
-									(f_player_field.time_node_last_unseen);
-								assert(f_player_field.owner < 0x20);
-								owners_file.Unsigned8(f_player_field.owner);
-								write_unseen_immovable
-									(f_player_field.map_object_descr[TCoords<>::None],
-									 node_immovable_kinds_file, node_immovables_file);
-							}
-
-							//  triangles
-							if
-								//  the player does not see the D triangle now but has
-								//  seen it
-								(not bl_seen & not br_seen &
-								 (f_everseen | bl_everseen | br_everseen))
-							{
-								terrains_file.put(f_player_field.terrains.d);
-								write_unseen_immovable
-									(f_player_field.map_object_descr[TCoords<>::D],
-									 triangle_immovable_kinds_file,
-									 triangle_immovables_file);
-							}
-							if
-								//  the player does not see the R triangle now but has
-								//  seen it
-								(not br_seen & not  r_seen &
-								 (f_everseen | br_everseen |  r_everseen))
-							{
-								terrains_file.put(f_player_field.terrains.r);
-								write_unseen_immovable
-									(f_player_field.map_object_descr[TCoords<>::R],
-									 triangle_immovable_kinds_file,
-									 triangle_immovables_file);
-							}
-
-							//  edges
-							if (not bl_seen & (f_everseen | bl_everseen))
-								roads_file.put(f_player_field.road_sw());
-							if (not br_seen & (f_everseen | br_everseen))
-								roads_file.put(f_player_field.road_se());
-							if (not  r_seen & (f_everseen |  r_everseen))
-								roads_file.put(f_player_field.road_e ());
+						if (f_everseen) {//  node
+							unseen_times_file.Unsigned32
+								(f_player_field.time_node_last_unseen);
+							assert(f_player_field.owner < 0x20);
+							owners_file.Unsigned8(f_player_field.owner);
+							write_unseen_immovable
+								(f_player_field.map_object_descr[TCoords<>::None],
+								 node_immovable_kinds_file, node_immovables_file);
 						}
 
-						//  geologic survey
-						if (f_everseen & bl_everseen & br_everseen) {
-							const Uint32 time_last_surveyed =
-								f_player_field
-								.time_triangle_last_surveyed[TCoords<>::D];
-							const Uint8 has_info = time_last_surveyed != 0xffffffff;
-							surveys_file.put(has_info);
-							if (has_info) {
-								survey_amounts_file
-									.put(f_player_field.resource_amounts.d);
-								survey_times_file.Unsigned32(time_last_surveyed);
-							}
+						//  triangles
+						if
+							//  the player does not see the D triangle now but has
+							//  seen it
+							(not bl_seen & not br_seen &
+							 (f_everseen | bl_everseen | br_everseen))
+						{
+							terrains_file.put(f_player_field.terrains.d);
+							write_unseen_immovable
+								(f_player_field.map_object_descr[TCoords<>::D],
+								 triangle_immovable_kinds_file,
+								 triangle_immovables_file);
 						}
-						if (f_everseen & br_everseen & r_everseen) {
-							const Uint32 time_last_surveyed =
-								f_player_field
-								.time_triangle_last_surveyed[TCoords<>::R];
-							const Uint8 has_info = time_last_surveyed != 0xffffffff;
-							surveys_file.put(has_info);
-							if (has_info) {
-								survey_amounts_file
-									.put(f_player_field.resource_amounts.r);
-								survey_times_file.Unsigned32(time_last_surveyed);
-							}
+						if
+							//  the player does not see the R triangle now but has
+							//  seen it
+							(not br_seen & not  r_seen &
+							 (f_everseen | br_everseen |  r_everseen))
+						{
+							terrains_file.put(f_player_field.terrains.r);
+							write_unseen_immovable
+								(f_player_field.map_object_descr[TCoords<>::R],
+								 triangle_immovable_kinds_file,
+								 triangle_immovables_file);
 						}
-					} while (r.x);
-				}
 
-				char filename[FILENAME_SIZE];
+						//  edges
+						if (not bl_seen & (f_everseen | bl_everseen))
+							roads_file.put(f_player_field.road_sw());
+						if (not br_seen & (f_everseen | br_everseen))
+							roads_file.put(f_player_field.road_se());
+						if (not  r_seen & (f_everseen |  r_everseen))
+							roads_file.put(f_player_field.road_e ());
+					}
 
-				snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, plnum);
-				fs.EnsureDirectoryExists(filename);
-				snprintf(filename, sizeof(filename),       DIRNAME_TEMPLATE, plnum);
-				fs.EnsureDirectoryExists(filename);
-
-				WRITE
-					(unseen_times_file,
-					 UNSEEN_TIMES_FILENAME_TEMPLATE,
-					 UNSEEN_TIMES_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(node_immovable_kinds_file,
-					 NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
-					 NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(node_immovables_file,
-					 NODE_IMMOVABLES_FILENAME_TEMPLATE,
-					 NODE_IMMOVABLES_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(roads_file,
-					 ROADS_FILENAME_TEMPLATE,    ROADS_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(terrains_file,
-					 TERRAINS_FILENAME_TEMPLATE, TERRAINS_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(triangle_immovable_kinds_file,
-					 TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
-					 TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(triangle_immovables_file,
-					 TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE,
-					 TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(owners_file,
-					 OWNERS_FILENAME_TEMPLATE,   OWNERS_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(surveys_file,
-					 SURVEYS_FILENAME_TEMPLATE,  SURVEYS_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(survey_amounts_file,
-					 SURVEY_AMOUNTS_FILENAME_TEMPLATE,
-					 SURVEY_AMOUNTS_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(survey_times_file,
-					 SURVEY_TIMES_FILENAME_TEMPLATE,
-					 SURVEY_TIMES_CURRENT_PACKET_VERSION);
-
-				WRITE
-					(vision_file,
-					 VISION_FILENAME_TEMPLATE,
-					 VISION_CURRENT_PACKET_VERSION);
+					//  geologic survey
+					if (f_everseen & bl_everseen & br_everseen) {
+						const Uint32 time_last_surveyed =
+							f_player_field.time_triangle_last_surveyed[TCoords<>::D];
+						const Uint8 has_info = time_last_surveyed != 0xffffffff;
+						surveys_file.put(has_info);
+						if (has_info) {
+							survey_amounts_file
+								.put(f_player_field.resource_amounts.d);
+							survey_times_file.Unsigned32(time_last_surveyed);
+						}
+					}
+					if (f_everseen & br_everseen & r_everseen) {
+						const Uint32 time_last_surveyed =
+							f_player_field.time_triangle_last_surveyed[TCoords<>::R];
+						const Uint8 has_info = time_last_surveyed != 0xffffffff;
+						surveys_file.put(has_info);
+						if (has_info) {
+							survey_amounts_file
+								.put(f_player_field.resource_amounts.r);
+							survey_times_file.Unsigned32(time_last_surveyed);
+						}
+					}
+				} while (r.x);
 			}
+
+			char filename[FILENAME_SIZE];
+
+			snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, plnum);
+			fs.EnsureDirectoryExists(filename);
+			snprintf(filename, sizeof(filename),       DIRNAME_TEMPLATE, plnum);
+			fs.EnsureDirectoryExists(filename);
+
+			WRITE
+				(unseen_times_file,
+				 UNSEEN_TIMES_FILENAME_TEMPLATE,
+				 UNSEEN_TIMES_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(node_immovable_kinds_file,
+				 NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
+				 NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(node_immovables_file,
+				 NODE_IMMOVABLES_FILENAME_TEMPLATE,
+				 NODE_IMMOVABLES_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(roads_file,
+				 ROADS_FILENAME_TEMPLATE,    ROADS_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(terrains_file,
+				 TERRAINS_FILENAME_TEMPLATE, TERRAINS_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(triangle_immovable_kinds_file,
+				 TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
+				 TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(triangle_immovables_file,
+				 TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE,
+				 TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(owners_file,
+				 OWNERS_FILENAME_TEMPLATE,   OWNERS_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(surveys_file,
+				 SURVEYS_FILENAME_TEMPLATE,  SURVEYS_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(survey_amounts_file,
+				 SURVEY_AMOUNTS_FILENAME_TEMPLATE,
+				 SURVEY_AMOUNTS_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(survey_times_file,
+				 SURVEY_TIMES_FILENAME_TEMPLATE,
+				 SURVEY_TIMES_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(vision_file,
+				 VISION_FILENAME_TEMPLATE,
+				 VISION_CURRENT_PACKET_VERSION);
+		}
 }

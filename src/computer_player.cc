@@ -1209,17 +1209,17 @@ void Computer_Player::construct_roads ()
 
 		if (BaseImmovable * const imm = map.get_immovable(*i)) {
 			if (Road * const road = dynamic_cast<Road *>(imm)) {
-		    if ((player->get_buildcaps(*i)&BUILDCAPS_FLAG)==0)
-			continue;
+				if ((player->get_buildcaps(*i) & BUILDCAPS_FLAG) == 0)
+					continue;
 
-		    queue.push (spots.size());
+				queue.push (spots.size());
 
-		    spots.push_back(WalkableSpot());
-		    spots.back().coords=*i;
-		    spots.back().hasflag=false;
-		    spots.back().cost=0;
+				spots.push_back(WalkableSpot());
+				spots.back().coords  = *i;
+				spots.back().hasflag = false;
+				spots.back().cost    = 0;
 				spots.back().eco = road->get_flag(Road::FlagStart)->get_economy();
-		    spots.back().from=-1;
+				spots.back().from    = -1;
 
 		    continue;
 		}
@@ -1283,7 +1283,7 @@ void Computer_Player::construct_roads ()
 			}
 
 			if (!hasflag)
-					game().send_player_build_flag (player_number, pc.back());
+				game().send_player_build_flag (player_number, pc.back());
 
 			pc.push_front (from.coords);
 			i=from.from;
@@ -1305,7 +1305,7 @@ void Computer_Player::construct_roads ()
 			pc.pop_front();
 
 			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++) {
-					const int32_t n = map.is_neighbour(path.get_end(), *c);
+				const int32_t n = map.is_neighbour(path.get_end(), *c);
 			    assert (n>=1 && n<=6);
 
 				path.append (map, n);

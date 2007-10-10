@@ -265,11 +265,13 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
    if (get_display_flag(dfDebug))
    {
       // Show FPS
-      char buf[100];
-		sprintf(buf, "%5.1f fps (avg: %5.1f fps)",
-				1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
+      char buffer[100];
+		snprintf
+		   (buffer, sizeof(buffer),
+		    "%5.1f fps (avg: %5.1f fps)",
+		    1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
 		g_fh->draw_string
-			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(85, 5), buf, Align_Left);
+			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(85, 5), buffer, Align_Left);
 	}
 }
 

@@ -294,8 +294,10 @@ void Player::bulldoze(PlayerImmovable* imm)
 	case Map_Object::FLAG:
 		building = ((Flag*)imm)->get_building();
 		if (building && !(building->get_playercaps() & (1 << Building::PCap_Bulldoze))) {
-			log("Player trying to rip flag (%u) with undestroyable building (%u)\n", imm->get_serial(),
-					building->get_serial());
+			log
+				("Player trying to rip flag (%u) with undestroyable building "
+				 "(%u)\n",
+				 imm->get_serial(), building->get_serial());
 			return;
 		}
 		break;
@@ -502,8 +504,8 @@ void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
 		 and
 		 imm->get_type() >= Map_Object::BUILDING)
 	{
-			Building* ms= static_cast<Building*>(imm);
-			ms->drop_soldier (soldier->get_serial());
+		Building* ms= static_cast<Building*>(imm);
+		ms->drop_soldier (soldier->get_serial());
 	}
 }
 
@@ -701,9 +703,10 @@ void Player::gain_immovable(PlayerImmovable* imm) {
 		dynamic_cast<const Building *>(imm))
 	{
 		const ConstructionSite * const constructionsite =
-				dynamic_cast<const ConstructionSite *>(building);
-		const std::string & building_name = constructionsite ?
-				constructionsite->building().name() : building->name();
+			dynamic_cast<const ConstructionSite *>(building);
+		const std::string & building_name =
+			constructionsite ?
+			constructionsite->building().name() : building->name();
 
 		const Building_Descr::Index nr_buildings = tribe().get_nrbuildings();
 
@@ -712,7 +715,7 @@ void Player::gain_immovable(PlayerImmovable* imm) {
 			m_building_stats.resize(nr_buildings);
 
 		std::vector<Building_Stats> & stat =
-				m_building_stats[tribe().get_building_index(building_name.c_str())];
+			m_building_stats[tribe().get_building_index(building_name.c_str())];
 
 		Building_Stats new_building;
 		new_building.is_constructionsite = constructionsite;
@@ -731,9 +734,10 @@ void Player::lose_immovable(PlayerImmovable* imm)
 		dynamic_cast<const Building *>(imm))
 	{
 		const ConstructionSite * const constructionsite =
-				dynamic_cast<const ConstructionSite *>(building);
-		const std::string & building_name = constructionsite ?
-				constructionsite->building().name() : building->name();
+			dynamic_cast<const ConstructionSite *>(building);
+		const std::string & building_name =
+			constructionsite ?
+			constructionsite->building().name() : building->name();
 
 		const Building_Descr::Index nr_buildings = tribe().get_nrbuildings();
 
@@ -742,7 +746,7 @@ void Player::lose_immovable(PlayerImmovable* imm)
 			m_building_stats.resize(nr_buildings);
 
 		std::vector<Building_Stats> & stat =
-				m_building_stats[tribe().get_building_index(building_name.c_str())];
+			m_building_stats[tribe().get_building_index(building_name.c_str())];
 
 		const Coords building_position = building->get_position();
 		for (uint32_t i = 0; i < stat.size(); i++) {
@@ -780,9 +784,10 @@ void Player::ReadStatistics(FileRead& fr, uint32_t version)
 
 		if (nr_wares > 0) {
 			if (nr_wares != tribe().get_nrwares())
-				throw wexception("Statistics for %u has bad number of wares (%u != %u)",
-						get_player_number(),
-						nr_wares, tribe().get_nrwares());
+				throw wexception
+					("Statistics for %u has bad number of wares (%u != %u)",
+					 get_player_number(),
+					 nr_wares, tribe().get_nrwares());
 
 			assert(m_ware_productions.size() == nr_wares);
 			assert(m_current_statistics.size() == nr_wares);

@@ -215,16 +215,16 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(const int argc, const char **argv):
-		m_commandline(std::map<std::string, std::string>()),
-		journal(0),
-		m_mouse_swapped(false),
-		m_mouse_position(0, 0),
-		m_mouse_locked(0),
-		m_mouse_compensate_warp(0, 0),
-		m_should_die(false),
-		m_gfx_w(0), m_gfx_h(0),
-		m_gfx_fullscreen(false),
-		m_game(0)
+m_commandline          (std::map<std::string, std::string>()),
+journal                (0),
+m_mouse_swapped        (false),
+m_mouse_position       (0, 0),
+m_mouse_locked         (0),
+m_mouse_compensate_warp(0, 0),
+m_should_die           (false),
+m_gfx_w(0), m_gfx_h(0),
+m_gfx_fullscreen       (false),
+m_game                 (0)
 {
 	g_fs=new LayeredFileSystem();
 	g_fh=new Font_Handler();
@@ -900,8 +900,7 @@ void WLApplication::handle_commandline_parameters() throw(Parameter_error)
 		#ifndef __WIN32__
 		init_double_game();
 		#else
-		cout << endl << _("Sorry, no double-instance debugging on WIN32.")
-				<< endl << endl;
+		cout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
 		#endif
 		#else
 		cout << _("--double is disabled. This is not a debug build!") << endl;
@@ -983,34 +982,45 @@ void WLApplication::handle_commandline_parameters() throw(Parameter_error)
 void WLApplication::show_usage()
 {
 	char buffer[80];
-	snprintf(buffer, sizeof(buffer), _("This is Widelands-%s").c_str(), BUILD_ID);
-	cout << buffer << endl << endl;
-	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>")
-		<< endl << endl;
-	cout << _("Options:") << endl << endl;
-	cout << _(" --<config-entry-name>=value overwrites any config file setting\n\n"
-			  " --record=FILENAME    Record all events to the given filename for later playback\n"
-			  " --playback=FILENAME  Playback given filename (see --record)\n\n"
-			  " --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n")
-			  << endl;
+	snprintf
+		(buffer, sizeof(buffer),
+		 _("This is Widelands-%s\n\n").c_str(), BUILD_ID);
+	cout << buffer;
+	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
+	cout << _("Options:\n\n");
+	cout
+		<<
+		_(" --<config-entry-name>=value overwrites any config file setting\n\n"
+		  " --record=FILENAME    Record all events to the given filename for "
+		  "later playback\n"
+		  " --playback=FILENAME  Playback given filename (see --record)\n\n"
+		  " --coredump=[yes|no]  Generates a core dump on segfaults instead of "
+		  "using the SDL\n");
 #ifdef USE_GGZ
-	cout << _(" --ggz                Starts game as GGZ Gaming Zone client (don't use!)")
-			<< endl;
+	cout
+		<<
+		_(" --ggz                Starts game as GGZ Gaming Zone client (don't "
+		  "use!)");
 #endif
-	cout << _(" --nosound            Starts the game with sound disabled\n"
-			  " --nozip              Do not save files as binary zip archives.\n\n"
-			  " --editor             Directly starts the Widelands editor.\n")
-			  << endl;
+	cout
+		<<
+		_(" --nosound            Starts the game with sound disabled\n"
+		  " --nozip              Do not save files as binary zip archives.\n\n"
+		  " --editor             Directly starts the Widelands editor.\n\n");
 #ifdef DEBUG
 #ifndef __WIN32__
-	cout << _(" --double             Start the game twice (for localhost network testing)\n")
-			<< endl;
+	cout
+		<<
+		_(" --double             Start the game twice (for localhost network "
+		  "testing)\n\n");
 #endif
 #endif
 	cout << _(" --help               Show this help\n") << endl;
-	cout << _("Bug reports? Suggestions? Check out the project website:\n"
-			  "        http://www.sourceforge.net/projects/widelands\n\n"
-			  "Hope you enjoy this game!\n") << endl;
+	cout
+		<<
+		_("Bug reports? Suggestions? Check out the project website:\n"
+		  "        http://www.sourceforge.net/projects/widelands\n\n"
+		  "Hope you enjoy this game!\n\n");
 }
 
 #ifdef DEBUG
@@ -1112,15 +1122,15 @@ void WLApplication::mainmenu()
 			break;
 
 		case Fullscreen_Menu_Main::mm_options: {
-				Section *s = g_options.pull_section("global");
-				Options_Ctrl om(s);
-			}
+			Section *s = g_options.pull_section("global");
+			Options_Ctrl om(s);
+		}
 			break;
 
 		case Fullscreen_Menu_Main::mm_readme: {
 			Fullscreen_Menu_FileView ff("txts/README");
 			ff.run();
-			}
+		}
 			break;
 
 		case Fullscreen_Menu_Main::mm_license: {

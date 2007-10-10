@@ -106,11 +106,19 @@ Soldier* IdleWorkerSupply::launch_soldier(Game *, int32_t, Requeriments * req)
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
-	if (!req or req->check(s->get_level(atrHP), s->get_level(atrAttack),
-					       s->get_level(atrDefense), s->get_level(atrEvade)))
+	if
+		(!req
+		 or
+		 req->check
+		 (s->get_level(atrHP),
+		  s->get_level(atrAttack),
+		  s->get_level(atrDefense),
+		  s->get_level(atrEvade)))
 		return s;
 	else
-		throw wexception ("IdleWorkerSupply::launch_soldier try to launch a soldiers that doesn't accomplish the requeriments.");
+		throw wexception
+			("IdleWorkerSupply::launch_soldier try to launch a soldiers that "
+			 "doesn't accomplish the requeriments.");
 }
 
 

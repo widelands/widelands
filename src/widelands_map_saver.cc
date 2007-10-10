@@ -160,16 +160,16 @@ void Widelands_Map_Saver::save() throw(_wexception) {
    // Allowed buildings
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, *m_egbase, player) {
-			const Building_Descr::Index nr_buildings =
-				player->tribe().get_nrbuildings();
-			for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
-				if (player->is_building_allowed(i)) {
-					log("Writing Allowed Buildings Data ... ");
-					Widelands_Map_Allowed_Buildings_Data_Packet p;
-					p.Write(m_fs, m_egbase, m_mos);
-					log("done!\n ");
-					goto end_outer_loop;
-				}
+		const Building_Descr::Index nr_buildings =
+			player->tribe().get_nrbuildings();
+		for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
+			if (player->is_building_allowed(i)) {
+				log("Writing Allowed Buildings Data ... ");
+				Widelands_Map_Allowed_Buildings_Data_Packet p;
+				p.Write(m_fs, m_egbase, m_mos);
+				log("done!\n ");
+				goto end_outer_loop;
+			}
 	} end_outer_loop:
 
    // !!!!!!!!!! NOTE

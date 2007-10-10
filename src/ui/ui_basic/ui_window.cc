@@ -329,12 +329,12 @@ bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
 		 btn == SDL_BUTTON_MIDDLE)
 		is_minimal() ? restore() : minimize();
 	else if (btn == SDL_BUTTON_LEFT) {
-			_dragging = true;
-			_drag_start_win_x = get_x();
-			_drag_start_win_y = get_y();
-			_drag_start_mouse_x = get_x() + get_lborder() + mx;
-			_drag_start_mouse_y = get_y() + get_tborder() + my;
-			grab_mouse(true);
+		_dragging = true;
+		_drag_start_win_x = get_x();
+		_drag_start_win_y = get_y();
+		_drag_start_mouse_x = get_x() + get_lborder() + mx;
+		_drag_start_mouse_y = get_y() + get_tborder() + my;
+		grab_mouse(true);
 	}
 	else if (btn == SDL_BUTTON_RIGHT) {
 		play_click();

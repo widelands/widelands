@@ -289,10 +289,10 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 					("check_soldier needs 'hp', 'attack', 'defense' or 'evade' "
 					 "parameter");
 
-		  int32_t how_many=1;
-		  char* endp;
-		  how_many = strtol(cmd[2].c_str(), &endp, 0);
-		  if (endp && *endp)
+			int32_t how_many = 1;
+			char * endp;
+			how_many = strtol(cmd[2].c_str(), &endp, 0);
+			if (endp && *endp)
 				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 
 			act.iparam1 = how_many;
@@ -330,7 +330,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			how_many = strtol(cmd[3].c_str(), &endp, 0);
 			if (endp && *endp)
-					throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 
 			act.iparam2 = how_many;
 

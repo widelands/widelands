@@ -23,11 +23,13 @@
 #define CMD_INCORPORATE_VERSION 1
 
 struct Cmd_Incorporate : public GameLogicCommand {
-		Cmd_Incorporate() : GameLogicCommand(0) {} // For savegame loading
-		Cmd_Incorporate (int32_t t, Worker* w): GameLogicCommand(t) {worker=w;}
+	Cmd_Incorporate() : GameLogicCommand(0) {} // For savegame loading
+	Cmd_Incorporate (int32_t t, Worker * const w)
+		: GameLogicCommand(t)
+	{worker = w;}
 
 
-		void execute (Game* g) {worker->incorporate(g);}
+	void execute (Game * g) {worker->incorporate(g);}
 
 	virtual void Write
 		(FileWrite             &,
@@ -38,10 +40,10 @@ struct Cmd_Incorporate : public GameLogicCommand {
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
-		/// Get this command ID
-		virtual int32_t get_id() {return QUEUE_CMD_INCORPORATE;}
+	/// Get this command ID
+	virtual int32_t get_id() {return QUEUE_CMD_INCORPORATE;}
 
 
 private:
-		Worker* worker;
+	Worker * worker;
 };

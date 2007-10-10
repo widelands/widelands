@@ -99,8 +99,8 @@ const
 /**
  * Parse the worker data from configuration
  */
-void Worker_Descr::parse(const char *directory, Profile *prof,
-						 const EncodeData *encdata)
+void Worker_Descr::parse
+(const char * const directory, Profile * const prof, const EncodeData * const encdata)
 {
 	char buffer[256];
 	char fname[256];
@@ -251,11 +251,11 @@ Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
 		descr->parse(directory, &prof, encdata);
 	}
 	catch (std::exception &e) {
-			delete descr;
+		delete descr;
 		throw wexception("Error reading worker %s: %s", name, e.what());
 	}
 	catch (...) {
-			delete descr;
+		delete descr;
 		throw;
 	}
 

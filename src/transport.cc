@@ -325,8 +325,8 @@ void WareInstance::update(Game* g)
 		if (!m_supply)
 			m_supply = new IdleWareSupply(this);
 	} else {
-			delete m_supply;
-			m_supply = 0;
+		delete m_supply;
+		m_supply = 0;
 	}
 
 	// Deal with transfers
@@ -379,8 +379,10 @@ void WareInstance::update(Game* g)
 				return;
 			}
 
-			throw wexception("MO(%u): ware: can't move from building %u to %u (not a warehouse)",
-							get_serial(), location->get_serial(), nextstep->get_serial());
+			throw wexception
+				("MO(%u): ware: can't move from building %u to %u (not a "
+				 "warehouse)",
+				 get_serial(), location->get_serial(), nextstep->get_serial());
 
 		case FLAG:
 			if (nextstep->get_type() == BUILDING && nextstep->get_base_flag() != location)
@@ -1852,24 +1854,24 @@ void Requeriments::set (tAttribute at, int32_t min, int32_t max)
 	switch (at) {
 	case atrHP:
 		m_hp.min = min;
-								m_hp.max = max;
-								break;
+		m_hp.max = max;
+		break;
 	case atrAttack:
 		m_attack.min = min;
-								m_attack.max = max;
-								break;
+		m_attack.max = max;
+		break;
 	case atrDefense:
 		m_defense.min = min;
-								m_defense.max = max;
-								break;
+		m_defense.max = max;
+		break;
 	case atrEvade:
 		m_evade.min = min;
-								m_evade.max = max;
-								break;
+		m_evade.max = max;
+		break;
 	case atrTotal:
 		m_total.min = min;
-								m_total.max = max;
-								break;
+		m_total.max = max;
+		break;
 		default:
 			throw wexception ("Requeriments::set Unknown attribute %d.", at);
 	}
@@ -2216,13 +2218,20 @@ int32_t Request::get_priority (int32_t cost)
 	// priority is higher if building waits for ware a long time
 	// additional factor - cost to deliver, so nearer building
 	// with same priority will get ware first
-	int32_t priority = (wait_time * WAITTIME_WEIGHT_IN_PRIORITY +
-					distance * COST_WEIGHT_IN_PRIORITY) * modifier
-	               + MAX_IDLE_PRIORITY;
+	int32_t priority =
+		(wait_time * WAITTIME_WEIGHT_IN_PRIORITY +
+		 distance  * COST_WEIGHT_IN_PRIORITY)
+		* modifier
+		+ MAX_IDLE_PRIORITY;
 
-	log("PRIORITY: %d (%s, gt=%d, last=%d, cost=%d, *%d)",
-		priority, 0x0 != building ? building->name().c_str() : "",
-		g.get_gametime(), get_last_request_time(), cost, modifier);
+	log
+		("PRIORITY: %d (%s, gt=%d, last=%d, cost=%d, *%d)",
+		 priority,
+		 0x0 != building ? building->name().c_str() : "",
+		 g.get_gametime(),
+		 get_last_request_time(),
+		 cost,
+		 modifier);
 
 	if (priority <= MAX_IDLE_PRIORITY)
 		return MAX_IDLE_PRIORITY + 1; // make sure idle request are lower
@@ -2352,7 +2361,7 @@ void Request::start_transfer(Game* g, Supply* supp, int32_t ware)
 	}
 	catch (...)
 	{
-			delete t;
+		delete t;
 
 		throw;
 	}
@@ -2598,8 +2607,8 @@ void WaresQueue::update() {
 	}
 	else
 	{
-			delete m_request;
-			m_request = 0;
+		delete m_request;
+		m_request = 0;
 	}
 }
 
@@ -3627,8 +3636,10 @@ struct RequestSupplyPair {
 	};
 };
 
-typedef std::priority_queue<RequestSupplyPair, std::vector<RequestSupplyPair>,
-				RequestSupplyPair::Compare> RSPairQueue;
+typedef
+std::priority_queue
+<RequestSupplyPair, std::vector<RequestSupplyPair>, RequestSupplyPair::Compare>
+RSPairQueue;
 
 struct RSPairStruct {
 	RSPairQueue queue;
@@ -3769,7 +3780,6 @@ void Economy::create_requested_workers(Game* g)
 					uint32_t n_wh = 0;
 					while (n_wh < get_nr_warehouses()) {
 						if (m_warehouses[n_wh]->can_create_worker(g, index)) {
-log("Economy::process_request-- Created a '%s' needed\n", w_desc->name().c_str());
 							m_warehouses[n_wh]->create_worker(g, index);
 							//break;
 						} // if (m_warehouses[n_wh]

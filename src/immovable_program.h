@@ -52,8 +52,10 @@ struct ImmovableAction {
 
 // The ImmovableProgram
 class ImmovableProgram {
-	typedef void (ImmovableProgram::*parse_t)(ImmovableAction* act, const ProgramParser* parser,
-																				const std::vector<std::string>& cmd);
+	typedef void (ImmovableProgram::*parse_t)
+		(ImmovableAction                *,
+		 const ProgramParser            *,
+		 const std::vector<std::string> & cmd);
 
 public:
 	ImmovableProgram(std::string name);

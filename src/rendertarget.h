@@ -105,13 +105,20 @@ public:
 		(const Editor_Game_Base & egbase,
 		 const Player * const     player,
 		 const Point              viewpoint,
-		 const uint32_t               flags);
+		 const uint32_t           flags);
 
-	void drawanim(Point dst, const uint32_t animation, const uint32_t time,
-		      const Player * const player=0);
+	void drawanim
+		(Point                dst,
+		 const uint32_t       animation,
+		 const uint32_t       time,
+		 const Player * const player = 0);
 
-	void drawanimrect(Point dst, const uint32_t animation, const uint32_t time,
-			  const Player * const player, Rect srcrc);
+	void drawanimrect
+		(Point                dst,
+		 const uint32_t       animation,
+		 const uint32_t       time,
+		 const Player * const player,
+		 Rect                 srcrc);
 
 	void reset();
 

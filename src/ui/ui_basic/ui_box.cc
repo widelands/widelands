@@ -166,27 +166,27 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 
 	switch (it.type) {
 	case Item::ItemPanel: {
-			int32_t breadth, maxbreadth;
+		int32_t breadth, maxbreadth;
 
 		if (m_orientation == Horizontal) {
-				breadth = it.u.panel.panel->get_h();
-				maxbreadth = get_h();
+			breadth = it.u.panel.panel->get_h();
+			maxbreadth = get_h();
 		} else {
-				breadth = it.u.panel.panel->get_w();
-				maxbreadth = get_w();
-				}
+			breadth = it.u.panel.panel->get_w();
+			maxbreadth = get_w();
+		}
 		switch (it.u.panel.align) {
 		case AlignLeft:
 		default:
-					breadth = 0;
+			breadth = 0;
 			break;
 
 		case AlignCenter:
-					breadth = (maxbreadth - breadth) / 2;
+			breadth = (maxbreadth - breadth) / 2;
 			break;
 
 		case AlignRight:
-					breadth = maxbreadth - breadth;
+			breadth = maxbreadth - breadth;
 			break;
 		}
 

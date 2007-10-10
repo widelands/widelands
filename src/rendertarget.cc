@@ -155,7 +155,7 @@ void RenderTarget::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGB
 	draw_rect(Rect(p, 1, 1), color);
 
 	if (dxabs >= dyabs) for (uint32_t i = 0;i < dxabs; ++i) {
-			//  the line is more horizontal than vertical
+		//  the line is more horizontal than vertical
 		y+=dyabs;
 
 		if (y >= dxabs) {y -= dxabs; p.y += sdy;}
@@ -164,7 +164,7 @@ void RenderTarget::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGB
 		draw_rect(Rect(p, 1, 1), color);
 	}
 	else for (uint32_t i = 0; i < dyabs; ++i) {
-			// the line is more vertical than horizontal
+		// the line is more vertical than horizontal
 		x+=dxabs;
 
 		if (x >= dyabs) {x -= dyabs; p.x += sdx;}
@@ -214,8 +214,8 @@ void RenderTarget::blit(const Point dst, const uint32_t picture)
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
-void RenderTarget::blitrect(const Point dst, const uint32_t picture,
-			    const Rect srcrc)
+void RenderTarget::blitrect
+(const Point dst, const uint32_t picture, const Rect srcrc)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -1079,10 +1079,11 @@ void RenderTarget::rendermap
  * Calculate the field at the top-left corner of the clipping rect
  * The entire clipping rect will be used for drawing.
  */
-void RenderTarget::renderminimap(const Editor_Game_Base & egbase,
-				 const Player * const player,
-				 const Point viewpoint,
-				 const uint32_t flags)
+void RenderTarget::renderminimap
+(const Editor_Game_Base &       egbase,
+ const Player           * const player,
+ const Point                    viewpoint,
+ const uint32_t                 flags)
 {
 	m_surface->draw_minimap
 			(egbase, player, m_rect, viewpoint - m_offset, flags);
@@ -1101,8 +1102,11 @@ void RenderTarget::renderminimap(const Editor_Game_Base & egbase,
  * \todo Document this method's parameters
  * \todo Correctly calculate the stereo position for sound effects
  */
-void RenderTarget::drawanim(Point dst, const uint32_t animation, const uint32_t time,
-			    const Player * const player)
+void RenderTarget::drawanim
+(Point                dst,
+ const uint32_t       animation,
+ const uint32_t       time,
+ const Player * const player)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	AnimationGfx* gfx = g_gr->get_animation(animation);
@@ -1139,9 +1143,12 @@ void RenderTarget::drawanim(Point dst, const uint32_t animation, const uint32_t 
 /**
  * Draws a part of a frame of an animation at the given location
  */
-void RenderTarget::drawanimrect(Point dst, const uint32_t animation,
-				const uint32_t time, const Player * const player,
-				Rect srcrc)
+void RenderTarget::drawanimrect
+(Point                dst,
+ const uint32_t       animation,
+ const uint32_t       time,
+ const Player * const player,
+ Rect                 srcrc)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	if (!data || !g_gr) {
@@ -1265,14 +1272,14 @@ Sint8 RenderTarget::node_brightness
 	if      (vision == 0) result = -128;
 	else if (vision == 1) {
 		assert(last_seen <= gametime);
-		const Editor_Game_Base::Duration time_ago = gametime - last_seen;
+		const Duration time_ago = gametime - last_seen;
 		result =
-				static_cast<Sint16>
-				(((static_cast<Sint16>(result) + 128) >> 1)
-				*
-				(1.0 + (time_ago < 45000 ? expf(-8.46126929e-5 * time_ago) : 0)))
-				-
-				128;
+			static_cast<Sint16>
+			(((static_cast<Sint16>(result) + 128) >> 1)
+			 *
+			 (1.0 + (time_ago < 45000 ? expf(-8.46126929e-5 * time_ago) : 0)))
+			-
+			128;
 	}
 
 	return result;

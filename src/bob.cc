@@ -139,20 +139,20 @@ Bob::Descr *Bob::Descr::create_from_dir(const char *name,
  * Zero-initialize a map object
  */
 Bob::Bob(const Bob::Descr &_descr) :
-		Map_Object       (&_descr),
-		m_owner          (0),
-		m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere
-		m_linknext       (0),
-		m_linkpprev      (0),
-		m_actid          (0),
-		m_anim           (0),
-		m_animstart      (0),
-		m_walking        (IDLE),
-		m_walkstart      (0),
-		m_walkend        (0),
-		m_stack_dirty    (false),
-		m_sched_init_task(false),
-		m_in_act         (false)
+Map_Object       (&_descr),
+m_owner          (0),
+m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere
+m_linknext       (0),
+m_linkpprev      (0),
+m_actid          (0),
+m_anim           (0),
+m_animstart      (0),
+m_walking        (IDLE),
+m_walkstart      (0),
+m_walkend        (0),
+m_stack_dirty    (false),
+m_sched_init_task(false),
+m_in_act         (false)
 {}
 
 
@@ -332,9 +332,9 @@ void Bob::do_act(Game* g, bool signalhandling)
 				m_sched_init_task = false;
 				m_stack_dirty = false;
 			} else {
-				throw wexception("MO(%u): stack dirty before update[%s]",
-			                 get_serial(),
-							 get_state() ? get_state()->task->name : "(nil)");
+				throw wexception
+					("MO(%u): stack dirty before update[%s]",
+					 get_serial(), get_state() ? get_state()->task->name : "(nil)");
 			}
 		}
 
@@ -660,8 +660,11 @@ bool Bob::start_task_movepath(Game* g, const Coords dest, int32_t persist,
 /**
  * Start moving along the given, precalculated path.
  */
-void Bob::start_task_movepath(const Path & path, const DirAnimations & anims,
-							  const bool forceonlast, const int32_t only_step)
+void Bob::start_task_movepath
+(const Path          & path,
+ const DirAnimations & anims,
+ const bool            forceonlast,
+ const int32_t         only_step)
 {
 	assert(path.get_start() == get_position());
 
@@ -682,9 +685,13 @@ void Bob::start_task_movepath(const Path & path, const DirAnimations & anims,
  * \return true if a task has been started, or false if we already are on
  * the given path index.
  */
-bool Bob::start_task_movepath(const Map & map, const Path & origpath,
-							  const int32_t index, const DirAnimations & anims,
-							  const bool forceonlast, const int32_t only_step)
+bool Bob::start_task_movepath
+(const Map           & map,
+ const Path          & origpath,
+ const int32_t         index,
+ const DirAnimations & anims,
+ const bool            forceonlast,
+ const int32_t         only_step)
 {
 	CoordPath path(map, origpath);
 	int32_t curidx = path.get_index(get_position());

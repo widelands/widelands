@@ -427,7 +427,7 @@ void Warehouse::init(Editor_Game_Base* gg)
 	Player & player = owner();
 	Map & map = gg->map();
 	player.see_area
-				(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+		(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
 }
 
 

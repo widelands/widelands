@@ -23,30 +23,30 @@
 #include "transport.h"
 
 struct IdleWorkerSupply : public Supply {
-		IdleWorkerSupply(Worker* w);
-		~IdleWorkerSupply();
+	IdleWorkerSupply(Worker *);
+	~IdleWorkerSupply();
 
-		void set_economy(Economy* e);
-		virtual PlayerImmovable* get_position(Game* g);
-		virtual int32_t get_amount(const int32_t ware) const;
+	void set_economy(Economy *);
+	virtual PlayerImmovable * get_position(Game *);
+	virtual int32_t get_amount(const int32_t ware) const;
 
-		/// Idle workers are always active supplies, because they need to get
-		/// into a Warehouse ASAP.
-		virtual bool is_active() const throw() {return true;}
+	/// Idle workers are always active supplies, because they need to get
+	/// into a Warehouse ASAP.
+	virtual bool is_active() const throw() {return true;}
 
-		virtual WareInstance* launch_item(Game* g, int32_t ware)
-				__attribute__ ((noreturn));
+	virtual WareInstance * launch_item(Game *, int32_t ware)
+		__attribute__ ((noreturn));
 
-		virtual Worker* launch_worker(Game* g, int32_t ware);
-		virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
-		virtual int32_t get_passing_requeriments (Game* g, int32_t ware,
-		                                      Requeriments* r);
-		virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r);
+	virtual Worker * launch_worker(Game *, int32_t ware);
+	virtual Soldier* launch_soldier(Game *, int32_t ware, Requeriments *);
+	virtual int32_t get_passing_requeriments
+		(Game *, int32_t ware, Requeriments *);
+	virtual void mark_as_used (Game *, int32_t ware, Requeriments*);
 
 
 private:
-		Worker  * m_worker;
-		Economy * m_economy;
+	Worker  * m_worker;
+	Economy * m_economy;
 };
 
 

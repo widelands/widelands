@@ -36,29 +36,29 @@ struct Section;
 #define NUM_RESOLUTIONS 6
 
 struct Options_Ctrl {
-		struct Options_Struct {
-			int32_t xres;
-			int32_t yres;
-			int32_t depth;
-			bool inputgrab;
-			bool fullscreen;
-			bool single_watchwin;
-			bool show_warea;
-			bool snap_windows_only_when_overlapping;
-			bool dock_windows_to_edges;
-         bool music;
-         bool fx;
-         std::string language;
-			int32_t autosave; // autosave interval in minutes
-		};
+	struct Options_Struct {
+		int32_t xres;
+		int32_t yres;
+		int32_t depth;
+		bool inputgrab;
+		bool fullscreen;
+		bool single_watchwin;
+		bool show_warea;
+		bool snap_windows_only_when_overlapping;
+		bool dock_windows_to_edges;
+		bool music;
+		bool fx;
+		std::string language;
+		int32_t autosave; // autosave interval in minutes
+	};
 
-		Options_Ctrl(Section *s);
-		~Options_Ctrl();
-		Options_Ctrl::Options_Struct options_struct(Section *s);
-		void save_options();
+	Options_Ctrl(Section *);
+	~Options_Ctrl();
+	Options_Ctrl::Options_Struct options_struct(Section *);
+	void save_options();
 private:
-		Fullscreen_Menu_Options *m_opt_dialog;
-		Section *m_opt_section;
+	Fullscreen_Menu_Options *m_opt_dialog;
+	Section *m_opt_section;
 };
 
 /**

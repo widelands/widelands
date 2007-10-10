@@ -69,8 +69,7 @@ Text_Block::Text_Block(const Text_Block &src) {
 	m_line_spacing = src.m_line_spacing;
 		}
 
-Text_Parser::Text_Parser() {
-		}
+Text_Parser::Text_Parser() {}
 
 Text_Parser::~Text_Parser() {
 }

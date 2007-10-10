@@ -51,8 +51,8 @@ struct Computer_Player {
 	Player * get_player() const {return game().get_player(player_number);}
 
 private:
-		void gain_building (Building*);
-		void lose_building (Building*);
+	void gain_building (Building *);
+	void lose_building (Building *);
 
 		bool construct_building ();
 		void construct_roads ();
@@ -121,11 +121,11 @@ private:
 		const BuildingHints               * hints;
 
 		enum {
-				BORING,
-				CONSTRUCTIONSITE,
-				PRODUCTIONSITE,
-				MILITARYSITE,
-				MINE
+			BORING,
+			CONSTRUCTIONSITE,
+			PRODUCTIONSITE,
+			MILITARYSITE,
+			MINE
 		}                                   type;
 
 		bool                                is_buildable;

@@ -30,16 +30,18 @@
 class Worker_Descr;
 
 struct WorkerProgram : public BobProgramBase {
-		struct Parser {
-			Worker_Descr     * descr;
-			std::string        directory;
-			Profile          * prof;
-			const EncodeData * encdata;
-		};
+	struct Parser {
+		Worker_Descr     * descr;
+		std::string        directory;
+		Profile          * prof;
+		const EncodeData * encdata;
+	};
 
-		typedef void (WorkerProgram::*parse_t)(Worker_Descr*, Worker::Action* act,
-											   Parser* parser,
-											   const std::vector<std::string>&);
+	typedef void (WorkerProgram::*parse_t)
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> &);
 
 	WorkerProgram(const std::string & name) : m_name(name) {}
 	virtual ~WorkerProgram() {}
@@ -52,53 +54,96 @@ struct WorkerProgram : public BobProgramBase {
 			return &m_actions[idx];
 		}
 
-		void parse(Worker_Descr*, Parser* parser, std::string name);
-		const Workarea_Info & get_workarea_info() const
-				{return m_workarea_info;}
+	void parse(Worker_Descr *, Parser *, std::string name);
+	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
 
 private:
-		Workarea_Info m_workarea_info;
-		struct ParseMap {
-			const char * name;
-			parse_t      function;
-		};
+	Workarea_Info m_workarea_info;
+	struct ParseMap {
+		const char * name;
+		parse_t      function;
+	};
 
-		void parse_mine(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                const std::vector<std::string>& cmd);
-		void parse_createitem(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                      const std::vector<std::string>& cmd);
-		void parse_setdescription(Worker_Descr*, Worker::Action* act,
-		                          Parser* parser,
-		                          const std::vector<std::string>& cmd);
-		void parse_setbobdescription(Worker_Descr*, Worker::Action* act,
-		                             Parser* parser,
-		                             const std::vector<std::string>& cmd);
-		void parse_findobject(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                      const std::vector<std::string>& cmd);
-		void parse_findspace(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                     const std::vector<std::string>& cmd);
-		void parse_walk(Worker_Descr*, Worker::Action* act, Parser* parser,
-						const std::vector<std::string>& cmd);
-		void parse_animation(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                     const std::vector<std::string>& cmd);
-		void parse_return(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                  const std::vector<std::string>& cmd);
-		void parse_object(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                  const std::vector<std::string>& cmd);
-		void parse_plant(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                 const std::vector<std::string>& cmd);
-		void parse_create_bob(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                      const std::vector<std::string>& cmd);
-		void parse_removeobject(Worker_Descr*, Worker::Action* act,
-		                        Parser* parser,
-		                        const std::vector<std::string>& cmd);
-		void parse_geologist(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                     const std::vector<std::string>& cmd);
-		void parse_geologist_find(Worker_Descr*, Worker::Action* act,
-		                          Parser* parser,
-		                          const std::vector<std::string>& cmd);
-		void parse_playFX(Worker_Descr*, Worker::Action* act, Parser* parser,
-		                  const std::vector<std::string>& cmd);
+	void parse_mine
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_createitem
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_setdescription
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_setbobdescription
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_findobject
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_findspace
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_walk
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_animation
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_return
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_object
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_plant
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_create_bob
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_removeobject
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_geologist
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_geologist_find
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
+	void parse_playFX
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
 
 	const std::string                 m_name;
 		std::vector<Worker::Action> m_actions;

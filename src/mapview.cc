@@ -146,9 +146,9 @@ bool Map_View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 			fieldclicked.call();
 	}
 	else if (btn == SDL_BUTTON_RIGHT) {
-			m_dragging = true;
-			grab_mouse(true);
-			WLApplication::get()->set_mouse_lock(true);
+		m_dragging = true;
+		grab_mouse(true);
+		WLApplication::get()->set_mouse_lock(true);
 	}
 	return true;
 }

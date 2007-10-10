@@ -37,26 +37,26 @@ class LAN_Open_Game;
 struct LAN_Game_Info;
 
 struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
-		enum {
-			CANCEL=0,
-			HOSTGAME,
-			JOINGAME,
-			INTERNETGAME,
-			HOSTGGZGAME,
-			JOINGGZGAME
-		};
+	enum {
+		CANCEL = 0,
+		HOSTGAME,
+		JOINGAME,
+		INTERNETGAME,
+		HOSTGGZGAME,
+		JOINGGZGAME
+	};
 
-		Fullscreen_Menu_NetSetup ();
+	Fullscreen_Menu_NetSetup ();
 
-		virtual void think();
+	virtual void think();
 
-		bool get_host_address (uint32_t&, uint16_t&);
-		// return true if the selected or entered hostname is valid
+	bool get_host_address (uint32_t&, uint16_t&);
+	// return true if the selected or entered hostname is valid
 
-		//bool is_internetgame();
-		// return true if game should be played over GGZ
+	//bool is_internetgame();
+	// return true if game should be played over GGZ
 
-		void fill(std::list<std::string> tables);
+	void fill(std::list<std::string> tables);
 
 private:
 	UI::Textarea                                title;

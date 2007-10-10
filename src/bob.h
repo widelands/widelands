@@ -170,28 +170,36 @@ struct Bob : public Map_Object {
 	void send_signal(Game*, std::string sig);
 	void start_task_idle(Game*, uint32_t anim, int32_t timeout);
 
-	bool start_task_movepath(Game*, const Coords dest, const int32_t persist,
-							 const DirAnimations &,
-							 const bool forceonlast = false,
-							 const int32_t only_step = -1);
+	bool start_task_movepath
+		(Game                *,
+		 const Coords          dest,
+		 const int32_t         persist,
+		 const DirAnimations &,
+		 const bool            forceonlast = false,
+		 const int32_t         only_step = -1);
 
-	void start_task_movepath(const Path &, const DirAnimations &,
-	                         const bool forceonlast = false,
-	                         const int32_t only_step = -1);
+	void start_task_movepath
+		(const Path          &,
+		 const DirAnimations &,
+		 const bool            forceonlast  = false,
+		 const int32_t         only_step = -1);
 
-	bool start_task_movepath(const Map &, const Path &, const int32_t index,
-	                         const DirAnimations &,
-	                         const bool forceonlast = false,
-	                         const int32_t only_step = -1);
+	bool start_task_movepath
+		(const Map           &,
+		 const Path          &,
+		 const int32_t         index,
+		 const DirAnimations &,
+		 const bool            forceonlast = false,
+		 const int32_t         only_step = -1);
 
 	void start_task_forcemove(const int32_t dir, const DirAnimations &);
 
 	// higher level handling (task-based)
 	State* get_state()
-			{return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0;}
+	{return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0;}
 
 	State & top_state()
-			{assert(m_stack.size()); return m_stack[m_stack.size() - 1];}
+	{assert(m_stack.size()); return m_stack[m_stack.size() - 1];}
 
 	std::string get_signal() {return m_signal;}
 	State* get_state(Task* task);

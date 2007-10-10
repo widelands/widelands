@@ -102,14 +102,9 @@ const char *_wexception::what() const throw()
  */
 bool is_printable(SDL_keysym k)
 {
-	bool printable=false;
-
-	if ((k.sym == SDLK_TAB) ||
-	    ((k.sym >= SDLK_SPACE)&&(k.sym <= SDLK_z)) ||
-	    ((k.sym >= SDLK_WORLD_0)&&(k.sym <= SDLK_WORLD_95)) ||
-	    ((k.sym >= SDLK_KP0)&&(k.sym <= SDLK_KP_EQUALS))
-	   )
-		printable=true;
-
-	return printable;
+	return
+		(k.sym == SDLK_TAB)                                   ||
+		((k.sym >= SDLK_SPACE)   && (k.sym <= SDLK_z))        ||
+		((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
+		((k.sym >= SDLK_KP0)     && (k.sym <= SDLK_KP_EQUALS));
 }

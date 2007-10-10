@@ -58,10 +58,11 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 			m_pading_t = s->get_int("padding-top", GAMETIPS_DEFAULT_PADDING);
 			m_pading_b = s->get_int("padding-bottom", GAMETIPS_DEFAULT_PADDING);
 			m_font_size = s->get_int("text-size", UI_FONT_SIZE_SMALL);
-			m_bgcolor = color_from_hex(s->get_string("background-color", NULL),
-									GAMETIPS_TEXTAREA_COLOR_BG);
-			m_color   = color_from_hex(s->get_string("text-color", NULL),
-									GAMETIPS_FONT_COLOR_FG);
+			m_bgcolor = color_from_hex
+				(s->get_string("background-color", NULL),
+				 GAMETIPS_TEXTAREA_COLOR_BG);
+			m_color   = color_from_hex
+				(s->get_string("text-color", NULL), GAMETIPS_FONT_COLOR_FG);
 		}
 
 		while ((s = prof.get_next_section(0))) {
@@ -123,9 +124,8 @@ const uint32_t GameTips::colorvalue_from_hex(const char c1, const char c2) {
 }
 
 // convert CSS hex color value to RGBColor
-const RGBColor GameTips::color_from_hex(
-		const char * hexcode,
-		const RGBColor & def)
+const RGBColor GameTips::color_from_hex
+(const char * hexcode, const RGBColor & def)
 {
 	if (NULL == hexcode)
 		return def;
@@ -196,16 +196,19 @@ void GameTips::show_tip(int32_t index) {
 		uint32_t h = 0;
 		g_gr->get_picture_size(pic_background, w, h);
 		// center picture
-		Point pt((xres - w) / 2,
-				 (yres - h) / 2);
+		Point pt((xres - w) / 2, (yres - h) / 2);
 		tips_area = Rect(pt, w, h);
 		rt.blit(pt, pic_background);
 	} else {
 		// if no background picture, just draw a rectangle
-		Point pt((xres - m_width) / 2 + GAMETIPS_TEXTAREA_BORDER,
-				 (yres - m_height) / 2 + GAMETIPS_TEXTAREA_BORDER);
-		tips_area = Rect(pt, m_width - 2 * GAMETIPS_TEXTAREA_BORDER,
-						 m_height - 2 * GAMETIPS_TEXTAREA_BORDER);
+		Point pt
+			((xres - m_width)  / 2 + GAMETIPS_TEXTAREA_BORDER,
+			 (yres - m_height) / 2 + GAMETIPS_TEXTAREA_BORDER);
+		tips_area =
+			Rect
+			(pt,
+			 m_width - 2 * GAMETIPS_TEXTAREA_BORDER,
+			 m_height - 2 * GAMETIPS_TEXTAREA_BORDER);
 		rt.fill_rect(tips_area, m_bgcolor);
 
 		tips_area.x -= GAMETIPS_TEXTAREA_BORDER;
@@ -220,12 +223,12 @@ void GameTips::show_tip(int32_t index) {
 	text_area.w -= m_pading_l + m_pading_r;
 	text_area.y += m_pading_t;
 	text_area.h -= m_pading_t + m_pading_b;
-	Point center(text_area.x + text_area.w / 2,
-				 text_area.y + text_area.h / 2);
+	Point center(text_area.x + text_area.w / 2, text_area.y + text_area.h / 2);
 
-	g_fh->draw_string(rt, UI_FONT_NAME, m_font_size,
-					  m_color, m_bgcolor, //RGBColor(107, 87, 55),
-					  center, m_tips[index].text.c_str(),
-					  Align_Center, text_area.w);
+	g_fh->draw_string
+		(rt, UI_FONT_NAME, m_font_size,
+		 m_color, m_bgcolor, //RGBColor(107, 87, 55),
+		 center, m_tips[index].text.c_str(),
+		 Align_Center, text_area.w);
 	g_gr->update_rectangle(tips_area);
 }

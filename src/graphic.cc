@@ -179,8 +179,8 @@ void Graphic::refresh(bool force)
 	if (force or m_update_fullscreen)
 		m_screen.update();
 	else
-		SDL_UpdateRects(m_screen.get_sdl_surface(),
-						m_nr_update_rects, m_update_rects);
+		SDL_UpdateRects
+			(m_screen.get_sdl_surface(), m_nr_update_rects, m_update_rects);
 
 	m_update_fullscreen = false;
 	m_nr_update_rects = 0;
@@ -428,9 +428,9 @@ void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
 	Surface* surf = get_picture_surface(pic_index);
 
 	// Save a png
-	png_structp png_ptr = png_create_write_struct
-			      (PNG_LIBPNG_VER_STRING, (png_voidp)0,
-			       0, 0);
+	png_structp png_ptr =
+		png_create_write_struct
+		(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(0), 0, 0);
 
 	if (!png_ptr)
 		throw wexception("Graphic::save_png: Couldn't create png struct!\n");
@@ -505,11 +505,12 @@ void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
 uint32_t Graphic::create_surface(int32_t w, int32_t h)
 {
 	const SDL_PixelFormat & format = m_screen.format();
-	SDL_Surface & surf = *SDL_CreateRGBSurface
-			     (SDL_SWSURFACE,
-			      w, h,
-			      format.BitsPerPixel,
-			      format.Rmask, format.Gmask, format.Bmask, format.Amask);
+	SDL_Surface & surf =
+		*SDL_CreateRGBSurface
+		(SDL_SWSURFACE,
+		 w, h,
+		 format.BitsPerPixel,
+		 format.Rmask, format.Gmask, format.Bmask, format.Amask);
 
 	const std::vector<Picture>::size_type id = find_free_picture();
 	Picture & pic = m_pictures[id];
@@ -638,8 +639,8 @@ void Graphic::get_animation_size
 		w = h = 0;
 	} else {
 		// Get the frame and its data. Ignore playerclrs.
-		frame = gfx->get_frame((time / data->frametime) % gfx->nr_frames(),
-					0, 0);
+		frame =
+			gfx->get_frame((time / data->frametime) % gfx->nr_frames(), 0, 0);
 
 		w = frame->get_w();
 		h = frame->get_h();
@@ -671,8 +672,8 @@ const char* Graphic::get_maptexture_picture(uint32_t id)
 /**
  * Save and load pictures
  */
-void Graphic::m_png_write_function(png_structp png_ptr, png_bytep data,
-				    png_size_t length)
+void Graphic::m_png_write_function
+(png_structp png_ptr, png_bytep data, png_size_t length)
 {
 	FileWrite* fw = static_cast<FileWrite*>(png_get_io_ptr(png_ptr));
 	fw->Data(data, length);

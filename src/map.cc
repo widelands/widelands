@@ -1228,8 +1228,8 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	// Big buildings:  same as big objects
 		{
 			const FCoords bl = bl_n(f);
-	uint8_t building = BUILDCAPS_BIG;
-	std::vector<ImmovableFound> objectlist;
+			uint8_t building = BUILDCAPS_BIG;
+			std::vector<ImmovableFound> objectlist;
 
 			find_immovables
 				(Area<FCoords>(f, 2),
@@ -1247,10 +1247,12 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 					// a flag to the bottom-right does not reduce building size (obvious)
 					// additionally, roads going top-right and left from a big building's
 					// flag should be allowed
-							if
-								((objpos != br and objpos != r and objpos != bl)
-								 or
-					    (obj->get_type() != Map_Object::FLAG && obj->get_type() != Map_Object::ROAD))
+					if
+						((objpos != br and objpos != r and objpos != bl)
+						 or
+						 (obj->get_type() != Map_Object::FLAG
+						  &&
+						  obj->get_type() != Map_Object::ROAD))
 						building = BUILDCAPS_MEDIUM;
 				}
 			}
@@ -1294,9 +1296,9 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 
 			const Sint16 f_height = f.field->get_height();
 
-	// 7) Reduce building size based on slope of direct neighbours:
-	//    - slope >= 4: can't build anything here -> return
-	//    - slope >= 3: maximum size is small
+			// 7) Reduce building size based on slope of direct neighbours:
+			//    - slope >= 4: can't build anything here -> return
+			//    - slope >= 3: maximum size is small
 			{
 				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 1));
 				do {
@@ -1306,23 +1308,13 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 					if (slope >= 3) building = BUILDCAPS_SMALL;
 				} while (mr.advance(*this));
 			}
-	// Special case for bottom-right neighbour (where our flag is)
-	// Is this correct?
-   // Yep, it is - Holger
 			if (abs(br.field->get_height() - f_height) >= 2) goto end;
 
-	// 8) Reduce building size based on height diff. of second order neighbours
-	//     If height difference between this field and second order neighbour
-	//     is >= 3, we can only build a small house here.
-	//    Additionally, we can potentially build a harbour on this field if one
-	//    of the second order neighbours is swimmable.
-   //    TODO: didn't we agree that it would be easier to make harbours only on specially set
-   //    fields? - Holger
-	//    Ah right. Well, for the final decision, we'd probably have to see how
-	//    ships work out. If they become an important part in day-to-day gameplay,
-	//    an automatic method will probably work better.
-	//    However, it should probably be more clever than this, to avoid harbours at tiny
-	//    lakes... - Nicolai
+			//  8) Reduce building size based on height diff. of second order
+			//    neighbours  If height difference between this field and second
+			//    order neighbour is >= 3, we can only build a small house here.
+			//    Additionally, we can potentially build a harbour on this field
+			//    if one of the second order neighbours is swimmable.
 			{
 				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
 				do if (abs(mr.location().field->get_height() - f_height) >= 3)
@@ -1959,7 +1951,7 @@ int32_t Map::findpath
 
 			// Calculate cost
 			const int32_t stepcost = (flags & fpBidiCost) ?
-					calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction);
+				calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction);
 
 			cost = curpf->real_cost + stepcost;
 

@@ -204,19 +204,21 @@ m_event_chain(chain)
 		 _("Cancel"));
 
    // Add conditional
-   if (cond) {
-      std::vector< TriggerConditional_Factory::Token >* tokens = cond->get_infix_tokenlist();
-      for (uint32_t i = 0; i < tokens->size(); i++) {
-         TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token((*tokens)[i]);
-	      assert(t.token <= TriggerConditional_Factory::TRIGGER);
+	if (cond) {
+		std::vector<TriggerConditional_Factory::Token> * tokens =
+			cond->get_infix_tokenlist();
+		for (uint32_t i = 0; i < tokens->size(); ++i) {
+			TriggerConditional_Factory::Token & t =
+				*new TriggerConditional_Factory::Token((*tokens)[i]);
+			assert(t.token <= TriggerConditional_Factory::TRIGGER);
 			m_construction->add
-		      (t.token == TriggerConditional_Factory::TRIGGER ?
-		       static_cast<Trigger *>(t.data)->get_name()
-		       :
-		       TriggerConditional_Factory::operators[t.token],
-		       t,
+				(t.token == TriggerConditional_Factory::TRIGGER ?
+				 static_cast<Trigger *>(t.data)->get_name()
+				 :
+				 TriggerConditional_Factory::operators[t.token],
+				 t,
 				 -1,
-		       true);
+				 true);
 		}
 	}
 

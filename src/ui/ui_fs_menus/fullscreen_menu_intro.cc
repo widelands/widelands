@@ -27,7 +27,7 @@ Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 {}
 
 bool Fullscreen_Menu_Intro::handle_mousepress(const Uint8, int32_t, int32_t) {
-		end_modal(0);
+	end_modal(0);
 
 	return true;
 }

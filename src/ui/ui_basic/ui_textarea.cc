@@ -22,9 +22,10 @@
 
 namespace UI {
 
-Textarea::Textarea (Panel * const parent, const int32_t x, const int32_t y,
-						  const std::string & text, const Align align,
-						  const bool multiline)
+Textarea::Textarea
+	(Panel * const parent,
+	 const int32_t x, const int32_t y,
+	 const std::string & text, const Align align, const bool multiline)
 	:
 		Panel      (parent, x, y, 0, 0),
 		m_text     (text),
@@ -36,9 +37,10 @@ Textarea::Textarea (Panel * const parent, const int32_t x, const int32_t y,
 	set_font        (UI_FONT_SMALL, UI_FONT_CLR_FG);
 }
 
-Textarea::Textarea (Panel *  const parent, const int32_t x, const int32_t y,
-						  const uint32_t w, const uint32_t h, const Align align,
-						  const bool multiline)
+Textarea::Textarea
+	(Panel *  const parent,
+	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 const Align align, const bool multiline)
 	:
 		Panel      (parent, x, y, w, h),
 		m_align    (align),
@@ -51,9 +53,11 @@ Textarea::Textarea (Panel *  const parent, const int32_t x, const int32_t y,
 	set_think(false);
 }
 
-Textarea:: Textarea (Panel *  const parent, const int32_t x, const int32_t y,
-							const uint32_t w, const uint32_t h, const std::string & text,
-							const Align align, const bool multiline)
+Textarea:: Textarea
+	(Panel * const parent,
+	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 const std::string & text, const Align align,
+	 const bool multiline)
 	:
 		Panel      (parent, x, y, w, h),
 		m_align    (align),

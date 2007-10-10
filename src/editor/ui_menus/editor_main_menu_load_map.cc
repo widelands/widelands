@@ -314,9 +314,10 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 		Overlay_Manager & overlay_manager = map.overlay_manager();
 		const Extent extent = map.extent();
 		iterate_Map_FCoords(map, extent, fc) {
-				if (const uint8_t amount = fc.field->get_resources_amount()) {
-					const std::string & immname =
-						world.get_resource(fc.field->get_resources())->get_editor_pic(amount);
+			if (const uint8_t amount = fc.field->get_resources_amount()) {
+				const std::string & immname =
+					world.get_resource(fc.field->get_resources())->get_editor_pic
+					(amount);
 					if (immname.size())
 						overlay_manager.register_overlay
 							(fc,

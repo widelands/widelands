@@ -125,8 +125,8 @@ void Font_Handler::draw_string
 		else {
 			//not cached, create a new surface
 			ci.surface_id =
-				create_text_surface(font, fg, bg, text, align,
-									wrap, caret, transparent);
+				create_text_surface
+				(font, fg, bg, text, align, wrap, caret, transparent);
 			// Now cache it
 			g_gr->get_picture_size(ci.surface_id, ci.w, ci.h);
 			ci.f = &font;
@@ -152,8 +152,8 @@ void Font_Handler::draw_string
 		if (widget_cache == Widget_Cache_Update)
 			g_gr->free_surface(*widget_cache_id);
 		*widget_cache_id =
-			create_text_surface(font, fg, bg, text, align,
-								wrap, caret, transparent);
+			create_text_surface
+			(font, fg, bg, text, align, wrap, caret, transparent);
 		g_gr->get_picture_size(*widget_cache_id, w, h);
 		picid = *widget_cache_id;
 	}
@@ -277,8 +277,10 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	}
 
 	// blit all this together in one Surface
-	return join_sdl_surfaces(global_surface_width, global_surface_height,
-				  m_rendered_lines, bg, align, line_spacing);
+	return
+		join_sdl_surfaces
+		(global_surface_width, global_surface_height,
+		 m_rendered_lines, bg, align, line_spacing);
 
 }
 
@@ -593,11 +595,13 @@ void Font_Handler::get_size_from_cache
 //creates an empty sdl surface of given size
 SDL_Surface* Font_Handler::create_empty_sdl_surface(uint32_t w, uint32_t h) {
 	SDL_Surface *mask_surf = draw_string_sdl_surface("FreeSans.ttf", 10, RGBColor(0, 0, 0), RGBColor(0, 0, 0), " ", Align_Left, -1);
-	SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 16,
-									mask_surf->format->Rmask,
-									mask_surf->format->Gmask,
-									mask_surf->format->Bmask,
-									mask_surf->format->Amask);
+	SDL_Surface* surface =
+		SDL_CreateRGBSurface
+		(SDL_SWSURFACE, w, h, 16,
+		 mask_surf->format->Rmask,
+		 mask_surf->format->Gmask,
+		 mask_surf->format->Bmask,
+		 mask_surf->format->Amask);
 	SDL_FreeSurface(mask_surf);
 	return surface;
 }

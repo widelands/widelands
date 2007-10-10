@@ -170,8 +170,10 @@ void Carrier::transport_update(Game* g, State* state)
 
 		// If the flag is overloaded we are allowed to drop items as
 		// long as we can pick another up. Otherwise we have to wait.
-		else if ((flag->has_capacity() || !swap_or_wait(g, state))
-				 && !start_task_walktoflag(g, state->ivar1 ^ 1))
+		else if
+			((flag->has_capacity() || !swap_or_wait(g, state))
+			 &&
+			 !start_task_walktoflag(g, state->ivar1 ^ 1))
 			// Drop the item, possible exchanging it with another one
 			drop_item(g, state);
 	}
@@ -230,8 +232,8 @@ void Carrier::deliver_to_building(Game* g, State* state)
 
 		// No more deliverable items. Walk out to the flag.
 		molog("[Carrier]: Move out of building.\n");
-		start_task_forcemove(WALK_SE,
-				descr().get_right_walk_anims(does_carry_ware()));
+		start_task_forcemove
+			(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
 	} else {
 		// We're done
 		pop_task();
@@ -292,8 +294,8 @@ void Carrier::drop_item(Game* g, State* s)
 	if (m_acked_ware == (s->ivar1 ^ 1)) {
 		// If there's an item we acked, we can drop ours even if the flag is
 		// flooded
-		other = flag->fetch_pending_item(g,
-				road->get_flag((Road::FlagId)s->ivar1));
+		other =
+			flag->fetch_pending_item(g, road->get_flag((Road::FlagId)s->ivar1));
 
 		if (!other && !flag->has_capacity()) {
 			molog("[Carrier]: strange: acked ware from busy flag no longer present.\n");
@@ -375,8 +377,9 @@ bool Carrier::swap_or_wait(Game *g, State* s)
 		return false;
 	} else if (flag->has_pending_item(g, otherflag)) {
 		if (!flag->ack_pending_item(g, otherflag))
-			throw wexception("MO(%u): transport: overload exchange: flag %u is fucked up",
-						get_serial(), flag->get_serial());
+			throw wexception
+				("MO(%u): transport: overload exchange: flag %u is fucked up",
+				 get_serial(), flag->get_serial());
 
 		m_acked_ware = s->ivar1 ^ 1;
 		return false;
@@ -467,12 +470,14 @@ void Carrier::find_pending_item(Game* g)
 
 	assert(m_acked_ware < 0);
 
-	if (road->get_flag(Road::FlagStart)->has_pending_item(g,
-												road->get_flag(Road::FlagEnd)))
+	if
+		(road->get_flag(Road::FlagStart)->has_pending_item
+		 (g, road->get_flag(Road::FlagEnd)))
 		haveitembits |= 1;
 
-	if (road->get_flag(Road::FlagEnd)->has_pending_item(g,
-												road->get_flag(Road::FlagStart)))
+	if
+		(road->get_flag(Road::FlagEnd)->has_pending_item
+		 (g, road->get_flag(Road::FlagStart)))
 		haveitembits |= 2;
 
 	// If both roads have an item, we pick the one closer to us
@@ -532,8 +537,10 @@ int32_t Carrier::find_closest_flag(Game* g)
 		else if (pos == startpath.get_end())
 			curidx = startpath.get_nsteps();
 		else
-			throw wexception("MO(%u): Carrier::find_closest_flag: not on road, not on building",
-						get_serial());
+			throw wexception
+				("MO(%u): Carrier::find_closest_flag: not on road, not on "
+				 "building",
+				 get_serial());
 	}
 
 	// Calculate the paths and their associated costs

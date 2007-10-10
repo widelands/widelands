@@ -30,17 +30,16 @@
  * It is useful for warehouses and for economy-wide inventory.
  */
 struct WareList {
-		WareList() {};
-		~WareList();
+	WareList() {};
+	~WareList();
 
-		/// Clear the storage
-		void clear() {m_wares.clear();};
+	void clear() {m_wares.clear();} /// Clear the storage
 
 	typedef Uint32 count_type;
 	typedef std::vector<count_type> vector_type;
 	typedef vector_type::size_type size_type;
 
-		/// \return Highest possible ware id
+	/// \return Highest possible ware id
 	const size_type get_nrwareids() const {return m_wares.size();}
 
 	void add   (const size_type id, const count_type count = 1);
@@ -50,12 +49,12 @@ struct WareList {
 	int32_t stock(size_type id) const;
 
 	void set_nrwares(const size_type i) {
-			assert(m_wares.size()==0);
-			m_wares.resize(i, 0);
-		}
+		assert(m_wares.size()==0);
+		m_wares.resize(i, 0);
+	}
 
-		bool operator==(const WareList &wl) const;
-		bool operator!=(const WareList &wl) const {return not (*this==wl);}
+	bool operator==(const WareList  &wl) const;
+	bool operator!=(const WareList & wl) const {return not (*this == wl);}
 
 private:
 	vector_type m_wares;

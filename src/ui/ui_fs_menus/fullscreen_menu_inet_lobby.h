@@ -37,28 +37,28 @@ class Game_Server_Connection;
  * and chat.
  */
 struct Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
-		Fullscreen_Menu_InetLobby(Game_Server_Connection*);
-		~Fullscreen_Menu_InetLobby();
+	Fullscreen_Menu_InetLobby(Game_Server_Connection*);
+	~Fullscreen_Menu_InetLobby();
 
-      void think();
+	void think();
 
-      void server_message(std::string str);
-      void user_entered(std::string name, std::string room, bool enters) ;
-      void user_info(std::string name, std::string name, std::string room) ;
-      void room_info(std::vector< std::string > users);
-      void chat_message(std::string user, std::string room, bool is_action);
-      void critical_error(std::string str);
-      void disconnect();
+	void server_message(std::string str);
+	void user_entered(std::string name, std::string room, bool enters);
+	void user_info(std::string name, std::string name, std::string room);
+	void room_info(std::vector< std::string > users);
+	void chat_message(std::string user, std::string room, bool is_action);
+	void critical_error(std::string str);
+	void disconnect();
 
 private:
-      Game_Server_Connection* m_gsc;
+	Game_Server_Connection * m_gsc;
 	UI::Edit_Box           * m_chatbox;
-      UI::Multiline_Textarea* m_chatarea;
-      UI::Listselect<void *> * m_userlist;
-      bool  m_disconnect_expected;
+	UI::Multiline_Textarea * m_chatarea;
+	UI::Listselect<void *> * m_userlist;
+	bool                     m_disconnect_expected;
 
 private:
-      void changed();
+	void changed();
 	void clicked_back();
 };
 

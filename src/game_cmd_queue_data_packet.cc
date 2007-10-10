@@ -67,7 +67,7 @@ throw (_wexception)
 					item.serial = fr.Unsigned32();
 
 					GameLogicCommand* cmd =
-							Queue_Cmd_Factory::create_correct_queue_command(packet_id);
+						Queue_Cmd_Factory::create_correct_queue_command(packet_id);
 					cmd->Read(fr, *game, *ol);
 
 					item.cmd=cmd;

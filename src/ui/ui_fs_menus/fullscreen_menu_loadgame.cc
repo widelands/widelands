@@ -140,10 +140,10 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 			Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);
 
-	 char* fname = strdup(FileSystem::FS_Filename(name));
-	 FileSystem::FS_StripExtension(fname);
+			char * const fname = strdup(FileSystem::FS_Filename(name));
+			FileSystem::FS_StripExtension(fname);
 			list.add(fname, name);
-         free(fname);
+			free(fname);
 
 		} catch (_wexception&) {
          // we simply skip illegal entries

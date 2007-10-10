@@ -27,53 +27,54 @@ struct Carrier : public Worker {
 	friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
 
 	struct Descr : public Worker_Descr {
-			Descr(const Tribe_Descr &t, const std::string & carrier_name):
-					Worker_Descr(t, carrier_name) {};
+		Descr(const Tribe_Descr &t, const std::string & carrier_name)
+			: Worker_Descr(t, carrier_name) {};
 
-			virtual Worker_Type get_worker_type() const {return CARRIER;}
+		virtual Worker_Type get_worker_type() const {return CARRIER;}
 
 	protected:
-				virtual Bob * create_object() const {return new Carrier(*this);}
-				virtual void parse(const char *directory, Profile *prof,
-								   const EncodeData *encdata)
-						{Worker_Descr::parse(directory, prof, encdata);}
+		virtual Bob * create_object() const {return new Carrier(*this);}
+		virtual void parse
+			(const char * directory, Profile * prof, const EncodeData * encdata)
+		{Worker_Descr::parse(directory, prof, encdata);}
 	};
 
 
-	Carrier(const Descr & carrier_descr): Worker(carrier_descr), m_acked_ware(-1)
+	Carrier(const Descr & carrier_descr)
+		: Worker(carrier_descr), m_acked_ware(-1)
 	{}
-		virtual ~Carrier() {};
+	virtual ~Carrier() {};
 
-		bool notify_ware(Game* g, int32_t flag);
+	bool notify_ware(Game *, int32_t flag);
 
-		void start_task_road();
-		void update_task_road(Game* g);
-		void start_task_transport(int32_t fromflag);
-		bool start_task_walktoflag(Game* g, int32_t flag, bool offset = false);
+	void start_task_road();
+	void update_task_road(Game *);
+	void start_task_transport(int32_t fromflag);
+	bool start_task_walktoflag(Game *, int32_t flag, bool offset = false);
 
 
 private:
-		MO_DESCR(Descr);
+	MO_DESCR(Descr);
 
-		void find_pending_item(Game* g);
-		int32_t find_closest_flag(Game* g);
+	void find_pending_item(Game * g);
+	int32_t find_closest_flag(Game * g);
 
-		// internal task stuff
-		void road_update(Game* g, State* state);
-		void road_signal(Game* g, State* state);
+	// internal task stuff
+	void road_update        (Game *, State *);
+	void road_signal        (Game *, State *);
 
-		void transport_update(Game* g, State* state);
-		void transport_signal(Game* g, State* state);
+	void transport_update   (Game *, State *);
+	void transport_signal   (Game *, State *);
 
-		static Task taskRoad;
-		static Task taskTransport;
+	static Task taskRoad;
+	static Task taskTransport;
 
-		void deliver_to_building(Game* g, State* state);
-		void pickup_from_flag(Game *g, State* s);
-		void drop_item(Game* g, State* s);
-		void enter_building(Game* g, State* s);
-		bool swap_or_wait(Game*g, State* s);
+	void deliver_to_building(Game *, State *);
+	void pickup_from_flag   (Game *, State *);
+	void drop_item          (Game *, State *);
+	void enter_building     (Game *, State *);
+	bool swap_or_wait       (Game *, State *);
 
-		/// -1: no ware acked; 0/1: acked ware for start/end flag of road
-		int32_t m_acked_ware;
+	/// -1: no ware acked; 0/1: acked ware for start/end flag of road
+	int32_t m_acked_ware;
 };

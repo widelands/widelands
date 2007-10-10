@@ -501,8 +501,9 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 			if (!wq->get_filled())
 				continue;
 
-			molog("ConstructionSite::check_work: wq has %i/%i, begin work\n",
-						wq->get_filled(), wq->get_size());
+			molog
+				("ConstructionSite::check_work: wq has %i/%i, begin work\n",
+				 wq->get_filled(), wq->get_size());
 
 			wq->set_filled(wq->get_filled() - 1);
 			wq->set_size(wq->get_size() - 1);

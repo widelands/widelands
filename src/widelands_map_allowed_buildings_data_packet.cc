@@ -65,14 +65,14 @@ throw (_wexception)
       // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
 		if (dynamic_cast<Game *>(egbase))
 			iterate_players_existing(p, nr_players, *egbase, player) {
-					const int32_t nr_buildings = player->tribe().get_nrbuildings();
-					for (int32_t b = 0; b < nr_buildings; ++b)
-						player->allow_building(b, false);
-				}
+				const int32_t nr_buildings = player->tribe().get_nrbuildings();
+				for (int32_t b = 0; b < nr_buildings; ++b)
+					player->allow_building(b, false);
+			}
 
       // Now read all players and buildings
 		iterate_players_existing(p, nr_players, *egbase, player) {
-				const Tribe_Descr & tribe = player->tribe();
+			const Tribe_Descr & tribe = player->tribe();
 			char buffer[10];
 			snprintf(buffer, sizeof(buffer), "player_%u", p);
          s = prof.get_safe_section(buffer);

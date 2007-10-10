@@ -107,8 +107,8 @@ void Panel::remove_child(Panel * child)
  * Free all of the panel's children.
  */
 void Panel::free_children() {
- 	while (!m_children.empty())
- 		delete *(m_children.begin());
+	while (!m_children.empty())
+		delete *(m_children.begin());
 }
 
 
@@ -375,21 +375,6 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  */
 void Panel::set_cache(bool)
 {
-/* Deactivated for now
-	if (enable)
-	{
-		if (_cache)
-			return;
-		_cache = new Pic;
-		_cache->set_size(_w, _h);
-		_needdraw = true;
-	}
-	else
-	{
-			delete _cache;
-			_cache = 0;
-	}
-*/
 }
 
 /**

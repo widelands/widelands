@@ -231,14 +231,15 @@ Immovable_Descr::~Immovable_Descr()
 /**
  * Find the program of the given name.
 */
-const ImmovableProgram* Immovable_Descr::get_program(std::string programname)
-		const
+const ImmovableProgram* Immovable_Descr::get_program
+(std::string programname) const
 {
 	ProgramMap::const_iterator it = m_programs.find(programname);
 
 	if (it == m_programs.end())
-		throw wexception("Immovable %s has no program '%s'", name().c_str(),
-							  programname.c_str());
+		throw wexception
+			("Immovable %s has no program '%s'",
+			 name().c_str(), programname.c_str());
 
 	return it->second;
 }
@@ -321,8 +322,10 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 
 		if (program)
 		{
-			log("WARNING: %s: obsolete implicit [program] section; use program=program in [global]\n",
-						directory);
+			log
+				("WARNING: %s: obsolete implicit [program] section; use "
+				 "program=program in [global]\n",
+				 directory);
 			parse_program(directory, prof, "program");
 		}
 		else
@@ -543,8 +546,9 @@ void Immovable::run_program(Game* g, bool killable)
 	}
 	while (origptr != m_program_ptr);
 
-	molog("WARNING: %s has infinite loop in program %s\n", descr().name().c_str(),
-					m_program->get_name().c_str());
+	molog
+		("WARNING: %s has infinite loop in program %s\n",
+		 descr().name().c_str(), m_program->get_name().c_str());
 }
 
 /**
@@ -726,8 +730,10 @@ Map_Object::Loader* Immovable::load
 /**
  * animation \<name\> \<duration\>
 */
-void ImmovableProgram::parse_animation(ImmovableAction* act, const ProgramParser* parser,
-																	const std::vector<std::string>& cmd)
+void ImmovableProgram::parse_animation
+(ImmovableAction                * act,
+ const ProgramParser            * parser,
+ const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 3)
 		throw wexception("Syntax: animation [name] [duration]");

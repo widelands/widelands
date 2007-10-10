@@ -98,8 +98,8 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 	uint32_t totalres = 0;
 	uint32_t totalchance = 0;
 	int32_t pick;
-	MapRegion<Area<FCoords> > mr(map,
-			Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
+	MapRegion<Area<FCoords> > mr
+		(map, Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
 		uint32_t amount = mr.location().field->get_resources_amount();
@@ -1104,8 +1104,8 @@ void Worker::transfer_update(Game* g, State* state)
 
 	// Figure out where to go
 	bool success;
-	PlayerImmovable* nextstep = state->transfer->get_next_step(location,
-															   &success);
+	PlayerImmovable* nextstep =
+		state->transfer->get_next_step(location, &success);
 
 	if (!nextstep) {
 		Transfer* t = state->transfer;
@@ -1241,8 +1241,9 @@ void Worker::transfer_update(Game* g, State* state)
 			 get_serial(), nextstep->get_serial(), nextstep->get_type());
 	}
 
-	throw wexception("MO(%u): location %u has bad type %u", get_serial(),
-					location->get_serial(), location->get_type());
+	throw wexception
+		("MO(%u): location %u has bad type %u",
+		 get_serial(), location->get_serial(), location->get_type());
 }
 
 
@@ -1529,7 +1530,7 @@ void Worker::program_update(Game* g, State* state)
 
 	for (;;) {
 		const WorkerProgram* program =
-				static_cast<const WorkerProgram*>(state->program);
+			static_cast<const WorkerProgram*>(state->program);
 
 		if (state->ivar1 >= program->get_size()) {
 			molog("  End of program\n");
@@ -2290,8 +2291,14 @@ void Worker::geologist_update(Game* g, State* state)
 				// FALLTHROUGH TO RETURN HOME
 			} else {
 				molog("[geologist]: Walk towards free field\n");
-				if (!start_task_movepath(g, target, 0,
-							descr().get_right_walk_anims(does_carry_ware()))) {
+				if
+					(!
+					 start_task_movepath
+					 (g,
+					  target,
+					  0,
+					  descr().get_right_walk_anims(does_carry_ware())))
+				{
 
 					molog("[geologist]: BUG: couldn't find path\n");
 					set_signal("fail");

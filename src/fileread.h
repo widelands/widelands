@@ -113,13 +113,13 @@ struct FileRead {
 	bool ReadLine(char *buf, const char * const buf_end);
 
 	void * Data(const uint32_t bytes, const Pos pos = NoPos()) {
-			assert(data);
+		assert(data);
 
-			Pos i = pos;
-			if (pos == NoPos()) {
-				prevpos = i = filepos;
-				filepos += bytes;
-			}
+		Pos i = pos;
+		if (pos == NoPos()) {
+			prevpos = i = filepos;
+			filepos += bytes;
+		}
 		if (i+bytes > length) throw File_Boundary_Exceeded();
 
 			return static_cast<char *>(data) + i;

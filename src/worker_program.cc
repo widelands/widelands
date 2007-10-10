@@ -358,9 +358,11 @@ void WorkerProgram::parse_walk(Worker_Descr *, Worker::Action * act, Parser *,
  * iparam2 = duration
  *
  */
-void WorkerProgram::parse_animation(Worker_Descr* descr, Worker::Action* act,
-									Parser* parser,
-									const std::vector<std::string>& cmd)
+void WorkerProgram::parse_animation
+(Worker_Descr                   * descr,
+ Worker::Action                 * act,
+ Parser                         * parser,
+ const std::vector<std::string> & cmd)
 {
 	char* endp;
 
@@ -372,9 +374,9 @@ void WorkerProgram::parse_animation(Worker_Descr* descr, Worker::Action* act,
 	if (!descr->is_animation_known(cmd[1].c_str())) {
 		// dynamically allocate animations here
 		Section* s = parser->prof->get_safe_section(cmd[1].c_str());
-		descr->add_animation(cmd[1].c_str(),
-		                     (g_anim.get(parser->directory.c_str(), s, 0,
-										 parser->encdata)));
+		descr->add_animation
+			(cmd[1].c_str(),
+			 (g_anim.get(parser->directory.c_str(), s, 0, parser->encdata)));
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 
