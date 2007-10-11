@@ -846,8 +846,8 @@ void Editor_Game_Base::cleanup_for_load
 	if (flush_graphics)
 		g_gr->flush(0);
 
-	const Player * const & players_end = m_players[MAX_PLAYERS];
-	for (Player * * p = m_players; p < &players_end; ++p) {
+	const Player * const * const players_end = m_players + MAX_PLAYERS;
+	for (Player * * p = m_players; p < players_end; ++p) {
 		delete *p;
 		*p = 0;
 	}
