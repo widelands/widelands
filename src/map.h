@@ -214,10 +214,10 @@ struct Map {
 	World * get_world() const {return m_world;}
    // The next few functions are only valid
    // when the map is loaded as an scenario.
-	const std::string & get_scenario_player_tribe(Player_Number);
-	const std::string & get_scenario_player_name (Player_Number);
-   void set_scenario_player_tribe(uint32_t i, std::string);
-   void set_scenario_player_name(uint32_t i, std::string);
+	const std::string & get_scenario_player_tribe(Player_Number) const;
+	const std::string & get_scenario_player_name (Player_Number) const;
+	void set_scenario_player_tribe(Player_Number, const std::string &);
+	void set_scenario_player_name (Player_Number, const std::string &);
 
 	BaseImmovable * get_immovable(const Coords) const;
 	uint32_t find_bobs

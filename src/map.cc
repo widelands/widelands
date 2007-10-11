@@ -471,27 +471,38 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 /*
  * The scenario get/set functions
  */
-const std::string & Map::get_scenario_player_tribe(const Player_Number i) {
-   assert(m_scenario_tribes.size()==m_nrplayers);
-
-   return m_scenario_tribes[i-1];
+const std::string & Map::get_scenario_player_tribe(const Player_Number p) const
+{
+   assert(m_scenario_tribes.size() == get_nrplayers());
+	assert(p);
+	assert(p <= get_nrplayers());
+   return m_scenario_tribes[p - 1];
 }
 
-const std::string & Map::get_scenario_player_name(const Player_Number i) {
-   assert(m_scenario_names.size()==m_nrplayers);
-
-   return m_scenario_names[i-1];
+const std::string & Map::get_scenario_player_name(const Player_Number p) const
+{
+	assert(m_scenario_names.size() == get_nrplayers());
+	assert(p);
+	assert(p <= get_nrplayers());
+	return m_scenario_names[p - 1];
 }
 
-void Map::set_scenario_player_tribe(uint32_t i, std::string str) {
-   assert(i<=m_nrplayers);
-   m_scenario_tribes.resize(m_nrplayers);
-   m_scenario_tribes[i-1]=str;
+void Map::set_scenario_player_tribe
+(const Player_Number p, const std::string & tribename)
+{
+	assert(p);
+	assert(p <= get_nrplayers());
+	m_scenario_tribes.resize(get_nrplayers());
+	m_scenario_tribes[p - 1] = tribename;
 }
-void Map::set_scenario_player_name(uint32_t i, std::string str) {
-   assert(i<=m_nrplayers);
-   m_scenario_names.resize(m_nrplayers);
-   m_scenario_names[i-1]=str;
+
+void Map::set_scenario_player_name
+(const Player_Number p, const std::string & playername)
+{
+	assert(p);
+	assert(p <= get_nrplayers());
+	m_scenario_names.resize(get_nrplayers());
+	m_scenario_names[p - 1] = playername;
 }
 
 /*
