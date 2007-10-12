@@ -52,13 +52,13 @@ throw (_wexception)
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version==CURRENT_PACKET_VERSION) {
-		const Uint16 nr_terrains = fr.Unsigned16();
+		const uint16_t nr_terrains = fr.Unsigned16();
 
       // construct ids and map
-		typedef std::map<const Uint16, Terrain_Descr::Index> terrain_id_map;
+		typedef std::map<const uint16_t, Terrain_Descr::Index> terrain_id_map;
 		terrain_id_map smap;
-		for (Uint16 i = 0; i < nr_terrains; ++i) {
-			const Uint16       id   = fr.Unsigned16();
+		for (uint16_t i = 0; i < nr_terrains; ++i) {
+			const uint16_t     id   = fr.Unsigned16();
          const char * const name = fr.CString   ();
 			const terrain_id_map::const_iterator it = smap.find(id);
 			if (it != smap.end())

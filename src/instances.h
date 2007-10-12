@@ -22,8 +22,6 @@
 
 #include "cmd_queue.h"
 
-#include <SDL_types.h>
-
 #include <map>
 #include <stdint.h>
 #include <string>
@@ -41,7 +39,7 @@ namespace UI {struct Tab_Panel;};
 //
 struct Map_Object_Descr {
 	friend class DirAnimations;
-		typedef Uint8 Index;
+		typedef uint8_t Index;
 		Map_Object_Descr() {}
 		virtual ~Map_Object_Descr() {m_anims.clear();}
 

@@ -284,7 +284,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == WORKER_BOB_PACKET_VERSION) {
 		if (Soldier * const soldier = dynamic_cast<Soldier *>(worker)) {
-			const Uint16 soldier_worker_bob_packet_version = fr->Unsigned16();
+			const uint16_t soldier_worker_bob_packet_version = fr->Unsigned16();
 			if
 				(2 <= soldier_worker_bob_packet_version
 				 and
@@ -292,14 +292,14 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 				 <=
 				 SOLDIER_WORKER_BOB_PACKET_VERSION)
 			{
-				const Uint32 min_hp = soldier->descr().get_min_hp();
+				const uint32_t min_hp = soldier->descr().get_min_hp();
 				assert(min_hp);
 				{
 					//  Soldiers created by old versions of Widelands have wrong
 					//  values for m_hp_max and m_hp_current; they
 					//  were soldier->descr().get_min_hp() less than they should be,
 					//  see bug #1687368.
-					const Uint32 broken_hp_compensation =
+					const uint32_t broken_hp_compensation =
 						soldier_worker_bob_packet_version < 3 ? min_hp : 0;
 
 					soldier->m_hp_current =
@@ -333,7 +333,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 		} else if
 			(Carrier * const carrier = dynamic_cast<Carrier *>(worker))
 		{
-			const Uint16 carrier_worker_bob_packet_version = fr->Unsigned16();
+			const uint16_t carrier_worker_bob_packet_version = fr->Unsigned16();
 			if
 				(carrier_worker_bob_packet_version
 				 ==

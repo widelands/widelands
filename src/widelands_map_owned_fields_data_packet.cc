@@ -41,20 +41,19 @@ void Widelands_Map_Owned_Fields_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-	if (not skip) {
-		FileRead fr;
-		try {fr.Open(fs, "binary/owned_fields");} catch (...) {return;}
-		const Uint16 packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
-			Map & map = egbase->map();
-			const Map::Index max_index = map.max_index();
-			for (Map::Index i = 0; i < max_index; ++i)
-				map[i].set_owned_by(fr.Unsigned8());
-		} else
-			throw wexception
-				("Unknown version in Widelands_Map_Owned_Fields_Data_Packet: %u",
-				 packet_version);
-	}
+	if (skip) return;
+	FileRead fr;
+	try {fr.Open(fs, "binary/owned_fields");} catch (...) {return;}
+	const uint16_t packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		Map & map = egbase->map();
+		const Map::Index max_index = map.max_index();
+		for (Map::Index i = 0; i < max_index; ++i)
+			map[i].set_owned_by(fr.Unsigned8());
+	} else
+		throw wexception
+			("Unknown version in Widelands_Map_Owned_Fields_Data_Packet: %u",
+			 packet_version);
 }
 
 

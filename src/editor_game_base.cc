@@ -118,8 +118,6 @@ last few cleanups
 ============
 */
 Editor_Game_Base::~Editor_Game_Base() {
-   int32_t i;
-
 	const Player * const * const players_end = m_players + MAX_PLAYERS;
 	for (Player * * p = m_players; p < players_end; ++p)
 		delete *p;

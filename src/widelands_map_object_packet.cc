@@ -53,17 +53,15 @@ void Widelands_Map_Object_Packet::Read
 		FileRead fr;
 		fr.Open(fs, "binary/mapobjects");
 
-		const Uint8 packet_version = fr.Unsigned8();
+		const uint8_t packet_version = fr.Unsigned8();
 		if (packet_version != CURRENT_PACKET_VERSION)
 			throw wexception("Unknown version %u", packet_version);
 
 		// Initial loading stage
-		for (;;) {
-			Uint8 header = fr.Unsigned8();
-			if (!header)
-				break;
-
-			switch (header) {
+		for (;;)
+			switch (uint8_t header = fr.Unsigned8()) {
+			case 0:
+				return;
 			case Map_Object::header_Immovable:
 				loaders.insert(Immovable::load(egbase, ol, fr));
 				break;
@@ -79,7 +77,6 @@ void Widelands_Map_Object_Packet::Read
 			default:
 				throw wexception("Unknown object header %u", header);
 			}
-		}
 	} catch (const std::exception & e) {
 		throw wexception("Loading map objects: %s", e.what());
 	} catch (...) {

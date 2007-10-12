@@ -51,40 +51,37 @@ void Widelands_Map_Building_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	if (not skip) {
-		FileRead fr;
-		try {
-			fr.Open(fs, "binary/building");
-		} catch (...) {
-			// not there, so skip
-			return ;
-		}
+	if (skip) return;
+	FileRead fr;
+	try {fr.Open(fs, "binary/building");} catch (...) {return;}
 
-		const Uint16 packet_version = fr.Unsigned16();
-		if (packet_version >= LOWEST_SUPPORTED_VERSION) {
-			Map & map = egbase->map();
-			const X_Coordinate width  = map.get_width ();
-			const Y_Coordinate height = map.get_height();
-			Player_Area<Area<FCoords> > a;
-			for (a.y = 0; a.y < height; ++a.y) for (a.x = 0; a.x < width; ++a.x) {
-				if (fr.Unsigned8()) {
-					// Ok, now read all the additional data
-					a.player_number = fr.Unsigned8();
-					int32_t serial=fr.Unsigned32();
-					const char * const name = fr.CString();
-					bool is_constructionsite=fr.Unsigned8();
+	const uint16_t packet_version = fr.Unsigned16();
+	if (packet_version >= LOWEST_SUPPORTED_VERSION) {
+		Map & map = egbase->map();
+		const X_Coordinate width  = map.get_width ();
+		const Y_Coordinate height = map.get_height();
+		Player_Area<Area<FCoords> > a;
+		for (a.y = 0; a.y < height; ++a.y) for (a.x = 0; a.x < width; ++a.x) {
+			if (fr.Unsigned8()) {
+				// Ok, now read all the additional data
+				a.player_number = fr.Unsigned8();
+				const uint32_t serial=fr.Unsigned32();
+				const char * const name = fr.CString();
+				bool is_constructionsite=fr.Unsigned8();
 
 					// No building lives on more than one main place
 					assert(!ol->is_object_known(serial));
 
 					// Get the tribe and the building index
-					Player * const player = egbase->get_safe_player(a.player_number);
-					assert(player); // He must be there FIXME Never use assert to validate input!
+				if
+					(Player * const player =
+					 egbase->get_safe_player(a.player_number))
+				{
 					const Tribe_Descr & tribe = player->tribe();
 					int32_t index= tribe.get_building_index(name);
 					if (index==-1)
 						throw wexception
-							("Widelands_Map_Building_Data_Packet::Read(): Should "
+							("Widelands_Map_Building_Data_Packet::Read: Should "
 							 "create building %s in tribe %s, but building is "
 							 "unknown!",
 							 name, tribe.name().c_str());
@@ -119,13 +116,16 @@ throw (_wexception)
 							(mr.location(), Area<>(a, a.radius));
 						while (mr.advance(map));
 					}
-				}
+				} else
+					throw wexception
+						("Widelands_Map_Building_Data_Packet::Read: player %u does "
+						 "not exist", a.player_number);
 			}
-		} else
-			throw wexception
-				("Unknown version %u in Widelands_Map_Building_Data_Packet!",
-				 packet_version);
-	}
+		}
+	} else
+		throw wexception
+			("Unknown version %u in Widelands_Map_Building_Data_Packet!",
+			 packet_version);
 }
 
 

@@ -60,17 +60,18 @@ throw (_wexception)
       return ;
 	}
 
-	const Uint16 packet_version = fr.Unsigned16();
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		const Extent extent = egbase->map().extent();
 		for (;;) {
-         uint32_t ser=fr.Unsigned32();
+			const uint32_t ser = fr.Unsigned32();
 
          if (ser==0xffffffff) break; // end of flags
          assert(ol->is_object_known(ser));
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG);
 
-         Flag* flag=static_cast<Flag*>(ol->get_object_by_file_index(ser));
+			Flag * const flag =
+				dynamic_cast<Flag *>(ol->get_object_by_file_index(ser));
 
          // The owner is already set, nothing to do from
          // PlayerImmovable
@@ -141,7 +142,7 @@ throw (_wexception)
          // Flag jobs
 			const uint16_t nr_jobs = fr.Unsigned16();
          assert(!flag->m_flag_jobs.size());
-			for (Uint16 i = 0; i < nr_jobs; ++i) {
+			for (uint16_t i = 0; i < nr_jobs; ++i) {
             Flag::FlagJob f;
             bool request=fr.Unsigned8();
             if (!request)

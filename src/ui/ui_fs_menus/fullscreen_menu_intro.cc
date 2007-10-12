@@ -19,8 +19,6 @@
 
 #include "fullscreen_menu_intro.h"
 
-#include <SDL.h>
-
 
 Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 	: Fullscreen_Menu_Base("splash.jpg")

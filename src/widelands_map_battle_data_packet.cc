@@ -64,10 +64,10 @@ throw (_wexception)
 		FileRead fr;
 		try {fr.Open(fs, "binary/battle");} catch (...) {return;}
 
-		const Uint16 packet_version = fr.Unsigned16();
+		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			const Uint32 nr_battles = fr.Unsigned32();
-			for (Uint32 i = 0; i < nr_battles; ++i) {
+			const uint32_t nr_battles = fr.Unsigned32();
+			for (uint32_t i = 0; i < nr_battles; ++i) {
          Battle* battle = 0;
 
          int32_t serial = fr.Unsigned32();

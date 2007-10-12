@@ -22,8 +22,6 @@
 
 #include "compile_assert.h"
 
-#include <SDL_types.h>
-
 #include <cmath>
 #include <limits>
 #include <stdint.h>
@@ -127,7 +125,7 @@ struct Vector {
 };
 
 
-typedef Sint16 Coordinate;
+typedef int16_t Coordinate;
 typedef Coordinate X_Coordinate;
 typedef Coordinate Y_Coordinate;
 /**
@@ -160,16 +158,16 @@ struct Coords {
 		{return a.all < b.all;}
 	};
 
-	union {struct {X_Coordinate x; Y_Coordinate y;}; Uint32 all;};
+	union {struct {X_Coordinate x; Y_Coordinate y;}; uint32_t all;};
 };
 compile_assert(sizeof(Coords) == 4);
 
 struct Extent {
-	Extent(const Uint16 W, const Uint16 H) throw () : w(W), h(H) {}
-	Uint16 w, h;
+	Extent(const uint16_t W, const uint16_t H) throw () : w(W), h(H) {}
+	uint16_t w, h;
 };
 
-template <typename _Coords_type = Coords, typename _Radius_type = Uint16>
+template <typename _Coords_type = Coords, typename _Radius_type = uint16_t>
 struct Area : public _Coords_type
 {
 	typedef _Coords_type Coords_type;

@@ -62,7 +62,7 @@ throw (_wexception)
 	const Extent map_extent = map.extent ();
 
    // First packet version
-	const Uint16 packet_version=fr.Unsigned16();
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (;;) {
          uint32_t reg=fr.Unsigned32();

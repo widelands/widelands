@@ -64,7 +64,7 @@ throw (_wexception)
 		// not there, so skip
 		return ;
 	}
-	const Uint16 packet_version = fr.Unsigned16();
+	const uint16_t packet_version = fr.Unsigned16();
 	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 		const Extent extent = egbase->map().extent();
 		uint32_t nrControllers = fr.Unsigned32();
@@ -94,14 +94,14 @@ throw (_wexception)
 
 				Coords battleGround;
 				if (packet_version == 1) {
-					const Uint32 x = fr.Unsigned32();
+					const uint32_t x = fr.Unsigned32();
 					if (extent.w <= x)
 						throw wexception
 							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
 							 "binary/attackcontroller:%u: battleGround has x "
 							 "coordinate %i, but the map width is only %u",
 							 fr.GetPrevPos(), x, extent.w);
-					const Uint32 y = fr.Unsigned32();
+					const uint32_t y = fr.Unsigned32();
 					if (extent.h <= y)
 						throw wexception
 							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "

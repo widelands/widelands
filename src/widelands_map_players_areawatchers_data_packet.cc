@@ -60,10 +60,10 @@ throw (_wexception)
 			catch (const File_error         &) {throw Not_Found();}
 			catch (const ZipOperation_error &) {throw Not_Found();}
 		} catch (const Not_Found) {continue;}
-		const Uint16 packet_version = fr.Unsigned16();
+		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			while (not fr.IsEOF()) {
-				const Uint32 reg = fr.Unsigned32();
+				const uint32_t reg = fr.Unsigned32();
 				if (ol->is_object_known(reg))
 					throw wexception
 						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "

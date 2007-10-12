@@ -59,11 +59,11 @@ throw (_wexception)
 
 		compile_assert(MAX_PLAYERS < 32);
 		Map & map = egbase->map();
-		const Uint8 nr_players = map.get_nrplayers();
+	const Player_Number nr_players = map.get_nrplayers();
 		const Map::Index max_index = map.max_index();
 	if (packet_version == 1) for (Map::Index i = 0; i < max_index; ++i) {
-		const Uint32 data = fr.Unsigned16();
-		for (Uint8 j = 0; j < nr_players; ++j) {
+		const uint32_t data = fr.Unsigned16();
+		for (uint8_t j = 0; j < nr_players; ++j) {
 			bool see = data & (1 << j);
 			if (Player * const player = egbase->get_player(j+1))
 				player->m_fields[i].vision = see ? 1 : 0;
@@ -75,8 +75,8 @@ throw (_wexception)
 		}
 	} else if (packet_version == CURRENT_PACKET_VERSION)
 		for (Map::Index i = 0; i < max_index; ++i) {
-			const Uint32 data = fr.Unsigned32();
-			for (Uint8 j = 0; j < nr_players; ++j) {
+			const uint32_t data = fr.Unsigned32();
+			for (uint8_t j = 0; j < nr_players; ++j) {
 				bool see = data & (1 << j);
 				if (Player * const player = egbase->get_player(j+1))
 					player->m_fields[i].vision = see ? 1 : 0;
@@ -109,12 +109,12 @@ throw (_wexception)
 
 	compile_assert(MAX_PLAYERS < 32);
 	Map & map = egbase->map();
-	const Uint8 nr_players = map.get_nrplayers();
+	const Player_Number nr_players = map.get_nrplayers();
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i) {
-		Uint32 data = 0;
-		for (Uint8 j = 0; j < nr_players; ++j) {
-			const Uint8 player_index = j + 1;
+		uint32_t data = 0;
+		for (uint8_t j = 0; j < nr_players; ++j) {
+			const uint8_t player_index = j + 1;
 			if (const Player * const player = egbase->get_player(player_index))
 				data |= ((0 < player->vision(i)) << j);
 		}

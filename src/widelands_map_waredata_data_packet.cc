@@ -58,7 +58,7 @@ throw (_wexception)
       return ;
 	}
 
-	const Uint16 packet_version=fr.Unsigned16();
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) for (;;) {
          uint32_t reg=fr.Unsigned32();
          if (reg==0xffffffff) break; // end of wares
@@ -69,7 +69,7 @@ throw (_wexception)
 			reg = fr.Unsigned32();
 			if (Map_Object * const location = ol->get_object_by_file_index(reg))
 			{
-				const Uint32 ware_index_from_file = fr.Unsigned32();
+				const uint32_t ware_index_from_file = fr.Unsigned32();
 				ware->m_descr_index = ware_index_from_file;
 				if
 					(PlayerImmovable * const player_immovable =

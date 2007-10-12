@@ -74,9 +74,9 @@ throw (_wexception)
 		FileRead fr;
 		try {fr.Open(fs, "binary/building_data");} catch (...) {return;}
 
-		const Uint16 packet_version = fr.Unsigned16();
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-		for (Uint32 ser; (ser = fr.Unsigned32()) != 0xffffffff;) {
+		for (uint32_t ser; (ser = fr.Unsigned32()) != 0xffffffff;) {
 
          assert(ol->is_object_known(ser));
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::BUILDING);
@@ -96,14 +96,14 @@ throw (_wexception)
 					(Building::Leave_Queue::iterator it = leave_queue.begin();
 					 it != leave_queue_end;
 					 ++it)
-					if (const Uint32 serial = fr.Unsigned32()) {
+					if (const uint32_t serial = fr.Unsigned32()) {
 						assert(ol->is_object_known(serial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 						*it = ol->get_object_by_file_index(serial);
 					} else
 						*it = 0;
 			}
          building->m_leave_time=fr.Unsigned32();
-			if (Uint32 serial = fr.Unsigned32()) {
+			if (const uint32_t serial = fr.Unsigned32()) {
 				assert(ol->is_object_known(serial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 				building->m_leave_allow=ol->get_object_by_file_index(serial);
 			} else
@@ -155,7 +155,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
       constructionsite.m_building=constructionsite.get_owner()->tribe().get_building_descr(constructionsite.get_owner()->tribe().get_safe_building_index(fr.CString()));
       bool prevb=fr.Unsigned8();
@@ -218,7 +218,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_WAREHOUSE_PACKET_VERSION) {
 		log("Reading warehouse stuff for %p\n", &warehouse);
       // Supply
@@ -416,7 +416,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-	const Uint16 trainingsite_packet_version = fr.Unsigned16();
+	const uint16_t trainingsite_packet_version = fr.Unsigned16();
 	if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION) {
          // Read productionsite
 		read_productionsite(trainingsite, fr, egbase, ol);

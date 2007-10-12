@@ -263,7 +263,7 @@ throw (_wexception)
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, *egbase, player) {
 		Player::Field * const player_fields = player->m_fields;
-		const Uint32 gametime = egbase->get_gametime();
+		const uint32_t gametime = egbase->get_gametime();
 
 		char unseen_times_filename[FILENAME_SIZE];
 		snprintf
@@ -355,7 +355,7 @@ throw (_wexception)
 					}
 
 					{//  edges
-						Uint8 mask = 0;
+						uint8_t mask = 0;
 						if (f_vision | bl_vision) mask  = Road_Mask << Road_SouthWest;
 						if (f_vision | br_vision) mask |= Road_Mask << Road_SouthEast;
 						if (f_vision |  r_vision) mask |= Road_Mask << Road_East;
@@ -490,7 +490,7 @@ throw (_wexception)
 
 				//  Store the player's view of roads and ownership in these
 				//  temporary variables and save it in the player when set.
-				Uint8         roads = 0;
+				uint8_t         roads = 0;
 				Player_Number owner;
 
 				switch (f_vision) { //  owner and map_object_descr
@@ -619,7 +619,7 @@ throw (_wexception)
 				}
 
 				{//  edges
-					Uint8 mask = 0;
+					uint8_t mask = 0;
 					if (f_seen | bl_seen) mask  = Road_Mask << Road_SouthWest;
 					else if (f_everseen | bl_everseen)
 						//  The player has seen the SouthWest edge but does not see it
@@ -763,7 +763,7 @@ inline static void write_unseen_immovable
   BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
 {
 	assert(map_object_descr != &g_road_descr);
-	Uint8 immovable_kind;
+	uint8_t immovable_kind;
 	if (not map_object_descr)
 		immovable_kind = 0;
 	else if
@@ -901,9 +901,9 @@ throw (_wexception)
 
 					//  geologic survey
 					if (f_everseen & bl_everseen & br_everseen) {
-						const Uint32 time_last_surveyed =
+						const uint32_t time_last_surveyed =
 							f_player_field.time_triangle_last_surveyed[TCoords<>::D];
-						const Uint8 has_info = time_last_surveyed != 0xffffffff;
+						const uint8_t has_info = time_last_surveyed != 0xffffffff;
 						surveys_file.put(has_info);
 						if (has_info) {
 							survey_amounts_file
@@ -912,9 +912,9 @@ throw (_wexception)
 						}
 					}
 					if (f_everseen & br_everseen & r_everseen) {
-						const Uint32 time_last_surveyed =
+						const uint32_t time_last_surveyed =
 							f_player_field.time_triangle_last_surveyed[TCoords<>::R];
-						const Uint8 has_info = time_last_surveyed != 0xffffffff;
+						const uint8_t has_info = time_last_surveyed != 0xffffffff;
 						surveys_file.put(has_info);
 						if (has_info) {
 							survey_amounts_file

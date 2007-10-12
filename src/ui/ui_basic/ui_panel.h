@@ -21,14 +21,16 @@
 #ifndef __S__PANEL_H
 #define __S__PANEL_H
 
-#include <cassert>
 #include "geometry.h"
-#include <list>
-#include <SDL_keyboard.h>
-#include <SDL_types.h>
-#include <stdint.h>
-#include <string>
 #include "ui_object.h"
+
+#include <SDL_keyboard.h>
+
+#include <cassert>
+#include <list>
+#include <string>
+
+#include <stdint.h>
 
 class RenderTarget;
 
