@@ -47,8 +47,7 @@ void Box::resize()
 	totaldepth = 0;
 	maxbreadth = 0;
 
-	for (idx = 0; idx < m_items.size(); idx++)
-		{
+	for (idx = 0; idx < m_items.size(); ++idx) {
 		int32_t depth, breadth;
 
 		get_item_size(idx, &depth, &breadth);
@@ -66,8 +65,7 @@ void Box::resize()
 	// Position the children
 	totaldepth = 0;
 
-	for (idx = 0; idx < m_items.size(); idx++)
-		{
+	for (idx = 0; idx < m_items.size(); ++idx) {
 		int32_t depth;
 
 		get_item_size(idx, &depth, 0);

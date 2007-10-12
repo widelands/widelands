@@ -43,13 +43,12 @@ Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
  * return the correct trigger for this id
  */
 Trigger* Trigger_Factory::get_correct_trigger(const char* id) {
-   std::string str = id;
-
-   if (str == "time") return new Trigger_Time();
-   else if (str == "null") return new Trigger_Null();
-   else if (str == "building") return new Trigger_Building();
-   else
-      throw wexception("Trigger_Factory::get_correct_trigger: Unknown trigger id found: %s\n", id);
+	if (strcmp("time",     id) == 0) return new Trigger_Time    ();
+	if (strcmp("null",     id) == 0) return new Trigger_Null    ();
+	if (strcmp("building", id) == 0) return new Trigger_Building();
+	throw wexception
+		("Trigger_Factory::get_correct_trigger: Unknown trigger id found: %s",
+		 id);
 
    // never here
    return 0;
@@ -99,7 +98,10 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
  */
 Trigger_Descr* Trigger_Factory::get_correct_trigger_descr(const char* id) {
    std::string str = id;
-   for (uint32_t i = 0; i < Trigger_Factory::get_nr_of_available_triggers(); i++)
+	for
+		(uint32_t i = 0;
+		 i < Trigger_Factory::get_nr_of_available_triggers();
+		 ++i)
       if (TRIGGER_DESCRIPTIONS[i].id == str)
          return &TRIGGER_DESCRIPTIONS[i];
 

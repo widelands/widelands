@@ -179,7 +179,11 @@ void Game_Main_Menu_Save_Game::fill_list() {
 
    Game_Preload_Data_Packet gpdp;
 
-   for (filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
+	for
+		(filenameset_t::iterator pname = m_gamefiles.begin();
+		 pname != m_gamefiles.end();
+		 ++pname)
+	{
       const char *name = pname->c_str();
 
       FileSystem* fs = 0;

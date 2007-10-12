@@ -1083,7 +1083,7 @@ void WLApplication::yield_double_game()
 		return;
 
 	if (may_run>0) {
-		may_run--;
+		--may_run;
 		kill (pid_peer, SIGUSR1);
 	}
 
@@ -1220,8 +1220,6 @@ void WLApplication::mainmenu_multiplayer()
 	case Fullscreen_Menu_NetSetup::JOINGAME: {
 		IPaddress peer;
 
-		//if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
-		//throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
 		uint32_t addr;
 		uint16_t port;
 

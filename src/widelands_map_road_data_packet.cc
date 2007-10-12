@@ -82,8 +82,8 @@ throw (_wexception)
    // Write roads, register this with the map_object_saver so that
    // it's data can be saved later.
    Map* map=egbase->get_map();
-   for (uint16_t y=0; y<map->get_height(); y++) {
-      for (uint16_t x=0; x<map->get_width(); x++) {
+	for (uint16_t y = 0; y < map->get_height(); ++y) {
+		for (uint16_t x = 0; x < map->get_width(); ++x) {
          BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
          // We only write Roads
          if (immovable && immovable->get_type()==Map_Object::ROAD) {

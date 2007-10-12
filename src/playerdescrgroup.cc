@@ -184,8 +184,7 @@ void PlayerDescriptionGroup::toggle_playertribe()
  * set the current player tribe
  */
 void PlayerDescriptionGroup::set_player_tribe(std::string str) {
-   uint32_t i=0;
-   for (i=0; i<m_tribes.size(); i++) {
+	for (uint32_t i = 0; i < m_tribes.size(); ++i) {
       if (m_tribes[i]==str) {
          m_current_tribe=i;
 			m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
@@ -200,7 +199,8 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
 		}
 	}
    // never here
-   throw wexception("Map defines tribe %s, but it doens't exist!\n", str.c_str());
+	throw wexception
+		("Map defines tribe %s, but it doens't exist!", str.c_str());
 }
 
 /*

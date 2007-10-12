@@ -161,7 +161,7 @@ void Fullscreen_Menu_InetLobby::room_info(std::vector<std::string > users) {
    /* We clear the list, and refill it */
    m_userlist->clear();
 
-   for (uint32_t i = 0; i < users.size(); i++) {
+	for (uint32_t i = 0; i < users.size(); ++i) {
       if (users[i] == m_gsc->get_username()) continue;
       std::string name = users[i];
 		m_userlist->add(name.c_str(), 0);

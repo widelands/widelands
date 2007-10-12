@@ -65,7 +65,7 @@ bool Worker::run_createitem(Game* g, State* state, const Action* action)
 	// For statistics, inform the user that a ware was produced
 	get_owner()->ware_produced(wareid);
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -144,7 +144,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 		if (pick < 0) {
 			assert(amount > 0);
 
-			amount--;
+			--amount;
 
 			mr.location().field->set_resources(res, amount);
 			break;
@@ -158,7 +158,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	molog("  Mined one item\n");
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -244,7 +244,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
 		return true;
 	}
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -323,7 +323,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 		molog("  %i found\n", list.size());
 	}
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -386,7 +386,7 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 
 	molog("  selected %i, %i\n", state->coords.x, state->coords.y);
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -460,7 +460,7 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 	// If we've already reached our destination, that's cool
 	if (get_position() == dest) {
 		molog("  reached\n");
-		state->ivar1++;
+		++state->ivar1;
 		return false; // next instruction
 	}
 
@@ -491,7 +491,7 @@ bool Worker::run_animation(Game* g, State* state, const Action* action)
 {
 	set_animation(g, action->iparam1);
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, action->iparam2);
 	return true;
 }
@@ -507,7 +507,7 @@ bool Worker::run_return(Game* g, State* state, const Action* action)
 {
 	molog("  Return(%i)\n", action->iparam1);
 
-	state->ivar1++;
+	++state->ivar1;
 	start_task_return(g, action->iparam1);
 	return true;
 }
@@ -557,7 +557,7 @@ bool Worker::run_object(Game* g, State* state, const Action* action)
 		throw wexception("MO(%u): [actObject]: bad object type = %i",
 		                 get_serial(), obj->get_type());
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -624,7 +624,7 @@ bool Worker::run_removeobject(Game * g, State * state, const Action *)
 		state->objvar1 = 0;
 	}
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -652,7 +652,7 @@ bool Worker::run_geologist(Game* g, State* state, const Action* action)
 	molog("  Start Geologist (%i attempts, %i radius -> %s)\n", action->iparam1,
 	      action->iparam2, action->sparam1.c_str());
 
-	state->ivar1++;
+	++state->ivar1;
 	start_task_geologist(action->iparam1, action->iparam2, action->sparam1);
 	return true;
 }
@@ -697,7 +697,7 @@ bool Worker::run_playFX(Game* g, State* state, const Action* action)
 {
 	g_sound_handler.play_fx(action->sparam1, get_position(), action->iparam1);
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -2108,7 +2108,7 @@ void Worker::fugitive_update(Game* g, State* state)
 
 		molog("[fugitive]: found warehouse(s)\n");
 
-		for (uint32_t i = 0; i < warehouses.size(); i++) {
+		for (uint32_t i = 0; i < warehouses.size(); ++i) {
 			Warehouse *wh = (Warehouse*)warehouses[i].object;
 
 			// Only walk into one of our warehouses
@@ -2230,7 +2230,7 @@ void Worker::geologist_update(Game* g, State* state)
 		{
 			molog("[geologist]: Starting program '%s'\n", state->svar1.c_str());
 
-			state->ivar1--;
+			--state->ivar1;
 			start_task_program(state->svar1);
 			return;
 		}

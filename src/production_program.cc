@@ -132,8 +132,8 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 				throw wexception("Line %i: Usage: produce <ware>", idx);
 
 			if (!building->is_output(cmd[1]))
-				throw wexception("Line %i: Ware %s is not in [outputs]\n", idx,
-					cmd[1].c_str());
+				throw wexception
+					("Line %i: Ware %s is not in [outputs]", idx, cmd[1].c_str());
 
 			act.type = ProductionAction::actProduce;
 			act.sparam1 = cmd[1];

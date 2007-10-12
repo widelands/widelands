@@ -243,7 +243,10 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 	//Add subdirectories to the list
 	//TODO: but skip uncompressed maps (which look like directories)
-	for (filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
+	for
+		(filenameset_t::iterator pname = m_mapfiles.begin();
+		 pname != m_mapfiles.end(); ++pname)
+	{
 		const char *name = pname->c_str();
 		if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
 		if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
@@ -261,7 +264,11 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	{
 		Map map; //Map_Loader needs a place to put it's preload data
 
-		for (filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
+		for
+			(filenameset_t::iterator pname = m_mapfiles.begin();
+			 pname != m_mapfiles.end();
+			 ++pname)
+		{
 			const char *name = pname->c_str();
 
 			Map_Loader * const ml = map.get_correct_loader(name);

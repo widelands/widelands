@@ -33,7 +33,7 @@
  */
 WareList::~WareList()
 {
-	for (uint32_t id = 0; id < m_wares.size(); id++) {
+	for (uint32_t id = 0; id < m_wares.size(); ++id) {
 		if (m_wares[id])
 			log("WareList: %i items of %i left.\n", m_wares[id], id);
 	}
@@ -58,7 +58,7 @@ void WareList::add(const WareList &wl)
 	if (wl.m_wares.size() > m_wares.size())
 		m_wares.reserve(wl.m_wares.size());
 
-	for (uint32_t id = 0; id < wl.m_wares.size(); id++)
+	for (uint32_t id = 0; id < wl.m_wares.size(); ++id)
 		if (wl.m_wares[id])
 			add(id, wl.m_wares[id]);
 }
@@ -79,7 +79,7 @@ void WareList::remove(const size_type id, const count_type count) {
 
 void WareList::remove(const WareList &wl)
 {
-	for (uint32_t id = 0; id < wl.m_wares.size(); id++)
+	for (uint32_t id = 0; id < wl.m_wares.size(); ++id)
 		if (wl.m_wares[id])
 			remove(id, wl.m_wares[id]);
 }
@@ -109,13 +109,13 @@ bool WareList::operator==(const WareList &wl) const
 			if (count) // wl2 has 0 stock per definition
 				return false;
 		}
-		i++;
+		++i;
 	}
 
 	while (i < m_wares.size()) {
 		if (m_wares[i]) // wl1 has 0 stock per definition
 			return false;
-		i++;
+		++i;
 	}
 
 	return true;

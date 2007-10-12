@@ -68,7 +68,7 @@ throw (_wexception)
 	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 		const Extent extent = egbase->map().extent();
 		uint32_t nrControllers = fr.Unsigned32();
-		for (uint32_t i=0;i<nrControllers;i++) {
+		for (uint32_t i = 0; i < nrControllers; ++i) {
 			AttackController* ctrl = egbase->create_attack_controller();
 
 			fr.Unsigned32();
@@ -85,7 +85,7 @@ throw (_wexception)
 
 			uint32_t numBs = fr.Unsigned32();
 
-			for (uint32_t j=0;j<numBs;j++) {
+			for (uint32_t j = 0; j < numBs; ++j) {
 				Soldier* soldier = (Soldier*) ol->get_object_by_file_index(fr.Unsigned32());
 				assert(soldier);
 
@@ -142,7 +142,7 @@ throw (_wexception)
 			}
 
 			uint32_t numInMs = fr.Unsigned32();
-			for (uint32_t j=0;j<numInMs;j++) {
+			for (uint32_t j = 0; j < numInMs; ++j) {
 			MilitarySite* ms = (MilitarySite*) ol->get_object_by_file_index(fr.Unsigned32());
 			assert(ms);
 			ctrl->involvedMilitarySites.insert(ms);

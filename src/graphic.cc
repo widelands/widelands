@@ -193,11 +193,9 @@ void Graphic::refresh(bool force)
 */
 void Graphic::flush(int32_t mod)
 {
-	uint32_t i;
-
 	// Flush pictures
 
-	for (i = 0; i < m_pictures.size(); i++) {
+	for (uint32_t i = 0; i < m_pictures.size(); ++i) {
 		Picture* pic = &m_pictures[i];
 
 		//      NoLog("Flushing picture: %i while flushing all!\n", i);
@@ -230,12 +228,12 @@ void Graphic::flush(int32_t mod)
 
 	// Flush game items
 	if (!mod || mod & PicMod_Game) {
-		for (i = 0; i < m_maptextures.size(); i++)
+		for (uint32_t i = 0; i < m_maptextures.size(); ++i)
 			delete m_maptextures[i];
 
 		m_maptextures.resize(0);
 
-		for (i = 0; i < m_animations.size(); i++)
+		for (uint32_t i = 0; i < m_animations.size(); ++i)
 			delete m_animations[i];
 
 		m_animations.resize(0);
@@ -433,7 +431,7 @@ void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
 		(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(0), 0, 0);
 
 	if (!png_ptr)
-		throw wexception("Graphic::save_png: Couldn't create png struct!\n");
+		throw wexception("Graphic::save_png: Couldn't create png struct!");
 
 	// Set another write function
 	png_set_write_fn(png_ptr, fw, &Graphic::m_png_write_function, 0);
@@ -442,13 +440,13 @@ void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
 
 	if (!info_ptr) {
 		png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
-		throw wexception("Graphic::save_png: Couldn't create png info struct!\n");
+		throw wexception("Graphic::save_png: Couldn't create png info struct!");
 	}
 
 	// Set jump for error
 	if (setjmp(png_jmpbuf(png_ptr))) {
 		png_destroy_write_struct(&png_ptr, &info_ptr);
-		throw wexception("Graphic::save_png: Couldn't set png setjmp!\n");
+		throw wexception("Graphic::save_png: Couldn't set png setjmp!");
 	}
 
 	// Fill info struct
@@ -469,10 +467,10 @@ void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
 	png_bytep row = new png_byte[4*surf->get_w()];
 
 	// Write each row
-	for (uint32_t y = 0; y < surf->get_h(); y++) {
+	for (uint32_t y = 0; y < surf->get_h(); ++y) {
 		uint32_t i = 0;
 
-		for (uint32_t x = 0; x < surf->get_w(); x++) {
+		for (uint32_t x = 0; x < surf->get_w(); ++x) {
 			uint8_t r, g, b, a;
 			SDL_GetRGBA
 			(surf->get_pixel(x, y),
@@ -583,7 +581,7 @@ uint32_t Graphic::get_maptexture(const char & fnametempl, const uint32_t frameti
 */
 void Graphic::animate_maptextures(uint32_t time)
 {
-	for (uint32_t i = 0; i < m_maptextures.size(); i++)
+	for (uint32_t i = 0; i < m_maptextures.size(); ++i)
 		m_maptextures[i]->animate(time);
 }
 
@@ -592,7 +590,7 @@ void Graphic::animate_maptextures(uint32_t time)
  */
 void Graphic::reset_texture_animation_reminder()
 {
-	for (uint32_t i = 0; i < m_maptextures.size(); i++)
+	for (uint32_t i = 0; i < m_maptextures.size(); ++i)
 		m_maptextures[i]->reset_was_animated();
 }
 
@@ -725,7 +723,7 @@ AnimationGfx* Graphic::get_animation(const uint32_t anim) const
 */
 Texture* Graphic::get_maptexture_data(uint32_t id)
 {
-	id--; // ID 1 is at m_maptextures[0]
+	--id; // ID 1 is at m_maptextures[0]
 
 	if (id < m_maptextures.size())
 		return m_maptextures[id];

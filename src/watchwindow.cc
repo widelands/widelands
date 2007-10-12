@@ -181,7 +181,7 @@ void WatchWindow::next_view(bool first) {
 	if (first || (static_cast<uint32_t>(m_cur_index) == m_views.size()-1 && m_cur_index != 0))
 		m_cur_index = 0;
 	else if (static_cast<uint32_t>(m_cur_index) < m_views.size()-1)
-		m_cur_index++;
+		++m_cur_index;
 	show_view(first);
 }
 
@@ -209,8 +209,8 @@ void WatchWindow::close_cur_view() {
 
 	std::vector<WatchWindowView>::iterator view_it = m_views.begin();
 
-	for (int32_t i=0;i<old_index;i++)
-		view_it++;
+	for (int32_t i = 0; i < old_index; ++i)
+		++view_it;
 
 	m_view_btns[m_cur_index]->set_enabled(false);
 	m_views.erase(view_it);
@@ -219,7 +219,7 @@ void WatchWindow::close_cur_view() {
 
 //Enables/Disables buttons for views
 void WatchWindow::toggle_buttons() {
-	for (uint32_t i=0;i<NUM_VIEWS;i++) {
+	for (uint32_t i = 0; i < NUM_VIEWS; ++i) {
 		if (i<m_views.size()) {
 			char buffer[32];
 			snprintf(buffer, sizeof(buffer), "%i", i + 1);
@@ -274,7 +274,7 @@ void WatchWindow::start_tracking(Point pos)
 	int32_t closest_dist = -1;
 	Bob* closest = 0;
 
-	for (uint32_t i = 0; i < bobs.size(); i++) {
+	for (uint32_t i = 0; i < bobs.size(); ++i) {
 		Bob* bob = bobs[i];
 		Point p;
 

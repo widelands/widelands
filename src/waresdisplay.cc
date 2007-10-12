@@ -126,7 +126,7 @@ void WaresDisplay::draw(RenderTarget* dst)
    int32_t totid=0;
 	for (int32_t id = 0; id < number; ++id, ++totid) {
       uint32_t totalstock = 0;
-      for (uint32_t i = 0; i < m_warelists.size(); i++)
+		for (uint32_t i = 0; i < m_warelists.size(); ++i)
          totalstock += m_warelists[i]->stock(id);
 
 		draw_ware(*dst, p, id, totalstock, is_worker);

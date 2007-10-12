@@ -406,19 +406,14 @@ void Soldier_Descr::load_graphics() {
 	m_attack_pics.resize(m_max_attack_level+1);
 	m_defense_pics.resize(m_max_defense_level+1);
 	m_evade_pics.resize(m_max_evade_level+1);
-	uint32_t i;
-	for (i=0; i<=m_max_hp_level; i++) {
+	for (uint32_t i = 0; i <= m_max_hp_level;      ++i)
 		m_hp_pics[i]=g_gr->get_picture(PicMod_Game,  m_hp_pics_fn[i].c_str());
-	}
-	for (i=0; i<=m_max_attack_level; i++) {
+	for (uint32_t i = 0; i <= m_max_attack_level;  ++i)
 		m_attack_pics[i]=g_gr->get_picture(PicMod_Game,  m_attack_pics_fn[i].c_str());
-	}
-	for (i=0; i<=m_max_defense_level; i++) {
+	for (uint32_t i = 0; i <= m_max_defense_level; ++i)
 		m_defense_pics[i]=g_gr->get_picture(PicMod_Game,  m_defense_pics_fn[i].c_str());
-	}
-	for (i=0; i<=m_max_evade_level; i++) {
+	for (uint32_t i = 0; i <= m_max_evade_level;   ++i)
 		m_evade_pics[i]=g_gr->get_picture(PicMod_Game,  m_evade_pics_fn[i].c_str());
-	}
 	Worker_Descr::load_graphics();
 }
 

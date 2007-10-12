@@ -84,7 +84,7 @@ int32_t Widelands_Map_Map_Object_Loader::get_nr_unloaded_objects()
 
 	while (i != m_loaded_obj.end()) {
 		if (!i->second)
-			retval++;
+			++retval;
 		++i;
 	}
 	return retval;

@@ -51,8 +51,7 @@ m_parent(parent)
    m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
 
-   uint32_t i=0;
-   for (i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
+   for (uint32_t i = 0; i < Event_Factory::get_nr_of_available_events(); ++i) {
 		Event_Descr & d = *Event_Factory::get_event_descr(i);
 		m_event_list->add(_(d.name).c_str(), d);
 	}

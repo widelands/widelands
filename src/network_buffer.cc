@@ -76,7 +76,7 @@ std::string Network_Buffer::get_string(bool remove) {
    assert(remove); // TODO: allow peeking also for string
 
    uint32_t s = get_16(1);
-   for (uint32_t i=0; i<s; i++)
+	for (uint32_t i = 0; i < s; ++i)
       retval.append(1, get_16(1));
 
    return retval;
@@ -124,7 +124,7 @@ void Network_Buffer::put_32(uint32_t val) {
 void Network_Buffer::put_string(std::string string) {
    put_16(string.size());
 
-   for (uint32_t i=0; i<string.size(); i++) {
+	for (uint32_t i = 0; i < string.size(); ++i) {
       put_16(string[i]);
 	}
 }
@@ -154,8 +154,10 @@ int32_t Network_Buffer::fill(TCPsocket sock) {
 	while (received != s) {
       uint32_t retval = SDLNet_TCP_Recv(sock, m_buffer+m_buffer_pointer+received, s - received);
 
-      if (retval <= 0)
-         throw wexception("Network_Buffer::fill: SDLNet_TCP_Recv brought up an error!: %s\n", SDLNet_GetError());
+		if (retval <= 0)
+			throw wexception
+				("Network_Buffer::fill: SDLNet_TCP_Recv brought up an error!: %s",
+				 SDLNet_GetError());
       received += retval;
 	}
 

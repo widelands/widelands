@@ -264,7 +264,7 @@ void ConstructionSite::set_previous_building
 	m_prev_building = previous_building_descr;
 
 	if (not m_prev_building->get_animation("build"))
-      throw wexception("Trying to enhance a non buildable building!\n");
+		throw wexception("Trying to enhance a non buildable building!");
 }
 
 /*
@@ -278,10 +278,9 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void ConstructionSite::set_economy(Economy* e)
 {
 	Economy* old = get_economy();
-	uint32_t i;
 
 	if (old) {
-		for (i = 0; i < m_wares.size(); i++)
+		for (size_t i = 0; i < m_wares.size(); ++i)
 			m_wares[i]->remove_from_economy(old);
 	}
 
@@ -290,7 +289,7 @@ void ConstructionSite::set_economy(Economy* e)
 		m_builder_request->set_economy(e);
 
 	if (e) {
-		for (i = 0; i < m_wares.size(); i++)
+		for (size_t i = 0; i < m_wares.size(); ++i)
 			m_wares[i]->add_to_economy(e);
 	}
 }
@@ -358,7 +357,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	// Cleanup the wares queues
-	for (uint32_t i = 0; i < m_wares.size(); i++) {
+	for (uint32_t i = 0; i < m_wares.size(); ++i) {
 		m_wares[i]->cleanup();
 		delete m_wares[i];
 	}
@@ -448,7 +447,7 @@ Remember the item on the flag. The worker will be sent from get_building_work().
 */
 bool ConstructionSite::fetch_from_flag(Game* g)
 {
-	m_fetchfromflag++;
+	++m_fetchfromflag;
 
 	Worker* builder = m_builder.get(g);
 	if (builder)
@@ -477,7 +476,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 			molog("ConstructionSite::check_work: step %i completed\n", m_work_completed);
 			//TODO(fweber): cause "construction sounds" to be played - perhaps dependent on kind of construction?
 
-			m_work_completed++;
+			++m_work_completed;
 			if (m_work_completed >= m_work_steps)
 				schedule_destroy(g);
 
@@ -487,7 +486,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 
 	// Fetch items from flag
 	if (m_fetchfromflag) {
-		m_fetchfromflag--;
+		--m_fetchfromflag;
 		w->start_task_fetchfromflag();
 		return true;
 	}
@@ -495,7 +494,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 	// Check if we've got wares to consume
 	if (m_work_completed < m_work_steps)
 	{
-		for (uint32_t i = 0; i < m_wares.size(); i++) {
+		for (uint32_t i = 0; i < m_wares.size(); ++i) {
 			WaresQueue* wq = m_wares[i];
 
 			if (!wq->get_filled())

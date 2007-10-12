@@ -147,8 +147,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 	x = 0;
 	y = 0;
 
-	for (uint32_t idx = 0; idx < m_items.size(); idx++)
-	{
+	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		const uint32_t picid = m_items[idx].picid;
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);

@@ -35,9 +35,9 @@ Richtext_Block::Richtext_Block() {
 Richtext_Block::Richtext_Block(const Richtext_Block &src) {
 	m_images.clear();
 	m_text_blocks.clear();
-	for (uint32_t i=0;i<src.m_images.size();i++)
+	for (uint32_t i = 0; i < src.m_images.size(); ++i)
 		m_images.push_back(src.m_images[i]);
-	for (uint32_t i=0;i<src.m_text_blocks.size();i++)
+	for (uint32_t i=0;i<src.m_text_blocks.size(); ++i)
 		m_text_blocks.push_back(src.m_text_blocks[i]);
 	m_image_align = src.m_image_align;
 	m_text_align = src.m_text_align;
@@ -56,18 +56,18 @@ Text_Block::Text_Block() {
 Text_Block::Text_Block(const Text_Block &src) {
 	m_words.clear();
 	m_line_breaks.clear();
-	for (uint32_t i=0;i<src.m_words.size();i++)
+	for (uint32_t i = 0; i < src.m_words.size(); ++i)
 		m_words.push_back(src.m_words[i]);
-	for (uint32_t i=0;i<src.m_line_breaks.size();i++)
+	for (uint32_t i = 0; i < src.m_line_breaks.size(); ++i)
 		m_line_breaks.push_back(src.m_line_breaks[i]);
-	m_font_size = src.m_font_size;
-	m_font_color = src.m_font_color;
-	m_font_weight = src.m_font_weight;
-	m_font_style = src.m_font_style;
+	m_font_size       = src.m_font_size;
+	m_font_color      = src.m_font_color;
+	m_font_weight     = src.m_font_weight;
+	m_font_style      = src.m_font_style;
 	m_font_decoration = src.m_font_decoration;
-	m_font_face = src.m_font_face;
-	m_line_spacing = src.m_line_spacing;
-		}
+	m_font_face       = src.m_font_face;
+	m_line_spacing    = src.m_line_spacing;
+}
 
 Text_Parser::Text_Parser() {}
 
@@ -146,7 +146,11 @@ bool Text_Parser::parse_textblock
 	split_words(block_text, &unwrapped_words);
 
 	//Handle user defined line breaks, and save them
-	for (std::vector<std::string>::const_iterator it = unwrapped_words.begin(); it != unwrapped_words.end(); it++) {
+	for
+		(std::vector<std::string>::const_iterator it = unwrapped_words.begin();
+		 it != unwrapped_words.end();
+		 ++it)
+	{
 		std::string line = *it;
 		while (true) {
 			SSS_T next_break = line.find("<br>");

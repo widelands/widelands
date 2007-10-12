@@ -294,7 +294,7 @@ void General_Statistics_Menu::cb_changed_to(int32_t id, bool what) {
  * The radiogroup has changed
  */
 void General_Statistics_Menu::radiogroup_changed(int32_t id) {
-   for (uint32_t i = 0; i < m_parent->get_game()->get_general_statistics().size(); i++) {
+	for (uint32_t i = 0; i < m_parent->game().get_general_statistics().size(); ++i) {
       if (!m_cbs[i]) continue;
 
       m_plot->show_plot(i* NR_DIFFERENT_DATASETS + id, m_cbs[i]->get_state());

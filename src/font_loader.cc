@@ -60,13 +60,13 @@ TTF_Font* Font_Loader::open_font(const std::string& name, int32_t size) {
    m_freads.push_back(fr);
 
    SDL_RWops* ops = SDL_RWFromMem(fr->Data(0), fr->GetSize());
-   if (!ops)
-      throw wexception("Couldn't load font!: RWops Pointer invalid\n");
+	if (!ops)
+		throw wexception("Couldn't load font!: RWops Pointer invalid");
 
    TTF_Font* font = TTF_OpenFontIndexRW(ops, 1, size, 0);
 
-   if (!font)
-      throw wexception("Couldn't load font!: %s\n", TTF_GetError());
+	if (!font)
+		throw wexception("Couldn't load font!: %s", TTF_GetError());
 	return font;
 }
 
@@ -101,12 +101,14 @@ TTF_Font* Font_Loader::get_font(std::string name, int32_t size) {
 * Clears the font cache.
 */
 void Font_Loader::clear_fonts() {
-	for (std::map<std::string, TTF_Font*>::iterator i = m_font_table.begin(); i != m_font_table.end(); i++) {
+	for
+		(std::map<std::string, TTF_Font *>::iterator i = m_font_table.begin();
+		 i != m_font_table.end();
+		 ++i)
 		TTF_CloseFont(i->second);
-	}
 	m_font_table.clear();
 
-   for (uint32_t i = 0; i < m_freads.size(); i++)
+	for (uint32_t i = 0; i < m_freads.size(); ++i)
       delete m_freads[i];
    m_freads.resize(0);
 }

@@ -576,11 +576,11 @@ bool Carrier::start_task_walktoflag(Game* g, int32_t flag, bool offset)
 	if (!flag) {
 		idx = 0;
 		if (offset)
-			idx++;
+			++idx;
 	} else {
 		idx = path.get_nsteps();
 		if (offset)
-			idx--;
+			--idx;
 	}
 
 	return start_task_movepath

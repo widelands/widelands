@@ -165,7 +165,7 @@ m_event_chain(chain)
 		 &Editor_Event_Menu_Edit_EventChain::end_modal, this, 0,
 		 _("Cancel"));
 
-   for (uint32_t i = 0; i < m_event_chain->get_nr_events(); i++) {
+   for (uint32_t i = 0; i < m_event_chain->get_nr_events(); ++i) {
 		Event & event = *m_event_chain->get_event(i);
 		m_events->add(event.name().c_str(), event);
 	}
@@ -214,7 +214,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
       // Events
       m_event_chain->clear_events();
 	const uint32_t nr_events = m_events->size();
-	for (uint32_t i = 0; i < nr_events; i++)
+	for (uint32_t i = 0; i < nr_events; ++i)
 		m_event_chain->add_event(&(*m_events)[i]);
       end_modal(1);
 }

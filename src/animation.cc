@@ -54,19 +54,18 @@ shadowclr_[r, g, b]  color for shadow pixels
 */
 void EncodeData::parse(Section *s)
 {
-	int32_t i;
-	int32_t r, g, b;
+	uint8_t i;
 
 	// Read player color codes
-	for (i = 0; i < 4; i++) {
+	for (i = 0; i < 4; ++i) {
 		char keyname[32];
 
 		snprintf(keyname, sizeof(keyname), "plrclr%i_r", i);
-		r = s->get_int(keyname, -1);
+		const int32_t r = s->get_int(keyname, -1);
 		snprintf(keyname, sizeof(keyname), "plrclr%i_g", i);
-		g = s->get_int(keyname, -1);
+		const int32_t g = s->get_int(keyname, -1);
 		snprintf(keyname, sizeof(keyname), "plrclr%i_b", i);
-		b = s->get_int(keyname, -1);
+		const int32_t b = s->get_int(keyname, -1);
 
 		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 			break;
@@ -90,7 +89,7 @@ void EncodeData::add(const EncodeData *other)
 {
 	if (other->hasplrclrs) {
 		hasplrclrs = true;
-		for (int32_t i = 0; i < 4; i++)
+		for (int32_t i = 0; i < 4; ++i)
 			plrclr[i] = other->plrclr[i];
 	}
 }
@@ -348,7 +347,7 @@ void DirAnimations::parse(Map_Object_Descr* b, const char *directory, Profile *p
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.png", sectnamebase);
 	}
 
-	for (int32_t dir = 1; dir <= 6; dir++) {
+	for (int32_t dir = 1; dir <= 6; ++dir) {
 		static const char *dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 		char sectname[300];
 		Section *s;

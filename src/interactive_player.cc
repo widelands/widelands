@@ -178,7 +178,7 @@ void Interactive_Player::think()
 	m_chat_messages.set_text("");
 	if (m_show_chatmsg.size() && m_do_chat_overlays) {
 		std::string str;
-		for (uint32_t i = 0; i < m_show_chatmsg.size(); i++) {
+		for (uint32_t i = 0; i < m_show_chatmsg.size(); ++i) {
 			const NetGame::Chat_Message& t = m_show_chatmsg[i].msg;
 			str += get_game()->get_player(t.plrnum)->get_name();
 			str += ": ";
@@ -187,7 +187,7 @@ void Interactive_Player::think()
 
 			if (WLApplication::get()->get_time() - m_show_chatmsg[i].starttime > CHAT_DISPLAY_TIME) {
 				m_show_chatmsg.erase(m_show_chatmsg.begin() + i);
-				i--;
+				--i;
 			}
 		}
 

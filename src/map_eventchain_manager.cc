@@ -29,7 +29,7 @@ MapEventChainManager::MapEventChainManager() {}
 
 
 MapEventChainManager::~MapEventChainManager() {
-   for (uint32_t i = 0; i < m_eventchains.size(); i++)
+	for (uint32_t i = 0; i < m_eventchains.size(); ++i)
       delete m_eventchains[i];
    m_eventchains.resize(0);
 }
@@ -49,9 +49,8 @@ bool MapEventChainManager::register_new_eventchain(EventChain* mv) {
  */
 EventChain* MapEventChainManager::get_eventchain(const char * const name) const
 {
-   uint32_t i;
    EventChain* retval = 0;
-   for (i = 0; i < m_eventchains.size(); i++) {
+	for (uint32_t i = 0; i < m_eventchains.size(); ++i) {
       if (!strcmp(m_eventchains[i]->name().c_str(), name)) {
          retval = m_eventchains[i];
          break;
@@ -65,7 +64,7 @@ EventChain* MapEventChainManager::get_eventchain(const char * const name) const
  * Remove a eventchain
  */
 void MapEventChainManager::delete_eventchain(const std::string & name) {
-   for (uint32_t i = 0; i < m_eventchains.size(); i++) {
+	for (uint32_t i = 0; i < m_eventchains.size(); ++i) {
       if (m_eventchains[i]->name() == name) {
          assert(m_eventchains[i]->get_trigcond());
          m_eventchains[i]->get_trigcond()->unreference_triggers(m_eventchains[i]);

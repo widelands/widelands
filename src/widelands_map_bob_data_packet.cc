@@ -64,7 +64,7 @@ void Widelands_Map_Bob_Data_Packet::ReadBob
 
 	if (owner == "world") {
 		if (subtype != Bob::CRITTER)
-			throw wexception("world bob is not a critter!\n");
+			throw wexception("world bob is not a critter!");
 
 		int32_t idx = egbase->get_map()->get_world()->get_bob(name.c_str());
 		if (idx == -1)
@@ -126,19 +126,17 @@ throw (_wexception)
 	Map* map = egbase->get_map();
 
 	// First packet version
-	Uint16 packet_version = fr.Unsigned16();
-
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		// Now get all the the bobs
-		for (uint16_t y = 0; y < map->get_height(); y++) {
-			for (uint16_t x = 0; x < map->get_width(); x++) {
+		for (uint16_t y = 0; y < map->get_height(); ++y) {
+			for (uint16_t x = 0; x < map->get_width(); ++x) {
 				uint32_t nr_bobs = fr.Unsigned32();
 
 				assert(!egbase->get_map()->get_field(Coords(x, y))->get_first_bob());
 
-				for (uint32_t i = 0; i < nr_bobs; i++) {
+				for (uint32_t i = 0; i < nr_bobs; ++i)
 					ReadBob(fr, egbase, skip, ol, Coords(x, y));
-				}
 			}
 		}
 	} else
@@ -173,14 +171,14 @@ throw (_wexception)
 	//      ...
 	//      bobn
 	Map* map=egbase->get_map();
-	for (uint16_t y=0; y<map->get_height(); y++) {
-		for (uint16_t x=0; x<map->get_width(); x++) {
+	for (uint16_t y = 0; y < map->get_height(); ++y) {
+		for (uint16_t x = 0; x < map->get_width(); ++x) {
 			std::vector<Bob*> bobarr;
 
 			map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr); //  FIXME clean up this mess!
 			fw.Unsigned32(bobarr.size());
 
-			for (uint32_t i=0;i<bobarr.size(); i++) {
+			for (uint32_t i = 0; i < bobarr.size(); ++i) {
 				// write serial number
 				assert(not os->is_object_known(bobarr[i])); // a bob can't be owned by two fields
 				const uint32_t reg = os->register_object(bobarr[i]);

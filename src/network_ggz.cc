@@ -497,8 +497,7 @@ void NetGGZ::join(const char *tablename) {
 
 	tableid = -1;
 	num = ggzcore_room_get_num_tables(room);
-	for (i = 0; i < num; i++)
-	{
+	for (i = 0; i < num; ++i) {
 		table = ggzcore_room_get_nth_table(room, i);
 		desc = ggzcore_table_get_desc(table);
 		if (!desc) desc = "(unknown map)";

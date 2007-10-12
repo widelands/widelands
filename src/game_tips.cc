@@ -135,7 +135,7 @@ const RGBColor GameTips::color_from_hex
 
 	// skip leading '#'
 	if (hexcode[0] == '#')
-		hexcode++;
+		++hexcode;
 
 	uint32_t red   = 0x100;
 	uint32_t green = 0x100;

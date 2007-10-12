@@ -50,8 +50,11 @@ m_parent(parent)
    m_trigger_list=new UI::Listselect<Trigger_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
-   uint32_t i=0;
-   for (i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
+	for
+		(uint32_t i = 0;
+		 i < Trigger_Factory::get_nr_of_available_triggers();
+		 ++i)
+	{
 		Trigger_Descr & d = *Trigger_Factory::get_trigger_descr(i);
 		m_trigger_list->add(i18n::translate(d.name).c_str(), d);
 	}

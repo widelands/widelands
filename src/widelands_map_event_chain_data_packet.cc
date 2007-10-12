@@ -98,8 +98,11 @@ throw (_wexception)
                sprintf(buf, "conditional_element_%02i_data", i);
                std::string trigname = s->get_safe_string(buf);
                Trigger * const trig = egbase->get_map()->get_mtm().get_trigger(trigname.c_str());
-               if (!trig)
-                  throw wexception("Trigger Conditional of Event Chain %s references unknown trigger %s!\n", name.c_str(), trigname.c_str());
+					if (!trig)
+						throw wexception
+							("Trigger Conditional of Event Chain %s references "
+							 "unknown trigger %s!",
+							 name.c_str(), trigname.c_str());
                tok.data = trig;
 				} else if (type == ")") {
                tok.token = TriggerConditional_Factory::RPAREN;
@@ -124,8 +127,10 @@ throw (_wexception)
             sprintf(buf, "event_%02i", i);
             std::string evname = s->get_safe_string(buf);
             Event * const event = egbase->get_map()->get_mem().get_event(evname.c_str());
-            if (!event)
-               throw wexception("Event Chain %s references unknown event %s!\n", name.c_str(), evname.c_str());
+				if (!event)
+					throw wexception
+						("Event Chain %s references unknown event %s!",
+						 name.c_str(), evname.c_str());
             e->add_event(event);
 			}
 
@@ -141,7 +146,8 @@ throw (_wexception)
          egbase->get_map()->get_mecm().register_new_eventchain(e);
 		}
 	else
-   throw wexception("Unknown version in Map EventChain Packet: %i\n", packet_version);
+		throw wexception
+			("Unknown version in Map EventChain Packet: %i", packet_version);
 }
 
 /*
@@ -169,7 +175,7 @@ throw (_wexception)
 			e.m_trigconditional->get_infix_tokenlist();
 		s.set_int("nr_conditional_element", toklist->size());
       char buf[256];
-      for (uint32_t t = 0; t < toklist->size(); t++) {
+		for (uint32_t t = 0; t < toklist->size(); ++t) {
          TriggerConditional_Factory::Token tok = (*toklist)[t];
          sprintf(buf, "conditional_element_%02i", t);
 			s.set_string(buf, TriggerConditional_Factory::operators[tok.token]);

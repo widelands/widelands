@@ -211,7 +211,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 
 		}
 
-		i++;
+		++i;
 
 		// increase csection
 		sprintf(csection, "campsect%i", i);
@@ -398,7 +398,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 			g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
 		}
 
-		i++;
+		++i;
 
 		// increase mapsection
 		mapsection = campsection;

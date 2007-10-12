@@ -61,7 +61,7 @@ m_pit                   (pit)
 	m_tabpanel.set_snapparent(true);
 
 	uint32_t width = 0, height = 0;
-   for (int32_t j=0; j<nr_bobs; j++) {
+   for (int32_t j = 0; j < nr_bobs; ++j) {
 		uint32_t w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture

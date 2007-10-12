@@ -114,7 +114,7 @@ int32_t Radiogroup::add_button
  const int32_t x, const int32_t y,
  const uint32_t picid, const char * const tooltip)
 {
-	m_highestid++;
+	++m_highestid;
 	(new Radiobutton(parent, x, y, picid, this, m_highestid))->set_tooltip
 		(tooltip);
 	return m_highestid;

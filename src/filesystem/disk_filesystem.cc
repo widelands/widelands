@@ -123,7 +123,7 @@ const int32_t RealFSImpl::FindFiles(std::string path,
 
 	count = gl.gl_pathc;
 
-	for (i = 0; i < count; i++) {
+	for (i = 0; i < count; ++i) {
 		results->insert(&gl.gl_pathv[i][ofs]);
 	}
 
@@ -192,7 +192,9 @@ FileSystem* RealFSImpl::CreateSubFileSystem(const std::string path,
       const Type fs)
 {
 	if (FileExists(path))
-		throw wexception("Path %s already exists. Can't create a filesystem from it!\n", path.c_str());
+		throw wexception
+			("Path %s already exists. Can't create a filesystem from it!",
+			 path.c_str());
 
 	std::string fullname;
 
@@ -252,7 +254,11 @@ void RealFSImpl::m_unlink_directory(const std::string file)
 
 	FindFiles(file, "*", &files);
 
-	for (filenameset_t::iterator pname = files.begin(); pname != files.end(); pname++) {
+	for
+		(filenameset_t::iterator pname = files.begin();
+		 pname != files.end();
+		 ++pname)
+	{
 		std::string filename = FS_Filename((*pname).c_str());
 		if (filename == ".svn") // HACK: ignore SVN directory for this might be a campaign directory or similar
 			continue;
@@ -302,7 +308,8 @@ void RealFSImpl::EnsureDirectoryExists(const std::string dirname)
 void RealFSImpl::MakeDirectory(const std::string dirname)
 {
 	if (FileExists(dirname))
-		throw wexception("A File with the name %s already exists\n", dirname.c_str());
+		throw wexception
+			("A File with the name %s already exists", dirname.c_str());
 
 	std::string fullname;
 
@@ -314,8 +321,10 @@ void RealFSImpl::MakeDirectory(const std::string dirname)
 #else
 	retval=mkdir(fullname.c_str(), 0x1FF);
 #endif
-	if (retval==-1)
-		throw wexception("Couldn't create directory %s: %s\n", dirname.c_str(), strerror(errno));
+	if (retval == -1)
+		throw wexception
+			("Couldn't create directory %s: %s",
+			 dirname.c_str(), strerror(errno));
 }
 
 /**

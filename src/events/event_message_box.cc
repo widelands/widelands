@@ -52,8 +52,7 @@ Event_Message_Box::Event_Message_Box() : Event(_("Message Box")) {
 }
 
 Event_Message_Box::~Event_Message_Box() {
-  uint32_t i=0;
-   for (i=0; i<m_buttons.size(); i++)
+	for (uint32_t i = 0; i < m_buttons.size(); ++i)
       if (m_buttons[i].trigger) {
          set_button_trigger(i, 0);
 		}
@@ -72,7 +71,7 @@ void Event_Message_Box::reinitialize(Game *) {}
 void Event_Message_Box::set_nr_buttons(int32_t i) {
    int32_t oldsize=m_buttons.size();
    m_buttons.resize(i);
-   for (uint32_t j=oldsize; j<m_buttons.size(); j++)
+	for (uint32_t j = oldsize; j < m_buttons.size(); ++j)
       m_buttons[j].trigger=0;
 }
 

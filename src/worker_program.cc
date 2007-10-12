@@ -154,7 +154,7 @@ void WorkerProgram::parse_setdescription(Worker_Descr *, Worker::Action * act,
 
 	act->function = &Worker::run_setdescription;
 
-	for (uint32_t i = 1; i < cmd.size(); i++)
+	for (uint32_t i = 1; i < cmd.size(); ++i)
 		act->sparamv.push_back(cmd[i]);
 }
 
@@ -176,7 +176,7 @@ void WorkerProgram::parse_setbobdescription(Worker_Descr *, Worker::Action * act
 
 	act->function = &Worker::run_setbobdescription;
 
-	for (uint32_t i = 1; i < cmd.size(); i++)
+	for (uint32_t i = 1; i < cmd.size(); ++i)
 		act->sparamv.push_back(cmd[i]);
 }
 
@@ -213,7 +213,7 @@ void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
 	act->sparam1 = "immovable";
 
 	// Parse predicates
-	for (i = 1; i < cmd.size(); i++) {
+	for (i = 1; i < cmd.size(); ++i) {
 		uint32_t idx = cmd[i].find(':');
 		std::string key = cmd[i].substr(0, idx);
 		std::string value = cmd[i].substr(idx+1);
@@ -274,7 +274,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 	act->sparam1 = "";
 
 	// Parse predicates
-	for (i = 1; i < cmd.size(); i++) {
+	for (i = 1; i < cmd.size(); ++i) {
 		uint32_t idx = cmd[i].find(':');
 		std::string key = cmd[i].substr(0, idx);
 		std::string value = cmd[i].substr(idx+1);

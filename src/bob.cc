@@ -395,7 +395,7 @@ void Bob::do_act(Game* g, bool signalhandling)
 void Bob::schedule_destroy(Game* g)
 {
 	Map_Object::schedule_destroy(g);
-	m_actid++;
+	++m_actid;
 }
 
 
@@ -417,7 +417,7 @@ void Bob::skip_act() {
 		throw wexception("MO(%u): %s calls skip_act(), but has no signal() function",
 		                 get_serial(), get_state()->task->name);
 
-	m_actid++;
+	++m_actid;
 }
 
 
@@ -501,7 +501,7 @@ void Bob::send_signal(Game* g, std::string sig)
 
 	m_signal = sig;
 
-	for (uint32_t i = 0; i < m_stack.size(); i++) {
+	for (uint32_t i = 0; i < m_stack.size(); ++i) {
 		State* state = &m_stack[i];
 
 		if (state->task->mask) {
@@ -778,7 +778,7 @@ void Bob::movepath_update(Game* g, State* state)
 		return;
 	}
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, tdelta);
 }
 
@@ -1056,7 +1056,7 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 
 	molog("Stack size: %i\n", m_stack.size());
 
-	for (uint32_t i=0; i<m_stack.size(); i++) {
+	for (uint32_t i = 0; i < m_stack.size(); ++i) {
 		molog("Stack dump %i/%i\n", i+1, m_stack.size());
 
 		molog("* task->name: %s\n", m_stack[i].task->name);

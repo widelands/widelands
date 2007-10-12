@@ -60,7 +60,7 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
    posx=spacing;
    posy=get_inner_h()-30;
    m_trigger.resize(event->get_nr_buttons());
-   for (int32_t i=0; i<event->get_nr_buttons(); i++) {
+   for (int32_t i = 0; i < event->get_nr_buttons(); ++i) {
       posx+=space;
 		new UI::IDButton<Message_Box_Event_Message_Box, int32_t>
 			(this,

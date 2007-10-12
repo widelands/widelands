@@ -184,21 +184,21 @@ void MilitarySite::set_economy(Economy* e)
 	uint32_t i;
 
 	if (old) {
-		for (i = 0; i < m_input_queues.size(); i++)
+		for (i = 0; i < m_input_queues.size(); ++i)
 			m_input_queues[i]->remove_from_economy(old);
 	}
 
 	Building::set_economy(e);
 
 	if (e) {
-		for (i = 0; i < m_input_queues.size(); i++)
+		for (i = 0; i < m_input_queues.size(); ++i)
 			m_input_queues[i]->add_to_economy(e);
 	}
 	*/
 	/*Economy* old = get_economy();
 
 	if (old) {
-		for (uint32_t i = 0; i < m_soldier_requests.size(); i++) {
+		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
 			if (m_soldier_requests[i])
 				m_soldier_requests[i]->remove_from_economy(old);
 		}
@@ -209,7 +209,7 @@ void MilitarySite::set_economy(Economy* e)
    ProductionSite::set_economy(e);
 
 	if (e)
-      for (uint32_t i = 0; i < m_soldier_requests.size(); i++) {
+      for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
          if (m_soldier_requests[i])
             m_soldier_requests[i]->set_economy(e);
 		}
@@ -225,19 +225,15 @@ Cleanup after a military site is removed
 void MilitarySite::cleanup(Editor_Game_Base* g)
 {
    // Release worker
-   if (m_soldier_requests.size())
-   {
-      for (uint32_t i = 0; i < m_soldier_requests.size(); i++)
-      {
+	if (m_soldier_requests.size()) {
+		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
          delete m_soldier_requests[i];
          m_soldier_requests[i] = 0;
 		}
       m_soldier_requests.resize(0);
 	}
 
-   uint32_t i;
-   for (i=0; i < m_soldiers.size(); i++)
-   {
+	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
       Soldier* s = m_soldiers[i];
 
       m_soldiers[i] = 0;
@@ -328,11 +324,12 @@ void MilitarySite::request_soldier_callback
 			   msite->descr().get_conquers())));
    msite->m_didconquer = true;
 
-   uint32_t i=0;
-   for (i=0; i<msite->m_soldier_requests.size(); i++)
-      if (rq==msite->m_soldier_requests[i]) break;
+	for (uint32_t i = 0; i < msite->m_soldier_requests.size(); ++i)
+		if (rq == msite->m_soldier_requests[i]) {
+			msite->m_soldier_requests.erase(msite->m_soldier_requests.begin() + i);
+			break;
+		}
 
-   msite->m_soldier_requests.erase(msite->m_soldier_requests.begin() + i);
 
    msite->m_soldiers.push_back(s);
    s->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
@@ -365,7 +362,7 @@ void MilitarySite::act(Game* g, uint32_t data)
 		+
 		descr().get_heal_increase_per_medic() * numMedics;
 
-      for (i=0; i < m_soldiers.size(); i++) {
+	for (i = 0; i < m_soldiers.size(); ++i) {
          s = m_soldiers[i];
 
             // This is for clean up the soldier killed out of the building
@@ -539,7 +536,7 @@ void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldie
 		  Area<FCoords>(g->map().get_fcoords(get_position()), get_conquers())));
    m_didconquer = true;
    m_soldiers.insert(m_soldiers.begin(), soldiers->begin(), soldiers->end());
-   /*for (uint32_t i=0; i<soldiers->size(); i++)
+   /*for (uint32_t i=0; i<soldiers->size(); ++i)
       m_soldiers.push_back((*soldies)[i]);*/
 }
 
@@ -558,7 +555,7 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
     // Release worker
    if (m_soldier_requests.size())
    {
-      for (uint32_t i = 0; i < m_soldier_requests.size(); i++)
+      for (uint32_t i = 0; i < m_soldier_requests.size(); ++i)
       {
          delete m_soldier_requests[i];
          m_soldier_requests[i] = 0;
@@ -566,8 +563,7 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
       m_soldier_requests.resize(0);
 	}
    log("removed all soldier requests.\n");
-   uint32_t i;
-   for (i=0; i < m_soldiers.size(); i++)
+   for (uint32_t i = 0; i < m_soldiers.size(); ++i)
    {
       Soldier* s = m_soldiers[i];
 

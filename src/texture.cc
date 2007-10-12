@@ -97,9 +97,9 @@ Texture::Texture
 
 				log("WARNING: %s: using 332 default palette\n", fname);
 
-				for (int32_t r=0;r<8;r++)
-					for (int32_t g=0;g<8;g++)
-						for (int32_t b=0;b<4;b++) {
+				for (int32_t r = 0; r < 8; ++r)
+					for (int32_t g = 0; g < 8; ++g)
+						for (int32_t b = 0; b < 4; ++b) {
 							pal[(r<<5) | (g<<2) | b].r=r<<5;
 							pal[(r<<5) | (g<<2) | b].g=g<<5;
 							pal[(r<<5) | (g<<2) | b].b=b<<6;
@@ -126,11 +126,11 @@ Texture::Texture
 		// Add the frame
 		m_pixels = (uint8_t*)realloc(m_pixels, TEXTURE_WIDTH*TEXTURE_HEIGHT*(m_nrframes+1));
 		m_curframe = &m_pixels[TEXTURE_WIDTH*TEXTURE_HEIGHT*m_nrframes];
-		m_nrframes++;
+		++m_nrframes;
 
 		SDL_LockSurface(cv);
 
-		for (int32_t y = 0; y < TEXTURE_HEIGHT; y++)
+		for (int32_t y = 0; y < TEXTURE_HEIGHT; ++y)
 			memcpy(m_curframe + y*TEXTURE_WIDTH, (Uint8*)cv->pixels + y*cv->pitch, TEXTURE_WIDTH);
 
 		SDL_UnlockSurface(cv);

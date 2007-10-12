@@ -35,8 +35,8 @@ Colormap::Colormap (const SDL_Color & pal, const SDL_PixelFormat & format) {
 	assert(format.BytesPerPixel == 2 or format.BytesPerPixel == 4);
 	colormap = malloc(format.BytesPerPixel * 65536);
 
-	for (i=0;i<256;i++)
-		for (j=0;j<256;j++) {
+	for (i = 0; i < 256; ++i)
+		for (j = 0; j < 256; ++j) {
 			int32_t shade=(j<128)?j:(j-256);
 			shade=256+2*shade;
 

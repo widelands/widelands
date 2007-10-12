@@ -488,7 +488,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					int32_t idx = m_map->m_world->get_bob(bobname);
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
-					for (uint32_t z=0; z<CRITTER_PER_DEFINITION; z++)
+					for (uint32_t z = 0; z < CRITTER_PER_DEFINITION; ++z)
 						game->create_bob(Coords(x, y), idx);
 				}
 			}
@@ -566,7 +566,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 
 		f = m_map->m_fields;
 		pc = section;
-      std::string res;
+      const char * res;
       int32_t amount=0;
 		for (Y_Coordinate y = 0; y < mapheight; ++y)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
@@ -581,10 +581,13 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				}
 
             int32_t nres=0;
-            if (res!="") {
-               nres=m_map->get_world()->get_resource(res.c_str());
-               if (nres==-1)
-                  throw wexception("World doesn't define Resource %s\n, you can't play settler maps here!\n", res.c_str());
+				if (*res) {
+					nres = m_map->world().get_resource(res);
+					if (nres == -1)
+						throw wexception
+							("World doesn't define Resource %s, you can not play "
+							 "settler maps here!",
+							 res);
 				}
 				const int32_t real_amount = static_cast<int32_t>
 					(2.86 * static_cast<float>(amount));

@@ -26,7 +26,7 @@
 MapObjectiveManager::MapObjectiveManager() {}
 
 MapObjectiveManager::~MapObjectiveManager() {
-   for (uint32_t i = 0; i < m_objectives.size(); i++)
+   for (uint32_t i = 0; i < m_objectives.size(); ++i)
       delete m_objectives[i];
    m_objectives.resize(0);
 }
@@ -46,7 +46,7 @@ MapObjective* MapObjectiveManager::get_objective(const char * const name) const
 {
    uint32_t i;
    MapObjective* retval = 0;
-   for (i = 0; i < m_objectives.size(); i++) {
+	for (i = 0; i < m_objectives.size(); ++i) {
       if (!strcmp(m_objectives[i]->name().c_str(), name)) {
          retval = m_objectives[i];
          break;
@@ -58,7 +58,7 @@ MapObjective* MapObjectiveManager::get_objective(const char * const name) const
 
 
 void MapObjectiveManager::delete_objective(const std::string & name) {
-   for (uint32_t i = 0; i < m_objectives.size(); i++) {
+	for (uint32_t i = 0; i < m_objectives.size(); ++i) {
       if (m_objectives[i]->name() == name) {
          delete m_objectives[i];
          m_objectives[i] = m_objectives[m_objectives.size() - 1];

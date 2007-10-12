@@ -28,7 +28,7 @@
 MapEventManager::MapEventManager() {}
 
 MapEventManager::~MapEventManager() {
-   for (uint32_t i = 0; i < m_events.size(); i++)
+	for (uint32_t i = 0; i < m_events.size(); ++i)
       delete m_events[i];
    m_events.resize(0);
 }
@@ -49,7 +49,7 @@ bool MapEventManager::register_new_event(Event* mv) {
 Event* MapEventManager::get_event(const char* name) {
    uint32_t i;
    Event* retval = 0;
-   for (i = 0; i < m_events.size(); i++) {
+	for (i = 0; i < m_events.size(); ++i) {
       if (!strcmp(m_events[i]->name().c_str(), name)) {
          retval = m_events[i];
          break;
@@ -63,7 +63,7 @@ Event* MapEventManager::get_event(const char* name) {
  * Remove a event
  */
 void MapEventManager::delete_event(const char* name) {
-   for (uint32_t i = 0; i < m_events.size(); i++) {
+   for (uint32_t i = 0; i < m_events.size(); ++i) {
       if (!strcmp(m_events[i]->name().c_str(), name)) {
          delete m_events[i];
          m_events[i] = m_events[m_events.size() - 1];

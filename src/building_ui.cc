@@ -894,8 +894,7 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 	box->add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); i++)
-	{
+	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); ++i) {
 		WaresQueueDisplay* wqd =
 			new WaresQueueDisplay
 			(box, 0, 0, get_w(), cs->get_waresqueue(i), parent->get_game());
@@ -1220,8 +1219,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list() {
    m_ls->clear();
    std::vector<Worker*>* workers=m_ps->get_workers();
 
-   uint32_t i;
-   for (i=0; i<workers->size(); i++) {
+	for (uint32_t i = 0; i < workers->size(); ++i) {
 		Worker* worker = (*workers)[i];
 		m_ls->add(worker->descname().c_str(), worker, worker->get_menu_pic());
 	}
@@ -1454,7 +1452,7 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
 
 	// Add the wares queue
 	std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
-	for (uint32_t i = 0; i < warequeues->size(); i++) {
+	for (uint32_t i = 0; i < warequeues->size(); ++i) {
 		create_ware_queue_panel (box, ps, (*warequeues)[i]);
 	}
 

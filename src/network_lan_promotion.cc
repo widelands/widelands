@@ -38,13 +38,12 @@ LAN_Base::LAN_Base ()
     setsockopt (sock, SOL_SOCKET, SO_BROADCAST, (char*) &opt, sizeof(opt));
 
 #ifndef WIN32
-    int32_t i;
 
     // get a list of all local broadcast addresses
     struct if_nameindex* ifnames=if_nameindex();
     struct ifreq ifr;
 
-    for (i=0;ifnames[i].if_index;i++) {
+	for (int32_t i = 0; ifnames[i].if_index; ++i) {
 	strncpy (ifr.ifr_name, ifnames[i].if_name, IFNAMSIZ);
 	if (ioctl(sock, SIOCGIFFLAGS, &ifr) < 0)
 	    continue;
@@ -123,9 +122,11 @@ void LAN_Base::send (const void* buf, size_t len, const sockaddr_in* addr)
 
 void LAN_Base::broadcast (const void* buf, size_t len, uint16_t port)
 {
-    std::list<in_addr_t>::iterator i;
-
-    for (i=broadcast_addresses.begin();i!=broadcast_addresses.end();i++) {
+	for
+		(std::list<in_addr_t>::iterator i = broadcast_addresses.begin();
+		 i != broadcast_addresses.end();
+		 ++i)
+	{
 	sockaddr_in addr;
 
 	addr.sin_family=AF_INET;
@@ -242,7 +243,7 @@ void LAN_Game_Finder::run ()
 
 	std::list<LAN_Open_Game*>::iterator i;
 	// if the game already is in the list, update the information
-	for (i=opengames.begin();i!=opengames.end();i++)
+	for (i = opengames.begin(); i != opengames.end(); ++i)
 	    if ((*i)->address==addr.sin_addr.s_addr) {
 		(*i)->info=info;
 

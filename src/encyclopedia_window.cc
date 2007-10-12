@@ -82,7 +82,7 @@ EncyclopediaWindow::~EncyclopediaWindow() {
 void EncyclopediaWindow::fillWares() {
    int32_t nrWares = tribe->get_nrwares();
    int32_t i;
-   for (i=0;i<nrWares;i++) {
+	for (i = 0; i < nrWares; ++i) {
       Item_Ware_Descr* ware = tribe->get_ware_descr(i);
 		wares.add(ware->descname().c_str(), i, ware->get_icon());
 	}

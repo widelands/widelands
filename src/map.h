@@ -409,7 +409,8 @@ private:
       std::string filename;
       Type        type;
 	};
-   std::vector<Extradata_Info> m_extradatainfos; // Only for caching of extradata for writing and reading
+	typedef std::vector<Extradata_Info> Extradata_Infos;
+	Extradata_Infos m_extradatainfos; // Only for caching of extradata for writing and reading
 
 	void recalc_brightness(FCoords);
 	void recalc_fieldcaps_pass1(FCoords);
@@ -915,8 +916,8 @@ inline void Map::get_tln(const FCoords f, FCoords * const o) const
 			o->y = m_height - 1;
 			o->field += max_index();
 		}
-		o->x--;
-		o->field--;
+		--o->x;
+		--o->field;
 		if (o->x == -1) {
 			o->x = m_width - 1;
 			o->field += m_width;
@@ -984,7 +985,7 @@ inline void Map::get_trn(const Coords f, Coords * const o) const
 	assert(f.y < m_height);
 	o->x = f.x;
 	if (f.y & 1) {
-		o->x++;
+		++o->x;
 		if (o->x == m_width) o->x = 0;
 	}
 	o->y = (f.y ? f.y : m_height) - 1;
@@ -1005,8 +1006,8 @@ inline void Map::get_trn(const FCoords f, FCoords * const o) const
 	o->x = f.x;
 	o->field = f.field - m_width;
 	if (f.y & 1) {
-		o->x++;
-		o->field++;
+		++o->x;
+		++o->field;
 		if (o->x == m_width) {
 			o->x = 0;
 			o->field -= m_width;
@@ -1100,8 +1101,8 @@ inline void Map::get_bln(const FCoords f, FCoords * const o) const
 		o->field -= max_index();
 	}
 	if (o->y & 1) {
-		o->x--;
-		o->field--;
+		--o->x;
+		--o->field;
 		if (o->x == -1) {
 			o->x = m_width - 1;
 			o->field += m_width;
@@ -1188,8 +1189,8 @@ inline void Map::get_brn(const FCoords f, FCoords * const o) const
 	o->x = f.x;
 	o->field = f.field + m_width;
 	if (f.y & 1) {
-		o->x++;
-		o->field++;
+		++o->x;
+		++o->field;
 		if (o->x == m_width) {
 			o->x = 0;
 			o->field -= m_width;

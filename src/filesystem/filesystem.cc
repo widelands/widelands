@@ -87,7 +87,7 @@ const char *FileSystem::FS_StripExtension(char * const fname)
 	char *p;
 	char *dot = 0;
 
-	for (p = fname; *p; p++) {
+	for (p = fname; *p; ++p) {
 		if (*p == '/' || *p == '\\')
 			dot = 0;
 		else if (*p == '.')
@@ -117,7 +117,7 @@ const char *FileSystem::FS_RelativePath(char *buf, const int32_t buflen, const c
 
 	// find the end of the basefile name
 	endbase = 0;
-	for (p = basefile; *p; p++) {
+	for (p = basefile; *p; ++p) {
 		if (*p == '/' || *p == '\\')
 			endbase = p-basefile+1;
 	}
@@ -321,7 +321,7 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 			continue;
 		}
 
-		i++;
+		++i;
 	}
 
 	std::string canonpath="";
@@ -330,7 +330,7 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 	else
 		canonpath="./";
 
-	for (i=components.begin(); i!=components.end(); i++)
+	for (i = components.begin(); i != components.end(); ++i)
 		canonpath+=*i+"/";
 
     canonpath.erase(canonpath.end() - 1); //remove trailing slash

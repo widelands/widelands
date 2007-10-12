@@ -42,7 +42,7 @@ void Game_Map_Data_Packet::Read
 throw (_wexception)
 {
 	if (not fs.FileExists("map") or not fs.IsDirectory("map"))
-      throw wexception("No map in this save game!\n");
+		throw wexception("No map in this save game!");
 
 	FileSystem * const mapfs = fs.MakeSubFileSystem("map");
 

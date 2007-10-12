@@ -187,17 +187,16 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
          constructionsite.m_builder=0;
 
       // Wares queues
-      uint32_t size=fr.Unsigned16();
+		const uint16_t size = fr.Unsigned16();
       assert(constructionsite.m_wares.size()>=size);
-      for (uint32_t i=size; i<constructionsite.m_wares.size(); i++) {
+		for (uint16_t i = size; i < constructionsite.m_wares.size(); ++i) {
 			if (dynamic_cast<Game *>(egbase))
 				constructionsite.m_wares[i]->cleanup();
          delete constructionsite.m_wares[i];
 		}
       constructionsite.m_wares.resize(size);
-      for (uint32_t i=0; i<constructionsite.m_wares.size(); i++) {
+		for (uint16_t i = 0; i < constructionsite.m_wares.size(); ++i)
          constructionsite.m_wares[i]->Read(&fr, egbase, ol);
-		}
 
       constructionsite.m_fetchfromflag=fr.Signed32();
 
@@ -236,10 +235,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
 		}
 
       // Request
-      for (uint32_t i=0; i<warehouse.m_requests.size(); i++)
+		for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i)
          delete warehouse.m_requests[i];
       warehouse.m_requests.resize(fr.Unsigned16());
-      for (uint32_t i=0; i<warehouse.m_requests.size(); i++) {
+		for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i) {
 			Request & req = *new Request
 				(&warehouse,
 				 0,
@@ -257,15 +256,21 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
          warehouse.m_incorporated_workers.erase(i);
 		}
       warehouse.m_incorporated_workers.resize(0);
-      int32_t nrworkers=fr.Unsigned16();
-      for (int32_t i=0; i<nrworkers; i++) {
+		const uint16_t nrworkers = fr.Unsigned16();
+		for (uint16_t i = 0; i < nrworkers; ++i) {
          uint32_t id=fr.Unsigned32();
          std::string name=fr.CString();
          assert(ol->is_object_known(id));
          // Worker might not yet be loaded so that get ware won't work
          // but make sure that such a worker exists in tribe
-         if (warehouse.get_owner()->tribe().get_worker_index(name.c_str())==-1)
-            throw wexception("Unknown worker %s in incorporated workers in Widelands_Map_Buildingdata_Data_Packet!\n", name.c_str());
+			if
+				(warehouse.get_owner()->tribe().get_worker_index(name.c_str())
+				 ==
+				 -1)
+				throw wexception
+					("Unknown worker %s in incorporated workers in "
+					 "Widelands_Map_Buildingdata_Data_Packet!",
+					 name.c_str());
          Worker* w=static_cast<Worker*>(ol->get_object_by_file_index(id));
          warehouse.sort_worker_in(egbase, name, w);
 		}
@@ -288,35 +293,34 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
  Widelands_Map_Map_Object_Loader * const ol)
 {
       // read the version
-      uint32_t version=fr.Unsigned16();
-
-	if (version == CURRENT_MILITARYSITE_PACKET_VERSION) {
+	const uint16_t packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION) {
          // Read productionsite
 		read_productionsite(militarysite, fr, egbase, ol);
 
          // Request
-			uint32_t nr_requests=fr.Unsigned16();
+		const uint16_t nr_requests = fr.Unsigned16();
 
-			for (uint32_t i=0; i<militarysite.m_soldier_requests.size(); i++)
+		for (uint16_t i = 0; i < militarysite.m_soldier_requests.size(); ++i)
 	         delete militarysite.m_soldier_requests[i];
 		militarysite.m_soldier_requests.resize(nr_requests);
 
-			for (uint32_t i=0; i<nr_requests; i++) {
-				Request & req = *new Request
-					(&militarysite,
-					 0,
-					 MilitarySite::request_soldier_callback,
-					 &militarysite,
-					 Request::SOLDIER);
-				req.Read(&fr, egbase, ol);
-				militarysite.m_soldier_requests[i] = &req;
-			}
+		for (uint16_t i = 0; i < nr_requests; ++i) {
+			Request & req = *new Request
+				(&militarysite,
+				 0,
+				 MilitarySite::request_soldier_callback,
+				 &militarysite,
+				 Request::SOLDIER);
+			req.Read(&fr, egbase, ol);
+			militarysite.m_soldier_requests[i] = &req;
+		}
 
          // Soldier
-         uint32_t nr_soldiers = fr.Unsigned16();
+		uint16_t nr_soldiers = fr.Unsigned16();
          assert(!militarysite.m_soldiers.size());
          militarysite.m_soldiers.resize(nr_soldiers);
-		for (uint32_t i = 0; i < nr_soldiers; ++i) {
+		for (uint16_t i = 0; i < nr_soldiers; ++i) {
             uint32_t reg = fr.Unsigned32();
             assert(ol->is_object_known(reg));
             militarysite.m_soldiers[i] = static_cast<Soldier*>(ol->get_object_by_file_index(reg));
@@ -328,8 +332,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
 			// capacity (modified by user)
 			militarysite.m_capacity = fr.Unsigned8();
          // DONE
-		} else
-         throw wexception("Unknown MilitarySite-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
+	} else
+		throw wexception
+			("Unknown MilitarySite-Version %u in "
+			 "Widelands_Map_Buildingdata_Data_Packet!",
+			 packet_version);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
@@ -338,14 +345,14 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
       // Requests
-      uint32_t nr_requests=fr.Unsigned16();
-      for (uint32_t i=0; i<productionsite.m_worker_requests.size(); i++)
+      uint16_t nr_requests = fr.Unsigned16();
+		for (uint16_t i = 0; i < productionsite.m_worker_requests.size(); ++i)
          delete productionsite.m_worker_requests[i];
       productionsite.m_worker_requests.resize(nr_requests);
-      for (uint32_t i=0; i<nr_requests; i++) {
+		for (uint16_t i = 0; i < nr_requests; ++i) {
 			Request & req = *new Request
 				(&productionsite,
 				 0,
@@ -357,10 +364,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
 		}
 
       // Workers
-      uint32_t nr_workers = fr.Unsigned16();
+		uint16_t nr_workers = fr.Unsigned16();
       assert(!productionsite.m_workers.size());
       productionsite.m_workers.resize(nr_workers);
-      for (uint32_t i=0; i<nr_workers; i++) {
+		for (uint16_t i = 0; i < nr_workers; ++i) {
          uint32_t reg = fr.Unsigned32();
          assert(ol->is_object_known(reg));
          productionsite.m_workers[i] = static_cast<Worker*>(ol->get_object_by_file_index(reg));
@@ -370,9 +377,9 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
       productionsite.m_fetchfromflag = fr.Signed32();
 
       // State
-      uint32_t nr_progs = fr.Unsigned16();
+		const uint16_t nr_progs = fr.Unsigned16();
       productionsite.m_program.resize(nr_progs);
-      for (uint32_t i=0; i<nr_progs; i++) {
+		for (uint16_t i = 0; i < nr_progs; ++i) {
          std::string prog = fr.CString();
          productionsite.m_program[i].program = productionsite.descr().get_program(prog.c_str());
          productionsite.m_program[i].ip = fr.Signed32();
@@ -383,16 +390,16 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
       productionsite.m_program_time = fr.Signed32();
 
       // Wares
-      uint32_t nr_queues = fr.Unsigned16();
+		const uint16_t nr_queues = fr.Unsigned16();
 		if (nr_queues != productionsite.m_input_queues.size())
-         throw wexception("Productionsite has wrong number of input queues!\n");
-      for (uint32_t i=0; i<productionsite.m_input_queues.size(); i++)
+         throw wexception("Productionsite has wrong number of input queues!");
+		for (uint16_t i = 0; i < productionsite.m_input_queues.size(); ++i)
          productionsite.m_input_queues[i]->Read(&fr, egbase, ol);
 
       // Statistics
-      uint32_t stats_size = fr.Unsigned16();
+		const uint16_t stats_size = fr.Unsigned16();
       productionsite.m_statistics.resize(stats_size);
-      for (uint32_t i=0; i<productionsite.m_statistics.size(); i++)
+		for (uint32_t i = 0; i < productionsite.m_statistics.size(); ++i)
          productionsite.m_statistics[i] = fr.Unsigned8();
       productionsite.m_statistics_changed = fr.Unsigned8();
       memcpy(productionsite.m_statistics_buf, fr.Data(sizeof(productionsite.m_statistics_buf)), sizeof(productionsite.m_statistics_buf));
@@ -415,13 +422,12 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
 		read_productionsite(trainingsite, fr, egbase, ol);
 
          // Requests
-		uint32_t nr_requests=fr.Unsigned16();
-
-		for (uint32_t i=0; i<trainingsite.m_soldier_requests.size(); i++)
+		const uint16_t nr_requests = fr.Unsigned16();
+		for (uint16_t i = 0; i < trainingsite.m_soldier_requests.size(); ++i)
 			delete trainingsite.m_soldier_requests[i];
 		trainingsite.m_soldier_requests.resize(nr_requests);
 
-		for (uint32_t i=0; i<nr_requests; i++) {
+		for (uint32_t i = 0; i < nr_requests; ++i) {
 			Request & req = *new Request
 				(&trainingsite,
 				 0,
@@ -433,10 +439,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
 		}
 
          // Soldiers
-		uint32_t nr_soldiers = fr.Unsigned16();
+		const uint16_t nr_soldiers = fr.Unsigned16();
 		assert(!trainingsite.m_soldiers.size());
 		trainingsite.m_soldiers.resize(nr_soldiers);
-		for (uint32_t i=0; i<nr_soldiers; i++) {
+		for (uint32_t i = 0; i < nr_soldiers; ++i) {
 			uint32_t reg = fr.Unsigned32();
 			assert(ol->is_object_known(reg));
 			trainingsite.m_soldiers[i] = static_cast<Soldier*>(ol->get_object_by_file_index(reg));
@@ -619,10 +625,10 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
 		fw.Unsigned32(0);
 
    // ware queues
-   fw.Unsigned16(constructionsite.m_wares.size());
-   for (uint32_t i=0; i<constructionsite.m_wares.size(); i++) {
+	const uint16_t wares_size = constructionsite.m_wares.size();
+	fw.Unsigned16(wares_size);
+	for (uint16_t i = 0; i < wares_size; ++i)
       constructionsite.m_wares[i]->Write(&fw, egbase, os);
-	}
 
    fw.Signed32(constructionsite.m_fetchfromflag);
 
@@ -660,10 +666,10 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
    fw.Unsigned8(0);
 
    // Request
-   fw.Unsigned16(warehouse.m_requests.size());
-   for (uint32_t i=0; i<warehouse.m_requests.size(); i++) {
+	const uint16_t requests_size = warehouse.m_requests.size();
+	fw.Unsigned16(requests_size);
+	for (uint16_t i = 0; i < warehouse.m_requests.size(); ++i)
       warehouse.m_requests[i]->Write(&fw, egbase, os);
-	}
 
    // Incorporated workers, write sorted after file-serial
    fw.Unsigned16(warehouse.m_incorporated_workers.size());
@@ -713,14 +719,17 @@ void Widelands_Map_Buildingdata_Data_Packet::write_militarysite
    write_productionsite(militarysite, fw, egbase, os);
 
    // Request
-   fw.Unsigned16(militarysite.m_soldier_requests.size());
-   for (uint32_t i=0; i<militarysite.m_soldier_requests.size(); i++)
+	const uint16_t soldier_requests_size =
+		militarysite.m_soldier_requests.size();
+	fw.Unsigned16(soldier_requests_size);
+	for (uint16_t i = 0; i < soldier_requests_size; ++i)
       militarysite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
 
    // Soldier
-   fw.Unsigned16(militarysite.m_soldiers.size());
-   for (uint32_t i=0; i<militarysite.m_soldiers.size(); i++) {
+	const uint16_t soldiers_size = militarysite.m_soldiers.size();
+	fw.Unsigned16(soldiers_size);
+	for (uint32_t i = 0; i < soldiers_size; ++i) {
       assert(os->is_object_known(militarysite.m_soldiers[i]));
       fw.Unsigned32(os->get_object_file_index(militarysite.m_soldiers[i]));
 	}
@@ -746,13 +755,16 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
 
 
    // Requests
-   fw.Unsigned16(productionsite.m_worker_requests.size());
-   for (uint32_t i=0; i<productionsite.m_worker_requests.size(); i++)
+	const uint16_t worker_requests_size =
+		productionsite.m_worker_requests.size();
+	fw.Unsigned16(worker_requests_size);
+	for (uint16_t i = 0; i < productionsite.m_worker_requests.size(); ++i)
       productionsite.m_worker_requests[i]->Write(&fw, egbase, os);
 
    // Workers
-   fw.Unsigned16(productionsite.m_workers.size());
-   for (uint32_t i=0; i<productionsite.m_workers.size(); i++) {
+	const uint16_t workers_size = productionsite.m_workers.size();
+	fw.Unsigned16(workers_size);
+	for (uint16_t i = 0; i < workers_size; ++i) {
       assert(os->is_object_known(productionsite.m_workers[i]));
       fw.Unsigned32(os->get_object_file_index(productionsite.m_workers[i]));
 	}
@@ -761,8 +773,9 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
    fw.Signed32(productionsite.m_fetchfromflag);
 
    // State
-   fw.Unsigned16(productionsite.m_program.size());
-   for (uint32_t i=0; i<productionsite.m_program.size(); i++) {
+	const uint16_t program_size = productionsite.m_program.size();
+	fw.Unsigned16(program_size);
+	for (uint16_t i = 0; i < program_size; ++i) {
       fw.CString(productionsite.m_program[i].program->get_name().c_str());
       fw.Signed32(productionsite.m_program[i].ip);
       fw.Signed32(productionsite.m_program[i].phase);
@@ -772,13 +785,15 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
    fw.Signed32(productionsite.m_program_time);
 
    // Wares Queues
-   fw.Unsigned16(productionsite.m_input_queues.size());
-   for (uint32_t i=0; i<productionsite.m_input_queues.size(); i++)
+	const uint16_t input_queues_size = productionsite.m_input_queues.size();
+	fw.Unsigned16(input_queues_size);
+	for (uint16_t i = 0; i < input_queues_size; ++i)
       productionsite.m_input_queues[i]->Write(&fw, egbase, os);
 
    // Statistics
-   fw.Unsigned16(productionsite.m_statistics.size());
-   for (uint32_t i=0; i<productionsite.m_statistics.size(); i++)
+	const uint16_t statistics_size = productionsite.m_statistics.size();
+	fw.Unsigned16(statistics_size);
+	for (uint32_t i = 0; i < statistics_size; ++i)
       fw.Unsigned8(productionsite.m_statistics[i]);
    fw.Unsigned8(productionsite.m_statistics_changed);
    fw.Data(productionsite.m_statistics_buf, sizeof(productionsite.m_statistics_buf));
@@ -800,14 +815,17 @@ void Widelands_Map_Buildingdata_Data_Packet::write_trainingsite
    write_productionsite(trainingsite, fw, egbase, os);
 
 	//  requests
-   fw.Unsigned16(trainingsite.m_soldier_requests.size());
-   for (uint32_t i=0; i<trainingsite.m_soldier_requests.size(); i++)
+	const uint16_t soldier_requests_size =
+		trainingsite.m_soldier_requests.size();
+	fw.Unsigned16(soldier_requests_size);
+	for (uint32_t i = 0; i < soldier_requests_size; ++i)
       trainingsite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
 
 	//  soldiers
-   fw.Unsigned16(trainingsite.m_soldiers.size());
-   for (uint32_t i=0; i<trainingsite.m_soldiers.size(); i++) {
+	const uint16_t soldiers_size = trainingsite.m_soldiers.size();
+	fw.Unsigned16(soldiers_size);
+	for (uint32_t i = 0; i < trainingsite.m_soldiers.size(); ++i) {
       assert(os->is_object_known(trainingsite.m_soldiers[i]));
       fw.Unsigned32(os->get_object_file_index(trainingsite.m_soldiers[i]));
 	}

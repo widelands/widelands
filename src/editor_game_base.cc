@@ -120,9 +120,9 @@ last few cleanups
 Editor_Game_Base::~Editor_Game_Base() {
    int32_t i;
 
-   for (i = 1; i <= MAX_PLAYERS; i++)
-      if (m_players[i-1])
-         remove_player(i);
+	const Player * const * const players_end = m_players + MAX_PLAYERS;
+	for (Player * * p = m_players; p < players_end; ++p)
+		delete *p;
 
 		delete m_map;
 
@@ -425,7 +425,7 @@ Player * Editor_Game_Base::add_player
 
 	manually_load_tribe(tribe.c_str());
 
-   for (i = 0; i < m_tribes.size(); i++)
+	for (i = 0; i < m_tribes.size(); ++i)
 		if (m_tribes[i]->name() == tribe) break;
 
    if (i == m_tribes.size())
@@ -449,7 +449,7 @@ Player * Editor_Game_Base::add_player
 void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
 	uint32_t i;
 
-	for (i = 0; i < m_tribes.size(); i++)
+	for (i = 0; i < m_tribes.size(); ++i)
 		if (m_tribes[i]->name() == tribe) break;
 
 	if (i == m_tribes.size())
@@ -461,7 +461,7 @@ void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
  */
 Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
 	uint32_t i;
-   for (i = 0; i < m_tribes.size(); i++) {
+   for (i = 0; i < m_tribes.size(); ++i) {
 		if (not strcmp(m_tribes[i]->name().c_str(), tribe))
 			return m_tribes[i];
 	}
@@ -531,12 +531,10 @@ void Editor_Game_Base::postload()
 	// Postload tribes
 	id = 0;
 	while (id < m_tribes.size()) {
-		for (pid = 1; pid <= MAX_PLAYERS; pid++) {
-			Player* plr = get_player(pid);
-
-			if (plr && &plr->tribe() == m_tribes[id])
-				break;
-		}
+		for (pid = 1; pid <= MAX_PLAYERS; ++pid)
+			if (const Player * const plr = get_player(pid))
+				if (&plr->tribe() == m_tribes[id])
+					break;
 
 		if
 			(pid <= MAX_PLAYERS
@@ -545,7 +543,7 @@ void Editor_Game_Base::postload()
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
 			m_tribes[id]->postload(this);
-			id++;
+			++id;
 		} else {
 			delete m_tribes[id]; // the tribe is no longer used, remove it
 			m_tribes.erase(m_tribes.begin() + id);
@@ -705,8 +703,7 @@ Battle* Editor_Game_Base::create_battle ()
 AttackController* Editor_Game_Base::create_attack_controller
 		(Flag* flag, int32_t attacker, int32_t defender, uint32_t num)
 {
-	uint32_t i;
-	for (i=0;i<m_attack_serials.size();i++) {
+	for (uint32_t i = 0; i < m_attack_serials.size(); ++i) {
 		AttackController* curCtrl =
 			dynamic_cast<AttackController *>
 			(objects().get_object(m_attack_serials[i]));
@@ -734,7 +731,7 @@ AttackController* Editor_Game_Base::create_attack_controller()
 
 void Editor_Game_Base::remove_attack_controller(uint32_t serial)
 {
-	for (uint32_t i=0;i<m_attack_serials.size();i++) {
+	for (uint32_t i = 0; i < m_attack_serials.size(); ++i) {
 		if (m_attack_serials[i] == serial) {
 			dynamic_cast<AttackController *>(objects().get_object(serial))
 				->destroy(this);
@@ -782,7 +779,7 @@ Returns the serial number that can be used to retrieve or remove the pointer.
 */
 uint32_t Editor_Game_Base::add_trackpointer(void* ptr)
 {
-	m_lasttrackserial++;
+	++m_lasttrackserial;
 
 	if (!m_lasttrackserial)
 		throw wexception("Dude, you play too long. Track serials exceeded.");

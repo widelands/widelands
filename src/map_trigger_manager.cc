@@ -29,7 +29,7 @@ MapTriggerManager::MapTriggerManager() {}
 
 
 MapTriggerManager::~MapTriggerManager() {
-   for (uint32_t i = 0; i < m_triggers.size(); i++)
+	for (uint32_t i = 0; i < m_triggers.size(); ++i)
       delete m_triggers[i];
    m_triggers.resize(0);
 }

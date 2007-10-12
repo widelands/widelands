@@ -78,7 +78,7 @@ Cleanup
 Building_Descr::~Building_Descr()
 {
       free(m_buildicon_fname);
-   for (uint32_t i=0; i<m_enhances_to.size(); i++)
+	for (uint32_t i=0; i<m_enhances_to.size(); ++i)
       free(m_enhances_to[i]);
 }
 

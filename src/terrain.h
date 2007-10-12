@@ -83,7 +83,7 @@ template<typename T> static void render_top_triangle
 	ty1     =  ITOFIX(p1.ty);
 	dty1    = (ITOFIX(p2.ty) - ty1) / (p2.y - y1);
 
-	for (y=y1;y<y2 && y<h;y++) {
+	for (y = y1; y < y2 && y < h; ++y) {
 		if (y>=0) {
 			ix1=FIXTOI(x1);
 			ix2=FIXTOI(x2);
@@ -174,7 +174,7 @@ template<typename T> static void render_bottom_triangle
 	ty1     =   ITOFIX(p3.ty);
 	dty1    = -(ITOFIX(p1.ty) - ty1) / (p1.y - y2);
 
-	for (y=y2;y>=y1 && y>0;y--) {
+	for (y = y2; y >= y1 && y > 0; --y) {
 		if (y<h) {
 			ix1=FIXTOI(x1);
 			ix2=FIXTOI(x2);
@@ -232,19 +232,19 @@ template<typename T> static void render_triangle
 (Surface & dst, Vertex & p1, Vertex & p2, Vertex & p3, const Texture & tex)
 {
 	Vertex * p[3]= {&p1, &p2, &p3};
-	int32_t top, bot, mid, y, ym, i;
+	int32_t top, bot, mid, y, ym;
 
 	top=bot=0; // to avoid compiler warning
 
 	y=0x7fffffff;
-	for (i=0;i<3;i++)
+	for (uint8_t i = 0; i < 3; ++i)
 		if (p[i]->y<y) {top=i; y=p[i]->y;}
 
 	y=-0x7fffffff;
-	for (i=0;i<3;i++)
+	for (uint8_t i = 0; i < 3; ++i)
 		if (p[i]->y>y) {bot=i; y=p[i]->y;}
 
-	for (mid=0;mid==top || mid==bot;mid++);
+	for (mid = 0; mid == top || mid == bot; ++mid);
 	ym=p[mid]->y;
 
 	if (p[top]->y < ym) {

@@ -57,7 +57,7 @@ m_pit     (pit)
 
 
 	uint32_t width = 0, height = 0;
-   for (int32_t j=0; j<nr_immovables; j++) {
+   for (int32_t j = 0; j < nr_immovables; ++j) {
 		const Immovable_Descr & descr = *world.get_immovable_descr(j);
 		uint32_t w, h;
 		g_gr->get_picture_size

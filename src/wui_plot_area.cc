@@ -143,10 +143,10 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
    uint32_t max = 0;
    // Find the maximum value
-   if (m_plotmode == PLOTMODE_ABSOLUTE)  {
-      for (uint32_t i = 0; i < m_plotdata.size(); i++) {
+	if (m_plotmode == PLOTMODE_ABSOLUTE)  {
+		for (uint32_t i = 0; i < m_plotdata.size(); ++i) {
          if (!m_plotdata[i].showplot) continue;
-         for (uint32_t l = 0; l < m_plotdata[i].dataset->size(); l++)
+			for (uint32_t l = 0; l < m_plotdata[i].dataset->size(); ++l)
             if (max < (*m_plotdata[i].dataset)[l])
                max = (*m_plotdata[i].dataset)[l];
 		}
@@ -166,7 +166,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
          uint32_t add = 0;
          // Relative data, first entry is always zero
-         for (uint32_t i = 0; i < dataset->size(); i++) {
+			for (uint32_t i = 0; i < dataset->size(); ++i) {
             add += (*dataset)[i];
             if (! ((i+1) % how_many)) {
                if (add > max) max = add;
@@ -214,7 +214,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
          uint32_t add = 0;
          // Relative data, first entry is always zero
          m_data.push_back(0);
-         for (uint32_t i = 0; i < dataset->size(); i++) {
+			for (uint32_t i = 0; i < dataset->size(); ++i) {
             add += (*dataset)[i];
             if (! ((i+1) % how_many)) {
                m_data.push_back(add);

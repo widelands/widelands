@@ -57,8 +57,8 @@ throw
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-      for (uint16_t y=0; y<map->get_height(); y++) {
-         for (uint16_t x=0; x<map->get_width(); x++) {
+		for (uint16_t y = 0; y < map->get_height(); ++y) {
+			for (uint16_t x = 0; x < map->get_width(); ++x) {
             uint8_t exists=fr.Unsigned8();
             if (exists) {
                // Ok, now read all the additional data
@@ -108,8 +108,8 @@ throw (_wexception)
    // Write flags and owner, register this with the map_object_saver so that
    // it's data can be saved later.
    Map* map=egbase->get_map();
-   for (uint16_t y=0; y<map->get_height(); y++) {
-      for (uint16_t x=0; x<map->get_width(); x++) {
+	for (uint16_t y = 0; y < map->get_height(); ++y) {
+		for (uint16_t x = 0; x < map->get_width(); ++x) {
          BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
          // We only write flags
          if (immovable && immovable->get_type()==Map_Object::FLAG) {

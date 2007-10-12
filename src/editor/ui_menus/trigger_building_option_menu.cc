@@ -50,14 +50,12 @@ m_player_area(trigger->m_player_area)
    int32_t posy=offsy;
 
    // Fill the building infos
-	;
-   int32_t i=0;
 	if
 		(const Tribe_Descr * const tribe = m_parent->egbase().get_tribe
 		 (m_parent->egbase().map()
 		  .get_scenario_player_tribe(m_player_area.player_number).c_str()))
 	{
-	   for (i=0; i<tribe->get_nrbuildings(); i++) {
+		for (int32_t i = 0; i < tribe->get_nrbuildings(); ++i) {
          Building_Descr* b=tribe->get_building_descr(i);
          if (!b->get_buildable() && !b->get_enhanced_building()) continue;
          std::string name=b->name();

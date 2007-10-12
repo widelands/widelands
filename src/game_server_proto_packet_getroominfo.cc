@@ -78,9 +78,8 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 
    std::vector< std::string > users;
 
-   for (uint32_t i = 0; i < nrusers; i++) {
+	for (uint32_t i = 0; i < nrusers; ++i)
       users.push_back(buf->get_string());
-	}
 
    gsc->get_room_info(users);
 }

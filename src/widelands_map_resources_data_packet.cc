@@ -60,7 +60,7 @@ throw (_wexception)
       // construct ids and map
       std::map<uint8_t, int32_t> smap;
       char* buffer;
-      for (int32_t i=0; i<nr_res; i++) {
+		for (int32_t i = 0; i < nr_res; ++i) {
          int32_t id=fr.Unsigned16();
          buffer=fr.CString();
          int32_t res=world->get_resource(buffer);
@@ -69,8 +69,8 @@ throw (_wexception)
 		}
 
       // Now get all the the resources
-      for (uint16_t y=0; y<map->get_height(); y++) {
-         for (uint16_t x=0; x<map->get_width(); x++) {
+		for (uint16_t y = 0; y < map->get_height(); ++y) {
+			for (uint16_t x = 0; x < map->get_width(); ++x) {
             int32_t id=fr.Unsigned8();
             int32_t found_amount=fr.Unsigned8();
             int32_t start_amount=0;
@@ -133,7 +133,7 @@ throw (_wexception)
 
    // Write all resources names and their id's
    std::map<std::string, uint8_t> smap;
-   for (int32_t i=0; i<nr_res; i++) {
+	for (int32_t i = 0; i < nr_res; ++i) {
       Resource_Descr* res=world->get_resource(i);
       smap[res->name().c_str()]=i;
       fw.Unsigned16(i);
@@ -144,8 +144,8 @@ throw (_wexception)
    //  - resource id
    //  - amount
    Map* map=egbase->get_map();
-   for (uint16_t y=0; y<map->get_height(); y++) {
-      for (uint16_t x=0; x<map->get_width(); x++) {
+	for (uint16_t y = 0; y < map->get_height(); ++y) {
+		for (uint16_t x = 0; x < map->get_width(); ++x) {
          int32_t res=map->get_field(Coords(x, y))->get_resources();
          int32_t amount=map->get_field(Coords(x, y))->get_resources_amount();
          int32_t start_amount=map->get_field(Coords(x, y))->get_starting_res_amount();

@@ -37,14 +37,14 @@ Trigger_Time::Trigger_Time()
 
 
 void Trigger_Time::Read(Section* s, Editor_Game_Base*) {
-   int32_t version= s->get_safe_int("version");
-
-   if (version == TRIGGER_VERSION) {
+	const int32_t packet_version= s->get_safe_int("version");
+	if (packet_version == TRIGGER_VERSION) {
       m_wait_time = s->get_safe_int("wait_time");
       m_last_start_time = s->get_safe_int("last_start_time");
-      return;
-	}
-   throw wexception("Time Trigger with unknown/unhandled version %i in map!\n", version);
+	} else
+		throw wexception
+		("Time Trigger with unknown/unhandled version %i in map!",
+		 packet_version);
 }
 
 void Trigger_Time::Write(Section & s) const {

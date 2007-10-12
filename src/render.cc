@@ -444,11 +444,10 @@ Free all resources
 */
 AnimationGfx::~AnimationGfx()
 {
-   for (uint32_t i = 0; i <= MAX_PLAYERS; i++) {
+	for (Player_Number i = 0; i <= MAX_PLAYERS; ++i) {
       std::vector<Surface*>& frames = m_plrframes[i];
-      for (uint32_t j = 0; j < frames.size(); j++) {
+		for (uint32_t j = 0; j < frames.size(); ++j)
          delete frames[j];
-		}
 	}
    delete[] m_plrframes;
 }
@@ -466,7 +465,7 @@ void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
    assert(m_encodedata.hasplrclrs);
    std::vector<Surface*>& frames = m_plrframes[plr];
 
-   for (uint32_t i = 0; i < m_plrframes[0].size(); i++) {
+	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
       // Copy the old surface
 		Surface & origsurface = *m_plrframes[0][i];
 		SDL_Surface & tempsurface = *SDL_ConvertSurface

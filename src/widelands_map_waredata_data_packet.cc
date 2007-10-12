@@ -160,15 +160,15 @@ throw (_wexception)
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
    Map* map=egbase->get_map();
    std::vector<uint32_t> ids;
-   for (uint16_t y=0; y<map->get_height(); y++) {
-      for (uint16_t x=0; x<map->get_width(); x++) {
+	for (uint16_t y = 0; y < map->get_height(); ++y) {
+		for (uint16_t x = 0; x < map->get_width(); ++x) {
          Field* f=map->get_field(Coords(x, y));
 
          // First, check for Flags
          BaseImmovable* imm=f->get_immovable();
          if (imm && imm->get_type()==Map_Object::FLAG) {
             Flag* fl=static_cast<Flag*>(imm);
-            for (int32_t i=0; i<fl->m_item_filled; i++) {
+            for (int32_t i = 0; i < fl->m_item_filled; ++i) {
                assert(os->is_object_known(fl->m_items[i].item));
                write_ware(&fw, egbase, os, fl->m_items[i].item);
 				}

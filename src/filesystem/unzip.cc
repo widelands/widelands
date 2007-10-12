@@ -1235,7 +1235,7 @@ extern int32_t ZEXPORT unzReadCurrentFile  (unzFile file, voidp buf, unsigned le
             else
                 uDoCopy = pfile_in_zip_read_info->stream.avail_in ;
 
-            for (i=0;i<uDoCopy;i++)
+			for (i = 0; i < uDoCopy; ++i)
                 *(pfile_in_zip_read_info->stream.next_out+i) =
                         *(pfile_in_zip_read_info->stream.next_in+i);
 
@@ -1718,7 +1718,7 @@ local int32_t add_data_in_datablock(linkedlist_data* ll, const void* buf, uLong 
 
         to_copy = &(ldi->data[ldi->filled_in_this_block]);
 
-        for (i=0;i<copy_this;i++)
+		for (i = 0; i < copy_this; ++i)
             *(to_copy+i)=*(from_copy+i);
 
         ldi->filled_in_this_block += copy_this;
@@ -1763,14 +1763,13 @@ local void ziplocal_putValue_inmemory (void* dest, uLong x, int32_t nbByte)
 {
     unsigned char* buf=(unsigned char*)dest;
     int32_t n;
-    for (n = 0; n < nbByte; n++) {
-        buf[n] = (unsigned char)(x & 0xff);
+	for (n = 0; n < nbByte; ++n) {
+		buf[n] = static_cast<unsigned char>(x & 0xff);
         x >>= 8;
 	}
 
-    if (x != 0)
-    {     /* data overflow - hack for ZIP64 */
-       for (n = 0; n < nbByte; n++)
+	if (x != 0) { /* data overflow - hack for ZIP64 */
+		for (n = 0; n < nbByte; ++n)
        {
           buf[n] = 0xff;
 		}
@@ -2264,14 +2263,14 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 
     ziplocal_putValue_inmemory(zi->ci.central_header+42, (uLong)zi->ci.pos_local_header- zi->add_position_when_writting_offset, 4);
 
-    for (i=0;i<size_filename;i++)
+	for (i = 0; i < size_filename; ++i)
         *(zi->ci.central_header+SIZECENTRALHEADER+i) = *(filename+i);
 
-    for (i=0;i<size_extrafield_global;i++)
+	for (i = 0; i < size_extrafield_global; ++i)
         *(zi->ci.central_header+SIZECENTRALHEADER+size_filename+i) =
               *(((const char*)extrafield_global)+i);
 
-    for (i=0;i<size_comment;i++)
+	for (i = 0;i < size_comment; ++i)
         *(zi->ci.central_header+SIZECENTRALHEADER+size_filename+
               size_extrafield_global+i) = *(comment+i);
     if (zi->ci.central_header == NULL)

@@ -168,7 +168,7 @@ m_label_autosave
 		}
 
 	bool did_select_a_res=false;
-	for (uint32_t i = 0; i < m_resolutions.size(); i++) {
+	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", m_resolutions[i].xres, m_resolutions[i].yres, m_resolutions[i].depth);
 		const bool selected =

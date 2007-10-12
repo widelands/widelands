@@ -87,7 +87,7 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
 	while (cconf->get_string(csection)) {
 		vis->set_bool(csection, cconf->get_bool(cvisible), "0");
 
-		i++;
+		++i;
 		sprintf(cvisible, "campvisi%i", i);
 		sprintf(csection, "campsect%i", i);
 	}
@@ -107,13 +107,13 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
 		while ((cconf = prof.get_section(cms.c_str()))) {
 			vis->set_bool(cms.c_str(), cconf->get_bool("visible"), "0");
 
-			imap++;
+			++imap;
 			cms = mapsection;
 			sprintf(number, "%02i", imap);
 			cms += number;
 		}
 
-		i++;
+		++i;
 		sprintf(csection, "campsect%i", i);
 		cconf = prof.get_section("global");
 		imap = 0;

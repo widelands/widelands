@@ -260,7 +260,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 			else {
 				cur_text_pos = new_text_pos;
 			}
-			i++;
+			++i;
 		}
 
 		m_rendered_lines.push_back(surface);
@@ -373,7 +373,11 @@ void Font_Handler::draw_richtext
 		//Iterate over richtext blocks
 		//Seems to be a problem with loading images, and freeing them
 		//Refactor to using datastructure
-		for (std::vector<Richtext_Block>::iterator richtext_it = blocks.begin();richtext_it != blocks.end();richtext_it++) {
+		for
+			(std::vector<Richtext_Block>::iterator richtext_it = blocks.begin();
+			 richtext_it != blocks.end();
+			 ++richtext_it)
+		{
 			int32_t cur_line_w = 0;
 			int32_t cur_line_h = 0;
 			int32_t block_h = 0;
@@ -427,14 +431,23 @@ void Font_Handler::draw_richtext
 			int32_t text_width_left = (wrap - img_surf_w) - h_space;
 
 			//Iterate over text blocks of current richtext block
-			for (std::vector<Text_Block>::iterator text_it = cur_text_blocks.begin(); text_it != cur_text_blocks.end(); text_it++) {
+			for
+				(std::vector<Text_Block>::iterator text_it =
+				 cur_text_blocks.begin();
+				 text_it != cur_text_blocks.end();
+				 ++text_it)
+			{
 				std::vector<std::string> words = text_it->get_words();
 				std::vector<std::vector<std::string>::size_type> line_breaks =
 					text_it->get_line_breaks();
 
 				//Iterate over words of current text block
 				uint32_t word_cnt = 0;
-				for (std::vector<std::string>::iterator word_it = words.begin(); word_it != words.end(); word_it++) {
+				for
+					(std::vector<std::string>::iterator word_it = words.begin();
+					 word_it != words.end();
+					 ++word_it)
+				{
 					std::string str_word = *word_it;
 
 					int32_t font_style = TTF_STYLE_NORMAL;
@@ -511,7 +524,7 @@ void Font_Handler::draw_richtext
 							line_breaks.erase(line_breaks.begin());
 						}
 					}
-					word_cnt++;
+					++word_cnt;
 				}
 			}
 			//If there are some words left to blit
@@ -625,7 +638,7 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
 	int32_t y = 0;
 	int32_t x = 0;
 
-	for (uint32_t i = 0; i < surfaces.size(); i++) {
+	for (uint32_t i = 0; i < surfaces.size(); ++i) {
 		SDL_Surface* s = surfaces[i];
 		SDL_Rect r;
 
@@ -722,7 +735,7 @@ std::string Font_Handler::word_wrap_text
 	std::string cur_word; // including start-whitespace
 	std::string cur_line; // the whole line so far
 
-	for (size_t c = 0; c < unwrapped_text.length(); c++) {
+	for (size_t c = 0; c < unwrapped_text.length(); ++c) {
 		// Find the next word
 		bool forced_line_break = false;
 		if (c == unwrapped_text.length() - 1) {
@@ -748,7 +761,7 @@ std::string Font_Handler::word_wrap_text
 			if (calc_linewidth(font, cur_word) > (max_width /*/ 2*/)) {
 				// The last word is too big to fit in a nice way, split it on a char basis
 				//std::vector<std::string> split_word = split_utf8_string(cur_word);
-				for (uint32_t i=0;i<cur_word.length();i++) {
+				for (uint32_t i = 0; i < cur_word.length(); ++i) {
 					tmp_str = cur_line + cur_word[i];
 					if (calc_linewidth(font, tmp_str) > max_width) {
 						wrapped_text += cur_line + '\n';

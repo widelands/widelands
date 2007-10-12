@@ -261,9 +261,9 @@ void ProductionSite::calc_statistics()
 
 	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
 		if (m_statistics[pos]) {
-			ok++;
+			++ok;
 			if (pos >= STATISTICS_VECTOR_LENGTH / 2)
-				lastOk++;
+				++lastOk;
 		}
 	}
 	double percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
@@ -312,26 +312,25 @@ void ProductionSite::init(Editor_Game_Base* g)
 	if (Game * const game = dynamic_cast<Game *>(g)) {
 		// Request worker
 		if (!m_workers.size()) {
-			const std::vector<ProductionSite_Descr::Worker_Info>* info=descr().get_workers();
-         uint32_t i;
-         int32_t j;
-         for (i=0; i<info->size(); i++)
-            for (j=0; j< ((*info)[i]).how_many; j++)
-					request_worker(((*info)[i]).name.c_str());
+			const std::vector<ProductionSite_Descr::Worker_Info> & info =
+				*descr().get_workers();
+			for (size_t i = 0; i < info.size(); ++i)
+				for (int32_t j = 0; j < info[i].how_many; ++j)
+					request_worker(info[i].name.c_str());
 	}
 
 		// Init input ware queues
-		const std::vector<Input>* inputs = descr().get_inputs();
+		const std::vector<Input> & inputs = *descr().get_inputs();
 
-		for (uint32_t i = 0; i < inputs->size(); i++) {
+		for (size_t i = 0; i < inputs.size(); ++i) {
 			WaresQueue* wq = new WaresQueue(this);
 
 			m_input_queues.push_back(wq);
 			//wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->init
 				(owner().tribe().get_safe_ware_index
-				 ((*inputs)[i].ware_descr().name().c_str()),
-				 (*inputs)[i].get_max());
+				 (inputs[i].ware_descr().name().c_str()),
+				 inputs[i].get_max());
 		}
 	}
 }
@@ -347,7 +346,7 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void ProductionSite::set_economy(Economy* e)
 {
 	if (Economy * const old = get_economy()) {
-		for (uint32_t i = 0; i < m_input_queues.size(); i++)
+		for (uint32_t i = 0; i < m_input_queues.size(); ++i)
 			m_input_queues[i]->remove_from_economy(old);
 	}
 
@@ -384,8 +383,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 {
 	// Release worker
 	if (m_worker_requests.size()) {
-		uint32_t i=0;
-		for (i=0; i<m_worker_requests.size(); i++) {
+		for (size_t i = 0; i < m_worker_requests.size(); ++i) {
 			delete m_worker_requests[i];
 			m_worker_requests[i]=0;
 		}
@@ -393,8 +391,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	if (m_workers.size()) {
-		uint32_t i=0;
-		for (i=0; i<m_workers.size(); i++) {
+		for (size_t i = 0; i < m_workers.size(); ++i) {
 			Worker* w = m_workers[i];
 
 			// Ensure we don't re-request the worker when remove_worker is called
@@ -408,7 +405,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	// Cleanup the wares queues
-	for (uint32_t i = 0; i < m_input_queues.size(); i++) {
+	for (uint32_t i = 0; i < m_input_queues.size(); ++i) {
 		m_input_queues[i]->cleanup();
 		delete m_input_queues[i];
 	}
@@ -428,8 +425,7 @@ Intercept remove_worker() calls to unassign our worker, if necessary.
 */
 void ProductionSite::remove_worker(Worker* w)
 {
-	uint32_t i=0;
-	for (i=0; i<m_workers.size(); i++) {
+	for (size_t i = 0; i < m_workers.size(); ++i) {
 		if (m_workers[i] == w) {
 			m_workers[i] = 0;
 			request_worker(w->name().c_str());
@@ -973,7 +969,7 @@ Remember that we need to fetch an item from the flag.
 */
 bool ProductionSite::fetch_from_flag(Game* g)
 {
-	m_fetchfromflag++;
+	++m_fetchfromflag;
 
 	if (m_workers.size())
 		m_workers[0]->update_task_buildingwork(g);
@@ -1030,7 +1026,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 	}
 
 	if (m_fetchfromflag) {
-		m_fetchfromflag--;
+		--m_fetchfromflag;
 		w->start_task_fetchfromflag();
 		return true;
 	}
@@ -1049,7 +1045,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 			if (state->phase == 0)
 			{
 				w->start_task_program(action->sparam1);
-				state->phase++;
+				++state->phase;
 				return true;
 			}
 			else
@@ -1072,7 +1068,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 
 				w->start_task_dropoff(g, item);
 
-				state->phase++;
+				++state->phase;
 				return true;
 			}
 			else
@@ -1100,7 +1096,7 @@ void ProductionSite::program_step(const uint32_t phase) {
 
 	assert(state);
 
-	state->ip++;
+	++state->ip;
 	state->phase = 0;
 }
 
@@ -1162,8 +1158,7 @@ void ProductionSite::program_end(Game* g, bool success)
 
 	// if succesfull, the workers gain experience
 	if (success) {
-		uint32_t i=0;
-		for (i=0; i<m_workers.size(); i++)
+		for (size_t i = 0; i < m_workers.size(); ++i)
 			m_workers[i]->gain_experience(g);
 	}
 

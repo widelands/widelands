@@ -106,7 +106,7 @@ throw (_wexception)
          flag->m_item_filled=fr.Unsigned32();
 
          // items
-         for (int32_t i=0; i<flag->m_item_filled; i++) {
+			for (int32_t i = 0; i < flag->m_item_filled; ++i) {
             flag->m_items[i].pending=fr.Unsigned8();
             uint32_t item=fr.Unsigned32();
             assert(ol->is_object_known(item));
@@ -130,16 +130,16 @@ throw (_wexception)
             flag->m_always_call_for_flag=0;
 
          // Workers waiting
-			const Uint16 nr_workers = fr.Unsigned16();
+			const uint16_t nr_workers = fr.Unsigned16();
          flag->m_capacity_wait.resize(nr_workers);
-         for (uint32_t i=0; i<nr_workers; i++) {
+			for (uint32_t i = 0; i < nr_workers; ++i) {
             uint32_t id=fr.Unsigned32();
             assert(ol->is_object_known(id));
             flag->m_capacity_wait[i]=ol->get_object_by_file_index(id);
 			}
 
          // Flag jobs
-			const Uint16 nr_jobs = fr.Unsigned16();
+			const uint16_t nr_jobs = fr.Unsigned16();
          assert(!flag->m_flag_jobs.size());
 			for (Uint16 i = 0; i < nr_jobs; ++i) {
             Flag::FlagJob f;
@@ -207,7 +207,7 @@ throw (_wexception)
             // Roads are not saved, they are set on load
 
             // Pending items
-            for (uint32_t i=0; i<6; i++)
+		for (uint32_t i = 0; i < 6; ++i)
                   fw.Unsigned32(flag->m_items_pending[i]);
 
             // Capacity
@@ -217,7 +217,7 @@ throw (_wexception)
             fw.Unsigned32(flag->m_item_filled);
 
             // items
-            for (int32_t i=0; i<flag->m_item_filled; i++) {
+		for (int32_t i = 0; i < flag->m_item_filled; ++i) {
                fw.Unsigned8(flag->m_items[i].pending);
                assert(os->is_object_known(flag->m_items[i].item));
                fw.Unsigned32(os->get_object_file_index(flag->m_items[i].item));

@@ -403,14 +403,14 @@ void Warehouse::init(Editor_Game_Base* gg)
    m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());
 
 	if (Game * const game = dynamic_cast<Game *>(gg)) {
-      for (int32_t i = 0; i < get_owner()->tribe().get_nrwares(); i++) {
+		for (int32_t i = 0; i < get_owner()->tribe().get_nrwares(); ++i) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
          req->set_idle(true);
 
          m_requests.push_back(req);
 		}
-      for (int32_t i = 0; i < get_owner()->tribe().get_nrworkers(); i++) {
+      for (int32_t i = 0; i < get_owner()->tribe().get_nrworkers(); ++i) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
 
          req->set_idle(true);
@@ -559,7 +559,7 @@ void Warehouse::set_economy(Economy* e)
 	m_supply->set_economy(e);
 	Building::set_economy(e);
 
-	for (uint32_t i = 0; i < m_requests.size(); i++)
+	for (uint32_t i = 0; i < m_requests.size(); ++i)
 		m_requests[i]->set_economy(e);
 
 	if (e)
@@ -688,8 +688,10 @@ Worker* Warehouse::launch_worker(Game* g, int32_t ware)
    // Look if we got one in stock of those
 	const std::string & workername = workerdescr.name();
    std::vector<Object_Ptr>::iterator i;
-   for (i=m_incorporated_workers.begin();
-         i!=m_incorporated_workers.end(); i++)
+	for
+		(i = m_incorporated_workers.begin();
+		 i != m_incorporated_workers.end();
+		 ++i)
       if (static_cast<Worker*>(i->get(g))->name()==workername) break;
 
    if (i==m_incorporated_workers.end()) {
@@ -726,8 +728,8 @@ Soldier* Warehouse::launch_soldier(Game* g, int32_t ware, Requeriments* r)
 	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(ware);
    // Look if we got one in stock of those
 	const std::string & workername = workerdescr.name();
-	std::vector<Object_Ptr>::iterator i;
-	for (i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+	std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
+	for (; i != m_incorporated_workers.end(); ++i)
 	{
 		if (static_cast<Worker*>(i->get(g))->name()==workername)
 		{
@@ -788,7 +790,10 @@ void Warehouse::mark_as_used(Game* g, int32_t ware, Requeriments* r)
    // Look if we got one in stock of those
 	std::string workername=workerdescr->name();
 	std::vector<Object_Ptr>::iterator i;
-	for (i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+	for
+		(i = m_incorporated_workers.begin();
+		 i != m_incorporated_workers.end();
+		 ++i)
 	{
 		if (static_cast<Worker*>(i->get(g))->name()==workername)
 		{
@@ -992,9 +997,11 @@ log ("Warehouse::get_soldiers_passing :");
 	workerdescr = get_owner()->tribe().get_worker_descr(w);
    // Look if we got one in stock of those
    std::string workername=workerdescr->name();
-   std::vector<Object_Ptr>::iterator i;
 
-	for (i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+	for
+		(std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
+		 i != m_incorporated_workers.end();
+		 ++i)
 	{
       if (static_cast<Worker*>(i->get(g))->name()==workername)
 		{
@@ -1013,13 +1020,13 @@ log ("Warehouse::get_soldiers_passing :");
 						  soldier->get_level(atrEvade)))
 					{
 						log ("+");
-						number++;
+						++number;
 					}
 				}
 				else
 				{
 					log ("+");
-					number++;
+					++number;
 				}
 			}
 			else

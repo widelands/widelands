@@ -124,11 +124,10 @@ float Section::Value::get_float() const
 
 bool Section::Value::get_bool() const
 {
-	int32_t i;
-	for (i = 0; i < TRUE_WORDS; i++)
+	for (int32_t i = 0; i < TRUE_WORDS; ++i)
 		if (!strcasecmp(m_value, trueWords[i]))
 			return true;
-	for (i = 0; i < FALSE_WORDS; i++)
+	for (int32_t i = 0; i < FALSE_WORDS; ++i)
 		if (!strcasecmp(m_value, falseWords[i]))
 			return false;
 
@@ -253,7 +252,7 @@ void Section::check_used()
  */
 Section::Value *Section::get_val(const char *name)
 {
-	for (Value_list::iterator v = m_values.begin(); v != m_values.end(); v++) {
+	for (Value_list::iterator v = m_values.begin(); v != m_values.end(); ++v) {
 		if (!strcasecmp(v->get_name(), name)) {
 			v->mark_used();
 			return &*v;
@@ -273,7 +272,7 @@ Section::Value *Section::get_val(const char *name)
  */
 Section::Value *Section::get_next_val(const char *name)
 {
-	for (Value_list::iterator v = m_values.begin(); v != m_values.end(); v++) {
+	for (Value_list::iterator v = m_values.begin(); v != m_values.end(); ++v) {
 		if (v->is_used())
 			continue;
 		if (!name || !strcasecmp(v->get_name(), name)) {
@@ -295,7 +294,11 @@ Section::Value *Section::get_next_val(const char *name)
 Section::Value *Section::create_val(const char *name, const char *value, bool duplicate)
 {
 	if (!duplicate) {
-		for (Value_list::iterator old = m_values.begin(); old != m_values.end(); old++) {
+		for
+			(Value_list::iterator old = m_values.begin();
+			 old != m_values.end();
+			 ++old)
+		{
 			if (!strcasecmp(old->get_name(), name)) {
 				old->set_string(value);
 				return &*old;
@@ -702,7 +705,11 @@ void Profile::error(const char *fmt, ...) const
  */
 void Profile::check_used()
 {
-	for (Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+	for
+		(Section_list::iterator s = m_sections.begin();
+		 s != m_sections.end();
+		 ++s)
+	{
 		if (!s->is_used())
 			error("Section [%s] not used (did you spell the name correctly?)", s->get_name());
 		else
@@ -720,7 +727,11 @@ void Profile::check_used()
  */
 Section *Profile::get_section(const char *name)
 {
-	for (Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+	for
+		(Section_list::iterator s = m_sections.begin();
+		 s != m_sections.end();
+		 ++s)
+	{
 		if (!strcasecmp(s->get_name(), name)) {
 			s->mark_used();
 			return &*s;
@@ -766,7 +777,11 @@ Section *Profile::pull_section(const char *name)
  */
 Section *Profile::get_next_section(const char *name)
 {
-	for (Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+	for
+		(Section_list::iterator s = m_sections.begin();
+		 s != m_sections.end();
+		 ++s)
+	{
 		if (s->is_used())
 			continue;
 		if (!name || !strcasecmp(s->get_name(), name)) {
@@ -787,7 +802,11 @@ Section *Profile::get_next_section(const char *name)
 Section *Profile::create_section(const char *name, bool duplicate)
 {
 	if (!duplicate) {
-		for (Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+		for
+			(Section_list::iterator s = m_sections.begin();
+			 s != m_sections.end();
+			 ++s)
+		{
 			if (!strcasecmp(s->get_name(), name))
 				return &*s;
 		}
@@ -800,14 +819,14 @@ Section *Profile::create_section(const char *name, bool duplicate)
 inline char *skipwhite(char *p)
 {
 	while (*p && isspace(*p))
-		p++;
+		++p;
 	return p;
 }
 
 inline void rtrim(char *str)
 {
 	char *p;
-	for (p = strchr(str, 0); p > str; p--) {
+	for (p = strchr(str, 0); p > str; --p) {
 		if (!isspace(*(p-1)))
 			break;
 	}
@@ -821,7 +840,7 @@ inline void killcomments(char *p)
 			p[0] = 0;
 			break;
 		}
-		p++;
+		++p;
 	}
 }
 
@@ -863,7 +882,7 @@ void Profile::read
 		std::string key;
 		bool translate_line = false;
 		while (fr.ReadLine(line, buf_end)) {
-			linenr++;
+			++linenr;
 
 			if (!reading_multiline)
 				p = line;
@@ -873,7 +892,7 @@ void Profile::read
 				continue;
 
 			if (p[0] == '[') {
-				p++;
+				++p;
 				setEndAt(p, ']');
 				s = create_section(p, true); // may create duplicate
 			} else {
@@ -888,11 +907,11 @@ void Profile::read
 								("line %i: runaway multiline string", linenr);
 						if (*line == '_')
 							translate_line = true;
-						line++;
+						++line;
 					}
 
 					// skip " or '
-					line++;
+					++line;
 
 					char *eot = line+strlen(line)-1;
 					while (*eot != '"' && *eot != '\'') {
@@ -930,7 +949,7 @@ void Profile::read
 
 					// then remove surrounding '' or ""
 					if (tail[0] == '\'' || tail[0] == '\"') {
-						tail++;
+						++tail;
 					}
 				}
 				if (tail) {
@@ -989,19 +1008,27 @@ void Profile::write
 
 	fw.Printf("# Automatically created by Widelands " BUILD_ID "\n\n");
 
-	for (Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+	for
+		(Section_list::iterator s = m_sections.begin();
+		 s != m_sections.end();
+		 ++s)
+	{
 		if (used_only && !s->is_used())
 			continue;
 
 		fw.Printf("[%s]\n", s->get_name());
 
-		for (Section::Value_list::iterator v = s->m_values.begin(); v != s->m_values.end(); v++) {
+		for
+			(Section::Value_list::iterator v = s->m_values.begin();
+			 v != s->m_values.end();
+			 ++v)
+		{
 			if (used_only && !v->is_used())
 				continue;
 
          const char* str = v->get_string();
          bool multiline = false;
-         for (uint32_t i = 0; i < strlen(str); i++)
+			for (uint32_t i = 0; i < strlen(str); ++i)
             if (str[i] == '\n')
                multiline = true;
 

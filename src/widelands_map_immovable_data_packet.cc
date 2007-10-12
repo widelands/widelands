@@ -96,8 +96,8 @@ throw (_wexception)
 			} else {
             // World immovable
             int32_t idx=world.get_immovable_index(name);
-            if (idx==-1)
-               throw wexception("Unknown world immovable %s in map!\n", name);
+				if (idx==-1)
+					throw wexception("Unknown world immovable %s in map!", name);
 				Immovable & immovable = *egbase->create_immovable(position, idx, 0);
 				if (not skip) ol->register_object(egbase, reg, &immovable);
 			}

@@ -186,7 +186,7 @@ bool Game::can_start()
 
 	// we need exactly one local player
 	local_num = -1;
-	for (i = 1; i <= MAX_PLAYERS; i++) {
+	for (i = 1; i <= MAX_PLAYERS; ++i) {
 		if (!get_player(i))
 			continue;
 
@@ -575,7 +575,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 	delete get_iabase();
 	set_iabase(0);
 
-	for (uint32_t i=0; i<cpl.size(); i++)
+	for (uint32_t i=0; i<cpl.size(); ++i)
 		delete cpl[i];
 
 	g_gr->flush(PicMod_Game);
@@ -599,7 +599,7 @@ void Game::think()
 	    m_netgame->handle_network ();
 
 	if (m_state == gs_running) {
-		for (uint32_t i=0;i<cpl.size();i++)
+		for (uint32_t i = 0;i < cpl.size(); ++i)
 			cpl[i]->think();
 
 		if
@@ -679,7 +679,7 @@ void Game::set_speed(int32_t speed)
 
 void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 {
-	for (uint32_t i=0;i<cpl.size();i++)
+	for (uint32_t i = 0; i < cpl.size(); ++i)
 		if (cpl[i]->get_player_number()==pi->get_owner()->get_player_number())
 			if (lg==GAIN)
 				cpl[i]->gain_immovable (pi);
@@ -694,7 +694,7 @@ void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 
 void Game::player_field_notification (const FCoords& fc, losegain_t lg)
 {
-	for (uint32_t i=0;i<cpl.size();i++)
+	for (uint32_t i = 0; i < cpl.size(); ++i)
 		if (cpl[i]->get_player_number()==fc.field->get_owned_by())
 			if (lg==GAIN)
 				cpl[i]->gain_field (fc);
@@ -898,8 +898,8 @@ void Game::sample_statistics()
 	std::vector< uint32_t > nr_production_sites; nr_production_sites.resize(map().get_nrplayers());
 
 	// We walk the map, to gain all needed informations
-	for (uint16_t y = 0; y < map().get_height(); y++) {
-		for (uint16_t x = 0; x < map().get_width(); x++) {
+	for (uint16_t y = 0; y < map().get_height(); ++y) {
+		for (uint16_t x = 0; x < map().get_width(); ++x) {
 			Field* f = map().get_field(Coords(x, y));
 
 			// First, ownership of this field
@@ -947,36 +947,35 @@ void Game::sample_statistics()
 	}
 
 	// Number of workers / wares
-	for (uint32_t i = 0; i < map().get_nrplayers(); i++) {
-		Player* plr = get_player(i+1);
-
+	const Player_Number nr_players = map().get_nrplayers();
+	iterate_players_existing(p, nr_players, *this, plr) {
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
-		for (uint32_t j = 0; plr && j < plr->get_nr_economies(); j++) {
+		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy* eco = plr->get_economy_by_number(j);
-
-			for (int32_t wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
+			const Tribe_Descr & tribe = plr->tribe();
+			for (int32_t wareid = 0; wareid < tribe.get_nrwares(); ++wareid)
 				wastock += eco->stock_ware(wareid);
-			for (int32_t workerid = 0; workerid < plr->tribe().get_nrworkers(); workerid++) {
-				if (plr->tribe().get_worker_descr(workerid)->get_worker_type() == Worker_Descr::CARRIER)
+			for (int32_t workerid = 0; workerid < tribe.get_nrworkers(); ++workerid) {
+				if (tribe.get_worker_descr(workerid)->get_worker_type() == Worker_Descr::CARRIER)
 					continue;
 				wostock += eco->stock_worker(workerid);
 			}
 		}
-		nr_wares[ i ] = wastock;
-		nr_workers[ i ] = wostock;
+		nr_wares  [p - 1] = wastock;
+		nr_workers[p - 1] = wostock;
 	}
 
 	// Now, divide the statistics
-	for (uint32_t i = 0; i < map().get_nrplayers(); i++) {
+	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
 		if (productivity[ i ])
 			productivity[ i ] /= nr_production_sites[ i ];
 	}
 
 	// Now, push this on the general statistics
 	m_general_stats.resize(map().get_nrplayers());
-	for (uint32_t i = 0; i < map().get_nrplayers(); i++) {
+	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
 		m_general_stats[i].land_size.push_back(land_size[i]);
 		m_general_stats[i].nr_buildings.push_back(nr_buildings[i]);
 		m_general_stats[i].nr_kills.push_back(nr_kills[i]);
@@ -1009,34 +1008,30 @@ void Game::ReadStatistics(FileRead& fr, uint32_t version)
 
 		// Read general statistics
 		uint32_t entries = fr.Unsigned16();
-		m_general_stats.resize(get_map()->get_nrplayers());
+		const Player_Number nr_players = map().get_nrplayers();
+		m_general_stats.resize(nr_players);
 
-		for (uint32_t i = 0; i < get_map()->get_nrplayers(); i++) {
-			if (get_player(i+1)) {
-				m_general_stats[i].land_size.resize(entries);
-				m_general_stats[i].nr_workers.resize(entries);
-				m_general_stats[i].nr_buildings.resize(entries);
-				m_general_stats[i].nr_wares.resize(entries);
-				m_general_stats[i].productivity.resize(entries);
-				m_general_stats[i].nr_kills.resize(entries);
-				m_general_stats[i].miltary_strength.resize(entries);
-			}
+		iterate_players_existing(p, nr_players, *this, plr) {
+			m_general_stats[p - 1].land_size       .resize(entries);
+			m_general_stats[p - 1].nr_workers      .resize(entries);
+			m_general_stats[p - 1].nr_buildings    .resize(entries);
+			m_general_stats[p - 1].nr_wares        .resize(entries);
+			m_general_stats[p - 1].productivity    .resize(entries);
+			m_general_stats[p - 1].nr_kills        .resize(entries);
+			m_general_stats[p - 1].miltary_strength.resize(entries);
 		}
 
-		for (uint32_t i = 0; i < get_map()->get_nrplayers(); i++) {
-			if (!get_player(i+1))
-				continue;
-
-			for (uint32_t j = 0; j < m_general_stats[i].land_size.size(); j++) {
-				m_general_stats[i].land_size[j] = fr.Unsigned32();
-				m_general_stats[i].nr_workers[j] = fr.Unsigned32();
-				m_general_stats[i].nr_buildings[j] = fr.Unsigned32();
-				m_general_stats[i].nr_wares[j] = fr.Unsigned32();
-				m_general_stats[i].productivity[j] = fr.Unsigned32();
-				m_general_stats[i].nr_kills[j] = fr.Unsigned32();
-				m_general_stats[i].miltary_strength[j] = fr.Unsigned32();
+		iterate_players_existing(p, nr_players, *this, plr)
+			for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
+			{
+				m_general_stats[p - 1].land_size       [j] = fr.Unsigned32();
+				m_general_stats[p - 1].nr_workers      [j] = fr.Unsigned32();
+				m_general_stats[p - 1].nr_buildings    [j] = fr.Unsigned32();
+				m_general_stats[p - 1].nr_wares        [j] = fr.Unsigned32();
+				m_general_stats[p - 1].productivity    [j] = fr.Unsigned32();
+				m_general_stats[p - 1].nr_kills        [j] = fr.Unsigned32();
+				m_general_stats[p - 1].miltary_strength[j] = fr.Unsigned32();
 			}
-		}
 	} else
 		throw wexception("Unsupported version %i", version);
 }
@@ -1053,27 +1048,23 @@ void Game::WriteStatistics(FileWrite& fw)
 	// First, we write the size of the statistics arrays
 	uint32_t entries = 0;
 
-	for (uint32_t i = 0; i < get_map()->get_nrplayers(); i++) {
-		if (get_player(i+1) && m_general_stats.size()) {
-			entries = m_general_stats[i].land_size.size();
+	const Player_Number nr_players = map().get_nrplayers();
+	iterate_players_existing(p, nr_players, *this, plr)
+		if (m_general_stats.size()) {
+			entries = m_general_stats[p - 1].land_size.size();
 			break;
 		}
-	}
 
 	fw.Unsigned16(entries);
 
-	for (uint32_t i = 0; i < get_map()->get_nrplayers(); i++) {
-		if (!get_player(i+1))
-			continue;
-
-		for (uint32_t j = 0; j < entries; j++) {
-			fw.Unsigned32(m_general_stats[i].land_size[j]);
-			fw.Unsigned32(m_general_stats[i].nr_workers[j]);
-			fw.Unsigned32(m_general_stats[i].nr_buildings[j]);
-			fw.Unsigned32(m_general_stats[i].nr_wares[j]);
-			fw.Unsigned32(m_general_stats[i].productivity[j]);
-			fw.Unsigned32(m_general_stats[i].nr_kills[j]);
-			fw.Unsigned32(m_general_stats[i].miltary_strength[j]);
+	iterate_players_existing(p, nr_players, *this, plr)
+		for (uint32_t j = 0; j < entries; ++j) {
+			fw.Unsigned32(m_general_stats[p - 1].land_size       [j]);
+			fw.Unsigned32(m_general_stats[p - 1].nr_workers      [j]);
+			fw.Unsigned32(m_general_stats[p - 1].nr_buildings    [j]);
+			fw.Unsigned32(m_general_stats[p - 1].nr_wares        [j]);
+			fw.Unsigned32(m_general_stats[p - 1].productivity    [j]);
+			fw.Unsigned32(m_general_stats[p - 1].nr_kills        [j]);
+			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
 		}
-	}
 }

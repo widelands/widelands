@@ -87,15 +87,13 @@ Load tribe graphics
 */
 void Tribe_Descr::load_graphics()
 {
-	int32_t i;
-
-	for (i = 0; i < m_workers.get_nitems(); i++)
+	for (int32_t i = 0; i < m_workers.get_nitems(); ++i)
 		m_workers.get(i)->load_graphics();
 
-   for (i = 0; i < m_wares.get_nitems(); i++)
+	for (int32_t i = 0; i < m_wares.get_nitems(); ++i)
 		m_wares.get(i)->load_graphics();
 
-	for (i = 0; i < m_buildings.get_nitems(); i++)
+	for (int32_t i = 0; i < m_buildings.get_nitems(); ++i)
 		m_buildings.get(i)->load_graphics();
 }
 
@@ -203,7 +201,7 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
 		Building_Descr *descr = 0;
 
 		try {
@@ -300,7 +298,7 @@ void Tribe_Descr::parse_workers(const char *directory)
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
 		Worker_Descr *descr = 0;
 
 		try {
@@ -334,7 +332,7 @@ void Tribe_Descr::parse_wares(const char* directory)
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
 		char fname[256];
 
 		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
@@ -388,7 +386,7 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
 		char fname[256];
 
 		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
@@ -521,7 +519,11 @@ void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
    // get all tribes
    filenameset_t m_tribes;
    g_fs->FindFiles("tribes", "*", &m_tribes);
-   for (filenameset_t::iterator pname = m_tribes.begin(); pname != m_tribes.end(); pname++) {
+	for
+		(filenameset_t::iterator pname = m_tribes.begin();
+		 pname != m_tribes.end();
+		 ++pname)
+	{
 		const std::string name = pname->substr(7);
 		if (Tribe_Descr::exists_tribe(name)) target.push_back(name);
 	}
@@ -539,8 +541,10 @@ uint32_t Tribe_Descr::get_resource_indicator
 {
 	if (not res or not amount) {
       int32_t idx=get_immovable_index("resi_none");
-      if (idx==-1)
-	      throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", name().c_str());
+		if (idx == -1)
+			throw wexception
+				("Tribe %s doesn't declare a resource indicator resi_none!",
+				 name().c_str());
       return idx;
 	}
 

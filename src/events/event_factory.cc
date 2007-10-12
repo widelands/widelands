@@ -58,20 +58,24 @@ Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
  */
 Event* Event_Factory::get_correct_event(const char* id)
 {
-	std::string str = id;
-	if (str == "message_box") return new Event_Message_Box();
-	else if (str == "move_view") return new Event_Move_View();
-	else if (str == "unhide_area") return new Event_Unhide_Area();
-	else if (str == "conquer_area") return new Event_Conquer_Area();
-	else if (str == "allow_building") return new Event_Allow_Building();
-	else if (str == "set_null_trigger") return new Event_Set_Null_Trigger();
-	else if (str == "unhide_objective") return new Event_Unhide_Objective();
-	else if (str == "set_visiblity") return new Event_Set_Visiblity();
-	else
-		throw wexception("Event_Factory::get_correct_event: Unknown event id found: %s\n", id);
-
-	// never here
-	return 0;
+	if (strcmp("message_box",      id) == 0)
+		return new Event_Message_Box     ();
+	if (strcmp("move_view",        id) == 0)
+		return new Event_Move_View       ();
+	if (strcmp("unhide_area",      id) == 0)
+		return new Event_Unhide_Area     ();
+	if (strcmp("conquer_area",     id) == 0)
+		return new Event_Conquer_Area    ();
+	if (strcmp("allow_building",   id) == 0)
+		return new Event_Allow_Building  ();
+	if (strcmp("set_null_trigger", id) == 0)
+		return new Event_Set_Null_Trigger();
+	if (strcmp("unhide_objective", id) == 0)
+		return new Event_Unhide_Objective();
+	if (strcmp("set_visiblity",    id) == 0)
+		return new Event_Set_Visiblity   ();
+	throw wexception
+		("Event_Factory::get_correct_event: Unknown event id found: %s", id);
 }
 
 
@@ -132,7 +136,7 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
 Event_Descr* Event_Factory::get_correct_event_descr(const char* id)
 {
 	std::string str = id;
-	for (uint32_t i = 0; i < Event_Factory::get_nr_of_available_events(); i++)
+	for (uint32_t i = 0; i < Event_Factory::get_nr_of_available_events(); ++i)
 		if (EVENT_DESCRIPTIONS[i].id == str)
 			return &EVENT_DESCRIPTIONS[i];
 

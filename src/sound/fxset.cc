@@ -41,7 +41,7 @@ FXset::~FXset()
 
 	while (i != m_fxs.end()) {
 		Mix_FreeChunk(*i);
-		i++;
+		++i;
 	}
 
 	m_fxs.clear();

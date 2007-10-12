@@ -59,7 +59,11 @@ throw (_wexception)
 		if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
          filenameset_t pictures;
 			fs.FindFiles("pics", "*", &pictures);
-         for (filenameset_t::iterator pname = pictures.begin(); pname != pictures.end(); pname++) {
+			for
+				(filenameset_t::iterator pname = pictures.begin();
+				 pname != pictures.end();
+				 ++pname)
+			{
 				if (fs.IsDirectory((*pname).c_str())) // Might be some dir, maybe CVS
                continue;
 
@@ -110,8 +114,10 @@ throw (_wexception)
    s->set_int("packet_version", CURRENT_PACKET_VERSION);
 
    // Nothing more. All pics in the dir pic are loaded as pictures
-   for (uint32_t i = 0; i < egbase->get_map()->m_extradatainfos.size(); i++) {
-      Map::Extradata_Info& edi = egbase->get_map()->m_extradatainfos[i];
+	const Map::Extradata_Infos & extradatainfos =
+		egbase->map().m_extradatainfos;
+	for (uint32_t i = 0; i < extradatainfos.size(); ++i) {
+		const Map::Extradata_Info & edi = extradatainfos[i];
       assert(edi.type == Map::Extradata_Info::PIC);
 
 		fs.EnsureDirectoryExists("pics");

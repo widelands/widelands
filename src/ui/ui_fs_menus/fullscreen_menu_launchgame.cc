@@ -77,15 +77,18 @@ m_is_scenario(false)
 	int32_t y;
 
 	y = 250;
-	for (uint32_t i = 1; i <= MAX_PLAYERS; ++i) {
-		PlayerDescriptionGroup *pdg = new PlayerDescriptionGroup(this, 50, y, m_game, i, m_netgame && m_netgame->get_playernum()==i);
+	iterate_player_numbers(p, MAX_PLAYERS) {
+		PlayerDescriptionGroup *pdg = new PlayerDescriptionGroup
+			(this,
+			 50, y,
+			 m_game, p, m_netgame && m_netgame->get_playernum() == p);
 		pdg->changed.set(this, &Fullscreen_Menu_LaunchGame::refresh);
 
-		m_players[i-1] = pdg;
+		m_players[p - 1] = pdg;
 		y += 30;
 
 		if (m_netgame!=0)
-		    m_netgame->set_player_description_group (i, pdg);
+		    m_netgame->set_player_description_group (p, pdg);
 	}
 
 	if (not m_netgame) m_players[0]->set_player_type(Player::Local);
@@ -145,7 +148,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	else m_mapname.set_text(_("(no map)"));
 
 	// update the player description groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; i++) {
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
 		m_players[i]->set_enabled(i < maxplayers);
 		if (m_is_scenario && (i<maxplayers) && map) {

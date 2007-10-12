@@ -64,7 +64,7 @@ EventChain::State EventChain::run(Game* g) {
  * Clear all events, events are not delted.
  */
 void EventChain::clear_events() {
-   for (uint32_t i = 0; i < m_events.size(); i++)
+	for (uint32_t i = 0; i < m_events.size(); ++i)
       m_events[i]->unreference(this);
 
    m_events.resize(0);
@@ -90,7 +90,7 @@ Cmd_CheckEventChain::Cmd_CheckEventChain (int32_t t, int32_t tid) : GameLogicCom
 
 void Cmd_CheckEventChain::execute (Game* g)
 {
-	m_eventchain_id++;
+	++m_eventchain_id;
 
 	Map & map = g->map();
 	MapEventChainManager & mecm = map.get_mecm();

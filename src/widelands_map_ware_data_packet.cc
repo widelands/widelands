@@ -117,7 +117,7 @@ throw (_wexception)
 
    // All checked, we only need to save those stuff to disk
    fw.Unsigned32(ids.size());
-   for (uint32_t i=0; i<ids.size(); i++)
+	for (uint32_t i = 0; i < ids.size(); ++i)
       fw.Unsigned32(ids[i]);
 
    fw.Write(fs, "binary/ware");

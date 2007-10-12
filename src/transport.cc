@@ -495,7 +495,7 @@ Flag::~Flag()
 	if (m_flag_jobs.size())
 		log("Flag: ouch! flagjobs left\n");
 
-	for (int32_t i = 0; i < 6; i++)
+	for (int32_t i = 0; i < 6; ++i)
 		if (m_roads[i])
 			log("Flag: ouch! road left\n");
 }
@@ -564,7 +564,7 @@ void Flag::set_economy(Economy *e)
 
 	PlayerImmovable::set_economy(e);
 
-	for (int32_t i = 0; i < m_item_filled; i++)
+	for (int32_t i = 0; i < m_item_filled; ++i)
 		m_items[i].item->set_economy(e);
 
 	if (m_building)
@@ -573,7 +573,7 @@ void Flag::set_economy(Economy *e)
 	for (std::list<FlagJob>::const_iterator it = m_flag_jobs.begin(); it != m_flag_jobs.end(); ++it)
 		it->request->set_economy(e);
 
-	for (int32_t i = 0; i < 6; i++) {
+	for (int8_t i = 0; i < 6; ++i) {
 		if (m_roads[i])
 			m_roads[i]->set_economy(e);
 	}
@@ -638,7 +638,7 @@ void Flag::detach_road(int32_t dir)
 */
 void Flag::get_neighbours(Neighbour_list *neighbours)
 {
-	for (int32_t i = 0; i < 6; i++) {
+	for (int8_t i = 0; i < 6; ++i) {
 		Road *road = m_roads[i];
 		if (!road)
 			continue;
@@ -668,7 +668,7 @@ void Flag::get_neighbours(Neighbour_list *neighbours)
 */
 Road *Flag::get_road(Flag *flag)
 {
-	for (int32_t i = 0; i < 6; i++) {
+	for (int8_t i = 0; i < 6; ++i) {
 		Road *road = m_roads[i];
 		if (!road)
 			continue;
@@ -721,7 +721,7 @@ void Flag::add_item(Game* g, WareInstance* item)
 bool Flag::has_pending_item(Game *, Flag * dest) {
 	int32_t i;
 
-	for (i = 0; i < m_item_filled; i++) {
+	for (i = 0; i < m_item_filled; ++i) {
 		if (!m_items[i].pending)
 			continue;
 
@@ -742,7 +742,7 @@ bool Flag::has_pending_item(Game *, Flag * dest) {
 bool Flag::ack_pending_item(Game *, Flag * destflag) {
 	int32_t i;
 
-	for (i = 0; i < m_item_filled; i++) {
+	for (i = 0; i < m_item_filled; ++i) {
 		if (!m_items[i].pending)
 			continue;
 
@@ -788,7 +788,7 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 	WareInstance* item;
 	int32_t best_index = -1;
 
-	for (int32_t i = 0; i < m_item_filled; i++) {
+	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (m_items[i].nextstep != dest)
 			continue;
 
@@ -802,7 +802,7 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 
 	// move the other items up the list and return this one
 	item = m_items[best_index].item;
-	m_item_filled--;
+	--m_item_filled;
 	memmove(&m_items[best_index], &m_items[best_index+1], sizeof(m_items[0]) * (m_item_filled - best_index));
 
 	item->set_location(g, 0);
@@ -819,11 +819,11 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 */
 void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 {
-	for (int32_t i = 0; i < m_item_filled; i++) {
+	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (m_items[i].item != item)
 			continue;
 
-		m_item_filled--;
+		--m_item_filled;
 		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
 
 		if (Game * const game = dynamic_cast<Game *>(g))
@@ -856,7 +856,7 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	int32_t i;
 
 	// Find the PendingItem entry
-	for (i = 0; i < m_item_filled; i++) {
+	for (i = 0; i < m_item_filled; ++i) {
 		if (m_items[i].item != item)
 			continue;
 
@@ -896,7 +896,7 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	// Deal with the normal (flag) case
 	assert(nextstep->get_type() == FLAG);
 
-	for (int32_t dir = 1; dir <= 6; dir++) {
+	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road* road = get_road(dir);
 		Flag* other;
 		Road::FlagId flagid;
@@ -942,7 +942,7 @@ void Flag::update_items(Game* g, Flag* other)
 {
 	m_always_call_for_flag = other;
 
-	for (int32_t i = 0; i < m_item_filled; i++)
+	for (int32_t i = 0; i < m_item_filled; ++i)
 		m_items[i].item->update(g);
 
 	m_always_call_for_flag = 0;
@@ -984,7 +984,7 @@ void Flag::cleanup(Editor_Game_Base *g)
 		assert(!m_building);
 	}
 
-	for (int32_t i = 0; i < 6; i++) {
+	for (int8_t i = 0; i < 6; ++i) {
 		if (m_roads[i]) {
 			m_roads[i]->remove(g); // immediate death
 			assert(!m_roads[i]);
@@ -1901,9 +1901,8 @@ bool Requeriments::check (int32_t hp, int32_t attack, int32_t defense, int32_t e
 void Requeriments::Read
 (FileRead * fr, Editor_Game_Base *, Widelands_Map_Map_Object_Loader *)
 {
-   uint32_t version=fr->Unsigned16();
-
-   if (version==REQUERIMENTS_VERSION) {
+	const uint16_t packet_version = fr->Unsigned16();
+	if (packet_version == REQUERIMENTS_VERSION) {
 
 		// HitPoints Levels
 		m_hp.min = fr->Unsigned8();
@@ -1920,11 +1919,9 @@ void Requeriments::Read
 		// Evade
 		m_evade.min = fr->Unsigned8();
 		m_evade.max = fr->Unsigned8();
-
-		// DONE
-      return;
-	}
-   throw wexception("Unknown requeriment version %i in file!\n", version);
+	} else
+		throw wexception
+			("Unknown requeriment version %i in file!", packet_version);
 }
 
 /**
@@ -2016,9 +2013,8 @@ Request::~Request()
  * them through the data in the file
  */
 void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
-   uint32_t version=fr->Unsigned16();
-
-   if (version >= REQUEST_SUPPORTED_VERSION) {
+	uint16_t version = fr->Unsigned16();
+	if (version >= REQUEST_SUPPORTED_VERSION) {
       m_type=static_cast<Type>(fr->Unsigned8());
       m_index=fr->Unsigned32();
       m_idle=fr->Unsigned8();
@@ -2032,9 +2028,8 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
 
       assert(!m_transfers.size());
 
-      uint32_t nr_transfers=fr->Unsigned16();
-      uint32_t i=0;
-      for (i=0; i<nr_transfers; i++) {
+		const uint16_t nr_transfers = fr->Unsigned16();
+		for (uint16_t i = 0; i < nr_transfers; ++i) {
          uint32_t what_is=fr->Unsigned8();
          uint32_t reg=fr->Unsigned32();
          Transfer* trans=0;
@@ -2064,11 +2059,8 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
 
       if (!is_open() && m_economy)
          m_economy->remove_request(this);
-
-      // DONE
-      return;
-	}
-   throw wexception("Unknown request version %i in file!\n", version);
+	} else
+		throw wexception("Unknown request version %i in file!", version);
 }
 
 /**
@@ -2101,8 +2093,7 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
 
    // Write number of current transfers
    fw->Unsigned16(m_transfers.size());
-   uint32_t i=0;
-   for (i=0; i<m_transfers.size(); i++) {
+	for (uint32_t i = 0; i < m_transfers.size(); ++i) {
       Transfer* trans=m_transfers[i];
       // Is this a ware (or a worker)
 		fw->Unsigned8(m_type);
@@ -2399,7 +2390,7 @@ void Request::transfer_finish(Game *g, Transfer* t)
 
 	if (!m_idle) {
 		set_required_time(get_base_required_time(g, 1));
-		m_count--;
+		--m_count;
 	}
 
 		delete m_requeriments;
@@ -2510,7 +2501,7 @@ void SupplyList::add_supply(Supply* supp)
 */
 void SupplyList::remove_supply(Supply* supp)
 {
-	for (uint32_t idx = 0; idx < m_supplies.size(); idx++) {
+	for (uint32_t idx = 0; idx < m_supplies.size(); ++idx) {
 		if (m_supplies[idx] == supp) {
 			if (idx != m_supplies.size()-1)
 				m_supplies[idx] = m_supplies[m_supplies.size()-1];
@@ -3017,11 +3008,11 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 	Map & map = owner().egbase().map();
 
 	// advance the path-finding cycle
-	mpf_cycle++;
+	++mpf_cycle;
 	if (!mpf_cycle) { // reset all cycle fields
-		for (uint32_t i = 0; i < m_flags.size(); i++)
+		for (uint32_t i = 0; i < m_flags.size(); ++i)
 			m_flags[i]->mpf_cycle = 0;
-		mpf_cycle++;
+		++mpf_cycle;
 	}
 
 	// Add the starting flag into the open list
@@ -3048,7 +3039,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 
 		current->get_neighbours(&neighbours);
 
-		for (uint32_t i = 0; i < neighbours.size(); i++) {
+		for (uint32_t i = 0; i < neighbours.size(); ++i) {
 			Flag *neighbour = neighbours[i].flag;
 			int32_t cost;
 			int32_t wait_cost = 0;
@@ -3113,7 +3104,7 @@ Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
 
 	assert(start->get_economy() == this);
 
-	for (uint32_t i = 0; i < m_warehouses.size(); i++) {
+	for (uint32_t i = 0; i < m_warehouses.size(); ++i) {
 		Warehouse *wh = m_warehouses[i];
 		Route buf_route;
 
@@ -3166,7 +3157,7 @@ void Economy::do_remove_flag(Flag *flag)
 
 	// fast remove
 	uint32_t i;
-	for (i = 0; i < m_flags.size(); i++) {
+	for (i = 0; i < m_flags.size(); ++i) {
 		if (m_flags[i] == flag) {
 			if (i < m_flags.size()-1)
 				m_flags[i] = m_flags[m_flags.size()-1];
@@ -3246,7 +3237,7 @@ void Economy::remove_warehouse(Warehouse *wh)
 {
    // fast remove
    uint32_t i;
-   for (i = 0; i < m_warehouses.size(); i++) {
+	for (i = 0; i < m_warehouses.size(); ++i) {
       if (m_warehouses[i] == wh) {
          if (i < m_warehouses.size()-1)
             m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
@@ -3336,7 +3327,7 @@ bool Economy::have_worker_supply(int32_t ware, Supply* supp)
 {
 	if (ware >= static_cast<int32_t>(m_worker_supplies.size())) return false;
 
-	for (int32_t i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
+	for (int32_t i = 0; i < m_worker_supplies[ware].get_nrsupplies(); ++i)
 		if (m_worker_supplies[ware].get_supply(i) == supp)
 			return true;
 
@@ -3373,7 +3364,7 @@ void Economy::add_soldier_supply(int32_t ware, Supply* supp)
 bool Economy::have_soldier_supply(int32_t ware, Supply* supp, Requeriments *) {
 	if (ware >= static_cast<int32_t>(m_worker_supplies.size())) return false;
 
-	for (int32_t i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
+	for (int32_t i = 0; i < m_worker_supplies[ware].get_nrsupplies(); ++i)
 		if (m_worker_supplies[ware].get_supply(i) == supp)
 			return true;
 
@@ -3411,7 +3402,7 @@ bool Economy::have_ware_supply(int32_t ware, Supply* supp)
 {
 	if (ware >= static_cast<int32_t>(m_ware_supplies.size())) return false;
 
-	for (int32_t i = 0; i < m_ware_supplies[ware].get_nrsupplies(); i++)
+	for (int32_t i = 0; i < m_ware_supplies[ware].get_nrsupplies(); ++i)
 		if (m_ware_supplies[ware].get_supply(i) == supp)
 			return true;
 
@@ -3490,7 +3481,7 @@ void Economy::do_split(Flag *f)
 		Neighbour_list neighbours;
 		f->get_neighbours(&neighbours);
 
-		for (uint32_t i = 0; i < neighbours.size(); i++) {
+		for (uint32_t i = 0; i < neighbours.size(); ++i) {
 			Flag *n = neighbours[i].flag;
 
 			if (n->get_economy() == this)
@@ -3575,7 +3566,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pware, int32_t
 	if (substitute >= 0)
 		*pware = substitute;
 
-	for (int32_t i = 0; i < (*use_supply)[*pware].get_nrsupplies(); i++) {
+	for (int32_t i = 0; i < (*use_supply)[*pware].get_nrsupplies(); ++i) {
 		Supply* supp = (*use_supply)[*pware].get_supply(i);
 		Route* route;
 
@@ -3757,18 +3748,22 @@ void Economy::create_requested_workers(Game* g)
 				if (!w_desc->get_buildable())
 					continue;
 
-				for (int32_t i = 0; i < m_worker_supplies[index].get_nrsupplies(); i++) {
+				for
+					(int32_t i = 0;
+					 i < m_worker_supplies[index].get_nrsupplies();
+					 ++i)
+				{
 					Supply* supp = m_worker_supplies[index].get_supply(i);
 
 					if (not supp->is_active()) {
 						if (req->has_requeriments())
 						{
 							if (supp->get_passing_requeriments (g, index, req->get_requeriments()))
-								num_wares++;
+								++num_wares;
 						}
 						else
 						{
-							num_wares++;
+							++num_wares;
 							continue;
 						}
 					} // if (supp->is_active)
@@ -3783,7 +3778,7 @@ void Economy::create_requested_workers(Game* g)
 							m_warehouses[n_wh]->create_worker(g, index);
 							//break;
 						} // if (m_warehouses[n_wh]
-						n_wh++;
+						++n_wh;
 					} // while (n_wh < get_nr_warehouses())
 				} // if (num_wares == 0)
 			} // if (req->is_open())

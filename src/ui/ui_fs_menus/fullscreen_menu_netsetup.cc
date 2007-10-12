@@ -181,7 +181,7 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 {
 	LAN_Game_Info info;
 	std::list<std::string>::iterator it;
-	for (it = tables.begin(); it != tables.end(); it++)
+	for (it = tables.begin(); it != tables.end(); ++it)
 	{
 		strncpy(info.hostname, "(ggz)", sizeof(info.hostname));
 		strncpy(info.map, (*it).c_str(), sizeof(info.map));

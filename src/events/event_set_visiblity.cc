@@ -48,16 +48,15 @@ void Event_Set_Visiblity::reinitialize(Game *) {}
 /**
  * file read
  */
-void Event_Set_Visiblity::Read(Section* s, Editor_Game_Base* egbase)
-{
-	int32_t version = s->get_safe_int("version");
-
-	if (version == EVENT_VERSION) {
+void Event_Set_Visiblity::Read(Section* s, Editor_Game_Base *) {
+	const int32_t packet_version = s->get_safe_int("version");
+	if (packet_version == EVENT_VERSION) {
 		v_entry = s->get_safe_string("entry");
 		v_case  = s->get_safe_int   ("vcase");
-	} else {
-		throw wexception("set_visibility event with unknown version %i in map!\n", version);
-	}
+	} else
+		throw wexception
+			("set_visibility event with unknown version %i in map!",
+			 packet_version);
 }
 
 
@@ -75,8 +74,7 @@ void Event_Set_Visiblity::Write (Section & s, const Editor_Game_Base &) const
 /**
  * run the event
  */
-Event::State Event_Set_Visiblity::run(Game* game)
-{
+Event::State Event_Set_Visiblity::run(Game *) {
 	Campaign_visiblity_save cvs;
 	cvs.set_visiblity(v_entry, v_case);
 

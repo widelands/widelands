@@ -50,18 +50,17 @@ void Event_Move_View::reinitialize(Game *) {}
  * File Read, File Write
  */
 void Event_Move_View::Read(Section * s, Editor_Game_Base *) {
-	const int32_t version = s->get_safe_int("version");
-
-	if (1 <= version and version <= EVENT_VERSION) {
+	const int32_t packet_version = s->get_safe_int("version");
+	if (1 <= packet_version and packet_version <= EVENT_VERSION) {
 		m_pt =
-			version == 1
-			?
+			packet_version == 1 ?
 			Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y"))
 			:
 			s->get_safe_Coords("point");
-      return;
-	}
-   throw wexception("Move View Event with unknown/unhandled version %i in map!\n", version);
+	} else
+		throw wexception
+			("Move View Event with unknown/unhandled version %i in map!",
+			 packet_version);
 }
 
 void Event_Move_View::Write(Section & s, const Editor_Game_Base &) const {

@@ -51,7 +51,7 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) {
       // DONE
       Map* map=game->get_map();
-      for (uint32_t i=1; i<=game->get_map()->get_nrplayers(); i++) {
+		for (uint32_t i = 1; i <= game->map().get_nrplayers(); ++i) {
          Player* plr=game->get_safe_player(i);
          if (!plr) continue;
 
@@ -61,14 +61,14 @@ throw (_wexception)
          std::vector<Economy*> ecos;
          ecos.resize(nr_economies);
 
-         for (uint32_t j=0; j<plr->m_economies.size(); j++) {
+			for (uint32_t j = 0; j < plr->m_economies.size(); ++j) {
             int32_t x=fr.Unsigned16();
             int32_t y=fr.Unsigned16();
             Flag* flag=static_cast<Flag*>(map->get_field(Coords(x, y))->get_immovable());
             assert(flag);
             ecos[j]=flag->get_economy();
 			}
-         for (uint32_t j=0; j<ecos.size(); j++) {
+			for (uint32_t j = 0; j < ecos.size(); ++j) {
             plr->m_economies[j]=ecos[j];
             ecos[j]->balance_requestsupply(); // Issue first balance
 			}
@@ -95,12 +95,12 @@ throw (_wexception)
 	const Player_Number nr_players = game->map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, *game, plr) {
       fw.Unsigned16(plr->m_economies.size());
-      for (uint32_t j=0; j<plr->m_economies.size(); j++) {
+		for (uint32_t j = 0; j < plr->m_economies.size(); ++j) {
          done=false;
          // Walk the map so that we find a representant
          Map* map=game->get_map();
-         for (uint16_t y=0; y<map->get_height(); y++) {
-            for (uint16_t x=0; x<map->get_width(); x++) {
+			for (uint16_t y = 0; y < map->get_height(); ++y) {
+				for (uint16_t x = 0; x < map->get_width(); ++x) {
                BaseImmovable* imm=map->get_field(Coords(x, y))->get_immovable();
                if (!imm) continue;
 

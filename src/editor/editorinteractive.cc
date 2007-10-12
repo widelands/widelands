@@ -137,8 +137,7 @@ Interactive_Base(e), m_egbase(e)
    // Load all tribes into memory
    std::vector<std::string> tribes;
 	Tribe_Descr::get_all_tribenames(tribes);
-   uint32_t i=0;
-   for (i=0; i<tribes.size(); i++)
+	for (uint32_t i = 0; i < tribes.size(); ++i)
 		e.manually_load_tribe(tribes[i].c_str());
 
    m_need_save=false;
@@ -477,8 +476,7 @@ bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
 	assert(0 < player);
 	assert    (player <= egbase().map().get_nrplayers());
 
-   uint32_t i=0;
-   for (i=0; i<m_player_tribe_references.size(); i++)
+	for (uint32_t i = 0; i < m_player_tribe_references.size(); ++i)
          if (m_player_tribe_references[i].player==player) return true;
 
    return false;

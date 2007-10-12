@@ -146,8 +146,8 @@ throw (_wexception)
 
    // We walk the map again for roads
    Map* map=egbase->get_map();
-   for (uint16_t y=0; y<map->get_height(); y++) {
-      for (uint16_t x=0; x<map->get_width(); x++) {
+	for (uint16_t y = 0; y < map->get_height(); ++y) {
+		for (uint16_t x = 0; x < map->get_width(); ++x) {
          Field* f=map->get_field(Coords(x, y));
          BaseImmovable* imm=f->get_immovable();
          if (!imm) continue;

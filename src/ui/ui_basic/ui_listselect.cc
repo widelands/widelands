@@ -350,7 +350,7 @@ void BaseListselect::draw(RenderTarget* dst)
 			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
 		}
 		y += lineheight;
-		idx++;
+		++idx;
 	}
 }
 
@@ -415,7 +415,7 @@ void BaseListselect::remove(const uint32_t i)
  */
 void BaseListselect::remove(const char * const str)
 {
-	for (uint32_t i=0; i<m_entry_records.size(); i++) {
+	for (uint32_t i=0; i<m_entry_records.size(); ++i) {
 		if (!strcmp(m_entry_records[i]->name, str)) {
 			remove(i);
 			return;

@@ -233,7 +233,7 @@ void TrainingSite::set_economy(Economy * e)
 {
 	ProductionSite::set_economy(e);
 
-	for (uint32_t i = 0; i < m_soldier_requests.size(); i++) {
+	for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
 		if (m_soldier_requests[i])
 			m_soldier_requests[i]->set_economy(e);
 	}
@@ -250,7 +250,7 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 	assert(g);
 
 	if (m_soldier_requests.size()) {
-		for (uint32_t i = 0; i < m_soldier_requests.size(); i++) {
+		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
 			delete m_soldier_requests[i];
 			m_soldier_requests[i] = 0;
 		}
@@ -258,8 +258,7 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 	}
 
 	if (m_soldiers.size()) {
-		uint32_t i;
-		for (i = 0; i < m_soldiers.size(); i++) {
+		for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
 			Soldier *s = m_soldiers[i];
 			m_soldiers[i] = 0;
 
@@ -331,7 +330,7 @@ void TrainingSite::request_soldier() {
 	req->set_requeriments(r);
 
 	m_soldier_requests.push_back(req);
-	m_total_soldiers++;
+	++m_total_soldiers;
 }
 
 
@@ -360,8 +359,7 @@ void TrainingSite::request_soldier_callback
 		  (g->map().get_fcoords(tsite->get_position()),
 		   tsite->descr().get_conquers())));
 
-	uint32_t i;
-	for (i = 0; i < tsite->m_soldier_requests.size(); i++) {
+	for (uint32_t i = 0; i < tsite->m_soldier_requests.size(); ++i) {
 		if (rq == tsite->m_soldier_requests[i]) {
 			tsite->m_soldier_requests.erase(tsite->m_soldier_requests.begin() + i);
 			break;
@@ -399,7 +397,7 @@ void TrainingSite::drop_soldier(uint32_t serial)
 		size_t i = 0;
 		Soldier *s = m_soldiers[i];
 		while (s->get_serial() != serial and i < m_soldiers.size()) {
-			i++;
+			++i;
 			s = m_soldiers.at(i);
 		}
 		if (i < m_soldiers.size() and s->get_serial() == serial) {
@@ -431,7 +429,7 @@ void TrainingSite::drop_soldier(Game * g, uint32_t nr)
 
 	//remove the soldier-to-be-dropped from m_soldiers (it is still alive in s) by overwriting any reference
 	//*must not* erase(), we still need the soldier
-	for (uint32_t i = nr; i < m_soldiers.size() - 1; i++)
+	for (uint32_t i = nr; i < m_soldiers.size() - 1; ++i)
 		m_soldiers[i] = m_soldiers[i + 1];
 	m_soldiers.pop_back();
 
@@ -455,15 +453,15 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 	assert(g);
 
 	if (descr().get_train_hp())
-		count_upgrades++;
+		++count_upgrades;
 	if (descr().get_train_attack())
-		count_upgrades++;
+		++count_upgrades;
 	if (descr().get_train_defense())
-		count_upgrades++;
+		++count_upgrades;
 	if (descr().get_train_evade())
-		count_upgrades++;
+		++count_upgrades;
 
-	for (uint32_t i = 0; i < m_soldiers.size(); i++) {
+	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
 		uint32_t count;
 		count = 0;
 		if
@@ -601,12 +599,12 @@ void TrainingSite::find_and_start_next_program(Game * g)
 
 				while ((min_level < max_level) && (!done)) {
 
-					for (j = 0; j < static_cast<int32_t>(m_soldiers.size()); j++)
+					for (j = 0; j < static_cast<int32_t>(m_soldiers.size()); ++j)
 						if (static_cast<int32_t>(m_soldiers[j]->get_level(attrib)) == max_level)
 							done = true;
 
 					if (!done)
-						max_level--;
+						--max_level;
 				}
 			} else {
 
@@ -617,7 +615,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 							done = true;
 
 					if (!done)
-						min_level++;
+						++min_level;
 				}
 			}
 
@@ -749,19 +747,19 @@ void TrainingSite::add_pri(tAttribute atr)
 	switch (atr) {
 	case atrHP:
 		if (m_pri_hp < 12)
-			m_pri_hp++;
+			++m_pri_hp;
 		break;
 	case atrAttack:
 		if (m_pri_attack < 12)
-			m_pri_attack++;
+			++m_pri_attack;
 		break;
 	case atrDefense:
 		if (m_pri_defense < 12)
-			m_pri_defense++;
+			++m_pri_defense;
 		break;
 	case atrEvade:
 		if (m_pri_evade < 12)
-			m_pri_evade++;
+			++m_pri_evade;
 		break;
 	default:
 		throw wexception("Invalid soldier attribute at %s:%d", __FILE__, __LINE__);
@@ -778,19 +776,19 @@ void TrainingSite::sub_pri(tAttribute atr)
 	switch (atr) {
 	case atrHP:
 		if (m_pri_hp > 0)
-			m_pri_hp--;
+			--m_pri_hp;
 		break;
 	case atrAttack:
 		if (m_pri_attack > 0)
-			m_pri_attack--;
+			--m_pri_attack;
 		break;
 	case atrDefense:
 		if (m_pri_defense > 0)
-			m_pri_defense--;
+			--m_pri_defense;
 		break;
 	case atrEvade:
 		if (m_pri_evade > 0)
-			m_pri_evade--;
+			--m_pri_evade;
 		break;
 	default:
 		throw wexception("Invalid soldier attribute at %s:%d", __FILE__, __LINE__);
@@ -893,22 +891,22 @@ void TrainingSite::calc_list_upgrades(Game *) {
 		}
 		switch (higher) {
 		case atrHP:
-			r_hp--;
+			--r_hp;
 			list.push_back("upgrade_hp_");
 			molog(" Added upgrade_hp_#\n");
 			break;
 		case atrAttack:
-			r_attack--;
+			--r_attack;
 			list.push_back("upgrade_attack_");
 			molog(" Added upgrade_attack_#\n");
 			break;
 		case atrDefense:
-			r_defense--;
+			--r_defense;
 			list.push_back("upgrade_defense_");
 			molog(" Added upgrade_defense_#\n");
 			break;
 		case atrEvade:
-			r_evade--;
+			--r_evade;
 			list.push_back("upgrade_evade_");
 			molog(" Added upgrade_evade_#\n");
 			break;
@@ -916,9 +914,8 @@ void TrainingSite::calc_list_upgrades(Game *) {
 	};
 
 	// Invert priorities
-	for (int32_t i = list.size() - 1; i >= 0; i--) {
+	for (int32_t i = list.size() - 1; i >= 0; --i)
 		m_list_upgrades.push_back(list[i]);
-	}
 }
 
 /**

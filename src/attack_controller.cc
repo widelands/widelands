@@ -223,7 +223,7 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
 			(dynamic_cast<Game *>(&egbase()), flag, bs.battleGround);
 
 		involvedSoldiers.push_back(bs);
-		totallyLaunched++;
+		++totallyLaunched;
 		return true;
 	}
 
@@ -289,7 +289,7 @@ void AttackController::soldierWon(Soldier* soldier)
 		building.destroy(&egbase());
 	}
 
-	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i = 0; i < involvedSoldiers.size(); ++i) {
 		//involvedSoldiers[i].soldier->set_economy(0);
 		involvedSoldiers[i].soldier->set_location(involvedSoldiers[i].origin);
 		involvedSoldiers[i].soldier->send_signal(dynamic_cast<Game*>(&egbase()), "return_home");
@@ -304,7 +304,7 @@ bool AttackController::startBattle(Soldier* soldier, bool isArrived)
 	uint32_t s1Index = getBattleSoldierIndex(soldier);
 	involvedSoldiers[s1Index].arrived = isArrived;
 
-	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i = 0; i < involvedSoldiers.size(); ++i) {
 		if (involvedSoldiers[i].arrived && !involvedSoldiers[i].fighting && (involvedSoldiers[i].attacker != involvedSoldiers[s1Index].attacker)) {
 			involvedSoldiers[i].fighting = true;
 			involvedSoldiers[s1Index].fighting = true;
@@ -327,7 +327,7 @@ bool AttackController::startBattle(Soldier* soldier, bool isArrived)
 bool AttackController::opponentsLeft(Soldier* soldier)
 {
 	uint32_t idx = getBattleSoldierIndex(soldier);
-	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i = 0; i < involvedSoldiers.size(); ++i) {
 		if (involvedSoldiers[i].attacker != involvedSoldiers[idx].attacker)
 			return true;
 	}
@@ -336,11 +336,12 @@ bool AttackController::opponentsLeft(Soldier* soldier)
 
 uint32_t AttackController::getBattleSoldierIndex(Soldier* soldier)
 {
-	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i = 0; i < involvedSoldiers.size(); ++i) {
 		if (involvedSoldiers[i].soldier == soldier)
 			return i;
 	}
-	throw wexception("No BattleSoldier structure found for %dP!\n", soldier->get_serial());
+	throw wexception
+		("No BattleSoldier structure found for %dP!", soldier->get_serial());
 }
 
 void AttackController::removeSoldier(Soldier* soldier)
@@ -355,7 +356,7 @@ void AttackController::removeSoldier(Soldier* soldier)
 
 bool AttackController::battleGroundOccupied(Coords coords)
 {
-	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i = 0; i < involvedSoldiers.size(); ++i) {
 		if (involvedSoldiers[i].battleGround == coords) {
 			return true;
 		}
@@ -387,7 +388,7 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int32_t so
 
 	CheckStepDefault step(battleSoldier->soldier->get_movecaps());
 
-	for (uint32_t i=0;i<20;i++) {
+	for (uint32_t i = 20; i; --i) {
 		map->get_neighbour(prevCoords, walkDir[walkDirIndex], &newCoords);
 
 		if (step.allowed(map, prevCoords, newCoords, walkDir[walkDirIndex], CheckStep::stepNormal)) {

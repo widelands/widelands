@@ -81,8 +81,7 @@ m_remove_last_player
 
    m_posy=posy;
 
-   int32_t i=0;
-   for (i=0; i<MAX_PLAYERS; i++) {
+	for (Player_Number i = 0; i < MAX_PLAYERS; ++i) {
       m_plr_names[i]=0;
       m_plr_set_pos_buts[i]=0;
       m_plr_set_tribes_buts[i]=0;
@@ -122,8 +121,7 @@ void Editor_Player_Menu::update() {
    m_nr_of_players_ta->set_text(text.c_str());
 
    // Now remove all the unneeded stuff
-   int32_t i=0;
-   for (i=nr_players; i<MAX_PLAYERS; i++) {
+	for (Player_Number i = nr_players; i < MAX_PLAYERS; ++i) {
          delete m_plr_names[i];
          m_plr_names[i]=0;
          delete m_plr_set_pos_buts[i];
@@ -143,50 +141,53 @@ void Editor_Player_Menu::update() {
 
 
    // And recreate the needed
-   for (i=0; i<nr_players; i++) {
+	iterate_player_numbers(p, nr_players) {
 		int32_t posx = spacing;
-      if (!m_plr_names[i]) {
-          m_plr_names[i]=new UI::Edit_Box(this, posx, posy, 140, size, 0, i);
-          m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
+		if (!m_plr_names[p - 1]) {
+			m_plr_names[p - 1] =
+		      new UI::Edit_Box(this, posx, posy, 140, size, 0, p - 1);
+			m_plr_names[p - 1]->changedid.set
+				(this, &Editor_Player_Menu::name_changed);
           posx+=140+spacing;
-			m_plr_names[i]->set_text(map.get_scenario_player_name(i + 1).c_str());
+			m_plr_names[p - 1]->set_text(map.get_scenario_player_name(p).c_str());
 		}
 
-      if (!m_plr_set_tribes_buts[i]) {
-			m_plr_set_tribes_buts[i] =
+		if (!m_plr_set_tribes_buts[p - 1]) {
+			m_plr_set_tribes_buts[p - 1] =
 				new UI::IDButton<Editor_Player_Menu, const Player_Number>
 				(this,
 				 posx, posy, 140, size,
 				 0,
-				 &Editor_Player_Menu::player_tribe_clicked, this, i,
+				 &Editor_Player_Menu::player_tribe_clicked, this, p - 1,
 				 std::string());
          posx+=140+spacing;
 		}
-		if (map.get_scenario_player_tribe(i + 1) != "<undefined>")
-			m_plr_set_tribes_buts[i]->set_title
-				(map.get_scenario_player_tribe(i + 1).c_str());
+		if (map.get_scenario_player_tribe(p) != "<undefined>")
+			m_plr_set_tribes_buts[p - 1]->set_title
+				(map.get_scenario_player_tribe(p).c_str());
 	   else {
-         m_plr_set_tribes_buts[i]->set_title(m_tribes[0].c_str());
-			map.set_scenario_player_tribe(i + 1, m_tribes[0]);
+         m_plr_set_tribes_buts[p - 1]->set_title(m_tribes[0].c_str());
+			map.set_scenario_player_tribe(p, m_tribes[0]);
 		}
 
       // Set Starting pos button
-      if (!m_plr_set_pos_buts[i]) {
-			m_plr_set_pos_buts[i] =
+      if (!m_plr_set_pos_buts[p - 1]) {
+			m_plr_set_pos_buts[p - 1] =
 				new UI::IDButton<Editor_Player_Menu, const Player_Number>
 				(this,
 				 posx, posy, size, size,
 				 0,
 				 0, //  set below
-				 &Editor_Player_Menu::set_starting_pos_clicked, this, i + 1,
+				 &Editor_Player_Menu::set_starting_pos_clicked, this, p,
 				 std::string());
           posx+=size+spacing;
 		}
       text="pics/fsel_editor_set_player_";
-      text+=static_cast<char>(((i+1)/10) + 0x30);
-      text+=static_cast<char>(((i+1)%10) + 0x30);
+      text+=static_cast<char>(p / 10 + 0x30);
+      text+=static_cast<char>(p % 10 + 0x30);
       text+="_pos.png";
-      m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture(PicMod_Game,  text.c_str()));
+		m_plr_set_pos_buts[p - 1]->set_pic
+			(g_gr->get_picture(PicMod_Game, text.c_str()));
       posy+=size+spacing;
 	}
    set_inner_size(get_inner_w(), posy+spacing);
@@ -271,10 +272,11 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
    // Tribe button has been clicked
 	if (not parent.is_player_tribe_referenced(n + 1)) {
       std::string t = m_plr_set_tribes_buts[n]->get_title();
-      if (!Tribe_Descr::exists_tribe(t))
-         throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
+		if (!Tribe_Descr::exists_tribe(t))
+			throw wexception
+				("Map defines tribe %s, but it doesn't exist!", t.c_str());
       uint32_t i;
-      for (i=0; i<m_tribes.size(); i++)
+		for (i = 0; i < m_tribes.size(); ++i)
          if (m_tribes[i]==t) break;
       if (i==m_tribes.size()-1) t=m_tribes[0];
       else t=m_tribes[++i];

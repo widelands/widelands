@@ -197,7 +197,7 @@ Insert the given Map_Object into the object manager
 */
 void Object_Manager::insert(Map_Object *obj)
 {
-	m_lastserial++;
+	++m_lastserial;
 	assert(m_lastserial);
 	obj->m_serial = m_lastserial;
 	m_objects[m_lastserial] = obj;
@@ -299,7 +299,7 @@ Search for the attribute in the attribute list
 ===============
 */
 bool Map_Object_Descr::has_attribute(uint32_t attr) const throw () {
-	for (uint32_t i = 0; i < m_attributes.size(); i++) {
+	for (uint32_t i = 0; i < m_attributes.size(); ++i) {
 		if (m_attributes[i] == attr)
 			return true;
 	}
@@ -344,7 +344,7 @@ uint32_t Map_Object_Descr::get_attribute_id(std::string name)
 	else if (name == "resi")
 		return Map_Object::RESI;
 
-	s_dyn_attribhigh++;
+	++s_dyn_attribhigh;
 	s_dyn_attribs[name] = s_dyn_attribhigh;
 
 	assert(s_dyn_attribhigh != 0); // wrap around seems *highly* unlikely ;)

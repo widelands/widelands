@@ -482,8 +482,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 	m_fastclick = false;
 
-	for (int32_t id = 0; id < tribe.get_nrbuildings(); id++)
-	{
+	for (int32_t id = 0; id < tribe.get_nrbuildings(); ++id) {
 		Building_Descr * descr = tribe.get_building_descr(id);
 		BuildGrid** ppgrid;
 
@@ -529,7 +528,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		}
 
 	// Add all necessary tabs
-	for (int32_t i = 0; i < 3; i++)
+	for (int32_t i = 0; i < 3; ++i)
 		if (bbg_house[i])
 			m_tabpanel->activate
 				(m_best_tab = add_tab

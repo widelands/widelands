@@ -141,8 +141,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 	p.directory = directory;
 	p.prof = prof;
 
-	for (line = 0; ; line++)
-	{
+	for (line = 0;; ++line) {
 		try
 		{
 			ImmovableAction action;
@@ -695,7 +694,7 @@ Map_Object::Loader* Immovable::load
 
 			Tribe_Descr* tribe = eg->get_tribe(owner);
 			if (!tribe)
-				throw wexception("Unknown tribe %s!\n", owner);
+				throw wexception("Unknown tribe %s!", owner);
 
 			int32_t idx = tribe->get_immovable_index(name);
 			if (idx == -1)
@@ -708,7 +707,7 @@ Map_Object::Loader* Immovable::load
 			// World immovable
 			int32_t idx = eg->map().world().get_immovable_index(name);
 			if (idx == -1)
-				throw wexception("Unknown world immovable %s in map!\n", name);
+				throw wexception("Unknown world immovable %s in map!", name);
 
 			imm = new Immovable(*eg->map().world().get_immovable_descr(idx));
 		}
@@ -900,7 +899,7 @@ void PlayerImmovable::set_economy(Economy *e)
 	if (m_economy == e)
 		return;
 
-	for (uint32_t i = 0; i < m_workers.size(); i++)
+	for (uint32_t i = 0; i < m_workers.size(); ++i)
 		m_workers[i]->set_economy(e);
 
 	m_economy = e;
@@ -925,7 +924,7 @@ void PlayerImmovable::add_worker(Worker *w)
 */
 void PlayerImmovable::remove_worker(Worker *w)
 {
-	for (uint32_t i = 0; i < m_workers.size(); i++) {
+	for (uint32_t i = 0; i < m_workers.size(); ++i) {
 		if (m_workers[i] == w) {
 			if (i < m_workers.size()-1)
 				m_workers[i] = m_workers[m_workers.size()-1];

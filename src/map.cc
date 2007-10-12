@@ -397,7 +397,7 @@ void Map::cleanup() {
 
    // Remove all extra datas. Pay attention here, maybe some freeing would be needed
 #ifdef DEBUG
-   for (uint32_t i = 0; i < m_extradatainfos.size(); i++) {
+	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
       assert(m_extradatainfos[i].type == Extradata_Info::PIC) ;
 	}
 #endif
@@ -731,7 +731,7 @@ struct FindBobsCallback {
 				if (m_list)
 					m_list->push_back(bob);
 
-				m_found++;
+				++m_found;
 			}
 		}
 	}
@@ -816,7 +816,7 @@ struct FindImmovablesCallback {
 				m_list->push_back(imf);
 			}
 
-			m_found++;
+			++m_found;
 		}
 	}
 
@@ -890,7 +890,7 @@ struct FindNodesCallback {
 			if (m_list)
 				m_list->push_back(cur);
 
-			m_found++;
+			++m_found;
 		}
 	}
 
@@ -1246,7 +1246,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 				(Area<FCoords>(f, 2),
 				 &objectlist,
 				 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-	for (uint32_t i = 0; i < objectlist.size(); i++) {
+	for (uint32_t i = 0; i < objectlist.size(); ++i) {
 		BaseImmovable *obj = objectlist[i].object;
 		Coords objpos = objectlist[i].coords;
 		int32_t dist = calc_distance(f, objpos);
@@ -1826,10 +1826,10 @@ public:
 */
 void Map::increase_pathcycle()
 {
-	m_pathcycle++;
+	++m_pathcycle;
 	if (!m_pathcycle) {
 		memset(m_pathfields, 0, sizeof(Pathfield)*m_height*m_width);
-		m_pathcycle++;
+		++m_pathcycle;
 	}
 }
 
@@ -2549,7 +2549,7 @@ void Path::reverse()
 	std::swap(m_start, m_end);
 	std::reverse(m_path.begin(), m_path.end());
 
-	for (uint32_t i = 0; i < m_path.size(); i++)
+	for (uint32_t i = 0; i < m_path.size(); ++i)
 		m_path[i] = get_reverse_dir(m_path[i]);
 }
 
@@ -2602,7 +2602,7 @@ Return -1 if field is not part of this path.
 */
 int32_t CoordPath::get_index(Coords field) const
 {
-	for (uint32_t i = 0; i < m_coords.size(); i++)
+	for (uint32_t i = 0; i < m_coords.size(); ++i)
 		if (m_coords[i] == field)
 			return i;
 
@@ -2622,7 +2622,7 @@ void CoordPath::reverse()
 	std::reverse(m_path.begin(), m_path.end());
 	std::reverse(m_coords.begin(), m_coords.end());
 
-	for (uint32_t i = 0; i < m_path.size(); i++)
+	for (uint32_t i = 0; i < m_path.size(); ++i)
 		m_path[i] = get_reverse_dir(m_path[i]);
 }
 
@@ -2675,11 +2675,6 @@ void CoordPath::append(const Map & map, const Path & tail) {
 		m_path.push_back(dir);
 		m_coords.push_back(c);
 	}
-
-	// debug
-	//log("CoordPath; start %i %i\n", m_coords[0].x, m_coords[0].y);
-	//for (uint32_t i = 0; i < m_path.size(); i++)
-	//log("  %i -> %i %i\n", m_path[i], m_coords[i+1].x, m_coords[i+1].y);
 }
 
 /*

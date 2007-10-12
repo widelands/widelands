@@ -196,7 +196,7 @@ void World::load_graphics()
 	int32_t i;
 
 	// Load terrain graphics
-	for (i = 0; i < ters.get_nitems(); i++)
+	for (i = 0; i < ters.get_nitems(); ++i)
 		ters.get(i)->load_graphics();
 
 	// TODO: load more graphics
@@ -298,7 +298,7 @@ void World::parse_bobs()
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
 		char fname[256];
 
 		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
@@ -366,7 +366,11 @@ void World::get_all_worlds(std::vector<std::string>* retval) {
    // get all worlds
    filenameset_t m_worlds;
    g_fs->FindFiles("worlds", "*", &m_worlds);
-   for (filenameset_t::iterator pname = m_worlds.begin(); pname != m_worlds.end(); pname++) {
+	for
+		(filenameset_t::iterator pname = m_worlds.begin();
+		 pname != m_worlds.end();
+		 ++pname)
+	{
       std::string world=*pname;
       world.erase(0, 7); // remove worlds/
       if (World::exists_world(world.c_str()))
@@ -396,15 +400,16 @@ m_texture           (0)
 {
 
 	// Parse the default resource
-	const char * str = s->get_string("def_resources", 0);
-	if (str) {
+	if (const char * str = s->get_string("def_resources", 0)) {
       std::istringstream str1(str);
       std::string resource;
       int32_t amount;
 	   str1 >> resource >> amount;
       int32_t res=resources->get_index(resource.c_str());;
-      if (res==-1)
-         throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), resource.c_str());
+		if (res == -1)
+			throw wexception
+				("Terrain %s has valid resource %s which doesn't exist in world!",
+				 s->get_name(), resource.c_str());
       m_default_resources=res;
       m_default_amount=amount;
 	}
@@ -427,10 +432,13 @@ m_texture           (0)
       int32_t cur_res=0;
 		while (i <= str1.size()) {
          if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {++i; continue;}
-         if (str1[i]==',' || i==str1.size()) {
-            int32_t res=resources->get_index(curres.c_str());;
-            if (res==-1)
-               throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());
+			if (str1[i] == ',' || i == str1.size()) {
+				const int32_t res = resources->get_index(curres.c_str());;
+				if (res == -1)
+					throw wexception
+						("Terrain %s has valid resource %s which doesn't exist in "
+						 "world!",
+						 s->get_name(), curres.c_str());
             m_valid_resources[cur_res++]=res;
             curres="";
 			} else {
@@ -444,33 +452,33 @@ m_texture           (0)
 	if (fps > 0)
 		m_frametime = 1000 / fps;
 
-	// switch is
-	str = s->get_safe_string("is");
-
-	if      (not strcasecmp(str, "dry"))
-		m_is = TERRAIN_DRY;
-	else if (not strcasecmp(str, "green"))
-		m_is = 0;
-	else if (not strcasecmp(str, "water"))
-		m_is = TERRAIN_WATER|TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	else if (not strcasecmp(str, "acid"))
-		m_is = TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	else if (not strcasecmp(str, "mountain"))
-		m_is = TERRAIN_DRY|TERRAIN_MOUNTAIN;
-	else if (not strcasecmp(str, "dead"))
-		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE|TERRAIN_ACID;
-	else if (not strcasecmp(str, "unpassable"))
-		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	else
-		throw wexception("%s: invalid type '%s'", m_name.c_str(), str);
+	{
+		const char * const is = s->get_safe_string("is");
+		if      (not strcmp(is, "dry"))
+			m_is = TERRAIN_DRY;
+		else if (not strcmp(is, "green"))
+			m_is = 0;
+		else if (not strcmp(is, "water"))
+			m_is = TERRAIN_WATER|TERRAIN_DRY|TERRAIN_UNPASSABLE;
+		else if (not strcmp(is, "acid"))
+			m_is = TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE;
+		else if (not strcmp(is, "mountain"))
+			m_is = TERRAIN_DRY|TERRAIN_MOUNTAIN;
+		else if (not strcmp(is, "dead"))
+			m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE|TERRAIN_ACID;
+		else if (not strcmp(is, "unpassable"))
+			m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
+		else
+			throw wexception("%s: invalid type '%s'", m_name.c_str(), is);
+	}
 
 	// Determine template of the texture animation pictures
 	char fnametmpl[256];
 
-	str = s->get_string("texture", 0);
-	if (str)
-		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, str);
-	else  snprintf
+	if (const char * const texture = s->get_string("texture", 0))
+		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, texture);
+	else
+		snprintf
 		(fnametmpl, sizeof(fnametmpl),
 		 "%s/pics/%s_??.png", directory, m_name.c_str());
 

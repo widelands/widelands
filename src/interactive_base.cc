@@ -646,7 +646,7 @@ void Interactive_Base::roadb_add_overlay()
 
 	assert(not m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
-	for (int32_t dir = 1; dir <= 6; dir++) {
+	for (int32_t dir = 1; dir <= 6; ++dir) {
 		FCoords neighb;
 		int32_t caps;
 

@@ -69,7 +69,7 @@ void Computer_Player::late_initialization ()
 	log ("ComputerPlayer(%d): initializing\n", player_number);
 
 	wares=new WareObserver[tribe->get_nrwares()];
-	for (int32_t i=0; i<tribe->get_nrwares(); i++) {
+	for (int32_t i = 0; i < tribe->get_nrwares(); ++i) {
 	    wares[i].producers=0;
 	    wares[i].consumers=0;
 	    wares[i].preciousness=0;
@@ -109,7 +109,7 @@ granitmine="marblemine";
 	wares[tribe->get_safe_ware_index(ware4)].preciousness=1;
 
 	// collect information about which buildings our tribe can construct
-	for (int32_t i=0; i<tribe->get_nrbuildings();i++) {
+	for (int32_t i = 0; i < tribe->get_nrbuildings(); ++i) {
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
 
@@ -219,7 +219,10 @@ Computer_Player::BuildingObserver& Computer_Player::get_building_observer (const
 	if (tribe == 0)
 		late_initialization ();
 
-	for (std::list<BuildingObserver>::iterator i=buildings.begin();i!=buildings.end();i++)
+	for
+		(std::list<BuildingObserver>::iterator i = buildings.begin();
+		 i != buildings.end();
+		 ++i)
 		if (!strcmp(i->name, name))
 			return *i;
 
@@ -317,7 +320,7 @@ void Computer_Player::think ()
 			continue;
 		}
 
-		i++;
+		++i;
 	}
 
 	// wait a moment so that all fields are classified
@@ -355,16 +358,22 @@ void Computer_Player::think ()
 		get_economy_observer(flag->get_economy())->flags.push_back (flag);
 	}
 
-	for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end();) {
+	for
+		(std::list<EconomyObserver *>::iterator i = economies.begin();
+		 i != economies.end();
+		 ++i)
+	{
 		// check if any flag has changed its economy
-		for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end();) {
+		for
+			(std::list<Flag *>::iterator j = (*i)->flags.begin();
+			 j != (*i)->flags.end();
+			 ++j)
+		{
 			if ((*i)->economy!=(*j)->get_economy()) {
 				get_economy_observer((*j)->get_economy())->flags.push_back (*j);
 				j=(*i)->flags.erase(j);
 				continue;
 			}
-
-			j++;
 		}
 
 		// if there are no more flags in this economy, we no longer need its observer
@@ -373,8 +382,6 @@ void Computer_Player::think ()
 			i=economies.erase(i);
 			continue;
 		}
-
-		i++;
 	}
 
 	if (next_road_due <= gametime and inhibit_road_building <= gametime) {
@@ -447,27 +454,34 @@ bool Computer_Player::construct_building ()
 {
 	int32_t spots_avail[4];
 
-	for (int32_t i=0;i<4;i++)
+	for (int32_t i = 0; i < 4; ++i)
 		spots_avail[i]=0;
 
-	for (std::list<BuildableField*>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++)
+	for
+		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
+		 i != buildable_fields.end();
+		 ++i)
 		spots_avail[(*i)->coords.field->get_caps() & BUILDCAPS_SIZEMASK]++;
 
 	int32_t expand_factor=1;
 
 	if (spots_avail[BUILDCAPS_BIG]<2)
-		expand_factor++;
+		++expand_factor;
 	if (spots_avail[BUILDCAPS_MEDIUM]+spots_avail[BUILDCAPS_BIG]<4)
-		expand_factor++;
+		++expand_factor;
 	if (spots_avail[BUILDCAPS_SMALL]+spots_avail[BUILDCAPS_MEDIUM]+spots_avail[BUILDCAPS_BIG]<8)
-		expand_factor++;
+		++expand_factor;
 
 	int32_t proposed_building=-1;
 	int32_t proposed_priority=0;
 	Coords proposed_coords;
 
 	// first scan all buildable fields for regular buildings
-	for (std::list<BuildableField*>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++) {
+	for
+		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
+		 i != buildable_fields.end();
+		 ++i)
+	{
 		BuildableField* bf=*i;
 
 		if (!bf->reachable)
@@ -476,8 +490,11 @@ bool Computer_Player::construct_building ()
 		int32_t maxsize=bf->coords.field->get_caps() & BUILDCAPS_SIZEMASK;
 		int32_t prio;
 
-		std::list<BuildingObserver>::iterator j;
-		for (j=buildings.begin();j!=buildings.end();j++) {
+		for
+			(std::list<BuildingObserver>::iterator j = buildings.begin();
+			 j != buildings.end();
+			 ++j)
+		{
 		    if (!j->is_buildable)
 			    continue;
 
@@ -514,12 +531,12 @@ bool Computer_Player::construct_building ()
 				if (j->cnt_built+j->cnt_under_construction==0)
 				    prio+=2;
 
-				for (uint32_t k=0; k<j->inputs.size(); k++) {
+				for (uint32_t k = 0; k < j->inputs.size(); ++k) {
 				    prio+=8*wares[j->inputs[k]].producers;
 				    prio-=4*wares[j->inputs[k]].consumers;
 				}
 
-				for (uint32_t k=0; k<j->outputs.size(); k++) {
+				for (uint32_t k = 0; k < j->outputs.size(); ++k) {
 				    prio-=12*wares[j->outputs[k]].producers;
 				    prio+=8*wares[j->outputs[k]].consumers;
 				    prio+=4*wares[j->outputs[k]].preciousness;
@@ -542,7 +559,7 @@ bool Computer_Player::construct_building ()
 		    if (bf->preferred)
 			prio+=prio/2 + 1;
 		    else
-			prio--;
+			--prio;
 
 		    // don't waste good land for small huts
 		    prio-=(maxsize - j->desc->get_size()) * 3;
@@ -558,11 +575,11 @@ bool Computer_Player::construct_building ()
 #if 0 //FIXME
 	// then try all mines
 	const World & world = game().map().world();
-	for (std::list<BuildingObserver>::iterator i=buildings.begin();i!=buildings.end();i++) {
+	for (std::list<BuildingObserver>::iterator i = buildings.begin();i != buildings.end(); ++i) {
 		if (!i->is_buildable || i->type!=BuildingObserver::MINE)
 			continue;
 
-		for (std::list<MineableField*>::iterator j=mineable_fields.begin(); j!=mineable_fields.end(); j++) {
+		for (std::list<MineableField *>::iterator j = mineable_fields.begin(); j != mineable_fields.end(); ++j) {
 			MineableField* mf=*j;
 			int32_t prio=-1;
 
@@ -706,7 +723,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 		field->preferred=true;
 	}
 
-	for (uint32_t i=0;i<immovables.size();i++) {
+	for (uint32_t i = 0;i < immovables.size(); ++i) {
 		const BaseImmovable & base_immovable = *immovables[i].object;
 		if (dynamic_cast<const Flag *>(&base_immovable))
 			field->reachable=true;
@@ -776,10 +793,10 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 		}
 
 		if (immovables[i].object->has_attribute(tree_attr))
-			field->trees_nearby++;
+			++field->trees_nearby;
 
 		if (immovables[i].object->has_attribute(stone_attr))
-			field->stones_nearby++;
+			++field->stones_nearby;
 	}
 }
 
@@ -807,7 +824,7 @@ void Computer_Player::update_mineable_field (MineableField* field)
 		field->preferred=true;
 	}
 
-	for (uint32_t i=0;i<immovables.size();i++) {
+	for (uint32_t i = 0; i < immovables.size(); ++i) {
 		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
 			field->reachable=true;
 
@@ -822,7 +839,7 @@ void Computer_Player::update_mineable_field (MineableField* field)
 
 			if (bld->get_building_type()==Building::CONSTRUCTIONSITE ||
 			    bld->get_building_type()==Building::PRODUCTIONSITE)
-				field->mines_nearby++;
+				++field->mines_nearby;
 		}
 	}
 }
@@ -831,17 +848,18 @@ void Computer_Player::consider_productionsite_influence
 (BuildableField * field, const Coords &, const BuildingObserver & bo)
 {
 	if (bo.need_trees)
-		field->tree_consumers_nearby++;
+		++field->tree_consumers_nearby;
 
 	if (bo.need_stones)
-		field->stone_consumers_nearby++;
+		++field->stone_consumers_nearby;
 }
 
 Computer_Player::EconomyObserver* Computer_Player::get_economy_observer (Economy* economy)
 {
-	std::list<EconomyObserver*>::iterator i;
-
-	for (i=economies.begin(); i!=economies.end(); i++)
+	for
+		(std::list<EconomyObserver*>::iterator i = economies.begin();
+		 i != economies.end();
+		 ++i)
 		if ((*i)->economy==economy)
 			return *i;
 
@@ -862,18 +880,18 @@ void Computer_Player::gain_building (Building* b)
 		++total_constructionsites;
 	}
 	else {
-		bo.cnt_built++;
+		++bo.cnt_built;
 
 		if (bo.type==BuildingObserver::PRODUCTIONSITE) {
 			productionsites.push_back (ProductionSiteObserver());
 			productionsites.back().site=static_cast<ProductionSite*>(b);
 			productionsites.back().bo=&bo;
 
-			for (uint32_t i=0;i<bo.outputs.size();i++)
+			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
 				++wares[bo.outputs[i]].producers;
 
-			for (uint32_t i=0;i<bo.inputs.size();i++)
-				wares[bo.inputs[i]].consumers++;
+			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
+				++wares[bo.inputs[i]].consumers;
 		}
 	}
 }
@@ -887,23 +905,27 @@ void Computer_Player::lose_building (Building* b)
 			(dynamic_cast<const ConstructionSite &>(*b)
 			 .building().name().c_str())
 			.cnt_under_construction;
-		total_constructionsites--;
+		--total_constructionsites;
 	}
 	else {
-		bo.cnt_built--;
+		--bo.cnt_built;
 
 		if (bo.type==BuildingObserver::PRODUCTIONSITE) {
-			for (std::list<ProductionSiteObserver>::iterator i=productionsites.begin(); i!=productionsites.end(); i++)
+			for
+				(std::list<ProductionSiteObserver>::iterator i =
+				 productionsites.begin();
+				 i != productionsites.end();
+				 ++i)
 				if (i->site==b) {
 					productionsites.erase (i);
 					break;
 				}
 
-			for (uint32_t i=0;i<bo.outputs.size();i++)
-				wares[bo.outputs[i]].producers--;
+			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
+				--wares[bo.outputs[i]].producers;
 
-			for (uint32_t i=0;i<bo.inputs.size();i++)
-				wares[bo.inputs[i]].consumers--;
+			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
+				--wares[bo.inputs[i]].consumers;
 		}
 	}
 }
@@ -1007,7 +1029,6 @@ bool Computer_Player::improve_roads (Flag* flag)
 {
 	std::priority_queue<NearFlag> queue;
 	std::vector<NearFlag> nearflags;
-	uint32_t i;
 
 	queue.push (NearFlag(flag, 0, 0));
 	Map & map = game().map();
@@ -1024,7 +1045,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 
 	    NearFlag& nf=nearflags.back();
 
-	    for (i=1;i<=6;i++) {
+		for (uint8_t i = 1; i <= 6; ++i) {
 		Road* road=nf.flag->get_road(i);
 
 		if (!road) continue;
@@ -1046,7 +1067,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 
 	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
 
-	for (i=1;i<nearflags.size();i++) {
+	for (uint32_t i = 1; i < nearflags.size(); ++i) {
 	    NearFlag& nf=nearflags[i];
 
 	    if (2*nf.distance+2>=nf.cost)
@@ -1095,8 +1116,14 @@ void Computer_Player::lose_immovable (PlayerImmovable* pi)
 		lose_building (static_cast<Building*>(pi));
 		break;
 	case BaseImmovable::FLAG:
-		for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end(); i++)
-		    for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end(); j++)
+		for
+			(std::list<EconomyObserver *>::iterator i = economies.begin();
+			 i!=economies.end();
+			 ++i)
+		    for
+			    (std::list<Flag *>::iterator j = (*i)->flags.begin();
+			     j != (*i)->flags.end();
+			     ++j)
 			if (*j==pi) {
 			    (*i)->flags.erase (j);
 			    break;
@@ -1182,8 +1209,15 @@ void Computer_Player::construct_roads ()
 	std::queue<int32_t> queue;
 	Map & map = game().map();
 
-	for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end(); i++)
-	    for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end(); j++) {
+	for
+		(std::list<EconomyObserver *>::iterator i = economies.begin();
+		 i != economies.end();
+		 ++i)
+		for
+			(std::list<Flag *>::iterator j = (*i)->flags.begin();
+			 j != (*i)->flags.end();
+			 ++j)
+		{
 		queue.push (spots.size());
 
 		spots.push_back(WalkableSpot());
@@ -1194,7 +1228,11 @@ void Computer_Player::construct_roads ()
 		spots.back().from=-1;
 		}
 
-	for (std::list<BuildableField*>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++) {
+	for
+		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
+		 i != buildable_fields.end();
+		 ++i)
+	{
 		spots.push_back(WalkableSpot());
 		spots.back().coords=(*i)->coords;
 		spots.back().hasflag=false;
@@ -1203,7 +1241,11 @@ void Computer_Player::construct_roads ()
 		spots.back().from=-1;
 	}
 
-	for (std::list<FCoords>::iterator i=unusable_fields.begin(); i!=unusable_fields.end(); i++) {
+	for
+		(std::list<FCoords>::iterator i = unusable_fields.begin();
+		 i != unusable_fields.end();
+		 ++i)
+	{
 		if ((player->get_buildcaps(*i)&MOVECAPS_WALK)==0)
 		    continue;
 
@@ -1237,13 +1279,13 @@ void Computer_Player::construct_roads ()
 
 	const clock_t time_before = clock();
 	int32_t i, j, k;
-	for (i=0;i<static_cast<int32_t>(spots.size());i++)
-		for (j=0;j<6;j++) {
+	for (i = 0; i < static_cast<int32_t>(spots.size()); ++i)
+		for (j = 0; j < 6; ++j) {
 		Coords nc;
 
 		map.get_neighbour (spots[i].coords, j + 1, &nc);
 
-			for (k=0;k<static_cast<int32_t>(spots.size());k++)
+			for (k = 0; k < static_cast<int32_t>(spots.size()); ++k)
 		    if (spots[k].coords==nc)
 			break;
 
@@ -1304,7 +1346,7 @@ void Computer_Player::construct_roads ()
 				Path & path = *new Path(pc.front());
 			pc.pop_front();
 
-			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++) {
+			for (std::list<Coords>::iterator c = pc.begin(); c != pc.end(); ++c) {
 				const int32_t n = map.is_neighbour(path.get_end(), *c);
 			    assert (n>=1 && n<=6);
 

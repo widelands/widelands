@@ -81,6 +81,7 @@ struct Interactive_Player : public Interactive_Base {
 	bool handle_key(bool down, SDL_keysym code);
 
 	Game * get_game() const {return m_game;}
+	Game & game() const {return *m_game;}
 	uint8_t get_player_number() const {return m_player_number;}
 	Player & player() const throw () {return m_game->player(m_player_number);}
 	Player * get_player() const throw () {

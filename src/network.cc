@@ -146,14 +146,12 @@ void NetGame::run ()
 
 void NetGame::begin_game ()
 {
-	int32_t i;
-
 	phase=PH_PREGAME;
 
 	statuswnd=new NetStatusWindow(game->get_ipl());
 	statuswnd->center_to_parent ();
 
-	for (i=0;i<MAX_PLAYERS;i++)
+	for (Player_Number i = 0; i < MAX_PLAYERS; ++i)
 	    if (player_human & (1<<i))
 		statuswnd->add_player (i+1);
 
@@ -201,7 +199,6 @@ void NetGame::disconnect_player (int32_t plnum)
 NetHost::NetHost ()
 {
 	IPaddress myaddr;
-	int32_t i;
 
 	log("[Host] starting up.\n");
 
@@ -217,7 +214,7 @@ NetHost::NetHost ()
 	net_delay=INITIAL_NETWORK_DELAY;
 	next_ping_due=0;
 
-	for (i=0;i<8;i++)
+	for (uint8_t i = 0; i < 8; ++i)
 	    net_delay_history[i]=INITIAL_NETWORK_DELAY;
 
 	promoter=new LAN_Game_Promoter();
@@ -231,7 +228,7 @@ NetHost::~NetHost ()
 	if (svsock!=0)
 		SDLNet_TCP_Close (svsock);
 
-	for (uint32_t i=0;i<clients.size();i++)
+	for (uint32_t i = 0; i < clients.size(); ++i)
 		SDLNet_TCP_Close (clients[i].sock);
 }
 
@@ -248,7 +245,7 @@ void NetHost::update_map ()
 	serializer->putstr (map?map->get_filename():"");
 	serializer->end_packet ();
 
-	for (uint32_t i=0;i<clients.size();i++)
+	for (uint32_t i = 0; i < clients.size(); ++i)
 		serializer->send (clients[i].sock);
 
 	playerdescr[0]->set_player_type (Player::Local);
@@ -260,13 +257,12 @@ void NetHost::update_map ()
 void NetHost::send_player_info ()
 {
 	Player* pl;
-	int32_t i;
 	log("[Host] Broadcasting player info to all players.\n");
         //send player info should also contain tribe.
 	player_enabled=0;
 	player_human=0;
 
-	for (i=0;i<MAX_PLAYERS;i++)
+	for (Player_Number i = 0; i < MAX_PLAYERS; ++i)
 		if ((pl=game->get_player(i+1))!=0) {
 			player_enabled|=1<<i;
 
@@ -279,7 +275,7 @@ void NetHost::send_player_info ()
 	serializer->putchar (player_human);
 	serializer->end_packet ();
 
-	for (uint32_t j=0;j<clients.size();j++)
+	for (uint32_t j = 0;j < clients.size(); ++j)
 		serializer->send (clients[j].sock);
 }
 
@@ -303,7 +299,7 @@ void NetHost::begin_game ()
 	serializer->end_packet ();
 	log("[Host] Initiating pregame.\n");
 
-	for (uint32_t i=0;i<clients.size();i++)
+	for (uint32_t i = 0;i < clients.size(); ++i)
 		serializer->send (clients[i].sock);
 
 	NetGame::begin_game ();
@@ -312,7 +308,6 @@ void NetHost::begin_game ()
 void NetHost::handle_network ()
 {
 	TCPsocket sock;
-	uint32_t i, j;
 
 	if (promoter!=0)
 	    promoter->run ();
@@ -323,7 +318,8 @@ void NetHost::handle_network ()
 
 		log("[Host] Received a connection request\n");
 
-		for (i=1;i<=MAX_PLAYERS;i++)
+		Player_Number i = 1;
+		for (; i <= MAX_PLAYERS; ++i)
 			if ((pl = game->get_player(i)) and pl->get_type() == Player::AI)
 				break;
 
@@ -371,7 +367,7 @@ void NetHost::handle_network ()
 
 	// check if we hear anything from our peers
 	while (SDLNet_CheckSockets(sockset, 0) > 0)
-		for (i=0;i<clients.size();i++)
+		for (size_t i = 0; i < clients.size(); ++i)
 			if (SDLNet_SocketReady(clients[i].sock)) {
 				if (!clients[i].deserializer->read_packet(clients[i].sock))
 				    continue;
@@ -390,14 +386,14 @@ void NetHost::handle_network ()
 
 				clients.erase (clients.begin()+i);
 
-				for (i=0;i<clients.size();i++)
-				    serializer->send (clients[i].sock);
+				for (size_t j = 0; j < clients.size(); ++j)
+					serializer->send (clients[j].sock);
 
 				break;
 			}
 
 	// if so, deserialize player commands
-	for (i=0;i<clients.size();i++)
+	for (size_t i = 0;i < clients.size(); ++i)
 		while (clients[i].deserializer->avail())
 			switch (clients[i].deserializer->getchar()) {
 			case NETCMD_READY:
@@ -424,7 +420,7 @@ void NetHost::handle_network ()
 
 				serializer->end_packet ();
 
-				for (j=0;j<clients.size();j++)
+				for (size_t j = 0; j < clients.size(); ++j)
 				    serializer->send (clients[j].sock);
 				break;
 
@@ -512,7 +508,7 @@ void NetHost::handle_network ()
 		serializer->end_packet ();
 
 		// send the packet to all peers
-		for (i=0;i<clients.size();i++)
+		for (size_t i = 0; i < clients.size(); ++i)
 			serializer->send (clients[i].sock);
 	}
 
@@ -529,7 +525,7 @@ void NetHost::handle_network ()
 		serializer->end_packet ();
 
 		//  send the packet to all peers
-		for (i=0;i<clients.size();i++) {
+		for (size_t i = 0; i < clients.size(); ++i) {
 			serializer->send (clients[i].sock);
 
 			clients[i].lag=0;
@@ -539,8 +535,6 @@ void NetHost::handle_network ()
 
 void NetHost::send_chat_message_int (const Chat_Message msg)
 {
-	uint32_t i;
-
 	log("[Host] Sending chat\n");
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_CHATMESSAGE);
@@ -548,7 +542,7 @@ void NetHost::send_chat_message_int (const Chat_Message msg)
 	serializer->putstr (msg.msg.c_str());
 	serializer->end_packet ();
 
-	for (i=0;i<clients.size();i++)
+	for (size_t i = 0; i < clients.size(); ++i)
 		serializer->send (clients[i].sock);
 
 	chat_msg_queue.push (msg);
@@ -557,21 +551,20 @@ void NetHost::send_chat_message_int (const Chat_Message msg)
 void NetHost::update_network_delay ()
 {
 	uint32_t tmp[8];
-	uint32_t i;
 
-	for (i=7;i>0;i--)
+	for (uint8_t i = 7; i; --i)
 		net_delay_history[i]=net_delay_history[i-1];
 
 	net_delay_history[0]=MINIMUM_NETWORK_DELAY;
 
-	for (i=0;i<clients.size();i++)
+	for (size_t i = 0; i < clients.size(); ++i)
 		if (clients[i].lag>net_delay_history[0])
 			net_delay_history[0]=clients[i].lag;
 
 	// add a safety margin (25%)
 	net_delay_history[0]+=net_delay_history[0]/4;
 
-	for (i=0;i<8;i++)
+	for (uint8_t i = 0; i < 8; ++i)
 		tmp[i]=net_delay_history[i];
 
 	std::sort (tmp, tmp+8);
@@ -581,7 +574,7 @@ void NetHost::update_network_delay ()
 
 	net_delay=0;
 
-	for (i=2;i<6;i++)
+	for (uint8_t i = 2; i < 6; ++i)
 		net_delay+=tmp[i];
 
 	net_delay/=4;
@@ -614,8 +607,6 @@ void NetHost::send_game_message (const char* msg)
 
 void NetHost::syncreport (const md5_checksum& newsync)
 {
-	uint32_t i;
-
 	log("[Host] got local sync report\n");
 
 	mysyncreports.push (newsync);
@@ -623,7 +614,7 @@ void NetHost::syncreport (const md5_checksum& newsync)
 	while (mysyncreports.size()) {
 		// Now look whether there is at least one syncreport from everyone.
 		// If so, make sure they match.
-		for (i=0;i<clients.size();i++) {
+		for (size_t i = 0;i < clients.size(); ++i) {
 			if (clients[i].syncreports.empty()) {
 				// Complain if we get too far ahead
 				if (mysyncreports.size() > 1)
@@ -636,7 +627,7 @@ void NetHost::syncreport (const md5_checksum& newsync)
 		md5_checksum sync = mysyncreports.front();
 		mysyncreports.pop();
 
-		for (i=0;i<clients.size();i++) {
+		for (size_t i = 0; i < clients.size();  ++i) {
 			if (clients[i].syncreports.front() != sync) {
 				log("[Host] lost synchronization with client %u!\n"
 				    "I have:     %s\n"
@@ -699,8 +690,6 @@ void NetClient::begin_game ()
 
 void NetClient::handle_network ()
 {
-	uint32_t i;
-
 	// What does this do here? It probably doesn't belong here.
 	NetGGZ::ref()->data();
 
@@ -748,7 +737,7 @@ void NetClient::handle_network ()
 			player_enabled=deserializer->getchar();
 			player_human=deserializer->getchar();
 			log("[Client] Playerinfo received\n");
-			for (i=0;i<MAX_PLAYERS;i++) {
+			for (Player_Number i = 0; i < MAX_PLAYERS; ++i) {
 				if (i!=playernum-1) {
 					if (player_enabled & (1<<i)) {
 						playerdescr[i]->set_player_type
@@ -770,7 +759,7 @@ void NetClient::handle_network ()
 				assert (phase==PH_PREGAME);
 				assert (statuswnd!=0);
 
-				for (i=0;i<MAX_PLAYERS;i++)
+				for (Player_Number i = 0;i < MAX_PLAYERS; ++i)
 					if (ready & ~player_ready & (1<<i))
 						statuswnd->set_ready (i+1);
 			}
@@ -882,9 +871,8 @@ void NetClient::syncreport (const md5_checksum& sync)
 
 void NetClient::disconnect ()
 {
-	for (uint32_t i = 1; i <= MAX_PLAYERS; ++i)
-		if (const Player * const player = game->get_player(i))
-			 if (player->get_type() == Player::Remote) disconnect_player (i);
+	iterate_players_existing(p, MAX_PLAYERS, *game, player)
+		if (player->get_type() == Player::Remote) disconnect_player (p);
 	log("[Client] Disconnect has happened\n");
 
     // Since we are now independent of the host, we are not bound to network
@@ -918,9 +906,7 @@ void NetStatusWindow::add_player (int32_t num)
 
 void NetStatusWindow::set_ready (int32_t num)
 {
-	uint32_t i;
-
-	for (i=0;i<entries.size();i++)
+	for (size_t i = 0; i < entries.size(); ++i)
 		if (entries[i].plnum == num)
 			entries[i].entry->set_string (1, _("Ready"));
 }
@@ -985,7 +971,7 @@ Deserializer::~Deserializer ()
 int32_t Deserializer::read_packet (TCPsocket sock)
 {
 	uint8_t buffer[256];
-	int32_t length, amount, i;
+	int32_t length, amount;
 
 	// read packet length (including length field)
 	if (SDLNet_TCP_Recv(sock, buffer, 2) < 2)
@@ -1002,7 +988,7 @@ int32_t Deserializer::read_packet (TCPsocket sock)
 
 		SDLNet_TCP_Recv (sock, buffer, amount);
 
-		for (i=0;i<amount;i++)
+		for (int32_t i = 0; i < amount; ++i)
 			queue.push (buffer[i]);
 
 		length-=amount;
@@ -1058,9 +1044,7 @@ int32_t Deserializer::getlong ()
 
 void Deserializer::getstr (char* buffer, int32_t maxlength)
 {
-	int32_t i;
-
-	for (i=0;(buffer[i]=getchar())!=0;i++)
+	for (int32_t i = 0; (buffer[i] = getchar()) != 0; ++i)
 		if (i==maxlength)
 			throw wexception("Deserializer: string too long");
 }

@@ -83,8 +83,11 @@ throw (_wexception)
 					const Tribe_Descr & tribe = player->tribe();
 					int32_t index= tribe.get_building_index(name);
 					if (index==-1)
-						throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n",
-							name, tribe.name().c_str());
+						throw wexception
+							("Widelands_Map_Building_Data_Packet::Read(): Should "
+							 "create building %s in tribe %s, but building is "
+							 "unknown!",
+							 name, tribe.name().c_str());
 
 					// Now, create this Building, take extra special care for constructionsites
 					Building & building = // all data is read later
@@ -143,8 +146,8 @@ throw (_wexception)
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
 	Map* map=egbase->get_map();
-	for (uint16_t y=0; y<map->get_height(); y++) {
-		for (uint16_t x=0; x<map->get_width(); x++) {
+	for (uint16_t y = 0; y < map->get_height(); ++y) {
+		for (uint16_t x = 0; x < map->get_width(); ++x) {
 			BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
 			// We only write Buildings
 			if (immovable && immovable->get_type()==Map_Object::BUILDING) {
@@ -246,7 +249,7 @@ void Widelands_Map_Building_Data_Packet::read_priorities
 	while (0xff != (ware_type = fr.Unsigned8())) {
 		// read count of priorities assigned for this ware type
 		const uint8_t count = fr.Unsigned8();
-		for (uint8_t i = 0; i < count; i++) {
+		for (uint8_t i = 0; i < count; ++i) {
 			int32_t idx = -1;
 			if (Request::WARE == ware_type)
 				idx = tribe.get_safe_ware_index(fr.CString());
