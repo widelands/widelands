@@ -188,10 +188,11 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 		bob=list[1];
 	}
 
-	if (state->svar1 == "world")
-		state->ivar2 = g->get_map()->get_world()->get_immovable_index(bob.c_str());
-	else
-		state->ivar2 = descr().get_tribe()->get_immovable_index(bob.c_str());
+	state->ivar2 =
+		state->svar1 == "world" ?
+		g->map().world().get_immovable_index(bob.c_str())
+		:
+		descr ().tribe().get_immovable_index(bob.c_str());
 
 	if (state->ivar2 < 0) {
 		molog("  WARNING: Unknown immovable %s\n", action->sparamv[idx].c_str());
@@ -200,7 +201,7 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 		return true;
 	}
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -230,10 +231,11 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
 		bob=list[1];
 	}
 
-	if (state->svar1 == "world")
-		state->ivar2 = g->get_map()->get_world()->get_bob(bob.c_str());
-	else
-		state->ivar2 = descr().get_tribe()->get_bob(bob.c_str());
+	state->ivar2 =
+		state->svar1 == "world" ?
+		g->map().world().get_bob(bob.c_str())
+		:
+		descr ().tribe().get_bob(bob.c_str());
 
 	if (state->ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", action->sparamv[idx].c_str());
@@ -581,12 +583,10 @@ bool Worker::run_plant(Game * g, State * state, const Action *)
 		return true;
 	}
 
-	if (state->svar1 == "world")
-		g->create_immovable(pos, state->ivar2, 0);
-	else
-		g->create_immovable(pos, state->ivar2, descr().get_tribe());
+	g->create_immovable
+		(pos, state->ivar2, state->svar1 == "world" ? 0 : &descr().tribe());
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -602,12 +602,10 @@ bool Worker::run_create_bob(Game * g, State * state, const Action *)
 
 	molog("  Create Bob: %i at %i, %i\n", state->ivar2, pos.x, pos.y);
 
-	if (state->svar1 == "world")
-		g->create_bob(pos, state->ivar2, 0);
-	else
-		g->create_bob(pos, state->ivar2, descr().get_tribe());
+	g->create_bob
+		(pos, state->ivar2, state->svar1 == "world" ? 0 : &descr().tribe());
 
-	state->ivar1++;
+	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
 }
@@ -666,29 +664,27 @@ bool Worker::run_geologist(Game* g, State* state, const Action* action)
  */
 bool Worker::run_geologist_find(Game * g, State * state, const Action *)
 {
-	FCoords position = g->get_map()->get_fcoords(get_position());
+	const Map & map = g->map();
+	const FCoords position = map.get_fcoords(get_position());
 	BaseImmovable* imm = position.field->get_immovable();
 
 	if (imm && imm->get_size() > BaseImmovable::NONE) {
 		//NoLog("  Field is no longer empty\n");
-	} else {
-		uint32_t res = position.field->get_resources();
-		uint32_t amount = position.field->get_resources_amount();
-
-		int32_t idx;
-		Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
-
-		if (rdescr->is_detectable() && amount)
-			idx = descr().get_tribe()->get_resource_indicator(rdescr, amount);
-		else
-			idx = descr().get_tribe()->get_resource_indicator(0, 0); // not detectable
-
-		//NoLog("  Resource: %02X -> plant indicator '%s'\n", res, get_descr()->get_tribe()->get_immovable_descr(idx)->get_name());
-
-		g->create_immovable(position, idx, descr().get_tribe());
+	} else if
+		(const Resource_Descr * const rdescr =
+		 map.world().get_resource(position.field->get_resources()))
+	{
+		const Tribe_Descr & tribe = descr().tribe();
+		g->create_immovable
+			(position,
+			 tribe.get_resource_indicator
+			 (rdescr,
+			  rdescr->is_detectable() ?
+			  position.field->get_resources_amount() : 0),
+			 &tribe);
 	}
 
-	state->ivar1++;
+	++state->ivar1;
 	return false;
 }
 
@@ -812,7 +808,7 @@ void Worker::set_economy(Economy *economy)
 		return;
 
 	if (m_economy)
-		m_economy->remove_workers(descr().get_tribe()->get_worker_index(name().c_str()), 1);
+		m_economy->remove_workers(descr().tribe().get_worker_index(name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -822,7 +818,7 @@ void Worker::set_economy(Economy *economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(descr().get_tribe()->get_worker_index(name().c_str()), 1);
+		m_economy->add_workers(descr().tribe().get_worker_index(name().c_str()), 1);
 }
 
 
@@ -992,14 +988,12 @@ void Worker::level(Game* g)
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
 	assert(get_becomes());
-	int32_t index = descr().get_tribe()->get_worker_index(get_becomes());
-	Worker_Descr* new_descr = descr().get_tribe()->get_worker_descr(index);
+	const Tribe_Descr & tribe = descr().tribe();
 
 	// Inform the economy, that something has changed
-	m_economy->remove_workers(descr().get_tribe()->get_worker_index(descr().name().c_str()), 1);
-	m_economy->add_workers(new_descr->get_tribe()->get_worker_index(new_descr->name().c_str()), 1);
-
-	m_descr = new_descr;
+	m_economy->remove_workers(tribe.get_worker_index(descr().name().c_str()), 1);
+	m_descr = tribe.get_worker_descr(tribe.get_worker_index(get_becomes()));
+	m_economy->add_workers   (tribe.get_worker_index(descr().name().c_str()), 1);
 
 	create_needed_experience(g);
 }

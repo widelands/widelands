@@ -160,7 +160,7 @@ private:
 	compile_assert(MAX_PLAYERS <= Player_Number_Bitmask);
 	Owner_Info_and_Selections_Type owner_info_and_selections;
 
-	uint8_t m_resources;
+	Resource_Index m_resources;
 
 	/** how much has there been*/
 	uint8_t m_starting_res_amount;

@@ -22,8 +22,9 @@
 #include "bob.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
-#include <stdint.h>
 #include "worlddata.h"
+
+#include "widelands.h"
 
 class Section;
 class Editor_Game_Base;
@@ -39,7 +40,7 @@ struct World_Descr_Header {
 };
 
 struct Resource_Descr {
-	typedef Uint8 Index;
+	typedef Resource_Index Index;
 	Resource_Descr() {}
 	~Resource_Descr() {}
 
@@ -76,7 +77,7 @@ struct Terrain_Descr {
    friend class Descr_Maintainer<Terrain_Descr>;
    friend class World;
 
-	typedef Uint8 Index;
+	typedef Terrain_Index Index;
       Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>*);
       ~Terrain_Descr();
 
@@ -86,7 +87,7 @@ struct Terrain_Descr {
 	uint8_t        get_is     () const throw () {return m_is;}
 	const std::string & name() const throw () {return m_name;}
 	__attribute__ ((deprecated)) const char * get_name   () const throw () {return m_name.c_str();}
-	int32_t resource_value(const Resource_Descr::Index resource) const throw () {
+	int32_t resource_value(const Resource_Index resource) const throw () {
 		return
 			resource == get_default_resources() or is_resource_valid(resource) ?
 			(get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
@@ -160,7 +161,7 @@ struct World {
 		Immovable_Descr* get_immovable_descr(int32_t index) const {return immovables.get(index);}
 
 	int32_t get_resource(const char * const name) const {return m_resources.get_index(name);}
-	Resource_Descr * get_resource(const Resource_Descr::Index res) const throw ()
+	Resource_Descr * get_resource(const Resource_Index res) const throw ()
 		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
       int32_t get_nr_resources() const {return m_resources.get_nitems();}
 

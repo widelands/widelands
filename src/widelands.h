@@ -33,6 +33,8 @@ inline Player_Number Neutral() throw () {return 0;}
 #define iterate_player_numbers(p, nr_players) \
 	for (Player_Number p = 1; p <= nr_players; ++p)
 
+typedef uint8_t  Terrain_Index;   /// 4 bits used, so 0 .. 15.
+typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.
 typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
 
 typedef uint16_t Vision;
