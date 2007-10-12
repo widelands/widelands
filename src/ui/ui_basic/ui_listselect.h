@@ -21,12 +21,13 @@
 #ifndef __S__LISTSELECT_H
 #define __S__LISTSELECT_H
 
-#include <vector>
-#include "compile_assert.h"
-#include "font_handler.h"
-#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_signal.h"
+
+#include "font_handler.h"
+
+#include "compile_assert.h"
+
 #include <limits>
 
 namespace UI {

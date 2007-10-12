@@ -20,9 +20,9 @@
 #ifndef __S__WUI_PLOT_AREA__H
 #define __S__WUI_PLOT_AREA__H
 
-#include "rgbcolor.h"
-#include <stdint.h>
 #include "ui_panel.h"
+
+#include "rgbcolor.h"
 
 #include <vector>
 

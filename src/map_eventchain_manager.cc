@@ -21,7 +21,6 @@
 #include "map_eventchain_manager.h"
 #include "trigger/trigger_conditional.h"
 
-#include <stdint.h>
 #include <vector>
 
 

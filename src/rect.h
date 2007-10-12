@@ -17,27 +17,19 @@
  *
  */
 
-#ifndef __S__GAME_SERVER_PROTO_PACKET_PING_H
-#define __S__GAME_SERVER_PROTO_PACKET_PING_H
+#ifndef RECT_H
+#define RECT_H
 
-#include "game_server_proto_packet.h"
+#include "point.h"
 
-/*
- * Ping. Checks if connection is alive
- */
-struct Game_Server_Protocol_Packet_Ping : public Game_Server_Protocol_Packet {
-	Game_Server_Protocol_Packet_Ping();
-      virtual ~Game_Server_Protocol_Packet_Ping();
+struct Rect : public Point {
+	Rect() throw () {}
+	Rect(const Point p, const uint32_t W, const uint32_t H) throw ()
+		: Point(p), w(W), h(H)
+	{}
+	Point bottom_left() const {return *this + Point(w, h);}
 
-      virtual uint16_t get_id();
-
-	virtual void recv(Game_Server_Connection*, Network_Buffer *);
-	virtual void send(Network_Buffer *) {}
-      virtual void write_reply(Network_Buffer*);
-      virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) {}
+	uint32_t w, h;
 };
 
-
-
-
-#endif // __S__GAME_SERVER_PROTO_PACKET_PING_H
+#endif

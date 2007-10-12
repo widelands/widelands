@@ -24,7 +24,6 @@
 #include "filewrite.h"
 #include "game.h"
 #include "queue_cmd_factory.h"
-#include <stdint.h>
 
 
 #define CURRENT_PACKET_VERSION 2

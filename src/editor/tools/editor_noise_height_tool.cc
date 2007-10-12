@@ -25,7 +25,6 @@
 #include "mapregion.h"
 #include "field.h"
 #include "editorinteractive.h"
-#include <stdint.h>
 
 /// Sets the heights to random values. Chages surrounding nodes if necessary.
 int32_t Editor_Noise_Height_Tool::handle_click_impl

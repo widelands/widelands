@@ -24,8 +24,6 @@
 #include "font_handler.h"
 #include "constants.h"
 
-#include <cassert>
-
 namespace UI {
 /**
 Initialize the grid

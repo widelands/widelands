@@ -22,9 +22,6 @@
 
 #include "ui_panel.h"
 
-#include <stdint.h>
-#include <string>
-
 namespace UI {
 /**
  * Windows are cached by default.

@@ -29,7 +29,6 @@
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "profile.h"
-#include <stdint.h>
 
 #include "ui_button.h"
 #include "ui_signal.h"

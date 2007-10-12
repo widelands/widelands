@@ -25,7 +25,6 @@
 #include "field.h"
 #include "instances.h" //for g_flag_descr
 #include "player.h"
-#include <stdint.h>
 #include "transport.h"
 #include "tribe.h"
 

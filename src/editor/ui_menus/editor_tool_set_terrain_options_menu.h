@@ -22,7 +22,6 @@
 
 #include "editor_tool_options_menu.h"
 
-#include <stdint.h>
 #include "ui_textarea.h"
 
 #include <vector>

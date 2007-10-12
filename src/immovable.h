@@ -21,8 +21,8 @@
 #define included_immovable_h
 
 #include "animation.h"
+#include "geometry.h"
 #include "instances.h"
-#include <stdint.h>
 
 class Economy;
 class Flag;

@@ -22,8 +22,9 @@
 
 #include <SDL_endian.h>
 
-#include <stdint.h>
 #include <string>
+
+#include <stdint.h>
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
 #define Little16(x)    (x)
@@ -41,53 +42,53 @@
 #define BigFloat(x)    (x)
 #endif
 
-inline Uint16 Swap16(const Uint16 x) {
-	Uint16 s;
-	reinterpret_cast<Uint8 *>(&s)[0] =
-		reinterpret_cast<const Uint8 *>(&x)[1];
-	reinterpret_cast<Uint8 *>(&s)[1] =
-		reinterpret_cast<const Uint8 *>(&x)[0];
+inline uint16_t Swap16(const uint16_t x) {
+	uint16_t s;
+	reinterpret_cast<uint8_t *>(&s)[0] =
+		reinterpret_cast<const uint8_t *>(&x)[1];
+	reinterpret_cast<uint8_t *>(&s)[1] =
+		reinterpret_cast<const uint8_t *>(&x)[0];
 	return s;
 }
 
-inline Uint32 Swap32(const Uint32 x) {
-	Uint32 s;
-	reinterpret_cast<Uint8 *>(&s)[0] =
-		reinterpret_cast<const Uint8 *>(&x)[3];
-	reinterpret_cast<Uint8 *>(&s)[1] =
-		reinterpret_cast<const Uint8 *>(&x)[2];
-	reinterpret_cast<Uint8 *>(&s)[2] =
-		reinterpret_cast<const Uint8 *>(&x)[1];
-	reinterpret_cast<Uint8 *>(&s)[3] =
-		reinterpret_cast<const Uint8 *>(&x)[0];
+inline uint32_t Swap32(const uint32_t x) {
+	uint32_t s;
+	reinterpret_cast<uint8_t *>(&s)[0] =
+		reinterpret_cast<const uint8_t *>(&x)[3];
+	reinterpret_cast<uint8_t *>(&s)[1] =
+		reinterpret_cast<const uint8_t *>(&x)[2];
+	reinterpret_cast<uint8_t *>(&s)[2] =
+		reinterpret_cast<const uint8_t *>(&x)[1];
+	reinterpret_cast<uint8_t *>(&s)[3] =
+		reinterpret_cast<const uint8_t *>(&x)[0];
 	return s;
 }
 
 inline float SwapFloat(const float x)
 {
 	float s;
-	reinterpret_cast<Uint8 *>(&s)[0] =
-		reinterpret_cast<const Uint8 *>(&x)[3];
+	reinterpret_cast<uint8_t *>(&s)[0] =
+		reinterpret_cast<const uint8_t *>(&x)[3];
 	reinterpret_cast<uint8_t *>(&s)[1] =
-		reinterpret_cast<const Uint8 *>(&x)[2];
+		reinterpret_cast<const uint8_t *>(&x)[2];
 	reinterpret_cast<uint8_t *>(&s)[2] =
-		reinterpret_cast<const Uint8 *>(&x)[1];
-	reinterpret_cast<Uint8 *>(&s)[3] =
-		reinterpret_cast<const Uint8 *>(&x)[0];
+		reinterpret_cast<const uint8_t *>(&x)[1];
+	reinterpret_cast<uint8_t *>(&s)[3] =
+		reinterpret_cast<const uint8_t *>(&x)[0];
 	return s;
 }
 
-inline Uint8 Deref8(const void * const ptr)
-{return *reinterpret_cast<const Uint8 *>(ptr);}
+inline uint8_t Deref8(const void * const ptr)
+{return *reinterpret_cast<const uint8_t *>(ptr);}
 
-inline Uint16 Deref16(const void * const ptr) {
-	Uint16 r;
+inline uint16_t Deref16(const void * const ptr) {
+	uint16_t r;
 	memcpy(&r, ptr, sizeof(r));
 	return r;
 }
 
-inline Uint32 Deref32(const void * const ptr) {
-	Uint32 r;
+inline uint32_t Deref32(const void * const ptr) {
+	uint32_t r;
 	memcpy(&r, ptr, sizeof(r));
 	return r;
 }

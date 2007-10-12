@@ -20,7 +20,6 @@
 #ifndef __S__SOLDIER_H
 #define __S__SOLDIER_H
 
-#include <stdint.h>
 #include "worker.h"
 
 // Constants used to launch attacks

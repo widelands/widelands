@@ -17,14 +17,15 @@
  *
  */
 
-#include <cassert>
+#include "ui_window.h"
+
 #include "constants.h"
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
-#include <SDL_keysym.h>
-#include "ui_window.h"
 #include "wlapplication.h"
+
+#include <SDL_keysym.h>
 
 namespace UI {
 //  Width the horizontal border graphics must have.

@@ -23,7 +23,6 @@
 #include "i18n.h"
 #include "editor_tool.h"
 
-#include <stdint.h>
 #include <stdio.h>
 
 /*

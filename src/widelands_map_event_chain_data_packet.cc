@@ -29,7 +29,6 @@
 #include "map_eventchain_manager.h"
 #include "map_trigger_manager.h"
 #include "profile.h"
-#include <stdint.h>
 #include "trigger/trigger.h"
 #include "trigger/trigger_conditional.h"
 #include "world.h"

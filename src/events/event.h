@@ -21,7 +21,6 @@
 #define __S__EVENT_H
 
 #include <map>
-#include <stdint.h>
 #include <string>
 
 class Game;

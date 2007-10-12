@@ -20,14 +20,14 @@
 #ifndef included_animation_h
 #define included_animation_h
 
-#include "geometry.h"
 #include "instances.h"
 #include "rgbcolor.h"
 
-#include <stdint.h>
+#include "point.h"
+
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 class Profile;
 class Section;

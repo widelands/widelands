@@ -22,7 +22,6 @@
 #include "wexception.h"
 
 #include <cstdarg>
-#include <stdint.h>
 
 //TODO: move wexception code into it's own file
 

@@ -20,7 +20,6 @@
 #ifndef __S__TRIGGER_TIME_H
 #define __S__TRIGGER_TIME_H
 
-#include <stdint.h>
 #include "trigger.h"
 
 /*

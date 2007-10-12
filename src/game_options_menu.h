@@ -21,7 +21,7 @@
 #define __S__GAME_OPTIONS_MENU_H
 
 #include "interactive_player.h"
-#include <stdint.h>
+
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"

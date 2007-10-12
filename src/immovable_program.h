@@ -26,7 +26,6 @@
 
 #include "immovable.h"
 
-#include <stdint.h>
 #include <string>
 
 

@@ -25,7 +25,6 @@
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"
-#include <stdint.h>
 
 struct Flag;
 struct Path;

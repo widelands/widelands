@@ -23,7 +23,8 @@
 #include "geometry.h"
 #include "layered_filesystem.h" //TODO: as soon as g_fs is not needed anymore, this can be changed to filesystem.h
 
-#include <stdint.h>
+#include "point.h"
+
 #include <vector>
 
 extern class Profile g_options;

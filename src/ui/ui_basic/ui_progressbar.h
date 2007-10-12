@@ -20,7 +20,6 @@
 #ifndef included_ui_progressbar_h
 #define included_ui_progressbar_h
 
-#include <stdint.h>
 #include "ui_panel.h"
 
 namespace UI {

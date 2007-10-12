@@ -20,9 +20,9 @@
 #ifndef included_ui_box_h
 #define included_ui_box_h
 
-#include <vector>
-#include <stdint.h>
 #include "ui_panel.h"
+
+#include <vector>
 
 namespace UI {
 /**

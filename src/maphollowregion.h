@@ -21,7 +21,6 @@
 #define __S__MAPHOLLOWREGION_H
 
 #include "map.h"
-#include <stdint.h>
 
 /**
  * Producer/Coroutine struct that iterates over every node for which the

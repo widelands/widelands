@@ -22,7 +22,6 @@
 
 #include "geometry.h"
 
-#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_signal.h"
 

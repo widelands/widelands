@@ -19,7 +19,6 @@
 
 #include "carrier.h"
 #include "game.h"
-#include <stdint.h>
 #include "wexception.h"
 
 

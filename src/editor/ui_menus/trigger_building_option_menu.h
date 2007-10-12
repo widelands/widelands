@@ -23,10 +23,9 @@
 #include "player_area.h"
 #include "building.h"
 
-#include <stdint.h>
-#include <string>
-#include <vector>
 #include "ui_window.h"
+
+#include <vector>
 
 class Editor_Interactive;
 class Trigger_Building;

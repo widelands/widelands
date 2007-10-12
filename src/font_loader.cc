@@ -29,7 +29,6 @@
 #include <SDL_ttf.h>
 
 #include <iostream>
-#include <stdint.h>
 #include <string>
 
 Font_Handler* g_fh = 0; // the font handler

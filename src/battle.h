@@ -22,7 +22,6 @@
 
 #include "immovable.h"
 #include "soldier.h"
-#include <stdint.h>
 
 
 struct Battle : public BaseImmovable {

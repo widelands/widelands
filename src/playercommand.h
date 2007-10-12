@@ -23,7 +23,6 @@
 
 #include "cmd_queue.h"
 #include "building.h"
-#include <stdint.h>
 #include "transport.h"
 
 struct StreamRead;

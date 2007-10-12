@@ -29,7 +29,6 @@
 #include "graphic.h"
 #include "overlay_manager.h"
 
-#include <stdint.h>
 #include <stdio.h>
 
 #define width  20

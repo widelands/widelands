@@ -23,7 +23,6 @@
 #include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
-#include <stdint.h>
 #include "widelands_map_data_packet_ids.h"
 #include "world.h"
 

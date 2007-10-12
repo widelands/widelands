@@ -20,7 +20,6 @@
 #ifndef __S__WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
 #define __S__WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
 
-#include <stdint.h>
 #include "widelands_map_data_packet.h"
 
 struct Map;

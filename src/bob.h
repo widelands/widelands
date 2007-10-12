@@ -21,9 +21,9 @@
 #define __BOB_H
 
 #include "animation.h"
+#include "geometry.h"
 
 #include <cassert>
-#include <stdint.h>
 
 /// \todo (Antonio Trueba#1#): Get rid of forward declarations (cleanup of other headers needed)
 class Map;

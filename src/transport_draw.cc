@@ -21,7 +21,6 @@
 
 #include "editor_game_base.h"
 #include "rendertarget.h"
-#include <stdint.h>
 
 void Flag::draw
 (const Editor_Game_Base & game,

@@ -21,7 +21,6 @@
 #define included_animation_gfx_h
 
 #include "player.h"
-#include <stdint.h>
 
 struct Surface;
 

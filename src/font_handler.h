@@ -20,13 +20,12 @@
 #ifndef __S__FONT_HANDLER_H
 #define __S__FONT_HANDLER_H
 
-#include "geometry.h"
+#include "point.h"
 #include "rgbcolor.h"
 
 #include <SDL_ttf.h>
 
 #include <list>
-#include <stdint.h>
 #include <string>
 #include <vector>
 

@@ -23,8 +23,8 @@
 #include "player_area.h"
 #include "trigger.h"
 
-#include <stdint.h>
 #include <string>
+
 /*
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h

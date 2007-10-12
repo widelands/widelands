@@ -28,7 +28,6 @@
 #include "game.h"
 #include "map.h"
 #include "player.h"
-#include <stdint.h>
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"

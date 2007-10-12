@@ -29,7 +29,6 @@
 #include "worker.h"
 
 #include <map>
-#include <stdint.h>
 #include <vector>
 
 class Building_Descr;

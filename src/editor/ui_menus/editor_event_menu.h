@@ -20,7 +20,6 @@
 #ifndef __S__EDITOR_EVENT_MENU_H
 #define __S__EDITOR_EVENT_MENU_H
 
-#include <stdint.h>
 #include "ui_unique_window.h"
 
 class Editor_Interactive;

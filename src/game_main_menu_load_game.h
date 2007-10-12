@@ -21,7 +21,6 @@
 #define __S__GAME_MAIN_MENU_LOAD_GAME_H
 
 #include "ui_unique_window.h"
-#include <stdint.h>
 
 class Interactive_Player;
 

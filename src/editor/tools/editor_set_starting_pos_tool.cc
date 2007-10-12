@@ -25,7 +25,6 @@
 #include "graphic.h"
 #include "map.h"
 #include "overlay_manager.h"
-#include <stdint.h>
 
 
 // global variable to pass data from callback to class

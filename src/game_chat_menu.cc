@@ -27,7 +27,6 @@
 #include "network.h"
 #include "player.h"
 #include "stock_menu.h"
-#include <stdint.h>
 
 #define CHAT_MSG_WAIT_TIME 1000
 

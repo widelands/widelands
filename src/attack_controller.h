@@ -25,8 +25,9 @@
 
 #include "widelands.h"
 
+#include "point.h"
+
 #include <set>
-#include <stdint.h>
 #include <vector>
 
 class Editor_Game_Base;

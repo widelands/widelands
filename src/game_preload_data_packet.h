@@ -22,7 +22,6 @@
 
 #include "game_data_packet.h"
 
-#include <stdint.h>
 #include <string>
 
 /**

@@ -20,8 +20,9 @@
 #ifndef __CAMPVIS_H
 #define __CAMPVIS_H
 
-#include <stdint.h>
 #include <string>
+
+#include <stdint.h>
 
 struct Campaign_visiblity_save {
 	std::string get_path();

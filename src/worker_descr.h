@@ -22,7 +22,6 @@
 
 #include "bob.h"
 #include "immovable.h"
-#include <stdint.h>
 
 
 /// \todo (Antonio Trueba#1#): Get rid of forward class declaration (chicked-and-egg problem)

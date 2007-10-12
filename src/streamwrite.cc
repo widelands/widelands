@@ -21,7 +21,6 @@
 #include "wexception.h"
 
 #include <stdarg.h>
-#include <stdint.h>
 
 StreamWrite::~StreamWrite()
 {

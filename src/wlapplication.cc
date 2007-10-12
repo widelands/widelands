@@ -46,7 +46,6 @@
 #include "log.h"
 
 #include <iostream>
-#include <stdint.h>
 #include <stdexcept>
 #include <string>
 
@@ -838,7 +837,7 @@ void WLApplication::parse_commandline(const int argc, const char **argv)
 	//TODO: EXENAME gets written out on windows!
 	m_commandline["EXENAME"]=argv[0];
 
-	for (uint32_t i=1; i<argc; ++i) {
+	for (int i = 1; i < argc; ++i) {
 		std::string opt=argv[i];
 		std::string value;
 		SSS_T pos;

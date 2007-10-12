@@ -22,7 +22,6 @@
 
 #include "interactive_player.h"
 
-#include <stdint.h>
 #include "ui_button.h"
 
 // The GameMainMenu is a rather dumb window with lots of buttons

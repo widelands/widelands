@@ -20,8 +20,6 @@
 #ifndef __S__TEXTAREA_H
 #define __S__TEXTAREA_H
 
-#include <stdint.h>
-#include <string>
 #include "constants.h"
 #include "font_handler.h"
 #include "ui_panel.h"

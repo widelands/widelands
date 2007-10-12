@@ -20,13 +20,13 @@
 #include "ui_multilineeditbox.h"
 
 #include "font_handler.h"
-#include "ui_multilinetextarea.h"
 #include "ui_scrollbar.h"
 #include "constants.h"
 #include "font_handler.h"
 #include "rendertarget.h"
-#include <SDL_keysym.h>
 #include "wlapplication.h"
+
+#include <SDL_keysym.h>
 
 namespace UI {
 /**

@@ -18,8 +18,9 @@
  */
 
 #include "helper.h"
-#include <SDL_keysym.h>
 #include "ui_editbox.h"
+
+#include <SDL_keysym.h>
 
 namespace UI {
 

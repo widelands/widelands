@@ -25,7 +25,6 @@
 #include "editor_game_base.h"
 #include "mapregion.h"
 #include "rgbcolor.h"
-#include <stdint.h>
 
 #include "widelands.h"
 

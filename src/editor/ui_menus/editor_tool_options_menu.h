@@ -22,7 +22,6 @@
 
 #include "editorinteractive.h"
 
-#include <stdint.h>
 #include "ui_unique_window.h"
 
 struct Editor_Tool_Options_Menu : public UI::UniqueWindow {

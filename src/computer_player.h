@@ -23,7 +23,6 @@
 #include "game.h"
 
 #include <list>
-#include <stdint.h>
 
 class BuildingHints;
 class Economy;

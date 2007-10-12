@@ -20,10 +20,9 @@
 #ifndef __ITEM_WARE_DESCR_H
 #define __ITEM_WARE_DESCR_H
 
-
-#include <stdint.h>
 #include <string>
 
+#include <stdint.h>
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons

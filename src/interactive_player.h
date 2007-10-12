@@ -23,11 +23,12 @@
 #include "game.h"
 #include "interactive_base.h"
 #include "network.h" // For chat
-#include <SDL_keyboard.h>
-#include <stdint.h>
+
 #include "ui_button.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
+
+#include <SDL_keyboard.h>
 
 #include <vector>
 

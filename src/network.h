@@ -28,7 +28,6 @@
 #include <SDL_net.h>
 
 #include <queue>
-#include <stdint.h>
 #include <string>
 #include <vector>
 

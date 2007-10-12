@@ -26,7 +26,6 @@
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"
-#include <stdint.h>
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"

@@ -20,9 +20,9 @@
 #ifndef __S__GAME_SERVER_PROTO_PACKET_USERENTERED_H
 #define __S__GAME_SERVER_PROTO_PACKET_USERENTERED_H
 
-#include <stdint.h>
-#include <string>
 #include "game_server_proto_packet.h"
+
+#include <string>
 
 /*
  * A new user entered a certain room

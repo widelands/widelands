@@ -26,7 +26,6 @@
 #include "world.h"
 #include "map.h"
 #include "overlay_manager.h"
-#include <stdint.h>
 #include "worlddata.h"
 
 

@@ -21,14 +21,15 @@
 #ifndef __S__TABLE_H
 #define __S__TABLE_H
 
-#include <vector>
-#include "font_handler.h"
-#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_signal.h"
-#include <limits>
+
+#include "font_handler.h"
 
 #include "compile_assert.h"
+
+#include <limits>
+#include <vector>
 
 namespace UI {
 struct Scrollbar;

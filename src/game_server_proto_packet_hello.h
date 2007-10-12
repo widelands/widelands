@@ -22,7 +22,6 @@
 
 #include "game_server_proto_packet.h"
 
-#include <stdint.h>
 #include <string>
 
 /*

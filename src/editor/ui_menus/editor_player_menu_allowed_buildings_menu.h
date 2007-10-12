@@ -20,7 +20,6 @@
 #ifndef __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 #define __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 
-#include <stdint.h>
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_textarea.h"

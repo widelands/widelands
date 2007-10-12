@@ -20,9 +20,10 @@
 #ifndef __S__SCROLLBAR_H
 #define __S__SCROLLBAR_H
 
-#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_signal.h"
+
+#include "rect.h"
 
 namespace UI {
 /** class Scrollbar

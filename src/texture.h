@@ -21,8 +21,8 @@
 #define TEXTURE_H
 
 #include "colormap.h"
+
 #include <stdint.h>
-#include <string>
 
 /**
  * This contains all the road textures needed to render roads
@@ -41,32 +41,31 @@ struct Road_Textures {
 * Currently, this is initialized from a 16 bit bitmap. This should be
 * changed to load 8 bit bitmaps directly.
 */
-class Texture {
-private:
-	Colormap      * m_colormap;
-	uint32_t            m_nrframes;
-	uint8_t * m_pixels;
-	uint32_t            m_frametime;
-	uint8_t * m_curframe;
-	std::string     m_texture_picture;
-	bool            is_32bit;
-	bool            m_was_animated;
-
-public:
+struct Texture {
 	Texture(const char & fnametempl, const uint32_t frametime, const SDL_PixelFormat &);
 	~Texture();
 
-	const char* get_texture_picture() {return m_texture_picture.c_str();}
+	const char * get_texture_picture() {return m_texture_picture;}
 
 	uint8_t *get_pixels () const {return m_pixels;}
 	uint8_t* get_curpixels() const {return m_curframe;}
 	void* get_colormap () const {return m_colormap->get_colormap();}
 
-	Uint32 get_minimap_color(const char shade);
+	uint32_t get_minimap_color(const char shade);
 
 	void animate(uint32_t time);
 	void reset_was_animated() {m_was_animated = false;}
 	bool was_animated() const throw () {return m_was_animated;}
+
+private:
+	Colormap * m_colormap;
+	uint8_t  * m_pixels;
+	uint8_t  * m_curframe;
+	char     * m_texture_picture;
+	uint32_t   m_nrframes;
+	uint32_t   m_frametime;
+	bool       is_32bit;
+	bool       m_was_animated;
 };
 
 #endif

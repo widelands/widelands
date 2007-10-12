@@ -34,14 +34,13 @@
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"
-#include <SDL_keysym.h>
-#include <stdint.h>
 #include "tribe.h"
 #include "ui_button.h"
 #include "ui_modal_messagebox.h"
 #include "ui_progresswindow.h"
 #include "wlapplication.h"
 
+#include <SDL_keysym.h>
 
 Editor_Interactive::Editor_Interactive(Editor_Game_Base & e) :
 Interactive_Base(e), m_egbase(e)

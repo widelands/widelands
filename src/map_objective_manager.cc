@@ -19,7 +19,6 @@
 
 #include "map_objective_manager.h"
 
-#include <stdint.h>
 #include <vector>
 
 

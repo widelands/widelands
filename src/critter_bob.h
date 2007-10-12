@@ -21,7 +21,6 @@
 #define __S__CRITTER_BOB_H
 
 #include "bob.h"
-#include <stdint.h>
 
 class Critter_BobAction;
 class Critter_BobProgram;

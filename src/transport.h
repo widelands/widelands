@@ -29,7 +29,6 @@
 #include "immovable.h"
 #include "item_ware_descr.h"
 #include "map.h"
-#include <stdint.h>
 #include "tattribute.h"
 #include "trackptr.h"
 #include "warelist.h"

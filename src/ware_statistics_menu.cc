@@ -25,7 +25,6 @@
 #include "player.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
-#include <stdint.h>
 #include "tribe.h"
 #include "warelist.h"
 #include "wui_plot_area.h"

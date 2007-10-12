@@ -20,10 +20,8 @@
 #ifndef RENDERTARGET_H
 #define RENDERTARGET_H
 
-#include "editor_game_base.h" //TODO: replace, only needed for "Time"
-#include "geometry.h"
+#include "rect.h"
 #include "rgbcolor.h"
-#include <stdint.h>
 
 #include "widelands.h"
 
@@ -48,8 +46,7 @@ class Surface;
  * \note If the sub-window would be empty/invisible, \ref enter_window() returns
  * false and doesn't change the window state at all.
 */
-class RenderTarget {
-public:
+struct RenderTarget {
 	RenderTarget(Surface* bmp);
 	~RenderTarget();
 	void get_window(Rect* rc, Point* ofs) const;

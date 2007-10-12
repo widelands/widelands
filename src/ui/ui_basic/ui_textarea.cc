@@ -18,6 +18,7 @@
  */
 
 #include "ui_textarea.h"
+
 #include "graphic.h"
 
 namespace UI {

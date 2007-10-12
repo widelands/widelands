@@ -20,7 +20,6 @@
 #ifndef __S__GAME_OBJECTIVE_MENU_H
 #define __S__GAME_OBJECTIVE_MENU_H
 
-#include <stdint.h>
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_unique_window.h"

@@ -21,7 +21,6 @@
 #define __S__CRITTER_BOB_PROGRAM
 
 #include "bob.h"
-#include <stdint.h>
 
 struct Critter_BobAction {
 	typedef bool (Critter_Bob::*execute_t)(Game* g, Bob::State* state, const Critter_BobAction* act);

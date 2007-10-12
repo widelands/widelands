@@ -23,7 +23,6 @@
 #include "cmd_queue.h"
 
 #include <map>
-#include <stdint.h>
 #include <string>
 #include <vector>
 

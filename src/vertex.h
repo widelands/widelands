@@ -17,27 +17,23 @@
  *
  */
 
-#ifndef __S__GAME_SERVER_PROTO_PACKET_PING_H
-#define __S__GAME_SERVER_PROTO_PACKET_PING_H
+#ifndef VERTEX_H
+#define VERTEX_H
 
-#include "game_server_proto_packet.h"
+#include "point.h"
 
-/*
- * Ping. Checks if connection is alive
- */
-struct Game_Server_Protocol_Packet_Ping : public Game_Server_Protocol_Packet {
-	Game_Server_Protocol_Packet_Ping();
-      virtual ~Game_Server_Protocol_Packet_Ping();
+/// Like a point but with an additional bright factor and texture coordinates.
+struct Vertex:public Point {
+	Vertex() throw () : Point (0, 0), b(0), tx(0), ty(0) {}
+	Vertex
+		(const int32_t vx,  const int32_t vy,
+		 const int32_t vb,
+		 const int32_t vtx, const int32_t vty)
+		throw ()
+		: Point(vx, vy), b(vb), tx(vtx), ty(vty)
+	{}
 
-      virtual uint16_t get_id();
-
-	virtual void recv(Game_Server_Connection*, Network_Buffer *);
-	virtual void send(Network_Buffer *) {}
-      virtual void write_reply(Network_Buffer*);
-      virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) {}
+	int32_t b, tx, ty;
 };
 
-
-
-
-#endif // __S__GAME_SERVER_PROTO_PACKET_PING_H
+#endif

@@ -21,7 +21,6 @@
 #define __S__GAME_SERVER_PROTO_PACKET_CONNECT_H
 
 #include "game_server_proto_packet.h"
-#include <stdint.h>
 
 /*
  * Checks versioning with the game server

@@ -22,7 +22,6 @@
 
 #include "compile_assert.h"
 #include "events/event_chain.h"
-#include <stdint.h>
 #include "trigger.h"
 
 #include "log.h"

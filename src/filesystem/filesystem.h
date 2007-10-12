@@ -23,7 +23,6 @@
 #include "filesystem_exceptions.h"
 
 #include <set>
-#include <stdint.h>
 #include <string>
 #include <stdexcept>
 #include <vector>

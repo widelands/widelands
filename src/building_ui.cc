@@ -34,7 +34,6 @@ class.
 #include "maphollowregion.h"
 #include "militarysite.h"
 #include "soldier.h"
-#include <stdint.h>
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"

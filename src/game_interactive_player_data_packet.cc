@@ -26,7 +26,6 @@
 #include "mapview.h"
 #include "overlay_manager.h"
 #include "player.h"
-#include <stdint.h>
 #include "tribe.h"
 
 

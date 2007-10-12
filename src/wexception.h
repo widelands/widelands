@@ -22,6 +22,7 @@
 
 #include <string>
 #include <exception>
+
 #include <stdint.h>
 
 #ifdef __GNUC__

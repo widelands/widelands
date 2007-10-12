@@ -20,8 +20,9 @@
 #ifndef included_ui_radiobutton_h
 #define included_ui_radiobutton_h
 
-#include <stdint.h>
 #include "ui_signal.h"
+
+#include <stdint.h>
 
 namespace UI {
 struct Panel;

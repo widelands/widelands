@@ -35,12 +35,13 @@ Texture::Texture
 (const char            & fnametmpl,
  const uint32_t              frametime,
  const SDL_PixelFormat & format)
+:
+m_colormap (0),
+m_pixels   (0),
+m_nrframes (0),
+m_frametime(frametime),
+is_32bit   (format.BytesPerPixel == 4)
 {
-	m_colormap = 0;
-	m_nrframes = 0;
-	m_pixels = 0;
-	m_frametime = frametime;
-	is_32bit = format.BytesPerPixel == 4;
 
 	// Load the pictures one by one
 	char fname[256];
@@ -70,7 +71,7 @@ Texture::Texture
 		// Load it
 		SDL_Surface* surf;
 
-		m_texture_picture =fname;
+		m_texture_picture = strdup(fname);
 
 		try
 		{
@@ -124,14 +125,18 @@ Texture::Texture
 		SDL_Surface* cv = SDL_ConvertSurface(surf, &fmt, 0);
 
 		// Add the frame
-		m_pixels = (uint8_t*)realloc(m_pixels, TEXTURE_WIDTH*TEXTURE_HEIGHT*(m_nrframes+1));
+		m_pixels = static_cast<uint8_t *>
+			(realloc(m_pixels, TEXTURE_WIDTH*TEXTURE_HEIGHT * (m_nrframes + 1)));
 		m_curframe = &m_pixels[TEXTURE_WIDTH*TEXTURE_HEIGHT*m_nrframes];
 		++m_nrframes;
 
 		SDL_LockSurface(cv);
 
 		for (int32_t y = 0; y < TEXTURE_HEIGHT; ++y)
-			memcpy(m_curframe + y*TEXTURE_WIDTH, (Uint8*)cv->pixels + y*cv->pitch, TEXTURE_WIDTH);
+			memcpy
+				(m_curframe + y * TEXTURE_WIDTH,
+				 static_cast<uint8_t *>(cv->pixels) + y * cv->pitch,
+				 TEXTURE_WIDTH);
 
 		SDL_UnlockSurface(cv);
 
@@ -150,6 +155,7 @@ Texture::~Texture ()
 {
 	delete m_colormap;
 	free(m_pixels);
+	free(m_texture_picture);
 }
 
 /**

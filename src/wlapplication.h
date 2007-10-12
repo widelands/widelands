@@ -20,11 +20,12 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
-#include "geometry.h"
+#include "point.h"
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
 #include <SDL_types.h>
+
 #include <map>
 #include <stdexcept>
 #include <string>

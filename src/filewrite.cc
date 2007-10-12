@@ -22,7 +22,6 @@
 #include "filesystem.h"
 
 #include <stdarg.h>
-#include <stdint.h>
 
 FileWrite::FileWrite() : data(0), length(0), maxsize(0), filepos(0) {}
 

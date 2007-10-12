@@ -20,8 +20,9 @@
 #ifndef __S__WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 #define __S__WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 
-#include <stdint.h>
 #include <map>
+
+#include <stdint.h>
 
 class Map_Object;
 

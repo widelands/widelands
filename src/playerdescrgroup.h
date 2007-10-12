@@ -25,8 +25,6 @@
 #include "ui_signal.h"
 #include "ui_textarea.h"
 
-#include <stdint.h>
-#include <string>
 #include <vector>
 
 class Game;

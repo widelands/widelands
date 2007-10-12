@@ -23,6 +23,7 @@
 #include "queue_cmd_ids.h"
 
 #include <queue>
+
 #include <stdint.h>
 
 class Editor_Game_Base;

@@ -24,7 +24,6 @@
 #include "unzip.h"
 #include "zip.h"
 
-#include <stdint.h>
 #include <string>
 
 struct ZipFilesystem : public FileSystem {

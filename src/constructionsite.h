@@ -22,7 +22,6 @@
 
 #include "building.h"
 
-#include <stdint.h>
 #include <vector>
 
 class Building;

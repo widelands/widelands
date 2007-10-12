@@ -24,7 +24,6 @@
 #include "filewrite.h"
 #include "immovable.h"
 #include "map.h"
-#include <stdint.h>
 #include "tribe.h"
 #include "world.h"
 #include "widelands_map_data_packet_ids.h"

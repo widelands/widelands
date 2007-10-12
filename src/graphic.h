@@ -23,10 +23,9 @@
 #include "animation_gfx.h"
 #include "picture.h"
 
-#include <vector>
-
 #include <png.h>
-#include <stdint.h>
+
+#include <vector>
 
 /**
  * Names of road terrains

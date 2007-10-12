@@ -21,7 +21,6 @@
 #define __S__S2MAP_H
 
 #include "map_loader.h"
-#include <stdint.h>
 
 struct S2MapDescrHeader {
 	char   magic[10]; // "WORLD_V1.0"

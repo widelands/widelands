@@ -20,9 +20,10 @@
 #include "map_variable_manager.h"
 
 #include "i18n.h"
-#include <stdint.h>
+
 #include <vector>
 
+#include <stdint.h>
 
 MapVariableManager::MapVariableManager() {
    // Create a default variable

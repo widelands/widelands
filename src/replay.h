@@ -28,8 +28,10 @@
  * playercommands.
  */
 
-#include <stdint.h>
 #include <string>
+
+#include <stdint.h>
+
 #define REPLAY_DIR "replays"
 #define REPLAY_SUFFIX ".wrpl"
 

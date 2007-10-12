@@ -22,7 +22,6 @@
 
 #include <map>
 #include <set>
-#include <stdint.h>
 #include <string>
 
 //  This type is used to store information about workareas. It stores radii and

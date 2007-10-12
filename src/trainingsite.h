@@ -21,7 +21,6 @@
 #define TRAININGSITE_H
 
 #include "productionsite.h"
-#include <stdint.h>
 #include "tattribute.h"
 
 class TrainingSite_Window;

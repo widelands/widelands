@@ -23,9 +23,10 @@
 #include <SDL_net.h>
 
 #include <map>
-#include <stdint.h>
 #include <string>
 #include <vector>
+
+#include <stdint.h>
 
 class Game_Server_Protocol_Packet;
 

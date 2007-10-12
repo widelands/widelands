@@ -23,8 +23,9 @@
 #include "graphic.h"
 #include "mapviewpixelconstants.h"
 #include "random.h"
-#include <stdint.h>
 #include "surface.h"
+
+#include "vertex.h"
 
 ///Must be a power of two
 #define DITHER_WIDTH 4

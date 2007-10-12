@@ -25,7 +25,6 @@
 #include "filewrite.h"
 #include "map.h"
 #include "player.h"
-#include <stdint.h>
 #include "transport.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"

@@ -22,10 +22,10 @@
 
 #include "geometry.h"
 #include "machdep.h"
+
 #include <exception>
 #include <limits>
 #include <cassert>
-#include <stdint.h>
 #include <string>
 
 struct FileSystem;

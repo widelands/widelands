@@ -20,12 +20,13 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
-#include "geometry.h"
 #include "rgbcolor.h"
-#include <stdint.h>
 #include "texture.h"
 
+#include "rect.h"
+
 struct Editor_Game_Base;
+struct Field;
 struct Player;
 
 /**

@@ -25,10 +25,11 @@
 #include "map.h"
 #include "mapview.h"
 #include "overlay_manager.h"
-#include <SDL_keysym.h>
-#include <stdint.h>
+
 #include "ui_panel.h"
 #include "ui_unique_window.h"
+
+#include <SDL_keysym.h>
 
 class CoordPath;
 class MiniMap;

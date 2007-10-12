@@ -20,6 +20,8 @@
 #ifndef __S__EVENT_MOVE_VIEW_OPTION_MENU_H
 #define __S__EVENT_MOVE_VIEW_OPTION_MENU_H
 
+#include "geometry.h"
+
 #include "ui_window.h"
 
 class Editor_Interactive;

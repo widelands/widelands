@@ -20,7 +20,6 @@
 #ifndef __S__MULTILINE_EDITBOX_H
 #define __S__MULTILINE_EDITBOX_H
 
-#include <stdint.h>
 #include "ui_multilinetextarea.h"
 #include "ui_signal.h"
 

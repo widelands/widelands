@@ -24,7 +24,6 @@
 #include "trigger/trigger_referencer.h"
 
 #include <cassert>
-#include <stdint.h>
 #include <string>
 #include <vector>
 

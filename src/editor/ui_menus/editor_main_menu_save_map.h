@@ -21,7 +21,7 @@
 #define __S__EDITOR_MAIN_MENU_SAVE_MAP_H
 
 #include "filesystem.h"
-#include <stdint.h>
+
 #include "ui_window.h"
 
 class Editor_Interactive;

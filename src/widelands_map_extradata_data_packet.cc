@@ -26,7 +26,6 @@
 #include "graphic.h" // Since we are laying about the path of the pictures
 #include "map.h"
 #include "profile.h"
-#include <stdint.h>
 #include "widelands_map_data_packet_ids.h"
 
 #include <SDL_image.h>

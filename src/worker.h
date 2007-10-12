@@ -21,7 +21,6 @@
 #define __S__WORKER_H
 
 #include "idleworkersupply.h"
-#include <stdint.h>
 #include "worker_descr.h"
 
 

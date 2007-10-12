@@ -22,7 +22,6 @@
 
 
 #include "bob.h"
-#include <stdint.h>
 #include "workarea_info.h"
 #include "worker.h"
 

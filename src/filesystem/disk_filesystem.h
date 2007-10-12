@@ -22,7 +22,6 @@
 
 #include "filesystem.h"
 
-#include <stdint.h>
 #include <string>
 
 /// \todo const correctness

@@ -28,7 +28,6 @@
 #include "map.h"
 #include "map_trigger_manager.h"
 #include "profile.h"
-#include <stdint.h>
 #include "trigger/trigger_null.h"
 #include "wexception.h"
 

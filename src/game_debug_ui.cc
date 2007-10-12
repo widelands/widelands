@@ -34,7 +34,6 @@
 #include "ui_tabpanel.h"
 #include "ui_window.h"
 
-#include <stdint.h>
 #include <stdio.h>
 
 

@@ -20,8 +20,9 @@
 #ifndef __S__TRIGGER_FACTORY_H
 #define __S__TRIGGER_FACTORY_H
 
-#include <stdint.h>
 #include <string>
+
+#include <stdint.h>
 
 class Trigger;
 class Editor_Interactive;

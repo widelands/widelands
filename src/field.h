@@ -29,7 +29,6 @@
 
 #include <cassert>
 #include <limits>
-#include <stdint.h>
 
 
 #define MAX_FIELD_HEIGHT 60

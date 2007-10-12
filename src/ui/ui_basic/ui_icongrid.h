@@ -20,13 +20,12 @@
 #ifndef included_ui_icongrid_h
 #define included_ui_icongrid_h
 
-#include <stdint.h>
-#include <string>
-#include <vector>
-
-#include "rgbcolor.h"
 #include "ui_panel.h"
 #include "ui_signal.h"
+
+#include "rgbcolor.h"
+
+#include <vector>
 
 namespace UI {
 /**

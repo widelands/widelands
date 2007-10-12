@@ -21,8 +21,6 @@
 
 #include "wexception.h"
 
-#include <cassert>
-
 namespace UI {
 /**
 Initialize an empty box

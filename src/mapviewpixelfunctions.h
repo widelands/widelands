@@ -21,7 +21,8 @@
 #define __S__MAPVIEWPIXELFUNCTIONS_H
 
 #include "geometry.h"
-#include <stdint.h>
+
+#include "point.h"
 
 struct Map;
 

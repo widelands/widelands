@@ -22,7 +22,6 @@
 
 #include "waresdisplay.h"
 
-#include <stdint.h>
 #include "ui_button.h"
 #include "ui_unique_window.h"
 

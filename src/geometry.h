@@ -23,80 +23,8 @@
 #include "compile_assert.h"
 
 #include <cmath>
-#include <limits>
+
 #include <stdint.h>
-
-struct Point {
-	Point() throw () {}
-	Point(const int32_t px, const int32_t py) throw () : x(px), y(py) {}
-
-	static Point invalid() throw () {
-		return Point
-			(std::numeric_limits<int32_t>::max(), std::numeric_limits<int32_t>::max());
-	}
-
-	bool operator==(const Point other) const throw ()
-	{return x == other.x and y == other.y;}
-	bool operator!=(const Point other) const  throw ()
-	{return not (*this == other);}
-
-	Point operator+(const Point other) const
-		{return Point(x + other.x, y + other.y);}
-	Point operator-(const Point other) const
-		{return Point(x - other.x, y - other.y);}
-	Point & operator+=(const Point other) {
-		x += other.x;
-		y += other.y;
-		return *this;
-	}
-	Point & operator-=(const Point other) {
-		x -= other.x;
-		y -= other.y;
-		return *this;
-	}
-
-	int32_t x, y;
-};
-
-/**
- * Returns the point in the middle between a and b (rounded to integer values).
- *
- * This may not be overflow safe as it could be. If the components of Point had
- * been unsigned, "((a^b)>>1)+(a&b)" would have worked, but they are signed.
- */
-inline Point middle(const Point a, const Point b) throw ()
-{
-	return Point((a.x + b.x) >> 1, (a.y + b.y) >> 1);
-}
-
-
-struct Rect : public Point {
-	Rect() throw () {}
-	Rect(const Point p, const uint32_t W, const uint32_t H) throw ()
-		: Point(p), w(W), h(H)
-	{}
-	Point bottom_left() const {return *this + Point(w, h);}
-
-	uint32_t w, h;
-};
-
-
-/** struct Vertex
- *
- * This struct is like a point, but with an additional bright factor and texture
- * coordinates.
- */
-struct Vertex:public Point {
-	Vertex() throw () : Point (0, 0), b(0), tx(0), ty(0) {}
-	Vertex
-		(const int32_t vx, const int32_t vy, const int32_t vb, const int32_t vtx, const int32_t vty)
-		throw ()
-		: Point(vx, vy), b(vb), tx(vtx), ty(vty)
-	{}
-
-	int32_t b, tx, ty;
-};
-
 
 // hm, floats...
 // tried to be faster with fixed point arithmetics

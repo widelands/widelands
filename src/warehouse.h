@@ -21,7 +21,6 @@
 #define WAREHOUSE_H
 
 #include "building.h"
-#include <stdint.h>
 #include "transport.h"
 
 class Editor_Game_Base;

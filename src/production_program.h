@@ -23,9 +23,10 @@
 #include "log.h"
 
 #include <cassert>
-#include <stdint.h>
 #include <string>
 #include <vector>
+
+#include <stdint.h>
 
 struct EncodeData;
 struct ProductionSite_Descr;

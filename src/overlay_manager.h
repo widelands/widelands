@@ -25,7 +25,6 @@
 
 #include <map>
 #include <set>
-#include <stdint.h>
 
 /*
  * The Overlay Manager is responsible for the map overlays. He

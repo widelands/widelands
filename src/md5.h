@@ -24,7 +24,6 @@
 
 #include <string>
 
-#include <stdint.h>
 #include "streamwrite.h"
 
 /* Structure to save state of computation between the single steps.  */

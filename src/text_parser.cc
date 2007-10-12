@@ -24,7 +24,6 @@
 #include "helper.h"
 
 #include <vector>
-#include <stdint.h>
 #include <string>
 
 Richtext_Block::Richtext_Block() {

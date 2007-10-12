@@ -24,8 +24,6 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "map.h"
-#include <SDL_keysym.h>
-#include <stdint.h>
 #include "wlapplication.h"
 #include "world.h"
 
@@ -35,6 +33,7 @@
 #include "ui_tabpanel.h"
 #include "ui_textarea.h"
 
+#include <SDL_keysym.h>
 
 Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 (Editor_Interactive         & parent,

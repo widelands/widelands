@@ -30,9 +30,6 @@
 #include "ui_table.h"
 #include "ui_multilinetextarea.h"
 
-#include <stdint.h>
-#include <string>
-
 class Item_Ware_Descr;
 class Tribe_Descr;
 

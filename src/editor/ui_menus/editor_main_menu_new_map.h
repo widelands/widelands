@@ -22,8 +22,6 @@
 
 #include "ui_window.h"
 
-#include <stdint.h>
-#include <string>
 #include <vector>
 
 class Editor_Interactive;

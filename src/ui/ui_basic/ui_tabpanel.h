@@ -20,11 +20,9 @@
 #ifndef included_ui_tabpanel_h
 #define included_ui_tabpanel_h
 
-#include <vector>
 #include "ui_panel.h"
 
-#include <stdint.h>
-#include <string>
+#include <vector>
 
 namespace UI {
 /**

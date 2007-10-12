@@ -21,7 +21,6 @@
 #define LAYEREDFILESYSTEM_H
 
 #include "filesystem.h"
-#include <stdint.h>
 
 /**
  * LayeredFileSystem is a file system which basically merges several layered

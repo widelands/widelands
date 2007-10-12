@@ -20,11 +20,10 @@
 #ifndef __S__BUTTON_H
 #define __S__BUTTON_H
 
-#include <stdint.h>
-#include <string>
-#include "rgbcolor.h"
 #include "ui_panel.h"
 #include "ui_signal.h"
+
+#include "rgbcolor.h"
 
 namespace UI {
 /**

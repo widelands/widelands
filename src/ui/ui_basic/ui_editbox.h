@@ -20,10 +20,9 @@
 #ifndef included_ui_editbox_h
 #define included_ui_editbox_h
 
-#include <SDL_keyboard.h>
-#include <stdint.h>
-#include <string>
 #include "ui_button.h"
+
+#include <SDL_keyboard.h>
 
 namespace UI {
 /**

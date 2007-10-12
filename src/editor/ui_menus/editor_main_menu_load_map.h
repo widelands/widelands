@@ -22,7 +22,6 @@
 
 #include "filesystem.h"
 
-#include <stdint.h>
 #include "ui_window.h"
 
 class Editor_Interactive;

@@ -19,14 +19,12 @@
 #ifndef __S__SLIDER_H
 #define __S__SLIDER_H
 
-
-#include <stdint.h>
-#include <string>
-#include "rgbcolor.h"
 #include "ui_panel.h"
 #include "ui_signal.h"
 #include "rendertarget.h"
 #include "graphic.h"
+
+#include "rgbcolor.h"
 
 namespace UI {
 

@@ -22,7 +22,6 @@
 
 #include "graphic.h"
 
-#include <stdint.h>
 #include <string>
 #include <vector>
 

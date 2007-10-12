@@ -17,7 +17,6 @@
  *
  */
 
-#include <cassert>
 #include "ui_unique_window.h"
 
 namespace UI {

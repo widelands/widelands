@@ -21,8 +21,9 @@
 #define __S__TRIGGER_H
 
 #include <map>
-#include <stdint.h>
 #include <string>
+
+#include <stdint.h>
 
 class Game;
 class Section;

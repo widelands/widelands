@@ -22,7 +22,6 @@
 
 #include "instances.h"
 #include "player_area.h"
-#include <stdint.h>
 
 struct AreaWatcher_Descr;
 

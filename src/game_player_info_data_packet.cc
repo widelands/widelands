@@ -25,7 +25,6 @@
 #include "game.h"
 #include "interactive_player.h"
 #include "player.h"
-#include <stdint.h>
 #include "tribe.h"
 
 
