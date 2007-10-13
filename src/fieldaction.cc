@@ -108,7 +108,7 @@ void BuildGrid::add(int32_t id)
 	Building_Descr* descr = m_tribe.get_building_descr(id);
 	uint32_t picid = descr->get_buildicon();
 
-	UI::Icon_Grid::add(picid, (void*)id, descr->descname());
+	UI::Icon_Grid::add(picid, reinterpret_cast<void *>(id), descr->descname());
 }
 
 
@@ -366,11 +366,8 @@ void FieldActionWindow::add_buttons_auto()
 		// The box with road-building buttons
 		buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
-		if (imm && imm->get_type() == Map_Object::FLAG)
-		{
+		if (Flag * const flag = dynamic_cast<Flag *>(imm)) {
 			// Add flag actions
-			Flag *flag = (Flag*)imm;
-
 			add_button(buildbox, pic_buildroad, &FieldActionWindow::act_buildroad, _("Build road"));
 
 			Building *building = flag->get_building();
@@ -689,32 +686,21 @@ Remove the flag at this field
 */
 void FieldActionWindow::act_ripflag()
 {
-   BaseImmovable* imm = m_iabase->egbase().map().get_immovable(m_field);
-   Flag* flag;
-   Building* building;
-
    okdialog();
-
-   if (!imm || imm->get_type() != Map_Object::FLAG)
-      return;
-
-   flag = (Flag*)imm;
-   building = flag->get_building();
-
-	if (building) {
-      if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
-         return;
-
-      show_bulldoze_confirm(m_iabase, building, flag);
-	} else {
-		if (Game * const game = dynamic_cast<Game *>(&m_iabase->egbase())) {
-         m_iabase->need_complete_redraw();
-			game->send_player_bulldoze (flag);
-		} else {// Editor
-			imm->remove(&m_iabase->egbase());
-         m_iabase->need_complete_redraw();
+	Editor_Game_Base & egbase = m_iabase->egbase();
+	if
+		(Flag * const flag =
+		 dynamic_cast<Flag *>(m_field.field->get_immovable()))
+		if (Building * const building = flag->get_building()) {
+			if (building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+				show_bulldoze_confirm(m_iabase, building, flag);
+		} else {
+			if (Game * const game = dynamic_cast<Game *>(&egbase))
+				game->send_player_bulldoze (flag);
+			else // Editor
+				flag->remove(&egbase);
+			m_iabase->need_complete_redraw();
 		}
-	}
 }
 
 

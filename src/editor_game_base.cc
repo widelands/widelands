@@ -711,11 +711,12 @@ AttackController* Editor_Game_Base::create_attack_controller
 		}
 	}
 
-	AttackController* ctrl = new AttackController((Game*)this, flag, attacker, defender);
-	ctrl->init(this);
-	ctrl->launchAttack(num);
-	m_attack_serials.push_back(ctrl->get_serial());
-	return ctrl;
+	AttackController & ctrl =
+		*new AttackController(this, flag, attacker, defender);
+	ctrl.init(this);
+	ctrl.launchAttack(num);
+	m_attack_serials.push_back(ctrl.get_serial());
+	return &ctrl;
 }
 
 AttackController* Editor_Game_Base::create_attack_controller()

@@ -185,44 +185,37 @@ in some situations over the network.
 */
 void Player::build_road(const Path & path) {
 	Map & map = egbase().map();
-	Flag *start, *end;
+	FCoords fc = map.get_fcoords(path.get_start());
+	if
+		(Flag * const start = dynamic_cast<Flag *>(fc.field->get_immovable()))
+	{
+		if
+			(Flag * const end =
+			 dynamic_cast<Flag *>(map.get_immovable(path.get_end())))
+		{
 
-	BaseImmovable * imm = map.get_immovable(path.get_start());
-	if (!imm || imm->get_type() != Map_Object::FLAG) {
+			//  Verify ownership of the path.
+			const int32_t laststep = path.get_nsteps() - 1;
+			for (int32_t i = 0; i < laststep; ++i) {
+				fc = map.get_neighbour(fc, path[i]);
+
+				if (BaseImmovable * const imm = fc.field->get_immovable())
+					if (imm->get_size() >= BaseImmovable::SMALL) {
+						log
+							("%i: building road, immovable in the way, type=%d\n",
+							 get_player_number(), imm->get_type());
+						return;
+					}
+				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
+					log("%i: building road, unwalkable\n", get_player_number());
+					return;
+				}
+			}
+			Road::create(&m_egbase, Road_Normal, start, end, path);
+		} else
+			log("%i: building road, missed end flag\n", get_player_number());
+	} else
 		log("%i: building road, missed start flag\n", get_player_number());
-		return;
-	}
-	start = (Flag *)imm;
-
-	imm = map.get_immovable(path.get_end());
-	if (!imm || imm->get_type() != Map_Object::FLAG) {
-		log("%i: building road, missed end flag\n", get_player_number());
-		return;
-	}
-	end = (Flag *)imm;
-
-	// Verify ownership of the path
-	FCoords coords = egbase().map().get_fcoords(path.get_start());
-
-	const int32_t laststep = path.get_nsteps() - 1;
-	for (int32_t i = 0; i < laststep; ++i) {
-		const Direction dir = path[i];
-		coords = map.get_neighbour(coords, dir);
-
-		imm = map.get_immovable(coords);
-		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-			log("%i: building road, small immovable in the way, type=%d\n", get_player_number(), imm->get_type());
-			return;
-		}
-		int32_t caps = get_buildcaps(coords);
-		if (!(caps & MOVECAPS_WALK)) {
-			log("%i: building road, unwalkable\n", get_player_number());
-			return;
-		}
-	}
-
-	// fine, we can build the road
-	Road::create(&m_egbase, Road_Normal, start, end, path);
 }
 
 

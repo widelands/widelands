@@ -74,10 +74,16 @@ throw (_wexception)
 			fr.Unsigned32();
 			uint32_t flagFilePos = fr.Unsigned32();
 
-			Flag* flag = (Flag*) ol->get_object_by_file_index(flagFilePos);
-			assert(flag);
-
-			ctrl->flag = flag;
+			if
+				(Flag * const flag =
+				 dynamic_cast<Flag *>(ol->get_object_by_file_index(flagFilePos)))
+				ctrl->flag = flag;
+			else
+				throw wexception
+					("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
+					 "binary/attackcontroller:%u: object with file index %u is not "
+					 "a flag",
+					 fr.GetPos() - 4, flagFilePos);
 			ctrl->attackingPlayer = fr.Unsigned32();
 			ctrl->defendingPlayer = fr.Unsigned32();
 			ctrl->totallyLaunched = fr.Unsigned32();
@@ -86,11 +92,11 @@ throw (_wexception)
 			uint32_t numBs = fr.Unsigned32();
 
 			for (uint32_t j = 0; j < numBs; ++j) {
-				Soldier* soldier = (Soldier*) ol->get_object_by_file_index(fr.Unsigned32());
-				assert(soldier);
+				Soldier * const soldier = dynamic_cast<Soldier *>(ol->get_object_by_file_index(fr.Unsigned32()));
+				assert(soldier); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-				MilitarySite* origin = (MilitarySite*) ol->get_object_by_file_index(fr.Unsigned32());
-				assert(origin);
+				MilitarySite * const origin = dynamic_cast<MilitarySite *>(ol->get_object_by_file_index(fr.Unsigned32()));
+				assert(origin); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
 				Coords battleGround;
 				if (packet_version == 1) {
@@ -143,8 +149,8 @@ throw (_wexception)
 
 			uint32_t numInMs = fr.Unsigned32();
 			for (uint32_t j = 0; j < numInMs; ++j) {
-			MilitarySite* ms = (MilitarySite*) ol->get_object_by_file_index(fr.Unsigned32());
-			assert(ms);
+				MilitarySite * const ms = dynamic_cast<MilitarySite *>(ol->get_object_by_file_index(fr.Unsigned32()));
+			assert(ms); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 			ctrl->involvedMilitarySites.insert(ms);
 			ms->set_in_battle(true);
 			}

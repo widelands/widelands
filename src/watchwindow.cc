@@ -339,19 +339,17 @@ void WatchWindow::think()
 {
 	UI::Window::think();
 
-	Map_Object* obj = m_views[m_cur_index].tracking.get(m_game);
-
 	if ((m_game->get_gametime() - last_visit) > REFRESH_TIME) {
 		last_visit = m_game->get_gametime();
 		next_view();
 		return;
 	}
 
-	if (obj) {
-		Bob* bob = (Bob*)obj;
+	if
+		(Bob * const bob =
+		 dynamic_cast<Bob *>(m_views[m_cur_index].tracking.get(m_game)))
+	{
 		Point pos;
-
-		assert(obj->get_type() == Map_Object::BOB);
 
 		MapviewPixelFunctions::get_pix
 			(*m_game->get_map(), bob->get_position(), pos.x, pos.y);

@@ -194,12 +194,12 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t
       return 0;
 	}
 
-   uint8_t *section = (uint8_t *)malloc(dw * dh);
+	uint8_t *section = static_cast<uint8_t *>(malloc(dw * dh));
 
 	try {
 		int32_t y = 0;
 		for (; y < height; ++y) {
-			uint8_t *ptr = (uint8_t*)file->Data(width);
+			uint8_t * const ptr = static_cast<uint8_t *>(file->Data(width));
 			memcpy(section + y*width, ptr, width);
 			file->Data(dw - width); //  skip the alignment junk
 		}

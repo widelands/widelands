@@ -165,7 +165,7 @@ void Journal::read(SDLKey &v)
 	Uint32 vv;
 
 	m_playbackstream.read((char*)&vv, sizeof(Uint32));
-	v=(SDLKey)Little32(vv);
+	v = static_cast<SDLKey>(Little32(vv));
 }
 
 /**
@@ -180,7 +180,7 @@ void Journal::read(SDLMod &v)
 	Uint32 vv;
 
 	m_playbackstream.read((char*)&vv, sizeof(Uint32));
-	v=(SDLMod)Little32(vv);
+	v = static_cast<SDLMod>(Little32(vv));
 }
 
 /**

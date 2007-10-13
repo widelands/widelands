@@ -359,35 +359,23 @@ void Sound_Handler::load_one_fx
 (const char * const filename, const std::string fx_name)
 {
 	FileRead fr;
-	Mix_Chunk *m;
-
 	if (not fr.TryOpen(*g_fs, filename)) {
 		log("WARNING: Could not open %s for reading!\n", filename);
 		return;
 	}
 
-	m = RWopsify_MixLoadWAV(&fr);
-
-	if (m) {
+	if (Mix_Chunk * const m = RWopsify_MixLoadWAV(&fr)) {
 		//make sure that requested FXset exists
 
 		if (m_fxs.count(fx_name) == 0)
 			m_fxs[fx_name] = new FXset();
 
 		m_fxs[fx_name]->add_fx(m);
-	} else {
-		char *msg = (char *) malloc(1024);
-		snprintf
-		(msg,
-		 1024,
-		 "Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" failed: "
-		 "%s\n",
-		 filename,
-		 fx_name.c_str(),
-		 strerror(errno));
-		log(msg);
-		free(msg);
-	}
+	} else
+		log
+			("Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" "
+			 "failed: %s\n",
+			 filename, fx_name.c_str(), strerror(errno));
 }
 
 /** Calculate  the position of an effect in relation to the visible part of the

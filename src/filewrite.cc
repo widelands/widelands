@@ -66,7 +66,7 @@ void FileWrite::Data(const void *buf, const size_t size, const Pos pos) {
 		length = i+size;
 	}
 
-	memcpy((char*)data + i, buf, size);
+	memcpy(static_cast<char *>(data) + i, buf, size);
 }
 
 void FileWrite::Printf(const char *fmt, ...)

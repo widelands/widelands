@@ -146,7 +146,7 @@ void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, Requeriments * r)
 
 		if (!r or r->check(s->get_level(atrHP), s->get_level(atrAttack),
 		                   s->get_level(atrDefense), s->get_level(atrEvade)))
-			((Soldier*)m_worker)->mark(true);
+			dynamic_cast<Soldier &>(*m_worker).mark(true);
 
 	} else {
 		// Non-soldiers doesn't have any need to be marked (by now)

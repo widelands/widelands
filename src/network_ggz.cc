@@ -207,7 +207,7 @@ void NetGGZ::initcore(const char *hostname, const char *playername) {
 	ggzcore_login = true;
 	ggzcore_ready = false;
 
-	opt.flags = (GGZOptionFlags)(GGZ_OPT_EMBEDDED);
+	opt.flags = static_cast<GGZOptionFlags>(GGZ_OPT_EMBEDDED);
 	ret = ggzcore_init(opt);
 
 	ggzserver = ggzcore_server_new();

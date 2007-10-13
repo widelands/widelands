@@ -662,14 +662,13 @@ PlayerCommand (0, des.Unsigned8())
 
 void Cmd_DropSoldier::execute (Game* g)
 {
-	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->objects().get_object(serial);
-	Map_Object* sold = g->objects().get_object(soldier);
-
-	/* � Maybe we must check that the building is a training house ? */
-	if ((obj) && (sold) && (obj->get_type() >= Map_Object::BUILDING) && (((Worker*)sold)->get_worker_type() == Worker_Descr::SOLDIER)) {
-		player->drop_soldier(static_cast<PlayerImmovable*>(obj), static_cast<Soldier*>(sold));
-	}
+	if
+		(PlayerImmovable * const pi =
+		 dynamic_cast<PlayerImmovable *>(g->objects().get_object(serial)))
+		if
+			(Soldier * const s =
+			 dynamic_cast<Soldier *>(g->objects().get_object(soldier)))
+			g->player(get_sender()).drop_soldier(pi, s);
 }
 
 void Cmd_DropSoldier::serialize (StreamWrite & ser)

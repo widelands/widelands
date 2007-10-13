@@ -768,8 +768,12 @@ void Bob::movepath_update(Game* g, State* state)
 		forcemove = true;
 	}
 
-	int32_t tdelta = start_walk(g, (WalkingDir)dir,
-	                        state->diranims->get_animation(dir), forcemove);
+	int32_t tdelta =
+		start_walk
+		(g,
+		 static_cast<WalkingDir>(dir),
+		 state->diranims->get_animation(dir),
+		 forcemove);
 
 	if (tdelta < 0) {
 		molog("[movepath]: Can't walk.\n");
@@ -816,9 +820,11 @@ void Bob::start_task_forcemove(const int32_t dir, const DirAnimations & anims)
 void Bob::forcemove_update(Game* g, State* state)
 {
 	if (state->diranims) {
-		int32_t tdelta = start_walk(g, (WalkingDir)state->ivar1,
-		                        state->diranims->get_animation(state->ivar1),
-		                        true);
+		int32_t tdelta = start_walk
+			(g,
+			 static_cast<WalkingDir>(state->ivar1),
+			 state->diranims->get_animation(state->ivar1),
+			 true);
 
 		state->diranims = 0;
 		schedule_act(g, tdelta);

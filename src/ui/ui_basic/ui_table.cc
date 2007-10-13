@@ -322,7 +322,7 @@ Set the list alignment (only horizontal alignment works)
 */
 void Table<void *>::set_align(Align align)
 {
-	m_align = (Align)(align & Align_Horizontal);
+	m_align = static_cast<Align>(align & Align_Horizontal);
 }
 
 

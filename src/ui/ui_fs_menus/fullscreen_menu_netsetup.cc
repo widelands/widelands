@@ -121,7 +121,7 @@ bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
 	if (he==0)
 	    return false;
 
-	addr=((in_addr*) (he->h_addr_list[0]))->s_addr;
+	addr = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
 	port=htons(WIDELANDS_PORT);
 
 	return true;
