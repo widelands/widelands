@@ -38,9 +38,9 @@
 #include "event_set_visiblity.h"
 #include "wexception.h"
 
+namespace Event_Factory {
 
-static const int32_t nr_of_events=5;
-Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
+Event_Descr EVENT_DESCRIPTIONS[] = {
 	{"message_box", _("Message Box"), _("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user")},
 	{"move_view", _("Move View"), _("This Event centers the Players View on a certain field")},
 	{"unhide_area", _("Unhide Area"), _("This Event makes a user definable part of the map visible for a selectable user")},
@@ -56,8 +56,7 @@ Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
 /**
  * return the correct event for this id
  */
-Event* Event_Factory::get_correct_event(const char* id)
-{
+Event * get_correct_event(const char * id) {
 	if (strcmp("message_box",      id) == 0)
 		return new Event_Message_Box     ();
 	if (strcmp("move_view",        id) == 0)
@@ -85,39 +84,39 @@ Event* Event_Factory::get_correct_event(const char* id)
  * and let it be initalised through it.
  * if it fails, return zero/unmodified given event, elso return the created/modified event
  */
-Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Interactive* m_parent, Event* gevent)
+Event * make_event_with_option_dialog
+(const char * const id, Editor_Interactive & m_parent, Event * const gevent)
 {
 	Event* event=gevent;
 	if (!event)
 		event=get_correct_event(id);
 
 	int32_t retval;
-	std::string str = id;
-
-	if        (str == "message_box")    {
+	if        (strcmp("message_box",    id) == 0) {
 		Event_Message_Box_Option_Menu t
-			(m_parent, static_cast<Event_Message_Box *>(event));
+			(m_parent, dynamic_cast<Event_Message_Box    &>(*event));
 		retval = t.run();
-	} else if (str == "move_view")      {
+	} else if (strcmp("move_view",      id) == 0) {
 		Event_Move_View_Option_Menu t
-			(m_parent, static_cast<Event_Move_View *>(event));
+			(m_parent, dynamic_cast<Event_Move_View      &>(*event));
 		retval = t.run();
-	} else if (str == "unhide_area")    {
+	} else if (strcmp("unhide_area",    id) == 0) {
 		Event_Unhide_Area_Option_Menu t
-			(m_parent, static_cast<Event_Unhide_Area *>(event));
+			(m_parent, dynamic_cast<Event_Unhide_Area    &>(*event));
 		retval = t.run();
-	} else if (str == "conquer_area")   {
+	} else if (strcmp("conquer_area",   id) == 0) {
 		Event_Conquer_Area_Option_Menu t
-			(m_parent, static_cast<Event_Conquer_Area *>(event));
+			(m_parent, dynamic_cast<Event_Conquer_Area   &>(*event));
 		retval = t.run();
-	} else if (str == "allow_building") {
+	} else if (strcmp("allow_building", id) == 0) {
 		Event_Allow_Building_Option_Menu t
-			(m_parent, static_cast<Event_Allow_Building *>(event));
+			(m_parent, dynamic_cast<Event_Allow_Building &>(*event));
 		retval = t.run();
 	} else
 		throw wexception
 			("Event_Factory::make_event_with_option_dialog: Unknown event id "
-			 "found: %s", id);
+			 "found: %s",
+			 id);
 	if (retval)
 		return event;
 	if (!gevent) {
@@ -125,32 +124,14 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
 		return 0;
 	} else
 		return gevent;
-		// never here
-}
-
-
-/**
- * Get the correct event descriptions and names from the
- * id header
- */
-Event_Descr* Event_Factory::get_correct_event_descr(const char* id)
-{
-	std::string str = id;
-	for (uint32_t i = 0; i < Event_Factory::get_nr_of_available_events(); ++i)
-		if (EVENT_DESCRIPTIONS[i].id == str)
-			return &EVENT_DESCRIPTIONS[i];
-
-	assert(false); // never here
-	return 0;
 }
 
 
 /**
  * Get event description by number
  */
-Event_Descr* Event_Factory::get_event_descr(uint32_t id)
-{
-	assert(id<Event_Factory::get_nr_of_available_events());
+Event_Descr * get_event_descr(const uint32_t id) {
+	assert(id < get_nr_of_available_events());
 
 	return &EVENT_DESCRIPTIONS[id];
 }
@@ -159,7 +140,8 @@ Event_Descr* Event_Factory::get_event_descr(uint32_t id)
 /**
  * return the nummer of available events
  */
-const uint32_t Event_Factory::get_nr_of_available_events()
-{
-	return nr_of_events;
+const uint32_t get_nr_of_available_events() {
+	return sizeof(EVENT_DESCRIPTIONS) / sizeof(*EVENT_DESCRIPTIONS);
 }
+
+};

@@ -36,14 +36,15 @@ template <typename T> struct Button;
  * before it can return
  */
 struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
-      Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive*, TriggerConditional*, EventChain*);
-      ~Editor_Event_Menu_Edit_TriggerConditional();
+	Editor_Event_Menu_Edit_TriggerConditional
+		(Editor_Interactive &, TriggerConditional *, EventChain *);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
       TriggerConditional* get_trigcond() {return m_given_cond;}
 
 private:
+	Editor_Interactive & eia();
 	void clicked_cancel     ();
 	void clicked_ok         ();
 	void clicked_operator   (const TriggerConditional_Factory::TokenNames);
@@ -58,7 +59,6 @@ private:
 
       UI::Listselect<Trigger                           &> *m_trigger_list;
       UI::Listselect<TriggerConditional_Factory::Token &> *m_construction;
-      Editor_Interactive *m_parent;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_insert_btn;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_delete_btn;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvup_btn;

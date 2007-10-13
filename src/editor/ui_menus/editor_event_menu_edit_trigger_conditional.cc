@@ -32,12 +32,19 @@
 #include "trigger/trigger.h"
 #include "trigger/trigger_conditional.h"
 
+
+inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
-(Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain)
+(Editor_Interactive &       parent,
+ TriggerConditional * const cond,
+ EventChain         *       chain)
 :
-UI::Window(parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
-m_parent(parent),
-m_given_cond(cond),
+UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
+m_given_cond (cond),
 m_event_chain(chain)
 {
 
@@ -176,7 +183,7 @@ m_event_chain(chain)
    m_trigger_list=new UI::Listselect<Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
-	const MapTriggerManager & mtm = parent->egbase().map().get_mtm();
+	const MapTriggerManager & mtm = parent.egbase().map().get_mtm();
 	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 		Trigger & tr = mtm.get_trigger_by_nr(i);
@@ -225,11 +232,6 @@ m_event_chain(chain)
    center_to_parent();
 }
 
-/*
- * cleanup
- */
-Editor_Event_Menu_Edit_TriggerConditional::~Editor_Event_Menu_Edit_TriggerConditional() {
-}
 
 /*
  * Handle mouseclick
@@ -263,7 +265,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
          end_modal(1);
 		} catch (TriggerConditional_Factory::SyntaxError err) {
 			UI::Modal_Message_Box mb
-				(m_parent,
+				(&eia(),
 				 _("Syntax Error"),
 				 _("Your conditional contains at least one syntax error. Please "
 				   "correct!\n"),

@@ -74,7 +74,7 @@ m_pit     (pit)
    int32_t xpos=xstart;
 	uint32_t cur_x = immovables_in_row;
 	for (Immovable_Descr::Index i = 0; i < nr_immovables; ++cur_x, ++i) {
-		UI::Box * box;
+		UI::Box * box = 0;
 		if (cur_x==immovables_in_row) {
          cur_x=0;
          ypos=ystart;

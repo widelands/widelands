@@ -32,11 +32,11 @@ template <typename T> struct Listselect;
 };
 
 struct Editor_Event_Menu : public UI::UniqueWindow {
-      Editor_Event_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
+	Editor_Event_Menu(Editor_Interactive &, UI::UniqueWindow::Registry *);
       virtual ~Editor_Event_Menu();
 
 private:
-      Editor_Interactive *m_parent;
+	Editor_Interactive & eia();
 
 	UI::Listselect<Event*      > *m_event_list;
 	UI::Listselect<EventChain* > *m_eventchain_list;

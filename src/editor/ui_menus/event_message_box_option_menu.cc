@@ -36,12 +36,16 @@
 #include "ui_window.h"
 
 
+inline Editor_Interactive & Event_Message_Box_Option_Menu::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
-(Editor_Interactive* parent, Event_Message_Box* event)
+(Editor_Interactive & parent, Event_Message_Box & event)
 :
-UI::Window(parent, 0, 0, 430, 400, _("Message Box Event Options").c_str()),
-m_event(event),
-m_parent(parent)
+UI::Window(&parent, 0, 0, 430, 400, _("Message Box Event Options").c_str()),
+m_event   (event)
 {
 
    const int32_t offsx=5;
@@ -49,7 +53,7 @@ m_parent(parent)
    const int32_t spacing=5;
    int32_t posx=offsx;
    int32_t posy=offsy;
-   m_nr_buttons=m_event->get_nr_buttons();
+   m_nr_buttons=m_event.get_nr_buttons();
    m_ls_selected=0;
 
    m_buttons[0].name=_("Continue");
@@ -62,26 +66,26 @@ m_parent(parent)
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
-	m_name->set_text(event->name().c_str());
+	m_name->set_text(event.name().c_str());
    posy+= 20+spacing;
 
    // Modal cb
    new UI::Textarea(this, get_inner_w()/2+spacing, posy, 150, 20, _("Is Modal: "), Align_CenterLeft);
    m_is_modal=new UI::Checkbox(this, get_inner_w()-STATEBOX_WIDTH-spacing, posy);
-   m_is_modal->set_state(m_event->get_is_modal());
+	m_is_modal->set_state(m_event.get_is_modal());
 
    posy+=20+spacing;
 
    // Window Title
    new UI::Textarea(this, spacing, posy, 50, 20, _("Window Title:"), Align_CenterLeft);
    m_window_title=new UI::Edit_Box(this, spacing+100, posy, get_inner_w()-100-2*spacing, 20, 0, 2);
-   m_window_title->set_text(m_event->get_window_title());
+	m_window_title->set_text(m_event.get_window_title());
 
    // Text
    posy+=20+spacing;
    new UI::Textarea(this, spacing, posy, 50, 20, _("Text:"), Align_CenterLeft);
    posy+=20+spacing;
-   m_text=new UI::Multiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, event->get_text());
+   m_text=new UI::Multiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, event.get_text());
 
    posy+=80+spacing;
 
@@ -155,20 +159,20 @@ m_parent(parent)
 		 &Event_Message_Box_Option_Menu::end_modal, this, 0,
 		 _("Cancel"));
 
-	const MapTriggerManager & mtm = m_parent->egbase().map().get_mtm();
+	const MapTriggerManager & mtm = parent.egbase().map().get_mtm();
 	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 		if (strcmp(mtm.get_trigger_by_nr(i).get_id(), "null") == 0)
          m_null_triggers.push_back(i);
 	}
 
-	for (int32_t i = 0; i < m_event->get_nr_buttons(); ++i) {
-      m_buttons[i].name=m_event->get_button_name(i);
+	for (int32_t i = 0; i < m_event.get_nr_buttons(); ++i) {
+		m_buttons[i].name = m_event.get_button_name(i);
 		for (size_t j = 0; j < m_null_triggers.size(); ++j) {
          // Get this triggers index
          int32_t foundidx = -1;
 			for (MapTriggerManager::Index x = 0; x < nr_triggers; ++x)
-				if (&mtm.get_trigger_by_nr(x) == m_event->get_button_trigger(i)) {
+				if (&mtm.get_trigger_by_nr(x) == m_event.get_button_trigger(i)) {
                foundidx = x;
                break;
 				}
@@ -182,11 +186,6 @@ m_parent(parent)
    update();
 }
 
-/*
- * cleanup
- */
-Event_Message_Box_Option_Menu::~Event_Message_Box_Option_Menu() {
-}
 
 /*
  * Handle mouseclick
@@ -203,24 +202,24 @@ bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int32_t, in
 
 
 void Event_Message_Box_Option_Menu::clicked_ok() {
-            if (m_name->get_text())
-               m_event->set_name(m_name->get_text());
-            if (m_text->get_text().c_str())
-               m_event->set_text(m_text->get_text().c_str());
-            if (m_window_title->get_text())
-               m_event->set_window_title(m_window_title->get_text());
-            m_event->set_is_modal(m_is_modal->get_state());
-            m_event->set_nr_buttons(m_nr_buttons);
-	const MapTriggerManager & mtm = m_parent->egbase().map().get_mtm();
+	if (m_name->get_text())
+		m_event.set_name(m_name->get_text());
+	if (m_text->get_text().c_str())
+		m_event.set_text(m_text->get_text().c_str());
+	if (m_window_title->get_text())
+		m_event.set_window_title(m_window_title->get_text());
+	m_event.set_is_modal(m_is_modal->get_state());
+	m_event.set_nr_buttons(m_nr_buttons);
+	const MapTriggerManager & mtm = eia().egbase().map().get_mtm();
 	for (uint32_t b = 0; b < m_nr_buttons; ++b) {
-               m_event->set_button_name(b, m_buttons[b].name);
-		if (m_buttons[b].trigger != -1) {
-                  m_event->set_button_trigger
-                     (b,
-                      static_cast<Trigger_Null*>
-                      (&mtm.get_trigger_by_nr
-                       (m_null_triggers[m_buttons[b].trigger])));
-		} else m_event->set_button_trigger(b, 0);
+		m_event.set_button_name(b, m_buttons[b].name);
+		m_event.set_button_trigger
+			(b,
+			 m_buttons[b].trigger == -1 ?
+			 0
+			 :
+			 dynamic_cast<Trigger_Null *>
+			 (&mtm.get_trigger_by_nr(m_null_triggers[m_buttons[b].trigger])));
 	}
 	end_modal(1);
 }
@@ -282,7 +281,7 @@ void Event_Message_Box_Option_Menu::update() {
 			(m_buttons[m_ls_selected].trigger == -1 ?
 			 "none"
 			 :
-			 m_parent->egbase().map().get_mtm().get_trigger_by_nr
+			 eia().egbase().map().get_mtm().get_trigger_by_nr
 			 (m_null_triggers[m_buttons[m_ls_selected].trigger]).get_name());
 	} else {
       m_current_trigger_ta->set_text("---");

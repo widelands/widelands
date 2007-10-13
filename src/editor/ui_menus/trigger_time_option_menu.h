@@ -35,8 +35,7 @@ struct Edit_Box;
  * before it can return
  */
 struct Trigger_Time_Option_Menu : public UI::Window {
-      Trigger_Time_Option_Menu(Editor_Interactive*, Trigger_Time*);
-      ~Trigger_Time_Option_Menu();
+	Trigger_Time_Option_Menu(Editor_Interactive &, Trigger_Time &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
@@ -46,8 +45,7 @@ private:
       void clicked(int32_t);
       void update();
 
-      Trigger_Time* m_trigger;
-      Editor_Interactive* m_parent;
+	Trigger_Time & m_trigger;
       UI::Edit_Box* m_name;
       UI::Textarea* m_textareas[6];
       int32_t         m_values[6];

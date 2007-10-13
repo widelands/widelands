@@ -31,14 +31,17 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 
-#include <stdio.h>
+
+inline Editor_Interactive & Event_Move_View_Option_Menu::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
 
 
-Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* parent, Event_Move_View* event) :
-UI::Window(parent, 0, 0, 180, 200, _("Move View Event Options").c_str()),
+Event_Move_View_Option_Menu::Event_Move_View_Option_Menu
+(Editor_Interactive & parent, Event_Move_View & event) :
+UI::Window(&parent, 0, 0, 180, 200, _("Move View Event Options").c_str()),
 m_event   (event),
-m_parent  (parent),
-m_location(event->get_coords())
+m_location(event.get_coords())
 {
    const int32_t offsx=5;
    const int32_t offsy=25;
@@ -49,7 +52,7 @@ m_location(event->get_coords())
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text(event->name().c_str());
+	m_name->set_text(event.name().c_str());
    posy+=20+spacing;
 
    // Set Field Buttons
@@ -175,11 +178,6 @@ m_location(event->get_coords())
    update();
 }
 
-/*
- * cleanup
- */
-Event_Move_View_Option_Menu::~Event_Move_View_Option_Menu() {
-}
 
 /*
  * Handle mouseclick
@@ -196,8 +194,8 @@ bool Event_Move_View_Option_Menu::handle_mouserelease(const Uint8, int32_t, int3
 
 
 void Event_Move_View_Option_Menu::clicked_ok() {
-	if (m_name->get_text()) m_event->set_name(m_name->get_text());
-	m_event->set_coords(m_location);
+	if (m_name->get_text()) m_event.set_name(m_name->get_text());
+	m_event.set_coords(m_location);
 	end_modal(1);
 }
 
@@ -224,7 +222,7 @@ void Event_Move_View_Option_Menu::clicked(int32_t i) {
  * update function: update all UI elements
  */
 void Event_Move_View_Option_Menu::update() {
-	const Extent extent = m_parent->egbase().map().extent();
+	const Extent extent = eia().egbase().map().extent();
 	if (extent.w <= static_cast<Uint16>(m_location.x))
 		m_location.x = extent.w - 1;
 	if (extent.h <= static_cast<Uint16>(m_location.y))

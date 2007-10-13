@@ -37,14 +37,14 @@ struct Edit_Box;
  * before it can return
  */
 struct Editor_Event_Menu_Edit_EventChain : public UI::Window {
-      Editor_Event_Menu_Edit_EventChain(Editor_Interactive*, EventChain*);
-      ~Editor_Event_Menu_Edit_EventChain();
+	Editor_Event_Menu_Edit_EventChain(Editor_Interactive &, EventChain *);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
       void think();
 
 private:
+	Editor_Interactive & eia();
 	void clicked_ok                      ();
 	void clicked_new_event               ();
 	void clicked_edit_trigger_contitional();
@@ -59,7 +59,6 @@ private:
 
 	UI::Listselect<Event &> *m_available_events;
 	UI::Listselect<Event &> *m_events;
-      Editor_Interactive *m_parent;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_insert_btn;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_delete_btn;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvup_btn;

@@ -30,9 +30,11 @@
 #include "ui_editbox.h"
 
 
-Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, Trigger_Null* trigger) :
-UI::Window(parent, 0, 0, 164, 100, _("Null Trigger Options").c_str()),
-m_parent(parent)
+Trigger_Null_Option_Menu::Trigger_Null_Option_Menu
+(Editor_Interactive & parent, Trigger_Null & trigger)
+:
+UI::Window(&parent, 0, 0, 164, 100, _("Null Trigger Options").c_str()),
+m_trigger (trigger)
 {
    const int32_t offsx=5;
    const int32_t offsy=25;
@@ -40,11 +42,9 @@ m_parent(parent)
    int32_t posx=offsx;
    int32_t posy=offsy;
 
-   m_trigger=trigger;
-
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
-   m_name->set_text(trigger->get_name());
+	m_name->set_text(trigger.get_name());
 
    // Buttons
    posx=(get_inner_w()/2)-60-spacing;
@@ -69,11 +69,6 @@ m_parent(parent)
    center_to_parent();
 }
 
-/*
- * cleanup
- */
-Trigger_Null_Option_Menu::~Trigger_Null_Option_Menu() {
-}
 
 /*
  * Handle mouseclick
@@ -93,6 +88,6 @@ bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t
  */
 void Trigger_Null_Option_Menu::clicked_ok() {
       if (m_name->get_text())
-         m_trigger->set_name(m_name->get_text());
+         m_trigger.set_name(m_name->get_text());
       end_modal(1);
 }

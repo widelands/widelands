@@ -33,11 +33,18 @@
 
 #include <stdio.h>
 
-Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive* parent, Event_Unhide_Area* event) :
-UI::Window(parent, 0, 0, 180, 280, _("Unhide Area Event Options").c_str()),
+
+inline Editor_Interactive & Event_Unhide_Area_Option_Menu::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
+Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu
+(Editor_Interactive & parent, Event_Unhide_Area & event)
+:
+UI::Window   (&parent, 0, 0, 180, 280, _("Unhide Area Event Options").c_str()),
 m_event   (event),
-m_parent     (parent),
-m_player_area(event->m_player_area)
+m_player_area(event.m_player_area)
 {
    const int32_t offsx=5;
    const int32_t offsy=25;
@@ -49,7 +56,7 @@ m_player_area(event->m_player_area)
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-	m_name->set_text(event->name().c_str());
+	m_name->set_text(event.name().c_str());
    posy+=20+spacing;
 
    // Set Field Buttons
@@ -244,11 +251,6 @@ m_player_area(event->m_player_area)
    update();
 }
 
-/*
- * cleanup
- */
-Event_Unhide_Area_Option_Menu::~Event_Unhide_Area_Option_Menu() {
-}
 
 /*
  * Handle mouseclick
@@ -265,8 +267,8 @@ bool Event_Unhide_Area_Option_Menu::handle_mouserelease(const Uint8, int32_t, in
 
 
 void Event_Unhide_Area_Option_Menu::clicked_ok() {
-	if (m_name->get_text()) m_event->set_name(m_name->get_text());
-	m_event->m_player_area = m_player_area;
+	if (m_name->get_text()) m_event.set_name(m_name->get_text());
+	m_event.m_player_area = m_player_area;
 	end_modal(1);
 }
 
@@ -315,7 +317,7 @@ void Event_Unhide_Area_Option_Menu::clicked(int32_t i) {
  * update function: update all UI elements
  */
 void Event_Unhide_Area_Option_Menu::update() {
-	const Map & map = m_parent->egbase().map();
+	const Map & map = eia().egbase().map();
 	const Extent extent = map.extent();
 	if (extent.w <= static_cast<Uint16>(m_player_area.x))
 		m_player_area.x = extent.w  - 1;

@@ -37,12 +37,18 @@
 #include <stdio.h>
 
 
+inline Editor_Interactive & Event_Allow_Building_Option_Menu::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
 #define spacing 5
-Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :
-UI::Window(parent, 0, 0, 200, 280, _("Allow Building Event Options").c_str()),
+Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu
+(Editor_Interactive & parent, Event_Allow_Building & event)
+:
+UI::Window(&parent, 0, 0, 200, 280, _("Allow Building Event Options").c_str()),
 m_event(event),
-m_parent(parent),
-m_player(m_event->get_player()),
+m_player  (m_event.get_player()),
 m_building(-1) //  FIXME negative value!
 {
    const int32_t offsx=5;
@@ -53,7 +59,7 @@ m_building(-1) //  FIXME negative value!
    if (m_player<1) m_player=1;
 
    // Fill the building infos
-	Editor_Game_Base & editor = m_parent->egbase();
+	Editor_Game_Base & editor = eia().egbase();
 	if
 		(const Tribe_Descr * const tribe = editor.get_tribe
 		 (editor.map().get_scenario_player_tribe(m_player).c_str()))
@@ -63,7 +69,7 @@ m_building(-1) //  FIXME negative value!
          Building_Descr* b=tribe->get_building_descr(i);
          if (!b->get_buildable() && !b->get_enhanced_building()) continue;
 			const std::string & name = b->name();
-			if (name == m_event->get_building()) m_building = m_buildings.size();
+			if (name == m_event.get_building()) m_building = m_buildings.size();
          m_buildings.push_back(name);
 		}
 	}
@@ -71,7 +77,7 @@ m_building(-1) //  FIXME negative value!
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text(event->name().c_str());
+	m_name->set_text(event.name().c_str());
    posy+=20+spacing;
 
    // Player
@@ -118,7 +124,7 @@ m_building(-1) //  FIXME negative value!
    // Enable
    new UI::Textarea(this, spacing, posy, 150, 20, _("Allow Building: "), Align_CenterLeft);
    m_allow=new UI::Checkbox(this, spacing+150, posy);
-   m_allow->set_state(m_event->get_allow());
+	m_allow->set_state(m_event.get_allow());
    posy+=20+spacing;
 
    // Ok/Cancel Buttons
@@ -170,16 +176,16 @@ bool Event_Allow_Building_Option_Menu::handle_mouserelease
 
 void Event_Allow_Building_Option_Menu::clicked_ok() {
             if (m_name->get_text())
-               m_event->set_name(m_name->get_text());
-            if (m_event->get_player()!=m_player && m_event->get_player()!=-1)
-               m_parent->unreference_player_tribe(m_event->get_player(), m_event);
-	if (m_event->get_player()!=m_player) {
-               m_event->set_player(m_player);
-               m_parent->reference_player_tribe(m_player, m_event);
+               m_event.set_name(m_name->get_text());
+	if (m_event.get_player()!=m_player && m_event.get_player() != -1)
+		eia().unreference_player_tribe(m_event.get_player(), &m_event);
+	if (m_event.get_player()!=m_player) {
+		m_event.set_player(m_player);
+		eia().reference_player_tribe(m_player, &m_event);
 	}
-            m_event->set_building(m_buildings[m_building].c_str());
-            m_event->set_allow(m_allow->get_state());
-            m_parent->set_need_save(true);
+	m_event.set_building(m_buildings[m_building].c_str());
+	m_event.set_allow(m_allow->get_state());
+	eia().set_need_save(true);
             end_modal(1);
 }
 
@@ -200,7 +206,7 @@ void Event_Allow_Building_Option_Menu::clicked(int32_t i) {
  */
 void Event_Allow_Building_Option_Menu::update() {
    if (m_player<=0) m_player=1;
-	const Player_Number nr_players = m_parent->egbase().map().get_nrplayers();
+	const Player_Number nr_players = eia().egbase().map().get_nrplayers();
 	if (m_player > nr_players) m_player = nr_players;
 
    if (m_building<0) m_building=0;

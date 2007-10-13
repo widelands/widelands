@@ -208,7 +208,7 @@ void Editor_Interactive::toggle_variablesmenu() {
 
 void Editor_Interactive::toggle_eventmenu() {
 	if (m_eventmenu.window) delete m_eventmenu.window;
-	else new Editor_Event_Menu(this, &m_eventmenu);
+	else new Editor_Event_Menu(*this, &m_eventmenu);
 }
 
 void Editor_Interactive::map_clicked() {

@@ -34,9 +34,14 @@
 #include "ui_window.h"
 
 
-Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
-UI::Window(parent, 0, 0, 400, 240, _("New Trigger").c_str()),
-m_parent(parent)
+inline Editor_Interactive & Editor_Event_Menu_New_Trigger::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
+Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
+(Editor_Interactive & parent)
+: UI::Window(&parent, 0, 0, 400, 240, _("New Trigger").c_str())
 {
 
    const int32_t offsx=5;
@@ -88,11 +93,6 @@ m_parent(parent)
    center_to_parent();
 }
 
-/*
- * cleanup
- */
-Editor_Event_Menu_New_Trigger::~Editor_Event_Menu_New_Trigger() {
-}
 
 /*
  * Handle mouseclick
@@ -115,9 +115,9 @@ void Editor_Event_Menu_New_Trigger::clicked_ok() {
 	if
 		(Trigger * const trig =
 		 Trigger_Factory::make_trigger_with_option_dialog
-		 (m_trigger_list->get_selected().id.c_str(), m_parent, 0))
+		 (m_trigger_list->get_selected().id.c_str(), eia(), 0))
 	{
-		m_parent->egbase().map().get_mtm().register_new_trigger(trig);
+		eia().egbase().map().get_mtm().register_new_trigger(trig);
 		end_modal(1);
 	}
 }

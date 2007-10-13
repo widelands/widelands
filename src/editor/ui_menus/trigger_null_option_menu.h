@@ -31,8 +31,7 @@ namespace UI {struct Edit_Box;};
  * before it can return
  */
 struct Trigger_Null_Option_Menu : public UI::Window {
-      Trigger_Null_Option_Menu(Editor_Interactive*, Trigger_Null*);
-      ~Trigger_Null_Option_Menu();
+	Trigger_Null_Option_Menu(Editor_Interactive &, Trigger_Null &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
@@ -40,8 +39,7 @@ struct Trigger_Null_Option_Menu : public UI::Window {
 private:
 	void clicked_ok();
 
-      Trigger_Null* m_trigger;
-      Editor_Interactive* m_parent;
+	Trigger_Null & m_trigger;
       UI::Edit_Box* m_name;
 };
 

@@ -34,18 +34,14 @@ struct Trigger_Descr {
    const std::string descr;
 };
 
-/*
- * This class returns the correct descriptions,
- * ids and creates the correct option dialog and (of course) trigger
- * for each trigger-id
- */
-struct Trigger_Factory {
-      static Trigger* get_correct_trigger(const char* id);
-      static Trigger* make_trigger_with_option_dialog(const char* id, Editor_Interactive*, Trigger*);
-
-      static Trigger_Descr* get_correct_trigger_descr(const char* id);
-      static const uint32_t get_nr_of_available_triggers();
-      static Trigger_Descr* get_trigger_descr(uint32_t);
+/// Returns the correct descriptions, ids and creates the correct option dialog
+/// and (of course) trigger for each trigger-id.
+namespace Trigger_Factory {
+Trigger * get_correct_trigger(const char * id);
+Trigger * make_trigger_with_option_dialog
+	(const char * id, Editor_Interactive &, Trigger *);
+size_t get_nr_of_available_triggers();
+Trigger_Descr * get_trigger_descr(uint32_t);
 };
 
 #endif

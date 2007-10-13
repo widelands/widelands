@@ -38,19 +38,19 @@ struct Textarea;
  * before it can return
  */
 struct Event_Allow_Building_Option_Menu : public UI::Window {
-      Event_Allow_Building_Option_Menu(Editor_Interactive*, Event_Allow_Building*);
+	Event_Allow_Building_Option_Menu(Editor_Interactive &, Event_Allow_Building &);
       ~Event_Allow_Building_Option_Menu();
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
+	Editor_Interactive & eia();
       void update();
 	void clicked_ok();
       void clicked(int32_t);
 
-      Event_Allow_Building* m_event;
-      Editor_Interactive* m_parent;
+	Event_Allow_Building & m_event;
       UI::Textarea *m_player_ta, *m_building_ta;
       UI::Checkbox* m_allow;
       UI::Edit_Box* m_name;

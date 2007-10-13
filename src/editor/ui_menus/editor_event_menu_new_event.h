@@ -35,20 +35,19 @@ struct Multiline_Textarea;
  * before it can return
  */
 struct Editor_Event_Menu_New_Event : public UI::Window {
-      Editor_Event_Menu_New_Event(Editor_Interactive*);
-      ~Editor_Event_Menu_New_Event();
+	Editor_Event_Menu_New_Event(Editor_Interactive &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
+	Editor_Interactive & eia();
 	void clicked_ok();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 
 	UI::Listselect<Event_Descr &> * m_event_list;
 	UI::Multiline_Textarea        * m_description;
-      Editor_Interactive* m_parent;
 	UI::Button<Editor_Event_Menu_New_Event> * m_ok_button;
 };
 

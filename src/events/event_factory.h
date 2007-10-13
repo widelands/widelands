@@ -31,18 +31,14 @@ struct Event_Descr {
 	const std::string descr;
 };
 
-/**
- * This class returns the correct descriptions,
- * ids and creates the correct option dialog and (of course) event
- * for each event-id
- */
-struct Event_Factory {
-	static Event* get_correct_event(const char* id);
-	static Event* make_event_with_option_dialog(const char* id, Editor_Interactive*, Event*);
-
-	static Event_Descr* get_correct_event_descr(const char* id);
-	static Event_Descr* get_event_descr(uint32_t id);
-	static const uint32_t get_nr_of_available_events();
+/// Returns the correct descriptions, ids and creates the correct option dialog
+/// and (of course) event for each event-id.
+namespace Event_Factory {
+Event * get_correct_event(const char* id);
+Event * make_event_with_option_dialog
+	(const char * id, Editor_Interactive &, Event *);
+Event_Descr * get_event_descr(uint32_t id);
+const uint32_t get_nr_of_available_events();
 };
 
 #endif

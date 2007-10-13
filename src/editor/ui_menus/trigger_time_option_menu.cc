@@ -31,9 +31,11 @@
 #include "ui_window.h"
 
 
-Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, Trigger_Time* trigger) :
-UI::Window(parent, 0, 0, 164, 180, _("Trigger Option Menu").c_str()),
-m_parent(parent)
+Trigger_Time_Option_Menu::Trigger_Time_Option_Menu
+(Editor_Interactive & parent, Trigger_Time & trigger)
+:
+UI::Window(&parent, 0, 0, 164, 180, _("Trigger Option Menu").c_str()),
+m_trigger (trigger)
 {
    const int32_t offsx=5;
    const int32_t offsy=25;
@@ -43,8 +45,7 @@ m_parent(parent)
    int32_t posx=offsx;
    int32_t posy=offsy;
 
-   m_trigger=trigger;
-   int32_t wait_time=trigger->get_wait_time();
+	int32_t wait_time = trigger.get_wait_time();
    m_values[0]=(wait_time/3600)/10; // hours
    m_values[1]=(wait_time/3600)%10;
    wait_time-=(wait_time/3600)*3600;
@@ -56,7 +57,7 @@ m_parent(parent)
 
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
-   m_name->set_text(trigger->get_name());
+	m_name->set_text(trigger.get_name());
 
    posy+=20+spacing;
 
@@ -213,11 +214,6 @@ m_parent(parent)
    update();
 }
 
-/*
- * cleanup
- */
-Trigger_Time_Option_Menu::~Trigger_Time_Option_Menu() {
-}
 
 /*
  * Handle mousepress/-release
@@ -228,20 +224,21 @@ Trigger_Time_Option_Menu::~Trigger_Time_Option_Menu() {
  * We are not draggable.
  */
 bool Trigger_Time_Option_Menu::handle_mousepress(const Uint8 btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {clicked(0); return true;} return false;}
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Trigger_Time_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 
 void Trigger_Time_Option_Menu::clicked_ok() {
-      int32_t hours=m_values[0]*10+m_values[1];
-      int32_t minutes=m_values[2]*10+m_values[3];
-      int32_t seconds=m_values[4]*10+m_values[5];
-      int32_t total=hours*3600+minutes*60+seconds;
-      m_trigger->set_wait_time(total);
-      if (m_name->get_text())
-         m_trigger->set_name(m_name->get_text());
-      end_modal(1);
+	m_trigger.set_wait_time
+		((m_values[0] * 10 + m_values[1]) * 3600
+		 +
+		 (m_values[2] * 10 + m_values[3]) * 60
+		 +
+		 (m_values[4] * 10 + m_values[5]));
+	if (m_name->get_text())
+		m_trigger.set_name(m_name->get_text());
+	end_modal(1);
 }
 
 

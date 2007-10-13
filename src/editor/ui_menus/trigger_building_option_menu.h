@@ -39,18 +39,18 @@ struct Textarea;
  * before it can return
  */
 struct Trigger_Building_Option_Menu : public UI::Window {
-      Trigger_Building_Option_Menu(Editor_Interactive*, Trigger_Building*);
+	Trigger_Building_Option_Menu(Editor_Interactive &, Trigger_Building &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
+	Editor_Interactive & eia();
       void update();
 	void clicked_ok();
       void clicked(int32_t);
 
-      Trigger_Building* m_trigger;
-      Editor_Interactive* m_parent;
+	Trigger_Building & m_trigger;
       UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta, *m_count_ta, *m_building_ta;
       UI::Edit_Box* m_name;
 	Player_Area<Area<FCoords> > m_player_area;

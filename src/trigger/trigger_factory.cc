@@ -29,9 +29,9 @@
 #include "trigger_building_option_menu.h"
 #include "wexception.h"
 
+namespace Trigger_Factory {
 
-static const int32_t nr_of_triggers=3;
-Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
+Trigger_Descr TRIGGER_DESCRIPTIONS[] = {
 	{"time", _("Time Trigger"), _("This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events")},
 	{"null", _("Null Trigger"), _("This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers")},
 	{"building", _("Building Trigger"), _("This trigger gets set when a number of a building type of one player is available in an area.")},
@@ -42,16 +42,13 @@ Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
 /*
  * return the correct trigger for this id
  */
-Trigger* Trigger_Factory::get_correct_trigger(const char* id) {
+Trigger * get_correct_trigger(const char * const id) {
 	if (strcmp("time",     id) == 0) return new Trigger_Time    ();
 	if (strcmp("null",     id) == 0) return new Trigger_Null    ();
 	if (strcmp("building", id) == 0) return new Trigger_Building();
 	throw wexception
 		("Trigger_Factory::get_correct_trigger: Unknown trigger id found: %s",
 		 id);
-
-   // never here
-   return 0;
 }
 
 /*
@@ -60,23 +57,27 @@ Trigger* Trigger_Factory::get_correct_trigger(const char* id) {
  * and let it be initalised through it.
  * if it fails, return zero/unmodified given trigger, elso return the created/modified trigger
  */
-Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor_Interactive* m_parent, Trigger* gtrig) {
+Trigger * make_trigger_with_option_dialog
+(const char         * const id,
+ Editor_Interactive &       parent,
+ Trigger            * const gtrig)
+{
    Trigger* trig=gtrig;
    if (!trig)
       trig=get_correct_trigger(id);
 
 	int32_t retval;
-   std::string str = id;
-	if        (str == "time") {
+	if        (strcmp(id, "time")     == 0) {
 		Trigger_Time_Option_Menu t
-			(m_parent, static_cast<Trigger_Time *>(trig));
+			(parent, dynamic_cast<Trigger_Time     &>(*trig));
 		retval = t.run();
-	} else if (str == "null") {
-		Trigger_Null_Option_Menu t(m_parent, static_cast<Trigger_Null*>(trig));
+	} else if (strcmp(id, "null")     == 0) {
+		Trigger_Null_Option_Menu t
+			(parent, dynamic_cast<Trigger_Null     &>(*trig));
 		retval = t.run();
-	} else if (str == "building") {
+	} else if (strcmp(id, "building") == 0) {
 		Trigger_Building_Option_Menu t
-			(m_parent, static_cast<Trigger_Building*>(trig));
+			(parent, dynamic_cast<Trigger_Building &>(*trig));
 		retval = t.run();
 	} else
 		throw wexception
@@ -88,32 +89,16 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
    if (!gtrig) {
       delete trig;
       return 0;
-	} else return gtrig;
-   // never here
+	} else
+		return gtrig;
 }
 
-/*
- * Get the correct trigger descriptions and names from the
- * id header
- */
-Trigger_Descr* Trigger_Factory::get_correct_trigger_descr(const char* id) {
-   std::string str = id;
-	for
-		(uint32_t i = 0;
-		 i < Trigger_Factory::get_nr_of_available_triggers();
-		 ++i)
-      if (TRIGGER_DESCRIPTIONS[i].id == str)
-         return &TRIGGER_DESCRIPTIONS[i];
-
-	assert(false); // never here
-   return 0;
-}
 
 /*
  * Get the trigger descriptions
  */
-Trigger_Descr* Trigger_Factory::get_trigger_descr(uint32_t id) {
-   assert(id < Trigger_Factory::get_nr_of_available_triggers());
+Trigger_Descr * get_trigger_descr(uint32_t id) {
+	assert(id < get_nr_of_available_triggers());
 
    return &TRIGGER_DESCRIPTIONS[id];
 }
@@ -122,6 +107,8 @@ Trigger_Descr* Trigger_Factory::get_trigger_descr(uint32_t id) {
 /*
  * return the nummer of available triggers
  */
-const uint32_t Trigger_Factory::get_nr_of_available_triggers() {
-   return nr_of_triggers;
+size_t get_nr_of_available_triggers() {
+	return sizeof(TRIGGER_DESCRIPTIONS) / sizeof(*TRIGGER_DESCRIPTIONS);
 }
+
+};

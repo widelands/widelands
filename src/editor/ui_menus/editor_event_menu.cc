@@ -44,17 +44,16 @@
 
 #include <sstream>
 
-/*
-===============
-Editor_Event_Menu::Editor_Event_Menu
 
-Create all the buttons etc...
-===============
-*/
-Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
+inline Editor_Interactive & Editor_Event_Menu::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
+Editor_Event_Menu::Editor_Event_Menu
+(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
 :
-UI::UniqueWindow(parent, registry, 620, 400, _("Event Menu")),
-m_parent        (parent)
+UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 {
    const int32_t offsx=5;
    const int32_t offsy=25;
@@ -199,7 +198,7 @@ Editor_Event_Menu::~Editor_Event_Menu()
  * update all lists and stuff
  */
 void Editor_Event_Menu::update() {
-	const Map & map = m_parent->egbase().map();
+	const Map & map = eia().egbase().map();
 
 	m_trigger_list->clear();
 	{
@@ -255,11 +254,11 @@ void Editor_Event_Menu::update() {
 
 void Editor_Event_Menu::clicked_new_event() {
       // Create the event if needed
-	Editor_Event_Menu_New_Event ntm(m_parent);
+	Editor_Event_Menu_New_Event ntm(eia());
 	if (ntm.run()) {
          update();
-         m_parent->set_need_save(true);
-		}
+		eia().set_need_save(true);
+	}
 }
 
 
@@ -268,9 +267,9 @@ void Editor_Event_Menu::clicked_del_event() {
 	const Event::EventReferencerMap & event_referencers =
 		event.get_referencers();
 	if (event_referencers.empty()) {
-		m_parent->egbase().map().get_mem().delete_event(event.name().c_str());
-		m_parent->unreference_player_tribe(0, &event);  // Remove all references done by this event
-      m_parent->set_need_save(true);
+		eia().egbase().map().get_mem().delete_event(event.name().c_str());
+		eia().unreference_player_tribe(0, &event);  // Remove all references done by this event
+		eia().set_need_save(true);
       update();
 	} else {
 		std::ostringstream s(_("Can't delete Event. It is in use by "));
@@ -283,7 +282,7 @@ void Editor_Event_Menu::clicked_del_event() {
 			 ++it)
 			s << it->first->get_type() << ':' << it->first->name().c_str() << '\n';
 		UI::Modal_Message_Box mmb
-			(m_parent, _("Error!"), s.str(), UI::Modal_Message_Box::OK);
+			(&eia(), _("Error!"), s.str(), UI::Modal_Message_Box::OK);
 		mmb.run();
          return;
 	}
@@ -293,19 +292,18 @@ void Editor_Event_Menu::clicked_del_event() {
 
 void Editor_Event_Menu::clicked_edit_event() {
 	Event & event = *m_event_list->get_selected();
-	Event_Factory::make_event_with_option_dialog
-		(event.get_id(), m_parent, &event);
+	Event_Factory::make_event_with_option_dialog(event.get_id(), eia(), &event);
       update();
 }
 
 
 void Editor_Event_Menu::clicked_new_trigger() {
-	Editor_Event_Menu_New_Trigger ntm(m_parent);
+	Editor_Event_Menu_New_Trigger ntm(eia());
 	if (ntm.run())  {
          update();
-         m_parent->set_need_save(true);
-		}
+		eia().set_need_save(true);
 	}
+}
 
 
 void Editor_Event_Menu::clicked_del_trigger() {
@@ -313,9 +311,9 @@ void Editor_Event_Menu::clicked_del_trigger() {
 	const Trigger::TriggerReferencerMap & trigger_referencers =
 		trigger.get_referencers();
 	if (trigger_referencers.empty()) {
-		m_parent->unreference_player_tribe(0, &trigger);  // Remove all references done by this trigger
-		m_parent->egbase().map().get_mtm().delete_trigger(trigger.get_name());
-      m_parent->set_need_save(true);
+		eia().unreference_player_tribe(0, &trigger);  // Remove all references done by this trigger
+		eia().egbase().map().get_mtm().delete_trigger(trigger.get_name());
+		eia().set_need_save(true);
       update();
 	} else {
 		std::ostringstream s(_("Can't delete Trigger. It is in use by "));
@@ -328,17 +326,17 @@ void Editor_Event_Menu::clicked_del_trigger() {
 			 ++it)
 			s << it->first->get_type() << ':' << it->first->name().c_str() << '\n';
 		UI::Modal_Message_Box messagebox
-			(m_parent, _("Error!"), s.str(), UI::Modal_Message_Box::OK);
+			(&eia(), _("Error!"), s.str(), UI::Modal_Message_Box::OK);
 		messagebox.run();
 	}
 }
 
 
 void Editor_Event_Menu::clicked_edit_trigger() {
-	Trigger* trigger = m_trigger_list->get_selected();
+	Trigger & trigger = *m_trigger_list->get_selected();
 	Trigger_Factory::make_trigger_with_option_dialog
-		(trigger->get_id(), m_parent, trigger);
-      m_parent->set_need_save(true);
+		(trigger.get_id(), eia(), &trigger);
+	eia().set_need_save(true);
       update();
 }
 
@@ -346,14 +344,14 @@ void Editor_Event_Menu::clicked_edit_trigger() {
 void Editor_Event_Menu::clicked_new_eventchain() {
       // First, create new TriggerConditional
       EventChain* ev = new EventChain();
-	Editor_Event_Menu_Edit_TriggerConditional menu(m_parent, 0, ev);
+	Editor_Event_Menu_Edit_TriggerConditional menu(eia(), 0, ev);
 	if (menu.run()) { // TriggerConditional has been accepted
 		ev->set_trigcond(menu.get_trigcond());
 
          // Get the a name
          char buffer[256];
 
-		Map & map = m_parent->egbase().map();
+		Map & map = eia().egbase().map();
 		for (uint32_t n = 1;; ++n) {
 			snprintf(buffer, sizeof(buffer), "%s%u", _("Unnamed").c_str(), n);
             if (not map.get_mecm().get_eventchain(buffer))
@@ -374,7 +372,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 
 
 void Editor_Event_Menu::clicked_del_eventchain() {
-	m_parent->egbase().map().get_mecm().delete_eventchain
+	eia().egbase().map().get_mecm().delete_eventchain
 		(m_eventchain_list->get_selected()->name());
 	m_eventchain_list->remove_selected();
       m_btn_del_eventchain->set_enabled(false);
@@ -385,7 +383,7 @@ void Editor_Event_Menu::clicked_del_eventchain() {
 
 void Editor_Event_Menu::clicked_edit_eventchain() {
 	Editor_Event_Menu_Edit_EventChain menu
-		(m_parent, m_eventchain_list->get_selected());
+		(eia(), m_eventchain_list->get_selected());
 	menu.run();
       update();
 }

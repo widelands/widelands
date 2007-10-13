@@ -40,14 +40,14 @@ struct Textarea;
  * before it can return
  */
 struct Event_Message_Box_Option_Menu : public UI::Window {
-      Event_Message_Box_Option_Menu(Editor_Interactive*, Event_Message_Box*);
-      ~Event_Message_Box_Option_Menu();
+	Event_Message_Box_Option_Menu(Editor_Interactive &, Event_Message_Box &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       static const uint32_t MAX_BUTTONS=4;
+	Editor_Interactive & eia();
 
       void update();
 	void clicked_ok                        ();
@@ -58,8 +58,7 @@ private:
 	void ls_selected    (uint32_t);
       void edit_box_edited(int32_t);
 
-      Event_Message_Box* m_event;
-      Editor_Interactive* m_parent;
+	Event_Message_Box & m_event;
 
 	struct Button_Descr {
          std::string name;

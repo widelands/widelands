@@ -38,9 +38,15 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 
-Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Interactive* parent, EventChain* chain) :
-UI::Window(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
-m_parent(parent),
+
+inline Editor_Interactive & Editor_Event_Menu_Edit_EventChain::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
+Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain
+(Editor_Interactive & parent, EventChain * chain) :
+UI::Window   (&parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
 m_event_chain(chain)
 {
    const int32_t offsx=5;
@@ -138,7 +144,7 @@ m_event_chain(chain)
    m_available_events=new UI::Listselect<Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_available_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
    m_available_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::tl_double_clicked);
-	const MapEventManager & mem = parent->egbase().map().get_mem();
+	const MapEventManager & mem = parent.egbase().map().get_mem();
 	const MapEventManager::Index nr_events = mem.get_nr_events();
 	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
 		Event & event = mem.get_event_by_nr(i);
@@ -175,11 +181,6 @@ m_event_chain(chain)
    center_to_parent();
 }
 
-/*
- * cleanup
- */
-Editor_Event_Menu_Edit_EventChain::~Editor_Event_Menu_Edit_EventChain() {
-}
 
 /*
  * Handle mousepress/-release
@@ -225,7 +226,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_new_event() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
 	Editor_Event_Menu_Edit_TriggerConditional menu
-		(m_parent, m_event_chain->get_trigcond(), m_event_chain);
+		(eia(), m_event_chain->get_trigcond(), m_event_chain);
 	if (menu.run()) {
 		if (m_event_chain->get_trigcond()) {
             m_event_chain->get_trigcond()->unreference_triggers(m_event_chain);

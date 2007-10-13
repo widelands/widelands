@@ -36,18 +36,18 @@ struct Textarea;
  * before it can return
  */
 struct Event_Unhide_Area_Option_Menu : public UI::Window {
-      Event_Unhide_Area_Option_Menu(Editor_Interactive*, Event_Unhide_Area*);
-      ~Event_Unhide_Area_Option_Menu();
+	Event_Unhide_Area_Option_Menu(Editor_Interactive &, Event_Unhide_Area &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
+	Editor_Interactive & eia();
       void update();
 	void clicked_ok();
       void clicked(int32_t);
 
-      Event_Unhide_Area* m_event;
+	Event_Unhide_Area & m_event;
       Editor_Interactive* m_parent;
       UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
       UI::Edit_Box* m_name;

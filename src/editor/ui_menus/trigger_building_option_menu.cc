@@ -36,11 +36,16 @@
 #include <stdio.h>
 
 
-Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* parent, Trigger_Building* trigger) :
-UI::Window(parent, 0, 0, 180, 280, _("Building Trigger Options").c_str()),
+inline Editor_Interactive & Trigger_Building_Option_Menu::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
+Trigger_Building_Option_Menu::Trigger_Building_Option_Menu
+(Editor_Interactive & parent, Trigger_Building & trigger) :
+UI::Window(&parent, 0, 0, 180, 280, _("Building Trigger Options").c_str()),
 m_trigger (trigger),
-m_parent     (parent),
-m_player_area(trigger->m_player_area)
+m_player_area(trigger.m_player_area)
 {
    m_building=-1;
    const int32_t offsx=5;
@@ -51,15 +56,15 @@ m_player_area(trigger->m_player_area)
 
    // Fill the building infos
 	if
-		(const Tribe_Descr * const tribe = m_parent->egbase().get_tribe
-		 (m_parent->egbase().map()
+		(const Tribe_Descr * const tribe = parent.egbase().get_tribe
+		 (parent.egbase().map()
 		  .get_scenario_player_tribe(m_player_area.player_number).c_str()))
 	{
 		for (int32_t i = 0; i < tribe->get_nrbuildings(); ++i) {
          Building_Descr* b=tribe->get_building_descr(i);
          if (!b->get_buildable() && !b->get_enhanced_building()) continue;
          std::string name=b->name();
-         std::string trig_name= m_trigger->get_building();
+         std::string trig_name= m_trigger.get_building();
          if (name==trig_name) m_building=m_buildings.size();
          m_buildings.push_back(name);
 		}
@@ -68,7 +73,7 @@ m_player_area(trigger->m_player_area)
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text(trigger->get_name());
+	m_name->set_text(trigger.get_name());
    posy+=20+spacing;
 
    // Player
@@ -321,18 +326,18 @@ bool Trigger_Building_Option_Menu::handle_mouserelease(const Uint8, int32_t, int
 
 
 void Trigger_Building_Option_Menu::clicked_ok() {
-	if (m_name->get_text()) m_trigger->set_name(m_name->get_text());
+	if (m_name->get_text()) m_trigger.set_name(m_name->get_text());
 	const Player_Number trigger_player_number =
-		m_trigger->m_player_area.player_number;
+		m_trigger.m_player_area.player_number;
 	if (trigger_player_number != m_player_area.player_number) {
 		if (trigger_player_number)
-			m_parent->unreference_player_tribe(trigger_player_number, m_trigger);
-		m_parent->reference_player_tribe(m_player_area.player_number, m_trigger);
+			eia().unreference_player_tribe(trigger_player_number, &m_trigger);
+		eia().reference_player_tribe(m_player_area.player_number, &m_trigger);
 	}
-	m_trigger->m_player_area = m_player_area;
-	m_trigger->set_building      (m_buildings[m_building].c_str());
-	m_trigger->set_building_count(m_count);
-	m_parent ->set_need_save     (true);
+	m_trigger.m_player_area = m_player_area;
+	m_trigger.set_building      (m_buildings[m_building].c_str());
+	m_trigger.set_building_count(m_count);
+	eia().set_need_save(true);
 	end_modal(1);
 }
 
@@ -377,7 +382,7 @@ void Trigger_Building_Option_Menu::clicked(int32_t i) {
 void Trigger_Building_Option_Menu::update() {
 	if (m_player_area.x < 0) m_player_area.x = 0;
 	if (m_player_area.y < 0) m_player_area.y = 0;
-	const Map & map = m_parent->egbase().map();
+	const Map & map = eia().egbase().map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
 	if (m_player_area.x >= static_cast<int32_t>(mapwidth))
