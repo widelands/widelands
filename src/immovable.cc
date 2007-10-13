@@ -692,17 +692,16 @@ Map_Object::Loader* Immovable::load
 			// It is a tribe immovable
 			eg->manually_load_tribe(owner);
 
-			Tribe_Descr* tribe = eg->get_tribe(owner);
-			if (!tribe)
-				throw wexception("Unknown tribe %s!", owner);
-
-			int32_t idx = tribe->get_immovable_index(name);
-			if (idx == -1)
-				throw wexception
-						("Unknown tribe-immovable %s in map, asked for tribe: %s!\n",
+			if (const Tribe_Descr * const tribe = eg->get_tribe(owner)) {
+				const int32_t idx = tribe->get_immovable_index(name);
+				if (idx != -1)
+					imm = new Immovable(*tribe->get_immovable_descr(idx));
+				else
+					throw wexception
+						("Unknown tribe-immovable %s in map, asked for tribe: %s!",
 						 name, owner);
-
-			imm = new Immovable(*tribe->get_immovable_descr(idx));
+			} else
+				throw wexception("Unknown tribe %s!", owner);
 		} else {
 			// World immovable
 			int32_t idx = eg->map().world().get_immovable_index(name);

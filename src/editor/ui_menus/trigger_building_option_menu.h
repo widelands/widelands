@@ -22,13 +22,17 @@
 
 #include "player_area.h"
 #include "building.h"
+#include "trigger/trigger_building.h"
 
+#include "ui_button.h"
+#include "ui_checkbox.h"
+#include "ui_editbox.h"
+#include "ui_textarea.h"
 #include "ui_window.h"
 
 #include <vector>
 
 class Editor_Interactive;
-class Trigger_Building;
 namespace UI {
 struct Edit_Box;
 struct Textarea;

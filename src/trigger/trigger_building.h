@@ -49,10 +49,12 @@ struct Trigger_Building : public Trigger {
       void set_building_count(int32_t n) {m_count=n;}
 	int32_t get_building_count() const {return m_count;}
 
+	typedef uint8_t Count_Type;
+
 private:
 	Player_Area<Area<FCoords> > m_player_area;
       std::string m_building;
-	uint32_t m_count;
+	Count_Type m_count;
 };
 
 #endif

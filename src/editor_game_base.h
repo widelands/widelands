@@ -70,7 +70,7 @@ struct Editor_Game_Base {
 	virtual void think();
 
 	// Player commands
-	void remove_player(int32_t plnum);
+	void remove_player(Player_Number);
 	Player * add_player
 		(const Player_Number plnum,
 		 const int32_t type,
@@ -132,9 +132,9 @@ struct Editor_Game_Base {
 	void remove_trackpointer(uint32_t serial);
 
 	// Manually load a tribe into memory. Used by the editor
-	void manually_load_tribe(const std::string & tribe);
+	const Tribe_Descr & manually_load_tribe(const std::string & tribe);
 	// Get a tribe from the loaded list, when available
-	Tribe_Descr * get_tribe(const char * const tribe) const;
+	const Tribe_Descr * get_tribe(const char * const tribe) const;
 
 	void inform_players_about_ownership(const Map::Index, const Player_Number);
 	void inform_players_about_immovable
@@ -198,7 +198,8 @@ private:
 	Player                   * m_players[MAX_PLAYERS];
 	Object_Manager             m_objects;
 protected:
-	std::vector<Tribe_Descr *> m_tribes;
+	typedef std::vector<Tribe_Descr *> Tribe_Vector;
+	Tribe_Vector           m_tribes;
 private:
 	Interactive_Base         * m_iabase;
 	Map                      * m_map;

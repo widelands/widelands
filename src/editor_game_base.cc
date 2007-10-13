@@ -122,11 +122,11 @@ Editor_Game_Base::~Editor_Game_Base() {
 	for (Player * * p = m_players; p < players_end; ++p)
 		delete *p;
 
-		delete m_map;
+	delete m_map;
 
-	const std::vector<Tribe_Descr*>::const_iterator tribes_end = m_tribes.end();
+	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
 	for
-		(std::vector<Tribe_Descr*>::const_iterator it = m_tribes.begin();
+		(Tribe_Vector::const_iterator it = m_tribes.begin();
 		 it != tribes_end;
 		 ++it)
 		delete *it;
@@ -388,13 +388,13 @@ Editor_Game_Base::remove_player
 Remove the player with the given number
 ===============
 */
-void Editor_Game_Base::remove_player(int32_t plnum)
-{
+void Editor_Game_Base::remove_player(const Player_Number plnum) {
 	assert(1 <= plnum);
 	assert     (plnum <= MAX_PLAYERS);
 
-		delete m_players[plnum-1];
-		m_players[plnum-1] = 0;
+	Player * & p = m_players[plnum - 1];
+	delete p;
+	p = 0;
 }
 
 
@@ -416,27 +416,16 @@ Player * Editor_Game_Base::add_player
 	assert(1 <= player_number);
 	assert(player_number <= MAX_PLAYERS);
 
-   if (m_players[player_number - 1]) remove_player(player_number);
-
-   // Get the player's tribe
-   uint32_t i;
-
-	manually_load_tribe(tribe.c_str());
-
-	for (i = 0; i < m_tribes.size(); ++i)
-		if (m_tribes[i]->name() == tribe) break;
-
-   if (i == m_tribes.size())
-      m_tribes.push_back(new Tribe_Descr(tribe, map().world()));
-
+	Player * & p = m_players[player_number - 1];
+	delete p;
    return
-		m_players[player_number - 1]
+		p
 		=
 		new Player
 		(*this,
 		 type,
 		 player_number,
-		 *m_tribes[i],
+		 manually_load_tribe(tribe.c_str()),
 		 name,
 		 g_playercolors[player_number - 1]);
 }
@@ -444,25 +433,33 @@ Player * Editor_Game_Base::add_player
 /*
  * Load the given tribe into structure
  */
-void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
-	uint32_t i;
+const Tribe_Descr & Editor_Game_Base::manually_load_tribe
+(const std::string & tribe)
+{
+	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
+	for
+		(Tribe_Vector::const_iterator it = m_tribes.begin();
+		 it != tribes_end;
+		 ++it)
+		if ((*it)->name() == tribe) return **it;
 
-	for (i = 0; i < m_tribes.size(); ++i)
-		if (m_tribes[i]->name() == tribe) break;
-
-	if (i == m_tribes.size())
-		m_tribes.push_back(new Tribe_Descr(tribe, map().world()));
+	Tribe_Descr & result = *new Tribe_Descr(tribe, map().world());
+	m_tribes.push_back(&result);
+	return result;
 }
 
 /*
  * Returns a tribe description from the internally loaded list
  */
-Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
-	uint32_t i;
-   for (i = 0; i < m_tribes.size(); ++i) {
-		if (not strcmp(m_tribes[i]->name().c_str(), tribe))
-			return m_tribes[i];
-	}
+const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
+{
+	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
+	for
+		(Tribe_Vector::const_iterator it = m_tribes.begin();
+		 it != tribes_end;
+		 ++it)
+		if (not strcmp((*it)->name().c_str(), tribe))
+			return *it;
    return 0;
 }
 
@@ -567,7 +564,7 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui) {
 	loader_ui.step(_("Loading world data"));
 	m_map->load_graphics(); // especially loads world data
 
-	const std::vector<Tribe_Descr*>::const_iterator tribes_end = m_tribes.end();
+	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
 	for
 		(std::vector<Tribe_Descr*>::const_iterator it = m_tribes.begin();
 		 it != tribes_end;

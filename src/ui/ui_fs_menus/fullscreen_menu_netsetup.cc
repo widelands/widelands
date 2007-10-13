@@ -119,7 +119,7 @@ bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
 
 	hostent* he=gethostbyname(host);
 	if (he==0)
-	    return false;
+		return false;
 
 	addr = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
 	port=htons(WIDELANDS_PORT);
@@ -164,16 +164,16 @@ void Fullscreen_Menu_NetSetup::discovery_callback (int32_t type, const LAN_Open_
 {
 	switch (type) {
 	case LAN_Game_Finder::GameOpened:
-	    static_cast<Fullscreen_Menu_NetSetup*>(userdata)->game_opened (game);
+		static_cast<Fullscreen_Menu_NetSetup *>(userdata)->game_opened (game);
 		break;
 	case LAN_Game_Finder::GameClosed:
-	    static_cast<Fullscreen_Menu_NetSetup*>(userdata)->game_closed (game);
+		static_cast<Fullscreen_Menu_NetSetup *>(userdata)->game_closed (game);
 		break;
 	case LAN_Game_Finder::GameUpdated:
-	    static_cast<Fullscreen_Menu_NetSetup*>(userdata)->game_updated (game);
+		static_cast<Fullscreen_Menu_NetSetup *>(userdata)->game_updated(game);
 		break;
 	default:
-	    abort ();
+		abort ();
 	}
 }
 

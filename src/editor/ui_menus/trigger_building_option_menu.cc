@@ -20,18 +20,11 @@
 #include "trigger_building_option_menu.h"
 
 #include "i18n.h"
-#include "trigger/trigger_building.h"
 #include "editorinteractive.h"
 #include "map.h"
 #include "graphic.h"
 #include "player.h"
 #include "tribe.h"
-
-#include "ui_window.h"
-#include "ui_textarea.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_editbox.h"
 
 #include <stdio.h>
 
