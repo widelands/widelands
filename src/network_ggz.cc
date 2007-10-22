@@ -411,7 +411,7 @@ void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 		log("GGZCORE/room ## -- table list\n");
 		room = ggzcore_server_get_cur_room(ggzserver);
 		num = ggzcore_room_get_num_tables(room);
-		for (i = 0; i < num; i++i) {
+		for (i = 0; i < num; ++i) {
 			table = ggzcore_room_get_nth_table(room, i);
 			desc = ggzcore_table_get_desc(table);
 			log("GGZCORE/room ## table: %s\n", desc);
@@ -468,7 +468,9 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 		break;
 	case GGZ_GAME_LAUNCH_FAIL:
 	case GGZ_GAME_NEGOTIATE_FAIL:
-		log("GGZCORE/game ## -- error! (%s) :(\n", static_cast<char *>(cbdata));
+		log
+			("GGZCORE/game ## -- error! (%s) :(\n",
+			 static_cast<const char *>(cbdata));
 		break;
 	}
 #endif
