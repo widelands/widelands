@@ -180,7 +180,6 @@
 		BF22DE220A5FB72B00D0292B /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC140A5FB72B00D0292B /* game.cc */; };
 		BF22DE240A5FB72B00D0292B /* game_chat_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC160A5FB72B00D0292B /* game_chat_menu.cc */; };
 		BF22DE260A5FB72B00D0292B /* game_cmd_queue_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC180A5FB72B00D0292B /* game_cmd_queue_data_packet.cc */; };
-		BF22DE280A5FB72B00D0292B /* game_computer_player_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC1A0A5FB72B00D0292B /* game_computer_player_data_packet.cc */; };
 		BF22DE2C0A5FB72B00D0292B /* game_data_packet_factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC1E0A5FB72B00D0292B /* game_data_packet_factory.cc */; };
 		BF22DE2F0A5FB72B00D0292B /* game_debug_ui.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC210A5FB72B00D0292B /* game_debug_ui.cc */; };
 		BF22DE310A5FB72B00D0292B /* game_game_class_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC230A5FB72B00D0292B /* game_game_class_data_packet.cc */; };
@@ -644,8 +643,6 @@
 		BF22DC170A5FB72B00D0292B /* game_chat_menu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_chat_menu.h; sourceTree = "<group>"; };
 		BF22DC180A5FB72B00D0292B /* game_cmd_queue_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_cmd_queue_data_packet.cc; sourceTree = "<group>"; };
 		BF22DC190A5FB72B00D0292B /* game_cmd_queue_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_cmd_queue_data_packet.h; sourceTree = "<group>"; };
-		BF22DC1A0A5FB72B00D0292B /* game_computer_player_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_computer_player_data_packet.cc; sourceTree = "<group>"; };
-		BF22DC1B0A5FB72B00D0292B /* game_computer_player_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_computer_player_data_packet.h; sourceTree = "<group>"; };
 		BF22DC1D0A5FB72B00D0292B /* game_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_data_packet.h; sourceTree = "<group>"; };
 		BF22DC1E0A5FB72B00D0292B /* game_data_packet_factory.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_data_packet_factory.cc; sourceTree = "<group>"; };
 		BF22DC1F0A5FB72B00D0292B /* game_data_packet_factory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_data_packet_factory.h; sourceTree = "<group>"; };
@@ -1264,7 +1261,6 @@
 				BF22DC140A5FB72B00D0292B /* game.cc */,
 				BF22DC160A5FB72B00D0292B /* game_chat_menu.cc */,
 				BF22DC180A5FB72B00D0292B /* game_cmd_queue_data_packet.cc */,
-				BF22DC1A0A5FB72B00D0292B /* game_computer_player_data_packet.cc */,
 				BF22DC1E0A5FB72B00D0292B /* game_data_packet_factory.cc */,
 				BF22DC210A5FB72B00D0292B /* game_debug_ui.cc */,
 				BF22DC230A5FB72B00D0292B /* game_game_class_data_packet.cc */,
@@ -1426,7 +1422,6 @@
 				BF22DC150A5FB72B00D0292B /* game.h */,
 				BF22DC170A5FB72B00D0292B /* game_chat_menu.h */,
 				BF22DC190A5FB72B00D0292B /* game_cmd_queue_data_packet.h */,
-				BF22DC1B0A5FB72B00D0292B /* game_computer_player_data_packet.h */,
 				BF22DC1D0A5FB72B00D0292B /* game_data_packet.h */,
 				BF22DC1F0A5FB72B00D0292B /* game_data_packet_factory.h */,
 				BF22DC200A5FB72B00D0292B /* game_data_packet_ids.h */,
@@ -2100,7 +2095,6 @@
 				BF22DE220A5FB72B00D0292B /* game.cc in Sources */,
 				BF22DE240A5FB72B00D0292B /* game_chat_menu.cc in Sources */,
 				BF22DE260A5FB72B00D0292B /* game_cmd_queue_data_packet.cc in Sources */,
-				BF22DE280A5FB72B00D0292B /* game_computer_player_data_packet.cc in Sources */,
 				BF22DE2C0A5FB72B00D0292B /* game_data_packet_factory.cc in Sources */,
 				BF22DE2F0A5FB72B00D0292B /* game_debug_ui.cc in Sources */,
 				BF22DE310A5FB72B00D0292B /* game_game_class_data_packet.cc in Sources */,
