@@ -136,9 +136,7 @@
 		BF22DD7D0A5FB72B00D0292B /* computer_player.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB6C0A5FB72A00D0292B /* computer_player.cc */; };
 		BF22DD7F0A5FB72B00D0292B /* computer_player_hints.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB6E0A5FB72A00D0292B /* computer_player_hints.cc */; };
 		BF22DD830A5FB72B00D0292B /* constructionsite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB720A5FB72A00D0292B /* constructionsite.cc */; };
-		BF22DD850A5FB72B00D0292B /* criterr.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB740A5FB72A00D0292B /* criterr.cc */; };
 		BF22DD860A5FB72B00D0292B /* critter_bob.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB750A5FB72A00D0292B /* critter_bob.cc */; };
-		BF22DD8A0A5FB72B00D0292B /* editor.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB7A0A5FB72A00D0292B /* editor.cc */; };
 		BF22DD8C0A5FB72B00D0292B /* editorinteractive.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB7C0A5FB72A00D0292B /* editorinteractive.cc */; };
 		BF22DDB60A5FB72B00D0292B /* editor_event_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBA80A5FB72A00D0292B /* editor_event_menu.cc */; };
 		BF22DDB80A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBAA0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc */; };
@@ -555,13 +553,10 @@
 		BF22DB710A5FB72A00D0292B /* constants.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		BF22DB720A5FB72A00D0292B /* constructionsite.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = constructionsite.cc; sourceTree = "<group>"; };
 		BF22DB730A5FB72A00D0292B /* constructionsite.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = constructionsite.h; sourceTree = "<group>"; };
-		BF22DB740A5FB72A00D0292B /* criterr.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = criterr.cc; sourceTree = "<group>"; };
 		BF22DB750A5FB72A00D0292B /* critter_bob.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = critter_bob.cc; sourceTree = "<group>"; };
 		BF22DB760A5FB72A00D0292B /* critter_bob.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = critter_bob.h; sourceTree = "<group>"; };
 		BF22DB770A5FB72A00D0292B /* critter_bob_program.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = critter_bob_program.h; sourceTree = "<group>"; };
 		BF22DB780A5FB72A00D0292B /* descr_maintainer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = descr_maintainer.h; sourceTree = "<group>"; };
-		BF22DB7A0A5FB72A00D0292B /* editor.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor.cc; sourceTree = "<group>"; };
-		BF22DB7B0A5FB72A00D0292B /* editor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor.h; sourceTree = "<group>"; };
 		BF22DB7C0A5FB72A00D0292B /* editorinteractive.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editorinteractive.cc; sourceTree = "<group>"; };
 		BF22DB7D0A5FB72A00D0292B /* editorinteractive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editorinteractive.h; sourceTree = "<group>"; };
 		BF22DBA80A5FB72A00D0292B /* editor_event_menu.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_event_menu.cc; sourceTree = "<group>"; };
@@ -1257,7 +1252,6 @@
 				BF22DB6C0A5FB72A00D0292B /* computer_player.cc */,
 				BF22DB6E0A5FB72A00D0292B /* computer_player_hints.cc */,
 				BF22DB720A5FB72A00D0292B /* constructionsite.cc */,
-				BF22DB740A5FB72A00D0292B /* criterr.cc */,
 				BF22DB750A5FB72A00D0292B /* critter_bob.cc */,
 				BF22DBE90A5FB72B00D0292B /* editor_game_base.cc */,
 				BFA98F2D0B4F01D900FB5075 /* encyclopedia_window.cc */,
@@ -1591,8 +1585,6 @@
 		BF22DB790A5FB72A00D0292B /* editor */ = {
 			isa = PBXGroup;
 			children = (
-				BF22DB7A0A5FB72A00D0292B /* editor.cc */,
-				BF22DB7B0A5FB72A00D0292B /* editor.h */,
 				BF22DB7C0A5FB72A00D0292B /* editorinteractive.cc */,
 				BF22DB7D0A5FB72A00D0292B /* editorinteractive.h */,
 				BF22DB7F0A5FB72A00D0292B /* tools */,
@@ -2064,9 +2056,7 @@
 				BF22DD7D0A5FB72B00D0292B /* computer_player.cc in Sources */,
 				BF22DD7F0A5FB72B00D0292B /* computer_player_hints.cc in Sources */,
 				BF22DD830A5FB72B00D0292B /* constructionsite.cc in Sources */,
-				BF22DD850A5FB72B00D0292B /* criterr.cc in Sources */,
 				BF22DD860A5FB72B00D0292B /* critter_bob.cc in Sources */,
-				BF22DD8A0A5FB72B00D0292B /* editor.cc in Sources */,
 				BF22DD8C0A5FB72B00D0292B /* editorinteractive.cc in Sources */,
 				BF22DDB60A5FB72B00D0292B /* editor_event_menu.cc in Sources */,
 				BF22DDB80A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc in Sources */,
