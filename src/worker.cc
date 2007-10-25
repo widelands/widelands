@@ -642,12 +642,7 @@ bool Worker::run_removeobject(Game * g, State * state, const Action *)
  */
 bool Worker::run_geologist(Game* g, State* state, const Action* action)
 {
-#ifdef DEBUG
-	PlayerImmovable* location = get_location(g);
-#endif
-
-	assert(location);
-	assert(location->get_type() == FLAG);
+	dynamic_cast<const Flag &>(*get_location(g));
 
 	molog("  Start Geologist (%i attempts, %i radius -> %s)\n", action->iparam1,
 	      action->iparam2, action->sparam1.c_str());
@@ -1692,12 +1687,10 @@ void Worker::dropoff_update(Game * g, State *)
 
 	WareInstance* item = get_carried_item(g);
 	BaseImmovable* location = g->get_map()->get_immovable(get_position());
-#ifdef DEBUG
-	PlayerImmovable* ploc = get_location(g);
+#ifndef NDEBUG
+	Building & ploc = dynamic_cast<Building &>(*get_location(g));
+	assert(&ploc == location || ploc.get_base_flag() == location);
 #endif
-
-	assert(ploc && ploc->get_type() == BUILDING);
-	assert(location && (ploc == location || ploc->get_base_flag() == location));
 
 	// Deliver the item
 	if (item) {
