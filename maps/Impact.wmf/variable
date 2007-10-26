@@ -1,0 +1,10 @@
+# Automatically created by Widelands build11
+
+[global]
+packet_version=1
+
+[Next scenario]
+delete_protected=true
+type=string
+value=<undefined>
+
