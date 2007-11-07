@@ -34,273 +34,311 @@ inline Editor_Interactive & Trigger_Building_Option_Menu::eia() {
 }
 
 
-Trigger_Building_Option_Menu::Trigger_Building_Option_Menu
-(Editor_Interactive & parent, Trigger_Building & trigger) :
-UI::Window(&parent, 0, 0, 180, 280, _("Building Trigger Options").c_str()),
-m_trigger (trigger),
-m_player_area(trigger.m_player_area)
+inline static void update_label_player
+(UI::Textarea & ta, const Player_Number p)
 {
-   m_building=-1;
-   const int32_t offsx=5;
-   const int32_t offsy=25;
-   int32_t spacing=5;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	char buffer[32];
+	snprintf(buffer, sizeof(buffer), _("Player: %u").c_str(), p);
+	ta.set_text(buffer);
+}
 
-   // Fill the building infos
-	if
-		(const Tribe_Descr * const tribe = parent.egbase().get_tribe
-		 (parent.egbase().map()
-		  .get_scenario_player_tribe(m_player_area.player_number).c_str()))
+
+inline static void update_label_count
+(UI::Textarea & ta, const Trigger_Building::Count_Type count)
+{
+	char buffer[32];
+	snprintf(buffer, sizeof(buffer), _("How many: %u").c_str(), count);
+	ta.set_text(buffer);
+}
+
+
+inline static void update_label_building
+(UI::Textarea & ta, const Building_Descr & building)
+{
+	char buffer[128];
+	snprintf
+		(buffer, sizeof(buffer),
+		 _("Building: %s").c_str(), building.descname().c_str());
+	ta.set_text(buffer);
+}
+
+
+inline static void update_label_coords
+(UI::Textarea & ta, const Coords coords)
+{
+	char buffer[32];
+	snprintf
+		(buffer, sizeof(buffer),
+		 _("(X, Y): (%i, %i)").c_str(), coords.x, coords.y);
+	ta.set_text(buffer);
+}
+
+
+inline static void update_label_radius
+(UI::Textarea & ta, const Player_Area<>::Radius_type radius)
+{
+	char buffer[32];
+	snprintf(buffer, sizeof(buffer), _("Radius: %u").c_str(), radius);
+	ta.set_text(buffer);
+}
+
+
+#define spacing 5U
+#define button_width  20U
+#define button_height 20U
+#define button_size button_width, button_height
+Trigger_Building_Option_Menu::Trigger_Building_Option_Menu
+(Editor_Interactive & parent, Trigger_Building & trigger)
+:
+UI::Window(&parent, 0, 0, 280, 280, _("Building Trigger Options").c_str()),
+m_trigger (trigger),
+
+m_player_area
+(Player_Area<>
+ (trigger.m_player_area.player_number,
+  Area<>(trigger.m_player_area, trigger.m_player_area.radius))),
+
+m_label_name(this, spacing, spacing, 50, 20, _("Name:"), Align_CenterLeft),
+
+m_name
+(this,
+ m_label_name.get_x() + m_label_name.get_w() + spacing, m_label_name.get_y(),
+ get_inner_w() - m_label_name.get_x() - m_label_name.get_w() - 3 * spacing, 20,
+ 0, 0),
+
+m_label_player
+(this,
+ spacing, m_label_name.get_y() + m_label_name.get_h() + spacing,
+ get_inner_w() - 2 * (2 * spacing + button_width), 20,
+ " ", Align_Left),
+
+m_decrement_player
+(this,
+ get_inner_w() - 2 * (spacing + 20), m_label_player.get_y(), 20, 20,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+ &Trigger_Building_Option_Menu::clicked_change_player, this, false),
+
+m_increment_player
+(this,
+ get_inner_w() - 1 * (spacing + 20), m_label_player.get_y(), 20, 20,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+ &Trigger_Building_Option_Menu::clicked_change_player, this, true),
+
+m_label_building
+(this,
+ spacing, m_label_player.get_y() + m_label_player.get_h() + spacing,
+ m_label_player.get_w(), 20,
+ " ", Align_Left),
+
+m_decrement_building
+(this,
+ get_inner_w() - 2 * (spacing + 20), m_label_building.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+ &Trigger_Building_Option_Menu::clicked_decrement_building, this),
+
+m_increment_building
+(this,
+ get_inner_w() - 1 * (spacing + 20), m_label_building.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+ &Trigger_Building_Option_Menu::clicked_increment_building, this),
+
+m_label_count
+(this,
+ spacing, m_label_building.get_y() + m_label_building.get_h() + spacing,
+ m_label_building.get_w(), 20,
+ " ", Align_Left),
+
+m_decrement_count
+(this,
+ m_decrement_building.get_x(), m_label_count.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+ &Trigger_Building_Option_Menu::clicked_decrement_count, this,
+ std::string(),
+ 0 < m_count),
+
+m_increment_count
+(this,
+ m_increment_building.get_x(), m_label_count.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+ &Trigger_Building_Option_Menu::clicked_increment_count, this,
+ std::string(),
+ m_count < std::numeric_limits<Trigger_Building::Count_Type>::max()),
+
+m_label_coords
+(this,
+ spacing, m_label_count.get_y() + m_label_count.get_h() + spacing,
+ get_inner_w() - 2 * spacing, 20,
+ " ", Align_Left),
+
+m_decrease_y_100
+(this,
+ get_inner_w() - button_width >> 1,
+ m_label_coords.get_y() + m_label_coords.get_h(),
+ button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this, 100),
+
+m_decrease_y_10
+(this,
+ m_decrease_y_100.get_x(), m_decrease_y_100.get_y() + button_height,
+ button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this,  10),
+
+m_decrease_y_1
+(this,
+ m_decrease_y_10.get_x(), m_decrease_y_10.get_y() + button_height,
+ button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this,   1),
+
+m_decrease_x_100
+(this,
+ m_decrease_y_1.get_x() - 3 * button_width,
+ m_decrease_y_1.get_y() + button_height,
+ button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+ &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this, 100),
+
+m_decrease_x_10
+(this,
+ m_decrease_x_100.get_x() + button_width, m_decrease_x_100.get_y(),
+ button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+ &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this,  10),
+
+m_decrease_x_1
+(this,
+ m_decrease_x_10.get_x() + button_width, m_decrease_x_10.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+ &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this,   1),
+
+m_increase_x_1
+(this,
+ m_decrease_x_1.get_x() + 2 * button_width, m_decrease_x_1.get_y(),
+ button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+ &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this,   1),
+
+m_increase_x_10
+(this,
+ m_increase_x_1.get_x() + button_width, m_increase_x_1.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+ &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this,  10),
+
+m_increase_x_100
+(this,
+ m_increase_x_10.get_x() + button_width, m_increase_x_10.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+ &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this, 100),
+
+m_increase_y_1
+(this,
+ m_decrease_y_1.get_x(), m_increase_x_100.get_y() + button_height, button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this,   1),
+
+m_increase_y_10
+(this,
+ m_increase_y_1.get_x(), m_increase_y_1.get_y() + button_height, button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this,  10),
+
+m_increase_y_100
+(this,
+ m_increase_y_10.get_x(), m_increase_y_10.get_y() + button_height, button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this, 100),
+
+m_label_radius
+(this,
+ spacing, m_increase_y_100.get_y() + button_height, 20, 20,
+ " ", Align_Left),
+
+m_decrement_radius
+(this,
+ m_decrement_count.get_x(), m_label_radius.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+ &Trigger_Building_Option_Menu::clicked_decrement_radius, this,
+ std::string(),
+ 0 < m_player_area.radius),
+
+m_increment_radius
+(this,
+ m_increment_count.get_x(), m_label_radius.get_y(), button_size,
+ 0,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+ &Trigger_Building_Option_Menu::clicked_increment_radius, this,
+ std::string(),
+ m_player_area.radius
+ <
+ std::numeric_limits<Player_Area<>::Radius_type>::max()),
+
+m_button_ok
+(this,
+ (get_inner_w() >> 1) - 60 - spacing,
+ m_label_radius.get_y() + m_label_radius.get_h() + spacing,
+ 3 * button_width, button_height,
+ 0,
+ &Trigger_Building_Option_Menu::clicked_ok, this,
+ _("Ok")),
+
+m_button_cancel
+(this,
+ m_button_ok.get_x() + m_button_ok.get_w() + spacing , m_button_ok.get_y(),
+ 3 * button_width, button_height,
+ 1,
+ &Trigger_Building_Option_Menu::end_modal, this, 0,
+ _("Cancel"))
+
+{
+	if (m_player_area.player_number == 0) m_player_area.player_number = 1;
+	const Editor_Game_Base & egbase = parent.egbase();
+	assert(m_player_area.player_number <= egbase.map().get_nrplayers());
+	const Tribe_Descr & tribe =
+		*egbase.get_tribe
+		(egbase.map()
+		 .get_scenario_player_tribe(m_player_area.player_number).c_str());
 	{
-		for (int32_t i = 0; i < tribe->get_nrbuildings(); ++i) {
-         Building_Descr* b=tribe->get_building_descr(i);
-         if (!b->get_buildable() && !b->get_enhanced_building()) continue;
-         std::string name=b->name();
-         std::string trig_name= m_trigger.get_building();
-         if (name==trig_name) m_building=m_buildings.size();
-         m_buildings.push_back(name);
-		}
+		const int i = tribe.get_building_index(trigger.get_building());
+		m_building = i == -1 ? 0 : i;
+	}
+	{
+		const bool has_several_players = 1 < egbase.map().get_nrplayers();
+		m_decrement_player.set_enabled(has_several_players);
+		m_increment_player.set_enabled(has_several_players);
 	}
 
-   // Name editbox
-   new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-   m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-	m_name->set_text(trigger.get_name());
-   posy+=20+spacing;
+	m_name.set_text(trigger.get_name());
 
-   // Player
-   new UI::Textarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
-   m_player_ta=new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 90, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 15);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 110, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 16);
-
-   posy+=20+spacing;
-
-   // Building
-   new UI::Textarea(this, spacing, posy, 70, 20, _("Building: "), Align_CenterLeft);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 70, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 23);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 90, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 24);
-
-   posy+=20+spacing;
-   m_building_ta=new UI::Textarea(this, 0, posy, get_inner_w(), 20, _("Headquarters"), Align_Center);
-   posy+=20+spacing;
-
-   // Count
-   new UI::Textarea(this, spacing, posy, 70, 20, _("How many: "), Align_CenterLeft);
-   m_count_ta=new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 110, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 25);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 130, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 26);
-
-   posy+=20+spacing;
-
-   // Set Field Buttons
-   new UI::Textarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
-   posy+=20+spacing;
-   // X
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 20, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 3);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 20, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 4);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 40, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 5);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 40, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 6);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 60, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 7);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 60, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 8);
-
-   new UI::Textarea(this, spacing+20, posy + 20, 20, 20, "X: ", Align_CenterLeft);
-   m_x_ta=new UI::Textarea(this, spacing+40, posy + 20, 20, 20, "X: ", Align_CenterLeft);
-
-   // Y
-   int32_t oldspacing=spacing;
-   spacing=get_inner_w()/2+spacing;
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 9);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 10);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 20, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 11);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 20, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 12);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 40, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 13);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 40, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 14);
-
-   new UI::Textarea(this, spacing, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
-   m_y_ta=new UI::Textarea(this, spacing+20, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
-   spacing=oldspacing;
-   posy+=60+spacing;
-
-   // Area
-   new UI::Textarea(this, spacing, posy + 20, 70, 20, _("Area: "), Align_CenterLeft);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 70, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 17);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 70, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 18);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 90, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 19);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 90, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 20);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 110, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 21);
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 spacing + 110, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Trigger_Building_Option_Menu::clicked, this, 22);
-
-   m_area_ta=new UI::Textarea(this, spacing+90, posy + 20, 20, 20, "2", Align_Center);
-   posy+=60+spacing;
-
-
-   // Ok/Cancel Buttons
-   posy+=spacing; // Extra space
-   posx=(get_inner_w()/2)-60-spacing;
-	new UI::Button<Trigger_Building_Option_Menu>
-		(this,
-		 posx, posy, 60, 20,
-		 0,
-		 &Trigger_Building_Option_Menu::clicked_ok, this,
-		 _("Ok"));
-   posx=(get_inner_w()/2)+spacing;
-
-	new UI::IDButton<Trigger_Building_Option_Menu, int32_t>
-		(this,
-		 posx, posy, 60, 20,
-		 1,
-		 &Trigger_Building_Option_Menu::end_modal, this, 0,
-		_("Cancel"));
-
-   set_inner_size(get_inner_w(), posy + 20+spacing);
+	set_inner_size
+		(get_inner_w(), m_button_ok.get_y() + m_button_ok.get_h() + spacing);
    center_to_parent();
-   update();
+	update_label_player(m_label_player, m_player_area.player_number);
+	update_label_building
+		(m_label_building, *tribe.get_building_descr(m_building));
+	update_label_count (m_label_count,  m_count);
+	update_label_coords(m_label_coords, m_player_area);
+	update_label_radius(m_label_radius, m_player_area.radius);
 }
 
 
@@ -318,8 +356,159 @@ bool Trigger_Building_Option_Menu::handle_mouserelease(const Uint8, int32_t, int
 {return false;}
 
 
+///  Change the player number 1 step in any direction. Wraps around.
+void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
+	const Editor_Game_Base & egbase = eia().egbase();
+	const Map & map = egbase.map();
+	const Tribe_Descr & old_tribe =
+		*egbase.get_tribe
+		(map.get_scenario_player_tribe(m_player_area.player_number).c_str());
+	const Player_Number nr_players = map.get_nrplayers();
+	assert(1 < nr_players);
+	assert(1 <= m_player_area.player_number);
+	assert     (m_player_area.player_number <= nr_players);
+	if (up) {
+		if (m_player_area.player_number == nr_players)
+			m_player_area.player_number = 0;
+		++m_player_area.player_number;
+	} else {
+		--m_player_area.player_number;
+		if (0 == m_player_area.player_number)
+			m_player_area.player_number = nr_players;
+	}
+	const Tribe_Descr & new_tribe =
+		*egbase.get_tribe
+		(map.get_scenario_player_tribe(m_player_area.player_number).c_str());
+	if (&old_tribe != &new_tribe) {
+		//  The new player belongs to another tribe than the old player. See if
+		//  the new player's tribe has a building with the same name as the
+		//  previously selected building. If not, select the first building in
+		//  the new player's tribe.
+		{
+			const int i =
+				new_tribe.get_building_index
+				(old_tribe.get_building_descr(m_building)->name().c_str());
+			m_building = i == -1 ? 0 : i;
+		}
+		update_label_building
+			(m_label_building, *new_tribe.get_building_descr(m_building));
+		const bool has_several_buildings = 1 < new_tribe.get_nrbuildings();
+		m_decrement_building.set_enabled(has_several_buildings);
+		m_increment_building.set_enabled(has_several_buildings);
+	}
+	update_label_player(m_label_player, m_player_area.player_number);
+}
+
+
+void Trigger_Building_Option_Menu::clicked_increment_building() {
+	const Editor_Game_Base & egbase = eia().egbase();
+	const Map & map = egbase.map();
+	const Tribe_Descr & tribe =
+		*egbase.get_tribe
+		(map.get_scenario_player_tribe(m_player_area.player_number).c_str());
+	++m_building;
+	if (m_building == tribe.get_nrbuildings()) m_building = 0;
+	update_label_building
+		(m_label_building, *tribe.get_building_descr(m_building));
+}
+
+
+void Trigger_Building_Option_Menu::clicked_decrement_building() {
+	const Editor_Game_Base & egbase = eia().egbase();
+	const Tribe_Descr & tribe =
+		*egbase.get_tribe
+		(egbase.map().get_scenario_player_tribe(m_player_area.player_number)
+		 .c_str());
+	if (0 == m_building) m_building = tribe.get_nrbuildings();
+	--m_building;
+	update_label_building
+		(m_label_building, *tribe.get_building_descr(m_building));
+}
+
+
+void Trigger_Building_Option_Menu::clicked_increment_count() {
+	assert(m_count < std::numeric_limits<Trigger_Building::Count_Type>::max());
+	++m_count;
+	update_label_count(m_label_count, m_count);
+	m_decrement_count.set_enabled(true);
+	m_increment_count.set_enabled
+		(m_count < std::numeric_limits<Trigger_Building::Count_Type>::max());
+}
+
+
+void Trigger_Building_Option_Menu::clicked_decrement_count() {
+	assert(1 < m_count);
+	--m_count;
+	update_label_count(m_label_count, m_count);
+	m_decrement_count.set_enabled(1 < m_count);
+	m_increment_count.set_enabled(true);
+}
+
+
+void Trigger_Building_Option_Menu::clicked_decrease_x_coordinate
+(const uint8_t d)
+{
+	const X_Coordinate w = eia().egbase().map().extent().w;
+	while (m_player_area.x < d) m_player_area.x += w;
+	m_player_area.x -= d;
+	update_label_coords(m_label_coords, m_player_area);
+}
+
+
+void Trigger_Building_Option_Menu::clicked_increase_x_coordinate
+(const uint8_t d)
+{
+	m_player_area.x += d;
+	m_player_area.x %= eia().egbase().map().extent().w;
+	update_label_coords(m_label_coords, m_player_area);
+}
+
+
+void Trigger_Building_Option_Menu::clicked_decrease_y_coordinate
+(const uint8_t d)
+{
+	const Y_Coordinate h = eia().egbase().map().extent().h;
+	while (m_player_area.y < d) m_player_area.y += h;
+	m_player_area.y -= d;
+	update_label_coords(m_label_coords, m_player_area);
+}
+
+
+void Trigger_Building_Option_Menu::clicked_increase_y_coordinate
+(const uint8_t d)
+{
+	m_player_area.y += d;
+	m_player_area.y %= eia().egbase().map().extent().h;
+	update_label_coords(m_label_coords, m_player_area);
+}
+
+
+void Trigger_Building_Option_Menu::clicked_increment_radius() {
+	assert
+		(m_player_area.radius
+		 <
+		 std::numeric_limits<Player_Area<>::Radius_type>::max());
+	++m_player_area.radius;
+	update_label_radius(m_label_radius, m_player_area.radius);
+	m_decrement_radius.set_enabled(true);
+	m_increment_radius.set_enabled
+		(m_player_area.radius
+		 <
+		 std::numeric_limits<Player_Area<>::Radius_type>::max());
+}
+
+
+void Trigger_Building_Option_Menu::clicked_decrement_radius() {
+	assert(0 < m_player_area.radius);
+	--m_player_area.radius;
+	update_label_radius(m_label_radius, m_player_area.radius);
+	m_decrement_radius.set_enabled(m_player_area.radius);
+	m_increment_radius.set_enabled(true);
+}
+
+
 void Trigger_Building_Option_Menu::clicked_ok() {
-	if (m_name->get_text()) m_trigger.set_name(m_name->get_text());
+	if (m_name.get_text()) m_trigger.set_name(m_name.get_text());
 	const Player_Number trigger_player_number =
 		m_trigger.m_player_area.player_number;
 	if (trigger_player_number != m_player_area.player_number) {
@@ -327,97 +516,19 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 			eia().unreference_player_tribe(trigger_player_number, &m_trigger);
 		eia().reference_player_tribe(m_player_area.player_number, &m_trigger);
 	}
-	m_trigger.m_player_area = m_player_area;
-	m_trigger.set_building      (m_buildings[m_building].c_str());
+	Editor_Game_Base & egbase = eia().egbase();
+	const Map & map = egbase.map();
+	m_trigger.m_player_area =
+		Player_Area<Area<FCoords> >
+		(m_player_area.player_number,
+		 Area<FCoords>
+		 (FCoords(m_player_area, &egbase.map()[m_player_area]),
+		  m_player_area.radius));
+	m_trigger.set_building
+		(egbase.get_tribe
+		 (map.get_scenario_player_tribe(m_player_area.player_number).c_str())
+		 ->get_building_descr(m_building)->name().c_str());
 	m_trigger.set_building_count(m_count);
 	eia().set_need_save(true);
 	end_modal(1);
-}
-
-
-void Trigger_Building_Option_Menu::clicked(int32_t i) {
-	switch (i) {
-	case  3: m_player_area.x      += 100; break;
-	case  4: m_player_area.x      -= 100; break;
-	case  5: m_player_area.x      +=  10; break;
-	case  6: m_player_area.x      -=  10; break;
-	case  7: m_player_area.x      +=   1; break;
-	case  8: m_player_area.x      -=   1; break;
-	case  9: m_player_area.y      += 100; break;
-	case 10: m_player_area.y      -= 100; break;
-	case 11: m_player_area.y      +=  10; break;
-	case 12: m_player_area.y      -=  10; break;
-	case 13: m_player_area.y      +=   1; break;
-	case 14: m_player_area.y      -=   1; break;
-
-	case 15: ++m_player_area.player_number; break;
-	case 16: --m_player_area.player_number; break;
-
-	case 17: m_player_area.radius += 100; break;
-	case 18: m_player_area.radius -= 100; break;
-	case 19: m_player_area.radius +=  10; break;
-	case 20: m_player_area.radius -=  10; break;
-	case 21: m_player_area.radius +=   1; break;
-	case 22: m_player_area.radius -=   1; break;
-
-      case 23: m_building++; break;
-      case 24: m_building--; break;
-
-      case 25: m_count++; break;
-      case 26: m_count--; break;
-	}
-   update();
-}
-
-/*
- * update function: update all UI elements
- */
-void Trigger_Building_Option_Menu::update() {
-	if (m_player_area.x < 0) m_player_area.x = 0;
-	if (m_player_area.y < 0) m_player_area.y = 0;
-	const Map & map = eia().egbase().map();
-	const X_Coordinate mapwidth  = map.get_width ();
-	const Y_Coordinate mapheight = map.get_height();
-	if (m_player_area.x >= static_cast<int32_t>(mapwidth))
-		m_player_area.x = mapwidth  - 1;
-	if (m_player_area.y >= static_cast<int32_t>(mapheight))
-		m_player_area.y = mapheight - 1;
-	m_player_area.field = map.get_field(m_player_area);
-
-	if (m_player_area.player_number < 1) m_player_area.player_number = 1;
-	const Player_Number nr_players = map.get_nrplayers();
-	if (nr_players < m_player_area.player_number)
-		m_player_area.player_number = nr_players;
-
-	if (m_player_area.radius < 1) m_player_area.radius = 1;
-
-   if (m_count<1) m_count=1;
-
-   if (m_building>=static_cast<int32_t>(m_buildings.size())) m_building=m_buildings.size()-1;
-
-   std::string curbuild=_("<invalid player tribe>");
-	if (not m_buildings.size()) {
-		m_player_area.player_number = 0;
-      m_building=-1;
-	} else {
-      curbuild=m_buildings[m_building];
-	}
-
-   char buf[200];
-	sprintf(buf, "%i", m_player_area.x);
-   m_x_ta->set_text(buf);
-	sprintf(buf, "%i", m_player_area.y);
-   m_y_ta->set_text(buf);
-
-	sprintf(buf, "%i", m_player_area.player_number);
-   m_player_ta->set_text(buf);
-
-	sprintf(buf, "%i", m_player_area.radius);
-   m_area_ta->set_text(buf);
-
-   sprintf(buf, "%i", m_count);
-   m_count_ta->set_text(buf);
-
-   sprintf(buf, "\"%s\"", curbuild.c_str());
-   m_building_ta->set_text(buf);
 }
