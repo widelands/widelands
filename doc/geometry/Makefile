@@ -9,4 +9,4 @@ all: $(FILES)
 	rm $@.
 
 clean:
-	@rm -f echo $(FILES)
+	@rm -f $(FILES)
