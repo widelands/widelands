@@ -180,7 +180,7 @@ granitmine="marblemine";
 
 	total_constructionsites=0;
 	next_construction_due=0;
-	next_road_due=0;
+	next_road_due=1000;
 	next_productionsite_check_due=0;
 	inhibit_road_building=0;
 
@@ -235,6 +235,7 @@ void Computer_Player::think ()
 		late_initialization ();
 
 	const int32_t gametime = game().get_gametime();
+	//printf("Computer_Player: Staring planner at GT %i.\n", gametime);
 
 	// update statistics about buildable fields
 	while
@@ -265,6 +266,7 @@ void Computer_Player::think ()
 		buildable_fields.push_back (bf);
 		buildable_fields.pop_front ();
 	}
+	//printf("Computer_Player: Done looking for buildable fields. %i found.\n", buildable_fields.size());
 
 	// do the same for mineable fields
 	while
@@ -295,7 +297,7 @@ void Computer_Player::think ()
 		mineable_fields.push_back (mf);
 		mineable_fields.pop_front ();
 	}
-
+	//printf("Computer_Player: Done looking for minenable fields. %i found.\n", mineable_fields.size());
 	for (std::list<FCoords>::iterator i=unusable_fields.begin(); i!=unusable_fields.end();) {
 		// check whether we lost ownership of the field
 		if (i->field->get_owned_by()!=player_number) {
@@ -329,9 +331,12 @@ void Computer_Player::think ()
 	// now build something if possible
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
-
+		//printf("Computer_Player: Time to build.\n");
 		if (construct_building()) {
-			inhibit_road_building = gametime + 2500;
+		//	inhibit_road_building = gametime + 2500; 
+		//Inhibiting roadbuilding is not a good idea, it causes 
+		//computer players to get into deadlock at certain circumstances.
+                       // printf("Computer_Player: Built something, waiting until road can be built.\n");
 			return;
 		}
 	}
@@ -349,7 +354,7 @@ void Computer_Player::think ()
 	    productionsites.push_back (productionsites.front());
 	    productionsites.pop_front ();
 	}
-
+        //printf("Computer_Player: Done checking up on construction sites.\n");
 	// if nothing else is to do, update flags and economies
 	while (!new_flags.empty()) {
 		Flag* flag=new_flags.front();
@@ -384,11 +389,15 @@ void Computer_Player::think ()
 		}
 	}
 
-	if (next_road_due <= gametime and inhibit_road_building <= gametime) {
-		next_road_due = gametime + 1000;
-
+	if (next_road_due <= gametime) {
+	//next_road_due+=1000;
+        //if (true) {
+	    next_road_due = gametime + 1000;
 	    construct_roads ();
+            //printf("Computer_Player: Building a road. next road due at %i, current GT %i\n", next_road_due, gametime);
 	}
+	//else printf("Computer_Player: Cant do roads yet, next at %i or %i GT  from %i GT.\n", 
+        //     (inhibit_road_building), (next_road_due), gametime);
 
 #if 0
 	if (not economies.empty() and inhibit_road_building <= gametime) {
@@ -448,6 +457,7 @@ void Computer_Player::think ()
 		roads.push_back (roads.front());
 		roads.pop_front ();
 	}
+	//printf("Computer_Player: Done inspecting road infrastructure.\n");
 }
 
 bool Computer_Player::construct_building ()
