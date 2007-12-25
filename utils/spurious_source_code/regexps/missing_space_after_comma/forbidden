@@ -1,0 +1,2 @@
+do_something('\t','u')
+do_something("\t","u")

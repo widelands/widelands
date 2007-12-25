@@ -1,0 +1,14 @@
+This was added to find some of the stuff that annoys Nicolai, such as:
+   if (a) throw wexception
+      ("Message explaining what went wrong, using format "
+       "argument such as %u, %ill and %s",
+       7, -9380350846789, "hej");
+
+He requires it to be formatted like this instead:
+   if (a)
+      throw wexception
+         ...
+
+So a line with "for (a)", "if (a)" or "while (a)" must end with one of the characters in the string "){};\". Although a comment at the end is allowed (therefore the complex regexp).
+
+It would indeed be inconsistent to wrap within the controlled statement without wrapping before it. A justification to do that would be to save vertical screen space.

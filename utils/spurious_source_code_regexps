@@ -1,21 +1,23 @@
 -------- For documentation see doc/README.spurious_source_code_regexps --------
-[	 ]$
-[^	]+[	]
-^([	 ]|[^/].|/[^/])* [,})]
-^("([^"]|\\")*\"|'(\\[\'nt]|[^\'])'|[^"'])*,[^ ]
-^([	 ]|[^/].|/[^/])*[^	 @]\{
-\{ +[^ /\\]
-^([	 ]|[^/].|/[^/])*\}[^ ,;}\]
-\([ ]
-(catch|for|if|switch|throw|while)\(
-[^_a-zA-Z0-9"](TRUE|FALSE)[^_a-zA-Z0-9"]
-\( *(const)* *void *\)
-(for|if|while) \((/[^/*]|[^/])*\) (/[^/*]|[^/])*[^){};\\]$
-_cast<const( +[_a-zA-Z][_a-zA-Z0-9]*)* *>
-_cast<( *[_a-zA-Z][_a-zA-Z0-9]*)* *\* *const *>
-\(( *const +)? *(void|float|double|u?(char|short|int((8|16|32|64)_t)?)|[US]int(8|16|32|64)) *\) *[^ :;{)=t]
-snprintf *\( *[_a-zA-Z][_a-zA-Z0-9]* *, *[[:digit:]]+
+DISABLED_TEST[	 ]$
+DISABLED_TEST[^	]+[	]
+DISABLED_TEST^([	 ]|[^/].|/[^/])* [,})]
+DISABLED_TEST^("([^"]|\\")*\"|'(\\[\'nt]|[^\'])'|[^"'])*,[^ ]
+DISABLED_TEST^([	 ]|[^/].|/[^/])*[^	 @]\{
+DISABLED_TEST\{ +[^ /\\]
+DISABLED_TEST^([	 ]|[^/].|/[^/])*\}[^ ,;}\]
+DISABLED_TEST\([ ]
+DISABLED_TEST(catch|for|if|switch|throw|while)\(
+DISABLED_TEST[^_a-zA-Z0-9"](TRUE|FALSE)[^_a-zA-Z0-9"]
+DISABLED_TEST\( *(const)* *void *\)
+DISABLED_TEST(for|if|while) \((/[^/*]|[^/])*\) (/[^/*]|[^/])*[^){};\\]$
+DISABLED_TEST_cast<const( +[_a-zA-Z][_a-zA-Z0-9]*)* *>
+DISABLED_TEST_cast<( *[_a-zA-Z][_a-zA-Z0-9]*)* *((const)? *\* *)* *const *>
+^([^/#"']|/([^/"']|"([^"]|\\")*"|'(\\[\'nt]|[^\'])')|"([^"]|\\")*"|'(\\[\'nt]|[^\'])')*(((((((((([_a-zA-Z0-9]o|[^o]|^)p|[^p]|^)e|[^e]|^)r|[^r]|^)a|[^a]|^)t|[^t]|^)o|[^o]|^)r|[^r]|^)[!=]|[^!=]|^)=|[^] "'_a-zA-Z0-9>=]|^) *\( *((const|long|(un)?signed|short) +)*[_a-zA-Z][_a-zA-Z0-9]* *((const)? *\* *)*(const *)?\) *[^].:,;{)=<>|?!& */%+-]
+DISABLED_TESTsnprintf *\( *[_a-zA-Z][_a-zA-Z0-9]* *, *[[:digit:]]+
 ^DISABLED_STILL_TOO_MANY_ERRORS	* +.*{$
-assert *\( *0 *\)
-[^_a-zA-Z0-9]this->[^*]
-^([	 ]|[^/].|/[^/])*[	 ]inline[ $/\]
+DISABLED_TESTassert *\( *0 *\)
+DISABLED_TEST[^_a-zA-Z0-9]this->[^*]
+DISABLED_TEST^([	 ]|[^/].|/[^/])*[	 ]inline[ $/\]
+DISABLED_TEST(	|; *)[_a-zA-Z][_a-zA-Z0-9]*( *(\\.|->) *[_a-zA-Z][_a-zA-Z0-9]*)* *(\+\+|--) *[);]
+DISABLED_TESTwexception *\( *"([^"]|\\")*\\n"

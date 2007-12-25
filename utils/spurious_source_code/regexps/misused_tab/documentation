@@ -1,0 +1,1 @@
+This catches a non-tab followed by a tab. Tabs are only allowed as the first character on a line or immediately following another tab. This is to make sure that tabs are not used for anything else than indentation.

@@ -1,0 +1,4 @@
+	for(;;)
+	catch(...) {
+	while(true)
+	throw('\n')

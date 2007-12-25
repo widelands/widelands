@@ -1,0 +1,6 @@
+_cast<  const  fgh   >
+_cast<   ghf   *  const   >
+_cast<   ghf   *  const   >
+_cast<   ghf  const  *  const   >
+_cast<   ghf  const  *  const   *const>
+_cast<   ghf**const>

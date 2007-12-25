@@ -1,0 +1,14 @@
+#! /bin/sh
+
+REGEXPS_FILE="/tmp/spurious_source_code_regexps"
+rm -f $REGEXPS_FILE
+for r in utils/spurious_source_code/regexps/*; do
+	[[ -d $r ]] && if [ ! -f $r/disabled ]; then
+		cat $r/regexps >> $REGEXPS_FILE
+	fi
+done
+for i in $(find src -name *.h -o -name *.cc); do
+	egrep --color --with-filename --line-number -f $REGEXPS_FILE $i;
+	utils/detect_spurious_indentation.py $i;
+done
+#rm -f $REGEXPS_FILE

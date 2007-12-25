@@ -1,0 +1,3 @@
+if (condition) do_something();
+if (c) throw wexception("Something went wrong.");
+if (c)

@@ -1,0 +1,14 @@
+(a)b
+(a *)b
+(a const *)b
+(a **)b
+(a * * )b
+(a * * const)b
+(a const * * const)b
+=(a) b
+goperator!=(b) and
+goperator==(b) or
+operagor!=(b) and
+operagor==(b) or
+perator!=(b) and
+perator==(b) or
