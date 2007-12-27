@@ -51,7 +51,7 @@ void Flag::draw
 			warepos.y -= 6 + (i - 8) * 3;
 		dst.drawanim
 			(warepos,
-			 m_items[i].item->get_ware_descr()->get_animation("idle"),
+			 m_items[i].item->descr().get_animation("idle"),
 			 0,
 			 get_owner());
 	}

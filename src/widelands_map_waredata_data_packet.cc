@@ -89,8 +89,7 @@ throw (_wexception)
 								("Widelands_Map_Waredata_Data_Packet: ware index out "
 								 "of range: %i\n",
 								 ware_index_from_file);
-						ware->m_ware_descr =
-							tribe.get_ware_descr(ware->descr_index());
+						ware->m_descr = tribe.get_ware_descr(ware->descr_index());
 						ware->set_economy(player_immovable->get_economy());
 					} else
 						throw wexception
@@ -105,7 +104,7 @@ throw (_wexception)
 							("Widelands_Map_Waredata_Data_Packet: ware index out of "
 							 "range: %i\n",
 							 ware_index_from_file);
-					ware->m_ware_descr = tribe.get_ware_descr(ware->descr_index());
+					ware->m_descr = tribe.get_ware_descr(ware->descr_index());
 					ware->m_economy = 0; //  The worker sets our economy.
 				} else
 					throw wexception

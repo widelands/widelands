@@ -191,7 +191,6 @@ WareInstance::WareInstance
 Map_Object   (ware_descr),
 m_economy    (0),
 m_descr_index(i),
-m_ware_descr (ware_descr),
 m_supply     (0),
 m_transfer   (0)
 {}
@@ -311,7 +310,7 @@ void WareInstance::update(Game* g)
 {
 	Map_Object* loc = m_location.get(g);
 
-	if (!m_ware_descr) // Upsy, we're not even intialized. Happens on load
+	if (!m_descr) // Upsy, we're not even intialized. Happens on load
 		return;
 
 	// Reset our state if we're not on location or outside an economy

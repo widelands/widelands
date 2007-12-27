@@ -2331,7 +2331,7 @@ void Worker::draw_inner(const Editor_Game_Base & game, RenderTarget & dst,
 	if (carried_item)
 		dst.drawanim
 			(drawpos - Point(0, 15),
-			 carried_item->get_ware_descr()->get_animation("idle"),
+			 carried_item->descr().get_animation("idle"),
 			 0,
 			 get_owner());
 }
