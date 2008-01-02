@@ -156,7 +156,7 @@ void Main_Menu_Load_Map::clicked_ok() {
          m_mapfiles.clear();
          fill_list();
 		} else {
-         load_map(filename);
+			m_parent->load(filename);
          delete this;
 		}
 }
@@ -268,71 +268,4 @@ void Main_Menu_Load_Map::fill_list() {
 	}
 
 	if (m_ls->size()) m_ls->select(0);
-}
-
-/*
- * Load map complete
- */
-void Main_Menu_Load_Map::load_map(std::string filename) {
-	Editor_Game_Base & egbase = m_parent->egbase();
-	Map              & map    = egbase.map();
-
-	if (filename != "") {
-		egbase.cleanup_for_load(true, false);
-
-		Map_Loader * const ml = map.get_correct_loader(filename.c_str());
-
-		UI::ProgressWindow loader_ui;
-         ml->preload_map(true);
-
-		 loader_ui.step (_("Loading world data"));
-		ml->load_world();
-		ml->load_map_complete(&egbase, true);
-		egbase.postload();
-		egbase.load_graphics(loader_ui);
-
-      // Now update all the visualisations
-      // Player positions
-      std::string text;
-		const Player_Number nr_players = map.get_nrplayers();
-		iterate_player_numbers(p, nr_players)
-			if (const Coords sp = map.get_starting_pos(p))
-				//  Have overlay on starting position only when it has no building.
-				if (not dynamic_cast<const Building *>(map[sp].get_immovable())) {
-					char picname[] ="pics/editor_player_??_starting_pos.png";
-					picname[19] = static_cast<char>(p / 10 + 0x30);
-					picname[20] = static_cast<char>(p % 10 + 0x30);
-					const uint32_t picid = g_gr->get_picture(PicMod_Game, picname);
-					uint32_t w, h;
-					g_gr->get_picture_size(picid, w, h);
-					map.overlay_manager().register_overlay
-						(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
-				}
-
-      /* Resources. we do not calculate default resources, therefore we do
-       * not expect to meet them here. */
-		const World & world = map.world();
-		Overlay_Manager & overlay_manager = map.overlay_manager();
-		const Extent extent = map.extent();
-		iterate_Map_FCoords(map, extent, fc) {
-			if (const uint8_t amount = fc.field->get_resources_amount()) {
-				const std::string & immname =
-					world.get_resource(fc.field->get_resources())->get_editor_pic
-					(amount);
-					if (immname.size())
-						overlay_manager.register_overlay
-							(fc,
-							 g_gr->get_picture(PicMod_Game, immname.c_str()),
-							 4);
-				}
-			}
-
-      // Tell the interactive that the map is saved and all
-      m_parent->set_need_save(false);
-
-      // Redraw everything
-      m_parent->need_complete_redraw();
-
-      delete ml;
-	}
 }

@@ -54,7 +54,6 @@ private:
 	void double_clicked(uint32_t);
 
       void fill_list();
-      void load_map(std::string);
 
       UI::Textarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;
       UI::Multiline_Textarea* m_descr;

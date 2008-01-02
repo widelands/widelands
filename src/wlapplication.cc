@@ -275,7 +275,7 @@ void WLApplication::run()
 	if (editor_commandline) {
 		g_sound_handler.start_music("ingame");
 		//  FIXME add the ability to load a map directly
-		Editor_Interactive::run_editor();
+		Editor_Interactive::run_editor(m_editor_filename);
 	} else if (m_loadgame_filename.size()) {
 		assert(not m_game);
 		m_game = new Game;
@@ -1139,7 +1139,7 @@ void WLApplication::mainmenu()
 			break;
 
 		case Fullscreen_Menu_Main::mm_editor:
-			Editor_Interactive::run_editor();
+			Editor_Interactive::run_editor(m_editor_filename);
 			break;
 
 		default:

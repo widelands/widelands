@@ -42,7 +42,7 @@ class Editor_Tool;
 struct Editor_Interactive : public Interactive_Base {
 	friend struct Editor_Tool_Menu;
 
-	static void run_editor();
+	static void run_editor(std::string const & filename);
 
 private:
 	Editor_Interactive(Editor_Game_Base &);
@@ -51,6 +51,8 @@ private:
 public:
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
+
+	void load(std::string const & filename);
 
 	// leaf functions from base class
 	void start();

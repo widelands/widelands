@@ -845,7 +845,7 @@ void Editor_Game_Base::cleanup_for_load
 		*p = 0;
 	}
 
-	m_map->cleanup();
+	if (m_map) m_map->cleanup();
 }
 
 

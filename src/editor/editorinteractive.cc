@@ -36,9 +36,11 @@
 #include "player.h"
 #include "tribe.h"
 #include "ui_button.h"
+#include "widelands_map_loader.h"
+#include "wlapplication.h"
+
 #include "ui_modal_messagebox.h"
 #include "ui_progresswindow.h"
-#include "wlapplication.h"
 
 #include <SDL_keysym.h>
 
@@ -133,20 +135,70 @@ Interactive_Base(e), m_egbase(e)
 		 &Editor_Interactive::toggle_objectivesmenu, this,
 		 _("Objectives"));
 
-   // Load all tribes into memory
-   std::vector<std::string> tribes;
-	Tribe_Descr::get_all_tribenames(tribes);
-	for (uint32_t i = 0; i < tribes.size(); ++i)
-		e.manually_load_tribe(tribes[i].c_str());
-
    m_need_save=false;
    m_ctrl_down=false;
-
-	select_tool(tools.increase_height, Editor_Tool::First);
 }
 
 /// Restore default sel.
 Editor_Interactive::~Editor_Interactive() {unset_sel_picture();}
+
+
+void Editor_Interactive::load(std::string const & filename) {
+	assert(filename.size());
+
+	Map & map = egbase().map();
+
+	egbase().cleanup_for_load(true, false);
+
+	Map_Loader * const ml = map.get_correct_loader(filename.c_str());
+
+	UI::ProgressWindow loader_ui;
+	ml->preload_map(true);
+
+	loader_ui.step (_("Loading world data"));
+	ml->load_world();
+	ml->load_map_complete(&egbase(), true);
+	egbase().load_graphics(loader_ui);
+
+	// Now update all the visualisations
+	// Player positions
+	std::string text;
+	const Player_Number nr_players = map.get_nrplayers();
+	iterate_player_numbers(p, nr_players)
+		if (const Coords sp = map.get_starting_pos(p))
+			//  Have overlay on starting position only when it has no building.
+			if (not dynamic_cast<const Building *>(map[sp].get_immovable())) {
+				char picname[] ="pics/editor_player_??_starting_pos.png";
+				picname[19] = static_cast<char>(p / 10 + 0x30);
+				picname[20] = static_cast<char>(p % 10 + 0x30);
+				const uint32_t picid = g_gr->get_picture(PicMod_Game, picname);
+				uint32_t w, h;
+				g_gr->get_picture_size(picid, w, h);
+				map.overlay_manager().register_overlay
+					(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
+			}
+
+	//  Resources. we do not calculate default resources, therefore we do not
+	//  expect to meet them here.
+	const World & world = map.world();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	const Extent extent = map.extent();
+	iterate_Map_FCoords(map, extent, fc) {
+		if (const uint8_t amount = fc.field->get_resources_amount()) {
+			const std::string & immname =
+				world.get_resource(fc.field->get_resources())->get_editor_pic
+				(amount);
+			if (immname.size())
+				overlay_manager.register_overlay
+					(fc, g_gr->get_picture(PicMod_Game, immname.c_str()), 4);
+		}
+	}
+
+	set_need_save(false);
+	need_complete_redraw();
+
+	delete ml;
+}
 
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -486,24 +538,44 @@ bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
  * Public static method to create an instance of the editor
  * and run it. This takes care of all the setup and teardown.
  */
-void Editor_Interactive::run_editor()
+void Editor_Interactive::run_editor(std::string const & filename)
 {
 	Editor_Game_Base editor;
-	UI::ProgressWindow loader_ui;
-
-	Map* m = new Map;
-	m->create_empty_map();
-	editor.set_map(m);
-
-	g_gr->flush(PicMod_Menu);
-
 	Editor_Interactive eia(editor);
 	editor.set_iabase(&eia); //TODO: get rid of this
+	{
+		UI::ProgressWindow loader_ui;
+		g_gr->flush(PicMod_Menu);
 
-	editor.postload();
-	editor.load_graphics(loader_ui);
+		{
+			Map & map = *new Map;
+			editor.set_map(&map);
+			if (filename.empty()) {
+				loader_ui.step("Creating empty map...");
+				map.create_empty_map();
+				editor.load_graphics(loader_ui);
+			} else {
+				loader_ui.stepf("Loading map \"%s\"...", filename.c_str());
+				eia.load(filename);
+			}
+		}
 
-	eia.start();
+		{ //  Load all tribes into memory
+			std::vector<std::string> tribenames;
+			Tribe_Descr::get_all_tribenames(tribenames);
+			std::vector<std::string>::const_iterator const tribenames_end =
+				tribenames.end();
+			for
+				(std::vector<std::string>::const_iterator it = tribenames.begin();
+				 it != tribenames_end;
+				 ++it)
+				editor.manually_load_tribe(it->c_str());
+		}
+
+		eia.select_tool(eia.tools.increase_height, Editor_Tool::First);
+		editor.postload();
+		eia.start();
+	}
 	eia.run();
 
 	editor.cleanup_objects();
