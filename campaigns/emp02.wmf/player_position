@@ -1,9 +1,7 @@
 # player_position-file of second Empire Tutorial - created by Peter Schwanemann, 2007
 
 [global]
-packet_version=1
-player_1_x=16
-player_1_y=21
-player_2_x=60
-player_2_y=65
+packet_version=2
+player_1=16 21
+player_2=60 65
 

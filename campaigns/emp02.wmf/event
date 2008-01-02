@@ -29,13 +29,13 @@ version=2
 point=17 10
 area=6
 player=1
+duration=0
 
 [Goto forests]
 type=move_view
 state=init
-version=1
-point_x=17
-point_y=10
+version=2
+point=17 10
 
 [Diary page 5.1]
 type=message_box
@@ -76,9 +76,8 @@ setto=true
 [Goto stones]
 type=move_view
 state=init
-version=1
-point_x=14
-point_y=31
+version=2
+point=14 31
 
 [Diary page 5.2]
 type=message_box
@@ -464,13 +463,13 @@ version=2
 point=15 46
 area=5
 player=1
+duration=0
 
 [Goto Shipparts]
 type=move_view
 state=init
-version=1
-point_x=15
-point_y=46
+version=2
+point=15 46
 
 [Saledus 1]
 type=message_box
@@ -531,13 +530,13 @@ version=2
 point=35 19
 area=5
 player=1
+duration=0
 
 [Goto Marblemountains]
 type=move_view
 state=init
-version=1
-point_x=35
-point_y=19
+version=2
+point=35 19
 
 [Saledus 2]
 type=message_box
@@ -589,6 +588,7 @@ version=2
 point=38 37
 area=6
 player=1
+duration=0
 
 [Show Coalmountains]
 type=unhide_area
@@ -597,13 +597,13 @@ version=2
 point=49 22
 area=6
 player=1
+duration=0
 
 [Goto Mountains middle]
 type=move_view
 state=init
-version=1
-point_x=42
-point_y=27
+version=2
+point=42 27
 
 [Saledus 3]
 type=message_box
@@ -842,6 +842,7 @@ version=2
 point=60 61
 area=6
 player=1
+duration=0
 
 [Show Barbarians 2]
 type=unhide_area
@@ -850,13 +851,13 @@ version=2
 point=60 48
 area=6
 player=1
+duration=0
 
 [Goto Barbarians]
 type=move_view
 state=init
-version=1
-point_x=59
-point_y=55
+version=2
+point=59 55
 
 [Diary page 8]
 type=message_box
