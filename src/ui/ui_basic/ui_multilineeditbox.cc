@@ -59,13 +59,14 @@ Multiline_Editbox::~Multiline_Editbox() {
 /**
 a key event must be handled
 */
-bool Multiline_Editbox::handle_key(bool down, int32_t code, char c) {
+bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
+	char c = code.unicode & 0xff80 ? '\0' : code.unicode;
 
    m_needs_update=true;
 
 	if (down) {
       std::string txt= g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
-		switch (code) {
+		switch (code.sym) {
 		case SDLK_BACKSPACE:
 			if (txt.size() and m_cur_pos) --m_cur_pos;
 			else break;

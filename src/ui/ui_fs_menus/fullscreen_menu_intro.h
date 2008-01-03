@@ -33,7 +33,7 @@ struct Fullscreen_Menu_Intro : public Fullscreen_Menu_Base {
 protected:
 	virtual bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	virtual bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
-	virtual bool handle_key(bool down, int32_t code, char c);
+	bool handle_key(bool down, SDL_keysym);
 };
 
 #endif // __S__INTRO_H

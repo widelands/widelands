@@ -79,7 +79,7 @@ struct Interactive_Player : public Interactive_Base {
 
 	void field_action();
 
-	bool handle_key(bool down, SDL_keysym code);
+	bool handle_key(bool down, SDL_keysym);
 
 	Game * get_game() const {return m_game;}
 	Game & game() const {return *m_game;}

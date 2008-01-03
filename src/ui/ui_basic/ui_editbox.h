@@ -46,7 +46,7 @@ struct Edit_Box : private Basic_Button {
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-     bool handle_key(bool down, SDL_keysym code);
+	bool handle_key(bool down, SDL_keysym);
      void handle_mousein(bool);
 
 protected:

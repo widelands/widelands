@@ -306,17 +306,16 @@ void Editor_Interactive::toolsize_menu_btn() {
 }
 
 
-bool Editor_Interactive::handle_key(bool down, SDLKey code, char)
+bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 {
 	bool handled=false;
 
-	if (code==SDLK_LCTRL || code==SDLK_RCTRL) m_ctrl_down = down;
+	if (code.sym == SDLK_LCTRL || code.sym == SDLK_RCTRL) m_ctrl_down = down;
 
 	if (down)
 	{
 		// only on down events
-		switch (code)
-		{
+		switch (code.sym) {
 		// Sel radius
 		case SDLK_1:
 			set_sel_radius (0);
@@ -442,8 +441,7 @@ bool Editor_Interactive::handle_key(bool down, SDLKey code, char)
 	else
 	{
 		// key up events
-		switch (code)
-		{
+		switch (code.sym) {
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
 		case SDLK_LALT:

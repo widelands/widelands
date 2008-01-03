@@ -44,7 +44,7 @@ public:
 	Game* get_game();
 	Player* get_player() const throw ();
 
-	bool handle_key(bool down, SDL_keysym code);
+	bool handle_key(bool down, SDL_keysym);
 	void end_of_game();
 
 private:

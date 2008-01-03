@@ -47,7 +47,7 @@ struct Multiline_Editbox : public Multiline_Textarea {
       // Event functions
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
-      bool handle_key(bool down, int32_t code, char c);
+	bool handle_key(bool down, SDL_keysym);
       void set_text(const char* str);
 
 private:
