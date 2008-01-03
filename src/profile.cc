@@ -1006,7 +1006,7 @@ void Profile::write
 {
 	FileWrite fw;
 
-	fw.Printf("# Automatically created by Widelands " BUILD_ID "\n\n");
+	fw.Printf("# Automatically created by Widelands " BUILD_ID "\n");
 
 	for
 		(Section_list::iterator s = m_sections.begin();
@@ -1016,7 +1016,7 @@ void Profile::write
 		if (used_only && !s->is_used())
 			continue;
 
-		fw.Printf("[%s]\n", s->get_name());
+		fw.Printf("\n[%s]\n", s->get_name());
 
 		for
 			(Section::Value_list::iterator v = s->m_values.begin();
@@ -1037,8 +1037,6 @@ void Profile::write
          else
             fw.Printf("%s='%s'\n", v->get_name(), v->get_string());
 		}
-
-		fw.Printf("\n");
 	}
 
 	fw.Write(fs, filename);
