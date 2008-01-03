@@ -29,7 +29,7 @@ version=2
 point=17 10
 area=6
 player=1
-duration=0
+duration=5000
 
 [Goto forests]
 type=move_view
@@ -463,7 +463,7 @@ version=2
 point=15 46
 area=5
 player=1
-duration=0
+duration=5000
 
 [Goto Shipparts]
 type=move_view
@@ -530,7 +530,7 @@ version=2
 point=35 19
 area=5
 player=1
-duration=0
+duration=5000
 
 [Goto Marblemountains]
 type=move_view
@@ -588,7 +588,7 @@ version=2
 point=38 37
 area=6
 player=1
-duration=0
+duration=5000
 
 [Show Coalmountains]
 type=unhide_area
@@ -597,7 +597,7 @@ version=2
 point=49 22
 area=6
 player=1
-duration=0
+duration=5000
 
 [Goto Mountains middle]
 type=move_view
@@ -842,7 +842,7 @@ version=2
 point=60 61
 area=6
 player=1
-duration=0
+duration=5000
 
 [Show Barbarians 2]
 type=unhide_area
@@ -851,7 +851,7 @@ version=2
 point=60 48
 area=6
 player=1
-duration=0
+duration=5000
 
 [Goto Barbarians]
 type=move_view
@@ -1027,4 +1027,3 @@ posx=-1
 posy=-1
 button_00_name=OK
 button_00_has_trigger=false
-

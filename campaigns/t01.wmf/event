@@ -428,23 +428,20 @@ allow=true
 [Goto Al'thunran]
 type=move_view
 state=init
-version=1
-point_x=53
-point_y=43
+version=2
+point=53 43
 
 [Goto Grave]
 type=move_view
 state=init
-version=1
-point_x=25
-point_y=22
+version=2
+point=25 22
 
 [Goto Home]
 type=move_view
 state=init
-version=1
-point_x=12
-point_y=10
+version=2
+point=12 10
 
 [Order Msg 1]
 type=message_box
@@ -585,20 +582,20 @@ button_00_trigger=Order7
 [Show Al'thunran]
 type=unhide_area
 state=init
-version=1
-point_x=51
-point_y=46
+version=2
+point=51 46
 area=14
 player=1
+duration=5000
 
 [Show Grave]
 type=unhide_area
 state=init
-version=1
-point_x=24
-point_y=29
+version=2
+point=24 29
 area=6
 player=1
+duration=5000
 
 [Story Msg 1]
 type=message_box

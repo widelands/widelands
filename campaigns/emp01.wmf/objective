@@ -1,5 +1,3 @@
-# Automatically created by Widelands svnbuild
-
 [global]
 packet_version=1
 
@@ -32,4 +30,3 @@ descr=_"Build a quarry in the south, to cut some stones and marble out of the ro
 visible=false
 optional=false
 trigger=Forester complete
-

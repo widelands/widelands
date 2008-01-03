@@ -1,9 +1,6 @@
-# Automatically created by Widelands svnbuild
-
 [global]
 packet_version=1
 
 [player_1]
 name=Lutius
 tribe=empire
-

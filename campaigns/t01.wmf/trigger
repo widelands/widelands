@@ -1,14 +1,11 @@
-# Automatically created by Widelands build-9
-
 [global]
 packet_version=1
 
 [Built Lumberjack 1]
 type=building
 set=false
-version=1
-point_x=15
-point_y=11
+version=2
+point=15 11
 area=2
 player=1
 count=1
@@ -17,9 +14,8 @@ building=lumberjack
 [Built Lumberjack 2]
 type=building
 set=false
-version=1
-point_x=12
-point_y=13
+version=2
+point=12 13
 area=2
 player=1
 count=1
@@ -28,9 +24,8 @@ building=lumberjack
 [Built Ranger]
 type=building
 set=false
-version=1
-point_x=17
-point_y=11
+version=2
+point=17 11
 area=2
 player=1
 count=1
@@ -39,9 +34,8 @@ building=ranger
 [Built Quarries]
 type=building
 set=false
-version=1
-point_x=8
-point_y=13
+version=2
+point=8 13
 area=2
 player=1
 count=2
@@ -110,4 +104,3 @@ set=false
 version=1
 wait_time=5
 last_start_time=0
-

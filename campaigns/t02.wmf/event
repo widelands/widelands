@@ -793,11 +793,11 @@ button_00_trigger=Mission Fernery
 [Show Rocks]
 type=unhide_area
 state=init
-version=1
-point_x=27
-point_y=48
+version=2
+point=27 48
 area=6
 player=1
+duration=5000
 
 [Story Msg 1]
 type=message_box
@@ -921,4 +921,3 @@ state=init
 version=1
 entry=campsect1
 vcase=0
-
