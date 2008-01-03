@@ -20,6 +20,7 @@
 #ifndef __S__EDITOR_MAIN_MENU_H
 #define __S__EDITOR_MAIN_MENU_H
 
+#include "ui_button.h"
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
@@ -35,10 +36,15 @@ this represents the main menu
 */
 struct Editor_Main_Menu : public UI::UniqueWindow {
       Editor_Main_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
-      virtual ~Editor_Main_Menu();
 
 private:
-      Editor_Interactive *m_parent;
+	Editor_Interactive         & m_parent;
+	UI::Button<Editor_Main_Menu> m_button_new_map;
+	UI::Button<Editor_Main_Menu> m_button_load_map;
+	UI::Button<Editor_Main_Menu> m_button_save_map;
+	UI::Button<Editor_Main_Menu> m_button_map_options;
+	UI::Button<Editor_Main_Menu> m_button_view_readme;
+	UI::Button<Editor_Main_Menu> m_button_exit_editor;
 
 	UI::UniqueWindow::Registry m_window_readme;
 

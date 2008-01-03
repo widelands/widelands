@@ -26,10 +26,6 @@
 #include "fullscreen_menu_fileview.h"
 #include "i18n.h"
 
-#include "ui_button.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
-
 /*
 ===============
 Editor_Main_Menu::Editor_Main_Menu
@@ -37,84 +33,58 @@ Editor_Main_Menu::Editor_Main_Menu
 Create all the buttons etc...
 ===============
 */
+#define width 120
+#define height 20
+#define margin 15
+#define hmargin margin
+#define vmargin margin
+#define vspacing 15
 Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
-	: UI::UniqueWindow(parent, registry, 150, 225, _("Main Menu"))
+:
+UI::UniqueWindow(parent, registry, 2 * hmargin + width, 225, _("Main Menu")),
+m_parent(*parent),
+m_button_new_map
+(this,
+ hmargin, vmargin + 0 * (height + vspacing), width, height,
+ 1,
+ &Editor_Main_Menu::new_map_btn, this,
+ _("New Map")),
+
+m_button_load_map
+(this,
+ hmargin, vmargin + 1 * (height + vspacing), width, height,
+ 1,
+ &Editor_Main_Menu::load_btn, this,
+ _("Load Map")),
+
+m_button_save_map
+(this,
+ hmargin, vmargin + 2 * (height + vspacing), width, height,
+ 1,
+ &Editor_Main_Menu::save_btn, this,
+ _("Save Map")),
+
+m_button_map_options
+(this,
+ hmargin, vmargin + 3 * (height + vspacing), width, height,
+ 1,
+ &Editor_Main_Menu::map_options_btn, this,
+ _("Map Options")),
+
+m_button_view_readme
+(this,
+ hmargin, vmargin + 4 * (height + vspacing), width, height,
+ 1,
+ &Editor_Main_Menu::readme_btn, this,
+ _("View Readme")),
+
+m_button_exit_editor
+(this,
+ hmargin, vmargin + 5 * (height + vspacing), width, height,
+ 0,
+ &Editor_Main_Menu::exit_btn, this,
+ _("Exit Editor"))
 {
-   m_parent=parent;
-
-   // UI::Buttons
-   const int32_t offsx=15;
-   const int32_t offsy=15;
-   const int32_t spacing=5;
-   const int32_t width=get_inner_w()-offsx*2;
-   const int32_t height=20;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
-
-	new UI::Button<Editor_Main_Menu>
-		(this,
-		 posx, posy, width, height,
-		 1,
-		 &Editor_Main_Menu::new_map_btn, this,
-		 _("New Map"));
-
-   posy+=height+spacing;
-
-   posy+=spacing;
-
-	new UI::Button<Editor_Main_Menu>
-		(this,
-		 posx, posy, width, height,
-		 1,
-		 &Editor_Main_Menu::load_btn, this,
-		 _("Load Map"));
-
-   posy+=height+spacing;
-
-   posy+=spacing;
-
-	new UI::Button<Editor_Main_Menu>
-		(this,
-		 posx, posy, width, height,
-		 1,
-		 &Editor_Main_Menu::save_btn, this,
-		 _("Save Map"));
-
-   posy+=height+spacing;
-
-   posy+=spacing;
-
-	new UI::Button<Editor_Main_Menu>
-		(this,
-		 posx, posy, width, height,
-		 1,
-		 &Editor_Main_Menu::map_options_btn, this,
-		 _("Map Options"));
-
-   posy+=height+spacing;
-
-   posy+=spacing;
-
-	new UI::Button<Editor_Main_Menu>
-		(this,
-		 posx, posy, width, height,
-		 1,
-		 &Editor_Main_Menu::readme_btn, this,
-		 _("View Readme"));
-
-   posy+=height+spacing;
-
-   posy+=spacing+(height+spacing);
-
-	new UI::Button<Editor_Main_Menu>
-		(this,
-		 posx, posy, width, height,
-		 0,
-		 &Editor_Main_Menu::exit_btn, this,
-		 _("Exit Editor"));
-
-   posy+=height+spacing;
-
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -128,34 +98,23 @@ called, when buttons get clicked
 ===========
 */
 void Editor_Main_Menu::new_map_btn() {
-   new Main_Menu_New_Map(m_parent);
+	new Main_Menu_New_Map(&m_parent);
    delete this;
 }
 void Editor_Main_Menu::load_btn() {
-   new Main_Menu_Load_Map(m_parent);
+	new Main_Menu_Load_Map(&m_parent);
    delete this;
 }
 
 void Editor_Main_Menu::save_btn() {
-   new Main_Menu_Save_Map(m_parent);
+	new Main_Menu_Save_Map(&m_parent);
    delete this;
 }
 void Editor_Main_Menu::map_options_btn() {
-   new Main_Menu_Map_Options(m_parent);
+	new Main_Menu_Map_Options(&m_parent);
    delete this;
 }
-void Editor_Main_Menu::exit_btn() {m_parent->exit();}
+void Editor_Main_Menu::exit_btn() {m_parent.exit();}
 void Editor_Main_Menu::readme_btn() {
-   fileview_window(m_parent, &m_window_readme, "txts/editor_readme");
-}
-
-/*
-===============
-Editor_Main_Menu::~Editor_Main_Menu
-
-Unregister from the registry pointer
-===============
-*/
-Editor_Main_Menu::~Editor_Main_Menu()
-{
+	fileview_window(&m_parent, &m_window_readme, "txts/editor_readme");
 }
