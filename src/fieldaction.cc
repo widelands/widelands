@@ -122,7 +122,8 @@ belongs to and trigger signal buildclicked.
 */
 void BuildGrid::clickslot(int32_t idx)
 {
-	buildclicked.call(reinterpret_cast<int32_t>(get_data(idx)));
+	buildclicked.call
+		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
@@ -136,7 +137,8 @@ building it belongs to and trigger signal buildmouseout.
 */
 void BuildGrid::mouseoutslot(int32_t idx)
 {
-	buildmouseout.call(reinterpret_cast<int32_t>(get_data(idx)));
+	buildmouseout.call
+		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
@@ -150,7 +152,8 @@ building it belongs to and trigger signal buildmousein.
 */
 void BuildGrid::mouseinslot(int32_t idx)
 {
-	buildmousein.call(reinterpret_cast<int32_t>(get_data(idx)));
+	buildmousein.call
+		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
