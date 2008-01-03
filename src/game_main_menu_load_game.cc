@@ -111,13 +111,10 @@ Game_Main_Menu_Load_Game::~Game_Main_Menu_Load_Game()
 
 
 void Game_Main_Menu_Load_Game::clicked_ok()
-{
-	load_game(m_ls->get_selected());
-	delete this;
-}
+{if (load_game(m_ls->get_selected())) die();}
 
 void Game_Main_Menu_Load_Game::clicked_cancel() {
-	delete this;
+	die();
 }
 
 /*
@@ -207,7 +204,7 @@ void Game_Main_Menu_Load_Game::edit_box_changed() {
  * returns true if dialog should close, false if it
  * should stay open
  */
-void Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
+bool Game_Main_Menu_Load_Game::load_game(std::string const & filename) {
 	FileSystem* fs = 0;
 
 	try {
@@ -226,6 +223,8 @@ void Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
 			(m_parent, _("Load Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
 	}
-
 	delete fs;
+	die();
+
+	return true;
 }

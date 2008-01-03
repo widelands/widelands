@@ -124,7 +124,6 @@ public:
 	virtual void think();
 
 private:
-	void die() __attribute__((deprecated));
 	void bulldoze();
 
 private:
@@ -190,10 +189,6 @@ BulldozeConfirm::~BulldozeConfirm()
 {
 }
 
-void BulldozeConfirm::die()
-{
-	delete this;
-}
 
 /*
 ===============
@@ -210,7 +205,7 @@ void BulldozeConfirm::think()
 
 	if (!todestroy || !building ||
 	    !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
-		delete this;
+		die();
 }
 
 
@@ -238,7 +233,7 @@ void BulldozeConfirm::bulldoze()
 		}
 	}
 
-	delete this;
+	die();
 }
 
 
@@ -747,7 +742,7 @@ void Building_Window::act_start_stop() {
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Stopable))
 		g->send_player_start_stop_building (m_building);
 
-	delete this;
+	die();
 }
 
 /*
@@ -763,7 +758,7 @@ void Building_Window::act_enhance(const Building_Descr::Index id)
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
 		g->send_player_enhance_building (m_building, id);
 
-	delete this;
+	die();
 }
 
 /*
@@ -1203,7 +1198,8 @@ void ProductionSite_Window_ListWorkerWindow::think() {
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
 		// The Productionsite has been removed. Die quickly.
-		delete this;
+		die();
+		return;
 	}
 
    fill_list();
@@ -1492,7 +1488,7 @@ void ProductionSite_Window::list_worker_clicked() {
    assert(*m_reg==this);
 
    *m_reg=new ProductionSite_Window_ListWorkerWindow(m_parent, get_productionsite());
-   delete this;
+	die();
 }
 
 /*
@@ -1651,7 +1647,8 @@ void MilitarySite_Window::think()
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
 		// The Site has been removed. Die quickly.
-		delete this;
+		die();
+		return;
 	}
    update();
 }
@@ -1900,7 +1897,8 @@ void TrainingSite_Options_Window::think()
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
 		// The Site has been removed. Die quickly.
-		delete this;
+		die();
+		return;
 	}
 	update();
 }
@@ -2111,7 +2109,8 @@ void TrainingSite_Window::think()
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
 		// The Site has been removed. Die quickly.
-		delete this;
+		die();
+		return;
 	}
 	update();
 }
@@ -2172,7 +2171,7 @@ void TrainingSite_Window::options_button_clicked () {
 	assert(*m_reg==this);
 
 	*m_reg=new TrainingSite_Options_Window(m_parent, get_trainingsite());
-	delete this;
+	die();
 }
 
 /*

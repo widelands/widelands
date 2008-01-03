@@ -35,8 +35,6 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
       virtual ~Game_Main_Menu_Save_Game();
 
 private:
-	void die() __attribute__((deprecated));
-
 	void clicked_ok    ();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);

@@ -150,11 +150,6 @@ Main_Menu_Save_Map::~Main_Menu_Save_Map()
 {
 }
 
-void Main_Menu_Save_Map::die()
-{
-	delete this;
-}
-
 /*
 ===========
 called when the ok button has been clicked
@@ -176,7 +171,7 @@ void Main_Menu_Save_Map::clicked_ok() {
 		} else {
          // Ok, save this map
          if (save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
-            delete this;
+				die();
 		}
 }
 void Main_Menu_Save_Map::clicked_make_directory() {
@@ -375,7 +370,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		mbox.run();
 	}
    delete fs;
-   delete this;
+	die();
 
    return true;
 }

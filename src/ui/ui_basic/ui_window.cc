@@ -485,15 +485,16 @@ bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int3
 				const bool SOWO = parent->get_snap_windows_only_when_overlapping();
 				const int32_t right = left + w, bot = top + h;
 
-				for (panellist_cit i=parent->get_first_child();
-				     i!=parent->get_last_child();
-				     ++i)
+				for
+					(const Panel * snap_target = parent->get_first_child();
+					 snap_target;
+					 snap_target = snap_target->get_next_sibling())
 				{
-					if ((*i) != this and (*i)->is_snap_target()) {
-						const int32_t other_left  = (*i)->get_x();
-						const int32_t other_top   = (*i)->get_y();
-						const int32_t other_right = other_left + (*i)->get_w();
-						const int32_t other_bot   = other_top  + (*i)->get_h();
+					if (snap_target != this and snap_target->is_snap_target()) {
+						int32_t const other_left  = snap_target->get_x();
+						int32_t const other_top   = snap_target->get_y();
+						int32_t const other_right = other_left + snap_target->get_w();
+						int32_t const other_bot   = other_top  + snap_target->get_h();
 
 						if (other_top <= bot && other_bot >= top) {
 							if (not SOWO || left <= other_right) {

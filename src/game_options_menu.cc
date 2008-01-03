@@ -142,12 +142,12 @@ void GameOptionsMenu::clicked_sound() {
 
 void GameOptionsMenu::clicked_save_game() {
 	new Game_Main_Menu_Save_Game(&m_player, &m_windows.savegame);
-	delete this;
+	die();
 }
 
 void GameOptionsMenu::clicked_load_game() {
 	new Game_Main_Menu_Load_Game(&m_player, &m_windows.loadgame);
-	delete this;
+	die();
 }
 
 void GameOptionsMenu::clicked_exit_game() {m_player.end_modal(0);}

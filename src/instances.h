@@ -102,7 +102,7 @@ given type (e.g. trees) within a certain radius.
 
 DO NOT allocate/free Map_Objects directly.
 Use the appropriate type-dependent create() function for creation, and call
-delete() the created object for removal
+die () for removal.
 Note that convenient creation functions are defined in class Game.
 
 When you do create a new object yourself (i.e. when you're implementing one

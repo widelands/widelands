@@ -603,7 +603,7 @@ It resets the mouse to its original position and closes the window
 void FieldActionWindow::okdialog()
 {
    m_iabase->warp_mouse_to_field(m_field);
-	delete this;
+	die();
 }
 
 /*

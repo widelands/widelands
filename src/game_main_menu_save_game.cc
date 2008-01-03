@@ -114,11 +114,6 @@ Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game()
 {
 }
 
-void Game_Main_Menu_Save_Game::die()
-{
-	delete this;
-}
-
 /*
 ===========
 called when the ok button has been clicked

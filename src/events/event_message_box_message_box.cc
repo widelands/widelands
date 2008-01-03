@@ -116,7 +116,8 @@ void Message_Box_Event_Message_Box::clicked(int32_t i) {
          end_modal(0);
          return;
 		} else {
-         delete this;
+			die();
+			return;
 		}
 	} else {
 		//  One of the buttons has been pressed
