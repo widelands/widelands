@@ -126,6 +126,7 @@ struct InputCallback {
  * Ordinarily, relative coordinates break down when the cursor leaves the
  * window. This means we have to grab the mouse, then relative coords are
  * always available.
+ * \todo Actually do grab the mouse when it is locked
  *
  * \todo What happens if a playback is canceled? Does the game continue or quit?
  * \todo Can recording be canceled?
@@ -162,13 +163,15 @@ struct WLApplication {
 	//@{
 	void warp_mouse(const Point position);
 	void set_input_grab(const bool grab);
-	void set_mouse_lock(const bool locked);
 
 	/// The mouse's current coordinates
 	Point get_mouse_position() const throw () {return m_mouse_position;}
 
 	/// Swap left and right mouse key?
 	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}
+
+	/// Lock the mouse cursor into place (e.g., for scrolling the map)
+	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
 	void init_graphics(const int32_t w, const int32_t h, const int32_t bpp,

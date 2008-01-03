@@ -653,21 +653,6 @@ void WLApplication::set_input_grab(bool grab)
 }
 
 /**
- * Lock the mouse cursor into place (e.g., for scrolling the map)
- *
- * \param locked Whether the mouse cursor should be locked (and grabbed) or not.
- *
- * \note This will also grab the mouse. That's somewhat paranoid, but it ensures
- * that even with very fast moves inside a very small window, the mouse cannot
- * leave the window (which would be unexpected for the user).
- */
-void WLApplication::set_mouse_lock(const bool locked)
-{
-	m_mouse_locked = locked;
-	set_input_grab(locked);
-}
-
-/**
  * Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE)
  * with the given resolution.
  * Throws an exception on failure.
