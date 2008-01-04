@@ -1026,16 +1026,41 @@ void Profile::write
 			if (used_only && !v->is_used())
 				continue;
 
-         const char* str = v->get_string();
-         bool multiline = false;
-			for (uint32_t i = 0; i < strlen(str); ++i)
-            if (str[i] == '\n')
-               multiline = true;
+			const char* str = v->get_string();
+			bool multiline = false;
 
-         if (!multiline)
-            fw.Printf("%s=%s\n", v->get_name(), v->get_string());
-         else
-            fw.Printf("%s='%s'\n", v->get_name(), v->get_string());
+			for (uint32_t i = 0; i < strlen(str); ++i) {
+				if (str[i] == '\n') {
+					multiline = true;
+				}
+			}
+
+			// Try to avoid _every_ possible way of
+			// getting inconsistent data
+			std::string tempstr("");
+
+			if (multiline)
+				// Telling Widelands the text will be multilined
+				tempstr += "\"";
+
+			for (uint32_t i = 0; i < strlen(str); i++) {
+				// No speach marks - would break the format
+				if (str[i] == '\"')
+					tempstr += "''";
+				else {
+					// Convert the newlines to WL format.
+					if (str[i] == '\n')
+						tempstr += " \"\n\"";
+					else
+						tempstr += str[i];
+				}
+			}
+
+			if (multiline)
+				// End of multilined text.
+				tempstr += "\"";
+
+			fw.Printf("%s=\"%s\"\n", v->get_name(), tempstr.c_str());
 		}
 	}
 
