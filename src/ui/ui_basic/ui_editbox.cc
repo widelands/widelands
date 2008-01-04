@@ -110,27 +110,33 @@ bool Edit_Box::handle_key(bool down, SDL_keysym code)
 			set_can_focus (false);
 			m_keyboard_grabbed=false;
 			grab_mouse (false);
-			changed.call();
-			changedid.call (m_id);
 			return true;
 
 		case SDLK_BACKSPACE:
-			if (m_text.size())
-			{
+			if (m_text.size()) {
 				m_text.erase (m_text.end() - 1);
 				set_title (m_text.c_str());
+				changed  .call();
+				changedid.call(m_id);
 			}
 			return true;
 
 		case SDLK_DELETE:
-			m_text.resize (0);
-			set_title (m_text.c_str());
+			if (m_text.size()) {
+				m_text.resize (0);
+				set_title (m_text.c_str());
+				changed  .call();
+				changedid.call(m_id);
+			}
 			return true;
 
 		default:
-			if (is_printable(code) && m_text.size() < m_maxchars)
+			if (is_printable(code) && m_text.size() < m_maxchars) {
 				m_text+=code.unicode;
-			set_title (m_text.c_str());
+				set_title (m_text.c_str());
+				changed  .call();
+				changedid.call(m_id);
+			}
 			return true;
 		}
 	}
