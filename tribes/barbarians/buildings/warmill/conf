@@ -28,10 +28,11 @@ gold=8
 [work]
 0=set +nostats
 1=call produce_axe
-2=call produce_broadaxe
-3=call produce_bronzeaxe
-4=call produce_battleaxe
-5=call produce_warriorsaxe
+2=call produce_sharpaxe
+3=call produce_broadaxe
+4=call produce_bronzeaxe
+5=call produce_battleaxe
+6=call produce_warriorsaxe
 
 [produce_axe]
 0=set +catch
