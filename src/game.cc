@@ -53,6 +53,8 @@
 
 #include "log.h"
 
+#include "timestring.h"
+
 #include <string>
 
 /// Define this to get lots of debugging output concerned with syncs
@@ -533,21 +535,9 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		log("Starting replay writer\n");
 
 		// Derive a replay filename from the current time
-		time_t t;
-		time(&t);
-		char* current_time = ctime(&t);
-		// Remove trailing newline
-		std::string time_string(current_time, strlen(current_time)-1);
-		SSS_T pos = std::string::npos;
-		// ':' is not a valid file name character under Windows,
-		// so we replace it with '.'
-		while ((pos = time_string.find (':')) != std::string::npos) {
-			time_string[pos] = '.';
-		}
-
 		std::string fname(REPLAY_DIR);
 		fname += '/';
-		fname += time_string;
+		fname += timestring();
 		if (m_netgame) {
 			char buf[100];
 			snprintf(buf, sizeof(buf), " - network game, player %u", m_netgame->get_playernum());
