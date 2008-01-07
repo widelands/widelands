@@ -304,7 +304,8 @@ def do_configure(config_h_file, conf, env):
 	conf.CheckCompilerFlag('-Wmissing-noreturn', env)
 	conf.CheckCompilerFlag('-Wno-comment', env)
 	conf.CheckCompilerFlag('-Wnormalized=nfc', env)
-	#conf.CheckCompilerFlag('-Wold-style-cast', env)
+	conf.CheckCompilerFlag('-Wold-style-cast', env)
+	#conf.CheckCompilerFlag('-Werror=old-style-cast', env) Some SDL macros still use old-style casts. Get them fixed!
 	#conf.CheckCompilerFlag('-Wpadded', env)
 	conf.CheckCompilerFlag('-Wpointer-arith', env)
 	conf.CheckCompilerFlag('-Wunsafe-loop-optimizations', env)

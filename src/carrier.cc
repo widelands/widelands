@@ -28,9 +28,8 @@
  */
 Bob::Task Carrier::taskRoad = {
 	"road",
-
-	(Bob::Ptr)&Carrier::road_update,
-	(Bob::Ptr)&Carrier::road_signal,
+	static_cast<Bob::Ptr>(&Carrier::road_update),
+	static_cast<Bob::Ptr>(&Carrier::road_signal),
 	0,
 };
 
@@ -121,9 +120,8 @@ void Carrier::road_signal(Game * g, State *)
  */
 Bob::Task Carrier::taskTransport = {
 	"transport",
-
-	(Bob::Ptr)&Carrier::transport_update,
-	(Bob::Ptr)&Carrier::transport_signal,
+	static_cast<Bob::Ptr>(&Carrier::transport_update),
+	static_cast<Bob::Ptr>(&Carrier::transport_signal),
 	0,
 };
 

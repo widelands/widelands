@@ -456,13 +456,11 @@ Change the training priotity values
 void Player::change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val) {
 	if (imm->get_owner() != this)
 		return;
-	if (imm->get_type() == Map_Object::BUILDING) {
-		TrainingSite* ts=static_cast<TrainingSite*>(imm);
+	if (upcast(TrainingSite, ts, imm))
 		if (val>0)
-			ts->add_pri((enum tAttribute) atr);
+			ts->add_pri(static_cast<tAttribute>(atr));
 		else
-			ts->sub_pri((enum tAttribute) atr);
-	}
+			ts->sub_pri(static_cast<tAttribute>(atr));
 }
 
 /*

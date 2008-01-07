@@ -1013,10 +1013,9 @@ void Worker::init_auto_task(Game* g)
  */
 Bob::Task Worker::taskTransfer = {
 	"transfer",
-
-	(Bob::Ptr)&Worker::transfer_update,
-	(Bob::Ptr)&Worker::transfer_signal,
-	(Bob::Ptr)&Worker::transfer_mask,
+	static_cast<Bob::Ptr>(&Worker::transfer_update),
+	static_cast<Bob::Ptr>(&Worker::transfer_signal),
+	static_cast<Bob::Ptr>(&Worker::transfer_mask),
 };
 
 
@@ -1273,9 +1272,8 @@ void Worker::cancel_task_transfer(Game* g)
  */
 Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
-
-	(Bob::Ptr)&Worker::buildingwork_update,
-	(Bob::Ptr)&Worker::buildingwork_signal,
+	static_cast<Bob::Ptr>(&Worker::buildingwork_update),
+	static_cast<Bob::Ptr>(&Worker::buildingwork_signal),
 	0
 };
 
@@ -1368,9 +1366,8 @@ void Worker::update_task_buildingwork(Game* g)
  */
 Bob::Task Worker::taskReturn = {
 	"return",
-
-	(Bob::Ptr)&Worker::return_update,
-	(Bob::Ptr)&Worker::return_signal,
+	static_cast<Bob::Ptr>(&Worker::return_update),
+	static_cast<Bob::Ptr>(&Worker::return_signal),
 	0,
 };
 
@@ -1477,9 +1474,8 @@ void Worker::return_signal(Game *, State *)
  */
 Bob::Task Worker::taskProgram = {
 	"program",
-
-	(Bob::Ptr)&Worker::program_update,
-	(Bob::Ptr)&Worker::program_signal,
+	static_cast<Bob::Ptr>(&Worker::program_update),
+	static_cast<Bob::Ptr>(&Worker::program_signal),
 	0
 };
 
@@ -1527,9 +1523,8 @@ void Worker::program_signal(Game *, State *)
 
 Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",
-
-	(Bob::Ptr)&Worker::gowarehouse_update,
-	(Bob::Ptr)&Worker::gowarehouse_signal,
+	static_cast<Bob::Ptr>(&Worker::gowarehouse_update),
+	static_cast<Bob::Ptr>(&Worker::gowarehouse_signal),
 	0,
 };
 
@@ -1639,8 +1634,7 @@ void Worker::gowarehouse_signal(Game * g, State *)
 
 Bob::Task Worker::taskDropoff = {
 	"dropoff",
-
-	(Bob::Ptr)&Worker::dropoff_update,
+	static_cast<Bob::Ptr>(&Worker::dropoff_update),
 	0,
 	0,
 };
@@ -1739,8 +1733,7 @@ void Worker::dropoff_update(Game * g, State *)
  */
 Bob::Task Worker::taskFetchfromflag = {
 	"fetchfromflag",
-
-	(Bob::Ptr)&Worker::fetchfromflag_update,
+	static_cast<Bob::Ptr>(&Worker::fetchfromflag_update),
 	0,
 	0,
 };
@@ -1821,9 +1814,8 @@ void Worker::fetchfromflag_update(Game *g, State* state)
  */
 Bob::Task Worker::taskWaitforcapacity = {
 	"waitforcapacity",
-
-	(Bob::Ptr)&Worker::waitforcapacity_update,
-	(Bob::Ptr)&Worker::waitforcapacity_signal,
+	static_cast<Bob::Ptr>(&Worker::waitforcapacity_update),
+	static_cast<Bob::Ptr>(&Worker::waitforcapacity_signal),
 	0,
 };
 
@@ -1895,9 +1887,8 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
  */
 Bob::Task Worker::taskLeavebuilding = {
 	"leavebuilding",
-
-	(Bob::Ptr)&Worker::leavebuilding_update,
-	(Bob::Ptr)&Worker::leavebuilding_signal,
+	static_cast<Bob::Ptr>(&Worker::leavebuilding_update),
+	static_cast<Bob::Ptr>(&Worker::leavebuilding_signal),
 	0,
 };
 
@@ -1992,9 +1983,8 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
  */
 Bob::Task Worker::taskFugitive = {
 	"fugitive",
-
-	(Bob::Ptr)&Worker::fugitive_update,
-	(Bob::Ptr)&Worker::fugitive_signal,
+	static_cast<Bob::Ptr>(&Worker::fugitive_update),
+	static_cast<Bob::Ptr>(&Worker::fugitive_signal),
 	0,
 };
 
@@ -2126,8 +2116,7 @@ void Worker::fugitive_signal(Game *, State *)
  */
 Bob::Task Worker::taskGeologist = {
 	"geologist",
-
-	(Bob::Ptr)&Worker::geologist_update,
+	static_cast<Bob::Ptr>(&Worker::geologist_update),
 	0,
 	0,
 };

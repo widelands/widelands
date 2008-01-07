@@ -857,7 +857,9 @@ public:
 	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, UI::Window** registry);
 	virtual ~ConstructionSite_Window();
 
-	ConstructionSite* get_constructionsize() {return (ConstructionSite*)get_building();}
+	ConstructionSite * get_constructionsize() {
+		return dynamic_cast<ConstructionSite *>(get_building());
+	}
 
 	virtual void think();
 
@@ -963,7 +965,9 @@ public:
 	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry);
 	virtual ~Warehouse_Window();
 
-	Warehouse* get_warehouse() {return (Warehouse*)get_building();}
+	Warehouse * get_warehouse() {
+		return dynamic_cast<Warehouse *>(get_building());
+	}
 
 	virtual void think();
 

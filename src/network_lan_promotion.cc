@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,9 @@ LAN_Base::LAN_Base ()
 
     int32_t opt=1;
     // the cast to char* is because microsoft wants it that way
-    setsockopt (sock, SOL_SOCKET, SO_BROADCAST, (char*) &opt, sizeof(opt));
+	setsockopt
+		(sock, SOL_SOCKET, SO_BROADCAST,
+		 reinterpret_cast<char *>(&opt), sizeof(opt));
 
 #ifndef WIN32
 

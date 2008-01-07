@@ -336,8 +336,7 @@ struct Route {
 
 	int32_t get_totalcost() const {return m_totalcost;}
 	int32_t get_nrsteps() const {return m_route.size()-1;}
-	Flag * get_flag
-		(Editor_Game_Base * const, const std::vector<Flag *>::size_type) const;
+	Flag * get_flag(Editor_Game_Base *, std::vector<Flag *>::size_type);
 
 	void starttrim(int32_t count);
 	void truncate(int32_t count);

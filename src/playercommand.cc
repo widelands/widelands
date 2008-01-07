@@ -589,14 +589,10 @@ PlayerCommand (0, des.Unsigned8())
 
 void Cmd_ChangeTrainingOptions::execute (Game* g)
 {
-	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->objects().get_object(serial);
-
 	/* � Maybe we must check that the building is a training house ? */
-	if ((obj) && (obj->get_type() >= Map_Object::BUILDING)) {
-		player->change_training_options(static_cast<PlayerImmovable*>(obj), attribute, value);
-	}
-
+	if (upcast(Building, building, g->objects().get_object(serial)))
+		g->get_player(get_sender())->change_training_options
+			(building, attribute, value);
 }
 
 void Cmd_ChangeTrainingOptions::serialize (StreamWrite & ser) {

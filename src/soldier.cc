@@ -658,10 +658,10 @@ void Soldier::start_task_gowarehouse() {
 }
 
 Bob::Task Soldier::taskMoveToBattle = {
-   "moveToBattle",
-   (Bob::Ptr)&Soldier::moveToBattleUpdate,
-   (Bob::Ptr)&Soldier::moveToBattleSignal,
-   0,
+	"moveToBattle",
+	static_cast<Bob::Ptr>(&Soldier::moveToBattleUpdate),
+	static_cast<Bob::Ptr>(&Soldier::moveToBattleSignal),
+	0,
 };
 
 void Soldier::startTaskMoveToBattle(Game * g, Flag *, Coords coords) {
@@ -728,11 +728,10 @@ void Soldier::moveToBattleSignal(Game * g, State *) {
 }
 
 Bob::Task Soldier::taskMoveHome = {
-   "moveHome",
-
-   (Bob::Ptr)&Soldier::moveHomeUpdate,
-   (Bob::Ptr)&Soldier::moveHomeSignal,
-   0,
+	"moveHome",
+	static_cast<Bob::Ptr>(&Soldier::moveHomeUpdate),
+	static_cast<Bob::Ptr>(&Soldier::moveHomeSignal),
+	0,
 };
 
 void Soldier::startTaskMoveHome(Game* g) {

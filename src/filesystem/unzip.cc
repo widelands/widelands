@@ -485,7 +485,7 @@ extern unzFile ZEXPORT unzOpen2 (const char* path, zlib_filefunc_def* pzlib_file
 	s = static_cast<unz_s *>(ALLOC(sizeof(unz_s)));
     *s=us;
 	unzGoToFirstFile(static_cast<unzFile>(s));
-    return (unzFile)s;
+	return static_cast<unzFile>(s);
 }
 
 
@@ -1025,8 +1025,8 @@ extern int32_t ZEXPORT unzOpenCurrentFile3 (unzFile file, int32_t* method, int32
                 &offset_local_extrafield, &size_local_extrafield)!=UNZ_OK)
         return UNZ_BADZIPFILE;
 
-    pfile_in_zip_read_info = (file_in_zip_read_info_s*)
-                                        ALLOC(sizeof(file_in_zip_read_info_s));
+	pfile_in_zip_read_info = static_cast<file_in_zip_read_info_s *>
+		ALLOC(sizeof(file_in_zip_read_info_s));
     if (pfile_in_zip_read_info==NULL)
         return UNZ_INTERNALERROR;
 
@@ -1307,7 +1307,7 @@ extern z_off_t ZEXPORT unztell (unzFile file)
     if (pfile_in_zip_read_info==NULL)
         return UNZ_PARAMERROR;
 
-    return (z_off_t)pfile_in_zip_read_info->stream.total_out;
+	return static_cast<z_off_t>(pfile_in_zip_read_info->stream.total_out);
 }
 
 
@@ -1462,8 +1462,8 @@ extern int32_t ZEXPORT unzGetGlobalComment (unzFile file, char* szComment, uLong
 /* Additions by RX '2004 */
 extern uLong ZEXPORT unzGetOffset (unzFile file)
 {
-    if (file==NULL)
-          return (uLong) UNZ_PARAMERROR;
+	if (file == NULL)
+		return static_cast<uLong>(UNZ_PARAMERROR);
 	unz_s * const s = static_cast<unz_s *>(file);
     if (!s->current_file_ok)
       return 0;
@@ -1634,9 +1634,9 @@ typedef struct
 
 local linkedlist_datablock_internal* allocate_new_datablock()
 {
-    linkedlist_datablock_internal* ldi;
-    ldi = (linkedlist_datablock_internal*)
-                 ALLOC(sizeof(linkedlist_datablock_internal));
+	linkedlist_datablock_internal * const ldi =
+		static_cast<linkedlist_datablock_internal *>
+		ALLOC(sizeof(linkedlist_datablock_internal));
     if (ldi!=NULL)
     {
         ldi->next_datablock = NULL ;
@@ -2136,15 +2136,12 @@ extern zipFile ZEXPORT zipOpen2
 	}
 #    endif /* !NO_ADDFILEINEXISTINGZIP*/
 
-    if (err != ZIP_OK)
-    {
+	if (err != ZIP_OK) {
         TRYFREE(zi);
         return NULL;
-	}
-    else
-    {
+	} else {
         *zi = ziinit;
-        return (zipFile)zi;
+		return static_cast<zipFile>(zi);
 	}
 }
 

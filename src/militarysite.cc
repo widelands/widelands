@@ -412,7 +412,7 @@ molog ("**Dropping soldier (%d)\n", serial);
       if (s)
          molog ("Serial: %d -- \n!", s->get_serial());
 
-      if ((s) && (s->get_serial() == serial))
+			if (s && s->get_serial() == serial)
       {
 molog ("**--Sodier localized!\n");
          drop_soldier(game, i);

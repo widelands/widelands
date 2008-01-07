@@ -149,9 +149,10 @@ static void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
 	memcpy (&ctx->buffer[bytes], fillbuf, pad);
 
 	/* Put the 64-bit file length in *bits* at the end of the buffer.  */
-	*(uint32_t *) &ctx->buffer[bytes + pad] = (ctx->total[0] << 3);
-	*(uint32_t *) &ctx->buffer[bytes + pad + 4] =
-			((ctx->total[1] << 3) | (ctx->total[0] >> 29));
+	*reinterpret_cast<uint32_t *>(&ctx->buffer[bytes + pad])     =
+		(ctx->total[0] << 3);
+	*reinterpret_cast<uint32_t *>(&ctx->buffer[bytes + pad + 4]) =
+		((ctx->total[1] << 3) | (ctx->total[0] >> 29));
 
 	/* Process last bytes.  */
 	md5_process_block (ctx->buffer, bytes + pad + 8, ctx);

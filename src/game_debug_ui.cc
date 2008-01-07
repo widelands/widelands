@@ -138,7 +138,9 @@ class MapObjectDebugWindow : public UI::Window {
 public:
 	MapObjectDebugWindow(Interactive_Base* parent, Map_Object* obj);
 
-	Interactive_Base* get_iabase() {return (Interactive_Base*)get_parent();}
+	Interactive_Base * get_iabase() {
+		return dynamic_cast<Interactive_Base *>(get_parent());
+	}
 
 	virtual void think();
 
@@ -234,7 +236,9 @@ public:
 	FieldDebugWindow(Interactive_Base & parent, const Coords);
 	~FieldDebugWindow();
 
-	Interactive_Base* get_iabase() {return (Interactive_Base*)get_parent();}
+	Interactive_Base * get_iabase() {
+		return dynamic_cast<Interactive_Base *>(get_parent());
+	}
 
 	virtual void think();
 

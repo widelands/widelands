@@ -438,10 +438,9 @@ void WareInstance::cancel_moving() {
 */
 PlayerImmovable* WareInstance::get_next_move_step(Game* g)
 {
-	if (m_transfer)
-		return (PlayerImmovable*)m_transfer_nextstep.get(g);
-	else
-		return 0;
+	return
+		m_transfer ?
+		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(g)) : 0;
 }
 
 
@@ -1510,10 +1509,10 @@ void Route::clear()
  * Every route has at least one flag.
 */
 Flag * Route::get_flag
-(Editor_Game_Base * const g, const std::vector<Flag *>::size_type idx) const
+(Editor_Game_Base * const g, std::vector<Flag *>::size_type const idx)
 {
 	assert(idx < m_route.size());
-	return (Flag*)m_route[idx].get(g);
+	return dynamic_cast<Flag *>(m_route[idx].get(g));
 }
 
 /**

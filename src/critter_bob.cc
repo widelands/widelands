@@ -273,9 +273,8 @@ coords is used to store target coordinates found by findspace
 
 Bob::Task Critter_Bob::taskProgram = {
 	"program",
-
-	(Bob::Ptr)&Critter_Bob::program_update,
-	(Bob::Ptr)&Critter_Bob::program_signal,
+	static_cast<Bob::Ptr>(&Critter_Bob::program_update),
+	static_cast<Bob::Ptr>(&Critter_Bob::program_signal),
 	0
 };
 
@@ -346,9 +345,8 @@ Simply roam the map
 
 Bob::Task Critter_Bob::taskRoam = {
 	"roam",
-
-	(Bob::Ptr)&Critter_Bob::roam_update,
-	(Bob::Ptr)&Critter_Bob::roam_signal,
+	static_cast<Bob::Ptr>(&Critter_Bob::roam_update),
+	static_cast<Bob::Ptr>(&Critter_Bob::roam_signal),
 	0,
 };
 
