@@ -28,6 +28,8 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
+#include "upcast.h"
+
 #include <map>
 
 #define CURRENT_PACKET_VERSION 1
@@ -80,13 +82,12 @@ throw (_wexception)
 
    // Write roads, register this with the map_object_saver so that
    // it's data can be saved later.
-   Map* map=egbase->get_map();
-	for (uint16_t y = 0; y < map->get_height(); ++y) {
-		for (uint16_t x = 0; x < map->get_width(); ++x) {
-         BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
+	Map const & map = egbase->map();
+	Field * field = &map[0];
+	Field const * const fields_end = field + map.max_index();
+	for (; field < fields_end; ++field)
          // We only write Roads
-         if (immovable && immovable->get_type()==Map_Object::ROAD) {
-            Road* road=static_cast<Road*>(immovable);
+		if (upcast(Road const, road, field->get_immovable())) {
 
             // Roads can life on multiple positions
             uint32_t serial=0;
@@ -95,9 +96,7 @@ throw (_wexception)
             serial=os->register_object(road);
             // write id
             fw.Unsigned32(serial);
-			}
 		}
-	}
    fw.Unsigned32(0xffffffff);
 
    fw.Write(fs, "binary/road");

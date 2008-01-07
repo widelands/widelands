@@ -1,5 +1,3 @@
-# Automatically created by Widelands build11
-
 [global]
 packet_version=1
 map_w=64
@@ -9,4 +7,3 @@ world=winterland
 name=_"Impact"
 author=deviant
 descr=_"After an impact of an asteroid and the following harsh winter, three isles are connected by ice and stone, setting an end to the peaceful coexistence of three tribes."
-

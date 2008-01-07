@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -324,7 +324,13 @@ template<typename T> static void dither_edge_horiz
 			// dither above the edge
 			for (uint32_t i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && y>=0 && y<dsth) {
-					T * const pix = (T*) ((uint8_t*)dst.get_pixels() + y*dst.get_pitch()) + x;
+					T * const pix =
+						reinterpret_cast<T *>
+						(static_cast<uint8_t *>(dst.get_pixels())
+						 +
+						 y * dst.get_pitch())
+						+
+						x;
 					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
 					*pix = tcolormap[tpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
@@ -337,7 +343,13 @@ template<typename T> static void dither_edge_horiz
 			// dither below the edge
 			for (uint32_t i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)>=i+DITHER_WIDTH && y>=0 && y<dsth) {
-					T * const pix = (T*) ((uint8_t*)dst.get_pixels() + y*dst.get_pitch()) + x;
+					T * const pix =
+						reinterpret_cast<T *>
+						(static_cast<uint8_t *>(dst.get_pixels())
+						 +
+						 y * dst.get_pitch())
+						+
+						x;
 					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
 					*pix = bcolormap[bpixels[texel] | ((b >> 8) & 0xFF00)];
 				}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,8 @@
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
+#include "upcast.h"
+
 #include <map>
 
 
@@ -77,8 +79,8 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (uint32_t ser; (ser = fr.Unsigned32()) != 0xffffffff;) {
 
-         assert(ol->is_object_known(ser));
-         assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::BUILDING);
+         assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+         assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::BUILDING); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
          Building* building=static_cast<Building*>(ol->get_object_by_file_index(ser));
 
          // Animation
@@ -112,25 +114,14 @@ throw (_wexception)
          // Set economy now, some stuff below will count on this
          building->set_economy(building->m_flag->get_economy());
 
-			if
-				(ConstructionSite * const constructionsite =
-				 dynamic_cast<ConstructionSite *>(building))
+			if (upcast(ConstructionSite, constructionsite, building))
 				read_constructionsite(*constructionsite, fr, egbase, ol);
-			else if
-				(Warehouse * const warehouse =
-				 dynamic_cast<Warehouse *>(building))
+			else if (upcast(Warehouse, warehouse, building))
 				read_warehouse(*warehouse, fr, egbase, ol);
-			else if
-				(ProductionSite * const productionsite =
-				 dynamic_cast<ProductionSite *>(building))
-			{
-				if
-					(MilitarySite * const militarysite =
-					 dynamic_cast<MilitarySite *>(productionsite))
+			else if (upcast(ProductionSite, productionsite, building)) {
+				if (upcast(MilitarySite, militarysite, productionsite))
 					read_militarysite(*militarysite, fr, egbase, ol);
-				else if
-					(TrainingSite * const trainingsite =
-					 dynamic_cast<TrainingSite *>(productionsite))
+				else if (upcast(TrainingSite, trainingsite, productionsite))
 					read_trainingsite(*trainingsite, fr, egbase, ol);
 				else read_productionsite(*productionsite, fr, egbase, ol);
 			} else {
@@ -549,25 +540,14 @@ throw (_wexception)
                fw.Unsigned32(0);
             fw.Unsigned8(building->m_stop);
 
-			if
-				(const ConstructionSite * const constructionsite =
-				 dynamic_cast<const ConstructionSite *>(building))
+			if (upcast(ConstructionSite const, constructionsite, building))
 				write_constructionsite(*constructionsite, fw, egbase, os);
-			else if
-				(const Warehouse * const warehouse =
-				 dynamic_cast<const Warehouse *>(building))
+			else if (upcast(Warehouse const, warehouse, building))
 				write_warehouse(*warehouse, fw, egbase, os);
-			else if
-				(const ProductionSite * const productionsite =
-				 dynamic_cast<const ProductionSite *>(building))
-			{
-				if
-					(const MilitarySite * const militarysite =
-					 dynamic_cast<const MilitarySite *>(productionsite))
-						write_militarysite(*militarysite, fw, egbase, os);
-				else if
-					(const TrainingSite * const trainingsite =
-					 dynamic_cast<const TrainingSite *>(productionsite))
+			else if (upcast(ProductionSite const, productionsite, building)) {
+				if (upcast(MilitarySite const, militarysite, productionsite))
+					write_militarysite(*militarysite, fw, egbase, os);
+				else if (upcast(TrainingSite const, trainingsite, productionsite))
 					write_trainingsite(*trainingsite, fw, egbase, os);
 				else write_productionsite(*productionsite, fw, egbase, os);
 			} else {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +43,7 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 
+#include "upcast.h"
 
 struct Building_Descr;
 
@@ -288,7 +289,8 @@ FieldActionWindow::FieldActionWindow
 	m_fastclick = true;
 	for (Workarea_Info::size_type i = NUMBER_OF_WORKAREA_PICS; i;) {
 		char filename[30];
-		snprintf(filename, sizeof(filename), "pics/workarea%ucumulative.png", i);
+		snprintf
+			(filename, sizeof(filename), "pics/workarea%zucumulative.png", i);
 		--i;
 		workarea_cumulative_picid[i] = g_gr->get_picture(PicMod_Game, filename);
 	}
@@ -369,7 +371,7 @@ void FieldActionWindow::add_buttons_auto()
 		// The box with road-building buttons
 		buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
-		if (Flag * const flag = dynamic_cast<Flag *>(imm)) {
+		if (upcast(Flag, flag, imm)) {
 			// Add flag actions
 			add_button(buildbox, pic_buildroad, &FieldActionWindow::act_buildroad, _("Build road"));
 
@@ -431,9 +433,7 @@ void FieldActionWindow::add_buttons_attack ()
          // The box with attack buttons
       attackbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
-		if
-			(Building * const building =
-			 dynamic_cast<Building *>(m_map->get_immovable(m_field)))
+		if (upcast(Building, building, m_map->get_immovable(m_field)))
 			if
 				(dynamic_cast<const Game *>(&m_iabase->egbase())
 				 and
@@ -671,7 +671,7 @@ Build a flag at this field
 void FieldActionWindow::act_buildflag()
 {
 	// Game: send command
-	if (Game * const game = dynamic_cast<Game *>(&m_iabase->egbase()))
+	if (upcast(Game, game, &m_iabase->egbase()))
 		game->send_player_build_flag(m_plr->get_player_number(), m_field);
 	// Editor: Just plain build this flag
 	else m_plr->build_flag(m_field);
@@ -691,14 +691,12 @@ void FieldActionWindow::act_ripflag()
 {
    okdialog();
 	Editor_Game_Base & egbase = m_iabase->egbase();
-	if
-		(Flag * const flag =
-		 dynamic_cast<Flag *>(m_field.field->get_immovable()))
+	if (upcast(Flag, flag, m_field.field->get_immovable()))
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				show_bulldoze_confirm(m_iabase, building, flag);
 		} else {
-			if (Game * const game = dynamic_cast<Game *>(&egbase))
+			if (upcast(Game, game, &egbase))
 				game->send_player_bulldoze (flag);
 			else // Editor
 				flag->remove(&egbase);
@@ -745,13 +743,12 @@ Remove the road at the given field
 */
 void FieldActionWindow::act_removeroad()
 {
-	if
-		(Road * const road = dynamic_cast<Road *>
-		 (m_iabase->egbase().map().get_immovable(m_field)))
-	{
-		if (Game * const game = dynamic_cast<Game *>(&m_iabase->egbase()))
+	Editor_Game_Base & egbase = m_iabase->egbase();
+	if (upcast(Road, road, egbase.map().get_immovable(m_field))) {
+		if (upcast(Game, game, &egbase))
 			game->send_player_bulldoze(road);
-		else road->get_owner()->bulldoze(road);
+		else
+			road->owner().bulldoze(road);
 	}
    m_iabase->need_complete_redraw();
    okdialog();
@@ -768,7 +765,7 @@ Start construction of the building with the give description index
 void FieldActionWindow::act_build(int32_t idx)
 {
 	Editor_Game_Base & egbase = m_iabase->egbase();
-	if (Game * const game = dynamic_cast<Game *>(&egbase))
+	if (upcast(Game, game, &egbase))
 		game->send_player_build
 		(static_cast<Interactive_Player*>(m_iabase)->get_player_number(),
 		 m_field,
@@ -862,9 +859,7 @@ Call a geologist on this flag.
 void FieldActionWindow::act_geologist()
 {
 	Game & game = dynamic_cast<Game &>(m_iabase->egbase());
-	if
-		(Flag * const flag =
-		 dynamic_cast<Flag *>(game.map().get_immovable(m_field)))
+	if (upcast(Flag, flag, game.map().get_immovable(m_field)))
 		game.send_player_flagaction (flag, FLAGACTION_GEOLOGIST);
 
    okdialog();
@@ -881,12 +876,8 @@ void FieldActionWindow::act_attack ()
 	Game & game = dynamic_cast<Game &>(m_iabase->egbase());
    Interactive_Player* m_player=static_cast<Interactive_Player*>(m_iabase);
 
-	if
-		(Building * const building =
-		 dynamic_cast<Building *>(game.map().get_immovable(m_field)))
-		if
-			(const Flag * const flag =
-			 dynamic_cast<const Flag *>(building->get_base_flag()))
+	if (upcast(Building, building, game.map().get_immovable(m_field)))
+		if (upcast(Flag const, flag, building->get_base_flag()))
 			if (m_attackers > 0)
 				game.send_player_enemyflagaction
 				(flag,
@@ -1004,7 +995,7 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 		case Map_Object::ROAD:
 			if (!(player->get_buildcaps(target) & BUILDCAPS_FLAG))
 				break;
-			if (Game * const game = dynamic_cast<Game *>(&iabase->egbase()))
+			if (upcast(Game, game, &iabase->egbase()))
 				game->send_player_build_flag(player->get_player_number(), target);
 
 		case Map_Object::FLAG:

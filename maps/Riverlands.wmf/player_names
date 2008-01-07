@@ -1,5 +1,3 @@
-# Automatically created by Widelands cvs 24-12-2005 (inofficial)
-
 [global]
 packet_version=1
 
@@ -30,4 +28,3 @@ tribe=barbarians
 [player_7]
 name=Titus
 tribe=barbarians
-

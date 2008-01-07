@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,8 @@
 
 #include "log.h"
 
+#include "upcast.h"
+
 void getCloseMilitarySites
 (const Editor_Game_Base & eg,
  const Flag & flag,
@@ -56,9 +58,7 @@ void getCloseMilitarySites
 
 	/* Find all friendly MS */
 	for (std::vector<ImmovableFound>::const_iterator it=immovables.begin();it != immovables.end();++it) {
-		if
-			(MilitarySite * const ms =
-			 dynamic_cast<MilitarySite *>(it->object))
+		if (upcast(MilitarySite, ms, it->object))
 			if (ms->owner().get_player_number() == player) {
 				militarySites.insert(ms);
 			}
@@ -258,18 +258,13 @@ void AttackController::soldierWon(Soldier* soldier)
 
 	//if the last remaing was an attacker, check for
 	//remaining soldiers in the building
-	if (involvedSoldiers[idx].attacker) {
-		if
-			(MilitarySite * const ms =
-			 dynamic_cast<MilitarySite *>(flag->get_building()))
-		{
+	if (involvedSoldiers[idx].attacker)
+		if (upcast(MilitarySite, ms, flag->get_building()))
 			//  There are defending soldiers left in the building.
 			if (const uint32_t n = ms->nr_not_marked_soldiers()) {
 				launchSoldiersOfMilitarySite(ms, n, false);
 				return;
 			}
-		}
-	}
 
 	log("finishing battle...\n");
 
@@ -420,7 +415,7 @@ void AttackController::Loader::load(FileRead& fr)
 {
 	BaseImmovable::Loader::load(fr);
 
-	AttackController* ctrl = dynamic_cast<AttackController*>(get_object());
+	upcast(AttackController, ctrl, get_object());
 
 	egbase().register_attack_controller(ctrl);
 
@@ -485,7 +480,7 @@ void AttackController::Loader::load_pointers()
 {
 	BaseImmovable::Loader::load_pointers();
 
-	AttackController* ctrl = dynamic_cast<AttackController*>(get_object());
+	upcast(AttackController, ctrl, get_object());
 
 	ctrl->flag = dynamic_cast<Flag*>(mol().get_object_by_file_index(flag));
 	assert(ctrl->flag);

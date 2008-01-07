@@ -1,9 +1,6 @@
-# Automatically created by Widelands svnbuild
-
 [global]
 packet_version=2
 player_1=67 77
 player_2=4 46
 player_3=41 45
 player_4=40 72
-

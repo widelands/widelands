@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -128,11 +128,12 @@ int32_t IdleWorkerSupply::get_passing_requeriments(Game *, int32_t, Requeriments
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
-   if (!req or req->check(s->get_level(atrHP), s->get_level(atrAttack),
-	                      s->get_level(atrDefense), s->get_level(atrEvade)))
-		return 1;
-	else
-		return 0;
+   return
+		!req
+		or
+		req->check
+		(s->get_level(atrHP), s->get_level(atrAttack),
+		 s->get_level(atrDefense), s->get_level(atrEvade));
 }
 
 
@@ -144,8 +145,12 @@ void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, Requeriments * r)
 
 		Soldier* s = static_cast<Soldier*>(m_worker);
 
-		if (!r or r->check(s->get_level(atrHP), s->get_level(atrAttack),
-		                   s->get_level(atrDefense), s->get_level(atrEvade)))
+		if
+			(!r
+			 or
+			 r->check
+			 (s->get_level(atrHP), s->get_level(atrAttack),
+			  s->get_level(atrDefense), s->get_level(atrEvade)))
 			dynamic_cast<Soldier &>(*m_worker).mark(true);
 
 	} else {

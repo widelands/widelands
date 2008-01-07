@@ -1,10 +1,7 @@
-# Automatically created by Widelands cvsbuild
-
 [global]
 packet_version=1
 
-[Nächstes Szenario]
+[Next scenario]
 delete_protected=true
 type=string
 value=<undefined>
-

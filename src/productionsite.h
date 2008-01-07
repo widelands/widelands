@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -128,8 +128,8 @@ protected:
 	};
 
 	void request_worker(const char * const worker_name);
-	static void request_worker_callback(Game* g, Request* rq, int32_t ware,
-		Worker* w, void* data);
+	static void request_worker_callback
+		(Game *, Request *, int32_t ware, Worker *, void * data);
 
 	State* get_current_program() {return m_program.size() ? &*m_program.rbegin() : 0;}
 	void program_act(Game* g);

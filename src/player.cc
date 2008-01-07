@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@
 #include "warehouse.h"
 #include "wexception.h"
 
+#include "upcast.h"
 
 extern Map_Object_Descr g_road_descr;
 
@@ -186,13 +187,8 @@ in some situations over the network.
 void Player::build_road(const Path & path) {
 	Map & map = egbase().map();
 	FCoords fc = map.get_fcoords(path.get_start());
-	if
-		(Flag * const start = dynamic_cast<Flag *>(fc.field->get_immovable()))
-	{
-		if
-			(Flag * const end =
-			 dynamic_cast<Flag *>(map.get_immovable(path.get_end())))
-		{
+	if (upcast(Flag, start, fc.field->get_immovable())) {
+		if (upcast(Flag, end, map.get_immovable(path.get_end()))) {
 
 			//  Verify ownership of the path.
 			const int32_t laststep = path.get_nsteps() - 1;
@@ -269,37 +265,27 @@ Bulldoze the given road, flag or building.
 */
 void Player::bulldoze(PlayerImmovable* imm)
 {
-	Building* building;
-
 	// General security check
 	if (imm->get_owner() != this)
 		return;
 
 	// Extended security check
-	switch (imm->get_type()) {
-	case Map_Object::BUILDING:
-		building = (Building*)imm;
+	if (upcast(Building, building, imm)) {
 		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
 			return;
-		break;
-
-	case Map_Object::FLAG:
-		building = ((Flag*)imm)->get_building();
-		if (building && !(building->get_playercaps() & (1 << Building::PCap_Bulldoze))) {
+	} else if (upcast(Flag, flag, imm)) {
+		if (Building * const flagbuilding = flag->get_building())
+		if (!(flagbuilding->get_playercaps() & (1 << Building::PCap_Bulldoze))) {
 			log
 				("Player trying to rip flag (%u) with undestroyable building "
 				 "(%u)\n",
-				 imm->get_serial(), building->get_serial());
+				 flag->get_serial(), flagbuilding->get_serial());
 			return;
 		}
-		break;
-
-	case Map_Object::ROAD:
-		break; // no additional check
-
-	default:
-		throw wexception("Player::bulldoze(%u): bad immovable type %u", imm->get_serial(), imm->get_type());
-	}
+	} else if (dynamic_cast<Road *>(imm)); // no additional check
+	else
+		throw wexception
+			("Player::bulldoze(%u): bad immovable type", imm->get_serial());
 
 	// Now destroy it
 	imm->destroy(&egbase());
@@ -308,10 +294,8 @@ void Player::bulldoze(PlayerImmovable* imm)
 void Player::start_stop_building(PlayerImmovable* imm) {
 	if (imm->get_owner() != this)
 		return;
-	if (imm->get_type() == Map_Object::BUILDING) {
-		Building *bld = (Building*)imm;
-		bld->set_stop(!bld->get_stop());
-	}
+	if (upcast(Building, building, imm))
+		building->set_stop(!building->get_stop());
 }
 
 /*
@@ -381,7 +365,7 @@ Perform an action on the given flag.
 */
 void Player::flagaction(Flag* flag, int32_t action)
 {
-	if (Game * const game = dynamic_cast<Game *>(&egbase()))
+	if (upcast(Game, game, &egbase()))
 		if (flag->get_owner() == this) {// Additional security check.
 		switch (action) {
 		case FLAGACTION_GEOLOGIST:
@@ -505,12 +489,11 @@ void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
 void Player::change_soldier_capacity (PlayerImmovable* imm, int32_t val) {
 	if (imm->get_owner() != this)
 		return;
-	if (imm->get_type() == Map_Object::BUILDING) {
-		//Building* ts=static_cast<TrainingSite*>(imm);
+	if (upcast(Building, building, imm)) {
 		if (val>0)
-			((Building*) imm)->soldier_capacity_up();
+			building->soldier_capacity_up  ();
 		else
-			((Building*)imm)->soldier_capacity_down();
+			building->soldier_capacity_down();
 	}
 }
 
@@ -526,7 +509,7 @@ void Player::enemyflagaction(Flag* flag, int32_t action, int32_t attacker, int32
 	if (attacker != get_player_number())
 		throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
 
-	if (Game * const game = dynamic_cast<Game *>(&egbase())) {
+	if (upcast(Game, game, &egbase())) {
 		assert (num >= 0);
 
 		log("++Player::EnemyFlagAction()\n");
@@ -578,9 +561,7 @@ throw ()
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 				if (map_object_descr == &g_road_descr) map_object_descr = 0;
-				else if
-					(const Building * const building =
-					 dynamic_cast<const Building *>(base_immovable))
+				else if (upcast(Building const, building, base_immovable))
 					if (building->get_position() != f)
 						//  TODO This is not the buildidng's main position so we can
 						//  TODO not see it. But it should be possible to see it from

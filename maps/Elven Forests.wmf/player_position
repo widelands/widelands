@@ -1,13 +1,6 @@
-# Automatically created by Widelands build-9
-
 [global]
-packet_version=1
-player_1_x=3
-player_1_y=3
-player_2_x=77
-player_2_y=2
-player_3_x=156
-player_3_y=71
-player_4_x=81
-player_4_y=75
-
+packet_version=2
+player_1=3 3
+player_2=77 2
+player_3=156 71
+player_4=81 75

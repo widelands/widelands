@@ -156,12 +156,10 @@ static void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
 	/* Process last bytes.  */
 	md5_process_block (ctx->buffer, bytes + pad + 8, ctx);
 
-
-	((uint32_t *) resbuf)[0] = (ctx->A);
-	((uint32_t *) resbuf)[1] = (ctx->B);
-	((uint32_t *) resbuf)[2] = (ctx->C);
-	((uint32_t *) resbuf)[3] = (ctx->D);
-
+	static_cast<uint32_t *>(resbuf)[0] = ctx->A;
+	static_cast<uint32_t *>(resbuf)[1] = ctx->B;
+	static_cast<uint32_t *>(resbuf)[2] = ctx->C;
+	static_cast<uint32_t *>(resbuf)[3] = ctx->D;
 
 	return resbuf;
 }
@@ -188,7 +186,7 @@ static void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx*
 			ctx->buflen = (left_over + add) & 63;
 		}
 
-		buffer = (const char *) buffer + add;
+		buffer = static_cast<const char *>(buffer) + add;
 		len -= add;
 	}
 
@@ -196,7 +194,7 @@ static void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx*
 	if (len > 64)
 	{
 		md5_process_block (buffer, len & ~63, ctx);
-		buffer = (const char *) buffer + (len & ~63);
+		buffer = static_cast<const char *>(buffer) + (len & ~63);
 		len &= 63;
 	}
 
@@ -224,7 +222,7 @@ static void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx*
 static void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx)
 {
 	uint32_t correct_words[16];
-	const uint32_t *words = (uint32_t*) buffer;
+	uint32_t const * words = static_cast<const uint32_t *>(buffer);
 	uint32_t nwords = len / sizeof (uint32_t);
 	const uint32_t *endp = words + nwords;
 	uint32_t A = ctx->A;
@@ -256,13 +254,13 @@ static void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx)
 		before the computation.  To reduce the work for the next steps
 		we store the swapped words in the array CORRECT_WORDS.  */
 
-#define OP(a, b, c, d, s, T)                                                   \
-	do {                                                                        \
-		a += FF (b, c, d) + (*cwp++ = (*words)) + T;                             \
-		++words;                                                                 \
-		CYCLIC (a, s);                                                           \
-		a += b;                                                                  \
-	} while (0)                                                                 \
+#define OP(a, b, c, d, s, T)                                                  \
+	do {                                                                       \
+		a += FF (b, c, d) + (*cwp++ = (*words)) + T;                            \
+		++words;                                                                \
+		CYCLIC (a, s);                                                          \
+		a += b;                                                                 \
+	} while (false)                                                            \
 
 		/* It is unfortunate that C does not provide an operator for
 		cyclic rotation.  Hope the C compiler is smart enough.  */
@@ -296,12 +294,12 @@ static void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx)
 		in CORRECT_WORDS.  Redefine the macro to take an additional first
 		argument specifying the function to use.  */
 #undef OP
-#define OP(f, a, b, c, d, k, s, T)                                             \
-	do {                                                                        \
-		a += f (b, c, d) + correct_words[k] + T;                                 \
-		CYCLIC (a, s);                                                           \
-		a += b;                                                                  \
-	} while (0)                                                                 \
+#define OP(f, a, b, c, d, k, s, T)                                            \
+	do {                                                                       \
+		a += f (b, c, d) + correct_words[k] + T;                                \
+		CYCLIC (a, s);                                                          \
+		a += b;                                                                 \
+	} while (false)                                                            \
 
 		/* Round 2.  */
 		OP (FG, A, B, C, D,  1,  5, 0xf61e2562);

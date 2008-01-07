@@ -1,5 +1,3 @@
-# Automatically created by Widelands cvs 24-12-2005 (inofficial)
-
 [global]
 packet_version=1
 map_w=192
@@ -9,4 +7,3 @@ world=greenland
 name=_Riverlands
 author=ISCH
 descr=_ "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
-

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,8 @@
 #include "ui_button.h"
 #include "ui_signal.h"
 #include "ui_window.h"
+
+#include "upcast.h"
 
 #include <vector>
 
@@ -345,10 +347,7 @@ void WatchWindow::think()
 		return;
 	}
 
-	if
-		(Bob * const bob =
-		 dynamic_cast<Bob *>(m_views[m_cur_index].tracking.get(m_game)))
-	{
+	if (upcast(Bob, bob, m_views[m_cur_index].tracking.get(m_game))) {
 		Point pos;
 
 		MapviewPixelFunctions::get_pix

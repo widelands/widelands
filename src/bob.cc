@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@
 #include "tribe.h"
 #include "wexception.h"
 
+#include "upcast.h"
 
 /**
  * Only tribe bobs have a vision range, since it would be irrelevant
@@ -163,7 +164,7 @@ Bob::~Bob()
 {
 	if (m_position.field) {
 		molog("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not called!\n");
-		*(int32_t *)0 = 0;
+		*static_cast<int32_t *>(0) = 0;
 	}
 }
 
@@ -231,7 +232,7 @@ void Bob::init(Editor_Game_Base* gg)
 
 	m_sched_init_task = true;
 
-	if (Game * const game = dynamic_cast<Game *>(gg))
+	if (upcast(Game, game, gg))
 		schedule_act(game, 1);
 	else
 		// In editor: play idle task forever
@@ -1032,7 +1033,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	// it involves coordinates and will thus additionally highlight desyncs
 	// in pathfinding even when two paths have the same length, and in
 	// randomly generated movements.
-	if (Game* game = dynamic_cast<Game*>(g)) {
+	if (upcast(Game, game, g)) {
 		StreamWrite& ss = game->syncstream();
 		ss.Unsigned32(get_serial());
 		ss.Signed16(coords.x);

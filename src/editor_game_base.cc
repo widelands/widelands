@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,8 @@
 #include "world.h"
 
 #include "ui_progresswindow.h"
+
+#include "upcast.h"
 
 #include <set>
 
@@ -366,7 +368,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area)
 	}
 
 	// Fix all immovables
-	if (Game * const game = dynamic_cast<Game *>(this))
+	if (upcast(Game, game, this))
 		for
 			(std::vector<PlayerImmovable *>::const_iterator it = burnlist.begin();
 			 it != burnlist.end();

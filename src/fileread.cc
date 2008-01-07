@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,7 +75,7 @@ char * FileRead::CString(const Pos pos) {
 	Pos i = pos == NoPos() ? filepos : pos;
 	if (i >= length) throw File_Boundary_Exceeded();
 
-	string = (char *)data + i;
+	string = static_cast<char *>(data) + i;
 	for (p = string; *p; ++p, ++i);
 	++i; // beyond the NUL
 

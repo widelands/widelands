@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,8 @@
 #include "wexception.h"
 #include "widelands_map_map_object_saver.h"
 #include "widelands_map_map_object_loader.h"
+
+#include "upcast.h"
 
 enum {
 	PLCMD_UNUSED=0,
@@ -523,9 +525,7 @@ PlayerCommand (0, des.Unsigned8())
 
 void Cmd_EnhanceBuilding::execute (Game* g)
 {
-	if
-		(Building * const building =
-		 dynamic_cast<Building *>(g->objects().get_object(serial)))
+	if (upcast(Building, building, g->objects().get_object(serial)))
 		g->get_player(get_sender())->enhance_building(building, id);
 }
 
@@ -662,13 +662,9 @@ PlayerCommand (0, des.Unsigned8())
 
 void Cmd_DropSoldier::execute (Game* g)
 {
-	if
-		(PlayerImmovable * const pi =
-		 dynamic_cast<PlayerImmovable *>(g->objects().get_object(serial)))
-		if
-			(Soldier * const s =
-			 dynamic_cast<Soldier *>(g->objects().get_object(soldier)))
-			g->player(get_sender()).drop_soldier(pi, s);
+	if (upcast(PlayerImmovable, player_imm, g->objects().get_object(serial)))
+		if (upcast(Soldier, s, g->objects().get_object(soldier)))
+			g->player(get_sender()).drop_soldier(player_imm, s);
 }
 
 void Cmd_DropSoldier::serialize (StreamWrite & ser)

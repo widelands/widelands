@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
  * reference or unrefereence this Event
  */
 void Event::reference(EventReferencer* ref) {
-   m_referencers[ ref ] ++;
+	++m_referencers[ref];
 }
 void Event::unreference(EventReferencer* ref) {
    std::map<EventReferencer*, uint32_t>::iterator cur = m_referencers.find(ref);

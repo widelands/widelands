@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,8 @@
 #include "widelands_map_map_object_saver.h"
 
 #include "log.h"
+
+#include "upcast.h"
 
 Battle::Descr g_Battle_Descr;
 
@@ -56,7 +58,7 @@ void Battle::init (Editor_Game_Base* eg, Soldier* s1, Soldier* s2)
 	Map_Object::init(eg);
 	m_first = s1;
 	m_second = s2;
-	if (Game * const game = dynamic_cast<Game *>(eg))
+	if (upcast(Game, game, eg))
 		m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
 }
 
@@ -67,7 +69,7 @@ void Battle::init (Editor_Game_Base* eg)
 
 	Map_Object::init(eg);
 
-	if (Game * const game = dynamic_cast<Game *>(eg))
+	if (upcast(Game, game, eg))
 		m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
 }
 
@@ -177,7 +179,7 @@ void Battle::Loader::load(FileRead& fr)
 {
 	BaseImmovable::Loader::load(fr);
 
-	Battle* b = dynamic_cast<Battle*>(get_object());
+	upcast(Battle, b, get_object());
 
 	b->m_next_assault = fr.Unsigned32();
 	b->m_last_try = fr.Unsigned32();
@@ -190,7 +192,7 @@ void Battle::Loader::load_pointers()
 {
 	BaseImmovable::Loader::load_pointers();
 
-	Battle* b = dynamic_cast<Battle*>(get_object());
+	upcast(Battle, b, get_object());
 
 	if (m_first) {
 		b->m_first = dynamic_cast<Soldier*>(mol().get_object_by_file_index(m_first));

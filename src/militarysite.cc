@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,8 @@
 #include "worker.h"
 
 #include "log.h"
+
+#include "upcast.h"
 
 #include <libintl.h>
 #include <locale.h>
@@ -159,7 +161,7 @@ void MilitarySite::init(Editor_Game_Base* g)
 {
    ProductionSite::init(g);
 
-	if (Game * const game = dynamic_cast<Game *>(g)) {
+	if (upcast(Game, game, g)) {
       // Request soldiers
 		call_soldiers();
 
@@ -254,25 +256,6 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
 
 /*
 ===============
-MilitarySite::remove_worker
-
-Intercept remove_worker() calls to unassign our worker, if necessary.
-===============
-
-void MilitarySite::remove_worker(Worker* w)
-{
-	if (m_worker == w) {
-		m_worker = 0;
-
-		request_worker((Game*)get_owner()->get_game());
-	}
-
-	Building::remove_worker(w);
-}
-*/
-
-/*
-===============
 MilitarySite::request_soldier
 
 Issue the soldier request
@@ -309,31 +292,33 @@ void MilitarySite::request_soldier_callback
 (Game * g, Request * rq, int32_t, Worker * w, void * data)
 {
 
-   MilitarySite* msite = (MilitarySite*)data;
-   Soldier* s=static_cast<Soldier*>(w);
+	MilitarySite & msite = *static_cast<MilitarySite *>(data);
+   Soldier & s = dynamic_cast<Soldier &>(*w);
 
-   assert(s);
-   assert(s->get_location(g) == msite);
+	assert(s.get_location(g) == &msite);
 
-	if (not msite->m_didconquer)
+	if (not msite.m_didconquer)
 		g->conquer_area
 			(Player_Area<Area<FCoords> >
-			 (msite->owner().get_player_number(),
+			 (msite.owner().get_player_number(),
 			  Area<FCoords>
-			  (g->map().get_fcoords(msite->get_position()),
-			   msite->descr().get_conquers())));
-   msite->m_didconquer = true;
+			  (g->map().get_fcoords(msite.get_position()),
+			   msite.descr().get_conquers())));
+	msite.m_didconquer = true;
 
-	for (uint32_t i = 0; i < msite->m_soldier_requests.size(); ++i)
-		if (rq == msite->m_soldier_requests[i]) {
-			msite->m_soldier_requests.erase(msite->m_soldier_requests.begin() + i);
+	for (uint32_t i = 0; i < msite.m_soldier_requests.size(); ++i)
+		if (rq == msite.m_soldier_requests[i]) {
+			msite.m_soldier_requests.erase(msite.m_soldier_requests.begin() + i);
 			break;
 		}
 
 
-   msite->m_soldiers.push_back(s);
-   s->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
-	s->mark (false);
+	msite.m_soldiers.push_back(&s);
+
+	// bind the worker into this house, hide him on the map
+	s.start_task_idle(g, 0, -1);
+
+	s.mark (false);
 }
 
 
@@ -414,7 +399,7 @@ void MilitarySite::drop_soldier (uint32_t serial)
 {
 molog ("**Dropping soldier (%d)\n", serial);
 
-	if (Game * const game = dynamic_cast<Game *>(&owner().egbase()))
+	if (upcast(Game, game, &owner().egbase()))
 		if (m_soldiers.size()) {
 			size_t i = 0;
       Soldier* s = m_soldiers[i];

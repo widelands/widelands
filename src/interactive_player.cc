@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +46,8 @@
 
 #include "ui_editbox.h"
 #include "ui_unique_window.h"
+
+#include "upcast.h"
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
 
@@ -290,16 +292,11 @@ void Interactive_Player::field_action()
 
 	if (player().vision(Map::get_index(get_sel_pos().node, map.get_width()))) {
 		// Special case for buildings
-		BaseImmovable * const imm = map.get_immovable(get_sel_pos().node);
-
-		if (imm && imm->get_type() == Map_Object::BUILDING) {
-			Building *building = (Building *)imm;
-
-			if (building->get_owner()->get_player_number() == get_player_number()) {
+		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
+			if (building->owner().get_player_number() == get_player_number()) {
 				building->show_options(this);
 				return;
 			}
-		}
 
 		// everything else can bring up the temporary dialog
 		show_field_action(this, get_player(), &m_fieldaction);

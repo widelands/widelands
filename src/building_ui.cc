@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,8 @@ class.
 #include "ui_tabpanel.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
+
+#include "upcast.h"
 
 static const char* pic_ok = "pics/menu_okay.png";
 static const char* pic_cancel = "pics/menu_abort.png";
@@ -200,8 +202,8 @@ Make sure the building still exists and can in fact be bulldozed.
 void BulldozeConfirm::think()
 {
 	Editor_Game_Base * const egbase = &m_iabase->egbase();
-	Building* building = (Building*)m_building.get(egbase);
-	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
+	upcast(Building,        building,  m_building .get(egbase));
+	upcast(PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if (!todestroy || !building ||
 	    !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
@@ -219,11 +221,11 @@ Issue the CMD_BULLDOZE command for this building.
 void BulldozeConfirm::bulldoze()
 {
 	Editor_Game_Base * const egbase = &m_iabase->egbase();
-	Building* building = (Building*)m_building.get(egbase);
-	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
+	upcast(Building,        building,  m_building .get(egbase));
+	upcast(PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
-		if (Game * const game = dynamic_cast<Game *>(egbase)) {
+		if (upcast(Game, game, egbase)) {
 			game->send_player_bulldoze (todestroy);
          m_iabase->need_complete_redraw();
 		} else {// Editor
@@ -541,7 +543,8 @@ m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 
 	for (Workarea_Info::size_type i = NUMBER_OF_WORKAREA_PICS; i;) {
 		char filename[30];
-		snprintf(filename, sizeof(filename), "pics/workarea%ucumulative.png", i);
+		snprintf
+			(filename, sizeof(filename), "pics/workarea%zucumulative.png", i);
 		--i;
 		workarea_cumulative_picid[i] = g_gr->get_picture(PicMod_Game, filename);
 	}
@@ -929,7 +932,8 @@ void ConstructionSite_Window::think()
 {
 	Building_Window::think();
 
-	m_progress->set_state(((ConstructionSite*)get_building())->get_built_per64k());
+	m_progress->set_state
+		(dynamic_cast<ConstructionSite &>(*get_building()).get_built_per64k());
 }
 
 
@@ -1369,11 +1373,13 @@ UI::Basic_Button * ProductionSite_Window::create_priority_button
  const char * picture1, const char * picture2,
  const std::string & button_tooltip)
 {
-	int32_t pic_enabled = g_gr->get_resized_picture (
-		 g_gr->get_picture(PicMod_Game,  picture1),
+	int32_t const pic_enabled  =
+		g_gr->get_resized_picture
+		(g_gr->get_picture(PicMod_Game,  picture1),
 		 w, h, Graphic::ResizeMode_Clip);
-	int32_t pic_disabled = g_gr->get_resized_picture (
-		 g_gr->get_picture(PicMod_Game,  picture2),
+	int32_t const pic_disabled =
+		g_gr->get_resized_picture
+		(g_gr->get_picture(PicMod_Game,  picture2),
 		 w, h, Graphic::ResizeMode_Clip);
 	UI::IDButton<PriorityButtonHelper, int32_t> * button =
 	 new UI::IDButton<PriorityButtonHelper, int32_t>
@@ -1691,8 +1697,10 @@ void MilitarySite_Window::update() {
    m_table->sort();
 
 	std::string str;
-	sprintf (buf, "%2d", ((MilitarySite *)get_building())->get_capacity());
-	str = (const char *) buf;
+	sprintf
+		(buf,
+		 "%2d", dynamic_cast<MilitarySite &>(*get_building()).get_capacity());
+	str = static_cast<const char *>(buf);
 	m_capacity->set_text (str);
 }
 
@@ -1915,19 +1923,19 @@ void TrainingSite_Options_Window::update() {
 		m_style_train->set_text(_("Balanced army"));
 
 	sprintf (buf, "%2d", ts->get_pri(atrHP));
-	str = (const char *) buf;
+	str = static_cast<const char *>(buf);
 	m_hp_pri->set_text (str);
 
 	sprintf (buf, "%2d", ts->get_pri(atrAttack));
-	str = (const char *) buf;
+	str = static_cast<const char *>(buf);
 	m_attack_pri->set_text (str);
 
 	sprintf (buf, "%2d", ts->get_pri(atrDefense));
-	str = (const char *) buf;
+	str = static_cast<const char *>(buf);
 	m_defense_pri->set_text (str);
 
 	sprintf (buf, "%2d", ts->get_pri(atrEvade));
-	str = (const char *) buf;
+	str = static_cast<const char *>(buf);
 	m_evade_pri->set_text (str);
 
 }

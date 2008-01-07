@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,8 @@
 #include "ui_window.h"
 #include "ui_unique_window.h"
 #include "ui_table.h"
+
+#include "upcast.h"
 
 #include <set>
 #include <map>
@@ -100,23 +102,19 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 	const Building_Descr::Index nr_buildings = tribe->get_nrbuildings();
 	for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
-		if
-			(const ProductionSite_Descr * const curProdSite =
-		    dynamic_cast<const ProductionSite_Descr *>
-			 (tribe->get_building_descr(i)))
+		if (upcast(ProductionSite_Descr const, de, tribe->get_building_descr(i)))
 		{
 
-			const char * const name = curProdSite->name().c_str();
+			const char * const name = de->name().c_str();
       if (strcmp(name, "constructionsite") == 0) continue;
       if (strcmp(name, "headquarters")     == 0) continue;
 
 			if
-				(curProdSite->get_outputs()->find(selectedWare->name())
+				(de->get_outputs()->find(selectedWare->name())
 				 !=
-				 curProdSite->get_outputs()->end())
+				 de->get_outputs()->end())
 			{
-				prodSites.add
-					(curProdSite->descname().c_str(), i, curProdSite->get_buildicon());
+				prodSites.add(de->descname().c_str(), i, de->get_buildicon());
             found = true;
 			}
 		}

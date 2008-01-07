@@ -1,11 +1,7 @@
 # Created by Nasenbaer
 
 [global]
-packet_version=1
-player_1_x=89
-player_1_y=68
-player_2_x=91
-player_2_y=18
-player_3_x=26
-player_3_y=93
-
+packet_version=2
+player_1=89 68
+player_2=91 18
+player_3=26 93

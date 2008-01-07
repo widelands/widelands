@@ -1,9 +1,6 @@
-# Automatically created by Widelands svn 2357
-
 [global]
 packet_version=2
 player_1=43 41
 player_2=66 43
 player_3=67 70
 player_4=44 67
-

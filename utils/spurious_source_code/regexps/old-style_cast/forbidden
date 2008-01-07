@@ -1,4 +1,9 @@
 (a)b
+(X::a)b
+(X ::a)b
+(X    ::a)b
+(X:: a)b
+(X::    a)b
 (a *)b
 (a const *)b
 (a **)b

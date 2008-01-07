@@ -1,5 +1,3 @@
-# Automatically created by Widelands build-9
-
 [global]
 packet_version=1
 map_w=96
@@ -9,4 +7,3 @@ world=greenland
 name=_Checkmate
 author=Winterwind
 descr=_"Whether just one of nature's strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
-

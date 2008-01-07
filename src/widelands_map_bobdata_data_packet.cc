@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,8 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker_program.h"
+
+#include "upcast.h"
 
 #define CURRENT_PACKET_VERSION 1
 
@@ -121,7 +123,7 @@ throw
          bob->m_animstart=fr.Signed32();
 
          // walking
-         bob->m_walking=(Map_Object::WalkingDir)fr.Signed32();
+			bob->m_walking=static_cast<Map_Object::WalkingDir>(fr.Signed32());
          bob->m_walkstart=fr.Signed32();
          bob->m_walkend=fr.Signed32();
 
@@ -282,7 +284,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Ga
 void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol, Worker* worker) {
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == WORKER_BOB_PACKET_VERSION) {
-		if (Soldier * const soldier = dynamic_cast<Soldier *>(worker)) {
+		if (upcast(Soldier, soldier, worker)) {
 			const uint16_t soldier_worker_bob_packet_version = fr->Unsigned16();
 			if
 				(2 <= soldier_worker_bob_packet_version
@@ -329,9 +331,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 					 fr->GetPrevPos(),
 					 worker, worker->get_serial(),
 					 soldier_worker_bob_packet_version);
-		} else if
-			(Carrier * const carrier = dynamic_cast<Carrier *>(worker))
-		{
+		} else if (upcast(Carrier, carrier, worker)) {
 			const uint16_t carrier_worker_bob_packet_version = fr->Unsigned16();
 			if
 				(carrier_worker_bob_packet_version

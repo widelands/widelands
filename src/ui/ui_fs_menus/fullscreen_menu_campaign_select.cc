@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -204,10 +204,10 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 				dif = 0;
 			difficulty = dif_picture_filenames[dif];
 
-			list.add(
-				s->get_string(cname, _("[No value found]").c_str()),
-				s->get_string(csection),
-				g_gr->get_picture(PicMod_Game, difficulty.c_str()));
+			list.add
+				(s->get_string(cname, _("[No value found]").c_str()),
+				 s->get_string(csection),
+				 g_gr->get_picture(PicMod_Game, difficulty.c_str()));
 
 		}
 
@@ -392,10 +392,10 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 	// Add all visible entries to the list.
 	while ((s = prof.get_section(mapsection.c_str()))) {
 		if (c->get_bool(mapsection.c_str())) {
-		list.add(
-			s->get_string("name", _("[No value found]").c_str()),
-			s->get_string("path"),
-			g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
+			list.add
+				(s->get_string("name", _("[No value found]").c_str()),
+				 s->get_string("path"),
+				 g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
 		}
 
 		++i;

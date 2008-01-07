@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,8 @@
 #include "worker.h"
 
 #include "ui_object.h" //only needed for i18n function _()
+
+#include "upcast.h"
 
 #include <stdio.h>
 
@@ -306,7 +308,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	if (Game * const game = dynamic_cast<Game *>(g)) {
+	if (upcast(Game, game, g)) {
 		const Tribe_Descr & tribe = owner().tribe();
 		// TODO: figure out whether planing is necessary
 
@@ -373,7 +375,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		// Walk the builder home safely
 		Worker* builder = m_builder.get(g);
 		if (builder) {
-			builder->reset_tasks((Game*)g);
+			builder->reset_tasks(dynamic_cast<Game *>(g));
 			builder->set_location(bld);
 			builder->start_task_gowarehouse();
 		}
@@ -427,12 +429,12 @@ void ConstructionSite::request_builder_callback
 {
 	assert(w);
 
-	ConstructionSite* cs = (ConstructionSite*)data;
+	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 
-	cs->m_builder = w;
+	cs.m_builder = w;
 
 	delete rq;
-	cs->m_builder_request = 0;
+	cs.m_builder_request = 0;
 
 	w->start_task_buildingwork();
 }
@@ -530,14 +532,11 @@ Called by WaresQueue code when an item has arrived
 void ConstructionSite::wares_queue_callback
 (Game * g, WaresQueue *, int32_t, void * data)
 {
-	ConstructionSite* cs = (ConstructionSite*)data;
+	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 
-	if (!cs->m_working) {
-		Worker* builder = cs->m_builder.get(g);
-
-		if (builder)
+	if (!cs.m_working)
+		if (Worker * const builder = cs.m_builder.get(g))
 			builder->update_task_buildingwork(g);
-	}
 }
 
 

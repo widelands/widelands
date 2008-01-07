@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,8 @@
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
+#include "upcast.h"
+
 #define CURRENT_PACKET_VERSION 1
 
 
@@ -61,19 +63,13 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) for (;;) {
          uint32_t reg=fr.Unsigned32();
          if (reg==0xffffffff) break; // end of wares
-		if
-			(WareInstance * const ware = dynamic_cast<WareInstance *>
-			 (ol->get_object_by_file_index(reg)))
-		{
+		if (upcast(WareInstance, ware, ol->get_object_by_file_index(reg))) {
 			reg = fr.Unsigned32();
 			if (Map_Object * const location = ol->get_object_by_file_index(reg))
 			{
 				const uint32_t ware_index_from_file = fr.Unsigned32();
 				ware->m_descr_index = ware_index_from_file;
-				if
-					(PlayerImmovable * const player_immovable =
-					 dynamic_cast<PlayerImmovable *>(location))
-				{
+				if (upcast(PlayerImmovable, player_immovable, location)) {
 					if
 						(dynamic_cast<const Building *>(player_immovable)
 						 or
@@ -95,9 +91,7 @@ throw (_wexception)
 						throw wexception
 							("Widelands_Map_Waredata_Data_Packet: location is "
 							 "PlayerImmovable but not Building or Flag\n");
-				} else if
-					(Worker * const worker = dynamic_cast<Worker *>(location))
-				{
+				} else if (upcast(Worker, worker, location)) {
 					const Tribe_Descr & tribe = *worker->get_tribe();
 					if (tribe.get_nrwares() <= static_cast<int32_t>(ware_index_from_file))
 						throw wexception
@@ -118,10 +112,10 @@ throw (_wexception)
             assert(ol->is_object_known(reg));
             ware->m_transfer_nextstep=ol->get_object_by_file_index(reg);
 			} else
-            ware->m_transfer_nextstep=(Map_Object*)(0);
+            ware->m_transfer_nextstep = static_cast<Map_Object *>(0);
 
          // Do some kind of init
-				if (Game * const game = dynamic_cast<Game *>(egbase))
+				if (upcast(Game, game, egbase))
 					ware->set_location(game, location);
          ol->mark_object_as_loaded(ware);
 			} else

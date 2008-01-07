@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,8 @@
 #include "wexception.h"
 #include "worker.h"
 #include "worker_program.h"
+
+#include "upcast.h"
 
 
 /**
@@ -272,16 +274,9 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
  */
 bool Worker::run_findobject(Game* g, State* state, const Action* action)
 {
-	molog("  FindObject(%i, %i, %s)\n", action->iparam1, action->iparam2,
-		 action->sparam1.c_str());
-
-	PlayerImmovable* location = get_location(g);
-	Building* owner;
-
-	assert(location);
-	assert(location->get_type() == BUILDING);
-
-	owner = (Building*)location;
+	molog
+		("  FindObject(%i, %i, %s)\n",
+		 action->iparam1, action->iparam2, action->sparam1.c_str());
 
 	CheckStepWalkOn cstep(get_movecaps(), false);
 
@@ -359,18 +354,20 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 
 	CheckStepDefault cstep(get_movecaps());
 
-	int32_t res = -1;
-	if (action->sparam1.size())
-		res = w->get_resource(action->sparam1.c_str());
+	int32_t const res =
+		action->sparam1.size() ? w->get_resource(action->sparam1.c_str()) : -1;
 
 	Area<FCoords> area(map.get_fcoords(get_position()), action->iparam1);
-	int32_t retval = 0;
-	if (res != -1)
-		retval = map.find_reachable_fields(area, &list, cstep,
-                 FindNodeSizeResource((FindNodeSize::Size)action->iparam2, res));
-	else
-		retval = map.find_reachable_fields(area, &list, cstep,
-		         FindNodeSize((FindNodeSize::Size)action->iparam2));
+	int32_t const retval =
+		map.find_reachable_fields
+		(area,
+		 &list,
+		 cstep,
+		 res == -1 ?
+		 FindNodeSize(static_cast<FindNodeSize::Size>(action->iparam2))
+		 :
+		 FindNodeSizeResource
+		 (static_cast<FindNodeSize::Size>(action->iparam2), res));
 
 	if (!retval) {
 		molog("  no space found\n");
@@ -406,19 +403,14 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 	BaseImmovable* imm = g->get_map()->get_immovable(get_position());
 	Coords dest;
 	bool forceonlast = false;
-	PlayerImmovable* location = get_location(g);
-	Building* owner;
 	int32_t max_steps = -1;
 
-	assert(location);
-	assert(location->get_type() == BUILDING);
-
-	owner = (Building*)location;
+	Building & owner = dynamic_cast<Building &>(*get_location(g));
 
 	molog("  Walk(%i)\n", action->iparam1);
 
 	// First of all, make sure we're outside
-	if (imm == owner) {
+	if (imm == &owner) {
 		start_task_leavebuilding(g, false);
 		return true;
 	}
@@ -437,12 +429,14 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 
 		molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
 
-		if (obj->get_type() == BOB)
-			dest = ((Bob*)obj)->get_position();
-		else if (obj->get_type() == IMMOVABLE)
-			dest = ((Immovable*)obj)->get_position();
+		if      (upcast(Bob       const, bob,       obj))
+			dest = bob      ->get_position();
+		else if (upcast(Immovable const, immovable, obj))
+			dest = immovable->get_position();
 		else
-			throw wexception("MO(%u): [actWalk]: bad object type = %i", get_serial(), obj->get_type());
+			throw wexception
+				("MO(%u): [actWalk]: bad object type = %i",
+				 get_serial(), obj->get_type());
 
 		max_steps=1; // Only take one step, then rethink (object may have moved)
 		forceonlast = true;
@@ -537,25 +531,23 @@ bool Worker::run_object(Game* g, State* state, const Action* action)
 
 	molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
 
-	if (obj->get_type() == IMMOVABLE)
-		((Immovable*)obj)->switch_program(g, action->sparam1);
-	else if (obj->get_type() == BOB) {
-		Bob* bob = ((Bob*)(obj));
-		if (bob->get_bob_type() == Bob::CRITTER) {
-			Critter_Bob* crit = ((Critter_Bob*)bob);
+	if      (upcast(Immovable, immovable, obj))
+		immovable->switch_program(g, action->sparam1);
+	else if (upcast(Bob,       bob,       obj)) {
+		if        (upcast(Critter_Bob, crit, bob)) {
 			crit->send_signal(g, "interrupt_now");
 			crit->start_task_program(action->sparam1);
-
-		} else if (bob->get_type() == Bob::WORKER or bob->get_type() == Bob::SOLDIER) {
-			Worker* w= ((Worker*)bob);
-			w->send_signal(g, "interrupt_now");
-			w->start_task_program(action->sparam1);
+		} else if (upcast(Worker,      w,    bob)) {
+			w   ->send_signal(g, "interrupt_now");
+			w   ->start_task_program(action->sparam1);
 		} else
-			throw wexception("MO(%i): [actObject]: bab bob type = %i",
-			                 get_serial(), bob->get_bob_type());
+			throw wexception
+				("MO(%i): [actObject]: bab bob type = %i",
+				 get_serial(), bob->get_bob_type());
 	} else
-		throw wexception("MO(%u): [actObject]: bad object type = %i",
-		                 get_serial(), obj->get_type());
+		throw wexception
+			("MO(%u): [actObject]: bad object type = %i",
+			 get_serial(), obj->get_type());
 
 	++state->ivar1;
 	schedule_act(g, 10);
@@ -829,7 +821,7 @@ void Worker::init(Editor_Game_Base *g)
 	// is unknown to this worker till he is initialized
 	// assert(get_location(g));
 
-	if (Game * const game = dynamic_cast<Game *>(g))
+	if (upcast(Game, game, g))
 		create_needed_experience(game); // Set his experience
 }
 
@@ -852,7 +844,7 @@ void Worker::cleanup(Editor_Game_Base *g)
 	// or doing something else. Get Location might
 	// init a gowarehouse task or something and this results
 	// in a dirty stack. Nono, we do not want to end like this
-	if (Game * const game = dynamic_cast<Game *>(g))
+	if (upcast(Game, game, g))
 		reset_tasks(game);
 
 	if (get_location(g))
@@ -917,11 +909,7 @@ void Worker::schedule_incorporate(Game* g)
  */
 void Worker::incorporate(Game *g)
 {
-	PlayerImmovable *location = get_location(g);
-
-	if (location && location->has_attribute(WAREHOUSE)) {
-		Warehouse *wh = (Warehouse*)location;
-
+	if (upcast(Warehouse, wh, get_location(g))) {
 		wh->incorporate_worker(g, this);
 		return;
 	}
@@ -1077,13 +1065,13 @@ void Worker::transfer_update(Game* g, State* state)
 	// the building, we may be somewhere else entirely (e.g. lumberjack, soldier)
 	// or we may be on the building's flag for a fetch_from_flag or dropoff
 	// task.
-	if (location->get_type() == BUILDING) {
+	if (dynamic_cast<Building const *>(location)) {
 		BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
 		if (position != location) {
-			if (position->get_type() == FLAG) {
-				location = (PlayerImmovable*)position;
-				set_location(location);
+			if (upcast(Flag, flag, position)) {
+				location = flag;
+				set_location(flag);
 			} else {
 				set_location(0);
 				return;
@@ -1118,52 +1106,54 @@ void Worker::transfer_update(Game* g, State* state)
 	}
 
 	// Initiate the next step
-	if (location->get_type() == BUILDING) {
-		if (location->get_base_flag() != nextstep)
-			throw wexception("MO(%u): [transfer]: in building, nextstep is not "
-			                 "building's flag", get_serial());
+	if (upcast(Building, building, location)) {
+		if (building->get_base_flag() != nextstep)
+			throw wexception
+				("MO(%u): [transfer]: in building, nextstep is not building's "
+				 "flag",
+				 get_serial());
 
 		molog("[transfer]: move from building to flag\n");
 		start_task_leavebuilding(g, true);
 		return;
 	}
 
-	if (location->get_type() == FLAG) {
+	if (upcast(Flag, flag, location)) {
 		// Flag to Building
-		if (nextstep->get_type() == BUILDING) {
-			if (nextstep->get_base_flag() != location)
-				throw wexception("MO(%u): [transfer]: next step is building, "
-				                 "but we're nowhere near", get_serial());
+		if (upcast(Building, building, nextstep)) {
+			if (building->get_base_flag() != location)
+				throw wexception
+					("MO(%u): [transfer]: next step is building, but we are "
+					 "nowhere near",
+					 get_serial());
 
 			molog("[transfer]: move from flag to building\n");
 			start_task_forcemove
 				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
-			set_location(nextstep);
+			set_location(building);
 			return;
 		}
 
 		// Flag to Flag
-		if (nextstep->get_type() == FLAG) {
-			Road* road = ((Flag*)location)->get_road((Flag*)nextstep);
+		if (upcast(Flag, nextflag, nextstep)) {
+			Road & road = *flag->get_road(nextflag);
 
-			molog("[transfer]: move to next flag via road %u\n",
-			      road->get_serial());
+			molog
+				("[transfer]: move to next flag via road %u\n", road.get_serial());
 
-			Path path(road->get_path());
+			Path path(road.get_path());
 
-			if (nextstep != road->get_flag(Road::FlagEnd))
+			if (nextstep != road.get_flag(Road::FlagEnd))
 				path.reverse();
 
 			start_task_movepath
 				(path, descr().get_right_walk_anims(does_carry_ware()));
-			set_location(road);
+			set_location(&road);
 			return;
 		}
 
 		// Flag to Road
-		if (nextstep->get_type() == ROAD) {
-			Road* road = (Road*)nextstep;
-
+		if (upcast(Road, road, nextstep)) {
 			if
 				(road->get_flag(Road::FlagStart) != location
 				 and
@@ -1183,10 +1173,9 @@ void Worker::transfer_update(Game* g, State* state)
 		                 get_serial(), nextstep->get_serial());
 	}
 
-	if (location->get_type() == ROAD) {
+	if (upcast(Road, road, location)) {
 		// Road to Flag
 		if (nextstep->get_type() == FLAG) {
-			Road* road = (Road*)location;
 			const Path& path = road->get_path();
 			int32_t index;
 
@@ -1219,7 +1208,7 @@ void Worker::transfer_update(Game* g, State* state)
 					                 "flag is nowhere near", get_serial());
 
 			molog("[transfer]: arrive at flag %u\n", nextstep->get_serial());
-			set_location((Flag*)nextstep);
+			set_location(dynamic_cast<Flag *>(nextstep));
 			set_animation(g, descr().get_animation("idle"));
 			schedule_act(g, 10); // wait a little
 			return;
@@ -1410,23 +1399,17 @@ void Worker::start_task_return(Game* g, bool dropitem)
 
 void Worker::return_update(Game* g, State* state)
 {
-	PlayerImmovable* location = get_location(g);
-	BaseImmovable* pos = g->get_map()->get_immovable(get_position());
-
-	assert(location && location->get_type() == BUILDING); // expect signal "location"
-
-	if (pos) {
-		if (pos == location) {
+	Building & location = dynamic_cast<Building &>(*get_location(g));
+	if (BaseImmovable * const pos = g->map().get_immovable(get_position())) {
+		if (pos == &location) {
 			set_animation(g, 0);
 			pop_task();
 			return;
 		}
 
-		if (pos->get_type() == FLAG) {
-			Flag* flag = (Flag*)pos;
-
+		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
-			if (flag->get_building() == location) {
+			if (flag->get_building() == &location) {
 				if (state->ivar1 && flag->has_capacity()) {
 					WareInstance* item = fetch_carried_item(g);
 
@@ -1458,7 +1441,7 @@ void Worker::return_update(Game* g, State* state)
 		(not
 		 start_task_movepath
 		 (g,
-		  location->get_base_flag()->get_position(),
+		  location.get_base_flag()->get_position(),
 		  15,
 		  descr().get_right_walk_anims(does_carry_ware())))
 	{
@@ -1695,8 +1678,8 @@ void Worker::dropoff_update(Game * g, State *)
 	// Deliver the item
 	if (item) {
 		// We're in the building, walk onto the flag
-		if (location->get_type() == Map_Object::BUILDING) {
-			Flag* flag = ((PlayerImmovable*)location)->get_base_flag();
+		if (upcast(Building, building, location)) {
+			Flag * const flag = building->get_base_flag();
 
 			if (start_task_waitforcapacity(g, flag))
 				return;
@@ -1708,9 +1691,7 @@ void Worker::dropoff_update(Game * g, State *)
 		}
 
 		// We're on the flag, drop the item and pause a little
-		if (location->get_type() == Map_Object::FLAG) {
-			Flag* flag = (Flag*)location;
-
+		if (upcast(Flag, flag, location)) {
 			if (flag->has_capacity()) {
 				molog("[dropoff]: dropping the item\n");
 
@@ -1778,31 +1759,25 @@ void Worker::start_task_fetchfromflag()
 
 void Worker::fetchfromflag_update(Game *g, State* state)
 {
-	PlayerImmovable* owner = get_location(g);
-	WareInstance* item = get_carried_item(g);
-
-	assert(owner); // expect 'location' signal
-
-	BaseImmovable* location = g->get_map()->get_immovable(get_position());
+	PlayerImmovable & owner = *get_location(g);
+	PlayerImmovable * const location =
+		dynamic_cast<PlayerImmovable *>(g->map().get_immovable(get_position()));
 
 	// If we haven't got the item yet, walk onto the flag
-	if (!item && !state->ivar1) {
-		if (location->get_type() == BUILDING) {
+	if (!get_carried_item(g) && !state->ivar1) {
+		if (dynamic_cast<Building const *>(location)) {
 			molog("[fetchfromflag]: move from building to flag\n");
 			start_task_leavebuilding(g, false);
 			return;
 		}
 
-		// This can't happen because of the owner check above
-		if (location->get_type() != FLAG)
-			throw wexception("MO(%u): [fetchfromflag]: flag disappeared", get_serial());
-
-		item = ((Flag*)location)->fetch_pending_item(g, owner);
 		state->ivar1 = 1; // force return to building
 
 		// The item has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
-		if (item)
+		if
+			(WareInstance * const item =
+			 dynamic_cast<Flag &>(*location).fetch_pending_item(g, &owner))
 			set_carried_item(g, item);
 
 		set_animation(g, descr().get_animation("idle"));
@@ -1811,7 +1786,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	}
 
 	// Go back into the building
-	if (location->get_type() == FLAG) {
+	if (dynamic_cast<Flag const *>(location)) {
 		molog("[fetchfromflag]: return to building\n");
 
 		start_task_forcemove
@@ -1819,21 +1794,20 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 		return;
 	}
 
-	if (location->get_type() != BUILDING)
+	if (not dynamic_cast<Building const *>(location))
 		throw wexception("MO(%u): [fetchfromflag]: building disappeared", get_serial());
 
-	assert(location == owner);
+	assert(location == &owner);
 
 	molog("[fetchfromflag]: back home\n");
 
-	item = fetch_carried_item(g);
-	if (item) {
+	if (WareInstance * const item = fetch_carried_item(g)) {
 		item->set_location(g, location);
 		item->update(g); // this might remove the item and ack any requests
 	}
 
 	// We're back!
-	if (location->has_attribute(WAREHOUSE)) {
+	if (dynamic_cast<Warehouse const *>(location)) {
 		schedule_incorporate(g);
 		return;
 	}
@@ -1937,31 +1911,19 @@ Bob::Task Worker::taskLeavebuilding = {
  */
 void Worker::start_task_leavebuilding(Game* g, bool changelocation)
 {
-	PlayerImmovable* location = get_location(g);
-
-	assert(location && location->get_type() == BUILDING);
-
-	Building* building = (Building*)location;
+	Building & building = dynamic_cast<Building &>(*get_location(g));
 
 	// Set the wait task
 	push_task(taskLeavebuilding);
 
 	get_state()->ivar1 = changelocation ? 1 : 0;
-	get_state()->objvar1 = building;
+	get_state()->objvar1 = &building;
 }
 
 
 void Worker::leavebuilding_update(Game* g, State* state)
 {
-	BaseImmovable* position = g->get_map()->get_immovable(get_position());
-
-	if (!position || position->get_type() != BUILDING) {
-		pop_task();
-		return;
-	}
-
-	Building* building = (Building*)position;
-
+	if (upcast(Building, building, g->map().get_immovable(get_position()))) {
 	assert(building == state->objvar1.get(g));
 
 	if (!building->leave_check_and_wait(g, this)) {
@@ -1970,14 +1932,17 @@ void Worker::leavebuilding_update(Game* g, State* state)
 		return;
 	}
 
-	molog("[leavebuilding]: Leave (%s)\n",
-		  state->ivar1 ? "change location" : "stay in location");
+		molog
+			("[leavebuilding]: Leave (%s location)\n",
+			 state->ivar1 ? "change" : "stay in");
 
 	if (state->ivar1)
 		set_location(building->get_base_flag());
 
-	start_task_forcemove(WALK_SE,
-	                     descr().get_right_walk_anims(does_carry_ware()));
+		start_task_forcemove
+			(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
+	} else
+		pop_task();
 }
 
 
@@ -2061,26 +2026,15 @@ void Worker::fugitive_update(Game* g, State* state)
 	}
 
 	// check whether we're on a flag and it's time to return home
-	BaseImmovable *imm = map->get_immovable(get_position());
-
-	if (imm && imm->get_type() == FLAG) {
-		Flag *flag = (Flag*)imm;
-		Building *building = flag->get_building();
-
-		if
-			(building
-			 and
-			 building->has_attribute(WAREHOUSE)
-			 and
-			 building->get_owner() == get_owner())
-		{
+	if (upcast(Flag, flag, map->get_immovable(get_position())))
+		if (upcast(Warehouse, warehouse, flag->get_building()))
+			if (warehouse->get_owner() == get_owner()) {
 			molog("[fugitive]: move into warehouse\n");
 			start_task_forcemove
 				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
-			set_location(building);
+				set_location(warehouse);
 			return;
-		}
-	}
+			}
 
 	// time to die?
 	if (g->get_gametime() - state->ivar1 >= 0) {
@@ -2093,8 +2047,10 @@ void Worker::fugitive_update(Game* g, State* state)
 	// Try to find a warehouse we can return to
 	std::vector<ImmovableFound> warehouses;
 
-	if (map->find_immovables(Area<FCoords>(map->get_fcoords(get_position()), 15),
-	                         &warehouses, FindImmovableAttribute(WAREHOUSE)))
+	if
+		(map->find_immovables
+		 (Area<FCoords>(map->get_fcoords(get_position()), 15),
+		  &warehouses, FindImmovableAttribute(WAREHOUSE)))
 	{
 		int32_t bestdist = -1;
 		Warehouse *best = 0;
@@ -2102,16 +2058,16 @@ void Worker::fugitive_update(Game* g, State* state)
 		molog("[fugitive]: found warehouse(s)\n");
 
 		for (uint32_t i = 0; i < warehouses.size(); ++i) {
-			Warehouse *wh = (Warehouse*)warehouses[i].object;
+			Warehouse & wh = dynamic_cast<Warehouse &>(*warehouses[i].object);
 
 			// Only walk into one of our warehouses
-			if (wh->get_owner() != get_owner())
+			if (wh.get_owner() != get_owner())
 				continue;
 
 			int32_t dist = map->calc_distance(get_position(), warehouses[i].coords);
 
 			if (!best || dist < bestdist) {
-				best = wh;
+				best = &wh;
 				bestdist = dist;
 			}
 		}
@@ -2129,8 +2085,12 @@ void Worker::fugitive_update(Game* g, State* state)
 				molog("[fugitive]: try to move to warehouse\n");
 
 				// the warehouse could be on a different island, so check for failure
-				if (start_task_movepath(g, flag->get_position(), 0,
-				    descr().get_right_walk_anims(does_carry_ware())))
+				if
+					(start_task_movepath
+					 (g,
+					  flag->get_position(),
+					  0,
+					  descr().get_right_walk_anims(does_carry_ware())))
 
 					return;
 			}
@@ -2200,14 +2160,9 @@ void Worker::geologist_update(Game* g, State* state)
 	//
 	Map & map = g->map();
 	const World & world = map.world();
-	PlayerImmovable* location = get_location(g);
-	Flag* owner;
-
-	assert(location);
-	assert(location->get_type() == FLAG);
-
-	owner = (Flag*)location;
-	Area<FCoords> owner_area(map.get_fcoords(owner->get_position()), state->ivar2);
+	Flag & owner = dynamic_cast<Flag &>(*get_location(g));
+	Area<FCoords> owner_area
+		(map.get_fcoords(owner.get_position()), state->ivar2);
 
 	// Check if it's time to go home
 	if (state->ivar1 > 0) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,8 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
+
+#include "upcast.h"
 
 #include <cstdarg>
 #include <stdio.h>
@@ -120,13 +122,13 @@ void IdleWareSupply::set_economy(Economy* e)
 */
 PlayerImmovable* IdleWareSupply::get_position(Game* g)
 {
-	Map_Object* loc = m_ware->get_location(g);
+	Map_Object * const loc = m_ware->get_location(g);
 
-	if (loc->get_type() >= Map_Object::BUILDING)
-		return (PlayerImmovable*)loc;
+	if (upcast(PlayerImmovable, playerimmovable, loc))
+		return playerimmovable;
 
-	if (loc->has_attribute(Map_Object::WORKER))
-		return ((Worker*)loc)->get_location(g);
+	if (upcast(Worker, worker, loc))
+		return worker->get_location(g);
 
 	return 0;
 }
@@ -217,19 +219,14 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 {
 	//molog("WareInstance::cleanup\n");
 
-	Map_Object* location = m_location.get(g);
-
 	// Unlink from our current location, if necessary
-	if (location && location->get_type() == FLAG) {
-		Flag* flag = (Flag*)location;
-
+	if (upcast(Flag, flag, m_location.get(g)))
 		flag->remove_item(g, this);
-	}
 
 		delete m_supply;
 		m_supply = 0;
 
-	if (Game * const game = dynamic_cast<Game *>(g)) {
+	if (upcast(Game, game, g)) {
 		cancel_moving();
 		set_location(game, 0);
 	}
@@ -274,10 +271,10 @@ void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
 	{
 		Economy* eco = 0;
 
-		if (location->get_type() >= BUILDING)
-			eco = ((PlayerImmovable*)location)->get_economy();
-		else if (location->has_attribute(WORKER))
-			eco = ((Worker*)location)->get_economy();
+		if (upcast(PlayerImmovable const, playerimmovable, location))
+			eco = playerimmovable->get_economy();
+		else if (upcast(Worker const, worker, location))
+			eco = worker->get_economy();
 
 		if (oldlocation && get_economy()) {
 			if (get_economy() != eco)
@@ -332,15 +329,12 @@ void WareInstance::update(Game* g)
 	if (m_transfer)
 	{
 		bool success;
-		PlayerImmovable* location;
-		PlayerImmovable* nextstep;
-
-		if (loc->get_type() >= BUILDING)
-			location = (PlayerImmovable*)loc;
-		else
+		upcast(PlayerImmovable, location, loc);
+		if (not location)
 			return; // wait
 
-		nextstep = m_transfer->get_next_step(location, &success);
+		PlayerImmovable * const nextstep =
+			m_transfer->get_next_step(location, &success);
 		m_transfer_nextstep = nextstep;
 
 		if (!nextstep) {
@@ -360,8 +354,7 @@ void WareInstance::update(Game* g)
 			}
 		}
 
-		switch (location->get_type()) {
-		case BUILDING:
+		if (upcast(Building, building, location)) {
 			if (nextstep != location->get_base_flag())
 				throw wexception("MO(%u): ware: move from building to non-baseflag", get_serial());
 
@@ -370,11 +363,8 @@ void WareInstance::update(Game* g)
 			//  - we were requested just when we were being carried into the warehouse
 			//  - we were carried into a harbour/warehouse to be shipped across the sea,
 			//    but a better, land-based route has been found
-			if (location->has_attribute(WAREHOUSE))
-			{
-				Warehouse* wh = (Warehouse*)location;
-
-				wh->do_launch_item(g, this);
+			if (upcast(Warehouse, warehouse, building)) {
+				warehouse->do_launch_item(g, this);
 				return;
 			}
 
@@ -383,15 +373,16 @@ void WareInstance::update(Game* g)
 				 "warehouse)",
 				 get_serial(), location->get_serial(), nextstep->get_serial());
 
-		case FLAG:
-			if (nextstep->get_type() == BUILDING && nextstep->get_base_flag() != location)
-				((Flag*)location)->call_carrier(g, this, nextstep->get_base_flag());
-			else
-				((Flag*)location)->call_carrier(g, this, nextstep);
-			break;
+		} else if (upcast(Flag, flag, location)) {
+			flag->call_carrier
+				(g,
+				 this,
+				 dynamic_cast<Building const *>(nextstep)
+				 &&
+				 nextstep->get_base_flag() != location
+				 ?
+				 nextstep->get_base_flag() : nextstep);
 		}
-
-		return;
 	}
 }
 
@@ -504,24 +495,15 @@ Flag::~Flag()
 */
 Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
 {
-	Road *road = 0;
-	BaseImmovable *imm = g->get_map()->get_immovable(coords);
+	BaseImmovable * const imm = g->map().get_immovable(coords);
 
 	Flag *flag = new Flag();
 	flag->set_owner(owner);
 	flag->m_position = coords;
 
-	if (imm && imm->get_type() == Map_Object::ROAD)
-	{
-		// we split a road
-		road = (Road*)imm;
-		road->get_economy()->add_flag(flag);
-	}
-	else
-	{
-		// a new, standalone flag is created
-		(new Economy(owner))->add_flag(flag);
-	}
+	upcast(Road, road, imm);
+	//  we split a road, or a new, standalone flag is created
+	(road ? road->get_economy() : new Economy(owner))->add_flag(flag);
 
 	if (road)
 		road->presplit(g, coords);
@@ -545,6 +527,11 @@ bool Flag::get_passable() const throw ()
 {
 	return true;
 }
+
+
+static std::string const flag_name = "flag";
+std::string const & Flag::name() const throw () {return flag_name;}
+
 
 Flag *Flag::get_base_flag()
 {
@@ -761,16 +748,9 @@ bool Flag::ack_pending_item(Game *, Flag * destflag) {
 void Flag::wake_up_capacity_queue(Game* g)
 {
 	while (m_capacity_wait.size()) {
-		Worker* w = (Worker*)m_capacity_wait[0].get(g);
-
+		upcast(Worker, w, m_capacity_wait[0].get(g));
 		m_capacity_wait.erase(m_capacity_wait.begin());
-
-		if (!w)
-			continue;
-
-		molog("Flag: wake up one from wait queue.\n");
-
-		if (w->wakeup_flag_capacity(g, this))
+		if (w and w->wakeup_flag_capacity(g, this))
 			break;
 	}
 }
@@ -825,7 +805,7 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 		--m_item_filled;
 		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
 
-		if (Game * const game = dynamic_cast<Game *>(g))
+		if (upcast(Game, game, g))
 			wake_up_capacity_queue(game);
 
 		return;
@@ -972,8 +952,8 @@ void Flag::cleanup(Editor_Game_Base *g)
 	while (m_item_filled) {
 		WareInstance* item = m_items[--m_item_filled].item;
 
-		item->set_location((Game*)g, 0);
-		item->destroy((Game*)g);
+		item->set_location(dynamic_cast<Game *>(g), 0);
+		item->destroy     (dynamic_cast<Game *>(g));
 	}
 
 	//molog("  items destroyed\n");
@@ -1037,7 +1017,7 @@ void Flag::add_flag_job(Game *, int32_t workerware, std::string programname) {
 void Flag::flag_job_request_callback
 (Game *, Request * rq, int32_t, Worker * w, void * data)
 {
-	Flag* flag = (Flag*)data;
+	Flag * const flag = static_cast<Flag *>(data);
 
 	assert(w);
 
@@ -1125,6 +1105,11 @@ bool Road::get_passable() const throw ()
 {
 	return true;
 }
+
+
+static std::string const road_name = "road";
+std::string const & Road::name() const throw () {return road_name;}
+
 
 Flag *Road::get_base_flag()
 {
@@ -1261,7 +1246,7 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
 	// Mark Fields
 	mark_map(gg);
 
-	if (Game * const game = dynamic_cast<Game *>(gg)) {
+	if (upcast(Game, game, gg)) {
 		Carrier * const carrier =
 			static_cast<Carrier *>(m_carrier.get(game));
       m_desire_carriers = 1;
@@ -1336,14 +1321,14 @@ void Road::request_carrier_callback
 {
 	assert(w);
 
-	Road* road = (Road*)data;
-	Carrier* carrier = (Carrier*)w;
+	Road    & road    = *static_cast<Road *>(data);
+	Carrier & carrier = dynamic_cast<Carrier &>(*w);
 
 	delete rq;
-	road->m_carrier_request = 0;
+	road.m_carrier_request = 0;
 
-	road->m_carrier = carrier;
-	carrier->start_task_road();
+	road.m_carrier = &carrier;
+	carrier.start_task_road();
 }
 
 /**
@@ -1352,14 +1337,14 @@ void Road::request_carrier_callback
 void Road::remove_worker(Worker *w)
 {
 	Editor_Game_Base & egbase = owner().egbase();
-	Carrier* carrier = dynamic_cast<Carrier *>(m_carrier.get(&egbase));
+	Carrier * carrier = dynamic_cast<Carrier *>(m_carrier.get(&egbase));
 
 	if (carrier == w)
 		m_carrier = carrier = 0;
 
-	Game * const game = dynamic_cast<Game *>(&egbase);
-	if (not carrier and not m_carrier_request and m_desire_carriers and game)
-		request_carrier(game);
+	if (not carrier and not m_carrier_request and m_desire_carriers)
+		if (upcast(Game, game, &egbase))
+			request_carrier(game);
 
 	PlayerImmovable::remove_worker(w);
 }
@@ -1418,7 +1403,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 	// Find workers on this road that need to be reassigned
 	// The algorithm is pretty simplistic, and has a bias towards keeping
 	// the worker around; there's obviously nothing wrong with that.
-	Carrier *carrier = (Carrier *)m_carrier.get(g);
+	upcast(Carrier, carrier, m_carrier.get(g));
 	const std::vector<Worker*> workers = get_workers();
 	std::vector<Worker*> reassigned_workers;
 
@@ -1460,7 +1445,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 		}
 
 		// Cause a worker update in any case
-		if (Game * const game = dynamic_cast<Game *>(g))
+		if (upcast(Game, game, g))
 			w->send_signal(game, "road");
 	}
 
@@ -1473,7 +1458,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 		(*it)->set_location(newroad);
 
 	// Do the following only if in game
-	if (Game * const game = dynamic_cast<Game *>(g)) {
+	if (upcast(Game, game, g)) {
 
 		// Request a new carrier for this road if necessary
 		// This must be done _after_ the new road initializes, otherwise request
@@ -1493,12 +1478,9 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
  */
 bool Road::notify_ware(Game* g, FlagId flagid)
 {
-	Carrier* carrier = (Carrier*)m_carrier.get(g);
-
-	if (!carrier)
-		return false;
-
-	return carrier->notify_ware(g, flagid);
+	if (upcast(Carrier, carrier, m_carrier.get(g)))
+		return carrier->notify_ware(g, flagid);
+	return false;
 }
 
 
@@ -1590,10 +1572,10 @@ void Route::load_pointers(LoadData* data, Widelands_Map_Map_Object_Loader* mol)
 	try {
 		for (uint32_t i = 0; i < data->flags.size(); ++i) {
 			uint32_t idx = data->flags.size();
-			Flag* flag = dynamic_cast<Flag*>(mol->get_object_by_file_index(idx));
-			if (!flag)
+			if (upcast(Flag, flag, mol->get_object_by_file_index(idx)))
+				m_route.push_back(flag);
+			else
 				throw wexception("Route step %u expected flag %u", i, idx);
-			m_route.push_back(flag);
 		}
 	} catch (...) {
 		delete data;
@@ -1735,38 +1717,35 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	if (!locflag->get_economy()->find_route(locflag, destflag, &m_route, m_item))
 		throw wexception("Transfer::get_next_step: inconsistent economy");
 
-	if (m_route.get_nrsteps() >= 1 && location->get_type() == Map_Object::ROAD) {
-		Road* road = (Road*)location;
-		Flag* oflag = m_route.get_flag(m_game, 1);
-
-		if (road->get_flag(Road::FlagEnd) == oflag) {
+	if (m_route.get_nrsteps() >= 1)
+		if (upcast(Road const, road, location))
+			if (road->get_flag(Road::FlagEnd) == m_route.get_flag(m_game, 1)) {
 			tlog("trim start flag (road)\n");
 			m_route.starttrim(1);
-		}
-	}
+			}
 
-	if (m_route.get_nrsteps() >= 1 && destination->get_type() == Map_Object::ROAD) {
-		Road* road = (Road*)destination;
-		Flag* oflag = m_route.get_flag(m_game, m_route.get_nrsteps()-1);
-
-		if (road->get_flag(Road::FlagEnd) == oflag) {
+	if (m_route.get_nrsteps() >= 1)
+		if (upcast(Road const, road, destination))
+			if
+				(road->get_flag(Road::FlagEnd)
+				 ==
+				 m_route.get_flag(m_game, m_route.get_nrsteps() - 1))
+			{
 			tlog("trim end flag (road)\n");
 			m_route.truncate(m_route.get_nrsteps()-1);
-		}
-	}
+			}
 
 	// Now decide where we want to go
-	if (location->get_type() == Map_Object::FLAG) {
+	if (dynamic_cast<Flag const *>(location)) {
 		assert(m_route.get_flag(m_game, 0) == location);
 
 		// special rule to get items into buildings
-		if (m_item) {
-			if (m_route.get_nrsteps() == 1 && destination->get_type() == Map_Object::BUILDING) {
+		if (m_item and m_route.get_nrsteps() == 1)
+			if (dynamic_cast<Building const *>(destination)) {
 				assert(m_route.get_flag(m_game, 1) == destination->get_base_flag());
 
 				return destination;
 			}
-		}
 
 		if (m_route.get_nrsteps() >= 1) {
 			return m_route.get_flag(m_game, 1);
@@ -2032,7 +2011,7 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
          uint32_t what_is=fr->Unsigned8();
          uint32_t reg=fr->Unsigned32();
          Transfer* trans=0;
-			if (Game * const game = dynamic_cast<Game *>(egbase)) {
+			if (upcast(Game, game, egbase)) {
             assert(mol->is_object_known(reg));
 				if        (what_is == WARE) {
                WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
@@ -2617,18 +2596,18 @@ void WaresQueue::set_callback(callback_t* fn, void* data)
 void WaresQueue::request_callback
 (Game * g, Request *, int32_t ware, Worker * w, void * data)
 {
-	WaresQueue* wq = (WaresQueue*)data;
+	WaresQueue & wq = *static_cast<WaresQueue *>(data);
 
 	assert(!w); // WaresQueue can't hold workers
-	assert(wq->m_filled < wq->m_size);
-	assert(wq->m_ware == ware);
+	assert(wq.m_filled < wq.m_size);
+	assert(wq.m_ware == ware);
 
 	// Update
-	wq->set_filled(wq->m_filled + 1);
-	wq->update();
+	wq.set_filled(wq.m_filled + 1);
+	wq.update();
 
-	if (wq->m_callback_fn)
-		(*wq->m_callback_fn)(g, wq, ware, wq->m_callback_data);
+	if (wq.m_callback_fn)
+		(*wq.m_callback_fn)(g, &wq, ware, wq.m_callback_data);
 }
 
 /**
@@ -3498,7 +3477,7 @@ void Economy::do_split(Flag *f)
 */
 void Economy::start_request_timer(int32_t delta)
 {
-	if (Game * const game = dynamic_cast<Game *>(&m_owner->egbase())) {
+	if (upcast(Game, game, &m_owner->egbase())) {
 		const int32_t gametime = game->get_gametime();
 
 		if (m_request_timer and m_request_timer_time - (gametime + delta) <= 0)
@@ -3797,7 +3776,7 @@ void Economy::balance_requestsupply()
 
 	rsps.nexttimer = -1;
 
-	if (Game *const game = dynamic_cast<Game *>(&m_owner->egbase())) {
+	if (upcast(Game, game, &m_owner->egbase())) {
 
 	// Try to fulfill non-idle Requests
 	process_requests(game, &rsps);

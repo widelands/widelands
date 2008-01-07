@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,8 @@
 #include "profile.h"
 #include "transport.h"
 #include "wlapplication.h"
+
+#include "upcast.h"
 
 Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
 :
@@ -138,8 +140,6 @@ void Interactive_Base::set_sel_radius(const uint32_t n) {
 }
 
 /*
- *  [ protected functions ]
- *
  * Set/Unset sel picture
  */
 void Interactive_Base::set_sel_picture(const char * const file) {
@@ -498,7 +498,7 @@ void Interactive_Base::finish_build_road()
 		// awkward... path changes ownership
 		Path & path = *new Path(*m_buildroad);
 		// Build the path as requested
-		if (Game * const game = dynamic_cast<Game *>(&egbase()))
+		if (upcast(Game, game, &egbase()))
 			game->send_player_build_road (m_road_build_player, path);
 		else {
 			egbase().get_player(m_road_build_player)->build_road(path);

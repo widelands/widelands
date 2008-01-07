@@ -1,0 +1,1 @@
+(^.?|[^}].|.[^ ])while *\((true|false|0x[[:xdigit:]]+|[[:digit:]]+(\.[[:digit:]]*)?)\)

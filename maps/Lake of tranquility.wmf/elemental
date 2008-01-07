@@ -1,5 +1,3 @@
-# Automatically created by Widelands build-9
-
 [global]
 packet_version=1
 map_w=64
@@ -9,4 +7,3 @@ world=greenland
 name=_Lake of Tranquility
 author=Winterwind
 descr=_"This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
-

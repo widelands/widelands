@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2007 by the Widelands Development Team
+ * Copyright (C) 2004-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -100,7 +100,7 @@ void NetGGZ::ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata)
 	log("GGZ ## ggzmod_server\n");
 	if (e == GGZMOD_EVENT_SERVER)
 	{
-		int32_t fd = *(int32_t*)cbdata;
+		int32_t fd = *static_cast<const int32_t *>(cbdata);
 		ggzobj->m_fd = fd;
 		log("GGZ ## got fd: %i\n", fd);
 		ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
@@ -392,7 +392,7 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 	case GGZ_CHANNEL_FAIL:
 	case GGZ_NET_ERROR:
 	case GGZ_PROTOCOL_ERROR:
-		log("GGZCORE ## -- error! (%s) :(\n", (int8_t*)cbdata);
+		log("GGZCORE ## -- error! (%s) :(\n", static_cast<const char *>(cbdata));
 		ggzcore_login = false;
 		break;
 	}

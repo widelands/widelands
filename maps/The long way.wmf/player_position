@@ -1,15 +1,7 @@
-# Automatically created by Widelands cvs 24-12-2005 (inofficial)
-
 [global]
-packet_version=1
-player_1_x=10
-player_1_y=9
-player_2_x=213
-player_2_y=9
-player_3_x=112
-player_3_y=24
-player_4_x=72
-player_4_y=24
-player_5_x=152
-player_5_y=24
-
+packet_version=2
+player_1=10 9
+player_2=213 9
+player_3=112 24
+player_4=72 24
+player_5=152 24

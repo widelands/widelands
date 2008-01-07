@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2007 by the Widelands Development Team
+ * Copyright (C) 2004-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -135,8 +135,8 @@ void NetGame::run ()
 {
 	game=new Game();
 
-	game->enqueue_command (
-	    new Cmd_NetCheckSync(game->get_gametime()+CHECK_SYNC_INTERVAL, this));
+	game->enqueue_command
+		(new Cmd_NetCheckSync(game->get_gametime()+CHECK_SYNC_INTERVAL, this));
 
 	game->run_multi_player (this);
 	delete game;
@@ -942,7 +942,7 @@ void Serializer::end_packet ()
 void Serializer::Data(const void * const data, const size_t size)
 {
 	for (size_t idx = 0; idx < size; ++idx)
-		putchar(((const char*)data)[idx]);
+		putchar(static_cast<const char *>(data)[idx]);
 }
 
 void Serializer::putstr (const char* str)

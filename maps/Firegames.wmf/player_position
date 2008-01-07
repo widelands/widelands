@@ -1,9 +1,4 @@
-# Automatically created by Widelands cvsbuild
-
 [global]
-packet_version=1
-player_1_x=11
-player_1_y=53
-player_2_x=53
-player_2_y=16
-
+packet_version=2
+player_1=11 53
+player_2=53 16

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@
 
 #include <stdio.h>
 
+#include "upcast.h"
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
@@ -135,10 +136,10 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 		m_size = BaseImmovable::SMALL;
 		m_mine = true;
 	} else
-		throw wexception(
-			"Section [global], unknown size '%s'. "
-			"Valid values are small, medium, big, mine",
-			string);
+		throw wexception
+			("Section [global], unknown size '%s'. Valid values are small, "
+			 "medium, big, mine",
+			 string);
 
 	// Parse build options
 	m_buildable = global->get_bool("buildable", true);
@@ -414,6 +415,9 @@ uint32_t Building::get_playercaps() const throw () {
 }
 
 
+std::string const & Building::name() const throw () {return descr().name();}
+
+
 /*
 ===============
 Building::start_animation
@@ -456,19 +460,15 @@ void Building::init(Editor_Game_Base* g)
 	}
 
 	// Make sure the flag is there
-	BaseImmovable* imm;
-	Flag* flag;
+
 
 	map->get_brn(m_position, &neighb);
-	imm = map->get_immovable(neighb);
-
-	if (imm && imm->get_type() == FLAG)
-		flag = (Flag*)imm;
-	else
-		flag = Flag::create(g, get_owner(), neighb);
-
-	m_flag = flag;
-	m_flag->attach_building(g, this);
+	{
+		Flag * flag = dynamic_cast<Flag *>(map->get_immovable(neighb));
+		if (not flag) flag = Flag::create(g, &owner(), neighb);
+		m_flag = flag;
+		flag->attach_building(g, this);
+	}
 
 	// Start the animation
 	start_animation(g, descr().get_animation("idle"));
@@ -657,16 +657,16 @@ void Building::act(Game* g, uint32_t data)
 		// Wake up one worker
 		while (m_leave_queue.size())
 		{
-			Worker* w = (Worker*)m_leave_queue[0].get(g);
+			upcast(Worker, worker, m_leave_queue[0].get(g));
 
 			m_leave_queue.erase(m_leave_queue.begin());
 
-			if (!w)
+			if (!worker)
 				continue;
 
-			m_leave_allow = w;
+			m_leave_allow = worker;
 
-			if (w->wakeup_leave_building(g, this)) {
+			if (worker->wakeup_leave_building(g, this)) {
 				m_leave_time = time + BUILDING_LEAVE_INTERVAL;
 				wakeup = true;
 				break;

@@ -1,21 +1,23 @@
 #! /bin/bash
 
-declare -i RESULT=0
+declare -i TESTS=0
+declare -i ERRORS=0
 for TEST in *; do
 	if [ -d $TEST ]; then
 		[[ -f $TEST/forbidden ]] && if [ "$(egrep -f $TEST/regexps $TEST/forbidden | wc -l)" != "$(wc -l < $TEST/forbidden)" ]; then
 			echo "$TEST failed to match all forbidden cases"
-			RESULT+=1
+			ERRORS+=1
 		fi
 		[[ -f $TEST/forbidden ]] && if [ "$(egrep -f $TEST/regexps $TEST/allowed | wc -l)" != "0" ]; then
 			echo "$TEST detected an allowed case as forbidden"
-			RESULT+=1
+			ERRORS+=1
 		fi
+		TESTS+=1
 	fi
 done
-if [ $RESULT == 0 ]; then
-	echo "All regexps passed their tests"
+if [ $ERRORS == 0 ]; then
+	echo "All $TESTS rules passed their tests"
 else
-	echo "$RESULT errors were found during the regexp tests"
+	echo "$ERRORS errors were found during the rule tests"
 fi
-exit $RESULT
+exit $ERRORS

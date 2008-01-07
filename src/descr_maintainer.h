@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ private:
 
 	void reserve(const typename T::Index n) {
 		T * * const new_items =
-			static_cast<T * * const>(realloc(items, sizeof(T *) * n));
+			static_cast<T * *>(realloc(items, sizeof(T *) * n));
 		if (not new_items) throw std::bad_alloc();
 		items = new_items;
 		capacity = n;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "game.h"
 #include "queue_cmd_factory.h"
 
+#include "upcast.h"
 
 #define CURRENT_PACKET_VERSION 2
 
@@ -134,7 +135,7 @@ throw (_wexception)
 	while (p.size()) {
 		const Cmd_Queue::cmditem& it = p.top();
 
-		if (GameLogicCommand* cmd = dynamic_cast<GameLogicCommand*>(it.cmd)) {
+		if (upcast(GameLogicCommand, cmd, it.cmd)) {
 			// The id (aka command type)
 			assert(0 < cmd->get_id() < 0x8000);
 			fw.Unsigned16(cmd->get_id());

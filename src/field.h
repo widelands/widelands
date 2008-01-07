@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,10 +93,8 @@ class Terrain_Descr;
 class Bob;
 class BaseImmovable;
 
-/**
- * a field like it is represented in the game
- * \todo This is all one evil hack :(
- */
+/// a field like it is represented in the game
+/// \todo This is all one evil hack :(
 struct Field {
    friend class Map;
 	friend class Bob;

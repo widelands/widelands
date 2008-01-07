@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
 	{"return",            &Critter_BobProgram::parse_return},
 	{"object",            &Critter_BobProgram::parse_object},
 	{"plant",             &Critter_BobProgram::parse_plant},
-   {"create_bob",        &Critter_BobProgram::parse_create_bob},
+	{"create_bob",        &Critter_BobProgram::parse_create_bob},
 	{"removeobject",      &Critter_BobProgram::parse_removeobject},
 	{"geologist",         &Critter_BobProgram::parse_geologist},
 	{"geologist-find",    &Critter_BobProgram::parse_geologist_find},
@@ -147,11 +147,9 @@ bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 ===========================================================================
 */
 
-Critter_Bob_Descr::Critter_Bob_Descr(const Tribe_Descr * const tribe_descr,
-                                     const std::string & critter_bob_name) :
-
-                                     Bob::Descr(tribe_descr, critter_bob_name),
-                                     m_swimming(0)
+Critter_Bob_Descr::Critter_Bob_Descr
+(const Tribe_Descr * const tribe_descr, const std::string & critter_bob_name)
+: Bob::Descr(tribe_descr, critter_bob_name), m_swimming(0)
 {}
 
 

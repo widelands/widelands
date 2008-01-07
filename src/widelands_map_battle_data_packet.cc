@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,8 @@
 #include "widelands_map_map_object_saver.h"
 
 #include "log.h"
+
+#include "upcast.h"
 
 #include <map>
 
@@ -68,34 +70,50 @@ throw (_wexception)
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			const uint32_t nr_battles = fr.Unsigned32();
 			for (uint32_t i = 0; i < nr_battles; ++i) {
-         Battle* battle = 0;
+				Battle & battle = *egbase->create_battle ();
 
-         int32_t serial = fr.Unsigned32();
-         int32_t next = fr.Unsigned32();
-         int32_t last = fr.Unsigned32();
-         int32_t sol1 = fr.Unsigned32();
-         int32_t sol2 = fr.Unsigned32();
+				uint32_t const serial = fr.Unsigned32();
+				battle.m_next_assault = fr.Unsigned32();
+				battle.m_last_try     = fr.Unsigned32();
 
-         battle = egbase->create_battle ();
+				uint32_t const soldier_1_serial = fr.Unsigned32();
+				Map_Object * const soldier_1_mo =
+					ol->get_object_by_file_index(soldier_1_serial);
+				if (not soldier_1_mo)
+					throw wexception
+						("Widelands_Map_Battle_Data_Packet::Read: in "
+						 "binary/battle:%u: battle %u: soldier 1 (%u) does not "
+						 "exist",
+						 fr.GetPos() - 4, serial, soldier_1_serial);
+				upcast(Soldier, soldier_1, soldier_1_mo);
+				if (not soldier_1)
+					throw wexception
+						("Widelands_Map_Battle_Data_Packet::Read: in "
+						 "binary/battle:%u: battle %u: soldier 1 (%u) is not a "
+						 "soldier",
+						 fr.GetPos() - 4, serial, soldier_1_serial);
 
-         log("Set battle %p (%d)\n", battle, serial);
-         assert(battle);
+				uint32_t const soldier_2_serial = fr.Unsigned32();
+				Map_Object * const soldier_2_mo =
+					ol->get_object_by_file_index(soldier_2_serial);
+				if (not soldier_2_mo)
+					throw wexception
+						("Widelands_Map_Battle_Data_Packet::Read: in "
+						 "binary/battle:%u: battle %u: soldier 2 (%u) does not "
+						 "exist",
+						 fr.GetPos() - 4, serial, soldier_2_serial);
+				upcast(Soldier, soldier_2, soldier_2_mo);
+				if (not soldier_2)
+					throw wexception
+						("Widelands_Map_Battle_Data_Packet::Read: in "
+						 "binary/battle:%u: battle %u: soldier 2 (%u) is not a "
+						 "soldier",
+						 fr.GetPos() - 4, serial, soldier_2_serial);
 
-         battle->m_next_assault = next;
-         battle->m_last_try = last;
-
-            // This may crash
-			Map_Object * const s1 = ol->get_object_by_file_index(sol1);
-			Map_Object * const s2 = ol->get_object_by_file_index(sol2);
-
-         assert (s1);
-         assert (s2);
-            // Here are needed more checks (map_object -> bob -> worker -> soldier ...)
-
-         battle->soldiers((Soldier*)s1, (Soldier*)s2);
+				battle.soldiers(soldier_1, soldier_2);
 
          // and register it with the object loader for further loading
-			ol->register_object(egbase, serial, battle);
+			ol->register_object(egbase, serial, &battle);
 		}
       if (fr.Unsigned32() != 0xffffffff)
          throw wexception ("Error in Widelands_Map_Battle_Data_Packet : Couldn't find 0xffffffff.");

@@ -1,5 +1,3 @@
-# Automatically created by Widelands svn 2357
-
 [global]
 packet_version=1
 map_w=112
@@ -9,4 +7,3 @@ world=greenland
 name=_"Enemy in sight"
 author="ISCH"
 descr=_"A Multiplayer-battle-map on a X-Shaped island."
-

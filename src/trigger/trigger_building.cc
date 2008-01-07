@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,8 @@
 #include "player.h"
 #include "profile.h"
 #include "wexception.h"
+
+#include "upcast.h"
 
 static const int32_t TRIGGER_VERSION = 2;
 
@@ -93,8 +95,7 @@ void Trigger_Building::check_set_conditions(Game* game) {
 	uint32_t count = 0;
 	MapRegion<Area<FCoords> > mr (map, m_player_area);
 	do if
-		(const Building * const building = dynamic_cast<const Building *>
-		 (mr.location().field->get_immovable()))
+		(upcast(Building const, building, mr.location().field->get_immovable()))
 		if
 			(building->owner().get_player_number() == m_player_area.player_number
 			 and

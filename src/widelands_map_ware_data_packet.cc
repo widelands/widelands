@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,8 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
+
+#include "upcast.h"
 
 #include <map>
 
@@ -93,10 +95,7 @@ throw (_wexception)
 	for (; field < fields_end; ++field) {
 
          // First, check for Flags
-		if
-			(const Flag * const flag =
-			 dynamic_cast<const Flag *>(field->get_immovable()))
-		{
+		if (upcast(Flag const, flag, field->get_immovable())) {
 			const Flag::PendingItem * item = flag->m_items;
 			const Flag::PendingItem & items_end =  *(item + flag->m_item_filled);
 			for (; item < &items_end; ++item) {
@@ -107,7 +106,7 @@ throw (_wexception)
 
          // Now, check for workers
 		for (const Bob * b = field->get_first_bob(); b; b = b->get_next_bob())
-			if (const Worker * const w = dynamic_cast<const Worker *>(b))
+			if (upcast(Worker const, w, b))
 				if (const WareInstance * const ware = w->get_carried_item(egbase)) {
                   assert(!os->is_object_known(ware));
                   ids.push_back(os->register_object(ware));

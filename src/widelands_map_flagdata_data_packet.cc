@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,7 @@
 
 #include <map>
 
+#include "upcast.h"
 
 #define CURRENT_PACKET_VERSION 1
 
@@ -66,8 +67,8 @@ throw (_wexception)
 			const uint32_t ser = fr.Unsigned32();
 
          if (ser==0xffffffff) break; // end of flags
-         assert(ol->is_object_known(ser));
-         assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG);
+         assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+         assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
 			Flag * const flag =
 				dynamic_cast<Flag *>(ol->get_object_by_file_index(ser));
@@ -181,8 +182,7 @@ throw (_wexception)
 	const Map & map = egbase->map();
 	const Field & fields_end = map[map.max_index()];
 	for (Field * field = &map[0]; field < &fields_end; ++field) if //  FIXME field should be "const Field *"
-		(Flag * const flag =
-		 dynamic_cast<Flag *>(field->get_immovable()))
+		(upcast(Flag, flag, field->get_immovable()))
 	{
             assert(os->is_object_known(flag));
             assert(!os->is_object_saved(flag));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -371,7 +371,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 			throw wexception
 				("RealFSImpl::Load: read failed for %s (%s) with size %u",
 				 fname.c_str(), fullname.c_str(), size);
-		((int8_t *)data)[size] = 0;
+		static_cast<int8_t *>(data)[size] = 0;
 
 		fclose(file);
 		file = 0;

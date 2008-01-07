@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@
 
 #include <stdio.h>
 
+#include "upcast.h"
 
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
 Map_Object(&mo_descr)
@@ -46,6 +47,10 @@ BaseImmovable::~BaseImmovable()
 {
 }
 
+static std::string const base_immovable_name = "unknown";
+std::string const & BaseImmovable::name() const throw () {
+	return base_immovable_name;
+}
 
 /**
  * Associate the given field with this immovable. Recalculate if necessary.
@@ -458,6 +463,10 @@ bool Immovable::get_passable() const throw ()
 	return descr().get_size() < BIG;
 }
 
+
+std::string const & Immovable::name() const throw () {return descr().name();}
+
+
 /**
  * Actually initialize the immovable.
 */
@@ -469,7 +478,7 @@ void Immovable::init(Editor_Game_Base *g)
 
 	set_program_animation(g);
 
-	if (Game * const game = dynamic_cast<Game *>(g))
+	if (upcast(Game, game, g))
 		switch_program(game, "program");
 }
 
@@ -579,46 +588,43 @@ void Immovable::Loader::load(FileRead& fr)
 {
 	BaseImmovable::Loader::load(fr);
 
-	Immovable* imm = dynamic_cast<Immovable*>(get_object());
+	Immovable & imm = dynamic_cast<Immovable &>(*get_object());
 
 	// Position
-	imm->m_position = fr.Coords32(egbase().map().extent());
-	imm->set_position(&egbase(), imm->m_position);
+	imm.m_position = fr.Coords32(egbase().map().extent());
+	imm.set_position(&egbase(), imm.m_position);
 
 	// Animation
 	const char* animname = fr.CString();
 	try {
-		imm->m_anim = imm->descr().get_animation(animname);
+		imm.m_anim = imm.descr().get_animation(animname);
 	}
 	catch (Map_Object_Descr::Animation_Nonexistent&) {
-		imm->m_anim = imm->descr().main_animation();
+		imm.m_anim = imm.descr().main_animation();
 		log("Warning: Animation '%s' not found, using animation '%s').\n",
-			animname, imm->descr().get_animation_name(imm->m_anim).c_str());
+			animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
-	imm->m_animstart = fr.Signed32();
+	imm.m_animstart = fr.Signed32();
 
 	// Programm
-	if (fr.Unsigned8())
-		imm->m_program = imm->descr().get_program(fr.CString());
-	else
-		imm->m_program = 0;
-	imm->m_program_ptr = fr.Unsigned32();
+	imm.m_program = fr.Unsigned8() ? imm.descr().get_program(fr.CString()) : 0;
+	imm.m_program_ptr = fr.Unsigned32();
 
-	if (!imm->m_program) {
-		imm->m_program_ptr = 0;
+	if (!imm.m_program) {
+		imm.m_program_ptr = 0;
 	} else {
-		if (imm->m_program_ptr >= imm->m_program->get_size()) {
+		if (imm.m_program_ptr >= imm.m_program->get_size()) {
 			// Try to not fail if the program of some immovable has changed
 			// significantly.
 			// Note that in some cases, the immovable may end up broken despite
 			// the fixup, but there isn't really anything we can do against that.
 			log("Warning: Immovable '%s', size of program '%s' seems to have changed.\n",
-				imm->descr().name().c_str(), imm->m_program->get_name().c_str());
-			imm->m_program_ptr = 0;
+				imm.descr().name().c_str(), imm.m_program->get_name().c_str());
+			imm.m_program_ptr = 0;
 		}
 	}
 
-	imm->m_program_step = fr.Signed32();
+	imm.m_program_step = fr.Signed32();
 }
 
 void Immovable::Loader::load_pointers()
@@ -630,7 +636,7 @@ void Immovable::Loader::load_finish()
 {
 	BaseImmovable::Loader::load_finish();
 
-	Immovable* imm = dynamic_cast<Immovable*>(get_object());
+	upcast(Immovable, imm, get_object());
 
 	egbase().inform_players_about_immovable
 			(Map::get_index(imm->m_position, egbase().map().get_width()),

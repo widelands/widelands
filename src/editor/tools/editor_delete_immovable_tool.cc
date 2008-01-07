@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "immovable.h"
 #include "mapregion.h"
 
+#include "upcast.h"
 
 /*
 ===========
@@ -38,9 +39,7 @@ int32_t Editor_Delete_Immovable_Tool::handle_click_impl
 	MapRegion<Area<FCoords> > mr
 		(map,
 		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
-	do if
-		(Immovable * const immovable =
-		 dynamic_cast<Immovable *>(mr.location().field->get_immovable()))
+	do if (upcast(Immovable, immovable, mr.location().field->get_immovable()))
 		immovable->remove(&parent.egbase()); //  Delete no buildings or stuff.
 	while (mr.advance(map));
 	return mr.radius() + 2;

@@ -1,5 +1,3 @@
-# Automatically created by Widelands cvsbuild
-
 [global]
 packet_version=1
 map_w=192
@@ -9,4 +7,3 @@ world=desert
 name=_Dry Riverbed
 author=Nasenbaer
 descr=_"It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
-

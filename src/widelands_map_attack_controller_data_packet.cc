@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "immovable.h"
 #include "militarysite.h"
 #include "map.h"
-#include <stdint.h>
 #include "soldier.h"
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
@@ -34,6 +33,8 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "world.h"
+
+#include "upcast.h"
 
 #include <map>
 #include <set>
@@ -74,9 +75,7 @@ throw (_wexception)
 			fr.Unsigned32();
 			uint32_t flagFilePos = fr.Unsigned32();
 
-			if
-				(Flag * const flag =
-				 dynamic_cast<Flag *>(ol->get_object_by_file_index(flagFilePos)))
+			if (upcast(Flag, flag, ol->get_object_by_file_index(flagFilePos)))
 				ctrl->flag = flag;
 			else
 				throw wexception
@@ -92,10 +91,10 @@ throw (_wexception)
 			uint32_t numBs = fr.Unsigned32();
 
 			for (uint32_t j = 0; j < numBs; ++j) {
-				Soldier * const soldier = dynamic_cast<Soldier *>(ol->get_object_by_file_index(fr.Unsigned32()));
+				upcast(Soldier, soldier, ol->get_object_by_file_index(fr.Unsigned32()));
 				assert(soldier); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-				MilitarySite * const origin = dynamic_cast<MilitarySite *>(ol->get_object_by_file_index(fr.Unsigned32()));
+				upcast(MilitarySite, origin, ol->get_object_by_file_index(fr.Unsigned32()));
 				assert(origin); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
 				Coords battleGround;
@@ -149,7 +148,7 @@ throw (_wexception)
 
 			uint32_t numInMs = fr.Unsigned32();
 			for (uint32_t j = 0; j < numInMs; ++j) {
-				MilitarySite * const ms = dynamic_cast<MilitarySite *>(ol->get_object_by_file_index(fr.Unsigned32()));
+				upcast(MilitarySite, ms, ol->get_object_by_file_index(fr.Unsigned32()));
 			assert(ms); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 			ctrl->involvedMilitarySites.insert(ms);
 			ms->set_in_battle(true);

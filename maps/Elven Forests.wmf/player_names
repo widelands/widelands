@@ -1,5 +1,3 @@
-# Automatically created by Widelands build-9
-
 [global]
 packet_version=1
 
@@ -18,4 +16,3 @@ tribe=barbarians
 [player_4]
 name=Player 4
 tribe=barbarians
-

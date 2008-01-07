@@ -1,5 +1,5 @@
 	/*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,11 +85,11 @@ const int32_t ZipFilesystem::FindFiles
 
    unz_file_info file_info;
    char filename_inzip[256];
-   while (1) {
+	for (;;) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
                             sizeof(filename_inzip), NULL, 0, NULL, 0);
 
-      std::string complete_filename = &filename_inzip[ m_basename.size() ];
+		std::string complete_filename = &filename_inzip[m_basename.size()];
       std::string filename = FS_Filename(complete_filename.c_str());
       std::string filepath = complete_filename.substr(0,
                                                        complete_filename.size()-
@@ -129,12 +129,12 @@ const bool ZipFilesystem::FileExists(std::string path)
    if (path[0] != '/')
       path = '/' + path;
 
-   while (1) {
+	for (;;) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
                             sizeof(filename_inzip), NULL, 0, NULL, 0);
 
-      std::string complete_filename = &filename_inzip[ m_basename.size() ];
-      if (complete_filename[ complete_filename.size() - 1 ] == '/')
+		std::string complete_filename = &filename_inzip[m_basename.size()];
+		if (complete_filename[complete_filename.size() - 1] == '/')
          complete_filename.resize(complete_filename.size() - 1);
 
       if (path == complete_filename) {
@@ -162,14 +162,11 @@ const bool ZipFilesystem::IsDirectory(const std::string path)
    unz_file_info file_info;
    char filename_inzip[256];
 
-   unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
-								 sizeof(filename_inzip), NULL, 0, NULL, 0);
+	unzGetCurrentFileInfo
+		(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
+		 NULL, 0, NULL, 0);
 
-   if (filename_inzip[ strlen(filename_inzip) - 1 ] == '/') {
-      return true;
-	}
-
-   return false;
+	return filename_inzip[strlen(filename_inzip) - 1] == '/';
 }
 
 /**

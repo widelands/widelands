@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,8 @@
 
 #include "log.h"
 
+#include "upcast.h"
+
 static const int32_t CARRIER_SPAWN_INTERVAL = 2500;
 
 
@@ -38,10 +40,10 @@ WarehouseSupply::~WarehouseSupply()
 {
 	if (m_economy)
 	{
-		log(
-			"WarehouseSupply::~WarehouseSupply: "
-			"Warehouse %u still belongs to an economy",
-			m_warehouse->get_serial());
+		log
+			("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
+			 "an economy",
+			 m_warehouse->get_serial());
 		set_economy(0);
 	}
 
@@ -344,9 +346,10 @@ void Warehouse_Descr::parse(const char* directory, Profile* prof,
 	} else if (!strcasecmp(string, "none")) {
 		//
 	} else
-		throw wexception(
-			"Unsupported warehouse subtype '%s'. Possible values: none, HQ, port",
-			string);
+		throw wexception
+			("Unsupported warehouse subtype '%s'. Possible values: none, HQ, "
+			 "port",
+			 string);
 
 	if (m_subtype == Subtype_HQ)
 		m_conquers = global->get_int("conquers");
@@ -402,7 +405,7 @@ void Warehouse::init(Editor_Game_Base* gg)
    m_supply->set_nrwares(get_owner()->tribe().get_nrwares());
    m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());
 
-	if (Game * const game = dynamic_cast<Game *>(gg)) {
+	if (upcast(Game, game, gg)) {
 		for (int32_t i = 0; i < get_owner()->tribe().get_nrwares(); ++i) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
@@ -440,7 +443,7 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base* gg)
 {
-	if (Game * const game = dynamic_cast<Game *>(gg)) {
+	if (upcast(Game, game, gg)) {
 
       while (m_requests.size()) {
          Request* req = m_requests[m_requests.size()-1];
@@ -521,8 +524,9 @@ void Warehouse::act(Game* g, uint32_t data)
 			 it != m_incorporated_workers.end();
 			 ++it)
 		{
-			if (static_cast<Worker *>(it->get(g))->name() == workername) {
-				const Soldier * const soldier = dynamic_cast<Soldier *>(it->get(g));
+			Worker const & worker = dynamic_cast<Worker const &>(*it->get(g));
+			if (worker.name() == workername) {
+				upcast(Soldier const, soldier, &worker);
 
                // Soldier dead ...
 				if (not soldier or soldier->get_current_hitpoints() == 0) {
@@ -848,12 +852,10 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
    {
       w->remove(g);
       w=0;
-	}
-   else
-   {
+	} else {
          // This is to prevent having soldiers that only are used one time and become allways 'marked'
-      if (w->get_worker_type() == Worker_Descr::SOLDIER)
-         ((Soldier*)w)->mark(false);
+		if (upcast(Soldier, soldier, w))
+			soldier->mark(false);
 
       sort_worker_in(g, w->name(), w);
       w->set_location(0); // No more in a economy
@@ -961,12 +963,10 @@ Called when a transfer for one of the idle Requests completes.
 void Warehouse::idle_request_cb
 (Game * g, Request *, int32_t ware, Worker * w, void * data)
 {
-	Warehouse* wh = (Warehouse*)data;
-
 	if (w)
 		w->schedule_incorporate(g);
 	else
-		wh->m_supply->add_wares(ware, 1);
+		static_cast<Warehouse *>(data)->m_supply->add_wares(ware, 1);
 }
 
 

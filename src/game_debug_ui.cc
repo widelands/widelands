@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -387,21 +387,10 @@ void FieldDebugWindow::think()
 	m_ui_field.set_text(str.c_str());
 
 	// Immovable information
-	BaseImmovable* imm = m_coords.field->get_immovable();
-
-	if (imm) {
-		std::string name;
-
-		switch (imm->get_type()) {
-		case Map_Object::IMMOVABLE: name = ((Immovable*)imm)->name(); break;
-		case Map_Object::BUILDING: name = ((Building*)imm)->name(); break;
-		case Map_Object::FLAG: name = "flag"; break;
-		case Map_Object::ROAD: name = "road"; break;
-		default: name = "unknown"; break;
-		}
-
+	if (BaseImmovable * const imm = m_coords.field->get_immovable()) {
 		snprintf
-			(buffer, sizeof(buffer), "%s (%u)", name.c_str(), imm->get_serial());
+			(buffer, sizeof(buffer),
+			 "%s (%u)", imm->name().c_str(), imm->get_serial());
 		m_ui_immovable.set_title(buffer);
 		m_ui_immovable.set_enabled(true);
 	} else {

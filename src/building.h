@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -167,7 +167,7 @@ public:
 	virtual uint32_t get_playercaps() const throw ();
 	virtual Coords get_position() const throw () {return m_position;}
 
-	const std::string & name    () const throw () {return descr().name    ();}
+	std::string const & name() const throw ();
 	__attribute__ ((deprecated)) const char * get_name    () const throw () {return descr().name().c_str();}
 	const std::string & descname() const throw () {return descr().descname();}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descr().descname().c_str();}

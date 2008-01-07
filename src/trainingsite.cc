@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,8 @@
 #include "transport.h"
 #include "tribe.h"
 #include "worker.h"
+
+#include "upcast.h"
 
 #include <stdio.h>
 
@@ -272,25 +274,6 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 }
 
 
-/*
-===============
-TrainingSite::remove_worker
-
-Intercept remove_worker() calls to unassign our worker, if necessary.
-===============
-
-void TrainingSite::remove_worker(Worker* w)
-{
-	if (m_worker == w) {
-		m_worker = 0;
-
-		request_worker((Game*)get_owner()->get_game());
-	}
-
-	Building::remove_worker(w);
-}
-*/
-
 /**
  * Request exactly one soldier
  */
@@ -346,11 +329,10 @@ void TrainingSite::request_soldier_callback
 	assert(w);
 	assert(data);
 
-	TrainingSite *tsite = (TrainingSite *) data;
-	Soldier *s = static_cast < Soldier * >(w);
+	TrainingSite * const tsite = static_cast<TrainingSite *>(data);
+	Soldier & s = dynamic_cast<Soldier &>(*w);
 
-	assert(s);
-	assert(s->get_location(g) == tsite);
+	assert(s.get_location(g) == tsite);
 
 	g->conquer_area
 		(Player_Area<Area<FCoords> >
@@ -366,13 +348,13 @@ void TrainingSite::request_soldier_callback
 		}
 	}
 
-	tsite->m_soldiers.push_back(s);
+	tsite->m_soldiers.push_back(&s);
 	tsite->m_total_soldiers = tsite->m_soldiers.size() + tsite->m_soldier_requests.size();
 
 	//  bind the worker into this house, hide him on the map
-	s->start_task_idle(g, 0, -1);
+	s.start_task_idle(g, 0, -1);
 
-	s->mark(false);
+	s.mark(false);
 }
 
 /**
@@ -389,7 +371,7 @@ void TrainingSite::call_soldiers()
  */
 void TrainingSite::drop_soldier(uint32_t serial)
 {
-	Game * const g = dynamic_cast<Game *>(&owner().egbase());
+	upcast(Game, g, &owner().egbase());
 
 	assert(g);
 

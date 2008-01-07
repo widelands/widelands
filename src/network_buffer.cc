@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,12 +23,12 @@
 
 #include <cassert>
 
-Network_Buffer::Network_Buffer() {
-   m_buffer_real_len = 1000;
-   m_buffer_len = 0; // To correct for size entry
-   m_buffer = (uint8_t*) malloc(1000);
-   m_buffer_pointer = 0;
-
+Network_Buffer::Network_Buffer() :
+m_buffer_real_len(1000),
+m_buffer_len     (0), // To correct for size entry
+m_buffer_pointer (0),
+m_buffer         (static_cast<uint8_t *>(malloc(1000)))
+{
    put_16(0); // This will become our size
 }
 
@@ -47,7 +47,7 @@ void Network_Buffer::finish() {
  * Get functions
  */
 uint8_t Network_Buffer::get_8(bool remove) {
-   uint8_t retval = *((uint8_t*)(m_buffer+m_buffer_pointer));
+	uint8_t const retval = *static_cast<uint8_t *>(m_buffer + m_buffer_pointer);
 
    if (remove)
       m_buffer_pointer += 1;
@@ -91,7 +91,7 @@ void Network_Buffer::put_8(uint8_t val) {
    while ((m_buffer_pointer + s) >= m_buffer_real_len)
       grow_buffer();
 
-   *((uint8_t*)(m_buffer+m_buffer_pointer)) = val;
+	*static_cast<uint8_t *>(m_buffer+m_buffer_pointer) = val;
 
    m_buffer_pointer += s;
    m_buffer_len += s;
@@ -170,5 +170,5 @@ int32_t Network_Buffer::fill(TCPsocket sock) {
  */
 void Network_Buffer::grow_buffer() {
    m_buffer_real_len += 1000;
-   m_buffer = (uint8_t*) realloc(m_buffer, m_buffer_real_len);
+	m_buffer = static_cast<uint8_t *>(realloc(m_buffer, m_buffer_real_len));
 }

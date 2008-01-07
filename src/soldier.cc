@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,8 @@
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
+
+#include "upcast.h"
 
 #include <stdio.h>
 
@@ -468,7 +470,7 @@ void Soldier::init(Editor_Game_Base* gg) {
 	m_max_attack=descr().get_max_attack();
 	m_defense=descr().get_defense();
 	m_evade=descr().get_evade();
-	if (Game * const game = dynamic_cast<Game *>(gg)) {
+	if (upcast(Game, game, gg)) {
 		const uint32_t min_hp = descr().get_min_hp();
 		assert(min_hp);
 		assert(min_hp <= descr().get_max_hp());
@@ -633,7 +635,7 @@ void Soldier::draw
 void Soldier::start_animation
 (Editor_Game_Base* gg, const char * const animname, const uint32_t time)
 {
-	if (Game * const game = dynamic_cast<Game *>(gg))
+	if (upcast(Game, game, gg))
 		start_task_idle (game, descr().get_rand_anim(animname), time);
 }
 
@@ -651,7 +653,8 @@ void Soldier::start_task_gowarehouse() {
 
 	push_task(taskGowarehouse);
 
-	m_supply = (IdleWorkerSupply*) new IdleSoldierSupply(this);
+	m_supply =
+		reinterpret_cast<IdleWorkerSupply *>(new IdleSoldierSupply(this));
 }
 
 Bob::Task Soldier::taskMoveToBattle = {
@@ -679,7 +682,7 @@ void Soldier::moveToBattleUpdate(Game* g, State* state) {
 	if (state->ivar1 == 1) {
 		BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
-		if (position && position->get_type() == BUILDING) {
+		if (dynamic_cast<Building const *>(position)) {
 			state->ivar1 = 2;
 			start_task_leavebuilding (g, 1);
 			return;

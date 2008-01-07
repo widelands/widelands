@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,19 +67,17 @@ void Journal::write(Uint32 v)
 	m_recordstream.write((char*)&v, sizeof(v));
 }
 
-/**
- * \overload
- * SDLKey is an enum, and enums are implemented as int32_t. Consequently, SDLKey
- * changes size on 64bit machines :-(
- * So we force it to be 32bit, discarding the higher 32 bits (hopefully noone
- * will have so man keys)
- *
- * On 32bit systems, it does not matter whether this method or \ref write(Uint32 v)
- * actually gets used.
- *
- * \sa write(SDLMod v)
- * \sa read(SDLMod &v)
- */
+/// \overload
+/// SDLKey is an enum, and enums are implemented as int32_t. Consequently,
+/// SDLKey changes size on 64bit machines :-(
+/// So we force it to be 32bit, discarding the higher 32 bits (hopefully noone
+/// will have so man keys)
+///
+/// On 32bit systems, it does not matter whether this method or
+/// \ref write(Uint32 v) actually gets used.
+///
+/// \sa write(SDLMod v)
+/// \sa read(SDLMod &v)
 void Journal::write(SDLKey v)
 {
 	Uint32 vv;

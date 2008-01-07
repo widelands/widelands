@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -304,7 +304,7 @@ m_button_ok
 
 m_button_cancel
 (this,
- m_button_ok.get_x() + m_button_ok.get_w() + spacing , m_button_ok.get_y(),
+ m_button_ok.get_x() + m_button_ok.get_w() + spacing, m_button_ok.get_y(),
  3 * button_width, button_height,
  1,
  &Trigger_Building_Option_Menu::end_modal, this, 0,

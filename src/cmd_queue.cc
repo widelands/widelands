@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #include "wexception.h"
 #include "worker.h"
 
+#include "upcast.h"
 
 //
 // class Cmd_Queue
@@ -68,7 +69,7 @@ void Cmd_Queue::enqueue (Command* cmd)
 	cmditem ci;
 
 	ci.cmd = cmd;
-	if (PlayerCommand* plcmd = dynamic_cast<PlayerCommand*>(cmd)) {
+	if (upcast(PlayerCommand, plcmd, cmd)) {
 		ci.category = cat_playercommand;
 		ci.serial = plcmd->get_cmdserial();
 	} else if (dynamic_cast<GameLogicCommand*>(cmd)) {

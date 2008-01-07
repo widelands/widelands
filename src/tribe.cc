@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,8 @@
 #include "wlapplication.h"
 #include "worker.h"
 #include "world.h"
+
+#include "upcast.h"
 
 #include <iostream>
 
@@ -485,7 +487,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
       if (endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
-			if (Game * const game = dynamic_cast<Game *>(&egbase))
+			if (upcast(Game, game, &egbase))
 		for (int32_t i = 0; i < it->second; ++i) {
             Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
 				Soldier & soldier = static_cast<Soldier &>

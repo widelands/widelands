@@ -1,5 +1,3 @@
-# Automatically created by Widelands cvs 24-12-2005 (inofficial)
-
 [global]
 packet_version=1
 map_w=192
@@ -9,4 +7,3 @@ world=greenland
 name=_The big lake
 author=ISCH
 descr=_"This island once came out of the deepest grounds of the sea. In those days, fire rose out of the salty seawater and brought ash, stones and earth to daylight. And the fire came nearer and nearer to the sun, while the mountain grew and grew. Until one day, when the whole firemountain exploded. Nowadays only this ring is left from that mighty firemountain. Do you think, that it is big enough for more than one tribe?"
-

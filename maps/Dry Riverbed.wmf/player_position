@@ -1,8 +1,5 @@
-# Automatically created by Widelands cvsbuild
-
 [global]
 packet_version=2
 player_1=108 4
 player_2=32 236
 player_3=70 149
-

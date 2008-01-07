@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,8 @@
 #include "zip_exceptions.h"
 
 #include "log.h"
+
+#include "upcast.h"
 
 extern const Map_Object_Descr g_road_descr;
 
@@ -322,9 +324,7 @@ throw (_wexception)
 							map_object_descr = &base_immovable->descr();
 							if (map_object_descr == &g_road_descr)
 								map_object_descr = 0;
-							else if
-								(const Building * const building =
-								 dynamic_cast<const Building *>(base_immovable))
+							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
 									//  TODO This is not the buildidng's main position
 									//  TODO so we can not see it. But it should be
@@ -554,9 +554,7 @@ throw (_wexception)
 					{
 						map_object_descr = &base_immovable->descr();
 						if (map_object_descr == &g_road_descr) map_object_descr = 0;
-						else if
-							(const Building * const building =
-							 dynamic_cast<const Building *>(base_immovable))
+						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
 								//  TODO This is not the buildidng's main position so we
 								//  TODO can not see it. But it should be possible to
@@ -765,11 +763,7 @@ inline static void write_unseen_immovable
 	uint8_t immovable_kind;
 	if (not map_object_descr)
 		immovable_kind = 0;
-	else if
-		(const Immovable_Descr * const immovable_descr =
-		 dynamic_cast<const Immovable_Descr *>
-		 (map_object_descr))
-	{
+	else if (upcast(Immovable_Descr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
 		{
 			const Tribe_Descr * const owner_tribe =
@@ -780,11 +774,7 @@ inline static void write_unseen_immovable
 		immovables_file.CString(immovable_descr->name().c_str());
 	} else if (map_object_descr == &g_flag_descr)
 		immovable_kind = 2;
-	else if
-		(const Building_Descr * const building_descr =
-		 dynamic_cast<const Building_Descr *>
-		 (map_object_descr))
-	{
+	else if (upcast(Building_Descr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
 		immovables_file.CString
 			(building_descr->tribe().name().c_str());
@@ -793,8 +783,8 @@ inline static void write_unseen_immovable
 	immovable_kinds_file.put(immovable_kind);
 }
 
-#define WRITE(file, filename_template, version)                                \
-	snprintf(filename, sizeof(filename), filename_template, plnum, version);    \
+#define WRITE(file, filename_template, version)                               \
+	snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
 	(file).Write(fs, filename);
 
 void Widelands_Map_Players_View_Data_Packet::Write

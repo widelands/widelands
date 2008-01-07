@@ -1,5 +1,3 @@
-# Automatically created by Widelands svnbuild
-
 [global]
 packet_version=1
 map_w=80
@@ -9,4 +7,3 @@ world=greenland
 name=_The Green Plateau
 author=Nasenbaer
 descr=_"You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
-

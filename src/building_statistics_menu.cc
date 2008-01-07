@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,8 @@
 #include "ui_textarea.h"
 #include "tribe.h"
 #include "wui_plot_area.h"
+
+#include "upcast.h"
 
 #include <vector>
 
@@ -276,9 +278,10 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
 			if (not vec[m_last_building_index].is_constructionsite) {
 				if
-					(ProductionSite * const productionsite =
-					 dynamic_cast<ProductionSite *>
-					 (map[vec[m_last_building_index].pos].get_immovable()))
+					(upcast
+					 (ProductionSite,
+					  productionsite,
+					  map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
                         found = true;
                         break;
@@ -286,9 +289,10 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 			}
 		if (not found) // Now look at the old
 			if
-				(ProductionSite * const productionsite =
-				 dynamic_cast<ProductionSite *>
-				 (map[vec[m_last_building_index].pos].get_immovable()))
+				(upcast
+				 (ProductionSite,
+				  productionsite,
+				  map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
                      found = true;
 	}
@@ -300,9 +304,10 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
 			if (not vec[m_last_building_index].is_constructionsite) {
 				if
-					(ProductionSite * const productionsite =
-					 dynamic_cast<ProductionSite *>
-					 (map[vec[m_last_building_index].pos].get_immovable()))
+					(upcast
+					 (ProductionSite,
+					  productionsite,
+					  map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
                         found = true;
                         break;
@@ -310,9 +315,10 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 			}
 		if (not found) // Now look at the old
 			if
-				(ProductionSite * const productionsite =
-				 dynamic_cast<ProductionSite *>
-				 (map[vec[m_last_building_index].pos].get_immovable()))
+				(upcast
+				 (ProductionSite,
+				  productionsite,
+				  map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
                         found = true;
 	}

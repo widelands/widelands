@@ -1,5 +1,3 @@
-# Automatically created by Widelands build-9
-
 [global]
 packet_version=1
 map_w=160
@@ -9,4 +7,3 @@ world=greenland
 name=_Elven Forests
 author=Winterwind
 descr=_"The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
-

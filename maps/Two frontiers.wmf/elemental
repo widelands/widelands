@@ -1,5 +1,3 @@
-# Automatically created by Widelands svn 2357
-
 [global]
 packet_version=1
 map_w=96
@@ -9,4 +7,3 @@ world=winterland
 name=_"Two Frontiers"
 author="ISCH"
 descr=_"A multiplayer-battle-map on a small circle-shaped island."
-

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -439,7 +439,7 @@ void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 
 	if (!info_ptr) {
-		png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
+		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(NULL));
 		throw wexception("Graphic::save_png: Couldn't create png info struct!");
 	}
 

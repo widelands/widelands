@@ -1,6 +1,6 @@
 #include <time.h>
 /*
- * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,8 @@
 #include "militarysite.h"
 
 #include "log.h"
+
+#include "upcast.h"
 
 #include <algorithm>
 #include <queue>
@@ -197,7 +199,7 @@ granitmine="marblemine";
 
 			unusable_fields.push_back (map.get_fcoords(Coords(x, y)));
 
-			PlayerImmovable* imm = dynamic_cast<PlayerImmovable*>(f.field->get_immovable());
+			upcast(PlayerImmovable, imm, f.field->get_immovable());
 
 			if (imm && imm->get_owner() == player) {
 				// Guard by a set because immovables might be on several fields at once
@@ -333,8 +335,8 @@ void Computer_Player::think ()
 		next_construction_due = gametime + 2000;
 		//printf("Computer_Player: Time to build.\n");
 		if (construct_building()) {
-		//	inhibit_road_building = gametime + 2500; 
-		//Inhibiting roadbuilding is not a good idea, it causes 
+			//inhibit_road_building = gametime + 2500;
+		//Inhibiting roadbuilding is not a good idea, it causes
 		//computer players to get into deadlock at certain circumstances.
                        // printf("Computer_Player: Built something, waiting until road can be built.\n");
 			return;
@@ -396,7 +398,7 @@ void Computer_Player::think ()
 	    construct_roads ();
             //printf("Computer_Player: Building a road. next road due at %i, current GT %i\n", next_road_due, gametime);
 	}
-	//else printf("Computer_Player: Cant do roads yet, next at %i or %i GT  from %i GT.\n", 
+	//else printf("Computer_Player: Cant do roads yet, next at %i or %i GT  from %i GT.\n",
         //     (inhibit_road_building), (next_road_due), gametime);
 
 #if 0
@@ -737,30 +739,18 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 		const BaseImmovable & base_immovable = *immovables[i].object;
 		if (dynamic_cast<const Flag *>(&base_immovable))
 			field->reachable=true;
-		if
-			(const PlayerImmovable * const player_immovable =
-			 dynamic_cast<const PlayerImmovable *>(&base_immovable))
+		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 			if (player_immovable->owner().get_player_number() != player_number)
 				continue;
 
-		if
-			(const Building * const building =
-			 dynamic_cast<const Building *>(&base_immovable))
-		{
+		if (upcast(Building const, building, &base_immovable)) {
 
-			if
-				(const ConstructionSite * const constructionsite =
-				 dynamic_cast<const ConstructionSite *>(building))
-			{
+			if (upcast(ConstructionSite const, constructionsite, building)) {
 				const Building_Descr & target_descr = constructionsite->building();
 
-				if
-					(const MilitarySite_Descr * const target_militarysite_descr =
-					 dynamic_cast<const MilitarySite_Descr *>(&target_descr))
-				{
-
+				if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr)) {
 					const int32_t v =
-						target_militarysite_descr->get_conquers()
+						target_ms_d->get_conquers()
 						-
 						map.calc_distance(field->coords, immovables[i].coords);
 
@@ -770,19 +760,14 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 				}
 				}
 
-				if
-					(const ProductionSite_Descr * const target_productionsite_descr =
-					 dynamic_cast<const ProductionSite_Descr *>(&target_descr))
+				if (dynamic_cast<ProductionSite_Descr const *>(&target_descr))
 					consider_productionsite_influence
 					(field,
 					 immovables[i].coords,
 					 get_building_observer(constructionsite->name().c_str()));
 			}
 
-			if
-				(const MilitarySite * const militarysite =
-				 dynamic_cast<const MilitarySite *>(building))
-			{
+			if (upcast(MilitarySite const, militarysite, building)) {
 				const int32_t v =
 					militarysite->get_conquers()
 					-
@@ -838,17 +823,16 @@ void Computer_Player::update_mineable_field (MineableField* field)
 		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
 			field->reachable=true;
 
-		if
-			(const Building * const bld =
-			 dynamic_cast<const Building *>(immovables[i].object))
+		if (upcast(Building const, bld, immovables[i].object))
 			if
 				(player->get_buildcaps(map.get_fcoords(immovables[i].coords))
 				 &
 				 BUILDCAPS_MINE)
 			{
 
-			if (bld->get_building_type()==Building::CONSTRUCTIONSITE ||
-			    bld->get_building_type()==Building::PRODUCTIONSITE)
+			if
+				(dynamic_cast<ConstructionSite const *>(bld) or
+				 dynamic_cast<ProductionSite   const *>(bld))
 				++field->mines_nearby;
 		}
 	}
@@ -1260,7 +1244,7 @@ void Computer_Player::construct_roads ()
 		    continue;
 
 		if (BaseImmovable * const imm = map.get_immovable(*i)) {
-			if (Road * const road = dynamic_cast<Road *>(imm)) {
+			if (upcast(Road, road, imm)) {
 				if ((player->get_buildcaps(*i) & BUILDCAPS_FLAG) == 0)
 					continue;
 

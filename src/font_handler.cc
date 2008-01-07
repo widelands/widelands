@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -294,8 +294,8 @@ void Font_Handler::render_caret
 	TTF_SizeUTF8(&font, text_caret_pos.c_str(), &caret_x, &caret_y);
 
 	Surface* caret_surf =
-		g_gr->get_picture_surface(
-			g_gr->get_picture(PicMod_Game, "pics/caret.png"));
+		g_gr->get_picture_surface
+		(g_gr->get_picture(PicMod_Game, "pics/caret.png"));
 	SDL_Surface* caret_surf_sdl = caret_surf->m_surface;
 
 	SDL_Rect r;

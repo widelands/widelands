@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,8 @@
 #include "warelist.h"
 #include "world.h"
 #include "sound/sound_handler.h"
+
+#include "upcast.h"
 
 static const size_t STATISTICS_VECTOR_LENGTH = 10;
 
@@ -309,7 +311,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	if (Game * const game = dynamic_cast<Game *>(g)) {
+	if (upcast(Game, game, g)) {
 		// Request worker
 		if (!m_workers.size()) {
 			const std::vector<ProductionSite_Descr::Worker_Info> & info =
@@ -464,13 +466,13 @@ Called when our worker arrives.
 void ProductionSite::request_worker_callback
 (Game* g, Request* rq, int32_t, Worker* w, void* data)
 {
-	ProductionSite* psite = (ProductionSite*)data;
+	ProductionSite & psite = *static_cast<ProductionSite *>(data);
 
 	assert(w);
-	assert(w->get_location(g) == psite);
+	assert(w->get_location(g) == &psite);
 
 	{
-		std::vector<Request *> & worker_requests = psite->m_worker_requests;
+		std::vector<Request *> & worker_requests = psite.m_worker_requests;
 		std::vector<Request *>::iterator it = worker_requests.begin();
 		//  Assume that rq must be in worker_requests.
 		assert(worker_requests.size());
@@ -481,19 +483,19 @@ void ProductionSite::request_worker_callback
 		worker_requests.erase(it);
 	}
 
-	psite->m_workers.push_back(w);
+	psite.m_workers.push_back(w);
 
 	delete rq;
 
-	Worker * const main_worker = psite->m_workers[0];
-	const bool can_start_working = psite->can_start_working();
+	Worker * const main_worker = psite.m_workers[0];
+	const bool can_start_working = psite.can_start_working();
 	const bool w_is_not_main_worker = w != main_worker;
 	if (not can_start_working or w_is_not_main_worker)
 		w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
 
 	if (can_start_working) {
 		if (w_is_not_main_worker) main_worker->send_signal(g, "wakeup");
-		psite->m_workers[0]->start_task_buildingwork();
+		psite.m_workers[0]->start_task_buildingwork();
 	}
 }
 

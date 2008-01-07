@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,7 +151,7 @@ bool Text_Parser::parse_textblock
 		 ++it)
 	{
 		std::string line = *it;
-		while (true) {
+		for (;;) {
 			SSS_T next_break = line.find("<br>");
 			if (next_break == std::string::npos)
 				break;

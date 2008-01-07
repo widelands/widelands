@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -278,10 +278,13 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			try {
 				map.set_filename(name);
 				ml->preload_map(true);
-				list.add(map.get_name(),
-				         name,
-				         g_gr->get_picture(PicMod_Game,
-				         dynamic_cast<const Widelands_Map_Loader *>(ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+				list.add
+					(map.get_name(),
+					 name,
+					 g_gr->get_picture
+					 (PicMod_Game,
+					  dynamic_cast<const Widelands_Map_Loader *>(ml) ?
+					  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const std::exception & e) {
 				log("Mapselect: Skip %s due to preload error: %s\n", name, e.what());
 			} catch (...) {

@@ -213,13 +213,9 @@ typedef struct unz_file_pos_s
     uLong num_of_file;            /* # of file */
 } unz_file_pos;
 
-extern int32_t ZEXPORT unzGetFilePos(
-    unzFile file,
-    unz_file_pos* file_pos);
+extern int32_t ZEXPORT unzGetFilePos (unzFile file, unz_file_pos * file_pos);
 
-extern int32_t ZEXPORT unzGoToFilePos(
-    unzFile file,
-    unz_file_pos* file_pos);
+extern int32_t ZEXPORT unzGoToFilePos(unzFile file, unz_file_pos * file_pos);
 
 /* ****************************************** */
 

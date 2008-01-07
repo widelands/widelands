@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
  * reference or unrefereence this Trigger
  */
 void Trigger::reference(TriggerReferencer* ref) {
-   m_referencers[ ref ] ++;
+	++m_referencers[ref];
 }
 void Trigger::unreference(TriggerReferencer* ref) {
    std::map<TriggerReferencer*, uint32_t>::iterator cur = m_referencers.find(ref);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,6 +55,7 @@ struct BaseImmovable : public Map_Object {
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
 		= 0;
+	virtual std::string const & name() const throw ();
 
 protected:
 	void set_position(Editor_Game_Base *g, Coords c);
@@ -119,7 +120,7 @@ public:
 	virtual int32_t  get_type    () const throw ();
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
-	const std::string & name() const throw () {return descr().name();}
+	std::string const & name() const throw ();
 	__attribute__ ((deprecated)) std::string get_name() const {return name();}
 
 	void init(Editor_Game_Base *g);

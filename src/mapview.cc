@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 #include "rendertarget.h"
 #include "wlapplication.h"
 
+#include "upcast.h"
 
 Map_View::Map_View
 (UI::Panel * parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Interactive_Base & player)
@@ -80,7 +81,7 @@ void Map_View::draw(RenderTarget* dst)
 {
 	Editor_Game_Base & egbase = intbase().egbase();
 
-	if (Game* game = dynamic_cast<Game *>(&egbase)) {
+	if (upcast(Game, game, &egbase)) {
 		// Bail out if the game isn't actually loaded.
 		// This fixes a crash with displaying an error dialog during loading.
 		if (!game->is_loaded())
@@ -92,9 +93,7 @@ void Map_View::draw(RenderTarget* dst)
 	}
 
 	egbase.map().overlay_manager().load_graphics();
-	if
-		(const Interactive_Player * const interactive_player =
-		 dynamic_cast<const Interactive_Player *>(&intbase()))
+	if (upcast(Interactive_Player const, interactive_player, &intbase()))
 		dst->rendermap
 		(egbase,
 		 interactive_player->player(),

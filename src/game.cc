@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,6 +52,8 @@
 #include "ui_progresswindow.h"
 
 #include "log.h"
+
+#include "upcast.h"
 
 #include "timestring.h"
 
@@ -463,7 +465,7 @@ void Game::postload()
 
 	// Set up computer controlled players
 	// unless we're watching a replay
-	if (Interactive_Player* ipl = dynamic_cast<Interactive_Player*>(get_iabase())) {
+	if (upcast(Interactive_Player, ipl, get_iabase())) {
 		const Player_Number nr_players = map().get_nrplayers();
 		iterate_players_existing(p, nr_players, *this, plr) {
 			if      (plr->get_type() == Player::AI)
@@ -795,11 +797,9 @@ void Game::send_player_command (PlayerCommand* pc)
  */
 void Game::enqueue_command (Command * const cmd)
 {
-	if (m_replaywriter) {
-		PlayerCommand* plcmd = dynamic_cast<PlayerCommand*>(cmd);
-		if (plcmd)
+	if (m_replaywriter)
+		if (upcast(PlayerCommand, plcmd, cmd))
 			m_replaywriter->SendPlayerCommand(plcmd);
-	}
 
 	cmdqueue.enqueue(cmd);
 }
@@ -894,23 +894,23 @@ void Game::sample_statistics()
 
 			// First, ownership of this field
 			if (f->get_owned_by())
-				land_size[ f->get_owned_by()-1 ]++;
+				++land_size[f->get_owned_by() - 1];
 
 			// Get the immovable
-			BaseImmovable* imm = f->get_immovable();
-			if (imm && imm->get_type() == Map_Object::BUILDING) {
-				Building* build = static_cast<Building*>(imm);
-				if (build->get_position() == Coords(x, y)) { // only main location is intresting
+			if (upcast(Building, building, f->get_immovable()))
+				if (building->get_position() == Coords(x, y)) { // only main location is intresting
 					// Ok, count the building
-					nr_buildings[ build->get_owner()->get_player_number() - 1 ]++;
+					uint8_t const player_index =
+						building->owner().get_player_number() - 1;
+					++nr_buildings[player_index];
 
 					// If it is a productionsite, add its productivity
-					if (build->get_building_type() == Building::PRODUCTIONSITE) {
-						nr_production_sites[  build->get_owner()->get_player_number() - 1 ]++;
-						productivity[ build->get_owner()->get_player_number() - 1 ] += static_cast<ProductionSite*>(build)->get_statistics_percent();
+					if (upcast(ProductionSite, productionsite, building)) {
+						++nr_production_sites[player_index];
+						productivity[player_index] +=
+							productionsite->get_statistics_percent();
 					}
 				}
-			}
 
 			// Now, walk the bobs
 			if (f->get_first_bob()) {
@@ -924,7 +924,10 @@ void Game::sample_statistics()
 							{
 								Soldier* s = static_cast<Soldier*>(w);
 								uint32_t calc_level = s->get_level(atrTotal) + 1; // So that level 0 loosers also count something
-								miltary_strength[ s->get_owner()->get_player_number() -1 ] += calc_level;
+								miltary_strength
+									[s->get_owner()->get_player_number() - 1]
+									+=
+									calc_level;
 							}
 							break;
 
@@ -959,8 +962,8 @@ void Game::sample_statistics()
 
 	// Now, divide the statistics
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
-		if (productivity[ i ])
-			productivity[ i ] /= nr_production_sites[ i ];
+		if (productivity[i])
+			productivity[i] /= nr_production_sites[i];
 	}
 
 	// Now, push this on the general statistics

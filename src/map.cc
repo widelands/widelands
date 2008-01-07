@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -458,11 +458,11 @@ void Map::set_size(const uint32_t w, const uint32_t h)
    m_width = w;
 	m_height = h;
 
-	m_fields = (Field*) malloc(sizeof(Field)*w*h);
+	m_fields = static_cast<Field *>(malloc(sizeof(Field) * w * h));
 	memset(m_fields, 0, sizeof(Field)*w*h);
 
 	m_pathcycle = 0;
-	m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*w*h);
+	m_pathfields = static_cast<Pathfield *>(malloc(sizeof(Pathfield) * w * h));
 	memset(m_pathfields, 0, sizeof(Pathfield)*w*h);
 
 	if (not m_overlay_manager) m_overlay_manager = new Overlay_Manager();
@@ -522,7 +522,8 @@ void Map::set_nrplayers(const Uint8 nrplayers) {
 		return;
 	}
 
-	m_starting_pos = (Coords*)realloc(m_starting_pos, sizeof(Coords)*nrplayers);
+	m_starting_pos = static_cast<Coords *>
+		(realloc(m_starting_pos, sizeof(Coords) * nrplayers));
 	while (m_nrplayers < nrplayers)
 		m_starting_pos[m_nrplayers++] = Coords(-1, -1);
 
@@ -1096,9 +1097,13 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
    // 3) General buildability check: if a "robust" Map_Object is on this field
    //    we cannot build anything on it.
    //    Exception: we can build flags on roads
-   BaseImmovable *imm = get_immovable(f);
+   ;
 
-   if (imm && imm->get_type() != Map_Object::ROAD && imm->get_size() >= BaseImmovable::SMALL)
+	if (BaseImmovable *imm = get_immovable(f))
+		if
+			(not dynamic_cast<Road const *>(imm)
+			 &&
+			 imm->get_size() >= BaseImmovable::SMALL)
    {
       // 3b) [OVERRIDE] check for "unpassable" Map_Objects
       if (!imm->get_passable())
@@ -1261,16 +1266,16 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 					if
 						((objpos != br and objpos != r and objpos != bl)
 						 or
-						 (obj->get_type() != Map_Object::FLAG
+						 (not dynamic_cast<Flag const *>(obj)
 						  &&
-						  obj->get_type() != Map_Object::ROAD))
+						  not dynamic_cast<Road const *>(obj)))
 						building = BUILDCAPS_MEDIUM;
 				}
 			}
 			break;
 
 		case BaseImmovable::MEDIUM:
-			if (obj->get_type() == Map_Object::BUILDING) {
+			if (dynamic_cast<Building const *>(obj)) {
 				if (building > BUILDCAPS_MEDIUM)
 					building = BUILDCAPS_MEDIUM;
 			} else {
@@ -2329,19 +2334,18 @@ bool FindNodeSize::accept(const Map &, const FCoords coord) const {
 }
 
 bool FindNodeSizeResource::accept(const Map & map, const FCoords coord) const {
-	if (FindNodeSize::accept(map, coord)) {
-   if (coord.field->get_resources()==m_res &&
-         coord.field->get_resources_amount())
-      return true;
-	}
-   return false;
+	return
+		FindNodeSize::accept(map, coord)
+		and
+		coord.field->get_resources       () == m_res
+		and
+		coord.field->get_resources_amount();
 }
 
 bool FindNodeImmovableSize::accept(const Map &, const FCoords coord) const {
-	BaseImmovable* imm = coord.field->get_immovable();
 	int32_t size = BaseImmovable::NONE;
 
-	if (imm)
+	if (BaseImmovable * const imm = coord.field->get_immovable())
 		size = imm->get_size();
 
 	switch (size) {
