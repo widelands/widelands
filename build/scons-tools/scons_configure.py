@@ -124,7 +124,7 @@ def CheckSDLVersionAtLeast(context, major, minor, micro, env):
 	context.Message( 'Checking SDL version >= %s ... ' % (repr(major)+'.'+repr(minor)+'.'+repr(micro)))
 	version=os.popen(env['sdlconfig']+" --version", "r").read()
 	(maj, min, mic)=version.split('.')
-	if int(maj)>=int(major) and int(min)>=int(minor) and int(mic)>=int(micro):
+	if int(maj)>int(major) or (int(maj)==int(major) and (int(min)>int(minor) or (int(min)==int(minor) and int(mic)>=int(micro)))):
 		ret=1
 	else: ret=0
 	context.Result( ret )
