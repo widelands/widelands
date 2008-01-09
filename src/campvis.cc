@@ -124,49 +124,34 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
 
 
 /**
- * Set an entry in campvis visible or invisible.
+ * Set an campaign entry in campvis visible or invisible.
  * If it doesn't exist, create it.
  * \param entry entry to be changed
- * \param vcase what kind of change is this
- *   0 = make campaign visible
- *   1 = make campaign invisible
- *   2 = make campaign map visible
- *   3 = make campaign map invisible
+ * \param visible should the map be visible?
  */
-void Campaign_visiblity_save::set_visiblity(std::string entry, uint32_t vcase)
+void Campaign_visiblity_save::set_campaign_visiblity(std::string entry, bool visible)
 {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());
 	Section *vis;
 
-	if (vcase <= 1) {
-		vis=campvis.pull_section("campaigns");
+	vis=campvis.pull_section("campaigns");
+	vis->set_bool(entry.c_str(), visible);
+}
 
-		if (vcase == 0) {
-			vis->set_bool(entry.c_str(), true);
-		}
-		if (vcase == 1) {
-			vis->set_bool(entry.c_str(), false);
-		}
-	}
 
-	if (vcase >= 2) {
-		vis=campvis.pull_section("campmaps");
+/**
+ * Set an campaignmap entry in campvis visible or invisible.
+ * If it doesn't exist, create it.
+ * \param entry entry to be changed
+ * \param visible should the map be visible?
+ */
+void Campaign_visiblity_save::set_map_visiblity(std::string entry, bool visible)
+{
+	std::string savepath = get_path();
+	Profile campvis(savepath.c_str());
+	Section *vis;
 
-		if (vcase == 2) {
-			vis->set_bool(entry.c_str(), true);
-		}
-		if (vcase == 3) {
-			vis->set_bool(entry.c_str(), false);
-
-		}
-	}
-
-	if (vcase >= 4) {
-		throw wexception
-			("Wrong vcase (%i) for entry \"%s\" of campvis",
-			 vcase, entry.c_str());
-	}
-
-	campvis.write(savepath.c_str(), false);
+	vis=campvis.pull_section("campmaps");
+	vis->set_bool(entry.c_str(), visible);
 }

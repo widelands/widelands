@@ -24,28 +24,52 @@
 
 #include <string>
 
+
 /**
- * Sets a campaign/campaignmap in Campaign UI visible/invisible
+ * Sets a campaign in Campaign UI visible/invisible
  */
-struct Event_Set_Visiblity : public Event {
-	Event_Set_Visiblity();
-	~Event_Set_Visiblity();
+struct Event_Set_Campaign_Visiblity : public Event {
+	Event_Set_Campaign_Visiblity();
+	~Event_Set_Campaign_Visiblity();
 
 	// one liner functions
-	const char * get_id() const {return "set_visiblity";}
+	const char * get_id() const {return "set_campaign_visiblity";}
 
 	State run(Game*);
 	virtual void reinitialize(Game*);
 
-	// fonctions for reading/writing the content of events section
+	// functions for reading/writing the content of events section
 	void Write(Section &, const Editor_Game_Base &) const;
 	void Read(Section*, Editor_Game_Base*);
 
 private:
 	static const int32_t EVENT_VERSION = 1;
+	std::string entry;
+	bool visible;
+};
 
-	std::string v_entry;
-	int32_t v_case;
+
+/**
+ * Sets a campaignmap in Campaign UI visible/invisible
+ */
+struct Event_Set_Map_Visiblity : public Event {
+	Event_Set_Map_Visiblity();
+	~Event_Set_Map_Visiblity();
+
+	// one liner functions
+	const char * get_id() const {return "set_map_visiblity";}
+
+	State run(Game*);
+	virtual void reinitialize(Game*);
+
+	// functions for reading/writing the content of events section
+	void Write(Section &, const Editor_Game_Base &) const;
+	void Read(Section*, Editor_Game_Base*);
+
+private:
+	static const int32_t EVENT_VERSION = 1;
+	std::string entry;
+	bool visible;
 };
 
 #endif //__S__EVENT_SET_VISIBLITY_H

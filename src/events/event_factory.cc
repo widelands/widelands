@@ -49,7 +49,8 @@ Event_Descr EVENT_DESCRIPTIONS[] = {
 // TODO: Events below are not creatable in the editor. Make UI Windows for them
 	// {"set_null_trigger", _("Set Null Trigger"), _("Manually set a Null Trigger to a given value")},
 	// {"unhide_objective", _("Unhide Objective"), _("Hide or unhide an objective so that the player can see it")},
-	// {"set_visiblity", _("Set Visiblity"), _("Make a campaign or map visible or invisible in the Campaign UI")},
+	// {"set_campaign_visiblity", _("Set Campaign Visiblity"), _("Make a campaign visible or invisible in the Campaign UI")},
+	// {"set_map_visiblity", _("Set Map Visiblity"), _("Make a campaignmap visible or invisible in the Campaign UI")},
 };
 
 
@@ -57,22 +58,24 @@ Event_Descr EVENT_DESCRIPTIONS[] = {
  * return the correct event for this id
  */
 Event * get_correct_event(const char * id) {
-	if (strcmp("message_box",      id) == 0)
-		return new Event_Message_Box     ();
-	if (strcmp("move_view",        id) == 0)
-		return new Event_Move_View       ();
-	if (strcmp("unhide_area",      id) == 0)
-		return new Event_Unhide_Area     ();
-	if (strcmp("conquer_area",     id) == 0)
-		return new Event_Conquer_Area    ();
-	if (strcmp("allow_building",   id) == 0)
-		return new Event_Allow_Building  ();
-	if (strcmp("set_null_trigger", id) == 0)
-		return new Event_Set_Null_Trigger();
-	if (strcmp("unhide_objective", id) == 0)
-		return new Event_Unhide_Objective();
-	if (strcmp("set_visiblity",    id) == 0)
-		return new Event_Set_Visiblity   ();
+	if (strcmp("message_box",            id) == 0)
+		return new Event_Message_Box           ();
+	if (strcmp("move_view",              id) == 0)
+		return new Event_Move_View             ();
+	if (strcmp("unhide_area",            id) == 0)
+		return new Event_Unhide_Area           ();
+	if (strcmp("conquer_area",           id) == 0)
+		return new Event_Conquer_Area          ();
+	if (strcmp("allow_building",         id) == 0)
+		return new Event_Allow_Building        ();
+	if (strcmp("set_null_trigger",       id) == 0)
+		return new Event_Set_Null_Trigger      ();
+	if (strcmp("unhide_objective",       id) == 0)
+		return new Event_Unhide_Objective      ();
+	if (strcmp("set_campaign_visiblity", id) == 0)
+		return new Event_Set_Campaign_Visiblity();
+	if (strcmp("set_map_visiblity",      id) == 0)
+		return new Event_Set_Map_Visiblity     ();
 	throw wexception
 		("Event_Factory::get_correct_event: Unknown event id found: %s", id);
 }

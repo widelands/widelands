@@ -23,39 +23,45 @@
 #include "profile.h"
 #include "wexception.h"
 
+
+/*
+ * Campaign VISIBILITY
+ */
+
+
 /**
  * init
  */
-Event_Set_Visiblity::Event_Set_Visiblity() : Event(_("Set Visibilty"))
+Event_Set_Campaign_Visiblity::Event_Set_Campaign_Visiblity() : Event(_("Set Campaign Visibilty"))
 {
-	v_entry="";
-	v_case=4;
+	entry="";
+	visible=false;
 }
 
 
 /**
  * cleanup
  */
-Event_Set_Visiblity::~Event_Set_Visiblity() {}
+Event_Set_Campaign_Visiblity::~Event_Set_Campaign_Visiblity() {}
 
 
 /**
  * reinitialize
  */
-void Event_Set_Visiblity::reinitialize(Game *) {}
+void Event_Set_Campaign_Visiblity::reinitialize(Game *) {}
 
 
 /**
  * file read
  */
-void Event_Set_Visiblity::Read(Section* s, Editor_Game_Base *) {
+void Event_Set_Campaign_Visiblity::Read(Section* s, Editor_Game_Base *) {
 	const int32_t packet_version = s->get_safe_int("version");
 	if (packet_version == EVENT_VERSION) {
-		v_entry = s->get_safe_string("entry");
-		v_case  = s->get_safe_int   ("vcase");
+		entry = s->get_safe_string("entry");
+		visible = s->get_safe_bool("visible");
 	} else
 		throw wexception
-			("set_visibility event with unknown version %i in map!",
+			("set_campaign_visibility event with unknown version %i in map!",
 			 packet_version);
 }
 
@@ -63,20 +69,85 @@ void Event_Set_Visiblity::Read(Section* s, Editor_Game_Base *) {
 /**
  * file write
  */
-void Event_Set_Visiblity::Write (Section & s, const Editor_Game_Base &) const
+void Event_Set_Campaign_Visiblity::Write (Section & s, const Editor_Game_Base &) const
 {
 	s.set_int   ("version", EVENT_VERSION);
-	s.set_string("entry",   v_entry.c_str());
-	s.set_int   ("vcase",   v_case);
+	s.set_string("entry",   entry.c_str());
+	s.set_bool  ("visible", visible);
 }
 
 
 /**
  * run the event
  */
-Event::State Event_Set_Visiblity::run(Game *) {
+Event::State Event_Set_Campaign_Visiblity::run(Game *) {
 	Campaign_visiblity_save cvs;
-	cvs.set_visiblity(v_entry, v_case);
+	cvs.set_campaign_visiblity(entry, visible);
+
+	m_state = DONE;
+	return m_state;
+}
+
+
+/*
+ * MAP VISIBILITY
+ */
+
+
+/**
+ * init
+ */
+Event_Set_Map_Visiblity::Event_Set_Map_Visiblity() : Event(_("Set Map Visibilty"))
+{
+	entry="";
+	visible=false;
+}
+
+
+/**
+ * cleanup
+ */
+Event_Set_Map_Visiblity::~Event_Set_Map_Visiblity() {}
+
+
+/**
+ * reinitialize
+ */
+void Event_Set_Map_Visiblity::reinitialize(Game *) {}
+
+
+/**
+ * file read
+ */
+void Event_Set_Map_Visiblity::Read(Section* s, Editor_Game_Base *) {
+	const int32_t packet_version = s->get_safe_int("version");
+	if (packet_version == EVENT_VERSION) {
+		entry = s->get_safe_string("entry");
+		visible = s->get_safe_bool("visible");
+	} else
+		throw wexception
+			("set_map_visibility event with unknown version %i in map!",
+			 packet_version);
+}
+
+
+/**
+ * file write
+ */
+void Event_Set_Map_Visiblity::Write (Section & s, const Editor_Game_Base &) const
+{
+	s.set_int   ("version", EVENT_VERSION);
+	s.set_string("entry",   entry.c_str());
+	s.set_bool  ("visible", visible);
+}
+
+
+/**
+ * run the event
+ */
+Event::State Event_Set_Map_Visiblity::run(Game *) {
+	Campaign_visiblity_save cvs;
+	cvs.set_map_visiblity(entry, visible);
 
 	m_state = DONE;
 	return m_state;

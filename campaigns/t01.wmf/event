@@ -721,8 +721,8 @@ button_00_name=_ OK
 button_00_has_trigger=false
 
 [Unhide Barbariantut01]
-type=set_visiblity
+type=set_map_visiblity
 state=init
 version=1
 entry=barbariantut01
-vcase=2
+visible=true

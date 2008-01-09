@@ -26,7 +26,8 @@
 
 struct Campaign_visiblity_save {
 	std::string get_path();
-	void set_visiblity(std::string, uint32_t);
+	void set_campaign_visiblity(std::string, bool);
+	void set_map_visiblity(std::string, bool);
 
 private:
 	void make_campvis(std::string);
