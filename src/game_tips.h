@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,8 +43,8 @@ private:
 	const RGBColor color_from_hex(const char * hexcode, const RGBColor & def);
 	const uint32_t colorvalue_from_hex(const char c1, const char c2);
 
-	Uint32               m_lastUpdated;
-	Uint32               m_updateAfter;
+	uint32_t             m_lastUpdated;
+	uint32_t             m_updateAfter;
 	UI::ProgressWindow & m_progressWindow;
 	bool                 m_registered;
 	uint32_t                 m_lastTip;

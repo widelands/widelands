@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ throw (_wexception)
 	}
 
    // read packet version
-   int32_t packet_version=fr.Unsigned16();
+   uint16_t const packet_version = fr.Unsigned16();
 
 		compile_assert(MAX_PLAYERS < 32);
 		Map & map = egbase->map();

@@ -230,7 +230,11 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
 	}
 
    std::string error;
-   if (!savehandler->save_game(m_parent->get_game(), complete_filename, &error)) {
+	if
+		(!
+		 savehandler->save_game
+		 (*m_parent->get_game(), complete_filename, &error))
+	{
       std::string s=_("Game Saving Error!\nSaved Game-File may be corrupt!\n\nReason given:\n");
       s+=error;
 		UI::Modal_Message_Box mbox

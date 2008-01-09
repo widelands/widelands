@@ -960,9 +960,7 @@ void Serializer::send (TCPsocket sock)
 
 /*** class Deserializer ***/
 
-Deserializer::Deserializer ()
-{
-}
+Deserializer::Deserializer () : StreamRead() {}
 
 Deserializer::~Deserializer ()
 {

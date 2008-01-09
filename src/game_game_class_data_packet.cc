@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ throw (_wexception)
 	fr.Open(fs, "binary/game_class");
 
 	// read packet version
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 
 	if (packet_version <= CURRENT_PACKET_VERSION) {
 		// Can't load netgames

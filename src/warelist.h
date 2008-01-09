@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ struct WareList {
 
 	void clear() {m_wares.clear();} /// Clear the storage
 
-	typedef Uint32 count_type;
+	typedef uint32_t count_type;
 	typedef std::vector<count_type> vector_type;
 	typedef vector_type::size_type size_type;
 

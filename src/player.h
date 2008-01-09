@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -195,7 +195,7 @@ public:
 		 */
 		::Field::Terrains terrains;
 
-		Uint8         roads;
+		uint8_t       roads;
 
 		/**
 		 * The owner of this node, as far as this player knows.
@@ -217,7 +217,7 @@ public:
 		 * as far as this player knows.
 		 * Only valid when this player has seen this node or the node to the east.
 		 */
-		Uint8 road_e() const throw () {return roads & Road_Mask;}
+		uint8_t road_e() const throw () {return roads & Road_Mask;}
 
 		/**
 		 * Wether there is a road between this node and the node to the southeast,
@@ -225,7 +225,7 @@ public:
 		 * Only valid when this player has seen this node or the node to the
 		 * southeast.
 		 */
-		Uint8 road_se() const throw ()
+		uint8_t road_se() const throw ()
 		{return roads >> Road_SouthEast & Road_Mask;}
 
 		/**
@@ -234,7 +234,7 @@ public:
 		 * Only valid when this player has seen this node or the node to the
 		 * southwest.
 		 */
-		Uint8 road_sw() const throw ()
+		uint8_t road_sw() const throw ()
 		{return roads >> Road_SouthWest & Road_Mask;}
 
 		/**
@@ -308,8 +308,8 @@ public:
 		//  <end>                           0x100         0x160
 
 	private:
-		Field & operator=(const Field &);
-		Field            (const Field &);
+		Field & operator=(Field const &);
+		explicit Field   (Field const &);
 	};
 
 	const Field * fields() const throw () {return m_fields;}

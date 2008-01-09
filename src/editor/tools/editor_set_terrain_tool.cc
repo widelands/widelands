@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl
 {
 	assert
 		(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
-	const Uint16 radius = parent.get_sel_radius();
+	uint16_t const radius = parent.get_sel_radius();
 	if (get_nr_enabled()) {
 		int32_t max = 0;
 		const World & world = map.world();

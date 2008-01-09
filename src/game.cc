@@ -30,7 +30,6 @@
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
 #include "fullscreen_menu_loadreplay.h"
-#include "fullscreen_menu_campaign_select.h"
 #include "game_loader.h"
 #include "game_tips.h"
 #include "graphic.h"
@@ -78,7 +77,7 @@ public:
 
 		log("[sync:%08u t=%6u]", m_counter, m_game->get_gametime());
 		for (size_t i = 0; i < size; ++i)
-			log(" %02x", (static_cast<const Uint8 *>(data))[i]);
+			log(" %02x", (static_cast<uint8_t const *>(data))[i]);
 		log("\n");
 
 		m_target->Data(data, size);
@@ -304,44 +303,6 @@ bool Game::run_single_player ()
 
 
 /**
- * Run Campaign UI
- * Only the UI is loaded, real loading of the map will
- * take place in run_splayer_map_direct
- */
-bool Game::run_campaign()
-{
-
-	m_state = gs_menu;
-	m_netgame = 0;
-
-	// set variables
-	int32_t campaign;
-	int32_t loop = 1;
-	std::string campmapfile;
-
-	// Campaign UI - Loop
-	while (loop==1) {
-		// First start UI for selecting the campaign
-		Fullscreen_Menu_CampaignSelect select_campaign;
-		if (select_campaign.run() > 0)
-			campaign=select_campaign.get_campaign();
-		else // Back was pressed
-			return false;
-		// Than start UI for the selected campaign
-		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
-		select_campaignmap.set_campaign(campaign);
-		if (select_campaignmap.run() > 0) {
-			campmapfile = select_campaignmap.get_map();
-			loop=0;
-		}
-	}
-
-	// Load selected campaign-map-file
-	return run_splayer_map_direct(campmapfile.c_str(), true);
-}
-
-
-/**
  * Load a game
  * argument defines if this is a single player game (true)
  * or networked (false)
@@ -435,7 +396,7 @@ bool Game::run_replay()
 
 	loaderUI.step(_("Loading..."));
 
-	m_replayreader = new ReplayReader(this, rm.filename());
+	m_replayreader = new ReplayReader(*this, rm.filename());
 
 	return run(loaderUI, true);
 }
@@ -547,7 +508,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		}
 		fname += REPLAY_SUFFIX;
 
-		m_replaywriter = new ReplayWriter(this, fname);
+		m_replaywriter = new ReplayWriter(*this, fname);
 		log("Replay writer has started\n");
 	}
 
@@ -652,8 +613,8 @@ void Game::think()
 		g_gr->animate_maptextures(get_gametime());
 
 		// check if autosave is needed, but only if that is not a network game
-		if (NULL == m_netgame)
-			m_savehandler.think(this, m_realtime);
+		if (0 == m_netgame)
+			m_savehandler.think(*this, m_realtime);
 	}
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2007-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ m_rowpos      (0),
 m_left        (hollow_area)
 {
 	assert(hollow_area.hole_radius < hollow_area.radius);
-	for (Uint16 r = hollow_area.radius; r; --r)
+	for (uint16_t r = hollow_area.radius; r; --r)
 		map.get_tln(m_hollow_area, &m_hollow_area);
 	m_left = m_hollow_area;
 }

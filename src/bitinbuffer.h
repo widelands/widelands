@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,14 +20,12 @@
 #include "fileread.h"
 #include "compile_assert.h"
 
-/**
- * Wrapper around FileRead for reading groups of Size bits from a file, where
- * Size can be a factor of 8. Call get to read Size bits from the buffer.
- * Attempts to read more bits than have been written to the BitOutBuffer when
- * the file was created will not fail unless it causes another byte to be read
- * from the file.
- */
-template<const Uint8 Size> struct BitInBuffer {
+/// Wrapper around FileRead for reading groups of Size bits from a file, where
+/// Size can be a factor of 8. Call get to read Size bits from the buffer.
+/// Attempts to read more bits than have been written to the BitOutBuffer when
+/// the file was created will not fail unless it causes another byte to be read
+/// from the file.
+template<uint8_t const Size> struct BitInBuffer {
 	compile_assert(Size == 1 or Size == 2 or Size == 4);
 	BitInBuffer() : mask(0x00) {}
 	void Open(FileSystem & fs, const char * const filename)
@@ -35,9 +33,9 @@ template<const Uint8 Size> struct BitInBuffer {
 	size_t GetSize() const throw () {return fr.GetSize();}
 	bool   IsEOF  () const throw () {return fr.IsEOF  ();}
 	size_t GetPos () const throw () {return fr.GetPos ();}
-	Uint8 get() {
+	uint8_t get() {
 		if (mask == 0x00) {buffer = fr.Unsigned8(); mask = 0xff;}
-		const Uint8 result = buffer >> 8 - Size;
+		uint8_t const result = buffer >> 8 - Size;
 		buffer <<= Size;
 		mask   <<= Size;
 		assert(result < (1 << Size));
@@ -45,5 +43,5 @@ template<const Uint8 Size> struct BitInBuffer {
 	}
 private:
 	FileRead fr;
-	Uint8 buffer, mask;
+	uint8_t buffer, mask;
 };

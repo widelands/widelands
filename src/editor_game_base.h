@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,7 +95,7 @@ struct Editor_Game_Base {
 	virtual void cleanup_for_load
 		(const bool flush_graphics = true, const bool flush_animations = true);
 
-	void set_road(const FCoords, const Uint8 direction, const Uint8 roadtype);
+	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
 	Building * warp_building
@@ -115,11 +115,6 @@ struct Editor_Game_Base {
 	const std::vector<uint32_t>& get_attack_controller_serials() const {return m_attack_serials;}
 
 	std::vector<int32_t> get_battle_serials() const {return m_battle_serials;}
-	typedef int32_t Time;
-	static Time     Never  () throw () {return 0xffffffff;}
-	typedef Uint32 Duration;
-	static Duration Forever() throw ()
-	{return std::numeric_limits<Duration>::max();}
 
 	int32_t get_gametime() const {return m_gametime;}
 	Interactive_Base * get_iabase() const {return m_iabase;}
@@ -211,17 +206,17 @@ public:
 	std::vector<uint32_t>          m_attack_serials;
 
 private:
-	Editor_Game_Base & operator=(const Editor_Game_Base &);
-	Editor_Game_Base            (const Editor_Game_Base &);
+	Editor_Game_Base & operator=(Editor_Game_Base const &);
+	explicit Editor_Game_Base   (Editor_Game_Base const &);
 };
 
-#define iterate_players_existing(p, nr_players, egbase, player)                \
-	iterate_player_numbers(p, nr_players)                                       \
-		if (Player * const player = (egbase).get_player(p))                      \
+#define iterate_players_existing(p, nr_players, egbase, player)               \
+	iterate_player_numbers(p, nr_players)                                      \
+		if (Player * const player = (egbase).get_player(p))                     \
 
-#define iterate_players_existing_const(p, nr_players, egbase, player)          \
-	iterate_player_numbers(p, nr_players)                                       \
-		if (const Player * const player = (egbase).get_player(p))                \
+#define iterate_players_existing_const(p, nr_players, egbase, player)         \
+	iterate_player_numbers(p, nr_players)                                      \
+		if (const Player * const player = (egbase).get_player(p))               \
 
 extern const uint8_t g_playercolors[MAX_PLAYERS][12];
 

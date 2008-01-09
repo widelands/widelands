@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,10 +42,9 @@
  * this value. The same happens with keyboard events at 32bits. Cutting off bits
  * is not a good solution, but in this case it'll do until a better way comes along.
  */
-class Journal {
-public:
+struct Journal {
 	/// change this and I will ensure your death will be a most unpleasant one
-	static const Uint32 RFC_MAGIC = 0x0ACAD100;
+	static uint32_t const RFC_MAGIC = 0x0ACAD100;
 
 	/**
 	 * Record file codes
@@ -83,7 +82,7 @@ public:
 	void record_event(SDL_Event *e);
 	bool read_event(SDL_Event *e);
 
-	void timestamp_handler(Uint32 *stamp);
+	void timestamp_handler(uint32_t * stamp);
 	void set_idle_mark();
 
 protected:
@@ -93,21 +92,21 @@ protected:
 	 */
 	const int32_t get_playback_offset() {return m_playbackstream.tellg();}
 
-	void write(int8_t  v);
-	void write(uint8_t v);
-	void write(Sint16 v);
-	void write(Uint16 v);
-	void write(Sint32 v);
-	void write(Uint32 v);
+	void write(int8_t   v);
+	void write(uint8_t  v);
+	void write(int16_t  v);
+	void write(uint16_t v);
+	void write(int32_t  v);
+	void write(uint32_t v);
 	void write(SDLKey v);
 	void write(SDLMod v);
 
-	void read(int8_t  &v);
-	void read(uint8_t &v);
-	void read(Sint16 &v);
-	void read(Uint16 &v);
-	void read(Sint32 &v);
-	void read(Uint32 &v);
+	void read(int8_t   &v);
+	void read(uint8_t  &v);
+	void read(int16_t  &v);
+	void read(uint16_t &v);
+	void read(int32_t  &v);
+	void read(uint32_t &v);
 	void read(SDLKey &v);
 	void read(SDLMod &v);
 	void ensure_code(uint8_t code);

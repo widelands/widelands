@@ -68,7 +68,7 @@ throw (_wexception)
 	const uint16_t packet_version = fr.Unsigned16();
 	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 		const Extent extent = egbase->map().extent();
-		uint32_t nrControllers = fr.Unsigned32();
+		uint32_t const nrControllers = fr.Unsigned32();
 		for (uint32_t i = 0; i < nrControllers; ++i) {
 			AttackController* ctrl = egbase->create_attack_controller();
 

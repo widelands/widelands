@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,18 +85,18 @@ struct FileRead {
 	 */
 	Pos GetPrevPos() const throw () {return prevpos;}
 
-	Sint8    Signed8 (const Pos pos = NoPos())
+	int8_t     Signed8 (const Pos pos = NoPos())
 	{return                                       Deref8    (Data(1, pos));}
-	Uint8  Unsigned8 (const Pos pos = NoPos())
-	{return static_cast<Uint8>             (Deref8    (Data(1, pos)));}
-	Sint16   Signed16(const Pos pos = NoPos())
+	uint8_t  Unsigned8 (const Pos pos = NoPos())
+	{return static_cast<uint8_t>                 (Deref8    (Data(1, pos)));}
+	int16_t    Signed16(const Pos pos = NoPos())
 	{return                           Little16   (Deref16   (Data(2, pos)));}
-	Uint16 Unsigned16(const Pos pos = NoPos())
-	{return static_cast<Uint16>(Little16   (Deref16   (Data(2, pos))));}
-	Sint32   Signed32(const Pos pos = NoPos())
+	uint16_t Unsigned16(const Pos pos = NoPos())
+	{return static_cast<uint16_t>    (Little16   (Deref16   (Data(2, pos))));}
+	int32_t    Signed32(const Pos pos = NoPos())
 	{return                           Little32   (Deref32   (Data(4, pos)));}
-	Uint32 Unsigned32(const Pos pos = NoPos())
-	{return static_cast<Uint32>(Little32   (Deref32   (Data(4, pos))));}
+	uint32_t Unsigned32(const Pos pos = NoPos())
+	{return static_cast<uint32_t>    (Little32   (Deref32   (Data(4, pos))));}
 	float       Float(const Pos pos = NoPos())
 	{return                           LittleFloat(DerefFloat(Data(4, pos)));}
 	char * CString(const Pos pos = NoPos()); /// Read a zero-terminated string.
@@ -134,17 +134,17 @@ struct FileRead {
 	struct Extent_Exceeded : public Data_Error
 	{Extent_Exceeded(const Pos pos) : Data_Error(pos) {}};
 	struct Width_Exceeded : public Extent_Exceeded {
-		Width_Exceeded(const Pos pos, const Uint16 W, const X_Coordinate X) :
+		Width_Exceeded(const Pos pos, uint16_t const W, const X_Coordinate X) :
 			Extent_Exceeded(pos), w(W), x(X)
 		{}
-		Uint16       w;
+		uint16_t     w;
 		X_Coordinate x;
 	};
 	struct Height_Exceeded : public Extent_Exceeded {
-		Height_Exceeded(const Pos pos, const Uint16 H, const Y_Coordinate Y) :
+		Height_Exceeded(const Pos pos, uint16_t const H, const Y_Coordinate Y) :
 			Extent_Exceeded(pos), h(H), y(Y)
 		{}
-		Uint16       h;
+		uint16_t     h;
 		Y_Coordinate y;
 	};
 
@@ -176,13 +176,13 @@ private:
 	Pos    prevpos;
 	size_t length;
 
-	FileRead & operator=(const FileRead &);
-	FileRead            (const FileRead &);
+	FileRead & operator=(FileRead const &);
+	explicit FileRead   (FileRead const &);
 };
 
 inline Coords FileRead::Coords32(const Extent extent) {
-	const Uint16 x = Unsigned16();
-	const Uint16 y = Unsigned16();
+	uint16_t const x = Unsigned16();
+	uint16_t const y = Unsigned16();
 	prevpos = filepos - 4;
 	if (extent.w <= x) throw Width_Exceeded (prevpos, extent.w, x);
 	if (extent.h <= y) throw Height_Exceeded(prevpos, extent.h, y);
@@ -190,8 +190,8 @@ inline Coords FileRead::Coords32(const Extent extent) {
 }
 
 inline Coords FileRead::Coords32_allow_null(const Extent extent) {
-	const Uint16 x = Unsigned16();
-	const Uint16 y = Unsigned16();
+	uint16_t const x = Unsigned16();
+	uint16_t const y = Unsigned16();
 	const Coords result(x, y);
 	prevpos = filepos - 4;
 	if (result) {

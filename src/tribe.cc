@@ -29,7 +29,6 @@
 #include "soldier.h"
 #include "warehouse.h"
 #include "wexception.h"
-#include "wlapplication.h"
 #include "worker.h"
 #include "world.h"
 

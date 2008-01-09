@@ -686,7 +686,7 @@ Map_Object::Loader* Immovable::load
 	try {
 		// The header has been peeled away by the caller
 
-		Uint8 version = fr.Unsigned8();
+		uint8_t const version = fr.Unsigned8();
 		if (version != IMMOVABLE_SAVEGAME_VERSION)
 			throw wexception("Unknown version %u", version);
 

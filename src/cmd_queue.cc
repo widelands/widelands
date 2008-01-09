@@ -112,7 +112,7 @@ int32_t Cmd_Queue::run_queue(int32_t interval, int32_t* game_time_var)
 
 		if (dynamic_cast<GameLogicCommand*>(c)) {
 			StreamWrite& ss(m_game->syncstream());
-			static const Uint8 tag[] = {0xde, 0xad, 0x00};
+			static uint8_t const tag[] = {0xde, 0xad, 0x00};
 			ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
 			ss.Unsigned32(c->get_duetime());
 			ss.Unsigned32(c->get_id());
@@ -170,7 +170,7 @@ void GameLogicCommand::Write
 void GameLogicCommand::Read
 (FileRead & fr, Editor_Game_Base &, Widelands_Map_Map_Object_Loader &)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == BASE_CMD_VERSION)
 		set_duetime(fr.Unsigned32());
 	else

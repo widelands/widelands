@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,13 +58,13 @@ void Cmd_Destroy_Map_Object::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
 		// Read Base Commands
 		GameLogicCommand::Read(fr, egbase, mol);
 
       // Serial
-		if (const Uint32 fileserial = fr.Unsigned32()) {
+		if (uint32_t const fileserial = fr.Unsigned32()) {
 			assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
 		} else
@@ -118,13 +118,13 @@ void Cmd_Act::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CMD_ACT_VERSION) {
 		// Read Base Commands
 		GameLogicCommand::Read(fr, egbase, mol);
 
 		// Serial
-		if (const Uint32 fileserial = fr.Unsigned32()) {
+		if (uint32_t const fileserial = fr.Unsigned32()) {
 			assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
 		} else
@@ -453,8 +453,8 @@ Returns the absolute gametime at which the CMD_ACT will occur.
 */
 uint32_t Map_Object::schedule_act(Game* g, uint32_t tdelta, uint32_t data)
 {
-	if (tdelta < Editor_Game_Base::Forever()) {
-		uint32_t time = g->get_gametime() + tdelta;
+	if (tdelta < Forever()) {
+		uint32_t const time = g->get_gametime() + tdelta;
 
 		g->get_cmdqueue()->enqueue (new Cmd_Act(time, this, data));
 
@@ -529,15 +529,15 @@ void Map_Object::molog(const char* fmt, ...) const
  */
 void Map_Object::Loader::load(FileRead& fr)
 {
-	Uint8 header = fr.Unsigned8();
+	uint8_t const header = fr.Unsigned8();
 	if (header != header_Map_Object)
 		throw wexception("Header %u expected (got %u)", header_Map_Object, header);
 
-	Uint8 version = fr.Unsigned8();
+	uint8_t const version = fr.Unsigned8();
 	if (version != CURRENT_SAVEGAME_VERSION)
 		throw wexception("Map_Object: Unknown version %u", version);
 
-	Uint32 fileindex = fr.Unsigned32();
+	uint32_t const fileindex = fr.Unsigned32();
 	mol().register_object(&egbase(), fileindex, get_object());
 
 	egbase().objects().insert(get_object());

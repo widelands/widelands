@@ -247,7 +247,7 @@ Map_Object::Loader* Battle::load
 	try {
 		// Header has been peeled away by caller
 
-		Uint8 version = fr.Unsigned8();
+		uint8_t const version = fr.Unsigned8();
 		if (version != BATTLE_SAVEGAME_VERSION)
 			throw wexception("Unknown version %u", version);
 

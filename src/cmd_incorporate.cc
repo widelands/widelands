@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,13 +30,13 @@ void Cmd_Incorporate::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CMD_INCORPORATE_VERSION) {
 		// Read Base Commands
 		GameLogicCommand::Read(fr, egbase, mol);
 
 		// Serial of worker
-		const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		worker = dynamic_cast<Worker *>(mol.get_object_by_file_index(fileserial)); //  FIXME check
 	} else

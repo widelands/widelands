@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -319,9 +319,9 @@ void Event_Conquer_Area_Option_Menu::clicked(int32_t i) {
 void Event_Conquer_Area_Option_Menu::update() {
 	const Map & map = eia().egbase().map();
 	const Extent extent = map.extent();
-	if (extent.w <= static_cast<Uint16>(m_player_area.x))
+	if (extent.w <= static_cast<uint16_t>(m_player_area.x))
 		m_player_area.x = extent.w  - 1;
-	if (extent.h <= static_cast<Uint16>(m_player_area.y))
+	if (extent.h <= static_cast<uint16_t>(m_player_area.y))
 		m_player_area.y = extent.h - 1;
 
 	if (m_player_area.player_number < 1) m_player_area.player_number = 1;

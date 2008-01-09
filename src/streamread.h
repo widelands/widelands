@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,8 @@
  *
  * Convenience functions are provided for many data types.
  */
-class StreamRead {
-public:
+struct StreamRead {
+	explicit StreamRead() {}
 	virtual ~StreamRead();
 
 	/**
@@ -58,24 +58,24 @@ public:
 
 	void DataComplete(void* const data, const size_t size);
 
-	Sint8 Signed8();
-	Uint8 Unsigned8();
-	Sint16 Signed16();
-	Uint16 Unsigned16();
-	Sint32 Signed32();
-	Uint32 Unsigned32();
+	int8_t Signed8();
+	uint8_t Unsigned8();
+	int16_t Signed16();
+	uint16_t Unsigned16();
+	int32_t Signed32();
+	uint32_t Unsigned32();
 	std::string String();
 
 	struct Data_Error {};
 	struct Extent_Exceeded : public Data_Error {};
 	struct Width_Exceeded : public Extent_Exceeded {
-		Width_Exceeded(const Uint16 W, const X_Coordinate X) : w(W), x(X) {}
-		Uint16       w;
+		Width_Exceeded (uint16_t const W, X_Coordinate const X) : w(W), x(X) {}
+		uint16_t     w;
 		X_Coordinate x;
 	};
 	struct Height_Exceeded : public Extent_Exceeded {
-		Height_Exceeded(const Uint16 H, const Y_Coordinate Y) : h(H), y(Y) {}
-		Uint16       h;
+		Height_Exceeded(uint16_t const H, Y_Coordinate const Y) : h(H), y(Y) {}
+		uint16_t     h;
 		Y_Coordinate y;
 	};
 
@@ -100,26 +100,30 @@ public:
 	 * the whole coordinate pair has been read.
 	 */
 	Coords Coords32_allow_null(const Extent extent);
+
+private:
+	StreamRead & operator=(StreamRead const &);
+	explicit StreamRead   (StreamRead const &);
 };
 
 
 inline Coords StreamRead::Coords32() {
-	const Uint16 x = Unsigned16();
-	const Uint16 y = Unsigned16();
+	uint16_t const x = Unsigned16();
+	uint16_t const y = Unsigned16();
 	return Coords(x, y);
 }
 
 inline Coords StreamRead::Coords32(const Extent extent) {
-	const Uint16 x = Unsigned16();
-	const Uint16 y = Unsigned16();
+	uint16_t const x = Unsigned16();
+	uint16_t const y = Unsigned16();
 	if (extent.w <= x) throw Width_Exceeded (extent.w, x);
 	if (extent.h <= y) throw Height_Exceeded(extent.h, y);
 	return Coords(x, y);
 }
 
 inline Coords StreamRead::Coords32_allow_null(const Extent extent) {
-	const Uint16 x = Unsigned16();
-	const Uint16 y = Unsigned16();
+	uint16_t const x = Unsigned16();
+	uint16_t const y = Unsigned16();
 	const Coords result(x, y);
 	if (result) {
 		if (extent.w <= x) throw Width_Exceeded (extent.w, x);

@@ -124,7 +124,7 @@ m_goto
 
 {
 	if (m_single_window) {
-		for (Uint8 i = 0; i < NUM_VIEWS; ++i)
+		for (uint8_t i = 0; i < NUM_VIEWS; ++i)
 			m_view_btns[i] = new UI::IDButton<WatchWindow, int32_t>
 				(this,
 				 74 + (17 * i), 200 - 34, 17, 34,

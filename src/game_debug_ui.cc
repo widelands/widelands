@@ -343,7 +343,7 @@ void FieldDebugWindow::think()
 		{
 			const Time time_last_surveyed =
 				player_field.time_triangle_last_surveyed[TCoords<>::D];
-			if (time_last_surveyed != Editor_Game_Base::Never()) {
+			if (time_last_surveyed != Never()) {
 				snprintf
 					(buffer, sizeof(buffer),
 					 "  D triangle last surveyed at %u: amount %u\n",
@@ -354,7 +354,7 @@ void FieldDebugWindow::think()
 		{
 			const Time time_last_surveyed =
 				player_field.time_triangle_last_surveyed[TCoords<>::R];
-			if (time_last_surveyed != Editor_Game_Base::Never()) {
+			if (time_last_surveyed != Never()) {
 				snprintf
 					(buffer, sizeof(buffer),
 					 "  R triangle last surveyed at %u: amount %u\n",

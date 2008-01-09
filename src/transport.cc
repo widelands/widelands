@@ -3850,7 +3850,7 @@ void Cmd_Call_Economy_Balance::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
 		// Read Base Commands
 		GameLogicCommand::Read(fr, egbase, mol);

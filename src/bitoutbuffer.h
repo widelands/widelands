@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,15 +20,13 @@
 #include "filewrite.h"
 #include "compile_assert.h"
 
-/**
- * Wrapper around FileWrite for writing bits to a file. Call put to write a bit
- * to the buffer. Call Write to write the buffer to file. Unassigned bits in the
- * last byte will be 0.
- */
-template<const Uint8 Size> struct BitOutBuffer {
+/// Wrapper around FileWrite for writing bits to a file. Call put to write a
+/// bit to the buffer. Call Write to write the buffer to file. Unassigned bits
+/// in the last byte will be 0.
+template<uint8_t const Size> struct BitOutBuffer {
 	compile_assert(Size == 1 or Size == 2 or Size == 4);
 	BitOutBuffer() : buffer(0x00), mask(0xff) {}
-	void put(const Uint8 item) {
+	void put(uint8_t const item) {
 		assert(item < (1 << Size));
 		buffer |= item;
 		mask <<= Size;
@@ -42,5 +40,5 @@ template<const Uint8 Size> struct BitOutBuffer {
 	}
 private:
 	FileWrite fw;
-	Uint8 buffer, mask;
+	uint8_t buffer, mask;
 };

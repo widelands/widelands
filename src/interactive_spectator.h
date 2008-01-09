@@ -33,8 +33,7 @@ class Game;
  *
  * This class provides the UI, runs the game logic, etc.
  */
-class Interactive_Spectator : public Interactive_Base {
-public:
+struct Interactive_Spectator : public Interactive_Base {
 	Interactive_Spectator(Game*);
 	~Interactive_Spectator();
 

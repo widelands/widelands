@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -389,7 +389,7 @@ void RenderTarget::rendermap
 				g_gr->get_maptexture_data
 				(world.terrain_descr(f_player_field.terrains.r).get_texture());
 
-			const Uint8 roads =
+			uint8_t const roads =
 				f_player_field.roads | overlay_manager.get_road_overlay(f);
 
 			m_ground_surface->draw_field //  Render ground

@@ -109,8 +109,8 @@ struct Field {
 		Buildhelp_None   = 5
 	};
 
-	typedef Uint8 Height;
-	typedef Uint8 Resource_Amount;
+	typedef uint8_t Height;
+	typedef uint8_t Resource_Amount;
 
 	struct Terrains         {Terrain_Descr::Index  d : 4, r : 4;};
 	struct Resources        {Resource_Descr::Index d : 4, r : 4;};

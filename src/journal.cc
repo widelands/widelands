@@ -29,42 +29,36 @@
  * Write a signed 8bit value to the recording file.
  * \param v The character to be written
  */
-void Journal::write(int8_t v)
-{
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+void Journal::write(int8_t const v) {
+	m_recordstream.write(reinterpret_cast<const char *>(&v), sizeof(v));
 }
 
 /// \overload
-void Journal::write(uint8_t v)
-{
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+void Journal::write(uint8_t const v) {
+	m_recordstream.write(reinterpret_cast<const char *>(&v), sizeof(v));
 }
 
 /// \overload
-void Journal::write(Sint16 v)
-{
+void Journal::write(int16_t v) {
 	v = Little16(v);
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+	m_recordstream.write(reinterpret_cast<const char *>(&v), sizeof(v));
 }
 /// \overload
-void Journal::write(Uint16 v)
-{
+void Journal::write(uint16_t v) {
 	v = Little16(v);
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+	m_recordstream.write(reinterpret_cast<const char *>(&v), sizeof(v));
 }
 
 /// \overload
-void Journal::write(Sint32 v)
-{
+void Journal::write(int32_t v) {
 	v = Little32(v);
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+	m_recordstream.write(reinterpret_cast<const char *>(&v), sizeof(v));
 }
 
 /// \overload
-void Journal::write(Uint32 v)
-{
+void Journal::write(uint32_t v) {
 	v = Little32(v);
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+	m_recordstream.write(reinterpret_cast<const char *>(&v), sizeof(v));
 }
 
 /// \overload
@@ -102,7 +96,7 @@ void Journal::write(SDLMod v)
  * Write a signed char value to the recording file.
  * \param v Reference where the read character will be stored.
  */
-void Journal::read(int8_t &v)
+void Journal::read (int8_t  & v)
 {
 	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(uint8_t));
 }
@@ -110,7 +104,7 @@ void Journal::read(int8_t &v)
 /**
  * \overload
  */
-void Journal::read(uint8_t &v)
+void Journal::read(uint8_t  & v)
 {
 	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(uint8_t));
 }
@@ -118,36 +112,32 @@ void Journal::read(uint8_t &v)
 /**
  * \overload
  */
-void Journal::read(Sint16 &v)
-{
-	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(Sint16));
+void Journal::read (int16_t & v) {
+	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(int16_t));
 	v=Little16(v);
 }
 
 /**
  * \overload
  */
-void Journal::read(Uint16 &v)
-{
-	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(Uint16));
+void Journal::read(uint16_t & v) {
+	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(uint16_t));
 	v=Little16(v);
 }
 
 /**
  * \overload
  */
-void Journal::read(Sint32 &v)
-{
-	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(Sint32));
+void Journal::read (int32_t & v) {
+	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(int32_t));
 	v=Little32(v);
 }
 
 /**
  * \overload
  */
-void Journal::read(Uint32 &v)
-{
-	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(Uint32));
+void Journal::read(uint32_t & v) {
+	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(uint32_t));
 	v=Little32(v);
 }
 
@@ -279,7 +269,7 @@ void Journal::start_playback(std::string filename)
 		assert(1==0); //TODO: barf in a controlled way
 
 	try {
-		Uint32 magic;
+		uint32_t magic;
 
 		m_playbackstream.open(m_playbackname.c_str(), std::ios::binary);
 		read(magic);
@@ -485,7 +475,7 @@ bool Journal::read_event(SDL_Event *e)
  * If necessary, they will be recorded. On playback, they will be modified to
  * show the recorded time instead of the current time.
  */
-void Journal::timestamp_handler(Uint32 *stamp)
+void Journal::timestamp_handler(uint32_t * const stamp)
 {
 	if (m_record) {
 		write(static_cast<uint8_t>(RFC_GETTIME));

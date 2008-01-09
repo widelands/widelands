@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -223,9 +223,9 @@ void Event_Move_View_Option_Menu::clicked(int32_t i) {
  */
 void Event_Move_View_Option_Menu::update() {
 	const Extent extent = eia().egbase().map().extent();
-	if (extent.w <= static_cast<Uint16>(m_location.x))
+	if (extent.w <= static_cast<uint16_t>(m_location.x))
 		m_location.x = extent.w - 1;
-	if (extent.h <= static_cast<Uint16>(m_location.y))
+	if (extent.h <= static_cast<uint16_t>(m_location.y))
 		m_location.y = extent.h - 1;
 
    char buf[6];

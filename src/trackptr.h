@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,10 +151,8 @@ Class T, i.e. the object that the TrackPtr points to, must be a class
 derived from Trackable.
 */
 template<class T>
-class TrackPtr : BaseTrackPtr {
-public:
+struct TrackPtr : BaseTrackPtr {
 	TrackPtr() {}
-	~TrackPtr() {}
 
 	TrackPtr(T* ptr) : BaseTrackPtr(ptr) {}
 	TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {}

@@ -81,6 +81,7 @@ public:
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Loader;
 	friend class Game_Main_Menu_Load_Game;
+	friend class WLApplication;
 
 	// This friend is for legacy reasons and should probably be removed
 	// at least after summer 2008, maybe even earlier.
@@ -92,7 +93,6 @@ public:
 	// life cycle
 	bool run_splayer_map_direct(const char* mapname, bool scenario);
 	bool run_single_player ();
-	bool run_campaign ();
 	bool run_multi_player (NetGame*);
 	bool run_replay();
 

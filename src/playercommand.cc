@@ -106,7 +106,7 @@ void PlayerCommand::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_COMMAND_VERSION || packet_version == 1) {
 		GameLogicCommand::Read(fr, egbase, mol);
 		sender = fr.Unsigned8 ();
@@ -150,11 +150,11 @@ void Cmd_Bulldoze::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BULLDOZE_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
-		const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
 	} else
@@ -203,7 +203,7 @@ void Cmd_Build::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILD_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
@@ -264,7 +264,7 @@ void Cmd_BuildFlag::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILDFLAG_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
@@ -360,7 +360,7 @@ void Cmd_BuildRoad::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILDROAD_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
@@ -422,7 +422,7 @@ void Cmd_FlagAction::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_FLAGACTION_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
@@ -430,7 +430,7 @@ void Cmd_FlagAction::Read
 		action = fr.Unsigned8 ();
 
 		// Serial
-		const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
 	} else
@@ -484,13 +484,13 @@ void Cmd_StartStopBuilding::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_STOPBUILDING_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
 
 		// Serial
-		const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
 	} else
@@ -542,12 +542,12 @@ void Cmd_EnhanceBuilding::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_ENHANCEBUILDING_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
 
-		const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial =mol.get_object_by_file_index(fileserial)->get_serial();
 
@@ -610,13 +610,13 @@ void Cmd_ChangeTrainingOptions::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
 
 		// Serial
-		const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial = mol.get_object_by_file_index(fileserial)->get_serial();
 
@@ -677,13 +677,13 @@ void Cmd_DropSoldier::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_DROPSOLDIER_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
 
 		// Serial
-  const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
 
@@ -755,13 +755,13 @@ void Cmd_ChangeSoldierCapacity::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
       // Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
 
       // Serial
-		const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial = mol.get_object_by_file_index(fileserial)->get_serial();
 
@@ -842,7 +842,7 @@ void Cmd_EnemyFlagAction::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
@@ -851,7 +851,7 @@ void Cmd_EnemyFlagAction::Read
 		action   = fr.Unsigned8 ();
 
 		// Serial
-		const Uint32 fileserial = fr.Unsigned32();
+		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial = mol.get_object_by_file_index(fileserial)->get_serial();
 

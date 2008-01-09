@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ struct Bob : public Map_Object {
 		const Task           * task;
 		int32_t                    ivar1;
 		int32_t                    ivar2;
-		union                  {int32_t ivar3; Uint32 ui32var3;};
+		union                  {int32_t ivar3; uint32_t ui32var3;};
 		Object_Ptr             objvar1;
 		std::string            svar1;
 

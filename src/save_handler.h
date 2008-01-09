@@ -36,9 +36,10 @@ protected:
 
 public:
 	SaveHandler() : m_initialized(false) {}
-	void think(Game* g, int32_t currenttime);
+	void think(Game &, int32_t currenttime);
 	std::string create_file_name(std::string dir, std::string filename);
-	bool save_game (Game* g, std::string filename, std::string *error = NULL);
+	bool save_game
+		(Game &, std::string const & filename, std::string * error = 0);
 
 	static std::string get_base_dir() {return "ssave";}
 };

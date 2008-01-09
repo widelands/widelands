@@ -1,7 +1,7 @@
 /*
  * Thanks to Ulrich Drepper for the md5sum example code
  *
- * Copyright (C) 2002, 2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ struct md5_ctx {
  * One MD5 checksum is simply an array of 16 bytes.
  */
 struct md5_checksum {
-	Uint8 data[16];
+	uint8_t data[16];
 
 	std::string str() const;
 
@@ -62,9 +62,13 @@ struct md5_checksum {
  *
  * Instances of this class can be copied.
  */
-class MD5Checksum : public StreamWrite {
-public:
+struct MD5Checksum : public StreamWrite {
 	MD5Checksum();
+	explicit MD5Checksum(MD5Checksum const & other)
+		:
+		StreamWrite(),
+		can_handle_data(other.can_handle_data), sum(other.sum), ctx(other.ctx)
+	{}
 
 	void Reset();
 

@@ -28,7 +28,7 @@
 /**
 * Check if autosave is not needed.
  */
-void SaveHandler::think(Game *g, int32_t realtime) {
+void SaveHandler::think(Game & game, int32_t realtime) {
 	initialize(realtime);
 
 	int32_t autosaveInterval = g_options.pull_section("global")->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
@@ -54,7 +54,7 @@ void SaveHandler::think(Game *g, int32_t realtime) {
 		g_fs->Rename(complete_filename, backup_filename);
 	}
 
-	if (!save_game(g, complete_filename)) {
+	if (!save_game(game, complete_filename)) {
 		log("Autosave: ERROR\n");
 
 		// if backup file was created, move it back
@@ -113,7 +113,9 @@ std::string SaveHandler::create_file_name(std::string dir, std::string filename)
  *
  * returns true if saved
  */
-bool SaveHandler::save_game(Game *g, std::string complete_filename, std::string *error) {
+bool SaveHandler::save_game
+(Game & game, std::string const & complete_filename, std::string * const error)
+{
 	bool binary = !g_options.pull_section("global")->get_bool("nozip", false);
 	// Make sure that the base directory exists
 	g_fs->EnsureDirectoryExists(get_base_dir());
@@ -127,11 +129,11 @@ bool SaveHandler::save_game(Game *g, std::string complete_filename, std::string 
 	}
 
 	bool ret = true;
-	Game_Saver gs(*fs, g);
+	Game_Saver gs(*fs, &game);
 	try {
 		gs.save();
 	} catch (std::exception& exe) {
-		if (NULL != error)
+		if (error)
 			*error = exe.what();
 		ret = false;
 	}

@@ -22,6 +22,7 @@
 #include "build_id.h"
 #include "editorinteractive.h"
 #include "font_handler.h"
+#include "fullscreen_menu_campaign_select.h"
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
 #include "fullscreen_menu_inet_lobby.h"
@@ -1169,11 +1170,34 @@ void WLApplication::mainmenu_singleplayer()
 				done=true;
 			break;
 
-		case Fullscreen_Menu_SinglePlayer::Campaign:
-			if (m_game->run_campaign())
-				done=true;
-			break;
+		case Fullscreen_Menu_SinglePlayer::Campaign: {
+			m_game->m_state = gs_menu;
+			m_game->m_netgame = 0;
+			std::string filename;
+			for (;;) { // Campaign UI - Loop
+				int32_t campaign;
+				{ //  First start UI for selecting the campaign
+					Fullscreen_Menu_CampaignSelect select_campaign;
+					if (select_campaign.run() > 0)
+						campaign = select_campaign.get_campaign();
+					else // Back was pressed
+						goto end_campaign;
+				}
+				// Than start UI for the selected campaign
+				Fullscreen_Menu_CampaignMapSelect select_campaignmap;
+				select_campaignmap.set_campaign(campaign);
+				if (select_campaignmap.run() > 0) {
+					filename = select_campaignmap.get_map();
+					break;
+				}
+			}
+
+			// Load selected campaign-map-file
+			if (m_game->run_splayer_map_direct(filename.c_str(), true))
+				done = true;
 		}
+			break;
+		} end_campaign:
 
 		delete m_game;
 		m_game = 0;
@@ -1279,7 +1303,7 @@ void WLApplication::emergency_save(const std::string &) {
 		try {
 			SaveHandler * save_handler = m_game->get_save_handler();
 			save_handler->save_game
-				(m_game,
+				(*m_game,
 				 save_handler->create_file_name
 				 (save_handler->get_base_dir(), timestring()));
 		} catch (...) {

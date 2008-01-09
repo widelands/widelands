@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ struct Event_Unhide_Area : public Event_Player_Area {
 	void Read (Section *,       Editor_Game_Base *);
 
 private:
-	Editor_Game_Base::Duration duration;
+	Duration duration;
 };
 
 #endif

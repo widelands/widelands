@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,14 +33,14 @@ struct Editor_Set_Resources_Tool : public Editor_Tool {
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_set_resources.png";}
 
-	Uint8 get_set_to() const throw () {return m_set_to;}
-	void set_set_to(const Uint8 n) throw () {m_set_to = n;}
+	uint8_t get_set_to() const throw () {return m_set_to;}
+	void set_set_to(uint8_t const n) throw () {m_set_to = n;}
 	Resource_Descr::Index get_cur_res() const throw () {return m_cur_res;}
 	void set_cur_res(const Resource_Descr::Index res) throw () {m_cur_res = res;}
 
 private:
 	Resource_Descr::Index m_cur_res;
-	Uint8                 m_set_to;
+	uint8_t               m_set_to;
 };
 
 #endif

@@ -563,7 +563,7 @@ Map_Object::Loader* AttackController::load
 	Loader* loader = new Loader;
 
 	try {
-		Uint8 version = fr.Unsigned8();
+		uint8_t const version = fr.Unsigned8();
 		if (version != ATTACKCONTROLLER_SAVEGAME_VERSION)
 			throw wexception("Unknown version %u", version);
 

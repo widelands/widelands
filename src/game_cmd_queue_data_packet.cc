@@ -40,7 +40,7 @@ throw (_wexception)
 	FileRead fr;
 	fr.Open(fs, "binary/cmd_queue");
 
-	const Uint16 packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version >= 1)
 		try {
 			Cmd_Queue* cmdq=game->get_cmdqueue();

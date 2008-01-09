@@ -513,7 +513,7 @@ Change the number of players the map supports.
 Could happen multiple times in the map editor.
 ===============
 */
-void Map::set_nrplayers(const Uint8 nrplayers) {
+void Map::set_nrplayers(Player_Number const nrplayers) {
 	if (!nrplayers) {
 		if (m_starting_pos)
 			free(m_starting_pos);
@@ -1041,12 +1041,12 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 
 	const World & w = world();
 
-	const Uint8 tr_d_terrain_is = w.terrain_descr(tr.field->terrain_d()).get_is();
-	const Uint8 tl_r_terrain_is = w.terrain_descr(tl.field->terrain_r()).get_is();
-	const Uint8 tl_d_terrain_is = w.terrain_descr(tl.field->terrain_d()).get_is();
-	const Uint8  l_r_terrain_is = w.terrain_descr (l.field->terrain_r()).get_is();
-	const Uint8  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
-	const Uint8  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
+	uint8_t const tr_d_terrain_is = w.terrain_descr(tr.field->terrain_d()).get_is();
+	uint8_t const tl_r_terrain_is = w.terrain_descr(tl.field->terrain_r()).get_is();
+	uint8_t const tl_d_terrain_is = w.terrain_descr(tl.field->terrain_d()).get_is();
+	uint8_t const  l_r_terrain_is = w.terrain_descr (l.field->terrain_r()).get_is();
+	uint8_t const  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
+	uint8_t const  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
 
    // 1b) Collect some information about the neighbours
 	uint8_t cnt_unpassable = 0;
@@ -1152,12 +1152,12 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 
 	const World & w = world();
 
-	const Uint8 tr_d_terrain_is = w.terrain_descr(tr.field->terrain_d()).get_is();
-	const Uint8 tl_r_terrain_is = w.terrain_descr(tl.field->terrain_r()).get_is();
-	const Uint8 tl_d_terrain_is = w.terrain_descr(tl.field->terrain_d()).get_is();
-	const Uint8  l_r_terrain_is = w.terrain_descr (l.field->terrain_r()).get_is();
-	const Uint8  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
-	const Uint8  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
+	uint8_t const tr_d_terrain_is = w.terrain_descr(tr.field->terrain_d()).get_is();
+	uint8_t const tl_r_terrain_is = w.terrain_descr(tl.field->terrain_r()).get_is();
+	uint8_t const tl_d_terrain_is = w.terrain_descr(tl.field->terrain_d()).get_is();
+	uint8_t const  l_r_terrain_is = w.terrain_descr (l.field->terrain_r()).get_is();
+	uint8_t const  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
+	uint8_t const  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
 
 	// 1b) Collect some information about the neighbours
 	int32_t cnt_unpassable = 0;
@@ -1310,7 +1310,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	if (cnt_mountain || cnt_dry)
 		goto end;
 
-			const Sint16 f_height = f.field->get_height();
+			Field::Height const f_height = f.field->get_height();
 
 			// 7) Reduce building size based on slope of direct neighbours:
 			//    - slope >= 4: can't build anything here -> return
@@ -1318,7 +1318,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 			{
 				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 1));
 				do {
-					const Uint16 slope =
+					uint16_t const slope =
 						abs(mr.location().field->get_height() - f_height);
 					if (slope >= 4) goto end;
 					if (slope >= 3) building = BUILDCAPS_SMALL;
@@ -2067,7 +2067,7 @@ int32_t Map::change_terrain
 }
 
 
-uint32_t Map::set_height(const FCoords fc, const Uint8 new_value) {
+uint32_t Map::set_height(const FCoords fc, uint8_t const new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);
 	assert(m_fields <= fc.field);
 	assert            (fc.field < m_fields + max_index());
@@ -2078,7 +2078,7 @@ uint32_t Map::set_height(const FCoords fc, const Uint8 new_value) {
 	return radius;
 }
 
-uint32_t Map::change_height(Area<FCoords> area, const Sint16 difference) {
+uint32_t Map::change_height(Area<FCoords> area, int16_t const difference) {
 	{
 		MapRegion<Area<FCoords> > mr(*this, area);
 		do {
@@ -2087,12 +2087,12 @@ uint32_t Map::change_height(Area<FCoords> area, const Sint16 difference) {
 			    and
 				 mr.location().field->height
 				 <
-				 static_cast<Uint8>(-difference))
+				 static_cast<uint8_t>(-difference))
 				mr.location().field->height = 0;
 			else if
-				(static_cast<Sint16>(MAX_FIELD_HEIGHT) - difference
+				(static_cast<int16_t>(MAX_FIELD_HEIGHT) - difference
 				 <
-				 static_cast<Sint16>(mr.location().field->height))
+				 static_cast<int16_t>(mr.location().field->height))
 				mr.location().field->height = MAX_FIELD_HEIGHT;
 			else  mr.location().field->height += difference;
 		} while (mr.advance(*this));
@@ -2179,7 +2179,7 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 		br_n(coords)
 	};
 
-	for (Uint8 i = 0; i < 6; ++i) {
+	for (uint8_t i = 0; i < 6; ++i) {
 		Field & f = *n[i].field;
 		const int32_t diff = height - f.get_height();
 		if (diff > MAX_FIELD_HEIGHT_DIFF) {
@@ -2194,7 +2194,7 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 		}
 	}
 
-	for (Uint8 i = 0; i < 6; ++i)
+	for (uint8_t i = 0; i < 6; ++i)
 		if (check[i]) check_neighbour_heights(n[i], area);
 }
 
@@ -2472,7 +2472,7 @@ CheckStepRoad
 bool CheckStepRoad::allowed
 (Map* map, FCoords start, FCoords end, int32_t, StepId id) const
 {
-	const Uint8 endcaps = m_player.get_buildcaps(end);
+	uint8_t const endcaps = m_player.get_buildcaps(end);
 
 	// Calculate cost and passability
 	if

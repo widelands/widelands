@@ -852,7 +852,7 @@ void Editor_Game_Base::cleanup_for_load
 
 
 void Editor_Game_Base::set_road
-		(const FCoords f, const Uint8 direction, const Uint8 roadtype)
+(const FCoords f, uint8_t const direction, uint8_t const roadtype)
 {
 	const Map & m = map();
 	const Field & first_field = m[0];
@@ -874,7 +874,7 @@ void Editor_Game_Base::set_road
 	f.field->set_road(direction, roadtype);
 
 	FCoords neighbour;
-	Uint8 mask;
+	uint8_t mask;
 	switch (direction) {
 	case Road_SouthWest:
 		neighbour = m.bl_n(f);
@@ -890,7 +890,7 @@ void Editor_Game_Base::set_road
 		break;
 	default: assert(false);
 	}
-	const Uint8 road = f.field->get_roads() & mask;
+	uint8_t const road = f.field->get_roads() & mask;
 	const Map::Index           i = f        .field - &first_field;
 	const Map::Index neighbour_i = neighbour.field - &first_field;
 	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum) {

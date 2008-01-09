@@ -64,9 +64,7 @@ throw (_wexception)
 		return ;
 	}
 
-	// First packet version
-	int32_t packet_version=fr.Unsigned16();
-
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version==CURRENT_PACKET_VERSION) {
 		for (;;) {
 			uint32_t reg=fr.Unsigned32();

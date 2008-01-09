@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,16 +87,16 @@ struct FileWrite {
 	 */
 		void Printf(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
 
-	void   Signed8 (const Sint8  x, const Pos pos = NoPos()) {Data(&x, 1, pos);}
-	void Unsigned8 (const Uint8  x, const Pos pos = NoPos()) {Data(&x, 1, pos);}
-	void   Signed16(const Sint16 x, const Pos pos = NoPos())
-	{const Sint16 y = Little16   (x); Data(&y, 2, pos);}
-	void Unsigned16(const Uint16 x, const Pos pos = NoPos())
-	{const Uint16 y = Little16   (x); Data(&y, 2, pos);}
-	void   Signed32(const Sint32 x, const Pos pos = NoPos())
-	{const Uint32 y = Little32   (x); Data(&y, 4, pos);}
-	void Unsigned32(const Uint32 x, const Pos pos = NoPos())
-	{const Uint32 y = Little32   (x); Data(&y, 4, pos);}
+	void   Signed8 (int8_t const x, const Pos pos = NoPos()) {Data(&x, 1, pos);}
+	void Unsigned8(uint8_t const x, const Pos pos = NoPos()) {Data(&x, 1, pos);}
+	void   Signed16 (int16_t const x, const Pos pos = NoPos())
+	{int16_t const y = Little16   (x); Data(&y, 2, pos);}
+	void Unsigned16(uint16_t const x, const Pos pos = NoPos())
+	{uint16_t const y = Little16   (x); Data(&y, 2, pos);}
+	void   Signed32 (int32_t const x, const Pos pos = NoPos())
+	{uint32_t const y = Little32   (x); Data(&y, 4, pos);}
+	void Unsigned32(uint32_t const x, const Pos pos = NoPos())
+	{uint32_t const y = Little32   (x); Data(&y, 4, pos);}
 	void      Float(const float  x, const Pos pos = NoPos())
 	{const float  y = LittleFloat(x); Data(&y, 4, pos);}
 	void CString(const char * const x, const Pos pos = NoPos())
@@ -110,15 +110,15 @@ private:
 	size_t maxsize;
 	Pos    filepos;
 
-	FileWrite & operator=(const FileWrite &);
-	FileWrite            (const FileWrite &);
+	FileWrite & operator=(FileWrite const &);
+	explicit FileWrite   (FileWrite const &);
 };
 
 inline void FileWrite::Coords32(const Coords c) {
-	assert(static_cast<Uint16>(c.x) < 0x8000 or c.x == -1);
-	assert(static_cast<Uint16>(c.y) < 0x8000 or c.y == -1);
-	{const Uint16 x = Little16(c.x); Data(&x, 2);}
-	{const Uint16 y = Little16(c.y); Data(&y, 2);}
+	assert(static_cast<uint16_t>(c.x) < 0x8000 or c.x == -1);
+	assert(static_cast<uint16_t>(c.y) < 0x8000 or c.y == -1);
+	{uint16_t const x = Little16(c.x); Data(&x, 2);}
+	{uint16_t const y = Little16(c.y); Data(&y, 2);}
 }
 
 #endif

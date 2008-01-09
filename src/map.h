@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,7 +125,7 @@ struct FindBobAttribute : public FindBob {
    virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 
-typedef Uint8 Direction;
+typedef uint8_t Direction;
 
 /** class Map
  *
@@ -185,7 +185,7 @@ struct Map {
    void recalc_for_field_area(const Area<FCoords>);
    void recalc_default_resources();
 
-	void set_nrplayers(const Uint8 nrplayers);
+	void set_nrplayers(Player_Number const nrplayers);
 
 	void set_starting_pos(const uint32_t plnum, const Coords);
 	Coords get_starting_pos(const uint32_t plnum) const
@@ -205,7 +205,7 @@ struct Map {
 	const char * get_description() const {return m_description;}
 	const char * get_world_name() const {return m_worldname;}
 	const std::string & get_background() const {return m_background;}
-	Uint8 get_nrplayers() const throw () {return m_nrplayers;}
+	Player_Number get_nrplayers() const throw () {return m_nrplayers;}
 	Extent extent() const throw () {return Extent(m_width, m_height);}
 	X_Coordinate get_width   () const throw () {return m_width;}
 	Y_Coordinate get_height  () const throw () {return m_height;}
@@ -326,10 +326,10 @@ struct Map {
 	 * so it will be terribly slow. Use set_height for Area for that purpouse
 	 * instead.
 	 */
-	uint32_t set_height(const FCoords, const Uint8  new_value);
+	uint32_t set_height(const FCoords, Player_Number const new_value);
 
 	/// Changes the height of the nodes in an Area by a difference.
-	uint32_t change_height(Area<FCoords>, const Sint16 difference);
+	uint32_t change_height(Area<FCoords>, int16_t const difference);
 
 	/**
 	 * Ensures that the height of each node within radius from fc is in
@@ -373,8 +373,8 @@ private:
 	void load_world();
 	void recalc_border(const FCoords);
 
-	Uint16 m_pathcycle;
-	Uint8             m_nrplayers; // # of players this map supports (!= Game's number of players)
+	uint16_t m_pathcycle;
+	Player_Number m_nrplayers; // # of players this map supports (!= Game's number of players)
 	X_Coordinate m_width;
 	Y_Coordinate m_height;
 	char        m_filename    [256];
@@ -423,8 +423,8 @@ private:
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 
-	Map & operator=(const Map &);
-	Map            (const Map &);
+	Map & operator=(Map const &);
+	explicit Map   (Map const &);
 };
 
 // FindImmovable functor
@@ -625,7 +625,7 @@ struct CheckStepRoad : public CheckStep {
 private:
 	const Player                                     &       m_player;
 	const std::set<Coords, Coords::ordering_functor> * const m_forbidden_locations;
-	const Uint8                                              m_movecaps;
+	const uint8_t                                            m_movecaps;
 };
 
 

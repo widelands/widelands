@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,8 +67,8 @@ struct Map_Object_Descr {
 	private:
 		typedef std::map<std::string, uint32_t> AttribMap;
 
-		Map_Object_Descr & operator=(const Map_Object_Descr &);
-		Map_Object_Descr            (const Map_Object_Descr &);
+		Map_Object_Descr & operator=(Map_Object_Descr const &);
+		explicit Map_Object_Descr   (Map_Object_Descr const &);
 
 		std::vector<uint32_t>           m_attributes;
 		std::map<std::string, uint32_t>  m_anims;
@@ -273,8 +273,8 @@ protected:
 	LogSink                * m_logsink;
 
 private:
-	Map_Object & operator=(const Map_Object &);
-	Map_Object            (const Map_Object &);
+	Map_Object & operator=(Map_Object const &);
+	explicit Map_Object   (Map_Object const &);
 };
 
 inline int32_t get_reverse_dir(int32_t dir) {return 1 + ((dir-1)+3)%6;}

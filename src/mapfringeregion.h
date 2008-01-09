@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,7 +74,7 @@ template <typename Area_type = Area<> > struct MapFringeRegion {
 private:
 	Area_type                       m_area;
 	typename Area_type::Radius_type m_remaining_in_phase;
-	Uint8   m_phase;
+	uint8_t   m_phase;
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,34 +77,37 @@ private:
 /**
  * Load the savegame part of the given replay and open the command log.
  */
-ReplayReader::ReplayReader(Game* game, const std::string filename)
+ReplayReader::ReplayReader(Game & game, std::string const & filename)
 	: m_game(game)
 {
 	m_replaytime = 0;
 
 	FileSystem* const fs = g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX);
-	Game_Loader gl(*fs, game);
+	Game_Loader gl(*fs, &game);
 	gl.load_game();
 	delete fs;
 
 	m_cmdlog = g_fs->OpenStreamRead(filename);
 
 	try {
-		Uint32 magic = m_cmdlog->Unsigned32();
+		uint32_t const magic = m_cmdlog->Unsigned32();
 		if (magic == 0x2E21A100) // Note: This was never released as part of a build
 			throw wexception
-					("%s is a replay from a version that is known to have desync problems",
-					 filename.c_str());
+				("%s is a replay from a version that is known to have desync "
+				 "problems",
+				 filename.c_str());
 		if (magic != REPLAY_MAGIC)
-			throw wexception("%s apparently not a valid replay file", filename.c_str());
+			throw wexception
+				("%s apparently not a valid replay file", filename.c_str());
 
-		Uint8 version = m_cmdlog->Unsigned8();
+		uint8_t const version = m_cmdlog->Unsigned8();
 		if (version < REPLAY_VERSION)
-			throw wexception("Replay of version %u is known to have desync problems", version);
+			throw wexception
+				("Replay of version %u is known to have desync problems", version);
 		if (version != REPLAY_VERSION)
 			throw wexception("Unknown version %u", version);
 
-		game->get_rng()->ReadState(*m_cmdlog);
+		game.get_rng()->ReadState(*m_cmdlog);
 	}
 	catch (...) {
 		delete m_cmdlog;
@@ -219,12 +222,12 @@ public:
  * This is expected to be called just after game load has completed
  * and the game has changed into running state.
  */
-ReplayWriter::ReplayWriter(Game* game, const std::string filename)
+ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
 	: m_game(game)
 {
 	g_fs->EnsureDirectoryExists(REPLAY_DIR);
 
-	SaveHandler* savehandler = m_game->get_save_handler();
+	SaveHandler * const savehandler = m_game.get_save_handler();
 
 	std::string error;
 	if (!savehandler->save_game(m_game, filename + WLGF_SUFFIX, &error))
@@ -233,10 +236,10 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 	log("Reloading the game from replay\n");
 	FileSystem* fs = g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX);
 	try {
-		Game_Loader gl(*fs, game);
-		game->cleanup_for_load(true, true);
+		Game_Loader gl(*fs, &game);
+		game.cleanup_for_load(true, true);
 		gl.load_game();
-		game->postload();
+		game.postload();
 	} catch (...) {
 		delete fs;
 		throw;
@@ -244,13 +247,14 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 	delete fs;
 	log("Done reloading the game from replay\n");
 
-	game->enqueue_command(new Cmd_ReplaySyncWrite(game->get_gametime() + SYNC_INTERVAL));
+	game.enqueue_command
+		(new Cmd_ReplaySyncWrite(game.get_gametime() + SYNC_INTERVAL));
 
 	m_cmdlog = g_fs->OpenStreamWrite(filename);
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
 	m_cmdlog->Unsigned8(REPLAY_VERSION);
 
-	game->get_rng()->WriteState(*m_cmdlog);
+	game.get_rng()->WriteState(*m_cmdlog);
 }
 
 
@@ -260,7 +264,7 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 ReplayWriter::~ReplayWriter()
 {
 	m_cmdlog->Unsigned8(pkt_end);
-	m_cmdlog->Unsigned32(m_game->get_gametime());
+	m_cmdlog->Unsigned32(m_game.get_gametime());
 
 	delete m_cmdlog;
 	m_cmdlog = 0;
@@ -276,7 +280,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand* cmd)
 	// The semantics of the timestamp is
 	// "There will be no more player commands that are due *before* the
 	// given time".
-	m_cmdlog->Unsigned32(m_game->get_gametime());
+	m_cmdlog->Unsigned32(m_game.get_gametime());
 	m_cmdlog->Unsigned32(cmd->get_duetime());
 	m_cmdlog->Unsigned32(cmd->get_cmdserial());
 	cmd->serialize(*m_cmdlog);
@@ -291,7 +295,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand* cmd)
 void ReplayWriter::SendSync(const md5_checksum& hash)
 {
 	m_cmdlog->Unsigned8(pkt_syncreport);
-	m_cmdlog->Unsigned32(m_game->get_gametime());
+	m_cmdlog->Unsigned32(m_game.get_gametime());
 	m_cmdlog->Data(hash.data, sizeof(hash.data));
 	m_cmdlog->Flush();
 }

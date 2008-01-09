@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,10 +37,10 @@
  * The initial coordinates must refer to a triangle (TCoords<>::D or TCoords<>::R).
  * Use MapRegion instead for nodes (TCoords<>::None).
  */
-template <typename Coords_type = TCoords<>, typename Radius_type = Uint16 >
+template <typename Coords_type = TCoords<>, typename Radius_type = uint16_t>
 struct MapTriangleRegion
 {
-	MapTriangleRegion(const Map &, Coords_type, const Uint16 radius);
+	MapTriangleRegion(Map const &, Coords_type, uint16_t radius);
 
 	const Coords_type & location() const throw ();
 
@@ -67,7 +67,7 @@ template <> struct MapTriangleRegion<FCoords> {
 		m_remaining_in_row(m_rowwidth),
 		m_remaining_rows  (m_area.radius * 2)
 	{
-		for (Uint8 r = m_area.radius; r; --r) map.get_tln(m_area, &m_area);
+		for (uint8_t r = m_area.radius; r; --r) map.get_tln(m_area, &m_area);
 		m_left = m_area;
 	}
 
@@ -95,13 +95,13 @@ template <> struct MapTriangleRegion<FCoords> {
 private:
 	Area<TCoords<FCoords> > m_area;
 	FCoords                 m_left;
-	Uint16                  m_rowwidth;
-	Uint16                  m_remaining_in_row;
-	Uint16                  m_remaining_rows;
+	uint16_t                m_rowwidth;
+	uint16_t                m_remaining_in_row;
+	uint16_t                m_remaining_rows;
 };
 template <typename Coords_type> struct MapTriangleRegion<TCoords<Coords_type> >
 {
-	MapTriangleRegion(const Map &, Area<TCoords<Coords_type>, Uint16>);
+	MapTriangleRegion(Map const &, Area<TCoords<Coords_type>, uint16_t>);
 
 	const TCoords<Coords_type> & location() const throw () {return m_location;}
 
