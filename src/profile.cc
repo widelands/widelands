@@ -1027,44 +1027,48 @@ void Profile::write
 				continue;
 
 			const char* str = v->get_string();
-			uint32_t spaces = strlen(v->get_name());
-			bool multiline = false;
 
-			for (uint32_t i = 0; i < strlen(str); ++i) {
-				if (str[i] == '\n') {
-					multiline = true;
-				}
-			}
+			if (strlen(str)>=1) {
+				uint32_t spaces = strlen(v->get_name());
+				bool multiline = false;
 
-			// Try to avoid _every_ possible way of
-			// getting inconsistent data
-			std::string tempstr("");
-
-			if (multiline)
-				// Show WL that a multilined text starts
-				tempstr += "\"";
-
-			for (uint32_t i = 0; i < strlen(str); i++) {
-				// No speach marks - they would break the format
-				if (str[i] == '\"')
-					tempstr += "''";
-				else {
-					// Convert the newlines to WL format.
+				for (uint32_t i = 0; i < strlen(str); ++i) {
 					if (str[i] == '\n') {
-						tempstr += " \"\n";
-						for (uint32_t j = 0; j <= spaces; j++)
-							tempstr += " ";
-						tempstr += " \"";
-					} else
-						tempstr += str[i];
+						multiline = true;
+					}
 				}
-			}
 
-			if (multiline)
-				// End of multilined text.
-				tempstr += "\"";
+				// Try to avoid _every_ possible way of
+				// getting inconsistent data
+				std::string tempstr("");
 
-			fw.Printf("%s=\"%s\"\n", v->get_name(), tempstr.c_str());
+				if (multiline)
+					// Show WL that a multilined text starts
+					tempstr += "\"";
+
+				for (uint32_t i = 0; i < strlen(str); i++) {
+					// No speach marks - they would break the format
+					if (str[i] == '\"')
+						tempstr += "''";
+					else {
+						// Convert the newlines to WL format.
+						if (str[i] == '\n') {
+							tempstr += " \"\n";
+							for (uint32_t j = 0; j <= spaces; j++)
+								tempstr += " ";
+							tempstr += " \"";
+						} else
+							tempstr += str[i];
+					}
+				}
+
+				if (multiline)
+					// End of multilined text.
+					tempstr += "\"";
+
+				fw.Printf("%s=\"%s\"\n", v->get_name(), tempstr.c_str());
+			} else
+				fw.Printf("%s=\n", v->get_name());
 		}
 	}
 
