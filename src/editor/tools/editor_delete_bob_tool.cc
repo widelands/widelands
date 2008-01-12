@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,12 +32,16 @@ deletes the bob at the given location
 ===========
 */
 int32_t Editor_Delete_Bob_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
+(Widelands::Map                     & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive                 & parent)
 {
 	const int32_t radius = parent.get_sel_radius();
-	MapRegion<Area<FCoords> > mr
-		(map, Area<FCoords>(map.get_fcoords(center.node), radius));
-	do if (Bob * const bob = mr.location().field->get_first_bob())
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
+		(map,
+		 Widelands::Area<Widelands::FCoords>
+		 (map.get_fcoords(center.node), radius));
+	do if (Widelands::Bob * const bob = mr.location().field->get_first_bob())
 		bob->remove(&parent.egbase());
 	while (mr.advance(map));
    return radius + 2;

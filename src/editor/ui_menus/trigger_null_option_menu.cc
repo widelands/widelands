@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu
-(Editor_Interactive & parent, Trigger_Null & trigger)
+(Editor_Interactive & parent, Widelands::Trigger_Null & trigger)
 :
 UI::Window(&parent, 0, 0, 164, 100, _("Null Trigger Options").c_str()),
 m_trigger (trigger)

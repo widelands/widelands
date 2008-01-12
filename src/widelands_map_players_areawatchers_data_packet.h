@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,20 +22,19 @@
 
 #include "widelands_map_data_packet.h"
 
-struct Widelands_Map_Players_AreaWatchers_Data_Packet :
-public Widelands_Map_Data_Packet
-{
+namespace Widelands {
+
+struct Map_Players_AreaWatchers_Data_Packet : public Map_Data_Packet {
 	virtual void Read
 		(FileSystem       &,
 		 Editor_Game_Base *,
 		 const bool,
-		 Widelands_Map_Map_Object_Loader * const = 0)
+		 Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	virtual void Write
-		(FileSystem       &,
-		 Editor_Game_Base *,
-		 Widelands_Map_Map_Object_Saver * const  = 0)
+	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
+};
+
 };
 
 #endif

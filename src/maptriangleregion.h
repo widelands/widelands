@@ -22,6 +22,8 @@
 
 #include "map.h"
 
+namespace Widelands {
+
 /**
  * Producer/Coroutine struct that returns every triangle which can be reached by
  * crossing at most \a radius edges.
@@ -115,6 +117,8 @@ private:
 	uint16_t m_row_length, m_remaining_in_row;
 	Coords_type          m_left;
 	TCoords<Coords_type> m_location;
+};
+
 };
 
 #endif

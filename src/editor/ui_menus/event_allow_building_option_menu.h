@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,8 @@
 #include <vector>
 
 class Editor_Interactive;
-class Event_Allow_Building;
+namespace Widelands {struct Event_Allow_Building;};
+
 namespace UI {
 struct Edit_Box;
 struct Checkbox;
@@ -38,7 +39,8 @@ struct Textarea;
  * before it can return
  */
 struct Event_Allow_Building_Option_Menu : public UI::Window {
-	Event_Allow_Building_Option_Menu(Editor_Interactive &, Event_Allow_Building &);
+	Event_Allow_Building_Option_Menu
+		(Editor_Interactive &, Widelands::Event_Allow_Building &);
       ~Event_Allow_Building_Option_Menu();
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
@@ -50,7 +52,7 @@ private:
 	void clicked_ok();
       void clicked(int32_t);
 
-	Event_Allow_Building & m_event;
+	Widelands::Event_Allow_Building & m_event;
       UI::Textarea *m_player_ta, *m_building_ta;
       UI::Checkbox* m_allow;
       UI::Edit_Box* m_name;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,22 +23,23 @@
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
 
-#include <stdint.h>
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 
+namespace Widelands {
 class Editor_Game_Base;
 class Game;
 class Map;
 class Map_Loader;
+};
 class RenderTarget;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadGame(Game &);
+	Fullscreen_Menu_LoadGame(Widelands::Game &);
 	~Fullscreen_Menu_LoadGame();
 
 	const std::string & filename() {return m_filename;}
@@ -49,7 +50,7 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
    void fill_list     ();
 
 private:
-	Game &                                      game;
+	Widelands::Game &                               game;
 	UI::IDButton<Fullscreen_Menu_LoadGame, int32_t> back;
 	UI::Button<Fullscreen_Menu_LoadGame>        m_ok;
 	UI::Listselect<const char *>                list;

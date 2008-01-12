@@ -37,6 +37,7 @@
 
 #include <stdio.h>
 
+namespace Widelands {
 
 /**
  * Callback function for font renderer.
@@ -1657,7 +1658,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
    {
       try {
          FileSystem* fs = g_fs->MakeSubFileSystem(filename);
-			retval = new Widelands_Map_Loader(*fs, this);
+			retval = new WL_Map_Loader(*fs, this);
 		} catch (...) {
          // If this fails, it is an illegal file (maybe old plain binary map format)
          //TODO: catchall hides real errors! Replace with more specific code
@@ -2251,7 +2252,7 @@ bool FindImmovableAttribute::accept(BaseImmovable *imm) const
 
 bool FindImmovablePlayerImmovable::accept(BaseImmovable* imm) const
 {
-	return imm->get_type() >= Map_Object::BUILDING;
+	return dynamic_cast<PlayerImmovable const *>(imm);
 }
 
 
@@ -2695,3 +2696,5 @@ void CoordPath::append(const CoordPath &tail)
 	m_path.insert(m_path.end(), tail.m_path.begin(), tail.m_path.end());
 	m_coords.insert(m_coords.end(), tail.m_coords.begin()+1, tail.m_coords.end());
 }
+
+};

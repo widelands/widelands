@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,8 @@
 #include "map_objective_manager.h"
 #include "profile.h"
 #include "wexception.h"
+
+namespace Widelands {
 
 static const int32_t EVENT_VERSION = 1;
 
@@ -90,3 +92,5 @@ Event::State Event_Unhide_Objective::run(Game *) {
    m_state = DONE;
    return m_state;
 }
+
+};

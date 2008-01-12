@@ -22,6 +22,8 @@
 
 #include <vector>
 
+namespace Widelands {
+
 class EventChain;
 class Trigger;
 class Game;
@@ -168,6 +170,8 @@ struct TriggerNOT : public TriggerConditional_OneArg {
 
 protected:
       virtual TriggerConditional_Factory::TokenNames get_token() {return TriggerConditional_Factory::NOT;}
+};
+
 };
 
 #endif // __S__TRIGGER_CONDITIONAL_H

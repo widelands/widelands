@@ -25,6 +25,8 @@
 #include <cassert>
 #include <vector>
 
+namespace Widelands {
+
 /**
  * WareList is a simple wrapper around an array of ware types.
  * It is useful for warehouses and for economy-wide inventory.
@@ -60,6 +62,7 @@ private:
 	vector_type m_wares;
 };
 
+};
 
 #endif   // __WARELIST_H
 

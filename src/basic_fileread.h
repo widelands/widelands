@@ -1,0 +1,127 @@
+/*
+ * Copyright (C) 2006-2008 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#ifndef __S_BASIC_FILEREAD_H
+#define __S_BASIC_FILEREAD_H
+
+#include "filesystem.h"
+#include "machdep.h"
+
+#include <cassert>
+#include <limits>
+
+/// Can be used to read a file. It works quite naively by reading the entire
+/// file into memory. Convenience functions are available for endian-safe access
+/// of common data types. Base must be derived from StreamRead.
+template<typename Base> struct basic_FileRead : public Base {
+	struct Pos {
+		Pos(size_t const p = 0) : pos(p) {}
+		/// Returns a special value indicating invalidity.
+		static Pos Null() {return std::numeric_limits<size_t>::max();}
+
+		bool isNull() const throw () {return *this == Null();}
+		operator size_t() const throw () {return pos;}
+		Pos operator++() {return ++pos;}
+		Pos operator+=(Pos const other) {return pos += other.pos;}
+	private:
+		size_t pos;
+	};
+
+	struct FileRead_Exception : public std::exception {};
+	struct File_Boundary_Exceeded : public FileRead_Exception {
+		virtual const char * what() const throw()
+		{return "File boundary exceeded";}
+	};
+	basic_FileRead () : data(0) {}; /// Create the object with nothing to read.
+	~basic_FileRead() {if (data) Close();} /// Close the file if open.
+
+	/// Loads a file into memory. Reserves one additional byte which is zeroed,
+	/// so that text files can be handled like a null-terminated string.
+	/// \throws an exception if the file couldn't be loaded for whatever reason.
+	/// \todo error handling
+	void Open(FileSystem & fs, const char * const filename) {
+		assert(not data);
+
+		data = static_cast<char *>(fs.Load(filename, length));
+		filepos = 0;
+	}
+
+	/// Works just like Open, but returns false when the load fails.
+	bool TryOpen(FileSystem & fs, const char * const filename) {
+		try {Open(fs, filename);} catch (const std::exception &) {return false;}
+		return true;
+	}
+
+	void Close(){assert(data); free(data); data = 0;} /// Frees allocated memory.
+
+	size_t GetSize() const throw () {return length;}
+	bool EndOfFile() const throw () {return length <= filepos;}
+
+	/// Set the file pointer to the given location.
+	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
+	void SetFilePos(const Pos pos){
+		assert(data);
+		if (pos >= length) throw File_Boundary_Exceeded();
+		filepos = pos;
+	}
+
+	/// Get the position that will be read from in the next read operation that
+	/// does not specify a position.
+	Pos GetPos() const throw () {return filepos;}
+
+	size_t Data(void * const dst, const size_t bufsize) {
+		assert(data);
+		size_t read = 0;
+		for (; read < bufsize and filepos < length; ++read, ++filepos)
+			static_cast<char *>(dst)[read] = data[filepos];
+		return read;
+	}
+
+	char * Data(uint32_t const bytes, const Pos pos = Pos::Null()) {
+		assert(data);
+
+		Pos i = pos;
+		if (pos.isNull()) {
+			i = filepos;
+			filepos += bytes;
+		}
+		if (i + bytes > length) throw File_Boundary_Exceeded();
+		return data + i;
+	}
+
+	char * CString(const Pos pos = Pos::Null()) {
+		assert(data);
+
+		Pos i = pos.isNull() ? filepos : pos;
+		if (i >= length) throw File_Boundary_Exceeded();
+		char * const result = data + i;
+		for (char * p = result; *p; ++p, ++i);
+		++i; //  beyond the null
+		if (i > length) throw File_Boundary_Exceeded();
+		if (pos.isNull()) filepos = i;
+		return result;
+	}
+
+private:
+	char * data;
+	size_t length;
+	Pos    filepos;
+};
+
+#endif

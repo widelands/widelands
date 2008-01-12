@@ -25,6 +25,8 @@
 #include "profile.h"
 #include "wexception.h"
 
+namespace Widelands {
+
 static const int32_t TRIGGER_VERSION = 1;
 
 /*
@@ -74,3 +76,5 @@ void Trigger_Time::reset_trigger(Game* game) {
 
    set_trigger(false);
 }
+
+};

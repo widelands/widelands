@@ -22,11 +22,12 @@
 #include "build_id.h"
 #include "fileread.h"
 #include "filesystem/layered_filesystem.h"
-#include "filewrite.h"
+#include "streamwrite.h"
 #include "font_handler.h"
 #include "i18n.h"
 #include "rendertarget.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
 
 #include "ui_progresswindow.h"
 
@@ -421,7 +422,7 @@ void Graphic::get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h)
 	h = bmp->get_h();
 }
 
-void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
+void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 {
 	Surface* surf = get_picture_surface(pic_index);
 
@@ -434,7 +435,7 @@ void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
 		throw wexception("Graphic::save_png: Couldn't create png struct!");
 
 	// Set another write function
-	png_set_write_fn(png_ptr, fw, &Graphic::m_png_write_function, 0);
+	png_set_write_fn(png_ptr, sw, &Graphic::m_png_write_function, 0);
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 
@@ -673,8 +674,7 @@ const char* Graphic::get_maptexture_picture(uint32_t id)
 void Graphic::m_png_write_function
 (png_structp png_ptr, png_bytep data, png_size_t length)
 {
-	FileWrite* fw = static_cast<FileWrite*>(png_get_io_ptr(png_ptr));
-	fw->Data(data, length);
+	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Data(data, length);
 }
 
 /**
@@ -746,7 +746,6 @@ Surface* Graphic::get_road_texture(int32_t roadtex)
 	}
 
 	return get_picture_surface
-	       (roadtex == Road_Normal ?
-		m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
+		(roadtex == Widelands::Road_Normal ?
+		 m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
 }
-

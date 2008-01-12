@@ -27,6 +27,8 @@
 #include <cassert>
 #include <string>
 
+namespace Widelands {
+
 /// The Map Objective manager keeps all objectives in order.
 ///
 /// A Map (or scenario) objective is a objectives that has to be fulfilled to
@@ -116,6 +118,8 @@ struct MapObjectiveManager {
 
 private:
 	objective_vector m_objectives;
+};
+
 };
 
 #endif

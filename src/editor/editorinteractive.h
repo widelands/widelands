@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,12 +45,12 @@ struct Editor_Interactive : public Interactive_Base {
 	static void run_editor(std::string const & filename);
 
 private:
-	Editor_Interactive(Editor_Game_Base &);
+	Editor_Interactive(Widelands::Editor_Game_Base &);
 	~Editor_Interactive();
 
 public:
-	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
-	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
+	Widelands::Editor_Game_Base const & egbase() const {return m_egbase;}
+	Widelands::Editor_Game_Base       & egbase()       {return m_egbase;}
 
 	void load(std::string const & filename);
 
@@ -59,7 +59,7 @@ public:
 	void think();
 
 	void map_clicked();
-	virtual void set_sel_pos(Node_and_Triangle<>);
+	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
 
       // gets called when a keyboard event occurs
 	bool handle_key(bool down, SDL_keysym);
@@ -100,14 +100,14 @@ public:
 
 	void select_tool(Editor_Tool &, const Editor_Tool::Tool_Index);
 
-	Player * get_player() const throw () {return 0;}
+	Widelands::Player * get_player() const throw () {return 0;}
 
       // action functions
       void exit();
 
       // reference functions
-	void   reference_player_tribe(const Player_Number, const void * const);
-	void unreference_player_tribe(const Player_Number, const void * const);
+	void   reference_player_tribe(Widelands::Player_Number, void const *);
+	void unreference_player_tribe(Widelands::Player_Number, void const *);
       bool is_player_tribe_referenced(int32_t);
       void set_need_save(bool t) {m_need_save=t;}
 
@@ -133,7 +133,7 @@ private:
 	int32_t m_realtime;
 
       // UI ownings
-	Editor_Game_Base & m_egbase;
+	Widelands::Editor_Game_Base & m_egbase;
 	UI::UniqueWindow::Registry m_toolmenu;
 	UI::UniqueWindow::Registry m_toolsizemenu;
 	UI::UniqueWindow::Registry m_playermenu;

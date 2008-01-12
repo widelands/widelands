@@ -35,6 +35,8 @@
 
 #include <stdio.h>
 
+namespace Widelands {
+
 TrainingSite_Descr::TrainingSite_Descr
 (const Tribe_Descr & tribe_descr, const std::string & trainingsite_name) :
 ProductionSite_Descr(tribe_descr, trainingsite_name),
@@ -945,3 +947,5 @@ void TrainingSite::program_end(Game * g, bool success)
 	if (relaunch)
 		find_and_start_next_program(g);
 }
+
+};

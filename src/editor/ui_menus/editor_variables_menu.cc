@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,22 +32,25 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 
+#include "upcast.h"
+
+using Widelands::MapVariableManager;
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
 struct New_Variable_Window : public UI::Window {
-      New_Variable_Window(Editor_Interactive*);
+	New_Variable_Window(Editor_Interactive &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
-      MapVariable* get_variable() {return m_variable;}
+	Widelands::MapVariable * get_variable() {return m_variable;}
 
 private:
-      Editor_Interactive* m_parent;
-      MapVariable* m_variable;
+	Editor_Interactive     & m_parent;
+	Widelands::MapVariable * m_variable;
 	enum Variable_Type {Integer_Type, String_Type};
 	UI::IDButton<New_Variable_Window, const Variable_Type> button_integer;
 	UI::IDButton<New_Variable_Window, const Variable_Type> button_string;
@@ -56,8 +59,8 @@ private:
 	void clicked_new(const Variable_Type);
 };
 
-New_Variable_Window::New_Variable_Window(Editor_Interactive* parent) :
-UI::Window(parent, 0, 0, 135, 55, _("New Variable").c_str()),
+New_Variable_Window::New_Variable_Window(Editor_Interactive & parent) :
+UI::Window(&parent, 0, 0, 135, 55, _("New Variable").c_str()),
 
 m_parent(parent),
 m_variable(0),
@@ -108,18 +111,18 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
 
    char buffer[256];
 
-	MapVariableManager & mvm = m_parent->egbase().map().get_mvm();
+	MapVariableManager & mvm = m_parent.egbase().map().get_mvm();
 	for (uint32_t n = 1; mvm.get_variable(buffer); ++n)
 		snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
 
    std::string name = buffer;
 	switch (i) {
 	case Integer_Type:
-         m_variable = new Int_MapVariable(0);
+		m_variable = new Widelands::Int_MapVariable(0);
          break;
 
 	case String_Type:
-         m_variable = new String_MapVariable(0);
+		m_variable = new Widelands::String_MapVariable(0);
          break;
 	}
 
@@ -135,14 +138,15 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
  */
 struct Edit_Variable_Window : public UI::Window {
 	Edit_Variable_Window
-		(Editor_Interactive &, UI::Table<MapVariable &>::Entry_Record &);
+		(Editor_Interactive &,
+		 UI::Table<Widelands::MapVariable &>::Entry_Record &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive                     & m_parent;
-	UI::Table<MapVariable &>::Entry_Record & m_te;
+	UI::Table<Widelands::MapVariable &>::Entry_Record & m_te;
 	UI::Textarea                             m_label_name;
 	UI::Edit_Box                             m_name;
 	UI::Textarea                             m_label_value;
@@ -156,7 +160,8 @@ private:
 #define spacing 5
 
 Edit_Variable_Window::Edit_Variable_Window
-(Editor_Interactive & parent, UI::Table<MapVariable &>::Entry_Record & te)
+(Editor_Interactive & parent,
+ UI::Table<Widelands::MapVariable &>::Entry_Record & te)
 :
 UI::Window(&parent, 0, 0, 250, 85, _("Edit Variable").c_str()),
 
@@ -210,10 +215,11 @@ void Edit_Variable_Window::clicked_ok() {
    // Get the a name
 
    // Extract value
-	MapVariable & var = UI::Table<MapVariable &>::get(m_te);
+	Widelands::MapVariable & var =
+		UI::Table<Widelands::MapVariable &>::get(m_te);
 
 	switch (var.get_type()) {
-	case MapVariable::MVT_INT: {
+	case Widelands::MapVariable::MVT_INT: {
          char* endp;
 			const int32_t ivar = strtol(m_value.get_text(), &endp, 0);
 
@@ -232,13 +238,14 @@ void Edit_Variable_Window::clicked_ok() {
          char buffer[256];
          snprintf(buffer, sizeof(buffer), "%i", ivar);
 
-			static_cast<Int_MapVariable &>(var).set_value(ivar);
+			static_cast<Widelands::Int_MapVariable &>(var).set_value(ivar);
 			m_te.set_string(1, buffer);
 	}
 		break;
 
-	case MapVariable::MVT_STRING: {
-		static_cast<String_MapVariable &>(var).set_value(m_value.get_text());
+	case Widelands::MapVariable::MVT_STRING: {
+		static_cast<Widelands::String_MapVariable &>(var).set_value
+			(m_value.get_text());
 		m_te.set_string(1, m_value.get_text());
 	}
       break;
@@ -259,9 +266,10 @@ Create all the buttons etc...
 ===============
 */
 #define spacing 5
-Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
+Editor_Variables_Menu::Editor_Variables_Menu
+(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
 :
-UI::UniqueWindow(parent, registry, 410, 330, _("Variables Menu")),
+UI::UniqueWindow(&parent, registry, 410, 330, _("Variables Menu")),
 m_parent(parent),
 
 m_table
@@ -300,7 +308,7 @@ m_button_del
    m_table.double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
 
    // Add all variables
-	const MapVariableManager & mvm = m_parent->egbase().map().get_mvm();
+	const MapVariableManager & mvm = m_parent.egbase().map().get_mvm();
 	const MapVariableManager::Index nr_variables = mvm.get_nr_variables();
 	for (MapVariableManager::Index i = 0; i < nr_variables; ++i)
 		insert_variable(mvm.get_variable_by_nr(i));
@@ -332,16 +340,14 @@ void Editor_Variables_Menu::clicked_new() {
 	}
 }
 void Editor_Variables_Menu::clicked_edit() {
-	Edit_Variable_Window evw(*m_parent, m_table.get_selected_record());
+	Edit_Variable_Window evw(m_parent, m_table.get_selected_record());
 	if (evw.run()) m_table.sort();
 }
 void Editor_Variables_Menu::clicked_del()      {
-	MapVariable & mv = m_table.get_selected();
-
          // Otherwise, delete button should be disabled
-	assert(not mv.is_delete_protected());
+	assert(not m_table.get_selected().is_delete_protected());
 
-	m_parent->egbase().map().get_mvm().delete_variable(mv.get_name());
+	m_parent.egbase().map().get_mvm().delete_variable(m_table.get_selected());
 	m_table.remove_selected();
 
 	m_button_edit.set_enabled(false);
@@ -352,7 +358,7 @@ void Editor_Variables_Menu::clicked_del()      {
  * The table has been selected
  */
 void Editor_Variables_Menu::table_selected(uint32_t n) {
-	assert(n < UI::Table<MapVariable &>::no_selection_index());
+	assert(n < UI::Table<Widelands::MapVariable &>::no_selection_index());
 	m_button_edit.set_enabled(true);
 
 	m_button_del.set_enabled(m_table[n].is_delete_protected());
@@ -366,38 +372,23 @@ void Editor_Variables_Menu::table_dblclicked(uint32_t) {clicked_edit();}
 /*
  * Insert this map variable into the table
  */
-void Editor_Variables_Menu::insert_variable(MapVariable & var) {
-   const char* pic = 0;
+void Editor_Variables_Menu::insert_variable(Widelands::MapVariable & var) {
+	char const * pic;
+	std::string val;
+	if        (upcast(Widelands::String_MapVariable const, svar, &var)) {
+		pic = "pics/map_variable_string.png";
+		val = svar->get_value();
+	} else if (upcast(Widelands::Int_MapVariable    const, ivar, &var)) {
+		pic = "pics/map_variable_int.png";
+		val = ivar->get_value();
+	} else
+		pic = "nothing";
 
-	const MapVariable::Type type = var.get_type();
-	switch (type) {
-	case MapVariable::MVT_INT:    pic = "pics/map_variable_int.png";    break;
-	case MapVariable::MVT_STRING: pic = "pics/map_variable_string.png"; break;
-	default:                      pic = "nothing";
-	};
+	UI::Table<Widelands::MapVariable &>::Entry_Record & t =
+		m_table.add(var, g_gr->get_picture(PicMod_UI, pic), true);
 
-	UI::Table<MapVariable &>::Entry_Record & t = m_table.add
-		(var, g_gr->get_picture(PicMod_UI, pic), true);
 	t.set_string(0, var.get_name());
-
-   std::string val;
-
-	switch (type) {
-	case MapVariable::MVT_INT: {
-         char buffer[256];
-         snprintf(buffer, sizeof(buffer), "%i", static_cast<Int_MapVariable &>(var).get_value());
-         val = buffer;
-	}
-		break;
-
-	case MapVariable::MVT_STRING:
-      val = static_cast<String_MapVariable &>(var).get_value();
-      break;
-
-	default: val = "";
-	}
-	t.set_string(0, var.get_name());
-	t.set_string(1, val.c_str());
+	t.set_string(1, val);
 
 	if (var.is_delete_protected()) t.set_color(RGBColor(255, 0, 0));
 

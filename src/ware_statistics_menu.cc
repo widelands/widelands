@@ -377,7 +377,7 @@ m_parent(&parent)
    int32_t cur_ware = 0;
    int32_t dposy = 0;
    posy += PLOT_HEIGHT+ 2*spacing;
-	const Tribe_Descr & tribe = parent.get_player()->tribe();
+	Widelands::Tribe_Descr const & tribe = parent.get_player()->tribe();
 	for (uint32_t y = 0; y < nr_rows; ++y) {
       posx = spacing;
 		for
@@ -385,7 +385,8 @@ m_parent(&parent)
 			 x < wares_per_row and cur_ware < nr_wares;
 			 ++x, ++cur_ware)
 		{
-			const Item_Ware_Descr & ware = *tribe.get_ware_descr(cur_ware);
+			Widelands::Item_Ware_Descr const & ware =
+				*tribe.get_ware_descr(cur_ware);
 			WSM_Checkbox & cb = *new WSM_Checkbox
 				(this, posx, posy, cur_ware, ware.get_icon(), colors[cur_ware]);
 			cb.set_tooltip(ware.descname().c_str());

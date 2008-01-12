@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ m_viewy       (0),
 m_pic_map_spot(g_gr->get_picture(PicMod_Game, "pics/map_spot.png")),
 flags         (MiniMap::Terrn)
 {
-	const Map & map = iabase.egbase().map();
+	Widelands::Map const & map = iabase.egbase().map();
 	set_size(w ? w : map.get_width(), h ? h : map.get_height());
 }
 
@@ -89,7 +89,8 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 		// calculates the coordinates corresponding to the mouse position
-	Coords c(m_viewx + 1 - get_w() / 2 + x, m_viewy + 1 - get_h() / 2 + y);
+	Widelands::Coords c
+		(m_viewx + 1 - get_w() / 2 + x, m_viewy + 1 - get_h() / 2 + y);
 
 	m_iabase.egbase().map().normalize_coords(&c);
 

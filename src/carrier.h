@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,12 +19,13 @@
 
 #include "worker.h"
 
+namespace Widelands {
 
 /**
  * Carrier is a worker who is employed by a Road.
  */
 struct Carrier : public Worker {
-	friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
+	friend struct Map_Bobdata_Data_Packet;
 
 	struct Descr : public Worker_Descr {
 		Descr(const Tribe_Descr &t, const std::string & carrier_name)
@@ -77,4 +78,6 @@ private:
 
 	/// -1: no ware acked; 0/1: acked ware for start/end flag of road
 	int32_t m_acked_ware;
+};
+
 };

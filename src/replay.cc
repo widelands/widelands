@@ -25,11 +25,12 @@
 #include "random.h"
 #include "replay.h"
 #include "save_handler.h"
-#include "streamread.h"
 #include "streamwrite.h"
 #include "wexception.h"
 
 #include "log.h"
+
+namespace Widelands {
 
 // File format definitions
 #define REPLAY_MAGIC 0x2E21A101
@@ -87,7 +88,8 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 	gl.load_game();
 	delete fs;
 
-	m_cmdlog = g_fs->OpenStreamRead(filename);
+	m_cmdlog =
+		static_cast<Widelands::StreamRead *>(g_fs->OpenStreamRead(filename));
 
 	try {
 		uint32_t const magic = m_cmdlog->Unsigned32();
@@ -250,7 +252,8 @@ ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
 	game.enqueue_command
 		(new Cmd_ReplaySyncWrite(game.get_gametime() + SYNC_INTERVAL));
 
-	m_cmdlog = g_fs->OpenStreamWrite(filename);
+	m_cmdlog =
+		static_cast<Widelands::StreamWrite *>(g_fs->OpenStreamWrite(filename));
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
 	m_cmdlog->Unsigned8(REPLAY_VERSION);
 
@@ -299,3 +302,5 @@ void ReplayWriter::SendSync(const md5_checksum& hash)
 	m_cmdlog->Data(hash.data, sizeof(hash.data));
 	m_cmdlog->Flush();
 }
+
+};

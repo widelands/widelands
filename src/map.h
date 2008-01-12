@@ -21,7 +21,7 @@
 #define __S__MAP_H
 
 #include "field.h"
-#include "geometry.h"
+#include "widelands_geometry.h"
 #include "interval.h"
 #include "world.h"
 
@@ -29,11 +29,14 @@
 #include <string>
 #include <vector>
 
+struct Overlay_Manager;
+struct S2_Map_Loader;
+
+namespace Widelands {
+
 class BaseImmovable;
-class FileRead;
 class Player;
 class World;
-class Overlay_Manager;
 class MapVariableManager;
 class MapObjectiveManager;
 class MapEventManager;
@@ -144,10 +147,10 @@ typedef uint8_t Direction;
 struct Map {
 	friend class Editor_Game_Base;
    friend class Map_Loader;
-   friend class S2_Map_Loader;
-   friend class Widelands_Map_Loader;
-	friend class Widelands_Map_Elemental_Data_Packet;
-   friend class Widelands_Map_Extradata_Data_Packet;
+	friend class ::S2_Map_Loader;
+	friend struct WL_Map_Loader;
+	friend struct Map_Elemental_Data_Packet;
+	friend struct Map_Extradata_Data_Packet;
    friend class Editor;
    friend class Main_Menu_New_Map;
 
@@ -1282,11 +1285,14 @@ inline void move_r(const X_Coordinate mapwidth, FCoords & f, Map::Index & i) {
 }
 
 
-#define iterate_Map_FCoords(map, extent, fc)                                   \
-	FCoords fc(map.get_fcoords(Coords(0, 0)));                                  \
-	for (fc.y = 0; fc.y < extent.h; ++fc.y)                                     \
-		for (fc.x = 0; fc.x < extent.w; ++fc.x, ++fc.field)                      \
+#define iterate_Map_FCoords(map, extent, fc)                                  \
+	Widelands::FCoords fc(map.get_fcoords(Widelands::Coords(0, 0)));           \
+	for (fc.y = 0; fc.y < extent.h; ++fc.y)                                    \
+		for (fc.x = 0; fc.x < extent.w; ++fc.x, ++fc.field)                     \
 
 
 std::string g_MapVariableCallback(std::string str, void* data);
+
+};
+
 #endif // __S__MAP_H

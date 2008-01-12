@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,14 +23,17 @@
 #include "building.h"
 #include "transport.h"
 
+struct EncodeData;
+struct Interactive_Player;
+struct Profile;
+
+namespace Widelands {
+
 class Editor_Game_Base;
-class Interactive_Player;
-class Profile;
 class Soldier;
 class Tribe_Descr;
 class WareInstance;
 class WareList;
-struct EncodeData;
 
 
 /*
@@ -60,7 +63,7 @@ private:
 
 
 class Warehouse : public Building {
-   friend class Widelands_Map_Buildingdata_Data_Packet;
+   friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
 
@@ -155,6 +158,8 @@ private:
 	WareList    m_wares;
 	WareList    m_workers; //  we use this to keep the soldiers
 	Warehouse * m_warehouse;
+};
+
 };
 
 #endif

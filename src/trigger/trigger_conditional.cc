@@ -26,6 +26,8 @@
 
 #include "log.h"
 
+namespace Widelands {
+
 const char * const TriggerConditional_Factory::operators[] =
 {"NOT", "AND", "OR", "XOR", "(", ")", "trigger"};
 
@@ -313,3 +315,5 @@ TriggerNOT::TriggerNOT(TriggerConditional* cond) :
 bool TriggerNOT::do_eval(bool t) {
    return (!t);
 }
+
+};

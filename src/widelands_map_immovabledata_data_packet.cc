@@ -19,15 +19,14 @@
 
 #include "widelands_map_immovabledata_data_packet.h"
 
-#include "fileread.h"
-#include "filewrite.h"
 #include "editor_game_base.h"
 #include "immovable.h"
 #include "immovable_program.h"
 #include "map.h"
 #include "player.h"
-#include <stdint.h>
 #include "tribe.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
@@ -36,21 +35,16 @@
 
 #include <map>
 
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
 
-Widelands_Map_Immovabledata_Data_Packet::
-~Widelands_Map_Immovabledata_Data_Packet
-()
-{}
-
-
-void Widelands_Map_Immovabledata_Data_Packet::Read
+void Map_Immovabledata_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base *,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip)
@@ -65,9 +59,9 @@ throw (_wexception)
 	}
 
 	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version==CURRENT_PACKET_VERSION) {
+	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (;;) {
-			uint32_t reg=fr.Unsigned32();
+			uint32_t const reg = fr.Unsigned32();
 			if (reg==0xffffffff) break; // Last immovable
 
 			assert(ol->is_object_known(reg));
@@ -110,19 +104,16 @@ throw (_wexception)
 		}
 	} else
 		throw wexception
-			("Unknown version %i in Widelands_Map_Immovabledata_Data_Packet!",
+			("Unknown version %u in Map_Immovabledata_Data_Packet!",
 			 packet_version);
 }
 
 
-/*
- * Write Function
- */
-void Widelands_Map_Immovabledata_Data_Packet::Write
-(FileSystem &,
- Editor_Game_Base*,
- Widelands_Map_Map_Object_Saver * const)
+void Map_Immovabledata_Data_Packet::Write
+(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	throw wexception("Immovable_Data_Packet is obsolete");
 }
+
+};

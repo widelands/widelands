@@ -25,6 +25,8 @@
 #include "workarea_info.h"
 #include "worker.h"
 
+namespace Widelands {
+
 /// \todo (Antonio Trueba#1#): Get rid of forward class declaration (Chicken-and-egg problem)
 class Worker_Descr;
 
@@ -149,5 +151,6 @@ private:
 		static const ParseMap       s_parsemap[];
 };
 
+};
 
 #endif // __S__WORKER_PROGRAM_H

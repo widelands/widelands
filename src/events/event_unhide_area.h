@@ -24,6 +24,10 @@
 #include "event_player_area.h"
 #include "i18n.h"
 
+struct Event_Unhide_Area_Option_Menu;
+
+namespace Widelands {
+
 /**
  * Makes an area seen to a player. duration determines how long time the area
  * will be in full vision for the player. Valid values are:
@@ -32,7 +36,7 @@
  * others:                      Gives a full view during the specified duration.
  */
 struct Event_Unhide_Area : public Event_Player_Area {
-	friend struct Event_Unhide_Area_Option_Menu;
+	friend struct ::Event_Unhide_Area_Option_Menu;
 	Event_Unhide_Area()
 		:
 		Event_Player_Area
@@ -49,6 +53,8 @@ struct Event_Unhide_Area : public Event_Player_Area {
 
 private:
 	Duration duration;
+};
+
 };
 
 #endif

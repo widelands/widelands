@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,10 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
+namespace Widelands {
 class Event;
 class EventChain;
+};
 namespace UI {
 template <typename T> struct Listselect;
 template <typename T> struct Button;
@@ -37,7 +39,8 @@ struct Edit_Box;
  * before it can return
  */
 struct Editor_Event_Menu_Edit_EventChain : public UI::Window {
-	Editor_Event_Menu_Edit_EventChain(Editor_Interactive &, EventChain *);
+	Editor_Event_Menu_Edit_EventChain
+		(Editor_Interactive &, Widelands::EventChain &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
@@ -57,15 +60,15 @@ private:
 	void cs_selected      (uint32_t);
 	void cs_double_clicked(uint32_t);
 
-	UI::Listselect<Event &> *m_available_events;
-	UI::Listselect<Event &> *m_events;
+	UI::Listselect<Widelands::Event &> *m_available_events;
+	UI::Listselect<Widelands::Event &> *m_events;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_insert_btn;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_delete_btn;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvup_btn;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvdown_btn;
       UI::Checkbox         *m_morethanonce;
       UI::Edit_Box         *m_name;
-      EventChain         *m_event_chain;
+	Widelands::EventChain              & m_event_chain;
       bool                m_edit_trigcond;
 };
 

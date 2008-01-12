@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2002-2006 by the Widelands Development Team
+* Copyright (C) 2002-2008 by the Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -23,6 +23,8 @@
 #include "cmd_queue.h"
 #include "map_eventchain_manager.h"
 
+namespace Widelands {
+
 class Cmd_CheckEventChain : public GameLogicCommand {
 private:
 	MapEventChainManager::Index m_eventchain_id;
@@ -32,18 +34,14 @@ public:
 	Cmd_CheckEventChain(int32_t, int32_t);
 
 	// Write these commands to a file (for savegames)
-	virtual void Write
-		(FileWrite             &,
-		 Editor_Game_Base               &,
-		 Widelands_Map_Map_Object_Saver &);
-	virtual void Read
-		(FileRead               &,
-		 Editor_Game_Base                &,
-		 Widelands_Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 	virtual int32_t get_id() {return QUEUE_CMD_CHECK_EVENTCHAIN;} // Get this command id
 
 	virtual void execute(Game *);
+};
+
 };
 
 #endif

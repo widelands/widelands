@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,26 +26,29 @@
 struct Editor_Noise_Height_Tool : public Editor_Tool {
 	Editor_Noise_Height_Tool
 		(Editor_Set_Height_Tool & the_set_tool,
-		 const interval<Field::Height> the_interval =
-		 interval<Field::Height>(10, 14))
+		 const interval<Widelands::Field::Height> the_interval =
+		 interval<Widelands::Field::Height>(10, 14))
 		:
 		Editor_Tool(the_set_tool, the_set_tool),
 		m_set_tool(the_set_tool),
 		m_interval(the_interval)
 	{}
 
-	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl
+		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_noise_height.png";}
 
-	interval<Field::Height> get_interval() const throw () {return m_interval;}
-	void set_interval(const interval<Field::Height> i) throw () {m_interval = i;}
+	interval<Widelands::Field::Height> get_interval() const throw ()
+	{return m_interval;}
+	void set_interval(const interval<Widelands::Field::Height> i) throw ()
+	{m_interval = i;}
 
 	Editor_Set_Height_Tool & set_tool() const throw () {return m_set_tool;}
 
 private:
 	Editor_Set_Height_Tool & m_set_tool;
-	interval<Field::Height> m_interval;
+	interval<Widelands::Field::Height> m_interval;
 };
 
 #endif

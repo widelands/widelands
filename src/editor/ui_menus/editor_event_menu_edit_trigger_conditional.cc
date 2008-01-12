@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,7 @@
 #include "trigger/trigger.h"
 #include "trigger/trigger_conditional.h"
 
+using Widelands::MapTriggerManager;
 
 inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -40,8 +41,8 @@ inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
 (Editor_Interactive &       parent,
- TriggerConditional * const cond,
- EventChain         *       chain)
+ Widelands::TriggerConditional * const cond,
+ Widelands::EventChain         *       chain)
 :
 UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
 m_given_cond (cond),
@@ -180,13 +181,13 @@ m_event_chain(chain)
 
    posx += 80 + spacing;
    new UI::Textarea(this, posx, offsy, _("Available Triggers: "), Align_Left);
-   m_trigger_list=new UI::Listselect<Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
+   m_trigger_list=new UI::Listselect<Widelands::Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
 	const MapTriggerManager & mtm = parent.egbase().map().get_mtm();
 	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
-		Trigger & tr = mtm.get_trigger_by_nr(i);
+		Widelands::Trigger & tr = mtm.get_trigger_by_nr(i);
 		m_trigger_list->add(tr.get_name(), tr);
 	}
    m_trigger_list->sort();
@@ -212,17 +213,17 @@ m_event_chain(chain)
 
    // Add conditional
 	if (cond) {
-		std::vector<TriggerConditional_Factory::Token> * tokens =
+		std::vector<Widelands::TriggerConditional_Factory::Token> * tokens =
 			cond->get_infix_tokenlist();
 		for (uint32_t i = 0; i < tokens->size(); ++i) {
 			TriggerConditional_Factory::Token & t =
 				*new TriggerConditional_Factory::Token((*tokens)[i]);
 			assert(t.token <= TriggerConditional_Factory::TRIGGER);
 			m_construction->add
-				(t.token == TriggerConditional_Factory::TRIGGER ?
-				 static_cast<Trigger *>(t.data)->get_name()
+				(t.token == Widelands::TriggerConditional_Factory::TRIGGER ?
+				 static_cast<Widelands::Trigger *>(t.data)->get_name()
 				 :
-				 TriggerConditional_Factory::operators[t.token],
+				 Widelands::TriggerConditional_Factory::operators[t.token],
 				 t,
 				 -1,
 				 true);
@@ -257,13 +258,14 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 	for (uint32_t i = 0; i < construction_size; ++i)
 		tok.push_back((*m_construction)[i]);
 
-      try {
-         if (!tok.size()) throw TriggerConditional_Factory::SyntaxError();
-         TriggerConditional* cond = TriggerConditional_Factory::create_from_infix(m_event_chain, tok);
-         assert(cond);
-         m_given_cond = cond;
+	try {
+		if (!tok.size())
+			throw Widelands::TriggerConditional_Factory::SyntaxError();
+		Widelands::TriggerConditional & cond =
+			*TriggerConditional_Factory::create_from_infix(m_event_chain, tok);
+		m_given_cond = &cond;
          end_modal(1);
-		} catch (TriggerConditional_Factory::SyntaxError err) {
+	} catch (Widelands::TriggerConditional_Factory::SyntaxError) {
 			UI::Modal_Message_Box mb
 				(&eia(),
 				 _("Syntax Error"),
@@ -287,10 +289,11 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_operator
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger() {
-	Trigger & trigger = m_trigger_list->get_selected();
-      TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token();
+	Widelands::Trigger & trigger = m_trigger_list->get_selected();
+      Widelands::TriggerConditional_Factory::Token & t =
+		*new TriggerConditional_Factory::Token();
       t.data = &trigger;
-      t.token = TriggerConditional_Factory::TRIGGER;
+	t.token = Widelands::TriggerConditional_Factory::TRIGGER;
 	m_construction->add(trigger.get_name(), t, -1, true);
 	}
 

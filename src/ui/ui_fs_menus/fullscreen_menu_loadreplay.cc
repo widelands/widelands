@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,10 @@
 #include "replay.h"
 
 
-Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay(Game* g) :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
+Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay
+(Widelands::Game * const g)
+:
+Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 	m_game(g),
 
@@ -93,9 +95,9 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 		FileSystem* fs = 0;
 
 		try {
-			Game_Preload_Data_Packet gpdp;
+			Widelands::Game_Preload_Data_Packet gpdp;
 			fs = g_fs->MakeSubFileSystem(savename);
-			Game_Loader gl(*fs, m_game);
+			Widelands::Game_Loader gl(*fs, m_game);
 			gl.preload_game(&gpdp);
 
 			char* fname = strdup(FileSystem::FS_Filename(pname->c_str()));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,18 +65,19 @@
 
 #include "log.h"
 
-Widelands_Map_Saver::Widelands_Map_Saver
-(FileSystem & fs, Editor_Game_Base* egbase) :
-m_egbase(egbase), m_fs(fs), m_mos(0)
+namespace Widelands {
+
+Map_Saver::Map_Saver(FileSystem & fs, Editor_Game_Base * egbase)
+	: m_egbase(egbase), m_fs(fs), m_mos(0)
 {}
 
 
-Widelands_Map_Saver::~Widelands_Map_Saver() {delete m_mos;}
+Map_Saver::~Map_Saver() {delete m_mos;}
 
 
-void Widelands_Map_Saver::save() throw (_wexception) {
+void Map_Saver::save() throw (_wexception) {
 	delete m_mos;
-	m_mos = new Widelands_Map_Map_Object_Saver();
+	m_mos = new Map_Map_Object_Saver();
 
    // The binary data is saved in an own directory
    // to keep it hidden from the poor debuggers
@@ -86,51 +87,45 @@ void Widelands_Map_Saver::save() throw (_wexception) {
    // Start with writing the map out, first Elemental data
    // PRELOAD DATA BEGIN
    log("Writing Elemental Data ... ");
-	{Widelands_Map_Elemental_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Elemental_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
 
    // now player names and tribes
    log("Writing Player Names And Tribe Data ... ");
-	{
-		Widelands_Map_Player_Names_And_Tribes_Data_Packet p;
-		p.Write(m_fs, m_egbase, m_mos);
-	}
+	{Map_Player_Names_And_Tribes_Data_Packet p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
    // PRELOAD DATA END
 
    // now heights
    log("Writing Heights Data ... ");
-	{Widelands_Map_Heights_Data_Packet        p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Heights_Data_Packet                 p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    // and terrains
    log("Writing Terrain Data ... ");
-	{Widelands_Map_Terrain_Data_Packet        p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Terrain_Data_Packet                 p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    // now player pos
    log("Writing Player Start Position Data ... ");
-	{
-		Widelands_Map_Player_Position_Data_Packet p;
-		p.Write(m_fs, m_egbase, m_mos);
-	}
+	{Map_Player_Position_Data_Packet         p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    // now bobs
    log("Writing Bob Data ... ");
-	{Widelands_Map_Bob_Data_Packet            p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Bob_Data_Packet                     p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    // now resources
    log("Writing Resources Data ... ");
-	{Widelands_Map_Resources_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Resources_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    // NON MANDATORY PACKETS BELOW THIS POINT
    // Map Extra Data
    log("Writing Map Extra Data ... ");
-	{Widelands_Map_Extradata_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
 	const Map & map = *m_egbase->get_map();
@@ -138,21 +133,21 @@ void Widelands_Map_Saver::save() throw (_wexception) {
    // Triggers
 	if (map.get_mtm().get_nr_triggers()) {
       log("Writing Trigger Data ... ");
-		Widelands_Map_Trigger_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);
+		Map_Trigger_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");
 	}
 
    // Events
 	if (map.get_mem().get_nr_events()) {
       log("Writing Event Data ... ");
-		Widelands_Map_Event_Data_Packet        p; p.Write(m_fs, m_egbase, m_mos);
+		Map_Event_Data_Packet                 p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");
 	}
 
    // Event Chains
 	if (map.get_mecm().get_nr_eventchains()) {
       log("Writing Event Chain Data ... ");
-		Widelands_Map_EventChain_Data_Packet   p; p.Write(m_fs, m_egbase, m_mos);
+		Map_EventChain_Data_Packet            p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");
 	}
 
@@ -164,7 +159,7 @@ void Widelands_Map_Saver::save() throw (_wexception) {
 		for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
 			if (player->is_building_allowed(i)) {
 				log("Writing Allowed Buildings Data ... ");
-				Widelands_Map_Allowed_Buildings_Data_Packet p;
+				Map_Allowed_Buildings_Data_Packet p;
 				p.Write(m_fs, m_egbase, m_mos);
 				log("done!\n ");
 				goto end_outer_loop;
@@ -176,90 +171,81 @@ void Widelands_Map_Saver::save() throw (_wexception) {
    // change this order without knowing what you do
    // EXISTENT PACKETS
    log("Writing Flag Data ... ");
-	{Widelands_Map_Flag_Data_Packet           p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Flag_Data_Packet                    p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    log("Writing Road Data ... ");
-	{Widelands_Map_Road_Data_Packet           p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Road_Data_Packet                    p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    log("Writing Building Data ... ");
-	{Widelands_Map_Building_Data_Packet       p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Building_Data_Packet                p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
 
    log("Writing Map Ware Data ... ");
-	{Widelands_Map_Ware_Data_Packet           p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Ware_Data_Packet                    p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
 	log("Writing Map Objects ... ");
-	{
-		Widelands_Map_Object_Packet p;
-		p.Write(m_fs, m_egbase, m_mos);
-	}
+	{Map_Object_Packet                       p; p.Write(m_fs, m_egbase, m_mos);}
 	log("done!\n ");
 
    // DATA PACKETS
 	if (m_mos->get_nr_flags()) {
       log("Writing Flagdata Data ... ");
-		{Widelands_Map_Flagdata_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Flagdata_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
 	}
 
 	if (m_mos->get_nr_roads()) {
       log("Writing Roaddata Data ... ");
-		{Widelands_Map_Roaddata_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Roaddata_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
 	}
 
 
 	if (m_mos->get_nr_buildings()) {
       log("Writing Buildingdata Data ... ");
-		{
-			Widelands_Map_Buildingdata_Data_Packet p;
-			p.Write(m_fs, m_egbase, m_mos);
-		}
+		{Map_Buildingdata_Data_Packet         p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
 	}
 
 
 	if (m_mos->get_nr_wares()) {
       log("Writing Waredata Data ... ");
-		{Widelands_Map_Waredata_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Waredata_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
 	}
 
 	if (m_mos->get_nr_bobs()) {
       log("Writing Bobdata Data ... ");
-	   {Widelands_Map_Bobdata_Data_Packet     p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Bobdata_Data_Packet              p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
 	}
 
    log("Writing Owned-Fields Data ... ");
-	{Widelands_Map_Owned_Fields_Data_Packet   p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Owned_Fields_Data_Packet            p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    log("Writing Seen-Fields Data ... ");
-	{Widelands_Map_Seen_Fields_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Seen_Fields_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    log("Writing Area Watchers Data ... ");
-	{
-		Widelands_Map_Players_AreaWatchers_Data_Packet  p;
-		p.Write(m_fs, m_egbase, m_mos);
-	}
+	{Map_Players_AreaWatchers_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    log("Writing Players Unseen Data ... ");
-	{Widelands_Map_Players_View_Data_Packet p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Players_View_Data_Packet            p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    log("Writing Variable Data ... ");
-	{Widelands_Map_Variable_Data_Packet       p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Variable_Data_Packet                p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    log("Writing Objective Data ... ");
-	{Widelands_Map_Objective_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Objective_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
 	if (m_mos->get_nr_unsaved_objects())
@@ -268,3 +254,5 @@ void Widelands_Map_Saver::save() throw (_wexception) {
 			 "committing!",
 			 m_mos->get_nr_unsaved_objects());
 }
+
+};

@@ -24,6 +24,8 @@
 #include "map.h"
 #include "trigger_referencer.h"
 
+namespace Widelands {
+
 /*
  * Trigger himself
  */
@@ -41,3 +43,5 @@ void Trigger::unreference(TriggerReferencer* ref) {
            m_referencers.erase(cur);
 	}
 }
+
+};

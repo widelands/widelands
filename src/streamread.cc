@@ -18,7 +18,10 @@
  */
 
 #include "streamread.h"
+
 #include "wexception.h"
+
+#include <cassert>
 
 StreamRead::~StreamRead()
 {
@@ -30,7 +33,7 @@ StreamRead::~StreamRead()
  * If the requested number of bytes couldn't be read, this function
  * fails by throwing an exception.
  */
-void StreamRead::DataComplete(void* const data, const size_t size)
+void StreamRead::DataComplete(void * const data, const size_t size)
 {
 	size_t read = Data(data, size);
 
@@ -91,3 +94,19 @@ std::string StreamRead::String()
 	return x;
 }
 
+bool StreamRead::ReadLine(char * buf, const char * const buf_end) {
+	assert(buf < buf_end);
+
+	if (EndOfFile()) return false;
+	for (char c; Data(&c, 1) and c != '\n';) {
+		if (c == '\r') continue;
+		*buf = c;
+		if (c == 0) throw Null_In_Line();
+		if (++buf == buf_end) {
+			buf[-1] = 0;
+			throw Buffer_Overflow();
+		}
+	}
+	*buf = 0;
+	return true;
+}

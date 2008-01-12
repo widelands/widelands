@@ -26,8 +26,6 @@
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
-#include <stdint.h>
-#include <string>
 
 /*
  * Fullscreen Menu for all Campaigns

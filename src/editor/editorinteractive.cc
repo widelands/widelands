@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,9 @@
 
 #include <SDL_keysym.h>
 
-Editor_Interactive::Editor_Interactive(Editor_Game_Base & e) :
+using Widelands::Building;
+
+Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 Interactive_Base(e), m_egbase(e)
 {
 
@@ -146,11 +148,11 @@ Editor_Interactive::~Editor_Interactive() {unset_sel_picture();}
 void Editor_Interactive::load(std::string const & filename) {
 	assert(filename.size());
 
-	Map & map = egbase().map();
+	Widelands::Map & map = egbase().map();
 
 	egbase().cleanup_for_load(true, false);
 
-	Map_Loader * const ml = map.get_correct_loader(filename.c_str());
+	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 
 	UI::ProgressWindow loader_ui;
 	ml->preload_map(true);
@@ -163,14 +165,15 @@ void Editor_Interactive::load(std::string const & filename) {
 	// Now update all the visualisations
 	// Player positions
 	std::string text;
-	const Player_Number nr_players = map.get_nrplayers();
+	Widelands::Player_Number const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players)
-		if (const Coords sp = map.get_starting_pos(p))
+		if (Widelands::Coords const sp = map.get_starting_pos(p))
 			//  Have overlay on starting position only when it has no building.
 			if (not dynamic_cast<const Building *>(map[sp].get_immovable())) {
-				char picname[] ="pics/editor_player_??_starting_pos.png";
-				picname[19] = static_cast<char>(p / 10 + 0x30);
-				picname[20] = static_cast<char>(p % 10 + 0x30);
+				assert(p <= 99); //  2 decimal digits
+				char picname[] ="pics/editor_player_00_starting_pos.png";
+				picname[19] += p / 10;
+				picname[20] += p % 10;
 				const uint32_t picid = g_gr->get_picture(PicMod_Game, picname);
 				uint32_t w, h;
 				g_gr->get_picture_size(picid, w, h);
@@ -180,9 +183,9 @@ void Editor_Interactive::load(std::string const & filename) {
 
 	//  Resources. we do not calculate default resources, therefore we do not
 	//  expect to meet them here.
-	const World & world = map.world();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
-	const Extent extent = map.extent();
+	Widelands::World const &       world           = map.world();
+	Overlay_Manager        &       overlay_manager = map.overlay_manager();
+	Widelands::Extent        const extent          = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		if (const uint8_t amount = fc.field->get_resources_amount()) {
 			const std::string & immname =
@@ -254,7 +257,7 @@ void Editor_Interactive::toggle_objectivesmenu() {
 
 void Editor_Interactive::toggle_variablesmenu() {
 	if (m_variablesmenu.window) delete m_variablesmenu.window;
-	else new Editor_Variables_Menu(this, &m_variablesmenu);
+	else new Editor_Variables_Menu(*this, &m_variablesmenu);
 }
 
 
@@ -271,7 +274,8 @@ void Editor_Interactive::map_clicked() {
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
-void Editor_Interactive::set_sel_pos(const Node_and_Triangle<> sel) {
+void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel)
+{
 	const bool target_changed = tools.current().operates_on_triangles() ?
 		sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	Interactive_Base::set_sel_pos(sel);
@@ -464,7 +468,7 @@ void Editor_Interactive::select_tool
 (Editor_Tool & primary, const Editor_Tool::Tool_Index which)
 {
 	if (which == Editor_Tool::First and &primary != tools.current_pointer) {
-		Map & map = egbase().map();
+		Widelands::Map & map = egbase().map();
       // A new tool has been selected. Remove all
       // registered overlay callback functions
 		map.overlay_manager().register_overlay_callback_function(0, 0);
@@ -486,7 +490,7 @@ void Editor_Interactive::select_tool
  *  or a tribe (for buildings)
  */
 void Editor_Interactive::reference_player_tribe
-(const Player_Number player, const void * const data)
+(Widelands::Player_Number const player, const void * const data)
 {
 	assert(0 < player);
 	assert    (player <= egbase().map().get_nrplayers());
@@ -503,7 +507,7 @@ void Editor_Interactive::reference_player_tribe
  * will leace a reference
  */
 void Editor_Interactive::unreference_player_tribe
-(const Player_Number player, const void * const data)
+(Widelands::Player_Number const player, const void * const data)
 {
 	assert(player <= egbase().map().get_nrplayers());
    assert(data);
@@ -538,7 +542,7 @@ bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
  */
 void Editor_Interactive::run_editor(std::string const & filename)
 {
-	Editor_Game_Base editor;
+	Widelands::Editor_Game_Base editor;
 	Editor_Interactive eia(editor);
 	editor.set_iabase(&eia); //TODO: get rid of this
 	{
@@ -546,7 +550,7 @@ void Editor_Interactive::run_editor(std::string const & filename)
 		g_gr->flush(PicMod_Menu);
 
 		{
-			Map & map = *new Map;
+			Widelands::Map & map = *new Widelands::Map;
 			editor.set_map(&map);
 			if (filename.empty()) {
 				loader_ui.step("Creating empty map...");
@@ -560,7 +564,7 @@ void Editor_Interactive::run_editor(std::string const & filename)
 
 		{ //  Load all tribes into memory
 			std::vector<std::string> tribenames;
-			Tribe_Descr::get_all_tribenames(tribenames);
+			Widelands::Tribe_Descr::get_all_tribenames(tribenames);
 			std::vector<std::string>::const_iterator const tribenames_end =
 				tribenames.end();
 			for

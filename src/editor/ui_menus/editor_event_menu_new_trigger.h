@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class Trigger_Descr;
+namespace Widelands {struct Trigger_Descr;};
 namespace UI {
 template <typename T> struct Listselect;
 struct Multiline_Textarea;
@@ -46,7 +46,7 @@ private:
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 
-	UI::Listselect<Trigger_Descr &> * m_trigger_list;
+	UI::Listselect<Widelands::Trigger_Descr &> * m_trigger_list;
       UI::Multiline_Textarea* m_description;
 	UI::Button<Editor_Event_Menu_New_Trigger> * m_ok_button;
 };

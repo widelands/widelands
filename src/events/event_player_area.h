@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,8 @@
 #include "event.h"
 #include "player_area.h"
 
+namespace Widelands {
+
 ///  Abstract base for events involving a player and an area.
 struct Event_Player_Area : public Event {
 	Event_Player_Area
@@ -37,6 +39,8 @@ struct Event_Player_Area : public Event {
 
 protected:
 	Player_Area<> m_player_area;
+};
+
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ m_pit                   (pit)
    const int32_t space=5;
    const int32_t xstart=5;
    const int32_t ystart=15;
-	const World & world = parent.egbase().map().world();
+	Widelands::World const & world = parent.egbase().map().world();
    int32_t nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
 		std::max

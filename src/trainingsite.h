@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,9 @@
 #include "productionsite.h"
 #include "tattribute.h"
 
-class TrainingSite_Window;
+struct TrainingSite_Window;
+
+namespace Widelands {
 
 struct TrainingSite_Descr : public ProductionSite_Descr {
 	TrainingSite_Descr
@@ -84,7 +86,7 @@ private:
  *        contains soldiers!
  */
 class TrainingSite:public ProductionSite {
-	friend class Widelands_Map_Buildingdata_Data_Packet;
+	friend struct Map_Buildingdata_Data_Packet;
 	 MO_DESCR(TrainingSite_Descr);
 	friend class TrainingSite_Window;
 public:
@@ -201,6 +203,8 @@ private:
 
 	/** The training program that is currently executing*/
 	std::string m_prog_name;
+};
+
 };
 
 #endif

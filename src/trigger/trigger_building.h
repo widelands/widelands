@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,12 +25,16 @@
 
 #include <string>
 
+struct Trigger_Building_Option_Menu;
+
+namespace Widelands {
+
 /*
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
  */
 struct Trigger_Building : public Trigger {
-	friend struct Trigger_Building_Option_Menu;
+	friend struct ::Trigger_Building_Option_Menu;
       Trigger_Building();
       ~Trigger_Building();
 
@@ -55,6 +59,8 @@ private:
 	Player_Area<Area<FCoords> > m_player_area;
       std::string m_building;
 	Count_Type m_count;
+};
+
 };
 
 #endif

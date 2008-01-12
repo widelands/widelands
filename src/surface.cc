@@ -140,7 +140,10 @@ void Surface::unset_subwin() {
 */
 void Surface::draw_field
 (Rect & subwin,
- Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+ Widelands::Field * const f,
+ Widelands::Field * const rf,
+ Widelands::Field * const fl,
+ Widelands::Field * const rfl,
 	                const int32_t posx, const int32_t rposx, const int32_t posy,
 	                const int32_t blposx, const int32_t rblposx, const int32_t blposy,
  uint8_t roads,

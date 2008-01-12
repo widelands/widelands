@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,8 @@
 #include "building.h"
 
 #include <vector>
+
+namespace Widelands {
 
 class Building;
 class Request;
@@ -56,7 +58,7 @@ struct ConstructionSite_Descr : public Building_Descr {
 };
 
 class ConstructionSite : public Building {
-   friend class Widelands_Map_Buildingdata_Data_Packet;
+	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(ConstructionSite_Descr);
 
@@ -120,6 +122,8 @@ private:
 	uint32_t m_work_steptime;  // time when next step is completed
 	uint32_t m_work_completed; // how many steps have we done so far?
 	uint32_t m_work_steps;     // how many steps (= items) until we're done?
+};
+
 };
 
 #endif

@@ -35,10 +35,10 @@
 
 #include <list>
 
+namespace Widelands {
+
 class Building;
 class Economy;
-class FileRead;
-class FileWrite;
 class Flag;
 class IdleWareSupply;
 class Item_Ware_Descr;
@@ -47,10 +47,8 @@ class Road;
 class Soldier;
 class Transfer;
 class Warehouse;
-class Widelands_Map_Map_Object_Loader;
-class Widelands_Map_Map_Object_Saver;
-class FileRead;
-class FileWrite;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
 
 struct Neighbour {
 	Flag * flag;
@@ -72,7 +70,7 @@ typedef std::vector<Neighbour> Neighbour_list;
  *   the building somehow
  */
 class WareInstance : public Map_Object {
-   friend class Widelands_Map_Waredata_Data_Packet;
+   friend struct Map_Waredata_Data_Packet;
 
 	MO_DESCR(Item_Ware_Descr);
 
@@ -135,9 +133,9 @@ private:
 class Flag : public PlayerImmovable {
 	friend class Economy;
 	friend class FlagQueue;
-   friend class Widelands_Map_Ware_Data_Packet; // has to look at pending items
-   friend class Widelands_Map_Waredata_Data_Packet; // has to look at pending items
-   friend class Widelands_Map_Flagdata_Data_Packet; // has to read/write this to a file
+	friend struct Map_Ware_Data_Packet;     //  has to look at pending items
+	friend struct Map_Waredata_Data_Packet; //  has to look at pending items
+	friend struct Map_Flagdata_Data_Packet; //  has to read/write this to a file
 
 	struct PendingItem {
 		WareInstance    * item;     //  the item itself
@@ -252,8 +250,8 @@ private:
  * PlayerImmovable.
  */
 struct Road : public PlayerImmovable {
-   friend class Widelands_Map_Roaddata_Data_Packet; // For saving
-   friend class Widelands_Map_Road_Data_Packet; // For init()
+	friend struct Map_Roaddata_Data_Packet; // For saving
+	friend struct Map_Road_Data_Packet; // For init()
 
 	enum FlagId {
 		FlagStart = 0,
@@ -346,8 +344,8 @@ struct Route {
 	};
 
 	LoadData* load(FileRead& fr);
-	void load_pointers(LoadData* data, Widelands_Map_Map_Object_Loader* mol);
-	void save(FileWrite& fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos);
+	void load_pointers(LoadData &, Map_Map_Object_Loader &);
+	void save(FileWrite &, Editor_Game_Base *, Map_Map_Object_Saver *);
 
 private:
 	int32_t                     m_totalcost;
@@ -414,8 +412,8 @@ struct Requeriments {
 	bool check (int32_t hp, int32_t attack, int32_t defense, int32_t evade);
 
 	// For Save/Load Games
-	void Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol);
-	void Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos);
+	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
+	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
 
 private:
 	MinMax m_hp;
@@ -525,8 +523,8 @@ struct Request : public Trackable {
 
 
    // For savegames
-   void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-   void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
+	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
    Worker* get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
@@ -604,8 +602,8 @@ struct WaresQueue {
 	Player * get_owner() const throw () {return m_owner->get_owner();}
 
    // For savegames
-   void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-   void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
+	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
 
 private:
 	static void request_callback(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
@@ -741,14 +739,8 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 
       virtual int32_t get_id() {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
-	virtual void Write
-		(FileWrite             &,
-		 Editor_Game_Base               &,
-		 Widelands_Map_Map_Object_Saver &);
-	virtual void Read
-		(FileRead               &,
-		 Editor_Game_Base                &,
-		 Widelands_Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 private:
       bool     m_force_balance;
@@ -756,5 +748,6 @@ private:
       Economy* m_economy;
 };
 
+};
 
 #endif // included_transport_h

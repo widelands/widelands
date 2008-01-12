@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+namespace Widelands {
+
 class GameLogicCommand;
 
 /*
@@ -30,6 +32,8 @@ class GameLogicCommand;
  */
 struct Queue_Cmd_Factory {
 	static GameLogicCommand* create_correct_queue_command(uint32_t id);
+};
+
 };
 
 #endif

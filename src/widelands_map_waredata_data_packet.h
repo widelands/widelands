@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,29 +22,30 @@
 
 #include "widelands_map_data_packet.h"
 
-struct FileWrite;
+namespace Widelands {
+
 class WareInstance;
 
 /*
  * This cares for the data of wares
  */
-struct Widelands_Map_Waredata_Data_Packet : public Widelands_Map_Data_Packet {
-      virtual ~Widelands_Map_Waredata_Data_Packet();
-
+struct Map_Waredata_Data_Packet : public Map_Data_Packet {
 	virtual void Read
 		(FileSystem &,
 		 Editor_Game_Base*,
 		 const bool,
-		 Widelands_Map_Map_Object_Loader * const = 0)
+		 Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	virtual void Write
-		(FileSystem &,
-		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const  = 0)
+	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
 private:
-      void write_ware(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*, WareInstance*);
+	void write_ware
+		(FileWrite            *,
+		 Editor_Game_Base     *,
+		 Map_Map_Object_Saver *,
+		 WareInstance         *);
 };
 
+};
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,9 @@
 #include "instances.h"
 #include "wexception.h"
 
-Widelands_Map_Map_Object_Saver::Widelands_Map_Map_Object_Saver() :
+namespace Widelands {
+
+Map_Map_Object_Saver::Map_Map_Object_Saver() :
 m_nr_roads     (0),
 m_nr_flags     (0),
 m_nr_buildings (0),
@@ -37,16 +39,13 @@ m_lastserial   (0)
 /*
  * Returns true if this object has already been inserted
  */
-bool Widelands_Map_Map_Object_Saver::is_object_known
-(const Map_Object * const obj) const
+bool Map_Map_Object_Saver::is_object_known(const Map_Object * const obj) const
 {return m_objects.find(obj) != m_objects.end();}
 
 /*
  * Registers this object as a new one
  */
-uint32_t Widelands_Map_Map_Object_Saver::register_object
-(const Map_Object * const obj)
-{
+uint32_t Map_Map_Object_Saver::register_object(const Map_Object * const obj) {
 	assert(!is_object_known(obj));
 
 	switch (obj->get_type()) {
@@ -59,9 +58,7 @@ uint32_t Widelands_Map_Map_Object_Saver::register_object
 	case Map_Object::BATTLE:           ++m_nr_battles;            break;
 	case Map_Object::ATTACKCONTROLLER: ++m_nr_attack_controllers; break;
 	default:
-		throw wexception
-			("Widelands_Map_Map_Object_Saver: Unknown MapObject type : %i",
-			 obj->get_type());
+		throw wexception("Map_Map_Object_Saver: Unknown MapObject type");
 	}
 
 	uint32_t fileserial = ++m_lastserial;
@@ -76,16 +73,16 @@ uint32_t Widelands_Map_Map_Object_Saver::register_object
  * Returns the file index for this map object. This is used on load
  * to regenerate the depencies between the objects
  */
-uint32_t Widelands_Map_Map_Object_Saver::get_object_file_index
+uint32_t Map_Map_Object_Saver::get_object_file_index
 (const Map_Object * const obj)
 {
 	// This check should rather be an assert(), but we get more information
 	// from a throw and time's not soo much an issue here
 	if (!is_object_known(obj))
 		throw wexception
-				("Widelands_Map_Map_Object_Saver::get_object_file_index(): "
-				 "Map Object %p (%i) is not known!\n",
-				 obj, obj->get_serial());
+			("Map_Map_Object_Saver::get_object_file_index(): Map Object %p (%i) "
+			 "is not known!",
+			 obj, obj->get_serial());
 
 	return m_objects[obj];
 }
@@ -93,17 +90,14 @@ uint32_t Widelands_Map_Map_Object_Saver::get_object_file_index
 /*
  * mark this object as saved
  */
-void Widelands_Map_Map_Object_Saver::mark_object_as_saved
-		(const Map_Object * const obj)
-{
+void Map_Map_Object_Saver::mark_object_as_saved(Map_Object const * const obj) {
 	m_saved_obj[obj] = true;
 }
 
 /*
  * Return the number of unsaved objects
  */
-uint32_t Widelands_Map_Map_Object_Saver::get_nr_unsaved_objects() const throw ()
-{
+uint32_t Map_Map_Object_Saver::get_nr_unsaved_objects() const throw () {
 	std::map<const Map_Object *, bool>::const_iterator i = m_saved_obj.begin();
 	uint32_t retval = 0;
 
@@ -114,3 +108,5 @@ uint32_t Widelands_Map_Map_Object_Saver::get_nr_unsaved_objects() const throw ()
 
 	return retval;
 }
+
+};

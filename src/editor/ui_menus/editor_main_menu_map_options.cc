@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,7 +80,7 @@ set values
 ==============
 */
 void Main_Menu_Map_Options::update() {
-	const Map & map = m_parent->egbase().map();
+	Widelands::Map const & map = m_parent->egbase().map();
 
    char buf[200];
 	sprintf(buf, "%ix%i", map.get_width(), map.get_height());
@@ -89,7 +89,7 @@ void Main_Menu_Map_Options::update() {
 	m_name  ->set_text(map.get_name());
 	sprintf(buf, "%i", map.get_nrplayers());
    m_nrplayers->set_text(buf);
-	m_world ->set_text(World::World(map.get_world_name()).get_name());
+	m_world->set_text(Widelands::World::World(map.get_world_name()).get_name());
 	m_descr ->set_text(map.get_description());
 }
 

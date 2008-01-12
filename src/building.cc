@@ -40,9 +40,11 @@
 #include "wexception.h"
 #include "worker.h"
 
+#include "upcast.h"
+
 #include <stdio.h>
 
-#include "upcast.h"
+namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
@@ -869,3 +871,5 @@ void Building::remove_worker(Worker * worker) {
 			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
 	}
 }
+
+};

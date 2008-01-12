@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,21 +20,21 @@
 #ifndef __S__MAPVIEWPIXELFUNCTIONS_H
 #define __S__MAPVIEWPIXELFUNCTIONS_H
 
-#include "geometry.h"
+#include "widelands_geometry.h"
 
 #include "point.h"
 
-struct Map;
+namespace Widelands {struct Map;}
 
 namespace MapviewPixelFunctions {
 
 float calc_brightness
 	(const int32_t l, const int32_t r, const int32_t tl, const int32_t tr, const int32_t bl, const int32_t br);
 
-uint32_t calc_pix_distance(const Map &, Point a, Point b);
+uint32_t calc_pix_distance(Widelands::Map const &, Point a, Point b);
 
-uint32_t get_map_end_screen_x(const Map &);
-uint32_t get_map_end_screen_y(const Map &);
+uint32_t get_map_end_screen_x(Widelands::Map const &);
+uint32_t get_map_end_screen_y(Widelands::Map const &);
 
 /**
  * Calculate the coordinates of the triangle the given point in pixels is in.
@@ -47,24 +47,27 @@ uint32_t get_map_end_screen_y(const Map &);
  *
  * \note More documentation exists in HTML-format with figures in doc/geometry.
  */
-Node_and_Triangle<> calc_node_and_triangle(const Map &, uint32_t x, uint32_t y);
+Widelands::Node_and_Triangle<> calc_node_and_triangle
+	(Widelands::Map const &, uint32_t x, uint32_t y);
 
-void normalize_pix(const Map &, Point & p);
+void normalize_pix(Widelands::Map const &, Point & p);
 
 /**
  * Calculate the on-screen position of the node without taking height into
  * account.
  */
-void get_basepix(const Coords fc, int32_t & px, int32_t & py);
+void get_basepix(Widelands::Coords fc, int32_t & px, int32_t & py);
 
 /**
  * Calculate the on-screen position of the node.
  */
-void get_pix(const FCoords fc, int32_t & px, int32_t & py);
+void get_pix(Widelands::FCoords fc, int32_t & px, int32_t & py);
 
-void get_pix(const Map &, const Coords c, int32_t & px, int32_t & py);
+void get_pix
+	(const Widelands::Map &, Widelands::Coords c, int32_t & px, int32_t & py);
 
-void get_save_pix(const Map &, const Coords c, int32_t & px, int32_t & py);
+void get_save_pix
+	(const Widelands::Map &, Widelands::Coords c, int32_t & px, int32_t & py);
 }
 
 //  Implementation follows:
@@ -76,9 +79,11 @@ void get_save_pix(const Map &, const Coords c, int32_t & px, int32_t & py);
 #include "map.h"
 #include "mapviewpixelconstants.h"
 
-inline uint32_t MapviewPixelFunctions::get_map_end_screen_x(const Map & map)
+inline uint32_t MapviewPixelFunctions::get_map_end_screen_x
+(Widelands::Map const & map)
 {return map.get_width() * TRIANGLE_WIDTH;}
-inline uint32_t MapviewPixelFunctions::get_map_end_screen_y(const Map & map)
+inline uint32_t MapviewPixelFunctions::get_map_end_screen_y
+(Widelands::Map const & map)
 {return map.get_height() * TRIANGLE_HEIGHT;}
 
 /*
@@ -88,14 +93,15 @@ into account.
 ===============
 */
 inline void MapviewPixelFunctions::get_basepix
-(const Coords c, int32_t & px, int32_t & py)
+(Widelands::Coords const  c, int32_t & px, int32_t & py)
 {
 	py = c.y * TRIANGLE_HEIGHT;
 	px = c.x * TRIANGLE_WIDTH + (c.y & 1) * (TRIANGLE_WIDTH / 2);
 }
 
 
-inline void MapviewPixelFunctions::get_pix(const FCoords fc, int32_t & px, int32_t & py)
+inline void MapviewPixelFunctions::get_pix
+(Widelands::FCoords const fc, int32_t & px, int32_t & py)
 {
 	get_basepix(fc, px, py);
 	py -= fc.field->get_height() * HEIGHT_FACTOR;
@@ -103,18 +109,20 @@ inline void MapviewPixelFunctions::get_pix(const FCoords fc, int32_t & px, int32
 
 inline
 void MapviewPixelFunctions::get_pix
-(const Map & map, const Coords c, int32_t & px, int32_t & py)
+(Widelands::Map const & map, const Widelands::Coords c,
+ int32_t & px, int32_t & py)
 {get_pix(map.get_fcoords(c), px, py);}
 
 // fx and fy might be out of range, must be normalized for the field
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
 inline void MapviewPixelFunctions::get_save_pix
-(const Map & map, const Coords c, int32_t & px, int32_t & py)
+(Widelands::Map const & map, Widelands::Coords const c,
+ int32_t & px, int32_t & py)
 {
-	Coords c1 = c;
+	Widelands::Coords c1 = c;
 	map.normalize_coords(&c1);
-	FCoords fc = map.get_fcoords(c1);
+	Widelands::FCoords fc = map.get_fcoords(c1);
 	fc.x = c.x;
 	fc.y = c.y;
 	get_pix(fc, px, py);

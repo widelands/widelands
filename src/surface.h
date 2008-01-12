@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,11 @@
 
 #include "rect.h"
 
+namespace Widelands {
 struct Editor_Game_Base;
 struct Field;
 struct Player;
+};
 
 /**
  * This was formerly called struct Bitmap. But now it manages an
@@ -87,8 +89,8 @@ public:
 	void fast_blit(Surface* src);
 
 	void draw_minimap
-		(const Editor_Game_Base  & egbase,
-		 const Player * const,
+		(Widelands::Editor_Game_Base const & egbase,
+		 Widelands::Player           const * const,
 		 const Rect                rc,
 		 const Point               viewpoint,
 		 const uint32_t                flags);
@@ -97,7 +99,10 @@ public:
 	/// sw16_terrain.cc
 	void draw_field
 		(Rect &,
-		 Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+		 Widelands::Field * const f,
+		 Widelands::Field * const rf,
+		 Widelands::Field * const fl,
+		 Widelands::Field * const rfl,
 		 const int32_t posx, const int32_t rposx, const int32_t posy,
 		 const int32_t blposx, const int32_t rblposx, const int32_t blposy,
 		 uint8_t roads,

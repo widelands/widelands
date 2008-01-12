@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ inline Editor_Interactive & Editor_Event_Menu_Edit_EventChain::eia() {
 
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain
-(Editor_Interactive & parent, EventChain * chain) :
+(Editor_Interactive & parent, Widelands::EventChain & chain) :
 UI::Window   (&parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
 m_event_chain(chain)
 {
@@ -59,19 +59,19 @@ m_event_chain(chain)
    // Name
    new UI::Textarea(this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
    m_name = new UI::Edit_Box(this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-	m_name->set_text(m_event_chain->name().c_str());
+	m_name->set_text(m_event_chain.name().c_str());
    posy += 20 + spacing;
 
    // More then once
    new UI::Textarea(this, posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT, _("Runs multiple times"), Align_CenterLeft);
    m_morethanonce = new UI::Checkbox(this, posx, posy);
-   m_morethanonce->set_state(m_event_chain->get_repeating());
+   m_morethanonce->set_state(m_event_chain.get_repeating());
    posy += STATEBOX_HEIGHT + spacing;
    const int32_t lsoffsy = posy;
 
    // Event List
    new UI::Textarea(this, posx, lsoffsy, _("Events: "), Align_Left);
-   m_events= new UI::Listselect<Event &>(this, spacing, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
+   m_events= new UI::Listselect<Widelands::Event &>(this, spacing, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::cs_selected);
    m_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::cs_double_clicked);
    posx += ls_width + spacing;
@@ -141,13 +141,13 @@ m_event_chain(chain)
 
    posx += 80 + spacing;
    new UI::Textarea(this, posx, lsoffsy, _("Available Events: "), Align_Left);
-   m_available_events=new UI::Listselect<Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
+   m_available_events=new UI::Listselect<Widelands::Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_available_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
    m_available_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::tl_double_clicked);
-	const MapEventManager & mem = parent.egbase().map().get_mem();
-	const MapEventManager::Index nr_events = mem.get_nr_events();
-	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
-		Event & event = mem.get_event_by_nr(i);
+	Widelands::MapEventManager const & mem = parent.egbase().map().get_mem();
+	Widelands::MapEventManager::Index const nr_events = mem.get_nr_events();
+	for (Widelands::MapEventManager::Index i = 0; i < nr_events; ++i) {
+		Widelands::Event & event = mem.get_event_by_nr(i);
 		m_available_events->add(event.name().c_str(), event);
 	}
    m_available_events->sort();
@@ -171,12 +171,12 @@ m_event_chain(chain)
 		 &Editor_Event_Menu_Edit_EventChain::end_modal, this, 0,
 		 _("Cancel"));
 
-   for (uint32_t i = 0; i < m_event_chain->get_nr_events(); ++i) {
-		Event & event = *m_event_chain->get_event(i);
+   for (uint32_t i = 0; i < m_event_chain.get_nr_events(); ++i) {
+		Widelands::Event & event = *m_event_chain.get_event(i);
 		m_events->add(event.name().c_str(), event);
 	}
 
-   m_edit_trigcond = m_event_chain->get_trigcond() ? false : true;
+   m_edit_trigcond = m_event_chain.get_trigcond() ? false : true;
 
    center_to_parent();
 }
@@ -208,15 +208,15 @@ void Editor_Event_Menu_Edit_EventChain::think()
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
       // Name
-      m_event_chain->set_name(m_name->get_text());
+	m_event_chain.set_name(m_name->get_text());
       // Repeating
-      m_event_chain->set_repeating(m_morethanonce->get_state());
+	m_event_chain.set_repeating(m_morethanonce->get_state());
       // Trigger Conditional is always updated
       // Events
-      m_event_chain->clear_events();
+	m_event_chain.clear_events();
 	const uint32_t nr_events = m_events->size();
 	for (uint32_t i = 0; i < nr_events; ++i)
-		m_event_chain->add_event(&(*m_events)[i]);
+		m_event_chain.add_event(&(*m_events)[i]);
       end_modal(1);
 }
 
@@ -226,19 +226,19 @@ void Editor_Event_Menu_Edit_EventChain::clicked_new_event() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
 	Editor_Event_Menu_Edit_TriggerConditional menu
-		(eia(), m_event_chain->get_trigcond(), m_event_chain);
+		(eia(), m_event_chain.get_trigcond(), &m_event_chain);
 	if (menu.run()) {
-		if (m_event_chain->get_trigcond()) {
-            m_event_chain->get_trigcond()->unreference_triggers(m_event_chain);
-            delete m_event_chain->get_trigcond();
+		if (m_event_chain.get_trigcond()) {
+			m_event_chain.get_trigcond()->unreference_triggers(&m_event_chain);
+			delete m_event_chain.get_trigcond();
 		}
-		m_event_chain->set_trigcond(menu.get_trigcond());
+		m_event_chain.set_trigcond(menu.get_trigcond());
 	}
 }
 
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ins_event() {
-	Event & event = m_available_events->get_selected();
+	Widelands::Event & event = m_available_events->get_selected();
 	m_events->add(event.name().c_str(), event, -1, true);
 }
 

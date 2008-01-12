@@ -33,6 +33,8 @@
 
 #include "upcast.h"
 
+namespace Widelands {
+
 static const int32_t CARRIER_SPAWN_INTERVAL = 2500;
 
 
@@ -1162,3 +1164,5 @@ void Warehouse::conquered_by (Player* pl)
    molog ("destroying\n");
 	cleanup(&pl->egbase());
 }
+
+};

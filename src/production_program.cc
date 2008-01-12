@@ -27,6 +27,7 @@
 
 #include <stdio.h>
 
+namespace Widelands {
 
 ProductionProgram::ProductionProgram(const std::string & name) : m_name(name) {}
 
@@ -360,3 +361,5 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 	if (sprogram->get_num_values() != m_actions.size())
 		throw wexception("Line numbers appear to be wrong");
 }
+
+};

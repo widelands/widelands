@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,10 +22,10 @@
 
 #include <string>
 
-#include <stdint.h>
+struct Editor_Interactive;
 
+namespace Widelands {
 class Trigger;
-class Editor_Interactive;
 
 
 struct Trigger_Descr {
@@ -42,6 +42,8 @@ Trigger * make_trigger_with_option_dialog
 	(const char * id, Editor_Interactive &, Trigger *);
 size_t get_nr_of_available_triggers();
 Trigger_Descr * get_trigger_descr(uint32_t);
+};
+
 };
 
 #endif

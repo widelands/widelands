@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,8 @@
 #include "overlay_manager.h"
 
 #include <stdio.h>
+
+using Widelands::Resource_Descr;
 
 #define width  20
 #define height 20
@@ -108,7 +110,7 @@ m_cur_selection
 
 m_increase_tool(increase_tool)
 {
-	const World & world = parent.egbase().map().world();
+	Widelands::World const & world = parent.egbase().map().world();
 	const Resource_Descr::Index nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
@@ -198,7 +200,8 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 	m_increase_tool.set_cur_res(n);
 	m_increase_tool.decrease_tool().set_cur_res(n);
 
-	Map & map = dynamic_cast<Editor_Interactive &>(*get_parent()).egbase().map();
+	Widelands::Map & map = dynamic_cast<Editor_Interactive &>(*get_parent())
+		.egbase().map();
 	map.overlay_manager().register_overlay_callback_function
 		(&Editor_Change_Resource_Tool_Callback, static_cast<void *>(&map), n);
 	map.recalc_whole_map();

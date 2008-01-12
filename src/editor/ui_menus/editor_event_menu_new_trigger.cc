@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,15 +52,16 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 
    // Trigger List
    new UI::Textarea(this, spacing, offsy, _("Available Triggers: "), Align_Left);
-   m_trigger_list=new UI::Listselect<Trigger_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   m_trigger_list=new UI::Listselect<Widelands::Trigger_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
 	for
 		(uint32_t i = 0;
-		 i < Trigger_Factory::get_nr_of_available_triggers();
+		 i < Widelands::Trigger_Factory::get_nr_of_available_triggers();
 		 ++i)
 	{
-		Trigger_Descr & d = *Trigger_Factory::get_trigger_descr(i);
+		Widelands::Trigger_Descr & d =
+			*Widelands::Trigger_Factory::get_trigger_descr(i);
 		m_trigger_list->add(i18n::translate(d.name).c_str(), d);
 	}
    m_trigger_list->sort();
@@ -113,8 +114,8 @@ bool Editor_Event_Menu_New_Trigger::handle_mouserelease(const Uint8, int32_t, in
  */
 void Editor_Event_Menu_New_Trigger::clicked_ok() {
 	if
-		(Trigger * const trig =
-		 Trigger_Factory::make_trigger_with_option_dialog
+		(Widelands::Trigger * const trig =
+		 Widelands::Trigger_Factory::make_trigger_with_option_dialog
 		 (m_trigger_list->get_selected().id.c_str(), eia(), 0))
 	{
 		eia().egbase().map().get_mtm().register_new_trigger(trig);

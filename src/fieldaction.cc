@@ -45,7 +45,9 @@
 
 #include "upcast.h"
 
-struct Building_Descr;
+namespace Widelands {struct Building_Descr;};
+using Widelands::Building;
+using Widelands::Game;
 
 #define BG_CELL_WIDTH  34 // extents of one cell
 #define BG_CELL_HEIGHT 34
@@ -55,7 +57,7 @@ struct Building_Descr;
 struct BuildGrid : public UI::Icon_Grid {
 	BuildGrid
 		(UI::Panel* parent,
-		 const Tribe_Descr & tribe,
+		 Widelands::Tribe_Descr const & tribe,
 		 const int32_t x, const int32_t y,
 		 int32_t cols);
 
@@ -71,7 +73,7 @@ private:
 	void mouseinslot(int32_t idx);
 
 private:
-	const Tribe_Descr & m_tribe;
+	Widelands::Tribe_Descr const & m_tribe;
 };
 
 
@@ -84,7 +86,7 @@ Initialize the grid
 */
 BuildGrid::BuildGrid
 (UI::Panel* parent,
- const Tribe_Descr & tribe,
+ Widelands::Tribe_Descr const & tribe,
  const int32_t x, const int32_t y,
  int32_t cols)
 :
@@ -106,10 +108,9 @@ Add a new building to the list of buildable buildings
 */
 void BuildGrid::add(int32_t id)
 {
-	Building_Descr* descr = m_tribe.get_building_descr(id);
-	uint32_t picid = descr->get_buildicon();
-
-	UI::Icon_Grid::add(picid, reinterpret_cast<void *>(id), descr->descname());
+	Widelands::Building_Descr const & descr = *m_tribe.get_building_descr(id);
+	UI::Icon_Grid::add
+		(descr.get_buildicon(), reinterpret_cast<void *>(id), descr.descname());
 }
 
 
@@ -167,7 +168,10 @@ FieldActionWindow IMPLEMENTATION
 ==============================================================================
 */
 struct FieldActionWindow : public UI::UniqueWindow {
-	FieldActionWindow(Interactive_Base *iabase, Player* plr, UI::UniqueWindow::Registry *registry);
+	FieldActionWindow
+		(Interactive_Base           * iabase,
+		 Widelands::Player          * plr,
+		 UI::UniqueWindow::Registry * registry);
 	~FieldActionWindow();
 
 	void init();
@@ -206,11 +210,11 @@ private:
 	void okdialog();
 
 	Interactive_Base    *m_iabase;
-   Player              *m_plr;
-	Map              * m_map;
+	Widelands::Player * m_plr;
+	Widelands::Map    * m_map;
 	Overlay_Manager & m_overlay_manager;
 
-	FCoords            m_field;
+	Widelands::FCoords  m_field;
 
 	UI::Tab_Panel    * m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
@@ -267,7 +271,9 @@ Initialize a field action window, creating the appropriate buttons.
 ===============
 */
 FieldActionWindow::FieldActionWindow
-(Interactive_Base *iabase, Player* plr, UI::UniqueWindow::Registry *registry) :
+(Interactive_Base           * const iabase,
+ Widelands::Player          * const plr,
+ UI::UniqueWindow::Registry * const registry) :
 	UI::UniqueWindow(iabase, registry, 68, 34, _("Action")),
 	m_iabase(iabase),
 	m_plr(plr),
@@ -366,18 +372,21 @@ void FieldActionWindow::add_buttons_auto()
 	// Add road-building actions
 	if (m_field.field->get_owned_by() == m_plr->get_player_number()) {
 
-		BaseImmovable *imm = m_map->get_immovable(m_field);
+		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_field);
 
 		// The box with road-building buttons
 		buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
-		if (upcast(Flag, flag, imm)) {
+		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
 			add_button(buildbox, pic_buildroad, &FieldActionWindow::act_buildroad, _("Build road"));
 
-			Building *building = flag->get_building();
+			Building * const building = flag->get_building();
 
-			if (!building || building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+			if
+				(!building
+				 ||
+				 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag, _("Destroy this flag"));
 
 			if (dynamic_cast<const Game *>(&m_iabase->egbase()))
@@ -389,14 +398,17 @@ void FieldActionWindow::add_buttons_auto()
 			int32_t buildcaps = m_plr->get_buildcaps(m_field);
 
 			// Add house building
-			if ((buildcaps & BUILDCAPS_SIZEMASK) || (buildcaps & BUILDCAPS_MINE))
+			if
+				((buildcaps & Widelands::BUILDCAPS_SIZEMASK)
+				 ||
+				 (buildcaps & Widelands::BUILDCAPS_MINE))
 				add_buttons_build(buildcaps);
 
 			// Add build actions
-			if (buildcaps & BUILDCAPS_FLAG)
+			if (buildcaps & Widelands::BUILDCAPS_FLAG)
 				add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag, _("Put a flag"));
 
-			if (imm && imm->get_type() == Map_Object::ROAD)
+			if (dynamic_cast<Widelands::Road const *>(imm))
 				add_button(buildbox, pic_remroad, &FieldActionWindow::act_removeroad, _("Destroy a road"));
 		}
 	} else add_buttons_attack ();
@@ -437,9 +449,9 @@ void FieldActionWindow::add_buttons_attack ()
 			if
 				(dynamic_cast<const Game *>(&m_iabase->egbase())
 				 and
-				 (dynamic_cast<const MilitarySite *>(building)
+				 (dynamic_cast<Widelands::MilitarySite const *>(building)
 				  or
-				  dynamic_cast<const Warehouse *>(building)))
+				  dynamic_cast<Widelands::Warehouse    const *>(building)))
 			{
             m_attackers = 0;
             m_attackers_type = STRONGEST;
@@ -477,37 +489,35 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 	BuildGrid* bbg_house[3] = {0, 0, 0};
 	BuildGrid* bbg_mine = 0;
 
-	const Tribe_Descr & tribe = m_plr->tribe();
+	Widelands::Tribe_Descr const & tribe = m_plr->tribe();
 
 	m_fastclick = false;
 
 	for (int32_t id = 0; id < tribe.get_nrbuildings(); ++id) {
-		Building_Descr * descr = tribe.get_building_descr(id);
+		Widelands::Building_Descr const & descr = *tribe.get_building_descr(id);
 		BuildGrid** ppgrid;
 
 		// Some buildings cannot be built (i.e. construction site, HQ)
       // and not allowed buildings. The rules are different in editor
       // and game: enhanced buildings _are_ buildable in the editor
 		if (dynamic_cast<const Game *>(&m_iabase->egbase())) {
-         if (!descr->get_buildable() || !m_plr->is_building_allowed(id))
+			if (!descr.get_buildable() || !m_plr->is_building_allowed(id))
             continue;
-		} else {
-			if (!descr->get_buildable() && !descr->get_enhanced_building()) continue;
-		}
+		} else if (!descr.get_buildable() && !descr.get_enhanced_building())
+			continue;
 
 		// Figure out if we can build it here, and in which tab it belongs
-		if (descr->get_ismine())
-			{
-			if (!(buildcaps & BUILDCAPS_MINE))
+		if (descr.get_ismine()) {
+			if (!(buildcaps & Widelands::BUILDCAPS_MINE))
 				continue;
 
 			ppgrid = &bbg_mine;
 			}
 		else
 			{
-			int32_t size = descr->get_size() - BaseImmovable::SMALL;
+			int32_t size = descr.get_size() - Widelands::BaseImmovable::SMALL;
 
-			if ((buildcaps & BUILDCAPS_SIZEMASK) < (size+1))
+			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < (size+1))
 				continue;
 
 			ppgrid = &bbg_house[size];
@@ -620,7 +630,7 @@ void FieldActionWindow::act_watch()
 {
 	assert(dynamic_cast<const Game *>(&m_iabase->egbase()));
 
-   show_watch_window(static_cast<Interactive_Player*>(m_iabase), m_field);
+	show_watch_window(static_cast<Interactive_Player &>(*m_iabase), m_field);
 	okdialog();
 }
 
@@ -657,7 +667,7 @@ Show a debug widow for this field.
 */
 void FieldActionWindow::act_debug()
 {
-	show_field_debug(m_iabase, m_field);
+	show_field_debug(*m_iabase, m_field);
 }
 
 
@@ -690,8 +700,8 @@ Remove the flag at this field
 void FieldActionWindow::act_ripflag()
 {
    okdialog();
-	Editor_Game_Base & egbase = m_iabase->egbase();
-	if (upcast(Flag, flag, m_field.field->get_immovable()))
+	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
+	if (upcast(Widelands::Flag, flag, m_field.field->get_immovable()))
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				show_bulldoze_confirm(m_iabase, building, flag);
@@ -743,8 +753,8 @@ Remove the road at the given field
 */
 void FieldActionWindow::act_removeroad()
 {
-	Editor_Game_Base & egbase = m_iabase->egbase();
-	if (upcast(Road, road, egbase.map().get_immovable(m_field))) {
+	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
+	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_field))) {
 		if (upcast(Game, game, &egbase))
 			game->send_player_bulldoze(road);
 		else
@@ -764,7 +774,7 @@ Start construction of the building with the give description index
 */
 void FieldActionWindow::act_build(int32_t idx)
 {
-	Editor_Game_Base & egbase = m_iabase->egbase();
+	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
 	if (upcast(Game, game, &egbase))
 		game->send_player_build
 		(static_cast<Interactive_Player*>(m_iabase)->get_player_number(),
@@ -803,7 +813,7 @@ void FieldActionWindow::building_icon_mouse_in(int32_t idx) {
 	if (m_iabase->m_show_workarea_preview) {
 		assert(not m_workarea_preview_job_id);
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
-		HollowArea<> hollow_area(Area<>(m_field, 0), 0);
+		Widelands::HollowArea<> hollow_area(Widelands::Area<>(m_field, 0), 0);
 		const Workarea_Info & workarea_info =
 			m_plr->tribe().get_building_descr(idx)->m_recursive_workarea_info;
 		Workarea_Info::const_iterator it = workarea_info.begin();
@@ -817,7 +827,7 @@ void FieldActionWindow::building_icon_mouse_in(int32_t idx) {
 			hollow_area.radius = it->first;
 			assert(hollow_area.radius);
 			assert(hollow_area.hole_radius < hollow_area.radius);
-			MapHollowRegion<> mr(*m_map, hollow_area);
+			Widelands::MapHollowRegion<> mr(*m_map, hollow_area);
 			do m_overlay_manager.register_overlay
 				(mr.location(),
 				 workarea_cumulative_picid[i],
@@ -859,8 +869,8 @@ Call a geologist on this flag.
 void FieldActionWindow::act_geologist()
 {
 	Game & game = dynamic_cast<Game &>(m_iabase->egbase());
-	if (upcast(Flag, flag, game.map().get_immovable(m_field)))
-		game.send_player_flagaction (flag, FLAGACTION_GEOLOGIST);
+	if (upcast(Widelands::Flag, flag, game.map().get_immovable(m_field)))
+		game.send_player_flagaction (flag, Widelands::FLAGACTION_GEOLOGIST);
 
    okdialog();
 }
@@ -876,12 +886,12 @@ void FieldActionWindow::act_attack ()
 	Game & game = dynamic_cast<Game &>(m_iabase->egbase());
    Interactive_Player* m_player=static_cast<Interactive_Player*>(m_iabase);
 
-	if (upcast(Building, building, game.map().get_immovable(m_field)))
-		if (upcast(Flag const, flag, building->get_base_flag()))
+	if (upcast(Building, b, game.map().get_immovable(m_field)))
+		if (upcast(Widelands::Flag const, flag, b->get_base_flag()))
 			if (m_attackers > 0)
 				game.send_player_enemyflagaction
-				(flag,
-               ENEMYFLAGACTION_ATTACK,
+					(flag,
+					 Widelands::ENEMYFLAGACTION_ATTACK,
                m_player->get_player_number(),
                m_attackers,  // Number of soldiers
                m_attackers_type); // Type of soldiers
@@ -905,7 +915,7 @@ void FieldActionWindow::act_attack_more() {
 uint32_t FieldActionWindow::get_max_attackers() {
 	return getMaxAttackSoldiers
 		(m_iabase->egbase(),
-		 dynamic_cast<const Flag &>
+		 dynamic_cast<Widelands::Flag const &>
 		 (*dynamic_cast<Building &>(*m_map->get_immovable(m_field))
 		  .get_base_flag()),
 		 m_plr->get_player_number());
@@ -943,7 +953,10 @@ Perform a field action (other than building options).
 Bring up a field action window or continue road building.
 ===============
 */
-void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindow::Registry *registry)
+void show_field_action
+(Interactive_Base           * const iabase,
+ Widelands::Player          * const player,
+ UI::UniqueWindow::Registry * const registry)
 {
 	FieldActionWindow *faw;
 
@@ -960,10 +973,11 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 		return;
 	}
 
-	const Map & map = player->egbase().map();
+	Widelands::Map const & map = player->egbase().map();
 
 	// we're building a road right now
-	const FCoords target = map.get_fcoords(iabase->get_sel_pos().node);
+	Widelands::FCoords const target =
+		map.get_fcoords(iabase->get_sel_pos().node);
 
 	// if user clicked on the same field again, build a flag
 	if (target == iabase->get_build_road_end()) {
@@ -973,7 +987,7 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 		if
 			(target != iabase->get_build_road_start()
 			 and
-			 player->get_buildcaps(target) & BUILDCAPS_FLAG)
+			 player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG)
 			flag = true;
 		faw->add_buttons_road(flag);
 		faw->init();
@@ -990,18 +1004,19 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 
 	// did he click on a flag or a road where a flag can be built?
 
-	if (const BaseImmovable * imm = map.get_immovable(target)) {
-		switch (imm->get_type()) {
-		case Map_Object::ROAD:
-			if (!(player->get_buildcaps(target) & BUILDCAPS_FLAG))
-				break;
-			if (upcast(Game, game, &iabase->egbase()))
-				game->send_player_build_flag(player->get_player_number(), target);
-
-		case Map_Object::FLAG:
+	if (upcast(Widelands::PlayerImmovable const, i, map.get_immovable(target)))
+	{
+		bool finish = false;
+		if      (dynamic_cast<Widelands::Flag const *>(i))
+			finish = true;
+		else if (dynamic_cast<Widelands::Road const *>(i))
+			if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
+				if (upcast(Game, game, &iabase->egbase()))
+					game->send_player_build_flag
+						(player->get_player_number(), target);
+				finish = true;
+			}
+		if (finish)
 			iabase->finish_build_road();
-			break;
-		}
 	}
 }
-

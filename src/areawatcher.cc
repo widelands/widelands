@@ -22,6 +22,7 @@
 #include "game.h"
 #include "player.h"
 
+namespace Widelands {
 
 void AreaWatcher::act(Game * game, uint32_t)
 {game->player(player_number).remove_areawatcher(*this); remove(game);}
@@ -42,3 +43,5 @@ AreaWatcher & AreaWatcher::create
 	result.init(&egbase);
 	return result;
 }
+
+};

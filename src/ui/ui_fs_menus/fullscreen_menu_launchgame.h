@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,16 +26,18 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 
-class Game;
+namespace Widelands {struct Game;
+struct Map_Loader;
+};
 class NetGame;
 class PlayerDescriptionGroup;
-class Map_Loader;
 
 /**
  * Fullscreen menu to select map and to set map options.
  */
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchGame(Game *, NetGame*, Map_Loader**);
+	Fullscreen_Menu_LaunchGame
+		(Widelands::Game *, NetGame *, Widelands::Map_Loader * *);
 
 	void start();
 	void think();
@@ -47,9 +49,9 @@ struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	void start_clicked();
 
 private:
-	Game                                 * m_game;
+	Widelands::Game                      * m_game;
 	NetGame                              * m_netgame;
-	Map_Loader *                         * m_ml;
+	Widelands::Map_Loader *              * m_ml;
 
 	UI::Textarea                           title;
 	UI::Button<Fullscreen_Menu_LaunchGame> back;

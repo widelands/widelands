@@ -34,8 +34,6 @@
 #include "building.h"
 #include "carrier.h"
 #include "editor_game_base.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "log.h"
@@ -45,6 +43,8 @@
 #include <vector>
 #include "warehouse.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
@@ -54,6 +54,7 @@
 #include <cstdarg>
 #include <stdio.h>
 
+namespace Widelands {
 
 Map_Object_Descr g_flag_descr;
 
@@ -872,7 +873,7 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	}
 
 	// Deal with the normal (flag) case
-	assert(nextstep->get_type() == FLAG);
+	dynamic_cast<Flag const &>(*nextstep);
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road* road = get_road(dir);
@@ -1416,14 +1417,13 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 		// end flag, he can be reassigned to the other road.
 		if (idx < 0)
 		{
-			Map* map = g->get_map();
-			BaseImmovable* imm = map->get_immovable(w->get_position());
-
-			if (imm && imm->get_type() == BUILDING) {
+			Map const & map = g->map();
+			if
+				(dynamic_cast<Building const *>
+				 (map.get_immovable(w->get_position())))
+			{
 				Coords pos;
-
-				g->get_map()->get_brn(w->get_position(), &pos);
-
+				map.get_brn(w->get_position(), &pos);
 				if (pos == path.get_start())
 					idx = 0;
 			}
@@ -1566,28 +1566,28 @@ Route::LoadData* Route::load(FileRead& fr)
  * load_pointers phase of loading: This is responsible for filling
  * in the \ref Flag pointers. Must be called after \ref load.
  */
-void Route::load_pointers(LoadData* data, Widelands_Map_Map_Object_Loader* mol)
-{
+void Route::load_pointers(LoadData & data, Map_Map_Object_Loader & mol) {
 	try {
-		for (uint32_t i = 0; i < data->flags.size(); ++i) {
-			uint32_t idx = data->flags.size();
-			if (upcast(Flag, flag, mol->get_object_by_file_index(idx)))
+		for (uint32_t i = 0; i < data.flags.size(); ++i) {
+			uint32_t const idx = data.flags.size();
+			if (upcast(Flag, flag, mol.get_object_by_file_index(idx)))
 				m_route.push_back(flag);
 			else
 				throw wexception("Route step %u expected flag %u", i, idx);
 		}
 	} catch (...) {
-		delete data;
+		delete &data;
 		throw;
 	}
-	delete data;
+	delete &data;
 }
 
 
 /**
  * Save the route to the given file.
  */
-void Route::save(FileWrite& fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Route::save
+	(FileWrite & fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * mos)
 {
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());
@@ -1876,7 +1876,7 @@ bool Requeriments::check (int32_t hp, int32_t attack, int32_t defense, int32_t e
  * loader.
  */
 void Requeriments::Read
-(FileRead * fr, Editor_Game_Base *, Widelands_Map_Map_Object_Loader *)
+(FileRead * fr, Editor_Game_Base *, Map_Map_Object_Loader *)
 {
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == REQUERIMENTS_VERSION) {
@@ -1901,11 +1901,9 @@ void Requeriments::Read
 			("Unknown requeriment version %i in file!", packet_version);
 }
 
-/**
- * Write this requeriment to a file
- */
+
 void Requeriments::Write
-(FileWrite * fw, Editor_Game_Base *, Widelands_Map_Map_Object_Saver *)
+(FileWrite * fw, Editor_Game_Base *, Map_Map_Object_Saver *)
 {
    // First, write version
 	fw->Unsigned16(REQUERIMENTS_VERSION);
@@ -1989,7 +1987,9 @@ Request::~Request()
  * might have been initialized. We have to kill them and replace
  * them through the data in the file
  */
-void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+void Request::Read
+	(FileRead * fr, Editor_Game_Base * egbase, Map_Map_Object_Loader * mol)
+{
 	uint16_t version = fr->Unsigned16();
 	if (version >= REQUEST_SUPPORTED_VERSION) {
       m_type=static_cast<Type>(fr->Unsigned8());
@@ -2043,7 +2043,9 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
 /**
  * Write this request to a file
  */
-void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+void Request::Write
+	(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * mos)
+{
    // First, write version
    fw->Unsigned16(REQUEST_VERSION);
 
@@ -2672,7 +2674,9 @@ void WaresQueue::set_consume_interval(const uint32_t time) throw ()
  * Read and write
  */
 #define WARES_QUEUE_DATA_PACKET_VERSION 1
-void WaresQueue::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) {
+void WaresQueue::Write
+	(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * os)
+{
 
    fw->Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
 
@@ -2687,7 +2691,11 @@ void WaresQueue::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Ma
 	} else
       fw->Unsigned8(0);
 }
-void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
+
+
+void WaresQueue::Read
+	(FileRead * fr, Editor_Game_Base * egbase, Map_Map_Object_Loader * ol)
+{
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
       m_ware=m_owner->get_owner()->tribe().get_ware_index(fr->CString());
@@ -3626,10 +3634,12 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 
 		// We somehow get desynced request lists that don't trigger desync
 		// alerts, so add info to the sync stream here.
-		StreamWrite& ss = g->syncstream();
+		{
+			::StreamWrite & ss = g->syncstream();
 		ss.Unsigned8(req->get_type());
 		ss.Unsigned8(req->get_index());
 		ss.Unsigned32(req->get_target()->get_serial());
+		}
 
 		int32_t ware_index = req->get_index();
 		if (req->get_type()==Request::WARE)
@@ -3846,9 +3856,7 @@ void Cmd_Call_Economy_Balance::execute(Game* g) {
  */
 #define CURRENT_CMD_CALL_ECONOMY_VERSION 1
 void Cmd_Call_Economy_Balance::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
@@ -3868,9 +3876,7 @@ void Cmd_Call_Economy_Balance::Read
 			 packet_version);
 }
 void Cmd_Call_Economy_Balance::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 
@@ -3885,3 +3891,5 @@ void Cmd_Call_Economy_Balance::Write
 	fw.Unsigned8 (has_eco);
 	if (has_eco) fw.Unsigned16(player.get_economy_number(m_economy));
 }
+
+};

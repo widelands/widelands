@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,8 @@ struct Textarea;
  * before it can return
  */
 struct Trigger_Building_Option_Menu : public UI::Window {
-	Trigger_Building_Option_Menu(Editor_Interactive &, Trigger_Building &);
+	Trigger_Building_Option_Menu
+		(Editor_Interactive &, Widelands::Trigger_Building &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
@@ -64,10 +65,10 @@ private:
 	void clicked_decrement_radius     ();
 	void clicked_increment_radius     ();
 
-	Trigger_Building &                                  m_trigger;
-	Player_Area<>                                       m_player_area;
-	Trigger_Building::Count_Type                        m_count;
-	Building_Descr::Index                               m_building;
+	Widelands::Trigger_Building &                       m_trigger;
+	Widelands::Player_Area<>                            m_player_area;
+	Widelands::Trigger_Building::Count_Type             m_count;
+	Widelands::Building_Descr::Index                    m_building;
 	UI::Textarea                                        m_label_name;
 	UI::Edit_Box                                        m_name;
 	UI::Textarea                                        m_label_player;

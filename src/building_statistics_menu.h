@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,10 @@
 #ifndef __S__BUILDING_STATISTICS_MENU_H
 #define __S__BUILDING_STATISTICS_MENU_H
 
-#include <stdint.h>
 #include "ui_table.h"
 #include "ui_unique_window.h"
 
-struct Building_Descr;
+namespace Widelands {struct Building_Descr;};
 class Interactive_Player;
 namespace UI {
 template <typename T, typename ID> struct IDButton;

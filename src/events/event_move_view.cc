@@ -28,6 +28,8 @@
 #include "profile.h"
 #include "wexception.h"
 
+namespace Widelands {
+
 static const int32_t EVENT_VERSION = 2;
 
 /*
@@ -80,3 +82,5 @@ Event::State Event_Move_View::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
+
+};

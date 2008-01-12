@@ -20,8 +20,6 @@
 #include "s2map.h"
 
 #include "editor_game_base.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
 #include "map.h"
@@ -42,32 +40,21 @@ using std::endl;
 // this is a detail of S2 maps
 #define CRITTER_PER_DEFINITION   1
 
-/**
- * class S2_Map_Loader
- *
- * the implementation of the S2 Map Loader
- */
-
-
-/**
- * S2_Map_Loader::S2_Map_Loader() - inits the map loader
- */
-S2_Map_Loader::S2_Map_Loader(const char* filename, Map* map) : Map_Loader(filename, map)
+S2_Map_Loader::S2_Map_Loader(const char * filename, Widelands::Map * const map)
+: Widelands::Map_Loader(filename, map)
 {
-	snprintf(m_filename, sizeof(m_filename), "%s", filename);
+	strncpy(m_filename, filename, sizeof(m_filename));
+	if (m_filename[sizeof(m_filename) - 1]) throw;
 	m_map=map;
 }
 
 
-/**
- * S2_Map_Loader::~S2_Map_Loader() - cleanups
- */
 S2_Map_Loader::~S2_Map_Loader() {
 }
 
 
 /**
- * S2_Map_Loader::preload_map() - load the header
+ * load the header
  *
  * preloads the map. The map will then return valid
  * infos when get_width() or get_nrplayers(),
@@ -80,7 +67,7 @@ int32_t S2_Map_Loader::preload_map(bool scenario) {
 
    load_s2mf_header();
 
-	if (not World::exists_world(m_map->get_world_name()))
+	if (not Widelands::World::exists_world(m_map->get_world_name()))
 		throw wexception("%s: World doesn't exist!", m_map->get_world_name());
 
 	if (scenario) {
@@ -100,7 +87,7 @@ int32_t S2_Map_Loader::preload_map(bool scenario) {
          "Rufus",
 		};
 
-		const Player_Number nr_players = m_map->get_nrplayers();
+		Widelands::Player_Number const nr_players = m_map->get_nrplayers();
 		iterate_player_numbers(i, nr_players) {
 	      m_map->set_scenario_player_tribe(i, "empire"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
          m_map->set_scenario_player_name(i, names[i-1]);
@@ -114,8 +101,6 @@ int32_t S2_Map_Loader::preload_map(bool scenario) {
 }
 
 /**
- * S2_Map_Loader::load_world()
- *
  * load predefined world of the S2Map
  */
 void S2_Map_Loader::load_world() {
@@ -126,14 +111,14 @@ void S2_Map_Loader::load_world() {
 
 
 /**
- * S2_Map_Loader::load_map_complete()
- *
  * Completly loads the map, loads the
  * corresponding world, loads the graphics
  * and places all the objects. From now on
  * the Map* can't be set to another one.
  */
-int32_t S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
+int32_t S2_Map_Loader::load_map_complete
+(Widelands::Editor_Game_Base * const game, bool)
+{
 	assert(get_state() == STATE_WORLD_LOADED);
 
    // Postload the world which provides all the immovables found on a map
@@ -150,8 +135,6 @@ int32_t S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
 
 
 /**
- * S2_Map_Loader::load_s2mf_section
- *
  * Some of the original S2 maps have rather odd sizes. In that case, however,
  * width (and height?) are rounded up to some alignment. The in-file size of
  * a section is stored in the section header (I think ;)).
@@ -199,7 +182,8 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t
 	try {
 		int32_t y = 0;
 		for (; y < height; ++y) {
-			uint8_t * const ptr = static_cast<uint8_t *>(file->Data(width));
+			uint8_t const * const ptr =
+				reinterpret_cast<uint8_t *>(file->Data(width));
 			memcpy(section + y*width, ptr, width);
 			file->Data(dw - width); //  skip the alignment junk
 		}
@@ -217,8 +201,6 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t
 
 
 /**
- * S2_Map_Loader::load_s2mf_header [private]
- *
  * Load informational data of an S2 map
  */
 void S2_Map_Loader::load_s2mf_header()
@@ -256,11 +238,9 @@ void S2_Map_Loader::load_s2mf_header()
 
 
 /**
- * S2_Map_Loader::load_s2mf [private]
- *
  * This loads a given file as a settlers 2 map file
  */
-void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
+void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 {
    uint8_t *section = 0;
 	uint8_t *bobs = 0;
@@ -285,8 +265,8 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		// The header must already have been processed
 		assert(m_map->m_world);
 		assert(m_map->m_fields);
-		const X_Coordinate mapwidth  = m_map->get_width ();
-		const Y_Coordinate mapheight = m_map->get_height();
+		Widelands::X_Coordinate const mapwidth  = m_map->get_width ();
+		Widelands::Y_Coordinate const mapheight = m_map->get_height();
 		assert(mapwidth  == header.w);
 		assert(mapheight == header.h);
 
@@ -298,10 +278,10 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		if (!section)
 			throw wexception("Section 1 (Heights) not found");
 
-		Field *f = m_map->m_fields;
+		Widelands::Field * f = m_map->m_fields;
 		pc = section;
-		for (Y_Coordinate y = 0; y < mapheight; ++y)
-			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc)
+		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
+			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc)
 				f->set_height(*pc);
 		free(section);
 		section = 0;
@@ -316,8 +296,8 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 
 		f = m_map->m_fields;
 		pc = section;
-		for (Y_Coordinate y = 0; y < mapheight; ++y)
-			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
+			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
 				switch (static_cast<int32_t>(c)) {
@@ -362,8 +342,8 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 
 		f = m_map->m_fields;
 		pc = section;
-		for (Y_Coordinate y = 0; y < mapheight; ++y)
-			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
+			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
 				switch (static_cast<int32_t>(c)) {
@@ -435,13 +415,14 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		if (!section)
 			throw wexception("Section 6 (Ways) not found");
 
-		for (Y_Coordinate y = 0; y < mapheight; ++y) {
+		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y) {
 			uint32_t i = y * mapwidth;
-			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
+			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				// ignore everything but HQs
 				if (section[i]==0x80) {
 					if (bobs[i] < m_map->get_nrplayers())
-						m_map->set_starting_pos(bobs[i]+1, Coords(x, y));
+						m_map->set_starting_pos
+							(bobs[i] + 1, Widelands::Coords(x, y));
 				}
 			}
 		}
@@ -463,9 +444,9 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		if (!section)
 			throw wexception("Section 7 (Animals) not found");
 
-		for (Y_Coordinate y = 0; y < mapheight; ++y) {
+		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y) {
 			uint32_t i = y * mapwidth;
-			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
+			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				const char *bobname = 0;
 
 				switch (section[i]) {
@@ -489,7 +470,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
 					for (uint32_t z = 0; z < CRITTER_PER_DEFINITION; ++z)
-						game->create_bob(Coords(x, y), idx);
+						game->create_bob(Widelands::Coords(x, y), idx);
 				}
 			}
 		}
@@ -568,8 +549,8 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		pc = section;
       const char * res;
       int32_t amount=0;
-		for (Y_Coordinate y = 0; y < mapheight; ++y)
-			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
+			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 
 				switch (c & 0xF8) {
@@ -636,12 +617,13 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
           Now try to convert the last stuff to Widelands-format
         */
 		uint8_t c;
-		for (Y_Coordinate y = 0; y < mapheight; ++y)
-			for (X_Coordinate x = 0; x < mapwidth; ++x) {
+		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
+			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x) {
 				const char *bobname = 0;
 
-				const Coords location(x, y);
-				const Map::Index index = Map::get_index(location, mapwidth);
+				Widelands::Coords const location(x, y);
+				Widelands::Map::Index const index =
+					Widelands::Map::get_index(location, mapwidth);
 				c = bobs[index];
 				if (buildings[index] == 0x78) {
 					switch (c) {
@@ -657,7 +639,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 						int32_t idx = m_map->m_world->get_immovable_index(bobname);
 						if (idx < 0)
 							throw wexception("Missing immovable type %s", bobname);
-						game->create_immovable(Coords(x, y), idx, 0);
+						game->create_immovable(Widelands::Coords(x, y), idx, 0);
 						continue;
 					}
 				}
@@ -760,7 +742,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					int32_t idx = m_map->m_world->get_immovable_index(bobname);
 					if (idx < 0)
 						throw wexception("Missing immovable type %s", bobname);
-					game->create_immovable(Coords(x, y), idx, 0);
+					game->create_immovable(Widelands::Coords(x, y), idx, 0);
 				}
 			}
 	}

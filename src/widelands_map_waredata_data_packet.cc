@@ -20,14 +20,13 @@
 #include "widelands_map_waredata_data_packet.h"
 
 #include "bob.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "map.h"
 #include "player.h"
 #include "transport.h"
 #include "tribe.h"
+#include "widelands_fileread.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
@@ -35,17 +34,16 @@
 
 #include "upcast.h"
 
+namespace Widelands {
+
 #define CURRENT_PACKET_VERSION 1
 
 
-Widelands_Map_Waredata_Data_Packet::~Widelands_Map_Waredata_Data_Packet() {}
-
-
-void Widelands_Map_Waredata_Data_Packet::Read
+void Map_Waredata_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
    if (skip)
@@ -82,28 +80,27 @@ throw (_wexception)
 						const Tribe_Descr & tribe = player_immovable->owner().tribe();
 						if (tribe.get_nrwares() <= static_cast<int32_t>(ware_index_from_file))
 							throw wexception
-								("Widelands_Map_Waredata_Data_Packet: ware index out "
-								 "of range: %i\n",
+								("Map_Waredata_Data_Packet: ware index out of range: "
+								 "%i",
 								 ware_index_from_file);
 						ware->m_descr = tribe.get_ware_descr(ware->descr_index());
 						ware->set_economy(player_immovable->get_economy());
 					} else
 						throw wexception
-							("Widelands_Map_Waredata_Data_Packet: location is "
-							 "PlayerImmovable but not Building or Flag\n");
+							("Map_Waredata_Data_Packet: location is PlayerImmovable "
+							 "but not Building or Flag");
 				} else if (upcast(Worker, worker, location)) {
 					const Tribe_Descr & tribe = *worker->get_tribe();
 					if (tribe.get_nrwares() <= static_cast<int32_t>(ware_index_from_file))
 						throw wexception
-							("Widelands_Map_Waredata_Data_Packet: ware index out of "
-							 "range: %i\n",
+							("Map_Waredata_Data_Packet: ware index out of range: %i",
 							 ware_index_from_file);
 					ware->m_descr = tribe.get_ware_descr(ware->descr_index());
 					ware->m_economy = 0; //  The worker sets our economy.
 				} else
 					throw wexception
-						("Widelands_Map_Waredata_Data_Packet: location is not "
-						 "PlayerImmovable or Worker\n");
+						("Map_Waredata_Data_Packet: location is not PlayerImmovable "
+						 "or Worker");
          // Do not touch supply or transfer
 
          // m_transfer_nextstep
@@ -120,28 +117,22 @@ throw (_wexception)
          ol->mark_object_as_loaded(ware);
 			} else
 				throw wexception
-					("Widelands_Map_Waredata_Data_Packet: location with serial "
-					 "number %u is not known",
+					("Map_Waredata_Data_Packet: location with serial number %u is "
+					 "not known",
 					 reg);
 		} else
 			throw wexception
-				("Widelands_Map_Waredata_Data_Packet: ware with serial number %u "
-				 "is not known",
+				("Map_Waredata_Data_Packet: ware with serial number %u is not "
+				 "known",
 				 reg);
 	} else
 		throw wexception
-			("Unknown version %u in Widelands_Map_Waredata_Data_Packet!",
-			 packet_version);
+			("Unknown version %u in Map_Waredata_Data_Packet!", packet_version);
 }
 
 
-/*
- * Write Function
- */
-void Widelands_Map_Waredata_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+void Map_Waredata_Data_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
    FileWrite fw;
@@ -190,7 +181,12 @@ throw (_wexception)
 /*
  * Write this ware instances data to disk
  */
-void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os, WareInstance* ware) {
+void Map_Waredata_Data_Packet::write_ware
+	(FileWrite            * fw,
+	 Editor_Game_Base     * egbase,
+	 Map_Map_Object_Saver * os,
+	 WareInstance         * ware)
+{
    // First, id
    fw->Unsigned32(os->get_object_file_index(ware));
 
@@ -225,3 +221,5 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
 
    os->mark_object_as_saved(ware);
 }
+
+};

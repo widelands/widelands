@@ -21,8 +21,7 @@
 
 #include "log.h"
 
-#include <stdint.h>
-
+namespace Widelands {
 
 /**
  * Delete the list. Print a warning message if the storage is not empty.
@@ -121,3 +120,4 @@ bool WareList::operator==(const WareList &wl) const
 	return true;
 }
 
+};

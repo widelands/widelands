@@ -20,11 +20,11 @@
 #include "instances.h"
 
 #include "cmd_queue.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "queue_cmd_ids.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
@@ -35,6 +35,7 @@
 
 #include <stdio.h>
 
+namespace Widelands {
 
 Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int32_t t, Map_Object* o)
 	: GameLogicCommand(t)
@@ -54,9 +55,7 @@ void Cmd_Destroy_Map_Object::execute(Game* g)
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
 void Cmd_Destroy_Map_Object::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
@@ -75,9 +74,7 @@ void Cmd_Destroy_Map_Object::Read
 			 packet_version);
 }
 void Cmd_Destroy_Map_Object::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
@@ -114,9 +111,7 @@ void Cmd_Act::execute(Game* g)
 
 #define CMD_ACT_VERSION 1
 void Cmd_Act::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CMD_ACT_VERSION) {
@@ -136,9 +131,7 @@ void Cmd_Act::Read
 		throw wexception("Unknown version in Cmd_Act::Read: %u", packet_version);
 }
 void Cmd_Act::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
@@ -573,10 +566,13 @@ void Map_Object::Loader::load_finish()
 /**
  * Save the Map_Object to the given file.
  */
-void Map_Object::save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver* mos, FileWrite& fw)
+void Map_Object::save
+	(Editor_Game_Base *, Map_Map_Object_Saver * mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Map_Object);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
 
 	fw.Unsigned32(mos->get_object_file_index(this));
 }
+
+};

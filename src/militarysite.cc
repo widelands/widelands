@@ -37,6 +37,7 @@
 #include <locale.h>
 #include <stdio.h>
 
+namespace Widelands {
 
 MilitarySite_Descr::MilitarySite_Descr
 (const Tribe_Descr & tribe_descr, const std::string & militarysite_name)
@@ -665,3 +666,5 @@ uint32_t MilitarySite::nr_attack_soldiers() {
       return not_marked-1;
    return 0;
 }
+
+};

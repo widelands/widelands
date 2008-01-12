@@ -27,6 +27,8 @@
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
 
+namespace Widelands {
+
 /**
  * Wares can be stored in warehouses. They can be transferred across an
  * Economy. They can be traded.
@@ -76,6 +78,6 @@ private:
 	uint32_t    m_icon;       //< Index of ware's picture in picture stack
 };
 
+};
 
 #endif   // __ITEM_WARE_DESCR_H
-

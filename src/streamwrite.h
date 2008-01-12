@@ -20,7 +20,6 @@
 #ifndef STREAMWRITE_H
 #define STREAMWRITE_H
 
-#include "geometry.h"
 #include "machdep.h"
 
 #include <cassert>
@@ -77,19 +76,11 @@ struct StreamWrite {
 	void String(const std::string str) {
 		Data(str.c_str(), str.size() + 1);
 	}
-
-	void  Coords32(const  Coords);
+	void CString(const char * const x) {Data(x, strlen(x) + 1);}
 
 private:
 	StreamWrite & operator=(StreamWrite const &);
 	explicit StreamWrite   (StreamWrite const &);
 };
-
-inline void StreamWrite::Coords32(const Coords c) {
-	assert(static_cast<uint16_t>(c.x) < 0x8000 or c.x == -1);
-	assert(static_cast<uint16_t>(c.y) < 0x8000 or c.y == -1);
-	{const uint16_t x = Little16(c.x); Data(&x, 2);}
-	{const uint16_t y = Little16(c.y); Data(&y, 2);}
-}
 
 #endif

@@ -23,6 +23,7 @@
 #include "bob.h"
 #include "immovable.h"
 
+namespace Widelands {
 
 /// \todo (Antonio Trueba#1#): Get rid of forward class declaration (chicked-and-egg problem)
 class Worker;
@@ -113,5 +114,6 @@ protected:
 	ProgramMap    m_programs;
 };
 
+};
 
 #endif // WORKER_DESCR_H

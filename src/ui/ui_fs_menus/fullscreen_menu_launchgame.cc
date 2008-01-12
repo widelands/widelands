@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,13 +27,15 @@
 #include "network.h"
 #include "map.h"
 #include "playerdescrgroup.h"
-#include <stdint.h>
 
 
-Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map_Loader** ml)
+Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
+(Widelands::Game         * const game,
+ NetGame                 * const ng,
+ Widelands::Map_Loader * * const ml)
 :
 Fullscreen_Menu_Base("launchgamemenu.jpg"),
-m_game(g),
+m_game(game),
 m_netgame(ng),
 m_ml(ml),
 
@@ -91,7 +93,7 @@ m_is_scenario(false)
 		    m_netgame->set_player_description_group (p, pdg);
 	}
 
-	if (not m_netgame) m_players[0]->set_player_type(Player::Local);
+	if (not m_netgame) m_players[0]->set_player_type(Widelands::Player::Local);
 }
 
 
@@ -136,12 +138,11 @@ void Fullscreen_Menu_LaunchGame::start_clicked()
 
 void Fullscreen_Menu_LaunchGame::refresh()
 {
-	Map* map = m_game->get_map();
+	Widelands::Map * const map = m_game->get_map();
 	uint32_t maxplayers = 0;
 
 	// update the mapname
-	if (map)
-	{
+	if (map) {
 		m_mapname.set_text(map->get_name());
 		maxplayers = map->get_nrplayers();
 	}
@@ -158,8 +159,9 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
 		} else if (i<maxplayers && map) {
 			std::string name=_("Player ");
-			if ((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
-			name.append(1, static_cast<char>(((i+1)%10) + 0x30));
+			uint8_t const n = i + 1;
+			if (uint8_t const n_10 = n / 10) name += '0' + n_10;
+			name                                  += '0' + n % 10;
 			m_players[i]->set_player_name(name);
 			m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
 		}

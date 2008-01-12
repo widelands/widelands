@@ -20,9 +20,11 @@
 #ifndef __S__PLAYER_AREA_H
 #define __S__PLAYER_AREA_H
 
-#include "geometry.h"
+#include "widelands_geometry.h"
 
 #include "widelands.h"
+
+namespace Widelands {
 
 template <typename Area_type = Area<> > struct Player_Area : public Area_type {
 	Player_Area() {}
@@ -30,6 +32,8 @@ template <typename Area_type = Area<> > struct Player_Area : public Area_type {
 		: Area_type(area), player_number(pn)
 	{}
 	Player_Number player_number;
+};
+
 };
 
 #endif // __S__PLAYER_AREA_H

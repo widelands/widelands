@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,8 @@
 #include "trigger_null_option_menu.h"
 #include "trigger_building_option_menu.h"
 #include "wexception.h"
+
+namespace Widelands {
 
 namespace Trigger_Factory {
 
@@ -69,15 +71,15 @@ Trigger * make_trigger_with_option_dialog
 	int32_t retval;
 	if        (strcmp(id, "time")     == 0) {
 		Trigger_Time_Option_Menu t
-			(parent, dynamic_cast<Trigger_Time     &>(*trig));
+			(parent, dynamic_cast<Widelands::Trigger_Time     &>(*trig));
 		retval = t.run();
 	} else if (strcmp(id, "null")     == 0) {
 		Trigger_Null_Option_Menu t
-			(parent, dynamic_cast<Trigger_Null     &>(*trig));
+			(parent, dynamic_cast<Widelands::Trigger_Null     &>(*trig));
 		retval = t.run();
 	} else if (strcmp(id, "building") == 0) {
 		Trigger_Building_Option_Menu t
-			(parent, dynamic_cast<Trigger_Building &>(*trig));
+			(parent, dynamic_cast<Widelands::Trigger_Building &>(*trig));
 		retval = t.run();
 	} else
 		throw wexception
@@ -110,5 +112,7 @@ Trigger_Descr * get_trigger_descr(uint32_t id) {
 size_t get_nr_of_available_triggers() {
 	return sizeof(TRIGGER_DESCRIPTIONS) / sizeof(*TRIGGER_DESCRIPTIONS);
 }
+
+};
 
 };

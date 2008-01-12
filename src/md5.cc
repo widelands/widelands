@@ -26,14 +26,6 @@
 #include "md5.h"
 
 
-// Note that the implementation of MD5Checksum is basically just
-// a wrapper around these functions, which have been taken basically
-// verbatim (with some whitespace changes) from the GNU tools; see below.
-static void * md5_finish_ctx (md5_ctx* ctx, void* resbuf);
-static void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx);
-static void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx);
-
-
 /**
  * Create a hex string out of the MD5 checksum.
  */
@@ -51,75 +43,6 @@ std::string md5_checksum::str() const
 }
 
 
-/**
- * Default Constructor
- */
-MD5Checksum::MD5Checksum()
-{
-	Reset();
-}
-
-
-/**
- * Reset the checksumming machinery to its initial state.
- */
-void MD5Checksum::Reset()
-{
-	can_handle_data = 1;
-
-	ctx.A = 0x67452301;
-	ctx.B = 0xefcdab89;
-	ctx.C = 0x98badcfe;
-	ctx.D = 0x10325476;
-
-	ctx.total[0] = ctx.total[1] = 0;
-	ctx.buflen = 0;
-}
-
-
-/**
- * This function consumes new data. It buffers it and calculates
- * one MD5 block when the buffer is full.
- *
- * \param data data to compute chksum for
- * \param size size of data
- */
-void MD5Checksum::Data(const void * const data, const size_t size)
-{
-	assert(can_handle_data);
-
-	md5_process_bytes(data, size, &ctx);
-}
-
-
-/**
- * This function finishes the checksum calculation.
- * After this, no more data may be written to the checksum.
- */
-void MD5Checksum::FinishChecksum()
-{
-	assert(can_handle_data);
-
-	can_handle_data = 0;
-
-	md5_finish_ctx(&ctx, sum.data);
-}
-
-
-/**
- * Retrieve the checksum. Note that \ref FinishChecksum must be called
- * before this function.
- *
- * \return a pointer to an array of 16 bytes containing the checksum.
- */
-const md5_checksum& MD5Checksum::GetChecksum() const
-{
-	 assert(!can_handle_data);
-
-	 return sum;
-}
-
-
 /********************************************************************
  *
  * Down here: private functions originally from Ulrich Drepper
@@ -134,7 +57,7 @@ static const uint8_t fillbuf[64] = {0x80, 0/*, 0, 0, ... 0 */};
 
    IMPORTANT: On some systems it is required that RESBUF is correctly
    aligned for a 32 bits value.  */
-static void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
+void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
 {
 	/* Take yet unprocessed bytes into account.  */
 	uint32_t bytes = ctx->buflen;
@@ -166,7 +89,7 @@ static void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
 }
 
 /* Processes some bytes in the internal buffer */
-static void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx)
+void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx)
 {
 	/* When we already have some bits in our internal buffer concatenate
 		both inputs first.  */
@@ -220,7 +143,7 @@ static void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx*
 /* Process LEN bytes of BUFFER, accumulating context into CTX.
    It is assumed that LEN % 64 == 0.  */
 
-static void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx)
+void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx)
 {
 	uint32_t correct_words[16];
 	uint32_t const * words = static_cast<const uint32_t *>(buffer);

@@ -21,6 +21,7 @@
 
 #include "trigger.h"
 
+namespace Widelands {
 
 void TriggerReferencer::reference_trigger(Trigger* tr) {
    tr->reference(this);
@@ -28,3 +29,5 @@ void TriggerReferencer::reference_trigger(Trigger* tr) {
 void TriggerReferencer::unreference_trigger(Trigger* tr) {
    tr->unreference(this);
 }
+
+};

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,13 @@
 #include "event_player_area.h"
 #include "i18n.h"
 
+struct Event_Conquer_Area_Option_Menu;
+
+namespace Widelands {
+
 /// Shows a message box.
 struct Event_Conquer_Area : public Event_Player_Area {
-	friend struct Event_Conquer_Area_Option_Menu;
+	friend struct ::Event_Conquer_Area_Option_Menu;
 	Event_Conquer_Area()
 		:
 		Event_Player_Area
@@ -37,6 +41,8 @@ struct Event_Conquer_Area : public Event_Player_Area {
 	const char * get_id() const {return "conquer_area";}
 
       State run(Game*);
+};
+
 };
 
 #endif

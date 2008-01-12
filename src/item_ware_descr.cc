@@ -22,6 +22,7 @@
 #include "item_ware_descr.h"
 #include "profile.h"
 
+namespace Widelands {
 
 /**
  * Loads a ware from conf stored in a given directory
@@ -84,3 +85,4 @@ Item_Ware_Descr* Item_Ware_Descr::create_from_dir(const char* name,
 	return descr;
 }
 
+};

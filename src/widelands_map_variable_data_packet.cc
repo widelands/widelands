@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,22 +20,23 @@
 #include "widelands_map_variable_data_packet.h"
 
 #include "editor_game_base.h"
-#include "filesystem.h"
 #include "map.h"
 #include "map_variable_manager.h"
+
+#include "filesystem.h"
 #include "profile.h"
 
+#include "upcast.h"
+
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-Widelands_Map_Variable_Data_Packet::~Widelands_Map_Variable_Data_Packet() {}
-
-
-void Widelands_Map_Variable_Data_Packet::Read
+void Map_Variable_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const)
+ Map_Map_Object_Loader * const)
 throw (_wexception)
 {
    if (skip)
@@ -71,13 +72,10 @@ throw (_wexception)
 }
 
 
-/*
- * Write Function
- */
-void Widelands_Map_Variable_Data_Packet::Write
+void Map_Variable_Data_Packet::Write
 (FileSystem & fs,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const)
+ Map_Map_Object_Saver * const)
 throw (_wexception)
 {
    Profile prof;
@@ -90,25 +88,19 @@ throw (_wexception)
 		mvm.get_nr_variables();
 	for (MapVariableManager::Index i = 0; i < nr_variables; ++i) {
 		const MapVariable & v = mvm.get_variable_by_nr(i);
-      Section & s = *prof.create_section(v.get_name());
+		Section & s = *prof.create_section(v.get_name().c_str());
       s.set_bool("delete_protected", v.is_delete_protected());
-		switch (v.get_type()) {
-		case MapVariable::MVT_INT:
+		if        (upcast(Int_MapVariable    const, ivar, &v)) {
 			s.set_string("type", "int");
-			s.set_int("value", static_cast<const Int_MapVariable &>(v).get_value());
-         break;
-
-		case MapVariable::MVT_STRING:
+			s.set_int   ("value", ivar->get_value());
+		} else if (upcast(String_MapVariable const, svar, &v)) {
 			s.set_string("type", "string");
-			s.set_string("value", static_cast<const String_MapVariable &>(v).get_value());
-         break;
-
-		default:
-			throw wexception
-				("Unknown Variable type in Widelands_Map_Variable_Data_Packet: %i",
-				 v.get_type());
-		}
+			s.set_string("value", svar->get_value().c_str());
+		} else
+			throw wexception("Unknown Variable type in Map_Variable_Data_Packet");
 	}
 
    prof.write("variable", false, fs);
 }
+
+};

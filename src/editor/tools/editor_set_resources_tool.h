@@ -29,17 +29,18 @@ struct Editor_Set_Resources_Tool : public Editor_Tool {
 		: Editor_Tool(*this, *this), m_cur_res(0), m_set_to(0)
 	{}
 
-	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl
+		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_set_resources.png";}
 
 	uint8_t get_set_to() const throw () {return m_set_to;}
 	void set_set_to(uint8_t const n) throw () {m_set_to = n;}
-	Resource_Descr::Index get_cur_res() const throw () {return m_cur_res;}
-	void set_cur_res(const Resource_Descr::Index res) throw () {m_cur_res = res;}
+	Widelands::Resource_Descr::Index get_cur_res() const throw () {return m_cur_res;}
+	void set_cur_res(const Widelands::Resource_Descr::Index res) throw () {m_cur_res = res;}
 
 private:
-	Resource_Descr::Index m_cur_res;
+	Widelands::Resource_Descr::Index m_cur_res;
 	uint8_t               m_set_to;
 };
 

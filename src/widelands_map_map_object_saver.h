@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #include <map>
 
-#include <stdint.h>
+namespace Widelands {
 
 class Map_Object;
 
@@ -31,9 +31,8 @@ class Map_Object;
  *   - keep track of map objects on the map
  *   - translate Map_Object* Pointer into the index used in the saved file
  */
-class Widelands_Map_Map_Object_Saver {
-public:
-	Widelands_Map_Map_Object_Saver();
+struct Map_Map_Object_Saver {
+	Map_Map_Object_Saver();
 
 	bool is_object_known(const Map_Object * const) const;
 	uint32_t register_object(const Map_Object * const);
@@ -72,6 +71,6 @@ private:
 	uint32_t m_lastserial;
 };
 
-
+};
 
 #endif

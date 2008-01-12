@@ -22,6 +22,8 @@
 
 #include "trigger.h"
 
+namespace Widelands {
+
 /*
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
@@ -46,6 +48,8 @@ struct Trigger_Time : public Trigger {
 private:
       uint32_t m_wait_time; // in seconds
       uint32_t m_last_start_time;
+};
+
 };
 
 #endif

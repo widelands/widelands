@@ -17,8 +17,11 @@
  *
  */
 
-#include <stdint.h>
 #include "mapviewpixelfunctions.h"
+
+#include "vector.h"
+
+using namespace Widelands;
 
 // sqrt(1/3)
 #define V3 static_cast<float>(0.57735)

@@ -22,6 +22,8 @@
 
 #include <string>
 
+namespace Widelands {
+
 struct Event;
 
 /*
@@ -36,6 +38,6 @@ struct EventReferencer {
       void unreference_event(Event*);
 };
 
-
+};
 
 #endif // __S__EVENT_REFERENCER_H

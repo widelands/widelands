@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,13 +50,18 @@ void PlayerDescriptionGroup::allow_changes(changemode_t t) {
    m_btnPlayerTribe.set_enabled(t & CHANGE_TRIBE);
 }
 
-PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* parent, int32_t x, int32_t y, Game* game, int32_t plnum, bool highlight)
+PlayerDescriptionGroup::PlayerDescriptionGroup
+(UI::Panel              * const parent,
+ int32_t const x, int32_t const y,
+ Widelands::Game        * const game,
+ Widelands::Player_Number const plnum,
+ bool                     const highlight)
 :
 UI::Panel(parent, x, y, 450, 20),
 m_game(game),
 m_plnum(plnum),
 m_enabled(false),
-m_playertype(Player::Local), //just for initalization
+m_playertype(Widelands::Player::Local), //just for initalization
 m_current_tribe(0),
 m_allow_changes(CHANGE_EVERYTHING),
 
@@ -83,10 +88,10 @@ m_btnPlayerTribe
 	set_visible(false);
 	m_btnEnablePlayer.set_state(true);
 	m_btnEnablePlayer.changedto.set(this, &PlayerDescriptionGroup::enable_player);
-	Tribe_Descr::get_all_tribenames(m_tribes);
+	Widelands::Tribe_Descr::get_all_tribenames(m_tribes);
 	m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
 
-	set_player_type(Player::AI);
+	set_player_type(Widelands::Player::AI);
 }
 
 /** PlayerDescriptionGroup::set_enabled(bool enable)
@@ -121,7 +126,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 		}
 
 		m_btnPlayerType.set_title
-			(m_playertype == Player::AI ? _("Computer") : _("Human"));
+			(m_playertype == Widelands::Player::AI ? _("Computer") : _("Human"));
 		m_btnPlayerType .set_visible(m_btnEnablePlayer.get_state());
 		m_btnPlayerTribe.set_visible(m_btnEnablePlayer.get_state());
 
@@ -218,7 +223,7 @@ void PlayerDescriptionGroup::set_player_type(int32_t type)
 
 	if (m_enabled) {
 		m_btnPlayerType.set_title
-			(m_playertype == Player::AI ? _("Computer") : _("Human"));
+			(m_playertype == Widelands::Player::AI ? _("Computer") : _("Human"));
 
 		m_game->add_player
 			(m_plnum, m_playertype,

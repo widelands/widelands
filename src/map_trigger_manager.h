@@ -23,6 +23,8 @@
 #include <cassert>
 #include <vector>
 
+namespace Widelands {
+
 class Trigger;
 
 /*
@@ -65,6 +67,8 @@ struct MapTriggerManager {
 
 private:
 	trigger_vector      m_triggers;
+};
+
 };
 
 #endif

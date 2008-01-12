@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,13 @@
 #ifndef __S__WIDELANDS_MAP_BUILDINGDATA_DATA_PACKET_H
 #define __S__WIDELANDS_MAP_BUILDINGDATA_DATA_PACKET_H
 
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet.h"
 
+namespace Widelands {
+
 struct ConstructionSite;
-struct FileRead;
-struct FileWrite;
 struct MilitarySite;
 struct TrainingSite;
 struct ProductionSite;
@@ -33,19 +35,14 @@ struct Warehouse;
 /*
  * This cares for the data of buildings
  */
-struct Widelands_Map_Buildingdata_Data_Packet : public Widelands_Map_Data_Packet {
-      virtual ~Widelands_Map_Buildingdata_Data_Packet();
-
+struct Map_Buildingdata_Data_Packet : public Map_Data_Packet {
 	virtual void Read
 		(FileSystem &,
 		 Editor_Game_Base*,
 		 const bool,
-		 Widelands_Map_Map_Object_Loader * const = 0)
+		 Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	virtual void Write
-		(FileSystem &,
-		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const  = 0)
+	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
 
 private:
@@ -53,53 +50,54 @@ private:
 		(ConstructionSite &,
 		 FileRead &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Loader * const);
+		 Map_Map_Object_Loader * const);
 	virtual void read_warehouse
 		(Warehouse &,
 		 FileRead &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Loader * const);
+		 Map_Map_Object_Loader * const);
 	virtual void read_militarysite
 		(MilitarySite &,
 		 FileRead &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Loader * const);
+		 Map_Map_Object_Loader * const);
 	virtual void read_trainingsite
 		(TrainingSite &,
 		 FileRead &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Loader * const);
+		 Map_Map_Object_Loader * const);
 	virtual void read_productionsite
 		(ProductionSite &,
 		 FileRead &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Loader * const);
+		 Map_Map_Object_Loader * const);
 	virtual void write_constructionsite
 		(const ConstructionSite &,
 		 FileWrite &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const);
+		 Map_Map_Object_Saver * const);
 	virtual void write_warehouse
 		(const Warehouse &,
 		 FileWrite &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const);
+		 Map_Map_Object_Saver * const);
 	virtual void write_militarysite
 		(const MilitarySite &,
 		 FileWrite &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const);
+		 Map_Map_Object_Saver * const);
 	virtual void write_trainingsite
 		(const TrainingSite &,
 		 FileWrite &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const);
+		 Map_Map_Object_Saver * const);
 	virtual void write_productionsite
 		(const ProductionSite &,
 		 FileWrite &,
 		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const);
+		 Map_Map_Object_Saver * const);
 };
 
+};
 
 #endif

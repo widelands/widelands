@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class Trigger_Null;
+namespace Widelands {class Trigger_Null;};
 namespace UI {struct Edit_Box;};
 
 /*
@@ -31,7 +31,7 @@ namespace UI {struct Edit_Box;};
  * before it can return
  */
 struct Trigger_Null_Option_Menu : public UI::Window {
-	Trigger_Null_Option_Menu(Editor_Interactive &, Trigger_Null &);
+	Trigger_Null_Option_Menu(Editor_Interactive &, Widelands::Trigger_Null &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
@@ -39,7 +39,7 @@ struct Trigger_Null_Option_Menu : public UI::Window {
 private:
 	void clicked_ok();
 
-	Trigger_Null & m_trigger;
+	Widelands::Trigger_Null & m_trigger;
       UI::Edit_Box* m_name;
 };
 

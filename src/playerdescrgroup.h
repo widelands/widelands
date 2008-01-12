@@ -20,6 +20,8 @@
 #ifndef __S__PLAYER_DESCR_GROUP
 #define __S__PLAYER_DESCR_GROUP
 
+#include "widelands.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_signal.h"
@@ -27,7 +29,7 @@
 
 #include <vector>
 
-class Game;
+namespace Widelands {struct Game;};
 
 /** class PlayerDescriptionGroup
  *
@@ -42,7 +44,12 @@ struct PlayerDescriptionGroup : public UI::Panel {
 		CHANGE_EVERYTHING=3
 	};
 
-	PlayerDescriptionGroup(UI::Panel* parent, int32_t x, int32_t y, Game* game, int32_t plnum, bool highlight=false);
+	PlayerDescriptionGroup
+		(UI::Panel              * parent,
+		 int32_t x, int32_t y,
+		 Widelands::Game        * game,
+		 Widelands::Player_Number plnum,
+		 bool                     highlight = false);
 
 	UI::Signal changed;
 
@@ -57,8 +64,8 @@ private:
 	void toggle_playertype();
 	void toggle_playertribe();
 
-	Game       * m_game;
-	int32_t          m_plnum;
+	Widelands::Game        * m_game;
+	Widelands::Player_Number m_plnum;
 
 	bool         m_enabled; //  is this player allowed at all (map-dependent)
 	int32_t          m_playertype;

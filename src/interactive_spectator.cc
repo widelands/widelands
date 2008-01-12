@@ -37,7 +37,7 @@ struct Interactive_Spectator::Internals {
 /**
  * Setup the replay UI for the given game.
  */
-Interactive_Spectator::Interactive_Spectator(Game* g)
+Interactive_Spectator::Interactive_Spectator(Widelands::Game * const g)
 :
 Interactive_Base(*g),
 m(new Internals)
@@ -83,9 +83,9 @@ Interactive_Spectator::~Interactive_Spectator()
 /**
  * \return a pointer to the running \ref Game instance.
  */
-Game* Interactive_Spectator::get_game()
+Widelands::Game * Interactive_Spectator::get_game()
 {
-	return static_cast<Game*>(&egbase());
+	return static_cast<Widelands::Game *>(&egbase());
 }
 
 
@@ -95,7 +95,7 @@ Game* Interactive_Spectator::get_game()
  * \note We might want to implement a feature to watch a specific player,
  * including their vision. Then this should be changed.
  */
-Player* Interactive_Spectator::get_player() const throw ()
+Widelands::Player * Interactive_Spectator::get_player() const throw ()
 {
 	return 0;
 }
@@ -139,7 +139,7 @@ void Interactive_Spectator::end_of_game()
  */
 void Interactive_Spectator::start()
 {
-	Map & map = get_game()->map();
+	Widelands::Map & map = get_game()->map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 

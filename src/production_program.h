@@ -29,8 +29,11 @@
 #include <stdint.h>
 
 struct EncodeData;
+struct Profile;
+
+namespace Widelands {
+
 struct ProductionSite_Descr;
-class Profile;
 
 struct ProductionAction {
 	enum Type {
@@ -96,7 +99,6 @@ private:
 	std::vector<ProductionAction> m_actions;
 };
 
-
-
+};
 
 #endif

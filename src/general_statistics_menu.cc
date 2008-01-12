@@ -36,6 +36,7 @@
 #include "ui_radiobutton.h"
 #include "ui_textarea.h"
 
+using namespace Widelands;
 
 #define PLOT_HEIGHT 100
 #define NR_DIFFERENT_DATASETS 7

@@ -23,6 +23,7 @@
 
 #include <vector>
 
+namespace Widelands {
 
 MapEventManager::MapEventManager() {}
 
@@ -87,3 +88,5 @@ void MapEventManager::delete_unreferenced_events() {
       ++i;
 	}
 }
+
+};

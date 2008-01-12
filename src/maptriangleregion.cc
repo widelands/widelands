@@ -17,8 +17,9 @@
  *
  */
 
-#include <stdint.h>
 #include "maptriangleregion.h"
+
+namespace Widelands {
 
 template <> MapTriangleRegion<>::MapTriangleRegion
 (const Map & map, Area<TCoords<> > area)
@@ -260,3 +261,5 @@ bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
 	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)
 	return true;
 }
+
+};

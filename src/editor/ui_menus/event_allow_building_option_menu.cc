@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ inline Editor_Interactive & Event_Allow_Building_Option_Menu::eia() {
 
 #define spacing 5
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu
-(Editor_Interactive & parent, Event_Allow_Building & event)
+(Editor_Interactive & parent, Widelands::Event_Allow_Building & event)
 :
 UI::Window(&parent, 0, 0, 200, 280, _("Allow Building Event Options").c_str()),
 m_event(event),
@@ -59,18 +59,21 @@ m_building(-1) //  FIXME negative value!
    if (m_player<1) m_player=1;
 
    // Fill the building infos
-	Editor_Game_Base & editor = eia().egbase();
+	Widelands::Editor_Game_Base & editor = eia().egbase();
 	if
-		(const Tribe_Descr * const tribe = editor.get_tribe
+		(Widelands::Tribe_Descr const * const tribe = editor.get_tribe
 		 (editor.map().get_scenario_player_tribe(m_player).c_str()))
 	{
-		const Building_Descr::Index nr_buildings = tribe->get_nrbuildings();
-		for (Building_Descr::Index i = 0; i < nr_buildings; ++i) {
-         Building_Descr* b=tribe->get_building_descr(i);
-         if (!b->get_buildable() && !b->get_enhanced_building()) continue;
-			const std::string & name = b->name();
-			if (name == m_event.get_building()) m_building = m_buildings.size();
-         m_buildings.push_back(name);
+		Widelands::Building_Descr::Index const nr_buildings =
+			tribe->get_nrbuildings();
+		for (Widelands::Building_Descr::Index i = 0; i < nr_buildings; ++i) {
+			Widelands::Building_Descr & building = *tribe->get_building_descr(i);
+			if (building.get_buildable() or building.get_enhanced_building()) {
+				std::string const & name = building.name();
+				if (name == m_event.get_building())
+					m_building = m_buildings.size();
+				m_buildings.push_back(name);
+			}
 		}
 	}
 
@@ -206,7 +209,8 @@ void Event_Allow_Building_Option_Menu::clicked(int32_t i) {
  */
 void Event_Allow_Building_Option_Menu::update() {
    if (m_player<=0) m_player=1;
-	const Player_Number nr_players = eia().egbase().map().get_nrplayers();
+	Widelands::Player_Number const nr_players =
+		eia().egbase().map().get_nrplayers();
 	if (m_player > nr_players) m_player = nr_players;
 
    if (m_building<0) m_building=0;

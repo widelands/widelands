@@ -21,6 +21,8 @@
 
 #include "event.h"
 
+namespace Widelands {
+
 /*
  * Reference a event
  */
@@ -30,3 +32,5 @@ void EventReferencer::reference_event(Event* tr) {
 void EventReferencer::unreference_event(Event* tr) {
    tr->unreference(this);
 }
+
+};

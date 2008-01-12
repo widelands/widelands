@@ -21,7 +21,7 @@
 #define __S__OVERLAY_HANDLER_H
 
 #include "field.h"
-#include "geometry.h"
+#include "widelands_geometry.h"
 
 #include <map>
 #include <set>
@@ -53,7 +53,8 @@
  */
 #define MAX_OVERLAYS_PER_NODE 5
 #define MAX_OVERLAYS_PER_TRIANGLE 3
-typedef int32_t (*Overlay_Callback_Function)(const TCoords<FCoords>, void *, int32_t);
+typedef int32_t (*Overlay_Callback_Function)
+(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 struct Overlay_Manager {
 	struct Job_Id { //  Boxing
 		static Job_Id Null() throw ()//  Constant value for no job.
@@ -107,35 +108,34 @@ struct Overlay_Manager {
 	 * Point::invalid(), the center of the picture will be used as hotspot.
 	 */
 	void register_overlay
-		(const TCoords<>,
-		 const int32_t picid,
-		 const int32_t level,
-		 Point        hotspot = Point::invalid(),
-		 const Job_Id jobid = Job_Id::Null());
+		(Widelands::TCoords<>,
+		 int32_t picid,
+		 int32_t level,
+		 Point   hotspot = Point::invalid(),
+		 Job_Id          = Job_Id::Null());
 
 	//  if picid == -1 remove all overlays
-	void remove_overlay(const TCoords<>, const int32_t picid = -1);
+	void remove_overlay(Widelands::TCoords<>, int32_t picid = -1);
 
-	void remove_overlay(const Job_Id jobid);
+	void remove_overlay(Job_Id);
 
-	uint8_t get_overlays(const FCoords c, Overlay_Info * const) const;
-	uint8_t get_overlays
-		(const TCoords<>, Overlay_Info * const overlays) const;
+	uint8_t get_overlays(Widelands::FCoords c, Overlay_Info *) const;
+	uint8_t get_overlays(Widelands::TCoords<>, Overlay_Info *) const;
 
       void show_buildhelp(bool t) {m_showbuildhelp= t;}
       void toggle_buildhelp() {m_showbuildhelp=!m_showbuildhelp;}
 
-	void recalc_field_overlays(const FCoords);
+	void recalc_field_overlays(Widelands::FCoords);
 
 	//  Road overlays are registered like normal overlays and removed like normal
 	//  overlays but they use are handled internally completly different. When a
 	//  road overlay information is requested the same data as for a field is
 	//  returned (a uint8_t which needs to be ANDed).
 	void register_road_overlay
-		(const Coords, const uint8_t where, const Job_Id jobid = Job_Id::Null());
-	void remove_road_overlay(const Coords);
-	void remove_road_overlay(const Job_Id jobid);
-	uint8_t get_road_overlay(const Coords c) const {
+		(Widelands::Coords, uint8_t where, Job_Id = Job_Id::Null());
+	void remove_road_overlay(Widelands::Coords);
+	void remove_road_overlay(Job_Id);
+	uint8_t get_road_overlay(const Widelands::Coords c) const {
 		Registered_Road_Overlays_Map::const_iterator it = m_road_overlays.find(c);
 		if (it != m_road_overlays.end()) return it->second.where;
 		return 0;
@@ -165,19 +165,25 @@ private:
 	};
 
 	typedef
-		std::map<const Coords, Registered_Road_Overlays, Coords::ordering_functor>
+		std::map
+			<const Widelands::Coords,
+			 Registered_Road_Overlays,
+			 Widelands::Coords::ordering_functor>
 		Registered_Road_Overlays_Map;
 
 	Registered_Road_Overlays_Map m_road_overlays;
 
 	typedef
-		std::multimap<const Coords, Registered_Overlays, Coords::ordering_functor>
+		std::multimap
+		<const Widelands::Coords,
+		 Registered_Overlays,
+		 Widelands::Coords::ordering_functor>
 		Registered_Overlays_Map;
 
 	//  indexed by TCoords<>::TriangleIndex
 	Registered_Overlays_Map m_overlays[3];
 
-	Overlay_Info m_buildhelp_infos[Field::Buildhelp_None];
+	Overlay_Info m_buildhelp_infos[Widelands::Field::Buildhelp_None];
       bool m_are_graphics_loaded;
       bool m_showbuildhelp;
       Overlay_Callback_Function m_callback;           // this callback is used to define we're overlays are set and were not

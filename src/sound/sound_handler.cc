@@ -256,7 +256,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 	assert(fr);
 
 	//direct access to member variable is neccessary here
-	src = SDL_RWFromMem(fr->data, fr->GetSize());
+	src = SDL_RWFromMem(fr->Data(fr->GetSize(), 0), fr->GetSize());
 
 	if (NEW_SDL_MIXER == 1) {
 		//SDL_mixer will free the RWops "src" itself
@@ -392,7 +392,7 @@ int32_t Sound_Handler::stereo_position(const Coords position)
 	int32_t sx, sy;
 	//x, y resolutions of game window
 	int32_t xres, yres;
-	FCoords fposition;
+	Widelands::FCoords fposition;
 	Point vp;
 	Interactive_Base *ia;
 

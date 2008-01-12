@@ -39,6 +39,8 @@
 
 #include "upcast.h"
 
+namespace Widelands {
+
 static const size_t STATISTICS_VECTOR_LENGTH = 10;
 
 
@@ -1167,3 +1169,5 @@ void ProductionSite::program_end(Game* g, bool success)
 	m_program_timer = true;
 	m_program_time = schedule_act(g, m_post_timer);
 }
+
+};

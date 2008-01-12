@@ -28,6 +28,7 @@
 
 #include <stdio.h>
 
+using Widelands::Trigger_Building;
 
 inline Editor_Interactive & Trigger_Building_Option_Menu::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -35,7 +36,7 @@ inline Editor_Interactive & Trigger_Building_Option_Menu::eia() {
 
 
 inline static void update_label_player
-(UI::Textarea & ta, const Player_Number p)
+(UI::Textarea & ta, Widelands::Player_Number const p)
 {
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), _("Player: %u").c_str(), p);
@@ -44,7 +45,7 @@ inline static void update_label_player
 
 
 inline static void update_label_count
-(UI::Textarea & ta, const Trigger_Building::Count_Type count)
+(UI::Textarea & ta, Trigger_Building::Count_Type const count)
 {
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), _("How many: %u").c_str(), count);
@@ -53,7 +54,7 @@ inline static void update_label_count
 
 
 inline static void update_label_building
-(UI::Textarea & ta, const Building_Descr & building)
+(UI::Textarea & ta, Widelands::Building_Descr const & building)
 {
 	char buffer[128];
 	snprintf
@@ -64,7 +65,7 @@ inline static void update_label_building
 
 
 inline static void update_label_coords
-(UI::Textarea & ta, const Coords coords)
+(UI::Textarea & ta, Widelands::Coords const coords)
 {
 	char buffer[32];
 	snprintf
@@ -75,7 +76,7 @@ inline static void update_label_coords
 
 
 inline static void update_label_radius
-(UI::Textarea & ta, const Player_Area<>::Radius_type radius)
+(UI::Textarea & ta, Widelands::Player_Area<>::Radius_type const radius)
 {
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), _("Radius: %u").c_str(), radius);
@@ -94,9 +95,9 @@ UI::Window(&parent, 0, 0, 280, 280, _("Building Trigger Options").c_str()),
 m_trigger (trigger),
 
 m_player_area
-(Player_Area<>
+(Widelands::Player_Area<>
  (trigger.m_player_area.player_number,
-  Area<>(trigger.m_player_area, trigger.m_player_area.radius))),
+  Widelands::Area<>(trigger.m_player_area, trigger.m_player_area.radius))),
 
 m_label_name(this, spacing, spacing, 50, 20, _("Name:"), Align_CenterLeft),
 
@@ -168,7 +169,9 @@ m_increment_count
  g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
  &Trigger_Building_Option_Menu::clicked_increment_count, this,
  std::string(),
- m_count < std::numeric_limits<Trigger_Building::Count_Type>::max()),
+ m_count
+ <
+ std::numeric_limits<Trigger_Building::Count_Type>::max()),
 
 m_label_coords
 (this,
@@ -291,7 +294,7 @@ m_increment_radius
  std::string(),
  m_player_area.radius
  <
- std::numeric_limits<Player_Area<>::Radius_type>::max()),
+ std::numeric_limits<Widelands::Player_Area<>::Radius_type>::max()),
 
 m_button_ok
 (this,
@@ -312,9 +315,9 @@ m_button_cancel
 
 {
 	if (m_player_area.player_number == 0) m_player_area.player_number = 1;
-	const Editor_Game_Base & egbase = parent.egbase();
+	Widelands::Editor_Game_Base const & egbase = parent.egbase();
 	assert(m_player_area.player_number <= egbase.map().get_nrplayers());
-	const Tribe_Descr & tribe =
+	Widelands::Tribe_Descr const & tribe =
 		*egbase.get_tribe
 		(egbase.map()
 		 .get_scenario_player_tribe(m_player_area.player_number).c_str());
@@ -358,12 +361,12 @@ bool Trigger_Building_Option_Menu::handle_mouserelease(const Uint8, int32_t, int
 
 ///  Change the player number 1 step in any direction. Wraps around.
 void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
-	const Editor_Game_Base & egbase = eia().egbase();
-	const Map & map = egbase.map();
-	const Tribe_Descr & old_tribe =
+	Widelands::Editor_Game_Base const & egbase    = eia().egbase();
+	Widelands::Map              const & map       = egbase.map();
+	Widelands::Tribe_Descr      const & old_tribe =
 		*egbase.get_tribe
 		(map.get_scenario_player_tribe(m_player_area.player_number).c_str());
-	const Player_Number nr_players = map.get_nrplayers();
+	Widelands::Player_Number const nr_players = map.get_nrplayers();
 	assert(1 < nr_players);
 	assert(1 <= m_player_area.player_number);
 	assert     (m_player_area.player_number <= nr_players);
@@ -376,7 +379,7 @@ void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
 		if (0 == m_player_area.player_number)
 			m_player_area.player_number = nr_players;
 	}
-	const Tribe_Descr & new_tribe =
+	Widelands::Tribe_Descr const & new_tribe =
 		*egbase.get_tribe
 		(map.get_scenario_player_tribe(m_player_area.player_number).c_str());
 	if (&old_tribe != &new_tribe) {
@@ -401,9 +404,9 @@ void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
 
 
 void Trigger_Building_Option_Menu::clicked_increment_building() {
-	const Editor_Game_Base & egbase = eia().egbase();
-	const Map & map = egbase.map();
-	const Tribe_Descr & tribe =
+	Widelands::Editor_Game_Base const & egbase = eia().egbase();
+	Widelands::Map              const & map    = egbase.map();
+	Widelands::Tribe_Descr      const & tribe  =
 		*egbase.get_tribe
 		(map.get_scenario_player_tribe(m_player_area.player_number).c_str());
 	++m_building;
@@ -414,8 +417,8 @@ void Trigger_Building_Option_Menu::clicked_increment_building() {
 
 
 void Trigger_Building_Option_Menu::clicked_decrement_building() {
-	const Editor_Game_Base & egbase = eia().egbase();
-	const Tribe_Descr & tribe =
+	Widelands::Editor_Game_Base const & egbase = eia().egbase();
+	Widelands::Tribe_Descr      const & tribe =
 		*egbase.get_tribe
 		(egbase.map().get_scenario_player_tribe(m_player_area.player_number)
 		 .c_str());
@@ -427,7 +430,10 @@ void Trigger_Building_Option_Menu::clicked_decrement_building() {
 
 
 void Trigger_Building_Option_Menu::clicked_increment_count() {
-	assert(m_count < std::numeric_limits<Trigger_Building::Count_Type>::max());
+	assert
+		(m_count
+		 <
+		 std::numeric_limits<Trigger_Building::Count_Type>::max());
 	++m_count;
 	update_label_count(m_label_count, m_count);
 	m_decrement_count.set_enabled(true);
@@ -448,7 +454,7 @@ void Trigger_Building_Option_Menu::clicked_decrement_count() {
 void Trigger_Building_Option_Menu::clicked_decrease_x_coordinate
 (const uint8_t d)
 {
-	const X_Coordinate w = eia().egbase().map().extent().w;
+	Widelands::X_Coordinate const w = eia().egbase().map().extent().w;
 	while (m_player_area.x < d) m_player_area.x += w;
 	m_player_area.x -= d;
 	update_label_coords(m_label_coords, m_player_area);
@@ -467,7 +473,7 @@ void Trigger_Building_Option_Menu::clicked_increase_x_coordinate
 void Trigger_Building_Option_Menu::clicked_decrease_y_coordinate
 (const uint8_t d)
 {
-	const Y_Coordinate h = eia().egbase().map().extent().h;
+	Widelands::Y_Coordinate const h = eia().egbase().map().extent().h;
 	while (m_player_area.y < d) m_player_area.y += h;
 	m_player_area.y -= d;
 	update_label_coords(m_label_coords, m_player_area);
@@ -487,14 +493,14 @@ void Trigger_Building_Option_Menu::clicked_increment_radius() {
 	assert
 		(m_player_area.radius
 		 <
-		 std::numeric_limits<Player_Area<>::Radius_type>::max());
+		 std::numeric_limits<Widelands::Player_Area<>::Radius_type>::max());
 	++m_player_area.radius;
 	update_label_radius(m_label_radius, m_player_area.radius);
 	m_decrement_radius.set_enabled(true);
 	m_increment_radius.set_enabled
 		(m_player_area.radius
 		 <
-		 std::numeric_limits<Player_Area<>::Radius_type>::max());
+		 std::numeric_limits<Widelands::Player_Area<>::Radius_type>::max());
 }
 
 
@@ -509,20 +515,20 @@ void Trigger_Building_Option_Menu::clicked_decrement_radius() {
 
 void Trigger_Building_Option_Menu::clicked_ok() {
 	if (m_name.get_text()) m_trigger.set_name(m_name.get_text());
-	const Player_Number trigger_player_number =
+	Widelands::Player_Number const trigger_player_number =
 		m_trigger.m_player_area.player_number;
 	if (trigger_player_number != m_player_area.player_number) {
 		if (trigger_player_number)
 			eia().unreference_player_tribe(trigger_player_number, &m_trigger);
 		eia().reference_player_tribe(m_player_area.player_number, &m_trigger);
 	}
-	Editor_Game_Base & egbase = eia().egbase();
-	const Map & map = egbase.map();
+	Widelands::Editor_Game_Base & egbase = eia().egbase();
+	Widelands::Map        const & map    = egbase.map();
 	m_trigger.m_player_area =
-		Player_Area<Area<FCoords> >
+		Widelands::Player_Area<Widelands::Area<Widelands::FCoords> >
 		(m_player_area.player_number,
-		 Area<FCoords>
-		 (FCoords(m_player_area, &egbase.map()[m_player_area]),
+		 Widelands::Area<Widelands::FCoords>
+		 (Widelands::FCoords(m_player_area, &egbase.map()[m_player_area]),
 		  m_player_area.radius));
 	m_trigger.set_building
 		(egbase.get_tribe

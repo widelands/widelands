@@ -22,6 +22,8 @@
 
 #include "map.h"
 
+namespace Widelands {
+
 /**
  * Producer/Coroutine struct that iterates over every node of an area.
  *
@@ -70,6 +72,8 @@ private:
 	typename Area_type::Radius_type m_rowwidth;
 	typename Area_type::Radius_type m_remaining_in_row;
 	typename Area_type::Radius_type m_remaining_rows;
+};
+
 };
 
 #endif

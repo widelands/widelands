@@ -45,6 +45,8 @@
 #define WINDOW_WIDTH  600
 #define WINDOW_HEIGHT 550
 
+using namespace Widelands;
+
 EncyclopediaWindow::EncyclopediaWindow (Interactive_Player& plr, UI::UniqueWindow::Registry& registry) :
 
 UI::UniqueWindow

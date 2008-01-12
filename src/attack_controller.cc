@@ -20,10 +20,8 @@
 #include "attack_controller.h"
 
 #include "battle.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
-#include "geometry.h"
+#include "widelands_geometry.h"
 #include "immovable.h"
 #include "instances.h"
 #include "map.h"
@@ -31,12 +29,16 @@
 #include "player.h"
 #include "soldier.h"
 #include "transport.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
 #include "log.h"
 
 #include "upcast.h"
+
+namespace Widelands {
 
 void getCloseMilitarySites
 (const Editor_Game_Base & eg,
@@ -411,8 +413,7 @@ Load/save support
 
 #define ATTACKCONTROLLER_SAVEGAME_VERSION 1
 
-void AttackController::Loader::load(FileRead& fr)
-{
+void AttackController::Loader::load(FileRead & fr) {
 	BaseImmovable::Loader::load(fr);
 
 	upcast(AttackController, ctrl, get_object());
@@ -435,18 +436,11 @@ void AttackController::Loader::load(FileRead& fr)
 		Coords battleGround;
 		try {
 			battleGround = fr.Coords32(egbase().map().extent());
-		} catch (const FileRead::Width_Exceeded e) {
+		} catch (FileRead::Data_Error const & e) {
 			throw wexception
-					("AttackController::load: in "
-					 "binary/mapobjects:%u: battleGround has x "
-					 "coordinate %i, but the map width is only %u",
-					  e.position, e.x, e.w);
-		} catch (const FileRead::Height_Exceeded e) {
-			throw wexception
-					("AttackController::load: in "
-					 "binary/mapobjects:%u: battleGround has y "
-					 "coordinate %i, but the map height is only %u",
-					 e.position, e.y, e.h);
+				("AttackController::load: in binary/mapobjects:%u: Coordinates of "
+				 "battleground: %s",
+				 fr.GetPos() - 4, e.message().c_str());
 		}
 
 		bool attacker = fr.Unsigned8();
@@ -510,9 +504,7 @@ void AttackController::Loader::load_pointers()
 
 
 void AttackController::save
-		(Editor_Game_Base* eg,
-		 Widelands_Map_Map_Object_Saver* mos,
-		 FileWrite& fw)
+	(Editor_Game_Base * eg, Map_Map_Object_Saver * mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_AttackController);
 	fw.Unsigned8(ATTACKCONTROLLER_SAVEGAME_VERSION);
@@ -544,21 +536,16 @@ void AttackController::save
 
 	//write involved military sites
 	fw.Unsigned32(involvedMilitarySites.size());
-	for (MilitarySiteSet::iterator it = involvedMilitarySites.begin();
-	     it != involvedMilitarySites.end();
-	     ++it)
-	{
-		OPtr<MilitarySite> ptr = *it;
-		MilitarySite* ms = ptr.get(eg);
-		fw.Unsigned32(mos->get_object_file_index(ms));
-	}
+	for
+		(MilitarySiteSet::iterator it = involvedMilitarySites.begin();
+		 it != involvedMilitarySites.end();
+		 ++it)
+		fw.Unsigned32(mos->get_object_file_index(it->get(eg)));
 }
 
 
 Map_Object::Loader* AttackController::load
-		(Editor_Game_Base* egbase,
-		 Widelands_Map_Map_Object_Loader* mol,
-		 FileRead& fr)
+	(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
 	Loader* loader = new Loader;
 
@@ -579,3 +566,5 @@ Map_Object::Loader* AttackController::load
 
 	return loader;
 }
+
+};

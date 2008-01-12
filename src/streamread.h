@@ -20,10 +20,8 @@
 #ifndef STREAMREAD_H
 #define STREAMREAD_H
 
-#include "geometry.h"
 #include "machdep.h"
 
-#include <limits>
 #include <string>
 
 /**
@@ -54,9 +52,9 @@ struct StreamRead {
 	/**
 	 * \return \c true if the end of file / end of stream has been reached.
 	 */
-	virtual bool EndOfFile() = 0;
+	virtual bool EndOfFile() const = 0;
 
-	void DataComplete(void* const data, const size_t size);
+	void DataComplete(void * const data, const size_t size);
 
 	int8_t Signed8();
 	uint8_t Unsigned8();
@@ -66,71 +64,42 @@ struct StreamRead {
 	uint32_t Unsigned32();
 	std::string String();
 
-	struct Data_Error {};
-	struct Extent_Exceeded : public Data_Error {};
-	struct Width_Exceeded : public Extent_Exceeded {
-		Width_Exceeded (uint16_t const W, X_Coordinate const X) : w(W), x(X) {}
-		uint16_t     w;
-		X_Coordinate x;
+	/// Copies characters from the stream to the memory starting at buffer until
+	/// a newline or EndOfFile is encountered. All read characters are consumed.
+	/// Any carriage return and the final newline are not copied.
+	///
+	/// \throws Null_In_Line if a null is encountered. Since the null has been
+	/// copied, buffer will point to a null-terminated string.
+	///
+	/// \throws Buffer_Overflow if the line would reach buffer_end. Before
+	/// throwing, null will be written to buffer_end[-1], so buffer will point to
+	/// a null-terminated string.
+	///
+	/// Assumes that buffer \< buffer_end.
+	bool ReadLine(char *buf, const char * const buf_end);
+
+
+	///  Base of all exceptions that are caused by errors in the data that is
+	///  read.
+	struct Data_Error {
+		virtual ~Data_Error() {}
+
+		/// Composes and returns an error message, which is at least 1 complete
+		/// sentence.
+		virtual std::string message() const = 0;
 	};
-	struct Height_Exceeded : public Extent_Exceeded {
-		Height_Exceeded(uint16_t const H, Y_Coordinate const Y) : h(H), y(Y) {}
-		uint16_t     h;
-		Y_Coordinate y;
+
+	struct Null_In_Line : public Data_Error {
+		virtual std::string message() const {
+			return "The line contains a null character.";
+		}
 	};
-
-	/**
-	 * Read a Coords from the stream. Use this when the result can only be a node
-	 * coordinate. Will throw an exception if the width is <= the x coordinate or
-	 * the height is <= the y coordinate. Both coordinates are read from the
-	 * stream before checking and possibly throwing, so in case such an exception
-	 * is thrown, it is guaranteed that the whole coordinate pair has been read.
-	 */
-	Coords Coords32(const Extent extent);
-
-	Coords Coords32();
-
-	/**
-	 * Read Coords from the stream. Use this when the result can only be a node
-	 * coordinate or the special value indicating invalidity, as defined by
-	 * Coords::Null. Unless the read Coords is null, this will throw an exception
-	 * if the width is <= the x coordinate or the height is <= the y coordinate.
-	 * Both coordinates are read from the stream before checking and possibly
-	 * throwing, so in case such an exception is thrown, it is guaranteed that
-	 * the whole coordinate pair has been read.
-	 */
-	Coords Coords32_allow_null(const Extent extent);
+	struct Buffer_Overflow {};
 
 private:
 	StreamRead & operator=(StreamRead const &);
 	explicit StreamRead   (StreamRead const &);
 };
-
-
-inline Coords StreamRead::Coords32() {
-	uint16_t const x = Unsigned16();
-	uint16_t const y = Unsigned16();
-	return Coords(x, y);
-}
-
-inline Coords StreamRead::Coords32(const Extent extent) {
-	uint16_t const x = Unsigned16();
-	uint16_t const y = Unsigned16();
-	if (extent.w <= x) throw Width_Exceeded (extent.w, x);
-	if (extent.h <= y) throw Height_Exceeded(extent.h, y);
-	return Coords(x, y);
-}
-
-inline Coords StreamRead::Coords32_allow_null(const Extent extent) {
-	uint16_t const x = Unsigned16();
-	uint16_t const y = Unsigned16();
-	const Coords result(x, y);
-	if (result) {
-		if (extent.w <= x) throw Width_Exceeded (extent.w, x);
-		if (extent.h <= y) throw Height_Exceeded(extent.h, y);
-	}
-	return result;
-}
 
 #endif
 

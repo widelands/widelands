@@ -23,7 +23,7 @@
 #include "interactive_base.h"
 #include <SDL_keyboard.h>
 
-class Game;
+namespace Widelands {struct Game;};
 
 /**
  * This class shows a game for somebody who is only a spectator.
@@ -34,14 +34,14 @@ class Game;
  * This class provides the UI, runs the game logic, etc.
  */
 struct Interactive_Spectator : public Interactive_Base {
-	Interactive_Spectator(Game*);
+	Interactive_Spectator(Widelands::Game *);
 	~Interactive_Spectator();
 
 	void start();
 	virtual void think();
 
-	Game* get_game();
-	Player* get_player() const throw ();
+	Widelands::Game * get_game();
+	Widelands::Player * get_player() const throw ();
 
 	bool handle_key(bool down, SDL_keysym);
 	void end_of_game();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,29 +20,26 @@
 #ifndef __S__WIDELANDS_MAP_BUILDING_DATA_PACKET_H
 #define __S__WIDELANDS_MAP_BUILDING_DATA_PACKET_H
 
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet.h"
 
+namespace Widelands {
+
 class Building;
-class FileRead;
-class FileWrite;
 
 /*
  * This packet cares for the existance of buildings
  * on the map, the data is parsed somewhere else
  */
-struct Widelands_Map_Building_Data_Packet : public Widelands_Map_Data_Packet {
-	virtual ~Widelands_Map_Building_Data_Packet();
-
+struct Map_Building_Data_Packet : public Map_Data_Packet {
 	virtual void Read
 		(FileSystem &,
 		 Editor_Game_Base*,
 		 const bool,
-		 Widelands_Map_Map_Object_Loader * const = 0)
+		 Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	virtual void Write
-		(FileSystem &,
-		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const  = 0)
+	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
 
 protected:
@@ -50,5 +47,6 @@ protected:
 	void write_priorities (Building & building, FileWrite & fw);
 };
 
+};
 
 #endif

@@ -24,6 +24,8 @@
 #include "trigger/trigger_null.h"
 #include "trigger/trigger_referencer.h"
 
+namespace Widelands {
+
 class Editor_Game_Base;
 
 /*
@@ -63,5 +65,6 @@ private:
       bool          m_setto;
 };
 
+};
 
 #endif

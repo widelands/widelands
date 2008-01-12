@@ -516,10 +516,10 @@ template<typename T> static void render_road_vert
 
 template<typename T> static void draw_field_int
 (Surface & dst,
- Field * const f,
- Field * const r,
- Field * const bl,
- Field * const br,
+ Widelands::Field * const f,
+ Widelands::Field * const r,
+ Widelands::Field * const bl,
+ Widelands::Field * const br,
  const int32_t     posx,
  const int32_t     rposx,
  const int32_t     posy,
@@ -546,8 +546,8 @@ template<typename T> static void draw_field_int
 	Vertex bl_vert
 		(blposx, blposy - bl->get_height() * HEIGHT_FACTOR, bl_brightness, 64, 64);
 
-	const Surface & rt_normal = *g_gr->get_road_texture(Road_Normal);
-	const Surface & rt_busy   = *g_gr->get_road_texture(Road_Busy);
+	Surface const & rt_normal = *g_gr->get_road_texture(Widelands::Road_Normal);
+	Surface const & rt_busy   = *g_gr->get_road_texture(Widelands::Road_Busy);
 
 	if (draw_all) {
 		render_triangle<T> (dst, r_vert,  f_vert, br_vert, f_r_texture);
@@ -562,14 +562,14 @@ template<typename T> static void draw_field_int
 	// Render roads and dither polygon edges
 	uint8_t road;
 
-	road = (roads >> Road_East) & Road_Mask;
+	road = (roads >> Widelands::Road_East) & Widelands::Road_Mask;
 	if (-128 < f_brightness or -128 < r_brightness) {
 		if (road) {
 			switch (road) {
-			case Road_Normal:
+			case Widelands::Road_Normal:
 				render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
 				break;
-			case Road_Busy:
+			case Widelands::Road_Busy:
 				render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
 				break;
 			default: assert(false);
@@ -584,14 +584,14 @@ template<typename T> static void draw_field_int
 			dither_edge_horiz<T>(dst, f_vert, r_vert, f_r_texture, tr_d_texture);
 	}
 
-	road = (roads >> Road_SouthEast) & Road_Mask;
+	road = (roads >> Widelands::Road_SouthEast) & Widelands::Road_Mask;
 	if (-128 < f_brightness or -128 < br_brightness) {
 		if (road) {
 			switch (road) {
-			case Road_Normal:
+			case Widelands::Road_Normal:
 				render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
 				break;
-			case Road_Busy:
+			case Widelands::Road_Busy:
 				render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
 				break;
 			default: assert(false);
@@ -604,14 +604,14 @@ template<typename T> static void draw_field_int
 			dither_edge_vert<T>(dst, f_vert, br_vert, f_r_texture, f_d_texture);
 	}
 
-	road = (roads >> Road_SouthWest) & Road_Mask;
+	road = (roads >> Widelands::Road_SouthWest) & Widelands::Road_Mask;
 	if (-128 < f_brightness or -128 < bl_brightness) {
 		if (road) {
 			switch (road) {
-			case Road_Normal:
+			case Widelands::Road_Normal:
 				render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
 				break;
-			case Road_Busy:
+			case Widelands::Road_Busy:
 				render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
 				break;
 			default: assert(false);

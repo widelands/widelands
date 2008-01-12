@@ -21,9 +21,10 @@
 #define __BOB_H
 
 #include "animation.h"
-#include "geometry.h"
 
 #include <cassert>
+
+namespace Widelands {
 
 /// \todo (Antonio Trueba#1#): Get rid of forward declarations (cleanup of other headers needed)
 class Map;
@@ -47,8 +48,8 @@ struct BobProgramBase {
  * Bobs are moving map objects: Animals, humans, ships...
  */
 struct Bob : public Map_Object {
-	friend class Widelands_Map_Bobdata_Data_Packet;
-	friend class Widelands_Map_Bob_Data_Packet;
+	friend struct Map_Bobdata_Data_Packet;
+	friend struct Map_Bob_Data_Packet;
 
 	struct State;
 	typedef void (Bob::*Ptr)(Game*, State*);
@@ -92,7 +93,7 @@ struct Bob : public Map_Object {
 	};
 
 	struct Descr: public Map_Object_Descr {
-		friend class Widelands_Map_Bobdata_Data_Packet; // To write it to a file
+		friend struct Map_Bobdata_Data_Packet;
 
 		Descr(const Tribe_Descr * const tribe, const std::string & bob_name)
 			: m_name(bob_name), m_owner_tribe(tribe)
@@ -266,6 +267,8 @@ private:
 	bool        m_sched_init_task; ///< if init_auto_task was scheduled
 	bool        m_in_act; ///< if do_act is currently running (blocking signals)
 	std::string m_signal;
+};
+
 };
 
 #endif

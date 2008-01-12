@@ -19,7 +19,6 @@
 
 #include "cmd_queue.h"
 
-#include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
 #include "instances.h"
@@ -28,9 +27,12 @@
 #include "playercommand.h"
 #include "trigger/trigger.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
 #include "worker.h"
 
 #include "upcast.h"
+
+namespace Widelands {
 
 //
 // class Cmd_Queue
@@ -153,7 +155,7 @@ GameLogicCommand::GameLogicCommand (int32_t duetime)
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Write
-(FileWrite & fw, Editor_Game_Base &, Widelands_Map_Map_Object_Saver &)
+(FileWrite & fw, Editor_Game_Base &, Map_Map_Object_Saver &)
 {
 	// First version
 	fw.Unsigned16(BASE_CMD_VERSION);
@@ -168,7 +170,7 @@ void GameLogicCommand::Write
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Read
-(FileRead & fr, Editor_Game_Base &, Widelands_Map_Map_Object_Loader &)
+(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader &)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == BASE_CMD_VERSION)
@@ -177,3 +179,5 @@ void GameLogicCommand::Read
 		throw wexception
 			("GameLogicCommand::Read: unknown version %u\n", packet_version);
 }
+
+};

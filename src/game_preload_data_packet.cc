@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,14 +23,13 @@
 #include "map.h"
 #include "profile.h"
 
+namespace Widelands {
+
 #define CURRENT_PACKET_VERSION 1
 
 
-Game_Preload_Data_Packet::~Game_Preload_Data_Packet() {}
-
-
 void Game_Preload_Data_Packet::Read
-(FileSystem & fs, Game *, Widelands_Map_Map_Object_Loader * const)
+(FileSystem & fs, Game *, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 
@@ -51,7 +50,7 @@ throw (_wexception)
  * Write Function
  */
 void Game_Preload_Data_Packet::Write
-(FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const)
+(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 
@@ -67,3 +66,5 @@ throw (_wexception)
 
    prof.write("preload", false, fs);
 }
+
+};

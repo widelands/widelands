@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-class MapObjective;
+namespace Widelands {struct MapObjective;};
 namespace UI {
 template <typename T> struct Button;
 template <typename T> struct Table;
@@ -44,12 +44,12 @@ struct Editor_Objectives_Menu : public UI::UniqueWindow {
 
 private:
       Editor_Interactive *m_parent;
-	UI::Table<MapObjective &>            m_table;
+	UI::Table<Widelands::MapObjective &> m_table;
 	UI::Button<Editor_Objectives_Menu> * m_edit_button;
 	UI::Button<Editor_Objectives_Menu> * m_delete_button;
       UI::Textarea         *m_trigger;
 
-	void insert_objective(MapObjective &);
+	void insert_objective(Widelands::MapObjective &);
 	void clicked_ok  ();
 	void clicked_new ();
 	void clicked_edit();

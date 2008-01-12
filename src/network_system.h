@@ -20,13 +20,14 @@
 #ifndef __NETWORK_SYSTEM_H__
 #define __NETWORK_SYSTEM_H__
 
+#include <stdint.h>
+
 #ifndef WIN32
 
 // These includes work on Linux and should be fine on any other Unix-alike.
 // If not, this is the right place to conditionally include what is needed.
 #include <sys/ioctl.h>
 #include <sys/socket.h>
-#include <stdint.h>
 #include <net/if.h>
 #include <netinet/in.h>
 #include <netdb.h>
@@ -42,7 +43,6 @@
 // at msdn.microsoft.com
 #include <winsock2.h>
 
-#include <stdint.h>
 #define DATATYPE    char
 // microsoft doesn't have these
 typedef uint16_t in_port_t;

@@ -26,7 +26,8 @@
 struct Editor_Set_Terrain_Tool : public Editor_Tool, public MultiSelect {
 	Editor_Set_Terrain_Tool() : Editor_Tool(*this, *this) {}
 
-	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl
+		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw () {return "pics/fsel.png";}
 	bool operates_on_triangles() const throw () {return true;};
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
 #include <stdio.h>
 
 
-Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game & g) :
+Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
 game(g),
 
@@ -82,8 +82,8 @@ void Fullscreen_Menu_LoadGame::clicked_ok()
 void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 	if (const char * const name = list.get_selected()) {
       FileSystem* fs = g_fs->MakeSubFileSystem(name);
-		Game_Loader gl(*fs, &game);
-      Game_Preload_Data_Packet gpdp;
+		Widelands::Game_Loader gl(*fs, &game);
+      Widelands::Game_Preload_Data_Packet gpdp;
       gl.preload_game(&gpdp); // This has worked before, no problem
 
 		m_ok.set_enabled(true);
@@ -122,7 +122,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
    // Fill it with all files we find.
    g_fs->FindFiles("ssave", "*", &m_gamefiles, 1);
 
-   Game_Preload_Data_Packet gpdp;
+	Widelands::Game_Preload_Data_Packet gpdp;
 
 	const filenameset_t & gamefiles = m_gamefiles;
 	const filenameset_t::const_iterator gamefiles_end = gamefiles.end();
@@ -137,7 +137,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 
 		try {
          fs = g_fs->MakeSubFileSystem(name);
-			Game_Loader gl(*fs, &game);
+			Widelands::Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);
 
 			char * const fname = strdup(FileSystem::FS_Filename(name));

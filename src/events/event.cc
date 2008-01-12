@@ -26,6 +26,7 @@
 
 #include <map>
 
+namespace Widelands {
 
 /*
  * reference or unrefereence this Event
@@ -41,3 +42,5 @@ void Event::unreference(EventReferencer* ref) {
          m_referencers.erase(cur);
 	}
 }
+
+};

@@ -20,12 +20,16 @@
 #ifndef __S__TATTRIBUTE_H
 #define __S__TATTRIBUTE_H
 
+namespace Widelands {
+
 enum tAttribute {
 	atrHP = 0,
 	atrAttack,
 	atrDefense,
 	atrEvade,
 	atrTotal = 100
+};
+
 };
 
 #endif

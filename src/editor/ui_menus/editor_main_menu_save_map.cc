@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,8 @@
 #include "ui_modal_messagebox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
+
+#include "upcast.h"
 
 #include <string>
 #include <stdio.h>
@@ -163,7 +165,11 @@ void Main_Menu_Save_Map::clicked_ok() {
 			filename = m_ls->get_selected();
 		}
 
-      if (g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
+	if
+		(g_fs->IsDirectory(filename.c_str())
+		 &&
+		 !Widelands::WL_Map_Loader::is_widelands_map(filename))
+	{
 	      m_curdir=g_fs->FS_CanonicalizeName(filename);
          m_ls->clear();
          m_mapfiles.clear();
@@ -195,11 +201,13 @@ void Main_Menu_Save_Map::clicked_make_directory() {
 void Main_Menu_Save_Map::selected(uint32_t) {
    const char * const name = m_ls->get_selected();
 
-   if (Widelands_Map_Loader::is_widelands_map(name)) {
-		Map map;
-		Map_Loader * const m_ml = map.get_correct_loader(name);
-      m_ml->preload_map(true); // This has worked before, no problem
-      delete m_ml;
+	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
+		Widelands::Map map;
+		{
+			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+			ml->preload_map(true); // This has worked before, no problem
+			delete ml;
+		}
 
 
       m_editbox->set_text(FileSystem::FS_Filename(name));
@@ -261,7 +269,7 @@ void Main_Menu_Save_Map::fill_list() {
       if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
       if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue;
       if (!g_fs->IsDirectory(name)) continue;
-      if (Widelands_Map_Loader::is_widelands_map(name)) continue;
+		if (Widelands::WL_Map_Loader::is_widelands_map(name)) continue;
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -269,7 +277,7 @@ void Main_Menu_Save_Map::fill_list() {
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 	}
 
-	Map map;
+	Widelands::Map map;
 
 	for
 		(filenameset_t::const_iterator pname = m_mapfiles.begin();
@@ -278,28 +286,18 @@ void Main_Menu_Save_Map::fill_list() {
 	{
       const char *name = pname->c_str();
 
-		Map_Loader* m_ml = map.get_correct_loader(name);
-      if (!m_ml) continue;
-      if (m_ml->get_type()==Map_Loader::S2ML) continue; // we do not list s2 files since we only write wlmf
-
-		try {
-         m_ml->preload_map(true);
-         std::string pic="";
-			switch (m_ml->get_type()) {
-			case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
-			case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
-			}
-			m_ls->add
-				(FileSystem::FS_Filename(name),
-				 name,
-				 g_gr->get_picture(PicMod_Game, pic.c_str()));
-		} catch (_wexception&) {
-         // we simply skip illegal entries
+		// we do not list S2 files since we only write wlmf
+		if (upcast(Widelands::WL_Map_Loader, ml, map.get_correct_loader(name))) {
+			try {
+				ml->preload_map(true);
+				m_ls->add
+					(FileSystem::FS_Filename(name),
+					 name,
+					 g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
+			} catch (_wexception const &) {} //  we simply skip illegal entries
+			delete ml;
 		}
-      delete m_ml;
-
 	}
-
 	if (m_ls->size()) m_ls->select(0);
 }
 
@@ -358,7 +356,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       // Make a zipfile
       fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
 	}
-	Widelands_Map_Saver wms(*fs, &m_parent->egbase());
+	Widelands::Map_Saver wms(*fs, &m_parent->egbase());
    try {
 		wms.save();
       m_parent->set_need_save(false);

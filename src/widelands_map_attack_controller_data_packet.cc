@@ -17,19 +17,20 @@
  *
  */
 
+#include "widelands_map_attack_controller_data_packet.h"
+
 #include "attack_controller.h"
 #include "battle.h"
 #include "editor_game_base.h"
-#include "fileread.h"
 #include "filewrite.h"
-#include "geometry.h"
+#include "widelands_geometry.h"
 #include "immovable.h"
 #include "militarysite.h"
 #include "map.h"
 #include "soldier.h"
 #include "tribe.h"
+#include "widelands_fileread.h"
 #include "widelands_map_data_packet_ids.h"
-#include "widelands_map_attack_controller_data_packet.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "world.h"
@@ -39,20 +40,16 @@
 #include <map>
 #include <set>
 
-
-/* VERSION 1: initial release
-*/
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 2
 
-Widelands_Map_Attack_Controller_Data_Packet::~Widelands_Map_Attack_Controller_Data_Packet() {
-}
 
-void Widelands_Map_Attack_Controller_Data_Packet::Read
+void Map_Attack_Controller_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip)
@@ -79,7 +76,7 @@ throw (_wexception)
 				ctrl->flag = flag;
 			else
 				throw wexception
-					("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
+					("Map_Attack_Controller_Data_Packet::Read: in "
 					 "binary/attackcontroller:%u: object with file index %u is not "
 					 "a flag",
 					 fr.GetPos() - 4, flagFilePos);
@@ -102,32 +99,26 @@ throw (_wexception)
 					const uint32_t x = fr.Unsigned32();
 					if (extent.w <= x)
 						throw wexception
-							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
+							("Map_Attack_Controller_Data_Packet::Read: in "
 							 "binary/attackcontroller:%u: battleGround has x "
 							 "coordinate %i, but the map width is only %u",
-							 fr.GetPrevPos(), x, extent.w);
+							 fr.GetPos() - 4, x, extent.w);
 					const uint32_t y = fr.Unsigned32();
 					if (extent.h <= y)
 						throw wexception
-							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
+							("Map_Attack_Controller_Data_Packet::Read: in "
 							 "binary/attackcontroller:%u: battleGround has y "
 							 "coordinate %i, but the map height is only %u",
-							 fr.GetPrevPos(), y, extent.h);
+							 fr.GetPos() - 4, y, extent.h);
 					battleGround = Coords(x, y);
 				} else {
 					try {battleGround = fr.Coords32(extent);}
-					catch (const FileRead::Width_Exceeded e) {
+					catch (const FileRead::Data_Error & e) {
 						throw wexception
-							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
-							 "binary/attackcontroller:%u: battleGround has x "
-							 "coordinate %i, but the map width is only %u",
-							 e.position, e.x, e.w);
-					} catch (const FileRead::Height_Exceeded e) {
-						throw wexception
-							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
-							 "binary/attackcontroller:%u: battleGround has y "
-							 "coordinate %i, but the map height is only %u",
-							 e.position, e.y, e.h);
+							("Map_Attack_Controller_Data_Packet::Read: in "
+							 "binary/attackcontroller:%u: reading coordinates of "
+							 "battleground: %s",
+							 fr.GetPos() - 4, e.message().c_str());
 					}
 				}
 
@@ -156,21 +147,20 @@ throw (_wexception)
 
 		}
 		if (fr.Unsigned32() != 0xffffffff)
-			throw wexception ("Error in Widelands_Attack_Controller_Data_Packet : Couldn't find 0xffffffff.");
+			throw wexception
+				("Error in Attack_Controller_Data_Packet : Couldn't find "
+				 "0xffffffff.");
 	} else
 		throw wexception
-			("Unkown version of Widelands_Map_Battle_Data_Packet : %u",
-			 packet_version);
+			("Unkown version of Map_Battle_Data_Packet : %u", packet_version);
 }
-/*
- * Write Function.
- * This writes ALL the information about battles !
- */
-void Widelands_Map_Attack_Controller_Data_Packet::Write
-(FileSystem &,
- Editor_Game_Base*,
- Widelands_Map_Map_Object_Saver * const)
+
+
+void Map_Attack_Controller_Data_Packet::Write
+(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-	throw wexception("Widelands_Map_Attack_Controller_Data_Packet::Write is obsolete");
+	throw wexception("Map_Attack_Controller_Data_Packet::Write is obsolete");
 }
+
+};

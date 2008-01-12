@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,11 @@
 #include <map>
 #include <string>
 
-#include <stdint.h>
+struct Section;
+
+namespace Widelands {
 
 class Game;
-class Section;
 class Editor_Game_Base;
 class TriggerReferencer;
 
@@ -36,7 +37,7 @@ class TriggerReferencer;
  * the event runs.
  */
 struct Trigger {
-   friend class Widelands_Map_Trigger_Data_Packet;
+	friend struct Map_Trigger_Data_Packet;
 
 	Trigger(const std::string & Name) : m_name(Name) {}
       virtual ~Trigger() {}
@@ -73,6 +74,8 @@ private:
       std::string                m_name;
       bool                        m_is_set;
 	TriggerReferencerMap m_referencers;
+};
+
 };
 
 #endif

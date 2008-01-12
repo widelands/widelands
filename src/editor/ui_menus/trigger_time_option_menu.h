@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class Trigger_Time;
+namespace Widelands {class Trigger_Time;}
 namespace UI {
 template <typename T> struct Button;
 struct Textarea;
@@ -35,7 +35,7 @@ struct Edit_Box;
  * before it can return
  */
 struct Trigger_Time_Option_Menu : public UI::Window {
-	Trigger_Time_Option_Menu(Editor_Interactive &, Trigger_Time &);
+	Trigger_Time_Option_Menu(Editor_Interactive &, Widelands::Trigger_Time &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
@@ -45,7 +45,7 @@ private:
       void clicked(int32_t);
       void update();
 
-	Trigger_Time & m_trigger;
+	Widelands::Trigger_Time & m_trigger;
       UI::Edit_Box* m_name;
       UI::Textarea* m_textareas[6];
       int32_t         m_values[6];

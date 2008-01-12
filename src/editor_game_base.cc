@@ -42,6 +42,8 @@
 
 #include <set>
 
+namespace Widelands {
+
 extern Map_Object_Descr g_road_descr;
 
 // hard-coded playercolors
@@ -908,3 +910,5 @@ void Editor_Game_Base::set_road
 		}
 	}
 }
+
+};

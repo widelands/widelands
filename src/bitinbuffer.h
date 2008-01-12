@@ -30,9 +30,9 @@ template<uint8_t const Size> struct BitInBuffer {
 	BitInBuffer() : mask(0x00) {}
 	void Open(FileSystem & fs, const char * const filename)
 	{fr.Open(fs, filename);}
-	size_t GetSize() const throw () {return fr.GetSize();}
-	bool   IsEOF  () const throw () {return fr.IsEOF  ();}
-	size_t GetPos () const throw () {return fr.GetPos ();}
+	size_t GetSize() const throw () {return fr.GetSize  ();}
+	bool EndOfFile() const throw () {return fr.EndOfFile();}
+	size_t GetPos () const throw () {return fr.GetPos   ();}
 	uint8_t get() {
 		if (mask == 0x00) {buffer = fr.Unsigned8(); mask = 0xff;}
 		uint8_t const result = buffer >> 8 - Size;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,13 +22,16 @@
 
 #include "worker.h"
 
+struct RGBColor;
+
+namespace Widelands {
+
 // Constants used to launch attacks
 #define WEAKEST   0
 #define STRONGEST 1
 
 class Editor_Game_Base;
 class AttackController;
-class RGBColor;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
@@ -105,7 +108,7 @@ protected:
 };
 
 class Soldier : public Worker {
-   friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
+   friend struct Map_Bobdata_Data_Packet;
 	MO_DESCR(Soldier_Descr);
 
 public:
@@ -210,5 +213,6 @@ private:
    AttackController* m_attack_ctrl;
 };
 
+};
 
 #endif // __S__SOLDIER_H

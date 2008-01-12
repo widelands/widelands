@@ -23,8 +23,6 @@
 #include "cmd_queue.h"
 #include "constructionsite.h"
 #include "log.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "militarysite.h"
 #include "soldier.h"
@@ -34,8 +32,12 @@
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 
 #include "upcast.h"
+
+namespace Widelands {
 
 extern Map_Object_Descr g_road_descr;
 
@@ -534,7 +536,7 @@ void Player::enemyflagaction(Flag* flag, int32_t action, int32_t attacker, int32
 
 inline void Player::discover_node
 (const Map     & map,
- const ::Field & first_map_field,
+ const Widelands::Field & first_map_field,
  const FCoords   f,
  Field         & field)
 throw ()
@@ -600,7 +602,7 @@ throw ()
 
 void Player::see_node
 (const Map                  & map,
- const ::Field              & first_map_field,
+ const Widelands::Field & first_map_field,
  const FCoords                f,
  const Time    gametime,
  const bool                   lasting)
@@ -789,3 +791,5 @@ void Player::WriteStatistics(FileWrite& fw) const {
 			fw.Unsigned32(m_ware_productions[i][j]);
 	}
 }
+
+};

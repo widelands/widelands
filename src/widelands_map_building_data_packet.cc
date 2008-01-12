@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,34 +20,31 @@
 #include "widelands_map_building_data_packet.h"
 
 #include "constructionsite.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "editor_game_base.h"
 #include "interactive_base.h"
 #include "map.h"
 #include "player.h"
 #include "tribe.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
 #include <map>
 
+namespace Widelands {
 
 #define LOWEST_SUPPORTED_VERSION           1
 #define PRIORITIES_INTRODUCED_IN_VERSION   2
 #define CURRENT_PACKET_VERSION             2
 
-Widelands_Map_Building_Data_Packet::~Widelands_Map_Building_Data_Packet() {}
 
-/*
- * Read Function
- */
-void Widelands_Map_Building_Data_Packet::Read
+void Map_Building_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip) return;
@@ -80,9 +77,8 @@ throw (_wexception)
 					int32_t index= tribe.get_building_index(name);
 					if (index==-1)
 						throw wexception
-							("Widelands_Map_Building_Data_Packet::Read: Should "
-							 "create building %s in tribe %s, but building is "
-							 "unknown!",
+							("Map_Building_Data_Packet::Read: Should create building "
+							 "%s in tribe %s, but building is unknown!",
 							 name, tribe.name().c_str());
 
 					// Now, create this Building, take extra special care for constructionsites
@@ -117,24 +113,21 @@ throw (_wexception)
 					}
 				} else
 					throw wexception
-						("Widelands_Map_Building_Data_Packet::Read: player %u does "
-						 "not exist", a.player_number);
+						("Map_Building_Data_Packet::Read: player %u does not exist",
+						 a.player_number);
 			}
 		}
 	} else
 		throw wexception
-			("Unknown version %u in Widelands_Map_Building_Data_Packet!",
-			 packet_version);
+			("Unknown version %u in Map_Building_Data_Packet!", packet_version);
 }
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Building_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+void Map_Building_Data_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -195,7 +188,7 @@ throw (_wexception)
    1     - ware priority(32 bits)
  0xff - end of ware types
  */
-void Widelands_Map_Building_Data_Packet::write_priorities
+void Map_Building_Data_Packet::write_priorities
 (Building & building, FileWrite & fw)
 {
 	fw.Unsigned32(building.get_base_priority());
@@ -237,7 +230,7 @@ void Widelands_Map_Building_Data_Packet::write_priorities
 	fw.Unsigned8(0xff);
 }
 
-void Widelands_Map_Building_Data_Packet::read_priorities
+void Map_Building_Data_Packet::read_priorities
 (Building & building, FileRead & fr)
 {
 	building.set_priority(fr.Unsigned32());
@@ -261,3 +254,5 @@ void Widelands_Map_Building_Data_Packet::read_priorities
 		}
 	}
 }
+
+};

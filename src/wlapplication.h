@@ -30,7 +30,7 @@
 #include <stdexcept>
 #include <string>
 
-class Game;
+namespace Widelands {struct Game;};
 class Journal;
 
 ///Thrown if a commandline parameter is faulty
@@ -264,7 +264,7 @@ protected:
 	bool   m_gfx_fullscreen;
 
 	///The game that is currently being played (or NULL, if in main menu)
-	Game *m_game;
+	Widelands::Game * m_game;
 
 private:
 	///Holds this process' one and only instance of WLApplication, if it was

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,23 +23,24 @@
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
 
-#include <stdint.h>
 #include "ui_checkbox.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 
+namespace Widelands {
 class Editor_Game_Base;
 class Map;
 class Map_Loader;
+};
 
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
 class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base
 {
-	Editor_Game_Base                           * egbase;
+	Widelands::Editor_Game_Base                * egbase;
 
 	UI::Textarea                                 title;
 	UI::Textarea                                 label_load_map_as_scenario;
@@ -62,12 +63,13 @@ class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base
 
 	filenameset_t                                m_mapfiles;
 
-	Map_Loader *                               * m_ml;
-	Map*              m_map;
+	Widelands::Map_Loader *                    * m_ml;
+	Widelands::Map                             * m_map;
 	bool              m_is_scenario;
 
 public:
-	Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader**);
+	Fullscreen_Menu_MapSelect
+		(Widelands::Editor_Game_Base *, Widelands::Map_Loader * *);
 	~Fullscreen_Menu_MapSelect();
 
 	const char * get_mapname() const throw () {return list.get_selected();}

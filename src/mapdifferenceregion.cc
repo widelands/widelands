@@ -19,6 +19,8 @@
 
 #include "mapdifferenceregion.h"
 
+namespace Widelands {
+
 template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
 throw ()
 {
@@ -72,3 +74,5 @@ throw ()
 	m_remaining_in_edge = m_area.radius;
 	m_passed_corner     = false;
 }
+
+};

@@ -54,6 +54,13 @@ struct md5_checksum {
 	bool operator!=(const md5_checksum& o) const {return not (*this == o);}
 };
 
+// Note that the implementation of MD5Checksum is basically just
+// a wrapper around these functions, which have been taken basically
+// verbatim (with some whitespace changes) from the GNU tools; see below.
+void * md5_finish_ctx (md5_ctx* ctx, void* resbuf);
+void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx);
+void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx);
+
 /**
  * This class is responsible for creating a streaming md5 checksum.
  * You simply pass it the data using stream operations, and if you want
@@ -62,20 +69,49 @@ struct md5_checksum {
  *
  * Instances of this class can be copied.
  */
-struct MD5Checksum : public StreamWrite {
-	MD5Checksum();
+template <typename Base> struct MD5Checksum : public Base {
+	MD5Checksum() {Reset();}
 	explicit MD5Checksum(MD5Checksum const & other)
 		:
-		StreamWrite(),
+		Base(),
 		can_handle_data(other.can_handle_data), sum(other.sum), ctx(other.ctx)
 	{}
 
-	void Reset();
+	/// Reset the checksumming machinery to its initial state.
+	void Reset() {
+		can_handle_data = 1;
+		ctx.A = 0x67452301; ctx.B = 0xefcdab89;
+		ctx.C = 0x98badcfe; ctx.D = 0x10325476;
+		ctx.total[0] = ctx.total[1] = 0;
+		ctx.buflen = 0;
+	}
 
-	virtual void Data(const void * data, size_t size);
+	/// This function consumes new data. It buffers it and calculates one MD5
+	/// block when the buffer is full.
+	///
+	/// \param data data to compute chksum for
+	/// \param size size of data
+	void Data(const void * const data, const size_t size) {
+		assert(can_handle_data);
+		md5_process_bytes(data, size, &ctx);
+	}
 
-	void FinishChecksum();
-	const md5_checksum& GetChecksum() const;
+	/// This function finishes the checksum calculation.
+	/// After this, no more data may be written to the checksum.
+	void FinishChecksum() {
+		assert(can_handle_data);
+		can_handle_data = 0;
+		md5_finish_ctx(&ctx, sum.data);
+	}
+
+	/// Retrieve the checksum. Note that \ref FinishChecksum must be called
+	/// before this function.
+	///
+	/// \return a pointer to an array of 16 bytes containing the checksum.
+	md5_checksum const & GetChecksum() const {
+	 assert(!can_handle_data);
+	 return sum;
+	}
 
 private:
 	bool can_handle_data;

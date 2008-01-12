@@ -20,21 +20,20 @@
 #include "game_cmd_queue_data_packet.h"
 
 #include "cmd_queue.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "queue_cmd_factory.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 
 #include "upcast.h"
+
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 2
 
 
-Game_Cmd_Queue_Data_Packet::~Game_Cmd_Queue_Data_Packet() {}
-
-
 void Game_Cmd_Queue_Data_Packet::Read
-(FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const ol)
+(FileSystem & fs, Game* game, Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	FileRead fr;
@@ -104,11 +103,9 @@ throw (_wexception)
 			("Unknown version in Game_Cmd_Queue_Data_Packet: %u", packet_version);
 }
 
-/*
- * Write Function
- */
+
 void Game_Cmd_Queue_Data_Packet::Write
-(FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const os)
+(FileSystem & fs, Game* game, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -156,3 +153,5 @@ throw (_wexception)
 
 	fw.Write(fs, "binary/cmd_queue");
 }
+
+};

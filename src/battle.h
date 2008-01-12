@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,10 @@
 #include "immovable.h"
 #include "soldier.h"
 
+namespace Widelands {
 
 struct Battle : public BaseImmovable {
-	friend class Widelands_Map_Battle_Data_Packet;
+	friend struct Map_Battle_Data_Packet;
 
 	typedef Map_Object_Descr Descr;
 
@@ -65,8 +66,11 @@ public:
 	// Remove as soon as we fully support the new system
 	virtual bool has_new_save_support() {return true;}
 
-	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
-	static Map_Object::Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, FileRead&);
+	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
+	static Map_Object::Loader * load
+		(Editor_Game_Base *, Map_Map_Object_Loader*, FileRead &);
+};
+
 };
 
 #endif

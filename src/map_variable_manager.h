@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,8 @@
 #include <cassert>
 #include <string>
 #include <vector>
+
+namespace Widelands {
 
 /**
  * The Map Variable Manager makes sure that variables
@@ -49,7 +51,7 @@ struct MapVariable {
       virtual ~MapVariable() {}
 
 	bool is_delete_protected() const {return m_delete_protected;}
-	const char * get_name() const {return m_name.c_str();}
+	std::string const & get_name() const {return m_name;}
       void set_name(const char* name) {m_name = name;}
 
 	virtual std::string get_string_representation() const = 0;
@@ -82,7 +84,7 @@ struct String_MapVariable : public MapVariable {
 
 	Type get_type() const {return MVT_STRING;}
 
-	const char * get_value() const {return m_value.c_str();}
+	std::string const & get_value() const {return m_value;}
       void set_value(const char* t) {m_value = t;}
 	std::string get_string_representation() const {return m_value;}
 
@@ -116,7 +118,7 @@ struct MapVariableManager {
        * Get a variable
        */
 	MapVariable* get_variable(const char * const name) const;
-      void delete_variable(const char* name);
+	void delete_variable(MapVariable const &);
 
 	typedef std::vector<MapVariable *> variable_vector;
 	typedef variable_vector::size_type Index;
@@ -126,6 +128,8 @@ struct MapVariableManager {
 
 private:
 	variable_vector      m_variables;
+};
+
 };
 
 #endif

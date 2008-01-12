@@ -26,18 +26,22 @@
 #include <string>
 #include <vector>
 
+struct DirAnimations;
 class RenderTarget;
+namespace UI {struct Tab_Panel;};
+
+namespace Widelands {
+
 class Path;
 class Player;
-struct Widelands_Map_Map_Object_Loader;
-namespace UI {struct Tab_Panel;};
+struct Map_Map_Object_Loader;
 
 //
 // Base class for descriptions of worker, files and so on. this must just
 // link them together
 //
 struct Map_Object_Descr {
-	friend class DirAnimations;
+	friend class ::DirAnimations;
 		typedef uint8_t Index;
 		Map_Object_Descr() {}
 		virtual ~Map_Object_Descr() {m_anims.clear();}
@@ -221,7 +225,7 @@ public:
 	 */
 	class Loader {
 		Editor_Game_Base* m_egbase;
-		Widelands_Map_Map_Object_Loader* m_mol;
+		Map_Map_Object_Loader * m_mol;
 		Map_Object* m_object;
 
 	protected:
@@ -231,9 +235,9 @@ public:
 		virtual ~Loader() {}
 
 		void init
-				(Editor_Game_Base* e,
-				 Widelands_Map_Map_Object_Loader* m,
-				 Map_Object* object)
+			(Editor_Game_Base      * const e,
+			 Map_Map_Object_Loader * const m,
+			 Map_Object            * const object)
 		{
 			m_egbase = e;
 			m_mol = m;
@@ -241,7 +245,7 @@ public:
 		}
 
 		Editor_Game_Base& egbase() {return *m_egbase;}
-		Widelands_Map_Map_Object_Loader& mol() {return *m_mol;}
+		Map_Map_Object_Loader & mol   () {return *m_mol;}
 		Map_Object * get_object() {return m_object;}
 
 	protected:
@@ -256,9 +260,8 @@ public:
 	// to the new Map_Object saving system
 	virtual bool has_new_save_support() {return false;}
 
-	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
+	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
 	// Pure Map_Objects cannot be loaded
-	//static Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
 protected:
 	// init for editor and game
@@ -395,14 +398,8 @@ public:
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object* o);
 	virtual void execute (Game* g);
 
-	virtual void Write
-		(FileWrite             &,
-		 Editor_Game_Base               &,
-		 Widelands_Map_Map_Object_Saver &);
-	virtual void Read
-		(FileRead               &,
-		 Editor_Game_Base                &,
-		 Widelands_Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 	virtual int32_t get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} // Get this command id
 };
@@ -418,16 +415,12 @@ public:
 
 	virtual void execute (Game* g);
 
-	virtual void Write
-		(FileWrite             &,
-		 Editor_Game_Base               &,
-		 Widelands_Map_Map_Object_Saver &);
-	virtual void Read
-		(FileRead               &,
-		 Editor_Game_Base                &,
-		 Widelands_Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 	virtual int32_t get_id() {return QUEUE_CMD_ACT;} // Get this command id
+};
+
 };
 
 #endif // __S__INSTANCE_H

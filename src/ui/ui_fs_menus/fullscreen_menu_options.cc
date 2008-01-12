@@ -31,7 +31,6 @@
 #include "wlapplication.h"
 
 #include <libintl.h>
-#include <stdint.h>
 #include <stdio.h>
 
 

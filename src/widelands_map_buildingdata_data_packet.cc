@@ -21,8 +21,6 @@
 
 #include "constructionsite.h"
 #include "editor_game_base.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "map.h"
 #include "militarysite.h"
@@ -34,6 +32,8 @@
 #include "transport.h"
 #include "tribe.h"
 #include "warehouse.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
@@ -43,6 +43,7 @@
 
 #include <map>
 
+namespace Widelands {
 
 // Versions
 #define CURRENT_PACKET_VERSION 1
@@ -54,20 +55,12 @@
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   1
 #define CURRENT_TRAININGSITE_PACKET_VERSION     1
 
-/*
- * Destructor
- */
-Widelands_Map_Buildingdata_Data_Packet::~Widelands_Map_Buildingdata_Data_Packet() {
-}
 
-/*
- * Read Function
- */
-void Widelands_Map_Buildingdata_Data_Packet::Read
+void Map_Buildingdata_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip) return;
@@ -135,15 +128,16 @@ throw (_wexception)
 		}
 	} else
 		throw wexception
-			("Unknown version %u in Widelands_Map_Buildingdata_Data_Packet!",
+			("Unknown version %u in Map_Buildingdata_Data_Packet!",
 			 packet_version);
 }
 
-void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
+
+void Map_Buildingdata_Data_Packet::read_constructionsite
 (ConstructionSite & constructionsite,
  FileRead & fr,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 {
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
@@ -198,15 +192,16 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
 	} else
 		throw wexception
 			("Unknown Constructionsite-Version %u in "
-			 "Widelands_Map_Buildingdata_Data_Packet!",
+			 "Map_Buildingdata_Data_Packet!",
 			 packet_version);
 }
 
-void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
+
+void Map_Buildingdata_Data_Packet::read_warehouse
 (Warehouse & warehouse,
  FileRead & fr,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 {
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_WAREHOUSE_PACKET_VERSION) {
@@ -259,7 +254,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
 				 -1)
 				throw wexception
 					("Unknown worker %s in incorporated workers in "
-					 "Widelands_Map_Buildingdata_Data_Packet!",
+					 "Map_Buildingdata_Data_Packet!",
 					 name.c_str());
          Worker* w=static_cast<Worker*>(ol->get_object_by_file_index(id));
          warehouse.sort_worker_in(egbase, name, w);
@@ -271,16 +266,16 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
       log("Read warehouse stuff for %p\n", &warehouse);
 	} else
 		throw wexception
-			("Unknown Warehouse-Version %u "
-			 "in Widelands_Map_Buildingdata_Data_Packet!",
+			("Unknown Warehouse-Version %u in Map_Buildingdata_Data_Packet!",
 			 packet_version);
 }
 
-void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
+
+void Map_Buildingdata_Data_Packet::read_militarysite
 (MilitarySite & militarysite,
  FileRead & fr,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 {
       // read the version
 	const uint16_t packet_version = fr.Unsigned16();
@@ -324,16 +319,15 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
          // DONE
 	} else
 		throw wexception
-			("Unknown MilitarySite-Version %u in "
-			 "Widelands_Map_Buildingdata_Data_Packet!",
+			("Unknown MilitarySite-Version %u in Map_Buildingdata_Data_Packet!",
 			 packet_version);
 }
 
-void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
+void Map_Buildingdata_Data_Packet::read_productionsite
 (ProductionSite & productionsite,
  FileRead & fr,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 {
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
@@ -395,16 +389,16 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
       memcpy(productionsite.m_statistics_buf, fr.Data(sizeof(productionsite.m_statistics_buf)), sizeof(productionsite.m_statistics_buf));
 	} else
 		throw wexception
-			("Unknown ProductionSite-Version %u in "
-			 "Widelands_Map_Buildingdata_Data_Packet!\n",
+			("Unknown ProductionSite-Version %u in Map_Buildingdata_Data_Packet!",
 			 packet_version);
 }
 
-void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
+
+void Map_Buildingdata_Data_Packet::read_trainingsite
 (TrainingSite & trainingsite,
  FileRead & fr,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 {
 	const uint16_t trainingsite_packet_version = fr.Unsigned16();
 	if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION) {
@@ -466,22 +460,15 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
 		trainingsite.m_total_soldiers=trainingsite.m_soldiers.size()+trainingsite.m_soldier_requests.size();
 	} else
 		throw wexception
-			("Unknown TrainingSite-Version %u in "
-			 "Widelands_Map_Buildingdata_Data_Packet!",
+			("Unknown TrainingSite-Version %u in Map_Buildingdata_Data_Packet!",
 			 trainingsite_packet_version);
 }
 
 
-
-
-
-/*
- * Write Function
- */
-void Widelands_Map_Buildingdata_Data_Packet::Write
+void Map_Buildingdata_Data_Packet::Write
 (FileSystem & fs,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+ Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
    FileWrite fw;
@@ -567,14 +554,12 @@ throw (_wexception)
    // DONE
 }
 
-/*
- * write for constructionsite
- */
-void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
+
+void Map_Buildingdata_Data_Packet::write_constructionsite
 (const ConstructionSite & constructionsite,
  FileWrite & fw,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+ Map_Map_Object_Saver * const os)
 {
 
    // First, write current version
@@ -617,14 +602,12 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
    fw.Unsigned32(constructionsite.m_work_steps);
 }
 
-/*
- * write for warehouse
- */
-void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
+
+void Map_Buildingdata_Data_Packet::write_warehouse
 (const Warehouse & warehouse,
  FileWrite & fw,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+ Map_Map_Object_Saver * const os)
 {
    fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
@@ -682,14 +665,12 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
    fw.Unsigned32(warehouse.m_next_carrier_spawn);
 }
 
-/*
- * write for militarysite
- */
-void Widelands_Map_Buildingdata_Data_Packet::write_militarysite
+
+void Map_Buildingdata_Data_Packet::write_militarysite
 (const MilitarySite & militarysite,
  FileWrite & fw,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+ Map_Map_Object_Saver * const os)
 {
    // Write the version
    fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
@@ -720,14 +701,12 @@ void Widelands_Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Unsigned8(militarysite.m_capacity);
 }
 
-/*
- * write for productionsite
- */
-void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
+
+void Map_Buildingdata_Data_Packet::write_productionsite
 (const ProductionSite & productionsite,
  FileWrite & fw,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+ Map_Map_Object_Saver * const os)
 {
    // Write the version
    fw.Unsigned16(CURRENT_PRODUCTIONSITE_PACKET_VERSION);
@@ -775,17 +754,20 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
 	for (uint32_t i = 0; i < statistics_size; ++i)
       fw.Unsigned8(productionsite.m_statistics[i]);
    fw.Unsigned8(productionsite.m_statistics_changed);
-   fw.Data(productionsite.m_statistics_buf, sizeof(productionsite.m_statistics_buf));
+	fw.Data
+		(productionsite.m_statistics_buf,
+		 sizeof(productionsite.m_statistics_buf),
+		 FileWrite::Pos::Null());
 }
 
 /*
  * write for trainingsite
  */
-void Widelands_Map_Buildingdata_Data_Packet::write_trainingsite
+void Map_Buildingdata_Data_Packet::write_trainingsite
 (const TrainingSite & trainingsite,
  FileWrite & fw,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+ Map_Map_Object_Saver * const os)
 {
    // Write the version
    fw.Unsigned16(CURRENT_TRAININGSITE_PACKET_VERSION);
@@ -834,3 +816,5 @@ void Widelands_Map_Buildingdata_Data_Packet::write_trainingsite
 
 	// DONE
 }
+
+};

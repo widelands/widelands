@@ -20,19 +20,20 @@
 #include "playercommand.h"
 
 #include "log.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "player.h"
 #include "soldier.h"
-#include "streamread.h"
 #include "streamwrite.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_saver.h"
 #include "widelands_map_map_object_loader.h"
 
 #include "upcast.h"
+
+namespace Widelands {
 
 enum {
 	PLCMD_UNUSED=0,
@@ -88,9 +89,7 @@ PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
  */
 #define PLAYER_COMMAND_VERSION 2
 void PlayerCommand::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_COMMAND_VERSION);
@@ -102,9 +101,7 @@ void PlayerCommand::Write
 }
 
 void PlayerCommand::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_COMMAND_VERSION || packet_version == 1) {
@@ -146,9 +143,7 @@ void Cmd_Bulldoze::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_BULLDOZE_VERSION 1
 void Cmd_Bulldoze::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BULLDOZE_VERSION) {
@@ -162,9 +157,7 @@ void Cmd_Bulldoze::Read
 			("Unknown version in Cmd_Bulldoze::Read: %u", packet_version);
 }
 void Cmd_Bulldoze::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BULLDOZE_VERSION);
@@ -199,9 +192,7 @@ void Cmd_Build::serialize (StreamWrite & ser) {
 }
 #define PLAYER_CMD_BUILD_VERSION 1
 void Cmd_Build::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILD_VERSION) {
@@ -209,15 +200,9 @@ void Cmd_Build::Read
 		PlayerCommand::Read(fr, egbase, mol);
 		id          = fr.Unsigned16();
 		try {coords = fr.Coords32  (egbase.map().extent());}
-		catch (const StreamRead::Width_Exceeded e) {
+		catch (StreamRead::Data_Error const & e) {
 			throw wexception
-				("Cmd_Build::Read: reading coords: width (%u) exceeded (x = %i)",
-				 e.w, e.x);
-		}
-		catch (const StreamRead::Height_Exceeded e) {
-			throw wexception
-				("Cmd_Build::Read: reading coords: height (%u) exceeded (y = %i)",
-				 e.h, e.y);
+				("Cmd_Build::Read: reading coords: %s", e.message().c_str());
 		}
 	} else
 		throw wexception
@@ -225,9 +210,7 @@ void Cmd_Build::Read
 }
 
 void Cmd_Build::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILD_VERSION);
@@ -260,35 +243,23 @@ void Cmd_BuildFlag::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_BUILDFLAG_VERSION 1
 void Cmd_BuildFlag::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILDFLAG_VERSION) {
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
 		try {coords = fr.Coords32(egbase.map().extent());}
-		catch (const StreamRead::Width_Exceeded e) {
+		catch (const StreamRead::Data_Error & e) {
 			throw wexception
-				("Cmd_BuildFlag::Read: reading coords: width (%u) exceeded (x = "
-				 "%i)",
-				 e.w, e.x);
-		}
-		catch (const StreamRead::Height_Exceeded e) {
-			throw wexception
-				("Cmd_BuildFlag::Read: reading coords: height (%u) exceeded (y = "
-				 "%i)",
-				 e.h, e.y);
+				("Cmd_BuildFlag::Read: reading coords: %s", e.message().c_str());
 		}
 	} else
 		throw wexception
 			("Unknown version in Cmd_BuildFlag::Read: %u", packet_version);
 }
 void Cmd_BuildFlag::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
@@ -356,9 +327,7 @@ void Cmd_BuildRoad::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_BUILDROAD_VERSION 1
 void Cmd_BuildRoad::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILDROAD_VERSION) {
@@ -376,9 +345,7 @@ void Cmd_BuildRoad::Read
 			("Unknown version in Cmd_BuildRoad::Read: %u", packet_version);
 }
 void Cmd_BuildRoad::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
@@ -418,9 +385,7 @@ void Cmd_FlagAction::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_FLAGACTION_VERSION 1
 void Cmd_FlagAction::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_FLAGACTION_VERSION) {
@@ -438,9 +403,7 @@ void Cmd_FlagAction::Read
 			("Unknown version in Cmd_FlagAction::Read: %u", packet_version);
 }
 void Cmd_FlagAction::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_FLAGACTION_VERSION);
@@ -480,9 +443,7 @@ void Cmd_StartStopBuilding::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_STOPBUILDING_VERSION 1
 void Cmd_StartStopBuilding::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_STOPBUILDING_VERSION) {
@@ -498,9 +459,7 @@ void Cmd_StartStopBuilding::Read
 			("Unknown version in Cmd_StartStopBuilding::Read: %u", packet_version);
 }
 void Cmd_StartStopBuilding::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_STOPBUILDING_VERSION);
@@ -538,9 +497,7 @@ void Cmd_EnhanceBuilding::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
 void Cmd_EnhanceBuilding::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_ENHANCEBUILDING_VERSION) {
@@ -557,9 +514,7 @@ void Cmd_EnhanceBuilding::Read
 			("Unknown version in Cmd_EnhanceBuilding::Read: %u", packet_version);
 }
 void Cmd_EnhanceBuilding::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_ENHANCEBUILDING_VERSION);
@@ -606,9 +561,7 @@ void Cmd_ChangeTrainingOptions::serialize (StreamWrite & ser) {
 
 #define PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION 1
 void Cmd_ChangeTrainingOptions::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
@@ -629,9 +582,7 @@ void Cmd_ChangeTrainingOptions::Read
 }
 
 void Cmd_ChangeTrainingOptions::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION);
@@ -673,9 +624,7 @@ void Cmd_DropSoldier::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_DROPSOLDIER_VERSION 1
 void Cmd_DropSoldier::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_DROPSOLDIER_VERSION) {
@@ -697,9 +646,7 @@ void Cmd_DropSoldier::Read
 }
 
 void Cmd_DropSoldier::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_DROPSOLDIER_VERSION);
@@ -751,9 +698,7 @@ void Cmd_ChangeSoldierCapacity::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION 1
 void Cmd_ChangeSoldierCapacity::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
@@ -774,9 +719,7 @@ void Cmd_ChangeSoldierCapacity::Read
 }
 
 void Cmd_ChangeSoldierCapacity::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION);
@@ -838,9 +781,7 @@ void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
 }
 #define PLAYER_CMD_ENEMYFLAGACTION_VERSION 2
 void Cmd_EnemyFlagAction::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
@@ -865,9 +806,7 @@ void Cmd_EnemyFlagAction::Read
 }
 
 void Cmd_EnemyFlagAction::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_ENEMYFLAGACTION_VERSION);
@@ -886,3 +825,5 @@ void Cmd_EnemyFlagAction::Write
 	fw.Unsigned8 (number);
 	fw.Unsigned8 (type);
 }
+
+};

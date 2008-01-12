@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #define __S__INTBASE_H
 
 #include "editor_game_base.h"
-#include "geometry.h"
 #include "map.h"
 #include "mapview.h"
 #include "overlay_manager.h"
@@ -31,7 +30,7 @@
 
 #include <SDL_keysym.h>
 
-class CoordPath;
+namespace Widelands {struct CoordPath;};
 class MiniMap;
 
 /**
@@ -47,11 +46,11 @@ struct Interactive_Base : public Map_View {
 			dfDebug          = 4, //  general debugging info
 		};
 
-	Interactive_Base(Editor_Game_Base &);
+	Interactive_Base(Widelands::Editor_Game_Base &);
 		virtual ~Interactive_Base();
 
-	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
-	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
+	Widelands::Editor_Game_Base const & egbase() const {return m_egbase;}
+	Widelands::Editor_Game_Base       & egbase()       {return m_egbase;}
 	virtual void reference_player_tribe(const int32_t, const void * const) {}
 
 		static int32_t get_xres();
@@ -59,13 +58,15 @@ struct Interactive_Base : public Map_View {
 	bool m_show_workarea_preview;
 
 	//  point of view for drawing
-	virtual Player * get_player() const throw () = 0;
+	virtual Widelands::Player * get_player() const throw () = 0;
 
       // logic handler func
       void think();
 	virtual void postload();
 
-	const Node_and_Triangle<> & get_sel_pos() const {return m_sel.pos;}
+	const Widelands::Node_and_Triangle<> & get_sel_pos() const {
+		return m_sel.pos;
+	}
 	bool get_sel_freeze() const {return m_sel.freeze;}
 
 	/**
@@ -76,11 +77,11 @@ struct Interactive_Base : public Map_View {
 	void set_sel_triangles(const bool yes) throw () {m_sel.triangles = yes;}
 
 	uint32_t get_sel_radius() const throw () {return m_sel.radius;}
-	virtual void set_sel_pos(const Node_and_Triangle<>);
+	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
 	void set_sel_freeze(const bool yes) throw () {m_sel.freeze = yes;}
 	void set_sel_radius(const uint32_t n);
 
-	void move_view_to(const Coords);
+	void move_view_to(Widelands::Coords);
 		void move_view_to_point(Point pos);
 
       virtual void start() = 0;
@@ -93,14 +94,14 @@ struct Interactive_Base : public Map_View {
 
       // Road building
 		bool is_building_road() const {return m_buildroad;}
-		CoordPath *get_build_road() {return m_buildroad;}
-		void start_build_road(Coords start, int32_t player);
+	Widelands::CoordPath * get_build_road() {return m_buildroad;}
+		void start_build_road(Widelands::Coords start, int32_t player);
 		void abort_build_road();
 		void finish_build_road();
-		bool append_build_road(Coords field);
-	Coords    get_build_road_start  () const throw ();
-	Coords    get_build_road_end    () const throw ();
-	Direction get_build_road_end_dir() const throw ();
+		bool append_build_road(Widelands::Coords field);
+	Widelands::Coords    get_build_road_start  () const throw ();
+	Widelands::Coords    get_build_road_end    () const throw ();
+	Widelands::Direction get_build_road_end_dir() const throw ();
 
       // for loading
       virtual void cleanup_for_load() {};
@@ -110,13 +111,13 @@ private:
       void roadb_remove_overlay();
 
       MiniMap* m_mm;
-	Editor_Game_Base & m_egbase;
+	Widelands::Editor_Game_Base & m_egbase;
 	struct Sel_Data {
 		Sel_Data
 			(const bool Freeze = false, const bool Triangles = false,
-			 const Node_and_Triangle<> Pos       =
-			 Node_and_Triangle<>
-			 (Coords(0, 0), TCoords<>(Coords(0, 0), TCoords<>::D)),
+			 const Widelands::Node_and_Triangle<> Pos       =
+			 Widelands::Node_and_Triangle<>
+			 (Widelands::Coords(0, 0), Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
 			 const int32_t Pic                       = 0,
 			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
@@ -126,7 +127,7 @@ private:
 		{}
 		bool              freeze; // don't change m_sel even if mouse moves
 		bool              triangles; //  otherwise nodes
-		Node_and_Triangle<>     pos;
+		Widelands::Node_and_Triangle<>     pos;
 		uint32_t              radius;
 		int32_t               pic;
 		Overlay_Manager::Job_Id jobid;
@@ -140,7 +141,7 @@ private:
 
 	Overlay_Manager::Job_Id m_jobid;
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
-	CoordPath             * m_buildroad;         //  path for the new road
+	Widelands::CoordPath  * m_buildroad;         //  path for the new road
       int32_t      m_road_build_player;
 
       UI::UniqueWindow::Registry m_minimap;

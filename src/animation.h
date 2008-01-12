@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,12 +95,12 @@ struct DirAnimations {
 	~DirAnimations();
 
 	void parse
-		(Map_Object_Descr *,
-		 const char       * directory,
-		 Profile          *,
-		 const char       * sectnametempl,
-		 Section          * defaults    = 0,
-		 const EncodeData * encdefaults = 0);
+		(Widelands::Map_Object_Descr * const,
+		 const char                  * const directory,
+		 Profile                     * const,
+		 const char                  * const sectnametempl,
+		 Section                     * const defaults = 0,
+		 const EncodeData            * const encdefaults = 0);
 
 	uint32_t get_animation(const int32_t dir) const throw ()
 	{return m_animations[dir - 1];}

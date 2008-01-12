@@ -20,6 +20,7 @@
 #ifndef __S__FONT_LOADER_H
 #define __S__FONT_LOADER_H
 
+#include "fileread.h"
 #include "rgbcolor.h"
 
 #include <SDL_ttf.h>
@@ -27,8 +28,6 @@
 #include <map>
 #include <string>
 #include <vector>
-
-class FileRead;
 
 /*
  * Font

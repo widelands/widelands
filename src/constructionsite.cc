@@ -38,6 +38,8 @@
 
 #include <stdio.h>
 
+namespace Widelands {
+
 static const int32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
 
 
@@ -613,3 +615,5 @@ void ConstructionSite::draw
 	// Draw help strings
 	draw_help(game, dst, coords, pos);
 }
+
+};

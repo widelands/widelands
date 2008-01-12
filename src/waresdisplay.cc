@@ -30,9 +30,10 @@
 
 #include <stdio.h>
 
-
 WaresDisplay::WaresDisplay
-(UI::Panel * const parent, const int32_t x, const int32_t y, const Tribe_Descr & tribe)
+(UI::Panel * const parent,
+ int32_t const x, int32_t const y,
+ Widelands::Tribe_Descr const & tribe)
 :
 UI::Panel(parent, x, y, Width, 0),
 m_tribe (tribe),
@@ -78,7 +79,8 @@ WaresDisplay::set_wares
 add a ware list to be displayed in this WaresDisplay
 ===============
 */
-void WaresDisplay::add_warelist(const WareList* wares, wdType type)
+void WaresDisplay::add_warelist
+(Widelands::WareList const * const wares, wdType const type)
 {
    // If you register something twice, it is counted twice. Not my problem
 	m_warelists.push_back(wares);

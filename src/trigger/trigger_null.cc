@@ -25,6 +25,8 @@
 #include "profile.h"
 #include "wexception.h"
 
+namespace Widelands {
+
 static const int32_t TRIGGER_VERSION = 1;
 
 Trigger_Null::Trigger_Null()
@@ -59,3 +61,5 @@ void Trigger_Null::reset_trigger(Game *) {
    m_value = false;
    set_trigger(false);
 }
+
+};

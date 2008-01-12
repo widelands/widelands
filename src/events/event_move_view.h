@@ -21,7 +21,9 @@
 #define __S__EVENT_MOVE_VIEW_H
 
 #include "event.h"
-#include "geometry.h"
+#include "widelands_geometry.h"
+
+namespace Widelands {
 
 class Editor_Game_Base;
 
@@ -49,6 +51,6 @@ private:
       Coords m_pt;
 };
 
-
+};
 
 #endif

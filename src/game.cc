@@ -22,9 +22,6 @@
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
 #include "events/event_chain.h"
-#include "fileread.h"
-#include "filesystem.h"
-#include "filewrite.h"
 #include "interactive_player.h"
 #include "interactive_spectator.h"
 #include "fullscreen_menu_launchgame.h"
@@ -45,6 +42,8 @@
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
 
@@ -58,12 +57,13 @@
 
 #include <string>
 
+namespace Widelands {
+
 /// Define this to get lots of debugging output concerned with syncs
 //#define SYNC_DEBUG
 
 #ifdef SYNC_DEBUG
-class SyncDebugWrapper : public StreamWrite {
-public:
+struct SyncDebugWrapper : public StreamWrite {
 	SyncDebugWrapper(Game* g, StreamWrite* target)
 	{
 		m_game = g;
@@ -99,7 +99,7 @@ public:
 #endif
 
 struct GameInternals {
-	MD5Checksum synchash;
+	MD5Checksum<StreamWrite> synchash;
 #ifdef SYNC_DEBUG
 	SyncDebugWrapper syncwrapper;
 #endif
@@ -215,7 +215,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	set_map(new Map);
 
 	FileSystem* fs = g_fs->MakeSubFileSystem(mapname);
-	m_maploader = new Widelands_Map_Loader(*fs, &map());
+	m_maploader = new WL_Map_Loader(*fs, &map());
 	UI::ProgressWindow loaderUI;
 	GameTips tips (loaderUI);
 
@@ -692,7 +692,7 @@ void Game::cleanup_for_load
  * \note This is returned as a \ref StreamWrite object to prevent
  * the caller from messing with the checksumming process.
  */
-StreamWrite& Game::syncstream()
+StreamWrite & Game::syncstream()
 {
 #ifdef SYNC_DEBUG
 	return m->syncwrapper;
@@ -711,7 +711,7 @@ StreamWrite& Game::syncstream()
  */
 md5_checksum Game::get_sync_hash() const
 {
-	MD5Checksum copy(m->synchash);
+	MD5Checksum<StreamWrite> copy(m->synchash);
 
 	copy.FinishChecksum();
 	return copy.GetChecksum();
@@ -788,36 +788,50 @@ void Game::send_player_build_road (int32_t pid, Path & path)
 
 void Game::send_player_flagaction (Flag* flag, int32_t action)
 {
-	send_player_command (new Cmd_FlagAction(get_gametime(), flag->get_owner()->get_player_number(), flag, action));
+	send_player_command
+		(new Cmd_FlagAction
+		 (get_gametime(), flag->get_owner()->get_player_number(), flag, action));
 }
 
 void Game::send_player_start_stop_building (Building* b)
 {
-	send_player_command (new Cmd_StartStopBuilding(get_gametime(), b->get_owner()->get_player_number(), b));
+	send_player_command
+		(new Cmd_StartStopBuilding
+		 (get_gametime(), b->get_owner()->get_player_number(), b));
 }
 
 void Game::send_player_enhance_building (Building* b, int32_t id)
 {
 	assert(id!=-1);
 
-	send_player_command (new Cmd_EnhanceBuilding(get_gametime(), b->get_owner()->get_player_number(), b, id));
+	send_player_command
+		(new Cmd_EnhanceBuilding
+		 (get_gametime(), b->get_owner()->get_player_number(), b, id));
 }
 
 void Game::send_player_change_training_options(Building* b, int32_t atr, int32_t val)
 {
-
-	send_player_command (new Cmd_ChangeTrainingOptions(get_gametime(), b->get_owner()->get_player_number(), b, atr, val));
+	send_player_command
+		(new Cmd_ChangeTrainingOptions
+		 (get_gametime(), b->get_owner()->get_player_number(), b, atr, val));
 }
 
 void Game::send_player_drop_soldier (Building* b, int32_t ser)
 {
 	assert(ser != -1);
-	send_player_command (new Cmd_DropSoldier(get_gametime(), b->get_owner()->get_player_number(), b, ser));
+	send_player_command
+		(new Cmd_DropSoldier
+		 (get_gametime(), b->get_owner()->get_player_number(), b, ser));
 }
 
 void Game::send_player_change_soldier_capacity (Building* b, int32_t val)
 {
-	send_player_command (new Cmd_ChangeSoldierCapacity(get_gametime(), b->get_owner()->get_player_number(), b, val));
+	send_player_command
+		(new Cmd_ChangeSoldierCapacity
+		 (get_gametime(),
+		  b->get_owner()->get_player_number(),
+		  b,
+		  val));
 }
 
 /////////////////////// TESTING STUFF
@@ -828,7 +842,15 @@ void Game::send_player_enemyflagaction
  const int32_t num_soldiers,
  const int32_t type)
 {
-	send_player_command (new Cmd_EnemyFlagAction(get_gametime(), who_attacks, flag, action, who_attacks, num_soldiers, type));
+	send_player_command
+		(new Cmd_EnemyFlagAction
+		 (get_gametime(),
+		  who_attacks,
+		  flag,
+		  action,
+		  who_attacks,
+		  num_soldiers,
+		  type));
 }
 
 
@@ -1022,3 +1044,5 @@ void Game::WriteStatistics(FileWrite& fw)
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
 		}
 }
+
+};

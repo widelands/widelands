@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,6 @@ things like size, world ....
 */
 struct Main_Menu_New_Map : public UI::Window {
       Main_Menu_New_Map(Editor_Interactive*);
-      virtual ~Main_Menu_New_Map();
 
 private:
       Editor_Interactive *m_parent;
@@ -51,7 +50,7 @@ private:
 	UI::IDButton<Main_Menu_New_Map, int32_t> * m_world;
       int32_t m_w, m_h;
       uint32_t m_currentworld;
-      std::vector<std::string>* m_worlds;
+	std::vector<std::string> m_worlds;
 
 	void button_clicked(int32_t);
 	void clicked_create_map();

@@ -30,18 +30,20 @@
 #include <set>
 #include <vector>
 
+namespace Widelands {
+
 class Editor_Game_Base;
 class Flag;
 class MilitarySite;
 class Soldier;
 class Coords;
-class Widelands_Map_Attack_Controller_Data_Packet;
+struct Map_Attack_Controller_Data_Packet;
 
 
 uint32_t getMaxAttackSoldiers(const Editor_Game_Base &, const Flag &, const Player_Number);
 
 struct AttackController : public BaseImmovable {
-	friend class Widelands_Map_Attack_Controller_Data_Packet;
+	friend struct Map_Attack_Controller_Data_Packet;
 
 	AttackController(Editor_Game_Base* eg, Flag* flag, int32_t attacker, int32_t defender);
 	AttackController(Editor_Game_Base &);
@@ -121,8 +123,11 @@ public:
 	// Remove as soon as we fully support the new system
 	virtual bool has_new_save_support() {return true;}
 
-	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
-	static Map_Object::Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, FileRead&);
+	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
+	static Map_Object::Loader * load
+		(Editor_Game_Base *, Map_Map_Object_Loader *, FileRead &);
+};
+
 };
 
 #endif

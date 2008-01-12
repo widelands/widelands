@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,20 +25,16 @@
 #include "profile.h"
 #include "widelands_map_data_packet_ids.h"
 
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 2
 
-Widelands_Map_Player_Position_Data_Packet::
-~Widelands_Map_Player_Position_Data_Packet
-()
-{}
 
-
-void Widelands_Map_Player_Position_Data_Packet::Read
+void Map_Player_Position_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base * egbase,
  const bool,
- Widelands_Map_Map_Object_Loader * const)
+ Map_Map_Object_Loader * const)
 throw (_wexception)
 {
    Profile prof;
@@ -69,15 +65,13 @@ throw (_wexception)
 		}
 	} else
 		throw wexception
-			("Unknown version in Widelands_Map_Player_Position_Data_Packet: %i",
+			("Unknown version in Map_Player_Position_Data_Packet: %i",
 			 packet_version);
 }
 
 
-void Widelands_Map_Player_Position_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const)
+void Map_Player_Position_Data_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
    Profile prof;
@@ -97,3 +91,5 @@ throw (_wexception)
 
    prof.write("player_position", false, fs);
 }
+
+};

@@ -155,10 +155,10 @@ Coords Section::Value::get_Coords() const
 	const int32_t x = strtol(endp, &endp, 0);
 	const int32_t y = strtol(endp, &endp, 0);
 	if
-		(x <  std::numeric_limits<X_Coordinate>::min() or
-		 x >= std::numeric_limits<X_Coordinate>::max() or
-		 y <  std::numeric_limits<Y_Coordinate>::min() or
-		 y >= std::numeric_limits<Y_Coordinate>::max() or
+		(x <  std::numeric_limits<Widelands::X_Coordinate>::min() or
+		 x >= std::numeric_limits<Widelands::X_Coordinate>::max() or
+		 y <  std::numeric_limits<Widelands::Y_Coordinate>::min() or
+		 y >= std::numeric_limits<Widelands::Y_Coordinate>::max() or
 		 *endp)
 		throw wexception("%s: '%s' is not a Coords", get_name(), m_value);
 

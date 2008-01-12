@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,10 @@
 
 #define MAX_TOOL_AREA 9
 
-#include "geometry.h"
+#include "widelands_geometry.h"
 
-class FCoords;
 class Editor_Interactive;
-class Map;
+namespace Widelands {struct Map;};
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
@@ -43,7 +42,7 @@ struct Editor_Tool {
 	enum Tool_Index {First, Second, Third};
 	int32_t handle_click
 		(const Tool_Index i,
-		 Map & map, const Node_and_Triangle<> center,
+		 Widelands::Map & map, Widelands::Node_and_Triangle<> const center,
 		 Editor_Interactive & parent)
 	{
 		return (i == First ? *this : i == Second ? m_second : m_third)
@@ -55,7 +54,8 @@ struct Editor_Tool {
 		}
 
 	virtual int32_t handle_click_impl
-		(Map &, const Node_and_Triangle<>, Editor_Interactive & parent) = 0;
+		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &)
+		= 0;
 	virtual const char * get_sel_impl() const throw () = 0;
 	virtual bool operates_on_triangles() const {return false;};
 

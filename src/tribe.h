@@ -31,6 +31,8 @@
 #include <map>
 #include <vector>
 
+namespace Widelands {
+
 class Building_Descr;
 class Editor_Game_Base;
 class Item_Ware_Descr;
@@ -128,7 +130,7 @@ private:
 		void parse_workers(const char *directory);
 		void parse_wares(const char *wares);
 		void parse_bobs(const char *directory);
-
+};
 
 };
 

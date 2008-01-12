@@ -28,8 +28,9 @@
 
 #include <string>
 
-
 class Profile;
+
+namespace Widelands {
 
 // Additional parameters for op parsing routines
 struct ProgramParser {
@@ -84,6 +85,8 @@ private:
 
 private:
 	static const ParseMap        s_parsemap[];
+};
+
 };
 
 #endif // __S__IMMOVABLE_PROGRAM_H

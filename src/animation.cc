@@ -22,7 +22,6 @@
 #include "bob.h"
 #include "constants.h"
 #include "profile.h"
-#include <stdint.h>
 #include "sound/sound_handler.h"
 #include "wexception.h"
 
@@ -317,8 +316,13 @@ If they don't exist, the data is taken from defaults and the bitmaps foowalk_??_
 are used.
 ===============
 */
-void DirAnimations::parse(Map_Object_Descr* b, const char *directory, Profile *prof, const char *sectnametempl,
-                          Section *defaults, const EncodeData *encdefaults)
+void DirAnimations::parse
+(Widelands::Map_Object_Descr * const b,
+ char                  const * const directory,
+ Profile                     * const prof,
+ char                  const * const sectnametempl,
+ Section                     * const defaults,
+ EncodeData            const * const encdefaults)
 {
 	char dirpictempl[256];
 	char sectnamebase[256];

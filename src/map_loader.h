@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 
 #include "map.h"
 
+namespace Widelands {
+
 class Editor_Game_Base;
 
 /*
@@ -39,15 +41,9 @@ must be deleted, a new one must be selected
 =============================
 */
 struct Map_Loader {
-	enum Type {
-         WLML, // Widelands Map Loader
-         S2ML  // S2 Map Loader
-	};
-
       Map_Loader(const char* filename, Map* map) {m_s=STATE_INIT; m_map=map; m_map->set_filename(filename);}
       virtual ~Map_Loader() {};
 
-      virtual int32_t get_type() = 0;
       virtual int32_t preload_map(bool as_scenario)=0;
 	virtual void load_world() = 0;
       virtual int32_t load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
@@ -67,6 +63,8 @@ protected:
 
 private:
       State m_s;
+};
+
 };
 
 #endif

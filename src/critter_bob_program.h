@@ -22,6 +22,8 @@
 
 #include "bob.h"
 
+namespace Widelands {
+
 struct Critter_BobAction {
 	typedef bool (Critter_Bob::*execute_t)(Game* g, Bob::State* state, const Critter_BobAction* act);
 
@@ -78,5 +80,6 @@ private:
 	static const ParseMap          s_parsemap[];
 };
 
+};
 
 #endif // __S__CRITTER_BOB_PROGRAM

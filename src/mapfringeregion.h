@@ -22,6 +22,8 @@
 
 #include "map.h"
 
+namespace Widelands {
+
 /**
  * Producer/Coroutine struct that iterates over every node on the fringe of an
  * area.
@@ -75,6 +77,8 @@ private:
 	Area_type                       m_area;
 	typename Area_type::Radius_type m_remaining_in_phase;
 	uint8_t   m_phase;
+};
+
 };
 
 #endif

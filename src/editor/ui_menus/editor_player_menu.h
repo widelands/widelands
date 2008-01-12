@@ -48,7 +48,7 @@ private:
       UI::Edit_Box* m_plr_names[MAX_PLAYERS];
 	UI::Button<Editor_Player_Menu>
 		m_add_player, m_remove_last_player;
-	UI::IDButton<Editor_Player_Menu, const Player_Number>
+	UI::IDButton<Editor_Player_Menu, Widelands::Player_Number const>
 		//* m_plr_allowed_buildings       [MAX_PLAYERS],
 		//* m_plr_make_infrastructure_buts[MAX_PLAYERS],
 		* m_plr_set_pos_buts            [MAX_PLAYERS],

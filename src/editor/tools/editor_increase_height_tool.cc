@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,9 +26,12 @@
 
 /// Increases the heights by a value. Chages surrounding nodes if necessary.
 int32_t Editor_Increase_Height_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
+(Widelands::Map                     & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive                 & parent)
 {
 	return map.change_height
-		(Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()),
+		(Widelands::Area<Widelands::FCoords>
+		 (map.get_fcoords(center.node), parent.get_sel_radius()),
 		 m_change_by);
 }

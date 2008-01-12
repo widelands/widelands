@@ -31,12 +31,16 @@
 #include <string>
 #include <vector>
 
+namespace UI {struct ProgressWindow;};
+struct Interactive_Base;
+
+namespace Widelands {
+
 struct AreaWatcher;
 class Battle;
 class Bob;
 class Building_Descr;
 class Immovable;
-class Interactive_Base;
 class Map;
 class Object_Manager;
 class Player;
@@ -44,7 +48,6 @@ class PlayerImmovable;
 class Tribe_Descr;
 class Flag;
 class AttackController;
-namespace UI {struct ProgressWindow;};
 
 struct Editor_Game_Base {
 	friend class Interactive_Base;
@@ -212,12 +215,14 @@ private:
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \
 	iterate_player_numbers(p, nr_players)                                      \
-		if (Player * const player = (egbase).get_player(p))                     \
+		if (Widelands::Player * const player = (egbase).get_player(p))          \
 
 #define iterate_players_existing_const(p, nr_players, egbase, player)         \
 	iterate_player_numbers(p, nr_players)                                      \
-		if (const Player * const player = (egbase).get_player(p))               \
+		if (Widelands::Player const * const player = (egbase).get_player(p))    \
 
 extern const uint8_t g_playercolors[MAX_PLAYERS][12];
+
+};
 
 #endif // __S__EDITOR_GAME_BASE_H

@@ -23,6 +23,7 @@
 
 #include <vector>
 
+namespace Widelands {
 
 MapEventChainManager::MapEventChainManager() {}
 
@@ -75,3 +76,5 @@ void MapEventChainManager::delete_eventchain(const std::string & name) {
 		}
 	}
 }
+
+};

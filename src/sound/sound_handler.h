@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2006 by the Widelands Development Team
+ * Copyright (C) 2005-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,9 @@
 //config.h *must* be included before SDL_mixer.h due to USE_RWOPS !!
 #include "config.h"
 
+#include "fileread.h"
 #include "fxset.h"
-#include "geometry.h"
+#include "widelands_geometry.h"
 #include "random.h"
 
 #include <map>
@@ -33,8 +34,7 @@
 
 #include <unistd.h>
 
-struct FileRead;
-struct Game;
+namespace Widelands {struct Game;};
 struct Songset;
 
 /// How many milliseconds in the past to consider for
@@ -178,7 +178,7 @@ public:
 	 const bool recursive = false);
 	void play_fx
 	(const std::string & fx_name,
-	 const Coords map_position,
+	 const Widelands::Coords map_position,
 	 const uint32_t priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 	void play_fx
 	(const std::string fx_name,
@@ -218,7 +218,7 @@ public:
 	/** The game logic where we can get a mapping from logical to screen
 	 * coordinates and vice vers
 	*/
-	Game *m_the_game;
+	Widelands::Game * m_the_game;
 
 	/** Only for buffering the command line option --nosound until real
 	 * intialization is done
@@ -237,7 +237,7 @@ public:
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
 	void load_one_fx(const char * const filename, const std::string fx_name);
-	int32_t stereo_position(const Coords position);
+	int32_t stereo_position(const Widelands::Coords position);
 	bool play_or_not
 	(const std::string fx_name,
 	 const int32_t stereo_position,

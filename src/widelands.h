@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+namespace Widelands {
+
 //  Type definitions for the game logic.
 
 typedef uint8_t Tribe_Index;
@@ -31,7 +33,7 @@ typedef uint32_t Military_Influence; //  FIXME should be uint16_t
 typedef uint8_t  Player_Number; /// 5 bits used, so 0 .. 31
 inline Player_Number Neutral() throw () {return 0;}
 #define iterate_player_numbers(p, nr_players) \
-	for (Player_Number p = 1; p <= nr_players; ++p)
+	for (Widelands::Player_Number p = 1; p <= nr_players; ++p)
 
 typedef uint8_t  Terrain_Index;   /// 4 bits used, so 0 .. 15.
 typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.
@@ -44,5 +46,7 @@ inline Time Never() throw () {return 0xffffffff;}
 
 typedef uint32_t Duration;
 inline Duration Forever() throw () {return 0xffffffff;}
+
+};
 
 #endif

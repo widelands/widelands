@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,21 +22,19 @@
 
 #include "game_data_packet.h"
 
-struct FileRead;
+namespace Widelands {
 
 /*
  * Informations about the interactive player. Mostly scrollpos,
  * player number and so on
  */
 struct Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
-	virtual ~Game_Interactive_Player_Data_Packet();
+	void Read (FileSystem &, Game *, Map_Map_Object_Loader * = 0)
+		throw (_wexception);
+	void Write(FileSystem &, Game *, Map_Map_Object_Saver  * = 0)
+		throw (_wexception);
+};
 
-	virtual void Read
-		(FileSystem &, Game*, Widelands_Map_Map_Object_Loader * const = 0)
-		throw (_wexception);
-	virtual void Write
-		(FileSystem &, Game*, Widelands_Map_Map_Object_Saver * const = 0)
-		throw (_wexception);
 };
 
 #endif

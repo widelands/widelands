@@ -25,9 +25,12 @@
 
 #include <vector>
 
+namespace UI {struct Panel;};
+
+namespace Widelands {
+
 class Trigger_Null;
 class Editor_Game_Base;
-namespace UI {struct Panel;};
 
 /*
  * This event shows a message box
@@ -92,6 +95,6 @@ private:
       int32_t  m_width, m_height;
 };
 
-
+};
 
 #endif

@@ -36,18 +36,22 @@
 
 #include <stdio.h>
 
-
-struct MapObjectDebugPanel : public UI::Panel, public Map_Object::LogSink {
-	MapObjectDebugPanel(UI::Panel* parent, Editor_Game_Base* egbase, Map_Object* obj);
+struct MapObjectDebugPanel
+: public UI::Panel, public Widelands::Map_Object::LogSink
+{
+	MapObjectDebugPanel
+		(UI::Panel                   & parent,
+		 Widelands::Editor_Game_Base &,
+		 Widelands::Map_Object       &);
 	~MapObjectDebugPanel();
 
 	virtual void log(std::string str);
 
 private:
-	Editor_Game_Base       * m_egbase;
-	Object_Ptr               m_object;
+	Widelands::Editor_Game_Base & m_egbase;
+	Widelands::Object_Ptr         m_object;
 
-	UI::Multiline_Textarea * m_log;
+	UI::Multiline_Textarea        m_log;
 };
 
 
@@ -58,16 +62,18 @@ MapObjectDebugPanel::MapObjectDebugPanel
 Initialize logging.
 ===============
 */
-MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel* parent, Editor_Game_Base* egbase, Map_Object* obj)
-	: UI::Panel(parent, 0, 0, 280, 150)
+MapObjectDebugPanel::MapObjectDebugPanel
+(UI::Panel                   & parent,
+ Widelands::Editor_Game_Base & egbase,
+ Widelands::Map_Object       & obj)
+:
+UI::Panel(&parent, 0, 0, 280, 150),
+m_egbase (egbase),
+m_object (&obj),
+m_log    (this, 0, 0, 280, 150, "")
 {
-	m_egbase = egbase;
-	m_object = obj;
-
-	m_log = new UI::Multiline_Textarea(this, 0, 0, 280, 150, "");
-	m_log->set_scrollmode(UI::Multiline_Textarea::ScrollLog);
-
-	obj->set_logsink(this);
+	m_log.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
+	obj.set_logsink(this);
 }
 
 
@@ -80,9 +86,8 @@ Unregister logger.
 */
 MapObjectDebugPanel::~MapObjectDebugPanel()
 {
-	Map_Object* obj = m_object.get(m_egbase);
-
-	if (obj && obj->get_logsink() == this)
+	if (Widelands::Map_Object * const obj = m_object.get(&m_egbase))
+		if (obj->get_logsink() == this)
 		obj->set_logsink(0);
 }
 
@@ -96,7 +101,7 @@ Append the string to the log textarea.
 */
 void MapObjectDebugPanel::log(std::string str)
 {
-	m_log->set_text((m_log->get_text() + str).c_str());
+	m_log.set_text((m_log.get_text() + str).c_str());
 }
 
 
@@ -111,11 +116,12 @@ UI headers in the game logic code (same reason why we have a separate
 building_ui.cc).
 ===============
 */
-void Map_Object::create_debug_panels(Editor_Game_Base* egbase, UI::Tab_Panel* tabs)
+void Widelands::Map_Object::create_debug_panels
+(Widelands::Editor_Game_Base * egbase, UI::Tab_Panel* tabs)
 {
 	tabs->add
 		(g_gr->get_picture(PicMod_Game,  "pics/menu_debug.png"),
-		 new MapObjectDebugPanel(tabs, egbase, this));
+		 new MapObjectDebugPanel(*tabs, *egbase, *this));
 }
 
 
@@ -134,9 +140,8 @@ The map object debug window is basically just a simple container for tabs
 that are provided by the map object itself via the virtual function
 collect_debug_tabs().
 */
-class MapObjectDebugWindow : public UI::Window {
-public:
-	MapObjectDebugWindow(Interactive_Base* parent, Map_Object* obj);
+struct MapObjectDebugWindow : public UI::Window {
+	MapObjectDebugWindow(Interactive_Base & parent, Widelands::Map_Object &);
 
 	Interactive_Base * get_iabase() {
 		return dynamic_cast<Interactive_Base *>(get_parent());
@@ -146,7 +151,7 @@ public:
 
 private:
    bool           m_log_general_info;
-	Object_Ptr      m_object;
+	Widelands::Object_Ptr m_object;
 	uint32_t            m_serial;
 	UI::Tab_Panel * m_tabs;
 };
@@ -160,25 +165,27 @@ MapObjectDebugWindow::MapObjectDebugWindow
 Create the window
 ===============
 */
-MapObjectDebugWindow::MapObjectDebugWindow(Interactive_Base* parent, Map_Object* obj)
-	: UI::Window(parent, 0, 0, 100, 100, "")
+MapObjectDebugWindow::MapObjectDebugWindow
+	(Interactive_Base & parent, Widelands::Map_Object & obj)
+	:
+	UI::Window        (&parent, 0, 0, 100, 100, ""),
+	m_log_general_info(true),
+	m_object          (&obj)
 {
 	char buffer[128];
 
-	m_object = obj;
 
-	m_serial = obj->get_serial();
+	m_serial = obj.get_serial();
 	snprintf(buffer, sizeof(buffer), "%u", m_serial);
 	set_title(buffer);
 
 	m_tabs = new UI::Tab_Panel(this, 0, 0, 1);
 
-	obj->create_debug_panels(&parent->egbase(), m_tabs);
+	obj.create_debug_panels(&parent.egbase(), m_tabs);
 
 	m_tabs->set_snapparent(true);
 	m_tabs->resize();
 
-   m_log_general_info = true;
 }
 
 
@@ -191,10 +198,8 @@ Remove self when the object disappears.
 */
 void MapObjectDebugWindow::think()
 {
-	Editor_Game_Base & egbase = get_iabase()->egbase();
-	Map_Object * const obj = m_object.get(&egbase);
-
-	if (obj) {
+	Widelands::Editor_Game_Base & egbase = get_iabase()->egbase();
+	if (Widelands::Map_Object * const obj = m_object.get(&egbase)) {
 		if (m_log_general_info)  {
       obj->log_general_info(&egbase);
       m_log_general_info = false;
@@ -217,7 +222,8 @@ show_mapobject_debug
 Show debug window for a Map_Object
 ===============
 */
-void show_mapobject_debug(Interactive_Base* parent, Map_Object* obj)
+void show_mapobject_debug
+	(Interactive_Base & parent, Widelands::Map_Object & obj)
 {
 	new MapObjectDebugWindow(parent, obj);
 }
@@ -231,9 +237,8 @@ FieldDebugWindow
 ==============================================================================
 */
 
-class FieldDebugWindow : public UI::Window {
-public:
-	FieldDebugWindow(Interactive_Base & parent, const Coords);
+struct FieldDebugWindow : public UI::Window {
+	FieldDebugWindow(Interactive_Base & parent, Widelands::Coords);
 	~FieldDebugWindow();
 
 	Interactive_Base * get_iabase() {
@@ -246,8 +251,8 @@ public:
 	void open_bob(const uint32_t index);
 
 private:
-	Map &                        m_map;
-	const FCoords                m_coords;
+	Widelands::Map             & m_map;
+	Widelands::FCoords const     m_coords;
 
 	UI::Multiline_Textarea       m_ui_field;
 	UI::Button<FieldDebugWindow> m_ui_immovable;
@@ -263,7 +268,7 @@ Initialize the field debug window.
 ===============
 */
 FieldDebugWindow::FieldDebugWindow
-(Interactive_Base & parent, const Coords coords)
+(Interactive_Base & parent, Widelands::Coords const coords)
 :
 UI::Window(&parent, 0, 60, 200, 400, _("Debug Field").c_str()),
 m_map     (parent.egbase().map()),
@@ -325,25 +330,25 @@ void FieldDebugWindow::think()
 		 m_coords.x, m_coords.y,
 		 _("height:").c_str(), m_coords.field->get_height());
 	str += buffer;
-	const Map::Index i = m_coords.field - &m_map[0];
-	const Editor_Game_Base & egbase =
+	Widelands::Map::Index const i = m_coords.field - &m_map[0];
+	Widelands::Editor_Game_Base const & egbase =
 		dynamic_cast<const Interactive_Base &>(*get_parent()).egbase();
-	const Player_Number nr_players = m_map.get_nrplayers();
+	Widelands::Player_Number const nr_players = m_map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
-		const Player::Field & player_field = player->fields()[i];
+		Widelands::Player::Field const & player_field = player->fields()[i];
 		snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
 		str += buffer;
 		snprintf
 			(buffer, sizeof(buffer),
 			 "  military influence: %u\n", player_field.military_influence);
 		str += buffer;
-		Vision vision = player_field.vision;
+		Widelands::Vision const vision = player_field.vision;
 		snprintf(buffer, sizeof(buffer), "  vision: %u\n", vision);
 		str += buffer;
 		{
-			const Time time_last_surveyed =
-				player_field.time_triangle_last_surveyed[TCoords<>::D];
-			if (time_last_surveyed != Never()) {
+			Widelands::Time const time_last_surveyed =
+				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::D];
+			if (time_last_surveyed != Widelands::Never()) {
 				snprintf
 					(buffer, sizeof(buffer),
 					 "  D triangle last surveyed at %u: amount %u\n",
@@ -352,9 +357,9 @@ void FieldDebugWindow::think()
 			} else str += "  D triangle never surveyed\n";
 		}
 		{
-			const Time time_last_surveyed =
-				player_field.time_triangle_last_surveyed[TCoords<>::R];
-			if (time_last_surveyed != Never()) {
+			Widelands::Time const time_last_surveyed =
+				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::R];
+			if (time_last_surveyed != Widelands::Never()) {
 				snprintf
 					(buffer, sizeof(buffer),
 					 "  R triangle last surveyed at %u: amount %u\n",
@@ -373,9 +378,9 @@ void FieldDebugWindow::think()
 				 "      ",
 				 player_field.time_node_last_unseen,
 				 player_field.owner,
-				 player_field.map_object_descr[TCoords<>::None] ?
+				 player_field.map_object_descr[Widelands::TCoords<>::None] ?
 				 g_anim.get_animation
-				 (player_field.map_object_descr[TCoords<>::None]
+				 (player_field.map_object_descr[Widelands::TCoords<>::None]
 				  ->main_animation())
 				 ->picnametempl.c_str()
 				 :
@@ -391,7 +396,8 @@ void FieldDebugWindow::think()
 	m_ui_field.set_text(str.c_str());
 
 	// Immovable information
-	if (BaseImmovable * const imm = m_coords.field->get_immovable()) {
+	if (Widelands::BaseImmovable * const imm = m_coords.field->get_immovable())
+	{
 		snprintf
 			(buffer, sizeof(buffer),
 			 "%s (%u)", imm->name().c_str(), imm->get_serial());
@@ -403,12 +409,16 @@ void FieldDebugWindow::think()
 	}
 
 	// Bobs information
-	std::vector<Bob*> bobs;
+	std::vector<Widelands::Bob *> bobs;
 
 	m_ui_bobs.clear();
 
-	m_map.find_bobs(Area<FCoords>(m_coords, 0), &bobs);
-	for (std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
+	m_map.find_bobs(Widelands::Area<Widelands::FCoords>(m_coords, 0), &bobs);
+	for
+		(std::vector<Widelands::Bob *>::iterator it = bobs.begin();
+		 it != bobs.end();
+		 ++it)
+	{
 		snprintf
 			(buffer, sizeof(buffer),
 			 "%s (%u)", (*it)->name().c_str(), (*it)->get_serial());
@@ -426,10 +436,8 @@ Open the debug window for the immovable on our position.
 */
 void FieldDebugWindow::open_immovable()
 {
-	BaseImmovable* imm = m_coords.field->get_immovable();
-
-	if (imm)
-		show_mapobject_debug(get_iabase(), imm);
+	if (Widelands::BaseImmovable * const imm = m_coords.field->get_immovable())
+		show_mapobject_debug(*get_iabase(), *imm);
 }
 
 
@@ -443,9 +451,9 @@ Open the bob debug window for the bob of the given index in the list
 void FieldDebugWindow::open_bob(const uint32_t index) {
 	if (index != UI::Listselect<intptr_t>::no_selection_index())
 		if
-			(Map_Object * const object =
+			(Widelands::Map_Object * const object =
 			 get_iabase()->egbase().objects().get_object(m_ui_bobs.get_selected()))
-			show_mapobject_debug(get_iabase(), object);
+			show_mapobject_debug(*get_iabase(), *object);
 }
 
 
@@ -456,5 +464,8 @@ show_field_debug
 Open a debug window for the given field.
 ===============
 */
-void show_field_debug(Interactive_Base *parent, Coords coords)
-{new FieldDebugWindow(*parent, coords);}
+void show_field_debug
+	(Interactive_Base & parent, Widelands::Coords const coords)
+{
+	new FieldDebugWindow(parent, coords);
+}

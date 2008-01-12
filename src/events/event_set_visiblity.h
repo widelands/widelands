@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 
 #include <string>
 
+namespace Widelands {
 
 /**
  * Sets a campaign in Campaign UI visible/invisible
@@ -70,6 +71,8 @@ private:
 	static const int32_t EVENT_VERSION = 1;
 	std::string entry;
 	bool visible;
+};
+
 };
 
 #endif //__S__EVENT_SET_VISIBLITY_H

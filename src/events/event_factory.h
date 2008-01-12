@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,11 @@
 
 #include <string>
 
+struct Editor_Interactive;
+
+namespace Widelands {
+
 class Event;
-class Editor_Interactive;
 
 struct Event_Descr {
 	std::string id;
@@ -39,6 +42,8 @@ Event * make_event_with_option_dialog
 	(const char * id, Editor_Interactive &, Event *);
 Event_Descr * get_event_descr(uint32_t id);
 const uint32_t get_nr_of_available_events();
+};
+
 };
 
 #endif

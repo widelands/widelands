@@ -23,6 +23,8 @@
 #include "player.h"
 #include "profile.h"
 
+namespace Widelands {
+
 Event::State Event_Unhide_Area::run(Game* game) {
 	assert(m_player_area);
 	assert(0 < m_player_area.player_number);
@@ -53,3 +55,5 @@ void Event_Unhide_Area::Write
 	Event_Player_Area::Write(s, egbase);
 	s.set_int("duration", duration);
 }
+
+};

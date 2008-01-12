@@ -50,6 +50,18 @@ class.
 
 #include "upcast.h"
 
+using Widelands::Building;
+using Widelands::ConstructionSite;
+using Widelands::MilitarySite;
+using Widelands::ProductionSite;
+using Widelands::Soldier;
+using Widelands::TrainingSite;
+using Widelands::Warehouse;
+using Widelands::atrAttack;
+using Widelands::atrDefense;
+using Widelands::atrEvade;
+using Widelands::atrHP;
+
 static const char* pic_ok = "pics/menu_okay.png";
 static const char* pic_cancel = "pics/menu_abort.png";
 static const char* pic_debug = "pics/menu_debug.png";
@@ -120,7 +132,7 @@ class BulldozeConfirm
  */
 class BulldozeConfirm : public UI::Window {
 public:
-	BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy = 0);
+	BulldozeConfirm(Interactive_Base* parent, Building* building, Widelands::PlayerImmovable* todestroy = 0);
 	virtual ~BulldozeConfirm();
 
 	virtual void think();
@@ -130,8 +142,8 @@ private:
 
 private:
 	Interactive_Base * m_iabase;
-	Object_Ptr         m_building;
-	Object_Ptr         m_todestroy;
+	Widelands::Object_Ptr m_building;
+	Widelands::Object_Ptr m_todestroy;
 };
 
 
@@ -145,7 +157,7 @@ Otherwise, todestroy is destroyed when the user confirms it. This is useful to
 confirm building destruction when the building's base flag is removed.
 ===============
 */
-BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy)
+BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, Widelands::PlayerImmovable* todestroy)
 	: UI::Window(parent, 0, 0, 160, 90, _("Destroy building?").c_str())
 {
 	std::string text;
@@ -201,9 +213,9 @@ Make sure the building still exists and can in fact be bulldozed.
 */
 void BulldozeConfirm::think()
 {
-	Editor_Game_Base * const egbase = &m_iabase->egbase();
+	Widelands::Editor_Game_Base * const egbase = &m_iabase->egbase();
 	upcast(Building,        building,  m_building .get(egbase));
-	upcast(PlayerImmovable, todestroy, m_todestroy.get(egbase));
+	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if (!todestroy || !building ||
 	    !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
@@ -220,17 +232,16 @@ Issue the CMD_BULLDOZE command for this building.
 */
 void BulldozeConfirm::bulldoze()
 {
-	Editor_Game_Base * const egbase = &m_iabase->egbase();
+	Widelands::Editor_Game_Base * const egbase = &m_iabase->egbase();
 	upcast(Building,        building,  m_building .get(egbase));
-	upcast(PlayerImmovable, todestroy, m_todestroy.get(egbase));
+	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
-		if (upcast(Game, game, egbase)) {
+		if (upcast(Widelands::Game, game, egbase)) {
 			game->send_player_bulldoze (todestroy);
          m_iabase->need_complete_redraw();
 		} else {// Editor
-         Player* plr=todestroy->get_owner();
-         plr->bulldoze(todestroy);
+			todestroy->get_owner()->bulldoze(todestroy);
          m_iabase->need_complete_redraw();
 		}
 	}
@@ -249,7 +260,7 @@ todestroy is the immovable that will be bulldozed if the user confirms the
 dialog.
 ===============
 */
-void show_bulldoze_confirm(Interactive_Base* player, Building* building, PlayerImmovable* todestroy)
+void show_bulldoze_confirm(Interactive_Base* player, Building* building, Widelands::PlayerImmovable* todestroy)
 {
 	new BulldozeConfirm(player, building, todestroy);
 }
@@ -286,7 +297,7 @@ public:
 	};
 
 public:
-	WaresQueueDisplay(UI::Panel* parent, int32_t x, int32_t y, uint32_t maxw, WaresQueue* queue, Game* g);
+	WaresQueueDisplay(UI::Panel* parent, int32_t x, int32_t y, uint32_t maxw, Widelands::WaresQueue* queue, Widelands::Game* g);
 	~WaresQueueDisplay();
 
 	virtual void think();
@@ -296,7 +307,7 @@ private:
 	void recalc_size();
 
 private:
-	WaresQueue * m_queue;
+	Widelands::WaresQueue * m_queue;
 	uint32_t         m_max_width;
 	uint32_t         m_icon;            //< Index to ware's picture
 	uint32_t         m_fade_mask;       //< Mask to show faded version of icons
@@ -316,7 +327,7 @@ Initialize the panel.
 ===============
 */
 WaresQueueDisplay::WaresQueueDisplay
-(UI::Panel * parent, int32_t x, int32_t y, uint32_t maxw, WaresQueue* queue, Game *)
+(UI::Panel * parent, int32_t x, int32_t y, uint32_t maxw, Widelands::WaresQueue* queue, Widelands::Game *)
 :
 UI::Panel(parent, x, y, 0, Height),
 m_queue(queue),
@@ -326,7 +337,7 @@ m_cache_size(queue->get_size()),
 m_cache_filled(queue->get_filled()),
 m_display_size(0)
 {
-	const Item_Ware_Descr & ware =
+	const Widelands::Item_Ware_Descr & ware =
 		*queue->get_owner()->tribe().get_ware_descr(m_queue->get_ware());
 	set_tooltip(ware.descname().c_str());
 
@@ -495,7 +506,7 @@ protected:
 	void act_debug();
 	void toggle_workarea();
 	void act_start_stop();
-	void act_enhance(const Building_Descr::Index);
+	void act_enhance(Widelands::Building_Descr::Index);
    void act_drop_soldier(uint32_t);
 	void act_change_soldier_capacity(int32_t);
 
@@ -658,7 +669,7 @@ void Building_Window::setup_capsbuttons()
 
 	if (m_capscache & 1 << Building::PCap_Enhancable) {
 		const std::vector<char *> & buildings = m_building->enhances_to();
-	   const Tribe_Descr & tribe = m_player->get_player()->tribe();
+		Widelands::Tribe_Descr const & tribe = m_player->player().tribe();
 		const std::vector<char *>::const_iterator buildings_end = buildings.end();
 		for
 			(std::vector<char *>::const_iterator it = buildings.begin();
@@ -671,12 +682,13 @@ void Building_Window::setup_capsbuttons()
 
 			if (not m_player->player().is_building_allowed(id)) continue;
 
-         const Building_Descr & building = *tribe.get_building_descr(id);
+			Widelands::Building_Descr const & building =
+				*tribe.get_building_descr(id);
          char buffer[128];
          snprintf
             (buffer, sizeof(buffer),
              _("Enhance to %s").c_str(), building.descname().c_str());
-			new UI::IDButton<Building_Window, Building_Descr::Index>
+			new UI::IDButton<Building_Window, Widelands::Building_Descr::Index>
 				(m_capsbuttons,
 				 x, 0, 34, 34,
 				 4,
@@ -741,9 +753,8 @@ void Building_Window::act_bulldoze()
 }
 
 void Building_Window::act_start_stop() {
-	Game* g = m_player->get_game();
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Stopable))
-		g->send_player_start_stop_building (m_building);
+		m_player->game().send_player_start_stop_building (m_building);
 
 	die();
 }
@@ -755,11 +766,13 @@ Building_Window::act_bulldoze
 Callback for bulldozing request
 ===============
 */
-void Building_Window::act_enhance(const Building_Descr::Index id)
+void Building_Window::act_enhance(Widelands::Building_Descr::Index const id)
 {
-	Game* g = m_player->get_game();
-	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
-		g->send_player_enhance_building (m_building, id);
+	if
+		(m_building
+		 &&
+		 m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
+		m_player->game().send_player_enhance_building (m_building, id);
 
 	die();
 }
@@ -772,10 +785,8 @@ Callback for bulldozing request
 ===============
 */
 void Building_Window::act_drop_soldier(uint32_t serial) {
-	 Game* g = m_player->get_game();
-
-	 if (m_building && (serial > 0))
-		  g->send_player_drop_soldier (m_building, serial);
+	if (m_building && (serial > 0))
+		m_player->game().send_player_drop_soldier (m_building, serial);
 }
 
 /*
@@ -788,9 +799,8 @@ TODO: Check that building is a military or a training site.
 */
 void Building_Window::act_change_soldier_capacity(int32_t value)
 {
-	Game* g = m_player->get_game();
 	if (m_building)
-		g->send_player_change_soldier_capacity (m_building, value);
+		m_player->game().send_player_change_soldier_capacity (m_building, value);
 
 }
 
@@ -803,12 +813,12 @@ Callback for debug window
 */
 void Building_Window::act_debug()
 {
-	show_mapobject_debug(m_player, m_building);
+	show_mapobject_debug(*m_player, *m_building);
 }
 
 
 void Building_Window::toggle_workarea() {
-	Map & map =
+	Widelands::Map & map =
 		static_cast<Interactive_Player *>(get_parent())->egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	if (m_workarea_job_id) {
@@ -817,7 +827,8 @@ void Building_Window::toggle_workarea() {
 		m_toggle_workarea->set_tooltip(_("Show workarea").c_str());
 	} else {
 		m_workarea_job_id = overlay_manager.get_a_job_id();
-		HollowArea<> hollow_area(Area<>(m_building->get_position(), 0), 0);
+		Widelands::HollowArea<> hollow_area
+			(Widelands::Area<>(m_building->get_position(), 0), 0);
 		const Workarea_Info & workarea_info =
 			m_building->descr().m_recursive_workarea_info;
 		Workarea_Info::const_iterator it = workarea_info.begin();
@@ -829,7 +840,7 @@ void Building_Window::toggle_workarea() {
 		{
 			--i;
 			hollow_area.radius = it->first;
-			MapHollowRegion<> mr(map, hollow_area);
+			Widelands::MapHollowRegion<> mr(map, hollow_area);
 			do overlay_manager.register_overlay
 				(mr.location(),
 				 workarea_cumulative_picid[i],
@@ -852,9 +863,8 @@ ConstructionSite UI IMPLEMENTATION
 ==============================================================================
 */
 
-class ConstructionSite_Window : public Building_Window {
-public:
-	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, UI::Window** registry);
+struct ConstructionSite_Window : public Building_Window {
+	ConstructionSite_Window(Interactive_Player* parent, Widelands::ConstructionSite* cs, UI::Window** registry);
 	virtual ~ConstructionSite_Window();
 
 	ConstructionSite * get_constructionsize() {
@@ -875,7 +885,7 @@ ConstructionSite_Window::ConstructionSite_Window
 Create the window and its panels
 ===============
 */
-ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs,
+ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Widelands::ConstructionSite* cs,
                                                  UI::Window** registry)
 	: Building_Window(parent, cs, registry)
 {
@@ -1135,10 +1145,10 @@ private:
       void update();
       void fill_list();
 
-      Coords          m_ps_location;
+      Widelands::Coords          m_ps_location;
       ProductionSite* m_ps;
       Interactive_Player* m_parent;
-	UI::Listselect<Worker*> * m_ls;
+	UI::Listselect<Widelands::Worker*> * m_ls;
       UI::Textarea* m_type, *m_experience, *m_becomes;
 };
 
@@ -1164,7 +1174,7 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str())
    int32_t posy=offsy;
 
    // listselect
-   m_ls=new UI::Listselect<Worker*>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
+   m_ls=new UI::Listselect<Widelands::Worker*>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
 
    // the descriptive areas
    // Type
@@ -1198,7 +1208,7 @@ ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow(
  * think()
  */
 void ProductionSite_Window_ListWorkerWindow::think() {
-	const BaseImmovable * const base_immovable =
+	Widelands::BaseImmovable const * const base_immovable =
 		m_parent->egbase().map()[m_ps_location].get_immovable();
 	if
 		(not dynamic_cast<const Building *>(base_immovable)
@@ -1220,11 +1230,11 @@ void ProductionSite_Window_ListWorkerWindow::think() {
 void ProductionSite_Window_ListWorkerWindow::fill_list() {
 	const uint32_t m_last_select = m_ls->selection_index();
    m_ls->clear();
-   std::vector<Worker*>* workers=m_ps->get_workers();
+	std::vector<Widelands::Worker *> & workers = *m_ps->get_workers();
 
-	for (uint32_t i = 0; i < workers->size(); ++i) {
-		Worker* worker = (*workers)[i];
-		m_ls->add(worker->descname().c_str(), worker, worker->get_menu_pic());
+	for (uint32_t i = 0; i < workers.size(); ++i) {
+		Widelands::Worker & worker = *workers[i];
+		m_ls->add(worker.descname().c_str(), &worker, worker.get_menu_pic());
 	}
 	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
 	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);
@@ -1238,7 +1248,8 @@ void ProductionSite_Window_ListWorkerWindow::fill_list() {
 void ProductionSite_Window_ListWorkerWindow::update()
 {
 	if (m_ls->has_selection()) {
-		const Worker& worker = *m_ls->get_selected();
+		Widelands::Worker      const & worker = *m_ls->get_selected();
+		Widelands::Tribe_Descr const & tribe  = worker.tribe();
 
 		m_type->set_text(worker.descname());
 
@@ -1256,11 +1267,10 @@ void ProductionSite_Window_ListWorkerWindow::update()
 			m_experience->set_text(buffer);
 
 			// Get the descriptive name of the ongoing upgrade
-			uint32_t index =
-				worker.get_tribe()->get_safe_worker_index(worker.get_becomes());
-			const Worker_Descr *descr =
-				worker.get_tribe()->get_worker_descr(index);
-			m_becomes->set_text(descr->descname());
+			m_becomes->set_text
+				(tribe.get_worker_descr
+				 (tribe.get_safe_worker_index(worker.get_becomes()))
+				 ->descname());
 
 		} else {
 			// Worker is not upgradeable
@@ -1315,7 +1325,7 @@ public:
 protected:
 	UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
 
-	void create_ware_queue_panel(UI::Box* box, ProductionSite * ps, WaresQueue * const wq);
+	void create_ware_queue_panel(UI::Box* box, ProductionSite * ps, Widelands::WaresQueue * const wq);
 
 	UI::Basic_Button* create_priority_button
 		(UI::Box* box, PriorityButtonHelper & helper,
@@ -1397,7 +1407,7 @@ UI::Basic_Button * ProductionSite_Window::create_priority_button
 	return button;
 }
 
-void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite * ps, WaresQueue * const wq)
+void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite * ps, Widelands::WaresQueue * const wq)
 {
 	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
 	UI::Box* hbox = new UI::Box (box, 0, 0, UI::Box::Horizontal);
@@ -1410,7 +1420,8 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 	hbox->add(wqd, UI::Box::AlignTop);
 
 	if (wq->get_ware() >= 0) {
-		m_priority_helpers.push_back (PriorityButtonHelper(ps, Request::WARE, wq->get_ware()));
+		m_priority_helpers.push_back
+			(PriorityButtonHelper(ps, Widelands::Request::WARE, wq->get_ware()));
 		PriorityButtonHelper & helper = m_priority_helpers.back();
 
 		UI::Box* vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
@@ -1456,7 +1467,7 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
 	UI::Box* box = new UI::Box (parent, 0, 0, UI::Box::Vertical);
 
 	// Add the wares queue
-	std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
+	std::vector<Widelands::WaresQueue*>* warequeues=ps->get_warequeues();
 	for (uint32_t i = 0; i < warequeues->size(); ++i) {
 		create_ware_queue_panel (box, ps, (*warequeues)[i]);
 	}
@@ -1550,7 +1561,7 @@ private:
 	void soldier_capacity_up () {act_change_soldier_capacity (1);}
 	void soldier_capacity_down() {act_change_soldier_capacity(-1);}
 
-   Coords          m_ms_location;
+   Widelands::Coords                 m_ms_location;
    Interactive_Player* m_parent;
    UI::Window** m_reg;
    UI::Table<Soldier &> * m_table;
@@ -1649,7 +1660,7 @@ void MilitarySite_Window::think()
 {
 	Building_Window::think();
 
-	const BaseImmovable * const base_immovable =
+	Widelands::BaseImmovable const * const base_immovable =
 		m_parent->egbase().map()[m_ms_location].get_immovable();
 	if
 		(not dynamic_cast<const Building *>(base_immovable)
@@ -1756,7 +1767,7 @@ private:
 
 	void update();
 
-	Coords               m_ms_location;
+	Widelands::Coords    m_ms_location;
 	Interactive_Player* m_parent;
 	UI::Window *       * m_reg;
 	UI::Textarea       * m_style_train;
@@ -1810,7 +1821,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	m_evade_pri->set_visible(false);
 
 	// Add priority buttons for every attribute
-	const TrainingSite_Descr & ts_descr = ps->descr();
+	Widelands::TrainingSite_Descr const & ts_descr = ps->descr();
 	if (ts_descr.get_train_hp()) {
 		// HP buttons
 		new UI::Button<TrainingSite_Options_Window>
@@ -1901,7 +1912,7 @@ void TrainingSite_Options_Window::think()
 {
 	//Building_Window::think();
 
-	const BaseImmovable * const base_immovable =
+	Widelands::BaseImmovable const * const base_immovable =
 		m_parent->egbase().map()[m_ms_location].get_immovable();
 	if
 		(not dynamic_cast<const Building *>(base_immovable)
@@ -1972,7 +1983,7 @@ private:
    void add_tab(const char* picname, UI::Panel* panel);
 //   void add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)());
 
-   Coords              m_ms_location;
+	Widelands::Coords     m_ms_location;
    Interactive_Player* m_parent;
    UI::Window**          m_reg;
    UI::Table<Soldier &> * m_table;
@@ -2113,7 +2124,7 @@ void TrainingSite_Window::think()
 {
 	Building_Window::think();
 
-	const BaseImmovable * const base_immovable =
+	Widelands::BaseImmovable const * const base_immovable =
 		m_parent->egbase().map()[m_ms_location].get_immovable();
 	if
 		(not dynamic_cast<const Building *>(base_immovable)

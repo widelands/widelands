@@ -21,11 +21,14 @@
 #ifndef game_debug_ui_h
 #define game_debug_ui_h
 
+#include "widelands_geometry.h"
+
 class Interactive_Base;
-class Map_Object;
+namespace Widelands {struct Map_Object;};
 
 // Open debug window for the given coordinates
-void show_mapobject_debug(Interactive_Base* parent, Map_Object* obj);
-void show_field_debug(Interactive_Base *parent, Coords coords);
+void show_mapobject_debug
+(Interactive_Base & parent, Widelands::Map_Object &);
+void show_field_debug(Interactive_Base & parent, Widelands::Coords coords);
 
 #endif // game_debug_ui_h

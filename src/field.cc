@@ -21,6 +21,8 @@
 
 #include "mapviewpixelfunctions.h"
 
+namespace Widelands {
+
 /**
  * Set the field's brightness based upon the slopes.
  * Slopes are calulated as this field's height - neighbour's height.
@@ -41,3 +43,5 @@ void Field::set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t
 	else if (b > 127) b = 127;
 	brightness = static_cast<int8_t>(b); //FIXME: ARGH !!
 }
+
+};

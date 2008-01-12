@@ -26,6 +26,8 @@
 
 #include "log.h"
 
+namespace Widelands {
+
 void Event_Player_Area::reinitialize(Game *) {}
 
 #define EVENT_VERSION 2
@@ -71,3 +73,5 @@ void Event_Player_Area::Write(Section & s, const Editor_Game_Base &) const {
 	s.set_int   ("area",    m_player_area.radius);
 	s.set_int   ("player",  m_player_area.player_number);
 }
+
+};

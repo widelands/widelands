@@ -20,7 +20,7 @@
 #ifndef __S__MAPVIEW_H
 #define __S__MAPVIEW_H
 
-#include "geometry.h"
+#include "widelands_geometry.h"
 
 #include "ui_panel.h"
 #include "ui_signal.h"
@@ -39,7 +39,7 @@ struct Map_View : public UI::Panel {
 	UI::Signal2<int32_t, int32_t> warpview; // x/y in screen coordinates
 	UI::Signal fieldclicked;
 
-	void warp_mouse_to_field(Coords c);
+	void warp_mouse_to_field(Widelands::Coords c);
 
 	// Function to set the viewpoint
 	void set_viewpoint(Point vp);

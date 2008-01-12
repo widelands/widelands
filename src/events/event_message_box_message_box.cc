@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,10 @@
 /*
  * The message box himself
  */
-Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Game* game, Event_Message_Box* event,
-      int32_t gposx, int32_t gposy, int32_t w, int32_t h) :
+Message_Box_Event_Message_Box::Message_Box_Event_Message_Box
+(Widelands::Game              * game,
+ Widelands::Event_Message_Box * event,
+ int32_t gposx, int32_t gposy, int32_t w, int32_t h) :
 UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
 
    m_game = game;
@@ -121,7 +123,7 @@ void Message_Box_Event_Message_Box::clicked(int32_t i) {
 		}
 	} else {
 		//  One of the buttons has been pressed
-		if (Trigger_Null * const t = m_trigger[i]) {
+		if (Widelands::Trigger_Null * const t = m_trigger[i]) {
          t->set_trigger_manually(true);
          t->check_set_conditions(m_game); // forcefully update this trigger
 		}

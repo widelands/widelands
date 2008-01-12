@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,8 @@
 #include "tribe.h"
 #include "player.h"
 
+using Widelands::Building_Descr;
+
 /*
 ===============
 Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu
@@ -42,7 +44,10 @@ Create all the buttons etc...
 #define middle_button_width  40
 #define middle_button_height 20
 #define label_height         20
-Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu(UI::Panel *parent, Player* player, UI::UniqueWindow::Registry* registry)
+Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu
+(UI::Panel                  * parent,
+ Widelands::Player          & player,
+ UI::UniqueWindow::Registry * registry)
 :
 UI::UniqueWindow
 (parent,
@@ -105,13 +110,13 @@ m_allow_button
 	m_forbidden.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
 
    // Fill the lists
-	const Tribe_Descr & tribe = player->tribe();
+	Widelands::Tribe_Descr const & tribe = player.tribe();
 	const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
 	for (intptr_t i = 0; i < nr_buildings; ++i) {
 		Building_Descr & building = *tribe.get_building_descr(i);
 		if (not building.get_enhanced_building() and not building.get_buildable())
 			continue;
-		(m_player->is_building_allowed(i) ? m_allowed : m_forbidden).add
+		(m_player.is_building_allowed(i) ? m_allowed : m_forbidden).add
 			(building.descname().c_str(), i, building.get_buildicon());
 	}
 	m_forbidden.sort();
@@ -158,13 +163,13 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
 	const Building_Descr::Index building_index = source.get_selected();
 	source.remove_selected();
 	const Building_Descr & building =
-		*m_player->tribe().get_building_descr(building_index);
+		*m_player.tribe().get_building_descr(building_index);
 	target.add
 		(building.descname().c_str(),
 		 building_index,
 		 building.get_buildicon());
 	target.sort();
-	m_player->allow_building(building_index, allow);
+	m_player.allow_building(building_index, allow);
 }
 
 void Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected(uint32_t index) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,7 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 
+using namespace Widelands::Event_Factory;
 
 inline Editor_Interactive & Editor_Event_Menu_New_Event::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -52,12 +53,12 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
 
    // Event List
    new UI::Textarea(this, spacing, offsy, _("Available Events: "), Align_Left);
-   m_event_list=new UI::Listselect<Event_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+	m_event_list=new UI::Listselect<Widelands::Event_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
 
-   for (uint32_t i = 0; i < Event_Factory::get_nr_of_available_events(); ++i) {
-		Event_Descr & d = *Event_Factory::get_event_descr(i);
+   for (uint32_t i = 0; i < get_nr_of_available_events(); ++i) {
+		Widelands::Event_Descr & d = *get_event_descr(i);
 		m_event_list->add(_(d.name).c_str(), d);
 	}
    m_event_list->sort();
@@ -110,8 +111,8 @@ bool Editor_Event_Menu_New_Event::handle_mouserelease(const Uint8, int32_t, int3
  */
 void Editor_Event_Menu_New_Event::clicked_ok() {
 	if
-		(Event * const event =
-		 Event_Factory::make_event_with_option_dialog
+		(Widelands::Event * const event =
+		 make_event_with_option_dialog
 		 (m_event_list->get_selected().id.c_str(), eia(), 0))
 	{
 		eia().egbase().map().get_mem().register_new_event(event);

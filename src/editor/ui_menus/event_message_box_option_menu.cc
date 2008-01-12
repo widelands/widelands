@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ inline Editor_Interactive & Event_Message_Box_Option_Menu::eia() {
 
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
-(Editor_Interactive & parent, Event_Message_Box & event)
+(Editor_Interactive & parent, Widelands::Event_Message_Box & event)
 :
 UI::Window(&parent, 0, 0, 430, 400, _("Message Box Event Options").c_str()),
 m_event   (event)
@@ -159,9 +159,9 @@ m_event   (event)
 		 &Event_Message_Box_Option_Menu::end_modal, this, 0,
 		 _("Cancel"));
 
-	const MapTriggerManager & mtm = parent.egbase().map().get_mtm();
-	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
-	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
+	Widelands::MapTriggerManager const & mtm = parent.egbase().map().get_mtm();
+	Widelands::MapTriggerManager::Index const nr_triggs = mtm.get_nr_triggers();
+	for (Widelands::MapTriggerManager::Index i = 0; i < nr_triggs; ++i) {
 		if (strcmp(mtm.get_trigger_by_nr(i).get_id(), "null") == 0)
          m_null_triggers.push_back(i);
 	}
@@ -171,7 +171,7 @@ m_event   (event)
 		for (size_t j = 0; j < m_null_triggers.size(); ++j) {
          // Get this triggers index
          int32_t foundidx = -1;
-			for (MapTriggerManager::Index x = 0; x < nr_triggers; ++x)
+			for (Widelands::MapTriggerManager::Index x = 0; x < nr_triggs; ++x)
 				if (&mtm.get_trigger_by_nr(x) == m_event.get_button_trigger(i)) {
                foundidx = x;
                break;
@@ -210,7 +210,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 		m_event.set_window_title(m_window_title->get_text());
 	m_event.set_is_modal(m_is_modal->get_state());
 	m_event.set_nr_buttons(m_nr_buttons);
-	const MapTriggerManager & mtm = eia().egbase().map().get_mtm();
+	Widelands::MapTriggerManager const & mtm = eia().egbase().map().get_mtm();
 	for (uint32_t b = 0; b < m_nr_buttons; ++b) {
 		m_event.set_button_name(b, m_buttons[b].name);
 		m_event.set_button_trigger
@@ -218,7 +218,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 			 m_buttons[b].trigger == -1 ?
 			 0
 			 :
-			 dynamic_cast<Trigger_Null *>
+			 dynamic_cast<Widelands::Trigger_Null *>
 			 (&mtm.get_trigger_by_nr(m_null_triggers[m_buttons[b].trigger])));
 	}
 	end_modal(1);
@@ -269,9 +269,12 @@ void Event_Message_Box_Option_Menu::update() {
 	for (uint32_t i = 0; i < m_nr_buttons; ++i)
 		m_buttons_ls->add(m_buttons[i].name.c_str(), 0);
 
-   std::string text;
-   text.append(1, static_cast<uint8_t>(m_nr_buttons+0x30));
-   m_nr_buttons_ta->set_text(text.c_str());
+	{
+		char text[2];
+		text[0] = '0' + m_nr_buttons;
+		text[1] = '\0';
+		m_nr_buttons_ta->set_text(text);
+	}
 
 
    m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());

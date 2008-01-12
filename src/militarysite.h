@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 
 #include "productionsite.h"
 #include "transport.h"
+
+namespace Widelands {
 
 class Soldier;
 
@@ -52,7 +54,7 @@ private:
 };
 
 class MilitarySite : public ProductionSite {
-   friend class Widelands_Map_Buildingdata_Data_Packet;
+	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(MilitarySite_Descr);
 
 public:
@@ -104,8 +106,8 @@ public:
    virtual void init_after_conquering (Game* g, std::vector<Soldier*>* soldiers);
 
 protected:
-	virtual UI::Window* create_options_window(Interactive_Player* plr,
-		UI::Window** registry);
+	virtual UI::Window * create_options_window
+		(Interactive_Player * plr, UI::Window * * registry);
 
 private:
 	void request_soldier();
@@ -122,6 +124,8 @@ private:
 	bool                   m_didconquer;
 	uint32_t                   m_capacity;
 	bool     m_in_battle;
+};
+
 };
 
 #endif

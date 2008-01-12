@@ -24,6 +24,8 @@
 #include <string>
 #include <vector>
 
+namespace Widelands {
+
 class Event;
 
 /*
@@ -66,6 +68,8 @@ struct MapEventManager {
 
 private:
 	event_vector m_events;
+};
+
 };
 
 #endif

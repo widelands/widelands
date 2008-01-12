@@ -19,13 +19,13 @@
 
 #include "widelands_map_ware_data_packet.h"
 
-#include "fileread.h"
-#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
 #include "transport.h"
 #include "tribe.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
@@ -35,18 +35,16 @@
 
 #include <map>
 
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
 
-Widelands_Map_Ware_Data_Packet::~Widelands_Map_Ware_Data_Packet() {}
-
-
-void Widelands_Map_Ware_Data_Packet::Read
+void Map_Ware_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
    if (skip)
@@ -67,18 +65,12 @@ throw (_wexception)
 		}
 	} else
 		throw wexception
-			("Unknown version %u in Widelands_Map_Ware_Data_Packet!",
-			 packet_version);
+			("Unknown version %u in Map_Ware_Data_Packet!", packet_version);
 }
 
 
-/*
- * Write Function
- */
-void Widelands_Map_Ware_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+void Map_Ware_Data_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 
@@ -120,3 +112,5 @@ throw (_wexception)
 
    fw.Write(fs, "binary/ware");
 }
+
+};

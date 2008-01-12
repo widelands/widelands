@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,12 +32,11 @@
 
 #include "log.h"
 
+namespace Widelands {
 
 Game_Loader::Game_Loader(FileSystem & fs, Game* game) : m_fs(fs), m_game(game)
 {}
 
-
-Game_Loader::~Game_Loader() {}
 
 /*
  * This function preloads a game
@@ -74,7 +73,7 @@ int32_t Game_Loader::load_game() {
 	M.Read_Complete(*m_game);
 	log("Game: Reading Map Data Complete done!\n");
 
-	Widelands_Map_Map_Object_Loader * const mol = M.get_map_object_loader();
+	Map_Map_Object_Loader * const mol = M.get_map_object_loader();
 
    log("Game: Reading Player Economies Info ... ");
 	{Game_Player_Economies_Data_Packet             p; p.Read(m_fs, m_game, mol);}
@@ -90,3 +89,5 @@ int32_t Game_Loader::load_game() {
 
    return 0;
 }
+
+};

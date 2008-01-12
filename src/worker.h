@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "idleworkersupply.h"
 #include "worker_descr.h"
 
+namespace Widelands {
 
 /**
  * Worker is the base class for all humans (and actually potential non-humans,
@@ -38,7 +39,7 @@
 class Worker : public Bob {
 	friend class Soldier; //  allow access to m_supply
 	friend class WorkerProgram;
-	friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
+	friend struct Map_Bobdata_Data_Packet;
 
 	MO_DESCR(Worker_Descr);
 
@@ -72,6 +73,7 @@ public:
 	uint32_t get_menu_pic() const throw () {return descr().get_menu_pic();}
 	const char * get_becomes() const throw () {return descr().get_becomes ();}
 	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}
+	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
 	const std::string & descname() const throw () {return descr().descname();}
 
 	virtual uint32_t get_movecaps() const throw ();
@@ -217,5 +219,6 @@ private:
 	int32_t                m_current_exp;  ///< current experience
 };
 
+};
 
 #endif // __S__WORKER_H

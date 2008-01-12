@@ -28,6 +28,7 @@
 #include "transport.h"
 #include "wexception.h"
 
+namespace Widelands {
 
 GameLogicCommand* Queue_Cmd_Factory::create_correct_queue_command(uint32_t id) {
 	switch (id) {
@@ -47,3 +48,5 @@ GameLogicCommand* Queue_Cmd_Factory::create_correct_queue_command(uint32_t id) {
 	}
    return 0; // Never here
 }
+
+};

@@ -21,32 +21,32 @@
 
 #include "building.h"
 #include "editor_game_base.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "map.h"
 #include "player.h"
 #include "transport.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
+#include "upcast.h"
+
 #include <map>
 
-#include "upcast.h"
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
 
-Widelands_Map_Flagdata_Data_Packet::~Widelands_Map_Flagdata_Data_Packet() {}
+Map_Flagdata_Data_Packet::~Map_Flagdata_Data_Packet() {}
 
-/*
- * Read Function
- */
-void Widelands_Map_Flagdata_Data_Packet::Read
+
+void Map_Flagdata_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
    if (skip)
@@ -77,18 +77,11 @@ throw (_wexception)
          // PlayerImmovable
 
 			try {flag->m_position = fr.Coords32(extent);}
-			catch (const FileRead::Width_Exceeded e) {
+			catch (const FileRead::Data_Error & e) {
 				throw wexception
-					("Widelands_Map_Flagdata_Data_Packet::Read: in "
-					 "binary/flag_data:%u: flag %u has x coordinate %i, but the map "
-					 "width is only %u",
-					 e.position, ser, e.x, e.w);
-			} catch (const FileRead::Height_Exceeded e) {
-				throw wexception
-					("Widelands_Map_Flagdata_Data_Packet::Read: in "
-					 "binary/flag_data:%u: flag %u has y coordinate %i, but the map "
-					 "height is only %u",
-					 e.position, ser, e.y, e.h);
+					("Map_Flagdata_Data_Packet::Read: in binary/flag_data:%u: "
+					 "Coordinates of flag %u: %s",
+					 fr.GetPos() - 4, ser, e.message().c_str());
 			}
          flag->m_animstart=fr.Unsigned16();
          int32_t building=fr.Unsigned32();
@@ -160,18 +153,14 @@ throw (_wexception)
 		}
 	} else
 		throw wexception
-			("Unknown version %u in Widelands_Map_Flagdata_Data_Packet!",
-			 packet_version);
+			("Unknown version %u in Map_Flagdata_Data_Packet!", packet_version);
 }
 
 
-/*
- * Write Function
- */
-void Widelands_Map_Flagdata_Data_Packet::Write
+void Map_Flagdata_Data_Packet::Write
 (FileSystem & fs,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+ Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -275,3 +264,5 @@ throw (_wexception)
 
    fw.Write(fs, "binary/flag_data");
 }
+
+};

@@ -20,7 +20,6 @@
 #include "tribe.h"
 
 #include "editor_game_base.h"
-#include "fileread.h"
 #include "game.h"
 #include "helper.h"
 #include "i18n.h"
@@ -30,6 +29,7 @@
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
+#include "widelands_fileread.h"
 #include "world.h"
 
 #include "upcast.h"
@@ -37,6 +37,8 @@
 #include <iostream>
 
 using namespace std;
+
+namespace Widelands {
 
 //
 // Tribe_Descr class
@@ -617,3 +619,4 @@ int32_t Tribe_Descr::get_safe_building_index(const char *buildingname) const {
    return retval;
 }
 
+};

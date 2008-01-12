@@ -22,6 +22,8 @@
 #include "editor_game_base.h"
 #include "rendertarget.h"
 
+namespace Widelands {
+
 void Flag::draw
 (const Editor_Game_Base & game,
  RenderTarget & dst,
@@ -62,4 +64,4 @@ void Road::draw
 (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
 {}
 
-
+};

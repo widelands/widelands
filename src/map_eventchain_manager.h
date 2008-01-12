@@ -23,6 +23,8 @@
 #include <cassert>
 #include <string>
 
+namespace Widelands {
+
 class Event;
 class EventChain;
 
@@ -62,6 +64,8 @@ struct MapEventChainManager {
 
 private:
 	eventchain_vector m_eventchains;
+};
+
 };
 
 #endif

@@ -40,8 +40,9 @@
 
 #define FIELD_UPDATE_INTERVAL 1000
 
-class CheckStepRoadAI : public CheckStep {
-public:
+using namespace Widelands;
+
+struct CheckStepRoadAI : public CheckStep {
 	CheckStepRoadAI(Player* pl, uint8_t mc, bool oe)
 		: player(pl), movecaps(mc), openend(oe)
 	{}
@@ -839,7 +840,7 @@ void Computer_Player::update_mineable_field (MineableField* field)
 }
 
 void Computer_Player::consider_productionsite_influence
-(BuildableField * field, const Coords &, const BuildingObserver & bo)
+(BuildableField * field, Coords const, const BuildingObserver & bo)
 {
 	if (bo.need_trees)
 		++field->tree_consumers_nearby;

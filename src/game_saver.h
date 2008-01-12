@@ -22,8 +22,11 @@
 
 #include "wexception.h"
 
-class Game;
 class FileSystem;
+
+namespace Widelands {
+
+class Game;
 
 /**
  * This class writes a complete state
@@ -43,6 +46,8 @@ struct Game_Saver {
 private:
 	FileSystem & m_fs;
       Game* m_game;
+};
+
 };
 
 #endif

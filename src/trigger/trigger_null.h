@@ -22,6 +22,8 @@
 
 #include "trigger.h"
 
+namespace Widelands {
+
 /*
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
@@ -44,6 +46,8 @@ struct Trigger_Null : public Trigger {
 private:
 	bool m_should_toggle;
 	bool m_value;
+};
+
 };
 
 #endif

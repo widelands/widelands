@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,16 +21,16 @@
 #define __S__CMD_QUEUE_H
 
 #include "queue_cmd_ids.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 
 #include <queue>
 
-#include <stdint.h>
+namespace Widelands {
 
 class Editor_Game_Base;
-class Widelands_Map_Map_Object_Saver;
-class Widelands_Map_Map_Object_Loader;
-class FileRead;
-class FileWrite;
+struct Map_Map_Object_Saver;
+struct Map_Map_Object_Loader;
 
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
@@ -92,19 +92,14 @@ public:
  * GameLogicCommands are stored in savegames, and they must run in parallel
  * for all instances of a game to ensure parallel simulation.
  */
-class GameLogicCommand : public Command {
-public:
+struct GameLogicCommand : public Command {
 	GameLogicCommand (int32_t duetime);
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
-		(FileWrite             &,
-		 Editor_Game_Base               &,
-		 Widelands_Map_Map_Object_Saver &);
+		(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	virtual void Read
-		(FileRead               &,
-		 Editor_Game_Base                &,
-		 Widelands_Map_Map_Object_Loader &);
+		(FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 };
 
 class Cmd_Queue {
@@ -151,6 +146,8 @@ private:
 	Game *                       m_game;
 	std::priority_queue<cmditem> m_cmds;
 	uint32_t                     nextserial;
+};
+
 };
 
 #endif // __S__CMD_QUEUE_H

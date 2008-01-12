@@ -25,42 +25,43 @@
 #include <list>
 
 class BuildingHints;
+
+namespace Widelands {
 class Economy;
 class Player;
 class PlayerImmovable;
 class Tribe_Descr;
 class Road;
 class ProductionSite;
+};
 
 struct Computer_Player {
-	Computer_Player(Game &, const Player_Number);
+	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
 		~Computer_Player ();
 
 		void think ();
 
-		void gain_immovable (PlayerImmovable*);
-		void lose_immovable (PlayerImmovable*);
+	void gain_immovable (Widelands::PlayerImmovable *);
+	void lose_immovable (Widelands::PlayerImmovable *);
 
-		void gain_field (const FCoords&);
-		void lose_field (const FCoords&);
+	void gain_field (Widelands::FCoords const &);
+	void lose_field (Widelands::FCoords const &);
 
-	const Game & game() const throw () {return m_game;}
-	Game       & game()       throw () {return m_game;}
-		uint8_t get_player_number() {return player_number;}
-	Player * get_player() const {return game().get_player(player_number);}
+	Widelands::Game & game() const throw () {return m_game;}
+	Widelands::Player_Number get_player_number() {return player_number;}
 
 private:
-	void gain_building (Building *);
-	void lose_building (Building *);
+	void gain_building (Widelands::Building *);
+	void lose_building (Widelands::Building *);
 
 		bool construct_building ();
 		void construct_roads ();
 
-		bool connect_flag_to_another_economy (Flag*);
-		bool improve_roads (Flag*);
+	bool connect_flag_to_another_economy (Widelands::Flag *);
+	bool improve_roads                   (Widelands::Flag *);
 
-		struct BuildableField {
-		FCoords       coords;
+	struct BuildableField {
+		Widelands::FCoords coords;
 
 		int32_t          next_update_due;
 
@@ -77,7 +78,7 @@ private:
 
 		int16_t         military_influence;
 
-			BuildableField (const FCoords& fc)
+		BuildableField (Widelands::FCoords const & fc)
 			{
 			    coords=fc;
 			    next_update_due=0;
@@ -87,10 +88,10 @@ private:
 			    trees_nearby=0;
 			    stones_nearby=0;
 			}
-		};
+	};
 
-		struct MineableField {
-		FCoords coords;
+	struct MineableField {
+		Widelands::FCoords coords;
 
 		int32_t    next_update_due;
 
@@ -99,25 +100,25 @@ private:
 
 		int32_t     mines_nearby;
 
-			MineableField (const FCoords& fc)
+			MineableField (Widelands::FCoords const & fc)
 			{
 			    coords=fc;
 			    next_update_due=0;
 			}
-		};
+	};
 
-		struct EconomyObserver {
-		Economy         * economy;
-		std::list<Flag *> flags;
+	struct EconomyObserver {
+		Widelands::Economy         * economy;
+		std::list<Widelands::Flag *> flags;
 
-			EconomyObserver (Economy* e) {economy=e;}
-		};
+		EconomyObserver (Widelands::Economy * e) {economy = e;}
+	};
 
 		struct BuildingObserver {
-		const char                        * name;
-		int32_t                                 id;
-		const Building_Descr              * desc;
-		const BuildingHints               * hints;
+		char                      const * name;
+		int32_t                           id;
+		Widelands::Building_Descr const * desc;
+		BuildingHints             const * hints;
 
 		enum {
 			BORING,
@@ -143,10 +144,10 @@ private:
 			{return cnt_built + cnt_under_construction;}
 		};
 
-		struct ProductionSiteObserver {
-		ProductionSite   * site;
+	struct ProductionSiteObserver {
+		Widelands::ProductionSite * site;
 		BuildingObserver * bo;
-		};
+	};
 
 		struct WareObserver {
 		uint8_t producers;
@@ -154,25 +155,25 @@ private:
 		uint8_t preciousness;
 		};
 
-	Game                            & m_game;
-	const Player_Number               player_number;
-	Player                          * player;
-	const Tribe_Descr               * tribe;
+	Widelands::Game                 & m_game;
+	Widelands::Player_Number const    player_number;
+	Widelands::Player               * player;
+	Widelands::Tribe_Descr const    * tribe;
 
 	std::list<BuildingObserver>       buildings;
 	int32_t                               total_constructionsites;
 
-	std::list<FCoords>                unusable_fields;
+	std::list<Widelands::FCoords>     unusable_fields;
 	std::list<BuildableField *>       buildable_fields;
 	std::list<MineableField *>        mineable_fields;
-	std::list<Flag *>                 new_flags;
-	std::list<Road *>                 roads;
+	std::list<Widelands::Flag *>      new_flags;
+	std::list<Widelands::Road *>      roads;
 	std::list<EconomyObserver *>      economies;
 	std::list<ProductionSiteObserver> productionsites;
 
 	WareObserver*         wares;
 
-		EconomyObserver* get_economy_observer (Economy*);
+	EconomyObserver * get_economy_observer (Widelands::Economy *);
 
 	int32_t                              next_road_due;
 	int32_t                              next_construction_due;
@@ -183,11 +184,11 @@ private:
 
 		void update_buildable_field (BuildableField*);
 		void update_mineable_field (MineableField*);
-		void consider_productionsite_influence (BuildableField*, const Coords&, const BuildingObserver&);
+	void consider_productionsite_influence
+		(BuildableField *, Widelands::Coords, BuildingObserver const &);
 		void check_productionsite (ProductionSiteObserver&);
 
 		BuildingObserver& get_building_observer(const char*);
 };
-
 
 #endif // __COMPPLAYER_H

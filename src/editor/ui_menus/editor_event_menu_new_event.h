@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class Event_Descr;
+namespace Widelands {struct Event_Descr;};
 namespace UI {
 template <typename T> struct Button;
 template <typename T> struct Listselect;
@@ -46,7 +46,7 @@ private:
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 
-	UI::Listselect<Event_Descr &> * m_event_list;
+	UI::Listselect<Widelands::Event_Descr &> * m_event_list;
 	UI::Multiline_Textarea        * m_description;
 	UI::Button<Editor_Event_Menu_New_Event> * m_ok_button;
 };

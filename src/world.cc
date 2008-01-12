@@ -20,13 +20,14 @@
 #include "world.h"
 
 #include "constants.h"
-#include "fileread.h"
 #include "graphic.h"
 #include "helper.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
 #include "profile.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "worlddata.h"
 
 #include <iostream>
@@ -35,6 +36,8 @@
 using std::cerr;
 using std::endl;
 
+
+namespace Widelands {
 
 /*
 ==============
@@ -512,3 +515,5 @@ void Terrain_Descr::load_graphics()
 	if (m_picnametempl)
 		m_texture = g_gr->get_maptexture(*m_picnametempl, m_frametime);
 }
+
+};

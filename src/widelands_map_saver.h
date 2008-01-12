@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,12 @@
 
 #include "wexception.h"
 
-class Editor_Game_Base;
 class FileSystem;
-class Widelands_Map_Map_Object_Saver;
+
+namespace Widelands {
+
+class Editor_Game_Base;
+struct Map_Map_Object_Saver;
 
 /*
 ===========================
@@ -39,17 +42,19 @@ debugability
 
 ===========================
 */
-struct Widelands_Map_Saver {
-	Widelands_Map_Saver(FileSystem &, Editor_Game_Base*);
-	~Widelands_Map_Saver();
+struct Map_Saver {
+	Map_Saver(FileSystem &, Editor_Game_Base*);
+	~Map_Saver();
 
 	void save() throw (_wexception) ;
-	Widelands_Map_Map_Object_Saver * get_map_object_saver() {return m_mos;}
+	Map_Map_Object_Saver * get_map_object_saver() {return m_mos;}
 
 private:
 	Editor_Game_Base               * m_egbase;
 	FileSystem & m_fs;
-	Widelands_Map_Map_Object_Saver * m_mos;
+	Map_Map_Object_Saver * m_mos;
+};
+
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,18 +24,20 @@
 #include "ui_multilinetextarea.h"
 #include "ui_unique_window.h"
 
+namespace Widelands {
 class Game;
+struct MapObjective;
+};
 class Interactive_Player;
-class MapObjective;
 
 // The GameObjectives Menu shows the not already
 // fullfilled scenario objectives.
-class GameObjectivesMenu : public UI::UniqueWindow {
-public:
-	GameObjectivesMenu(Interactive_Player &, UI::UniqueWindow::Registry &, Game &);
+struct GameObjectivesMenu : public UI::UniqueWindow {
+	GameObjectivesMenu
+		(Interactive_Player &, UI::UniqueWindow::Registry &, Widelands::Game &);
 
 private:
-	UI::Listselect<MapObjective &>list;
+	UI::Listselect<Widelands::MapObjective &>list;
 	UI::Multiline_Textarea objectivetext;
 
 	void selected(uint32_t);

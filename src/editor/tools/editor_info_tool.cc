@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,14 +38,16 @@ show a simple info dialog with infos about this field
 ===========
 */
 int32_t Editor_Info_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
+(Widelands::Map                     & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive                 & parent)
 {
-	const World & world = map.world();
+	Widelands::World const & world = map.world();
 	UI::Window * w =
 		new UI::Window(&parent, 30, 30, 400, 200, _("Field Information").c_str());
    UI::Multiline_Textarea* multiline_textarea = new UI::Multiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
 
-	Field * const f = map.get_field(center.node);
+	Widelands::Field * const f = map.get_field(center.node);
 
    std::string buf;
    char buf1[1024];
@@ -59,16 +61,16 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += buf1;
    sprintf(buf1, " %s %i\n", _("Height").c_str(), f->get_height()); buf+=buf1;
    buf+=_(" Caps: ");
-	switch ((f->get_caps() & BUILDCAPS_SIZEMASK)) {
-	case BUILDCAPS_SMALL:  buf+=_("small");  break;
-	case BUILDCAPS_MEDIUM: buf+=_("medium"); break;
-	case BUILDCAPS_BIG:    buf+=_("big");    break;
+	switch ((f->get_caps() & Widelands::BUILDCAPS_SIZEMASK)) {
+	case Widelands::BUILDCAPS_SMALL:  buf += _("small");  break;
+	case Widelands::BUILDCAPS_MEDIUM: buf += _("medium"); break;
+	case Widelands::BUILDCAPS_BIG:    buf += _("big");    break;
 	}
-   if (f->get_caps() & BUILDCAPS_FLAG) buf+=_(" flag");
-   if (f->get_caps() & BUILDCAPS_MINE) buf+=_(" mine");
-   if (f->get_caps() & BUILDCAPS_PORT) buf+=_(" port");
-   if (f->get_caps() & MOVECAPS_WALK) buf+=_(" walk");
-   if (f->get_caps() & MOVECAPS_SWIM) buf+=_(" swim");
+	if (f->get_caps() & Widelands::BUILDCAPS_FLAG) buf += _(" flag");
+	if (f->get_caps() & Widelands::BUILDCAPS_MINE) buf += _(" mine");
+	if (f->get_caps() & Widelands::BUILDCAPS_PORT) buf += _(" port");
+	if (f->get_caps() & Widelands::MOVECAPS_WALK)  buf += _(" walk");
+	if (f->get_caps() & Widelands::MOVECAPS_SWIM)  buf += _(" swim");
    buf+="\n";
    sprintf(buf1, " %s: %i\n", _("Owned by").c_str(), f->get_owned_by()); buf+=buf1;
    sprintf(buf1, " %s: %s (TODO! more info)\n", _("Has base immovable").c_str(), f->get_immovable() ? "Yes" : "No"); buf+=buf1;
@@ -96,9 +98,10 @@ int32_t Editor_Info_Tool::handle_click_impl
    buf += "\n";
    sprintf(buf1, "%s\n", _("2) Terrain Info\n").c_str()); buf+=buf1;
 	{
-		const Field & tf = map[center.triangle];
-		const Terrain_Descr & ter = world.terrain_descr
-			(center.triangle.t == TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
+		Widelands::Field         const & tf  = map[center.triangle];
+		Widelands::Terrain_Descr const & ter = world.terrain_descr
+			(center.triangle.t == Widelands::TCoords<>::D ?
+			 tf.terrain_d() : tf.terrain_r());
 		snprintf
 			(buf1, sizeof(buf1),
 			 " %s: %s\n", _("Name").c_str(), ter.name().c_str());

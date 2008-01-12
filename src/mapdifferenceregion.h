@@ -22,6 +22,8 @@
 
 #include "map.h"
 
+namespace Widelands {
+
 /**
  * Producer/Coroutine struct that iterates over the set of nodes that is the
  * difference between the areas A and B around neighboring nodes a and b. The
@@ -93,6 +95,8 @@ private:
 	typename Area_type::Radius_type m_remaining_in_edge;
 	bool                            m_passed_corner;
 	Direction                       m_direction;
+};
+
 };
 
 #endif

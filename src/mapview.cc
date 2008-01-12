@@ -49,9 +49,8 @@ Map_View::warp_mouse_to_field
 Moves the mouse cursor so that it is directly above the given field
 ===============
 */
-void Map_View::warp_mouse_to_field(Coords c)
-{
-	const Map & map = intbase().egbase().map();
+void Map_View::warp_mouse_to_field(Widelands::Coords const c) {
+	Widelands::Map const & map = intbase().egbase().map();
 	Point p;
 	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
 	p -= m_viewpoint;
@@ -60,9 +59,10 @@ void Map_View::warp_mouse_to_field(Coords c)
 	//  surely doesn't want to jump there.
 	if (p.x < get_w() and p.y < get_h()) {
 
-		if (p.x <= 0) warp_mouse_to_field(Coords(c.x + map.get_width (), c.y));
+		if      (p.x <= 0)
+			warp_mouse_to_field(Widelands::Coords(c.x + map.get_width (), c.y));
 		else if (p.y <= 0)
-			warp_mouse_to_field(Coords(c.x, c.y + map.get_height()));
+			warp_mouse_to_field(Widelands::Coords(c.x, c.y + map.get_height()));
 		else set_mouse_pos(p);
 	}
 }
@@ -79,9 +79,9 @@ in this function
 */
 void Map_View::draw(RenderTarget* dst)
 {
-	Editor_Game_Base & egbase = intbase().egbase();
+	Widelands::Editor_Game_Base & egbase = intbase().egbase();
 
-	if (upcast(Game, game, &egbase)) {
+	if (upcast(Widelands::Game, game, &egbase)) {
 		// Bail out if the game isn't actually loaded.
 		// This fixes a crash with displaying an error dialog during loading.
 		if (!game->is_loaded())

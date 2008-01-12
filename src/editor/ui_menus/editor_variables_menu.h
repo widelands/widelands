@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-class MapVariable;
+namespace Widelands {struct MapVariable;};
 
 /*
 =============================
@@ -35,18 +35,18 @@ class Editor_Variables_Menu
 =============================
 */
 struct Editor_Variables_Menu : public UI::UniqueWindow {
-      Editor_Variables_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
+	Editor_Variables_Menu(Editor_Interactive &, UI::UniqueWindow::Registry *);
       virtual ~Editor_Variables_Menu();
 
 private:
-      Editor_Interactive *m_parent;
-	UI::Table<MapVariable &>          m_table;
+	Editor_Interactive                & m_parent;
+	UI::Table<Widelands::MapVariable &> m_table;
 	UI::Button<Editor_Variables_Menu> m_button_new;
 	UI::Button<Editor_Variables_Menu> m_button_edit;
 	UI::Button<Editor_Variables_Menu> m_button_del;
 
 private:
-	void insert_variable(MapVariable &);
+	void insert_variable(Widelands::MapVariable &);
 	void clicked_new ();
 	void clicked_edit();
 	void clicked_del ();

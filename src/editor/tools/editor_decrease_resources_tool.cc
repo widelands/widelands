@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 
 #include "editor_increase_resources_tool.h"
 #include "editor_set_resources_tool.h"
-#include "geometry.h"
+#include "widelands_geometry.h"
 #include "graphic.h"
 #include "map.h"
 #include "field.h"
@@ -39,11 +39,14 @@ there is not already another resource there.
 ===========
 */
 int32_t Editor_Decrease_Resources_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
+(Widelands::Map                     & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive                 & parent)
 {
-	MapRegion<Area<FCoords> > mr
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
-		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
+		 Widelands::Area<Widelands::FCoords>
+		 (map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
 		int32_t res    = mr.location().field->get_resources();
 		int32_t amount = mr.location().field->get_resources_amount();
@@ -74,7 +77,8 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 				str = map.world().get_resource(m_cur_res)->get_editor_pic(amount);
             picid=g_gr->get_picture(PicMod_Menu,  str.c_str());
 				map.overlay_manager().register_overlay(mr.location(), picid, 4);
-				map.recalc_for_field_area(Area<FCoords>(mr.location(), 0));
+				map.recalc_for_field_area
+					(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
 			}
 		}
 	} while (mr.advance(map));

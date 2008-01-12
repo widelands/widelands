@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,8 @@
 
 #include <stdio.h>
 
+using Widelands::NUMBER_OF_MAP_DIMENSIONS;
+
 /*
 ===============
 Main_Menu_New_Map::Main_Menu_New_Map
@@ -58,7 +60,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    int32_t posx=offsx;
    int32_t posy=offsy;
    m_w=0; m_h=0;
-   sprintf(buf, "%s: %i", _("Width").c_str(), MAP_DIMENSIONS[m_w]);
+	sprintf(buf, "%s: %i", _("Width").c_str(), Widelands::MAP_DIMENSIONS[m_w]);
    m_width=new UI::Textarea(this, posx+spacing+20, posy, buf, Align_Left);
 
 	new UI::IDButton<Main_Menu_New_Map, int32_t>
@@ -77,7 +79,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 
 	posy+=20+spacing+spacing;
 
-   sprintf(buf, "%s: %i", _("Height").c_str(), MAP_DIMENSIONS[m_h]);
+	sprintf(buf, "%s: %i", _("Height").c_str(), Widelands::MAP_DIMENSIONS[m_h]);
    m_height=new UI::Textarea(this, posx+spacing+20, posy, buf, Align_Left);
 
 	new UI::IDButton<Main_Menu_New_Map, int32_t>
@@ -97,10 +99,9 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    posy+=20+spacing+spacing;
 
    // get all worlds
-   m_worlds=new std::vector<std::string>;
-   World::get_all_worlds(m_worlds);
+	Widelands::World::get_all_worlds(&m_worlds);
 
-   assert(m_worlds->size());
+   assert(m_worlds.size());
    m_currentworld=0;
 
 	m_world = new UI::IDButton<Main_Menu_New_Map, int32_t>
@@ -108,7 +109,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 		 posx, posy, width, height,
 		 1,
 		 &Main_Menu_New_Map::button_clicked, this, 4,
-		 World::World((*m_worlds)[m_currentworld].c_str()).get_name());
+		 Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
 
 	posy+=height+spacing+spacing+spacing;
 
@@ -140,8 +141,10 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 	case 3: --m_h; break;
 	case 4:
               ++m_currentworld;
-              if (m_currentworld==m_worlds->size()) m_currentworld=0;
-              m_world->set_title(World::World((*m_worlds)[m_currentworld].c_str()).get_name());
+		if (m_currentworld == m_worlds.size()) m_currentworld=0;
+		m_world->set_title
+			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name
+			 ());
               break;
 	}
 
@@ -150,21 +153,23 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
    if (m_w>=NUMBER_OF_MAP_DIMENSIONS) m_w=NUMBER_OF_MAP_DIMENSIONS-1;
    if (m_h<0) m_h=0;
    if (m_h>=NUMBER_OF_MAP_DIMENSIONS) m_h=NUMBER_OF_MAP_DIMENSIONS-1;
-   sprintf(buf, "%s: %i", _("Width").c_str(), MAP_DIMENSIONS[m_w]);
+	sprintf(buf, "%s: %i", _("Width").c_str(), Widelands::MAP_DIMENSIONS[m_w]);
    m_width->set_text(buf);
-   sprintf(buf, "%s: %i", _("Height").c_str(), MAP_DIMENSIONS[m_h]);
+	sprintf(buf, "%s: %i", _("Height").c_str(), Widelands::MAP_DIMENSIONS[m_h]);
    m_height->set_text(buf);
 }
 
 void Main_Menu_New_Map::clicked_create_map() {
-	Editor_Game_Base & egbase = m_parent->egbase();
-	Map              & map    = egbase.map();
+	Widelands::Editor_Game_Base & egbase = m_parent->egbase();
+	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 
 	// Clean all the stuff up, so we can load
 	egbase.cleanup_for_load(true, false);
 
-	map.create_empty_map(MAP_DIMENSIONS[m_w], MAP_DIMENSIONS[m_h], (*m_worlds)[m_currentworld]);
+	map.create_empty_map
+		(Widelands::MAP_DIMENSIONS[m_w], Widelands::MAP_DIMENSIONS[m_h],
+		 m_worlds[m_currentworld]);
 
 	// Postload the world which provides all the immovables found on a map
 	map.get_world()->postload(&egbase);
@@ -178,17 +183,4 @@ void Main_Menu_New_Map::clicked_create_map() {
 	m_parent->need_complete_redraw();
 
 	die();
-}
-
-
-/*
-===============
-Main_Menu_New_Map::~Main_Menu_New_Map
-
-Unregister from the registry pointer
-===============
-*/
-Main_Menu_New_Map::~Main_Menu_New_Map()
-{
-   delete m_worlds;
 }

@@ -31,6 +31,8 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 
+using Widelands::X_Coordinate;
+using Widelands::Y_Coordinate;
 
 inline Editor_Interactive & Event_Move_View_Option_Menu::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -38,7 +40,7 @@ inline Editor_Interactive & Event_Move_View_Option_Menu::eia() {
 
 
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu
-(Editor_Interactive & parent, Event_Move_View & event) :
+(Editor_Interactive & parent, Widelands::Event_Move_View & event) :
 UI::Window(&parent, 0, 0, 180, 200, _("Move View Event Options").c_str()),
 m_event   (event),
 m_location(event.get_coords())
@@ -222,7 +224,7 @@ void Event_Move_View_Option_Menu::clicked(int32_t i) {
  * update function: update all UI elements
  */
 void Event_Move_View_Option_Menu::update() {
-	const Extent extent = eia().egbase().map().extent();
+	Widelands::Extent const extent = eia().egbase().map().extent();
 	if (extent.w <= static_cast<uint16_t>(m_location.x))
 		m_location.x = extent.w - 1;
 	if (extent.h <= static_cast<uint16_t>(m_location.y))

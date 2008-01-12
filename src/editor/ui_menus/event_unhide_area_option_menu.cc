@@ -33,6 +33,8 @@
 
 #include <stdio.h>
 
+using Widelands::X_Coordinate;
+using Widelands::Y_Coordinate;
 
 inline Editor_Interactive & Event_Unhide_Area_Option_Menu::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -40,7 +42,7 @@ inline Editor_Interactive & Event_Unhide_Area_Option_Menu::eia() {
 
 
 Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu
-(Editor_Interactive & parent, Event_Unhide_Area & event)
+(Editor_Interactive & parent, Widelands::Event_Unhide_Area & event)
 :
 UI::Window   (&parent, 0, 0, 180, 280, _("Unhide Area Event Options").c_str()),
 m_event   (event),
@@ -317,15 +319,15 @@ void Event_Unhide_Area_Option_Menu::clicked(int32_t i) {
  * update function: update all UI elements
  */
 void Event_Unhide_Area_Option_Menu::update() {
-	const Map & map = eia().egbase().map();
-	const Extent extent = map.extent();
+	Widelands::Map const &       map    = eia().egbase().map();
+	Widelands::Extent      const extent = map.extent();
 	if (extent.w <= static_cast<uint16_t>(m_player_area.x))
 		m_player_area.x = extent.w  - 1;
 	if (extent.h <= static_cast<uint16_t>(m_player_area.y))
 		m_player_area.y = extent.h - 1;
 
 	if (m_player_area.player_number < 1) m_player_area.player_number = 1;
-	const Player_Number nr_players = map.get_nrplayers();
+	Widelands::Player_Number const nr_players = map.get_nrplayers();
 	if (nr_players < m_player_area.player_number)
 		m_player_area.player_number = nr_players;
 

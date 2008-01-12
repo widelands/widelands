@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,19 +23,17 @@
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
 
-#include <stdint.h>
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_textarea.h"
 
-class Game;
+namespace Widelands {struct Game;};
 
 /**
  * Select a replay from a list of replays.
  */
-class Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
-public:
-	Fullscreen_Menu_LoadReplay(Game*);
+struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
+	Fullscreen_Menu_LoadReplay(Widelands::Game *);
 	~Fullscreen_Menu_LoadReplay();
 
 	const std::string& filename() {return m_filename;}
@@ -46,7 +44,7 @@ public:
 	void fill_list();
 
 private:
-	Game* m_game;
+	Widelands::Game * m_game;
 
 	UI::IDButton<Fullscreen_Menu_LoadReplay, int32_t> m_back;
 	UI::Button<Fullscreen_Menu_LoadReplay> m_ok;

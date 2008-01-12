@@ -30,6 +30,8 @@
 #include "worker_descr.h"
 #include "worker_program.h"
 
+namespace Widelands {
+
 Worker_Descr::Worker_Descr(const Tribe_Descr  & tribe_descr,
                             const std::string & worker_name):
                             Bob::Descr        (&tribe_descr, worker_name),
@@ -293,3 +295,5 @@ bool Worker_Descr::can_act_as(int32_t ware) const {
 
 	return false;
 }
+
+};

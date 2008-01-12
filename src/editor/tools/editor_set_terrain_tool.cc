@@ -23,26 +23,29 @@
 #include "editorinteractive.h"
 #include "maptriangleregion.h"
 
+using Widelands::TCoords;
 
 int32_t Editor_Set_Terrain_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
+(Widelands::Map                     & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive                 & parent)
 {
 	assert
 		(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
 	uint16_t const radius = parent.get_sel_radius();
 	if (get_nr_enabled()) {
 		int32_t max = 0;
-		const World & world = map.world();
-		MapTriangleRegion<TCoords<FCoords> > mr
+		Widelands::World const & world = map.world();
+		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords> > mr
 			(map,
-			 Area<TCoords<FCoords> >
-			 (TCoords<FCoords>
-			  (FCoords(map.get_fcoords(center.triangle)),
-			   static_cast<const TCoords<FCoords>::TriangleIndex>
+			 Widelands::Area<TCoords<Widelands::FCoords> >
+			 (TCoords<Widelands::FCoords>
+			  (Widelands::FCoords(map.get_fcoords(center.triangle)),
+			   static_cast<TCoords<Widelands::FCoords>::TriangleIndex>
 			   (center.triangle.t)),
 			  radius));
 		do {
-			const Terrain_Descr::Index new_terrain_index =
+			Widelands::Terrain_Descr::Index const new_terrain_index =
 				get_random_enabled();
 				max = std::max
 					(max, map.change_terrain(mr.location(), new_terrain_index));

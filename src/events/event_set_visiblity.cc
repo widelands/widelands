@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "profile.h"
 #include "wexception.h"
 
+namespace Widelands {
 
 /*
  * Campaign VISIBILITY
@@ -152,3 +153,5 @@ Event::State Event_Set_Map_Visiblity::run(Game *) {
 	m_state = DONE;
 	return m_state;
 }
+
+};

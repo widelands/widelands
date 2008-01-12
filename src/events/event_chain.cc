@@ -20,8 +20,6 @@
 #include "event_chain.h"
 
 #include "event.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "map.h"
 #include "map_event_manager.h"
@@ -29,7 +27,10 @@
 #include "map_trigger_manager.h"
 #include "trigger/trigger_conditional.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 
+namespace Widelands {
 
 /*
  * Run this event chain
@@ -78,7 +79,12 @@ void EventChain::add_event(Event* ev) {
    ev->reference(this);
 }
 
+};
+
+
 #include "cmd_check_eventchain.h"
+
+namespace Widelands {
 
 /*
  * Check trigger cmd
@@ -143,9 +149,7 @@ void Cmd_CheckEventChain::execute (Game* g)
 
 #define CMD_CHECK_EVENTCHAIN_VERSION 1
 void Cmd_CheckEventChain::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CMD_CHECK_EVENTCHAIN_VERSION) {
@@ -159,9 +163,7 @@ void Cmd_CheckEventChain::Read
 			("Unknown version in Cmd_CheckEventChain::Read: %u", packet_version);
 }
 void Cmd_CheckEventChain::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
    // First, write version
 	fw.Unsigned16(CMD_CHECK_EVENTCHAIN_VERSION);
@@ -171,3 +173,5 @@ void Cmd_CheckEventChain::Write
    // Now eventchain id
 	fw.Unsigned16(m_eventchain_id);
 }
+
+};

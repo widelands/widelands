@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,9 +24,13 @@
 #include "player.h"
 #include "trigger/trigger_null.h"
 
+using Widelands::MapObjective;
+using Widelands::MapObjectiveManager;
 
 GameObjectivesMenu::GameObjectivesMenu
-(Interactive_Player & plr, UI::UniqueWindow::Registry & registry, Game & game)
+(Interactive_Player         & plr,
+ UI::UniqueWindow::Registry & registry,
+ Widelands::Game            & game)
 :
 UI::UniqueWindow
 (&plr, &registry, 340, 5 + 120 + 5 + 240 + 5, _("Objectives Menu")),

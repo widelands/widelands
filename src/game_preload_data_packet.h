@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,18 +24,16 @@
 
 #include <string>
 
+namespace Widelands {
+
 /**
  * This contains all the preload data needed to identify
  * a game for a user (for example in a listbox)
  */
 struct Game_Preload_Data_Packet : public Game_Data_Packet {
-      virtual ~Game_Preload_Data_Packet();
-
-	virtual void Read
-		(FileSystem &, Game*, Widelands_Map_Map_Object_Loader * const = 0)
+	void Read (FileSystem &, Game *, Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	virtual void Write
-		(FileSystem &, Game*, Widelands_Map_Map_Object_Saver * const = 0)
+	void Write(FileSystem &, Game *, Map_Map_Object_Saver  * = 0)
 		throw (_wexception);
 
       const char* get_mapname() {return m_mapname.c_str();}
@@ -44,6 +42,8 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 private:
       std::string m_mapname;
       uint32_t m_gametime;
+};
+
 };
 
 #endif

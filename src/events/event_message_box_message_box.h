@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,20 +24,24 @@
 
 #include <vector>
 
+namespace Widelands {
 struct Event_Message_Box;
 struct Game;
 struct Trigger_Null;
+};
 
 struct Message_Box_Event_Message_Box : public UI::Window {
-      Message_Box_Event_Message_Box(Game*, Event_Message_Box*, int32_t, int32_t, int32_t, int32_t);
+	Message_Box_Event_Message_Box
+		(Widelands::Game *, Widelands::Event_Message_Box *,
+		 int32_t, int32_t, int32_t, int32_t);
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
-      Game* m_game;
+	Widelands::Game                      * m_game;
       void clicked(int32_t);
       bool m_is_modal;
-      std::vector<Trigger_Null*> m_trigger;
+	std::vector<Widelands::Trigger_Null *> m_trigger;
 };
 
 #endif

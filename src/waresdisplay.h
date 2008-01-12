@@ -26,9 +26,12 @@
 
 #include <vector>
 
+namespace UI {struct Textarea;};
+
+namespace Widelands {
 struct Tribe_Descr;
 struct WareList;
-namespace UI {struct Textarea;};
+};
 
 /*
 class WaresDisplay
@@ -49,12 +52,13 @@ struct WaresDisplay : public UI::Panel {
 
 public:
 	WaresDisplay
-		(UI::Panel * const parent, const int32_t x, const int32_t y, const Tribe_Descr &);
+		(UI::Panel * const parent,
+		 int32_t const x, int32_t const y, Widelands::Tribe_Descr const &);
 	virtual ~WaresDisplay();
 
 	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
-   void add_warelist(const WareList*, wdType);
+   void add_warelist(Widelands::WareList const *, wdType);
    void remove_all_warelists();
 
 protected:
@@ -66,13 +70,12 @@ protected:
 		 const bool worker);
 
 private:
-	typedef std::vector<const WareList *> vector_type;
+	typedef std::vector<Widelands::WareList const *> vector_type;
 
-	const Tribe_Descr & m_tribe;
+	Widelands::Tribe_Descr const & m_tribe;
 	UI::Textarea        m_curware;
 	wdType              m_type;
 	vector_type         m_warelists;
 };
-
 
 #endif // include_waresdisplay_h

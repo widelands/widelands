@@ -30,6 +30,8 @@
 #include "trigger/trigger_null.h"
 #include "wexception.h"
 
+namespace Widelands {
+
 static const int32_t EVENT_VERSION = 1;
 
 /*
@@ -96,3 +98,5 @@ Event::State Event_Set_Null_Trigger::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
+
+};

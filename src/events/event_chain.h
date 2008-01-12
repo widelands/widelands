@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,8 @@
 #include <string>
 #include <vector>
 
+namespace Widelands {
+
 class Event;
 class Game;
 class TriggerConditional;
@@ -39,7 +41,7 @@ class TriggerConditional;
  * true.
  */
 struct EventChain : public EventReferencer, public TriggerReferencer {
-   friend class Widelands_Map_EventChain_Data_Packet;
+	friend struct Map_EventChain_Data_Packet;
 
 	enum State {
          INIT,
@@ -85,6 +87,8 @@ private:
       // For running
       uint32_t                m_curevent;
       State               m_state;
+
+};
 
 };
 

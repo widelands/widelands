@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,30 +19,22 @@
 
 #include "game_interactive_player_data_packet.h"
 
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "interactive_player.h"
 #include "mapview.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "tribe.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 2
 
 
-/*
- * Destructor
- */
-Game_Interactive_Player_Data_Packet::~Game_Interactive_Player_Data_Packet() {
-}
-
-/*
- * Read Function
- */
 void Game_Interactive_Player_Data_Packet::Read
-(FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const)
+(FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	FileRead fr;
@@ -82,7 +74,7 @@ throw (_wexception)
  * Write Function
  */
 void Game_Interactive_Player_Data_Packet::Write
-(FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const)
+(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -106,3 +98,5 @@ throw (_wexception)
 
 	fw.Write(fs, "binary/interactive_player");
 }
+
+};

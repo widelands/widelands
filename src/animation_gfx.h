@@ -33,7 +33,9 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	typedef Frames::size_type Index;
 	Index nr_frames() const {assert((*m_plrframes)[0]); return m_plrframes[0].size();}
 	Surface * get_frame
-		(const Index i, const Player_Number plyr, const Player * const player)
+		(Index                     const i,
+		 Widelands::Player_Number  const plyr,
+		 Widelands::Player const * const player)
 	{
 		assert(i < nr_frames());
 		assert(plyr <= MAX_PLAYERS);

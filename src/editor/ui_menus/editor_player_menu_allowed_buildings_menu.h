@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 
-class Player;
+namespace Widelands {struct Player;};
 
 /*
  * Let's the user choose which buildings should be available
@@ -33,11 +33,12 @@ class Player;
  * to advance technology slowly through the missions
  */
 struct Editor_Player_Menu_Allowed_Buildings_Menu : public UI::UniqueWindow {
-      Editor_Player_Menu_Allowed_Buildings_Menu(UI::Panel* parent, Player* player, UI::UniqueWindow::Registry*);
+	Editor_Player_Menu_Allowed_Buildings_Menu
+		(UI::Panel * parent, Widelands::Player &, UI::UniqueWindow::Registry *);
       virtual ~Editor_Player_Menu_Allowed_Buildings_Menu();
 
 private:
-      Player* m_player;
+	Widelands::Player & m_player;
 	UI::Textarea              m_allowed_label, m_forbidden_label;
 	UI::Listselect<intptr_t> m_allowed,       m_forbidden;
 	UI::IDButton<Editor_Player_Menu_Allowed_Buildings_Menu, const bool>

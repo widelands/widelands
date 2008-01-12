@@ -34,12 +34,17 @@ deletes the immovable at the given location
 ===========
 */
 int32_t Editor_Delete_Immovable_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
+(Widelands::Map                     & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive                 & parent)
 {
-	MapRegion<Area<FCoords> > mr
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
-		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
-	do if (upcast(Immovable, immovable, mr.location().field->get_immovable()))
+		 Widelands::Area<Widelands::FCoords>
+		 (map.get_fcoords(center.node), parent.get_sel_radius()));
+	do if
+		(upcast
+		 (Widelands::Immovable, immovable, mr.location().field->get_immovable()))
 		immovable->remove(&parent.egbase()); //  Delete no buildings or stuff.
 	while (mr.advance(map));
 	return mr.radius() + 2;

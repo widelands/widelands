@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GEOMETRY_H
-#define GEOMETRY_H
+#ifndef WIDELANDS_GEOMETRY_H
+#define WIDELANDS_GEOMETRY_H
 
 #include "compile_assert.h"
 
@@ -26,32 +26,7 @@
 
 #include <stdint.h>
 
-// hm, floats...
-// tried to be faster with fixed point arithmetics
-// it was, but i'll try to find other opts first
-struct Vector {
-	Vector() : x(0), y(0), z(0) {}
-	Vector(const float X, const float Y, const float Z) : x(X), y(Y), z(Z) {}
-
-	void normalize() {
-		const float f = static_cast<float>(sqrt(x * x + y * y + z * z));
-		if (f == 0) return;
-		x /= f;
-		y /= f;
-		z /= f;
-	}
-
-	// vector addition
-	Vector operator+(const Vector other) const
-	{return Vector(x + other.x, y + other.y, z + other.z);}
-
-	// inner product
-	float operator*(const Vector other) const
-		{return x * other.x + y * other.y + z * other.z;}
-
-	float x, y, z;
-};
-
+namespace Widelands {
 
 typedef int16_t Coordinate;
 typedef Coordinate X_Coordinate;
@@ -183,4 +158,6 @@ struct Node_and_Triangle {
 	TCoords<Triangle_Coords_type> triangle;
 };
 
-#endif /* GEOMETRY_H */
+};
+
+#endif

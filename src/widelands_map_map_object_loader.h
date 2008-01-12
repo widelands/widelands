@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef __S__WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 #define __S__WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
-#include <stdint.h>
+namespace Widelands {
 
 class Map_Object;
 class Editor_Game_Base;
@@ -30,7 +30,7 @@ class Editor_Game_Base;
  *   - keep track of map objects on the map (to be loaded)
  *   - translate file index pointers into Map_Objects
  */
-struct Widelands_Map_Map_Object_Loader {
+struct Map_Map_Object_Loader {
 	bool is_object_known(uint32_t);
 	void register_object(Editor_Game_Base*, uint32_t, Map_Object*);
 
@@ -48,7 +48,6 @@ private:
 	Reverse_Map_Object_Map m_objects;
 };
 
-
-
+};
 
 #endif

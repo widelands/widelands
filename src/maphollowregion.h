@@ -22,6 +22,8 @@
 
 #include "map.h"
 
+namespace Widelands {
+
 /**
  * Producer/Coroutine struct that iterates over every node for which the
  * distance to the center point is greater than hollow_area.hole_radius and
@@ -68,6 +70,8 @@ private:
 	uint32_t m_rowwidth; // # of fields to return per row
 	uint32_t m_rowpos; // # of fields we have returned in this row
 	typename Area_type::Coords_type m_left; //  left-most node of current row
+};
+
 };
 
 #endif

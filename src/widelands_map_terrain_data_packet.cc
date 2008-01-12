@@ -19,10 +19,10 @@
 
 #include "widelands_map_terrain_data_packet.h"
 
-#include "fileread.h"
-#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "world.h"
 
@@ -30,17 +30,16 @@
 
 #include <map>
 
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-Widelands_Map_Terrain_Data_Packet::~Widelands_Map_Terrain_Data_Packet() {}
 
-
-void Widelands_Map_Terrain_Data_Packet::Read
+void Map_Terrain_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base * egbase,
  const bool,
- Widelands_Map_Map_Object_Loader * const)
+ Map_Map_Object_Loader * const)
 throw (_wexception)
 {
    FileRead fr;
@@ -62,9 +61,8 @@ throw (_wexception)
 			const terrain_id_map::const_iterator it = smap.find(id);
 			if (it != smap.end())
 				log
-					("Widelands_Map_Terrain_Data_Packet::Read: WARNING: Found "
-					 "duplicate terrain id %i: Previously defined as \"%s\", now as "
-					 "\"%s\".",
+					("Map_Terrain_Data_Packet::Read: WARNING: Found duplicate "
+					 "terrain id %i: Previously defined as \"%s\", now as \"%s\".",
 					 id, world.terrain_descr(it->second).name().c_str(), name);
 			if (not world.get_ter(name))
 				throw wexception("Terrain '%s' exists in map, not in world!", name);
@@ -85,10 +83,8 @@ throw (_wexception)
 }
 
 
-void Widelands_Map_Terrain_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const)
+void Map_Terrain_Data_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 
@@ -125,3 +121,5 @@ throw (_wexception)
 
    fw.Write(fs, "binary/terrain");
 }
+
+};

@@ -453,7 +453,7 @@ public:
 		return fread(data, 1, bufsize, m_file);
 	}
 
-	bool EndOfFile()
+	bool EndOfFile() const
 	{
 		return feof(m_file);
 	}

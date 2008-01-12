@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 
 #include <vector>
 
-#include <stdint.h>
+namespace Widelands {
 
 MapVariableManager::MapVariableManager() {
    // Create a default variable
@@ -43,7 +43,7 @@ MapVariableManager::~MapVariableManager() {
 
 bool MapVariableManager::register_new_variable(MapVariable* mv) {
    // check if this variable is already known
-   if (get_variable(mv->get_name()))
+	if (get_variable(mv->get_name().c_str()))
          return 0;
 
    m_variables.push_back(mv);
@@ -75,7 +75,7 @@ MapVariable* MapVariableManager::get_variable
 (const char * const name) const
 {
 	for (uint32_t i = 0; i < m_variables.size(); ++i)
-		if (!strcmp(m_variables[i]->get_name(), name))
+		if (!strcmp(m_variables[i]->get_name().c_str(), name))
          return m_variables[i];
 	return 0;
 }
@@ -83,9 +83,9 @@ MapVariable* MapVariableManager::get_variable
 /**
  * Remove a variable
  */
-void MapVariableManager::delete_variable(const char* name) {
+void MapVariableManager::delete_variable(MapVariable const & var) {
 	for (uint32_t i = 0; i < m_variables.size(); ++i) {
-      if (!strcmp(m_variables[i]->get_name(), name)) {
+		if (m_variables[i] == &var) {
          delete m_variables[i];
          m_variables[i] = m_variables[m_variables.size() - 1];
          m_variables.resize(m_variables.size() - 1);
@@ -93,3 +93,5 @@ void MapVariableManager::delete_variable(const char* name) {
 		}
 	}
 }
+
+};

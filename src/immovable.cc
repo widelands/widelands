@@ -21,8 +21,6 @@
 
 #include "editor_game_base.h"
 #include "field.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "helper.h"
 #include "immovable_program.h"
@@ -33,11 +31,15 @@
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "worker.h"
+
+#include "upcast.h"
 
 #include <stdio.h>
 
-#include "upcast.h"
+namespace Widelands {
 
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
 Map_Object(&mo_descr)
@@ -643,7 +645,8 @@ void Immovable::Loader::load_finish()
 			 &imm->descr());
 }
 
-void Immovable::save(Editor_Game_Base* eg, Widelands_Map_Map_Object_Saver* mos, FileWrite& fw)
+void Immovable::save
+	(Editor_Game_Base * egbase, Map_Map_Object_Saver * mos, FileWrite & fw)
 {
 	// This is in front because it is required to obtain the descriptiong
 	// necessary to create the Immovable
@@ -651,25 +654,25 @@ void Immovable::save(Editor_Game_Base* eg, Widelands_Map_Map_Object_Saver* mos, 
 	fw.Unsigned8(IMMOVABLE_SAVEGAME_VERSION);
 
 	if (const Tribe_Descr * const tribe = get_owner_tribe())
-		fw.CString(tribe->name().c_str());
+		fw.String(tribe->name());
 	else
 		fw.CString("world");
 
-	fw.CString(name().c_str());
+	fw.String(name());
 
 	// The main loading data follows
-	BaseImmovable::save(eg, mos, fw);
+	BaseImmovable::save(egbase, mos, fw);
 
 	fw.Coords32(m_position);
 
 	// Animations
-	fw.CString(descr().get_animation_name(m_anim).c_str());
+	fw.String(descr().get_animation_name(m_anim));
 	fw.Signed32(m_animstart);
 
 	// Program Stuff
 	if (m_program) {
 		fw.Unsigned8(1);
-		fw.CString(m_program->get_name().c_str());
+		fw.String(m_program->get_name());
 	} else {
 		fw.Unsigned8(0);
 	}
@@ -679,7 +682,7 @@ void Immovable::save(Editor_Game_Base* eg, Widelands_Map_Map_Object_Saver* mos, 
 }
 
 Map_Object::Loader* Immovable::load
-		(Editor_Game_Base* eg, Widelands_Map_Map_Object_Loader* mol, FileRead& fr)
+	(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
 	Loader* loader = new Loader;
 
@@ -696,9 +699,9 @@ Map_Object::Loader* Immovable::load
 
 		if (strcmp(owner, "world")) {
 			// It is a tribe immovable
-			eg->manually_load_tribe(owner);
+			egbase->manually_load_tribe(owner);
 
-			if (const Tribe_Descr * const tribe = eg->get_tribe(owner)) {
+			if (const Tribe_Descr * const tribe = egbase->get_tribe(owner)) {
 				const int32_t idx = tribe->get_immovable_index(name);
 				if (idx != -1)
 					imm = new Immovable(*tribe->get_immovable_descr(idx));
@@ -710,14 +713,14 @@ Map_Object::Loader* Immovable::load
 				throw wexception("Unknown tribe %s!", owner);
 		} else {
 			// World immovable
-			int32_t idx = eg->map().world().get_immovable_index(name);
+			int32_t const idx = egbase->map().world().get_immovable_index(name);
 			if (idx == -1)
 				throw wexception("Unknown world immovable %s in map!", name);
 
-			imm = new Immovable(*eg->map().world().get_immovable_descr(idx));
+			imm = new Immovable(*egbase->map().world().get_immovable_descr(idx));
 		}
 
-		loader->init(eg, mol, imm);
+		loader->init(egbase, mol, imm);
 		loader->load(fr);
 	} catch (const std::exception & e) {
 		delete loader;
@@ -993,3 +996,5 @@ void PlayerImmovable::log_general_info(Editor_Game_Base* egbase)
 	molog("* player nr: %i\n", m_owner->get_player_number());
 	molog("m_economy: %p\n", m_economy);
 }
+
+};

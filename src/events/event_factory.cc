@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,8 @@
 #include "event_unhide_objective.h"
 #include "event_set_visiblity.h"
 #include "wexception.h"
+
+namespace Widelands {
 
 namespace Event_Factory {
 
@@ -97,23 +99,23 @@ Event * make_event_with_option_dialog
 	int32_t retval;
 	if        (strcmp("message_box",    id) == 0) {
 		Event_Message_Box_Option_Menu t
-			(m_parent, dynamic_cast<Event_Message_Box    &>(*event));
+			(m_parent, dynamic_cast<Widelands::Event_Message_Box    &>(*event));
 		retval = t.run();
 	} else if (strcmp("move_view",      id) == 0) {
 		Event_Move_View_Option_Menu t
-			(m_parent, dynamic_cast<Event_Move_View      &>(*event));
+			(m_parent, dynamic_cast<Widelands::Event_Move_View      &>(*event));
 		retval = t.run();
 	} else if (strcmp("unhide_area",    id) == 0) {
 		Event_Unhide_Area_Option_Menu t
-			(m_parent, dynamic_cast<Event_Unhide_Area    &>(*event));
+			(m_parent, dynamic_cast<Widelands::Event_Unhide_Area    &>(*event));
 		retval = t.run();
 	} else if (strcmp("conquer_area",   id) == 0) {
 		Event_Conquer_Area_Option_Menu t
-			(m_parent, dynamic_cast<Event_Conquer_Area   &>(*event));
+			(m_parent, dynamic_cast<Widelands::Event_Conquer_Area   &>(*event));
 		retval = t.run();
 	} else if (strcmp("allow_building", id) == 0) {
 		Event_Allow_Building_Option_Menu t
-			(m_parent, dynamic_cast<Event_Allow_Building &>(*event));
+			(m_parent, dynamic_cast<Widelands::Event_Allow_Building &>(*event));
 		retval = t.run();
 	} else
 		throw wexception
@@ -146,5 +148,7 @@ Event_Descr * get_event_descr(const uint32_t id) {
 const uint32_t get_nr_of_available_events() {
 	return sizeof(EVENT_DESCRIPTIONS) / sizeof(*EVENT_DESCRIPTIONS);
 }
+
+};
 
 };

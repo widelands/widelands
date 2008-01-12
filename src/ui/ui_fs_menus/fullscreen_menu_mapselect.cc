@@ -33,8 +33,11 @@
 
 #include <stdio.h>
 
+using Widelands::WL_Map_Loader;
 
-Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader** ml)
+
+Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
+(Widelands::Editor_Game_Base * g, Widelands::Map_Loader * * ml)
 :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 	egbase(g),
@@ -85,7 +88,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 	 false),
 
 	m_ml         (ml),
-	m_map        (new Map),
+	m_map        (new Widelands::Map),
 	m_is_scenario(false),
 
 	m_curdir ("maps"),
@@ -122,7 +125,11 @@ void Fullscreen_Menu_MapSelect::ok()
 {
 	const std::string filename = list.get_selected();
 
-	if (g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
+	if
+		(g_fs->IsDirectory(filename.c_str())
+		 &&
+		 !WL_Map_Loader::is_widelands_map(filename))
+	{
 		m_curdir=g_fs->FS_CanonicalizeName(filename);
 		list.clear();
 		m_mapfiles.clear();
@@ -154,7 +161,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
 	const char * const name = list.get_selected();
 
-	if (!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map(name)) {
+	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
 		// No directory
 		delete *m_ml;
 		*m_ml = 0;
@@ -176,7 +183,8 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 				sprintf(buf, "%i", m_map->get_nrplayers());
 				tanplayers.set_text(buf);
 				tadescr   .set_text(m_map->get_description());
-				taworld   .set_text(World::World(m_map->get_world_name()).get_name());
+				taworld   .set_text
+					(Widelands::World::World(m_map->get_world_name()).get_name());
 				m_ok.set_enabled(true);
 			} catch (std::exception& e) {
 				log("Failed to load map %s: %s\n", get_mapname(), e.what());
@@ -252,7 +260,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
 		if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
 		if (!g_fs->IsDirectory(name)) continue;
-		if (Widelands_Map_Loader::is_widelands_map(name)) continue;
+		if (WL_Map_Loader::is_widelands_map(name))             continue;
 
 		list.add(FileSystem::FS_Filename(name),
 		         name,
@@ -262,7 +270,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 	//Add map files(compressed maps) and directories(uncompressed)
 	{
-		Map map; //Map_Loader needs a place to put it's preload data
+		Widelands::Map map; //  Map_Loader needs a place to put it's preload data
 
 		for
 			(filenameset_t::iterator pname = m_mapfiles.begin();
@@ -271,7 +279,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		{
 			const char *name = pname->c_str();
 
-			Map_Loader * const ml = map.get_correct_loader(name);
+			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
 			if (!ml)
 				continue;
 
@@ -283,7 +291,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					 name,
 					 g_gr->get_picture
 					 (PicMod_Game,
-					  dynamic_cast<const Widelands_Map_Loader *>(ml) ?
+					  dynamic_cast<WL_Map_Loader const *>(ml) ?
 					  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const std::exception & e) {
 				log("Mapselect: Skip %s due to preload error: %s\n", name, e.what());

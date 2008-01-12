@@ -18,17 +18,16 @@
  */
 
 #include "cmd_incorporate.h"
-#include "fileread.h"
-#include "filewrite.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "wexception.h"
 
+namespace Widelands {
 
 void Cmd_Incorporate::Read
-(FileRead               & fr,
- Editor_Game_Base                & egbase,
- Widelands_Map_Map_Object_Loader & mol)
+(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CMD_INCORPORATE_VERSION) {
@@ -46,9 +45,7 @@ void Cmd_Incorporate::Read
 
 
 void Cmd_Incorporate::Write
-(FileWrite             & fw,
- Editor_Game_Base               & egbase,
- Widelands_Map_Map_Object_Saver & mos)
+(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_INCORPORATE_VERSION);
@@ -60,3 +57,5 @@ void Cmd_Incorporate::Write
 	assert(mos.is_object_known(worker));
 	fw.Unsigned32(mos.get_object_file_index(worker));
 }
+
+};

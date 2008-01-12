@@ -23,6 +23,8 @@
 #include "instances.h"
 #include "player_area.h"
 
+namespace Widelands {
+
 struct AreaWatcher_Descr;
 
 /**
@@ -36,11 +38,13 @@ struct AreaWatcher_Descr;
  */
 struct AreaWatcher : public Map_Object, private Player_Area<> {
 	friend struct Player;
-	friend struct Widelands_Map_Players_AreaWatchers_Data_Packet;
+	friend struct Map_Players_AreaWatchers_Data_Packet;
 	AreaWatcher(const Player_Area<>);
 	virtual int32_t get_type() const throw () {return AREAWATCHER;}
 	static AreaWatcher & create(Editor_Game_Base &, const Player_Area<>);
 	virtual void act(Game *, uint32_t data);
+};
+
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,10 +30,11 @@
  * Callback function to calculate correct overlays
  */
 int32_t Editor_Make_Infrastructure_Tool_Callback
-(const TCoords<FCoords> c, void * data, int32_t player)
+(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t player)
 {
 	return
-		static_cast<const Editor_Game_Base *>(data)->player(player).get_buildcaps(c);
+		static_cast<Widelands::Editor_Game_Base const *>(data)->player(player)
+		.get_buildcaps(c);
 }
 
 
@@ -48,7 +49,9 @@ Obviously, this function ignores the sel radius
 ===========
 */
 int32_t Editor_Make_Infrastructure_Tool::handle_click_impl
-(Map &, const Node_and_Triangle<>, Editor_Interactive & parent)
+(Widelands::Map                     &,
+ Widelands::Node_and_Triangle<> const,
+ Editor_Interactive                 & parent)
 {
 	show_field_action
 		(&parent, parent.egbase().get_player(m_player), &m_registry);

@@ -22,6 +22,8 @@
 #include "game.h"
 #include "map.h"
 
+namespace Widelands {
+
 Event::State Event_Conquer_Area::run(Game* game) {
 	assert(m_player_area);
 	assert(0 < m_player_area.player_number);
@@ -36,3 +38,5 @@ Event::State Event_Conquer_Area::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
+
+};

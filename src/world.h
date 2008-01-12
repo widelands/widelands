@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,9 @@
 #include "widelands.h"
 
 class Section;
+
+namespace Widelands {
+
 class Editor_Game_Base;
 
 #define WORLD_NAME_LEN 30
@@ -178,6 +181,8 @@ private:
       void parse_resources();
       void parse_terrains();
       void parse_bobs();
+};
+
 };
 
 #endif

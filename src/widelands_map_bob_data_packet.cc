@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,13 +19,12 @@
 
 #include "widelands_map_bob_data_packet.h"
 
-#include "fileread.h"
-#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
-#include <stdint.h>
 #include "tribe.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
@@ -33,21 +32,18 @@
 
 #include <map>
 
+namespace Widelands {
 
-// VERSION 1:
 //   - workers are also handled here, registering through Map_Object_Loader/Saver
 #define CURRENT_PACKET_VERSION 1
 
 
-Widelands_Map_Bob_Data_Packet::~Widelands_Map_Bob_Data_Packet() {}
-
-
-void Widelands_Map_Bob_Data_Packet::ReadBob
-		(FileRead& fr,
-		 Editor_Game_Base* egbase,
-		 bool skip,
-		 Widelands_Map_Map_Object_Loader * ol,
-		 Coords coords)
+void Map_Bob_Data_Packet::ReadBob
+	(FileRead              &       fr,
+	 Editor_Game_Base      * const egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const ol,
+	 Coords                  const coords)
 {
 	std::string owner = fr.CString();
 	std::string name = fr.CString();
@@ -59,8 +55,7 @@ void Widelands_Map_Bob_Data_Packet::ReadBob
 	Bob* bob = 0;
 	if (subtype != Bob::CRITTER && subtype != Bob::WORKER)
 		throw wexception
-				("Unknown bob type %i in Widelands_Map_Bob_Data_Packet!\n",
-				 subtype);
+			("Unknown bob type %i in Map_Bob_Data_Packet!", subtype);
 
 	if (owner == "world") {
 		if (subtype != Bob::CRITTER)
@@ -113,11 +108,11 @@ void Widelands_Map_Bob_Data_Packet::ReadBob
 	ol->register_object(egbase, reg, bob);
 }
 
-void Widelands_Map_Bob_Data_Packet::Read
+void Map_Bob_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	FileRead fr;
@@ -141,18 +136,14 @@ throw (_wexception)
 		}
 	} else
 		throw wexception
-				("Widelands_Map_Bob_Data_Packet: Unknown packet version %u\n",
-				 packet_version);
+			("Map_Bob_Data_Packet: Unknown packet version %u", packet_version);
 }
 
 
-/*
- * Write Function
- */
-void Widelands_Map_Bob_Data_Packet::Write
+void Map_Bob_Data_Packet::Write
 (FileSystem & fs,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+ Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -198,3 +189,5 @@ throw (_wexception)
 
 	fw.Write(fs, "binary/bob");
 }
+
+};

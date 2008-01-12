@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,11 +25,13 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class TriggerConditional;
+namespace Widelands {struct TriggerConditional;};
 namespace UI {
 template <typename T> struct Listselect;
 template <typename T> struct Button;
 }
+
+using Widelands::TriggerConditional_Factory;
 
 /*
  * This is a modal box - The user must end this first
@@ -37,11 +39,13 @@ template <typename T> struct Button;
  */
 struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
 	Editor_Event_Menu_Edit_TriggerConditional
-		(Editor_Interactive &, TriggerConditional *, EventChain *);
+		(Editor_Interactive &,
+		 Widelands::TriggerConditional *,
+		 Widelands::EventChain *);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
-      TriggerConditional* get_trigcond() {return m_given_cond;}
+	Widelands::TriggerConditional* get_trigcond() {return m_given_cond;}
 
 private:
 	Editor_Interactive & eia();
@@ -57,14 +61,14 @@ private:
 	void cs_selected        (uint32_t);
 	void cs_double_clicked  (uint32_t);
 
-      UI::Listselect<Trigger                           &> *m_trigger_list;
-      UI::Listselect<TriggerConditional_Factory::Token &> *m_construction;
+	UI::Listselect<Widelands::Trigger                  &> * m_trigger_list;
+	UI::Listselect<TriggerConditional_Factory::Token   &> * m_construction;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_insert_btn;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_delete_btn;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvup_btn;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvdown_btn;
-      TriggerConditional *m_given_cond;
-      EventChain         *m_event_chain;
+	Widelands::TriggerConditional                         * m_given_cond;
+	Widelands::EventChain                                 * m_event_chain;
 };
 
 #endif

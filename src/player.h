@@ -28,9 +28,9 @@
 
 #include "widelands.h"
 
+namespace Widelands {
+
 class Economy;
-class FileRead;
-class FileWrite;
 class Path;
 class PlayerImmovable;
 class Soldier;
@@ -53,7 +53,6 @@ class AttackController;
  *                      -- Nicolai
  */
 struct Player {
-public:
 	struct Building_Stats {
 		bool is_constructionsite;
 		Coords pos;
@@ -61,13 +60,12 @@ public:
 	typedef std::vector<Building_Stats> Building_Stats_vector;
 	typedef std::vector<Building_Stats_vector> BuildingStats;
 
-public:
 	friend class Editor_Game_Base;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Player_Economies_Data_Packet;
-	friend struct Widelands_Map_Building_Data_Packet;
-	friend struct Widelands_Map_Players_View_Data_Packet;
-	friend struct Widelands_Map_Seen_Fields_Data_Packet;
+	friend struct Map_Building_Data_Packet;
+	friend struct Map_Players_View_Data_Packet;
+	friend struct Map_Seen_Fields_Data_Packet;
 
 	enum {
 		Local = 0,
@@ -193,7 +191,7 @@ public:
 		 * Each value is only valid when one of the corner nodes of the triangle
 		 * has been seen.
 		 */
-		::Field::Terrains terrains;
+		Widelands::Field::Terrains terrains;
 
 		uint8_t       roads;
 
@@ -210,7 +208,7 @@ public:
 		 * The r component is only valid when time_last_surveyed[1] != Never().
 		 * \todo Check this on access, at least in debug builds
 		 */
-		::Field::Resource_Amounts resource_amounts;
+		Widelands::Field::Resource_Amounts resource_amounts;
 
 		/**
 		 * Wether there is a road between this node and the node to the east,
@@ -333,7 +331,7 @@ public:
 	 */
 	void see_node
 		(const Map                  &,
-		 const ::Field              & first_map_field,
+		 const Widelands::Field & first_map_field,
 		 const FCoords,
 		 const Time,
 		 const bool                   lasting = true)
@@ -354,7 +352,7 @@ public:
 	{
 		const Time gametime = egbase().get_gametime();
 		const Map & map = egbase().map();
-		const ::Field & first_map_field = map[0];
+		const Widelands::Field & first_map_field = map[0];
 		MapRegion<Area<FCoords> > mr(map, area);
 		do see_node(map, first_map_field, mr.location(), gametime, lasting);
 		while (mr.advance(map));
@@ -365,7 +363,7 @@ public:
 	void unsee_area(const Area<FCoords> area) throw () {
 		const Time gametime = egbase().get_gametime();
 		const Map &                  map      = egbase().map         ();
-		const ::Field & first_map_field = map[0];
+		const Widelands::Field & first_map_field = map[0];
 		MapRegion<Area<FCoords> > mr(map, area);
 		do unsee_node(mr.location().field - &first_map_field, gametime);
 		while (mr.advance(map));
@@ -453,7 +451,7 @@ private:
 	 * vision counter is incremented. Discovers the node and those of the 6
 	 * surrounding edges/triangles that are not seen fron another node.
 	 */
-	void discover_node(const Map &, const ::Field &, const FCoords, Field &)
+	void discover_node(Map const &, Widelands::Field const &, FCoords, Field &)
 		throw ();
 
 private:
@@ -475,6 +473,8 @@ private:
 	std::vector<uint32_t> m_current_statistics;
 	std::vector< std::vector<uint32_t> > m_ware_productions;
 	BuildingStats m_building_stats;
+};
+
 };
 
 #endif

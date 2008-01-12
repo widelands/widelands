@@ -37,6 +37,7 @@
 
 #include "upcast.h"
 
+namespace Widelands {
 
 /**
  * createitem \<waretype\>
@@ -661,14 +662,14 @@ bool Worker::run_geologist_find(Game * g, State * state, const Action *)
 		(const Resource_Descr * const rdescr =
 		 map.world().get_resource(position.field->get_resources()))
 	{
-		const Tribe_Descr & tribe = descr().tribe();
+		Tribe_Descr const & t = tribe();
 		g->create_immovable
 			(position,
-			 tribe.get_resource_indicator
+			 t.get_resource_indicator
 			 (rdescr,
 			  rdescr->is_detectable() ?
 			  position.field->get_resources_amount() : 0),
-			 &tribe);
+			 &t);
 	}
 
 	++state->ivar1;
@@ -971,12 +972,12 @@ void Worker::level(Game* g)
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
 	assert(get_becomes());
-	const Tribe_Descr & tribe = descr().tribe();
+	const Tribe_Descr & t = tribe();
 
 	// Inform the economy, that something has changed
-	m_economy->remove_workers(tribe.get_worker_index(descr().name().c_str()), 1);
-	m_descr = tribe.get_worker_descr(tribe.get_worker_index(get_becomes()));
-	m_economy->add_workers   (tribe.get_worker_index(descr().name().c_str()), 1);
+	m_economy->remove_workers   (t.get_worker_index(descr().name().c_str()), 1);
+	m_descr = t.get_worker_descr(t.get_worker_index(get_becomes()));
+	m_economy->add_workers      (t.get_worker_index(descr().name().c_str()), 1);
 
 	create_needed_experience(g);
 }
@@ -2290,3 +2291,5 @@ void Worker::draw(const Editor_Game_Base & game, RenderTarget & dst,
 	if (get_current_anim())
 		draw_inner(game, dst, calc_drawpos(game, pos));
 }
+
+};

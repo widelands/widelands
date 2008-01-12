@@ -32,6 +32,8 @@
 
 #include "upcast.h"
 
+namespace Widelands {
+
 static const int32_t TRIGGER_VERSION = 2;
 
 Trigger_Building::Trigger_Building()
@@ -122,3 +124,5 @@ void Trigger_Building::check_set_conditions(Game* game) {
  * Reset this trigger. This is only valid for non one timers
  */
 void Trigger_Building::reset_trigger(Game *) {}
+
+};

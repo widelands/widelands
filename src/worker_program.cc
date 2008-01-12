@@ -21,6 +21,8 @@
 #include "profile.h"
 #include "worker_program.h"
 
+namespace Widelands {
+
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"mine",              &WorkerProgram::parse_mine},
 	{"createitem",        &WorkerProgram::parse_createitem},
@@ -515,3 +517,5 @@ void WorkerProgram::parse_playFX(Worker_Descr *, Worker::Action * act, Parser *,
 	else
 		act->iparam1=atoi(cmd[2].c_str());
 }
+
+};

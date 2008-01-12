@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,8 @@
  *
  */
 
-#include "log.h"
+#include "save_handler.h"
+
 #include "game.h"
 #include "wexception.h"
 #include "wlapplication.h"
@@ -25,10 +26,14 @@
 #include "game_saver.h"
 #include "profile.h"
 
+#include "log.h"
+
+using Widelands::Game_Saver;
+
 /**
 * Check if autosave is not needed.
  */
-void SaveHandler::think(Game & game, int32_t realtime) {
+void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	initialize(realtime);
 
 	int32_t autosaveInterval = g_options.pull_section("global")->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
@@ -114,7 +119,9 @@ std::string SaveHandler::create_file_name(std::string dir, std::string filename)
  * returns true if saved
  */
 bool SaveHandler::save_game
-(Game & game, std::string const & complete_filename, std::string * const error)
+(Widelands::Game   &       game,
+ std::string const &       complete_filename,
+ std::string       * const error)
 {
 	bool binary = !g_options.pull_section("global")->get_bool("nozip", false);
 	// Make sure that the base directory exists

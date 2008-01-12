@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,15 +33,18 @@ and places this on the current field
 ===========
 */
 int32_t Editor_Place_Bob_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
+(Widelands::Map                     & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive                 & parent)
 {
-	Editor_Game_Base & editor = parent.egbase();
-	MapRegion<Area<FCoords> > mr
+	Widelands::Editor_Game_Base & editor = parent.egbase();
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
-		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
+		 Widelands::Area<Widelands::FCoords>
+		 (map.get_fcoords(center.node), parent.get_sel_radius()));
 	if (get_nr_enabled()) {
 		do {
-			if (Bob * const bob = mr.location().field->get_first_bob())
+			if (Widelands::Bob * const bob = mr.location().field->get_first_bob())
 				// There is already a bob. Remove it first
 				bob->remove(&editor);
 			editor.create_bob(mr.location(), get_random_enabled());

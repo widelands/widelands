@@ -39,6 +39,7 @@
 
 #include <stdio.h>
 
+namespace Widelands {
 
 struct IdleSoldierSupply : public Supply {
 	IdleSoldierSupply(Soldier * const);
@@ -774,3 +775,5 @@ void Soldier::log_general_info(Editor_Game_Base* egbase)
 	molog ("Defense : %d%%\n", m_defense);
 	molog ("Evade:    %d%%\n", m_evade);
 }
+
+};

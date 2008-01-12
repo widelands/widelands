@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,21 +22,21 @@
 #include "attack_controller.h"
 #include "battle.h"
 #include "editor_game_base.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "immovable.h"
 #include "map.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
 
-Widelands_Map_Object_Packet::~Widelands_Map_Object_Packet()
-{
+Map_Object_Packet::~Map_Object_Packet() {
 	while (loaders.size()) {
 		delete *loaders.begin();
 		loaders.erase(loaders.begin());
@@ -44,10 +44,8 @@ Widelands_Map_Object_Packet::~Widelands_Map_Object_Packet()
 }
 
 
-void Widelands_Map_Object_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Loader * const ol)
+void Map_Object_Packet::Read
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Loader * const ol)
 {
 	try {
 		FileRead fr;
@@ -85,8 +83,7 @@ void Widelands_Map_Object_Packet::Read
 }
 
 
-void Widelands_Map_Object_Packet::LoadFinish()
-{
+void Map_Object_Packet::LoadFinish() {
 	// load_pointer stage
 	for
 		(LoaderSet::const_iterator cit = loaders.begin();
@@ -106,10 +103,8 @@ void Widelands_Map_Object_Packet::LoadFinish()
 }
 
 
-void Widelands_Map_Object_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+void Map_Object_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 {
 	FileWrite fw;
 
@@ -139,3 +134,5 @@ void Widelands_Map_Object_Packet::Write
 
 	fw.Write(fs, "binary/mapobjects");
 }
+
+};

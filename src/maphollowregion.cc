@@ -19,6 +19,8 @@
 
 #include "maphollowregion.h"
 
+namespace Widelands {
+
 template <> MapHollowRegion<Area<> >::MapHollowRegion
 (const Map & map, const HollowArea<Area<> > hollow_area)
 :
@@ -81,3 +83,5 @@ template <> bool MapHollowRegion<Area<> >::advance(const Map & map) throw () {
 
 	return true;
 }
+
+};

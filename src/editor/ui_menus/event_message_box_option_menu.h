@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,9 @@
 
 #include <vector>
 
+
 class Editor_Interactive;
-class Event_Message_Box;
+namespace Widelands {struct Event_Message_Box;};
 namespace UI {
 template <typename T> struct Button;
 struct Edit_Box;
@@ -40,7 +41,8 @@ struct Textarea;
  * before it can return
  */
 struct Event_Message_Box_Option_Menu : public UI::Window {
-	Event_Message_Box_Option_Menu(Editor_Interactive &, Event_Message_Box &);
+	Event_Message_Box_Option_Menu
+		(Editor_Interactive &, Widelands::Event_Message_Box &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
@@ -58,7 +60,7 @@ private:
 	void ls_selected    (uint32_t);
       void edit_box_edited(int32_t);
 
-	Event_Message_Box & m_event;
+	Widelands::Event_Message_Box & m_event;
 
 	struct Button_Descr {
          std::string name;

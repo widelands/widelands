@@ -19,6 +19,8 @@
 
 #include "mapfringeregion.h"
 
+namespace Widelands {
+
 template <>
 bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) throw () {
 	switch (m_phase) {
@@ -37,3 +39,5 @@ bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) throw () {
 	{m_remaining_in_phase = m_area.radius; --m_phase;}
 	return m_phase;
 }
+
+};

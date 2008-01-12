@@ -19,16 +19,18 @@
 
 #include "battle.h"
 
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
 #include "log.h"
 
 #include "upcast.h"
+
+namespace Widelands {
 
 Battle::Descr g_Battle_Descr;
 
@@ -175,7 +177,7 @@ Load/Save support
 
 #define BATTLE_SAVEGAME_VERSION 1
 
-void Battle::Loader::load(FileRead& fr)
+void Battle::Loader::load(FileRead & fr)
 {
 	BaseImmovable::Loader::load(fr);
 
@@ -211,12 +213,13 @@ void Battle::Loader::load_pointers()
 	}
 }
 
-void Battle::save(Editor_Game_Base* eg, Widelands_Map_Map_Object_Saver* mos, FileWrite& fw)
+void Battle::save
+	(Editor_Game_Base * egbase, Map_Map_Object_Saver * mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Battle);
 	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
 
-	BaseImmovable::save(eg, mos, fw);
+	BaseImmovable::save(egbase, mos, fw);
 
 	// Write time to next assault
 	fw.Unsigned32(m_next_assault);
@@ -238,9 +241,7 @@ void Battle::save(Editor_Game_Base* eg, Widelands_Map_Map_Object_Saver* mos, Fil
 
 
 Map_Object::Loader* Battle::load
-		(Editor_Game_Base* eg,
-		 Widelands_Map_Map_Object_Loader* mol,
-		 FileRead& fr)
+	(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
 	Loader* loader = new Loader;
 
@@ -251,7 +252,7 @@ Map_Object::Loader* Battle::load
 		if (version != BATTLE_SAVEGAME_VERSION)
 			throw wexception("Unknown version %u", version);
 
-		loader->init(eg, mol, new Battle);
+		loader->init(egbase, mol, new Battle);
 		loader->load(fr);
 	} catch (const std::exception & e) {
 		delete loader;
@@ -263,3 +264,5 @@ Map_Object::Loader* Battle::load
 
 	return loader;
 }
+
+};

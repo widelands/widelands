@@ -18,8 +18,6 @@
  */
 
 
-#include <stdio.h>
-
 #include "bob.h"
 #include "critter_bob.h"
 #include "game.h"
@@ -32,6 +30,8 @@
 #include "wexception.h"
 
 #include "upcast.h"
+
+namespace Widelands {
 
 /**
  * Only tribe bobs have a vision range, since it would be irrelevant
@@ -1093,3 +1093,5 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 		molog("* program: %p\n",  m_stack[i].route);
 	}
 }
+
+};

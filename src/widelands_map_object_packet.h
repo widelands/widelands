@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,12 @@
 #include <set>
 
 class FileSystem;
+
+namespace Widelands {
+
 class Editor_Game_Base;
-class Widelands_Map_Map_Object_Loader;
-class Widelands_Map_Map_Object_Saver;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
 
 /**
  * This data packet contains all \ref Map_Object and derived instances.
@@ -35,24 +38,19 @@ class Widelands_Map_Map_Object_Saver;
  * \note Right now, only those Map_Objects not covered by other objects
  * are in this packet.
  */
-struct Widelands_Map_Object_Packet {
+struct Map_Object_Packet {
 	typedef std::set<Map_Object::Loader*> LoaderSet;
 	LoaderSet loaders;
 
-	~Widelands_Map_Object_Packet();
+	~Map_Object_Packet();
 
-	void Read
-		(FileSystem &,
-		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Loader * const);
+	void Read (FileSystem &, Editor_Game_Base *, Map_Map_Object_Loader *);
 
 	void LoadFinish();
 
-	void Write
-		(FileSystem &,
-		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const);
+	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver  *);
 };
 
+};
 
 #endif

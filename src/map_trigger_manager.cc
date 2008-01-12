@@ -24,6 +24,7 @@
 #include <stdint.h>
 #include <vector>
 
+namespace Widelands {
 
 MapTriggerManager::MapTriggerManager() {}
 
@@ -90,3 +91,5 @@ void MapTriggerManager::delete_unreferenced_triggers() {
       ++i;
 	}
 }
+
+};

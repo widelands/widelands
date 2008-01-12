@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,8 +125,8 @@ void Game_Main_Menu_Load_Game::selected(uint32_t) {
 
    FileSystem* fs = g_fs->MakeSubFileSystem(name);
 
-	Game_Loader gl(*fs, m_parent->get_game());
-   Game_Preload_Data_Packet gpdp;
+	Widelands::Game_Loader gl(*fs, m_parent->get_game());
+	Widelands::Game_Preload_Data_Packet gpdp;
    gl.preload_game(&gpdp); // This has worked before, no problem
 
    m_ok_btn->set_enabled(true);
@@ -161,7 +161,7 @@ void Game_Main_Menu_Load_Game::fill_list()
    // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
 
-   Game_Preload_Data_Packet gpdp;
+	Widelands::Game_Preload_Data_Packet gpdp;
 
 	for
 		(filenameset_t::iterator pname = m_gamefiles.begin();
@@ -174,7 +174,7 @@ void Game_Main_Menu_Load_Game::fill_list()
       FileSystem* fs = 0;
       try {
          fs = g_fs->MakeSubFileSystem(name);
-			Game_Loader gl(*fs, m_parent->get_game());
+			Widelands::Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
 
 			char* fname = strdup(FileSystem::FS_Filename(name));
@@ -210,12 +210,12 @@ bool Game_Main_Menu_Load_Game::load_game(std::string const & filename) {
 	try {
 		UI::ProgressWindow loader_ui;
 		fs = g_fs->MakeSubFileSystem(filename);
-		Game_Loader gl(*fs, m_parent->get_game());
+		Widelands::Game_Loader gl(*fs, m_parent->get_game());
 		m_parent->get_game()->cleanup_for_load(true, true);
 		gl.load_game();
 		m_parent->get_game()->postload();
 		m_parent->get_game()->load_graphics(loader_ui);
-		m_parent->get_game()->m_state = gs_running;
+		m_parent->get_game()->m_state = Widelands::gs_running;
 	} catch (std::exception& exe) {
 		std::string s=_("Game Loading Error!\nReason given:\n");
 		s+=exe.what();

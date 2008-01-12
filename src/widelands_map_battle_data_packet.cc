@@ -20,14 +20,14 @@
 #include "widelands_map_battle_data_packet.h"
 
 #include "battle.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "editor_game_base.h"
 #include "immovable.h"
 #include "map.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "world.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
@@ -38,27 +38,16 @@
 
 #include <map>
 
-
-/* VERSION 1: initial release
-*/
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Battle_Data_Packet::~Widelands_Map_Battle_Data_Packet()
-{
-}
 
-/*
- * Read Function
- */
-void Widelands_Map_Battle_Data_Packet::Read
+void Map_Battle_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (not skip) {
@@ -115,20 +104,20 @@ throw (_wexception)
          // and register it with the object loader for further loading
 			ol->register_object(egbase, serial, &battle);
 		}
-      if (fr.Unsigned32() != 0xffffffff)
-         throw wexception ("Error in Widelands_Map_Battle_Data_Packet : Couldn't find 0xffffffff.");
+			if (fr.Unsigned32() != 0xffffffff)
+				throw wexception
+					("Error in Map_Battle_Data_Packet : Couldn't find 0xffffffff.");
 		} else
 			throw wexception
-				("Unkown version of Widelands_Map_Battle_Data_Packet : %d",
-				 packet_version);
+				("Unkown version of Map_Battle_Data_Packet : %d", packet_version);
 	}
 }
 
-void Widelands_Map_Battle_Data_Packet::Write
-(FileSystem &,
- Editor_Game_Base*,
- Widelands_Map_Map_Object_Saver * const)
+void Map_Battle_Data_Packet::Write
+(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-	throw wexception("Widelands_Map_Battle_Data_Packet::Write is obsolete");
+	throw wexception("Map_Battle_Data_Packet::Write is obsolete");
 }
+
+};

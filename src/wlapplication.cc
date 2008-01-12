@@ -281,13 +281,13 @@ void WLApplication::run()
 		Editor_Interactive::run_editor(m_editor_filename);
 	} else if (m_loadgame_filename.size()) {
 		assert(not m_game);
-		m_game = new Game;
+		m_game = new Widelands::Game;
 		m_game->run_load_game(true, m_loadgame_filename.c_str());
 		delete m_game;
 		m_game = 0;
 	} else if (m_tutorial_filename.size()) {
 		assert(not m_game);
-		m_game = new Game;
+		m_game = new Widelands::Game;
 		m_game->run_splayer_map_direct(m_tutorial_filename.c_str(), true);
 		delete m_game;
 		m_game = 0;
@@ -1102,7 +1102,7 @@ void WLApplication::mainmenu()
 			break;
 
 		case Fullscreen_Menu_Main::mm_replay:
-			m_game = new Game;
+			m_game = new Widelands::Game;
 			m_game->run_replay();
 			delete m_game;
 			m_game = 0;
@@ -1157,7 +1157,7 @@ void WLApplication::mainmenu_singleplayer()
 
 		if (code == Fullscreen_Menu_SinglePlayer::Back) break;
 
-		m_game = new Game;
+		m_game = new Widelands::Game;
 
 		switch (code) {
 		case Fullscreen_Menu_SinglePlayer::New_Game:
@@ -1171,7 +1171,7 @@ void WLApplication::mainmenu_singleplayer()
 			break;
 
 		case Fullscreen_Menu_SinglePlayer::Campaign: {
-			m_game->m_state = gs_menu;
+			m_game->m_state = Widelands::gs_menu;
 			m_game->m_netgame = 0;
 			std::string filename;
 			for (;;) { // Campaign UI - Loop

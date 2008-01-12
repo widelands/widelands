@@ -49,12 +49,15 @@
 
 #include "upcast.h"
 
+using Widelands::Building;
+using Widelands::Map;
+
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
 
 
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
-(const TCoords<FCoords> c, void* data, int32_t)
+(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t)
 {
 	return
 		static_cast<const Interactive_Player *>(data)->get_player()->
@@ -69,8 +72,8 @@ Interactive_Player::Interactive_Player
 Initialize
 ===============
 */
-Interactive_Player::Interactive_Player(Game & g, const uint8_t plyn) :
-Interactive_Base(g), m_game(&g),
+Interactive_Player::Interactive_Player(Widelands::Game & g, uint8_t const plyn)
+: Interactive_Base(g), m_game(&g),
 
 m_label_speed(this, get_w(), 0, 0, 0, "", Align_TopRight),
 
@@ -165,8 +168,8 @@ void Interactive_Player::think()
 	}
 
 	// Check for chatmessages
-	NetGame* ng = m_game->get_netgame();
-	if (ng && ng->have_chat_message()) {
+	if (NetGame * const ng = m_game->get_netgame())
+		if (ng->have_chat_message()) {
 		NetGame::Chat_Message t = ng->get_chat_message();
 		m_chatmsges.push_back(t);
 
@@ -288,7 +291,7 @@ Player has clicked on the given field; bring up the context menu.
 */
 void Interactive_Player::field_action()
 {
-	const Map & map = egbase().map();
+	Map const & map = egbase().map();
 
 	if (player().vision(Map::get_index(get_sel_pos().node, map.get_width()))) {
 		// Special case for buildings

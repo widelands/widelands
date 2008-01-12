@@ -32,7 +32,6 @@
 
 #include <vector>
 
-class Player;
 namespace UI {
 struct Multiline_Textarea;
 struct Textarea;
@@ -65,7 +64,7 @@ struct Interactive_Player : public Interactive_Base {
 		UI::UniqueWindow::Registry objectives;
 	};
 
-	Interactive_Player(Game &, const uint8_t pln);
+	Interactive_Player(Widelands::Game &, const uint8_t pln);
 	~Interactive_Player();
 
 	virtual void think();
@@ -81,11 +80,11 @@ struct Interactive_Player : public Interactive_Base {
 
 	bool handle_key(bool down, SDL_keysym);
 
-	Game * get_game() const {return m_game;}
-	Game & game() const {return *m_game;}
-	uint8_t get_player_number() const {return m_player_number;}
-	Player & player() const throw () {return m_game->player(m_player_number);}
-	Player * get_player() const throw () {
+	Widelands::Game * get_game() const {return m_game;}
+	Widelands::Game & game() const {return *m_game;}
+	Widelands::Player_Number get_player_number() const {return m_player_number;}
+	Widelands::Player & player() const throw () {return m_game->player(m_player_number);}
+	Widelands::Player * get_player() const throw () {
 		assert(m_game);
 		return m_game->get_player(m_player_number);
 	}
@@ -111,8 +110,8 @@ private:
 	};
 
 private:
-	Game                     * m_game;
-	Player_Number m_player_number;
+	Widelands::Game        * m_game;
+	Widelands::Player_Number m_player_number;
 
 	UI::Textarea                   m_label_speed;
 	UI::Multiline_Textarea         m_chat_messages;

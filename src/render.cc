@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,8 +36,13 @@ Rendering functions of the 16-bit software renderer.
 
 #include "log.h"
 
+#include "upcast.h"
+
 #include <SDL.h>
 
+using Widelands::Flag;
+using Widelands::PlayerImmovable;
+using Widelands::Road;
 
 /*
  * Create a Surface from a surface
@@ -210,10 +215,10 @@ Return the color to be used in the minimap for the given field.
 */
 inline static uint32_t calc_minimap_color
 (const SDL_PixelFormat & format,
- const Editor_Game_Base & egbase,
- const FCoords f,
+ Widelands::Editor_Game_Base const & egbase,
+ Widelands::FCoords          const   f,
  const uint32_t flags,
- const Player_Number owner,
+ Widelands::Player_Number    const owner,
  const bool see_details)
 {
 	uint32_t pixelcolor = 0;
@@ -241,8 +246,7 @@ inline static uint32_t calc_minimap_color
 	}
 
 	if (see_details) {
-	const PlayerImmovable * const immovable =
-		dynamic_cast<const PlayerImmovable *>(f.field->get_immovable());
+	upcast(PlayerImmovable const, immovable, f.field->get_immovable());
 	if (flags & MiniMap::Roads and dynamic_cast<const Road *>(immovable))
 		pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
 	if
@@ -250,7 +254,7 @@ inline static uint32_t calc_minimap_color
 		 or
 		 (flags & MiniMap::Bldns
 		  and
-		  dynamic_cast<const Building *>(immovable)))
+		  dynamic_cast<const Widelands::Building *>(immovable)))
 		pixelcolor = SDL_MapRGB
 		(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
 	}
@@ -269,19 +273,19 @@ static void draw_minimap_int
  const uint16_t              pitch,
  const SDL_PixelFormat   & format,
  const uint32_t                mapwidth,
- const Editor_Game_Base  & egbase,
- const Player * const     player,
+ Widelands::Editor_Game_Base const &       egbase,
+ Widelands::Player           const * const player,
  const Rect                rc,
  const Point               viewpoint,
  const uint32_t                flags)
 {
-	const Map & map = egbase.map();
+	Widelands::Map const & map = egbase.map();
 	if (not player or player->see_all()) for (uint32_t y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-		FCoords f(Coords(viewpoint.x, viewpoint.y + y), 0);
+		Widelands::FCoords f(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
-		Map::Index i = Map::get_index(f, mapwidth);
+		Widelands::Map::Index i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 			*reinterpret_cast<T *>(pix) = static_cast<T>
@@ -289,17 +293,17 @@ static void draw_minimap_int
 				 (format, egbase, f, flags, f.field->get_owned_by(), true));
 		}
 	} else {
-		const Player::Field * const player_fields = player->fields();
+		Widelands::Player::Field const * const player_fields = player->fields();
 		for (uint32_t y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-		FCoords f(Coords(viewpoint.x, viewpoint.y + y), 0);
+		Widelands::FCoords f(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
-		Map::Index i = Map::get_index(f, mapwidth);
+		Widelands::Map::Index i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
-				const Player::Field & player_field = player_fields[i];
-				const Vision vision = player_field.vision;
+				const Widelands::Player::Field & player_field = player_fields[i];
+				const Widelands::Vision vision = player_field.vision;
 				*reinterpret_cast<T *>(pix) = static_cast<T>
 					(vision ?
 					 calc_minimap_color
@@ -318,8 +322,8 @@ viewpt is the field at the top left of the rectangle.
 ===============
 */
 void Surface::draw_minimap
-(const Editor_Game_Base  & egbase,
- const Player * const     player,
+(Widelands::Editor_Game_Base const &       egbase,
+ Widelands::Player           const * const player,
  const Rect                rc,
  const Point               viewpt,
  const uint32_t                flags)
@@ -327,7 +331,7 @@ void Surface::draw_minimap
 	//TODO: this const_cast is evil and should be exorcised.
 	Uint8 * const pixels = const_cast<Uint8 *>(static_cast<const Uint8 *>(get_pixels()));
 	const uint16_t pitch = get_pitch();
-	const X_Coordinate w = egbase.map().get_width();
+	Widelands::X_Coordinate const w = egbase.map().get_width();
 	switch (format().BytesPerPixel) {
 	case sizeof(Uint16):
 		draw_minimap_int<Uint16>
@@ -443,7 +447,7 @@ Free all resources
 */
 AnimationGfx::~AnimationGfx()
 {
-	for (Player_Number i = 0; i <= MAX_PLAYERS; ++i) {
+	for (Widelands::Player_Number i = 0; i <= MAX_PLAYERS; ++i) {
       std::vector<Surface*>& frames = m_plrframes[i];
 		for (uint32_t j = 0; j < frames.size(); ++j)
          delete frames[j];

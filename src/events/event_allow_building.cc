@@ -32,6 +32,8 @@
 
 #include "log.h"
 
+namespace Widelands {
+
 static const int32_t EVENT_VERSION = 1;
 
 /*
@@ -105,3 +107,5 @@ Event::State Event_Allow_Building::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
+
+};

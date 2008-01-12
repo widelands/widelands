@@ -21,6 +21,7 @@
 
 #include <vector>
 
+namespace Widelands {
 
 MapObjectiveManager::MapObjectiveManager() {}
 
@@ -66,3 +67,5 @@ void MapObjectiveManager::delete_objective(const std::string & name) {
 		}
 	}
 }
+
+};

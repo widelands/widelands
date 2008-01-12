@@ -29,15 +29,18 @@
 #include <string>
 #include <vector>
 
-class Flag;
-class Interactive_Player;
-class Tribe_Descr;
-class Profile;
 namespace UI {struct Window;};
+struct BuildingHints;
 struct EncodeData;
+struct Interactive_Player;
+struct Profile;
+
+namespace Widelands {
+
+class Flag;
+class Tribe_Descr;
 
 class Building;
-class BuildingHints;
 
 #define LOW_PRIORITY             2
 #define DEFAULT_PRIORITY         4
@@ -47,7 +50,7 @@ class BuildingHints;
  * Common to all buildings!
  */
 struct Building_Descr : public Map_Object_Descr {
-   friend class Widelands_Map_Buildingdata_Data_Packet;
+	friend struct Map_Buildingdata_Data_Packet;
 
 	struct CostItem {
 		std::string name;   // name of ware
@@ -132,7 +135,7 @@ public:
 
 class Building : public PlayerImmovable {
 	friend class Building_Descr;
-   friend class Widelands_Map_Buildingdata_Data_Packet;
+   friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Building_Descr)
 
@@ -239,8 +242,9 @@ protected:
 	void draw_help
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
-	virtual UI::Window* create_options_window(Interactive_Player* plr,
-		UI::Window** registry) = 0;
+	virtual UI::Window* create_options_window
+		(Interactive_Player * plr, UI::Window * * registry)
+		= 0;
 
 	UI::Window* m_optionswindow;
 	Coords    m_position;
@@ -260,6 +264,8 @@ protected:
 
 	int32_t m_priority; // base priority
 	std::map<int32_t, int32_t> m_ware_priorities;
+};
+
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2006 by the Widelands Development Team
+ * Copyright (C) 2004-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,8 @@
 
 #include "constants.h"
 #include "md5.h"
-#include "streamread.h"
-#include "streamwrite.h"
+#include "widelands_streamread.h"
+#include "widelands_streamwrite.h"
 
 #include <SDL_net.h>
 
@@ -31,8 +31,10 @@
 #include <string>
 #include <vector>
 
-class Game;
+namespace Widelands {
+struct Game;
 class PlayerCommand;
+};
 class PlayerDescriptionGroup;
 class Serializer;
 class Deserializer;
@@ -80,7 +82,7 @@ struct NetGame {
 
 	virtual void handle_network ()=0;
 
-	virtual void send_player_command (PlayerCommand*)=0;
+	virtual void send_player_command (Widelands::PlayerCommand *) = 0;
 	virtual void send_chat_message (Chat_Message)=0;
 
 	bool have_chat_message();
@@ -97,7 +99,7 @@ protected:
 		PH_INGAME
 	}                            phase;
 
-	Game                       * game;
+	Widelands::Game                       * game;
 
 	uint32_t                          playernum;
 	uint32_t                        net_game_time;
@@ -129,7 +131,7 @@ struct NetHost:public NetGame {
 
 	virtual void handle_network ();
 
-	virtual void send_player_command (PlayerCommand*);
+	virtual void send_player_command (Widelands::PlayerCommand *);
 	virtual void send_chat_message (Chat_Message);
 
 	virtual void syncreport (const md5_checksum&);
@@ -153,7 +155,7 @@ private:
 	TCPsocket                   svsock;
 	SDLNet_SocketSet            sockset;
 
-	std::queue<PlayerCommand *> cmds;
+	std::queue<Widelands::PlayerCommand *> cmds;
 	std::vector<Client>         clients;
 
 	Serializer                * serializer;
@@ -177,7 +179,7 @@ struct NetClient:public NetGame {
 
 	virtual void handle_network ();
 
-	virtual void send_player_command (PlayerCommand*);
+	virtual void send_player_command (Widelands::PlayerCommand *);
 	virtual void send_chat_message (Chat_Message);
 
 	virtual void syncreport (const md5_checksum&);
@@ -192,7 +194,7 @@ private:
 	Deserializer   * deserializer;
 };
 
-struct Serializer : public StreamWrite {
+struct Serializer : public Widelands::StreamWrite {
 	Serializer ();
 	~Serializer ();
 
@@ -228,17 +230,16 @@ private:
 	std::vector<uint8_t> buffer;
 };
 
-struct Deserializer : public StreamRead {
+struct Deserializer : public Widelands::StreamRead {
 	Deserializer ();
 	~Deserializer ();
 
 	int32_t read_packet (TCPsocket);
 
-	bool avail ()
-	{return !queue.empty();}
+	bool avail () const throw () {return not queue.empty();}
 
 	size_t Data(void* const data, const size_t bufsize);
-	bool EndOfFile();
+	bool EndOfFile() const;
 
 	char getchar ();
 	int16_t getshort ();

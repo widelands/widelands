@@ -21,12 +21,15 @@
 #define included_immovable_h
 
 #include "animation.h"
-#include "geometry.h"
 #include "instances.h"
+#include "widelands_geometry.h"
+
+struct Profile;
+
+namespace Widelands {
 
 class Economy;
 class Flag;
-class Profile;
 class Tribe_Descr;
 class Worker;
 
@@ -71,7 +74,7 @@ struct ImmovableAction;
 Immovable represents a standard immovable such as trees or stones.
 */
 struct Immovable_Descr : public Map_Object_Descr {
-	friend class Widelands_Map_Immovabledata_Data_Packet; // For writing (get_program)
+	friend struct Map_Immovabledata_Data_Packet; // For writing (get_program)
 
 	typedef std::map<std::string, ImmovableProgram*> ProgramMap;
 
@@ -107,7 +110,7 @@ protected:
 class Immovable : public BaseImmovable {
 	friend class Immovable_Descr;
 	friend class ImmovableProgram;
-	friend class Widelands_Map_Immovabledata_Data_Packet; // for writing (obsolete since build-11)
+	friend struct Map_Immovabledata_Data_Packet; // for writing (obsolete since build-11)
 
 	MO_DESCR(Immovable_Descr);
 
@@ -159,7 +162,7 @@ protected:
 	// Load/save support
 protected:
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead&);
+		virtual void load(FileRead &);
 		virtual void load_pointers();
 		virtual void load_finish();
 	};
@@ -168,8 +171,9 @@ public:
 	// Remove as soon as we fully support the new system
 	virtual bool has_new_save_support() {return true;}
 
-	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
-	static Map_Object::Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, FileRead&);
+	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
+	static Map_Object::Loader * load
+		(Editor_Game_Base *, Map_Map_Object_Loader *, FileRead &);
 };
 
 
@@ -214,5 +218,6 @@ private:
 	std::vector<Worker *> m_workers;
 };
 
+};
 
 #endif // included_immovable_h

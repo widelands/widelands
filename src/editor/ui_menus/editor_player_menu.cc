@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,7 +64,7 @@ m_remove_last_player
    int32_t width=20;
    int32_t posy= 0;
 
-	Tribe_Descr::get_all_tribenames(m_tribes);
+	Widelands::Tribe_Descr::get_all_tribenames(m_tribes);
 
    set_inner_size(375, 135);
 
@@ -80,7 +80,7 @@ m_remove_last_player
 
    m_posy=posy;
 
-	for (Player_Number i = 0; i < MAX_PLAYERS; ++i) {
+	for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i) {
       m_plr_names[i]=0;
       m_plr_set_pos_buts[i]=0;
       m_plr_set_tribes_buts[i]=0;
@@ -110,17 +110,25 @@ Update all
 void Editor_Player_Menu::update() {
 	if (is_minimal()) return;
 
-	Map & map =
+	Widelands::Map & map =
 		dynamic_cast<const Editor_Interactive &>(*get_parent()).egbase().map();
-	const Player_Number nr_players = map.get_nrplayers();
-   std::string text="";
-   if (nr_players/10) text+=static_cast<char>(nr_players/10 + 0x30);
-   text+=static_cast<char>((nr_players%10) + 0x30);
-
-   m_nr_of_players_ta->set_text(text.c_str());
+	Widelands::Player_Number const nr_players = map.get_nrplayers();
+	{
+		assert(nr_players <= 99); //  2 decimal digits
+		char text[3];
+		if (char const nr_players_10 = nr_players / 10) {
+			text[0] = '0' + nr_players_10;
+			text[1] = '0' + nr_players % 10;
+			text[2] = '\0';
+		} else {
+			text[0] = '0' + nr_players;
+			text[1] = '\0';
+		}
+		m_nr_of_players_ta->set_text(text);
+	}
 
    // Now remove all the unneeded stuff
-	for (Player_Number i = nr_players; i < MAX_PLAYERS; ++i) {
+	for (Widelands::Player_Number i = nr_players; i < MAX_PLAYERS; ++i) {
          delete m_plr_names[i];
          m_plr_names[i]=0;
          delete m_plr_set_pos_buts[i];
@@ -153,7 +161,8 @@ void Editor_Player_Menu::update() {
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
 			m_plr_set_tribes_buts[p - 1] =
-				new UI::IDButton<Editor_Player_Menu, const Player_Number>
+				new UI::IDButton
+				<Editor_Player_Menu, Widelands::Player_Number const>
 				(this,
 				 posx, posy, 140, size,
 				 0,
@@ -170,9 +179,10 @@ void Editor_Player_Menu::update() {
 		}
 
       // Set Starting pos button
-      if (!m_plr_set_pos_buts[p - 1]) {
+		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =
-				new UI::IDButton<Editor_Player_Menu, const Player_Number>
+				new UI::IDButton
+				<Editor_Player_Menu, Widelands::Player_Number const>
 				(this,
 				 posx, posy, size, size,
 				 0,
@@ -181,12 +191,10 @@ void Editor_Player_Menu::update() {
 				 std::string());
           posx+=size+spacing;
 		}
-      text="pics/fsel_editor_set_player_";
-      text+=static_cast<char>(p / 10 + 0x30);
-      text+=static_cast<char>(p % 10 + 0x30);
-      text+="_pos.png";
-		m_plr_set_pos_buts[p - 1]->set_pic
-			(g_gr->get_picture(PicMod_Game, text.c_str()));
+		char text[] = "pics/fsel_editor_set_player_00_pos.png";
+		text[28] += p / 10;
+		text[29] += p % 10;
+		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->get_picture(PicMod_Game, text));
       posy+=size+spacing;
 	}
    set_inner_size(get_inner_w(), posy+spacing);
@@ -195,17 +203,18 @@ void Editor_Player_Menu::update() {
 void Editor_Player_Menu::clicked_add_player() {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
-	Map & map = parent.egbase().map();
-	const Player_Number nr_players = map.get_nrplayers() + 1;
+	Widelands::Map & map = parent.egbase().map();
+	Widelands::Player_Number const nr_players = map.get_nrplayers() + 1;
 	assert(nr_players <= MAX_PLAYERS);
-      // register new default name for this players
-      char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
-      char c2= (nr_players%10) + 0x30;
-      std::string name=_("Player ");
-      if (c1) name.append(1, c1);
-      name.append(1, c2);
-		map.set_nrplayers(nr_players);
+	map.set_nrplayers(nr_players);
+	{ //  register new default name for this players
+		assert(nr_players <= 99); //  2 decimal digits
+		std::string name=_("Player ");
+		if (char const nr_players_10 = nr_players / 10)
+			name += '0' + nr_players_10;
+		name += '0' + nr_players % 10;
 		map.set_scenario_player_name(nr_players, name);
+	}
 		map.set_scenario_player_tribe(nr_players, m_tribes[0]);
 		parent.set_need_save(true);
 	m_add_player        .set_enabled(nr_players < MAX_PLAYERS);
@@ -217,16 +226,16 @@ void Editor_Player_Menu::clicked_add_player() {
 void Editor_Player_Menu::clicked_remove_last_player() {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
-	Map & map = parent.egbase().map();
-	const Player_Number old_nr_players = map.get_nrplayers();
-	const Player_Number nr_players = old_nr_players - 1;
+	Widelands::Map & map = parent.egbase().map();
+	Widelands::Player_Number const old_nr_players = map.get_nrplayers();
+	Widelands::Player_Number const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
 	if (not parent.is_player_tribe_referenced(nr_players)) {
-		if (const Coords sp = map.get_starting_pos(old_nr_players)) {
+		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			char picsname[] = "pics/editor_player_??_starting_pos.png";
-			picsname[19] = static_cast<char>(old_nr_players / 10 + 0x30);
-			picsname[20] = static_cast<char>(old_nr_players % 10 + 0x30);
+			char picsname[] = "pics/editor_player_00_starting_pos.png";
+			picsname[19] += old_nr_players / 10;
+			picsname[20] += old_nr_players % 10;
 			map.overlay_manager().remove_overlay
 				(sp, g_gr->get_picture(PicMod_Game, picsname));
 		}
@@ -271,7 +280,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
    // Tribe button has been clicked
 	if (not parent.is_player_tribe_referenced(n + 1)) {
       std::string t = m_plr_set_tribes_buts[n]->get_title();
-		if (!Tribe_Descr::exists_tribe(t))
+		if (!Widelands::Tribe_Descr::exists_tribe(t))
 			throw wexception
 				("Map defines tribe %s, but it doesn't exist!", t.c_str());
       uint32_t i;
@@ -302,15 +311,19 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
    // jump to the current field
-	Map & map =parent.egbase().map();
-   if (const Coords sp = map.get_starting_pos(n)) parent.move_view_to(sp);
+	Widelands::Map & map =parent.egbase().map();
+	if (Widelands::Coords const sp = map.get_starting_pos(n))
+		parent.move_view_to(sp);
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
 	if (parent.egbase().get_player(n))
-		if (const Coords sp = map.get_starting_pos(n))
-			if (dynamic_cast<const Building *> (map[sp].get_immovable())) return;
+		if (const Widelands::Coords sp = map.get_starting_pos(n))
+			if
+				(dynamic_cast<Widelands::Building const *>
+				 (map[sp].get_immovable()))
+				return;
 
    // Select tool set mplayer
 	parent.select_tool(parent.tools.set_starting_pos, Editor_Tool::First);
@@ -334,7 +347,7 @@ void Editor_Player_Menu::name_changed(int32_t m) {
    std::string text=m_plr_names[m]->get_text();
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
-	Map & map = parent.egbase().map();
+	Widelands::Map & map = parent.egbase().map();
    if (text=="") {
 		text = map.get_scenario_player_name(m + 1);
       m_plr_names[m]->set_text(text.c_str());

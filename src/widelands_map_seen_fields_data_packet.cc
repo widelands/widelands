@@ -19,28 +19,25 @@
 
 #include "widelands_map_seen_fields_data_packet.h"
 
-#include "fileread.h"
-#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 
 #include "log.h"
 
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 2
 
 
-Widelands_Map_Seen_Fields_Data_Packet::~Widelands_Map_Seen_Fields_Data_Packet()
-{}
-
-
-void Widelands_Map_Seen_Fields_Data_Packet::Read
+void Map_Seen_Fields_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const)
+ Map_Map_Object_Loader * const)
 throw (_wexception)
 {
    if (skip)
@@ -69,8 +66,8 @@ throw (_wexception)
 				player->m_fields[i].vision = see ? 1 : 0;
 			else if (see)
 				log
-					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: "
-					 "Player %u, which does not exist, sees field %u.\n",
+					("Map_Seen_Fields_Data_Packet::Read: WARNING: Player %u, which "
+					 "does not exist, sees field %u.\n",
 					 j + 1, i);
 		}
 	} else if (packet_version == CURRENT_PACKET_VERSION)
@@ -82,24 +79,20 @@ throw (_wexception)
 					player->m_fields[i].vision = see ? 1 : 0;
 				else if (see)
 					log
-						("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: "
-						 "Player %u, which does not exist, sees field %u.\n",
+						("Map_Seen_Fields_Data_Packet::Read: WARNING: Player %u, "
+						 "which does not exist, sees field %u.\n",
 						 j + 1, i);
 			}
 		}
 	else
 		throw wexception
-			("Unknown version in Widelands_Map_Seen_Fields_Data_Packet: %u",
+			("Unknown version in Map_Seen_Fields_Data_Packet: %u",
 			 packet_version);
 }
 
-/*
- * Write Function
- */
-void Widelands_Map_Seen_Fields_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const)
+
+void Map_Seen_Fields_Data_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
    FileWrite fw;
@@ -123,3 +116,5 @@ throw (_wexception)
 
    fw.Write(fs, "binary/seen_fields");
 }
+
+};

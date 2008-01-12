@@ -41,13 +41,14 @@ m_callback(0)
  * Returns the currently registered overlays and the buildhelp for a node.
  */
 uint8_t Overlay_Manager::get_overlays
-(const FCoords c, Overlay_Info * const overlays) const
+(Widelands::FCoords const c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
 
 	uint8_t num_ret = 0;
 
-	const Registered_Overlays_Map & overlay_map = m_overlays[TCoords<>::None];
+	const Registered_Overlays_Map & overlay_map =
+		m_overlays[Widelands::TCoords<>::None];
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
 	while (it != overlay_map.end() and it->first == c and it->second.level <= 5)
 	{
@@ -59,7 +60,7 @@ uint8_t Overlay_Manager::get_overlays
 	if (m_showbuildhelp) {
 		const uint8_t buildhelp_overlay_index =
 			c.field->get_buildhelp_overlay_index();
-		if (buildhelp_overlay_index < Field::Buildhelp_None) {
+		if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
 			overlays[num_ret] = m_buildhelp_infos[buildhelp_overlay_index];
 			if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
 		}
@@ -78,10 +79,10 @@ end:
  * Returns the currently registered overlays for a triangle.
  */
 uint8_t Overlay_Manager::get_overlays
-(const TCoords<> c, Overlay_Info * const overlays) const
+(Widelands::TCoords<> const c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
-	assert(c.t == TCoords<>::D or c.t == TCoords<>::R);
+	assert(c.t == Widelands::TCoords<>::D or c.t == Widelands::TCoords<>::R);
 
 	uint8_t num_ret = 0;
 
@@ -121,35 +122,32 @@ void Overlay_Manager::reset() {
 /*
  * Recalculates all calculatable overlays for fields
  */
-void Overlay_Manager::recalc_field_overlays(const FCoords fc) {
-	Field::Buildhelp_Index index = Field::Buildhelp_None;
-	const FieldCaps caps =
-		m_callback
-		?
-		static_cast<FieldCaps>
+void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
+	Widelands::FieldCaps const caps =
+		m_callback ?
+		static_cast<Widelands::FieldCaps>
 		(m_callback(fc, m_callback_data, m_callback_data_i))
 		:
 		fc.field->get_caps();
 
-	if (caps & BUILDCAPS_MINE)
-		index = Field::Buildhelp_Mine;
-	else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
-		index = Field::Buildhelp_Big;
-	else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
-		index = Field::Buildhelp_Medium;
-	else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
-		index = Field::Buildhelp_Small;
-	else if (caps & BUILDCAPS_FLAG)
-		index = Field::Buildhelp_Flag;
-
-	fc.field->set_buildhelp_overlay_index(index);
+	fc.field->set_buildhelp_overlay_index
+		(caps & Widelands::BUILDCAPS_MINE                                      ?
+		 Widelands::Field::Buildhelp_Mine                                      :
+		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG    ?
+		 Widelands::Field::Buildhelp_Big                                       :
+		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
+		 Widelands::Field::Buildhelp_Medium                                    :
+		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL  ?
+		 Widelands::Field::Buildhelp_Small                                     :
+		 caps & Widelands::BUILDCAPS_FLAG                                      ?
+		 Widelands::Field::Buildhelp_Flag : Widelands::Field::Buildhelp_None);
 }
 
 /*
  * finally, register a new overlay
  */
 void Overlay_Manager::register_overlay
-(const TCoords<> c,
+(Widelands::TCoords<> const c,
  const int32_t picid,
  const int32_t level,
  Point            hotspot,
@@ -181,7 +179,7 @@ void Overlay_Manager::register_overlay
 		}
 
 	overlay_map.insert
-		(std::pair<const Coords, Registered_Overlays>
+		(std::pair<Widelands::Coords const, Registered_Overlays>
 		 (c, Registered_Overlays(jobid, picid, hotspot, level)));
 
    // Now manually sort, so that they are ordered
@@ -209,7 +207,9 @@ void Overlay_Manager::register_overlay
 /*
  * remove one (or many) overlays from a node or triangle
  */
-void Overlay_Manager::remove_overlay(const TCoords<> c, const int32_t picid) {
+void Overlay_Manager::remove_overlay
+(Widelands::TCoords<> const c, int32_t const picid)
+{
 	assert(c.t <= 2);
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
@@ -244,20 +244,21 @@ void Overlay_Manager::remove_overlay(const Job_Id jobid) {
  * Register road overlays
  */
 void Overlay_Manager::register_road_overlay
-(const Coords c, const uint8_t where, const Job_Id jobid)
+(Widelands::Coords const c, uint8_t const where, Job_Id const jobid)
 {
 	const Registered_Road_Overlays overlay = {jobid, where};
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
 	if (it == m_road_overlays.end())
 		m_road_overlays.insert
-		(std::pair<const Coords, Registered_Road_Overlays>(c, overlay));
+		(std::pair<const Widelands::Coords,
+		 Registered_Road_Overlays>(c, overlay));
 	else it->second = overlay;
 }
 
 /*
  * Remove road overlay
  */
-void Overlay_Manager::remove_road_overlay(const Coords c) {
+void Overlay_Manager::remove_road_overlay(const Widelands::Coords c) {
 	const Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
 	if (it != m_road_overlays.end()) m_road_overlays.erase(it);
 }
@@ -265,7 +266,7 @@ void Overlay_Manager::remove_road_overlay(const Coords c) {
 /*
  * remove all overlays with this jobid
  */
-void Overlay_Manager::remove_road_overlay(const Job_Id jobid) {
+void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.begin();
 	const Registered_Road_Overlays_Map::const_iterator end =
 		m_road_overlays.end();
@@ -303,7 +304,7 @@ void Overlay_Manager::load_graphics() {
 	}
 
 	const Overlay_Info * const buildhelp_infos_end =
-		buildhelp_info + Field::Buildhelp_None;
+		buildhelp_info + Widelands::Field::Buildhelp_None;
 	for (;;) { // The other buildhelp overlays.
 		++buildhelp_info, ++filename;
 		if (buildhelp_info == buildhelp_infos_end) break;

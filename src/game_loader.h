@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,10 @@
 
 #include <stdint.h>
 
-class FileSystem;
+struct FileSystem;
+
+namespace Widelands {
+
 class Game;
 class Game_Preload_Data_Packet;
 
@@ -32,7 +35,6 @@ class Game_Preload_Data_Packet;
  */
 struct Game_Loader {
 	Game_Loader(FileSystem &, Game* game);
-      ~Game_Loader();
 
       int32_t preload_game(Game_Preload_Data_Packet*);
       int32_t load_game();
@@ -40,6 +42,8 @@ struct Game_Loader {
 private:
 	FileSystem & m_fs;
       Game* m_game;
+};
+
 };
 
 #endif

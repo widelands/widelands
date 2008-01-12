@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,10 @@
 
 #include <vector>
 
+namespace Widelands {
 class Editor_Game_Base;
 class Player;
+};
 class Surface;
 
 /**
@@ -80,42 +82,42 @@ struct RenderTarget {
 	 * is not redrawn at all.
 	 */
 	void rendermap
-		(const Editor_Game_Base & egbase,
-		 const Player           & player,
-		 Point                    viewofs,
-		 const bool               draw_all);
+		(Widelands::Editor_Game_Base const &       egbase,
+		 Widelands::Player           const &       player,
+		 Point                                     viewofs,
+		 bool                                const draw_all);
 
 	/**
 	 * Same as above but not from a player's point of view. Used in game when
 	 * rendering for a player that sees all and the editor.
 	 */
 	void rendermap
-		(const Editor_Game_Base & egbase,
-		 Point                    viewofs,
-		 const bool               draw_all);
+		(Widelands::Editor_Game_Base const & egbase,
+		 Point                               viewofs,
+		 bool                                draw_all);
 
 	/**
 	 * Render the minimap. If player is not 0, it renders from that player's
 	 * point of view.
 	 */
 	void renderminimap
-		(const Editor_Game_Base & egbase,
-		 const Player * const     player,
-		 const Point              viewpoint,
-		 const uint32_t           flags);
+		(Widelands::Editor_Game_Base const & egbase,
+		 Widelands::Player           const * player,
+		 Point                               viewpoint,
+		 uint32_t                            flags);
 
 	void drawanim
-		(Point                dst,
-		 const uint32_t       animation,
-		 const uint32_t       time,
-		 const Player * const player = 0);
+		(Point                     dst,
+		 uint32_t                  animation,
+		 uint32_t                  time,
+		 Widelands::Player const * = 0);
 
 	void drawanimrect
-		(Point                dst,
-		 const uint32_t       animation,
-		 const uint32_t       time,
-		 const Player * const player,
-		 Rect                 srcrc);
+		(Point                     dst,
+		 uint32_t                  animation,
+		 uint32_t                  time,
+		 Widelands::Player const *,
+		 Rect                      srcrc);
 
 	void reset();
 
@@ -123,9 +125,6 @@ protected:
 	bool clip(Rect & r) const throw ();
 
 	void doblit(Point dst, Surface * const src, Rect srcrc);
-
-	Sint8 node_brightness
-		(const Time gametime, const Time last_seen, const Vision, Sint8 result);
 
 	///Only needed, when this is a mapview
 	Surface* m_ground_surface;

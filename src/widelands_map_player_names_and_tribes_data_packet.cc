@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,33 +26,33 @@
 #include "widelands_map_data_packet_ids.h"
 #include "world.h"
 
+namespace Widelands {
+
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Player_Names_And_Tribes_Data_Packet::~Widelands_Map_Player_Names_And_Tribes_Data_Packet() {
-}
+
+Map_Player_Names_And_Tribes_Data_Packet::
+	~Map_Player_Names_And_Tribes_Data_Packet
+	()
+{}
 
 /*
  * Read Function
  *
  * this is a scenario packet, it might be that we have to skip it
  */
-void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Read
+void Map_Player_Names_And_Tribes_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const)
+ Map_Map_Object_Loader * const)
 throw (_wexception)
 {
    Pre_Read(fs, egbase->get_map(), skip);
 }
 
-/*
- * Pre Read function
- */
-void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
+
+void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 (FileSystem & fs, Map* map, const bool skip)
 {
 	if (skip) return;
@@ -77,13 +77,11 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 			 packet_version);
 }
 
-/*
- * Write Function
- */
-void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write
+
+void Map_Player_Names_And_Tribes_Data_Packet::Write
 (FileSystem & fs,
  Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const)
+ Map_Map_Object_Saver * const)
 throw (_wexception)
 {
    Profile prof;
@@ -105,3 +103,5 @@ throw (_wexception)
 
    prof.write("player_names", false, fs);
 }
+
+};

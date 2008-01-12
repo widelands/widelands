@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 
 
 Trigger_Time_Option_Menu::Trigger_Time_Option_Menu
-(Editor_Interactive & parent, Trigger_Time & trigger)
+(Editor_Interactive & parent, Widelands::Trigger_Time & trigger)
 :
 UI::Window(&parent, 0, 0, 164, 180, _("Trigger Option Menu").c_str()),
 m_trigger (trigger)
@@ -257,8 +257,9 @@ void Trigger_Time_Option_Menu::clicked(int32_t i) {
  */
 void Trigger_Time_Option_Menu::update() {
 	for (size_t i = 0; i < 6; ++i) {
-      std::string str;
-      str.append(1, static_cast<char>(m_values[i]+0x30));
+		char str[2];
+		str[0] = '0' + m_values[i];
+		str[1] = '\0';
       m_textareas[i]->set_text(str);
 	}
 }

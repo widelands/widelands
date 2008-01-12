@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,15 +30,19 @@ struct Editor_Set_Height_Tool : public Editor_Tool {
 		: Editor_Tool(*this, *this), m_interval(10, 10)
 	{}
 
-	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl
+		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_set_height.png";}
 
-	interval<Field::Height> get_interval() const throw () {return m_interval;}
-	void set_interval(const interval<Field::Height> i) throw () {m_interval = i;}
+	interval<Widelands::Field::Height> get_interval() const throw () {
+		return m_interval;
+	}
+	void set_interval(const interval<Widelands::Field::Height> i) throw ()
+	{m_interval = i;}
 
 private:
-	interval<Field::Height> m_interval;
+	interval<Widelands::Field::Height> m_interval;
 };
 
 #endif

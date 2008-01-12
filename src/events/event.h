@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,11 @@
 #include <map>
 #include <string>
 
+struct Section;
+
+namespace Widelands {
+
 class Game;
-class Section;
 class Editor_Game_Base;
 class EventReferencer;
 
@@ -32,7 +35,7 @@ class EventReferencer;
  * Event is a in game event of some kind
  */
 struct Event {
-   friend class Widelands_Map_Event_Data_Packet;
+	friend struct Map_Event_Data_Packet;
 
 	enum State {
          INIT,
@@ -73,6 +76,8 @@ protected:
 private:
 	std::string        m_name;
 	EventReferencerMap m_referencers;
+};
+
 };
 
 #endif

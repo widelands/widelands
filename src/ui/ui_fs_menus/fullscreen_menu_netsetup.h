@@ -28,7 +28,6 @@
 #include "ui_table.h"
 
 #include <list>
-#include <stdint.h>
 #include <string>
 
 #include "fullscreen_menu_base.h"

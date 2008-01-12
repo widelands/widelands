@@ -133,8 +133,8 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
    FileSystem* fs = g_fs->MakeSubFileSystem(name);
-	Game_Loader gl(*fs, m_parent->get_game());
-   Game_Preload_Data_Packet gpdp;
+	Widelands::Game_Loader gl(*fs, m_parent->get_game());
+	Widelands::Game_Preload_Data_Packet gpdp;
    gl.preload_game(&gpdp); // This has worked before, no problem
 
    char* fname = strdup(FileSystem::FS_Filename(name));
@@ -172,7 +172,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
    // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
 
-   Game_Preload_Data_Packet gpdp;
+	Widelands::Game_Preload_Data_Packet gpdp;
 
 	for
 		(filenameset_t::iterator pname = m_gamefiles.begin();
@@ -184,7 +184,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
       FileSystem* fs = 0;
       try {
          fs = g_fs->MakeSubFileSystem(name);
-			Game_Loader gl(*fs, m_parent->get_game());
+			Widelands::Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
 			char* fname = strdup(FileSystem::FS_Filename(name));
 			FileSystem::FS_StripExtension(fname);

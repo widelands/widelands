@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,34 +21,38 @@
 #define __S__WIDELANDS_MAP_DATA_PACKET_H
 
 #include "wexception.h"
+#include "widelands_filewrite.h"
 
 class FileSystem;
+
+namespace Widelands {
+
 class Editor_Game_Base;
-class Widelands_Map_Map_Object_Loader;
-class Widelands_Map_Map_Object_Saver;
+class Map_Map_Object_Loader;
+class Map_Map_Object_Saver;
 
 /** This class represents a data packet in a widelands map file. it is an
  * abstract base class
 */
-struct Widelands_Map_Data_Packet {
-      virtual ~Widelands_Map_Data_Packet() {m_skip=false;}
+struct Map_Data_Packet {
+	virtual ~Map_Data_Packet() {m_skip = false;}
 
 	virtual void Read
 		(FileSystem &,
 		 Editor_Game_Base*,
 		 const bool,
-		 Widelands_Map_Map_Object_Loader * const = 0)
+		 Map_Map_Object_Loader * = 0)
 		throw (_wexception)
 		= 0;
 	virtual void Write
-		(FileSystem &,
-		 Editor_Game_Base*,
-		 Widelands_Map_Map_Object_Saver * const  = 0)
+		(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
 		throw (_wexception)
 		= 0;
 
 private:
       bool m_skip;
+};
+
 };
 
 #endif

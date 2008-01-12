@@ -46,12 +46,15 @@
 struct WatchWindowView {
 	Point view_point;
 	Interactive_Player *parent;
-	Object_Ptr tracking; //  if non-null, we're tracking a Bob
+	Widelands::Object_Ptr tracking; //  if non-null, we're tracking a Bob
 };
 
-class WatchWindow : public UI::Window {
-public:
-	WatchWindow(Interactive_Player *parent, int32_t x, int32_t y, int32_t w, int32_t h, Coords coords, bool single_window=false);
+struct WatchWindow : public UI::Window {
+	WatchWindow
+		(Interactive_Player & parent,
+		 int32_t x, int32_t y, int32_t w, int32_t h,
+		 Widelands::Coords,
+		 bool single_window = false);
 	~WatchWindow();
 
 	UI::Signal1<Point> warp_mainview;
@@ -75,7 +78,7 @@ protected:
 	void stop_tracking_by_drag(int32_t x, int32_t y);
 
 private:
-	Game                           * m_game;
+	Widelands::Game                * m_game;
 	Map_View                         m_mapview;
 	bool m_single_window;
 	uint32_t last_visit;
@@ -96,13 +99,17 @@ WatchWindow::WatchWindow
 Initialize a watch window.
 ===============
 */
-WatchWindow::WatchWindow(Interactive_Player *parent, int32_t x, int32_t y, int32_t w, int32_t h, Coords coords, bool single_window)
+WatchWindow::WatchWindow
+(Interactive_Player &       parent,
+ int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+ Widelands::Coords    const coords,
+ bool                 const single_window)
 :
-UI::Window(parent, x, y, w, h, _("Watch").c_str()),
-m_game(parent->get_game()),
-m_mapview(this, 0, 0, 200, 166, *parent),
+UI::Window     (&parent, x, y, w, h, _("Watch").c_str()),
+m_game         (parent.get_game()),
+m_mapview      (this, 0, 0, 200, 166, parent),
 m_single_window(single_window),
-last_visit(m_game->get_gametime()),
+last_visit     (m_game->get_gametime()),
 
 	// UI::Buttons
 
@@ -140,9 +147,9 @@ m_goto
 			 &WatchWindow::close_cur_view, this,
 			 _("Close"));
 	}
-	m_mapview.fieldclicked.set(parent, &Interactive_Player::field_action);
+	m_mapview.fieldclicked.set(&parent, &Interactive_Player::field_action);
 	m_mapview.warpview.set(this, &WatchWindow::stop_tracking_by_drag);
-	warp_mainview.set(parent, &Interactive_Base::move_view_to_point);
+	warp_mainview.set(&parent, &Interactive_Base::move_view_to_point);
 
 	add_view(coords);
 	next_view(true);
@@ -258,14 +265,14 @@ point is *not* a coordinate, but a map-global position in pixels.
 */
 void WatchWindow::start_tracking(Point pos)
 {
-	Map & map = *m_game->get_map();
-	std::vector<Bob*> bobs;
+	Widelands::Map & map = *m_game->get_map();
+	std::vector<Widelands::Bob *> bobs;
 
 	MapviewPixelFunctions::normalize_pix(map, pos);
 
 	// Scan progressively larger circles around the given position for suitable bobs
 	for
-		(Area<FCoords> area
+		(Widelands::Area<Widelands::FCoords> area
 		 (map.get_fcoords
 		  (MapviewPixelFunctions::calc_node_and_triangle(map, pos.x, pos.y).node),
 		  2); area.radius <= 32; area.radius *= 2)
@@ -273,10 +280,10 @@ void WatchWindow::start_tracking(Point pos)
 
 	// Find the bob closest to us
 	int32_t closest_dist = -1;
-	Bob* closest = 0;
+	Widelands::Bob * closest = 0;
 
 	for (uint32_t i = 0; i < bobs.size(); ++i) {
-		Bob* bob = bobs[i];
+		Widelands::Bob * const bob = bobs[i];
 		Point p;
 
 		MapviewPixelFunctions::get_pix(map, bob->get_position(), p.x, p.y);
@@ -304,9 +311,9 @@ Otherwise, start tracking the nearest bob from our current position.
 void WatchWindow::toggle_tracking()
 {
 
-	Map_Object* obj = m_views[m_cur_index].tracking.get(m_game);
-
-	if (obj)
+	if
+		(Widelands::Map_Object const * const obj =
+		 m_views[m_cur_index].tracking.get(m_game))
 		m_views[m_cur_index].tracking = 0;
 	else start_tracking
 		(m_mapview.get_viewpoint()
@@ -347,7 +354,8 @@ void WatchWindow::think()
 		return;
 	}
 
-	if (upcast(Bob, bob, m_views[m_cur_index].tracking.get(m_game))) {
+	if (upcast(Widelands::Bob, bob, m_views[m_cur_index].tracking.get(m_game)))
+	{
 		Point pos;
 
 		MapviewPixelFunctions::get_pix
@@ -386,7 +394,7 @@ show_watch_window
 Open a watch window.
 ===============
 */
-void show_watch_window(Interactive_Player *parent, Coords coords)
+void show_watch_window(Interactive_Player & parent, Coords coords)
 {
 	Section *s = g_options.pull_section("global");
 	WatchWindow* win;
@@ -399,6 +407,6 @@ void show_watch_window(Interactive_Player *parent, Coords coords)
 	}
 	else
 		win = new WatchWindow(parent, 250, 150, 200, 200, coords, false);
-   win->closed.set(parent, &Interactive_Player::need_complete_redraw);
+   win->closed.set(&parent, &Interactive_Player::need_complete_redraw);
 
 }

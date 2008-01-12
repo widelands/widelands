@@ -45,6 +45,8 @@
 
 #include <algorithm>
 
+using Widelands::Player;
+
 #define CHECK_SYNC_INTERVAL     2000
 #define   DELAY_PROBE_INTERVAL 10000
 #define MINIMUM_NETWORK_DELAY     10 // to avoid unneccessary network congestion
@@ -71,14 +73,14 @@ enum {
 };
 
 
-class Cmd_NetCheckSync : public Command {
+class Cmd_NetCheckSync : public Widelands::Command {
 private:
 	NetGame * netgame;
 
 public:
 	Cmd_NetCheckSync (int32_t dt, NetGame* ng) : Command (dt) {netgame=ng;}
 
-	virtual void execute (Game* g);
+	virtual void execute (Widelands::Game *);
 
 	virtual int32_t get_id() {return QUEUE_CMD_NETCHECKSYNC;}
 };
@@ -133,7 +135,7 @@ NetGame::~NetGame ()
 
 void NetGame::run ()
 {
-	game=new Game();
+	game = new Widelands::Game();
 
 	game->enqueue_command
 		(new Cmd_NetCheckSync(game->get_gametime()+CHECK_SYNC_INTERVAL, this));
@@ -151,7 +153,7 @@ void NetGame::begin_game ()
 	statuswnd=new NetStatusWindow(game->get_ipl());
 	statuswnd->center_to_parent ();
 
-	for (Player_Number i = 0; i < MAX_PLAYERS; ++i)
+	for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i)
 	    if (player_human & (1<<i))
 		statuswnd->add_player (i+1);
 
@@ -236,7 +238,7 @@ NetHost::~NetHost ()
 // notify the other players so that they load the map as well
 void NetHost::update_map ()
 {
-	Map* map=game->get_map();
+	Widelands::Map * const map = game->get_map();
 
 	promoter->set_map (map?map->get_name():"none");
 
@@ -256,18 +258,15 @@ void NetHost::update_map ()
 
 void NetHost::send_player_info ()
 {
-	Player* pl;
 	log("[Host] Broadcasting player info to all players.\n");
         //send player info should also contain tribe.
 	player_enabled=0;
 	player_human=0;
 
-	for (Player_Number i = 0; i < MAX_PLAYERS; ++i)
-		if ((pl=game->get_player(i+1))!=0) {
-			player_enabled|=1<<i;
-
-			if (pl->get_type() != Player::AI) player_human |= 1 << i;
-		}
+	iterate_players_existing_const(p, MAX_PLAYERS, *game, pl) {
+		player_enabled |= 1 << p - 1;
+		if (pl->get_type() != Player::AI) player_human |= 1 << p - 1;
+	}
 
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_PLAYERINFO);
@@ -314,11 +313,11 @@ void NetHost::handle_network ()
 
 	// if we are in the game initiation phase, check for new connections
 	while (svsock!=0 && (sock=SDLNet_TCP_Accept(svsock))!=0) {
-		Player* pl=0;
+		Player * pl = 0;
 
 		log("[Host] Received a connection request\n");
 
-		Player_Number i = 1;
+		Widelands::Player_Number i = 1;
 		for (; i <= MAX_PLAYERS; ++i)
 			if ((pl = game->get_player(i)) and pl->get_type() == Player::AI)
 				break;
@@ -355,7 +354,7 @@ void NetHost::handle_network ()
 		serializer->putchar (i);
 		log("[Host] Sending hello to new player\n");
 
-		Map* map=game->get_map();
+		Widelands::Map * map = game->get_map();
 		serializer->putchar (NETCMD_SELECTMAP);
 		serializer->putstr (map?map->get_filename():"");
 		serializer->end_packet ();
@@ -443,7 +442,9 @@ void NetHost::handle_network ()
 
 			case NETCMD_PLAYERCOMMAND:
 				log ("[Host] Player command in\n");
-				cmds.push (PlayerCommand::deserialize(*clients[i].deserializer));
+				cmds.push
+					(Widelands::PlayerCommand::deserialize
+					 (*clients[i].deserializer));
 				break;
 
 			case NETCMD_SYNCREPORT:
@@ -487,7 +488,7 @@ void NetHost::handle_network ()
 		while (!cmds.empty()) {
 			log ("[Host] %u player commands queued\n", cmds.size());
 
-			PlayerCommand* cmd=cmds.front();
+			Widelands::PlayerCommand * cmd = cmds.front();
 			cmds.pop ();
 
 			log ("[Host] player command from player %d\n", cmd->get_sender());
@@ -582,8 +583,7 @@ void NetHost::update_network_delay ()
 	log ("network delay is now %ims\n", net_delay);
 }
 
-void NetHost::send_player_command (PlayerCommand* cmd)
-{
+void NetHost::send_player_command (Widelands::PlayerCommand * const cmd) {
 	cmds.push (cmd);
 }
 
@@ -737,7 +737,7 @@ void NetClient::handle_network ()
 			player_enabled=deserializer->getchar();
 			player_human=deserializer->getchar();
 			log("[Client] Playerinfo received\n");
-			for (Player_Number i = 0; i < MAX_PLAYERS; ++i) {
+			for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i) {
 				if (i!=playernum-1) {
 					if (player_enabled & (1<<i)) {
 						playerdescr[i]->set_player_type
@@ -759,7 +759,7 @@ void NetClient::handle_network ()
 				assert (phase==PH_PREGAME);
 				assert (statuswnd!=0);
 
-				for (Player_Number i = 0;i < MAX_PLAYERS; ++i)
+				for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i)
 					if (ready & ~player_ready & (1<<i))
 						statuswnd->set_ready (i+1);
 			}
@@ -800,9 +800,10 @@ void NetClient::handle_network ()
 
 		case NETCMD_PLAYERCOMMAND:
 			{
-				PlayerCommand* cmd=PlayerCommand::deserialize(*deserializer);
-				cmd->set_duetime(net_game_time);
-				game->enqueue_command (cmd);
+				Widelands::PlayerCommand & cmd =
+					*Widelands::PlayerCommand::deserialize(*deserializer);
+				cmd.set_duetime(net_game_time);
+				game->enqueue_command (&cmd);
 				log("[Client] Player command received\n");
 			}
 			break;
@@ -827,8 +828,7 @@ void NetClient::handle_network ()
 		}
 }
 
-void NetClient::send_player_command (PlayerCommand* cmd)
-{
+void NetClient::send_player_command (Widelands::PlayerCommand * const cmd) {
 	// send the packet to the server instead of queuing it locally
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_PLAYERCOMMAND);
@@ -1003,7 +1003,7 @@ size_t Deserializer::Data(void* const data, const size_t bufsize)
 	return read;
 }
 
-bool Deserializer::EndOfFile()
+bool Deserializer::EndOfFile() const
 {
 	return !avail();
 }
@@ -1047,8 +1047,7 @@ void Deserializer::getstr (char* buffer, int32_t maxlength)
 			throw wexception("Deserializer: string too long");
 }
 
-void Cmd_NetCheckSync::execute (Game* g)
-{
+void Cmd_NetCheckSync::execute (Widelands::Game * g) {
 	netgame->syncreport (g->get_sync_hash());
 
 	g->enqueue_command (new Cmd_NetCheckSync(get_duetime()+CHECK_SYNC_INTERVAL, netgame));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,15 +28,16 @@
 #include "overlay_manager.h"
 #include "worlddata.h"
 
+using Widelands::TCoords;
 
 int32_t Editor_Change_Resource_Tool_Callback
-(const TCoords<FCoords> c, void * data, int32_t curres)
+(const TCoords<Widelands::FCoords> c, void * data, int32_t curres)
 {
-	Map & map = *static_cast<Map *>(data);
-	const World & world = map.world();
-	FCoords f = FCoords(c, map.get_field(c));
+	Widelands::Map   & map   = *static_cast<Widelands::Map *>(data);
+	Widelands::World & world = map.world();
+	Widelands::FCoords f(c, map.get_field(c));
 
-   FCoords f1;
+	Widelands::FCoords f1;
    int32_t count=0;
 
    // This field
@@ -46,16 +47,16 @@ int32_t Editor_Change_Resource_Tool_Callback
 
    // If one of the neighbours is unpassable, count its resource stronger
    // top left neigbour
-   map.get_neighbour(f, Map_Object::WALK_NW, &f1);
+	map.get_neighbour(f, Widelands::Map_Object::WALK_NW, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
 
    // top right neigbour
-   map.get_neighbour(f, Map_Object::WALK_NE, &f1);
+	map.get_neighbour(f, Widelands::Map_Object::WALK_NE, &f1);
 	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
 
    // left neighbour
-   map.get_neighbour(f, Map_Object::WALK_W, &f1);
+	map.get_neighbour(f, Widelands::Map_Object::WALK_W, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 
    if (count<=3)
@@ -73,13 +74,16 @@ there is not already another resource there.
 ===========
 */
 int32_t Editor_Increase_Resources_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
+(Widelands::Map                     & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive                 & parent)
 {
-	const World & world = map.world();
+	Widelands::World const & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
-	MapRegion<Area<FCoords> > mr
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
-		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
+		 Widelands::Area<Widelands::FCoords>
+		 (map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
 		int32_t res        = mr.location().field->get_resources();
 		int32_t amount     = mr.location().field->get_resources_amount();
@@ -112,7 +116,8 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 					(PicMod_Menu,
 					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
 				overlay_manager.register_overlay(mr.location(), picid, 4);
-				map.recalc_for_field_area(Area<FCoords>(mr.location(), 0));
+				map.recalc_for_field_area
+					(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
 			}
 		}
 	} while (mr.advance(map));

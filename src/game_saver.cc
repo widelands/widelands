@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,8 @@
 
 #include "log.h"
 
+namespace Widelands {
+
 Game_Saver::Game_Saver(FileSystem & fs, Game* game) : m_fs(fs), m_game(game) {}
 
 
@@ -59,7 +61,7 @@ void Game_Saver::save() throw (_wexception) {
 	Game_Map_Data_Packet                          M; M.Write(m_fs, m_game, 0);
    log("Game: Writing Map Data done!\n");
 
-	Widelands_Map_Map_Object_Saver * const mos = M.get_map_object_saver();
+	Map_Map_Object_Saver * const mos = M.get_map_object_saver();
 
    log("Game: Writing Player Economies Info ... ");
 	{Game_Player_Economies_Data_Packet            p; p.Write(m_fs, m_game, mos);}
@@ -73,3 +75,5 @@ void Game_Saver::save() throw (_wexception) {
 	{Game_Interactive_Player_Data_Packet          p; p.Write(m_fs, m_game, mos);}
    log(" done\n");
 }
+
+};

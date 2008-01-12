@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,11 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
+namespace Widelands {
 class Event;
 class EventChain;
 class Trigger;
+};
 namespace UI {
 template <typename T> struct Button;
 template <typename T> struct Listselect;
@@ -38,15 +40,15 @@ struct Editor_Event_Menu : public UI::UniqueWindow {
 private:
 	Editor_Interactive & eia();
 
-	UI::Listselect<Event*      > *m_event_list;
-	UI::Listselect<EventChain* > *m_eventchain_list;
-	UI::Listselect<Trigger*    > *m_trigger_list;
-	UI::Button<Editor_Event_Menu> * m_btn_del_event;
-	UI::Button<Editor_Event_Menu> * m_btn_edit_event;
-	UI::Button<Editor_Event_Menu> * m_btn_del_trigger;
-	UI::Button<Editor_Event_Menu> * m_btn_edit_trigger;
-	UI::Button<Editor_Event_Menu> * m_btn_del_eventchain;
-	UI::Button<Editor_Event_Menu> * m_btn_edit_eventchain;
+	UI::Listselect<Widelands::Event      *> * m_event_list;
+	UI::Listselect<Widelands::EventChain *> * m_eventchain_list;
+	UI::Listselect<Widelands::Trigger    *> * m_trigger_list;
+	UI::Button    <Editor_Event_Menu>       * m_btn_del_event;
+	UI::Button    <Editor_Event_Menu>       * m_btn_edit_event;
+	UI::Button    <Editor_Event_Menu>       * m_btn_del_trigger;
+	UI::Button    <Editor_Event_Menu>       * m_btn_edit_trigger;
+	UI::Button    <Editor_Event_Menu>       * m_btn_del_eventchain;
+	UI::Button    <Editor_Event_Menu>       * m_btn_edit_eventchain;
 	void trigger_list_selected    (uint32_t);
 	void event_list_selected      (uint32_t);
 	void eventchain_list_selected (uint32_t);
@@ -64,6 +66,5 @@ private:
 	void clicked_edit_eventchain();
       void update();
 };
-
 
 #endif

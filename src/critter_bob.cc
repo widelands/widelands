@@ -28,6 +28,7 @@
 
 #include <stdio.h>
 
+namespace Widelands {
 
 const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
 #if 0
@@ -392,3 +393,5 @@ void Critter_Bob::init_auto_task(Game *) {
 }
 
 Bob * Critter_Bob_Descr::create_object() const {return new Critter_Bob(*this);}
+
+};

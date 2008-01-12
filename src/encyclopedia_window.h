@@ -30,8 +30,10 @@
 #include "ui_table.h"
 #include "ui_multilinetextarea.h"
 
+namespace Widelands {
 class Item_Ware_Descr;
 class Tribe_Descr;
+}
 
 struct WareCondition {
 	uint32_t amount;
@@ -48,8 +50,8 @@ private:
 	UI::Listselect<intptr_t> prodSites;
 	UI::Table     <intptr_t> condTable;
 	UI::Multiline_Textarea    descrTxt;
-	  const Item_Ware_Descr* selectedWare;
-	  const Tribe_Descr* tribe;
+	Widelands::Item_Ware_Descr const * selectedWare;
+	Widelands::Tribe_Descr     const * tribe;
 	void fillWares();
 	void wareSelected(uint32_t);
 	void prodSiteSelected(uint32_t);

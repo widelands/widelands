@@ -28,6 +28,8 @@
 #include <string>
 #include <vector>
 
+namespace Widelands {
+
 class Input;
 class Item_Ware_Descr;
 class ProductionProgram;
@@ -83,7 +85,7 @@ private:
 };
 
 class ProductionSite : public Building {
-   friend class Widelands_Map_Buildingdata_Data_Packet;
+	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(ProductionSite_Descr);
 
 public:
@@ -116,8 +118,8 @@ public:
 	__attribute__ ((noreturn)) virtual const std::vector<Soldier *> & get_soldiers() const
 	{throw wexception ("ProductionSite::get_soldiers makes no sense");}
 protected:
-	virtual UI::Window* create_options_window(Interactive_Player* plr,
-		UI::Window** registry);
+	virtual UI::Window * create_options_window
+		(Interactive_Player *, UI::Window * * registry);
 
 protected:
 	struct State {
@@ -186,6 +188,6 @@ private:
 	int32_t m_max;
 };
 
-
+};
 
 #endif

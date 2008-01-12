@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 #define __S__EVENT_UNHIDE_OBJECTIVE_H
 
 #include "event.h"
+
+namespace Widelands {
 
 class Editor_Game_Base;
 class MapObjective;
@@ -52,6 +54,6 @@ private:
 	bool           m_dounhide;
 };
 
-
+};
 
 #endif

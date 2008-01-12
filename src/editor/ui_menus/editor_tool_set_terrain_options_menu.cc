@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "ui_panel.h"
 #include "ui_checkbox.h"
 
+using Widelands::Terrain_Descr;
 
 Editor_Tool_Set_Terrain_Tool_Options_Menu::
 Editor_Tool_Set_Terrain_Tool_Options_Menu
@@ -47,7 +48,7 @@ Editor_Tool_Options_Menu
 m_cur_selection(this, 0, 0, 0, 20, Align_Center),
 m_tool(tool)
 {
-	World & world = parent.egbase().map().world();
+	Widelands::World & world = parent.egbase().map().world();
 	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();
 	const uint32_t terrains_in_row = static_cast<uint32_t>
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
@@ -203,7 +204,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
    select_correct_tool();
 
    std::string buf=_("Current:");
-		const World & world =
+		Widelands::World const & world =
 			dynamic_cast<Editor_Interactive &>(*get_parent())
 			.egbase().map().world();
 		uint32_t j = m_tool.get_nr_enabled();

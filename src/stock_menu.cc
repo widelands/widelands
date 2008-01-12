@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -103,7 +103,7 @@ void Stock_Menu::think()
  */
 void Stock_Menu::fill_waredisplay_with_wares() {
 	waresdisplay.remove_all_warelists();
-	const Player & player = *m_player.get_player();
+	Widelands::Player const & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay.add_warelist
@@ -115,7 +115,7 @@ void Stock_Menu::fill_waredisplay_with_wares() {
  */
 void Stock_Menu::fill_waredisplay_with_workers() {
 	waresdisplay.remove_all_warelists();
-	const Player & player = *m_player.get_player();
+	Widelands::Player const & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay.add_warelist

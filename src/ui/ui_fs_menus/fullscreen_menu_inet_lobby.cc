@@ -26,7 +26,6 @@
 #include "game_server_proto_packet_connect.h"
 #include "game_server_proto_packet_getuserinfo.h"
 #include "i18n.h"
-#include <stdint.h>
 
 #include "ui_button.h"
 #include "ui_editbox.h"

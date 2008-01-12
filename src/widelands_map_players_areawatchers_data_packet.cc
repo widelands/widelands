@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,16 +20,17 @@
 #include "widelands_map_players_areawatchers_data_packet.h"
 
 #include "editor_game_base.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "map.h"
 #include "player.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
 #include "filesystem.h"
 #include "zip_exceptions.h"
 
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION   1
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
@@ -37,12 +38,11 @@
 #define FILENAME_TEMPLATE DIRNAME_TEMPLATE "/areawatchers"
 #define FILENAME_SIZE 32
 
-
-void Widelands_Map_Players_AreaWatchers_Data_Packet::Read
+void Map_Players_AreaWatchers_Data_Packet::Read
 (FileSystem       & fs,
  Editor_Game_Base * egbase,
  const bool         skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip) return;
@@ -62,28 +62,21 @@ throw (_wexception)
 		} catch (const Not_Found) {continue;}
 		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			while (not fr.IsEOF()) {
+			while (not fr.EndOfFile()) {
 				const uint32_t reg = fr.Unsigned32();
 				if (ol->is_object_known(reg))
 					throw wexception
-						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
-						 "player %u: in \"%s\":%u: read object with reg %u, but an "
-						 "object with that reg has already been loaded",
-						 p, filename, fr.GetPrevPos(), reg);
+						("Map_Players_AreaWatchers_Data_Packet::Read: player %u: in "
+						 "\"%s\":%u: read object with reg %u, but an object with "
+						 "that reg has already been loaded",
+						 p, filename, fr.GetPos() - 4, reg);
 				Coords c;
 				try {c = fr.Coords32(extent);}
-				catch  (const FileRead::Width_Exceeded e) {
+				catch (const FileRead::Data_Error & e) {
 					throw wexception
-						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
-						 "player %u: in \"%s\":%u: area watcher %u: x-cordinate (%u) "
-						 "exceeds the witdh of the map (%u)\n",
-						 p, filename, e.position, reg, e.x, e.w);
-				} catch (const FileRead::Height_Exceeded e) {
-					throw wexception
-						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
-						 "player %u: in \"%s\":%u: area watcher %u: y-cordinate (%u) "
-						 "exceeds the height of the map (%u)\n",
-						 p, filename, e.position, reg, e.y, e.h);
+						("Map_Players_AreaWatchers_Data_Packet::Read: player %u: in "
+						 "\"%s\":%u: Coordinates of watcher %u: %s",
+						 p, filename, fr.GetPos() - 4, reg, e.message().c_str());
 				}
 				ol->register_object
 					(egbase,
@@ -93,17 +86,15 @@ throw (_wexception)
 			}
 		} else
 			throw wexception
-				("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: player %u: "
-				 "in \"%s\":0: unknown packet version %u",
+				("Map_Players_AreaWatchers_Data_Packet::Read: player %u: in "
+				 "\"%s\":0: unknown packet version %u",
 				 p, filename, packet_version);
 	}
 }
 
 
-void Widelands_Map_Players_AreaWatchers_Data_Packet::Write
-(FileSystem                     &       fs,
- Editor_Game_Base               *       egbase,
- Widelands_Map_Map_Object_Saver * const os)
+void Map_Players_AreaWatchers_Data_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
@@ -135,3 +126,5 @@ throw (_wexception)
 		fw.Write(fs, filename);
 	}
 }
+
+};

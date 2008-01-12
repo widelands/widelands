@@ -23,20 +23,22 @@
 #include "carrier.h"
 #include "critter_bob.h"
 #include "critter_bob_program.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "map.h"
 #include "player.h"
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker_program.h"
 
 #include "upcast.h"
+
+namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
@@ -48,27 +50,19 @@
 #define SOLDIER_WORKER_BOB_PACKET_VERSION 3
 #define CARRIER_WORKER_BOB_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Bobdata_Data_Packet::~Widelands_Map_Bobdata_Data_Packet() {
-}
 
-/*
- * Read Function
- */
-void Widelands_Map_Bobdata_Data_Packet::Read
+void Map_Bobdata_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  const bool skip,
- Widelands_Map_Map_Object_Loader * const ol)
+ Map_Map_Object_Loader * const ol)
 throw
 (_wexception)
 {
    if (skip)
       return;
 
-   FileRead fr;
+	FileRead fr;
    try {
       fr.Open(fs, "binary/bob_data");
 	} catch (...) {
@@ -231,8 +225,7 @@ throw
                   r=new Route();
                else
                   r=s->route;
-					Route::LoadData* ld = r->load(fr);
-					r->load_pointers(ld, ol);
+					r->load_pointers(*r->load(fr), *ol);
 					s->route = r;
 				} else
                s->route=0;
@@ -259,20 +252,19 @@ throw
             case Bob::WORKER: read_worker_bob(&fr, egbase, ol, static_cast<Worker*>(bob)); break;
 			default:
 				throw wexception
-					("Unknown sub bob type %i in "
-					 "Widelands_Map_Bobdata_Data_Packet::Read",
-					 bob->get_bob_type());
+					("Unknown sub bob type in Map_Bobdata_Data_Packet::Read");
 			}
 
          ol->mark_object_as_loaded(bob);
 		}
 	} else
 		throw wexception
-			("Unknown version %u in Widelands_Map_Bobdata_Data_Packet!",
-			 packet_version);
+			("Unknown version %u in Map_Bobdata_Data_Packet!", packet_version);
 }
 
-void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, Critter_Bob*) {
+void Map_Bobdata_Data_Packet::read_critter_bob
+	(FileRead * fr, Editor_Game_Base *, Map_Map_Object_Loader *, Critter_Bob *)
+{
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == CRITTER_BOB_PACKET_VERSION) {
       // No data for critter bob currently
@@ -281,7 +273,12 @@ void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Ga
 			("Unknown version %u in Critter Bob Subpacket!", packet_version);
 }
 
-void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol, Worker* worker) {
+void Map_Bobdata_Data_Packet::read_worker_bob
+	(FileRead              * fr,
+	 Editor_Game_Base      * egbase,
+	 Map_Map_Object_Loader * ol,
+	 Worker                * worker)
+{
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == WORKER_BOB_PACKET_VERSION) {
 		if (upcast(Soldier, soldier, worker)) {
@@ -309,10 +306,10 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 				}
 				if (soldier->m_hp_max < min_hp)
 					throw wexception
-						("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+						("Map_Bobdata_Data_Packet::read_worker_bob: "
 						 "binary/bob_data:%u: soldier %p (serial %u): m_hp_max = %u "
 						 "but must be at least %u",
-					 fr->GetPrevPos(), worker, worker->get_serial(),
+					 fr->GetPos() - 4, worker, worker->get_serial(),
 					 soldier->m_hp_max, min_hp);
                soldier->m_min_attack=fr->Unsigned32();
                soldier->m_max_attack=fr->Unsigned32();
@@ -325,10 +322,10 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
                soldier->m_marked=fr->Unsigned8();
 			} else
 				throw wexception
-					("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+					("Map_Bobdata_Data_Packet::read_worker_bob: "
 					 "binary/bob_data:%u: soldier %p (serial %u): unknown soldier "
 					 "worker bob packet version %u",
-					 fr->GetPrevPos(),
+					 fr->GetPos() - 2,
 					 worker, worker->get_serial(),
 					 soldier_worker_bob_packet_version);
 		} else if (upcast(Carrier, carrier, worker)) {
@@ -340,10 +337,10 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 				carrier->m_acked_ware = fr->Signed32();
 			else
 				throw wexception
-					("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+					("Map_Bobdata_Data_Packet::read_worker_bob:"
 					 "binary/bob_data:%u: carrier %p (serial %u): unknown carrier "
 					 "worker bob packet version %u",
-					 fr->GetPrevPos(),
+					 fr->GetPos() - 2,
 					 worker, worker->get_serial(),
 					 carrier_worker_bob_packet_version);
 		}
@@ -385,13 +382,9 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 			("Unknown version %i in Worker Bob Subpacket!", packet_version);
 }
 
-/*
- * Write Function
- */
-void Widelands_Map_Bobdata_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+
+void Map_Bobdata_Data_Packet::Write
+(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
    FileWrite fw;
@@ -531,9 +524,7 @@ throw (_wexception)
                case Bob::WORKER: write_worker_bob(&fw, egbase, os, static_cast<Worker*>(bob)); break;
 				default:
 					throw wexception
-						("Unknown sub bob type %i in "
-						 "Widelands_Map_Bobdata_Data_Packet::Write",
-						 bob->get_bob_type());
+						("Unknown sub bob type in Map_Bobdata_Data_Packet::Write");
 
 				}
 
@@ -548,13 +539,16 @@ throw (_wexception)
    // DONE
 }
 
-void Widelands_Map_Bobdata_Data_Packet::write_critter_bob
-(FileWrite * fw, Editor_Game_Base *,
- Widelands_Map_Map_Object_Saver *,
- Critter_Bob *)
+void Map_Bobdata_Data_Packet::write_critter_bob
+(FileWrite * fw, Editor_Game_Base *, Map_Map_Object_Saver *, Critter_Bob *)
 {fw->Unsigned16(CRITTER_BOB_PACKET_VERSION);}
 
-void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os, Worker* worker) {
+void Map_Bobdata_Data_Packet::write_worker_bob
+	(FileWrite            * fw,
+	 Editor_Game_Base     * egbase,
+	 Map_Map_Object_Saver * os,
+	 Worker               * worker)
+{
    fw->Unsigned16(WORKER_BOB_PACKET_VERSION);
 
 	switch (worker->get_worker_type()) {
@@ -588,9 +582,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
       break;
 	default:
 		throw wexception
-			("Unknown Worker %i in "
-			 "Widelands_Map_Bobdata_Data_Packet::write_worker_bob()",
-			 worker->get_worker_type());
+			("Unknown Worker in Map_Bobdata_Data_Packet::write_worker_bob()");
 	}
 
    // location
@@ -622,3 +614,5 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
    fw->Signed32(worker->m_needed_exp);
    fw->Signed32(worker->m_current_exp);
 }
+
+};

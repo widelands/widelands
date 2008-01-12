@@ -27,6 +27,14 @@
 
 #include "log.h"
 
+using Widelands::BaseImmovable;
+using Widelands::Coords;
+using Widelands::FCoords;
+using Widelands::Map;
+using Widelands::Map_Object_Descr;
+using Widelands::Player;
+using Widelands::TCoords;
+
 /**
  * Build a render target for the given bitmap.
  * \note The bitmap will not be owned by the renderer, i.e. it won't be
@@ -283,33 +291,62 @@ void RenderTarget::tile(Rect r, uint32_t picture, Point ofs)
 }
 
 
-#define RENDERMAP_INITIALIZANTONS                                              \
-	/* Check if we have the ground surface set up. */                           \
-	if (not m_ground_surface) m_ground_surface = new Surface(*m_surface);       \
-                                                                               \
-	viewofs -= m_offset;                                                        \
-                                                                               \
-	const Map             & map             = egbase.map();                     \
-	const World           & world           = map.world();                      \
-	const Overlay_Manager & overlay_manager = map.get_overlay_manager();        \
-	const uint32_t              mapwidth        = map.get_width();                  \
-	int32_t minfx, minfy;                                                           \
-	int32_t maxfx, maxfy;                                                           \
-                                                                               \
-	/* hack to prevent negative numbers */                                      \
-	minfx = (viewofs.x + (TRIANGLE_WIDTH>>1)) / TRIANGLE_WIDTH - 1;             \
-                                                                               \
-	minfy = viewofs.y / TRIANGLE_HEIGHT;                                        \
-	maxfx = (viewofs.x + (TRIANGLE_WIDTH>>1) + m_rect.w) / TRIANGLE_WIDTH;      \
-	maxfy = (viewofs.y + m_rect.h) / TRIANGLE_HEIGHT;                           \
-	maxfx +=  1; /* because of big buildings */                                 \
-	maxfy += 10; /* because of heights */                                       \
-                                                                               \
-	int32_t dx              = maxfx - minfx + 1;                                    \
-	int32_t dy              = maxfy - minfy + 1;                                    \
-	int32_t linear_fy       = minfy;                                                \
-	bool row_is_forward = linear_fy & 1;                                        \
-	int32_t b_posy          = linear_fy * TRIANGLE_HEIGHT - viewofs.y;
+static inline Sint8 node_brightness
+(Widelands::Time   gametime,
+ Widelands::Time   last_seen,
+ Widelands::Vision vision,
+ Sint8             result)
+__attribute__((const));
+static inline Sint8 node_brightness
+(Widelands::Time   const gametime,
+ Widelands::Time   const last_seen,
+ Widelands::Vision const vision,
+ Sint8                   result)
+{
+	if      (vision == 0) result = -128;
+	else if (vision == 1) {
+		assert(last_seen <= gametime);
+		Widelands::Duration const time_ago = gametime - last_seen;
+		result =
+			static_cast<Sint16>
+			(((static_cast<Sint16>(result) + 128) >> 1)
+			 *
+			 (1.0 + (time_ago < 45000 ? expf(-8.46126929e-5 * time_ago) : 0)))
+			-
+			128;
+	}
+
+	return result;
+}
+
+
+#define RENDERMAP_INITIALIZANTONS                                             \
+	/* Check if we have the ground surface set up. */                          \
+	if (not m_ground_surface) m_ground_surface = new Surface(*m_surface);      \
+                                                                              \
+	viewofs -= m_offset;                                                       \
+                                                                              \
+	Map                   const & map             = egbase.map();              \
+	Widelands::World      const & world           = map.world();               \
+	Overlay_Manager       const & overlay_manager = map.get_overlay_manager(); \
+	uint32_t const                mapwidth        = map.get_width();           \
+	int32_t minfx, minfy;                                                      \
+	int32_t maxfx, maxfy;                                                      \
+                                                                              \
+	/* hack to prevent negative numbers */                                     \
+	minfx = (viewofs.x + (TRIANGLE_WIDTH>>1)) / TRIANGLE_WIDTH - 1;            \
+                                                                              \
+	minfy = viewofs.y / TRIANGLE_HEIGHT;                                       \
+	maxfx = (viewofs.x + (TRIANGLE_WIDTH>>1) + m_rect.w) / TRIANGLE_WIDTH;     \
+	maxfy = (viewofs.y + m_rect.h) / TRIANGLE_HEIGHT;                          \
+	maxfx +=  1; /* because of big buildings */                                \
+	maxfy += 10; /* because of heights */                                      \
+                                                                              \
+	int32_t dx              = maxfx - minfx + 1;                               \
+	int32_t dy              = maxfy - minfy + 1;                               \
+	int32_t linear_fy       = minfy;                                           \
+	bool row_is_forward = linear_fy & 1;                                       \
+	int32_t b_posy          = linear_fy * TRIANGLE_HEIGHT - viewofs.y;         \
 
 
 /**
@@ -317,17 +354,17 @@ void RenderTarget::tile(Rect r, uint32_t picture, Point ofs)
  * roads, then immovables, then bobs, then overlay stuff (build icons etc...)
  */
 void RenderTarget::rendermap
-(const Editor_Game_Base & egbase,
- const Player           & player,
- Point                    viewofs,
- const bool               draw_all)
+(Widelands::Editor_Game_Base const &       egbase,
+ Player                      const &       player,
+ Point                                     viewofs,
+ bool                                const draw_all)
 {
 	if (player.see_all()) return rendermap(egbase, viewofs, draw_all);
 
 	RENDERMAP_INITIALIZANTONS;
 
 	const Player::Field * const first_player_field = player.fields();
-	const Time gametime = egbase.get_gametime();
+	Widelands::Time const gametime = egbase.get_gametime();
 
 	while (dy--) {
 		const int32_t posy = b_posy;
@@ -456,8 +493,8 @@ void RenderTarget::rendermap
 				const Player::Field * r_player_field = first_player_field + r_index;
 				const Player::Field * br_player_field =
 					first_player_field + br_index;
-				Vision  r_vision =  r_player_field->vision;
-				Vision br_vision = br_player_field->vision;
+				Widelands::Vision  r_vision =  r_player_field->vision;
+				Widelands::Vision br_vision = br_player_field->vision;
 				Point r_pos
 					(linear_fx * TRIANGLE_WIDTH
 					 +
@@ -488,8 +525,8 @@ void RenderTarget::rendermap
 					r_is_border = r.field->is_border();         //  FIXME PPoV
 					r_owner_number = r.field->get_owned_by();   //  FIXME PPoV
 					br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
-					const Vision  f_vision =  r_vision;
-					const Vision bl_vision = br_vision;
+					Widelands::Vision const  f_vision =  r_vision;
+					Widelands::Vision const bl_vision = br_vision;
 					r_vision  = player.vision (r_index);
 					br_vision = player.vision(br_index);
 					const Point f_pos = r_pos, bl_pos = br_pos;
@@ -548,7 +585,7 @@ void RenderTarget::rendermap
 						if (BaseImmovable * const imm = f.field->get_immovable())
 							imm->draw(egbase, *this, f, f_pos);
 						for
-							(Bob * bob = f.field->get_first_bob();
+							(Widelands::Bob * bob = f.field->get_first_bob();
 							 bob;
 							 bob = bob->get_next_bob())
 							bob->draw(egbase, *this, f_pos);
@@ -574,7 +611,7 @@ void RenderTarget::rendermap
 						{
 							if (const uint32_t picid = map_object_descr->main_animation())
 								drawanim(f_pos, picid, 0);
-							else if (map_object_descr == &g_flag_descr) {
+							else if (map_object_descr == &Widelands::g_flag_descr) {
 								const Player & owner = egbase.player(f_owner_number);
 								drawanim
 									(f_pos, owner.tribe().get_flag_anim(), 0, &owner);
@@ -726,7 +763,9 @@ void RenderTarget::rendermap
 
 
 void RenderTarget::rendermap
-(const Editor_Game_Base & egbase, Point viewofs, const bool draw_all)
+(Widelands::Editor_Game_Base const &       egbase,
+ Point                                     viewofs,
+ bool                                const draw_all)
 {
 	RENDERMAP_INITIALIZANTONS;
 
@@ -910,7 +949,7 @@ void RenderTarget::rendermap
 						if (BaseImmovable * const imm = f.field->get_immovable())
 							imm->draw(egbase, *this, f, f_pos);
 						for
-							(Bob * bob = f.field->get_first_bob();
+							(Widelands::Bob * bob = f.field->get_first_bob();
 							 bob;
 							 bob = bob->get_next_bob())
 							bob->draw(egbase, *this, f_pos);
@@ -1080,10 +1119,10 @@ void RenderTarget::rendermap
  * The entire clipping rect will be used for drawing.
  */
 void RenderTarget::renderminimap
-(const Editor_Game_Base &       egbase,
- const Player           * const player,
- const Point                    viewpoint,
- const uint32_t                 flags)
+(Widelands::Editor_Game_Base const &       egbase,
+ Player                      const * const player,
+ Point                               const viewpoint,
+ uint32_t                            const flags)
 {
 	m_surface->draw_minimap
 			(egbase, player, m_rect, viewpoint - m_offset, flags);
@@ -1263,24 +1302,4 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
 
 	// Draw it
 	m_surface->blit(dst, src, srcrc);
-}
-
-///\todo Rename the _in_ parameter "result" to reflect it's real meaning
-Sint8 RenderTarget::node_brightness
-(const Time gametime, const Time last_seen, const Vision vision, Sint8 result)
-{
-	if      (vision == 0) result = -128;
-	else if (vision == 1) {
-		assert(last_seen <= gametime);
-		const Duration time_ago = gametime - last_seen;
-		result =
-			static_cast<Sint16>
-			(((static_cast<Sint16>(result) + 128) >> 1)
-			 *
-			 (1.0 + (time_ago < 45000 ? expf(-8.46126929e-5 * time_ago) : 0)))
-			-
-			128;
-	}
-
-	return result;
 }

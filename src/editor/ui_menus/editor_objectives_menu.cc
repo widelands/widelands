@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,9 @@
 #include "ui_listselect.h"
 
 #include <map>
+
+using Widelands::MapObjective;
+using Widelands::MapObjectiveManager;
 
 /**
  * This is a modal box - The user must end this first
@@ -248,7 +251,7 @@ void Editor_Objectives_Menu::clicked_new() {
          // Get the a name
          char buffer[256];
 
-	Map & map = m_parent->egbase().map();
+	Widelands::Map & map = m_parent->egbase().map();
          MapObjectiveManager & mom = map.get_mom();
 	for (uint32_t n = 1;; ++n) {
 		snprintf(buffer, sizeof(buffer), _("Unnamed%u").c_str(), n);
@@ -259,7 +262,7 @@ void Editor_Objectives_Menu::clicked_new() {
          mo.set_name(buffer);
          mom.register_new_objective(&mo);
          // Create a null trigger for this
-         Trigger_Null & trigger = *new Trigger_Null();
+         Widelands::Trigger_Null & trigger = *new Widelands::Trigger_Null();
          trigger.set_name(buffer);
          mo.set_trigger(&trigger);
          map.get_mtm().register_new_trigger(&trigger);
@@ -282,7 +285,7 @@ void Editor_Objectives_Menu::clicked_del() {
 
 	if (not obj.get_trigger()->get_referencers().empty()) {
             std::string str=_("Can't delete Objective, because it's trigger is in use by ");
-		std::map<TriggerReferencer*, uint32_t>::const_iterator i =
+		std::map<Widelands::TriggerReferencer *, uint32_t>::const_iterator i =
 			obj.get_trigger()->get_referencers().begin();
 		while (i != obj.get_trigger()->get_referencers().end()) {
                str += i->first->get_type();
@@ -296,7 +299,7 @@ void Editor_Objectives_Menu::clicked_del() {
             return;
 			}
 
-	Map & map = m_parent->egbase().map();
+	Widelands::Map & map = m_parent->egbase().map();
 	map.get_mtm().delete_trigger(obj.get_trigger()->get_name());
 	map.get_mom().delete_objective(obj.name().c_str());
 	m_table.remove_selected();

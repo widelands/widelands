@@ -37,7 +37,6 @@
 
 #include <vector>
 
-
 #define BUILDING_LIST_HEIGHT 220
 #define BUILDING_LIST_WIDTH  320
 
@@ -246,9 +245,9 @@ void Building_Statistics_Menu::clicked_help() {
 
 void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 	assert(m_table.has_selection());
-	const std::vector<Player::Building_Stats> & vec =
+	const std::vector<Widelands::Player::Building_Stats> & vec =
 		m_parent->get_player()->get_building_statistics(m_table.get_selected());
-	const Map & map = m_parent->egbase().map();
+	const Widelands::Map & map = m_parent->egbase().map();
 
    bool found = true; // We think, we always find a proper building
 
@@ -279,7 +278,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 			if (not vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
-					 (ProductionSite,
+					 (Widelands::ProductionSite,
 					  productionsite,
 					  map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
@@ -290,7 +289,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		if (not found) // Now look at the old
 			if
 				(upcast
-				 (ProductionSite,
+				 (Widelands::ProductionSite,
 				  productionsite,
 				  map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
@@ -305,7 +304,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 			if (not vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
-					 (ProductionSite,
+					 (Widelands::ProductionSite,
 					  productionsite,
 					  map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
@@ -316,7 +315,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		if (not found) // Now look at the old
 			if
 				(upcast
-				 (ProductionSite,
+				 (Widelands::ProductionSite,
 				  productionsite,
 				  map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
@@ -343,16 +342,17 @@ void Building_Statistics_Menu::update() {
    m_progbar->set_state(0);
 
    // List all buildings
-	const Tribe_Descr & tribe = m_parent->player().tribe();
-	const Map         & map   = m_parent->get_game()->map();
-	for (Building_Descr::Index i = 0; i < tribe.get_nrbuildings(); ++i) {
-		const Building_Descr & building = *tribe.get_building_descr(i);
+	Widelands::Tribe_Descr const & tribe = m_parent->player().tribe();
+	Widelands::Map         const & map   = m_parent->get_game()->map();
+	for (Widelands::Building_Descr::Index i = 0; i < tribe.get_nrbuildings(); ++i) {
+		Widelands::Building_Descr const & building = *tribe.get_building_descr(i);
 		{
 			const std::string & name = building.name();
 			if (name == "constructionsite" or name == "headquarters") continue;
 		}
 
-      const std::vector< Player::Building_Stats >& vec = m_parent->get_player()->get_building_statistics(i);
+		std::vector<Widelands::Player::Building_Stats> const & vec =
+			m_parent->get_player()->get_building_statistics(i);
 
       // walk all entries, add new ones if needed
 		UI::Table<const intptr_t>::Entry_Record * te = 0;
@@ -375,15 +375,14 @@ void Building_Statistics_Menu::update() {
 		uint32_t nr_owned   = 0;
 		uint32_t nr_build   = 0;
 		uint32_t total_prod = 0;
-		const ProductionSite_Descr * const productionsite =
-			dynamic_cast<const ProductionSite_Descr *>(&building);
+		upcast(Widelands::ProductionSite_Descr const, productionsite, &building);
 		for (uint32_t l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite) ++nr_build;
 			else {
 				++nr_owned;
 				if (productionsite)
 					total_prod +=
-						dynamic_cast<ProductionSite &>
+						dynamic_cast<Widelands::ProductionSite &>
 						(*map.get_field(vec[l].pos)->get_immovable())
 						.get_statistics_percent();
 

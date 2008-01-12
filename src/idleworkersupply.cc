@@ -25,6 +25,7 @@
 #include "worker.h"
 #include "wexception.h"
 
+namespace Widelands {
 
 /**
  * Automatically register with the worker's economy.
@@ -157,3 +158,5 @@ void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, Requeriments * r)
 		// Non-soldiers doesn't have any need to be marked (by now)
 	}
 }
+
+};

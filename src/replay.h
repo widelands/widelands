@@ -41,6 +41,8 @@ class StreamRead;
 class StreamWrite;
 
 
+namespace Widelands {
+
 /**
  * Read game replays from disk.
  */
@@ -73,7 +75,7 @@ private:
 	StreamWrite* m_cmdlog;
 };
 
-
+};
 
 #endif // __S__REPLAYWRITER_H
 

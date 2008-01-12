@@ -40,6 +40,14 @@
 
 #include "upcast.h"
 
+using Widelands::Area;
+using Widelands::CoordPath;
+using Widelands::Editor_Game_Base;
+using Widelands::Game;
+using Widelands::Map;
+using Widelands::Map_Object;
+using Widelands::TCoords;
+
 Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
 :
 Map_View(0, 0, 0, get_xres(), get_yres(), *this),
@@ -100,7 +108,7 @@ Interactive_Base::~Interactive_Base()
 }
 
 
-void Interactive_Base::set_sel_pos(const Node_and_Triangle<> center)
+void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 {
 	Map & map = egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
@@ -115,13 +123,13 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle<> center)
    // register sel overlay position
 	if (m_sel.triangles) {
 		assert(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
-		MapTriangleRegion<> mr
+		Widelands::MapTriangleRegion<> mr
 			(map, Area<TCoords<> >(center.triangle, m_sel.radius));
 		do overlay_manager.register_overlay
 			(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
-		MapRegion<> mr(map, Area<>(center.node, m_sel.radius));
+		Widelands::MapRegion<> mr(map, Area<>(center.node, m_sel.radius));
 		do overlay_manager.register_overlay
 			(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
@@ -496,7 +504,7 @@ void Interactive_Base::finish_build_road()
 
 	if (m_buildroad->get_nsteps()) {
 		// awkward... path changes ownership
-		Path & path = *new Path(*m_buildroad);
+		Widelands::Path & path = *new Widelands::Path(*m_buildroad);
 		// Build the path as requested
 		if (upcast(Game, game, &egbase()))
 			game->send_player_build_road (m_road_build_player, path);
@@ -524,8 +532,8 @@ bool Interactive_Base::append_build_road(Coords field)
 	assert(m_buildroad);
 
 	Map & map = egbase().map();
-	const Player & player = *egbase().get_player(m_road_build_player);
-	int32_t idx = m_buildroad->get_index(field);
+	Widelands::Player const & player = egbase().player(m_road_build_player);
+	int32_t const idx = m_buildroad->get_index(field);
 
 	if (idx >= 0) {
 		roadb_remove_overlay();
@@ -537,7 +545,7 @@ bool Interactive_Base::append_build_road(Coords field)
 	}
 
 	{
-		Path path;
+		Widelands::Path path;
 		std::set<Coords, Coords::ordering_functor> forbidden_locations;
 		const std::vector<Coords> & road_cp = m_buildroad->get_coords();
 		const std::vector<Coords>::const_iterator road_cp_end = road_cp.end();
@@ -546,7 +554,8 @@ bool Interactive_Base::append_build_road(Coords field)
 			 it != road_cp_end;
 			 ++it)
 			forbidden_locations.insert(*it);
-		CheckStepRoad cstep(player, MOVECAPS_WALK, &forbidden_locations);
+		Widelands::CheckStepRoad cstep
+			(player, Widelands::MOVECAPS_WALK, &forbidden_locations);
 	if
 		(map.findpath
 		 (m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
@@ -596,7 +605,7 @@ Interactive_Base::get_build_road_end_dir
 Return the direction of the last step
 ===============
 */
-Direction Interactive_Base::get_build_road_end_dir() const throw () {
+Widelands::Direction Interactive_Base::get_build_road_end_dir() const throw () {
 	assert(m_buildroad);
 
 	if (!m_buildroad->get_nsteps())
@@ -626,44 +635,46 @@ void Interactive_Base::roadb_add_overlay()
 	m_jobid = overlay_manager.get_a_job_id();
 	const CoordPath::Step_Vector::size_type nr_steps = m_buildroad->get_nsteps();
 	for (CoordPath::Step_Vector::size_type idx = 0; idx < nr_steps; ++idx) {
-		Direction dir = (*m_buildroad)[idx];
+		Widelands::Direction dir = (*m_buildroad)[idx];
 		Coords c = m_buildroad->get_coords()[idx];
 
 		if (dir < Map_Object::WALK_E || dir > Map_Object::WALK_SW) {
 			map.get_neighbour(c, dir, &c);
-			dir = get_reverse_dir(dir);
+			dir = Widelands::get_reverse_dir(dir);
 		}
 
 		int32_t shift = 2*(dir - Map_Object::WALK_E);
 
 		uint8_t set_to = overlay_manager.get_road_overlay(c);
-      set_to|=  Road_Normal << shift;
+      set_to|=  Widelands::Road_Normal << shift;
 		overlay_manager.register_road_overlay(c, set_to, m_jobid);
 	}
 
 	// build hints
-	FCoords endpos = map.get_fcoords(m_buildroad->get_end());
+	Widelands::FCoords endpos = map.get_fcoords(m_buildroad->get_end());
 
 	assert(not m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
 	for (int32_t dir = 1; dir <= 6; ++dir) {
-		FCoords neighb;
+		Widelands::FCoords neighb;
 		int32_t caps;
 
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(m_road_build_player).get_buildcaps(neighb);
 
-		if (!(caps & MOVECAPS_WALK))
+		if (!(caps & Widelands::MOVECAPS_WALK))
 			continue; // need to be able to walk there
 
 		//  can't build on robusts
-		BaseImmovable * const imm = map.get_immovable(neighb);
-		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
+		Widelands::BaseImmovable * const imm = map.get_immovable(neighb);
+		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if
 				(not
-				 (dynamic_cast<const Flag *>(imm)
+				 (dynamic_cast<const Widelands::Flag *>(imm)
 				  or
-				  (dynamic_cast<const Road *>(imm) and caps & BUILDCAPS_FLAG)))
+				  (dynamic_cast<const Widelands::Road *>(imm)
+				   and
+				   caps & Widelands::BUILDCAPS_FLAG)))
 				continue;
 		}
 

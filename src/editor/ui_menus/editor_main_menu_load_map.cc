@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,8 @@
 #include "ui_textarea.h"
 
 #include <stdio.h>
+
+using Widelands::WL_Map_Loader;
 
 /*
 ===============
@@ -145,7 +147,11 @@ called when the ok button has been clicked
 void Main_Menu_Load_Map::clicked_ok() {
 	std::string filename(m_ls->get_selected());
 
-      if (g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
+	if
+		(g_fs->IsDirectory(filename.c_str())
+		 &&
+		 !WL_Map_Loader::is_widelands_map(filename))
+	{
 	      m_curdir=g_fs->FS_CanonicalizeName(filename);
          m_ls->clear();
          m_mapfiles.clear();
@@ -164,9 +170,9 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 
    m_ok_btn->set_enabled(true);
 
-   if (!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map(name)) {
-		Map map;
-		Map_Loader * const m_ml = map.get_correct_loader(name);
+	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
+		Widelands::Map map;
+		Widelands::Map_Loader * const m_ml = map.get_correct_loader(name);
       m_ml->preload_map(true); // This has worked before, no problem
       delete m_ml;
 
@@ -224,7 +230,7 @@ void Main_Menu_Load_Map::fill_list() {
       if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
       if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
       if (!g_fs->IsDirectory(name)) continue;
-      if (Widelands_Map_Loader::is_widelands_map(name)) continue;
+		if (WL_Map_Loader::is_widelands_map(name))             continue;
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -232,7 +238,7 @@ void Main_Menu_Load_Map::fill_list() {
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 	}
 
-	Map map;
+	Widelands::Map map;
 
 	for
 		(filenameset_t::const_iterator pname = m_mapfiles.begin();
@@ -241,20 +247,18 @@ void Main_Menu_Load_Map::fill_list() {
 	{
       const char *name = pname->c_str();
 
-		Map_Loader * const m_ml = map.get_correct_loader(name);
+		Widelands::Map_Loader * const m_ml = map.get_correct_loader(name);
       if (!m_ml) continue;
 
 		try {
          m_ml->preload_map(true);
-         std::string pic="";
-			switch (m_ml->get_type()) {
-			case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
-			case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
-			}
 			m_ls->add
 				(FileSystem::FS_Filename(name),
 				 name,
-				 g_gr->get_picture(PicMod_Game, pic.c_str()));
+				 g_gr->get_picture
+				 (PicMod_Game,
+				  dynamic_cast<WL_Map_Loader const *>(m_ml) ?
+				  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 		} catch (_wexception&) {
          // we simply skip illegal entries
 		}

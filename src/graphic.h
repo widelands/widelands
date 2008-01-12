@@ -36,7 +36,6 @@
 #define MAX_RECTS 20
 
 class RenderTarget;
-class FileWrite;
 class Surface;
 class Graphic;
 
@@ -77,7 +76,7 @@ public:
 	void get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h);
 	uint32_t get_picture(const int32_t mod, Surface &, const char * const name = 0);
 	Surface* get_picture_surface(uint32_t id);
-	void save_png(uint32_t, FileWrite*);
+	void save_png(uint32_t, StreamWrite *);
 	uint32_t create_surface(int32_t w, int32_t h);
 	void free_surface(uint32_t pic);
 	RenderTarget* get_surface_renderer(uint32_t pic);

@@ -22,6 +22,8 @@
 
 #include "event.h"
 
+namespace Widelands {
+
 class Editor_Game_Base;
 
 /*
@@ -54,6 +56,6 @@ private:
       int32_t m_player;
 };
 
-
+};
 
 #endif

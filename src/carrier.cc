@@ -21,6 +21,7 @@
 #include "game.h"
 #include "wexception.h"
 
+namespace Widelands {
 
 /**
  * Signal "road" on road split.
@@ -199,7 +200,7 @@ void Carrier::deliver_to_building(Game* g, State* state)
 		molog("[Carrier]: Building disappeared while in building.\n");
 		set_location(0);
 
-	} else if (pos->get_type() == Map_Object::BUILDING) {
+	} else if (dynamic_cast<Building const *>(pos)) {
 		molog("[Carrier]: Arrived at building.\n");
 
 		// Drop all items addresed to this building
@@ -588,3 +589,5 @@ bool Carrier::start_task_walktoflag(Game* g, int32_t flag, bool offset)
 		 idx,
 		 descr().get_right_walk_anims(does_carry_ware()));
 }
+
+};

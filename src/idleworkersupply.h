@@ -22,6 +22,8 @@
 
 #include "transport.h"
 
+namespace Widelands {
+
 struct IdleWorkerSupply : public Supply {
 	IdleWorkerSupply(Worker *);
 	~IdleWorkerSupply();
@@ -49,5 +51,6 @@ private:
 	Economy * m_economy;
 };
 
+};
 
 #endif  // IDLEWORKERSUPPLY_H

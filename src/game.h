@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,10 +26,18 @@
 #include "random.h"
 #include "save_handler.h"
 
+namespace UI {struct ProgressWindow;};
+class Computer_Player;
+class Interactive_Base;
+struct Game_Main_Menu_Load_Game;
+struct NetGame;
+struct WLApplication;
+
+namespace Widelands {
+
 struct Flag;
 struct Path;
 struct PlayerImmovable;
-namespace UI {struct ProgressWindow;};
 
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
@@ -47,23 +55,15 @@ enum {
 	gs_running      //  in-game
 };
 
-class FileRead;
-class FileWrite;
 class Player;
-class Interactive_Base;
-class Computer_Player;
 class Map_Loader;
-class Command;
 class PlayerCommand;
-class NetGame;
 class ReplayReader;
 class ReplayWriter;
-class StreamWrite;
 
 struct GameInternals;
 
 struct Game : public Editor_Game_Base {
-public:
 	struct General_Stats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;
@@ -75,13 +75,12 @@ public:
 	};
 	typedef std::vector<General_Stats> General_Stats_vector;
 
-public:
 	friend class Cmd_Queue; // this class handles the commands
 	friend class Game_Game_Class_Data_Packet;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Loader;
-	friend class Game_Main_Menu_Load_Game;
-	friend class WLApplication;
+	friend struct ::Game_Main_Menu_Load_Game;
+	friend struct ::WLApplication;
 
 	// This friend is for legacy reasons and should probably be removed
 	// at least after summer 2008, maybe even earlier.
@@ -146,7 +145,7 @@ public:
 
 	void enqueue_command (Command * const);
 
-	void send_player_command (PlayerCommand*);
+	void send_player_command (Widelands::PlayerCommand *);
 
 	void send_player_bulldoze (PlayerImmovable*);
 	void send_player_build (int32_t, const Coords&, int32_t);
@@ -218,5 +217,7 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	location.y += logic_rand() % s - radius;
 	return location;
 }
+
+};
 
 #endif // __S__GAME_H

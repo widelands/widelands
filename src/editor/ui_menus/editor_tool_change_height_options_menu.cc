@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -113,7 +113,8 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
 		 m_increase_tool.decrease_tool().get_change_by());
 
 	int32_t change_by = m_increase_tool.get_change_by();
-	Field::Height set_to  = m_increase_tool.set_tool().get_interval().min;
+	Widelands::Field::Height set_to =
+		m_increase_tool.set_tool().get_interval().min;
 	switch (n) {
 	case Change_By_Increase: change_by +=     change_by < MAX_FIELD_HEIGHT_DIFF;
 		break;
@@ -125,7 +126,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
 	m_increase_tool                .set_change_by(change_by);
 	m_increase_tool.decrease_tool().set_change_by(change_by);
 	m_increase_tool.set_tool()
-		.set_interval(interval<Field::Height>(set_to, set_to));
+		.set_interval(interval<Widelands::Field::Height>(set_to, set_to));
 
    select_correct_tool();
    update();

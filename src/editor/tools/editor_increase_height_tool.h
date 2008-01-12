@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,8 @@ struct Editor_Increase_Height_Tool : public Editor_Tool {
 		m_change_by(1)
 	{}
 
-	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl
+		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_increase_height.png";}
 

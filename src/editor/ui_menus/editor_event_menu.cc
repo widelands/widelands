@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,6 +44,9 @@
 
 #include <sstream>
 
+using Widelands::MapEventChainManager;
+using Widelands::MapEventManager;
+using Widelands::MapTriggerManager;
 
 inline Editor_Interactive & Editor_Event_Menu::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -64,21 +67,21 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 
    // EventChain List
    new UI::Textarea(this, posx, offsy, _("Event Chains: "), Align_Left);
-   m_eventchain_list=new UI::Listselect<EventChain*>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
+   m_eventchain_list=new UI::Listselect<Widelands::EventChain*>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_eventchain_list->selected.set(this, &Editor_Event_Menu::eventchain_list_selected);
    m_eventchain_list->double_clicked.set(this, &Editor_Event_Menu::eventchain_double_clicked);
    posx += ls_width + spacing;
 
    // Event List
    new UI::Textarea(this, posx, offsy, _("Registered Events: "), Align_Left);
-   m_event_list=new UI::Listselect<Event*>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
+   m_event_list=new UI::Listselect<Widelands::Event*>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu::event_double_clicked);
    posx += ls_width + spacing;
 
    // Trigger List
    new UI::Textarea(this, posx, offsy, _("Registered Triggers"), Align_Left);
-   m_trigger_list=new UI::Listselect<Trigger*>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
+   m_trigger_list=new UI::Listselect<Widelands::Trigger*>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu::trigger_list_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu::trigger_double_clicked);
    posx += ls_width + spacing;
@@ -198,18 +201,18 @@ Editor_Event_Menu::~Editor_Event_Menu()
  * update all lists and stuff
  */
 void Editor_Event_Menu::update() {
-	const Map & map = eia().egbase().map();
+	Widelands::Map const & map = eia().egbase().map();
 
 	m_trigger_list->clear();
 	{
 		const MapTriggerManager & mtm = map.get_mtm();
 		const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 		for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
-			Trigger* trigger = &mtm.get_trigger_by_nr(i);
-			m_trigger_list->add(trigger->get_name(), trigger);
-			if (trigger->get_referencers().empty())
+			Widelands::Trigger & trigger = mtm.get_trigger_by_nr(i);
+			m_trigger_list->add(trigger.get_name(), &trigger);
+			if (trigger.get_referencers().empty())
 				m_trigger_list->set_entry_color
-				(m_trigger_list->size() - 1, RGBColor(255, 0, 0));
+					(m_trigger_list->size() - 1, RGBColor(255, 0, 0));
 		}
 	}
 
@@ -218,11 +221,11 @@ void Editor_Event_Menu::update() {
 		const MapEventManager & mem = map.get_mem();
 		const MapEventManager::Index nr_events = mem.get_nr_events();
 		for (MapEventManager::Index i = 0; i < nr_events; ++i) {
-			Event* event = &mem.get_event_by_nr(i);
-			m_event_list->add(event->name().c_str(), event);
-			if (event->get_referencers().empty())
+			Widelands::Event & event = mem.get_event_by_nr(i);
+			m_event_list->add(event.name().c_str(), &event);
+			if (event.get_referencers().empty())
 				m_event_list->set_entry_color
-				(m_event_list->size()-1, RGBColor(255, 0, 0));
+					(m_event_list->size() - 1, RGBColor(255, 0, 0));
 		}
 	}
 
@@ -232,8 +235,8 @@ void Editor_Event_Menu::update() {
 		const MapEventChainManager::Index nr_eventchains =
 			mecm.get_nr_eventchains();
 		for (MapEventChainManager::Index i = 0; i < nr_eventchains; ++i) {
-			EventChain* evc = &mecm.get_eventchain_by_nr(i);
-			m_eventchain_list->add(evc->name().c_str(), evc);
+			Widelands::EventChain & evc = mecm.get_eventchain_by_nr(i);
+			m_eventchain_list->add(evc.name().c_str(), &evc);
 		}
 	}
 
@@ -263,8 +266,8 @@ void Editor_Event_Menu::clicked_new_event() {
 
 
 void Editor_Event_Menu::clicked_del_event() {
-	const Event & event = *m_event_list->get_selected();
-	const Event::EventReferencerMap & event_referencers =
+	Widelands::Event const & event = *m_event_list->get_selected();
+	Widelands::Event::EventReferencerMap const & event_referencers =
 		event.get_referencers();
 	if (event_referencers.empty()) {
 		eia().egbase().map().get_mem().delete_event(event.name().c_str());
@@ -273,10 +276,10 @@ void Editor_Event_Menu::clicked_del_event() {
       update();
 	} else {
 		std::ostringstream s(_("Can't delete Event. It is in use by "));
-		Event::EventReferencerMap::const_iterator event_referencers_end =
-			event_referencers.end();
+		Widelands::Event::EventReferencerMap::const_iterator
+			event_referencers_end = event_referencers.end();
 		for
-			(Event::EventReferencerMap::const_iterator it =
+			(Widelands::Event::EventReferencerMap::const_iterator it =
 			 event_referencers.begin();
 			 it != event_referencers_end;
 			 ++it)
@@ -291,8 +294,9 @@ void Editor_Event_Menu::clicked_del_event() {
 
 
 void Editor_Event_Menu::clicked_edit_event() {
-	Event & event = *m_event_list->get_selected();
-	Event_Factory::make_event_with_option_dialog(event.get_id(), eia(), &event);
+	Widelands::Event & event = *m_event_list->get_selected();
+	Widelands::Event_Factory::make_event_with_option_dialog
+		(event.get_id(), eia(), &event);
       update();
 }
 
@@ -307,8 +311,8 @@ void Editor_Event_Menu::clicked_new_trigger() {
 
 
 void Editor_Event_Menu::clicked_del_trigger() {
-	Trigger & trigger = *m_trigger_list->get_selected();
-	const Trigger::TriggerReferencerMap & trigger_referencers =
+	Widelands::Trigger & trigger = *m_trigger_list->get_selected();
+	Widelands::Trigger::TriggerReferencerMap const & trigger_referencers =
 		trigger.get_referencers();
 	if (trigger_referencers.empty()) {
 		eia().unreference_player_tribe(0, &trigger);  // Remove all references done by this trigger
@@ -317,10 +321,10 @@ void Editor_Event_Menu::clicked_del_trigger() {
       update();
 	} else {
 		std::ostringstream s(_("Can't delete Trigger. It is in use by "));
-		const Trigger::TriggerReferencerMap::const_iterator
+		Widelands::Trigger::TriggerReferencerMap::const_iterator const
 			trigger_referencers_end = trigger_referencers.end();
 		for
-			(Trigger::TriggerReferencerMap::const_iterator it =
+			(Widelands::Trigger::TriggerReferencerMap::const_iterator it =
 			 trigger_referencers.begin();
 			 it != trigger_referencers_end;
 			 ++it)
@@ -333,8 +337,8 @@ void Editor_Event_Menu::clicked_del_trigger() {
 
 
 void Editor_Event_Menu::clicked_edit_trigger() {
-	Trigger & trigger = *m_trigger_list->get_selected();
-	Trigger_Factory::make_trigger_with_option_dialog
+	Widelands::Trigger & trigger = *m_trigger_list->get_selected();
+	Widelands::Trigger_Factory::make_trigger_with_option_dialog
 		(trigger.get_id(), eia(), &trigger);
 	eia().set_need_save(true);
       update();
@@ -343,31 +347,30 @@ void Editor_Event_Menu::clicked_edit_trigger() {
 
 void Editor_Event_Menu::clicked_new_eventchain() {
       // First, create new TriggerConditional
-      EventChain* ev = new EventChain();
-	Editor_Event_Menu_Edit_TriggerConditional menu(eia(), 0, ev);
+	Widelands::EventChain & ev = *new Widelands::EventChain();
+	Editor_Event_Menu_Edit_TriggerConditional menu(eia(), 0, &ev);
 	if (menu.run()) { // TriggerConditional has been accepted
-		ev->set_trigcond(menu.get_trigcond());
+		ev.set_trigcond(menu.get_trigcond());
 
          // Get the a name
          char buffer[256];
 
-		Map & map = eia().egbase().map();
+		Widelands::Map & map = eia().egbase().map();
 		for (uint32_t n = 1;; ++n) {
 			snprintf(buffer, sizeof(buffer), "%s%u", _("Unnamed").c_str(), n);
             if (not map.get_mecm().get_eventchain(buffer))
                break;
 		}
 
-         ev->set_name(buffer);
-         map.get_mecm().register_new_eventchain(ev);
-			m_eventchain_list->add(_("Unnamed").c_str(), ev, -1, true);
+		ev.set_name(buffer);
+		map.get_mecm().register_new_eventchain(&ev);
+			m_eventchain_list->add(_("Unnamed").c_str(), &ev, -1, true);
          m_eventchain_list->sort();
 		clicked_edit_eventchain();
-		} else {
+	} else
          // TriggerConditional was not accepted. Remove this EventChain straithly.
          // No dereferencing of triggers is needed, since they are not referenced at all on cancel
-         delete ev;
-		}
+		delete &ev;
 }
 
 
@@ -383,7 +386,7 @@ void Editor_Event_Menu::clicked_del_eventchain() {
 
 void Editor_Event_Menu::clicked_edit_eventchain() {
 	Editor_Event_Menu_Edit_EventChain menu
-		(eia(), m_eventchain_list->get_selected());
+		(eia(), *m_eventchain_list->get_selected());
 	menu.run();
       update();
 }

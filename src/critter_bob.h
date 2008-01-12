@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 #define __S__CRITTER_BOB_H
 
 #include "bob.h"
+
+namespace Widelands {
 
 class Critter_BobAction;
 class Critter_BobProgram;
@@ -52,7 +54,7 @@ private:
 };
 
 class Critter_Bob : public Bob {
-   friend class Widelands_Map_Bobdata_Data_Packet;
+	friend struct Map_Bobdata_Data_Packet;
 	friend class Critter_BobProgram;
 
    MO_DESCR(Critter_Bob_Descr);
@@ -83,6 +85,8 @@ private:
 private:
 	static Task taskRoam;
 	static Task taskProgram;
+};
+
 };
 
 #endif // __S__CRITTER_BOB_H

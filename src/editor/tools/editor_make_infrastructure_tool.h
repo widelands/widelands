@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,19 +36,21 @@ this places immovables on the map
 struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this), m_player(1) {}
 
-	void          set_player(const Player_Number n) throw () {m_player = n;}
-	Player_Number get_player() const                throw () {return m_player;}
+	void          set_player(Widelands::Player_Number const n) throw ()
+	{m_player = n;}
+	Widelands::Player_Number get_player() const throw () {return m_player;}
 
-	int32_t handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
+	int32_t handle_click_impl
+		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
 
 private:
-	Player_Number m_player;
+	Widelands::Player_Number m_player;
       UI::UniqueWindow::Registry m_registry;
 };
 
 int32_t Editor_Make_Infrastructure_Tool_Callback
-(const TCoords<FCoords>, void *, int32_t);
+(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 
 #endif
