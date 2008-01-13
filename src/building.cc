@@ -162,11 +162,11 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 
       // build animation
       s = prof->get_section("build");
+			if (!s)
+				throw wexception("Missing build animation");
+
 			if (s->get_int("fps", -1) != -1)
          throw wexception("fps defined for build animation!");
-
-      if (!s)
-         throw wexception("Missing build animation");
 
 			if (!is_animation_known("build"))
          add_animation("build", g_anim.get(directory, s, 0, encdata));
