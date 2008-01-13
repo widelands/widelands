@@ -359,18 +359,20 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 		action->sparam1.size() ? w->get_resource(action->sparam1.c_str()) : -1;
 
 	Area<FCoords> area(map.get_fcoords(get_position()), action->iparam1);
-	int32_t const retval =
-		map.find_reachable_fields
-		(area,
-		 &list,
-		 cstep,
-		 res == -1 ?
-		 FindNodeSize(static_cast<FindNodeSize::Size>(action->iparam2))
-		 :
-		 FindNodeSizeResource
-		 (static_cast<FindNodeSize::Size>(action->iparam2), res));
 
-	if (!retval) {
+	if
+		(!
+		 (res != -1 ?
+		  map.find_reachable_fields
+		  (area, &list, cstep,
+		   FindNodeSizeResource
+		   (static_cast<FindNodeSize::Size>(action->iparam2), res))
+		  :
+		  map.find_reachable_fields
+		  (area, &list, cstep,
+		   FindNodeSize
+		   (static_cast<FindNodeSize::Size>(action->iparam2)))))
+	{
 		molog("  no space found\n");
 		set_signal("fail");
 		pop_task();
