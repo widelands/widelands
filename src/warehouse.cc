@@ -704,11 +704,11 @@ Worker * Warehouse::launch_worker(Game * game, int32_t const ware) {
 			worker = &workerdescr.create(*game, owner(), *this, m_position);
 			break;
 		} else {
-			Worker & worker = dynamic_cast<Worker &>(*it->get(game));
-			if (worker.name() == workername) {
+			worker = dynamic_cast<Worker *>(it->get(game));
+			if (worker->name() == workername) {
       // one found, make him available
-				worker.reset_tasks(game);  //  forget everything you did
-				worker.set_location(this); //  back in a economy
+				worker->reset_tasks(game);  //  forget everything you did
+				worker->set_location(this); //  back in a economy
 				m_incorporated_workers.erase(it);
 				break;
 			}
@@ -1003,7 +1003,6 @@ log ("Warehouse::get_soldiers_passing :");
 
 	assert(m_supply->stock_workers(w));
 
-	Worker_Descr * const workerdescr = owner().tribe().get_worker_descr(w);
    // Look if we got one in stock of those
 
 	for
