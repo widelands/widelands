@@ -39,8 +39,10 @@ EventChain::State EventChain::run(Game* g) {
    m_state = RUNNING;
 
 	while (m_curevent < m_events.size()) {
-		if (m_events[m_curevent]->run(g) == Event::DONE) ++m_curevent;
-      else break;
+		if (m_events[m_curevent]->run(g) == Event::DONE)
+			++m_curevent;
+		else
+			break;
 	}
 
 	if (m_curevent == m_events.size()) {

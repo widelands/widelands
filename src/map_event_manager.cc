@@ -36,8 +36,8 @@ MapEventManager::~MapEventManager() {
 
 bool MapEventManager::register_new_event(Event* mv) {
    // check if this event is already known
-   if (get_event(mv->name().c_str()))
-         return 0;
+	if (get_event(mv->name().c_str()))
+		return false;
 
    m_events.push_back(mv);
    return true;
@@ -47,30 +47,31 @@ bool MapEventManager::register_new_event(Event* mv) {
  * Get events
  */
 Event* MapEventManager::get_event(const char* name) {
-   uint32_t i;
-   Event* retval = 0;
-	for (i = 0; i < m_events.size(); ++i) {
-      if (!strcmp(m_events[i]->name().c_str(), name)) {
-         retval = m_events[i];
-         break;
-		}
-	}
-
-   return retval;
+	event_vector::const_iterator const events_end = m_events.end();
+	for
+		(event_vector::const_iterator it = m_events.begin();
+		 it != events_end;
+		 ++it)
+		if (!strcmp((*it)->name().c_str(), name))
+			return *it;
+	return 0;
 }
 
 /*
  * Remove a event
  */
 void MapEventManager::delete_event(const char* name) {
-   for (uint32_t i = 0; i < m_events.size(); ++i) {
-      if (!strcmp(m_events[i]->name().c_str(), name)) {
-         delete m_events[i];
-         m_events[i] = m_events[m_events.size() - 1];
-         m_events.resize(m_events.size() - 1);
+	event_vector::const_iterator const events_end = m_events.end();
+	for
+		(event_vector::iterator it = m_events.begin();
+		 it != events_end;
+		 ++it)
+		if (!strcmp((*it)->name().c_str(), name)) {
+			delete *it;
+			*it = *(events_end - 1);
+			m_events.pop_back();
          break;
 		}
-	}
 }
 
 /*
@@ -78,9 +79,9 @@ void MapEventManager::delete_event(const char* name) {
  */
 void MapEventManager::delete_unreferenced_events() {
    uint32_t i = 0;
-   while (i < m_events.size()) {
+	while (i < m_events.size()) {
       Event* tr = m_events[i];
-      if (tr->get_referencers().empty()) {
+		if (tr->get_referencers().empty()) {
          delete_event(tr->name().c_str());
          i = 0;
          continue;

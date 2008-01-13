@@ -85,9 +85,10 @@ int32_t Editor_Info_Tool::handle_click_impl
 			 amount,
 			 _("amount of").c_str(),
 			 world.get_resource(res)->name().c_str());
-   else snprintf
-		(buf1, sizeof(buf1),
-		 _(" Has resources: No\n").c_str());
+	else
+		snprintf
+			(buf1, sizeof(buf1),
+			 _(" Has resources: No\n").c_str());
    buf+=buf1;
 
    sprintf(buf1, " %s: %i\n", _("Start resources amount").c_str(), f->get_starting_res_amount());

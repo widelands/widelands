@@ -149,9 +149,9 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
          r = gr + factor;
          g = gg + factor;
          b = gb + factor;
-         if (b & 0xFF00) b = (~b) >> 24;
-         if (g & 0xFF00) g = (~g) >> 24;
-         if (r & 0xFF00) r = (~r) >> 24;
+		if (b & 0xFF00) b = (~b) >> 24;
+		if (g & 0xFF00) g = (~g) >> 24;
+		if (r & 0xFF00) r = (~r) >> 24;
          clr = SDL_MapRGB(m_surface->format, r, g, b);
          set_pixel(x, y, clr);
 	}
@@ -390,7 +390,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
          snprintf(fname, sizeof(fname), "%s%s", data->picnametempl.c_str(), extensions[i]);
          p = fname + strlen(fname);
 			while (p > fname) {
-            if (*--p != '?')
+				if (*--p != '?')
                continue;
 
             cycling=true;
@@ -399,13 +399,16 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
             nr = nr / 10;
 			}
 
-         if (nr) // cycled up to maximum possible frame number
+			if (nr) // cycled up to maximum possible frame number
             break;
 
 
          // is the frame actually there?
 			if (not g_fs->FileExists(fname)) {
-            if (i==(nextensions-1)) {alldone=true; break;}
+				if (i == nextensions - 1) {
+					alldone = true;
+					break;
+				}
             continue;
 			}
 
@@ -423,11 +426,13 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 			}
 
 
-         if (!cycling) alldone=true;
+			if (!cycling)
+				alldone = true;
 			break;
 		}
 
-      if (alldone==true) break;
+		if (alldone)
+			break;
 	}
 
    m_plrframes[0] = frames;

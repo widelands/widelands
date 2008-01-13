@@ -41,11 +41,9 @@ struct WL_Map_Loader : public Map_Loader {
 
 	Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
 
-      static bool is_widelands_map(std::string filename) {
-         if (!strcasecmp(&filename.c_str()[filename.size()-4], WLMF_SUFFIX))
-            return true;
-         return false;
-		}
+	static bool is_widelands_map(std::string const & filename) {
+		return !strcasecmp(&filename.c_str()[filename.size() - 4], WLMF_SUFFIX);
+	}
 
 private:
 	FileSystem & m_fs;

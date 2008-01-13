@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -160,8 +160,8 @@ void Fullscreen_Menu_InetLobby::room_info(std::vector<std::string > users) {
    /* We clear the list, and refill it */
    m_userlist->clear();
 
-	for (uint32_t i = 0; i < users.size(); ++i) {
-      if (users[i] == m_gsc->get_username()) continue;
+	for (uint32_t i = 0; i < users.size(); ++i)
+		if (users[i] != m_gsc->get_username()) {
       std::string name = users[i];
 		m_userlist->add(name.c_str(), 0);
       // Get User Informations

@@ -685,7 +685,7 @@ void FieldActionWindow::act_buildflag()
 		game->send_player_build_flag(m_plr->get_player_number(), m_field);
 	// Editor: Just plain build this flag
 	else m_plr->build_flag(m_field);
-   if (m_iabase->is_building_road())
+	if (m_iabase->is_building_road())
       m_iabase->finish_build_road();
 	okdialog();
 }
@@ -737,7 +737,7 @@ Abort building a road.
 */
 void FieldActionWindow::act_abort_buildroad()
 {
-   if (!m_iabase->is_building_road())
+	if (!m_iabase->is_building_road())
       return;
 
    m_iabase->abort_build_road();
@@ -903,10 +903,7 @@ void FieldActionWindow::act_attack_more() {
    char buf[20];
    uint32_t available = get_max_attackers();
 
-   if (m_attackers < available)
-      m_attackers ++;
-   else
-      m_attackers = available;
+	m_attackers = m_attackers < available ? m_attackers + 1 : available;
 
    sprintf(buf, "%d/%d", m_attackers, available);
    m_text_attackers->set_text (buf);
@@ -925,10 +922,7 @@ void FieldActionWindow::act_attack_less() {
    char buf[20];
    uint32_t available = get_max_attackers();
 
-   if (m_attackers > 0)
-      m_attackers --;
-   else
-      m_attackers = 0;
+	m_attackers = m_attackers > 0 ? m_attackers - 1 : 0;
 
    sprintf(buf, "%d/%d", m_attackers, available);
    m_text_attackers->set_text (buf);

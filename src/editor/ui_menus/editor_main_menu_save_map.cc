@@ -160,10 +160,9 @@ called when the ok button has been clicked
 void Main_Menu_Save_Map::clicked_ok() {
       std::string filename=m_editbox->get_text();
 
-      if (filename=="") {
+	if (filename == "")
          // Maybe a dir is selected
 			filename = m_ls->get_selected();
-		}
 
 	if
 		(g_fs->IsDirectory(filename.c_str())
@@ -176,7 +175,10 @@ void Main_Menu_Save_Map::clicked_ok() {
          fill_list();
 		} else {
          // Ok, save this map
-         if (save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
+			if
+				(save_map
+				 (filename,
+				  ! g_options.pull_section("global")->get_bool("nozip", false)))
 				die();
 		}
 }
@@ -265,11 +267,12 @@ void Main_Menu_Save_Map::fill_list() {
 		 ++pname)
 	{
       const char *name = pname->c_str();
-      if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
-      if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
-      if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue;
-      if (!g_fs->IsDirectory(name)) continue;
-		if (Widelands::WL_Map_Loader::is_widelands_map(name)) continue;
+		if
+			(strcmp(FileSystem::FS_Filename(name), ".")    and
+			 strcmp(FileSystem::FS_Filename(name), "..")   and // Upsy, appeared again. ignore
+			 strcmp(FileSystem::FS_Filename(name), ".svn") and
+			 g_fs->IsDirectory(name)                       and
+			 not Widelands::WL_Map_Loader::is_widelands_map(name))
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -321,13 +324,13 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 
    // ok, first check if the extension matches (ignoring case)
    bool assign_extension=true;
-   if (filename.size() >= strlen(WLMF_SUFFIX)) {
+	if (filename.size() >= strlen(WLMF_SUFFIX)) {
       char buffer[10]; // enough for the extension
       filename.copy(buffer, sizeof(WLMF_SUFFIX), filename.size()-strlen(WLMF_SUFFIX));
-      if (!strncasecmp(buffer, WLMF_SUFFIX, strlen(WLMF_SUFFIX)))
+		if (!strncasecmp(buffer, WLMF_SUFFIX, strlen(WLMF_SUFFIX)))
          assign_extension=false;
 	}
-   if (assign_extension)
+	if (assign_extension)
       filename+=WLMF_SUFFIX;
 
    // Now append directory name
@@ -336,7 +339,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
    complete_filename+=filename;
 
    // Check if file exists, if it does, show a warning
-   if (g_fs->FileExists(complete_filename)) {
+	if (g_fs->FileExists(complete_filename)) {
       std::string s=_("A File with the name ");
       s+=FileSystem::FS_Filename(filename.c_str());
       s+=_(" exists already. Overwrite?");
@@ -349,7 +352,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	}
 
    FileSystem* fs = 0;
-   if (!binary) {
+	if (!binary) {
    // Make a filesystem out of this
       fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR);
 	} else {
@@ -357,7 +360,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
 	}
 	Widelands::Map_Saver wms(*fs, &m_parent->egbase());
-   try {
+	try {
 		wms.save();
       m_parent->set_need_save(false);
 	} catch (std::exception& exe) {

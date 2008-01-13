@@ -177,7 +177,7 @@ m_event   (event)
                break;
 				}
 
-         if (foundidx==m_null_triggers[j])
+			if (foundidx == m_null_triggers[j])
             m_buttons[i].trigger=j;
 		}
 	}
@@ -226,29 +226,35 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 
 
 void Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease() {
-            m_nr_buttons--;
-            if (m_nr_buttons<1) m_nr_buttons=1;
+	--m_nr_buttons;
+	if (m_nr_buttons < 1)
+		m_nr_buttons = 1;
             update();
 }
 
 
 void Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase() {
-            m_nr_buttons++;
-            if (m_nr_buttons>MAX_BUTTONS) m_nr_buttons=MAX_BUTTONS;
+	++m_nr_buttons;
+	if (m_nr_buttons > MAX_BUTTONS)
+		m_nr_buttons = MAX_BUTTONS;
             update();
 }
 
 
 void Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease() {
             m_buttons[m_ls_selected].trigger--;
-            if (m_buttons[m_ls_selected].trigger<-1) m_buttons[m_ls_selected].trigger=m_null_triggers.size()-1;
+	if (m_buttons[m_ls_selected].trigger < -1)
+		m_buttons[m_ls_selected].trigger = m_null_triggers.size() - 1;
             update();
 }
 
 
 void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
             m_buttons[m_ls_selected].trigger++;
-            if (m_buttons[m_ls_selected].trigger>=static_cast<int32_t>(m_null_triggers.size()))
+	if
+		(m_buttons[m_ls_selected].trigger
+		 >=
+		 static_cast<int32_t>(m_null_triggers.size()))
                m_buttons[m_ls_selected].trigger=-1;
             update();
 }
@@ -258,12 +264,12 @@ void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
  * update function: update all UI elements
  */
 void Event_Message_Box_Option_Menu::update() {
-   if (m_ls_selected>=m_nr_buttons) m_buttons_ls->select(0);
+	if (m_ls_selected >= m_nr_buttons)
+		m_buttons_ls->select(0);
 
-   if (!m_null_triggers.size()) {
+	if (!m_null_triggers.size())
       // No triggers, no other buttons
       m_nr_buttons=1;
-	}
 
    m_buttons_ls->clear();
 	for (uint32_t i = 0; i < m_nr_buttons; ++i)
@@ -279,7 +285,7 @@ void Event_Message_Box_Option_Menu::update() {
 
    m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());
 
-   if (m_nr_buttons && m_null_triggers.size()) {
+	if (m_nr_buttons && m_null_triggers.size()) {
 		m_current_trigger_ta->set_text
 			(m_buttons[m_ls_selected].trigger == -1 ?
 			 "none"

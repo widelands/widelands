@@ -114,10 +114,10 @@ called when one of the editboxes are changed
 ===========
 */
 void Main_Menu_Map_Options::changed(int32_t id) {
-   if (id==0) {
+	if        (id == 0) {
       // name
 		m_parent->egbase().map().set_name(m_name->get_text());
-	} else if (id==1) {
+	} else if (id == 1) {
       // author
 		m_parent->egbase().map().set_author(m_author->get_text());
 	}

@@ -47,10 +47,9 @@ template <class T> struct Descr_Maintainer {
 		return -1;
 	}
 
-      T * get(const int32_t idx) const {
-         if (idx >= 0 and idx < static_cast<int32_t>(nitems)) return items[idx];
-         else return 0;
-		}
+	T * get(int32_t const idx) const {
+		return idx >= 0 and idx < static_cast<int32_t>(nitems) ? items[idx] : 0;
+	}
 
 private:
 	typename T::Index capacity;

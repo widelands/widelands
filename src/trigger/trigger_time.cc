@@ -59,7 +59,8 @@ void Trigger_Time::Write(Section & s) const {
  * check if trigger conditions are done
  */
 void Trigger_Time::check_set_conditions(Game* game) {
-   if (((game->get_gametime()-m_last_start_time)/1000) < m_wait_time) return;
+	if ((game->get_gametime() - m_last_start_time) / 1000 < m_wait_time)
+		return;
 
    // Time has come. Set us
    set_trigger(true);

@@ -19,6 +19,7 @@
 
 #include "warehouse.h"
 
+#include "carrier.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "player.h"
@@ -447,7 +448,7 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
 {
 	if (upcast(Game, game, gg)) {
 
-      while (m_requests.size()) {
+		while (m_requests.size()) {
          Request* req = m_requests[m_requests.size()-1];
 
          m_requests.pop_back();
@@ -456,11 +457,11 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
 		}
 
       // all cached workers are unbound and freed
-      while (m_incorporated_workers.size()) {
-         Worker* w=static_cast<Worker*>(m_incorporated_workers.begin()->get(gg));
+		while (m_incorporated_workers.size()) {
          // If the game ends and this worker has been created before this warehouse, it might
          // already be deleted. So do not try and free him
-         if (w) w->reset_tasks(game);
+			if (upcast(Worker, worker, m_incorporated_workers.begin()->get(gg)))
+				worker->reset_tasks(game);
          m_incorporated_workers.erase(m_incorporated_workers.begin());
 		}
 	}
@@ -683,8 +684,7 @@ Warehouse::launch_worker
 Start a worker of a given type. The worker will be assigned a job by the caller.
 ===============
 */
-Worker* Warehouse::launch_worker(Game* g, int32_t ware)
-{
+Worker * Warehouse::launch_worker(Game * game, int32_t const ware) {
 	assert(m_supply->stock_workers(ware));
 
 	Worker* worker;
@@ -693,23 +693,26 @@ Worker* Warehouse::launch_worker(Game* g, int32_t ware)
 
    // Look if we got one in stock of those
 	const std::string & workername = workerdescr.name();
-   std::vector<Object_Ptr>::iterator i;
+   std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
+		m_incorporated_workers.end();
 	for
-		(i = m_incorporated_workers.begin();
-		 i != m_incorporated_workers.end();
-		 ++i)
-      if (static_cast<Worker*>(i->get(g))->name()==workername) break;
-
-   if (i==m_incorporated_workers.end()) {
+		(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
+		 ;
+		 ++it)
+		if (it == m_incorporated_workers.end()) {
       // None found, create a new one (if available)
-		worker = &workerdescr.create(*g, owner(), *this, m_position);
-	} else {
+			worker = &workerdescr.create(*game, owner(), *this, m_position);
+			break;
+		} else {
+			Worker & worker = dynamic_cast<Worker &>(*it->get(game));
+			if (worker.name() == workername) {
       // one found, make him available
-      worker = static_cast<Worker*>(i->get(g));
-      worker->reset_tasks(g); // Forget everything you did
-      worker->set_location(this); // Back in a economy
-      m_incorporated_workers.erase(i);
-	}
+				worker.reset_tasks(game);  //  forget everything you did
+				worker.set_location(this); //  back in a economy
+				m_incorporated_workers.erase(it);
+				break;
+			}
+		}
 
    m_supply->remove_workers(ware, 1);
 
@@ -850,8 +853,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
    // We remove carrier, but we keep other workers around
-   if (w->get_worker_type()==Worker_Descr::CARRIER)
-   {
+	if (dynamic_cast<Carrier const *>(w)) {
       w->remove(g);
       w=0;
 	} else {
@@ -879,13 +881,21 @@ void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Work
 
       std::vector<Object_Ptr>::iterator i=m_incorporated_workers.begin();
 
-      while (i!= m_incorporated_workers.end() && workername <= static_cast<Worker*>(i->get(g))->name()) ++i;
-      if (i==m_incorporated_workers.end()) {
+	while
+		(i!= m_incorporated_workers.end()
+		 &&
+		 workername <= dynamic_cast<Worker &>(*i->get(g)).name())
+		++i;
+	if (i == m_incorporated_workers.end()) {
          m_incorporated_workers.insert(i, w);
          return;
 		}
 
-      while (i!=m_incorporated_workers.end() && w->get_serial() <= static_cast<Worker*>(i->get(g))->get_serial()) ++i;
+	while
+		(i != m_incorporated_workers.end()
+		 &&
+		 w->get_serial() <= dynamic_cast<Worker &>(*i->get(g)).get_serial())
+		++i;
 
       m_incorporated_workers.insert(i, w);
 }
@@ -993,27 +1003,18 @@ log ("Warehouse::get_soldiers_passing :");
 
 	assert(m_supply->stock_workers(w));
 
-	Worker_Descr* workerdescr;
-	Soldier* soldier;
-
-	workerdescr = get_owner()->tribe().get_worker_descr(w);
+	Worker_Descr * const workerdescr = owner().tribe().get_worker_descr(w);
    // Look if we got one in stock of those
-   std::string workername=workerdescr->name();
 
 	for
 		(std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
 		 i != m_incorporated_workers.end();
 		 ++i)
-	{
-      if (static_cast<Worker*>(i->get(g))->name()==workername)
-		{
-			soldier = static_cast<Soldier*>(i->get(g));
+		if (upcast(Soldier, soldier, i->get(g))) {
 
 			// Its a marked soldier, we cann't supply it !
-			if (!soldier->is_marked())
-			{
-				if (r)
-				{
+			if (!soldier->is_marked()) {
+				if (r) {
 					if
 						(r->check
 						 (soldier->get_level(atrHP),
@@ -1034,7 +1035,6 @@ log ("Warehouse::get_soldiers_passing :");
 			else
 				log ("M");
 		}
-	}
 	log ("\n");
 	return number;
 }

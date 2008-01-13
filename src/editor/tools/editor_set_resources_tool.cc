@@ -52,8 +52,10 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 		int32_t max_amount = world.get_resource(m_cur_res)->get_max_amount();
 
       amount=m_set_to;
-      if (amount<0) amount=0;
-      if (amount>max_amount) amount=max_amount;
+		if (amount < 0)
+			amount = 0;
+		if (amount > max_amount)
+			amount = max_amount;
 
 		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{

@@ -318,7 +318,7 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Variable_Data_Packet        p; p.Read(m_fs, egbase, !scenario, m_mol);}
    log("done!\n ");
 
-   if (m_mol->get_nr_unloaded_objects())
+	if (m_mol->get_nr_unloaded_objects())
       log("WARNING: There are %i unloaded objects. This is a bug, please consider committing!\n", m_mol->get_nr_unloaded_objects());
 
    m_map->recalc_whole_map();

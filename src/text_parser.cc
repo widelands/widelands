@@ -229,20 +229,20 @@ bool Text_Parser::extract_format_block
 }
 
 void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Block *element) {
-   if (!format.size())
+	if (!format.size())
       return;
-   if (format[0] == ' ')
+	if (format[0] == ' ')
       format.erase(0, 1);
 
-   while (format.size()) {
+	while (format.size()) {
       SSS_T key_end = format.find("=");
-      if (key_end == std::string::npos)
+		if (key_end == std::string::npos)
          return;
-      else {
+		else {
          std::string key = format.substr(0, key_end);
          format.erase(0, key_end+1);
          SSS_T val_end = format.find(" ");
-         if (val_end == std::string::npos)
+			if (val_end == std::string::npos)
             val_end = format.size();
          std::string val = format.substr(0, val_end);
          format.erase(0, val_end+1);
@@ -284,7 +284,7 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
 				element->set_line_spacing(atoi(val.c_str()));
 			else if (key == "font-color") {
             SSS_T offset = 0;
-            if (val[0] == '#')
+				if (val[0] == '#')
                offset = 1;
             std::string r = "0x"+val.substr(offset, 2);
             std::string g = "0x"+val.substr(offset+2, 2);
@@ -296,21 +296,19 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
 				int32_t blue = strtol(b.c_str(), &ptr, 0);
 				element->set_font_color(RGBColor(red, green, blue));
 			}
-         else if (key == "font-weight")
+			else if (key == "font-weight")
 				element->set_font_weight(val);
-         else if (key == "font-style")
+			else if (key == "font-style")
 				element->set_font_style(val);
-         else if (key == "font-decoration")
+			else if (key == "font-decoration")
 				element->set_font_decoration(val);
 		}
 	}
 }
 
 Align Text_Parser::set_align(std::string align) {
-   if (align == "right")
-      return Align_Right;
-   else if (align == "center")
-      return Align_HCenter;
-   else
-      return Align_Left;
+	return
+		align == "right"  ? Align_Right   :
+		align == "center" ? Align_HCenter :
+		Align_Left;
 }

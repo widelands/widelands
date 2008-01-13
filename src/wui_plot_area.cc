@@ -144,15 +144,15 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    uint32_t max = 0;
    // Find the maximum value
 	if (m_plotmode == PLOTMODE_ABSOLUTE)  {
-		for (uint32_t i = 0; i < m_plotdata.size(); ++i) {
-         if (!m_plotdata[i].showplot) continue;
-			for (uint32_t l = 0; l < m_plotdata[i].dataset->size(); ++l)
-            if (max < (*m_plotdata[i].dataset)[l])
+		for (uint32_t i = 0; i < m_plotdata.size(); ++i)
+			if (m_plotdata[i].showplot) {
+				for (uint32_t l = 0; l < m_plotdata[i].dataset->size(); ++l)
+					if (max < (*m_plotdata[i].dataset)[l])
                max = (*m_plotdata[i].dataset)[l];
-		}
+			}
 	} else {
-		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot) {
-         if (!m_plotdata[plot].showplot) continue;
+		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
+			if (m_plotdata[plot].showplot) {
 
          const std::vector<uint32_t>* dataset = m_plotdata[plot].dataset;
 
@@ -166,14 +166,14 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
          uint32_t add = 0;
          // Relative data, first entry is always zero
-			for (uint32_t i = 0; i < dataset->size(); ++i) {
+				for (uint32_t i = 0; i < dataset->size(); ++i) {
             add += (*dataset)[i];
-            if (! ((i+1) % how_many)) {
-               if (add > max) max = add;
+					if (0 == ((i + 1) % how_many)) {
+						if (add > max) max = add;
                add = 0;
+					}
 				}
 			}
-		}
 	}
 
    // Print the maximal value
@@ -195,14 +195,14 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 		(static_cast<float>(time_in_ms[m_time])
 		 /
 		 static_cast<float>(m_sample_rate));
-	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot) {
-      if (!m_plotdata[plot].showplot) continue;
+	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
+		if (m_plotdata[plot].showplot) {
 
       RGBColor color = m_plotdata[plot].plotcolor;
       const std::vector<uint32_t>* dataset = m_plotdata[plot].dataset;
 
       std::vector<uint32_t> m_data;
-		if (m_plotmode == PLOTMODE_RELATIVE) {
+			if (m_plotmode == PLOTMODE_RELATIVE) {
          // How many do we take together
 			const int32_t how_many = static_cast<int32_t>
 				((static_cast<float>(time_in_ms[m_time])
@@ -216,7 +216,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
          m_data.push_back(0);
 			for (uint32_t i = 0; i < dataset->size(); ++i) {
             add += (*dataset)[i];
-            if (! ((i+1) % how_many)) {
+				if (0 == ((i + 1) % how_many)) {
                m_data.push_back(add);
                add = 0;
 				}
@@ -249,16 +249,15 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
          lx = curx;
          ly = cury;
 		}
-	}
+		}
 }
 
 /*
  * Register a new plot data stream
  */
 void WUIPlot_Area::register_plot_data(uint32_t id, const std::vector<uint32_t>* data, RGBColor color) {
-   if (id >= m_plotdata.size()) {
+	if (id >= m_plotdata.size())
       m_plotdata.resize(id+1);
-	}
 
    m_plotdata[id].dataset = data;
    m_plotdata[id].showplot = false;

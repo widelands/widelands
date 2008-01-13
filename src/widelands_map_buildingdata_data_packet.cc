@@ -142,8 +142,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
       constructionsite.m_building=constructionsite.get_owner()->tribe().get_building_descr(constructionsite.get_owner()->tribe().get_safe_building_index(fr.CString()));
-      bool prevb=fr.Unsigned8();
-      if (prevb) {
+		if (fr.Unsigned8()) {
          constructionsite.m_prev_building=constructionsite.get_owner()->tribe().get_building_descr(constructionsite.get_owner()->tribe().get_safe_building_index(fr.CString()));
 		} else
          constructionsite.m_prev_building=0;
@@ -567,6 +566,9 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 
    // Describtions
    fw.CString(constructionsite.m_building->name().c_str());
+	//  FIXME Just write the string without the 1 first:
+	//  FIXME   fw.CString(constructionsite.m_prev_building ? constructionsite.m_prev_building->name().c_str() : "");
+	//  FIXME When reading, the empty string should mean no prev_building.
 	if (constructionsite.m_prev_building) {
       fw.Unsigned8(1);
       fw.CString(constructionsite.m_prev_building->name().c_str());

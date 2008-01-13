@@ -45,7 +45,7 @@ template<typename Base> struct basic_FileRead : public Base {
 
 	struct FileRead_Exception : public std::exception {};
 	struct File_Boundary_Exceeded : public FileRead_Exception {
-		virtual const char * what() const throw()
+		virtual char const * what() const throw ()
 		{return "File boundary exceeded";}
 	};
 	basic_FileRead () : data(0) {}; /// Create the object with nothing to read.
@@ -68,14 +68,15 @@ template<typename Base> struct basic_FileRead : public Base {
 		return true;
 	}
 
-	void Close(){assert(data); free(data); data = 0;} /// Frees allocated memory.
+	/// Frees allocated memory.
+	void Close() {assert(data); free(data); data = 0;}
 
 	size_t GetSize() const throw () {return length;}
 	bool EndOfFile() const throw () {return length <= filepos;}
 
 	/// Set the file pointer to the given location.
 	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
-	void SetFilePos(const Pos pos){
+	void SetFilePos(Pos const pos) {
 		assert(data);
 		if (pos >= length) throw File_Boundary_Exceeded();
 		filepos = pos;

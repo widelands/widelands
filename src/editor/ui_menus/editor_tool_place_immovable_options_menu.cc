@@ -59,13 +59,13 @@ m_pit     (pit)
 
 
 	uint32_t width = 0, height = 0;
-   for (int32_t j = 0; j < nr_immovables; ++j) {
+	for (int32_t j = 0; j < nr_immovables; ++j) {
 		const Immovable_Descr & descr = *world.get_immovable_descr(j);
 		uint32_t w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture(PicMod_Game, descr.get_picture()), w, h);
-      if (w>width) width=w;
-      if (h>height) height=h;
+		if (w > width)  width  = w;
+		if (h > height) height = h;
 	}
 
 	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart, (immovables_in_row)*(height+1+space)+ystart+yend);

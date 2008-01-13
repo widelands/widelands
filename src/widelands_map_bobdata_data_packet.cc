@@ -59,37 +59,33 @@ void Map_Bobdata_Data_Packet::Read
 throw
 (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
 	FileRead fr;
-   try {
-      fr.Open(fs, "binary/bob_data");
-	} catch (...) {
-      // not there, so skip
-      return ;
-	}
+	try {fr.Open(fs, "binary/bob_data");} catch (...) {return;}
 
    // First packet version
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (;;) {
          uint32_t reg=fr.Unsigned32();
-         if (reg==0xffffffff) break; // No more bobs
+			if (reg == 0xffffffff)
+				break; // No more bobs
 
-         assert(ol->is_object_known(reg));
-         Bob* bob=static_cast<Bob*>(ol->get_object_by_file_index(reg));
+         assert(ol->is_object_known(reg)); //  FIXME
+			Bob* bob=static_cast<Bob*>(ol->get_object_by_file_index(reg)); //  FIXME
 
          uint8_t read_owner=fr.Unsigned8();
          Player* plr_owner=0;
-         if (read_owner) {
+			if (read_owner) {
             plr_owner=egbase->get_safe_player(read_owner);
             assert(plr_owner); // He must be there
 			}
 
-         Coords pos;
-         pos.x=fr.Unsigned16();
-         pos.y=fr.Unsigned16();
+         Coords pos; //  FIXME
+         pos.x=fr.Unsigned16(); //  FIXME
+         pos.y=fr.Unsigned16(); //  FIXME
 
          // Basic initialisation
          bob->set_owner(plr_owner);
@@ -99,7 +95,7 @@ throw
          bool have_transfer=fr.Unsigned8();
 
          Transfer* trans=0;
-         if (have_transfer) {
+			if (have_transfer) {
             trans=bob->m_stack[0].transfer;
             assert(trans);
 			}
@@ -110,7 +106,7 @@ throw
          bob->m_actid=fr.Unsigned32();
 
          // Animation
-         if (fr.Unsigned8()) {
+			if (fr.Unsigned8()) {
             bob->m_anim=bob->descr().get_animation(fr.CString());
 			} else
             bob->m_anim=0;
@@ -125,38 +121,61 @@ throw
          bob->m_stack.resize(fr.Unsigned16());
 			for (uint32_t i = 0; i < bob->m_stack.size(); ++i) {
             Bob::State* s=&bob->m_stack[i];
-            Bob::Task* task;
 
-            // Task
-            std::string taskname=fr.CString();
-            if (taskname=="idle") task=&Bob::taskIdle;
-            else if (taskname=="movepath") task=&Bob::taskMovepath;
-            else if (taskname=="forcemove") task=&Bob::taskForcemove;
-            else if (taskname=="roam") task=&Critter_Bob::taskRoam;
-            else if (taskname=="program") {
-               if (bob->get_bob_type()==Bob::WORKER)
-                  task=&Worker::taskProgram;
-               else
-                  task=&Critter_Bob::taskProgram;
-				} else if (taskname=="transfer") task=&Worker::taskTransfer;
-            else if (taskname=="buildingwork") task=&Worker::taskBuildingwork;
-            else if (taskname=="return") task=&Worker::taskReturn;
-            else if (taskname=="gowarehouse") task=&Worker::taskGowarehouse;
-            else if (taskname=="dropoff") task=&Worker::taskDropoff;
-            else if (taskname=="fetchfromflag") task=&Worker::taskFetchfromflag;
-            else if (taskname=="waitforcapacity") task=&Worker::taskWaitforcapacity;
-            else if (taskname=="leavebuilding") task=&Worker::taskLeavebuilding;
-            else if (taskname=="fugitive") task=&Worker::taskFugitive;
-            else if (taskname=="geologist") task=&Worker::taskGeologist;
-            else if (taskname=="road") task=&Carrier::taskRoad;
-            else if (taskname=="transport") task=&Carrier::taskTransport;
-            else if (taskname=="moveToBattle") task=&Soldier::taskMoveToBattle;
-            else if (taskname=="moveHome") task=&Soldier::taskMoveHome;
-            else if (taskname=="") continue; // Skip task
+				{ //  Task
+            Bob::Task* task;
+					char const * const taskname = fr.CString();
+					if      (not strcmp(taskname, "idle"))
+						task = &Bob::taskIdle;
+					else if (not strcmp(taskname, "movepath"))
+						task = &Bob::taskMovepath;
+					else if (not strcmp(taskname, "forcemove"))
+						task = &Bob::taskForcemove;
+					else if (not strcmp(taskname, "roam"))
+						task = &Critter_Bob::taskRoam;
+					else if (not strcmp(taskname, "program")) {
+						if (dynamic_cast<Worker const *>(bob))
+							task = &Worker::taskProgram;
+						else if (dynamic_cast<Critter_Bob const *>(bob))
+							task = &Critter_Bob::taskProgram;
+						else
+							throw;
+					}
+					else if (not strcmp(taskname, "transfer"))
+						task = &Worker::taskTransfer;
+					else if (not strcmp(taskname, "buildingwork"))
+						task = &Worker::taskBuildingwork;
+					else if (not strcmp(taskname, "return"))
+						task = &Worker::taskReturn;
+					else if (not strcmp(taskname, "gowarehouse"))
+						task = &Worker::taskGowarehouse;
+					else if (not strcmp(taskname, "dropoff"))
+						task = &Worker::taskDropoff;
+					else if (not strcmp(taskname, "fetchfromflag"))
+						task = &Worker::taskFetchfromflag;
+					else if (not strcmp(taskname, "waitforcapacity"))
+						task = &Worker::taskWaitforcapacity;
+					else if (not strcmp(taskname, "leavebuilding"))
+						task = &Worker::taskLeavebuilding;
+					else if (not strcmp(taskname, "fugitive"))
+						task = &Worker::taskFugitive;
+					else if (not strcmp(taskname, "geologist"))
+						task = &Worker::taskGeologist;
+					else if (not strcmp(taskname, "road"))
+						task = &Carrier::taskRoad;
+					else if (not strcmp(taskname, "transport"))
+						task = &Carrier::taskTransport;
+					else if (not strcmp(taskname, "moveToBattle"))
+						task = &Soldier::taskMoveToBattle;
+					else if (not strcmp(taskname, "moveHome"))
+						task = &Soldier::taskMoveHome;
+					else if (*taskname == '\0')
+						continue; // Skip task
 				else
-					throw wexception("Unknown task %s in file!", taskname.c_str());
+					throw wexception("Unknown task %s in file!", taskname);
 
             s->task=task;
+				}
 
             s->ivar1=fr.Signed32();
             s->ivar2=fr.Signed32();
@@ -164,8 +183,7 @@ throw
 
             s->transfer=0;
 
-            int32_t obj=fr.Unsigned32();
-            if (obj) {
+				if (int32_t obj=fr.Unsigned32()) {
                assert(ol->is_object_known(obj));
                s->objvar1=ol->get_object_by_file_index(obj);
 				} else
@@ -174,8 +192,7 @@ throw
             s->coords.x=fr.Signed32();
             s->coords.y=fr.Signed32();
 
-            bool diranims=fr.Unsigned8();
-            if (diranims) {
+				if (fr.Unsigned8()) {
                const Bob::Descr & bob_descr = bob->descr();
                const uint32_t anims[6] = {
                   bob_descr.get_animation(fr.CString()),
@@ -191,7 +208,7 @@ throw
                s->diranims=0;
 
             uint32_t pathsteps=fr.Unsigned16();
-            if (i < oldstacksize)
+				if (i < oldstacksize)
                delete s->path;
 				if (pathsteps) {
                Coords start;
@@ -204,40 +221,39 @@ throw
 				} else
                s->path=0;
 
-            if (i < oldstacksize && !trans)
+				if (i < oldstacksize && !trans)
                delete s->transfer;
 
-            if (s->task==&Worker::taskGowarehouse || s->task==&Worker::taskTransfer)
-               s->transfer=trans;
-            else
-               s->transfer=0;
+				s->transfer =
+					s->task == &Worker::taskGowarehouse
+					||
+					s->task == &Worker::taskTransfer
+					?
+					trans : 0;
 
             bool route=fr.Unsigned8();
-            if (i < oldstacksize && s->route)
-               if (!route)
-                  delete s->route;
-               else
-                  s->route->clear();
+				if (i < oldstacksize && s->route)
+					if (!route)
+						delete s->route;
+					else
+						s->route->clear();
 
-            if (route) {
-               Route* r;
-               if (!s->route)
-                  r=new Route();
-               else
-                  r=s->route;
+				if (route) {
+					Route * const r = s->route ? s->route : new Route();
 					r->load_pointers(*r->load(fr), *ol);
 					s->route = r;
 				} else
                s->route=0;
 
             // Now programm
-            bool program=fr.Unsigned8();
-            if (program) {
+				if (fr.Unsigned8()) {
                std::string progname=fr.CString();
-               if (bob->get_bob_type()==Bob::WORKER)
-                  s->program=static_cast<Worker*>(bob)->descr().get_program(progname);
-               else
-                  s->program=static_cast<Critter_Bob*>(bob)->descr().get_program(progname);
+					if      (upcast(Worker      const, worker,      bob))
+						s->program = worker     ->descr().get_program(progname);
+					else if (upcast(Critter_Bob const, critter_bob, bob))
+						s->program = critter_bob->descr().get_program(progname);
+					else
+						throw;
 				} else
                s->program=0;
 			}
@@ -247,13 +263,12 @@ throw
          bob->m_sched_init_task=fr.Unsigned8();
          bob->m_signal=fr.CString();
 
-			switch (bob->get_bob_type()) {
-            case Bob::CRITTER: read_critter_bob(&fr, egbase, ol, static_cast<Critter_Bob*>(bob)); break;
-            case Bob::WORKER: read_worker_bob(&fr, egbase, ol, static_cast<Worker*>(bob)); break;
-			default:
-				throw wexception
-					("Unknown sub bob type in Map_Bobdata_Data_Packet::Read");
-			}
+			if      (upcast(Critter_Bob, critter_bob, bob))
+				read_critter_bob(&fr, egbase, ol, critter_bob);
+			else if (upcast(Worker,      worker,      bob))
+				read_worker_bob(&fr, egbase, ol, worker);
+			else
+				assert(false);
 
          ol->mark_object_as_loaded(bob);
 		}
@@ -346,8 +361,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 		}
 
       // location
-      uint32_t reg=fr->Unsigned32();
-      if (reg) {
+		if (uint32_t const reg = fr->Unsigned32()) {
          assert(ol->is_object_known(reg));
          worker->set_location(static_cast<PlayerImmovable*>(ol->get_object_by_file_index(reg)));
          assert(worker->m_location.get(egbase));
@@ -356,8 +370,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 
       // Carried item
-      reg=fr->Unsigned32();
-      if (reg) {
+		if (uint32_t const reg = fr->Unsigned32()) {
          assert(ol->is_object_known(reg));
          worker->m_carried_item=ol->get_object_by_file_index(reg);
 		} else
@@ -369,11 +382,11 @@ void Map_Bobdata_Data_Packet::read_worker_bob
       worker->m_current_exp=fr->Signed32();
 
       Economy* eco=0;
-      if (worker->m_location.get(egbase))
+		if (worker->m_location.get(egbase))
          eco=static_cast<PlayerImmovable*>(worker->m_location.get(egbase))->get_economy();
 
       worker->set_economy(eco);
-      if (worker->m_carried_item.get(egbase))
+		if (worker->m_carried_item.get(egbase))
          static_cast<WareInstance*>(worker->m_carried_item.get(egbase))->set_economy(eco);
 
 
@@ -408,10 +421,7 @@ throw (_wexception)
             fw.Unsigned32(reg);
             // BOB STUFF
 
-            if (bob->m_owner)
-               fw.Unsigned8(bob->m_owner->get_player_number());
-            else
-               fw.Unsigned8(0);
+				fw.Unsigned8(bob->m_owner ? bob->m_owner->get_player_number() : 0);
 
             // m_position
             fw.Unsigned16(bob->m_position.x);
@@ -421,15 +431,15 @@ throw (_wexception)
             // m_linknext, linkpprev are handled automatically
 
             // Are we currently transfering?
-            if (bob->m_stack.size() && bob->m_stack[0].transfer)
-               fw.Unsigned8(1);
-            else
-               fw.Unsigned8(0);
+				fw.Unsigned8(bob->m_stack.size() && bob->m_stack[0].transfer);
 
             fw.Unsigned32(bob->m_actid);
 
             // Animation
-            if (bob->m_anim) {
+				//  FIXME Just write the string without the 1 first:
+				//  FIXME   fw.CString(bob->m_anim ? bob->descr().get_animation_name(bob->m_anim).c_str() : "");
+				//  FIXME When reading, the empty string should mean no animation.
+				if (bob->m_anim) {
                fw.Unsigned8(1);
                fw.CString(bob->descr().get_animation_name(bob->m_anim).c_str());
 				} else
@@ -458,8 +468,7 @@ throw (_wexception)
                fw.Signed32(s->ivar2);
                fw.Signed32(s->ivar3);
 
-               Map_Object* obj=s->objvar1.get(egbase);
-               if (obj) {
+					if (Map_Object * const obj = s->objvar1.get(egbase)) {
                   assert(os->is_object_known(obj));
                   fw.Unsigned32(os->get_object_file_index(obj));
 					} else
@@ -471,7 +480,7 @@ throw (_wexception)
                fw.Signed32(s->coords.x);
                fw.Signed32(s->coords.y);
 
-               if (s->diranims) {
+					if (s->diranims) {
                   fw.Unsigned8(1);
                   fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(1)).c_str());
                   fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(2)).c_str());
@@ -499,14 +508,14 @@ throw (_wexception)
                   fw.Unsigned16(0);
 
                // Route
-               if (s->route) {
+					if (s->route) {
                   fw.Unsigned8(1);
 						s->route->save(fw, egbase, os);
 					} else
                   fw.Unsigned8(0);
 
                // Programm
-               if (s->program) {
+					if (s->program) {
                   fw.Unsigned8(1);
                   fw.CString(s->program->get_name().c_str());
 					} else
@@ -519,14 +528,12 @@ throw (_wexception)
             fw.Unsigned8(bob->m_sched_init_task);
             fw.CString(bob->m_signal.c_str());
 
-				switch (bob->get_bob_type()) {
-               case Bob::CRITTER: write_critter_bob(&fw, egbase, os, static_cast<Critter_Bob*>(bob)); break;
-               case Bob::WORKER: write_worker_bob(&fw, egbase, os, static_cast<Worker*>(bob)); break;
-				default:
-					throw wexception
-						("Unknown sub bob type in Map_Bobdata_Data_Packet::Write");
-
-				}
+				if      (upcast(Critter_Bob, critter_bob, bob))
+					write_critter_bob(&fw, egbase, os, critter_bob);
+				else if (upcast(Worker,      worker,      bob))
+					write_worker_bob (&fw, egbase, os, worker);
+				else
+					assert(false);
 
             os->mark_object_as_saved(bob);
 			}
@@ -552,9 +559,9 @@ void Map_Bobdata_Data_Packet::write_worker_bob
    fw->Unsigned16(WORKER_BOB_PACKET_VERSION);
 
 	switch (worker->get_worker_type()) {
-      case Worker_Descr::NORMAL: break;
-      case Worker_Descr::SOLDIER:
-      {
+	case Worker_Descr::NORMAL:
+		break;
+	case Worker_Descr::SOLDIER: {
          fw->Unsigned16(SOLDIER_WORKER_BOB_PACKET_VERSION);
          Soldier* soldier=static_cast<Soldier*>(worker);
 
@@ -569,16 +576,15 @@ void Map_Bobdata_Data_Packet::write_worker_bob
          fw->Unsigned32(soldier->m_defense_level);
          fw->Unsigned32(soldier->m_evade_level);
          fw->Unsigned8 (soldier->m_marked);
-		}
+	}
       break;
 
-      case Worker_Descr::CARRIER:
-      {
+	case Worker_Descr::CARRIER: {
          fw->Unsigned16(CARRIER_WORKER_BOB_PACKET_VERSION);
          Carrier* c=static_cast<Carrier*>(worker);
 
          fw->Signed32(c->m_acked_ware);
-		}
+	}
       break;
 	default:
 		throw wexception
@@ -586,8 +592,7 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 	}
 
    // location
-   Map_Object* loca=worker->m_location.get(egbase);
-   if (loca) {
+	if (Map_Object * const loca = worker->m_location.get(egbase)) {
       assert(os->is_object_known(loca));
       fw->Unsigned32(os->get_object_file_index(loca));
 	} else
@@ -596,8 +601,7 @@ void Map_Bobdata_Data_Packet::write_worker_bob
    // Economy is not our beer
 
    // Carried item
-   Map_Object* carried_item=worker->m_carried_item.get(egbase);
-   if (carried_item) {
+	if (Map_Object * const carried_item = worker->m_carried_item.get(egbase)) {
       assert(os->is_object_known(carried_item));
       fw->Unsigned32(os->get_object_file_index(carried_item));
 	} else

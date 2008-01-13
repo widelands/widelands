@@ -149,10 +149,10 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 	}
 
    char buf[200];
-   if (m_w<0) m_w=0;
-   if (m_w>=NUMBER_OF_MAP_DIMENSIONS) m_w=NUMBER_OF_MAP_DIMENSIONS-1;
-   if (m_h<0) m_h=0;
-   if (m_h>=NUMBER_OF_MAP_DIMENSIONS) m_h=NUMBER_OF_MAP_DIMENSIONS-1;
+	if (m_w <  0)                        m_w = 0;
+	if (m_w >= NUMBER_OF_MAP_DIMENSIONS) m_w = NUMBER_OF_MAP_DIMENSIONS - 1;
+	if (m_h <  0)                        m_h = 0;
+	if (m_h >= NUMBER_OF_MAP_DIMENSIONS) m_h = NUMBER_OF_MAP_DIMENSIONS - 1;
 	sprintf(buf, "%s: %i", _("Width").c_str(), Widelands::MAP_DIMENSIONS[m_w]);
    m_width->set_text(buf);
 	sprintf(buf, "%s: %i", _("Height").c_str(), Widelands::MAP_DIMENSIONS[m_h]);

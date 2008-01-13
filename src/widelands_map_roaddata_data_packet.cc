@@ -31,6 +31,8 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
+#include "upcast.h"
+
 #include <map>
 
 namespace Widelands {
@@ -54,7 +56,7 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION)
 		for (;;) {
          uint32_t ser=fr.Unsigned32();
-         if (ser==0xffffffff) // end of roaddata
+			if (ser == 0xffffffff) // end of roaddata
             break;
          assert(ol->is_object_known(ser));
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::ROAD);
@@ -93,8 +95,7 @@ throw (_wexception)
          r->m_idle_index=fr.Unsigned32();
          r->m_desire_carriers=fr.Unsigned32();
          assert(!r->m_carrier.get(egbase));
-         uint32_t carrierid=fr.Unsigned32();
-         if (carrierid) {
+			if (uint32_t const carrierid = fr.Unsigned32()) {
             assert(ol->is_object_known(carrierid));
             r->m_carrier=ol->get_object_by_file_index(carrierid);
 			} else
@@ -103,9 +104,8 @@ throw (_wexception)
             delete r->m_carrier_request;
             r->m_carrier_request=0;
 
-         bool request_exists=fr.Unsigned8();
-         if (request_exists) {
-            if (dynamic_cast<const Game *>(egbase)) {
+			if (fr.Unsigned8()) {
+				if (dynamic_cast<Game const *>(egbase)) {
                r->m_carrier_request = new Request(r, 0,
                      &Road::request_carrier_callback, r, Request::WORKER);
                r->m_carrier_request->Read(&fr, egbase, ol);
@@ -132,26 +132,19 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // We walk the map again for roads
-   Map* map=egbase->get_map();
-	for (uint16_t y = 0; y < map->get_height(); ++y) {
-		for (uint16_t x = 0; x < map->get_width(); ++x) {
-         Field* f=map->get_field(Coords(x, y));
-         BaseImmovable* imm=f->get_immovable();
-         if (!imm) continue;
-
-         if (imm->get_type()==Map_Object::ROAD) {
-            Road* r=static_cast<Road*>(imm);
+	Map   const & map        = egbase->map();
+	Field const & fields_end = map[map.max_index()];
+	for (Field const * field = &map[0]; field < &fields_end; ++field)
+		if (upcast(Road const, r, field->get_immovable()))
+			if (not os->is_object_saved(r)) {
             assert(os->is_object_known(r));
-            if (os->is_object_saved(r))
-               continue;
-            uint32_t ser=os->get_object_file_index(r);
 
             // First, write serial
-            fw.Unsigned32(ser);
+            fw.Unsigned32(os->get_object_file_index(r));
 
             // First, write PlayerImmovable Stuff
             // Theres only the owner
-            fw.Unsigned8(r->get_owner()->get_player_number());
+				fw.Unsigned8(r->owner().get_player_number());
 
             // type
             fw.Unsigned32(r->m_type);
@@ -184,15 +177,14 @@ throw (_wexception)
             fw.Unsigned32(r->m_desire_carriers);
 
             // Carrier
-            if (r->m_carrier.get(egbase)) {
+				if (r->m_carrier.get(egbase)) {
                assert(os->is_object_known(r->m_carrier.get(egbase)));
                fw.Unsigned32(os->get_object_file_index(r->m_carrier.get(egbase)));
-				} else {
+				} else
                fw.Unsigned32(0);
-				}
 
             // Request
-            if (r->m_carrier_request) {
+				if (r->m_carrier_request) {
                fw.Unsigned8(1);
                r->m_carrier_request->Write(&fw, egbase, os);
 				} else
@@ -200,8 +192,6 @@ throw (_wexception)
 
             os->mark_object_as_saved(r);
 			}
-		}
-	}
 
    fw.Unsigned32(0xFFFFFFFF); // End of roads
    // DONE

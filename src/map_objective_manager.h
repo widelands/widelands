@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,7 +74,7 @@ struct MapObjective : public TriggerReferencer {
       // Setting the values below is only a good idea in editor
 	void set_trigger(Trigger * const tr) {
          assert(!m_trigger);
-         if (tr)
+		if (tr)
             reference_trigger(tr);
          m_trigger = tr;
 	}

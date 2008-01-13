@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,23 +43,23 @@ struct Languages {
 #ifdef DEFINE_LANGUAGES  // defined in fullscreen_menu_options.cc
 #define NR_LANGUAGES 16
 static Languages available_languages[NR_LANGUAGES] = {
-   {"Default system language", ""},
+	{"Default system language", ""},
 // EXTRACT BEGIN (leaves this line untouched)
-   {"česky", "cz_CZ"},
-   {"Deutsch", "de_DE"},
-   {"English", "en_EN"},
-   {"Español", "es_ES"},
-   {"Français", "fr_FR"},
-   {"Galego", "gl_ES"},
-   {"עברית", "he_HE"},
-   {"Magyar", "hu_HU"},
-   {"Nederlands", "nl_NL"},
-   {"Polski", "pl_PL"},
-   {"Русский", "ru_RU"},
-   {"Suomi", "fi_FI"},
-   {"Slovensky", "sk_SK"},
-   {"Svenska", "sv_SE"},
-   {"Dansk", "da_DK"},
+	{"česky",                  "cz_CZ"},
+	{"Deutsch",                 "de_DE"},
+	{"English",                 "en_EN"},
+	{"Español",                "es_ES"},
+	{"Français",               "fr_FR"},
+	{"Galego",                  "gl_ES"},
+	{"עברית",              "he_HE"},
+	{"Magyar",                  "hu_HU"},
+	{"Nederlands",              "nl_NL"},
+	{"Polski",                  "pl_PL"},
+	{"Русский",          "ru_RU"},
+	{"Suomi",                   "fi_FI"},
+	{"Slovensky",               "sk_SK"},
+	{"Svenska",                 "sv_SE"},
+	{"Dansk",                   "da_DK"},
 // EXTRACT END (leave this line untouched)
 };
 #endif

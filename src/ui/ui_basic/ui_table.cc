@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -171,7 +171,7 @@ void Table<void *>::draw(RenderTarget * dst)
 	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
-      if (y >= get_h())
+		if (y >= get_h())
          return;
 
 		const Entry_Record & er = *m_entry_records[idx];
@@ -197,18 +197,6 @@ void Table<void *>::draw(RenderTarget * dst)
       int32_t curw;
 		for (uint32_t i = 0; i < get_nr_columns(); ++i) {
          curw=m_columns[i].btn->get_w();
-         int32_t x;
-         if (m_align & Align_Right)
-            x = curx + (curw - 1);
-         else if (m_align & Align_HCenter)
-            x = curx + (curw>>1);
-			else {
-            // Pictures are always left aligned, leave some space here
-            if (m_max_pic_width && i==0)
-               x= curx + m_max_pic_width + 10;
-            else
-               x= curx + 1;
-			}
 
          // Horizontal center the string
 			g_fh->draw_string
@@ -216,9 +204,15 @@ void Table<void *>::draw(RenderTarget * dst)
 				 UI_FONT_SMALL,
 				 col,
 				 RGBColor(107, 87, 55),
+				 Point(curx, y)
+				 +
 				 Point
-				 (x,
-				  y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
+				 (m_align & Align_Right     ? curw            -  1 :
+				  m_align & Align_HCenter   ? curw            >> 1 :
+				  // Pictures are always left aligned, leave some space here
+				  m_max_pic_width && i == 0 ? m_max_pic_width + 10 :
+				  1,
+				  (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
 				 er.get_string(i), m_align,
 				 -1);
 
@@ -290,9 +284,11 @@ Table<void *>::Entry_Record & Table<void *>::add
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 	   entry_height = std::max<uint32_t>(entry_height, h);
-      if (m_max_pic_width<w) m_max_pic_width=w;
+		if (m_max_pic_width < w)
+			m_max_pic_width = w;
 	}
-   if (entry_height>m_lineheight) m_lineheight=entry_height;
+	if (entry_height > m_lineheight)
+		m_lineheight = entry_height;
 
 	Entry_Record & result = *new Entry_Record(entry, picid);
 	m_entry_records.push_back(&result);
@@ -300,7 +296,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 
 	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2));
 
-   if (do_select)
+	if (do_select)
       select(m_entry_records.size() - 1);
 
    update(0, 0, get_eff_w(), get_h());

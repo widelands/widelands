@@ -173,7 +173,7 @@ void Editor_Player_Menu::update() {
 		if (map.get_scenario_player_tribe(p) != "<undefined>")
 			m_plr_set_tribes_buts[p - 1]->set_title
 				(map.get_scenario_player_tribe(p).c_str());
-	   else {
+		else {
          m_plr_set_tribes_buts[p - 1]->set_title(m_tribes[0].c_str());
 			map.set_scenario_player_tribe(p, m_tribes[0]);
 		}
@@ -285,9 +285,9 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 				("Map defines tribe %s, but it doesn't exist!", t.c_str());
       uint32_t i;
 		for (i = 0; i < m_tribes.size(); ++i)
-         if (m_tribes[i]==t) break;
-      if (i==m_tribes.size()-1) t=m_tribes[0];
-      else t=m_tribes[++i];
+			if (m_tribes[i] == t)
+				break;
+		t = i == m_tribes.size() - 1 ? m_tribes[0] : m_tribes[++i];
 		parent.egbase().map().set_scenario_player_tribe(n+1, t);
 		parent.set_need_save(true);
 	} else {
@@ -348,7 +348,7 @@ void Editor_Player_Menu::name_changed(int32_t m) {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
 	Widelands::Map & map = parent.egbase().map();
-   if (text=="") {
+	if (text == "") {
 		text = map.get_scenario_player_name(m + 1);
       m_plr_names[m]->set_text(text.c_str());
 	}

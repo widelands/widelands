@@ -56,7 +56,8 @@ m_building(-1) //  FIXME negative value!
    int32_t posx=offsx;
    int32_t posy=offsy;
 
-   if (m_player<1) m_player=1;
+	if (m_player < 1)
+		m_player = 1;
 
    // Fill the building infos
 	Widelands::Editor_Game_Base & editor = eia().egbase();
@@ -178,7 +179,7 @@ bool Event_Allow_Building_Option_Menu::handle_mouserelease
 
 
 void Event_Allow_Building_Option_Menu::clicked_ok() {
-            if (m_name->get_text())
+	if (m_name->get_text())
                m_event.set_name(m_name->get_text());
 	if (m_event.get_player()!=m_player && m_event.get_player() != -1)
 		eia().unreference_player_tribe(m_event.get_player(), &m_event);
@@ -208,16 +209,19 @@ void Event_Allow_Building_Option_Menu::clicked(int32_t i) {
  * update function: update all UI elements
  */
 void Event_Allow_Building_Option_Menu::update() {
-   if (m_player<=0) m_player=1;
+	if (m_player <= 0)
+		m_player = 1;
 	Widelands::Player_Number const nr_players =
 		eia().egbase().map().get_nrplayers();
 	if (m_player > nr_players) m_player = nr_players;
 
-   if (m_building<0) m_building=0;
-   if (m_building>=static_cast<int32_t>(m_buildings.size())) m_building=m_buildings.size()-1;
+	if (m_building < 0)
+		m_building = 0;
+	if (m_building >= static_cast<int32_t>(m_buildings.size()))
+		m_building = m_buildings.size() - 1;
 
    std::string curbuild=_("<invalid player tribe>");
-   if (!m_buildings.size()) {
+	if (!m_buildings.size()) {
       m_player=-1;
       m_building=-1;
 	} else {

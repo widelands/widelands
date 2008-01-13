@@ -76,7 +76,7 @@ tribe(&interactivePlayer.get_player()->tribe())
 
 	fillWares();
 
-   if (get_usedefaultpos())
+	if (get_usedefaultpos())
 		center_to_parent();
 }
 
@@ -108,11 +108,10 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 		{
 
 			const char * const name = de->name().c_str();
-      if (strcmp(name, "constructionsite") == 0) continue;
-      if (strcmp(name, "headquarters")     == 0) continue;
-
 			if
-				(de->get_outputs()->find(selectedWare->name())
+				(strcmp(name, "constructionsite") and strcmp(name, "headquarters")
+				 and
+				 de->get_outputs()->find(selectedWare->name())
 				 !=
 				 de->get_outputs()->end())
 			{
@@ -120,7 +119,8 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
             found = true;
 			}
 		}
-   if (found) prodSites.select(0);
+	if (found)
+		prodSites.select(0);
 
 }
 

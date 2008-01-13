@@ -732,7 +732,7 @@ void Building_Window::setup_capsbuttons()
 		x += 34;
 	}
 
-   if (x == 0) {
+	if (x == 0) {
       // no capsbutton is in this window
       // resize us, so that we do not take space
       m_capsbuttons->set_inner_size(0, 0);
@@ -1050,7 +1050,7 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
    posx = 0;
    UI::Panel* caps = create_capsbuttons(this);
 	caps->set_pos(Point(spacing, posy));
-   if (caps->get_h())
+	if (caps->get_h())
       posy += caps->get_h() + spacing;
 
    set_inner_size(get_inner_w(), posy);
@@ -1086,7 +1086,7 @@ void Warehouse_Window::clicked_goto() {
  * wares -> workers -> soldier
  */
 void Warehouse_Window::clicked_switchpage() {
-   if (m_curpage == 0) {
+	if        (m_curpage == 0) {
       // Showing wares, should show workers
       m_waresdisplay->remove_all_warelists();
       m_waresdisplay->add_warelist(&get_warehouse()->get_workers(), WaresDisplay::WORKER);
@@ -1373,8 +1373,7 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
    m_reg=registry;
 
    UI::Box* prod_box = 0;
-   if (ps->get_building_type() == Building::PRODUCTIONSITE)
-   {
+	if (ps->get_building_type() == Building::PRODUCTIONSITE) {
        prod_box = create_production_box (this, ps);
       fit_inner(prod_box);
       move_inside_parent();
@@ -1902,10 +1901,15 @@ TrainingSite_Options_Window::~TrainingSite_Options_Window()
 
 void TrainingSite_Options_Window::act_change_priority (int32_t atr, int32_t val) {
 
-	 if ((atr == atrHP) || (atr == atrAttack) || (atr == atrDefense) || (atr == atrEvade))
-		 if (m_trainingsite)
-			 m_parent->get_game()->send_player_change_training_options
-			 (m_trainingsite, atr, val);
+	if
+		((atr == atrHP      ||
+		  atr == atrAttack  ||
+		  atr == atrDefense ||
+		  atr == atrEvade)
+		 and
+		 m_trainingsite)
+		m_parent->game().send_player_change_training_options
+			(m_trainingsite, atr, val);
 }
 
 void TrainingSite_Options_Window::think()

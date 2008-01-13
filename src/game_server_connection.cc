@@ -30,19 +30,20 @@
 
 #include "log.h"
 
-Game_Server_Connection::Game_Server_Connection(std::string host, uint32_t port) {
-   m_host = host;
-   m_port = port;
-   m_socket = 0;
-   m_last_packet_index = FIRST_CLIENT_PACKET_INDEX;
-
-   m_smh = 0;
-   m_smhd = 0;
-}
+Game_Server_Connection::Game_Server_Connection
+(std::string const & host, uint32_t const port)
+:
+m_socket           (0),
+m_host             (host),
+m_port             (port),
+m_last_packet_index(FIRST_CLIENT_PACKET_INDEX),
+m_smh              (0),
+m_smhd             (0)
+{}
 
 
 Game_Server_Connection::~Game_Server_Connection() {
-   if (m_socket) {
+	if (m_socket) {
       SDLNet_TCP_Close(m_socket);
       SDLNet_FreeSocketSet(m_socketset);
 	}
@@ -66,8 +67,10 @@ void Game_Server_Connection::connect() {
 
    // Create the socket set and add this socket
    m_socketset = SDLNet_AllocSocketSet(1);
-   if (!m_socketset)
-		throw wexception("Game_Server_Connection::connect: SDLNet_AllocSocketSet failed: %s", SDLNet_GetError());
+	if (!m_socketset)
+		throw wexception
+			("Game_Server_Connection::connect: SDLNet_AllocSocketSet failed: %s",
+			 SDLNet_GetError());
    SDLNet_TCP_AddSocket(m_socketset, m_socket);
 
 }
@@ -80,7 +83,8 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
    uint32_t   index = m_last_packet_index++;
    uint16_t flags = 0;
 
-   if (m_last_packet_index > LAST_CLIENT_PACKET_INDEX) // Hopefully this wrap never occures
+	if (m_last_packet_index > LAST_CLIENT_PACKET_INDEX)
+		//  hopefully this wrap never occures
       m_last_packet_index = FIRST_CLIENT_PACKET_INDEX;
 
    // This packet is replied to
@@ -111,7 +115,7 @@ void Game_Server_Connection::handle_data() {
 
 
       Network_Buffer buf;
-      if (buf.fill(m_socket) == -1) {
+		if (buf.fill(m_socket) == -1) {
          // Upsy, no data. But rather a disconnect
          (*m_dch)(m_dchd);
          return;

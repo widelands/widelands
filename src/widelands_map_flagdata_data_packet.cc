@@ -49,16 +49,11 @@ void Map_Flagdata_Data_Packet::Read
  Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
 	FileRead fr;
-   try {
-      fr.Open(fs, "binary/flag_data");
-	} catch (...) {
-      // not there, so skip
-      return ;
-	}
+	try {fr.Open(fs, "binary/flag_data");} catch (...) {return;}
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
@@ -66,12 +61,12 @@ throw (_wexception)
 		for (;;) {
 			const uint32_t ser = fr.Unsigned32();
 
-         if (ser==0xffffffff) break; // end of flags
+			if (ser == 0xffffffff)
+				break; // end of flags
          assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-			Flag * const flag =
-				dynamic_cast<Flag *>(ol->get_object_by_file_index(ser));
+			upcast(Flag, flag, ol->get_object_by_file_index(ser));
 
          // The owner is already set, nothing to do from
          // PlayerImmovable
@@ -138,7 +133,7 @@ throw (_wexception)
 			for (uint16_t i = 0; i < nr_jobs; ++i) {
             Flag::FlagJob f;
             bool request=fr.Unsigned8();
-            if (!request)
+				if (!request)
                f.request=0;
 				else {
                f.request = new Request(flag, 1,
@@ -210,11 +205,10 @@ throw (_wexception)
                fw.Unsigned8(flag->m_items[i].pending);
                assert(os->is_object_known(flag->m_items[i].item));
                fw.Unsigned32(os->get_object_file_index(flag->m_items[i].item));
-               if (os->is_object_known(flag->m_items[i].nextstep))
-                  fw.Unsigned32(os->get_object_file_index(flag->m_items[i].nextstep));
-               else
-                  fw.Unsigned32(0);
-				}
+			fw.Unsigned32
+				(os->is_object_known      (flag->m_items[i].nextstep) ?
+				 os->get_object_file_index(flag->m_items[i].nextstep) : 0);
+		}
 
             // always call
 		if (flag->m_always_call_for_flag) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -182,7 +182,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
       const char *name = pname->c_str();
 
       FileSystem* fs = 0;
-      try {
+		try {
          fs = g_fs->MakeSubFileSystem(name);
 			Widelands::Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
@@ -217,7 +217,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
     std::string complete_filename = savehandler->create_file_name(m_curdir, filename);
 
    // Check if file exists, if it does, show a warning
-   if (g_fs->FileExists(complete_filename)) {
+	if (g_fs->FileExists(complete_filename)) {
       std::string s=_("A File with the name ");
       s+=FileSystem::FS_Filename(filename.c_str());
       s+=_(" already exists. Overwrite?");

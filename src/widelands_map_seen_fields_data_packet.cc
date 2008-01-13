@@ -40,16 +40,11 @@ void Map_Seen_Fields_Data_Packet::Read
  Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
    FileRead fr;
-   try {
-      fr.Open(fs, "binary/seen_fields");
-	} catch (...) {
-      // not there, so skip
-      return ;
-	}
+	try {fr.Open(fs, "binary/seen_fields");} catch (...) {return;}
 
    // read packet version
    uint16_t const packet_version = fr.Unsigned16();

@@ -37,9 +37,9 @@ void Trigger::reference(TriggerReferencer* ref) {
 }
 void Trigger::unreference(TriggerReferencer* ref) {
    std::map<TriggerReferencer*, uint32_t>::iterator cur = m_referencers.find(ref);
-     if (cur != m_referencers.end()) {
+	if (cur != m_referencers.end()) {
         cur->second--;
-        if (cur->second == 0)
+		if (cur->second == 0)
            m_referencers.erase(cur);
 	}
 }

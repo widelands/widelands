@@ -59,10 +59,7 @@ int32_t Editor_Change_Resource_Tool_Callback
 	map.get_neighbour(f, Widelands::Map_Object::WALK_W, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 
-   if (count<=3)
-      return 0;
-   else
-      return f.field->get_caps();
+	return count <= 3 ? 0 : f.field->get_caps();
 }
 
 /*
@@ -90,7 +87,8 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
       int32_t max_amount = map.get_world()->get_resource(m_cur_res)->get_max_amount();
 
 		amount += m_change_by;
-      if (amount>max_amount) amount=max_amount;
+		if (amount > max_amount)
+			amount = max_amount;
 
 
 		if

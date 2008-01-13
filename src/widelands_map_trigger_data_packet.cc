@@ -41,12 +41,12 @@ void Map_Trigger_Data_Packet::Read
  Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
    // Skip, if no triggers saved
    FileRead fr;
-   if (!fr.TryOpen(fs, "trigger"))
+	if (!fr.TryOpen(fs, "trigger"))
       return;
 
    Profile prof;

@@ -358,7 +358,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 		Widelands::Map & map = eia().egbase().map();
 		for (uint32_t n = 1;; ++n) {
 			snprintf(buffer, sizeof(buffer), "%s%u", _("Unnamed").c_str(), n);
-            if (not map.get_mecm().get_eventchain(buffer))
+			if (not map.get_mecm().get_eventchain(buffer))
                break;
 		}
 

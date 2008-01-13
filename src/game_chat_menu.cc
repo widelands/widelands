@@ -111,7 +111,7 @@ void GameChatMenu::changed_show_as_overlays(bool t)
 void GameChatMenu::clicked_send() {
 	std::string str = editbox.get_text();
 
-   if (str.size() && m_netgame) {
+	if (str.size() && m_netgame) {
       NetGame::Chat_Message t;
 
       t.plrnum = m_player.get_player_number();

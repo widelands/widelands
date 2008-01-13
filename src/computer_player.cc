@@ -508,21 +508,21 @@ bool Computer_Player::construct_building ()
 			 j != buildings.end();
 			 ++j)
 		{
-		    if (!j->is_buildable)
+			if (!j->is_buildable)
 			    continue;
 
-		    if (j->type==BuildingObserver::MINE)
+			if (j->type == BuildingObserver::MINE)
 			    continue;
 
-		    if (j->desc->get_size()>maxsize)
+			if (j->desc->get_size() > maxsize)
 			    continue;
 
 		    prio=0;
 
-		    if (j->type==BuildingObserver::MILITARYSITE) {
+			if (j->type==BuildingObserver::MILITARYSITE) {
 			    prio=(bf->unowned_land_nearby - bf->military_influence*2) * expand_factor / 4;
 
-			    if (bf->avoid_military)
+				if (bf->avoid_military)
 				prio=prio/3 - 6;
 
 			    prio-=spots_avail[BUILDCAPS_BIG]/2;
@@ -530,54 +530,58 @@ bool Computer_Player::construct_building ()
 			    prio-=spots_avail[BUILDCAPS_SMALL]/8;
 			}
 
-		    if (j->type==BuildingObserver::PRODUCTIONSITE) {
-			    if (j->need_trees)
+			if (j->type==BuildingObserver::PRODUCTIONSITE) {
+				if (j->need_trees)
 				    prio+=bf->trees_nearby - 6*bf->tree_consumers_nearby - 2;
 
-			    if (j->need_stones)
+				if (j->need_stones)
 				    prio+=bf->stones_nearby - 6*bf->stone_consumers_nearby - 2;
 
-			    if ((j->need_trees || j->need_stones) && j->cnt_built==0 && j->cnt_under_construction==0)
+				if
+					((j->need_trees || j->need_stones)
+					 &&
+					 j->cnt_built == 0
+					 &&
+					 j->cnt_under_construction == 0)
 				    prio*=2;
 
-			    if (!j->need_trees && !j->need_stones) {
-				if (j->cnt_built+j->cnt_under_construction==0)
+				if (!j->need_trees && !j->need_stones) {
+					if (j->cnt_built+j->cnt_under_construction==0)
 				    prio+=2;
 
-				for (uint32_t k = 0; k < j->inputs.size(); ++k) {
+					for (uint32_t k = 0; k < j->inputs.size(); ++k) {
 				    prio+=8*wares[j->inputs[k]].producers;
 				    prio-=4*wares[j->inputs[k]].consumers;
-				}
+					}
 
-				for (uint32_t k = 0; k < j->outputs.size(); ++k) {
-				    prio-=12*wares[j->outputs[k]].producers;
-				    prio+=8*wares[j->outputs[k]].consumers;
-				    prio+=4*wares[j->outputs[k]].preciousness;
+					for (uint32_t k = 0; k < j->outputs.size(); ++k) {
+						prio -= 12 * wares[j->outputs[k]].producers;
+						prio +=  8 * wares[j->outputs[k]].consumers;
+						prio +=  4 * wares[j->outputs[k]].preciousness;
 
-				    if (j->cnt_built+j->cnt_under_construction==0 &&
-					wares[j->outputs[k]].consumers>0)
+						if
+							(j->cnt_built+j->cnt_under_construction == 0
+							 &&
+							 wares[j->outputs[k]].consumers > 0)
 					prio+=8; // add a big bonus
-				}
+					}
 
-				if (j->production_hint>=0) {
+					if (j->production_hint >= 0) {
 				    prio-=6*(j->cnt_built+j->cnt_under_construction);
 				    prio+=4*wares[j->production_hint].consumers;
 				    prio+=2*wares[j->production_hint].preciousness;
-				}
+					}
 				}
 
 			    prio-=2*j->cnt_under_construction*(j->cnt_under_construction+1);
 			}
 
-		    if (bf->preferred)
-			prio+=prio/2 + 1;
-		    else
-			--prio;
+			prio += bf->preferred ? prio / 2 + 1 : -1;
 
 		    // don't waste good land for small huts
 		    prio-=(maxsize - j->desc->get_size()) * 3;
 
-		    if (prio>proposed_priority) {
+			if (prio > proposed_priority) {
 			    proposed_building=j->id;
 			    proposed_priority=prio;
 			    proposed_coords=bf->coords;
@@ -626,7 +630,7 @@ bool Computer_Player::construct_building ()
 		return false;
 
         // don't have too many construction sites
-        if (proposed_priority<total_constructionsites*total_constructionsites)
+	if (proposed_priority < total_constructionsites * total_constructionsites)
 		return false;
 
 	// if we want to construct a new building, send the command now
@@ -727,14 +731,14 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	FCoords fse;
 	map.get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
 
-	BaseImmovable* imm=fse.field->get_immovable();
-	if (imm!=0) {
-	    if (imm->get_type()==BaseImmovable::FLAG)
+	if (BaseImmovable const * const imm = fse.field->get_immovable())
+		if
+			(dynamic_cast<Flag const *>(imm)
+			 or
+			 dynamic_cast<Road const *>(imm)
+			 &&
+			 fse.field->get_caps() & BUILDCAPS_FLAG)
 		field->preferred=true;
-
-	    if (imm->get_type()==BaseImmovable::ROAD && (fse.field->get_caps() & BUILDCAPS_FLAG))
-		field->preferred=true;
-	}
 
 	for (uint32_t i = 0;i < immovables.size(); ++i) {
 		const BaseImmovable & base_immovable = *immovables[i].object;
@@ -811,14 +815,14 @@ void Computer_Player::update_mineable_field (MineableField* field)
 	FCoords fse;
 	map.get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
 
-	BaseImmovable* imm=fse.field->get_immovable();
-	if (imm!=0) {
-	    if (imm->get_type()==BaseImmovable::FLAG)
+	if (BaseImmovable const * const imm = fse.field->get_immovable())
+		if
+			(dynamic_cast<Flag const *>(imm)
+			 or
+			 dynamic_cast<Road const *>(imm)
+			 &&
+			 fse.field->get_caps() & BUILDCAPS_FLAG)
 		field->preferred=true;
-
-	    if (imm->get_type()==BaseImmovable::ROAD && (fse.field->get_caps() & BUILDCAPS_FLAG))
-		field->preferred=true;
-	}
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
 		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
@@ -1005,19 +1009,21 @@ struct NearFlag {
 	int32_t   cost;
 	int32_t   distance;
 
-    NearFlag (Flag* f, int32_t c, int32_t d)
-    {flag=f; cost=c; distance=d;}
+	NearFlag (Flag * const f, int32_t const c, int32_t const d) {
+		flag     = f;
+		cost     = c;
+		distance = d;
+	}
 
-    bool operator< (const NearFlag& f) const
-    {return cost>f.cost;}
+	bool operator< (NearFlag const & f) const {return cost > f.cost;}
 
-    bool operator== (const Flag* f) const
-    {return flag==f;}
+	bool operator== (Flag const * const f) const {return flag == f;}
 };
 
 struct CompareDistance {
-    bool operator() (const NearFlag& a, const NearFlag& b) const
-    {return a.distance < b.distance;}
+	bool operator() (const NearFlag& a, const NearFlag& b) const {
+		return a.distance < b.distance;
+	}
 };
 
 bool Computer_Player::improve_roads (Flag* flag)
@@ -1030,9 +1036,9 @@ bool Computer_Player::improve_roads (Flag* flag)
 
 	while (!queue.empty()) {
 		std::vector<NearFlag>::iterator f = find(nearflags.begin(), nearflags.end(), queue.top().flag);
-	    if (f!=nearflags.end()) {
-		queue.pop ();
-		continue;
+		if (f != nearflags.end()) {
+			queue.pop ();
+			continue;
 		}
 
 	    nearflags.push_back (queue.top());
@@ -1065,23 +1071,23 @@ bool Computer_Player::improve_roads (Flag* flag)
 	for (uint32_t i = 1; i < nearflags.size(); ++i) {
 	    NearFlag& nf=nearflags[i];
 
-	    if (2*nf.distance+2>=nf.cost)
-		continue;
+		if (2 * nf.distance + 2 < nf.cost) {
 
-		Path & path = *new Path();
-		if
-			(map.findpath
-			 (flag->get_position(), nf.flag->get_position(), 0, path, check)
-			 >=
-			 0
-			 and
-			 static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost)
-		{
-			game().send_player_build_road (player_number, path);
-			return true;
+			Path & path = *new Path();
+			if
+				(map.findpath
+				 (flag->get_position(), nf.flag->get_position(), 0, path, check)
+				 >=
+				 0
+				 and
+				 static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost)
+			{
+				game().send_player_build_road (player_number, path);
+				return true;
+			}
+
+			delete &path;
 		}
-
-		delete &path;
 	}
 
 	return false;
@@ -1281,8 +1287,8 @@ void Computer_Player::construct_roads ()
 		map.get_neighbour (spots[i].coords, j + 1, &nc);
 
 			for (k = 0; k < static_cast<int32_t>(spots.size()); ++k)
-		    if (spots[k].coords==nc)
-			break;
+				if (spots[k].coords == nc)
+					break;
 
 			spots[i].neighbours[j]=(k<static_cast<int32_t>(spots.size())) ? k : -1;
 		}

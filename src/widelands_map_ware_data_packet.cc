@@ -47,7 +47,7 @@ void Map_Ware_Data_Packet::Read
  Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
    FileRead fr;

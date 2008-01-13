@@ -145,10 +145,9 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 
 	// Parse build options
 	m_buildable = global->get_bool("buildable", true);
-   while (global->get_next_string("enhances_to", &string)) {
-      if (string)
+	while (global->get_next_string("enhances_to", &string))
+		if (string)
          m_enhances_to.push_back(strdup(string));
-	}
    m_enhanced_building=global->get_bool("enhanced_building", false);
 	if (m_buildable || m_enhanced_building)
 		{
@@ -163,13 +162,13 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 
       // build animation
       s = prof->get_section("build");
-      if (s->get_int("fps", -1)!=-1)
+			if (s->get_int("fps", -1) != -1)
          throw wexception("fps defined for build animation!");
 
       if (!s)
          throw wexception("Missing build animation");
 
-      if (!is_animation_known("build"))
+			if (!is_animation_known("build"))
          add_animation("build", g_anim.get(directory, s, 0, encdata));
 
 		// Get costs
@@ -203,7 +202,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	s = prof->get_section("idle");
 	if (!s)
 		throw wexception("Missing idle animation");
-   if (!is_animation_known("idle"))
+	if (!is_animation_known("idle"))
       add_animation("idle", g_anim.get(directory, s, 0, encdata));
 
 	while (global->get_next_string("soundfx", &string)) {

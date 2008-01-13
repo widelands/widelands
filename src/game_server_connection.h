@@ -46,7 +46,7 @@ typedef void (*ChatMessage_Handler)(std::string, std::string, uint8_t, void*);
 typedef void (*Disconnet_Handler)(void*);
 
 struct Game_Server_Connection {
-      Game_Server_Connection(std::string host, uint32_t port);
+      Game_Server_Connection(std::string const & host, uint32_t port);
       ~Game_Server_Connection();
 
       void connect();

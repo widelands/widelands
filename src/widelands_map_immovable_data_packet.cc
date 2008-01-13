@@ -63,7 +63,8 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (;;) {
          uint32_t reg=fr.Unsigned32();
-         if (reg==0xffffffff) break;
+			if (reg == 0xffffffff)
+				break;
 			const char * const owner = fr.CString ();
 			const char * const name  = fr.CString ();
 			const Coords position    = fr.Coords32(map_extent);

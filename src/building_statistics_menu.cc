@@ -195,13 +195,18 @@ Building_Statistics_Menu::~Building_Statistics_Menu()
  * Update this statistic
  */
 void Building_Statistics_Menu::think() {
-   int32_t gs = m_parent->get_game()->get_speed();
+	Widelands::Game const & game = m_parent->game();
+	int32_t const gametime = game.get_gametime();
 
-   if (gs==0) gs = 1;
-
-   if ((m_parent->get_game()->get_gametime() - m_lastupdate)/gs > UPDATE_TIME) {
+	if
+		((gametime - m_lastupdate)
+		 /
+		 std::max<Widelands::Game::Speed>(1, game.get_speed())
+		 >
+		 UPDATE_TIME)
+	{
       update();
-      m_lastupdate = m_parent->get_game()->get_gametime();
+		m_lastupdate = gametime;
 	}
 }
 
@@ -228,9 +233,9 @@ void Building_Statistics_Menu::draw(RenderTarget* dst) {
  * validate if this pointer is ok
  */
 int32_t Building_Statistics_Menu::validate_pointer(int32_t* id, int32_t size) {
-   if (*id < 0)
+	if (*id < 0)
       *id = size-1;
-   if (*id >= size)
+	if (*id >= size)
       *id = 0;
 
    return *id;
@@ -260,14 +265,16 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		break;
 	case Prev_Construction: {
             int32_t curindex = m_last_building_index;
-            while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
-               if (vec[m_last_building_index].is_constructionsite) break;
+		while
+			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
+			if (vec[m_last_building_index].is_constructionsite) break;
 	}
 		break;
 	case Next_Construction: {
             int32_t curindex = m_last_building_index;
-            while (validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
-               if (vec[m_last_building_index].is_constructionsite) break;
+		while
+			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
+			if (vec[m_last_building_index].is_constructionsite) break;
 	}
 		break;
 	case Prev_Unproductive: {
@@ -368,7 +375,8 @@ void Building_Statistics_Menu::update() {
       // If not in list, add new one, as long as this building is
       // enabled
 		if (not te) {
-         if (! m_parent->get_player()->is_building_allowed(i)) continue;
+			if (! m_parent->player().is_building_allowed(i))
+				continue;
 			te = &m_table.add(i, building.get_buildicon());
 		}
 
@@ -427,13 +435,13 @@ void Building_Statistics_Menu::update() {
           // Number of this buildings
 		snprintf(buffer, sizeof(buffer), "%i", nr_owned);
           te->set_string(2, buffer);
-          if (is_selected)
+		if (is_selected)
             m_owned->set_text(buffer);
 
           // Number of currently builds
 		snprintf(buffer, sizeof(buffer), "%i", nr_build);
           te->set_string(3, buffer);
-          if (is_selected)
+		if (is_selected)
             m_build->set_text(buffer);
 	}
 

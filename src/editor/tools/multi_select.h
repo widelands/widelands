@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,14 +37,15 @@ struct MultiSelect {
       MultiSelect() {m_nr_enabled=0;}
       ~MultiSelect() {}
 
-      void enable(int32_t n, bool t) {
+	void enable(int32_t n, bool t) {
 		if (static_cast<int32_t>(m_enabled.size()) < n + 1)
             m_enabled.resize(n+1, false);
 
-         if (m_enabled[n]==t) return;
+		if (m_enabled[n] == t)
+			return;
          m_enabled[n]=t;
-         if (t) ++m_nr_enabled;
-         else --m_nr_enabled;
+		if (t) ++m_nr_enabled;
+		else   --m_nr_enabled;
          assert(m_nr_enabled>=0);
 		}
 	bool is_enabled(int32_t n) const {
@@ -60,7 +61,7 @@ struct MultiSelect {
 			 rand() / (RAND_MAX + 1.0));
          int32_t i=0;
          int32_t j=rand_value+1;
-         while (j) {if (is_enabled(i)) j--; ++i;}
+		while (j) {if (is_enabled(i)) --j; ++i;}
          return i-1;
 		}
 

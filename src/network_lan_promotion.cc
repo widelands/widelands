@@ -173,13 +173,13 @@ LAN_Game_Promoter::~LAN_Game_Promoter ()
 
 void LAN_Game_Promoter::run ()
 {
-    if (needupdate) {
+	if (needupdate) {
 	needupdate=false;
 
 	broadcast (&gameinfo, sizeof(gameinfo), WIDELANDS_LAN_DISCOVERY_PORT);
 	}
 
-    while (avail()) {
+	while (avail()) {
 	char magic[8];
 	sockaddr_in addr;
 
@@ -246,7 +246,7 @@ void LAN_Game_Finder::run ()
 	std::list<LAN_Open_Game*>::iterator i;
 	// if the game already is in the list, update the information
 	for (i = opengames.begin(); i != opengames.end(); ++i)
-	    if ((*i)->address==addr.sin_addr.s_addr) {
+		if ((*i)->address == addr.sin_addr.s_addr) {
 		(*i)->info=info;
 
 		callback (GameUpdated, *i, userdata);

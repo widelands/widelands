@@ -39,7 +39,7 @@ void Map_Variable_Data_Packet::Read
  Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
    Profile prof;

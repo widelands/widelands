@@ -46,25 +46,20 @@ void Map_Waredata_Data_Packet::Read
  Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
    FileRead fr;
-   try {
-      fr.Open(fs, "binary/ware_data");
-	} catch (...) {
-      // not there, so skip
-      return ;
-	}
+	try {fr.Open(fs, "binary/ware_data");} catch (...) {return;}
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) for (;;) {
          uint32_t reg=fr.Unsigned32();
-         if (reg==0xffffffff) break; // end of wares
+		if (reg == 0xffffffff)
+			break; // end of wares
 		if (upcast(WareInstance, ware, ol->get_object_by_file_index(reg))) {
 			reg = fr.Unsigned32();
-			if (Map_Object * const location = ol->get_object_by_file_index(reg))
-			{
+			if (Map_Object * const location = ol->get_object_by_file_index(reg)) {
 				const uint32_t ware_index_from_file = fr.Unsigned32();
 				ware->m_descr_index = ware_index_from_file;
 				if (upcast(PlayerImmovable, player_immovable, location)) {
@@ -104,11 +99,10 @@ throw (_wexception)
          // Do not touch supply or transfer
 
          // m_transfer_nextstep
-         reg=fr.Unsigned32();
-         if (reg) {
+				if (uint32_t const nextstep = fr.Unsigned32()) {
             assert(ol->is_object_known(reg));
-            ware->m_transfer_nextstep=ol->get_object_by_file_index(reg);
-			} else
+            ware->m_transfer_nextstep=ol->get_object_by_file_index(nextstep);
+				} else
             ware->m_transfer_nextstep = static_cast<Map_Object *>(0);
 
          // Do some kind of init
@@ -141,36 +135,27 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
-   Map* map=egbase->get_map();
    std::vector<uint32_t> ids;
-	for (uint16_t y = 0; y < map->get_height(); ++y) {
-		for (uint16_t x = 0; x < map->get_width(); ++x) {
-         Field* f=map->get_field(Coords(x, y));
-
+	Map   const & map        = egbase->map();
+	Field const & fields_end = map[map.max_index()];
+	for (Field const * field = &map[0]; field < &fields_end; ++field) {
          // First, check for Flags
-         BaseImmovable* imm=f->get_immovable();
-         if (imm && imm->get_type()==Map_Object::FLAG) {
-            Flag* fl=static_cast<Flag*>(imm);
+		if (upcast(Flag const, fl, field->get_immovable()))
             for (int32_t i = 0; i < fl->m_item_filled; ++i) {
                assert(os->is_object_known(fl->m_items[i].item));
                write_ware(&fw, egbase, os, fl->m_items[i].item);
-				}
 			}
 
          // Now, check for workers
-         Bob* b=f->get_first_bob();
-         while (b) {
-            if (b->get_bob_type()==Bob::WORKER) {
-               Worker* w=static_cast<Worker*>(b);
-               WareInstance* ware=w->get_carried_item(egbase);
-               if (ware) {
+		for (Bob const * b = field->get_first_bob(); b; b = b->get_next_bob())
+			if (upcast(Worker const, worker, b))
+				if
+					(WareInstance const * const ware =
+					 worker->get_carried_item(egbase))
+				{
                   assert(os->is_object_known(ware));
                   write_ware(&fw, egbase, os, ware);
-					}
 				}
-            b=b->get_next_bob();
-			}
-		}
 	}
    fw.Unsigned32(0xffffffff); // End of wares
 
@@ -185,14 +170,13 @@ void Map_Waredata_Data_Packet::write_ware
 	(FileWrite            * fw,
 	 Editor_Game_Base     * egbase,
 	 Map_Map_Object_Saver * os,
-	 WareInstance         * ware)
+	 WareInstance   const * ware)
 {
    // First, id
    fw->Unsigned32(os->get_object_file_index(ware));
 
    // Location
-   Map_Object* obj=ware->m_location.get(egbase);
-   if (obj) {
+	if (Map_Object const * const obj = ware->m_location.get(egbase)) {
       assert(os->is_object_known(obj));
       fw->Unsigned32(os->get_object_file_index(obj));
 	} else
@@ -212,8 +196,7 @@ void Map_Waredata_Data_Packet::write_ware
 //      fw->Unsigned8(0);
 //
    // m_transfer_nextstep
-	obj=ware->m_transfer_nextstep.get(egbase);
-   if (obj) {
+	if (Map_Object const * const obj = ware->m_transfer_nextstep.get(egbase)) {
       assert(os->is_object_known(obj));
       fw->Unsigned32(os->get_object_file_index(obj));
 	} else

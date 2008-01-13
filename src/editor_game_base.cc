@@ -614,14 +614,11 @@ if oldi != -1 this is a constructionsite comming from an enhancing action
 */
 Building* Editor_Game_Base::warp_constructionsite(Coords c, int8_t owner, int32_t idx, int32_t old_id)
 {
-	Building_Descr* descr, *old_descr=0;
-	Player & plr = player(owner);
-
-	descr = plr.tribe().get_building_descr(idx);
-   if (old_id!=-1) old_descr = plr.tribe().get_building_descr(old_id);
-	assert(descr);
-
-	return descr->create(*this, plr, c, true, old_descr);
+	Player            & plr   = player(owner);
+	Tribe_Descr const & tribe = plr.tribe();
+	return
+		tribe.get_building_descr(idx)->create
+		(*this, plr, c, true, old_id ? tribe.get_building_descr(old_id) : 0);
 }
 
 
@@ -637,15 +634,13 @@ idx is the bob type.
 Bob * Editor_Game_Base::create_bob
 (const Coords c, const Bob::Descr::Index idx, const Tribe_Descr * const tribe)
 {
-	Bob::Descr *descr;
-
-   if (!tribe)
-      descr = m_map->get_world()->get_bob_descr(idx);
-   else
-      descr=tribe->get_bob_descr(idx);
-	assert(descr);
-
-	return descr->create(this, 0, c); // The bob knows for itself it is a world or a tribe bob
+	Bob::Descr & descr =
+		*
+		(tribe ?
+		 tribe->get_bob_descr(idx)
+		 :
+		 m_map->get_world()->get_bob_descr(idx));
+	return descr.create(this, 0, c); // The bob knows for itself it is a world or a tribe bob
 }
 
 
@@ -662,16 +657,15 @@ Does not perform any placability checks.
 Immovable *Editor_Game_Base::create_immovable
 (const Coords c, int32_t idx, const Tribe_Descr* tribe)
 {
-	Immovable_Descr *descr;
-
-   if (!tribe)
-      descr = m_map->get_world()->get_immovable_descr(idx);
-   else
-      descr = tribe->get_immovable_descr(idx);
-	assert(descr);
-
-	inform_players_about_immovable(Map::get_index(c, map().get_width()), descr);
-	return descr->create(this, c);
+	Immovable_Descr & descr =
+		*
+		(tribe ?
+		 tribe->get_immovable_descr(idx)
+		 :
+		 m_map->world().get_immovable_descr(idx));
+	inform_players_about_immovable
+		(Map::get_index(c, map().get_width()), &descr);
+	return descr.create(this, c);
 }
 
 Immovable* Editor_Game_Base::create_immovable

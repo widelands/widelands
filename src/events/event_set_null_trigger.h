@@ -46,9 +46,9 @@ struct Event_Set_Null_Trigger : public Event, public TriggerReferencer {
 	void Read (Section *,       Editor_Game_Base *);
 
 	void set_trigger(Trigger_Null * trig) {
-		 if (m_trigger)
+		if (m_trigger)
 			 unreference_trigger(m_trigger);
-		 if (trig)
+		if (trig)
 			 reference_trigger(trig);
 		 m_trigger = trig;
 	}

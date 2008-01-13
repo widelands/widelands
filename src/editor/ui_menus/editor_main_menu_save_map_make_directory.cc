@@ -86,7 +86,7 @@ bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
  */
 void Main_Menu_Save_Map_Make_Directory::edit_changed() {
    std::string text=m_edit->get_text();
-   if (text.size()) {
+	if (text.size()) {
       m_ok_button->set_enabled(true);
       m_dirname=text;
 	}

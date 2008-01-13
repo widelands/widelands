@@ -64,9 +64,7 @@ Trigger * make_trigger_with_option_dialog
  Editor_Interactive &       parent,
  Trigger            * const gtrig)
 {
-   Trigger* trig=gtrig;
-   if (!trig)
-      trig=get_correct_trigger(id);
+	Trigger * const trig = gtrig ? gtrig : get_correct_trigger(id);
 
 	int32_t retval;
 	if        (strcmp(id, "time")     == 0) {
@@ -86,9 +84,9 @@ Trigger * make_trigger_with_option_dialog
 			("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger "
 			 "id found: %s",
 			 id);
-   if (retval)
+	if (retval)
       return trig;
-   if (!gtrig) {
+	if (!gtrig) {
       delete trig;
       return 0;
 	} else

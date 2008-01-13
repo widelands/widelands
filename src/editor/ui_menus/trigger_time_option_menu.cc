@@ -245,10 +245,20 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 void Trigger_Time_Option_Menu::clicked(int32_t i) {
    int32_t id=(i-2)/2;
    m_values[id]= i%2 ?  m_values[id]-1 :  m_values[id]+1;
-   if (m_values[id]<0) m_values[id]=0;
-   if (!m_values[0] && !m_values[1] && !m_values[2] && !m_values[3] && !m_values[4] && !m_values[5]) m_values[5]=1;
-   if (m_values[id]>9) m_values[id]=9;
-   if ((id==2 || id==4)  && m_values[id]>=6) m_values[id]=5;
+	if (m_values[id] < 0)
+		m_values[id] = 0;
+	if
+		(!m_values[0] &&
+		 !m_values[1] &&
+		 !m_values[2] &&
+		 !m_values[3] &&
+		 !m_values[4] &&
+		 !m_values[5])
+		m_values[5]  = 1;
+	if (m_values[id] > 9)
+		m_values[id] = 9;
+	if ((id == 2 || id == 4) && m_values[id] >= 6)
+		m_values[id] = 5;
    update();
 }
 

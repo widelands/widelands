@@ -51,7 +51,7 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
    set_inner_size(w, h);
    m_text=new UI::Multiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
 
-   if (m_text)
+	if (m_text)
       m_text->set_text(event->get_text());
 
    // Buttons
@@ -112,9 +112,9 @@ bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int32_t, in
  * clicked
  */
 void Message_Box_Event_Message_Box::clicked(int32_t i) {
-   if (i==-1) {
+	if (i == -1) {
       // we should end this dialog
-      if (m_is_modal) {
+		if (m_is_modal) {
          end_modal(0);
          return;
 		} else {

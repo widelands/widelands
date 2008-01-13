@@ -87,7 +87,7 @@ bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t
  * a button has been clicked
  */
 void Trigger_Null_Option_Menu::clicked_ok() {
-      if (m_name->get_text())
+	if (m_name->get_text())
          m_trigger.set_name(m_name->get_text());
       end_modal(1);
 }

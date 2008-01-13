@@ -358,13 +358,10 @@ void Map::cleanup() {
 	m_width = m_height = 0;
 	m_pathcycle = 0;
 
-   if (m_fields)
       free(m_fields);
 	m_fields = 0;
-	if (m_pathfields)
 		free(m_pathfields);
 	m_pathfields = 0;
-   if (m_starting_pos)
       free(m_starting_pos);
 	m_starting_pos = 0;
 		delete m_world;
@@ -373,7 +370,7 @@ void Map::cleanup() {
    m_scenario_tribes.clear();
    m_scenario_names.clear();
 
-   if (m_overlay_manager)
+	if (m_overlay_manager)
       m_overlay_manager->reset();
 
    delete m_mom;
@@ -1080,17 +1077,17 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 
    // 2a) If any of the neigbouring triangles is walkable this field is
    //     walkable.
-   if (cnt_unpassable < 6)
+	if (cnt_unpassable < 6)
       caps |= MOVECAPS_WALK;
 
    // 2b) If all neighbouring triangles are water, the field is swimable
-   if (cnt_water == 6)
+	if (cnt_water == 6)
       caps |= MOVECAPS_SWIM;
 
 
    // 2c) [OVERRIDE] If any of the neighbouring triangles is really
    //     "bad" (such as lava), we can neither walk nor swim to this field.
-   if (cnt_acid)
+	if (cnt_acid)
       caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 
    // === everything below is used to check buildability ===
@@ -1100,17 +1097,17 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
    //    Exception: we can build flags on roads
    ;
 
-	if (BaseImmovable *imm = get_immovable(f))
+	if (BaseImmovable * imm = get_immovable(f))
 		if
 			(not dynamic_cast<Road const *>(imm)
 			 &&
 			 imm->get_size() >= BaseImmovable::SMALL)
-   {
+		{
       // 3b) [OVERRIDE] check for "unpassable" Map_Objects
-      if (!imm->get_passable())
+			if (!imm->get_passable())
          caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
-      goto end;
-	}
+			goto end;
+		}
 
    // 4) Flags
    //    We can build flags on anything that's walkable and buildable, with some
@@ -1654,21 +1651,22 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
    Map_Loader* retval=0;
    if (strlen(filename)<strlen(WLMF_SUFFIX) || strlen(filename)<strlen(S2MF_SUFFIX)) return 0;
 
-   if (!strcasecmp(filename+(strlen(filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
-   {
-      try {
-         FileSystem* fs = g_fs->MakeSubFileSystem(filename);
-			retval = new WL_Map_Loader(*fs, this);
+	if
+		(!
+		 strcasecmp
+		 (filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+		try {
+			retval = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
          // If this fails, it is an illegal file (maybe old plain binary map format)
          //TODO: catchall hides real errors! Replace with more specific code
 		}
-	}
-   else if (!strcasecmp(filename+(strlen(filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
-   {
+	else if
+		(!
+		 strcasecmp
+		 (filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
       // it is a S2 Map file. load it as such
       retval=new S2_Map_Loader(filename, this);
-	}
 
    return retval;
 }

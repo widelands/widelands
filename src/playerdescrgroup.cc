@@ -190,7 +190,7 @@ void PlayerDescriptionGroup::toggle_playertribe()
  */
 void PlayerDescriptionGroup::set_player_tribe(std::string str) {
 	for (uint32_t i = 0; i < m_tribes.size(); ++i) {
-      if (m_tribes[i]==str) {
+		if (m_tribes[i] == str) {
          m_current_tribe=i;
 			m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
          // set the player

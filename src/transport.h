@@ -672,9 +672,8 @@ struct Economy {
 	bool have_soldier_supply(int32_t soldier, Supply* supp, Requeriments* r = 0);
 	void remove_soldier_supply(int32_t soldier, Supply* supp);
 
-   bool should_run_balance_check(int32_t gametime) {
-      if (m_request_timer && (gametime == m_request_timer_time)) return true;
-      return false;
+	bool should_run_balance_check(int32_t const gametime) {
+		return m_request_timer && (gametime == m_request_timer_time);
 	}
 
    // Informations over this economy
@@ -727,13 +726,16 @@ private:
 struct Cmd_Call_Economy_Balance : public GameLogicCommand {
       Cmd_Call_Economy_Balance () : GameLogicCommand (0) {} // For load and save
 
-      Cmd_Call_Economy_Balance (int32_t starttime, int32_t player, Economy* economy) :
-         GameLogicCommand(starttime)
-      {
-         m_player=player;
-         m_economy=economy;
-         m_force_balance = false;
-		}
+	Cmd_Call_Economy_Balance
+		(int32_t       const starttime,
+		 Player_Number const player,
+		 Economy     * const economy)
+		:
+		GameLogicCommand(starttime),
+		m_force_balance (false),
+		m_player        (player),
+		m_economy       (economy)
+	{}
 
       void execute (Game* g);
 
@@ -743,9 +745,9 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 private:
-      bool     m_force_balance;
-      int32_t      m_player;
-      Economy* m_economy;
+	bool          m_force_balance;
+	Player_Number m_player;
+	Economy     * m_economy;
 };
 
 };

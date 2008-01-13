@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix(EventChain* ev
 		case LPAREN: tempstack.push_back(*it); break;
 		case RPAREN: // append everything to our postfix notation
 			for (;;) {
-            if (!tempstack.size()) { // Mismatched parathesis
+				if (!tempstack.size()) { // Mismatched parathesis
                ALIVE();
                log("Missmatched parenthesis!\n");
                throw SyntaxError();
@@ -78,8 +78,8 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix(EventChain* ev
 		}
 
    // Unload all operators which are left on stack
-   while (tempstack.size()) {
-      if (tempstack.back().token == LPAREN) {
+	while (tempstack.size()) {
+		if (tempstack.back().token == LPAREN) {
          // Unmatched parentesis
          ALIVE();
          log("Unmatched parenthesis!\n");
@@ -174,7 +174,6 @@ TriggerConditional_OneArg::TriggerConditional_OneArg(TriggerConditional* cond) {
    m_conditional = cond;
 }
 TriggerConditional_OneArg::~TriggerConditional_OneArg() {
-   if (m_conditional)
       delete m_conditional;
 }
 bool TriggerConditional_OneArg::eval(Game* g) {
@@ -237,9 +236,7 @@ TriggerConditional_TwoArg::TriggerConditional_TwoArg(TriggerConditional* l, Trig
    m_rconditional = r;
 }
 TriggerConditional_TwoArg::~TriggerConditional_TwoArg() {
-   if (m_lconditional)
       delete m_lconditional;
-   if (m_rconditional)
       delete m_rconditional;
 }
 bool TriggerConditional_TwoArg::eval(Game* g) {

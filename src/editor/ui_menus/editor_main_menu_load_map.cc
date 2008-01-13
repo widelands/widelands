@@ -226,11 +226,12 @@ void Main_Menu_Load_Map::fill_list() {
 		 ++pname)
 	{
       const char *name = pname->c_str();
-      if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
-      if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
-      if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
-      if (!g_fs->IsDirectory(name)) continue;
-		if (WL_Map_Loader::is_widelands_map(name))             continue;
+		if
+			(strcmp(FileSystem::FS_Filename(name), ".")    and
+			 strcmp(FileSystem::FS_Filename(name), "..")   and // Upsy, appeared again. ignore
+			 strcmp(FileSystem::FS_Filename(name), ".svn") and // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
+			 g_fs->IsDirectory(name)                       and
+			 not WL_Map_Loader::is_widelands_map(name))
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -247,23 +248,21 @@ void Main_Menu_Load_Map::fill_list() {
 	{
       const char *name = pname->c_str();
 
-		Widelands::Map_Loader * const m_ml = map.get_correct_loader(name);
-      if (!m_ml) continue;
-
-		try {
-         m_ml->preload_map(true);
-			m_ls->add
-				(FileSystem::FS_Filename(name),
-				 name,
-				 g_gr->get_picture
-				 (PicMod_Game,
-				  dynamic_cast<WL_Map_Loader const *>(m_ml) ?
-				  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-		} catch (_wexception&) {
+		if (Widelands::Map_Loader * const m_ml = map.get_correct_loader(name)) {
+			try {
+				m_ml->preload_map(true);
+				m_ls->add
+					(FileSystem::FS_Filename(name),
+					 name,
+					 g_gr->get_picture
+					 (PicMod_Game,
+					  dynamic_cast<WL_Map_Loader const *>(m_ml) ?
+					  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+			} catch (_wexception&) {
          // we simply skip illegal entries
+			}
+			delete m_ml;
 		}
-      delete m_ml;
-
 	}
 
 	if (m_ls->size()) m_ls->select(0);

@@ -154,7 +154,7 @@ void NetGame::begin_game ()
 	statuswnd->center_to_parent ();
 
 	for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i)
-	    if (player_human & (1<<i))
+		if (player_human & 1 << i)
 		statuswnd->add_player (i+1);
 
 	statuswnd->set_ready (playernum);

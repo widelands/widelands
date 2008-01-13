@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -327,7 +327,6 @@ void DirAnimations::parse
 	char dirpictempl[256];
 	char sectnamebase[256];
 	char *repl;
-	const char* string;
 
 	if (strchr(sectnametempl, '%'))
 		throw wexception("sectnametempl %s contains %%", sectnametempl);
@@ -338,10 +337,10 @@ void DirAnimations::parse
 		throw wexception("DirAnimations section name template %s does not contain %%s", sectnametempl);
 	strncpy(repl, "%s", 2);
 
-	if (defaults) string = defaults->get_string("dirpics", 0);
-   else string=0;
-
-	if (string) {
+	if
+		(char const * const string =
+		 defaults ? defaults->get_string("dirpics", 0) : 0)
+	{
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s", string);
 		repl = strstr(dirpictempl, "!!");
 		if (!repl)

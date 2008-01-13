@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,8 @@ MapTriggerManager::~MapTriggerManager() {
 
 bool MapTriggerManager::register_new_trigger(Trigger* mv) {
    // check if this trigger is already known
-   if (get_trigger(mv->get_name()))
-         return 0;
+	if (get_trigger(mv->get_name()))
+		return false;
 
    m_triggers.push_back(mv);
    return true;
@@ -81,9 +81,9 @@ void MapTriggerManager::delete_trigger(const char* name) {
 
 void MapTriggerManager::delete_unreferenced_triggers() {
    uint32_t i = 0;
-   while (i < m_triggers.size()) {
+	while (i < m_triggers.size()) {
       Trigger* tr = m_triggers[i];
-      if (tr->get_referencers().empty()) {
+		if (tr->get_referencers().empty()) {
          delete_trigger(tr->get_name());
          i = 0;
          continue;

@@ -42,16 +42,11 @@ void Map_Allowed_Buildings_Data_Packet::Read
  Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
    Profile prof;
-   try {
-      prof.read("allowed_buildings", 0, fs);
-	} catch (...) {
-      // Packet wasn't save. Same as skip
-      return;
-	}
+	try {prof.read("allowed_buildings", 0, fs);} catch (...) {return;}
    Section* s = prof.get_section("global");
 
 	const int32_t packet_version = s->get_int("packet_version");

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,53 +81,70 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 
 		case SDLK_LEFT:
             m_cur_pos-=1;
-            if (static_cast<int32_t>(m_cur_pos)<0) m_cur_pos=0;
+			if (static_cast<int32_t>(m_cur_pos) < 0)
+				m_cur_pos = 0;
             break;
 
 		case SDLK_RIGHT:
             m_cur_pos+=1;
-            if (m_cur_pos>=txt.size()) m_cur_pos=txt.size();
+			if (m_cur_pos >= txt.size())
+				m_cur_pos = txt.size();
             break;
 
 		case SDLK_DOWN:
 			if (m_cur_pos < txt.size() - 1) {
                uint32_t begin_of_line=m_cur_pos;
-               if (txt[begin_of_line]=='\n') --begin_of_line;
-               while (begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
-               if (begin_of_line!=0) ++begin_of_line;
+				if (txt[begin_of_line] == '\n')
+					--begin_of_line;
+				while (begin_of_line > 0 && txt[begin_of_line] != '\n')
+					--begin_of_line;
+				if (begin_of_line)
+					++begin_of_line;
                uint32_t begin_of_next_line=m_cur_pos;
-               while (txt[begin_of_next_line]!='\n' && begin_of_next_line<txt.size())
+				while
+					(txt[begin_of_next_line] != '\n'
+					 &&
+					 begin_of_next_line < txt.size())
                   ++begin_of_next_line;
-               if (begin_of_next_line==txt.size())
-                  --begin_of_next_line;
-                else
-                  ++begin_of_next_line;
+				begin_of_next_line += begin_of_next_line == txt.size() ? -1 : 1;
                uint32_t end_of_next_line=begin_of_next_line;
-               while (txt[end_of_next_line]!='\n' && end_of_next_line<txt.size())
+				while
+					(txt[end_of_next_line] != '\n' && end_of_next_line < txt.size())
                   ++end_of_next_line;
-               if (begin_of_next_line+m_cur_pos-begin_of_line > end_of_next_line)
-                  m_cur_pos=end_of_next_line;
-               else
-                  m_cur_pos=begin_of_next_line+m_cur_pos-begin_of_line;
+				m_cur_pos =
+					begin_of_next_line + m_cur_pos - begin_of_line
+					>
+					end_of_next_line
+					?
+					end_of_next_line : begin_of_next_line+m_cur_pos-begin_of_line;
 				}
 			break;
 
 		case SDLK_UP:
 			if (m_cur_pos > 0) {
                uint32_t begin_of_line=m_cur_pos;
-               if (txt[begin_of_line]=='\n') --begin_of_line;
-               while (begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
-               if (begin_of_line!=0) ++begin_of_line;
+				if (txt[begin_of_line] == '\n')
+					--begin_of_line;
+				while (begin_of_line > 0 && txt[begin_of_line] != '\n')
+					--begin_of_line;
+				if (begin_of_line)
+					++begin_of_line;
                uint32_t end_of_last_line=begin_of_line;
-               if (begin_of_line!=0) --end_of_last_line;
+				if (begin_of_line)
+					--end_of_last_line;
                uint32_t begin_of_lastline=end_of_last_line;
-               if (txt[begin_of_lastline]=='\n') --begin_of_lastline;
-               while (begin_of_lastline>0 && txt[begin_of_lastline]!='\n') --begin_of_lastline;
-               if (begin_of_lastline!=0) ++begin_of_lastline;
-               if (begin_of_lastline+(m_cur_pos-begin_of_line) > end_of_last_line)
-                  m_cur_pos=end_of_last_line;
-               else
-                  m_cur_pos=begin_of_lastline+(m_cur_pos-begin_of_line);
+				if (txt[begin_of_lastline] == '\n')
+					--begin_of_lastline;
+				while (begin_of_lastline > 0 && txt[begin_of_lastline] != '\n')
+					--begin_of_lastline;
+				if (begin_of_lastline)
+					++begin_of_lastline;
+				m_cur_pos =
+					begin_of_lastline + (m_cur_pos - begin_of_line)
+					>
+					end_of_last_line
+					?
+					end_of_last_line : begin_of_lastline+(m_cur_pos-begin_of_line);
 			}
 			break;
 
@@ -196,10 +213,7 @@ void Multiline_Editbox::draw(RenderTarget* dst)
  * position
  */
 void Multiline_Editbox::set_text(const char* str) {
-   if (strlen(str))
       m_cur_pos=strlen(str);
-   else
-      m_cur_pos=0;
 
    Multiline_Textarea::set_text(str);
 

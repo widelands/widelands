@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -288,7 +288,8 @@ void Scrollbar::draw(RenderTarget* dst)
 {
 	uint32_t knobpos = get_knob_pos();
 
-   if (m_steps==1 && !m_force_draw) return; // don't draw a not doing scrollbar
+	if (m_steps == 1 && !m_force_draw)
+		return; // don't draw a not doing scrollbar
 
 	if (m_horizontal)
 	{

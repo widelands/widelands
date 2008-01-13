@@ -1651,7 +1651,7 @@ Transfer::~Transfer()
 		assert(!m_item);
 		assert(!m_soldier);
 
-      if (m_game->objects().object_still_available(m_worker))
+		if (m_game->objects().object_still_available(m_worker))
          m_worker->cancel_task_transfer(m_game);
 	}
 	else if (m_item)
@@ -1951,7 +1951,7 @@ Request::Request(PlayerImmovable *target, int32_t index, callback_t cbfn, void* 
 	m_callbackfn = cbfn;
 	m_callbackdata = cbdata;
 
-   if (m_economy)
+	if (m_economy)
       m_economy->add_request(this);
 
 	m_requeriments = 0;
@@ -1999,9 +1999,8 @@ void Request::Read
       m_required_time=fr->Unsigned32();
       m_required_interval=fr->Unsigned32();
 
-	  if (version == REQUEST_VERSION) {
+		if (version == REQUEST_VERSION)
 		  m_last_request_time = fr->Unsigned32();
-	}
 
       assert(!m_transfers.size());
 
@@ -2034,7 +2033,7 @@ void Request::Read
 			}
 		}
 
-      if (!is_open() && m_economy)
+		if (!is_open() && m_economy)
          m_economy->remove_request(this);
 	} else
 		throw wexception("Unknown request version %i in file!", version);
@@ -2077,7 +2076,7 @@ void Request::Write
       // Is this a ware (or a worker)
 		fw->Unsigned8(m_type);
       // Write ware/worker
-      if (trans->m_item) {
+		if (trans->m_item) {
          assert(mos->is_object_known(trans->m_item));
          fw->Unsigned32(mos->get_object_file_index(trans->m_item));
 		} else if (trans->m_worker) {
@@ -2616,7 +2615,8 @@ void WaresQueue::request_callback
 */
 void WaresQueue::remove_from_economy(Economy* e)
 {
-   if (m_ware==-1) return;
+	if (m_ware == -1)
+		return;
 
 	e->remove_wares(m_ware, m_filled);
 	if (m_request)
@@ -3049,7 +3049,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 				// found a better path to a field that's already Open
 				neighbour->mpf_realcost = cost;
 				neighbour->mpf_backlink = current;
-            if (neighbour->mpf_heapindex != -1) // This neighbour is already 'popped', skip it
+				if (neighbour->mpf_heapindex != -1) // This neighbour is already 'popped', skip it
                Open.boost(neighbour);
 			}
 		}
@@ -3223,8 +3223,8 @@ void Economy::remove_warehouse(Warehouse *wh)
    // fast remove
    uint32_t i;
 	for (i = 0; i < m_warehouses.size(); ++i) {
-      if (m_warehouses[i] == wh) {
-         if (i < m_warehouses.size()-1)
+		if (m_warehouses[i] == wh) {
+			if (i < m_warehouses.size() - 1)
             m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
          break;
 		}
@@ -3238,7 +3238,7 @@ void Economy::remove_warehouse(Warehouse *wh)
     *
     */
    assert(i != m_warehouses.size() || !m_warehouses.size());
-   if (m_warehouses.size())
+	if (m_warehouses.size())
       m_warehouses.pop_back();
 }
 
@@ -3251,7 +3251,7 @@ void Economy::add_request(Request* req)
 	assert(req->is_open());
    assert(!have_request(req));
 
-   if (!get_owner()) // our owner is deleted, we are cleaning up. So ignore this
+	if (!get_owner()) // our owner is deleted, we are cleaning up. So ignore this
       return;
 
 	m_requests.push_back(req);
@@ -3841,10 +3841,13 @@ void Cmd_Call_Economy_Balance::execute(Game* g) {
 
    // If this economy has vanished, drop this
    // call silently
-   if (!plr->has_economy(m_economy))
+	if (!plr->has_economy(m_economy))
       return;
 
-   if (!m_economy->should_run_balance_check(g->get_gametime()) && !m_force_balance)
+	if
+		(!m_economy->should_run_balance_check(g->get_gametime())
+		 &&
+		 !m_force_balance)
       return;
 
    m_force_balance = false;

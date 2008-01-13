@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -185,7 +185,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 	if (highlight) {
       int32_t w, h;
       g_fh->get_size(UI_FONT_SMALL,  m_items[m_highlight].descr.c_str(), &w, &h);
-      if (w>get_inner_w())
+		if (w > get_inner_w())
          set_inner_size(w, get_inner_h());
 		g_fh->draw_string
 			(*dst,

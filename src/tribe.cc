@@ -157,7 +157,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 	   Section::Value* value;
 
 		while ((value = s->get_next_val(0))) {
-         if (not m_wares.exists(value->get_name()))
+			if (not m_wares.exists(value->get_name()))
             throw wexception("In section [startwares], ware %s is not know!", value->get_name());
 
          std::string valuename=value->get_name();
@@ -166,14 +166,14 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
       // default workers
       s = prof.get_safe_section("startworkers");
-		while ((value = s->get_next_val(0))) {
-         if (!strcmp(value->get_name(), "soldier")) continue; // Ignore soldiers here
-         if (not m_workers.exists(value->get_name()))
+		while ((value = s->get_next_val(0)))
+			if (strcmp(value->get_name(), "soldier")) { // Ignore soldiers here
+				if (not m_workers.exists(value->get_name()))
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
 
          std::string valuename=value->get_name();
          m_startworkers[valuename]=value->get_int();
-		}
+			}
 
       // default soldiers
       s = prof.get_safe_section("startsoldiers");
@@ -476,16 +476,16 @@ void Tribe_Descr::load_warehouse_with_start_wares
 
       char* endp;
       int32_t hplvl=strtol(list[0].c_str(), &endp, 0);
-      if (endp && *endp)
+			if (endp && *endp)
          throw wexception("Bad hp level '%s'", list[0].c_str());
       int32_t attacklvl=strtol(list[1].c_str(), &endp, 0);
-      if (endp && *endp)
+			if (endp && *endp)
          throw wexception("Bad attack level '%s'", list[1].c_str());
       int32_t defenselvl=strtol(list[2].c_str(), &endp, 0);
-      if (endp && *endp)
+			if (endp && *endp)
          throw wexception("Bad defense level '%s'", list[2].c_str());
       int32_t evadelvl=strtol(list[3].c_str(), &endp, 0);
-      if (endp && *endp)
+			if (endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
 			if (upcast(Game, game, &egbase))
@@ -557,7 +557,7 @@ uint32_t Tribe_Descr::get_resource_indicator
    int32_t num_indicators=0;
 	for (;;) {
       sprintf(buffer, "resi_%s%i", res->name().c_str(), i);
-      if (get_immovable_index(buffer)==-1)
+		if (get_immovable_index(buffer) == -1)
          break;
       ++i;
       ++num_indicators;
@@ -589,7 +589,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 int32_t Tribe_Descr::get_safe_ware_index(const char * const warename) const {
    int32_t retval=get_ware_index(warename);
 
-   if (retval==-1)
+	if (retval == -1)
       throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!",
 							  warename);
    return retval;
@@ -601,7 +601,7 @@ int32_t Tribe_Descr::get_safe_ware_index(const char * const warename) const {
 int32_t Tribe_Descr::get_safe_worker_index(const char * const workername) const {
    int32_t retval=get_worker_index(workername);
 
-   if (retval==-1)
+	if (retval == -1)
       throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!",
 							  workername);
    return retval;
@@ -613,7 +613,7 @@ int32_t Tribe_Descr::get_safe_worker_index(const char * const workername) const 
 int32_t Tribe_Descr::get_safe_building_index(const char *buildingname) const {
    int32_t retval=get_building_index(buildingname);
 
-   if (retval==-1)
+	if (retval == -1)
       throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!",
 							  buildingname);
    return retval;

@@ -530,7 +530,8 @@ bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
 	assert    (player <= egbase().map().get_nrplayers());
 
 	for (uint32_t i = 0; i < m_player_tribe_references.size(); ++i)
-         if (m_player_tribe_references[i].player==player) return true;
+		if (m_player_tribe_references[i].player == player)
+			return true;
 
    return false;
 }

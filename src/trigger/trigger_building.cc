@@ -105,12 +105,13 @@ void Trigger_Building::check_set_conditions(Game* game) {
 			++count;
 	while (mr.advance(map));
 
-   if (count>=m_count) set_trigger(true);
+	if (count >= m_count)
+		set_trigger(true);
 
    // Set MapVariable inttemp
 	MapVariableManager & mvm = game->map().get_mvm();
 	Int_MapVariable * inttemp = mvm.get_int_variable("inttemp");
-   if (!inttemp) {
+	if (!inttemp) {
       inttemp = new Int_MapVariable(false);
       inttemp->set_name("inttemp");
       mvm.register_new_variable(inttemp);

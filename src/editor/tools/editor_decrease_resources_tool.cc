@@ -52,7 +52,8 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 		int32_t amount = mr.location().field->get_resources_amount();
 
 		amount -= m_change_by;
-      if (amount<0) amount=0;
+		if (amount < 0)
+			amount = 0;
 
 
 		if

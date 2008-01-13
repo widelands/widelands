@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -124,15 +124,15 @@ void Textarea::collapse()
    int32_t h = get_h();
 
 	if (not m_multiline) {
-      if (m_align & Align_HCenter)
+		if      (m_align & Align_HCenter)
          x += w >> 1;
-      else if (m_align & Align_Right)
+		else if (m_align & Align_Right)
          x += w;
 	}
 
-   if (m_align & Align_VCenter)
+	if      (m_align & Align_VCenter)
       y += h >> 1;
-   else if (m_align & Align_Bottom)
+	else if (m_align & Align_Bottom)
       y += h;
 
 	set_pos(Point(x, y));
@@ -145,7 +145,7 @@ void Textarea::collapse()
   */
 void Textarea::expand()
 {
-   if (!m_text.length())
+	if (!m_text.length())
       return;
 
    int32_t x = get_x();
@@ -155,15 +155,15 @@ void Textarea::expand()
    g_fh->get_size(m_fontname, m_fontsize, m_text.c_str(), &w, &h, m_multiline ? get_w() : -1);
 
 	if (not m_multiline) {
-      if (m_align & Align_HCenter)
+		if      (m_align & Align_HCenter)
          x -= w >> 1;
-      else if (m_align & Align_Right)
+		else if (m_align & Align_Right)
          x -= w;
 	}
 
-   if (m_align & Align_VCenter)
+	if      (m_align & Align_VCenter)
       y -= h >> 1;
-   else if (m_align & Align_Bottom)
+	else if (m_align & Align_Bottom)
       y -= h;
 
 	set_pos(Point(x, y));

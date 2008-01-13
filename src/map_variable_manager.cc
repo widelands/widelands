@@ -44,7 +44,7 @@ MapVariableManager::~MapVariableManager() {
 bool MapVariableManager::register_new_variable(MapVariable* mv) {
    // check if this variable is already known
 	if (get_variable(mv->get_name().c_str()))
-         return 0;
+		return false;
 
    m_variables.push_back(mv);
    return true;
@@ -56,19 +56,12 @@ bool MapVariableManager::register_new_variable(MapVariable* mv) {
 Int_MapVariable * MapVariableManager::get_int_variable
 (const char * const name) const
 {
-   MapVariable* v = get_variable(name);
-   if (v && v->get_type() != MapVariable::MVT_INT)
-      return 0;
-
-   return static_cast<Int_MapVariable*>(v);
+	return dynamic_cast<Widelands::Int_MapVariable    *>(get_variable(name));
 }
 String_MapVariable * MapVariableManager::get_string_variable
 (const char * const name) const
 {
-   MapVariable* v = get_variable(name);
-   if (v && v->get_type() != MapVariable::MVT_STRING)
-      return 0;
-   return static_cast<String_MapVariable*>(v);
+	return dynamic_cast<Widelands::String_MapVariable *>(get_variable(name));
 }
 
 MapVariable* MapVariableManager::get_variable

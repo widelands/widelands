@@ -134,11 +134,12 @@ m_label_autosave
    // GRAPHIC_TODO: this shouldn't be here List all resolutions
    SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
    fmt->BitsPerPixel = 16;
-   SDL_Rect** modes = SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
-	if (modes)
-		for (uint32_t i = 0; modes[i]; ++i) {
-         if (modes[i]->w < 640) continue;
-			res this_res = {modes[i]->w, modes[i]->h, 16};
+	if
+		(SDL_Rect const * const * const modes =
+		 SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
+		for (uint32_t i = 0; modes[i]; ++i)
+			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
+				res const this_res = {modes[i]->w, modes[i]->h, 16};
 			if
 				(not m_resolutions.size()
 				 or
@@ -148,23 +149,20 @@ m_label_autosave
 				m_resolutions.push_back(this_res);
 		}
    fmt->BitsPerPixel = 32;
-   modes = SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
-	if (modes)
-		for (uint32_t i = 0; modes[i]; ++i) {
-         if (modes[i]->w < 640) continue;
-			res this_res = {
-            modes[i]->w,
-            modes[i]->h,
-            32
-			};
-			if
-				(not m_resolutions.size()
-				 or
-				 this_res.xres != m_resolutions[m_resolutions.size() - 1].xres
-				 or
-				 this_res.yres != m_resolutions[m_resolutions.size() - 1].yres)
-				m_resolutions.push_back(this_res);
-		}
+	if
+		(SDL_Rect const * const * const modes =
+		 SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
+		for (uint32_t i = 0; modes[i]; ++i)
+			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
+				res const this_res = {modes[i]->w, modes[i]->h, 32};
+				if
+					(not m_resolutions.size()
+					 or
+					 this_res.xres != m_resolutions[m_resolutions.size() - 1].xres
+					 or
+					 this_res.yres != m_resolutions[m_resolutions.size() - 1].yres)
+					m_resolutions.push_back(this_res);
+			}
 
 	bool did_select_a_res=false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {

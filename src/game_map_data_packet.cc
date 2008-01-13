@@ -76,7 +76,7 @@ throw (_wexception)
 	FileSystem * const mapfs = fs.CreateSubFileSystem("map", FileSystem::DIR);
 
    // Now Write the map as it would be a normal map saving
-   if (m_wms) delete m_wms;
+	delete m_wms;
 	m_wms = new Map_Saver(*mapfs, game);
    m_wms->save();
    m_mos = m_wms->get_map_object_saver();

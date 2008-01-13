@@ -82,7 +82,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 
       m_editor_pics.push_back(i);
 	}
-   if (!m_editor_pics.size())
+	if (!m_editor_pics.size())
       throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
 }
 
@@ -256,7 +256,7 @@ void World::parse_resources()
       Section* section;
 
       Resource_Descr* descr;
-      while ((section=prof.get_next_section(0))) {
+		while ((section = prof.get_next_section(0))) {
          descr=new Resource_Descr();
          descr->parse(section, m_basedir);
          m_resources.add(descr);
@@ -376,7 +376,7 @@ void World::get_all_worlds(std::vector<std::string>* retval) {
 	{
       std::string world=*pname;
       world.erase(0, 7); // remove worlds/
-      if (World::exists_world(world.c_str()))
+		if (World::exists_world(world.c_str()))
          retval->push_back(world);
 	}
 }
@@ -426,15 +426,15 @@ m_texture           (0)
 			if (*it == ',') ++nres;
 
       m_nr_valid_resources=nres;
-      if (nres==1)
-         m_valid_resources=new uint8_t;
-      else
-         m_valid_resources=new uint8_t[nres];
+		m_valid_resources = new uint8_t[nres];
       std::string curres;
 		uint32_t i = 0;
       int32_t cur_res=0;
 		while (i <= str1.size()) {
-         if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {++i; continue;}
+			if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {
+				++i;
+				continue;
+			}
 			if (str1[i] == ',' || i == str1.size()) {
 				const int32_t res = resources->get_index(curres.c_str());;
 				if (res == -1)
@@ -492,12 +492,7 @@ Terrain_Descr::~Terrain_Descr()
 {
 	if (m_picnametempl)
 		free(m_picnametempl);
-   if (m_nr_valid_resources==1) {
-      delete m_valid_resources;
-	}
-   if (m_nr_valid_resources>1) {
       delete[] m_valid_resources;
-	}
    m_nr_valid_resources=0;
    m_valid_resources=0;
 }

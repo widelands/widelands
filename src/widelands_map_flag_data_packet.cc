@@ -29,6 +29,8 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
+#include "upcast.h"
+
 #include <map>
 
 namespace Widelands {
@@ -44,7 +46,7 @@ void Map_Flag_Data_Packet::Read
 throw
 (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
    FileRead fr;
@@ -56,8 +58,7 @@ throw
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (uint16_t y = 0; y < map->get_height(); ++y) {
 			for (uint16_t x = 0; x < map->get_width(); ++x) {
-            uint8_t exists=fr.Unsigned8();
-            if (exists) {
+				if (fr.Unsigned8()) {
                // Ok, now read all the additional data
                uint8_t owner=fr.Unsigned8();
                uint32_t serial=fr.Unsigned32();
@@ -98,14 +99,10 @@ throw (_wexception)
 
    // Write flags and owner, register this with the map_object_saver so that
    // it's data can be saved later.
-   Map* map=egbase->get_map();
-	for (uint16_t y = 0; y < map->get_height(); ++y) {
-		for (uint16_t x = 0; x < map->get_width(); ++x) {
-         BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
-         // We only write flags
-         if (immovable && immovable->get_type()==Map_Object::FLAG) {
-            Flag* flag=static_cast<Flag*>(immovable);
-
+	Map   const & map        = egbase->map();
+	Field const & fields_end = map[map.max_index()];
+	for (Field const * field = &map[0]; field < &fields_end; ++field)
+		if (upcast(Flag const, flag, field->get_immovable())) { //  we only write flags
             // Flags can't life on multiply positions, therefore
             // this flag shouldn't be registered.
             assert(!os->is_object_known(flag));
@@ -113,16 +110,13 @@ throw (_wexception)
             uint32_t serial=os->register_object(flag);
 
             fw.Unsigned8(1);
-            fw.Unsigned8(flag->get_owner()->get_player_number());
+			fw.Unsigned8(flag->owner().get_player_number());
             // write id
             fw.Unsigned32(serial);
 
-			} else {
+		} else
             // No existance, no owner
             fw.Unsigned8(0);
-			}
-		}
-	}
 
    fw.Write(fs, "binary/flag");
    // DONE

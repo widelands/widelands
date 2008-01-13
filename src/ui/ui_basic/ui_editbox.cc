@@ -161,7 +161,8 @@ Handles mouseins or rather mouse outs.
 Hides a mouseout event from the underlying button
 */
 void Edit_Box::handle_mousein(bool inside) {
-   if (m_keyboard_grabbed) return;
+	if (m_keyboard_grabbed)
+		return;
    Basic_Button::handle_mousein(inside);
 }
 };

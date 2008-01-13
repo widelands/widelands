@@ -619,17 +619,6 @@ void Game::think()
 }
 
 
-/**
- * Change the game speed.
- */
-void Game::set_speed(int32_t speed)
-{
-	assert(speed >= 0);
-
-	m_speed = speed;
-}
-
-
 void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 {
 	for (uint32_t i = 0; i < cpl.size(); ++i)

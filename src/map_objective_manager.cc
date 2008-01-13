@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,28 +44,21 @@ bool MapObjectiveManager::register_new_objective(MapObjective* mv) {
 
 MapObjective* MapObjectiveManager::get_objective(const char * const name) const
 {
-   uint32_t i;
-   MapObjective* retval = 0;
-	for (i = 0; i < m_objectives.size(); ++i) {
-      if (!strcmp(m_objectives[i]->name().c_str(), name)) {
-         retval = m_objectives[i];
-         break;
-		}
-	}
-
-   return retval;
+	for (uint32_t i = 0; i < m_objectives.size(); ++i)
+		if (!strcmp(m_objectives[i]->name().c_str(), name))
+			return m_objectives[i];
+	return 0;
 }
 
 
 void MapObjectiveManager::delete_objective(const std::string & name) {
-	for (uint32_t i = 0; i < m_objectives.size(); ++i) {
-      if (m_objectives[i]->name() == name) {
+	for (uint32_t i = 0; i < m_objectives.size(); ++i)
+		if (m_objectives[i]->name() == name) {
          delete m_objectives[i];
          m_objectives[i] = m_objectives[m_objectives.size() - 1];
          m_objectives.resize(m_objectives.size() - 1);
          break;
 		}
-	}
 }
 
 };

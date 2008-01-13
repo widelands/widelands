@@ -49,7 +49,7 @@ void Network_Buffer::finish() {
 uint8_t Network_Buffer::get_8(bool remove) {
 	uint8_t const retval = *static_cast<uint8_t *>(m_buffer + m_buffer_pointer);
 
-   if (remove)
+	if (remove)
       m_buffer_pointer += 1;
    return retval;
 }
@@ -57,7 +57,7 @@ uint8_t Network_Buffer::get_8(bool remove) {
 uint16_t Network_Buffer::get_16(bool remove) {
    uint16_t retval = SDLNet_Read16(m_buffer+m_buffer_pointer);
 
-   if (remove)
+	if (remove)
       m_buffer_pointer += 2;
    return retval;
 }
@@ -65,7 +65,7 @@ uint16_t Network_Buffer::get_16(bool remove) {
 uint32_t Network_Buffer::get_32(bool remove) {
    uint32_t retval = SDLNet_Read32(m_buffer+m_buffer_pointer);
 
-   if (remove)
+	if (remove)
       m_buffer_pointer += 4;
    return retval;
 }
@@ -88,7 +88,7 @@ std::string Network_Buffer::get_string(bool remove) {
 void Network_Buffer::put_8(uint8_t val) {
    const uint32_t s = 1;
 
-   while ((m_buffer_pointer + s) >= m_buffer_real_len)
+	while (m_buffer_pointer + s >= m_buffer_real_len)
       grow_buffer();
 
 	*static_cast<uint8_t *>(m_buffer+m_buffer_pointer) = val;
@@ -100,7 +100,7 @@ void Network_Buffer::put_8(uint8_t val) {
 void Network_Buffer::put_16(uint16_t val) {
    const uint32_t s = 2;
 
-   while ((m_buffer_pointer + s) >= m_buffer_real_len)
+	while (m_buffer_pointer + s >= m_buffer_real_len)
       grow_buffer();
 
    SDLNet_Write16(val, m_buffer+m_buffer_pointer);
@@ -112,7 +112,7 @@ void Network_Buffer::put_16(uint16_t val) {
 void Network_Buffer::put_32(uint32_t val) {
    const uint32_t s = 4;
 
-   while ((m_buffer_pointer + s) >= m_buffer_real_len)
+	while (m_buffer_pointer + s >= m_buffer_real_len)
       grow_buffer();
 
    SDLNet_Write32(val, m_buffer+m_buffer_pointer);
@@ -144,7 +144,7 @@ int32_t Network_Buffer::fill(TCPsocket sock) {
    uint32_t s = get_16();
 
    // Check the s of the packet
-   while ((m_buffer_pointer + s) >= m_buffer_real_len)
+	while (m_buffer_pointer + s >= m_buffer_real_len)
       grow_buffer();
 
    // Get the rest of the packet

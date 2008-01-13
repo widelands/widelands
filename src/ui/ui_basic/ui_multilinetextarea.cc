@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,7 +64,7 @@ Multiline_Textarea::Multiline_Textarea
 Free allocated resources
 */
 Multiline_Textarea::~Multiline_Textarea() {
-   if (m_cache_id)
+	if (m_cache_id)
       g_fh->delete_widget_cache(m_cache_id);
 }
 
@@ -82,7 +82,7 @@ void Multiline_Textarea::set_text(const std::string & text) {
       m_textpos = 0;
 		m_scrollbar.set_steps(1);
 	}
-   if (m_cache_mode != Widget_Cache_New)
+	if (m_cache_mode != Widget_Cache_New)
       m_cache_mode = Widget_Cache_Update;
    update(0, 0, get_eff_w(), get_h());
 }
@@ -153,17 +153,23 @@ void Multiline_Textarea::draw_scrollbar() {
 	if (m_cache_mode != Widget_Cache_Use) {
       bool setbottom = false;
 
-		if (m_scrollmode == ScrollLog) {
-         if (m_textpos >= m_textheight - get_h() - g_fh->get_fontheight(m_fontname, m_fontsize))
+		if (m_scrollmode == ScrollLog)
+			if
+				(m_textpos
+				 >=
+				 m_textheight
+				 -
+				 get_h()
+				 -
+				 g_fh->get_fontheight(m_fontname, m_fontsize))
             setbottom = true;
-		}
 
 		uint32_t m_width = 0;
       //update(0, 0, get_eff_w(), get_h());
-      if (m_cache_id)
+		if (m_cache_id)
 			g_fh->get_size_from_cache(m_cache_id, m_width, m_textheight);
 
-      if (setbottom || m_textpos > m_textheight - get_h())
+		if (setbottom || m_textpos > m_textheight - get_h())
          m_textpos = m_textheight - get_h();
 
 		m_scrollbar.set_steps(m_textheight - get_h());
@@ -179,9 +185,9 @@ bool Multiline_Textarea::handle_mousepress(const Uint8 btn, int32_t x, int32_t y
 int32_t Multiline_Textarea::get_halign() {
    int32_t x = 0;
    // Only HAlignment allowed
-   if (m_align & Align_HCenter)
+	if      (m_align & Align_HCenter)
       x += get_w()/2;
-   else if (m_align & Align_Right)
+	else if (m_align & Align_Right)
       x += get_w();
    return x;
 }

@@ -117,10 +117,10 @@ MilitarySite::~MilitarySite
 */
 MilitarySite::~MilitarySite()
 {
-   if (m_soldier_requests.size())
+	if (m_soldier_requests.size())
       log ("[MilitarySite] Ouch! Still have soldier requests!\n");
 
-   if (m_soldiers.size())
+	if (m_soldiers.size())
       log ("[MilitarySite] Ouch! Still have soldiers!\n");
 }
 
@@ -212,8 +212,8 @@ void MilitarySite::set_economy(Economy* e)
    ProductionSite::set_economy(e);
 
 	if (e)
-      for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
-         if (m_soldier_requests[i])
+		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
+			if (m_soldier_requests[i])
             m_soldier_requests[i]->set_economy(e);
 		}
 }
@@ -360,7 +360,7 @@ void MilitarySite::act(Game* g, uint32_t data)
 			}
 
             // Fighting soldiers couldn't be healed !
-         if (s->is_marked())
+		if (s->is_marked())
             continue;
 
             // Heal action
@@ -409,16 +409,14 @@ molog ("**Dropping soldier (%d)\n", serial);
          molog ("Serial: %d -- \n!", s->get_serial());
          i++;
          s = m_soldiers[i];
-		}
-      if (s)
+			}
+			if (s)
          molog ("Serial: %d -- \n!", s->get_serial());
 
-			if (s && s->get_serial() == serial)
-      {
+			if (s && s->get_serial() == serial) {
 molog ("**--Sodier localized!\n");
          drop_soldier(game, i);
-		}
-      else
+			} else
          molog ("--Soldier NOT localized!\n");
 	}
 }
@@ -533,95 +531,6 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
 	return static_cast<MilitarySite *>
 		(static_cast<const MilitarySite_Descr &>(*m_descr)
 		 .create(*g, *winner, m_position, false));
-
-   //IMPLEMENTATION FOR OVERTAKING EXISITING BUILDING
-   //FIXME: Coorect implementation, someone with deeper knowledge needs
-   //to look into this.
-  /* log("starting to change owner...\n");
-    // Release worker
-   if (m_soldier_requests.size())
-   {
-      for (uint32_t i = 0; i < m_soldier_requests.size(); ++i)
-      {
-         delete m_soldier_requests[i];
-         m_soldier_requests[i] = 0;
-		}
-      m_soldier_requests.resize(0);
-	}
-   log("removed all soldier requests.\n");
-   for (uint32_t i = 0; i < m_soldiers.size(); ++i)
-   {
-      Soldier* s = m_soldiers[i];
-
-      m_soldiers[i] = 0;
-		if (g->objects().object_still_available(s))
-         s->set_location(0);
-	}
-   log("removed all remainig soldiers\n");
-
-   if (m_didconquer)
-	  g->unconquer_area(get_owner()->get_player_number(), get_position());
-
-   Flag* f = get_base_flag();
-
-   //  Destroy roads
-   log ("[Donquered - MilitarySite] : Destroying roads\n");
-   if (f->get_road(WALK_NE)) f->detach_road(WALK_NE);
-   if (f->get_road(WALK_E))  f->detach_road(WALK_E);
-   if (f->get_road(WALK_SE)) f->detach_road(WALK_SE);
-   if (f->get_road(WALK_W))  f->detach_road(WALK_W);
-   if (f->get_road(WALK_SW)) f->detach_road(WALK_SW);
-   log("destroyed roads...\n");
-
-   get_economy()->remove_flag(f);
-   log("removed flag from economy\n");
-
-   set_owner(who);
-   log("owner of building set\n");
-
-   f->set_owner(who);
-   log("owner of flag set\n");
-
-   who->get_economy_by_number(who->get_player_number())->add_flag(f);
-   log("flag added economy\n");
-
-   g->conquer_area(get_owner()->get_player_number(), get_position(), get_descr());
-
-   // unconquer land
-
-
-   //g->unconquer_area(get_owner()->get_player_number(), get_position());
-
-/* ORIGINAL CODE FOLLOWS
-   // unconquer land
-   if (m_didconquer)
-      g->unconquer_area(get_owner()->get_player_number(), get_position());
-molog("%s %d\n", __FILE__, __LINE__);
-   g->player_immovable_notification(this, Game::LOSE);
-molog("%s %d\n", __FILE__, __LINE__);
-
-      //  Become the new owner
-   set_owner (who);
-
-   Become the owner of the fields
-   Field* fi = get_owner()->get_game()->get_map()->get_field(get_position());
-   assert (fi);
-   fi->set_owned_by (get_owner()->get_player_number());
-
-   fi = get_owner()->get_game()->get_map()->get_field(f->get_position());
-   assert(fi);
-   fi->set_owned_by (get_owner()->get_player_number());
-
-   Become the owner of the  base flag
-   f->conquered_by (who);
-
-   Reconquer land (crash arround here)
-   if (m_didconquer)
-      g->conquer_area(who->get_player_number(), get_position(), get_descr());
-molog("%s %d\n", __FILE__, __LINE__);
-   g->player_immovable_notification(this, Game::GAIN);
-molog("%s %d\n", __FILE__, __LINE__);*/
-
 }
 
 
@@ -649,12 +558,11 @@ void MilitarySite::clear_requeriments ()
 }
 
 uint32_t MilitarySite::nr_not_marked_soldiers() {
-   if (m_soldiers.size() <= 0) {
+	if (m_soldiers.size() <= 0)
       return 0;
-	}
    uint32_t nr_soldiers = 0;
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
-      if (!m_soldiers[i]->is_marked())
+		if (!m_soldiers[i]->is_marked())
          nr_soldiers++;
 	}
    return nr_soldiers;
@@ -662,7 +570,7 @@ uint32_t MilitarySite::nr_not_marked_soldiers() {
 
 uint32_t MilitarySite::nr_attack_soldiers() {
    uint32_t not_marked = nr_not_marked_soldiers();
-   if (not_marked > 1)
+	if (not_marked > 1)
       return not_marked-1;
    return 0;
 }

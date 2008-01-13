@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -172,7 +172,7 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t
 	size = file->Signed32();
    assert(size == dw*dh);
 
-   if (dw < width || dh < height) {
+	if (dw < width || dh < height) {
       cerr << "Section not big enough" << endl;
       return 0;
 	}

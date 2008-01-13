@@ -52,7 +52,7 @@ throw (_wexception)
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
       uint32_t ser;
-      while ((ser=fr.Unsigned32())!=0xffffffff) {
+		while ((ser = fr.Unsigned32()) != 0xffffffff) {
          // If this is already known, get it
          // Road data is read somewhere else
          assert(!ol->is_object_known(ser));
@@ -83,16 +83,11 @@ throw (_wexception)
 	Field const * const fields_end = field + map.max_index();
 	for (; field < fields_end; ++field)
          // We only write Roads
-		if (upcast(Road const, road, field->get_immovable())) {
-
+		if (upcast(Road const, road, field->get_immovable()))
             // Roads can life on multiple positions
-            uint32_t serial=0;
-            if (os->is_object_known(road)) continue;
-
-            serial=os->register_object(road);
+			if (not os->is_object_known(road))
             // write id
-            fw.Unsigned32(serial);
-		}
+            fw.Unsigned32(os->register_object(road));
    fw.Unsigned32(0xffffffff);
 
    fw.Write(fs, "binary/road");

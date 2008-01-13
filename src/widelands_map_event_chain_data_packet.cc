@@ -45,12 +45,12 @@ void Map_EventChain_Data_Packet::Read
  Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if (skip)
+	if (skip)
       return;
 
    // Skip, if no triggers saved
    FileRead fr;
-   if (!fr.TryOpen(fs, "event_chain"))
+	if (!fr.TryOpen(fs, "event_chain"))
       return;
 
    Profile prof;
@@ -135,11 +135,14 @@ throw (_wexception)
          // Current event
          e->m_curevent = s->get_safe_int("current_event");
 
-         // State
-         std::string state = s->get_safe_string("state");
-         if (state == "init") e->m_state = EventChain::INIT;
-         else if (state == "running") e->m_state = EventChain::RUNNING;
-         else if (state == "done") e->m_state = EventChain::DONE;
+			{ //  state
+				char const * const state = s->get_safe_string("state");
+				e->m_state =
+					not strcmp(state, "init")    ? EventChain::INIT    :
+					not strcmp(state, "running") ? EventChain::RUNNING :
+					not strcmp(state, "done")    ? EventChain::DONE    :
+					e->m_state;
+			}
 
          egbase->get_map()->get_mecm().register_new_eventchain(e);
 		}

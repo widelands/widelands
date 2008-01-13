@@ -43,7 +43,7 @@ private:
 		(FileWrite            *,
 		 Editor_Game_Base     *,
 		 Map_Map_Object_Saver *,
-		 WareInstance         *);
+		 WareInstance   const *);
 };
 
 };

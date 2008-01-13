@@ -64,7 +64,13 @@ void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
       set_building(s->get_safe_string("building"));
       set_allow(s->get_safe_bool("allow"));
 
-      if (player<=0 || player>egbase->get_map()->get_nrplayers() || m_building=="<undefined>") {
+		if
+			(player <= 0
+			 ||
+			 player>egbase->map().get_nrplayers()
+			 ||
+			 m_building == "<undefined>")
+		{
          // give a warning
          log("Conquer Area Event with illegal player orbuilding name: (Player: %i, Building: %s) deleted!\n", m_player, m_building.c_str());
 		}

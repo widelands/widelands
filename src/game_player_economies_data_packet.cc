@@ -56,7 +56,7 @@ throw (_wexception)
 			for (uint32_t j = 0; j < plr->m_economies.size(); ++j) {
             int32_t x=fr.Unsigned16();
             int32_t y=fr.Unsigned16();
-            Flag* flag=static_cast<Flag*>(map->get_field(Coords(x, y))->get_immovable());
+				Flag* flag=static_cast<Flag*>(map->get_field(Coords(x, y))->get_immovable()); //  FIXME!!!
             assert(flag);
             ecos[j]=flag->get_economy();
 			}

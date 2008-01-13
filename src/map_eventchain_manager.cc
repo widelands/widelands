@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,23 +49,18 @@ bool MapEventChainManager::register_new_eventchain(EventChain* mv) {
  */
 EventChain* MapEventChainManager::get_eventchain(const char * const name) const
 {
-   EventChain* retval = 0;
-	for (uint32_t i = 0; i < m_eventchains.size(); ++i) {
-      if (!strcmp(m_eventchains[i]->name().c_str(), name)) {
-         retval = m_eventchains[i];
-         break;
-		}
-	}
-
-   return retval;
+	for (uint32_t i = 0; i < m_eventchains.size(); ++i)
+		if (!strcmp(m_eventchains[i]->name().c_str(), name))
+			return m_eventchains[i];
+	return 0;
 }
 
 /*
  * Remove a eventchain
  */
 void MapEventChainManager::delete_eventchain(const std::string & name) {
-	for (uint32_t i = 0; i < m_eventchains.size(); ++i) {
-      if (m_eventchains[i]->name() == name) {
+	for (uint32_t i = 0; i < m_eventchains.size(); ++i)
+		if (m_eventchains[i]->name() == name) {
          assert(m_eventchains[i]->get_trigcond());
          m_eventchains[i]->get_trigcond()->unreference_triggers(m_eventchains[i]);
          m_eventchains[i]->clear_events();
@@ -74,7 +69,6 @@ void MapEventChainManager::delete_eventchain(const std::string & name) {
          m_eventchains.resize(m_eventchains.size() - 1);
          break;
 		}
-	}
 }
 
 };

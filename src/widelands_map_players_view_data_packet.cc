@@ -120,21 +120,25 @@ inline static const Map_Object_Descr * read_unseen_immovable
 			const char * tribename; try {tribename = immovables_file.CString();}
 			catch (const FileRead::File_Boundary_Exceeded) {
 				throw wexception
-					("Map_Players_View_Data_Packet::Read: player %u: in \"%s\":%u: "
-					 "(%i, %i) t = %u: unexpected end of file while reading "
-					 "immovable tribe name",
+					("Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%zu: (%i, %i) t = %u: unexpected end of file while "
+					 "reading immovable tribe name",
 					 plnum,
-					 &immovables_filename, tribename - immovables_file.Data(0, 0),
+					 &immovables_filename,
+					 reinterpret_cast<size_t>
+					 (tribename - immovables_file.Data(0, 0)),
 					 tcoords.x, tcoords.y, tcoords.t);
 			}
 			const char * type_name; try {type_name = immovables_file.CString();}
 			catch (const FileRead::File_Boundary_Exceeded) {
 				throw wexception
-					("Map_Players_View_Data_Packet::Read: player %u: in \"%s\":%u: "
-					 "(%i, %i) t = %u: unexpected end of file while reading "
-					 "immovable type name",
+					("Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%zu: (%i, %i) t = %u: unexpected end of file while "
+					 "reading immovable type name",
 					 plnum,
-					 &immovables_filename, type_name - immovables_file.Data(0, 0),
+					 &immovables_filename,
+					 reinterpret_cast<size_t>
+					 (type_name - immovables_file.Data(0, 0)),
 					 tcoords.x, tcoords.y, tcoords.t);
 			}
 			if (*tribename) // it is a tribe immovable
@@ -147,35 +151,38 @@ inline static const Map_Object_Descr * read_unseen_immovable
 					if (index == -1)
 						throw wexception
 							("Map_Players_View_Data_Packet::Read: player %u: in "
-							 "\"%s\":%u: (%i, %i) t = %u: player thinks that there "
+							 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there "
 							 "is an immovable, defined in the tribe \"%s\", of the "
 							 "nonexistent type \"%s\" at this location",
 							 plnum,
 							 &immovables_filename,
-							 type_name - immovables_file.Data(0, 0),
+							 reinterpret_cast<size_t>
+							 (type_name - immovables_file.Data(0, 0)),
 							 tcoords.x, tcoords.y, tcoords.t, tribename, type_name);
 					map_object_descr = owner_tribe->get_immovable_descr(index);
 				} else
 					throw wexception
 						("Map_Players_View_Data_Packet::Read: player %u: in "
-						 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is "
+						 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there is "
 						 "an immovable, defined in the nonexistent tribe \"%s\" at "
 						 "this location",
 						 plnum,
 						 &immovables_filename,
-						 tribename - immovables_file.Data(0, 0),
+						 reinterpret_cast<size_t>
+						 (tribename - immovables_file.Data(0, 0)),
 						 tcoords.x, tcoords.y, tcoords.t, tribename);
 			else {//  it is a world immovable
 				const int32_t index = world.get_immovable_index(type_name);
 				if (index == -1)
 					throw wexception
 						("Map_Players_View_Data_Packet::Read: player %u: in "
-						 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is "
+						 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there is "
 						 "an immovable, defined in the world (%s), of the "
 						 "nonexistent type \"%s\" at this location",
 						 plnum,
 						 &immovables_filename,
-						 type_name - immovables_file.Data(0, 0),
+						 reinterpret_cast<size_t>
+						 (type_name - immovables_file.Data(0, 0)),
 						 tcoords.x, tcoords.y, tcoords.t,
 						 world.get_name(), type_name);
 				map_object_descr = world.get_immovable_descr(index);
@@ -187,11 +194,13 @@ inline static const Map_Object_Descr * read_unseen_immovable
 			const char * tribename; try {tribename = immovables_file.CString();}
 			catch (const FileRead::File_Boundary_Exceeded) {
 				throw wexception
-					("Map_Players_View_Data_Packet::Read: player %u: in \"%s\":%u: "
-					 "(%i, %i) t = %u: unexpected end of file while reading "
-					 "building tribe name",
+					("Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%zu: (%i, %i) t = %u: unexpected end of file while "
+					 "reading building tribe name",
 					 plnum,
-					 &immovables_filename, tribename - immovables_file.Data(0, 0),
+					 &immovables_filename,
+					 reinterpret_cast<size_t>
+					 (tribename - immovables_file.Data(0, 0)),
 					 tcoords.x, tcoords.y, tcoords.t);
 			}
 			if
@@ -203,32 +212,37 @@ inline static const Map_Object_Descr * read_unseen_immovable
 				catch (const FileRead::File_Boundary_Exceeded) {
 					throw wexception
 						("Map_Players_View_Data_Packet::Read: player %u: in "
-						 "\"%s\":%u: (%i, %i) t = %u: unexpected end of file while "
+						 "\"%s\":%zu: (%i, %i) t = %u: unexpected end of file while "
 						 "reading building name",
 						 plnum,
 						 &immovables_filename,
-						 buildname - immovables_file.Data(0, 0),
+						 reinterpret_cast<size_t>
+						 (buildname - immovables_file.Data(0, 0)),
 						 tcoords.x, tcoords.y, tcoords.t);
 				}
 				const int32_t index = owner_tribe->get_building_index(buildname);
 				if (index == -1)
 					throw wexception
 						("Map_Players_View_Data_Packet::Read: player %u: in "
-						 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is a "
-						 "building, defined in the tribe \"%s\", of the nonexistent "
-						 "type \"%s\" at this location",
+						 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there is "
+						 "a building, defined in the tribe \"%s\", of the "
+						 "nonexistent type \"%s\" at this location",
 						 plnum,
 						 &immovables_filename,
-						 buildname - immovables_file.Data(0, 0),
+						 reinterpret_cast<size_t>
+						 (buildname - immovables_file.Data(0, 0)),
 						 tcoords.x, tcoords.y, tcoords.t, tribename, buildname);
 				map_object_descr = owner_tribe->get_building_descr(index);
 			} else
 				throw wexception
-					("Map_Players_View_Data_Packet::Read: player %u: in \"%s\":%u: "
-					 "(%i, %i) t = %u: player thinks that there is a building, "
-					 "defined in the nonexistent tribe \"%s\" at this location",
+					("Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there is a "
+					 "building, defined in the nonexistent tribe \"%s\" at this "
+					 "location",
 					 plnum,
-					 &immovables_filename, tribename - immovables_file.Data(0, 0),
+					 &immovables_filename,
+					 reinterpret_cast<size_t>
+					 (tribename - immovables_file.Data(0, 0)),
 					 tcoords.x, tcoords.y, tcoords.t, tribename);
 		}
 		}

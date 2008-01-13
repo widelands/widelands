@@ -135,8 +135,9 @@ struct Game : public Editor_Game_Base {
 	StreamWrite& syncstream();
 	md5_checksum get_sync_hash() const;
 
-	int32_t get_speed() const {return m_speed;}
-	void set_speed(int32_t speed);
+	typedef uint8_t Speed;
+	Speed get_speed() const {return m_speed;}
+	void set_speed(Speed const speed) {m_speed = speed;}
 
 	bool get_allow_cheats();
 
@@ -191,7 +192,7 @@ private:
 	NetGame                      * m_netgame;
 
 	int32_t                            m_state;
-	int32_t                            m_speed; //  frametime multiplier
+	Speed                          m_speed; //  frametime multiplier
 
 	RNG                            rng;
 

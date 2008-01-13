@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -494,7 +494,7 @@ const char *Section::get_next_int(const char *name, int32_t *value)
 	if (!v)
 		return 0;
 
-   if (value)
+	if (value)
       *value = v->get_int();
 	return v->get_name();
 }
@@ -509,7 +509,7 @@ const char *Section::get_next_float(const char *name, float *value)
 	if (!v)
 		return 0;
 
-   if (value)
+	if (value)
       *value = v->get_float();
 	return v->get_name();
 }
@@ -529,7 +529,7 @@ const char *Section::get_next_bool(const char *name, bool *value)
 	if (!v)
 		return 0;
 
-   if (value)
+	if (value)
       *value = v->get_bool();
 	return v->get_name();
 }
@@ -549,7 +549,7 @@ const char *Section::get_next_string(const char *name, const char **value)
 	if (!v)
 		return 0;
 
-   if (value)
+	if (value)
       *value = v->get_string();
 	return v->get_name();
 }

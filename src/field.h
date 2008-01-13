@@ -186,7 +186,7 @@ public:
 	void set_terrain_d(const Terrain_Descr::Index i) throw () {terrains.d = i;}
 	void set_terrain_r(const Terrain_Descr::Index i) throw () {terrains.r = i;}
 
-	Bob* get_first_bob() {return bobs;}
+	Bob * get_first_bob() const throw () {return bobs;}
 	const BaseImmovable * get_immovable() const throw () {return immovable;}
 	BaseImmovable* get_immovable() {return immovable;}
 

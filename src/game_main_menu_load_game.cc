@@ -172,7 +172,7 @@ void Game_Main_Menu_Load_Game::fill_list()
 
 
       FileSystem* fs = 0;
-      try {
+		try {
          fs = g_fs->MakeSubFileSystem(name);
 			Widelands::Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);

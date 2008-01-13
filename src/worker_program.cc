@@ -125,7 +125,7 @@ void WorkerProgram::parse_createitem(Worker_Descr *, Worker::Action * act,
 void WorkerProgram::parse_mine(Worker_Descr *, Worker::Action * act, Parser *,
                                const std::vector<std::string>& cmd)
 {
-   if (cmd.size() != 3)
+	if (cmd.size() != 3)
       throw wexception("Usage: mine <ware type> <area>");
 
    act->function = &Worker::run_mine;
@@ -133,7 +133,7 @@ void WorkerProgram::parse_mine(Worker_Descr *, Worker::Action * act, Parser *,
    char* endp;
    act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
 
-   if (endp && *endp)
+	if (endp && *endp)
       throw wexception("Bad area '%s'", cmd[2].c_str());
 
 }

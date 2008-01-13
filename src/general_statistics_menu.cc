@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -294,8 +294,8 @@ void General_Statistics_Menu::cb_changed_to(int32_t id, bool what) {
  * The radiogroup has changed
  */
 void General_Statistics_Menu::radiogroup_changed(int32_t id) {
-	for (uint32_t i = 0; i < m_parent->game().get_general_statistics().size(); ++i) {
-      if (!m_cbs[i]) continue;
+	for (uint32_t i = 0; i < m_parent->game().get_general_statistics().size(); ++i)
+		if (m_cbs[i]) {
 
       m_plot->show_plot(i* NR_DIFFERENT_DATASETS + id, m_cbs[i]->get_state());
       m_plot->show_plot(i* NR_DIFFERENT_DATASETS + m_selected_information, false);

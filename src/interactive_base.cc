@@ -229,7 +229,7 @@ void Interactive_Base::think()
    // Update everythink so and so many milliseconds, to make sure the whole
    // screen is synced (another user may have done something, and the screen was
    // not redrawn)
-   if (curframe & 1023) // % 1024
+	if (curframe & 1023) // % 1024
       need_complete_redraw();
 
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
@@ -270,8 +270,7 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 25), buf, Align_Left);
 	}
 
-   if (get_display_flag(dfDebug))
-   {
+	if (get_display_flag(dfDebug)) {
       // Show FPS
       char buffer[100];
 		snprintf
@@ -297,9 +296,9 @@ void Interactive_Base::mainview_move(int32_t x, int32_t y)
 		const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
 
 		x += get_w() >> 1;
-      if (x >= maxx) x -= maxx;
+		if (x >= maxx) x -= maxx;
 		y += get_h() >> 1;
-      if (y >= maxy) y -= maxy;
+		if (y >= maxy) y -= maxy;
 
 
       m_mm->set_view_pos(x, y);
