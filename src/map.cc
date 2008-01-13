@@ -1649,7 +1649,6 @@ void Map::get_neighbour
 */
 Map_Loader* Map::get_correct_loader(const char* filename) {
    Map_Loader* retval=0;
-   if (strlen(filename)<strlen(WLMF_SUFFIX) || strlen(filename)<strlen(S2MF_SUFFIX)) return 0;
 
 	if
 		(!
