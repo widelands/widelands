@@ -622,7 +622,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 				const char *bobname = 0;
 
 				Widelands::Coords const location(x, y);
-				Widelands::Map::Index const index =
+				Widelands::Map_Index const index =
 					Widelands::Map::get_index(location, mapwidth);
 				c = bobs[index];
 				if (buildings[index] == 0x78) {

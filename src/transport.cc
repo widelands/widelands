@@ -1146,8 +1146,8 @@ void Road::set_path(Editor_Game_Base *g, const Path &path)
 */
 void Road::mark_map(Editor_Game_Base *g)
 {
-	Map *map = g->get_map();
-	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
+	Map & map = g->map();
+	FCoords curf = map.get_fcoords(m_path.get_start());
 
 	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
 	for (Path::Step_Vector::size_type steps = 0; steps <= nr_steps; ++steps) {
@@ -1169,7 +1169,7 @@ void Road::mark_map(Editor_Game_Base *g)
 
 			if (rdir <= 4) g->set_road(curf, rdir, m_type);
 
-			map->get_neighbour(curf, dir, &curf);
+			map.get_neighbour(curf, dir, &curf);
 		}
 	}
 }
@@ -1177,22 +1177,22 @@ void Road::mark_map(Editor_Game_Base *g)
 /**
  * Remove road markings from the map
 */
-void Road::unmark_map(Editor_Game_Base *g)
-{
-	Map *map = g->get_map();
-	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
+void Road::unmark_map(Editor_Game_Base * egbase) {
+	Map & map = egbase->map();
+	FCoords curf(m_path.get_start(), &map[m_path.get_start()]);
 
 	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
 	for (Path::Step_Vector::size_type steps = 0; steps <= nr_steps; ++steps) {
 		if (steps > 0 && steps < m_path.get_nsteps())
-			unset_position(g, curf);
+			unset_position(egbase, curf);
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir  = get_reverse_dir(m_path[steps - 1]);
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir <= 4) g->set_road(curf, rdir, Road_None);
+			if (rdir <= 4)
+				egbase->set_road(curf, rdir, Road_None);
 		}
 
 		// mark the road that leads away from this field
@@ -1200,9 +1200,10 @@ void Road::unmark_map(Editor_Game_Base *g)
 			const Direction  dir = m_path[steps];
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir <= 4) g->set_road(curf, rdir, Road_None);
+			if (rdir <= 4)
+				egbase->set_road(curf, rdir, Road_None);
 
-			map->get_neighbour(curf, dir, &curf);
+			map.get_neighbour(curf, dir, &curf);
 		}
 	}
 }

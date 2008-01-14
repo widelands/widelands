@@ -102,7 +102,7 @@ throw (_wexception)
 					if (a.radius) { //  Add to map of military influence.
 						Player::Field * const player_fields = player->m_fields;
 						const Field & first_map_field = map[0];
-						a.field = map.get_field(a);
+						a.field = &map[a];
 						MapRegion<Area<FCoords> > mr(map, a);
 						do player_fields[mr.location().field - &first_map_field]
 							.military_influence

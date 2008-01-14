@@ -330,7 +330,7 @@ void FieldDebugWindow::think()
 		 m_coords.x, m_coords.y,
 		 _("height:").c_str(), m_coords.field->get_height());
 	str += buffer;
-	Widelands::Map::Index const i = m_coords.field - &m_map[0];
+	Widelands::Map_Index const i = m_coords.field - &m_map[0];
 	Widelands::Editor_Game_Base const & egbase =
 		dynamic_cast<const Interactive_Base &>(*get_parent()).egbase();
 	Widelands::Player_Number const nr_players = m_map.get_nrplayers();

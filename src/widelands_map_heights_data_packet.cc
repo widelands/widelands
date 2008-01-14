@@ -46,8 +46,8 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) {
       // Read all the heights
 		Map & map = egbase->map();
-		const Map::Index max_index = map.max_index();
-		for (Map::Index i = 0; i < max_index; ++i)
+		Map_Index const max_index = map.max_index();
+		for (Map_Index i = 0; i < max_index; ++i)
 			map[i].set_height(fr.Unsigned8());
 	} else
 		throw wexception
@@ -71,8 +71,9 @@ throw (_wexception)
 
    // Now, all heights as uint8_ts in order
 	Map & map = egbase->map();
-	const Map::Index max_index = map.max_index();
-	for (Map::Index i = 0; i < max_index; ++i) fw.Unsigned8(map[i].get_height());
+	Map_Index const max_index = map.max_index();
+	for (Map_Index i = 0; i < max_index; ++i)
+		fw.Unsigned8(map[i].get_height());
 
    fw.Write(fs,  "binary/heights");
 }

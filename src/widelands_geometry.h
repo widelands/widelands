@@ -28,6 +28,8 @@
 
 namespace Widelands {
 
+typedef uint32_t Map_Index;
+
 typedef int16_t Coordinate;
 typedef Coordinate X_Coordinate;
 typedef Coordinate Y_Coordinate;

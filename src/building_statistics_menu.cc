@@ -391,8 +391,7 @@ void Building_Statistics_Menu::update() {
 				if (productionsite)
 					total_prod +=
 						dynamic_cast<Widelands::ProductionSite &>
-						(*map.get_field(vec[l].pos)->get_immovable())
-						.get_statistics_percent();
+						(*map[vec[l].pos].get_immovable()).get_statistics_percent();
 
 			}
 		}

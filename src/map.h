@@ -251,15 +251,12 @@ struct Map {
 		 const FindNode &);
 
 	// Field logic
-	typedef uint32_t Index;
-	static Index get_index(const Coords c, const X_Coordinate width);
-	Index max_index() const {return m_width * m_height;}
-	Field & operator[](const Index)  const;
-	Field & operator[](const Coords) const;
-	Field * get_field(const Index) const;
-	Field * get_field(const Coords) const;
-	const Field & get_field(const uint32_t x, const uint32_t y) const;
-	FCoords get_fcoords(const Coords) const;
+	static Map_Index get_index(Coords const c, X_Coordinate const width);
+	Map_Index max_index() const {return m_width * m_height;}
+	Field & operator[](Map_Index const)  const;
+	Field & operator[](Coords) const;
+	Field * get_field(Coords) const __attribute__((deprecated));
+	FCoords get_fcoords(Coords) const;
 	void normalize_coords(Coords *) const;
 	FCoords get_fcoords(Field &) const;
 	void get_coords(Field & f, Coords & c) const;
@@ -701,24 +698,18 @@ Field arithmetics
 ==============================================================================
 */
 
-inline Map::Index Map::get_index(const Coords c, const X_Coordinate width)
+inline Map_Index Map::get_index(Coords const c, X_Coordinate const width)
 {return c.y * width + c.x;}
 
-inline Field & Map::operator[](const Index i) const {return m_fields[i];}
+inline Field & Map::operator[](Map_Index const i) const {return m_fields[i];}
 inline Field & Map::operator[](const Coords c) const
 {return operator[](get_index(c, m_width));}
 
-inline Field * Map::get_field(const Index i) const {return &m_fields[i];}
-
-inline Field * Map::get_field(const Coords c) const
-{return get_field(get_index(c, m_width));}
-
-inline const Field & Map::get_field(const uint32_t x, const uint32_t y) const
-{return m_fields[y * m_width + x];}
+inline Field * Map::get_field(const Coords c) const {return &operator[](c);}
 
 inline FCoords Map::get_fcoords(const Coords c) const
 {
-	return FCoords(c, get_field(c));
+	return FCoords(c, &operator[](c));
 }
 
 inline void Map::normalize_coords(Coords * c) const
@@ -1275,7 +1266,7 @@ inline void move_r(const X_Coordinate mapwidth, FCoords & f) {
 	assert(f.x < mapwidth);
 }
 
-inline void move_r(const X_Coordinate mapwidth, FCoords & f, Map::Index & i) {
+inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 	assert(f.x < mapwidth);
 	++f.x;
 	++f.field;

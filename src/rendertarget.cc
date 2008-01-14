@@ -383,16 +383,16 @@ void RenderTarget::rendermap
 		// Calculate safe (bounded) field coordinates and get field pointers
 		map.normalize_coords(&r);
 		map.normalize_coords(&br);
-		Map::Index r_index = Map::get_index(r, mapwidth);
+		Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
 		r.field = &map[r_index];
-		Map::Index br_index = Map::get_index(br, mapwidth);
+		Widelands::Map_Index br_index = Map::get_index(br, mapwidth);
 		br.field = &map[br_index];
 		const Player::Field *  r_player_field = first_player_field +  r_index;
 		const Player::Field * br_player_field = first_player_field + br_index;
 		FCoords tr, f;
 		map.get_tln(r, &tr);
 		map.get_ln(r, &f);
-		Map::Index tr_index = tr.field - &map[0];
+		Widelands::Map_Index tr_index = tr.field - &map[0];
 		const Texture * f_r_texture =
 			g_gr->get_maptexture_data
 			(world
@@ -477,9 +477,9 @@ void RenderTarget::rendermap
 				// Calculate safe (bounded) field coordinates and get field pointers
 				map.normalize_coords(&r);
 				map.normalize_coords(&br);
-				Map::Index r_index = Map::get_index(r, mapwidth);
+				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
 				r.field = &map[r_index];
-				Map::Index br_index = Map::get_index(br, mapwidth);
+				Widelands::Map_Index br_index = Map::get_index(br, mapwidth);
 				br.field = &map[br_index];
 				FCoords tr, f;
 				map.get_tln(r, &tr);
@@ -786,9 +786,9 @@ void RenderTarget::rendermap
 		// Calculate safe (bounded) field coordinates and get field pointers
 		map.normalize_coords(&r);
 		map.normalize_coords(&br);
-		Map::Index r_index = Map::get_index(r, mapwidth);
+		Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
 		r.field = &map[r_index];
-		Map::Index br_index = Map::get_index(br, mapwidth);
+		Widelands::Map_Index br_index = Map::get_index(br, mapwidth);
 		br.field = &map[br_index];
 		FCoords tr, f;
 		map.get_tln(r, &tr);
@@ -859,9 +859,9 @@ void RenderTarget::rendermap
 				// Calculate safe (bounded) field coordinates and get field pointers
 				map.normalize_coords(&r);
 				map.normalize_coords(&br);
-				Map::Index r_index = Map::get_index(r, mapwidth);
+				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
 				r.field = &map[r_index];
-				Map::Index br_index = Map::get_index(br, mapwidth);
+				Widelands::Map_Index br_index = Map::get_index(br, mapwidth);
 				br.field = &map[br_index];
 				FCoords tr, f;
 				map.get_tln(r, &tr);

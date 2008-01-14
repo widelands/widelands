@@ -27,6 +27,8 @@
 #include "player.h"
 #include "transport.h"
 #include "tribe.h"
+#include "widelands_streamread_inlines.h"
+#include "widelands_streamwrite_inlines.h"
 
 #include "filesystem.h"
 #include "zip_exceptions.h"
@@ -103,154 +105,35 @@ extern const Map_Object_Descr g_road_descr;
 //  FIXME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 inline static const Map_Object_Descr * read_unseen_immovable
 (const Editor_Game_Base & egbase,
- const World            & world,
  const Player_Number      plnum,                    //  only for error messages
  const TCoords<>          tcoords,                  //  only for error messages
  BitInBuffer<2>         & immovable_kinds_file,
  FileRead               & immovables_file,
- const char             & immovable_kinds_filename, //  only for error messages
  const char             & immovables_filename)      //  only for error messages
 {
 	const Map_Object_Descr * map_object_descr;
 	try {
 		switch (immovable_kinds_file.get()) {
 		case 0:  //  The player sees no immovable.
-			map_object_descr = 0; break;
-		case 1: {//  The player sees a tribe or world immovable.
-			const char * tribename; try {tribename = immovables_file.CString();}
-			catch (const FileRead::File_Boundary_Exceeded) {
-				throw wexception
-					("Map_Players_View_Data_Packet::Read: player %u: in "
-					 "\"%s\":%zu: (%i, %i) t = %u: unexpected end of file while "
-					 "reading immovable tribe name",
-					 plnum,
-					 &immovables_filename,
-					 reinterpret_cast<size_t>
-					 (tribename - immovables_file.Data(0, 0)),
-					 tcoords.x, tcoords.y, tcoords.t);
-			}
-			const char * type_name; try {type_name = immovables_file.CString();}
-			catch (const FileRead::File_Boundary_Exceeded) {
-				throw wexception
-					("Map_Players_View_Data_Packet::Read: player %u: in "
-					 "\"%s\":%zu: (%i, %i) t = %u: unexpected end of file while "
-					 "reading immovable type name",
-					 plnum,
-					 &immovables_filename,
-					 reinterpret_cast<size_t>
-					 (type_name - immovables_file.Data(0, 0)),
-					 tcoords.x, tcoords.y, tcoords.t);
-			}
-			if (*tribename) // it is a tribe immovable
-				if
-					(const Tribe_Descr * const owner_tribe =
-					 egbase.get_tribe(tribename))
-				{
-					const int32_t index =
-						owner_tribe->get_immovable_index(type_name);
-					if (index == -1)
-						throw wexception
-							("Map_Players_View_Data_Packet::Read: player %u: in "
-							 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there "
-							 "is an immovable, defined in the tribe \"%s\", of the "
-							 "nonexistent type \"%s\" at this location",
-							 plnum,
-							 &immovables_filename,
-							 reinterpret_cast<size_t>
-							 (type_name - immovables_file.Data(0, 0)),
-							 tcoords.x, tcoords.y, tcoords.t, tribename, type_name);
-					map_object_descr = owner_tribe->get_immovable_descr(index);
-				} else
-					throw wexception
-						("Map_Players_View_Data_Packet::Read: player %u: in "
-						 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there is "
-						 "an immovable, defined in the nonexistent tribe \"%s\" at "
-						 "this location",
-						 plnum,
-						 &immovables_filename,
-						 reinterpret_cast<size_t>
-						 (tribename - immovables_file.Data(0, 0)),
-						 tcoords.x, tcoords.y, tcoords.t, tribename);
-			else {//  it is a world immovable
-				const int32_t index = world.get_immovable_index(type_name);
-				if (index == -1)
-					throw wexception
-						("Map_Players_View_Data_Packet::Read: player %u: in "
-						 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there is "
-						 "an immovable, defined in the world (%s), of the "
-						 "nonexistent type \"%s\" at this location",
-						 plnum,
-						 &immovables_filename,
-						 reinterpret_cast<size_t>
-						 (type_name - immovables_file.Data(0, 0)),
-						 tcoords.x, tcoords.y, tcoords.t,
-						 world.get_name(), type_name);
-				map_object_descr = world.get_immovable_descr(index);
-			}
-		} break;
+			map_object_descr = 0;                                       break;
+		case 1: //  The player sees a tribe or world immovable.
+			map_object_descr = &immovables_file.Immovable_Type(egbase); break;
 		case 2:  //  The player sees a flag.
-			map_object_descr = &g_flag_descr; break;
-		case 3: {//  The player sees a building.
-			const char * tribename; try {tribename = immovables_file.CString();}
-			catch (const FileRead::File_Boundary_Exceeded) {
-				throw wexception
-					("Map_Players_View_Data_Packet::Read: player %u: in "
-					 "\"%s\":%zu: (%i, %i) t = %u: unexpected end of file while "
-					 "reading building tribe name",
-					 plnum,
-					 &immovables_filename,
-					 reinterpret_cast<size_t>
-					 (tribename - immovables_file.Data(0, 0)),
-					 tcoords.x, tcoords.y, tcoords.t);
-			}
-			if
-				(const Tribe_Descr * const owner_tribe =
-				 egbase.get_tribe(tribename))
-			{
-				const char *  buildname;
-				try {buildname = immovables_file.CString();}
-				catch (const FileRead::File_Boundary_Exceeded) {
-					throw wexception
-						("Map_Players_View_Data_Packet::Read: player %u: in "
-						 "\"%s\":%zu: (%i, %i) t = %u: unexpected end of file while "
-						 "reading building name",
-						 plnum,
-						 &immovables_filename,
-						 reinterpret_cast<size_t>
-						 (buildname - immovables_file.Data(0, 0)),
-						 tcoords.x, tcoords.y, tcoords.t);
-				}
-				const int32_t index = owner_tribe->get_building_index(buildname);
-				if (index == -1)
-					throw wexception
-						("Map_Players_View_Data_Packet::Read: player %u: in "
-						 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there is "
-						 "a building, defined in the tribe \"%s\", of the "
-						 "nonexistent type \"%s\" at this location",
-						 plnum,
-						 &immovables_filename,
-						 reinterpret_cast<size_t>
-						 (buildname - immovables_file.Data(0, 0)),
-						 tcoords.x, tcoords.y, tcoords.t, tribename, buildname);
-				map_object_descr = owner_tribe->get_building_descr(index);
-			} else
-				throw wexception
-					("Map_Players_View_Data_Packet::Read: player %u: in "
-					 "\"%s\":%zu: (%i, %i) t = %u: player thinks that there is a "
-					 "building, defined in the nonexistent tribe \"%s\" at this "
-					 "location",
-					 plnum,
-					 &immovables_filename,
-					 reinterpret_cast<size_t>
-					 (tribename - immovables_file.Data(0, 0)),
-					 tcoords.x, tcoords.y, tcoords.t, tribename);
-		}
+			map_object_descr = &g_flag_descr;                           break;
+		case 3: //  The player sees a building.
+			map_object_descr = &immovables_file.Building_Type (egbase); break;
 		}
 	} catch (const FileRead::File_Boundary_Exceeded) {
 		throw wexception
+			("Map_Players_View_Data_Packet::Read: player %u: (%i, %i) t = %u: "
+			 "unexpected end of file",
+			 plnum, tcoords.x, tcoords.y, tcoords.t);
+	} catch (StreamRead::Data_Error & e) {
+		throw wexception
 			("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": (%i, %i) "
-			 "t = %u: unexpected end of file while reading immovable kind",
-			 plnum, &immovable_kinds_filename, tcoords.x, tcoords.y, tcoords.t);
+			 "t = %u: error while reading immovable kind: %s",
+			 plnum, &immovables_filename, tcoords.x, tcoords.y, tcoords.t,
+			 e.message().c_str());
 	}
 	return map_object_descr;
 }
@@ -287,7 +170,6 @@ throw (_wexception)
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
 	Field & first_field = map[0];
-	const World & world = map.world();
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, *egbase, player) {
 		Player::Field * const player_fields = player->m_fields;
@@ -319,8 +201,8 @@ throw (_wexception)
 				 ++first_in_row.y, first_in_row.field += mapwidth)
 			{
 				FCoords  r = first_in_row, br = map.bl_n(r);
-				Map::Index  r_index =  r.field - &first_field;
-				Map::Index br_index = br.field - &first_field;
+				Map_Index  r_index =  r.field - &first_field;
+				Map_Index br_index = br.field - &first_field;
 				Player::Field *  r_player_field = player_fields +  r_index;
 				Player::Field * br_player_field = player_fields + br_index;
 				Vision  r_vision =  r_player_field->vision;
@@ -416,7 +298,7 @@ throw (_wexception)
 				 ++first_in_row.y, first_in_row.field += mapwidth)
 			{
 				FCoords r = first_in_row;
-				Map::Index r_index = r.field - &first_field;
+				Map_Index r_index = r.field - &first_field;
 				Player::Field * r_player_field = player_fields + r_index;
 				do {
 					const FCoords f = r;
@@ -491,8 +373,8 @@ throw (_wexception)
 			 ++first_in_row.y, first_in_row.field += mapwidth)
 		{
 			FCoords  r = first_in_row, br = map.bl_n(r);
-			Map::Index  r_index =  r.field - &first_field;
-			Map::Index br_index = br.field - &first_field;
+			Map_Index  r_index =  r.field - &first_field;
+			Map_Index br_index = br.field - &first_field;
 			Player::Field *  r_player_field = player_fields +  r_index;
 			Player::Field * br_player_field = player_fields + br_index;
 			Vision  r_vision =  r_player_field->vision;
@@ -563,9 +445,9 @@ throw (_wexception)
 
 					f_player_field.map_object_descr[TCoords<>::None] =
 						read_unseen_immovable
-						(*egbase, world, plnum, TCoords<>(f, TCoords<>::None),
+						(*egbase, plnum, TCoords<>(f, TCoords<>::None),
 						 node_immovable_kinds_file, node_immovables_file,
-						 *node_immovable_kinds_filename, *node_immovables_filename);
+						 *node_immovables_filename);
 				}
 					break;
 				default:
@@ -616,9 +498,8 @@ throw (_wexception)
 					}
 					f_player_field.map_object_descr[TCoords<>::D] =
 						read_unseen_immovable
-						(*egbase, world, plnum, TCoords<>(f, TCoords<>::D),
+						(*egbase, plnum, TCoords<>(f, TCoords<>::D),
 						 triangle_immovable_kinds_file, triangle_immovables_file,
-						 *triangle_immovable_kinds_filename,
 						 *triangle_immovables_filename);
 				}
 				if  (f_seen | br_seen | r_seen) {
@@ -640,9 +521,8 @@ throw (_wexception)
 					}
 					f_player_field.map_object_descr[TCoords<>::R] =
 						read_unseen_immovable
-						(*egbase, world, plnum, TCoords<>(f, TCoords<>::R),
+						(*egbase, plnum, TCoords<>(f, TCoords<>::R),
 						 triangle_immovable_kinds_file, triangle_immovables_file,
-						 *triangle_immovable_kinds_filename,
 						 *triangle_immovables_filename);
 				}
 
@@ -792,20 +672,12 @@ inline static void write_unseen_immovable
 		immovable_kind = 0;
 	else if (upcast(Immovable_Descr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
-		{
-			const Tribe_Descr * const owner_tribe =
-				immovable_descr->get_owner_tribe();
-			immovables_file.CString
-				(owner_tribe ? owner_tribe->name().c_str() : "");
-		}
-		immovables_file.CString(immovable_descr->name().c_str());
+		immovables_file.Immovable_Type(*immovable_descr);
 	} else if (map_object_descr == &g_flag_descr)
 		immovable_kind = 2;
 	else if (upcast(Building_Descr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
-		immovables_file.CString
-			(building_descr->tribe().name().c_str());
-		immovables_file.CString(building_descr->name().c_str());
+		immovables_file.Building_Type(*building_descr);
 	} else assert(false);
 	immovable_kinds_file.put(immovable_kind);
 }
@@ -844,8 +716,8 @@ throw (_wexception)
 				 ++first_in_row.y, first_in_row.field += mapwidth)
 			{
 				FCoords  r = first_in_row, br = map.bl_n(r);
-				Map::Index  r_index =  r.field - &first_field;
-				Map::Index br_index = br.field - &first_field;
+				Map_Index  r_index =  r.field - &first_field;
+				Map_Index br_index = br.field - &first_field;
 				const Player::Field *  r_player_field = player_fields +  r_index;
 				const Player::Field * br_player_field = player_fields + br_index;
 				Vision  r_vision =  r_player_field->vision;

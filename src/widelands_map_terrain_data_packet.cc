@@ -70,8 +70,8 @@ throw (_wexception)
 		}
 
       // Now get all the terrains
-		const Map::Index max_index = map.max_index();
-		for (Map::Index i = 0; i < max_index; ++i) {
+		Map_Index const max_index = map.max_index();
+		for (Map_Index i = 0; i < max_index; ++i) {
 			Field & f = map[i];
 			f.set_terrain_r(smap[fr.Unsigned8()]);
 			f.set_terrain_d(smap[fr.Unsigned8()]);
@@ -112,8 +112,8 @@ throw (_wexception)
 	}
 
    // Now, all terrains as uint8_ts in order
-	const Map::Index max_index = map.max_index();
-	for (Map::Index i = 0; i < max_index; ++i) {
+	Map_Index const max_index = map.max_index();
+	for (Map_Index i = 0; i < max_index; ++i) {
 		Field & f = map[i];
 		fw.Unsigned8(smap[world.terrain_descr(f.terrain_r()).name().c_str()]);
 		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);

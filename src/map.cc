@@ -621,7 +621,7 @@ Returns the immovable at the given coordinate
 ===============
 */
 BaseImmovable * Map::get_immovable(const Coords coord) const
-{return get_field(coord)->get_immovable();}
+{return operator[](coord).get_immovable();}
 
 
 /*
@@ -1879,8 +1879,8 @@ int32_t Map::findpath
 	normalize_coords(&instart);
 	normalize_coords(&inend);
 
-	start = FCoords(instart, get_field(instart));
-	end   = FCoords(inend,   get_field(inend));
+	start = FCoords(instart, &operator[](instart));
+	end   = FCoords(inend,   &operator[](inend));
 
 	path.m_path.clear();
 

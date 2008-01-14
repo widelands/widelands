@@ -285,7 +285,7 @@ static void draw_minimap_int
 		Widelands::FCoords f(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
-		Widelands::Map::Index i = Widelands::Map::get_index(f, mapwidth);
+		Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 			*reinterpret_cast<T *>(pix) = static_cast<T>
@@ -299,7 +299,7 @@ static void draw_minimap_int
 		Widelands::FCoords f(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
-		Widelands::Map::Index i = Widelands::Map::get_index(f, mapwidth);
+		Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 				const Widelands::Player::Field & player_field = player_fields[i];

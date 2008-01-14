@@ -35,7 +35,7 @@ int32_t Editor_Change_Resource_Tool_Callback
 {
 	Widelands::Map   & map   = *static_cast<Widelands::Map *>(data);
 	Widelands::World & world = map.world();
-	Widelands::FCoords f(c, map.get_field(c));
+	Widelands::FCoords f(c, &map[c]);
 
 	Widelands::FCoords f1;
    int32_t count=0;

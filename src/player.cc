@@ -432,10 +432,10 @@ bool Player::has_economy(Economy * const economy) const throw () {
 }
 
 std::vector<Economy *>::size_type Player::get_economy_number
-(Economy * const economy) const
+(Economy const * const economy) const
 throw ()
 {
-	const std::vector<Economy *>::const_iterator
+	economy_vector::const_iterator const
 		economies_end = m_economies.end(), economies_begin = m_economies.begin();
 	for
 		(std::vector<Economy *>::const_iterator it = economies_begin;

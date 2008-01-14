@@ -25,9 +25,11 @@
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 
+#include "upcast.h"
+
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 void Game_Player_Economies_Data_Packet::Read
@@ -38,32 +40,50 @@ throw (_wexception)
 
    fr.Open(fs, "binary/player_economies");
 
-   // read packet version
+	Map   const &       map        = game->map();
+	Map_Index     const max_index  = map.max_index();
+	Extent        const extent     = map.extent();
+	Player_Number const nr_players = map.get_nrplayers();
+
 	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-      // DONE
-      Map* map=game->get_map();
-		for (uint32_t i = 1; i <= game->map().get_nrplayers(); ++i) {
-         Player* plr=game->get_safe_player(i);
-         if (!plr) continue;
+	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		iterate_players_existing(p, nr_players, *game, player) {
+			Player::economy_vector & economies = player->m_economies;
+			uint16_t const nr_economies = economies.size();
 
-         uint32_t nr_economies=fr.Unsigned16();
-         assert(nr_economies == plr->m_economies.size());
-
-         std::vector<Economy*> ecos;
-         ecos.resize(nr_economies);
-
-			for (uint32_t j = 0; j < plr->m_economies.size(); ++j) {
-            int32_t x=fr.Unsigned16();
-            int32_t y=fr.Unsigned16();
-				Flag* flag=static_cast<Flag*>(map->get_field(Coords(x, y))->get_immovable()); //  FIXME!!!
-            assert(flag);
-            ecos[j]=flag->get_economy();
+			if (packet_version == 1) {
+				uint16_t const nr_economies_from_file = fr.Unsigned16();
+				if (nr_economies != nr_economies_from_file)
+					throw wexception
+						("Game_Player_Economies_Data_Packet::Read: in "
+						 "binary/player_economies:%zu: player %u: read number of "
+						 "economies as %u, but this was read as %u elsewhere",
+						 fr.GetPos() - 2, p,
+						 nr_economies_from_file, nr_economies);
 			}
-			for (uint32_t j = 0; j < ecos.size(); ++j) {
-            plr->m_economies[j]=ecos[j];
-            ecos[j]->balance_requestsupply(); // Issue first balance
-			}
+
+			Player::economy_vector ecos(nr_economies);
+			Player::economy_vector::const_iterator const ecos_end = ecos.end();
+			for
+				(Player::economy_vector::iterator it = ecos.begin();
+				 it != ecos_end;
+				 ++it)
+				if
+					(upcast
+					 (Flag const,
+					  flag,
+					  (packet_version == 1 ?
+					   map[fr.Coords32(extent)] : map[fr.Map_Index32(max_index)])
+					  .get_immovable()))
+					*it = flag->get_economy();
+				else
+					throw wexception
+						("Game_Player_Economies_Data_Packet::Read: in "
+						 "binary/player_economies:%zu: player %u: there is no flag "
+						 "at the specified location",
+						 fr.GetPos() - 4, p);
+			for (uint16_t j = 0; j < nr_economies; ++j) // Issue first balance
+				(economies[j] = ecos[j])->balance_requestsupply();
 		}
 	} else
 		throw wexception
@@ -83,33 +103,26 @@ throw (_wexception)
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   bool done=false;
-	const Player_Number nr_players = game->map().get_nrplayers();
-	iterate_players_existing_const(p, nr_players, *game, plr) {
-      fw.Unsigned16(plr->m_economies.size());
-		for (uint32_t j = 0; j < plr->m_economies.size(); ++j) {
-         done=false;
+	Map const & map = game->map();
+	Field const & field_0 = map[0];
+	Player_Number const nr_players = map.get_nrplayers();
+	iterate_players_existing_const(p, nr_players, *game, player) {
+		Player::economy_vector const & economies = player->m_economies;
+		Player::economy_vector::const_iterator const economies_end =
+			economies.end();
+		for
+			(Player::economy_vector::const_iterator it = economies.begin();
+			 it != economies_end;
+			 ++it)
          // Walk the map so that we find a representant
-         Map* map=game->get_map();
-			for (uint16_t y = 0; y < map->get_height(); ++y) {
-				for (uint16_t x = 0; x < map->get_width(); ++x) {
-               BaseImmovable* imm=map->get_field(Coords(x, y))->get_immovable();
-               if (!imm) continue;
-
-               if (imm->get_type()==Map_Object::FLAG) {
-                  Flag* flag=static_cast<Flag*>(imm);
-                  if (flag->get_economy() == plr->m_economies[j]) {
-                     fw.Unsigned16(x);
-                     fw.Unsigned16(y);
-                     done=true;
-						}
+			for (Field const * field = &field_0;; ++field) {
+				assert(field < &map[map.max_index()]); //  should never reach end
+				if (upcast(Flag const, flag, field->get_immovable()))
+					if (flag->get_economy() == *it) {
+						fw.Map_Index32(field - &field_0);
+						break;
 					}
-               if (done) break;
-				}
-            if (done) break;
 			}
-         if (done) continue;
-		}
 	}
 
    fw.Write(fs, "binary/player_economies");

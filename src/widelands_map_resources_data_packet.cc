@@ -58,10 +58,9 @@ throw (_wexception)
 
       // construct ids and map
       std::map<uint8_t, int32_t> smap;
-      char* buffer;
 		for (int32_t i = 0; i < nr_res; ++i) {
          int32_t id=fr.Unsigned16();
-         buffer=fr.CString();
+			char const * const buffer = fr.CString();
          int32_t res=world->get_resource(buffer);
          if (res==-1) throw wexception("Resource '%s' exists in map, not in world!", buffer);
          smap[id]=res;

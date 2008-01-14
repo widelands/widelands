@@ -313,9 +313,7 @@ struct Player {
 	const Field * fields() const throw () {return m_fields;}
 
 	// See area
-	Vision vision(const Map::Index i) const throw () {
-		return m_fields[i].vision;
-	}
+	Vision vision(Map_Index const i) const throw () {return m_fields[i].vision;}
 
 	bool has_view_changed() {
 		bool t = m_view_changed;
@@ -338,7 +336,7 @@ struct Player {
 		throw ();
 
 	/// Decrement this player's vision for a node.
-	void unsee_node(const Map::Index i, const Time gametime) throw () {
+	void unsee_node(Map_Index const i, Time const gametime) throw () {
 		Field & field = m_fields[i];
 		assert(1 < field.vision);
 		--field.vision;
@@ -370,10 +368,10 @@ struct Player {
 		m_view_changed = true;
 	}
 
-	Military_Influence military_influence(const Map::Index i) const throw ()
+	Military_Influence military_influence(Map_Index const i) const throw ()
 	{return m_fields[i].military_influence;}
 
-	Military_Influence & military_influence(const Map::Index i) throw ()
+	Military_Influence & military_influence(Map_Index const i) throw ()
 	{return m_fields[i].military_influence;}
 
 	// Allowed buildings
@@ -397,11 +395,11 @@ struct Player {
 	void add_economy(Economy*);
 	void remove_economy(Economy*);
 	bool has_economy(Economy * const) const throw ();
-	std::vector<Economy *>::size_type get_economy_number(Economy * const) const
+	typedef std::vector<Economy *> economy_vector;
+	economy_vector::size_type get_economy_number(Economy const *) const
 		throw (); //  for savegames
-	Economy * get_economy_by_number(const std::vector<Economy *>::size_type i)
-		const //  for loading
-	{return m_economies[i];}
+	Economy * get_economy_by_number(economy_vector::size_type const i) const
+	{return m_economies[i];} //  for loading
 	uint32_t get_nr_economies() const {return m_economies.size();}
 
 	// Military stuff
@@ -467,7 +465,7 @@ private:
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_buildings;
-	std::vector<Economy*> m_economies;
+	economy_vector        m_economies;
 	std::string           m_name; // Player name
 
 	std::vector<uint32_t> m_current_statistics;

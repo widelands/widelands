@@ -128,7 +128,7 @@ throw (_wexception)
 			for (uint16_t x = 0; x < map->get_width(); ++x) {
 				uint32_t nr_bobs = fr.Unsigned32();
 
-				assert(!egbase->get_map()->get_field(Coords(x, y))->get_first_bob());
+				assert(!egbase->map()[Coords(x, y)].get_first_bob());
 
 				for (uint32_t i = 0; i < nr_bobs; ++i)
 					ReadBob(fr, egbase, skip, ol, Coords(x, y));

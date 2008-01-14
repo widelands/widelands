@@ -59,24 +59,21 @@ std::string const & BaseImmovable::name() const throw () {
  *
  * Only call this during init.
 */
-void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
+void BaseImmovable::set_position(Editor_Game_Base * egbase, Coords const c)
 {
-	Field *f = g->get_map()->get_field(c);
-	if (f->immovable && f->immovable!=this) {
-		BaseImmovable *other = f->immovable;
+	Map & map = egbase->map();
+	FCoords f = map.get_fcoords(c);
+	if (f.field->immovable && f.field->immovable != this) {
+	   assert(f.field->immovable->get_size() == NONE);
 
-	   assert(other->get_size() == NONE);
-
-		other->cleanup(g);
-		delete other;
+		f.field->immovable->cleanup(egbase);
+		delete f.field->immovable;
 	}
 
-	f->immovable = this;
+	f.field->immovable = this;
 
-	if (get_size() >= SMALL) {
-		Map & map = g->map();
-		map.recalc_for_field_area(Area<FCoords>(map.get_fcoords(c), 2));
-	}
+	if (get_size() >= SMALL)
+		map.recalc_for_field_area(Area<FCoords>(f, 2));
 }
 
 /**
@@ -84,20 +81,18 @@ void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
  *
  * Only call this during cleanup.
 */
-void BaseImmovable::unset_position(Editor_Game_Base *g, Coords c)
+void BaseImmovable::unset_position(Editor_Game_Base * egbase, Coords const c)
 {
-	Field *f = g->get_map()->get_field(c);
+	Map & map = egbase->map();
+	FCoords f = map.get_fcoords(c);
 
-	assert(f->immovable == this);
+	assert(f.field->immovable == this);
 
-	f->immovable = 0;
-	g->inform_players_about_immovable
-		(Map::get_index(c, g->map().get_width()), 0);
+	f.field->immovable = 0;
+	egbase->inform_players_about_immovable(f.field - &map[0], 0);
 
-	if (get_size() >= SMALL) {
-		Map & map = g->map();
-		map.recalc_for_field_area(Area<FCoords>(map.get_fcoords(c), 2));
-	}
+	if (get_size() >= SMALL)
+		map.recalc_for_field_area(Area<FCoords>(f, 2));
 }
 
 

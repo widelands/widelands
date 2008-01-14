@@ -261,7 +261,7 @@ void Editor_Game_Base::do_conquer_area
 	Player & conquering_player = player(player_area.player_number);
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
-		const Map::Index index = mr.location().field - &first_field;
+		Map_Index const index = mr.location().field - &first_field;
 		const Military_Influence influence =
 			map().calc_influence
 			(mr.location(), Area<>(player_area, player_area.radius));
@@ -360,10 +360,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area)
 		 it != immovables.end(); ++it)
 	{
 		PlayerImmovable & imm = dynamic_cast<PlayerImmovable &>(*it->object);
-		if
-			(not m.get_field(it->coords)->is_interior
-			 (imm.get_owner()->get_player_number()))
-		{
+		if (not m[it->coords].is_interior(imm.owner().get_player_number())) {
 			if (std::find(burnlist.begin(), burnlist.end(), &imm) == burnlist.end())
 				burnlist.push_back(&imm);
 		}
@@ -468,7 +465,7 @@ const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 }
 
 void Editor_Game_Base::inform_players_about_ownership
-(const Map::Index i, const Player_Number new_owner)
+(Map_Index const i, Player_Number const new_owner)
 {
 	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
 		if (Player * const p = m_players[plnum]) {
@@ -477,7 +474,7 @@ void Editor_Game_Base::inform_players_about_ownership
 		}
 }
 void Editor_Game_Base::inform_players_about_immovable
-(const Map::Index i, const Map_Object_Descr * const descr)
+(Map_Index const i, Map_Object_Descr const * const descr)
 {
 	if (descr != &g_road_descr)
 		for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
@@ -887,8 +884,8 @@ void Editor_Game_Base::set_road
 	default: assert(false);
 	}
 	uint8_t const road = f.field->get_roads() & mask;
-	const Map::Index           i = f        .field - &first_field;
-	const Map::Index neighbour_i = neighbour.field - &first_field;
+	Map_Index const           i = f        .field - &first_field;
+	Map_Index const neighbour_i = neighbour.field - &first_field;
 	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum) {
 		if (Player * const p = m_players[plnum]) {
 			Player::Field & first_player_field = *p->m_fields;

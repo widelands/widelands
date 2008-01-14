@@ -63,6 +63,7 @@ struct StreamRead {
 	int32_t Signed32();
 	uint32_t Unsigned32();
 	std::string String();
+	__attribute__((noreturn)) virtual char const * CString() {throw;}
 
 	/// Copies characters from the stream to the memory starting at buffer until
 	/// a newline or EndOfFile is encountered. All read characters are consumed.

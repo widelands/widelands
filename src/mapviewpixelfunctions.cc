@@ -122,7 +122,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 	int32_t upper_screen_dy, lower_screen_dy =
 		screen_y_base
 		-
-		map.get_field(slash ? right_col : left_col, row_number).get_height()
+		map[Coords(slash ? right_col : left_col, row_number)].get_height()
 		*
 		HEIGHT_FACTOR
 		-
@@ -135,7 +135,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 		lower_screen_dy =
 			screen_y_base
 			-
-			map.get_field(slash ? left_col : right_col, next_row_number)
+			map[Coords(slash ? left_col : right_col, next_row_number)]
 			.get_height()
 			*
 			HEIGHT_FACTOR
@@ -173,14 +173,14 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 		int32_t Y_a =
 			screen_y_base - TRIANGLE_HEIGHT
 			-
-			map.get_field((right_col == 0 ? mapwidth : right_col) - 1, row_number)
+			map[Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number)]
 			.get_height()
 			*
 			HEIGHT_FACTOR;
 		int32_t Y_b =
 			screen_y_base - TRIANGLE_HEIGHT
 			-
-			map.get_field(right_col, row_number).get_height()
+			map[Coords(right_col, row_number)].get_height()
 			*
 			HEIGHT_FACTOR;
 		int32_t ldy = Y_b - Y_a, pdy = Y_b - y;
@@ -196,7 +196,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 			Y_a =
 				screen_y_base
 				-
-				map.get_field(left_col, next_row_number).get_height()
+				map[Coords(left_col, next_row_number)].get_height()
 				*
 				HEIGHT_FACTOR;
 			ldy = Y_b - Y_a;
@@ -210,8 +210,9 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 				Y_b =
 					screen_y_base
 					-
-					map.get_field
-					(left_col + 1 == mapwidth ? 0 : left_col + 1, next_row_number)
+					map
+					[Coords
+					 (left_col + 1 == mapwidth ? 0 : left_col + 1, next_row_number)]
 					.get_height()
 					*
 					HEIGHT_FACTOR;
@@ -232,13 +233,13 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 		int32_t Y_a =
 			screen_y_base - TRIANGLE_HEIGHT
 			-
-			map.get_field(left_col, row_number).get_height()
+			map[Coords(left_col, row_number)].get_height()
 			*
 			HEIGHT_FACTOR;
 		int32_t Y_b =
 			screen_y_base - TRIANGLE_HEIGHT
 			-
-			map.get_field(left_col + 1 == mapwidth ? 0 : left_col + 1, row_number)
+			map[Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, row_number)]
 			.get_height()
 			*
 			HEIGHT_FACTOR;
@@ -255,7 +256,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 			Y_b =
 				screen_y_base
 				-
-				map.get_field(right_col, next_row_number).get_height()
+				map[Coords(right_col, next_row_number)].get_height()
 				*
 				HEIGHT_FACTOR;
 			ldy = Y_b - Y_a, pdy = Y_b - y;
@@ -268,8 +269,9 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 				Y_a =
 					screen_y_base
 					-
-					map.get_field
-					((right_col == 0 ? mapwidth : right_col) - 1, next_row_number)
+					map
+					[Coords
+					 ((right_col == 0 ? mapwidth : right_col) - 1, next_row_number)]
 					.get_height()
 					*
 					HEIGHT_FACTOR;

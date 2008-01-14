@@ -132,13 +132,11 @@ struct Editor_Game_Base {
 	// Manually load a tribe into memory. Used by the editor
 	const Tribe_Descr & manually_load_tribe(const std::string & tribe);
 	// Get a tribe from the loaded list, when available
-	const Tribe_Descr * get_tribe(const char * const tribe) const;
+	Tribe_Descr const * get_tribe(const char * tribe) const;
 
-	void inform_players_about_ownership(const Map::Index, const Player_Number);
-	void inform_players_about_immovable
-		(const Map::Index, const Map_Object_Descr * const);
-	void inform_players_about_road
-		(const FCoords, const Map_Object_Descr * const);
+	void inform_players_about_ownership(Map_Index, Player_Number);
+	void inform_players_about_immovable(Map_Index, Map_Object_Descr const *);
+	void inform_players_about_road     (FCoords,   Map_Object_Descr const *);
 
 	enum losegain_t {LOSE=0, GAIN};
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t);

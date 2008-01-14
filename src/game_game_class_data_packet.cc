@@ -48,7 +48,8 @@ throw (_wexception)
 		game->m_gametime=fr.Unsigned32();
 	} else
 		throw wexception
-			("Unknown version in Game_Game_Class_Data_Packet: %u\n", packet_version);
+			("Unknown version in Game_Game_Class_Data_Packet: %u",
+			 packet_version);
 }
 
 /*

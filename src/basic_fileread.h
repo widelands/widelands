@@ -106,7 +106,7 @@ template<typename Base> struct basic_FileRead : public Base {
 		return data + i;
 	}
 
-	char * CString(const Pos pos = Pos::Null()) {
+	char * CString(Pos const pos) {
 		assert(data);
 
 		Pos i = pos.isNull() ? filepos : pos;
@@ -118,6 +118,7 @@ template<typename Base> struct basic_FileRead : public Base {
 		if (pos.isNull()) filepos = i;
 		return result;
 	}
+	char const * CString() {return CString(Pos::Null());}
 
 private:
 	char * data;

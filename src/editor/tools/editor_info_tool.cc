@@ -47,7 +47,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 		new UI::Window(&parent, 30, 30, 400, 200, _("Field Information").c_str());
    UI::Multiline_Textarea* multiline_textarea = new UI::Multiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
 
-	Widelands::Field * const f = map.get_field(center.node);
+	Widelands::Field & f = map[center.node];
 
    std::string buf;
    char buf1[1024];
@@ -59,24 +59,36 @@ int32_t Editor_Info_Tool::handle_click_impl
 		 _("Coordinates").c_str(),
 		 center.node.x, center.node.y);
 	buf += buf1;
-   sprintf(buf1, " %s %i\n", _("Height").c_str(), f->get_height()); buf+=buf1;
+	sprintf(buf1, " %s %i\n", _("Height").c_str(), f.get_height()); buf += buf1;
    buf+=_(" Caps: ");
-	switch ((f->get_caps() & Widelands::BUILDCAPS_SIZEMASK)) {
-	case Widelands::BUILDCAPS_SMALL:  buf += _("small");  break;
-	case Widelands::BUILDCAPS_MEDIUM: buf += _("medium"); break;
-	case Widelands::BUILDCAPS_BIG:    buf += _("big");    break;
+	{
+		Widelands::FieldCaps const caps = f.get_caps();
+		switch (caps & Widelands::BUILDCAPS_SIZEMASK) {
+		case Widelands::BUILDCAPS_SMALL:  buf += _("small");  break;
+		case Widelands::BUILDCAPS_MEDIUM: buf += _("medium"); break;
+		case Widelands::BUILDCAPS_BIG:    buf += _("big");    break;
+		}
+		if (caps & Widelands::BUILDCAPS_FLAG) buf += _(" flag");
+		if (caps & Widelands::BUILDCAPS_MINE) buf += _(" mine");
+		if (caps & Widelands::BUILDCAPS_PORT) buf += _(" port");
+		if (caps & Widelands::MOVECAPS_WALK)  buf += _(" walk");
+		if (caps & Widelands::MOVECAPS_SWIM)  buf += _(" swim");
 	}
-	if (f->get_caps() & Widelands::BUILDCAPS_FLAG) buf += _(" flag");
-	if (f->get_caps() & Widelands::BUILDCAPS_MINE) buf += _(" mine");
-	if (f->get_caps() & Widelands::BUILDCAPS_PORT) buf += _(" port");
-	if (f->get_caps() & Widelands::MOVECAPS_WALK)  buf += _(" walk");
-	if (f->get_caps() & Widelands::MOVECAPS_SWIM)  buf += _(" swim");
    buf+="\n";
-   sprintf(buf1, " %s: %i\n", _("Owned by").c_str(), f->get_owned_by()); buf+=buf1;
-   sprintf(buf1, " %s: %s (TODO! more info)\n", _("Has base immovable").c_str(), f->get_immovable() ? "Yes" : "No"); buf+=buf1;
-   sprintf(buf1, " %s: %s (TODO: more informations)\n", _("Has bobs").c_str(), f->get_first_bob() ? "Yes" : "No"); buf+=buf1;
-   int32_t res=f->get_resources();
-   int32_t amount=f->get_resources_amount();
+	sprintf(buf1, " %s: %i\n", _("Owned by").c_str(), f.get_owned_by());
+	buf += buf1;
+	sprintf
+		(buf1,
+		 " %s: %s (TODO! more info)\n",
+		 _("Has base immovable").c_str(), f.get_immovable() ? "Yes" : "No");
+	buf+=buf1;
+	sprintf
+		(buf1,
+		 " %s: %s (TODO: more informations)\n",
+		 _("Has bobs").c_str(), f.get_first_bob() ? "Yes" : "No");
+	buf += buf1;
+	int32_t const res    = f.get_resources();
+	int32_t const amount = f.get_resources_amount();
 	if (res or amount)
 		snprintf
 			(buf1, sizeof(buf1),
@@ -91,7 +103,10 @@ int32_t Editor_Info_Tool::handle_click_impl
 			 _(" Has resources: No\n").c_str());
    buf+=buf1;
 
-   sprintf(buf1, " %s: %i\n", _("Start resources amount").c_str(), f->get_starting_res_amount());
+   sprintf
+		(buf1,
+		 " %s: %i\n", _("Start resources amount").c_str(),
+		 f.get_starting_res_amount());
    buf+=buf1;
 
    sprintf(buf1, _(" Roads: TODO!\n").c_str()); buf+=buf1;

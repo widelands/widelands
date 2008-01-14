@@ -478,8 +478,8 @@ throw (_wexception)
    // Walk the map again
 	Map & map = egbase->map();
 	const uint32_t mapwidth = map.get_width();
-	const Map::Index max_index = map.max_index();
-	for (Map::Index i = 0; i < max_index; ++i) {
+	Map_Index const max_index = map.max_index();
+	for (Map_Index i = 0; i < max_index; ++i) {
 		const Building * const building =
 			dynamic_cast<const Building *>(map[i].get_immovable());
 
