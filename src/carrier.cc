@@ -21,6 +21,8 @@
 #include "game.h"
 #include "wexception.h"
 
+#include "upcast.h"
+
 namespace Widelands {
 
 /**
@@ -191,38 +193,35 @@ void Carrier::transport_update(Game* g, State* state)
  * \todo Upgrade this function to really support many-wares-at-a-time
  * \todo Document parameter state
  */
-void Carrier::deliver_to_building(Game* g, State* state)
+void Carrier::deliver_to_building(Game * game, State * state)
 {
-	BaseImmovable* pos = g->get_map()->get_immovable(get_position());
+	BaseImmovable * const pos = game->map()[get_position()].get_immovable();
 
-	// tough luck, the building has disappeared
-	if (!pos || (pos->get_type() != BUILDING && pos->get_type() != FLAG)) {
-		molog("[Carrier]: Building disappeared while in building.\n");
-		set_location(0);
-
-	} else if (dynamic_cast<Building const *>(pos)) {
+	if (dynamic_cast<Flag const *>(pos))
+		pop_task(); //  we are done
+	else if (upcast(Building, building, pos)) {
 		molog("[Carrier]: Arrived at building.\n");
 
 		// Drop all items addresed to this building
-		while (WareInstance* item = get_carried_item(g)) {
+		while (WareInstance * const item = get_carried_item(game)) {
 			// If the building has disappeared and immediately been replaced
 			// with another building, we might have to return without dropping
 			// the item.
-			PlayerImmovable* next = item->get_next_move_step(g);
+			PlayerImmovable const * const next = item->get_next_move_step(game);
 
 			if (next == pos) {
-				fetch_carried_item(g);
-				item->set_location(g, dynamic_cast<Building *>(pos));
-				item->update(g);
+				fetch_carried_item(game);
+				item->set_location(game, building);
+				item->update      (game);
 
 				molog("[Carrier]: Delivered item inside building.\n");
 			} else {
 				molog("[Carrier]: Building switch from under us, return to road.\n");
 
 				state->ivar1 =
-					dynamic_cast<Building &>(*pos).get_base_flag()
+					building->get_base_flag()
 					==
-					dynamic_cast<Road &>(*get_location(g)).get_flag
+					dynamic_cast<Road &>(*get_location(game)).get_flag
 					(static_cast<Road::FlagId>(0));
 				break;
 			}
@@ -233,8 +232,9 @@ void Carrier::deliver_to_building(Game* g, State* state)
 		start_task_forcemove
 			(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
 	} else {
-		// We're done
-		pop_task();
+		//  tough luck, the building has disappeared
+		molog("[Carrier]: Building disappeared while in building.\n");
+		set_location(0);
 	}
 
 	return;

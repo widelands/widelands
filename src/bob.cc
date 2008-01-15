@@ -163,7 +163,9 @@ m_in_act         (false)
 Bob::~Bob()
 {
 	if (m_position.field) {
-		molog("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not called!\n");
+		molog
+			("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not "
+			 "called!\n");
 		*static_cast<int32_t *>(0) = 0;
 	}
 }
@@ -282,8 +284,8 @@ void Bob::act(Game* g, uint32_t data)
 		m_sched_init_task = false;
 
 		if (!m_stack.size())
-			throw wexception("MO(%u): init_auto_task() failed to set a task",
-			                 get_serial());
+			throw wexception
+				("MO(%u): init_auto_task() failed to set a task", get_serial());
 
 		assert(m_stack_dirty);
 
@@ -345,13 +347,15 @@ void Bob::do_act(Game* g, bool signalhandling)
 			(this->*task.update)(g, &top_state());
 			if (not m_stack_dirty) {
 				if (origactid == m_actid)
-					throw wexception("MO(%u): update[%s] failed to act",
-					                 get_serial(), task.name);
+					throw wexception
+						("MO(%u): update[%s] failed to act",
+						 get_serial(), task.name);
 				break; // we did our work, now get out of here
 
 			} else if (origactid != m_actid)
-				throw wexception("MO(%u): [%s] changes both stack and act",
-				                 get_serial(), task.name);
+				throw wexception
+					("MO(%u): [%s] changes both stack and act",
+					 get_serial(), task.name);
 		}
 
 		do {
@@ -415,8 +419,9 @@ void Bob::schedule_act(Game* g, uint32_t tdelta)
  */
 void Bob::skip_act() {
 	if (!get_state()->task->signal)
-		throw wexception("MO(%u): %s calls skip_act(), but has no signal() function",
-		                 get_serial(), get_state()->task->name);
+		throw wexception
+			("MO(%u): %s calls skip_act(), but has no signal() function",
+			 get_serial(), get_state()->task->name);
 
 	++m_actid;
 }
@@ -461,8 +466,9 @@ void Bob::pop_task()
 	State* state = get_state();
 
 	if (m_stack_dirty)
-		throw wexception("MO(%u): pop_task(%s): stack already dirty",
-		                 get_serial(), state->task->name);
+		throw wexception
+			("MO(%u): pop_task(%s): stack already dirty",
+			 get_serial(), state->task->name);
 
 	delete state->path;
 	delete state->route;
@@ -627,9 +633,13 @@ Bob::Task Bob::taskMovepath = {
  * \par only_step defines how many steps should be taken, before this
  * returns as a success
  */
-bool Bob::start_task_movepath(Game* g, const Coords dest, int32_t persist,
-                              const DirAnimations & anims,
-                              const bool forceonlast, const int32_t only_step)
+bool Bob::start_task_movepath
+	(Game                * game,
+	 Coords          const dest,
+	 int32_t         const persist,
+	 DirAnimations const & anims,
+	 bool            const forceonlast,
+	 int32_t         const only_step)
 {
 	Path* path = new Path;
 	CheckStepDefault cstep_default(get_movecaps());
@@ -641,7 +651,7 @@ bool Bob::start_task_movepath(Game* g, const Coords dest, int32_t persist,
 	else
 		cstep = &cstep_default;
 
-	if (g->get_map()->findpath(m_position, dest, persist, *path, *cstep) < 0) {
+	if (game->map().findpath(m_position, dest, persist, *path, *cstep) < 0) {
 		delete path;
 		return false;
 	}
@@ -698,8 +708,8 @@ bool Bob::start_task_movepath
 	int32_t curidx = path.get_index(get_position());
 
 	if (curidx == -1)
-		throw wexception("MO(%u): start_task_movepath(index): not on path",
-		                 get_serial());
+		throw wexception
+			("MO(%u): start_task_movepath(index): not on path", get_serial());
 
 	if (curidx != index) {
 		if (curidx < index) {
@@ -730,8 +740,7 @@ void Bob::movepath_update(Game* g, State* state)
 	// We ignore signals when they arrive, but interrupt as soon as possible,
 	// i.e. when the next step has finished
 	if (get_signal().size()) {
-		molog("[movepath]: Interrupted by signal '%s'.\n",
-		      get_signal().c_str());
+		molog("[movepath]: Interrupted by signal '%s'.\n", get_signal().c_str());
 
 		pop_task();
 		return;
@@ -917,8 +926,11 @@ void Bob::draw(const Editor_Game_Base & game, RenderTarget & dst,
                const Point pos) const
 {
 	if (m_anim)
-		dst.drawanim(calc_drawpos(game, pos), m_anim,
-		             (game.get_gametime() - m_animstart), get_owner());
+		dst.drawanim
+			(calc_drawpos(game, pos),
+			 m_anim,
+			 game.get_gametime() - m_animstart,
+			 get_owner());
 }
 
 

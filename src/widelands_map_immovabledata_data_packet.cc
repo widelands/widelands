@@ -93,8 +93,11 @@ throw (_wexception)
 					// significantly.
 					// Note that in some cases, the immovable may end up broken despite
 					// the fixup, but there isn't really anything we can do against that.
-					log("Warning: Immovable '%s', size of program '%s' seems to have changed.\n",
-						imm->descr().name().c_str(), imm->m_program->get_name().c_str());
+					log
+						("Warning: Immovable '%s', size of program '%s' seems to "
+						 "have changed.\n",
+						 imm->descr().name().c_str(),
+						 imm->m_program->get_name().c_str());
 					imm->m_program_ptr = 0;
 				}
 			}
