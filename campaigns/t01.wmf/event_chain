@@ -1,12 +1,10 @@
 [global]
-packet_version=1
+packet_version=2
 
 [Briefing]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=The Story begins
-nr_events=9
 event_00=Briefing Msg 1
 event_01=Show Al'thunran
 event_02=Goto Al'thunran
@@ -21,10 +19,8 @@ state=init
 
 [Disable Buildings]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Game Started
-nr_events=42
 event_00=Disable Building 01
 event_01=Disable Building 02
 event_02=Disable Building 03
@@ -72,10 +68,8 @@ state=init
 
 [Advisor 1]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Wait
-nr_events=4
 event_00=Order Msg 1
 event_01=Order Msg 2
 event_02=Order Msg 3
@@ -85,15 +79,11 @@ state=init
 
 [Advisor 2]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Order3
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Built Lumberjack 1
-conditional_element_04=)
-nr_events=3
+conditional_element_00=trigger
+conditional_element_00_data=Order3
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Built Lumberjack 1
 event_00=Order Msg 4
 event_01=Order Msg 5
 event_02=Unhide Objective 2
@@ -102,15 +92,11 @@ state=init
 
 [Advisor 3]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Order5
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Built Lumberjack 2
-conditional_element_04=)
-nr_events=6
+conditional_element_00=trigger
+conditional_element_00_data=Order5
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Built Lumberjack 2
 event_00=Order Msg 6
 event_01=Enable Ranger
 event_02=Order Msg 7
@@ -122,20 +108,14 @@ state=init
 
 [Mission Complete]
 repeating=false
-nr_conditional_element=9
-conditional_element_00=(
-conditional_element_01=(
+conditional_element_00=trigger
+conditional_element_00_data=Order7
+conditional_element_01=AND
 conditional_element_02=trigger
-conditional_element_02_data=Order7
+conditional_element_02_data=Built Quarries
 conditional_element_03=AND
 conditional_element_04=trigger
-conditional_element_04_data=Built Quarries
-conditional_element_05=)
-conditional_element_06=AND
-conditional_element_07=trigger
-conditional_element_07_data=Built Ranger
-conditional_element_08=)
-nr_events=2
+conditional_element_04_data=Built Ranger
 event_00=Mission Complete
 event_01=Unhide Barbariantut01
 current_event=0
@@ -143,10 +123,8 @@ state=init
 
 [Story 1]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Story Timer 1
-nr_events=3
 event_00=Goto Al'thunran
 event_01=Story Msg 1
 event_02=Goto Home
@@ -155,10 +133,8 @@ state=init
 
 [Story 2]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Story Timer 2
-nr_events=2
 event_00=Goto Grave
 event_01=Story Msg 2
 current_event=0
@@ -166,20 +142,16 @@ state=init
 
 [Story 3]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Story Timer 3
-nr_events=1
 event_00=Story Msg 3
 current_event=0
 state=init
 
 [Story 4]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Story Timer 4
-nr_events=1
 event_00=Story Msg 4
 current_event=0
 state=init

@@ -863,25 +863,23 @@ void Game::sample_statistics()
 	Map const &  themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {
-			// First, ownership of this field
 		if (fc.field->get_owned_by())
 			++land_size[fc.field->get_owned_by() - 1];
 
 			// Get the immovable
 		if (upcast(Building, building, fc.field->get_immovable()))
 			if (building->get_position() == fc) { // only count main location
-					// Ok, count the building
-					uint8_t const player_index =
-						building->owner().get_player_number() - 1;
-					++nr_buildings[player_index];
+				uint8_t const player_index =
+					building->owner().get_player_number() - 1;
+				++nr_buildings[player_index];
 
 					// If it is a productionsite, add its productivity
-					if (upcast(ProductionSite, productionsite, building)) {
-						++nr_production_sites[player_index];
-						productivity[player_index] +=
-							productionsite->get_statistics_percent();
-					}
+				if (upcast(ProductionSite, productionsite, building)) {
+					++nr_production_sites[player_index];
+					productivity[player_index] +=
+						productionsite->get_statistics_percent();
 				}
+			}
 
 			// Now, walk the bobs
 		for (Bob const * b = fc.field->get_first_bob(); b; b = b->get_next_bob())

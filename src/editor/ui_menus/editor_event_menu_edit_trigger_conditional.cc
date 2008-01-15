@@ -33,6 +33,7 @@
 #include "trigger/trigger_conditional.h"
 
 using Widelands::MapTriggerManager;
+using Widelands::TriggerConditional;
 
 inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -41,7 +42,7 @@ inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
 (Editor_Interactive &       parent,
- Widelands::TriggerConditional * const cond,
+ TriggerConditional * const cond,
  Widelands::EventChain         *       chain)
 :
 UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
@@ -58,7 +59,7 @@ m_event_chain(chain)
 
    // Trigger List
    new UI::Textarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
-	m_construction= new UI::Listselect<TriggerConditional_Factory::Token &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
+	m_construction= new UI::Listselect<Widelands::TriggerConditional_Factory::Token &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_construction->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_selected);
    m_construction->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked);
    posx += ls_width + spacing;
@@ -67,72 +68,72 @@ m_event_chain(chain)
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
-		TriggerConditional_Factory::TokenNames>
+		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, TriggerConditional_Factory::LPAREN,
+		 this, Widelands::TriggerConditional_Factory::LPAREN,
 		 _("("));
 
    posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
-		TriggerConditional_Factory::TokenNames>
+		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, TriggerConditional_Factory::RPAREN,
+		 this, Widelands::TriggerConditional_Factory::RPAREN,
 		 _(")"));
 
    posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
-		TriggerConditional_Factory::TokenNames>
+		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, TriggerConditional_Factory::AND,
+		 this, Widelands::TriggerConditional_Factory::AND,
 		 _("AND"));
 
 	posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
-		TriggerConditional_Factory::TokenNames>
+		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, TriggerConditional_Factory::OR,
+		 this, Widelands::TriggerConditional_Factory::OR,
 		 _("OR"));
 
    posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
-		TriggerConditional_Factory::TokenNames>
+		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, TriggerConditional_Factory::XOR,
+		 this, Widelands::TriggerConditional_Factory::XOR,
 		 _("XOR"));
 
    posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
-		TriggerConditional_Factory::TokenNames>
+		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, TriggerConditional_Factory::NOT,
+		 this, Widelands::TriggerConditional_Factory::NOT,
 		 _("NOT"));
 
    posy += 20 + spacing + spacing;
@@ -213,15 +214,21 @@ m_event_chain(chain)
 
    // Add conditional
 	if (cond) {
-		std::vector<Widelands::TriggerConditional_Factory::Token> * tokens =
-			cond->get_infix_tokenlist();
-		for (uint32_t i = 0; i < tokens->size(); ++i) {
-			TriggerConditional_Factory::Token & t =
-				*new TriggerConditional_Factory::Token((*tokens)[i]);
-			assert(t.token <= TriggerConditional_Factory::TRIGGER);
+		TriggerConditional::token_vector tokens;
+		cond->get_infix_tokenlist(tokens);
+		TriggerConditional::token_vector::const_iterator const tokens_end =
+			tokens.end();
+		for
+			(TriggerConditional::token_vector::const_iterator it = tokens.begin();
+			 it != tokens_end;
+			 ++it)
+		{
+			Widelands::TriggerConditional_Factory::Token & t =
+				*new Widelands::TriggerConditional_Factory::Token(*it);
+			assert(t.token <= Widelands::TriggerConditional_Factory::TRIGGER);
 			m_construction->add
 				(t.token == Widelands::TriggerConditional_Factory::TRIGGER ?
-				 static_cast<Widelands::Trigger *>(t.data)->get_name()
+				 t.data->get_name()
 				 :
 				 Widelands::TriggerConditional_Factory::operators[t.token],
 				 t,
@@ -252,7 +259,7 @@ bool Editor_Event_Menu_Edit_TriggerConditional::handle_mouserelease
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
       // construct token list
-      std::vector<TriggerConditional_Factory::Token> tok;
+	TriggerConditional::token_vector tok;
 
 	const uint32_t construction_size = m_construction->size();
 	for (uint32_t i = 0; i < construction_size; ++i)
@@ -261,8 +268,9 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 	try {
 		if (!tok.size())
 			throw Widelands::TriggerConditional_Factory::SyntaxError();
-		Widelands::TriggerConditional & cond =
-			*TriggerConditional_Factory::create_from_infix(m_event_chain, tok);
+		TriggerConditional & cond =
+			Widelands::TriggerConditional_Factory::create_from_infix
+			(*m_event_chain, tok);
 		m_given_cond = &cond;
          end_modal(1);
 	} catch (Widelands::TriggerConditional_Factory::SyntaxError) {
@@ -279,23 +287,26 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_operator
-(const TriggerConditional_Factory::TokenNames i)
+(Widelands::TriggerConditional_Factory::TokenNames const i)
 {
-	assert(i <= TriggerConditional_Factory::TRIGGER);
-      TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token();
-      t.data = 0;
-	m_construction->add(TriggerConditional_Factory::operators[i], t, -1, true);
+	assert(i <= Widelands::TriggerConditional_Factory::TRIGGER);
+	m_construction->add
+		(Widelands::TriggerConditional_Factory::operators[i],
+		 *new Widelands::TriggerConditional_Factory::Token(i),
+		 -1,
+		 true);
 }
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger() {
 	Widelands::Trigger & trigger = m_trigger_list->get_selected();
-      Widelands::TriggerConditional_Factory::Token & t =
-		*new TriggerConditional_Factory::Token();
-      t.data = &trigger;
-	t.token = Widelands::TriggerConditional_Factory::TRIGGER;
-	m_construction->add(trigger.get_name(), t, -1, true);
-	}
+	m_construction->add
+		(trigger.get_name(),
+		 *new Widelands::TriggerConditional_Factory::Token
+		 (Widelands::TriggerConditional_Factory::TRIGGER, &trigger),
+		 -1,
+		 true);
+}
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger() {

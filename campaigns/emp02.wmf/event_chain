@@ -1,14 +1,12 @@
 # event_chain-file of second Empire Tutorial - created by Peter Schwanemann, 2007
 
 [global]
-packet_version=1
+packet_version=2
 
 [Beginning]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Start Trigger
-nr_events=8
 event_00=Diary page 5
 event_01=Show forests
 event_02=Goto forests
@@ -22,10 +20,8 @@ state=init
 
 [Disable Buildings]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Start Trigger
-nr_events=39
 event_00=Disable Building 01
 event_01=Disable Building 02
 event_02=Disable Building 03
@@ -74,48 +70,38 @@ state=init
 
 [Woodeconomy]
 repeating=false
-nr_conditional_element=7
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Lumberjack complete
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Forester complete
-conditional_element_04=AND
-conditional_element_05=trigger
-conditional_element_05_data=Sawmill complete
-conditional_element_06=)
-nr_events=1
+conditional_element_00=trigger
+conditional_element_00_data=Lumberjack complete
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Forester complete
+conditional_element_03=AND
+conditional_element_04=trigger
+conditional_element_04_data=Sawmill complete
 event_00=Set Woodeconomy-trigger
 current_event=0
 state=init
 
 [Woodeconomy complete]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Woodeconomy complete
-nr_events=1
 event_00=Diary page 6
 current_event=0
 state=init
 
 [Quarry complete]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Quarry complete
-nr_events=1
 event_00=Diary page 7
 current_event=0
 state=init
 
 [Shipparts]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Saledus found shipparts
-nr_events=6
 event_00=Show Shipparts
 event_01=Goto Shipparts
 event_02=Saledus 1
@@ -127,15 +113,11 @@ state=init
 
 [Marblemountains]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Barracks complete
-conditional_element_02=OR
-conditional_element_03=trigger
-conditional_element_03_data=Sentry complete
-conditional_element_04=)
-nr_events=7
+conditional_element_00=trigger
+conditional_element_00_data=Barracks complete
+conditional_element_01=OR
+conditional_element_02=trigger
+conditional_element_02_data=Sentry complete
 event_00=Set military buildings trigger
 event_01=Show Marblemountains
 event_02=Goto Marblemountains
@@ -148,15 +130,11 @@ state=init
 
 [View other mountains]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Sentry near mountains
-conditional_element_02=OR
-conditional_element_03=trigger
-conditional_element_03_data=Barracks near mountains
-conditional_element_04=)
-nr_events=15
+conditional_element_00=trigger
+conditional_element_00_data=Sentry near mountains
+conditional_element_01=OR
+conditional_element_02=trigger
+conditional_element_02_data=Barracks near mountains
 event_00=Show Coalmountains
 event_01=Show Ironmountains
 event_02=Goto Mountains middle
@@ -177,51 +155,43 @@ state=init
 
 [Mining infrastructure]
 repeating=false
-nr_conditional_element=17
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Stonemason complete
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Carpenter complete
-conditional_element_04=AND
-conditional_element_05=trigger
-conditional_element_05_data=Armoursmith complete
-conditional_element_06=AND
-conditional_element_07=trigger
-conditional_element_07_data=Smelter complete
-conditional_element_08=AND
-conditional_element_09=trigger
-conditional_element_09_data=Burner complete
-conditional_element_10=AND
-conditional_element_11=trigger
-conditional_element_11_data=Ironmine complete
-conditional_element_12=AND
-conditional_element_13=trigger
-conditional_element_13_data=Coalmine complete
-conditional_element_14=AND
-conditional_element_15=trigger
-conditional_element_15_data=Weaponsmith complete
-conditional_element_16=)
-nr_events=1
+conditional_element_00=trigger
+conditional_element_00_data=Stonemason complete
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Carpenter complete
+conditional_element_03=AND
+conditional_element_04=trigger
+conditional_element_04_data=Armoursmith complete
+conditional_element_05=AND
+conditional_element_06=trigger
+conditional_element_06_data=Smelter complete
+conditional_element_07=AND
+conditional_element_08=trigger
+conditional_element_08_data=Burner complete
+conditional_element_09=AND
+conditional_element_10=trigger
+conditional_element_10_data=Ironmine complete
+conditional_element_11=AND
+conditional_element_12=trigger
+conditional_element_12_data=Coalmine complete
+conditional_element_13=AND
+conditional_element_14=trigger
+conditional_element_14_data=Weaponsmith complete
 event_00=Set Mining infrastructure-trigger
 current_event=0
 state=init
 
 [One or more mines complete]
 repeating=false
-nr_conditional_element=7
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Marblemine complete
-conditional_element_02=OR
-conditional_element_03=trigger
-conditional_element_03_data=Coalmine complete
-conditional_element_04=OR
-conditional_element_05=trigger
-conditional_element_05_data=Ironmine complete
-conditional_element_06=)
-nr_events=13
+conditional_element_00=trigger
+conditional_element_00_data=Marblemine complete
+conditional_element_01=OR
+conditional_element_02=trigger
+conditional_element_02_data=Coalmine complete
+conditional_element_03=OR
+conditional_element_04=trigger
+conditional_element_04_data=Ironmine complete
 event_00=Amalea 1
 event_01=Enable Fisher
 event_02=Enable Well
@@ -240,31 +210,23 @@ state=init
 
 [Barbarians found]
 repeating=false
-nr_conditional_element=17
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Marblemine complete
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Ironmine complete
-conditional_element_04=)
-conditional_element_05=OR
-conditional_element_06=(
-conditional_element_07=trigger
-conditional_element_07_data=Marblemine complete
-conditional_element_08=AND
-conditional_element_09=trigger
-conditional_element_09_data=Coalmine complete
-conditional_element_10=)
-conditional_element_11=OR
-conditional_element_12=(
-conditional_element_13=trigger
-conditional_element_13_data=Ironmine complete
-conditional_element_14=AND
-conditional_element_15=trigger
-conditional_element_15_data=Coalmine complete
-conditional_element_16=)
-nr_events=8
+conditional_element_00=trigger
+conditional_element_00_data=Marblemine complete
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Ironmine complete
+conditional_element_03=OR
+conditional_element_04=trigger
+conditional_element_04_data=Marblemine complete
+conditional_element_05=AND
+conditional_element_06=trigger
+conditional_element_06_data=Coalmine complete
+conditional_element_07=OR
+conditional_element_08=trigger
+conditional_element_08_data=Ironmine complete
+conditional_element_09=AND
+conditional_element_10=trigger
+conditional_element_10_data=Coalmine complete
 event_00=Show Barbarians 1
 event_01=Show Barbarians 2
 event_02=Goto Barbarians
@@ -278,33 +240,25 @@ state=init
 
 [Bigger military buildings]
 repeating=false
-nr_conditional_element=7
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Outpost complete
-conditional_element_02=OR
-conditional_element_03=trigger
-conditional_element_03_data=Barrier complete
-conditional_element_04=OR
-conditional_element_05=trigger
-conditional_element_05_data=Tower complete
-conditional_element_06=)
-nr_events=1
+conditional_element_00=trigger
+conditional_element_00_data=Outpost complete
+conditional_element_01=OR
+conditional_element_02=trigger
+conditional_element_02_data=Barrier complete
+conditional_element_03=OR
+conditional_element_04=trigger
+conditional_element_04_data=Tower complete
 event_00=Set Bigger military building-trigger
 current_event=0
 state=init
 
 [Command for Attack]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Mining infrastructure complete
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Bigger military building complete
-conditional_element_04=)
-nr_events=3
+conditional_element_00=trigger
+conditional_element_00_data=Mining infrastructure complete
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Bigger military building complete
 event_00=Diary page 9
 event_01=Enable Fortress
 event_02=Unhide Objective 7 - Attack
@@ -313,10 +267,8 @@ state=init
 
 [Victory]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Victory
-nr_events=3
 event_00=Diary page 10
 event_01=7 days later
 event_02=Diary page 11
@@ -326,10 +278,8 @@ state=init
 #Optional (not needed for winning)
 [Amalea 2]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Tavern complete
-nr_events=1
 event_00=Amalea 2
 current_event=0
 state=init

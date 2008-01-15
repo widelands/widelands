@@ -35,7 +35,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 void Map_EventChain_Data_Packet::Read
@@ -55,96 +55,117 @@ throw (_wexception)
 
    Profile prof;
    prof.read("event_chain", 0, fs);
-   Section* s = prof.get_section("global");
 
-   /*
-
-   std::string        m_name;
-      bool                m_repeating;
-      TriggerConditional* m_trigconditional;
-      std::vector<Event*> m_events;
-
-      // For running
-      uint32_t                m_curevent;
-      State               m_state;
- */
-   // check packet version
-	const int32_t packet_version = s->get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION)
-		while ((s = prof.get_next_section(0))) {
-         std::string name = s->get_name();
-         EventChain* e = new EventChain();
+	Map & map = egbase->map();
+	int32_t const packet_version =
+		prof.get_section("global")->get_int("packet_version");
+	if (1 <= packet_version  and packet_version <= CURRENT_PACKET_VERSION)
+		while (Section * const s = prof.get_next_section(0)) {
+			char const * const name = s->get_name();
+			EventChain & e = *new EventChain();
 
          // Name
-         e->set_name(name.c_str());
+			e.set_name(name);
 
          // Repeating
-         e->m_repeating = s->get_safe_bool("repeating");
+			e.m_repeating = s->get_safe_bool("repeating");
 
-         // TriggerConditional
-         std::vector< TriggerConditional_Factory::Token > toklist;
-         uint32_t nr_tokens = s->get_safe_int("nr_conditional_element");
+			{ //  TriggerConditional
+				TriggerConditional::token_vector toklist;
+				char key[] = "conditional_element_00\0data"; //  tailed string
+				while (char const * const type = s->get_string(key)) {
+					if (not strcmp(type, "trigger")) {
+						key[22] = '_'; //  Enable the "_data" tail of the key string.
+						char const * const trigname = s->get_safe_string(key);
+						key[22] = '\0'; //  Cut off the tail again.
+						if (Trigger * const tr = map.get_mtm().get_trigger(trigname))
+							toklist.push_back
+								(TriggerConditional_Factory::Token
+								 (TriggerConditional_Factory::TRIGGER, tr));
+						else
+							throw wexception
+								("Map_EventChain_Data_Packet::Read: while reading "
+								 "event chain %s: trigger \"%s\" does not exist",
+								 name, trigname);
+					}
+					else {
+						uint8_t i = 0;
+						while
+							(strcmp(type, TriggerConditional_Factory::operators[i]))
+							if (i++ == TriggerConditional_Factory::TRIGGER)
+								throw wexception
+									("Map_EventChain_Data_Packet::Read: while reading "
+									 "event chain %s: \"%s=%s\": token type \"%s\" is "
+									 "not allowed (must be one of {trigger, ), (, XOR, "
+									 "OR, AND, NOT}",
+									 name, key, type, type);
+						toklist.push_back
+							(static_cast<TriggerConditional_Factory::TokenNames>(i));
+					}
 
-         char buf[256];
-			for (uint32_t i = 0; i < nr_tokens; ++i) {
-            sprintf(buf, "conditional_element_%02i", i);
-            TriggerConditional_Factory::Token tok;
-            std::string type = s->get_safe_string(buf);
-            tok.data = 0;
-				if (type == "trigger") {
-               tok.token = TriggerConditional_Factory::TRIGGER;
-               sprintf(buf, "conditional_element_%02i_data", i);
-               std::string trigname = s->get_safe_string(buf);
-               Trigger * const trig = egbase->get_map()->get_mtm().get_trigger(trigname.c_str());
-					if (!trig)
-						throw wexception
-							("Trigger Conditional of Event Chain %s references "
-							 "unknown trigger %s!",
-							 name.c_str(), trigname.c_str());
-               tok.data = trig;
-				} else if (type == ")") {
-               tok.token = TriggerConditional_Factory::RPAREN;
-				} else if (type == "(") {
-               tok.token = TriggerConditional_Factory::LPAREN;
-				} else if (type == "XOR") {
-               tok.token = TriggerConditional_Factory::XOR;
-				} else if (type == "OR") {
-               tok.token = TriggerConditional_Factory::OR;
-				} else if (type == "AND") {
-               tok.token = TriggerConditional_Factory::AND;
-				} else if (type == "NOT") {
-               tok.token = TriggerConditional_Factory::NOT;
+					//  Increment the number in the key string.
+					if (key[21] == '9') {
+						key[21] = '0';
+						if (key[20] == '9') //  We are already at number 99; fail!
+							throw wexception
+								("Map_EventChain_Data_Packet::Read: while reading "
+								 "event chain %s: there are too many conditional "
+								 "elements. Only 100 are allowed",
+							 name);
+						++key[20];
+					} else
+						++key[21];
 				}
-            toklist.push_back(tok);
+				e.set_trigcond
+					(TriggerConditional_Factory::create_from_infix(e, toklist));
 			}
-         e->set_trigcond(TriggerConditional_Factory::create_from_infix(e, toklist));
 
-         // Events
-         uint32_t nr_events = s->get_safe_int("nr_events");
-			for (uint32_t i = 0; i < nr_events; ++i) {
-            sprintf(buf, "event_%02i", i);
-            std::string evname = s->get_safe_string(buf);
-            Event * const event = egbase->get_map()->get_mem().get_event(evname.c_str());
-				if (!event)
-					throw wexception
-						("Event Chain %s references unknown event %s!",
-						 name.c_str(), evname.c_str());
-            e->add_event(event);
+			{ //  Events
+				char key[] = "event_00";
+				while (char const * const evname = s->get_string(key)) {
+					if (Event * const event = map.get_mem().get_event(evname))
+						e.add_event(event);
+					else
+						throw wexception
+							("Map_EventChain_Data_Packet::Read: while reading event "
+							 "chain %s: \"%s=%s\": event \"%s\" does not exist",
+							 name, key, evname, evname);
+
+					//  Increment the number in the key string.
+					if (key[7] == '9') {
+						key[7] = '0';
+						if (key[6] == '9') //  We are already at number 99; fail!
+							throw wexception
+								("Map_EventChain_Data_Packet::Read: while reading "
+								 "event chain %s: there are too many events. Only 100 "
+								 "are allowed",
+								 name);
+						++key[6];
+					} else
+						++key[7];
+				}
 			}
 
          // Current event
-         e->m_curevent = s->get_safe_int("current_event");
+			e.m_curevent = s->get_safe_int("current_event");
 
 			{ //  state
 				char const * const state = s->get_safe_string("state");
-				e->m_state =
-					not strcmp(state, "init")    ? EventChain::INIT    :
-					not strcmp(state, "running") ? EventChain::RUNNING :
-					not strcmp(state, "done")    ? EventChain::DONE    :
-					e->m_state;
+				if      (not strcmp(state, "init"))
+					e.m_state = EventChain::INIT;
+				else if (not strcmp(state, "running"))
+					e.m_state = EventChain::RUNNING;
+				else if (not strcmp(state, "done"))
+					e.m_state = EventChain::DONE;
+				else
+					throw wexception
+						("Map_EventChain_Data_Packet::Read: while reading "
+						 "event chain %s: state is \"%s\" but must be one of {init, "
+						 "running, done}",
+						 name, state);
 			}
 
-         egbase->get_map()->get_mecm().register_new_eventchain(e);
+			map.get_mecm().register_new_eventchain(&e);
 		}
 	else
 		throw wexception
@@ -170,29 +191,52 @@ throw (_wexception)
 		const EventChain & e = mecm.get_eventchain_by_nr(i);
 		Section & s = *prof.create_section(e.name().c_str());
 		s.set_bool("repeating", e.m_repeating);
-		std::vector< TriggerConditional_Factory::Token >* toklist =
-			e.m_trigconditional->get_infix_tokenlist();
-		s.set_int("nr_conditional_element", toklist->size());
-      char buf[256];
-		for (uint32_t t = 0; t < toklist->size(); ++t) {
-         TriggerConditional_Factory::Token tok = (*toklist)[t];
-         sprintf(buf, "conditional_element_%02i", t);
-			s.set_string(buf, TriggerConditional_Factory::operators[tok.token]);
-			if (tok.token == TriggerConditional_Factory::TRIGGER) {
-               sprintf(buf, "conditional_element_%02i_data", t);
-               s.set_string(buf, static_cast<Trigger*>(tok.data)->get_name());
+
+		{ //  TriggerConditional
+			TriggerConditional::token_vector toklist;
+			e.m_trigconditional->get_infix_tokenlist(toklist);
+			assert(toklist.size() <= 99); //  becase we write 2 decimal digits
+			char key[] = "conditional_element_00\0data"; //  tailed string
+			TriggerConditional::token_vector::const_iterator const toklist_end =
+				toklist.end();
+			for
+				(TriggerConditional::token_vector::const_iterator it =
+				 toklist.begin();
+				 it != toklist_end;
+				 ++it)
+			{
+				s.set_string
+					(key, TriggerConditional_Factory::operators[it->token]);
+				if (it->token == TriggerConditional_Factory::TRIGGER) {
+					key[22] = '_'; //  Enable the "_data" tail of the key string.
+					s.set_string(key, it->data->get_name());
+					key[22] = '\0'; //  Cut off the tail again.
+				}
+
+				//  Increment the number in the key string.
+				if (key[21] == '9') {key[21] = '0'; ++key[20];} else ++key[21];
 			}
 		}
-      delete toklist;
 
 
-      // Events
-		const EventChain::event_vector::size_type size =
+
+		{ //  Events
+			EventChain::event_vector const & events = e.m_events;
+			assert(events.size() <= 99); //  becase we write 2 decimal digits
+			char key[] = "event_00";
+			EventChain::event_vector::const_iterator const events_end =
+				events.end();
 			e.m_events.size();
-		s.set_int("nr_events", size);
-		for (EventChain::event_vector::size_type eventnum = 0; eventnum < size; ++eventnum) {
-			sprintf(buf, "event_%02u", eventnum);
-			s.set_string(buf, e.m_events[eventnum]->name().c_str());
+			for
+				(EventChain::event_vector::const_iterator it = events.begin();
+				 it != events_end;
+				 ++it)
+			{
+				s.set_string(key, (*it)->name().c_str());
+
+				//  Increment the number in the key string.
+				if (key[7] == '9') {key[7] = '0'; ++key[6];} else ++key[7];
+			}
 		}
 
       // Which is the current event
@@ -203,13 +247,11 @@ throw (_wexception)
 		case EventChain::INIT:    s.set_string("state", "init");    break;
 		case EventChain::RUNNING: s.set_string("state", "running"); break;
 		case EventChain::DONE:    s.set_string("state", "done");    break;
+		default: assert(false);
 		}
 	}
 
-
    prof.write("event_chain", false, fs);
-
-   // done
 }
 
 };

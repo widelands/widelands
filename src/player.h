@@ -139,8 +139,6 @@ struct Player {
 		 * first soldier located in it is loaded.
 		 */
 		Military_Influence military_influence;
-		//  FIXME Change the military influence calculation so that this can be
-		//  FIXME 16 bit.
 
 		/**
 		 * Indicates whether the player is currently seeing this node or

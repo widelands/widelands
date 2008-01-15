@@ -350,7 +350,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 	Widelands::EventChain & ev = *new Widelands::EventChain();
 	Editor_Event_Menu_Edit_TriggerConditional menu(eia(), 0, &ev);
 	if (menu.run()) { // TriggerConditional has been accepted
-		ev.set_trigcond(menu.get_trigcond());
+		ev.set_trigcond(*menu.get_trigcond());
 
          // Get the a name
          char buffer[256];

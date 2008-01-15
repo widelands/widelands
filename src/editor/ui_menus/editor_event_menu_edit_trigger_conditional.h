@@ -25,13 +25,10 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-namespace Widelands {struct TriggerConditional;};
 namespace UI {
 template <typename T> struct Listselect;
 template <typename T> struct Button;
 }
-
-using Widelands::TriggerConditional_Factory;
 
 /*
  * This is a modal box - The user must end this first
@@ -51,7 +48,7 @@ private:
 	Editor_Interactive & eia();
 	void clicked_cancel     ();
 	void clicked_ok         ();
-	void clicked_operator   (const TriggerConditional_Factory::TokenNames);
+	void clicked_operator   (Widelands::TriggerConditional_Factory::TokenNames);
 	void clicked_ins_trigger();
 	void clicked_del_trigger();
 	void clicked_move_up    ();
@@ -62,7 +59,8 @@ private:
 	void cs_double_clicked  (uint32_t);
 
 	UI::Listselect<Widelands::Trigger                  &> * m_trigger_list;
-	UI::Listselect<TriggerConditional_Factory::Token   &> * m_construction;
+	UI::Listselect<Widelands::TriggerConditional_Factory::Token &>
+		* m_construction;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_insert_btn;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_delete_btn;
 	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvup_btn;

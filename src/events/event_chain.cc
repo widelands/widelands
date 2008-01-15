@@ -50,7 +50,7 @@ EventChain::State EventChain::run(Game* g) {
 		if (get_repeating()) {
          // This eventchain will repeat in due time
          m_curevent = 0;
-         m_trigconditional->reset_triggers(g);
+			m_trigconditional->reset_triggers(*g);
          m_state = INIT;
 		} else {
          // This eventchain is completly done
@@ -96,11 +96,10 @@ Cmd_CheckEventChain::Cmd_CheckEventChain (int32_t t, int32_t tid) : GameLogicCom
 	m_eventchain_id=tid;
 }
 
-void Cmd_CheckEventChain::execute (Game* g)
-{
+void Cmd_CheckEventChain::execute (Game * game) {
 	++m_eventchain_id;
 
-	Map & map = g->map();
+	Map & map = game->map();
 	MapEventChainManager & mecm = map.get_mecm();
 	MapEventChainManager::Index nr_eventchains = mecm.get_nr_eventchains();
 	if (m_eventchain_id >= nr_eventchains) {
@@ -113,8 +112,9 @@ void Cmd_CheckEventChain::execute (Game* g)
 
 		if (nr_eventchains) m_eventchain_id = 0;
 		else
-			return g->enqueue_command
-			(new Cmd_CheckEventChain(g->get_gametime() + 30000, -1));
+			return
+				game->enqueue_command
+				(new Cmd_CheckEventChain(game->get_gametime() + 30000, -1));
 	}
 
 	EventChain & evchain = mecm.get_eventchain_by_nr(m_eventchain_id);
@@ -122,12 +122,12 @@ void Cmd_CheckEventChain::execute (Game* g)
 	switch (evchain.get_state()) {
 	case EventChain::INIT:
          // This is initialized, look if it needs running
-		if (evchain.get_trigcond()->eval(g)) // Hooray, we can start the shit off
-            evchain.run(g);
+		if (evchain.get_trigcond()->eval(*game))
+			evchain.run(game); //  Hooray, we can start the shit off
 		break;
 	case EventChain::RUNNING:
          // This chain is currently running. Continue to run it
-         evchain.run(g);
+		evchain.run(game);
 		break;
 	case EventChain::DONE:
          // This shouldn't happen!
@@ -146,7 +146,8 @@ void Cmd_CheckEventChain::execute (Game* g)
 	// recheck next in the time that all eventchains get checked at least once ever 10 seconds
 	const int32_t delay = nr_eventchains ? 1000 / nr_eventchains : 30000;
 
-   g->enqueue_command (new Cmd_CheckEventChain(g->get_gametime() + delay, m_eventchain_id));
+	game->enqueue_command
+		(new Cmd_CheckEventChain(game->get_gametime() + delay, m_eventchain_id));
 }
 
 #define CMD_CHECK_EVENTCHAIN_VERSION 1

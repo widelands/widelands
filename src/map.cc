@@ -33,6 +33,8 @@
 #include "worlddata.h"
 #include "wexception.h"
 
+#include "log.h"
+
 #include <algorithm>
 
 #include <stdio.h>
@@ -384,8 +386,10 @@ void Map::cleanup() {
 	m_mem->delete_unreferenced_events();
 	m_mtm->delete_unreferenced_triggers();
 
-	assert(m_mtm->get_nr_triggers() == 0);
-	assert(m_mem->get_nr_events  () == 0);
+	if (uint8_t nr_triggers = m_mtm->get_nr_triggers())
+		log("WARNING: Map::cleanup: there are %u triggers left!", nr_triggers);
+	if (uint8_t nr_events   = m_mem->get_nr_events  ())
+		log("WARNING: Map::cleanup: there are %u events left!",   nr_events);
 
    delete m_mvm;
    m_mvm = new MapVariableManager();

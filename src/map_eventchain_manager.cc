@@ -62,7 +62,8 @@ void MapEventChainManager::delete_eventchain(const std::string & name) {
 	for (uint32_t i = 0; i < m_eventchains.size(); ++i)
 		if (m_eventchains[i]->name() == name) {
          assert(m_eventchains[i]->get_trigcond());
-         m_eventchains[i]->get_trigcond()->unreference_triggers(m_eventchains[i]);
+			m_eventchains[i]->get_trigcond()->unreference_triggers
+				(*m_eventchains[i]);
          m_eventchains[i]->clear_events();
          delete m_eventchains[i];
          m_eventchains[i] = m_eventchains[m_eventchains.size() - 1];

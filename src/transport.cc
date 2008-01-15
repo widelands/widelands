@@ -1990,7 +1990,7 @@ Request::~Request()
 void Request::Read
 	(FileRead * fr, Editor_Game_Base * egbase, Map_Map_Object_Loader * mol)
 {
-	uint16_t version = fr->Unsigned16();
+	uint16_t const version = fr->Unsigned16();
 	if (version >= REQUEST_SUPPORTED_VERSION) {
       m_type=static_cast<Type>(fr->Unsigned8());
       m_index=fr->Unsigned32();
@@ -2006,27 +2006,47 @@ void Request::Read
 
 		const uint16_t nr_transfers = fr->Unsigned16();
 		for (uint16_t i = 0; i < nr_transfers; ++i) {
-         uint32_t what_is=fr->Unsigned8();
-         uint32_t reg=fr->Unsigned32();
-         Transfer* trans=0;
+         uint8_t const what_is = fr->Unsigned8();
+			if (what_is != WARE and what_is != WORKER and what_is != SOLDIER)
+				throw wexception
+					("Request::Read: while reading transfer %u: type is %u but "
+					 "must be one of {%u (WARE), %u (WORKER), %u (SOLDIER)}",
+					 i, what_is, WARE, WORKER, SOLDIER);
+         uint32_t const reg = fr->Unsigned32();
 			if (upcast(Game, game, egbase)) {
-            assert(mol->is_object_known(reg));
-				if        (what_is == WARE) {
-               WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
-               trans = new Transfer(game, this, ware);
-				} else if (what_is==WORKER) {
-               Worker* worker=static_cast<Worker*>(mol->get_object_by_file_index(reg));
-               trans = new Transfer(game, this, worker);
-				} else if (what_is==SOLDIER) {
-               Soldier* soldier=static_cast<Soldier*>(mol->get_object_by_file_index(reg));
-               trans = new Transfer(game, this, soldier);
-				}
+				if (not mol->is_object_known(reg))
+					throw wexception
+						("Request::Read: while reading %s transfer %u: %u is not "
+						 "known",
+						 what_is == WARE   ? "ware"   :
+						 what_is == WORKER ? "worker" :
+						 "soldier",
+						 i, reg);
+				Transfer * const trans =
+					what_is == WARE ?
+					new Transfer
+					(game,
+					 this,
+					 dynamic_cast<WareInstance *>
+					 (mol->get_object_by_file_index(reg)))
+					:
+					what_is == WORKER ?
+					new Transfer
+					(game,
+					 this,
+					 dynamic_cast<Worker       *>
+					 (mol->get_object_by_file_index(reg)))
+					:
+					new Transfer
+					(game,
+					 this,
+					 dynamic_cast<Soldier      *>
+					 (mol->get_object_by_file_index(reg)));
             trans->set_idle(fr->Unsigned8());
             m_transfers.push_back(trans);
 
 				// Requeriments
-				bool has_requ = fr->Unsigned8();
-				if (has_requ) {
+				if (fr->Unsigned8()) {
 					m_requeriments = new Requeriments();
 					m_requeriments->Read (fr, egbase, mol);
 				}

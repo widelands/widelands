@@ -1,12 +1,10 @@
 [global]
-packet_version=1
+packet_version=2
 
 [Beginning]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Start Trigger
-nr_events=6
 event_00=Goto Darkness
 event_01=Diary page 1
 event_02=Show Sea
@@ -18,10 +16,8 @@ state=init
 
 [Disable Buildings]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Start Trigger
-nr_events=43
 event_00=Disable Building 01
 event_01=Disable Building 02
 event_02=Disable Building 03
@@ -70,10 +66,8 @@ state=init
 
 [Visitor 1]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Message Barracks
-nr_events=4
 event_00=Saledus 1
 event_01=Goto Forest
 event_02=Enable Barracks
@@ -83,10 +77,8 @@ state=init
 
 [Baracks Complete]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Barracks complete
-nr_events=6
 event_00=Goto Forest
 event_01=Saledus 2
 event_02=Unhide Objective 2 - Lumberjack
@@ -98,10 +90,8 @@ state=init
 
 [Lumberjack Complete]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Lumberjack complete
-nr_events=4
 event_00=Goto Home
 event_01=Amalea 2
 event_02=Unhide Objective 3 - Sawmill
@@ -111,10 +101,8 @@ state=init
 
 [Sawmill Complete]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Sawmill complete
-nr_events=4
 event_00=Goto Home
 event_01=Amalea 3
 event_02=Unhide Objective 4 - Forester
@@ -124,10 +112,8 @@ state=init
 
 [Forester Complete]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Forester complete
-nr_events=4
 event_00=Goto Home
 event_01=Saledus 3
 event_02=Unhide Objective 5 - Quarry
@@ -137,10 +123,8 @@ state=init
 
 [Quarry Complete]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Quarry complete
-nr_events=2
 event_00=Goto Home
 event_01=Saledus 4
 current_event=0
@@ -148,13 +132,11 @@ state=init
 
 [End]
 repeating=false
-nr_conditional_element=3
 conditional_element_00=trigger
 conditional_element_00_data=End Trigger
 conditional_element_01=AND
 conditional_element_02=trigger
 conditional_element_02_data=Quarry complete
-nr_events=2
 event_00=Diary page 4
 event_01=Unhide Empiretut02
 current_event=0

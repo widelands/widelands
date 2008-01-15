@@ -1,12 +1,10 @@
 [global]
-packet_version=1
+packet_version=2
 
 [Briefing]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=The Story begins
-nr_events=9
 event_00=Briefing Msg 1
 event_01=Briefing Msg 2
 event_02=Briefing Msg 3
@@ -21,10 +19,8 @@ state=init
 
 [Disable Buildings]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Game Started
-nr_events=38
 event_00=Disable Building 01
 event_01=Disable Building 02
 event_02=Disable Building 03
@@ -68,25 +64,19 @@ state=init
 
 [Advisor 1 Quarry]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Built Quarry
-nr_events=1
 event_00=Order Msg 05 Quarry
 current_event=0
 state=init
 
 [Advisor 2 First Expand]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Built Sentry
-conditional_element_02=OR
-conditional_element_03=trigger
-conditional_element_03_data=Built Stronghold
-conditional_element_04=)
-nr_events=6
+conditional_element_00=trigger
+conditional_element_00_data=Built Sentry
+conditional_element_01=OR
+conditional_element_02=trigger
+conditional_element_02_data=Built Stronghold
 event_00=Order Msg 06 Geologist
 event_01=Unhide Build Mines
 event_02=Enable Coal Mine
@@ -98,15 +88,11 @@ state=init
 
 [Advisor 3 Mines Up]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Built Coal Mine
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Built Ore Mine
-conditional_element_04=)
-nr_events=13
+conditional_element_00=trigger
+conditional_element_00_data=Built Coal Mine
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Built Ore Mine
 event_00=Order Msg 07 Mines Up
 event_01=Order Msg 08 Mines Up
 event_02=Order Msg 09 Hunter
@@ -125,65 +111,47 @@ state=init
 
 [Advisor 4 Hunt Began]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Built Hunter
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Built Gamekeeper
-conditional_element_04=)
-nr_events=1
+conditional_element_00=trigger
+conditional_element_00_data=Built Hunter
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Built Gamekeeper
 event_00=Order Msg 11 Hunt Began
 current_event=0
 state=init
 
 [Advisor 5 Farming Began]
 repeating=false
-nr_conditional_element=9
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Built Bakery
-conditional_element_02=AND
-conditional_element_03=(
+conditional_element_00=trigger
+conditional_element_00_data=Built Bakery
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Built Farm
+conditional_element_03=AND
 conditional_element_04=trigger
-conditional_element_04_data=Built Farm
-conditional_element_05=AND
-conditional_element_06=trigger
-conditional_element_06_data=Built Well
-conditional_element_07=)
-conditional_element_08=)
-nr_events=1
+conditional_element_04_data=Built Well
 event_00=Order Msg 12 Farming Began
 current_event=0
 state=init
 
 [Advisor 6 Tavern]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Built Tavern
-nr_events=1
 event_00=Order Msg 13 Tavern
 current_event=0
 state=init
 
 [Advisor 7 Refine Ore]
 repeating=false
-nr_conditional_element=9
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Built Tavern
-conditional_element_02=AND
-conditional_element_03=(
+conditional_element_00=trigger
+conditional_element_00_data=Built Tavern
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Hunt Began
+conditional_element_03=AND
 conditional_element_04=trigger
-conditional_element_04_data=Hunt Began
-conditional_element_05=AND
-conditional_element_06=trigger
-conditional_element_06_data=Farming Began
-conditional_element_07=)
-conditional_element_08=)
-nr_events=4
+conditional_element_04_data=Farming Began
 event_00=Order Msg 14 Refine Ore
 event_01=Enable Smelter
 event_02=Enable Burner
@@ -193,15 +161,11 @@ state=init
 
 [Advisor 8 Mines Exhaustes]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Built Smelter
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Built Burner
-conditional_element_04=)
-nr_events=4
+conditional_element_00=trigger
+conditional_element_00_data=Built Smelter
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Built Burner
 event_00=Order Msg 15 Mines Exhausted
 event_01=Enable Inn
 event_02=Enable Deep Coal Mine
@@ -211,15 +175,11 @@ state=init
 
 [Advisor 9 Blackwood]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Built First Sentry
-conditional_element_02=OR
-conditional_element_03=trigger
-conditional_element_03_data=Built First Stronghold
-conditional_element_04=)
-nr_events=3
+conditional_element_00=trigger
+conditional_element_00_data=Built First Sentry
+conditional_element_01=OR
+conditional_element_02=trigger
+conditional_element_02_data=Built First Stronghold
 event_00=Order Msg 16 Blackwood
 event_01=Enable Hardener
 event_02=Unhide Better Material I
@@ -228,10 +188,8 @@ state=init
 
 [Advisor 10 Grindstone]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Built Hardener
-nr_events=4
 event_00=Order Msg 17 Grindstone
 event_01=Enable Grinder
 event_02=Enable Well
@@ -241,15 +199,11 @@ state=init
 
 [Advisor 11 Fernery]
 repeating=false
-nr_conditional_element=5
-conditional_element_00=(
-conditional_element_01=trigger
-conditional_element_01_data=Built Grinder
-conditional_element_02=AND
-conditional_element_03=trigger
-conditional_element_03_data=Built Well
-conditional_element_04=)
-nr_events=3
+conditional_element_00=trigger
+conditional_element_00_data=Built Grinder
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Built Well
 event_00=Order Msg 18 Fernery
 event_01=Enable Fernery
 event_02=Unhide Better Material III
@@ -258,35 +212,25 @@ state=init
 
 [Advisor 12 All Material]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Built Fernery
-nr_events=1
 event_00=Order Msg 19 All Material
 current_event=0
 state=init
 
 [Mission Complete]
 repeating=false
-nr_conditional_element=13
-conditional_element_00=(
-conditional_element_01=(
+conditional_element_00=trigger
+conditional_element_00_data=Mission Quarry
+conditional_element_01=AND
 conditional_element_02=trigger
-conditional_element_02_data=Mission Quarry
+conditional_element_02_data=Mission Fernery
 conditional_element_03=AND
 conditional_element_04=trigger
-conditional_element_04_data=Mission Fernery
-conditional_element_05=)
-conditional_element_06=AND
-conditional_element_07=(
-conditional_element_08=trigger
-conditional_element_08_data=Built Inn
-conditional_element_09=AND
-conditional_element_10=trigger
-conditional_element_10_data=Built Deep Coal Mine
-conditional_element_11=)
-conditional_element_12=)
-nr_events=2
+conditional_element_04_data=Built Inn
+conditional_element_05=AND
+conditional_element_06=trigger
+conditional_element_06_data=Built Deep Coal Mine
 event_00=Mission Complete
 event_01=Unhide Empiretut
 current_event=0
@@ -294,20 +238,16 @@ state=init
 
 [Story 1]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Story Timer 1
-nr_events=1
 event_00=Story Msg 1
 current_event=0
 state=init
 
 [Story 2]
 repeating=false
-nr_conditional_element=1
 conditional_element_00=trigger
 conditional_element_00_data=Story Timer 2
-nr_events=1
 event_00=Story Msg 2
 current_event=0
 state=init

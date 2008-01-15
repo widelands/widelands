@@ -39,7 +39,9 @@ const char * const TriggerConditional_Factory::operators[] =
  * Creates trigger conditionals, throws SyntaxError on error
  * This basically only converts the infix into postfix notation
  */
-TriggerConditional* TriggerConditional_Factory::create_from_infix(EventChain* evchain, const std::vector<Token>& vec) {
+TriggerConditional & TriggerConditional_Factory::create_from_infix
+	(EventChain & evchain, std::vector<Token> const & vec)
+{
 
    std::vector<Token> tempstack;
    std::vector<Token> postfix;
@@ -80,7 +82,6 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix(EventChain* ev
    // Unload all operators which are left on stack
 	while (tempstack.size()) {
 		if (tempstack.back().token == LPAREN) {
-         // Unmatched parentesis
          ALIVE();
          log("Unmatched parenthesis!\n");
          throw SyntaxError();
@@ -89,7 +90,7 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix(EventChain* ev
       tempstack.pop_back();
 	}
 
-   return create_from_postfix(evchain, postfix);
+	return create_from_postfix(evchain, postfix);
 }
 
 /*
@@ -98,15 +99,20 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix(EventChain* ev
  *
  * Note that this function expects valid syntax.
  */
-TriggerConditional* TriggerConditional_Factory::create_from_postfix(EventChain* evchain, const std::vector<Token>& vec) {
+TriggerConditional & TriggerConditional_Factory::create_from_postfix
+	(EventChain & evchain, std::vector<Token> const & vec)
+{
    std::vector< TriggerConditional* > stk;
 	const std::vector<Token>::const_iterator vec_end = vec.end();
 	for
-		(std::vector<Token>::const_iterator it = vec.begin(); it != vec_end; ++it)
+		(std::vector<Token>::const_iterator it = vec.begin();
+		 it != vec_end;
+		 ++it)
 		switch (const TokenNames token = it->token) {
 		case NOT: {
 			assert(stk.size());
-			TriggerConditional * & back = stk.back(); back = new TriggerNOT(back);
+			TriggerConditional * & back = stk.back();
+			back = new TriggerNOT(*back);
 		}
 			break;
 		case AND: case OR: case XOR: {
@@ -114,54 +120,23 @@ TriggerConditional* TriggerConditional_Factory::create_from_postfix(EventChain* 
 			TriggerConditional * r = stk.back();
 			stk.pop_back();
 			TriggerConditional * & l = stk.back();
-			l = token == AND ?
-				new TriggerAND(r, l)
-				:
-				(token == OR ?
-				 static_cast<TriggerConditional *>(new TriggerOR(r, l))
-				 :
-				 new TriggerXOR(r, l));
+			if      (token == AND) l = new TriggerAND(*l, *r);
+			else if (token == OR)  l = new TriggerOR (*l, *r);
+			else                   l = new TriggerXOR(*l, *r);
 		}
 			break;
 		case TRIGGER: {
-			Trigger & trigger = *static_cast<Trigger *>(it->data);
-			trigger.reference(evchain);
-			stk.push_back(new TriggerConditional_Const(&trigger));
+			Trigger & trigger = *it->data;
+			trigger.reference(&evchain);
+			stk.push_back(new TriggerConditional_Var (trigger));
 		}
 			break;
 		default: assert(false);
 		}
 	assert(stk.size() == 1);
-   return stk.back();
+   return *stk.back();
 }
 
-/*
- * Unreference all triggers found
- */
-void TriggerConditional::unreference_triggers(EventChain* ev) {
-   std::vector< TriggerConditional_Factory::Token >* vec = get_infix_tokenlist();
-
-	for (uint32_t i = 0; i < vec->size(); ++i) {
-      if ((*vec)[i].token == TriggerConditional_Factory::TRIGGER) {
-         Trigger* trig = static_cast<Trigger*>((*vec)[i].data);
-         trig->unreference(ev);
-		}
-	}
-}
-
-/*
- * Reset all triggers found
- */
-void TriggerConditional::reset_triggers(Game* g) {
-   std::vector< TriggerConditional_Factory::Token >* vec = get_infix_tokenlist();
-
-	for (uint32_t i = 0; i < vec->size(); ++i) {
-      if ((*vec)[i].token == TriggerConditional_Factory::TRIGGER) {
-         Trigger* trig = static_cast<Trigger*>((*vec)[i].data);
-         trig->reset_trigger(g);
-		}
-	}
-}
 
 /*
  * BASE CLASSES
@@ -170,147 +145,132 @@ void TriggerConditional::reset_triggers(Game* g) {
 /*
  * TriggerConditional_OneArg
  */
-TriggerConditional_OneArg::TriggerConditional_OneArg(TriggerConditional* cond) {
-   m_conditional = cond;
-}
+TriggerConditional_OneArg::TriggerConditional_OneArg
+	(TriggerConditional & cond)
+	: m_conditional(cond)
+{}
 TriggerConditional_OneArg::~TriggerConditional_OneArg() {
-      delete m_conditional;
+	delete &m_conditional;
 }
-bool TriggerConditional_OneArg::eval(Game* g) {
-   assert(m_conditional);
 
-   bool result = m_conditional->eval(g);
 
-   return do_eval(result);
+void TriggerConditional_OneArg::get_infix_tokenlist
+	(TriggerConditional::token_vector           & result,
+	 TriggerConditional_Factory::TokenNames const outer_precedence)
+	const
+{
+	bool const parentheses = outer_precedence < token();
+	if (parentheses)
+		result.push_back(TriggerConditional_Factory::LPAREN);
+	result.push_back(token());
+	m_conditional.get_infix_tokenlist(result, token());
+	if (parentheses)
+		result.push_back(TriggerConditional_Factory::RPAREN);
 }
-std::vector< TriggerConditional_Factory::Token >* TriggerConditional_OneArg::get_infix_tokenlist() {
-   std::vector< TriggerConditional_Factory::Token >* retval = new std::vector< TriggerConditional_Factory::Token >;
-
-   TriggerConditional_Factory::Token tok;
-   tok.data = 0;
-
-   // (
-   tok.token = TriggerConditional_Factory::LPAREN; retval->push_back(tok);
-
-   // Our token name
-   tok.token = get_token();  retval->push_back(tok);
-
-   // Now add our conditionals tokenlist
-   std::vector< TriggerConditional_Factory::Token >* l = m_conditional->get_infix_tokenlist();
-	for (uint32_t i = 0; i < l->size(); ++i)
-      retval->push_back((*l)[i]);
-   delete l;
-
-   //)
-   tok.token = TriggerConditional_Factory::RPAREN; retval->push_back(tok);
-
-   return retval;
+void TriggerConditional_OneArg::unreference_triggers(EventChain & evch) const {
+	m_conditional.unreference_triggers(evch);
 }
+void TriggerConditional_OneArg::reset_triggers      (Game       & game) const {
+	m_conditional.reset_triggers      (game);
+}
+bool TriggerConditional_OneArg::eval                (Game       & game) const {
+	return do_eval(m_conditional.eval (game));
+}
+
 
 /*
- * TriggerConditional_Const
+ * TriggerConditional_Var
  */
-TriggerConditional_Const::TriggerConditional_Const(Trigger* trig) {
-   m_trigger = trig;
+TriggerConditional_Var ::TriggerConditional_Var (Trigger & trig)
+	: m_trigger(trig)
+{}
+void TriggerConditional_Var ::get_infix_tokenlist
+	(TriggerConditional::token_vector           & result,
+	 TriggerConditional_Factory::TokenNames)
+	const
+{
+	result.push_back
+		(TriggerConditional_Factory::Token
+		 (TriggerConditional_Factory::TRIGGER, &m_trigger));
 }
-bool TriggerConditional_Const::eval(Game* g) {
-   m_trigger->check_set_conditions(g);
-   return m_trigger->is_set();
+void TriggerConditional_Var  ::unreference_triggers(EventChain & evch) const {
+	m_trigger.unreference         (&evch);
 }
-std::vector< TriggerConditional_Factory::Token>* TriggerConditional_Const::get_infix_tokenlist() {
-   std::vector< TriggerConditional_Factory::Token >* retval = new std::vector< TriggerConditional_Factory::Token >;
-
-   TriggerConditional_Factory::Token tok;
-   tok.token = TriggerConditional_Factory::TRIGGER;
-   tok.data  = m_trigger;
-   retval->push_back(tok);
-   return retval;
+void TriggerConditional_Var  ::reset_triggers      (Game       & game) const {
+	m_trigger.reset_trigger       (&game);
+}
+bool TriggerConditional_Var  ::eval                (Game       & game) const {
+   m_trigger.check_set_conditions(&game);
+   return m_trigger.is_set();
 }
 
 
 /*
  * TriggerConditional_TwoArg
  */
-TriggerConditional_TwoArg::TriggerConditional_TwoArg(TriggerConditional* l, TriggerConditional* r) {
-   m_lconditional = l;
-   m_rconditional = r;
-}
+TriggerConditional_TwoArg::TriggerConditional_TwoArg
+	(TriggerConditional & l, TriggerConditional & r)
+	: m_lconditional(l), m_rconditional(r)
+{}
 TriggerConditional_TwoArg::~TriggerConditional_TwoArg() {
-      delete m_lconditional;
-      delete m_rconditional;
+	delete &m_lconditional;
+	delete &m_rconditional;
 }
-bool TriggerConditional_TwoArg::eval(Game* g) {
-   assert(m_lconditional && m_rconditional);
-
-   bool l_result, r_result;
-   l_result = m_lconditional->eval(g);
-   r_result = m_rconditional->eval(g);
-
-   return do_eval(l_result, r_result);
+void TriggerConditional_TwoArg::get_infix_tokenlist
+	(TriggerConditional::token_vector           & result,
+	 TriggerConditional_Factory::TokenNames const outer_precedence)
+	const
+{
+	bool const parentheses = outer_precedence < token();
+	if (parentheses)
+		result.push_back(TriggerConditional_Factory::LPAREN);
+	m_lconditional.get_infix_tokenlist(result, token());
+	result.push_back(token());
+	m_rconditional.get_infix_tokenlist(result, token());
+	if (parentheses)
+		result.push_back(TriggerConditional_Factory::RPAREN);
 }
-std::vector< TriggerConditional_Factory::Token >* TriggerConditional_TwoArg::get_infix_tokenlist() {
-   std::vector< TriggerConditional_Factory::Token >* retval = new std::vector< TriggerConditional_Factory::Token >;
-
-   TriggerConditional_Factory::Token tok;
-   tok.data = 0;
-
-   // (
-   tok.token = TriggerConditional_Factory::LPAREN; retval->push_back(tok);
-
-   // Now add our lefts conditionals tokenlist
-   std::vector< TriggerConditional_Factory::Token >* l = m_lconditional->get_infix_tokenlist();
-	for (uint32_t i = 0; i < l->size(); ++i)
-      retval->push_back((*l)[i]);
-   delete l;
-
-   // Our token name
-   tok.token = get_token();  retval->push_back(tok);
-
-   // Now add our right conditionals tokenlist
-   std::vector< TriggerConditional_Factory::Token >* r = m_rconditional->get_infix_tokenlist();
-	for (uint32_t i = 0; i < r->size(); ++i)
-      retval->push_back((*r)[i]);
-   delete r;
-
-   //)
-   tok.token = TriggerConditional_Factory::RPAREN; retval->push_back(tok);
-
-   return retval;
+void TriggerConditional_TwoArg::unreference_triggers(EventChain & evch) const {
+	m_lconditional.unreference_triggers(evch);
+	m_rconditional.unreference_triggers(evch);
+}
+void TriggerConditional_TwoArg::reset_triggers      (Game       & game) const {
+	m_lconditional.reset_triggers      (game);
+	m_rconditional.reset_triggers      (game);
+}
+bool TriggerConditional_TwoArg::eval                (Game       & game) const {
+	return do_eval(m_lconditional.eval(game), m_rconditional.eval(game));
 }
 
 /*
  * The effective Trigger Conditionals
  */
-// AND
-TriggerAND::TriggerAND(TriggerConditional* l, TriggerConditional* r)
-  : TriggerConditional_TwoArg(l, r) {
-}
-bool TriggerAND::do_eval(bool t1, bool t2) {
-   return (t1 && t2);
-}
-
-// OR
-TriggerOR::TriggerOR(TriggerConditional* l, TriggerConditional* r)
-  : TriggerConditional_TwoArg(l, r) {
-}
-bool TriggerOR::do_eval(bool t1, bool t2) {
-   return (t1 || t2);
+TriggerAND::TriggerAND(TriggerConditional & l, TriggerConditional & r)
+  : TriggerConditional_TwoArg(l, r)
+{}
+bool TriggerAND::do_eval(bool const t1, bool const t2) const {
+	return t1 && t2;
 }
 
-// XOR
-TriggerXOR::TriggerXOR(TriggerConditional* l, TriggerConditional* r)
-  : TriggerConditional_TwoArg(l, r) {
-}
-bool TriggerXOR::do_eval(bool t1, bool t2) {
-   return ((t1 && !t2) || (!t1 && t2));
+TriggerOR::TriggerOR (TriggerConditional & l, TriggerConditional & r)
+  : TriggerConditional_TwoArg(l, r)
+{}
+bool TriggerOR ::do_eval(bool const t1, bool const t2) const {
+	return t1 || t2;
 }
 
-// NOT
-TriggerNOT::TriggerNOT(TriggerConditional* cond) :
-   TriggerConditional_OneArg(cond) {
+TriggerXOR::TriggerXOR(TriggerConditional & l, TriggerConditional & r)
+  : TriggerConditional_TwoArg(l, r)
+{}
+bool TriggerXOR::do_eval(bool const t1, bool const t2) const {
+	return t1 && !t2 || !t1 && t2;
 }
-bool TriggerNOT::do_eval(bool t) {
-   return (!t);
+
+TriggerNOT::TriggerNOT(TriggerConditional & cond)
+	: TriggerConditional_OneArg(cond)
+{}
+bool TriggerNOT::do_eval(bool const t) const {
+	return !t;
 }
 
 };

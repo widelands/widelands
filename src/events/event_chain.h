@@ -62,7 +62,7 @@ struct EventChain : public EventReferencer, public TriggerReferencer {
 	void set_name(const std::string & new_name) {m_name = new_name;}
 	bool get_repeating() const {return m_repeating;}
 	TriggerConditional * get_trigcond() {return m_trigconditional;}
-	void set_trigcond(TriggerConditional * t) {m_trigconditional = t;}
+	void set_trigcond(TriggerConditional & t) {m_trigconditional = &t;}
 
 	State get_state() const {return m_state;}
 
