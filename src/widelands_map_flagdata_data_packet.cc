@@ -247,7 +247,7 @@ throw (_wexception)
 			} else fw.Unsigned8(0);
 
 
-			fw.CString(it->program.c_str());
+			fw.String(it->program);
 		}
 
             os->mark_object_as_saved(flag);

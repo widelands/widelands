@@ -123,7 +123,7 @@ public:
 	void set_attack_level(const uint32_t);
 	void set_defense_level(const uint32_t);
 	void set_evade_level(const uint32_t);
-	uint32_t get_level (const tAttribute at);
+	uint32_t get_level (tAttribute) const;
 	uint32_t get_hp_level     () const {return m_hp_level;}
 	uint32_t get_attack_level () const {return m_attack_level;}
 	uint32_t get_defense_level() const {return m_defense_level;}

@@ -31,6 +31,8 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
+#include "upcast.h"
+
 #include <map>
 
 namespace Widelands {
@@ -137,28 +139,19 @@ throw (_wexception)
 
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
-	Map* map=egbase->get_map();
-	for (uint16_t y = 0; y < map->get_height(); ++y) {
-		for (uint16_t x = 0; x < map->get_width(); ++x) {
-			BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
+	Map const &  map    = egbase->map();
+	Extent const extent = map.extent();
+	iterate_Map_FCoords(map, extent, fc) {
+		upcast(Building const, building, fc.field->get_immovable());
+		if (building and building->get_position() == fc) {
 			// We only write Buildings
-			if (immovable && immovable->get_type()==Map_Object::BUILDING) {
-				Building* building=static_cast<Building*>(immovable);
-
-				if (building->get_position()!=Coords(x, y)) {
-					// This is not this buildings main position
-					fw.Unsigned8('\0');
-					continue;
-				}
-
 				// Buildings can life on only one main position
 				assert(!os->is_object_known(building));
-				uint32_t serial=os->register_object(building);
 
 				fw.Unsigned8(1);
-				fw.Unsigned8(building->get_owner()->get_player_number());
+			fw.Unsigned8(building->owner().get_player_number());
 				// write id
-				fw.Unsigned32(serial);
+				fw.Unsigned32(os->register_object(building));
 
 				const ConstructionSite * const constructionsite =
 					dynamic_cast<const ConstructionSite *>(building);
@@ -170,8 +163,8 @@ throw (_wexception)
 
 				write_priorities(*building, fw);
 
-			} else fw.Unsigned8(0);
-		}
+		} else
+			fw.Unsigned8(0);
 	}
 
 	fw.Write(fs, "binary/building");
@@ -189,7 +182,7 @@ throw (_wexception)
  0xff - end of ware types
  */
 void Map_Building_Data_Packet::write_priorities
-(Building & building, FileWrite & fw)
+(Building const & building, FileWrite & fw)
 {
 	fw.Unsigned32(building.get_base_priority());
 

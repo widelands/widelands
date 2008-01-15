@@ -2217,7 +2217,6 @@ Military_Influence Map::calc_influence
 	else if (influence == 0) influence = MAX_RADIUS;
 	else influence = MAX_RADIUS - influence;
 	influence *= influence;
-	influence *= influence;
 
    return influence;
 }

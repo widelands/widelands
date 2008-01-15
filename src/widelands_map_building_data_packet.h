@@ -43,8 +43,8 @@ struct Map_Building_Data_Packet : public Map_Data_Packet {
 		throw (_wexception);
 
 protected:
-	void read_priorities (Building & building, FileRead & fr);
-	void write_priorities (Building & building, FileWrite & fw);
+	void read_priorities (Building       &, FileRead  &);
+	void write_priorities(Building const &, FileWrite &);
 };
 
 };

@@ -233,16 +233,13 @@ bool WarehouseSupply::is_active() const throw () {return false;}
 
 /*
 ===============
-WarehouseSupply::launch_item
-
 Launch a ware as item.
 ===============
 */
-WareInstance* WarehouseSupply::launch_item(Game* g, int32_t ware)
-{
+WareInstance & WarehouseSupply::launch_item(Game * game, int32_t ware) {
 	assert(m_wares.stock(ware));
 
-	return m_warehouse->launch_item(g, ware);
+	return m_warehouse->launch_item(game, ware);
 }
 
 
@@ -902,24 +899,18 @@ void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Work
 
 /*
 ===============
-Warehouse::launch_item
-
 Create an instance of a ware and make sure it gets carried out of the warehouse.
 ===============
 */
-WareInstance* Warehouse::launch_item(Game* g, int32_t ware)
-{
-	WareInstance* item;
-
+WareInstance & Warehouse::launch_item(Game * game, int32_t const ware) {
 	// Create the item
-   Item_Ware_Descr* waredescr=get_owner()->tribe().get_ware_descr(ware);
-   assert(waredescr);
-	item = new WareInstance(ware, waredescr);
-	item->init(g);
+	WareInstance & item =
+		*new WareInstance(ware, owner().tribe().get_ware_descr(ware));
+	item.init(game);
 
 	m_supply->remove_wares(ware, 1);
 
-	do_launch_item(g, item);
+	do_launch_item(game, item);
 
 	return item;
 }
@@ -927,26 +918,24 @@ WareInstance* Warehouse::launch_item(Game* g, int32_t ware)
 
 /*
 ===============
-Warehouse::do_launch_item
-
 Get a carrier to actually move this item out of the warehouse.
 ===============
 */
-void Warehouse::do_launch_item(Game* g, WareInstance* item)
+void Warehouse::do_launch_item(Game * game, WareInstance & item)
 {
 	// Create a carrier
 	const Tribe_Descr & tribe = owner().tribe();
 	const int32_t carrierid = tribe.get_worker_index("carrier");
 	const Worker_Descr & workerdescr = *tribe.get_worker_descr(carrierid);
 
-	Worker & worker = workerdescr.create(*g, owner(), *this, m_position);
+	Worker & worker = workerdescr.create(*game, owner(), *this, m_position);
 
 	// Yup, this is cheating.
 	if (m_supply->stock_workers(carrierid))
 		m_supply->remove_workers(carrierid, 1);
 
 	// Setup the carrier
-	worker.start_task_dropoff(g, item);
+	worker.start_task_dropoff(game, &item);
 }
 
 
@@ -1045,17 +1034,13 @@ Warehouse::can_create_worker
 ===============
 */
 bool Warehouse::can_create_worker(Game *, int32_t worker) {
-	Worker_Descr *w_desc = 0;
-
 	if (worker >= static_cast<int32_t>(m_supply->get_workers().get_nrwareids())) {
 		throw wexception ("Worker type %d doesn't exists! (max is %d)", worker,
             m_supply->get_workers().get_nrwareids());
 	}
 
-   w_desc=get_owner()->tribe().get_worker_descr(worker);
-
-	if (w_desc)
-	{
+	const Tribe_Descr & tribe = owner().tribe();
+	if (Worker_Descr const * const w_desc = tribe.get_worker_descr(worker)) {
 		bool enought_wares;
 
 		// First watch if we can build it
@@ -1065,7 +1050,6 @@ bool Warehouse::can_create_worker(Game *, int32_t worker) {
 
 		// Now see if we have the resources
 		const char & worker_name = *w_desc->name().c_str();
-		const Tribe_Descr & tribe = owner().tribe();
 		const Worker_Descr::BuildCost & buildcost = w_desc->get_buildcost();
 		const Worker_Descr::BuildCost::const_iterator buildcost_end =
 			buildcost.end();

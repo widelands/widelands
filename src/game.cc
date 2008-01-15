@@ -860,17 +860,16 @@ void Game::sample_statistics()
 	std::vector< uint32_t > nr_production_sites; nr_production_sites.resize(map().get_nrplayers());
 
 	// We walk the map, to gain all needed informations
-	for (uint16_t y = 0; y < map().get_height(); ++y) {
-		for (uint16_t x = 0; x < map().get_width(); ++x) {
-			Field* f = map().get_field(Coords(x, y));
-
+	Map const &  themap = map();
+	Extent const extent = themap.extent();
+	iterate_Map_FCoords(themap, extent, fc) {
 			// First, ownership of this field
-			if (f->get_owned_by())
-				++land_size[f->get_owned_by() - 1];
+		if (fc.field->get_owned_by())
+			++land_size[fc.field->get_owned_by() - 1];
 
 			// Get the immovable
-			if (upcast(Building, building, f->get_immovable()))
-				if (building->get_position() == Coords(x, y)) { // only main location is intresting
+		if (upcast(Building, building, fc.field->get_immovable()))
+			if (building->get_position() == fc) { // only count main location
 					// Ok, count the building
 					uint8_t const player_index =
 						building->owner().get_player_number() - 1;
@@ -885,30 +884,10 @@ void Game::sample_statistics()
 				}
 
 			// Now, walk the bobs
-			if (f->get_first_bob()) {
-				Bob* b = f->get_first_bob();
-				do {
-					if (b->get_bob_type() == Bob::WORKER) {
-						Worker* w = static_cast<Worker*>(b);
-
-						switch (w->get_worker_type()) {
-							case Worker_Descr::SOLDIER:
-							{
-								Soldier* s = static_cast<Soldier*>(w);
-								uint32_t calc_level = s->get_level(atrTotal) + 1; // So that level 0 loosers also count something
-								miltary_strength
-									[s->get_owner()->get_player_number() - 1]
-									+=
-									calc_level;
-							}
-							break;
-
-							default: break;
-						}
-					}
-				} while ((b = b->get_next_bob()));
-			}
-		}
+		for (Bob const * b = fc.field->get_first_bob(); b; b = b->get_next_bob())
+			if (upcast(Soldier const, s, b))
+				miltary_strength[s->get_owner()->get_player_number() - 1] +=
+					s->get_level(atrTotal) + 1; //  So that level 0 also counts.
 	}
 
 	// Number of workers / wares

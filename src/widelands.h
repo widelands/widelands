@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ namespace Widelands {
 
 typedef uint8_t Tribe_Index;
 
-typedef uint32_t Military_Influence; //  FIXME should be uint16_t
+typedef uint16_t Military_Influence;
 
 typedef uint8_t  Player_Number; /// 5 bits used, so 0 .. 31
 inline Player_Number Neutral() throw () {return 0;}

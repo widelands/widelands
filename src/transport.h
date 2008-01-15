@@ -442,7 +442,7 @@ struct Supply : public Trackable {
 	virtual int32_t get_amount(const int32_t ware) const = 0;
 	virtual bool is_active() const throw () = 0;
 
-	virtual WareInstance* launch_item(Game* g, int32_t ware) = 0;
+	virtual WareInstance & launch_item(Game *, int32_t ware) = 0;
 	virtual Worker* launch_worker(Game* g, int32_t ware) = 0;
 
 	// This is only for Soldier Requests correct use !

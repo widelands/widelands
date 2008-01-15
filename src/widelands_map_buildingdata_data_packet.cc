@@ -141,9 +141,13 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 {
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
-      constructionsite.m_building=constructionsite.get_owner()->tribe().get_building_descr(constructionsite.get_owner()->tribe().get_safe_building_index(fr.CString()));
+		Tribe_Descr const & tribe = constructionsite.owner().tribe();
+		constructionsite.m_building =
+			tribe.get_building_descr(tribe.get_safe_building_index(fr.CString()));
 		if (fr.Unsigned8()) {
-         constructionsite.m_prev_building=constructionsite.get_owner()->tribe().get_building_descr(constructionsite.get_owner()->tribe().get_safe_building_index(fr.CString()));
+			constructionsite.m_prev_building =
+				tribe.get_building_descr
+				(tribe.get_safe_building_index(fr.CString()));
 		} else
          constructionsite.m_prev_building=0;
 
@@ -206,7 +210,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 	if (packet_version == CURRENT_WAREHOUSE_PACKET_VERSION) {
 		log("Reading warehouse stuff for %p\n", &warehouse);
       // Supply
-		const Tribe_Descr & tribe = warehouse.get_owner()->tribe();
+		const Tribe_Descr & tribe = warehouse.owner().tribe();
 		while (fr.Unsigned8()) {
 			const int32_t id = tribe.get_safe_ware_index(fr.CString());
          warehouse.remove_wares(id, warehouse.m_supply->stock_wares(id));
@@ -247,10 +251,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
          assert(ol->is_object_known(id));
          // Worker might not yet be loaded so that get ware won't work
          // but make sure that such a worker exists in tribe
-			if
-				(warehouse.get_owner()->tribe().get_worker_index(name.c_str())
-				 ==
-				 -1)
+			if (tribe.get_worker_index(name.c_str()) == -1)
 				throw wexception
 					("Unknown worker %s in incorporated workers in "
 					 "Map_Buildingdata_Data_Packet!",
@@ -498,8 +499,8 @@ throw (_wexception)
             // Write the general stuff
 			if (building->m_anim) {
                fw.Unsigned8(1);
-               fw.CString(building->descr().get_animation_name(building->m_anim).c_str());
-				} else
+				fw.String(building->descr().get_animation_name(building->m_anim));
+			} else
                fw.Unsigned8(0);
 
 			fw.Unsigned32(building->m_animstart);
@@ -565,13 +566,13 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
    fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
 
    // Describtions
-   fw.CString(constructionsite.m_building->name().c_str());
+	fw.String(constructionsite.m_building->name());
 	//  FIXME Just write the string without the 1 first:
 	//  FIXME   fw.CString(constructionsite.m_prev_building ? constructionsite.m_prev_building->name().c_str() : "");
 	//  FIXME When reading, the empty string should mean no prev_building.
 	if (constructionsite.m_prev_building) {
       fw.Unsigned8(1);
-      fw.CString(constructionsite.m_prev_building->name().c_str());
+		fw.String(constructionsite.m_prev_building->name());
 	} else
       fw.Unsigned8(0);
 
@@ -614,17 +615,18 @@ void Map_Buildingdata_Data_Packet::write_warehouse
    fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
    // Supply
+	Tribe_Descr const & tribe = warehouse.owner().tribe();
    const WareList& wares=warehouse.m_supply->get_wares();
 	for (size_t i = 0; i < wares.get_nrwareids(); ++i) {
       fw.Unsigned8(1);
-      fw.CString(warehouse.get_owner()->tribe().get_ware_descr(i)->name().c_str());
+		fw.String(tribe.get_ware_descr(i)->name());
       fw.Unsigned16(wares.stock(i));
 	}
    fw.Unsigned8(0);
    const WareList& workers=warehouse.m_supply->get_workers();
 	for (size_t i = 0; i < workers.get_nrwareids(); ++i) {
       fw.Unsigned8(1);
-      fw.CString(warehouse.get_owner()->tribe().get_worker_descr(i)->name().c_str());
+		fw.String(tribe.get_worker_descr(i)->name());
       fw.Unsigned16(workers.stock(i));
 	}
    fw.Unsigned8(0);
@@ -660,7 +662,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	{
 		assert(os->is_object_known(it->second));
 		fw.Unsigned32(os->get_object_file_index(it->second));
-		fw.CString(it->second->name().c_str());
+		fw.String(it->second->name());
 	}
 
    // Carrier spawn
@@ -736,7 +738,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	const uint16_t program_size = productionsite.m_program.size();
 	fw.Unsigned16(program_size);
 	for (uint16_t i = 0; i < program_size; ++i) {
-      fw.CString(productionsite.m_program[i].program->get_name().c_str());
+		fw.String(productionsite.m_program[i].program->get_name());
       fw.Signed32(productionsite.m_program[i].ip);
       fw.Signed32(productionsite.m_program[i].phase);
       fw.Unsigned32(productionsite.m_program[i].flags);
@@ -814,7 +816,7 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	fw.Unsigned8(trainingsite.m_capacity);
 
 	// Need to read the m_prog_name as string !!
-	fw.CString(trainingsite.m_prog_name.c_str());
+	fw.String(trainingsite.m_prog_name);
 
 	// DONE
 }

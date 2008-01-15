@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ public:
 
 	virtual void load_graphics();
 
-	bool get_buildable() {return m_buildable;}
+	bool              get_buildable() const throw () {return m_buildable;}
 	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
 
 	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}

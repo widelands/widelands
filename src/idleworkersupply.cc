@@ -84,7 +84,7 @@ int32_t IdleWorkerSupply::get_amount(const int32_t ware) const
 }
 
 
-WareInstance * IdleWorkerSupply::launch_item(Game *, int32_t)
+WareInstance & IdleWorkerSupply::launch_item(Game *, int32_t)
 {
 	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");
 }

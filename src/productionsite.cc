@@ -1061,14 +1061,15 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 		} else if (action->type == ProductionAction::actProduce) {
 			if (state->phase == 0)
 			{
-				int32_t wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
+				Tribe_Descr const & tribe = owner().tribe();
+				int32_t wareid = tribe.get_safe_ware_index(action->sparam1.c_str());
 
 				WareInstance* item = new WareInstance
-					(wareid, get_owner()->tribe().get_ware_descr(wareid));
+					(wareid, tribe.get_ware_descr(wareid));
 				item->init(g);
 
 				// For statistics, inform the player that a ware was produced
-				get_owner()->ware_produced(wareid);
+				owner().ware_produced(wareid);
 
 				w->start_task_dropoff(g, item);
 

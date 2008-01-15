@@ -74,7 +74,7 @@ public: // implementation of Supply
 	virtual int32_t get_amount(const int32_t ware) const;
 	virtual bool is_active() const throw ();
 
-	virtual WareInstance* launch_item(Game* g, int32_t ware);
+	virtual WareInstance & launch_item(Game * g, int32_t ware);
 	virtual Worker* launch_worker(Game* g, int32_t ware) __attribute__ ((noreturn));
 
 	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req) __attribute__ ((noreturn));
@@ -147,7 +147,7 @@ bool IdleWareSupply::is_active()  const throw ()
 /**
  * The item is already "launched", so we only need to return it.
 */
-WareInstance* IdleWareSupply::launch_item(Game *, int32_t ware) {
+WareInstance & IdleWareSupply::launch_item(Game *, int32_t ware) {
 	if (ware != m_ware->descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
@@ -155,7 +155,7 @@ WareInstance* IdleWareSupply::launch_item(Game *, int32_t ware) {
 			 m_ware->descr_index(),
 			 ware);
 
-	return m_ware;
+	return *m_ware;
 }
 
 Worker* IdleWareSupply::launch_worker(Game *, int32_t)
@@ -304,9 +304,8 @@ void WareInstance::act(Game *, uint32_t)
  *
  * \note \ref update() may result in the deletion of this object.
 */
-void WareInstance::update(Game* g)
-{
-	Map_Object* loc = m_location.get(g);
+void WareInstance::update(Game * game) {
+	Map_Object * const loc = m_location.get(game);
 
 	if (!m_descr) // Upsy, we're not even intialized. Happens on load
 		return;
@@ -350,7 +349,7 @@ void WareInstance::update(Game* g)
 				t->has_failed();
 
 				cancel_moving();
-				update(g);
+				update(game);
 				return;
 			}
 		}
@@ -365,7 +364,7 @@ void WareInstance::update(Game* g)
 			//  - we were carried into a harbour/warehouse to be shipped across the sea,
 			//    but a better, land-based route has been found
 			if (upcast(Warehouse, warehouse, building)) {
-				warehouse->do_launch_item(g, this);
+				warehouse->do_launch_item(game, *this);
 				return;
 			}
 
@@ -376,7 +375,7 @@ void WareInstance::update(Game* g)
 
 		} else if (upcast(Flag, flag, location)) {
 			flag->call_carrier
-				(g,
+				(game,
 				 this,
 				 dynamic_cast<Building const *>(nextstep)
 				 &&
@@ -2324,9 +2323,9 @@ void Request::start_transfer(Game* g, Supply* supp, int32_t ware)
 			// Begin the transfer of an item. The item itself is passive.
 			// launch_item() ensures the WareInstance is transported out of the warehouse
 			// Once it's on the flag, the flag code will decide what to do with it.
-			WareInstance* item = supp->launch_item(g, ware);
+			WareInstance & item = supp->launch_item(g, ware);
 
-			t = new Transfer(g, this, item);
+			t = new Transfer(g, this, &item);
 		}
 	}
 	catch (...)

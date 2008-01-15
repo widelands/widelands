@@ -51,7 +51,8 @@ struct IdleSoldierSupply : public Supply {
 	virtual int32_t get_amount(const int32_t ware) const;
 	virtual bool is_active() const throw ();
 
-	virtual WareInstance* launch_item(Game* g, int32_t ware) __attribute__ ((noreturn));
+	virtual WareInstance & launch_item(Game *, int32_t ware)
+		__attribute__ ((noreturn));
 	virtual Worker* launch_worker(Game* g, int32_t ware);
 
 	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
@@ -154,7 +155,7 @@ bool IdleSoldierSupply::is_active() const throw () {return true;}
 IdleSoldierSupply::launch_item
 ===============
 */
-WareInstance* IdleSoldierSupply::launch_item(Game *, int32_t)
+WareInstance & IdleSoldierSupply::launch_item(Game *, int32_t)
 {throw wexception("IdleSoldierSupply::launch_item() makes no sense.");}
 
 
@@ -530,8 +531,7 @@ void Soldier::set_evade_level(const uint32_t evade) {
 	}
 }
 
-uint32_t Soldier::get_level(const tAttribute at)
-{
+uint32_t Soldier::get_level(tAttribute const at) const {
 	switch (at) {
 	case atrHP:      return m_hp_level;
 	case atrAttack:  return m_attack_level;

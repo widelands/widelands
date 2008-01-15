@@ -93,8 +93,8 @@ public:
 	Worker* launch_worker(Game* g, int32_t ware);
 	void incorporate_worker(Game *g, Worker *w);
 
-	WareInstance* launch_item(Game* g, int32_t ware);
-	void do_launch_item(Game* g, WareInstance* item);
+	WareInstance & launch_item(Game *, int32_t ware);
+	void do_launch_item(Game *, WareInstance &);
 	void incorporate_item(Game* g, WareInstance* item);
 
 	int32_t get_soldiers_passing (Game*, int32_t, Requeriments*);
@@ -147,7 +147,7 @@ struct WarehouseSupply : public Supply {
 	virtual int32_t get_amount(const int32_t ware) const;
 	virtual bool is_active() const throw ();
 
-	virtual WareInstance* launch_item(Game* g, int32_t ware);
+	virtual WareInstance & launch_item(Game *, int32_t ware);
 	virtual Worker* launch_worker(Game* g, int32_t ware);
 
 	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);

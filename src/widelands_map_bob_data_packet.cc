@@ -176,9 +176,9 @@ throw (_wexception)
 
 				// Write its owner
 				std::string owner_tribe = bobarr[i]->descr().get_owner_tribe() ? bobarr[i]->descr().get_owner_tribe()->name() : "world";
-				fw.CString(owner_tribe.c_str());
+				fw.String(owner_tribe);
 				// Write it's name
-				fw.CString(bobarr[i]->name().c_str());
+				fw.String(bobarr[i]->name());
 				// Write it's subtype
 				fw.Unsigned8(bobarr[i]->get_bob_type());
 				// And it's file register index
