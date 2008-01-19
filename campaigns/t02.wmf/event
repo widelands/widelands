@@ -347,14 +347,6 @@ player=1
 building=well
 allow=false
 
-[Disable Building 38]
-type=allow_building
-state=init
-version=1
-player=1
-building=well
-allow=false
-
 [Enable Coal Mine]
 type=allow_building
 state=init
