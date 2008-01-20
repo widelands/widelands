@@ -2020,7 +2020,7 @@ void Worker::fugitive_update(Game* g, State* state)
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map->get_immovable(get_position())))
-		if (upcast(Warehouse, warehouse, flag->get_building()))
+		if (upcast(Warehouse, warehouse, flag->get_building())) {
 			if (warehouse->get_owner() == get_owner()) {
 			molog("[fugitive]: move into warehouse\n");
 			start_task_forcemove
@@ -2028,60 +2028,66 @@ void Worker::fugitive_update(Game* g, State* state)
 				set_location(warehouse);
 			return;
 			}
+		} else if
+			(flag->get_owner() == get_owner()
+			 and
+			 flag->economy().get_nr_warehouses())
+		{
+			set_location(flag);
+			pop_task();
+			start_task_gowarehouse();
+			return;
+		}
 
-	// time to die?
-	if (g->get_gametime() - state->ivar1 >= 0) {
-		molog("[fugitive]: die\n");
-
-		schedule_destroy(g);
-		return;
-	}
-
-	// Try to find a warehouse we can return to
-	std::vector<ImmovableFound> warehouses;
-
+	//  try to find a flag connected to a warehouse that we can return to
+	std::vector<ImmovableFound> flags;
+	struct FindFlagWithPlayersWarehouse : public FindImmovable {
+		FindFlagWithPlayersWarehouse(Player const & owner) : m_owner(owner) {}
+		bool accept(BaseImmovable * const imm) const {
+			if (upcast(Flag const, flag, imm))
+				if (flag->get_owner() == &m_owner)
+					if(flag->economy().get_nr_warehouses())
+						return true;
+			return false;
+		}
+	private:
+		Player const & m_owner;
+	};
 	if
 		(map->find_immovables
-		 (Area<FCoords>(map->get_fcoords(get_position()), 15),
-		  &warehouses, FindImmovableAttribute(WAREHOUSE)))
+		 (Area<FCoords>(map->get_fcoords(get_position()), vision_range()),
+		  &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
 		int32_t bestdist = -1;
-		Warehouse *best = 0;
+		Flag *  best     =  0;
 
-		molog("[fugitive]: found warehouse(s)\n");
+		molog("[fugitive]: found a flag connected to warehouse(s)\n");
 
-		for (uint32_t i = 0; i < warehouses.size(); ++i) {
-			Warehouse & wh = dynamic_cast<Warehouse &>(*warehouses[i].object);
+		std::vector<ImmovableFound>::const_iterator flags_end = flags.end();
+		for
+			(std::vector<ImmovableFound>::const_iterator it = flags.begin();
+			 it != flags_end;
+			 ++it)
+		{
+			Flag & flag = dynamic_cast<Flag &>(*it->object);
 
-			// Only walk into one of our warehouses
-			if (wh.get_owner() != get_owner())
-				continue;
-
-			int32_t dist = map->calc_distance(get_position(), warehouses[i].coords);
+			int32_t const dist = map->calc_distance(get_position(), it->coords);
 
 			if (!best || dist < bestdist) {
-				best = &wh;
+				best = &flag;
 				bestdist = dist;
 			}
 		}
 
 		if (best) {
-			bool use = false;
-
-			if (static_cast<int32_t>((g->logic_rand() % 30)) <= (30 - bestdist))
-				use = true;
-
-			// okay, move towards the flag of this warehouse
-			if (use) {
-				Flag *flag = best->get_base_flag();
-
-				molog("[fugitive]: try to move to warehouse\n");
+			if (static_cast<int32_t>((g->logic_rand() % 30)) <= (30 - bestdist)) {
+				molog("[fugitive]: try to move to flag\n");
 
 				// the warehouse could be on a different island, so check for failure
 				if
 					(start_task_movepath
 					 (g,
-					  flag->get_position(),
+					  best->get_position(),
 					  0,
 					  descr().get_right_walk_anims(does_carry_ware())))
 
@@ -2090,10 +2096,20 @@ void Worker::fugitive_update(Game* g, State* state)
 		}
 	}
 
+	if (state->ivar1 < g->get_gametime()) {//  time to die?
+		molog("[fugitive]: die\n");
+		schedule_destroy(g);
+		return;
+	}
+
 	molog("[fugitive]: wander randomly\n");
 
-	if (start_task_movepath(g, g->random_location(get_position(), 5), //  Pick a target at random.
-		                    4, descr().get_right_walk_anims(does_carry_ware())))
+	if
+		(start_task_movepath
+		 (g,
+		  g->random_location(get_position(), vision_range()),
+		  4,
+		  descr().get_right_walk_anims(does_carry_ware())))
 		return;
 
 	start_task_idle(g, descr().get_animation("idle"), 50);
