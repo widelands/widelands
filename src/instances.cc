@@ -330,9 +330,7 @@ uint32_t Map_Object_Descr::get_attribute_id(std::string name)
 	if (it != s_dyn_attribs.end())
 		return it->second;
 
-	if (name == "warehouse")
-		return Map_Object::WAREHOUSE;
-	else if (name == "worker")
+	if      (name == "worker")
 		return Map_Object::WORKER;
 	else if (name == "resi")
 		return Map_Object::RESI;

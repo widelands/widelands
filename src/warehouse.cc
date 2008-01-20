@@ -331,8 +331,6 @@ Parse the additional warehouse settings from the given profile and directory
 void Warehouse_Descr::parse(const char* directory, Profile* prof,
 	const EncodeData* encdata)
 {
-	add_attribute(Map_Object::WAREHOUSE);
-
 	Building_Descr::parse(directory, prof, encdata);
 
 	Section* global = prof->get_safe_section("global");

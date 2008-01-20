@@ -148,8 +148,7 @@ public:
 	// Some default, globally valid, attributes.
 	// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
 	enum Attribute {
-		WAREHOUSE        = 1, //  assume BUILDING
-		CONSTRUCTIONSITE, // assume BUILDING
+		CONSTRUCTIONSITE = 1, // assume BUILDING
 		WORKER,               //  assume BOB
 		SOLDIER,              //  assume WORKER
 		RESI,                 //  resource indicator, assume IMMOVABLE

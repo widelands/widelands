@@ -1553,12 +1553,7 @@ void Worker::gowarehouse_update(Game* g, State* state)
 
 	assert(location); // 'location' signal expected otherwise
 
-	if
-		(dynamic_cast<const Building *>(location)
-		 and
-		 location->has_attribute(WAREHOUSE))
-	{
-
+	if (dynamic_cast<Warehouse const *>(location)) {
 		molog("[gowarehouse]: Back in warehouse, schedule incorporate\n");
 
 		delete m_supply;
@@ -1719,7 +1714,7 @@ void Worker::dropoff_update(Game * g, State *)
 	if (location->get_type() != Map_Object::BUILDING)
 		throw wexception("MO(%u): [dropoff]: not on building on return", get_serial());
 
-	if (location->has_attribute(WAREHOUSE)) {
+	if (dynamic_cast<Warehouse const *>(location)) {
 		schedule_incorporate(g);
 		return;
 	}
@@ -2009,7 +2004,7 @@ void Worker::fugitive_update(Game* g, State* state)
 	if (location && location->get_owner() == get_owner()) {
 		molog("[fugitive]: we're on location\n");
 
-		if (location->has_attribute(WAREHOUSE)) {
+		if (dynamic_cast<Warehouse const *>(location)) {
 			schedule_incorporate(g);
 			return;
 		}
