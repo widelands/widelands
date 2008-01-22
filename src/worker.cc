@@ -1998,7 +1998,7 @@ void Worker::start_task_fugitive(Game* g)
 
 void Worker::fugitive_update(Game* g, State* state)
 {
-	Map *map = g->get_map();
+	Map & map = g->map();
 	PlayerImmovable *location = get_location(g);
 
 	if (location && location->get_owner() == get_owner()) {
@@ -2014,23 +2014,14 @@ void Worker::fugitive_update(Game* g, State* state)
 	}
 
 	// check whether we're on a flag and it's time to return home
-	if (upcast(Flag, flag, map->get_immovable(get_position())))
-		if (upcast(Warehouse, warehouse, flag->get_building())) {
-			if (warehouse->get_owner() == get_owner()) {
-			molog("[fugitive]: move into warehouse\n");
-			start_task_forcemove
-				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
-				set_location(warehouse);
-			return;
-			}
-		} else if
+	if (upcast(Flag, flag, map[get_position()].get_immovable()))
+		if
 			(flag->get_owner() == get_owner()
 			 and
 			 flag->economy().get_nr_warehouses())
 		{
 			set_location(flag);
 			pop_task();
-			start_task_gowarehouse();
 			return;
 		}
 
@@ -2049,8 +2040,8 @@ void Worker::fugitive_update(Game* g, State* state)
 		Player const & m_owner;
 	};
 	if
-		(map->find_immovables
-		 (Area<FCoords>(map->get_fcoords(get_position()), vision_range()),
+		(map.find_immovables
+		 (Area<FCoords>(map.get_fcoords(get_position()), vision_range()),
 		  &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
 		int32_t bestdist = -1;
@@ -2066,7 +2057,7 @@ void Worker::fugitive_update(Game* g, State* state)
 		{
 			Flag & flag = dynamic_cast<Flag &>(*it->object);
 
-			int32_t const dist = map->calc_distance(get_position(), it->coords);
+			int32_t const dist = map.calc_distance(get_position(), it->coords);
 
 			if (!best || dist < bestdist) {
 				best = &flag;
