@@ -88,18 +88,18 @@ public:
 
 	virtual bool fetch_from_flag(Game* g);
 
-	void mark_as_used (Game* g, int32_t ware, Requeriments* r);
-	Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
+	void mark_as_used (Game *, Ware_Index, Requeriments *);
+	Soldier* launch_soldier(Game *, Ware_Index, Requeriments *);
 	Worker* launch_worker(Game* g, int32_t ware);
 	void incorporate_worker(Game *g, Worker *w);
 
-	WareInstance & launch_item(Game *, int32_t ware);
+	WareInstance & launch_item(Game *, Ware_Index);
 	void do_launch_item(Game *, WareInstance &);
 	void incorporate_item(Game* g, WareInstance* item);
 
-	int32_t get_soldiers_passing (Game*, int32_t, Requeriments*);
-	bool can_create_worker(Game *, int32_t worker);
-	void create_worker(Game *, int32_t worker);
+	int32_t get_soldiers_passing (Game *, Ware_Index, Requeriments *);
+	bool can_create_worker(Game *, Ware_Index);
+	void     create_worker(Game *, Ware_Index);
 
    /// Military stuff
    virtual bool has_soldiers();
@@ -109,7 +109,8 @@ protected:
 	virtual UI::Window *create_options_window(Interactive_Player *plr, UI::Window **registry);
 
 private:
-	static void idle_request_cb(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
+	static void idle_request_cb
+		(Game *, Request *, Ware_Index, Worker *, void * data);
    void sort_worker_in(Editor_Game_Base*, std::string, Worker*);
 
 	WarehouseSupply       * m_supply;
@@ -135,12 +136,12 @@ struct WarehouseSupply : public Supply {
 
 	const WareList &get_wares() const {return m_wares;}
 	const WareList &get_workers() const {return m_workers;}
-	int32_t stock_wares(int32_t id) const {return m_wares.stock(id);}
-	int32_t stock_workers(int32_t id) const {return m_workers.stock(id);}
-	void add_wares(int32_t id, int32_t count);
-	void remove_wares(int32_t id, int32_t count);
-   void add_workers(int32_t id, int32_t count);
-   void remove_workers(int32_t id, int32_t count);
+	int32_t stock_wares  (Ware_Index const i) const {return m_wares  .stock(i);}
+	int32_t stock_workers(Ware_Index const i) const {return m_workers.stock(i);}
+	void add_wares     (Ware_Index, uint32_t count);
+	void remove_wares  (Ware_Index, uint32_t count);
+   void add_workers   (Ware_Index, uint32_t count);
+   void remove_workers(Ware_Index, uint32_t count);
 
 	// Supply implementation
 	virtual PlayerImmovable* get_position(Game* g);

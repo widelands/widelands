@@ -63,9 +63,9 @@ bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, 
 	m_curware.set_text
 		(index < m_warelists[0]->get_nrwareids() ?
 		 (m_type == WORKER ?
-		  m_tribe.get_worker_descr(index)->descname()
+		  m_tribe.get_worker_descr(static_cast<uint8_t>(index))->descname()
 		  :
-		  m_tribe.get_ware_descr(index)->descname())
+		  m_tribe.get_ware_descr  (static_cast<uint8_t>(index))->descname())
 		 .c_str()
 		 :
 		 "");
@@ -147,7 +147,11 @@ Draw one ware icon + additional information.
 ===============
 */
 void WaresDisplay::draw_ware
-(RenderTarget & dst, const Point p, const uint32_t id, const uint32_t stock, const bool worker)
+(RenderTarget              & dst,
+ Point                 const p,
+ Widelands::Ware_Index const id,
+ uint32_t              const stock,
+ bool                  const is_worker)
 {
    // Draw a background
 	const uint32_t picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
@@ -160,7 +164,7 @@ void WaresDisplay::draw_ware
 	// Draw it
 	dst.blit
 		(pos,
-		 worker ?
+		 is_worker ?
 		 m_tribe.get_worker_descr(id)->get_menu_pic()
 		 :
 		 m_tribe.get_ware_descr(id)->get_icon());

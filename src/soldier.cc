@@ -293,9 +293,13 @@ Soldier_Descr::~Soldier_Descr()
    m_evade_pics_fn.resize(0);
 }
 
-void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
+void Soldier_Descr::parse
+	(char       const * directory,
+	 Profile          * prof,
+	 becomes_map_t    & becomes_map,
+	 EncodeData const * encdata)
 {
-	Worker_Descr::parse(directory, prof, encdata);
+	Worker_Descr::parse(directory, prof, becomes_map, encdata);
 	Section* sglobal=prof->get_section("global");
 
 	{ //  hitpoints

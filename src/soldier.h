@@ -74,7 +74,8 @@ struct Soldier_Descr : public Worker_Descr {
 	uint32_t get_rand_anim(const char * const name) const;
 protected:
 	virtual Bob * create_object() const;
-	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+	virtual void parse
+		(char const * dir, Profile *, becomes_map_t &, EncodeData const *);
 
    // Start values
    uint32_t m_min_hp;

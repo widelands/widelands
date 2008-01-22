@@ -47,6 +47,7 @@ namespace Widelands {
  * look differently.
 */
 struct Item_Ware_Descr : public Map_Object_Descr {
+	typedef Ware_Index::value_t Index;
 	Item_Ware_Descr(const std::string & ware_name)
 		: m_name(ware_name), m_icon(0)
 	{}

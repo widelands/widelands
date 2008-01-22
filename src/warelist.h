@@ -20,6 +20,8 @@
 #ifndef __WARELIST_H
 #define __WARELIST_H
 
+#include "widelands.h"
+
 #include <SDL.h>
 
 #include <cassert>
@@ -44,11 +46,11 @@ struct WareList {
 	/// \return Highest possible ware id
 	const size_type get_nrwareids() const {return m_wares.size();}
 
-	void add   (const size_type id, const count_type count = 1);
-		void add(const WareList &wl);
-	void remove(const size_type id, const count_type count = 1);
+	void add   (Ware_Index, count_type = 1);
+	void add(const WareList &wl);
+	void remove(Ware_Index, count_type = 1);
 		void remove(const WareList &wl);
-	int32_t stock(size_type id) const;
+	int32_t stock(Ware_Index) const;
 
 	void set_nrwares(const size_type i) {
 		assert(m_wares.size()==0);

@@ -35,9 +35,6 @@ struct Carrier : public Worker {
 
 	protected:
 		virtual Bob * create_object() const {return new Carrier(*this);}
-		virtual void parse
-			(const char * directory, Profile * prof, const EncodeData * encdata)
-		{Worker_Descr::parse(directory, prof, encdata);}
 	};
 
 

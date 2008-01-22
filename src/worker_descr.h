@@ -50,6 +50,7 @@ class Worker_Descr : public Bob::Descr
 	typedef std::vector<CostItem> BuildCost;
 
 public:
+	typedef Ware_Index::value_t Index;
 	enum Worker_Type {
 		NORMAL = 0,
 		CARRIER,
@@ -83,21 +84,22 @@ public:
 	// For leveling
 	int32_t get_max_exp() const throw () {return m_max_experience;}
 	int32_t get_min_exp() const throw () {return m_min_experience;}
-	const char * get_becomes() const throw () {return m_becomes.c_str();}
-	int32_t get_becomes_index() const throw ();
-	bool can_act_as(int32_t ware) const;
+	Ware_Index becomes() const throw () {return m_becomes;}
+	bool can_act_as(Ware_Index) const;
 
 	Worker & create
 		(Editor_Game_Base &, Player &, PlayerImmovable &, const Coords) const;
 
+	typedef std::map<Worker_Descr *, std::string> becomes_map_t;
 
 protected:
 	virtual void parse
-		(const char * directory, Profile *, const EncodeData *);
-		static Worker_Descr * create_from_dir
-		(const Tribe_Descr &,
-		 const char        * directory,
-		 const EncodeData  *);
+		(char const * dir, Profile *, becomes_map_t &, const EncodeData *);
+	static Worker_Descr * create_from_dir
+		(Tribe_Descr const &,
+		 becomes_map_t     &,
+		 char        const * directory,
+		 EncodeData  const *);
 
 	std::string   m_descname;       ///< Descriptive name
 	std::string   m_helptext;       ///< Short (tooltip-like) help text
@@ -109,8 +111,7 @@ protected:
 	BuildCost     m_buildcost;      ///< What and how much we need to build this worker
 	int32_t           m_max_experience;
 	int32_t           m_min_experience;
-	std::string   m_becomes;        ///< Workername this worker evolves to, if any
-	mutable int32_t   m_becomes_index;  ///< index in tribe array if any (cached)
+	Ware_Index    m_becomes;       /// Type that this type can become (or Null).
 	ProgramMap    m_programs;
 };
 

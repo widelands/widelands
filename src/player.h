@@ -436,7 +436,7 @@ struct Player {
 	void ReadStatistics(FileRead& fr, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
-	void ware_produced(uint32_t id);
+	void ware_produced(Ware_Index);
 	void next_ware_production_period();
 	void gain_immovable(PlayerImmovable*);
 	void lose_immovable(PlayerImmovable*);

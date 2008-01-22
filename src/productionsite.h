@@ -131,7 +131,7 @@ protected:
 
 	void request_worker(const char * const worker_name);
 	static void request_worker_callback
-		(Game *, Request *, int32_t ware, Worker *, void * data);
+		(Game *, Request *, Ware_Index, Worker *, void * data);
 
 	State* get_current_program() {return m_program.size() ? &*m_program.rbegin() : 0;}
 	void program_act(Game* g);

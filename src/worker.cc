@@ -49,7 +49,6 @@ namespace Widelands {
 bool Worker::run_createitem(Game* g, State* state, const Action* action)
 {
 	WareInstance* item;
-	int32_t wareid;
 
 	molog("  CreateItem(%s)\n", action->sparam1.c_str());
 
@@ -59,14 +58,15 @@ bool Worker::run_createitem(Game* g, State* state, const Action* action)
 		item->schedule_destroy(g);
 	}
 
-	wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
+	Player & player = *get_owner();
+	Ware_Index wareid = player.tribe().ware_index(action->sparam1.c_str());
 	item = new WareInstance(wareid, get_owner()->tribe().get_ware_descr(wareid));
 	item->init(g);
 
 	set_carried_item(g, item);
 
 	// For statistics, inform the user that a ware was produced
-	get_owner()->ware_produced(wareid);
+	player.ware_produced(wareid);
 
 	++state->ivar1;
 	schedule_act(g, 10);
@@ -825,7 +825,7 @@ void Worker::init(Editor_Game_Base *g)
 	// assert(get_location(g));
 
 	if (upcast(Game, game, g))
-		create_needed_experience(game); // Set his experience
+		create_needed_experience(*game); //  set his experience
 }
 
 
@@ -927,16 +927,17 @@ void Worker::incorporate(Game *g)
  *
  * This sets the needed experience on a value between max and min
  */
-void Worker::create_needed_experience(Game* g)
+void Worker::create_needed_experience(Game & game)
 {
 	if (descr().get_min_exp() == -1 && descr().get_max_exp() == -1) {
 		m_needed_exp = m_current_exp = -1;
 		return;
 	}
 
-	int32_t range = descr().get_max_exp() - descr().get_min_exp();
-	int32_t value = g->logic_rand() % range;
-	m_needed_exp = value + descr().get_min_exp();
+	m_needed_exp =
+		descr().get_min_exp()
+		+
+		game.logic_rand() % (descr().get_max_exp() - descr().get_min_exp());
 	m_current_exp = 0;
 }
 
@@ -948,15 +949,11 @@ void Worker::create_needed_experience(Game* g)
  * of the worker by one, if he reaches
  * needed_experience he levels
  */
-void Worker::gain_experience(Game* g)
-{
-	if (m_needed_exp == -1)
-		return; // This worker can not level
-
-	++m_current_exp;
-
-	if (m_current_exp == m_needed_exp)
-		level(g);
+Ware_Index Worker::gain_experience(Game & game) {
+	return
+		m_needed_exp == -1              ? Ware_Index::Null() :
+		++m_current_exp == m_needed_exp ? level(game)          :
+		Ware_Index::Null();
 }
 
 
@@ -964,8 +961,7 @@ void Worker::gain_experience(Game* g)
  * Level this worker to the next higher level. this includes creating a
  * new worker with his propertys and removing this worker
  */
-void Worker::level(Game* g)
-{
+Ware_Index Worker::level(Game & game) {
 
 	// We do not really remove this worker, all we do
 	// is to overwrite his description with the new one and to
@@ -973,26 +969,27 @@ void Worker::level(Game* g)
 	// This silently expects that the new worker is the same type as the old
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
-	assert(get_becomes());
+	assert(becomes());
 	const Tribe_Descr & t = tribe();
+	Ware_Index const old_index = t.get_worker_index(descr().name().c_str());
+	Ware_Index const new_index = becomes();
+	m_descr = t.get_worker_descr(new_index);
+	assert(new_index);
 
 	// Inform the economy, that something has changed
-	m_economy->remove_workers   (t.get_worker_index(descr().name().c_str()), 1);
-	m_descr = t.get_worker_descr(t.get_worker_index(get_becomes()));
-	m_economy->add_workers      (t.get_worker_index(descr().name().c_str()), 1);
+	m_economy->remove_workers(old_index, 1);
+	m_economy->add_workers   (new_index, 1);
 
-	create_needed_experience(g);
+	create_needed_experience(game);
+	return old_index; //  So that the caller knows what to replace him with.
 }
 
 
 /**
  * Set a fallback task.
  */
-void Worker::init_auto_task(Game* g)
-{
-	PlayerImmovable* location = get_location(g);
-
-	if (location) {
+void Worker::init_auto_task(Game * game) {
+	if (get_location(game)) {
 		if (get_economy()->get_nr_warehouses()) {
 			molog("init_auto_task: go warehouse\n");
 
@@ -1005,7 +1002,7 @@ void Worker::init_auto_task(Game* g)
 
 	molog("init_auto_task: become fugitive\n");
 
-	start_task_fugitive(g);
+	start_task_fugitive(game);
 }
 
 

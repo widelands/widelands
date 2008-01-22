@@ -75,15 +75,14 @@ class WareInstance : public Map_Object {
 	MO_DESCR(Item_Ware_Descr);
 
 public:
-	WareInstance
-		(const Item_Ware_Descr::Index, const Item_Ware_Descr * const);
+	WareInstance(Ware_Index, const Item_Ware_Descr * const);
 	~WareInstance();
 
 	virtual int32_t get_type() const throw ();
 
 	Map_Object* get_location(Editor_Game_Base* g) {return m_location.get(g);}
 	Economy* get_economy() const throw () {return m_economy;}
-	Item_Ware_Descr::Index descr_index() const throw () {return m_descr_index;}
+	Ware_Index descr_index() const throw () {return m_descr_index;}
 
 	void init(Editor_Game_Base* g);
 	void cleanup(Editor_Game_Base* g);
@@ -104,7 +103,7 @@ public:
 private:
 	Object_Ptr        m_location;
 	Economy         * m_economy;
-	Item_Ware_Descr::Index m_descr_index;
+	Ware_Index       m_descr_index;
 
 	IdleWareSupply  * m_supply;
 	Transfer*         m_transfer;
@@ -201,7 +200,8 @@ protected:
 
 	void wake_up_capacity_queue(Game* g);
 
-	static void flag_job_request_callback(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
+	static void flag_job_request_callback
+		(Game *, Request *, Ware_Index, Worker *, void * data);
 
 private:
 	Coords                  m_position;
@@ -296,7 +296,8 @@ protected:
 	virtual void cleanup(Editor_Game_Base *g);
 
 	void request_carrier(Game* g);
-	static void request_carrier_callback(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
+	static void request_carrier_callback
+		(Game *, Request *, Ware_Index, Worker *, void * data);
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
@@ -486,7 +487,8 @@ struct Request : public Trackable {
 	friend class Economy;
 	friend class RequestList;
 
-	typedef void (*callback_t)(Game*, Request*, int32_t ware, Worker*, void* data);
+	typedef void (*callback_t)
+		(Game *, Request *, Ware_Index, Worker *, void * data);
 
    enum Type {
       WARE = 0,
@@ -494,11 +496,12 @@ struct Request : public Trackable {
 	   SOLDIER = 2
 	};
 
-	Request(PlayerImmovable *target, int32_t index, callback_t cbfn, void* cbdata, Type);
+	Request
+		(PlayerImmovable * target, Ware_Index, callback_t, void * cbdata, Type);
 	~Request();
 
 	PlayerImmovable * get_target() const throw () {return m_target;}
-	int32_t get_index() const {return m_index;}
+	Ware_Index get_index() const {return m_index;}
    int32_t get_type() const {return m_type;}
 	bool is_idle() const {return m_idle;}
 	int32_t get_count() const {return m_count;}
@@ -550,7 +553,7 @@ private:
    Type              m_type;
 	PlayerImmovable * m_target;            //  who requested it?
 	Economy         * m_economy;
-	int32_t               m_index;             //  the index of the ware descr
+	Ware_Index        m_index;             //  the index of the ware descr
 	bool              m_idle;
 	int32_t               m_count;             //  how many do we need in total
 
@@ -576,7 +579,8 @@ Note that you must call update() after changing the queue's size or filled
 state using one of the set_*() functions.
 */
 struct WaresQueue {
-	typedef void (callback_t)(Game* g, WaresQueue* wq, int32_t ware, void* data);
+	typedef void (callback_t)
+		(Game *, WaresQueue *, Ware_Index ware, void * data);
 
 	WaresQueue(PlayerImmovable* bld);
 	~WaresQueue();
@@ -606,7 +610,8 @@ struct WaresQueue {
 	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
 
 private:
-	static void request_callback(Game* g, Request* rq, int32_t ware, Worker* w, void* data);
+	static void request_callback
+		(Game *, Request *, Ware_Index, Worker *, void * data);
 
 	PlayerImmovable * m_owner;
 	int32_t               m_ware; //  ware ID
@@ -659,26 +664,30 @@ struct Economy {
 	bool have_request(Request* req);
 	void remove_request(Request* req);
 
-	void add_ware_supply(int32_t ware, Supply* supp);
-	bool have_ware_supply(int32_t ware, Supply* supp);
-	void remove_ware_supply(int32_t ware, Supply* supp);
+	void       add_ware_supply(Ware_Index, Supply *);
+	bool      have_ware_supply(Ware_Index, Supply *);
+	void    remove_ware_supply(Ware_Index, Supply *);
 
-	void add_worker_supply(int32_t worker, Supply* supp);
-	bool have_worker_supply(int32_t worker, Supply* supp);
-	void remove_worker_supply(int32_t worker, Supply* supp);
+	void     add_worker_supply(Ware_Index, Supply *);
+	bool    have_worker_supply(Ware_Index, Supply *);
+	void  remove_worker_supply(Ware_Index, Supply *);
 
 // Soldier stuff
-	void add_soldier_supply(int32_t soldier, Supply* supp);
-	bool have_soldier_supply(int32_t soldier, Supply* supp, Requeriments* r = 0);
-	void remove_soldier_supply(int32_t soldier, Supply* supp);
+	void    add_soldier_supply(Ware_Index, Supply *);
+	bool   have_soldier_supply(Ware_Index, Supply *, Requeriments * = 0);
+	void remove_soldier_supply(Ware_Index, Supply *);
 
 	bool should_run_balance_check(int32_t const gametime) {
 		return m_request_timer && (gametime == m_request_timer_time);
 	}
 
    // Informations over this economy
-   int32_t stock_ware(int32_t id) {return m_wares.stock(id);}
-   int32_t stock_worker(int32_t id) {return m_workers.stock(id);}
+	int32_t stock_ware(Ware_Index const i) {
+		return m_wares  .stock(i.value());
+	}
+	int32_t stock_worker(Ware_Index const i) {
+		return m_workers.stock(i.value());
+	}
    const WareList& get_wares() {return m_wares;}
    const WareList& get_workers() {return m_workers;}
 
@@ -695,8 +704,12 @@ private:
 
 	void start_request_timer(int32_t delta = 200);
 
-	Supply* find_best_supply(Game* g, Request* req, int32_t* ware, int32_t* pcost, std::vector<SupplyList>*);
-	int32_t  get_ware_substitute(Request* req, int32_t ware);
+	Supply * find_best_supply
+		(Game                    *,
+		 Request                 *,
+		 Ware_Index              & ware,
+		 int32_t                 & pcost,
+		 std::vector<SupplyList> &);
 	void process_requests(Game* g, RSPairStruct* s);
 	void create_requested_workers(Game* g);
 

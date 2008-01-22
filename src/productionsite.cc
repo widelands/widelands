@@ -90,22 +90,17 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 	while (sglobal->get_next_string("output", &string))
 		m_output.insert(string);
 
-	Section* s=prof->get_section("inputs");
-	if (s) {
+	if (Section * const s = prof->get_section("inputs"))
 		// This house obviously requests wares and works on them
-		Section::Value* val;
-		while ((val=s->get_next_val(0))) {
-			int32_t idx=tribe().get_ware_index(val->get_name());
-			if (idx == -1)
-				throw wexception("Error in [inputs], ware %s is unknown!",
-					val->get_name());
-
+		while (Section::Value * const val = s->get_next_val(0))
+			if (Ware_Index const idx = tribe().ware_index(val->get_name())) {
 			Item_Ware_Descr* ware= tribe().get_ware_descr(idx);
 
 			Input input(ware, val->get_int());
 			m_inputs.push_back(input);
-		}
-	}
+			} else
+				throw wexception
+					("Error in [inputs], ware %s is unknown!", val->get_name());
 
 	// Are we only a production site?
 	// If not, we might not have a worker
@@ -460,13 +455,11 @@ void ProductionSite::request_worker(const char * const worker_name) {
 
 /*
 ===============
-ProductionSite::request_worker_callback [static]
-
 Called when our worker arrives.
 ===============
 */
 void ProductionSite::request_worker_callback
-(Game* g, Request* rq, int32_t, Worker* w, void* data)
+(Game * g, Request * rq, Ware_Index, Worker * const w, void * const data)
 {
 	ProductionSite & psite = *static_cast<ProductionSite *>(data);
 
@@ -1062,7 +1055,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 			if (state->phase == 0)
 			{
 				Tribe_Descr const & tribe = owner().tribe();
-				int32_t wareid = tribe.get_safe_ware_index(action->sparam1.c_str());
+				Ware_Index wareid = tribe.ware_index(action->sparam1.c_str());
 
 				WareInstance* item = new WareInstance
 					(wareid, tribe.get_ware_descr(wareid));
@@ -1164,7 +1157,7 @@ void ProductionSite::program_end(Game* g, bool success)
 	// if succesfull, the workers gain experience
 	if (success) {
 		for (size_t i = 0; i < m_workers.size(); ++i)
-			m_workers[i]->gain_experience(g);
+			m_workers[i]->gain_experience(*g);
 	}
 
 	m_program_timer = true;

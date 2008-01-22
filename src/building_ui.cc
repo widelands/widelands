@@ -1268,9 +1268,7 @@ void ProductionSite_Window_ListWorkerWindow::update()
 
 			// Get the descriptive name of the ongoing upgrade
 			m_becomes->set_text
-				(tribe.get_worker_descr
-				 (tribe.get_safe_worker_index(worker.get_becomes()))
-				 ->descname());
+				(tribe.get_worker_descr(worker.becomes())->descname());
 
 		} else {
 			// Worker is not upgradeable

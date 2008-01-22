@@ -42,13 +42,14 @@ WareList::~WareList()
 /**
  * Add the given number of items (default = 1) to the storage.
  */
-void WareList::add(const size_type id, const count_type count) {
+void WareList::add(Ware_Index const i, const count_type count) {
 	if (!count)
 		return;
 
-	if (id >= m_wares.size()) m_wares.resize(id + 1, 0);
-	m_wares[id] += count;
-	assert(m_wares[id] >= count);
+	if (m_wares.size() <= i.value())
+		m_wares.resize(i.value() + 1, 0);
+	m_wares[i.value()] += count;
+	assert(m_wares[i.value()] >= count);
 }
 
 
@@ -57,37 +58,37 @@ void WareList::add(const WareList &wl)
 	if (wl.m_wares.size() > m_wares.size())
 		m_wares.reserve(wl.m_wares.size());
 
-	for (uint32_t id = 0; id < wl.m_wares.size(); ++id)
-		if (wl.m_wares[id])
-			add(id, wl.m_wares[id]);
+	for (Ware_Index::value_t i = 0; i < wl.m_wares.size(); ++i)
+		if (wl.m_wares[i])
+			add(i, wl.m_wares[i]);
 }
 
 
 /**
  * Remove the given number of items (default = 1) from the storage.
  */
-void WareList::remove(const size_type id, const count_type count) {
+void WareList::remove(Ware_Index const i, const count_type count) {
 	if (!count)
 		return;
 
-	assert(id < m_wares.size());
-   assert(m_wares[id] >= count);
-	m_wares[id] -= count;
+	assert(i.value() < m_wares.size());
+   assert(m_wares[i.value()] >= count);
+	m_wares[i.value()] -= count;
 }
 
 
 void WareList::remove(const WareList &wl)
 {
-	for (uint32_t id = 0; id < wl.m_wares.size(); ++id)
-		if (wl.m_wares[id])
-			remove(id, wl.m_wares[id]);
+	for (Ware_Index::value_t i = 0; i < wl.m_wares.size(); ++i)
+		if (wl.m_wares[i])
+			remove(i, wl.m_wares[i]);
 }
 
 /**
  * Return the number of wares of a given type stored in this storage.
  */
-int32_t WareList::stock(const size_type id) const {
-	return id < m_wares.size() ? m_wares[id] : 0;
+int32_t WareList::stock(Ware_Index const id) const {
+	return id.value() < m_wares.size() ? m_wares[id.value()] : 0;
 }
 
 

@@ -20,6 +20,9 @@
 #ifndef __S__WIDELANDS_H
 #define __S__WIDELANDS_H
 
+#include <cassert>
+#include <limits>
+
 #include <stdint.h>
 
 namespace Widelands {
@@ -46,6 +49,41 @@ inline Time Never() throw () {return 0xffffffff;}
 
 typedef uint32_t Duration;
 inline Duration Forever() throw () {return 0xffffffff;}
+
+/// Index for ware (and worker) types. Boxed for type-safety. Has a special
+/// null value to indicate invalidity. Has operator bool so that an index can
+/// be tested for validity with code like "if (index) ...". Operator bool
+/// asserts that the index is not null.
+struct Ware_Index {
+	typedef uint8_t value_t;
+	Ware_Index(Ware_Index const & other = Null()) : i(other.i) {}
+	Ware_Index(value_t const I) : i(I) {}
+
+	/// For compatibility with old code that use int32_t for ware/worker index
+	/// and use -1 to indicate invalidity.
+	Ware_Index(int32_t const I) __attribute__((deprecated))
+		:
+		i
+		(I == -1 ?
+		 std::numeric_limits<value_t>::max() : static_cast<value_t>(I))
+	{}
+
+	/// Returns a special value indicating invalidity.
+	static Ware_Index Null() {
+		return Ware_Index(std::numeric_limits<value_t>::max());
+	}
+
+	///  Get a value for array subscripting.
+	value_t value() const {assert(*this); return i;}
+
+	bool operator==(Ware_Index const other) const {return i == other.i;}
+	bool operator!=(Ware_Index const other) const {return i != other.i;}
+
+	operator bool() const throw () {return operator!=(Null());}
+	operator int32_t() const __attribute__((deprecated)) {return *this ? i : -1;} //  FIXME ditch this temporary hack eventually
+private:
+	value_t i;
+};
 
 };
 

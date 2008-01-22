@@ -646,12 +646,11 @@ void Player::sample_statistics()
 /**
  * A ware was produced. Update the corresponding statistics.
  */
-void Player::ware_produced(uint32_t wareid)
-{
+void Player::ware_produced(Ware_Index const wareid) {
 	assert (m_ware_productions.size() == static_cast<uint32_t>(tribe().get_nrwares()));
 	assert(wareid < static_cast<uint32_t>(tribe().get_nrwares()));
 
-	m_current_statistics[wareid]++;
+	++m_current_statistics[wareid.value()];
 }
 
 

@@ -67,15 +67,24 @@ struct Tribe_Descr {
 	const World & world() const throw () {return m_world;}
 
 		int32_t get_nrworkers() const {return m_workers.get_nitems();}
-		Worker_Descr * get_worker_descr(const uint32_t idx) const
-		{return m_workers.get(idx);}
+	Worker_Descr * get_worker_descr(Ware_Index const index) const {
+		return m_workers.get(index);
+	}
+	Ware_Index worker_index(char const * const workername) const {
+		return m_workers.get_index(workername);
+	}
 		int32_t get_worker_index(const char * const workername) const
 		{return m_workers.get_index(workername);}
 		int32_t get_nrwares() const {return m_wares.get_nitems();}
+	Ware_Index ware_index(char const * const warename) const {
+		return m_wares.get_index(warename);
+	}
 		int32_t get_safe_ware_index(const char * const warename) const;
 		int32_t get_ware_index(const char * const warename) const
 		{return m_wares.get_index(warename);}
-      Item_Ware_Descr* get_ware_descr(uint32_t idx) const {return m_wares.get(idx);}
+	Item_Ware_Descr* get_ware_descr(Ware_Index const index) const {
+		return m_wares.get(index);
+	}
 		int32_t get_safe_worker_index(const char * const workername) const;
 		int32_t get_nrbuildings() const {return m_buildings.get_nitems();}
 		int32_t get_safe_building_index(const char *name) const;

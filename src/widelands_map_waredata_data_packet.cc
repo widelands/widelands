@@ -61,12 +61,13 @@ throw (_wexception)
 			reg = fr.Unsigned32();
 			if (Map_Object * const location = ol->get_object_by_file_index(reg)) {
 				const uint32_t ware_index_from_file = fr.Unsigned32();
-				ware->m_descr_index = ware_index_from_file;
+				ware->m_descr_index =
+					static_cast<Ware_Index::value_t>(ware_index_from_file);
 				if (upcast(PlayerImmovable, player_immovable, location)) {
 					if
 						(dynamic_cast<const Building *>(player_immovable)
 						 or
-						 dynamic_cast<const Flag *>(player_immovable))
+						 dynamic_cast<const Flag     *>(player_immovable))
 					{
 						//  We didn't know what kind of ware we were till now, so no
 						//  economy might have a clue of us.

@@ -111,8 +111,8 @@ protected:
 
 private:
 	void request_soldier();
-	static void request_soldier_callback(Game* g, Request* rq, int32_t ware,
-		Worker* w, void* data);
+	static void request_soldier_callback
+		(Game *, Request *, Ware_Index, Worker *, void * data);
 
 	void drop_soldier (Game *g, int32_t i);
 	void call_soldiers();

@@ -290,7 +290,7 @@ Called when our soldier arrives.
 ===============
 */
 void MilitarySite::request_soldier_callback
-(Game * g, Request * rq, int32_t, Worker * w, void * data)
+(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
 {
 
 	MilitarySite & msite = *static_cast<MilitarySite *>(data);

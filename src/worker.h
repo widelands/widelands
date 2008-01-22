@@ -71,7 +71,7 @@ public:
 
 	uint32_t get_animation(const char * const str) const {return descr().get_animation(str);}
 	uint32_t get_menu_pic() const throw () {return descr().get_menu_pic();}
-	const char * get_becomes() const throw () {return descr().get_becomes ();}
+	Ware_Index becomes() const throw () {return descr().becomes();}
 	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}
 	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
 	const std::string & descname() const throw () {return descr().descname();}
@@ -104,11 +104,18 @@ public:
 	bool wakeup_flag_capacity(Game* g, Flag* flag);
 	bool wakeup_leave_building(Game* g, Building* building);
 
-	// For leveling
-	void level(Game*);
-	void create_needed_experience(Game*);
-	// For leveling
-	void gain_experience(Game*);
+
+	/// This should be called whenever the worker has done work that he gains
+	/// experience from. It may cause him to change his type so that he becomes
+	/// overqualified for his current Worker_Position and needs to be replaced.
+	/// If so, his old Ware_Index is returned so that the calling code can
+	/// request a new worker of his old type. Otherwise Ware_Index::Null is
+	/// returned.
+	Ware_Index gain_experience   (Game &);
+
+	void create_needed_experience(Game &);
+	Ware_Index level             (Game &);
+
 	int32_t get_needed_experience() const {return m_needed_exp;}
 	int32_t get_current_experience() const {return m_current_exp;}
 

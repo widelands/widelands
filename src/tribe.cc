@@ -294,18 +294,21 @@ Read all worker descriptions
 */
 void Tribe_Descr::parse_workers(const char *directory)
 {
-	char subdir[256];
 	filenameset_t dirs;
-
-	snprintf(subdir, sizeof(subdir), "%s/workers", directory);
-
-	g_fs->FindFiles(subdir, "*", &dirs);
+	{
+		char subdir[256];
+		snprintf(subdir, sizeof(subdir), "%s/workers", directory);
+		g_fs->FindFiles(subdir, "*", &dirs);
+	}
+	Worker_Descr::becomes_map_t becomes_map;
 
 	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
 		Worker_Descr *descr = 0;
 
 		try {
-			descr = Worker_Descr::create_from_dir(*this, it->c_str(), &m_default_encdata);
+			descr =
+				Worker_Descr::create_from_dir
+				(*this, becomes_map, it->c_str(), &m_default_encdata);
 		} catch (std::exception &e) {
 			log("Worker %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
 		} catch (...) {
@@ -315,6 +318,18 @@ void Tribe_Descr::parse_workers(const char *directory)
 		if (descr)
 			m_workers.add(descr);
 	}
+
+	//  Resolve inter-worker-type dependencies.
+	Worker_Descr::becomes_map_t::const_iterator const becomes_map_end =
+		becomes_map.end();
+	for
+		(Worker_Descr::becomes_map_t::const_iterator it = becomes_map.begin();
+		 it != becomes_map_end;
+		 ++it)
+		if (not (it->first->m_becomes = worker_index(it->second.c_str())))
+			throw wexception
+				("worker type %s becomes nonexistent worker type \"%s\"",
+				 it->first->name().c_str(), it->second.c_str());
 }
 
 /*

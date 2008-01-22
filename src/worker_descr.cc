@@ -32,12 +32,12 @@
 
 namespace Widelands {
 
-Worker_Descr::Worker_Descr(const Tribe_Descr  & tribe_descr,
-                            const std::string & worker_name):
-                            Bob::Descr        (&tribe_descr, worker_name),
-                            m_menu_pic_fname  (0),
-                            m_menu_pic        (0),
-							m_becomes_index   (-2)
+Worker_Descr::Worker_Descr
+	(Tribe_Descr const & tribe_descr, std::string const & worker_name)
+	:
+	Bob::Descr        (&tribe_descr, worker_name),
+	m_menu_pic_fname  (0),
+	m_menu_pic        (0)
 {
 	add_attribute(Map_Object::WORKER);
 }
@@ -102,7 +102,10 @@ const
  * Parse the worker data from configuration
  */
 void Worker_Descr::parse
-(const char * const directory, Profile * const prof, const EncodeData * const encdata)
+(char const       * const directory,
+ Profile          * const prof,
+ becomes_map_t    &       becomes_map,
+ const EncodeData * const encdata)
 {
 	char buffer[256];
 	char fname[256];
@@ -151,7 +154,8 @@ void Worker_Descr::parse
 		g_sound_handler.load_fx(directory, string);
 
 	// Read the becomes and experience
-	m_becomes = sglobal->get_string("becomes", "");
+	if (char const * const becomes_name = sglobal->get_string("becomes"))
+		becomes_map[this] = becomes_name;
 	std::string exp=sglobal->get_string("experience", "");
 	m_min_experience=m_max_experience=-1;
 	if (exp.size()) {
@@ -208,9 +212,11 @@ Bob * Worker_Descr::create_object() const
  * config data.
  * \note May return 0.
  */
-Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
-                                            const char * const directory,
-                                            const EncodeData * const encdata)
+Worker_Descr * Worker_Descr::create_from_dir
+	(Tribe_Descr const &       tribe,
+	 becomes_map_t     &       becomes_map,
+	 char        const * const directory,
+	 EncodeData  const * const encdata)
 {
 	const char *name;
 
@@ -250,7 +256,7 @@ Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
 		else
 			throw wexception("Unknown worker type '%s' [supported: carrier, soldier]", type);
 
-		descr->parse(directory, &prof, encdata);
+		descr->parse(directory, &prof, becomes_map, encdata);
 	}
 	catch (std::exception &e) {
 		delete descr;
@@ -264,36 +270,18 @@ Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
 	return descr;
 }
 
-/**
-* index of get_becomes() in tribe array or -1
- */
-int32_t Worker_Descr::get_becomes_index() const throw () {
-	if (m_becomes_index >= -1) // already calculated
-		return m_becomes_index;
-
-	const char * becomes = get_becomes();
-	if (NULL != becomes && 0 != becomes[0])
-		m_becomes_index = tribe().get_safe_worker_index(becomes);
-	else
-		m_becomes_index = -1;
-
-	return m_becomes_index;
-}
 
 /**
 * check if worker can be substitute for a requested worker type
  */
-bool Worker_Descr::can_act_as(int32_t ware) const {
-	if (ware == tribe().get_worker_index(name().c_str()))
+bool Worker_Descr::can_act_as(Ware_Index const index) const {
+	if (index == tribe().worker_index(name().c_str()))
 		return true;
 
 	// if requested worker type can be promoted, compare with that type
-	const Worker_Descr *descr = tribe().get_worker_descr(ware);
-	const int32_t becomes = descr->get_becomes_index();
-	if (becomes >= 0)
-		return can_act_as(becomes);
-
-	return false;
+	Worker_Descr const & descr = *tribe().get_worker_descr(index);
+	Ware_Index const becomes_index = descr.becomes();
+	return becomes_index ? can_act_as(becomes_index) : false;
 }
 
 };

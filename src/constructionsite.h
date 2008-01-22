@@ -99,10 +99,10 @@ protected:
 		UI::Window** registry);
 
 	void request_builder(Game* g);
-	static void request_builder_callback(Game* g, Request* rq, int32_t ware,
-		Worker* w, void* data);
-	static void wares_queue_callback(Game* g, WaresQueue* wq, int32_t ware,
-		void* data);
+	static void request_builder_callback
+		(Game *, Request *, Ware_Index, Worker *, void * data);
+	static void wares_queue_callback
+		(Game *, WaresQueue *, Ware_Index, void * data);
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);

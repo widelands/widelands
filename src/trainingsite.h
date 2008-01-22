@@ -134,7 +134,8 @@ protected:
 
 private:
 	void request_soldier();
-	static void request_soldier_callback(Game * g, Request * rq, int32_t ware, Worker * w, void *data);
+	static void request_soldier_callback
+		(Game *, Request *, Ware_Index, Worker *, void * data);
 
 	void program_start(Game * g, std::string program_name);
 	void program_end(Game * g, bool success);

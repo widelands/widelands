@@ -421,13 +421,11 @@ void ConstructionSite::request_builder(Game *) {
 
 /*
 ===============
-ConstructionSite::request_builder_callback [static]
-
 Called by transfer code when the builder has arrived on site.
 ===============
 */
 void ConstructionSite::request_builder_callback
-(Game *, Request * rq, int32_t, Worker * w, void * data)
+(Game *, Request * rq, Ware_Index, Worker * const w, void * const data)
 {
 	assert(w);
 
@@ -526,13 +524,11 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 
 /*
 ===============
-ConstructionSite::wares_queue_callback [static]
-
 Called by WaresQueue code when an item has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback
-(Game * g, WaresQueue *, int32_t, void * data)
+(Game * g, WaresQueue *, Ware_Index, void * data)
 {
 	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 

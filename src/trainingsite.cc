@@ -324,7 +324,7 @@ void TrainingSite::request_soldier() {
  */
 // this is a static method
 void TrainingSite::request_soldier_callback
-(Game * g, Request * rq, int32_t, Worker * w, void * data)
+(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
 {
 	assert(g);
 	assert(rq);

@@ -64,10 +64,11 @@ public:
 protected:
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_ware
-		(RenderTarget &, const Point,
-		 const uint32_t id,
-		 const uint32_t stock,
-		 const bool worker);
+		(RenderTarget &,
+		 Point,
+		 Widelands::Ware_Index,
+		 uint32_t stock,
+		 bool     is_worker);
 
 private:
 	typedef std::vector<Widelands::WareList const *> vector_type;
