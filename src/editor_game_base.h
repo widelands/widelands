@@ -80,8 +80,8 @@ struct Editor_Game_Base {
 		 const std::string & tribe,
 		 const std::string & name);
 	Player * get_player(const int32_t n) const {
-		assert(n >= 1);
-		assert(n <= MAX_PLAYERS);
+		assert(1 <= n);
+		assert     (n <= MAX_PLAYERS);
 		return m_players[n - 1];
 	}
 	Player & player(const int32_t n) const {

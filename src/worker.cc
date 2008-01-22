@@ -2041,7 +2041,7 @@ void Worker::fugitive_update(Game* g, State* state)
 		bool accept(BaseImmovable * const imm) const {
 			if (upcast(Flag const, flag, imm))
 				if (flag->get_owner() == &m_owner)
-					if(flag->economy().get_nr_warehouses())
+					if (flag->economy().get_nr_warehouses())
 						return true;
 			return false;
 		}

@@ -60,45 +60,54 @@ throw
 (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
 	FileRead fr;
 	try {fr.Open(fs, "binary/bob_data");} catch (...) {return;}
 
-   // First packet version
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		for (;;) {
-         uint32_t reg=fr.Unsigned32();
-			if (reg == 0xffffffff)
-				break; // No more bobs
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Map   const &       map        = egbase->map();
+			Extent        const extent     = map.extent();
+			Player_Number const nr_players = map.get_nrplayers();
 
-         assert(ol->is_object_known(reg)); //  FIXME
-			Bob* bob=static_cast<Bob*>(ol->get_object_by_file_index(reg)); //  FIXME
+			for (;;) {
+				uint32_t const serial = fr.Unsigned32();
+				if (serial == 0xffffffff) //  FIXME test EndOfFile instead in the
+					break;                 //  FIXME next packet version
 
-         uint8_t read_owner=fr.Unsigned8();
-         Player* plr_owner=0;
-			if (read_owner) {
-            plr_owner=egbase->get_safe_player(read_owner);
-            assert(plr_owner); // He must be there
-			}
+				try {
+					if (not ol->is_object_known(serial))
+						throw wexception("not known");
+					upcast(Bob, bob, ol->get_object_by_file_index(serial));
+					if (not bob)
+						throw wexception("not a bob");
+					Bob::Descr const & bob_descr = bob->descr();
 
-         Coords pos; //  FIXME
-         pos.x=fr.Unsigned16(); //  FIXME
-         pos.y=fr.Unsigned16(); //  FIXME
+					if (Player_Number const read_owner = fr.Player_Number8()) {
+						if (nr_players < read_owner)
+							throw wexception
+								("owner number is %u but there are only %u players",
+								 read_owner, nr_players);
+						if (Player * const owner = egbase->get_player(read_owner))
+							bob->set_owner(owner);
+						else
+							throw wexception
+								("owning player %u does not exist", read_owner);
+					}
 
          // Basic initialisation
-         bob->set_owner(plr_owner);
-         bob->set_position(egbase, pos);
+         bob->set_position(egbase, fr.Coords32(extent));
 
          // Look if we had an transfer
          bool have_transfer=fr.Unsigned8();
 
          Transfer* trans=0;
-			if (have_transfer) {
+					if (have_transfer) {
             trans=bob->m_stack[0].transfer;
             assert(trans);
-			}
+					}
 
          //         if (!have_transfer)
          //           bob->reset_tasks(static_cast<Game*>(egbase));
@@ -106,157 +115,183 @@ throw
          bob->m_actid=fr.Unsigned32();
 
          // Animation
-			if (fr.Unsigned8()) {
-            bob->m_anim=bob->descr().get_animation(fr.CString());
-			} else
-            bob->m_anim=0;
+					bob->m_anim =
+						fr.Unsigned8() ? bob_descr.get_animation(fr.CString()) : 0;
          bob->m_animstart=fr.Signed32();
 
          // walking
-			bob->m_walking=static_cast<Map_Object::WalkingDir>(fr.Signed32());
+					{
+						Map_Object::WalkingDir const walking_dir =
+							static_cast<Map_Object::WalkingDir>(fr.Signed32());
+						if (6 < walking_dir)
+							throw wexception
+								("walking dir is %u but must be one of {0 (idle), 1 "
+								 "(northeast), 2 (east), 3 (southeast), 4 "
+								 "(southwest), 5 (west), 6 (northwest)}",
+								 walking_dir);
+						bob->m_walking = walking_dir;
+					}
          bob->m_walkstart=fr.Signed32();
          bob->m_walkend=fr.Signed32();
 
          uint32_t oldstacksize=bob->m_stack.size();
          bob->m_stack.resize(fr.Unsigned16());
-			for (uint32_t i = 0; i < bob->m_stack.size(); ++i) {
-            Bob::State* s=&bob->m_stack[i];
+					for (uint32_t i = 0; i < bob->m_stack.size(); ++i) {
+						Bob::State & state = bob->m_stack[i];
+						try {
 
-				{ //  Task
+							{ //  Task
             Bob::Task* task;
-					char const * const taskname = fr.CString();
-					if      (not strcmp(taskname, "idle"))
-						task = &Bob::taskIdle;
-					else if (not strcmp(taskname, "movepath"))
-						task = &Bob::taskMovepath;
-					else if (not strcmp(taskname, "forcemove"))
-						task = &Bob::taskForcemove;
-					else if (not strcmp(taskname, "roam"))
-						task = &Critter_Bob::taskRoam;
-					else if (not strcmp(taskname, "program")) {
-						if (dynamic_cast<Worker const *>(bob))
-							task = &Worker::taskProgram;
-						else if (dynamic_cast<Critter_Bob const *>(bob))
-							task = &Critter_Bob::taskProgram;
-						else
-							throw;
-					}
-					else if (not strcmp(taskname, "transfer"))
-						task = &Worker::taskTransfer;
-					else if (not strcmp(taskname, "buildingwork"))
-						task = &Worker::taskBuildingwork;
-					else if (not strcmp(taskname, "return"))
-						task = &Worker::taskReturn;
-					else if (not strcmp(taskname, "gowarehouse"))
-						task = &Worker::taskGowarehouse;
-					else if (not strcmp(taskname, "dropoff"))
-						task = &Worker::taskDropoff;
-					else if (not strcmp(taskname, "fetchfromflag"))
-						task = &Worker::taskFetchfromflag;
-					else if (not strcmp(taskname, "waitforcapacity"))
-						task = &Worker::taskWaitforcapacity;
-					else if (not strcmp(taskname, "leavebuilding"))
-						task = &Worker::taskLeavebuilding;
-					else if (not strcmp(taskname, "fugitive"))
-						task = &Worker::taskFugitive;
-					else if (not strcmp(taskname, "geologist"))
-						task = &Worker::taskGeologist;
-					else if (not strcmp(taskname, "road"))
-						task = &Carrier::taskRoad;
-					else if (not strcmp(taskname, "transport"))
-						task = &Carrier::taskTransport;
-					else if (not strcmp(taskname, "moveToBattle"))
-						task = &Soldier::taskMoveToBattle;
-					else if (not strcmp(taskname, "moveHome"))
-						task = &Soldier::taskMoveHome;
-					else if (*taskname == '\0')
-						continue; // Skip task
-				else
-					throw wexception("Unknown task %s in file!", taskname);
+								char const * const taskname = fr.CString();
+								if      (not strcmp(taskname, "idle"))
+									task = &Bob::taskIdle;
+								else if (not strcmp(taskname, "movepath"))
+									task = &Bob::taskMovepath;
+								else if (not strcmp(taskname, "forcemove"))
+									task = &Bob::taskForcemove;
+								else if (not strcmp(taskname, "roam"))
+									task = &Critter_Bob::taskRoam;
+								else if (not strcmp(taskname, "program")) {
+									if (dynamic_cast<Worker const *>(bob))
+										task = &Worker::taskProgram;
+									else if (dynamic_cast<Critter_Bob const *>(bob))
+										task = &Critter_Bob::taskProgram;
+									else
+										throw;
+								}
+								else if (not strcmp(taskname, "transfer"))
+									task = &Worker::taskTransfer;
+								else if (not strcmp(taskname, "buildingwork"))
+									task = &Worker::taskBuildingwork;
+								else if (not strcmp(taskname, "return"))
+									task = &Worker::taskReturn;
+								else if (not strcmp(taskname, "gowarehouse"))
+									task = &Worker::taskGowarehouse;
+								else if (not strcmp(taskname, "dropoff"))
+									task = &Worker::taskDropoff;
+								else if (not strcmp(taskname, "fetchfromflag"))
+									task = &Worker::taskFetchfromflag;
+								else if (not strcmp(taskname, "waitforcapacity"))
+									task = &Worker::taskWaitforcapacity;
+								else if (not strcmp(taskname, "leavebuilding"))
+									task = &Worker::taskLeavebuilding;
+								else if (not strcmp(taskname, "fugitive"))
+									task = &Worker::taskFugitive;
+								else if (not strcmp(taskname, "geologist"))
+									task = &Worker::taskGeologist;
+								else if (not strcmp(taskname, "road"))
+									task = &Carrier::taskRoad;
+								else if (not strcmp(taskname, "transport"))
+									task = &Carrier::taskTransport;
+								else if (not strcmp(taskname, "moveToBattle"))
+									task = &Soldier::taskMoveToBattle;
+								else if (not strcmp(taskname, "moveHome"))
+									task = &Soldier::taskMoveHome;
+								else if (*taskname == '\0')
+									continue; // Skip task
+								else
+									throw wexception("unknown task %s", taskname);
 
-            s->task=task;
-				}
+								state.task = task;
+							}
 
-            s->ivar1=fr.Signed32();
-            s->ivar2=fr.Signed32();
-            s->ivar3=fr.Signed32();
+							state.ivar1 = fr.Signed32();
+							state.ivar2 = fr.Signed32();
+							state.ivar3 = fr.Signed32();
 
-            s->transfer=0;
+							state.transfer = 0;
 
-				if (int32_t obj=fr.Unsigned32()) {
-               assert(ol->is_object_known(obj));
-               s->objvar1=ol->get_object_by_file_index(obj);
-				} else
-               s->objvar1=0;
-            s->svar1=fr.CString();
-            s->coords.x=fr.Signed32();
-            s->coords.y=fr.Signed32();
+							if (int32_t const obj = fr.Unsigned32()) {
+								assert(ol->is_object_known(obj));
+								state.objvar1 = ol->get_object_by_file_index(obj);
+							} else
+								state.objvar1 = 0;
+							state.svar1 = fr.CString();
+							state.coords.x = fr.Signed32(); //  FIXME fix format to use
+							state.coords.y = fr.Signed32(); //  FIXME FileRead::Coords32
 
-				if (fr.Unsigned8()) {
-               const Bob::Descr & bob_descr = bob->descr();
-               const uint32_t anims[6] = {
+							if (fr.Unsigned8()) {
+								const uint32_t ans[6] = {
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString())
-					};
-               s->diranims = new DirAnimations
-                  (anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
-				} else
-               s->diranims=0;
+								};
+								state.diranims = new DirAnimations
+									(ans[0], ans[1], ans[2], ans[3], ans[4], ans[5]);
+							} else
+								state.diranims = 0;
 
-            uint32_t pathsteps=fr.Unsigned16();
-				if (i < oldstacksize)
-               delete s->path;
-				if (pathsteps) {
-               Coords start;
-               start.x=fr.Unsigned16();
-               start.y=fr.Unsigned16();
-					Path * const path = new Path(start);
-					for (uint32_t step = 0; step < pathsteps; ++step)
-						path->append(egbase->map(), fr.Unsigned8());
-               s->path=path;
-				} else
-               s->path=0;
+							uint32_t const pathsteps = fr.Unsigned16();
+							if (i < oldstacksize)
+								delete state.path;
+							if (pathsteps) {
+								try {
+									Path * const path = new Path(fr.Coords32(extent));
+									for (uint32_t step = 0; step < pathsteps; ++step) {
+										Direction const direction = fr.Unsigned8();
+										if (direction == 0 or 6 < direction)
+											throw wexception
+												("step %u: direction is %u but must be "
+												 "one of {0 (idle), 1 (northeast), 2 "
+												 "(east), 3 (southeast), 4 (southwest), 5 "
+												 "(west), 6 (northwest)}",
+												 step, direction);
+										path->append(map, direction);
+									}
+									state.path = path;
+								} catch (_wexception const & e) {
+									throw wexception("reading path: %s", e.what());
+								}
+							} else
+								state.path = 0;
 
-				if (i < oldstacksize && !trans)
-               delete s->transfer;
+							if (i < oldstacksize && !trans)
+								delete state.transfer;
 
-				s->transfer =
-					s->task == &Worker::taskGowarehouse
-					||
-					s->task == &Worker::taskTransfer
-					?
-					trans : 0;
+							state.transfer =
+								state.task == &Worker::taskGowarehouse
+								||
+								state.task == &Worker::taskTransfer
+								?
+								trans : 0;
 
-            bool route=fr.Unsigned8();
-				if (i < oldstacksize && s->route)
-					if (!route)
-						delete s->route;
-					else
-						s->route->clear();
+							{
+								bool has_route = fr.Unsigned8();
+								if (i < oldstacksize && state.route)
+									if (!has_route) {
+										delete state.route;
+										state.route = 0; //  paranoia
+									} else
+										state.route->clear();
 
-				if (route) {
-					Route * const r = s->route ? s->route : new Route();
-					r->load_pointers(*r->load(fr), *ol);
-					s->route = r;
-				} else
-               s->route=0;
+								if (has_route) {
+									Route * const route =
+										state.route ? state.route : new Route();
+									route->load_pointers(*route->load(fr), *ol);
+									state.route = route;
+								} else
+									state.route = 0;
+							}
 
             // Now programm
-				if (fr.Unsigned8()) {
+							if (fr.Unsigned8()) {
                std::string progname=fr.CString();
-					if      (upcast(Worker      const, worker,      bob))
-						s->program = worker     ->descr().get_program(progname);
-					else if (upcast(Critter_Bob const, critter_bob, bob))
-						s->program = critter_bob->descr().get_program(progname);
-					else
-						throw;
-				} else
-               s->program=0;
-			}
+								if      (upcast(Worker      const, wor,  bob))
+									state.program = wor->descr().get_program(progname);
+								else if (upcast(Critter_Bob const, cri, bob))
+									state.program = cri->descr().get_program(progname);
+								else
+									throw;
+							} else
+								state.program = 0;
+
+						} catch (_wexception const & e) {
+							throw wexception("reading state %u: %s", i, e.what());
+						}
+					}
 
          // Rest of bob stuff
          bob->m_stack_dirty=fr.Unsigned8();
@@ -271,10 +306,15 @@ throw
 				assert(false);
 
          ol->mark_object_as_loaded(bob);
-		}
-	} else
-		throw wexception
-			("Unknown version %u in Map_Bobdata_Data_Packet!", packet_version);
+				} catch (_wexception const & e) {
+					throw wexception("reading object %u: %s", serial, e.what());
+				}
+			}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("reading bobdata: %s", e.what());
+	}
 }
 
 void Map_Bobdata_Data_Packet::read_critter_bob
@@ -424,8 +464,7 @@ throw (_wexception)
 				fw.Unsigned8(bob->m_owner ? bob->m_owner->get_player_number() : 0);
 
             // m_position
-            fw.Unsigned16(bob->m_position.x);
-            fw.Unsigned16(bob->m_position.y);
+				fw.Coords32(bob->m_position);
             // FIELD can't be saved
 
             // m_linknext, linkpprev are handled automatically
@@ -477,8 +516,8 @@ throw (_wexception)
                fw.CString(s->svar1.c_str());
 
                // Coords
-               fw.Signed32(s->coords.x);
-               fw.Signed32(s->coords.y);
+					fw.Signed32(s->coords.x); //  FIXME fix format to use
+					fw.Signed32(s->coords.y); //  FIXME FileWrite::Coords32
 
 					if (s->diranims) {
                   fw.Unsigned8(1);
@@ -496,9 +535,7 @@ throw (_wexception)
 						const Path::Step_Vector::size_type nr_steps =
 							s->path->get_nsteps();
 						fw.Unsigned16(nr_steps);
-						const Coords pstart =path->get_start();
-                  fw.Unsigned16(pstart.x);
-                  fw.Unsigned16(pstart.y);
+                  fw.Coords32(path->get_start());
 						for
 							(Path::Step_Vector::size_type idx = 0;
 							 idx < nr_steps;
