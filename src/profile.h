@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,14 +125,23 @@ public:
 	const char *get_next_string(const char *name, const char **value);
 	const char *get_next_Coords(const char * const name, Coords * const value);
 
-	void set_int(const char *name, int32_t value, bool duplicate = false);
-	void set_float(const char *name, float value, bool duplicate = false);
-	void set_bool(const char *name, bool value, bool duplicate = false);
-	void set_string(const char *name, const char *string, bool duplicate = false);
+	void set_int
+		(char const * name, int32_t      value, bool duplicate = false);
+	void set_float
+		(char const * name, float        value, bool duplicate = false);
+	void set_bool
+		(char const * name, bool         value, bool duplicate = false);
+	void set_string
+		(char const * name, char const * value, bool duplicate = false);
+	void set_string
+		(char        const * const name,
+		 std::string const &       value,
+		 bool                const duplicate = false)
+	{
+		set_string(name, value.c_str(), duplicate);
+	}
 	void set_Coords
-		(const char * const name,
-		 const Coords value,
-		 const bool duplicate = false);
+		(char const * name, Coords       value, bool duplicate = false);
 
 	Value *create_val(const char *name, const char *value, bool duplicate = false);
 };
