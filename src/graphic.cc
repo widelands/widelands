@@ -424,7 +424,7 @@ void Graphic::get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h)
 
 void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 {
-	Surface* surf = get_picture_surface(pic_index);
+	Surface & surf = *get_picture_surface(pic_index);
 
 	// Save a png
 	png_structp png_ptr =
@@ -451,9 +451,10 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 	}
 
 	// Fill info struct
-	png_set_IHDR(png_ptr, info_ptr, surf->get_w(), surf->get_h(),
-		     8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
-		     PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+	png_set_IHDR
+		(png_ptr, info_ptr, surf.get_w(), surf.get_h(),
+		 8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
+		 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
 	// png_set_strip_16(png_ptr) ;
 
@@ -465,29 +466,23 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 
 	png_set_packing(png_ptr);
 
-	png_bytep row = new png_byte[4*surf->get_w()];
+	{
+		uint32_t surf_w = surf.get_w();
+		uint32_t surf_h = surf.get_h();
+		uint32_t row_size = 4 * surf_w;
+		SDL_PixelFormat & format = const_cast<SDL_PixelFormat &>(surf.format());
 
 	// Write each row
-	for (uint32_t y = 0; y < surf->get_h(); ++y) {
-		uint32_t i = 0;
-
-		for (uint32_t x = 0; x < surf->get_w(); ++x) {
-			uint8_t r, g, b, a;
-			SDL_GetRGBA
-			(surf->get_pixel(x, y),
-			 &const_cast<SDL_PixelFormat &>(surf->format()),
-			 &r, &g, &b, &a);
-			row[i+0] = r;
-			row[i+1] = g;
-			row[i+2] = b;
-			row[i+3] = a;
-			i += 4;
-		}
-
+		for (uint32_t y = 0; y < surf_h; ++y) {
+			png_byte row[row_size];
+			png_bytep rowp = row;
+			for (uint32_t x = 0; x < surf_w; rowp += 4, ++x)
+				SDL_GetRGBA
+					(surf.get_pixel(x, y), &format,
+					 rowp + 0, rowp + 1, rowp + 2, rowp + 3);
 		png_write_row(png_ptr, row);
+		}
 	}
-
-	delete row;
 
 	// End write
 	png_write_end(png_ptr, info_ptr);
