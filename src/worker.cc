@@ -403,7 +403,7 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
  */
 bool Worker::run_walk(Game* g, State* state, const Action* action)
 {
-	BaseImmovable* imm = g->get_map()->get_immovable(get_position());
+	BaseImmovable const * const imm = g->map()[get_position()].get_immovable();
 	Coords dest;
 	bool forceonlast = false;
 	int32_t max_steps = -1;
@@ -569,14 +569,13 @@ bool Worker::run_plant(Game * g, State * state, const Action *)
 	molog("  Plant: %i at %i, %i\n", state->ivar2, pos.x, pos.y);
 
 	// Check if the map is still free here
-	BaseImmovable* imm = g->get_map()->get_immovable(pos);
-
-	if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-		molog("  field no longer free\n");
-		set_signal("fail");
-		pop_task();
-		return true;
-	}
+	if (BaseImmovable const * const imm = g->map()[pos].get_immovable())
+		if (imm->get_size() >= BaseImmovable::SMALL) {
+			molog("  field no longer free\n");
+			set_signal("fail");
+			pop_task();
+			return true;
+		}
 
 	g->create_immovable
 		(pos, state->ivar2, state->svar1 == "world" ? 0 : &descr().tribe());
@@ -728,7 +727,9 @@ void Worker::log_general_info(Editor_Game_Base* egbase)
 	WareInstance* ware=static_cast<WareInstance*>(m_carried_item.get(egbase));
 	molog("m_carried_item: %p\n", ware);
 	if (ware) {
-		molog("* m_carried_item->get_ware() (id): %i\n", ware->descr_index());
+		molog
+			("* m_carried_item->get_ware() (id): %i\n",
+			 ware->descr_index().value());
 		molog("* m_carried_item->get_economy() (): %p\n", ware->get_economy());
 	}
 
@@ -1044,9 +1045,9 @@ void Worker::start_task_transfer(Game* g, Transfer* t)
 }
 
 
-void Worker::transfer_update(Game* g, State* state)
-{
-	PlayerImmovable* location = get_location(g);
+void Worker::transfer_update(Game * game, State * state) {
+	Map & map = game->map();
+	PlayerImmovable * location = get_location(game);
 
 	assert(location); // 'location' signal expected otherwise
 
@@ -1065,7 +1066,7 @@ void Worker::transfer_update(Game* g, State* state)
 	// or we may be on the building's flag for a fetch_from_flag or dropoff
 	// task.
 	if (dynamic_cast<Building const *>(location)) {
-		BaseImmovable* position = g->get_map()->get_immovable(get_position());
+		BaseImmovable * const position = map[get_position()].get_immovable();
 
 		if (position != location) {
 			if (upcast(Flag, flag, position)) {
@@ -1080,7 +1081,7 @@ void Worker::transfer_update(Game* g, State* state)
 
 	// Figure out where to go
 	bool success;
-	PlayerImmovable* nextstep =
+	PlayerImmovable * const nextstep =
 		state->transfer->get_next_step(location, &success);
 
 	if (!nextstep) {
@@ -1105,7 +1106,7 @@ void Worker::transfer_update(Game* g, State* state)
 	}
 
 	// Initiate the next step
-	if (upcast(Building, building, location)) {
+	if        (upcast(Building, building, location)) {
 		if (building->get_base_flag() != nextstep)
 			throw wexception
 				("MO(%u): [transfer]: in building, nextstep is not building's "
@@ -1113,14 +1114,10 @@ void Worker::transfer_update(Game* g, State* state)
 				 get_serial());
 
 		molog("[transfer]: move from building to flag\n");
-		start_task_leavebuilding(g, true);
-		return;
-	}
-
-	if (upcast(Flag, flag, location)) {
-		// Flag to Building
-		if (upcast(Building, building, nextstep)) {
-			if (building->get_base_flag() != location)
+		start_task_leavebuilding(game, true);
+	} else if (upcast(Flag,     flag,     location)) {
+		if        (upcast(Building, nextbuild, nextstep)) { //  Flag to Building
+			if (nextbuild->get_base_flag() != location)
 				throw wexception
 					("MO(%u): [transfer]: next step is building, but we are "
 					 "nowhere near",
@@ -1129,12 +1126,10 @@ void Worker::transfer_update(Game* g, State* state)
 			molog("[transfer]: move from flag to building\n");
 			start_task_forcemove
 				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
-			set_location(building);
-			return;
-		}
-
-		// Flag to Flag
-		if (upcast(Flag, nextflag, nextstep)) {
+			//  FIXME Here the worker enters the building before he arrives at it.
+			//  FIXME This has implications for vision.
+			set_location(nextbuild);
+		} else if (upcast(Flag,     nextflag,  nextstep)) { //  Flag to Flag
 			Road & road = *flag->get_road(nextflag);
 
 			molog
@@ -1148,11 +1143,7 @@ void Worker::transfer_update(Game* g, State* state)
 			start_task_movepath
 				(path, descr().get_right_walk_anims(does_carry_ware()));
 			set_location(&road);
-			return;
-		}
-
-		// Flag to Road
-		if (upcast(Road, road, nextstep)) {
+		} else if (upcast(Road,    road,      nextstep)) { //  Flag to Road
 			if
 				(road->get_flag(Road::FlagStart) != location
 				 and
@@ -1163,16 +1154,13 @@ void Worker::transfer_update(Game* g, State* state)
 
 			molog("[transfer]: set location to road %u\n", road->get_serial());
 			set_location(road);
-			set_animation(g, descr().get_animation("idle"));
-			schedule_act(g, 10); // wait a little
-			return;
-		}
-
-		throw wexception("MO(%u): [transfer]: flag to bad nextstep %u",
-		                 get_serial(), nextstep->get_serial());
-	}
-
-	if (upcast(Road, road, location)) {
+			set_animation(game, descr().get_animation("idle"));
+			schedule_act(game, 10); //  wait a little
+		} else
+			throw wexception
+				("MO(%u): [transfer]: flag to bad nextstep %u",
+				 get_serial(), nextstep->get_serial());
+	} else if (upcast(Road,     road,     location)) {
 		// Road to Flag
 		if (nextstep->get_type() == FLAG) {
 			const Path& path = road->get_path();
@@ -1185,42 +1173,40 @@ void Worker::transfer_update(Game* g, State* state)
 			else
 				index = -1;
 
-			molog("[transfer]: on road %u, to flag %u, index is %i\n",
-			      road->get_serial(), nextstep->get_serial(), index);
+			molog
+				("[transfer]: on road %u, to flag %u, index is %i\n",
+				 road->get_serial(), nextstep->get_serial(), index);
 
 			if (index >= 0) {
 				if
 					(start_task_movepath
-					 (g->map(),
+					 (map,
 					  path,
 					  index,
 					  descr().get_right_walk_anims(does_carry_ware())))
 				{
-					molog("[transfer]: from road %u to flag %u nextstep %u\n",
-					      get_serial(), road->get_serial(),
-					      nextstep->get_serial());
+					molog
+						("[transfer]: from road %u to flag %u nextstep %u\n",
+						 get_serial(), road->get_serial(), nextstep->get_serial());
 					return;
 				}
-			} else
-				if (nextstep != g->get_map()->get_immovable(get_position()))
-					throw wexception("MO(%u): [transfer]: road to flag, but "
-					                 "flag is nowhere near", get_serial());
+			} else if (nextstep != map[get_position()].get_immovable())
+				throw wexception
+					("MO(%u): [transfer]: road to flag, but flag is nowhere near",
+					 get_serial());
 
 			molog("[transfer]: arrive at flag %u\n", nextstep->get_serial());
 			set_location(dynamic_cast<Flag *>(nextstep));
-			set_animation(g, descr().get_animation("idle"));
-			schedule_act(g, 10); // wait a little
-			return;
-		}
-
+			set_animation(game, descr().get_animation("idle"));
+			schedule_act(game, 10); //  wait a little
+		} else
+			throw wexception
+				("MO(%u): [transfer]: from road to bad nextstep %u",
+				 get_serial(), nextstep->get_serial());
+	} else
 		throw wexception
-			("MO(%u): [transfer]: from road to bad nextstep %u (type %u)",
-			 get_serial(), nextstep->get_serial(), nextstep->get_type());
-	}
-
-	throw wexception
-		("MO(%u): location %u has bad type %u",
-		 get_serial(), location->get_serial(), location->get_type());
+			("MO(%u): location %u has bad type",
+			 get_serial(), location->get_serial());
 }
 
 
@@ -1658,7 +1644,7 @@ void Worker::dropoff_update(Game * g, State *)
 	}
 
 	WareInstance* item = get_carried_item(g);
-	BaseImmovable* location = g->get_map()->get_immovable(get_position());
+	BaseImmovable * const location = g->map()[get_position()].get_immovable();
 #ifndef NDEBUG
 	Building & ploc = dynamic_cast<Building &>(*get_location(g));
 	assert(&ploc == location || ploc.get_base_flag() == location);
