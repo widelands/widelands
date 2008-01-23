@@ -194,19 +194,18 @@ void Cmd_Build::serialize (StreamWrite & ser) {
 void Cmd_Build::Read
 (FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == PLAYER_CMD_BUILD_VERSION) {
-		// Read Player Command
-		PlayerCommand::Read(fr, egbase, mol);
-		id          = fr.Unsigned16();
-		try {coords = fr.Coords32  (egbase.map().extent());}
-		catch (StreamRead::Data_Error const & e) {
-			throw wexception
-				("Cmd_Build::Read: reading coords: %s", e.message().c_str());
-		}
-	} else
-		throw wexception
-			("Unknown version in Cmd_Build::Read: %u", packet_version);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_BUILD_VERSION) {
+			// Read Player Command
+			PlayerCommand::Read(fr, egbase, mol);
+			id     = fr.Unsigned16();
+			coords = fr.Coords32  (egbase.map().extent());
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("Error in Cmd_Build: %s", e.what());
+	}
 }
 
 void Cmd_Build::Write
@@ -245,18 +244,17 @@ void Cmd_BuildFlag::serialize (StreamWrite & ser)
 void Cmd_BuildFlag::Read
 (FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == PLAYER_CMD_BUILDFLAG_VERSION) {
-		// Read Player Command
-		PlayerCommand::Read(fr, egbase, mol);
-		try {coords = fr.Coords32(egbase.map().extent());}
-		catch (const StreamRead::Data_Error & e) {
-			throw wexception
-				("Cmd_BuildFlag::Read: reading coords: %s", e.message().c_str());
-		}
-	} else
-		throw wexception
-			("Unknown version in Cmd_BuildFlag::Read: %u", packet_version);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_BUILDFLAG_VERSION) {
+			// Read Player Command
+			PlayerCommand::Read(fr, egbase, mol);
+			coords = fr.Coords32(egbase.map().extent());
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("Error in Cmd_BuildFlag: %s", e.what());
+	}
 }
 void Cmd_BuildFlag::Write
 (FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
