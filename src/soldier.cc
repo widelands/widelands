@@ -682,26 +682,33 @@ void Soldier::startTaskMoveToBattle(Game * g, Flag *, Coords coords) {
 	s->coords = coords; // Destination
 }
 
-void Soldier::moveToBattleUpdate(Game* g, State* state) {
+void Soldier::moveToBattleUpdate(Game * game, State* state) {
 	// See if soldier is at building and drop of it
 	if (state->ivar1 == 1) {
-		BaseImmovable* position = g->get_map()->get_immovable(get_position());
-
-		if (dynamic_cast<Building const *>(position)) {
+		if
+			(dynamic_cast<Building const *>
+			 (game->map()[get_position()].get_immovable()))
+		{
 			state->ivar1 = 2;
-			start_task_leavebuilding (g, 1);
+			start_task_leavebuilding (game, 1);
 			return;
 		}
-	}
-	else {
+	} else {
 		if (get_position() == state->coords) {
 			if (state->ivar1 != 3)
 				m_attack_ctrl->moveToReached(this);
 			state->ivar1 = 3;
-			start_task_idle(g, descr().get_animation("idle"), 1000);
+			start_task_idle(game, descr().get_animation("idle"), 1000);
 			return;
 		}
-		if (!start_task_movepath(g, state->coords, 0, descr().get_right_walk_anims(does_carry_ware()))) {
+		if
+			(!
+			 start_task_movepath
+			 (game,
+			  state->coords,
+			  0,
+			  descr().get_right_walk_anims(does_carry_ware())))
+		{
 			molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
 			set_signal("fail");
 			mark(false);
