@@ -72,7 +72,8 @@ uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
 	x+= m_offsx;
 	y+= m_offsy;
 
-	assert(x < get_w() && y < get_h());
+	assert(x < get_w());
+	assert(y < get_h());
 	assert(m_surface);
 
 	// Locking not needed: reading only
@@ -87,7 +88,20 @@ uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
 	case 2:
 		return *reinterpret_cast<const Uint16 *>(pix);
 	case 3: //Needed for save_png.
-		//  fallthrough
+		//  We can not dereference a pointer to a size 4 object in this case
+		//  since that would casue a read beyond the end of the block pointed to
+		//  by m_surface. Furthermore it would not be properly aligned to a 4
+		//  byte boundary.
+		//
+		//  Suppose that the image is 2 * 2 pixels. Then m_surface points to a
+		//  block of size 2 * 2 * 3 = 12. The values for the last pixel are at
+		//  m_surface[9], m_surface[10] and m_surface[11]. But m_surface[12] is
+		//  beyond the end of the block, so we can not read 4 bytes starting at
+		//  m_surface[9] (even if unaligned access is allowed).
+		//
+		//  Therefore we read the 3 bytes separately and get the result by
+		//  shifting the values. It is alignment safe.
+		return pix[0] << 0x00 | pix[1] << 0x08 | pix[2] << 0x10;
 	case 4:
 		return *reinterpret_cast<const Uint32 *>(pix);
 	}
