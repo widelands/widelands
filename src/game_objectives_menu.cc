@@ -20,12 +20,9 @@
 #include "game_objectives_menu.h"
 
 #include "interactive_player.h"
-#include "map_objective_manager.h"
 #include "player.h"
 #include "trigger/trigger_null.h"
 
-using Widelands::MapObjective;
-using Widelands::MapObjectiveManager;
 
 GameObjectivesMenu::GameObjectivesMenu
 (Interactive_Player         & plr,
@@ -38,16 +35,11 @@ list         (this, 5,   5, get_inner_w() - 10, 120, Align_Left, false),
 objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
 {
    // Listselect with Objectives
-	MapObjectiveManager & mom = game.map().get_mom();
-	for (MapObjectiveManager::Index i = 0; i < mom.get_nr_objectives(); ++i) {
-		MapObjective & obj = mom.get_objective_by_nr(i);
-		if (not obj.get_is_visible()) continue;
-		if (obj.get_trigger()->is_set()) continue;
-
-		list.add(obj.name().c_str(), obj);
-		if (obj.get_is_optional())
-			list.set_entry_color(list.size() - 1, RGBColor(255, 0, 0));
-	}
+	Manager<Widelands::Objective> & mom = game.map().mom();
+	Manager<Widelands::Objective>::Index const nr_objectives = mom.size();
+	for (Manager<Widelands::Objective>::Index i = 0; i < nr_objectives; ++i)
+		if (mom[i].get_is_visible() and not mom[i].get_trigger()->is_set())
+			list.add(mom[i].name().c_str(), mom[i]);
    list.selected.set(this, &GameObjectivesMenu::selected);
 
    // If any objectives, select the first one

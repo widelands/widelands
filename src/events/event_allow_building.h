@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,18 +30,14 @@ class Editor_Game_Base;
  * Allows/denies the player to build a certain building
  */
 struct Event_Allow_Building : public Event {
-     Event_Allow_Building();
-      ~Event_Allow_Building();
+	Event_Allow_Building(char const * name, State);
 
-      // one liner functions
-	const char * get_id() const {return "allow_building";}
+	int32_t option_menu(Editor_Interactive &);
 
       State run(Game*);
-      virtual void reinitialize(Game*);
 
-      // File Functions
-	void Write(Section &, const Editor_Game_Base &) const;
-      void Read(Section*, Editor_Game_Base*);
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &) const;
 
 	int32_t get_player() const {return m_player;}
 	void set_player(int32_t i) {m_player = i;}

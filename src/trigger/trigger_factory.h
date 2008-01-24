@@ -20,28 +20,49 @@
 #ifndef __S__TRIGGER_FACTORY_H
 #define __S__TRIGGER_FACTORY_H
 
+#include "trigger.h"
+
 #include <string>
 
-struct Editor_Interactive;
-
 namespace Widelands {
-class Trigger;
 
+/// Functions that create a trigger of some type and returns a reference to it.
+/// The caller is given ownership of the created object and is therefore
+/// resposible for that it is deallocated with operator delete. The event's
+/// name and state are initialized to the given values.
+namespace Trigger_Factory {
 
-struct Trigger_Descr {
-   std::string id;
-   const std::string name;
-   const std::string descr;
+/// Creates a trigger of the type with the given number. A default name is
+/// given set is set to false.
+///
+/// Assumes that the given index is less than the number of trigger types.
+Trigger & create(size_t);
+
+/// Creates a trigger of the type with the given number.
+///
+/// Assumes that the given index is less than the number of trigger types.
+Trigger & create(size_t, char const * const name, bool set);
+
+/// Creates an event of the type with the given type name.
+///
+/// \Throws _wexception if there is no event type with the given name.
+Trigger & create (char const * type_name, char const * name = "", bool set = false);
+
+	struct Type_Descr {
+	char const * const id;       /// The identifier that is written to files.
+	std::string  const name;     /// Descriptive name for the user (localized).
+	std::string  const helptext; /// Help text for the user (localized).
 };
 
-/// Returns the correct descriptions, ids and creates the correct option dialog
-/// and (of course) trigger for each trigger-id.
-namespace Trigger_Factory {
-Trigger * get_correct_trigger(const char * id);
-Trigger * make_trigger_with_option_dialog
-	(const char * id, Editor_Interactive &, Trigger *);
-size_t get_nr_of_available_triggers();
-Trigger_Descr * get_trigger_descr(uint32_t);
+/// \Returns the description of the trigger type with the given index. The return
+/// value is a reference to an item in the static array of trigger type
+/// descriptions.
+///
+/// Assumes that the given index is less than the number of event types.
+Type_Descr const & type_descr(size_t);
+
+/// \Returns the number of trigger types, which is a compile-time constant.
+size_t nr_trigger_types();
 };
 
 };

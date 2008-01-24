@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,31 +17,34 @@
  *
  */
 
+#ifndef TRIGGER_PLAYER_AREA_H
+#define TRIGGER_PLAYER_AREA_H
+
+#include "player_area.h"
 #include "trigger.h"
 
-#include "filesystem.h"
-#include "game.h"
-#include "map.h"
-#include "trigger_referencer.h"
+struct Trigger_Building_Option_Menu;
 
 namespace Widelands {
 
 /*
- * Trigger himself
+ * For documentation see the description in editor or trigger_factory.cc
+ * or see trigger.h
  */
-/*
- * reference or unrefereence this Trigger
- */
-void Trigger::reference(TriggerReferencer* ref) {
-	++m_referencers[ref];
-}
-void Trigger::unreference(TriggerReferencer* ref) {
-   std::map<TriggerReferencer*, uint32_t>::iterator cur = m_referencers.find(ref);
-	if (cur != m_referencers.end()) {
-        cur->second--;
-		if (cur->second == 0)
-           m_referencers.erase(cur);
-	}
-}
+struct Trigger_Player_Area : public Trigger {
+	friend struct ::Trigger_Building_Option_Menu;
+	Trigger_Player_Area(char const * Name, bool set);
+
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &) const;
+
+	typedef uint16_t Count_Type;
+
+protected:
+	Player_Area<Area<FCoords> > m_player_area;
+	Count_Type m_count;
+};
 
 };
+
+#endif

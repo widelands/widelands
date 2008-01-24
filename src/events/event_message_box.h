@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #define __S__EVENT_MESSAGEBOX_H
 
 #include "event.h"
-#include "trigger/trigger_referencer.h"
 
 #include <vector>
 
@@ -29,29 +28,25 @@ namespace UI {struct Panel;};
 
 namespace Widelands {
 
+struct Trigger;
 class Trigger_Null;
 class Editor_Game_Base;
 
 /*
  * This event shows a message box
  */
-struct Event_Message_Box : public Event, public TriggerReferencer {
-     Event_Message_Box();
+struct Event_Message_Box : public Event, public Referencer<Trigger> {
+	Event_Message_Box(char const * const Name, State);
       ~Event_Message_Box();
 
-      // For trigger referenecer
-	const char * get_type() const {return "Event:MessageBox";}
-	const std::string & name() const {return Event::name();}
+	std::string identifier() const {return "Event (message box): " + name();}
 
-      // one liner functions
-	const char * get_id() const {return "message_box";}
+	int32_t option_menu(Editor_Interactive &);
 
       State run(Game*);
-      virtual void reinitialize(Game*);
 
-      // File Functions
-	void Write(Section &, const Editor_Game_Base &) const;
-      void Read(Section*, Editor_Game_Base*);
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &) const;
 
 	void set_text(const char * str) {m_text = str;}
 	const char * get_text() const {return m_text.c_str();}
@@ -65,7 +60,7 @@ struct Event_Message_Box : public Event, public TriggerReferencer {
 	void set_dimensions(int32_t w, int32_t h) {m_width = w; m_height = h;}
 	int32_t get_w() const {return m_width;}
 	int32_t get_h() const {return m_height;}
-      void set_button_trigger(int32_t i, Trigger_Null* t);
+	void set_button_trigger(uint8_t button_number, Trigger_Null *);
       Trigger_Null* get_button_trigger(int32_t i);
       void set_button_name(int32_t i, std::string);
       const char* get_button_name(int32_t i);

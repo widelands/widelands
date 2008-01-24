@@ -21,6 +21,7 @@
 #define STREAMREAD_H
 
 #include "machdep.h"
+#include "wexception.h"
 
 #include <string>
 
@@ -69,7 +70,7 @@ struct StreamRead {
 	/// a newline or EndOfFile is encountered. All read characters are consumed.
 	/// Any carriage return and the final newline are not copied.
 	///
-	/// \throws Null_In_Line if a null is encountered. Since the null has been
+	/// \throws null_in_line if a null is encountered. Since the null has been
 	/// copied, buffer will point to a null-terminated string.
 	///
 	/// \throws Buffer_Overflow if the line would reach buffer_end. Before
@@ -82,18 +83,13 @@ struct StreamRead {
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.
-	struct Data_Error {
-		virtual ~Data_Error() {}
-
-		/// Composes and returns an error message, which is at least 1 complete
-		/// sentence.
-		virtual std::string message() const = 0;
+	struct _data_error : public _wexception {
+		_data_error(char const * const fmt, ...) throw () PRINTF_FORMAT(2, 3);
 	};
+#define data_error(...) _data_error(__VA_ARGS__)
 
-	struct Null_In_Line : public Data_Error {
-		virtual std::string message() const {
-			return "The line contains a null character.";
-		}
+	struct null_in_line : public _data_error {
+		null_in_line() : data_error("the line contains a null character") {}
 	};
 	struct Buffer_Overflow {};
 

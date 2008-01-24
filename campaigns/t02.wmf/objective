@@ -6,7 +6,6 @@ descr=_""<rt>"
 _"<p>Build military buildings (like Sentries and Strongholds) to expand your territory. Get to the rocks north-east from you and build a Quarry there.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Mission Quarry
 
 [Build Mines]
@@ -14,7 +13,6 @@ descr=_""<rt>"
 _"<p>When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Mission Mines
 
 [Begin the Hunt]
@@ -22,7 +20,6 @@ descr=_""<rt>
 _"<p>In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Hunt Began
 
 [Build a Tavern]
@@ -30,7 +27,6 @@ descr=_""<rt>"
 _"<p>In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Built Tavern
 
 [Begin Farming]
@@ -38,7 +34,6 @@ descr=_""<rt>"
 _"<p>Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source. Build a well, a farm and a bakery.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Farming Began
 
 [Refine Ores]
@@ -46,7 +41,6 @@ descr=_""<rt>"
 _"<p>The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the coalearth from your coalmines must be refined into coal - for that, build a Coal Burner.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Refining Began
 
 [Enhance Buildings]
@@ -54,7 +48,6 @@ descr=_""<rt>"
 _"<p>A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It is up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Enhance Buildings
 
 [Better Material I]
@@ -62,7 +55,6 @@ descr=_""<rt>"
 _"<p>Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a Woodhardener first. Always remember to build a Woodhardener before you run out of blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Built Hardener
 
 [Better Material II]
@@ -70,7 +62,6 @@ descr=_""<rt>"
 _"<p>Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a Stonegrinder. You can obtain water by building a Well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu.<br>Build a Stonegrinder and a Well.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Mission Grindstone
 
 [Better Material III]
@@ -78,5 +69,4 @@ descr=_""<rt>"
 _"<p>The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
 "</rt>""
 visible=false
-optional=false
 trigger=Mission Fernery

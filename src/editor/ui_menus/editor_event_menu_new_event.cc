@@ -25,7 +25,6 @@
 #include "events/event_factory.h"
 #include "i18n.h"
 #include "map.h"
-#include "map_event_manager.h"
 
 #include "ui_button.h"
 #include "ui_listselect.h"
@@ -53,15 +52,13 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
 
    // Event List
    new UI::Textarea(this, spacing, offsy, _("Available Events: "), Align_Left);
-	m_event_list=new UI::Listselect<Widelands::Event_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
-   m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
-   m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
+	m_event_type_list=new UI::BaseListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   m_event_type_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
+   m_event_type_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
 
-   for (uint32_t i = 0; i < get_nr_of_available_events(); ++i) {
-		Widelands::Event_Descr & d = *get_event_descr(i);
-		m_event_list->add(_(d.name).c_str(), d);
-	}
-   m_event_list->sort();
+   for (uint32_t i = 0; i < nr_event_types(); ++i)
+		m_event_type_list->add(_(type_descr(i).name).c_str(), i);
+   m_event_type_list->sort();
 
    // Descr List
    new UI::Textarea(this, (get_inner_w()/2)+spacing, offsy, _("Description: "), Align_Left);
@@ -110,21 +107,21 @@ bool Editor_Event_Menu_New_Event::handle_mouserelease(const Uint8, int32_t, int3
  * a button has been clicked
  */
 void Editor_Event_Menu_New_Event::clicked_ok() {
-	if
-		(Widelands::Event * const event =
-		 make_event_with_option_dialog
-		 (m_event_list->get_selected().id.c_str(), eia(), 0))
-	{
-		eia().egbase().map().get_mem().register_new_event(event);
+	assert(m_event_type_list->has_selection());
+	Widelands::Event & event = create(m_event_type_list->get_selected());
+	if (event.option_menu(eia())) {
+		eia().egbase().map().mem().register_new(event);
 		end_modal(1);
-	}
+	} else
+		delete &event;
 }
 
 /*
  * the listbox got selected
  */
 void Editor_Event_Menu_New_Event::selected(uint32_t) {
-	m_description->set_text(i18n::translate(m_event_list->get_selected().descr));
+	m_description->set_text
+		(_(type_descr(m_event_type_list->get_selected()).helptext));
    m_ok_button->set_enabled(true);
 }
 

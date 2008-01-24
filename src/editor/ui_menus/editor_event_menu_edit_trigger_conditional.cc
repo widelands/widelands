@@ -23,7 +23,6 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "map.h"
-#include "map_trigger_manager.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
@@ -32,7 +31,6 @@
 #include "trigger/trigger.h"
 #include "trigger/trigger_conditional.h"
 
-using Widelands::MapTriggerManager;
 using Widelands::TriggerConditional;
 
 inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
@@ -185,11 +183,11 @@ m_event_chain(chain)
    m_trigger_list=new UI::Listselect<Widelands::Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
-	const MapTriggerManager & mtm = parent.egbase().map().get_mtm();
-	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
-	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
-		Widelands::Trigger & tr = mtm.get_trigger_by_nr(i);
-		m_trigger_list->add(tr.get_name(), tr);
+	Manager<Widelands::Trigger> & mtm = parent.egbase().map().mtm();
+	Manager<Widelands::Trigger>::Index const nr_triggers = mtm.size();
+	for (Manager<Widelands::Trigger>::Index i = 0; i < nr_triggers; ++i) {
+		Widelands::Trigger & trigger = mtm[i];
+		m_trigger_list->add(trigger.name().c_str(), trigger);
 	}
    m_trigger_list->sort();
 
@@ -228,7 +226,7 @@ m_event_chain(chain)
 			assert(t.token <= Widelands::TriggerConditional_Factory::TRIGGER);
 			m_construction->add
 				(t.token == Widelands::TriggerConditional_Factory::TRIGGER ?
-				 t.data->get_name()
+				 t.data->name().c_str()
 				 :
 				 Widelands::TriggerConditional_Factory::operators[t.token],
 				 t,
@@ -301,7 +299,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_operator
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger() {
 	Widelands::Trigger & trigger = m_trigger_list->get_selected();
 	m_construction->add
-		(trigger.get_name(),
+		(trigger.name().c_str(),
 		 *new Widelands::TriggerConditional_Factory::Token
 		 (Widelands::TriggerConditional_Factory::TRIGGER, &trigger),
 		 -1,

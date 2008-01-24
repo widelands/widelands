@@ -127,7 +127,7 @@ TriggerConditional & TriggerConditional_Factory::create_from_postfix
 			break;
 		case TRIGGER: {
 			Trigger & trigger = *it->data;
-			trigger.reference(&evchain);
+			trigger.reference(evchain);
 			stk.push_back(new TriggerConditional_Var (trigger));
 		}
 			break;
@@ -143,18 +143,18 @@ TriggerConditional & TriggerConditional_Factory::create_from_postfix
  */
 
 /*
- * TriggerConditional_OneArg
+ * TriggerConditional_Unary
  */
-TriggerConditional_OneArg::TriggerConditional_OneArg
+TriggerConditional_Unary ::TriggerConditional_Unary
 	(TriggerConditional & cond)
 	: m_conditional(cond)
 {}
-TriggerConditional_OneArg::~TriggerConditional_OneArg() {
+TriggerConditional_Unary ::~TriggerConditional_Unary () {
 	delete &m_conditional;
 }
 
 
-void TriggerConditional_OneArg::get_infix_tokenlist
+void TriggerConditional_Unary ::get_infix_tokenlist
 	(TriggerConditional::token_vector           & result,
 	 TriggerConditional_Factory::TokenNames const outer_precedence)
 	const
@@ -167,13 +167,15 @@ void TriggerConditional_OneArg::get_infix_tokenlist
 	if (parentheses)
 		result.push_back(TriggerConditional_Factory::RPAREN);
 }
-void TriggerConditional_OneArg::unreference_triggers(EventChain & evch) const {
+void TriggerConditional_Unary ::unreference_triggers
+	(EventChain const & evch) const
+{
 	m_conditional.unreference_triggers(evch);
 }
-void TriggerConditional_OneArg::reset_triggers      (Game       & game) const {
+void TriggerConditional_Unary ::reset_triggers      (Game const & game) const {
 	m_conditional.reset_triggers      (game);
 }
-bool TriggerConditional_OneArg::eval                (Game       & game) const {
+bool TriggerConditional_Unary ::eval                (Game const & game) const {
 	return do_eval(m_conditional.eval (game));
 }
 
@@ -193,30 +195,32 @@ void TriggerConditional_Var ::get_infix_tokenlist
 		(TriggerConditional_Factory::Token
 		 (TriggerConditional_Factory::TRIGGER, &m_trigger));
 }
-void TriggerConditional_Var  ::unreference_triggers(EventChain & evch) const {
-	m_trigger.unreference         (&evch);
+void TriggerConditional_Var   ::unreference_triggers
+	(EventChain const & evch) const
+{
+	m_trigger.unreference         (evch);
 }
-void TriggerConditional_Var  ::reset_triggers      (Game       & game) const {
-	m_trigger.reset_trigger       (&game);
+void TriggerConditional_Var   ::reset_triggers      (Game const & game) const {
+	m_trigger.reset_trigger       (game);
 }
-bool TriggerConditional_Var  ::eval                (Game       & game) const {
-   m_trigger.check_set_conditions(&game);
+bool TriggerConditional_Var   ::eval                (Game const & game) const {
+   m_trigger.check_set_conditions(game);
    return m_trigger.is_set();
 }
 
 
 /*
- * TriggerConditional_TwoArg
+ * TriggerConditional_Binary
  */
-TriggerConditional_TwoArg::TriggerConditional_TwoArg
+TriggerConditional_Binary::TriggerConditional_Binary
 	(TriggerConditional & l, TriggerConditional & r)
 	: m_lconditional(l), m_rconditional(r)
 {}
-TriggerConditional_TwoArg::~TriggerConditional_TwoArg() {
+TriggerConditional_Binary::~TriggerConditional_Binary() {
 	delete &m_lconditional;
 	delete &m_rconditional;
 }
-void TriggerConditional_TwoArg::get_infix_tokenlist
+void TriggerConditional_Binary::get_infix_tokenlist
 	(TriggerConditional::token_vector           & result,
 	 TriggerConditional_Factory::TokenNames const outer_precedence)
 	const
@@ -230,15 +234,17 @@ void TriggerConditional_TwoArg::get_infix_tokenlist
 	if (parentheses)
 		result.push_back(TriggerConditional_Factory::RPAREN);
 }
-void TriggerConditional_TwoArg::unreference_triggers(EventChain & evch) const {
+void TriggerConditional_Binary::unreference_triggers
+	(EventChain const & evch) const
+{
 	m_lconditional.unreference_triggers(evch);
 	m_rconditional.unreference_triggers(evch);
 }
-void TriggerConditional_TwoArg::reset_triggers      (Game       & game) const {
+void TriggerConditional_Binary::reset_triggers      (Game const & game) const {
 	m_lconditional.reset_triggers      (game);
 	m_rconditional.reset_triggers      (game);
 }
-bool TriggerConditional_TwoArg::eval                (Game       & game) const {
+bool TriggerConditional_Binary::eval                (Game const & game) const {
 	return do_eval(m_lconditional.eval(game), m_rconditional.eval(game));
 }
 
@@ -246,28 +252,28 @@ bool TriggerConditional_TwoArg::eval                (Game       & game) const {
  * The effective Trigger Conditionals
  */
 TriggerAND::TriggerAND(TriggerConditional & l, TriggerConditional & r)
-  : TriggerConditional_TwoArg(l, r)
+  : TriggerConditional_Binary(l, r)
 {}
 bool TriggerAND::do_eval(bool const t1, bool const t2) const {
 	return t1 && t2;
 }
 
 TriggerOR::TriggerOR (TriggerConditional & l, TriggerConditional & r)
-  : TriggerConditional_TwoArg(l, r)
+  : TriggerConditional_Binary(l, r)
 {}
 bool TriggerOR ::do_eval(bool const t1, bool const t2) const {
 	return t1 || t2;
 }
 
 TriggerXOR::TriggerXOR(TriggerConditional & l, TriggerConditional & r)
-  : TriggerConditional_TwoArg(l, r)
+  : TriggerConditional_Binary(l, r)
 {}
 bool TriggerXOR::do_eval(bool const t1, bool const t2) const {
 	return t1 && !t2 || !t1 && t2;
 }
 
 TriggerNOT::TriggerNOT(TriggerConditional & cond)
-	: TriggerConditional_OneArg(cond)
+	: TriggerConditional_Unary (cond)
 {}
 bool TriggerNOT::do_eval(bool const t) const {
 	return !t;

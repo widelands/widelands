@@ -72,11 +72,11 @@ throw (_wexception)
          // PlayerImmovable
 
 			try {flag->m_position = fr.Coords32(extent);}
-			catch (const FileRead::Data_Error & e) {
+			catch (_wexception const & e) {
 				throw wexception
 					("Map_Flagdata_Data_Packet::Read: in binary/flag_data:%u: "
 					 "Coordinates of flag %u: %s",
-					 fr.GetPos() - 4, ser, e.message().c_str());
+					 fr.GetPos() - 4, ser, e.what());
 			}
          flag->m_animstart=fr.Unsigned16();
          int32_t building=fr.Unsigned32();

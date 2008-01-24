@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,20 +17,18 @@
  *
  */
 
-#include "event_referencer.h"
+#ifndef REFERENCER_H
+#define REFERENCER_H
 
-#include "event.h"
+#include <string>
 
-namespace Widelands {
-
-/*
- * Reference a event
- */
-void EventReferencer::reference_event(Event* tr) {
-   tr->reference(this);
-}
-void EventReferencer::unreference_event(Event* tr) {
-   tr->unreference(this);
-}
-
+/// A template for types that reference objects of type Referenced. It is
+/// identifiable so that it is possible to tell what is referencing something.
+template<typename Referenced> struct Referencer {
+	virtual ~Referencer() {}
+	virtual std::string identifier() const = 0;
+	void   reference(Referenced & item) {item.  reference(*this);}
+	void unreference(Referenced & item) {item.unreference(*this);}
 };
+
+#endif

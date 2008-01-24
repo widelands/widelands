@@ -23,9 +23,9 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-namespace Widelands {struct Trigger_Descr;};
+namespace Widelands {namespace Trigger_Factory {struct Type_Descr;};};
 namespace UI {
-template <typename T> struct Listselect;
+struct BaseListselect;
 struct Multiline_Textarea;
 template <typename T> struct Button;
 };
@@ -46,7 +46,7 @@ private:
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 
-	UI::Listselect<Widelands::Trigger_Descr &> * m_trigger_list;
+	UI::BaseListselect * m_trigger_type_list;
       UI::Multiline_Textarea* m_description;
 	UI::Button<Editor_Event_Menu_New_Trigger> * m_ok_button;
 };

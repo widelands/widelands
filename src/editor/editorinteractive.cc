@@ -166,20 +166,20 @@ void Editor_Interactive::load(std::string const & filename) {
 	// Player positions
 	std::string text;
 	Widelands::Player_Number const nr_players = map.get_nrplayers();
-	iterate_player_numbers(p, nr_players)
+	assert(nr_players <= 99); //  2 decimal digits
+	char fname[] ="pics/editor_player_00_starting_pos.png";
+	iterate_player_numbers(p, nr_players) {
+		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p))
 			//  Have overlay on starting position only when it has no building.
 			if (not dynamic_cast<const Building *>(map[sp].get_immovable())) {
-				assert(p <= 99); //  2 decimal digits
-				char picname[] ="pics/editor_player_00_starting_pos.png";
-				picname[19] += p / 10;
-				picname[20] += p % 10;
-				const uint32_t picid = g_gr->get_picture(PicMod_Game, picname);
+				uint32_t const picid = g_gr->get_picture(PicMod_Game, fname);
 				uint32_t w, h;
 				g_gr->get_picture_size(picid, w, h);
 				map.overlay_manager().register_overlay
 					(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
 			}
+	}
 
 	//  Resources. we do not calculate default resources, therefore we do not
 	//  expect to meet them here.

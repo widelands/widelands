@@ -17,12 +17,11 @@
  *
  */
 
-#ifndef __S__OBJECTIVE_MANAGER_H
-#define __S__OBJECTIVE_MANAGER_H
+#ifndef OBJECTIVE_H
+#define OBJECTIVE_H
 
 #include "i18n.h"
 #include "trigger/trigger.h"
-#include "trigger/trigger_referencer.h"
 
 #include <cassert>
 #include <string>
@@ -32,8 +31,7 @@ namespace Widelands {
 /// The Map Objective manager keeps all objectives in order.
 ///
 /// A Map (or scenario) objective is a objectives that has to be fulfilled to
-/// end a scenario successfully. Optional objectives are available, which
-/// usually do not need to be fulfilled.
+/// end a scenario successfully.
 /// Each objectives has a trigger assigned to it, which is used to check the
 /// objective's condition.
 /// But note, the objectives itself doesn't check it's conditions, the map
@@ -41,31 +39,21 @@ namespace Widelands {
 ///
 /// Usually, the win trigger is only set, when all of the objectives triggers
 /// are going up.
-///
-/// Also note, that each game has objectives. These might be in a network game
-/// something like "Crush you enemy" or "Have the most points at the end of the
-/// game". Depending on choosen game type.
-struct MapObjective : public TriggerReferencer {
-	MapObjective()
+struct Objective : public Named, public Referencer<Trigger> {
+	Objective()
 		:
-		m_descr      (_("no descr")),
-		m_trigger    (0),
-		m_is_visible (true),
-		m_is_optional(false)
+		m_descr     (_("no descr")),
+		m_trigger   (0),
+		m_is_visible(true)
 	{}
-	virtual ~MapObjective() {if (m_trigger) unreference_trigger(m_trigger);}
+	virtual ~Objective() {if (m_trigger) unreference(*m_trigger);}
 
+	std::string identifier() const {return "Objective: " + name();}
 
-	const std::string & name()  const throw ()    {return m_name;}
-	void set_name(const std::string & new_name)   {m_name = new_name;}
 	const std::string & descr() const throw ()    {return m_descr;}
 	void set_descr(const std::string & new_descr) {m_descr = new_descr;}
 	bool get_is_visible()       const throw ()    {return m_is_visible;}
 	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
-	bool get_is_optional()      const throw ()    {return m_is_optional;}
-
-      // For trigger referncer
-	const char * get_type() const {return "Map Objective";}
 
       // Get the trigger that is attached to this
       // Trigger is created by Editor or on load
@@ -75,49 +63,14 @@ struct MapObjective : public TriggerReferencer {
 	void set_trigger(Trigger * const tr) {
          assert(!m_trigger);
 		if (tr)
-            reference_trigger(tr);
-         m_trigger = tr;
+			reference(*tr);
+		m_trigger = tr;
 	}
-	void set_is_optional(const bool t) {m_is_optional = t;}
 
 private:
-	std::string m_name;
 	std::string m_descr;
 	Trigger *   m_trigger;
 	bool        m_is_visible;
-	bool        m_is_optional;
-};
-
-/*
- * The manager himself.
- * This is mainly a wrapper, the function
- * could have also been implemented directly in the map.
- *
- * But it is better this way.
- */
-struct MapObjectiveManager {
-      MapObjectiveManager();
-      ~MapObjectiveManager();
-
-      /*
-       * Register a new objective
-       */
-      bool register_new_objective(MapObjective*);
-
-      /*
-       * Get a objective
-       */
-	MapObjective * get_objective(const char * const name) const;
-	void delete_objective(const std::string & name);
-
-	typedef std::vector<MapObjective *> objective_vector;
-	typedef objective_vector::size_type Index;
-	Index get_nr_objectives() const {return m_objectives.size();}
-	MapObjective & get_objective_by_nr(const Index i) const
-	{assert(i < m_objectives.size()); return *m_objectives[i];}
-
-private:
-	objective_vector m_objectives;
 };
 
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,45 +21,44 @@
 
 #include "filesystem.h"
 #include "game.h"
-#include "i18n.h"
 #include "profile.h"
 #include "wexception.h"
 
+#define TRIGGER_VERSION 1
+
 namespace Widelands {
 
-static const int32_t TRIGGER_VERSION = 1;
-
-/*
- * Init and cleanup
- */
-Trigger_Time::Trigger_Time()
-: Trigger(_("Time Trigger")), m_wait_time(60), m_last_start_time(0)
+Trigger_Time::Trigger_Time(char const * const Name, bool const set)
+: Trigger(Name, set), m_wait_time(60), m_last_start_time(0)
  // defaults to one minute
-{set_trigger(false);}
+{}
 
 
-void Trigger_Time::Read(Section* s, Editor_Game_Base*) {
-	const int32_t packet_version= s->get_safe_int("version");
-	if (packet_version == TRIGGER_VERSION) {
-      m_wait_time = s->get_safe_int("wait_time");
-      m_last_start_time = s->get_safe_int("last_start_time");
-	} else
-		throw wexception
-		("Time Trigger with unknown/unhandled version %i in map!",
-		 packet_version);
+void Trigger_Time::Read(Section & s, Editor_Game_Base &) {
+	try {
+		int32_t const packet_version= s.get_safe_int("version");
+		if (packet_version == TRIGGER_VERSION) {
+			m_wait_time       = s.get_safe_int("wait_time");
+			m_last_start_time = s.get_safe_int("last_start_time");
+		} else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (std::exception const & e) {
+		throw wexception("(time): %s", e.what());
+	}
 }
 
 void Trigger_Time::Write(Section & s) const {
-	s.set_int("version",         TRIGGER_VERSION);
-	s.set_int("wait_time",       m_wait_time);
-	s.set_int("last_start_time", m_last_start_time);
+	s.set_string("type",            "time");
+	s.set_int   ("version",         TRIGGER_VERSION);
+	s.set_int   ("wait_time",       m_wait_time);
+	s.set_int   ("last_start_time", m_last_start_time);
 }
 
 /*
  * check if trigger conditions are done
  */
-void Trigger_Time::check_set_conditions(Game* game) {
-	if ((game->get_gametime() - m_last_start_time) / 1000 < m_wait_time)
+void Trigger_Time::check_set_conditions(Game const & game) {
+	if ((game.get_gametime() - m_last_start_time) / 1000 < m_wait_time)
 		return;
 
    // Time has come. Set us
@@ -69,11 +68,11 @@ void Trigger_Time::check_set_conditions(Game* game) {
 /*
  * Reset this trigger. This is only valid for non one timers
  */
-void Trigger_Time::reset_trigger(Game* game) {
+void Trigger_Time::reset_trigger       (Game const & game) {
    // save new start time
    // NOTE: if it took a while for an event to note us,
    // this time the trigger wasn't counting
-   m_last_start_time=game->get_gametime();
+	m_last_start_time = game.get_gametime();
 
    set_trigger(false);
 }

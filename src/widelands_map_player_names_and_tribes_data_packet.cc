@@ -90,15 +90,15 @@ throw (_wexception)
    // packet version
    s->set_int("packet_version", CURRENT_PACKET_VERSION);
 
-   Map* map=egbase->get_map();
+   Map const & map = egbase->map();
    std::string name, tribe;
-	const Player_Number nr_players = map->get_nrplayers();
+	Player_Number const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
 		s = prof.create_section(buffer);
-		s->set_string("name",  map->get_scenario_player_name (p).c_str());
-		s->set_string("tribe", map->get_scenario_player_tribe(p).c_str());
+		s->set_string("name",  map.get_scenario_player_name (p));
+		s->set_string("tribe", map.get_scenario_player_tribe(p));
 	}
 
    prof.write("player_names", false, fs);

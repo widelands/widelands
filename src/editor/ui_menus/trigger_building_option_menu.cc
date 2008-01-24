@@ -26,9 +26,16 @@
 #include "player.h"
 #include "tribe.h"
 
+#include "ui_modal_messagebox.h"
+
 #include <stdio.h>
 
 using Widelands::Trigger_Building;
+
+int32_t Trigger_Building::option_menu(Editor_Interactive & eia) {
+	Trigger_Building_Option_Menu m(eia, *this); return m.run();
+}
+
 
 inline Editor_Interactive & Trigger_Building_Option_Menu::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -331,7 +338,7 @@ m_button_cancel
 		m_increment_player.set_enabled(has_several_players);
 	}
 
-	m_name.set_text(trigger.get_name());
+	m_name.set_text(trigger.name().c_str());
 
 	set_inner_size
 		(get_inner_w(), m_button_ok.get_y() + m_button_ok.get_h() + spacing);
@@ -514,7 +521,27 @@ void Trigger_Building_Option_Menu::clicked_decrement_radius() {
 
 
 void Trigger_Building_Option_Menu::clicked_ok() {
-	if (m_name.get_text()) m_trigger.set_name(m_name.get_text());
+	if (char const * const name = m_name.get_text()) {
+		if
+			(Widelands::Trigger * const registered_trigger =
+			 eia().egbase().map().mtm()[name])
+			if (registered_trigger != & m_trigger) {
+				char buffer[256];
+				snprintf
+					(buffer, sizeof(buffer),
+					 _("There is another trigger registered with the name \"%s\". "
+					   "Choose another name.")
+					 .c_str(),
+					 name);
+				UI::Modal_Message_Box mb
+					(get_parent(),
+					 _("Name in use"), buffer,
+					 UI::Modal_Message_Box::OK);
+				mb.run();
+				return;
+			}
+		m_trigger.set_name(name);
+	}
 	Widelands::Player_Number const trigger_player_number =
 		m_trigger.m_player_area.player_number;
 	if (trigger_player_number != m_player_area.player_number) {
@@ -534,7 +561,7 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 		(egbase.get_tribe
 		 (map.get_scenario_player_tribe(m_player_area.player_number).c_str())
 		 ->get_building_descr(m_building)->name().c_str());
-	m_trigger.set_building_count(m_count);
+	m_trigger.m_count = m_count;
 	eia().set_need_save(true);
 	end_modal(1);
 }

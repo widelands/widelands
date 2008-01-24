@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 
 #include "event.h"
 #include "trigger/trigger_null.h"
-#include "trigger/trigger_referencer.h"
 
 namespace Widelands {
 
@@ -31,34 +30,31 @@ class Editor_Game_Base;
 /*
  * This event is able to set a null trigger to a certain state
  */
-struct Event_Set_Null_Trigger : public Event, public TriggerReferencer {
-     Event_Set_Null_Trigger();
-      ~Event_Set_Null_Trigger();
+struct Event_Set_Null_Trigger : public Event, public Referencer<Trigger> {
+	Event_Set_Null_Trigger(char const * name, State);
+	~Event_Set_Null_Trigger();
 
-      // one liner functions
-	const char * get_id() const {return "set_null_trigger";}
+	std::string identifier() const {
+		return "Event (set null trigger): " + name();
+	}
+
+	int32_t option_menu(Editor_Interactive &);
 
       State run(Game*);
-      virtual void reinitialize(Game*);
 
-      // File Functions
-	void Write(Section &, const Editor_Game_Base &) const;
-	void Read (Section *,       Editor_Game_Base *);
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &) const;
 
-	void set_trigger(Trigger_Null * trig) {
-		if (m_trigger)
-			 unreference_trigger(m_trigger);
-		if (trig)
-			 reference_trigger(trig);
-		 m_trigger = trig;
+	void set_trigger(Trigger_Null * const new_trigger) {
+		if (new_trigger != m_trigger) {
+			if   (m_trigger) Referencer<Trigger>::unreference  (*m_trigger);
+			if (new_trigger) Referencer<Trigger>::  reference(*new_trigger);
+			m_trigger = new_trigger;
+		}
 	}
 	Trigger_Null * get_trigger() const {return m_trigger;}
 	void set_setto(bool t) {m_setto = t;}
 	bool get_setto() const {return m_setto;}
-
-      // For Trigger referencer
-	const std::string & name() const {return Event::name();}
-	const char* get_type() const {return "Event Set Null Trigger";}
 
 private:
       Trigger_Null* m_trigger;

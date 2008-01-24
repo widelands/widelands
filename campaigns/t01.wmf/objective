@@ -6,7 +6,6 @@ descr=_ ""<rt><p>"
 _"- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- build a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack.<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
 "</p></rt>""
 visible=false
-optional=false
 trigger=Built Lumberjack 1
 
 [Build Lumberjack 2]
@@ -14,7 +13,6 @@ descr=_ ""<rt><p>"
 _"- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 "</p></rt>""
 visible=false
-optional=false
 trigger=Built Lumberjack 2
 
 [Build Ranger]
@@ -22,7 +20,6 @@ descr=_ ""<rt><p>"
 _"- Build a Ranger's Hut to the east of the Lumberjack."
 "</p></rt>""
 visible=false
-optional=false
 trigger=Built Ranger
 
 [Build Quarries]
@@ -30,5 +27,4 @@ descr=_ ""<rt><p>"
 _"- Build two Quarries south-west of your headquarters."
 "</p></rt>""
 visible=false
-optional=false
 trigger=Built Quarries

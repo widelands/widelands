@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,17 +29,15 @@ namespace Widelands {
  * or see trigger.h
  */
 struct Trigger_Null : public Trigger {
-      Trigger_Null();
+	Trigger_Null(char const * Name, bool set = false);
 
-      // one liner functions
-	const char * get_id() const {return "null";}
+	int32_t option_menu(Editor_Interactive &);
 
-      void check_set_conditions(Game*);
-      void reset_trigger(Game*);
+	void check_set_conditions(Game const &);
+	void reset_trigger       (Game const &);
 
-      // File Functions
+	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &) const;
-      void Read(Section*, Editor_Game_Base*);
 
       void set_trigger_manually(bool t) {m_should_toggle=true; m_value=t;}
 

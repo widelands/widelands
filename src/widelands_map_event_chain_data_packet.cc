@@ -23,9 +23,6 @@
 #include "events/event.h"
 #include "events/event_chain.h"
 #include "map.h"
-#include "map_event_manager.h"
-#include "map_eventchain_manager.h"
-#include "map_trigger_manager.h"
 #include "profile.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_conditional.h"
@@ -53,123 +50,126 @@ throw (_wexception)
 	if (!fr.TryOpen(fs, "event_chain"))
       return;
 
+	Map                 & map = egbase->map();
+	Manager<EventChain> & mcm = map.mcm();
+	Manager<Event>      & mem = map.mem();
+	Manager<Trigger>    & mtm = map.mtm();
    Profile prof;
-   prof.read("event_chain", 0, fs);
-
-	Map & map = egbase->map();
-	int32_t const packet_version =
-		prof.get_section("global")->get_int("packet_version");
-	if (1 <= packet_version  and packet_version <= CURRENT_PACKET_VERSION)
-		while (Section * const s = prof.get_next_section(0)) {
-			char const * const name = s->get_name();
-			EventChain & e = *new EventChain();
-
-         // Name
-			e.set_name(name);
+	try {
+		prof.read("event_chain", 0, fs);
+		int32_t const packet_version =
+			prof.get_section("global")->get_int("packet_version");
+		if (1 <= packet_version  and packet_version <= CURRENT_PACKET_VERSION)
+			while (Section * const s = prof.get_next_section(0)) {
+				char const * const name = s->get_name();
+				EventChain & event_chain = *new EventChain(name);
+				try {
+					try {
+						mcm.register_new(event_chain);
+					} catch (Manager<EventChain>::Already_Exists) {
+						throw wexception("duplicated");
+					}
 
          // Repeating
-			e.m_repeating = s->get_safe_bool("repeating");
+					event_chain.m_repeating = s->get_safe_bool("repeating");
 
-			{ //  TriggerConditional
-				TriggerConditional::token_vector toklist;
-				char key[] = "conditional_element_00\0data"; //  tailed string
-				while (char const * const type = s->get_string(key)) {
-					if (not strcmp(type, "trigger")) {
-						key[22] = '_'; //  Enable the "_data" tail of the key string.
-						char const * const trigname = s->get_safe_string(key);
-						key[22] = '\0'; //  Cut off the tail again.
-						if (Trigger * const tr = map.get_mtm().get_trigger(trigname))
-							toklist.push_back
-								(TriggerConditional_Factory::Token
-								 (TriggerConditional_Factory::TRIGGER, tr));
-						else
-							throw wexception
-								("Map_EventChain_Data_Packet::Read: while reading "
-								 "event chain %s: trigger \"%s\" does not exist",
-								 name, trigname);
+					{ //  TriggerConditional
+						TriggerConditional::token_vector toklist;
+						char key[] = "conditional_element_00\0data"; //  tailed
+						while (char const * const type = s->get_string(key)) {
+							if (not strcmp(type, "trigger")) {
+								key[22] = '_'; //  Enable the tail of the key string.
+								char const * const trigname = s->get_safe_string(key);
+								key[22] = '\0'; //  Cut off the tail again.
+								if (Trigger * const tr = mtm[trigname])
+									toklist.push_back
+										(TriggerConditional_Factory::Token
+										 (TriggerConditional_Factory::TRIGGER, tr));
+								else
+									throw wexception
+										("trigger \"%s\" does not exist", trigname);
+							}
+							else {
+								uint8_t i = 0;
+								while
+									(strcmp
+									 (type, TriggerConditional_Factory::operators[i]))
+									if (i++ == TriggerConditional_Factory::TRIGGER)
+										throw wexception
+											("\"%s=%s\": token type \"%s\" is not "
+											 "allowed (must be one of {trigger, ), (, "
+											 "XOR, OR, AND, NOT}",
+											 key, type, type);
+								toklist.push_back
+									(static_cast<TriggerConditional_Factory::TokenNames>
+									 (i));
+							}
+
+							//  Increment the number in the key string.
+							if (key[21] == '9') {
+								key[21] = '0';
+								if (key[20] == '9') //  We are already at number 99!
+									throw wexception
+										("there are too many conditional elements, only "
+										 "99 are allowed");
+								++key[20];
+							} else
+								++key[21];
+						}
+						event_chain.set_trigcond
+							(TriggerConditional_Factory::create_from_infix
+							 (event_chain, toklist));
 					}
-					else {
-						uint8_t i = 0;
-						while
-							(strcmp(type, TriggerConditional_Factory::operators[i]))
-							if (i++ == TriggerConditional_Factory::TRIGGER)
+
+					{ //  Events
+						char key[] = "event_00";
+						while (char const * const evname = s->get_string(key)) {
+							if (Event * const event = mem[evname])
+								event_chain.add_event(event);
+							else
 								throw wexception
-									("Map_EventChain_Data_Packet::Read: while reading "
-									 "event chain %s: \"%s=%s\": token type \"%s\" is "
-									 "not allowed (must be one of {trigger, ), (, XOR, "
-									 "OR, AND, NOT}",
-									 name, key, type, type);
-						toklist.push_back
-							(static_cast<TriggerConditional_Factory::TokenNames>(i));
+									("\"%s=%s\": event \"%s\" does not exist",
+									 key, evname, evname);
+
+							//  Increment the number in the key string.
+							if (key[7] == '9') {
+								key[7] = '0';
+								if (key[6] == '9') //  We are already at number 99!
+									throw wexception
+										("there are too many events, only 99 are "
+										 "allowed");
+								++key[6];
+							} else
+								++key[7];
+						}
 					}
-
-					//  Increment the number in the key string.
-					if (key[21] == '9') {
-						key[21] = '0';
-						if (key[20] == '9') //  We are already at number 99; fail!
-							throw wexception
-								("Map_EventChain_Data_Packet::Read: while reading "
-								 "event chain %s: there are too many conditional "
-								 "elements. Only 100 are allowed",
-							 name);
-						++key[20];
-					} else
-						++key[21];
-				}
-				e.set_trigcond
-					(TriggerConditional_Factory::create_from_infix(e, toklist));
-			}
-
-			{ //  Events
-				char key[] = "event_00";
-				while (char const * const evname = s->get_string(key)) {
-					if (Event * const event = map.get_mem().get_event(evname))
-						e.add_event(event);
-					else
-						throw wexception
-							("Map_EventChain_Data_Packet::Read: while reading event "
-							 "chain %s: \"%s=%s\": event \"%s\" does not exist",
-							 name, key, evname, evname);
-
-					//  Increment the number in the key string.
-					if (key[7] == '9') {
-						key[7] = '0';
-						if (key[6] == '9') //  We are already at number 99; fail!
-							throw wexception
-								("Map_EventChain_Data_Packet::Read: while reading "
-								 "event chain %s: there are too many events. Only 100 "
-								 "are allowed",
-								 name);
-						++key[6];
-					} else
-						++key[7];
-				}
-			}
 
          // Current event
-			e.m_curevent = s->get_safe_int("current_event");
+					event_chain.m_curevent = s->get_safe_int("current_event");
 
-			{ //  state
-				char const * const state = s->get_safe_string("state");
-				if      (not strcmp(state, "init"))
-					e.m_state = EventChain::INIT;
-				else if (not strcmp(state, "running"))
-					e.m_state = EventChain::RUNNING;
-				else if (not strcmp(state, "done"))
-					e.m_state = EventChain::DONE;
-				else
-					throw wexception
-						("Map_EventChain_Data_Packet::Read: while reading "
-						 "event chain %s: state is \"%s\" but must be one of {init, "
-						 "running, done}",
-						 name, state);
+					{ //  state
+						char const * const state = s->get_safe_string("state");
+						if      (not strcmp(state, "init"))
+							event_chain.m_state = EventChain::INIT;
+						else if (not strcmp(state, "running"))
+							event_chain.m_state = EventChain::RUNNING;
+						else if (not strcmp(state, "done"))
+							event_chain.m_state = EventChain::DONE;
+						else
+							throw wexception
+							("state is \"%s\" but must be one of {init (default), "
+							 "running, done}",
+							 state);
+					}
+				} catch (std::exception const & e) {
+					throw wexception("%s: %s", name, e.what());
+				}
 			}
-
-			map.get_mecm().register_new_eventchain(&e);
-		}
-	else
-		throw wexception
-			("Unknown version in Map EventChain Packet: %i", packet_version);
+		else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (std::exception const & e) {
+		throw wexception("EventChains: %s", e.what());
+	}
 }
 
 
@@ -184,18 +184,17 @@ throw (_wexception)
 		("packet_version", CURRENT_PACKET_VERSION);
 
    // Now write all the event chains
-	const MapEventChainManager & mecm = egbase->get_map()->get_mecm();
-	const MapEventChainManager::Index nr_eventchains =
-		mecm.get_nr_eventchains();
-	for (MapEventChainManager::Index i = 0; i < nr_eventchains; ++i) {
-		const EventChain & e = mecm.get_eventchain_by_nr(i);
+	Manager<EventChain> const & mcm = egbase->map().mcm();
+	Manager<EventChain>::Index const nr_eventchains = mcm.size();
+	for (Manager<EventChain>::Index i = 0; i < nr_eventchains; ++i) {
+		EventChain const & e = mcm[i];
 		Section & s = *prof.create_section(e.name().c_str());
 		s.set_bool("repeating", e.m_repeating);
 
 		{ //  TriggerConditional
 			TriggerConditional::token_vector toklist;
 			e.m_trigconditional->get_infix_tokenlist(toklist);
-			assert(toklist.size() <= 99); //  becase we write 2 decimal digits
+			assert(toklist.size() < 99); //  because we write 2 decimal digits
 			char key[] = "conditional_element_00\0data"; //  tailed string
 			TriggerConditional::token_vector::const_iterator const toklist_end =
 				toklist.end();
@@ -209,7 +208,7 @@ throw (_wexception)
 					(key, TriggerConditional_Factory::operators[it->token]);
 				if (it->token == TriggerConditional_Factory::TRIGGER) {
 					key[22] = '_'; //  Enable the "_data" tail of the key string.
-					s.set_string(key, it->data->get_name());
+					s.set_string(key, it->data->name());
 					key[22] = '\0'; //  Cut off the tail again.
 				}
 
@@ -222,7 +221,7 @@ throw (_wexception)
 
 		{ //  Events
 			EventChain::event_vector const & events = e.m_events;
-			assert(events.size() <= 99); //  becase we write 2 decimal digits
+			assert(events.size() < 99); //  becase we write 2 decimal digits
 			char key[] = "event_00";
 			EventChain::event_vector::const_iterator const events_end =
 				events.end();
@@ -232,7 +231,7 @@ throw (_wexception)
 				 it != events_end;
 				 ++it)
 			{
-				s.set_string(key, (*it)->name().c_str());
+				s.set_string(key, (*it)->name());
 
 				//  Increment the number in the key string.
 				if (key[7] == '9') {key[7] = '0'; ++key[6];} else ++key[7];

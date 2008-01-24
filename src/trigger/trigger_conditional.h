@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -90,25 +90,25 @@ struct TriggerConditional {
 		const
 		= 0;
 
-	virtual void unreference_triggers(EventChain  &) const = 0;
-	virtual void reset_triggers      (Game        &) const = 0;
-	virtual bool eval                (Game        &) const = 0;
+	virtual void unreference_triggers(EventChain const &) const = 0;
+	virtual void reset_triggers      (Game       const &) const = 0;
+	virtual bool eval                (Game       const &) const = 0;
 };
 
 /*
  * A trigger conditional which takes only one argument
  */
-struct TriggerConditional_OneArg : public TriggerConditional {
-	TriggerConditional_OneArg(TriggerConditional &);
-	~TriggerConditional_OneArg();
+struct TriggerConditional_Unary  : public TriggerConditional {
+	TriggerConditional_Unary (TriggerConditional &);
+	~TriggerConditional_Unary ();
 
 	void get_infix_tokenlist
 		(token_vector &,
 		 TriggerConditional_Factory::TokenNames outer_precedence)
 		const;
-	void unreference_triggers(EventChain  &) const;
-	void reset_triggers      (Game        &) const;
-	bool eval                (Game        &) const;
+	void unreference_triggers(EventChain const &) const;
+	void reset_triggers      (Game       const &) const;
+	bool eval                (Game       const &) const;
 	virtual bool do_eval(bool) const = 0;
 
 protected:
@@ -124,9 +124,9 @@ struct TriggerConditional_Var  : public TriggerConditional {
 		(token_vector &,
 		 TriggerConditional_Factory::TokenNames outer_precedence)
 		const;
-	void unreference_triggers(EventChain  &) const;
-	void reset_triggers      (Game        &) const;
-	bool eval                (Game        &) const;
+	void unreference_triggers(EventChain const &) const;
+	void reset_triggers      (Game       const &) const;
+	bool eval                (Game       const &) const;
 
 private:
 	Trigger & m_trigger;
@@ -137,17 +137,17 @@ private:
 /*
  * A trigger conditional which takes two arguments
  */
-struct TriggerConditional_TwoArg : public TriggerConditional {
-	TriggerConditional_TwoArg(TriggerConditional &, TriggerConditional &);
-	virtual ~TriggerConditional_TwoArg();
+struct TriggerConditional_Binary : public TriggerConditional {
+	TriggerConditional_Binary(TriggerConditional &, TriggerConditional &);
+	virtual ~TriggerConditional_Binary();
 
 	void get_infix_tokenlist
 		(token_vector &,
 		 TriggerConditional_Factory::TokenNames outer_precedence)
 		const;
-	void unreference_triggers(EventChain  &) const;
-	void reset_triggers      (Game        &) const;
-	bool eval                (Game        &) const;
+	void unreference_triggers(EventChain const &) const;
+	void reset_triggers      (Game       const &) const;
+	bool eval                (Game       const &) const;
 	virtual bool do_eval(bool, bool) const = 0;
 
 protected:
@@ -161,7 +161,7 @@ private:
 /*
  * Now the effective TriggerConditionals
  */
-struct TriggerAND : public TriggerConditional_TwoArg {
+struct TriggerAND : public TriggerConditional_Binary {
 	TriggerAND(TriggerConditional &, TriggerConditional &);
 
 	bool do_eval(bool, bool) const;
@@ -172,7 +172,7 @@ protected:
 	}
 };
 
-struct TriggerOR : public TriggerConditional_TwoArg {
+struct TriggerOR : public TriggerConditional_Binary {
 	TriggerOR(TriggerConditional &, TriggerConditional &);
 
 	bool do_eval(bool, bool) const;
@@ -183,7 +183,7 @@ protected:
 	}
 };
 
-struct TriggerXOR : public TriggerConditional_TwoArg {
+struct TriggerXOR : public TriggerConditional_Binary {
 	TriggerXOR(TriggerConditional &, TriggerConditional &);
 
 	bool do_eval(bool, bool) const;
@@ -194,7 +194,7 @@ protected:
 	}
 };
 
-struct TriggerNOT : public TriggerConditional_OneArg {
+struct TriggerNOT : public TriggerConditional_Unary  {
 	TriggerNOT(TriggerConditional &);
 
 	bool do_eval(bool) const;

@@ -1,12 +1,11 @@
 # event-file of second Empire Tutorial - created by Peter Schwanemann, 2007
 
 [global]
-packet_version=1
+packet_version=2
 
 [Diary page 5]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -14,17 +13,12 @@ _"Finally!<br>This island seems to be made for us, it is a present of the Gods t
 "</p></rt>""
 window_title=_A new islands
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Show forests]
 type=unhide_area
-state=init
 version=2
 point=17 10
 area=6
@@ -33,14 +27,12 @@ duration=5000
 
 [Goto forests]
 type=move_view
-state=init
 version=2
 point=17 10
 
 [Diary page 5.1]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -49,40 +41,31 @@ _"* Build up three lumberjacks, a forester and a sawmill."
 "</p></rt>""
 window_title=_The green forests
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Unhide Objective 1 - Woodeconomy]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Woodeconomy
-dounhide=true
 
 [Set Woodeconomy-trigger]
 # Will be run, when triggers 'Lumberjack complete',
 # 'Forester complete' and 'Sawmill complete' are set.
 type=set_null_trigger
-state=init
 version=1
 trigger=Woodeconomy complete
 setto=true
 
 [Goto stones]
 type=move_view
-state=init
 version=2
 point=14 31
 
 [Diary page 5.2]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -91,24 +74,17 @@ _"* Build a quarry to the south of your headquarters."
 "</p></rt>""
 window_title=_The rocks
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Unhide Objective 2 - Quarry]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Quarry
-dounhide=true
 
 [Disable Building 01]
 type=allow_building
-state=init
 version=1
 player=1
 building=arena
@@ -116,7 +92,6 @@ allow=false
 
 [Disable Building 02]
 type=allow_building
-state=init
 version=1
 player=1
 building=armoursmith
@@ -124,7 +99,6 @@ allow=false
 
 [Disable Building 03]
 type=allow_building
-state=init
 version=1
 player=1
 building=bakery
@@ -132,7 +106,6 @@ allow=false
 
 [Disable Building 04]
 type=allow_building
-state=init
 version=1
 player=1
 building=barracks
@@ -140,7 +113,6 @@ allow=false
 
 [Disable Building 05]
 type=allow_building
-state=init
 version=1
 player=1
 building=barrier
@@ -148,7 +120,6 @@ allow=false
 
 [Disable Building 06]
 type=allow_building
-state=init
 version=1
 player=1
 building=brewery
@@ -156,7 +127,6 @@ allow=false
 
 [Disable Building 07]
 type=allow_building
-state=init
 version=1
 player=1
 building=burner
@@ -164,7 +134,6 @@ allow=false
 
 [Disable Building 08]
 type=allow_building
-state=init
 version=1
 player=1
 building=carpenter
@@ -172,7 +141,6 @@ allow=false
 
 [Disable Building 09]
 type=allow_building
-state=init
 version=1
 player=1
 building=castle
@@ -180,7 +148,6 @@ allow=false
 
 [Disable Building 10]
 type=allow_building
-state=init
 version=1
 player=1
 building=coalmine
@@ -188,7 +155,6 @@ allow=false
 
 [Disable Building 11]
 type=allow_building
-state=init
 version=1
 player=1
 building=colosseum
@@ -196,7 +162,6 @@ allow=false
 
 [Disable Building 12]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_coalmine
@@ -204,7 +169,6 @@ allow=false
 
 [Disable Building 13]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_goldmine
@@ -212,7 +176,6 @@ allow=false
 
 [Disable Building 14]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_oremine
@@ -220,7 +183,6 @@ allow=false
 
 [Disable Building 15]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_marblemine
@@ -228,7 +190,6 @@ allow=false
 
 [Disable Building 16]
 type=allow_building
-state=init
 version=1
 player=1
 building=farm
@@ -236,7 +197,6 @@ allow=false
 
 [Disable Building 17]
 type=allow_building
-state=init
 version=1
 player=1
 building=fisher
@@ -244,7 +204,6 @@ allow=false
 
 [Disable Building 19]
 type=allow_building
-state=init
 version=1
 player=1
 building=fortress
@@ -252,7 +211,6 @@ allow=false
 
 [Disable Building 20]
 type=allow_building
-state=init
 version=1
 player=1
 building=goldmine
@@ -260,7 +218,6 @@ allow=false
 
 [Disable Building 21]
 type=allow_building
-state=init
 version=1
 player=1
 building=hunter
@@ -268,7 +225,6 @@ allow=false
 
 [Disable Building 22]
 type=allow_building
-state=init
 version=1
 player=1
 building=inn
@@ -276,7 +232,6 @@ allow=false
 
 [Disable Building 24]
 type=allow_building
-state=init
 version=1
 player=1
 building=marblemine
@@ -284,7 +239,6 @@ allow=false
 
 [Disable Building 25]
 type=allow_building
-state=init
 version=1
 player=1
 building=mill
@@ -292,7 +246,6 @@ allow=false
 
 [Disable Building 26]
 type=allow_building
-state=init
 version=1
 player=1
 building=oremine
@@ -300,7 +253,6 @@ allow=false
 
 [Disable Building 27]
 type=allow_building
-state=init
 version=1
 player=1
 building=outpost
@@ -308,7 +260,6 @@ allow=false
 
 [Disable Building 28]
 type=allow_building
-state=init
 version=1
 player=1
 building=piggery
@@ -316,7 +267,6 @@ allow=false
 
 [Disable Building 31]
 type=allow_building
-state=init
 version=1
 player=1
 building=sentry
@@ -324,7 +274,6 @@ allow=false
 
 [Disable Building 32]
 type=allow_building
-state=init
 version=1
 player=1
 building=sheepfarm
@@ -332,7 +281,6 @@ allow=false
 
 [Disable Building 33]
 type=allow_building
-state=init
 version=1
 player=1
 building=smelting_works
@@ -340,7 +288,6 @@ allow=false
 
 [Disable Building 34]
 type=allow_building
-state=init
 version=1
 player=1
 building=stonemason
@@ -348,7 +295,6 @@ allow=false
 
 [Disable Building 35]
 type=allow_building
-state=init
 version=1
 player=1
 building=tavern
@@ -356,7 +302,6 @@ allow=false
 
 [Disable Building 36]
 type=allow_building
-state=init
 version=1
 player=1
 building=tower
@@ -364,7 +309,6 @@ allow=false
 
 [Disable Building 37]
 type=allow_building
-state=init
 version=1
 player=1
 building=trainingscamp
@@ -372,7 +316,6 @@ allow=false
 
 [Disable Building 38]
 type=allow_building
-state=init
 version=1
 player=1
 building=vintagery
@@ -380,7 +323,6 @@ allow=false
 
 [Disable Building 39]
 type=allow_building
-state=init
 version=1
 player=1
 building=warehouse
@@ -388,7 +330,6 @@ allow=false
 
 [Disable Building 40]
 type=allow_building
-state=init
 version=1
 player=1
 building=weaponsmith
@@ -396,7 +337,6 @@ allow=false
 
 [Disable Building 41]
 type=allow_building
-state=init
 version=1
 player=1
 building=weaving-mill
@@ -404,7 +344,6 @@ allow=false
 
 [Disable Building 42]
 type=allow_building
-state=init
 version=1
 player=1
 building=well
@@ -412,7 +351,6 @@ allow=false
 
 [Disable Building 43]
 type=allow_building
-state=init
 version=1
 player=1
 building=vineyard
@@ -420,8 +358,7 @@ allow=false
 
 [Diary page 6]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -429,18 +366,13 @@ _"Wonderful, today our wood economy was completely built up. Now we can be sure 
 "</p></rt>""
 window_title=_Wood for the colony
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Diary page 7]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -448,17 +380,12 @@ _"Great, today the building of the quarry was completed. Now we get enough stone
 "</p></rt>""
 window_title=_Stone for the colony
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Show Shipparts]
 type=unhide_area
-state=init
 version=2
 point=15 46
 area=5
@@ -467,14 +394,12 @@ duration=5000
 
 [Goto Shipparts]
 type=move_view
-state=init
 version=2
 point=15 46
 
 [Saledus 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus looks unhappy"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -483,24 +408,17 @@ _"* Build some barracks and sentrys around the colony."
 "</p></rt>""
 window_title=_Dangerous shipparts
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Unhide Objective 3 - military-buildings]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build military buildings
-dounhide=true
 
 [Enable Barracks]
 type=allow_building
-state=init
 version=1
 player=1
 building=barracks
@@ -508,7 +426,6 @@ allow=true
 
 [Enable Sentry]
 type=allow_building
-state=init
 version=1
 player=1
 building=sentry
@@ -518,14 +435,12 @@ allow=true
 # Will be run, when trigger 'Barracks complete',
 # or 'Sentry complete' is set.
 type=set_null_trigger
-state=init
 version=1
 trigger=Military buildings complete
 setto=true
 
 [Show Marblemountains]
 type=unhide_area
-state=init
 version=2
 point=35 19
 area=5
@@ -534,14 +449,12 @@ duration=5000
 
 [Goto Marblemountains]
 type=move_view
-state=init
 version=2
 point=35 19
 
 [Saledus 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -550,24 +463,17 @@ _"* Expand to the east, to start mining marble on the mountain."
 "</p></rt>""
 window_title=_Marble on the mountain
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Unhide Objective 4 - marblemine]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Marblemine
-dounhide=true
 
 [Enable Marblemine]
 type=allow_building
-state=init
 version=1
 player=1
 building=marblemine
@@ -575,7 +481,6 @@ allow=true
 
 [Enable Deep Marblemine]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_marblemine
@@ -583,7 +488,6 @@ allow=true
 
 [Show Ironmountains]
 type=unhide_area
-state=init
 version=2
 point=38 37
 area=6
@@ -592,7 +496,6 @@ duration=5000
 
 [Show Coalmountains]
 type=unhide_area
-state=init
 version=2
 point=49 22
 area=6
@@ -601,14 +504,12 @@ duration=5000
 
 [Goto Mountains middle]
 type=move_view
-state=init
 version=2
 point=42 27
 
 [Saledus 3]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -617,24 +518,17 @@ _"* Build up a complete Mining and production infrastructure(Coalmine, Oremine, 
 "</p></rt>""
 window_title=_Further mountains
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Unhide Objective 5 - mining]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Mining infrastructure
-dounhide=true
 
 [Enable Coalmine]
 type=allow_building
-state=init
 version=1
 player=1
 building=coalmine
@@ -642,7 +536,6 @@ allow=true
 
 [Enable Deep Coalmine]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_coalmine
@@ -650,7 +543,6 @@ allow=true
 
 [Enable Oremine]
 type=allow_building
-state=init
 version=1
 player=1
 building=oremine
@@ -658,7 +550,6 @@ allow=true
 
 [Enable Deep Oremine]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_oremine
@@ -666,7 +557,6 @@ allow=true
 
 [Enable Stonemason]
 type=allow_building
-state=init
 version=1
 player=1
 building=stonemason
@@ -674,7 +564,6 @@ allow=true
 
 [Enable Carpenter]
 type=allow_building
-state=init
 version=1
 player=1
 building=carpenter
@@ -682,7 +571,6 @@ allow=true
 
 [Enable Armoursmith]
 type=allow_building
-state=init
 version=1
 player=1
 building=armoursmith
@@ -690,7 +578,6 @@ allow=true
 
 [Enable Weaponsmith]
 type=allow_building
-state=init
 version=1
 player=1
 building=weaponsmith
@@ -698,7 +585,6 @@ allow=true
 
 [Enable Smelter]
 type=allow_building
-state=init
 version=1
 player=1
 building=smelting_works
@@ -706,7 +592,6 @@ allow=true
 
 [Enable Burner]
 type=allow_building
-state=init
 version=1
 player=1
 building=burner
@@ -715,15 +600,13 @@ allow=true
 [Set Mining infrastructure-trigger]
 # Will be run, when all needed buildings are build up.
 type=set_null_trigger
-state=init
 version=1
 trigger=Mining infrastructure complete
 setto=true
 
 [Amalea 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea comes in..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -731,17 +614,12 @@ _"Hi Lutius,<br>I hope you forgive my criticism, but it seems to me as if you fo
 "</p></rt>""
 window_title=_Food for the miners
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Enable Well]
 type=allow_building
-state=init
 version=1
 player=1
 building=well
@@ -749,7 +627,6 @@ allow=true
 
 [Enable Farm]
 type=allow_building
-state=init
 version=1
 player=1
 building=farm
@@ -757,7 +634,6 @@ allow=true
 
 [Enable Brewery]
 type=allow_building
-state=init
 version=1
 player=1
 building=brewery
@@ -765,7 +641,6 @@ allow=true
 
 [Enable Vineyard]
 type=allow_building
-state=init
 version=1
 player=1
 building=vineyard
@@ -773,7 +648,6 @@ allow=true
 
 [Enable Vintagery]
 type=allow_building
-state=init
 version=1
 player=1
 building=vintagery
@@ -781,7 +655,6 @@ allow=true
 
 [Enable Mill]
 type=allow_building
-state=init
 version=1
 player=1
 building=mill
@@ -789,7 +662,6 @@ allow=true
 
 [Enable Bakery]
 type=allow_building
-state=init
 version=1
 player=1
 building=bakery
@@ -797,7 +669,6 @@ allow=true
 
 [Enable Hunter]
 type=allow_building
-state=init
 version=1
 player=1
 building=hunter
@@ -805,7 +676,6 @@ allow=true
 
 [Enable Piggery]
 type=allow_building
-state=init
 version=1
 player=1
 building=piggery
@@ -813,7 +683,6 @@ allow=true
 
 [Enable Tavern]
 type=allow_building
-state=init
 version=1
 player=1
 building=tavern
@@ -821,7 +690,6 @@ allow=true
 
 [Enable Inn]
 type=allow_building
-state=init
 version=1
 player=1
 building=inn
@@ -829,7 +697,6 @@ allow=true
 
 [Enable Fisher]
 type=allow_building
-state=init
 version=1
 player=1
 building=fisher
@@ -837,7 +704,6 @@ allow=true
 
 [Show Barbarians 1]
 type=unhide_area
-state=init
 version=2
 point=60 61
 area=6
@@ -846,7 +712,6 @@ duration=5000
 
 [Show Barbarians 2]
 type=unhide_area
-state=init
 version=2
 point=60 48
 area=6
@@ -855,14 +720,12 @@ duration=5000
 
 [Goto Barbarians]
 type=move_view
-state=init
 version=2
 point=59 55
 
 [Diary page 8]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -871,24 +734,17 @@ _"* Build up bigger military buildings, like an outpost, a barrier or a tower, o
 "</p></rt>""
 window_title=_The Barbarians
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Unhide Objective 6 - bigger military buildings]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build bigger military buildings
-dounhide=true
 
 [Enable Outpost]
 type=allow_building
-state=init
 version=1
 player=1
 building=outpost
@@ -896,7 +752,6 @@ allow=true
 
 [Enable Barrier]
 type=allow_building
-state=init
 version=1
 player=1
 building=barrier
@@ -904,7 +759,6 @@ allow=true
 
 [Enable Tower]
 type=allow_building
-state=init
 version=1
 player=1
 building=tower
@@ -913,15 +767,13 @@ allow=true
 [Set Bigger military building-trigger]
 # Will be run, when a bigger military building is build up.
 type=set_null_trigger
-state=init
 version=1
 trigger=Bigger military building complete
 setto=true
 
 [Diary page 9]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -930,33 +782,25 @@ _"* As soon as you have enough soldiers, attack and completely remove the barbar
 "</p></rt>""
 window_title=_Command for Attack
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Enable Fortress]
 type=allow_building
-state=init
 version=1
 player=1
 building=fortress
 allow=true
 
 [Unhide Objective 7 - Attack]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Remove the barbarians
-dounhide=true
 
 [Diary page 10]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -964,35 +808,25 @@ _"Today makes me proud. We fought for our new home and rose victorious.<br>There
 "</p></rt>""
 window_title=_Victory
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [7 days later]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p line-spacing=3 font-size=12>"
 _"7 days later..."
 "</p></rt>""
 window_title=_As time is running by
 is_modal=true
-number_of_buttons=1
 width=200
 height=150
-posx=-1
-posy=-1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Diary page 11]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -1000,19 +834,14 @@ _"Today a pigeon landed on our island. It brought a message which is filling me 
 "</p></rt>""
 window_title=_A Message
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 #Optional (not needed for winning)
 [Amalea 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea smiles"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -1020,10 +849,6 @@ _"Hey my friend,<br>just visited our new tavern 'At the palms'. The beer, they h
 "</p></rt>""
 window_title=_"A drink at 'At the palms'"
 is_modal=true
-number_of_buttons=1
 width=450
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK

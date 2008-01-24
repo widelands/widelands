@@ -23,7 +23,6 @@
 #include "events/event.h"
 #include "events/event_factory.h"
 #include "map.h"
-#include "map_event_manager.h"
 #include "profile.h"
 #include "widelands_fileread.h"
 #include "widelands_map_data_packet_ids.h"
@@ -31,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 void Map_Event_Data_Packet::Read
@@ -49,27 +48,46 @@ throw (_wexception)
 
    Profile prof;
    prof.read("event", 0, fs);
-   Section* s = prof.get_section("global");
 
-   // check packet version
-			const int32_t packet_version=s->get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		while ((s = prof.get_next_section(0))) {
-         std::string name = s->get_name();
-         std::string type = s->get_safe_string("type");
-         std::string state = s->get_safe_string("state");
-         Event* e = Event_Factory::get_correct_event(type.c_str());
-         e->set_name(name.c_str());
-					if      (state == "init")    e->m_state = Event::INIT;
-					else if (state == "running") e->m_state = Event::RUNNING;
-					else if (state == "done")    e->m_state = Event::DONE;
-
-         e->Read(s, egbase);
-         egbase->get_map()->get_mem().register_new_event(e);
-		}
-	} else
-		throw wexception
-			("Unknown version in Map Event Packet: %u", packet_version);
+	try {
+		int32_t const packet_version =
+			prof.get_section("global")->get_safe_int("packet_version");
+		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+			Manager<Event> & mem = egbase->map().mem();
+			while (Section * const s = prof.get_next_section(0)) {
+				char const * const name = s->get_name();
+				try {
+					char const * const state_name = s->get_string("state", "init");
+					Event::State state;
+					if      (not strcmp(state_name, "init"))
+						state = Event::INIT;
+					else if (not strcmp(state_name, "running"))
+						state = Event::RUNNING;
+					else if (not strcmp(state_name, "done"))
+						state = Event::DONE;
+					else
+						throw wexception
+							("illegal state \"%s\" (must be one of {init, running, "
+							 "done})",
+							 state_name);
+					Event & event =
+						Event_Factory::create
+						(s->get_safe_string("type"), name, state);
+					try {
+						mem.register_new(event);
+					} catch (Manager<Event>::Already_Exists) {
+						throw wexception("duplicated");
+					}
+					event.Read(*s, *egbase);
+				} catch (std::exception const & e) {
+					throw wexception("%s: %s", name, e.what());
+				}
+			}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("Events: %s", e.what());
+	}
 }
 
 
@@ -84,18 +102,18 @@ throw (_wexception)
 		("packet_version", CURRENT_PACKET_VERSION);
 
    // Now write all the events
-	const MapEventManager & mem = egbase->get_map()->get_mem();
-	const MapEventManager::Index nr_events = mem.get_nr_events();
-	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
-		const Event & e = mem.get_event_by_nr(i);
+	Manager<Event> const & mem = egbase->map().mem();
+	Manager<Event>::Index const nr_events = mem.size();
+	for (Manager<Event>::Index i = 0; i < nr_events; ++i) {
+		Event const & e = mem[i];
 		Section & s = *prof.create_section(e.name().c_str());
-		s.set_string("type", e.get_id());
 		switch (e.m_state) {
-		case Event::INIT:    s.set_string("state", "init");    break;
+		case Event::INIT:                                      break;
 		case Event::RUNNING: s.set_string("state", "running"); break;
 		case Event::DONE:    s.set_string("state", "done");    break;
+		default: assert(false);
 		}
-		e.Write(s, *egbase);
+		e.Write(s);
 	}
 
    prof.write("event", false, fs);

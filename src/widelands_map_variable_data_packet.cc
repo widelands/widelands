@@ -21,7 +21,6 @@
 
 #include "editor_game_base.h"
 #include "map.h"
-#include "map_variable_manager.h"
 
 #include "filesystem.h"
 #include "profile.h"
@@ -44,27 +43,33 @@ throw (_wexception)
 
    Profile prof;
 	try {prof.read("variable", 0, fs);} catch (...) {return;}
-   MapVariableManager & mvm = egbase->get_map()->get_mvm();
+	Manager<Variable> & mvm = egbase->map().mvm();
 
-   Section* s = prof.get_section("global");
-
-   const int32_t packet_version = s->get_int("packet_version");
+	int32_t const packet_version =
+		prof.get_section("global")->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
-		while ((s = prof.get_next_section(0))) {
-         std::string type = s->get_safe_string("type");
-			if        (type == "int")    {
-            Int_MapVariable* v = new Int_MapVariable(s->get_safe_bool("delete_protected"));
-            v->set_name(s->get_name());
-            v->set_value(s->get_safe_int("value"));
-            mvm.register_new_variable(v);
-			} else if (type == "string") {
-            String_MapVariable* v = new String_MapVariable(s->get_safe_bool("delete_protected"));
-            v->set_name(s->get_name());
-            v->set_value(s->get_safe_string("value"));
-            mvm.register_new_variable(v);
+		while (Section * const s = prof.get_next_section(0)) {
+			char const * const      name = s->get_name();
+			char const * const type_name = s->get_safe_string("type");
+			bool const delete_protected = s->get_safe_bool("delete_protected");
+			Variable * variable;
+			if      (not strcmp(type_name, "int")) {
+				Variable_Int    & v = *new Variable_Int   (delete_protected);
+				v.set_value(s->get_safe_int("value"));
+				variable = &v;
+			} else if (not strcmp(type_name, "string")) {
+				Variable_String & v = *new Variable_String(delete_protected);
+				v.set_value(s->get_safe_string("value"));
+				variable = &v;
 			} else
-            throw wexception("Unknown Map Variable type %s", type.c_str());
-
+				throw wexception
+					("Variable %s has invalid type \"%s\"", name, type_name);
+			variable->set_name(name);
+			try {
+				mvm.register_new(*variable);
+			} catch (Manager<Variable>::Already_Exists) {
+				throw wexception("Variable %s is duplicated.", name);
+			}
 		}
 	} else
 		throw wexception
@@ -83,19 +88,18 @@ throw (_wexception)
 		("packet_version", CURRENT_PACKET_VERSION);
 
    // Now, all positions in order, first x, then y
-	const MapVariableManager & mvm = egbase->get_map()->get_mvm();
-	const MapVariableManager::Index nr_variables =
-		mvm.get_nr_variables();
-	for (MapVariableManager::Index i = 0; i < nr_variables; ++i) {
-		const MapVariable & v = mvm.get_variable_by_nr(i);
-		Section & s = *prof.create_section(v.get_name().c_str());
-      s.set_bool("delete_protected", v.is_delete_protected());
-		if        (upcast(Int_MapVariable    const, ivar, &v)) {
+	Manager<Variable> const & mvm = egbase->map().mvm();
+	Manager<Variable>::Index const nr_variables = mvm.size();
+	for (Manager<Variable>::Index i = 0; i < nr_variables; ++i) {
+		Variable const & variable = mvm[i];
+		Section & s = *prof.create_section(variable.name().c_str());
+      s.set_bool("delete_protected", variable.is_delete_protected());
+		if        (upcast(Variable_Int    const, ivar, &variable)) {
 			s.set_string("type", "int");
 			s.set_int   ("value", ivar->get_value());
-		} else if (upcast(String_MapVariable const, svar, &v)) {
+		} else if (upcast(Variable_String const, svar, &variable)) {
 			s.set_string("type", "string");
-			s.set_string("value", svar->get_value().c_str());
+			s.set_string("value", svar->get_value());
 		} else
 			throw wexception("Unknown Variable type in Map_Variable_Data_Packet");
 	}

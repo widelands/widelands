@@ -28,11 +28,13 @@
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
+#include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
 
 using Widelands::X_Coordinate;
 using Widelands::Y_Coordinate;
+
 
 inline Editor_Interactive & Event_Move_View_Option_Menu::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -43,7 +45,7 @@ Event_Move_View_Option_Menu::Event_Move_View_Option_Menu
 (Editor_Interactive & parent, Widelands::Event_Move_View & event) :
 UI::Window(&parent, 0, 0, 180, 200, _("Move View Event Options").c_str()),
 m_event   (event),
-m_location(event.get_coords())
+m_location(event.location())
 {
    const int32_t offsx=5;
    const int32_t offsy=25;
@@ -196,8 +198,28 @@ bool Event_Move_View_Option_Menu::handle_mouserelease(const Uint8, int32_t, int3
 
 
 void Event_Move_View_Option_Menu::clicked_ok() {
-	if (m_name->get_text()) m_event.set_name(m_name->get_text());
-	m_event.set_coords(m_location);
+	if (char const * const name = m_name->get_text()) {
+		if
+			(Widelands::Event * const registered_event =
+			 eia().egbase().map().mem()[name])
+			if (registered_event != & m_event) {
+				char buffer[256];
+				snprintf
+					(buffer, sizeof(buffer),
+					 _("There is another event registered with the name \"%s\". "
+					   "Choose another name.")
+					 .c_str(),
+					 name);
+				UI::Modal_Message_Box mb
+					(get_parent(),
+					 _("Name in use"), buffer,
+					 UI::Modal_Message_Box::OK);
+				mb.run();
+				return;
+			}
+		m_event.set_name(name);
+	}
+	m_event.set_location(m_location);
 	end_modal(1);
 }
 

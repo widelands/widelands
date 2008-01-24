@@ -34,7 +34,7 @@ inline Tribe_Descr const & StreamRead::Tribe
 	if (Tribe_Descr const * const result = egbase.get_tribe(name))
 		return *result;
 	else
-		throw Tribe_Nonexistent(name);
+		throw tribe_nonexistent(name);
 }
 
 inline Tribe_Descr const * StreamRead::Tribe_allow_null
@@ -45,7 +45,7 @@ inline Tribe_Descr const * StreamRead::Tribe_allow_null
 		if (Tribe_Descr const * const result = egbase.get_tribe(name))
 			return result;
 		else
-			throw Tribe_Nonexistent(name);
+			throw tribe_nonexistent(name);
 	else
 		return 0;
 }
@@ -56,7 +56,7 @@ inline Immovable_Descr const & StreamRead::Immovable_Type
 	char const * const name = CString();
 	int32_t const index = world.get_immovable_index(name);
 	if (index == -1)
-		throw World_Immovable_Nonexistent(name);
+		throw world_immovable_nonexistent(name);
 	return *world.get_immovable_descr(index);
 }
 
@@ -66,7 +66,7 @@ inline Immovable_Descr const & StreamRead::Immovable_Type
 	char const * const name = CString();
 	int32_t const index = tribe.get_immovable_index(name);
 	if (index == -1)
-		throw Tribe_Immovable_Nonexistent(tribe.name(), name);
+		throw tribe_immovable_nonexistent(tribe.name(), name);
 	return *tribe.get_immovable_descr(index);
 }
 
@@ -85,7 +85,7 @@ inline Building_Descr  const & StreamRead::Building_Type
 	char const * const name = CString();
 	int32_t const index = tribe.get_building_index(name);
 	if (index == -1)
-		throw Building_Nonexistent(tribe.name(), name);
+		throw building_nonexistent(tribe.name(), name);
 	return *tribe.get_building_descr(index);
 }
 

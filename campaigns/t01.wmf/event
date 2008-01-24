@@ -1,12 +1,11 @@
 # Changed by Nasenbaer - fixed few translation problems
 
 [global]
-packet_version=1
+packet_version=2
 
 [Briefing Msg 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -14,68 +13,52 @@ _"It's been months and we are still hiding where the forests are old and dark. M
 "</p></rt>""
 window_title=_ The Story begins...
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
 posy=1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Briefing Msg 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
 _"We can see the raging flames that swallow Al'thunran, miles away, from here. The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares."
 "</p></rt>""
 window_title=_ The Story begins...
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
 posy=1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Briefing Msg 3]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
 _"My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br>Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well"
 "</p></rt>""
 window_title=_ The Story begins...
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
 posy=1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Briefing Msg 4]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
 _"As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait."
 "</p></rt>""
 window_title=_ The Story begins...
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
 posy=1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Disable Building 01]
 type=allow_building
-state=init
 version=1
 player=1
 building=axefactory
@@ -83,7 +66,6 @@ allow=false
 
 [Disable Building 02]
 type=allow_building
-state=init
 version=1
 player=1
 building=bakery
@@ -91,7 +73,6 @@ allow=false
 
 [Disable Building 03]
 type=allow_building
-state=init
 version=1
 player=1
 building=barrier
@@ -99,7 +80,6 @@ allow=false
 
 [Disable Building 04]
 type=allow_building
-state=init
 version=1
 player=1
 building=battlearena
@@ -107,7 +87,6 @@ allow=false
 
 [Disable Building 05]
 type=allow_building
-state=init
 version=1
 player=1
 building=big_inn
@@ -115,7 +94,6 @@ allow=false
 
 [Disable Building 06]
 type=allow_building
-state=init
 version=1
 player=1
 building=brewery
@@ -123,7 +101,6 @@ allow=false
 
 [Disable Building 07]
 type=allow_building
-state=init
 version=1
 player=1
 building=burner
@@ -131,7 +108,6 @@ allow=false
 
 [Disable Building 08]
 type=allow_building
-state=init
 version=1
 player=1
 building=citadel
@@ -139,7 +115,6 @@ allow=false
 
 [Disable Building 09]
 type=allow_building
-state=init
 version=1
 player=1
 building=coalmine
@@ -147,7 +122,6 @@ allow=false
 
 [Disable Building 10]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_coalmine
@@ -155,7 +129,6 @@ allow=false
 
 [Disable Building 11]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_goldmine
@@ -163,7 +136,6 @@ allow=false
 
 [Disable Building 12]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_oremine
@@ -171,7 +143,6 @@ allow=false
 
 [Disable Building 13]
 type=allow_building
-state=init
 version=1
 player=1
 building=deeper_coalmine
@@ -179,7 +150,6 @@ allow=false
 
 [Disable Building 14]
 type=allow_building
-state=init
 version=1
 player=1
 building=deeper_goldmine
@@ -187,7 +157,6 @@ allow=false
 
 [Disable Building 15]
 type=allow_building
-state=init
 version=1
 player=1
 building=deeper_oremine
@@ -195,7 +164,6 @@ allow=false
 
 [Disable Building 16]
 type=allow_building
-state=init
 version=1
 player=1
 building=donjon
@@ -203,7 +171,6 @@ allow=false
 
 [Disable Building 17]
 type=allow_building
-state=init
 version=1
 player=1
 building=farm
@@ -211,7 +178,6 @@ allow=false
 
 [Disable Building 18]
 type=allow_building
-state=init
 version=1
 player=1
 building=fernery
@@ -219,7 +185,6 @@ allow=false
 
 [Disable Building 19]
 type=allow_building
-state=init
 version=1
 player=1
 building=fisher
@@ -227,7 +192,6 @@ allow=false
 
 [Disable Building 20]
 type=allow_building
-state=init
 version=1
 player=1
 building=fortress
@@ -235,7 +199,6 @@ allow=false
 
 [Disable Building 21]
 type=allow_building
-state=init
 version=1
 player=1
 building=gamekeeper
@@ -243,7 +206,6 @@ allow=false
 
 [Disable Building 22]
 type=allow_building
-state=init
 version=1
 player=1
 building=goldmine
@@ -251,7 +213,6 @@ allow=false
 
 [Disable Building 23]
 type=allow_building
-state=init
 version=1
 player=1
 building=granitemine
@@ -259,7 +220,6 @@ allow=false
 
 [Disable Building 24]
 type=allow_building
-state=init
 version=1
 player=1
 building=hardener
@@ -267,7 +227,6 @@ allow=false
 
 [Disable Building 25]
 type=allow_building
-state=init
 version=1
 player=1
 building=helmsmith
@@ -275,7 +234,6 @@ allow=false
 
 [Disable Building 26]
 type=allow_building
-state=init
 version=1
 player=1
 building=hunter
@@ -283,7 +241,6 @@ allow=false
 
 [Disable Building 27]
 type=allow_building
-state=init
 version=1
 player=1
 building=inn
@@ -291,7 +248,6 @@ allow=false
 
 [Disable Building 28]
 type=allow_building
-state=init
 version=1
 player=1
 building=metalworks
@@ -299,7 +255,6 @@ allow=false
 
 [Disable Building 29]
 type=allow_building
-state=init
 version=1
 player=1
 building=micro-brewery
@@ -307,7 +262,6 @@ allow=false
 
 [Disable Building 30]
 type=allow_building
-state=init
 version=1
 player=1
 building=oremine
@@ -315,7 +269,6 @@ allow=false
 
 [Disable Building 31]
 type=allow_building
-state=init
 version=1
 player=1
 building=weaving-mill
@@ -323,7 +276,6 @@ allow=false
 
 [Disable Building 32]
 type=allow_building
-state=init
 version=1
 player=1
 building=sentry
@@ -331,7 +283,6 @@ allow=false
 
 [Disable Building 33]
 type=allow_building
-state=init
 version=1
 player=1
 building=smelting_works
@@ -339,7 +290,6 @@ allow=false
 
 [Disable Building 34]
 type=allow_building
-state=init
 version=1
 player=1
 building=stonegrinder
@@ -347,7 +297,6 @@ allow=false
 
 [Disable Building 35]
 type=allow_building
-state=init
 version=1
 player=1
 building=stronghold
@@ -355,7 +304,6 @@ allow=false
 
 [Disable Building 36]
 type=allow_building
-state=init
 version=1
 player=1
 building=tavern
@@ -363,7 +311,6 @@ allow=false
 
 [Disable Building 37]
 type=allow_building
-state=init
 version=1
 player=1
 building=trainingscamp
@@ -371,7 +318,6 @@ allow=false
 
 [Disable Building 38]
 type=allow_building
-state=init
 version=1
 player=1
 building=warehouse
@@ -379,7 +325,6 @@ allow=false
 
 [Disable Building 39]
 type=allow_building
-state=init
 version=1
 player=1
 building=warmill
@@ -387,7 +332,6 @@ allow=false
 
 [Disable Building 40]
 type=allow_building
-state=init
 version=1
 player=1
 building=well
@@ -395,7 +339,6 @@ allow=false
 
 [Disable Building 41]
 type=allow_building
-state=init
 version=1
 player=1
 building=ranger
@@ -403,7 +346,6 @@ allow=false
 
 [Disable Building 42]
 type=allow_building
-state=init
 version=1
 player=1
 building=quarry
@@ -411,7 +353,6 @@ allow=false
 
 [Enable Ranger]
 type=allow_building
-state=init
 version=1
 player=1
 building=ranger
@@ -419,7 +360,6 @@ allow=true
 
 [Enable Quarry]
 type=allow_building
-state=init
 version=1
 player=1
 building=quarry
@@ -427,26 +367,22 @@ allow=true
 
 [Goto Al'thunran]
 type=move_view
-state=init
 version=2
 point=53 43
 
 [Goto Grave]
 type=move_view
-state=init
 version=2
 point=25 22
 
 [Goto Home]
 type=move_view
-state=init
 version=2
 point=12 10
 
 [Order Msg 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"An old man approaches you..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -454,18 +390,13 @@ _" "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allo
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Order Msg 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh continues..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -473,18 +404,13 @@ _" "None but the gods know how long we have to remain hidden here. The warriors 
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Order Msg 3]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The elder remarks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -492,19 +418,14 @@ _" "Obviously, it would be too draining for our people to walk all the way to th
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=true
+button_00=_ OK
 button_00_trigger=Order3
 
 [Order Msg 4]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -512,18 +433,13 @@ _" "There is an old saying: 'A burden divided is easier to endure.' A crossroad 
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Order Msg 5]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The old man looks to the sky..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -531,19 +447,14 @@ _" "The northern winds tell us, the coming winter will be a long and cruel one. 
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=true
+button_00=_ OK
 button_00_trigger=Order5
 
 [Order Msg 6]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh nods..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -551,18 +462,13 @@ _" "Of course, if we intended to build a bigger settlement much more Lumberjacks
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Order Msg 7]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The elder speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -570,18 +476,13 @@ _" "I am well aware, chieftain, that neither you nor your warriors have the desi
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=true
+button_00=_ OK
 button_00_trigger=Order7
 
 [Show Al'thunran]
 type=unhide_area
-state=init
 version=2
 point=51 46
 area=14
@@ -590,7 +491,6 @@ duration=5000
 
 [Show Grave]
 type=unhide_area
-state=init
 version=2
 point=24 29
 area=6
@@ -599,8 +499,7 @@ duration=5000
 
 [Story Msg 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -608,18 +507,14 @@ _"In another sleepless night I went up to the hill and gazed to the north. The f
 "</p></rt>""
 window_title=_ In the night...
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
 posy=1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Story Msg 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p><p image-align=left line-spacing=3 font-size=12><br>"
@@ -627,18 +522,14 @@ _"Once again I went up to my father's tomb, in a sacred grove at the feet of the
 "</p></rt>""
 window_title=_ At the grave
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
 posy=1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Story Msg 3]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -646,18 +537,13 @@ _"Some time ago, Boldreth came to me. His advise was to move to some place close
 "</p></rt>""
 window_title=_ The other day...
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Story Msg 4]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p><p image-align=left line-spacing=3 font-size=12><br>"
@@ -665,46 +551,33 @@ _"Today, my warriors picked up an old man, wandering sick and wounded through th
 "</p></rt>""
 window_title=_ Another evening...
 is_modal=true
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Unhide Objective 1]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Lumberjack 1
-dounhide=true
 
 [Unhide Objective 2]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Lumberjack 2
-dounhide=true
 
 [Unhide Objective 3]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Ranger
-dounhide=true
 
 [Unhide Objective 4]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Quarries
-dounhide=true
 
 [Mission Complete]
 type=message_box
-state=init
-version=1
+version=2
 text=_ ""<rt image=map:chieftain.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Victory!"
 "</p><p image-align=left line-spacing=3 font-size=12><br>"
@@ -712,17 +585,11 @@ _"Very well done, chieftain. We now have all we need to face the winter and may 
 "</p></rt>""
 window_title=_ Mission Complete
 is_modal=false
-number_of_buttons=1
 width=400
 height=300
-posx=-1
-posy=-1
-button_00_name=_ OK
-button_00_has_trigger=false
+button_00=_ OK
 
 [Unhide Barbariantut01]
-type=set_map_visiblity
-state=init
-version=1
+type=reveal_scenario
+version=2
 entry=barbariantut01
-visible=true

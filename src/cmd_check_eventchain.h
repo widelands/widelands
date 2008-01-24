@@ -21,15 +21,14 @@
 #define __S__CMD_CHECK_EVENTCHAIN_H
 
 #include "cmd_queue.h"
-#include "map_eventchain_manager.h"
+
+#include "manager.h"
 
 namespace Widelands {
 
-class Cmd_CheckEventChain : public GameLogicCommand {
-private:
-	MapEventChainManager::Index m_eventchain_id;
+struct EventChain;
 
-public:
+struct Cmd_CheckEventChain : public GameLogicCommand {
 	Cmd_CheckEventChain() : GameLogicCommand(0) {} // For savegame loading
 	Cmd_CheckEventChain(int32_t, int32_t);
 
@@ -40,6 +39,9 @@ public:
 	virtual int32_t get_id() {return QUEUE_CMD_CHECK_EVENTCHAIN;} // Get this command id
 
 	virtual void execute(Game *);
+
+private:
+	Manager<EventChain>::Index m_eventchain_id;
 };
 
 };

@@ -24,7 +24,7 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-namespace Widelands {struct MapObjective;};
+namespace Widelands {struct Objective;};
 namespace UI {
 template <typename T> struct Button;
 template <typename T> struct Table;
@@ -44,12 +44,12 @@ struct Editor_Objectives_Menu : public UI::UniqueWindow {
 
 private:
       Editor_Interactive *m_parent;
-	UI::Table<Widelands::MapObjective &> m_table;
+	UI::Table<Widelands::Objective &> m_table;
 	UI::Button<Editor_Objectives_Menu> * m_edit_button;
 	UI::Button<Editor_Objectives_Menu> * m_delete_button;
       UI::Textarea         *m_trigger;
 
-	void insert_objective(Widelands::MapObjective &);
+	void insert_objective(Widelands::Objective &);
 	void clicked_ok  ();
 	void clicked_new ();
 	void clicked_edit();

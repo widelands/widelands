@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,23 +25,20 @@
 #include "i18n.h"
 #include "interactive_base.h"
 #include "map.h"
-#include "map_trigger_manager.h"
 #include "profile.h"
 #include "trigger/trigger_null.h"
 #include "wexception.h"
 
+#include "upcast.h"
+
+#define EVENT_VERSION 1
+
 namespace Widelands {
 
-static const int32_t EVENT_VERSION = 1;
-
-/*
- * Init and cleanup
- */
-Event_Set_Null_Trigger::Event_Set_Null_Trigger() {
-   set_name(_("Set Null Trigger").c_str());
-   m_trigger = 0;
-   set_setto(true);
-}
+Event_Set_Null_Trigger::Event_Set_Null_Trigger
+	(char const * const Name, State const S)
+	: Event(Name, S), m_trigger(0), m_setto(true)
+{}
 
 
 
@@ -49,51 +46,41 @@ Event_Set_Null_Trigger::~Event_Set_Null_Trigger() {
    set_trigger(0);
 }
 
-/*
- * reinitialize
- */
-void Event_Set_Null_Trigger::reinitialize(Game *) {}
 
-/*
- * File Read, File Write
- */
-void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
-	const int32_t event_version = s->get_safe_int("version");
-	if (event_version == EVENT_VERSION) {
-		const std::string triggername = s->get_safe_string("trigger");
-		if
-			(Trigger_Null * const trig = static_cast<Trigger_Null *>
-			 (egbase->map().get_mtm().get_trigger(triggername.c_str())))
-		{
+void Event_Set_Null_Trigger::Read(Section & s, Editor_Game_Base & egbase) {
+	try {
+		const int32_t event_version = s.get_safe_int("version");
+		if (event_version == EVENT_VERSION) {
+			char const * const trigger_name = s.get_safe_string("trigger");
+			if (upcast(Trigger_Null, trig, egbase.map().mtm()[trigger_name])) {
 			// Bit Hackish, hopefully the user paid attention
-			set_trigger(trig);
-			set_setto(s->get_bool("setto"));
+				set_trigger(trig);
+				set_setto(s.get_bool("setto"));
+			} else
+				throw wexception
+					("trigger refers to \"%s\", " "which is not a null trigger",
+					 trigger_name);
 		} else
-			throw wexception
-				("Set Null Trigger event with unknown trigger %s in map!",
-				 triggername.c_str());
-	} else
-		throw wexception
-			("Set Null Trigger Event with unknown/unhandled version %u in map!",
-			 event_version);
+			throw wexception("unknown/unhandled version %u", event_version);
+	} catch (_wexception const & e) {
+		throw wexception("(set null trigger): %s", e.what());
+	}
 }
 
-void Event_Set_Null_Trigger::Write(Section & s, const Editor_Game_Base &) const
-{
+void Event_Set_Null_Trigger::Write(Section & s) const {
    assert(m_trigger);
+	s.set_string("type",    "set_null_trigger");
 	s.set_int   ("version", EVENT_VERSION);
-	s.set_string("trigger", m_trigger->get_name());
+	s.set_string("trigger", m_trigger->name());
 	s.set_bool  ("setto",   get_setto());
 }
 
-/*
- * Run this trigger
- */
+
 Event::State Event_Set_Null_Trigger::run(Game* game) {
    assert(m_trigger);
 
    m_trigger->set_trigger_manually(get_setto());
-   m_trigger->check_set_conditions(game); // forcefully update this trigger
+	m_trigger->check_set_conditions(*game); // forcefully update this trigger
 
    m_state = DONE;
    return m_state;

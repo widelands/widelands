@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include "game.h"
 #include "player.h"
 #include "profile.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -44,16 +45,20 @@ Event::State Event_Unhide_Area::run(Game* game) {
    return m_state;
 }
 
-void Event_Unhide_Area::Read(Section * s, Editor_Game_Base * egbase) {
-	Event_Player_Area::Read(s, egbase);
-	duration = s->get_int("duration", 0);
+void Event_Unhide_Area::Read(Section & s, Editor_Game_Base & egbase) {
+	try {
+		Event_Player_Area::Read(s, egbase);
+		duration = s.get_int("duration", 0);
+	} catch (std::exception const & e) {
+		throw wexception("(unhide area): %s", e.what());
+	}
 }
 
-void Event_Unhide_Area::Write
-(Section & s, const Editor_Game_Base & egbase) const
-{
-	Event_Player_Area::Write(s, egbase);
-	s.set_int("duration", duration);
+void Event_Unhide_Area::Write(Section & s) const {
+	s.set_string("type",     "unhide_area");
+	Event_Player_Area::Write(s);
+	if (duration)
+		s.set_int("duration", duration);
 }
 
 };

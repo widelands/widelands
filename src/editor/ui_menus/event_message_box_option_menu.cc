@@ -24,13 +24,13 @@
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "map.h"
-#include "map_trigger_manager.h"
 #include "trigger/trigger_null.h"
 
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
+#include "ui_modal_messagebox.h"
 #include "ui_multilineeditbox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
@@ -159,10 +159,10 @@ m_event   (event)
 		 &Event_Message_Box_Option_Menu::end_modal, this, 0,
 		 _("Cancel"));
 
-	Widelands::MapTriggerManager const & mtm = parent.egbase().map().get_mtm();
-	Widelands::MapTriggerManager::Index const nr_triggs = mtm.get_nr_triggers();
-	for (Widelands::MapTriggerManager::Index i = 0; i < nr_triggs; ++i) {
-		if (strcmp(mtm.get_trigger_by_nr(i).get_id(), "null") == 0)
+	Manager<Widelands::Trigger> const & mtm = parent.egbase().map().mtm();
+	Manager<Widelands::Trigger>::Index const nr_triggs = mtm.size();
+	for (Manager<Widelands::Trigger>::Index i = 0; i < nr_triggs; ++i) {
+		if (dynamic_cast<Widelands::Trigger_Null const *>(&mtm[i]))
          m_null_triggers.push_back(i);
 	}
 
@@ -171,8 +171,8 @@ m_event   (event)
 		for (size_t j = 0; j < m_null_triggers.size(); ++j) {
          // Get this triggers index
          int32_t foundidx = -1;
-			for (Widelands::MapTriggerManager::Index x = 0; x < nr_triggs; ++x)
-				if (&mtm.get_trigger_by_nr(x) == m_event.get_button_trigger(i)) {
+			for (Manager<Widelands::Trigger>::Index x = 0; x < nr_triggs; ++x)
+				if (&mtm[x] == m_event.get_button_trigger(i)) {
                foundidx = x;
                break;
 				}
@@ -202,15 +202,34 @@ bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int32_t, in
 
 
 void Event_Message_Box_Option_Menu::clicked_ok() {
-	if (m_name->get_text())
-		m_event.set_name(m_name->get_text());
+	if (char const * const name = m_name->get_text()) {
+		if
+			(Widelands::Event * const registered_event =
+			 eia().egbase().map().mem()[name])
+			if (registered_event != & m_event) {
+				char buffer[256];
+				snprintf
+					(buffer, sizeof(buffer),
+					 _("There is another event registered with the name \"%s\". "
+					   "Choose another name.")
+					 .c_str(),
+					 name);
+				UI::Modal_Message_Box mb
+					(get_parent(),
+					 _("Name in use"), buffer,
+					 UI::Modal_Message_Box::OK);
+				mb.run();
+				return;
+			}
+		m_event.set_name(name);
+	}
 	if (m_text->get_text().c_str())
 		m_event.set_text(m_text->get_text().c_str());
 	if (m_window_title->get_text())
 		m_event.set_window_title(m_window_title->get_text());
 	m_event.set_is_modal(m_is_modal->get_state());
 	m_event.set_nr_buttons(m_nr_buttons);
-	Widelands::MapTriggerManager const & mtm = eia().egbase().map().get_mtm();
+	Manager<Widelands::Trigger> & mtm = eia().egbase().map().mtm();
 	for (uint32_t b = 0; b < m_nr_buttons; ++b) {
 		m_event.set_button_name(b, m_buttons[b].name);
 		m_event.set_button_trigger
@@ -219,7 +238,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 			 0
 			 :
 			 dynamic_cast<Widelands::Trigger_Null *>
-			 (&mtm.get_trigger_by_nr(m_null_triggers[m_buttons[b].trigger])));
+			 (&mtm[m_null_triggers[m_buttons[b].trigger]]));
 	}
 	end_modal(1);
 }
@@ -290,8 +309,8 @@ void Event_Message_Box_Option_Menu::update() {
 			(m_buttons[m_ls_selected].trigger == -1 ?
 			 "none"
 			 :
-			 eia().egbase().map().get_mtm().get_trigger_by_nr
-			 (m_null_triggers[m_buttons[m_ls_selected].trigger]).get_name());
+			 eia().egbase().map().mtm()
+			 [m_null_triggers[m_buttons[m_ls_selected].trigger]].name());
 	} else {
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;

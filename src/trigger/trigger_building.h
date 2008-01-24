@@ -20,8 +20,7 @@
 #ifndef __S__TRIGGER_BUILDING_H
 #define __S__TRIGGER_BUILDING_H
 
-#include "player_area.h"
-#include "trigger.h"
+#include "trigger_player_area.h"
 
 #include <string>
 
@@ -33,32 +32,22 @@ namespace Widelands {
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
  */
-struct Trigger_Building : public Trigger {
+struct Trigger_Building : public Trigger_Player_Area {
 	friend struct ::Trigger_Building_Option_Menu;
-      Trigger_Building();
-      ~Trigger_Building();
+	Trigger_Building(char const * Name, bool set);
 
-      // one liner functions
-	const char * get_id() const {return "building";}
+	int32_t option_menu(Editor_Interactive &);
 
-      void check_set_conditions(Game*);
-      void reset_trigger(Game*);
+	void check_set_conditions(Game const &);
 
-      // File Functions
+	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &) const;
-      void Read(Section*, Editor_Game_Base*);
 
 	const char* get_building() const {return m_building.c_str();}
       void set_building(const char* b) {m_building=b;}
-      void set_building_count(int32_t n) {m_count=n;}
-	int32_t get_building_count() const {return m_count;}
-
-	typedef uint8_t Count_Type;
 
 private:
-	Player_Area<Area<FCoords> > m_player_area;
       std::string m_building;
-	Count_Type m_count;
 };
 
 };

@@ -26,7 +26,7 @@ class Editor_Interactive;
 namespace Widelands {struct Event_Descr;};
 namespace UI {
 template <typename T> struct Button;
-template <typename T> struct Listselect;
+struct BaseListselect;
 struct Multiline_Textarea;
 };
 
@@ -46,7 +46,7 @@ private:
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 
-	UI::Listselect<Widelands::Event_Descr &> * m_event_list;
+	UI::BaseListselect * m_event_type_list;
 	UI::Multiline_Textarea        * m_description;
 	UI::Button<Editor_Event_Menu_New_Event> * m_ok_button;
 };

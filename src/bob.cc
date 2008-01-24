@@ -958,7 +958,8 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 {
 	FCoords newf;
 
-	g->get_map()->get_neighbour(m_position, dir, &newf);
+	Map & map = g->map();
+	map.get_neighbour(m_position, dir, &newf);
 
 	// Move capability check by ANDing with the field caps
 	//
@@ -978,7 +979,7 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 		return -1;
 
 	// Move is go
-	int32_t tdelta = g->get_map()->calc_cost(m_position, dir);
+	int32_t const tdelta = map.calc_cost(m_position, dir);
 
 	m_walking = dir;
 	m_walkstart = g->get_gametime();

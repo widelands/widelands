@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,27 +17,18 @@
  *
  */
 
-#ifndef __S__EVENT_REFERENCER_H
-#define __S__EVENT_REFERENCER_H
+#ifndef NAMED_H
+#define NAMED_H
 
 #include <string>
 
-namespace Widelands {
-
-struct Event;
-
-/*
- * An Event referencer is a class, that uses an Event
- */
-struct EventReferencer {
-      virtual ~EventReferencer() {}
-	virtual const char * get_type() const = 0;
-	virtual const std::string & name() const throw () = 0;
-
-      void reference_event(Event*);
-      void unreference_event(Event*);
+struct Named {
+	Named(char        const * const Name = "") : m_name(Name) {}
+	Named(std::string const &       Name)      : m_name(Name) {}
+	void set_name(std::string const & new_name) {m_name = new_name;}
+	std::string const & name() const throw () {return m_name;}
+private:
+	std::string m_name;
 };
 
-};
-
-#endif // __S__EVENT_REFERENCER_H
+#endif

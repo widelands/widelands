@@ -27,6 +27,17 @@ StreamRead::~StreamRead()
 {
 }
 
+StreamRead::_data_error::_data_error(char const * const fmt, ...) throw () {
+	char buffer[256];
+	{
+		va_list va;
+		va_start(va, fmt);
+		vsnprintf(buffer, sizeof(buffer), fmt, va);
+		va_end(va);
+	}
+	m_what += buffer;
+}
+
 /**
  * Read a number of bytes from the stream.
  *
@@ -38,7 +49,9 @@ void StreamRead::DataComplete(void * const data, const size_t size)
 	size_t read = Data(data, size);
 
 	if (read != size)
-		throw wexception("Stream ended unexpectedly (%u bytes read, %u expected)", read, size);
+		throw data_error
+			("Stream ended unexpectedly (%u bytes read, %u expected)",
+			 read, size);
 }
 
 int8_t StreamRead::Signed8() {
@@ -101,7 +114,8 @@ bool StreamRead::ReadLine(char * buf, const char * const buf_end) {
 	for (char c; Data(&c, 1) and c != '\n';) {
 		if (c == '\r') continue;
 		*buf = c;
-		if (c == 0) throw Null_In_Line();
+		if (c == 0)
+			throw null_in_line();
 		if (++buf == buf_end) {
 			buf[-1] = 0;
 			throw Buffer_Overflow();

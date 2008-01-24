@@ -40,104 +40,84 @@ struct World;
 /// ::StreamRead can be used as a Widelands::StreamRead to read
 /// Widelands-specific types.
 struct StreamRead : public ::StreamRead {
-	struct Max_Index_Exceeded : public Data_Error {
-		Max_Index_Exceeded(Map_Index const Max, Map_Index const I)
-			: max(Max), i(I)
+	struct exceeded_max_index : public _data_error {
+		exceeded_max_index
+			(Map_Index const Max, Map_Index const I)
+			:
+			_data_error
+			("index is %u but max index is only %u",
+			 I, Max),
+			max(Max), i(I)
 		{}
-		std::string message() const {
-			std::string result;
-			result  = "index is ";
-			result += i;
-			result += " but max index is only ";
-			result += max;
-			return result;
-		}
 		Map_Index const max, i;
 	};
-	struct Extent_Exceeded : public Data_Error {};
-	struct Width_Exceeded : public Extent_Exceeded {
-		Width_Exceeded (uint16_t const W, const X_Coordinate X) : w(W), x(X) {}
-		std::string message() const {
-			std::string result;
-			result  = "x coordinate is ";
-			result += x;
-			result += " but width is only ";
-			result += w;
-			return result;
-		}
+	struct exceeded_width : public _data_error {
+		exceeded_width
+			(uint16_t const W, const X_Coordinate X)
+			:
+			_data_error
+			("x coordinate is %i but width is only %u",
+			 X, W),
+			w(W), x(X)
+		{}
 		uint16_t     const w;
 		X_Coordinate const x;
 	};
-	struct Height_Exceeded : public Extent_Exceeded {
-		Height_Exceeded(uint16_t const H, const Y_Coordinate Y) : h(H), y(Y) {}
-		std::string message() const {
-			std::string result;
-			result += "y coordinate is ";
-			result += y;
-			result += " but height is only ";
-			result += h;
-			return result;
-		}
+	struct exceeded_height : public _data_error {
+		exceeded_height
+			(uint16_t const H, const Y_Coordinate Y)
+			:
+			_data_error
+			("y coordinate is %i but height is only %u",
+			 Y, H),
+			h(H), y(Y)
+		{}
 		uint16_t     h;
 		Y_Coordinate y;
 	};
-	struct Tribe_Nonexistent           : public Data_Error {
-		Tribe_Nonexistent(char const * const Name) : name(Name) {}
-		std::string message() const {
-			std::string result;
-			result  = "tribe \"";
-			result += name;
-			result += "\" does not exist";
-			return result;
-		}
+	struct tribe_nonexistent           : public _data_error {
+		tribe_nonexistent
+			(char const * const Name)
+			:
+			_data_error
+			("tribe \"%s\" does not exist",
+			 Name),
+			name(Name) {}
 		char const * const name;
 	};
-	struct Immovable_Error             : public Data_Error {};
-	struct Immovable_Nonexistent : public Immovable_Error {
-		Immovable_Nonexistent(char const * const Name) : name(Name) {}
-		char const * const name;
-	};
-	struct Tribe_Immovable_Nonexistent : public Immovable_Nonexistent {
-		Tribe_Immovable_Nonexistent
+	struct tribe_immovable_nonexistent : public _data_error {
+		tribe_immovable_nonexistent
 			(std::string const & Tribename, char const * const Name)
-			: Immovable_Nonexistent(Name), tribename(Tribename)
+			:
+			_data_error
+			("tribe %s does not define immovable \"%s\"",
+			 Tribename.c_str(), Name),
+			tribename(Tribename), name(Name)
 		{}
-		std::string message() const {
-			std::string result;
-			result  = "immovable \"";
-			result += name;
-			result += "\" does not exist in tribe ";
-			result += tribename;
-			return result;
-		}
 		std::string const & tribename;
+		char        const * const name;
 	};
-	struct World_Immovable_Nonexistent : public Immovable_Nonexistent {
-		World_Immovable_Nonexistent(char const * const Name)
-			: Immovable_Nonexistent(Name)
+	struct world_immovable_nonexistent : public _data_error {
+		world_immovable_nonexistent
+			(char const * const Name)
+			:
+			_data_error
+			("world does not define immovable \"%s\"",
+			 Name),
+			name(Name)
 		{}
-		std::string message() const {
-			std::string result;
-			result  = "immovable \"";
-			result += name;
-			result += "\" does not exist in world";
-			return result;
-		}
+		char const * const name;
 	};
-	struct Building_Nonexistent : public Data_Error {
-		Building_Nonexistent
+	struct building_nonexistent : public _data_error {
+		building_nonexistent
 			(std::string const & Tribename, char const * const Name)
-			: tribename(Tribename), name(Name)
+			:
+			_data_error
+			("tribe %s does not define building \"%s\"",
+			 Tribename.c_str(), Name),
+			tribename(Tribename), name(Name)
 		{}
-		std::string message() const {
-			std::string result;
-			result  = "building \"";
-			result += name;
-			result += "\" does not exist in tribe ";
-			result += tribename;
-			return result;
-		}
-		std::string const &  tribename;
+		std::string const & tribename;
 		char        const * const name;
 	};
 
@@ -151,13 +131,15 @@ struct StreamRead : public ::StreamRead {
 	/// Both coordinates are read from the file before checking and possibly
 	/// throwing, so in case such an exception is thrown, it is guaranteed that
 	/// the whole coordinate pair has been read.
-	Coords Coords32(const Extent extent);
+	Coords Coords32(Extent);
 
 	/// Like Coords32 but the result can have the special value indicating
 	/// invalidity, as defined by Coords::Null.
-	Coords Coords32_allow_null(const Extent extent);
+	Coords Coords32_allow_null(Extent);
 
 	Coords Coords32(); /// Unchecked reading.
+
+	Area<Coords, uint16_t> Area48(Extent);
 
 	Player_Number Player_Number8() {return Unsigned8();}
 
@@ -216,15 +198,15 @@ struct StreamRead : public ::StreamRead {
 
 inline Map_Index StreamRead::Map_Index32(Map_Index const max) {
 	uint32_t const i = Unsigned32();
-	if (max <= i) throw Max_Index_Exceeded(max, i);
+	if (max <= i) throw exceeded_max_index(max, i);
 	return i;
 }
 
 inline Coords StreamRead::Coords32(const Extent extent) {
 	uint16_t const x = Unsigned16();
 	uint16_t const y = Unsigned16();
-	if (extent.w <= x) throw Width_Exceeded (extent.w, x);
-	if (extent.h <= y) throw Height_Exceeded(extent.h, y);
+	if (extent.w <= x) throw exceeded_width (extent.w, x);
+	if (extent.h <= y) throw exceeded_height(extent.h, y);
 	return Coords(x, y);
 }
 
@@ -233,8 +215,8 @@ inline Coords StreamRead::Coords32_allow_null(const Extent extent) {
 	uint16_t const y = Unsigned16();
 	const Coords result(x, y);
 	if (result) {
-		if (extent.w <= x) throw Width_Exceeded (extent.w, x);
-		if (extent.h <= y) throw Height_Exceeded(extent.h, y);
+		if (extent.w <= x) throw exceeded_width (extent.w, x);
+		if (extent.h <= y) throw exceeded_height(extent.h, y);
 	}
 	return result;
 }
@@ -243,6 +225,12 @@ inline Coords StreamRead::Coords32() {
 	uint16_t const x = Unsigned16();
 	uint16_t const y = Unsigned16();
 	return Coords(x, y);
+}
+
+inline Area<Coords, uint16_t> StreamRead::Area48(Extent const extent) {
+	Coords   const c =   Coords32(extent);
+	uint16_t const r = Unsigned16();
+	return Area<Coords, uint16_t>(c, r);
 }
 
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef __S__EVENT_MOVE_VIEW_H
 #define __S__EVENT_MOVE_VIEW_H
 
+#include "widelands.h"
 #include "event.h"
 #include "widelands_geometry.h"
 
@@ -27,28 +28,22 @@ namespace Widelands {
 
 class Editor_Game_Base;
 
-/*
- * This event shows a message box
- */
 struct Event_Move_View : public Event {
-     Event_Move_View();
-      ~Event_Move_View();
+	Event_Move_View(char const * name, State);
 
-      // one liner functions
-	const char * get_id() const {return "move_view";}
+	int32_t option_menu(Editor_Interactive &);
 
       State run(Game*);
-      virtual void reinitialize(Game*);
 
-      // File Functions
-	void Write(Section &, const Editor_Game_Base &) const;
-	void Read (Section *,       Editor_Game_Base *);
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &) const;
 
-	void set_coords(Coords pt) {m_pt = pt;}
-	Coords get_coords() {return m_pt;}
+	void set_location(Coords const c) {m_location = c;}
+	Coords location() {return m_location;}
 
 private:
-      Coords m_pt;
+	Coords        m_location;
+	Player_Number m_player;
 };
 
 };

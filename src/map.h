@@ -20,10 +20,15 @@
 #ifndef __S__MAP_H
 #define __S__MAP_H
 
+#include "events/event_chain.h"
 #include "field.h"
 #include "widelands_geometry.h"
-#include "interval.h"
+#include "objective.h"
+#include "variable.h"
 #include "world.h"
+
+#include "interval.h"
+#include "manager.h"
 
 #include <set>
 #include <string>
@@ -37,11 +42,6 @@ namespace Widelands {
 class BaseImmovable;
 class Player;
 class World;
-class MapVariableManager;
-class MapObjectiveManager;
-class MapEventManager;
-class MapEventChainManager;
-class MapTriggerManager;
 class Map;
 class Map_Loader;
 #define WLMF_SUFFIX ".wmf"
@@ -354,16 +354,16 @@ struct Map {
     * Get the a manager for registering or removing
     * something
     */
-	const MapVariableManager   & get_mvm () const {return *m_mvm;}
-	MapVariableManager         & get_mvm ()       {return *m_mvm;}
-	const MapTriggerManager    & get_mtm () const {return *m_mtm;}
-	MapTriggerManager          & get_mtm ()       {return *m_mtm;}
-	const MapEventManager      & get_mem () const {return *m_mem;}
-	MapEventManager            & get_mem ()       {return *m_mem;}
-	const MapEventChainManager & get_mecm() const {return *m_mecm;}
-	MapEventChainManager       & get_mecm()       {return *m_mecm;}
-	const MapObjectiveManager  & get_mom () const {return *m_mom;}
-	MapObjectiveManager        & get_mom ()       {return *m_mom;}
+	Manager<Variable>   const & mvm() const {return m_mvm;}
+	Manager<Variable>         & mvm()       {return m_mvm;}
+	Manager<Trigger>    const & mtm() const {return m_mtm;}
+	Manager<Trigger>          & mtm()       {return m_mtm;}
+	Manager<Event>      const & mem() const {return m_mem;}
+	Manager<Event>            & mem()       {return m_mem;}
+	Manager<EventChain> const & mcm() const {return m_mcm;}
+	Manager<EventChain>       & mcm()       {return m_mcm;}
+	Manager<Objective>  const & mom() const {return m_mom;}
+	Manager<Objective>        & mom()       {return m_mom;}
 
 	/// Returns the military influence on a location from an area.
 	Military_Influence calc_influence(const Coords a, const Area<>) const;
@@ -394,11 +394,11 @@ private:
    std::vector<std::string>  m_scenario_tribes; // only alloced when really needed
    std::vector<std::string>  m_scenario_names;
 
-	MapVariableManager*   m_mvm;  // The mapvariable manager makes sure for handling all the variables
-	MapTriggerManager*    m_mtm;  // The maptrigger manager
-	MapEventManager*      m_mem;  // The mapevent manager
-	MapEventChainManager* m_mecm; // The mapeventchain manager has a list of all event chains in this map
-	MapObjectiveManager*  m_mom;  // The mapobjective manager lists all scenarios objectives.
+	Manager<Variable>   m_mvm;
+	Manager<Trigger>    m_mtm;
+	Manager<Event>      m_mem;
+	Manager<EventChain> m_mcm;
+	Manager<Objective>  m_mom;
 
 	struct Extradata_Info {
 		enum Type {
@@ -1282,7 +1282,7 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 		for (fc.x = 0; fc.x < extent.w; ++fc.x, ++fc.field)                     \
 
 
-std::string g_MapVariableCallback(std::string str, void* data);
+std::string g_VariableCallback(std::string str, void* data);
 
 };
 

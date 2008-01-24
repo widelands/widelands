@@ -1,270 +1,210 @@
 [global]
-packet_version=1
+packet_version=2
 
 [Built Quarry]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=6
 player=1
-count=1
 building=quarry
 
 [Built First Sentry]
 type=building
-set=false
-version=2
+version=3
 point=24 10
 area=100
 player=1
-count=1
 building=sentry
 
 [Built First Stronghold]
 type=building
-set=false
-version=2
+version=3
 point=24 10
 area=100
 player=1
-count=1
 building=stronghold
 
 [Built Sentry]
 type=building
-set=false
-version=2
+version=3
 point=24 10
 area=6
 player=1
-count=1
 building=sentry
 
 [Built Stronghold]
 type=building
-set=false
-version=2
+version=3
 point=24 10
 area=6
 player=1
-count=1
 building=stronghold
 
 [Built Coal Mine]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=coalmine
 
 [Built Ore Mine]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=oremine
 
 [Built Gamekeeper]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=gamekeeper
 
 [Built Hunter]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=hunter
 
 [Built Bakery]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=bakery
 
 [Built Farm]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=farm
 
 [Built Well]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=well
 
 [Built Tavern]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=tavern
 
 [Built Smelter]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=smelting_works
 
 [Built Burner]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=burner
 
 [Built Inn]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=inn
 
 [Built Deep Coal Mine]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=deep_coalmine
 
 [Built Hardener]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=hardener
 
 [Built Grinder]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=stonegrinder
 
 [Built Fernery]
 type=building
-set=false
-version=2
+version=3
 point=27 48
 area=100
 player=1
-count=1
 building=fernery
 
 [The Story begins]
 type=time
-set=false
 version=1
 wait_time=2
 last_start_time=0
 
 [Game Started]
 type=time
-set=false
 version=1
 wait_time=1
 last_start_time=0
 
 [Mission Mines]
 type=null
-set=false
-version=1
 
 [Hunt Began]
 type=null
-set=false
-version=1
 
 [Farming Began]
 type=null
-set=false
-version=1
 
 [Refining Began]
 type=null
-set=false
-version=1
 
 [Enhance Buildings]
 type=null
-set=false
-version=1
 
 [Mission Quarry]
 type=null
-set=false
-version=1
 
 [Mission Grindstone]
 type=null
-set=false
-version=1
 
 [Mission Fernery]
 type=null
-set=false
-version=1
 
 [Story Timer 1]
 type=time
-set=false
 version=1
 wait_time=240
 last_start_time=0
 
 [Story Timer 2]
 type=time
-set=false
 version=1
 wait_time=520
 last_start_time=0

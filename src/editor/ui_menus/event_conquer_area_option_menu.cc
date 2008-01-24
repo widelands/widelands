@@ -25,16 +25,18 @@
 #include "i18n.h"
 #include "map.h"
 
-#include "ui_window.h"
-#include "ui_textarea.h"
+#include "ui_modal_messagebox.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
 
 #include <stdio.h>
 
 using Widelands::X_Coordinate;
 using Widelands::Y_Coordinate;
+
 
 Editor_Interactive & Event_Conquer_Area_Option_Menu::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -269,7 +271,27 @@ bool Event_Conquer_Area_Option_Menu::handle_mouserelease(const Uint8, int32_t, i
 
 
 void Event_Conquer_Area_Option_Menu::clicked_ok() {
-	if (m_name->get_text()) m_event.set_name(m_name->get_text());
+	if (char const * const name = m_name->get_text()) {
+		if
+			(Widelands::Event * const registered_event =
+			 eia().egbase().map().mem()[name])
+			if (registered_event != & m_event) {
+				char buffer[256];
+				snprintf
+					(buffer, sizeof(buffer),
+					 _("There is another event registered with the name \"%s\". "
+					   "Choose another name.")
+					 .c_str(),
+					 name);
+				UI::Modal_Message_Box mb
+					(get_parent(),
+					 _("Name in use"), buffer,
+					 UI::Modal_Message_Box::OK);
+				mb.run();
+				return;
+			}
+		m_event.set_name(name);
+	}
 	m_event.m_player_area = m_player_area;
 	end_modal(1);
 }

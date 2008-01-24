@@ -3,8 +3,7 @@ packet_version=1
 
 [Diary page 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -12,18 +11,13 @@ _"What has become of our Empire? I really ask this question, while my king disal
 "</p></rt>""
 window_title=_A dark night
 is_modal=true
-number_of_buttons=1
 width=500
 height=450
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Diary page 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -31,18 +25,13 @@ _"Seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature w
 "</p></rt>""
 window_title=_The rough sea
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Diary page 3]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -50,29 +39,22 @@ _"Finally the Gods were with us. We landed on an unknown coast and found a peace
 "</p></rt>""
 window_title=_Survivor
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=OK
-button_00_has_trigger=false
+button_00=OK
 
 [Goto Darkness]
 type=move_view
-state=init
 version=2
 point=47 25
 
 [Goto Home]
 type=move_view
-state=init
 version=2
 point=7 62
 
 [Show Sea]
 type=unhide_area
-state=init
 version=2
 point=47 25
 area=6
@@ -81,7 +63,6 @@ duration=5000
 
 [Disable Building 01]
 type=allow_building
-state=init
 version=1
 player=1
 building=arena
@@ -89,7 +70,6 @@ allow=false
 
 [Disable Building 02]
 type=allow_building
-state=init
 version=1
 player=1
 building=armoursmith
@@ -97,7 +77,6 @@ allow=false
 
 [Disable Building 03]
 type=allow_building
-state=init
 version=1
 player=1
 building=bakery
@@ -105,7 +84,6 @@ allow=false
 
 [Disable Building 04]
 type=allow_building
-state=init
 version=1
 player=1
 building=barracks
@@ -113,7 +91,6 @@ allow=false
 
 [Disable Building 05]
 type=allow_building
-state=init
 version=1
 player=1
 building=barrier
@@ -121,7 +98,6 @@ allow=false
 
 [Disable Building 06]
 type=allow_building
-state=init
 version=1
 player=1
 building=brewery
@@ -129,7 +105,6 @@ allow=false
 
 [Disable Building 07]
 type=allow_building
-state=init
 version=1
 player=1
 building=burner
@@ -137,7 +112,6 @@ allow=false
 
 [Disable Building 08]
 type=allow_building
-state=init
 version=1
 player=1
 building=carpenter
@@ -145,7 +119,6 @@ allow=false
 
 [Disable Building 09]
 type=allow_building
-state=init
 version=1
 player=1
 building=castle
@@ -153,7 +126,6 @@ allow=false
 
 [Disable Building 10]
 type=allow_building
-state=init
 version=1
 player=1
 building=coalmine
@@ -161,7 +133,6 @@ allow=false
 
 [Disable Building 11]
 type=allow_building
-state=init
 version=1
 player=1
 building=colosseum
@@ -169,7 +140,6 @@ allow=false
 
 [Disable Building 12]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_coalmine
@@ -177,7 +147,6 @@ allow=false
 
 [Disable Building 13]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_goldmine
@@ -185,7 +154,6 @@ allow=false
 
 [Disable Building 14]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_oremine
@@ -193,7 +161,6 @@ allow=false
 
 [Disable Building 15]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_marblemine
@@ -201,7 +168,6 @@ allow=false
 
 [Disable Building 16]
 type=allow_building
-state=init
 version=1
 player=1
 building=farm
@@ -209,7 +175,6 @@ allow=false
 
 [Disable Building 17]
 type=allow_building
-state=init
 version=1
 player=1
 building=fisher
@@ -217,7 +182,6 @@ allow=false
 
 [Disable Building 18]
 type=allow_building
-state=init
 version=1
 player=1
 building=forester
@@ -225,7 +189,6 @@ allow=false
 
 [Disable Building 19]
 type=allow_building
-state=init
 version=1
 player=1
 building=fortress
@@ -233,7 +196,6 @@ allow=false
 
 [Disable Building 20]
 type=allow_building
-state=init
 version=1
 player=1
 building=goldmine
@@ -241,7 +203,6 @@ allow=false
 
 [Disable Building 21]
 type=allow_building
-state=init
 version=1
 player=1
 building=hunter
@@ -249,7 +210,6 @@ allow=false
 
 [Disable Building 22]
 type=allow_building
-state=init
 version=1
 player=1
 building=inn
@@ -257,7 +217,6 @@ allow=false
 
 [Disable Building 23]
 type=allow_building
-state=init
 version=1
 player=1
 building=lumberjack
@@ -265,7 +224,6 @@ allow=false
 
 [Disable Building 24]
 type=allow_building
-state=init
 version=1
 player=1
 building=marblemine
@@ -273,7 +231,6 @@ allow=false
 
 [Disable Building 25]
 type=allow_building
-state=init
 version=1
 player=1
 building=mill
@@ -281,7 +238,6 @@ allow=false
 
 [Disable Building 26]
 type=allow_building
-state=init
 version=1
 player=1
 building=oremine
@@ -289,7 +245,6 @@ allow=false
 
 [Disable Building 27]
 type=allow_building
-state=init
 version=1
 player=1
 building=outpost
@@ -297,7 +252,6 @@ allow=false
 
 [Disable Building 28]
 type=allow_building
-state=init
 version=1
 player=1
 building=piggery
@@ -305,7 +259,6 @@ allow=false
 
 [Disable Building 29]
 type=allow_building
-state=init
 version=1
 player=1
 building=quarry
@@ -313,7 +266,6 @@ allow=false
 
 [Disable Building 30]
 type=allow_building
-state=init
 version=1
 player=1
 building=sawmill
@@ -321,7 +273,6 @@ allow=false
 
 [Disable Building 31]
 type=allow_building
-state=init
 version=1
 player=1
 building=sentry
@@ -329,7 +280,6 @@ allow=false
 
 [Disable Building 32]
 type=allow_building
-state=init
 version=1
 player=1
 building=sheepfarm
@@ -337,7 +287,6 @@ allow=false
 
 [Disable Building 33]
 type=allow_building
-state=init
 version=1
 player=1
 building=smelting_works
@@ -345,7 +294,6 @@ allow=false
 
 [Disable Building 34]
 type=allow_building
-state=init
 version=1
 player=1
 building=stonemason
@@ -353,7 +301,6 @@ allow=false
 
 [Disable Building 35]
 type=allow_building
-state=init
 version=1
 player=1
 building=tavern
@@ -361,7 +308,6 @@ allow=false
 
 [Disable Building 36]
 type=allow_building
-state=init
 version=1
 player=1
 building=tower
@@ -369,7 +315,6 @@ allow=false
 
 [Disable Building 37]
 type=allow_building
-state=init
 version=1
 player=1
 building=trainingscamp
@@ -377,7 +322,6 @@ allow=false
 
 [Disable Building 38]
 type=allow_building
-state=init
 version=1
 player=1
 building=vintagery
@@ -385,7 +329,6 @@ allow=false
 
 [Disable Building 39]
 type=allow_building
-state=init
 version=1
 player=1
 building=warehouse
@@ -393,7 +336,6 @@ allow=false
 
 [Disable Building 40]
 type=allow_building
-state=init
 version=1
 player=1
 building=weaponsmith
@@ -401,7 +343,6 @@ allow=false
 
 [Disable Building 41]
 type=allow_building
-state=init
 version=1
 player=1
 building=weaving-mill
@@ -409,7 +350,6 @@ allow=false
 
 [Disable Building 42]
 type=allow_building
-state=init
 version=1
 player=1
 building=well
@@ -417,7 +357,6 @@ allow=false
 
 [Disable Building 43]
 type=allow_building
-state=init
 version=1
 player=1
 building=vineyard
@@ -425,7 +364,6 @@ allow=false
 
 [Enable Barracks]
 type=allow_building
-state=init
 version=1
 player=1
 building=barracks
@@ -433,7 +371,6 @@ allow=true
 
 [Enable Lumberjack]
 type=allow_building
-state=init
 version=1
 player=1
 building=lumberjack
@@ -441,8 +378,7 @@ allow=true
 
 [Saledus 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -450,31 +386,23 @@ _"Sire, I fear we are not safe in this foreign land.<br>Who knows, what cruel cr
 "</p></rt>""
 window_title=_A visitor
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=_OK
-button_00_has_trigger=false
+button_00=_OK
 
 [Goto Forest]
 type=move_view
-state=init
 version=2
 point=12 0
 
 [Unhide Objective 1 - Barracks]
 type=unhide_objective
-state=init
 version=1
 objective=Build Barracks
-dounhide=true
 
 [Saledus 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -482,18 +410,13 @@ _"Sire, I saw that the construction of the barrack is completed, so I sent one o
 "</p></rt>""
 window_title=_A visitor
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=_OK
-button_00_has_trigger=false
+button_00=_OK
 
 [Amalea 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea smiles..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -501,25 +424,18 @@ _"Hey Lutius, I just met Saledus outside. He told me about construction of the b
 "</p></rt>""
 window_title=_Young Amalea
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=_OK
-button_00_has_trigger=false
+button_00=_OK
 
 [Unhide Objective 2 - Lumberjack]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Lumberjack
-dounhide=true
 
 [Amalea 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea smiles..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -527,24 +443,17 @@ _"Hey Lutius, I got the message that our first lumberjack started his work today
 "</p></rt>""
 window_title=_Young Amalea
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=_OK
-button_00_has_trigger=false
+button_00=_OK
 
 [Unhide Objective 3 - Sawmill]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Sawmill
-dounhide=true
 
 [Enable Sawmill]
 type=allow_building
-state=init
 version=1
 player=1
 building=sawmill
@@ -552,8 +461,7 @@ allow=true
 
 [Amalea 3]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea comes in..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -561,24 +469,17 @@ _"Hi Lutius,<br>I've got two important things to talk about:<br>First the positi
 "</p></rt>""
 window_title=_Young Amalea
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=_OK
-button_00_has_trigger=false
+button_00=_OK
 
 [Unhide Objective 4 - Forester]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Forester
-dounhide=true
 
 [Enable Forester]
 type=allow_building
-state=init
 version=1
 player=1
 building=forester
@@ -586,8 +487,7 @@ allow=true
 
 [Saledus 3]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -595,24 +495,17 @@ _"Hey my good old friend, I just thought about the rocks, standing on the south 
 "</p></rt>""
 window_title=_A Visitor
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=_OK
-button_00_has_trigger=false
+button_00=_OK
 
 [Unhide Objective 5 - Quarry]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Quarry
-dounhide=true
 
 [Enable Quarry]
 type=allow_building
-state=init
 version=1
 player=1
 building=quarry
@@ -620,8 +513,7 @@ allow=true
 
 [Saledus 4]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -629,19 +521,14 @@ _"Hey Lutius,<br>today we got a big piece closer to our first castle. The quarry
 "</p></rt>""
 window_title=_A Visitor
 is_modal=true
-number_of_buttons=1
 width=400
 height=350
-posx=-1
-posy=-1
-button_00_name=_OK
-button_00_has_trigger=true
+button_00=_OK
 button_00_trigger=End Trigger
 
 [Diary page 4]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
@@ -649,13 +536,9 @@ _"Today I got the message that our ship is completely repaired. At the moment my
 "</p></rt>""
 window_title=_Mission Complete
 is_modal=false
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Unhide Empiretut02]
-type=set_map_visiblity
-state=init
-version=1
+type=reveal_scenario
+version=2
 entry=empiretut01
-visible=true

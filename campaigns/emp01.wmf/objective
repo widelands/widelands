@@ -4,29 +4,24 @@ packet_version=1
 [Build Barracks]
 descr=_"Build a barrack at the red point in the east of the forest."
 visible=false
-optional=false
 trigger=Barracks complete
 
 [Build Lumberjack]
 descr=_"Build a lumberjack, at the red point at the south of your headquarters."
 visible=false
-optional=false
 trigger=Lumberjack complete
 
 [Build Sawmill]
 descr=_"Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
 visible=false
-optional=false
 trigger=Sawmill complete
 
 [Build Forester]
 descr=_"Build a forester hut, to save the wood resources of this island."
 visible=false
-optional=false
 trigger=Forester complete
 
 [Build Quarry]
 descr=_"Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
 visible=false
-optional=false
 trigger=Forester complete

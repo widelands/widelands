@@ -27,7 +27,6 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "map.h"
-#include "map_event_manager.h"
 #include "trigger/trigger_conditional.h"
 
 #include "ui_button.h"
@@ -144,10 +143,10 @@ m_event_chain(chain)
    m_available_events=new UI::Listselect<Widelands::Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_available_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
    m_available_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::tl_double_clicked);
-	Widelands::MapEventManager const & mem = parent.egbase().map().get_mem();
-	Widelands::MapEventManager::Index const nr_events = mem.get_nr_events();
-	for (Widelands::MapEventManager::Index i = 0; i < nr_events; ++i) {
-		Widelands::Event & event = mem.get_event_by_nr(i);
+	Manager<Widelands::Event> & mem = parent.egbase().map().mem();
+	Manager<Widelands::Event>::Index const nr_events = mem.size();
+	for (Manager<Widelands::Event>::Index i = 0; i < nr_events; ++i) {
+		Widelands::Event & event = mem[i];
 		m_available_events->add(event.name().c_str(), event);
 	}
    m_available_events->sort();

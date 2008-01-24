@@ -17,136 +17,102 @@
  *
  */
 
-
 #include "event_factory.h"
 
-#include "editorinteractive.h"
-#include "event.h"
 #include "event_allow_building.h"
-#include "event_allow_building_option_menu.h"
 #include "event_conquer_area.h"
-#include "event_conquer_area_option_menu.h"
 #include "event_message_box.h"
-#include "event_message_box_option_menu.h"
 #include "event_move_view.h"
-#include "event_move_view_option_menu.h"
 #include "event_unhide_area.h"
-#include "event_unhide_area_option_menu.h"
-/* EVENTS BELOW HAVE NO OPTION MENU YET */
 #include "event_set_null_trigger.h"
-#include "event_unhide_objective.h"
-#include "event_set_visiblity.h"
+#include "event_reveal_campaign.h"
+#include "event_reveal_objective.h"
+#include "event_reveal_scenario.h"
 #include "wexception.h"
+
+#include "i18n.h"
 
 namespace Widelands {
 
 namespace Event_Factory {
 
-Event_Descr EVENT_DESCRIPTIONS[] = {
-	{"message_box", _("Message Box"), _("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user")},
-	{"move_view", _("Move View"), _("This Event centers the Players View on a certain field")},
-	{"unhide_area", _("Unhide Area"), _("This Event makes a user definable part of the map visible for a selectable user")},
-	{"conquer_area", _("Conquer Area"), _("This Event conquers a user definable part of the map for one player if there isn't a player already there")},
-	{"allow_building", _("Allow Building"), _("Allows/Disables a certain building for a player so that it can be build or it can't any longer")},
-// TODO: Events below are not creatable in the editor. Make UI Windows for them
-	// {"set_null_trigger", _("Set Null Trigger"), _("Manually set a Null Trigger to a given value")},
-	// {"unhide_objective", _("Unhide Objective"), _("Hide or unhide an objective so that the player can see it")},
-	// {"set_campaign_visiblity", _("Set Campaign Visiblity"), _("Make a campaign visible or invisible in the Campaign UI")},
-	// {"set_map_visiblity", _("Set Map Visiblity"), _("Make a campaignmap visible or invisible in the Campaign UI")},
+Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
+	{"message_box",            _("Show message box"),
+			_("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user")},
+	{"move_view",              _("Move view"),
+			_("This Event centers the Players View on a certain location")},
+	{"unhide_area",            _("Unhide area"),
+			_("Gives vision for a specified amount of time of all locations whithin an area to the player.")},
+	{"conquer_area",           _("Conquer area"),
+			_("Gives ownership of all unowned locations whithin an area to the player")},
+	{"allow_building",         _("Allow building type"),
+			_("Allows (or forbids) tye construction of a building type for a player")},
+	{"set_null_trigger",       _("Set null trigger"),
+			_("Manually set a Null Trigger to a given value")},
+	{"reveal_objective",       _("Reveal objective"),
+			_("Reveal (or hide) an objective")},
+	{"reveal_scenario",        _("Reveal scenario"),
+			_("Reveal (or hide) a scenario")},
+	{"reveal_campaign",        _("Reveal campaign"),
+			_("Reveal (or hide) a campaign")},
 };
 
 
-/**
- * return the correct event for this id
- */
-Event * get_correct_event(const char * id) {
-	if (strcmp("message_box",            id) == 0)
-		return new Event_Message_Box           ();
-	if (strcmp("move_view",              id) == 0)
-		return new Event_Move_View             ();
-	if (strcmp("unhide_area",            id) == 0)
-		return new Event_Unhide_Area           ();
-	if (strcmp("conquer_area",           id) == 0)
-		return new Event_Conquer_Area          ();
-	if (strcmp("allow_building",         id) == 0)
-		return new Event_Allow_Building        ();
-	if (strcmp("set_null_trigger",       id) == 0)
-		return new Event_Set_Null_Trigger      ();
-	if (strcmp("unhide_objective",       id) == 0)
-		return new Event_Unhide_Objective      ();
-	if (strcmp("set_campaign_visiblity", id) == 0)
-		return new Event_Set_Campaign_Visiblity();
-	if (strcmp("set_map_visiblity",      id) == 0)
-		return new Event_Set_Map_Visiblity     ();
-	throw wexception
-		("Event_Factory::get_correct_event: Unknown event id found: %s", id);
+Event & create(size_t const id) {
+	return
+		create
+		(id,
+		 i18n::translate(EVENT_TYPE_DESCRIPTIONS[id].name).c_str(),
+		 Event::INIT);
 }
 
 
-/**
- * create the correct option dialog and initialize it with the given
- * event. if the given event is zero, create a new event
- * and let it be initalised through it.
- * if it fails, return zero/unmodified given event, elso return the created/modified event
- */
-Event * make_event_with_option_dialog
-(const char * const id, Editor_Interactive & m_parent, Event * const gevent)
+Event & create
+	(size_t const id, char const * const name, Event::State const state)
 {
-	Event* event=gevent;
-	if (!event)
-		event=get_correct_event(id);
-
-	int32_t retval;
-	if        (strcmp("message_box",    id) == 0) {
-		Event_Message_Box_Option_Menu t
-			(m_parent, dynamic_cast<Widelands::Event_Message_Box    &>(*event));
-		retval = t.run();
-	} else if (strcmp("move_view",      id) == 0) {
-		Event_Move_View_Option_Menu t
-			(m_parent, dynamic_cast<Widelands::Event_Move_View      &>(*event));
-		retval = t.run();
-	} else if (strcmp("unhide_area",    id) == 0) {
-		Event_Unhide_Area_Option_Menu t
-			(m_parent, dynamic_cast<Widelands::Event_Unhide_Area    &>(*event));
-		retval = t.run();
-	} else if (strcmp("conquer_area",   id) == 0) {
-		Event_Conquer_Area_Option_Menu t
-			(m_parent, dynamic_cast<Widelands::Event_Conquer_Area   &>(*event));
-		retval = t.run();
-	} else if (strcmp("allow_building", id) == 0) {
-		Event_Allow_Building_Option_Menu t
-			(m_parent, dynamic_cast<Widelands::Event_Allow_Building &>(*event));
-		retval = t.run();
-	} else
-		throw wexception
-			("Event_Factory::make_event_with_option_dialog: Unknown event id "
-			 "found: %s",
-			 id);
-	if (retval)
-		return event;
-	if (!gevent) {
-		delete event;
-		return 0;
-	} else
-		return gevent;
+	switch (id) {
+	case 0: return *new Event_Message_Box     (name, state);
+	case 1: return *new Event_Move_View       (name, state);
+	case 2: return *new Event_Unhide_Area     (name, state);
+	case 3: return *new Event_Conquer_Area    (name, state);
+	case 4: return *new Event_Allow_Building  (name, state);
+	case 5: return *new Event_Set_Null_Trigger(name, state);
+	case 6: return *new Event_Reveal_Objective(name, state);
+	case 7: return *new Event_Reveal_Scenario (name, state);
+	case 8: return *new Event_Reveal_Campaign (name, state);
+	default: assert(false);
+	}
 }
 
 
-/**
- * Get event description by number
- */
-Event_Descr * get_event_descr(const uint32_t id) {
-	assert(id < get_nr_of_available_events());
+Event & create
+	(const char * type_name, char const * const name, Event::State const state)
+{
 
-	return &EVENT_DESCRIPTIONS[id];
+	//  Handle old names.
+	if (not strcmp(type_name, "unhide_objective"))
+		type_name = "reveal_objective";
+	if (not strcmp(type_name, "set_map_visiblity"))
+		type_name = "reveal_scenario";
+	if (not strcmp(type_name, "set_campaign_visiblity"))
+		type_name = "reveal_campaign";
+
+	size_t i = 0;
+	while (strcmp(type_name, EVENT_TYPE_DESCRIPTIONS[i].id))
+		if (++i == nr_event_types())
+			throw wexception("invalid type \"%s\"", type_name);
+	return create(i, name, state);
 }
 
 
-/**
- * return the nummer of available events
- */
-const uint32_t get_nr_of_available_events() {
-	return sizeof(EVENT_DESCRIPTIONS) / sizeof(*EVENT_DESCRIPTIONS);
+Type_Descr const & type_descr(size_t const id) {
+	assert(id < nr_event_types());
+	return EVENT_TYPE_DESCRIPTIONS[id];
+}
+
+
+size_t nr_event_types() {
+	return sizeof(EVENT_TYPE_DESCRIPTIONS) / sizeof(*EVENT_TYPE_DESCRIPTIONS);
 }
 
 };

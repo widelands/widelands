@@ -62,7 +62,7 @@ throw (_wexception)
 
    // save some kind of header.
    s->set_int("gametime", game->get_gametime()); // Time in milliseconds of elapsed game time (without pauses)
-   s->set_string("mapname", game->get_map()->get_name());  // Name of map
+	s->set_string("mapname", game->map().get_name());  // Name of map
 
    prof.write("preload", false, fs);
 }

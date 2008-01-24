@@ -27,8 +27,8 @@
 #include <limits>
 
 /// Can be used to read a file. It works quite naively by reading the entire
-/// file into memory. Convenience functions are available for endian-safe access
-/// of common data types. Base must be derived from StreamRead.
+/// file into memory. Convenience functions are available for endian-safe
+/// access of common data types. Base must be derived from StreamRead.
 template<typename Base> struct basic_FileRead : public Base {
 	struct Pos {
 		Pos(size_t const p = 0) : pos(p) {}
@@ -43,10 +43,8 @@ template<typename Base> struct basic_FileRead : public Base {
 		size_t pos;
 	};
 
-	struct FileRead_Exception : public std::exception {};
-	struct File_Boundary_Exceeded : public FileRead_Exception {
-		virtual char const * what() const throw ()
-		{return "File boundary exceeded";}
+	struct File_Boundary_Exceeded : public Base::_data_error {
+		File_Boundary_Exceeded() : Base::_data_error("end of file") {}
 	};
 	basic_FileRead () : data(0) {}; /// Create the object with nothing to read.
 	~basic_FileRead() {if (data) Close();} /// Close the file if open.

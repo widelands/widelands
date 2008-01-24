@@ -61,7 +61,7 @@ void Map_Bob_Data_Packet::ReadBob
 		if (subtype != Bob::CRITTER)
 			throw wexception("world bob is not a critter!");
 
-		int32_t idx = egbase->get_map()->get_world()->get_bob(name.c_str());
+		int32_t const idx = egbase->map().world().get_bob(name.c_str());
 		if (idx == -1)
 			throw wexception
 					("Map defines Bob %s, but world doesn't deliver!\n",

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,30 +17,32 @@
  *
  */
 
-#ifndef __S__GAME_OBJECTIVE_MENU_H
-#define __S__GAME_OBJECTIVE_MENU_H
+#include "event_reveal.h"
 
-#include "ui_listselect.h"
-#include "ui_multilinetextarea.h"
-#include "ui_unique_window.h"
+#include "wexception.h"
+
+#include "profile.h"
+
+#define EVENT_VERSION 2
 
 namespace Widelands {
-class Game;
-struct Objective;
+
+void Event_Reveal::Read(Section & s, Editor_Game_Base &) {
+	try {
+		int32_t const packet_version = s.get_safe_int("version");
+		if (1 <= packet_version and packet_version <= EVENT_VERSION)
+			reveal = s.get_safe_string("entry");
+		else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (std::exception const & e) {
+		throw wexception("(reveal): %s", e.what());
+	}
+}
+
+
+void Event_Reveal::Write (Section & s) const {
+	s.set_int   ("version", EVENT_VERSION);
+	s.set_string("entry",   reveal);
+}
+
 };
-class Interactive_Player;
-
-// The GameObjectives Menu shows the not already
-// fullfilled scenario objectives.
-struct GameObjectivesMenu : public UI::UniqueWindow {
-	GameObjectivesMenu
-		(Interactive_Player &, UI::UniqueWindow::Registry &, Widelands::Game &);
-
-private:
-	UI::Listselect<Widelands::Objective &>list;
-	UI::Multiline_Textarea objectivetext;
-
-	void selected(uint32_t);
-};
-
-#endif

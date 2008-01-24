@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,29 +25,33 @@
 #include "profile.h"
 #include "wexception.h"
 
+#define PACKET_VERSION 1
+
 namespace Widelands {
 
-static const int32_t TRIGGER_VERSION = 1;
-
-Trigger_Null::Trigger_Null()
-: Trigger(_("Null Trigger")), m_should_toggle(false), m_value(false)
-{set_trigger(false);}
+Trigger_Null::Trigger_Null(char const * const Name, bool const set)
+: Trigger(Name, set), m_should_toggle(false), m_value(false)
+{}
 
 
-void Trigger_Null::Read(Section* s, Editor_Game_Base*) {
-	const int32_t version = s->get_safe_int("version");
-	if (version != TRIGGER_VERSION)
-		throw wexception
-			("Null Trigger with unknown/unhandled version %u in map!", version);
+void Trigger_Null::Read(Section & s, Editor_Game_Base &) {
+	try {
+		int32_t const packet_version = s.get_int("version", PACKET_VERSION);
+		if (packet_version != PACKET_VERSION)
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (std::exception const & e) {
+		throw wexception("(null): %s", e.what());
+	}
 }
 
-void Trigger_Null::Write(Section & s) const
-{s.set_int("version", TRIGGER_VERSION);}
+void Trigger_Null::Write(Section & s) const {
+	s.set_string("type", "null");
+}
 
 /*
  * check if trigger conditions are done
  */
-void Trigger_Null::check_set_conditions(Game *) {
+void Trigger_Null::check_set_conditions(Game const &) {
 	if (m_should_toggle) set_trigger(m_value);
 
    return;
@@ -56,7 +60,7 @@ void Trigger_Null::check_set_conditions(Game *) {
 /*
  * Reset this trigger. This is only valid for non one timers
  */
-void Trigger_Null::reset_trigger(Game *) {
+void Trigger_Null::reset_trigger       (Game const &) {
    m_should_toggle = false;
    m_value = false;
    set_trigger(false);

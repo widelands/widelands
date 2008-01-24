@@ -59,36 +59,39 @@ throw (_wexception)
 			try {fr.Open(fs, filename);}
 			catch (const File_error         &) {throw Not_Found();}
 			catch (const ZipOperation_error &) {throw Not_Found();}
-		} catch (const Not_Found) {continue;}
-		const uint16_t packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
-			while (not fr.EndOfFile()) {
-				const uint32_t reg = fr.Unsigned32();
-				if (ol->is_object_known(reg))
-					throw wexception
-						("Map_Players_AreaWatchers_Data_Packet::Read: player %u: in "
-						 "\"%s\":%u: read object with reg %u, but an object with "
-						 "that reg has already been loaded",
-						 p, filename, fr.GetPos() - 4, reg);
-				Coords c;
-				try {c = fr.Coords32(extent);}
-				catch (const FileRead::Data_Error & e) {
-					throw wexception
-						("Map_Players_AreaWatchers_Data_Packet::Read: player %u: in "
-						 "\"%s\":%u: Coordinates of watcher %u: %s",
-						 p, filename, fr.GetPos() - 4, reg, e.message().c_str());
+		} catch (Not_Found) {continue;}
+		try {
+			uint16_t const packet_version = fr.Unsigned16();
+			if (packet_version == CURRENT_PACKET_VERSION) {
+				while (not fr.EndOfFile()) {
+					uint32_t const reg = fr.Unsigned32();
+					if (ol->is_object_known(reg))
+						throw wexception
+							("%u: read object with reg %u, but an object with that "
+							 "reg has already been loaded",
+							 fr.GetPos() - 4, reg);
+					Coords c;
+					try {c = fr.Coords32(extent);}
+					catch (_wexception const & e) {
+						throw wexception
+							("%u: coordinates of watcher %u: %s",
+							 fr.GetPos() - 4, reg, e.what());
+					}
+					ol->register_object
+						(egbase,
+						 reg,
+						 &player->add_areawatcher
+						 (Player_Area<>(p, Area<>(c, fr.Unsigned16()))));
 				}
-				ol->register_object
-					(egbase,
-					 reg,
-					 &player->add_areawatcher
-					 (Player_Area<>(p, Area<>(c, fr.Unsigned16()))));
-			}
-		} else
+			} else
+				throw wexception
+					("0: unknown/unhandled packet version %u", packet_version);
+		} catch (std::exception const & e) {
 			throw wexception
 				("Map_Players_AreaWatchers_Data_Packet::Read: player %u: in "
-				 "\"%s\":0: unknown packet version %u",
-				 p, filename, packet_version);
+				 "\"%s\": %s",
+				 p, filename, e.what());
+		}
 	}
 }
 
@@ -114,8 +117,7 @@ throw (_wexception)
 			const AreaWatcher & areawatcher =
 				dynamic_cast<const AreaWatcher &>(*it->get(egbase));
 			fw.Unsigned32(os->register_object(&areawatcher));
-			fw.Coords32  (areawatcher);
-			fw.Unsigned16(areawatcher.radius);
+			fw.Area48    (areawatcher);
 		}
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);

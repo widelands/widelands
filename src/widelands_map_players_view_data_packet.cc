@@ -100,16 +100,10 @@ extern const Map_Object_Descr g_road_descr;
 //                /     \ /
 //              bl------br
 
-//  FIXME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//  FIXME make sure that FileRead, FileWrite can not be copied (for example passed by value)
-//  FIXME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 inline static const Map_Object_Descr * read_unseen_immovable
 (const Editor_Game_Base & egbase,
- const Player_Number      plnum,                    //  only for error messages
- const TCoords<>          tcoords,                  //  only for error messages
  BitInBuffer<2>         & immovable_kinds_file,
- FileRead               & immovables_file,
- const char             & immovables_filename)      //  only for error messages
+ FileRead               & immovables_file)
 {
 	const Map_Object_Descr * map_object_descr;
 	try {
@@ -123,17 +117,8 @@ inline static const Map_Object_Descr * read_unseen_immovable
 		case 3: //  The player sees a building.
 			map_object_descr = &immovables_file.Building_Type (egbase); break;
 		}
-	} catch (const FileRead::File_Boundary_Exceeded) {
-		throw wexception
-			("Map_Players_View_Data_Packet::Read: player %u: (%i, %i) t = %u: "
-			 "unexpected end of file",
-			 plnum, tcoords.x, tcoords.y, tcoords.t);
-	} catch (StreamRead::Data_Error & e) {
-		throw wexception
-			("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": (%i, %i) "
-			 "t = %u: error while reading immovable kind: %s",
-			 plnum, &immovables_filename, tcoords.x, tcoords.y, tcoords.t,
-			 e.message().c_str());
+	} catch (_wexception const & e) {
+		throw wexception("unseen immovable: %s", e.what());
 	}
 	return map_object_descr;
 }
@@ -288,8 +273,7 @@ throw (_wexception)
 			         plnum, VISION_CURRENT_PACKET_VERSION);
 			vision_file.Open(fs, fname);
 			have_vision = true;
-		} catch (...) {
-		}
+		} catch (...) {}
 
 		if (have_vision) {
 			for
@@ -445,11 +429,9 @@ throw (_wexception)
 
 					f_player_field.map_object_descr[TCoords<>::None] =
 						read_unseen_immovable
-						(*egbase, plnum, TCoords<>(f, TCoords<>::None),
-						 node_immovable_kinds_file, node_immovables_file,
-						 *node_immovables_filename);
-				}
+						(*egbase, node_immovable_kinds_file, node_immovables_file);
 					break;
+				}
 				default:
 					//  The player currently sees the node. Therefore his
 					//  information about the node has not been saved. Fill in the
@@ -498,9 +480,8 @@ throw (_wexception)
 					}
 					f_player_field.map_object_descr[TCoords<>::D] =
 						read_unseen_immovable
-						(*egbase, plnum, TCoords<>(f, TCoords<>::D),
-						 triangle_immovable_kinds_file, triangle_immovables_file,
-						 *triangle_immovables_filename);
+						(*egbase,
+						 triangle_immovable_kinds_file, triangle_immovables_file);
 				}
 				if  (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
@@ -521,9 +502,8 @@ throw (_wexception)
 					}
 					f_player_field.map_object_descr[TCoords<>::R] =
 						read_unseen_immovable
-						(*egbase, plnum, TCoords<>(f, TCoords<>::R),
-						 triangle_immovable_kinds_file, triangle_immovables_file,
-						 *triangle_immovables_filename);
+						(*egbase,
+						 triangle_immovable_kinds_file, triangle_immovables_file);
 				}
 
 				{//  edges

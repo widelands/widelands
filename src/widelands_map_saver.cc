@@ -22,9 +22,6 @@
 #include "editor_game_base.h"
 #include "filesystem.h"
 #include "map.h"
-#include "map_event_manager.h"
-#include "map_eventchain_manager.h"
-#include "map_trigger_manager.h"
 #include "player.h"
 #include "tribe.h"
 #include "wexception.h"
@@ -131,21 +128,21 @@ void Map_Saver::save() throw (_wexception) {
 	const Map & map = *m_egbase->get_map();
 
    // Triggers
-	if (map.get_mtm().get_nr_triggers()) {
+	if (map.mtm().size()) {
       log("Writing Trigger Data ... ");
 		Map_Trigger_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");
 	}
 
    // Events
-	if (map.get_mem().get_nr_events()) {
+	if (map.mem().size()) {
       log("Writing Event Data ... ");
 		Map_Event_Data_Packet                 p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");
 	}
 
    // Event Chains
-	if (map.get_mecm().get_nr_eventchains()) {
+	if (map.mcm().size()) {
       log("Writing Event Chain Data ... ");
 		Map_EventChain_Data_Packet            p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");

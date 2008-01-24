@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,30 +17,35 @@
  *
  */
 
+#ifndef EVENT_REVEAL_OBJECTIVE_H
+#define EVENT_REVEAL_OBJECTIVE_H
+
 #include "event.h"
-
-#include "event_referencer.h"
-#include "map.h"
-#include "editor_game_base.h"
-#include "game.h"
-
-#include <map>
 
 namespace Widelands {
 
-/*
- * reference or unrefereence this Event
- */
-void Event::reference(EventReferencer* ref) {
-	++m_referencers[ref];
-}
-void Event::unreference(EventReferencer* ref) {
-   std::map<EventReferencer*, uint32_t>::iterator cur = m_referencers.find(ref);
-	if (cur != m_referencers.end()) {
-      cur->second--;
-		if (cur->second == 0)
-         m_referencers.erase(cur);
-	}
-}
+class Editor_Game_Base;
+class Objective;
+
+struct Event_Reveal_Objective : public Event {
+	Event_Reveal_Objective(char const * const Name, State const S)
+	: Event(Name, S), m_objective(0)
+	{}
+
+	int32_t option_menu(Editor_Interactive &);
+
+      State run(Game*);
+
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &) const;
+
+	void set_objective(Objective * objective) {m_objective = objective;}
+	Objective * get_objective() {return m_objective;}
+
+private:
+	Objective * m_objective;
+};
 
 };
+
+#endif

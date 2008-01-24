@@ -51,6 +51,7 @@ throw (_wexception)
    // read packet version
 	const int32_t packet_version = s->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
+		Map & map = egbase->map();
       // Nothing more. But read all pics
 		if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
          filenameset_t pictures;
@@ -84,7 +85,7 @@ throw (_wexception)
             info.type = Map::Extradata_Info::PIC;
             info.filename = *pname;
             info.data = data;
-            egbase->get_map()->m_extradatainfos.push_back(info);
+				map.m_extradatainfos.push_back(info);
 			}
 		}
 	} else

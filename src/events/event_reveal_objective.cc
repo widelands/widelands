@@ -17,14 +17,13 @@
  *
  */
 
-#include "event_move_view.h"
-
-#include "interactive_player.h"
+#include "event_reveal_objective.h"
 
 #include "editor_game_base.h"
 #include "filesystem.h"
 #include "game.h"
 #include "i18n.h"
+#include "interactive_base.h"
 #include "map.h"
 #include "profile.h"
 #include "wexception.h"
@@ -33,52 +32,37 @@
 
 namespace Widelands {
 
-Event_Move_View::Event_Move_View(char const * const Name, State const S)
-	: Event(Name, S), m_location(Coords::Null()), m_player(1)
-{}
-
-
-void Event_Move_View::Read(Section & s, Editor_Game_Base & egbase) {
+void Event_Reveal_Objective::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
 		int32_t const packet_version = s.get_safe_int("version");
 		if (1 <= packet_version and packet_version <= EVENT_VERSION) {
-			m_location =
-				packet_version == 1 ?
-				Coords(s.get_safe_int("point_x"), s.get_safe_int("point_y"))
-				:
-				s.get_safe_Coords("point");
-			m_player = s.get_int("player", 1);
-			Map const & map = egbase.map();
-			if
-				(m_location.x < 0 or map.get_width () <= m_location.x
-				 or
-				 m_location.y < 0 or map.get_height() <= m_location.y)
-				throw wexception
-					("illegal coordinates (%i, %i)", m_location.x, m_location.y);
-			if (m_player <= 0 or map.get_nrplayers() < m_player)
-				throw wexception("illegal player number %u", m_player);
+			char const * const objective_name = s.get_safe_string("objective");
+			if (Objective * const obj = egbase.map().mom()[objective_name])
+				set_objective(obj);
+			else
+				throw wexception("objecive \"%s\" does not exist", objective_name);
 		} else
 			throw wexception("unknown/unhandled version %i", packet_version);
-	} catch (_wexception const & e) {
-		throw wexception("(move view): %s", e.what());
+	} catch (std::exception const & e) {
+		throw wexception
+			("Event (Reveal Objective) %s: %s", name().c_str(), e.what());
 	}
 }
 
-void Event_Move_View::Write(Section & s) const {
-	s.set_string("type",    "move_view");
-	s.set_int   ("version", EVENT_VERSION);
-	s.set_Coords("point",   m_location);
+void Event_Reveal_Objective::Write(Section & s) const {
+   assert(m_objective);
+	s.set_string("type",      "reveal_objective");
+	s.set_int   ("version",   EVENT_VERSION);
+	s.set_string("objective", m_objective->name());
 }
 
 /*
  * check if trigger conditions are done
  */
-Event::State Event_Move_View::run(Game* game) {
-	assert(m_location);
+Event::State Event_Reveal_Objective::run(Game *) {
+   assert(m_objective);
 
-	Interactive_Player & ipl = *game->get_ipl();
-	if (ipl.get_player_number() == m_player)
-		ipl.move_view_to(m_location);
+	m_objective->set_is_visible(true);
 
    m_state = DONE;
    return m_state;

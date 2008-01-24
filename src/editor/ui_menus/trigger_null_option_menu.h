@@ -37,6 +37,7 @@ struct Trigger_Null_Option_Menu : public UI::Window {
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
+	Editor_Interactive & eia();
 	void clicked_ok();
 
 	Widelands::Trigger_Null & m_trigger;

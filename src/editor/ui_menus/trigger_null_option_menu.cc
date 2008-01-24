@@ -23,11 +23,22 @@
 #include "trigger/trigger_null.h"
 #include "editorinteractive.h"
 
-#include "ui_window.h"
-#include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
+#include "ui_modal_messagebox.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
+
+
+int32_t Widelands::Trigger_Null::option_menu(Editor_Interactive & eia) {
+	Trigger_Null_Option_Menu m(eia, *this); return m.run();
+}
+
+
+inline Editor_Interactive & Trigger_Null_Option_Menu::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
 
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu
@@ -44,7 +55,7 @@ m_trigger (trigger)
 
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
-	m_name->set_text(trigger.get_name());
+	m_name->set_text(trigger.name().c_str());
 
    // Buttons
    posx=(get_inner_w()/2)-60-spacing;
@@ -87,7 +98,26 @@ bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t
  * a button has been clicked
  */
 void Trigger_Null_Option_Menu::clicked_ok() {
-	if (m_name->get_text())
-         m_trigger.set_name(m_name->get_text());
+	if (char const * const name = m_name->get_text()) {
+		if
+			(Widelands::Trigger * const registered_trigger =
+			 eia().egbase().map().mtm()[name])
+			if (registered_trigger != & m_trigger) {
+				char buffer[256];
+				snprintf
+					(buffer, sizeof(buffer),
+					 _("There is another trigger registered with the name \"%s\". "
+					   "Choose another name.")
+					 .c_str(),
+					 name);
+				UI::Modal_Message_Box mb
+					(get_parent(),
+					 _("Name in use"), buffer,
+					 UI::Modal_Message_Box::OK);
+				mb.run();
+				return;
+			}
+		m_trigger.set_name(name);
+	}
       end_modal(1);
 }

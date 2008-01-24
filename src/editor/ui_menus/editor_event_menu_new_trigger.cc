@@ -21,7 +21,6 @@
 
 #include "constants.h"
 #include "i18n.h"
-#include "map_trigger_manager.h"
 #include "editorinteractive.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_factory.h"
@@ -33,6 +32,7 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 
+using namespace Widelands::Trigger_Factory;
 
 inline Editor_Interactive & Editor_Event_Menu_New_Trigger::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());
@@ -52,19 +52,12 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 
    // Trigger List
    new UI::Textarea(this, spacing, offsy, _("Available Triggers: "), Align_Left);
-   m_trigger_list=new UI::Listselect<Widelands::Trigger_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
-   m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
-   m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
-	for
-		(uint32_t i = 0;
-		 i < Widelands::Trigger_Factory::get_nr_of_available_triggers();
-		 ++i)
-	{
-		Widelands::Trigger_Descr & d =
-			*Widelands::Trigger_Factory::get_trigger_descr(i);
-		m_trigger_list->add(i18n::translate(d.name).c_str(), d);
-	}
-   m_trigger_list->sort();
+	m_trigger_type_list=new UI::BaseListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   m_trigger_type_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
+   m_trigger_type_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
+	for (uint32_t i = 0; i < nr_trigger_types(); ++i)
+		m_trigger_type_list->add(_(type_descr(i).name).c_str(), i);
+   m_trigger_type_list->sort();
 
    // Descr List
    new UI::Textarea(this, (get_inner_w()/2)+spacing, offsy, _("Description: "), Align_Left);
@@ -113,21 +106,21 @@ bool Editor_Event_Menu_New_Trigger::handle_mouserelease(const Uint8, int32_t, in
  * a button has been clicked
  */
 void Editor_Event_Menu_New_Trigger::clicked_ok() {
-	if
-		(Widelands::Trigger * const trig =
-		 Widelands::Trigger_Factory::make_trigger_with_option_dialog
-		 (m_trigger_list->get_selected().id.c_str(), eia(), 0))
-	{
-		eia().egbase().map().get_mtm().register_new_trigger(trig);
+	assert(m_trigger_type_list->has_selection());
+	Widelands::Trigger & trigger = create(m_trigger_type_list->get_selected());
+	if (trigger.option_menu(eia())) {
+		eia().egbase().map().mtm().register_new(trigger);
 		end_modal(1);
-	}
+	} else
+		delete &trigger;
 }
 
 /*
  * the listbox got selected
  */
 void Editor_Event_Menu_New_Trigger::selected(uint32_t) {
-	m_description->set_text(_(m_trigger_list->get_selected().descr));
+	m_description->set_text
+		(_(type_descr(m_trigger_type_list->get_selected()).helptext));
    m_ok_button->set_enabled(true);
 }
 

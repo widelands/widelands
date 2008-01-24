@@ -68,13 +68,15 @@ class _wexception implementation
 _wexception::_wexception(const char* file, uint32_t line, const char *fmt, ...)
 throw ()
 {
-	va_list va;
 	char buffer[256];
-	va_start(va, fmt);
-	vsnprintf(buffer, sizeof(buffer), fmt, va);
-	va_end(va);
+	{
+		va_list va;
+		va_start(va, fmt);
+		vsnprintf(buffer, sizeof(buffer), fmt, va);
+		va_end(va);
+	}
 	std::ostringstream ost;
-	ost << file << ':' << line << ' ' << buffer;
+	ost << '[' << file << ':' << line << "] " << buffer;
 	m_what = ost.str();
 }
 

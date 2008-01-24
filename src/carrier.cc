@@ -519,8 +519,8 @@ void Carrier::find_pending_item(Game* g)
  */
 int32_t Carrier::find_closest_flag(Game* g)
 {
-	CoordPath startpath
-		(g->map(), dynamic_cast<Road &>(*get_location(g)).get_path());
+	Map & map = g->map();
+	CoordPath startpath(map, dynamic_cast<Road &>(*get_location(g)).get_path());
 	CoordPath endpath;
 	int32_t startcost, endcost;
 	int32_t curidx = -1;
@@ -531,7 +531,7 @@ int32_t Carrier::find_closest_flag(Game* g)
 	if (curidx < 0) {
 		Coords pos = get_position();
 
-		g->get_map()->get_brn(pos, &pos);
+		map.get_brn(pos, &pos);
 
 		if (pos == startpath.get_start())
 			curidx = 0;
@@ -552,13 +552,10 @@ int32_t Carrier::find_closest_flag(Game* g)
 
 	endpath.starttrim(curidx);
 
-	g->get_map()->calc_cost(startpath, &startcost, 0);
-	g->get_map()->calc_cost(endpath, &endcost, 0);
+	map.calc_cost(startpath, &startcost, 0);
+	map.calc_cost(endpath,   &endcost,   0);
 
-	if (startcost <= endcost)
-		return 0;
-	else
-		return 1;
+	return endcost < startcost;
 }
 
 

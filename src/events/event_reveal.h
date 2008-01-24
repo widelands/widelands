@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,27 +17,25 @@
  *
  */
 
-#ifndef __S__TRIGGER_REFERENCER_H
-#define __S__TRIGGER_REFERENCER_H
+#ifndef EVENT_REVEAL_H
+#define EVENT_REVEAL_H
 
-#include <string>
+#include "event.h"
 
 namespace Widelands {
 
-class Trigger;
+struct Event_Reveal : public Event {
+	Event_Reveal(char const * Name, State const S)
+		: Event(Name, S)
+	{}
 
-/**
- * A Trigger referencer is a class, that uses a Trigger (trigger chain, objective)
- */
-struct TriggerReferencer {
-	virtual ~TriggerReferencer() {}
-	virtual const char * get_type() const = 0;
-	virtual const std::string & name() const = 0;
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &) const;
 
-	void reference_trigger(Trigger*);
-	void unreference_trigger(Trigger*);
+protected:
+	std::string reveal;
 };
 
 };
 
-#endif // __S__TRIGGER_REFERENCER_H
+#endif

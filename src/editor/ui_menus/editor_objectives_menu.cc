@@ -22,11 +22,8 @@
 #include "editorinteractive.h"
 #include "i18n.h"
 #include "map.h"
-#include "map_objective_manager.h"
-#include "map_trigger_manager.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_null.h"
-#include "trigger/trigger_referencer.h"
 
 #include "ui_button.h"
 #include "ui_checkbox.h"
@@ -39,8 +36,8 @@
 
 #include <map>
 
-using Widelands::MapObjective;
-using Widelands::MapObjectiveManager;
+using Widelands::Objective;
+using Widelands::Trigger;
 
 /**
  * This is a modal box - The user must end this first
@@ -49,25 +46,24 @@ using Widelands::MapObjectiveManager;
 struct Edit_Objective_Window : public UI::Window {
 	Edit_Objective_Window
 		(Editor_Interactive * const parent,
-		 UI::Table<MapObjective &>::Entry_Record &);
+		 UI::Table<Objective &>::Entry_Record &);
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
       Editor_Interactive  *m_parent;
-	UI::Table<MapObjective &>::Entry_Record & m_te;
+	UI::Table<Objective &>::Entry_Record & m_te;
       UI::Edit_Box          *m_name;
       UI::Multiline_Editbox *m_descr;
       UI::Checkbox          *m_visibleAtBegin;
-      UI::Checkbox          *m_optional;
 
 	void clicked_ok();
 };
 
 Edit_Objective_Window::Edit_Objective_Window
 (Editor_Interactive * const parent,
- UI::Table<MapObjective &>::Entry_Record & te)
+ UI::Table<Objective &>::Entry_Record & te)
 :
 UI::Window(parent, 0, 0, 250, 85, _("Edit Objective").c_str()),
 m_parent  (parent),
@@ -76,7 +72,7 @@ m_te      (te)
    int32_t spacing = 5;
    int32_t posy = 5;
 
-	MapObjective & obj = UI::Table<MapObjective &>::get(te);
+	Objective & obj = UI::Table<Objective &>::get(te);
 
    // What type
    new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
@@ -87,11 +83,6 @@ m_te      (te)
    new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Visible at Begin: "), Align_CenterLeft);
    m_visibleAtBegin = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
 	m_visibleAtBegin->set_state(obj.get_is_visible());
-   posy += STATEBOX_HEIGHT+ spacing;
-
-   new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Optional Objective: "), Align_CenterLeft);
-   m_optional = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
-	m_optional->set_state(obj.get_is_optional());
    posy += STATEBOX_HEIGHT+ spacing;
 
    // Multiline editbox
@@ -144,15 +135,13 @@ bool Edit_Objective_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
  */
 void Edit_Objective_Window::clicked_ok() {
    // Extract value
-	MapObjective & obj = UI::Table<MapObjective &>::get(m_te);
+	Objective & obj = UI::Table<Objective &>::get(m_te);
 
 	obj.set_name(m_name->get_text());
-	obj.set_is_optional(m_optional->get_state());
 	obj.set_is_visible(m_visibleAtBegin->get_state());
 	obj.set_descr(m_descr->get_text().c_str());
 	m_te.set_string(0, obj.name());
-	m_te.set_string(1, obj.get_is_optional() ? "Yes" : "No");
-	m_te.set_string(2, obj.get_is_visible() ? "Yes" : "No");
+	m_te.set_string(1, obj.get_is_visible() ? "Yes" : "No");
 
    // Set the triggers name
 	obj.get_trigger()->set_name(m_name->get_text());
@@ -222,10 +211,10 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
    m_trigger = new UI::Textarea(this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
 
    // Add all variables
-	const MapObjectiveManager & mom = m_parent->egbase().map().get_mom();
-	const MapObjectiveManager::Index nr_objectives = mom.get_nr_objectives();
-	for (MapObjectiveManager::Index i = 0; i < nr_objectives; ++i)
-		insert_objective(mom.get_objective_by_nr(i));
+	Manager<Objective> & mom = m_parent->egbase().map().mom();
+	Manager<Objective>::Index const nr_objectives = mom.size();
+	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i)
+		insert_objective(mom[i]);
 
 
 	// Put in the default position, if necessary
@@ -252,21 +241,22 @@ void Editor_Objectives_Menu::clicked_new() {
          char buffer[256];
 
 	Widelands::Map & map = m_parent->egbase().map();
-         MapObjectiveManager & mom = map.get_mom();
+	Manager<Objective> & mom = map.mom();
+	Manager<Trigger>   & mtm = map.mtm();
 	for (uint32_t n = 1;; ++n) {
 		snprintf(buffer, sizeof(buffer), _("Unnamed%u").c_str(), n);
-		if (not mom.get_objective(buffer)) break;
+		if (not mom[buffer] and not mtm[buffer])
+			break;
 	}
          // Create a new objective
-         MapObjective & mo = *new MapObjective;
-         mo.set_name(buffer);
-         mom.register_new_objective(&mo);
+	Objective & objective = *new Objective;
+	objective.set_name(buffer);
+	mom.register_new(objective);
          // Create a null trigger for this
-         Widelands::Trigger_Null & trigger = *new Widelands::Trigger_Null();
-         trigger.set_name(buffer);
-         mo.set_trigger(&trigger);
-         map.get_mtm().register_new_trigger(&trigger);
-         insert_objective(mo);
+	Widelands::Trigger_Null & trigger = *new Widelands::Trigger_Null(buffer);
+	objective.set_trigger(&trigger);
+	mtm.register_new(trigger);
+	insert_objective(objective);
 	   clicked_edit();// Fallthrough to edit
 }
 
@@ -275,24 +265,24 @@ void Editor_Objectives_Menu::clicked_edit() {
 	Edit_Objective_Window evw(m_parent, m_table.get_selected_record());
 	if (evw.run()) {
 		m_table.sort();
-		m_trigger->set_text(m_table.get_selected().get_trigger()->get_name());
+		m_trigger->set_text(m_table.get_selected().get_trigger()->name());
 			}
 }
 
 void Editor_Objectives_Menu::clicked_del() {
          // Delete selected objective
-	MapObjective & obj = m_table.get_selected();
+	Objective & obj = m_table.get_selected();
 
-	if (not obj.get_trigger()->get_referencers().empty()) {
+	if (not obj.get_trigger()->referencers().empty()) {
             std::string str=_("Can't delete Objective, because it's trigger is in use by ");
-		std::map<Widelands::TriggerReferencer *, uint32_t>::const_iterator i =
-			obj.get_trigger()->get_referencers().begin();
-		while (i != obj.get_trigger()->get_referencers().end()) {
-               str += i->first->get_type();
-               str += ":";
-               str += i->first->name();
-               str += " ";
-				}
+		Trigger::Referencers const & referencers =
+			obj.get_trigger()->referencers();
+		Trigger::Referencers::const_iterator i = referencers.begin();
+		while (i != referencers.end()) {
+			str += i->first->identifier();
+			str += "; ";
+		}
+		str.erase(str.end() - 2, str.end());
 		UI::Modal_Message_Box mmb
 			(m_parent, _("Error!"), str.c_str(), UI::Modal_Message_Box::OK);
 		mmb.run();
@@ -300,8 +290,8 @@ void Editor_Objectives_Menu::clicked_del() {
 			}
 
 	Widelands::Map & map = m_parent->egbase().map();
-	map.get_mtm().delete_trigger(obj.get_trigger()->get_name());
-	map.get_mom().delete_objective(obj.name().c_str());
+	map.mtm().remove(*obj.get_trigger());
+	map.mom().remove(obj);
 	m_table.remove_selected();
 
          m_edit_button->set_enabled(false);
@@ -317,7 +307,7 @@ void Editor_Objectives_Menu::table_selected(uint32_t n) {
    m_delete_button->set_enabled(true);
 
    // Baad stuff will happen, if trigger got deleted
-	m_trigger->set_text(m_table[n].get_trigger()->get_name());
+	m_trigger->set_text(m_table[n].get_trigger()->name());
 }
 
 /*
@@ -328,12 +318,11 @@ void Editor_Objectives_Menu::table_dblclicked(uint32_t) {clicked_edit();}
 /*
  * Insert this map variable into the table
  */
-void Editor_Objectives_Menu::insert_objective(MapObjective & var) {
-	UI::Table<MapObjective &>::Entry_Record & t = m_table.add(var, -1, true);
+void Editor_Objectives_Menu::insert_objective(Objective & var) {
+	UI::Table<Objective &>::Entry_Record & t = m_table.add(var, -1, true);
 
 	t.set_string(0, var.name());
-	t.set_string(1, var.get_is_optional() ? "Yes" : "No");
-	t.set_string(2, var.get_is_visible() ? "Yes" : "No");
+	t.set_string(1, var.get_is_visible() ? "Yes" : "No");
 
    m_table.sort();
 }

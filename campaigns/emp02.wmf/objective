@@ -6,41 +6,34 @@ packet_version=1
 [Build Woodeconomy]
 descr=_"* Build up three lumberjacks, a forester and a sawmill."
 visible=false
-optional=false
 trigger=Woodeconomy complete
 
 [Build Quarry]
 descr=_"* Build a quarry to the south of your headquarters."
 visible=false
-optional=false
 trigger=Quarry complete
 
 [Build military buildings]
 descr=_"* Build some barracks and sentrys around the colony."
 visible=false
-optional=false
 trigger=Military buildings complete
 
 [Build Marblemine]
 descr=_"* Expand to the east, to start mining marble on the mountain."
 visible=false
-optional=false
 trigger=Marblemine complete
 
 [Build Mining infrastructure]
 descr=_"* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 visible=false
-optional=false
 trigger=Mining infrastructure complete
 
 [Build bigger military buildings]
 descr=_"* Build up bigger military buildings, like an outpost, a barrier or a tower, on the eastern frontier."
 visible=false
-optional=false
 trigger=Bigger military building complete
 
 [Remove the barbarians]
 descr=_"* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 visible=false
-optional=false
 trigger=Victory

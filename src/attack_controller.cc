@@ -420,6 +420,7 @@ void AttackController::Loader::load(FileRead & fr) {
 
 	egbase().register_attack_controller(ctrl);
 
+	try {
 	flag = fr.Unsigned32();
 
 	ctrl->attackingPlayer = fr.Unsigned8();
@@ -429,19 +430,18 @@ void AttackController::Loader::load(FileRead & fr) {
 
 	uint32_t numBs = fr.Unsigned32();
 
-	for (uint32_t j = 0; j < numBs; ++j) {
+		for (uint32_t j = 0; j < numBs; ++j) {
 		uint32_t soldier = fr.Unsigned32();
 		uint32_t origin = fr.Unsigned32();
 
 		Coords battleGround;
-		try {
-			battleGround = fr.Coords32(egbase().map().extent());
-		} catch (FileRead::Data_Error const & e) {
-			throw wexception
-				("AttackController::load: in binary/mapobjects:%u: Coordinates of "
-				 "battleground: %s",
-				 fr.GetPos() - 4, e.message().c_str());
-		}
+			try {
+				battleGround = fr.Coords32(egbase().map().extent());
+			} catch (_wexception const & e) {
+				throw wexception
+					("%u: coordinates of battleground: %s",
+					 fr.GetPos() - 4, e.what());
+			}
 
 		bool attacker = fr.Unsigned8();
 		bool arrived = fr.Unsigned8();
@@ -467,6 +467,10 @@ void AttackController::Loader::load(FileRead & fr) {
 	uint32_t numInMs = fr.Unsigned32();
 	for (uint32_t j = 0; j < numInMs; ++j)
 		militarySites.push_back(fr.Unsigned32());
+	} catch (_wexception const & e) {
+		throw wexception
+			("Error in AttackController: binary/mapobjects:%s", e.what());
+	}
 }
 
 

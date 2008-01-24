@@ -1134,7 +1134,7 @@ void Road::set_path(Editor_Game_Base *g, const Path &path)
 	assert(path.get_end() == m_flags[FlagEnd]->get_position());
 
 	m_path = path;
-	g->get_map()->calc_cost(path, &m_cost[FlagStart], &m_cost[FlagEnd]);
+	g->map().calc_cost(path, &m_cost[FlagStart], &m_cost[FlagEnd]);
 
 	// Figure out where carriers should idle
 	m_idle_index = path.get_nsteps() / 2;

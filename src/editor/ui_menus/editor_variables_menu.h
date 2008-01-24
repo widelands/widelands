@@ -25,7 +25,7 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-namespace Widelands {struct MapVariable;};
+namespace Widelands {struct Variable;};
 
 /*
 =============================
@@ -40,13 +40,13 @@ struct Editor_Variables_Menu : public UI::UniqueWindow {
 
 private:
 	Editor_Interactive                & m_parent;
-	UI::Table<Widelands::MapVariable &> m_table;
+	UI::Table<Widelands::Variable &> m_table;
 	UI::Button<Editor_Variables_Menu> m_button_new;
 	UI::Button<Editor_Variables_Menu> m_button_edit;
 	UI::Button<Editor_Variables_Menu> m_button_del;
 
 private:
-	void insert_variable(Widelands::MapVariable &);
+	void insert_variable(Widelands::Variable &);
 	void clicked_new ();
 	void clicked_edit();
 	void clicked_del ();

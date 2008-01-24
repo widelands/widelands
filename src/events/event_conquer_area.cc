@@ -22,6 +22,8 @@
 #include "game.h"
 #include "map.h"
 
+#include "profile.h"
+
 namespace Widelands {
 
 Event::State Event_Conquer_Area::run(Game* game) {
@@ -37,6 +39,12 @@ Event::State Event_Conquer_Area::run(Game* game) {
 
    m_state = DONE;
    return m_state;
+}
+
+
+void Event_Conquer_Area::Write(Section & s) const {
+	s.set_string("type",    "conquer_area");
+	Event_Player_Area::Write(s);
 }
 
 };

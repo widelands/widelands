@@ -3,71 +3,58 @@ packet_version=1
 
 [Start Trigger]
 type=time
-set=false
 version=1
 wait_time=0
 last_start_time=0
 
 [Message Barracks]
 type=time
-set=false
 version=1
 wait_time=10
 last_start_time=0
 
 [Barracks complete]
 type=building
-set=false
 version=2
 point=12 0
 area=2
 player=1
-count=1
 building=barracks
 
 [Lumberjack complete]
 type=building
-set=false
 version=2
 point=5 3
 area=2
 player=1
-count=1
 building=lumberjack
 
 [Sawmill complete]
 type=building
-set=false
 version=2
 point=5 3
 area=100
 player=1
-count=1
 building=sawmill
 
 [Forester complete]
 type=building
-set=false
 version=2
 point=5 3
 area=100
 player=1
-count=1
 building=forester
 
 [Quarry complete]
 type=building
-set=false
 version=2
 point=5 3
 area=100
 player=1
-count=1
 building=quarry
 
 [End Trigger]
 type=time
-set=false
 version=1
 wait_time=80
 last_start_time=100000

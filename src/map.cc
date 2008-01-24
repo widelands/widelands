@@ -17,14 +17,10 @@
  *
  */
 
+#include "events/event.h"
 #include "events/event_chain.h"
 #include "layered_filesystem.h"
 #include "mapfringeregion.h"
-#include "map_event_manager.h"
-#include "map_eventchain_manager.h"
-#include "map_variable_manager.h"
-#include "map_objective_manager.h"
-#include "map_trigger_manager.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "s2map.h"
@@ -44,11 +40,9 @@ namespace Widelands {
 /**
  * Callback function for font renderer.
  */
-std::string g_MapVariableCallback(std::string str, void* data) {
+std::string g_VariableCallback(std::string str, void * data) {
 	if (const Map * const map = static_cast<const Map *>(data))
-		if
-			(const MapVariable * const var =
-			 map->get_mvm().get_variable(str.c_str()))
+		if (Variable const * const var = map->mvm()[str])
 			return var->get_string_representation();
 	return (std::string("UNKNOWN:") + str).c_str();
 }
@@ -104,13 +98,7 @@ m_world          (0),
 m_starting_pos   (0),
 m_fields         (0),
 m_pathfields     (0),
-m_overlay_manager(0),
-
-m_mvm            (new MapVariableManager  ()),
-m_mtm            (new MapTriggerManager   ()),
-m_mem            (new MapEventManager     ()),
-m_mecm           (new MapEventChainManager()),
-m_mom            (new MapObjectiveManager ())
+m_overlay_manager(0)
 {}
 
 /*
@@ -124,17 +112,6 @@ Map::~Map()
 {
    cleanup();
       delete m_overlay_manager;
-      m_overlay_manager=0;
-      delete m_mvm;
-      m_mvm = 0;
-      delete m_mom;
-      m_mom = 0;
-      delete m_mecm;
-      m_mecm = 0;
-      delete m_mtm;
-      m_mtm = 0;
-      delete m_mem;
-      m_mem = 0;
 }
 
 void Map::recalc_border(const FCoords fc) {
@@ -375,27 +352,44 @@ void Map::cleanup() {
 	if (m_overlay_manager)
       m_overlay_manager->reset();
 
-   delete m_mom;
-   m_mom = new MapObjectiveManager();
-
+	mom().remove_all();
+	mcm().remove_all();
+	mem().remove_unreferenced();
 	{
-		MapEventChainManager & mecm = *m_mecm;
-		while (mecm.get_nr_eventchains())
-			mecm.delete_eventchain(mecm.get_eventchain_by_nr(0).name());
+		Manager<Event>::Index nr_events = mem().size();
+		for (Manager<Trigger>::Index e_idx = 0; e_idx < nr_events; ++e_idx) {
+			Trigger const & event = mtm()[e_idx];
+			Trigger::Referencers const referencers =event.referencers();
+			Trigger::Referencers::const_iterator const referencers_end =
+				referencers.end();
+			for
+				(Trigger::Referencers::const_iterator it = referencers.begin();
+				 it != referencers_end;
+				 ++it)
+				log
+					("ERROR: event %s is still referenced by %s\n",
+					 event.name().c_str(), it->first->identifier().c_str());
+		}
 	}
-	m_mem->delete_unreferenced_events();
-	m_mtm->delete_unreferenced_triggers();
+	mtm().remove_unreferenced();
+	{
+		Manager<Trigger>::Index nr_triggers = mtm().size();
+		for (Manager<Trigger>::Index t_idx = 0; t_idx < nr_triggers; ++t_idx) {
+			Trigger const & trigger = mtm()[t_idx];
+			Trigger::Referencers const referencers =trigger.referencers();
+			Trigger::Referencers::const_iterator const referencers_end =
+				referencers.end();
+			for
+				(Trigger::Referencers::const_iterator it = referencers.begin();
+				 it != referencers_end;
+				 ++it)
+				log
+					("ERROR: trigger %s is still referenced by %s\n",
+					 trigger.name().c_str(), it->first->identifier().c_str());
+		}
+	}
 
-	if (uint8_t nr_triggers = m_mtm->get_nr_triggers())
-		log("WARNING: Map::cleanup: there are %u triggers left!", nr_triggers);
-	if (uint8_t nr_events   = m_mem->get_nr_events  ())
-		log("WARNING: Map::cleanup: there are %u events left!",   nr_events);
-
-   delete m_mvm;
-   m_mvm = new MapVariableManager();
-
-   delete m_mecm;
-   m_mecm = new MapEventChainManager();
+	mvm().remove_all();
 
    // Remove all extra datas. Pay attention here, maybe some freeing would be needed
 #ifdef DEBUG

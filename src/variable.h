@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__VARIABLE_MANAGER_H
-#define __S__VARIABLE_MANAGER_H
+#ifndef VARIABLE_H
+#define VARIABLE_H
 
 #include <cassert>
 #include <string>
@@ -27,9 +27,6 @@
 namespace Widelands {
 
 /**
- * The Map Variable Manager makes sure that variables
- * in the map are watched accordingly.
- *
  * A Map variable is a user defined type, which can be changed with
  * triggers or events and displayed in strings. Also triggers can be
  * run when variables are over a certain value.
@@ -41,31 +38,23 @@ namespace Widelands {
 /**
  * First, the variables
  */
-struct MapVariable {
-      enum Type {
-         MVT_INT,
-         MVT_STRING,
-		};
-
-      MapVariable(bool t) {m_delete_protected = t;}
-      virtual ~MapVariable() {}
+struct Variable {
+	Variable(bool const t) {m_delete_protected = t;}
+	virtual ~Variable() {}
 
 	bool is_delete_protected() const {return m_delete_protected;}
-	std::string const & get_name() const {return m_name;}
-      void set_name(const char* name) {m_name = name;}
+	void set_name(std::string const & new_name) {m_name = new_name;}
+	std::string const & name() const throw () {return m_name;}
 
 	virtual std::string get_string_representation() const = 0;
-	virtual Type get_type() const = 0;
 
 private:
       std::string   m_name;
       bool           m_delete_protected;
 };
 
-struct Int_MapVariable : public MapVariable {
-      Int_MapVariable(bool t) : MapVariable(t) {m_value = 0;}
-
-	Type get_type() const {return MVT_INT;}
+struct Variable_Int : public Variable {
+	Variable_Int(bool const t = 0) : Variable(t) {m_value = 0;}
 
 	int32_t get_value() const {return m_value;}
       void set_value(int32_t t) {m_value = t;}
@@ -79,10 +68,8 @@ private:
       int32_t            m_value;
 };
 
-struct String_MapVariable : public MapVariable {
-      String_MapVariable(bool t) : MapVariable(t) {m_value = "";}
-
-	Type get_type() const {return MVT_STRING;}
+struct Variable_String : public Variable {
+	Variable_String(bool const t = 0) : Variable(t) {}
 
 	std::string const & get_value() const {return m_value;}
       void set_value(const char* t) {m_value = t;}
@@ -90,44 +77,6 @@ struct String_MapVariable : public MapVariable {
 
 private:
       std::string            m_value;
-};
-
-/**
- * The manager himself.
- * This is mainly a wrapper, the function
- * could have also been implemented directly in the map.
- *
- * But it is better this way.
- */
-struct MapVariableManager {
-      MapVariableManager();
-      ~MapVariableManager();
-
-      /**
-       * Register a new variable
-       */
-      bool register_new_variable(MapVariable*);
-
-      /**
-       * This prevents casting
-       */
-	Int_MapVariable    * get_int_variable   (const char * const name) const;
-	String_MapVariable * get_string_variable(const char * const name) const;
-
-      /**
-       * Get a variable
-       */
-	MapVariable* get_variable(const char * const name) const;
-	void delete_variable(MapVariable const &);
-
-	typedef std::vector<MapVariable *> variable_vector;
-	typedef variable_vector::size_type Index;
-	Index get_nr_variables() const {return m_variables.size();}
-	MapVariable & get_variable_by_nr(const Index i) const
-	{assert(i < m_variables.size()); return *m_variables[i];}
-
-private:
-	variable_vector      m_variables;
 };
 
 };

@@ -20,28 +20,50 @@
 #ifndef __S__EVENT_FACTORY_H
 #define __S__EVENT_FACTORY_H
 
-#include <string>
+#include "event.h"
 
-struct Editor_Interactive;
+#include <string>
 
 namespace Widelands {
 
-class Event;
+/// Functions that create an event of some type and returns a reference to it.
+/// The caller is given ownership of the created object and is therefore
+/// resposible for that it is deallocated with operator delete. The event's
+/// name and state are initialized to the given values.
+namespace Event_Factory {
 
-struct Event_Descr {
-	std::string id;
-	const std::string name;
-	const std::string descr;
+/// Creates an event of the type with the given number. A default name is given
+/// and the state is set to INIT.
+///
+/// Assumes that the given index is less than the number of event types.
+Event & create(size_t);
+
+/// Creates an event of the type with the given number.
+///
+/// Assumes that the given index is less than the number of event types.
+Event & create(size_t, char const * const name, Event::State const state);
+
+/// Creates an event of the type with the given type name.
+///
+/// \Throws _wexception if there is no event type with the given name.
+Event & create
+	(char const * type_name, char const * name, Event::State);
+
+struct Type_Descr {
+	char const * const id;       /// The identifier that is written to files.
+	std::string  const name;     /// Descriptive name for the user (localized).
+	std::string  const helptext; /// Help text for the user (localized).
 };
 
-/// Returns the correct descriptions, ids and creates the correct option dialog
-/// and (of course) event for each event-id.
-namespace Event_Factory {
-Event * get_correct_event(const char* id);
-Event * make_event_with_option_dialog
-	(const char * id, Editor_Interactive &, Event *);
-Event_Descr * get_event_descr(uint32_t id);
-const uint32_t get_nr_of_available_events();
+/// \Returns the description of the event type with the given index. The return
+/// value is a reference to an item in the static array of event type
+/// descriptions.
+///
+/// Assumes that the given index is less than the number of event types.
+Type_Descr const & type_descr(size_t);
+
+/// \Returns the number of event types, which is a compile-time constant.
+size_t nr_event_types();
 };
 
 };

@@ -25,64 +25,50 @@
 #include "game.h"
 #include "i18n.h"
 #include "map.h"
-#include "map_variable_manager.h"
 #include "player.h"
 #include "profile.h"
 #include "wexception.h"
 
 #include "upcast.h"
 
+#define PACKET_VERSION 3
+
 namespace Widelands {
 
-static const int32_t TRIGGER_VERSION = 2;
-
-Trigger_Building::Trigger_Building()
+Trigger_Building::Trigger_Building(char const * const Name, bool const set)
 :
-Trigger      (_("Building Trigger")),
-m_player_area(0, Area<FCoords>(FCoords(Coords(0, 0)), 0)),
-m_building   (_("<unset>")),
-m_count      (0)
-{set_trigger(false);}
+Trigger_Player_Area(Name, set),
+m_building         (_("<unset>"))
+{}
 
-Trigger_Building::~Trigger_Building() {}
 
-void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
-	const int32_t trigger_version= s->get_safe_int("version");
-	if (1 <= trigger_version and trigger_version <= TRIGGER_VERSION) {
-		m_player_area = Player_Area<Area<FCoords> >
-			(s->get_safe_int("player"),
-			 Area<FCoords>
-			 (egbase->map().get_fcoords
-			  (trigger_version == 1
-			   ?
-			   (Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y")))
-			   :
-			   s->get_safe_Coords("point")),
-			  s->get_safe_int("area")));
-		egbase->get_iabase()
-			->reference_player_tribe(m_player_area.player_number, this);
-      set_building_count(s->get_int("count"));
-      set_building(s->get_safe_string("building"));
-	} else
-		throw wexception
-			("Building Trigger with unknown/unhandled version %u in map!",
-			 trigger_version);
+void Trigger_Building::Read(Section & s, Editor_Game_Base & egbase) {
+	try {
+		int32_t const packet_version = s.get_safe_int("version");
+		if (1 <= packet_version and packet_version <= PACKET_VERSION) {
+			Trigger_Player_Area::Read(s, egbase);
+			egbase.get_iabase()->reference_player_tribe
+				(m_player_area.player_number, this);
+			set_building(s.get_safe_string("building"));
+		} else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (std::exception const & e) {
+		throw wexception("(building): %s", e.what());
+	}
 }
 
 void Trigger_Building::Write(Section & s) const {
-	s.set_int   ("version",  TRIGGER_VERSION);
-	s.set_Coords("point",    m_player_area);
-	s.set_int   ("area",     m_player_area.radius);
-	s.set_int   ("player",   m_player_area.player_number);
-	s.set_int   ("count",    get_building_count());
-	s.set_string("building", m_building.c_str());
+	s.set_string("type",     "building");
+	s.set_int   ("version",  PACKET_VERSION);
+	Trigger_Player_Area::Write(s);
+	s.set_string("building", m_building);
 }
 
 /*
  * check if trigger conditions are done
  */
-void Trigger_Building::check_set_conditions(Game* game) {
-	const Map & map = game->map();
+void Trigger_Building::check_set_conditions(Game const & game) {
+	Map const & map = game.map();
 	if
 		(m_player_area.x < 0 or map.get_width () <= m_player_area.x
 		 or
@@ -108,22 +94,17 @@ void Trigger_Building::check_set_conditions(Game* game) {
 	if (count >= m_count)
 		set_trigger(true);
 
-   // Set MapVariable inttemp
-	MapVariableManager & mvm = game->map().get_mvm();
-	Int_MapVariable * inttemp = mvm.get_int_variable("inttemp");
+	//  Set Variable inttemp.
+	Manager<Variable> & mvm = game.map().mvm();
+	Variable_Int * inttemp = dynamic_cast<Variable_Int *>(mvm["inttemp"]);
 	if (!inttemp) {
-      inttemp = new Int_MapVariable(false);
+      inttemp = new Variable_Int(false);
       inttemp->set_name("inttemp");
-      mvm.register_new_variable(inttemp);
+		mvm.register_new(*inttemp);
 	}
    inttemp->set_value(count);
 
    return;
 }
-
-/*
- * Reset this trigger. This is only valid for non one timers
- */
-void Trigger_Building::reset_trigger(Game *) {}
 
 };

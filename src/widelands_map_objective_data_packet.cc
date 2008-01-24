@@ -22,8 +22,6 @@
 #include "editor_game_base.h"
 #include "filesystem.h"
 #include "map.h"
-#include "map_objective_manager.h"
-#include "map_trigger_manager.h"
 #include "profile.h"
 #include "trigger/trigger_null.h"
 
@@ -44,32 +42,41 @@ throw (_wexception)
 
    Profile prof;
 	try {prof.read("objective", 0, fs);} catch (...) {return;}
-	MapObjectiveManager & mom = egbase->get_map()->get_mom();
-	MapTriggerManager   & mtm = egbase->get_map()->get_mtm();
+	Map & map = egbase->map();
+	Manager<Objective> & mom = map.mom();
+	Manager<Trigger>   & mtm = map.mtm();
 
-   Section* s = prof.get_section("global");
-
-	const int32_t packet_version = s->get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		while ((s = prof.get_next_section(0))) {
-         MapObjective* o = new MapObjective();
-         o->set_name(s->get_name());
-         o->set_descr(s->get_safe_string("descr"));
-         o->set_is_visible(s->get_safe_bool("visible"));
-         o->set_is_optional(s->get_safe_bool("optional"));
-
-         const char* trigname = s->get_safe_string("trigger");
-			if (Trigger * const trig = mtm.get_trigger(trigname))
-				o->set_trigger(trig);
-			else
-				throw wexception
-					("Unknown trigger referenced in Objective: %s", trigname);
-
-         mom.register_new_objective(o);
-		}
-	} else
-		throw wexception
-			("Unknown version %i in Map_Objective_Data_Packet!", packet_version);
+	try {
+		int32_t const packet_version =
+			prof.get_section("global")->get_int("packet_version");
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			while (Section * const s = prof.get_next_section(0)) {
+				char const * const         name = s->get_name();
+				try {
+					char const * const trigger_name = s->get_safe_string("trigger");
+					Objective & objective = *new Objective();
+					objective.set_name(name);
+					try {
+						mom.register_new(objective);
+					} catch (Manager<Objective>::Already_Exists) {
+						throw wexception("duplicated");
+					}
+					objective.set_descr      (s->get_safe_string("descr"));
+					objective.set_is_visible (s->get_safe_bool  ("visible"));
+					if (Trigger * const trig = mtm[trigger_name])
+						objective.set_trigger(trig);
+					else
+						throw wexception
+							("references nonexistent trigger \"%s\"", trigger_name);
+				} catch (_wexception const & e) {
+					throw wexception("%s: %s", e.what());
+				}
+			}
+		} else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("Objectives: %s", e.what());
+	}
 }
 
 
@@ -82,16 +89,14 @@ throw (_wexception)
 		("packet_version", CURRENT_PACKET_VERSION);
 
    // Write all the objectives out
-	const MapObjectiveManager & mom = egbase->get_map()->get_mom();
-	const MapObjectiveManager::Index nr_objectives =
-		mom.get_nr_objectives();
-	for (MapObjectiveManager::Index i = 0; i < nr_objectives; ++i) {
-		const MapObjective & o = mom.get_objective_by_nr(i);
-		Section & s = *prof.create_section(o.name().c_str());
-		s.set_string("descr",    o.descr().c_str());
-		s.set_bool  ("visible",  o.get_is_visible());
-		s.set_bool  ("optional", o.get_is_optional());
-		s.set_string("trigger",  o.get_trigger()->get_name());
+	Manager<Objective> const & mom = egbase->map().mom();
+	Manager<Objective>::Index const nr_objectives = mom.size();
+	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i) {
+		Objective const & objective = mom[i];
+		Section & s = *prof.create_section(objective.name().c_str());
+		s.set_string("descr",    objective.descr());
+		s.set_bool  ("visible",  objective.get_is_visible());
+		s.set_string("trigger",  objective.get_trigger()->name());
 	}
 
    prof.write("objective", false, fs);

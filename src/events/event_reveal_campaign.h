@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,30 +17,25 @@
  *
  */
 
-#ifndef __S__GAME_OBJECTIVE_MENU_H
-#define __S__GAME_OBJECTIVE_MENU_H
+#ifndef EVENT_REVEAL_CAMPAIGN_H
+#define EVENT_REVEAL_CAMPAIGN_H
 
-#include "ui_listselect.h"
-#include "ui_multilinetextarea.h"
-#include "ui_unique_window.h"
+#include "event_reveal.h"
 
 namespace Widelands {
-class Game;
-struct Objective;
+
+struct Event_Reveal_Campaign : public Event_Reveal {
+	Event_Reveal_Campaign(char const * Name, State const S)
+		: Event_Reveal(Name, S)
+	{}
+
+	int32_t option_menu(Editor_Interactive &);
+
+	State run(Game*);
+
+	void Write(Section &) const;
 };
-class Interactive_Player;
 
-// The GameObjectives Menu shows the not already
-// fullfilled scenario objectives.
-struct GameObjectivesMenu : public UI::UniqueWindow {
-	GameObjectivesMenu
-		(Interactive_Player &, UI::UniqueWindow::Registry &, Widelands::Game &);
-
-private:
-	UI::Listselect<Widelands::Objective &>list;
-	UI::Multiline_Textarea objectivetext;
-
-	void selected(uint32_t);
 };
 
 #endif

@@ -125,7 +125,7 @@ void Message_Box_Event_Message_Box::clicked(int32_t i) {
 		//  One of the buttons has been pressed
 		if (Widelands::Trigger_Null * const t = m_trigger[i]) {
          t->set_trigger_manually(true);
-         t->check_set_conditions(m_game); // forcefully update this trigger
+			t->check_set_conditions(*m_game); // forcefully update this trigger
 		}
       clicked(-1);
       return;

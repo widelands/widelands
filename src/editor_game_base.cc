@@ -500,7 +500,7 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 	m_map = new_map;
 
    // Register map_variable callback
-   g_fh->register_variable_callback(g_MapVariableCallback, m_map);
+	g_fh->register_variable_callback(g_VariableCallback, m_map);
 }
 
 

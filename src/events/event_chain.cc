@@ -22,9 +22,6 @@
 #include "event.h"
 #include "game.h"
 #include "map.h"
-#include "map_event_manager.h"
-#include "map_eventchain_manager.h"
-#include "map_trigger_manager.h"
 #include "trigger/trigger_conditional.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
@@ -32,9 +29,14 @@
 
 namespace Widelands {
 
-/*
- * Run this event chain
- */
+
+EventChain::~EventChain() {
+	clear_events();
+	if (m_trigconditional)
+		m_trigconditional->unreference_triggers(*this);
+}
+
+
 EventChain::State EventChain::run(Game* g) {
    m_state = RUNNING;
 
@@ -57,7 +59,7 @@ EventChain::State EventChain::run(Game* g) {
          m_state = DONE;
 		}
 	} else {
-      assert(m_events[m_curevent]->get_state() == Event::RUNNING);
+		assert(m_events[m_curevent]->state() == Event::RUNNING);
 	}
 
    return m_state;
@@ -67,10 +69,12 @@ EventChain::State EventChain::run(Game* g) {
  * Clear all events, events are not delted.
  */
 void EventChain::clear_events() {
-	for (uint32_t i = 0; i < m_events.size(); ++i)
-      m_events[i]->unreference(this);
+	event_vector & evs = m_events;
+	event_vector::const_iterator const evs_end = evs.end();
+	for (event_vector::const_iterator it = evs.begin(); it != evs_end; ++it)
+		(*it)->unreference(*this);
 
-   m_events.resize(0);
+	evs.clear();
 }
 
 /*
@@ -78,7 +82,7 @@ void EventChain::clear_events() {
  */
 void EventChain::add_event(Event* ev) {
    m_events.push_back(ev);
-   ev->reference(this);
+	ev->reference(*this);
 }
 
 };
@@ -100,8 +104,8 @@ void Cmd_CheckEventChain::execute (Game * game) {
 	++m_eventchain_id;
 
 	Map & map = game->map();
-	MapEventChainManager & mecm = map.get_mecm();
-	MapEventChainManager::Index nr_eventchains = mecm.get_nr_eventchains();
+	Manager<EventChain> & mcm = map.mcm();
+	Manager<EventChain>::Index nr_eventchains = mcm.size();
 	if (m_eventchain_id >= nr_eventchains) {
       // either we wrapped around the end of all eventchains
       // if so, restart. if there are no eventchains at all,
@@ -117,7 +121,7 @@ void Cmd_CheckEventChain::execute (Game * game) {
 				(new Cmd_CheckEventChain(game->get_gametime() + 30000, -1));
 	}
 
-	EventChain & evchain = mecm.get_eventchain_by_nr(m_eventchain_id);
+	EventChain & evchain = mcm[m_eventchain_id];
 
 	switch (evchain.get_state()) {
 	case EventChain::INIT:
@@ -137,10 +141,10 @@ void Cmd_CheckEventChain::execute (Game * game) {
 	}
 
 	if (evchain.get_state() == EventChain::DONE) {
-		mecm.delete_eventchain(evchain.name());
-		nr_eventchains = mecm.get_nr_eventchains();
-		map.get_mem().delete_unreferenced_events();
-		map.get_mtm().delete_unreferenced_triggers();
+		mcm.remove(evchain);
+		nr_eventchains = mcm.size();
+		map.mem().remove_unreferenced();
+		map.mtm().remove_unreferenced();
 	}
 
 	// recheck next in the time that all eventchains get checked at least once ever 10 seconds

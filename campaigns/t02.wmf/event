@@ -1,11 +1,10 @@
 # Changed by Nasenbaer -> fixed few translation bugs
 [global]
-packet_version=1
+packet_version=2
 
 [Briefing Msg 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:chieftain.png image-align=left ><p font-size=24 text-align=left font-weight=bold font-face=FreeSerif font-color=2F9131>"
 _"Thron speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
@@ -13,39 +12,30 @@ _" "The war goes on. More and more of our brothers and sisters flee the brutal w
 "</p></rt>""
 window_title=_The Story goes on...
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Briefing Msg 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:chieftain.png image-align=left ><p line-spacing=3 font-size=12>"
 _" "Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me? Rise against whoever threatens our very existance may it even be one of your blood or mind?" "
 "</p></rt>""
 window_title=_The Story continues...
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Briefing Msg 3]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt image=map:chieftain.png image-align=left ><pline-spacing=3 font-size=12>"
 _" "Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br>Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home..." "
 "</p></rt>""
 window_title=_The Story continues...
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Disable Building 01]
 type=allow_building
-state=init
 version=1
 player=1
 building=axefactory
@@ -53,7 +43,6 @@ allow=false
 
 [Disable Building 02]
 type=allow_building
-state=init
 version=1
 player=1
 building=bakery
@@ -61,7 +50,6 @@ allow=false
 
 [Disable Building 03]
 type=allow_building
-state=init
 version=1
 player=1
 building=barrier
@@ -69,7 +57,6 @@ allow=false
 
 [Disable Building 04]
 type=allow_building
-state=init
 version=1
 player=1
 building=battlearena
@@ -77,7 +64,6 @@ allow=false
 
 [Disable Building 05]
 type=allow_building
-state=init
 version=1
 player=1
 building=big_inn
@@ -85,7 +71,6 @@ allow=false
 
 [Disable Building 06]
 type=allow_building
-state=init
 version=1
 player=1
 building=brewery
@@ -93,7 +78,6 @@ allow=false
 
 [Disable Building 07]
 type=allow_building
-state=init
 version=1
 player=1
 building=burner
@@ -101,7 +85,6 @@ allow=false
 
 [Disable Building 08]
 type=allow_building
-state=init
 version=1
 player=1
 building=citadel
@@ -109,7 +92,6 @@ allow=false
 
 [Disable Building 09]
 type=allow_building
-state=init
 version=1
 player=1
 building=coalmine
@@ -117,7 +99,6 @@ allow=false
 
 [Disable Building 10]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_coalmine
@@ -125,7 +106,6 @@ allow=false
 
 [Disable Building 11]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_goldmine
@@ -133,7 +113,6 @@ allow=false
 
 [Disable Building 12]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_oremine
@@ -141,7 +120,6 @@ allow=false
 
 [Disable Building 13]
 type=allow_building
-state=init
 version=1
 player=1
 building=deeper_coalmine
@@ -149,7 +127,6 @@ allow=false
 
 [Disable Building 14]
 type=allow_building
-state=init
 version=1
 player=1
 building=deeper_goldmine
@@ -157,7 +134,6 @@ allow=false
 
 [Disable Building 15]
 type=allow_building
-state=init
 version=1
 player=1
 building=deeper_oremine
@@ -165,7 +141,6 @@ allow=false
 
 [Disable Building 16]
 type=allow_building
-state=init
 version=1
 player=1
 building=donjon
@@ -173,7 +148,6 @@ allow=false
 
 [Disable Building 17]
 type=allow_building
-state=init
 version=1
 player=1
 building=farm
@@ -181,7 +155,6 @@ allow=false
 
 [Disable Building 18]
 type=allow_building
-state=init
 version=1
 player=1
 building=fernery
@@ -189,7 +162,6 @@ allow=false
 
 [Disable Building 19]
 type=allow_building
-state=init
 version=1
 player=1
 building=fisher
@@ -197,7 +169,6 @@ allow=false
 
 [Disable Building 20]
 type=allow_building
-state=init
 version=1
 player=1
 building=fortress
@@ -205,7 +176,6 @@ allow=false
 
 [Disable Building 21]
 type=allow_building
-state=init
 version=1
 player=1
 building=gamekeeper
@@ -213,7 +183,6 @@ allow=false
 
 [Disable Building 22]
 type=allow_building
-state=init
 version=1
 player=1
 building=goldmine
@@ -221,7 +190,6 @@ allow=false
 
 [Disable Building 23]
 type=allow_building
-state=init
 version=1
 player=1
 building=granitemine
@@ -229,7 +197,6 @@ allow=false
 
 [Disable Building 24]
 type=allow_building
-state=init
 version=1
 player=1
 building=hardener
@@ -237,7 +204,6 @@ allow=false
 
 [Disable Building 25]
 type=allow_building
-state=init
 version=1
 player=1
 building=helmsmith
@@ -245,7 +211,6 @@ allow=false
 
 [Disable Building 26]
 type=allow_building
-state=init
 version=1
 player=1
 building=hunter
@@ -253,7 +218,6 @@ allow=false
 
 [Disable Building 27]
 type=allow_building
-state=init
 version=1
 player=1
 building=inn
@@ -261,7 +225,6 @@ allow=false
 
 [Disable Building 28]
 type=allow_building
-state=init
 version=1
 player=1
 building=metalworks
@@ -269,7 +232,6 @@ allow=false
 
 [Disable Building 29]
 type=allow_building
-state=init
 version=1
 player=1
 building=micro-brewery
@@ -277,7 +239,6 @@ allow=false
 
 [Disable Building 30]
 type=allow_building
-state=init
 version=1
 player=1
 building=oremine
@@ -285,7 +246,6 @@ allow=false
 
 [Disable Building 31]
 type=allow_building
-state=init
 version=1
 player=1
 building=weaving-mill
@@ -293,7 +253,6 @@ allow=false
 
 [Disable Building 32]
 type=allow_building
-state=init
 version=1
 player=1
 building=smelting_works
@@ -301,7 +260,6 @@ allow=false
 
 [Disable Building 33]
 type=allow_building
-state=init
 version=1
 player=1
 building=stonegrinder
@@ -309,7 +267,6 @@ allow=false
 
 [Disable Building 34]
 type=allow_building
-state=init
 version=1
 player=1
 building=tavern
@@ -317,7 +274,6 @@ allow=false
 
 [Disable Building 35]
 type=allow_building
-state=init
 version=1
 player=1
 building=trainingscamp
@@ -325,7 +281,6 @@ allow=false
 
 [Disable Building 36]
 type=allow_building
-state=init
 version=1
 player=1
 building=warehouse
@@ -333,7 +288,6 @@ allow=false
 
 [Disable Building 37]
 type=allow_building
-state=init
 version=1
 player=1
 building=warmill
@@ -341,7 +295,6 @@ allow=false
 
 [Disable Building 38]
 type=allow_building
-state=init
 version=1
 player=1
 building=well
@@ -349,7 +302,6 @@ allow=false
 
 [Enable Coal Mine]
 type=allow_building
-state=init
 version=1
 player=1
 building=coalmine
@@ -357,7 +309,6 @@ allow=true
 
 [Enable Ore Mine]
 type=allow_building
-state=init
 version=1
 player=1
 building=oremine
@@ -365,7 +316,6 @@ allow=true
 
 [Enable Gold Mine]
 type=allow_building
-state=init
 version=1
 player=1
 building=goldmine
@@ -373,7 +323,6 @@ allow=true
 
 [Enable Granite Mine]
 type=allow_building
-state=init
 version=1
 player=1
 building=granitemine
@@ -381,7 +330,6 @@ allow=true
 
 [Enable Hunter]
 type=allow_building
-state=init
 version=1
 player=1
 building=hunter
@@ -389,7 +337,6 @@ allow=true
 
 [Enable Gamekeeper]
 type=allow_building
-state=init
 version=1
 player=1
 building=gamekeeper
@@ -397,7 +344,6 @@ allow=true
 
 [Enable Tavern]
 type=allow_building
-state=init
 version=1
 player=1
 building=tavern
@@ -405,7 +351,6 @@ allow=true
 
 [Enable Farm]
 type=allow_building
-state=init
 version=1
 player=1
 building=farm
@@ -413,7 +358,6 @@ allow=true
 
 [Enable Well]
 type=allow_building
-state=init
 version=1
 player=1
 building=well
@@ -421,7 +365,6 @@ allow=true
 
 [Enable Bakery]
 type=allow_building
-state=init
 version=1
 player=1
 building=bakery
@@ -429,7 +372,6 @@ allow=true
 
 [Enable Smelter]
 type=allow_building
-state=init
 version=1
 player=1
 building=smelting_works
@@ -437,7 +379,6 @@ allow=true
 
 [Enable Burner]
 type=allow_building
-state=init
 version=1
 player=1
 building=burner
@@ -445,7 +386,6 @@ allow=true
 
 [Enable Inn]
 type=allow_building
-state=init
 version=1
 player=1
 building=inn
@@ -453,7 +393,6 @@ allow=true
 
 [Enable Deep Coal Mine]
 type=allow_building
-state=init
 version=1
 player=1
 building=deep_coalmine
@@ -461,7 +400,6 @@ allow=true
 
 [Enable Hardener]
 type=allow_building
-state=init
 version=1
 player=1
 building=hardener
@@ -469,7 +407,6 @@ allow=true
 
 [Enable Grinder]
 type=allow_building
-state=init
 version=1
 player=1
 building=stonegrinder
@@ -477,7 +414,6 @@ allow=true
 
 [Enable Fernery]
 type=allow_building
-state=init
 version=1
 player=1
 building=fernery
@@ -485,8 +421,7 @@ allow=true
 
 [Order Msg 01]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Brave Boldreth steps aside you..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
@@ -494,14 +429,11 @@ _" "So you want to prepare us for a longer stay in these forests, Thron? Well, I
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 02]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh joins the both of you"
 "</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
@@ -509,14 +441,11 @@ _" "I beg your forgiveness, chieftain, but I have a grief concern to discuss wit
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 03]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth jumps up."
 "</p></rt><rt image=map:boldreth.png image-align=left><p line-spacing=3 font-size=12>"
@@ -524,14 +453,11 @@ _" "While it is certainly no worthy task for a warrior, at least it is something
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 04]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh grumbles..."
 "</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
@@ -539,14 +465,11 @@ _" "Old man? Disrespectful youth..."</p>"
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 05 Quarry]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh nods satisfied."
 "</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
@@ -554,15 +477,12 @@ _" "At least. These rocks should last for a while."</p>"
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=true
+button_00=_Continue
 button_00_trigger=Mission Quarry
 
 [Order Msg 06 Geologist]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth exclaims..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
@@ -570,14 +490,11 @@ _" "Just look at that! The great mountain of Kal'mavrath! I wonder what treasure
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 07 Mines Up]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth laughs..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
@@ -585,15 +502,12 @@ _" "By Chat'Karuth's beard, this is awesome! Just imagine what we can use this c
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=true
+button_00=_Continue
 button_00_trigger=Mission Mines
 
 [Order Msg 08 Mines Up]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh interrupts..."
 "</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
@@ -601,14 +515,11 @@ _" "While this is true, we should consider it later, for now other obstacles are
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 09 Hunter]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth nods..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
@@ -617,14 +528,11 @@ _"--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter can 
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 10 Bread]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The elder laughs..."
 "</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
@@ -633,14 +541,11 @@ _"--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food t
 "</rt>""
 window_title=Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 11 Hunt Began]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth cheers up..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
@@ -648,15 +553,12 @@ _" "Our hunters are out in the forests, Thron. I promise you, before the sun set
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=true
+button_00=_Continue
 button_00_trigger=Hunt Began
 
 [Order Msg 12 Farming Began]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh gazes over the plains..."
 "</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
@@ -664,15 +566,12 @@ _" "Isn't it lovely, the view of golden fields, growing peacefully, dancing to t
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=true
+button_00=_Continue
 button_00_trigger=Farming Began
 
 [Order Msg 13 Tavern]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
@@ -680,14 +579,11 @@ _" "The new tavern opened yesterday. While I am hardly in the mood for celebrati
 "</rt>""
 window_title=_A beautiful morning...
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 14 Refine Ore]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth remarks..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
@@ -696,14 +592,11 @@ _"--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it ha
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 15 Mines Exhausted]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh speaks..."
 "</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
@@ -712,15 +605,12 @@ _"--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all r
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=true
+button_00=_Continue
 button_00_trigger=Refining Began
 
 [Order Msg 16 Blackwood]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth seems concerned..."
 "</p></rt><rt image=map:boldreth.png image-align=left><p line-spacing=3 font-size=12>"
@@ -729,14 +619,11 @@ _"--NEW OBJECTIVES--<br>- Bigger and better buildings - including all militarian
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 17 Grindstone]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth smiles..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
@@ -745,14 +632,11 @@ _"--NEW OBJECTIVES--<br>- Better buildings may require also other improved mater
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Order Msg 18 Fernery]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh steps in..."
 "</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
@@ -761,15 +645,12 @@ _"--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=true
+button_00=_Continue
 button_00_trigger=Mission Grindstone
 
 [Order Msg 19 All Material]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh seems reliefed..."
 "</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
@@ -777,14 +658,11 @@ _" "Wonderful! Our roofs are not dripping anymore, and we have all the material 
 "</rt>""
 window_title=_Advisor
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=true
+button_00=_Continue
 button_00_trigger=Mission Fernery
 
 [Show Rocks]
 type=unhide_area
-state=init
 version=2
 point=27 48
 area=6
@@ -793,8 +671,7 @@ duration=5000
 
 [Story Msg 1]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
@@ -802,14 +679,11 @@ _" "One night, when the moon shone brightly, I climbed to the peak of Kal'mavrat
 "</rt>""
 window_title=_One fullmoon night...
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Story Msg 2]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
@@ -817,99 +691,72 @@ _" "The winter is upon us. Many of us are suffering from the cold, yet we must e
 "</rt>""
 window_title=_Another cold day...
 is_modal=true
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=false
+button_00=_Continue
 
 [Unhide Claim Northeastern Rocks]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Claim Northeastern Rocks
-dounhide=true
 
 [Unhide Build Mines]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build Mines
-dounhide=true
 
 [Unhide Begin the Hunt]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Begin the Hunt
-dounhide=true
 
 [Unhide Build a Tavern]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Build a Tavern
-dounhide=true
 
 [Unhide Begin Farming]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Begin Farming
-dounhide=true
 
 [Unhide Refine Ores]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Refine Ores
-dounhide=true
 
 [Unhide Enhance Buildings]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Enhance Buildings
-dounhide=true
 
 [Unhide Better Material I]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Better Material I
-dounhide=true
 
 [Unhide Better Material II]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Better Material II
-dounhide=true
 
 [Unhide Better Material III]
-type=unhide_objective
-state=init
-version=1
+type=reveal_objective
+version=2
 objective=Better Material III
-dounhide=true
 
 [Mission Complete]
 type=message_box
-state=init
-version=1
+version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Victory!"
 "</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
 _"Thron speaks:<br>"The other day Boldreth talked me into accompanying him to the new inn. It would cheer me up, he said.<br>When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br>The news he brought were to change everything..."<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.</p>"
 "</rt>""
 window_title=_Mission Complete!
-is_modal=false
-number_of_buttons=1
-button_00_name=_Continue
-button_00_has_trigger=true
+is_modal=true
+button_00=_Continue
 button_00_trigger=Enhance Buildings
 
 [Unhide Empiretut]
-type=set_campaign_visiblity
-state=init
-version=1
+type=reveal_campaign
+version=2
 entry=campsect1
-visible=true

@@ -21,6 +21,7 @@
 
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
+#include "events/event.h"
 #include "events/event_chain.h"
 #include "interactive_player.h"
 #include "interactive_spectator.h"
@@ -32,8 +33,6 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
-#include "map_event_manager.h"
-#include "map_trigger_manager.h"
 #include "network.h"
 #include "player.h"
 #include "playercommand.h"
@@ -475,8 +474,8 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
-		map().get_mem().delete_unreferenced_events  ();
-		map().get_mtm().delete_unreferenced_triggers();
+		map().mem().remove_unreferenced();
+		map().mtm().remove_unreferenced();
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players

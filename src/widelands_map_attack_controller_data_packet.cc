@@ -113,12 +113,12 @@ throw (_wexception)
 					battleGround = Coords(x, y);
 				} else {
 					try {battleGround = fr.Coords32(extent);}
-					catch (const FileRead::Data_Error & e) {
+					catch (_wexception const & e) {
 						throw wexception
 							("Map_Attack_Controller_Data_Packet::Read: in "
 							 "binary/attackcontroller:%u: reading coordinates of "
 							 "battleground: %s",
-							 fr.GetPos() - 4, e.message().c_str());
+							 fr.GetPos() - 4, e.what());
 					}
 				}
 

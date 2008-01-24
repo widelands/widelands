@@ -31,6 +31,7 @@
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
+#include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
 
@@ -179,8 +180,27 @@ bool Event_Allow_Building_Option_Menu::handle_mouserelease
 
 
 void Event_Allow_Building_Option_Menu::clicked_ok() {
-	if (m_name->get_text())
-               m_event.set_name(m_name->get_text());
+	if (char const * const name = m_name->get_text()) {
+		if
+			(Widelands::Event * const registered_event =
+			 eia().egbase().map().mem()[name])
+			if (registered_event != & m_event) {
+				char buffer[256];
+				snprintf
+					(buffer, sizeof(buffer),
+					 _("There is another event registered with the name \"%s\". "
+					   "Choose another name.")
+					 .c_str(),
+					 name);
+				UI::Modal_Message_Box mb
+					(get_parent(),
+					 _("Name in use"), buffer,
+					 UI::Modal_Message_Box::OK);
+				mb.run();
+				return;
+			}
+		m_event.set_name(name);
+	}
 	if (m_event.get_player()!=m_player && m_event.get_player() != -1)
 		eia().unreference_player_tribe(m_event.get_player(), &m_event);
 	if (m_event.get_player()!=m_player) {

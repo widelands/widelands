@@ -21,7 +21,6 @@
 
 #include "editor_game_base.h"
 #include "map.h"
-#include "map_trigger_manager.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_factory.h"
 #include "profile.h"
@@ -31,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 void Map_Trigger_Data_Packet::Read
@@ -52,29 +51,36 @@ throw (_wexception)
    Profile prof;
    prof.read("trigger", 0, fs);
 
-   Section* s = prof.get_section("global");
-
-	const int32_t packet_version = s->get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		while ((s = prof.get_next_section(0))) {
-         std::string name = s->get_name();
-         std::string type = s->get_safe_string("type");
-         bool set = s->get_safe_bool("set");
-         Trigger* t = Trigger_Factory::get_correct_trigger(type.c_str());
-         t->set_name(name.c_str());
-         t->set_trigger(set);
-         t->Read(s, egbase);
-
-         egbase->get_map()->get_mtm().register_new_trigger(t);
-		}
-	} else
-		throw wexception
-			("Unknown version in Map Trigger Packet: %i", packet_version);
+	try {
+		int32_t const packet_version =
+			prof.get_section("global")->get_int("packet_version");
+		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+			Manager<Trigger> & mtm = egbase->map().mtm();
+			while (Section * const s = prof.get_next_section(0)) {
+				char const * const name = s->get_name();
+				try {
+					bool         const set  = s->get_bool("set", false);
+					char const * const type_name = s->get_safe_string("type");
+					Trigger & trigger =
+						Trigger_Factory::create(type_name, name, set);
+					try {
+						mtm.register_new(trigger);
+					} catch (Manager<Trigger>::Already_Exists) {
+						throw wexception("duplicated");
+					}
+					trigger.Read(*s, *egbase);
+				} catch (std::exception const & e) {
+					throw wexception("%s: %s", name, e.what());
+				}
+			}
+		} else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("Triggers: %s", e.what());
+	}
 }
 
-/*
- * Write Function
- */
+
 void Map_Trigger_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
@@ -85,14 +91,14 @@ throw (_wexception)
 		("packet_version", CURRENT_PACKET_VERSION);
 
    // Now write all the triggers
-	const MapTriggerManager & mtm = egbase->get_map()->get_mtm();
-	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
-	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
-		const Trigger & t = mtm.get_trigger_by_nr(i);
-		Section & s = *prof.create_section(t.get_name());
-		s.set_string("type", t.get_id());
-		s.set_bool  ("set",  t.is_set());
-		t.Write(s);
+	Manager<Trigger> const & mtm = egbase->map().mtm();
+	Manager<Trigger>::Index const nr_triggers = mtm.size();
+	for (Manager<Trigger>::Index i = 0; i < nr_triggers; ++i) {
+		const Trigger & trigger = mtm[i];
+		Section & s = *prof.create_section(trigger.name().c_str());
+		if (trigger.is_set())
+			s.set_bool("set", true);
+		trigger.Write(s);
 	}
 
    prof.write("trigger", false, fs);

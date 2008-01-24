@@ -20,8 +20,8 @@
 #ifndef __S__EVENT_CHAIN_H
 #define __S__EVENT_CHAIN_H
 
-#include "event_referencer.h"
-#include "trigger/trigger_referencer.h"
+#include "named.h"
+#include "referencer.h"
 
 #include <cassert>
 #include <string>
@@ -31,6 +31,7 @@ namespace Widelands {
 
 class Event;
 class Game;
+struct Trigger;
 class TriggerConditional;
 
 /*
@@ -40,7 +41,9 @@ class TriggerConditional;
  * in order as soon as the eventchains trigger conditional is
  * true.
  */
-struct EventChain : public EventReferencer, public TriggerReferencer {
+struct EventChain
+	: public Named, public Referencer<Event>, public Referencer<Trigger>
+{
 	friend struct Map_EventChain_Data_Packet;
 
 	enum State {
@@ -49,17 +52,18 @@ struct EventChain : public EventReferencer, public TriggerReferencer {
          DONE,
 	};
 
-      EventChain() {
-        m_repeating = false;
-        m_trigconditional = 0;
-        m_state = INIT;
-        m_curevent = 0;
-		}
-      virtual ~EventChain() {}
+	EventChain(char const * const Name)
+		:
+		Named            (Name),
+		m_repeating      (false),
+		m_trigconditional(0),
+		m_curevent       (0),
+		m_state          (INIT)
+	{}
+	virtual ~EventChain();
 
-	const std::string & name() const throw () {return m_name;}
-	const char * get_type() const {return "EventChain";}
-	void set_name(const std::string & new_name) {m_name = new_name;}
+	std::string identifier() const {return "EventChain: " + name();}
+
 	bool get_repeating() const {return m_repeating;}
 	TriggerConditional * get_trigcond() {return m_trigconditional;}
 	void set_trigcond(TriggerConditional & t) {m_trigconditional = &t;}
@@ -78,7 +82,6 @@ struct EventChain : public EventReferencer, public TriggerReferencer {
       State run(Game* g);
 
 private:
-      std::string        m_name;
       bool                m_repeating;
       TriggerConditional* m_trigconditional;
 	typedef std::vector<Event*> event_vector;

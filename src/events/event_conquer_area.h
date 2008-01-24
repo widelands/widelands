@@ -21,7 +21,6 @@
 #define __S__EVENT_CONQUER_AREA_H
 
 #include "event_player_area.h"
-#include "i18n.h"
 
 struct Event_Conquer_Area_Option_Menu;
 
@@ -30,15 +29,14 @@ namespace Widelands {
 /// Shows a message box.
 struct Event_Conquer_Area : public Event_Player_Area {
 	friend struct ::Event_Conquer_Area_Option_Menu;
-	Event_Conquer_Area()
+	Event_Conquer_Area(char const * Name, State const S)
 		:
-		Event_Player_Area
-		(_("Conquer Area"), Player_Area<>(0, Area<>(Coords(0, 0), 5)))
+		Event_Player_Area(Name, S)
 	{}
 
+	int32_t option_menu(Editor_Interactive &);
 
-
-	const char * get_id() const {return "conquer_area";}
+	void Write(Section &) const;
 
       State run(Game*);
 };

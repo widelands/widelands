@@ -20,60 +20,49 @@
 #ifndef __S__TRIGGER_H
 #define __S__TRIGGER_H
 
+#include "named.h"
+#include "referenced.h"
+
 #include <map>
 #include <string>
 
+struct Editor_Interactive;
 struct Section;
 
 namespace Widelands {
 
+struct Editor_Game_Base;
 class Game;
-class Editor_Game_Base;
-class TriggerReferencer;
 
-/*
- * A trigger is a switch for events. Each event can register
- * one or more triggers with himself; when all triggers are set
- * the event runs.
- */
-struct Trigger {
+struct Trigger : public Named, public Referenced<Trigger> {
 	friend struct Map_Trigger_Data_Packet;
 
-	Trigger(const std::string & Name) : m_name(Name) {}
-      virtual ~Trigger() {}
+	Trigger(char const * const Name, bool const set)
+		: Named(Name), m_is_set(set)
+	{}
+	virtual ~Trigger() {}
+
+	virtual int32_t option_menu(Editor_Interactive &) = 0;
+
+	virtual void Read (Section &, Editor_Game_Base &) = 0;
+	virtual void Write(Section &) const               = 0;
 
       // virtual functions, implemented by the real triggers
-      virtual void check_set_conditions(Game*) = 0;
-	virtual const char * get_id() const = 0; // this function is needed to recreate the correct option window
+	virtual void check_set_conditions(Game const &) = 0;
 
       // Toggle the triggers state (if it isn't a one timer)
       // and give it a chance to reinitialize
-      virtual void reset_trigger(Game*) = 0;
+	virtual void reset_trigger       (Game const &) {}
 
       // Functions needed by all
-      void set_name(const char* name) {m_name=name;}
-	const char * get_name() const {return m_name.c_str();}
 	bool is_set() const {return m_is_set;}
-
-      // File functions, to save or load this trigger
-	virtual void Write(Section &) const = 0;
-      virtual void Read(Section*, Editor_Game_Base*) = 0;
-
-      // Reference this event
-      void reference(TriggerReferencer* ref);
-      void unreference(TriggerReferencer* ref);
-	typedef std::map<TriggerReferencer *, uint32_t> TriggerReferencerMap;
-	const TriggerReferencerMap & get_referencers() const throw ()
-	{return m_referencers;}
 
 protected:
 	// This is only for child classes to toggle the trigger
 	void set_trigger(bool t) {m_is_set = t;}
 
 private:
-      std::string                m_name;
       bool                        m_is_set;
-	TriggerReferencerMap m_referencers;
 };
 
 };
