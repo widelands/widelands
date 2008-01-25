@@ -24,34 +24,53 @@
 #include "trigger/trigger_null.h"
 
 
+inline Interactive_Player & GameObjectivesMenu::iaplayer() const {
+	return dynamic_cast<Interactive_Player &>(*get_parent());
+}
+
+
 GameObjectivesMenu::GameObjectivesMenu
-(Interactive_Player         & plr,
- UI::UniqueWindow::Registry & registry,
- Widelands::Game            & game)
+(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
 (&plr, &registry, 340, 5 + 120 + 5 + 240 + 5, _("Objectives Menu")),
 list         (this, 5,   5, get_inner_w() - 10, 120, Align_Left, false),
 objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
 {
-   // Listselect with Objectives
-	Manager<Widelands::Objective> & mom = game.map().mom();
-	Manager<Widelands::Objective>::Index const nr_objectives = mom.size();
-	for (Manager<Widelands::Objective>::Index i = 0; i < nr_objectives; ++i)
-		if (mom[i].get_is_visible() and not mom[i].get_trigger()->is_set())
-			list.add(mom[i].name().c_str(), mom[i]);
-   list.selected.set(this, &GameObjectivesMenu::selected);
-
-   // If any objectives, select the first one
-	if (list.size()) list.select(0);
-
+	list.selected.set(this, &GameObjectivesMenu::selected);
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 
+void GameObjectivesMenu::think() {
+	//  Adjust the list according to the game state.
+	Manager<Widelands::Objective> & mom = iaplayer().game().map().mom();
+	Manager<Widelands::Objective>::Index const nr_objectives = mom.size();
+	for (Manager<Widelands::Objective>::Index i = 0; i < nr_objectives; ++i) {
+		bool const should_show =
+			mom[i].get_is_visible() and not mom[i].get_trigger()->is_set();
+		uint32_t const list_size = list.size();
+		for (uint32_t j = 0;; ++j)
+			if (j == list_size) { //  the objective is not in our list
+				if     (should_show)
+					list.add(mom[i].name().c_str(), mom[i]);
+				break;
+			} else if (&list[j] == &mom[i]) { //  the objective is in our list
+				if (not should_show)
+					list.remove(j);
+				break;
+			}
+	}
+	list.sort();
+	if (list.size() and not list.has_selection())
+		list.select(0);
+}
+
 /*
  * Something has been selected
  */
-void GameObjectivesMenu::selected(uint32_t t)
-{objectivetext.set_text(list[t].descr());}
+void GameObjectivesMenu::selected(uint32_t const t) {
+	objectivetext.set_text
+		(t == list_type::no_selection_index() ? std::string() : list[t].descr());
+}

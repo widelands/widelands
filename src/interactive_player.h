@@ -59,7 +59,6 @@ struct Interactive_Player : public Interactive_Base {
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
 
-		UI::UniqueWindow::Registry mission_objectives;
 		UI::UniqueWindow::Registry chat;
 		UI::UniqueWindow::Registry objectives;
 	};
@@ -71,10 +70,11 @@ struct Interactive_Player : public Interactive_Base {
 
 	void start();
 
-	void toggle_main_menu();
-	void toggle_buildhelp();
-	void toggle_resources();
-	void toggle_help     ();
+	void toggle_main_menu ();
+	void toggle_objectives();
+	void toggle_buildhelp ();
+	void toggle_resources ();
+	void toggle_help      ();
 
 	void field_action();
 
@@ -117,12 +117,14 @@ private:
 	UI::Multiline_Textarea         m_chat_messages;
 	UI::Textarea                   m_type_message;
 	UI::Button<Interactive_Player> m_toggle_main_menu;
+	UI::Button<Interactive_Player> m_toggle_objectives;
 	UI::Button<Interactive_Player> m_toggle_minimap;
 	UI::Button<Interactive_Player> m_toggle_buildhelp;
 	UI::Button<Interactive_Player> m_toggle_resources;
 	UI::Button<Interactive_Player> m_toggle_help;
 
 	UI::UniqueWindow::Registry m_mainmenu;
+	UI::UniqueWindow::Registry m_objectives;
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_encyclopedia;
 	Game_Main_Menu_Windows  m_mainm_windows;

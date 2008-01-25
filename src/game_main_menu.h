@@ -38,7 +38,6 @@ private:
 	UI::Button<GameMainMenu> ware_stats;
 	UI::Button<GameMainMenu> building_stats;
 	UI::Button<GameMainMenu> stock;
-	UI::Button<GameMainMenu> objectives;
 	UI::Button<GameMainMenu> chat;
 	UI::Button<GameMainMenu> options_menu;
 
@@ -76,7 +75,6 @@ private:
 	void clicked_ware_stats    ();
 	void clicked_building_stats();
 	void clicked_stock         ();
-	void clicked_objectives    ();
 	void clicked_chat          ();
 	void clicked_options_menu  ();
 };

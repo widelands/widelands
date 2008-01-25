@@ -28,6 +28,7 @@
 #include "font_handler.h"
 #include "game_loader.h"
 #include "game_main_menu.h"
+#include "game_objectives_menu.h"
 #include "graphic.h"
 #include "general_statistics_menu.h"
 #include "helper.h"
@@ -94,9 +95,18 @@ m_toggle_main_menu
  &Interactive_Player::toggle_main_menu, this,
  _("Menu")),
 
-m_toggle_minimap
+m_toggle_objectives
 (this,
  m_toggle_main_menu.get_x() + BUTTON_WIDTH, m_toggle_main_menu.get_y(),
+ BUTTON_WIDTH, BUTTON_HEIGHT,
+ 2,
+ g_gr->get_picture(PicMod_Game, "pics/menu_objectives.png"),
+ &Interactive_Player::toggle_objectives, this,
+ _("Objectives")),
+
+m_toggle_minimap
+(this,
+ m_toggle_objectives.get_x() + BUTTON_WIDTH, m_toggle_objectives.get_y(),
  BUTTON_WIDTH, BUTTON_HEIGHT,
  2,
  g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png"),
@@ -259,6 +269,13 @@ void Interactive_Player::toggle_main_menu() {
 		new GameMainMenu(*this, m_mainmenu, m_mainm_windows);
 }
 
+void Interactive_Player::toggle_objectives() {
+	if (m_objectives.window)
+		delete m_objectives.window;
+	else
+		new GameObjectivesMenu(*this, m_objectives);
+}
+
 //
 // Toggles buildhelp rendering in the main MapView
 //
@@ -337,6 +354,12 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 		if (down)
 			toggle_minimap();
 		handled=true;
+		break;
+
+	case SDLK_o:
+		if (down)
+			toggle_objectives();
+		handled = true;
 		break;
 
 	case SDLK_c:

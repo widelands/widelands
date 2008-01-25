@@ -33,14 +33,16 @@ class Interactive_Player;
 // The GameObjectives Menu shows the not already
 // fullfilled scenario objectives.
 struct GameObjectivesMenu : public UI::UniqueWindow {
-	GameObjectivesMenu
-		(Interactive_Player &, UI::UniqueWindow::Registry &, Widelands::Game &);
+	GameObjectivesMenu(Interactive_Player &, UI::UniqueWindow::Registry &);
+	void think();
 
 private:
-	UI::Listselect<Widelands::Objective &>list;
-	UI::Multiline_Textarea objectivetext;
+	Interactive_Player & iaplayer() const;
+	void                 selected(uint32_t);
 
-	void selected(uint32_t);
+	typedef UI::Listselect<Widelands::Objective &> list_type;
+	list_type              list;
+	UI::Multiline_Textarea objectivetext;
 };
 
 #endif

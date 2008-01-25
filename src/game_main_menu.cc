@@ -23,7 +23,6 @@
 #include "game_chat_menu.h"
 #include "game_main_menu_save_game.h"
 #include "game_main_menu_load_game.h"
-#include "game_objectives_menu.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
 #include "graphic.h"
@@ -76,14 +75,6 @@ stock
  &GameMainMenu::clicked_stock, this,
  _("Stock")),
 
-objectives
-(this,
- posx(0, 2), posy(1, 3), buttonw(2), buttonh(3),
- 4,
-	g_gr->get_picture(PicMod_Game, "pics/menu_objectives.png"),
- &GameMainMenu::clicked_objectives, this,
- _("Objectives")),
-
 chat
 (this,
  posx(1, 2), posy(1, 3), buttonw(2), buttonh(3),
@@ -118,11 +109,6 @@ void GameMainMenu::clicked_building_stats() {
 void GameMainMenu::clicked_stock() {
 	if (m_windows.stock.window) delete m_windows.stock.window;
 	else new Stock_Menu(m_player, m_windows.stock);
-}
-void GameMainMenu::clicked_objectives() {
-	if (m_windows.objectives.window) delete m_windows.objectives.window;
-	else new GameObjectivesMenu
-		(m_player, m_windows.objectives, *m_player.get_game());
 }
 void GameMainMenu::clicked_chat() {
 	if (m_windows.chat.window) delete m_windows.chat.window;
