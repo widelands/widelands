@@ -244,10 +244,11 @@ void Interactive_Base::think()
 
 	if (m_flag_to_connect) {
 		Widelands::Field & field = egbase().map()[m_flag_to_connect];
-		if (upcast(Widelands::Flag const, flag, field.get_immovable()))
+		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
 			if (not flag->has_road())
 				start_build_road(m_flag_to_connect, field.get_owned_by());
-		m_flag_to_connect = Coords::Null();
+			m_flag_to_connect = Coords::Null();
+		}
 	}
 }
 
