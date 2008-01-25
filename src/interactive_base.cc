@@ -51,7 +51,22 @@ using Widelands::TCoords;
 Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
 :
 Map_View(0, 0, 0, get_xres(), get_yres(), *this),
-m_egbase(the_egbase)
+m_mm                          (0),
+m_egbase                      (the_egbase),
+#ifdef DEBUG //  not in releases
+m_display_flags               (dfDebug),
+#else
+m_display_flags               (0),
+#endif
+m_lastframe                   (WLApplication::get()->get_time()),
+m_frametime                   (0),
+m_avg_usframetime             (0),
+m_jobid                       (Overlay_Manager::Job_Id::Null()),
+m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
+m_buildroad                   (false),
+m_road_build_player           (0),
+m_shift_down                  (false),
+m_ctrl_down                   (false)
 {
 	warpview.set(this, &Interactive_Player::mainview_move);
 
@@ -73,25 +88,7 @@ m_egbase(the_egbase)
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will given
 	//  funny results.
-	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png"),
-
-   m_display_flags = 0;
-
-#ifdef DEBUG
-   // Not in releases
-	m_display_flags = dfDebug;
-#endif
-
-	m_lastframe = WLApplication::get()->get_time();
-	m_frametime = 0;
-	m_avg_usframetime = 0;
-
-   m_mm=0;
-
-   m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
-   m_jobid = Overlay_Manager::Job_Id::Null();
-	m_buildroad = false;
-   m_road_build_player=0;
+	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png");
 }
 
 /*
@@ -105,6 +102,12 @@ Interactive_Base::~Interactive_Base()
 {
 	if (m_buildroad)
 		abort_build_road();
+}
+
+bool Interactive_Base::handle_key(bool const down, SDL_keysym const code) {
+	if (code.sym == SDLK_LSHIFT || code.sym == SDLK_RSHIFT) m_shift_down = down;
+	if (code.sym == SDLK_LCTRL  || code.sym == SDLK_RCTRL)  m_ctrl_down  = down;
+	return false;
 }
 
 
@@ -502,14 +505,31 @@ void Interactive_Base::finish_build_road()
 	need_complete_redraw();
 
 	if (m_buildroad->get_nsteps()) {
-		// awkward... path changes ownership
-		Widelands::Path & path = *new Widelands::Path(*m_buildroad);
 		// Build the path as requested
-		if (upcast(Game, game, &egbase()))
-			game->send_player_build_road (m_road_build_player, path);
-		else {
-			egbase().get_player(m_road_build_player)->build_road(path);
-			delete &path;
+		if (upcast(Game, game, &egbase())) {
+			game->send_player_build_road
+				(m_road_build_player, *new Widelands::Path(*m_buildroad));
+			if (m_ctrl_down) { //  place flags
+				Map const & map = game->map();
+				std::vector<Coords> const & c_v = m_buildroad->get_coords();
+				std::vector<Coords>::const_iterator const first = c_v.begin() + 2;
+				std::vector<Coords>::const_iterator const last  = c_v.end  () - 2;
+				if (m_shift_down) { //  start to end
+					for
+						(std::vector<Coords>::const_iterator it = first;
+						 it <= last;
+						 ++it)
+						game->send_player_build_flag
+							(m_road_build_player, map.get_fcoords(*it));
+				} else            { //  end to start
+					for
+						(std::vector<Coords>::const_iterator it = last;
+						 first <= it;
+						 --it)
+						game->send_player_build_flag
+							(m_road_build_player, map.get_fcoords(*it));
+				}
+			}
 		}
 	}
 
@@ -532,35 +552,37 @@ bool Interactive_Base::append_build_road(Coords field)
 
 	Map & map = egbase().map();
 	Widelands::Player const & player = egbase().player(m_road_build_player);
-	int32_t const idx = m_buildroad->get_index(field);
 
-	if (idx >= 0) {
-		roadb_remove_overlay();
-		m_buildroad->truncate(idx);
-		roadb_add_overlay();
-
-		need_complete_redraw();
-		return true;
+	{ //  find a path to the clicked-on node
+		Widelands::Path path;
+		Widelands::CheckStepRoad cstep(player, Widelands::MOVECAPS_WALK);
+		if
+			(map.findpath
+			 (m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
+			 <
+			 0)
+			return false; //  could not find a path
+		m_buildroad->append(map, path);
 	}
 
 	{
+		//  Fix the road by finding an optimal path through the set of nodes
+		//  currently used by the road. This will not claim any new nodes, so it
+		//  is guaranteed to not hinder building placement.
 		Widelands::Path path;
-		std::set<Coords, Coords::ordering_functor> forbidden_locations;
+		std::set<Coords, Coords::ordering_functor> allowed_locations;
 		const std::vector<Coords> & road_cp = m_buildroad->get_coords();
 		const std::vector<Coords>::const_iterator road_cp_end = road_cp.end();
 		for
 			(std::vector<Coords>::const_iterator it = road_cp.begin();
 			 it != road_cp_end;
 			 ++it)
-			forbidden_locations.insert(*it);
-		Widelands::CheckStepRoad cstep
-			(player, Widelands::MOVECAPS_WALK, &forbidden_locations);
-	if
-		(map.findpath
-		 (m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
-		 <
-		 0)
-		return false; // couldn't find a path
+			allowed_locations.insert(*it);
+		Widelands::CheckStepRoadLimited cstep
+			(player, Widelands::MOVECAPS_WALK, allowed_locations);
+		map.findpath
+			(m_buildroad->get_start(), field, 0, path, cstep, Map::fpBidiCost);
+		m_buildroad->truncate(0);
 		m_buildroad->append(map, path);
 	}
 

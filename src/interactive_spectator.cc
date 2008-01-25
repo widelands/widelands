@@ -172,7 +172,7 @@ void Interactive_Spectator::field_action()
  */
 bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 {
-	bool handled=false;
+	bool handled = Interactive_Base::handle_key(down, code);
 
 	switch (code.sym) {
 	case SDLK_m:

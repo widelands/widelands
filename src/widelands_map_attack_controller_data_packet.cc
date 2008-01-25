@@ -56,36 +56,37 @@ throw (_wexception)
 		return;
 
 	FileRead fr;
+	try {fr.Open(fs, "binary/attackcontroller");} catch (...) {return;}
 	try {
-		fr.Open(fs, "binary/attackcontroller");
-	} catch (...) {
-		// not there, so skip
-		return ;
-	}
-	const uint16_t packet_version = fr.Unsigned16();
-	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-		const Extent extent = egbase->map().extent();
-		uint32_t const nrControllers = fr.Unsigned32();
-		for (uint32_t i = 0; i < nrControllers; ++i) {
-			AttackController* ctrl = egbase->create_attack_controller();
+		uint16_t const packet_version = fr.Unsigned16();
+		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+			Extent const extent = egbase->map().extent();
+			uint32_t const nrControllers = fr.Unsigned32();
+			for (uint32_t i = 0; i < nrControllers; ++i) {
+				AttackController & ctrl = *egbase->create_attack_controller();
 
-			fr.Unsigned32();
-			uint32_t flagFilePos = fr.Unsigned32();
+				fr.Unsigned32();
+				uint32_t const flagFilePos = fr.Unsigned32();
+				try {
+					if (ol->is_object_known(flagFilePos))
+						if
+							(upcast
+							 (Flag, flag, ol->get_object_by_file_index(flagFilePos)))
+							ctrl.flag = flag;
+						else
+							throw wexception ("not a flag");
+					else
+						throw wexception("nonexistent");
+				} catch (_wexception const & e) {
+					throw wexception
+						("%u: flag %u: %s", fr.GetPos() - 4, flagFilePos, e.what());
+				}
+				ctrl.attackingPlayer = fr.Unsigned32();
+				ctrl.defendingPlayer = fr.Unsigned32();
+				ctrl.totallyLaunched = fr.Unsigned32();
+				ctrl.attackedMsEmpty = fr.Unsigned8();
 
-			if (upcast(Flag, flag, ol->get_object_by_file_index(flagFilePos)))
-				ctrl->flag = flag;
-			else
-				throw wexception
-					("Map_Attack_Controller_Data_Packet::Read: in "
-					 "binary/attackcontroller:%u: object with file index %u is not "
-					 "a flag",
-					 fr.GetPos() - 4, flagFilePos);
-			ctrl->attackingPlayer = fr.Unsigned32();
-			ctrl->defendingPlayer = fr.Unsigned32();
-			ctrl->totallyLaunched = fr.Unsigned32();
-			ctrl->attackedMsEmpty = fr.Unsigned8();
-
-			uint32_t numBs = fr.Unsigned32();
+				uint32_t const numBs = fr.Unsigned32();
 
 			for (uint32_t j = 0; j < numBs; ++j) {
 				upcast(Soldier, soldier, ol->get_object_by_file_index(fr.Unsigned32()));
@@ -133,26 +134,45 @@ throw (_wexception)
 					arrived,
 					fighting
 				};
-				ctrl->involvedSoldiers.push_back(bs);
-				soldier->set_attack_ctrl(ctrl);
+				ctrl.involvedSoldiers.push_back(bs);
+				soldier->set_attack_ctrl(&ctrl);
 			}
 
-			uint32_t numInMs = fr.Unsigned32();
-			for (uint32_t j = 0; j < numInMs; ++j) {
-				upcast(MilitarySite, ms, ol->get_object_by_file_index(fr.Unsigned32()));
-			assert(ms); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			ctrl->involvedMilitarySites.insert(ms);
-			ms->set_in_battle(true);
-			}
+				uint32_t const numInMs = fr.Unsigned32();
+				for (uint32_t j = 0; j < numInMs; ++j) {
+					uint32_t const ms_serial = fr.Unsigned32();
+					try {
+						if (ol->is_object_known(ms_serial)) {
+							if
+								(upcast
+								 (MilitarySite,
+								  ms,
+								  ol->get_object_by_file_index(ms_serial)))
+							{
+								ctrl.involvedMilitarySites.insert(ms);
+								ms->set_in_battle(true);
+							} else
+								throw wexception("not a militarysite");
+						} else
+							throw wexception("nonexistent");
+					} catch (_wexception const & e) {
+						throw wexception
+							("involved militarysite %u of %u with serial %u: %s",
+							 j, numInMs, ms_serial, e.what());
+					}
+				}
 
-		}
-		if (fr.Unsigned32() != 0xffffffff)
+			}
+			if (fr.Unsigned32() != 0xffffffff)
+				throw wexception
+					("Error in Attack_Controller_Data_Packet : Couldn't find "
+					 "0xffffffff.");
+		} else
 			throw wexception
-				("Error in Attack_Controller_Data_Packet : Couldn't find "
-				 "0xffffffff.");
-	} else
-		throw wexception
-			("Unkown version of Map_Battle_Data_Packet : %u", packet_version);
+				("unkown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("attack controller: %s", e.what());
+	}
 }
 
 

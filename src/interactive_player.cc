@@ -317,7 +317,7 @@ void Interactive_Player::field_action()
 */
 bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 {
-	bool handled=false;
+	bool handled = Interactive_Base::handle_key(down, code);
 
 	if (m_is_typing_msg && down) {
 		if (is_printable(code)) {

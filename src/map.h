@@ -597,25 +597,16 @@ private:
 
 
 /*
-CheckStepRoad
 -------------
 Implements the step checking behaviour for road building.
 
 player is the player who is building the road.
 movecaps are the capabilities with which the road is to be built (swimming
 for boats, walking for normal roads).
-forbidden is an array of coordinates that must not be crossed by the road.
 */
 struct CheckStepRoad : public CheckStep {
-	CheckStepRoad
-		(const Player & player,
-		 const uint8_t movecaps,
-		 const std::set<Coords, Coords::ordering_functor> * const
-		 forbidden_locations = 0)
-		:
-		m_player           (player),
-		m_forbidden_locations(forbidden_locations),
-		m_movecaps         (movecaps)
+	CheckStepRoad(Player const & player, uint8_t const movecaps)
+		: m_player(player), m_movecaps(movecaps)
 	{}
 	virtual ~CheckStepRoad() {} //  make gcc shut up
 
@@ -624,8 +615,22 @@ struct CheckStepRoad : public CheckStep {
 
 private:
 	const Player                                     &       m_player;
-	const std::set<Coords, Coords::ordering_functor> * const m_forbidden_locations;
 	const uint8_t                                            m_movecaps;
+};
+
+/// A version of CheckStepRoad that is limited to a set of allowed locations.
+struct CheckStepRoadLimited : public CheckStepRoad {
+	CheckStepRoadLimited
+		(Player const & player, uint8_t const movecaps,
+		 std::set<Coords, Coords::ordering_functor> const & allowed_locations)
+		: CheckStepRoad(player, movecaps), m_allowed_locations(allowed_locations)
+	{}
+
+	virtual bool allowed
+		(Map *, FCoords start, FCoords end, int32_t dir, StepId id) const;
+
+private:
+	std::set<Coords, Coords::ordering_functor> const & m_allowed_locations;
 };
 
 

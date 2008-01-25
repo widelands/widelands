@@ -138,7 +138,6 @@ Interactive_Base(e), m_egbase(e)
 		 _("Objectives"));
 
    m_need_save=false;
-   m_ctrl_down=false;
 }
 
 /// Restore default sel.
@@ -312,9 +311,7 @@ void Editor_Interactive::toolsize_menu_btn() {
 
 bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 {
-	bool handled=false;
-
-	if (code.sym == SDLK_LCTRL || code.sym == SDLK_RCTRL) m_ctrl_down = down;
+	bool handled = Interactive_Base::handle_key(down, code);
 
 	if (down)
 	{

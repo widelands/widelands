@@ -128,7 +128,6 @@ private:
          const void *object;
 	};
       std::vector<Player_References> m_player_tribe_references;
-      bool m_ctrl_down;
 
 	int32_t m_realtime;
 
