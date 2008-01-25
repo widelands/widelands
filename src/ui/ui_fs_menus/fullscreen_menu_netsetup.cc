@@ -99,7 +99,8 @@ void Fullscreen_Menu_NetSetup::think ()
 {
 	Fullscreen_Menu_Base::think ();
 
-	if (not NetGGZ::ref()->usedcore()) discovery.run();
+	if (not NetGGZ::ref().usedcore())
+		discovery.run();
 }
 
 bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
@@ -192,9 +193,7 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 
 void Fullscreen_Menu_NetSetup::toggle_networktype() {
 	if (internetgame)
-	{
-		NetGGZ::ref()->deinitcore();
-	}
+		NetGGZ::ref().deinitcore();
 
 	internetgame = !internetgame;
 
@@ -208,9 +207,10 @@ void Fullscreen_Menu_NetSetup::toggle_networktype() {
 		defaultserver = s->get_string("defaultserver", "live.ggzgamingzone.org");
 		hostname.set_text(defaultserver);
 
-		NetGGZ::ref()->initcore(hostname.get_text(), playername.get_text());
+		NetGGZ::ref().initcore(hostname.get_text(), playername.get_text());
 		networktype.set_title(_("GGZ games").c_str());
-		if (NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
+		if (NetGGZ::ref().tables().size() > 0)
+			fill(NetGGZ::ref().tables());
 	}
 	else
 	{
@@ -229,19 +229,19 @@ void Fullscreen_Menu_NetSetup::toggle_hostname()
 		s->set_string("defaultserver", hostname.get_text());
 		g_options.write("config", true);
 
-		NetGGZ::ref()->deinitcore();
-		NetGGZ::ref()->initcore(hostname.get_text(), playername.get_text());
+		NetGGZ::ref().deinitcore();
+		NetGGZ::ref().initcore(hostname.get_text(), playername.get_text());
 		networktype.set_title(_("GGZ games").c_str());
-		if (NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
+		if (NetGGZ::ref().tables().size() > 0)
+			fill(NetGGZ::ref().tables());
 	}
 }
 
 //bool Fullscreen_Menu_NetSetup::is_internetgame() {return internetgame;}
 
 void Fullscreen_Menu_NetSetup::clicked_joingame() {
-	if (NetGGZ::ref()->usedcore())
-	{
-		NetGGZ::ref()->join
+	if (NetGGZ::ref().usedcore()) {
+		NetGGZ::ref().join
 			(opengames.get_selected_record().get_string(1).c_str());
 		end_modal(JOINGGZGAME);
 	}
@@ -249,6 +249,5 @@ void Fullscreen_Menu_NetSetup::clicked_joingame() {
 }
 
 void Fullscreen_Menu_NetSetup::clicked_hostgame() {
-	if (NetGGZ::ref()->usedcore()) end_modal(HOSTGGZGAME);
-	else end_modal(HOSTGAME);
+	end_modal(NetGGZ::ref().usedcore() ? HOSTGGZGAME : HOSTGAME);
 }

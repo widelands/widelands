@@ -301,21 +301,18 @@ void WLApplication::run()
 		}
 
 		//TODO: what does this do? where does it belong? read up on GGZ! #fweber
-		if (NetGGZ::ref()->used())
-		{
-			if (NetGGZ::ref()->connect())
-			{
+		if (NetGGZ::ref().used()) {
+			if (NetGGZ::ref().connect()) {
 				NetGame *netgame;
 
-				if (NetGGZ::ref()->host()) netgame = new NetHost();
+				if (NetGGZ::ref().host()) netgame = new NetHost();
 				else
 				{
-					while (!NetGGZ::ref()->ip())
-						NetGGZ::ref()->data();
+					while (!NetGGZ::ref().ip())
+						NetGGZ::ref().data();
 
 					IPaddress peer;
-					SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(),
-					                    WIDELANDS_PORT);
+					SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
 					netgame = new NetClient(&peer);
 				}
 				netgame->run();
@@ -490,8 +487,8 @@ void WLApplication::handle_input(const InputCallback *cb)
 	// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
 	// by 0x81427A6: main (main.cc:39)
 
-	NetGGZ::ref()->data();
-	NetGGZ::ref()->datacore();
+	NetGGZ::ref().data();
+	NetGGZ::ref().datacore();
 
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
@@ -868,7 +865,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("ggz")>0) {
-		NetGGZ::ref()->init();
+		NetGGZ::ref().init();
 		m_commandline.erase("ggz");
 	}
 
@@ -1221,7 +1218,7 @@ void WLApplication::mainmenu_multiplayer()
 	NetGame* netgame = 0;
 	Fullscreen_Menu_NetSetup ns;
 
-	if (NetGGZ::ref()->tables().size() > 0) ns.fill(NetGGZ::ref()->tables());
+	if (NetGGZ::ref().tables().size() > 0) ns.fill(NetGGZ::ref().tables());
 
 	switch (ns.run()) {
 	case Fullscreen_Menu_NetSetup::HOSTGAME:
@@ -1269,16 +1266,17 @@ void WLApplication::mainmenu_multiplayer()
 	}
 		break;
 	case Fullscreen_Menu_NetSetup::HOSTGGZGAME:
-		NetGGZ::ref()->launch();
+		NetGGZ::ref().launch();
 		//  fallthrough
 	case Fullscreen_Menu_NetSetup::JOINGGZGAME: {
-		if (NetGGZ::ref()->host()) netgame = new NetHost();
+		if (NetGGZ::ref().host()) netgame = new NetHost();
 
 		else {
-			while (!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
+			while (!NetGGZ::ref().ip())
+				NetGGZ::ref().data();
 
 			IPaddress peer;
-			SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(), WIDELANDS_PORT);
+			SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
 			netgame = new NetClient(&peer);
 		}
 	}

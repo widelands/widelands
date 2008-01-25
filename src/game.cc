@@ -327,7 +327,7 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 
 	m_state = gs_loading;
 
-	set_iabase(new Interactive_Player(*this, 0));
+	set_iabase(new Interactive_Player(*this, 0)); //  FIXME memory leak!!!
 
 	Game_Loader gl(*fs, this);
 	loaderUI.step(_("Loading..."));
@@ -356,7 +356,7 @@ bool Game::run_multi_player (NetGame* ng)
 
 	m_state = gs_loading;
 
-	set_iabase(new Interactive_Player(*this, 0));
+	set_iabase(new Interactive_Player(*this, 0)); //  FIXME memory leak???
 
 	// Now first, completly load the map
 	loaderUI.step(_("Loading a map"));
@@ -391,7 +391,7 @@ bool Game::run_replay()
 	set_map(new Map);
 
 	m_state = gs_loading;
-	set_iabase(new Interactive_Spectator(this));
+	set_iabase(new Interactive_Spectator(this)); //  FIXME memory leak???
 
 	loaderUI.step(_("Loading..."));
 

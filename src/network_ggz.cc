@@ -36,9 +36,8 @@ NetGGZ::NetGGZ()
 	ip_address = NULL;
 }
 
-NetGGZ* NetGGZ::ref()
-{
-	if (!ggzobj) ggzobj = new NetGGZ();
+NetGGZ & NetGGZ::ref() {
+	static NetGGZ ggzobj;
 	return ggzobj;
 }
 

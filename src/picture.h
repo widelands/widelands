@@ -25,23 +25,24 @@
 
 /// picture module flags
 enum {
-	PicMod_UI = 1,
-	PicMod_Menu = 2,
-	PicMod_Game = 4,
-	PicMod_Font = 8,
+	PicMod_UI   = 0x01,
+	PicMod_Menu = 0x02,
+	PicMod_Game = 0x04,
+	PicMod_Font = 0x40,
+	PicSurface  = 0x80
 };
 
 struct Picture {
-	Picture() : mod(0), surface(0) {u.fname=0;}
-	/// 0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
-	int32_t mod;
-	Surface* surface;
+	Picture() : module(0), surface(0) {u.fname = 0;}
+	/// 0 if unused, PicSurface for surfaces, PicMod_* bitmask for pictures
+	uint8_t   module;
+	Surface * surface;
 
 	//WTF ?!?! A union between char* (to be used as filename) and class* ?!?
 	//Why ?!?! #fweber
 	union {
-		char * fname;
-		RenderTarget * rendertarget;
+		char         * fname; //  module & (PicMod_UI|PicMod_Menu|PicMod_Game)
+		RenderTarget * rendertarget; //  module & (PicMod_Font | PicSurface)
 	} u;
 };
 

@@ -39,7 +39,7 @@
 #endif
 
 struct NetGGZ {
-	static NetGGZ* ref();
+	static NetGGZ & ref();
 
 	void init();
 	bool connect();

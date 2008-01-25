@@ -54,9 +54,7 @@ SDL_Surface* LoadImage(const char * const filename);
  * alone, but this is only used (and usefull) in the editor.
 */
 
-class Graphic
-{
-public:
+struct Graphic {
 	Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen);
 	~Graphic();
 
@@ -71,10 +69,10 @@ public:
 	bool need_update();
 	void refresh(bool force = true);
 
-	void flush(int32_t mod);
-	uint32_t get_picture(int32_t mod, const char* fname);
+	void flush(uint8_t module);
+	uint32_t get_picture(uint8_t module, char const * fname);
 	void get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h);
-	uint32_t get_picture(const int32_t mod, Surface &, const char * const name = 0);
+	uint32_t get_picture(uint32_t module, Surface &, const char * name = 0);
 	Surface* get_picture_surface(uint32_t id);
 	void save_png(uint32_t, StreamWrite *);
 	uint32_t create_surface(int32_t w, int32_t h);

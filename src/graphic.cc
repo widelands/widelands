@@ -63,11 +63,11 @@ SDL_Surface* LoadImage(const char * const filename)
  * Initialize the SDL video mode.
 */
 Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
+:
+m_nr_update_rects   (0),
+m_update_fullscreen(false),
+m_roadtextures     (0)
 {
-	m_nr_update_rects = 0;
-	m_update_fullscreen = false;
-	m_roadtextures = 0;
-
 	// Set video mode using SDL
 	int32_t flags = SDL_SWSURFACE;
 
@@ -93,13 +93,20 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 */
 Graphic::~Graphic()
 {
-	flush(0);
-
+	flush(PicMod_UI | PicMod_Menu | PicMod_Game);
 	delete m_roadtextures;
-	m_roadtextures = 0;
-
 	delete m_rendertarget;
-	flush(-1);
+
+	std::vector<Picture>::const_iterator const pictures_end = m_pictures.end();
+	for
+		(std::vector<Picture>::const_iterator it = m_pictures.begin();
+		 it != pictures_end;
+		 ++it)
+		if (it->module)
+			log
+				("WARNING: picture with module %u has not been freed "
+				 "(u.{fname,rendertarget} = %p)\n",
+				 it->module, it->u.fname);
 }
 
 /**
@@ -189,62 +196,60 @@ void Graphic::refresh(bool force)
 
 /**
  * Remove all resources (currently pictures) from the given modules.
- * If mod is 0, all pictures are flushed.
- * \todo FIXME: this seems to be wrong - sigra
+ * \note flush(0) does nothing
 */
-void Graphic::flush(int32_t mod)
-{
+void Graphic::flush(uint8_t const module) {
+	assert(not (module & (PicMod_Font | PicSurface)));
 	// Flush pictures
 
 	for (uint32_t i = 0; i < m_pictures.size(); ++i) {
-		Picture* pic = &m_pictures[i];
+		Picture & pic = m_pictures[i];
 
 		//      NoLog("Flushing picture: %i while flushing all!\n", i);
 
-		if (!pic->mod)
+		if (!pic.module)
 			continue;
 
 
-		if (pic->mod < 0) {
-			if (!mod)
+		if (pic.module == PicSurface) {
+			if (!module)
 				log("LEAK: SW16: flush(0): non-picture %i left.\n", i+1);
 
 			continue;
 		}
 
-		pic->mod &= ~mod; // unmask the mods that should be flushed
+		pic.module &= ~module; // unmask the modules that should be flushed
 
 		// Once the picture is no longer in any mods, free it
 
-		if (!pic->mod) {
+		if (!pic.module) {
 
-			if (pic->u.fname) {
-				m_picturemap.erase(pic->u.fname);
-				free(pic->u.fname);
+			if (pic.u.fname) {
+				m_picturemap.erase(pic.u.fname);
+				free(pic.u.fname);
+				pic.u.fname = 0;
 			}
 
-			delete pic->surface;
+			delete pic.surface;
+			pic.surface = 0;
 		}
 	}
 
 	// Flush game items
-	if (!mod || mod & PicMod_Game) {
+	if (!module || module & PicMod_Game) {
 		for (uint32_t i = 0; i < m_maptextures.size(); ++i)
 			delete m_maptextures[i];
-
-		m_maptextures.resize(0);
+		m_maptextures.clear();
 
 		for (uint32_t i = 0; i < m_animations.size(); ++i)
 			delete m_animations[i];
-
-		m_animations.resize(0);
+		m_animations.clear();
 
 		delete m_roadtextures;
-
 		m_roadtextures = 0;
 	}
 
-	if (not mod or mod & PicMod_UI) // Flush the cached Fontdatas
+	if (not module or module & PicMod_UI) // Flush the cached Fontdatas
 		g_fh->flush_cache();
 }
 
@@ -255,8 +260,7 @@ void Graphic::flush(int32_t mod)
  *
  * \return 0 (a null-picture) if the picture cannot be loaded.
 */
-uint32_t Graphic::get_picture(int32_t mod, const char* fname)
-{
+uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 	std::vector<Picture>::size_type id;
 
 	//  Check if the picture is already loaded.
@@ -285,7 +289,7 @@ uint32_t Graphic::get_picture(int32_t mod, const char* fname)
 
 		Picture & pic = m_pictures[id];
 
-		pic.mod       = 0; // will be filled in by caller
+		pic.module    = 0; // will be filled in by caller
 
 		pic.u.fname   = strdup(fname);
 
@@ -298,17 +302,17 @@ uint32_t Graphic::get_picture(int32_t mod, const char* fname)
 		m_picturemap[fname] = id;
 	}
 
-	m_pictures[id].mod |= mod;
+	m_pictures[id].module |= module;
 
 	return id;
 }
 
 uint32_t Graphic::get_picture
-(const int32_t mod, Surface & surf, const char * const fname)
+(uint32_t const module, Surface & surf, char const * const fname)
 {
 	const std::vector<Picture>::size_type id = find_free_picture();
 	Picture & pic = m_pictures[id];
-	pic.mod       = mod;
+	pic.module    = module;
 	pic.surface   = &surf;
 
 	if (fname) {
@@ -327,7 +331,7 @@ uint32_t Graphic::get_picture
 uint32_t Graphic::get_resized_picture
 (const uint32_t index, const uint32_t w, const uint32_t h, ResizeMode mode)
 {
-	if (index >= m_pictures.size() or !m_pictures[index].mod)
+	if (index >= m_pictures.size() or !m_pictures[index].module)
 		throw wexception("get_resized_picture(%i): picture doesn't exist", index);
 
 	Surface* orig = m_pictures[index].surface;
@@ -381,10 +385,9 @@ uint32_t Graphic::get_resized_picture
 
 		target->blitrect
 			(Point((w - srcrc.w) / 2, (h - srcrc.h) / 2),
-			 get_picture(m_pictures[index].mod, src), srcrc);
+			 get_picture(m_pictures[index].module, src), srcrc);
 	}
 
-	m_pictures[pic].mod = m_pictures[index].mod;
 	return pic;
 }
 
@@ -412,7 +415,7 @@ SDL_Surface* Graphic::resize(const uint32_t index, const uint32_t w, const uint3
 */
 void Graphic::get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h)
 {
-	if (pic >= m_pictures.size() || !m_pictures[pic].mod)
+	if (pic >= m_pictures.size() || !m_pictures[pic].module)
 		throw wexception("get_picture_size(%i): picture doesn't exist", pic);
 
 	Surface* bmp = m_pictures[pic].surface;
@@ -508,7 +511,7 @@ uint32_t Graphic::create_surface(int32_t w, int32_t h)
 
 	const std::vector<Picture>::size_type id = find_free_picture();
 	Picture & pic = m_pictures[id];
-	pic.mod       = -1; // mark as surface
+	pic.module    = PicSurface; // mark as surface
 	pic.surface   = new Surface();
 	pic.surface->set_sdl_surface(surf);
 	pic.u.rendertarget = new RenderTarget(pic.surface);
@@ -520,17 +523,20 @@ uint32_t Graphic::create_surface(int32_t w, int32_t h)
  * Free the given surface.
  * Unlike normal pictures, surfaces are not freed by flush().
 */
-void Graphic::free_surface(uint32_t picid)
-{
-	assert(picid < m_pictures.size() &&
-			(m_pictures[picid].mod == -1 ||
-			  m_pictures[picid].mod == PicMod_Font));
+void Graphic::free_surface(uint32_t const picid) {
+	assert(picid < m_pictures.size());
+	assert
+		(m_pictures[picid].module == PicMod_Font
+		 ||
+		 m_pictures[picid].module == PicSurface);
 
-	Picture* pic = &m_pictures[picid];
+	Picture & pic = m_pictures[picid];
 
-	delete pic->u.rendertarget;
-	delete pic->surface;
-	pic->mod = 0;
+	delete pic.u.rendertarget;
+	pic.u.rendertarget = 0;
+	delete pic.surface;
+	pic.surface = 0;
+	pic.module = 0;
 }
 
 /**
@@ -538,7 +544,8 @@ void Graphic::free_surface(uint32_t picid)
 */
 RenderTarget* Graphic::get_surface_renderer(uint32_t pic)
 {
-	assert(pic < m_pictures.size() && m_pictures[pic].mod == -1);
+	assert(pic < m_pictures.size());
+	assert(m_pictures[pic].module == 0xff);
 
 	RenderTarget* rt = m_pictures[pic].u.rendertarget;
 
@@ -680,7 +687,9 @@ std::vector<Picture>::size_type Graphic::find_free_picture()
 	const std::vector<Picture>::size_type pictures_size = m_pictures.size();
 	std::vector<Picture>::size_type id = 1;
 
-	for (; id < pictures_size; ++id) if (m_pictures[id].mod == 0) return id;
+	for (; id < pictures_size; ++id)
+		if (m_pictures[id].module == 0)
+			return id;
 
 	m_pictures.resize(id+1);
 
@@ -696,7 +705,7 @@ Surface* Graphic::get_picture_surface(uint32_t id)
 	if (id >= m_pictures.size())
 		return 0;
 
-	if (!m_pictures[id].mod)
+	if (!m_pictures[id].module)
 		return 0;
 
 	return m_pictures[id].surface;

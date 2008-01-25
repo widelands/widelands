@@ -691,7 +691,7 @@ void NetClient::begin_game ()
 void NetClient::handle_network ()
 {
 	// What does this do here? It probably doesn't belong here.
-	NetGGZ::ref()->data();
+	NetGGZ::ref().data();
 
 	// check if data is available on the socket
 	while (sock!=0 && SDLNet_CheckSockets(sockset, 0) > 0) {
