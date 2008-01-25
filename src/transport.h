@@ -168,6 +168,11 @@ public:
 	void attach_building(Editor_Game_Base *g, Building *building);
 	void detach_building(Editor_Game_Base *g);
 
+	bool has_road() const {
+		return
+			m_roads[0] or m_roads[1] or m_roads[2] or
+			m_roads[3] or m_roads[4] or m_roads[5];
+	}
 	Road *get_road(int32_t dir) {return m_roads[dir-1];}
 	void attach_road(int32_t dir, Road *road);
 	void detach_road(int32_t dir);

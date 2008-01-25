@@ -95,6 +95,9 @@ struct Interactive_Base : public Map_View {
 		void set_display_flag(uint32_t flag, bool on);
 
       // Road building
+	void set_flag_to_connect(Widelands::Coords const location) {
+		m_flag_to_connect = location;
+	}
 		bool is_building_road() const {return m_buildroad;}
 	Widelands::CoordPath * get_build_road() {return m_buildroad;}
 		void start_build_road(Widelands::Coords start, int32_t player);
@@ -159,6 +162,7 @@ protected:
 
       void unset_sel_picture();
       void set_sel_picture(const char * const);
+	Widelands::Coords m_flag_to_connect;
 	bool m_shift_down;
 	bool m_ctrl_down;
 };

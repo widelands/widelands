@@ -65,6 +65,7 @@ m_jobid                       (Overlay_Manager::Job_Id::Null()),
 m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
 m_buildroad                   (false),
 m_road_build_player           (0),
+m_flag_to_connect             (Coords::Null()),
 m_shift_down                  (false),
 m_ctrl_down                   (false)
 {
@@ -240,6 +241,14 @@ void Interactive_Base::think()
 
 	// some of the UI windows need to think()
 	UI::Panel::think();
+
+	if (m_flag_to_connect) {
+		Widelands::Field & field = egbase().map()[m_flag_to_connect];
+		if (upcast(Widelands::Flag const, flag, field.get_immovable()))
+			if (not flag->has_road())
+				start_build_road(m_flag_to_connect, field.get_owned_by());
+		m_flag_to_connect = Coords::Null();
+	}
 }
 
 

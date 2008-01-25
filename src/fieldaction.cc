@@ -686,7 +686,9 @@ void FieldActionWindow::act_buildflag()
 	// Editor: Just plain build this flag
 	else m_plr->build_flag(m_field);
 	if (m_iabase->is_building_road())
-      m_iabase->finish_build_road();
+		m_iabase->finish_build_road();
+	else
+		m_iabase->set_flag_to_connect(m_field);
 	okdialog();
 }
 
@@ -783,6 +785,7 @@ void FieldActionWindow::act_build(int32_t idx)
 	else egbase.warp_building(m_field, m_plr->get_player_number(), idx);
 	m_iabase->reference_player_tribe
 		(m_plr->get_player_number(), &m_plr->tribe());
+	m_iabase->set_flag_to_connect(egbase.map().br_n(m_field));
 	okdialog();
 }
 
