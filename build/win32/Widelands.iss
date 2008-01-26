@@ -92,22 +92,22 @@ Name: desktopicon;     Description: {cm:CreateDesktopIcon};     GroupDescription
 Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
 
 [Files]
-Source: ..\..\campaigns\*; Excludes: .svn; DestDir: {app}\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\fonts\*;     Excludes: .svn; DestDir: {app}\fonts\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\locale\*;    Excludes: .svn; DestDir: {app}\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\maps\*;      Excludes: .svn; DestDir: {app}\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Maps"
-Source: ..\..\music\*;     Excludes: .svn; DestDir: {app}\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Music"
-Source: ..\..\pics\*;      Excludes: .svn; DestDir: {app}\pics\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\sound\*;     Excludes: .svn; DestDir: {app}\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\tribes\*;    Excludes: .svn; DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\txts\*;      Excludes: .svn; DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\worlds\*;    Excludes: .svn; DestDir: {app}\worlds\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\*.dll;                       DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
-Source: ..\..\widelands.exe;               DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
-Source: ..\..\ChangeLog;                   DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: " Widelands"
-Source: ..\..\COPYING;                     DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: " Widelands"
-Source: ..\..\CREDITS;                     DestDir: {app};            Flags: ignoreversion; DestName: CREDITS.txt;                                Components: " Widelands"
-Source: .\innosetup-files\WL-Editor.ico;   DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: ..\..\campaigns\*; Excludes: .svn Sconscript; DestDir: {app}\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\fonts\*;     Excludes: .svn Sconscript; DestDir: {app}\fonts\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\locale\*;    Excludes: .svn Sconscript; DestDir: {app}\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\maps\*;      Excludes: .svn Sconscript; DestDir: {app}\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Maps"
+Source: ..\..\music\*;     Excludes: .svn Sconscript; DestDir: {app}\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Music"
+Source: ..\..\pics\*;      Excludes: .svn Sconscript; DestDir: {app}\pics\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\sound\*;     Excludes: .svn Sconscript; DestDir: {app}\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\tribes\*;    Excludes: .svn Sconscript; DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\txts\*;      Excludes: .svn Sconscript; DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\worlds\*;    Excludes: .svn Sconscript; DestDir: {app}\worlds\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\*.dll;                                  DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: ..\..\widelands.exe;                          DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: ..\..\ChangeLog;                              DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: " Widelands"
+Source: ..\..\COPYING;                                DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: " Widelands"
+Source: ..\..\CREDITS;                                DestDir: {app};            Flags: ignoreversion; DestName: CREDITS.txt;                                Components: " Widelands"
+Source: .\innosetup-files\WL-Editor.ico;              DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
 
 [INI]
 Filename: {app}\{#UrlName};  Section: InternetShortcut; Key: URL; String: {#URL}
