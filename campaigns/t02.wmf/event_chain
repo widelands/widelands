@@ -218,6 +218,17 @@ event_00=Order Msg 19 All Material
 current_event=0
 state=init
 
+[Buildings Enhanced]
+repeating=false
+conditional_element_00=trigger
+conditional_element_00_data=Built Inn
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Built Deep Coal Mine
+event_00=Set Enhance Buildings
+current_event=0
+state=init
+
 [Mission Complete]
 repeating=false
 conditional_element_00=trigger
@@ -227,10 +238,7 @@ conditional_element_02=trigger
 conditional_element_02_data=Mission Fernery
 conditional_element_03=AND
 conditional_element_04=trigger
-conditional_element_04_data=Built Inn
-conditional_element_05=AND
-conditional_element_06=trigger
-conditional_element_06_data=Built Deep Coal Mine
+conditional_element_04_data=Enhance Buildings
 event_00=Mission Complete
 event_01=Unhide Empiretut
 current_event=0

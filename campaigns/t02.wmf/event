@@ -743,6 +743,12 @@ type=reveal_objective
 version=2
 objective=Better Material III
 
+[Set Enhance Buildings]
+type=set_null_trigger
+version=1
+trigger=Enhance Buildings
+setto=true
+
 [Mission Complete]
 type=message_box
 version=2
@@ -754,7 +760,6 @@ _"Thron speaks:<br>"The other day Boldreth talked me into accompanying him to th
 window_title=_Mission Complete!
 is_modal=true
 button_00=_Continue
-button_00_trigger=Enhance Buildings
 
 [Unhide Empiretut]
 type=reveal_campaign
