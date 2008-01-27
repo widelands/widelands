@@ -552,11 +552,10 @@ m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 
 	set_think(true);
 
-	for (Workarea_Info::size_type i = NUMBER_OF_WORKAREA_PICS; i;) {
-		char filename[30];
-		snprintf
-			(filename, sizeof(filename), "pics/workarea%zucumulative.png", i);
-		--i;
+	char filename[] = "pics/workarea0cumulative.png";
+	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
+	for (Workarea_Info::size_type i = 0; i < NUMBER_OF_WORKAREA_PICS; ++i) {
+		++filename[13];
 		workarea_cumulative_picid[i] = g_gr->get_picture(PicMod_Game, filename);
 	}
 }

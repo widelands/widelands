@@ -56,7 +56,7 @@ throw (_wexception)
 				if (nr_economies != nr_economies_from_file)
 					throw wexception
 						("Game_Player_Economies_Data_Packet::Read: in "
-						 "binary/player_economies:%zu: player %u: read number of "
+						 "binary/player_economies:%u: player %u: read number of "
 						 "economies as %u, but this was read as %u elsewhere",
 						 fr.GetPos() - 2, p,
 						 nr_economies_from_file, nr_economies);
@@ -79,7 +79,7 @@ throw (_wexception)
 				else
 					throw wexception
 						("Game_Player_Economies_Data_Packet::Read: in "
-						 "binary/player_economies:%zu: player %u: there is no flag "
+						 "binary/player_economies:%u: player %u: there is no flag "
 						 "at the specified location",
 						 fr.GetPos() - 4, p);
 			for (uint16_t j = 0; j < nr_economies; ++j) // Issue first balance
