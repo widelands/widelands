@@ -46,7 +46,7 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 	  ~EncyclopediaWindow();
 private:
 	  Interactive_Player& interactivePlayer;
-	UI::Listselect<intptr_t> wares;
+	UI::Listselect<Widelands::Ware_Index> wares;
 	UI::Listselect<intptr_t> prodSites;
 	UI::Table     <intptr_t> condTable;
 	UI::Multiline_Textarea    descrTxt;

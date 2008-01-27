@@ -88,7 +88,7 @@ private:
 class TrainingSite:public ProductionSite {
 	friend struct Map_Buildingdata_Data_Packet;
 	 MO_DESCR(TrainingSite_Descr);
-	friend class TrainingSite_Window;
+	friend struct ::TrainingSite_Window;
 public:
 	 TrainingSite(const TrainingSite_Descr &);
 	 virtual ~ TrainingSite();
