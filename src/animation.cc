@@ -53,27 +53,21 @@ shadowclr_[r, g, b]  color for shadow pixels
 */
 void EncodeData::parse(Section *s)
 {
-	uint8_t i;
-
 	// Read player color codes
-	for (i = 0; i < 4; ++i) {
-		char keyname[32];
-
-		snprintf(keyname, sizeof(keyname), "plrclr%i_r", i);
-		const int32_t r = s->get_int(keyname, -1);
-		snprintf(keyname, sizeof(keyname), "plrclr%i_g", i);
-		const int32_t g = s->get_int(keyname, -1);
-		snprintf(keyname, sizeof(keyname), "plrclr%i_b", i);
-		const int32_t b = s->get_int(keyname, -1);
+	char key[] = "plrclr0_r";
+	for (uint8_t i = 0; i < 4; ++i) {
+		++key[6];
+		key[8] = 'r'; const int32_t r = s->get_int(key, -1);
+		key[8] = 'g'; const int32_t g = s->get_int(key, -1);
+		key[8] = 'b'; const int32_t b = s->get_int(key, -1);
 
 		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-			break;
+			return;
 
 		plrclr[i] = RGBColor(r, g, b);
 	}
 
-	if (i == 4)
-		hasplrclrs = true;
+	hasplrclrs = true;
 }
 
 
@@ -152,7 +146,6 @@ uint32_t AnimationManager::get(const char *directory, Section *s, const char *pi
 {
 	uint32_t id;
 	AnimationData* ad;
-
 	m_animations.push_back(AnimationData());
 	id = m_animations.size();
 
