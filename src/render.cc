@@ -476,23 +476,24 @@ void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
       // Copy the old surface
 		Surface & origsurface = *m_plrframes[0][i];
-		SDL_Surface & tempsurface = *SDL_ConvertSurface
-			(origsurface.m_surface,
-			 &const_cast<SDL_PixelFormat &>(origsurface.format()),
-			 SDL_HWSURFACE | SDL_SRCALPHA);
 		Surface & newsurface = *new Surface();
-		newsurface.set_sdl_surface(tempsurface);
+		newsurface.set_sdl_surface
+			(*
+			 SDL_ConvertSurface
+			 (origsurface.m_surface,
+			  &const_cast<SDL_PixelFormat &>(origsurface.format()),
+			  SDL_HWSURFACE | SDL_SRCALPHA));
 		const SDL_PixelFormat & format = newsurface.format();
 
-		uint32_t plrclr1 = m_encodedata.plrclr[0].map(format);
-		uint32_t plrclr2 = m_encodedata.plrclr[1].map(format);
-		uint32_t plrclr3 = m_encodedata.plrclr[2].map(format);
-		uint32_t plrclr4 = m_encodedata.plrclr[3].map(format);
+		uint32_t const     plrclr1 = m_encodedata.plrclr [0].map(format);
+		uint32_t const     plrclr2 = m_encodedata.plrclr [1].map(format);
+		uint32_t const     plrclr3 = m_encodedata.plrclr [2].map(format);
+		uint32_t const     plrclr4 = m_encodedata.plrclr [3].map(format);
 
-		uint32_t new_plrclr1 = plrclrs[0].map(format);
-		uint32_t new_plrclr2 = plrclrs[1].map(format);
-		uint32_t new_plrclr3 = plrclrs[2].map(format);
-		uint32_t new_plrclr4 = plrclrs[3].map(format);
+		uint32_t const new_plrclr1 =              plrclrs[0].map(format);
+		uint32_t const new_plrclr2 =              plrclrs[1].map(format);
+		uint32_t const new_plrclr3 =              plrclrs[2].map(format);
+		uint32_t const new_plrclr4 =              plrclrs[3].map(format);
 
       // Walk the surface, replace all playercolors
 		for (uint32_t y = 0; y < newsurface.get_h(); ++y) {
