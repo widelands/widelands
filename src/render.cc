@@ -470,6 +470,8 @@ Encodes the given surface into a frame
 */
 void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 {
+	//  FIXME This playercolor conversion fails for indexed images. See bug
+	//  FIXME #1880277.
    assert(m_encodedata.hasplrclrs);
    std::vector<Surface*>& frames = m_plrframes[plr];
 
