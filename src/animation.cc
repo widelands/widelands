@@ -55,8 +55,7 @@ void EncodeData::parse(Section *s)
 {
 	// Read player color codes
 	char key[] = "plrclr0_r";
-	for (uint8_t i = 0; i < 4; ++i) {
-		++key[6];
+	for (uint8_t i = 0; i < 4; ++i, ++key[6]) {
 		key[8] = 'r'; const int32_t r = s->get_int(key, -1);
 		key[8] = 'g'; const int32_t g = s->get_int(key, -1);
 		key[8] = 'b'; const int32_t b = s->get_int(key, -1);
