@@ -46,15 +46,15 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	{"conquer_area",           _("Conquer area"),
 			_("Gives ownership of all unowned locations whithin an area to the player")},
 	{"allow_building",         _("Allow building type"),
-			_("Allows (or forbids) tye construction of a building type for a player")},
+			_("Allows (or forbids) the construction of a building type for a player")},
 	{"set_null_trigger",       _("Set null trigger"),
 			_("Manually set a Null Trigger to a given value")},
 	{"reveal_objective",       _("Reveal objective"),
 			_("Reveal (or hide) an objective")},
 	{"reveal_scenario",        _("Reveal scenario"),
-			_("Reveal (or hide) a scenario")},
+			_("Reveal a scenario")},
 	{"reveal_campaign",        _("Reveal campaign"),
-			_("Reveal (or hide) a campaign")},
+			_("Reveal a campaign")},
 };
 
 

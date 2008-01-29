@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,5 +95,5 @@ version(this, MENU_XRES-25, MENU_YRES-29, _("Version")+" "+BUILD_ID, Align_Right
 copyright
 (this,
  15, MENU_YRES - 29,
- _("(C) 2002-2007 by the Widelands Development Team"), Align_TopLeft)
+ _("(C) 2002-2008 by the Widelands Development Team"), Align_TopLeft)
 {}

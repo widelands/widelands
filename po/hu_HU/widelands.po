@@ -1430,8 +1430,8 @@ msgid "Version"
 msgstr "Verzió"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:98
-msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(C) 2002-2007 Widelands fejlesztőcsapat"
+msgid "(C) 2002-2008 by the Widelands Development Team"
+msgstr "(C) 2002-2008 Widelands fejlesztőcsapat"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:47
 #, fuzzy

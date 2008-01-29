@@ -1429,8 +1429,8 @@ msgid "Version"
 msgstr "Versión"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:98
-msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(c) 2002-2007 por el Equipo de Desarrollo de Widelands"
+msgid "(C) 2002-2008 by the Widelands Development Team"
+msgstr "(c) 2002-2008 por el Equipo de Desarrollo de Widelands"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:47
 #, fuzzy

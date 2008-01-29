@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,23 +31,13 @@ std::string Campaign_visiblity_save::get_path()
 {
 	std::string savepath("ssave");
 
-#ifndef __WIN32__
 	char *buf=getenv("HOME");
-
-	if (buf) {
+	if (buf)
 		savepath = std::string(buf) + "/.widelands/ssave";
-		g_fs->EnsureDirectoryExists(savepath);
-	} else {
-		// If the user has NO homedirectory (singleusers-system) but can
-		// start Widelands, (s)he/it hopefully has write-access to the
-		// Widelands-directory, so we keep the path at [widelands]/ssave.
-	}
-#else
-	// Until now, Widelands doesn't use home directories of the users under
-	// Windows and as the Widelands-path is always writeable under Windows,
-	// we just keep the path at [widelands]/ssave.
-#endif
+	// Make sure ssave directory exists in any case.
+	g_fs->EnsureDirectoryExists(savepath);
 
+    // Now add the name of save-file
 	savepath += "/campvis";
 
 	// check if campaigns visiblity-save is available
