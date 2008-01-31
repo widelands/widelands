@@ -127,6 +127,8 @@ void Campaign_visiblity_save::set_campaign_visiblity(std::string entry, bool vis
 
 	vis=campvis.pull_section("campaigns");
 	vis->set_bool(entry.c_str(), visible);
+
+	campvis.write(savepath.c_str(), false);
 }
 
 
@@ -144,4 +146,6 @@ void Campaign_visiblity_save::set_map_visiblity(std::string entry, bool visible)
 
 	vis=campvis.pull_section("campmaps");
 	vis->set_bool(entry.c_str(), visible);
+
+	campvis.write(savepath.c_str(), false);
 }
