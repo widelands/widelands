@@ -92,9 +92,20 @@ void Player::init(const bool place_headquarters) {
 	const Map & map = egbase().map();
 	if (place_headquarters) {
 		const Tribe_Descr & trdesc = m_tribe;
+		Coords starting_pos = map.get_starting_pos(m_plnum);
+
+		if (!starting_pos)
+			throw wexception("Player %u has no starting point", m_plnum);
+
+		FCoords fpos = map.get_fcoords(starting_pos);
+
+		if ((fpos.field->get_caps() & BUILDCAPS_SIZEMASK) < BUILDCAPS_BIG)
+			throw wexception("Starting point of player %u is too small", m_plnum);
+
 		Player_Area<Area<FCoords> > starting_area
 			(m_plnum,
-			 Area<FCoords>(map.get_fcoords(map.get_starting_pos(m_plnum)), 0));
+			 Area<FCoords>(fpos, 0));
+
 		//try {
 			Warehouse & headquarter = dynamic_cast<Warehouse &>
 				(*egbase().warp_building

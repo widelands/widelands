@@ -61,6 +61,8 @@ std::string const & BaseImmovable::name() const throw () {
 */
 void BaseImmovable::set_position(Editor_Game_Base * egbase, Coords const c)
 {
+	assert(c);
+
 	Map & map = egbase->map();
 	FCoords f = map.get_fcoords(c);
 	if (f.field->immovable && f.field->immovable != this) {
