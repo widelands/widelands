@@ -328,36 +328,6 @@ void WLApplication::run()
 	g_sound_handler.stop_music(500);
 
 	return;
-
-	//----------------------------------------------------------------------
-	//everything below here is unfinished work. please don't modify #fweber
-
-	while (!m_should_die) {
-		SDL_Event e;
-
-		if (journal->is_recording()) journal->record_event(&e);
-		//TODO: playback
-
-		switch (e.type) {
-		case SDL_MOUSEMOTION:
-			break;
-		case SDL_KEYDOWN:
-			break;
-		case SDL_SYSWMEVENT:
-			break;
-		case SDL_QUIT:
-			m_should_die=true;
-			break;
-		case SDL_USEREVENT:
-			switch (e.user.code) {
-			case CHANGE_MUSIC:
-				g_sound_handler.change_music();
-				break;
-			}
-			break;
-		}
-		break;
-	}
 }
 
 /**
