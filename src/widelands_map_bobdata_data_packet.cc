@@ -263,14 +263,16 @@ throw
 								if (i < oldstacksize && state.route)
 									if (!has_route) {
 										delete state.route;
-										state.route = 0; //  paranoia
+										state.route = 0; // in case we get an exception further down
 									} else
 										state.route->clear();
 
 								if (has_route) {
 									Route * const route =
 										state.route ? state.route : new Route();
-									route->load_pointers(*route->load(fr), *ol);
+									Route::LoadData d;
+									route->load(d, fr);
+									route->load_pointers(d, *ol);
 									state.route = route;
 								} else
 									state.route = 0;

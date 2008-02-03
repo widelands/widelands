@@ -1538,27 +1538,18 @@ void Route::truncate(int32_t count)
 
 /**
  * Preliminarily load the route from the given file.
- * \return pointer to a \ref LoadData structure that must be passed to
- * \ref load_pointers in a subsequent call during the load_pointers phase
- * of loading.
+ * Must call \ref load_pointers after \ref load
+ * \param data the caller must provide and manage this buffer that
+ * stores information for a later call to \ref load_pointers
  */
-Route::LoadData* Route::load(FileRead& fr)
+void Route::load(LoadData& data, FileRead& fr)
 {
-	LoadData* data = 0;
-
 	m_route.clear();
 
-	try {
-		m_totalcost = fr.Signed32();
-		uint32_t nsteps = fr.Unsigned16();
-		for (uint32_t step = 0; step < nsteps; ++step)
-			data->flags.push_back(fr.Unsigned32());
-	} catch (...) {
-		delete data;
-		throw;
-	}
-
-	return data;
+	m_totalcost = fr.Signed32();
+	uint32_t nsteps = fr.Unsigned16();
+	for (uint32_t step = 0; step < nsteps; ++step)
+		data.flags.push_back(fr.Unsigned32());
 }
 
 
@@ -1566,20 +1557,14 @@ Route::LoadData* Route::load(FileRead& fr)
  * load_pointers phase of loading: This is responsible for filling
  * in the \ref Flag pointers. Must be called after \ref load.
  */
-void Route::load_pointers(LoadData & data, Map_Map_Object_Loader & mol) {
-	try {
-		for (uint32_t i = 0; i < data.flags.size(); ++i) {
-			uint32_t const idx = data.flags.size();
-			if (upcast(Flag, flag, mol.get_object_by_file_index(idx)))
-				m_route.push_back(flag);
-			else
-				throw wexception("Route step %u expected flag %u", i, idx);
-		}
-	} catch (...) {
-		delete &data;
-		throw;
+void Route::load_pointers(const LoadData & data, Map_Map_Object_Loader & mol) {
+	for (uint32_t i = 0; i < data.flags.size(); ++i) {
+		uint32_t const idx = data.flags.size();
+		if (upcast(Flag, flag, mol.get_object_by_file_index(idx)))
+			m_route.push_back(flag);
+		else
+			throw wexception("Route step %u expected flag %u", i, idx);
 	}
-	delete &data;
 }
 
 

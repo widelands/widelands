@@ -349,8 +349,8 @@ struct Route {
 		std::vector<uint32_t> flags;
 	};
 
-	LoadData* load(FileRead& fr);
-	void load_pointers(LoadData &, Map_Map_Object_Loader &);
+	void load(LoadData& data, FileRead& fr);
+	void load_pointers(const LoadData&, Map_Map_Object_Loader &);
 	void save(FileWrite &, Editor_Game_Base *, Map_Map_Object_Saver *);
 
 private:
