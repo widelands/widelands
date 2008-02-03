@@ -204,17 +204,26 @@ update() function. The signal() and mask() functions are optional (can be 0).
 The update() function is called once after the task is pushed, and whenever a
 previously scheduled CMD_ACT occured. It is also called when a sub-task is pops
 itself.
-update() must call either schedule_act() or skip_act() if you really don't
-want a CMD_ACT to occur. Note that if you call skip_act(), your task MUST
-implement signal().
-Alternatively, update() can call pop_task() to end the current task.
+One of the following things must happen during update():
+- Call schedule_act() to schedule the next call to update()
+  This often happens indirectly by calls to start_task_* type fuctions
+- Call skip_act() if you really don't want a CMD_ACT to occur.
+  Note that if you call skip_act(), your task MUST implement signal(),
+  otherwise your bob will never wake up again.
+- Call pop_task() to end the current task
+- Send a new signal. Note that in this case, the signal handler must ensure
+  continued operation of the bob by calling pop_task() or schedule_act().
 
 signal() is usually called by send_signal().
 signal() is also called when a sub-task returns while a signal is still set.
 Note that after signal() called, update() is also called.
+Also note that if a signal is sent during an update() or signal() routine,
+the signal delivery is delayed until that function is over.
 signal() must call schedule_act(), or pop_task(), or do nothing at all.
 If signal() is not implemented, it is equivalent to a signal() function that
 does nothing at all.
+In the latter case, the signal has no effect, but it is remembered. Once
+the current task is popped, its parent task will receive a signal() call.
 
 Whenever send_signal() is called, the mask() function of all tasks are called,
 starting with the highest-level task.
@@ -344,18 +353,27 @@ void Bob::do_act(Game* g, bool signalhandling)
 		// Run the task if we're not coming from signalhandling
 		if (!signalhandling) {
 			const Task & task = *top_state().task;
-			(this->*task.update)(g, &top_state());
-			if (not m_stack_dirty) {
-				if (origactid == m_actid)
-					throw wexception
-						("MO(%u): update[%s] failed to act",
-						 get_serial(), task.name);
-				break; // we did our work, now get out of here
+			std::string oldsignal = m_signal;
 
-			} else if (origactid != m_actid)
+			(this->*task.update)(g, &top_state());
+
+			// If a new signal is sent during update, we want
+			// to deliver it now. Note that if the signal had been
+			// pending before, and the update() routine ignores that
+			// signal, then we ignore it as well.
+			bool newsignal = m_signal.size() && m_signal != oldsignal;
+
+			if (origactid != m_actid && m_stack_dirty)
 				throw wexception
 					("MO(%u): [%s] changes both stack and act",
 					 get_serial(), task.name);
+			if (origactid == m_actid && !m_stack_dirty && !newsignal)
+				throw wexception
+					("MO(%u): update[%s] failed to act",
+					 get_serial(), task.name);
+
+			if (!m_stack_dirty && !newsignal)
+				break; // we did our work, now get out of here until the next CMD_ACT
 		}
 
 		do {
