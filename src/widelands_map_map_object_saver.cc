@@ -36,17 +36,54 @@ m_lastserial   (0)
 {}
 
 
-/*
- * Returns true if this object has already been inserted
+/**
+ * Return a pointer to the record for the given object.
+ * Create a record if that hasn't been done yet.
+ */
+Map_Map_Object_Saver::MapObjectRec*
+Map_Map_Object_Saver::get_object_record(const Map_Object* obj)
+{
+	Map_Object_Map::iterator it = m_objects.find(obj);
+
+	if (it != m_objects.end())
+		return &it->second;
+
+	MapObjectRec rec;
+	rec.fileserial = ++m_lastserial;
+	rec.registered = false;
+	rec.saved = false;
+	return &m_objects.insert(std::pair<const Map_Object*, MapObjectRec>(obj, rec)).first->second;
+}
+
+
+/**
+ * Returns true if this object has already been registered.
+ * \deprecated since get_object_file_index supports unregistered objects now
  */
 bool Map_Map_Object_Saver::is_object_known(const Map_Object * const obj) const
-{return m_objects.find(obj) != m_objects.end();}
+{
+	Map_Object_Map::const_iterator it = m_objects.find(obj);
+
+	if (it == m_objects.end())
+		return false;
+
+	return it->second.registered;
+}
+
+bool Map_Map_Object_Saver::is_object_saved(const Map_Object * const obj) throw ()
+{
+	MapObjectRec* rec = get_object_record(obj);
+	return rec->saved;
+}
+
 
 /*
  * Registers this object as a new one
  */
 uint32_t Map_Map_Object_Saver::register_object(const Map_Object * const obj) {
-	assert(!is_object_known(obj));
+	MapObjectRec* rec = get_object_record(obj);
+
+	assert(!rec->registered);
 
 	switch (obj->get_type()) {
 	case Map_Object::FLAG:             ++m_nr_flags;              break;
@@ -61,12 +98,8 @@ uint32_t Map_Map_Object_Saver::register_object(const Map_Object * const obj) {
 		throw wexception("Map_Map_Object_Saver: Unknown MapObject type");
 	}
 
-	uint32_t fileserial = ++m_lastserial;
-
-	m_objects.insert(std::pair<const Map_Object*, uint32_t>(obj, fileserial));
-	m_saved_obj[obj] = false;
-
-	return fileserial;
+	rec->registered = true;
+	return rec->fileserial;
 }
 
 /*
@@ -76,34 +109,28 @@ uint32_t Map_Map_Object_Saver::register_object(const Map_Object * const obj) {
 uint32_t Map_Map_Object_Saver::get_object_file_index
 (const Map_Object * const obj)
 {
-	// This check should rather be an assert(), but we get more information
-	// from a throw and time's not soo much an issue here
-	if (!is_object_known(obj))
-		throw wexception
-			("Map_Map_Object_Saver::get_object_file_index(): Map Object %p (%i) "
-			 "is not known!",
-			 obj, obj->get_serial());
-
-	return m_objects[obj];
+	MapObjectRec* rec = get_object_record(obj);
+	return rec->fileserial;
 }
 
 /*
  * mark this object as saved
  */
 void Map_Map_Object_Saver::mark_object_as_saved(Map_Object const * const obj) {
-	m_saved_obj[obj] = true;
+	MapObjectRec* rec = get_object_record(obj);
+	assert(rec->registered);
+	rec->saved = true;
 }
 
 /*
  * Return the number of unsaved objects
  */
 uint32_t Map_Map_Object_Saver::get_nr_unsaved_objects() const throw () {
-	std::map<const Map_Object *, bool>::const_iterator i = m_saved_obj.begin();
-	uint32_t retval = 0;
+	uint retval = 0;
 
-	while (i!=m_saved_obj.end()) {
-		if (!i->second) retval++;
-		++i;
+	for(Map_Object_Map::const_iterator it = m_objects.begin(); it != m_objects.end(); ++it) {
+		if (!it->second.saved)
+			retval++;
 	}
 
 	return retval;

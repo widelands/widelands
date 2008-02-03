@@ -52,13 +52,18 @@ struct Map_Map_Object_Saver {
 	uint32_t get_nr_battles        () const throw () {return m_nr_battles;}
 	uint32_t get_nr_attack_controllers() const throw () {return m_nr_attack_controllers;}
 
-	bool is_object_saved(const Map_Object * const obj) throw ()
-	{return m_saved_obj[obj];}
+	bool is_object_saved(const Map_Object * const obj) throw ();
 
 private:
-	typedef std::map<const Map_Object *, const uint32_t> Map_Object_Map;
+	struct MapObjectRec {
+		uint32_t fileserial;
+		bool registered;
+		bool saved;
+	};
+	typedef std::map<const Map_Object *, MapObjectRec> Map_Object_Map;
 
-	std::map<const Map_Object *, bool> m_saved_obj;
+	MapObjectRec* get_object_record(const Map_Object *);
+
 	Map_Object_Map m_objects;
 	uint32_t m_nr_roads;
 	uint32_t m_nr_flags;
