@@ -303,17 +303,15 @@ void RealFSImpl::EnsureDirectoryExists(const std::string dirname)
  *
  * Pleas note, this function does not honor parents,
  * MakeDirectory("onedir/otherdir/onemoredir") will fail
- * if either ondir or otherdir is missing
+ * if either onedir or otherdir is missing
  */
 void RealFSImpl::MakeDirectory(const std::string dirname)
 {
 	if (FileExists(dirname))
 		throw wexception
-			("A File with the name %s already exists", dirname.c_str());
+			("a file with the name \"%s\" already exists", dirname.c_str());
 
-	std::string fullname;
-
-	fullname=FS_CanonicalizeName(dirname);
+	std::string const fullname = FS_CanonicalizeName(dirname);
 
 	int32_t retval=0;
 #ifdef WIN32

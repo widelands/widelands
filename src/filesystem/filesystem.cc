@@ -31,6 +31,7 @@
 #include "zip_exceptions.h"
 #include "zip_filesystem.h"
 
+#include <cassert>
 #include <string>
 #include <vector>
 
@@ -137,12 +138,20 @@ const char *FileSystem::FS_RelativePath(char *buf, const int32_t buflen, const c
  * \param path A file or directory name
  * \return True if ref path is absolute, false otherwise
  */
-const bool FileSystem::pathIsAbsolute(const std::string path) const
-{
+bool FileSystem::pathIsAbsolute(std::string const & path) const {
+	std::string::size_type const path_size = path  .size();
+	std::string::size_type const root_size = m_root.size();
+	if (path_size < root_size)
+		return false;
+
+	if (path_size == root_size)
+		return path == m_root;
+
 	if (path.substr(0, m_root.size())!=m_root)
 		return false;
 
-	if (path[m_root.size()]!=m_filesep)
+	assert(root_size < path_size); //  Otherwise an invalid read happens below.
+	if (path[root_size] != m_filesep)
 		return false;
 
 	return true;
@@ -254,7 +263,8 @@ const std::vector<std::string> FileSystem::FS_Tokenize(const std::string path) c
  *
  * \todo Enable non-Unix paths
  */
-const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
+std::string FileSystem::FS_CanonicalizeName
+(std::string const & path) const
 {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;

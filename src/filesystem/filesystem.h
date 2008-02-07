@@ -101,12 +101,12 @@ struct FileSystem {
 	// basic path/filename manipulation
 	const std::string getWorkingDirectory() const;
 	const std::string getTempDirectory();
-	const std::string FS_CanonicalizeName(const std::string path) const;
+	std::string FS_CanonicalizeName(std::string const & path) const;
 	static const std::string AutoExtension(const std::string filename,
 	                                       const std::string extension);
 	static const char *FS_StripExtension(char * const fname);
 	static const char *FS_RelativePath(char *buf, const int32_t buflen, const char *basefile, const char *filename);
-	const bool pathIsAbsolute(const std::string path) const;
+	bool pathIsAbsolute(std::string const & path) const;
 	const std::string AbsolutePath(const std::string path) const;
 	const std::vector<std::string> FS_Tokenize(const std::string path) const;
 	static const char *FS_Filename(const char* buf);
