@@ -349,8 +349,11 @@ void Warehouse_Descr::parse(const char* directory, Profile* prof,
 			 "port",
 			 string);
 
-	if (m_subtype == Subtype_HQ)
+	if (m_subtype == Subtype_HQ) {
 		m_conquers = global->get_int("conquers");
+		if (0 < m_conquers)
+			m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
+	}
 }
 
 
