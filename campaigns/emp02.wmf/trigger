@@ -14,7 +14,6 @@ type=building
 version=3
 point=16 17
 area=50
-player=1
 count=3
 building=lumberjack
 
@@ -23,7 +22,6 @@ type=building
 version=3
 point=16 17
 area=50
-player=1
 building=forester
 
 [Sawmill complete]
@@ -31,7 +29,6 @@ type=building
 version=3
 point=16 17
 area=50
-player=1
 building=sawmill
 
 [Woodeconomy complete]
@@ -42,7 +39,6 @@ type=building
 version=3
 point=15 29
 area=50
-player=1
 building=quarry
 
 [Saledus found shipparts]
@@ -51,39 +47,22 @@ version=1
 wait_time=40
 last_start_time=0
 
-[Barracks complete]
-type=building
-version=3
-point=23 22
-area=6
-player=1
-building=barracks
-
-[Sentry complete]
-type=building
-version=3
-point=23 22
-area=6
-player=1
-building=sentry
-
 [Military buildings complete]
-type=null
-
-[Barracks near mountains]
-type=building
+type=military_influence
 version=3
-point=31 21
-area=6
-player=1
-building=barracks
+point=26 21
+
+[Discovered mountains]
+type=vision
+version=3
+point=38 33
+area=3
 
 [Sentry near mountains]
 type=building
 version=3
 point=31 21
 area=6
-player=1
 building=sentry
 
 [Marblemine complete]
@@ -91,7 +70,6 @@ type=building
 version=3
 point=36 20
 area=6
-player=1
 building=marblemine
 
 [Ironmine complete]
@@ -99,7 +77,6 @@ type=building
 version=3
 point=38 37
 area=8
-player=1
 building=oremine
 
 [Coalmine complete]
@@ -107,7 +84,6 @@ type=building
 version=3
 point=49 22
 area=8
-player=1
 building=coalmine
 
 # Everything needed for mining infrastructure
@@ -116,7 +92,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=stonemason
 
 [Carpenter complete]
@@ -124,7 +99,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=carpenter
 
 [Armoursmith complete]
@@ -132,7 +106,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=armoursmith
 
 [Smelter complete]
@@ -140,7 +113,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=smelting_works
 
 [Burner complete]
@@ -148,7 +120,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=burner
 
 [Weaponsmith complete]
@@ -156,7 +127,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=weaponsmith
 
 [Mining infrastructure complete]
@@ -168,7 +138,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=outpost
 
 [Barrier complete]
@@ -176,7 +145,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=barrier
 
 [Tower complete]
@@ -184,7 +152,6 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=tower
 
 [Bigger military building complete]
@@ -195,7 +162,6 @@ type=building
 version=3
 point=60 65
 area=6
-player=1
 building=fortress
 
 #Optional (not needed for winning)
@@ -204,5 +170,4 @@ type=building
 version=3
 point=36 20
 area=80
-player=1
 building=tavern

@@ -754,8 +754,8 @@ uint32_t Worker::get_movecaps() const throw ()
  */
 void Worker::set_location(PlayerImmovable *location)
 {
+	assert(not location or Object_Ptr(location).get(&get_owner()->egbase()));
 	PlayerImmovable *oldlocation = get_location(&get_owner()->egbase());
-
 	if (oldlocation == location)
 		return;
 

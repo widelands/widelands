@@ -1,0 +1,5 @@
+[global]
+packet_version=1
+
+[player_1]
+lumberjack=true

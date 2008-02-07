@@ -18,7 +18,6 @@ type=building
 version=2
 point=12 0
 area=2
-player=1
 building=barracks
 
 [Lumberjack complete]
@@ -26,7 +25,14 @@ type=building
 version=2
 point=5 3
 area=2
-player=1
+building=lumberjack
+
+[Lumberjacks complete]
+type=building
+version=2
+point=9 1
+area=10
+count=3
 building=lumberjack
 
 [Sawmill complete]
@@ -34,15 +40,16 @@ type=building
 version=2
 point=5 3
 area=100
-player=1
 building=sawmill
+
+[Sawmill and Lumberjacks complete]
+type=null
 
 [Forester complete]
 type=building
 version=2
 point=5 3
 area=100
-player=1
 building=forester
 
 [Quarry complete]
@@ -50,11 +57,67 @@ type=building
 version=2
 point=5 3
 area=100
-player=1
 building=quarry
 
 [End Trigger]
-type=time
-version=1
-wait_time=80
-last_start_time=100000
+type=null
+
+[Extra Barracks 1]
+type=building
+version=2
+point=8 57
+building=barracks
+
+[Extra Barracks 2]
+type=building
+version=2
+point=10 58
+building=barracks
+
+[Extra Barracks 3]
+type=building
+version=2
+point=6 59
+building=barracks
+
+[Extra Barracks 4]
+type=building
+version=2
+point=11 59
+building=barracks
+
+[Extra Barracks 5]
+type=building
+version=2
+point=14 63
+building=barracks
+
+[Extra Barracks 6]
+type=building
+version=2
+point=15 2
+building=barracks
+
+[Extra Barracks 7]
+type=building
+version=2
+point=5 4
+building=barracks
+
+[Extra Barracks 8]
+type=building
+version=2
+point=13 5
+building=barracks
+
+[Extra Barracks 9]
+type=building
+version=2
+point=7 10
+building=barracks
+
+[Extra Barracks 10]
+type=building
+version=2
+point=10 11
+building=barracks

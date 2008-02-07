@@ -42,8 +42,8 @@ struct Event_Set_Null_Trigger : public Event, public Referencer<Trigger> {
 
       State run(Game*);
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
 	void set_trigger(Trigger_Null * const new_trigger) {
 		if (new_trigger != m_trigger) {
@@ -53,8 +53,6 @@ struct Event_Set_Null_Trigger : public Event, public Referencer<Trigger> {
 		}
 	}
 	Trigger_Null * get_trigger() const {return m_trigger;}
-	void set_setto(bool t) {m_setto = t;}
-	bool get_setto() const {return m_setto;}
 
 private:
       Trigger_Null* m_trigger;

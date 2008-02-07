@@ -35,8 +35,8 @@ struct Trigger_Player_Area : public Trigger {
 	friend struct ::Trigger_Building_Option_Menu;
 	Trigger_Player_Area(char const * Name, bool set);
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
 	typedef uint16_t Count_Type;
 

@@ -21,11 +21,7 @@
 
 #include "interactive_player.h"
 
-#include "editor_game_base.h"
-#include "filesystem.h"
 #include "game.h"
-#include "i18n.h"
-#include "map.h"
 #include "profile.h"
 #include "wexception.h"
 
@@ -33,30 +29,24 @@
 
 namespace Widelands {
 
-Event_Move_View::Event_Move_View(char const * const Name, State const S)
-	: Event(Name, S), m_location(Coords::Null()), m_player(1)
-{}
-
-
 void Event_Move_View::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
 		int32_t const packet_version = s.get_safe_int("version");
 		if (1 <= packet_version and packet_version <= EVENT_VERSION) {
+			Map const & map = egbase.map();
+			Extent const extent = map.extent();
 			m_location =
 				packet_version == 1 ?
 				Coords(s.get_safe_int("point_x"), s.get_safe_int("point_y"))
 				:
-				s.get_safe_Coords("point");
-			m_player = s.get_int("player", 1);
-			Map const & map = egbase.map();
+				s.get_safe_Coords("point", extent);
 			if
-				(m_location.x < 0 or map.get_width () <= m_location.x
+				(m_location.x < 0 or extent.w <= m_location.x
 				 or
-				 m_location.y < 0 or map.get_height() <= m_location.y)
+				 m_location.y < 0 or extent.h <= m_location.y)
 				throw wexception
 					("illegal coordinates (%i, %i)", m_location.x, m_location.y);
-			if (m_player <= 0 or map.get_nrplayers() < m_player)
-				throw wexception("illegal player number %u", m_player);
+			m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
 		} else
 			throw wexception("unknown/unhandled version %i", packet_version);
 	} catch (_wexception const & e) {
@@ -64,10 +54,13 @@ void Event_Move_View::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Move_View::Write(Section & s) const {
-	s.set_string("type",    "move_view");
-	s.set_int   ("version", EVENT_VERSION);
-	s.set_Coords("point",   m_location);
+void Event_Move_View::Write(Section & s, Editor_Game_Base const & egbase) const
+{
+	s.set_string ("type",    "move_view");
+	s.set_int    ("version", EVENT_VERSION);
+	s.set_Coords ("point",   m_location);
+	if (m_player != 1)
+		s.set_int ("player",  m_player);
 }
 
 /*

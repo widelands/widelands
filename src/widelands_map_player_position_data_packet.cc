@@ -49,6 +49,7 @@ throw (_wexception)
       // is not set (this is possible in the editor), is also
       // -1, -1
 		Map & map = *egbase->get_map();
+		Extent const extent = map.extent();
 		const Player_Number nr_players = map.get_nrplayers();
 		iterate_player_numbers(p, nr_players) {
 			if (packet_version == 1) {
@@ -60,7 +61,7 @@ throw (_wexception)
 			} else {
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
-				map.set_starting_pos(p, s->get_Coords(buffer));
+				map.set_starting_pos(p, s->get_safe_Coords(buffer, extent));
 			}
 		}
 	} else

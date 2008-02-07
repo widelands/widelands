@@ -1,0 +1,9 @@
+[global]
+packet_version=1
+
+[player_1]
+lumberjack=true
+quarry=true
+ranger=true
+sentry=true
+stronghold=true

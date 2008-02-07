@@ -266,13 +266,6 @@ void Editor_Game_Base::do_conquer_area
 			map().calc_influence
 			(mr.location(), Area<>(player_area, player_area.radius));
 
-         // This is for put a weight to every field, its equal to the next array:
-         // 1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56, 67, 79, 92, 106, 121, 137, 154, 172 ... 1+(x*(x-1)/2)
-         // This method will make harder to conquer an area already owner by any other player.
-         // This don't have conflict with changing radius of conquer of an specific building, the only
-         // that is needed to do is first: unconquer the area with inital values, second: reconquer the area
-         // with new values. Will be usefull to save this values at the building.
-         // -- RFerriz
 		const Player_Number owner = mr.location().field->get_owned_by();
 		if (conquer) {
           // Adds the influence
@@ -615,7 +608,9 @@ Building* Editor_Game_Base::warp_constructionsite(Coords c, int8_t owner, int32_
 	Tribe_Descr const & tribe = plr.tribe();
 	return
 		tribe.get_building_descr(idx)->create
-		(*this, plr, c, true, old_id ? tribe.get_building_descr(old_id) : 0);
+		(*this, plr, c,
+		 true, false,
+		 old_id ? tribe.get_building_descr(old_id) : 0);
 }
 
 
@@ -651,8 +646,8 @@ but an immovable defined by the players tribe)
 Does not perform any placability checks.
 ===============
 */
-Immovable *Editor_Game_Base::create_immovable
-(const Coords c, int32_t idx, const Tribe_Descr* tribe)
+Immovable & Editor_Game_Base::create_immovable
+(Coords const c, int32_t const idx, Tribe_Descr const * const tribe)
 {
 	Immovable_Descr & descr =
 		*
@@ -662,11 +657,11 @@ Immovable *Editor_Game_Base::create_immovable
 		 m_map->world().get_immovable_descr(idx));
 	inform_players_about_immovable
 		(Map::get_index(c, map().get_width()), &descr);
-	return descr.create(this, c);
+	return descr.create(*this, c);
 }
 
-Immovable* Editor_Game_Base::create_immovable
-(const Coords c, const std::string & name, const Tribe_Descr* tribe)
+Immovable & Editor_Game_Base::create_immovable
+(Coords const c, std::string const & name, Tribe_Descr const * const tribe)
 {
 	const int32_t idx =
 		tribe ?

@@ -68,7 +68,7 @@ class _wexception implementation
 _wexception::_wexception(const char* file, uint32_t line, const char *fmt, ...)
 throw ()
 {
-	char buffer[256];
+	char buffer[512];
 	{
 		va_list va;
 		va_start(va, fmt);

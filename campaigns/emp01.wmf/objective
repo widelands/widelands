@@ -11,10 +11,10 @@ descr=_"Build a lumberjack, at the red point at the south of your headquarters."
 visible=false
 trigger=Lumberjack complete
 
-[Build Sawmill]
+[Build Sawmill and Lumberjacks]
 descr=_"Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
 visible=false
-trigger=Sawmill complete
+trigger=Sawmill and Lumberjacks complete
 
 [Build Forester]
 descr=_"Build a forester hut, to save the wood resources of this island."
@@ -24,4 +24,4 @@ trigger=Forester complete
 [Build Quarry]
 descr=_"Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
 visible=false
-trigger=Forester complete
+trigger=Quarry complete

@@ -449,8 +449,6 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 
 /*
 ===========
-void Tribe_Descr::load_warehouse_with_start_wares()
-
 This loads a warehouse with the given start wares as defined in
 the conf files
 ===========
@@ -472,7 +470,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 			 it != startworkers_end;
 			 ++it)
 			wh.insert_workers
-			(get_safe_worker_index(it->first.c_str()), it->second);
+				(get_safe_worker_index(it->first.c_str()), it->second);
 	}
 	{
 		const smit startsoldiers_end = m_startsoldiers.end();
@@ -490,24 +488,25 @@ void Tribe_Descr::load_warehouse_with_start_wares
 					 it->first.c_str());
 
       char* endp;
-      int32_t hplvl=strtol(list[0].c_str(), &endp, 0);
+			long int const hplvl      = strtol(list[0].c_str(), &endp, 0);
 			if (endp && *endp)
          throw wexception("Bad hp level '%s'", list[0].c_str());
-      int32_t attacklvl=strtol(list[1].c_str(), &endp, 0);
+			long int const attacklvl  = strtol(list[1].c_str(), &endp, 0);
 			if (endp && *endp)
          throw wexception("Bad attack level '%s'", list[1].c_str());
-      int32_t defenselvl=strtol(list[2].c_str(), &endp, 0);
+			long int const defenselvl = strtol(list[2].c_str(), &endp, 0);
 			if (endp && *endp)
          throw wexception("Bad defense level '%s'", list[2].c_str());
-      int32_t evadelvl=strtol(list[3].c_str(), &endp, 0);
+			long int const evadelvl   = strtol(list[3].c_str(), &endp, 0);
 			if (endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
 			if (upcast(Game, game, &egbase))
 		for (int32_t i = 0; i < it->second; ++i) {
-            Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
-				Soldier & soldier = static_cast<Soldier &>
-					(soldierd->create(*game, wh.owner(), wh, wh.get_position()));
+			Soldier & soldier = static_cast<Soldier &>
+				(dynamic_cast<Soldier_Descr const *>
+				 (get_worker_descr(get_worker_index("soldier")))
+				 ->create(*game, wh.owner(), wh, wh.get_position()));
             soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
 				wh.incorporate_worker(game, &soldier);
 			}

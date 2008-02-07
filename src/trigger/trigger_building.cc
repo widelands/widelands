@@ -37,8 +37,8 @@ namespace Widelands {
 
 Trigger_Building::Trigger_Building(char const * const Name, bool const set)
 :
-Trigger_Player_Area(Name, set),
-m_building         (_("<unset>"))
+	Trigger_Player_Area(Name, set),
+	m_building_type    (0)
 {}
 
 
@@ -49,7 +49,9 @@ void Trigger_Building::Read(Section & s, Editor_Game_Base & egbase) {
 			Trigger_Player_Area::Read(s, egbase);
 			egbase.get_iabase()->reference_player_tribe
 				(m_player_area.player_number, this);
-			set_building(s.get_safe_string("building"));
+			m_building_type =
+				&s.get_safe_Building_Type
+				("building", egbase, m_player_area.player_number);
 		} else
 			throw wexception("unknown/unhandled version %i", packet_version);
 	} catch (std::exception const & e) {
@@ -57,11 +59,13 @@ void Trigger_Building::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Trigger_Building::Write(Section & s) const {
-	s.set_string("type",     "building");
-	s.set_int   ("version",  PACKET_VERSION);
-	Trigger_Player_Area::Write(s);
-	s.set_string("building", m_building);
+void Trigger_Building::Write
+	(Section & s, Editor_Game_Base const & egbase) const
+{
+	s.set_string       ("type",     "building");
+	s.set_int          ("version",  PACKET_VERSION);
+	Trigger_Player_Area::Write(s, egbase);
+	s.set_Building_Type("building", *m_building_type);
 }
 
 /*
@@ -69,16 +73,6 @@ void Trigger_Building::Write(Section & s) const {
  */
 void Trigger_Building::check_set_conditions(Game const & game) {
 	Map const & map = game.map();
-	if
-		(m_player_area.x < 0 or map.get_width () <= m_player_area.x
-		 or
-		 m_player_area.y < 0 or map.get_height() <= m_player_area.y
-		 or
-		 m_player_area.player_number <= 0
-		 or
-		 map.get_nrplayers() < m_player_area.player_number)
-		return;
-
 
 	uint32_t count = 0;
 	MapRegion<Area<FCoords> > mr (map, m_player_area);
@@ -87,24 +81,10 @@ void Trigger_Building::check_set_conditions(Game const & game) {
 		if
 			(building->owner().get_player_number() == m_player_area.player_number
 			 and
-			 building->name() == m_building)
-			++count;
+			 &building->descr() == m_building_type)
+			if (m_count <= ++count)
+				return set_trigger(true);
 	while (mr.advance(map));
-
-	if (count >= m_count)
-		set_trigger(true);
-
-	//  Set Variable inttemp.
-	Manager<Variable> & mvm = game.map().mvm();
-	Variable_Int * inttemp = dynamic_cast<Variable_Int *>(mvm["inttemp"]);
-	if (!inttemp) {
-      inttemp = new Variable_Int(false);
-      inttemp->set_name("inttemp");
-		mvm.register_new(*inttemp);
-	}
-   inttemp->set_value(count);
-
-   return;
 }
 
 };

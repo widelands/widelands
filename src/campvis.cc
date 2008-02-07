@@ -29,11 +29,13 @@
  */
 std::string Campaign_visiblity_save::get_path()
 {
-	std::string savepath("ssave");
-
-	char *buf=getenv("HOME");
-	if (buf)
-		savepath = std::string(buf) + "/.widelands/ssave";
+	std::string savepath;
+	if (char const * const buf = getenv("HOME")) {
+		savepath  = std::string(buf);
+		savepath += "/.widelands";
+		g_fs->EnsureDirectoryExists(savepath);
+	}
+	savepath += "/ssave";
 	// Make sure ssave directory exists in any case.
 	g_fs->EnsureDirectoryExists(savepath);
 

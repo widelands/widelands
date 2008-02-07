@@ -24,9 +24,11 @@
 
 namespace Widelands {
 
-void Event_Reveal_Scenario::Write (Section & s) const {
+void Event_Reveal_Scenario::Write
+	(Section & s, Editor_Game_Base const & egbase) const
+{
 	s.set_string("type", "reveal_scenario");
-	Event_Reveal::Write(s);
+	Event_Reveal::Write(s, egbase);
 }
 
 

@@ -266,7 +266,11 @@ struct Road : public PlayerImmovable {
 	Road();
 	virtual ~Road();
 
-	static Road* create(Editor_Game_Base *g, int32_t type, Flag* start, Flag* end, const Path &path);
+	static void  create
+		(Editor_Game_Base &,
+		 Flag & start, Flag & end, Path const &,
+		 bool    create_carrier = false,
+		 int32_t type           = Road_Normal);
 
 	Flag* get_flag(FlagId flag) const {return m_flags[flag];}
 

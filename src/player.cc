@@ -47,32 +47,27 @@ extern Map_Object_Descr g_road_descr;
 //
 //
 Player::Player
-(Editor_Game_Base  & the_egbase,
- const int32_t type,
- const Player_Number plnum,
- const Tribe_Descr & tribe_descr,
- const std::string & name,
- const uint8_t * const playercolor)
-:
-m_see_all(false),
-m_egbase (the_egbase),
-m_type   (type),
-m_plnum  (plnum),
-m_tribe  (tribe_descr),
-m_fields (0)
+	(Editor_Game_Base  & the_egbase,
+	 int32_t               const type,
+	 Player_Number         const plnum,
+	 Tribe_Descr   const &       tribe_descr,
+	 std::string   const &       name,
+	 uint8_t       const * const playercolor)
+	:
+	m_see_all           (false),
+	m_egbase            (the_egbase),
+	m_type              (type),
+	m_plnum             (plnum),
+	m_tribe             (tribe_descr),
+	m_fields            (0),
+	m_allowed_buildings (tribe_descr.get_nrbuildings(), true),
+	m_current_statistics(tribe().get_nrwares()),
+	m_ware_productions  (tribe().get_nrwares())
 {
 	for (int32_t i = 0; i < 4; ++i)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
 
 	set_name(name);
-
-	// Allow all buildings per default
-	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
-	for (int32_t i = 0; i < m_tribe.get_nrbuildings(); ++i)
-		m_allowed_buildings[i]=true;
-
-	m_ware_productions.resize(tribe().get_nrwares());
-	m_current_statistics.resize(tribe().get_nrwares());
 }
 
 
@@ -178,13 +173,31 @@ Player::build_flag
 Build a flag, checking that it's legal to do so.
 ===============
 */
-void Player::build_flag(Coords c)
-{
+void Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
-	if (buildcaps & BUILDCAPS_FLAG) Flag::create(&m_egbase, this, c);
+	if (buildcaps & BUILDCAPS_FLAG)
+		Flag::create(&egbase(), this, c);
 }
 
+
+Flag & Player::force_flag(FCoords const c) {
+	log("Forcing flag at (%i, %i)\n", c.x, c.y);
+	Map const & map = egbase().map();
+	if (BaseImmovable * const immovable = c.field->get_immovable())
+		if (upcast(Flag, existing_flag, immovable)) {
+			if (&existing_flag->owner() == this)
+				return *existing_flag;
+		} else if (not dynamic_cast<Road const *>(immovable)) //  A road is OK.
+			immovable->remove(&egbase()); //  Make room for the flag.
+	MapRegion<Area<FCoords> > mr(map, Area<FCoords>(c, 1));
+	do if (upcast(Flag, flag, mr.location().field->get_immovable()))
+		flag->remove(&egbase()); //  Remove all flags that are too close.
+	while (mr.advance(map));
+	egbase().conquer_area //  Make sure that the player owns the area around.
+		(Player_Area<Area<FCoords> >(get_player_number(), Area<FCoords>(c, 1)));
+	return *Flag::create(&egbase(), this, c);
+}
 
 /*
 ===============
@@ -220,11 +233,65 @@ void Player::build_road(const Path & path) {
 					return;
 				}
 			}
-			Road::create(&m_egbase, Road_Normal, start, end, path);
+			Road::create(egbase(), *start, *end, path);
 		} else
 			log("%i: building road, missed end flag\n", get_player_number());
 	} else
 		log("%i: building road, missed start flag\n", get_player_number());
+}
+
+
+void Player::force_road(Path const & path, bool const create_carrier) {
+	Map & map = egbase().map();
+	FCoords c = map.get_fcoords(path.get_start());
+	Flag & start = force_flag(c);
+	Flag & end   = force_flag(map.get_fcoords(path.get_end()));
+
+	Path::Step_Vector::size_type const laststep = path.get_nsteps() - 1;
+	for (Path::Step_Vector::size_type i = 0; i < laststep; ++i) {
+		c = map.get_neighbour(c, path[i]);
+		log("Clearing for road at (%i, %i)\n", c.x, c.y);
+		egbase().conquer_area
+			(Player_Area<Area<FCoords> >
+			 (get_player_number(), Area<FCoords>(c, 1)));
+		if (BaseImmovable * const immovable = c.field->get_immovable()) {
+			assert(immovable != &start);
+			assert(immovable != &end);
+			immovable->remove(&egbase());
+		}
+	}
+	Road::create(egbase(), start, end, path, create_carrier);
+}
+
+
+void Player::force_building
+	(Coords const location, Building_Index const idx, bool const fill)
+{
+	Map & map = egbase().map();
+	FCoords c[4]; //  Big buildings occupy 4 locations.
+	c[0] = map.get_fcoords(location);
+	map.get_brn(c[0], &c[1]);
+	force_flag(c[1]);
+	if (BaseImmovable * const immovable = c[0].field->get_immovable())
+		immovable->remove(&egbase());
+	Building_Descr const & descr = *tribe().get_building_descr(idx);
+	{
+		size_t nr_locations = 1;
+		if ((descr.get_size() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
+			nr_locations = 4;
+			map.get_trn(c[0], &c[1]);
+			map.get_tln(c[0], &c[2]);
+			map.get_ln (c[0], &c[3]);
+		}
+		for (size_t i = 0; i < nr_locations; ++i) {
+			egbase().conquer_area
+				(Player_Area<Area<FCoords> >
+				 (get_player_number(), Area<FCoords>(c[i], 1)));
+			if (BaseImmovable * const immovable = c[i].field->get_immovable())
+				immovable->remove(&egbase());
+		}
+	}
+	descr.create(egbase(), *this, c[0], false, fill);
 }
 
 
@@ -400,12 +467,9 @@ void Player::flagaction(Flag* flag, int32_t action)
  *
  * Disable or enable a building for a player
  */
-void Player::allow_building(int32_t i, bool t)
-{
-	assert(i < m_tribe.get_nrbuildings());
-	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
-
-	m_allowed_buildings[i]=t;
+void Player::allow_building(Building_Index const i, bool const allow) {
+	assert(i.value() < m_allowed_buildings.size());
+	m_allowed_buildings[i.value()] = allow;
 }
 
 /*
@@ -659,7 +723,7 @@ void Player::sample_statistics()
  */
 void Player::ware_produced(Ware_Index const wareid) {
 	assert (m_ware_productions.size() == static_cast<uint32_t>(tribe().get_nrwares()));
-	assert(wareid < static_cast<uint32_t>(tribe().get_nrwares()));
+	assert(wareid.value() < static_cast<uint32_t>(tribe().get_nrwares()));
 
 	++m_current_statistics[wareid.value()];
 }

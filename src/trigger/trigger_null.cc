@@ -44,7 +44,7 @@ void Trigger_Null::Read(Section & s, Editor_Game_Base &) {
 	}
 }
 
-void Trigger_Null::Write(Section & s) const {
+void Trigger_Null::Write(Section & s, Editor_Game_Base const &) const {
 	s.set_string("type", "null");
 }
 

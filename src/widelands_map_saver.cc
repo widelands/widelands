@@ -154,7 +154,7 @@ void Map_Saver::save() throw (_wexception) {
 		const Building_Descr::Index nr_buildings =
 			player->tribe().get_nrbuildings();
 		for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
-			if (player->is_building_allowed(i)) {
+			if (not player->is_building_allowed(i)) {
 				log("Writing Allowed Buildings Data ... ");
 				Map_Allowed_Buildings_Data_Packet p;
 				p.Write(m_fs, m_egbase, m_mos);

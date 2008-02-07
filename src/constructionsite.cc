@@ -372,7 +372,8 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	if (m_work_completed >= m_work_steps)
 	{
 		// Put the real building in place
-		Building * const bld = m_building->create(*g, owner(), m_position, false);
+		Building * const bld =
+			m_building->create(*g, owner(), m_position, false);
 		bld->set_stop(get_stop());
 		// Walk the builder home safely
 		Worker* builder = m_builder.get(g);

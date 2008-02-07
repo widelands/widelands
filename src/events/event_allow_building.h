@@ -22,6 +22,10 @@
 
 #include "event.h"
 
+#include "widelands.h"
+
+struct Event_Allow_Building_Option_Menu;
+
 namespace Widelands {
 
 class Editor_Game_Base;
@@ -30,26 +34,23 @@ class Editor_Game_Base;
  * Allows/denies the player to build a certain building
  */
 struct Event_Allow_Building : public Event {
+	friend struct ::Event_Allow_Building_Option_Menu;
 	Event_Allow_Building(char const * name, State);
 
 	int32_t option_menu(Editor_Interactive &);
 
       State run(Game*);
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
-	int32_t get_player() const {return m_player;}
-	void set_player(int32_t i) {m_player = i;}
-      const char* get_building() {return m_building.c_str();}
-      void set_building(const char* b) {m_building=b;}
 	void set_allow(bool t) {m_allow = t;}
 	bool get_allow() {return m_allow;}
 
 private:
+	Player_Number  m_player;
+	Building_Index m_building;
       bool m_allow;
-      std::string m_building;
-      int32_t m_player;
 };
 
 };

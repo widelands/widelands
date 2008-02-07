@@ -85,6 +85,37 @@ private:
 	value_t i;
 };
 
+struct Building_Index {
+	typedef uint8_t value_t;
+	Building_Index(Building_Index const & other = Null()) : i(other.i) {}
+	Building_Index(value_t const I) : i(I) {}
+
+	/// For compatibility with old code that use int32_t for building index
+	/// and use -1 to indicate invalidity.
+	Building_Index(int32_t const I) __attribute__((deprecated))
+		:
+		i
+		(I == -1 ?
+		 std::numeric_limits<value_t>::max() : static_cast<value_t>(I))
+	{}
+
+	/// Returns a special value indicating invalidity.
+	static Building_Index Null() {
+		return Building_Index(std::numeric_limits<value_t>::max());
+	}
+
+	///  Get a value for array subscripting.
+	value_t value() const {assert(*this); return i;}
+
+	bool operator==(Building_Index const other) const {return i == other.i;}
+	bool operator!=(Building_Index const other) const {return i != other.i;}
+
+	operator bool() const throw () {return operator!=(Null());}
+	operator int32_t() const __attribute__((deprecated)) {return *this ? i : -1;} //  FIXME ditch this temporary hack eventually
+private:
+	value_t i;
+};
+
 };
 
 #endif

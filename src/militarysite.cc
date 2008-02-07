@@ -127,8 +127,6 @@ MilitarySite::~MilitarySite()
 
 /**
 ===============
-MilitarySite::get_statistics_string
-
 Display number of soldiers.
 ===============
 */
@@ -151,6 +149,25 @@ std::string MilitarySite::get_statistics_string()
 }
 
 
+void MilitarySite::fill(Game & game) {
+	ProductionSite::fill(game);
+	assert(m_soldiers        .empty());
+	assert(m_soldier_requests.empty());
+	Tribe_Descr const & tribe = owner().tribe();
+	std::vector<std::string> const & workers = descr().workers();
+	std::vector<std::string>::const_iterator const workers_end =
+		workers.end();
+	for (uint32_t i = descr().get_max_number_of_soldiers(); i; --i) {
+		Soldier & soldier =
+			dynamic_cast<Soldier &>
+			(tribe.get_worker_descr(tribe.worker_index("soldier"))->create
+			 (game, owner(), *get_base_flag(), get_position()));
+		soldier.start_task_idle(&game, 0, -1);
+		m_soldiers.push_back(&soldier);
+	}
+	conquer_area(game);
+}
+
 /**
 ===============
 MilitarySite::init
@@ -163,8 +180,18 @@ void MilitarySite::init(Editor_Game_Base* g)
    ProductionSite::init(g);
 
 	if (upcast(Game, game, g)) {
+		if (m_soldiers.size()) {
+			std::vector<Soldier *>::const_iterator const soldiers_end =
+				m_soldiers.end();
+			for
+				(std::vector<Soldier *>::const_iterator it = m_soldiers.begin();
+				 it != soldiers_end;
+				 ++it)
+				(*it)->set_location(this);
+		} else {
       // Request soldiers
 		call_soldiers();
+		}
 
       //    Should schedule because all stuff related to healing and removing own
       // soldiers should be scheduled.
@@ -299,13 +326,7 @@ void MilitarySite::request_soldier_callback
 	assert(s.get_location(g) == &msite);
 
 	if (not msite.m_didconquer)
-		g->conquer_area
-			(Player_Area<Area<FCoords> >
-			 (msite.owner().get_player_number(),
-			  Area<FCoords>
-			  (g->map().get_fcoords(msite.get_position()),
-			   msite.descr().get_conquers())));
-	msite.m_didconquer = true;
+		msite.conquer_area(*g);
 
 	for (uint32_t i = 0; i < msite.m_soldier_requests.size(); ++i)
 		if (rq == msite.m_soldier_requests[i]) {
@@ -379,8 +400,6 @@ void MilitarySite::act(Game* g, uint32_t data)
 
 /*
 ===============
-MilitarySite::call_soldiers
-
 Send the request for more soldiers if there are not full
 ===============
  */
@@ -514,14 +533,20 @@ void MilitarySite::change_soldier_capacity(int32_t how)
 }
 
 void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldiers) {
-	g->conquer_area
-		(Player_Area<Area<FCoords> >
-		 (owner().get_player_number(),
-		  Area<FCoords>(g->map().get_fcoords(get_position()), get_conquers())));
-   m_didconquer = true;
+	conquer_area(*g);
    m_soldiers.insert(m_soldiers.begin(), soldiers->begin(), soldiers->end());
    /*for (uint32_t i=0; i<soldiers->size(); ++i)
       m_soldiers.push_back((*soldies)[i]);*/
+}
+
+void MilitarySite::conquer_area(Game & game) {
+	assert(not m_didconquer);
+	game.conquer_area
+		(Player_Area<Area<FCoords> >
+		 (owner().get_player_number(),
+		  Area<FCoords>
+		  (game.map().get_fcoords(get_position()), get_conquers())));
+	m_didconquer = true;
 }
 
 MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
@@ -529,8 +554,8 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
    cleanup(g);
    get_base_flag()->schedule_destroy(g);
 	return static_cast<MilitarySite *>
-		(static_cast<const MilitarySite_Descr &>(*m_descr)
-		 .create(*g, *winner, m_position, false));
+		(static_cast<const MilitarySite_Descr &>(*m_descr).create
+		 (*g, *winner, m_position, false));
 }
 
 

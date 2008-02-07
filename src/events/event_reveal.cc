@@ -40,7 +40,7 @@ void Event_Reveal::Read(Section & s, Editor_Game_Base &) {
 }
 
 
-void Event_Reveal::Write (Section & s) const {
+void Event_Reveal::Write(Section & s, Editor_Game_Base const &) const {
 	s.set_int   ("version", EVENT_VERSION);
 	s.set_string("entry",   reveal);
 }

@@ -6,7 +6,6 @@ type=building
 version=3
 point=15 11
 area=2
-player=1
 building=lumberjack
 
 [Built Lumberjack 2]
@@ -14,7 +13,6 @@ type=building
 version=3
 point=12 13
 area=2
-player=1
 building=lumberjack
 
 [Built Ranger]
@@ -22,7 +20,6 @@ type=building
 version=3
 point=17 11
 area=2
-player=1
 building=ranger
 
 [Built Quarries]
@@ -30,7 +27,6 @@ type=building
 version=3
 point=8 13
 area=2
-player=1
 count=2
 building=quarry
 
@@ -38,12 +34,6 @@ building=quarry
 type=time
 version=1
 wait_time=2
-last_start_time=0
-
-[Game Started]
-type=time
-version=1
-wait_time=1
 last_start_time=0
 
 [Order3]

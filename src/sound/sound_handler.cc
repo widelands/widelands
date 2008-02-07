@@ -386,7 +386,7 @@ void Sound_Handler::load_one_fx
  * \note This function can also be used to check whether a logical coordinate is
  * visible at all
 */
-int32_t Sound_Handler::stereo_position(const Coords position)
+int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 {
 	//screen x, y (without clipping applied, might well be invisible)
 	int32_t sx, sy;
@@ -497,7 +497,9 @@ bool Sound_Handler::play_or_not
  *         (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-(const std::string & fx_name, const Coords map_position, const uint32_t priority)
+(std::string const &       fx_name,
+ Widelands::Coords   const map_position,
+ uint32_t            const priority)
 {play_fx(fx_name, stereo_position(map_position), priority);}
 
 /** \overload

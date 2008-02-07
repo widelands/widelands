@@ -28,6 +28,8 @@ struct Trigger_Building_Option_Menu;
 
 namespace Widelands {
 
+struct Building_Descr;
+
 /*
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
@@ -40,14 +42,11 @@ struct Trigger_Building : public Trigger_Player_Area {
 
 	void check_set_conditions(Game const &);
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
-
-	const char* get_building() const {return m_building.c_str();}
-      void set_building(const char* b) {m_building=b;}
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
 private:
-      std::string m_building;
+	Building_Descr const * m_building_type;
 };
 
 };

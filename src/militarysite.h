@@ -58,12 +58,14 @@ class MilitarySite : public ProductionSite {
 	MO_DESCR(MilitarySite_Descr);
 
 public:
-	MilitarySite(const MilitarySite_Descr & descr);
+	MilitarySite(MilitarySite_Descr const &);
 	virtual ~MilitarySite();
 
 	virtual int32_t get_building_type() const throw ()
 	{return Building::MILITARYSITE;}
 	virtual std::string get_statistics_string();
+
+	void fill(Game &);
 
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
@@ -106,6 +108,8 @@ public:
    virtual void init_after_conquering (Game* g, std::vector<Soldier*>* soldiers);
 
 protected:
+	void conquer_area(Game &);
+
 	virtual UI::Window * create_options_window
 		(Interactive_Player * plr, UI::Window * * registry);
 

@@ -82,7 +82,7 @@ throw (_wexception)
 							ol->register_object
 								(egbase,
 								 reg,
-								 egbase->create_immovable(position, idx, tribe));
+								 &egbase->create_immovable(position, idx, tribe));
 						else
 							throw wexception
 								("Unknown tribe-immovable %s in map, asked for tribe: "
@@ -96,7 +96,7 @@ throw (_wexception)
             int32_t idx=world.get_immovable_index(name);
 				if (idx==-1)
 					throw wexception("Unknown world immovable %s in map!", name);
-				Immovable & immovable = *egbase->create_immovable(position, idx, 0);
+				Immovable & immovable = egbase->create_immovable(position, idx, 0);
 				if (not skip) ol->register_object(egbase, reg, &immovable);
 			}
 		}

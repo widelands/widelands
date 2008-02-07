@@ -55,7 +55,7 @@ void Event_Set_Null_Trigger::Read(Section & s, Editor_Game_Base & egbase) {
 			if (upcast(Trigger_Null, trig, egbase.map().mtm()[trigger_name])) {
 			// Bit Hackish, hopefully the user paid attention
 				set_trigger(trig);
-				set_setto(s.get_bool("setto"));
+				m_setto = s.get_bool("setto", true);
 			} else
 				throw wexception
 					("trigger refers to \"%s\", " "which is not a null trigger",
@@ -67,23 +67,23 @@ void Event_Set_Null_Trigger::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Set_Null_Trigger::Write(Section & s) const {
+void Event_Set_Null_Trigger::Write(Section & s, Editor_Game_Base const &) const {
    assert(m_trigger);
-	s.set_string("type",    "set_null_trigger");
-	s.set_int   ("version", EVENT_VERSION);
-	s.set_string("trigger", m_trigger->name());
-	s.set_bool  ("setto",   get_setto());
+	s.set_string ("type",    "set_null_trigger");
+	s.set_int    ("version", EVENT_VERSION);
+	s.set_string ("trigger", m_trigger->name());
+	if (not m_setto)
+		s.set_bool("setto",   false);
 }
 
 
 Event::State Event_Set_Null_Trigger::run(Game* game) {
    assert(m_trigger);
 
-   m_trigger->set_trigger_manually(get_setto());
+   m_trigger->set_trigger_manually(m_setto);
 	m_trigger->check_set_conditions(*game); // forcefully update this trigger
 
-   m_state = DONE;
-   return m_state;
+   return m_state = DONE;
 }
 
 };

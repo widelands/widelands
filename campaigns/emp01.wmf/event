@@ -58,323 +58,17 @@ type=unhide_area
 version=2
 point=47 25
 area=6
-player=1
 duration=5000
-
-[Disable Building 01]
-type=allow_building
-version=1
-player=1
-building=arena
-allow=false
-
-[Disable Building 02]
-type=allow_building
-version=1
-player=1
-building=armoursmith
-allow=false
-
-[Disable Building 03]
-type=allow_building
-version=1
-player=1
-building=bakery
-allow=false
-
-[Disable Building 04]
-type=allow_building
-version=1
-player=1
-building=barracks
-allow=false
-
-[Disable Building 05]
-type=allow_building
-version=1
-player=1
-building=barrier
-allow=false
-
-[Disable Building 06]
-type=allow_building
-version=1
-player=1
-building=brewery
-allow=false
-
-[Disable Building 07]
-type=allow_building
-version=1
-player=1
-building=burner
-allow=false
-
-[Disable Building 08]
-type=allow_building
-version=1
-player=1
-building=carpenter
-allow=false
-
-[Disable Building 09]
-type=allow_building
-version=1
-player=1
-building=castle
-allow=false
-
-[Disable Building 10]
-type=allow_building
-version=1
-player=1
-building=coalmine
-allow=false
-
-[Disable Building 11]
-type=allow_building
-version=1
-player=1
-building=colosseum
-allow=false
-
-[Disable Building 12]
-type=allow_building
-version=1
-player=1
-building=deep_coalmine
-allow=false
-
-[Disable Building 13]
-type=allow_building
-version=1
-player=1
-building=deep_goldmine
-allow=false
-
-[Disable Building 14]
-type=allow_building
-version=1
-player=1
-building=deep_oremine
-allow=false
-
-[Disable Building 15]
-type=allow_building
-version=1
-player=1
-building=deep_marblemine
-allow=false
-
-[Disable Building 16]
-type=allow_building
-version=1
-player=1
-building=farm
-allow=false
-
-[Disable Building 17]
-type=allow_building
-version=1
-player=1
-building=fisher
-allow=false
-
-[Disable Building 18]
-type=allow_building
-version=1
-player=1
-building=forester
-allow=false
-
-[Disable Building 19]
-type=allow_building
-version=1
-player=1
-building=fortress
-allow=false
-
-[Disable Building 20]
-type=allow_building
-version=1
-player=1
-building=goldmine
-allow=false
-
-[Disable Building 21]
-type=allow_building
-version=1
-player=1
-building=hunter
-allow=false
-
-[Disable Building 22]
-type=allow_building
-version=1
-player=1
-building=inn
-allow=false
-
-[Disable Building 23]
-type=allow_building
-version=1
-player=1
-building=lumberjack
-allow=false
-
-[Disable Building 24]
-type=allow_building
-version=1
-player=1
-building=marblemine
-allow=false
-
-[Disable Building 25]
-type=allow_building
-version=1
-player=1
-building=mill
-allow=false
-
-[Disable Building 26]
-type=allow_building
-version=1
-player=1
-building=oremine
-allow=false
-
-[Disable Building 27]
-type=allow_building
-version=1
-player=1
-building=outpost
-allow=false
-
-[Disable Building 28]
-type=allow_building
-version=1
-player=1
-building=piggery
-allow=false
-
-[Disable Building 29]
-type=allow_building
-version=1
-player=1
-building=quarry
-allow=false
-
-[Disable Building 30]
-type=allow_building
-version=1
-player=1
-building=sawmill
-allow=false
-
-[Disable Building 31]
-type=allow_building
-version=1
-player=1
-building=sentry
-allow=false
-
-[Disable Building 32]
-type=allow_building
-version=1
-player=1
-building=sheepfarm
-allow=false
-
-[Disable Building 33]
-type=allow_building
-version=1
-player=1
-building=smelting_works
-allow=false
-
-[Disable Building 34]
-type=allow_building
-version=1
-player=1
-building=stonemason
-allow=false
-
-[Disable Building 35]
-type=allow_building
-version=1
-player=1
-building=tavern
-allow=false
-
-[Disable Building 36]
-type=allow_building
-version=1
-player=1
-building=tower
-allow=false
-
-[Disable Building 37]
-type=allow_building
-version=1
-player=1
-building=trainingscamp
-allow=false
-
-[Disable Building 38]
-type=allow_building
-version=1
-player=1
-building=vintagery
-allow=false
-
-[Disable Building 39]
-type=allow_building
-version=1
-player=1
-building=warehouse
-allow=false
-
-[Disable Building 40]
-type=allow_building
-version=1
-player=1
-building=weaponsmith
-allow=false
-
-[Disable Building 41]
-type=allow_building
-version=1
-player=1
-building=weaving-mill
-allow=false
-
-[Disable Building 42]
-type=allow_building
-version=1
-player=1
-building=well
-allow=false
-
-[Disable Building 43]
-type=allow_building
-version=1
-player=1
-building=vineyard
-allow=false
 
 [Enable Barracks]
 type=allow_building
 version=1
-player=1
 building=barracks
-allow=true
 
 [Enable Lumberjack]
 type=allow_building
 version=1
-player=1
 building=lumberjack
-allow=true
 
 [Saledus 1]
 type=message_box
@@ -395,7 +89,7 @@ type=move_view
 version=2
 point=12 0
 
-[Unhide Objective 1 - Barracks]
+[Reveal Objective 1 - Barracks]
 type=unhide_objective
 version=1
 objective=Build Barracks
@@ -428,7 +122,7 @@ width=400
 height=350
 button_00=_OK
 
-[Unhide Objective 2 - Lumberjack]
+[Reveal Objective 2 - Lumberjack]
 type=reveal_objective
 version=2
 objective=Build Lumberjack
@@ -447,17 +141,15 @@ width=400
 height=350
 button_00=_OK
 
-[Unhide Objective 3 - Sawmill]
+[Reveal Objective 3 - Sawmill]
 type=reveal_objective
 version=2
-objective=Build Sawmill
+objective=Build Sawmill and Lumberjacks
 
 [Enable Sawmill]
 type=allow_building
 version=1
-player=1
 building=sawmill
-allow=true
 
 [Amalea 3]
 type=message_box
@@ -473,7 +165,7 @@ width=400
 height=350
 button_00=_OK
 
-[Unhide Objective 4 - Forester]
+[Reveal Objective 4 - Forester]
 type=reveal_objective
 version=2
 objective=Build Forester
@@ -481,9 +173,12 @@ objective=Build Forester
 [Enable Forester]
 type=allow_building
 version=1
-player=1
 building=forester
-allow=true
+
+[Set Sawmill and Lumberjacks complete]
+type=set_null_trigger
+version=1
+trigger=Sawmill and Lumberjacks complete
 
 [Saledus 3]
 type=message_box
@@ -499,7 +194,7 @@ width=400
 height=350
 button_00=_OK
 
-[Unhide Objective 5 - Quarry]
+[Reveal Objective 5 - Quarry]
 type=reveal_objective
 version=2
 objective=Build Quarry
@@ -507,9 +202,7 @@ objective=Build Quarry
 [Enable Quarry]
 type=allow_building
 version=1
-player=1
 building=quarry
-allow=true
 
 [Saledus 4]
 type=message_box
@@ -538,7 +231,19 @@ window_title=_Mission Complete
 is_modal=false
 button_00=_Continue
 
-[Unhide Empiretut02]
+[Reveal Empiretut02]
 type=reveal_scenario
 version=2
 entry=empiretut01
+
+[Safe Peninsula]
+type=message_box
+version=2
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"You have made this peninsula a very secure place. It is time to move on!"
+"</p></rt>""
+window_title=_Safe Peninsula
+is_modal=false
+button_00=_Continue

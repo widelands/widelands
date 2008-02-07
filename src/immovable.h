@@ -93,7 +93,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 	void parse_program(std::string directory, Profile* prof, std::string programname);
 	uint32_t parse_animation(std::string directory, Profile* prof, std::string name);
 	void parse_playFX(std::string directory, Profile* prof, std::string name);
-	Immovable *create(Editor_Game_Base *g, Coords coords);
+	Immovable & create(Editor_Game_Base &, Coords) const;
 
 	const Tribe_Descr* get_owner_tribe() const throw () {return m_owner_tribe;}
 

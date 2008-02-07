@@ -49,7 +49,8 @@ void Event_Reveal_Objective::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Reveal_Objective::Write(Section & s) const {
+void Event_Reveal_Objective::Write(Section & s, Editor_Game_Base const &) const
+{
    assert(m_objective);
 	s.set_string("type",      "reveal_objective");
 	s.set_int   ("version",   EVENT_VERSION);

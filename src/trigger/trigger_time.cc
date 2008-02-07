@@ -47,7 +47,7 @@ void Trigger_Time::Read(Section & s, Editor_Game_Base &) {
 	}
 }
 
-void Trigger_Time::Write(Section & s) const {
+void Trigger_Time::Write(Section & s, Editor_Game_Base const &) const {
 	s.set_string("type",            "time");
 	s.set_int   ("version",         TRIGGER_VERSION);
 	s.set_int   ("wait_time",       m_wait_time);

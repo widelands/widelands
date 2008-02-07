@@ -1073,21 +1073,42 @@ Road::~Road()
 /**
  * Create a road between the given flags, using the given path.
 */
-Road *Road::create(Editor_Game_Base *g, int32_t type, Flag *start, Flag *end, const Path &path)
+void Road::create
+	(Editor_Game_Base & egbase,
+	 Flag & start, Flag & end, Path const & path,
+	 bool    const create_carrier,
+	 int32_t const type)
 {
-	assert(start->get_position() == path.get_start());
-	assert(end->get_position() == path.get_end());
+	assert(start.get_position() == path.get_start());
+	assert(end  .get_position() == path.get_end  ());
+	assert(start.get_owner   () == end .get_owner());
 
-	Road *r = new Road();
-	r->set_owner(start->get_owner());
-	r->m_type = type;
-	r->m_flags[FlagStart] = start;
-	r->m_flags[FlagEnd] = end;
+	Player & owner          = start.owner();
+	Road & road             = *new Road();
+	road.set_owner(&owner);
+	road.m_type             = type;
+	road.m_flags[FlagStart] = &start;
+	road.m_flags[FlagEnd]   = &end;
 	// m_flagidx is set when attach_road() is called, i.e. in init()
-	r->set_path(g, path);
-	r->init(g);
-
-	return r;
+	road.set_path(&egbase, path);
+	if (create_carrier) {
+		Coords idle_position = start.get_position();
+		{
+			Map const & map = egbase.map();
+			Path::Step_Vector::size_type idle_index = road.get_idle_index();
+			for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
+				map.get_neighbour(idle_position, path[i], &idle_position);
+		}
+		Tribe_Descr const & tribe = owner.tribe();
+		Carrier & carrier =
+			dynamic_cast<Carrier &>
+			(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
+			 (egbase, owner, start, idle_position));
+		carrier.start_task_road();
+		road.m_carrier = &carrier;
+	}
+	log("Road::create: &road = %p\n", &road);
+	road.init(&egbase);
 }
 
 int32_t Road::get_type() const throw ()
@@ -1250,12 +1271,12 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
 		Carrier * const carrier =
 			static_cast<Carrier *>(m_carrier.get(game));
       m_desire_carriers = 1;
-		if (not carrier) {if (not m_carrier_request) request_carrier(game);}
-		else {
+		if (carrier) {
          // This happens after a road split. Tell the carrier what's going on
-         carrier->set_location(this);
+         carrier->set_location    (this);
          carrier->update_task_road(game);
-		}
+		} else if (not m_carrier_request)
+			request_carrier(game);
 	}
 }
 

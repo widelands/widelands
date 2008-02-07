@@ -86,9 +86,9 @@ struct Building_Descr : public Map_Object_Descr {
 	Building * create
 		(Editor_Game_Base &,
 		 Player &,
-		 const Coords,
-		 const bool construct,
-		 const Building_Descr * const = 0)
+		 Coords,
+		 bool construct, bool fill = false,
+		 Building_Descr const * = 0)
 		const;
 	virtual void parse(const char* directory, Profile* prof,
 		const EncodeData* encdata);
@@ -177,6 +177,10 @@ public:
 
 	virtual const std::string & census_string() const throw ();
 	virtual std::string get_statistics_string();
+
+	/// Fills the building with everything that it would normally request
+	/// (wares/workers/soldiers).
+	virtual void fill(Game &);
 
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base*);

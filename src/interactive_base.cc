@@ -42,6 +42,7 @@
 
 using Widelands::Area;
 using Widelands::CoordPath;
+using Widelands::Coords;
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
 using Widelands::Map;
@@ -458,7 +459,8 @@ Interactive_Base::start_build_road
 Begin building a road
 ===============
 */
-void Interactive_Base::start_build_road(Coords _start, int32_t player)
+void Interactive_Base::start_build_road
+(Coords _start, Widelands::Player_Number const player)
 {
 	// create an empty path
 	assert(not m_buildroad);
@@ -521,9 +523,12 @@ void Interactive_Base::finish_build_road()
 				(m_road_build_player, *new Widelands::Path(*m_buildroad));
 			if (m_ctrl_down) { //  place flags
 				Map const & map = game->map();
-				std::vector<Coords> const & c_v = m_buildroad->get_coords();
-				std::vector<Coords>::const_iterator const first = c_v.begin() + 2;
-				std::vector<Coords>::const_iterator const last  = c_v.end  () - 2;
+				std::vector<Coords>         const &       c_vector =
+					m_buildroad->get_coords();
+				std::vector<Coords>::const_iterator const first    =
+					c_vector.begin() + 2;
+				std::vector<Coords>::const_iterator const last     =
+					c_vector.end  () - 2;
 				if (m_shift_down) { //  start to end
 					for
 						(std::vector<Coords>::const_iterator it = first;
@@ -556,8 +561,7 @@ If field is on the path, remove tail of path.
 Otherwise append if possible or return false.
 ===============
 */
-bool Interactive_Base::append_build_road(Coords field)
-{
+bool Interactive_Base::append_build_road(Coords const field) {
 	assert(m_buildroad);
 
 	Map & map = egbase().map();
@@ -580,18 +584,21 @@ bool Interactive_Base::append_build_road(Coords field)
 		//  currently used by the road. This will not claim any new nodes, so it
 		//  is guaranteed to not hinder building placement.
 		Widelands::Path path;
-		std::set<Coords, Coords::ordering_functor> allowed_locations;
-		const std::vector<Coords> & road_cp = m_buildroad->get_coords();
-		const std::vector<Coords>::const_iterator road_cp_end = road_cp.end();
-		for
-			(std::vector<Coords>::const_iterator it = road_cp.begin();
-			 it != road_cp_end;
-			 ++it)
-			allowed_locations.insert(*it);
-		Widelands::CheckStepRoadLimited cstep
-			(player, Widelands::MOVECAPS_WALK, allowed_locations);
-		map.findpath
-			(m_buildroad->get_start(), field, 0, path, cstep, Map::fpBidiCost);
+		{
+			Widelands::CheckStepLimited cstep;
+			{
+				std::vector<Coords> const & road_cp = m_buildroad->get_coords();
+				std::vector<Coords>::const_iterator const road_cp_end =
+					road_cp.end();
+				for
+					(std::vector<Coords>::const_iterator it = road_cp.begin();
+					 it != road_cp_end;
+					 ++it)
+					cstep.add_allowed_location(*it);
+			}
+			map.findpath
+				(m_buildroad->get_start(), field, 0, path, cstep, Map::fpBidiCost);
+		}
 		m_buildroad->truncate(0);
 		m_buildroad->append(map, path);
 	}
@@ -605,8 +612,6 @@ bool Interactive_Base::append_build_road(Coords field)
 
 /*
 ===============
-Interactive_Base::get_build_road_start
-
 Return the current road-building startpoint
 ===============
 */
@@ -618,8 +623,6 @@ Coords Interactive_Base::get_build_road_start() const throw () {
 
 /*
 ===============
-Interactive_Base::get_build_road_end
-
 Return the current road-building endpoint
 ===============
 */
@@ -631,12 +634,11 @@ Coords Interactive_Base::get_build_road_end() const throw () {
 
 /*
 ===============
-Interactive_Base::get_build_road_end_dir
-
 Return the direction of the last step
 ===============
 */
-Widelands::Direction Interactive_Base::get_build_road_end_dir() const throw () {
+Widelands::Direction Interactive_Base::get_build_road_end_dir() const throw ()
+{
 	assert(m_buildroad);
 
 	if (!m_buildroad->get_nsteps())
@@ -647,8 +649,6 @@ Widelands::Direction Interactive_Base::get_build_road_end_dir() const throw () {
 
 /*
 ===============
-Interactive_Base::roadb_add_overlay
-
 Add road building data to the road overlay
 ===============
 */

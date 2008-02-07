@@ -51,7 +51,6 @@ struct Trigger_Building_Option_Menu : public UI::Window {
 
 private:
 	Editor_Interactive & eia();
-      void update();
 	void clicked_ok();
 	void clicked_decrease_x_coordinate(const uint8_t);
 	void clicked_increase_x_coordinate(const uint8_t);
@@ -68,7 +67,7 @@ private:
 	Widelands::Trigger_Building &                       m_trigger;
 	Widelands::Player_Area<>                            m_player_area;
 	Widelands::Trigger_Building::Count_Type             m_count;
-	Widelands::Building_Descr::Index                    m_building;
+	Widelands::Building_Index                           m_building;
 	UI::Textarea                                        m_label_name;
 	UI::Edit_Box                                        m_name;
 	UI::Textarea                                        m_label_player;

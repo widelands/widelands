@@ -100,7 +100,8 @@ struct Interactive_Base : public Map_View {
 	}
 		bool is_building_road() const {return m_buildroad;}
 	Widelands::CoordPath * get_build_road() {return m_buildroad;}
-		void start_build_road(Widelands::Coords start, int32_t player);
+	void start_build_road
+		(Widelands::Coords start, Widelands::Player_Number player);
 		void abort_build_road();
 		void finish_build_road();
 		bool append_build_road(Widelands::Coords field);
@@ -147,7 +148,7 @@ private:
 	Overlay_Manager::Job_Id m_jobid;
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
-      int32_t      m_road_build_player;
+	Widelands::Player_Number m_road_build_player;
 
       UI::UniqueWindow::Registry m_minimap;
 

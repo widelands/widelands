@@ -2506,16 +2506,16 @@ bool CheckStepRoad::reachabledest(Map* map, FCoords dest) const
 	return true;
 }
 
-bool CheckStepRoadLimited::allowed
-(Map  * const map, FCoords const start, FCoords const end, int32_t const dir,
- StepId const id)
-	const
+
+bool CheckStepLimited::allowed
+	(Map *, FCoords start, FCoords end, int32_t dir, StepId) const
 {
-	return
-		CheckStepRoad::allowed(map, start, end, dir, id)
-		and
-		m_allowed_locations.find(end) != m_allowed_locations.end();
+	return m_allowed_locations.find(end) != m_allowed_locations.end();
 }
+bool CheckStepLimited::reachabledest(Map *, FCoords const dest) const {
+	return true;
+}
+
 
 /*
 ==============================================================================

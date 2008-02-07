@@ -52,11 +52,6 @@ struct ProductionSite_Descr : public Building_Descr {
    friend class ProductionProgram; // To add animations
    typedef std::map<std::string, ProductionProgram*> ProgramMap;
 
-   struct Worker_Info {
-      std::string name;
-      int32_t how_many;
-	};
-
 	ProductionSite_Descr
 		(const Tribe_Descr & tribe, const std::string & productionsite_name);
 	virtual ~ProductionSite_Descr();
@@ -65,8 +60,9 @@ struct ProductionSite_Descr : public Building_Descr {
 		const EncodeData* encdata);
 	virtual Building * create_object() const;
 
-	const std::vector<Worker_Info>* get_workers() const throw ()
-	{return &m_workers;}
+	std::vector<std::string> const & workers() const throw () {
+		return m_workers;
+	}
 	bool is_output(const std::string & warename) const throw ()
 	{return m_output.find(warename) != m_output.end();}
 	const std::set<std::string>* get_outputs() const {return &m_output;}
@@ -78,7 +74,7 @@ struct ProductionSite_Descr : public Building_Descr {
 
 
 private:
-	std::vector<Worker_Info>   m_workers; // name of worker type
+	std::vector<std::string> m_workers; // name of worker type
 	std::vector<Input>    m_inputs;
 	std::set<std::string> m_output;      // output wares type names
 	ProgramMap            m_programs;
@@ -94,6 +90,8 @@ public:
 
 	virtual std::string get_statistics_string();
    int8_t get_statistics_percent() {return m_last_stat_percent;}
+
+	void fill(Game &);
 
 	virtual int32_t get_building_type() const throw ()
 	{return Building::PRODUCTIONSITE;}

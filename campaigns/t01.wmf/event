@@ -57,313 +57,15 @@ height=300
 posy=1
 button_00=_ OK
 
-[Disable Building 01]
-type=allow_building
-version=1
-player=1
-building=axefactory
-allow=false
-
-[Disable Building 02]
-type=allow_building
-version=1
-player=1
-building=bakery
-allow=false
-
-[Disable Building 03]
-type=allow_building
-version=1
-player=1
-building=barrier
-allow=false
-
-[Disable Building 04]
-type=allow_building
-version=1
-player=1
-building=battlearena
-allow=false
-
-[Disable Building 05]
-type=allow_building
-version=1
-player=1
-building=big_inn
-allow=false
-
-[Disable Building 06]
-type=allow_building
-version=1
-player=1
-building=brewery
-allow=false
-
-[Disable Building 07]
-type=allow_building
-version=1
-player=1
-building=burner
-allow=false
-
-[Disable Building 08]
-type=allow_building
-version=1
-player=1
-building=citadel
-allow=false
-
-[Disable Building 09]
-type=allow_building
-version=1
-player=1
-building=coalmine
-allow=false
-
-[Disable Building 10]
-type=allow_building
-version=1
-player=1
-building=deep_coalmine
-allow=false
-
-[Disable Building 11]
-type=allow_building
-version=1
-player=1
-building=deep_goldmine
-allow=false
-
-[Disable Building 12]
-type=allow_building
-version=1
-player=1
-building=deep_oremine
-allow=false
-
-[Disable Building 13]
-type=allow_building
-version=1
-player=1
-building=deeper_coalmine
-allow=false
-
-[Disable Building 14]
-type=allow_building
-version=1
-player=1
-building=deeper_goldmine
-allow=false
-
-[Disable Building 15]
-type=allow_building
-version=1
-player=1
-building=deeper_oremine
-allow=false
-
-[Disable Building 16]
-type=allow_building
-version=1
-player=1
-building=donjon
-allow=false
-
-[Disable Building 17]
-type=allow_building
-version=1
-player=1
-building=farm
-allow=false
-
-[Disable Building 18]
-type=allow_building
-version=1
-player=1
-building=fernery
-allow=false
-
-[Disable Building 19]
-type=allow_building
-version=1
-player=1
-building=fisher
-allow=false
-
-[Disable Building 20]
-type=allow_building
-version=1
-player=1
-building=fortress
-allow=false
-
-[Disable Building 21]
-type=allow_building
-version=1
-player=1
-building=gamekeeper
-allow=false
-
-[Disable Building 22]
-type=allow_building
-version=1
-player=1
-building=goldmine
-allow=false
-
-[Disable Building 23]
-type=allow_building
-version=1
-player=1
-building=granitemine
-allow=false
-
-[Disable Building 24]
-type=allow_building
-version=1
-player=1
-building=hardener
-allow=false
-
-[Disable Building 25]
-type=allow_building
-version=1
-player=1
-building=helmsmith
-allow=false
-
-[Disable Building 26]
-type=allow_building
-version=1
-player=1
-building=hunter
-allow=false
-
-[Disable Building 27]
-type=allow_building
-version=1
-player=1
-building=inn
-allow=false
-
-[Disable Building 28]
-type=allow_building
-version=1
-player=1
-building=metalworks
-allow=false
-
-[Disable Building 29]
-type=allow_building
-version=1
-player=1
-building=micro-brewery
-allow=false
-
-[Disable Building 30]
-type=allow_building
-version=1
-player=1
-building=oremine
-allow=false
-
-[Disable Building 31]
-type=allow_building
-version=1
-player=1
-building=weaving-mill
-allow=false
-
-[Disable Building 32]
-type=allow_building
-version=1
-player=1
-building=sentry
-allow=false
-
-[Disable Building 33]
-type=allow_building
-version=1
-player=1
-building=smelting_works
-allow=false
-
-[Disable Building 34]
-type=allow_building
-version=1
-player=1
-building=stonegrinder
-allow=false
-
-[Disable Building 35]
-type=allow_building
-version=1
-player=1
-building=stronghold
-allow=false
-
-[Disable Building 36]
-type=allow_building
-version=1
-player=1
-building=tavern
-allow=false
-
-[Disable Building 37]
-type=allow_building
-version=1
-player=1
-building=trainingscamp
-allow=false
-
-[Disable Building 38]
-type=allow_building
-version=1
-player=1
-building=warehouse
-allow=false
-
-[Disable Building 39]
-type=allow_building
-version=1
-player=1
-building=warmill
-allow=false
-
-[Disable Building 40]
-type=allow_building
-version=1
-player=1
-building=well
-allow=false
-
-[Disable Building 41]
-type=allow_building
-version=1
-player=1
-building=ranger
-allow=false
-
-[Disable Building 42]
-type=allow_building
-version=1
-player=1
-building=quarry
-allow=false
-
 [Enable Ranger]
 type=allow_building
-version=1
-player=1
+version=2
 building=ranger
-allow=true
 
 [Enable Quarry]
 type=allow_building
-version=1
-player=1
+version=2
 building=quarry
-allow=true
 
 [Goto Al'thunran]
 type=move_view
@@ -414,7 +116,7 @@ version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The elder remarks..."
 "</p><p line-spacing=3 font-size=12><br>"
-_" "Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough."<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+_" "Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough."<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. Wheb you place the lumberjack hut, a flag is created for it. You are expected to connect it to another flag with a road. Little symbols appear around the flag show in which directions you can build the road. The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it. You can click on any of those symbols to build the first step of the road to it. New symbols will appear to show you where the next step can go, and so on. But you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
@@ -443,7 +145,7 @@ version=2
 text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The old man looks to the sky..."
 "</p><p line-spacing=3 font-size=12><br>"
-_" "The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+_" "The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards."
 "</p></rt>""
 window_title=_ Advisor
 is_modal=true
@@ -486,7 +188,6 @@ type=unhide_area
 version=2
 point=51 46
 area=14
-player=1
 duration=5000
 
 [Show Grave]
@@ -494,7 +195,6 @@ type=unhide_area
 version=2
 point=24 29
 area=6
-player=1
 duration=5000
 
 [Story Msg 1]
@@ -555,22 +255,22 @@ width=400
 height=300
 button_00=_ OK
 
-[Unhide Objective 1]
+[Reveal Objective 1]
 type=reveal_objective
 version=2
 objective=Build Lumberjack 1
 
-[Unhide Objective 2]
+[Reveal Objective 2]
 type=reveal_objective
 version=2
 objective=Build Lumberjack 2
 
-[Unhide Objective 3]
+[Reveal Objective 3]
 type=reveal_objective
 version=2
 objective=Build Ranger
 
-[Unhide Objective 4]
+[Reveal Objective 4]
 type=reveal_objective
 version=2
 objective=Build Quarries
@@ -589,7 +289,7 @@ width=400
 height=300
 button_00=_ OK
 
-[Unhide Barbariantut01]
+[Reveal Barbariantut01]
 type=reveal_scenario
 version=2
 entry=barbariantut01

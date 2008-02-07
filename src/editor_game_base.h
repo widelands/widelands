@@ -108,9 +108,9 @@ struct Editor_Game_Base {
 		 const Building_Descr::Index);
 		Building* warp_constructionsite(Coords c, int8_t owner, int32_t idx, int32_t oldid=-1);
 	Bob * create_bob(const Coords, const Bob::Descr::Index, const Tribe_Descr * const = 0);
-	Immovable* create_immovable(const Coords c, int32_t idx, const Tribe_Descr*);
-	Immovable* create_immovable
-		(const Coords c, const std::string & name, const Tribe_Descr*);
+	Immovable & create_immovable(Coords, int32_t idx, Tribe_Descr const *);
+	Immovable & create_immovable
+		(Coords, std::string const & name, Tribe_Descr const *);
 	Battle* create_battle ();
 	AttackController* create_attack_controller(Flag* flag, int32_t attacker, int32_t defender, uint32_t num);
 	AttackController* create_attack_controller();

@@ -54,9 +54,11 @@ void Event_Unhide_Area::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Unhide_Area::Write(Section & s) const {
+void Event_Unhide_Area::Write
+	(Section & s, Editor_Game_Base const & egbase) const
+{
 	s.set_string("type",     "unhide_area");
-	Event_Player_Area::Write(s);
+	Event_Player_Area::Write(s, egbase);
 	if (duration)
 		s.set_int("duration", duration);
 }

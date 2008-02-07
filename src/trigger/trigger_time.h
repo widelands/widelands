@@ -36,8 +36,8 @@ struct Trigger_Time : public Trigger {
 	void check_set_conditions(Game const &);
 	void reset_trigger       (Game const &);
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
 	void set_wait_time      (int32_t i) {m_wait_time       = i;}
 	void set_last_start_time(int32_t i) {m_last_start_time = i;}

@@ -36,7 +36,7 @@ struct Event_Conquer_Area : public Event_Player_Area {
 
 	int32_t option_menu(Editor_Interactive &);
 
-	void Write(Section &) const;
+	void Write(Section &, Editor_Game_Base const &) const;
 
       State run(Game*);
 };

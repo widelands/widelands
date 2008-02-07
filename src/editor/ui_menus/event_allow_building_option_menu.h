@@ -20,19 +20,19 @@
 #ifndef __S__EVENT_ALLOW_BUILDING_OPTION_MENU_H
 #define __S__EVENT_ALLOW_BUILDING_OPTION_MENU_H
 
+#include "ui_button.h"
+#include "ui_checkbox.h"
+#include "ui_editbox.h"
 #include "ui_window.h"
+#include "ui_textarea.h"
+
+#include "widelands.h"
 
 #include <string>
 #include <vector>
 
 class Editor_Interactive;
 namespace Widelands {struct Event_Allow_Building;};
-
-namespace UI {
-struct Edit_Box;
-struct Checkbox;
-struct Textarea;
-};
 
 /*
  * This is a modal box - The user must end this first
@@ -41,23 +41,32 @@ struct Textarea;
 struct Event_Allow_Building_Option_Menu : public UI::Window {
 	Event_Allow_Building_Option_Menu
 		(Editor_Interactive &, Widelands::Event_Allow_Building &);
-      ~Event_Allow_Building_Option_Menu();
 
 	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive & eia();
-      void update();
 	void clicked_ok();
-      void clicked(int32_t);
+	void clicked_change_player     (const bool up);
+	void clicked_decrement_building();
+	void clicked_increment_building();
 
 	Widelands::Event_Allow_Building & m_event;
-      UI::Textarea *m_player_ta, *m_building_ta;
-      UI::Checkbox* m_allow;
-      UI::Edit_Box* m_name;
-      int32_t         m_player, m_building;
-      std::vector<std::string> m_buildings;
+	Widelands::Player_Number                                m_player;
+	Widelands::Building_Index                               m_building;
+	UI::Textarea                                            m_label_name;
+	UI::Edit_Box                                            m_name;
+	UI::Textarea                                            m_label_player;
+	UI::IDButton<Event_Allow_Building_Option_Menu, bool>    m_decrement_player;
+	UI::IDButton<Event_Allow_Building_Option_Menu, bool>    m_increment_player;
+	UI::Textarea                                            m_label_building;
+	UI::Button<Event_Allow_Building_Option_Menu>            m_decrement_building;
+	UI::Button<Event_Allow_Building_Option_Menu>            m_increment_building;
+	UI::Textarea                                            m_label_allow;
+	UI::Checkbox                                            m_allow;
+	UI::Button<Event_Allow_Building_Option_Menu>            m_button_ok;
+	UI::IDButton<Event_Allow_Building_Option_Menu, int32_t> m_button_cancel;
 };
 
 #endif

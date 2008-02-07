@@ -98,7 +98,7 @@ throw (_wexception)
 		Section & s = *prof.create_section(trigger.name().c_str());
 		if (trigger.is_set())
 			s.set_bool("set", true);
-		trigger.Write(s);
+		trigger.Write(s, *egbase);
 	}
 
    prof.write("trigger", false, fs);

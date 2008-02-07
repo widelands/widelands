@@ -291,9 +291,9 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
             std::string b = "0x"+val.substr(offset+4, 2);
 
             char *ptr;
-				int32_t red = strtol(r.c_str(), &ptr, 0);
-				int32_t green = strtol(g.c_str(), &ptr, 0);
-				int32_t blue = strtol(b.c_str(), &ptr, 0);
+				long int const red   = strtol(r.c_str(), &ptr, 0);
+				long int const green = strtol(g.c_str(), &ptr, 0);
+				long int const blue  = strtol(b.c_str(), &ptr, 0);
 				element->set_font_color(RGBColor(red, green, blue));
 			}
 			else if (key == "font-weight")

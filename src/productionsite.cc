@@ -116,27 +116,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 		(std::vector<std::string>::iterator it = workers.begin();
 		 it != workers_end;
 		 ++it)
-	{
-		remove_spaces(*it);
-		std::vector<std::string> amounts(split_string(*it, "*"));
-		const std::vector<std::string>::const_iterator amounts_end =
-			amounts.end();
-		for
-			(std::vector<std::string>::iterator jt = amounts.begin();
-			 jt != amounts_end;
-			 ++jt)
-			remove_spaces(*jt);
-
-      int32_t amount=1;
-		if (amounts.size() == 2) {
-         char *endp;
-			amount = strtol(amounts[1].c_str(), &endp, 0);
-			if (endp && *endp)
-				throw wexception("Bad amount in worker line: %s", amounts[1].c_str());
-		}
-      Worker_Info m= {amounts[0], amount};
-      m_workers.push_back(m);
-	}
+		m_workers.push_back(*it);
 
 	// Get programs
 	while (sglobal->get_next_string("program", &string)) {
@@ -245,6 +225,26 @@ std::string ProductionSite::get_statistics_string()
 	return m_statistics_buf;
 }
 
+
+void ProductionSite::fill(Game & game) {
+	Building::fill(game);
+	Tribe_Descr const & tribe = owner().tribe();
+	std::vector<std::string> const & workers = descr().workers();
+	std::vector<std::string>::const_iterator const workers_end =
+		workers.end();
+	for
+		(std::vector<std::string>::const_iterator it = workers.begin();
+		 it != workers_end;
+		 ++it)
+	{
+		Worker & worker =
+			tribe.get_worker_descr(tribe.worker_index(it->c_str()))->create
+			(game, owner(), *get_base_flag(), get_position());
+		worker.start_task_buildingwork();
+		m_workers.push_back(&worker);
+	}
+}
+
 /*
 ===============
 ProductionSite::calc_statistic
@@ -309,14 +309,25 @@ void ProductionSite::init(Editor_Game_Base* g)
 	Building::init(g);
 
 	if (upcast(Game, game, g)) {
-		// Request worker
-		if (!m_workers.size()) {
-			const std::vector<ProductionSite_Descr::Worker_Info> & info =
-				*descr().get_workers();
-			for (size_t i = 0; i < info.size(); ++i)
-				for (int32_t j = 0; j < info[i].how_many; ++j)
-					request_worker(info[i].name.c_str());
-	}
+
+		if (m_workers.size()) {
+			std::vector<Worker *>::const_iterator const workers_end =
+				m_workers.end();
+			for
+				(std::vector<Worker *>::const_iterator it = m_workers.begin();
+				 it != workers_end;
+				 ++it)
+				(*it)->set_location(this);
+		} else {//  request workers
+			std::vector<std::string> const & workers = descr().workers();
+			std::vector<std::string>::const_iterator const workers_end =
+				workers.end();
+			for
+				(std::vector<std::string>::const_iterator it = workers.begin();
+				 it != workers_end;
+				 ++it)
+				request_worker(it->c_str());
+		}
 
 		// Init input ware queues
 		const std::vector<Input> & inputs = *descr().get_inputs();

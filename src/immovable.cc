@@ -418,12 +418,13 @@ uint32_t Immovable_Descr::parse_animation
 /**
  * Create an immovable of this type
 */
-Immovable *Immovable_Descr::create(Editor_Game_Base *gg, Coords coords)
+Immovable & Immovable_Descr::create
+	(Editor_Game_Base & egbase, Coords const coords) const
 {
-	Immovable * im = new Immovable(*this);
-	im->m_position = coords;
-	im->init(gg);
-	return im;
+	Immovable & result = *new Immovable(*this);
+	result.m_position = coords;
+	result.init(&egbase);
+	return result;
 }
 
 

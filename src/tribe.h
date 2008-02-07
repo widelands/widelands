@@ -86,11 +86,18 @@ struct Tribe_Descr {
 		return m_wares.get(index);
 	}
 		int32_t get_safe_worker_index(const char * const workername) const;
-		int32_t get_nrbuildings() const {return m_buildings.get_nitems();}
+	Building_Index::value_t get_nrbuildings() const {
+		return m_buildings.get_nitems();
+	}
 		int32_t get_safe_building_index(const char *name) const;
+	Building_Descr * get_building_descr(Building_Index const index) const {
+		return m_buildings.get(index);
+	}
+	Building_Index building_index(char const * const buildingname) const {
+		return m_buildings.get_index(buildingname);
+	}
 	int32_t get_building_index(const char * const buildingname) const
 	{return m_buildings.get_index(buildingname);}
-		Building_Descr *get_building_descr(uint32_t idx) const {return m_buildings.get(idx);}
       int32_t get_immovable_index(const char* l) const {return m_immovables.get_index(l);}
       int32_t get_nr_immovables() {return m_immovables.get_nitems();}
 		Immovable_Descr* get_immovable_descr(int32_t index) const {return m_immovables.get(index);}

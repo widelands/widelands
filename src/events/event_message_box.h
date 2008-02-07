@@ -45,8 +45,8 @@ struct Event_Message_Box : public Event, public Referencer<Trigger> {
 
       State run(Game*);
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
 	void set_text(const char * str) {m_text = str;}
 	const char * get_text() const {return m_text.c_str();}

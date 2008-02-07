@@ -113,7 +113,7 @@ throw (_wexception)
 		case Event::DONE:    s.set_string("state", "done");    break;
 		default: assert(false);
 		}
-		e.Write(s);
+		e.Write(s, *egbase);
 	}
 
    prof.write("event", false, fs);

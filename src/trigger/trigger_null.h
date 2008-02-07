@@ -36,8 +36,8 @@ struct Trigger_Null : public Trigger {
 	void check_set_conditions(Game const &);
 	void reset_trigger       (Game const &);
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
       void set_trigger_manually(bool t) {m_should_toggle=true; m_value=t;}
 

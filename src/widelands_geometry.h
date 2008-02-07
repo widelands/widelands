@@ -37,7 +37,7 @@ typedef Coordinate Y_Coordinate;
  * Structure used to store map coordinates
  */
 struct Coords {
-	Coords() throw () {}
+	explicit Coords() throw () {}
 	Coords(const X_Coordinate nx, const Y_Coordinate ny) throw ()
 		: x(nx), y(ny)
 	{}

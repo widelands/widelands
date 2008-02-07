@@ -21,13 +21,18 @@
 #define PROFILE_H
 
 #include "layered_filesystem.h" //TODO: as soon as g_fs is not needed anymore, this can be changed to filesystem.h
+#include "widelands.h"
 #include "widelands_geometry.h"
 
 #include "point.h"
 
 #include <vector>
 
-using Widelands::Coords;
+namespace Widelands {
+struct Building_Descr;
+struct Editor_Game_Base;
+struct Immovable_Descr;
+};
 
 extern class Profile g_options;
 class FileSystem;
@@ -40,7 +45,7 @@ class FileSystem;
  * Returns the value of the first key with the given name. If the key isn't found,
  * def is returned.
  *
- * get_int, get_bool, get_float convert the value string to the desired type.
+ * get_int, get_bool, convert the value string to the desired type.
  *
  * get_safe_*:
  * Like above, but throw an exception if the key doesn't exist.
@@ -71,11 +76,10 @@ public:
 		void mark_used();
 
 		int32_t get_int() const;
-		float get_float() const;
 		bool get_bool() const;
 		const char *get_string() const;
 		Point  get_Point () const;
-		Coords get_Coords() const;
+		Widelands::Coords get_Coords(Widelands::Extent) const;
 
 		void set_string(const char *value);
 	};
@@ -106,33 +110,54 @@ public:
 
 	void check_used();
 
-	int32_t get_int(const char *name, int32_t def = 0);
-	float get_float(const char *name, float def = 0);
-	bool get_bool(const char *name, bool def = false);
-	const char *get_string(const char *name, const char *def = 0);
-	Point  get_Point (const char * const name, const Point  def = Point (0, 0));
-	Coords get_Coords(const char * const name, const Coords def = Coords(-1, -1));
+	int32_t                  get_int
+		(char             const * name,
+		 int32_t                  def = 0);
+	bool                     get_bool
+		(char             const * name,
+		 bool                     def = false);
+	const char *             get_string
+		(char             const * name,
+		 char             const * def = 0);
+	Point                    get_Point
+		(char             const * name,
+		 Point                    def = Point (0, 0));
+	Widelands::Player_Number get_Player_Number
+		(char             const * name,
+		 Widelands::Player_Number nr_players,
+		 Widelands::Player_Number def = 1);
 
-	int32_t get_safe_int(const char *name);
-	float get_safe_float(const char *name);
-	bool get_safe_bool(const char *name);
-	const char *get_safe_string(const char *name);
-	Coords get_safe_Coords(const char * const name);
+	int32_t                   get_safe_int
+		(const char * name);
+	bool                      get_safe_bool
+		(const char * name);
+	const char *              get_safe_string
+		(const char * name);
+	Widelands::Coords         get_safe_Coords
+		(const char * name, Widelands::Extent);
+	Widelands::Player_Number  get_safe_Player_Number
+		(char const * name,
+		 Widelands::Player_Number nr_players);
+	Widelands::Immovable_Descr const & get_safe_Immovable_Type
+		(char const * tribe, char const * name,
+		 Widelands::Editor_Game_Base &);
+	Widelands::Building_Index get_safe_Building_Index
+		(char const * name,
+		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
+	Widelands::Building_Descr const & get_safe_Building_Type
+		(char const * name,
+		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
 
 	const char *get_next_int(const char *name, int32_t *value);
-	const char *get_next_float(const char *name, float *value);
 	const char *get_next_bool(const char *name, bool *value);
 	const char *get_next_string(const char *name, const char **value);
-	const char *get_next_Coords(const char * const name, Coords * const value);
 
 	void set_int
-		(char const * name, int32_t      value, bool duplicate = false);
-	void set_float
-		(char const * name, float        value, bool duplicate = false);
+		(char const * name, int32_t           value, bool duplicate = false);
 	void set_bool
-		(char const * name, bool         value, bool duplicate = false);
+		(char const * name, bool              value, bool duplicate = false);
 	void set_string
-		(char const * name, char const * value, bool duplicate = false);
+		(char const * name, char      const * value, bool duplicate = false);
 	void set_string
 		(char        const * const name,
 		 std::string const &       value,
@@ -141,7 +166,19 @@ public:
 		set_string(name, value.c_str(), duplicate);
 	}
 	void set_Coords
-		(char const * name, Coords       value, bool duplicate = false);
+		(char const * name, Widelands::Coords value, bool duplicate = false);
+	void set_Immovable_Type
+		(char const * tribe, char const * name,
+		 Widelands::Immovable_Descr const &);
+	void set_Building_Index
+		(char const * name,
+		 Widelands::Building_Index value,
+		 Widelands::Editor_Game_Base const &, Widelands::Player_Number,
+		 bool duplicate = false);
+	void set_Building_Type
+		(char const * name,
+		 Widelands::Building_Descr const &,
+		 bool duplicate = false);
 
 	Value *create_val(const char *name, const char *value, bool duplicate = false);
 };

@@ -34,8 +34,8 @@ struct Event_Player_Area : public Event {
 		: Event(Name, S), m_player_area(player_area)
 	{}
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
 protected:
 	Player_Area<> m_player_area;

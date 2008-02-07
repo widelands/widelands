@@ -64,10 +64,10 @@ struct WatchWindow : public UI::Window {
 	void toggle_tracking();
 	void act_mainview_goto();
 
-	void add_view(Coords coords);
+	void add_view(Widelands::Coords);
 	void next_view(bool first=false);
 	void show_view(bool first=false);
-	Point calc_coords(Coords coords);
+	Point calc_coords(Widelands::Coords);
 	void save_coords();
 	void set_view(int32_t index);
 	void close_cur_view();
@@ -157,7 +157,7 @@ m_goto
 }
 
 //Add a view to a watchwindow, if there is space left
-void WatchWindow::add_view(Coords coords) {
+void WatchWindow::add_view(Widelands::Coords const coords) {
 	if (m_views.size() >= NUM_VIEWS)
 		return;
 	WatchWindowView view;
@@ -171,7 +171,7 @@ void WatchWindow::add_view(Coords coords) {
 }
 
 //Calc point on map from coords
-Point WatchWindow::calc_coords(Coords coords) {
+Point WatchWindow::calc_coords(Widelands::Coords const coords) {
 	// Initial positioning
 	int32_t vx = coords.x * TRIANGLE_WIDTH;
 	int32_t vy = coords.y * TRIANGLE_HEIGHT;
@@ -394,7 +394,8 @@ show_watch_window
 Open a watch window.
 ===============
 */
-void show_watch_window(Interactive_Player & parent, Coords coords)
+void show_watch_window
+(Interactive_Player & parent, Widelands::Coords const coords)
 {
 	Section *s = g_options.pull_section("global");
 	WatchWindow* win;

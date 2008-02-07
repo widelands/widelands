@@ -618,19 +618,19 @@ private:
 	const uint8_t                                            m_movecaps;
 };
 
-/// A version of CheckStepRoad that is limited to a set of allowed locations.
-struct CheckStepRoadLimited : public CheckStepRoad {
-	CheckStepRoadLimited
-		(Player const & player, uint8_t const movecaps,
-		 std::set<Coords, Coords::ordering_functor> const & allowed_locations)
-		: CheckStepRoad(player, movecaps), m_allowed_locations(allowed_locations)
-	{}
-
+/// A version of CheckStep that is limited to a set of allowed locations. It
+/// only checks whether the target is an allowed location.
+struct CheckStepLimited : CheckStep {
+	void add_allowed_location(Coords const c) {m_allowed_locations.insert(c);}
 	virtual bool allowed
 		(Map *, FCoords start, FCoords end, int32_t dir, StepId id) const;
+	bool reachabledest(Map *, FCoords dest)                        const;
 
 private:
-	std::set<Coords, Coords::ordering_functor> const & m_allowed_locations;
+	//  It is OK to use Coords::ordering_functor because the ordering of the set
+	//  does not matter. The only thing that matters is whether a location is
+	//  in the set.
+	std::set<Coords, Coords::ordering_functor> m_allowed_locations;
 };
 
 

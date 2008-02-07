@@ -29,14 +29,16 @@ namespace Widelands {
 class Editor_Game_Base;
 
 struct Event_Move_View : public Event {
-	Event_Move_View(char const * name, State);
+	Event_Move_View(char const * Name, State const S)
+		: Event(Name, S), m_location(Coords::Null()), m_player(1)
+	{}
 
 	int32_t option_menu(Editor_Interactive &);
 
       State run(Game*);
 
-	void Read (Section &, Editor_Game_Base &);
-	void Write(Section &) const;
+	void Read (Section &, Editor_Game_Base       &);
+	void Write(Section &, Editor_Game_Base const &) const;
 
 	void set_location(Coords const c) {m_location = c;}
 	Coords location() {return m_location;}

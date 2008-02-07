@@ -30,6 +30,8 @@
 #include "widelands_map_data_packet_ids.h"
 #include "world.h"
 
+#include "upcast.h"
+
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
@@ -47,42 +49,44 @@ throw (_wexception)
 
    Profile prof;
 	try {prof.read("allowed_buildings", 0, fs);} catch (...) {return;}
-   Section* s = prof.get_section("global");
-
-	const int32_t packet_version = s->get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		const Player_Number nr_players = egbase->map().get_nrplayers();
-      // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
-		if (dynamic_cast<Game *>(egbase))
-			iterate_players_existing(p, nr_players, *egbase, player) {
-				const int32_t nr_buildings = player->tribe().get_nrbuildings();
-				for (int32_t b = 0; b < nr_buildings; ++b)
-					player->allow_building(b, false);
-			}
+	try {
+		int32_t const packet_version =
+			prof.get_section("global")->get_int("packet_version");
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Player_Number const nr_players = egbase->map().get_nrplayers();
+			upcast(Game const, game, egbase);
 
       // Now read all players and buildings
-		iterate_players_existing(p, nr_players, *egbase, player) {
-			const Tribe_Descr & tribe = player->tribe();
-			char buffer[10];
-			snprintf(buffer, sizeof(buffer), "player_%u", p);
-         s = prof.get_safe_section(buffer);
+			iterate_players_existing(p, nr_players, *egbase, player) {
+				Tribe_Descr const & tribe = player->tribe();
+				//  All building types default to false in the game (not in the
+				//  editor).
+				if (game)
+					for (Building_Index::value_t i = tribe.get_nrbuildings(); i;)
+						player->allow_building(--i, false);
+				char buffer[10];
+				snprintf(buffer, sizeof(buffer), "player_%u", p);
+				try {
+					Section & s = *prof.get_safe_section(buffer);
 
          // Write for all buildings if it is enabled
-				while (const char * const name = s->get_next_bool(0, 0)) {
-            bool allowed = s->get_bool(name);
-					const int32_t index = tribe.get_building_index(name);
-					if (index == -1)
-						throw wexception
-							("Unknown building found in map (Allowed_Buildings_Data): "
-							 "%s is not in tribe %s",
-							 name, tribe.name().c_str());
-					player->allow_building(index, allowed);
+					bool allowed;
+					while (const char * const name = s.get_next_bool(0, &allowed)) {
+						if (Building_Index const index = tribe.building_index(name))
+							player->allow_building(index, allowed);
+						else
+							throw wexception("building \"%s\" does not exist", name);
+					}
+				} catch (_wexception const & e) {
+					throw wexception
+						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
+				}
 			}
-		}
-	} else
-		throw wexception
-			("Unknown version %i Allowed_Building_Data_Packet in map!",
-			 packet_version);
+		} else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("Allowed buildings: %s", e.what());
+	}
 }
 
 
@@ -104,9 +108,9 @@ throw (_wexception)
       // Write for all buildings if it is enabled
 			const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
 		for (Building_Descr::Index b = 0; b < nr_buildings; ++b)
-			section.set_bool
-				(tribe.get_building_descr(b)->name().c_str(),
-				 player->is_building_allowed(b));
+			if (bool const allowed = player->is_building_allowed(b))
+				section.set_bool
+					(tribe.get_building_descr(b)->name().c_str(), true);
 	}
 
    prof.write("allowed_buildings", false, fs);

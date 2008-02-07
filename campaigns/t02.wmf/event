@@ -2,6 +2,84 @@
 [global]
 packet_version=2
 
+[Road HQ East]
+type=road
+version=1
+point=12 11
+steps=22
+
+[Road HQ West]
+type=road
+version=1
+point=12 11
+steps=55
+
+[Build Eastern Lumberjack]
+type=building
+version=1
+point=15 11
+building=lumberjack
+
+[Road Eastern Lumberjack East]
+type=road
+version=1
+point=16 12
+steps=22
+
+[Road Eastern Lumberjack West]
+type=road
+version=1
+point=16 12
+steps=56
+
+[Build Southern Lumberjack]
+type=building
+version=1
+point=12 13
+building=lumberjack
+
+[Road Southern Lumberjack East]
+type=road
+version=1
+point=13 14
+steps=111
+
+[Road Southern Lumberjack West]
+type=road
+version=1
+point=13 14
+steps=45
+
+[Build Quarry]
+type=building
+version=1
+point=8 12
+building=quarry
+
+[Road Quarry]
+type=road
+version=1
+point=8 13
+steps=112
+
+[Build Ranger]
+type=building
+version=1
+point=9 13
+building=ranger
+
+[Road Ranger East]
+type=road
+version=1
+point=10 14
+steps=32
+
+[Road Ranger West]
+type=road
+version=1
+point=10 14
+steps=56
+
 [Briefing Msg 1]
 type=message_box
 version=2
@@ -34,390 +112,90 @@ window_title=_The Story continues...
 is_modal=true
 button_00=_Continue
 
-[Disable Building 01]
-type=allow_building
-version=1
-player=1
-building=axefactory
-allow=false
-
-[Disable Building 02]
-type=allow_building
-version=1
-player=1
-building=bakery
-allow=false
-
-[Disable Building 03]
-type=allow_building
-version=1
-player=1
-building=barrier
-allow=false
-
-[Disable Building 04]
-type=allow_building
-version=1
-player=1
-building=battlearena
-allow=false
-
-[Disable Building 05]
-type=allow_building
-version=1
-player=1
-building=big_inn
-allow=false
-
-[Disable Building 06]
-type=allow_building
-version=1
-player=1
-building=brewery
-allow=false
-
-[Disable Building 07]
-type=allow_building
-version=1
-player=1
-building=burner
-allow=false
-
-[Disable Building 08]
-type=allow_building
-version=1
-player=1
-building=citadel
-allow=false
-
-[Disable Building 09]
-type=allow_building
-version=1
-player=1
-building=coalmine
-allow=false
-
-[Disable Building 10]
-type=allow_building
-version=1
-player=1
-building=deep_coalmine
-allow=false
-
-[Disable Building 11]
-type=allow_building
-version=1
-player=1
-building=deep_goldmine
-allow=false
-
-[Disable Building 12]
-type=allow_building
-version=1
-player=1
-building=deep_oremine
-allow=false
-
-[Disable Building 13]
-type=allow_building
-version=1
-player=1
-building=deeper_coalmine
-allow=false
-
-[Disable Building 14]
-type=allow_building
-version=1
-player=1
-building=deeper_goldmine
-allow=false
-
-[Disable Building 15]
-type=allow_building
-version=1
-player=1
-building=deeper_oremine
-allow=false
-
-[Disable Building 16]
-type=allow_building
-version=1
-player=1
-building=donjon
-allow=false
-
-[Disable Building 17]
-type=allow_building
-version=1
-player=1
-building=farm
-allow=false
-
-[Disable Building 18]
-type=allow_building
-version=1
-player=1
-building=fernery
-allow=false
-
-[Disable Building 19]
-type=allow_building
-version=1
-player=1
-building=fisher
-allow=false
-
-[Disable Building 20]
-type=allow_building
-version=1
-player=1
-building=fortress
-allow=false
-
-[Disable Building 21]
-type=allow_building
-version=1
-player=1
-building=gamekeeper
-allow=false
-
-[Disable Building 22]
-type=allow_building
-version=1
-player=1
-building=goldmine
-allow=false
-
-[Disable Building 23]
-type=allow_building
-version=1
-player=1
-building=granitemine
-allow=false
-
-[Disable Building 24]
-type=allow_building
-version=1
-player=1
-building=hardener
-allow=false
-
-[Disable Building 25]
-type=allow_building
-version=1
-player=1
-building=helmsmith
-allow=false
-
-[Disable Building 26]
-type=allow_building
-version=1
-player=1
-building=hunter
-allow=false
-
-[Disable Building 27]
-type=allow_building
-version=1
-player=1
-building=inn
-allow=false
-
-[Disable Building 28]
-type=allow_building
-version=1
-player=1
-building=metalworks
-allow=false
-
-[Disable Building 29]
-type=allow_building
-version=1
-player=1
-building=micro-brewery
-allow=false
-
-[Disable Building 30]
-type=allow_building
-version=1
-player=1
-building=oremine
-allow=false
-
-[Disable Building 31]
-type=allow_building
-version=1
-player=1
-building=weaving-mill
-allow=false
-
-[Disable Building 32]
-type=allow_building
-version=1
-player=1
-building=smelting_works
-allow=false
-
-[Disable Building 33]
-type=allow_building
-version=1
-player=1
-building=stonegrinder
-allow=false
-
-[Disable Building 34]
-type=allow_building
-version=1
-player=1
-building=tavern
-allow=false
-
-[Disable Building 35]
-type=allow_building
-version=1
-player=1
-building=trainingscamp
-allow=false
-
-[Disable Building 36]
-type=allow_building
-version=1
-player=1
-building=warehouse
-allow=false
-
-[Disable Building 37]
-type=allow_building
-version=1
-player=1
-building=warmill
-allow=false
-
-[Disable Building 38]
-type=allow_building
-version=1
-player=1
-building=well
-allow=false
-
 [Enable Coal Mine]
 type=allow_building
 version=1
-player=1
 building=coalmine
-allow=true
 
 [Enable Ore Mine]
 type=allow_building
 version=1
-player=1
 building=oremine
-allow=true
 
 [Enable Gold Mine]
 type=allow_building
 version=1
-player=1
 building=goldmine
-allow=true
 
 [Enable Granite Mine]
 type=allow_building
 version=1
-player=1
 building=granitemine
-allow=true
 
 [Enable Hunter]
 type=allow_building
 version=1
-player=1
 building=hunter
-allow=true
 
 [Enable Gamekeeper]
 type=allow_building
 version=1
-player=1
 building=gamekeeper
-allow=true
 
 [Enable Tavern]
 type=allow_building
 version=1
-player=1
 building=tavern
-allow=true
 
 [Enable Farm]
 type=allow_building
 version=1
-player=1
 building=farm
-allow=true
 
 [Enable Well]
 type=allow_building
 version=1
-player=1
 building=well
-allow=true
 
 [Enable Bakery]
 type=allow_building
 version=1
-player=1
 building=bakery
-allow=true
 
 [Enable Smelter]
 type=allow_building
 version=1
-player=1
 building=smelting_works
-allow=true
 
 [Enable Burner]
 type=allow_building
 version=1
-player=1
 building=burner
-allow=true
 
 [Enable Inn]
 type=allow_building
 version=1
-player=1
 building=inn
-allow=true
 
 [Enable Deep Coal Mine]
 type=allow_building
 version=1
-player=1
 building=deep_coalmine
-allow=true
 
 [Enable Hardener]
 type=allow_building
 version=1
-player=1
 building=hardener
-allow=true
 
 [Enable Grinder]
 type=allow_building
 version=1
-player=1
 building=stonegrinder
-allow=true
 
 [Enable Fernery]
 type=allow_building
 version=1
-player=1
 building=fernery
-allow=true
 
 [Order Msg 01]
 type=message_box
@@ -575,7 +353,7 @@ version=2
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
-_" "The new tavern opened yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br>Maybe we actually are slowly creating a place here which we can... call home."</p>"
+_" "A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br>Maybe we actually are slowly creating a place here which we can... call home."</p>"
 "</rt>""
 window_title=_A beautiful morning...
 is_modal=true
@@ -666,7 +444,6 @@ type=unhide_area
 version=2
 point=27 48
 area=6
-player=1
 duration=5000
 
 [Story Msg 1]
@@ -693,52 +470,52 @@ window_title=_Another cold day...
 is_modal=true
 button_00=_Continue
 
-[Unhide Claim Northeastern Rocks]
+[Reveal Claim Northeastern Rocks]
 type=reveal_objective
 version=2
 objective=Claim Northeastern Rocks
 
-[Unhide Build Mines]
+[Reveal Build Mines]
 type=reveal_objective
 version=2
 objective=Build Mines
 
-[Unhide Begin the Hunt]
+[Reveal Begin the Hunt]
 type=reveal_objective
 version=2
 objective=Begin the Hunt
 
-[Unhide Build a Tavern]
+[Reveal Build a Tavern]
 type=reveal_objective
 version=2
 objective=Build a Tavern
 
-[Unhide Begin Farming]
+[Reveal Begin Farming]
 type=reveal_objective
 version=2
 objective=Begin Farming
 
-[Unhide Refine Ores]
+[Reveal Refine Ores]
 type=reveal_objective
 version=2
 objective=Refine Ores
 
-[Unhide Enhance Buildings]
+[Reveal Enhance Buildings]
 type=reveal_objective
 version=2
 objective=Enhance Buildings
 
-[Unhide Better Material I]
+[Reveal Better Material I]
 type=reveal_objective
 version=2
 objective=Better Material I
 
-[Unhide Better Material II]
+[Reveal Better Material II]
 type=reveal_objective
 version=2
 objective=Better Material II
 
-[Unhide Better Material III]
+[Reveal Better Material III]
 type=reveal_objective
 version=2
 objective=Better Material III
@@ -747,7 +524,6 @@ objective=Better Material III
 type=set_null_trigger
 version=1
 trigger=Enhance Buildings
-setto=true
 
 [Mission Complete]
 type=message_box
@@ -761,7 +537,569 @@ window_title=_Mission Complete!
 is_modal=true
 button_00=_Continue
 
-[Unhide Empiretut]
+[Reveal Empiretut]
 type=reveal_campaign
 version=2
 entry=campsect1
+
+[Village Tree 1]
+type=immovable
+version=1
+point=55 19
+name=tree3
+
+[Village Tree 2]
+type=immovable
+version=1
+point=58 19
+name=tree7_s
+
+[Village Tree 3]
+type=immovable
+version=1
+point=58 20
+name=tree5_m
+
+[Village Tree 4]
+type=immovable
+version=1
+point=57 21
+name=tree7
+
+[Village Tree 5]
+type=immovable
+version=1
+point=54 22
+name=tree4_s
+
+[Village Tree 6]
+type=immovable
+version=1
+point=56 24
+name=tree5_s
+
+[Village Tree 7]
+type=immovable
+version=1
+point=58 24
+name=tree1
+
+[Village Tree 8]
+type=immovable
+version=1
+point=56 25
+name=tree7_s
+
+[Village Tree 9]
+type=immovable
+version=1
+point=53 27
+name=tree3
+
+[Village Tree 10]
+type=immovable
+version=1
+point=57 27
+name=tree7_s
+
+[Village Tree 11]
+type=immovable
+version=1
+point=52 29
+name=tree1_m
+
+[Village Tree 12]
+type=immovable
+version=1
+point=54 30
+name=tree5
+
+[Village Tree 13]
+type=immovable
+version=1
+point=55 30
+name=tree6
+
+[Village Tree 14]
+type=immovable
+version=1
+point=56 30
+name=tree7
+
+[Village Northern Farm Field 1]
+type=immovable
+version=1
+point=56 14
+tribe=barbarians
+name=field2
+
+[Village Northern Farm Field 2]
+type=immovable
+version=1
+point=57 14
+tribe=barbarians
+name=field2
+
+[Village Northern Farm Field 3]
+type=immovable
+version=1
+point=54 15
+tribe=barbarians
+name=field2
+
+[Village Northern Farm Field 4]
+type=immovable
+version=1
+point=57 15
+tribe=barbarians
+name=field1
+
+[Village Northern Farm Field 5]
+type=immovable
+version=1
+point=54 16
+tribe=barbarians
+name=field0
+
+[Village Northern Farm Field 6]
+type=immovable
+version=1
+point=57 16
+tribe=barbarians
+name=field1
+
+[Village Northern Farm Field 7]
+type=immovable
+version=1
+point=58 16
+tribe=barbarians
+name=field2
+
+[Village Northern Farm Field 8]
+type=immovable
+version=1
+point=54 17
+tribe=barbarians
+name=field2
+
+[Village Northern Farm Field 9]
+type=immovable
+version=1
+point=55 17
+tribe=barbarians
+name=field1
+
+[Village Northern Farm Field 10]
+type=immovable
+version=1
+point=57 17
+tribe=barbarians
+name=field2
+
+[Village Northern Farm Field 11]
+type=immovable
+version=1
+point=55 18
+tribe=barbarians
+name=field2
+
+[Village Northern Farm Field 12]
+type=immovable
+version=1
+point=57 18
+tribe=barbarians
+name=field2
+
+[Village Southern Farm Field 1]
+type=immovable
+version=1
+point=54 31
+tribe=barbarians
+name=field2
+
+[Village Southern Farm Field 2]
+type=immovable
+version=1
+point=55 31
+tribe=barbarians
+name=field1
+
+[Village Southern Farm Field 3]
+type=immovable
+version=1
+point=56 32
+tribe=barbarians
+name=field2
+
+[Village Southern Farm Field 4]
+type=immovable
+version=1
+point=55 33
+tribe=barbarians
+name=field0
+
+[Village Southern Farm Field 5]
+type=immovable
+version=1
+point=56 33
+tribe=barbarians
+name=field0
+
+[Village Southern Farm Field 6]
+type=immovable
+version=1
+point=53 34
+tribe=barbarians
+name=field2
+
+[Village Southern Farm Field 7]
+type=immovable
+version=1
+point=54 34
+tribe=barbarians
+name=field0
+
+[Village Southern Farm Field 8]
+type=immovable
+version=1
+point=56 34
+tribe=barbarians
+name=field2
+
+[Village Southern Farm Field 9]
+type=immovable
+version=1
+point=53 35
+tribe=barbarians
+name=field1
+
+[Village Southern Farm Field 10]
+type=immovable
+version=1
+point=55 35
+tribe=barbarians
+name=field1
+
+[Village Northern Sentry]
+type=building
+version=1
+point=57 9
+building=sentry
+
+[Village Northern Sentry Road]
+type=road
+version=1
+point=58 10
+steps=54
+
+[Village Hunter]
+type=building
+version=1
+point=56 10
+building=hunter
+
+[Village Hunter Road]
+type=road
+version=1
+point=56 11
+steps=34
+
+[Village Gamekeeper]
+type=building
+version=1
+point=56 12
+building=gamekeeper
+
+[Village Gamekeeper Road 1]
+type=road
+version=1
+point=56 13
+steps=23
+
+[Village Gamekeeper Road 2]
+type=road
+version=1
+point=58 14
+steps=33
+
+[Village Gamekeeper Road 3]
+type=road
+version=1
+point=59 16
+steps=44
+
+[Village Gamekeeper Road 4]
+type=road
+version=1
+point=58 18
+steps=45
+
+[Village Northern Farm]
+type=building
+version=1
+point=56 16
+building=farm
+
+[Village Northern Farm Road 1]
+type=road
+version=1
+point=56 17
+steps=43
+
+[Village Northern Farm Road 2]
+type=road
+version=1
+point=56 19
+steps=44
+
+[Village Northern Well]
+type=building
+version=1
+point=54 18
+building=well
+
+[Village Northern Well Road]
+type=road
+version=1
+point=54 19
+steps=432
+
+[Village Northern Bakery]
+type=building
+version=1
+point=55 20
+building=bakery
+
+[Village Northern Bakery Road]
+type=road
+version=1
+point=55 21
+steps=34
+
+[Village Northeastern Lumberjack]
+type=building
+version=1
+point=56 21
+building=lumberjack
+
+[Village Northeastern Lumberjack Road]
+type=road
+version=1
+point=57 22
+steps=45
+
+[Village Middle Lumberjack]
+type=building
+version=1
+point=55 22
+building=lumberjack
+
+[Village Middle Lumberjack Road]
+type=road
+version=1
+point=55 23
+steps=44
+
+[Village Southwestern Lumberjack]
+type=building
+version=1
+point=54 24
+building=lumberjack
+
+[Village Southwestern Lumberjack Road]
+type=road
+version=1
+point=54 25
+steps=34
+
+[Village Eastern Ranger]
+type=building
+version=1
+point=57 24
+building=ranger
+
+[Village Eastern Ranger Road]
+type=road
+version=1
+point=57 25
+steps=45
+
+[Village Western Ranger]
+type=building
+version=1
+point=55 25
+building=ranger
+
+[Village Western Ranger Road]
+type=road
+version=1
+point=56 26
+steps=45
+
+[Village Hardener]
+type=building
+version=1
+point=54 26
+building=hardener
+
+[Village Hardener Road]
+type=road
+version=1
+point=54 27
+steps=44
+
+[Village Warehouse]
+type=building
+version=1
+point=53 28
+building=warehouse
+
+[Village Warehouse Road]
+type=road
+version=1
+point=53 29
+steps=44
+
+[Village Inn]
+type=building
+version=1
+point=55 28
+building=inn
+
+[Village Inn Road]
+type=road
+version=1
+point=55 29
+steps=55
+
+[Village Tavern]
+type=building
+version=1
+point=57 28
+building=tavern
+
+[Village Tavern Road]
+type=road
+version=1
+point=57 29
+steps=55
+
+[Village Middle Well]
+type=building
+version=1
+point=52 30
+building=well
+
+[Village Middle Well Road 1]
+type=road
+version=1
+point=52 31
+steps=44
+
+[Village Middle Well Road 2]
+type=road
+version=1
+point=51 33
+steps=334
+
+[Village Southern Farm]
+type=building
+version=1
+point=54 33
+building=farm
+
+[Village Southern Farm Road]
+type=road
+version=1
+point=55 34
+steps=44
+
+[Village Southern Bakery]
+type=building
+version=1
+point=51 35
+building=bakery
+
+[Village Southern Bakery Road]
+type=road
+version=1
+point=52 36
+steps=22
+
+[Village Southern Well]
+type=building
+version=1
+point=52 37
+building=well
+
+[Village Southern Well Road]
+type=road
+version=1
+point=53 38
+steps=11
+
+[Village Southern Sentry]
+type=building
+version=1
+point=52 39
+building=sentry
+
+[Village Southern Sentry Road]
+type=road
+version=1
+point=53 40
+steps=16
+
+[Village Adjust Eastern Border 1]
+type=conquer_area
+version=2
+point=57 19
+area=2
+
+[Village Adjust Eastern Border 2]
+type=conquer_area
+version=2
+point=57 24
+area=2
+
+[Village Adjust Eastern Border 3]
+type=conquer_area
+version=2
+point=58 27
+
+[Village Adjust Eastern Border 4]
+type=conquer_area
+version=2
+point=56 31
+area=1
+
+[Village Adjust Eastern Border 5]
+type=conquer_area
+version=2
+point=57 33
+
+[Village Adjust Western Border 1]
+type=conquer_area
+version=2
+point=53 16
+
+[Village Adjust Western Border 2]
+type=conquer_area
+version=2
+point=53 22
+
+[Village Show]
+type=move_view
+version=2
+point=55 25
+
+[Village]
+type=message_box
+version=2
+text=""<rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
+_"Thron speaks:<br>"We found a village with friendly and productive people, impressed by our wealth, technology and strengt. They have decided to join us!"</p>"
+"</rt>""
+window_title=_A friendly village joined us!
+posx=0
+is_modal=false
+button_00=_Continue

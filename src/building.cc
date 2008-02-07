@@ -87,8 +87,6 @@ Building_Descr::~Building_Descr()
 
 /*
 ===============
-Building_Descr::create
-
 Create a building of this type. Does not perform any sanity checks.
 
 if old != 0 this is an enhancing
@@ -99,12 +97,15 @@ Building* Building_Descr::create
  Player & owner,
  const Coords pos,
  const bool construct,
+ bool const fill,
  const Building_Descr * const old)
 const
 {
 	Building* b = construct ? create_constructionsite(old) : create_object();
 	b->m_position = pos;
 	b->set_owner(&owner);
+	if (fill)
+		b->fill(dynamic_cast<Game &>(egbase));
 	b->init(&egbase);
 
 	return b;
@@ -584,6 +585,9 @@ std::string Building::get_statistics_string()
 {
 	return "";
 }
+
+
+void Building::fill(Game &) {}
 
 
 /*

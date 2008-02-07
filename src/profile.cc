@@ -21,7 +21,9 @@
 #include "fileread.h"
 #include "filewrite.h"
 #include "i18n.h"
+#include "player.h"
 #include "profile.h"
+#include "tribe.h"
 #include "wexception.h"
 #include "wlapplication.h"
 
@@ -109,18 +111,6 @@ int32_t Section::Value::get_int() const
 	return i;
 }
 
-float Section::Value::get_float() const
-{
-	char *endp;
-	float f;
-
-	f = strtod(m_value, &endp);
-
-	if (*endp)
-		throw wexception("%s: '%s' is not a float", get_name(), m_value);
-
-	return f;
-}
 
 bool Section::Value::get_bool() const
 {
@@ -142,27 +132,25 @@ const char *Section::Value::get_string() const
 Point Section::Value::get_Point() const
 {
 	char * endp = m_value;
-	const int32_t x = strtol(endp, &endp, 0);
-	const int32_t y = strtol(endp, &endp, 0);
+	long int const x = strtol(endp, &endp, 0);
+	long int const y = strtol(endp, &endp, 0);
 	if (*endp) throw wexception("%s: '%s' is not a Point", get_name(), m_value);
 
 	return Point(x, y);
 }
 
-Coords Section::Value::get_Coords() const
+Widelands::Coords Section::Value::get_Coords
+(Widelands::Extent const extent) const
 {
 	char * endp = m_value;
-	const int32_t x = strtol(endp, &endp, 0);
-	const int32_t y = strtol(endp, &endp, 0);
-	if
-		(x <  std::numeric_limits<Widelands::X_Coordinate>::min() or
-		 x >= std::numeric_limits<Widelands::X_Coordinate>::max() or
-		 y <  std::numeric_limits<Widelands::Y_Coordinate>::min() or
-		 y >= std::numeric_limits<Widelands::Y_Coordinate>::max() or
-		 *endp)
-		throw wexception("%s: '%s' is not a Coords", get_name(), m_value);
+	long int const x = strtol(endp, &endp, 0);
+	long int const y = strtol(endp, &endp, 0);
+	if (x <  0 or extent.w <= x or y < 0 or extent.h <= y or *endp)
+		throw wexception
+			("%s: \"%s\" is not a Coords on a map with size (%u, %u)",
+			 get_name(), m_value, extent.w, extent.h);
 
-	return Coords(x, y);
+	return Widelands::Coords(x, y);
 }
 
 void Section::Value::set_string(const char *value)
@@ -324,18 +312,6 @@ int32_t Section::get_safe_int(const char *name)
 	return v->get_int();
 }
 
-/** Section::get_safe_float(const char *name)
- *
- * Return the float value of the given key or throw an exception if a
- * problem arises.
- */
-float Section::get_safe_float(const char *name)
-{
-	Value *v = get_val(name);
-	if (!v)
-		throw wexception("[%s]: missing float key '%s'", get_name(), name);
-	return v->get_float();
-}
 
 /** Section::get_safe_bool(const char *name)
  *
@@ -368,11 +344,85 @@ const char *Section::get_safe_string(const char *name)
  * Return the key value as a Coords or throw an exception if the key
  * doesn't exist
  */
-Coords Section::get_safe_Coords(const char * const name) {
-	const Value * const v = get_val(name);
-	if (not v) throw wexception("[%s]: missing key '%s'", get_name(), name);
-	return v->get_Coords();
+Widelands::Coords Section::get_safe_Coords
+(const char * const name, Widelands::Extent const extent)
+{
+	if (const Value * const v = get_val(name))
+		return v->get_Coords(extent);
+	else
+		throw wexception("[%s]: missing key '%s'", get_name(), name);
 }
+
+
+Widelands::Immovable_Descr const & Section::get_safe_Immovable_Type
+(char const * tribe, char const * name,
+ Widelands::Editor_Game_Base & egbase)
+{
+	char const * const immname = get_safe_string(name);
+	if (char const * const tribename = get_string(tribe, 0)) {
+		Widelands::Tribe_Descr const & tridescr =
+			egbase.manually_load_tribe(tribename);
+		if
+			(Widelands::Immovable_Descr const * const result =
+			 tridescr.get_immovable_descr(tridescr.get_immovable_index(immname)))
+			return *result;
+		else
+			throw wexception
+				("tribe %s does not define immovable type \"%s\"",
+				 tribename,        immname);
+	} else {
+		Widelands::World       const & world    =
+			egbase.map().world();
+		if
+			(Widelands::Immovable_Descr const * const result =
+			 world   .get_immovable_descr(world   .get_immovable_index(immname)))
+			return *result;
+		else
+			throw wexception
+				("world %s does not define immovable type \"%s\"",
+				 world.get_name(), immname);
+	}
+}
+
+
+
+Widelands::Building_Index Section::get_safe_Building_Index
+(const char * const name,
+ Widelands::Editor_Game_Base &       egbase,
+ Widelands::Player_Number      const player)
+{
+	Widelands::Tribe_Descr const & tribe =
+		egbase.manually_load_tribe
+		(egbase.map().get_scenario_player_tribe(player).c_str());
+	char const * const b = get_safe_string(name);
+	if (Widelands::Building_Index const idx = tribe.get_building_index(b))
+		return idx;
+	else
+		throw wexception
+			("building type \"%s\" does not exist in player %u's tribe %s",
+			 b, player, tribe.name().c_str());
+}
+
+
+Widelands::Building_Descr const & Section::get_safe_Building_Type
+(const char * const name,
+ Widelands::Editor_Game_Base &       egbase,
+ Widelands::Player_Number      const player)
+{
+	Widelands::Tribe_Descr const & tribe =
+		egbase.manually_load_tribe
+		(egbase.map().get_scenario_player_tribe(player).c_str());
+	char const * const b = get_safe_string(name);
+	if
+		(Widelands::Building_Descr const * const result =
+		 tribe.get_building_descr(tribe.building_index(b)))
+		return *result;
+	else
+		throw wexception
+			("building type \"%s\" does not exist in player %u's tribe %s",
+			 b, player, tribe.name().c_str());
+}
+
 
 /** Section::get_int(const char *name, int32_t def)
  *
@@ -398,24 +448,6 @@ int32_t Section::get_int(const char *name, int32_t def)
 	}
 }
 
-/** Section::get_float(const char *name, float def)
- *
- * Returns the float value of the given key. Falls back to a default value
- * if the key is not found.
- */
-float Section::get_float(const char *name, float def)
-{
-	Value *v = get_val(name);
-	if (!v)
-		return def;
-
-	try {
-		return v->get_float();
-	} catch (std::exception &e) {
-		m_profile->error("%s", e.what());
-		return def;
-	}
-}
 
 /** Section::get_bool(const char *name, bool def)
  *
@@ -454,30 +486,28 @@ bool Section::get_bool(const char *name, bool def)
  */
 const char *Section::get_string(const char *name, const char *def)
 {
-	Value *v = get_val(name);
-	if (!v)
-		return def;
-	return v->get_string();
+	Value const * const v = get_val(name);
+	return v ? v->get_string() : def;
 }
 
 Point Section::get_Point(const char * const name, const Point def)
 {const Value * const v = get_val(name); return v ? v->get_Point() : def;}
 
-/** Section::get_Coords(const char * const name, const Coords def)
- *
- * Returns the value of the given key. Falls back to a default value if the
- * key is not found.
- *
- * Args: name  name of the key
- *       def   fallback value
- *
- * Returns: the Coords value of the key
- */
-Coords Section::get_Coords(const char * const name, Coords def) {
-	const Value * const v = get_val(name);
-	if (not v) return def;
-	return v->get_Coords();
+
+Widelands::Player_Number Section::get_Player_Number
+(const char * const name,
+ Widelands::Player_Number const nr_players,
+ Widelands::Player_Number const def)
+{
+	int32_t const value = get_int(name, def);
+	if (1 <= value and value <= nr_players)
+		return value;
+	else
+		throw wexception
+			("player number is %i but there are only %u players on the map",
+			 value, nr_players);
 }
+
 
 /** Section::get_next_int(const char *name, int32_t *value)
  *
@@ -490,29 +520,14 @@ Coords Section::get_Coords(const char * const name, Coords def) {
  */
 const char *Section::get_next_int(const char *name, int32_t *value)
 {
-	Value *v = get_next_val(name);
-	if (!v)
+	if (Value const * const v = get_next_val(name)) {
+		if (value)
+			*value = v->get_int();
+		return v->get_name();
+	} else
 		return 0;
-
-	if (value)
-      *value = v->get_int();
-	return v->get_name();
 }
 
-/** Section::get_next_float(const char *name, float *value)
- *
- * Retrieve the next unused key with the given name as a float.
- */
-const char *Section::get_next_float(const char *name, float *value)
-{
-	Value *v = get_next_val(name);
-	if (!v)
-		return 0;
-
-	if (value)
-      *value = v->get_float();
-	return v->get_name();
-}
 
 /** Section::get_next_bool(const char *name, int32_t *value)
  *
@@ -554,23 +569,6 @@ const char *Section::get_next_string(const char *name, const char **value)
 	return v->get_name();
 }
 
-/** Section::get_next_Coords(const char * const name, Coords & value)
- *
- * Retrieve the next unused key with the given name as a Coords value.
- *
- * Args: name   name of the key, can be 0 to find all unused keys
- *       value  value of the key is stored here
- *
- * Returns: the name of the key, or 0 if none has been found
- */
-const char * Section::get_next_Coords
-(const char * const name, Coords * const value)
-{
-	const Value * const v = get_next_val(name);
-	if (not v) return 0;
-	if (value) *value = v->get_Coords();
-	return v->get_name();
-}
 
 /** Section::set_int(const char *name, int32_t value, bool duplicate = false)
  *
@@ -586,19 +584,6 @@ void Section::set_int(const char *name, int32_t value, bool duplicate)
 	create_val(name, buffer, duplicate)->mark_used();
 }
 
-/** Section::set_float(const char *name, float value, bool duplicate = false)
- *
- * Modifies/Creates the given key.
- * If duplicate is true, a duplicate key will be created if the key already
- * exists.
- */
-void Section::set_float(const char *name, float value, bool duplicate)
-{
-	char buffer[64];
-
-	snprintf(buffer, sizeof(buffer), "%f", value);
-	create_val(name, buffer, duplicate)->mark_used();
-}
 
 /** Section::set_bool(const char *name, bool value, bool duplicate = false)
  *
@@ -632,12 +617,46 @@ void Section::set_string(const char *name, const char *string, bool duplicate)
  * exists.
  */
 void Section::set_Coords
-(const char * const name, const Coords value, const bool duplicate)
+(const char * const name, const Widelands::Coords value, const bool duplicate)
 {
 	char buffer[64];
 
 	snprintf(buffer, sizeof(buffer), "%i %i", value.x, value.y);
 	create_val(name, buffer, duplicate)->mark_used();
+}
+
+
+void Section::set_Immovable_Type
+(char const * const tribe, char const * const name,
+ Widelands::Immovable_Descr const & descr)
+{
+	if (Widelands::Tribe_Descr const * const tridescr = descr.get_owner_tribe())
+		create_val(tribe, tridescr->name().c_str(), false)->mark_used();
+	create_val   (name,     descr. name().c_str(), false)->mark_used();
+}
+
+
+void Section::set_Building_Index
+(char const * const name,
+ Widelands::Building_Index           const value,
+ Widelands::Editor_Game_Base const &       egbase,
+ Widelands::Player_Number            const player,
+ bool                                const duplicate)
+{
+	create_val
+		(name,
+		 egbase.player(player).tribe().get_building_descr(value)->name().c_str(),
+		 duplicate)
+		->mark_used();
+}
+
+
+void Section::set_Building_Type
+(char const * const name,
+ Widelands::Building_Descr const &       value,
+ bool                              const duplicate)
+{
+	create_val(name, value.name().c_str(), duplicate)->mark_used();
 }
 
 

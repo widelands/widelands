@@ -376,12 +376,15 @@ struct Player {
 	bool is_building_allowed(const Building_Descr::Index i) const throw () {
 		return m_allowed_buildings[i];
 	}
-	void allow_building(int32_t i, bool t);
+	void allow_building(Building_Index, bool allow);
 
 	// Player commands
 	// Only to be called indirectly via CmdQueue
-	void build_flag(Coords c);
-	void build_road(const Path & path);
+	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
+	void   build_flag(Coords);       /// Build a flag if it is allowed.
+	void   force_road(Path const &, bool create_carrier = false);
+	void   build_road(Path const &); /// Build a road if it is allowed.
+	void force_building(Coords, Building_Index, bool fill);
 	void build(Coords c, int32_t idx);
 	void bulldoze(PlayerImmovable* imm);
 	void flagaction(Flag* flag, int32_t action);

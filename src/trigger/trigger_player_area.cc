@@ -44,27 +44,38 @@ m_count      (0)
 
 void Trigger_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
+		Map const & map = egbase.map();
+		Extent const extent = map.extent();
 		m_player_area = Player_Area<Area<FCoords> >
-			(s.get_int("player", 1),
+			(s.get_Player_Number("player", map.get_nrplayers(), 1),
 			 Area<FCoords>
-			 (egbase.map().get_fcoords
+			 (map.get_fcoords
 			  (s.get_safe_int("version") == 1
 			   ?
 			   (Coords(s.get_safe_int("point_x"), s.get_safe_int("point_y")))
 			   :
-			   s.get_safe_Coords("point")),
-			  s.get_safe_int("area")));
+			   s.get_safe_Coords("point", extent)),
+			  s.get_int("area", 0)));
+			if
+				(m_player_area.x < 0 or extent.w <= m_player_area.x
+				 or
+				 m_player_area.y < 0 or extent.h <= m_player_area.y)
+				throw wexception
+					("illegal coordinates (%i, %i)",
+					 m_player_area.x, m_player_area.y);
 		m_count = s.get_int("count", 1);
 	} catch (std::exception const & e) {
 		throw wexception("(player prea): %s", e.what());
 	}
 }
 
-void Trigger_Player_Area::Write(Section & s) const {
+void Trigger_Player_Area::Write(Section & s, Editor_Game_Base const &) const {
 	s.set_Coords("point",    m_player_area);
-	s.set_int   ("area",     m_player_area.radius);
-	s.set_int   ("player",   m_player_area.player_number);
-	if (m_count != 1)
+	if (m_player_area.radius)
+		s.set_int("area",     m_player_area.radius);
+	if (m_player_area.player_number != 1)
+		s.set_int("player",   m_player_area.player_number);
+	if (m_count                     != 1)
 		s.set_int("count",    m_count);
 }
 

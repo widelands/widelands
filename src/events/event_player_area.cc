@@ -34,28 +34,24 @@ void Event_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
 		int32_t const event_version = s.get_safe_int("version");
 		if (1 <= event_version and event_version <= EVENT_VERSION) {
+			Map const & map = egbase.map();
+			Extent const extent = map.extent();
 			m_player_area = Player_Area<>
-				(s.get_int("player", 1),
+				(s.get_Player_Number("player", map.get_nrplayers(), 1),
 				 Area<>
 				 (event_version == 1
 				  ?
 				  Coords(s.get_safe_int("point_x"), s.get_safe_int("point_y"))
 				  :
-				  s.get_safe_Coords("point"),
-				  s.get_safe_int("area")));
-			Map const & map = egbase.map();
+				  s.get_safe_Coords("point", extent),
+				  s.get_int("area", 0)));
 			if
-				(m_player_area.x < 0 or map.get_width () <= m_player_area.x
+				(m_player_area.x < 0 or extent.w <= m_player_area.x
 				 or
-				 m_player_area.y < 0 or map.get_height() <= m_player_area.y
-				 or
-				 m_player_area.player_number <= 0
-				 or
-				 map.get_nrplayers() < m_player_area.player_number)
+				 m_player_area.y < 0 or extent.h <= m_player_area.y)
 				throw wexception
-					("illegal coordinates (%i, %i), radius %u or player number %u",
-					 m_player_area.x, m_player_area.y, m_player_area.radius,
-					 m_player_area.player_number);
+					("illegal coordinates (%i, %i)",
+					 m_player_area.x, m_player_area.y);
 		} else
 			throw wexception("unknown/unhandled version %i", event_version);
 	} catch (std::exception const & e) {
@@ -64,11 +60,13 @@ void Event_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
 }
 
 
-void Event_Player_Area::Write(Section & s) const {
+void Event_Player_Area::Write(Section & s, Editor_Game_Base const &) const {
 	s.set_int   ("version", EVENT_VERSION);
 	s.set_Coords("point",   m_player_area);
-	s.set_int   ("area",    m_player_area.radius);
-	s.set_int   ("player",  m_player_area.player_number);
+	if (m_player_area.radius)
+		s.set_int("area",    m_player_area.radius);
+	if (m_player_area.player_number != 1)
+		s.set_int("player",  m_player_area.player_number);
 }
 
 };

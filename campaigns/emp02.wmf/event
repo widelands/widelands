@@ -22,7 +22,6 @@ type=unhide_area
 version=2
 point=17 10
 area=6
-player=1
 duration=5000
 
 [Goto forests]
@@ -45,7 +44,7 @@ width=450
 height=350
 button_00=OK
 
-[Unhide Objective 1 - Woodeconomy]
+[Reveal Objective 1 - Woodeconomy]
 type=reveal_objective
 version=2
 objective=Build Woodeconomy
@@ -56,7 +55,6 @@ objective=Build Woodeconomy
 type=set_null_trigger
 version=1
 trigger=Woodeconomy complete
-setto=true
 
 [Goto stones]
 type=move_view
@@ -78,283 +76,10 @@ width=450
 height=350
 button_00=OK
 
-[Unhide Objective 2 - Quarry]
+[Reveal Objective 2 - Quarry]
 type=reveal_objective
 version=2
 objective=Build Quarry
-
-[Disable Building 01]
-type=allow_building
-version=1
-player=1
-building=arena
-allow=false
-
-[Disable Building 02]
-type=allow_building
-version=1
-player=1
-building=armoursmith
-allow=false
-
-[Disable Building 03]
-type=allow_building
-version=1
-player=1
-building=bakery
-allow=false
-
-[Disable Building 04]
-type=allow_building
-version=1
-player=1
-building=barracks
-allow=false
-
-[Disable Building 05]
-type=allow_building
-version=1
-player=1
-building=barrier
-allow=false
-
-[Disable Building 06]
-type=allow_building
-version=1
-player=1
-building=brewery
-allow=false
-
-[Disable Building 07]
-type=allow_building
-version=1
-player=1
-building=burner
-allow=false
-
-[Disable Building 08]
-type=allow_building
-version=1
-player=1
-building=carpenter
-allow=false
-
-[Disable Building 09]
-type=allow_building
-version=1
-player=1
-building=castle
-allow=false
-
-[Disable Building 10]
-type=allow_building
-version=1
-player=1
-building=coalmine
-allow=false
-
-[Disable Building 11]
-type=allow_building
-version=1
-player=1
-building=colosseum
-allow=false
-
-[Disable Building 12]
-type=allow_building
-version=1
-player=1
-building=deep_coalmine
-allow=false
-
-[Disable Building 13]
-type=allow_building
-version=1
-player=1
-building=deep_goldmine
-allow=false
-
-[Disable Building 14]
-type=allow_building
-version=1
-player=1
-building=deep_oremine
-allow=false
-
-[Disable Building 15]
-type=allow_building
-version=1
-player=1
-building=deep_marblemine
-allow=false
-
-[Disable Building 16]
-type=allow_building
-version=1
-player=1
-building=farm
-allow=false
-
-[Disable Building 17]
-type=allow_building
-version=1
-player=1
-building=fisher
-allow=false
-
-[Disable Building 19]
-type=allow_building
-version=1
-player=1
-building=fortress
-allow=false
-
-[Disable Building 20]
-type=allow_building
-version=1
-player=1
-building=goldmine
-allow=false
-
-[Disable Building 21]
-type=allow_building
-version=1
-player=1
-building=hunter
-allow=false
-
-[Disable Building 22]
-type=allow_building
-version=1
-player=1
-building=inn
-allow=false
-
-[Disable Building 24]
-type=allow_building
-version=1
-player=1
-building=marblemine
-allow=false
-
-[Disable Building 25]
-type=allow_building
-version=1
-player=1
-building=mill
-allow=false
-
-[Disable Building 26]
-type=allow_building
-version=1
-player=1
-building=oremine
-allow=false
-
-[Disable Building 27]
-type=allow_building
-version=1
-player=1
-building=outpost
-allow=false
-
-[Disable Building 28]
-type=allow_building
-version=1
-player=1
-building=piggery
-allow=false
-
-[Disable Building 31]
-type=allow_building
-version=1
-player=1
-building=sentry
-allow=false
-
-[Disable Building 32]
-type=allow_building
-version=1
-player=1
-building=sheepfarm
-allow=false
-
-[Disable Building 33]
-type=allow_building
-version=1
-player=1
-building=smelting_works
-allow=false
-
-[Disable Building 34]
-type=allow_building
-version=1
-player=1
-building=stonemason
-allow=false
-
-[Disable Building 35]
-type=allow_building
-version=1
-player=1
-building=tavern
-allow=false
-
-[Disable Building 36]
-type=allow_building
-version=1
-player=1
-building=tower
-allow=false
-
-[Disable Building 37]
-type=allow_building
-version=1
-player=1
-building=trainingscamp
-allow=false
-
-[Disable Building 38]
-type=allow_building
-version=1
-player=1
-building=vintagery
-allow=false
-
-[Disable Building 39]
-type=allow_building
-version=1
-player=1
-building=warehouse
-allow=false
-
-[Disable Building 40]
-type=allow_building
-version=1
-player=1
-building=weaponsmith
-allow=false
-
-[Disable Building 41]
-type=allow_building
-version=1
-player=1
-building=weaving-mill
-allow=false
-
-[Disable Building 42]
-type=allow_building
-version=1
-player=1
-building=well
-allow=false
-
-[Disable Building 43]
-type=allow_building
-version=1
-player=1
-building=vineyard
-allow=false
 
 [Diary page 6]
 type=message_box
@@ -412,7 +137,7 @@ width=450
 height=350
 button_00=OK
 
-[Unhide Objective 3 - military-buildings]
+[Reveal Objective 3 - military-buildings]
 type=reveal_objective
 version=2
 objective=Build military buildings
@@ -420,31 +145,18 @@ objective=Build military buildings
 [Enable Barracks]
 type=allow_building
 version=1
-player=1
 building=barracks
-allow=true
 
 [Enable Sentry]
 type=allow_building
 version=1
-player=1
 building=sentry
-allow=true
-
-[Set military buildings trigger]
-# Will be run, when trigger 'Barracks complete',
-# or 'Sentry complete' is set.
-type=set_null_trigger
-version=1
-trigger=Military buildings complete
-setto=true
 
 [Show Marblemountains]
 type=unhide_area
 version=2
 point=35 19
 area=5
-player=1
 duration=5000
 
 [Goto Marblemountains]
@@ -467,7 +179,7 @@ width=450
 height=350
 button_00=OK
 
-[Unhide Objective 4 - marblemine]
+[Reveal Objective 4 - marblemine]
 type=reveal_objective
 version=2
 objective=Build Marblemine
@@ -475,23 +187,18 @@ objective=Build Marblemine
 [Enable Marblemine]
 type=allow_building
 version=1
-player=1
 building=marblemine
-allow=true
 
 [Enable Deep Marblemine]
 type=allow_building
 version=1
-player=1
 building=deep_marblemine
-allow=true
 
 [Show Ironmountains]
 type=unhide_area
 version=2
 point=38 37
 area=6
-player=1
 duration=5000
 
 [Show Coalmountains]
@@ -499,7 +206,6 @@ type=unhide_area
 version=2
 point=49 22
 area=6
-player=1
 duration=5000
 
 [Goto Mountains middle]
@@ -522,7 +228,7 @@ width=450
 height=350
 button_00=OK
 
-[Unhide Objective 5 - mining]
+[Reveal Objective 5 - mining]
 type=reveal_objective
 version=2
 objective=Build Mining infrastructure
@@ -530,79 +236,58 @@ objective=Build Mining infrastructure
 [Enable Coalmine]
 type=allow_building
 version=1
-player=1
 building=coalmine
-allow=true
 
 [Enable Deep Coalmine]
 type=allow_building
 version=1
-player=1
 building=deep_coalmine
-allow=true
 
 [Enable Oremine]
 type=allow_building
 version=1
-player=1
 building=oremine
-allow=true
 
 [Enable Deep Oremine]
 type=allow_building
 version=1
-player=1
 building=deep_oremine
-allow=true
 
 [Enable Stonemason]
 type=allow_building
 version=1
-player=1
 building=stonemason
-allow=true
 
 [Enable Carpenter]
 type=allow_building
 version=1
-player=1
 building=carpenter
-allow=true
 
 [Enable Armoursmith]
 type=allow_building
 version=1
-player=1
 building=armoursmith
-allow=true
 
 [Enable Weaponsmith]
 type=allow_building
 version=1
-player=1
 building=weaponsmith
-allow=true
 
 [Enable Smelter]
 type=allow_building
 version=1
-player=1
 building=smelting_works
-allow=true
 
 [Enable Burner]
 type=allow_building
 version=1
-player=1
 building=burner
-allow=true
 
 [Set Mining infrastructure-trigger]
 # Will be run, when all needed buildings are build up.
 type=set_null_trigger
 version=1
 trigger=Mining infrastructure complete
-setto=true
 
 [Amalea 1]
 type=message_box
@@ -621,93 +306,68 @@ button_00=OK
 [Enable Well]
 type=allow_building
 version=1
-player=1
 building=well
-allow=true
 
 [Enable Farm]
 type=allow_building
 version=1
-player=1
 building=farm
-allow=true
 
 [Enable Brewery]
 type=allow_building
 version=1
-player=1
 building=brewery
-allow=true
 
 [Enable Vineyard]
 type=allow_building
 version=1
-player=1
 building=vineyard
-allow=true
 
 [Enable Vintagery]
 type=allow_building
 version=1
-player=1
 building=vintagery
-allow=true
 
 [Enable Mill]
 type=allow_building
 version=1
-player=1
 building=mill
-allow=true
 
 [Enable Bakery]
 type=allow_building
 version=1
-player=1
 building=bakery
-allow=true
 
 [Enable Hunter]
 type=allow_building
 version=1
-player=1
 building=hunter
-allow=true
 
 [Enable Piggery]
 type=allow_building
 version=1
-player=1
 building=piggery
-allow=true
 
 [Enable Tavern]
 type=allow_building
 version=1
-player=1
 building=tavern
-allow=true
 
 [Enable Inn]
 type=allow_building
 version=1
-player=1
 building=inn
-allow=true
 
 [Enable Fisher]
 type=allow_building
 version=1
-player=1
 building=fisher
-allow=true
 
 [Show Barbarians 1]
 type=unhide_area
 version=2
 point=60 61
 area=6
-player=1
 duration=5000
 
 [Show Barbarians 2]
@@ -715,7 +375,6 @@ type=unhide_area
 version=2
 point=60 48
 area=6
-player=1
 duration=5000
 
 [Goto Barbarians]
@@ -738,7 +397,7 @@ width=450
 height=350
 button_00=OK
 
-[Unhide Objective 6 - bigger military buildings]
+[Reveal Objective 6 - bigger military buildings]
 type=reveal_objective
 version=2
 objective=Build bigger military buildings
@@ -746,30 +405,23 @@ objective=Build bigger military buildings
 [Enable Outpost]
 type=allow_building
 version=1
-player=1
 building=outpost
-allow=true
 
 [Enable Barrier]
 type=allow_building
 version=1
-player=1
 building=barrier
-allow=true
 
 [Enable Tower]
 type=allow_building
 version=1
-player=1
 building=tower
-allow=true
 
 [Set Bigger military building-trigger]
 # Will be run, when a bigger military building is build up.
 type=set_null_trigger
 version=1
 trigger=Bigger military building complete
-setto=true
 
 [Diary page 9]
 type=message_box
@@ -789,11 +441,9 @@ button_00=OK
 [Enable Fortress]
 type=allow_building
 version=1
-player=1
 building=fortress
-allow=true
 
-[Unhide Objective 7 - Attack]
+[Reveal Objective 7 - Attack]
 type=reveal_objective
 version=2
 objective=Remove the barbarians
