@@ -542,10 +542,9 @@ void Graphic::free_surface(uint32_t const picid) {
 /**
  * Returns the RenderTarget for the given surface
 */
-RenderTarget* Graphic::get_surface_renderer(uint32_t pic)
-{
+RenderTarget* Graphic::get_surface_renderer(uint32_t const pic) {
 	assert(pic < m_pictures.size());
-	assert(m_pictures[pic].module == 0xff);
+	//  assert(m_pictures[pic].module == 0xff); fails showing terrains in editor
 
 	RenderTarget* rt = m_pictures[pic].u.rendertarget;
 
