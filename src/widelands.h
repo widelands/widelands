@@ -80,7 +80,17 @@ struct Ware_Index {
 	bool operator!=(Ware_Index const other) const {return i != other.i;}
 
 	operator bool() const throw () {return operator!=(Null());}
-	operator int32_t() const __attribute__((deprecated)) {return *this ? i : -1;} //  FIXME ditch this temporary hack eventually
+
+	// DO NOT REMOVE THE DECLARATION OF operator int32_t
+	// (Note: the function body may eventually be removed)
+	// Rationale: If only operator bool() is present, the compiler may
+	// choose to use it in an implied cast when a user of this class
+	// forgets to use value() in order to obtain a value_t. As long as
+	// the declaration of operator int32_t is present, the compile will
+	// fail with an ambiguous operator overload error instead of
+	// producing erroneous code.
+	operator int32_t() const __attribute__((deprecated)) {return *this ? i : -1;}
+
 private:
 	value_t i;
 };
@@ -111,7 +121,17 @@ struct Building_Index {
 	bool operator!=(Building_Index const other) const {return i != other.i;}
 
 	operator bool() const throw () {return operator!=(Null());}
-	operator int32_t() const __attribute__((deprecated)) {return *this ? i : -1;} //  FIXME ditch this temporary hack eventually
+
+	// DO NOT REMOVE THE DECLARATION OF operator int32_t
+	// (Note: the function body may eventually be removed)
+	// Rationale: If only operator bool() is present, the compiler may
+	// choose to use it in an implied cast when a user of this class
+	// forgets to use value() in order to obtain a value_t. As long as
+	// the declaration of operator int32_t is present, the compile will
+	// fail with an ambiguous operator overload error instead of
+	// producing erroneous code.
+	operator int32_t() const __attribute__((deprecated)) {return *this ? i : -1;}
+
 private:
 	value_t i;
 };
