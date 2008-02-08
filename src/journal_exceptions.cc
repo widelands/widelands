@@ -21,21 +21,21 @@
 
 #include "helper.h"
 
-Journalfile_error::Journalfile_error(const std::string _filename) throw ()
+Journalfile_error::Journalfile_error(std::string const & _filename) throw ()
 : std::runtime_error("Problem with journal file."), filename(_filename)
 {
 	text="Problem with journal file "+_filename;
 }
 
 ///\todo Say _which_ magic number was found and which was expected
-BadMagic_error::BadMagic_error(const std::string _filename) throw ()
+BadMagic_error::BadMagic_error(std::string const & _filename) throw ()
 : Journalfile_error(_filename)
 {
 	text="Journal file "+_filename+" starts with bad magic number";
 }
 
 BadRecord_error::BadRecord_error
-(const std::string _filename,
+(std::string const & _filename,
  const uint8_t     _code,
  const uint8_t     _expectedcode)
 throw ()
@@ -47,7 +47,7 @@ throw ()
 }
 
 BadEvent_error::BadEvent_error
-(const std::string _filename, const uint8_t _type)
+(std::string const & _filename, uint8_t const _type)
 throw ()
 : Journalfile_error(_filename), type(_type)
 {

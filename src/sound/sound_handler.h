@@ -173,28 +173,28 @@ public:
 	void load_system_sounds();
 
 	void load_fx
-	(const std::string dir,
-	 const std::string basename,
-	 const bool recursive = false);
+		(std::string const & dir,
+		 std::string const & basename,
+		 bool                recursive = false);
 	void play_fx
-	(const std::string & fx_name,
-	 const Widelands::Coords map_position,
-	 const uint32_t priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+		(std::string const & fx_name,
+		 Widelands::Coords   map_position,
+		 uint32_t            priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 	void play_fx
-	(const std::string fx_name,
-	 const int32_t stereo_position,
-	 const uint32_t priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+		(std::string const & fx_name,
+		 int32_t             stereo_position,
+		 uint32_t            priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 
 	void register_song
-	(const std::string dir,
-	 const std::string basename,
-	 const bool recursive = false);
-	void start_music(const std::string songset_name, int32_t fadein_ms = 0);
+		(std::string const & dir,
+		 std::string const & basename,
+		 bool                recursive = false);
+	void start_music(std::string const & songset_name, int32_t fadein_ms = 0);
 	void stop_music(int32_t fadeout_ms = 0);
 	void change_music
-	(const std::string songset_name = "",
-	 int32_t fadeout_ms = 0,
-	 int32_t fadein_ms = 0);
+		(std::string const & songset_name = std::string(),
+		 int32_t             fadeout_ms   = 0,
+		 int32_t             fadein_ms    = 0);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
@@ -236,12 +236,12 @@ public:
 
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
-	void load_one_fx(const char * const filename, const std::string fx_name);
-	int32_t stereo_position(const Widelands::Coords position);
+	void load_one_fx(const char * filename, std::string const & fx_name);
+	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not
-	(const std::string fx_name,
-	 const int32_t stereo_position,
-	 const uint32_t priority);
+		(std::string const & fx_name,
+		 int32_t             stereo_position,
+		 uint32_t            priority);
 
 	/// Whether to disable background music
 	bool m_disable_music;

@@ -1,0 +1,1 @@
+This catches functions that return a value as const, which makes no sense. Unfortunately it only catches virtual functions.

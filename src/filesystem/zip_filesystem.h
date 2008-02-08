@@ -27,38 +27,42 @@
 #include <string>
 
 struct ZipFilesystem : public FileSystem {
-	ZipFilesystem(const std::string);
+	ZipFilesystem(std::string const &);
 	virtual ~ZipFilesystem();
 
-	virtual const bool IsWritable() const;
+	virtual bool IsWritable() const;
 
-	virtual const int32_t FindFiles(std::string path, const std::string pattern,
-                                    filenameset_t *results, uint32_t depth=0);
+	virtual int32_t FindFiles
+		(std::string const & path,
+		 std::string const & pattern,
+		 filenameset_t     * results,
+		 uint32_t            depth = 0);
 
-	virtual const bool IsDirectory(std::string path);
-	virtual const bool FileExists(std::string path);
+	virtual bool IsDirectory(std::string const & path);
+	virtual bool FileExists (std::string const & path);
 
-	virtual void * Load(const std::string & fname, size_t & length);
-	virtual void Write(const std::string fname, const void * const data,
-                           const int32_t length);
-	virtual void EnsureDirectoryExists(const std::string dirname);
-	virtual void MakeDirectory(const std::string dirname);
+	virtual void * Load(std::string const & fname, size_t & length);
+	virtual void Write
+		(std::string const & fname, void const * data, int32_t length);
+	virtual void EnsureDirectoryExists(std::string const & dirname);
+	virtual void   MakeDirectory      (std::string const & dirname);
 
 	virtual StreamRead  * OpenStreamRead
 		(const std::string & fname) __attribute__ ((noreturn));
 	virtual StreamWrite * OpenStreamWrite
 		(const std::string & fname) __attribute__ ((noreturn));
 
-	virtual FileSystem*  MakeSubFileSystem(const std::string dirname);
-	virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
-                                                 const Type);
-	virtual void Unlink(const std::string filename) __attribute__ ((noreturn));
+	virtual FileSystem *   MakeSubFileSystem(std::string const & dirname);
+	virtual FileSystem * CreateSubFileSystem
+		(std::string const & dirname, Type);
+	virtual void Unlink(std::string const & filename)
+		__attribute__ ((noreturn));
 	virtual void Rename(const std::string&, const std::string&) __attribute__ ((noreturn));
 
 public:
-	static FileSystem *CreateFromDirectory(const std::string directory);
+	static FileSystem * CreateFromDirectory(std::string const & directory);
 
-	virtual const std::string getBasename() {return m_zipfilename;};
+	virtual std::string getBasename() {return m_zipfilename;};
 
 private:
 	void m_OpenUnzip();

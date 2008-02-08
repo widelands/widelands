@@ -148,10 +148,8 @@ World
 =============================================================================
 */
 
-World::World(const std::string name) : m_basedir("worlds/"+name)
-{
-	try
-	{
+World::World(std::string const & name) : m_basedir("worlds/" + name) {
+	try {
 		i18n::grab_textdomain(m_basedir);
 
 		FileSystem *fs=g_fs->MakeSubFileSystem(m_basedir);

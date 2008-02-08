@@ -44,8 +44,7 @@ Songset::~Songset()
  * first song. If you do not want to disturb the (linear) playback order then
  * \ref register_song() all songs before you start playing
  */
-void Songset::add_song(const std::string filename)
-{
+void Songset::add_song(std::string const & filename) {
 	m_songs.push_back(filename);
 	m_current_song = m_songs.begin();
 }

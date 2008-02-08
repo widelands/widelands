@@ -36,7 +36,7 @@
  * logic_error (?)
  */
 struct Journalfile_error : public std::runtime_error {
-	explicit Journalfile_error(const std::string filename) throw ();
+	explicit Journalfile_error(std::string const & filename) throw ();
 	virtual ~Journalfile_error() throw () {}
 
 	virtual const char *what() const throw () {return text.c_str();}
@@ -50,7 +50,7 @@ struct Journalfile_error : public std::runtime_error {
  * \todo add offset into journal file
  */
 struct BadMagic_error : public Journalfile_error {
-	explicit BadMagic_error(const std::string filename) throw ();
+	explicit BadMagic_error(std::string const & filename) throw ();
 	virtual ~BadMagic_error() throw () {}
 };
 
@@ -60,7 +60,7 @@ struct BadMagic_error : public Journalfile_error {
  */
 struct BadRecord_error : public Journalfile_error {
 	explicit BadRecord_error
-		(const std::string filename,
+		(std::string const & filename,
 		 const uint8_t     code,
 		 const uint8_t     expectedcode)
 		throw ();
@@ -76,7 +76,7 @@ struct BadRecord_error : public Journalfile_error {
  * \todo add offset into journal file
  */
 struct BadEvent_error : public Journalfile_error {
-	explicit BadEvent_error(const std::string filename, const uint8_t type)
+	explicit BadEvent_error(std::string const & filename, uint8_t const type)
 		throw ();
 	virtual ~BadEvent_error() throw () {}
 

@@ -133,7 +133,7 @@ struct World {
          ERR_WRONGVERSION
 	};
 
-      World(const std::string name);
+	World(std::string const & name);
 
       // Check if a world really exists
       static bool exists_world(std::string);

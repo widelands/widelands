@@ -26,39 +26,39 @@
 
 /// \todo const correctness
 struct RealFSImpl : public FileSystem {
-	RealFSImpl(const std::string Directory);
+	RealFSImpl(std::string const & Directory);
 	~RealFSImpl();
 
-	virtual const int32_t FindFiles(std::string path,
-	                            const std::string pattern,
-	                            filenameset_t *results, uint32_t depth=0);
+	virtual int32_t FindFiles
+		(std::string const & path,
+		 std::string const & pattern,
+		 filenameset_t     * results,
+		 uint32_t            depth = 0);
 
-	virtual const bool IsWritable() const;
-	virtual const bool FileExists(const std::string path);
-	virtual const bool IsDirectory(const std::string path);
-	virtual void EnsureDirectoryExists(const std::string dirname);
-	virtual void MakeDirectory(const std::string dirname);
+	virtual bool IsWritable() const;
+	virtual bool FileExists (std::string const & path);
+	virtual bool IsDirectory(std::string const & path);
+	virtual void EnsureDirectoryExists(std::string const & dirname);
+	virtual void MakeDirectory        (std::string const & dirname);
 
 	virtual void * Load(const std::string & fname, size_t & length);
-	virtual void Write(const std::string fname, const void * const data,
-	                   const int32_t length);
+	virtual void Write
+		(std::string const & fname, void const * data, int32_t length);
 
-	virtual StreamRead  * OpenStreamRead
-		(const std::string & fname);
-	virtual StreamWrite * OpenStreamWrite
-		(const std::string & fname);
+	virtual StreamRead  * OpenStreamRead (std::string const & fname);
+	virtual StreamWrite * OpenStreamWrite(std::string const & fname);
 
-	virtual FileSystem* MakeSubFileSystem(const std::string dirname);
-	virtual FileSystem* CreateSubFileSystem(const std::string dirname,
-	                                        const Type);
-	virtual void Unlink(const std::string file);
+	virtual FileSystem * MakeSubFileSystem(std::string const & dirname);
+	virtual FileSystem * CreateSubFileSystem
+		(std::string const & dirname, Type);
+	virtual void Unlink(std::string const & file);
 	virtual void Rename(const std::string&, const std::string&);
 
-	virtual const std::string getBasename() {return m_directory;};
+	virtual std::string getBasename() {return m_directory;};
 
 private:
-	void m_unlink_directory(const std::string file);
-	void m_unlink_file(const std::string file);
+	void m_unlink_directory(std::string const & file);
+	void m_unlink_file     (std::string const & file);
 
 	std::string m_directory;
 };

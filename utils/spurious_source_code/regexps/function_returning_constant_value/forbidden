@@ -1,0 +1,2 @@
+virtual const My::integer f();
+virtual bool const gh() {

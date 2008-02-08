@@ -402,14 +402,12 @@ void Map::cleanup() {
 
 /*
 ===========
-Map::create_emtpy_map
-
 creates an empty map without name with
 the given data
 ===========
 */
 void Map::create_empty_map
-(const uint32_t w, const uint32_t h, const std::string worldname)
+(uint32_t const w, uint32_t const h, std::string const & worldname)
 {
 	set_world_name(worldname.c_str());
 	load_world();

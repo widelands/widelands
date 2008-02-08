@@ -30,8 +30,7 @@
 /**
  * Initialize the real file-system
  */
-ZipFilesystem::ZipFilesystem(const std::string zipfile)
-{
+ZipFilesystem::ZipFilesystem(std::string const & zipfile) {
    m_basename = FS_Filename(zipfile.c_str());
    m_zipfilename = zipfile;
    m_zipfile = m_unzipfile = 0;
@@ -52,8 +51,7 @@ ZipFilesystem::~ZipFilesystem()
 /**
  * Return true if this directory is writable.
  */
-const bool ZipFilesystem::IsWritable() const
-{
+bool ZipFilesystem::IsWritable() const {
 	return true; // should be checked in constructor
 }
 
@@ -62,23 +60,26 @@ const bool ZipFilesystem::IsWritable() const
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-const int32_t ZipFilesystem::FindFiles
-(std::string path,
- const std::string
+int32_t ZipFilesystem::FindFiles
+(std::string const & path_in,
+ std::string const &
 #ifndef NDEBUG
  pattern
 #endif
 ,
- filenameset_t * results, uint32_t)
+ filenameset_t     * const results,
+ uint32_t)
 {
    m_OpenUnzip();
 
    assert(pattern == "*"); // If you need something else, implement a proper glob() here. I do not want to! -- Holger
-
+	std::string path;
+	assert(path_in.size()); //  prevent invalid read below
+	if (path_in[0] != '/')
+		path = '/';
+	path += path_in;
 	if (path[path.size() - 1] != '/')
       path += '/';
-	if (path[0] != '/')
-      path = '/'+path;
 
    unzCloseCurrentFile(m_unzipfile);
    unzGoToFirstFile(m_unzipfile);
@@ -112,8 +113,7 @@ const int32_t ZipFilesystem::FindFiles
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-const bool ZipFilesystem::FileExists(std::string path)
-{
+bool ZipFilesystem::FileExists(std::string const & path_in) {
 	try {
       m_OpenUnzip();
       //TODO: check return code
@@ -126,8 +126,11 @@ const bool ZipFilesystem::FileExists(std::string path)
    char filename_inzip[256];
    memset(filename_inzip, ' ', 256);
 
-	if (path[0] != '/')
-      path = '/' + path;
+	std::string path;
+	assert(path_in.size()); //  prevent invalid read below
+	if (path_in[0] != '/')
+		path = '/';
+	path += path_in;
 
 	for (;;) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
@@ -151,8 +154,7 @@ const bool ZipFilesystem::FileExists(std::string path)
  * Returns true if the given file is a directory, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-const bool ZipFilesystem::IsDirectory(const std::string path)
-{
+bool ZipFilesystem::IsDirectory(std::string const & path) {
 
 	if (!FileExists(path))
       return false;
@@ -170,8 +172,7 @@ const bool ZipFilesystem::IsDirectory(const std::string path)
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem* ZipFilesystem::MakeSubFileSystem(std::string path)
-{
+FileSystem * ZipFilesystem::MakeSubFileSystem(std::string const & path) {
    m_OpenUnzip();
 
    assert(FileExists(path));
@@ -190,7 +191,8 @@ FileSystem* ZipFilesystem::MakeSubFileSystem(std::string path)
  * \todo type should be recognized automatically, \see Filesystem::Create
  * \throw ZipOperation_error
  */
-FileSystem* ZipFilesystem::CreateSubFileSystem(std::string path, Type type)
+FileSystem * ZipFilesystem::CreateSubFileSystem
+(std::string const & path, Type const type)
 {
    assert(!FileExists(path));
 
@@ -213,8 +215,7 @@ FileSystem* ZipFilesystem::CreateSubFileSystem(std::string path, Type type)
  * Remove a number of files
  * \throw ZipOperation_error
  */
-void ZipFilesystem::Unlink(const std::string filename)
-{
+void ZipFilesystem::Unlink(std::string const & filename) {
 	throw ZipOperation_error
 		("ZipFilesystem::Unlink",
 		 filename,
@@ -226,8 +227,7 @@ void ZipFilesystem::Unlink(const std::string filename)
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
-void ZipFilesystem::EnsureDirectoryExists(const std::string dirname)
-{
+void ZipFilesystem::EnsureDirectoryExists(std::string const & dirname) {
 	if (FileExists(dirname) && IsDirectory(dirname))
       return;
 
@@ -242,7 +242,7 @@ void ZipFilesystem::EnsureDirectoryExists(const std::string dirname)
  * MakeDirectory("onedir/otherdir/onemoredir") will fail
  * if either ondir or otherdir is missing
  */
-void ZipFilesystem::MakeDirectory(std::string dirname) {
+void ZipFilesystem::MakeDirectory(std::string const & dirname) {
    m_OpenZip();
 
    zip_fileinfo zi;
@@ -253,10 +253,13 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
    zi.internal_fa = 0;
    zi.external_fa = 0;
 
-	if (dirname[ dirname.size() - 1] != '/')
-      dirname += '/';
+	std::string complete_file = m_basename;
+	complete_file            += '/';
+	complete_file            += dirname;
+	assert(dirname.size());
+	if (complete_file[complete_file.size() - 1] != '/')
+		complete_file += '/';
 
-   std::string complete_file = m_basename + '/' + dirname;
 #ifndef NDEBUG
 	int32_t err =
 #endif
@@ -315,7 +318,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
  * Throws an exception if it fails.
  */
 void ZipFilesystem::Write
-(const std::string fname, const void * const data, const int32_t length)
+(std::string const & fname, void const * const data, int32_t const length)
 {
    m_OpenZip();
 

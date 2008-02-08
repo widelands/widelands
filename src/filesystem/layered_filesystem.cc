@@ -51,8 +51,7 @@ void LayeredFileSystem::listSubdirs() const
  * Just assume that at least one of our child FSs is writable
  * \todo Implement me
  */
-const bool LayeredFileSystem::IsWritable() const
-{
+bool LayeredFileSystem::IsWritable() const {
 	return true;
 }
 
@@ -88,10 +87,11 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem * const fs)
  * Returns the number of files found.
  */
 //TODO: return type is wrong
-const int32_t LayeredFileSystem::FindFiles(std::string path,
-                                       const std::string pattern,
-                                       filenameset_t *results,
-                                       uint32_t depth)
+int32_t LayeredFileSystem::FindFiles
+(std::string const &       path,
+ std::string const &       pattern,
+ filenameset_t     * const results,
+ uint32_t                  depth)
 {
 	uint32_t i=0;
 	if (depth==0)
@@ -118,8 +118,7 @@ const int32_t LayeredFileSystem::FindFiles(std::string path,
 /**
  * Returns true if the file can be found in at least one of the sub-filesystems
  */
-const bool LayeredFileSystem::FileExists(const std::string path)
-{
+bool LayeredFileSystem::FileExists(std::string const & path) {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
@@ -136,8 +135,7 @@ const bool LayeredFileSystem::FileExists(const std::string path)
  * Returns true if path is a directory in at least one of the directories
  * \todo What if it's a file in some and a dir in others?????
  */
-const bool LayeredFileSystem::IsDirectory(const std::string path)
-{
+bool LayeredFileSystem::IsDirectory(std::string const & path) {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
@@ -176,8 +174,8 @@ void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
  * Write the given block of memory out as a file to the first writable sub-FS.
  * Throws an exception if it fails.
  */
-void LayeredFileSystem::Write(const std::string fname, const void * const data,
-                              const int32_t length)
+void LayeredFileSystem::Write
+(std::string const & fname, void const * const data, int32_t const length)
 {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -234,8 +232,7 @@ StreamWrite * LayeredFileSystem::OpenStreamWrite
 /**
  * MakeDir in first writable directory
  */
-void LayeredFileSystem::MakeDirectory(const std::string dirname)
-{
+void LayeredFileSystem::MakeDirectory(std::string const & dirname) {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
@@ -254,8 +251,7 @@ void LayeredFileSystem::MakeDirectory(const std::string dirname)
 /**
  * EnsureDirectoryExists in first writable directory
  */
-void LayeredFileSystem::EnsureDirectoryExists(const std::string dirname)
-{
+void LayeredFileSystem::EnsureDirectoryExists(std::string const & dirname) {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
@@ -274,7 +270,7 @@ void LayeredFileSystem::EnsureDirectoryExists(const std::string dirname)
 /**
  * Create a subfilesystem from an existing file/directory
  */
-FileSystem* LayeredFileSystem::MakeSubFileSystem(const std::string dirname)
+FileSystem * LayeredFileSystem::MakeSubFileSystem(std::string const & dirname)
 {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -297,8 +293,8 @@ FileSystem* LayeredFileSystem::MakeSubFileSystem(const std::string dirname)
 /**
  * Create a subfilesystem from a new file/directory
  */
-FileSystem* LayeredFileSystem::CreateSubFileSystem(const std::string dirname,
-      const Type type)
+FileSystem * LayeredFileSystem::CreateSubFileSystem
+(std::string const & dirname, Type const type)
 {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -321,8 +317,7 @@ FileSystem* LayeredFileSystem::CreateSubFileSystem(const std::string dirname,
 /**
  * Remove this file or directory. If it is a directory, remove it recursively
  */
-void LayeredFileSystem::Unlink(const std::string file)
-{
+void LayeredFileSystem::Unlink(std::string const & file) {
 	if (!FileExists(file))
 		return;
 

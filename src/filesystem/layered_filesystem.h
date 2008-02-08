@@ -48,33 +48,33 @@ struct LayeredFileSystem : public FileSystem {
 	virtual void AddFileSystem(FileSystem * const fs);
 	virtual void RemoveFileSystem(FileSystem * const fs);
 
-	virtual const int32_t FindFiles(std::string path, const std::string pattern,
-	                            filenameset_t *results,
-	                            uint32_t depth=0);
+	virtual int32_t FindFiles
+		(std::string const & path,
+		 std::string const & pattern,
+		 filenameset_t     * results,
+		 uint32_t            depth = 0);
 
-	virtual const bool IsWritable() const;
-	virtual const bool FileExists(const std::string path);
-	virtual const bool IsDirectory(std::string path);
-	virtual void EnsureDirectoryExists(const std::string dirname);
-	virtual void MakeDirectory(const std::string dirname);
+	virtual bool IsWritable() const;
+	virtual bool            FileExists(std::string const & path);
+	virtual bool     IsDirectory      (std::string const & path);
+	virtual void EnsureDirectoryExists(std::string const & dirname);
+	virtual void   MakeDirectory      (std::string const & dirname);
 
-	virtual void * Load(const std::string & fname, size_t & length);
-	virtual void Write(const std::string fname, const void * const data,
-	                   const int32_t length);
+	virtual void * Load(std::string const & fname, size_t & length);
+	virtual void Write
+		(std::string const & fname, void const * data, int32_t length);
 
-	virtual StreamRead  * OpenStreamRead
-		(const std::string & fname);
-	virtual StreamWrite * OpenStreamWrite
-		(const std::string & fname);
+	virtual StreamRead  * OpenStreamRead (std::string const & fname);
+	virtual StreamWrite * OpenStreamWrite(std::string const & fname);
 
-	virtual FileSystem* MakeSubFileSystem(const std::string dirname);
-	virtual FileSystem* CreateSubFileSystem(const std::string dirname,
-	                                        const Type);
-	virtual void Unlink(const std::string file);
-	virtual void Rename(const std::string&, const std::string&);
+	virtual FileSystem * MakeSubFileSystem(std::string const & dirname);
+	virtual FileSystem * CreateSubFileSystem
+		(std::string const & dirname, Type);
+	virtual void Unlink(std::string const & file);
+	virtual void Rename(std::string const &, std::string const &);
 
 	void listSubdirs() const;
-	virtual const std::string getBasename() {return "";};
+	virtual std::string getBasename() {return std::string();};
 
 private:
 	typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;

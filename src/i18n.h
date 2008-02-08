@@ -30,10 +30,10 @@
  * Encapsulates i18n-handling
  */
 struct i18n {
-	static const std::string translate(const std::string);
-	static void grab_textdomain(const std::string);
+	static std::string translate      (std::string const &);
+	static void        grab_textdomain(std::string const &);
 	static void release_textdomain();
-	static void set_locale(const std::string="");
+	static void        set_locale     (std::string const & = std::string());
 	static const std::string get_locale() {return m_locale;}
 
 private:

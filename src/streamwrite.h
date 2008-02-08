@@ -73,7 +73,7 @@ struct StreamWrite {
 		uint32_t const y = Little32(x);
 		Data(&y, 4);
 	}
-	void String(const std::string str) {
+	void String(std::string const & str) {
 		Data(str.c_str(), str.size() + 1);
 	}
 	void CString(const char * const x) {Data(x, strlen(x) + 1);}

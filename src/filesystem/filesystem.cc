@@ -66,8 +66,8 @@ FileSystem::FileSystem()
  * \param extension The extension to append, without leading dot (unless you
  * want two consecutive dots)
  */
-const std::string FileSystem::AutoExtension(const std::string filename,
-                                            const std::string extension)
+std::string FileSystem::AutoExtension
+(std::string const & filename, std::string const & extension)
 {
 	const SSS_T suffix_length=extension.size()+1;
 	const SSS_T startpos=filename.size()-suffix_length;
@@ -162,8 +162,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
  * \param path A path that might or might not be absolute
  * \return An absolute path
  */
-const std::string FileSystem::AbsolutePath(const std::string path) const
-{
+std::string FileSystem::AbsolutePath(std::string const & path) const {
 	if (pathIsAbsolute(path))
 		return path;
 
@@ -173,8 +172,7 @@ const std::string FileSystem::AbsolutePath(const std::string path) const
 /**
  * \return The process' current working directory
  */
-const std::string FileSystem::getWorkingDirectory() const
-{
+std::string FileSystem::getWorkingDirectory() const {
 	char cwd[PATH_MAX+1];
 	getcwd(cwd, PATH_MAX);
 
@@ -185,8 +183,7 @@ const std::string FileSystem::getWorkingDirectory() const
  * \return An existing directory where temporary files can be put
  * \todo Is there a temp directory on win32? Where?
  */
-const std::string FileSystem::getTempDirectory()
-{
+std::string FileSystem::getTempDirectory() {
 	const char *tmpdir;
 
 #ifdef __WIN32__
@@ -231,7 +228,8 @@ std::string FileSystem::GetHomedir()
  *
  * \todo This does not really belong into a filesystem class
  */
-const std::vector<std::string> FileSystem::FS_Tokenize(const std::string path) const
+std::vector<std::string> FileSystem::FS_Tokenize
+(std::string const & path) const
 {
 	std::vector<std::string> components;
 	SSS_T pos;  //start of token
@@ -396,7 +394,7 @@ const char *FileSystem::FS_Filename(const char* buf) {
  * \throw FileTypeError if root is neither a directory or regular file
  * \todo throw FileTypeError if root is not a zipfile (exception from ZipFilesystem)
  */
-FileSystem *FileSystem::Create(std::string root)
+FileSystem * FileSystem::Create(std::string const & root)
 throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 {
 	struct stat statinfo;

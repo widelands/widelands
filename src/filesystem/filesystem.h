@@ -46,19 +46,24 @@ struct FileSystem {
 
 	virtual ~FileSystem() {}
 
-	virtual const int32_t FindFiles(std::string path, const std::string pattern,
-	                            filenameset_t *results, uint32_t depth=0) = 0;
+	virtual int32_t FindFiles
+		(std::string const & path,
+		 std::string const & pattern,
+		 filenameset_t     * results,
+		 uint32_t            depth = 0)
+		= 0;
 
-	virtual const bool IsWritable() const = 0;
-	virtual const bool IsDirectory(std::string path) = 0;
-	virtual const bool FileExists(const std::string path) = 0;
+	virtual bool IsWritable() const = 0;
+	virtual bool IsDirectory(std::string const & path) = 0;
+	virtual bool FileExists (std::string const & path) = 0;
 
 	virtual void * Load(const std::string & fname, size_t & length) = 0;
-	virtual void Write(const std::string fname, const void * const data,
-	                   const int32_t length) = 0;
-	virtual void EnsureDirectoryExists(const std::string dirname) = 0;
+	virtual void Write
+		(std::string const & fname, void const * data, int32_t length)
+		= 0;
+	virtual void EnsureDirectoryExists(std::string const & dirname) = 0;
 	//TODO: use this only from inside EnsureDirectoryExists()
-	virtual void MakeDirectory(const std::string dirname) = 0;
+	virtual void MakeDirectory(std::string const & dirname) = 0;
 
 	/**
 	 * Opens the given file for reading as a stream.
@@ -67,9 +72,7 @@ struct FileSystem {
 	 * \return a \ref StreamRead object for the file. The caller must delete this
 	 * object when done to close the file.
 	 */
-	virtual StreamRead * OpenStreamRead
-		(const std::string & fname)
-		= 0;
+	virtual StreamRead * OpenStreamRead(std::string const & fname) = 0;
 
 	/**
 	 * Opens the given file for writing as a stream.
@@ -81,34 +84,32 @@ struct FileSystem {
 	 * delete this object when done to close the file (which will implicitly
 	 * flush unwritten data).
 	 */
-	virtual StreamWrite * OpenStreamWrite
-		(const std::string & fname)
-		= 0;
+	virtual StreamWrite * OpenStreamWrite(std::string const & fname) = 0;
 
-	virtual FileSystem* MakeSubFileSystem(const std::string dirname) = 0;
-	virtual FileSystem* CreateSubFileSystem(const std::string dirname,
-	      const Type) = 0;
-	virtual void Unlink(const std::string) = 0;
+	virtual FileSystem * MakeSubFileSystem(std::string const & dirname) = 0;
+	virtual FileSystem * CreateSubFileSystem
+		(std::string const & dirname, const Type) = 0;
+	virtual void Unlink(std::string const &) = 0;
 	virtual void Rename(const std::string&, const std::string&) = 0;
 
-	static FileSystem *Create(const std::string root)
+	static FileSystem *Create(std::string const & root)
 	throw (FileType_error, FileNotFound_error, FileAccessDenied_error);
 
 	///Retrieve the filesystem root's name == the mountpoint inside a
 	///LayeredFileSystem
-	virtual const std::string getBasename() = 0;
+	virtual std::string getBasename() = 0;
 
 	// basic path/filename manipulation
-	const std::string getWorkingDirectory() const;
-	const std::string getTempDirectory();
+	std::string getWorkingDirectory() const;
+	std::string getTempDirectory();
 	std::string FS_CanonicalizeName(std::string const & path) const;
-	static const std::string AutoExtension(const std::string filename,
-	                                       const std::string extension);
+	static std::string AutoExtension
+		(std::string const & filename, std::string const & extension);
 	static const char *FS_StripExtension(char * const fname);
 	static const char *FS_RelativePath(char *buf, const int32_t buflen, const char *basefile, const char *filename);
 	bool pathIsAbsolute(std::string const & path) const;
-	const std::string AbsolutePath(const std::string path) const;
-	const std::vector<std::string> FS_Tokenize(const std::string path) const;
+	std::string              AbsolutePath(std::string const & path) const;
+	std::vector<std::string> FS_Tokenize (std::string const & path) const;
 	static const char *FS_Filename(const char* buf);
 	static std::string GetHomedir();
 

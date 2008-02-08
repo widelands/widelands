@@ -29,8 +29,7 @@ std::vector<std::string> i18n::m_textdomains=std::vector<std::string>();
  * Translate a string with gettext
  * \todo Implement a workaround if gettext was not found
  */
-const std::string i18n::translate(const std::string str)
-{
+std::string i18n::translate(std::string const & str) {
 	return std::string(gettext(str.c_str()));
 }
 
@@ -42,9 +41,8 @@ const std::string i18n::translate(const std::string str)
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void i18n::grab_textdomain(const std::string domain)
-{
-	const char* dom=domain.c_str();
+void i18n::grab_textdomain(std::string const & domain) {
+	char const * const dom = domain.c_str();
 
 	bind_textdomain_codeset(dom, "UTF-8");
 	bindtextdomain(dom, INSTALL_LOCALEDIR);
@@ -73,7 +71,7 @@ void i18n::release_textdomain()
 /**
  * Set the locale to the given string
  */
-void i18n::set_locale(const std::string str) {
+void i18n::set_locale(std::string const & str) {
 	// Somehow setlocale doesn't behave same on
 	// some systems.
 #ifdef __BEOS__
