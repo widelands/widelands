@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,8 +45,8 @@ struct Radiogroup {
 
 	int32_t add_button
 		(Panel * parent,
-		 const int32_t x, const int32_t y,
-		 const uint32_t picid, const char * const tooltip = 0);
+		 int32_t x, int32_t y,
+		 uint32_t picid, char const * tooltip = 0);
 
 	int32_t get_state() const throw () {return m_state;}
 	void set_state(int32_t state);

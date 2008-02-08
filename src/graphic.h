@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -90,10 +90,10 @@ struct Graphic {
 		ResizeMode_Average,
 	};
 
-	uint32_t get_resized_picture(const uint32_t, const uint32_t w, const uint32_t h, ResizeMode);
-	SDL_Surface* resize(const uint32_t index, const uint32_t w, const uint32_t h);
+	uint32_t get_resized_picture(uint32_t, uint32_t w, uint32_t h, ResizeMode);
+	SDL_Surface * resize(uint32_t index, uint32_t w, uint32_t h);
 
-	uint32_t get_maptexture(const char & fnametempl, const uint32_t frametime);
+	uint32_t get_maptexture(char const & fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
@@ -104,7 +104,7 @@ struct Graphic {
 	void screenshot(const char & fname) const;
 	const char* get_maptexture_picture (uint32_t id);
 	Texture* get_maptexture_data(uint32_t id);
-	AnimationGfx* get_animation(const uint32_t anim) const;
+	AnimationGfx * get_animation(uint32_t) const;
 
 	Surface* get_road_texture(int32_t roadtex);
 

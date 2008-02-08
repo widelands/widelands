@@ -248,7 +248,7 @@ struct FieldDebugWindow : public UI::Window {
 	virtual void think();
 
 	void open_immovable();
-	void open_bob(const uint32_t index);
+	void open_bob(uint32_t);
 
 private:
 	Widelands::Map             & m_map;

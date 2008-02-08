@@ -46,17 +46,17 @@ struct Trigger_Building_Option_Menu : public UI::Window {
 	Trigger_Building_Option_Menu
 		(Editor_Interactive &, Widelands::Trigger_Building &);
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive & eia();
 	void clicked_ok();
-	void clicked_decrease_x_coordinate(const uint8_t);
-	void clicked_increase_x_coordinate(const uint8_t);
-	void clicked_decrease_y_coordinate(const uint8_t);
-	void clicked_increase_y_coordinate(const uint8_t);
-	void clicked_change_player        (const bool up);
+	void clicked_decrease_x_coordinate(uint8_t);
+	void clicked_increase_x_coordinate(uint8_t);
+	void clicked_decrease_y_coordinate(uint8_t);
+	void clicked_increase_y_coordinate(uint8_t);
+	void clicked_change_player        (bool up);
 	void clicked_decrement_building   ();
 	void clicked_increment_building   ();
 	void clicked_decrement_count      ();

@@ -40,8 +40,8 @@ struct Event_Unhide_Area_Option_Menu : public UI::Window {
 	Event_Unhide_Area_Option_Menu
 		(Editor_Interactive &, Widelands::Event_Unhide_Area &);
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive & eia();

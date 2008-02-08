@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,16 +50,15 @@ private:
 	struct View : public UI::Panel {
 		View
 			(UI::Panel & parent,
-			 const  int32_t x, const  int32_t y,
-			 const uint32_t w, const uint32_t h,
+			 int32_t x, int32_t y, uint32_t w, uint32_t h,
 			 Interactive_Base &);
 
-		void set_view_pos(const int32_t x, const int32_t y);
+		void set_view_pos(int32_t x, int32_t y);
 
 		void draw(RenderTarget* dst);
 
-		bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-		bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+		bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+		bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 	private:
 		Interactive_Base & m_iabase;

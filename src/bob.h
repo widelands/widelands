@@ -149,7 +149,7 @@ struct Bob : public Map_Object {
 	void schedule_act(Game* g, uint32_t tdelta);
 	void skip_act();
 	void force_skip_act();
-	Point calc_drawpos(const Editor_Game_Base &, const Point) const;
+	Point calc_drawpos(Editor_Game_Base const &, Point) const;
 	void set_owner(Player *player);
 	Player * get_owner() const {return m_owner;}
 	void set_position(Editor_Game_Base* g, Coords f);
@@ -193,7 +193,7 @@ struct Bob : public Map_Object {
 		 const bool            forceonlast = false,
 		 const int32_t         only_step = -1);
 
-	void start_task_forcemove(const int32_t dir, const DirAnimations &);
+	void start_task_forcemove(int32_t dir, DirAnimations const &);
 
 	// higher level handling (task-based)
 	State* get_state()

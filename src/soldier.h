@@ -119,11 +119,11 @@ public:
    virtual void init(Editor_Game_Base*);
 
 	void set_level
-		(const uint32_t hp, const uint32_t attack, const uint32_t defense, const uint32_t evade);
-	void set_hp_level(const uint32_t);
-	void set_attack_level(const uint32_t);
-	void set_defense_level(const uint32_t);
-	void set_evade_level(const uint32_t);
+		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
+	void set_hp_level     (uint32_t);
+	void set_attack_level (uint32_t);
+	void set_defense_level(uint32_t);
+	void set_evade_level  (uint32_t);
 	uint32_t get_level (tAttribute) const;
 	uint32_t get_hp_level     () const {return m_hp_level;}
 	uint32_t get_attack_level () const {return m_attack_level;}
@@ -167,10 +167,10 @@ public:
 		(Editor_Game_Base*, const char * const animname, const uint32_t time);
 
 	/// Heal quantity of hit points instantly
-	void heal (const uint32_t);
+	void heal (uint32_t);
 
    /// Damage quantity of hit points
-	void damage (const uint32_t);
+	void damage (uint32_t);
 
 	///  This are used to control Requests (only called by Warehouse)
 	bool is_marked () const throw () {return m_marked;}

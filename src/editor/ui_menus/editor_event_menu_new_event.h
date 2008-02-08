@@ -37,8 +37,8 @@ struct Multiline_Textarea;
 struct Editor_Event_Menu_New_Event : public UI::Window {
 	Editor_Event_Menu_New_Event(Editor_Interactive &);
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive & eia();

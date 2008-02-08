@@ -59,14 +59,14 @@ struct RenderTarget {
 	int32_t get_h() const;
 
 	void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGBColor color);
-	void draw_rect(Rect r, const RGBColor clr);
-	void fill_rect(Rect r, const RGBColor clr);
-	void brighten_rect(Rect r, const int32_t factor);
+	void draw_rect(Rect, RGBColor);
+	void fill_rect(Rect, RGBColor);
+	void brighten_rect(Rect, int32_t factor);
 	void clear();
 
-	void blit(Point dst, const uint32_t picture);
-	void blitrect(Point dst, const uint32_t picture, Rect src);
-	void tile(Rect r, const uint32_t picture, Point ofs);
+	void blit(Point dst, uint32_t picture);
+	void blitrect(Point dst, uint32_t picture, Rect src);
+	void tile(Rect, uint32_t picture, Point ofs);
 
 	/**
 	 * Renders the map from a player's point of view into the current drawing

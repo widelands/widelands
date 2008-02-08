@@ -1065,15 +1065,15 @@ void Profile::write
 					// Show WL that a multilined text starts
 					tempstr += "\"";
 
-				for (uint32_t i = 0; i < strlen(str); i++) {
+				for (uint32_t i = 0; i < strlen(str); i++) {//  FIXME
 					// No speach marks - they would break the format
-					if (str[i] == '\"')
+					if (str[i] == '"')
 						tempstr += "''";
 					else {
 						// Convert the newlines to WL format.
 						if (str[i] == '\n') {
 							tempstr += " \"\n";
-							for (uint32_t j = 0; j <= spaces; j++)
+							for (uint32_t j = 0; j <= spaces; j++)//  FIXME
 								tempstr += " ";
 							tempstr += " \"";
 						} else

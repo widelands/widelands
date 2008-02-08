@@ -57,8 +57,8 @@ struct Map_Object_Descr {
 			return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
 		}
 
-		std::string get_animation_name(const uint32_t anim) const; // This is needed for save games and debug
-		bool has_attribute(uint32_t attr) const throw ();
+	std::string get_animation_name(uint32_t) const; //  needed for save, debug
+	bool has_attribute(uint32_t) const throw ();
 		static uint32_t get_attribute_id(std::string name);
 
 	protected:

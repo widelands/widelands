@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ struct Editor_Toolsize_Menu : public UI::UniqueWindow {
       Editor_Toolsize_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
 
 private:
-	void change_radius(const bool increase);
+	void change_radius(bool increase);
 
 	UI::Textarea                                   m_textarea;
 	UI::IDButton<Editor_Toolsize_Menu, const bool> m_increase, m_decrease;

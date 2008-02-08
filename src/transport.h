@@ -599,7 +599,7 @@ struct WaresQueue {
 	uint32_t get_filled          () const throw () {return m_filled;}
 	uint32_t get_consume_interval() const throw () {return m_consume_interval;}
 
-	void init(const int32_t ware, const uint32_t size);
+	void init(int32_t ware, uint32_t size);
 	void cleanup();
 	void update();
 
@@ -608,9 +608,9 @@ struct WaresQueue {
 	void remove_from_economy(Economy* e);
 	void add_to_economy(Economy* e);
 
-	void set_size            (const uint32_t) throw ();
-	void set_filled          (const uint32_t) throw ();
-	void set_consume_interval(const uint32_t) throw ();
+	void set_size            (uint32_t) throw ();
+	void set_filled          (uint32_t) throw ();
+	void set_consume_interval(uint32_t) throw ();
 
 	Player * get_owner() const throw () {return m_owner->get_owner();}
 

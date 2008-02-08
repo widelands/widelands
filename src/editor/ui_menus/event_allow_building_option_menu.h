@@ -42,13 +42,13 @@ struct Event_Allow_Building_Option_Menu : public UI::Window {
 	Event_Allow_Building_Option_Menu
 		(Editor_Interactive &, Widelands::Event_Allow_Building &);
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive & eia();
 	void clicked_ok();
-	void clicked_change_player     (const bool up);
+	void clicked_change_player     (bool up);
 	void clicked_decrement_building();
 	void clicked_increment_building();
 

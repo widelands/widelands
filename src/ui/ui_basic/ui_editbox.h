@@ -43,9 +43,10 @@ struct Edit_Box : private Basic_Button {
      void set_maximum_chars(int32_t n) {m_maxchars=n;}
 	int32_t get_maximum_chars() const {return m_maxchars;}
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousemove
+		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool handle_key(bool down, SDL_keysym);
      void handle_mousein(bool);
 

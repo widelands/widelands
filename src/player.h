@@ -95,9 +95,9 @@ struct Player {
 	const std::string & get_name() const throw () {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
 
-	void init(const bool place_headquarters);
+	void init(bool place_headquarters);
 
-	FieldCaps get_buildcaps(const FCoords) const;
+	FieldCaps get_buildcaps(FCoords) const;
 
 	// For cheating
 	void set_see_all(bool t) {m_see_all=t; m_view_changed = true;}

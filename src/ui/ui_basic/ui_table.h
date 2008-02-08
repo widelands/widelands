@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,30 +54,35 @@ template<typename Entry> struct Table {
 		std::string & get_string(uint32_t column) const;
 		int32_t  get_picid() const throw ();
 		Entry entry() const throw ();
-		void set_color(const RGBColor);
+		void set_color(RGBColor);
 
 		bool     use_color() const throw ();
 		RGBColor get_color() const throw ();
 
 	};
 
-	Table(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align = Align_Left, const bool up = false);
+	Table
+		(Panel * parent,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
+		 Align align = Align_Left, bool up = false);
 	~Table();
 
 	Signal1<uint32_t> selected;
 	Signal1<uint32_t> double_clicked;
 
-	void add_column(const std::string & name, const uint32_t width);
+	void add_column(const std::string & name, uint32_t width);
 
 	uint32_t get_nr_columns() const throw ();
 
    void clear();
-	void set_sort_column(const uint32_t col) throw ();
+	void set_sort_column(uint32_t col) throw ();
 	uint32_t get_sort_colum() const throw ();
 	bool get_sort_descending() const throw ();
 
-	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
-   void remove(const uint32_t i);
+	void sort
+		(uint32_t Begin = 0,
+		 uint32_t End   = std::numeric_limits<uint32_t>::max());
+   void remove(uint32_t);
 
 	void set_align(Align align);
 
@@ -87,15 +92,15 @@ template<typename Entry> struct Table {
 		 const bool select_this = false);
 
 	uint32_t size() const throw ();
-	Entry operator[](const uint32_t i) const throw ();
+	Entry operator[](uint32_t) const throw ();
 	static uint32_t no_selection_index() throw ();
 	bool has_selection() const throw ();
 	uint32_t selection_index() const throw ();
-	Entry_Record & get_record(const uint32_t n) const throw ();
+	Entry_Record & get_record(uint32_t) const throw ();
 	static Entry get(const Entry_Record &);
-	Entry_Record * find(const Entry) const throw ();
+	Entry_Record * find(Entry) const throw ();
 
-   void select(const uint32_t);
+   void select(uint32_t);
 	struct No_Selection {};
 	Entry_Record & get_selected_record() const;
 	Entry get_selected() const;
@@ -107,8 +112,8 @@ template<typename Entry> struct Table {
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 };
 
 template <> struct Table<void *> : public Panel {
@@ -118,7 +123,7 @@ template <> struct Table<void *> : public Panel {
 
       // Data Functions
 		void set_string(uint32_t column, const std::string &);
-		const std::string & get_string(const uint32_t column) const;
+		const std::string & get_string(uint32_t column) const;
 		int32_t  get_picid() const throw () {return m_picid;}
 		void * entry() const throw () {return m_entry;}
 		void set_color(const  RGBColor c) {
@@ -144,13 +149,13 @@ public:
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left,
-		 const bool descending = false);
+		 bool descending = false);
 	~Table();
 
 	Signal1<uint32_t> selected;
 	Signal1<uint32_t> double_clicked;
 
-	void add_column(const std::string & name, const uint32_t width);
+	void add_column(std::string const & name, uint32_t width);
 
 	uint32_t get_nr_columns() const throw () {return m_columns.size();}
 
@@ -162,13 +167,15 @@ public:
 	void set_sort_descending(const bool descending) throw ()
 	{m_sort_descending = descending;}
 
-	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
-   void remove(const uint32_t index);
+	void sort
+		(uint32_t Begin = 0,
+		 uint32_t End   = std::numeric_limits<uint32_t>::max());
+   void remove(uint32_t);
 
 	void set_align(Align align);
 
 	Entry_Record & add
-		(void * const entry = 0, const int32_t picid = -1, const bool select = false);
+		(void * entry = 0, int32_t picid = -1, bool select = false);
 
 	uint32_t size() const throw () {return m_entry_records.size();}
 	void * operator[](const uint32_t i) const throw ()
@@ -184,7 +191,7 @@ public:
 	{return er.entry();}
 	Entry_Record * find(const void * entry) const throw ();
 
-   void select(const uint32_t);
+   void select(uint32_t);
 	struct No_Selection {};
 	Entry_Record & get_selected_record() const {
 		if (m_selection == no_selection_index()) throw No_Selection();
@@ -202,8 +209,8 @@ public:
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	struct Column;
@@ -228,7 +235,7 @@ private:
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;
 
-	void header_button_clicked(const Columns::size_type);
+	void header_button_clicked(Columns::size_type);
 	typedef std::vector<Entry_Record *> Entry_Record_vector;
 	Entry_Record_vector m_entry_records;
 	void set_scrollpos(int32_t pos);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ struct Interactive_Player : public Interactive_Base {
 		UI::UniqueWindow::Registry objectives;
 	};
 
-	Interactive_Player(Widelands::Game &, const uint8_t pln);
+	Interactive_Player(Widelands::Game &, Widelands::Player_Number);
 	~Interactive_Player();
 
 	virtual void think();

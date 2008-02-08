@@ -531,9 +531,10 @@ Map::set_starting_pos
 Set the starting coordinates of a player
 ===============
 */
-void Map::set_starting_pos(const uint32_t plnum, const Coords c)
+void Map::set_starting_pos(Player_Number const plnum, Coords const c)
 {
-	assert(plnum >= 1 && plnum <= m_nrplayers);
+	assert(1 <= plnum);
+	assert     (plnum <= get_nrplayers());
 
 	m_starting_pos[plnum-1] = c;
 }
@@ -2506,11 +2507,11 @@ bool CheckStepRoad::reachabledest(Map* map, FCoords dest) const
 
 
 bool CheckStepLimited::allowed
-	(Map *, FCoords start, FCoords end, int32_t dir, StepId) const
+	(Map *, FCoords, FCoords const end, int32_t, StepId) const
 {
 	return m_allowed_locations.find(end) != m_allowed_locations.end();
 }
-bool CheckStepLimited::reachabledest(Map *, FCoords const dest) const {
+bool CheckStepLimited::reachabledest(Map *, FCoords) const {
 	return true;
 }
 

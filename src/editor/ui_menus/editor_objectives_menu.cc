@@ -47,8 +47,8 @@ struct Edit_Objective_Window : public UI::Window {
 		(Editor_Interactive * const parent,
 		 UI::Table<Objective &>::Entry_Record &);
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
       Editor_Interactive  *m_parent;

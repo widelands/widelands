@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,8 @@ public:
 		 int32_t const x, int32_t const y, Widelands::Tribe_Descr const &);
 	virtual ~WaresDisplay();
 
-	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool handle_mousemove
+		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
    void add_warelist(Widelands::WareList const *, wdType);
    void remove_all_warelists();

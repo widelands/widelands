@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,9 +72,10 @@ protected:
 	void update_for_index(int32_t idx);
 
 	void handle_mousein(bool inside);
-	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousemove
+		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	struct Item {

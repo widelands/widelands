@@ -71,7 +71,7 @@ public:
 
 public: // implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
-	virtual int32_t get_amount(const int32_t ware) const;
+	virtual int32_t get_amount(int32_t ware) const;
 	virtual bool is_active() const throw ();
 
 	virtual WareInstance & launch_item(Game * g, int32_t ware);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,8 +63,7 @@ private:
 	VisualizationArray m_visualizations;
 	std::string m_background;
 
-	void draw_background
-		(RenderTarget & rt, const uint32_t xres, const uint32_t yres);
+	void draw_background(RenderTarget & rt, uint32_t xres, uint32_t yres);
 	void update(bool repaint);
 };
 };

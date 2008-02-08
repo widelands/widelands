@@ -76,8 +76,8 @@ struct Editor_Game_Base {
 	// Player commands
 	void remove_player(Player_Number);
 	Player * add_player
-		(const Player_Number plnum,
-		 const int32_t type,
+		(Player_Number,
+		 int32_t             type,
 		 const std::string & tribe,
 		 const std::string & name);
 	Player * get_player(const int32_t n) const {
@@ -90,24 +90,22 @@ struct Editor_Game_Base {
 		assert     (n <= MAX_PLAYERS);
 		return *m_players[n - 1];
 	}
-	virtual Player * get_safe_player(const int32_t n);
+	virtual Player * get_safe_player(Player_Number);
 
 	// loading stuff
 	void allocate_player_maps();
 	virtual void postload();
 	void load_graphics(UI::ProgressWindow & loader_ui);
 	virtual void cleanup_for_load
-		(const bool flush_graphics = true, const bool flush_animations = true);
+		(bool flush_graphics = true, bool flush_animations = true);
 
 	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building * warp_building
-		(const Coords,
-		 const Player_Number,
-		 const Building_Descr::Index);
-		Building* warp_constructionsite(Coords c, int8_t owner, int32_t idx, int32_t oldid=-1);
-	Bob * create_bob(const Coords, const Bob::Descr::Index, const Tribe_Descr * const = 0);
+	Building * warp_building(Coords, Player_Number, Building_Descr::Index);
+	Building * warp_constructionsite
+		(Coords, Player_Number, int32_t idx, int32_t oldid = -1);
+	Bob * create_bob(Coords, Bob::Descr::Index, const Tribe_Descr * const = 0);
 	Immovable & create_immovable(Coords, int32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
 		(Coords, std::string const & name, Tribe_Descr const *);
@@ -182,14 +180,14 @@ protected:
 	 */
 	virtual void do_conquer_area
 		(Player_Area<Area<FCoords> > player_area,
-		 const bool conquer,
-		 const Player_Number preferred_player = 0,
-		 const bool neutral_when_no_influence = false,
-		 const bool neutral_when_competing_influence = false,
-		 const bool conquer_guarded_location_by_superior_influence = false);
+		 bool          conquer,
+		 Player_Number preferred_player                               = 0,
+		 bool          neutral_when_no_influence                      = false,
+		 bool          neutral_when_competing_influence               = false,
+		 bool          conquer_guarded_location_by_superior_influence = false);
 
 private:
-	void cleanup_playerimmovables_area(const Area<FCoords>);
+	void cleanup_playerimmovables_area(Area<FCoords>);
 
 	int32_t m_gametime;
 	Player                   * m_players[MAX_PLAYERS];

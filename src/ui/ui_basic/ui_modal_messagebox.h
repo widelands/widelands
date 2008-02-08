@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,14 +32,14 @@ struct Modal_Message_Box : public Window {
          YESNO
 	};
 	Modal_Message_Box
-		(Panel * const parent,
+		(Panel * parent,
 		 const std::string & caption,
 		 const std::string & text,
-		 const MB_Type);
+		 MB_Type);
       ~Modal_Message_Box();
 
-	bool handle_mousepress  (const Uint8 btn, int32_t mx, int32_t my);
-	bool handle_mouserelease(const Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);
 };
 };
 

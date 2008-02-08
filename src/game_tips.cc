@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -100,7 +100,7 @@ GameTips::~GameTips() {
 }
 
 // conver 2-char hex string into uint32_t
-const uint32_t GameTips::colorvalue_from_hex(const char c1, const char c2) {
+uint32_t GameTips::colorvalue_from_hex(char const c1, char const c2) {
 	uint32_t ret = 0;
 	if (c1 >= '0' && c1 <= '9')
 		ret += (c1 - '0') * 16;
@@ -124,7 +124,7 @@ const uint32_t GameTips::colorvalue_from_hex(const char c1, const char c2) {
 }
 
 // convert CSS hex color value to RGBColor
-const RGBColor GameTips::color_from_hex
+RGBColor GameTips::color_from_hex
 (const char * hexcode, const RGBColor & def)
 {
 	if (NULL == hexcode)

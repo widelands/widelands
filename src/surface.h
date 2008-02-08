@@ -78,22 +78,20 @@ public:
 
 	/// For the slowest: Indirect pixel access
 	uint32_t get_pixel(uint32_t x, uint32_t y);
-	void set_pixel(uint32_t x, uint32_t y, const Uint32 clr);
+	void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
 
 	void clear();
-	void draw_rect(const Rect, const RGBColor);
-	void fill_rect(const Rect, const RGBColor);
-	void brighten_rect(const Rect, const int32_t factor);
+	void draw_rect(Rect, RGBColor);
+	void fill_rect(Rect, RGBColor);
+	void brighten_rect(Rect, int32_t factor);
 
 	void blit(Point dst, Surface* src, Rect srcrc);
 	void fast_blit(Surface* src);
 
 	void draw_minimap
-		(Widelands::Editor_Game_Base const & egbase,
-		 Widelands::Player           const * const,
-		 const Rect                rc,
-		 const Point               viewpoint,
-		 const uint32_t                flags);
+		(Widelands::Editor_Game_Base const &,
+		 Widelands::Player           const *,
+		 Rect, Point, uint32_t flags);
 
 
 	/// sw16_terrain.cc

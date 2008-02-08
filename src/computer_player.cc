@@ -691,7 +691,7 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 }
 
 struct FindNodeUnowned:FindNode {
-	virtual bool accept (const Map &, const FCoords) const;
+	virtual bool accept (Map const &, FCoords) const;
 };
 
 bool FindNodeUnowned::accept (const Map &, const FCoords fc) const

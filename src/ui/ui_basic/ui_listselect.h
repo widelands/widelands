@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,13 +53,13 @@ struct BaseListselect : public Panel {
 		 uint32_t value,
 		 const int32_t picid = -1,
 		 const bool select_this = false);
-	void remove(const uint32_t i);
-	void remove(const char * const name);
+	void remove(uint32_t);
+	void remove(const char * name);
 
-	void switch_entries(const uint32_t, const uint32_t);
+	void switch_entries(uint32_t, uint32_t);
 
-	void set_entry_color(const uint32_t n, const RGBColor) throw ();
-	void set_align(const Align);
+	void set_entry_color(uint32_t, RGBColor) throw ();
+	void set_align(Align);
 
 	uint32_t size() const throw ()
 	{
@@ -82,7 +82,7 @@ struct BaseListselect : public Panel {
 		return m_selection;
 	}
 
-	void select(const uint32_t i);
+	void select(uint32_t i);
 	bool has_selection() const throw ();
 
 	struct No_Selection {};
@@ -96,13 +96,13 @@ struct BaseListselect : public Panel {
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	static const int32_t DOUBLE_CLICK_INTERVAL = 500; // half a second
 
-	void set_scrollpos(const int32_t);
+	void set_scrollpos(int32_t);
 
 private:
 	static const int32_t ms_darken_value=-20;

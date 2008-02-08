@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,8 @@ class Coords;
 struct Map_Attack_Controller_Data_Packet;
 
 
-uint32_t getMaxAttackSoldiers(const Editor_Game_Base &, const Flag &, const Player_Number);
+uint32_t getMaxAttackSoldiers
+	(Editor_Game_Base const &, Flag const &, Player_Number);
 
 struct AttackController : public BaseImmovable {
 	friend struct Map_Attack_Controller_Data_Packet;

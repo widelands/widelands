@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,29 +38,29 @@ struct Textarea : public Panel {
 	 * from a Multiline_Textarea in that Multiline_Textarea provides scrollbars.
 	 */
 	Textarea
-		(Panel * const parent,
-		 const int32_t x, const int32_t y,
+		(Panel * parent,
+		 int32_t x, int32_t y,
 		 const std::string & text,
-		 const Align align = Align_Left, const bool multiline = false);
+		 Align align = Align_Left, bool multiline = false);
+
+	Textarea
+		(Panel * parent,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
+		 Align align = Align_Left, bool multiline = false);
 
 	Textarea
 		(Panel *  const parent,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const Align align = Align_Left, const bool multiline = false);
-
-	Textarea
-		(Panel *  const parent,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const std::string & text,
-		 const Align align = Align_Left, const bool multiline = false);
+		 Align align = Align_Left, bool multiline = false);
 
 	void set_text(const std::string &);
-	void set_align(const Align);
+	void set_align(Align);
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
 
-	void set_font(const std::string & name, const int32_t size, const RGBColor fg) {
+	void set_font(std::string const & name, int32_t size, RGBColor fg) {
 		m_fontname = name;
 		m_fontsize = size;
 		m_fcolor   = fg;

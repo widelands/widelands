@@ -138,7 +138,7 @@ struct NetHost:public NetGame {
 
 private:
 	void send_game_message (const char*);
-	void send_chat_message_int (const Chat_Message);
+	void send_chat_message_int (Chat_Message);
 	void send_player_info ();
 	void update_network_delay ();
 
@@ -203,7 +203,7 @@ struct Serializer : public Widelands::StreamWrite {
 
 	void send (TCPsocket);
 
-	void Data(const void * const data, const size_t size);
+	void Data(void const * data, size_t size);
 
 	void putchar (char v)
 	{
@@ -238,7 +238,7 @@ struct Deserializer : public Widelands::StreamRead {
 
 	bool avail () const throw () {return not queue.empty();}
 
-	size_t Data(void* const data, const size_t bufsize);
+	size_t Data(void * data, size_t bufsize);
 	bool EndOfFile() const;
 
 	char getchar ();

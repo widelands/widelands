@@ -55,7 +55,7 @@ struct StreamRead {
 	 */
 	virtual bool EndOfFile() const = 0;
 
-	void DataComplete(void * const data, const size_t size);
+	void DataComplete(void * data, size_t size);
 
 	int8_t Signed8();
 	uint8_t Unsigned8();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -161,8 +161,8 @@ struct WLApplication {
 		{return SDL_GetKeyState(0)[key];}
 
 	//@{
-	void warp_mouse(const Point position);
-	void set_input_grab(const bool grab);
+	void warp_mouse(Point);
+	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
 	Point get_mouse_position() const throw () {return m_mouse_position;}
@@ -174,8 +174,7 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
-	void init_graphics(const int32_t w, const int32_t h, const int32_t bpp,
-	                   const bool fullscreen);
+	void init_graphics(int32_t w, int32_t h, int32_t bpp, bool fullscreen);
 
 	void handle_input(const InputCallback *cb);
 

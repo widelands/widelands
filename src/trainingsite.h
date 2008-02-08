@@ -41,8 +41,8 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	bool get_train_defense() const throw () {return m_train_defense;}
 	bool get_train_evade  () const throw () {return m_train_evade;}
 
-	int32_t get_min_level(const tAttribute) const;
-	int32_t get_max_level(const tAttribute) const;
+	int32_t get_min_level(tAttribute) const;
+	int32_t get_max_level(tAttribute) const;
 private:
 	/** Maximum number of soldiers for a training site*/
 	int32_t m_num_soldiers;

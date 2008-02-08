@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,9 +52,10 @@ struct Map_View : public UI::Panel {
 	void draw(RenderTarget* dst);
 
 	// Event handling
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousemove
+		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
 	void track_sel(Point m);
    void need_complete_redraw() {m_complete_redraw_needed = true;}

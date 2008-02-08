@@ -98,7 +98,7 @@ public:
 		Editor_Make_Infrastructure_Tool make_infrastructure;
 	} tools;
 
-	void select_tool(Editor_Tool &, const Editor_Tool::Tool_Index);
+	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
 
 	Widelands::Player * get_player() const throw () {return 0;}
 

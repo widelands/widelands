@@ -47,7 +47,7 @@ private:
 	void forbidden_selected      (uint32_t);
 	void allowed_double_clicked  (uint32_t);
 	void forbidden_double_clicked(uint32_t);
-	void clicked                 (const bool allow);
+	void clicked                 (bool allow);
       void update();
 };
 

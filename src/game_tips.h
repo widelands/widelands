@@ -40,8 +40,8 @@ private:
 	};
 
 	void show_tip(int32_t index);
-	const RGBColor color_from_hex(const char * hexcode, const RGBColor & def);
-	const uint32_t colorvalue_from_hex(const char c1, const char c2);
+	RGBColor color_from_hex(const char * hexcode, const RGBColor & def);
+	uint32_t colorvalue_from_hex(char c1, char c2);
 
 	uint32_t             m_lastUpdated;
 	uint32_t             m_updateAfter;

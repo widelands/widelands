@@ -179,19 +179,22 @@ struct Map {
 
    // for editor
 	void create_empty_map
-		(uint32_t const w = 64, uint32_t const h = 64,
+		(uint32_t w = 64, uint32_t h = 64,
 		 std::string const & worldname = "greenland");
 
    void load_graphics();
    void recalc_whole_map();
-   void recalc_for_field_area(const Area<FCoords>);
+   void recalc_for_field_area(Area<FCoords>);
    void recalc_default_resources();
 
-	void set_nrplayers(Player_Number const nrplayers);
+	void set_nrplayers(Player_Number);
 
-	void set_starting_pos(const uint32_t plnum, const Coords);
-	Coords get_starting_pos(const uint32_t plnum) const
-	{return m_starting_pos[plnum - 1];}
+	void set_starting_pos(Player_Number, Coords);
+	Coords get_starting_pos(Player_Number const p) const {
+		assert(p);
+		assert(p <= get_nrplayers());
+		return m_starting_pos[p - 1];
+	}
 
 	void set_filename(const char *string);
 	void set_author(const char *string);
@@ -220,7 +223,7 @@ struct Map {
 	void set_scenario_player_tribe(Player_Number, const std::string &);
 	void set_scenario_player_name (Player_Number, const std::string &);
 
-	BaseImmovable * get_immovable(const Coords) const;
+	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
 		(const Area<FCoords>,
 		 std::vector<Bob *> * list,
@@ -250,9 +253,9 @@ struct Map {
 		 const FindNode &);
 
 	// Field logic
-	static Map_Index get_index(Coords const c, X_Coordinate const width);
+	static Map_Index get_index(Coords, X_Coordinate width);
 	Map_Index max_index() const {return m_width * m_height;}
-	Field & operator[](Map_Index const)  const;
+	Field & operator[](Map_Index) const;
 	Field & operator[](Coords) const;
 	Field * get_field(Coords) const __attribute__((deprecated));
 	FCoords get_fcoords(Coords) const;
@@ -260,45 +263,44 @@ struct Map {
 	FCoords get_fcoords(Field &) const;
 	void get_coords(Field & f, Coords & c) const;
 
-	uint32_t calc_distance(const Coords, const Coords) const;
-	int32_t is_neighbour(const Coords, const Coords) const;
+	uint32_t calc_distance(Coords, Coords) const;
+	int32_t is_neighbour(Coords, Coords) const;
 
-	int32_t calc_cost_estimate(const Coords, const Coords) const;
-	int32_t calc_cost_lowerbound(const Coords, const Coords) const;
-	int32_t calc_cost(const int32_t slope) const;
-	int32_t calc_cost(const Coords, const int32_t dir) const;
-	int32_t calc_bidi_cost(const Coords, const int32_t dir) const;
+	int32_t calc_cost_estimate(Coords, Coords) const;
+	int32_t calc_cost_lowerbound(Coords, Coords) const;
+	int32_t calc_cost(int32_t slope) const;
+	int32_t calc_cost(Coords, int32_t dir) const;
+	int32_t calc_bidi_cost(Coords, int32_t dir) const;
 	void calc_cost(const Path &, int32_t * forward, int32_t * backward) const;
 
-	void get_ln (const  Coords,  Coords * const) const;
-	void get_ln (const FCoords, FCoords * const) const;
-	Coords  l_n (const  Coords) const;
-	FCoords l_n (const FCoords) const;
-	void get_rn (const  Coords,  Coords * const) const;
-	void get_rn (const FCoords, FCoords * const) const;
-	Coords  r_n (const  Coords) const;
-	FCoords r_n (const FCoords) const;
-	void get_tln(const  Coords,  Coords * const) const;
-	void get_tln(const FCoords, FCoords * const) const;
-	Coords  tl_n(const  Coords) const;
-	FCoords tl_n(const FCoords) const;
-	void get_trn(const  Coords,  Coords * const) const;
-	void get_trn(const FCoords, FCoords * const) const;
-	Coords  tr_n(const  Coords) const;
-	FCoords tr_n(const FCoords) const;
-	void get_bln(const  Coords,  Coords * const) const;
-	void get_bln(const FCoords, FCoords * const) const;
-	Coords  bl_n(const  Coords) const;
-	FCoords bl_n(const FCoords) const;
-	void get_brn(const  Coords,  Coords * const) const;
-	void get_brn(const FCoords, FCoords * const) const;
-	Coords  br_n(const  Coords) const;
-	FCoords br_n(const FCoords) const;
+	void get_ln  (Coords,  Coords *) const;
+	void get_ln (FCoords, FCoords *) const;
+	Coords  l_n  (Coords) const;
+	FCoords l_n (FCoords) const;
+	void get_rn  (Coords,  Coords *) const;
+	void get_rn (FCoords, FCoords *) const;
+	Coords  r_n  (Coords) const;
+	FCoords r_n (FCoords) const;
+	void get_tln (Coords,  Coords *) const;
+	void get_tln(FCoords, FCoords *) const;
+	Coords  tl_n (Coords) const;
+	FCoords tl_n(FCoords) const;
+	void get_trn (Coords,  Coords *) const;
+	void get_trn(FCoords, FCoords *) const;
+	Coords  tr_n (Coords) const;
+	FCoords tr_n(FCoords) const;
+	void get_bln (Coords,  Coords *) const;
+	void get_bln(FCoords, FCoords *) const;
+	Coords  bl_n (Coords) const;
+	FCoords bl_n(FCoords) const;
+	void get_brn (Coords,  Coords *) const;
+	void get_brn(FCoords, FCoords *) const;
+	Coords  br_n (Coords) const;
+	FCoords br_n(FCoords) const;
 
-	void get_neighbour(const Coords, const Direction dir, Coords * const) const;
-	void get_neighbour
-		(const FCoords, const Direction dir, FCoords * const) const;
-	FCoords get_neighbour(const FCoords f, const Direction dir) const throw ();
+	void get_neighbour (Coords, Direction dir,  Coords *) const;
+	void get_neighbour(FCoords, Direction dir, FCoords *) const;
+	FCoords get_neighbour(FCoords, Direction dir) const throw ();
 
 	// Pathfinding
 	int32_t findpath
@@ -313,7 +315,7 @@ struct Map {
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
 	 * MOVECAPS_WALK and at least one of the neighbours has MOVECAPS_SWIM
 	 */
-	bool can_reach_by_water(const Coords) const;
+	bool can_reach_by_water(Coords) const;
 
 	/**
 	 * Sets the height to a value. Recalculates brightness. Changes the
@@ -325,7 +327,7 @@ struct Map {
 	 * so it will be terribly slow. Use set_height for Area for that purpouse
 	 * instead.
 	 */
-	uint32_t set_height(const FCoords, Player_Number const new_value);
+	uint32_t set_height(FCoords, Player_Number new_value);
 
 	/// Changes the height of the nodes in an Area by a difference.
 	uint32_t change_height(Area<FCoords>, int16_t const difference);
@@ -368,9 +370,9 @@ struct Map {
 	Military_Influence calc_influence(const Coords a, const Area<>) const;
 
 private:
-	void set_size(const uint32_t w, const uint32_t h);
+	void set_size(uint32_t w, uint32_t h);
 	void load_world();
-	void recalc_border(const FCoords);
+	void recalc_border(FCoords);
 
 	uint16_t m_pathcycle;
 	Player_Number m_nrplayers; // # of players this map supports (!= Game's number of players)
@@ -462,7 +464,7 @@ struct FindNodeCaps : public FindNode {
 	FindNodeCaps(uint8_t mincaps) : m_mincaps(mincaps) {}
    virtual ~FindNodeCaps() {}  // make gcc shut up
 
-	virtual bool accept(const Map &, const FCoords coord) const;
+	virtual bool accept(Map const &, FCoords) const;
 
 	uint8_t m_mincaps;
 };
@@ -474,7 +476,7 @@ struct FindNodeAnd : public FindNode {
 
 	void add(const FindNode* findfield, bool negate = false);
 
-	virtual bool accept(const Map &, const FCoords coord) const;
+	virtual bool accept(Map const &, FCoords) const;
 
 	struct Subfunctor {
 		bool              negate;
@@ -499,7 +501,7 @@ struct FindNodeSize : public FindNode {
 	FindNodeSize(Size size) : m_size(size) {}
    virtual ~FindNodeSize() {}  // make gcc shut up
 
-	virtual bool accept(const Map &, const FCoords coord) const;
+	virtual bool accept(Map const &, FCoords) const;
 
 	Size m_size;
 };
@@ -510,7 +512,7 @@ struct FindNodeSizeResource : public FindNodeSize {
    FindNodeSizeResource(Size size, int32_t res) : FindNodeSize(size) {m_res=res;}
    virtual ~FindNodeSizeResource() {}  // make gcc shut up
 
-   virtual bool accept(const Map &, const FCoords coord) const;
+   virtual bool accept(Map const &, FCoords) const;
 
    int32_t m_res;
 };
@@ -527,7 +529,7 @@ struct FindNodeImmovableSize : public FindNode {
 	FindNodeImmovableSize(uint32_t sizes) : m_sizes(sizes) {}
    virtual ~FindNodeImmovableSize() {}  // make gcc shut up
 
-	virtual bool accept(const Map &, const FCoords coord) const;
+	virtual bool accept(Map const &, FCoords) const;
 
 	uint32_t m_sizes;
 };
@@ -537,7 +539,7 @@ struct FindNodeImmovableAttribute : public FindNode {
 	FindNodeImmovableAttribute(uint32_t attrib) : m_attribute(attrib) {}
    virtual ~FindNodeImmovableAttribute() {}  // make gcc shut up
 
-	virtual bool accept(const Map &, const FCoords coord) const;
+	virtual bool accept(Map const &, FCoords) const;
 
 	uint32_t m_attribute;
 };
@@ -548,7 +550,7 @@ struct FindNodeResource : public FindNode {
 	FindNodeResource(uint8_t res) : m_resource(res) {}
    virtual ~FindNodeResource() {}  // make gcc shut up
 
-	virtual bool accept(const Map &, const FCoords coord) const;
+	virtual bool accept(Map const &, FCoords) const;
 
 	uint8_t m_resource;
 };
@@ -657,7 +659,7 @@ struct Path {
 	Direction operator[](const Step_Vector::size_type i) const throw ()
 	{assert(i < m_path.size()); return m_path[m_path.size() - i - 1];}
 
-	void append(const Map & map, const Direction dir);
+	void append(Map const & map, Direction);
 
 private:
 	Coords m_start;

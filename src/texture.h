@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,8 @@ struct Road_Textures {
 * changed to load 8 bit bitmaps directly.
 */
 struct Texture {
-	Texture(const char & fnametempl, const uint32_t frametime, const SDL_PixelFormat &);
+	Texture
+		(char const & fnametempl, uint32_t frametime, const SDL_PixelFormat &);
 	~Texture();
 
 	const char * get_texture_picture() {return m_texture_picture;}
@@ -51,7 +52,7 @@ struct Texture {
 	uint8_t* get_curpixels() const {return m_curframe;}
 	void* get_colormap () const {return m_colormap->get_colormap();}
 
-	uint32_t get_minimap_color(const char shade);
+	uint32_t get_minimap_color(char shade);
 
 	void animate(uint32_t time);
 	void reset_was_animated() {m_was_animated = false;}

@@ -81,7 +81,7 @@ struct Interactive_Base : public Map_View {
 	uint32_t get_sel_radius() const throw () {return m_sel.radius;}
 	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
 	void set_sel_freeze(const bool yes) throw () {m_sel.freeze = yes;}
-	void set_sel_radius(const uint32_t n);
+	void set_sel_radius(uint32_t);
 
 	void move_view_to(Widelands::Coords);
 		void move_view_to_point(Point pos);

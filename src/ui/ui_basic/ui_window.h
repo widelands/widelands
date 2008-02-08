@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,10 +63,10 @@ struct Window : public Panel {
 
 	void think();
 
-	bool handle_mousepress  (const Uint8 btn, int32_t mx, int32_t my);
-	bool handle_mouserelease(const Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);
 	bool handle_mousemove
-		(const Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
+		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
 
 private:
 	void dock_left();

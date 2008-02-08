@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,8 +75,8 @@ struct Panel : public Object {
 	virtual void end();
 
 	// Geometry
-	void set_size(const uint32_t nw, const uint32_t nh);
-	void set_pos(const Point);
+	void set_size(uint32_t nw, uint32_t nh);
+	void set_pos(Point);
 	virtual void move_inside_parent();
 
 	int32_t get_x() const {return _x;}
@@ -127,14 +127,14 @@ struct Panel : public Object {
 	virtual void think();
 
 	Point get_mouse_position() const throw ();
-	void set_mouse_pos(const Point);
+	void set_mouse_pos(Point);
 	void center_mouse();
 
 	virtual void handle_mousein(bool inside);
-	virtual bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	virtual bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove
-		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
 
 	void set_handle_mouse(bool yes);

@@ -602,7 +602,9 @@ Create a building site at the given x/y location for the given building type.
 if oldi != -1 this is a constructionsite comming from an enhancing action
 ===============
 */
-Building* Editor_Game_Base::warp_constructionsite(Coords c, int8_t owner, int32_t idx, int32_t old_id)
+Building * Editor_Game_Base::warp_constructionsite
+	(Coords const c, Player_Number const owner,
+	 int32_t const idx, int32_t const old_id)
 {
 	Player            & plr   = player(owner);
 	Tribe_Descr const & tribe = plr.tribe();
@@ -616,8 +618,6 @@ Building* Editor_Game_Base::warp_constructionsite(Coords c, int8_t owner, int32_
 
 /*
 ===============
-Editor_Game_Base::create_bob
-
 Instantly create a bob at the given x/y location.
 
 idx is the bob type.
@@ -638,8 +638,6 @@ Bob * Editor_Game_Base::create_bob
 
 /*
 ===============
-Editor_Game_Base::create_immovable
-
 Create an immovable at the given location.
 If tribe is not zero, create a immovable of a player (not a PlayerImmovable
 but an immovable defined by the players tribe)
@@ -750,8 +748,7 @@ In the game, this is the same as get_player(). If it returns
 zero it means that this player is disabled in the game.
 ================
 */
-Player * Editor_Game_Base::get_safe_player(const int32_t n)
-{
+Player * Editor_Game_Base::get_safe_player(Player_Number const n) {
 	return get_player(n);
 }
 

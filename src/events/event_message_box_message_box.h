@@ -34,8 +34,8 @@ struct Message_Box_Event_Message_Box : public UI::Window {
 	Message_Box_Event_Message_Box
 		(Widelands::Game *, Widelands::Event_Message_Box *,
 		 int32_t, int32_t, int32_t, int32_t);
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Widelands::Game                      * m_game;

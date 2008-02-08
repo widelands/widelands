@@ -41,7 +41,7 @@ Event & create(size_t);
 /// Creates an event of the type with the given number.
 ///
 /// Assumes that the given index is less than the number of event types.
-Event & create(size_t, char const * const name, Event::State const state);
+Event & create(size_t, char const * name, Event::State state);
 
 /// Creates an event of the type with the given type name.
 ///

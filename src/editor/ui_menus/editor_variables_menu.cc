@@ -41,8 +41,8 @@ using Widelands::Variable;
 struct New_Variable_Window : public UI::Window {
 	New_Variable_Window(Editor_Interactive &);
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 	Variable * get_variable() {return m_variable;}
 
@@ -54,7 +54,7 @@ private:
 	UI::IDButton<New_Variable_Window, const Variable_Type> button_string;
 	UI::IDButton<New_Variable_Window, int32_t>                 button_back;
 
-	void clicked_new(const Variable_Type);
+	void clicked_new(Variable_Type);
 };
 
 New_Variable_Window::New_Variable_Window(Editor_Interactive & parent) :
@@ -133,8 +133,8 @@ struct Edit_Variable_Window : public UI::Window {
 	Edit_Variable_Window
 		(Editor_Interactive &, UI::Table<Variable &>::Entry_Record &);
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive                     & m_parent;

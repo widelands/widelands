@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ public:
 	uint32_t get_pagesize() const {return m_pagesize;}
 	uint32_t get_pos() const {return m_pos;}
 
-	bool handle_mousepress  (const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 
    void set_force_draw(bool t) {m_force_draw=t;}
 
@@ -70,14 +70,14 @@ private:
 
 	void action(Area area);
 
-	void draw_button(RenderTarget &, const Area area, const Rect);
-	void draw_area(RenderTarget &, const Area, const Rect);
+	void draw_button(RenderTarget &, Area, Rect);
+	void draw_area  (RenderTarget &, Area, Rect);
 	void draw(RenderTarget* dst);
 	void think();
 
-	bool handle_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_mousemove
-		(const Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
+		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
 
 private:
 	bool m_horizontal;

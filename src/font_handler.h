@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,22 +76,22 @@ public:
 	void draw_string
 		(RenderTarget &,
 		 const std::string & font,
-		 int32_t size,
-		 const RGBColor fg, const RGBColor bg,
-		 Point dstpoint,
+		 int32_t             size,
+		 RGBColor fg, RGBColor bg,
+		 Point               dstpoint,
 		 const std::string & text,
-		 const Align align = Align_CenterLeft,
-		 const int32_t wrap = -1,
-		 const Widget_Cache widget_cache = Widget_Cache_None,
-		 uint32_t * const widget_cache_id = 0,
-		 const int32_t caret = -1,
-		 bool transparent = true);
+		 Align               align           = Align_CenterLeft,
+		 int32_t             wrap            = -1,
+		 Widget_Cache        widget_cache    = Widget_Cache_None,
+		 uint32_t          * widget_cache_id = 0,
+		 int32_t             caret           = -1,
+		 bool                transparent     = true);
 	void get_size
-		(const std::string & fontname, const int32_t size,
+		(std::string const & fontname, int32_t size,
 		 std::string text,
 		 int32_t *w, int32_t *h, int32_t wrap = -1);
 	int32_t calc_linewidth(TTF_Font &, const std::string & text);
-	uint32_t get_fontheight(const std::string & name, const int32_t size);
+	uint32_t get_fontheight(std::string const & name, int32_t size);
 	std::string remove_first_space(const std::string &text);
 	std::string word_wrap_text
 		(TTF_Font &,
