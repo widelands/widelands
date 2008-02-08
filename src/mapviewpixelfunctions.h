@@ -45,7 +45,8 @@ uint32_t get_map_end_screen_y(Widelands::Map const &);
  * the point is in. But this should be fully correct for all but the most
  * bizarre triangle shapes, and acceptable even for them.
  *
- * \note More documentation exists in HTML-format with figures in doc/geometry.
+ * \note More documentation exists in HTML-format with figures in
+ * <a href="../../../../geometry/index.html">doc/geometry</a>.
  */
 Widelands::Node_and_Triangle<> calc_node_and_triangle
 	(Widelands::Map const &, uint32_t x, uint32_t y);
