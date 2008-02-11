@@ -97,7 +97,9 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	},
 	{
 		"unhide_area",            _("Unhide area"),
-		_("Gives vision for a specified amount of time of all locations whithin an area to the player.")
+		_
+		("Gives vision for a specified amount of time of all locations whithin "
+		 "an area to the player.")
 	},
 };
 
@@ -105,9 +107,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 Event & create(size_t const id) {
 	return
 		create
-		(id,
-		 i18n::translate(EVENT_TYPE_DESCRIPTIONS[id].name).c_str(),
-		 Event::INIT);
+		(id, i18n::translate(EVENT_TYPE_DESCRIPTIONS[id].name), Event::INIT);
 }
 
 

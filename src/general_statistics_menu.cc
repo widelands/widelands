@@ -132,53 +132,53 @@ m_parent(&parent) //  FIXME redundant (base already stores parent pointer)
 	} else //  player nr p does not exist
 		m_cbs[p - 1] = 0;
 
-   posx = spacing;
-   posy += 25+spacing+spacing;
+	posx = spacing;
+	posy += 25 + spacing + spacing;
 
    // Below, Radiobuttons for what to display
-   m_radiogroup = new UI::Radiogroup();
-   button_size = (get_inner_w()-(spacing*8)) / 7;
-   m_radiogroup->add_button
+	m_radiogroup = new UI::Radiogroup();
+	button_size = (get_inner_w() - spacing * 8) / 7;
+	m_radiogroup->add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_landsize.png"),
-		 _("Land").c_str());
-   posx+=button_size + spacing;
-   m_radiogroup->add_button
+		 _("Land"));
+	posx += button_size + spacing;
+	m_radiogroup->add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrworkers.png"),
-		 _("Workers").c_str());
-   posx+=button_size + spacing;
-   m_radiogroup->add_button
+		 _("Workers"));
+	posx += button_size + spacing;
+	m_radiogroup->add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrbuildings.png"),
-		 _("Buildings").c_str());
+		 _("Buildings"));
 	posx += button_size + spacing;
 	m_radiogroup->add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrwares.png"),
-		 _("Wares").c_str());
-   posx+=button_size + spacing;
-   m_radiogroup->add_button
+		 _("Wares"));
+	posx += button_size + spacing;
+	m_radiogroup->add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_productivity.png"),
-		 _("Productivity").c_str());
-   posx+=button_size + spacing;
-   m_radiogroup->add_button
+		 _("Productivity"));
+	posx += button_size + spacing;
+	m_radiogroup->add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_kills.png"),
-		 _("Kills").c_str());
-   posx+=button_size + spacing;
-   m_radiogroup->add_button
+		 _("Kills"));
+	posx += button_size + spacing;
+	m_radiogroup->add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_militarystrength.png"),
-		 _("Military").c_str());
+		 _("Military"));
 	m_radiogroup->set_state(0);
 	m_selected_information = 0;
 	m_radiogroup->changedto.set

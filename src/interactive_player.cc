@@ -162,8 +162,9 @@ void Interactive_Player::think()
 	{//  draw speed display
 		char buffer[32];
 		if (uint32_t speed = m_game->get_speed())
-			snprintf(buffer, sizeof(buffer), _("%ux").c_str(), speed);
-		else strncpy (buffer, _("PAUSE").c_str(), sizeof(buffer));
+			snprintf(buffer, sizeof(buffer), _("%ux"), speed);
+		else
+			strncpy (buffer, _("PAUSE"), sizeof(buffer));
 		m_label_speed.set_text(buffer);
 	}
 

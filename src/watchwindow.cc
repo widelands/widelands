@@ -105,7 +105,7 @@ WatchWindow::WatchWindow
  Widelands::Coords    const coords,
  bool                 const single_window)
 :
-UI::Window     (&parent, x, y, w, h, _("Watch").c_str()),
+UI::Window     (&parent, x, y, w, h, _("Watch")),
 m_game         (parent.get_game()),
 m_mapview      (this, 0, 0, 200, 166, parent),
 m_single_window(single_window),

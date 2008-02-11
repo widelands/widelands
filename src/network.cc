@@ -887,18 +887,17 @@ void NetClient::disconnect ()
 /*** class NetStatusWindow ***/
 
 NetStatusWindow::NetStatusWindow (UI::Panel* parent) :
-UI::Window(parent, 0, 0, 256, 192, _("Starting network game").c_str()),
+UI::Window(parent, 0, 0, 256, 192, _("Starting network game")),
 table(this, 0, 0, 256, 192)
 {
 	table.add_column (_("Player"), 192);
 	table.add_column (_("Status"),  64);
 }
 
-void NetStatusWindow::add_player (int32_t num)
-{
+void NetStatusWindow::add_player (int32_t const num) {
 	char buffer[64];
 
-	snprintf (buffer, sizeof(buffer), "%s %d", _("Player").c_str(), num);
+	snprintf (buffer, sizeof(buffer), _("Player %d"), num);
 
 	Entry entry = {&table.add(), num};
 	entry.entry->set_string (0, buffer);

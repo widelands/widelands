@@ -114,7 +114,7 @@ void Interactive_Spectator::think()
 
 		if (uint32_t speed = get_game()->get_speed()) {
 			char buffer[32];
-			snprintf(buffer, sizeof(buffer), _("%ux").c_str(), speed);
+			snprintf(buffer, sizeof(buffer), _("%ux"), speed);
 			text = buffer;
 		} else {
 			text = _("PAUSE");

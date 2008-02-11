@@ -43,7 +43,7 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
  TriggerConditional * const cond,
  Widelands::EventChain         *       chain)
 :
-UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
+UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional")),
 m_given_cond (cond),
 m_event_chain(chain)
 {

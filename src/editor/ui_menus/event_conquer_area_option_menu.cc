@@ -46,7 +46,7 @@ Editor_Interactive & Event_Conquer_Area_Option_Menu::eia() {
 Event_Conquer_Area_Option_Menu::Event_Conquer_Area_Option_Menu
 (Editor_Interactive & parent, Widelands::Event_Conquer_Area & event)
 :
-UI::Window(&parent, 0, 0, 180, 280, _("Conquer Area Event Options").c_str()),
+UI::Window(&parent, 0, 0, 180, 280, _("Conquer Area Event Options")),
 m_event(event),
 m_player_area(event.m_player_area)
 {
@@ -285,8 +285,7 @@ void Event_Conquer_Area_Option_Menu::clicked_ok() {
 					(buffer, sizeof(buffer),
 					 _
 					 ("There is another event registered with the name \"%s\". "
-					  "Choose another name.")
-					 .c_str(),
+					  "Choose another name."),
 					 name);
 				UI::Modal_Message_Box mb
 					(get_parent(),

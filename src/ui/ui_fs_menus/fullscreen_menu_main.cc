@@ -89,7 +89,11 @@ exit
  &Fullscreen_Menu_Main::end_modal, this, mm_exit,
  _("Exit Game")),
 
-version(this, MENU_XRES-25, MENU_YRES-29, _("Version")+" "+BUILD_ID, Align_Right),
+version
+(this,
+ MENU_XRES - 25,
+ MENU_YRES - 29,
+ std::string(_("Version ")) + BUILD_ID, Align_Right),
 copyright
 (this,
  15, MENU_YRES - 29,

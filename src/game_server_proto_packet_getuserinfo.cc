@@ -65,8 +65,7 @@ void Game_Server_Protocol_Packet_GetUserInfo::handle_reply(Game_Server_Connectio
 			(buffer, sizeof(buffer),
 			 _
 			 ("The User %s is currently not logged in or unknown to the "
-			  "server.\n")
-			 .c_str(),
+			  "server.\n"),
 			 m_username.c_str());
 
 		gsc->server_message(buffer);

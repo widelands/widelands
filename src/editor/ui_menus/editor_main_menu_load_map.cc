@@ -53,7 +53,7 @@ Create all the buttons etc...
 */
 Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 :
-UI::Window(parent, 0, 0, 500, 300, _("Load Map").c_str()),
+UI::Window(parent, 0, 0, 500, 300, _("Load Map")),
 m_parent(parent) //  FIXME redundant (base stores parent pointer)
 {
 	int32_t const spacing =  5;

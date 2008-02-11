@@ -41,7 +41,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
  UI::UniqueWindow::Registry     & registry)
 :
 Editor_Tool_Options_Menu
-(parent, registry, 164, 120, _("Resources Tools Options").c_str()),
+(parent, registry, 164, 120, _("Resources Tools Options")),
 
 m_change_by_label
 (this,

@@ -40,8 +40,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
  Editor_Place_Bob_Tool      & pit,
  UI::UniqueWindow::Registry & registry)
 :
-Editor_Tool_Options_Menu
-(parent, registry, 100, 100, _("Bobs Menu").c_str()),
+Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs Menu")),
 
 m_tabpanel              (this, 0, 0, 1),
 m_pit                   (pit)

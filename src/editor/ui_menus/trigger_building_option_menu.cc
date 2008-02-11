@@ -46,7 +46,7 @@ inline static void update_label_player
 (UI::Textarea & ta, Widelands::Player_Number const p)
 {
 	char buffer[32];
-	snprintf(buffer, sizeof(buffer), _("Player: %u").c_str(), p);
+	snprintf(buffer, sizeof(buffer), _("Player: %u"), p);
 	ta.set_text(buffer);
 }
 
@@ -55,7 +55,7 @@ inline static void update_label_count
 (UI::Textarea & ta, Trigger_Building::Count_Type const count)
 {
 	char buffer[32];
-	snprintf(buffer, sizeof(buffer), _("How many: %u").c_str(), count);
+	snprintf(buffer, sizeof(buffer), _("How many: %u"), count);
 	ta.set_text(buffer);
 }
 
@@ -65,8 +65,7 @@ inline static void update_label_building
 {
 	char buffer[128];
 	snprintf
-		(buffer, sizeof(buffer),
-		 _("Building: %s").c_str(), building.descname().c_str());
+		(buffer, sizeof(buffer), _("Building: %s"), building.descname().c_str());
 	ta.set_text(buffer);
 }
 
@@ -76,8 +75,7 @@ inline static void update_label_coords
 {
 	char buffer[32];
 	snprintf
-		(buffer, sizeof(buffer),
-		 _("(X, Y): (%i, %i)").c_str(), coords.x, coords.y);
+		(buffer, sizeof(buffer), _("(X, Y): (%i, %i)"), coords.x, coords.y);
 	ta.set_text(buffer);
 }
 
@@ -86,7 +84,7 @@ inline static void update_label_radius
 (UI::Textarea & ta, Widelands::Player_Area<>::Radius_type const radius)
 {
 	char buffer[32];
-	snprintf(buffer, sizeof(buffer), _("Radius: %u").c_str(), radius);
+	snprintf(buffer, sizeof(buffer), _("Radius: %u"), radius);
 	ta.set_text(buffer);
 }
 
@@ -98,7 +96,7 @@ inline static void update_label_radius
 Trigger_Building_Option_Menu::Trigger_Building_Option_Menu
 (Editor_Interactive & parent, Trigger_Building & trigger)
 :
-UI::Window(&parent, 0, 0, 280, 280, _("Building Trigger Options").c_str()),
+UI::Window(&parent, 0, 0, 280, 280, _("Building Trigger Options")),
 m_trigger (trigger),
 
 m_player_area
@@ -530,8 +528,7 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 					(buffer, sizeof(buffer),
 					 _
 					 ("There is another trigger registered with the name \"%s\". "
-					  "Choose another name.")
-					 .c_str(),
+					  "Choose another name."),
 					 name);
 				UI::Modal_Message_Box mb
 					(get_parent(),

@@ -116,7 +116,8 @@ void Worker_Descr::parse
 	sglobal = prof->get_safe_section("global");
 
 	m_descname = sglobal->get_string("descname", name().c_str());
-	m_helptext = sglobal->get_string("help", _("Doh... someone forgot the help text!").c_str());
+	m_helptext =
+		sglobal->get_string("help", _("Doh... someone forgot the help text!"));
 
 	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
 	const char * string = sglobal->get_string("menu_pic", buffer);

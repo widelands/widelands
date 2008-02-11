@@ -42,8 +42,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu
  Editor_Set_Terrain_Tool    & tool,
  UI::UniqueWindow::Registry & registry)
 :
-Editor_Tool_Options_Menu
-(parent, registry, 0, 0, _("Terrain Select").c_str()),
+Editor_Tool_Options_Menu(parent, registry, 0, 0, _("Terrain Select")),
 
 m_cur_selection(this, 0, 0, 0, 20, Align_Center),
 m_tool(tool)

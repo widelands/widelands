@@ -42,7 +42,7 @@ inline static void update_label_player
 (UI::Textarea & ta, Widelands::Player_Number const p)
 {
 	char buffer[32];
-	snprintf(buffer, sizeof(buffer), _("Player: %u").c_str(), p);
+	snprintf(buffer, sizeof(buffer), _("Player: %u"), p);
 	ta.set_text(buffer);
 }
 
@@ -52,8 +52,7 @@ inline static void update_label_building
 {
 	char buffer[128];
 	snprintf
-		(buffer, sizeof(buffer),
-		 _("Building: %s").c_str(), building.descname().c_str());
+		(buffer, sizeof(buffer), _("Building: %s"), building.descname().c_str());
 	ta.set_text(buffer);
 }
 
@@ -65,7 +64,7 @@ inline static void update_label_building
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu
 (Editor_Interactive & parent, Widelands::Event_Allow_Building & event)
 :
-UI::Window(&parent, 0, 0, 200, 280, _("Allow Building Event Options").c_str()),
+UI::Window(&parent, 0, 0, 200, 280, _("Allow Building Event Options")),
 m_event   (event),
 m_player  (m_event.m_player),
 m_building(m_event.m_building),
@@ -198,8 +197,7 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 					(buffer, sizeof(buffer),
 					 _
 					 ("There is another event registered with the name \"%s\". "
-					  "Choose another name.")
-					 .c_str(),
+					  "Choose another name."),
 					 name);
 				UI::Modal_Message_Box mb
 					(get_parent(),

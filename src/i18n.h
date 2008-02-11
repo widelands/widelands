@@ -27,8 +27,8 @@
 #define _(str) i18n::translate(str)
 
 namespace i18n {
-std::string translate(char        const *);
-std::string translate(std::string const &);
+char const * translate(char        const *);
+char const * translate(std::string const &);
 
 void    grab_textdomain(std::string const &);
 void release_textdomain();

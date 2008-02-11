@@ -97,7 +97,7 @@ throw (_wexception)
 							ol->register_object(egbase, reg, &immovable);
 					} else
 						throw wexception
-							("world %u does not define immovable type \"%s\"",
+							("world %s does not define immovable type \"%s\"",
 							 world.get_name(), name);
 				}
 			}

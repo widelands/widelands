@@ -270,7 +270,7 @@ Initialize the field debug window.
 FieldDebugWindow::FieldDebugWindow
 (Interactive_Base & parent, Widelands::Coords const coords)
 :
-UI::Window(&parent, 0, 60, 200, 400, _("Debug Field").c_str()),
+UI::Window(&parent, 0, 60, 200, 400, _("Debug Field")),
 m_map     (parent.egbase().map()),
 m_coords  (m_map.get_fcoords(coords)),
 
@@ -319,9 +319,8 @@ void FieldDebugWindow::think()
 	str = "";
 	snprintf
 		(buffer, sizeof(buffer),
-		 "%i, %i - %s %i\n",
-		 m_coords.x, m_coords.y,
-		 _("height:").c_str(), m_coords.field->get_height());
+		 _("%i, %i - height: %u\n"),
+		 m_coords.x, m_coords.y, m_coords.field->get_height());
 	str += buffer;
 	Widelands::Map_Index const i = m_coords.field - &m_map[0];
 	Widelands::Editor_Game_Base const & egbase =

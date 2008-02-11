@@ -44,7 +44,7 @@ inline Editor_Interactive & Event_Message_Box_Option_Menu::eia() {
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
 (Editor_Interactive & parent, Widelands::Event_Message_Box & event)
 :
-UI::Window(&parent, 0, 0, 430, 400, _("Message Box Event Options").c_str()),
+UI::Window(&parent, 0, 0, 430, 400, _("Message Box Event Options")),
 m_event   (event)
 {
 	int32_t const offsx   =  5;
@@ -232,8 +232,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 					(buffer, sizeof(buffer),
 					 _
 					 ("There is another event registered with the name \"%s\". "
-					  "Choose another name.")
-					 .c_str(),
+					  "Choose another name."),
 					 name);
 				UI::Modal_Message_Box mb
 					(get_parent(),

@@ -58,7 +58,7 @@ private:
 };
 
 New_Variable_Window::New_Variable_Window(Editor_Interactive & parent) :
-UI::Window(&parent, 0, 0, 135, 55, _("New Variable").c_str()),
+UI::Window(&parent, 0, 0, 135, 55, _("New Variable")),
 
 m_parent(parent),
 m_variable(0),
@@ -107,7 +107,7 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
 
 	Manager<Variable> & mvm = m_parent.egbase().map().mvm();
 	for (uint32_t n = 1; mvm[buffer]; ++n)
-		snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
+		snprintf(buffer, sizeof(buffer), _("Unnamed%u"), n);
 
 	std::string name = buffer;
 	switch (i) {
@@ -152,7 +152,7 @@ private:
 Edit_Variable_Window::Edit_Variable_Window
 (Editor_Interactive & parent, UI::Table<Variable &>::Entry_Record & te)
 :
-UI::Window(&parent, 0, 0, 250, 85, _("Edit Variable").c_str()),
+UI::Window(&parent, 0, 0, 250, 85, _("Edit Variable")),
 
 m_parent(parent),
 m_te(te),
@@ -213,8 +213,7 @@ void Edit_Variable_Window::clicked_ok() {
 			char buffer[1024];
 			snprintf
 				(buffer, sizeof(buffer),
-				 "%s %s",
-				 m_value.get_text(), _("is not a valid integer!").c_str());
+				 _("\"%s\" is not a valid integer!"), m_value.get_text());
 			UI::Modal_Message_Box mb
 				(&m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
 			mb.run();

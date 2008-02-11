@@ -222,8 +222,7 @@ void S2_Map_Loader::load_s2mf_header()
 	m_map.set_author(header.author);
 	m_map.set_name(header.name);
 	m_map.set_nrplayers(header.nplayers);
-	m_map.set_description
-		(_("Bluebyte Settlers II Map. No comment defined!").c_str());
+	m_map.set_description(_("Bluebyte Settlers II Map. No comment defined!"));
 
 	//  This is not the name, this is the directory of the world, so please
 	//  do not translate it.

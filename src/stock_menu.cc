@@ -71,12 +71,12 @@ void Stock_Menu::clicked_switch_page() {
 	case Wares:
 		current_page = Workers;
 		fill_waredisplay_with_workers();
-		switchpage.set_tooltip(_("Show wares").c_str());
+		switchpage.set_tooltip(_("Show wares"));
 		break;
 	case Workers:
 		current_page = Wares;
 		fill_waredisplay_with_wares();
-		switchpage.set_tooltip(_("Show workers").c_str());
+		switchpage.set_tooltip(_("Show workers"));
 		break;
 	default:
 		assert(false);

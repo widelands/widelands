@@ -41,7 +41,7 @@ inline Editor_Interactive & Editor_Event_Menu_New_Trigger::eia() {
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 (Editor_Interactive & parent)
-: UI::Window(&parent, 0, 0, 400, 240, _("New Trigger").c_str())
+: UI::Window(&parent, 0, 0, 400, 240, _("New Trigger"))
 {
 
 	int32_t const offsx   =  5;
@@ -61,7 +61,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 	m_trigger_type_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
 	m_trigger_type_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
 	for (uint32_t i = 0; i < nr_trigger_types(); ++i)
-		m_trigger_type_list->add(_(type_descr(i).name).c_str(), i);
+		m_trigger_type_list->add(_(type_descr(i).name), i);
 	m_trigger_type_list->sort();
 
 	//  descr List

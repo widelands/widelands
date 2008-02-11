@@ -179,7 +179,7 @@ void Fullscreen_Menu_InetLobby::user_info(std::string user, std::string game, st
 
 	snprintf
 		(buffer, sizeof(buffer),
-		 _("User %s is using \"%s\" in room \"%s\"\n").c_str(),
+		 _("User %s is using \"%s\" in room \"%s\"\n"),
 		 user.c_str(), game.c_str(), room.c_str());
 	server_message(buffer);
 }

@@ -36,10 +36,10 @@ std::string locale;
  * Translate a string with gettext
  * \todo Implement a workaround if gettext was not found
  */
-std::string translate(char const * const str) {
+char const * translate(char const * const str) {
 	return gettext(str);
 }
-std::string translate(std::string const & str) {
+char const * translate(std::string const & str) {
 	return gettext(str.c_str());
 }
 

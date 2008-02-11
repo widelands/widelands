@@ -44,8 +44,9 @@ inline Editor_Interactive & Editor_Event_Menu_Edit_EventChain::eia() {
 
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain
-(Editor_Interactive & parent, Widelands::EventChain & chain) :
-UI::Window   (&parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
+(Editor_Interactive & parent, Widelands::EventChain & chain)
+:
+UI::Window   (&parent, 0, 0, 505, 340, _("Edit Event Chain")),
 m_event_chain(chain)
 {
 	int32_t const offsx    =   5;

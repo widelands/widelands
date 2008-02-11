@@ -78,10 +78,7 @@ Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 
 Trigger & create(size_t const id) {
 	return
-		create
-		(id,
-		 i18n::translate(TRIGGER_TYPE_DESCRIPTIONS[id].name).c_str(),
-		 false);
+		create(id, i18n::translate(TRIGGER_TYPE_DESCRIPTIONS[id].name), false);
 }
 
 

@@ -158,7 +158,7 @@ confirm building destruction when the building's base flag is removed.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, Widelands::PlayerImmovable* todestroy)
-	: UI::Window(parent, 0, 0, 160, 90, _("Destroy building?").c_str())
+	: UI::Window(parent, 0, 0, 160, 90, _("Destroy building?"))
 {
 	std::string text;
 
@@ -678,7 +678,7 @@ void Building_Window::setup_capsbuttons()
 			char buffer[128];
 			snprintf
 				(buffer, sizeof(buffer),
-				 _("Enhance to %s").c_str(), building.descname().c_str());
+				 _("Enhance to %s"), building.descname().c_str());
 			new UI::IDButton<Building_Window, Widelands::Building_Descr::Index>
 				(m_capsbuttons,
 				 x, 0, 34, 34,
@@ -815,7 +815,7 @@ void Building_Window::toggle_workarea() {
 	if (m_workarea_job_id) {
 		overlay_manager.remove_overlay(m_workarea_job_id);
 		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
-		m_toggle_workarea->set_tooltip(_("Show workarea").c_str());
+		m_toggle_workarea->set_tooltip(_("Show workarea"));
 	} else {
 		m_workarea_job_id = overlay_manager.get_a_job_id();
 		Widelands::HollowArea<> hollow_area
@@ -841,7 +841,7 @@ void Building_Window::toggle_workarea() {
 			while (mr.advance(map));
 			hollow_area.hole_radius = hollow_area.radius;
 		}
-		m_toggle_workarea->set_tooltip(_("Hide workarea").c_str());
+		m_toggle_workarea->set_tooltip(_("Hide workarea"));
 	}
 }
 
@@ -1140,7 +1140,7 @@ private:
  */
 ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)
 :
-UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str())
+UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 {
 	m_ps          = ps;
 	m_ps_location = ps->get_position();
@@ -1755,7 +1755,8 @@ private:
 };
 
 TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps)
-	: UI::Window(parent, 0, 0, 320, 125, _("Training Options").c_str()) {
+	: UI::Window(parent, 0, 0, 320, 125, _("Training Options"))
+{
 
 	int32_t _bs = 22;
 	int32_t _cn = 20;

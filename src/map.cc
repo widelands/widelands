@@ -407,9 +407,9 @@ void Map::create_empty_map
 	set_world_name(worldname.c_str());
 	load_world();
 	set_size(w, h);
-	set_name(_("No Name").c_str());
-	set_author(_("Unknown").c_str());
-	set_description(_("no description defined").c_str());
+	set_name       (_("No Name"));
+	set_author     (_("Unknown"));
+	set_description(_("no description defined"));
 	set_nrplayers(1);
 	// Set first tribe found as the "basic" tribe
 	// <undefined> (as set before) is useless and will lead to a crash -> Widelands will search for tribe "<undefined>"

@@ -130,13 +130,13 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t i)
 			dif = 0;
 
 		// Print informations
-		tacampname.set_text(s->get_string(cname, _("[No value found]").c_str()));
+		tacampname .set_text(s->get_string(cname,        _("[No value found]")));
 		tadifficulty.set_text(dif_descriptions[dif]);
-		tacampdescr.set_text(s->get_string(cdescription, _("[No value found]").c_str()));
+		tacampdescr.set_text(s->get_string(cdescription, _("[No value found]")));
 
 	} else { // normally never here
 		b_ok.set_enabled(false);
-		tacampname  .set_text(_("[Invalid entry]").c_str());
+		tacampname  .set_text(_("[Invalid entry]"));
 		tadifficulty.set_text("");
 		tacampdescr .set_text("");
 	}
@@ -205,7 +205,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 			difficulty = dif_picture_filenames[dif];
 
 			list.add
-				(s->get_string(cname, _("[No value found]").c_str()),
+				(s->get_string(cname, _("[No value found]")),
 				 s->get_string(csection),
 				 g_gr->get_picture(PicMod_Game, difficulty.c_str()));
 
@@ -325,13 +325,13 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t const i) {
 		b_ok.set_enabled(true);
 
 		// Print informations
-		tamapname .set_text(s->get_string("name", _("[No value found]").c_str()));
-		taauthor  .set_text(s->get_string("author", _("[No value found]").c_str()));
-		tamapdescr.set_text(s->get_string("descr", _("[No value found]").c_str()));
+		tamapname .set_text(s->get_string("name",   _("[No value found]")));
+		taauthor  .set_text(s->get_string("author", _("[No value found]")));
+		tamapdescr.set_text(s->get_string("descr",  _("[No value found]")));
 
 	} else { // normally never here
 		b_ok.set_enabled(false);
-		tamapname .set_text(_("[Invalid entry]").c_str());
+		tamapname .set_text(_("[Invalid entry]"));
 		taauthor  .set_text("");
 		tamapdescr.set_text("");
 	}
@@ -391,7 +391,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 	while ((s = prof.get_section(mapsection.c_str()))) {
 		if (c->get_bool(mapsection.c_str())) {
 			list.add
-				(s->get_string("name", _("[No value found]").c_str()),
+				(s->get_string("name", _("[No value found]")),
 				 s->get_string("path"),
 				 g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
 		}

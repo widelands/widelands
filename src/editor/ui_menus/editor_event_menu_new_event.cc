@@ -41,7 +41,7 @@ inline Editor_Interactive & Editor_Event_Menu_New_Event::eia() {
 
 Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
 (Editor_Interactive & parent)
-: UI::Window(&parent, 0, 0, 400, 240, _("New Event").c_str())
+: UI::Window(&parent, 0, 0, 400, 240, _("New Event"))
 {
 
 	int32_t const offsx   =  5;
@@ -59,7 +59,7 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
 		(this, &Editor_Event_Menu_New_Event::double_clicked);
 
 	for (uint32_t i = 0; i < nr_event_types(); ++i)
-		m_event_type_list->add(_(type_descr(i).name).c_str(), i);
+		m_event_type_list->add(_(type_descr(i).name), i);
 	m_event_type_list->sort();
 
 	//  descr List

@@ -64,7 +64,7 @@ Edit_Objective_Window::Edit_Objective_Window
 (Editor_Interactive * const parent,
  UI::Table<Objective &>::Entry_Record & te)
 :
-UI::Window(parent, 0, 0, 250, 85, _("Edit Objective").c_str()),
+UI::Window(parent, 0, 0, 250, 85, _("Edit Objective")),
 m_parent  (parent),
 m_te      (te)
 {
@@ -242,7 +242,7 @@ void Editor_Objectives_Menu::clicked_new() {
 	Manager<Objective> & mom = map.mom();
 	Manager<Trigger>   & mtm = map.mtm();
 	for (uint32_t n = 1;; ++n) {
-		snprintf(buffer, sizeof(buffer), _("Unnamed%u").c_str(), n);
+		snprintf(buffer, sizeof(buffer), _("Unnamed%u"), n);
 		if (not mom[buffer] and not mtm[buffer])
 			break;
 	}

@@ -349,14 +349,14 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 
 		Widelands::Map & map = eia().egbase().map();
 		for (uint32_t n = 1;; ++n) {
-			snprintf(buffer, sizeof(buffer), "%s%u", _("Unnamed").c_str(), n);
+			snprintf(buffer, sizeof(buffer), _("Unnamed%u"), n);
 			if (not map.mcm()[buffer])
 				break;
 		}
 
 		evch.set_name(buffer);
 		map.mcm().register_new(evch);
-		m_eventchain_list->add(_("Unnamed").c_str(), &evch, -1, true);
+		m_eventchain_list->add(_("Unnamed"), &evch, -1, true);
 		m_eventchain_list->sort();
 		clicked_edit_eventchain();
 	} else

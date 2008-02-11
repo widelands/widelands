@@ -38,7 +38,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
  UI::UniqueWindow::Registry & registry)
 :
 Editor_Tool_Options_Menu
-(parent, registry, 200, 115, _("Noise Height Options").c_str()),
+(parent, registry, 200, 115, _("Noise Height Options")),
 
 m_lower_label
 (this,
@@ -122,15 +122,14 @@ Update all textareas
 void Editor_Tool_Noise_Height_Options_Menu::update() {
 	char buffer[200];
 	const interval<Field::Height> height_interval = m_noise_tool.get_interval();
-	sprintf(buffer, _("Minimum: %u").c_str(), height_interval.min);
+	snprintf(buffer, sizeof(buffer), _("Minimum: %u"), height_interval.min);
 	m_lower_label.set_text(buffer);
-	sprintf(buffer, _("Maximum: %u").c_str(), height_interval.max);
+	snprintf(buffer, sizeof(buffer), _("Maximum: %u"), height_interval.max);
 	m_upper_label.set_text(buffer);
 
 	snprintf
 		(buffer, sizeof(buffer),
-		 _("Set value: %u").c_str(),
-		 m_noise_tool.set_tool().get_interval().min);
+		 _("Set value: %u"), m_noise_tool.set_tool().get_interval().min);
 	m_set_label.set_text(buffer);
 
 	select_correct_tool();

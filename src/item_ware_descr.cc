@@ -37,7 +37,8 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 	Section* global = prof->get_safe_section("global");
 
 	m_descname = global->get_string("descname", name().c_str());
-	m_helptext = global->get_string("help", _("Doh... someone forgot the help text!").c_str());
+	m_helptext = global->get_string
+		("help", _("Doh... someone forgot the help text!"));
 
 	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
 	string = global->get_string("menu_pic", buffer);

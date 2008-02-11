@@ -42,8 +42,9 @@ inline Editor_Interactive & Event_Move_View_Option_Menu::eia() {
 
 
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu
-(Editor_Interactive & parent, Widelands::Event_Move_View & event) :
-UI::Window(&parent, 0, 0, 180, 200, _("Move View Event Options").c_str()),
+(Editor_Interactive & parent, Widelands::Event_Move_View & event)
+:
+UI::Window(&parent, 0, 0, 180, 200, _("Move View Event Options")),
 m_event   (event),
 m_location(event.location())
 {
@@ -175,7 +176,7 @@ m_location(event.location())
 		 posx, posy, 60, 20,
 		 0,
 		 &Event_Move_View_Option_Menu::clicked_ok, this,
-		 _("Ok").c_str());
+		 _("Ok"));
 
 	posx = get_inner_w() / 2 + spacing;
 
@@ -216,8 +217,7 @@ void Event_Move_View_Option_Menu::clicked_ok() {
 					(buffer, sizeof(buffer),
 					 _
 					 ("There is another event registered with the name \"%s\". "
-					  "Choose another name.")
-					 .c_str(),
+					  "Choose another name."),
 					 name);
 				UI::Modal_Message_Box mb
 					(get_parent(),

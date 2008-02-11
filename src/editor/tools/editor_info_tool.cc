@@ -45,7 +45,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	Widelands::World const & world = map.world();
 	UI::Window * w =
 		new UI::Window
-		(&parent, 30, 30, 400, 200, _("Field Information").c_str());
+		(&parent, 30, 30, 400, 200, _("Field Information"));
 	UI::Multiline_Textarea * const multiline_textarea =
 		new UI::Multiline_Textarea
 		(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
@@ -55,16 +55,11 @@ int32_t Editor_Info_Tool::handle_click_impl
 	std::string buf;
 	char buf1[1024];
 
-	sprintf(buf1, "%s\n", _("1) Field Infos").c_str());
+	snprintf
+		(buf1, sizeof(buf1),
+		 _("1) Node infos\n Coordinates: (%i, %i)\n Height: %u\n Caps: "),
+		 center.node.x, center.node.y, f.get_height());
 	buf += buf1;
-	sprintf
-		(buf1,
-		 " %s (%i/%i)\n",
-		 _("Coordinates").c_str(),
-		 center.node.x, center.node.y);
-	buf += buf1;
-	sprintf(buf1, " %s %i\n", _("Height").c_str(), f.get_height()); buf += buf1;
-	buf += _(" Caps: ");
 	{
 		Widelands::FieldCaps const caps = f.get_caps();
 		switch (caps & Widelands::BUILDCAPS_SIZEMASK) {
@@ -78,104 +73,46 @@ int32_t Editor_Info_Tool::handle_click_impl
 		if (caps & Widelands::MOVECAPS_WALK)  buf += _(" walk");
 		if (caps & Widelands::MOVECAPS_SWIM)  buf += _(" swim");
 	}
-	buf += "\n";
-	sprintf(buf1, " %s: %i\n", _("Owned by").c_str(), f.get_owned_by());
-	buf += buf1;
-	sprintf
-		(buf1,
-		 " %s: %s (TODO! more info)\n",
-		 _("Has base immovable").c_str(), f.get_immovable() ? "Yes" : "No");
-	buf+=buf1;
-	sprintf
-		(buf1,
-		 " %s: %s (TODO: more informations)\n",
-		 _("Has bobs").c_str(), f.get_first_bob() ? "Yes" : "No");
-	buf += buf1;
-	int32_t const res    = f.get_resources();
-	int32_t const amount = f.get_resources_amount();
-	if (res or amount)
-		snprintf
-			(buf1, sizeof(buf1),
-			 " %s, %i %s '%s'\n",
-			 _("Has resources: Yes").c_str(),
-			 amount,
-			 _("amount of").c_str(),
-			 world.get_resource(res)->name().c_str());
-	else
-		snprintf
-			(buf1, sizeof(buf1),
-			 _(" Has resources: No\n").c_str());
+	snprintf
+		(buf1, sizeof(buf1),
+		 _("\n Owned by %i\n Has base immovable: %s\n Has bobs: %s\n"),
+		 f.get_owned_by(),
+		 f.get_immovable() ? _("Yes") : _("No"),
+		 f.get_first_bob() ? _("Yes") : _("No"));
 	buf += buf1;
 
-   sprintf
-		(buf1,
-		 " %s: %i\n", _("Start resources amount").c_str(),
-		 f.get_starting_res_amount());
-	buf += buf1;
-
-	sprintf(buf1, _(" Roads: TODO!\n").c_str());
-	buf += buf1;
-
-	buf += "\n";
-	sprintf(buf1, "%s\n", _("2) Terrain Info\n").c_str());
-	buf += buf1;
+	buf += _("2) Terrain Info\n Name: ");
 	{
 		Widelands::Field         const & tf  = map[center.triangle];
 		Widelands::Terrain_Descr const & ter = world.terrain_descr
 			(center.triangle.t == Widelands::TCoords<>::D ?
 			 tf.terrain_d() : tf.terrain_r());
+		buf += ter.name();
 		snprintf
-			(buf1, sizeof(buf1),
-			 " %s: %s\n", _("Name").c_str(), ter.name().c_str());
-		buf += buf1;
-		snprintf
-			(buf1, sizeof(buf1),
-			 " %s: %i\n", _("Texture Number").c_str(), ter.get_texture());
+			(buf1, sizeof(buf1), _("\n Texture Number: %i\n"), ter.get_texture());
 		buf += buf1;
 	}
 
-	buf += "\n";
-	sprintf(buf1, "%s\n", _("4) Map Info").c_str());
+	buf += _("4) Map Info\n Name: ");
+	buf += map.get_name();
+	snprintf
+		(buf1, sizeof(buf1),
+		 _("Size: %ix%i\n Author: "), map.get_width(), map.get_height());
 	buf += buf1;
-	sprintf(buf1, " %s: %s\n", _("Name").c_str(), map.get_name());
-	buf += buf1;
-	sprintf
-		(buf1,
-		 " %s: %ix%i\n", _("Size").c_str(), map.get_width(), map.get_height());
-	buf += buf1;
-	sprintf(buf1, " %s: %s\n", _("Author").c_str(), map.get_author());
-	buf += buf1;
-	sprintf(buf1, " %s: %s\n", _("Descr").c_str(), map.get_description());
-	buf += buf1;
-	sprintf
-		(buf1, " %s: %i\n", _("Number of Players").c_str(), map.get_nrplayers());
-	buf += buf1;
-	sprintf
-		(buf1,
-		 " %s\n",
-		 _
-		 (" TODO: more information (number of resources, number of terrains...)")
-		 .c_str());
+	buf += map.get_author     ();
+	buf += _("\n Descr: ");
+	buf += map.get_description();
+	snprintf
+		(buf1, sizeof(buf1),
+		 _("\n Number of Players: %i\n"), map.get_nrplayers());
 	buf += buf1;
 
-	buf += "\n";
-	sprintf(buf1, "%s\n", _("5) World Info").c_str());
-	buf += buf1;
-	sprintf(buf1, " %s: %s\n", _("Name").c_str(), world.get_name());
-	buf += buf1;
-	sprintf(buf1, " %s: %s\n", _("Author").c_str(), world.get_author());
-	buf += buf1;
-	sprintf(buf1, " %s: %s\n", _("Descr").c_str(), world.get_descr());
-	buf += buf1;
-	sprintf
-		(buf1,
-		 " %s\n",
-		 _
-		 (" TODO -- More information (Number of bobs/number of wares...)\n")
-		 .c_str());
-	buf += buf1;
-
-	buf += "\n\n\n\n\n";
+	buf += _("5) World Info\n Name: ");
+	buf += world.get_name  ();
+	buf += _("\n Author: ");
+	buf += world.get_author();
+	buf += _("\n Descr: ");
+	buf += world.get_descr ();
 
 	multiline_textarea->set_text(buf.c_str());
 

@@ -53,7 +53,7 @@ Create all the buttons etc...
 */
 Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
 :
-UI::Window(parent, 0, 0, 500, 330, _("Save Map").c_str()),
+UI::Window(parent, 0, 0, 500, 330, _("Save Map")),
 m_parent  (parent) //  FIXME redundant (base has parent pointer)
 {
 	int32_t const spacing =  5;
@@ -187,7 +187,7 @@ void Main_Menu_Save_Map::clicked_ok() {
 	}
 }
 void Main_Menu_Save_Map::clicked_make_directory() {
-	Main_Menu_Save_Map_Make_Directory md(this, _("unnamed").c_str());
+	Main_Menu_Save_Map_Make_Directory md(this, _("unnamed"));
 	if (md.run()) {
 		g_fs->EnsureDirectoryExists(m_basedir);
 		//  create directory

@@ -39,8 +39,8 @@ namespace Widelands {
 Event_Message_Box::Event_Message_Box(char const * const Name, State const S)
 	: Event(Name, S)
 {
-	set_text(_("No text defined").c_str());
-	set_window_title(_("Window Title").c_str());
+	set_text(_("No text defined"));
+	set_window_title(_("Window Title"));
 	set_is_modal(false);
 	set_dimensions(400, 300);
 	set_pos(-1, -1);

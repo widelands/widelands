@@ -41,8 +41,7 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
  Editor_Place_Immovable_Tool & pit,
  UI::UniqueWindow::Registry  & registry)
 :
-Editor_Tool_Options_Menu
-(parent, registry, 100, 100, _("Immovable Bobs Menu").c_str()),
+Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Immovable Bobs Menu")),
 m_tabpanel(this, 0, 0, 1),
 m_pit     (pit)
 {

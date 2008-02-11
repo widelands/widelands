@@ -82,7 +82,7 @@ internetgame(false)
 	title     .set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::toggle_hostname);
 	hostname  .set_text("localhost");
-	playername.set_text(_("nobody").c_str());
+	playername.set_text  (_("nobody"));
 	opengames .add_column(_("Host"), 150);
 	opengames .add_column(_("Map"),  150);
 	opengames .add_column(_("State"), 90);
@@ -203,7 +203,7 @@ void Fullscreen_Menu_NetSetup::toggle_networktype() {
 		hostname.set_text(defaultserver);
 
 		NetGGZ::ref().initcore(hostname.get_text(), playername.get_text());
-		networktype.set_title(_("GGZ games").c_str());
+		networktype.set_title(_("GGZ games"));
 		if (NetGGZ::ref().tables().size() > 0)
 			fill(NetGGZ::ref().tables());
 	}
@@ -211,7 +211,7 @@ void Fullscreen_Menu_NetSetup::toggle_networktype() {
 	{
 		hostname.set_text("localhost");
 		discovery.reset();
-		networktype.set_title(_("LAN games").c_str());
+		networktype.set_title(_("LAN games"));
 	}
 }
 
@@ -226,7 +226,7 @@ void Fullscreen_Menu_NetSetup::toggle_hostname()
 
 		NetGGZ::ref().deinitcore();
 		NetGGZ::ref().initcore(hostname.get_text(), playername.get_text());
-		networktype.set_title(_("GGZ games").c_str());
+		networktype.set_title(_("GGZ games"));
 		if (NetGGZ::ref().tables().size() > 0)
 			fill(NetGGZ::ref().tables());
 	}

@@ -50,7 +50,7 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 		char directory[256];
 
 		//  Grab the localisation text domain
-		sprintf(directory, "tribes/%s", tribename.c_str());
+		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());
 		i18n::Textdomain textdomain(directory);
 
 		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());
@@ -568,7 +568,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 	int32_t i = 1;
 	int32_t num_indicators = 0;
 	for (;;) {
-		sprintf(buffer, "resi_%s%i", res->name().c_str(), i);
+		snprintf(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), i);
 		if (get_immovable_index(buffer) == -1)
 			break;
 		++i;
@@ -587,7 +587,8 @@ uint32_t Tribe_Descr::get_resource_indicator
 	if (static_cast<int32_t>(amount) < res->get_max_amount())
       bestmatch+=1; // Resi start with 1, not 0
 
-	sprintf(buffer, "resi_%s%i", res->name().c_str(), bestmatch);
+	snprintf
+		(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), bestmatch);
 
 	// NoLog("Resource(%s): Indicator '%s' for amount = %u\n",
 	//res->get_name(), buffer, amount);

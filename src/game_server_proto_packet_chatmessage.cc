@@ -65,8 +65,7 @@ void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connectio
 			(buffer, sizeof(buffer),
 			 _
 			 ("Server replied illegally to ChatMessage package. Should have sent "
-			  "%i but sent %i. Ignored")
-			 .c_str(),
+			  "%i but sent %i. Ignored"),
 			 CM_ACK, answer);
 
 		gsc->server_message(buffer);

@@ -944,9 +944,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 void WLApplication::show_usage()
 {
 	char buffer[80];
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("This is Widelands-%s\n\n").c_str(), BUILD_ID);
+	snprintf(buffer, sizeof(buffer), _("This is Widelands-%s\n\n"), BUILD_ID);
 	cout << buffer;
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
 	cout << _("Options:\n\n");
