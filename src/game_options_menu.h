@@ -27,8 +27,7 @@
 #include "ui_unique_window.h"
 
 // The GameOptionsMenu is a rather dumb window with lots of buttons
-class GameOptionsMenu : public UI::UniqueWindow {
-public:
+struct GameOptionsMenu : public UI::UniqueWindow {
 	GameOptionsMenu
 		(Interactive_Player &,
 		 UI::UniqueWindow::Registry &,

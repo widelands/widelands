@@ -153,15 +153,15 @@ World::World(std::string const & name) : m_basedir("worlds/" + name) {
 	try {
 		i18n::grab_textdomain(m_basedir);
 
-		FileSystem *fs=g_fs->MakeSubFileSystem(m_basedir);
-		g_fs->AddFileSystem(fs);
+		FileSystem & fs = *g_fs->MakeSubFileSystem(m_basedir);
+		g_fs->AddFileSystem(&fs);
 
 		parse_root_conf(name.c_str());
 		parse_resources();
 		parse_terrains();
 		parse_bobs();
 
-		g_fs->RemoveFileSystem(fs);
+		g_fs->RemoveFileSystem(&fs);
 
 		i18n::release_textdomain();
 	} catch (std::exception const & e) {
@@ -341,15 +341,14 @@ void World::parse_bobs()
  */
 bool World::exists_world(std::string worldname)
 {
+;
 	FileRead f;
-	FileSystem *fs;
-	bool exists;
-
-	fs=g_fs->MakeSubFileSystem("worlds/"+worldname);
-	exists=f.TryOpen(*fs, "conf");
-	delete fs;
-
-	return exists;
+	return
+		f.TryOpen
+		(*
+		 std::auto_ptr<FileSystem>
+		 (g_fs->MakeSubFileSystem("worlds/" + worldname)),
+		 "conf");
 }
 
 /*

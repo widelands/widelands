@@ -117,7 +117,7 @@ void Game_Main_Menu_Load_Game::clicked_cancel() {
 void Game_Main_Menu_Load_Game::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-	FileSystem* fs = g_fs->MakeSubFileSystem(name);
+	std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
 
 	Widelands::Game_Loader gl(*fs, m_parent->get_game());
 	Widelands::Game_Preload_Data_Packet gpdp;
@@ -135,8 +135,6 @@ void Game_Main_Menu_Load_Game::selected(uint32_t) {
 
 	sprintf(buf, "%02i:%02i", hours, gametime / 60000);
 	m_gametime->set_text(buf);
-
-	delete fs;
 }
 
 /*
@@ -163,9 +161,8 @@ void Game_Main_Menu_Load_Game::fill_list()
 	{
 		char const * const name = pname->c_str();
 
-		FileSystem * fs = 0;
 		try {
-			fs = g_fs->MakeSubFileSystem(name);
+			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
 			Widelands::Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
 
@@ -174,8 +171,7 @@ void Game_Main_Menu_Load_Game::fill_list()
 			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
 			free(fname);
 
-		} catch (_wexception&) {} //  we simply skip illegal entries
-		delete fs;
+		} catch (_wexception const &) {} //  we simply skip illegal entries
 	}
 
 	if (m_ls->size()) m_ls->select(0);
@@ -195,11 +191,9 @@ void Game_Main_Menu_Load_Game::edit_box_changed() {
  * should stay open
  */
 bool Game_Main_Menu_Load_Game::load_game(std::string const & filename) {
-	FileSystem* fs = 0;
-
 	try {
 		UI::ProgressWindow loader_ui;
-		fs = g_fs->MakeSubFileSystem(filename);
+		std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(filename));
 		Widelands::Game_Loader gl(*fs, m_parent->get_game());
 		m_parent->get_game()->cleanup_for_load(true, true);
 		gl.load_game();
@@ -213,7 +207,6 @@ bool Game_Main_Menu_Load_Game::load_game(std::string const & filename) {
 			(m_parent, _("Load Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
 	}
-	delete fs;
 	die();
 
 	return true;

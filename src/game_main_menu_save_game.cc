@@ -135,7 +135,7 @@ void Game_Main_Menu_Save_Game::clicked_ok() {
 void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-	FileSystem * const fs = g_fs->MakeSubFileSystem(name);
+	std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
 	Widelands::Game_Loader gl(*fs, m_parent->get_game());
 	Widelands::Game_Preload_Data_Packet gpdp;
 	gl.preload_game(&gpdp); // This has worked before, no problem
@@ -159,8 +159,6 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 
 	sprintf(buf, "%02i:%02i", hours, minutes);
 	m_gametime->set_text(buf);
-
-	delete fs;
 }
 
 /**
@@ -186,9 +184,8 @@ void Game_Main_Menu_Save_Game::fill_list() {
 	{
 		char const * const name = pname->c_str();
 
-		FileSystem * fs = 0;
 		try {
-			fs = g_fs->MakeSubFileSystem(name);
+			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
 			Widelands::Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
 			char* fname = strdup(FileSystem::FS_Filename(name));
@@ -196,7 +193,6 @@ void Game_Main_Menu_Save_Game::fill_list() {
 			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
 			free(fname);
 		} catch (_wexception&) {} //  we simply skip illegal entries
-		delete fs;
 	}
 
 	if (m_ls->size()) m_ls->select(0);

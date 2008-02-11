@@ -165,17 +165,13 @@ bool RealFSImpl::IsDirectory(std::string const & path) {
  */
 FileSystem * RealFSImpl::MakeSubFileSystem(std::string const & path) {
 	assert(FileExists(path)); //TODO: throw an exception instead
-	std::string fullname;
-
-	fullname=FS_CanonicalizeName(path);
+	std::string const fullname = FS_CanonicalizeName(path);
 	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n", path.c_str(), fullname.c_str());
 
-	if (IsDirectory(path)) {
-		return new RealFSImpl(fullname);
-	} else {
-		FileSystem* s =  new ZipFilesystem(fullname);
-		return s;
-	}
+	if (IsDirectory(path))
+		return new RealFSImpl   (fullname);
+	else
+		return new ZipFilesystem(fullname);
 }
 
 /**

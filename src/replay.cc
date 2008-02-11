@@ -82,10 +82,12 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 {
 	m_replaytime = 0;
 
-	FileSystem* const fs = g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX);
-	Game_Loader gl(*fs, &game);
-	gl.load_game();
-	delete fs;
+	{
+		std::auto_ptr<FileSystem> const fs
+			(g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX));
+		Game_Loader gl(*fs, &game);
+		gl.load_game();
+	}
 
 	m_cmdlog =
 		static_cast<Widelands::StreamRead *>(g_fs->OpenStreamRead(filename));
@@ -235,17 +237,14 @@ ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
-	FileSystem* fs = g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX);
-	try {
+	{
+		std::auto_ptr<FileSystem> const fs
+			(g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX));
 		Game_Loader gl(*fs, &game);
 		game.cleanup_for_load(true, true);
 		gl.load_game();
 		game.postload();
-	} catch (...) {
-		delete fs;
-		throw;
 	}
-	delete fs;
 	log("Done reloading the game from replay\n");
 
 	game.enqueue_command

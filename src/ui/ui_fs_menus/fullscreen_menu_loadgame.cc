@@ -76,7 +76,7 @@ void Fullscreen_Menu_LoadGame::clicked_ok()
 
 void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 	if (const char * const name = list.get_selected()) {
-		FileSystem* fs = g_fs->MakeSubFileSystem(name);
+		std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
 		Widelands::Game_Loader gl(*fs, &game);
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(&gpdp); // This has worked before, no problem
@@ -93,8 +93,6 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 
 		sprintf(buf, "%02i:%02i", hours, minutes);
 		tagametime.set_text(buf);
-
-		delete fs;
 	} else {
 		tamapname .set_text("");
 		tagametime.set_text("");
@@ -126,10 +124,8 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 	{
 		const char * const name = pname->c_str();
 
-		FileSystem * fs = 0;
-
 		try {
-			fs = g_fs->MakeSubFileSystem(name);
+			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
 			Widelands::Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);
 
@@ -139,7 +135,6 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 			free(fname);
 
 		} catch (_wexception&) {} // we simply skip illegal entries
-		delete fs;
 	}
 
 	if (list.size()) list.select(0);

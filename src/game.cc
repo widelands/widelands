@@ -321,16 +321,18 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 	// We have to create an empty map, otherwise nothing will load properly
 	set_map(new Map);
 
-	FileSystem * const fs = g_fs->MakeSubFileSystem(filename.c_str());
+	{
+		std::auto_ptr<FileSystem> const fs
+			(g_fs->MakeSubFileSystem(filename.c_str()));
 
-	m_state = gs_loading;
+		m_state = gs_loading;
 
-	set_iabase(new Interactive_Player(*this, 0)); //  FIXME memory leak!!!
+		set_iabase(new Interactive_Player(*this, 0)); //  FIXME memory leak!!!
 
-	Game_Loader gl(*fs, this);
-	loaderUI.step(_("Loading..."));
-	gl.load_game();
-	delete fs;
+		Game_Loader gl(*fs, this);
+		loaderUI.step(_("Loading..."));
+		gl.load_game();
+	}
 
 	return run(loaderUI, true);
 }

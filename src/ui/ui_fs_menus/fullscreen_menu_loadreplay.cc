@@ -91,11 +91,9 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 		if (!g_fs->FileExists(savename))
 			continue;
 
-		FileSystem* fs = 0;
-
 		try {
 			Widelands::Game_Preload_Data_Packet gpdp;
-			fs = g_fs->MakeSubFileSystem(savename);
+			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(savename));
 			Widelands::Game_Loader gl(*fs, m_game);
 			gl.preload_game(&gpdp);
 
@@ -106,8 +104,6 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 		} catch (_wexception&) {
 			// we simply skip illegal entries
 		}
-
-		delete fs;
 	}
 
 	if (m_list.size())

@@ -41,12 +41,10 @@ throw (_wexception)
 	if (not fs.FileExists("map") or not fs.IsDirectory("map"))
 		throw wexception("No map in this save game!");
 
-	FileSystem * const mapfs = fs.MakeSubFileSystem("map");
-
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;
 
-	m_wml = new WL_Map_Loader(*mapfs, game->get_map());
+	m_wml = new WL_Map_Loader(*fs.MakeSubFileSystem("map"), &game->map());
 
 	m_wml->preload_map(true);
 	m_wml->load_world();
