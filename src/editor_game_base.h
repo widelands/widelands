@@ -29,6 +29,7 @@
 #include <cassert>
 #include <map>
 #include <string>
+#include <cstring>
 #include <vector>
 
 namespace UI {struct ProgressWindow;};

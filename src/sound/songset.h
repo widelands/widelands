@@ -26,6 +26,7 @@
 #include <SDL_mixer.h>
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 /** A collection of several pieces of music meant for the same situation.

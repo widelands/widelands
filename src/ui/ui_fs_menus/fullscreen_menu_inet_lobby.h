@@ -23,6 +23,7 @@
 #include "fullscreen_menu_base.h"
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 namespace UI {
@@ -44,7 +45,7 @@ struct Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
 
 	void server_message(std::string str);
 	void user_entered(std::string name, std::string room, bool enters);
-	void user_info(std::string name, std::string name, std::string room);
+	void user_info(std::string user, std::string game, std::string room);
 	void room_info(std::vector< std::string > users);
 	void chat_message(std::string user, std::string room, bool is_action);
 	void critical_error(std::string str);

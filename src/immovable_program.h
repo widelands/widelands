@@ -27,6 +27,7 @@
 #include "immovable.h"
 
 #include <string>
+#include <cstring>
 
 class Profile;
 

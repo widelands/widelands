@@ -23,6 +23,7 @@
 #include "ui_progresswindow.h"
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 /// Displays game tips in progress window

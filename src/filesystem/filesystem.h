@@ -24,6 +24,7 @@
 
 #include <set>
 #include <string>
+#include <cstring>
 #include <stdexcept>
 #include <vector>
 

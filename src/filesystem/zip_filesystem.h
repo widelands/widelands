@@ -25,6 +25,7 @@
 #include "zip.h"
 
 #include <string>
+#include <cstring>
 
 struct ZipFilesystem : public FileSystem {
 	ZipFilesystem(std::string const &);

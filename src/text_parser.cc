@@ -24,7 +24,9 @@
 #include "helper.h"
 
 #include <vector>
+#include <algorithm>
 #include <string>
+#include <cstring>
 
 Richtext_Block::Richtext_Block() {
 	m_image_align = Align_Left;

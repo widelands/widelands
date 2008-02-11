@@ -29,6 +29,7 @@
 #include "widelands.h"
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 class Editor_Interactive;

@@ -32,6 +32,7 @@
 
 #include <set>
 #include <string>
+#include <cstring>
 #include <vector>
 
 struct Overlay_Manager;

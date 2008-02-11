@@ -29,6 +29,7 @@
 
 #include <cassert>
 #include <string>
+#include <cstring>
 
 class RenderTarget;
 

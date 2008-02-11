@@ -25,6 +25,7 @@
 #include <cassert>
 #include <limits>
 #include <string>
+#include <cstring>
 
 /**
  * Abstract base class for stream-like data sinks.

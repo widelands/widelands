@@ -25,6 +25,7 @@
 #include <SDL_keyboard.h>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include <vector>
 
 /**

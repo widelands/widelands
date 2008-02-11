@@ -41,6 +41,7 @@
 #include "upcast.h"
 
 #include <set>
+#include <algorithm>
 
 namespace Widelands {
 

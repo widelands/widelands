@@ -23,6 +23,7 @@
 #include <list>
 #include <stdint.h>
 #include <string>
+#include <cstring>
 
 #ifdef USE_GGZ
 #define HAVE_GGZ 1

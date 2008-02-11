@@ -24,6 +24,7 @@
 #include "wexception.h"
 
 #include <string>
+#include <cstring>
 
 /**
  * Abstract base class for stream-like data sources.

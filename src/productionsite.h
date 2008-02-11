@@ -26,6 +26,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <cstring>
 #include <vector>
 
 namespace Widelands {

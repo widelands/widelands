@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <cstring>
 #include <vector>
 
 class Font_Loader;

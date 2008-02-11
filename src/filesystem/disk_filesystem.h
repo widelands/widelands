@@ -23,6 +23,7 @@
 #include "filesystem.h"
 
 #include <string>
+#include <cstring>
 
 /// \todo const correctness
 struct RealFSImpl : public FileSystem {

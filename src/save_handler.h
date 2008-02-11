@@ -21,6 +21,7 @@
 #define SAVE_HANDLER_H
 
 #include <string>
+#include <cstring>
 
 namespace Widelands {struct Game;};
 

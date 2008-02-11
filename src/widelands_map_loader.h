@@ -21,6 +21,7 @@
 #define WIDELANDS_MAP_LOADER_H
 
 #include <string>
+#include <cstring>
 #include "map_loader.h"
 
 class FileSystem;

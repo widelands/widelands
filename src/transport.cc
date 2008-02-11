@@ -52,6 +52,7 @@
 #include "upcast.h"
 
 #include <cstdarg>
+#include <algorithm>
 #include <stdio.h>
 
 namespace Widelands {

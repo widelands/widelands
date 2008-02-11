@@ -25,6 +25,7 @@
 
 #include <cassert>
 #include <string>
+#include <cstring>
 
 namespace Widelands {
 

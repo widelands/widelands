@@ -23,6 +23,7 @@
 #include "game_server_proto_packet.h"
 
 #include <string>
+#include <cstring>
 
 /*
  * This is used to register a user on a game server

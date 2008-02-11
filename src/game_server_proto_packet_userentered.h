@@ -23,6 +23,7 @@
 #include "game_server_proto_packet.h"
 
 #include <string>
+#include <cstring>
 
 /*
  * A new user entered a certain room

@@ -33,7 +33,10 @@
 
 #include <cassert>
 #include <string>
+#include <cstring>
 #include <vector>
+#include <climits>
+#include <cstdlib>
 
 #include <errno.h>
 #ifdef _WIN32

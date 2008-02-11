@@ -23,6 +23,7 @@
 #include "event.h"
 
 #include <string>
+#include <cstring>
 
 namespace Widelands {
 

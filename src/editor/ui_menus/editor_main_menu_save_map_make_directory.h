@@ -23,6 +23,7 @@
 #include "ui_window.h"
 
 #include <string>
+#include <cstring>
 
 namespace UI {
 struct Edit_Box;

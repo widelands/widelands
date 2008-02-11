@@ -23,6 +23,7 @@
 #include "game_server_proto_packet.h"
 
 #include <string>
+#include <cstring>
 
 /*
  * Checks versioning with the game server

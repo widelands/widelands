@@ -23,6 +23,7 @@
 #include <SDL_endian.h>
 
 #include <string>
+#include <cstring>
 
 #include <stdint.h>
 

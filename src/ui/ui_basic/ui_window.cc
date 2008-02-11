@@ -496,14 +496,14 @@ bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int3
 
 						if (other_top <= bot && other_bot >= top) {
 							if (not SOWO || left <= other_right) {
-								const int32_t distance = std::abs(left - other_right);
+								const int32_t distance = abs(left - other_right);
 								if (distance < nearest_snap_distance_x) {
 									nearest_snap_distance_x = distance;
 									new_left = other_right;
 								}
 							}
 							if (not SOWO || right >= other_left) {
-								const int32_t distance = std::abs(right - other_left);
+								const int32_t distance = abs(right - other_left);
 								if (distance < nearest_snap_distance_x) {
 									nearest_snap_distance_x = distance;
 									new_left = other_left - w;
@@ -512,14 +512,14 @@ bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int3
 						}
 						if (other_left <= right && other_right >= left) {
 							if (not SOWO || top <= other_bot) {
-								const int32_t distance = std::abs(top - other_bot);
+								const int32_t distance = abs(top - other_bot);
 								if (distance < nearest_snap_distance_y) {
 									nearest_snap_distance_y = distance;
 									new_top = other_bot;
 								}
 							}
 							if (not SOWO || bot >= other_top) {
-								const int32_t distance = std::abs(bot - other_top);
+								const int32_t distance = abs(bot - other_top);
 								if (distance < nearest_snap_distance_y) {
 									nearest_snap_distance_y = distance;
 									new_top = other_top - h;

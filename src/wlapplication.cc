@@ -51,6 +51,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <cstring>
 
 #include <errno.h>
 #include <sys/types.h>

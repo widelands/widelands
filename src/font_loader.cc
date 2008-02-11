@@ -30,6 +30,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 
 Font_Handler* g_fh = 0; // the font handler
 

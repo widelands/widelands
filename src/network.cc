@@ -44,6 +44,7 @@
 #include "log.h"
 
 #include <algorithm>
+#include <climits>
 
 using Widelands::Player;
 

@@ -28,6 +28,7 @@
 #include "ui_unique_window.h"
 
 #include <string>
+#include <cstring>
 
 void fileview_window(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename);
 

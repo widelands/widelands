@@ -27,6 +27,7 @@
 #include "widelands.h"
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 namespace UI {struct Window;};

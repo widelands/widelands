@@ -24,6 +24,7 @@
 
 #include <stdint.h>
 #include <string>
+#include <cstring>
 
 /*
  * A Network buffer is a specialisation which knows how

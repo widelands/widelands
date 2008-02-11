@@ -21,6 +21,7 @@
 #define LANGUAGES_H
 
 #include <string>
+#include <cstring>
 
 /*
  * This file simply contains the languages which are available as translations in widelands.

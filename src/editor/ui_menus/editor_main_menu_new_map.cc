@@ -32,6 +32,7 @@
 #include "ui_window.h"
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 #include <stdio.h>

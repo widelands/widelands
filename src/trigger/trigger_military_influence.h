@@ -23,6 +23,7 @@
 #include "trigger_player_area.h"
 
 #include <string>
+#include <cstring>
 
 struct Trigger_Military_Influence_Option_Menu;
 

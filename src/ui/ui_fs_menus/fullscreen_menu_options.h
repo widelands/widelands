@@ -28,6 +28,7 @@
 #include "ui_textarea.h"
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 class Fullscreen_Menu_Options;

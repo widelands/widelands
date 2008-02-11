@@ -21,6 +21,7 @@
 #define I18N_H
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 ///A macro to make i18n more readable and aid in tagging strings for translation

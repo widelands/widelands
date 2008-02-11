@@ -23,6 +23,7 @@
 #define MD5_H
 
 #include <string>
+#include <cstring>
 
 #include "streamwrite.h"
 

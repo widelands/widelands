@@ -21,6 +21,7 @@
 #define REFERENCER_H
 
 #include <string>
+#include <cstring>
 
 /// A template for types that reference objects of type Referenced. It is
 /// identifiable so that it is possible to tell what is referencing something.

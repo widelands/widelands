@@ -33,6 +33,7 @@
 #include <cctype>
 #include <limits>
 #include <string>
+#include <cstring>
 
 #include <stdio.h>
 

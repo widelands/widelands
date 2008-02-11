@@ -21,6 +21,7 @@
 #define CAMPVIS_H
 
 #include <string>
+#include <cstring>
 
 #include <stdint.h>
 

@@ -26,6 +26,7 @@
 
 #include <fstream>
 #include <string>
+#include <cstring>
 
 /**
  * Journal encapsulates all operations that are necessary for recording and

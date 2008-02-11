@@ -23,6 +23,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <cstring>
 
 //  This type is used to store information about workareas. It stores radii and
 //  for each radius a set of strings. Each string contains a description of an

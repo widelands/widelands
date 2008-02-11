@@ -28,6 +28,7 @@
 #include "ui_unique_window.h"
 
 #include <string>
+#include <cstring>
 #include <vector>
 
 class Editor_Interactive;

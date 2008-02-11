@@ -25,6 +25,7 @@
 
 #include <map>
 #include <string>
+#include <cstring>
 
 struct Editor_Interactive;
 struct Section;

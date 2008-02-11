@@ -22,6 +22,8 @@
 
 #include <cassert>
 #include <vector>
+#include <climits>
+#include <cstdlib>
 
 /*
 =============================

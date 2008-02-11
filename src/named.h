@@ -21,6 +21,7 @@
 #define NAMED_H
 
 #include <string>
+#include <cstring>
 
 struct Named {
 	Named(char        const * const Name = "") : m_name(Name) {}

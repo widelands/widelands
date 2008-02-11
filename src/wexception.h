@@ -21,6 +21,7 @@
 #define WEXCEPTION_H
 
 #include <string>
+#include <cstring>
 #include <exception>
 
 #include <stdint.h>

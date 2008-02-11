@@ -55,6 +55,7 @@
 #include "timestring.h"
 
 #include <string>
+#include <cstring>
 
 namespace Widelands {
 

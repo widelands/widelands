@@ -23,6 +23,7 @@
 #include "game_server_proto_packet.h"
 
 #include <string>
+#include <cstring>
 
 /*
  * Gets information about one logged-in user.

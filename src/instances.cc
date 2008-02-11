@@ -32,6 +32,7 @@
 
 #include <cstdarg>
 #include <string>
+#include <cstring>
 
 #include <stdio.h>
 

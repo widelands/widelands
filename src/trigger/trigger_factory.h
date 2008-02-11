@@ -23,6 +23,7 @@
 #include "trigger.h"
 
 #include <string>
+#include <cstring>
 
 namespace Widelands {
 

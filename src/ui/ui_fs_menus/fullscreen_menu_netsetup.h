@@ -29,6 +29,7 @@
 
 #include <list>
 #include <string>
+#include <cstring>
 
 #include "fullscreen_menu_base.h"
 

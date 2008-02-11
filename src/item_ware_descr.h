@@ -21,6 +21,7 @@
 #define ITEM_WARE_DESCR_H
 
 #include <string>
+#include <cstring>
 
 #include <stdint.h>
 

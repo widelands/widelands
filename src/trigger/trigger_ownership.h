@@ -23,6 +23,7 @@
 #include "trigger_player_area.h"
 
 #include <string>
+#include <cstring>
 
 struct Trigger_Ownership_Option_Menu;
 

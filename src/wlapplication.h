@@ -29,6 +29,7 @@
 #include <map>
 #include <stdexcept>
 #include <string>
+#include <cstring>
 
 namespace Widelands {struct Game;};
 class Journal;
