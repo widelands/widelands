@@ -122,7 +122,7 @@ bool Edit_Box::handle_key(bool down, SDL_keysym code)
 
 		case SDLK_DELETE:
 			if (m_text.size()) {
-				m_text.resize (0);
+				m_text.clear();
 				set_title (m_text.c_str());
 				changed  .call();
 				changedid.call(m_id);

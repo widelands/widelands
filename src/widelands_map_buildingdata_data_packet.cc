@@ -239,7 +239,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			static_cast<Worker*>(i->get(egbase))->remove(egbase);
 			warehouse.m_incorporated_workers.erase(i);
 		}
-		warehouse.m_incorporated_workers.resize(0);
+		warehouse.m_incorporated_workers.clear();
 		const uint16_t nrworkers = fr.Unsigned16();
 		for (uint16_t i = 0; i < nrworkers; ++i) {
 			uint32_t const id = fr.Unsigned32();

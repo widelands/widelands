@@ -355,7 +355,7 @@ bool World::exists_world(std::string worldname)
  * World::get_all_worlds()
  */
 void World::get_all_worlds(std::vector<std::string>* retval) {
-	retval->resize(0);
+	retval->clear();
 
 	//  get all worlds
 	filenameset_t m_worlds;

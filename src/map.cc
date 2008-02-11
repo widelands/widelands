@@ -392,7 +392,7 @@ void Map::cleanup() {
 		assert(m_extradatainfos[i].type == Extradata_Info::PIC) ;
 	}
 #endif
-	m_extradatainfos.resize(0);
+	m_extradatainfos.clear();
 }
 
 /*

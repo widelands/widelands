@@ -254,7 +254,7 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 			delete m_soldier_requests[i];
 			m_soldier_requests[i] = 0;
 		}
-		m_soldier_requests.resize(0);
+		m_soldier_requests.clear();
 	}
 
 	if (m_soldiers.size()) {
@@ -265,7 +265,7 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 			if (g->objects().object_still_available(s))
 				s->set_location(0);
 		}
-		m_soldiers.resize(0);
+		m_soldiers.clear();
 	}
 
 	ProductionSite::cleanup(g);

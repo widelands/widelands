@@ -657,7 +657,7 @@ void Game::cleanup_for_load
 		 it != m_tribes.end();
 		 ++it)
 		delete *it;
-	m_tribes.resize(0);
+	m_tribes.clear();
 	get_cmdqueue()->flush();
 	while (cpl.size()) {
 		delete cpl[cpl.size()-1];

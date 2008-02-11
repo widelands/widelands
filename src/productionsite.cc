@@ -387,7 +387,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 			delete m_worker_requests[i];
 			m_worker_requests[i]=0;
 		}
-		m_worker_requests.resize(0);
+		m_worker_requests.clear();
 	}
 
 	if (m_workers.size()) {
@@ -401,7 +401,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 			if (g->objects().object_still_available(w))
 				w->set_location(0);
 		}
-		m_workers.resize(0);
+		m_workers.clear();
 	}
 
 	// Cleanup the wares queues

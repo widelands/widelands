@@ -108,7 +108,7 @@ void Font_Loader::clear_fonts() {
 
 	for (uint32_t i = 0; i < m_freads.size(); ++i)
 		delete m_freads[i];
-	m_freads.resize(0);
+	m_freads.clear();
 }
 
 

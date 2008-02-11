@@ -110,7 +110,7 @@ Remove all animations
 */
 void AnimationManager::flush()
 {
-	m_animations.resize(0);
+	m_animations.clear();
 }
 
 /**
