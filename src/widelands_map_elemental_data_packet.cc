@@ -40,7 +40,7 @@ throw (_wexception)
 
 	int32_t const packet_version = s.get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
-		i18n::grab_textdomain("maps"); //  load maps textdomain
+		i18n::Textdomain textdomain("maps");
 		map->m_width       = s.get_int   ("map_w");
 		map->m_height      = s.get_int   ("map_h");
 		map->set_nrplayers  (s.get_int   ("nr_players"));
@@ -49,7 +49,6 @@ throw (_wexception)
 		map->set_author     (s.get_string("author"));
 		map->set_description(s.get_string("descr"));
 		map->set_background (s.get_string("background"));
-		i18n::release_textdomain();    //  release maps textdomain
 	} else
 		throw wexception
 			("Map Elemental Data with unknown/unhandled version %i in map!",

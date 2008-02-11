@@ -219,14 +219,11 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	GameTips tips (loaderUI);
 
 	// Loading the locals for the campaign
-	std::string camp_textdomain("");
 	if (scenario) {
 		loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
-		camp_textdomain.append(mapname);
-		i18n::grab_textdomain(camp_textdomain.c_str());
+		i18n::Textdomain textdomain(mapname);
 		log("Loading the locals for scenario. file: %s.mo\n", mapname);
 		m_maploader->preload_map(scenario);
-		i18n::release_textdomain(); // To see a translated loaderUI-Texts
 	} else {
 		//  We are not loading a scenario, so no ingame texts to be translated.
 		loaderUI.step (_("Preloading a map"));
@@ -255,15 +252,12 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 
 	// Reload campaign textdomain
-	if (scenario)
-		i18n::grab_textdomain(camp_textdomain.c_str());
-
-	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
-	delete m_maploader;
-	m_maploader=0;
-
-	if (scenario)
-		i18n::release_textdomain();
+	if (scenario) {
+		i18n::Textdomain textdomain(mapname);
+		m_maploader->load_map_complete(this, true);
+	} else
+		m_maploader->load_map_complete(this, false);
+	delete m_maploader; m_maploader = 0;
 
 	return run(loaderUI);
 }

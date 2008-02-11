@@ -39,14 +39,15 @@ close_button
  _("Close"))
 
 {
-	i18n::grab_textdomain("texts");
+	{
+		i18n::Textdomain textdomain("texts");
 
-	Profile prof(filename.c_str(), "global"); // section-less file
-	Section & section = *prof.get_section("global");
+		Profile prof(filename.c_str(), "global"); //  section-less file
+		Section & section = *prof.get_section("global");
 
-	title   .set_text(section.get_safe_string("title"));
-	textview.set_text(section.get_safe_string("text"));
-	i18n::release_textdomain();
+		title   .set_text(section.get_safe_string("title"));
+		textview.set_text(section.get_safe_string("text"));
+	}
 
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	title.set_pos(Point((get_inner_w() - title.get_w()) / 2, 100));

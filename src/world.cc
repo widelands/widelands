@@ -151,7 +151,7 @@ World
 
 World::World(std::string const & name) : m_basedir("worlds/" + name) {
 	try {
-		i18n::grab_textdomain(m_basedir);
+		i18n::Textdomain textdomain(m_basedir);
 
 		FileSystem & fs = *g_fs->MakeSubFileSystem(m_basedir);
 		g_fs->AddFileSystem(&fs);
@@ -162,8 +162,6 @@ World::World(std::string const & name) : m_basedir("worlds/" + name) {
 		parse_bobs();
 
 		g_fs->RemoveFileSystem(&fs);
-
-		i18n::release_textdomain();
 	} catch (std::exception const & e) {
 		// tag with world name
 		throw wexception("Error loading world %s: %s", name.c_str(), e.what());

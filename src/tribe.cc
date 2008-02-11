@@ -51,7 +51,7 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 
 		//  Grab the localisation text domain
 		sprintf(directory, "tribes/%s", tribename.c_str());
-		i18n::grab_textdomain(directory);
+		i18n::Textdomain textdomain(directory);
 
 		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());
 
@@ -61,8 +61,6 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 		parse_buildings(directory);
 		parse_bobs     (directory);
 		parse_root_conf(directory);
-
-		i18n::release_textdomain();
 	}
 	catch (std::exception &e)
 	{throw wexception("Error loading tribe %s: %s", tribename.c_str(), e.what());}

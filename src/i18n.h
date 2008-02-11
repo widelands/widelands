@@ -26,24 +26,23 @@
 ///A macro to make i18n more readable and aid in tagging strings for translation
 #define _(str) i18n::translate(str)
 
-/**
- * Encapsulates i18n-handling
- */
-struct i18n {
-	static std::string translate      (std::string const &);
-	static void        grab_textdomain(std::string const &);
-	static void release_textdomain();
-	static void        set_locale     (std::string const & = std::string());
-	static const std::string get_locale() {return m_locale;}
+namespace i18n {
+std::string translate(char        const *);
+std::string translate(std::string const &);
 
-private:
-	///The current locale
-	static std::string m_locale;
+void    grab_textdomain(std::string const &);
+void release_textdomain();
 
-	///A stack of textdomains. On entering a new textdomain, the old one gets
-	///pushed on the stack. On leaving the domain again it is popped back.
-	///\see grab_texdomain()
-	static std::vector<std::string> m_textdomains;
+/// Create an object of this type to grab a textdomain and make sure that it is
+/// released when the object goes out of scope. This is exception-safe, unlike
+/// calling grab_textdomain and release_textdomain directly.
+struct Textdomain {
+	Textdomain (std::string const & name) {grab_textdomain   (name);}
+	~Textdomain()                         {release_textdomain();}
+};
+
+void                set_locale(char const *);
+std::string const & get_locale();
 };
 
 #endif

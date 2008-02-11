@@ -41,7 +41,7 @@ m_registered    (false),
 m_lastTip       (0)
 {
 	// Loading texts-locals, for translating the tips
-	i18n::grab_textdomain("texts");
+	i18n::Textdomain textdomain("texts");
 
 	// Skip, if no triggers saved
 	// Load the TrueType Font
@@ -92,8 +92,6 @@ m_lastTip       (0)
 		m_registered = true;
 		m_lastTip = m_tips.size();
 	}
-
-	i18n::release_textdomain(); //  Drop textdomain, fall back to previous one.
 }
 
 GameTips::~GameTips() {
