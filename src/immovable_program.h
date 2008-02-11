@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__IMMOVABLE_PROGRAM_H
-#define __S__IMMOVABLE_PROGRAM_H
+#ifndef IMMOVABLE_PROGRAM_H
+#define IMMOVABLE_PROGRAM_H
 
 /*
  * Implementation is in immovable.cc
@@ -47,7 +47,7 @@ struct ImmovableAction {
 	int32_t         iparam1;
 	int32_t         iparam2;
 	std::string sparam1;
-   std::string sparam2;
+	std::string sparam2;
 };
 
 // The ImmovableProgram
@@ -89,4 +89,4 @@ private:
 
 };
 
-#endif // __S__IMMOVABLE_PROGRAM_H
+#endif

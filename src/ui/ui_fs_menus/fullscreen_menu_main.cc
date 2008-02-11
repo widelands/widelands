@@ -32,7 +32,6 @@ Fullscreen_Menu_Main
 Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 :
 Fullscreen_Menu_Base("mainmenu.jpg"),
-	// UI::Buttons
 
 singleplayer
 (this,
@@ -90,7 +89,6 @@ exit
  &Fullscreen_Menu_Main::end_modal, this, mm_exit,
  _("Exit Game")),
 
-	// Text
 version(this, MENU_XRES-25, MENU_YRES-29, _("Version")+" "+BUILD_ID, Align_Right),
 copyright
 (this,

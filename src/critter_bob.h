@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__CRITTER_BOB_H
-#define __S__CRITTER_BOB_H
+#ifndef CRITTER_BOB_H
+#define CRITTER_BOB_H
 
 #include "bob.h"
 
@@ -35,7 +35,7 @@ struct Critter_Bob_Descr : public Bob::Descr {
 		(const Tribe_Descr * const, const std::string & critter_bob_name);
 	virtual ~Critter_Bob_Descr();
 
-      virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+	virtual void parse(char const * directory, Profile *, EncodeData const *);
 	Bob * create_object() const;
 
 	bool is_swimming() const throw () {return m_swimming;}
@@ -43,21 +43,22 @@ struct Critter_Bob_Descr : public Bob::Descr {
 	const std::string & descname() const throw () {return m_descname;}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descname().c_str();}
 
-      const Critter_BobProgram* get_program(std::string programname) const;
+	Critter_BobProgram const * get_program
+		(std::string const & programname) const;
 
 private:
 	std::string   m_descname;
 	DirAnimations m_walk_anims;
 	bool          m_swimming;
 	typedef std::map<std::string, Critter_BobProgram *> ProgramMap;
-      ProgramMap     m_programs;
+	ProgramMap    m_programs;
 };
 
 class Critter_Bob : public Bob {
 	friend struct Map_Bobdata_Data_Packet;
 	friend class Critter_BobProgram;
 
-   MO_DESCR(Critter_Bob_Descr);
+	MO_DESCR(Critter_Bob_Descr);
 
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
@@ -76,11 +77,11 @@ private:
 	void roam_update(Game* g, State* state);
 	void roam_signal(Game* g, State* state);
 
-   void program_update(Game* g, State* state);
+	void program_update(Game* g, State* state);
 	void program_signal(Game* g, State* state);
 
 private:
-   bool run_remove(Game* g, State* state, const Critter_BobAction* act);
+	bool run_remove(Game *, State *, Critter_BobAction const *);
 
 private:
 	static Task taskRoam;
@@ -89,4 +90,4 @@ private:
 
 };
 
-#endif // __S__CRITTER_BOB_H
+#endif

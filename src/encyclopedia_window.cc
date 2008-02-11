@@ -70,9 +70,9 @@ tribe(&interactivePlayer.get_player()->tribe())
 
 	prodSites.selected.set(this, &EncyclopediaWindow::prodSiteSelected);
 
-   condTable.add_column(_("Needs Ware"), 140); //was 240
-   condTable.add_column(_("Consumed"),    80);
-   condTable.add_column(_("Group"),       70);
+	condTable.add_column(_("Needs Ware"), 140); //was 240
+	condTable.add_column(_("Consumed"),    80);
+	condTable.add_column(_("Group"),       70);
 
 	fillWares();
 
@@ -80,15 +80,13 @@ tribe(&interactivePlayer.get_player()->tribe())
 		center_to_parent();
 }
 
-EncyclopediaWindow::~EncyclopediaWindow() {
-}
+EncyclopediaWindow::~EncyclopediaWindow() {}
 
 void EncyclopediaWindow::fillWares() {
-   int32_t nrWares = tribe->get_nrwares();
-   int32_t i;
-	for (i = 0; i < nrWares; ++i) {
-      Item_Ware_Descr* ware = tribe->get_ware_descr(i);
-		wares.add(ware->descname().c_str(), i, ware->get_icon());
+	Ware_Index::value_t const nrWares = tribe->get_nrwares();
+	for (Ware_Index::value_t i = 0; i < nrWares; ++i) {
+		Item_Ware_Descr const & ware = *tribe->get_ware_descr(i);
+		wares.add(ware.descname().c_str(), i, ware.get_icon());
 	}
 }
 
@@ -100,7 +98,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 	prodSites.clear();
 	condTable.clear();
 
-   bool found = false;
+	bool found = false;
 
 	const Building_Descr::Index nr_buildings = tribe->get_nrbuildings();
 	for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
@@ -116,7 +114,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 				 de->get_outputs()->end())
 			{
 				prodSites.add(de->descname().c_str(), i, de->get_buildicon());
-            found = true;
+				found = true;
 			}
 		}
 	if (found)
@@ -133,10 +131,10 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 		(*tribe->get_building_descr(prodSites.get_selected()))
 		.get_all_programs();
 
-	//  FIXME This needs reworking. A program can indeed produce iron even if the
-	//  FIXME program name is not any of produce_iron, smelt_iron, prog_iron or
-	//  FIXME work. What matters is whether the program has a statement such as
-	//  FIXME "produce iron" or "createitem iron". The program name is not
+	//  FIXME This needs reworking. A program can indeed produce iron even if
+	//  FIXME the program name is not any of produce_iron, smelt_iron, prog_iron
+	//  FIXME or work. What matters is whether the program has a statement such
+	//  FIXME as "produce iron" or "createitem iron". The program name is not
 	//  FIXME supposed to have any meaning to the game logic except to uniquely
 	//  FIXME identify the program.
 	std::map<std::string, ProductionProgram*>::const_iterator programIt =
@@ -152,13 +150,14 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	if (programIt == program_map.end()) programIt = program_map.find("work");
 
 	if (programIt != program_map.end()) {
-      std::vector<ProductionAction> actions = programIt->second->get_all_actions();
+		std::vector<ProductionAction> actions =
+			programIt->second->get_all_actions();
 
-      std::map<std::string, WareCondition> waresConsumed;
-      std::map<std::string, WareCondition> waresChecked;
+		std::map<std::string, WareCondition> waresConsumed;
+		std::map<std::string, WareCondition> waresChecked;
 
-      int32_t consumeGroup = 0;
-      int32_t checkGroup = 0;
+		int32_t consumeGroup = 0;
+		int32_t checkGroup   = 0;
 
 		const std::vector<ProductionAction>::const_iterator actions_end =
 			actions.end();
@@ -167,16 +166,16 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 			 it != actions_end;
 			 ++it)
 		{
-         //some actions are noted as "consume ware1, ware2"
+			//  some actions are noted as "consume ware1, ware2"
 			const std::vector<std::string> splitWares
 				(split_string(it->sparam1, ","));
 			const std::vector<std::string>::const_iterator splitWares_end =
 				splitWares.end();
 
-         bool isGrouped = false;
+			bool isGrouped = false;
 
 			if (splitWares.size() > 1) {
-            isGrouped = true;
+				isGrouped = true;
 				if      (it->type == ProductionAction::actCheck)   ++checkGroup;
 				else if (it->type == ProductionAction::actConsume) ++consumeGroup;
 			}
@@ -236,13 +235,14 @@ void EncyclopediaWindow::createCondTableEntry
  const bool            consumed,
  const WareCondition & wareCondition)
 {
-   Item_Ware_Descr* curWare = tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));
+	Item_Ware_Descr const & curWare =
+		*tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));
 
 	UI::Table<intptr_t>::Entry_Record & tableEntry =
-		condTable.add(index, curWare->get_icon());
-   std::string rowText = curWare->descname();
-   std::string consumeAmount = "0";
-   std::string groupId = "";
+		condTable.add(index, curWare.get_icon());
+	std::string rowText       = curWare.descname();
+	std::string consumeAmount = "0";
+	std::string groupId       = "";
 
 	if (consumed) {
 		char buffer[5];

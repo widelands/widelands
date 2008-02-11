@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__STOCK_MENU_H
-#define __S__STOCK_MENU_H
+#ifndef STOCK_MENU_H
+#define STOCK_MENU_H
 
 #include "waresdisplay.h"
 
@@ -44,8 +44,8 @@ private:
 	UI::Button<Stock_Menu> help;
 	UI::Button<Stock_Menu> switchpage;
 	enum {Wares, Workers} current_page;
-   void fill_waredisplay_with_wares();
-   void fill_waredisplay_with_workers();
+	void fill_waredisplay_with_wares  ();
+	void fill_waredisplay_with_workers();
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint32_t hspacing() const {return 5;};

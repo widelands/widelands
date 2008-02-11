@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,14 +64,9 @@ back
  &Fullscreen_Menu_NetSetup::end_modal, this, CANCEL,
  _("Back")),
 
-	// Hostname
-hostname(this, 310, 220, 200, 26, 2, 0),
-
-	// Player
+hostname  (this, 310, 220, 200, 26, 2, 0),
 playername(this, 310, 260, 200, 26, 2, 0),
-
-	// List of open games in local network
-opengames(this, 310, 300, 390, 180),
+opengames (this, 310, 300, 390, 180),
 
 // LAN or GGZ game
 networktype
@@ -114,7 +109,7 @@ bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
 		if (not strcmp(game.info.hostname, host)) {
 			addr = game.address;
 			port = game.port;
-		return true;
+			return true;
 		}
 	}
 
@@ -145,7 +140,7 @@ void Fullscreen_Menu_NetSetup::update_game_info
 	case LAN_GAME_OPEN:   er.set_string(2, _("Open"));   break;
 	case LAN_GAME_CLOSED: er.set_string(2, _("Closed")); break;
 	default:              er.set_string(2, _("Unknown"));
-	}
+	};
 }
 
 void Fullscreen_Menu_NetSetup::game_opened (const LAN_Open_Game * game)

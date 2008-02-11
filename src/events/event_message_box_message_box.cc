@@ -36,47 +36,53 @@
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box
 (Widelands::Game              * game,
  Widelands::Event_Message_Box * event,
- int32_t gposx, int32_t gposy, int32_t w, int32_t h) :
-UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
+ int32_t gposx, int32_t gposy, int32_t w, int32_t h)
+:
+UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()),
+m_game    (game)
+{
 
-   m_game = game;
 
-   UI::Multiline_Textarea* m_text=0;
-   int32_t spacing=5;
-   int32_t offsy=5;
-   int32_t offsx=spacing;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	UI::Multiline_Textarea * m_text = 0;
+	int32_t const spacing = 5;
+	int32_t       offsy   = 5;
+	int32_t       offsx   = spacing;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
-   set_inner_size(w, h);
-   m_text=new UI::Multiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
+	set_inner_size(w, h);
+	m_text =
+		new UI::Multiline_Textarea
+		(this,
+		 posx, posy,
+		 get_inner_w() - posx-spacing, get_inner_h() - posy - 2 * spacing - 50,
+		 "", Align_Left);
 
 	if (m_text)
-      m_text->set_text(event->get_text());
+		m_text->set_text(event->get_text());
 
-   // Buttons
-   int32_t but_width=80;
-   int32_t space=get_inner_w()-2*spacing;
-   space-=but_width*event->get_nr_buttons();
-   space/=event->get_nr_buttons()+1;
-   posx=spacing;
-   posy=get_inner_h()-30;
-   m_trigger.resize(event->get_nr_buttons());
-   for (int32_t i = 0; i < event->get_nr_buttons(); ++i) {
-      posx+=space;
+	int32_t const but_width = 80;
+	int32_t space = get_inner_w() - 2 * spacing;
+	space -= but_width * event->get_nr_buttons();
+	space /= event->get_nr_buttons() + 1;
+	posx = spacing;
+	posy = get_inner_h() - 30;
+	m_trigger.resize(event->get_nr_buttons());
+	for (int32_t i = 0; i < event->get_nr_buttons(); ++i) {
+		posx += space;
 		new UI::IDButton<Message_Box_Event_Message_Box, int32_t>
 			(this,
 			 posx, posy, but_width, 20,
 			 0,
 			 &Message_Box_Event_Message_Box::clicked, this, i,
 			 event->get_button_name(i));
-      posx+=but_width;
-      m_trigger[i]=event->get_button_trigger(i);
+		posx += but_width;
+		m_trigger[i] = event->get_button_trigger(i);
 	}
 
-   m_is_modal = event->get_is_modal();
+	m_is_modal = event->get_is_modal();
 
-   center_to_parent();
+	center_to_parent();
 
 	if (gposx != -1) set_pos(Point(gposy, get_y()));
 	if (gposy != -1) set_pos(Point(get_x(), gposy));
@@ -112,11 +118,10 @@ bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int32_t, in
  * clicked
  */
 void Message_Box_Event_Message_Box::clicked(int32_t i) {
-	if (i == -1) {
-      // we should end this dialog
+	if (i == -1) { // we should end this dialog
 		if (m_is_modal) {
-         end_modal(0);
-         return;
+			end_modal(0);
+			return;
 		} else {
 			die();
 			return;
@@ -124,10 +129,10 @@ void Message_Box_Event_Message_Box::clicked(int32_t i) {
 	} else {
 		//  One of the buttons has been pressed
 		if (Widelands::Trigger_Null * const t = m_trigger[i]) {
-         t->set_trigger_manually(true);
+			t->set_trigger_manually(true);
 			t->check_set_conditions(*m_game); // forcefully update this trigger
 		}
-      clicked(-1);
-      return;
+		clicked(-1);
+		return;
 	}
 }

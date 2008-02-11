@@ -46,19 +46,19 @@ throw (_wexception)
 {
 	if (skip) return;
 
-   FileRead fr;
+	FileRead fr;
 	try {fr.Open(fs, "binary/road");} catch (...) {return;}
 
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-      uint32_t ser;
+		uint32_t ser;
 		while ((ser = fr.Unsigned32()) != 0xffffffff) {
-         // If this is already known, get it
-         // Road data is read somewhere else
-         assert(!ol->is_object_known(ser));
-         Road* road=new Road();
-         road->init(egbase);
-         ol->register_object(egbase, ser, road);
+			//  If this is already known, get it.
+			//  Road data is read somewhere else
+			assert(!ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			Road & road = *new Road();
+			road.init(egbase);
+			ol->register_object(egbase, ser, &road);
 		}
 	} else
 		throw wexception
@@ -70,28 +70,23 @@ void Map_Road_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
+	FileWrite fw;
 
-   FileWrite fw;
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
-
-   // Write roads, register this with the map_object_saver so that
-   // it's data can be saved later.
+	//  Write roads. Register this with the map_object_saver so that its data
+	//  can be saved later.
 	Map const & map = egbase->map();
 	Field * field = &map[0];
 	Field const * const fields_end = field + map.max_index();
 	for (; field < fields_end; ++field)
-         // We only write Roads
-		if (upcast(Road const, road, field->get_immovable()))
-            // Roads can life on multiple positions
+		if (upcast(Road const, road, field->get_immovable())) // only roads
+			//  Roads can life on multiple positions.
 			if (not os->is_object_known(road))
-            // write id
-            fw.Unsigned32(os->register_object(road));
-   fw.Unsigned32(0xffffffff);
+				fw.Unsigned32(os->register_object(road));
+	fw.Unsigned32(0xffffffff);
 
-   fw.Write(fs, "binary/road");
-   // DONE
+	fw.Write(fs, "binary/road");
 }
 
 };

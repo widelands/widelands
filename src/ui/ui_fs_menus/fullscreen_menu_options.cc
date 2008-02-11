@@ -38,8 +38,6 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 :
 Fullscreen_Menu_Base("optionsmenu.jpg"),
 
-	// UI::Buttons
-
 m_cancel
 (this,
  410, 530, 190, 24,
@@ -54,37 +52,28 @@ m_apply
  &Fullscreen_Menu_Options::end_modal, this, om_ok,
  _("Apply")),
 
-	// Menu title
 m_title(this, MENU_XRES / 2, 30, _("General Options"), Align_HCenter),
 
-	// Fullscreen mode
 m_fullscreen(this, 300, 110),
 m_label_fullscreen(this, 325, 120, _("Fullscreen"), Align_VCenter),
 
-	// input grab
 m_inputgrab(this, 300, 140),
 m_label_inputgrab(this, 325, 150, _("Grab Input"), Align_VCenter),
 
-	// Music
 m_music(this, 300, 170),
 m_label_music(this, 325, 180, _("Enable Music"), Align_VCenter),
 
-	// Sound FX
 m_fx(this, 300, 200),
 m_label_fx(this, 325, 210, _("Enable Sound"), Align_VCenter),
 
-	// In-game resolution
 m_reslist(this, 80, 110, 190, 150, Align_Left, true),
 m_label_resolution(this, 85, 95, _("In-game resolution"), Align_VCenter),
 
-   // Available locales
 m_label_language(this, MENU_XRES / 2 + 85, 95, _("Language"), Align_VCenter),
 m_language_list(this, MENU_XRES / 2 + 75, 110, 210, 150, Align_Left, true),
 
 m_label_game_options
 (this, MENU_XRES / 2, 300, _("In-game Options"), Align_HCenter),
-
-   // Toggle Options
 
 m_single_watchwin(this, 85, 355),
 m_label_single_watchwin
@@ -119,7 +108,7 @@ m_label_autosave
 	m_snap_windows_only_when_overlapping.set_state
 		(opt.snap_windows_only_when_overlapping);
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
-    m_autosave                          .set_state(opt.autosave > 0);
+	m_autosave                          .set_state(opt.autosave > 0);
 
 	char buffer[255];
 	snprintf
@@ -131,9 +120,9 @@ m_label_autosave
 	m_label_autosave.set_text(buffer);
 
 
-   // GRAPHIC_TODO: this shouldn't be here List all resolutions
-   SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
-   fmt->BitsPerPixel = 16;
+	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
+	SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
+	fmt->BitsPerPixel = 16;
 	if
 		(SDL_Rect const * const * const modes =
 		 SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
@@ -148,7 +137,7 @@ m_label_autosave
 				 this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
 				m_resolutions.push_back(this_res);
 		}
-   fmt->BitsPerPixel = 32;
+	fmt->BitsPerPixel = 32;
 	if
 		(SDL_Rect const * const * const modes =
 		 SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
@@ -177,7 +166,7 @@ m_label_autosave
 	}
 	if (not did_select_a_res) m_reslist.select(m_reslist.size() - 1);
 
-   available_languages[0].name = _("System default language");
+	available_languages[0].name = _("System default language");
 	for (uint32_t i = 0; i < NR_LANGUAGES; ++i)
 		m_language_list.add
 			(available_languages[i].name.c_str(),
@@ -204,9 +193,9 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 		m_music                             .get_state   (),
 		m_fx                                .get_state   (),
 		m_language_list                     .get_selected(),
-        (m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0)
+			(m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0)
 	};
-   return opt;
+	return opt;
 }
 
 
@@ -227,39 +216,42 @@ Options_Ctrl::~Options_Ctrl() {
 
 Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	Options_Struct opt;
-	opt.xres = s->get_int("xres", 640);
-	opt.yres = s->get_int("yres", 480);
-	opt.depth = s->get_int("depth", 16);
-	opt.inputgrab = s->get_bool("inputgrab", false);
-	opt.fullscreen = s->get_bool("fullscreen", false);
-	opt.single_watchwin = s->get_bool("single_watchwin", false);
-	opt.show_warea= s->get_bool("workareapreview", false);
-	opt.snap_windows_only_when_overlapping= s->get_bool("snap_windows_only_when_overlapping", false);
-	opt.dock_windows_to_edges= s->get_bool("dock_windows_to_edges", false);
-	opt.language = s->get_string("language", "");
-   opt.music = !s->get_bool("disable_music", false);
-   opt.fx = !s->get_bool("disable_fx", false);
-   opt.autosave = s->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
-   return opt;
+	opt.xres                  =  s->get_int ("xres",                    640);
+	opt.yres                  =  s->get_int ("yres",                    480);
+	opt.depth                 =  s->get_int ("depth",                    16);
+	opt.inputgrab             =  s->get_bool("inputgrab",             false);
+	opt.fullscreen            =  s->get_bool("fullscreen",            false);
+	opt.single_watchwin       =  s->get_bool("single_watchwin",       false);
+	opt.show_warea            =  s->get_bool("workareapreview",       false);
+	opt.snap_windows_only_when_overlapping
+		= s->get_bool("snap_windows_only_when_overlapping", false);
+	opt.dock_windows_to_edges =  s->get_bool("dock_windows_to_edges", false);
+	opt.language              =  s->get_string("language", "");
+	opt.music                 = !s->get_bool("disable_music", false);
+	opt.fx                    = !s->get_bool("disable_fx", false);
+	opt.autosave = s->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	return opt;
 }
 
 void Options_Ctrl::save_options() {
 	Options_Ctrl::Options_Struct opt = m_opt_dialog->get_values();
-	m_opt_section->set_int("xres", opt.xres);
-	m_opt_section->set_int("yres", opt.yres);
-	m_opt_section->set_bool("fullscreen", opt.fullscreen);
-	m_opt_section->set_bool("inputgrab", opt.inputgrab);
-	m_opt_section->set_bool("single_watchwin", opt.single_watchwin);
-	m_opt_section->set_bool("workareapreview", opt.show_warea);
-	m_opt_section->set_bool("snap_windows_only_when_overlapping", opt.snap_windows_only_when_overlapping);
+	m_opt_section->set_int ("xres",                  opt.xres);
+	m_opt_section->set_int ("yres",                  opt.yres);
+	m_opt_section->set_bool("fullscreen",            opt.fullscreen);
+	m_opt_section->set_bool("inputgrab",             opt.inputgrab);
+	m_opt_section->set_bool("single_watchwin",       opt.single_watchwin);
+	m_opt_section->set_bool("workareapreview",       opt.show_warea);
+	m_opt_section->set_bool
+		("snap_windows_only_when_overlapping",
+		 opt.snap_windows_only_when_overlapping);
 	m_opt_section->set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
-	m_opt_section->set_int("depth", opt.depth);
-   m_opt_section->set_bool("disable_music", !opt.music);
-   m_opt_section->set_bool("disable_fx", !opt.fx);
-   m_opt_section->set_string("language", opt.language);
-   m_opt_section->set_int("autosave", opt.autosave*60);
-   WLApplication::get()->set_input_grab(opt.inputgrab);
-   i18n::set_locale(opt.language.c_str());
-   g_sound_handler.set_disable_music(!opt.music);
-   g_sound_handler.set_disable_fx(!opt.fx);
+	m_opt_section->set_int ("depth",                 opt.depth);
+	m_opt_section->set_bool("disable_music",        !opt.music);
+	m_opt_section->set_bool("disable_fx",           !opt.fx);
+	m_opt_section->set_string("language",            opt.language);
+	m_opt_section->set_int("autosave",               opt.autosave * 60);
+	WLApplication::get()->set_input_grab(opt.inputgrab);
+	i18n::set_locale(opt.language.c_str());
+	g_sound_handler.set_disable_music(!opt.music);
+	g_sound_handler.set_disable_fx(!opt.fx);
 }

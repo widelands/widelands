@@ -73,8 +73,7 @@ Event::State Event_Move_View::run(Game* game) {
 	if (ipl.get_player_number() == m_player)
 		ipl.move_view_to(m_location);
 
-   m_state = DONE;
-   return m_state;
+	return m_state = DONE;
 }
 
 };

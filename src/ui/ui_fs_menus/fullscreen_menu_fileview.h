@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__FILE_VIEW_SCREEN_H
-#define __S__FILE_VIEW_SCREEN_H
+#ifndef FULLSCREEN_MENU_FILEVIEW_H
+#define FULLSCREEN_MENU_FILEVIEW_H
 
 #include "fullscreen_menu_base.h"
 
@@ -54,4 +54,4 @@ struct Fullscreen_Menu_FileView : public Fullscreen_Menu_TextView
 
 
 
-#endif // __S__FILE_VIEW_SCREEN_H
+#endif

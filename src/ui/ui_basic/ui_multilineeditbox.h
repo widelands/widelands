@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MULTILINE_EDITBOX_H
-#define __S__MULTILINE_EDITBOX_H
+#ifndef UI_MULTILINEEDITBOX_H
+#define UI_MULTILINEEDITBOX_H
 
 #include "ui_multilinetextarea.h"
 #include "ui_signal.h"
@@ -33,31 +33,29 @@ struct Scrollbar;
  * Shift + del or Shift + backspace deletes all text
  */
 struct Multiline_Editbox : public Multiline_Textarea {
-      Multiline_Editbox(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const char *text);
-      ~Multiline_Editbox();
+	Multiline_Editbox
+		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, char const *);
+	~Multiline_Editbox();
 
-      // Changed event
-      Signal changed;
+	Signal changed;
 
-      // Drawing and event handlers
-      void draw(RenderTarget* dst);
-      void set_maximum_chars(int32_t n) {m_maxchars=n;}
-      int32_t get_maximum_chars() {return m_maxchars;}
+	void draw(RenderTarget *);
+	void set_maximum_chars(int32_t n) {m_maxchars=n;}
+	int32_t get_maximum_chars() {return m_maxchars;}
 
-      // Event functions
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_keysym);
-      void set_text(const char* str);
+	void set_text(char const *);
 
 private:
-	   static const int32_t ms_darken_value=-20;
-      uint32_t m_cur_pos;
-      uint32_t m_char_pos;
-      uint32_t m_line_pos;
-      uint32_t m_maxchars;
-      bool m_needs_update;
+	static const int32_t ms_darken_value = -20;
+	uint32_t m_cur_pos;
+	uint32_t m_char_pos;
+	uint32_t m_line_pos;
+	uint32_t m_maxchars;
+	bool     m_needs_update;
 };
 };
 
-#endif // __S__MULTILINE_EDITBOX_H
+#endif

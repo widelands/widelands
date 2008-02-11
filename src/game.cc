@@ -220,20 +220,18 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
 	// Loading the locals for the campaign
 	std::string camp_textdomain("");
-	if (scenario)
-		{
+	if (scenario) {
 		loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 		camp_textdomain.append(mapname);
 		i18n::grab_textdomain(camp_textdomain.c_str());
 		log("Loading the locals for scenario. file: %s.mo\n", mapname);
 		m_maploader->preload_map(scenario);
 		i18n::release_textdomain(); // To see a translated loaderUI-Texts
-		}
-	else // we are not loading a scenario, so no ingame texts to be translated.
-		{
+	} else {
+		//  We are not loading a scenario, so no ingame texts to be translated.
 		loaderUI.step (_("Preloading a map"));
 		m_maploader->preload_map(scenario);
-		}
+	}
 
 	const std::string background = map().get_background();
 	if (background.size() > 0)
@@ -241,7 +239,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	loaderUI.step (_("Loading a world"));
 	m_maploader->load_world();
 
-    // We have to create the players here
+	// We have to create the players here.
 	const Player_Number nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		loaderUI.stepf (_("Adding player %u"), p);
@@ -281,7 +279,7 @@ bool Game::run_single_player ()
 	const int32_t code = lgm.run();
 
 	if (code==0 || get_map()==0)
-	    return false;
+		return false;
 
 	g_gr->flush(PicMod_Menu);
 
@@ -406,7 +404,7 @@ void Game::load_map (const char* filename)
 	m_maploader = (new Map())->get_correct_loader(filename);
 	assert (m_maploader!=0);
 	m_maploader->preload_map(0);
-	set_map (m_maploader->get_map());
+	set_map (&m_maploader->map());
 }
 
 
@@ -548,7 +546,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 void Game::think()
 {
 	if (m_netgame!=0)
-	    m_netgame->handle_network ();
+		m_netgame->handle_network ();
 
 	if (m_state == gs_running) {
 		for (uint32_t i = 0;i < cpl.size(); ++i)
@@ -872,7 +870,7 @@ void Game::sample_statistics()
 					building->owner().get_player_number() - 1;
 				++nr_buildings[player_index];
 
-					// If it is a productionsite, add its productivity
+				//  If it is a productionsite, add its productivity.
 				if (upcast(ProductionSite, productionsite, building)) {
 					++nr_production_sites[player_index];
 					productivity[player_index] +=

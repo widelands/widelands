@@ -139,7 +139,7 @@ void Fullscreen_Menu_MapSelect::ok()
 		{
 			assert(*m_ml);
 
-			egbase->set_map((*m_ml)->get_map());
+			egbase->set_map(&(*m_ml)->map());
 			(*m_ml)->preload_map(m_is_scenario);
 			(*m_ml)->load_world();
 			m_map = 0;
@@ -243,9 +243,10 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	//about the absolute filesystem top!) we manually add ".."
 	if (m_curdir!=m_basedir) {
 		m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
-		list.add("<parent>",
-		         m_parentdir.c_str(),
-		         g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
+		list.add
+			("<parent>",
+			 m_parentdir.c_str(),
+			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 		++ndirs;
 	}
 
@@ -255,16 +256,17 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		(filenameset_t::iterator pname = m_mapfiles.begin();
 		 pname != m_mapfiles.end(); ++pname)
 	{
-		const char *name = pname->c_str();
+		const char * const name = pname->c_str();
 		if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
 		if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
 		if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
 		if (!g_fs->IsDirectory(name)) continue;
 		if (WL_Map_Loader::is_widelands_map(name))             continue;
 
-		list.add(FileSystem::FS_Filename(name),
-		         name,
-		         g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
+		list.add
+			(FileSystem::FS_Filename(name),
+			 name,
+			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 		++ndirs;
 	}
 

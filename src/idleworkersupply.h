@@ -53,4 +53,4 @@ private:
 
 };
 
-#endif  // IDLEWORKERSUPPLY_H
+#endif

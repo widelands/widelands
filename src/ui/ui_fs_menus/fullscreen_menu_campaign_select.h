@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__CAMPAIGN_SELECT_H
-#define __S__CAMPAIGN_SELECT_H
+#ifndef FULLSCREEN_MENU_CAMPAIGN_SELECT_H
+#define FULLSCREEN_MENU_CAMPAIGN_SELECT_H
 
 #include "fullscreen_menu_base.h"
 
@@ -87,4 +87,5 @@ private:
 	std::string                                          campmapfile;
 
 };
-#endif // __S__CAMPAIGN_SELECT_H
+
+#endif

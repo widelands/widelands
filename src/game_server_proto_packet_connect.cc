@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,53 +35,54 @@ Game_Server_Protocol_Packet_Connect::~Game_Server_Protocol_Packet_Connect() {}
  * Get this packets id
  */
 uint16_t Game_Server_Protocol_Packet_Connect::get_id() {
-   return GGSPP_CONNECT;
+	return GGSPP_CONNECT;
 }
 
 /*
  * Write To network
  */
 void Game_Server_Protocol_Packet_Connect::send(Network_Buffer* buffer) {
-   uint16_t version = (GSP_MAJOR_VERSION << 8) | GSP_MINOR_VERSION;
-   buffer->put_16(version);
-   buffer->put_string("widelands");
+	uint16_t const version = (GSP_MAJOR_VERSION << 8) | GSP_MINOR_VERSION;
+	buffer->put_16(version);
+	buffer->put_string("widelands");
 }
 
 /*
  * Handle reply
  */
 void Game_Server_Protocol_Packet_Connect::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
-   uint8_t retcode = buf->get_8();
-   uint16_t version = buf->get_16();
+	uint8_t  const retcode = buf->get_8 ();
+	uint16_t const version = buf->get_16();
 
-   char buffer[1024];
+	char buffer[1024];
 
 	switch (retcode) {
 	case WELCOME: // Everything is ok
-         break;
+		break;
 
 	case PROTOCOL_TO_OLD:
 		snprintf
 			(buffer, sizeof(buffer),
-			 _("Server delivers a connection Error. Your Protocol (%i.%02i) is "
-			   "too old, Server runs %i.%02i\n")
+			 _
+			 ("Server delivers a connection Error. Your Protocol (%i.%02i) is "
+			  "too old, Server runs %i.%02i\n")
 			 .c_str(),
 			 GSP_MAJOR_VERSION, GSP_MINOR_VERSION,
 			 version &0xff00, version &0x00ff);
-         gsc->critical_error(buffer);
-         break;
+		gsc->critical_error(buffer);
+		break;
 
 	case SERVER_FULL:
 		snprintf(buffer, sizeof(buffer), _("Server is full!\n").c_str());
-         gsc->critical_error(buffer);
-         break;
+		gsc->critical_error(buffer);
+		break;
 
 	case GAME_NOT_SERVED:
 		snprintf
 			(buffer, sizeof(buffer),
 			 _("This server doesn't serve widelands!\n").c_str());
-         gsc->critical_error(buffer);
-         break;
+		gsc->critical_error(buffer);
+		break;
 
 	}
 }

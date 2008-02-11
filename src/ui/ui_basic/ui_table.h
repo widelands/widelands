@@ -18,8 +18,8 @@
  */
 
 
-#ifndef __S__TABLE_H
-#define __S__TABLE_H
+#ifndef UI_TABLE_H
+#define UI_TABLE_H
 
 #include "ui_panel.h"
 #include "ui_signal.h"
@@ -49,7 +49,6 @@ template<typename Entry> struct Table {
 	struct Entry_Record {
 		Entry_Record(Entry entry, int32_t picid = -1);
 
-      // Data Functions
 		void set_string(uint32_t column, const std::string &);
 		std::string & get_string(uint32_t column) const;
 		int32_t  get_picid() const throw ();
@@ -74,7 +73,7 @@ template<typename Entry> struct Table {
 
 	uint32_t get_nr_columns() const throw ();
 
-   void clear();
+	void clear();
 	void set_sort_column(uint32_t col) throw ();
 	uint32_t get_sort_colum() const throw ();
 	bool get_sort_descending() const throw ();
@@ -82,9 +81,9 @@ template<typename Entry> struct Table {
 	void sort
 		(uint32_t Begin = 0,
 		 uint32_t End   = std::numeric_limits<uint32_t>::max());
-   void remove(uint32_t);
+	void remove(uint32_t);
 
-	void set_align(Align align);
+	void set_align(Align);
 
 	Entry_Record & add
 		(void * const entry,
@@ -100,7 +99,7 @@ template<typename Entry> struct Table {
 	static Entry get(const Entry_Record &);
 	Entry_Record * find(Entry) const throw ();
 
-   void select(uint32_t);
+	void select(uint32_t);
 	struct No_Selection {};
 	Entry_Record & get_selected_record() const;
 	Entry get_selected() const;
@@ -121,7 +120,6 @@ template <> struct Table<void *> : public Panel {
 	struct Entry_Record {
 		Entry_Record(void * const entry, int32_t picid = -1);
 
-      // Data Functions
 		void set_string(uint32_t column, const std::string &);
 		const std::string & get_string(uint32_t column) const;
 		int32_t  get_picid() const throw () {return m_picid;}
@@ -141,7 +139,7 @@ template <> struct Table<void *> : public Panel {
 		RGBColor clr;
 		int32_t      m_picid;
 		struct _data {std::string d_string;};
-      std::vector<_data> m_data;
+		std::vector<_data> m_data;
 	};
 
 public:
@@ -159,7 +157,7 @@ public:
 
 	uint32_t get_nr_columns() const throw () {return m_columns.size();}
 
-   void clear();
+	void clear();
 	void set_sort_column(const uint32_t col) throw ()
 	{assert(col < m_columns.size()); m_sort_column = col;}
 	uint32_t get_sort_colum() const throw () {return m_sort_column;}
@@ -170,9 +168,9 @@ public:
 	void sort
 		(uint32_t Begin = 0,
 		 uint32_t End   = std::numeric_limits<uint32_t>::max());
-   void remove(uint32_t);
+	void remove(uint32_t);
 
-	void set_align(Align align);
+	void set_align(Align);
 
 	Entry_Record & add
 		(void * entry = 0, int32_t picid = -1, bool select = false);
@@ -191,7 +189,7 @@ public:
 	{return er.entry();}
 	Entry_Record * find(const void * entry) const throw ();
 
-   void select(uint32_t);
+	void select(uint32_t);
 	struct No_Selection {};
 	Entry_Record & get_selected_record() const {
 		if (m_selection == no_selection_index()) throw No_Selection();
@@ -216,7 +214,7 @@ private:
 	struct Column;
 	typedef std::vector<Column> Columns;
 	struct Column {
-      std::string name;
+		std::string name;
 		IDButton<Table, Columns::size_type> * btn;
 	};
 
@@ -225,12 +223,12 @@ private:
 
 	Columns m_columns;
 	uint32_t                m_max_pic_width;
-   int32_t                  m_lineheight;
+	int32_t            m_lineheight;
 	Align              m_align;
 	Scrollbar        * m_scrollbar;
 	int32_t                m_scrollpos; //  in pixels
-	uint32_t               m_selection;
-   int32_t                  m_last_click_time;
+	uint32_t           m_selection;
+	int32_t            m_last_click_time;
 	uint32_t                  m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;

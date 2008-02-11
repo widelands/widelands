@@ -61,37 +61,42 @@ m_table
 (this,
  (get_inner_w() - BUILDING_LIST_WIDTH) / 2, 30,
  BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT)
-
 {
+	int32_t const spacing =  5;
+	int32_t const offsx   = spacing;
+	int32_t const offsy   = 30;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
-   // First, we must decide about the size
-   int32_t spacing=5;
-   int32_t offsx=spacing;
-   int32_t offsy=30;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
-
-   // Building list
+	//  building list
 	m_table.add_column(_("Name"), 160);
 	m_table.add_column(_("Prod"),  40);
 	m_table.add_column(_("Owned"), 40);
 	m_table.add_column(_("Build"), 40);
-   m_table.selected.set(this, &Building_Statistics_Menu::table_changed);
+	m_table.selected.set(this, &Building_Statistics_Menu::table_changed);
 
-   posy += BUILDING_LIST_HEIGHT + 2*spacing;
-   m_end_of_table_y = posy;
+	posy += BUILDING_LIST_HEIGHT + 2 * spacing;
+	m_end_of_table_y = posy;
 
-   // let place for Picture
-   posx = get_inner_w() / 4 + spacing;
+	posx = get_inner_w() / 4 + spacing; // let place for Picture
 
-   // Toggle when to run button
-   UI::Textarea* ta = new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Total Productivity: "), Align_CenterLeft);
-   m_progbar = new UI::Progress_Bar(this, posx + ta->get_w() + spacing, posy, get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 24, UI::Progress_Bar::Horizontal);
-   m_progbar->set_total(100);
-   posy += 25;
+	//  toggle when to run button
+	UI::Textarea * ta =
+		new UI::Textarea
+		(this,
+		 posx, posy, get_inner_w() / 4, 24,
+		 _("Total Productivity: "), Align_CenterLeft);
+	m_progbar =
+		new UI::Progress_Bar
+		(this,
+		 posx + ta->get_w() + spacing, posy,
+		 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 24,
+		 UI::Progress_Bar::Horizontal);
+	m_progbar->set_total(100);
+	posy += 25;
 
-   // owned
-   new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Owned: "), Align_CenterLeft);
+	new UI::Textarea
+		(this, posx, posy, get_inner_w()/4, 24, _("Owned: "), Align_CenterLeft);
 	m_owned = new UI::Textarea
 		(this, posx+ta->get_w(), posy, 100, 24, Align_CenterLeft);
 
@@ -113,10 +118,12 @@ m_table
 		 _("Snow next"),
 		 false);
 
-   posy += 25;
+	posy += 25;
 
-   // build
-   new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("In Build: "), Align_CenterLeft);
+	new UI::Textarea
+		(this,
+		 posx, posy, get_inner_w() / 4, 24,
+		 _("In Build: "), Align_CenterLeft);
 	m_build = new UI::Textarea
 		(this, posx+ta->get_w(), posy, 100, 24, Align_CenterLeft);
 
@@ -138,10 +145,12 @@ m_table
 		 _("Snow next"),
 		 false);
 
-   posy += 25;
+	posy += 25;
 
-   // Jump to unproductive
-   new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Jump to unproductive: "), Align_CenterLeft);
+	new UI::Textarea
+		(this,
+		 posx, posy, get_inner_w() / 4, 24,
+		 _("Jump to unproductive: "), Align_CenterLeft);
 
 	m_btn[Prev_Unproductive] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
@@ -161,9 +170,9 @@ m_table
 		 _("Snow next"),
 		 false);
 
-   posy += 25;
+	posy += 25;
 
-   // TODO: help button
+	//  TODO help button
 	new UI::Button<Building_Statistics_Menu>
 		(this,
 		 spacing, get_inner_w() - 37, 32, 32,
@@ -171,27 +180,21 @@ m_table
 		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
 		 &Building_Statistics_Menu::clicked_help, this);
 
-   m_lastupdate = m_parent->get_game()->get_gametime();
-   m_anim = 0;
-   update();
+	m_lastupdate = m_parent->get_game()->get_gametime();
+	m_anim = 0;
+	update();
 
-   m_last_building_index = 0;
+	m_last_building_index = 0;
 }
 
 /*
 ===============
-Building_Statistics_Menu::~Building_Statistics_Menu
-
 Unregister from the registry pointer
 ===============
 */
-Building_Statistics_Menu::~Building_Statistics_Menu()
-{
-}
+Building_Statistics_Menu::~Building_Statistics_Menu() {}
 
 /*
- * Think
- *
  * Update this statistic
  */
 void Building_Statistics_Menu::think() {
@@ -205,7 +208,7 @@ void Building_Statistics_Menu::think() {
 		 >
 		 UPDATE_TIME)
 	{
-      update();
+		update();
 		m_lastupdate = gametime;
 	}
 }
@@ -234,18 +237,17 @@ void Building_Statistics_Menu::draw(RenderTarget* dst) {
  */
 int32_t Building_Statistics_Menu::validate_pointer(int32_t* id, int32_t size) {
 	if (*id < 0)
-      *id = size-1;
-	if (*id >= size)
-      *id = 0;
+		*id = size - 1;
+	if (size <= *id)
+		*id = 0;
 
-   return *id;
+	return *id;
 }
 
 /**
  * \todo Implement help
 */
-void Building_Statistics_Menu::clicked_help() {
-}
+void Building_Statistics_Menu::clicked_help() {}
 
 
 void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
@@ -254,7 +256,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		m_parent->get_player()->get_building_statistics(m_table.get_selected());
 	const Widelands::Map & map = m_parent->egbase().map();
 
-   bool found = true; // We think, we always find a proper building
+	bool found = true; //  we think, we always find a proper building
 
 	switch (id) {
 	case Prev_Owned:
@@ -264,22 +266,22 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		++m_last_building_index;
 		break;
 	case Prev_Construction: {
-            int32_t curindex = m_last_building_index;
+		int32_t const curindex = m_last_building_index;
 		while
 			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
 			if (vec[m_last_building_index].is_constructionsite) break;
-	}
 		break;
+	}
 	case Next_Construction: {
-            int32_t curindex = m_last_building_index;
+		int32_t const curindex = m_last_building_index;
 		while
 			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
 			if (vec[m_last_building_index].is_constructionsite) break;
-	}
 		break;
+	}
 	case Prev_Unproductive: {
-            int32_t curindex = m_last_building_index;
-            found = false;
+		int32_t const curindex = m_last_building_index;
+		found = false;
 		while
 			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
 			if (not vec[m_last_building_index].is_constructionsite) {
@@ -289,8 +291,8 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 					  productionsite,
 					  map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
-                        found = true;
-                        break;
+						found = true;
+						break;
 					}
 			}
 		if (not found) // Now look at the old
@@ -300,12 +302,12 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 				  productionsite,
 				  map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
-                     found = true;
+					found = true;
+		break;
 	}
-         break;
 	case Next_Unproductive: {
-            int32_t curindex = m_last_building_index;
-            found = false;
+		int32_t const curindex = m_last_building_index;
+		found = false;
 		while
 			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
 			if (not vec[m_last_building_index].is_constructionsite) {
@@ -315,8 +317,8 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 					  productionsite,
 					  map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
-                        found = true;
-                        break;
+						found = true;
+						break;
 					}
 			}
 		if (not found) // Now look at the old
@@ -326,11 +328,14 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 				  productionsite,
 				  map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
-                        found = true;
+					found = true;
+		break;
 	}
+	default:
+		assert(false);
 	}
 
-   validate_pointer(&m_last_building_index, vec.size());
+	validate_pointer(&m_last_building_index, vec.size());
 
 	if (found) m_parent->move_view_to(vec[m_last_building_index].pos);
 }
@@ -361,19 +366,18 @@ void Building_Statistics_Menu::update() {
 		std::vector<Widelands::Player::Building_Stats> const & vec =
 			m_parent->get_player()->get_building_statistics(i);
 
-      // walk all entries, add new ones if needed
+		//  walk all entries, add new ones if needed
 		UI::Table<const intptr_t>::Entry_Record * te = 0;
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
 			UI::Table<const intptr_t>::Entry_Record & er = m_table.get_record(l);
 			if (UI::Table<const intptr_t>::get(er) == i) {
 				te = &er;
-            break;
+				break;
 			}
 		}
 
-      // If not in list, add new one, as long as this building is
-      // enabled
+		//  If not in list, add new one, as long as this building is enabled.
 		if (not te) {
 			if (! m_parent->player().is_building_allowed(i))
 				continue;
@@ -392,12 +396,10 @@ void Building_Statistics_Menu::update() {
 					total_prod +=
 						dynamic_cast<Widelands::ProductionSite &>
 						(*map[vec[l].pos].get_immovable()).get_statistics_percent();
-
 			}
 		}
 
-          // Is this entry selected?
-		const bool is_selected =
+		const bool is_selected = //  Is this entry selected?
 			m_table.has_selection() and m_table.get_selected() == i;
 
 		if (is_selected) {
@@ -408,11 +410,10 @@ void Building_Statistics_Menu::update() {
 			m_btn[Next_Construction]->set_enabled(nr_build);
 		}
 
-          // Add new Table Entry
-          char buffer[100];
+		//  add new Table Entry
+		char buffer[100];
 		te->set_string(0, building.descname());
 
-          // Product
 		if (productionsite and nr_owned) {
 			const uint32_t percent = static_cast<uint32_t>
 				(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
@@ -429,28 +430,28 @@ void Building_Statistics_Menu::update() {
 				m_btn[Next_Unproductive]->set_enabled(false);
 			}
 		}
-          te->set_string(1, buffer);
+		te->set_string(1, buffer);
 
-          // Number of this buildings
+		//  number of this buildings
 		snprintf(buffer, sizeof(buffer), "%i", nr_owned);
-          te->set_string(2, buffer);
+		te->set_string(2, buffer);
 		if (is_selected)
-            m_owned->set_text(buffer);
+			m_owned->set_text(buffer);
 
-          // Number of currently builds
+		//  number of currently builds
 		snprintf(buffer, sizeof(buffer), "%i", nr_build);
-          te->set_string(3, buffer);
+		te->set_string(3, buffer);
 		if (is_selected)
-            m_build->set_text(buffer);
+			m_build->set_text(buffer);
 	}
 
-   // Disable all buttons, if nothing to select
+	//  disable all buttons, if nothing to select
 	if (not m_table.has_selection()) {
-      m_btn[Prev_Owned]       ->set_enabled(false);
-      m_btn[Next_Owned]       ->set_enabled(false);
-      m_btn[Prev_Construction]->set_enabled(false);
-      m_btn[Next_Construction]->set_enabled(false);
-      m_btn[Prev_Unproductive]->set_enabled(false);
-      m_btn[Next_Unproductive]->set_enabled(false);
+		m_btn[Prev_Owned]       ->set_enabled(false);
+		m_btn[Next_Owned]       ->set_enabled(false);
+		m_btn[Prev_Construction]->set_enabled(false);
+		m_btn[Next_Construction]->set_enabled(false);
+		m_btn[Prev_Unproductive]->set_enabled(false);
+		m_btn[Next_Unproductive]->set_enabled(false);
 	}
 }

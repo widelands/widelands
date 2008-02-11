@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_MESSAGE_BOX_OPTION_MENU_H
-#define __S__EVENT_MESSAGE_BOX_OPTION_MENU_H
+#ifndef EVENT_MESSAGE_BOX_OPTION_MENU_H
+#define EVENT_MESSAGE_BOX_OPTION_MENU_H
 
 #include "ui_window.h"
 
@@ -48,38 +48,38 @@ struct Event_Message_Box_Option_Menu : public UI::Window {
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
-      static const uint32_t MAX_BUTTONS=4;
+	static const uint32_t MAX_BUTTONS = 4;
 	Editor_Interactive & eia();
 
-      void update();
+	void update();
 	void clicked_ok                        ();
 	void clicked_number_of_buttons_decrease();
 	void clicked_number_of_buttons_increase();
 	void clicked_trigger_sel_decrease      ();
 	void clicked_trigger_sel_increase      ();
 	void ls_selected    (uint32_t);
-      void edit_box_edited(int32_t);
+	void edit_box_edited(int32_t);
 
 	Widelands::Event_Message_Box & m_event;
 
 	struct Button_Descr {
-         std::string name;
-         int32_t trigger;
+		std::string name;
+		int32_t trigger;
 	} m_buttons[MAX_BUTTONS];
 
-      UI::Checkbox* m_is_modal;
-      UI::Edit_Box* m_caption;
-      UI::Edit_Box* m_name;
-      UI::Edit_Box* m_window_title;
-      UI::Edit_Box* m_button_name;
-      UI::Textarea* m_nr_buttons_ta;
-	uint32_t                     m_nr_buttons;
-      uint32_t         m_ls_selected;
-      UI::Multiline_Editbox* m_text;
-      UI::Textarea* m_current_trigger_ta;
+	UI::Checkbox           * m_is_modal;
+	UI::Edit_Box           * m_caption;
+	UI::Edit_Box           * m_name;
+	UI::Edit_Box           * m_window_title;
+	UI::Edit_Box           * m_button_name;
+	UI::Textarea           * m_nr_buttons_ta;
+	uint32_t                 m_nr_buttons;
+	uint32_t                 m_ls_selected;
+	UI::Multiline_Editbox  * m_text;
+	UI::Textarea           * m_current_trigger_ta;
 	UI::Listselect<void *> * m_buttons_ls;
 
-      std::vector<int32_t> m_null_triggers;
+	std::vector<int32_t> m_null_triggers;
 };
 
 #endif

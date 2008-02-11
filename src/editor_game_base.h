@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_GAME_BASE_H
-#define __S__EDITOR_GAME_BASE_H
+#ifndef EDITOR_GAME_BASE_H
+#define EDITOR_GAME_BASE_H
 
 #include "bob.h"
 #include "building.h"
@@ -222,4 +222,4 @@ extern const uint8_t g_playercolors[MAX_PLAYERS][12];
 
 };
 
-#endif // __S__EDITOR_GAME_BASE_H
+#endif

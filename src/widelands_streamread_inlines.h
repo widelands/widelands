@@ -23,7 +23,6 @@
 #include "widelands_streamread.h"
 
 #include "immovable.h"
-//#include "tribe.h"
 
 namespace Widelands {
 

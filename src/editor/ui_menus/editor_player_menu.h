@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_PLAYER_MENU_H
-#define __S__EDITOR_PLAYER_MENU_H
+#ifndef EDITOR_PLAYER_MENU_H
+#define EDITOR_PLAYER_MENU_H
 
 #include "constants.h"
 
@@ -40,12 +40,12 @@ template <typename T, typename ID> struct IDButton;
 struct Editor_Player_Menu : public UI::UniqueWindow {
 	Editor_Player_Menu
 		(Editor_Interactive &, UI::UniqueWindow::Registry *);
-      virtual ~Editor_Player_Menu() {}
+	virtual ~Editor_Player_Menu() {}
 
 private:
-      UI::UniqueWindow::Registry m_allow_buildings_menu;
-      UI::Textarea *m_nr_of_players_ta;
-      UI::Edit_Box* m_plr_names[MAX_PLAYERS];
+	UI::UniqueWindow::Registry m_allow_buildings_menu;
+	UI::Textarea * m_nr_of_players_ta;
+	UI::Edit_Box * m_plr_names[MAX_PLAYERS];
 	UI::Button<Editor_Player_Menu>
 		m_add_player, m_remove_last_player;
 	UI::IDButton<Editor_Player_Menu, Widelands::Player_Number const>
@@ -53,20 +53,20 @@ private:
 		//* m_plr_make_infrastructure_buts[MAX_PLAYERS],
 		* m_plr_set_pos_buts            [MAX_PLAYERS],
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];
-      std::vector<std::string> m_tribes;
+	std::vector<std::string> m_tribes;
 
-      int32_t m_spt_index;
-      int32_t m_mis_index;
+	int32_t m_spt_index;
+	int32_t m_mis_index;
 
-      int32_t m_posy;
+	int32_t m_posy;
 
 	void name_changed(int32_t);
 	void clicked_add_player         ();
 	void clicked_remove_last_player ();
 	void player_tribe_clicked       (uint8_t);
 	void set_starting_pos_clicked   (uint8_t);
-      void update();
-      void think();
+	void update();
+	void think();
 };
 
 #endif

@@ -146,22 +146,12 @@ m_do_chat_overlays(true), m_is_typing_msg(false)
 	fieldclicked.set(this, &Interactive_Player::field_action);
 }
 
-/*
-===============
-Interactive_Player::~Interactive_Player
 
-cleanups
-===============
-*/
-Interactive_Player::~Interactive_Player()
-{
-}
+Interactive_Player::~Interactive_Player() {}
 
 
 /*
 ===============
-Interactive_Player::think
-
 Update the speed display, check for chatmessages.
 ===============
 */
@@ -285,8 +275,7 @@ void Interactive_Player::toggle_buildhelp()
 }
 
 
-void Interactive_Player::toggle_resources() {
-}
+void Interactive_Player::toggle_resources() {}
 
 
 //
@@ -469,6 +458,4 @@ void Interactive_Player::set_player_number(uint32_t n) {
  * Cleanup any game-related data before loading a new game
  * while a game is currently playing.
  */
-void Interactive_Player::cleanup_for_load()
-{
-}
+void Interactive_Player::cleanup_for_load() {}

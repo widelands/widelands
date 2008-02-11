@@ -31,17 +31,18 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay
 (Widelands::Game * const g)
 :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
+m_game              (g),
 
-	m_game(g),
+m_back
+(this,
+ 570, 505, 200, 26, 0,
+ &Fullscreen_Menu_LoadReplay::end_modal, this, 0,
+ _("Back")),
 
-// UI::Buttons
-	m_back(this, 570, 505, 200, 26, 0,
-	       &Fullscreen_Menu_LoadReplay::end_modal, this, 0,
-	       _("Back")),
-
-	m_ok(this, 570, 535, 200, 26, 2,
-	     &Fullscreen_Menu_LoadReplay::clicked_ok, this,
-	     _("OK")),
+m_ok
+(this, 570, 535, 200, 26, 2,
+ &Fullscreen_Menu_LoadReplay::clicked_ok, this,
+ _("OK")),
 
 // Create the list area
 	m_list(this, 15, 205, 455, 365),
@@ -54,9 +55,7 @@ Fullscreen_Menu_Base("choosemapmenu.jpg"),
 	fill_list();
 }
 
-Fullscreen_Menu_LoadReplay::~Fullscreen_Menu_LoadReplay()
-{
-}
+Fullscreen_Menu_LoadReplay::~Fullscreen_Menu_LoadReplay() {}
 
 void Fullscreen_Menu_LoadReplay::clicked_ok()
 {

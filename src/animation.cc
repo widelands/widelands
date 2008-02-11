@@ -97,13 +97,9 @@ AnimationManager IMPLEMENTATION
 AnimationManager g_anim;
 
 
-AnimationManager::AnimationManager()
-{
-}
+AnimationManager:: AnimationManager() {}
 
-AnimationManager::~AnimationManager()
-{
-}
+AnimationManager::~AnimationManager() {}
 
 /*
 ===============
@@ -140,8 +136,11 @@ void AnimationManager::flush()
  * \param picnametempl  a template for the picture names
  * \param encdefaults   default values for player colors, see \ref EncodeData
 */
-uint32_t AnimationManager::get(const char *directory, Section *s, const char *picnametempl,
-	                        const EncodeData *encdefaults)
+uint32_t AnimationManager::get
+(char       const * const directory,
+ Section          * const s,
+ char       const *       picnametempl,
+ EncodeData const * const encdefaults)
 {
 	uint32_t id;
 	AnimationData* ad;
@@ -291,9 +290,7 @@ DirAnimations::DirAnimations
 	m_animations[5] = dir6;
 }
 
-DirAnimations::~DirAnimations()
-{
-}
+DirAnimations::~DirAnimations() {}
 
 /*
 ===============
@@ -350,7 +347,7 @@ void DirAnimations::parse
 
 		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
 
-      std::string anim_name=sectname;
+		std::string anim_name = sectname;
 
 		s = prof->get_section(sectname);
 		if (!s) {
@@ -360,7 +357,7 @@ void DirAnimations::parse
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir-1]);
-      m_animations[dir-1] = g_anim.get(directory, s, sectname, encdefaults);
-      b->add_animation(anim_name.c_str(), m_animations[dir-1]);
+		m_animations[dir - 1] = g_anim.get(directory, s, sectname, encdefaults);
+		b->add_animation(anim_name.c_str(), m_animations[dir-1]);
 	}
 }

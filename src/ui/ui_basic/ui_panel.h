@@ -18,8 +18,8 @@
  */
 
 
-#ifndef __S__PANEL_H
-#define __S__PANEL_H
+#ifndef UI_PANEL_H
+#define UI_PANEL_H
 
 #include "ui_object.h"
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,54 +45,54 @@ Editor_Tool_Menu::Editor_Tool_Menu
 UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 {
 
-   // UI::Buttons
-   const int32_t offsx=5;
-	const int32_t offsy   = 5;
-   const int32_t spacing=5;
-   const int32_t width=34;
-   const int32_t height=34;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	int32_t const offsx   =  5;
+	int32_t const offsy   =  5;
+	int32_t const spacing =  5;
+	int32_t const width   = 34;
+	int32_t const height  = 34;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
 
-   int32_t num_tools=6;
+	int32_t const num_tools = 6;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
 		 (PicMod_Game, "pics/editor_menu_tool_change_height.png"));
-   posx+=width+spacing;
+	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
 		 (PicMod_Game, "pics/editor_menu_tool_noise_height.png"));
-   posx+=width+spacing;
+	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
 		 (PicMod_Game, "pics/editor_menu_tool_set_terrain.png"));
-   posx+=width+spacing;
+	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
 		 (PicMod_Game, "pics/editor_menu_tool_place_immovable.png"));
-   posx+=width+spacing;
+	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
 		 (PicMod_Game, "pics/editor_menu_tool_place_bob.png"));
-   posx+=width+spacing;
+	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
 		 (PicMod_Game, "pics/editor_menu_tool_change_resources.png"));
 
-   set_inner_size(offsx+(width+spacing)*num_tools, offsy+(height+spacing));
+	set_inner_size
+		(offsx + (width + spacing) * num_tools, offsy + (height + spacing));
 
 	{
 		const Editor_Tool & current = parent.tools.current();
@@ -151,7 +151,8 @@ void Editor_Tool_Menu::changed_to() {
 		current_tool_pointer     = &parent.tools.increase_resources;
 		current_registry_pointer = &parent.m_resourcesmenu;
 		break;
-	default: assert(false);
+	default:
+		assert(false);
 	}
 
 	parent.select_tool(*current_tool_pointer, Editor_Tool::First);

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_MOVE_VIEW_H
-#define __S__EVENT_MOVE_VIEW_H
+#ifndef EVENT_MOVE_VIEW_H
+#define EVENT_MOVE_VIEW_H
 
 #include "widelands.h"
 #include "event.h"
@@ -35,7 +35,7 @@ struct Event_Move_View : public Event {
 
 	int32_t option_menu(Editor_Interactive &);
 
-      State run(Game*);
+	State run(Game *);
 
 	void Read (Section &, Editor_Game_Base       &);
 	void Write(Section &, Editor_Game_Base const &) const;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__INTERACTIVE_SPECTATOR_H
-#define __S__INTERACTIVE_SPECTATOR_H
+#ifndef INTERACTIVE_SPECTATOR_H
+#define INTERACTIVE_SPECTATOR_H
 
 #include "interactive_base.h"
 #include <SDL_keyboard.h>
@@ -57,4 +57,4 @@ private:
 };
 
 
-#endif // __S__INTERACTIVE_SPECTATOR_H
+#endif

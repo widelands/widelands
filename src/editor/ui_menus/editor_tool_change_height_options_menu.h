@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_TOOL_CHANGE_HEIGHT_OPTIONS_MENU
-#define __S__EDITOR_TOOL_CHANGE_HEIGHT_OPTIONS_MENU
+#ifndef EDITOR_TOOL_CHANGE_HEIGHT_OPTIONS_MENU_H
+#define EDITOR_TOOL_CHANGE_HEIGHT_OPTIONS_MENU_H
 
 #include "editor_tool_options_menu.h"
 
@@ -40,7 +40,7 @@ private:
 		Set_To_Increase,    Set_To_Decrease
 	};
 	void clicked_button(Button);
-      void update();
+	void update();
 	UI::Textarea                  m_change_by_label;
 	UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Button>
 		m_change_by_increase, m_change_by_decrease;

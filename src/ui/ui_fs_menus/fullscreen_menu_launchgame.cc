@@ -39,7 +39,6 @@ m_game(game),
 m_netgame(ng),
 m_ml(ml),
 
-	// Title
 title(this, MENU_XRES/2, 120, _("Launch Game"), Align_HCenter),
 
 back
@@ -58,7 +57,6 @@ m_ok
  std::string(),
  false),
 
-	// Map selection fields
 m_mapname(this, 650, 250, "(no map)", Align_HCenter),
 m_select_map
 (this,

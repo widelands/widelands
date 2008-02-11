@@ -125,7 +125,7 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 
 	m_sel.pos = center;
 
-   // register sel overlay position
+	//  register sel overlay position
 	if (m_sel.triangles) {
 		assert(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
 		Widelands::MapTriangleRegion<> mr
@@ -156,11 +156,11 @@ void Interactive_Base::set_sel_radius(const uint32_t n) {
  * Set/Unset sel picture
  */
 void Interactive_Base::set_sel_picture(const char * const file) {
-   m_sel.pic = g_gr->get_picture(PicMod_Game, file);
-   set_sel_pos(get_sel_pos()); //  redraw
+	m_sel.pic = g_gr->get_picture(PicMod_Game, file);
+	set_sel_pos(get_sel_pos()); //  redraw
 }
 void Interactive_Base::unset_sel_picture() {
-   set_sel_picture("pics/fsel.png");
+	set_sel_picture("pics/fsel.png");
 }
 
 
@@ -189,9 +189,7 @@ int32_t Interactive_Base::get_yres()
  *
  * Default implementation does nothing.
  */
-void Interactive_Base::postload()
-{
-}
+void Interactive_Base::postload() {}
 
 
 /*
@@ -210,20 +208,19 @@ void Interactive_Base::think()
 	m_avg_usframetime = ((m_avg_usframetime * 15) + (m_frametime * 1000)) / 16;
 	m_lastframe = curframe;
 
-   // If one of the arrow keys is pressed,
-   // scroll here
-   const uint32_t scrollval = 10;
+	// If one of the arrow keys is pressed, scroll here
+	const uint32_t scrollval = 10;
 
-   WLApplication *app=WLApplication::get();
+	WLApplication & app = *WLApplication::get();
 
 	if (keyboard_free()) {
-		if (app->get_key_state(SDLK_UP))
+		if (app.get_key_state(SDLK_UP))
 			set_rel_viewpoint(Point(0, -scrollval));
-		if (app->get_key_state(SDLK_DOWN))
+		if (app.get_key_state(SDLK_DOWN))
 			set_rel_viewpoint(Point(0,  scrollval));
-		if (app->get_key_state(SDLK_LEFT))
+		if (app.get_key_state(SDLK_LEFT))
 			set_rel_viewpoint(Point(-scrollval, 0));
-		if (app->get_key_state(SDLK_RIGHT))
+		if (app.get_key_state(SDLK_RIGHT))
 			set_rel_viewpoint(Point (scrollval, 0));
 	}
 
@@ -231,13 +228,14 @@ void Interactive_Base::think()
    // The game advances
 	egbase().think();
 
-   // Update everythink so and so many milliseconds, to make sure the whole
-   // screen is synced (another user may have done something, and the screen was
-   // not redrawn)
+	//  Update everything so and so many milliseconds, to make sure that the
+	//  whole screen is synced (another user may have done something, and the
+	//  screen was not redrawn).
 	if (curframe & 1023) // % 1024
-      need_complete_redraw();
+		need_complete_redraw();
 
-	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
+	//  The entire screen needs to be redrawn (unit movement, tile animation,
+	//  etc...)
 	g_gr->update_fullscreen();
 
 	// some of the UI windows need to think()
@@ -267,14 +265,14 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 		 or
 		 not dynamic_cast<const Game *>(&egbase()))
 	{
-      // Show sel coordinates
-      char buf[100];
+		//  show sel coordinates
+		char buf[100];
 
 		snprintf(buf, sizeof(buf), "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
 		g_fh->draw_string
 			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 5), buf, Align_Left);
-	   assert(m_sel.pos.triangle.t < 2);
-	   const char * const triangle_string[] = {"down", "right"};
+		assert(m_sel.pos.triangle.t < 2);
+		const char * const triangle_string[] = {"down", "right"};
 		snprintf
 			(buf, sizeof(buf),
 			 "%3i %3i %s",
@@ -285,8 +283,8 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 	}
 
 	if (get_display_flag(dfDebug)) {
-      // Show FPS
-      char buffer[100];
+		//  show FPS
+		char buffer[100];
 		snprintf
 		   (buffer, sizeof(buffer),
 		    "%5.1f fps (avg: %5.1f fps)",
@@ -315,7 +313,7 @@ void Interactive_Base::mainview_move(int32_t x, int32_t y)
 		if (y >= maxy) y -= maxy;
 
 
-      m_mm->set_view_pos(x, y);
+		m_mm->set_view_pos(x, y);
 	}
 }
 
@@ -495,7 +493,7 @@ void Interactive_Base::abort_build_road()
 	roadb_remove_overlay();
 	need_complete_redraw();
 
-   m_road_build_player=0;
+	m_road_build_player = 0;
 
 	delete m_buildroad;
 	m_buildroad = 0;
@@ -677,7 +675,7 @@ void Interactive_Base::roadb_add_overlay()
 		int32_t shift = 2*(dir - Map_Object::WALK_E);
 
 		uint8_t set_to = overlay_manager.get_road_overlay(c);
-      set_to|=  Widelands::Road_Normal << shift;
+		set_to|=  Widelands::Road_Normal << shift;
 		overlay_manager.register_road_overlay(c, set_to, m_jobid);
 	}
 
@@ -722,18 +720,18 @@ void Interactive_Base::roadb_add_overlay()
 		else
 			icon = 3;
 
-      std::string name="";
+		char const * name;
 		switch (icon) {
 		case 1: name = "pics/roadb_green.png";  break;
 		case 2: name = "pics/roadb_yellow.png"; break;
 		case 3: name = "pics/roadb_red.png";    break;
-		};
-
-      assert(name!="");
+		default:
+			assert(false);
+		}
 
 		egbase().map().overlay_manager().register_overlay
 			(neighb,
-			 g_gr->get_picture(PicMod_Game, name.c_str()),
+			 g_gr->get_picture(PicMod_Game, name),
 			 7,
 			 Point::invalid(),
 			 m_road_buildhelp_overlay_jobid);

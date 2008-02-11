@@ -91,17 +91,22 @@ void Table<void *>::add_column(const std::string & name, const uint32_t width) {
 	Column c = {
 		name,
 		new IDButton<Table, Columns::size_type>
-		   (this,
-		    complete_width, 0, width, 15,
-		    3,
-		    &Table::header_button_clicked, this, m_columns.size(),
-		    name)
+			(this,
+			 complete_width, 0, width, 15,
+			 3,
+			 &Table::header_button_clicked, this, m_columns.size(),
+			 name)
 	};
-   m_columns.push_back(c);
+	m_columns.push_back(c);
 	if (not m_scrollbar) {
-      m_scrollbar=new Scrollbar(get_parent(), get_x()+get_w()-24, get_y()+m_columns[0].btn->get_h(), 24, get_h()-m_columns[0].btn->get_h(), false);
-      m_scrollbar->moved.set(this, &Table::set_scrollpos);
-      m_scrollbar->set_steps(1);
+		m_scrollbar =
+			new Scrollbar
+			(get_parent(),
+			 get_x() + get_w() - 24, get_y() + m_columns[0].btn->get_h(),
+			 24,                     get_h() - m_columns[0].btn->get_h(),
+			 false);
+		m_scrollbar->moved.set(this, &Table::set_scrollpos);
+		m_scrollbar->set_steps(1);
 	}
 
 }
@@ -117,7 +122,7 @@ Table<void *>::Entry_Record * Table<void *>::find
 		 ++it)
 		if ((*it)->entry() == entry) return *it;
 
-    return 0;
+	return 0;
 }
 
 /*
@@ -125,15 +130,14 @@ Table<void *>::Entry_Record * Table<void *>::find
  */
 void Table<void *>::header_button_clicked(Columns::size_type n) {
 	if (get_sort_colum() == n) {
-      // Change sort direction
-		set_sort_descending(not get_sort_descending());
-      sort();
-      return;
+		set_sort_descending(not get_sort_descending()); //  change sort direction
+		sort();
+		return;
 	}
 
-   set_sort_column(n);
-   sort();
-   return;
+	set_sort_column(n);
+	sort();
+	return;
 }
 
 /**
@@ -163,28 +167,27 @@ Redraw the table
 */
 void Table<void *>::draw(RenderTarget * dst)
 {
-   // draw text lines
-   int32_t lineheight = get_lineheight();
+	//  draw text lines
+	int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
-   int32_t y = 1 + idx*lineheight - m_scrollpos + m_columns[0].btn->get_h();
+	int32_t y = 1 + idx * lineheight - m_scrollpos + m_columns[0].btn->get_h();
 
 	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		if (y >= get_h())
-         return;
+			return;
 
 		const Entry_Record & er = *m_entry_records[idx];
 
 		if (idx == m_selection) {
 			assert(2 <= get_eff_w());
-         // dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
 			dst->brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
 		}
 
-      // First draw pictures
+		//  first draw pictures
 		if (er.get_picid() != -1) {
 			uint32_t w, h;
 			g_gr->get_picture_size(er.get_picid(), w, h);
@@ -193,12 +196,12 @@ void Table<void *>::draw(RenderTarget * dst)
 
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
-      int32_t curx=0;
-      int32_t curw;
+		int32_t curx = 0;
+		int32_t curw;
 		for (uint32_t i = 0; i < get_nr_columns(); ++i) {
-         curw=m_columns[i].btn->get_w();
+			curw = m_columns[i].btn->get_w();
 
-         // Horizontal center the string
+			//  Horizontal center the string
 			g_fh->draw_string
 				(*dst,
 				 UI_FONT_SMALL,
@@ -216,11 +219,11 @@ void Table<void *>::draw(RenderTarget * dst)
 				 er.get_string(i), m_align,
 				 -1);
 
-         curx+=curw;
+			curx += curw;
 		}
 
-      y += lineheight;
-      idx++;
+		y += lineheight;
+		++idx;
 	}
 }
 
@@ -230,17 +233,16 @@ void Table<void *>::draw(RenderTarget * dst)
 bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	   int32_t time=WLApplication::get()->get_time();
+	int32_t const time = WLApplication::get()->get_time();
 
-      // This hick hack is needed if any of the
-      // callback functions calls clear to forget the last
-      // clicked time.
-      int32_t real_last_click_time=m_last_click_time;
+	//  This hick hack is needed if any of the callback functions calls clear to
+	//  forget the last clicked time.
+	int32_t real_last_click_time = m_last_click_time;
 
-      m_last_selection=m_selection;
-      m_last_click_time=time;
+	m_last_selection  = m_selection;
+	m_last_click_time = time;
 
-      y = (y + m_scrollpos - m_columns[0].btn->get_h()) / get_lineheight();
+	y = (y + m_scrollpos - m_columns[0].btn->get_h()) / get_lineheight();
 	if (static_cast<size_t>(y) < m_entry_records.size()) select(y);
 
       // check if doubleclicked
@@ -249,7 +251,7 @@ bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
 		 and
 		 m_last_selection == m_selection
 		 and m_selection != no_selection_index())
-         double_clicked.call(m_selection);
+		double_clicked.call(m_selection);
 
 
 	return true;
@@ -279,11 +281,11 @@ Add a new entry to the table.
 Table<void *>::Entry_Record & Table<void *>::add
 	(void * const entry, const int32_t picid, const bool do_select)
 {
-   int32_t entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
+	int32_t entry_height = g_fh->get_fontheight(UI_FONT_SMALL);
 	if (picid != -1) {
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
-	   entry_height = std::max<uint32_t>(entry_height, h);
+		entry_height = std::max<uint32_t>(entry_height, h);
 		if (m_max_pic_width < w)
 			m_max_pic_width = w;
 	}
@@ -297,9 +299,9 @@ Table<void *>::Entry_Record & Table<void *>::add
 	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2));
 
 	if (do_select)
-      select(m_entry_records.size() - 1);
+		select(m_entry_records.size() - 1);
 
-   update(0, 0, get_eff_w(), get_h());
+	update(0, 0, get_eff_w(), get_h());
 	return result;
 }
 
@@ -375,7 +377,7 @@ void Table<void *>::Entry_Record::set_string
 {
 	assert(column < m_data.size());
 
-   m_data[column].d_string = str;
+	m_data[column].d_string = str;
 }
 const std::string & Table<void *>::Entry_Record::get_string
 	(const uint32_t column) const

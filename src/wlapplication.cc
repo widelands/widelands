@@ -502,7 +502,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 					snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr);
 					if (g_fs->FileExists(buffer)) continue;
 					g_gr->screenshot(*buffer);
-						break;
+					break;
 				}
 				break;
 			}
@@ -522,8 +522,12 @@ void WLApplication::handle_input(const InputCallback *cb)
 			if (cb and cb->mouse_press) {
 				if (m_mouse_swapped) {
 					switch (ev.button.button) {
-					case SDL_BUTTON_LEFT: ev.button.button = SDL_BUTTON_RIGHT; break;
-					case SDL_BUTTON_RIGHT: ev.button.button = SDL_BUTTON_LEFT;
+					case SDL_BUTTON_LEFT:
+						ev.button.button = SDL_BUTTON_RIGHT;
+						break;
+					case SDL_BUTTON_RIGHT:
+						ev.button.button = SDL_BUTTON_LEFT;
+						break;
 					}
 				}
 				assert(ev.button.state == SDL_PRESSED);
@@ -534,8 +538,12 @@ void WLApplication::handle_input(const InputCallback *cb)
 			if (cb and cb->mouse_release) {
 				if (m_mouse_swapped) {
 					switch (ev.button.button) {
-					case SDL_BUTTON_LEFT: ev.button.button = SDL_BUTTON_RIGHT; break;
-					case SDL_BUTTON_RIGHT: ev.button.button = SDL_BUTTON_LEFT;
+					case SDL_BUTTON_LEFT:
+						ev.button.button = SDL_BUTTON_RIGHT;
+						break;
+					case SDL_BUTTON_RIGHT:
+						ev.button.button = SDL_BUTTON_LEFT;
+						break;
 					}
 				}
 				assert(ev.button.state == SDL_RELEASED);
@@ -633,8 +641,8 @@ void WLApplication::set_input_grab(bool grab)
  * \todo Ensure that calling this with active UI elements does barf
  * \todo Document parameters
  */
-void WLApplication::init_graphics(const int32_t w, const int32_t h,
-                                  const int32_t bpp, const bool fullscreen)
+void WLApplication::init_graphics
+(int32_t const w, int32_t const h, int32_t const bpp, bool const fullscreen)
 {
 	if (w == m_gfx_w && h == m_gfx_h && fullscreen == m_gfx_fullscreen)
 		return;
@@ -850,15 +858,15 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("double")>0) {
-		#ifdef DEBUG
-		#ifndef __WIN32__
+#ifdef DEBUG
+#ifndef __WIN32__
 		init_double_game();
-		#else
+#else
 		cout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
-		#endif
-		#else
+#endif
+#else
 		cout << _("--double is disabled. This is not a debug build!") << endl;
-		#endif
+#endif
 
 		m_commandline.erase("double");
 	}
@@ -915,12 +923,12 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	//will be taken care of (==ignored) when saving the options
 
 	const std::map<std::string, std::string>::const_iterator commandline_end =
-	   m_commandline.end();
+		m_commandline.end();
 	for
-	(std::map<std::string, std::string>::const_iterator it =
-	         m_commandline.begin();
-	      it != commandline_end;
-	      ++it)
+		(std::map<std::string, std::string>::const_iterator it =
+		 m_commandline.begin();
+		 it != commandline_end;
+		 ++it)
 	{
 		//TODO: barf here on unkown option; the list of known options
 		//TODO: needs to be centralized
@@ -944,37 +952,42 @@ void WLApplication::show_usage()
 	cout << _("Options:\n\n");
 	cout
 		<<
-		_(" --<config-entry-name>=value overwrites any config file setting\n\n"
-		  " --record=FILENAME    Record all events to the given filename for "
-		  "later playback\n"
-		  " --playback=FILENAME  Playback given filename (see --record)\n\n"
-		  " --coredump=[yes|no]  Generates a core dump on segfaults instead of "
-		  "using the SDL\n");
+		_
+		(" --<config-entry-name>=value overwrites any config file setting\n\n"
+		 " --record=FILENAME    Record all events to the given filename for "
+		 "later playback\n"
+		 " --playback=FILENAME  Playback given filename (see --record)\n\n"
+		 " --coredump=[yes|no]  Generates a core dump on segfaults instead of "
+		 "using the SDL\n");
 #ifdef USE_GGZ
 	cout
 		<<
-		_(" --ggz                Starts game as GGZ Gaming Zone client (don't "
-		  "use!)");
+		_
+		(" --ggz                Starts game as GGZ Gaming Zone client (don't "
+		 "use!)");
 #endif
 	cout
 		<<
-		_(" --nosound            Starts the game with sound disabled\n"
-		  " --nozip              Do not save files as binary zip archives.\n\n"
-		  " --editor             Directly starts the Widelands editor.\n\n");
+		_
+		(" --nosound            Starts the game with sound disabled\n"
+		 " --nozip              Do not save files as binary zip archives.\n\n"
+		 " --editor             Directly starts the Widelands editor.\n\n");
 #ifdef DEBUG
 #ifndef __WIN32__
 	cout
 		<<
-		_(" --double             Start the game twice (for localhost network "
-		  "testing)\n\n");
+		_
+		(" --double             Start the game twice (for localhost network "
+		 "testing)\n\n");
 #endif
 #endif
 	cout << _(" --help               Show this help\n") << endl;
 	cout
 		<<
-		_("Bug reports? Suggestions? Check out the project website:\n"
-		  "        http://www.sourceforge.net/projects/widelands\n\n"
-		  "Hope you enjoy this game!\n\n");
+		_
+		("Bug reports? Suggestions? Check out the project website:\n"
+		 "        http://www.sourceforge.net/projects/widelands\n\n"
+		 "Hope you enjoy this game!\n\n");
 }
 
 #ifdef DEBUG
@@ -1055,52 +1068,42 @@ void WLApplication::yield_double_game()
  */
 void WLApplication::mainmenu()
 {
-	bool done=false;
-
-	while (!done) {
+	for (;;) {
 		Fullscreen_Menu_Main mm;
 		switch (mm.run()) {
 		case Fullscreen_Menu_Main::mm_singleplayer:
 			mainmenu_singleplayer();
 			break;
-
 		case Fullscreen_Menu_Main::mm_multiplayer:
 			mainmenu_multiplayer();
 			break;
-
 		case Fullscreen_Menu_Main::mm_replay:
 			m_game = new Widelands::Game;
 			m_game->run_replay();
 			delete m_game;
 			m_game = 0;
 			break;
-
 		case Fullscreen_Menu_Main::mm_options: {
 			Section *s = g_options.pull_section("global");
 			Options_Ctrl om(s);
-		}
 			break;
-
+		}
 		case Fullscreen_Menu_Main::mm_readme: {
 			Fullscreen_Menu_FileView ff("txts/README");
 			ff.run();
-		}
 			break;
-
+		}
 		case Fullscreen_Menu_Main::mm_license: {
 			Fullscreen_Menu_FileView ff("txts/COPYING");
 			ff.run();
-			}
 			break;
-
+		}
 		case Fullscreen_Menu_Main::mm_editor:
 			Editor_Interactive::run_editor(m_editor_filename);
 			break;
-
 		default:
 		case Fullscreen_Menu_Main::mm_exit:
-			done=true;
-			break;
+			return;
 		}
 	}
 }
@@ -1162,9 +1165,11 @@ void WLApplication::mainmenu_singleplayer()
 			// Load selected campaign-map-file
 			if (m_game->run_splayer_map_direct(filename.c_str(), true))
 				done = true;
-		}
 			break;
-		} end_campaign:
+		}
+		default:
+			assert(false);
+		} end_campaign:;
 
 		delete m_game;
 		m_game = 0;
@@ -1177,13 +1182,13 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-      #if __WIN32__
-      // The Winsock2 library needs to get called through WSAStartup,
-      // to initiate the use of the Winsock DLL by Widelands.
-      WSADATA wsaData;
+#if __WIN32__
+	//  The Winsock2 library needs to get called through WSAStartup, to initiate
+	//  the use of the Winsock DLL by Widelands.
+	WSADATA wsaData;
 	if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0)
-        throw wexception("Initialisation of Wsock2-library failed");
-      #endif
+		throw wexception("Initialisation of Wsock2-library failed");
+#endif
 
 	NetGame* netgame = 0;
 	Fullscreen_Menu_NetSetup ns;
@@ -1207,8 +1212,8 @@ void WLApplication::mainmenu_multiplayer()
 		peer.port=port;
 
 		netgame=new NetClient(&peer);
-	}
 		break;
+	}
 	case Fullscreen_Menu_NetSetup::INTERNETGAME: {
 		Fullscreen_Menu_InetServerOptions igo;
 		const int32_t igo_code = igo.run();
@@ -1233,8 +1238,8 @@ void WLApplication::mainmenu_multiplayer()
 			Fullscreen_Menu_InetLobby il(&csc);
 			il.run();
 		}
-	}
 		break;
+	}
 	case Fullscreen_Menu_NetSetup::HOSTGGZGAME:
 		NetGGZ::ref().launch();
 		//  fallthrough
@@ -1250,6 +1255,8 @@ void WLApplication::mainmenu_multiplayer()
 			netgame = new NetClient(&peer);
 		}
 	}
+	default:
+		assert(false);
 	}
 
 	if (netgame!=0) {

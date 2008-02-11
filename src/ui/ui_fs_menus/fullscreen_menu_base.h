@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MENUECOMMON_H
-#define __S__MENUECOMMON_H
+#ifndef FULLSCREEN_MENU_BASE_H
+#define FULLSCREEN_MENU_BASE_H
 
 #include "ui_panel.h"
 
@@ -41,4 +41,4 @@ public:
 };
 
 
-#endif // __S__MENUECOMMON_H
+#endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__NETSETUP_H
-#define __S__NETSETUP_H
+#ifndef FULLSCREEN_MENU_NETSETUP_H
+#define FULLSCREEN_MENU_NETSETUP_H
 
 #include "network_lan_promotion.h"
 
@@ -72,18 +72,18 @@ private:
 
 	void game_selected (uint32_t);
 
-		static void discovery_callback (int32_t, const LAN_Open_Game*, void*);
+	static void discovery_callback (int32_t, LAN_Open_Game const *, void *);
 
-		void game_opened (const LAN_Open_Game*);
-		void game_closed (const LAN_Open_Game*);
-		void game_updated (const LAN_Open_Game*);
+	void game_opened  (LAN_Open_Game const *);
+	void game_closed  (LAN_Open_Game const *);
+	void game_updated (LAN_Open_Game const *);
 
 	void update_game_info
 		(UI::Table<const LAN_Open_Game * const>::Entry_Record &,
 		 const LAN_Game_Info &);
 
 	void toggle_networktype();
-		void toggle_hostname();
+	void toggle_hostname   ();
 	void clicked_joingame();
 	void clicked_hostgame();
 };

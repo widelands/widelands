@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_SERVER_PROTO_H
-#define __S__GAME_SERVER_PROTO_H
+#ifndef GAME_SERVER_PROTO_H
+#define GAME_SERVER_PROTO_H
 
 #include <stdint.h>
 
@@ -54,24 +54,24 @@
  * (General Game Server Protocol Packet)
  */
 enum {
-   GGSPP_CONNECT = 1,
-   GGSPP_HELLO = 2,
-   GGSPP_USERENTERED = 3,
-   GGSPP_GETROOMINFO = 4,
-   GGSPP_GETUSERINFO = 5,
+	GGSPP_CONNECT       =  1,
+	GGSPP_HELLO         =  2,
+	GGSPP_USERENTERED   =  3,
+	GGSPP_GETROOMINFO   =  4,
+	GGSPP_GETUSERINFO   =  5,
 
-   GGSPP_CHATMESSAGE = 6,
-   GGSPP_PING = 7,
-
-
+	GGSPP_CHATMESSAGE   =  6,
+	GGSPP_PING          =  7,
 
 
-   GGSPP_GAMELIST = 8,
 
-   GGSPP_GAMESTARTED = 9,
-   GGSPP_GAMEENDED = 10,
 
-   GGSPP_SERVERMESSAGE = 11,
+	GGSPP_GAMELIST      =  8,
+
+	GGSPP_GAMESTARTED   =  9,
+	GGSPP_GAMEENDED     = 10,
+
+	GGSPP_SERVERMESSAGE = 11,
 
 };
 
@@ -92,7 +92,7 @@ const static uint16_t GAME_SERVER_PORT = 8128;
  * Flags
  */
 enum GSP_Flags {
-   GSP_ANSWER = 1
+	GSP_ANSWER = 1
 };
 
 /*
@@ -115,10 +115,10 @@ const static uint8_t GSP_MINOR_VERSION = 0;
  *  <2B id> <2B index> <2B FLAGS> <1B Answer> <2B Server Protocol Version>
  */
 enum CP_Answer {
-   WELCOME,
-   PROTOCOL_TO_OLD,
-   SERVER_FULL,
-   GAME_NOT_SERVED
+	WELCOME,
+	PROTOCOL_TO_OLD,
+	SERVER_FULL,
+	GAME_NOT_SERVED
 };
 
 /*
@@ -132,11 +132,11 @@ enum CP_Answer {
  *   really usefull data.
  */
 enum HP_Features {
-   FEATURES_NONE = 0,
-   FEATURES_FONT_FORMAT = 1,  // This client has font formating support (colors, size)
+	FEATURES_NONE        = 0,
+	FEATURES_FONT_FORMAT = 1,  // This client has font formating support (colors, size)
 };
 enum HP_RetVal {
-   USER_WELCOME = 1, // you are on board
+	USER_WELCOME = 1, //  you are on board
 };
 
 /*
@@ -157,8 +157,8 @@ const uint8_t UEP_ACK = 1;
  *  <2B id><2B index><2B Flags><Answer Flags><2B nr_users><nr_users* Usernames>
  */
 enum RI_AnswerFlags {
-   RI_ACK = 1,
-   RI_NONEXISTANT
+	RI_ACK = 1,
+	RI_NONEXISTANT
 };
 
 /*
@@ -169,8 +169,8 @@ enum RI_AnswerFlags {
  *  <2B id><2B index><2B Flags><Answer Flags><Game Name><Room Name>
  */
 enum UI_AnswerFlags {
-   UI_ACK = 1,
-   UI_UNKNOWN
+	UI_ACK = 1,
+	UI_UNKNOWN
 };
 
 /*
@@ -181,8 +181,8 @@ enum UI_AnswerFlags {
  *    <2B id><2B index><1B ACK>
  */
 enum CM_Flags {
-   CM_NONE,
-   CM_ACTION = 1
+	CM_NONE,
+	CM_ACTION = 1
 };
 const uint8_t CM_ACK = 1;
 
@@ -195,4 +195,4 @@ const uint8_t CM_ACK = 1;
  */
 const uint8_t PING_ACK = 1;
 
-#endif // __S__GAME_SERVER_PROTO_H
+#endif

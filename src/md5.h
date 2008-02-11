@@ -19,8 +19,8 @@
  *
  */
 
-#ifndef __S__MD5_H
-#define __S__MD5_H
+#ifndef MD5_H
+#define MD5_H
 
 #include <string>
 
@@ -109,8 +109,8 @@ template <typename Base> struct MD5Checksum : public Base {
 	///
 	/// \return a pointer to an array of 16 bytes containing the checksum.
 	md5_checksum const & GetChecksum() const {
-	 assert(!can_handle_data);
-	 return sum;
+		assert(!can_handle_data);
+		return sum;
 	}
 
 private:
@@ -119,4 +119,4 @@ private:
 	md5_ctx ctx;
 };
 
-#endif /* __S__MD5_H */
+#endif

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_UNHIDE_AREA_H
-#define __S__EVENT_UNHIDE_AREA_H
+#ifndef EVENT_UNHIDE_AREA_H
+#define EVENT_UNHIDE_AREA_H
 
 #include "event_player_area.h"
 
@@ -42,7 +42,7 @@ struct Event_Unhide_Area : public Event_Player_Area {
 
 	int32_t option_menu(Editor_Interactive &);
 
-      State run(Game*);
+	State run(Game *);
 
 	void Read (Section &, Editor_Game_Base       &);
 	void Write(Section &, Editor_Game_Base const &) const;

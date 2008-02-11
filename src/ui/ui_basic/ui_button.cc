@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,10 +85,10 @@ Set a text title for the Basic_Button
 */
 void Basic_Button::set_title(const std::string & title) {
 	m_pic_custom = 0;
-      m_title = title;
+	m_title      = title;
 
 
-   update(0, 0, get_w(), get_h());
+	update(0, 0, get_w(), get_h());
 }
 
 
@@ -137,66 +137,62 @@ void Basic_Button::draw(RenderTarget* dst)
 			 (get_w() - static_cast<int32_t>(cpw) >> 1,
 			  get_h() - static_cast<int32_t>(cph) >> 1),
 			 m_pic_custom);
-		}
-	else if (m_title.length()) // otherwise draw the title string centered
-		{
+		} else if (m_title.length()) { //  otherwise draw title string centered
 		g_fh->draw_string
-				(*dst,
-				 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
-				 Point(get_w() >> 1, get_h() >> 1),
-				 m_title.c_str(),
-				 Align_Center,
-				 -1,
-				 Widget_Cache_None,
-				 0,
-				 (m_draw_caret ?
-				  m_title.length() : std::numeric_limits<uint32_t>::max()));
-		}
+			(*dst,
+			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+			 Point(get_w() >> 1, get_h() >> 1),
+			 m_title.c_str(),
+			 Align_Center,
+			 -1,
+			 Widget_Cache_None,
+			 0,
+			 (m_draw_caret ?
+			  m_title.length() : std::numeric_limits<uint32_t>::max()));
+	}
 
-	// draw border
-	// a pressed but not highlighted button occurs when the user has pressed
-	// the left mouse button and then left the area of the button
-	// or the button stays pressed when it is pressed once
-   RGBColor black(0, 0, 0);
+	//  draw border
+	//  a pressed but not highlighted button occurs when the user has pressed
+	//  the left mouse button and then left the area of the button or the button
+	//  stays pressed when it is pressed once
+	RGBColor black(0, 0, 0);
 
 	if (not m_flat) {
 		assert(2 <= get_w());
 		assert(2 <= get_h());
-      // button is a normal one, not flat
+		//  button is a normal one, not flat
 		if (not m_pressed or not m_highlighted) {
-         // top edge
-	      dst->brighten_rect
-		      (Rect(Point(0, 0), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
-         // left edge
-         dst->brighten_rect
-		      (Rect(Point(0, 2), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
-         // bottom edge
-	      dst->fill_rect(Rect(Point(2, get_h() - 2), get_w() - 2, 1), black);
-	      dst->fill_rect(Rect(Point(1, get_h() - 1), get_w() - 1, 1), black);
-         // right edge
-	      dst->fill_rect(Rect(Point(get_w() - 2, 2), 1, get_h() - 2), black);
-	      dst->fill_rect(Rect(Point(get_w() - 1, 1), 1, get_h() - 1), black);
+			//  top edge
+			dst->brighten_rect
+				(Rect(Point(0, 0), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			//  left edge
+			dst->brighten_rect
+				(Rect(Point(0, 2), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			//  bottom edge
+			dst->fill_rect(Rect(Point(2, get_h() - 2), get_w() - 2, 1), black);
+			dst->fill_rect(Rect(Point(1, get_h() - 1), get_w() - 1, 1), black);
+			//  right edge
+			dst->fill_rect(Rect(Point(get_w() - 2, 2), 1, get_h() - 2), black);
+			dst->fill_rect(Rect(Point(get_w() - 1, 1), 1, get_h() - 1), black);
 		} else {
-         // bottom edge
-	      dst->brighten_rect
-		      (Rect(Point(0, get_h() - 2), get_w(), 2),
-		       BUTTON_EDGE_BRIGHT_FACTOR);
-         // right edge
-	      dst->brighten_rect
-		      (Rect(Point(get_w() - 2, 0), 2, get_h() - 2),
-		       BUTTON_EDGE_BRIGHT_FACTOR);
-         // top edge
-	      dst->fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
-	      dst->fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
-         // left edge
-	      dst->fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
-	      dst->fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
+			//  bottom edge
+			dst->brighten_rect
+				(Rect(Point(0, get_h() - 2), get_w(), 2),
+				 BUTTON_EDGE_BRIGHT_FACTOR);
+			//  right edge
+			dst->brighten_rect
+				(Rect(Point(get_w() - 2, 0), 2, get_h() - 2),
+				 BUTTON_EDGE_BRIGHT_FACTOR);
+			//  top edge
+			dst->fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
+			dst->fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
+			//  left edge
+			dst->fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
+			dst->fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
 		}
-	}
-	else
-	{
-      // Button is flat, do not draw borders, instead, if it is pressed, draw
-      // a box around it
+	} else {
+		//  Button is flat, do not draw borders, instead, if it is pressed, draw
+		//  a box around it.
 		if (m_pressed && m_highlighted)
 			dst->draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
 	}

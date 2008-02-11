@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,11 +42,11 @@ Panel::Panel
 	 const int32_t nx, const int32_t ny, const uint32_t nw, const uint32_t nh,
 	 const std::string & tooltip_text)
 	:
-_parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
-_flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
-_x(nx), _y(ny), _w(nw), _h(nh),
-_lborder(0), _rborder(0), _tborder(0), _bborder(0),
-_border_snap_distance(0), _panel_snap_distance(0),
+	_parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
+	_flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
+	_x(nx), _y(ny), _w(nw), _h(nh),
+	_lborder(0), _rborder(0), _tborder(0), _bborder(0),
+	_border_snap_distance(0), _panel_snap_distance(0),
 	_tooltip(tooltip_text.size() ? strdup(tooltip_text.c_str()) : 0)
 {
 	assert(nparent != this);
@@ -198,16 +198,12 @@ void Panel::end_modal(int32_t code)
 /**
  * Called once before the event loop in run is started
  */
-void Panel::start()
-{
-}
+void Panel::start() {}
 
 /**
  * Called once after the event loop in run() has ended
  */
-void Panel::end()
-{
-}
+void Panel::end() {}
 
 /**
  * Resizes the panel.
@@ -313,8 +309,7 @@ void Panel::move_to_top()
  */
 void Panel::set_visible(bool on)
 {
-
-   _flags &= ~pf_visible;
+	_flags &= ~pf_visible;
 	if (on)
 		_flags |= pf_visible;
 
@@ -392,9 +387,7 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * has been called explicitly. Otherwise, the contents of the panel are copied
  * from a cached Pic.
  */
-void Panel::set_cache(bool)
-{
-}
+void Panel::set_cache(bool) {}
 
 /**
  * Called once per event loop pass, unless set_think(false) has
@@ -619,7 +612,7 @@ void Panel::check_child_death()
 			p->check_child_death();
 	}
 
-   _flags &= ~pf_child_die;
+	_flags &= ~pf_child_die;
 }
 
 /**

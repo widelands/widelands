@@ -339,8 +339,8 @@ void Carrier::enter_building(Game* g, State* s)
 {
 	if (!start_task_walktoflag(g, s->ivar1 ^ 1)) {
 		molog("[Carrier]: Move into building.\n");
-		start_task_forcemove(WALK_NW,
-		                     descr().get_right_walk_anims(does_carry_ware()));
+		start_task_forcemove
+			(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
 		s->ivar1 = -1;
 	}
 

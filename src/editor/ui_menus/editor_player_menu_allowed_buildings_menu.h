@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
-#define __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
+#ifndef EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
+#define EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 
 #include "ui_button.h"
 #include "ui_listselect.h"
@@ -35,7 +35,7 @@ namespace Widelands {struct Player;};
 struct Editor_Player_Menu_Allowed_Buildings_Menu : public UI::UniqueWindow {
 	Editor_Player_Menu_Allowed_Buildings_Menu
 		(UI::Panel * parent, Widelands::Player &, UI::UniqueWindow::Registry *);
-      virtual ~Editor_Player_Menu_Allowed_Buildings_Menu();
+	virtual ~Editor_Player_Menu_Allowed_Buildings_Menu();
 
 private:
 	Widelands::Player & m_player;
@@ -48,7 +48,7 @@ private:
 	void allowed_double_clicked  (uint32_t);
 	void forbidden_double_clicked(uint32_t);
 	void clicked                 (bool allow);
-      void update();
+	void update();
 };
 
 #endif

@@ -48,7 +48,7 @@ void Map_Player_Names_And_Tribes_Data_Packet::Read
  Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   Pre_Read(fs, egbase->get_map(), skip);
+	Pre_Read(fs, egbase->get_map(), skip);
 }
 
 
@@ -57,19 +57,19 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 {
 	if (skip) return;
 
-   Profile prof;
-   prof.read("player_names", 0, fs);
-   Section* s = prof.get_section("global");
+	Profile prof;
+	prof.read("player_names", 0, fs);
 
-   const int32_t packet_version = s->get_int("packet_version");
+	int32_t const packet_version =
+		prof.get_section("global")->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		const Player_Number nr_players = map->get_nrplayers();
 		iterate_player_numbers(p, nr_players) {
 			char buffer[10];
 			snprintf(buffer, sizeof(buffer), "player_%u", p);
-			s = prof.get_section(buffer);
-			map->set_scenario_player_name (p, s->get_string("name", ""));
-			map->set_scenario_player_tribe(p, s->get_string("tribe", ""));
+			Section & s =*prof.get_section(buffer);
+			map->set_scenario_player_name (p, s.get_string("name", ""));
+			map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
 		}
 	} else
 		throw wexception
@@ -84,24 +84,23 @@ void Map_Player_Names_And_Tribes_Data_Packet::Write
  Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   Profile prof;
-   Section* s = prof.create_section("global");
+	Profile prof;
 
-   // packet version
-   s->set_int("packet_version", CURRENT_PACKET_VERSION);
+	prof.create_section("global")->set_int
+		("packet_version", CURRENT_PACKET_VERSION);
 
-   Map const & map = egbase->map();
-   std::string name, tribe;
+	Map const & map = egbase->map();
+	std::string name, tribe;
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		s = prof.create_section(buffer);
-		s->set_string("name",  map.get_scenario_player_name (p));
-		s->set_string("tribe", map.get_scenario_player_tribe(p));
+		Section & s = *prof.create_section(buffer);
+		s.set_string("name",  map.get_scenario_player_name (p));
+		s.set_string("tribe", map.get_scenario_player_tribe(p));
 	}
 
-   prof.write("player_names", false, fs);
+	prof.write("player_names", false, fs);
 }
 
 };

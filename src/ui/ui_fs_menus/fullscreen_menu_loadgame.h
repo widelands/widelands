@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__LOAD_GAMEMENUE_H
-#define __S__LOAD_GAMEMENUE_H
+#ifndef FULLSCREEN_MENU_LOADGAME_H
+#define FULLSCREEN_MENU_LOADGAME_H
 
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
@@ -47,7 +47,7 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	void clicked_ok    ();
 	void map_selected  (uint32_t);
 	void double_clicked(uint32_t);
-   void fill_list     ();
+	void fill_list     ();
 
 private:
 	Widelands::Game &                               game;
@@ -59,7 +59,7 @@ private:
 	UI::Textarea                                tamapname;
 	UI::Textarea                                label_gametime;
 	UI::Textarea                                tagametime;
-   std::string m_filename;
+	std::string m_filename;
 
 	filenameset_t                               m_gamefiles;
 

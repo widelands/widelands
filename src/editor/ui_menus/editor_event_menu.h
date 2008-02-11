@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_EVENT_MENU_H
-#define __S__EDITOR_EVENT_MENU_H
+#ifndef EDITOR_EVENT_MENU_H
+#define EDITOR_EVENT_MENU_H
 
 #include "ui_unique_window.h"
 
@@ -35,7 +35,7 @@ template <typename T> struct Listselect;
 
 struct Editor_Event_Menu : public UI::UniqueWindow {
 	Editor_Event_Menu(Editor_Interactive &, UI::UniqueWindow::Registry *);
-      virtual ~Editor_Event_Menu();
+	virtual ~Editor_Event_Menu();
 
 private:
 	Editor_Interactive & eia();
@@ -64,7 +64,7 @@ private:
 	void clicked_new_eventchain ();
 	void clicked_del_eventchain ();
 	void clicked_edit_eventchain();
-      void update();
+	void update();
 };
 
 #endif

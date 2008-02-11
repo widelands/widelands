@@ -41,13 +41,12 @@ void Map_Seen_Fields_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   FileRead fr;
+	FileRead fr;
 	try {fr.Open(fs, "binary/seen_fields");} catch (...) {return;}
 
-   // read packet version
-   uint16_t const packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 
 	compile_assert(MAX_PLAYERS < 32);
 	Map & map = egbase->map();
@@ -92,10 +91,9 @@ void Map_Seen_Fields_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // Now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	compile_assert(MAX_PLAYERS < 32);
 	Map & map = egbase->map();
@@ -111,7 +109,7 @@ throw (_wexception)
 		fw.Unsigned32(data);
 	}
 
-   fw.Write(fs, "binary/seen_fields");
+	fw.Write(fs, "binary/seen_fields");
 }
 
 };

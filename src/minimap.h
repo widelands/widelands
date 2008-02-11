@@ -79,7 +79,7 @@ private:
 	UI::IDButton<MiniMap, Layers> button_flags;
 	UI::IDButton<MiniMap, Layers> button_roads;
 	UI::IDButton<MiniMap, Layers> button_bldns;
-   int8_t     m_flags;
+	int8_t     m_flags;
 };
 
-#endif /* MINIMAP_H */
+#endif

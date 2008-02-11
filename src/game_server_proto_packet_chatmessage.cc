@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,35 +40,36 @@ Game_Server_Protocol_Packet_ChatMessage::
  * Get this packets id
  */
 uint16_t Game_Server_Protocol_Packet_ChatMessage::get_id() {
-   return GGSPP_CHATMESSAGE;
+	return GGSPP_CHATMESSAGE;
 }
 
 /*
  * Write To network
  */
 void Game_Server_Protocol_Packet_ChatMessage::send(Network_Buffer* buffer) {
-   buffer->put_8(m_flags);
-   buffer->put_string("");  // Is ignored by server
-   buffer->put_string(m_msg);
+	buffer->put_8(m_flags);
+	buffer->put_string("");  // Is ignored by server
+	buffer->put_string(m_msg);
 }
 
 /*
  * Handle reply
  */
 void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
-   uint8_t answer = buf->get_8();
+	uint8_t const answer = buf->get_8();
 
 	if (answer != CM_ACK) {
-      char buffer[1024];
+		char buffer[1024];
 
 		snprintf
 			(buffer, sizeof(buffer),
-			 _("Server replied illegally to ChatMessage package. Should have sent "
-			   "%i but sent %i. Ignored")
+			 _
+			 ("Server replied illegally to ChatMessage package. Should have sent "
+			  "%i but sent %i. Ignored")
 			 .c_str(),
 			 CM_ACK, answer);
 
-      gsc->server_message(buffer);
+		gsc->server_message(buffer);
 	}
 }
 
@@ -76,16 +77,17 @@ void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connectio
  * Read from network
  */
 void Game_Server_Protocol_Packet_ChatMessage::recv(Game_Server_Connection* gsc, Network_Buffer* buffer) {
-   m_flags = buffer->get_8();
-   std::string user = buffer->get_string();
-   std::string msg = buffer->get_string();
+	m_flags = buffer->get_8();
+	std::string user = buffer->get_string();
+	std::string msg = buffer->get_string();
 
-   gsc->chat_message(user, msg, m_flags);
+	gsc->chat_message(user, msg, m_flags);
 }
 
 /*
  * Write reply
  */
-void Game_Server_Protocol_Packet_ChatMessage::write_reply(Network_Buffer* buf) {
-   buf->put_8(CM_ACK);
+void Game_Server_Protocol_Packet_ChatMessage::write_reply(Network_Buffer * buf)
+{
+	buf->put_8(CM_ACK);
 }

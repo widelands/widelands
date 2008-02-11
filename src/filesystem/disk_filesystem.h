@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef REALFSIMPL_H
-#define REALFSIMPL_H
+#ifndef DISK_FILESYSTEM_H
+#define DISK_FILESYSTEM_H
 
 #include "filesystem.h"
 

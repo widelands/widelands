@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef WIDELANDS_MAP_DATA_PACKET_IDS_H
+#define WIDELANDS_MAP_DATA_PACKET_IDS_H
 
 /*
  * This file contains the ids (the magic bytes) of all data packets
@@ -54,4 +54,5 @@
 #define PACKET_BATTLE            23        // Active battle, non obligatory
 #define PACKET_ATTACK_CONTROLLER 24        // Active attack controller, non obligatory
 #define PACKET_END_OF_MAP_DATA 254         // End of Map
+
 #endif

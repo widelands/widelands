@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __COMPPLAYER_H
-#define __COMPPLAYER_H
+#ifndef COMPUTER_PLAYER_H
+#define COMPUTER_PLAYER_H
 
 #include "game.h"
 
@@ -37,9 +37,9 @@ class ProductionSite;
 
 struct Computer_Player {
 	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
-		~Computer_Player ();
+	~Computer_Player ();
 
-		void think ();
+	void think ();
 
 	void gain_immovable (Widelands::PlayerImmovable *);
 	void lose_immovable (Widelands::PlayerImmovable *);
@@ -54,8 +54,8 @@ private:
 	void gain_building (Widelands::Building *);
 	void lose_building (Widelands::Building *);
 
-		bool construct_building ();
-		void construct_roads ();
+	bool construct_building ();
+	void construct_roads    ();
 
 	bool connect_flag_to_another_economy (Widelands::Flag *);
 	bool improve_roads                   (Widelands::Flag *);
@@ -79,15 +79,15 @@ private:
 		int16_t         military_influence;
 
 		BuildableField (Widelands::FCoords const & fc)
-			{
-			    coords=fc;
-			    next_update_due=0;
-			    reachable=false;
-			    preferred=false;
-			    unowned_land_nearby=0;
-			    trees_nearby=0;
-			    stones_nearby=0;
-			}
+			:
+			coords             (fc),
+			next_update_due    (0),
+			reachable          (false),
+			preferred          (false),
+			unowned_land_nearby(0),
+			trees_nearby       (0),
+			stones_nearby      (0)
+		{}
 	};
 
 	struct MineableField {
@@ -100,11 +100,9 @@ private:
 
 		int32_t     mines_nearby;
 
-			MineableField (Widelands::FCoords const & fc)
-			{
-			    coords=fc;
-			    next_update_due=0;
-			}
+		MineableField (Widelands::FCoords const & fc)
+			: coords(fc), next_update_due(0)
+		{}
 	};
 
 	struct EconomyObserver {
@@ -114,7 +112,7 @@ private:
 		EconomyObserver (Widelands::Economy * e) {economy = e;}
 	};
 
-		struct BuildingObserver {
+	struct BuildingObserver {
 		char                      const * name;
 		int32_t                           id;
 		Widelands::Building_Descr const * desc;
@@ -126,34 +124,33 @@ private:
 			PRODUCTIONSITE,
 			MILITARYSITE,
 			MINE
-		}                                   type;
+		}                                 type;
 
-		bool                                is_buildable;
+		bool                              is_buildable;
 
-		bool                                need_trees;
-		bool                                need_stones;
+		bool                              need_trees;
+		bool                              need_stones;
 
-		std::vector<int16_t>                  inputs;
-		std::vector<int16_t>                  outputs;
-		int16_t                               production_hint;
+		std::vector<int16_t>              inputs;
+		std::vector<int16_t>              outputs;
+		int16_t                           production_hint;
 
-		int32_t                                 cnt_built;
-		int32_t                                 cnt_under_construction;
+		int32_t                           cnt_built;
+		int32_t                           cnt_under_construction;
 
-			int32_t get_total_count()
-			{return cnt_built + cnt_under_construction;}
-		};
+		int32_t get_total_count() {return cnt_built + cnt_under_construction;}
+	};
 
 	struct ProductionSiteObserver {
 		Widelands::ProductionSite * site;
 		BuildingObserver * bo;
 	};
 
-		struct WareObserver {
+	struct WareObserver {
 		uint8_t producers;
 		uint8_t consumers;
 		uint8_t preciousness;
-		};
+	};
 
 	Widelands::Game                 & m_game;
 	Widelands::Player_Number const    player_number;
@@ -180,15 +177,15 @@ private:
 	int32_t                              next_productionsite_check_due;
 	int32_t                              inhibit_road_building;
 
-		void late_initialization ();
+	void late_initialization ();
 
-		void update_buildable_field (BuildableField*);
-		void update_mineable_field (MineableField*);
+	void update_buildable_field (BuildableField *);
+	void update_mineable_field (MineableField*);
 	void consider_productionsite_influence
 		(BuildableField *, Widelands::Coords, BuildingObserver const &);
-		void check_productionsite (ProductionSiteObserver&);
+	void check_productionsite (ProductionSiteObserver &);
 
-		BuildingObserver& get_building_observer(const char*);
+	BuildingObserver& get_building_observer(char const *);
 };
 
-#endif // __COMPPLAYER_H
+#endif

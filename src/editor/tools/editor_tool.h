@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_TOOL_H
-#define __S__EDITOR_TOOL_H
+#ifndef EDITOR_TOOL_H
+#define EDITOR_TOOL_H
 
 #define MAX_TOOL_AREA 9
 

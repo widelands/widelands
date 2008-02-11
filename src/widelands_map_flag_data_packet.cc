@@ -47,37 +47,35 @@ throw
 (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   FileRead fr;
+	FileRead fr;
 	try {fr.Open(fs, "binary/flag");} catch (...) {return;}
 
-   Map* map=egbase->get_map();
+	Map const & map = egbase->map();
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-		for (uint16_t y = 0; y < map->get_height(); ++y) {
-			for (uint16_t x = 0; x < map->get_width(); ++x) {
+		for (uint16_t y = 0; y < map.get_height(); ++y) {
+			for (uint16_t x = 0; x < map.get_width(); ++x) {
 				if (fr.Unsigned8()) {
-               // Ok, now read all the additional data
-               uint8_t owner=fr.Unsigned8();
-               uint32_t serial=fr.Unsigned32();
+					uint8_t  const owner  = fr.Unsigned8(); //  FIXME use FileRead::Player_Number8
+					uint32_t const serial = fr.Unsigned32();
 
-               // No flag lives on more than one place
-               assert(!ol->is_object_known(serial));
+					//  No flag lives on more than one place.
+					assert(!ol->is_object_known(serial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-               // Now, create this Flag. Directly
-               // create it, do not call the player class since
-               // we recreate the data in another packet. We always
-               // create this, no matter what skip is since we have
-               // to read the data packets. We delete this object
-               // later again, if it isn't wanted
-               Player* plr = egbase->get_safe_player(owner);
-               assert(plr);
-               Flag* flag=Flag::create(egbase, plr, Coords(x, y));
+					//  Now, create this Flag. Directly create it, do not call the
+					//  player class since we recreate the data in another packet.
+					//  We always create this, no matter what skip is since we have
+					//  to read the data packets. We delete this object later again,
+					//  if it is not wanted.
+					Player * plr = egbase->get_safe_player(owner);
+					assert(plr); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-               // and register it with the object loader for further loading
-               ol->register_object(egbase, serial, flag);
+					//  and register it with the object loader for further loading
+					ol->register_object
+						(egbase, serial, Flag::create(egbase, plr, Coords(x, y)));
 				}
 			}
 
@@ -103,23 +101,17 @@ throw (_wexception)
 	Field const & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Flag const, flag, field->get_immovable())) { //  we only write flags
-            // Flags can't life on multiply positions, therefore
-            // this flag shouldn't be registered.
-            assert(!os->is_object_known(flag));
+			//  Flags can't life on multiply positions, therefore this flag
+			//  shouldn't be registered.
+			assert(!os->is_object_known(flag));
 
-            uint32_t serial=os->register_object(flag);
-
-            fw.Unsigned8(1);
+			fw.Unsigned8(1);
 			fw.Unsigned8(flag->owner().get_player_number());
-            // write id
-            fw.Unsigned32(serial);
+			fw.Unsigned32(os->register_object(flag));
+		} else //  no existance, no owner
+			fw.Unsigned8(0);
 
-		} else
-            // No existance, no owner
-            fw.Unsigned8(0);
-
-   fw.Write(fs, "binary/flag");
-   // DONE
+	fw.Write(fs, "binary/flag");
 }
 
 };

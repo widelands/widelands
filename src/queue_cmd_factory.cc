@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,9 +44,9 @@ GameLogicCommand* Queue_Cmd_Factory::create_correct_queue_command(uint32_t id) {
 	case QUEUE_CMD_CHECK_EVENTCHAIN:     return new Cmd_CheckEventChain     ();
 	case QUEUE_CMD_INCORPORATE:          return new Cmd_Incorporate         ();
 	case QUEUE_CMD_CALL_ECONOMY_BALANCE: return new Cmd_Call_Economy_Balance();
-	default: throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
+	default:
+		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}
-   return 0; // Never here
 }
 
 };

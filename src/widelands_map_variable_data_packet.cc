@@ -39,9 +39,9 @@ void Map_Variable_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   Profile prof;
+	Profile prof;
 	try {prof.read("variable", 0, fs);} catch (...) {return;}
 	Manager<Variable> & mvm = egbase->map().mvm();
 
@@ -83,7 +83,7 @@ void Map_Variable_Data_Packet::Write
  Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   Profile prof;
+	Profile prof;
 	prof.create_section("global")->set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
@@ -93,7 +93,7 @@ throw (_wexception)
 	for (Manager<Variable>::Index i = 0; i < nr_variables; ++i) {
 		Variable const & variable = mvm[i];
 		Section & s = *prof.create_section(variable.name().c_str());
-      s.set_bool("delete_protected", variable.is_delete_protected());
+		s.set_bool("delete_protected", variable.is_delete_protected());
 		if        (upcast(Variable_Int    const, ivar, &variable)) {
 			s.set_string("type", "int");
 			s.set_int   ("value", ivar->get_value());
@@ -104,7 +104,7 @@ throw (_wexception)
 			throw wexception("Unknown Variable type in Map_Variable_Data_Packet");
 	}
 
-   prof.write("variable", false, fs);
+	prof.write("variable", false, fs);
 }
 
 };

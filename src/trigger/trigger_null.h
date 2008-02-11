@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIGGER_NULL_H
-#define __S__TRIGGER_NULL_H
+#ifndef TRIGGER_NULL_H
+#define TRIGGER_NULL_H
 
 #include "trigger.h"
 
@@ -39,7 +39,10 @@ struct Trigger_Null : public Trigger {
 	void Read (Section &, Editor_Game_Base       &);
 	void Write(Section &, Editor_Game_Base const &) const;
 
-      void set_trigger_manually(bool t) {m_should_toggle=true; m_value=t;}
+	void set_trigger_manually(bool const t) {
+		m_should_toggle = true;
+		m_value         = t;
+	}
 
 private:
 	bool m_should_toggle;

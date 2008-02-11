@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIGGER_TIME_OPTION_MENU_H
-#define __S__TRIGGER_TIME_OPTION_MENU_H
+#ifndef TRIGGER_TIME_OPTION_MENU_H
+#define TRIGGER_TIME_OPTION_MENU_H
 
 #include "ui_window.h"
 
@@ -43,13 +43,13 @@ struct Trigger_Time_Option_Menu : public UI::Window {
 private:
 	Editor_Interactive & eia();
 	void clicked_ok();
-      void clicked(int32_t);
-      void update();
+	void clicked(int32_t);
+	void update();
 
 	Widelands::Trigger_Time & m_trigger;
-      UI::Edit_Box* m_name;
-      UI::Textarea* m_textareas[6];
-      int32_t         m_values[6];
+	UI::Edit_Box            * m_name;
+	UI::Textarea            * m_textareas[6];
+	int32_t                   m_values[6];
 };
 
 #endif

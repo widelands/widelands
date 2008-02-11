@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__OVERLAY_HANDLER_H
-#define __S__OVERLAY_HANDLER_H
+#ifndef OVERLAY_MANAGER_H
+#define OVERLAY_MANAGER_H
 
 #include "field.h"
 #include "widelands_geometry.h"
@@ -73,14 +73,18 @@ struct Overlay_Manager {
 		Point hotspot;
 	};
 
-      Overlay_Manager();
+	Overlay_Manager();
 
 	void reset();
 
-      // register callback function (see data below for description)
-      void register_overlay_callback_function(Overlay_Callback_Function func, void* data, int32_t iparam1 = 0) {
-         m_callback=func; m_callback_data=data;  m_callback_data_i=iparam1;
-		}
+	//  register callback function (see data below for description)
+	void register_overlay_callback_function
+		(Overlay_Callback_Function const func,
+		 void                    * const data,
+		 int32_t                   const iparam1 = 0)
+	{
+		m_callback = func; m_callback_data = data; m_callback_data_i = iparam1;
+	}
 
 	//  Get a job id that is hopefully unused. This function is guaranteed to
 	//  never return Job_Id::Null(). All other values are valid and may be returned.
@@ -122,8 +126,8 @@ struct Overlay_Manager {
 	uint8_t get_overlays(Widelands::FCoords c, Overlay_Info *) const;
 	uint8_t get_overlays(Widelands::TCoords<>, Overlay_Info *) const;
 
-      void show_buildhelp(bool t) {m_showbuildhelp= t;}
-      void toggle_buildhelp() {m_showbuildhelp=!m_showbuildhelp;}
+	void show_buildhelp(bool const t) {m_showbuildhelp = t;}
+	void toggle_buildhelp() {m_showbuildhelp = !m_showbuildhelp;}
 
 	void recalc_field_overlays(Widelands::FCoords);
 
@@ -184,12 +188,12 @@ private:
 	Registered_Overlays_Map m_overlays[3];
 
 	Overlay_Info m_buildhelp_infos[Widelands::Field::Buildhelp_None];
-      bool m_are_graphics_loaded;
-      bool m_showbuildhelp;
-      Overlay_Callback_Function m_callback;           // this callback is used to define we're overlays are set and were not
-      // since we only care for map stuff, not for player stuff or editor issues
-      void *m_callback_data;
-      int32_t m_callback_data_i;
+	bool m_are_graphics_loaded;
+	bool m_showbuildhelp;
+	Overlay_Callback_Function m_callback;           // this callback is used to define we're overlays are set and were not
+	// since we only care for map stuff, not for player stuff or editor issues
+	void * m_callback_data;
+	int32_t m_callback_data_i;
 
 	//  No need to initialize m_current_job_id (see comment for get_a_job_id).
 	Job_Id m_current_job_id;
@@ -199,4 +203,4 @@ private:
 
 
 
-#endif // __S__OVERLAY_HANDLER_H
+#endif

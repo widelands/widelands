@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
-#define __S__WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
+#ifndef WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
+#define WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
 
 #include "widelands_map_data_packet.h"
 
@@ -40,15 +40,14 @@ struct Map_Elemental_Data_Packet : public Map_Data_Packet {
 	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
 
-      // The following function prereads a given map without
-      // the need of a properly configured Editor_Game_Base
-      // object
+	//  The following function prereads a given map without the need of a
+	//  properly configured Editor_Game_Base object.
 	void Pre_Read(FileSystem &, Map*) throw (_wexception);
 
-      uint32_t get_version() {return m_version;}
+	uint32_t get_version() {return m_version;}
 
 private:
-      uint32_t m_version;
+	uint32_t m_version;
 };
 
 };

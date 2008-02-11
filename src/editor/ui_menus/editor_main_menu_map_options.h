@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_MAIN_MENU_MAP_OPTIONS_H
-#define __S__EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#ifndef EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#define EDITOR_MAIN_MENU_MAP_OPTIONS_H
 
 #include "ui_window.h"
 
@@ -41,17 +41,17 @@ author, name and description
 =================================================
 */
 struct Main_Menu_Map_Options : public UI::Window {
-      Main_Menu_Map_Options(Editor_Interactive*);
-      virtual ~Main_Menu_Map_Options();
+	Main_Menu_Map_Options(Editor_Interactive *);
+	virtual ~Main_Menu_Map_Options();
 
 private:
-      void changed(int32_t);
-      void editbox_changed();
-      Editor_Interactive  *m_parent;
-      UI::Multiline_Editbox* m_descr;
-      UI::Textarea* m_world, *m_nrplayers, *m_size;
-      UI::Edit_Box* m_name, *m_author;
-      void update();
+	void changed(int32_t);
+	void editbox_changed();
+	Editor_Interactive  * m_parent; //  FIXME redundant (base has parent pointer)
+	UI::Multiline_Editbox * m_descr;
+	UI::Textarea * m_world, * m_nrplayers, * m_size;
+	UI::Edit_Box * m_name, * m_author;
+	void update();
 };
 
 #endif

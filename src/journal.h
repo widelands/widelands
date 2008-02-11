@@ -52,17 +52,17 @@ struct Journal {
 	 * However, 64 bit platforms are currently not supported.
 	 */
 	enum rfccode {
-	   RFC_GETTIME = 0x01,
-	   RFC_EVENT = 0x02,
-	   RFC_ENDEVENTS = 0x03,
+		RFC_GETTIME         = 0x01,
+		RFC_EVENT           = 0x02,
+		RFC_ENDEVENTS       = 0x03,
 
-	   RFC_KEYDOWN = 0x10,
-	   RFC_KEYUP = 0x11,
-	   RFC_MOUSEBUTTONDOWN = 0x12,
-	   RFC_MOUSEBUTTONUP = 0x13,
-	   RFC_MOUSEMOTION = 0x14,
-	   RFC_QUIT = 0x15,
-	   RFC_INVALID = 0xff
+		RFC_KEYDOWN         = 0x10,
+		RFC_KEYUP           = 0x11,
+		RFC_MOUSEBUTTONDOWN = 0x12,
+		RFC_MOUSEBUTTONUP   = 0x13,
+		RFC_MOUSEMOTION     = 0x14,
+		RFC_QUIT            = 0x15,
+		RFC_INVALID         = 0xff
 	};
 
 public:

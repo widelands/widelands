@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,12 +41,12 @@ close_button
 {
 	i18n::grab_textdomain("texts");
 
-   Profile prof(filename.c_str(), "global"); // section-less file
+	Profile prof(filename.c_str(), "global"); // section-less file
 	Section & section = *prof.get_section("global");
 
 	title   .set_text(section.get_safe_string("title"));
 	textview.set_text(section.get_safe_string("text"));
-   i18n::release_textdomain();
+	i18n::release_textdomain();
 
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	title.set_pos(Point((get_inner_w() - title.get_w()) / 2, 100));
@@ -76,9 +76,9 @@ FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* re
 {
 	i18n::grab_textdomain("texts");
 
-   Profile prof(filename.c_str(), "global"); // section-less file
-   Section* s = prof.get_section("global");
-   i18n::release_textdomain();
+	Profile prof(filename.c_str(), "global"); // section-less file
+	Section * const s = prof.get_section("global");
+	i18n::release_textdomain();
 
 	set_title(s->get_safe_string("title"));
 
@@ -101,5 +101,5 @@ Display the contents of a text file in a scrollable window.
 */
 void fileview_window(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename)
 {
-   new FileViewWindow(parent, reg, filename);
+	new FileViewWindow(parent, reg, filename);
 }

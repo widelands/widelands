@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,8 +72,8 @@ const WorkerProgram* Worker_Descr::get_program(std::string programname) const
 	ProgramMap::const_iterator it = m_programs.find(programname);
 
 	if (it == m_programs.end())
-		throw wexception("%s has no program '%s'", name().c_str(),
-		                 programname.c_str());
+		throw wexception
+			("%s has no program '%s'", name().c_str(), programname.c_str());
 
 	return it->second;
 }
@@ -142,12 +142,17 @@ void Worker_Descr::parse
 	}
 
 	// Read the walking animations
-	m_walk_anims.parse(this, directory, prof, "walk_??",
-	                   prof->get_section("walk"), encdata);
+	m_walk_anims.parse
+		(this, directory, prof, "walk_??", prof->get_section("walk"), encdata);
 
-	if (get_worker_type()!=SOLDIER) // Soldier have no walkload
-		m_walkload_anims.parse(this, directory, prof, "walkload_??",
-		                       prof->get_section("walkload"), encdata);
+	if (get_worker_type() != SOLDIER) // Soldier have no walkload
+		m_walkload_anims.parse
+			(this,
+			 directory,
+			 prof,
+			 "walkload_??",
+			 prof->get_section("walkload"),
+			 encdata);
 
 	// Read the sound effects
 	while (sglobal->get_next_string("soundfx", &string))

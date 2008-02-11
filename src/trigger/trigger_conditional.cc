@@ -42,9 +42,8 @@ const char * const TriggerConditional_Factory::operators[] =
 TriggerConditional & TriggerConditional_Factory::create_from_infix
 	(EventChain & evchain, std::vector<Token> const & vec)
 {
-
-   std::vector<Token> tempstack;
-   std::vector<Token> postfix;
+	std::vector<Token> tempstack;
+	std::vector<Token> postfix;
 
 	const std::vector<Token>::const_iterator vec_end = vec.end();
 	for
@@ -54,15 +53,15 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 		case RPAREN: // append everything to our postfix notation
 			for (;;) {
 				if (!tempstack.size()) { // Mismatched parathesis
-               ALIVE();
-               log("Missmatched parenthesis!\n");
-               throw SyntaxError();
+					ALIVE();
+					log("Missmatched parenthesis!\n");
+					throw SyntaxError();
 				}
 				if (tempstack.back().token == LPAREN) break;
-            postfix.push_back(tempstack.back());
-            tempstack.pop_back();
+				postfix.push_back(tempstack.back());
+				tempstack.pop_back();
 			}
-         tempstack.pop_back(); // Pop the last left paranthesis
+			tempstack.pop_back(); // Pop the last left paranthesis
 			break;
 		case TRIGGER: postfix.push_back(*it); break;
 		case NOT: case AND: case OR: case XOR:
@@ -76,18 +75,19 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 			}
 			tempstack.push_back(*it);
 			break;
-		default: assert(false);
+		default:
+			assert(false);
 		}
 
-   // Unload all operators which are left on stack
+	//  Unload all operators which are left on stack.
 	while (tempstack.size()) {
 		if (tempstack.back().token == LPAREN) {
-         ALIVE();
-         log("Unmatched parenthesis!\n");
-         throw SyntaxError();
+			ALIVE();
+			log("Unmatched parenthesis!\n");
+			throw SyntaxError();
 		}
-      postfix.push_back(tempstack.back());
-      tempstack.pop_back();
+		postfix.push_back(tempstack.back());
+		tempstack.pop_back();
 	}
 
 	return create_from_postfix(evchain, postfix);
@@ -102,7 +102,7 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 TriggerConditional & TriggerConditional_Factory::create_from_postfix
 	(EventChain & evchain, std::vector<Token> const & vec)
 {
-   std::vector< TriggerConditional* > stk;
+	std::vector<TriggerConditional *> stk;
 	const std::vector<Token>::const_iterator vec_end = vec.end();
 	for
 		(std::vector<Token>::const_iterator it = vec.begin();
@@ -113,8 +113,8 @@ TriggerConditional & TriggerConditional_Factory::create_from_postfix
 			assert(stk.size());
 			TriggerConditional * & back = stk.back();
 			back = new TriggerNOT(*back);
-		}
 			break;
+		}
 		case AND: case OR: case XOR: {
 			assert(stk.size() >= 2);
 			TriggerConditional * r = stk.back();
@@ -123,18 +123,19 @@ TriggerConditional & TriggerConditional_Factory::create_from_postfix
 			if      (token == AND) l = new TriggerAND(*l, *r);
 			else if (token == OR)  l = new TriggerOR (*l, *r);
 			else                   l = new TriggerXOR(*l, *r);
-		}
 			break;
+		}
 		case TRIGGER: {
 			Trigger & trigger = *it->data;
 			trigger.reference(evchain);
 			stk.push_back(new TriggerConditional_Var (trigger));
-		}
 			break;
-		default: assert(false);
+		}
+		default:
+			assert(false);
 		}
 	assert(stk.size() == 1);
-   return *stk.back();
+	return *stk.back();
 }
 
 
@@ -204,8 +205,8 @@ void TriggerConditional_Var   ::reset_triggers      (Game const & game) const {
 	m_trigger.reset_trigger       (game);
 }
 bool TriggerConditional_Var   ::eval                (Game const & game) const {
-   m_trigger.check_set_conditions(game);
-   return m_trigger.is_set();
+	m_trigger.check_set_conditions(game);
+	return m_trigger.is_set();
 }
 
 

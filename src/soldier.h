@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__SOLDIER_H
-#define __S__SOLDIER_H
+#ifndef SOLDIER_H
+#define SOLDIER_H
 
 #include "worker.h"
 
@@ -37,11 +37,10 @@ class AttackController;
 
 struct Soldier_Descr : public Worker_Descr {
 	Soldier_Descr(const Tribe_Descr &, const std::string & soldier_name);
-	virtual ~Soldier_Descr();
 
-   virtual Worker_Type get_worker_type() const {return SOLDIER;}
+	virtual Worker_Type get_worker_type() const {return SOLDIER;}
 
-   virtual void load_graphics();
+	virtual void load_graphics();
 
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
 	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
@@ -77,46 +76,45 @@ protected:
 	virtual void parse
 		(char const * dir, Profile *, becomes_map_t &, EncodeData const *);
 
-   // Start values
-   uint32_t m_min_hp;
-   uint32_t m_max_hp;
-   uint32_t m_min_attack;
-   uint32_t m_max_attack;
-   uint32_t m_defense;
-   uint32_t m_evade;
+	//  start values
+	uint32_t m_min_hp;
+	uint32_t m_max_hp;
+	uint32_t m_min_attack;
+	uint32_t m_max_attack;
+	uint32_t m_defense;
+	uint32_t m_evade;
 
-   // per level increases
-   uint32_t m_hp_incr;
-   uint32_t m_attack_incr;
-   uint32_t m_defense_incr;
-   uint32_t m_evade_incr;
+	//  per level increases
+	uint32_t m_hp_incr;
+	uint32_t m_attack_incr;
+	uint32_t m_defense_incr;
+	uint32_t m_evade_incr;
 
-   // max levels
-   uint32_t m_max_hp_level;
-   uint32_t m_max_attack_level;
-   uint32_t m_max_defense_level;
-   uint32_t m_max_evade_level;
+	//  max levels
+	uint32_t m_max_hp_level;
+	uint32_t m_max_attack_level;
+	uint32_t m_max_defense_level;
+	uint32_t m_max_evade_level;
 
-   // Level pictures
-   std::vector<uint32_t> m_hp_pics;
-   std::vector<uint32_t> m_attack_pics;
-   std::vector<uint32_t> m_evade_pics;
-   std::vector<uint32_t> m_defense_pics;
-   std::vector<std::string> m_hp_pics_fn;
-   std::vector<std::string> m_attack_pics_fn;
-   std::vector<std::string> m_evade_pics_fn;
-   std::vector<std::string> m_defense_pics_fn;
+	//  level pictures
+	std::vector<uint32_t>    m_hp_pics;
+	std::vector<uint32_t>    m_attack_pics;
+	std::vector<uint32_t>    m_evade_pics;
+	std::vector<uint32_t>    m_defense_pics;
+	std::vector<std::string> m_hp_pics_fn;
+	std::vector<std::string> m_attack_pics_fn;
+	std::vector<std::string> m_evade_pics_fn;
+	std::vector<std::string> m_defense_pics_fn;
 };
 
 class Soldier : public Worker {
-   friend struct Map_Bobdata_Data_Packet;
+	friend struct Map_Bobdata_Data_Packet;
 	MO_DESCR(Soldier_Descr);
 
 public:
 	Soldier(const Soldier_Descr &);
-	virtual ~Soldier();
 
-   virtual void init(Editor_Game_Base*);
+	virtual void init(Editor_Game_Base *);
 
 	void set_level
 		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
@@ -130,11 +128,11 @@ public:
 	uint32_t get_defense_level() const {return m_defense_level;}
 	uint32_t get_evade_level  () const throw () {return m_evade_level;}
 
-   /// Draw this soldier
+	/// Draw this soldier
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const Point) const;
 
-   // Information function from description
+	//  Information function from description.
 	uint32_t get_max_hp_level () const throw ()
 	{return descr().get_max_hp_level();}
 	uint32_t get_max_attack_level () const throw ()
@@ -178,36 +176,35 @@ public:
 public: // Worker-specific redefinitions
 	virtual void start_task_gowarehouse();
 
-   void startTaskMoveToBattle(Game*, Flag*, Coords);
-   void startTaskMoveHome(Game*);
+	void startTaskMoveToBattle(Game *, Flag *, Coords);
+	void startTaskMoveHome(Game *);
 
-   void log_general_info(Editor_Game_Base* egbase);
+	void log_general_info(Editor_Game_Base *);
 
-   void set_attack_ctrl(AttackController* ctrl) {m_attack_ctrl = ctrl;};
+	void set_attack_ctrl(AttackController* ctrl) {m_attack_ctrl = ctrl;};
 
 private:
-   void moveToBattleUpdate (Game*, State*);
-   void moveToBattleSignal (Game*, State*);
+	void moveToBattleUpdate (Game *, State *);
+	void moveToBattleSignal (Game *, State *);
 
-   void moveHomeUpdate (Game*, State*);
-   void moveHomeSignal (Game*, State*);
+	void moveHomeUpdate     (Game *, State *);
+	void moveHomeSignal     (Game *, State *);
 protected:
-   static Task taskMoveToBattle;
-   static Task taskMoveHome;
+	static Task taskMoveToBattle;
+	static Task taskMoveHome;
 
 private:
-   // Private data
-   uint32_t m_hp_current;
-   uint32_t m_hp_max;
-   uint32_t m_min_attack;
-   uint32_t m_max_attack;
-   uint32_t m_defense;
-   uint32_t m_evade;
+	uint32_t m_hp_current;
+	uint32_t m_hp_max;
+	uint32_t m_min_attack;
+	uint32_t m_max_attack;
+	uint32_t m_defense;
+	uint32_t m_evade;
 
-   uint32_t m_hp_level;
-   uint32_t m_attack_level;
-   uint32_t m_defense_level;
-   uint32_t m_evade_level;
+	uint32_t m_hp_level;
+	uint32_t m_attack_level;
+	uint32_t m_defense_level;
+	uint32_t m_evade_level;
 
 	bool m_marked;
 
@@ -216,4 +213,4 @@ private:
 
 };
 
-#endif // __S__SOLDIER_H
+#endif

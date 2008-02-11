@@ -194,20 +194,11 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, W
 }
 
 
-/*
-===============
-BulldozeConfirm::~BulldozeCOnfirm
-===============
-*/
-BulldozeConfirm::~BulldozeConfirm()
-{
-}
+BulldozeConfirm::~BulldozeConfirm() {}
 
 
 /*
 ===============
-BulldozeConfirm::think
-
 Make sure the building still exists and can in fact be bulldozed.
 ===============
 */
@@ -217,7 +208,9 @@ void BulldozeConfirm::think()
 	upcast(Building,        building,  m_building .get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
-	if (!todestroy || !building ||
+	if
+		(!todestroy ||
+		 !building  ||
 	    !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
 		die();
 }
@@ -239,10 +232,10 @@ void BulldozeConfirm::bulldoze()
 	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
 		if (upcast(Widelands::Game, game, egbase)) {
 			game->send_player_bulldoze (todestroy);
-         m_iabase->need_complete_redraw();
+			m_iabase->need_complete_redraw();
 		} else {// Editor
 			todestroy->get_owner()->bulldoze(todestroy);
-         m_iabase->need_complete_redraw();
+			m_iabase->need_complete_redraw();
 		}
 	}
 
@@ -357,14 +350,10 @@ m_display_size(0)
 
 /*
 ===============
-WaresQueueDisplay::~WaresQueueDisplay
-
 Cleanup
 ===============
 */
-WaresQueueDisplay::~WaresQueueDisplay()
-{
-}
+WaresQueueDisplay::~WaresQueueDisplay() {}
 
 
 /*
@@ -447,11 +436,14 @@ void WaresQueueDisplay::draw(RenderTarget* dst)
 
 		// If ware is undelivered, gray it out.
 		if (cells >= m_cache_filled)
-			dst->blitrect(Point(x, 0), m_fade_mask,
-			              Rect(Point(cells + 1 == m_display_size and
-			                         m_cache_size > m_display_size ?
-				                     BG_ContinueCellX : BG_CellX, 0),
-				          CellWidth, Height));
+			dst->blitrect
+				(Point(x, 0), m_fade_mask,
+				 Rect
+				 (Point
+				  (cells + 1 == m_display_size and
+				   m_cache_size > m_display_size ?
+				   BG_ContinueCellX : BG_CellX, 0),
+				  CellWidth, Height));
 	}
 
 	compile_assert(0 <= BG_RightBorderX);
@@ -507,7 +499,7 @@ protected:
 	void toggle_workarea();
 	void act_start_stop();
 	void act_enhance(Widelands::Building_Descr::Index);
-   void act_drop_soldier(uint32_t);
+	void act_drop_soldier(uint32_t);
 	void act_change_soldier_capacity(int32_t);
 
 private:
@@ -539,7 +531,7 @@ UI::Window(parent, 0, 0, Width, 0, building->descname().c_str()),
 m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 {
 	m_registry = registry;
-		delete *m_registry;
+	delete *m_registry;
 	*m_registry = this;
 
 	m_player = parent;
@@ -683,10 +675,10 @@ void Building_Window::setup_capsbuttons()
 
 			Widelands::Building_Descr const & building =
 				*tribe.get_building_descr(id);
-         char buffer[128];
-         snprintf
-            (buffer, sizeof(buffer),
-             _("Enhance to %s").c_str(), building.descname().c_str());
+			char buffer[128];
+			snprintf
+				(buffer, sizeof(buffer),
+				 _("Enhance to %s").c_str(), building.descname().c_str());
 			new UI::IDButton<Building_Window, Widelands::Building_Descr::Index>
 				(m_capsbuttons,
 				 x, 0, 34, 34,
@@ -694,7 +686,7 @@ void Building_Window::setup_capsbuttons()
 				 building.get_buildicon(),
 				 &Building_Window::act_enhance, this, id, // Button id = building id
 				 buffer);
-         x += 34;
+			x += 34;
 		}
 	}
 
@@ -732,9 +724,9 @@ void Building_Window::setup_capsbuttons()
 	}
 
 	if (x == 0) {
-      // no capsbutton is in this window
-      // resize us, so that we do not take space
-      m_capsbuttons->set_inner_size(0, 0);
+		//  No capsbutton is in this window.
+		//  Resize us, so that we do not take space.
+		m_capsbuttons->set_inner_size(0, 0);
 	}
 }
 
@@ -884,8 +876,10 @@ ConstructionSite_Window::ConstructionSite_Window
 Create the window and its panels
 ===============
 */
-ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Widelands::ConstructionSite* cs,
-                                                 UI::Window** registry)
+ConstructionSite_Window::ConstructionSite_Window
+(Interactive_Player          * const parent,
+ Widelands::ConstructionSite * const cs,
+ UI::Window *                * const registry)
 	: Building_Window(parent, cs, registry)
 {
 	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
@@ -922,14 +916,10 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Wid
 
 /*
 ===============
-ConstructionSite_Window::~ConstructionSite_Window
-
 Deinitialize
 ===============
 */
-ConstructionSite_Window::~ConstructionSite_Window()
-{
-}
+ConstructionSite_Window::~ConstructionSite_Window() {}
 
 
 /*
@@ -1001,20 +991,21 @@ Open the window, create the window buttons and add to the registry.
 Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry)
 	: Building_Window(parent, wh, registry)
 {
-   m_parent = parent;
+	m_parent = parent;
 
 	// Add wares display
 	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->player().tribe());
 	m_waresdisplay->add_warelist(&get_warehouse()->get_wares(), WaresDisplay::WARE);
 
-   set_inner_size(m_waresdisplay->get_w(), 0);
+	set_inner_size(m_waresdisplay->get_w(), 0);
 
-   int32_t spacing = 5;
-   int32_t nr_buttons = 4; // one more, turn page button is bigger
-   int32_t button_w = (get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
-   int32_t posx = spacing;
-   int32_t posy = m_waresdisplay->get_h() + spacing;
-   m_curpage = 0;
+	int32_t const spacing = 5;
+	int32_t const nr_buttons = 4; // one more, turn page button is bigger
+	int32_t const button_w =
+		(get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
+	int32_t       posx = spacing;
+	int32_t       posy = m_waresdisplay->get_h() + spacing;
+	m_curpage = 0;
 
 
 	new UI::Button<Warehouse_Window>
@@ -1033,7 +1024,7 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 		 g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
 		 &Warehouse_Window::clicked_switchpage, this);
 
-   posx += button_w*2 + 2*spacing;
+	posx += button_w * 2 + 2 * spacing;
 
 	new UI::Button<Warehouse_Window>
 		(this,
@@ -1042,41 +1033,36 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 		 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
 		 &Warehouse_Window::clicked_goto, this);
 
-   posx += button_w + spacing;
-   posy += 25 + spacing;
+	posx += button_w + spacing;
+	posy += 25 + spacing;
 
 	// Add caps buttons
-   posx = 0;
-   UI::Panel* caps = create_capsbuttons(this);
+	posx = 0;
+	UI::Panel * caps = create_capsbuttons(this);
 	caps->set_pos(Point(spacing, posy));
 	if (caps->get_h())
-      posy += caps->get_h() + spacing;
+		posy += caps->get_h() + spacing;
 
-   set_inner_size(get_inner_w(), posy);
-   move_inside_parent();
+	set_inner_size(get_inner_w(), posy);
+	move_inside_parent();
 }
 
 
 /*
 ===============
-Warehouse_Window::~Warehouse_Window
-
 Deinitialize, remove from registry
 ===============
 */
-Warehouse_Window::~Warehouse_Window()
-{
-}
+Warehouse_Window::~Warehouse_Window() {}
 
 /**
  * \todo Implement help
  */
-void Warehouse_Window::clicked_help() {
-}
+void Warehouse_Window::clicked_help() {}
 
 
 void Warehouse_Window::clicked_goto() {
-         m_parent->move_view_to(get_warehouse()->get_position());
+	m_parent->move_view_to(get_warehouse()->get_position());
 }
 
 
@@ -1086,28 +1072,26 @@ void Warehouse_Window::clicked_goto() {
  */
 void Warehouse_Window::clicked_switchpage() {
 	if        (m_curpage == 0) {
-      // Showing wares, should show workers
-      m_waresdisplay->remove_all_warelists();
-      m_waresdisplay->add_warelist(&get_warehouse()->get_workers(), WaresDisplay::WORKER);
-      m_curpage = 1;
+		//  Showing wares, should show workers.
+		m_waresdisplay->remove_all_warelists();
+		m_waresdisplay->add_warelist
+			(&get_warehouse()->get_workers(), WaresDisplay::WORKER);
+		m_curpage = 1;
 	} else if (m_curpage == 1) {
-      // Showing workers, should show soldiers
-      //TODO currently switches back to wares
-      m_waresdisplay->remove_all_warelists();
-      m_waresdisplay->add_warelist(&get_warehouse()->get_wares(), WaresDisplay::WARE);
-      m_curpage = 0;
+		//  Showing workers, should show soldiers
+		//  TODO currently switches back to wares
+		m_waresdisplay->remove_all_warelists();
+		m_waresdisplay->add_warelist
+			(&get_warehouse()->get_wares(), WaresDisplay::WARE);
+		m_curpage = 0;
 	}
 }
 /*
 ===============
-Warehouse_Window::think
-
 Push the current wares status to the WaresDisplay.
 ===============
 */
-void Warehouse_Window::think()
-{
-}
+void Warehouse_Window::think() {}
 
 
 /*
@@ -1141,14 +1125,14 @@ struct ProductionSite_Window_ListWorkerWindow : public UI::Window {
       virtual void think();
 
 private:
-      void update();
-      void fill_list();
+	void update();
+	void fill_list();
 
-      Widelands::Coords          m_ps_location;
-      ProductionSite* m_ps;
-      Interactive_Player* m_parent;
-	UI::Listselect<Widelands::Worker*> * m_ls;
-      UI::Textarea* m_type, *m_experience, *m_becomes;
+	Widelands::Coords                     m_ps_location;
+	ProductionSite                      * m_ps;
+	Interactive_Player                  * m_parent;
+	UI::Listselect<Widelands::Worker *> * m_ls;
+	UI::Textarea * m_type, * m_experience, * m_becomes;
 };
 
 /*
@@ -1158,54 +1142,54 @@ ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(I
 :
 UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str())
 {
-   m_ps=ps;
-   m_ps_location=ps->get_position();
-   m_parent=parent;
+	m_ps          = ps;
+	m_ps_location = ps->get_position();
+	m_parent      = parent;
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Worker Listing"), Align_Left);
-	tt->set_pos(Point((get_inner_w() - tt->get_w()) / 2, 5));
+	int32_t const spacing = 5;
+	int32_t       offsx   = spacing;
+	int32_t       offsy   = 30;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
-   int32_t spacing=5;
-   int32_t offsx=spacing;
-   int32_t offsy=30;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	// listselect
+	m_ls =
+		new UI::Listselect<Widelands::Worker*>
+		(this,
+		 posx, posy,
+		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy);
 
-   // listselect
-   m_ls=new UI::Listselect<Widelands::Worker*>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
+	posx = get_inner_w() / 2 + spacing;
+	new UI::Textarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
+	m_type =
+		new UI::Textarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // the descriptive areas
-   // Type
-   posx=get_inner_w()/2+spacing;
-   new UI::Textarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
-   m_type=new UI::Textarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
+	//  experience
+	new UI::Textarea
+		(this, posx, posy, 150, 20, _("Experience: "), Align_CenterLeft);
+	m_experience =
+		new UI::Textarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // Experience
-   new UI::Textarea(this, posx, posy, 150, 20, _("Experience: "), Align_CenterLeft);
-   m_experience=new UI::Textarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
+	// is working to become
+	new UI::Textarea
+		(this, posx, posy, 70, 20, _("Trying to become: "), Align_CenterLeft);
+	posy += 20;
+	m_becomes =
+		new UI::Textarea(this, posx+25, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // is working to become
-   new UI::Textarea(this, posx, posy, 70, 20, _("Trying to become: "), Align_CenterLeft);
-   posy+=20;
-   m_becomes=new UI::Textarea(this, posx+25, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
-
-   center_to_parent();
-   move_to_top();
+	center_to_parent();
+	move_to_top();
 }
 
-/*
- * desctructor
- */
-ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow() {
-}
 
-/*
- * think()
- */
+ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow
+()
+{}
+
+
 void ProductionSite_Window_ListWorkerWindow::think() {
 	Widelands::BaseImmovable const * const base_immovable =
 		m_parent->egbase().map()[m_ps_location].get_immovable();
@@ -1219,8 +1203,8 @@ void ProductionSite_Window_ListWorkerWindow::think() {
 		return;
 	}
 
-   fill_list();
-   UI::Window::think();
+	fill_list();
+	UI::Window::think();
 }
 
 /*
@@ -1228,7 +1212,7 @@ void ProductionSite_Window_ListWorkerWindow::think() {
  */
 void ProductionSite_Window_ListWorkerWindow::fill_list() {
 	const uint32_t m_last_select = m_ls->selection_index();
-   m_ls->clear();
+	m_ls->clear();
 	std::vector<Widelands::Worker *> & workers = *m_ps->get_workers();
 
 	for (uint32_t i = 0; i < workers.size(); ++i) {
@@ -1238,7 +1222,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list() {
 	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
 	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);
 
-   update();
+	update();
 }
 
 /**
@@ -1314,8 +1298,8 @@ struct ProductionSite_Window : public Building_Window {
 	virtual void think();
 
 private:
-   Interactive_Player* m_parent;
-   UI::Window** m_reg;
+	Interactive_Player * m_parent;
+	UI::Window * * m_reg;
 	std::list<PriorityButtonHelper> m_priority_helpers;
 public:
    void list_worker_clicked();
@@ -1366,14 +1350,14 @@ Create the window and its panels, add it to the registry.
 ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry)
 	: Building_Window(parent, ps, registry)
 {
-   m_parent=parent;
-   m_reg=registry;
+	m_parent=parent;
+	m_reg=registry;
 
-   UI::Box* prod_box = 0;
+	UI::Box * prod_box = 0;
 	if (ps->get_building_type() == Building::PRODUCTIONSITE) {
-       prod_box = create_production_box (this, ps);
-      fit_inner(prod_box);
-      move_inside_parent();
+		prod_box = create_production_box (this, ps);
+		fit_inner(prod_box);
+		move_inside_parent();
 	}
 }
 
@@ -1489,22 +1473,20 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
 
 /*
 ===============
-ProductionSite_Window::~ProductionSite_Window
-
 Deinitialize, remove from registry
 ===============
 */
-ProductionSite_Window::~ProductionSite_Window()
-{
-}
+ProductionSite_Window::~ProductionSite_Window() {}
 
 /*
  * List worker button has been clicked
  */
 void ProductionSite_Window::list_worker_clicked() {
-   assert(*m_reg==this);
+	assert(*m_reg == this);
 
-   *m_reg=new ProductionSite_Window_ListWorkerWindow(m_parent, get_productionsite());
+	*m_reg =
+		new ProductionSite_Window_ListWorkerWindow
+		(m_parent, get_productionsite());
 	die();
 }
 
@@ -1552,15 +1534,15 @@ struct MilitarySite_Window : public Building_Window {
 
 	virtual void think();
 private:
-   void update();
+	void update();
 	void drop_button_clicked ();
 	void soldier_capacity_up () {act_change_soldier_capacity (1);}
 	void soldier_capacity_down() {act_change_soldier_capacity(-1);}
 
-   Widelands::Coords                 m_ms_location;
-   Interactive_Player* m_parent;
-   UI::Window** m_reg;
-   UI::Table<Soldier &> * m_table;
+	Widelands::Coords      m_ms_location;
+	Interactive_Player   * m_parent;
+	UI::Window *         * m_reg;
+	UI::Table<Soldier &> * m_table;
 	UI::Textarea         * m_capacity;
 };
 
@@ -1575,9 +1557,9 @@ Create the window and its panels, add it to the registry.
 MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UI::Window** registry)
 	: Building_Window(parent, ps, registry)
 {
-   m_parent=parent;
-   m_reg=registry;
-   m_ms_location=ps->get_position();
+	m_parent=parent;
+	m_reg=registry;
+	m_ms_location=ps->get_position();
 
 	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
@@ -1590,7 +1572,7 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 	m_table->add_column(_("EV"),     40);
 	m_table->add_column(_("Level"), 100); // enough space for scrollbar
 
-   box->add(m_table, UI::Box::AlignCenter);
+	box->add(m_table, UI::Box::AlignCenter);
 
 	// Add drop soldier button
 	box->add_space(8);
@@ -1609,7 +1591,7 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 	// Add the caps button
 	create_capsbuttons(pan);
 
-		new UI::Textarea (pan, 104, 11, _("Capacity"), Align_Left);
+	new UI::Textarea (pan, 104, 11, _("Capacity"), Align_Left);
 	// Capacity buttons
 	new UI::Button<MilitarySite_Window>
 		(pan,
@@ -1628,8 +1610,8 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 	box->add(pan, UI::Box::AlignLeft);
 
 
-   fit_inner(box);
-   move_inside_parent();
+	fit_inner(box);
+	move_inside_parent();
 }
 
 
@@ -1640,9 +1622,7 @@ MilitarySite_Window::~MilitarySite_Window
 Deinitialize, remove from registry
 ===============
 */
-MilitarySite_Window::~MilitarySite_Window()
-{
-}
+MilitarySite_Window::~MilitarySite_Window() {}
 
 
 /*
@@ -1667,7 +1647,7 @@ void MilitarySite_Window::think()
 		die();
 		return;
 	}
-   update();
+	update();
 }
 
 /*
@@ -1682,7 +1662,7 @@ soldiers
 void MilitarySite_Window::update() {
 	const std::vector<Soldier *> & soldiers = get_militarysite()->get_soldiers();
 
-   char buf[200];
+	char buf[200];
 	if (soldiers.size() < m_table->size()) m_table->clear();
 
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
@@ -1705,7 +1685,7 @@ void MilitarySite_Window::update() {
 		sprintf(buf, "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
 		er->set_string(5, buf);
 	}
-   m_table->sort();
+	m_table->sort();
 
 	std::string str;
 	sprintf
@@ -1892,9 +1872,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	move_to_top();
 }
 
-TrainingSite_Options_Window::~TrainingSite_Options_Window()
-{
-}
+TrainingSite_Options_Window::~TrainingSite_Options_Window() {}
 
 void TrainingSite_Options_Window::act_change_priority (int32_t atr, int32_t val) {
 
@@ -1977,20 +1955,19 @@ struct TrainingSite_Window : public ProductionSite_Window {
 	void drop_button_clicked ();
 	void soldier_capacity_up () {act_change_soldier_capacity (1);}
 	void soldier_capacity_down() {act_change_soldier_capacity(-1);}
-   UI::Box* create_military_box (UI::Panel*);
+	UI::Box * create_military_box (UI::Panel *);
 private:
 	void update();
 
-   void add_tab(const char* picname, UI::Panel* panel);
-//   void add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)());
+	void add_tab(const char* picname, UI::Panel* panel);
 
-	Widelands::Coords     m_ms_location;
-   Interactive_Player* m_parent;
-   UI::Window**          m_reg;
-   UI::Table<Soldier &> * m_table;
-   UI::Textarea*         m_capacity;
+	Widelands::Coords      m_ms_location;
+	Interactive_Player   * m_parent;
+	UI::Window**           m_reg;
+	UI::Table<Soldier &> * m_table;
+	UI::Textarea         * m_capacity;
 
-   UI::Tab_Panel*         m_tabpanel;
+	UI::Tab_Panel        * m_tabpanel;
 
 };
 
@@ -2005,43 +1982,39 @@ Create the window and its panels, add it to the registry.
 TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSite* ms, UI::Window** registry)
 	: ProductionSite_Window(parent, ms, registry)
 {
-   m_parent = parent;
-   m_reg = registry;
-   m_ms_location = ms->get_position ();
+	m_parent = parent;
+	m_reg = registry;
+	m_ms_location = ms->get_position ();
 
-   m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
-   m_tabpanel->set_snapparent(true);
+	m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
+	m_tabpanel->set_snapparent(true);
 
 	// Training Box (wares and buttons related to them)
-   UI::Box* prod_box = create_production_box (m_tabpanel, ms);
-   prod_box->resize();
-   add_tab(pic_tab_training, prod_box);
+	UI::Box * prod_box = create_production_box (m_tabpanel, ms);
+	prod_box->resize();
+	add_tab(pic_tab_training, prod_box);
 
 	// Military Box (Soldiers and buttons related to them)
 	// Training Box (wares and buttons related to them)
-   UI::Box* train_box = create_military_box (m_tabpanel);
-   train_box->resize();
-   add_tab(pic_tab_military, train_box);
+	UI::Box * train_box = create_military_box (m_tabpanel);
+	train_box->resize();
+	add_tab(pic_tab_military, train_box);
 
-   m_tabpanel->resize();
-   fit_inner (m_tabpanel);
+	m_tabpanel->resize();
+	fit_inner (m_tabpanel);
 }
 
 
 /*
 ===============
-TrainingSite_Window::~TrainingSite_Window
-
 Deinitialize, remove from registry
 ===============
 */
-TrainingSite_Window::~TrainingSite_Window()
-{
-}
+TrainingSite_Window::~TrainingSite_Window() {}
 
 UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 {
-   UI::Box* sold_box = new UI::Box (panel, 0, 0, UI::Box::Vertical);
+	UI::Box * sold_box = new UI::Box (panel, 0, 0, UI::Box::Vertical);
 
       // Soldiers view
 	m_table = new UI::Table<Soldier &>(sold_box, 0, 0, 360, 200);
@@ -2085,8 +2058,8 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 		  &TrainingSite_Window::soldier_capacity_down, this),
 		 Align_Top);
 
-   m_capacity = new UI::Textarea (box, 0, 11, _("xx"), Align_Center);
-   box->add (m_capacity, Align_Top);
+	m_capacity = new UI::Textarea (box, 0, 11, _("xx"), Align_Center);
+	box->add (m_capacity, Align_Top);
 
 	box->add
 		(new UI::Button<TrainingSite_Window>
@@ -2096,9 +2069,9 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 		  g_gr->get_picture(PicMod_Game, pic_up_train),
 		  &TrainingSite_Window::soldier_capacity_up, this),
 		 Align_Top);
-   sold_box->add (box, Align_Left);
+	sold_box->add (box, Align_Left);
 
-   return sold_box;
+	return sold_box;
 }
 
 /*

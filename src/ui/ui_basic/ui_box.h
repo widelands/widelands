@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_ui_box_h
-#define included_ui_box_h
+#ifndef UI_BOX_H
+#define UI_BOX_H
 
 #include "ui_panel.h"
 
@@ -79,4 +79,4 @@ private:
 };
 };
 
-#endif // included_ui_box_h
+#endif

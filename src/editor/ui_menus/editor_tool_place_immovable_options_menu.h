@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU
-#define __S__EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU
+#ifndef EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#define EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 
 #include "editor_tool_options_menu.h"
 
@@ -35,14 +35,14 @@ struct Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Men
 		(Editor_Interactive          &,
 		 Editor_Place_Immovable_Tool &,
 		 UI::UniqueWindow::Registry  &);
-      virtual ~Editor_Tool_Place_Immovable_Options_Menu();
+	virtual ~Editor_Tool_Place_Immovable_Options_Menu();
 
 private:
-      std::vector<UI::Checkbox*> m_checkboxes;
+	std::vector<UI::Checkbox *> m_checkboxes;
 	UI::Tab_Panel m_tabpanel;
 	Editor_Place_Immovable_Tool & m_pit;
-      void clicked(int32_t, bool);
-      void do_nothing(int32_t, bool);
+	void clicked(int32_t, bool);
+	void do_nothing(int32_t, bool);
 };
 
 #endif

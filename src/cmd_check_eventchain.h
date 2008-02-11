@@ -17,8 +17,8 @@
 *
 */
 
-#ifndef __S__CMD_CHECK_EVENTCHAIN_H
-#define __S__CMD_CHECK_EVENTCHAIN_H
+#ifndef CMD_CHECK_EVENTCHAIN_H
+#define CMD_CHECK_EVENTCHAIN_H
 
 #include "cmd_queue.h"
 

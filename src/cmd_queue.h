@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__CMD_QUEUE_H
-#define __S__CMD_QUEUE_H
+#ifndef CMD_QUEUE_H
+#define CMD_QUEUE_H
 
 #include "queue_cmd_ids.h"
 #include "widelands_fileread.h"
@@ -69,12 +69,8 @@ class Game;
  * Therefore, base Commands are not saved in savegames and do not need to be
  * the same for all parallel simulation.
  */
-class Command {
-private:
-	int32_t m_duetime;
-
-public:
-	Command (int32_t);
+struct Command {
+	Command (int32_t const duetime) : m_duetime(duetime) {}
 	virtual ~Command ();
 
 	virtual void execute (Game*) = 0;
@@ -82,6 +78,9 @@ public:
 
 	int32_t get_duetime() const {return m_duetime;}
 	void set_duetime(int32_t t) {m_duetime = t;}
+
+private:
+	int32_t m_duetime;
 };
 
 
@@ -150,4 +149,4 @@ private:
 
 };
 
-#endif // __S__CMD_QUEUE_H
+#endif

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_transport_h
-#define included_transport_h
+#ifndef TRANSPORT_H
+#define TRANSPORT_H
 
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
@@ -70,7 +70,7 @@ typedef std::vector<Neighbour> Neighbour_list;
  *   the building somehow
  */
 class WareInstance : public Map_Object {
-   friend struct Map_Waredata_Data_Packet;
+	friend struct Map_Waredata_Data_Packet;
 
 	MO_DESCR(Item_Ware_Descr);
 
@@ -194,7 +194,7 @@ public:
 
 	void add_flag_job(Game* g, int32_t workerware, std::string programname);
 
-   void conquered_by (Player* who) {assert(who); set_owner(who);}
+	void conquered_by (Player * const who) {assert(who); set_owner(who);}
 protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
@@ -499,10 +499,10 @@ struct Request : public Trackable {
 	typedef void (*callback_t)
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
-   enum Type {
-      WARE = 0,
-      WORKER = 1,
-	   SOLDIER = 2
+	enum Type {
+		WARE    = 0,
+		WORKER  = 1,
+		SOLDIER = 2
 	};
 
 	Request
@@ -511,7 +511,7 @@ struct Request : public Trackable {
 
 	PlayerImmovable * get_target() const throw () {return m_target;}
 	Ware_Index get_index() const {return m_index;}
-   int32_t get_type() const {return m_type;}
+	int32_t get_type() const {return m_type;}
 	bool is_idle() const {return m_idle;}
 	int32_t get_count() const {return m_count;}
 	bool is_open() const
@@ -537,7 +537,7 @@ struct Request : public Trackable {
    // For savegames
 	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
 	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
-   Worker* get_transfer_worker();
+	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
 	void transfer_finish(Game* g, Transfer* t);
@@ -559,7 +559,7 @@ private:
 
 	typedef std::vector<Transfer*> TransferList;
 
-   Type              m_type;
+	Type              m_type;
 	PlayerImmovable * m_target;            //  who requested it?
 	Economy         * m_economy;
 	Ware_Index        m_index;             //  the index of the ware descr
@@ -662,7 +662,7 @@ struct Economy {
 	void add_wares(int32_t id, int32_t count = 1);
 	void remove_wares(int32_t id, int32_t count = 1);
 
-   void add_workers(int32_t id, int32_t count = 1);
+	void    add_workers(int32_t id, int32_t count = 1);
 	void remove_workers(int32_t id, int32_t count = 1);
 
 	void add_warehouse(Warehouse *wh);
@@ -759,9 +759,9 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 		m_economy       (economy)
 	{}
 
-      void execute (Game* g);
+	void execute (Game *);
 
-      virtual int32_t get_id() {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
+	virtual int32_t get_id() {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
@@ -774,4 +774,4 @@ private:
 
 };
 
-#endif // included_transport_h
+#endif

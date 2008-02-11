@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __COMPUTER_PLAYER_HINTS_H
-#define __COMPUTER_PLAYER_HINTS_H
+#ifndef COMPUTER_PLAYER_HINTS_H
+#define COMPUTER_PLAYER_HINTS_H
 
 class Profile;
 

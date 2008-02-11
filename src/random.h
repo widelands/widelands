@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Wide Lands Development Team
+ * Copyright (C) 2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __RANDOM_H__
-#define __RANDOM_H__
+#ifndef RANDOM_H
+#define RANDOM_H
 
 #include <stdint.h>
 

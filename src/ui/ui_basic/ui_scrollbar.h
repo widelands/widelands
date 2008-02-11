@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__SCROLLBAR_H
-#define __S__SCROLLBAR_H
+#ifndef UI_SCROLLBAR_H
+#define UI_SCROLLBAR_H
 
 #include "ui_panel.h"
 #include "ui_signal.h"
@@ -61,7 +61,7 @@ public:
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 
-   void set_force_draw(bool t) {m_force_draw=t;}
+	void set_force_draw(bool const t) {m_force_draw = t;}
 
 private:
 	Area get_area_for_point(int32_t x, int32_t y);
@@ -81,7 +81,7 @@ private:
 
 private:
 	bool m_horizontal;
-   bool     m_force_draw; // draw this scrollbar, even if it can't do anything
+	bool     m_force_draw; // draw this scrollbar, even if it can't do anything
 
 	uint32_t m_pos;            ///< from 0 to m_range - 1
 	uint32_t m_pagesize;
@@ -98,4 +98,4 @@ private:
 };
 };
 
-#endif // __S__SCROLLBAR_H
+#endif

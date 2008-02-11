@@ -483,7 +483,7 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 				SDL_GetRGBA
 					(surf.get_pixel(x, y), &format,
 					 rowp + 0, rowp + 1, rowp + 2, rowp + 3);
-		png_write_row(png_ptr, row);
+			png_write_row(png_ptr, row);
 		}
 	}
 

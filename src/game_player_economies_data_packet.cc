@@ -36,9 +36,9 @@ void Game_Player_Economies_Data_Packet::Read
 (FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   FileRead fr;
+	FileRead fr;
 
-   fr.Open(fs, "binary/player_economies");
+	fr.Open(fs, "binary/player_economies");
 
 	Map   const &       map        = game->map();
 	Map_Index     const max_index  = map.max_index();
@@ -98,10 +98,9 @@ void Game_Player_Economies_Data_Packet::Write
 (FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // Now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	Map const & map = game->map();
 	Field const & field_0 = map[0];
@@ -114,7 +113,7 @@ throw (_wexception)
 			(Player::economy_vector::const_iterator it = economies.begin();
 			 it != economies_end;
 			 ++it)
-         // Walk the map so that we find a representant
+			//  Walk the map so that we find a representant.
 			for (Field const * field = &field_0;; ++field) {
 				assert(field < &map[map.max_index()]); //  should never reach end
 				if (upcast(Flag const, flag, field->get_immovable()))
@@ -125,7 +124,7 @@ throw (_wexception)
 			}
 	}
 
-   fw.Write(fs, "binary/player_economies");
+	fw.Write(fs, "binary/player_economies");
 }
 
 };

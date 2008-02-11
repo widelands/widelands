@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__DESCR_MAINTAINER_H
-#define __S__DESCR_MAINTAINER_H
+#ifndef DESCR_MAINTAINER_H
+#define DESCR_MAINTAINER_H
 
 #include <limits>
 #include <stdexcept>
@@ -34,8 +34,8 @@ template <class T> struct Descr_Maintainer {
 	static typename T::Index invalid_index()
 	{return std::numeric_limits<typename T::Index>::max();}
 
-      T* exists(const char* name);
-      int32_t add(T* item);
+	T * exists(char const * name);
+	int32_t add(T *);
 	typename T::Index get_nitems() const throw () {return nitems;}
 
 	struct Nonexistent {};
@@ -68,12 +68,11 @@ private:
 
 template <class T>
 int32_t Descr_Maintainer<T>::add(T* item) {
-   nitems++;
-	if (nitems >= capacity) {
-      reserve(nitems);
-	}
-   items[nitems-1]=item;
-	return nitems-1;
+	int32_t const result = nitems;
+	if (++nitems >= capacity)
+		reserve(nitems);
+	items[result] = item;
+	return result;
 }
 
 //

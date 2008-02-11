@@ -38,9 +38,9 @@ void Map_Objective_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   Profile prof;
+	Profile prof;
 	try {prof.read("objective", 0, fs);} catch (...) {return;}
 	Map & map = egbase->map();
 	Manager<Objective> & mom = map.mom();
@@ -84,7 +84,7 @@ void Map_Objective_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   Profile prof;
+	Profile prof;
 	prof.create_section("global")->set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
@@ -99,7 +99,7 @@ throw (_wexception)
 		s.set_string("trigger",  objective.get_trigger()->name());
 	}
 
-   prof.write("objective", false, fs);
+	prof.write("objective", false, fs);
 }
 
 };

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAINMENUE_H
-#define __S__MAINMENUE_H
+#ifndef FULLSCREEN_MENU_MAIN_H
+#define FULLSCREEN_MENU_MAIN_H
 
 #include "fullscreen_menu_base.h"
 
@@ -54,4 +54,4 @@ public:
 	};
 };
 
-#endif /* __S__MAINMENUE_H */
+#endif

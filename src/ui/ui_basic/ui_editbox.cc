@@ -43,26 +43,26 @@ Edit_Box::Edit_Box
 	 "")
 {
 
-   set_think(false);
+	set_think(false);
 
-   m_keyboard_grabbed=false;
-   m_maxchars=0xffff;
-   m_text="";
-   m_lasttext="";
+	m_keyboard_grabbed = false;
+	m_maxchars         = 0xffff;
+	m_text             = "";
+	m_lasttext         = "";
 
-   m_id=id;
+	m_id = id;
 
-   set_handle_mouse(true);
-   set_can_focus(true);
-   set_draw_caret(true);
+	set_handle_mouse(true);
+	set_can_focus   (true);
+	set_draw_caret  (true);
 }
 
 /**
 destructor
 */
 Edit_Box::~Edit_Box() {
-   grab_mouse(false);
-   set_can_focus(false);
+	grab_mouse   (false);
+	set_can_focus(false);
 }
 
 /**
@@ -72,11 +72,10 @@ bool Edit_Box::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (not m_keyboard_grabbed) {
-      set_can_focus(true);
-      focus();
-      m_keyboard_grabbed=true;
-      m_lasttext=m_text;
-      return true;
+		set_can_focus(true);
+		focus();
+		m_lasttext         = m_text;
+		m_keyboard_grabbed = true;
 	}
 	return m_keyboard_grabbed;
 }
@@ -163,6 +162,6 @@ Hides a mouseout event from the underlying button
 void Edit_Box::handle_mousein(bool inside) {
 	if (m_keyboard_grabbed)
 		return;
-   Basic_Button::handle_mousein(inside);
+	Basic_Button::handle_mousein(inside);
 }
 };

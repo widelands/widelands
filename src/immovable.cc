@@ -45,9 +45,7 @@ BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
 Map_Object(&mo_descr)
 {}
 
-BaseImmovable::~BaseImmovable()
-{
-}
+BaseImmovable::~BaseImmovable() {}
 
 static std::string const base_immovable_name = "unknown";
 std::string const & BaseImmovable::name() const throw () {
@@ -66,7 +64,7 @@ void BaseImmovable::set_position(Editor_Game_Base * egbase, Coords const c)
 	Map & map = egbase->map();
 	FCoords f = map.get_fcoords(c);
 	if (f.field->immovable && f.field->immovable != this) {
-	   assert(f.field->immovable->get_size() == NONE);
+		assert(f.field->immovable->get_size() == NONE);
 
 		f.field->immovable->cleanup(egbase);
 		delete f.field->immovable;
@@ -182,8 +180,9 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 	}
 
 	if (s->get_num_values() != m_actions.size())
-		log("WARNING: %s:%s: program line numbers appear to be wrong\n",
-			directory.c_str(), m_name.c_str());
+		log
+			("WARNING: %s:%s: program line numbers appear to be wrong\n",
+			 directory.c_str(), m_name.c_str());
 
 	// Fallback (default) program
 	if (!m_actions.size())
@@ -444,9 +443,7 @@ m_program_ptr (0),
 m_program_step(0)
 {}
 
-Immovable::~Immovable()
-{
-}
+Immovable::~Immovable() {}
 
 int32_t Immovable::get_type() const throw ()
 {
@@ -601,8 +598,9 @@ void Immovable::Loader::load(FileRead& fr)
 	}
 	catch (Map_Object_Descr::Animation_Nonexistent&) {
 		imm.m_anim = imm.descr().main_animation();
-		log("Warning: Animation '%s' not found, using animation '%s').\n",
-			animname, imm.descr().get_animation_name(imm.m_anim).c_str());
+		log
+			("Warning: Animation \"%s\" not found, using animation %s).\n",
+			 animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.Signed32();
 
@@ -618,8 +616,10 @@ void Immovable::Loader::load(FileRead& fr)
 			// significantly.
 			// Note that in some cases, the immovable may end up broken despite
 			// the fixup, but there isn't really anything we can do against that.
-			log("Warning: Immovable '%s', size of program '%s' seems to have changed.\n",
-				imm.descr().name().c_str(), imm.m_program->get_name().c_str());
+			log
+				("Warning: Immovable '%s', size of program '%s' seems to have "
+				 "changed.\n",
+				 imm.descr().name().c_str(), imm.m_program->get_name().c_str());
 			imm.m_program_ptr = 0;
 		}
 	}
@@ -885,8 +885,7 @@ PlayerImmovable IMPLEMENTATION
 */
 PlayerImmovable::PlayerImmovable(const Map_Object_Descr & mo_descr) :
 	BaseImmovable(mo_descr), m_owner(0), m_economy(0)
-{
-}
+{}
 
 /**
  * Cleanup

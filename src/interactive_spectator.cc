@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -162,9 +162,7 @@ void Interactive_Spectator::exit_btn()
  * Observer has clicked on the given field; bring up the context menu.
  * \todo Implement
  */
-void Interactive_Spectator::field_action()
-{
-}
+void Interactive_Spectator::field_action() {}
 
 
 /**

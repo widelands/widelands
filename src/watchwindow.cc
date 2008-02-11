@@ -58,7 +58,7 @@ struct WatchWindow : public UI::Window {
 	~WatchWindow();
 
 	UI::Signal1<Point> warp_mainview;
-   UI::Signal         closed;
+	UI::Signal         closed;
 
 	void start_tracking(Point pos);
 	void toggle_tracking();
@@ -111,7 +111,7 @@ m_mapview      (this, 0, 0, 200, 166, parent),
 m_single_window(single_window),
 last_visit     (m_game->get_gametime()),
 
-	// UI::Buttons
+//  UI::Buttons
 
 m_follow
 (this,
@@ -250,7 +250,7 @@ void WatchWindow::show_view(bool) {
 
 WatchWindow::~WatchWindow() {
 	g_watch_window = NULL;
-   closed.call();
+	closed.call();
 }
 
 /*
@@ -404,10 +404,9 @@ void show_watch_window
 			g_watch_window->add_view(coords);
 		else
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, coords, true);
-      win = g_watch_window;
+		win = g_watch_window;
 	}
 	else
 		win = new WatchWindow(parent, 250, 150, 200, 200, coords, false);
-   win->closed.set(&parent, &Interactive_Player::need_complete_redraw);
-
+	win->closed.set(&parent, &Interactive_Player::need_complete_redraw);
 }

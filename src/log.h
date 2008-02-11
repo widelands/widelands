@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S_LOG_H
-#define __S_LOG_H
+#ifndef LOG_H
+#define LOG_H
 
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))

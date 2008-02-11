@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
-#define __S__EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
+#ifndef EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
+#define EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
 
 #include "editor_tool_options_menu.h"
 
@@ -49,7 +49,7 @@ private:
 	Editor_Noise_Height_Tool & m_noise_tool;
 
 	void clicked_button(Button);
-      void update();
+	void update();
 };
 
 #endif

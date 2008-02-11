@@ -47,39 +47,46 @@ Create all the buttons etc...
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UI::UniqueWindow::Registry* registry)
 :
 UI::UniqueWindow(parent, registry, 400, 270, _("Save Game")),
-m_parent(parent)
+m_parent(parent) //  FIXME redundant (base already stores parent pointer)
 
 {
-   int32_t spacing=5;
-   int32_t offsx=spacing;
-   int32_t offsy=30;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	int32_t const spacing =  5;
+	int32_t const offsx   = spacing;
+	int32_t const offsy   = 30;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
-   // listselect
-   m_ls=new UI::Listselect<const char *>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
-   m_ls->selected.set(this, &Game_Main_Menu_Save_Game::selected);
-   m_ls->double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
-   // Filename editbox
-   m_editbox=new UI::Edit_Box(this, posx, posy+get_inner_h()-spacing-offsy-60+3, get_inner_w()/2-spacing, 20, 1, 0);
-   m_editbox->changed.set(this, &Game_Main_Menu_Save_Game::edit_box_changed);
+	m_ls =
+		new UI::Listselect<char const *>
+		(this,
+		 posx, posy,
+		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
+	m_ls->selected.set(this, &Game_Main_Menu_Save_Game::selected);
+	m_ls->double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
+	m_editbox =
+		new UI::Edit_Box
+		(this,
+		 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
+		 get_inner_w() / 2 - spacing, 20,
+		 1, 0);
+	m_editbox->changed.set(this, &Game_Main_Menu_Save_Game::edit_box_changed);
 
-   // the descriptive areas
-   // Name
-   posx=get_inner_w()/2+spacing;
-   posy+=20;
-   new UI::Textarea(this, posx, posy, 150, 20, _("Map Name: "), Align_CenterLeft);
-   m_name=new UI::Textarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
+	posx = get_inner_w() / 2 + spacing;
+	posy += 20;
+	new UI::Textarea
+		(this, posx, posy, 150, 20, _("Map Name: "), Align_CenterLeft);
+	m_name =
+		new UI::Textarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // Author
-   new UI::Textarea(this, posx, posy, 150, 20, _("Game Time: "), Align_CenterLeft);
-   m_gametime=new UI::Textarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
+	new UI::Textarea
+		(this, posx, posy, 150, 20, _("Game Time: "), Align_CenterLeft);
+	m_gametime =
+		new UI::Textarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // Buttons
-   posx=5;
-   posy=get_inner_h()-30;
+	posx = 5;
+	posy = get_inner_h() - 30;
 	m_ok_btn = new UI::Button<Game_Main_Menu_Save_Game>
 		(this,
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
@@ -95,24 +102,20 @@ m_parent(parent)
 		 &Game_Main_Menu_Save_Game::die, this,
 		 _("Cancel"));
 
-   m_curdir=SaveHandler::get_base_dir();
+	m_curdir = SaveHandler::get_base_dir();
 
-   fill_list();
+	fill_list();
 
-   center_to_parent();
-   move_to_top();
+	center_to_parent();
+	move_to_top();
 }
 
 /*
 ===============
-Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game
-
 Unregister from the registry pointer
 ===============
 */
-Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game()
-{
-}
+Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game() {}
 
 /*
 ===========
@@ -132,30 +135,32 @@ void Game_Main_Menu_Save_Game::clicked_ok() {
 void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-   FileSystem* fs = g_fs->MakeSubFileSystem(name);
+	FileSystem * const fs = g_fs->MakeSubFileSystem(name);
 	Widelands::Game_Loader gl(*fs, m_parent->get_game());
 	Widelands::Game_Preload_Data_Packet gpdp;
-   gl.preload_game(&gpdp); // This has worked before, no problem
+	gl.preload_game(&gpdp); // This has worked before, no problem
 
-   char* fname = strdup(FileSystem::FS_Filename(name));
-   FileSystem::FS_StripExtension(fname);
-   m_editbox->set_text(fname);
-   free(fname);
-   m_ok_btn->set_enabled(true);
+	{
+		char * const fname = strdup(FileSystem::FS_Filename(name));
+		FileSystem::FS_StripExtension(fname);
+		m_editbox->set_text(fname);
+		free(fname);
+	}
+	m_ok_btn->set_enabled(true);
 
-   m_name->set_text(gpdp.get_mapname());
+	m_name->set_text(gpdp.get_mapname());
 
-   char buf[200];
-   uint32_t gametime = gpdp.get_gametime();
+	char buf[200];
+	uint32_t gametime = gpdp.get_gametime();
 
-   int32_t hours = gametime / 3600000;
-   gametime -= hours * 3600000;
-   int32_t minutes = gametime / 60000;
+	int32_t hours = gametime / 3600000;
+	gametime -= hours * 3600000;
+	int32_t minutes = gametime / 60000;
 
-   sprintf(buf, "%02i:%02i", hours, minutes);
-   m_gametime->set_text(buf);
+	sprintf(buf, "%02i:%02i", hours, minutes);
+	m_gametime->set_text(buf);
 
-   delete fs;
+	delete fs;
 }
 
 /**
@@ -169,8 +174,8 @@ void Game_Main_Menu_Save_Game::double_clicked(uint32_t) {clicked_ok();}
 void Game_Main_Menu_Save_Game::fill_list() {
 	filenameset_t m_gamefiles;
 
-   // Fill it with all files we find.
-   g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
+	//  Fill it with all files we find.
+	g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
 
 	Widelands::Game_Preload_Data_Packet gpdp;
 
@@ -179,21 +184,19 @@ void Game_Main_Menu_Save_Game::fill_list() {
 		 pname != m_gamefiles.end();
 		 ++pname)
 	{
-      const char *name = pname->c_str();
+		char const * const name = pname->c_str();
 
-      FileSystem* fs = 0;
+		FileSystem * fs = 0;
 		try {
-         fs = g_fs->MakeSubFileSystem(name);
+			fs = g_fs->MakeSubFileSystem(name);
 			Widelands::Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
 			char* fname = strdup(FileSystem::FS_Filename(name));
 			FileSystem::FS_StripExtension(fname);
 			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
-         free(fname);
-		} catch (_wexception&) {
-         // we simply skip illegal entries
-		}
-         delete fs;
+			free(fname);
+		} catch (_wexception&) {} //  we simply skip illegal entries
+		delete fs;
 	}
 
 	if (m_ls->size()) m_ls->select(0);
@@ -203,7 +206,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
  * The editbox was changed. Enable ok button
  */
 void Game_Main_Menu_Save_Game::edit_box_changed() {
-   m_ok_btn->set_enabled(true);
+	m_ok_btn->set_enabled(true);
 }
 
 /*
@@ -213,34 +216,37 @@ void Game_Main_Menu_Save_Game::edit_box_changed() {
  * should stay open
  */
 bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
-    SaveHandler* savehandler = m_parent->get_game()->get_save_handler();
-    std::string complete_filename = savehandler->create_file_name(m_curdir, filename);
+	SaveHandler * savehandler = m_parent->get_game()->get_save_handler();
+	std::string complete_filename =
+		savehandler->create_file_name(m_curdir, filename);
 
-   // Check if file exists, if it does, show a warning
+	//  Check if file exists. If it does, show a warning.
 	if (g_fs->FileExists(complete_filename)) {
-      std::string s=_("A File with the name ");
-      s+=FileSystem::FS_Filename(filename.c_str());
-      s+=_(" already exists. Overwrite?");
+		std::string s = _("A File with the name ");
+		s            += FileSystem::FS_Filename(filename.c_str());
+		s            += _(" already exists. Overwrite?");
 		UI::Modal_Message_Box mbox
 			(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::YESNO);
 		if (not mbox.run()) return false;
 
-      // Delete this
-      g_fs->Unlink(complete_filename);
+		g_fs->Unlink(complete_filename); //  delete this
 	}
 
-   std::string error;
+	std::string error;
 	if
 		(!
 		 savehandler->save_game
 		 (*m_parent->get_game(), complete_filename, &error))
 	{
-      std::string s=_("Game Saving Error!\nSaved Game-File may be corrupt!\n\nReason given:\n");
-      s+=error;
+		std::string s =
+			_
+			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
+			 "Reason given:\n");
+		s += error;
 		UI::Modal_Message_Box mbox
 			(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
 	}
 
-   return true;
+	return true;
 }

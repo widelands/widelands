@@ -49,15 +49,14 @@ class WaresQueue;
  * wares type has an associated store.
  */
 struct ProductionSite_Descr : public Building_Descr {
-   friend class ProductionProgram; // To add animations
-   typedef std::map<std::string, ProductionProgram*> ProgramMap;
+	friend class ProductionProgram; // To add animations
+	typedef std::map<std::string, ProductionProgram*> ProgramMap;
 
 	ProductionSite_Descr
 		(const Tribe_Descr & tribe, const std::string & productionsite_name);
 	virtual ~ProductionSite_Descr();
 
-	virtual void parse(const char* directory, Profile* prof,
-		const EncodeData* encdata);
+	virtual void parse(char const * directory, Profile *, EncodeData const *);
 	virtual Building * create_object() const;
 
 	std::vector<std::string> const & workers() const throw () {
@@ -86,10 +85,9 @@ class ProductionSite : public Building {
 
 public:
 	ProductionSite(const ProductionSite_Descr & descr);
-	virtual ~ProductionSite();
 
 	virtual std::string get_statistics_string();
-   int8_t get_statistics_percent() {return m_last_stat_percent;}
+	int8_t get_statistics_percent() {return m_last_stat_percent;}
 
 	void fill(Game &);
 
@@ -109,8 +107,8 @@ public:
 	std::vector<WaresQueue*>* get_warequeues() {
 		return &m_input_queues;
 	}
-   std::vector<Worker*>* get_workers() {
-      return &m_workers;
+	std::vector<Worker*>* get_workers() {
+		return &m_workers;
 	}
 
 	__attribute__ ((noreturn)) virtual const std::vector<Soldier *> & get_soldiers() const
@@ -143,8 +141,8 @@ protected:
 	void set_post_timer (int32_t t) {m_post_timer = t;}
 
 protected:  // TrainingSite must have access to this stuff
-   std::vector<Request*> m_worker_requests;
-   std::vector<Worker*>  m_workers;
+	std::vector<Request*> m_worker_requests;
+	std::vector<Worker *> m_workers;
 
 	int32_t m_fetchfromflag; // # of items to fetch from flag
 
@@ -173,8 +171,7 @@ out of a building
 
 =============================
 */
-class Input {
-public:
+struct Input {
 	Input(Item_Ware_Descr* ware, int32_t max) : m_ware(ware), m_max(max) {}
 	~Input() {}
 

@@ -78,7 +78,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 			if (!cmd.size())
 				continue;
 
-         // Find the appropriate parser
+			//  find the appropriate parser
 			Critter_BobAction act;
 			uint32_t mapidx;
 
@@ -127,7 +127,7 @@ void Critter_BobProgram::parse_remove
 	if (cmd.size() != 1)
 		throw wexception("Usage: remove");
 
-   act->function = &Critter_Bob::run_remove;
+	act->function = &Critter_Bob::run_remove;
 }
 
 bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
@@ -135,8 +135,8 @@ bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 
 	++state->ivar1;
 	// Bye, bye cruel world
-   schedule_destroy(g);
-   return true;
+	schedule_destroy(g);
+	return true;
 }
 
 
@@ -172,7 +172,7 @@ Get a program from the workers description.
 ===============
 */
 const Critter_BobProgram* Critter_Bob_Descr::get_program
-(std::string programname)
+(std::string const & programname)
 const
 {
 	const ProgramMap::const_iterator it = m_programs.find(programname);
@@ -192,7 +192,7 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 	m_swimming = s->get_bool("swimming", false);
 
 	// Pretty name
-   m_descname = s->get_safe_string("descname");
+	m_descname = s->get_safe_string("descname");
 
 	m_walk_anims.parse
 		(this,
@@ -208,14 +208,13 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 	while (sglobal->get_next_string("program", &string)) {
 		Critter_BobProgram* prog = 0;
 
-		try
-		{
+		try {
 			Critter_BobProgram::Parser parser;
 
 			parser.descr = this;
 			parser.directory = directory;
 			parser.prof = prof;
-         parser.encdata = encdata;
+			parser.encdata = encdata;
 
 			prog = new Critter_BobProgram(string);
 			prog->parse(&parser, string);
@@ -247,12 +246,9 @@ class Critter_Bob
 
 Critter_Bob::Critter_Bob(const Critter_Bob_Descr & critter_bob_descr) :
 Bob(critter_bob_descr)
-{
-}
+{}
 
-Critter_Bob::~Critter_Bob()
-{
-}
+Critter_Bob::~Critter_Bob() {}
 
 uint32_t Critter_Bob::get_movecaps() const throw ()
 {return descr().is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;}
@@ -304,17 +300,17 @@ void Critter_Bob::program_update(Game* g, State* state)
 {
 	const Critter_BobAction* action;
 
-	for (;;)
-	{
-      const Critter_BobProgram* program=static_cast<const Critter_BobProgram*>(state->program);
+	for (;;) {
+		Critter_BobProgram const & program =
+			dynamic_cast<Critter_BobProgram const &>(*state->program);
 
-		if (state->ivar1 >= program->get_size()) {
+		if (state->ivar1 >= program.get_size()) {
 			molog("  End of program\n");
 			pop_task();
 			return;
 		}
 
-		action = program->get_action(state->ivar1);
+		action = program.get_action(state->ivar1);
 
 		if ((this->*(action->function))(g, state, action))
 			return;

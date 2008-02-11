@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAPVIEWPIXELFUNCTIONS_H
-#define __S__MAPVIEWPIXELFUNCTIONS_H
+#ifndef MAPVIEWPIXELFUNCTIONS_H
+#define MAPVIEWPIXELFUNCTIONS_H
 
 #include "widelands_geometry.h"
 
@@ -129,4 +129,4 @@ inline void MapviewPixelFunctions::get_save_pix
 	get_pix(fc, px, py);
 }
 
-#endif // __S__MAPVIEWPIXELFUNCTIONS_H
+#endif

@@ -53,5 +53,5 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 		 Widelands::BaseImmovable::NONE)
 		egbase.create_immovable(mr.location(), get_random_enabled(), 0);
 	while (mr.advance(map));
-   return radius + 2;
+	return radius + 2;
 }

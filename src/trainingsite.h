@@ -30,7 +30,7 @@ namespace Widelands {
 struct TrainingSite_Descr : public ProductionSite_Descr {
 	TrainingSite_Descr
 		(const Tribe_Descr &, const std::string & trainingsite_name);
-	 virtual ~ TrainingSite_Descr();
+	virtual ~TrainingSite_Descr();
 
 	virtual void parse(const char *directory, Profile * prof, const EncodeData * encdata);
 	virtual Building * create_object() const;

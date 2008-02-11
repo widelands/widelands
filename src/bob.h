@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __BOB_H
-#define __BOB_H
+#ifndef BOB_H
+#define BOB_H
 
 #include "animation.h"
 
@@ -159,8 +159,8 @@ struct Bob : public Map_Object {
 
 	uint32_t vision_range() const {return descr().vision_range();}
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &,
-	                  const Point) const;
+	virtual void draw
+		(Editor_Game_Base const &, RenderTarget &, Point) const;
 
 
 	// For debug

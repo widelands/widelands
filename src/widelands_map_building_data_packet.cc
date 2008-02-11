@@ -67,10 +67,10 @@ throw (_wexception)
 				const char * const name = fr.CString();
 				bool is_constructionsite=fr.Unsigned8();
 
-					// No building lives on more than one main place
-					assert(!ol->is_object_known(serial));
+				//  No building lives on more than one main place.
+				assert(!ol->is_object_known(serial)); // FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-					// Get the tribe and the building index
+				//  Get the tribe and the building index.
 				if
 					(Player * const player =
 					 egbase->get_safe_player(a.player_number))
@@ -85,10 +85,11 @@ throw (_wexception)
 
 					// Now, create this Building, take extra special care for constructionsites
 					Building & building = // all data is read later
-						*(is_constructionsite ?
-						  egbase->warp_constructionsite(a, a.player_number, index, 0)
-						  :
-						  egbase->warp_building        (a, a.player_number, index));
+						*
+						(is_constructionsite ?
+						 egbase->warp_constructionsite(a, a.player_number, index, 0)
+						 :
+						 egbase->warp_building        (a, a.player_number, index));
 
 					if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION) {
 						read_priorities (building, fr);
@@ -144,24 +145,22 @@ throw (_wexception)
 	iterate_Map_FCoords(map, extent, fc) {
 		upcast(Building const, building, fc.field->get_immovable());
 		if (building and building->get_position() == fc) {
-			// We only write Buildings
-				// Buildings can life on only one main position
-				assert(!os->is_object_known(building));
+			//  We only write Buildings.
+			//  Buildings can life on only one main position.
+			assert(!os->is_object_known(building));
 
-				fw.Unsigned8(1);
+			fw.Unsigned8(1);
 			fw.Unsigned8(building->owner().get_player_number());
-				// write id
-				fw.Unsigned32(os->register_object(building));
+			fw.Unsigned32(os->register_object(building));
 
-				const ConstructionSite * const constructionsite =
-					dynamic_cast<const ConstructionSite *>(building);
-				fw.CString
-					((constructionsite ?
-					  constructionsite->building() : building->descr())
-					 .name().c_str());
-				fw.Unsigned8(static_cast<bool>(constructionsite));
+			upcast(ConstructionSite const, constructionsite, building);
+			fw.CString
+				((constructionsite ?
+				  constructionsite->building() : building->descr())
+				 .name().c_str());
+			fw.Unsigned8(static_cast<bool>(constructionsite));
 
-				write_priorities(*building, fw);
+			write_priorities(*building, fw);
 
 		} else
 			fw.Unsigned8(0);
@@ -191,8 +190,7 @@ void Map_Building_Data_Packet::write_priorities
 
 	const Tribe_Descr & tribe = building.get_owner()->tribe();
 	building.collect_priorities(type_to_priorities);
-	for (it = type_to_priorities.begin();
-		 it != type_to_priorities.end(); ++it)
+	for (it = type_to_priorities.begin(); it != type_to_priorities.end(); ++it)
 	{
 		if (it->second.size() == 0)
 			continue;

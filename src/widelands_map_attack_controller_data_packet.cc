@@ -88,55 +88,55 @@ throw (_wexception)
 
 				uint32_t const numBs = fr.Unsigned32();
 
-			for (uint32_t j = 0; j < numBs; ++j) {
-				upcast(Soldier, soldier, ol->get_object_by_file_index(fr.Unsigned32()));
-				assert(soldier); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+				for (uint32_t j = 0; j < numBs; ++j) {
+					upcast(Soldier, soldier, ol->get_object_by_file_index(fr.Unsigned32()));
+					assert(soldier); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-				upcast(MilitarySite, origin, ol->get_object_by_file_index(fr.Unsigned32()));
-				assert(origin); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+					upcast(MilitarySite, origin, ol->get_object_by_file_index(fr.Unsigned32()));
+					assert(origin); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-				Coords battleGround;
-				if (packet_version == 1) {
-					const uint32_t x = fr.Unsigned32();
-					if (extent.w <= x)
-						throw wexception
-							("Map_Attack_Controller_Data_Packet::Read: in "
-							 "binary/attackcontroller:%u: battleGround has x "
-							 "coordinate %i, but the map width is only %u",
-							 fr.GetPos() - 4, x, extent.w);
-					const uint32_t y = fr.Unsigned32();
-					if (extent.h <= y)
-						throw wexception
-							("Map_Attack_Controller_Data_Packet::Read: in "
-							 "binary/attackcontroller:%u: battleGround has y "
-							 "coordinate %i, but the map height is only %u",
-							 fr.GetPos() - 4, y, extent.h);
-					battleGround = Coords(x, y);
-				} else {
-					try {battleGround = fr.Coords32(extent);}
-					catch (_wexception const & e) {
-						throw wexception
-							("Map_Attack_Controller_Data_Packet::Read: in "
-							 "binary/attackcontroller:%u: reading coordinates of "
-							 "battleground: %s",
-							 fr.GetPos() - 4, e.what());
+					Coords battleGround;
+					if (packet_version == 1) {
+						const uint32_t x = fr.Unsigned32();
+						if (extent.w <= x)
+							throw wexception
+								("Map_Attack_Controller_Data_Packet::Read: in "
+								 "binary/attackcontroller:%u: battleGround has x "
+								 "coordinate %i, but the map width is only %u",
+								 fr.GetPos() - 4, x, extent.w);
+						const uint32_t y = fr.Unsigned32();
+						if (extent.h <= y)
+							throw wexception
+								("Map_Attack_Controller_Data_Packet::Read: in "
+								 "binary/attackcontroller:%u: battleGround has y "
+								 "coordinate %i, but the map height is only %u",
+								 fr.GetPos() - 4, y, extent.h);
+						battleGround = Coords(x, y);
+					} else {
+						try {battleGround = fr.Coords32(extent);}
+						catch (_wexception const & e) {
+							throw wexception
+								("Map_Attack_Controller_Data_Packet::Read: in "
+								 "binary/attackcontroller:%u: reading coordinates of "
+								 "battleground: %s",
+								 fr.GetPos() - 4, e.what());
+						}
 					}
-				}
 
-				bool attacker = fr.Unsigned8();
-				bool arrived = fr.Unsigned8();
-				bool fighting = fr.Unsigned8();
-				AttackController::BattleSoldier bs = {
-					soldier,
-					origin,
-					battleGround,
-					attacker,
-					arrived,
-					fighting
-				};
-				ctrl.involvedSoldiers.push_back(bs);
-				soldier->set_attack_ctrl(&ctrl);
-			}
+					bool attacker = fr.Unsigned8();
+					bool arrived = fr.Unsigned8();
+					bool fighting = fr.Unsigned8();
+					AttackController::BattleSoldier bs = {
+						soldier,
+						origin,
+						battleGround,
+						attacker,
+						arrived,
+						fighting
+					};
+					ctrl.involvedSoldiers.push_back(bs);
+					soldier->set_attack_ctrl(&ctrl);
+				}
 
 				uint32_t const numInMs = fr.Unsigned32();
 				for (uint32_t j = 0; j < numInMs; ++j) {

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_MESSAGE_BOX_MESSAGE_BOX_H
-#define __S__EVENT_MESSAGE_BOX_MESSAGE_BOX_H
+#ifndef EVENT_MESSAGE_BOX_MESSAGE_BOX_H
+#define EVENT_MESSAGE_BOX_MESSAGE_BOX_H
 
 #include "ui_window.h"
 
@@ -39,8 +39,8 @@ struct Message_Box_Event_Message_Box : public UI::Window {
 
 private:
 	Widelands::Game                      * m_game;
-      void clicked(int32_t);
-      bool m_is_modal;
+	void clicked(int32_t);
+	bool                                   m_is_modal;
 	std::vector<Widelands::Trigger_Null *> m_trigger;
 };
 

@@ -17,6 +17,9 @@
  *
  */
 
+#ifndef BITINBUFFER_H
+#define BITINBUFFER_H
+
 #include "fileread.h"
 #include "compile_assert.h"
 
@@ -45,3 +48,5 @@ private:
 	FileRead fr;
 	uint8_t buffer, mask;
 };
+
+#endif

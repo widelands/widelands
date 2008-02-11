@@ -44,17 +44,16 @@ throw (_wexception)
 {
 	if (skip) return;
 
-   Profile prof;
+	Profile prof;
 	try {prof.read("extra_data", 0, fs);} catch (...) {return;}
-   Section* s = prof.get_section("global");
 
-   // read packet version
-	const int32_t packet_version = s->get_int("packet_version");
+	int32_t const packet_version =
+		prof.get_section("global")->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		Map & map = egbase->map();
-      // Nothing more. But read all pics
+		//  Nothing more. But read all pics.
 		if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
-         filenameset_t pictures;
+			filenameset_t pictures;
 			fs.FindFiles("pics", "*", &pictures);
 			for
 				(filenameset_t::iterator pname = pictures.begin();
@@ -62,29 +61,30 @@ throw (_wexception)
 				 ++pname)
 			{
 				if (fs.IsDirectory((*pname).c_str())) // Might be some dir, maybe CVS
-               continue;
+					continue;
 
-            FileRead fr;
+				FileRead fr;
 
 				fr.Open(fs, pname->c_str());
-            SDL_Surface* surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+				SDL_Surface * const surf =
+					IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 				if (!surf)
-               continue; // Illegal pic. Skip it
+					continue; //  Illegal pic. Skip it.
 				Surface & picsurf = *new Surface();
 				picsurf.set_sdl_surface(*surf);
 
-	    std::string picname = FileSystem::FS_Filename((*pname).c_str());
-            picname = "map:" + picname;
+				std::string picname = FileSystem::FS_Filename((*pname).c_str());
+				picname = "map:" + picname;
 
 				const uint32_t data =
 					g_gr->get_picture(PicMod_Game, picsurf, picname.c_str());
 
-            // ok, the pic is now known to the game. But when the game is saved, this data has to be
-            // regenerated.
-            Map::Extradata_Info info;
-            info.type = Map::Extradata_Info::PIC;
-            info.filename = *pname;
-            info.data = data;
+				//  OK, the pic is now known to the game. But when the game is
+				//  saved, this data has to be regenerated.
+				Map::Extradata_Info info;
+				info.type     = Map::Extradata_Info::PIC;
+				info.filename = *pname;
+				info.data     = data;
 				map.m_extradatainfos.push_back(info);
 			}
 		}
@@ -99,29 +99,26 @@ void Map_Extradata_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   Profile prof;
-   Section* s = prof.create_section("global");
+	Profile prof;
+	prof.create_section("global")->set_int
+		("packet_version", CURRENT_PACKET_VERSION);
 
-   // packet version
-   s->set_int("packet_version", CURRENT_PACKET_VERSION);
-
-   // Nothing more. All pics in the dir pic are loaded as pictures
+	//  Nothing more. All pics in the dir pic are loaded as pictures.
 	const Map::Extradata_Infos & extradatainfos =
 		egbase->map().m_extradatainfos;
 	for (uint32_t i = 0; i < extradatainfos.size(); ++i) {
 		const Map::Extradata_Info & edi = extradatainfos[i];
-      assert(edi.type == Map::Extradata_Info::PIC);
+		assert(edi.type == Map::Extradata_Info::PIC);
 
 		fs.EnsureDirectoryExists("pics");
-      FileWrite fw;
+		FileWrite fw;
 
-      g_gr->save_png(edi.data, &fw);
+		g_gr->save_png(edi.data, &fw);
 
-      fw.Write(fs, edi.filename.c_str());
+		fw.Write(fs, edi.filename.c_str());
 	}
 
-   // Write out
-   prof.write("extra_data", false, fs);
+	prof.write("extra_data", false, fs);
 }
 
 };

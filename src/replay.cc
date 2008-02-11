@@ -45,12 +45,10 @@ enum {
 #define SYNC_INTERVAL 200
 
 
-class Cmd_ReplaySyncRead : public Command {
-public:
+struct Cmd_ReplaySyncRead : public Command {
 	Cmd_ReplaySyncRead(uint32_t time, const md5_checksum& hash)
 		: Command(time), m_hash(hash)
-	{
-	}
+	{}
 
 	int32_t get_id() {return QUEUE_CMD_REPLAYSYNCREAD;}
 
@@ -59,10 +57,11 @@ public:
 		md5_checksum myhash = g->get_sync_hash();
 
 		if (m_hash != myhash) {
-			log("REPLAY: Lost synchronization at time %u\n"
-			    "I have:     %s\n"
-			    "Replay has: %s\n",
-			    get_duetime(), myhash.str().c_str(), m_hash.str().c_str());
+			log
+				("REPLAY: Lost synchronization at time %u\n"
+				 "I have:     %s\n"
+				 "Replay has: %s\n",
+				 get_duetime(), myhash.str().c_str(), m_hash.str().c_str());
 
 			g->set_speed(0);
 		} else {

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_H
+#ifndef WIDELANDS_MAP_DATA_PACKET_H
+#define WIDELANDS_MAP_DATA_PACKET_H
 
 #include "wexception.h"
 #include "widelands_filewrite.h"
@@ -50,7 +50,7 @@ struct Map_Data_Packet {
 		= 0;
 
 private:
-      bool m_skip;
+	bool m_skip;
 };
 
 };

@@ -47,50 +47,63 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
 UI::Window(&parent, 0, 0, 430, 400, _("Message Box Event Options").c_str()),
 m_event   (event)
 {
+	int32_t const offsx   =  5;
+	int32_t const offsy   = 25;
+	int32_t const spacing =  5;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
+	m_nr_buttons  = m_event.get_nr_buttons();
+	m_ls_selected =0;
 
-   const int32_t offsx=5;
-   const int32_t offsy=25;
-   const int32_t spacing=5;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
-   m_nr_buttons=m_event.get_nr_buttons();
-   m_ls_selected=0;
-
-   m_buttons[0].name=_("Continue");
-   m_buttons[1].name=_("Button 1");
-   m_buttons[2].name=_("Button 2");
-   m_buttons[3].name=_("Button 3");
-   m_buttons[0].trigger=m_buttons[1].trigger=m_buttons[2].trigger=m_buttons[3].trigger=-1;
+	m_buttons[0].name    = _("Continue");
+	m_buttons[1].name    = _("Button 1");
+	m_buttons[2].name    = _("Button 2");
+	m_buttons[3].name    = _("Button 3");
+	m_buttons[0].trigger = -1;
+	m_buttons[1].trigger = -1;
+	m_buttons[2].trigger = -1;
+	m_buttons[3].trigger = -1;
 
 
-   // Name editbox
-   new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-   m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
+	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+	m_name =
+		new UI::Edit_Box
+		(this,
+		 spacing + 60, posy, get_inner_w() / 2 - 60 - 2 * spacing, 20,
+		 0, 0);
 	m_name->set_text(event.name().c_str());
-   posy+= 20+spacing;
+	posy += 20 + spacing;
 
-   // Modal cb
-   new UI::Textarea(this, get_inner_w()/2+spacing, posy, 150, 20, _("Is Modal: "), Align_CenterLeft);
-   m_is_modal=new UI::Checkbox(this, get_inner_w()-STATEBOX_WIDTH-spacing, posy);
+	new UI::Textarea
+		(this,
+		 get_inner_w() / 2 + spacing, posy, 150, 20,
+		 _("Is Modal: "), Align_CenterLeft);
+	m_is_modal =
+		new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
 	m_is_modal->set_state(m_event.get_is_modal());
 
-   posy+=20+spacing;
+	posy += 20 + spacing;
 
-   // Window Title
-   new UI::Textarea(this, spacing, posy, 50, 20, _("Window Title:"), Align_CenterLeft);
-   m_window_title=new UI::Edit_Box(this, spacing+100, posy, get_inner_w()-100-2*spacing, 20, 0, 2);
+	new UI::Textarea
+		(this, spacing, posy, 50, 20, _("Window Title:"), Align_CenterLeft);
+	m_window_title =
+		new UI::Edit_Box
+		(this, spacing + 100, posy, get_inner_w() - 100 - 2 * spacing, 20, 0, 2);
 	m_window_title->set_text(m_event.get_window_title());
 
-   // Text
-   posy+=20+spacing;
-   new UI::Textarea(this, spacing, posy, 50, 20, _("Text:"), Align_CenterLeft);
-   posy+=20+spacing;
-   m_text=new UI::Multiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, event.get_text());
+	posy += 20 + spacing;
+	new UI::Textarea(this, spacing, posy, 50, 20, _("Text:"), Align_CenterLeft);
+	posy += 20 + spacing;
+	m_text =
+		new UI::Multiline_Editbox
+		(this, spacing, posy, get_inner_w()-2*spacing, 80, event.get_text());
 
-   posy+=80+spacing;
+	posy += 80 + spacing;
 
-   // Nur Buttons
-   new UI::Textarea(this, spacing, posy, 130, 20, _("Number of Buttons: "), Align_CenterLeft);
+	new UI::Textarea
+		(this,
+		 spacing, posy, 130, 20,
+		 _("Number of Buttons: "), Align_CenterLeft);
 
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,
@@ -110,19 +123,26 @@ m_event   (event)
 		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase,
 		 this);
 
-   // Button name
-   posy+=20+spacing;
-   new UI::Textarea(this, spacing, posy, 100, 20, _("Button Name: "), Align_CenterLeft);
-   m_button_name=new UI::Edit_Box(this, spacing+110, posy, 100, 20, 0, 3);
-   m_button_name->changedid.set(this, &Event_Message_Box_Option_Menu::edit_box_edited);
+	posy += 20 + spacing;
+	new UI::Textarea
+		(this, spacing, posy, 100, 20, _("Button Name: "), Align_CenterLeft);
+	m_button_name =
+		new UI::Edit_Box(this, spacing+110, posy, 100, 20, 0, 3);
+	m_button_name->changedid.set
+		(this, &Event_Message_Box_Option_Menu::edit_box_edited);
 
-   // Listbox for buttons
-   m_buttons_ls=new UI::Listselect<void *>(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, 80, Align_Left);
-   m_buttons_ls->selected.set(this, &Event_Message_Box_Option_Menu::ls_selected);
+	//  Listbox for buttons
+	m_buttons_ls =
+		new UI::Listselect<void *>
+		(this,
+		 get_inner_w() / 2 + spacing, posy, get_inner_w() / 2 - 2 * spacing, 80,
+		 Align_Left);
+	m_buttons_ls->selected.set
+		(this, &Event_Message_Box_Option_Menu::ls_selected);
 
-   // Select trigger
-   posy+=20+spacing;
-   new UI::Textarea(this, spacing, posy, 100, 20, _("Select Trigger: "), Align_CenterLeft);
+	posy += 20 + spacing;
+	new UI::Textarea
+		(this, spacing, posy, 100, 20, _("Select Trigger: "), Align_CenterLeft);
 
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,
@@ -144,14 +164,14 @@ m_event   (event)
    m_current_trigger_ta=new UI::Textarea(this, spacing+15, posy+15+spacing, get_inner_w()/2, 20, _("No trigger selected!"), Align_CenterLeft);
 
    // Ok/Cancel Buttons
-   posx=(get_inner_w()/2)-60-spacing;
-   posy=get_inner_h()-30;
+	posx = get_inner_w() / 2 - 60 - spacing;
+	posy = get_inner_h()     - 30;
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,
 		 posx, posy, 60, 20, 0,
 		 &Event_Message_Box_Option_Menu::clicked_ok, this,
 		 _("Ok"));
-   posx=(get_inner_w()/2)+spacing;
+	posx = get_inner_w() / 2 + spacing;
 	new UI::IDButton<Event_Message_Box_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
@@ -163,27 +183,27 @@ m_event   (event)
 	Manager<Widelands::Trigger>::Index const nr_triggs = mtm.size();
 	for (Manager<Widelands::Trigger>::Index i = 0; i < nr_triggs; ++i) {
 		if (dynamic_cast<Widelands::Trigger_Null const *>(&mtm[i]))
-         m_null_triggers.push_back(i);
+			m_null_triggers.push_back(i);
 	}
 
 	for (int32_t i = 0; i < m_event.get_nr_buttons(); ++i) {
 		m_buttons[i].name = m_event.get_button_name(i);
 		for (size_t j = 0; j < m_null_triggers.size(); ++j) {
-         // Get this triggers index
-         int32_t foundidx = -1;
+			//  Get this trigger's index.
+			int32_t foundidx = -1;
 			for (Manager<Widelands::Trigger>::Index x = 0; x < nr_triggs; ++x)
 				if (&mtm[x] == m_event.get_button_trigger(i)) {
-               foundidx = x;
-               break;
+					foundidx = x;
+					break;
 				}
 
 			if (foundidx == m_null_triggers[j])
-            m_buttons[i].trigger=j;
+				m_buttons[i].trigger=j;
 		}
 	}
 
-   center_to_parent();
-   update();
+	center_to_parent();
+	update();
 }
 
 
@@ -210,8 +230,9 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
-					 _("There is another event registered with the name \"%s\". "
-					   "Choose another name.")
+					 _
+					 ("There is another event registered with the name \"%s\". "
+					  "Choose another name.")
 					 .c_str(),
 					 name);
 				UI::Modal_Message_Box mb
@@ -248,7 +269,7 @@ void Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease() {
 	--m_nr_buttons;
 	if (m_nr_buttons < 1)
 		m_nr_buttons = 1;
-            update();
+	update();
 }
 
 
@@ -256,26 +277,26 @@ void Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase() {
 	++m_nr_buttons;
 	if (m_nr_buttons > MAX_BUTTONS)
 		m_nr_buttons = MAX_BUTTONS;
-            update();
+	update();
 }
 
 
 void Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease() {
-            m_buttons[m_ls_selected].trigger--;
+	--m_buttons[m_ls_selected].trigger;
 	if (m_buttons[m_ls_selected].trigger < -1)
 		m_buttons[m_ls_selected].trigger = m_null_triggers.size() - 1;
-            update();
+	update();
 }
 
 
 void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
-            m_buttons[m_ls_selected].trigger++;
+	++m_buttons[m_ls_selected].trigger;
 	if
 		(m_buttons[m_ls_selected].trigger
 		 >=
 		 static_cast<int32_t>(m_null_triggers.size()))
-               m_buttons[m_ls_selected].trigger=-1;
-            update();
+		m_buttons[m_ls_selected].trigger = -1;
+	update();
 }
 
 
@@ -286,11 +307,10 @@ void Event_Message_Box_Option_Menu::update() {
 	if (m_ls_selected >= m_nr_buttons)
 		m_buttons_ls->select(0);
 
-	if (!m_null_triggers.size())
-      // No triggers, no other buttons
-      m_nr_buttons=1;
+	if (!m_null_triggers.size()) //  No triggers, no other buttons.
+		m_nr_buttons = 1;
 
-   m_buttons_ls->clear();
+	m_buttons_ls->clear();
 	for (uint32_t i = 0; i < m_nr_buttons; ++i)
 		m_buttons_ls->add(m_buttons[i].name.c_str(), 0);
 
@@ -302,7 +322,7 @@ void Event_Message_Box_Option_Menu::update() {
 	}
 
 
-   m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());
+	m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());
 
 	if (m_nr_buttons && m_null_triggers.size()) {
 		m_current_trigger_ta->set_text
@@ -312,23 +332,23 @@ void Event_Message_Box_Option_Menu::update() {
 			 eia().egbase().map().mtm()
 			 [m_null_triggers[m_buttons[m_ls_selected].trigger]].name());
 	} else {
-      m_current_trigger_ta->set_text("---");
-      m_buttons[0].trigger=-1;
+		m_current_trigger_ta->set_text("---");
+		m_buttons[0].trigger=-1;
 	}
 }
 
 /*
  * Listbox got selected
  */
-void Event_Message_Box_Option_Menu::ls_selected(uint32_t i) {
-   m_ls_selected=i;
-   update();
+void Event_Message_Box_Option_Menu::ls_selected(uint32_t const i) {
+	m_ls_selected = i;
+	update();
 }
 
 /*
  * Button name edit box edited
  */
 void Event_Message_Box_Option_Menu::edit_box_edited(int32_t) {
-   m_buttons[m_ls_selected].name= m_button_name->get_text() ;
-   update();
+	m_buttons[m_ls_selected].name = m_button_name->get_text();
+	update();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_TOOL_SET_TERRAIN_TOOL_H
-#define __S__EDITOR_TOOL_SET_TERRAIN_TOOL_H
+#ifndef EDITOR_TOOL_SET_TERRAIN_TOOL_H
+#define EDITOR_TOOL_SET_TERRAIN_TOOL_H
 
 #include "editor_tool_options_menu.h"
 
@@ -35,15 +35,15 @@ struct Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Me
 		(Editor_Interactive         &,
 		 Editor_Set_Terrain_Tool    &,
 		 UI::UniqueWindow::Registry &);
-      virtual ~Editor_Tool_Set_Terrain_Tool_Options_Menu() ;
+	virtual ~Editor_Tool_Set_Terrain_Tool_Options_Menu();
 
 private:
-      std::vector<uint32_t> m_surfaces;
+	std::vector<uint32_t>       m_surfaces;
 	UI::Textarea                m_cur_selection;
 	Editor_Set_Terrain_Tool   & m_tool;
-      void selected(int32_t, bool);
-      void do_nothing(int32_t, bool);
-      std::vector<UI::Checkbox*> m_checkboxes;
+	void selected(int32_t, bool);
+	void do_nothing(int32_t, bool);
+	std::vector<UI::Checkbox *> m_checkboxes;
 };
 
 

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_immovable_h
-#define included_immovable_h
+#ifndef IMMOVABLE_H
+#define IMMOVABLE_H
 
 #include "animation.h"
 #include "instances.h"
@@ -220,4 +220,4 @@ private:
 
 };
 
-#endif // included_immovable_h
+#endif

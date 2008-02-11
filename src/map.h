@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAP_H
-#define __S__MAP_H
+#ifndef MAP_H
+#define MAP_H
 
 #include "events/event_chain.h"
 #include "field.h"
@@ -52,9 +52,9 @@ class Map_Loader;
 
 const uint16_t NUMBER_OF_MAP_DIMENSIONS=29;
 const uint16_t MAP_DIMENSIONS[] = {
-   64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256,
-   272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480,
-   496, 512};
+	64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 272, 288, 304,
+	320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512
+};
 
 
 class Path;
@@ -78,17 +78,17 @@ Predicates used in path finding and find functions.
 struct FindImmovable {
 	// Return true if this immovable should be returned by find_immovables()
 	virtual bool accept(BaseImmovable *imm) const = 0;
-   virtual ~FindImmovable() {}  // make gcc shut up
+	virtual ~FindImmovable() {}  // make gcc shut up
 };
 struct FindBob {
 	// Return true if this immovable should be returned by find_bobs()
 	virtual bool accept(Bob *imm) const = 0;
-   virtual ~FindBob() {}  // make gcc shut up
+	virtual ~FindBob() {}  // make gcc shut up
 };
 struct FindNode {
 	// Return true if this immovable should be returned by find_fields()
 	virtual bool accept(const Map &, const FCoords coord) const = 0;
-   virtual ~FindNode() {}  // make gcc shut up
+	virtual ~FindNode() {}  // make gcc shut up
 };
 struct CheckStep {
 	enum StepId {
@@ -104,7 +104,7 @@ struct CheckStep {
 	// Return true if the destination field can be reached at all
 	// (e.g. return false for land-based bobs when dest is in water).
 	virtual bool reachabledest(Map* map, FCoords dest) const = 0;
-   virtual ~CheckStep() {}  // make gcc shut up
+	virtual ~CheckStep() {}  // make gcc shut up
 };
 
 
@@ -113,11 +113,11 @@ Some very simple default predicates (more predicates below Map).
 */
 struct FindImmovableAlwaysTrue : public FindImmovable {
 	virtual bool accept(BaseImmovable *) const {return true;}
-   virtual ~FindImmovableAlwaysTrue() {}  // make gcc shut up
+	virtual ~FindImmovableAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAlwaysTrue : public FindBob {
 	virtual bool accept(Bob *) const {return true;}
-   virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
+	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAttribute : public FindBob {
 	FindBobAttribute(uint32_t attrib) : m_attrib(attrib) {}
@@ -125,7 +125,7 @@ struct FindBobAttribute : public FindBob {
 	virtual bool accept(Bob *imm) const;
 
 	int32_t m_attrib;
-   virtual ~FindBobAttribute() {}  // make gcc shut up
+	virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 
 typedef uint8_t Direction;
@@ -146,13 +146,13 @@ typedef uint8_t Direction;
  */
 struct Map {
 	friend class Editor_Game_Base;
-   friend class Map_Loader;
+	friend class Map_Loader;
 	friend class ::S2_Map_Loader;
 	friend struct WL_Map_Loader;
 	friend struct Map_Elemental_Data_Packet;
 	friend struct Map_Extradata_Data_Packet;
-   friend class Editor;
-   friend class Main_Menu_New_Map;
+	friend class Editor;
+	friend class Main_Menu_New_Map;
 
 	enum { // flags for findpath()
 
@@ -164,28 +164,26 @@ struct Map {
 
 	struct Pathfield;
 
-   Map();
-   ~Map();
+	Map ();
+	~Map();
 
-   // For overlays
-   Overlay_Manager* get_overlay_manager() {return m_overlay_manager;}
+	Overlay_Manager * get_overlay_manager()       {return  m_overlay_manager;}
 	Overlay_Manager & get_overlay_manager() const {return *m_overlay_manager;}
 	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
 	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
 
-   // For loading
-   Map_Loader* get_correct_loader(const char*);
-   void cleanup();
+	//  for loading
+	Map_Loader * get_correct_loader(char const *);
+	void cleanup();
 
-   // for editor
-	void create_empty_map
+	void create_empty_map // for editor
 		(uint32_t w = 64, uint32_t h = 64,
 		 std::string const & worldname = "greenland");
 
-   void load_graphics();
-   void recalc_whole_map();
-   void recalc_for_field_area(Area<FCoords>);
-   void recalc_default_resources();
+	void load_graphics();
+	void recalc_whole_map();
+	void recalc_for_field_area(Area<FCoords>);
+	void recalc_default_resources();
 
 	void set_nrplayers(Player_Number);
 
@@ -216,8 +214,9 @@ struct Map {
 	Y_Coordinate get_height  () const throw () {return m_height;}
 	World & world() const throw () {return *m_world;}
 	World * get_world() const {return m_world;}
-   // The next few functions are only valid
-   // when the map is loaded as an scenario.
+
+	//  The next few functions are only valid when the map is loaded as a
+	//  scenario.
 	const std::string & get_scenario_player_tribe(Player_Number) const;
 	const std::string & get_scenario_player_name (Player_Number) const;
 	void set_scenario_player_tribe(Player_Number, const std::string &);
@@ -390,10 +389,10 @@ private:
 	Field     * m_fields;
 
 	Pathfield * m_pathfields;
-   Overlay_Manager* m_overlay_manager;
+	Overlay_Manager * m_overlay_manager;
 
-   std::vector<std::string>  m_scenario_tribes; // only alloced when really needed
-   std::vector<std::string>  m_scenario_names;
+	std::vector<std::string> m_scenario_tribes; // o nly alloced when needed
+	std::vector<std::string>  m_scenario_names;
 
 	Manager<Variable>   m_mvm;
 	Manager<Trigger>    m_mtm;
@@ -403,11 +402,11 @@ private:
 
 	struct Extradata_Info {
 		enum Type {
-         PIC,
+			PIC,
 		};
-      uint32_t    data;
-      std::string filename;
-      Type        type;
+		uint32_t    data;
+		std::string filename;
+		Type        type;
 	};
 	typedef std::vector<Extradata_Info> Extradata_Infos;
 	Extradata_Infos m_extradatainfos; // Only for caching of extradata for writing and reading
@@ -1260,8 +1259,9 @@ throw ()
 	case Map_Object::WALK_SE: return br_n(f);
 	case Map_Object::WALK_SW: return bl_n(f);
 	case Map_Object::WALK_W:  return  l_n(f);
+	default:
+		assert(false);
 	}
-	assert(false);
 }
 
 inline void move_r(const X_Coordinate mapwidth, FCoords & f) {
@@ -1292,4 +1292,4 @@ std::string g_VariableCallback(std::string str, void* data);
 
 };
 
-#endif // __S__MAP_H
+#endif

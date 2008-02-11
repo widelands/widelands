@@ -344,7 +344,7 @@ m_button_cancel
 
 	set_inner_size
 		(get_inner_w(), m_button_ok.get_y() + m_button_ok.get_h() + spacing);
-   center_to_parent();
+	center_to_parent();
 	update_label_player(m_label_player, m_player_area.player_number);
 	update_label_building
 		(m_label_building, *tribe.get_building_descr(m_building));
@@ -528,8 +528,9 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
-					 _("There is another trigger registered with the name \"%s\". "
-					   "Choose another name.")
+					 _
+					 ("There is another trigger registered with the name \"%s\". "
+					  "Choose another name.")
 					 .c_str(),
 					 name);
 				UI::Modal_Message_Box mb

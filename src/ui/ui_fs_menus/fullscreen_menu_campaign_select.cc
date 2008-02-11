@@ -282,17 +282,15 @@ std::string Fullscreen_Menu_CampaignMapSelect::get_map()
 
 
 //telling this class what campaign we have and since we know what campaign we have, fill it.
-void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t i)
-{
-   campaign=i;
-   fill_list();
+void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
+	campaign = i;
+	fill_list();
 }
 
 /**
  * an entry of the maplist got selected.
  */
-void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t i)
-{
+void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t const i) {
 	if (list.get_selected()) { //gets false, if the selected entry has no value.
 		// Load maps textdomain to translate the strings from cconfig
 		i18n::grab_textdomain("maps");

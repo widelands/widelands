@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_ALLOW_BUILDING_OPTION_MENU_H
-#define __S__EVENT_ALLOW_BUILDING_OPTION_MENU_H
+#ifndef EVENT_ALLOW_BUILDING_OPTION_MENU_H
+#define EVENT_ALLOW_BUILDING_OPTION_MENU_H
 
 #include "ui_button.h"
 #include "ui_checkbox.h"

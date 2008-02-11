@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_trackptr_h
-#define included_trackptr_h
+#ifndef TRACKPTR_H
+#define TRACKPTR_H
 
 #include <stdint.h>
 
@@ -64,8 +64,9 @@ class Trackable {
 
 		Trackable* get() {return m_ptr;}
 
-	protected: // putting private here causes a compiler warning, even though
-	           // we use delete this
+		//  Putting "private:" here causes a compiler warning, even though we use
+		//  delete this.
+	protected:
 		~Tracker() {}
 	};
 
@@ -165,4 +166,4 @@ struct TrackPtr : BaseTrackPtr {
 };
 
 
-#endif // included_trackptr_h
+#endif

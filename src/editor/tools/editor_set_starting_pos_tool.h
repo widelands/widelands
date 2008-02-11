@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_SET_STARTING_POS_TOOL_H
-#define __S__EDITOR_SET_STARTING_POS_TOOL_H
+#ifndef EDITOR_SET_STARTING_POS_TOOL_H
+#define EDITOR_SET_STARTING_POS_TOOL_H
 
 #include "editor_tool.h"
 
@@ -39,9 +39,8 @@ struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw () {return m_current_sel_pic;}
 
-      // tool functions
 	Widelands::Player_Number get_current_player() const throw ();
-      void set_current_player(int32_t i);
+	void set_current_player(int32_t);
 
 private:
 	char fsel_picsname[sizeof(FSEL_PIC_FILENAME)];

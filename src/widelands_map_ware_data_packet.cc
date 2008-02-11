@@ -48,16 +48,15 @@ void Map_Ware_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   FileRead fr;
+	FileRead fr;
 	try {fr.Open(fs, "binary/ware");} catch (...) {return;}
 
-   // First packet version
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-      // Now the rest data len
-      const uint32_t nr_files = fr.Unsigned32();
+		//  now the rest data len
+		uint32_t const nr_files = fr.Unsigned32();
 		for (uint32_t i = 0; i < nr_files; ++i) {
 			WareInstance & w = *new WareInstance(0, 0); // data is read elsewhere
 			w.init(egbase);
@@ -74,19 +73,19 @@ void Map_Ware_Data_Packet::Write
 throw (_wexception)
 {
 
-   FileWrite fw;
+	FileWrite fw;
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
+	//  Traverse the map and whenever we find a suitable object, check if it has
+	//  wares.
 	const Map & map = egbase->map();
-   std::vector<uint32_t> ids;
+	std::vector<uint32_t> ids;
 	Field * field = &map[0];
 	const Field * const fields_end = field + map.max_index();
 	for (; field < fields_end; ++field) {
 
-         // First, check for Flags
+		//  check for flags
 		if (upcast(Flag const, flag, field->get_immovable())) {
 			const Flag::PendingItem * item = flag->m_items;
 			const Flag::PendingItem & items_end =  *(item + flag->m_item_filled);
@@ -96,21 +95,22 @@ throw (_wexception)
 			}
 		}
 
-         // Now, check for workers
+		//  check for workers
 		for (const Bob * b = field->get_first_bob(); b; b = b->get_next_bob())
 			if (upcast(Worker const, w, b))
-				if (const WareInstance * const ware = w->get_carried_item(egbase)) {
-                  assert(!os->is_object_known(ware));
-                  ids.push_back(os->register_object(ware));
-					}
+				if (const WareInstance * const ware = w->get_carried_item(egbase))
+				{
+					assert(!os->is_object_known(ware));
+					ids.push_back(os->register_object(ware));
+				}
 	}
 
-   // All checked, we only need to save those stuff to disk
-   fw.Unsigned32(ids.size());
+	//  All checked, we only need to save those stuff to disk.
+	fw.Unsigned32(ids.size());
 	for (uint32_t i = 0; i < ids.size(); ++i)
-      fw.Unsigned32(ids[i]);
+		fw.Unsigned32(ids[i]);
 
-   fw.Write(fs, "binary/ware");
+	fw.Write(fs, "binary/ware");
 }
 
 };

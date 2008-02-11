@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__INSTANCE_H
-#define __S__INSTANCE_H
+#ifndef INSTANCES_H
+#define INSTANCES_H
 
 #include "cmd_queue.h"
 
@@ -42,24 +42,24 @@ struct Map_Map_Object_Loader;
 //
 struct Map_Object_Descr {
 	friend class ::DirAnimations;
-		typedef uint8_t Index;
-		Map_Object_Descr() {}
-		virtual ~Map_Object_Descr() {m_anims.clear();}
+	typedef uint8_t Index;
+	Map_Object_Descr() {}
+	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-		struct Animation_Nonexistent {};
-		uint32_t get_animation(const char * const name) const {
-			std::map<std::string, uint32_t>::const_iterator it = m_anims.find(name);
-			if (it == m_anims.end()) throw Animation_Nonexistent();
-			return it->second;
-		}
+	struct Animation_Nonexistent {};
+	uint32_t get_animation(const char * const name) const {
+		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(name);
+		if (it == m_anims.end()) throw Animation_Nonexistent();
+		return it->second;
+	}
 
-		uint32_t main_animation() const throw () {
-			return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
-		}
+	uint32_t main_animation() const throw () {
+		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
+	}
 
 	std::string get_animation_name(uint32_t) const; //  needed for save, debug
 	bool has_attribute(uint32_t) const throw ();
-		static uint32_t get_attribute_id(std::string name);
+	static uint32_t get_attribute_id(std::string const & name);
 
 	protected:
 		void add_attribute(uint32_t attr);
@@ -186,8 +186,7 @@ public:
 	void remove(Editor_Game_Base*);
 	virtual void destroy(Editor_Game_Base*);
 
-   // The next functions are really only needed in games.
-   // Not in Editor
+	//  The next functions are really only needed in games, not in the editor.
 	void schedule_destroy(Game *g);
 	uint32_t schedule_act(Game* g, uint32_t tdelta, uint32_t data = 0);
 	virtual void act(Game*, uint32_t data);
@@ -354,10 +353,7 @@ private:
 
 template<class T>
 struct OPtr {
-	OPtr(T* const obj = 0)
-		: m(obj)
-	{
-	}
+	OPtr(T * const obj = 0) : m(obj) {}
 
 	OPtr& operator=(T* const obj)
 	{
@@ -422,4 +418,4 @@ public:
 
 };
 
-#endif // __S__INSTANCE_H
+#endif

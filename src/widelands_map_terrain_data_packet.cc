@@ -42,8 +42,8 @@ void Map_Terrain_Data_Packet::Read
  Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   FileRead fr;
-   fr.Open(fs, "binary/terrain");
+	FileRead fr;
+	fr.Open(fs, "binary/terrain");
 
 	Map & map = egbase->map();
 	World & world = map.world();
@@ -52,12 +52,11 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		const uint16_t nr_terrains = fr.Unsigned16();
 
-      // construct ids and map
 		typedef std::map<const uint16_t, Terrain_Descr::Index> terrain_id_map;
 		terrain_id_map smap;
 		for (uint16_t i = 0; i < nr_terrains; ++i) {
 			const uint16_t     id   = fr.Unsigned16();
-         const char * const name = fr.CString   ();
+			char const * const name = fr.CString   ();
 			const terrain_id_map::const_iterator it = smap.find(id);
 			if (it != smap.end())
 				log
@@ -69,7 +68,6 @@ throw (_wexception)
 			smap[id] = world.index_of_terrain(name);
 		}
 
-      // Now get all the terrains
 		Map_Index const max_index = map.max_index();
 		for (Map_Index i = 0; i < max_index; ++i) {
 			Field & f = map[i];
@@ -100,14 +98,13 @@ throw (_wexception)
 	const Map & map = egbase->map();
 	const World & world = map.world();
 	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();
-   fw.Unsigned16(nr_terrains);
+	fw.Unsigned16(nr_terrains);
 
-   // Write all terrain names and their id's
 	std::map<const char * const, Terrain_Descr::Index> smap;
 	for (Terrain_Descr::Index i = 0; i < nr_terrains; ++i) {
 		const char * const name = world.get_ter(i).name().c_str();
 		smap[name] = i;
-      fw.Unsigned16(i);
+		fw.Unsigned16(i);
 		fw.CString(name);
 	}
 
@@ -119,7 +116,7 @@ throw (_wexception)
 		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);
 	}
 
-   fw.Write(fs, "binary/terrain");
+	fw.Write(fs, "binary/terrain");
 }
 
 };

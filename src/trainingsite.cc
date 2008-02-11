@@ -55,9 +55,7 @@ m_max_defense       (0),
 m_max_evade         (0)
 {}
 
-TrainingSite_Descr::~TrainingSite_Descr()
-{
-}
+TrainingSite_Descr::~TrainingSite_Descr() {}
 
 /**
  * Parse the additional information necessary for miltary buildings
@@ -194,9 +192,7 @@ m_success        (false)
 {}
 
 
-TrainingSite::~TrainingSite()
-{
-}
+TrainingSite::~TrainingSite() {}
 
 
 /**

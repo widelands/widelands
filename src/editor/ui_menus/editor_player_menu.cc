@@ -59,37 +59,34 @@ m_remove_last_player
  1 < parent.egbase().map().get_nrplayers())
 
 {
-   // User Interface
-   int32_t spacing=5;
-   int32_t width=20;
-   int32_t posy= 0;
+	int32_t const spacing = 5;
+	int32_t const width   =20;
+	int32_t       posy    = 0;
 
 	Widelands::Tribe_Descr::get_all_tribenames(m_tribes);
 
-   set_inner_size(375, 135);
+	set_inner_size(375, 135);
 
 	UI::Textarea * ta =
 		new UI::Textarea(this, 0, 0, _("Number of Players"), Align_Left);
 	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
-   posy+=spacing+width;
+	posy += spacing + width;
 
-   m_nr_of_players_ta=new UI::Textarea(this, 0, 0, "5", Align_Left);
-   m_nr_of_players_ta->set_pos
+	m_nr_of_players_ta = new UI::Textarea(this, 0, 0, "5", Align_Left);
+	m_nr_of_players_ta->set_pos
 		(Point((get_inner_w() - m_nr_of_players_ta->get_w()) / 2, posy + 5));
-   posy+=width+spacing+spacing;
+	posy += width + spacing + spacing;
 
-   m_posy=posy;
+	m_posy = posy;
 
 	for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i) {
-      m_plr_names[i]=0;
-      m_plr_set_pos_buts[i]=0;
-      m_plr_set_tribes_buts[i]=0;
-//       m_plr_make_infrastructure_buts[i]=0;
-//       m_plr_allowed_buildings[i]=0;
+		m_plr_names          [i] = 0;
+		m_plr_set_pos_buts   [i] = 0;
+		m_plr_set_tribes_buts[i] = 0;
 	}
-   update();
+	update();
 
-   set_think(true);
+	set_think(true);
 }
 
 /*
@@ -97,7 +94,7 @@ m_remove_last_player
  * is open
  */
 void Editor_Player_Menu::think() {
-   update();
+	update();
 }
 
 /*
@@ -129,22 +126,13 @@ void Editor_Player_Menu::update() {
 
    // Now remove all the unneeded stuff
 	for (Widelands::Player_Number i = nr_players; i < MAX_PLAYERS; ++i) {
-         delete m_plr_names[i];
-         m_plr_names[i]=0;
-         delete m_plr_set_pos_buts[i];
-         m_plr_set_pos_buts[i]=0;
-         delete m_plr_set_tribes_buts[i];
-         m_plr_set_tribes_buts[i]=0;
-#if 0
-         delete m_plr_make_infrastructure_buts[i];
-         m_plr_make_infrastructure_buts[i]=0;
-         delete m_plr_allowed_buildings[i];
-         m_plr_allowed_buildings[i]=0;
-#endif
+		delete m_plr_names          [i]; m_plr_names          [i] = 0;
+		delete m_plr_set_pos_buts   [i]; m_plr_set_pos_buts   [i] = 0;
+		delete m_plr_set_tribes_buts[i]; m_plr_set_tribes_buts[i] = 0;
 	}
-   int32_t posy=m_posy;
-   int32_t spacing=5;
-   int32_t size=20;
+	int32_t       posy    = m_posy;
+	int32_t const spacing =  5;
+	int32_t const size    = 20;
 
 
    // And recreate the needed
@@ -152,10 +140,10 @@ void Editor_Player_Menu::update() {
 		int32_t posx = spacing;
 		if (!m_plr_names[p - 1]) {
 			m_plr_names[p - 1] =
-		      new UI::Edit_Box(this, posx, posy, 140, size, 0, p - 1);
+				new UI::Edit_Box(this, posx, posy, 140, size, 0, p - 1);
 			m_plr_names[p - 1]->changedid.set
 				(this, &Editor_Player_Menu::name_changed);
-          posx+=140+spacing;
+			posx += 140 + spacing;
 			m_plr_names[p - 1]->set_text(map.get_scenario_player_name(p).c_str());
 		}
 
@@ -168,17 +156,17 @@ void Editor_Player_Menu::update() {
 				 0,
 				 &Editor_Player_Menu::player_tribe_clicked, this, p - 1,
 				 std::string());
-         posx+=140+spacing;
+			posx += 140 + spacing;
 		}
 		if (map.get_scenario_player_tribe(p) != "<undefined>")
 			m_plr_set_tribes_buts[p - 1]->set_title
 				(map.get_scenario_player_tribe(p).c_str());
 		else {
-         m_plr_set_tribes_buts[p - 1]->set_title(m_tribes[0].c_str());
+			m_plr_set_tribes_buts[p - 1]->set_title(m_tribes[0].c_str());
 			map.set_scenario_player_tribe(p, m_tribes[0]);
 		}
 
-      // Set Starting pos button
+		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =
 				new UI::IDButton
@@ -189,15 +177,15 @@ void Editor_Player_Menu::update() {
 				 0, //  set below
 				 &Editor_Player_Menu::set_starting_pos_clicked, this, p,
 				 std::string());
-          posx+=size+spacing;
+			posx += size + spacing;
 		}
 		char text[] = "pics/fsel_editor_set_player_00_pos.png";
 		text[28] += p / 10;
 		text[29] += p % 10;
 		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->get_picture(PicMod_Game, text));
-      posy+=size+spacing;
+		posy += size + spacing;
 	}
-   set_inner_size(get_inner_w(), posy+spacing);
+	set_inner_size(get_inner_w(), posy+spacing);
 }
 
 void Editor_Player_Menu::clicked_add_player() {
@@ -215,8 +203,8 @@ void Editor_Player_Menu::clicked_add_player() {
 		name += '0' + nr_players % 10;
 		map.set_scenario_player_name(nr_players, name);
 	}
-		map.set_scenario_player_tribe(nr_players, m_tribes[0]);
-		parent.set_need_save(true);
+	map.set_scenario_player_tribe(nr_players, m_tribes[0]);
+	parent.set_need_save(true);
 	m_add_player        .set_enabled(nr_players < MAX_PLAYERS);
 	m_remove_last_player.set_enabled(true);
 	update();
@@ -239,12 +227,12 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			map.overlay_manager().remove_overlay
 				(sp, g_gr->get_picture(PicMod_Game, picsname));
 		}
-			std::string name  = map.get_scenario_player_name (nr_players);
-			std::string tribe = map.get_scenario_player_tribe(nr_players);
-			map.set_nrplayers(nr_players);
-			map.set_scenario_player_name(nr_players, name);
-			map.set_scenario_player_tribe(nr_players, tribe);
-			parent.set_need_save(true);
+		std::string name  = map.get_scenario_player_name (nr_players);
+		std::string tribe = map.get_scenario_player_tribe(nr_players);
+		map.set_nrplayers(nr_players);
+		map.set_scenario_player_name(nr_players, name);
+		map.set_scenario_player_tribe(nr_players, tribe);
+		parent.set_need_save(true);
 		m_add_player        .set_enabled(true);
 		m_remove_last_player.set_enabled(1 < nr_players);
 		if
@@ -257,14 +245,16 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			//  that case by by switching the tool to the previous player and
 			//  reselecting the tool.
 			set_starting_pos_clicked(nr_players); //  This calls update().
-		else update();
+		else
+			update();
 		} else {
 			UI::Modal_Message_Box mmb
 				(&parent,
 				 _("Error!"),
-				 _("Can't remove player. It is referenced in some place. Remove "
-				   "all buildings, bobs, triggers and events that depend on this "
-				   "player and try again"),
+				 _
+				 ("Can't remove player. It is referenced in some place. Remove "
+				  "all buildings, bobs, triggers and events that depend on this "
+				  "player and try again"),
 				 UI::Modal_Message_Box::OK);
 			mmb.run();
 		}
@@ -279,11 +269,11 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 		dynamic_cast<Editor_Interactive &>(*get_parent());
    // Tribe button has been clicked
 	if (not parent.is_player_tribe_referenced(n + 1)) {
-      std::string t = m_plr_set_tribes_buts[n]->get_title();
+		std::string t = m_plr_set_tribes_buts[n]->get_title();
 		if (!Widelands::Tribe_Descr::exists_tribe(t))
 			throw wexception
 				("Map defines tribe %s, but it doesn't exist!", t.c_str());
-      uint32_t i;
+		uint32_t i;
 		for (i = 0; i < m_tribes.size(); ++i)
 			if (m_tribes[i] == t)
 				break;
@@ -294,13 +284,14 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 		UI::Modal_Message_Box mmb
 			(&parent,
 			 _("Error!"),
-			 _("Can't change player tribe. It is referenced in some place. Remove "
-			   "all buildings, bobs, triggers and events that depend on this "
-			   "tribe and try again"),
+			 _
+			 ("Can't change player tribe. It is referenced in some place. Remove "
+			  "all buildings, bobs, triggers and events that depend on this "
+			  "tribe and try again"),
 			 UI::Modal_Message_Box::OK);
 		mmb.run();
 	}
-   update();
+	update();
 }
 
 
@@ -332,25 +323,26 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
    // Reselect tool, so everything is in a defined state
 	parent.select_tool(parent.tools.current(), Editor_Tool::First);
 
-   // Register callback function to make sure that only valid fields are selected.
+	//  Register callback function to make sure that only valid locations are
+	//  selected.
 	map.overlay_manager().register_overlay_callback_function
 		(&Editor_Tool_Set_Starting_Pos_Callback, &map);
 	map.recalc_whole_map();
-   update();
+	update();
 }
 
 /*
  * Player name has changed
  */
 void Editor_Player_Menu::name_changed(int32_t m) {
-   // Player name has been changed
-   std::string text=m_plr_names[m]->get_text();
+	//  Player name has been changed.
+	std::string text=m_plr_names[m]->get_text();
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
 	Widelands::Map & map = parent.egbase().map();
 	if (text == "") {
 		text = map.get_scenario_player_name(m + 1);
-      m_plr_names[m]->set_text(text.c_str());
+		m_plr_names[m]->set_text(text.c_str());
 	}
 	map.set_scenario_player_name(m + 1, text);
 	m_plr_names[m]->set_text(map.get_scenario_player_name(m + 1).c_str());

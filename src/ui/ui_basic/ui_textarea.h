@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TEXTAREA_H
-#define __S__TEXTAREA_H
+#ifndef UI_TEXTAREA_H
+#define UI_TEXTAREA_H
 
 #include "constants.h"
 #include "font_handler.h"
@@ -80,4 +80,4 @@ private:
 };
 };
 
-#endif // __S__TEXTAREA_H
+#endif

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAPTRIANGLEREGION_H
-#define __S__MAPTRIANGLEREGION_H
+#ifndef MAPTRIANGLEREGION_H
+#define MAPTRIANGLEREGION_H
 
 #include "map.h"
 

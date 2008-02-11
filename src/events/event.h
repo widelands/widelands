@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_H
-#define __S__EVENT_H
+#ifndef EVENT_H
+#define EVENT_H
 
 #include "named.h"
 #include "referenced.h"
@@ -41,9 +41,9 @@ struct Event : public Named, public Referenced<Event> {
 	friend struct Map_Event_Data_Packet;
 
 	enum State {
-         INIT,
-         RUNNING,
-         DONE
+		INIT,
+		RUNNING,
+		DONE
 	};
 
 	Event(char const * const Name, State const S = INIT)
@@ -56,8 +56,7 @@ struct Event : public Named, public Referenced<Event> {
 	virtual void Read (Section &, Editor_Game_Base       &)       = 0;
 	virtual void Write(Section &, Editor_Game_Base const &) const = 0;
 
-      // virtual functions, implemented by the real events
-      virtual State run(Game*)       = 0;
+	virtual State run(Game *) = 0;
 
 	State state() const {return m_state;}
 

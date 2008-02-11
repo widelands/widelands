@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_MOVE_VIEW_OPTION_MENU_H
-#define __S__EVENT_MOVE_VIEW_OPTION_MENU_H
+#ifndef EVENT_MOVE_VIEW_OPTION_MENU_H
+#define EVENT_MOVE_VIEW_OPTION_MENU_H
 
 #include "widelands_geometry.h"
 
@@ -45,15 +45,15 @@ struct Event_Move_View_Option_Menu : public UI::Window {
 
 private:
 	Editor_Interactive & eia();
-      void update();
+	void update();
 	void clicked_ok();
-      void clicked(int32_t);
+	void clicked(int32_t);
 
 	Widelands::Event_Move_View & m_event;
 
-      UI::Edit_Box* m_name;
+	UI::Edit_Box    * m_name;
 	Widelands::Coords m_location;
-      UI::Textarea* m_x_ta, *m_y_ta;
+	UI::Textarea* m_x_ta, *m_y_ta;
 };
 
 #endif

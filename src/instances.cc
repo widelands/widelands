@@ -62,7 +62,6 @@ void Cmd_Destroy_Map_Object::Read
 		// Read Base Commands
 		GameLogicCommand::Read(fr, egbase, mol);
 
-      // Serial
 		if (uint32_t const fileserial = fr.Unsigned32()) {
 			assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
@@ -323,8 +322,7 @@ Lookup an attribute by name. If the attribute name hasn't been encountered
 before, we add it to the map.
 ===============
 */
-uint32_t Map_Object_Descr::get_attribute_id(std::string name)
-{
+uint32_t Map_Object_Descr::get_attribute_id(std::string const & name) {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
 	if (it != s_dyn_attribs.end())
@@ -462,9 +460,7 @@ Map_Object::act
 Called when a CMD_ACT triggers.
 ===============
 */
-void Map_Object::act(Game *, uint32_t)
-{
-}
+void Map_Object::act(Game *, uint32_t) {}
 
 
 /*
@@ -482,8 +478,7 @@ void Map_Object::set_logsink(LogSink* sink)
 /*
  * General infos, nothing todo for a no object
  */
-void Map_Object::log_general_info(Editor_Game_Base*) {
-}
+void Map_Object::log_general_info(Editor_Game_Base*) {}
 
 /*
 ===============
@@ -543,9 +538,7 @@ void Map_Object::Loader::load(FileRead& fr)
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load_pointers()
-{
-}
+void Map_Object::Loader::load_pointers() {}
 
 
 /**
@@ -556,9 +549,7 @@ void Map_Object::Loader::load_pointers()
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load_finish()
-{
-}
+void Map_Object::Loader::load_finish() {}
 
 
 /**

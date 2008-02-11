@@ -49,72 +49,73 @@ throw (_wexception)
 {
 	if (skip) return;
 
-   FileRead fr;
+	FileRead fr;
 	try {fr.Open(fs, "binary/road_data");} catch (...) {return;}
 
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION)
 		for (;;) {
-         uint32_t ser=fr.Unsigned32();
+			uint32_t ser = fr.Unsigned32();
 			if (ser == 0xffffffff) // end of roaddata
-            break;
-         assert(ol->is_object_known(ser));
-         assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::ROAD);
+				break;
+			assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::ROAD); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-         Road* r=static_cast<Road*>(ol->get_object_by_file_index(ser));
+			upcast(Road, r, ol->get_object_by_file_index(ser)); //  FIXME CHECK RESULT OF CAST
 
-         assert(!ol->is_object_loaded(r));
+			assert(!ol->is_object_loaded(r)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-         Player* plr = egbase->get_safe_player(fr.Unsigned8());
-         assert(plr);
+			Player* plr = egbase->get_safe_player(fr.Unsigned8());
+			assert(plr); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
-         r->set_owner(plr);
-         r->m_type=fr.Unsigned32();
-         ser=fr.Unsigned32();
-         uint32_t ser1=fr.Unsigned32();
-         assert(ol->is_object_known(ser));
-         assert(ol->is_object_known(ser1));
-         r->m_flags[0]=static_cast<Flag*>(ol->get_object_by_file_index(ser));
-         r->m_flags[1]=static_cast<Flag*>(ol->get_object_by_file_index(ser1));
-         r->m_flagidx[0]=fr.Unsigned32();
-         r->m_flagidx[1]=fr.Unsigned32();
+			r->set_owner(plr);
+			r->m_type = fr.Unsigned32();
+			ser = fr.Unsigned32();
+			uint32_t const ser1 = fr.Unsigned32();
+			assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			assert(ol->is_object_known(ser1)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			r->m_flags[0] = dynamic_cast<Flag *>(ol->get_object_by_file_index(ser)); //  FIXME CHECK RESULT OF CAST
+			r->m_flags[1] = dynamic_cast<Flag *>(ol->get_object_by_file_index(ser1)); //  FIXME CHECK RESULT OF CAST
+			r->m_flagidx[0] = fr.Unsigned32();
+			r->m_flagidx[1] = fr.Unsigned32();
 
-         r->m_cost[0]=fr.Unsigned32();
-         r->m_cost[1]=fr.Unsigned32();
+			r->m_cost[0] = fr.Unsigned32();
+			r->m_cost[1] = fr.Unsigned32();
 			const Path::Step_Vector::size_type nsteps = fr.Unsigned16();
 			assert(nsteps); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 			Path p(r->m_flags[0]->get_position());
 			for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 				p.append(egbase->map(), fr.Unsigned8()); //  FIXME validate that the value is a direction
-         r->set_path(egbase, p);
+			r->set_path(egbase, p);
 
-         // Now that all rudimentary data is set, init this road,
-         // than overwrite the initialization values
-         r->link_into_flags(egbase);
+			//  Now that all rudimentary data is set, init this road. Then
+			//  overwrite the initialization values.
+			r->link_into_flags(egbase);
 
-         r->m_idle_index=fr.Unsigned32();
-         r->m_desire_carriers=fr.Unsigned32();
-         assert(!r->m_carrier.get(egbase));
+			r->m_idle_index      = fr.Unsigned32();
+			r->m_desire_carriers = fr.Unsigned32();
+			assert(!r->m_carrier.get(egbase));
 			if (uint32_t const carrierid = fr.Unsigned32()) {
-            assert(ol->is_object_known(carrierid));
-            r->m_carrier=ol->get_object_by_file_index(carrierid);
+				assert(ol->is_object_known(carrierid));
+				r->m_carrier = ol->get_object_by_file_index(carrierid);
 			} else
-            r->m_carrier=0;
+				r->m_carrier = 0;
 
-            delete r->m_carrier_request;
-            r->m_carrier_request=0;
+			delete r->m_carrier_request;
+			r->m_carrier_request = 0;
 
 			if (fr.Unsigned8()) {
 				if (dynamic_cast<Game const *>(egbase)) {
-               r->m_carrier_request = new Request(r, 0,
-                     &Road::request_carrier_callback, r, Request::WORKER);
-               r->m_carrier_request->Read(&fr, egbase, ol);
+					r->m_carrier_request =
+						new Request
+						(r, 0, &Road::request_carrier_callback, r, Request::WORKER);
+					r->m_carrier_request->Read(&fr, egbase, ol);
 				}
 			} else {
-            r->m_carrier_request=0;
+				r->m_carrier_request = 0;
 			}
 
-         ol->mark_object_as_loaded(r);
+			ol->mark_object_as_loaded(r);
 		}
 	else
 		throw wexception
@@ -137,66 +138,56 @@ throw (_wexception)
 	for (Field const * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Road const, r, field->get_immovable()))
 			if (not os->is_object_saved(r)) {
-            assert(os->is_object_known(r));
+				assert(os->is_object_known(r));
 
-            // First, write serial
-            fw.Unsigned32(os->get_object_file_index(r));
+				fw.Unsigned32(os->get_object_file_index(r));
 
-            // First, write PlayerImmovable Stuff
-            // Theres only the owner
+				//  First, write PlayerImmovable Stuff
+				//  Theres only the owner
 				fw.Unsigned8(r->owner().get_player_number());
 
-            // type
-            fw.Unsigned32(r->m_type);
+				fw.Unsigned32(r->m_type);
 
-            // Serial of flags
-            assert(os->is_object_known(r->m_flags[0]));
-            assert(os->is_object_known(r->m_flags[1]));
-            fw.Unsigned32(os->get_object_file_index(r->m_flags[0]));
-            fw.Unsigned32(os->get_object_file_index(r->m_flags[1]));
+				//  serial of flags
+				assert(os->is_object_known(r->m_flags[0]));
+				assert(os->is_object_known(r->m_flags[1]));
+				fw.Unsigned32(os->get_object_file_index(r->m_flags[0]));
+				fw.Unsigned32(os->get_object_file_index(r->m_flags[1]));
 
-            // Flags index
-            fw.Unsigned32(r->m_flagidx[0]);
-            fw.Unsigned32(r->m_flagidx[1]);
+				fw.Unsigned32(r->m_flagidx[0]);
+				fw.Unsigned32(r->m_flagidx[1]);
 
-            // Cost
-            fw.Unsigned32(r->m_cost[0]);
-            fw.Unsigned32(r->m_cost[1]);
+				fw.Unsigned32(r->m_cost[0]);
+				fw.Unsigned32(r->m_cost[1]);
 
-            // Path
 				const Path & path = r->m_path;
 				const Path::Step_Vector::size_type nr_steps = path.get_nsteps();
 				fw.Unsigned16(nr_steps);
 				for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
 					fw.Unsigned8(path[i]);
 
-            // Idle index
-            fw.Unsigned32(r->m_idle_index);
+				fw.Unsigned32(r->m_idle_index); //  FIXME do not save this
 
-            // Desired carrier
-            fw.Unsigned32(r->m_desire_carriers);
+				fw.Unsigned32(r->m_desire_carriers);
 
-            // Carrier
 				if (r->m_carrier.get(egbase)) {
-               assert(os->is_object_known(r->m_carrier.get(egbase)));
-               fw.Unsigned32(os->get_object_file_index(r->m_carrier.get(egbase)));
+					assert(os->is_object_known(r->m_carrier.get(egbase)));
+					fw.Unsigned32(os->get_object_file_index(r->m_carrier.get(egbase)));
 				} else
-               fw.Unsigned32(0);
+					fw.Unsigned32(0);
 
-            // Request
 				if (r->m_carrier_request) {
-               fw.Unsigned8(1);
-               r->m_carrier_request->Write(&fw, egbase, os);
+					fw.Unsigned8(1);
+					r->m_carrier_request->Write(&fw, egbase, os);
 				} else
-               fw.Unsigned8(0);
+					fw.Unsigned8(0);
 
-            os->mark_object_as_saved(r);
+				os->mark_object_as_saved(r);
 			}
 
-   fw.Unsigned32(0xFFFFFFFF); // End of roads
-   // DONE
+	fw.Unsigned32(0xFFFFFFFF); // End of roads
 
-   fw.Write(fs, "binary/road_data");
+	fw.Write(fs, "binary/road_data");
 }
 
 };

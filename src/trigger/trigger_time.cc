@@ -29,8 +29,8 @@
 namespace Widelands {
 
 Trigger_Time::Trigger_Time(char const * const Name, bool const set)
-: Trigger(Name, set), m_wait_time(60), m_last_start_time(0)
- // defaults to one minute
+	: Trigger(Name, set), m_wait_time(60), m_last_start_time(0)
+	// defaults to one minute
 {}
 
 
@@ -61,20 +61,20 @@ void Trigger_Time::check_set_conditions(Game const & game) {
 	if ((game.get_gametime() - m_last_start_time) / 1000 < m_wait_time)
 		return;
 
-   // Time has come. Set us
-   set_trigger(true);
+	// Time has come. Set us
+	set_trigger(true);
 }
 
 /*
  * Reset this trigger. This is only valid for non one timers
  */
 void Trigger_Time::reset_trigger       (Game const & game) {
-   // save new start time
-   // NOTE: if it took a while for an event to note us,
-   // this time the trigger wasn't counting
+	// save new start time
+	// NOTE: if it took a while for an event to note us,
+	// this time the trigger wasn't counting
 	m_last_start_time = game.get_gametime();
 
-   set_trigger(false);
+	set_trigger(false);
 }
 
 };

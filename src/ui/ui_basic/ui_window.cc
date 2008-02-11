@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,9 +87,7 @@ m_pic_background(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
 /**
  * Resource cleanup
  */
-Window::~Window()
-{
-}
+Window::~Window() {}
 
 
 /**
@@ -358,17 +356,17 @@ void Window::restore() {
 	set_border
 		(get_lborder(), get_rborder(),
 		 get_tborder(), _docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS);
-      set_inner_size(get_inner_w(), _oldh);
+	set_inner_size(get_inner_w(), _oldh);
 	_is_minimal = false;
 	move_inside_parent();
 }
 void Window::minimize() {
 	assert(not _is_minimal);
 	if (_docked_bottom) undock_bottom(); //  Minimal can not be bottom-docked.
-      _oldh=get_inner_h();
+	_oldh = get_inner_h();
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
-      set_size(get_w(), TP_B_PIXMAP_THICKNESS);
-		set_pos(Point(get_x(), get_y())); // If on border, this feels more natural
+	set_size(get_w(), TP_B_PIXMAP_THICKNESS);
+	set_pos(Point(get_x(), get_y())); // If on border, this feels more natural
 	_is_minimal = true;
 }
 

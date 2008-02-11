@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,8 +37,7 @@ Event::State Event_Conquer_Area::run(Game* game) {
 		  Area<FCoords>
 		  (game->map().get_fcoords(m_player_area), m_player_area.radius)));
 
-   m_state = DONE;
-   return m_state;
+	return m_state = DONE;
 }
 
 

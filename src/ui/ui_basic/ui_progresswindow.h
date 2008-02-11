@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__UI_PROGRESSWINDOW_H
-#define __S__UI_PROGRESSWINDOW_H
+#ifndef UI_PROGRESSWINDOW_H
+#define UI_PROGRESSWINDOW_H
 
 #include "graphic.h"
 
@@ -68,4 +68,4 @@ private:
 };
 };
 
-#endif // __S__UI_PROGRESSWINDOW_H
+#endif

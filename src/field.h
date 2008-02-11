@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__FIELD_H
-#define __S__FIELD_H
+#ifndef FIELD_H
+#define FIELD_H
 
 #include "widelands_geometry.h"
 #include "compile_assert.h"
@@ -98,7 +98,7 @@ class BaseImmovable;
 /// a field like it is represented in the game
 /// \todo This is all one evil hack :(
 struct Field {
-   friend class Map;
+	friend class Map;
 	friend class Bob;
 	friend class BaseImmovable;
 
@@ -119,7 +119,7 @@ struct Field {
 	struct Resource_Amounts {Resource_Amount       d : 4, r : 4;};
 
 private:
-   Height height;
+	Height height;
 	int8_t   brightness;
 
 	FieldCaps       caps                    : 7;
@@ -191,7 +191,7 @@ public:
 	BaseImmovable* get_immovable() {return immovable;}
 
 	void set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
-   int8_t get_brightness() const {return brightness;}
+	int8_t get_brightness() const {return brightness;}
 
 	/**
 	 * Does not change the border bit of this or neighbouring fileds. That must
@@ -242,15 +242,15 @@ public:
 	}
 
 	uint8_t get_resources() const {return m_resources;}
-   uint8_t get_resources_amount() const {return m_res_amount;}
+	uint8_t get_resources_amount() const {return m_res_amount;}
 	void set_resources(uint8_t res, uint8_t amount) {m_resources = res; m_res_amount=amount;}
-   void set_starting_res_amount(int32_t amount) {m_starting_res_amount=amount;}
-   int32_t get_starting_res_amount() {return m_starting_res_amount;}
+	void set_starting_res_amount(int32_t amount) {m_starting_res_amount=amount;}
+	int32_t get_starting_res_amount() const {return m_starting_res_amount;}
 
-   /** \note you must reset this field's + neighbor's brightness when you change the height
-    * Map's change_height does this
-    * This function is not private, because the loader will use them directly
-    * But realize, most of the times you will need Map::set_field_height()*/
+	/// \note you must reset this field's + neighbor's brightness when you
+	/// change the height. Map::change_height does this. This function is not
+	/// private, because the loader will use them directly But realize, most of
+	/// the times you will need Map::set_field_height().
 	void set_height(Height h) {
 		if (static_cast<int8_t>(h) < 0) h = 0;
 		if (h > MAX_FIELD_HEIGHT) h = MAX_FIELD_HEIGHT;

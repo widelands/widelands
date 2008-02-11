@@ -38,7 +38,7 @@ EventChain::~EventChain() {
 
 
 EventChain::State EventChain::run(Game* g) {
-   m_state = RUNNING;
+	m_state = RUNNING;
 
 	while (m_curevent < m_events.size()) {
 		if (m_events[m_curevent]->run(g) == Event::DONE)
@@ -48,21 +48,21 @@ EventChain::State EventChain::run(Game* g) {
 	}
 
 	if (m_curevent == m_events.size()) {
-      // Last event has been run. This is finished
+		//  Last event has been run. This is finished.
 		if (get_repeating()) {
-         // This eventchain will repeat in due time
-         m_curevent = 0;
+			//  This eventchain will repeat in due time.
+			m_curevent = 0;
 			m_trigconditional->reset_triggers(*g);
-         m_state = INIT;
+			m_state = INIT;
 		} else {
-         // This eventchain is completly done
-         m_state = DONE;
+			//  This eventchain is completly done.
+			m_state = DONE;
 		}
 	} else {
 		assert(m_events[m_curevent]->state() == Event::RUNNING);
 	}
 
-   return m_state;
+	return m_state;
 }
 
 /*
@@ -81,7 +81,7 @@ void EventChain::clear_events() {
  * Add an event
  */
 void EventChain::add_event(Event* ev) {
-   m_events.push_back(ev);
+	m_events.push_back(ev);
 	ev->reference(*this);
 }
 
@@ -107,12 +107,12 @@ void Cmd_CheckEventChain::execute (Game * game) {
 	Manager<EventChain> & mcm = map.mcm();
 	Manager<EventChain>::Index nr_eventchains = mcm.size();
 	if (m_eventchain_id >= nr_eventchains) {
-      // either we wrapped around the end of all eventchains
-      // if so, restart. if there are no eventchains at all,
-      // requeue in about 30 seconds to check if this state has changed
-      // (a new trigger could be registered) (this should only happen at the beginning
-      // of the game and should not harm at all, and 30seconds means nearly no CPU time
-      // for non trigger games)
+		//  either we wrapped around the end of all eventchains if so, restart.
+		//  if there are no eventchains at all, requeue in about 30 seconds to
+		//  check if this state has changed (a new trigger could be registered)
+		//  (this should only happen at the beginning of the game and should not
+		//  harm at all, and 30 seconds means nearly no CPU time for non trigger
+		//  games)
 
 		if (nr_eventchains) m_eventchain_id = 0;
 		else
@@ -125,19 +125,18 @@ void Cmd_CheckEventChain::execute (Game * game) {
 
 	switch (evchain.get_state()) {
 	case EventChain::INIT:
-         // This is initialized, look if it needs running
+		//  This is initialized, look if it needs running.
 		if (evchain.get_trigcond()->eval(*game))
 			evchain.run(game); //  Hooray, we can start the shit off
 		break;
 	case EventChain::RUNNING:
-         // This chain is currently running. Continue to run it
+		// This chain is currently running. Continue to run it.
 		evchain.run(game);
 		break;
 	case EventChain::DONE:
-         // This shouldn't happen!
 		throw wexception
 			("Cmd_CheckEventChain: Done event chain found. no good no good!");
-      break;
+		break;
 	}
 
 	if (evchain.get_state() == EventChain::DONE) {
@@ -163,7 +162,6 @@ void Cmd_CheckEventChain::Read
 		// Read Base Commands
 		GameLogicCommand::Read(fr, egbase, mol);
 
-      // eventchain id
 		m_eventchain_id = fr.Unsigned16();
 	} else
 		throw wexception

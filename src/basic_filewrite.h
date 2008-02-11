@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FILEWRITE_H
-#define FILEWRITE_H
+#ifndef BASIC_FILEWRITE_H
+#define BASIC_FILEWRITE_H
 
 #include "filesystem.h"
 #include "machdep.h"

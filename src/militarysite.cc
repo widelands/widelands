@@ -50,19 +50,17 @@ m_heal_per_second    (0),
 m_heal_incr_per_medic(0)
 {}
 
-MilitarySite_Descr::~MilitarySite_Descr()
-{
-}
+MilitarySite_Descr::~MilitarySite_Descr() {}
 
 /**
 ===============
-MilitarySite_Descr::parse
-
 Parse the additional information necessary for miltary buildings
 ===============
 */
-void MilitarySite_Descr::parse(const char* directory, Profile* prof,
-	const EncodeData* encdata)
+void MilitarySite_Descr::parse
+	(char       const * const directory,
+	 Profile          * const prof,
+	 EncodeData const * const encdata)
 {
 	Section* sglobal = prof->get_section("global");
 
@@ -118,10 +116,10 @@ MilitarySite::~MilitarySite
 MilitarySite::~MilitarySite()
 {
 	if (m_soldier_requests.size())
-      log ("[MilitarySite] Ouch! Still have soldier requests!\n");
+		log ("[MilitarySite] Ouch! Still have soldier requests!\n");
 
 	if (m_soldiers.size())
-      log ("[MilitarySite] Ouch! Still have soldiers!\n");
+		log ("[MilitarySite] Ouch! Still have soldiers!\n");
 }
 
 
@@ -168,16 +166,10 @@ void MilitarySite::fill(Game & game) {
 	conquer_area(game);
 }
 
-/**
-===============
-MilitarySite::init
 
-Initialize the military site.
-===============
-*/
 void MilitarySite::init(Editor_Game_Base* g)
 {
-   ProductionSite::init(g);
+	ProductionSite::init(g);
 
 	if (upcast(Game, game, g)) {
 		if (m_soldiers.size()) {
@@ -188,13 +180,11 @@ void MilitarySite::init(Editor_Game_Base* g)
 				 it != soldiers_end;
 				 ++it)
 				(*it)->set_location(this);
-		} else {
-      // Request soldiers
-		call_soldiers();
-		}
+		} else
+			call_soldiers();
 
-      //    Should schedule because all stuff related to healing and removing own
-      // soldiers should be scheduled.
+		//  Should schedule because all stuff related to healing and removing own
+		//  soldiers should be scheduled.
 		schedule_act(game, 1000);
 	}
 }
@@ -235,40 +225,34 @@ void MilitarySite::set_economy(Economy* e)
 	}
 */
 
-   // TODO: SoldiersQueue migration
-   ProductionSite::set_economy(e);
+	//  TODO SoldiersQueue migration
+	ProductionSite::set_economy(e);
 
 	if (e)
-		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
+		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i)
 			if (m_soldier_requests[i])
-            m_soldier_requests[i]->set_economy(e);
-		}
+				m_soldier_requests[i]->set_economy(e);
 }
 
 /**
 ===============
-MilitarySite::cleanup
-
 Cleanup after a military site is removed
 ===============
 */
 void MilitarySite::cleanup(Editor_Game_Base* g)
 {
-   // Release worker
-	if (m_soldier_requests.size()) {
-		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
-         delete m_soldier_requests[i];
-         m_soldier_requests[i] = 0;
-		}
-      m_soldier_requests.resize(0);
+	{
+		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i)
+			delete m_soldier_requests[i];
+		m_soldier_requests.clear();
 	}
 
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
-      Soldier* s = m_soldiers[i];
+		Soldier* s = m_soldiers[i];
 
-      m_soldiers[i] = 0;
+		m_soldiers[i] = 0;
 		if (g->objects().object_still_available(s))
-         s->set_location(0);
+			s->set_location(0);
 	}
 	// unconquer land
 	if (m_didconquer)
@@ -293,19 +277,18 @@ void MilitarySite::request_soldier() {
    int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
    // TODO: This should be user-configurable through windows options (still nothing is done to support this)
-   Requeriments* r = new Requeriments();
-   *r = m_soldier_requeriments;
+	Requeriments & r = *new Requeriments();
+	r = m_soldier_requeriments;
 
-	Request * req = new Request
+	Request & req = *new Request
 		(this,
 		 soldierid,
 		 &MilitarySite::request_soldier_callback,
 		 this,
 		 Request::SOLDIER);
-   req->set_requeriments (r);
+	req.set_requeriments (&r);
 
-   m_soldier_requests.push_back (req);
-
+	m_soldier_requests.push_back (&req);
 }
 
 
@@ -321,7 +304,7 @@ void MilitarySite::request_soldier_callback
 {
 
 	MilitarySite & msite = *static_cast<MilitarySite *>(data);
-   Soldier & s = dynamic_cast<Soldier &>(*w);
+	Soldier & s = dynamic_cast<Soldier &>(*w);
 
 	assert(s.get_location(g) == &msite);
 
@@ -358,11 +341,10 @@ void MilitarySite::act(Game* g, uint32_t data)
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
 	// Maybe a new queueing system like MilitaryAct could be introduced.
-   ProductionSite::act(g, data);
+	ProductionSite::act(g, data);
 
 	uint32_t numMedics = 0; // FIX THIS when medics were added
-      uint32_t i = 0;
-      Soldier* s;
+	uint32_t i = 0;
 
 	uint32_t total_heal =
 		descr().get_heal_per_second()
@@ -370,32 +352,31 @@ void MilitarySite::act(Game* g, uint32_t data)
 		descr().get_heal_increase_per_medic() * numMedics;
 
 	for (i = 0; i < m_soldiers.size(); ++i) {
-         s = m_soldiers[i];
+		Soldier * const s = m_soldiers[i];
 
-            // This is for clean up the soldier killed out of the building
-			if (not s or s->get_current_hitpoints() == 0) {
-            m_soldiers[i] = m_soldiers[m_soldiers.size() - 1];
-            m_soldiers.pop_back();
-            --i;
-            continue;
-			}
+		//  This is for clean up the soldier killed out of the building.
+		if (not s or s->get_current_hitpoints() == 0) {
+			m_soldiers[i] = m_soldiers[m_soldiers.size() - 1];
+			m_soldiers.pop_back();
+			--i;
+			continue;
+		}
 
-            // Fighting soldiers couldn't be healed !
-		if (s->is_marked())
-            continue;
+		if (s->is_marked()) //  Fighting soldiers couldn't be healed!
+			continue;
 
-            // Heal action
+		//  Heal action
 
-            // I don't like this 'healing' method, but I don't have any idea to do differently ...
-			if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
-            s->heal (total_heal);
-				total_heal -= total_heal / 3;
+		//  I don't like this 'healing' method, but I don't have any idea to do
+		//  differently ...
+		if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
+			s->heal (total_heal);
+			total_heal -= total_heal / 3;
 		}
 	}
 	if (not m_in_battle) call_soldiers();
 
-      // Schedule the next wakeup at 1 second
-   schedule_act (g, 1000);
+	schedule_act (g, 1000); // Schedule the next wakeup at 1 second.
 }
 
 /*
@@ -417,26 +398,26 @@ Get out specied soldier from house.
  */
 void MilitarySite::drop_soldier (uint32_t serial)
 {
-molog ("**Dropping soldier (%d)\n", serial);
+	molog ("**Dropping soldier (%d)\n", serial);
 
 	if (upcast(Game, game, &owner().egbase()))
 		if (m_soldiers.size()) {
 			size_t i = 0;
-      Soldier* s = m_soldiers[i];
+			Soldier * s = m_soldiers[i];
 
 			while (s and s->get_serial() != serial and i < m_soldiers.size()) {
-         molog ("Serial: %d -- \n!", s->get_serial());
-         i++;
-         s = m_soldiers[i];
+				molog ("Serial: %d -- \n!", s->get_serial());
+				++i;
+				s = m_soldiers[i];
 			}
 			if (s)
-         molog ("Serial: %d -- \n!", s->get_serial());
+				molog ("Serial: %d -- \n!", s->get_serial());
 
 			if (s && s->get_serial() == serial) {
-molog ("**--Sodier localized!\n");
-         drop_soldier(game, i);
+				molog ("**--Sodier localized!\n");
+				drop_soldier(game, i);
 			} else
-         molog ("--Soldier NOT localized!\n");
+				molog ("--Soldier NOT localized!\n");
 	}
 }
 
@@ -451,15 +432,12 @@ Use throught drop_soldier(int32_t)
 
 void MilitarySite::drop_soldier (Game *g, int32_t nr)
 {
-      Soldier *s;
-
-      // Check if its out of bounds
+	//  check if its out of bounds
 	if (nr < 0 or nr > static_cast<int32_t>(m_soldiers.size())) return;
 
-      s = m_soldiers.at(nr);
+	Soldier & s = *m_soldiers.at(nr);
 
-      assert (s);
-      s->set_location(0);
+	s.set_location(0);
 
 	{
 		const std::vector<Soldier *>::const_iterator soldiers_end =
@@ -472,16 +450,16 @@ void MilitarySite::drop_soldier (Game *g, int32_t nr)
 			*current = *next;
 	}
 
-      m_soldiers.pop_back();
+	m_soldiers.pop_back();
 
-         // Call more soldiers if are enought space
+	//  call more soldiers if are enought space
 	call_soldiers ();
 
-         // Walk the soldier home safely
-      s->mark (false);
-      s->reset_tasks (g);
-      s->set_location (this);
-      s->start_task_leavebuilding (g, true);
+	//  walk the soldier home safely
+	s.mark (false);
+	s.reset_tasks (g);
+	s.set_location (this);
+	s.start_task_leavebuilding (g, true);
 }
 
 /*
@@ -495,7 +473,7 @@ void MilitarySite::change_soldier_capacity(int32_t how)
 {
 	if (how) {
 		if (how > 0) {
-         m_capacity += how;
+			m_capacity += how;
 
 			if
 				(m_capacity > static_cast<uint32_t>(descr().get_max_number_of_soldiers()))
@@ -503,7 +481,7 @@ void MilitarySite::change_soldier_capacity(int32_t how)
 			call_soldiers();
 		}
 		else {
-         how = -how;
+			how = -how;
 
 			if (how >= static_cast<int32_t>(m_capacity)) m_capacity  = 1;
 			else                                     m_capacity -= how;
@@ -523,10 +501,8 @@ void MilitarySite::change_soldier_capacity(int32_t how)
 
 					m_soldier_requests.erase(it, it+1);
 				}
-				else if (m_soldiers.size()) {
-               Soldier *s = m_soldiers[m_soldiers.size()-1];
-               drop_soldier (s->get_serial());
-				}
+				else if (m_soldiers.size())
+					drop_soldier (m_soldiers.back()->get_serial());
 			}
 		}
 	}
@@ -534,9 +510,7 @@ void MilitarySite::change_soldier_capacity(int32_t how)
 
 void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldiers) {
 	conquer_area(*g);
-   m_soldiers.insert(m_soldiers.begin(), soldiers->begin(), soldiers->end());
-   /*for (uint32_t i=0; i<soldiers->size(); ++i)
-      m_soldiers.push_back((*soldies)[i]);*/
+	m_soldiers.insert(m_soldiers.begin(), soldiers->begin(), soldiers->end());
 }
 
 void MilitarySite::conquer_area(Game & game) {
@@ -550,9 +524,9 @@ void MilitarySite::conquer_area(Game & game) {
 }
 
 MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
-   //NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLY NEW BUILDING
-   cleanup(g);
-   get_base_flag()->schedule_destroy(g);
+	//  NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLY NEW BUILDING
+	cleanup(g);
+	get_base_flag()->schedule_destroy(g);
 	return static_cast<MilitarySite *>
 		(static_cast<const MilitarySite_Descr &>(*m_descr).create
 		 (*g, *winner, m_position, false));
@@ -567,8 +541,8 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
 */
 void MilitarySite::set_requeriments (Requeriments* R)
 {
-   assert (R);
-   m_soldier_requeriments = (*R);
+	assert (R);
+	m_soldier_requeriments = *R;
 }
 
 /*
@@ -578,26 +552,26 @@ void MilitarySite::set_requeriments (Requeriments* R)
 */
 void MilitarySite::clear_requeriments ()
 {
-   Requeriments R;
-   m_soldier_requeriments = R;
+	Requeriments R;
+	m_soldier_requeriments = R;
 }
 
 uint32_t MilitarySite::nr_not_marked_soldiers() {
 	if (m_soldiers.size() <= 0)
-      return 0;
-   uint32_t nr_soldiers = 0;
+		return 0;
+	uint32_t nr_soldiers = 0;
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
 		if (!m_soldiers[i]->is_marked())
-         nr_soldiers++;
+			++nr_soldiers;
 	}
-   return nr_soldiers;
+	return nr_soldiers;
 }
 
 uint32_t MilitarySite::nr_attack_soldiers() {
-   uint32_t not_marked = nr_not_marked_soldiers();
+	uint32_t not_marked = nr_not_marked_soldiers();
 	if (not_marked > 1)
-      return not_marked-1;
-   return 0;
+		return not_marked - 1;
+	return 0;
 }
 
 };

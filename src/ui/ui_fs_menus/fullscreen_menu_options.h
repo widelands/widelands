@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef OPTIONSMENU_H
-#define OPTIONSMENU_H
+#ifndef FULLSCREEN_MENU_OPTIONS_H
+#define FULLSCREEN_MENU_OPTIONS_H
 
 #include "fullscreen_menu_base.h"
 
@@ -69,8 +69,8 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
 	Options_Ctrl::Options_Struct get_values();
 	enum {
-      om_cancel = 0,
-      om_ok = 1
+		om_cancel = 0,
+		om_ok     = 1
 	};
 
 private:
@@ -108,4 +108,4 @@ private:
 	std::vector<res> m_resolutions;
 };
 
-#endif /* OPTIONSMENU_H */
+#endif

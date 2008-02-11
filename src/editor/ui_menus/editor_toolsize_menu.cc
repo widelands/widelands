@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ m_decrease
  &Editor_Toolsize_Menu::change_radius, this, false)
 
 {
-   char buf[250];
+	char buf[250];
 	sprintf(buf, _("Current Size: %u").c_str(), parent->get_sel_radius() + 1);
 	m_textarea.set_text(buf);
 
@@ -64,8 +64,6 @@ m_decrease
 
 /*
 ===========
-Editor_Toolsize_Menu::button_clicked()
-
 called, when one of the up/down buttons is pressed
 id: 0 is up, 1 is down
 ===========
@@ -76,7 +74,7 @@ void Editor_Toolsize_Menu::change_radius(const bool increase) {
 		(increase ? 1 : std::numeric_limits<uint32_t>::max());
 	if (val <= MAX_TOOL_AREA) {
 		intbase.set_sel_radius(val);
-   char buf[250];
+		char buf[250];
 		sprintf(buf, _("Current Size: %u").c_str(), val + 1);
 		m_textarea.set_text(buf);
 	}

@@ -48,31 +48,32 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu
 UI::Window(&parent, 0, 0, 164, 180, _("Trigger Option Menu").c_str()),
 m_trigger (trigger)
 {
-   const int32_t offsx=5;
-   const int32_t offsy=25;
-   const int32_t spacing=5;
-   const int32_t width=20;
-   const int32_t height=20;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	int32_t const offsx   =  5;
+	int32_t const offsy   = 25;
+	int32_t const spacing =  5;
+	int32_t const width   = 20;
+	int32_t const height  = 20;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
 	int32_t wait_time = trigger.get_wait_time();
-   m_values[0]=(wait_time/3600)/10; // hours
-   m_values[1]=(wait_time/3600)%10;
-   wait_time-=(wait_time/3600)*3600;
-   m_values[2]=(wait_time/60)/10; // minutes
-   m_values[3]=(wait_time/60)%10;
-   wait_time-=(wait_time/60)*60;
-   m_values[4]=(wait_time)/10; // seconds
-   m_values[5]=(wait_time)%10;
+	m_values[0] = wait_time / 3600 /   10; //  hours
+	m_values[1] = wait_time / 3600 %   10;
+	wait_time  -= wait_time / 3600 * 3600;
+	m_values[2] = wait_time /   60 /   10; //  minutes
+	m_values[3] = wait_time /   60 %   10;
+	wait_time  -= wait_time /   60 *   60;
+	m_values[4] = wait_time        /   10; //  seconds
+	m_values[5] = wait_time        %   10;
 
-   new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-   m_name=new UI::Edit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
+	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+	m_name = new UI::Edit_Box
+		(this, spacing + 50, posy, get_inner_w() - 50 - 2 * spacing, 20, 0, 0);
 	m_name->set_text(trigger.name().c_str());
 
-   posy+=20+spacing;
+	posy += 20 + spacing;
 
-   // hours, first cipher
+	//  hours, first cipher
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -81,7 +82,9 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 2);
 
-   m_textareas[0]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
+	m_textareas[0] =
+		new UI::Textarea
+		(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -90,9 +93,9 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 3);
 
-   posx+=width+spacing/2;
+	posx += width + spacing / 2;
 
-   // hours second cipher
+	//  hours second cipher
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -101,7 +104,9 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 4);
 
-   m_textareas[1]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
+	m_textareas[1] =
+		new UI::Textarea
+		(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -110,13 +115,12 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 5);
 
-   posx+=width+spacing;
+	posx += width + spacing;
 
-   // two points
 	UI::Textarea * tt = new UI::Textarea(this, posx, posy+23, ":", Align_Left);
-   posx+=spacing+tt->get_w();
+	posx += spacing + tt->get_w();
 
-   // minutes, first cipher
+	//  minutes, first cipher
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -125,7 +129,9 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 6);
 
-   m_textareas[2]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
+	m_textareas[2] =
+		new UI::Textarea
+		(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -145,7 +151,9 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 8);
 
-   m_textareas[3]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
+	m_textareas[3] =
+		new UI::Textarea
+		(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -168,7 +176,9 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 10);
 
-   m_textareas[4]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
+	m_textareas[4] =
+		new UI::Textarea
+		(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -187,7 +197,9 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 12);
 
-   m_textareas[5]=new UI::Textarea(this, posx, posy+20, width, height, "9", Align_Center);
+	m_textareas[5] =
+		new UI::Textarea
+		(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -196,14 +208,13 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 13);
 
-   posx+=width+spacing;
+	posx += width + spacing;
 
-   posy+=60;
+	posy += 60;
 
-   posy+=2*spacing;
+	posy += 2 * spacing;
 
-   // Buttons
-   posx=(get_inner_w()/2)-60-spacing;
+	posx = get_inner_w() / 2 - 60 - spacing;
 
 	new UI::Button<Trigger_Time_Option_Menu>
 		(this,
@@ -212,7 +223,7 @@ m_trigger (trigger)
 		 &Trigger_Time_Option_Menu::clicked_ok, this,
 		 _("Ok"));
 
-   posx=(get_inner_w()/2)+spacing;
+	posx = get_inner_w() / 2 + spacing;
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -221,8 +232,8 @@ m_trigger (trigger)
 		 &Trigger_Time_Option_Menu::end_modal, this, 0,
 		 _("Cancel"));
 
-   center_to_parent();
-   update();
+	center_to_parent();
+	update();
 }
 
 
@@ -255,8 +266,9 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
-					 _("There is another trigger registered with the name \"%s\". "
-					   "Choose another name.")
+					 _
+					 ("There is another trigger registered with the name \"%s\". "
+					  "Choose another name.")
 					 .c_str(),
 					 name);
 				UI::Modal_Message_Box mb
@@ -272,9 +284,9 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 }
 
 
-void Trigger_Time_Option_Menu::clicked(int32_t i) {
-   int32_t id=(i-2)/2;
-   m_values[id]= i%2 ?  m_values[id]-1 :  m_values[id]+1;
+void Trigger_Time_Option_Menu::clicked(int32_t const i) {
+	int32_t id = (i - 2) /2;
+	m_values[id]= i % 2 ?  m_values[id] - 1 :  m_values[id] + 1;
 	if (m_values[id] < 0)
 		m_values[id] = 0;
 	if
@@ -289,7 +301,7 @@ void Trigger_Time_Option_Menu::clicked(int32_t i) {
 		m_values[id] = 9;
 	if ((id == 2 || id == 4) && m_values[id] >= 6)
 		m_values[id] = 5;
-   update();
+	update();
 }
 
 /*
@@ -300,6 +312,6 @@ void Trigger_Time_Option_Menu::update() {
 		char str[2];
 		str[0] = '0' + m_values[i];
 		str[1] = '\0';
-      m_textareas[i]->set_text(str);
+		m_textareas[i]->set_text(str);
 	}
 }

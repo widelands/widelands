@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__PLAYER_DESCR_GROUP
-#define __S__PLAYER_DESCR_GROUP
+#ifndef PLAYERDESCRGROUP_H
+#define PLAYERDESCRGROUP_H
 
 #include "widelands.h"
 

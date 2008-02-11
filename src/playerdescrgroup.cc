@@ -41,13 +41,13 @@ static const std::string default_names[MAX_PLAYERS + 1] = {
 	_("Player 6"),
 	_("Player 7"),
 	_("Player 8"),
-	};
+};
 
 void PlayerDescriptionGroup::allow_changes(changemode_t t) {
-   m_allow_changes=t;
-   m_btnEnablePlayer.set_visible(t & CHANGE_ENABLED);
-   m_btnPlayerType .set_enabled(false);
-   m_btnPlayerTribe.set_enabled(t & CHANGE_TRIBE);
+	m_allow_changes = t;
+	m_btnEnablePlayer.set_visible(t & CHANGE_ENABLED);
+	m_btnPlayerType .set_enabled(false);
+	m_btnPlayerTribe.set_enabled(t & CHANGE_TRIBE);
 }
 
 PlayerDescriptionGroup::PlayerDescriptionGroup
@@ -65,7 +65,7 @@ m_playertype(Widelands::Player::Local), //just for initalization
 m_current_tribe(0),
 m_allow_changes(CHANGE_EVERYTHING),
 
-	// create sub-panels
+//  create sub-panels
 m_plr_name(this, 0, 0, 100, 20, _("Player 1"), Align_Left),
 
 m_btnEnablePlayer(this, 88, 0),
@@ -191,16 +191,16 @@ void PlayerDescriptionGroup::toggle_playertribe()
 void PlayerDescriptionGroup::set_player_tribe(std::string str) {
 	for (uint32_t i = 0; i < m_tribes.size(); ++i) {
 		if (m_tribes[i] == str) {
-         m_current_tribe=i;
+			m_current_tribe = i;
 			m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
-         // set the player
+			//  set the player
 			m_game->add_player
 				(m_plnum,
 				 m_playertype,
 				 m_tribes[m_current_tribe].c_str(),
 				 default_names[m_plnum]);
-         m_game->get_player(m_plnum)->init(false); // Small initializes
-         return;
+			m_game->get_player(m_plnum)->init(false); //  small initializes
+			return;
 		}
 	}
    // never here

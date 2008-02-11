@@ -41,9 +41,12 @@ BadRecord_error::BadRecord_error
 throw ()
 : Journalfile_error(_filename), code(_code), expectedcode(_expectedcode)
 {
-	text="Journal file "+_filename+" contains record with type "+
-	     toString(_code)+" instead of the expected type "+
-	     toString(_expectedcode);
+	text  = "Journal file ";
+	text += _filename;
+	text += " contains record with type ";
+	text += toString(_code);
+	text += " instead of the expected type ";
+	text += toString(_expectedcode);
 }
 
 BadEvent_error::BadEvent_error
@@ -51,6 +54,8 @@ BadEvent_error::BadEvent_error
 throw ()
 : Journalfile_error(_filename), type(_type)
 {
-	text="Journal file '"+_filename+"' contains record with unknown event type "+
-	     toString(_type);
+	text  = "Journal file '";
+	text += _filename;
+	text += "' contains record with unknown event type ";
+	text += toString(_type);
 }

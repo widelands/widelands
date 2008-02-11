@@ -49,10 +49,10 @@ extern Map_Object_Descr g_road_descr;
 // hard-coded playercolors
 const uint8_t g_playercolors[MAX_PLAYERS][12] = {
 	{ // blue
-		  2,   2,  74,
-		  2,   2, 112,
-		  2,   2, 149,
-		  2,   2, 198
+		2,     2,  74,
+		2,     2, 112,
+		2,     2, 149,
+		2,     2, 198
 	},
 	{ // red
 		119,  19,   0,
@@ -67,16 +67,16 @@ const uint8_t g_playercolors[MAX_PLAYERS][12] = {
 		255, 232,   0
 	},
 	{ // green
-		 26,  99,   1,
-		 37, 143,   2,
-		 48, 183,   3,
-		 59, 223,   3
+		26,   99,   1,
+		37,  143,   2,
+		48,  183,   3,
+		59,  223,   3
 	},
 	{ // black/dark gray
-		  0,   0,   0,
-		 19,  19,  19,
-		 35,  35,  35,
-		 57,  57,  57
+		0,     0,   0,
+		19,   19,  19,
+		35,   35,  35,
+		57,   57,  57
 	},
 	{ // orange
 		119,  80,   0,
@@ -85,7 +85,7 @@ const uint8_t g_playercolors[MAX_PLAYERS][12] = {
 		255, 172,   0,
 	},
 	{ // purple
-		 91,   0,  93,
+		91,    0,  93,
 		139,   0, 141,
 		176,   0, 179,
 		215,   0, 218,
@@ -176,7 +176,7 @@ void Editor_Game_Base::unconquer_area
 		dynamic_cast<const Building &>(*map().get_immovable(player_area));
 	assert(building.owner().get_player_number() == player_area.player_number);
 
-   // step 1: unconquer area of this building
+	//  step 1: unconquer area of this building
 	do_conquer_area(player_area, false, destroying_player);
 
 	// step 5: deal with player immovables in the lost area
@@ -268,7 +268,7 @@ void Editor_Game_Base::do_conquer_area
 
 		const Player_Number owner = mr.location().field->get_owned_by();
 		if (conquer) {
-          // Adds the influence
+			//  adds the influence
 			Military_Influence new_influence_modified =
 				conquering_player.military_influence(index) += influence;
 			if (owner and not conquer_guarded_location_by_superior_influence)
@@ -412,7 +412,7 @@ Player * Editor_Game_Base::add_player
 
 	Player * & p = m_players[player_number - 1];
 	delete p;
-   return
+	return
 		p
 		=
 		new Player
@@ -454,7 +454,7 @@ const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 		 ++it)
 		if (not strcmp((*it)->name().c_str(), tribe))
 			return *it;
-   return 0;
+	return 0;
 }
 
 void Editor_Game_Base::inform_players_about_ownership
@@ -488,7 +488,7 @@ to the Editor_Game_Base object.
 */
 void Editor_Game_Base::set_map(Map * const new_map) {
 	assert(new_map != m_map);
-		delete m_map;
+	delete m_map;
 
 	m_map = new_map;
 
@@ -677,10 +677,10 @@ Immovable & Editor_Game_Base::create_immovable
 
 Battle* Editor_Game_Base::create_battle ()
 {
-   Battle* b = new Battle ();
-   b->init (this);
-   m_battle_serials.push_back (b->get_serial());
-   return b;
+	Battle & b = *new Battle ();
+	b.init (this);
+	m_battle_serials.push_back (b.get_serial());
+	return &b;
 }
 
 AttackController* Editor_Game_Base::create_attack_controller
@@ -873,7 +873,8 @@ void Editor_Game_Base::set_road
 		neighbour = m. r_n(f);
 		mask = Road_Mask << Road_East;
 		break;
-	default: assert(false);
+	default:
+		assert(false);
 	}
 	uint8_t const road = f.field->get_roads() & mask;
 	Map_Index const           i = f        .field - &first_field;

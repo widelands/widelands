@@ -285,13 +285,6 @@ Soldier_Descr::Soldier_Descr
 	add_attribute(Map_Object::SOLDIER);
 }
 
-Soldier_Descr::~Soldier_Descr()
-{
-   m_hp_pics_fn.resize(0);
-   m_attack_pics_fn.resize(0);
-   m_defense_pics_fn.resize(0);
-   m_evade_pics_fn.resize(0);
-}
 
 void Soldier_Descr::parse
 	(char       const * directory,
@@ -458,13 +451,7 @@ Soldier::~Soldier
 Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr) {}
    // all done through init
 
-Soldier::~Soldier()
-{
-}
 
-/*
- * Initialize this soldier
- */
 void Soldier::init(Editor_Game_Base* gg) {
 	m_hp_level=0;
 	m_attack_level=0;

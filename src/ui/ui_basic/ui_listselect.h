@@ -18,8 +18,8 @@
  */
 
 
-#ifndef __S__LISTSELECT_H
-#define __S__LISTSELECT_H
+#ifndef UI_LISTSELECT_H
+#define UI_LISTSELECT_H
 
 #include "ui_panel.h"
 #include "ui_signal.h"

@@ -50,20 +50,20 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 Interactive_Base(e), m_egbase(e)
 {
 
-   // Disable debug. it is no use for editor
+	//  Disable debug. It is no use for editor.
 #ifndef DEBUG
-   set_display_flag(Interactive_Base::dfDebug, false);
+	set_display_flag(Interactive_Base::dfDebug, false);
 #else
-   set_display_flag(Interactive_Base::dfDebug, true);
+	set_display_flag(Interactive_Base::dfDebug, true);
 #endif
 
 	m_realtime = WLApplication::get()->get_time();
 
 	fieldclicked.set(this, &Editor_Interactive::map_clicked);
 
-   // user interface buttons
-   int32_t x = (get_w() - (7*34)) >> 1;
-   int32_t y = get_h() - 34;
+	//  user interface buttons
+	int32_t x = (get_w() - (7*34)) >> 1;
+	int32_t y = get_h() - 34;
 
 	new UI::Button<Editor_Interactive>
 		(this,
@@ -137,7 +137,7 @@ Interactive_Base(e), m_egbase(e)
 		 &Editor_Interactive::toggle_objectivesmenu, this,
 		 _("Objectives"));
 
-   m_need_save=false;
+	m_need_save = false;
 }
 
 /// Restore default sel.
@@ -239,7 +239,7 @@ void Editor_Interactive::exit() {
 			 UI::Modal_Message_Box::YESNO);
 		if (mmb.run() == 0) return;
 	}
-   end_modal(0);
+	end_modal(0);
 }
 
 void Editor_Interactive::toggle_mainmenu() {
@@ -466,14 +466,14 @@ void Editor_Interactive::select_tool
 {
 	if (which == Editor_Tool::First and &primary != tools.current_pointer) {
 		Widelands::Map & map = egbase().map();
-      // A new tool has been selected. Remove all
-      // registered overlay callback functions
+		//  A new tool has been selected. Remove all registered overlay callback
+		//  functions.
 		map.overlay_manager().register_overlay_callback_function(0, 0);
 		map.recalc_whole_map();
 
 	}
 	tools.current_pointer = &primary;
-   tools.use_tool=which;
+	tools.use_tool        = which;
 
 	if (const char * sel_pic = primary.get_sel(which)) set_sel_picture(sel_pic);
 	else                                             unset_sel_picture();
@@ -492,11 +492,11 @@ void Editor_Interactive::reference_player_tribe
 	assert(0 < player);
 	assert    (player <= egbase().map().get_nrplayers());
 
-   Player_References r;
-   r.player=player;
-   r.object=data;
+	Player_References r;
+	r.player = player;
+	r.object = data;
 
-   m_player_tribe_references.push_back(r);
+	m_player_tribe_references.push_back(r);
 }
 
 /*
@@ -507,7 +507,7 @@ void Editor_Interactive::unreference_player_tribe
 (Widelands::Player_Number const player, const void * const data)
 {
 	assert(player <= egbase().map().get_nrplayers());
-   assert(data);
+	assert(data);
 
 	std::vector<Player_References> & references = m_player_tribe_references;
 	std::vector<Player_References>::iterator it = references.begin();
@@ -530,7 +530,7 @@ bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
 		if (m_player_tribe_references[i].player == player)
 			return true;
 
-   return false;
+	return false;
 }
 
 

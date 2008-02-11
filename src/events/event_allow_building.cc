@@ -76,8 +76,8 @@ void Event_Allow_Building::Write
 
 
 Event::State Event_Allow_Building::run(Game* game) {
-   game->player(m_player).allow_building(m_building, m_allow);
-   return m_state = DONE;
+	game->player(m_player).allow_building(m_building, m_allow);
+	return m_state = DONE;
 }
 
 };

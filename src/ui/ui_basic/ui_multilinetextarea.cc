@@ -43,10 +43,10 @@ Multiline_Textarea::Multiline_Textarea
 	m_textpos   (0)
 {
 	assert(scrollbar_w() <= w);
-   set_think(false);
+	set_think(false);
 
 
-   set_align(align);
+	set_align(align);
 
 	m_scrollbar.moved.set(this, &Multiline_Textarea::set_scrollpos);
 
@@ -54,7 +54,7 @@ Multiline_Textarea::Multiline_Textarea
 	m_scrollbar.set_steps(1);
 	m_scrollbar.set_force_draw(always_show_scrollbar);
 
-   set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
+	set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
 
 	update(0, 0, get_eff_w(), get_h());
 }
@@ -65,7 +65,7 @@ Free allocated resources
 */
 Multiline_Textarea::~Multiline_Textarea() {
 	if (m_cache_id)
-      g_fh->delete_widget_cache(m_cache_id);
+		g_fh->delete_widget_cache(m_cache_id);
 }
 
 
@@ -75,16 +75,14 @@ Fix up scrolling state if necessary.
 */
 void Multiline_Textarea::set_text(const std::string & text) {
 	m_text = text;
-	if (not text.size()) {
-      // Clear the field
-
-      m_textheight = 0;
-      m_textpos = 0;
+	if (not text.size()) { //  clear the field
+		m_textheight = 0;
+		m_textpos    = 0;
 		m_scrollbar.set_steps(1);
 	}
 	if (m_cache_mode != Widget_Cache_New)
-      m_cache_mode = Widget_Cache_Update;
-   update(0, 0, get_eff_w(), get_h());
+		m_cache_mode = Widget_Cache_Update;
+	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -92,8 +90,8 @@ Change alignment of the textarea
 */
 void Multiline_Textarea::set_align(Align align)
 {
-   // don't allow vertical alignment as it doesn't make sense
-   m_align = static_cast<Align>(align & Align_Horizontal);
+	//  do not allow vertical alignment as it does not make sense
+	m_align = static_cast<Align>(align & Align_Horizontal);
 }
 
 
@@ -102,9 +100,9 @@ Scroll to the given position.
 */
 void Multiline_Textarea::set_scrollpos(int32_t pixels)
 {
-   m_textpos = pixels;
+	m_textpos = pixels;
 
-   update(0, 0, get_eff_w(), get_h());
+	update(0, 0, get_eff_w(), get_h());
 }
 
 
@@ -114,7 +112,7 @@ it only affects the behaviour of set_text().
 */
 void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 {
-   m_scrollmode = mode;
+	m_scrollmode = mode;
 }
 
 
@@ -124,7 +122,7 @@ Redraw the textarea
 void Multiline_Textarea::draw(RenderTarget* dst)
 {
 	if (m_text.length()) {
-      // Let the font handler worry about all the complicated stuff..
+		//  Let the font handler worry about all the complicated stuff..
 		if (is_richtext(m_text))
 			g_fh->draw_richtext
 				(*dst,
@@ -144,14 +142,14 @@ void Multiline_Textarea::draw(RenderTarget* dst)
 				 m_align,
 				 get_eff_w(),
 				 m_cache_mode, &m_cache_id);
-      draw_scrollbar();
-      m_cache_mode = Widget_Cache_Use;
+		draw_scrollbar();
+		m_cache_mode = Widget_Cache_Use;
 	}
 }
 
 void Multiline_Textarea::draw_scrollbar() {
 	if (m_cache_mode != Widget_Cache_Use) {
-      bool setbottom = false;
+		bool setbottom = false;
 
 		if (m_scrollmode == ScrollLog)
 			if
@@ -162,15 +160,14 @@ void Multiline_Textarea::draw_scrollbar() {
 				 get_h()
 				 -
 				 g_fh->get_fontheight(m_fontname, m_fontsize))
-            setbottom = true;
+				setbottom = true;
 
 		uint32_t m_width = 0;
-      //update(0, 0, get_eff_w(), get_h());
 		if (m_cache_id)
 			g_fh->get_size_from_cache(m_cache_id, m_width, m_textheight);
 
 		if (setbottom || m_textpos > m_textheight - get_h())
-         m_textpos = m_textheight - get_h();
+			m_textpos = m_textheight - get_h();
 
 		m_scrollbar.set_steps(m_textheight - get_h());
 		m_scrollbar.set_pos(m_textpos);
@@ -183,12 +180,12 @@ bool Multiline_Textarea::handle_mousepress(const Uint8 btn, int32_t x, int32_t y
 }
 
 int32_t Multiline_Textarea::get_halign() {
-   int32_t x = 0;
-   // Only HAlignment allowed
+	int32_t x = 0;
+	//  only HAlignment is allowed
 	if      (m_align & Align_HCenter)
-      x += get_w()/2;
+		x += get_w() / 2;
 	else if (m_align & Align_Right)
-      x += get_w();
-   return x;
+		x += get_w();
+	return x;
 }
 };

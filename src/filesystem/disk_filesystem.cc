@@ -50,12 +50,7 @@ RealFSImpl::RealFSImpl(std::string const & Directory)
 #endif
 }
 
-/**
- * Cleanup code
- */
-RealFSImpl::~RealFSImpl()
-{
-}
+RealFSImpl::~RealFSImpl() {}
 
 /**
  * Return true if this directory is writable.
@@ -452,7 +447,7 @@ private:
 	FILE* m_file;
 };
 
-} // anonymous namespace
+};
 
 StreamRead * RealFSImpl::OpenStreamRead
 (const std::string & fname)
@@ -500,7 +495,7 @@ private:
 	FILE* m_file;
 };
 
-} // anonymous namespace
+};
 
 StreamWrite * RealFSImpl::OpenStreamWrite
 (const std::string & fname)

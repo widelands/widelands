@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_ui_tabpanel_h
-#define included_ui_tabpanel_h
+#ifndef UI_TABPANEL_H
+#define UI_TABPANEL_H
 
 #include "ui_panel.h"
 
@@ -73,4 +73,4 @@ private:
 };
 };
 
-#endif // included_ui_tabpanel_h
+#endif

@@ -70,8 +70,7 @@ Text_Block::Text_Block(const Text_Block &src) {
 
 Text_Parser::Text_Parser() {}
 
-Text_Parser::~Text_Parser() {
-}
+Text_Parser::~Text_Parser() {}
 
 void Text_Parser::parse
 (std::string                 & text,
@@ -125,20 +124,20 @@ bool Text_Parser::parse_textblock
 	const bool extract_more =
 		extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
 
-      // Serch for map variables
+	//  serch for map variables
 	for
 		(std::string::size_type offset;
 		 (offset = block_text.find("<variable name=")) != std::string::npos;)
 	{
-         SSS_T end = block_text.find(">");
+		std::string::size_type const end = block_text.find(">");
 		if (end == std::string::npos)
-            log("WARNING: <variable> tag not closed!\n");
+			log("WARNING: <variable> tag not closed!\n");
 		else {
-            std::string name = block_text.substr(offset+15, end-(offset+15));
-            std::string str = vcb(name, vcdata);
-            block_text.replace(offset, end-offset+1, str);
-			}
+			std::string name = block_text.substr(offset+15, end-(offset+15));
+			std::string str = vcb(name, vcdata);
+			block_text.replace(offset, end-offset+1, str);
 		}
+	}
 
 	//Split the the text because of " "
 	std::vector<std::string> unwrapped_words;
@@ -158,7 +157,7 @@ bool Text_Parser::parse_textblock
 			if (next_break) words.push_back(line.substr(0, next_break));
 			line_breaks.push_back(words.size());
 			line.erase(0, next_break + 4);
-	}
+		}
 		if (line.size()) words.push_back(line);
 	}
 	return extract_more;
@@ -230,22 +229,22 @@ bool Text_Parser::extract_format_block
 
 void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Block *element) {
 	if (!format.size())
-      return;
+		return;
 	if (format[0] == ' ')
-      format.erase(0, 1);
+		format.erase(0, 1);
 
 	while (format.size()) {
-      SSS_T key_end = format.find("=");
+		std::string::size_type const key_end = format.find("=");
 		if (key_end == std::string::npos)
-         return;
+			return;
 		else {
-         std::string key = format.substr(0, key_end);
-         format.erase(0, key_end+1);
-         SSS_T val_end = format.find(" ");
+			std::string key = format.substr(0, key_end);
+			format.erase(0, key_end + 1);
+			SSS_T val_end = format.find(" ");
 			if (val_end == std::string::npos)
-            val_end = format.size();
-         std::string val = format.substr(0, val_end);
-         format.erase(0, val_end+1);
+				val_end = format.size();
+			std::string val = format.substr(0, val_end);
+			format.erase(0, val_end + 1);
 			if        (key == "image") {
 				const std::vector<std::string> images(split_string(val, ";"));
 				element->set_images(images);
@@ -283,14 +282,12 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
 			else if (key == "line-spacing")
 				element->set_line_spacing(atoi(val.c_str()));
 			else if (key == "font-color") {
-            SSS_T offset = 0;
-				if (val[0] == '#')
-               offset = 1;
-            std::string r = "0x"+val.substr(offset, 2);
-            std::string g = "0x"+val.substr(offset+2, 2);
-            std::string b = "0x"+val.substr(offset+4, 2);
+				std::string::size_type const offset = val[0] == '#';
+				std::string const r = "0x" + val.substr(offset,     2);
+				std::string const g = "0x" + val.substr(offset + 2, 2);
+				std::string const b = "0x" + val.substr(offset + 4, 2);
 
-            char *ptr;
+				char * ptr;
 				long int const red   = strtol(r.c_str(), &ptr, 0);
 				long int const green = strtol(g.c_str(), &ptr, 0);
 				long int const blue  = strtol(b.c_str(), &ptr, 0);

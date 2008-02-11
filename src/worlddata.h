@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIBEDATA_H
-#define __S__TRIBEDATA_H
+#ifndef WORLDDATA_H
+#define WORLDDATA_H
 
 #include <stdint.h>
 
@@ -46,4 +46,4 @@
 #define TERRAIN_UNPASSABLE 16
 
 
-#endif /* __S__TRIBEDATA_H */
+#endif

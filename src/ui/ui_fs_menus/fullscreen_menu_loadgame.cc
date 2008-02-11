@@ -33,8 +33,6 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
 game(g),
 
-	// UI::Buttons
-
 back
 (this,
  570, 505, 200, 26,
@@ -51,7 +49,6 @@ m_ok
  std::string(),
  false),
 
-	// Create the list area
 list(this, 15, 205, 455, 365),
 
 title(this, MENU_XRES / 2, 90, _("Choose saved game!"), Align_HCenter),
@@ -66,40 +63,38 @@ tagametime    (this, 570, 225, "")
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	list.selected.set(this, &Fullscreen_Menu_LoadGame::map_selected);
 	list.double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
-   fill_list();
+	fill_list();
 }
 
-Fullscreen_Menu_LoadGame::~Fullscreen_Menu_LoadGame()
-{
-}
+Fullscreen_Menu_LoadGame::~Fullscreen_Menu_LoadGame() {}
 
 void Fullscreen_Menu_LoadGame::clicked_ok()
 {
 	m_filename = list.get_selected();
-   end_modal(1);
+	end_modal(1);
 }
 
 void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 	if (const char * const name = list.get_selected()) {
-      FileSystem* fs = g_fs->MakeSubFileSystem(name);
+		FileSystem* fs = g_fs->MakeSubFileSystem(name);
 		Widelands::Game_Loader gl(*fs, &game);
-      Widelands::Game_Preload_Data_Packet gpdp;
-      gl.preload_game(&gpdp); // This has worked before, no problem
+		Widelands::Game_Preload_Data_Packet gpdp;
+		gl.preload_game(&gpdp); // This has worked before, no problem
 
 		m_ok.set_enabled(true);
 		tamapname.set_text(gpdp.get_mapname());
 
-      char buf[200];
-      uint32_t gametime = gpdp.get_gametime();
+		char buf[200];
+		uint32_t gametime = gpdp.get_gametime();
 
-      int32_t hours = gametime / 3600000;
-      gametime -= hours * 3600000;
-      int32_t minutes = gametime / 60000;
+		int32_t hours = gametime / 3600000;
+		gametime -= hours * 3600000;
+		int32_t minutes = gametime / 60000;
 
-      sprintf(buf, "%02i:%02i", hours, minutes);
+		sprintf(buf, "%02i:%02i", hours, minutes);
 		tagametime.set_text(buf);
 
-      delete fs;
+		delete fs;
 	} else {
 		tamapname .set_text("");
 		tagametime.set_text("");
@@ -110,17 +105,15 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
  * listbox got double clicked
  */
 void Fullscreen_Menu_LoadGame::double_clicked(uint32_t) {
-   // Ok
-   clicked_ok();
-
+	clicked_ok();
 }
 
 /*
  * fill the file list
  */
 void Fullscreen_Menu_LoadGame::fill_list() {
-   // Fill it with all files we find.
-   g_fs->FindFiles("ssave", "*", &m_gamefiles, 1);
+	//  Fill it with all files we find.
+	g_fs->FindFiles("ssave", "*", &m_gamefiles, 1);
 
 	Widelands::Game_Preload_Data_Packet gpdp;
 
@@ -131,12 +124,12 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		 pname != gamefiles.end();
 		 ++pname)
 	{
-      const char *name = pname->c_str();
+		const char * const name = pname->c_str();
 
-      FileSystem* fs = 0;
+		FileSystem * fs = 0;
 
 		try {
-         fs = g_fs->MakeSubFileSystem(name);
+			fs = g_fs->MakeSubFileSystem(name);
 			Widelands::Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);
 
@@ -145,10 +138,8 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 			list.add(fname, name);
 			free(fname);
 
-		} catch (_wexception&) {
-         // we simply skip illegal entries
-		}
-         delete fs;
+		} catch (_wexception&) {} // we simply skip illegal entries
+		delete fs;
 	}
 
 	if (list.size()) list.select(0);

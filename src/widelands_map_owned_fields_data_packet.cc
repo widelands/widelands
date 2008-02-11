@@ -69,7 +69,7 @@ throw (_wexception)
 	for (Map_Index i = 0; i < max_index; ++i)
 		fw.Unsigned8(map[i].get_owned_by());
 
-   fw.Write(fs, "binary/owned_fields");
+	fw.Write(fs, "binary/owned_fields");
 }
 
 };

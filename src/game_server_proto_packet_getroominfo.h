@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_SERVER_PROTO_PACKET_GETROOMINFO_H
-#define __S__GAME_SERVER_PROTO_PACKET_GETROOMINFO_H
+#ifndef GAME_SERVER_PROTO_PACKET_GETROOMINFO_H
+#define GAME_SERVER_PROTO_PACKET_GETROOMINFO_H
 
 #include "game_server_proto_packet.h"
 
@@ -31,14 +31,14 @@ struct Game_Server_Protocol_Packet_GetRoomInfo :
 public Game_Server_Protocol_Packet
 {
 	Game_Server_Protocol_Packet_GetRoomInfo(const std::string & roomname);
-      virtual ~Game_Server_Protocol_Packet_GetRoomInfo();
+	virtual ~Game_Server_Protocol_Packet_GetRoomInfo();
 
-      virtual uint16_t get_id();
+	virtual uint16_t get_id();
 
-	virtual void recv(Game_Server_Connection *, Network_Buffer *) {}
-	virtual void send(Network_Buffer *);
-      virtual void write_reply(Network_Buffer*) {}
-      virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
+	virtual void recv        (Game_Server_Connection *, Network_Buffer *) {}
+	virtual void send                                  (Network_Buffer *);
+	virtual void write_reply                           (Network_Buffer *) {}
+	virtual void handle_reply(Game_Server_Connection *, Network_Buffer *);
 
 private:
 	const std::string m_roomname; // which room to query

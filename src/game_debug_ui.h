@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,8 @@
  */
 // UI classes for real-time game debugging
 
-#ifndef game_debug_ui_h
-#define game_debug_ui_h
+#ifndef GAME_DEBUG_UI_H
+#define GAME_DEBUG_UI_H
 
 #include "widelands_geometry.h"
 
@@ -31,4 +31,4 @@ void show_mapobject_debug
 (Interactive_Base & parent, Widelands::Map_Object &);
 void show_field_debug(Interactive_Base & parent, Widelands::Coords coords);
 
-#endif // game_debug_ui_h
+#endif

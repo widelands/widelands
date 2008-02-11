@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAPVIEW_H
-#define __S__MAPVIEW_H
+#ifndef MAPVIEW_H
+#define MAPVIEW_H
 
 #include "widelands_geometry.h"
 
@@ -58,7 +58,7 @@ struct Map_View : public UI::Panel {
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
 	void track_sel(Point m);
-   void need_complete_redraw() {m_complete_redraw_needed = true;}
+	void need_complete_redraw() {m_complete_redraw_needed = true;}
 
 protected:
 	Interactive_Base & intbase() const throw () {return m_intbase;}
@@ -69,8 +69,8 @@ private:
 	Interactive_Base & m_intbase;
 	Point              m_viewpoint;
 	bool               m_dragging;
-   bool              m_complete_redraw_needed;
+	bool               m_complete_redraw_needed;
 };
 
 
-#endif /* __S__MAPVIEW_H */
+#endif

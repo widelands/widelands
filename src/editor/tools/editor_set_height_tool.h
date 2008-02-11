@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_SET_HEIGHT_TOOL_H
-#define __S__EDITOR_SET_HEIGHT_TOOL_H
+#ifndef EDITOR_SET_HEIGHT_TOOL_H
+#define EDITOR_SET_HEIGHT_TOOL_H
 
 #include "editor_tool.h"
 #include "field.h"

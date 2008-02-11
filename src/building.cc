@@ -80,9 +80,9 @@ Cleanup
 */
 Building_Descr::~Building_Descr()
 {
-      free(m_buildicon_fname);
+	free(m_buildicon_fname);
 	for (uint32_t i=0; i<m_enhances_to.size(); ++i)
-      free(m_enhances_to[i]);
+		free(m_enhances_to[i]);
 }
 
 /*
@@ -118,8 +118,10 @@ Building_Descr::parse
 Parse the basic building settings from the given profile and directory
 ===============
 */
-void Building_Descr::parse(const char* directory, Profile* prof,
-	const EncodeData* encdata)
+void Building_Descr::parse
+	(char       const * const directory,
+	 Profile          * const prof,
+	 EncodeData const * const encdata)
 {
 	Section* global = prof->get_safe_section("global");
 	Section* s;
@@ -148,12 +150,12 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	m_buildable = global->get_bool("buildable", true);
 	while (global->get_next_string("enhances_to", &string))
 		if (string)
-         m_enhances_to.push_back(strdup(string));
-   m_enhanced_building=global->get_bool("enhanced_building", false);
-	if (m_buildable || m_enhanced_building)
-		{
-      // Get build icon
-		string = global->get_string("buildicon", (m_name + "_build.png").c_str());
+			m_enhances_to.push_back(strdup(string));
+	m_enhanced_building = global->get_bool("enhanced_building", false);
+	if (m_buildable || m_enhanced_building) {
+		//  get build icon
+		string =
+			global->get_string("buildicon", (m_name + "_build.png").c_str());
 
 		snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 
@@ -161,16 +163,16 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 		assert(not m_buildicon_fname);
 		m_buildicon_fname = strdup(fname);
 
-      // build animation
-      s = prof->get_section("build");
-			if (!s)
-				throw wexception("Missing build animation");
+		//  build animation
+		s = prof->get_section("build");
+		if (!s)
+			throw wexception("Missing build animation");
 
-			if (s->get_int("fps", -1) != -1)
-         throw wexception("fps defined for build animation!");
+		if (s->get_int("fps", -1) != -1)
+			throw wexception("fps defined for build animation!");
 
-			if (!is_animation_known("build"))
-         add_animation("build", g_anim.get(directory, s, 0, encdata));
+		if (!is_animation_known("build"))
+			add_animation("build", g_anim.get(directory, s, 0, encdata));
 
 		// Get costs
 		s = prof->get_safe_section("buildcost");
@@ -204,7 +206,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	if (!s)
 		throw wexception("Missing idle animation");
 	if (!is_animation_known("idle"))
-      add_animation("idle", g_anim.get(directory, s, 0, encdata));
+		add_animation("idle", g_anim.get(directory, s, 0, encdata));
 
 	while (global->get_next_string("soundfx", &string)) {
 		if (string) g_sound_handler.load_fx(directory, string);
@@ -603,8 +605,9 @@ Return false if there's nothing to be done.
 */
 bool Building::get_building_work(Game *, Worker * w, bool)
 {
-	throw wexception("MO(%u): get_building_work() for unknown worker %u",
-		get_serial(), w->get_serial());
+	throw wexception
+		("MO(%u): get_building_work() for unknown worker %u",
+		 get_serial(), w->get_serial());
 }
 
 
@@ -721,13 +724,13 @@ void Building::draw
  const Point pos)
 {
 	if (coords == m_position) { // draw big buildings only once
+		dst.drawanim
+			(pos, m_anim, game.get_gametime() - m_animstart, get_owner());
 
-		dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, get_owner());
+		//  door animation?
 
-	// door animation?
-
-	// Overlay strings (draw when enabled)
-	draw_help(game, dst, coords, pos);
+		//  overlay strings (draw when enabled)
+		draw_help(game, dst, coords, pos);
 	}
 }
 
@@ -749,7 +752,7 @@ void Building::draw_help
 
 	if (dpyflags & Interactive_Base::dfShowCensus)
 	{
-      // TODO: Make more here
+		//  TODO make more here
 		g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,
@@ -833,22 +836,22 @@ void Building::conquered_by (Player *)
  * Log basic infos
  */
 void Building::log_general_info(Editor_Game_Base* egbase) {
-   PlayerImmovable::log_general_info(egbase);
+	PlayerImmovable::log_general_info(egbase);
 
-   molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
-   molog("m_flag: %p\n", m_flag);
+	molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
+	molog("m_flag: %p\n", m_flag);
 	molog
 		("* position: (%i, %i)\n",
 		 m_flag->get_position().x, m_flag->get_position().y);
 
 	molog("m_anim: %s\n", descr().get_animation_name(m_anim).c_str());
-   molog("m_animstart: %i\n", m_animstart);
+	molog("m_animstart: %i\n", m_animstart);
 
 	molog("m_leave_time: %i\n", m_leave_time);
-   molog("m_stop: %i\n", m_stop);
+	molog("m_stop: %i\n", m_stop);
 
-   molog("m_leave_queue.size(): %i\n", m_leave_queue.size());
-   molog("m_leave_allow.get(): %p\n", m_leave_allow.get(egbase));
+	molog("m_leave_queue.size(): %i\n", m_leave_queue.size());
+	molog("m_leave_allow.get(): %p\n", m_leave_allow.get(egbase));
 }
 
 

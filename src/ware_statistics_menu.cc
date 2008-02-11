@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -299,42 +299,50 @@ static const RGBColor colors[] = {
  * of the graph and it needs a picture
  */
 struct WSM_Checkbox : public UI::Checkbox {
-      WSM_Checkbox(UI::Panel* parent, int32_t x, int32_t y, int32_t id, uint32_t picid, RGBColor color);
+	WSM_Checkbox
+		(UI::Panel *,
+		 int32_t x, int32_t y,
+		 int32_t id, uint32_t picid,
+		 RGBColor);
 
-      virtual void draw(RenderTarget* dst);
+	virtual void draw(RenderTarget *t);
 
 private:
-      int32_t      m_pic;
-      RGBColor m_color;
+	int32_t  m_pic;
+	RGBColor m_color;
 };
 
-/*
- * Constructor
- */
-WSM_Checkbox::WSM_Checkbox(UI::Panel* parent, int32_t x, int32_t y, int32_t id, uint32_t picid, RGBColor color) :
-   UI::Checkbox(parent, x, y, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG)) {
 
-   m_pic = picid;
-   set_id(id);
-   m_color = color;
+WSM_Checkbox::WSM_Checkbox
+(UI::Panel * const parent,
+ int32_t const x, int32_t const y,
+ int32_t const id, uint32_t const picid,
+ RGBColor const color)
+: UI::Checkbox(parent, x, y, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG))
+{
+
+	m_pic = picid;
+	set_id(id);
+	m_color = color;
 }
 
 /*
  * draw
  */
 void WSM_Checkbox::draw(RenderTarget* dst) {
-   // First, draw normal
-   UI::Checkbox::draw(dst);
+	//  First, draw normal.
+	UI::Checkbox::draw(dst);
 
-   // Now, draw a small box with the color
+	//  Now, draw a small box with the color.
 	assert(1 <= get_inner_w());
 	compile_assert(2 <= COLOR_BOX_HEIGHT);
 	dst->fill_rect
 		(Rect(Point(1, 1), get_inner_w() - 1, COLOR_BOX_HEIGHT - 2), m_color);
 
-   // and the item
-	dst->blit(Point((get_inner_w()-WARE_MENU_PIC_WIDTH)/2, COLOR_BOX_HEIGHT),
-	          m_pic);
+	//  and the item
+	dst->blit
+		(Point
+		 ((get_inner_w() - WARE_MENU_PIC_WIDTH) / 2, COLOR_BOX_HEIGHT), m_pic);
 }
 
 /*
@@ -350,7 +358,7 @@ Ware_Statistics_Menu::Ware_Statistics_Menu
 UI::UniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
-   // First, we must decide about the size
+	 // First, we must decide about the size
 	const int32_t nr_wares = parent.get_player()->tribe().get_nrwares();
 	uint32_t wares_per_row = MIN_WARES_PER_LINE;
 	while (nr_wares % wares_per_row && wares_per_row <= MAX_WARES_PER_LINE)
@@ -358,29 +366,30 @@ m_parent(&parent)
 	const uint32_t nr_rows =
 		nr_wares / wares_per_row + (nr_wares % wares_per_row ? 1 : 0);
 
-   int32_t spacing=5;
-   int32_t offsx=spacing;
-   int32_t offsy=30;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	int32_t const spacing = 5;
+	int32_t       offsx   = spacing;
+	int32_t       offsy   = 30;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
 
-   set_inner_size(10, (offsy + spacing + PLOT_HEIGHT + spacing +
-                       nr_rows * (WARE_MENU_PIC_HEIGHT + spacing) + 100));
+	set_inner_size
+		(10,
+		 (offsy + spacing + PLOT_HEIGHT + spacing +
+		  nr_rows * (WARE_MENU_PIC_HEIGHT + spacing) + 100));
 
 
-   // Plotter
-   m_plot = new WUIPlot_Area(this, spacing, offsy+spacing, get_inner_w()-2*spacing, PLOT_HEIGHT);
-   m_plot->set_sample_rate(STATISTICS_SAMPLE_TIME);
-   m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot = new WUIPlot_Area(this, spacing, offsy+spacing, get_inner_w()-2*spacing, PLOT_HEIGHT);
+	m_plot->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
-   // all wares
-   int32_t cur_ware = 0;
-   int32_t dposy = 0;
-   posy += PLOT_HEIGHT+ 2*spacing;
+	//  all wares
+	int32_t cur_ware = 0;
+	int32_t dposy    = 0;
+	posy += PLOT_HEIGHT+ 2 * spacing;
 	Widelands::Tribe_Descr const & tribe = parent.get_player()->tribe();
 	for (uint32_t y = 0; y < nr_rows; ++y) {
-      posx = spacing;
+		posx = spacing;
 		for
 			(uint32_t x = 0;
 			 x < wares_per_row and cur_ware < nr_wares;
@@ -396,18 +405,20 @@ m_parent(&parent)
 			dposy = cb.get_h() + spacing;
 			set_inner_size
 				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
-         m_plot->register_plot_data(cur_ware, parent.get_player()->get_ware_production_statistics(cur_ware), colors[cur_ware]);
+			m_plot->register_plot_data
+				(cur_ware,
+				 parent.get_player()->get_ware_production_statistics(cur_ware),
+				 colors[cur_ware]);
 		}
-      posy += dposy;
+		posy += dposy;
 	}
 
-   m_plot->set_size(get_inner_w()-2*spacing, PLOT_HEIGHT);
+	m_plot->set_size(get_inner_w()-2*spacing, PLOT_HEIGHT);
 
 
-   // Buttons
-   int32_t button_size = (get_inner_w()-(spacing*5)) / 4;
-   posx = spacing;
-   posy +=spacing+spacing;
+	int32_t button_size = (get_inner_w() - spacing * 5) / 4;
+	posx = spacing;
+	posy +=spacing+spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
@@ -416,7 +427,7 @@ m_parent(&parent)
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_15_MINS,
 		 _("15 m"));
 
-   posx += button_size+spacing;
+	posx += button_size+spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
@@ -425,7 +436,7 @@ m_parent(&parent)
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_30_MINS,
 		 _("30 m"));
 
-   posx += button_size+spacing;
+	posx += button_size+spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
@@ -434,7 +445,7 @@ m_parent(&parent)
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_ONE_HOUR,
 		 _("1 h"));
 
-   posx += button_size+spacing;
+	posx += button_size+spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
@@ -443,8 +454,8 @@ m_parent(&parent)
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_TWO_HOURS,
 		 _("2 h"));
 
-   posy += 25 + spacing;
-   posx = spacing;
+	posy += 25 + spacing;
+	posx = spacing;
 
 	new UI::Button<Ware_Statistics_Menu>
 		(this,
@@ -454,7 +465,7 @@ m_parent(&parent)
 		 &Ware_Statistics_Menu::clicked_help, this,
 		 _("Help"));
 
-   posx += button_size+spacing;
+	posx += button_size+spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
@@ -463,7 +474,7 @@ m_parent(&parent)
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_FOUR_HOURS,
 		 _("4 h"));
 
-   posx += button_size+spacing;
+	posx += button_size+spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
@@ -472,7 +483,7 @@ m_parent(&parent)
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_EIGHT_HOURS,
 		 _("8 h"));
 
-   posx += button_size+spacing;
+	posx += button_size+spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
@@ -481,33 +492,29 @@ m_parent(&parent)
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_16_HOURS,
 		 _("16 h"));
 
-   posx += button_size+spacing;
-   posy += 32+spacing;
+	posx += button_size + spacing;
+	posy += 32 + spacing;
 
-   set_inner_size(get_inner_w(), posy);
+	set_inner_size(get_inner_w(), posy);
 }
 
 /*
 ===============
-Ware_Statistics_Menu::~Ware_Statistics_Menu
 
 Unregister from the registry pointer
 ===============
 */
-Ware_Statistics_Menu::~Ware_Statistics_Menu()
-{
-}
+Ware_Statistics_Menu::~Ware_Statistics_Menu() {}
 
 /**
  * Called when the ok button has been clicked
  * \todo Implement help
 */
-void Ware_Statistics_Menu::clicked_help() {
-}
+void Ware_Statistics_Menu::clicked_help() {}
 
 /*
  * Cb has been changed to this state
  */
 void Ware_Statistics_Menu::cb_changed_to(int32_t id, bool what) {
-   m_plot->show_plot(id, what);
+	m_plot->show_plot(id, what);
 }

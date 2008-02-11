@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_PLACE_BOB_TOOL
-#define __S__EDITOR_PLACE_BOB_TOOL
+#ifndef EDITOR_PLACE_BOB_TOOL_H
+#define EDITOR_PLACE_BOB_TOOL_H
 
 #include "multi_select.h"
 #include "editor_delete_bob_tool.h"

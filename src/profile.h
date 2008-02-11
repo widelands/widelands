@@ -234,4 +234,4 @@ public:
 	Section *create_section(const char *name, bool duplicate = false);
 };
 
-#endif /* PROFILE_H */
+#endif

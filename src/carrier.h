@@ -17,6 +17,9 @@
  *
  */
 
+#ifndef CARRIER_H
+#define CARRIER_H
+
 #include "worker.h"
 
 namespace Widelands {
@@ -78,3 +81,5 @@ private:
 };
 
 };
+
+#endif

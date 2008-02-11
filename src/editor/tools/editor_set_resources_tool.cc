@@ -51,7 +51,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 		int32_t amount     = mr.location().field->get_resources_amount();
 		int32_t max_amount = world.get_resource(m_cur_res)->get_max_amount();
 
-      amount=m_set_to;
+		amount = m_set_to;
 		if (amount < 0)
 			amount = 0;
 		if (amount > max_amount)
@@ -59,8 +59,9 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 
 		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{
-         // Ok, we're doing something. First remove the current overlays
-			int32_t picid = g_gr->get_picture
+			//  Ok, we're doing something. First remove the current overlays.
+			int32_t picid =
+				g_gr->get_picture
 				(PicMod_Menu,
 				 world.get_resource(res)->get_editor_pic
 				 (mr.location().field->get_resources_amount()).c_str());
@@ -72,8 +73,9 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 			} else {
 				mr.location().field->set_resources(m_cur_res, amount);
 				mr.location().field->set_starting_res_amount(amount);
-            // set new overlay
-				picid = g_gr->get_picture
+				//  set new overlay
+				picid =
+					g_gr->get_picture
 					(PicMod_Menu,
 					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
 				overlay_manager.register_overlay(mr.location(), picid, 4);

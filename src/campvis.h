@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __CAMPVIS_H
-#define __CAMPVIS_H
+#ifndef CAMPVIS_H
+#define CAMPVIS_H
 
 #include <string>
 
@@ -34,4 +34,4 @@ private:
 };
 
 
-#endif // __CAMPVIS_H
+#endif

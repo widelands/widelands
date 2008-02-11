@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_EVENT_MENU_NEW_EVENT_H
-#define __S__EDITOR_EVENT_MENU_NEW_EVENT_H
+#ifndef EDITOR_EVENT_MENU_NEW_EVENT_H
+#define EDITOR_EVENT_MENU_NEW_EVENT_H
 
 #include "ui_window.h"
 

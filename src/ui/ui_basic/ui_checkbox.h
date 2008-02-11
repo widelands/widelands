@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_ui_checkbox_h
-#define included_ui_checkbox_h
+#ifndef UI_CHECKBOX_H
+#define UI_CHECKBOX_H
 
 #include "ui_panel.h"
 #include "ui_signal.h"
@@ -58,7 +58,7 @@ struct Statebox : public Panel {
 private:
 	virtual void clicked() = 0;
 
-   int32_t      m_id;
+	int32_t  m_id;
 
 	bool     m_custom_picture; ///< the statebox displays a custom picture
 	uint32_t     m_pic_graphics;
@@ -87,4 +87,4 @@ private:
 };
 };
 
-#endif // included_ui_checkbox_h
+#endif

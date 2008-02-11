@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__BUILDING_STATISTICS_MENU_H
-#define __S__BUILDING_STATISTICS_MENU_H
+#ifndef BUILDING_STATISTICS_MENU_H
+#define BUILDING_STATISTICS_MENU_H
 
 #include "ui_table.h"
 #include "ui_unique_window.h"
@@ -33,10 +33,10 @@ struct Textarea;
 
 struct Building_Statistics_Menu : public UI::UniqueWindow {
 	Building_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
-      virtual ~Building_Statistics_Menu();
+	virtual ~Building_Statistics_Menu();
 
-      void think();
-      void draw(RenderTarget*);
+	void think();
+	void draw(RenderTarget *);
 
 private:
 	enum Jump_Targets {
@@ -45,21 +45,21 @@ private:
 		Prev_Unproductive, Next_Unproductive
 	};
 
-      Interactive_Player* m_parent;
+	Interactive_Player      * m_parent;
 	UI::Table<const intptr_t> m_table;
-      UI::Progress_Bar*     m_progbar;
-      UI::Textarea*         m_owned, *m_build;
-      uint32_t                m_anim;
-      uint32_t                m_lastupdate;
-      uint32_t                m_end_of_table_y;
+	UI::Progress_Bar        * m_progbar;
+	UI::Textarea * m_owned, * m_build;
+	uint32_t                  m_anim;
+	uint32_t                  m_lastupdate;
+	uint32_t                  m_end_of_table_y;
 	UI::IDButton<Building_Statistics_Menu, Jump_Targets> * m_btn[6];
-      int32_t                 m_last_building_index;
+	int32_t                   m_last_building_index;
 
 	void clicked_help();
 	void clicked_jump(Jump_Targets);
 	void table_changed(uint32_t);
-      void update();
-      int32_t validate_pointer(int32_t*, int32_t);
+	void update();
+	int32_t validate_pointer(int32_t *, int32_t);
 };
 
 #endif

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_TOOLSIZE_MENU_H
-#define __S__EDITOR_TOOLSIZE_MENU_H
+#ifndef EDITOR_TOOLSIZE_MENU_H
+#define EDITOR_TOOLSIZE_MENU_H
 
 #include "ui_button.h"
 #include "ui_textarea.h"
@@ -40,7 +40,7 @@ Here, you can select the tool you wish to use the next time
 */
 
 struct Editor_Toolsize_Menu : public UI::UniqueWindow {
-      Editor_Toolsize_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
+	Editor_Toolsize_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
 
 private:
 	void change_radius(bool increase);

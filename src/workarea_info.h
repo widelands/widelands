@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005 by the Widelands Development Team
+ * Copyright (C) 2005, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S_WORKAREA_INFO_H
-#define __S_WORKAREA_INFO_H
+#ifndef WORKAREA_INFO_H
+#define WORKAREA_INFO_H
 
 #include <map>
 #include <set>
@@ -29,4 +29,4 @@
 //  activity (or similar) that can be performed within the radius.
 typedef std::map<uint32_t, std::set<std::string> > Workarea_Info;
 
-#endif /* __S_WORKAREA_INFO_H */
+#endif

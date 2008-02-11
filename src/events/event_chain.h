@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_CHAIN_H
-#define __S__EVENT_CHAIN_H
+#ifndef EVENT_CHAIN_H
+#define EVENT_CHAIN_H
 
 #include "named.h"
 #include "referencer.h"
@@ -47,9 +47,9 @@ struct EventChain
 	friend struct Map_EventChain_Data_Packet;
 
 	enum State {
-         INIT,
-         RUNNING,
-         DONE,
+		INIT,
+		RUNNING,
+		DONE,
 	};
 
 	EventChain(char const * const Name)
@@ -70,26 +70,27 @@ struct EventChain
 
 	State get_state() const {return m_state;}
 
-      // Below is only good idea in editor
-      void set_repeating(bool t) {m_repeating = t;}
-      uint32_t get_nr_events() {return m_events.size();}
-      Event* get_event(uint32_t i) {assert(i < m_events.size()); return m_events[i];}
-      void clear_events();
-      void add_event(Event* ev);
+	//  Below is only good idea in editor.
+	void set_repeating(bool const t) {m_repeating = t;}
+	uint32_t get_nr_events() {return m_events.size();}
+	Event * get_event(uint32_t const i) {
+		assert(i < m_events.size()); return m_events[i];
+	}
+	void clear_events();
+	void add_event(Event* ev);
 
 
-      // Run this event queue
-      State run(Game* g);
+	State run(Game *);
 
 private:
-      bool                m_repeating;
-      TriggerConditional* m_trigconditional;
-	typedef std::vector<Event*> event_vector;
+	bool                         m_repeating;
+	TriggerConditional         * m_trigconditional;
+	typedef std::vector<Event *> event_vector;
 	event_vector m_events;
 
-      // For running
-      uint32_t                m_curevent;
-      State               m_state;
+	// For running
+	uint32_t                     m_curevent;
+	State                        m_state;
 
 };
 

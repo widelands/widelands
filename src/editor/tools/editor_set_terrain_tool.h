@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_SET_TERRAIN_TOOL
-#define __S__EDITOR_SET_TERRAIN_TOOL
+#ifndef EDITOR_SET_TERRAIN_TOOL_H
+#define EDITOR_SET_TERRAIN_TOOL_H
 
 #include "editor_tool.h"
 #include "multi_select.h"
@@ -32,4 +32,4 @@ struct Editor_Set_Terrain_Tool : public Editor_Tool, public MultiSelect {
 	bool operates_on_triangles() const throw () {return true;};
 };
 
-#endif // __S__EDITOR_SET_TERRAIN_TOOL
+#endif

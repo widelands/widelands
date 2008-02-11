@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_SERVER_PROTO_PACKET_CHATMESSAGE_H
-#define __S__GAME_SERVER_PROTO_PACKET_CHATMESSAGE_H
+#ifndef GAME_SERVER_PROTO_PACKET_CHATMESSAGE_H
+#define GAME_SERVER_PROTO_PACKET_CHATMESSAGE_H
 
 #include "game_server_proto_packet.h"
 
@@ -32,14 +32,14 @@ public Game_Server_Protocol_Packet
 {
 	Game_Server_Protocol_Packet_ChatMessage
 		(const uint8_t flags, const std::string & msg);
-      virtual ~Game_Server_Protocol_Packet_ChatMessage();
+	virtual ~Game_Server_Protocol_Packet_ChatMessage();
 
-      virtual uint16_t get_id();
+	virtual uint16_t get_id();
 
-      virtual void recv(Game_Server_Connection*, Network_Buffer* buffer);
-      virtual void send(Network_Buffer* buffer);
-      virtual void write_reply(Network_Buffer*);
-      virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
+	virtual void recv        (Game_Server_Connection *, Network_Buffer *);
+	virtual void send                                  (Network_Buffer *);
+	virtual void write_reply                           (Network_Buffer *);
+	virtual void handle_reply(Game_Server_Connection *, Network_Buffer *);
 
 private:
 	uint8_t m_flags;
@@ -49,4 +49,4 @@ private:
 
 
 
-#endif // __S__GAME_SERVER_PROTO_PACKET_HELLO_H
+#endif

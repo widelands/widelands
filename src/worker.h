@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WORKER_H
-#define __S__WORKER_H
+#ifndef WORKER_H
+#define WORKER_H
 
 #include "idleworkersupply.h"
 #include "worker_descr.h"
@@ -44,8 +44,7 @@ class Worker : public Bob {
 	MO_DESCR(Worker_Descr);
 
 	struct Action {
-		typedef bool (Worker::*execute_t)(Game* g, Bob::State* state,
-		                                  const Action* act);
+		typedef bool (Worker::*execute_t)(Game *, Bob::State *, const Action *);
 
 		enum {
 			walkObject, //  walk to objvar1
@@ -146,10 +145,8 @@ public:
 
 
 protected:
-	void draw_inner(const Editor_Game_Base &, RenderTarget &,
-	                const Point) const;
-	virtual void draw(const Editor_Game_Base &, RenderTarget &,
-	                  const Point) const;
+	void draw_inner(Editor_Game_Base const &, RenderTarget &, Point) const;
+	virtual void draw(Editor_Game_Base const &, RenderTarget &, Point) const;
 	virtual void init_auto_task(Game* g);
 
 	bool does_carry_ware() {return m_carried_item.is_set();}
@@ -228,4 +225,4 @@ private:
 
 };
 
-#endif // __S__WORKER_H
+#endif

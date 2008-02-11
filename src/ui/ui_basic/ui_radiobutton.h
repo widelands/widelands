@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_ui_radiobutton_h
-#define included_ui_radiobutton_h
+#ifndef UI_RADIOBUTTON_H
+#define UI_RADIOBUTTON_H
 
 #include "ui_signal.h"
 
@@ -41,7 +41,7 @@ struct Radiogroup {
 
 	Signal changed;
 	Signal1<int32_t> changedto;
-   Signal clicked; // clicked without things changed
+	Signal clicked; //  clicked without things changed
 
 	int32_t add_button
 		(Panel * parent,

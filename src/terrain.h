@@ -470,17 +470,19 @@ template<typename T> static void render_road_horiz
 		int32_t y = (centery >> 16) - 2;
 
 		for (int32_t i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
-			*(reinterpret_cast<T *>
-			  (static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
-			  +
-			  x)
+			*
+			(reinterpret_cast<T *>
+			 (static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
+			 +
+			 x)
 			=
-			*(reinterpret_cast<const T *>
-			  (static_cast<const uint8_t *>(src.get_pixels())
-			   +
-			   i * src.get_pitch())
+			*
+			(reinterpret_cast<const T *>
+			 (static_cast<const uint8_t *>(src.get_pixels())
 			  +
-			  sx);
+			  i * src.get_pitch())
+			 +
+			 sx);
 	}
 }
 
@@ -500,17 +502,19 @@ template<typename T> static void render_road_vert
 		int32_t x = (centerx >> 16) - 2;
 
 		for (int32_t i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
-			*(reinterpret_cast<T *>
-			  (static_cast<uint8_t *>(dst.get_pixels()) +  y * dst.get_pitch())
-			  +
-			  x)
+			*
+			(reinterpret_cast<T *>
+			 (static_cast<uint8_t *>(dst.get_pixels()) +  y * dst.get_pitch())
+			 +
+			 x)
 			=
-			*(reinterpret_cast<const T *>
-			  (static_cast<const uint8_t *>(src.get_pixels())
-			   +
-			   sy * src.get_pitch())
+			*
+			(reinterpret_cast<const T *>
+			 (static_cast<const uint8_t *>(src.get_pixels())
 			  +
-			  i);
+			  sy * src.get_pitch())
+			 +
+			 i);
 	}
 }
 
@@ -572,7 +576,8 @@ template<typename T> static void draw_field_int
 			case Widelands::Road_Busy:
 				render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
 				break;
-			default: assert(false);
+			default:
+				assert(false);
 			}
 		}
 		else if
@@ -594,7 +599,8 @@ template<typename T> static void draw_field_int
 			case Widelands::Road_Busy:
 				render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
 				break;
-			default: assert(false);
+			default:
+				assert(false);
 			}
 		}
 		else if
@@ -614,7 +620,8 @@ template<typename T> static void draw_field_int
 			case Widelands::Road_Busy:
 				render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
 				break;
-			default: assert(false);
+			default:
+				assert(false);
 			}
 		}
 		else if

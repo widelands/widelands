@@ -45,35 +45,35 @@ void Game_Saver::save() throw (_wexception) {
 
 	m_fs.EnsureDirectoryExists("binary");
 
-   log("Game: Writing Preload Data ... ");
+	log("Game: Writing Preload Data ... ");
 	{Game_Preload_Data_Packet                     p; p.Write(m_fs, m_game, 0);}
-   log(" done\n");
+	log(" done\n");
 
-   log("Game: Writing Game Class Data ... ");
+	log("Game: Writing Game Class Data ... ");
 	{Game_Game_Class_Data_Packet                  p; p.Write(m_fs, m_game, 0);}
-   log(" done\n");
+	log(" done\n");
 
-   log("Game: Writing Player Info ... ");
+	log("Game: Writing Player Info ... ");
 	{Game_Player_Info_Data_Packet                 p; p.Write(m_fs, m_game, 0);}
-   log(" done\n");
+	log(" done\n");
 
-   log("Game: Writing Map Data!\n");
+	log("Game: Writing Map Data!\n");
 	Game_Map_Data_Packet                          M; M.Write(m_fs, m_game, 0);
-   log("Game: Writing Map Data done!\n");
+	log("Game: Writing Map Data done!\n");
 
 	Map_Map_Object_Saver * const mos = M.get_map_object_saver();
 
-   log("Game: Writing Player Economies Info ... ");
+	log("Game: Writing Player Economies Info ... ");
 	{Game_Player_Economies_Data_Packet            p; p.Write(m_fs, m_game, mos);}
-   log(" done\n");
+	log(" done\n");
 
-   log("Game: Writing Command Queue Data ... ");
+	log("Game: Writing Command Queue Data ... ");
 	{Game_Cmd_Queue_Data_Packet                   p; p.Write(m_fs, m_game, mos);}
-   log(" done\n");
+	log(" done\n");
 
-   log("Game: Writing Interactive Player Data ... ");
+	log("Game: Writing Interactive Player Data ... ");
 	{Game_Interactive_Player_Data_Packet          p; p.Write(m_fs, m_game, mos);}
-   log(" done\n");
+	log(" done\n");
 }
 
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __INTERVAL_H
-#define __INTERVAL_H
+#ifndef INTERVAL_H
+#define INTERVAL_H
 
 template<typename T> struct interval {
 	interval(const T Min, const T Max) : min(Min), max(Max) {}

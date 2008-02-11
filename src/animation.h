@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_animation_h
-#define included_animation_h
+#ifndef ANIMATION_H
+#define ANIMATION_H
 
 #include "instances.h"
 #include "rgbcolor.h"
@@ -67,8 +67,11 @@ struct AnimationManager {
 	~AnimationManager();
 
 	void flush();
-	uint32_t get(const char *directory, Section *s, const char *picnametempl = 0,
-	         const EncodeData *encdefaults = 0);
+	uint32_t get
+		(char       const * directory,
+		 Section          *,
+		 char       const * picnametempl = 0,
+		 EncodeData const * = 0);
 
 	// for use by the graphics subsystem
 	uint32_t get_nranimations() const;
@@ -112,4 +115,4 @@ private:
 extern AnimationManager g_anim;
 
 
-#endif // included_animation_h
+#endif

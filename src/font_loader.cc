@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,25 +48,24 @@ Font Loader IMPLEMENTATION
 
 TTF_Font* Font_Loader::open_font(const std::string& name, int32_t size) {
 	// Load the TrueType Font
-   std::string filename="fonts/";
-   filename+=name;
+	std::string filename = "fonts/";
+	filename            += name;
 
-   // we must keep this File Read open, otherwise the
-   // following calls are crashing. do not know why...
+	//  We must keep this File Read open, otherwise the following calls are
+	//  crashing. do not know why...
 	FileRead* fr=new FileRead();
 	fr->Open(*g_fs, filename.c_str());
 
-   m_freads.push_back(fr);
+	m_freads.push_back(fr);
 
-   SDL_RWops* ops = SDL_RWFromMem(fr->Data(0), fr->GetSize());
+	SDL_RWops * const ops = SDL_RWFromMem(fr->Data(0), fr->GetSize());
 	if (!ops)
 		throw wexception("Couldn't load font!: RWops Pointer invalid");
 
-   TTF_Font* font = TTF_OpenFontIndexRW(ops, 1, size, 0);
-
-	if (!font)
+	if (TTF_Font * const font = TTF_OpenFontIndexRW(ops, 1, size, 0))
+		return font;
+	else
 		throw wexception("Couldn't load font!: %s", TTF_GetError());
-	return font;
 }
 
 /*
@@ -93,7 +92,7 @@ TTF_Font* Font_Loader::get_font(std::string name, int32_t size) {
 
 	m_font_table.insert(std::pair<std::string, TTF_Font*>(key_name, font));
 
-   return font;
+	return font;
 }
 
 /*
@@ -108,8 +107,8 @@ void Font_Loader::clear_fonts() {
 	m_font_table.clear();
 
 	for (uint32_t i = 0; i < m_freads.size(); ++i)
-      delete m_freads[i];
-   m_freads.resize(0);
+		delete m_freads[i];
+	m_freads.resize(0);
 }
 
 

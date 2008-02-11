@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 	catch (Parameter_error &e) { //handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
 		WLApplication::show_usage();
-			delete g_app;
+		delete g_app;
 
 		return 0;
 	}
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save(e.what());
-			delete g_app;
+		delete g_app;
 
 		return 1;
 	}
@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save(e.what());
-			delete g_app;
+		delete g_app;
 
 		return 1;
 	}
@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save("Unhandled exception");
-			delete g_app;
+		delete g_app;
 
 		return 1;
 	}

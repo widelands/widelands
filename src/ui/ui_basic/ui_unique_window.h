@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__UNIQUE_WINDOW_H
-#define __S__UNIQUE_WINDOW_H
+#ifndef UI_UNIQUE_WINDOW_H
+#define UI_UNIQUE_WINDOW_H
 
 #include "ui_window.h"
 
@@ -40,7 +40,8 @@ struct UniqueWindow : public Window {
 		~Registry();
 	};
 
-      UniqueWindow(Panel* parent, Registry* reg, int32_t w, int32_t h, std::string title);
+	UniqueWindow
+		(Panel * parent, Registry *, int32_t w, int32_t h, std::string title);
 	virtual ~UniqueWindow();
 
 	bool get_usedefaultpos() {return m_usedefaultpos;}

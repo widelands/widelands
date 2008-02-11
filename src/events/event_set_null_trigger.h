@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_SET_NULL_TRIGGER_H
-#define __S__EVENT_SET_NULL_TRIGGER_H
+#ifndef EVENT_SET_NULL_TRIGGER_H
+#define EVENT_SET_NULL_TRIGGER_H
 
 #include "event.h"
 #include "trigger/trigger_null.h"
@@ -40,7 +40,7 @@ struct Event_Set_Null_Trigger : public Event, public Referencer<Trigger> {
 
 	int32_t option_menu(Editor_Interactive &);
 
-      State run(Game*);
+	State run(Game *);
 
 	void Read (Section &, Editor_Game_Base       &);
 	void Write(Section &, Editor_Game_Base const &) const;
@@ -55,8 +55,8 @@ struct Event_Set_Null_Trigger : public Event, public Referencer<Trigger> {
 	Trigger_Null * get_trigger() const {return m_trigger;}
 
 private:
-      Trigger_Null* m_trigger;
-      bool          m_setto;
+	Trigger_Null * m_trigger;
+	bool           m_setto;
 };
 
 };

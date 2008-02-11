@@ -545,7 +545,7 @@ const char *Section::get_next_bool(const char *name, bool *value)
 		return 0;
 
 	if (value)
-      *value = v->get_bool();
+		*value = v->get_bool();
 	return v->get_name();
 }
 
@@ -565,7 +565,7 @@ const char *Section::get_next_string(const char *name, const char **value)
 		return 0;
 
 	if (value)
-      *value = v->get_string();
+		*value = v->get_string();
 	return v->get_name();
 }
 
@@ -693,9 +693,7 @@ Profile::Profile(const char* filename, const char *global_section, int32_t error
  *
  * Free allocated resources
  */
-Profile::~Profile()
-{
-}
+Profile::~Profile() {}
 
 /** Profile::error(const char *fmt, ...)
  *
@@ -1083,7 +1081,7 @@ void Profile::write
 
 				if (multiline)
 					// End of multilined text.
-					tempstr += "\"";
+					tempstr += '"';
 
 				fw.Printf("%s=\"%s\"\n", v->get_name(), tempstr.c_str());
 			} else

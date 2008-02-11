@@ -56,9 +56,7 @@ Scrollbar::Scrollbar(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h
 	{
 		m_pic_minus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_left.png");
 		m_pic_plus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_right.png");
-	}
-	else
-	{
+	} else {
 		m_pic_minus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_up.png");
 		m_pic_plus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_down.png");
 	}
@@ -67,7 +65,7 @@ Scrollbar::Scrollbar(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h
 	m_pic_buttons = g_gr->get_picture(PicMod_UI,  "pics/but3.png");
 
 	m_time_nextact = 0;
-   m_force_draw = false;
+	m_force_draw = false;
 
 	set_think(true);
 }
@@ -212,7 +210,8 @@ void Scrollbar::action(Area area)
 	case MinusPage: diff = -m_pagesize; break;
 	case Plus: diff = 1; break;
 	case PlusPage: diff = m_pagesize; break;
-	default: return;
+	default:
+		return;
 	}
 
 	pos = static_cast<int32_t>(m_pos) + diff;
@@ -240,7 +239,7 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 	}
 
 	// Draw border
-   RGBColor black(0, 0, 0);
+	RGBColor black(0, 0, 0);
 
 	if (area != m_pressed)
 	{

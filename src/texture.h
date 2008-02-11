@@ -28,8 +28,8 @@
  * This contains all the road textures needed to render roads
  */
 struct Road_Textures {
-   uint32_t pic_road_normal;
-   uint32_t pic_road_busy;
+	uint32_t pic_road_normal;
+	uint32_t pic_road_busy;
 };
 
 /** class Texture

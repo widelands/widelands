@@ -43,18 +43,18 @@ void Map_EventChain_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   // Skip, if no triggers saved
-   FileRead fr;
+	//  Skip, if no triggers saved.
+	FileRead fr;
 	if (!fr.TryOpen(fs, "event_chain"))
-      return;
+		return;
 
 	Map                 & map = egbase->map();
 	Manager<EventChain> & mcm = map.mcm();
 	Manager<Event>      & mem = map.mem();
 	Manager<Trigger>    & mtm = map.mtm();
-   Profile prof;
+	Profile prof;
 	try {
 		prof.read("event_chain", 0, fs);
 		int32_t const packet_version =
@@ -70,7 +70,6 @@ throw (_wexception)
 						throw wexception("duplicated");
 					}
 
-         // Repeating
 					event_chain.m_repeating = s->get_safe_bool("repeating");
 
 					{ //  TriggerConditional
@@ -144,7 +143,6 @@ throw (_wexception)
 						}
 					}
 
-         // Current event
 					event_chain.m_curevent = s->get_safe_int("current_event");
 
 					{ //  state
@@ -179,11 +177,10 @@ void Map_EventChain_Data_Packet::Write
  Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   Profile prof;
+	Profile prof;
 	prof.create_section("global")->set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-   // Now write all the event chains
 	Manager<EventChain> const & mcm = egbase->map().mcm();
 	Manager<EventChain>::Index const nr_eventchains = mcm.size();
 	for (Manager<EventChain>::Index i = 0; i < nr_eventchains; ++i) {
@@ -238,19 +235,18 @@ throw (_wexception)
 			}
 		}
 
-      // Which is the current event
 		s.set_int("current_event", e.m_curevent);
 
-      // State
 		switch (e.m_state) {
 		case EventChain::INIT:    s.set_string("state", "init");    break;
 		case EventChain::RUNNING: s.set_string("state", "running"); break;
 		case EventChain::DONE:    s.set_string("state", "done");    break;
-		default: assert(false);
+		default:
+			assert(false);
 		}
 	}
 
-   prof.write("event_chain", false, fs);
+	prof.write("event_chain", false, fs);
 }
 
 };

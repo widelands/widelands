@@ -55,13 +55,13 @@ struct Objective : public Named, public Referencer<Trigger> {
 	bool get_is_visible()       const throw ()    {return m_is_visible;}
 	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
 
-      // Get the trigger that is attached to this
-      // Trigger is created by Editor or on load
+	//  Get the trigger that is attached to this
+	//  Trigger is created by Editor or on load
 	Trigger * get_trigger() const {return m_trigger;}
 
-      // Setting the values below is only a good idea in editor
+	//  Setting the values below is only a good idea in editor.
 	void set_trigger(Trigger * const tr) {
-         assert(!m_trigger);
+		assert(!m_trigger);
 		if (tr)
 			reference(*tr);
 		m_trigger = tr;

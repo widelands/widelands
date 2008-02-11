@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,9 +30,10 @@ m_are_graphics_loaded(false),
 m_showbuildhelp(false),
 m_callback(0)
 #ifndef NDEBUG
- //  No need to initialize (see comment for get_a_job_id) other than to shut up
- //  Valgrind.
-, m_current_job_id(Job_Id::Null())
+//  No need to initialize (see comment for get_a_job_id) other than to shut up
+//  Valgrind.
+,
+m_current_job_id(Job_Id::Null())
 #endif
 {}
 
@@ -109,8 +110,8 @@ uint8_t Overlay_Manager::get_overlays
  * can than be reused without needing to be delete()ed
  */
 void Overlay_Manager::reset() {
-   m_are_graphics_loaded=false;
-   m_callback=0;
+	m_are_graphics_loaded = false;
+	m_callback = 0;
 
 	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
 	for (Registered_Overlays_Map * it = m_overlays; it != overlays_end; ++it)
@@ -314,5 +315,5 @@ void Overlay_Manager::load_graphics() {
 		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y / 2);
 	}
 
-   m_are_graphics_loaded=true;
+	m_are_graphics_loaded = true;
 }

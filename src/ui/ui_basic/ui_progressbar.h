@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_ui_progressbar_h
-#define included_ui_progressbar_h
+#ifndef UI_PROGRESSBAR_H
+#define UI_PROGRESSBAR_H
 
 #include "ui_panel.h"
 
@@ -56,4 +56,4 @@ private:
 };
 };
 
-#endif // included_ui_progressbar_h
+#endif

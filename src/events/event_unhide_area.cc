@@ -41,8 +41,7 @@ Event::State Event_Unhide_Area::run(Game* game) {
 		  (game->map().get_fcoords(m_player_area), m_player_area.radius)),
 		 false);
 
-   m_state = DONE;
-   return m_state;
+	return m_state = DONE;
 }
 
 void Event_Unhide_Area::Read(Section & s, Editor_Game_Base & egbase) {

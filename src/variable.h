@@ -49,34 +49,34 @@ struct Variable {
 	virtual std::string get_string_representation() const = 0;
 
 private:
-      std::string   m_name;
-      bool           m_delete_protected;
+	std::string m_name;
+	bool        m_delete_protected;
 };
 
 struct Variable_Int : public Variable {
 	Variable_Int(bool const t = 0) : Variable(t) {m_value = 0;}
 
 	int32_t get_value() const {return m_value;}
-      void set_value(int32_t t) {m_value = t;}
+	void set_value(int32_t const t) {m_value = t;}
 	std::string get_string_representation() const {
-         char buffer[256];
-         sprintf(buffer, "%i", m_value);
-         return buffer;
-		}
+		char buffer[256];
+		sprintf(buffer, "%i", m_value);
+		return buffer;
+	}
 
 private:
-      int32_t            m_value;
+	int32_t m_value;
 };
 
 struct Variable_String : public Variable {
 	Variable_String(bool const t = 0) : Variable(t) {}
 
 	std::string const & get_value() const {return m_value;}
-      void set_value(const char* t) {m_value = t;}
+	void set_value(const char* t) {m_value = t;}
 	std::string get_string_representation() const {return m_value;}
 
 private:
-      std::string            m_value;
+	std::string m_value;
 };
 
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIBEDATA_H
-#define __S__TRIBEDATA_H
+#ifndef TRIBEDATA_H
+#define TRIBEDATA_H
 
 #include <stdint.h>
 
@@ -68,4 +68,4 @@
 #define FRONTIER_HSX   4
 #define FRONTIER_HSY   19
 
-#endif /* __S__TRIBEDATA_H */
+#endif

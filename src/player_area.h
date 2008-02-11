@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__PLAYER_AREA_H
-#define __S__PLAYER_AREA_H
+#ifndef PLAYER_AREA_H
+#define PLAYER_AREA_H
 
 #include "widelands_geometry.h"
 
@@ -36,4 +36,4 @@ template <typename Area_type = Area<> > struct Player_Area : public Area_type {
 
 };
 
-#endif // __S__PLAYER_AREA_H
+#endif

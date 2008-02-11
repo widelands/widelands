@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ show_as_overlays(this, get_inner_w() - STATEBOX_WIDTH - 5, 250)
 	if (get_usedefaultpos())
 		center_to_parent();
 
-   think();
+	think(); //  FIXME check whether this call is really necessary
 }
 
 
@@ -89,14 +89,14 @@ show_as_overlays(this, get_inner_w() - STATEBOX_WIDTH - 5, 250)
  * think: updates the chat area
  */
 void GameChatMenu::think() {
-	const std::vector<NetGame::Chat_Message>* msges = m_player.get_chatmsges();
-   std::string str;
+	std::vector<NetGame::Chat_Message>const & msges = *m_player.get_chatmsges();
+	std::string str;
 
-	for (uint32_t i = 0; i < msges->size(); ++i) {
-		str += m_player.get_game()->player((*msges)[i].plrnum).get_name();
-      str += ": ";
-      str += (*msges)[i].msg;
-      str += "\n";
+	for (uint32_t i = 0; i < msges.size(); ++i) {
+		str += m_player.get_game()->player(msges[i].plrnum).get_name();
+		str += ": ";
+		str += msges[i].msg;
+		str += '\n';
 	}
 
 	chatbox.set_text(str.c_str());
@@ -112,11 +112,11 @@ void GameChatMenu::clicked_send() {
 	std::string str = editbox.get_text();
 
 	if (str.size() && m_netgame) {
-      NetGame::Chat_Message t;
+		NetGame::Chat_Message t;
 
-      t.plrnum = m_player.get_player_number();
-      t.msg = str;
-      m_netgame->send_chat_message(t);
-      editbox.set_text("");
+		t.plrnum = m_player.get_player_number();
+		t.msg = str;
+		m_netgame->send_chat_message(t);
+		editbox.set_text("");
 	}
 }

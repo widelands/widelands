@@ -41,15 +41,14 @@ void Map_Trigger_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   // Skip, if no triggers saved
-   FileRead fr;
-	if (!fr.TryOpen(fs, "trigger"))
-      return;
+	FileRead fr;
+	if (!fr.TryOpen(fs, "trigger")) //  Skip, if no triggers saved.
+		return;
 
-   Profile prof;
-   prof.read("trigger", 0, fs);
+	Profile prof;
+	prof.read("trigger", 0, fs);
 
 	try {
 		int32_t const packet_version =
@@ -86,11 +85,10 @@ void Map_Trigger_Data_Packet::Write
 throw (_wexception)
 {
 
-   Profile prof;
+	Profile prof;
 	prof.create_section("global")->set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-   // Now write all the triggers
 	Manager<Trigger> const & mtm = egbase->map().mtm();
 	Manager<Trigger>::Index const nr_triggers = mtm.size();
 	for (Manager<Trigger>::Index i = 0; i < nr_triggers; ++i) {
@@ -101,9 +99,7 @@ throw (_wexception)
 		trigger.Write(s, *egbase);
 	}
 
-   prof.write("trigger", false, fs);
-
-   // done
+	prof.write("trigger", false, fs);
 }
 
 };

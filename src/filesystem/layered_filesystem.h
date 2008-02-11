@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LAYEREDFILESYSTEM_H
-#define LAYEREDFILESYSTEM_H
+#ifndef LAYERED_FILESYSTEM_H
+#define LAYERED_FILESYSTEM_H
 
 #include "filesystem.h"
 

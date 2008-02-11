@@ -58,51 +58,55 @@ throw (_wexception)
 	World      & world      = map.world  ();
 	const Extent map_extent = map.extent ();
 
-   // First packet version
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		for (;;) {
-         uint32_t reg=fr.Unsigned32();
-			if (reg == 0xffffffff)
-				break;
-			const char * const owner = fr.CString ();
-			const char * const name  = fr.CString ();
-			const Coords position    = fr.Coords32(map_extent);
+	try {
+		const uint16_t packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			for (;;) {
+				uint32_t const reg = fr.Unsigned32();
+				if (reg == 0xffffffff)
+					break;
+				const char * const owner = fr.CString ();
+				const char * const name  = fr.CString ();
+				const Coords position    = fr.Coords32(map_extent);
 
-			assert(not ol->is_object_known(reg));
+				assert(not ol->is_object_known(reg));
 
-			if (strcmp(owner, "world")) {
-				if (not skip) { //  We do not load player immovables in normal maps.
-               // It is a tribe immovable
-					egbase->manually_load_tribe(owner);
-					if (const Tribe_Descr * const tribe = egbase->get_tribe(owner))
-					{
-						int32_t idx = tribe->get_immovable_index(name);
+				if (strcmp(owner, "world")) {
+					if (not skip) { //  do not load player immovables in normal maps
+						//  It is a tribe immovable
+						Tribe_Descr const & tribe =
+							egbase->manually_load_tribe(owner);
+						int32_t idx = tribe.get_immovable_index(name);
 						if (idx != -1)
 							ol->register_object
 								(egbase,
 								 reg,
-								 &egbase->create_immovable(position, idx, tribe));
+								 &egbase->create_immovable(position, idx, &tribe));
 						else
 							throw wexception
-								("Unknown tribe-immovable %s in map, asked for tribe: "
-								 "%s!",
-								 name, owner);
+								("tribe %s does not define immovable type \"%s\"",
+								 owner, name);
+					}
+				} else {
+					//  world immovable
+					int32_t const idx = world.get_immovable_index(name);
+					if (idx != -1) {
+						Immovable & immovable =
+							egbase->create_immovable(position, idx, 0);
+						if (not skip)
+							ol->register_object(egbase, reg, &immovable);
 					} else
-						throw wexception("Unknown tribe %s in map!", owner);
+						throw wexception
+							("world %u does not define immovable type \"%s\"",
+							 world.get_name(), name);
 				}
-			} else {
-            // World immovable
-            int32_t idx=world.get_immovable_index(name);
-				if (idx==-1)
-					throw wexception("Unknown world immovable %s in map!", name);
-				Immovable & immovable = egbase->create_immovable(position, idx, 0);
-				if (not skip) ol->register_object(egbase, reg, &immovable);
 			}
-		}
-	} else
-		throw wexception
-			("Unknown version %i in Map_Immovable_Data_Packet!", packet_version);
+		} else
+			throw wexception
+				("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("reading immovable data: %s", e.what());
+	}
 }
 
 

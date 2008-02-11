@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,9 +101,11 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
  *
  * sparam1 = ware name
  */
-void WorkerProgram::parse_createitem(Worker_Descr *, Worker::Action * act,
-                                     Parser *,
-                                     const std::vector<std::string> & cmd)
+void WorkerProgram::parse_createitem
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: createitem <ware type>");
@@ -122,20 +124,22 @@ void WorkerProgram::parse_createitem(Worker_Descr *, Worker::Action * act,
  * iparam1 = area
  * sparam1 = resource
  */
-void WorkerProgram::parse_mine(Worker_Descr *, Worker::Action * act, Parser *,
-                               const std::vector<std::string>& cmd)
+void WorkerProgram::parse_mine
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 3)
-      throw wexception("Usage: mine <ware type> <area>");
+		throw wexception("Usage: mine <ware type> <area>");
 
-   act->function = &Worker::run_mine;
-   act->sparam1 = cmd[1];
-   char* endp;
-   act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
+	act->function = &Worker::run_mine;
+	act->sparam1 = cmd[1];
+	char * endp;
+	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
 
 	if (endp && *endp)
-      throw wexception("Bad area '%s'", cmd[2].c_str());
-
+		throw wexception("Bad area '%s'", cmd[2].c_str());
 }
 
 
@@ -147,9 +151,11 @@ void WorkerProgram::parse_mine(Worker_Descr *, Worker::Action * act, Parser *,
  *
  * sparamv = possible bobs
  */
-void WorkerProgram::parse_setdescription(Worker_Descr *, Worker::Action * act,
-                                         Parser *,
-                                         const std::vector<std::string> & cmd)
+void WorkerProgram::parse_setdescription
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() < 2)
 		throw wexception("Usage: setdescription <bob name> <bob name> ...");
@@ -169,9 +175,11 @@ void WorkerProgram::parse_setdescription(Worker_Descr *, Worker::Action * act,
  *
  * sparamv = possible bobs
  */
-void WorkerProgram::parse_setbobdescription(Worker_Descr *, Worker::Action * act,
-                                            Parser *,
-                                            const std::vector<std::string>& cmd)
+void WorkerProgram::parse_setbobdescription
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() < 2)
 		throw wexception("Usage: setbobdescription <bob name> <bob name> ...");
@@ -203,9 +211,11 @@ void WorkerProgram::parse_setbobdescription(Worker_Descr *, Worker::Action * act
  * iparam2 = attribute predicate (if >= 0)
  * sparam1 = type
  */
-void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
-                                     Parser *,
-                                     const std::vector<std::string> & cmd)
+void WorkerProgram::parse_findobject
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	uint32_t i;
 
@@ -232,8 +242,8 @@ void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
 		} else if (key == "type") {
 			act->sparam1 = value;
 		} else
-			throw wexception("Bad findobject predicate %s:%s",
-			                 key.c_str(), value.c_str());
+			throw wexception
+				("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
 	}
 
 	if (act->iparam1 <= 0)
@@ -264,9 +274,11 @@ void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
  * iparam2 = FindNodeSize::sizeXXX
  * sparam1 = Resource
  */
-void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
-                                    Parser *,
-                                    const std::vector<std::string>& cmd)
+void WorkerProgram::parse_findspace
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	uint32_t i;
 
@@ -335,8 +347,11 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
  *
  * iparam1 = walkXXX
  */
-void WorkerProgram::parse_walk(Worker_Descr *, Worker::Action * act, Parser *,
-                               const std::vector<std::string> & cmd)
+void WorkerProgram::parse_walk
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: walk <where>");
@@ -396,8 +411,11 @@ void WorkerProgram::parse_animation
  *
  * iparam1 = 0: don't drop item on flag, 1: do drop item on flag
  */
-void WorkerProgram::parse_return(Worker_Descr *, Worker::Action * act, Parser *,
-                                 const std::vector<std::string> &)
+void WorkerProgram::parse_return
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const &)
 {
 	act->function = &Worker::run_return;
 	act->iparam1 = 1; // drop any item on our owner's flag
@@ -411,8 +429,11 @@ void WorkerProgram::parse_return(Worker_Descr *, Worker::Action * act, Parser *,
  *
  * sparam1 = object command name
  */
-void WorkerProgram::parse_object(Worker_Descr *, Worker::Action * act, Parser *,
-                                 const std::vector<std::string> & cmd)
+void WorkerProgram::parse_object
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: object <program name>");
@@ -426,8 +447,11 @@ void WorkerProgram::parse_object(Worker_Descr *, Worker::Action * act, Parser *,
  * Plant an immovable on the current position. The immovable type must have
  * been selected by a previous command (i.e. setdescription)
  */
-void WorkerProgram::parse_plant(Worker_Descr *, Worker::Action * act, Parser *,
-                                const std::vector<std::string> &)
+void WorkerProgram::parse_plant
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const &)
 {
 	act->function = &Worker::run_plant;
 }
@@ -437,9 +461,11 @@ void WorkerProgram::parse_plant(Worker_Descr *, Worker::Action * act, Parser *,
  * Plants a bob (critter usually, maybe also worker later on). The immovable
  * type must have been selected by a previous command (i.e. setbobdescription).
  */
-void WorkerProgram::parse_create_bob(Worker_Descr *, Worker::Action * act,
-                                     Parser *,
-                                     const std::vector<std::string> &)
+void WorkerProgram::parse_create_bob
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const &)
 {
 	act->function = &Worker::run_create_bob;
 }
@@ -448,9 +474,11 @@ void WorkerProgram::parse_create_bob(Worker_Descr *, Worker::Action * act,
 /**
  * Simply remove the currently selected object - make no fuss about it.
  */
-void WorkerProgram::parse_removeobject(Worker_Descr *, Worker::Action * act,
-                                       Parser *,
-                                       const std::vector<std::string> &)
+void WorkerProgram::parse_removeobject
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const &)
 {
 	act->function = &Worker::run_removeobject;
 }
@@ -466,9 +494,11 @@ void WorkerProgram::parse_removeobject(Worker_Descr *, Worker::Action * act,
  * iparam2 = radius
  * sparam1 = subcommand
  */
-void WorkerProgram::parse_geologist(Worker_Descr *, Worker::Action * act,
-                                    Parser *,
-                                    const std::vector<std::string> & cmd)
+void WorkerProgram::parse_geologist
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	char* endp;
 
@@ -493,9 +523,11 @@ void WorkerProgram::parse_geologist(Worker_Descr *, Worker::Action * act,
  * Check resources at the current position, and plant a marker object
  * when possible.
  */
-void WorkerProgram::parse_geologist_find(Worker_Descr *, Worker::Action * act,
-                                         Parser *,
-                                         const std::vector<std::string> & cmd)
+void WorkerProgram::parse_geologist_find
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: geologist-find");
@@ -504,8 +536,11 @@ void WorkerProgram::parse_geologist_find(Worker_Descr *, Worker::Action * act,
 }
 
 
-void WorkerProgram::parse_playFX(Worker_Descr *, Worker::Action * act, Parser *,
-                                 const std::vector<std::string> & cmd)
+void WorkerProgram::parse_playFX
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size()<2 || cmd.size()>3)
 		throw wexception("Usage: playFX <fx_name> [priority]");

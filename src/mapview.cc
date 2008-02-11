@@ -107,8 +107,6 @@ void Map_View::draw(RenderTarget* dst)
 
 /*
 ===============
-Map_View::set_viewpoint
-
 Set the viewpoint to the given pixel coordinates
 ===============
 */
@@ -122,7 +120,7 @@ void Map_View::set_viewpoint(Point vp)
 
 	warpview.call(m_viewpoint.x, m_viewpoint.y);
 
-   m_complete_redraw_needed = true;
+	m_complete_redraw_needed = true;
 }
 
 
@@ -139,12 +137,11 @@ void Map_View::stop_dragging() {
  * Left-press:    field action window
  */
 bool Map_View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
-	if (btn == SDL_BUTTON_LEFT) {
+	if        (btn == SDL_BUTTON_LEFT)  {
 		track_sel(Point(x, y));
 
-			fieldclicked.call();
-	}
-	else if (btn == SDL_BUTTON_RIGHT) {
+		fieldclicked.call();
+	} else if (btn == SDL_BUTTON_RIGHT) {
 		m_dragging = true;
 		grab_mouse(true);
 		WLApplication::get()->set_mouse_lock(true);

@@ -48,42 +48,43 @@ Parse a resource description section.
 */
 void Resource_Descr::parse(Section *s, std::string basedir)
 {
-   const char* string;
+	const char * string;
 
+	m_name = s->get_name();
+	m_descrname = s->get_string("name", s->get_name());
+	m_is_detectable = s->get_bool("detectable", true);
 
-   m_name=s->get_name();
-   m_descrname = s->get_string("name", s->get_name());
-   m_is_detectable=s->get_bool("detectable", true);
-
-   m_max_amount = s->get_safe_int("max_amount");
+	m_max_amount = s->get_safe_int("max_amount");
 	while (s->get_next_string("editor_pic", &string)) {
-      Editor_Pic i;
+		Editor_Pic i;
 
 		const std::vector<std::string> args(split_string(string, " \t"));
 		if (args.size() != 1 and args.size() != 2) {
-         log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
-         continue;
+			log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
+			continue;
 		}
 
-      i.picname = basedir + "/pics/";
-      i.picname += args[0];
-      i.upperlimit = -1;
+		i.picname = basedir + "/pics/";
+		i.picname += args[0];
+		i.upperlimit = -1;
 
 		if (args.size() >= 2) {
-         char* endp;
+			char* endp;
 
-         i.upperlimit = strtol(args[1].c_str(), &endp, 0);
+			i.upperlimit = strtol(args[1].c_str(), &endp, 0);
 
 			if (endp && *endp) {
-            log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
-            continue;
+				log
+					("Resource '%s' has bad editor_pic=%s\n",
+					 m_name.c_str(), string);
+				continue;
 			}
 		}
 
-      m_editor_pics.push_back(i);
+		m_editor_pics.push_back(i);
 	}
 	if (!m_editor_pics.size())
-      throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
+		throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
 }
 
 
@@ -163,12 +164,9 @@ World::World(std::string const & name) : m_basedir("worlds/" + name) {
 		g_fs->RemoveFileSystem(fs);
 
 		i18n::release_textdomain();
-	}
-	catch (std::exception &e)
-	{
+	} catch (std::exception const & e) {
 		// tag with world name
-		throw wexception("Error loading world %s: %s",
-		                 name.c_str(), e.what());
+		throw wexception("Error loading world %s: %s", name.c_str(), e.what());
 	}
 }
 
@@ -248,16 +246,12 @@ void World::parse_resources()
 
 	snprintf(fname, sizeof(fname), "%s/resconf", m_basedir.c_str());
 
-	try
-	{
+	try {
 		Profile prof(fname);
-      Section* section;
-
-      Resource_Descr* descr;
-		while ((section = prof.get_next_section(0))) {
-         descr=new Resource_Descr();
-         descr->parse(section, m_basedir);
-         m_resources.add(descr);
+		while (Section * const section = prof.get_next_section(0)) {
+			Resource_Descr & descr = *new Resource_Descr();
+			descr.parse(section, m_basedir);
+			m_resources.add(&descr);
 		}
 	}
 	catch (std::exception &e) {
@@ -362,20 +356,20 @@ bool World::exists_world(std::string worldname)
  * World::get_all_worlds()
  */
 void World::get_all_worlds(std::vector<std::string>* retval) {
-   retval->resize(0);
+	retval->resize(0);
 
-   // get all worlds
-   filenameset_t m_worlds;
-   g_fs->FindFiles("worlds", "*", &m_worlds);
+	//  get all worlds
+	filenameset_t m_worlds;
+	g_fs->FindFiles("worlds", "*", &m_worlds);
 	for
 		(filenameset_t::iterator pname = m_worlds.begin();
 		 pname != m_worlds.end();
 		 ++pname)
 	{
-      std::string world=*pname;
-      world.erase(0, 7); // remove worlds/
+		std::string world = *pname;
+		world.erase(0, 7); //  remove worlds/
 		if (World::exists_world(world.c_str()))
-         retval->push_back(world);
+			retval->push_back(world);
 	}
 }
 
@@ -402,32 +396,32 @@ m_texture           (0)
 
 	// Parse the default resource
 	if (const char * str = s->get_string("def_resources", 0)) {
-      std::istringstream str1(str);
-      std::string resource;
-      int32_t amount;
-	   str1 >> resource >> amount;
-      int32_t res=resources->get_index(resource.c_str());;
+		std::istringstream str1(str);
+		std::string resource;
+		int32_t amount;
+		str1 >> resource >> amount;
+		int32_t const res = resources->get_index(resource.c_str());;
 		if (res == -1)
 			throw wexception
 				("Terrain %s has valid resource %s which doesn't exist in world!",
 				 s->get_name(), resource.c_str());
-      m_default_resources=res;
-      m_default_amount=amount;
+		m_default_resources = res;
+		m_default_amount    = amount;
 	}
 
-   // Parse valid resources
-   std::string str1=s->get_string("resources", "");
+	//  parse valid resources
+	std::string str1 = s->get_string("resources", "");
 	if (str1 != "") {
-      int32_t nres=1;
+		int32_t nres = 1;
 		const std::string::const_iterator str1_end = str1.end();
 		for (std::string::const_iterator it = str1.begin(); it != str1_end; ++it)
 			if (*it == ',') ++nres;
 
-      m_nr_valid_resources=nres;
-		m_valid_resources = new uint8_t[nres];
-      std::string curres;
+		m_nr_valid_resources =nres;
+		m_valid_resources    = new uint8_t[nres];
+		std::string curres;
 		uint32_t i = 0;
-      int32_t cur_res=0;
+		int32_t cur_res = 0;
 		while (i <= str1.size()) {
 			if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {
 				++i;
@@ -440,12 +434,11 @@ m_texture           (0)
 						("Terrain %s has valid resource %s which doesn't exist in "
 						 "world!",
 						 s->get_name(), curres.c_str());
-            m_valid_resources[cur_res++]=res;
-            curres="";
-			} else {
-            curres.append(1, str1[i]);
-			}
-         i++;
+				m_valid_resources[cur_res++]=res;
+				curres = "";
+			} else
+				curres.append(1, str1[i]);
+			++i;
 		}
 	}
 
@@ -490,9 +483,9 @@ Terrain_Descr::~Terrain_Descr()
 {
 	if (m_picnametempl)
 		free(m_picnametempl);
-      delete[] m_valid_resources;
-   m_nr_valid_resources=0;
-   m_valid_resources=0;
+	delete[] m_valid_resources;
+	m_nr_valid_resources = 0;
+	m_valid_resources    = 0;
 }
 
 

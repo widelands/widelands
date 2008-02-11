@@ -47,14 +47,14 @@ void Map_Waredata_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   FileRead fr;
+	FileRead fr;
 	try {fr.Open(fs, "binary/ware_data");} catch (...) {return;}
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) for (;;) {
-         uint32_t reg=fr.Unsigned32();
+		uint32_t reg = fr.Unsigned32();
 		if (reg == 0xffffffff)
 			break; // end of wares
 		if (upcast(WareInstance, ware, ol->get_object_by_file_index(reg))) {
@@ -97,19 +97,18 @@ throw (_wexception)
 					throw wexception
 						("Map_Waredata_Data_Packet: location is not PlayerImmovable "
 						 "or Worker");
-         // Do not touch supply or transfer
+				//  Do not touch supply or transfer.
 
-         // m_transfer_nextstep
 				if (uint32_t const nextstep = fr.Unsigned32()) {
-            assert(ol->is_object_known(reg));
-            ware->m_transfer_nextstep=ol->get_object_by_file_index(nextstep);
+					assert(ol->is_object_known(reg)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+					ware->m_transfer_nextstep=ol->get_object_by_file_index(nextstep);
 				} else
-            ware->m_transfer_nextstep = static_cast<Map_Object *>(0);
+					ware->m_transfer_nextstep = static_cast<Map_Object *>(0);
 
-         // Do some kind of init
+				//  Do some kind of init.
 				if (upcast(Game, game, egbase))
 					ware->set_location(game, location);
-         ol->mark_object_as_loaded(ware);
+				ol->mark_object_as_loaded(ware);
 			} else
 				throw wexception
 					("Map_Waredata_Data_Packet: location with serial number %u is "
@@ -130,38 +129,37 @@ void Map_Waredata_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
-   std::vector<uint32_t> ids;
+	//  We transverse the map and whenever we find a suitable object, we check
+	//  if it has wares of some kind.
+	std::vector<uint32_t> ids;
 	Map   const & map        = egbase->map();
 	Field const & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field) {
-         // First, check for Flags
+		// First, check for Flags
 		if (upcast(Flag const, fl, field->get_immovable()))
-            for (int32_t i = 0; i < fl->m_item_filled; ++i) {
-               assert(os->is_object_known(fl->m_items[i].item));
-               write_ware(&fw, egbase, os, fl->m_items[i].item);
+			for (int32_t i = 0; i < fl->m_item_filled; ++i) {
+				assert(os->is_object_known(fl->m_items[i].item));
+				write_ware(&fw, egbase, os, fl->m_items[i].item);
 			}
 
-         // Now, check for workers
+		//  Now, check for workers.
 		for (Bob const * b = field->get_first_bob(); b; b = b->get_next_bob())
 			if (upcast(Worker const, worker, b))
 				if
 					(WareInstance const * const ware =
 					 worker->get_carried_item(egbase))
 				{
-                  assert(os->is_object_known(ware));
-                  write_ware(&fw, egbase, os, ware);
+					assert(os->is_object_known(ware));
+					write_ware(&fw, egbase, os, ware);
 				}
 	}
-   fw.Unsigned32(0xffffffff); // End of wares
+	fw.Unsigned32(0xffffffff); // End of wares
 
-   fw.Write(fs, "binary/ware_data");
-   // DONE
+	fw.Write(fs, "binary/ware_data");
 }
 
 /*
@@ -173,37 +171,25 @@ void Map_Waredata_Data_Packet::write_ware
 	 Map_Map_Object_Saver * os,
 	 WareInstance   const * ware)
 {
-   // First, id
-   fw->Unsigned32(os->get_object_file_index(ware));
+	fw->Unsigned32(os->get_object_file_index(ware));
 
-   // Location
 	if (Map_Object const * const obj = ware->m_location.get(egbase)) {
-      assert(os->is_object_known(obj));
-      fw->Unsigned32(os->get_object_file_index(obj));
+		assert(os->is_object_known(obj));
+		fw->Unsigned32(os->get_object_file_index(obj));
 	} else
-      fw->Unsigned32(0);
+		fw->Unsigned32(0);
 
-   // Economy is set by set_location()
+	// Economy is set by set_location()
 
 	fw->Signed32(ware->descr_index());
-   // Description is set manually
 
-   // Skip Supply
-
-   // Transfer is handled automatically
-//   if (ware->m_transfer)
-//      fw->Unsigned8(1);
-//   else
-//      fw->Unsigned8(0);
-//
-   // m_transfer_nextstep
 	if (Map_Object const * const obj = ware->m_transfer_nextstep.get(egbase)) {
-      assert(os->is_object_known(obj));
-      fw->Unsigned32(os->get_object_file_index(obj));
+		assert(os->is_object_known(obj));
+		fw->Unsigned32(os->get_object_file_index(obj));
 	} else
-      fw->Unsigned32(0);
+		fw->Unsigned32(0);
 
-   os->mark_object_as_saved(ware);
+	os->mark_object_as_saved(ware);
 }
 
 };

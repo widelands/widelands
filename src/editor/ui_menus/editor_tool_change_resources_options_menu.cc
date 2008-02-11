@@ -165,7 +165,8 @@ m_increase_tool(increase_tool)
 }
 
 
-void Editor_Tool_Change_Resources_Options_Menu::clicked_button(const Button n) {
+void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
+{
 	assert
 		(m_increase_tool.get_change_by()
 		 ==
@@ -181,13 +182,15 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(const Button n) {
 	case    Set_To_Increase:
 		set_to += set_to < std::numeric_limits<int32_t>::max();       break;
 	case    Set_To_Decrease: set_to    -= 0 < set_to;
+	default:
+		assert(false);
 	}
 	m_increase_tool.set_change_by(change_by);
 	m_increase_tool.decrease_tool().set_change_by(change_by);
 	m_increase_tool.set_tool().set_set_to(set_to);
 
-   select_correct_tool();
-   update();
+	select_correct_tool();
+	update();
 }
 
 /*
@@ -205,9 +208,9 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 	map.overlay_manager().register_overlay_callback_function
 		(&Editor_Change_Resource_Tool_Callback, static_cast<void *>(&map), n);
 	map.recalc_whole_map();
-   select_correct_tool();
+	select_correct_tool();
 
-   update();
+	update();
 }
 
 /*
@@ -218,7 +221,7 @@ Update all the textareas, so that they represent the correct values
 ===========
 */
 void Editor_Tool_Change_Resources_Options_Menu::update() {
-   char buf[250];
+	char buf[250];
 	sprintf(buf, "%i", m_increase_tool.get_change_by());
 	m_change_by_value.set_text(buf);
 	sprintf(buf, "%i", m_increase_tool.set_tool().get_set_to());

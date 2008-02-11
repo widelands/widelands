@@ -100,15 +100,7 @@ void Font_Handler::draw_string
 	//Fontrender takes care of caching
 	if (widget_cache == Widget_Cache_None) {
 		// look if text is cached
-		_Cache_Infos  ci = {
-		                       0,
-		                       text,
-			&font,
-		                       fg,
-		                       bg,
-		                       0,
-		                       0,
-		};
+		_Cache_Infos  ci = {0, text, &font, fg, bg, 0, 0};
 
 		std::list<_Cache_Infos>::iterator i=find(m_cache.begin(), m_cache.end(), ci);
 
@@ -169,11 +161,13 @@ uint32_t Font_Handler::create_text_surface
  const std::string & text, const Align align, const int32_t wrap,
  const int32_t caret, bool transparent)
 {
-	return convert_sdl_surface
-		(*(wrap > 0 ?
-		   create_static_long_text_surface(f, fg, bg, text, align, wrap, 0, caret)
-		   :
-		   create_single_line_text_surface(f, fg, bg, text, align, caret)),
+	return
+		convert_sdl_surface
+		(*
+		 (wrap > 0 ?
+		  create_static_long_text_surface(f, fg, bg, text, align, wrap, 0, caret)
+		  :
+		  create_single_line_text_surface(f, fg, bg, text, align, caret)),
 		 bg, transparent);
 }
 
@@ -254,7 +248,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 			if (new_text_pos >= caret - i) {
 				int32_t caret_line_pos = caret - cur_text_pos - i;
 				std::string text_caret_pos = line.substr(0, caret_line_pos);
-					render_caret(font, *surface, text_caret_pos);
+				render_caret(font, *surface, text_caret_pos);
 				caret = -1;
 			}
 			else {
@@ -458,8 +452,17 @@ void Font_Handler::draw_richtext
 					if (text_it->get_font_decoration() == "underline")
 						font_style |= TTF_STYLE_UNDERLINE;
 
-					SDL_Surface *rend_word = draw_string_sdl_surface(text_it->get_font_face(), text_it->get_font_size(), text_it->get_font_color(), bg,
-					                         str_word, Align_Left, -1, font_style, text_it->get_line_spacing());
+					SDL_Surface * rend_word =
+						draw_string_sdl_surface
+						(text_it->get_font_face (),
+						 text_it->get_font_size (),
+						 text_it->get_font_color(),
+						 bg,
+						 str_word,
+						 Align_Left,
+						 -1,
+						 font_style,
+						 text_it->get_line_spacing());
 
 					//is there a break before this word
 					//TODO: comparison between signed and unsigned !
@@ -595,8 +598,17 @@ void Font_Handler::draw_richtext
 
 SDL_Surface* Font_Handler::render_space(Text_Block &block, RGBColor bg, int32_t style) {
 	SDL_Surface *rend_space = 0;
-	rend_space = draw_string_sdl_surface(block.get_font_face(), block.get_font_size(), block.get_font_color(),
-	                                     bg, " ", Align_Left, -1, style, block.get_line_spacing());
+	rend_space =
+		draw_string_sdl_surface
+		(block.get_font_face (),
+		 block.get_font_size (),
+		 block.get_font_color(),
+		 bg,
+		 " ",
+		 Align_Left,
+		 -1,
+		 style,
+		 block.get_line_spacing());
 	return rend_space;
 }
 

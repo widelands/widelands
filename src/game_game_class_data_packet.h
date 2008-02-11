@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_GAME_CLASS_DATA_PACKET_H
-#define __S__GAME_GAME_CLASS_DATA_PACKET_H
+#ifndef GAME_GAME_CLASS_DATA_PACKET_H
+#define GAME_GAME_CLASS_DATA_PACKET_H
 
 #include "game_data_packet.h"
 

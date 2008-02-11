@@ -232,8 +232,9 @@ void Journal::start_recording(std::string filename)
 	catch (std::ofstream::failure e) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
-		log("Problem while opening record file %s for writing.\n",
-		    m_recordname.c_str());
+		log
+			("Problem while opening record file %s for writing.\n",
+			 m_recordname.c_str());
 		stop_recording();
 		throw Journalfile_error(m_recordname);
 	}
@@ -281,8 +282,9 @@ void Journal::start_playback(std::string filename)
 	catch (std::ifstream::failure e) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
-		log("ERROR: problem while opening playback file for reading. "
-		    "Playback deactivated.\n");
+		log
+			("ERROR: problem while opening playback file for reading. Playback "
+			 "deactivated.\n");
 		stop_playback();
 		throw Journalfile_error(m_recordname);
 	}

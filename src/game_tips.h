@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_TIPS_H
-#define __S__GAME_TIPS_H
+#ifndef GAME_TIPS_H
+#define GAME_TIPS_H
 
 #include "ui_progresswindow.h"
 
@@ -62,4 +62,4 @@ private:
 	RGBColor             m_color;
 };
 
-#endif // __S__GAME_TIPS_H
+#endif

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_PRELOAD_DATA_PACKET_H
-#define __S__GAME_PRELOAD_DATA_PACKET_H
+#ifndef GAME_PRELOAD_DATA_PACKET_H
+#define GAME_PRELOAD_DATA_PACKET_H
 
 #include "game_data_packet.h"
 
@@ -36,12 +36,12 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	void Write(FileSystem &, Game *, Map_Map_Object_Saver  * = 0)
 		throw (_wexception);
 
-      const char* get_mapname() {return m_mapname.c_str();}
-      uint32_t get_gametime() {return m_gametime;}
+	char const * get_mapname() {return m_mapname.c_str();}
+	uint32_t get_gametime() {return m_gametime;}
 
 private:
-      std::string m_mapname;
-      uint32_t m_gametime;
+	std::string m_mapname;
+	uint32_t m_gametime;
 };
 
 };

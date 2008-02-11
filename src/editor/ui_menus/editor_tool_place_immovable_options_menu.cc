@@ -46,16 +46,16 @@ Editor_Tool_Options_Menu
 m_tabpanel(this, 0, 0, 1),
 m_pit     (pit)
 {
-   const int32_t space=5;
-   const int32_t xstart=5;
-   const int32_t ystart=15;
+	int32_t const space  =  5;
+	int32_t const xstart =  5;
+	int32_t const ystart = 15;
 	Widelands::World const & world = parent.egbase().map().world();
 	const Immovable_Descr::Index nr_immovables = world.get_nr_immovables();
 	const uint32_t immovables_in_row = std::min
 		(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_immovables)))), 6U);
 
 
-   m_tabpanel.set_snapparent(true);
+	m_tabpanel.set_snapparent(true);
 
 
 	uint32_t width = 0, height = 0;
@@ -72,17 +72,17 @@ m_pit     (pit)
 	const uint32_t tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 
-   int32_t ypos=ystart;
-   int32_t xpos=xstart;
+	int32_t ypos = ystart;
+	int32_t xpos = xstart;
 	uint32_t cur_x = immovables_in_row;
 	UI::Box * box = 0;
 	for (Immovable_Descr::Index i = 0; i < nr_immovables; ++cur_x, ++i) {
 		if (cur_x==immovables_in_row) {
-         cur_x=0;
-         ypos=ystart;
-         xpos=xstart;
+			cur_x = 0;
+			ypos = ystart;
+			xpos = xstart;
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
-         box->resize();
+			box->resize();
 			m_tabpanel.add(tab_icon, box);
 		}
 		assert(box);
@@ -98,10 +98,10 @@ m_pit     (pit)
 		cb.changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
 		m_checkboxes.push_back(&cb);
 		box->add(&cb, Align_Left);
-      box->add_space(space);
-      xpos+=width+1+space;
+		box->add_space(space);
+		xpos += width + 1 + space;
 	}
-   ypos+=height+1+space+5;
+	ypos += height + 1 + space + 5;
 
 	m_tabpanel.activate(0);
 	m_tabpanel.resize();
@@ -110,8 +110,10 @@ m_pit     (pit)
 /**
  * Cleanup
  */
-Editor_Tool_Place_Immovable_Options_Menu::~Editor_Tool_Place_Immovable_Options_Menu() {
-}
+Editor_Tool_Place_Immovable_Options_Menu::
+~Editor_Tool_Place_Immovable_Options_Menu
+()
+{}
 
 /**
  * called when one of the state boxes is toggled
@@ -128,18 +130,20 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 	else {
 		if (not multiselect) {
 			for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
-      // Disable all checkboxes
+			//  Disable all checkboxes
 			const uint32_t size = m_checkboxes.size();
 			//TODO: the uint32_t cast is ugly!
 			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n)) {
-         m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::do_nothing);
-         m_checkboxes[i]->set_state(false);
-         m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
+				m_checkboxes[i]->changedtoid.set
+					(this, &Editor_Tool_Place_Immovable_Options_Menu::do_nothing);
+				m_checkboxes[i]->set_state(false);
+				m_checkboxes[i]->changedtoid.set
+					(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
 			}
 		}
 
 		m_pit.enable(n, t);
-   select_correct_tool();
+		select_correct_tool();
 	}
 }
 

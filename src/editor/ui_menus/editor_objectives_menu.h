@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_OBJECTIVES_MENU_H
-#define __S__EDITOR_OBJECTIVES_MENU_H
+#ifndef EDITOR_OBJECTIVES_MENU_H
+#define EDITOR_OBJECTIVES_MENU_H
 
 #include "ui_table.h"
 #include "ui_unique_window.h"
@@ -39,15 +39,15 @@ class Editor_Objectives_Menu
 =============================
 */
 struct Editor_Objectives_Menu : public UI::UniqueWindow {
-      Editor_Objectives_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
-      virtual ~Editor_Objectives_Menu();
+	Editor_Objectives_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
+	virtual ~Editor_Objectives_Menu();
 
 private:
-      Editor_Interactive *m_parent;
+	Editor_Interactive                 * m_parent;
 	UI::Table<Widelands::Objective &> m_table;
 	UI::Button<Editor_Objectives_Menu> * m_edit_button;
 	UI::Button<Editor_Objectives_Menu> * m_delete_button;
-      UI::Textarea         *m_trigger;
+	UI::Textarea                       * m_trigger;
 
 	void insert_objective(Widelands::Objective &);
 	void clicked_ok  ();

@@ -47,19 +47,20 @@ Trigger_Null_Option_Menu::Trigger_Null_Option_Menu
 UI::Window(&parent, 0, 0, 164, 100, _("Null Trigger Options").c_str()),
 m_trigger (trigger)
 {
-   const int32_t offsx=5;
-   const int32_t offsy=25;
-   const int32_t spacing=5;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	int32_t const offsx   =  5;
+	int32_t const offsy   = 25;
+	int32_t const spacing =  5;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
-   new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-   m_name=new UI::Edit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
+	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+	m_name =
+		new UI::Edit_Box
+		(this, spacing + 50, posy, get_inner_w() - 50 - 2 * spacing, 20, 0, 0);
 	m_name->set_text(trigger.name().c_str());
 
-   // Buttons
-   posx=(get_inner_w()/2)-60-spacing;
-   posy+=20+spacing;
+	posx = get_inner_w() / 2 - 60 - spacing;
+	posy += 20 + spacing;
 	new UI::Button<Trigger_Null_Option_Menu>
 		(this,
 		 posx, posy, 60, 20,
@@ -67,7 +68,7 @@ m_trigger (trigger)
 		 &Trigger_Null_Option_Menu::clicked_ok, this,
 		 _("Ok"));
 
-   posx=(get_inner_w()/2)+spacing;
+	posx = get_inner_w() / 2 + spacing;
 
 	new UI::IDButton<Trigger_Null_Option_Menu, int32_t>
 		(this,
@@ -76,8 +77,8 @@ m_trigger (trigger)
 		 &Trigger_Null_Option_Menu::end_modal, this, 0,
 		 _("Cancel"));
 
-   set_inner_size(get_inner_w(), posy+20+spacing);
-   center_to_parent();
+	set_inner_size(get_inner_w(), posy + 20 + spacing);
+	center_to_parent();
 }
 
 
@@ -106,8 +107,9 @@ void Trigger_Null_Option_Menu::clicked_ok() {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
-					 _("There is another trigger registered with the name \"%s\". "
-					   "Choose another name.")
+					 _
+					 ("There is another trigger registered with the name \"%s\". "
+					  "Choose another name.")
 					 .c_str(),
 					 name);
 				UI::Modal_Message_Box mb
@@ -119,5 +121,5 @@ void Trigger_Null_Option_Menu::clicked_ok() {
 			}
 		m_trigger.set_name(name);
 	}
-      end_modal(1);
+	end_modal(1);
 }

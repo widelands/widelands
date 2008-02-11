@@ -52,8 +52,8 @@ WarehouseSupply::~WarehouseSupply()
 
 	// We're removed from the Economy. Therefore, the wares can simply
 	// be cleared out. The global inventory will be okay.
-	m_wares.clear();
-   m_workers.clear();
+	m_wares  .clear();
+	m_workers.clear();
 }
 
 /*
@@ -61,14 +61,14 @@ WarehouseSupply::~WarehouseSupply()
  * are to be handled
  */
 void WarehouseSupply::set_nrwares(int32_t i) {
-   assert(m_wares.get_nrwareids()==0);
+	assert(m_wares.get_nrwareids() == 0);
 
-   m_wares.set_nrwares(i);
+	m_wares.set_nrwares(i);
 }
 void WarehouseSupply::set_nrworkers(int32_t i) {
-   assert(m_workers.get_nrwareids()==0);
+	assert(m_workers.get_nrwareids() == 0);
 
-   m_workers.set_nrwares(i);
+	m_workers.set_nrwares(i);
 }
 
 
@@ -174,7 +174,7 @@ void WarehouseSupply::add_workers   (Ware_Index const id, uint32_t const count)
 	if (!m_workers.stock(id))
 		m_economy->add_worker_supply(id, this);
 
-   m_economy->add_workers(id, count);
+	m_economy->add_workers(id, count);
 	m_workers.add(id, count);
 }
 
@@ -194,7 +194,7 @@ void WarehouseSupply::remove_workers(Ware_Index const id, uint32_t const count)
 		return;
 
 	m_workers.remove(id, count);
-   m_economy->remove_workers(id, count);
+	m_economy->remove_workers(id, count);
 
 	if (!m_workers.stock(id))
 		m_economy->remove_worker_supply(id, this);
@@ -328,8 +328,10 @@ Warehouse_Descr::parse
 Parse the additional warehouse settings from the given profile and directory
 ===============
 */
-void Warehouse_Descr::parse(const char* directory, Profile* prof,
-	const EncodeData* encdata)
+void Warehouse_Descr::parse
+	(char       const * const directory,
+	 Profile          * const prof,
+	 EncodeData const * const encdata)
 {
 	Building_Descr::parse(directory, prof, encdata);
 
@@ -403,23 +405,27 @@ void Warehouse::init(Editor_Game_Base* gg)
 {
 	Building::init(gg);
 
-   m_supply->set_nrwares(get_owner()->tribe().get_nrwares());
-   m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());
+	m_supply->set_nrwares(get_owner()->tribe().get_nrwares());//  FIXME
+	m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());//  FIXME
 
 	if (upcast(Game, game, gg)) {
-		for (int32_t i = 0; i < get_owner()->tribe().get_nrwares(); ++i) {
-         Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
+		for (int32_t i = 0; i < get_owner()->tribe().get_nrwares(); ++i) {//  FIXME
+			Request & req =
+				*new Request
+				(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
-         req->set_idle(true);
+			req.set_idle(true);
 
-         m_requests.push_back(req);
+			m_requests.push_back(&req);
 		}
-      for (int32_t i = 0; i < get_owner()->tribe().get_nrworkers(); ++i) {
-         Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
+		for (int32_t i = 0; i < get_owner()->tribe().get_nrworkers(); ++i) {//  FIXME
+			Request & req =
+				*new Request
+				(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
 
-         req->set_idle(true);
+			req.set_idle(true);
 
-         m_requests.push_back(req);
+			m_requests.push_back(&req);
 		}
 		m_next_carrier_spawn = schedule_act(game, CARRIER_SPAWN_INTERVAL);
 		m_next_military_act  = schedule_act(game, 1000);
@@ -447,20 +453,17 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
 	if (upcast(Game, game, gg)) {
 
 		while (m_requests.size()) {
-         Request* req = m_requests[m_requests.size()-1];
-
-         m_requests.pop_back();
-
-         delete req;
+			delete m_requests.back();
+			m_requests.pop_back();
 		}
 
-      // all cached workers are unbound and freed
+		//  all cached workers are unbound and freed
 		while (m_incorporated_workers.size()) {
-         // If the game ends and this worker has been created before this warehouse, it might
-         // already be deleted. So do not try and free him
+			//  If the game ends and this worker has been created before this
+			//  warehouse, it might already be deleted. So do not try and free him
 			if (upcast(Worker, worker, m_incorporated_workers.begin()->get(gg)))
 				worker->reset_tasks(game);
-         m_incorporated_workers.erase(m_incorporated_workers.begin());
+			m_incorporated_workers.erase(m_incorporated_workers.begin());
 		}
 	}
 	if (const uint32_t conquer_raduis = get_conquers())
@@ -519,7 +522,7 @@ void Warehouse::act(Game* g, uint32_t data)
 		const int32_t ware = tribe.get_safe_worker_index("soldier");
 		const Worker_Descr & workerdescr = *tribe.get_worker_descr(ware);
 		const std::string & workername = workerdescr.name();
-         // Look if we got one in stock of those
+		//  Look if we got one in stock of those.
 		for
 			(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
 			 it != m_incorporated_workers.end();
@@ -529,18 +532,18 @@ void Warehouse::act(Game* g, uint32_t data)
 			if (worker.name() == workername) {
 				upcast(Soldier const, soldier, &worker);
 
-               // Soldier dead ...
+				//  Soldier dead ...
 				if (not soldier or soldier->get_current_hitpoints() == 0) {
 					m_incorporated_workers.erase(it);
-               m_supply->remove_workers(ware, 1);
-               continue;
+					m_supply->remove_workers(ware, 1);
+					continue;
 				}
-               // If warehouse can heal, this is the place to put it
+				//  If warehouse can heal, this is the place to put it.
 			}
 		}
-      m_next_military_act = schedule_act (g, 1000);
+		m_next_military_act = schedule_act (g, 1000);
 	}
-   Building::act(g, data);
+	Building::act(g, data);
 }
 
 
@@ -691,20 +694,19 @@ Worker * Warehouse::launch_worker(Game * game, int32_t const ware) {
 
    // Look if we got one in stock of those
 	const std::string & workername = workerdescr.name();
-   std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
+	std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
 		m_incorporated_workers.end();
 	for
-		(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
-		 ;
+		(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();;
 		 ++it)
 		if (it == m_incorporated_workers.end()) {
-      // None found, create a new one (if available)
+			// None found, create a new one (if available)
 			worker = &workerdescr.create(*game, owner(), *this, m_position);
 			break;
 		} else {
 			worker = dynamic_cast<Worker *>(it->get(game));
 			if (worker->name() == workername) {
-      // one found, make him available
+				//  one found, make him available
 				worker->reset_tasks(game);  //  forget everything you did
 				worker->set_location(this); //  back in a economy
 				m_incorporated_workers.erase(it);
@@ -712,7 +714,7 @@ Worker * Warehouse::launch_worker(Game * game, int32_t const ware) {
 			}
 		}
 
-   m_supply->remove_workers(ware, 1);
+	m_supply->remove_workers(ware, 1);
 
 
 	return worker;
@@ -757,23 +759,20 @@ Soldier* Warehouse::launch_soldier
 	}
 
 	soldier = 0;
-	if (i==m_incorporated_workers.end())
-	{
-      // None found, create a new one (if available)
+	if (i == m_incorporated_workers.end()) {
+		//  None found, create a new one (if available).
 		soldier = &dynamic_cast<Soldier &>
 			(workerdescr.create(*g, owner(), *this, m_position));
-	}
-	else
-	{
-      // one found, make him available
-		soldier = static_cast<Soldier*>(i->get(g));
+	} else {
+		//  one found, make him available
+		soldier = dynamic_cast<Soldier *>(i->get(g));
 		soldier->reset_tasks(g); // Forget everything you did
 		soldier->mark(false);
-      soldier->set_location(this);
+		soldier->set_location(this);
 		m_incorporated_workers.erase(i);
 	}
 
-   m_supply->remove_workers(ware, 1);
+	m_supply->remove_workers(ware, 1);
 
 	return soldier;
 }
@@ -793,7 +792,6 @@ void Warehouse::mark_as_used
 	assert(m_supply->stock_workers(ware));
 
 	Worker_Descr* workerdescr;
-	Soldier* soldier;
 
 	workerdescr = get_owner()->tribe().get_worker_descr(ware);
    // Look if we got one in stock of those
@@ -806,17 +804,17 @@ void Warehouse::mark_as_used
 	{
 		if (static_cast<Worker*>(i->get(g))->name()==workername)
 		{
-			soldier = static_cast<Soldier*>(i->get(g));
-			if (!soldier->is_marked())
+			Soldier & soldier = dynamic_cast<Soldier &>(*i->get(g));
+			if (!soldier.is_marked())
 			{
 				if
 					(not r
 					 or
 					 r->check
-					 (soldier->get_level(atrHP),
-					  soldier->get_level(atrAttack),
-					  soldier->get_level(atrDefense),
-					  soldier->get_level(atrEvade)))
+					 (soldier.get_level(atrHP),
+					  soldier.get_level(atrAttack),
+					  soldier.get_level(atrDefense),
+					  soldier.get_level(atrEvade)))
 					break;
 				else
 					continue;
@@ -824,23 +822,14 @@ void Warehouse::mark_as_used
 		}
 	}
 
-	soldier = 0;
-	if (i==m_incorporated_workers.end())
-	{
-	}
-	else
-	{
-      // one found
-		soldier = static_cast<Soldier*>(i->get(g));
-		soldier->mark(true);
-	}
+	if (i != m_incorporated_workers.end())
+		// one found
+		dynamic_cast<Soldier &>(*i->get(g)).mark(true);
 }
 
 
 /*
 ===============
-Warehouse::incorporate_worker
-
 This is the opposite of launch_worker: destroy the worker and add the
 appropriate ware to our warelist
 ===============
@@ -854,19 +843,20 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 
    // We remove carrier, but we keep other workers around
 	if (dynamic_cast<Carrier const *>(w)) {
-      w->remove(g);
-      w=0;
+		w->remove(g);
+		w = 0;
 	} else {
-         // This is to prevent having soldiers that only are used one time and become allways 'marked'
+		//  This is to prevent having soldiers that only are used one time and
+		//  become allways 'marked'
 		if (upcast(Soldier, soldier, w))
 			soldier->mark(false);
 
-      sort_worker_in(g, w->name(), w);
-      w->set_location(0); // No more in a economy
-      w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
+		sort_worker_in(g, w->name(), w);
+		w->set_location(0); // No more in a economy
+		w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
 	}
 
-   m_supply->add_workers(index, 1);
+	m_supply->add_workers(index, 1);
 
 	if (item)
 		incorporate_item(g, item);
@@ -879,7 +869,7 @@ void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Work
       // We insert this worker, but to keep some consistency in ordering, we tell him
       // where to insert
 
-      std::vector<Object_Ptr>::iterator i=m_incorporated_workers.begin();
+	std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
 
 	while
 		(i!= m_incorporated_workers.end()
@@ -887,9 +877,9 @@ void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Work
 		 workername <= dynamic_cast<Worker &>(*i->get(g)).name())
 		++i;
 	if (i == m_incorporated_workers.end()) {
-         m_incorporated_workers.insert(i, w);
-         return;
-		}
+		m_incorporated_workers.insert(i, w);
+		return;
+	}
 
 	while
 		(i != m_incorporated_workers.end()
@@ -897,7 +887,7 @@ void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Work
 		 w->get_serial() <= dynamic_cast<Worker &>(*i->get(g)).get_serial())
 		++i;
 
-      m_incorporated_workers.insert(i, w);
+	m_incorporated_workers.insert(i, w);
 }
 
 /*
@@ -996,7 +986,7 @@ int32_t Warehouse::get_soldiers_passing
 {
 	int32_t number = 0;
 
-log ("Warehouse::get_soldiers_passing :");
+	log ("Warehouse::get_soldiers_passing :");
 
 	assert(m_supply->stock_workers(w));
 
@@ -1072,7 +1062,7 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) {
 					molog
 						(" %s: Need more %s for creation\n",
 						 &worker_name, input_name);
-               enought_wares = false;
+					enought_wares = false;
 				}
 			} else {
 				input_name = it->name.c_str();
@@ -1081,7 +1071,7 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) {
 					molog
 						(" %s: Need more %s for creation\n",
 						 &worker_name, input_name);
-               enought_wares = false;
+					enought_wares = false;
 				}
 			}
 		}
@@ -1153,9 +1143,9 @@ bool Warehouse::has_soldiers()
 // A warhouse couldn't be conquered, this building is destroyed ...
 void Warehouse::conquered_by (Player* pl)
 {
-   molog ("Warehouse::conquered_by- ");
-   assert (pl);
-   molog ("destroying\n");
+	molog ("Warehouse::conquered_by- ");
+	assert (pl);
+	molog ("destroying\n");
 	cleanup(&pl->egbase());
 }
 

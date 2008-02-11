@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef include_waresdisplay_h
-#define include_waresdisplay_h
+#ifndef WARESDISPLAY_H
+#define WARESDISPLAY_H
 
 #include "warelist.h"
 
@@ -45,9 +45,9 @@ struct WaresDisplay : public UI::Panel {
 		WaresPerRow = 5,
 	};
 
-   enum wdType {
-      WORKER,
-      WARE
+	enum wdType {
+		WORKER,
+		WARE
 	};
 
 public:
@@ -59,8 +59,8 @@ public:
 	bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
-   void add_warelist(Widelands::WareList const *, wdType);
-   void remove_all_warelists();
+	void add_warelist(Widelands::WareList const *, wdType);
+	void remove_all_warelists();
 
 protected:
 	virtual void draw(RenderTarget* dst);
@@ -80,4 +80,4 @@ private:
 	vector_type         m_warelists;
 };
 
-#endif // include_waresdisplay_h
+#endif

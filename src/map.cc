@@ -101,17 +101,11 @@ m_pathfields     (0),
 m_overlay_manager(0)
 {}
 
-/*
-===============
-Map::~Map
 
-cleanups
-===============
-*/
 Map::~Map()
 {
-   cleanup();
-      delete m_overlay_manager;
+	cleanup();
+	delete m_overlay_manager;
 }
 
 void Map::recalc_border(const FCoords fc) {
@@ -149,7 +143,7 @@ void Map::recalc_for_field_area(const Area<FCoords> area) {
 	assert(area.y < m_height);
 	assert(m_fields <= area.field);
 	assert            (area.field < m_fields + max_index());
-   assert(m_overlay_manager);
+	assert(m_overlay_manager);
 
 	{ //  First pass.
 		MapRegion<Area<FCoords> > mr(*this, area);
@@ -175,7 +169,6 @@ void Map::recalc_for_field_area(const Area<FCoords> area) {
 
 /*
 ===========
-Map::recalc_whole_map()
 
 this recalculates all data that needs to be recalculated.
 This is only needed when all fields have change, this means
@@ -185,32 +178,32 @@ the overlays have completly changed
 */
 void Map::recalc_whole_map()
 {
-   assert(m_overlay_manager);
+	assert(m_overlay_manager);
 
-   // Post process the map in the necessary two passes to calculate
-   // brightness and building caps
-   FCoords f;
+	//  Post process the map in the necessary two passes to calculate
+	//  brightness and building caps
+	FCoords f;
 
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
-         f = get_fcoords(Coords(x, y));
+			f = get_fcoords(Coords(x, y));
 			uint32_t radius;
 			check_neighbour_heights(f, radius);
-         recalc_brightness(f);
-         recalc_border(f);
-         recalc_fieldcaps_pass1(f);
+			recalc_brightness     (f);
+			recalc_border         (f);
+			recalc_fieldcaps_pass1(f);
 		}
 
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
 			f = get_fcoords(Coords(x, y));
-         recalc_fieldcaps_pass2(f);
+			recalc_fieldcaps_pass2(f);
 		}
 
-   // Now only recaluclate the overlays
+	//  Now only recaluclate the overlays.
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x)
-	      get_overlay_manager()->recalc_field_overlays(get_fcoords(Coords(x, y)));
+			overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
 }
 
 /*
@@ -224,14 +217,15 @@ void Map::recalc_default_resources() {
 	const World & w = world();
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
-         FCoords f, f1;
-         f=get_fcoords(Coords(x, y));
-         // only on unset fields
-         if (f.field->get_resources()!=0 || f.field->get_resources_amount()) continue;
-         std::map<int32_t, int32_t> m;
-         int32_t amount=0;
+			FCoords f, f1;
+			f = get_fcoords(Coords(x, y));
+			//  only on unset nodes
+			if (f.field->get_resources() != 0 || f.field->get_resources_amount())
+				continue;
+			std::map<int32_t, int32_t> m;
+			int32_t amount = 0;
 
-         // This field
+			//  this node
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f.field->terrain_r());
 				++m[terr.get_default_resources()];
@@ -243,9 +237,10 @@ void Map::recalc_default_resources() {
 				amount += terd.get_default_resources_amount();
 			}
 
-         // If one of the neighbours is unpassable, count its resource stronger
-         // top left neigbour
-         get_neighbour(f, Map_Object::WALK_NW, &f1);
+			//  If one of the neighbours is unpassable, count its resource
+			//  stronger
+			//  top left neigbour
+			get_neighbour(f, Map_Object::WALK_NW, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
 				const int8_t resr =
@@ -271,8 +266,8 @@ void Map::recalc_default_resources() {
 				amount += terd.get_default_resources_amount();
 			}
 
-         // top right neigbour
-         get_neighbour(f, Map_Object::WALK_NE, &f1);
+			//  top right neigbour
+			get_neighbour(f, Map_Object::WALK_NE, &f1);
 			{
 				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
 				const int8_t resd =
@@ -286,8 +281,8 @@ void Map::recalc_default_resources() {
 				amount += terd.get_default_resources_amount();
 			}
 
-         // left neighbour
-         get_neighbour(f, Map_Object::WALK_W, &f1);
+			//  left neighbour
+			get_neighbour(f, Map_Object::WALK_W, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
 				const int8_t resr =
@@ -301,24 +296,24 @@ void Map::recalc_default_resources() {
 				amount += terr.get_default_resources_amount();
 			}
 
-         int32_t lv=0;
-         int32_t res=0;
-         std::map<int32_t, int32_t>::iterator i=m.begin();
+			int32_t lv  = 0;
+			int32_t res = 0;
+			std::map<int32_t, int32_t>::iterator i = m.begin();
 			while (i != m.end()) {
 				if (i->second > lv) {
-               lv=i->second;
-               res=i->first;
+					lv  = i->second;
+					res = i->first;
 				}
-            i++;
+				++i;
 			}
-         amount/=6;
+			amount /= 6;
 
 			if (res == -1 or not amount) {
-            f.field->set_resources(0, 0);
-            f.field->set_starting_res_amount(0);
+				f.field->set_resources(0, 0);
+				f.field->set_starting_res_amount(0);
 			} else {
-            f.field->set_resources(res, amount);
-            f.field->set_starting_res_amount(amount);
+				f.field->set_resources(res, amount);
+				f.field->set_starting_res_amount(amount);
 			}
 
 		}
@@ -337,20 +332,20 @@ void Map::cleanup() {
 	m_width = m_height = 0;
 	m_pathcycle = 0;
 
-      free(m_fields);
+	free(m_fields);
 	m_fields = 0;
-		free(m_pathfields);
+	free(m_pathfields);
 	m_pathfields = 0;
-      free(m_starting_pos);
+	free(m_starting_pos);
 	m_starting_pos = 0;
-		delete m_world;
+	delete m_world;
 	m_world = 0;
 
-   m_scenario_tribes.clear();
-   m_scenario_names.clear();
+	m_scenario_tribes.clear();
+	m_scenario_names.clear();
 
 	if (m_overlay_manager)
-      m_overlay_manager->reset();
+		m_overlay_manager->reset();
 
 	mom().remove_all();
 	mcm().remove_all();
@@ -394,10 +389,10 @@ void Map::cleanup() {
    // Remove all extra datas. Pay attention here, maybe some freeing would be needed
 #ifdef DEBUG
 	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
-      assert(m_extradatainfos[i].type == Extradata_Info::PIC) ;
+		assert(m_extradatainfos[i].type == Extradata_Info::PIC) ;
 	}
 #endif
-   m_extradatainfos.resize(0);
+	m_extradatainfos.resize(0);
 }
 
 /*
@@ -434,7 +429,7 @@ void Map::create_empty_map
 			field->set_terrains(default_terrains);
 		}
 	}
-   recalc_whole_map();
+	recalc_whole_map();
 }
 
 /*
@@ -446,10 +441,10 @@ Set the size of the map. This should only happen once during initial load.
 */
 void Map::set_size(const uint32_t w, const uint32_t h)
 {
-   assert(!m_fields);
+	assert(!m_fields);
 	assert(!m_pathfields);
 
-   m_width = w;
+	m_width  = w;
 	m_height = h;
 
 	m_fields = static_cast<Field *>(malloc(sizeof(Field) * w * h));
@@ -467,10 +462,10 @@ void Map::set_size(const uint32_t w, const uint32_t h)
  */
 const std::string & Map::get_scenario_player_tribe(const Player_Number p) const
 {
-   assert(m_scenario_tribes.size() == get_nrplayers());
+	assert(m_scenario_tribes.size() == get_nrplayers());
 	assert(p);
 	assert(p <= get_nrplayers());
-   return m_scenario_tribes[p - 1];
+	return m_scenario_tribes[p - 1];
 }
 
 const std::string & Map::get_scenario_player_name(const Player_Number p) const
@@ -592,7 +587,7 @@ once during initial load.
 */
 void Map::load_world()
 {
-   assert(!m_world);
+	assert(!m_world);
 
 	m_world = new World(m_worldname);
 }
@@ -976,36 +971,36 @@ Map::recalc_brightness
 Fetch the slopes to neighbours and call the actual logic in Field
 ===============
 */
-void Map::recalc_brightness(FCoords f)
-{
-	FCoords d;
-   int32_t l, r, tl, tr, bl, br;
+void Map::recalc_brightness(FCoords const f) {
+	int32_t left, right, top_left, top_right, bottom_left, bottom_right;
+	Field::Height const height = f.field->get_height();
 
-   // left
-   get_ln(f, &d);
-   l = f.field->get_height() - d.field->get_height();
-
-   // right
-   get_rn(f, &d);
-   r = f.field->get_height() - d.field->get_height();
-
-   // top-left
-   get_tln(f, &d);
-   tl = f.field->get_height() - d.field->get_height();
-
-   // top-right
-   get_rn(d, &d);
-   tr = f.field->get_height() - d.field->get_height();
-
-   // bottom-left
-   get_bln(f, &d);
-   bl = f.field->get_height() - d.field->get_height();
-
-   // bottom-right
-   get_rn(d, &d);
-   br = f.field->get_height() - d.field->get_height();
-
-   f.field->set_brightness(l, r, tl, tr, bl, br);
+	{
+		FCoords neighbour;
+		get_ln(f, &neighbour);
+		left         = height - neighbour.field->get_height();
+	}
+	{
+		FCoords neighbour;
+		get_rn(f, &neighbour);
+		right        = height - neighbour.field->get_height();
+	}
+	{
+		FCoords neighbour;
+		get_tln(f, &neighbour);
+		top_left     = height - neighbour.field->get_height();
+		get_rn(neighbour, &neighbour);
+		top_right    = height - neighbour.field->get_height();
+	}
+	{
+		FCoords neighbour;
+		get_bln(f, &neighbour);
+		bottom_left  = height - neighbour.field->get_height();
+		get_rn(neighbour, &neighbour);
+		bottom_right = height - neighbour.field->get_height();
+	}
+	f.field->set_brightness
+		(left, right, top_left, top_right, bottom_left, bottom_right);
 }
 
 
@@ -1070,52 +1065,49 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 	if   (f_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
 
 
-   // 2) Passability
+	//  2) Passability
 
-   // 2a) If any of the neigbouring triangles is walkable this field is
-   //     walkable.
+	//  2a) If any of the neigbouring triangles is walkable this node is
+	//  walkable.
 	if (cnt_unpassable < 6)
-      caps |= MOVECAPS_WALK;
+		caps |= MOVECAPS_WALK;
 
-   // 2b) If all neighbouring triangles are water, the field is swimable
+	//  2b) If all neighbouring triangles are water, the node is swimable.
 	if (cnt_water == 6)
-      caps |= MOVECAPS_SWIM;
+		caps |= MOVECAPS_SWIM;
 
 
-   // 2c) [OVERRIDE] If any of the neighbouring triangles is really
-   //     "bad" (such as lava), we can neither walk nor swim to this field.
+	// 2c) [OVERRIDE] If any of the neighbouring triangles is really "bad" (such
+	// as lava), we can neither walk nor swim to this node.
 	if (cnt_acid)
-      caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+		caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 
-   // === everything below is used to check buildability ===
+	//  === everything below is used to check buildability ===
 
-   // 3) General buildability check: if a "robust" Map_Object is on this field
-   //    we cannot build anything on it.
-   //    Exception: we can build flags on roads
-   ;
-
+	//  3) General buildability check: if a "robust" Map_Object is on this node
+	//  we cannot build anything on it. Exception: we can build flags on roads.
 	if (BaseImmovable * imm = get_immovable(f))
 		if
 			(not dynamic_cast<Road const *>(imm)
 			 &&
 			 imm->get_size() >= BaseImmovable::SMALL)
 		{
-      // 3b) [OVERRIDE] check for "unpassable" Map_Objects
+			// 3b) [OVERRIDE] check for "unpassable" Map_Objects
 			if (!imm->get_passable())
-         caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+				caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 			goto end;
 		}
 
-   // 4) Flags
-   //    We can build flags on anything that's walkable and buildable, with some
-   //    restrictions
+	//  4) Flags
+	//  We can build flags on anything that's walkable and buildable, with some
+	//  restrictions
 	if (caps & MOVECAPS_WALK) {
-      // 4b) Flags must be at least 1 field apart
+		//  4b) Flags must be at least 2 edges apart
 		if
 			(find_immovables
 			 (Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
-         goto end;
-      caps |= BUILDCAPS_FLAG;
+			goto end;
+		caps |= BUILDCAPS_FLAG;
 	}
 end:
 	f.field->caps = static_cast<FieldCaps>(caps);
@@ -1207,9 +1199,9 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	if
 		(not (caps & MOVECAPS_WALK)
 		 or
-	    cnt_water
+		 cnt_water
 		 or
-	    (immovable and immovable->get_size() >= BaseImmovable::SMALL))
+		 (immovable and immovable->get_size() >= BaseImmovable::SMALL))
 		goto end;
 
 	// 3) We can only build something if there is a flag on the bottom-right neighbour
@@ -1246,68 +1238,70 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 				(Area<FCoords>(f, 2),
 				 &objectlist,
 				 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-	for (uint32_t i = 0; i < objectlist.size(); ++i) {
-		BaseImmovable *obj = objectlist[i].object;
-		Coords objpos = objectlist[i].coords;
-		int32_t dist = calc_distance(f, objpos);
+			for (uint32_t i = 0; i < objectlist.size(); ++i) {
+				BaseImmovable * obj = objectlist[i].object;
+				Coords objpos = objectlist[i].coords;
+				int32_t dist = calc_distance(f, objpos);
 
-		switch (obj->get_size()) {
-		case BaseImmovable::SMALL:
-			if (dist == 1) {
-				if (building > BUILDCAPS_MEDIUM) {
-					// a flag to the bottom-right does not reduce building size (obvious)
-					// additionally, roads going top-right and left from a big building's
-					// flag should be allowed
-					if
-						((objpos != br and objpos != r and objpos != bl)
-						 or
-						 (not dynamic_cast<Flag const *>(obj)
-						  &&
-						  not dynamic_cast<Road const *>(obj)))
-						building = BUILDCAPS_MEDIUM;
-				}
-			}
-			break;
+				switch (obj->get_size()) {
+				case BaseImmovable::SMALL:
+					if (dist == 1) {
+						if (building > BUILDCAPS_MEDIUM) {
+							//  A flag to the bottom-right does not reduce building
+							//  size (obvious) additionally, roads going top-right and
+							//  left from a big building's flag should be allowed
+							if
+								((objpos != br and objpos != r and objpos != bl)
+								 or
+								 (not dynamic_cast<Flag const *>(obj)
+								  &&
+								  not dynamic_cast<Road const *>(obj)))
+								building = BUILDCAPS_MEDIUM;
+						}
+					}
+					break;
 
-		case BaseImmovable::MEDIUM:
-			if (dynamic_cast<Building const *>(obj)) {
-				if (building > BUILDCAPS_MEDIUM)
-					building = BUILDCAPS_MEDIUM;
-			} else {
-				if (dist == 1) {
-					if (building > BUILDCAPS_SMALL)
+				case BaseImmovable::MEDIUM:
+					if (dynamic_cast<Building const *>(obj)) {
+						if (building > BUILDCAPS_MEDIUM)
+							building = BUILDCAPS_MEDIUM;
+					} else {
+						if (dist == 1) {
+							if (building > BUILDCAPS_SMALL)
+								building = BUILDCAPS_SMALL;
+						}
+					}
+					break;
+
+				case BaseImmovable::BIG:
+					if (dist == 2)
 						building = BUILDCAPS_SMALL;
+					else
+						goto end; // can't build buildings next to big objects
 				}
 			}
-			break;
 
-		case BaseImmovable::BIG:
-			if (dist == 2)
-				building = BUILDCAPS_SMALL;
-			else
-				goto end; // can't build buildings next to big objects
-		}
-	}
+			//  5) Build mines on mountains.
+			if (cnt_mountain == 6) {
+				//  4b) Check the mountain slope
+				if
+					(static_cast<int32_t>(br.field->get_height())
+					 -
+					 f.field->get_height()
+					 <
+					 4)
+					caps |= BUILDCAPS_MINE;
+				goto end;
+			}
 
-	// 5) Build mines on mountains
-	if (cnt_mountain == 6)
-	{
-		// 4b) Check the mountain slope
-		if
-			(static_cast<int32_t>(br.field->get_height()) - f.field->get_height()
-			 <
-			 4)
-			caps |= BUILDCAPS_MINE;
-		goto end;
-	}
-
-	// 6) Can't build anything if there are mountain or desert triangles next to the field
-	if (cnt_mountain || cnt_dry)
-		goto end;
+			//  6) Can not build anything if there are mountain or desert
+			//  triangles next to the node
+			if (cnt_mountain || cnt_dry)
+				goto end;
 
 			Field::Height const f_height = f.field->get_height();
 
-			// 7) Reduce building size based on slope of direct neighbours:
+			//  7) Reduce building size based on slope of direct neighbours:
 			//    - slope >= 4: can't build anything here -> return
 			//    - slope >= 3: maximum size is small
 			{
@@ -1332,7 +1326,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 				{building = BUILDCAPS_SMALL; break;} while (mr.advance(*this));
 			}
 
-	caps |= building;
+			caps |= building;
 		}
 	}
 end: //  9) That's it, store the collected information.
@@ -1432,7 +1426,8 @@ int32_t Map::is_neighbour(const Coords start, const Coords end) const
 		case -1: return Map_Object::WALK_W;
 		case  0: return -1;
 		case  1: return Map_Object::WALK_E;
-		default: return 0;
+		default:
+			return 0;
 		}
 	}
 
@@ -1447,7 +1442,8 @@ int32_t Map::is_neighbour(const Coords start, const Coords end) const
 		switch (dx) {
 		case -1: return Map_Object::WALK_SW;
 		case  0: return Map_Object::WALK_SE;
-		default: return 0;
+		default:
+			return 0;
 		}
 	}
 
@@ -1457,7 +1453,8 @@ int32_t Map::is_neighbour(const Coords start, const Coords end) const
 		switch (dx) {
 		case -1: return Map_Object::WALK_NW;
 		case  0: return Map_Object::WALK_NE;
-		default: return 0;
+		default:
+			return 0;
 		}
 	}
 
@@ -1625,6 +1622,8 @@ void Map::get_neighbour
 	case Map_Object::WALK_SE: get_brn(f, o); break;
 	case Map_Object::WALK_SW: get_bln(f, o); break;
 	case Map_Object::WALK_W:  get_ln (f, o); break;
+	default:
+		assert(false);
 	}
 }
 
@@ -1638,6 +1637,8 @@ void Map::get_neighbour
 	case Map_Object::WALK_SE: get_brn(f, o); break;
 	case Map_Object::WALK_SW: get_bln(f, o); break;
 	case Map_Object::WALK_W:  get_ln (f, o); break;
+	default:
+		assert(false);
 	}
 }
 
@@ -1645,26 +1646,27 @@ void Map::get_neighbour
  * Returns the correct initialized loader for the given mapfile
 */
 Map_Loader* Map::get_correct_loader(const char* filename) {
-   Map_Loader* retval=0;
+	Map_Loader * result = 0;
 
 	if
 		(!
 		 strcasecmp
 		 (filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
 		try {
-			retval = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
+			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
-         // If this fails, it is an illegal file (maybe old plain binary map format)
-         //TODO: catchall hides real errors! Replace with more specific code
+			//  If this fails, it is an illegal file (maybe old plain binary map
+			//  format)
+			//  TODO: catchall hides real errors! Replace with more specific code
 		}
 	else if
 		(!
 		 strcasecmp
 		 (filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
-      // it is a S2 Map file. load it as such
-      retval=new S2_Map_Loader(filename, this);
+		//  It is a S2 Map file. Load it as such.
+		result = new S2_Map_Loader(filename, *this);
 
-   return retval;
+	return result;
 }
 
 /**
@@ -1924,10 +1926,14 @@ int32_t Map::findpath
 			break; // found our target
 
 		// avoid bias by using different orders when pathfinding
-		static const int8_t order1[6] = {Map_Object::WALK_NW, Map_Object::WALK_NE,
-			Map_Object::WALK_E, Map_Object::WALK_SE, Map_Object::WALK_SW, Map_Object::WALK_W};
-		static const int8_t order2[6] = {Map_Object::WALK_NW, Map_Object::WALK_W,
-			Map_Object::WALK_SW, Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE};
+		static const int8_t order1[] = {
+			Map_Object::WALK_NW, Map_Object::WALK_NE, Map_Object::WALK_E,
+			Map_Object::WALK_SE, Map_Object::WALK_SW, Map_Object::WALK_W
+		};
+		static const int8_t order2[] = {
+			Map_Object::WALK_NW, Map_Object::WALK_W, Map_Object::WALK_SW,
+			Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE
+		};
 		const int8_t *direction;
 
 		direction = (cur.x + cur.y) & 1 ? order1 : order2;
@@ -2058,7 +2064,7 @@ int32_t Map::change_terrain
 	c.field->set_terrain(c.t, terrain);
 	recalc_for_field_area(Area<FCoords>(c, 2));
 
-   return 2;
+	return 2;
 }
 
 
@@ -2162,10 +2168,10 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 	assert(m_fields <= coords.field);
 	assert            (coords.field < m_fields + max_index());
 
-   int32_t height = coords.field->get_height();
-   bool check[6] = {false, false, false, false, false, false};
+	int32_t height = coords.field->get_height();
+	bool check[] = {false, false, false, false, false, false};
 
-	const FCoords n[6] = {
+	const FCoords n[] = {
 		tl_n(coords),
 		tr_n(coords),
 		l_n (coords),
@@ -2215,7 +2221,7 @@ Military_Influence Map::calc_influence
 	else influence = MAX_RADIUS - influence;
 	influence *= influence;
 
-   return influence;
+	return influence;
 }
 
 
@@ -2283,8 +2289,9 @@ void FindNodeAnd::add(const FindNode* findfield, bool negate)
 }
 
 bool FindNodeAnd::accept(const Map & map, const FCoords coord) const {
-	for (std::vector<Subfunctor>::const_iterator it = m_subfunctors.begin();
-	    it != m_subfunctors.end();
+	for
+		(std::vector<Subfunctor>::const_iterator it = m_subfunctors.begin();
+		 it != m_subfunctors.end();
 		 ++it)
 	{
 		if (it->findfield->accept(map, coord) == it->negate)
@@ -2308,22 +2315,21 @@ bool FindNodeCaps::accept(const Map &, const FCoords coord) const {
 }
 
 bool FindNodeSize::accept(const Map &, const FCoords coord) const {
-	BaseImmovable* imm = coord.field->get_immovable();
-	bool hasrobust = (imm && imm->get_size() > BaseImmovable::NONE);
+	if (BaseImmovable const * const immovable = coord.field->get_immovable())
+		if (immovable->get_size() > BaseImmovable::NONE)
+			return false;
 	uint8_t fieldcaps = coord.field->get_caps();
 
-	if (hasrobust)
-		return false;
-
 	switch (m_size) {
-	default:
-	case sizeAny:    return true;
 	case sizeBuild:  return (fieldcaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE));
 	case sizeMine:   return (fieldcaps & BUILDCAPS_MINE);
 	case sizePort:   return (fieldcaps & BUILDCAPS_PORT);
 	case sizeSmall:  return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_SMALL;
 	case sizeMedium: return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_MEDIUM;
 	case sizeBig:    return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
+	case sizeAny:
+	default:
+		return true;
 	}
 }
 
@@ -2347,7 +2353,8 @@ bool FindNodeImmovableSize::accept(const Map &, const FCoords coord) const {
 	case BaseImmovable::SMALL:  return m_sizes & sizeSmall;
 	case BaseImmovable::MEDIUM: return m_sizes & sizeMedium;
 	case BaseImmovable::BIG:    return m_sizes & sizeBig;
-	default: throw wexception("FindNodeImmovableSize: bad size = %i", size);
+	default:
+		throw wexception("FindNodeImmovableSize: bad size = %i", size);
 	}
 }
 
@@ -2365,7 +2372,7 @@ bool FindNodeImmovableAttribute::accept(const Map &, const FCoords coord) const
 
 bool FindNodeResource::accept(const Map &, const FCoords coord) const {
 	uint8_t res = coord.field->get_resources();
-   uint8_t amount = coord.field->get_resources_amount();
+	uint8_t amount = coord.field->get_resources_amount();
 
 	if ((res==m_resource) && amount)
 		return false;

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
-#define __S__EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#ifndef EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#define EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 
 #include "ui_window.h"
 
@@ -34,18 +34,18 @@ template <typename T, typename ID> struct IDButton;
  * a directory name to be created
  */
 struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
-      Main_Menu_Save_Map_Make_Directory(UI::Panel*, const char*);
+	Main_Menu_Save_Map_Make_Directory(UI::Panel *, char const *);
 
-      const char* get_dirname() {return m_dirname.c_str();}
+	char const * get_dirname() {return m_dirname.c_str();}
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
-      std::string m_dirname;
-      UI::Edit_Box* m_edit;
-      UI::IDButton<Main_Menu_Save_Map_Make_Directory, int32_t> * m_ok_button;
-      void edit_changed();
+	std::string                                                m_dirname;
+	UI::Edit_Box                                             * m_edit;
+	UI::IDButton<Main_Menu_Save_Map_Make_Directory, int32_t> * m_ok_button;
+	void edit_changed();
 };
 
 #endif

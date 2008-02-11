@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__FONT_HANDLER_H
-#define __S__FONT_HANDLER_H
+#ifndef FONT_HANDLER_H
+#define FONT_HANDLER_H
 
 #include "point.h"
 #include "rgbcolor.h"
@@ -34,34 +34,35 @@ class RenderTarget;
 class Text_Block;
 
 enum Align {
-    Align_Left = 0,
-    Align_HCenter = 1,
-    Align_Right = 2,
-    Align_Horizontal = 3,
+	Align_Left         =  0,
+	Align_HCenter      =  1,
+	Align_Right        =  2,
+	Align_Horizontal   =  3,
 
-    Align_Top = 0,
-    Align_VCenter = 4,
-    Align_Bottom = 8,
-    Align_Vertical = 12,
+	Align_Top          =  0,
+	Align_VCenter      =  4,
+	Align_Bottom       =  8,
+	Align_Vertical     = 12,
 
-    Align_TopLeft = 0,
-    Align_CenterLeft = Align_VCenter,
-    Align_BottomLeft = Align_Bottom,
+	Align_TopLeft      =  0,
+	Align_CenterLeft   = Align_VCenter,
+	Align_BottomLeft   = Align_Bottom,
 
-    Align_TopCenter = Align_HCenter,
-    Align_Center = Align_HCenter|Align_VCenter,
-    Align_BottomCenter = Align_HCenter|Align_Bottom,
+	Align_TopCenter    = Align_HCenter,
+	Align_Center       = Align_HCenter|Align_VCenter,
+	Align_BottomCenter = Align_HCenter|Align_Bottom,
 
-    Align_TopRight = Align_Right,
-    Align_CenterRight = Align_Right|Align_VCenter,
-    Align_BottomRight = Align_Right|Align_Bottom,
+	Align_TopRight     = Align_Right,
+	Align_CenterRight  = Align_Right|Align_VCenter,
+
+	Align_BottomRight  = Align_Right|Align_Bottom,
 };
 
 enum Widget_Cache {
-    Widget_Cache_None = 0,
-    Widget_Cache_Use = 1,
-    Widget_Cache_New = 2,
-    Widget_Cache_Update = 3
+	Widget_Cache_None   = 0,
+	Widget_Cache_Use    = 1,
+	Widget_Cache_New    = 2,
+	Widget_Cache_Update = 3
 };
 
 /** class Font_Handler
@@ -69,8 +70,7 @@ enum Widget_Cache {
  * This class generates font Pictures out of strings and returns them
  */
 typedef std::string (*Varibale_Callback)(std::string, void* data);
-class Font_Handler {
-public:
+struct Font_Handler {
 	Font_Handler();
 	~Font_Handler();
 	void draw_string
@@ -132,10 +132,11 @@ private:
 		uint32_t      h;
 
 		bool operator== (const _Cache_Infos& who) const {
-			return (str == who.str &&
-			         f == who.f &&
-			         fg == who.fg &&
-			         bg == who.bg);
+			return
+				str == who.str &&
+				f   == who.f   &&
+				fg  == who.fg  &&
+				bg  == who.bg;
 		}
 	};
 

@@ -390,7 +390,7 @@ void Player::enhance_building
 			tribe().get_building_index(building->name().c_str());
 		const Coords position = building->get_position();
 
-      // Get workers and soldiers
+		//  Get workers and soldiers
 		//  Make copies of the vectors, because the originals are destroyed with
 		//  the building.
 		const std::vector<Worker  *> workers  = building->get_workers();

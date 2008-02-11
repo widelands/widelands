@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_ALLOW_BUILDING_H
-#define __S__EVENT_ALLOW_BUILDING_H
+#ifndef EVENT_ALLOW_BUILDING_H
+#define EVENT_ALLOW_BUILDING_H
 
 #include "event.h"
 
@@ -39,7 +39,7 @@ struct Event_Allow_Building : public Event {
 
 	int32_t option_menu(Editor_Interactive &);
 
-      State run(Game*);
+	State run(Game *);
 
 	void Read (Section &, Editor_Game_Base       &);
 	void Write(Section &, Editor_Game_Base const &) const;
@@ -50,7 +50,7 @@ struct Event_Allow_Building : public Event {
 private:
 	Player_Number  m_player;
 	Building_Index m_building;
-      bool m_allow;
+	bool           m_allow;
 };
 
 };

@@ -51,11 +51,11 @@ struct Edit_Objective_Window : public UI::Window {
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
-      Editor_Interactive  *m_parent;
+	Editor_Interactive                   * m_parent;
 	UI::Table<Objective &>::Entry_Record & m_te;
-      UI::Edit_Box          *m_name;
-      UI::Multiline_Editbox *m_descr;
-      UI::Checkbox          *m_visibleAtBegin;
+	UI::Edit_Box                         * m_name;
+	UI::Multiline_Editbox                * m_descr;
+	UI::Checkbox                         * m_visibleAtBegin;
 
 	void clicked_ok();
 };
@@ -68,32 +68,37 @@ UI::Window(parent, 0, 0, 250, 85, _("Edit Objective").c_str()),
 m_parent  (parent),
 m_te      (te)
 {
-   int32_t spacing = 5;
-   int32_t posy = 5;
+	int32_t const spacing = 5;
+	int32_t       posy    = 5;
 
 	Objective & obj = UI::Table<Objective &>::get(te);
 
-   // What type
-   new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
-   m_name = new UI::Edit_Box(this, 120, 5, 120, 20, 0, 0);
+	new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
+	m_name = new UI::Edit_Box(this, 120, 5, 120, 20, 0, 0);
 	m_name->set_text(obj.name().c_str());
-   posy += 20 + spacing;
+	posy += 20 + spacing;
 
-   new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Visible at Begin: "), Align_CenterLeft);
-   m_visibleAtBegin = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
+	new UI::Textarea
+		(this,
+		 5, posy, 120, STATEBOX_HEIGHT,
+		 _("Visible at Begin: "), Align_CenterLeft);
+	m_visibleAtBegin =
+		new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
 	m_visibleAtBegin->set_state(obj.get_is_visible());
-   posy += STATEBOX_HEIGHT+ spacing;
+	posy += STATEBOX_HEIGHT + spacing;
 
-   // Multiline editbox
-   new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Objective text: "), Align_CenterLeft);
-   posy += 20 + spacing;
+	new UI::Textarea
+		(this,
+		 5, posy, 120, STATEBOX_HEIGHT,
+		 _("Objective text: "), Align_CenterLeft);
+	posy += 20 + spacing;
 
-   const int32_t editbox_height = 140;
+	int32_t const editbox_height = 140;
 	m_descr = new UI::Multiline_Editbox
 		(this,
 		 5, posy, get_inner_w() - 2 * spacing, editbox_height,
 		 obj.descr().c_str());
-   posy+= editbox_height + spacing + spacing;
+	posy += editbox_height + spacing + spacing;
 
 	new UI::Button<Edit_Objective_Window>
 		(this,
@@ -109,11 +114,11 @@ m_te      (te)
 		 &Edit_Objective_Window::end_modal, this, 0,
 		 _("Back"));
 
-   posy += 20 + spacing;
+	posy += 20 + spacing;
 
-   set_inner_size(get_inner_w(), posy);
+	set_inner_size(get_inner_w(), posy);
 
-   center_to_parent();
+	center_to_parent();
 }
 
 /*
@@ -142,10 +147,9 @@ void Edit_Objective_Window::clicked_ok() {
 	m_te.set_string(0, obj.name());
 	m_te.set_string(1, obj.get_is_visible() ? "Yes" : "No");
 
-   // Set the triggers name
 	obj.get_trigger()->set_name(m_name->get_text());
 
-   end_modal(1);
+	end_modal(1);
 }
 
 
@@ -180,7 +184,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 		 &Editor_Objectives_Menu::clicked_new, this,
 		 _("New"));
 
-   posx += 60 + spacing;
+	posx += 60 + spacing;
 
 	m_edit_button = new UI::Button<Editor_Objectives_Menu>
 		(this,
@@ -191,7 +195,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 		 std::string(),
 		 false);
 
-   posx += 60 + spacing;
+	posx += 60 + spacing;
 
 	m_delete_button = new UI::Button<Editor_Objectives_Menu>
 		(this,
@@ -223,21 +227,16 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 
 /*
 ===============
-Editor_Objectives_Menu::~Editor_Objectives_Menu
-
 Unregister from the registry pointer
 ===============
 */
-Editor_Objectives_Menu::~Editor_Objectives_Menu()
-{
-}
+Editor_Objectives_Menu::~Editor_Objectives_Menu() {}
 
 /*
  * A Button has been clicked
  */
 void Editor_Objectives_Menu::clicked_new() {
-         // Get the a name
-         char buffer[256];
+	char buffer[256];
 
 	Widelands::Map & map = m_parent->egbase().map();
 	Manager<Objective> & mom = map.mom();
@@ -247,11 +246,11 @@ void Editor_Objectives_Menu::clicked_new() {
 		if (not mom[buffer] and not mtm[buffer])
 			break;
 	}
-         // Create a new objective
+	//  create a new objective
 	Objective & objective = *new Objective;
 	objective.set_name(buffer);
 	mom.register_new(objective);
-         // Create a null trigger for this
+	//  create a null trigger for this
 	Widelands::Trigger_Null & trigger = *new Widelands::Trigger_Null(buffer);
 	objective.set_trigger(&trigger);
 	mtm.register_new(trigger);
@@ -260,20 +259,19 @@ void Editor_Objectives_Menu::clicked_new() {
 }
 
 void Editor_Objectives_Menu::clicked_edit() {
-         // Edit selected variable
 	Edit_Objective_Window evw(m_parent, m_table.get_selected_record());
 	if (evw.run()) {
 		m_table.sort();
 		m_trigger->set_text(m_table.get_selected().get_trigger()->name());
-			}
+	}
 }
 
 void Editor_Objectives_Menu::clicked_del() {
-         // Delete selected objective
 	Objective & obj = m_table.get_selected();
 
 	if (not obj.get_trigger()->referencers().empty()) {
-            std::string str=_("Can't delete Objective, because it's trigger is in use by ");
+		std::string str =
+			_("Can't delete Objective, because it's trigger is in use by ");
 		Trigger::Referencers const & referencers =
 			obj.get_trigger()->referencers();
 		Trigger::Referencers::const_iterator i = referencers.begin();
@@ -285,16 +283,16 @@ void Editor_Objectives_Menu::clicked_del() {
 		UI::Modal_Message_Box mmb
 			(m_parent, _("Error!"), str.c_str(), UI::Modal_Message_Box::OK);
 		mmb.run();
-            return;
-			}
+		return;
+	}
 
 	Widelands::Map & map = m_parent->egbase().map();
 	map.mtm().remove(*obj.get_trigger());
 	map.mom().remove(obj);
 	m_table.remove_selected();
 
-         m_edit_button->set_enabled(false);
-         m_delete_button->set_enabled(false);
+	m_edit_button  ->set_enabled(false);
+	m_delete_button->set_enabled(false);
 }
 
 
@@ -323,5 +321,5 @@ void Editor_Objectives_Menu::insert_objective(Objective & var) {
 	t.set_string(0, var.name());
 	t.set_string(1, var.get_is_visible() ? "Yes" : "No");
 
-   m_table.sort();
+	m_table.sort();
 }

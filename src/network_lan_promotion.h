@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __NETWORK_LAN_PROMOTION_H__
-#define __NETWORK_LAN_PROMOTION_H__
+#ifndef NETWORK_LAN_PROMOTION_H
+#define NETWORK_LAN_PROMOTION_H
 
 #include "network_system.h"
 
@@ -40,9 +40,9 @@ struct LAN_Game_Info {
 };
 
 struct LAN_Open_Game {
-    in_addr_t     address;
-    in_port_t     port;
-    LAN_Game_Info info;
+	in_addr_t     address;
+	in_port_t     port;
+	LAN_Game_Info info;
 };
 
 struct LAN_Base {
@@ -80,9 +80,9 @@ private:
 
 struct LAN_Game_Finder:LAN_Base {
 	enum {
-	    GameOpened,
-	    GameClosed,
-	    GameUpdated
+		GameOpened,
+		GameClosed,
+		GameUpdated
 	};
 
 	LAN_Game_Finder ();

@@ -70,15 +70,16 @@ void Stock_Menu::clicked_switch_page() {
 	switch (current_page) {
 	case Wares:
 		current_page = Workers;
-      fill_waredisplay_with_workers();
+		fill_waredisplay_with_workers();
 		switchpage.set_tooltip(_("Show wares").c_str());
 		break;
 	case Workers:
 		current_page = Wares;
-      fill_waredisplay_with_wares();
+		fill_waredisplay_with_wares();
 		switchpage.set_tooltip(_("Show workers").c_str());
 		break;
-	default: assert(false);
+	default:
+		assert(false);
 	}
 }
 
@@ -94,7 +95,8 @@ void Stock_Menu::think()
 	switch (current_page) {
 	case Wares:   fill_waredisplay_with_wares  (); break;
 	case Workers: fill_waredisplay_with_workers(); break;
-	default: assert(false);
+	default:
+		assert(false);
 	}
 }
 

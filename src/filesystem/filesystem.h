@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,8 @@ class StreamWrite;
 struct FileSystem {
 	//TODO: this should be unneccessary. Make it so.
 	enum Type {
-	   DIR,
-	   ZIP
+		DIR,
+		ZIP
 	};
 
 	virtual ~FileSystem() {}

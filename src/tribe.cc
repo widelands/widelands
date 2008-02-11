@@ -46,24 +46,23 @@ namespace Widelands {
 Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 : m_name(tribename), m_world(the_world)
 {
-	try
-	{
+	try {
 		char directory[256];
 
-      // Grab the localisation text domain
+		//  Grab the localisation text domain
 		sprintf(directory, "tribes/%s", tribename.c_str());
-      i18n::grab_textdomain(directory);
+		i18n::grab_textdomain(directory);
 
 		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());
 
 		m_default_encdata.clear();
-      parse_wares(directory);
-		parse_workers(directory);
+		parse_wares    (directory);
+		parse_workers  (directory);
 		parse_buildings(directory);
-      parse_bobs(directory);
-      parse_root_conf(directory);
+		parse_bobs     (directory);
+		parse_root_conf(directory);
 
-      i18n::release_textdomain();
+		i18n::release_textdomain();
 	}
 	catch (std::exception &e)
 	{throw wexception("Error loading tribe %s: %s", tribename.c_str(), e.what());}
@@ -152,38 +151,38 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
 		m_anim_flag = g_anim.get(directory, s, 0, &m_default_encdata);
 
-      // default wares
-      s = prof.get_safe_section("startwares");
-	   Section::Value* value;
+		s = prof.get_safe_section("startwares");
+		Section::Value * value;
 
 		while ((value = s->get_next_val(0))) {
 			if (not m_wares.exists(value->get_name()))
-            throw wexception("In section [startwares], ware %s is not know!", value->get_name());
+				throw wexception
+					("In section [startwares], ware %s is not know!", value->get_name());
 
-         std::string valuename=value->get_name();
-         m_startwares[valuename]=value->get_int();
+			std::string valuename   = value->get_name();
+			m_startwares[valuename] = value->get_int();
 		}
 
-      // default workers
-      s = prof.get_safe_section("startworkers");
+		s = prof.get_safe_section("startworkers");
 		while ((value = s->get_next_val(0)))
 			if (strcmp(value->get_name(), "soldier")) { // Ignore soldiers here
 				if (not m_workers.exists(value->get_name()))
-            throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
+					throw wexception
+						("In section [startworkers], worker %s is not know!",
+						 value->get_name());
 
-         std::string valuename=value->get_name();
-         m_startworkers[valuename]=value->get_int();
+				std::string valuename     = value->get_name();
+				m_startworkers[valuename] = value->get_int();
 			}
 
-      // default soldiers
-      s = prof.get_safe_section("startsoldiers");
+		s = prof.get_safe_section("startsoldiers");
 		while ((value = s->get_next_val(0))) {
-         // NOTE: no check here, since we do not know about max levels and so on
-         std::string soldier=value->get_name();
-         m_startsoldiers[soldier]=value->get_int();
+			//  NOTE no check here since we do not know about max levels and so on
+			std::string soldier=value->get_name();
+			m_startsoldiers[soldier]=value->get_int();
 		}
 	} catch (const std::exception & e) {
-      throw wexception("%s: %s", fname, e.what());
+		throw wexception("%s: %s", fname, e.what());
 	}
 }
 
@@ -342,8 +341,8 @@ and is called by the Game class
 */
 void Tribe_Descr::parse_wares(const char* directory)
 {
-   Descr_Maintainer<Item_Ware_Descr>* wares=&m_wares;
-   char subdir[256];
+	Descr_Maintainer<Item_Ware_Descr>* wares=&m_wares;
+	char subdir[256];
 	filenameset_t dirs;
 
 	snprintf(subdir, sizeof(subdir), "%s/wares", directory);
@@ -487,31 +486,31 @@ void Tribe_Descr::load_warehouse_with_start_wares
 					 name().c_str(),
 					 it->first.c_str());
 
-      char* endp;
+			char * endp;
 			long int const hplvl      = strtol(list[0].c_str(), &endp, 0);
 			if (endp && *endp)
-         throw wexception("Bad hp level '%s'", list[0].c_str());
+				throw wexception("Bad hp level '%s'", list[0].c_str());
 			long int const attacklvl  = strtol(list[1].c_str(), &endp, 0);
 			if (endp && *endp)
-         throw wexception("Bad attack level '%s'", list[1].c_str());
+				throw wexception("Bad attack level '%s'", list[1].c_str());
 			long int const defenselvl = strtol(list[2].c_str(), &endp, 0);
 			if (endp && *endp)
-         throw wexception("Bad defense level '%s'", list[2].c_str());
+				throw wexception("Bad defense level '%s'", list[2].c_str());
 			long int const evadelvl   = strtol(list[3].c_str(), &endp, 0);
 			if (endp && *endp)
-         throw wexception("Bad evade level '%s'", list[3].c_str());
+				throw wexception("Bad evade level '%s'", list[3].c_str());
 
 			if (upcast(Game, game, &egbase))
-		for (int32_t i = 0; i < it->second; ++i) {
-			Soldier & soldier = static_cast<Soldier &>
-				(dynamic_cast<Soldier_Descr const *>
-				 (get_worker_descr(get_worker_index("soldier")))
-				 ->create(*game, wh.owner(), wh, wh.get_position()));
-            soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
-				wh.incorporate_worker(game, &soldier);
-			}
-      //TODO: What to do in editor
-	}
+				for (int32_t i = 0; i < it->second; ++i) {
+					Soldier & soldier = static_cast<Soldier &>
+						(dynamic_cast<Soldier_Descr const *>
+						 (get_worker_descr(get_worker_index("soldier")))
+						 ->create(*game, wh.owner(), wh, wh.get_position()));
+					soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
+					wh.incorporate_worker(game, &soldier);
+				}
+			//  TODO what to do in editor
+		}
 	}
 }
 
@@ -520,10 +519,11 @@ void Tribe_Descr::load_warehouse_with_start_wares
  * does this tribe exist?
  */
 bool Tribe_Descr::exists_tribe(const std::string & name) {
-   std::string buf;
-   buf="tribes/" + name + "/conf";;
+	std::string buf = "tribes/";
+	buf            += name;
+	buf            += "/conf";
 
-   FileRead f;
+	FileRead f;
 	return f.TryOpen(*g_fs, buf.c_str());
 }
 
@@ -533,9 +533,9 @@ bool Tribe_Descr::exists_tribe(const std::string & name) {
 void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
 	assert(target.empty());
 
-   // get all tribes
-   filenameset_t m_tribes;
-   g_fs->FindFiles("tribes", "*", &m_tribes);
+	//  get all tribes
+	filenameset_t m_tribes;
+	g_fs->FindFiles("tribes", "*", &m_tribes);
 	for
 		(filenameset_t::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
@@ -557,24 +557,24 @@ uint32_t Tribe_Descr::get_resource_indicator
 (const Resource_Descr * const res, const uint32_t amount) const
 {
 	if (not res or not amount) {
-      int32_t idx=get_immovable_index("resi_none");
+		int32_t idx = get_immovable_index("resi_none");
 		if (idx == -1)
 			throw wexception
 				("Tribe %s doesn't declare a resource indicator resi_none!",
 				 name().c_str());
-      return idx;
+		return idx;
 	}
 
-   char buffer[256];
+	char buffer[256];
 
-   int32_t i=1;
-   int32_t num_indicators=0;
+	int32_t i = 1;
+	int32_t num_indicators = 0;
 	for (;;) {
-      sprintf(buffer, "resi_%s%i", res->name().c_str(), i);
+		sprintf(buffer, "resi_%s%i", res->name().c_str(), i);
 		if (get_immovable_index(buffer) == -1)
-         break;
-      ++i;
-      ++num_indicators;
+			break;
+		++i;
+		++num_indicators;
 	}
 
 	if (not num_indicators)
@@ -583,7 +583,9 @@ uint32_t Tribe_Descr::get_resource_indicator
 			 name().c_str(),
 			 res->name().c_str());
 
-   uint32_t bestmatch = static_cast<uint32_t>((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
+	uint32_t bestmatch =
+		static_cast<uint32_t>
+		((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
 	if (static_cast<int32_t>(amount) < res->get_max_amount())
       bestmatch+=1; // Resi start with 1, not 0
 
@@ -601,36 +603,39 @@ uint32_t Tribe_Descr::get_resource_indicator
  * Return the given ware or die trying
  */
 int32_t Tribe_Descr::get_safe_ware_index(const char * const warename) const {
-   int32_t retval=get_ware_index(warename);
+	int32_t const result = get_ware_index(warename);
 
-	if (retval == -1)
-      throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!",
-							  warename);
-   return retval;
+	if (result == -1)
+		throw wexception
+			("tribe %s does not define ware type \"%s\"",
+			 name().c_str(), warename);
+	return result;
 }
 
 /*
  * Return the given worker or die trying
  */
 int32_t Tribe_Descr::get_safe_worker_index(const char * const workername) const {
-   int32_t retval=get_worker_index(workername);
+	int32_t const result = get_worker_index(workername);
 
-	if (retval == -1)
-      throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!",
-							  workername);
-   return retval;
+	if (result == -1)
+		throw wexception
+			("tribe %s does not define worker type \"%s\"",
+			 name().c_str(), workername);
+	return result;
 }
 
 /*
  * Return the given building or die trying
  */
 int32_t Tribe_Descr::get_safe_building_index(const char *buildingname) const {
-   int32_t retval=get_building_index(buildingname);
+	int32_t const result = get_building_index(buildingname);
 
-	if (retval == -1)
-      throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!",
-							  buildingname);
-   return retval;
+	if (result == -1)
+		throw wexception
+			("tribe %s does not define building type \"%s\"",
+			 name().c_str(), buildingname);
+	return result;
 }
 
 };

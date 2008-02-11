@@ -34,18 +34,45 @@ namespace Widelands {
 namespace Trigger_Factory {
 
 Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
-	{"building",           _("Building Trigger"),
-			_("Triggers when the player has the specified number of buildings of the specified type in the specified area.")},
-	{"military_influence", _("Military influence Trigger"),
-			_("Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area.")},
-	{"null",               _("Null Trigger"),
-			_("This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers")},
-	{"ownership",          _("Own Area Trigger"),
-			_("Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds.")},
-	{"time",               _("Time Trigger"),
-			_("This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events")},
-	{"vision",             _("Vision Trigger"),
-			_("Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds.")},
+	{
+		"building",           _("Building Trigger"),
+		_
+		("Triggers when the player has the specified number of buildings of the "
+		 "specified type in the specified area.")
+	},
+	{
+		"military_influence", _("Military influence Trigger"),
+		_
+		("Triggers when the player has some (or highest) military influence "
+		 "over the specified number of nodes in the specified area.")
+	},
+	{
+		"null",               _("Null Trigger"),
+		_
+		("Never triggers by itself. It is useful to pass it to some event which "
+		 "changes triggers")
+	},
+	{
+		"ownership",          _("Own Area Trigger"),
+		_
+		("Triggers when the the player owns at least the specified number of "
+		 "locations in the specified area. Unless it is a one-time trigger, it "
+		 "becomes unset when this no longer holds.")
+	},
+	{
+		"time",               _("Time Trigger"),
+		_
+		("This Trigger waits a certain time before it is true. It can be "
+		 "configured to constantly restart itself when the wait time is over "
+		 "for repeating events")
+	},
+	{
+		"vision",             _("Vision Trigger"),
+		_
+		("Triggers when the the player sees (or has seen) at least a specified "
+		 "number of locations in the specified area. Unless it is a one-time "
+		 "trigger, it becomes unset when this no longer holds.")
+	},
 };
 
 
@@ -66,7 +93,8 @@ Trigger & create(size_t const id, char const * const name, bool const set) {
 	case 3: return *new Trigger_Ownership         (name, set);
 	case 4: return *new Trigger_Time              (name, set);
 	case 5: return *new Trigger_Vision            (name, set);
-	default: assert(false);
+	default:
+		assert(false);
 	}
 }
 

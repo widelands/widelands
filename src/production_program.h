@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__PRODUCTION_PROGRAM_H
-#define __S__PRODUCTION_PROGRAM_H
+#ifndef PRODUCTION_PROGRAM_H
+#define PRODUCTION_PROGRAM_H
 
 #include "log.h"
 
@@ -49,8 +49,8 @@ struct ProductionAction {
 		actPlayFX,  // sparam1 = sound_fx_name to play
 
 		// This is ONLY for Training Porpouses!
-      actCheckSoldier, // sparam = attribute asking to, iparam1 = level requested
-      actTrain,   // sparam = attribute asking to, iparam1 = level requested, iparam2 = level to upgrade
+		actCheckSoldier, // sparam = attribute asking to, iparam1 = level requested
+		actTrain,   // sparam = attribute asking to, iparam1 = level requested, iparam2 = level to upgrade
 	};
 
 	enum {
@@ -91,8 +91,12 @@ struct ProductionProgram {
 
 	const std::vector<ProductionAction>& get_all_actions() {return m_actions;};
 
-	void parse(std::string directory, Profile* prof, std::string name,
-		ProductionSite_Descr* building, const EncodeData* encdata);
+	void parse
+		(std::string    const & directory,
+		 Profile              *,
+		 std::string    const & name,
+		 ProductionSite_Descr *,
+		 EncodeData     const *);
 
 private:
 	std::string                   m_name;

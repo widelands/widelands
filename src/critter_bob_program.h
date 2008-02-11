@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__CRITTER_BOB_PROGRAM
-#define __S__CRITTER_BOB_PROGRAM
+#ifndef CRITTER_BOB_PROGRAM_H
+#define CRITTER_BOB_PROGRAM_H
 
 #include "bob.h"
 
@@ -45,7 +45,7 @@ struct Critter_BobProgram : public BobProgramBase {
 		Critter_Bob_Descr * descr;
 		std::string         directory;
 		Profile           * prof;
-      const EncodeData  * encdata;
+		EncodeData  const * encdata;
 	};
 
 	typedef void (Critter_BobProgram::*parse_t)(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd);
@@ -82,4 +82,4 @@ private:
 
 };
 
-#endif // __S__CRITTER_BOB_PROGRAM
+#endif

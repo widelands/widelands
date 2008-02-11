@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_EVENT_MENU_EDIT_EVENTCHAIN_H
-#define __S__EDITOR_EVENT_MENU_EDIT_EVENTCHAIN_H
+#ifndef EDITOR_EVENT_MENU_EDIT_EVENTCHAIN_H
+#define EDITOR_EVENT_MENU_EDIT_EVENTCHAIN_H
 
 #include "ui_window.h"
 
@@ -44,7 +44,7 @@ struct Editor_Event_Menu_Edit_EventChain : public UI::Window {
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-      void think();
+	void think();
 
 private:
 	Editor_Interactive & eia();
@@ -66,10 +66,10 @@ private:
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_delete_btn;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvup_btn;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvdown_btn;
-      UI::Checkbox         *m_morethanonce;
-      UI::Edit_Box         *m_name;
+	UI::Checkbox                                  * m_morethanonce;
+	UI::Edit_Box                                  * m_name;
 	Widelands::EventChain              & m_event_chain;
-      bool                m_edit_trigcond;
+	bool                                            m_edit_trigcond;
 };
 
 #endif

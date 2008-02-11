@@ -116,7 +116,7 @@ void Surface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 
 	assert(x < get_w());
 	assert(y < get_h());
-        assert(m_surface);
+	assert(m_surface);
 
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_LockSurface(m_surface);
@@ -128,7 +128,7 @@ void Surface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 	switch (bytes_per_pixel) {
 	case 2: *reinterpret_cast<Uint16 *>(pix) = static_cast<Uint16>(clr); break;
 	case 4: *reinterpret_cast<Uint32 *>(pix) = clr;                      break;
-	}
+	};
 
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_UnlockSurface(m_surface);
@@ -158,8 +158,8 @@ void Surface::draw_field
  Widelands::Field * const rf,
  Widelands::Field * const fl,
  Widelands::Field * const rfl,
-	                const int32_t posx, const int32_t rposx, const int32_t posy,
-	                const int32_t blposx, const int32_t rblposx, const int32_t blposy,
+ int32_t const   posx, int32_t const   rposx, int32_t const   posy,
+ int32_t const blposx, int32_t const rblposx, int32_t const blposy,
  uint8_t roads,
  Sint8            f_brightness,
  Sint8            r_brightness,
@@ -176,25 +176,26 @@ bool draw_all)
 	switch (get_format()->BytesPerPixel) {
 	case 2:
 		draw_field_int<Uint16>
-		    (*this,
-		     f, rf, fl, rfl,
-		     posx, rposx, posy, blposx, rblposx, blposy,
-		     roads,
-		     f_brightness, r_brightness, bl_brightness, br_brightness,
-		     tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
-		     draw_all);
+			(*this,
+			 f, rf, fl, rfl,
+			 posx, rposx, posy, blposx, rblposx, blposy,
+			 roads,
+			 f_brightness, r_brightness, bl_brightness, br_brightness,
+			 tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
+			 draw_all);
 		break;
 	case 4:
 		draw_field_int<Uint32>
-		    (*this,
-		     f, rf, fl, rfl,
-		     posx, rposx, posy, blposx, rblposx, blposy,
-		     roads,
-		     f_brightness, r_brightness, bl_brightness, br_brightness,
-		     tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
-		     draw_all);
+			(*this,
+			 f, rf, fl, rfl,
+			 posx, rposx, posy, blposx, rblposx, blposy,
+			 roads,
+			 f_brightness, r_brightness, bl_brightness, br_brightness,
+			 tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
+			 draw_all);
 		break;
-	default: assert(false);
+	default:
+		assert(false);
 	}
 
 	unset_subwin();

@@ -30,21 +30,20 @@ RNG::RNG () : state0(0), state1(0) {}
 
 void RNG::seed (uint32_t s)
 {
-    state0^=state1;
-    state1=SIMPLE_RAND(state1) + s;
+	state0 ^= state1;
+	state1 = SIMPLE_RAND(state1) + s;
 }
 
 uint32_t RNG::rand ()
 {
-    // apply a bijective mixing operation
-    state0=SIMPLE_RAND(state0);
-    state1=SIMPLE_RAND(state1);
+	//  apply a bijective mixing operation
+	state0 = SIMPLE_RAND(state0);
+	state1 = SIMPLE_RAND(state1);
 
-    state0+=state1;
-    state1+=state0;
+	state0 += state1;
+	state1 += state0;
 
-    // and return the next random number
-    return state0 ^ state1;
+	return state0 ^ state1; // the next random number
 }
 
 // this is a nonlinear sbox used for mixing the state

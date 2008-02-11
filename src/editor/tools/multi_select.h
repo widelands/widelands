@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MULTI_SELECT_H
-#define __S__MULTI_SELECT_H
+#ifndef MULTI_SELECT_H
+#define MULTI_SELECT_H
 
 #include <cassert>
 #include <vector>
@@ -34,23 +34,23 @@ This is a helper class, no Editor Tool (might be usable in game too)
 =============================
 */
 struct MultiSelect {
-      MultiSelect() {m_nr_enabled=0;}
-      ~MultiSelect() {}
+	MultiSelect() : m_nr_enabled(0) {}
+	~MultiSelect() {}
 
 	void enable(int32_t n, bool t) {
 		if (static_cast<int32_t>(m_enabled.size()) < n + 1)
-            m_enabled.resize(n+1, false);
+			m_enabled.resize(n + 1, false);
 
 		if (m_enabled[n] == t)
 			return;
-         m_enabled[n]=t;
+		m_enabled[n] = t;
 		if (t) ++m_nr_enabled;
 		else   --m_nr_enabled;
-         assert(m_nr_enabled>=0);
-		}
+		assert(0 <= m_nr_enabled);
+	}
 	bool is_enabled(int32_t n) const {
 		if (static_cast<int32_t>(m_enabled.size()) < n + 1) return false;
-         return m_enabled[n];
+		return m_enabled[n];
 	}
 	int32_t get_nr_enabled() const {return m_nr_enabled;}
 	int32_t get_random_enabled() const {
@@ -59,15 +59,15 @@ struct MultiSelect {
 			(static_cast<double>(get_nr_enabled())
 			 *
 			 rand() / (RAND_MAX + 1.0));
-         int32_t i=0;
-         int32_t j=rand_value+1;
+		int32_t i = 0;
+		int32_t j = rand_value + 1;
 		while (j) {if (is_enabled(i)) --j; ++i;}
-         return i-1;
-		}
+		return i - 1;
+	}
 
 private:
-      int32_t m_nr_enabled;
-      std::vector<bool> m_enabled;
+	int32_t           m_nr_enabled;
+	std::vector<bool> m_enabled;
 };
 
 #endif

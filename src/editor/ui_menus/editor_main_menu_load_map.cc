@@ -52,56 +52,68 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
-	: UI::Window(parent, 0, 0, 500, 300, _("Load Map").c_str())
+:
+UI::Window(parent, 0, 0, 500, 300, _("Load Map").c_str()),
+m_parent(parent) //  FIXME redundant (base stores parent pointer)
 {
-   m_parent=parent;
+	int32_t const spacing =  5;
+	int32_t const offsx   = spacing;
+	int32_t const offsy   = 30;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
-   int32_t spacing=5;
-   int32_t offsx=spacing;
-   int32_t offsy=30;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	m_ls = new UI::Listselect<const char *>
+		(this,
+		 posx, posy,
+		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 40);
+	m_ls->selected.set(this, &Main_Menu_Load_Map::selected);
+	m_ls->double_clicked.set(this, &Main_Menu_Load_Map::double_clicked);
 
-   // listselect
-   m_ls=new UI::Listselect<const char *>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-40);
-   m_ls->selected.set(this, &Main_Menu_Load_Map::selected);
-   m_ls->double_clicked.set(this, &Main_Menu_Load_Map::double_clicked);
+	posx = get_inner_w() / 2 + spacing;
+	posy += 20;
+	new UI::Textarea(this, posx, posy, 150, 20, _("Name: "), Align_CenterLeft);
+	m_name =
+		new UI::Textarea
+		(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // the descriptive areas
-   // Name
-   posx=get_inner_w()/2+spacing;
-   posy+=20;
-   new UI::Textarea(this, posx, posy, 150, 20, _("Name: "), Align_CenterLeft);
-   m_name=new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
+	new UI::Textarea
+		(this, posx, posy, 150, 20, _("Author: "), Align_CenterLeft);
+	m_author =
+		new UI::Textarea
+		(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // Author
-   new UI::Textarea(this, posx, posy, 150, 20, _("Author: "), Align_CenterLeft);
-   m_author=new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
+	new UI::Textarea(this, posx, posy, 70, 20, _("Size: "), Align_CenterLeft);
+	m_size =
+		new UI::Textarea
+		(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // Size
-   new UI::Textarea(this, posx, posy, 70, 20, _("Size: "), Align_CenterLeft);
-   m_size=new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
+	new UI::Textarea(this, posx, posy, 70, 20, _("World: "), Align_CenterLeft);
+	m_world =
+		new UI::Textarea
+		(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
-   // World
-   new UI::Textarea(this, posx, posy, 70, 20, _("World: "), Align_CenterLeft);
-   m_world=new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
-
-   // Players
-   new UI::Textarea(this, posx, posy, 70, 20, _("Players: "), Align_CenterLeft);
-   m_nrplayers=new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
-   posy+=20+spacing;
+	new UI::Textarea
+		(this, posx, posy, 70, 20, _("Players: "), Align_CenterLeft);
+	m_nrplayers =
+		new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
+	posy += 20 + spacing;
 
 
-   // Description
-   new UI::Textarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
-   m_descr=new UI::Multiline_Textarea(this, posx+70, posy, get_inner_w()-posx-spacing-70, get_inner_h()-posy-spacing-40, "---", Align_CenterLeft);
+	new UI::Textarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
+	m_descr =
+		new UI::Multiline_Textarea
+		(this,
+		 posx + 70, posy,
+		 get_inner_w() - posx - spacing - 70,
+		 get_inner_h() - posy - spacing - 40,
+		 "---", Align_CenterLeft);
 
-   posx=5;
-   posy=get_inner_h()-30;
+	posx = 5;
+	posy = get_inner_h() - 30;
 
 	m_ok_btn = new UI::Button<Main_Menu_Load_Map>
 		(this,
@@ -119,25 +131,21 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 		 &Main_Menu_Load_Map::die, this,
 		 _("Cancel"));
 
-   m_basedir="maps";
-   m_curdir="maps";
+	m_basedir = "maps";
+	m_curdir  = "maps";
 
-   fill_list();
+	fill_list();
 
-   center_to_parent();
-   move_to_top();
+	center_to_parent();
+	move_to_top();
 }
 
 /*
 ===============
-Main_Menu_Load_Map::~Main_Menu_Load_Map
-
 Unregister from the registry pointer
 ===============
 */
-Main_Menu_Load_Map::~Main_Menu_Load_Map()
-{
-}
+Main_Menu_Load_Map::~Main_Menu_Load_Map() {}
 
 /*
 ===========
@@ -152,14 +160,14 @@ void Main_Menu_Load_Map::clicked_ok() {
 		 &&
 		 !WL_Map_Loader::is_widelands_map(filename))
 	{
-	      m_curdir=g_fs->FS_CanonicalizeName(filename);
-         m_ls->clear();
-         m_mapfiles.clear();
-         fill_list();
-		} else {
-			m_parent->load(filename);
-			die();
-		}
+		m_curdir = g_fs->FS_CanonicalizeName(filename);
+		m_ls->clear();
+		m_mapfiles.clear();
+		fill_list();
+	} else {
+		m_parent->load(filename);
+		die();
+	}
 }
 
 /*
@@ -168,32 +176,34 @@ void Main_Menu_Load_Map::clicked_ok() {
 void Main_Menu_Load_Map::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-   m_ok_btn->set_enabled(true);
+	m_ok_btn->set_enabled(true);
 
 	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
-		Widelands::Map_Loader * const m_ml = map.get_correct_loader(name);
-      m_ml->preload_map(true); // This has worked before, no problem
-      delete m_ml;
+		{
+			Widelands::Map_Loader * const m_ml = map.get_correct_loader(name);
+			m_ml->preload_map(true); //  This has worked before, no problem.
+			delete m_ml;
+		}
 
 		m_name  ->set_text(map.get_name       ());
 		m_author->set_text(map.get_author     ());
 		m_descr ->set_text(map.get_description());
 		m_world ->set_text(map.get_world_name ());
 
-      char buf[200];
+		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());
-      m_nrplayers->set_text(buf);
+		m_nrplayers->set_text(buf);
 
 		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-      m_size->set_text(buf);
+		m_size     ->set_text(buf);
 	} else {
-      m_name->set_text("");
-      m_author->set_text("");
-      m_descr->set_text("");
-      m_world->set_text("");
-      m_nrplayers->set_text("");
-      m_size->set_text("");
+		m_name     ->set_text("");
+		m_author   ->set_text("");
+		m_descr    ->set_text("");
+		m_world    ->set_text("");
+		m_nrplayers->set_text("");
+		m_size     ->set_text("");
 	}
 }
 
@@ -212,7 +222,7 @@ void Main_Menu_Load_Map::fill_list() {
    // First, we add all directorys
    // We manually add the parent directory
 	if (m_curdir != m_basedir) {
-	   m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
+		m_parentdir = g_fs->FS_CanonicalizeName(m_curdir + "/..");
 		m_ls->add
 			("<parent>",
 			 m_parentdir.c_str(),
@@ -225,7 +235,7 @@ void Main_Menu_Load_Map::fill_list() {
 		 pname != mapfiles_end;
 		 ++pname)
 	{
-      const char *name = pname->c_str();
+		const char * const name = pname->c_str();
 		if
 			(strcmp(FileSystem::FS_Filename(name), ".")    and
 			 strcmp(FileSystem::FS_Filename(name), "..")   and // Upsy, appeared again. ignore
@@ -246,7 +256,7 @@ void Main_Menu_Load_Map::fill_list() {
 		 pname != mapfiles_end;
 		 ++pname)
 	{
-      const char *name = pname->c_str();
+		char const * const name = pname->c_str();
 
 		if (Widelands::Map_Loader * const m_ml = map.get_correct_loader(name)) {
 			try {
@@ -258,9 +268,7 @@ void Main_Menu_Load_Map::fill_list() {
 					 (PicMod_Game,
 					  dynamic_cast<WL_Map_Loader const *>(m_ml) ?
 					  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (_wexception&) {
-         // we simply skip illegal entries
-			}
+			} catch (_wexception&) {} //  we simply skip illegal entries
 			delete m_ml;
 		}
 	}

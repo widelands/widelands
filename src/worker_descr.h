@@ -117,4 +117,4 @@ protected:
 
 };
 
-#endif // WORKER_DESCR_H
+#endif

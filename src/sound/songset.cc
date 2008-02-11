@@ -121,8 +121,9 @@ Mix_Music *Songset::get_song()
 	if (m_m) {
 		log(("Sound_Handler: loaded song \""+filename+"\"\n").c_str());
 	} else {
-		log(("Sound_Handler: loading song \"" + filename +
-		     "\" failed!\n").c_str());
+		log
+			(("Sound_Handler: loading song \"" + filename + "\" failed!\n")
+			 .c_str());
 		log("Sound_Handler: %s\n", Mix_GetError());
 	}
 

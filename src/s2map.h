@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__S2MAP_H
-#define __S__S2MAP_H
+#ifndef S2MAP_H
+#define S2MAP_H
 
 #include "map_loader.h"
 
@@ -44,18 +44,18 @@ struct S2MapDescrHeader {
 //  40 (0x28)
 //  41 (0x29)
 
-#define BOB_NONE            0x0
+#define BOB_NONE             0x00
 
-#define BOB_STONE1          0x1
-#define BOB_STONE2          0x2
-#define BOB_STONE3          0x3
-#define BOB_STONE4          0x4
-#define BOB_STONE5          0x5
-#define BOB_STONE6          0x6
+#define BOB_STONE1           0x01
+#define BOB_STONE2           0x02
+#define BOB_STONE3           0x03
+#define BOB_STONE4           0x04
+#define BOB_STONE5           0x05
+#define BOB_STONE6           0x06
 
-#define BOB_SKELETON1        0x7
-#define BOB_SKELETON2        0x8
-#define BOB_SKELETON3         0x21
+#define BOB_SKELETON1        0x07
+#define BOB_SKELETON2        0x08
+#define BOB_SKELETON3        0x21
 
 #define BOB_STANDING_STONES1 0x18
 #define BOB_STANDING_STONES2 0x19
@@ -68,26 +68,26 @@ struct S2MapDescrHeader {
 #define BOB_MUSHROOM1        0x01
 #define BOB_MUSHROOM2        0x22
 
-#define BOB_PEBBLE1          0x2
-#define BOB_PEBBLE2          0x3
-#define BOB_PEBBLE3          0x4
-#define BOB_PEBBLE4         0x25
-#define BOB_PEBBLE5         0x26
-#define BOB_PEBBLE6         0x27
+#define BOB_PEBBLE1          0x02
+#define BOB_PEBBLE2          0x03
+#define BOB_PEBBLE3          0x04
+#define BOB_PEBBLE4          0x25
+#define BOB_PEBBLE5          0x26
+#define BOB_PEBBLE6          0x27
 
-#define BOB_DEADTREE1          0x5
-#define BOB_DEADTREE2         0x6
-#define BOB_DEADTREE3         0x20
-#define BOB_DEADTREE4         0x1f
+#define BOB_DEADTREE1        0x05
+#define BOB_DEADTREE2        0x06
+#define BOB_DEADTREE3        0x20
+#define BOB_DEADTREE4        0x1f
 
-#define BOB_CACTUS1          0xC
-#define BOB_CACTUS2          0xD
+#define BOB_CACTUS1          0x0c
+#define BOB_CACTUS2          0x0d
 
-#define BOB_BUSH1           0x11
-#define BOB_BUSH2           0x13
-#define BOB_BUSH3           0x10
-#define BOB_BUSH4           0x12
-#define BOB_BUSH5           0xa
+#define BOB_BUSH1            0x11
+#define BOB_BUSH2            0x13
+#define BOB_BUSH3            0x10
+#define BOB_BUSH4            0x12
+#define BOB_BUSH5            0x0a
 
 // Settlers 2 has 8 types of trees.
 // I assume that different animation states are stored in the map file
@@ -95,63 +95,67 @@ struct S2MapDescrHeader {
 // together.
 // Unfortunately, I can't verify that (can't run the S2 editor).
 // In the end, it doesn't matter much anyway.
-#define BOB_TREE1           0x70
-#define BOB_TREE2           0x71
-#define BOB_TREE3           0x72
-#define BOB_TREE4           0x73
-#define BOB_TREE5           0x74
-#define BOB_TREE6           0x75
-#define BOB_TREE7           0x76
-#define BOB_TREE8           0x77
+#define BOB_TREE1_T          0x70
+#define BOB_TREE1_S          0x71
+#define BOB_TREE1_M          0x72
+#define BOB_TREE1            0x73
 
-#define BOB_TREE9           0xB0
-#define BOB_TREE10          0xb1
-#define BOB_TREE11          0xB2
-#define BOB_TREE12          0xb3
-#define BOB_TREE13          0xb4
-#define BOB_TREE14          0xb5
-#define BOB_TREE15          0xB6
-#define BOB_TREE16          0xB7
+#define BOB_TREE2_T          0x74
+#define BOB_TREE2_S          0x75
+#define BOB_TREE2_M          0x76
+#define BOB_TREE2            0x77
 
-#define BOB_TREE17          0xf0
-#define BOB_TREE18          0xf1
-#define BOB_TREE19          0xF2
-#define BOB_TREE20          0xF3
-#define BOB_TREE21          0xf4
-#define BOB_TREE22          0xF5
-#define BOB_TREE23          0xf6
-#define BOB_TREE24          0xf7
+#define BOB_TREE3_T          0xb0
+#define BOB_TREE3_S          0xb1
+#define BOB_TREE3_M          0xb2
+#define BOB_TREE3            0xb3
 
-#define BOB_TREE25          0x30
-#define BOB_TREE26          0x31
-#define BOB_TREE27          0x32
-#define BOB_TREE28          0x33
-#define BOB_TREE29          0x34
-#define BOB_TREE30          0x35
-#define BOB_TREE31          0x36
-#define BOB_TREE32          0x37
+#define BOB_TREE4_T          0xb4
+#define BOB_TREE4_S          0xb5
+#define BOB_TREE4_M          0xb6
+#define BOB_TREE4            0xb7
 
-#define BOB_GRASS1          0x0e
-#define BOB_GRASS2          0x14
-#define BOB_GRASS3          0x0f
+#define BOB_TREE5_T          0xf0
+#define BOB_TREE5_S          0xf1
+#define BOB_TREE5_M          0xf2
+#define BOB_TREE5            0xf3
+
+#define BOB_TREE6_T          0xf4
+#define BOB_TREE6_S          0xf5
+#define BOB_TREE6_M          0xf6
+#define BOB_TREE6            0xf7
+
+#define BOB_TREE7_T          0x30
+#define BOB_TREE7_S          0x31
+#define BOB_TREE7_M          0x32
+#define BOB_TREE7            0x33
+
+#define BOB_TREE8_T          0x34
+#define BOB_TREE8_S          0x35
+#define BOB_TREE8_M          0x36
+#define BOB_TREE8            0x37
+
+#define BOB_GRASS1           0x0e
+#define BOB_GRASS2           0x14
+#define BOB_GRASS3           0x0f
 
 
 struct S2_Map_Loader : public Widelands::Map_Loader {
-	S2_Map_Loader(const char *, Widelands::Map *);
-      virtual ~S2_Map_Loader();
+	S2_Map_Loader(const char *, Widelands::Map &);
+	virtual ~S2_Map_Loader();
 
-      virtual int32_t preload_map(bool);
+	virtual int32_t preload_map(bool);
 	void load_world();
 	virtual int32_t load_map_complete
 		(Widelands::Editor_Game_Base *, bool scenario);
 
 private:
-      char  m_filename[256];
+	char  m_filename[256];
 
-      uint8_t *load_s2mf_section(FileRead *, int32_t width, int32_t height);
-      void  load_s2mf_header();
+	uint8_t * load_s2mf_section(FileRead *, int32_t width, int32_t height);
+	void load_s2mf_header();
 	void load_s2mf(Widelands::Editor_Game_Base *);
 };
 
 
-#endif /* __S__S2MAP_H */
+#endif

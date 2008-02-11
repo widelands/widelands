@@ -80,8 +80,7 @@ void Trigger_Military_Influence::check_set_conditions(Game const & game) {
 						goto next_location;
 				if (m_count <= ++count)
 					return set_trigger(true);
-			}
-		next_location:;
+			} next_location:;
 		} while (mr.advance(map));
 	else
 		do {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,44 +42,45 @@ Game_Server_Protocol_Packet_GetRoomInfo::
  * Get this packets id
  */
 uint16_t Game_Server_Protocol_Packet_GetRoomInfo::get_id() {
-   return GGSPP_GETROOMINFO;
+	return GGSPP_GETROOMINFO;
 }
 
 /*
  * Write To network
  */
 void Game_Server_Protocol_Packet_GetRoomInfo::send(Network_Buffer* buffer) {
-   buffer->put_string(m_roomname);
+	buffer->put_string(m_roomname);
 }
 
 /*
  * Handle reply
  */
 void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
-   uint8_t flags = buf->get_8();
+	uint8_t const flags = buf->get_8();
 
 	if (flags == RI_NONEXISTANT) {
-      char buffer[1024];
+		char buffer[1024];
 
 		snprintf
 			(buffer, sizeof(buffer),
-			 _("The Room %s is currently not logged in or unknown to the "
-			   "server.\n")
+			 _
+			 ("The Room %s is currently not logged in or unknown to the "
+			  "server.\n")
 			 .c_str(),
 			 m_roomname.c_str());
 
-      gsc->server_message(buffer);
-      return;
+		gsc->server_message(buffer);
+		return;
 	}
 
-   assert(flags == RI_ACK) ;
+	assert(flags == RI_ACK);
 
-   uint16_t nrusers = buf->get_16();
+	uint16_t const nrusers = buf->get_16();
 
-   std::vector< std::string > users;
+	std::vector<std::string> users;
 
 	for (uint32_t i = 0; i < nrusers; ++i)
-      users.push_back(buf->get_string());
+		users.push_back(buf->get_string());
 
-   gsc->get_room_info(users);
+	gsc->get_room_info(users);
 }

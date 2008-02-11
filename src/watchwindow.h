@@ -26,4 +26,4 @@ class Interactive_Player;
 
 void show_watch_window(Interactive_Player & parent, Widelands::Coords coords);
 
-#endif /* WATCHWINDOW_H */
+#endif

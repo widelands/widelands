@@ -96,8 +96,7 @@ AttackController::AttackController(Editor_Game_Base & eg) :
 	BaseImmovable  (globalAttackControllerDescr),
 	attackedMsEmpty(false),
 	m_egbase(&eg)
-{
-}
+{}
 
 AttackController::AttackController(Editor_Game_Base* eg, Flag* _flag, int32_t _attacker, int32_t _defender) :
 BaseImmovable  (globalAttackControllerDescr),
@@ -107,11 +106,9 @@ totallyLaunched(0),
 attackedMsEmpty(false),
 flag           (_flag),
 m_egbase       (eg)
-{
-}
+{}
 
-AttackController::~AttackController() {
-}
+AttackController::~AttackController() {}
 
 //Methods inherited by BaseImmovable
 void AttackController::act (Game* game, uint32_t) {
@@ -421,20 +418,20 @@ void AttackController::Loader::load(FileRead & fr) {
 	egbase().register_attack_controller(ctrl);
 
 	try {
-	flag = fr.Unsigned32();
+		flag = fr.Unsigned32();
 
-	ctrl->attackingPlayer = fr.Unsigned8();
-	ctrl->defendingPlayer = fr.Unsigned8();
-	ctrl->totallyLaunched = fr.Unsigned32();
-	ctrl->attackedMsEmpty = fr.Unsigned8();
+		ctrl->attackingPlayer = fr.Unsigned8();
+		ctrl->defendingPlayer = fr.Unsigned8();
+		ctrl->totallyLaunched = fr.Unsigned32();
+		ctrl->attackedMsEmpty = fr.Unsigned8();
 
-	uint32_t numBs = fr.Unsigned32();
+		uint32_t numBs = fr.Unsigned32();
 
 		for (uint32_t j = 0; j < numBs; ++j) {
-		uint32_t soldier = fr.Unsigned32();
-		uint32_t origin = fr.Unsigned32();
+			uint32_t soldier = fr.Unsigned32();
+			uint32_t origin = fr.Unsigned32();
 
-		Coords battleGround;
+			Coords battleGround;
 			try {
 				battleGround = fr.Coords32(egbase().map().extent());
 			} catch (_wexception const & e) {

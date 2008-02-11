@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_INFO_TOOL_H
-#define __S__EDITOR_INFO_TOOL_H
+#ifndef EDITOR_INFO_TOOL_H
+#define EDITOR_INFO_TOOL_H
 
 #include "editor_tool.h"
 

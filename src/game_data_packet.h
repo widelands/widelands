@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_DATA_PACKET_H
-#define __S__GAME_DATA_PACKET_H
+#ifndef GAME_DATA_PACKET_H
+#define GAME_DATA_PACKET_H
 
 #include "wexception.h"
 
@@ -39,7 +39,7 @@ saved game file. it is an abstract base class
 ========================================
 */
 struct Game_Data_Packet {
-      virtual ~Game_Data_Packet() {}
+	virtual ~Game_Data_Packet() {}
 	virtual void Read(FileSystem &, Game *, Map_Map_Object_Loader * = 0)
 		throw (_wexception)
 		= 0;

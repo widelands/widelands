@@ -132,20 +132,12 @@ int32_t Cmd_Queue::run_queue(int32_t interval, int32_t* game_time_var)
 }
 
 
-Command::Command (int32_t t)
-{
-	m_duetime = t;
-}
-
-Command::~Command ()
-{
-}
+Command::~Command () {}
 
 
-GameLogicCommand::GameLogicCommand (int32_t duetime)
+GameLogicCommand::GameLogicCommand (int32_t const duetime)
 	: Command(duetime)
-{
-}
+{}
 
 #define BASE_CMD_VERSION 1
 

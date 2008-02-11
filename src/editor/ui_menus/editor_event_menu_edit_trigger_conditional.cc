@@ -47,22 +47,23 @@ UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
 m_given_cond (cond),
 m_event_chain(chain)
 {
+	int32_t const offsx    =   5;
+	int32_t const offsy    =  25;
+	int32_t const spacing  =   5;
+	int32_t       posx     = offsx;
+	int32_t       posy     = offsy;
+	int32_t const ls_width = 180;
 
-   const int32_t offsx=5;
-   const int32_t offsy=25;
-   const int32_t spacing=5;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
-   const int32_t ls_width = 180;
-
-   // Trigger List
-   new UI::Textarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
+	//  trigger List
+	new UI::Textarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
 	m_construction= new UI::Listselect<Widelands::TriggerConditional_Factory::Token &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
-   m_construction->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_selected);
-   m_construction->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked);
-   posx += ls_width + spacing;
+	m_construction->selected.set
+		(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_selected);
+	m_construction->double_clicked.set
+		(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked);
+	posx += ls_width + spacing;
 
-   posy = 35;
+	posy = 35;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
@@ -74,7 +75,7 @@ m_event_chain(chain)
 		 this, Widelands::TriggerConditional_Factory::LPAREN,
 		 _("("));
 
-   posy += 20 + spacing;
+	posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
@@ -86,7 +87,7 @@ m_event_chain(chain)
 		 this, Widelands::TriggerConditional_Factory::RPAREN,
 		 _(")"));
 
-   posy += 20 + spacing;
+	posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
@@ -110,7 +111,7 @@ m_event_chain(chain)
 		 this, Widelands::TriggerConditional_Factory::OR,
 		 _("OR"));
 
-   posy += 20 + spacing;
+	posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
@@ -122,7 +123,7 @@ m_event_chain(chain)
 		 this, Widelands::TriggerConditional_Factory::XOR,
 		 _("XOR"));
 
-   posy += 20 + spacing;
+	posy += 20 + spacing;
 
 	new UI::IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
@@ -134,7 +135,7 @@ m_event_chain(chain)
 		 this, Widelands::TriggerConditional_Factory::NOT,
 		 _("NOT"));
 
-   posy += 20 + spacing + spacing;
+	posy += 20 + spacing + spacing;
 
 	m_insert_btn = new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
@@ -145,7 +146,7 @@ m_event_chain(chain)
 		 _("Insert"),
 		 false);
 
-   posy += 20 + spacing + spacing;
+	posy += 20 + spacing + spacing;
 
 	m_delete_btn = new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
@@ -156,7 +157,7 @@ m_event_chain(chain)
 		 std::string(),
 		 false);
 
-   posy += 20 + spacing + spacing + spacing;
+	posy += 20 + spacing + spacing + spacing;
 
 	m_mvup_btn = new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
@@ -176,23 +177,27 @@ m_event_chain(chain)
 		 std::string(),
 		 false);
 
-   posy += 24 + spacing + spacing;
+	posy += 24 + spacing + spacing;
 
-   posx += 80 + spacing;
-   new UI::Textarea(this, posx, offsy, _("Available Triggers: "), Align_Left);
-   m_trigger_list=new UI::Listselect<Widelands::Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
-   m_trigger_list->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
-   m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
+	posx += 80 + spacing;
+	new UI::Textarea(this, posx, offsy, _("Available Triggers: "), Align_Left);
+	m_trigger_list =
+		new UI::Listselect<Widelands::Trigger &>
+		(this,
+		 posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
+	m_trigger_list->selected.set
+		(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
+	m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
 	Manager<Widelands::Trigger> & mtm = parent.egbase().map().mtm();
 	Manager<Widelands::Trigger>::Index const nr_triggers = mtm.size();
 	for (Manager<Widelands::Trigger>::Index i = 0; i < nr_triggers; ++i) {
 		Widelands::Trigger & trigger = mtm[i];
 		m_trigger_list->add(trigger.name().c_str(), trigger);
 	}
-   m_trigger_list->sort();
+	m_trigger_list->sort();
 
-   posy=get_inner_h()-30;
-   posx=(get_inner_w()/2)-80-spacing;
+	posy = get_inner_h() - 30;
+	posx = get_inner_w() / 2 - 80 - spacing;
 
 	new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
@@ -201,7 +206,7 @@ m_event_chain(chain)
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_ok, this,
 		 _("Ok"));
 
-   posx=(get_inner_w()/2)+spacing;
+	posx = get_inner_w() / 2 + spacing;
 
 	new UI::IDButton<Editor_Event_Menu_Edit_TriggerConditional, int32_t>
 		(this,
@@ -235,7 +240,7 @@ m_event_chain(chain)
 		}
 	}
 
-   center_to_parent();
+	center_to_parent();
 }
 
 
@@ -270,13 +275,14 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 			Widelands::TriggerConditional_Factory::create_from_infix
 			(*m_event_chain, tok);
 		m_given_cond = &cond;
-         end_modal(1);
+		end_modal(1);
 	} catch (Widelands::TriggerConditional_Factory::SyntaxError) {
 		UI::Modal_Message_Box mb
 			(&eia(),
 			 _("Syntax Error"),
-			 _("Your conditional contains at least one syntax error. Please "
-			   "correct!\n"),
+			 _
+			 ("Your conditional contains at least one syntax error. Please "
+			  "correct!\n"),
 			 UI::Modal_Message_Box::OK);
 		mb.run();
 		return;
@@ -311,9 +317,9 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger() {
 	delete &m_construction->get_selected();
 
 	m_construction->remove_selected();
-      m_mvup_btn->set_enabled(false);
-      m_mvdown_btn->set_enabled(false);
-      m_delete_btn->set_enabled(false);
+	m_mvup_btn  ->set_enabled(false);
+	m_mvdown_btn->set_enabled(false);
+	m_delete_btn->set_enabled(false);
 }
 
 
@@ -334,12 +340,12 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
  * the listbox got selected
  */
 void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(uint32_t) {
-   m_insert_btn->set_enabled(true);
+	m_insert_btn->set_enabled(true);
 }
-void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint32_t i) {
+void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint32_t const i) {
 	m_mvdown_btn->set_enabled(i + 1 < m_construction->size());
 	m_mvup_btn->set_enabled(i > 0);
-   m_delete_btn->set_enabled(true);
+	m_delete_btn->set_enabled(true);
 }
 
 /*

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__LOAD_REPLAY_H
-#define __S__LOAD_REPLAY_H
+#ifndef FULLSCREEN_MENU_LOADREPLAY_H
+#define FULLSCREEN_MENU_LOADREPLAY_H
 
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"

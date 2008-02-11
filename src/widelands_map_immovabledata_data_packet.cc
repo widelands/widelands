@@ -74,8 +74,10 @@ throw (_wexception)
 			}
 			catch (Map_Object_Descr::Animation_Nonexistent&) {
 				imm->m_anim = imm->descr().main_animation();
-				log("Warning: Animation '%s' not found, using animation '%s').\n",
-					animname, imm->descr().get_animation_name(imm->m_anim).c_str());
+				log
+					("Warning: Animation '%s' not found, using animation '%s').\n",
+					 animname,
+					 imm->descr().get_animation_name(imm->m_anim).c_str());
 			}
 			imm->m_animstart=fr.Signed32();
 

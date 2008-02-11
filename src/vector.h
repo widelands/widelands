@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GEOMETRY_H
-#define GEOMETRY_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include "compile_assert.h"
 
@@ -50,4 +50,4 @@ struct Vector {
 	float x, y, z;
 };
 
-#endif /* GEOMETRY_H */
+#endif

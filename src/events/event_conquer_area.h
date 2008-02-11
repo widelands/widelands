@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_CONQUER_AREA_H
-#define __S__EVENT_CONQUER_AREA_H
+#ifndef EVENT_CONQUER_AREA_H
+#define EVENT_CONQUER_AREA_H
 
 #include "event_player_area.h"
 
@@ -38,7 +38,7 @@ struct Event_Conquer_Area : public Event_Player_Area {
 
 	void Write(Section &, Editor_Game_Base const &) const;
 
-      State run(Game*);
+	State run(Game *);
 };
 
 };

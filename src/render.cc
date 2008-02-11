@@ -48,23 +48,23 @@ using Widelands::Road;
  * Create a Surface from a surface
  */
 Surface::Surface(const Surface& surf) {
-   m_w = surf.m_w;
-   m_h = surf.m_h;
-   m_surface = SDL_DisplayFormat(surf.m_surface); // HACK: assume this should be picture format; there is no SDL_CopySurface
+	m_w = surf.m_w;
+	m_h = surf.m_h;
+	m_surface = SDL_DisplayFormat(surf.m_surface); // HACK: assume this should be picture format; there is no SDL_CopySurface
 }
 
 /*
  * Updating the whole Surface
  */
 void Surface::update() {
-   SDL_UpdateRect(m_surface, 0, 0, 0, 0);
+	SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 }
 
 /*
  * Save a bitmap
  */
 void Surface::save_bmp(const char & fname) const {
-   assert(m_surface);
+	assert(m_surface);
 	SDL_SaveBMP(m_surface, &fname);
 }
 
@@ -75,9 +75,9 @@ void Surface::save_bmp(const char & fname) const {
  * textures
  */
 void Surface::force_disable_alpha() {
-   SDL_Surface* newsur = SDL_DisplayFormat(m_surface);
-   SDL_FreeSurface(m_surface);
-   m_surface = newsur;
+	SDL_Surface* newsur = SDL_DisplayFormat(m_surface);
+	SDL_FreeSurface(m_surface);
+	m_surface = newsur;
 }
 
 /*
@@ -88,7 +88,7 @@ Draws the outline of a rectangle
 ===============
 */
 void Surface::draw_rect(const Rect rc, const RGBColor clr) {
-   assert(m_surface);
+	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
@@ -116,15 +116,15 @@ Draws a filled rectangle
 ===============
 */
 void Surface::fill_rect(const Rect rc, const RGBColor clr) {
-   assert(m_surface);
+	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
 	const uint32_t color = clr.map(format());
 
-   SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
-   SDL_FillRect(m_surface, &r, color);
+	SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
+	SDL_FillRect(m_surface, &r, color);
 }
 
 /*
@@ -142,18 +142,18 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 	assert(rc.h >= 1);
 	const Point bl = rc.bottom_left();
 	for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
-         uint8_t gr, gg, gb;
-         int16_t r, g, b;
-         uint32_t clr = get_pixel(x, y);
-         SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
-         r = gr + factor;
-         g = gg + factor;
-         b = gb + factor;
+		uint8_t gr, gg, gb;
+		int16_t r, g, b;
+		uint32_t clr = get_pixel(x, y);
+		SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
+		r = gr + factor;
+		g = gg + factor;
+		b = gb + factor;
 		if (b & 0xFF00) b = (~b) >> 24;
 		if (g & 0xFF00) g = (~g) >> 24;
 		if (r & 0xFF00) r = (~r) >> 24;
-         clr = SDL_MapRGB(m_surface->format, r, g, b);
-         set_pixel(x, y, clr);
+		clr = SDL_MapRGB(m_surface->format, r, g, b);
+		set_pixel(x, y, clr);
 	}
 }
 
@@ -178,17 +178,17 @@ Blit this given source bitmap to this bitmap.
 */
 void Surface::blit(Point dst, Surface* src, Rect srcrc)
 {
-   SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
-   SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
+	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
+	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
-   SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
+	SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
 }
 
 /*
  * Fast blit, simply copy the source to the destination
  */
 void Surface::fast_blit(Surface* src) {
-   SDL_BlitSurface(src->m_surface, 0, m_surface, 0);
+	SDL_BlitSurface(src->m_surface, 0, m_surface, 0);
 }
 
 /*
@@ -260,11 +260,6 @@ inline static uint32_t calc_minimap_color
 	}
 
 	return pixelcolor;
-
-/*
-
-*/
-   return 0;
 }
 
 template<typename T>
@@ -302,14 +297,15 @@ static void draw_minimap_int
 		Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
-				const Widelands::Player::Field & player_field = player_fields[i];
-				const Widelands::Vision vision = player_field.vision;
-				*reinterpret_cast<T *>(pix) = static_cast<T>
-					(vision ?
-					 calc_minimap_color
-					 (format, egbase, f, flags, player_field.owner, 1 < vision)
-					 :
-					 0);
+			Widelands::Player::Field const & player_field = player_fields[i];
+			Widelands::Vision const vision = player_field.vision;
+			*reinterpret_cast<T *>(pix) =
+				static_cast<T>
+				(vision ?
+				 calc_minimap_color
+				 (format, egbase, f, flags, player_field.owner, 1 < vision)
+				 :
+				 0);
 			}
 		}
 	}
@@ -341,7 +337,8 @@ void Surface::draw_minimap
 		draw_minimap_int<Uint32>
 			(pixels, pitch, format(), w, egbase, player, rc, viewpt, flags);
 		break;
-	default: assert (false);
+	default:
+		assert (false);
 	}
 }
 
@@ -365,51 +362,53 @@ static const char extensions[nextensions][5] = {".bmp", ".png", ".gif", ".jpg"};
 AnimationGfx::AnimationGfx(const AnimationData* data)
 {
 
-   m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
-   m_encodedata.plrclr[0] = data->encdata.plrclr[0];
-   m_encodedata.plrclr[1] = data->encdata.plrclr[1];
-   m_encodedata.plrclr[2] = data->encdata.plrclr[2];
-   m_encodedata.plrclr[3] = data->encdata.plrclr[3];
+	m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
+	m_encodedata.plrclr[0]  = data->encdata.plrclr[0];
+	m_encodedata.plrclr[1]  = data->encdata.plrclr[1];
+	m_encodedata.plrclr[2]  = data->encdata.plrclr[2];
+	m_encodedata.plrclr[3]  = data->encdata.plrclr[3];
 
-   m_hotspot = data->hotspot;
-   m_plrframes = new std::vector<Surface*>[MAX_PLAYERS+1];
+	m_hotspot = data->hotspot;
+	m_plrframes = new std::vector<Surface*>[MAX_PLAYERS+1];
 
-   std::vector<Surface*> frames;
+	std::vector<Surface *> frames;
 	for (;;) {
-      char fname[256];
-      int32_t nr = frames.size();
-      char *p;
+		char fname[256];
+		int32_t nr = frames.size();
+		char *p;
 
-      bool alldone=false;
-      bool cycling=false;
+		bool alldone = false;
+		bool cycling = false;
 
 		for (uint32_t i = 0; i < nextensions; ++i) {
 
-         // create the file name by reverse-scanning for '?' and replacing
-         nr=frames.size();
-         snprintf(fname, sizeof(fname), "%s%s", data->picnametempl.c_str(), extensions[i]);
-         p = fname + strlen(fname);
+			//  create the file name by reverse-scanning for '?' and replacing
+			nr = frames.size();
+			snprintf
+				(fname, sizeof(fname),
+				 "%s%s", data->picnametempl.c_str(), extensions[i]);
+			p = fname + strlen(fname);
 			while (p > fname) {
 				if (*--p != '?')
-               continue;
+					continue;
 
-            cycling=true;
+				cycling = true;
 
-            *p = '0' + (nr % 10);
-            nr = nr / 10;
+				*p = '0' + (nr % 10);
+				nr = nr / 10;
 			}
 
 			if (nr) // cycled up to maximum possible frame number
-            break;
+				break;
 
 
-         // is the frame actually there?
+			//  is the frame actually there?
 			if (not g_fs->FileExists(fname)) {
 				if (i == nextensions - 1) {
 					alldone = true;
 					break;
 				}
-            continue;
+				continue;
 			}
 
 			try {
@@ -421,8 +420,8 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 				frame.set_sdl_surface(bmp);
 			}
 			catch (const std::exception & e) {
-            log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
-            continue;
+				log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
+				continue;
 			}
 
 
@@ -435,7 +434,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 			break;
 	}
 
-   m_plrframes[0] = frames;
+	m_plrframes[0] = frames;
 
 	if (!frames.size())
 		throw wexception("Animation %s has no frames", data->picnametempl.c_str());
@@ -453,11 +452,11 @@ Free all resources
 AnimationGfx::~AnimationGfx()
 {
 	for (Widelands::Player_Number i = 0; i <= MAX_PLAYERS; ++i) {
-      std::vector<Surface*>& frames = m_plrframes[i];
+		std::vector<Surface *> & frames = m_plrframes[i];
 		for (uint32_t j = 0; j < frames.size(); ++j)
-         delete frames[j];
+			delete frames[j];
 	}
-   delete[] m_plrframes;
+	delete[] m_plrframes;
 }
 
 
@@ -471,12 +470,15 @@ Encodes the given surface into a frame
 void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 {
 	//  FIXME This playercolor conversion fails for indexed images. See bug
-	//  FIXME #1880277.
-   assert(m_encodedata.hasplrclrs);
-   std::vector<Surface*>& frames = m_plrframes[plr];
+	//  FIXME #1880277. The efficient way to handle this would of course be to
+	//  FIXME have all playercolor images in indexed format and set the
+	//  FIXME playercolor in the palette before blitting. Then there is no need
+	//  FIXME to keep a version of each image in memory for each player.
+	assert(m_encodedata.hasplrclrs);
+	std::vector<Surface*>& frames = m_plrframes[plr];
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
-      // Copy the old surface
+		//  Copy the old surface.
 		Surface & origsurface = *m_plrframes[0][i];
 		Surface & newsurface = *new Surface();
 		newsurface.set_sdl_surface
@@ -497,7 +499,7 @@ void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 		uint32_t const new_plrclr3 =              plrclrs[2].map(format);
 		uint32_t const new_plrclr4 =              plrclrs[3].map(format);
 
-      // Walk the surface, replace all playercolors
+		//  Walk the surface, replace all playercolors.
 		for (uint32_t y = 0; y < newsurface.get_h(); ++y) {
 			for (uint32_t x = 0; x < newsurface.get_w(); ++x) {
 				const uint32_t clr = newsurface.get_pixel(x, y);
@@ -508,7 +510,6 @@ void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 			}
 		}
 
-      // Add to the framse
 		frames.push_back(&newsurface);
 	}
 }

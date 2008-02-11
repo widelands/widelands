@@ -97,8 +97,10 @@ int32_t LayeredFileSystem::FindFiles
 	if (depth==0)
 		depth=10000; // Wow, if you have so many filesystem you're my hero
 
-	for (FileSystem_rit it = m_filesystems.rbegin();
-	      (it != m_filesystems.rend()) && (i<depth); it++, i++)
+	for
+		(FileSystem_rit it = m_filesystems.rbegin();
+		 it != m_filesystems.rend() && i < depth;
+		 ++it, ++i)
 	{
 		filenameset_t files;
 		(*it)->FindFiles(path, pattern, &files);
@@ -201,7 +203,7 @@ StreamRead * LayeredFileSystem::OpenStreamRead
 {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
-	    it != m_filesystems.rend();
+		 it != m_filesystems.rend();
 		 ++it)
 	{
 		if ((*it)->FileExists(fname))

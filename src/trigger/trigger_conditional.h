@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIGGER_CONDITIONAL_H
-#define __S__TRIGGER_CONDITIONAL_H
+#ifndef TRIGGER_CONDITIONAL_H
+#define TRIGGER_CONDITIONAL_H
 
 #include <vector>
 
@@ -37,8 +37,7 @@ class Game;
  */
 class TriggerConditional;
 namespace TriggerConditional_Factory {
-      // Note: these are ordered for easy precendence parsing
-enum TokenNames {
+enum TokenNames { //  NOTE these are ordered for easy precendence parsing
 	NOT,
 	AND,
 	OR,
@@ -207,4 +206,4 @@ protected:
 
 };
 
-#endif // __S__TRIGGER_CONDITIONAL_H
+#endif

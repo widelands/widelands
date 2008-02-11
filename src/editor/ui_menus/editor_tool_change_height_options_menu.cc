@@ -116,11 +116,14 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
 	Widelands::Field::Height set_to =
 		m_increase_tool.set_tool().get_interval().min;
 	switch (n) {
-	case Change_By_Increase: change_by +=     change_by < MAX_FIELD_HEIGHT_DIFF;
+	case Change_By_Increase:
+		change_by +=     change_by < MAX_FIELD_HEIGHT_DIFF;
 		break;
 	case Change_By_Decrease: change_by -= 1 < change_by;                 break;
 	case    Set_To_Increase: set_to    +=     set_to < MAX_FIELD_HEIGHT; break;
 	case    Set_To_Decrease: set_to    -= 0 < set_to;
+	default:
+		assert(false);
 	}
 
 	m_increase_tool                .set_change_by(change_by);
@@ -128,13 +131,13 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
 	m_increase_tool.set_tool()
 		.set_interval(interval<Widelands::Field::Height>(set_to, set_to));
 
-   select_correct_tool();
-   update();
+	select_correct_tool();
+	update();
 }
 
 /// Update all the textareas, so that they represent the correct values.
 void Editor_Tool_Change_Height_Options_Menu::update() {
-   char buf[250];
+	char buf[250];
 	sprintf(buf, "%i", m_increase_tool.get_change_by());
 	m_change_by_value.set_text(buf);
 	sprintf(buf, "%i", m_increase_tool.set_tool().get_interval().min);

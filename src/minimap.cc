@@ -17,7 +17,7 @@
  *
  */
 
- // just testing - philipp
+// just testing - philipp
 
 #include "minimap.h"
 
@@ -58,7 +58,7 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 	m_viewx = x / TRIANGLE_WIDTH;
 	m_viewy = y / TRIANGLE_HEIGHT;
 
-   update(0, 0, get_w(), get_h());
+	update(0, 0, get_w(), get_h());
 }
 
 /*
@@ -88,7 +88,7 @@ Left-press: warp the view point to the new position
 bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-		// calculates the coordinates corresponding to the mouse position
+	//  calculates the coordinates corresponding to the mouse position
 	Widelands::Coords c
 		(m_viewx + 1 - get_w() / 2 + x, m_viewy + 1 - get_h() / 2 + y);
 

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WIDELANDS_ATTACK_CTRL_H
-#define __S__WIDELANDS_ATTACK_CTRL_H
+#ifndef ATTACK_CONTROLLERL_H
+#define ATTACK_CONTROLLERL_H
 
 #include "immovable.h"
 #include "instances.h"

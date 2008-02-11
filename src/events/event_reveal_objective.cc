@@ -51,7 +51,7 @@ void Event_Reveal_Objective::Read(Section & s, Editor_Game_Base & egbase) {
 
 void Event_Reveal_Objective::Write(Section & s, Editor_Game_Base const &) const
 {
-   assert(m_objective);
+	assert(m_objective);
 	s.set_string("type",      "reveal_objective");
 	s.set_int   ("version",   EVENT_VERSION);
 	s.set_string("objective", m_objective->name());
@@ -61,12 +61,11 @@ void Event_Reveal_Objective::Write(Section & s, Editor_Game_Base const &) const
  * check if trigger conditions are done
  */
 Event::State Event_Reveal_Objective::run(Game *) {
-   assert(m_objective);
+	assert(m_objective);
 
 	m_objective->set_is_visible(true);
 
-   m_state = DONE;
-   return m_state;
+	return m_state = DONE;
 }
 
 };

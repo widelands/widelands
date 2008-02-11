@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAPREGION_H
-#define __S__MAPREGION_H
+#ifndef MAPREGION_H
+#define MAPREGION_H
 
 #include "map.h"
 

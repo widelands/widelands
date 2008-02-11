@@ -59,9 +59,7 @@ PlayerCommand::PlayerCommand (int32_t t, char s) : GameLogicCommand (t)
 	cmdserial = 0;
 }
 
-PlayerCommand::~PlayerCommand ()
-{
-}
+PlayerCommand::~PlayerCommand () {}
 
 PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
 {
@@ -76,7 +74,7 @@ PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
 	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
 	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
-   ///   TESTING STUFF
+	///   TESTING STUFF
 	case PLCMD_ENEMYFLAGACTION:       return new Cmd_EnemyFlagAction      (des);
 	default:
 		throw wexception
@@ -700,16 +698,13 @@ void Cmd_ChangeSoldierCapacity::Read
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
-      // Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
 
-      // Serial
 		uint32_t const fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial = mol.get_object_by_file_index(fileserial)->get_serial();
 
-      // Now new capacity
-		val = fr.Signed16();
+		val = fr.Signed16(); //  now new capacity
 	} else
 		throw wexception
 			("Unknown version in Cmd_ChangeSoldierCapacity::Read: %u",
@@ -755,16 +750,16 @@ void Cmd_EnemyFlagAction::execute (Game* g)
 
 	Player* real_player = g->get_player(attacker);
 
-	log("player(%d)    imm->get_owner (%d)   real_player (%d)\n",
-		player->get_player_number(),
-		imm->get_owner()->get_player_number(),
-		real_player->get_player_number());
+	log
+		("player(%d)    imm->get_owner (%d)   real_player (%d)\n",
+		 player->get_player_number(),
+		 imm->get_owner()->get_player_number(),
+		 real_player->get_player_number());
 
-	if (obj &&
-		obj->get_type() == Map_Object::FLAG &&
-		imm->get_owner() != real_player)
-		real_player->enemyflagaction (static_cast<Flag*>(obj), action, attacker, number, type);
-	else
+	if (upcast(Flag, flag, obj)) {
+		if (imm->get_owner() != real_player)
+			real_player->enemyflagaction (flag, action, attacker, number, type);
+	} else
 		log ("Cmd_EnemyFlagAction Player invalid.\n");
 }
 

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __WARELIST_H
-#define __WARELIST_H
+#ifndef WARELIST_H
+#define WARELIST_H
 
 #include "widelands.h"
 
@@ -49,7 +49,7 @@ struct WareList {
 	void add   (Ware_Index, count_type = 1);
 	void add(const WareList &wl);
 	void remove(Ware_Index, count_type = 1);
-		void remove(const WareList &wl);
+	void remove(WareList const & wl);
 	int32_t stock(Ware_Index) const;
 
 	void set_nrwares(const size_type i) {
@@ -66,5 +66,4 @@ private:
 
 };
 
-#endif   // __WARELIST_H
-
+#endif

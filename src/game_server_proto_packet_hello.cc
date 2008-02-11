@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,15 +38,15 @@ Game_Server_Protocol_Packet_Hello::~Game_Server_Protocol_Packet_Hello() {}
  * Get this packets id
  */
 uint16_t Game_Server_Protocol_Packet_Hello::get_id() {
-   return GGSPP_HELLO;
+	return GGSPP_HELLO;
 }
 
 /*
  * Write To network
  */
 void Game_Server_Protocol_Packet_Hello::send(Network_Buffer* buffer) {
-   buffer->put_8(FEATURES_NONE);
-   buffer->put_string(m_name);
+	buffer->put_8(FEATURES_NONE);
+	buffer->put_string(m_name);
 }
 
 /*
@@ -54,20 +54,20 @@ void Game_Server_Protocol_Packet_Hello::send(Network_Buffer* buffer) {
  */
 void Game_Server_Protocol_Packet_Hello::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
 #ifdef DEBUG
-   uint8_t retcode = buf->get_8();
+	uint8_t retcode = buf->get_8();
 #else
-   buf->get_8();
+	buf->get_8();
 #endif
 
-   m_name = buf->get_string();
-   std::string m_group = buf->get_string();
-   std::string m_room= buf->get_string();
-   std::string m_motd= buf->get_string();
+	m_name              = buf->get_string();
+	std::string m_group = buf->get_string();
+	std::string m_room  = buf->get_string();
+	std::string m_motd  = buf->get_string();
 
-   assert(retcode == USER_WELCOME); // no other code defined at the moment
+	assert(retcode == USER_WELCOME); // no other code defined at the moment
 
-   gsc->set_username(m_name.c_str());
-   gsc->set_group(m_group.c_str());
-   gsc->set_room(m_room.c_str());
-   gsc->server_message(m_motd);
+	gsc->set_username  (m_name.c_str());
+	gsc->set_group     (m_group.c_str());
+	gsc->set_room      (m_room.c_str());
+	gsc->server_message(m_motd);
 }

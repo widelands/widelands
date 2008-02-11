@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_LOADER_H
-#define __S__GAME_LOADER_H
+#ifndef GAME_LOADER_H
+#define GAME_LOADER_H
 
 #include <stdint.h>
 
@@ -36,12 +36,12 @@ class Game_Preload_Data_Packet;
 struct Game_Loader {
 	Game_Loader(FileSystem &, Game* game);
 
-      int32_t preload_game(Game_Preload_Data_Packet*);
-      int32_t load_game();
+	int32_t preload_game(Game_Preload_Data_Packet *);
+	int32_t    load_game();
 
 private:
 	FileSystem & m_fs;
-      Game* m_game;
+	Game       * m_game;
 };
 
 };

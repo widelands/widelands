@@ -42,9 +42,9 @@ Multiline_Editbox::Multiline_Editbox
 	m_maxchars        (0xffff),
 	m_needs_update    (false)
 {
-   set_scrollmode(ScrollLog);
-   set_handle_mouse(true);
-   set_can_focus(true);
+	set_scrollmode(ScrollLog);
+	set_handle_mouse(true);
+	set_can_focus(true);
 	set_think(false);
 }
 
@@ -53,7 +53,7 @@ Multiline_Editbox::Multiline_Editbox
 Free allocated resources
 */
 Multiline_Editbox::~Multiline_Editbox() {
-   changed.call();
+	changed.call();
 }
 
 /**
@@ -62,55 +62,56 @@ a key event must be handled
 bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 	char c = code.unicode & 0xff80 ? '\0' : code.unicode;
 
-   m_needs_update=true;
+	m_needs_update = true;
 
 	if (down) {
-      std::string txt= g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
+		std::string txt =
+			g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
 		switch (code.sym) {
 		case SDLK_BACKSPACE:
 			if (txt.size() and m_cur_pos) --m_cur_pos;
 			else break;
-            // Fallthrough
+			//  fallthrough
 
 		case SDLK_DELETE:
 			if (txt.size() and m_cur_pos < txt.size()) {
-               txt.erase(txt.begin() + m_cur_pos);
-               Multiline_Textarea::set_text(txt.c_str());
+				txt.erase(txt.begin() + m_cur_pos);
+				Multiline_Textarea::set_text(txt.c_str());
 			}
 			break;
 
 		case SDLK_LEFT:
-            m_cur_pos-=1;
+			m_cur_pos -= 1;
 			if (static_cast<int32_t>(m_cur_pos) < 0)
 				m_cur_pos = 0;
-            break;
+			break;
 
 		case SDLK_RIGHT:
-            m_cur_pos+=1;
+			m_cur_pos += 1;
 			if (m_cur_pos >= txt.size())
 				m_cur_pos = txt.size();
-            break;
+			break;
 
 		case SDLK_DOWN:
 			if (m_cur_pos < txt.size() - 1) {
-               uint32_t begin_of_line=m_cur_pos;
+				uint32_t begin_of_line = m_cur_pos;
 				if (txt[begin_of_line] == '\n')
 					--begin_of_line;
 				while (begin_of_line > 0 && txt[begin_of_line] != '\n')
 					--begin_of_line;
 				if (begin_of_line)
 					++begin_of_line;
-               uint32_t begin_of_next_line=m_cur_pos;
+				uint32_t begin_of_next_line = m_cur_pos;
 				while
 					(txt[begin_of_next_line] != '\n'
 					 &&
 					 begin_of_next_line < txt.size())
-                  ++begin_of_next_line;
+					++begin_of_next_line;
 				begin_of_next_line += begin_of_next_line == txt.size() ? -1 : 1;
-               uint32_t end_of_next_line=begin_of_next_line;
+				uint32_t end_of_next_line = begin_of_next_line;
 				while
 					(txt[end_of_next_line] != '\n' && end_of_next_line < txt.size())
-                  ++end_of_next_line;
+					++end_of_next_line;
 				m_cur_pos =
 					begin_of_next_line + m_cur_pos - begin_of_line
 					>
@@ -122,17 +123,17 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 
 		case SDLK_UP:
 			if (m_cur_pos > 0) {
-               uint32_t begin_of_line=m_cur_pos;
+				uint32_t begin_of_line = m_cur_pos;
 				if (txt[begin_of_line] == '\n')
 					--begin_of_line;
 				while (begin_of_line > 0 && txt[begin_of_line] != '\n')
 					--begin_of_line;
 				if (begin_of_line)
 					++begin_of_line;
-               uint32_t end_of_last_line=begin_of_line;
+				uint32_t end_of_last_line = begin_of_line;
 				if (begin_of_line)
 					--end_of_last_line;
-               uint32_t begin_of_lastline=end_of_last_line;
+				uint32_t begin_of_lastline = end_of_last_line;
 				if (txt[begin_of_lastline] == '\n')
 					--begin_of_lastline;
 				while (begin_of_lastline > 0 && txt[begin_of_lastline] != '\n')
@@ -149,22 +150,22 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 			break;
 
 		case SDLK_RETURN:
-            c='\n';
-            // fallthrough
+			c = '\n';
+			// fallthrough
 		default:
 			if (c and txt.size() < m_maxchars) {
-               txt.insert(m_cur_pos, 1, c);
-               m_cur_pos++;
+				txt.insert(m_cur_pos, 1, c);
+				++m_cur_pos;
 			}
-            Multiline_Textarea::set_text(txt.c_str());
-            break;
+			Multiline_Textarea::set_text(txt.c_str());
+			break;
 		}
-      Multiline_Textarea::set_text(txt.c_str());
-      changed.call();
-      return true;
+		Multiline_Textarea::set_text(txt.c_str());
+		changed.call();
+		return true;
 	}
 
-   return false;
+	return false;
 }
 
 /*
@@ -172,10 +173,10 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
  */
 bool Multiline_Editbox::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
-      focus();
-      Multiline_Textarea::set_text(get_text().c_str());
-      changed.call();
-      return true;
+		focus();
+		Multiline_Textarea::set_text(get_text().c_str());
+		changed.call();
+		return true;
 	}
 	return Multiline_Textarea::handle_mousepress(btn, x, y);
 }
@@ -203,9 +204,9 @@ void Multiline_Editbox::draw(RenderTarget* dst)
 			 m_cache_mode,
 			 &m_cache_id,
 			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1)); //explicit cast is neccessary to avoid a compiler warning
-      m_cache_mode = Widget_Cache_Use;
+		m_cache_mode = Widget_Cache_Use;
 	}
-   Multiline_Textarea::draw_scrollbar();
+	Multiline_Textarea::draw_scrollbar();
 }
 
 /*
@@ -213,9 +214,9 @@ void Multiline_Editbox::draw(RenderTarget* dst)
  * position
  */
 void Multiline_Editbox::set_text(const char* str) {
-      m_cur_pos=strlen(str);
+	m_cur_pos = strlen(str);
 
-   Multiline_Textarea::set_text(str);
+	Multiline_Textarea::set_text(str);
 
 }
 };

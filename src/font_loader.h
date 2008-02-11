@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__FONT_LOADER_H
-#define __S__FONT_LOADER_H
+#ifndef FONT_LOADER_H
+#define FONT_LOADER_H
 
 #include "fileread.h"
 #include "rgbcolor.h"
@@ -45,4 +45,4 @@ private:
 	std::vector<FileRead *> m_freads;
 };
 
-#endif // __S__FONT_LOADER_H
+#endif

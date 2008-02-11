@@ -39,12 +39,12 @@ void Map_Heights_Data_Packet::Read
 throw (_wexception)
 {
 
-   FileRead fr;
-   fr.Open(fs, "binary/heights");
+	FileRead fr;
+	fr.Open(fs, "binary/heights");
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-      // Read all the heights
+		//  read all the heights
 		Map & map = egbase->map();
 		Map_Index const max_index = map.max_index();
 		for (Map_Index i = 0; i < max_index; ++i)
@@ -75,7 +75,7 @@ throw (_wexception)
 	for (Map_Index i = 0; i < max_index; ++i)
 		fw.Unsigned8(map[i].get_height());
 
-   fw.Write(fs,  "binary/heights");
+	fw.Write(fs,  "binary/heights");
 }
 
 };

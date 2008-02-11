@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__BUTTON_H
-#define __S__BUTTON_H
+#ifndef UI_BUTTON_H
+#define UI_BUTTON_H
 
 #include "ui_panel.h"
 #include "ui_signal.h"

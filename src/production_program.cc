@@ -39,8 +39,12 @@ ProductionProgram::parse
 Parse a program. The building is parsed completly. hopefully
 ===============
 */
-void ProductionProgram::parse(std::string directory, Profile* prof,
-	std::string name, ProductionSite_Descr* building, const EncodeData* encdata)
+void ProductionProgram::parse
+	(std::string    const & directory,
+	 Profile              * const prof,
+	 std::string    const & name,
+	 ProductionSite_Descr * const building,
+	 EncodeData     const * const encdata)
 {
 	Section* sprogram = prof->get_safe_section(name.c_str());
 
@@ -67,7 +71,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			act.iparam1 = strtol(cmd[1].c_str(), &endp, 0);
 
 			if (endp && *endp)
-            throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 		} else if (cmd[0] == "consume") {
 			if (cmd.size() != 2 && cmd.size() != 3)
 				throw wexception
@@ -90,18 +94,18 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 							 idx, cmd[1].c_str());
 			}
 
-         act.type = ProductionAction::actConsume;
-         act.sparam1 = cmd[1];
-         int32_t how_many=1;
+			act.type = ProductionAction::actConsume;
+			act.sparam1 = cmd[1];
+			int32_t how_many = 1;
 			if (cmd.size() == 3) {
-            char* endp;
-            how_many = strtol(cmd[2].c_str(), &endp, 0);
+				char * endp;
+				how_many = strtol(cmd[2].c_str(), &endp, 0);
 				if (endp && *endp)
 					throw wexception
 						("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 
 			}
-         act.iparam1 = how_many;
+			act.iparam1 = how_many;
 		}  else if (cmd[0] == "check") {
 			if (cmd.size() != 2 && cmd.size() != 3)
 				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
@@ -122,16 +126,16 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			}
 			act.type = ProductionAction::actCheck;
 			act.sparam1 = cmd[1];
-         int32_t how_many=1;
+			int32_t how_many = 1;
 			if (cmd.size() == 3) {
-            char* endp;
-            how_many = strtol(cmd[2].c_str(), &endp, 0);
+				char * endp;
+				how_many = strtol(cmd[2].c_str(), &endp, 0);
 				if (endp && *endp)
 					throw wexception
 						("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 
 			}
-         act.iparam1 = how_many;
+			act.iparam1 = how_many;
 
 		} else if (cmd[0] == "produce") {
 			if (cmd.size() != 2)
@@ -194,11 +198,11 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			// dynamically allocate animations here
 			if (not building->is_animation_known(cmd[1].c_str())) {
-            Section* s = prof->get_safe_section(cmd[1].c_str());
-            act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
-            building->add_animation(cmd[1].c_str(), act.iparam1);
+				Section* s = prof->get_safe_section(cmd[1].c_str());
+				act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
+				building->add_animation(cmd[1].c_str(), act.iparam1);
 			} else
-            act.iparam1 = building->get_animation(cmd[1].c_str());
+				act.iparam1 = building->get_animation(cmd[1].c_str());
 
 			if (cmd[1] == "idle")
 				/* XXX */
@@ -211,29 +215,31 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			if (act.iparam2 <= 0)
 				throw wexception("animation duration must be positive");
 		} else if (cmd[0] == "mine") {
-         char* endp;
+			char * endp;
 
 			if (cmd.size() != 5)
 				throw wexception("Usage: mine <resource> <area> <up to %%> <chance after %%>");
 
 			act.type = ProductionAction::actMine;
 			act.sparam1=cmd[1]; // what to mine
-         act.iparam1=strtol(cmd[2].c_str(), &endp, 0);
+			act.iparam1=strtol(cmd[2].c_str(), &endp, 0);
 			if (endp && *endp)
-            throw wexception("Bad area '%s'", cmd[2].c_str());
-         act.iparam2=strtol(cmd[3].c_str(), &endp, 0);
+				throw wexception("Bad area '%s'", cmd[2].c_str());
+			act.iparam2=strtol(cmd[3].c_str(), &endp, 0);
 			if (endp && *endp || act.iparam2 > 100)
-            throw wexception("Bad maximum amount: '%s'", cmd[3].c_str());
-         act.iparam3=strtol(cmd[4].c_str(), &endp, 0);
+				throw wexception("Bad maximum amount: '%s'", cmd[3].c_str());
+			act.iparam3=strtol(cmd[4].c_str(), &endp, 0);
 			if (endp && *endp || act.iparam3 > 100)
-            throw wexception("Bad chance after maximum amount is empty: '%s'", cmd[4].c_str());
+				throw wexception
+					("Bad chance after maximum amount is empty: '%s'",
+					 cmd[4].c_str());
 
-				 std::string description = building->descname();
-				 description += ' ';
-				 description += name;
-				 description += " mine ";
-				 description += act.sparam1;
-				 building->m_workarea_info[act.iparam1].insert(description);
+			std::string description = building->descname();
+			description            += ' ';
+			description            += name;
+			description            += " mine ";
+			description            += act.sparam1;
+			building->m_workarea_info[act.iparam1].insert(description);
 		} else if (cmd[0] == "call") {
 			if (cmd.size() != 2)
 				throw wexception("Usage: call <program>");

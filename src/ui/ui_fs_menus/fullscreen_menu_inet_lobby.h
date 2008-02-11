@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__INET_LOBBY_H
-#define __S__INET_LOBBY_H
+#ifndef FULLSCREEN_MENU_INET_LOBBY_H
+#define FULLSCREEN_MENU_INET_LOBBY_H
 
 #include "fullscreen_menu_base.h"
 

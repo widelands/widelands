@@ -49,10 +49,10 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 
 	const int32_t caps = c.field->get_caps();
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
-      return caps;
+		return caps;
 
 
-   return 0;
+	return 0;
 }
 
 
@@ -75,19 +75,18 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 	assert(center.node.y < map.get_height());
 	if (m_current_player) {
 		if (map.get_nrplayers() < m_current_player) {
-         // mmh, my current player is not valid
-         // maybe the user has loaded a new map while this tool
-         // was activated. we set the new player to a valid one. The
-			// sel pointer is the only thing that stays wrong, but this is not
-			// important
-         m_current_player=1;
+			//  Mmh, my current player is not valid. Maybe the user has loaded a
+			//  new map while this tool was active. We set the new player to a
+			//  valid one. The sel pointer is the only thing that stays wrong, but
+			//  this is not important
+			m_current_player = 1;
 		}
 
 		Widelands::Coords const old_sp = map.get_starting_pos(m_current_player);
 
-      // If the player is already created in the editor, this means
-      // that there might be already a hq placed somewhere. This needs to be
-      // deleted before a starting position change can occure
+		//  If the player is already created in the editor, this means that there
+		//  might be already a hq placed somewhere. This needs to be deleted
+		//  before a starting position change can occur.
 		if
 			(parent.egbase().get_player(m_current_player)
 			 and
@@ -104,24 +103,25 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 
-      // check if field is valid
-		if (Editor_Tool_Set_Starting_Pos_Callback
+		//  check if field is valid
+		if
+			(Editor_Tool_Set_Starting_Pos_Callback
 		    (map.get_fcoords(center.node), &map, 0))
 		{
 			Overlay_Manager & overlay_manager = map.overlay_manager();
-         // Remove old overlay if any
+			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, picid);
 
-         // Add new overlay
+			//  add new overlay
 			overlay_manager.register_overlay
 				(center.node, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
 
-         // And set new player pos
+			//  set new player pos
 			map.set_starting_pos(m_current_player, center.node);
 
 		}
 	}
-   return 1;
+	return 1;
 }
 
 Widelands::Player_Number Editor_Set_Starting_Pos_Tool::get_current_player
@@ -130,8 +130,8 @@ throw ()
 {return m_current_player;}
 
 
-void Editor_Set_Starting_Pos_Tool::set_current_player(int32_t i) {
-      m_current_player=i;
+void Editor_Set_Starting_Pos_Tool::set_current_player(int32_t const i) {
+	m_current_player = i;
 
 	fsel_picsname[28] = '0' + m_current_player / 10;
 	fsel_picsname[29] = '0' + m_current_player % 10;

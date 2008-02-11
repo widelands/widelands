@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WIDELANDS_H
-#define __S__WIDELANDS_H
+#ifndef WIDELANDS_H
+#define WIDELANDS_H
 
 #include <cassert>
 #include <limits>

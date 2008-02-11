@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__PLAYER_H
-#define __S__PLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include "areawatcher.h"
 #include "building.h"
@@ -75,20 +75,20 @@ struct Player {
 
 	Player
 		(Editor_Game_Base &,
-		 const int32_t type,
-		 const Player_Number plnum,
+		 int32_t type,
+		 Player_Number,
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
-		 const uint8_t * const playercolor);
+		 const uint8_t * playercolor);
 	~Player();
 
 	void allocate_map();
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
-		int32_t get_type() const {return m_type;}
+	int32_t get_type() const {return m_type;}
 	Player_Number get_player_number() const throw () {return m_plnum;}
-		const RGBColor* get_playercolor() const {return m_playercolor;}
+	RGBColor const * get_playercolor() const {return m_playercolor;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &tribe();}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
@@ -407,7 +407,7 @@ struct Player {
 	void drop_soldier(PlayerImmovable* imm, Soldier* worker);
 	void change_soldier_capacity (PlayerImmovable*, int32_t val);
 	void change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val);
-		// Launch an attack
+	//  launch an attack
 	void enemyflagaction(Flag* flag, int32_t action, int32_t param, int32_t param2, int32_t param3);
 
 	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {

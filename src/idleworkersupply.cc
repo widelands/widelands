@@ -129,7 +129,7 @@ int32_t IdleWorkerSupply::get_passing_requeriments(Game *, int32_t, Requeriments
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
-   return
+	return
 		!req
 		or
 		req->check

@@ -76,10 +76,10 @@ Textarea:: Textarea
   Set the text of the Textarea. Size is automatically adjusted
   */
 void Textarea::set_text(const std::string & text) {
-   collapse(); // collapse() implicitly updates
+	collapse(); // collapse() implicitly updates
 
-   m_text = text;
-   expand();
+	m_text = text;
+	expand();
 }
 
 
@@ -87,9 +87,9 @@ void Textarea::set_text(const std::string & text) {
   Change the alignment
   */
 void Textarea::set_align(const Align align) {
-   collapse();
-   m_align = align;
-   expand();
+	collapse();
+	m_align = align;
+	expand();
 }
 
 
@@ -118,25 +118,25 @@ void Textarea::draw(RenderTarget* dst)
   */
 void Textarea::collapse()
 {
-   int32_t x = get_x();
-   int32_t y = get_y();
-   int32_t w = get_w();
-   int32_t h = get_h();
+	int32_t x = get_x();
+	int32_t y = get_y();
+	int32_t w = get_w();
+	int32_t h = get_h();
 
 	if (not m_multiline) {
 		if      (m_align & Align_HCenter)
-         x += w >> 1;
+			x += w >> 1;
 		else if (m_align & Align_Right)
-         x += w;
+			x += w;
 	}
 
 	if      (m_align & Align_VCenter)
-      y += h >> 1;
+		y += h >> 1;
 	else if (m_align & Align_Bottom)
-      y += h;
+		y += h;
 
 	set_pos(Point(x, y));
-   set_size(m_multiline ? get_w() : 0, 0);
+	set_size(m_multiline ? get_w() : 0, 0);
 }
 
 
@@ -146,27 +146,29 @@ void Textarea::collapse()
 void Textarea::expand()
 {
 	if (!m_text.length())
-      return;
+		return;
 
-   int32_t x = get_x();
-   int32_t y = get_y();
-   int32_t w, h;
+	int32_t x = get_x();
+	int32_t y = get_y();
+	int32_t w, h;
 
-   g_fh->get_size(m_fontname, m_fontsize, m_text.c_str(), &w, &h, m_multiline ? get_w() : -1);
+	g_fh->get_size
+		(m_fontname,
+		 m_fontsize, m_text.c_str(), &w, &h, m_multiline ? get_w() : -1);
 
 	if (not m_multiline) {
 		if      (m_align & Align_HCenter)
-         x -= w >> 1;
+			x -= w >> 1;
 		else if (m_align & Align_Right)
-         x -= w;
+			x -= w;
 	}
 
 	if      (m_align & Align_VCenter)
-      y -= h >> 1;
+		y -= h >> 1;
 	else if (m_align & Align_Bottom)
-      y -= h;
+		y -= h;
 
 	set_pos(Point(x, y));
-   set_size(m_multiline ? get_w() : w, h);
+	set_size(m_multiline ? get_w() : w, h);
 }
 };

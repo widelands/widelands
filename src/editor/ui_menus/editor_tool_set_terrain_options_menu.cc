@@ -55,15 +55,15 @@ m_tool(tool)
 
 
 	int32_t check[] = {
-      0,                   // "green"
-      TERRAIN_DRY,         // "dry"
-      TERRAIN_DRY|TERRAIN_MOUNTAIN,   // "mountain"
-      TERRAIN_DRY|TERRAIN_UNPASSABLE, // "unpassable"
-      TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE, // "dead" or "acid"
-      TERRAIN_UNPASSABLE|TERRAIN_DRY|TERRAIN_WATER,
+		0,                                            //  "green"
+		TERRAIN_DRY,                                  //  "dry"
+		TERRAIN_DRY|TERRAIN_MOUNTAIN,                 //  "mountain"
+		TERRAIN_DRY|TERRAIN_UNPASSABLE,               //  "unpassable"
+		TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE,  //  "dead" or "acid"
+		TERRAIN_UNPASSABLE|TERRAIN_DRY|TERRAIN_WATER,
 	};
 
-   m_checkboxes.resize(nr_terrains);
+	m_checkboxes.resize(nr_terrains);
 
 	const uint32_t green = g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
 	const uint32_t water = g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
@@ -90,50 +90,51 @@ m_tool(tool)
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-         // Create a surface for this
+			//  create a surface for this
 			uint32_t picw, pich;
 			g_gr->get_picture_size
 				(g_gr->get_picture
 				 (PicMod_Game, g_gr->get_maptexture_picture(i + 1)), picw, pich);
-         uint32_t surface=g_gr->create_surface(picw, pich);
+			uint32_t surface = g_gr->create_surface(picw, pich);
 
-         // Get the rendertarget for this
-         RenderTarget* target=g_gr->get_surface_renderer(surface);
+			//  get the rendertarget for this
+			RenderTarget & target = *g_gr->get_surface_renderer(surface);
 
-         // firts, blit the terrain texture
-			target->blit
+			//  firts, blit the terrain texture
+			target.blit
 				(Point(0, 0),
 				 g_gr->get_picture
 				 (PicMod_Game, g_gr->get_maptexture_picture(i + 1)));
 
 			Point pic(1, pich - small_pich - 1);
 
-         // Check is green
+			//  check is green
 			if (ter_is == 0) {
-				target->blit(pic, green);
+				target.blit(pic, green);
 				pic.x += small_picw + 1;
 			} else {
 				if (ter_is & TERRAIN_WATER) {
-					target->blit(pic, water);
+					target.blit(pic, water);
 					pic.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_MOUNTAIN) {
-					target->blit(pic, mountain);
+					target.blit(pic, mountain);
 					pic.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_ACID) {
-					target->blit(pic, dead);
+					target.blit(pic, dead);
 					pic.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_UNPASSABLE) {
-					target->blit(pic, unpassable);
+					target.blit(pic, unpassable);
 					pic.x += small_picw + 1;
 				}
-				if (ter_is & TERRAIN_DRY) target->blit(pic, dry);
+				if (ter_is & TERRAIN_DRY)
+					target.blit(pic, dry);
 			}
 
-         // Save this surface, so we can free it later on
-         m_surfaces.push_back(surface);
+			//  Save this surface, so we can free it later on.
+			m_surfaces.push_back(surface);
 
 			UI::Checkbox & cb = *new UI::Checkbox(this, pos.x, pos.y, surface);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
@@ -144,7 +145,7 @@ m_tool(tool)
 			m_checkboxes[i] = &cb;
 
 			pos.x += TEXTURE_WIDTH + hspacing();
-         ++cur_x;
+			++cur_x;
 		}
 	pos.y += TEXTURE_HEIGHT + vspacing();
 
@@ -154,13 +155,14 @@ m_tool(tool)
 	pos.x = get_inner_w() / 2;
 	m_cur_selection.set_pos(pos);
 
-   std::string buf=_("Current:");
+	std::string buf = _("Current:");
 	uint32_t j = m_tool.get_nr_enabled();
-	for (Terrain_Descr::Index i = 0; j; ++i) if (m_tool.is_enabled(i)) {
-         buf+=" ";
-		buf += world.get_ter(i).name();
-         --j;
-	}
+	for (Terrain_Descr::Index i = 0; j; ++i)
+		if (m_tool.is_enabled(i)) {
+			buf += " ";
+			buf += world.get_ter(i).name();
+			--j;
+		}
 	m_cur_selection.set_text(buf);
 }
 
@@ -190,29 +192,32 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 	else {
 		if (not multiselect) {
 			for (uint32_t i = 0; m_tool.get_nr_enabled(); ++i) m_tool.enable(i, false);
-      // Disable all checkboxes
+			//  disable all checkboxes
 			const uint32_t size = m_checkboxes.size();
 			//TODO: the uint32_t cast is ugly!
 			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n)) {
-         m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing);
-         m_checkboxes[i]->set_state(false);
-         m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
+				m_checkboxes[i]->changedtoid.set
+					(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing);
+				m_checkboxes[i]->set_state(false);
+				m_checkboxes[i]->changedtoid.set
+					(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
 			}
 		}
 
 		m_tool.enable(n, t);
-   select_correct_tool();
+		select_correct_tool();
 
-   std::string buf=_("Current:");
+		std::string buf = _("Current:");
 		Widelands::World const & world =
 			dynamic_cast<Editor_Interactive &>(*get_parent())
 			.egbase().map().world();
 		uint32_t j = m_tool.get_nr_enabled();
-		for (Terrain_Descr::Index i = 0; j; ++i) if (m_tool.is_enabled(i)) {
-         buf+=" ";
-			buf += world.get_ter(i).name();
-         --j;
-		}
+		for (Terrain_Descr::Index i = 0; j; ++i)
+			if (m_tool.is_enabled(i)) {
+				buf += " ";
+				buf += world.get_ter(i).name();
+				--j;
+			}
 
 		m_cur_selection.set_text(buf.c_str());
 		m_cur_selection.set_pos

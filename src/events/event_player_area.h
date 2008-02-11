@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_PLAYER_AREA_H
-#define __S__EVENT_PLAYER_AREA_H
+#ifndef EVENT_PLAYER_AREA_H
+#define EVENT_PLAYER_AREA_H
 
 #include "event.h"
 #include "player_area.h"

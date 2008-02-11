@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_MAIN_MENU_H
-#define __S__EDITOR_MAIN_MENU_H
+#ifndef EDITOR_MAIN_MENU_H
+#define EDITOR_MAIN_MENU_H
 
 #include "ui_button.h"
 #include "ui_unique_window.h"
@@ -35,7 +35,7 @@ this represents the main menu
 =============================
 */
 struct Editor_Main_Menu : public UI::UniqueWindow {
-      Editor_Main_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
+	Editor_Main_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
 
 private:
 	Editor_Interactive         & m_parent;
@@ -48,12 +48,12 @@ private:
 
 	UI::UniqueWindow::Registry m_window_readme;
 
-      void exit_btn();
-      void load_btn();
-      void save_btn();
-      void new_map_btn();
-      void map_options_btn();
-      void readme_btn();
+	void exit_btn       ();
+	void load_btn       ();
+	void save_btn       ();
+	void new_map_btn    ();
+	void map_options_btn();
+	void readme_btn     ();
 };
 
 

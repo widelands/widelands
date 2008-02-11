@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__ZIP_FILESYSTEM_H
-#define __S__ZIP_FILESYSTEM_H
+#ifndef ZIP_FILESYSTEM_H
+#define ZIP_FILESYSTEM_H
 
 #include "filesystem.h"
 #include "unzip.h"
@@ -84,4 +84,4 @@ private:
 
 };
 
-#endif // __S__ZIP_FILESYSTEM_H
+#endif

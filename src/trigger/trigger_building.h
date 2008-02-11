@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIGGER_BUILDING_H
-#define __S__TRIGGER_BUILDING_H
+#ifndef TRIGGER_BUILDING_H
+#define TRIGGER_BUILDING_H
 
 #include "trigger_player_area.h"
 

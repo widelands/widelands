@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,8 @@
 #include "wexception.h"
 
 
-Game_Server_Protocol_Packet_UserEntered::Game_Server_Protocol_Packet_UserEntered
+Game_Server_Protocol_Packet_UserEntered::
+Game_Server_Protocol_Packet_UserEntered
 ()
 {}
 
@@ -35,27 +36,27 @@ Game_Server_Protocol_Packet_UserEntered::
 ()
 {}
 
-/*
- * Get this packets id
- */
+
 uint16_t Game_Server_Protocol_Packet_UserEntered::get_id() {
-   return GGSPP_USERENTERED;
+	return GGSPP_USERENTERED;
 }
 
 /*
  * Get this packet and execute it
  */
-void Game_Server_Protocol_Packet_UserEntered::recv(Game_Server_Connection* gsc, Network_Buffer* buffer) {
-   std::string name = buffer->get_string();
-   std::string room = buffer->get_string();
-   bool enters = buffer->get_8();
+void Game_Server_Protocol_Packet_UserEntered::recv
+(Game_Server_Connection * const gsc, Network_Buffer * const buffer)
+{
+	std::string const name   = buffer->get_string();
+	std::string const room   = buffer->get_string();
+	bool        const enters = buffer->get_8();
 
-   gsc->user_entered(name, room, enters);
+	gsc->user_entered(name, room, enters);
 }
 
-/*
- * Write reply
- */
-void Game_Server_Protocol_Packet_UserEntered::write_reply(Network_Buffer* buf) {
-   buf->put_8(UEP_ACK);
+
+void Game_Server_Protocol_Packet_UserEntered::write_reply
+(Network_Buffer * const buf)
+{
+	buf->put_8(UEP_ACK);
 }

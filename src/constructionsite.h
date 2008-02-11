@@ -52,8 +52,7 @@ struct ConstructionSite_Descr : public Building_Descr {
 	ConstructionSite_Descr
 		(const Tribe_Descr &, const std::string & constructionsite_name);
 
-	virtual void parse(const char* directoy, Profile* prof,
-		const EncodeData* encdata);
+	virtual void parse(char const * directoy, Profile *, EncodeData const *);
 	virtual Building * create_object() const;
 };
 
@@ -64,7 +63,6 @@ class ConstructionSite : public Building {
 
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
-	virtual ~ConstructionSite();
 
 	virtual int32_t get_building_type() const throw ()
 	{return Building::CONSTRUCTIONSITE;}
@@ -92,11 +90,11 @@ public:
 	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
-   void log_general_info(Editor_Game_Base* egbase);
+	void log_general_info(Editor_Game_Base *);
 
 protected:
-	virtual UI::Window* create_options_window(Interactive_Player* plr,
-		UI::Window** registry);
+	virtual UI::Window* create_options_window
+		(Interactive_Player * plr, UI::Window * * registry);
 
 	void request_builder(Game* g);
 	static void request_builder_callback

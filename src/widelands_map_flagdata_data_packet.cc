@@ -50,7 +50,7 @@ void Map_Flagdata_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
 	FileRead fr;
 	try {fr.Open(fs, "binary/flag_data");} catch (...) {return;}
@@ -63,13 +63,12 @@ throw (_wexception)
 
 			if (ser == 0xffffffff)
 				break; // end of flags
-         assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-         assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 
 			upcast(Flag, flag, ol->get_object_by_file_index(ser));
 
-         // The owner is already set, nothing to do from
-         // PlayerImmovable
+			//  The owner is already set, nothing to do from PlayerImmovable.
 
 			try {flag->m_position = fr.Coords32(extent);}
 			catch (_wexception const & e) {
@@ -78,73 +77,70 @@ throw (_wexception)
 					 "Coordinates of flag %u: %s",
 					 fr.GetPos() - 4, ser, e.what());
 			}
-         flag->m_animstart=fr.Unsigned16();
-         int32_t building=fr.Unsigned32();
-			if (building) {
-            assert(ol->is_object_known(building));
-            flag->m_building=static_cast<Building*>(ol->get_object_by_file_index(building));
+			flag->m_animstart = fr.Unsigned16();
+			if (int32_t const building = fr.Unsigned32()) {
+				assert(ol->is_object_known(building)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+				flag->m_building = dynamic_cast<Building *>(ol->get_object_by_file_index(building)); //  FIXME CHECK RESULT OF CAST
 			} else
-            flag->m_building=0;
+				flag->m_building = 0;
 
 
-         // Roads are set somewhere else
+			//  Roads are set somewhere else.
 
 			for (uint32_t i = 0; i < 6; ++i)
 				flag->m_items_pending[i] = fr.Unsigned32();
-         flag->m_item_capacity=fr.Unsigned32();
-         flag->m_item_filled=fr.Unsigned32();
+			flag->m_item_capacity = fr.Unsigned32();
+			flag->m_item_filled = fr.Unsigned32();
 
-         // items
 			for (int32_t i = 0; i < flag->m_item_filled; ++i) {
-            flag->m_items[i].pending=fr.Unsigned8();
-            uint32_t item=fr.Unsigned32();
-            assert(ol->is_object_known(item));
-            flag->m_items[i].item=static_cast<WareInstance*>(ol->get_object_by_file_index(item));
+				flag->m_items[i].pending=fr.Unsigned8();
+				uint32_t item = fr.Unsigned32();
+				assert(ol->is_object_known(item)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+				flag->m_items[i].item = dynamic_cast<WareInstance *>(ol->get_object_by_file_index(item)); //  FIXME CHECK RESULT OF CAST
 
-            uint32_t nextstep=fr.Unsigned32();
-				if (nextstep) {
-               assert(ol->is_object_known(nextstep));
-               flag->m_items[i].nextstep=static_cast<PlayerImmovable*>(ol->get_object_by_file_index(nextstep));
-				} else {
-               flag->m_items[i].nextstep=0;
-				}
+				if (uint32_t const nextstep = fr.Unsigned32()) {
+					assert(ol->is_object_known(nextstep)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+					flag->m_items[i].nextstep = dynamic_cast<PlayerImmovable *>(ol->get_object_by_file_index(nextstep)); //  FIXME CHECK RESULT OF CAST
+				} else
+					flag->m_items[i].nextstep = 0;
 			}
 
-         // always call
-         uint32_t always_call=fr.Unsigned32();
-			if (always_call) {
-            assert(ol->is_object_known(always_call));
-            flag->m_always_call_for_flag=static_cast<Flag*>(ol->get_object_by_file_index(always_call));
+			if (uint32_t const always_call = fr.Unsigned32()) {
+				assert(ol->is_object_known(always_call)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+				flag->m_always_call_for_flag = dynamic_cast<Flag *>(ol->get_object_by_file_index(always_call)); //  FIXME CHECK RESULT OF CAST
 			} else
-            flag->m_always_call_for_flag=0;
+				flag->m_always_call_for_flag = 0;
 
-         // Workers waiting
+			//  workers waiting
 			const uint16_t nr_workers = fr.Unsigned16();
-         flag->m_capacity_wait.resize(nr_workers);
+			flag->m_capacity_wait.resize(nr_workers);
 			for (uint32_t i = 0; i < nr_workers; ++i) {
-            uint32_t id=fr.Unsigned32();
-            assert(ol->is_object_known(id));
-            flag->m_capacity_wait[i]=ol->get_object_by_file_index(id);
+				uint32_t const id = fr.Unsigned32();
+				assert(ol->is_object_known(id));
+				flag->m_capacity_wait[i]=ol->get_object_by_file_index(id);
 			}
 
-         // Flag jobs
+			//  flag jobs
 			const uint16_t nr_jobs = fr.Unsigned16();
-         assert(!flag->m_flag_jobs.size());
+			assert(!flag->m_flag_jobs.size());
 			for (uint16_t i = 0; i < nr_jobs; ++i) {
-            Flag::FlagJob f;
-            bool request=fr.Unsigned8();
-				if (!request)
-               f.request=0;
-				else {
-               f.request = new Request(flag, 1,
-	                        &Flag::flag_job_request_callback, flag, Request::WORKER);
-               f.request->Read(&fr, egbase, ol);
+				Flag::FlagJob f;
+				if (fr.Unsigned8()) {
+					f.request =
+						new Request
+						(flag,
+						 1,
+						 &Flag::flag_job_request_callback, flag,
+						 Request::WORKER);
+					f.request->Read(&fr, egbase, ol);
+				} else {
+					f.request = 0;
 				}
-            f.program=fr.CString();
-            flag->m_flag_jobs.push_back(f);
+				f.program = fr.CString();
+				flag->m_flag_jobs.push_back(f);
 			}
 
-         ol->mark_object_as_loaded(flag);
+			ol->mark_object_as_loaded(flag);
 		}
 	} else
 		throw wexception
@@ -160,63 +156,56 @@ throw (_wexception)
 {
 	FileWrite fw;
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	const Map & map = egbase->map();
 	const Field & fields_end = map[map.max_index()];
 	for (Field * field = &map[0]; field < &fields_end; ++field) if //  FIXME field should be "const Field *"
 		(upcast(Flag, flag, field->get_immovable()))
 	{
-            assert(os->is_object_known(flag));
-            assert(!os->is_object_saved(flag));
+		assert(os->is_object_known(flag));
+		assert(!os->is_object_saved(flag));
 
-            // Write serial
-            fw.Unsigned32(os->get_object_file_index(flag));
+		fw.Unsigned32(os->get_object_file_index(flag));
 
-            // Owner is already written in the existanz packet
+		//  Owner is already written in the existanz packet.
 
 		fw.Coords32  (flag->m_position);
 
-            // Animation is set by creator
-            fw.Unsigned16(flag->m_animstart);
+		//  Animation is set by creator.
+		fw.Unsigned16(flag->m_animstart);
 
-            // Building is not used, it is set by Building_Data packet through
-            // attach building.
+		//  Building is not used, it is set by Building_Data packet through
+		//  attach building.
 		if (flag->m_building) {
-               assert(os->is_object_known(flag->m_building));
-               fw.Unsigned32(os->get_object_file_index(flag->m_building));
+			assert(os->is_object_known(flag->m_building));
+			fw.Unsigned32(os->get_object_file_index(flag->m_building));
 		} else fw.Unsigned32(0);
 
-            // Roads are not saved, they are set on load
+		//  Roads are not saved, they are set on load.
 
-            // Pending items
 		for (uint32_t i = 0; i < 6; ++i)
-                  fw.Unsigned32(flag->m_items_pending[i]);
+			fw.Unsigned32(flag->m_items_pending[i]);
 
-            // Capacity
-            fw.Unsigned32(flag->m_item_capacity);
+		fw.Unsigned32(flag->m_item_capacity);
 
-            // Items filled
-            fw.Unsigned32(flag->m_item_filled);
+		fw.Unsigned32(flag->m_item_filled);
 
-            // items
 		for (int32_t i = 0; i < flag->m_item_filled; ++i) {
-               fw.Unsigned8(flag->m_items[i].pending);
-               assert(os->is_object_known(flag->m_items[i].item));
-               fw.Unsigned32(os->get_object_file_index(flag->m_items[i].item));
+			fw.Unsigned8(flag->m_items[i].pending);
+			assert(os->is_object_known(flag->m_items[i].item));
+			fw.Unsigned32(os->get_object_file_index(flag->m_items[i].item));
 			fw.Unsigned32
 				(os->is_object_known      (flag->m_items[i].nextstep) ?
 				 os->get_object_file_index(flag->m_items[i].nextstep) : 0);
 		}
 
-            // always call
 		if (flag->m_always_call_for_flag) {
-               assert(os->is_object_known(flag->m_always_call_for_flag));
-               fw.Unsigned32(os->get_object_file_index(flag->m_always_call_for_flag));
+			assert(os->is_object_known(flag->m_always_call_for_flag));
+			fw.Unsigned32(os->get_object_file_index(flag->m_always_call_for_flag));
 		} else fw.Unsigned32(0);
 
-            // Worker waiting for capacity
+		//  worker waiting for capacity
 		const std::vector<Object_Ptr> & capacity_wait = flag->m_capacity_wait;
 		const std::vector<Object_Ptr>::const_iterator capacity_wait_end =
 			capacity_wait.end();
@@ -227,11 +216,10 @@ throw (_wexception)
 			 ++it)
 		{
 			const Map_Object * const obj = it->get(egbase);
-               assert(os->is_object_known(obj));
-               fw.Unsigned32(os->get_object_file_index(obj));
+			assert(os->is_object_known(obj));
+			fw.Unsigned32(os->get_object_file_index(obj));
 		}
 
-            // Flag jobs
 		const std::list<Flag::FlagJob> & flag_jobs = flag->m_flag_jobs;
 		const std::list<Flag::FlagJob>::const_iterator flag_jobs_end =
 			flag_jobs.end();
@@ -242,7 +230,7 @@ throw (_wexception)
 			 ++it)
 		{
 			if (it->request) {
-                  fw.Unsigned8(1);
+				fw.Unsigned8(1);
 				it->request->Write(&fw, egbase, os);
 			} else fw.Unsigned8(0);
 
@@ -250,13 +238,13 @@ throw (_wexception)
 			fw.String(it->program);
 		}
 
-            os->mark_object_as_saved(flag);
+		os->mark_object_as_saved(flag);
 
 	}
 
-   fw.Unsigned32(0xffffffff); // End of flags
+	fw.Unsigned32(0xffffffff); // End of flags
 
-   fw.Write(fs, "binary/flag_data");
+	fw.Write(fs, "binary/flag_data");
 }
 
 };

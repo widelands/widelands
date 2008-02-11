@@ -65,21 +65,20 @@ throw (_wexception)
 {
 	if (skip) return;
 
-		FileRead fr;
-		try {fr.Open(fs, "binary/building_data");} catch (...) {return;}
+	FileRead fr;
+	try {fr.Open(fs, "binary/building_data");} catch (...) {return;}
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (uint32_t ser; (ser = fr.Unsigned32()) != 0xffffffff;) {
 
-         assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-         assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::BUILDING); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-         Building* building=static_cast<Building*>(ol->get_object_by_file_index(ser));
+			assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::BUILDING); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			upcast(Building, building, ol->get_object_by_file_index(ser)); //  FIXME CHECK RESULT OF CAST
 
-         // Animation
-				building->m_anim = fr.Unsigned8() ?
-					building->descr().get_animation(fr.CString()) : 0;
-         building->m_animstart=fr.Unsigned32();
+			building->m_anim = fr.Unsigned8() ?
+				building->descr().get_animation(fr.CString()) : 0;
+			building->m_animstart = fr.Unsigned32();
 
 			{
 				Building::Leave_Queue & leave_queue = building->m_leave_queue;
@@ -96,16 +95,16 @@ throw (_wexception)
 					} else
 						*it = 0;
 			}
-         building->m_leave_time=fr.Unsigned32();
+			building->m_leave_time = fr.Unsigned32();
 			if (const uint32_t serial = fr.Unsigned32()) {
 				assert(ol->is_object_known(serial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 				building->m_leave_allow=ol->get_object_by_file_index(serial);
 			} else
-            building->m_leave_allow=0;
-         building->m_stop=fr.Unsigned8();
+				building->m_leave_allow = 0;
+			building->m_stop = fr.Unsigned8();
 
-         // Set economy now, some stuff below will count on this
-         building->set_economy(building->m_flag->get_economy());
+			//  Set economy now, some stuff below will count on this.
+			building->set_economy(building->m_flag->get_economy());
 
 			if (upcast(ConstructionSite, constructionsite, building))
 				read_constructionsite(*constructionsite, fr, egbase, ol);
@@ -124,7 +123,7 @@ throw (_wexception)
 			}
 
 
-         ol->mark_object_as_loaded(building);
+			ol->mark_object_as_loaded(building);
 		}
 	} else
 		throw wexception
@@ -149,13 +148,11 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 				tribe.get_building_descr
 				(tribe.get_safe_building_index(fr.CString()));
 		} else
-         constructionsite.m_prev_building=0;
+			constructionsite.m_prev_building = 0;
 
-      // Builder request
-         delete constructionsite.m_builder_request;
-      bool request=fr.Unsigned8();
-		if (request) {
-         constructionsite.m_builder_request = new Request
+		delete constructionsite.m_builder_request;
+		if (fr.Unsigned8()) {
+			constructionsite.m_builder_request = new Request
 				(&constructionsite,
 				 0,
 				 ConstructionSite::request_builder_callback,
@@ -163,34 +160,34 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 				 Request::WORKER);
 			constructionsite.m_builder_request->Read(&fr, egbase, ol);
 		} else
-         constructionsite.m_builder_request=0;
+			constructionsite.m_builder_request = 0;
 
-      // Builder
-      uint32_t reg=fr.Unsigned32();
+		//  builder
+		uint32_t reg = fr.Unsigned32();
 		if (reg) {
-         assert(ol->is_object_known(reg));
-         constructionsite.m_builder=static_cast<Worker*>(ol->get_object_by_file_index(reg));
+			assert(ol->is_object_known(reg));
+			constructionsite.m_builder = dynamic_cast<Worker*>(ol->get_object_by_file_index(reg)); //  FIXME check result of cast
 		} else
-         constructionsite.m_builder=0;
+			constructionsite.m_builder = 0;
 
-      // Wares queues
+		//  wares queues
 		const uint16_t size = fr.Unsigned16();
-      assert(constructionsite.m_wares.size()>=size);
+		assert(constructionsite.m_wares.size() >= size); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		for (uint16_t i = size; i < constructionsite.m_wares.size(); ++i) {
 			if (dynamic_cast<Game *>(egbase))
 				constructionsite.m_wares[i]->cleanup();
-         delete constructionsite.m_wares[i];
+			delete constructionsite.m_wares[i];
 		}
-      constructionsite.m_wares.resize(size);
+		constructionsite.m_wares.resize(size);
 		for (uint16_t i = 0; i < constructionsite.m_wares.size(); ++i)
-         constructionsite.m_wares[i]->Read(&fr, egbase, ol);
+			constructionsite.m_wares[i]->Read(&fr, egbase, ol);
 
-      constructionsite.m_fetchfromflag=fr.Signed32();
+		constructionsite.m_fetchfromflag  = fr.  Signed32();
 
-      constructionsite.m_working=fr.Unsigned8();
-      constructionsite.m_work_steptime=fr.Unsigned32();
-      constructionsite.m_work_completed=fr.Unsigned32();
-      constructionsite.m_work_steps=fr.Unsigned32();
+		constructionsite.m_working        = fr.Unsigned8 ();
+		constructionsite.m_work_steptime  = fr.Unsigned32();
+		constructionsite.m_work_completed = fr.Unsigned32();
+		constructionsite.m_work_steps     = fr.Unsigned32();
 
 	} else
 		throw wexception
@@ -209,23 +206,22 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_WAREHOUSE_PACKET_VERSION) {
 		log("Reading warehouse stuff for %p\n", &warehouse);
-      // Supply
+		//  supply
 		const Tribe_Descr & tribe = warehouse.owner().tribe();
 		while (fr.Unsigned8()) {
 			const int32_t id = tribe.get_safe_ware_index(fr.CString());
-         warehouse.remove_wares(id, warehouse.m_supply->stock_wares(id));
+			warehouse.remove_wares(id, warehouse.m_supply->stock_wares(id));
 			warehouse.insert_wares(id, fr.Unsigned16());
 		}
 		while (fr.Unsigned8()) {
 			const int32_t id = tribe.get_safe_worker_index(fr.CString());
-         warehouse.remove_workers(id, warehouse.m_supply->stock_workers(id));
+			warehouse.remove_workers(id, warehouse.m_supply->stock_workers(id));
 			warehouse.insert_workers(id, fr.Unsigned16());
 		}
 
-      // Request
 		for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i)
-         delete warehouse.m_requests[i];
-      warehouse.m_requests.resize(fr.Unsigned16());
+			delete warehouse.m_requests[i];
+		warehouse.m_requests.resize(fr.Unsigned16());
 		for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i) {
 			Request & req = *new Request
 				(&warehouse,
@@ -237,33 +233,32 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			warehouse.m_requests[i] = &req;
 		}
 
-      // Incorporated Workers
+		//  incorporated Workers
 		while (warehouse.m_incorporated_workers.size()) {assert(false); //  FIXME why this loop?
-         std::vector<Object_Ptr>::iterator i=warehouse.m_incorporated_workers.begin();
-         static_cast<Worker*>(i->get(egbase))->remove(egbase);
-         warehouse.m_incorporated_workers.erase(i);
+			std::vector<Object_Ptr>::iterator i=warehouse.m_incorporated_workers.begin();
+			static_cast<Worker*>(i->get(egbase))->remove(egbase);
+			warehouse.m_incorporated_workers.erase(i);
 		}
-      warehouse.m_incorporated_workers.resize(0);
+		warehouse.m_incorporated_workers.resize(0);
 		const uint16_t nrworkers = fr.Unsigned16();
 		for (uint16_t i = 0; i < nrworkers; ++i) {
-         uint32_t id=fr.Unsigned32();
-         std::string name=fr.CString();
-         assert(ol->is_object_known(id));
-         // Worker might not yet be loaded so that get ware won't work
-         // but make sure that such a worker exists in tribe
+			uint32_t const id = fr.Unsigned32();
+			std::string name = fr.CString();
+			assert(ol->is_object_known(id)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			//  Worker might not yet be loaded so that get ware won't work but
+			//  make sure that such a worker exists in the tribe.
 			if (tribe.get_worker_index(name.c_str()) == -1)
 				throw wexception
 					("Unknown worker %s in incorporated workers in "
 					 "Map_Buildingdata_Data_Packet!",
 					 name.c_str());
-         Worker* w=static_cast<Worker*>(ol->get_object_by_file_index(id));
-         warehouse.sort_worker_in(egbase, name, w);
+			upcast(Worker, w, ol->get_object_by_file_index(id));//  FIXME CHECK RESULT OF CAST
+			warehouse.sort_worker_in(egbase, name, w);
 		}
 
-      // Carrier spawn
-      warehouse.m_next_carrier_spawn=fr.Unsigned32();
+		warehouse.m_next_carrier_spawn = fr.Unsigned32();
 
-      log("Read warehouse stuff for %p\n", &warehouse);
+		log("Read warehouse stuff for %p\n", &warehouse);
 	} else
 		throw wexception
 			("Unknown Warehouse-Version %u in Map_Buildingdata_Data_Packet!",
@@ -277,17 +272,13 @@ void Map_Buildingdata_Data_Packet::read_militarysite
  Editor_Game_Base* egbase,
  Map_Map_Object_Loader * const ol)
 {
-      // read the version
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION) {
-         // Read productionsite
 		read_productionsite(militarysite, fr, egbase, ol);
 
-         // Request
 		const uint16_t nr_requests = fr.Unsigned16();
-
 		for (uint16_t i = 0; i < militarysite.m_soldier_requests.size(); ++i)
-	         delete militarysite.m_soldier_requests[i];
+			delete militarysite.m_soldier_requests[i];
 		militarysite.m_soldier_requests.resize(nr_requests);
 
 		for (uint16_t i = 0; i < nr_requests; ++i) {
@@ -301,22 +292,20 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			militarysite.m_soldier_requests[i] = &req;
 		}
 
-         // Soldier
-		uint16_t nr_soldiers = fr.Unsigned16();
-         assert(!militarysite.m_soldiers.size());
-         militarysite.m_soldiers.resize(nr_soldiers);
+		uint16_t const nr_soldiers = fr.Unsigned16();
+		assert(!militarysite.m_soldiers.size());
+		militarysite.m_soldiers.resize(nr_soldiers);
 		for (uint16_t i = 0; i < nr_soldiers; ++i) {
-            uint32_t reg = fr.Unsigned32();
-            assert(ol->is_object_known(reg));
-            militarysite.m_soldiers[i] = static_cast<Soldier*>(ol->get_object_by_file_index(reg));
-			}
+			uint32_t const reg = fr.Unsigned32();
+			assert(ol->is_object_known(reg));
+			militarysite.m_soldiers[i] = static_cast<Soldier*>(ol->get_object_by_file_index(reg));
+		}
 
-         // did conquer
-         militarysite.m_didconquer = fr.Unsigned8();
+		//  did conquer
+		militarysite.m_didconquer = fr.Unsigned8();
 
-			// capacity (modified by user)
-			militarysite.m_capacity = fr.Unsigned8();
-         // DONE
+		//  capacity (modified by user)
+		militarysite.m_capacity = fr.Unsigned8();
 	} else
 		throw wexception
 			("Unknown MilitarySite-Version %u in Map_Buildingdata_Data_Packet!",
@@ -331,11 +320,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 {
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-      // Requests
-      uint16_t nr_requests = fr.Unsigned16();
+		uint16_t const nr_requests = fr.Unsigned16();
 		for (uint16_t i = 0; i < productionsite.m_worker_requests.size(); ++i)
-         delete productionsite.m_worker_requests[i];
-      productionsite.m_worker_requests.resize(nr_requests);
+			delete productionsite.m_worker_requests[i];
+		productionsite.m_worker_requests.resize(nr_requests);
 		for (uint16_t i = 0; i < nr_requests; ++i) {
 			Request & req = *new Request
 				(&productionsite,
@@ -347,46 +335,47 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			productionsite.m_worker_requests[i] = &req;
 		}
 
-      // Workers
-		uint16_t nr_workers = fr.Unsigned16();
-      assert(!productionsite.m_workers.size());
-      productionsite.m_workers.resize(nr_workers);
+		uint16_t const nr_workers = fr.Unsigned16();
+		assert(!productionsite.m_workers.size());
+		productionsite.m_workers.resize(nr_workers);
 		for (uint16_t i = 0; i < nr_workers; ++i) {
-         uint32_t reg = fr.Unsigned32();
-         assert(ol->is_object_known(reg));
-         productionsite.m_workers[i] = static_cast<Worker*>(ol->get_object_by_file_index(reg));
+			uint32_t const reg = fr.Unsigned32();
+			assert(ol->is_object_known(reg));
+			productionsite.m_workers[i] = static_cast<Worker*>(ol->get_object_by_file_index(reg));
 		}
 
-      // Items from flags
-      productionsite.m_fetchfromflag = fr.Signed32();
+		//  items from flags
+		productionsite.m_fetchfromflag = fr.Signed32();
 
-      // State
+		//  state
 		const uint16_t nr_progs = fr.Unsigned16();
-      productionsite.m_program.resize(nr_progs);
+		productionsite.m_program.resize(nr_progs);
 		for (uint16_t i = 0; i < nr_progs; ++i) {
-         std::string prog = fr.CString();
-         productionsite.m_program[i].program = productionsite.descr().get_program(prog.c_str());
-         productionsite.m_program[i].ip = fr.Signed32();
-         productionsite.m_program[i].phase = fr.Signed32();
-         productionsite.m_program[i].flags = fr.Unsigned32();
+			std::string prog = fr.CString();
+			productionsite.m_program[i].program =
+				productionsite.descr().get_program(prog.c_str());
+			productionsite.m_program[i].ip      = fr.Signed32();
+			productionsite.m_program[i].phase   = fr.Signed32();
+			productionsite.m_program[i].flags   = fr.Unsigned32();
 		}
-      productionsite.m_program_timer = fr.Unsigned8();
-      productionsite.m_program_time = fr.Signed32();
+		productionsite.m_program_timer = fr.Unsigned8();
+		productionsite.m_program_time = fr.Signed32();
 
-      // Wares
 		const uint16_t nr_queues = fr.Unsigned16();
 		if (nr_queues != productionsite.m_input_queues.size())
-         throw wexception("Productionsite has wrong number of input queues!");
+			throw wexception("Productionsite has wrong number of input queues!");
 		for (uint16_t i = 0; i < productionsite.m_input_queues.size(); ++i)
-         productionsite.m_input_queues[i]->Read(&fr, egbase, ol);
+			productionsite.m_input_queues[i]->Read(&fr, egbase, ol);
 
-      // Statistics
 		const uint16_t stats_size = fr.Unsigned16();
-      productionsite.m_statistics.resize(stats_size);
+		productionsite.m_statistics.resize(stats_size);
 		for (uint32_t i = 0; i < productionsite.m_statistics.size(); ++i)
-         productionsite.m_statistics[i] = fr.Unsigned8();
-      productionsite.m_statistics_changed = fr.Unsigned8();
-      memcpy(productionsite.m_statistics_buf, fr.Data(sizeof(productionsite.m_statistics_buf)), sizeof(productionsite.m_statistics_buf));
+			productionsite.m_statistics[i] = fr.Unsigned8();
+		productionsite.m_statistics_changed = fr.Unsigned8();
+		memcpy
+			(productionsite.m_statistics_buf,
+			 fr.Data(sizeof(productionsite.m_statistics_buf)),
+			 sizeof(productionsite.m_statistics_buf));
 	} else
 		throw wexception
 			("Unknown ProductionSite-Version %u in Map_Buildingdata_Data_Packet!",
@@ -402,10 +391,8 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 {
 	const uint16_t trainingsite_packet_version = fr.Unsigned16();
 	if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION) {
-         // Read productionsite
 		read_productionsite(trainingsite, fr, egbase, ol);
 
-         // Requests
 		const uint16_t nr_requests = fr.Unsigned16();
 		for (uint16_t i = 0; i < trainingsite.m_soldier_requests.size(); ++i)
 			delete trainingsite.m_soldier_requests[i];
@@ -422,7 +409,6 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			trainingsite.m_soldier_requests[i] = &req;
 		}
 
-         // Soldiers
 		const uint16_t nr_soldiers = fr.Unsigned16();
 		assert(!trainingsite.m_soldiers.size());
 		trainingsite.m_soldiers.resize(nr_soldiers);
@@ -434,16 +420,16 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 
 		// Don't save m_list_upgrades (remake at load)
 
-			//Building heros ?
+		//  Building heros?
 		trainingsite.m_build_heros = fr.Unsigned8();
 
-			// Priority upgrades
+		//  priority upgrades
 		trainingsite.m_pri_hp = fr.Unsigned16();
 		trainingsite.m_pri_attack = fr.Unsigned16();
 		trainingsite.m_pri_defense = fr.Unsigned16();
 		trainingsite.m_pri_evade = fr.Unsigned16();
 
-			// Priority modificators
+		//  priority modificators
 		trainingsite.m_pri_hp_mod = fr.Unsigned16();
 		trainingsite.m_pri_attack_mod = fr.Unsigned16();
 		trainingsite.m_pri_defense_mod = fr.Unsigned16();
@@ -471,37 +457,32 @@ void Map_Buildingdata_Data_Packet::Write
  Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	// now packet version
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Walk the map again
+	// Walk the map again
 	Map & map = egbase->map();
 	const uint32_t mapwidth = map.get_width();
 	Map_Index const max_index = map.max_index();
-	for (Map_Index i = 0; i < max_index; ++i) {
-		const Building * const building =
-			dynamic_cast<const Building *>(map[i].get_immovable());
+	for (Map_Index i = 0; i < max_index; ++i)
+		if (upcast(Building const, building, map[i].get_immovable())) {
+			assert(os->is_object_known(building));
 
-		if (building) {
-            assert(os->is_object_known(building));
-
-			if (Map::get_index(building->get_position(), mapwidth) != i) {
-               // This is not this buildings main position
-               continue;
-				}
+			if (Map::get_index(building->get_position(), mapwidth) != i)
+				continue; // This is not this buildings main position.
 
 			fw.Unsigned32(os->get_object_file_index(building));
 
-            // Player immovable owner is already in existance packet
+			//  player immovable owner is already in existance packet
 
-            // Write the general stuff
+			//  write the general stuff
 			if (building->m_anim) {
-               fw.Unsigned8(1);
+				fw.Unsigned8(1);
 				fw.String(building->descr().get_animation_name(building->m_anim));
 			} else
-               fw.Unsigned8(0);
+				fw.Unsigned8(0);
 
 			fw.Unsigned32(building->m_animstart);
 
@@ -519,13 +500,13 @@ throw (_wexception)
 					fw.Unsigned32(os->get_object_file_index(jt->get(egbase)));
 				}
 			}
-            fw.Unsigned32(building->m_leave_time);
+			fw.Unsigned32(building->m_leave_time);
 			if (building->m_leave_allow.get(egbase)) {
-               assert(os->is_object_known(building->m_leave_allow.get(egbase)));
-               fw.Unsigned32(os->get_object_file_index(building->m_leave_allow.get(egbase)));
-				} else
-               fw.Unsigned32(0);
-            fw.Unsigned8(building->m_stop);
+				assert(os->is_object_known(building->m_leave_allow.get(egbase)));
+				fw.Unsigned32(os->get_object_file_index(building->m_leave_allow.get(egbase)));
+			} else
+				fw.Unsigned32(0);
+			fw.Unsigned8(building->m_stop);
 
 			if (upcast(ConstructionSite const, constructionsite, building))
 				write_constructionsite(*constructionsite, fw, egbase, os);
@@ -541,17 +522,14 @@ throw (_wexception)
 				assert(false);
 				//  type of building is not one of (or derived from)
 				//  {ConstructionSite, Warehouse, ProductionSite}
-				}
-
-            os->mark_object_as_saved(building);
 			}
 
-	}
+			os->mark_object_as_saved(building);
+		}
 
-   fw.Unsigned32(0xffffffff); // End of buildings
+	fw.Unsigned32(0xffffffff); // End of buildings
 
-   fw.Write(fs, "binary/building_data");
-   // DONE
+	fw.Write(fs, "binary/building_data");
 }
 
 
@@ -562,26 +540,25 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
  Map_Map_Object_Saver * const os)
 {
 
-   // First, write current version
-   fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
 
-   // Describtions
+	//  descriptions
 	fw.String(constructionsite.m_building->name());
 	//  FIXME Just write the string without the 1 first:
 	//  FIXME   fw.CString(constructionsite.m_prev_building ? constructionsite.m_prev_building->name().c_str() : "");
 	//  FIXME When reading, the empty string should mean no prev_building.
 	if (constructionsite.m_prev_building) {
-      fw.Unsigned8(1);
+		fw.Unsigned8(1);
 		fw.String(constructionsite.m_prev_building->name());
 	} else
-      fw.Unsigned8(0);
+		fw.Unsigned8(0);
 
-   // builder request
+	// builder request
 	if (constructionsite.m_builder_request) {
-      fw.Unsigned8(1);
-      constructionsite.m_builder_request->Write(&fw, egbase, os);
+		fw.Unsigned8(1);
+		constructionsite.m_builder_request->Write(&fw, egbase, os);
 	} else
-      fw.Unsigned8(0);
+		fw.Unsigned8(0);
 
 	// builder
 	const Worker* builder = constructionsite.m_builder.get(egbase);
@@ -595,14 +572,14 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 	const uint16_t wares_size = constructionsite.m_wares.size();
 	fw.Unsigned16(wares_size);
 	for (uint16_t i = 0; i < wares_size; ++i)
-      constructionsite.m_wares[i]->Write(&fw, egbase, os);
+		constructionsite.m_wares[i]->Write(&fw, egbase, os);
 
-   fw.Signed32(constructionsite.m_fetchfromflag);
+	fw.  Signed32(constructionsite.m_fetchfromflag);
 
-   fw.Unsigned8(constructionsite.m_working);
-   fw.Unsigned32(constructionsite.m_work_steptime);
-   fw.Unsigned32(constructionsite.m_work_completed);
-   fw.Unsigned32(constructionsite.m_work_steps);
+	fw.Unsigned8 (constructionsite.m_working);
+	fw.Unsigned32(constructionsite.m_work_steptime);
+	fw.Unsigned32(constructionsite.m_work_completed);
+	fw.Unsigned32(constructionsite.m_work_steps);
 }
 
 
@@ -612,33 +589,33 @@ void Map_Buildingdata_Data_Packet::write_warehouse
  Editor_Game_Base* egbase,
  Map_Map_Object_Saver * const os)
 {
-   fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
-   // Supply
+	//  supply
 	Tribe_Descr const & tribe = warehouse.owner().tribe();
-   const WareList& wares=warehouse.m_supply->get_wares();
+	WareList const & wares = warehouse.m_supply->get_wares();
 	for (Ware_Index::value_t i = 0; i < wares.get_nrwareids(); ++i) {
-      fw.Unsigned8(1);
+		fw.Unsigned8(1);
 		fw.String(tribe.get_ware_descr(i)->name());
-      fw.Unsigned16(wares.stock(i));
+		fw.Unsigned16(wares.stock(i));
 	}
-   fw.Unsigned8(0);
-   const WareList& workers=warehouse.m_supply->get_workers();
+	fw.Unsigned8(0);
+	WareList const & workers = warehouse.m_supply->get_workers();
 	for (Ware_Index::value_t i = 0; i < workers.get_nrwareids(); ++i) {
-      fw.Unsigned8(1);
+		fw.Unsigned8(1);
 		fw.String(tribe.get_worker_descr(i)->name());
-      fw.Unsigned16(workers.stock(i));
+		fw.Unsigned16(workers.stock(i));
 	}
-   fw.Unsigned8(0);
+	fw.Unsigned8(0);
 
    // Request
 	const uint16_t requests_size = warehouse.m_requests.size();
 	fw.Unsigned16(requests_size);
 	for (uint16_t i = 0; i < warehouse.m_requests.size(); ++i)
-      warehouse.m_requests[i]->Write(&fw, egbase, os);
+		warehouse.m_requests[i]->Write(&fw, egbase, os);
 
-   // Incorporated workers, write sorted after file-serial
-   fw.Unsigned16(warehouse.m_incorporated_workers.size());
+	//  Incorporated workers, write sorted after file-serial.
+	fw.Unsigned16(warehouse.m_incorporated_workers.size());
 	std::map<uint32_t, const Worker *> workermap;
 	const std::vector<Object_Ptr>::const_iterator iw_end =
 		warehouse.m_incorporated_workers.end();
@@ -665,8 +642,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		fw.String(it->second->name());
 	}
 
-   // Carrier spawn
-   fw.Unsigned32(warehouse.m_next_carrier_spawn);
+	fw.Unsigned32(warehouse.m_next_carrier_spawn);
 }
 
 
@@ -687,15 +663,14 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 		militarysite.m_soldier_requests.size();
 	fw.Unsigned16(soldier_requests_size);
 	for (uint16_t i = 0; i < soldier_requests_size; ++i)
-      militarysite.m_soldier_requests[i]->Write(&fw, egbase, os);
+		militarysite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
-
-   // Soldier
+	//  soldier
 	const uint16_t soldiers_size = militarysite.m_soldiers.size();
 	fw.Unsigned16(soldiers_size);
 	for (uint32_t i = 0; i < soldiers_size; ++i) {
-      assert(os->is_object_known(militarysite.m_soldiers[i]));
-      fw.Unsigned32(os->get_object_file_index(militarysite.m_soldiers[i]));
+		assert(os->is_object_known(militarysite.m_soldiers[i]));
+		fw.Unsigned32(os->get_object_file_index(militarysite.m_soldiers[i]));
 	}
 
    // did conquer
@@ -721,14 +696,14 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		productionsite.m_worker_requests.size();
 	fw.Unsigned16(worker_requests_size);
 	for (uint16_t i = 0; i < productionsite.m_worker_requests.size(); ++i)
-      productionsite.m_worker_requests[i]->Write(&fw, egbase, os);
+		productionsite.m_worker_requests[i]->Write(&fw, egbase, os);
 
-   // Workers
+	//  workers
 	const uint16_t workers_size = productionsite.m_workers.size();
 	fw.Unsigned16(workers_size);
 	for (uint16_t i = 0; i < workers_size; ++i) {
-      assert(os->is_object_known(productionsite.m_workers[i]));
-      fw.Unsigned32(os->get_object_file_index(productionsite.m_workers[i]));
+		assert(os->is_object_known(productionsite.m_workers[i]));
+		fw.Unsigned32(os->get_object_file_index(productionsite.m_workers[i]));
 	}
 
    // Items from flag
@@ -739,9 +714,9 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	fw.Unsigned16(program_size);
 	for (uint16_t i = 0; i < program_size; ++i) {
 		fw.String(productionsite.m_program[i].program->get_name());
-      fw.Signed32(productionsite.m_program[i].ip);
-      fw.Signed32(productionsite.m_program[i].phase);
-      fw.Unsigned32(productionsite.m_program[i].flags);
+		fw.  Signed32(productionsite.m_program[i].ip);
+		fw.  Signed32(productionsite.m_program[i].phase);
+		fw.Unsigned32(productionsite.m_program[i].flags);
 	}
    fw.Unsigned8(productionsite.m_program_timer);
    fw.Signed32(productionsite.m_program_time);
@@ -756,8 +731,8 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	const uint16_t statistics_size = productionsite.m_statistics.size();
 	fw.Unsigned16(statistics_size);
 	for (uint32_t i = 0; i < statistics_size; ++i)
-      fw.Unsigned8(productionsite.m_statistics[i]);
-   fw.Unsigned8(productionsite.m_statistics_changed);
+		fw.Unsigned8(productionsite.m_statistics[i]);
+	fw.Unsigned8(productionsite.m_statistics_changed);
 	fw.Data
 		(productionsite.m_statistics_buf,
 		 sizeof(productionsite.m_statistics_buf),
@@ -773,40 +748,37 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
  Editor_Game_Base* egbase,
  Map_Map_Object_Saver * const os)
 {
-   // Write the version
-   fw.Unsigned16(CURRENT_TRAININGSITE_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_TRAININGSITE_PACKET_VERSION);
 
-   // Write for productionsite
-   write_productionsite(trainingsite, fw, egbase, os);
+	write_productionsite(trainingsite, fw, egbase, os);
 
 	//  requests
 	const uint16_t soldier_requests_size =
 		trainingsite.m_soldier_requests.size();
 	fw.Unsigned16(soldier_requests_size);
 	for (uint32_t i = 0; i < soldier_requests_size; ++i)
-      trainingsite.m_soldier_requests[i]->Write(&fw, egbase, os);
+		trainingsite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
 
 	//  soldiers
 	const uint16_t soldiers_size = trainingsite.m_soldiers.size();
 	fw.Unsigned16(soldiers_size);
 	for (uint32_t i = 0; i < trainingsite.m_soldiers.size(); ++i) {
-      assert(os->is_object_known(trainingsite.m_soldiers[i]));
-      fw.Unsigned32(os->get_object_file_index(trainingsite.m_soldiers[i]));
+		assert(os->is_object_known(trainingsite.m_soldiers[i]));
+		fw.Unsigned32(os->get_object_file_index(trainingsite.m_soldiers[i]));
 	}
 
 	// Don't save m_list_upgrades (remake at load)
 
-		//Building heros ?
 	fw.Unsigned8(trainingsite.m_build_heros);
 
-		// Priority upgrades
+	//  priority upgrades
 	fw.Unsigned16(trainingsite.m_pri_hp);
 	fw.Unsigned16(trainingsite.m_pri_attack);
 	fw.Unsigned16(trainingsite.m_pri_defense);
 	fw.Unsigned16(trainingsite.m_pri_evade);
 
-		// Priority modificators
+	//  priority modificators
 	fw.Unsigned16(trainingsite.m_pri_hp_mod);
 	fw.Unsigned16(trainingsite.m_pri_attack_mod);
 	fw.Unsigned16(trainingsite.m_pri_defense_mod);

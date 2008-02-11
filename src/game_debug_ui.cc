@@ -150,7 +150,7 @@ struct MapObjectDebugWindow : public UI::Window {
 	virtual void think();
 
 private:
-   bool           m_log_general_info;
+	bool                  m_log_general_info;
 	Widelands::Object_Ptr m_object;
 	uint32_t            m_serial;
 	UI::Tab_Panel * m_tabs;
@@ -201,8 +201,8 @@ void MapObjectDebugWindow::think()
 	Widelands::Editor_Game_Base & egbase = get_iabase()->egbase();
 	if (Widelands::Map_Object * const obj = m_object.get(&egbase)) {
 		if (m_log_general_info)  {
-      obj->log_general_info(&egbase);
-      m_log_general_info = false;
+			obj->log_general_info(&egbase);
+			m_log_general_info = false;
 		}
 		UI::Window::think();
 	} else {
@@ -274,7 +274,7 @@ UI::Window(&parent, 0, 60, 200, 400, _("Debug Field").c_str()),
 m_map     (parent.egbase().map()),
 m_coords  (m_map.get_fcoords(coords)),
 
-	// Setup child panels
+//  setup child panels
 m_ui_field(this, 0, 0, 200, 280, ""),
 
 m_ui_immovable
@@ -297,14 +297,7 @@ m_ui_bobs(this, 0, 304, 200, 96)
 }
 
 
-/*
-===============
-FieldDebugWindow::~FieldDebugWindow
-===============
-*/
-FieldDebugWindow::~FieldDebugWindow()
-{
-}
+FieldDebugWindow::~FieldDebugWindow() {}
 
 
 /*

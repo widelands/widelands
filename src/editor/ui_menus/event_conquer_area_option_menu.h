@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_CONQUER_AREA_OPTION_MENU_H
-#define __S__EVENT_CONQUER_AREA_OPTION_MENU_H
+#ifndef EVENT_CONQUER_AREA_OPTION_MENU_H
+#define EVENT_CONQUER_AREA_OPTION_MENU_H
 
 #include "player_area.h"
 
@@ -46,14 +46,14 @@ struct Event_Conquer_Area_Option_Menu : public UI::Window {
 
 private:
 	Editor_Interactive & eia();
-      void update();
+	void update();
 	void clicked_ok();
-      void clicked(int32_t);
+	void clicked(int32_t);
 
 	Widelands::Event_Conquer_Area & m_event;
-      UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
-      UI::Checkbox *m_enable;
-      UI::Edit_Box* m_name;
+	UI::Textarea * m_player_ta, * m_area_ta, * m_x_ta, * m_y_ta;
+	UI::Checkbox                  * m_enable;
+	UI::Edit_Box                  * m_name;
 	Widelands::Player_Area<>        m_player_area;
 };
 

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_NOISE_HEIGHT_TOOL_H
-#define __S__EDITOR_NOISE_HEIGHT_TOOL_H
+#ifndef EDITOR_NOISE_HEIGHT_TOOL_H
+#define EDITOR_NOISE_HEIGHT_TOOL_H
 
 #include "editor_set_height_tool.h"
 

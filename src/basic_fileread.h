@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S_BASIC_FILEREAD_H
-#define __S_BASIC_FILEREAD_H
+#ifndef BASIC_FILEREAD_H
+#define BASIC_FILEREAD_H
 
 #include "filesystem.h"
 #include "machdep.h"

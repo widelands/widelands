@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,12 +46,12 @@ m_curware
 
 WaresDisplay::~WaresDisplay()
 {
-   remove_all_warelists();
+	remove_all_warelists();
 }
 
 
 bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
-   assert(m_warelists.size());
+	assert(m_warelists.size());
 
 	const vector_type::size_type index =
 		x < 0 | y < 0 ?
@@ -69,7 +69,7 @@ bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, 
 		 .c_str()
 		 :
 		 "");
-   return true;
+	return true;
 }
 
 /*
@@ -85,26 +85,24 @@ void WaresDisplay::add_warelist
    // If you register something twice, it is counted twice. Not my problem
 	m_warelists.push_back(wares);
 
-   int32_t rows, height;
+	int32_t rows, height;
 
-   rows = (wares->get_nrwareids() + WaresPerRow - 1) / WaresPerRow;
+	rows = (wares->get_nrwareids() + WaresPerRow - 1) / WaresPerRow;
 	height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
 
 	set_size(get_inner_w(), height+30);
 	m_curware.set_pos(Point(0, get_inner_h() - 25));
 	m_curware.set_size(get_inner_w(), 20);
 
-   m_type = type;
+	m_type = type;
 
 
 	update(0, 0, get_w(), get_h());
 }
 
-/*
- * Delete all ware lists
- */
+
 void WaresDisplay::remove_all_warelists() {
-   m_warelists.clear();
+	m_warelists.clear();
 }
 
 /*
@@ -119,17 +117,17 @@ void WaresDisplay::draw(RenderTarget* dst)
 	Point p(2, 2);
 
 	int32_t number = m_tribe.get_nrwares();
-   bool is_worker = false;
+	bool is_worker = false;
 
 	if (m_type == WORKER) {
 		number = m_tribe.get_nrworkers();
-      is_worker = true;
+		is_worker = true;
 	}
-   int32_t totid=0;
+	int32_t totid = 0;
 	for (int32_t id = 0; id < number; ++id, ++totid) {
-      uint32_t totalstock = 0;
+		uint32_t totalstock = 0;
 		for (uint32_t i = 0; i < m_warelists.size(); ++i)
-         totalstock += m_warelists[i]->stock(id);
+			totalstock += m_warelists[i]->stock(id);
 
 		draw_ware(*dst, p, id, totalstock, is_worker);
 

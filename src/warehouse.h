@@ -50,7 +50,7 @@ struct Warehouse_Descr : public Building_Descr {
 
 	Warehouse_Descr(const Tribe_Descr & tribe, const std::string & name);
 
-	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+	virtual void parse(char const * directory, Profile *, const EncodeData *);
 	virtual Building * create_object() const;
 
 	int32_t get_subtype() const {return m_subtype;}
@@ -63,7 +63,7 @@ private:
 
 
 class Warehouse : public Building {
-   friend struct Map_Buildingdata_Data_Packet;
+	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
 
@@ -83,8 +83,8 @@ public:
 	const WareList &get_workers() const;
 	void insert_wares(int32_t id, int32_t count);
 	void remove_wares(int32_t id, int32_t count);
-   void insert_workers(int32_t id, int32_t count);
-   void remove_workers(int32_t id, int32_t count);
+	void insert_workers(int32_t id, int32_t count);
+	void remove_workers(int32_t id, int32_t count);
 
 	virtual bool fetch_from_flag(Game* g);
 
@@ -101,9 +101,9 @@ public:
 	bool can_create_worker(Game *, Ware_Index);
 	void     create_worker(Game *, Ware_Index);
 
-   /// Military stuff
-   virtual bool has_soldiers();
-   virtual void conquered_by (Player*);
+	/// Military stuff
+	virtual bool has_soldiers();
+	virtual void conquered_by (Player *);
 
 protected:
 	virtual UI::Window *create_options_window(Interactive_Player *plr, UI::Window **registry);
@@ -111,13 +111,13 @@ protected:
 private:
 	static void idle_request_cb
 		(Game *, Request *, Ware_Index, Worker *, void * data);
-   void sort_worker_in(Editor_Game_Base*, std::string, Worker*);
+	void sort_worker_in(Editor_Game_Base*, std::string, Worker*);
 
 	WarehouseSupply       * m_supply;
 	std::vector<Request *>  m_requests; // one idle request per ware type
-   std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
-	int32_t                     m_next_carrier_spawn; //  time of next carrier growth
-   int32_t                     m_next_military_act; // time of next military action
+	std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
+	int32_t                 m_next_carrier_spawn; //  time of next carrier growth
+	int32_t                 m_next_military_act; // time of next military action
 };
 
 /*
@@ -130,8 +130,8 @@ struct WarehouseSupply : public Supply {
 
 	void set_economy(Economy* e);
 
-   void set_nrworkers(int32_t i);
-   void set_nrwares(int32_t i);
+	void set_nrworkers(int32_t i);
+	void set_nrwares(int32_t i);
 
 
 	const WareList &get_wares() const {return m_wares;}
@@ -140,8 +140,8 @@ struct WarehouseSupply : public Supply {
 	int32_t stock_workers(Ware_Index const i) const {return m_workers.stock(i);}
 	void add_wares     (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
-   void add_workers   (Ware_Index, uint32_t count);
-   void remove_workers(Ware_Index, uint32_t count);
+	void add_workers   (Ware_Index, uint32_t count);
+	void remove_workers(Ware_Index, uint32_t count);
 
 	// Supply implementation
 	virtual PlayerImmovable* get_position(Game* g);

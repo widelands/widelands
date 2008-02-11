@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S_FILEREAD_H
-#define __S_FILEREAD_H
+#ifndef FILEREAD_H
+#define FILEREAD_H
 
 #include "basic_fileread.h"
 #include "streamread.h"

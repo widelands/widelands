@@ -76,9 +76,9 @@ Sound_Handler::~Sound_Handler()
 	{
 		const Songset_map::const_iterator songs_end = m_songs.end();
 		for
-		(Songset_map::const_iterator it = m_songs.begin();
-		      it != songs_end;
-		      ++it)
+			(Songset_map::const_iterator it = m_songs.begin();
+			 it != songs_end;
+			 ++it)
 			delete it->second;
 	}
 }
@@ -113,8 +113,7 @@ void Sound_Handler::init()
 		 -1)
 	{
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
-		log("WARNING: Failed to initialize sound system: %s\n",
-		    Mix_GetError());
+		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
 
 		set_disable_music(true);
 		set_disable_fx(true);
@@ -286,17 +285,16 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 #endif
 
 		if (tempfile == NULL) {
-			log("Could not create tempfile "
-			    "/tmp/widelands-sfx.XXXXXXXX! Cannot load "
-			    "music.");
+			log
+				("Could not create tempfile /tmp/widelands-sfx.XXXXXXXX! Cannot "
+				 "load music.");
 			return NULL;
 		}
 
 		f = fopen(tempfile, "w+");
 
 		if (tempfile == NULL) {
-			log("Could not open %s for writing! Cannot load "
-			    "music.", tempfile);
+			log("Could not open %s for writing! Cannot load music.", tempfile);
 			return NULL;
 		}
 
@@ -304,14 +302,14 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		target = SDL_RWFromFP(f, 0);
 		if (!target) {
 			fclose(f);
-			log("SDL_RWFromFP failed miserably on %s: %s.\n",
-			    tempfile, SDL_GetError());
+			log
+				("SDL_RWFromFP failed miserably on %s: %s.\n",
+				 tempfile, SDL_GetError());
 		}
 		buf = malloc(fr->GetSize());
 
 		if (buf == NULL) {
-			log("Could not write to %s! Cannot load music.",
-			    tempfile);
+			log("Could not write to %s! Cannot load music.", tempfile);
 			return NULL;
 		}
 
@@ -523,8 +521,9 @@ void Sound_Handler::play_fx
 		return;
 
 	if (m_fxs.count(fx_name) == 0) {
-		log("Sound_Handler: sound effect \"%s\" does not exist!\n",
-		    fx_name.c_str());
+		log
+			("Sound_Handler: sound effect \"%s\" does not exist!\n",
+			 fx_name.c_str());
 		return;
 	}
 
@@ -542,8 +541,9 @@ void Sound_Handler::play_fx
 			m_active_fx[chan] = fx_name;
 		}
 	} else
-		log("Sound_Handler: sound effect \"%s\" exists but contains no "
-		    "files!\n", fx_name.c_str());
+		log
+			("Sound_Handler: sound effect \"%s\" exists but contains no files!\n",
+			 fx_name.c_str());
 }
 
 /** Load a background song. One "song" can consist of several audio files named
@@ -605,8 +605,9 @@ void Sound_Handler::start_music
 		change_music(songset_name, 0, fadein_ms);
 
 	if (m_songs.count(songset_name) == 0)
-		log("Sound_Handler: songset \"%s\" does not exist!\n",
-		    songset_name.c_str());
+		log
+			("Sound_Handler: songset \"%s\" does not exist!\n",
+			 songset_name.c_str());
 	else {
 		Mix_Music *m = m_songs[songset_name]->get_song();
 
@@ -614,10 +615,11 @@ void Sound_Handler::start_music
 			Mix_FadeInMusic(m, 1, fadein_ms);
 			m_current_songset = songset_name;
 		} else
-			log("Sound_Handler: songset \"%s\" exists but contains "
-			    "no files!\n", songset_name.c_str());
+			log
+				("Sound_Handler: songset \"%s\" exists but contains no files!\n",
+				 songset_name.c_str());
 	}
-    Mix_VolumeMusic(m_music_volume);
+	Mix_VolumeMusic(m_music_volume);
 }
 
 /** Stop playing a songset.
@@ -685,8 +687,7 @@ void Sound_Handler::set_disable_music(bool disable)
 		start_music(m_current_songset);
 	}
 
-	g_options.pull_section("global")->set_bool("disable_music", disable,
-	      false);
+	g_options.pull_section("global")->set_bool("disable_music", disable, false);
 }
 
 /** Normal set_* function
@@ -700,8 +701,7 @@ void Sound_Handler::set_disable_fx(bool disable)
 
 	m_disable_fx = disable;
 
-	g_options.pull_section("global")->set_bool("disable_fx", disable,
-	      false);
+	g_options.pull_section("global")->set_bool("disable_fx", disable, false);
 }
 
 /**

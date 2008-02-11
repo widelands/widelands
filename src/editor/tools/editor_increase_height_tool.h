@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_INCREASE_HEIGHT_TOOL_H
-#define __S__EDITOR_INCREASE_HEIGHT_TOOL_H
+#ifndef EDITOR_INCREASE_HEIGHT_TOOL_H
+#define EDITOR_INCREASE_HEIGHT_TOOL_H
 
 #include "editor_decrease_height_tool.h"
 #include "editor_set_height_tool.h"

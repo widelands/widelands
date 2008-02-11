@@ -269,8 +269,9 @@ throw (_wexception)
 
 		try {
 			char fname[FILENAME_SIZE];
-			snprintf(fname, sizeof(fname), VISION_FILENAME_TEMPLATE,
-			         plnum, VISION_CURRENT_PACKET_VERSION);
+			snprintf
+				(fname, sizeof(fname),
+				 VISION_FILENAME_TEMPLATE, plnum, VISION_CURRENT_PACKET_VERSION);
 			vision_file.Open(fs, fname);
 			have_vision = true;
 		} catch (...) {}

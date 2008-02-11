@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAP_LOADER_H
-#define __S__MAP_LOADER_H
+#ifndef MAP_LOADER_H
+#define MAP_LOADER_H
 
 #include "map.h"
 
@@ -41,28 +41,29 @@ must be deleted, a new one must be selected
 =============================
 */
 struct Map_Loader {
-      Map_Loader(const char* filename, Map* map) {m_s=STATE_INIT; m_map=map; m_map->set_filename(filename);}
-      virtual ~Map_Loader() {};
+	Map_Loader(char const * const filename, Map & M)
+		: m_map(M), m_s(STATE_INIT) {m_map.set_filename(filename);}
+	virtual ~Map_Loader() {};
 
-      virtual int32_t preload_map(bool as_scenario)=0;
+	virtual int32_t preload_map(bool as_scenario) = 0;
 	virtual void load_world() = 0;
-      virtual int32_t load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
+	virtual int32_t load_map_complete(Editor_Game_Base *, bool as_scenario) = 0;
 
-      Map* get_map() {return m_map;}
+	Map & map() {return m_map;}
 
 protected:
 	enum State {
-         STATE_INIT,
-         STATE_PRELOADED,
+		STATE_INIT,
+		STATE_PRELOADED,
 		STATE_WORLD_LOADED,
-         STATE_LOADED
+		STATE_LOADED
 	};
-      void set_state(State s) {m_s=s;}
-      State get_state() {return m_s;}
-      Map* m_map;
+	void set_state(State s) {m_s=s;}
+	State get_state() {return m_s;}
+	Map & m_map;
 
 private:
-      State m_s;
+	State m_s;
 };
 
 };

@@ -101,9 +101,9 @@ throw (_wexception)
 
 				battle.soldiers(soldier_1, soldier_2);
 
-         // and register it with the object loader for further loading
-			ol->register_object(egbase, serial, &battle);
-		}
+				//  and register it with the object loader for further loading
+				ol->register_object(egbase, serial, &battle);
+			}
 			if (fr.Unsigned32() != 0xffffffff)
 				throw wexception
 					("Error in Map_Battle_Data_Packet : Couldn't find 0xffffffff.");

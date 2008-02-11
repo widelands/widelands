@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EVENT_MESSAGEBOX_H
-#define __S__EVENT_MESSAGEBOX_H
+#ifndef EVENT_MESSAGEBOX_H
+#define EVENT_MESSAGEBOX_H
 
 #include "event.h"
 
@@ -37,13 +37,13 @@ class Editor_Game_Base;
  */
 struct Event_Message_Box : public Event, public Referencer<Trigger> {
 	Event_Message_Box(char const * const Name, State);
-      ~Event_Message_Box();
+	~Event_Message_Box();
 
 	std::string identifier() const {return "Event (message box): " + name();}
 
 	int32_t option_menu(Editor_Interactive &);
 
-      State run(Game*);
+	State run(Game *);
 
 	void Read (Section &, Editor_Game_Base       &);
 	void Write(Section &, Editor_Game_Base const &) const;
@@ -61,33 +61,33 @@ struct Event_Message_Box : public Event, public Referencer<Trigger> {
 	int32_t get_w() const {return m_width;}
 	int32_t get_h() const {return m_height;}
 	void set_button_trigger(uint8_t button_number, Trigger_Null *);
-      Trigger_Null* get_button_trigger(int32_t i);
-      void set_button_name(int32_t i, std::string);
-      const char* get_button_name(int32_t i);
-      void set_nr_buttons(int32_t i);
+	Trigger_Null * get_button_trigger(int32_t);
+	void set_button_name(int32_t, std::string);
+	char const * get_button_name(int32_t);
+	void set_nr_buttons(int32_t);
 	int32_t get_nr_buttons() const {return m_buttons.size();}
 
 	enum {
-         Right = 0,
-         Left,
-         Center_under,
-         Center_over,
+		Right = 0,
+		Left,
+		Center_under,
+		Center_over,
 	};
 
 private:
 	struct Button_Descr {
-         std::string name;
-         Trigger_Null *trigger;
+		std::string    name;
+		Trigger_Null * trigger;
 	};
 
-      std::string m_text;
-      std::string m_window_title;
-      bool m_is_modal;
+	std::string m_text;
+	std::string m_window_title;
+	bool m_is_modal;
 
-      std::vector<Button_Descr> m_buttons;
-      UI::Panel*      m_window;
-      int32_t  m_posx, m_posy;
-      int32_t  m_width, m_height;
+	std::vector<Button_Descr> m_buttons;
+	UI::Panel               * m_window;
+	int32_t m_posx, m_posy;
+	int32_t m_width, m_height;
 };
 
 };

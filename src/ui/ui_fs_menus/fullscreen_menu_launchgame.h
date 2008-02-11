@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__LAUNCH_GAME_MENU_H
-#define __S__LAUNCH_GAME_MENU_H
+#ifndef FULLSCREEN_MENU_LAUNCHGAME_H
+#define FULLSCREEN_MENU_LAUNCHGAME_H
 
 #include "constants.h"
 #include "fullscreen_menu_base.h"

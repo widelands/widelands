@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,14 +70,13 @@ void Tab_Panel::resize()
 	h = TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT;
 
 	// size of contents
-	if (m_active < m_tabs.size())
-		{
+	if (m_active < m_tabs.size()) {
 		Panel* panel = m_tabs[m_active].panel;
 
 		if (panel->get_w() > w)
 			w = panel->get_w();
 		h += panel->get_h();
-		}
+	}
 
 	set_size(w, h);
 
@@ -229,12 +228,12 @@ Cancel all highlights when the mouse leaves the panel
 */
 void Tab_Panel::handle_mousein(bool inside)
 {
-	if (!inside && m_highlight >= 0)
-		{
-		update(m_highlight*TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
+	if (!inside && m_highlight >= 0) {
+		update
+			(m_highlight * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
 
 		m_highlight = -1;
-		}
+	}
 }
 
 
@@ -246,16 +245,14 @@ bool Tab_Panel::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int
 
 	if (y < 0 || y >= TP_BUTTON_HEIGHT)
 		hl = -1;
-	else
-		{
+	else {
 		hl = x / TP_BUTTON_WIDTH;
 
-			if (static_cast<size_t>(hl) >= m_tabs.size())
+		if (m_tabs.size() <= static_cast<size_t>(hl))
 			hl = -1;
-		}
+	}
 
-	if (hl != m_highlight)
-		{
+	if (hl != m_highlight) {
 		{
 			const char * t = 0;
 			if (hl >= 0) {
@@ -270,7 +267,7 @@ bool Tab_Panel::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int
 			update(hl*TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
 
 		m_highlight = hl;
-		}
+	}
 	return true;
 }
 
@@ -291,8 +288,8 @@ bool Tab_Panel::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 			activate(id);
 
 			return true;
-			}
 		}
+	}
 
 	return false;
 }

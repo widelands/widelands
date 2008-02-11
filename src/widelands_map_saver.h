@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_SAVER_H
-#define __S__WIDELANDS_MAP_SAVER_H
+#ifndef WIDELANDS_MAP_SAVER_H
+#define WIDELANDS_MAP_SAVER_H
 
 #include "wexception.h"
 

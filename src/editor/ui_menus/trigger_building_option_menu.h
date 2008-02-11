@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIGGER_BUILDING_OPTION_MENU_H
-#define __S__TRIGGER_BUILDING_OPTION_MENU_H
+#ifndef TRIGGER_BUILDING_OPTION_MENU_H
+#define TRIGGER_BUILDING_OPTION_MENU_H
 
 #include "player_area.h"
 #include "building.h"

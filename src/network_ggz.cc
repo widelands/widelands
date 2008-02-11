@@ -161,7 +161,8 @@ void NetGGZ::data()
 		ip_address = ggz_strdup(ipstring);
 		ggz_free(ipstring);
 		break;
-	default: log("GGZ ## opcode unknown!\n");
+	default:
+		log("GGZ ## opcode unknown!\n");
 	}
 #endif
 }
@@ -261,10 +262,11 @@ void NetGGZ::deinitcore()
 
 bool NetGGZ::usedcore()
 {
+	return
 #ifdef HAVE_GGZ
-   return (ggzserver != 0);
+		ggzserver;
 #else
-   return 0; // To make gcc shut up
+		false;
 #endif
 }
 

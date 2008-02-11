@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIGGER_NULL_OPTION_MENU_H
-#define __S__TRIGGER_NULL_OPTION_MENU_H
+#ifndef TRIGGER_NULL_OPTION_MENU_H
+#define TRIGGER_NULL_OPTION_MENU_H
 
 #include "ui_window.h"
 
@@ -41,7 +41,7 @@ private:
 	void clicked_ok();
 
 	Widelands::Trigger_Null & m_trigger;
-      UI::Edit_Box* m_name;
+	UI::Edit_Box            * m_name;
 };
 
 #endif

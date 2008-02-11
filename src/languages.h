@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__LANGUAGES_H
-#define __S__LANGUAGES_H
+#ifndef LANGUAGES_H
+#define LANGUAGES_H
 
 #include <string>
 
@@ -31,8 +31,8 @@
  */
 
 struct Languages {
-   std::string name;
-   std::string abbrev;
+	std::string name;
+	std::string abbrev;
 };
 
 
@@ -64,4 +64,4 @@ static Languages available_languages[NR_LANGUAGES] = {
 };
 #endif
 
-#endif // __S__LANGUAGES_H
+#endif

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
-#define __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
+#ifndef EDITOR_EVENT_MENU_EDIT_TRIGGER_CONDITIONAL_H
+#define EDITOR_EVENT_MENU_EDIT_TRIGGER_CONDITIONAL_H
 
 #include "trigger/trigger_conditional.h"
 
@@ -28,7 +28,7 @@ class Editor_Interactive;
 namespace UI {
 template <typename T> struct Listselect;
 template <typename T> struct Button;
-}
+};
 
 /*
  * This is a modal box - The user must end this first

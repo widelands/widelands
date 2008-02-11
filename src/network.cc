@@ -129,9 +129,7 @@ NetGame::NetGame ()
 	statuswnd=0;
 }
 
-NetGame::~NetGame ()
-{
-}
+NetGame::~NetGame () {}
 
 void NetGame::run ()
 {
@@ -217,7 +215,7 @@ NetHost::NetHost ()
 	next_ping_due=0;
 
 	for (uint8_t i = 0; i < 8; ++i)
-	    net_delay_history[i]=INITIAL_NETWORK_DELAY;
+		net_delay_history[i] = INITIAL_NETWORK_DELAY;
 
 	promoter=new LAN_Game_Promoter();
 }
@@ -259,7 +257,7 @@ void NetHost::update_map ()
 void NetHost::send_player_info ()
 {
 	log("[Host] Broadcasting player info to all players.\n");
-        //send player info should also contain tribe.
+	//  Send player info should also contain tribe.
 	player_enabled=0;
 	player_human=0;
 
@@ -309,7 +307,7 @@ void NetHost::handle_network ()
 	TCPsocket sock;
 
 	if (promoter!=0)
-	    promoter->run ();
+		promoter->run ();
 
 	// if we are in the game initiation phase, check for new connections
 	while (svsock!=0 && (sock=SDLNet_TCP_Accept(svsock))!=0) {
@@ -369,7 +367,7 @@ void NetHost::handle_network ()
 		for (size_t i = 0; i < clients.size(); ++i)
 			if (SDLNet_SocketReady(clients[i].sock)) {
 				if (!clients[i].deserializer->read_packet(clients[i].sock))
-				    continue;
+					continue;
 
 				// the network connection to this player has been closed
 				log("[Host] client %i has left\n", i);
@@ -408,19 +406,19 @@ void NetHost::handle_network ()
 				serializer->putchar (player_ready);
 				log("[Host] Client %i has sent ready\n", i);
 				if (player_ready==player_human) {
-				    serializer->putchar (NETCMD_BEGIN_GAME);
+					serializer->putchar (NETCMD_BEGIN_GAME);
 
-				    phase=PH_INGAME;
+					phase = PH_INGAME;
 
-				    delete statuswnd;
-				    statuswnd=0;
-				    log("[Host] All players have notified ready... Starting.\n");
+					delete statuswnd;
+					statuswnd = 0;
+					log("[Host] All players have notified ready... Starting.\n");
 				}
 
 				serializer->end_packet ();
 
 				for (size_t j = 0; j < clients.size(); ++j)
-				    serializer->send (clients[j].sock);
+					serializer->send (clients[j].sock);
 				break;
 
 			case NETCMD_PONG:
@@ -618,8 +616,10 @@ void NetHost::syncreport (const md5_checksum& newsync)
 			if (clients[i].syncreports.empty()) {
 				// Complain if we get too far ahead
 				if (mysyncreports.size() > 1)
-					log("[Host] no sync reports from client %u (my queue has %u entries)\n",
-						i, mysyncreports.size());
+					log
+						("[Host] no sync reports from client %u (my queue has %u "
+						 "entries)\n",
+						 i, mysyncreports.size());
 				return;
 			}
 		}
@@ -629,10 +629,13 @@ void NetHost::syncreport (const md5_checksum& newsync)
 
 		for (size_t i = 0; i < clients.size();  ++i) {
 			if (clients[i].syncreports.front() != sync) {
-				log("[Host] lost synchronization with client %u!\n"
-				    "I have:     %s\n"
-				    "Client has: %s\n",
-				    i, sync.str().c_str(), clients[i].syncreports.front().str().c_str());
+				log
+					("[Host] lost synchronization with client %u!\n"
+					 "I have:     %s\n"
+					 "Client has: %s\n",
+					 i,
+					 sync.str().c_str(),
+					 clients[i].syncreports.front().str().c_str());
 
 				// TODO: Actually handle the desync here
 			}
@@ -875,10 +878,10 @@ void NetClient::disconnect ()
 		if (player->get_type() == Player::Remote) disconnect_player (p);
 	log("[Client] Disconnect has happened\n");
 
-    // Since we are now independent of the host, we are not bound to network
-    // time anymore (nor are we receiving NETCMD_ADVANCETIME packets).
-	//FIXME: This is not working. if host drops the clients characters start blinking around
-    net_game_time=INT_MAX;
+	//  Since we are now independent of the host, we are not bound to network
+	//  time anymore (nor are we receiving NETCMD_ADVANCETIME packets).
+	//  FIXME: This is not working. if host drops the clients characters start blinking around
+	net_game_time = INT_MAX;
 }
 
 /*** class NetStatusWindow ***/
@@ -913,13 +916,8 @@ void NetStatusWindow::set_ready (int32_t num)
 
 /*** class Serializer ***/
 
-Serializer::Serializer ()
-{
-}
-
-Serializer::~Serializer ()
-{
-}
+Serializer:: Serializer () {}
+Serializer::~Serializer () {}
 
 void Serializer::begin_packet ()
 {
@@ -960,11 +958,8 @@ void Serializer::send (TCPsocket sock)
 
 /*** class Deserializer ***/
 
-Deserializer::Deserializer () : StreamRead() {}
-
-Deserializer::~Deserializer ()
-{
-}
+Deserializer:: Deserializer () {}
+Deserializer::~Deserializer () {}
 
 int32_t Deserializer::read_packet (TCPsocket sock)
 {

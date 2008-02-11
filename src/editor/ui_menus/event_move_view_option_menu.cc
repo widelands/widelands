@@ -47,22 +47,25 @@ UI::Window(&parent, 0, 0, 180, 200, _("Move View Event Options").c_str()),
 m_event   (event),
 m_location(event.location())
 {
-   const int32_t offsx=5;
-   const int32_t offsy=25;
-   int32_t spacing=5;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	int32_t const offsx   =  5;
+	int32_t const offsy   = 25;
+	int32_t       spacing =  5;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
-   // Name editbox
-   new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-   m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
+	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+	m_name =
+		new UI::Edit_Box
+		(this, spacing + 60, posy, get_inner_w() - 2 * spacing - 60, 20, 0, 0);
 	m_name->set_text(event.name().c_str());
-   posy+=20+spacing;
+	posy += 20 + spacing;
 
-   // Set Field Buttons
-   new UI::Textarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
-   posy+=20+spacing;
-   // X
+	new UI::Textarea
+		(this,
+		 spacing, posy, get_inner_w(), 15,
+		 _("Current position: "), Align_CenterLeft);
+	posy += 20 + spacing;
+	//  X
 
 	new UI::IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
@@ -106,12 +109,15 @@ m_location(event.location())
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Move_View_Option_Menu::clicked, this, 8);
 
-   new UI::Textarea(this, spacing+20, posy+20, 20, 20, "X: ", Align_CenterLeft);
-   m_x_ta=new UI::Textarea(this, spacing+40, posy+20, 20, 20, "X: ", Align_CenterLeft);
+	new UI::Textarea
+		(this, spacing + 20, posy + 20, 20, 20, "X: ", Align_CenterLeft);
+	m_x_ta =
+		new UI::Textarea
+		(this, spacing + 40, posy + 20, 20, 20, "X: ", Align_CenterLeft);
 
-   // Y
-   int32_t oldspacing=spacing;
-   spacing=get_inner_w()/2+spacing;
+	//  Y
+	int32_t const oldspacing = spacing;
+	spacing = get_inner_w() / 2 + spacing;
 
 	new UI::IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
@@ -155,13 +161,15 @@ m_location(event.location())
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Move_View_Option_Menu::clicked, this, 14);
 
-   new UI::Textarea(this, spacing, posy+20, 20, 20, "Y: ", Align_CenterLeft);
-   m_y_ta=new UI::Textarea(this, spacing+20, posy+20, 20, 20, "Y: ", Align_CenterLeft);
-   spacing=oldspacing;
+	new UI::Textarea
+		(this, spacing,      posy + 20, 20, 20, "Y: ", Align_CenterLeft);
+	m_y_ta =
+		new UI::Textarea
+		(this, spacing + 20, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
+	spacing = oldspacing;
 
-   // Ok/Cancel Buttons
-   posx=(get_inner_w()/2)-60-spacing;
-   posy=get_inner_h()-20-spacing;
+	posx = get_inner_w() / 2 - 60 - spacing;
+	posy = get_inner_h()     - 20 - spacing;
 	new UI::Button<Event_Move_View_Option_Menu>
 		(this,
 		 posx, posy, 60, 20,
@@ -169,7 +177,7 @@ m_location(event.location())
 		 &Event_Move_View_Option_Menu::clicked_ok, this,
 		 _("Ok").c_str());
 
-   posx=(get_inner_w()/2)+spacing;
+	posx = get_inner_w() / 2 + spacing;
 
 	new UI::IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
@@ -178,8 +186,8 @@ m_location(event.location())
 		 &Event_Move_View_Option_Menu::end_modal, this, 0,
 		 _("Cancel"));
 
-   center_to_parent();
-   update();
+	center_to_parent();
+	update();
 }
 
 
@@ -206,8 +214,9 @@ void Event_Move_View_Option_Menu::clicked_ok() {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
-					 _("There is another event registered with the name \"%s\". "
-					   "Choose another name.")
+					 _
+					 ("There is another event registered with the name \"%s\". "
+					  "Choose another name.")
 					 .c_str(),
 					 name);
 				UI::Modal_Message_Box mb
@@ -224,7 +233,7 @@ void Event_Move_View_Option_Menu::clicked_ok() {
 }
 
 
-void Event_Move_View_Option_Menu::clicked(int32_t i) {
+void Event_Move_View_Option_Menu::clicked(int32_t const i) {
 	switch (i) {
 	case  3: m_location.x +=                                      100;  break;
 	case  4: m_location.x -= std::min<X_Coordinate>(m_location.x, 100); break;
@@ -238,8 +247,10 @@ void Event_Move_View_Option_Menu::clicked(int32_t i) {
 	case 12: m_location.y -= std::min<Y_Coordinate>(m_location.y,  10); break;
 	case 13: m_location.y +=                                        1;  break;
 	case 14: m_location.y -= std::min<Y_Coordinate>(m_location.y,   1); break;
+	default:
+		assert(false);
 	}
-   update();
+	update();
 }
 
 /*
@@ -252,9 +263,9 @@ void Event_Move_View_Option_Menu::update() {
 	if (extent.h <= static_cast<uint16_t>(m_location.y))
 		m_location.y = extent.h - 1;
 
-   char buf[6];
+	char buf[6];
 	snprintf(buf, sizeof(buf), "%i", m_location.x);
-   m_x_ta->set_text(buf);
-   snprintf(buf, sizeof(buf), "%i", m_location.y);
-   m_y_ta->set_text(buf);
+	m_x_ta->set_text(buf);
+	snprintf(buf, sizeof(buf), "%i", m_location.y);
+	m_y_ta->set_text(buf);
 }

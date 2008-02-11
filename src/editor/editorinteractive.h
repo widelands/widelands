@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITORINTERACTIVE_H
-#define __S__EDITORINTERACTIVE_H
+#ifndef EDITORINTERACTIVE_H
+#define EDITORINTERACTIVE_H
 
 #include "editor_increase_height_tool.h"
 #include "editor_increase_resources_tool.h"
@@ -61,7 +61,7 @@ public:
 	void map_clicked();
 	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
 
-      // gets called when a keyboard event occurs
+	//  gets called when a keyboard event occurs
 	bool handle_key(bool down, SDL_keysym);
 
 	struct Tools {
@@ -102,36 +102,35 @@ public:
 
 	Widelands::Player * get_player() const throw () {return 0;}
 
-      // action functions
-      void exit();
+	// action functions
+	void exit();
 
-      // reference functions
+	//  reference functions
 	void   reference_player_tribe(Widelands::Player_Number, void const *);
 	void unreference_player_tribe(Widelands::Player_Number, void const *);
-      bool is_player_tribe_referenced(int32_t);
-      void set_need_save(bool t) {m_need_save=t;}
+	bool is_player_tribe_referenced(int32_t);
+	void set_need_save(bool const t) {m_need_save = t;}
 
 private:
-      void toggle_buildhelp();
-      void tool_menu_btn();
-      void toolsize_menu_btn();
-      void toggle_mainmenu();
-      void toggle_eventmenu();
-      void toggle_playermenu();
-      void toggle_variablesmenu();
-      void toggle_objectivesmenu();
+	void toggle_buildhelp     ();
+	void tool_menu_btn        ();
+	void toolsize_menu_btn    ();
+	void toggle_mainmenu      ();
+	void toggle_eventmenu     ();
+	void toggle_playermenu    ();
+	void toggle_variablesmenu ();
+	void toggle_objectivesmenu();
 
-      // State variables
-      bool m_need_save;
+	//  state variables
+	bool m_need_save;
 	struct Player_References {
-         int32_t player;
-         const void *object;
+		int32_t      player;
+		void const * object;
 	};
-      std::vector<Player_References> m_player_tribe_references;
+	std::vector<Player_References> m_player_tribe_references;
 
 	int32_t m_realtime;
 
-      // UI ownings
 	Widelands::Editor_Game_Base & m_egbase;
 	UI::UniqueWindow::Registry m_toolmenu;
 	UI::UniqueWindow::Registry m_toolsizemenu;
@@ -147,4 +146,5 @@ private:
 	UI::UniqueWindow::Registry m_bobmenu;
 	UI::UniqueWindow::Registry m_resourcesmenu;
 };
-#endif // __S__EDITOR_H
+
+#endif

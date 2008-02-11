@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "font_handler.h"
 
 inline bool is_richtext(std::string text) {
-   return (text.substr(0, 3) == "<rt");
+	return text.substr(0, 3) == "<rt";
 }
 
 struct Text_Block {
@@ -67,14 +67,14 @@ struct Text_Block {
 		() const throw ()
 	{return m_line_breaks;}
 private:
-	int32_t                      m_font_size;
-		RGBColor m_font_color;
-		std::string m_font_weight;
-		std::string m_font_style;
-		std::string m_font_decoration;
-		std::string m_font_face;
-		int32_t m_line_spacing;
-		std::vector<std::string> m_words;
+	int32_t                                          m_font_size;
+	RGBColor                                         m_font_color;
+	std::string                                      m_font_weight;
+	std::string                                      m_font_style;
+	std::string                                      m_font_decoration;
+	std::string                                      m_font_face;
+	int32_t                                          m_line_spacing;
+	std::vector<std::string>                         m_words;
 	std::vector<std::vector<std::string>::size_type> m_line_breaks;
 };
 
@@ -107,8 +107,8 @@ private:
 };
 
 struct Text_Parser {
-      Text_Parser();
-      ~Text_Parser();
+	Text_Parser ();
+	~Text_Parser();
 	void parse
 		(std::string & text,
 		 std::vector<Richtext_Block> & blocks,
@@ -129,8 +129,8 @@ private:
 		 const std::string & block_start,
 		 const std::string & format_end,
 		 const std::string & block_end);
-      Align set_align(std::string align);
-		void split_words(std::string in, std::vector<std::string>* plist);
+	Align set_align(std::string align);
+	void split_words(std::string in, std::vector<std::string> * plist);
 };
 
 

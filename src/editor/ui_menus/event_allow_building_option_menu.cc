@@ -163,14 +163,7 @@ m_button_cancel
 
 	set_inner_size
 		(get_inner_w(), m_button_ok.get_y() + m_button_ok.get_h() + spacing);
-   center_to_parent();
-	update_label_player(m_label_player, m_player);
-	update_label_building
-		(m_label_building, *tribe.get_building_descr(m_building));
-
-	set_inner_size
-		(get_inner_w(), m_button_ok.get_y() + m_button_ok.get_h() + spacing);
-   center_to_parent();
+	center_to_parent();
 	update_label_player(m_label_player, m_player);
 	update_label_building
 		(m_label_building, *tribe.get_building_descr(m_building));
@@ -203,8 +196,9 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
-					 _("There is another event registered with the name \"%s\". "
-					   "Choose another name.")
+					 _
+					 ("There is another event registered with the name \"%s\". "
+					  "Choose another name.")
 					 .c_str(),
 					 name);
 				UI::Modal_Message_Box mb
@@ -225,7 +219,7 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 	m_event.m_building = m_building;
 	m_event.set_allow(m_allow.get_state());
 	eia().set_need_save(true);
-            end_modal(1);
+	end_modal(1);
 }
 
 

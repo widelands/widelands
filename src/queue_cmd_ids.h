@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__QUEUE_CMD_IDS_H
-#define __S__QUEUE_CMD_IDS_H
+#ifndef QUEUE_CMD_IDS_H
+#define QUEUE_CMD_IDS_H
 
 /*
  * This file contains the ids for the different
@@ -58,4 +58,4 @@
 #define QUEUE_CMD_REPLAYSYNCWRITE      251
 #define QUEUE_CMD_REPLAYSYNCREAD       252
 
-#endif // __S__QUEUE_CMD_IDS_H
+#endif

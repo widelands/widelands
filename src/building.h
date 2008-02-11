@@ -69,7 +69,7 @@ struct Building_Descr : public Map_Object_Descr {
 	const std::string & descname() const throw () {return m_descname;}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return m_descname.c_str();}
 	bool get_buildable() const {return m_buildable;}
-   bool get_enhanced_building() const {return m_enhanced_building;}
+	bool get_enhanced_building() const {return m_enhanced_building;}
 	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
 	uint32_t get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
@@ -90,8 +90,7 @@ struct Building_Descr : public Map_Object_Descr {
 		 bool construct, bool fill = false,
 		 Building_Descr const * = 0)
 		const;
-	virtual void parse(const char* directory, Profile* prof,
-		const EncodeData* encdata);
+	virtual void parse(char const * directory, Profile *, EncodeData const *);
 	virtual void load_graphics();
 
 	virtual uint32_t get_conquers() const;
@@ -135,7 +134,7 @@ public:
 
 class Building : public PlayerImmovable {
 	friend class Building_Descr;
-   friend struct Map_Buildingdata_Data_Packet;
+	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Building_Descr)
 
@@ -149,10 +148,10 @@ public:
 
 public:
 	enum Type {
-      PRODUCTIONSITE=0,
-      CONSTRUCTIONSITE,
-      MILITARYSITE,
-      WAREHOUSE,
+		PRODUCTIONSITE = 0,
+		CONSTRUCTIONSITE,
+		MILITARYSITE,
+		WAREHOUSE,
 		TRAININGSITE
 	};
 
@@ -164,7 +163,7 @@ public:
 	virtual int32_t  get_type    () const throw ();
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
-   virtual uint32_t get_ui_anim () const;
+	virtual uint32_t get_ui_anim () const;
 
 	virtual Flag* get_base_flag();
 	virtual uint32_t get_playercaps() const throw ();
@@ -212,20 +211,20 @@ public:
 	const std::vector<char *> & enhances_to() const throw ()
 	{return descr().enhances_to();}
 
-   void log_general_info(Editor_Game_Base* egbase);
+	void log_general_info(Editor_Game_Base *);
 
-    // Use on military and training sites
-   virtual void drop_soldier(uint32_t) {};
+	//  Use on military and training sites.
+	virtual void drop_soldier(uint32_t) {};
 	virtual void soldier_capacity_up   () {}
 	virtual void soldier_capacity_down () {}
 
-    // Use on training sites only
-   virtual void change_train_priority(uint32_t, int32_t) {};
+	//  Use on training sites only.
+	virtual void change_train_priority(uint32_t, int32_t) {};
 	virtual void switch_train_mode () {};
 
-   /// Testing stuff
-   virtual bool has_soldiers() {return false;};
-   virtual void conquered_by (Player*);
+	/// testing stuff
+	virtual bool has_soldiers() {return false;};
+	virtual void conquered_by (Player*);
 
 	///  Stores the Player_Number of the player who has defeated this building.
 	void set_defeating_player(const Player_Number player_number) throw ()

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __PLAYERCOMMAND_H__
-#define __PLAYERCOMMAND_H__
+#ifndef PLAYERCOMMAND_H
+#define PLAYERCOMMAND_H
 
 
 #include "cmd_queue.h"

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_EVENT_MENU_NEW_TRIGGER_H
-#define __S__EDITOR_EVENT_MENU_NEW_TRIGGER_H
+#ifndef EDITOR_EVENT_MENU_NEW_TRIGGER_H
+#define EDITOR_EVENT_MENU_NEW_TRIGGER_H
 
 #include "ui_window.h"
 
@@ -47,7 +47,7 @@ private:
 	void double_clicked(uint32_t);
 
 	UI::BaseListselect * m_trigger_type_list;
-      UI::Multiline_Textarea* m_description;
+	UI::Multiline_Textarea                    * m_description;
 	UI::Button<Editor_Event_Menu_New_Trigger> * m_ok_button;
 };
 

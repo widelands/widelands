@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,39 +42,40 @@ Game_Server_Protocol_Packet_GetUserInfo::
  * Get this packets id
  */
 uint16_t Game_Server_Protocol_Packet_GetUserInfo::get_id() {
-   return GGSPP_GETUSERINFO;
+	return GGSPP_GETUSERINFO;
 }
 
 /*
  * Write To network
  */
 void Game_Server_Protocol_Packet_GetUserInfo::send(Network_Buffer* buffer) {
-   buffer->put_string(m_username);
+	buffer->put_string(m_username);
 }
 
 /*
  * Handle reply
  */
 void Game_Server_Protocol_Packet_GetUserInfo::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
-   uint8_t flags = buf->get_8();
+	uint8_t const flags = buf->get_8();
 
 	if (flags == UI_UNKNOWN) {
-      char buffer[1024];
+		char buffer[1024];
 
 		snprintf
 			(buffer, sizeof(buffer),
-			 _("The User %s is currently not logged in or unknown to the "
-			   "server.\n")
+			 _
+			 ("The User %s is currently not logged in or unknown to the "
+			  "server.\n")
 			 .c_str(),
 			 m_username.c_str());
 
-      gsc->server_message(buffer);
-      return;
+		gsc->server_message(buffer);
+		return;
 	}
 
-   assert(flags == UI_ACK);
+	assert(flags == UI_ACK);
 
-   std::string game = buf->get_string();
-   std::string room = buf->get_string();
-   gsc->get_user_info(m_username, game, room);
+	std::string game = buf->get_string();
+	std::string room = buf->get_string();
+	gsc->get_user_info(m_username, game, room);
 }

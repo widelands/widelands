@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_VARIABLES_MENU_H
-#define __S__EDITOR_VARIABLES_MENU_H
+#ifndef EDITOR_VARIABLES_MENU_H
+#define EDITOR_VARIABLES_MENU_H
 
 #include "ui_button.h"
 #include "ui_table.h"
@@ -36,7 +36,7 @@ class Editor_Variables_Menu
 */
 struct Editor_Variables_Menu : public UI::UniqueWindow {
 	Editor_Variables_Menu(Editor_Interactive &, UI::UniqueWindow::Registry *);
-      virtual ~Editor_Variables_Menu();
+	virtual ~Editor_Variables_Menu();
 
 private:
 	Editor_Interactive                & m_parent;

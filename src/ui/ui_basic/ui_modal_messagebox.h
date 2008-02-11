@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__UI_MODAL_MESSAGE_BOX_H
-#define __S__UI_MODAL_MESSAGE_BOX_H
+#ifndef UI_MODAL_MESSAGEBOX_H
+#define UI_MODAL_MESSAGEBOX_H
 
 #include "ui_window.h"
 
@@ -28,15 +28,15 @@ namespace UI {
 */
 struct Modal_Message_Box : public Window {
 	enum MB_Type {
-         OK,
-         YESNO
+		OK,
+		YESNO
 	};
 	Modal_Message_Box
 		(Panel * parent,
 		 const std::string & caption,
 		 const std::string & text,
 		 MB_Type);
-      ~Modal_Message_Box();
+	~Modal_Message_Box();
 
 	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
 	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);

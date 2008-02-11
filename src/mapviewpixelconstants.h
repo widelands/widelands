@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAPVIEWPIXELCONSTANTS_H
-#define __S__MAPVIEWPIXELCONSTANTS_H
+#ifndef MAPVIEWPIXELCONSTANTS_H
+#define MAPVIEWPIXELCONSTANTS_H
 
 //  These are constants with the unit pixel.
 #define TRIANGLE_WIDTH 64
@@ -26,4 +26,4 @@
 #define HEIGHT_FACTOR 5
 
 
-#endif // __S__MAPVIEWPIXELCONSTANTS_H
+#endif

@@ -41,32 +41,64 @@ namespace Widelands {
 namespace Event_Factory {
 
 Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
-	{"allow_building",         _("Allow building type"),
-			_("Allows (or forbids) the construction of a building type for a player")},
-	{"building",               _("Create building"),
-			_("Create a building and optionally place workers in it")},
-	{"conquer_area",           _("Conquer area"),
-			_("Gives ownership of all unowned locations whithin an area to the player")},
-	{"flag",                   _("Create flag"),
-			_("Create a flag")},
-	{"immovable",              _("Create immovable"),
-			_("Create an immovable")},
-	{"message_box",            _("Show message box"),
-			_("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user")},
-	{"move_view",              _("Move view"),
-			_("This Event centers the Players View on a certain location")},
-	{"reveal_campaign",        _("Reveal campaign"),
-			_("Reveal a campaign")},
-	{"reveal_objective",       _("Reveal objective"),
-			_("Reveal (or hide) an objective")},
-	{"reveal_scenario",        _("Reveal scenario"),
-			_("Reveal a scenario")},
-	{"road",                   _("Create road"),
-			_("Create a road and optionally place a carrier on it")},
-	{"set_null_trigger",       _("Set null trigger"),
-			_("Manually set a Null Trigger to a given value")},
-	{"unhide_area",            _("Unhide area"),
-			_("Gives vision for a specified amount of time of all locations whithin an area to the player.")},
+	{
+		"allow_building",         _("Allow building type"),
+		_
+		("Allows (or forbids) the construction of a building type for a player")
+	},
+	{
+		"building",               _("Create building"),
+		_("Create a building and optionally place workers in it")
+	},
+	{
+		"conquer_area",           _("Conquer area"),
+		_
+		("Gives ownership of all unowned locations whithin an area to the "
+		 "player")
+	},
+	{
+		"flag",                   _("Create flag"),
+		_("Create a flag")
+	},
+	{
+		"immovable",              _("Create immovable"),
+		_("Create an immovable")
+	},
+	{
+		"message_box",            _("Show message box"),
+		_
+		("This Event shows a messagebox. The user can choose to make it "
+		 "modal/non-modal and to add a picture. Events can be assigned to each "
+		 "button to use this as a Choose Dialog for the user")
+	},
+	{
+		"move_view",              _("Move view"),
+		_("This Event centers the Players View on a certain location")
+	},
+	{
+		"reveal_campaign",        _("Reveal campaign"),
+		_("Reveal a campaign")
+	},
+	{
+		"reveal_objective",       _("Reveal objective"),
+		_("Reveal (or hide) an objective")
+	},
+	{
+		"reveal_scenario",        _("Reveal scenario"),
+		_("Reveal a scenario")
+	},
+	{
+		"road",                   _("Create road"),
+		_("Create a road and optionally place a carrier on it")
+	},
+	{
+		"set_null_trigger",       _("Set null trigger"),
+		_("Manually set a Null Trigger to a given value")
+	},
+	{
+		"unhide_area",            _("Unhide area"),
+		_("Gives vision for a specified amount of time of all locations whithin an area to the player.")
+	},
 };
 
 
@@ -96,7 +128,8 @@ Event & create
 	case 10: return *new Event_Road            (name, state);
 	case 11: return *new Event_Set_Null_Trigger(name, state);
 	case 12: return *new Event_Unhide_Area     (name, state);
-	default: assert(false);
+	default:
+		assert(false);
 	}
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__ENCYCLOPEDIA_WINDOW_H
-#define __S__ENCYCLOPEDIA_WINDOW_H
+#ifndef ENCYCLOPEDIA_WINDOW_H
+#define ENCYCLOPEDIA_WINDOW_H
 
 #include "graphic.h"
 #include "i18n.h"
@@ -33,19 +33,19 @@
 namespace Widelands {
 class Item_Ware_Descr;
 class Tribe_Descr;
-}
+};
 
 struct WareCondition {
 	uint32_t amount;
-   bool isGrouped;
+	bool     isGrouped;
 	uint32_t groupId;
 };
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	  EncyclopediaWindow(Interactive_Player&, UI::UniqueWindow::Registry&);
-	  ~EncyclopediaWindow();
+	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
+	~EncyclopediaWindow();
 private:
-	  Interactive_Player& interactivePlayer;
+	Interactive_Player               & interactivePlayer;
 	UI::Listselect<Widelands::Ware_Index> wares;
 	UI::Listselect<intptr_t> prodSites;
 	UI::Table     <intptr_t> condTable;
@@ -61,4 +61,5 @@ private:
 		 const bool            consumed,
 		 const WareCondition & wareCondition);
 };
+
 #endif

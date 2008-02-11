@@ -37,24 +37,25 @@
 namespace Widelands {
 
 Event_Message_Box::Event_Message_Box(char const * const Name, State const S)
-	: Event(Name, S) {
+	: Event(Name, S)
+{
 	set_text(_("No text defined").c_str());
 	set_window_title(_("Window Title").c_str());
-   set_is_modal(false);
-   set_dimensions(400, 300);
-   set_pos(-1, -1);
+	set_is_modal(false);
+	set_dimensions(400, 300);
+	set_pos(-1, -1);
 
-   set_nr_buttons(1);
-   m_buttons[0].name=_("Continue");
-   m_buttons[0].trigger=0;
+	set_nr_buttons(1);
+	m_buttons[0].name    = _("Continue");
+	m_buttons[0].trigger = 0;
 
-   m_window = 0;
+	m_window = 0;
 }
 
 Event_Message_Box::~Event_Message_Box() {
 	for (uint32_t i = 0; i < m_buttons.size(); ++i)
 		if (m_buttons[i].trigger)
-         set_button_trigger(i, 0);
+			set_button_trigger(i, 0);
 }
 
 
@@ -62,10 +63,10 @@ Event_Message_Box::~Event_Message_Box() {
  * functions for button handling
  */
 void Event_Message_Box::set_nr_buttons(int32_t i) {
-   int32_t oldsize=m_buttons.size();
-   m_buttons.resize(i);
+	int32_t oldsize = m_buttons.size();
+	m_buttons.resize(i);
 	for (uint32_t j = oldsize; j < m_buttons.size(); ++j)
-      m_buttons[j].trigger=0;
+		m_buttons[j].trigger = 0;
 }
 
 
@@ -81,16 +82,16 @@ void Event_Message_Box::set_button_trigger
 	}
 }
 Trigger_Null* Event_Message_Box::get_button_trigger(int32_t i) {
-   assert(i<get_nr_buttons());
-   return m_buttons[i].trigger;
+	assert(i<get_nr_buttons());
+	return m_buttons[i].trigger;
 }
 void Event_Message_Box::set_button_name(int32_t i, std::string str) {
-   assert(i<get_nr_buttons());
-   m_buttons[i].name=str;
+	assert(i<get_nr_buttons());
+	m_buttons[i].name = str;
 }
 const char* Event_Message_Box::get_button_name(int32_t i) {
-   assert(i<get_nr_buttons());
-   return m_buttons[i].name.c_str();
+	assert(i<get_nr_buttons());
+	return m_buttons[i].name.c_str();
 }
 
 
@@ -196,15 +197,16 @@ void Event_Message_Box::Write(Section & s, Editor_Game_Base const &) const {
  * check if trigger conditions are done
  */
 Event::State Event_Message_Box::run(Game* game) {
-
-   Message_Box_Event_Message_Box* mb=new Message_Box_Event_Message_Box(game, this, get_posx(), get_posy(), get_w(), get_h());
+	Message_Box_Event_Message_Box * mb =
+		new Message_Box_Event_Message_Box
+		(game, this, get_posx(), get_posy(), get_w(), get_h());
 	if (get_is_modal()) {
-      mb->run();
-      delete mb;
+		mb->run();
+		delete mb;
 	}
 
-   m_state = DONE;
-   return m_state;
+	m_state = DONE;
+	return m_state;
 }
 
 };

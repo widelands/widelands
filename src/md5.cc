@@ -105,8 +105,9 @@ void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx)
 		{
 			md5_process_block (ctx->buffer, (left_over + add) & ~63, ctx);
 			/* The regions in the following copy operation cannot overlap.  */
-			memcpy (ctx->buffer, &ctx->buffer[(left_over + add) & ~63],
-				(left_over + add) & 63);
+			memcpy
+				(ctx->buffer, &ctx->buffer[(left_over + add) & ~63],
+				 (left_over + add) & 63);
 			ctx->buflen = (left_over + add) & 63;
 		}
 

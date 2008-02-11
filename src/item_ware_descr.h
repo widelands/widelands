@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __ITEM_WARE_DESCR_H
-#define __ITEM_WARE_DESCR_H
+#ifndef ITEM_WARE_DESCR_H
+#define ITEM_WARE_DESCR_H
 
 #include <string>
 
@@ -81,4 +81,4 @@ private:
 
 };
 
-#endif   // __ITEM_WARE_DESCR_H
+#endif

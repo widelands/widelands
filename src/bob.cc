@@ -53,8 +53,10 @@ uint32_t Bob::Descr::vision_range() const
 /**
  * Parse additional information from the config file
  */
-void Bob::Descr::parse(const char *directory, Profile *prof,
-                  const EncodeData *encdata)
+void Bob::Descr::parse
+	(char const       * const directory,
+	 Profile          * const prof,
+	 EncodeData const * const encdata)
 {
 	char buffer [256];
 	char picname[256];
@@ -63,15 +65,21 @@ void Bob::Descr::parse(const char *directory, Profile *prof,
 
 	// Global options
 	snprintf(buffer, sizeof(buffer), "%s_00.png", m_name.c_str());
-	snprintf(picname, sizeof(picname), "%s/%s", directory,
-	         global->get_string("picture", buffer));
+	snprintf
+		(picname, sizeof(picname),
+		 "%s/%s", directory, global->get_string("picture", buffer));
 
 	m_picture = picname;
 
 	m_default_encodedata.parse(global);
 
-	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle"),
-	                                 (m_name + "_??.png").c_str(), encdata));
+	add_animation
+		("idle",
+		 g_anim.get
+		 (directory,
+		  prof->get_safe_section("idle"),
+		  (m_name + "_??.png").c_str(),
+		  encdata));
 
 	// Parse attributes
 	const char* string;
@@ -106,9 +114,11 @@ Bob *Bob::Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords)
  * Master factory to read a bob from the given directory and create the
  * appropriate description class.
  */
-Bob::Descr *Bob::Descr::create_from_dir(const char *name,
-                                        const char *directory, Profile *prof,
-                                        Tribe_Descr* tribe)
+Bob::Descr * Bob::Descr::create_from_dir
+	(char const  * const name,
+	 char const  * const directory,
+	 Profile     * const prof,
+	 Tribe_Descr * const tribe)
 {
 	Bob::Descr *bob = 0;
 
@@ -776,9 +786,7 @@ void Bob::movepath_update(Game* g, State* state)
 		assert(not path or m_position == path->get_end());
 		pop_task(); // success
 		return;
-	}
-	else if (state->ivar1==state->ivar3)
-	{
+	} else if (state->ivar1==state->ivar3) {
 		// We have stepped all steps that we were asked for.
 		// This is some kind of success, though we do not are were we wanted
 		// to go
@@ -789,9 +797,12 @@ void Bob::movepath_update(Game* g, State* state)
 	const Direction dir = (*path)[state->ivar1];
 	bool forcemove = false;
 
-	if (state->ivar2 and
-		static_cast<const Path::Step_Vector::size_type>(state->ivar1) + 1 ==
-		path->get_nsteps())
+	if
+		(state->ivar2
+		 and
+		 static_cast<const Path::Step_Vector::size_type>(state->ivar1) + 1
+		 ==
+		 path->get_nsteps())
 	{
 		forcemove = true;
 	}
@@ -909,6 +920,8 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 		break;
 
 	case IDLE: start.field = 0; break;
+	default:
+		assert(false);
 	}
 
 	if (start.field) {
@@ -937,17 +950,17 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
  * posx/posy is the on-bitmap position of the field we're currently on.
  *
  * It LERPs between start and end position when we're walking.
- * Note that the current field is actually the field we're walking to, not
+ * Note that the current node is actually the node we are walking to, not
  * the one we start from.
  */
-void Bob::draw(const Editor_Game_Base & game, RenderTarget & dst,
-               const Point pos) const
+void Bob::draw
+	(Editor_Game_Base const & egbase, RenderTarget & dst, Point const pos) const
 {
 	if (m_anim)
 		dst.drawanim
-			(calc_drawpos(game, pos),
+			(calc_drawpos(egbase, pos),
 			 m_anim,
-			 game.get_gametime() - m_animstart,
+			 egbase.get_gametime() - m_animstart,
 			 get_owner());
 }
 
@@ -1080,7 +1093,8 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 	molog("Owner: %p\n", m_owner);
 	molog("Postition: (%i, %i)\n", m_position.x, m_position.y);
 	molog("ActID: %i\n", m_actid);
-	molog("Animation: %s\n",
+	molog
+		("Animation: %s\n",
 		 m_anim ? descr().get_animation_name(m_anim).c_str() : "<none>");
 
 	molog("AnimStart: %i\n", m_animstart);

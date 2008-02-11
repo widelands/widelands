@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,10 +26,7 @@ Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 :
 Fullscreen_Menu_Base("singleplmenu.jpg"), // change this
 
-	// Text
 title(this, MENU_XRES/2, 140, _("Internet Options"), Align_HCenter),
-
-	// UI::Buttons
 
 rungame
 (this,
@@ -54,6 +51,4 @@ hostname  (this, 288, 210, 174, 24, 2, 0)
 	playername.set_text(_("nobody").c_str());
 }
 
-Fullscreen_Menu_InetServerOptions::~Fullscreen_Menu_InetServerOptions ()
-{
-}
+Fullscreen_Menu_InetServerOptions::~Fullscreen_Menu_InetServerOptions () {}

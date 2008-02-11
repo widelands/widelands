@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_CHAT_MENU_H
-#define __S__GAME_CHAT_MENU_H
+#ifndef GAME_CHAT_MENU_H
+#define GAME_CHAT_MENU_H
 
 #include "ui_button.h"
 #include "ui_checkbox.h"
@@ -31,11 +31,10 @@ class Interactive_Player;
 class NetGame;
 
 // The GameChatMenu is a rather dumb window with lots of buttons
-class GameChatMenu : public UI::UniqueWindow {
-public:
+struct GameChatMenu : public UI::UniqueWindow {
 	GameChatMenu(Interactive_Player &, UI::UniqueWindow::Registry &, NetGame *);
 
-   void  think();
+	void think();
 
 private:
 	Interactive_Player & m_player;

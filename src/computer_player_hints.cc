@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by The Widelands Development Team
+ * Copyright (C) 2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,5 +36,5 @@ void BuildingHints::parse (Profile* prof)
 
 	s=hints->get_string("need_map_resource");
 	if (s!=0)
-	    need_map_resource=strdup(s);
+		need_map_resource = strdup(s);
 }

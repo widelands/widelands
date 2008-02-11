@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WORKER_PROGRAM_H
-#define __S__WORKER_PROGRAM_H
+#ifndef WORKER_PROGRAM_H
+#define WORKER_PROGRAM_H
 
 
 #include "bob.h"
@@ -47,13 +47,13 @@ struct WorkerProgram : public BobProgramBase {
 	WorkerProgram(const std::string & name) : m_name(name) {}
 	virtual ~WorkerProgram() {}
 
-		std::string get_name() const {return m_name;}
-		int32_t get_size() const {return m_actions.size();}
-		const Worker::Action* get_action(int32_t idx) const {
-			assert(idx >= 0);
-			assert(static_cast<uint32_t>(idx) < m_actions.size());
-			return &m_actions[idx];
-		}
+	std::string get_name() const {return m_name;}
+	int32_t get_size() const {return m_actions.size();}
+	const Worker::Action* get_action(int32_t idx) const {
+		assert(idx >= 0);
+		assert(static_cast<uint32_t>(idx) < m_actions.size());
+		return &m_actions[idx];
+	}
 
 	void parse(Worker_Descr *, Parser *, std::string name);
 	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
@@ -147,10 +147,10 @@ private:
 		 const std::vector<std::string> & cmd);
 
 	const std::string                 m_name;
-		std::vector<Worker::Action> m_actions;
-		static const ParseMap       s_parsemap[];
+	std::vector<Worker::Action> m_actions;
+	static ParseMap       const s_parsemap[];
 };
 
 };
 
-#endif // __S__WORKER_PROGRAM_H
+#endif

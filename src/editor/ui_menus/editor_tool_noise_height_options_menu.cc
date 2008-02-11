@@ -116,13 +116,11 @@ m_noise_tool(noise_tool)
 
 /*
 ===============
-Editor_Tool_Noise_Height_Options_Menu::update()
-
 Update all textareas
 ===============
 */
 void Editor_Tool_Noise_Height_Options_Menu::update() {
-   char buffer[200];
+	char buffer[200];
 	const interval<Field::Height> height_interval = m_noise_tool.get_interval();
 	sprintf(buffer, _("Minimum: %u").c_str(), height_interval.min);
 	m_lower_label.set_text(buffer);
@@ -135,8 +133,7 @@ void Editor_Tool_Noise_Height_Options_Menu::update() {
 		 m_noise_tool.set_tool().get_interval().min);
 	m_set_label.set_text(buffer);
 
-   select_correct_tool();
-
+	select_correct_tool();
 }
 
 
@@ -154,18 +151,19 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_button(const Button n) {
 		break;
 	case Upper_Decrease:
 		if (0 < height_interval.max) {
-			--height_interval.max;
-				if (height_interval.max < height_interval.min)
-					height_interval.min = height_interval.max;
+			if (--height_interval.max < height_interval.min)
+				height_interval.min = height_interval.max;
 		}
 		break;
 	case Set_To_Increase: set_to +=     set_to < MAX_FIELD_HEIGHT; break;
 	case Set_To_Decrease: set_to -= 0 < set_to;                    break;
+	default:
+		assert(false);
 	}
 
 	m_noise_tool.set_interval(height_interval);
 	m_noise_tool.set_tool()
 		.set_interval(interval<Field::Height>(set_to, set_to));
 
-   update();
+	update();
 }

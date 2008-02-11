@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__INTRO_H
-#define __S__INTRO_H
+#ifndef FULLSCREEN_MENU_INTRO_H
+#define FULLSCREEN_MENU_INTRO_H
 
 #include "fullscreen_menu_base.h"
 
@@ -36,4 +36,4 @@ protected:
 	bool handle_key(bool down, SDL_keysym);
 };
 
-#endif // __S__INTRO_H
+#endif

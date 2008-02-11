@@ -63,8 +63,6 @@ UI::Window(&parent, 0, 0, 135, 55, _("New Variable").c_str()),
 m_parent(parent),
 m_variable(0),
 
-   // What type
-
 button_integer
 (this,
  5, 5, 60, 20,
@@ -105,24 +103,24 @@ bool New_Variable_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
  * a button has been clicked
  */
 void New_Variable_Window::clicked_new(const Variable_Type i) {
-   // Get the a name
-
-   char buffer[256];
+	char buffer[256];
 
 	Manager<Variable> & mvm = m_parent.egbase().map().mvm();
 	for (uint32_t n = 1; mvm[buffer]; ++n)
 		snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
 
-   std::string name = buffer;
+	std::string name = buffer;
 	switch (i) {
 	case Integer_Type: m_variable = new Widelands::Variable_Int   (); break;
 	case  String_Type: m_variable = new Widelands::Variable_String(); break;
+	default:
+		assert(false);
 	}
 
 	m_variable->set_name(buffer);
 	mvm.register_new(*m_variable);
 	end_modal(1);
-   return;
+	return;
 }
 
 /*
@@ -183,7 +181,7 @@ m_back
 {
 	m_name .set_text(m_te.get_string(0).c_str());
 	m_value.set_text(m_te.get_string(1).c_str());
-   center_to_parent();
+	center_to_parent();
 }
 
 /*
@@ -203,31 +201,30 @@ bool Edit_Variable_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
  * a button has been clicked
  */
 void Edit_Variable_Window::clicked_ok() {
-   // Get the a name
+	//  Get the a name
 
-   // Extract value
+	//  Extract value
 	Variable & var = UI::Table<Variable &>::get(m_te);
 	if (upcast(Widelands::Variable_Int, variable_int, &var)) {
-         char* endp;
-			const int32_t ivar = strtol(m_value.get_text(), &endp, 0);
+		char * endp;
+		int32_t const ivar = strtol(m_value.get_text(), &endp, 0);
 
 		if (endp and *endp) {
-            char buffer[1024];
-				snprintf
-					(buffer, sizeof(buffer),
-					 "%s %s",
-					 m_value.get_text(),
-					 _("is not a valid integer!").c_str());
-				UI::Modal_Message_Box mb
-					(&m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
-            mb.run();
-            return;
+			char buffer[1024];
+			snprintf
+				(buffer, sizeof(buffer),
+				 "%s %s",
+				 m_value.get_text(), _("is not a valid integer!").c_str());
+			UI::Modal_Message_Box mb
+				(&m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
+			mb.run();
+			return;
 		}
-         char buffer[256];
-         snprintf(buffer, sizeof(buffer), "%i", ivar);
+		char buffer[256];
+		snprintf(buffer, sizeof(buffer), "%i", ivar);
 
 		variable_int   ->set_value(ivar);
-			m_te.set_string(1, buffer);
+		m_te.set_string(1, buffer);
 	} else if (upcast(Widelands::Variable_String, variable_string, &var)) {
 		variable_string->set_value(m_value.get_text());
 		m_te.set_string(1, m_value.get_text());
@@ -237,7 +234,7 @@ void Edit_Variable_Window::clicked_ok() {
 	var.set_name(m_name.get_text());
 	m_te.set_string(0, var.name());
 
-   end_modal(1);
+	end_modal(1);
 }
 
 
@@ -308,9 +305,7 @@ Editor_Variables_Menu::~Editor_Variables_Menu
 Unregister from the registry pointer
 ===============
 */
-Editor_Variables_Menu::~Editor_Variables_Menu()
-{
-}
+Editor_Variables_Menu::~Editor_Variables_Menu() {}
 
 /*
  * A Button has been clicked

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_TOOL_MENU_H
-#define __S__EDITOR_TOOL_MENU_H
+#ifndef EDITOR_TOOL_MENU_H
+#define EDITOR_TOOL_MENU_H
 
 #include "editorinteractive.h"
 
@@ -32,7 +32,7 @@ struct Editor_Tool_Menu : public UI::UniqueWindow {
 private:
 	UI::Radiogroup m_radioselect;
 
-      void changed_to();
+	void changed_to();
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,12 +37,15 @@ Modal_Message_Box::Modal_Message_Box
 	Window(parent, 0, 0, 20, 20, caption.c_str())
 {
 
-   set_inner_size(320, 160);
+	set_inner_size(320, 160);
 	set_pos
 		(Point
 		 ((parent->get_inner_w() - 320) / 2, (parent->get_inner_h() - 100) / 2));
 
-   new Multiline_Textarea(this, 5, 5, get_inner_w()-10, get_inner_h()-70, text.c_str(), Align_Center);
+	new Multiline_Textarea
+		(this,
+		 5, 5, get_inner_w() - 10, get_inner_h() - 70,
+		 text.c_str(), Align_Center);
 
 	if (type == OK) {
 		new IDButton<Modal_Message_Box, int32_t>
@@ -68,8 +71,7 @@ Modal_Message_Box::Modal_Message_Box
 	}
 }
 
-Modal_Message_Box::~Modal_Message_Box() {
-}
+Modal_Message_Box::~Modal_Message_Box() {}
 
 /*
  * Handle mouseclick

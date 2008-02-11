@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ public:
 		_fn = static_cast<fnT>(f);
 	}
 	void unset() {
-      _fn = 0;
+		_fn = 0;
 	}
 	void call() {if (_fn) (_obj->*_fn)();}
 };
@@ -69,7 +69,7 @@ public:
 		_fn = static_cast<fnT>(f);
 	}
 	void unset() {
-      _fn = 0;
+		_fn = 0;
 	}
 	void call(T1 t1) {if (_fn) (_obj->*_fn)(t1);}
 };
@@ -90,10 +90,10 @@ public:
 		_fn = static_cast<fnT>(f);
 	}
 	void unset() {
-      _fn = 0;
+		_fn = 0;
 	}
 	void call(T1 t1, T2 t2) {if (_fn) (_obj->*_fn)(t1, t2);}
 };
 };
 
-#endif /* UI_SIGNAL_H */
+#endif

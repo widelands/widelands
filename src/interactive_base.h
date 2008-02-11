@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__INTBASE_H
-#define __S__INTBASE_H
+#ifndef INTERACTIVE_BASE_H
+#define INTERACTIVE_BASE_H
 
 #include "editor_game_base.h"
 #include "map.h"
@@ -38,16 +38,16 @@ class MiniMap;
  * Editor_Interactive share.
  */
 struct Interactive_Base : public Map_View {
-   friend class Sound_Handler;
+	friend class Sound_Handler;
 
-		enum {
-			dfShowCensus     = 1, //  show census report on buildings
-			dfShowStatistics = 2, //  show statistics report on buildings
-			dfDebug          = 4, //  general debugging info
-		};
+	enum {
+		dfShowCensus     = 1, //  show census report on buildings
+		dfShowStatistics = 2, //  show statistics report on buildings
+		dfDebug          = 4, //  general debugging info
+	};
 
 	Interactive_Base(Widelands::Editor_Game_Base &);
-		virtual ~Interactive_Base();
+	virtual ~Interactive_Base();
 
 	virtual bool handle_key(bool down, SDL_keysym);
 
@@ -55,15 +55,14 @@ struct Interactive_Base : public Map_View {
 	Widelands::Editor_Game_Base       & egbase()       {return m_egbase;}
 	virtual void reference_player_tribe(const int32_t, const void * const) {}
 
-		static int32_t get_xres();
-		static int32_t get_yres();
+	static int32_t get_xres();
+	static int32_t get_yres();
 	bool m_show_workarea_preview;
 
 	//  point of view for drawing
 	virtual Widelands::Player * get_player() const throw () = 0;
 
-      // logic handler func
-      void think();
+	void think();
 	virtual void postload();
 
 	const Widelands::Node_and_Triangle<> & get_sel_pos() const {
@@ -84,21 +83,21 @@ struct Interactive_Base : public Map_View {
 	void set_sel_radius(uint32_t);
 
 	void move_view_to(Widelands::Coords);
-		void move_view_to_point(Point pos);
+	void move_view_to_point(Point pos);
 
-      virtual void start() = 0;
+	virtual void start() = 0;
 
-      // Display flags
-		uint32_t get_display_flags();
-		void set_display_flags(uint32_t flags);
-		bool get_display_flag(uint32_t flag);
-		void set_display_flag(uint32_t flag, bool on);
+	//  display flags
+	uint32_t get_display_flags();
+	void set_display_flags(uint32_t flags);
+	bool get_display_flag(uint32_t flag);
+	void set_display_flag(uint32_t flag, bool on);
 
-      // Road building
+	//  road building
 	void set_flag_to_connect(Widelands::Coords const location) {
 		m_flag_to_connect = location;
 	}
-		bool is_building_road() const {return m_buildroad;}
+	bool is_building_road() const {return m_buildroad;}
 	Widelands::CoordPath * get_build_road() {return m_buildroad;}
 	void start_build_road
 		(Widelands::Coords start, Widelands::Player_Number player);
@@ -109,14 +108,13 @@ struct Interactive_Base : public Map_View {
 	Widelands::Coords    get_build_road_end    () const throw ();
 	Widelands::Direction get_build_road_end_dir() const throw ();
 
-      // for loading
-      virtual void cleanup_for_load() {};
+	virtual void cleanup_for_load() {};
 
 private:
-      void roadb_add_overlay();
-      void roadb_remove_overlay();
+	void roadb_add_overlay   ();
+	void roadb_remove_overlay();
 
-      MiniMap* m_mm;
+	MiniMap * m_mm;
 	Widelands::Editor_Game_Base & m_egbase;
 	struct Sel_Data {
 		Sel_Data
@@ -150,23 +148,23 @@ private:
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
 
-      UI::UniqueWindow::Registry m_minimap;
+	UI::UniqueWindow::Registry m_minimap;
 
 protected:
 	void toggle_minimap();
 	void hide_minimap();
 
-      void mainview_move(int32_t x, int32_t y);
-		void minimap_warp(int32_t x, int32_t y);
+	void mainview_move(int32_t x, int32_t y);
+	void minimap_warp(int32_t x, int32_t y);
 
 	virtual void draw_overlay(RenderTarget &);
 
-      void unset_sel_picture();
-      void set_sel_picture(const char * const);
+	void unset_sel_picture();
+	void set_sel_picture(const char * const);
 	Widelands::Coords m_flag_to_connect;
 	bool m_shift_down;
 	bool m_ctrl_down;
 };
 
 
-#endif // __S__INTPLAYER_H
+#endif

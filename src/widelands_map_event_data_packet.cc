@@ -42,12 +42,12 @@ throw (_wexception)
 {
 	if (skip) return;
 
-   // Skip, if no events saved
-		FileRead fr;
+	//  skip, if no events saved
+	FileRead fr;
 	try {fr.Open(fs, "event");} catch (...) {return;}
 
-   Profile prof;
-   prof.read("event", 0, fs);
+	Profile prof;
+	prof.read("event", 0, fs);
 
 	try {
 		int32_t const packet_version =
@@ -97,7 +97,7 @@ void Map_Event_Data_Packet::Write
  Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   Profile prof;
+	Profile prof;
 	prof.create_section("global")->set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
@@ -111,14 +111,13 @@ throw (_wexception)
 		case Event::INIT:                                      break;
 		case Event::RUNNING: s.set_string("state", "running"); break;
 		case Event::DONE:    s.set_string("state", "done");    break;
-		default: assert(false);
+		default:
+			assert(false);
 		}
 		e.Write(s, *egbase);
 	}
 
-   prof.write("event", false, fs);
-
-   // done
+	prof.write("event", false, fs);
 }
 
 };

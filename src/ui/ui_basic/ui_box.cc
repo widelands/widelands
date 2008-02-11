@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ void Box::resize()
 		set_item_pos(idx, totaldepth);
 
 		totaldepth += depth;
-		}
+	}
 }
 
 
@@ -118,32 +118,28 @@ void Box::get_item_size(uint32_t idx, int32_t* pdepth, int32_t* pbreadth)
 	const Item& it = m_items[idx];
 	int32_t depth, breadth;
 
-	switch (it.type)
-		{
-		case Item::ItemPanel:
-			if (m_orientation == Horizontal)
-				{
-				depth = it.u.panel.panel->get_w();
-				breadth = it.u.panel.panel->get_h();
-				}
-			else
-				{
-				depth = it.u.panel.panel->get_h();
-				breadth = it.u.panel.panel->get_w();
-				}
-			break;
-
-		case Item::ItemSpace:
-			depth = it.u.space;
-			breadth = 0;
-			break;
-
-		default:
-			throw wexception("Box::get_item_size: bad type %u", it.type);
+	switch (it.type) {
+	case Item::ItemPanel:
+		if (m_orientation == Horizontal) {
+			depth   = it.u.panel.panel->get_w();
+			breadth = it.u.panel.panel->get_h();
+		} else {
+			depth   = it.u.panel.panel->get_h();
+			breadth = it.u.panel.panel->get_w();
 		}
+		break;
+
+	case Item::ItemSpace:
+		depth   = it.u.space;
+		breadth = 0;
+		break;
+
+	default:
+		throw wexception("Box::get_item_size: bad type %u", it.type);
+	}
 
 	if (pdepth)
-		*pdepth = depth;
+		*pdepth   = depth;
 	if (pbreadth)
 		*pbreadth = breadth;
 }
@@ -186,13 +182,13 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 			break;
 		}
 
-			if (m_orientation == Horizontal)
-				it  .u.panel.panel->set_pos(Point(pos, breadth));
-			else it.u.panel.panel->set_pos(Point(breadth, pos));
-	}
+		if (m_orientation == Horizontal)
+			it  .u.panel.panel->set_pos(Point(pos, breadth));
+		else it.u.panel.panel->set_pos(Point(breadth, pos));
 		break;
+	}
 
 	case Item::ItemSpace:; //  no need to do anything
-	}
+	};
 }
 };

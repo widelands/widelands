@@ -121,30 +121,26 @@ m_allow_button
 	}
 	m_forbidden.sort();
 	m_allowed  .sort();
-   update();
+	update();
 }
 
 /*
 ===============
-Editor_Player_Menu_Allowed_Buildings_Menu::update()
-
 Updates all UI::Textareas in the UI::Window to represent currently
 set values
 ==============
 */
-void Editor_Player_Menu_Allowed_Buildings_Menu::update() {
-}
+void Editor_Player_Menu_Allowed_Buildings_Menu::update() {}
 
 /*
 ===============
-Editor_Player_Menu_Allowed_Buildings_Menu::~Editor_Player_Menu_Allowed_Buildings_Menu
-
 Unregister from the registry pointer
 ===============
 */
-Editor_Player_Menu_Allowed_Buildings_Menu::~Editor_Player_Menu_Allowed_Buildings_Menu()
-{
-}
+Editor_Player_Menu_Allowed_Buildings_Menu::
+~Editor_Player_Menu_Allowed_Buildings_Menu
+()
+{}
 
 
 /*

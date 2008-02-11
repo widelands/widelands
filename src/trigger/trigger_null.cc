@@ -54,16 +54,16 @@ void Trigger_Null::Write(Section & s, Editor_Game_Base const &) const {
 void Trigger_Null::check_set_conditions(Game const &) {
 	if (m_should_toggle) set_trigger(m_value);
 
-   return;
+	return;
 }
 
 /*
  * Reset this trigger. This is only valid for non one timers
  */
 void Trigger_Null::reset_trigger       (Game const &) {
-   m_should_toggle = false;
-   m_value = false;
-   set_trigger(false);
+	m_should_toggle = false;
+	m_value         = false;
+	set_trigger(false);
 }
 
 };

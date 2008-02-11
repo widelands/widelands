@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,18 +34,19 @@ Game_Server_Protocol_Packet_Ping::~Game_Server_Protocol_Packet_Ping() {}
  * Get this packets id
  */
 uint16_t Game_Server_Protocol_Packet_Ping::get_id() {
-   return GGSPP_PING;
+	return GGSPP_PING;
 }
 
 /*
  * Recv
  */
-void Game_Server_Protocol_Packet_Ping::recv(Game_Server_Connection*, Network_Buffer*) {
-}
+void Game_Server_Protocol_Packet_Ping::recv
+(Game_Server_Connection *, Network_Buffer *)
+{}
 
 /*
  * Construct reply
  */
 void Game_Server_Protocol_Packet_Ping::write_reply(Network_Buffer* buf) {
-   buf->put_8(PING_ACK);
+	buf->put_8(PING_ACK);
 }

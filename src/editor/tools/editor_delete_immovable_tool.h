@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_DELETE_IMMOVABLE_TOOL
-#define __S__EDITOR_DELETE_IMMOVABLE_TOOL
+#ifndef EDITOR_DELETE_IMMOVABLE_TOOL_H
+#define EDITOR_DELETE_IMMOVABLE_TOOL_H
 
 #include "editor_tool.h"
 

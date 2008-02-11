@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S_FILEWRITE_H
-#define __S_FILEWRITE_H
+#ifndef FILEWRITE_H
+#define FILEWRITE_H
 
 #include "basic_filewrite.h"
 #include "streamwrite.h"

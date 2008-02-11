@@ -43,7 +43,7 @@ Event_Set_Null_Trigger::Event_Set_Null_Trigger
 
 
 Event_Set_Null_Trigger::~Event_Set_Null_Trigger() {
-   set_trigger(0);
+	set_trigger(0);
 }
 
 
@@ -68,7 +68,7 @@ void Event_Set_Null_Trigger::Read(Section & s, Editor_Game_Base & egbase) {
 }
 
 void Event_Set_Null_Trigger::Write(Section & s, Editor_Game_Base const &) const {
-   assert(m_trigger);
+	assert(m_trigger);
 	s.set_string ("type",    "set_null_trigger");
 	s.set_int    ("version", EVENT_VERSION);
 	s.set_string ("trigger", m_trigger->name());
@@ -78,12 +78,12 @@ void Event_Set_Null_Trigger::Write(Section & s, Editor_Game_Base const &) const 
 
 
 Event::State Event_Set_Null_Trigger::run(Game* game) {
-   assert(m_trigger);
+	assert(m_trigger);
 
-   m_trigger->set_trigger_manually(m_setto);
+	m_trigger->set_trigger_manually(m_setto);
 	m_trigger->check_set_conditions(*game); // forcefully update this trigger
 
-   return m_state = DONE;
+	return m_state = DONE;
 }
 
 };

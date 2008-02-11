@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__AREAWATCHER_H
-#define __S__AREAWATCHER_H
+#ifndef AREAWATCHER_H
+#define AREAWATCHER_H
 
 #include "instances.h"
 #include "player_area.h"

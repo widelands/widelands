@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_ui_icongrid_h
-#define included_ui_icongrid_h
+#ifndef UI_ICONGRID_H
+#define UI_ICONGRID_H
 
 #include "ui_panel.h"
 #include "ui_signal.h"
@@ -107,4 +107,4 @@ private:
 };
 };
 
-#endif // included_ui_icongrid_h
+#endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,8 +65,8 @@ void Item_Ware_Descr::load_graphics()
  * \return newly created structure.
  * \throw all exceptions happened during process
  */
-Item_Ware_Descr* Item_Ware_Descr::create_from_dir(const char* name,
-                                                  const char* dir)
+Item_Ware_Descr * Item_Ware_Descr::create_from_dir
+	(char const * const name, char const * const dir)
 {
 	Item_Ware_Descr* descr = new Item_Ware_Descr(name);
 

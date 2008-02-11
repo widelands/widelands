@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __NETWORK_H__
-#define __NETWORK_H__
+#ifndef NETWORK_H
+#define NETWORK_H
 
 #include "constants.h"
 #include "md5.h"

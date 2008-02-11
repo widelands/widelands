@@ -32,8 +32,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		(const Tribe_Descr &, const std::string & militarysite_name);
 	virtual ~MilitarySite_Descr();
 
-	virtual void parse(const char* directory, Profile* prof,
-		const EncodeData* encdata);
+	virtual void parse(char const * directory, Profile *, EncodeData const *);
 	virtual Building * create_object() const;
 
 	virtual bool is_only_production_site() const throw () {return false;}
@@ -76,19 +75,17 @@ public:
 	{return m_soldiers;}
 
 	uint32_t get_capacity () const throw () {return m_capacity;}
-	// Overload of building functions
-   virtual void drop_soldier (uint32_t serial);
+	//  overload of building functions
+	virtual void drop_soldier (uint32_t serial);
 	virtual void soldier_capacity_up   () {change_soldier_capacity  (1);}
 	virtual void soldier_capacity_down () {change_soldier_capacity (-1);}
 
-   /**
-      This methods are helper for use at configure this site.
-   */
-   void set_requeriments (Requeriments*);
-   void  clear_requeriments ();
-   Requeriments get_requeriments () {return m_soldier_requeriments;}
+	/// This methods are helper for use at configure this site.
+	void set_requeriments (Requeriments *);
+	void  clear_requeriments ();
+	Requeriments get_requeriments () {return m_soldier_requeriments;}
 
-   /*
+	/*
       So, to set a new requeriment to the request you should do something like:
 
          Requeriments new_req = ms->get_requeriments();
@@ -96,16 +93,16 @@ public:
          new_req.set (atribute, min_value, max_value);
          ms->set_requeriments (&new_req);
 
-   */
+	*/
 
-   /// Testing stuff
-   uint32_t nr_not_marked_soldiers();
-   uint32_t nr_attack_soldiers();
-   void set_in_battle(bool in_battle) {m_in_battle = in_battle;};
+	/// Testing stuff
+	uint32_t nr_not_marked_soldiers();
+	uint32_t nr_attack_soldiers();
+	void set_in_battle(bool const in_battle) {m_in_battle = in_battle;};
 
-   virtual bool has_soldiers() {return m_soldiers.size() > 0;}
-   virtual MilitarySite* conquered_by (Game*, Player*);
-   virtual void init_after_conquering (Game* g, std::vector<Soldier*>* soldiers);
+	virtual bool has_soldiers() {return m_soldiers.size() > 0;}
+	virtual MilitarySite * conquered_by (Game *, Player *);
+	virtual void init_after_conquering (Game *, std::vector<Soldier *> *);
 
 protected:
 	void conquer_area(Game &);

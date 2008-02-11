@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,11 +28,10 @@
 class Colormap {
 	SDL_Color palette[256];
 
-	 /** maps 8 bit color and brightness value to the shaded color
-	  * \note brightness is currently 8 bits. Restricting brightness
-	  * to 64 or less shades would greatly reduce the size of this
-	  * table, and thus improve memory cache impact inside the renderer.
-	  */
+	/// maps 8 bit color and brightness value to the shaded color.
+	/// \note Brightness is currently 8 bits. Restricting brightness to 64 or
+	/// less shades would greatly reduce the size of this table, and thus
+	/// improve memory cache impact inside the renderer.
 	void * colormap;
 
 public:

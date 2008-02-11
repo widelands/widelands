@@ -85,7 +85,7 @@ bool Worker::run_createitem(Game* g, State* state, const Action* action)
  */
 bool Worker::run_mine(Game* g, State* state, const Action* action)
 {
-   molog("  Mine(%s, %i)\n", action->sparam1.c_str(), action->iparam1);
+	molog("  Mine(%s, %i)\n", action->sparam1.c_str(), action->iparam1);
 
 	Map & map = *g->get_map();
 
@@ -288,8 +288,8 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 		if (action->iparam2 < 0)
 			map.find_reachable_immovables(area, &list, cstep);
 		else
-			map.find_reachable_immovables(area, &list, cstep,
-			                           FindImmovableAttribute(action->iparam2));
+			map.find_reachable_immovables
+				(area, &list, cstep, FindImmovableAttribute(action->iparam2));
 
 		if (!list.size()) {
 			set_signal("fail"); // no object found, cannot run program
@@ -306,8 +306,8 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 		if (action->iparam2 < 0)
 			map.find_reachable_bobs(area, &list, cstep);
 		else
-			map.find_reachable_bobs(area, &list, cstep,
-			                        FindBobAttribute(action->iparam2));
+			map.find_reachable_bobs
+				(area, &list, cstep, FindBobAttribute(action->iparam2));
 
 		if (!list.size()) {
 			set_signal("fail"); // no object found, cannot run program
@@ -462,9 +462,14 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 	}
 
 	// Walk towards it
-	if (not start_task_movepath(g, dest, 10,
-	                            descr().get_right_walk_anims(does_carry_ware()),
-	                            forceonlast, max_steps))
+	if
+		(not
+		 start_task_movepath
+		 (g,
+		  dest,
+		  10,
+		  descr().get_right_walk_anims(does_carry_ware()),
+		  forceonlast, max_steps))
 	{
 		molog("  couldn't find path\n");
 		set_signal("fail");
@@ -638,8 +643,9 @@ bool Worker::run_geologist(Game* g, State* state, const Action* action)
 {
 	dynamic_cast<const Flag &>(*get_location(g));
 
-	molog("  Start Geologist (%i attempts, %i radius -> %s)\n", action->iparam1,
-	      action->iparam2, action->sparam1.c_str());
+	molog
+		("  Start Geologist (%i attempts, %i radius -> %s)\n",
+		 action->iparam1, action->iparam2, action->sparam1.c_str());
 
 	++state->ivar1;
 	start_task_geologist(action->iparam1, action->iparam2, action->sparam1);
@@ -692,13 +698,14 @@ bool Worker::run_playFX(Game* g, State* state, const Action* action)
 }
 
 
-Worker::Worker(const Worker_Descr & worker_descr):Bob          (worker_descr),
-                                                  m_economy    (0),
-                                                  m_supply     (0),
-                                                  m_needed_exp (0),
-                                                  m_current_exp(0)
-{
-}
+Worker::Worker(const Worker_Descr & worker_descr)
+	:
+	Bob          (worker_descr),
+	m_economy    (0),
+	m_supply     (0),
+	m_needed_exp (0),
+	m_current_exp(0)
+{}
 
 Worker::~Worker()
 {
@@ -782,8 +789,7 @@ void Worker::set_location(PlayerImmovable *location)
 		// Interrupt whatever we've been doing.
 		set_economy(0);
 
-		send_signal(static_cast<Game *>(&get_owner()->egbase()),
-		            "location");
+		send_signal(static_cast<Game *>(&get_owner()->egbase()), "location");
 	}
 }
 
@@ -1851,8 +1857,8 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 		molog("[waitforcapacity]: Wake up: flag capacity.\n");
 
 		if (state->objvar1.get(g) != flag)
-			throw wexception("MO(%u): wakeup_flag_capacity: Flags don't match.",
-			                 get_serial());
+			throw wexception
+				("MO(%u): wakeup_flag_capacity: Flags don't match.", get_serial());
 
 		send_signal(g, "wakeup");
 		return true;
@@ -1896,20 +1902,20 @@ void Worker::start_task_leavebuilding(Game* g, bool changelocation)
 void Worker::leavebuilding_update(Game* g, State* state)
 {
 	if (upcast(Building, building, g->map().get_immovable(get_position()))) {
-	assert(building == state->objvar1.get(g));
+		assert(building == state->objvar1.get(g));
 
-	if (!building->leave_check_and_wait(g, this)) {
-		molog("[leavebuilding]: Wait\n");
-		skip_act();
-		return;
-	}
+		if (!building->leave_check_and_wait(g, this)) {
+			molog("[leavebuilding]: Wait\n");
+			skip_act();
+			return;
+		}
 
 		molog
 			("[leavebuilding]: Leave (%s location)\n",
 			 state->ivar1 ? "change" : "stay in");
 
-	if (state->ivar1)
-		set_location(building->get_base_flag());
+		if (state->ivar1)
+			set_location(building->get_base_flag());
 
 		start_task_forcemove
 			(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
@@ -2110,8 +2116,10 @@ Bob::Task Worker::taskGeologist = {
 };
 
 
-void Worker::start_task_geologist(const int32_t attempts, const int32_t radius,
-                                  const std::string & subcommand)
+void Worker::start_task_geologist
+	(int32_t             const attempts,
+	 int32_t             const radius,
+	 std::string const &       subcommand)
 {
 	push_task(taskGeologist);
 	State & state = top_state();
@@ -2239,8 +2247,13 @@ void Worker::geologist_update(Game* g, State* state)
 	}
 
 	molog("[geologist]: Return home\n");
-	if (not start_task_movepath(g, owner_area, 0,
-	                            descr().get_right_walk_anims(does_carry_ware())))
+	if
+		(not
+		 start_task_movepath
+		 (g,
+		  owner_area,
+		  0,
+		  descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[geologist]: Couldn't find path home\n");
 		set_signal("fail");
@@ -2250,8 +2263,11 @@ void Worker::geologist_update(Game* g, State* state)
 }
 
 
-void Worker::draw_inner(const Editor_Game_Base & game, RenderTarget & dst,
-                        const Point drawpos) const
+void Worker::draw_inner
+	(Editor_Game_Base const &       game,
+	 RenderTarget           &       dst,
+	 Point                    const drawpos)
+	const
 {
 	dst.drawanim
 		(drawpos,
@@ -2272,8 +2288,8 @@ void Worker::draw_inner(const Editor_Game_Base & game, RenderTarget & dst,
 /**
  * Draw the worker, taking the carried item into account.
  */
-void Worker::draw(const Editor_Game_Base & game, RenderTarget & dst,
-                  const Point pos) const
+void Worker::draw
+	(Editor_Game_Base const & game, RenderTarget & dst, Point const pos) const
 {
 	if (get_current_anim())
 		draw_inner(game, dst, calc_drawpos(game, pos));

@@ -44,5 +44,5 @@ int32_t Editor_Delete_Bob_Tool::handle_click_impl
 	do if (Widelands::Bob * const bob = mr.location().field->get_first_bob())
 		bob->remove(&parent.egbase());
 	while (mr.advance(map));
-   return radius + 2;
+	return radius + 2;
 }

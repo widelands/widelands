@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIGGER_H
-#define __S__TRIGGER_H
+#ifndef TRIGGER_H
+#define TRIGGER_H
 
 #include "named.h"
 #include "referenced.h"
@@ -47,14 +47,12 @@ struct Trigger : public Named, public Referenced<Trigger> {
 	virtual void Read (Section &, Editor_Game_Base       &)       = 0;
 	virtual void Write(Section &, Editor_Game_Base const &) const = 0;
 
-      // virtual functions, implemented by the real triggers
 	virtual void check_set_conditions(Game const &) = 0;
 
-      // Toggle the triggers state (if it isn't a one timer)
-      // and give it a chance to reinitialize
+	/// Toggle the triggers state (if it isn't a one timer) and give it a chance
+	/// to reinitialize.
 	virtual void reset_trigger       (Game const &) {}
 
-      // Functions needed by all
 	bool is_set() const {return m_is_set;}
 
 protected:
@@ -62,7 +60,7 @@ protected:
 	void set_trigger(bool t) {m_is_set = t;}
 
 private:
-      bool                        m_is_set;
+	bool m_is_set;
 };
 
 };

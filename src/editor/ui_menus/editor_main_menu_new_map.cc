@@ -46,22 +46,25 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
-	: UI::Window(parent, (parent->get_w()-140)/2, (parent->get_h()-150)/2, 140, 150, _("New Map").c_str())
+:
+UI::Window
+(parent,
+ (parent->get_w() - 140) / 2, (parent->get_h() - 150) / 2, 140, 150,
+ _("New Map").c_str()),
+m_parent(parent) //  FIXME redundant (base stores parent pointer)
 {
-   m_parent=parent;
-
-   // UI::Buttons
-   char buf[250];
-   const int32_t offsx=5;
-   const int32_t offsy=30;
-   const int32_t spacing=5;
-   const int32_t width=get_inner_w()-offsx*2;
-   const int32_t height=20;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
-   m_w=0; m_h=0;
+	char buf[250];
+	int32_t const offsx   =  5;
+	int32_t const offsy   = 30;
+	int32_t const spacing =  5;
+	int32_t const width   = get_inner_w() - offsx * 2;
+	int32_t const height  = 20;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
+	m_w = 0; m_h = 0;
 	sprintf(buf, "%s: %i", _("Width").c_str(), Widelands::MAP_DIMENSIONS[m_w]);
-   m_width=new UI::Textarea(this, posx+spacing+20, posy, buf, Align_Left);
+	m_width =
+		new UI::Textarea(this, posx + spacing + 20, posy, buf, Align_Left);
 
 	new UI::IDButton<Main_Menu_New_Map, int32_t>
 		(this,
@@ -80,7 +83,8 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 	posy+=20+spacing+spacing;
 
 	sprintf(buf, "%s: %i", _("Height").c_str(), Widelands::MAP_DIMENSIONS[m_h]);
-   m_height=new UI::Textarea(this, posx+spacing+20, posy, buf, Align_Left);
+	m_height =
+		new UI::Textarea(this, posx + spacing + 20, posy, buf, Align_Left);
 
 	new UI::IDButton<Main_Menu_New_Map, int32_t>
 		(this,
@@ -101,8 +105,8 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    // get all worlds
 	Widelands::World::get_all_worlds(&m_worlds);
 
-   assert(m_worlds.size());
-   m_currentworld=0;
+	assert(m_worlds.size());
+	m_currentworld = 0;
 
 	m_world = new UI::IDButton<Main_Menu_New_Map, int32_t>
 		(this,
@@ -120,10 +124,8 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 		  &Main_Menu_New_Map::clicked_create_map, this,
 		  _("Create Map"));
 
-   posy+=height+spacing;
-
-
-	}
+	posy += height + spacing;
+}
 
 
 /*
@@ -140,23 +142,23 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 	case 2: ++m_h; break;
 	case 3: --m_h; break;
 	case 4:
-              ++m_currentworld;
+		++m_currentworld;
 		if (m_currentworld == m_worlds.size()) m_currentworld=0;
 		m_world->set_title
 			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name
 			 ());
-              break;
+		break;
 	}
 
-   char buf[200];
+	char buf[200];
 	if (m_w <  0)                        m_w = 0;
 	if (m_w >= NUMBER_OF_MAP_DIMENSIONS) m_w = NUMBER_OF_MAP_DIMENSIONS - 1;
 	if (m_h <  0)                        m_h = 0;
 	if (m_h >= NUMBER_OF_MAP_DIMENSIONS) m_h = NUMBER_OF_MAP_DIMENSIONS - 1;
 	sprintf(buf, "%s: %i", _("Width").c_str(), Widelands::MAP_DIMENSIONS[m_w]);
-   m_width->set_text(buf);
+	m_width ->set_text(buf);
 	sprintf(buf, "%s: %i", _("Height").c_str(), Widelands::MAP_DIMENSIONS[m_h]);
-   m_height->set_text(buf);
+	m_height->set_text(buf);
 }
 
 void Main_Menu_New_Map::clicked_create_map() {

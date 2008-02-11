@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__INTPLAYER_H
-#define __S__INTPLAYER_H
+#ifndef INTERACTIVE_PLAYER_H
+#define INTERACTIVE_PLAYER_H
 
 #include "game.h"
 #include "interactive_base.h"
@@ -138,4 +138,4 @@ private:
 };
 
 
-#endif // __S__INTPLAYER_H
+#endif

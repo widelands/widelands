@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
-#define __S__EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
+#ifndef EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
+#define EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
 
 #include "editor_tool.h"
 
@@ -47,7 +47,7 @@ struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 
 private:
 	Widelands::Player_Number m_player;
-      UI::UniqueWindow::Registry m_registry;
+	UI::UniqueWindow::Registry m_registry;
 };
 
 int32_t Editor_Make_Infrastructure_Tool_Callback

@@ -208,8 +208,9 @@ std::string FileSystem::GetHomedir()
 #endif
 
 	if (homedir.empty()) {
-		printf("\nWARNING: either we can not detect your home directory "
-		       "or you don't have one! Please contact the developers.\n\n");
+		printf
+			("\nWARNING: either we can not detect your home directory "
+			 "or you don't have one! Please contact the developers.\n\n");
 
 		//TODO: is it really a good idea to set homedir to "." then ??
 
@@ -278,8 +279,8 @@ std::string FileSystem::FS_CanonicalizeName
 
 		std::vector<std::string> homecomponents;
 		homecomponents=FS_Tokenize(GetHomedir());
-		components.insert(components.begin(),
-		                  homecomponents.begin(), homecomponents.end());
+		components.insert
+			(components.begin(), homecomponents.begin(), homecomponents.end());
 
 		absolute=true;
 	}
@@ -293,8 +294,8 @@ std::string FileSystem::FS_CanonicalizeName
 		else
 			cwdcomponents=FS_Tokenize(m_root);
 
-		components.insert(components.begin(),
-		                  cwdcomponents.begin(), cwdcomponents.end());
+		components.insert
+			(components.begin(), cwdcomponents.begin(), cwdcomponents.end());
 		absolute=true;
 	}
 
@@ -341,7 +342,7 @@ std::string FileSystem::FS_CanonicalizeName
 	for (i = components.begin(); i != components.end(); ++i)
 		canonpath+=*i+"/";
 
-    canonpath.erase(canonpath.end() - 1); //remove trailing slash
+	canonpath.erase(canonpath.end() - 1); //remove trailing slash
 
 #else // ifndef __WIN32__
 	// Still a stupid workaround: some paths still might be relative,
@@ -400,13 +401,14 @@ throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 	struct stat statinfo;
 
 	if (stat(root.c_str(), &statinfo) == -1) {
-		if (errno==EBADF ||
-		      errno==ENOENT ||
-		      errno==ENOTDIR ||
+		if
+			(errno == EBADF   ||
+			 errno == ENOENT  ||
+			 errno == ENOTDIR ||
 #ifdef ELOOP
-		      errno==ELOOP || //MinGW does not support ELOOP (yet)
+			 errno == ELOOP   || //MinGW does not support ELOOP (yet)
 #endif
-		      errno==ENAMETOOLONG)
+			 errno == ENAMETOOLONG)
 		{
 			throw FileNotFound_error("FileSystem::Create", root);
 		}
@@ -422,6 +424,7 @@ throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 		return new ZipFilesystem(root);
 	}
 
-	throw FileType_error("FileSystem::Create", root,
-	                     "cannot create virtual filesystem from file or directory");
+	throw FileType_error
+		("FileSystem::Create", root,
+		 "cannot create virtual filesystem from file or directory");
 }

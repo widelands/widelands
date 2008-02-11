@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_MAIN_MENU_LOAD_GAME_H
-#define __S__GAME_MAIN_MENU_LOAD_GAME_H
+#ifndef GAME_MAIN_MENU_LOAD_GAME_H
+#define GAME_MAIN_MENU_LOAD_GAME_H
 
 #include "ui_unique_window.h"
 
@@ -32,27 +32,28 @@ template <typename T> struct Listselect;
 };
 
 struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
-      Game_Main_Menu_Load_Game(Interactive_Player* plr, UI::UniqueWindow::Registry* registry) ;
-      virtual ~Game_Main_Menu_Load_Game();
+	Game_Main_Menu_Load_Game
+		(Interactive_Player *, UI::UniqueWindow::Registry *);
+	virtual ~Game_Main_Menu_Load_Game();
 
 private:
 	void clicked_ok    ();
 	void clicked_cancel();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
-      void edit_box_changed();
+	void edit_box_changed();
 
-      void fill_list();
+	void fill_list();
 	bool load_game(std::string const & filename);
 
-      Interactive_Player* m_parent;
+	Interactive_Player * m_parent;
 	UI::Textarea * m_name, * m_gametime;
 	UI::Listselect<const char *> * m_ls;
 
 	UI::Button<Game_Main_Menu_Load_Game> * m_ok_btn;
-      std::string m_basedir;
-      std::string m_curdir;
-      std::string m_parentdir;
+	std::string m_basedir;
+	std::string m_curdir;
+	std::string m_parentdir;
 };
 
 #endif

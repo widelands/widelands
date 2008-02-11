@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__EDITOR_MAIN_MENU_SAVE_MAP_H
-#define __S__EDITOR_MAIN_MENU_SAVE_MAP_H
+#ifndef EDITOR_MAIN_MENU_SAVE_MAP_H
+#define EDITOR_MAIN_MENU_SAVE_MAP_H
 
 #include "filesystem.h"
 
@@ -43,30 +43,30 @@ Choose a filename and save your brand new created map
 =================================================
 */
 struct Main_Menu_Save_Map : public UI::Window {
-      Main_Menu_Save_Map(Editor_Interactive*);
-      virtual ~Main_Menu_Save_Map();
+	Main_Menu_Save_Map(Editor_Interactive *);
+	virtual ~Main_Menu_Save_Map();
 
 private:
 	void clicked_ok            ();
 	void clicked_make_directory();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
-      void edit_box_changed();
+	void edit_box_changed();
 
-      void fill_list();
-      bool save_map(std::string, bool);
+	void fill_list();
+	bool save_map(std::string, bool);
 
 	UI::Edit_Box * m_editbox;
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
-      Editor_Interactive *m_parent;
+	Editor_Interactive * m_parent; //  FIXME redundant (base stores parent pointer)
 	UI::Listselect<const char *> * m_ls;
 	UI::Button<Main_Menu_Save_Map> * m_ok_btn;
 
-      std::string m_basedir;
-      std::string m_curdir;
-      std::string m_parentdir;
-      filenameset_t m_mapfiles;
+	std::string   m_basedir;
+	std::string   m_curdir;
+	std::string   m_parentdir;
+	filenameset_t m_mapfiles;
 };
 
 #endif

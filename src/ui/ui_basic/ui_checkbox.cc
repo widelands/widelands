@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,16 +63,11 @@ Statebox::Statebox(Panel *parent, int32_t x, int32_t y, uint32_t picid)
 	m_clr_highlight = RGBColor(100, 100, 80);
 	m_clr_state     = RGBColor(229, 161,  2);
 
-   m_id=-1;
+	m_id = -1;
 }
 
 
-/**
-Clean up resources
-*/
-Statebox::~Statebox()
-{
-}
+Statebox::~Statebox() {}
 
 
 /**
@@ -110,7 +105,7 @@ void Statebox::set_state(bool on)
 	changed.call();
 	changedto.call(on);
 	if (m_id!=-1) changedtoid.call(m_id, on);
-   update(0, 0, get_w(), get_h());
+	update(0, 0, get_w(), get_h());
 }
 
 

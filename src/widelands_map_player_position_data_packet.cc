@@ -37,17 +37,15 @@ void Map_Player_Position_Data_Packet::Read
  Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   Profile prof;
-   prof.read("player_position", 0, fs);
-   Section* s = prof.get_section("global");
+	Profile prof;
+	prof.read("player_position", 0, fs);
+	Section & s = *prof.get_section("global");
 
-   // read packet version
-	const int32_t packet_version=s->get_int("packet_version");
+	int32_t const packet_version = s.get_int("packet_version");
 	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-      // Read all the positions
-      // This could bring trouble if one player position
-      // is not set (this is possible in the editor), is also
-      // -1, -1
+		//  Read all the positions
+		//  This could bring trouble if one player position/ is not set (this is
+		//  possible in the editor), is also -1, -1.
 		Map & map = *egbase->get_map();
 		Extent const extent = map.extent();
 		const Player_Number nr_players = map.get_nrplayers();
@@ -57,11 +55,11 @@ throw (_wexception)
 				snprintf(buf_x, sizeof(buf_x), "player_%u_x", p);
 				snprintf(buf_y, sizeof(buf_y), "player_%u_y", p);
 				map.set_starting_pos
-					(p, Coords(s->get_int(buf_x), s->get_int(buf_y)));
+					(p, Coords(s.get_int(buf_x), s.get_int(buf_y)));
 			} else {
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
-				map.set_starting_pos(p, s->get_safe_Coords(buffer, extent));
+				map.set_starting_pos(p, s.get_safe_Coords(buffer, extent));
 			}
 		}
 	} else
@@ -75,11 +73,10 @@ void Map_Player_Position_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   Profile prof;
-   Section* s = prof.create_section("global");
+	Profile prof;
+	Section & s = *prof.create_section("global");
 
-   // packet version
-   s->set_int("packet_version", CURRENT_PACKET_VERSION);
+	s.set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	// Now, all positions in order
 	const Map & map = *egbase->get_map();
@@ -87,10 +84,10 @@ throw (_wexception)
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		s->set_Coords(buffer, map.get_starting_pos(p));
+		s.set_Coords(buffer, map.get_starting_pos(p));
 	}
 
-   prof.write("player_position", false, fs);
+	prof.write("player_position", false, fs);
 }
 
 };

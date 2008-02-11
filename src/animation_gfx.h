@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_animation_gfx_h
-#define included_animation_gfx_h
+#ifndef ANIMATION_GFX_H
+#define ANIMATION_GFX_H
 
 #include "player.h"
 
@@ -56,4 +56,4 @@ private:
 	Point      m_hotspot;
 };
 
-#endif // included_animation_gfx_h
+#endif

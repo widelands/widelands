@@ -42,10 +42,10 @@ Game_Loader::Game_Loader(FileSystem & fs, Game* game) : m_fs(fs), m_game(game)
  * This function preloads a game
  */
 int32_t Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
-   // Load elemental data block
-   mp->Read(m_fs, m_game, 0);
+	// Load elemental data block
+	mp->Read(m_fs, m_game, 0);
 
-   return 0;
+	return 0;
 }
 
 /*
@@ -53,13 +53,13 @@ int32_t Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
  */
 int32_t Game_Loader::load_game() {
 
-   log("Game: Reading Preload Data ... ");
+	log("Game: Reading Preload Data ... ");
 	{Game_Preload_Data_Packet                     p; p.Read(m_fs, m_game, 0);}
-   log(" done\n");
+	log(" done\n");
 
-   log("Game: Reading Game Class Data ... ");
+	log("Game: Reading Game Class Data ... ");
 	{Game_Game_Class_Data_Packet                   p; p.Read(m_fs, m_game, 0);}
-   log(" done\n");
+	log(" done\n");
 
 	log("Game: Reading Map Data ... ");
 	Game_Map_Data_Packet M;                           M.Read(m_fs, m_game, 0);
@@ -67,7 +67,7 @@ int32_t Game_Loader::load_game() {
 
 	log("Game: Reading Player Info ... ");
 	{Game_Player_Info_Data_Packet                  p; p.Read(m_fs, m_game, 0);}
-   log(" done\n");
+	log(" done\n");
 
 	log("Game: Reading Map Data Complete!\n");
 	M.Read_Complete(*m_game);
@@ -75,19 +75,19 @@ int32_t Game_Loader::load_game() {
 
 	Map_Map_Object_Loader * const mol = M.get_map_object_loader();
 
-   log("Game: Reading Player Economies Info ... ");
+	log("Game: Reading Player Economies Info ... ");
 	{Game_Player_Economies_Data_Packet             p; p.Read(m_fs, m_game, mol);}
-   log(" done\n");
+	log(" done\n");
 
-   log("Game: Reading Command Queue Data ... ");
+	log("Game: Reading Command Queue Data ... ");
 	{Game_Cmd_Queue_Data_Packet                    p; p.Read(m_fs, m_game, mol);}
-   log(" done\n");
+	log(" done\n");
 
-   log("Game: Reading Interactive Player Data ... ");
+	log("Game: Reading Interactive Player Data ... ");
 	{Game_Interactive_Player_Data_Packet           p; p.Read(m_fs, m_game, mol);}
-   log(" done\n");
+	log(" done\n");
 
-   return 0;
+	return 0;
 }
 
 };

@@ -17,6 +17,9 @@
  *
  */
 
+#ifndef CMD_INCORPORATE_H
+#define CMD_INCORPORATE_H
+
 #include "cmd_queue.h"
 #include "worker.h"
 
@@ -45,3 +48,5 @@ private:
 };
 
 };
+
+#endif

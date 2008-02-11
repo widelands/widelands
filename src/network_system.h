@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __NETWORK_SYSTEM_H__
-#define __NETWORK_SYSTEM_H__
+#ifndef NETWORK_SYSTEM_H
+#define NETWORK_SYSTEM_H
 
 #include <stdint.h>
 

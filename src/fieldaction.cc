@@ -194,19 +194,23 @@ struct FieldActionWindow : public UI::UniqueWindow {
 	void building_icon_mouse_out(int32_t idx);
 	void building_icon_mouse_in(int32_t idx);
 	void act_geologist();
-   void act_attack();         /// Launch the attack
-   void act_attack_more();    /// Increase the number of soldiers to be launched
-   void act_attack_less();    /// Decrease the number of soldiers to be launched
-   void act_attack_strong();  /// Prepare to launch strongest soldiers
-   void act_attack_weak();    /// Prepare to launch weakest soldiers
-   uint32_t get_max_attackers();  /// Total number of attackers available for a specific enemy flag
+	void act_attack();         /// Launch the attack
+	void act_attack_more();    /// Increase the number of soldiers to be launched
+	void act_attack_less();    /// Decrease the number of soldiers to be launched
+	void act_attack_strong();  /// Prepare to launch strongest soldiers
+	void act_attack_weak();    /// Prepare to launch weakest soldiers
+	uint32_t get_max_attackers();  /// Total number of attackers available for a specific enemy flag
 
 private:
 	uint32_t add_tab
 		(const char * picname,
 		 UI::Panel * panel,
 		 const std::string & tooltip_text = std::string());
-   void add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)(), const std::string & tooltip_text);
+	void add_button
+		(UI::Box *,
+		 char const * picname,
+		 void (FieldActionWindow::*fn)(),
+		 std::string const & tooltip_text);
 	void okdialog();
 
 	Interactive_Base    *m_iabase;
@@ -287,10 +291,9 @@ FieldActionWindow::FieldActionWindow
 
 	iabase->set_sel_freeze(true);
 
-	//
 	m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
 	m_tabpanel->set_snapparent(true);
-   m_text_attackers = 0;
+	m_text_attackers = 0;
 
 	m_fastclick = true;
 	char filename[] = "pics/workarea0cumulative.png";
@@ -313,8 +316,8 @@ FieldActionWindow::~FieldActionWindow()
 	if (m_workarea_preview_job_id)
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	m_iabase->set_sel_freeze(false);
-      delete m_text_attackers;
-      m_text_attackers = 0;
+	delete m_text_attackers;
+	m_text_attackers = 0;
 }
 
 
@@ -349,8 +352,8 @@ void FieldActionWindow::init()
 
 	// Now force the mouse onto the first button
 	// TODO: should be on first tab button if we're building
-	set_mouse_pos(Point(17 + BG_CELL_WIDTH * m_best_tab,
-	                    m_fastclick ? 51 : 17));
+	set_mouse_pos
+		(Point(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17));
 }
 
 
@@ -389,7 +392,11 @@ void FieldActionWindow::add_buttons_auto()
 				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag, _("Destroy this flag"));
 
 			if (dynamic_cast<const Game *>(&m_iabase->egbase()))
-            add_button(buildbox, pic_geologist, &FieldActionWindow::act_geologist, _("Send geologist to explore site"));
+				add_button
+					(buildbox,
+					 pic_geologist,
+					 &FieldActionWindow::act_geologist,
+					 _("Send geologist to explore site"));
 			// No geologist in editor
 		}
 		else
@@ -412,11 +419,19 @@ void FieldActionWindow::add_buttons_auto()
 		}
 	} else add_buttons_attack ();
 
-	// Watch actions, only when game (no use in editor)
-   // same for statistics. census is ok
+	//  Watch actions, only when game (no use in editor) same for statistics.
+	//  census is ok
 	if (dynamic_cast<const Game *>(&m_iabase->egbase())) {
-      add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch, _("Watch field in a separate window"));
-      add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics, _("Toggle building statistics display"));
+		add_button
+			(watchbox,
+			 pic_watchfield,
+			 &FieldActionWindow::act_watch,
+			 _("Watch field in a separate window"));
+		add_button
+			(watchbox,
+			 pic_showstatistics,
+			 &FieldActionWindow::act_show_statistics,
+			 _("Toggle building statistics display"));
 	}
 	add_button(watchbox, pic_showcensus, &FieldActionWindow::act_show_census, _("Toggle building label display"));
 
@@ -424,11 +439,10 @@ void FieldActionWindow::add_buttons_auto()
 		add_button(watchbox, pic_debug, &FieldActionWindow::act_debug, _("Debug window"));
 
 	// Add tabs
-	if (buildbox && buildbox->get_nritems())
-		{
+	if (buildbox && buildbox->get_nritems()) {
 		buildbox->resize();
 		add_tab(pic_tab_buildroad, buildbox, _("Build roads"));
-		}
+	}
 
 	watchbox->resize();
 	add_tab(pic_tab_watch, watchbox, _("Watch"));
@@ -436,13 +450,13 @@ void FieldActionWindow::add_buttons_auto()
 
 void FieldActionWindow::add_buttons_attack ()
 {
-   UI::Box* attackbox = 0;
+	UI::Box * attackbox = 0;
 
-      // Add attack button
+	// Add attack button
 	if (m_field.field->get_owned_by() != m_plr->get_player_number()) {
 
-         // The box with attack buttons
-      attackbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
+		// The box with attack buttons
+		attackbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Building, building, m_map->get_immovable(m_field)))
 			if
@@ -452,27 +466,47 @@ void FieldActionWindow::add_buttons_attack ()
 				  or
 				  dynamic_cast<Widelands::Warehouse    const *>(building)))
 			{
-            m_attackers = 0;
-            m_attackers_type = STRONGEST;
-            add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less, _("Send less soldiers"));
+				m_attackers = 0;
+				m_attackers_type = STRONGEST;
+				add_button
+					(attackbox,
+					 pic_attack_less,
+					 &FieldActionWindow::act_attack_less,
+					 _("Send less soldiers"));
 
-            m_text_attackers = new UI::Textarea(attackbox, 90, 0, "000/000", Align_Center);
-            attackbox->add(m_text_attackers, UI::Box::AlignTop);
+				m_text_attackers =
+					new UI::Textarea(attackbox, 90, 0, "000/000", Align_Center);
+				attackbox->add(m_text_attackers, UI::Box::AlignTop);
 
-            add_button(attackbox, pic_attack_more, &FieldActionWindow::act_attack_more, _("Send more soldiers"));
+				add_button
+					(attackbox,
+					 pic_attack_more,
+					 &FieldActionWindow::act_attack_more,
+					 _("Send more soldiers"));
 
-            add_button(attackbox, pic_attack_strong, &FieldActionWindow::act_attack_strong, _("Most agressive attack"));
-            add_button(attackbox, pic_attack_weak,   &FieldActionWindow::act_attack_weak, _("Cautious attack"));
+				add_button
+					(attackbox,
+					 pic_attack_strong,
+					 &FieldActionWindow::act_attack_strong,
+					 _("Most agressive attack"));
+				add_button
+					(attackbox,
+					 pic_attack_weak,
+					 &FieldActionWindow::act_attack_weak,
+					 _("Cautious attack"));
 
-            add_button(attackbox, pic_attack, &FieldActionWindow::act_attack, _("Start attack"));
-            act_attack_more();
+				add_button
+					(attackbox,
+					 pic_attack,
+					 &FieldActionWindow::act_attack,
+					 _("Start attack"));
+				act_attack_more();
 			}
 	}
 
-      // Add tab
-	if (attackbox and attackbox->get_nritems()) {
-      attackbox->resize();
-	   add_tab(pic_tab_attack, attackbox, _("Attack"));
+	if (attackbox and attackbox->get_nritems()) { //  add tab
+		attackbox->resize();
+		add_tab(pic_tab_attack, attackbox, _("Attack"));
 	}
 }
 
@@ -496,12 +530,12 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		Widelands::Building_Descr const & descr = *tribe.get_building_descr(id);
 		BuildGrid** ppgrid;
 
-		// Some buildings cannot be built (i.e. construction site, HQ)
-      // and not allowed buildings. The rules are different in editor
-      // and game: enhanced buildings _are_ buildable in the editor
+		//  Some buildings cannot be built (i.e. construction site, HQ) and not
+		//  allowed buildings. The rules are different in editor and game:
+		//  enhanced buildings _are_ buildable in the editor
 		if (dynamic_cast<const Game *>(&m_iabase->egbase())) {
 			if (!descr.get_buildable() || !m_plr->is_building_allowed(id))
-            continue;
+				continue;
 		} else if (!descr.get_buildable() && !descr.get_enhanced_building())
 			continue;
 
@@ -511,29 +545,26 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 				continue;
 
 			ppgrid = &bbg_mine;
-			}
-		else
-			{
+		} else {
 			int32_t size = descr.get_size() - Widelands::BaseImmovable::SMALL;
 
 			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < (size+1))
 				continue;
 
 			ppgrid = &bbg_house[size];
-			}
+		}
 
 		// Allocate the tab's grid if necessary
-		if (!*ppgrid)
-			{
+		if (!*ppgrid) {
 			*ppgrid = new BuildGrid(m_tabpanel, tribe, 0, 0, 5);
 			(*ppgrid)->buildclicked.set(this, &FieldActionWindow::act_build);
 			(*ppgrid)->buildmouseout.set(this, &FieldActionWindow::building_icon_mouse_out);
 			(*ppgrid)->buildmousein.set(this, &FieldActionWindow::building_icon_mouse_in);
-			}
+		}
 
 		// Add it to the grid
 		(*ppgrid)->add(id);
-		}
+	}
 
 	// Add all necessary tabs
 	for (int32_t i = 0; i < 3; ++i)
@@ -614,7 +645,7 @@ It resets the mouse to its original position and closes the window
 */
 void FieldActionWindow::okdialog()
 {
-   m_iabase->warp_mouse_to_field(m_field);
+	m_iabase->warp_mouse_to_field(m_field);
 	die();
 }
 
@@ -644,15 +675,17 @@ Toggle display of census and statistics for buildings, respectively.
 */
 void FieldActionWindow::act_show_census()
 {
-	m_iabase->set_display_flag(Interactive_Base::dfShowCensus,
-		!m_iabase->get_display_flag(Interactive_Base::dfShowCensus));
+	m_iabase->set_display_flag
+		(Interactive_Base::dfShowCensus,
+		 !m_iabase->get_display_flag(Interactive_Base::dfShowCensus));
 	okdialog();
 }
 
 void FieldActionWindow::act_show_statistics()
 {
-	m_iabase->set_display_flag(Interactive_Base::dfShowStatistics,
-		!m_iabase->get_display_flag(Interactive_Base::dfShowStatistics));
+	m_iabase->set_display_flag
+		(Interactive_Base::dfShowStatistics,
+		 !m_iabase->get_display_flag(Interactive_Base::dfShowStatistics));
 	okdialog();
 }
 
@@ -700,7 +733,7 @@ Remove the flag at this field
 */
 void FieldActionWindow::act_ripflag()
 {
-   okdialog();
+	okdialog();
 	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
 	if (upcast(Widelands::Flag, flag, m_field.field->get_immovable()))
 		if (Building * const building = flag->get_building()) {
@@ -718,31 +751,27 @@ void FieldActionWindow::act_ripflag()
 
 /*
 ===============
-FieldActionWindow::act_buildroad
-
 Start road building.
 ===============
 */
 void FieldActionWindow::act_buildroad()
 {
-   m_iabase->start_build_road(m_field, m_plr->get_player_number());
-   okdialog();
+	m_iabase->start_build_road(m_field, m_plr->get_player_number());
+	okdialog();
 }
 
 /*
 ===============
-FieldActionWindow::act_abort_buildroad
-
 Abort building a road.
 ===============
 */
 void FieldActionWindow::act_abort_buildroad()
 {
 	if (!m_iabase->is_building_road())
-      return;
+		return;
 
-   m_iabase->abort_build_road();
-   okdialog();
+	m_iabase->abort_build_road();
+	okdialog();
 }
 
 /*
@@ -761,15 +790,13 @@ void FieldActionWindow::act_removeroad()
 		else
 			road->owner().bulldoze(road);
 	}
-   m_iabase->need_complete_redraw();
-   okdialog();
+	m_iabase->need_complete_redraw();
+	okdialog();
 }
 
 
 /*
 ===============
-FieldActionWindow::act_build
-
 Start construction of the building with the give description index
 ===============
 */
@@ -874,7 +901,7 @@ void FieldActionWindow::act_geologist()
 	if (upcast(Widelands::Flag, flag, game.map().get_immovable(m_field)))
 		game.send_player_flagaction (flag, Widelands::FLAGACTION_GEOLOGIST);
 
-   okdialog();
+	okdialog();
 }
 
 /**
@@ -886,7 +913,6 @@ void FieldActionWindow::act_geologist()
 void FieldActionWindow::act_attack ()
 {
 	Game & game = dynamic_cast<Game &>(m_iabase->egbase());
-   Interactive_Player* m_player=static_cast<Interactive_Player*>(m_iabase);
 
 	if (upcast(Building, b, game.map().get_immovable(m_field)))
 		if (upcast(Widelands::Flag const, flag, b->get_base_flag()))
@@ -894,21 +920,22 @@ void FieldActionWindow::act_attack ()
 				game.send_player_enemyflagaction
 					(flag,
 					 Widelands::ENEMYFLAGACTION_ATTACK,
-               m_player->get_player_number(),
-               m_attackers,  // Number of soldiers
-               m_attackers_type); // Type of soldiers
+					 dynamic_cast<Interactive_Player const &>(*m_iabase)
+					 .get_player_number(),
+					 m_attackers,       //  number of soldiers
+					 m_attackers_type); //  type of soldiers
 
-   okdialog();
+	okdialog();
 }
 
 void FieldActionWindow::act_attack_more() {
-   char buf[20];
-   uint32_t available = get_max_attackers();
+	char buf[20];
+	uint32_t available = get_max_attackers();
 
 	m_attackers = m_attackers < available ? m_attackers + 1 : available;
 
-   sprintf(buf, "%d/%d", m_attackers, available);
-   m_text_attackers->set_text (buf);
+	sprintf(buf, "%d/%d", m_attackers, available);
+	m_text_attackers->set_text (buf);
 }
 
 uint32_t FieldActionWindow::get_max_attackers() {
@@ -921,24 +948,24 @@ uint32_t FieldActionWindow::get_max_attackers() {
 }
 
 void FieldActionWindow::act_attack_less() {
-   char buf[20];
-   uint32_t available = get_max_attackers();
+	char buf[20];
+	uint32_t available = get_max_attackers();
 
 	m_attackers = m_attackers > 0 ? m_attackers - 1 : 0;
 
-   sprintf(buf, "%d/%d", m_attackers, available);
-   m_text_attackers->set_text (buf);
+	sprintf(buf, "%d/%d", m_attackers, available);
+	m_text_attackers->set_text (buf);
 }
 
 void FieldActionWindow::act_attack_strong()
 {
-   m_attackers_type = STRONGEST;
+	m_attackers_type = STRONGEST;
 }
 
 
 void FieldActionWindow::act_attack_weak()
 {
-   m_attackers_type = WEAKEST;
+	m_attackers_type = WEAKEST;
 }
 
 /*

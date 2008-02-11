@@ -44,27 +44,40 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 : UI::Window(&parent, 0, 0, 400, 240, _("New Trigger").c_str())
 {
 
-   const int32_t offsx=5;
-   const int32_t offsy=25;
-   const int32_t spacing=5;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
+	int32_t const offsx   =  5;
+	int32_t const offsy   = 25;
+	int32_t const spacing =  5;
+	int32_t       posx    = offsx;
+	int32_t       posy    = offsy;
 
-   // Trigger List
-   new UI::Textarea(this, spacing, offsy, _("Available Triggers: "), Align_Left);
-	m_trigger_type_list=new UI::BaseListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
-   m_trigger_type_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
-   m_trigger_type_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
+	//  trigger List
+	new UI::Textarea
+		(this, spacing, offsy, _("Available Triggers: "), Align_Left);
+	m_trigger_type_list =
+		new UI::BaseListselect
+		(this,
+		 spacing, offsy + 20,
+		 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55);
+	m_trigger_type_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
+	m_trigger_type_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
 	for (uint32_t i = 0; i < nr_trigger_types(); ++i)
 		m_trigger_type_list->add(_(type_descr(i).name).c_str(), i);
-   m_trigger_type_list->sort();
+	m_trigger_type_list->sort();
 
-   // Descr List
-   new UI::Textarea(this, (get_inner_w()/2)+spacing, offsy, _("Description: "), Align_Left);
-   m_description=new UI::Multiline_Textarea(this, (get_inner_w()/2)+spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55, "", Align_Left);
+	//  descr List
+	new UI::Textarea
+		(this,
+		 get_inner_w() / 2 + spacing, offsy,
+		 _("Description: "), Align_Left);
+	m_description =
+		new UI::Multiline_Textarea
+		(this,
+		 get_inner_w() / 2 + spacing, offsy + 20,
+		 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55,
+		 "", Align_Left);
 
-   posy=get_inner_h()-30;
-   posx=(get_inner_w()/2)-80-spacing;
+	posy = get_inner_h() - 30;
+	posx = get_inner_w() / 2 - 80 - spacing;
 
 	m_ok_button = new UI::Button<Editor_Event_Menu_New_Trigger>
 		(this,
@@ -84,7 +97,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 		 &Editor_Event_Menu_New_Trigger::end_modal, this, 0,
 		 _("Cancel"));
 
-   center_to_parent();
+	center_to_parent();
 }
 
 
@@ -121,7 +134,7 @@ void Editor_Event_Menu_New_Trigger::clicked_ok() {
 void Editor_Event_Menu_New_Trigger::selected(uint32_t) {
 	m_description->set_text
 		(_(type_descr(m_trigger_type_list->get_selected()).helptext));
-   m_ok_button->set_enabled(true);
+	m_ok_button->set_enabled(true);
 }
 
 /*

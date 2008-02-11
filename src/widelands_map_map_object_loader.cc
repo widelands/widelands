@@ -72,7 +72,7 @@ Map_Object * Map_Map_Object_Loader::get_object_by_file_index(uint32_t const n)
  */
 void Map_Map_Object_Loader::mark_object_as_loaded(Map_Object * const obj)
 {
-   m_loaded_obj[obj] = true;
+	m_loaded_obj[obj] = true;
 }
 
 /*

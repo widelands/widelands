@@ -23,9 +23,7 @@
 
 #include <cassert>
 
-StreamRead::~StreamRead()
-{
-}
+StreamRead::~StreamRead() {}
 
 StreamRead::_data_error::_data_error(char const * const fmt, ...) throw () {
 	char buffer[256];

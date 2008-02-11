@@ -17,6 +17,9 @@
  *
  */
 
+#ifndef BITOUTBUFFER_H
+#define BITOUTBUFFER_H
+
 #include "filewrite.h"
 #include "compile_assert.h"
 
@@ -42,3 +45,5 @@ private:
 	FileWrite fw;
 	uint8_t buffer, mask;
 };
+
+#endif

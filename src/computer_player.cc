@@ -73,9 +73,9 @@ void Computer_Player::late_initialization ()
 
 	wares=new WareObserver[tribe->get_nrwares()];
 	for (int32_t i = 0; i < tribe->get_nrwares(); ++i) {
-	    wares[i].producers=0;
-	    wares[i].consumers=0;
-	    wares[i].preciousness=0;
+		wares[i].producers    = 0;
+		wares[i].consumers    = 0;
+		wares[i].preciousness = 0;
 	}
 
 // Tribe specific stuff
@@ -96,14 +96,14 @@ void Computer_Player::late_initialization ()
 /*=====================*/
 //Here comes the empire
 	if (tribe->name() == "empire") {
-ware1="stone";
-ware2="trunk";
-ware3="wood";
-ware4="marble";
+		ware1      = "stone";
+		ware2      = "trunk";
+		ware3      = "wood";
+		ware4      = "marble";
 
-ranger="forester";
-granitmine="marblemine";
-}
+		ranger     = "forester";
+		granitmine = "marblemine";
+	}
 /*=====================*/
 
 	wares[tribe->get_safe_ware_index(ware1)].preciousness=4;
@@ -139,7 +139,7 @@ granitmine="marblemine";
 		if (building_name == granitmine) bo.need_stones = true;
 		if (building_name == lumberjack) bo.need_trees  = true;
 		if (building_name == ranger)
-		    bo.production_hint=tribe->get_safe_ware_index("trunk");
+			bo.production_hint = tribe->get_safe_ware_index("trunk");
 
 		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
 			bo.type=BuildingObserver::CONSTRUCTIONSITE;
@@ -177,7 +177,7 @@ granitmine="marblemine";
 				 ++it)
 				bo.outputs.push_back(tribe->get_safe_ware_index(it->c_str()));
 
-		    continue;
+			continue;
 		}
 	}
 
@@ -213,9 +213,7 @@ granitmine="marblemine";
 	}
 }
 
-Computer_Player::~Computer_Player ()
-{
-}
+Computer_Player::~Computer_Player () {}
 
 Computer_Player::BuildingObserver& Computer_Player::get_building_observer (const char* name)
 {
@@ -337,9 +335,9 @@ void Computer_Player::think ()
 		//printf("Computer_Player: Time to build.\n");
 		if (construct_building()) {
 			//inhibit_road_building = gametime + 2500;
-		//Inhibiting roadbuilding is not a good idea, it causes
-		//computer players to get into deadlock at certain circumstances.
-                       // printf("Computer_Player: Built something, waiting until road can be built.\n");
+			//Inhibiting roadbuilding is not a good idea, it causes
+			//computer players to get into deadlock at certain circumstances.
+			// printf("Computer_Player: Built something, waiting until road can be built.\n");
 			return;
 		}
 	}
@@ -352,12 +350,12 @@ void Computer_Player::think ()
 	{
 		next_productionsite_check_due = gametime + 2000;
 
-	    check_productionsite (productionsites.front());
+		check_productionsite (productionsites.front());
 
-	    productionsites.push_back (productionsites.front());
-	    productionsites.pop_front ();
+		productionsites.push_back (productionsites.front());
+		productionsites.pop_front ();
 	}
-        //printf("Computer_Player: Done checking up on construction sites.\n");
+	//printf("Computer_Player: Done checking up on construction sites.\n");
 	// if nothing else is to do, update flags and economies
 	while (!new_flags.empty()) {
 		Flag* flag=new_flags.front();
@@ -393,14 +391,14 @@ void Computer_Player::think ()
 	}
 
 	if (next_road_due <= gametime) {
-	//next_road_due+=1000;
-        //if (true) {
-	    next_road_due = gametime + 1000;
-	    construct_roads ();
-            //printf("Computer_Player: Building a road. next road due at %i, current GT %i\n", next_road_due, gametime);
+		//next_road_due+=1000;
+		//if (true) {
+		next_road_due = gametime + 1000;
+		construct_roads ();
+		//printf("Computer_Player: Building a road. next road due at %i, current GT %i\n", next_road_due, gametime);
 	}
 	//else printf("Computer_Player: Cant do roads yet, next at %i or %i GT  from %i GT.\n",
-        //     (inhibit_road_building), (next_road_due), gametime);
+	//     (inhibit_road_building), (next_road_due), gametime);
 
 #if 0
 	if (not economies.empty() and inhibit_road_building <= gametime) {
@@ -509,25 +507,29 @@ bool Computer_Player::construct_building ()
 			 ++j)
 		{
 			if (!j->is_buildable)
-			    continue;
+				continue;
 
 			if (j->type == BuildingObserver::MINE)
-			    continue;
+				continue;
 
 			if (j->desc->get_size() > maxsize)
-			    continue;
+				continue;
 
-		    prio=0;
+			prio = 0;
 
 			if (j->type==BuildingObserver::MILITARYSITE) {
-			    prio=(bf->unowned_land_nearby - bf->military_influence*2) * expand_factor / 4;
+				prio  = bf->unowned_land_nearby - bf->military_influence * 2;
+				prio *= expand_factor;
+				prio /= 4;
 
-				if (bf->avoid_military)
-				prio=prio/3 - 6;
+				if (bf->avoid_military) {
+					prio /= 3;
+					prio -= 6;
+				}
 
-			    prio-=spots_avail[BUILDCAPS_BIG]/2;
-			    prio-=spots_avail[BUILDCAPS_MEDIUM]/4;
-			    prio-=spots_avail[BUILDCAPS_SMALL]/8;
+				prio -= spots_avail[BUILDCAPS_BIG]    / 2;
+				prio -= spots_avail[BUILDCAPS_MEDIUM] / 4;
+				prio -= spots_avail[BUILDCAPS_SMALL]  / 8;
 			}
 
 			if (j->type==BuildingObserver::PRODUCTIONSITE) {
@@ -547,11 +549,11 @@ bool Computer_Player::construct_building ()
 
 				if (!j->need_trees && !j->need_stones) {
 					if (j->cnt_built+j->cnt_under_construction==0)
-				    prio+=2;
+						prio += 2;
 
 					for (uint32_t k = 0; k < j->inputs.size(); ++k) {
-				    prio+=8*wares[j->inputs[k]].producers;
-				    prio-=4*wares[j->inputs[k]].consumers;
+						prio += 8 * wares[j->inputs[k]].producers;
+						prio -= 4 * wares[j->inputs[k]].consumers;
 					}
 
 					for (uint32_t k = 0; k < j->outputs.size(); ++k) {
@@ -563,28 +565,29 @@ bool Computer_Player::construct_building ()
 							(j->cnt_built+j->cnt_under_construction == 0
 							 &&
 							 wares[j->outputs[k]].consumers > 0)
-					prio+=8; // add a big bonus
+							prio += 8; // add a big bonus
 					}
 
 					if (j->production_hint >= 0) {
-				    prio-=6*(j->cnt_built+j->cnt_under_construction);
-				    prio+=4*wares[j->production_hint].consumers;
-				    prio+=2*wares[j->production_hint].preciousness;
+						prio -= 6 * (j->cnt_built + j->cnt_under_construction);
+						prio += 4 * wares[j->production_hint].consumers;
+						prio += 2 * wares[j->production_hint].preciousness;
 					}
 				}
 
-			    prio-=2*j->cnt_under_construction*(j->cnt_under_construction+1);
+				prio -=
+					2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
 			}
 
 			prio += bf->preferred ? prio / 2 + 1 : -1;
 
-		    // don't waste good land for small huts
-		    prio-=(maxsize - j->desc->get_size()) * 3;
+			//  don't waste good land for small huts
+			prio -= (maxsize - j->desc->get_size()) * 3;
 
 			if (prio > proposed_priority) {
-			    proposed_building=j->id;
-			    proposed_priority=prio;
-			    proposed_coords=bf->coords;
+				proposed_building = j->id;
+				proposed_priority = prio;
+				proposed_coords   = bf->coords;
 			}
 		}
 	}
@@ -653,8 +656,9 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 	const Workarea_Info & workarea_info = site.bo->desc->m_recursive_workarea_info;
 	for
 		(Workarea_Info::const_iterator it = workarea_info.begin();
-			it != workarea_info.end();
-			++it) if (it->first > radius) radius = it->first;
+		 it != workarea_info.end();
+		 ++it)
+		if (it->first > radius) radius = it->first;
 
 	Map & map = game().map();
 	if
@@ -668,9 +672,11 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		 0)
 	{
 
-	    log ("ComputerPlayer(%d): out of resources, destructing\n", player_number);
-	    m_game.send_player_bulldoze (site.site);
-	    return;
+		log
+			("ComputerPlayer(%d): out of resources, destructing\n",
+			 player_number);
+		m_game.send_player_bulldoze (site.site);
+		return;
 	}
 
 	if
@@ -684,9 +690,11 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		 0)
 	{
 
-	    log ("ComputerPlayer(%d): out of resources, destructing\n", player_number);
+		log
+			("ComputerPlayer(%d): out of resources, destructing\n",
+			 player_number);
 		game().send_player_bulldoze (site.site);
-	    return;
+		return;
 	}
 }
 
@@ -759,10 +767,10 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 						-
 						map.calc_distance(field->coords, immovables[i].coords);
 
-				if (v>0) {
-				    field->military_influence+=v*(v+2)*6;
-				    field->avoid_military=true;
-				}
+					if (0 < v) {
+						field->military_influence += v * (v + 2) * 6;
+						field->avoid_military = true;
+					}
 				}
 
 				if (dynamic_cast<ProductionSite_Descr const *>(&target_descr))
@@ -1041,10 +1049,10 @@ bool Computer_Player::improve_roads (Flag* flag)
 			continue;
 		}
 
-	    nearflags.push_back (queue.top());
-	    queue.pop ();
+		nearflags.push_back (queue.top());
+		queue.pop ();
 
-	    NearFlag& nf=nearflags.back();
+		NearFlag & nf = nearflags.back();
 
 		for (uint8_t i = 1; i <= 6; ++i) {
 		Road* road=nf.flag->get_road(i);
@@ -1053,14 +1061,15 @@ bool Computer_Player::improve_roads (Flag* flag)
 
 		Flag* endflag=road->get_flag(Road::FlagStart);
 		if (endflag==nf.flag)
-		    endflag=road->get_flag(Road::FlagEnd);
+			endflag = road->get_flag(Road::FlagEnd);
 
 			int32_t dist =
 				map.calc_distance(flag->get_position(), endflag->get_position());
 		if (dist > 16) //  out of range
-		    continue;
+			continue;
 
-		queue.push (NearFlag(endflag, nf.cost+road->get_path().get_nsteps(), dist));
+			queue.push
+				(NearFlag(endflag, nf.cost+road->get_path().get_nsteps(), dist));
 		}
 	}
 
@@ -1069,7 +1078,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
 
 	for (uint32_t i = 1; i < nearflags.size(); ++i) {
-	    NearFlag& nf=nearflags[i];
+		NearFlag & nf = nearflags[i];
 
 		if (2 * nf.distance + 2 < nf.cost) {
 
@@ -1121,13 +1130,13 @@ void Computer_Player::lose_immovable (PlayerImmovable* pi)
 			(std::list<EconomyObserver *>::iterator i = economies.begin();
 			 i!=economies.end();
 			 ++i)
-		    for
-			    (std::list<Flag *>::iterator j = (*i)->flags.begin();
-			     j != (*i)->flags.end();
-			     ++j)
+			for
+				(std::list<Flag *>::iterator j = (*i)->flags.begin();
+				 j != (*i)->flags.end();
+				 ++j)
 			if (*j==pi) {
-			    (*i)->flags.erase (j);
-			    break;
+				(*i)->flags.erase (j);
+				break;
 			}
 
 		break;
@@ -1219,14 +1228,14 @@ void Computer_Player::construct_roads ()
 			 j != (*i)->flags.end();
 			 ++j)
 		{
-		queue.push (spots.size());
+			queue.push (spots.size());
 
-		spots.push_back(WalkableSpot());
-		spots.back().coords=(*j)->get_position();
-		spots.back().hasflag=true;
-		spots.back().cost=0;
-		spots.back().eco=(*i)->economy;
-		spots.back().from=-1;
+			spots.push_back(WalkableSpot());
+			spots.back().coords  = (*j)->get_position();
+			spots.back().hasflag = true;
+			spots.back().cost    = 0;
+			spots.back().eco     = (*i)->economy;
+			spots.back().from    = -1;
 		}
 
 	for
@@ -1264,8 +1273,8 @@ void Computer_Player::construct_roads ()
 				spots.back().eco = road->get_flag(Road::FlagStart)->get_economy();
 				spots.back().from    = -1;
 
-		    continue;
-		}
+				continue;
+			}
 
 			if (imm->get_size() >= BaseImmovable::SMALL) continue;
 		}
@@ -1282,9 +1291,8 @@ void Computer_Player::construct_roads ()
 	int32_t i, j, k;
 	for (i = 0; i < static_cast<int32_t>(spots.size()); ++i)
 		for (j = 0; j < 6; ++j) {
-		Coords nc;
-
-		map.get_neighbour (spots[i].coords, j + 1, &nc);
+			Coords nc;
+			map.get_neighbour (spots[i].coords, j + 1, &nc);
 
 			for (k = 0; k < static_cast<int32_t>(spots.size()); ++k)
 				if (spots[k].coords == nc)
@@ -1297,66 +1305,68 @@ void Computer_Player::construct_roads ()
 		("Computer_Player(%u): %u spots for road building (%f seconds) \n", player_number, spots.size(), static_cast<double>(clock() - time_before) / CLOCKS_PER_SEC);
 
 	while (!queue.empty()) {
-	    WalkableSpot &from=spots[queue.front()];
-	    queue.pop();
+		WalkableSpot & from = spots[queue.front()];
+		queue.pop();
 
 		for (i = 0; i < 6; ++i) if (from.neighbours[i] >= 0) {
-		    WalkableSpot &to=spots[from.neighbours[i]];
+			WalkableSpot &to = spots[from.neighbours[i]];
 
 			if (to.cost < 0) {
 				to.cost = from.cost + 1;
-			to.eco=from.eco;
-			to.from=&from - &spots.front();
+				to.eco=from.eco;
+				to.from=&from - &spots.front();
 
-			queue.push (&to - &spots.front());
-			continue;
+				queue.push (&to - &spots.front());
+				continue;
 			}
 
 			if (from.eco != to.eco and to.cost > 0) {
-			std::list<Coords> pc;
-			bool hasflag;
+				std::list<Coords> pc;
+				bool hasflag;
 
-			pc.push_back (to.coords);
-			i=to.from;
-			hasflag=to.hasflag;
-			while (i>=0) {
-			    pc.push_back (spots[i].coords);
-			    hasflag=spots[i].hasflag;
-			    i=spots[i].from;
-			}
+				pc.push_back (to.coords);
+				i = to.from;
+				hasflag = to.hasflag;
+				while (0 <= i) {
+					pc.push_back (spots[i].coords);
+					hasflag = spots[i].hasflag;
+					i = spots[i].from;
+				}
 
-			if (!hasflag)
-				game().send_player_build_flag (player_number, pc.back());
+				if (!hasflag)
+					game().send_player_build_flag (player_number, pc.back());
 
-			pc.push_front (from.coords);
-			i=from.from;
-			hasflag=from.hasflag;
-			while (i>=0) {
-			    pc.push_front (spots[i].coords);
-			    hasflag=spots[i].hasflag;
-			    i=spots[i].from;
-			}
+				pc.push_front (from.coords);
+				i = from.from;
+				hasflag = from.hasflag;
+				while (i>=0) {
+					pc.push_front (spots[i].coords);
+					hasflag = spots[i].hasflag;
+					i = spots[i].from;
+				}
 
-			if (!hasflag)
-				game().send_player_build_flag (player_number, pc.front());
+				if (!hasflag)
+					game().send_player_build_flag (player_number, pc.front());
 
 				log
 					("Computer_Player(%u): New road has length %u\n",
 					 player_number,
 					 pc.size());
 				Path & path = *new Path(pc.front());
-			pc.pop_front();
+				pc.pop_front();
 
-			for (std::list<Coords>::iterator c = pc.begin(); c != pc.end(); ++c) {
-				const int32_t n = map.is_neighbour(path.get_end(), *c);
-			    assert (n>=1 && n<=6);
+				for
+					(std::list<Coords>::iterator c = pc.begin(); c != pc.end(); ++c)
+				{
+					const int32_t n = map.is_neighbour(path.get_end(), *c);
+					assert (n>=1 && n<=6);
 
-				path.append (map, n);
-				assert (path.get_end() == *c);
-			}
+					path.append (map, n);
+					assert (path.get_end() == *c);
+				}
 
 				game().send_player_build_road (player_number, path);
-			return;
+				return;
 			}
 		}
 	}

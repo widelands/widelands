@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__TRIGGER_FACTORY_H
-#define __S__TRIGGER_FACTORY_H
+#ifndef TRIGGER_FACTORY_H
+#define TRIGGER_FACTORY_H
 
 #include "trigger.h"
 
@@ -48,7 +48,7 @@ Trigger & create(size_t, char const * const name, bool set);
 /// \Throws _wexception if there is no event type with the given name.
 Trigger & create (char const * type_name, char const * name = "", bool set = false);
 
-	struct Type_Descr {
+struct Type_Descr {
 	char const * const id;       /// The identifier that is written to files.
 	std::string  const name;     /// Descriptive name for the user (localized).
 	std::string  const helptext; /// Help text for the user (localized).

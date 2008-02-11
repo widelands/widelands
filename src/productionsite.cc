@@ -54,10 +54,9 @@ ProductionSite BUILDING
 */
 
 ProductionSite_Descr::ProductionSite_Descr
-(const Tribe_Descr & tribe_descr, const std::string & productionsite_name)
-: Building_Descr(tribe_descr, productionsite_name)
-{
-}
+	(Tribe_Descr const & tribe_descr, std::string const & productionsite_name)
+	: Building_Descr(tribe_descr, productionsite_name)
+{}
 
 ProductionSite_Descr::~ProductionSite_Descr()
 {
@@ -75,14 +74,16 @@ ProductionSite_Descr::parse
 Parse the additional information necessary for production buildings
 ===============
 */
-void ProductionSite_Descr::parse(const char* directory, Profile* prof,
-	const EncodeData* encdata)
+void ProductionSite_Descr::parse
+	(char       const * const directory,
+	 Profile          * const prof,
+	 EncodeData const * const encdata)
 {
 	Section* sglobal = prof->get_section("global");
 	const char* string;
 
-   // Stopabple defaults to true for Production sites
-   m_stopable=true;
+	// Stopabple defaults to true for Production sites
+	m_stopable = true;
 
 	Building_Descr::parse(directory, prof, encdata);
 
@@ -94,21 +95,19 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 		// This house obviously requests wares and works on them
 		while (Section::Value * const val = s->get_next_val(0))
 			if (Ware_Index const idx = tribe().ware_index(val->get_name())) {
-			Item_Ware_Descr* ware= tribe().get_ware_descr(idx);
+				Item_Ware_Descr* ware= tribe().get_ware_descr(idx);
 
-			Input input(ware, val->get_int());
-			m_inputs.push_back(input);
+				Input input(ware, val->get_int());
+				m_inputs.push_back(input);
 			} else
 				throw wexception
 					("Error in [inputs], ware %s is unknown!", val->get_name());
 
 	// Are we only a production site?
 	// If not, we might not have a worker
-   std::string workerstr="";
-	if (is_only_production_site())
-		workerstr = sglobal->get_safe_string("worker");
-	else
-		workerstr = sglobal->get_string("worker", "");
+	std::string workerstr =
+		is_only_production_site() ?
+		sglobal->get_safe_string("worker") : sglobal->get_string("worker", "");
 
 	std::vector<std::string> workers(split_string(workerstr, ","));
 	const std::vector<std::string>::const_iterator workers_end = workers.end();
@@ -189,15 +188,6 @@ m_statistics_changed(true),
 m_last_stat_percent (0)
 {}
 
-
-/*
-===============
-ProductionSite::~ProductionSite
-===============
-*/
-ProductionSite::~ProductionSite()
-{
-}
 
 /*
 ===============
@@ -650,41 +640,34 @@ void ProductionSite::program_act(Game* g)
 			molog("  Checking(%s)\n", jt->c_str());
 			const std::vector<Input> & inputs = *descr().get_inputs();
 			const std::vector<Input>::size_type inputs_size = inputs.size();
-				for
-					(std::vector<std::string>::size_type i = 0;
-					 i < inputs_size;
-					 ++i)
-				{
-					if (inputs[i].ware_descr().name() == *jt) {
-						WaresQueue* wq = m_input_queues[i];
-						if
-							(static_cast<int32_t>(wq->get_filled())
-								>=
-								action->iparam1)
-						{
-							// okay, do nothing
-							molog("    okay\n");
-							found=true;
-							break;
-						}
+			for (std::vector<std::string>::size_type i = 0; i < inputs_size; ++i)
+			{
+				if (inputs[i].ware_descr().name() == *jt) {
+					WaresQueue* wq = m_input_queues[i];
+					if (static_cast<int32_t>(wq->get_filled()) >= action->iparam1) {
+						// okay, do nothing
+						molog("    okay\n");
+						found = true;
+						break;
 					}
 				}
-
-				if (found)
-					break;
 			}
 
-			if (not found) {
-				molog("   Checking failed, program restart\n");
-				program_end(g, false);
-				return;
-			}
-			molog("  Check done!\n");
+			if (found)
+				break;
+		}
 
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
+		if (not found) {
+			molog("   Checking failed, program restart\n");
+			program_end(g, false);
 			return;
+		}
+		molog("  Check done!\n");
+
+		program_step();
+		m_program_timer = true;
+		m_program_time = schedule_act(g, 10);
+		return;
 	}
 
 	case ProductionAction::actProduce: {
@@ -964,6 +947,8 @@ void ProductionSite::program_act(Game* g)
 		m_program_time = schedule_act(g, 10);
 		return;
 	}
+	default:
+		assert(false);
 	}
 }
 

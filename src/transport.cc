@@ -810,8 +810,9 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 		return;
 	}
 
-	throw wexception("MO(%u): Flag::remove_item: item %u not on flag",
-	                 get_serial(), item->get_serial());
+	throw wexception
+		("MO(%u): Flag::remove_item: item %u not on flag",
+		 get_serial(), item->get_serial());
 }
 
 /**
@@ -1002,8 +1003,13 @@ void Flag::destroy(Editor_Game_Base* g)
 void Flag::add_flag_job(Game *, int32_t workerware, std::string programname) {
 	FlagJob j;
 
-	j.request = new Request(this, workerware,
-	                        &Flag::flag_job_request_callback, this, Request::WORKER);
+	j.request =
+		new Request
+		(this,
+		 workerware,
+		 &Flag::flag_job_request_callback,
+		 this,
+		 Request::WORKER);
 	j.program = programname;
 
 	m_flag_jobs.push_back(j);
@@ -1233,7 +1239,7 @@ void Road::unmark_map(Editor_Game_Base * egbase) {
 */
 void Road::init(Editor_Game_Base *gg)
 {
-   PlayerImmovable::init(gg);
+	PlayerImmovable::init(gg);
 
 	if (m_path.get_nsteps() >=2) link_into_flags(gg);
 }
@@ -1246,14 +1252,14 @@ void Road::init(Editor_Game_Base *gg)
  * as Map Object, thats why this is moved
  */
 void Road::link_into_flags(Editor_Game_Base* gg) {
-   assert(m_path.get_nsteps() >= 2);
+	assert(m_path.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
 
 	{
 		const Direction dir = m_path[0];
-	m_flags[FlagStart]->attach_road(dir, this);
-	m_flagidx[FlagStart] = dir;
+		m_flags[FlagStart]->attach_road(dir, this);
+		m_flagidx[FlagStart] = dir;
 	}
 
 
@@ -1270,11 +1276,11 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
 	if (upcast(Game, game, gg)) {
 		Carrier * const carrier =
 			static_cast<Carrier *>(m_carrier.get(game));
-      m_desire_carriers = 1;
+		m_desire_carriers = 1;
 		if (carrier) {
-         // This happens after a road split. Tell the carrier what's going on
-         carrier->set_location    (this);
-         carrier->update_task_road(game);
+			//  This happens after a road split. Tell the carrier what's going on.
+			carrier->set_location    (this);
+			carrier->update_task_road(game);
 		} else if (not m_carrier_request)
 			request_carrier(game);
 	}
@@ -1290,8 +1296,8 @@ void Road::cleanup(Editor_Game_Base *gg)
 	// Release carrier
 	m_desire_carriers = 0;
 
-		delete m_carrier_request;
-		m_carrier_request = 0;
+	delete m_carrier_request;
+	m_carrier_request = 0;
 
 	m_carrier = 0; // carrier will be released via PlayerImmovable::cleanup
 
@@ -1330,8 +1336,11 @@ void Road::set_economy(Economy *e)
 void Road::request_carrier(Game * g) {
 	assert(!m_carrier.get(g) && !m_carrier_request);
 
-	m_carrier_request = new Request(this, get_owner()->tribe().get_safe_worker_index("carrier"),
-	                                &Road::request_carrier_callback, this, Request::WORKER);
+	m_carrier_request =
+		new Request
+		(this,
+		 get_owner()->tribe().get_safe_worker_index("carrier"),
+		 &Road::request_carrier_callback, this, Request::WORKER);
 }
 
 /**
@@ -1652,13 +1661,12 @@ Transfer::Transfer(Game* g, Request* req, Soldier* s) :
 */
 Transfer::~Transfer()
 {
-	if (m_worker)
-	{
+	if (m_worker) {
 		assert(!m_item);
 		assert(!m_soldier);
 
 		if (m_game->objects().object_still_available(m_worker))
-         m_worker->cancel_task_transfer(m_game);
+			m_worker->cancel_task_transfer(m_game);
 	}
 	else if (m_item)
 	{
@@ -1725,8 +1733,8 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	if (m_route.get_nrsteps() >= 1)
 		if (upcast(Road const, road, location))
 			if (road->get_flag(Road::FlagEnd) == m_route.get_flag(m_game, 1)) {
-			tlog("trim start flag (road)\n");
-			m_route.starttrim(1);
+				tlog("trim start flag (road)\n");
+				m_route.starttrim(1);
 			}
 
 	if (m_route.get_nrsteps() >= 1)
@@ -1736,8 +1744,8 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 				 ==
 				 m_route.get_flag(m_game, m_route.get_nrsteps() - 1))
 			{
-			tlog("trim end flag (road)\n");
-			m_route.truncate(m_route.get_nrsteps()-1);
+				tlog("trim end flag (road)\n");
+				m_route.truncate(m_route.get_nrsteps() - 1);
 			}
 
 	// Now decide where we want to go
@@ -1771,7 +1779,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
  */
 void Transfer::has_finished()
 {
-   m_request->transfer_finish(m_game, this);
+	m_request->transfer_finish(m_game, this);
 }
 
 /**
@@ -1780,7 +1788,7 @@ void Transfer::has_finished()
 */
 void Transfer::has_failed()
 {
-   m_request->transfer_fail(m_game, this);
+	m_request->transfer_fail(m_game, this);
 }
 
 void Transfer::tlog(const char* fmt, ...)
@@ -1819,17 +1827,17 @@ void Transfer::tlog(const char* fmt, ...)
 
 Requeriments::Requeriments ()
 {
-	m_hp.min = -1;
-	m_attack.min = -1;
-	m_defense.min = -1;
-	m_evade.min = -1;
-   m_total.min = -1;
+	m_hp     .min =  -1;
+	m_attack .min =  -1;
+	m_defense.min =  -1;
+	m_evade  .min =  -1;
+	m_total  .min =  -1;
 
-	m_hp.max = 100;
-	m_attack.max = 100;
+	m_hp     .max = 100;
+	m_attack .max = 100;
 	m_defense.max = 100;
-	m_evade.max = 100;
-   m_total.max = 400;
+	m_evade  .max = 100;
+	m_total  .max = 400;
 }
 
 void Requeriments::set (tAttribute at, int32_t min, int32_t max)
@@ -1862,7 +1870,7 @@ void Requeriments::set (tAttribute at, int32_t min, int32_t max)
 
 bool Requeriments::check (int32_t hp, int32_t attack, int32_t defense, int32_t evade)
 {
-   int32_t total = hp + attack + defense + evade;
+	int32_t total = hp + attack + defense + evade;
 
 	return
 		m_hp     .min <= hp      and hp      <= m_hp     .max and
@@ -1929,7 +1937,6 @@ void Requeriments::Write
 	// Evade
 	fw->Unsigned8(m_defense.min);
 	fw->Unsigned8(m_defense.max);
-   // DONE
 }
 
 
@@ -1962,7 +1969,7 @@ Request::Request
 	m_requeriments     (0)
 {
 	if (m_economy)
-      m_economy->add_request(this);
+		m_economy->add_request(this);
 }
 
 Request::~Request()
@@ -2000,27 +2007,27 @@ void Request::Read
 {
 	uint16_t const version = fr->Unsigned16();
 	if (version >= REQUEST_SUPPORTED_VERSION) {
-      m_type=static_cast<Type>(fr->Unsigned8());
-		m_index = static_cast<Ware_Index::value_t>(fr->Unsigned32());
-      m_idle=fr->Unsigned8();
-      m_count=fr->Unsigned32();
-      m_required_time=fr->Unsigned32();
-      m_required_interval=fr->Unsigned32();
+		m_type              = static_cast<Type>(fr->Unsigned8());
+		m_index             = static_cast<Ware_Index::value_t>(fr->Unsigned32());
+		m_idle              = fr->Unsigned8();
+		m_count             = fr->Unsigned32();
+		m_required_time     = fr->Unsigned32();
+		m_required_interval = fr->Unsigned32();
 
 		if (version == REQUEST_VERSION)
 		  m_last_request_time = fr->Unsigned32();
 
-      assert(!m_transfers.size());
+		assert(!m_transfers.size());
 
 		const uint16_t nr_transfers = fr->Unsigned16();
 		for (uint16_t i = 0; i < nr_transfers; ++i) {
-         uint8_t const what_is = fr->Unsigned8();
+			uint8_t const what_is = fr->Unsigned8();
 			if (what_is != WARE and what_is != WORKER and what_is != SOLDIER)
 				throw wexception
 					("Request::Read: while reading transfer %u: type is %u but "
 					 "must be one of {%u (WARE), %u (WORKER), %u (SOLDIER)}",
 					 i, what_is, WARE, WORKER, SOLDIER);
-         uint32_t const reg = fr->Unsigned32();
+			uint32_t const reg = fr->Unsigned32();
 			if (upcast(Game, game, egbase)) {
 				if (not mol->is_object_known(reg))
 					throw wexception
@@ -2050,11 +2057,10 @@ void Request::Read
 					 this,
 					 dynamic_cast<Soldier      *>
 					 (mol->get_object_by_file_index(reg)));
-            trans->set_idle(fr->Unsigned8());
-            m_transfers.push_back(trans);
+				trans->set_idle(fr->Unsigned8());
+				m_transfers.push_back(trans);
 
-				// Requeriments
-				if (fr->Unsigned8()) {
+				if (fr->Unsigned8()) { //  requeriments
 					m_requeriments = new Requeriments();
 					m_requeriments->Read (fr, egbase, mol);
 				}
@@ -2062,7 +2068,7 @@ void Request::Read
 		}
 
 		if (!is_open() && m_economy)
-         m_economy->remove_request(this);
+			m_economy->remove_request(this);
 	} else
 		throw wexception("Unknown request version %i in file!", version);
 }
@@ -2073,52 +2079,39 @@ void Request::Read
 void Request::Write
 	(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * mos)
 {
-   // First, write version
-   fw->Unsigned16(REQUEST_VERSION);
+	fw->Unsigned16(REQUEST_VERSION);
 
-   // target and econmy should be set,
-   // same is true for callback stuff
+	//  Target and econmy should be set. Same is true for callback stuff.
 
-   // Write type
-   fw->Unsigned8(m_type);
+	fw->Unsigned8(m_type);
 
-   // Write ware
 	fw->Unsigned32(m_index.value());
 
-   // Write idle
-   fw->Unsigned8(m_idle);
+	fw->Unsigned8(m_idle);
 
-   // Write count
-   fw->Unsigned32(m_count);
+	fw->Unsigned32(m_count);
 
-   // Write required time
-   fw->Unsigned32(m_required_time);
-   fw->Unsigned32(m_required_interval);
+	fw->Unsigned32(m_required_time);
+	fw->Unsigned32(m_required_interval);
 
-   fw->Unsigned32(m_last_request_time);
+	fw->Unsigned32(m_last_request_time);
 
-   // Write number of current transfers
-   fw->Unsigned16(m_transfers.size());
+	fw->Unsigned16(m_transfers.size()); //  Write number of current transfers.
 	for (uint32_t i = 0; i < m_transfers.size(); ++i) {
-      Transfer* trans=m_transfers[i];
-      // Is this a ware (or a worker)
+		Transfer & trans = *m_transfers[i];
+		//  is this a ware (or a worker)
 		fw->Unsigned8(m_type);
-      // Write ware/worker
-		if (trans->m_item) {
-         assert(mos->is_object_known(trans->m_item));
-         fw->Unsigned32(mos->get_object_file_index(trans->m_item));
-		} else if (trans->m_worker) {
-         assert(mos->is_object_known(trans->m_worker));
-         fw->Unsigned32(mos->get_object_file_index(trans->m_worker));
-		} else if (trans->m_soldier) {
-         assert(mos->is_object_known(trans->m_soldier));
-         fw->Unsigned32(mos->get_object_file_index(trans->m_soldier));
+		if        (trans.m_item) { //  write ware/worker
+			assert(mos->is_object_known(trans.m_item));
+			fw->Unsigned32(mos->get_object_file_index(trans.m_item));
+		} else if (trans.m_worker) {
+			assert(mos->is_object_known(trans.m_worker));
+			fw->Unsigned32(mos->get_object_file_index(trans.m_worker));
+		} else if (trans.m_soldier) {
+			assert(mos->is_object_known(trans.m_soldier));
+			fw->Unsigned32(mos->get_object_file_index(trans.m_soldier));
 		}
-      // Write idle
-      fw->Unsigned8(trans->is_idle());
-
-		// Requeriments
-		//fw->Unsigned8(m_requeriments ? true: false);
+		fw->Unsigned8(trans.is_idle());
 
 		if (m_requeriments) {
 			fw->Unsigned8(true);
@@ -2127,7 +2120,6 @@ void Request::Write
 		else
 			fw->Unsigned8(false);
 	}
-   // DONE
 }
 
 /**
@@ -2399,7 +2391,7 @@ void Request::transfer_finish(Game *g, Transfer* t)
 		--m_count;
 	}
 
-		delete m_requeriments;
+	delete m_requeriments;
 	m_requeriments = 0;
 
 	// the callback functions are likely to delete us,
@@ -2411,7 +2403,7 @@ void Request::transfer_finish(Game *g, Transfer* t)
 		(*m_callbackfn)(g, this, m_index, s, m_callbackdata);
 
 
-log ("<<Transfer::has_finished()\n");
+	log ("<<Transfer::has_finished()\n");
 }
 
 /**
@@ -2662,7 +2654,7 @@ void WaresQueue::add_to_economy(Economy* e)
 {
 	if (m_ware==-1) return;
 
-   e->add_wares(m_ware, m_filled);
+	e->add_wares(m_ware, m_filled);
 	if (m_request)
 		m_request->set_economy(e);
 }
@@ -2710,18 +2702,19 @@ void WaresQueue::Write
 	(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * os)
 {
 
-   fw->Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
+	fw->Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
 
-	// Owner and callback is not saved, but this should be obvious on load
-   fw->CString(m_owner->get_owner()->tribe().get_ware_descr(m_ware)->name().c_str());
-   fw->Signed32(m_size);
-   fw->Signed32(m_filled);
-   fw->Signed32(m_consume_interval);
+	//  Owner and callback is not saved, but this should be obvious on load.
+	fw->CString
+		(m_owner->get_owner()->tribe().get_ware_descr(m_ware)->name().c_str());
+	fw->Signed32(m_size);
+	fw->Signed32(m_filled);
+	fw->Signed32(m_consume_interval);
 	if (m_request) {
-      fw->Unsigned8(1);
-      m_request->Write(fw, egbase, os);
+		fw->Unsigned8(1);
+		m_request->Write(fw, egbase, os);
 	} else
-      fw->Unsigned8(0);
+		fw->Unsigned8(0);
 }
 
 
@@ -2730,21 +2723,23 @@ void WaresQueue::Read
 {
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
-      m_ware=m_owner->get_owner()->tribe().get_ware_index(fr->CString());
-      m_size=fr->Signed32();
-      m_filled=fr->Signed32();
-      m_consume_interval=fr->Signed32();
-      bool request=fr->Unsigned8();
-         delete m_request;
+		m_ware = m_owner->get_owner()->tribe().get_ware_index(fr->CString());
+		m_size = fr->Signed32();
+		m_filled = fr->Signed32();
+		m_consume_interval = fr->Signed32();
+		bool request = fr->Unsigned8();
+		delete m_request;
 		if (request) {
-         m_request = new Request(m_owner, 0, &WaresQueue::request_callback, this, Request::WORKER);
-         m_request->Read(fr, egbase, ol);
+			m_request =
+				new Request
+				(m_owner, 0, &WaresQueue::request_callback, this, Request::WORKER);
+			m_request->Read(fr, egbase, ol);
 		} else {
-         m_request=0;
+			m_request = 0;
 		}
 
-      // Now Economy stuff. We have to add our filled items to the economy
-      add_to_economy(m_owner->get_economy());
+		//  Now Economy stuff. We have to add our filled items to the economy.
+		add_to_economy(m_owner->get_economy());
 	} else
 		throw wexception
 			("WaresQueue::Read: Unknown WaresQueueVersion %u!", packet_version);
@@ -2764,19 +2759,19 @@ m_rebuilding(false),
 m_request_timer(false),
 mpf_cycle(0)
 {
-   m_worker_supplies.resize(player->tribe().get_nrworkers());
-   m_workers.set_nrwares(player->tribe().get_nrworkers());
-   m_ware_supplies.resize(player->tribe().get_nrwares());
-   m_wares.set_nrwares(player->tribe().get_nrwares());
+	m_worker_supplies.resize(player->tribe().get_nrworkers());
+	m_workers.set_nrwares(player->tribe().get_nrworkers());
+	m_ware_supplies.resize(player->tribe().get_nrwares());
+	m_wares.set_nrwares(player->tribe().get_nrwares());
 
-   player->add_economy(this);
+	player->add_economy(this);
 }
 
 Economy::~Economy()
 {
 	assert(!m_rebuilding);
 
-   m_owner->remove_economy(this);
+	m_owner->remove_economy(this);
 
 	if (m_requests.size())
 		log("Warning: Economy still has requests left on destruction\n");
@@ -3082,7 +3077,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 				neighbour->mpf_realcost = cost;
 				neighbour->mpf_backlink = current;
 				if (neighbour->mpf_heapindex != -1) // This neighbour is already 'popped', skip it
-               Open.boost(neighbour);
+					Open.boost(neighbour);
 			}
 		}
 	}
@@ -3252,26 +3247,23 @@ void Economy::add_warehouse(Warehouse *wh)
 */
 void Economy::remove_warehouse(Warehouse *wh)
 {
-   // fast remove
-   uint32_t i;
+   //  fast remove
+	uint32_t i;
 	for (i = 0; i < m_warehouses.size(); ++i) {
 		if (m_warehouses[i] == wh) {
 			if (i < m_warehouses.size() - 1)
-            m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
-         break;
+				m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
+			break;
 		}
 	}
-   /*
-    * This assert was modified, since on
-    * loading, warehouses might try to remove
-    * themselves from their own economy,
-    * though they weren't added (since they weren't
-    * initialized)
-    *
-    */
-   assert(i != m_warehouses.size() || !m_warehouses.size());
+
+	//  This assert was modified, since on loading, warehouses might try to
+	//  remove themselves from their own economy, though they weren't added
+	//  (since they weren't initialized)
+	assert(i != m_warehouses.size() || !m_warehouses.size());
+
 	if (m_warehouses.size())
-      m_warehouses.pop_back();
+		m_warehouses.pop_back();
 }
 
 /**
@@ -3281,10 +3273,10 @@ void Economy::remove_warehouse(Warehouse *wh)
 void Economy::add_request(Request* req)
 {
 	assert(req->is_open());
-   assert(!have_request(req));
+	assert(!have_request(req));
 
 	if (!get_owner()) // our owner is deleted, we are cleaning up. So ignore this
-      return;
+		return;
 
 	m_requests.push_back(req);
 
@@ -3526,20 +3518,11 @@ void Economy::start_request_timer(int32_t delta)
 		if (m_request_timer and m_request_timer_time - (gametime + delta) <= 0)
 		return;
 
-	Cmd_Queue* cq = game->get_cmdqueue();
-
-	m_request_timer = true;
-	m_request_timer_time = game->get_gametime() + delta;
-   cq->enqueue (new Cmd_Call_Economy_Balance(m_request_timer_time, m_owner->get_player_number(), this));
-
-#if 0
-	cq->queue
-		(m_request_timer_time,
-		 SENDER_MAPOBJECT, CMD_CALL,
-		 static_cast<int32_t>(&Economy::request_timer_cb),
-		 m_trackserial,
-		 0);
-#endif
+		m_request_timer = true;
+		m_request_timer_time = game->get_gametime() + delta;
+		game->get_cmdqueue()->enqueue
+			(new Cmd_Call_Economy_Balance
+			 (m_request_timer_time, m_owner->get_player_number(), this));
 	}
 }
 
@@ -3633,9 +3616,9 @@ Supply* Economy::find_best_supply
 }
 
 struct RequestSupplyPair {
-   bool                 is_item;
-   bool                 is_worker;
-   bool                 is_soldier;
+	bool              is_item;
+	bool              is_worker;
+	bool              is_soldier;
 	int32_t               ware;
 	TrackPtr<Request> request;
 	TrackPtr<Supply>  supply;
@@ -3672,9 +3655,9 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		// alerts, so add info to the sync stream here.
 		{
 			::StreamWrite & ss = g->syncstream();
-		ss.Unsigned8(req->get_type());
-		ss.Unsigned8(req->get_index().value());
-		ss.Unsigned32(req->get_target()->get_serial());
+			ss.Unsigned8 (req->get_type  ());
+			ss.Unsigned8 (req->get_index ().value());
+			ss.Unsigned32(req->get_target()->get_serial());
 		}
 
 		Ware_Index ware_index = req->get_index();
@@ -3729,6 +3712,8 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		case Request::WARE:    rsp.is_item    = true; break;
 		case Request::WORKER:  rsp.is_worker  = true; break;
 		case Request::SOLDIER: rsp.is_soldier = true; break;
+		default:
+			assert(false);
 		}
 
 		rsp.ware = ware_index;
@@ -3765,7 +3750,7 @@ void Economy::create_requested_workers(Game* g)
 			if (!req->is_idle() && ((req->get_type()==Request::WORKER) || (req->get_type()==Request::SOLDIER))) {
 				int32_t index = req->get_index();
 				int32_t num_wares = 0;
-            Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
+				Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
 
 				// Ignore it if is a worker that cann't be buildable
 				if (!w_desc->get_buildable())
@@ -3817,7 +3802,7 @@ void Economy::balance_requestsupply()
 {
 	RSPairStruct rsps;
 
-   m_request_timer = false;
+	m_request_timer = false;
 
 	rsps.nexttimer = -1;
 
@@ -3827,44 +3812,46 @@ void Economy::balance_requestsupply()
 	process_requests(game, &rsps);
 
 	// Now execute request/supply pairs
-	while (rsps.queue.size()) {
-		RequestSupplyPair rsp = rsps.queue.top();
+		while (rsps.queue.size()) {
+			RequestSupplyPair rsp = rsps.queue.top();
 
-		rsps.queue.pop();
+			rsps.queue.pop();
 
-		if (!rsp.request || !rsp.supply ||
-			!have_request(rsp.request) ||
-			(((rsp.is_soldier)  && !have_worker_supply(rsp.ware, rsp.supply)) ||
-			((rsp.is_worker)  && !have_worker_supply(rsp.ware, rsp.supply)) ||
-			((rsp.is_item) && !have_ware_supply(rsp.ware, rsp.supply)))) {
-			log("NO: ware %i, priority %i\n", rsp.ware, rsp.priority);
+			if
+				(!rsp.request               ||
+				 !rsp.supply                ||
+				 !have_request(rsp.request) ||
+				 ((rsp.is_soldier && !have_worker_supply(rsp.ware, rsp.supply)) ||
+				  (rsp.is_worker  && !have_worker_supply(rsp.ware, rsp.supply)) ||
+				  (rsp.is_item    && !have_ware_supply(rsp.ware, rsp.supply))))
+			{
+				log("NO: ware %i, priority %i\n", rsp.ware, rsp.priority);
 
-			rsps.nexttimer = 200;
-			continue;
+				rsps.nexttimer = 200;
+				continue;
+			}
+
+			log
+				("HANDLE: %u -> %u, ware %i, priority %i\n",
+				 rsp.request->get_target()->get_serial(),
+				 rsp.supply->get_position(game)->get_serial(),
+				 rsp.ware,
+				 rsp.priority);
+
+			rsp.request->start_transfer(game, rsp.supply, rsp.ware);
+			rsp.request->set_last_request_time(owner().egbase().get_gametime());
+
+			//  for multiple wares
+			if (rsp.request && have_request(rsp.request)) {
+				log("  request is still around, reschedule timer\n");
+				rsps.nexttimer = 200;
+			}
 		}
 
-		log
-			("HANDLE: %u -> %u, ware %i, priority %i\n",
-			 rsp.request->get_target()->get_serial(),
-			 rsp.supply->get_position(game)->get_serial(),
-			 rsp.ware,
-			 rsp.priority);
-
-		rsp.request->start_transfer(game, rsp.supply, rsp.ware);
-		rsp.request->set_last_request_time(owner().egbase().get_gametime());
-
-		// for multiple wares
-		if (rsp.request && have_request(rsp.request)) {
-			log("  request is still around, reschedule timer\n");
-			rsps.nexttimer = 200;
+		if (rsps.nexttimer > 0) { //  restart the timer, if necessary
+			log("  nexttimer: %i\n", rsps.nexttimer);
+			start_request_timer(rsps.nexttimer);
 		}
-	}
-
-	// restart the timer, if necessary
-	if (rsps.nexttimer > 0) {
-		log("  nexttimer: %i\n", rsps.nexttimer);
-		start_request_timer(rsps.nexttimer);
-	}
 	}
 }
 
@@ -3873,21 +3860,18 @@ void Economy::balance_requestsupply()
  * Call economy functions to balance supply and request.
 */
 void Cmd_Call_Economy_Balance::execute(Game* g) {
-   Player* plr=g->get_player(m_player);
-
-   // If this economy has vanished, drop this
-   // call silently
-	if (!plr->has_economy(m_economy))
-      return;
+	//  If this economy has vanished, drop this call silently
+	if (!g->player(m_player).has_economy(m_economy))
+		return;
 
 	if
 		(!m_economy->should_run_balance_check(g->get_gametime())
 		 &&
 		 !m_force_balance)
-      return;
+		return;
 
-   m_force_balance = false;
-   m_economy->balance_requestsupply();
+	m_force_balance = false;
+	m_economy->balance_requestsupply();
 }
 
 /**
@@ -3908,7 +3892,7 @@ void Cmd_Call_Economy_Balance::Read
 			:
 			reinterpret_cast<Economy *>(0xffffffff); //  FIXME ?!?!?!
 
-      m_force_balance = true; // on load, the first balance has to been forced
+		m_force_balance = true; //  on load, the first balance has to been forced
 	} else
 		throw wexception
 			("Unknown version %u in Cmd_Call_Economy_Balance::Read()!",

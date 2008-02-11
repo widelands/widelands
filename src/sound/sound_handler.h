@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOUND_HANDLER
-#define SOUND_HANDLER
+#ifndef SOUND_HANDLER_H
+#define SOUND_HANDLER_H
 
 //config.h *must* be included before SDL_mixer.h due to USE_RWOPS !!
 #include "config.h"

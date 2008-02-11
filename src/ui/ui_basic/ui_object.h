@@ -40,4 +40,4 @@ private:
 };
 };
 
-#endif /* UI_OBJECT_H */
+#endif

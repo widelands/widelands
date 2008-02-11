@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WINDOW_H
-#define __S__WINDOW_H
+#ifndef UI_WINDOW_H
+#define UI_WINDOW_H
 
 #include "ui_panel.h"
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__SINGLEPMENUE_H
-#define __S__SINGLEPMENUE_H
+#ifndef FULLSCREEN_MENU_SINGLEPLAYER_H
+#define FULLSCREEN_MENU_SINGLEPLAYER_H
 
 #include "fullscreen_menu_base.h"
 
@@ -30,7 +30,7 @@
  * Here you select what game you want to play.
  */
 struct Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
-      Fullscreen_Menu_SinglePlayer();
+	Fullscreen_Menu_SinglePlayer();
 
 	enum {Back = dying_code, New_Game, Campaign, Load_Game};
 
@@ -42,4 +42,4 @@ private:
 	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> back;
 };
 
-#endif // __S__SINGLEPMENUE_H
+#endif

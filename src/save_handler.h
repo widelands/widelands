@@ -17,8 +17,8 @@
 *
 */
 
-#ifndef __S__SAVE_HANDLER_H
-#define __S__SAVE_HANDLER_H
+#ifndef SAVE_HANDLER_H
+#define SAVE_HANDLER_H
 
 #include <string>
 

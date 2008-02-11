@@ -28,17 +28,12 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
 Game_Map_Data_Packet::~Game_Map_Data_Packet() {
-      delete m_wms;
-      delete m_wml;
+	delete m_wms;
+	delete m_wml;
 }
 
-/*
- * Read Function
- */
+
 void Game_Map_Data_Packet::Read
 (FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -48,17 +43,17 @@ throw (_wexception)
 
 	FileSystem * const mapfs = fs.MakeSubFileSystem("map");
 
-   // Now Load the map as it would be a normal map saving
-      delete m_wml;
+	//  Now Load the map as it would be a normal map saving.
+	delete m_wml;
 
 	m_wml = new WL_Map_Loader(*mapfs, game->get_map());
 
 	m_wml->preload_map(true);
 	m_wml->load_world();
 
-   // DONE, mapfs gets deleted by WidelandsMapLoader
+	//  DONE, mapfs gets deleted by WidelandsMapLoader.
 
-   return;
+	return;
 }
 
 
@@ -75,13 +70,13 @@ throw (_wexception)
 
 	FileSystem * const mapfs = fs.CreateSubFileSystem("map", FileSystem::DIR);
 
-   // Now Write the map as it would be a normal map saving
+	//  Now Write the map as it would be a normal map saving.
 	delete m_wms;
 	m_wms = new Map_Saver(*mapfs, game);
-   m_wms->save();
-   m_mos = m_wms->get_map_object_saver();
+	m_wms->save();
+	m_mos = m_wms->get_map_object_saver();
 
-   delete mapfs;
+	delete mapfs;
 }
 
 };

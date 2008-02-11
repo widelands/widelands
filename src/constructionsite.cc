@@ -57,8 +57,6 @@ Building_Descr(tribe_descr, building_name)
 
 /*
 ===============
-ConstructionSite_Descr::parse
-
 Parse tribe-specific construction site data, such as graphics, worker type,
 etc...
 ===============
@@ -67,7 +65,7 @@ void ConstructionSite_Descr::parse(const char* directory, Profile* prof, const E
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
 
-   Building_Descr::parse(directory, prof, encdata);
+	Building_Descr::parse(directory, prof, encdata);
 
 	// TODO
 }
@@ -115,16 +113,6 @@ m_work_steps     (0)
 
 /*
 ===============
-ConstructionSite::~ConstructionSite
-===============
-*/
-ConstructionSite::~ConstructionSite()
-{
-}
-
-
-/*
-===============
 ConstructionSite::get_size
 
 Override: construction size is always the same size as the building
@@ -137,33 +125,35 @@ int32_t ConstructionSite::get_size() const throw ()
  * Write infos over this constructionsite
  */
 void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
-   Building::log_general_info(egbase);
+	Building::log_general_info(egbase);
 
-   molog("m_building: %p\n", m_building);
+	molog("m_building: %p\n", m_building);
 	molog("* m_building (name): %s\n", m_building->name().c_str());
-   molog("m_prev_building: %p\n", m_prev_building);
+	molog("m_prev_building: %p\n", m_prev_building);
 	if (m_prev_building)
 		molog("* m_prev_building (name): %s\n", m_prev_building->name().c_str());
 
-   molog("m_builder_request: %p\n", m_builder_request);
-   molog("m_builder: %u\n", m_builder.get_serial());
+	molog("m_builder_request: %p\n", m_builder_request);
+	molog("m_builder: %u\n", m_builder.get_serial());
 
-   molog("m_fetchfromflag: %i\n", m_fetchfromflag);
+	molog("m_fetchfromflag: %i\n", m_fetchfromflag);
 
 	molog("m_working: %i\n", m_working);
 	molog("m_work_steptime: %i\n", m_work_steptime);
 	molog("m_work_completed: %i\n", m_work_completed);
 	molog("m_work_steps: %i\n", m_work_steps);
 
-   molog("WaresQueue size: %i\n", m_wares.size());
+	molog("WaresQueue size: %i\n", m_wares.size());
 	const std::vector<WaresQueue *>::size_type nr_wares = m_wares.size();
 	for (std::vector<WaresQueue *>::size_type i = 0; i < nr_wares; ++i) {
-      molog("Dumping WaresQueue %i/%i\n", i+1, m_wares.size());
-      molog("* Owner: %i (player nr)\n", m_wares[i]->get_owner()->get_player_number());
-      molog("* Ware: %i (index)\n", m_wares[i]->get_ware());
-      molog("* Size: %i\n", m_wares[i]->get_size());
-      molog("* Filled: %i\n", m_wares[i]->get_filled());
-      molog("* Consume Interval: %i\n", m_wares[i]->get_consume_interval());
+		molog("Dumping WaresQueue %i/%i\n", i + 1, m_wares.size());
+		molog
+			("* Owner: %i (player nr)\n",
+			 m_wares[i]->get_owner()->get_player_number());
+		molog("* Ware: %i (index)\n", m_wares[i]->get_ware());
+		molog("* Size: %i\n", m_wares[i]->get_size());
+		molog("* Filled: %i\n", m_wares[i]->get_filled());
+		molog("* Consume Interval: %i\n", m_wares[i]->get_consume_interval());
 	}
 }
 
@@ -263,7 +253,7 @@ void ConstructionSite::set_building(const Building_Descr & building_descr) {
 void ConstructionSite::set_previous_building
 (const Building_Descr * const previous_building_descr)
 {
-   assert(!m_prev_building);
+	assert(!m_prev_building);
 
 	m_prev_building = previous_building_descr;
 
@@ -415,8 +405,12 @@ Issue a request for the builder.
 void ConstructionSite::request_builder(Game *) {
 	assert(!m_builder.is_set() && !m_builder_request);
 
-	m_builder_request = new Request(this, get_owner()->tribe().get_safe_worker_index("builder"),
-	                                &ConstructionSite::request_builder_callback, this, Request::WORKER);
+	m_builder_request =
+		new Request
+		(this,
+		 get_owner()->tribe().get_safe_worker_index("builder"),
+		 &ConstructionSite::request_builder_callback, this,
+		 Request::WORKER);
 }
 
 
@@ -578,25 +572,28 @@ void ConstructionSite::draw
 
 	const uint32_t anim = building().get_animation("build");
 	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
-   uint32_t anim_pic = completedtime * nr_frames / totaltime;
+	uint32_t const anim_pic = completedtime * nr_frames / totaltime;
 	// Redefine tanim
-   tanim = anim_pic*FRAME_LENGTH;
+	tanim = anim_pic * FRAME_LENGTH;
 
 	uint32_t w, h;
-   g_gr->get_animation_size(anim, tanim, w, h);
+	g_gr->get_animation_size(anim, tanim, w, h);
 
 	uint32_t lines = h * completedtime * nr_frames / totaltime;
 	assert(h * anim_pic <= lines);
-   lines -= h*anim_pic; // This won't work if pictures have various sizes
+	lines -= h * anim_pic; //  This won't work if pictures have various sizes.
 
-   // NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
+	// NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
 	if (anim_pic) //  not the first pic
-      // draw the prev pic from top to where next image will be drawing
-      dst.drawanimrect
-        (pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
+		//  draw the prev pic from top to where next image will be drawing
+		dst.drawanimrect
+			(pos,
+			 anim,
+			 tanim - FRAME_LENGTH, get_owner(),
+			 Rect(Point(0, 0), w, h - lines));
 	else if (m_prev_building) {
-      // Is the first building, but there was another building here before,
-      // get its last build picture and draw it instead
+		//  Is the first building, but there was another building here before,
+		//  get its last build picture and draw it instead.
 		const uint32_t a = m_prev_building->get_animation("build");
 		dst.drawanim
 			(pos,

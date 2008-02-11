@@ -35,11 +35,13 @@ namespace Widelands {
 Battle::Descr g_Battle_Descr;
 
 
-Battle::Battle (): BaseImmovable(g_Battle_Descr),
-                   m_first      (0),
-                   m_second     (0),
-                   m_last_try   (0),
-                   m_next_assault(0)
+Battle::Battle ()
+	:
+	BaseImmovable(g_Battle_Descr),
+	m_first      (0),
+	m_second     (0),
+	m_last_try   (0),
+	m_next_assault(0)
 {}
 
 

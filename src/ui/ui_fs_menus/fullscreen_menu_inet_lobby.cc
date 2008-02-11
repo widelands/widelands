@@ -38,32 +38,26 @@
  * Static callback functions for various packets
  */
 static void user_entered(std::string name, std::string room, bool enters, void* data) {
-   Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
-   lob->user_entered(name, room, enters);
+	static_cast<Fullscreen_Menu_InetLobby *>(data)->user_entered(name, room, enters);
 }
 static void server_message(std::string str, void* data) {
-   Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
-   lob->server_message(str);
+	static_cast<Fullscreen_Menu_InetLobby*>(data)->server_message(str);
 }
 static void room_info(std::vector< std::string > users, void* data) {
-   Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
-   lob->room_info(users);
+	static_cast<Fullscreen_Menu_InetLobby *>(data)->room_info(users);
 }
 static void user_info(std::string user, std::string game, std::string room, void* data) {
-   Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
-   lob->user_info(user, game, room);
+	static_cast<Fullscreen_Menu_InetLobby *>(data)->user_info(user, game, room);
 }
 static void chat_message(std::string user, std::string msg, uint8_t is_action, void* data) {
-   Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
-   lob->chat_message(user, msg, is_action);
+	static_cast<Fullscreen_Menu_InetLobby*>(data)
+		->chat_message(user, msg, is_action);
 }
 static void critical_error(std::string str, void* data) {
-   Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
-   lob->critical_error(str);
+	static_cast<Fullscreen_Menu_InetLobby *>(data)->critical_error(str);
 }
 static void disconnect(void* data) {
-   Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
-   lob->disconnect();
+	static_cast<Fullscreen_Menu_InetLobby *>(data)->disconnect();
 }
 
 /*
@@ -72,24 +66,35 @@ static void disconnect(void* data) {
 Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc)
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this
 {
-   m_disconnect_expected = false;
+	m_disconnect_expected = false;
 
-   // Text
 	UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 10, _("Lobby"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	// Chat area
-   m_chatarea = new UI::Multiline_Textarea(this, 5, 40, static_cast<int32_t>(get_inner_w()*0.75)-5, get_inner_h()-40-50, 0, Align_Left, 1);
-   m_chatarea->set_scrollmode(UI::Multiline_Textarea::ScrollLog);
+	m_chatarea = new UI::Multiline_Textarea
+		(this,
+		 5, 40,
+		 static_cast<int32_t>(get_inner_w() * 0.75) - 5, get_inner_h() - 40 - 50,
+		 0, Align_Left, 1);
+	m_chatarea->set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 
-   // Chat editbox
-   m_chatbox = new UI::Edit_Box(this, 5, get_inner_h()-45, static_cast<int32_t>(get_inner_w()*0.75)-5, 25, 0, 1);
-   m_chatbox->changed.set(this, &Fullscreen_Menu_InetLobby::changed);
+	m_chatbox =
+		new UI::Edit_Box
+		(this,
+		 5, get_inner_h() - 45,
+		 static_cast<int32_t>(get_inner_w() * 0.75) - 5, 25,
+		 0, 1);
+	m_chatbox->changed.set(this, &Fullscreen_Menu_InetLobby::changed);
 
-   // User Listing
-   m_userlist = new UI::Listselect<void *>(this, static_cast<int32_t>(get_inner_w()-get_inner_w()*0.25+5), 40, static_cast<int32_t>(get_inner_w()*0.25-10), get_inner_h()-40-50, Align_Left);
+	m_userlist =
+		new UI::Listselect<void *>
+		(this,
+		 static_cast<int32_t>(get_inner_w()-get_inner_w() * 0.25 +  5),
+		 40,
+		 static_cast<int32_t>(get_inner_w()               * 0.25 - 10),
+		 get_inner_h() - 40 - 50,
+		 Align_Left);
 
-   // Buttons
 	new UI::Button<Fullscreen_Menu_InetLobby>
 		(this,
 		 get_inner_w() - get_inner_w() / 4 + 5, get_inner_h() - 45, 50, 25,
@@ -97,51 +102,47 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
 		 &Fullscreen_Menu_InetLobby::clicked_back, this,
 		 _("Back"));
 
-   m_gsc = gsc;
-   gsc->set_server_message_handler(&::server_message, this);
-   gsc->set_user_entered_handler(&::user_entered, this);
-   gsc->set_get_room_info_handler(&::room_info, this);
-   gsc->set_get_user_info_handler(&::user_info, this);
-   gsc->set_chat_message_handler(&::chat_message, this);
-   gsc->set_critical_error_handler(&::critical_error, this);
-   gsc->set_disconnect_handler(&::disconnect, this);
+	m_gsc = gsc;
+	gsc->set_server_message_handler(&::server_message, this);
+	gsc->set_user_entered_handler(&::user_entered, this);
+	gsc->set_get_room_info_handler(&::room_info, this);
+	gsc->set_get_user_info_handler(&::user_info, this);
+	gsc->set_chat_message_handler(&::chat_message, this);
+	gsc->set_critical_error_handler(&::critical_error, this);
+	gsc->set_disconnect_handler(&::disconnect, this);
 
-   // Send welcome packet(s)
-   Game_Server_Protocol_Packet_Connect* gp = new Game_Server_Protocol_Packet_Connect();
-   m_gsc->send(gp);
-   Game_Server_Protocol_Packet_Hello* hello = new Game_Server_Protocol_Packet_Hello(gsc->get_username());
-   m_gsc->send(hello);
+	//  send welcome packet(s)
+	m_gsc->send(new Game_Server_Protocol_Packet_Connect());
+	m_gsc->send(new Game_Server_Protocol_Packet_Hello(gsc->get_username()));
 }
 
-Fullscreen_Menu_InetLobby::~Fullscreen_Menu_InetLobby()
-{
-}
+Fullscreen_Menu_InetLobby::~Fullscreen_Menu_InetLobby() {}
 
 /*
  * Check if there is network data for us
  */
 void Fullscreen_Menu_InetLobby::think() {
-   m_gsc->handle_data();
+	m_gsc->handle_data();
 }
 
 /*
  * The editbox has changed, this is to send something over the net
  */
 void Fullscreen_Menu_InetLobby::changed() {
-   std::string text = m_chatbox->get_text();
-   m_chatbox->set_text("");
+	std::string text = m_chatbox->get_text();
+	m_chatbox->set_text("");
 
-   // TODO: check here if this is a Server message
-   Game_Server_Protocol_Packet_ChatMessage* cm = new Game_Server_Protocol_Packet_ChatMessage(0, text);
-   m_gsc->send(cm);
+	//  TODO check here if this is a Server message
+	Game_Server_Protocol_Packet_ChatMessage* cm = new Game_Server_Protocol_Packet_ChatMessage(0, text);
+	m_gsc->send(cm);
 }
 
 /*
  * A button has been clicked
  */
 void Fullscreen_Menu_InetLobby::clicked_back() {
-   // TODO: shut down connection gracefully
-   end_modal(0);
+	//  TODO shut down connection gracefully
+	end_modal(0);
 }
 
 /*
@@ -150,55 +151,61 @@ void Fullscreen_Menu_InetLobby::clicked_back() {
  * server (as response to a packet mostly)
  */
 void Fullscreen_Menu_InetLobby::server_message(std::string str) {
-   m_chatarea->set_text((m_chatarea->get_text() + str).c_str());
+	m_chatarea->set_text((m_chatarea->get_text() + str).c_str());
 }
 
 /*
  * A room info request has returned
  */
 void Fullscreen_Menu_InetLobby::room_info(std::vector<std::string > users) {
-   /* We clear the list, and refill it */
-   m_userlist->clear();
+	m_userlist->clear(); //  We clear the list, and refill it.
 
 	for (uint32_t i = 0; i < users.size(); ++i)
 		if (users[i] != m_gsc->get_username()) {
-      std::string name = users[i];
-		m_userlist->add(name.c_str(), 0);
-      // Get User Informations
-      Game_Server_Protocol_Packet_GetUserInfo *gui = new Game_Server_Protocol_Packet_GetUserInfo(users[i]);
-      m_gsc->send(gui);
-	}
-   m_userlist->sort();
+			std::string name = users[i];
+			m_userlist->add(name.c_str(), 0);
+			// Get User Informations
+			Game_Server_Protocol_Packet_GetUserInfo *gui = new Game_Server_Protocol_Packet_GetUserInfo(users[i]);
+			m_gsc->send(gui);
+		}
+	m_userlist->sort();
 }
 
 /*
  * A user info request has returned
  */
 void Fullscreen_Menu_InetLobby::user_info(std::string user, std::string game, std::string room) {
-   char buffer[1024];
+	char buffer[1024];
 
 	snprintf
 		(buffer, sizeof(buffer),
 		 _("User %s is using \"%s\" in room \"%s\"\n").c_str(),
 		 user.c_str(), game.c_str(), room.c_str());
-   server_message(buffer);
+	server_message(buffer);
 }
 
 /*
  * A chat message has arrived
  */
 void Fullscreen_Menu_InetLobby::chat_message(std::string user, std::string msg, bool is_action) {
-   std::string buffer;
+	std::string buffer;
 
 	if (is_action) {
-      buffer="** "+user+" "+msg+"\n";
-      server_message(buffer.c_str());
-      return;
+		buffer  = "** ";
+		buffer += user;
+		buffer += ' ';
+		buffer += msg;
+		buffer += '\n';
+		server_message(buffer.c_str());
+		return;
 	}
 
-   std::string text = m_chatbox->get_text();
-   buffer=user+": "+msg+"\n";
-   m_chatarea->set_text((m_chatarea->get_text() + buffer).c_str());
+	std::string text = m_chatbox->get_text();
+	buffer  = user;
+	buffer += ": ";
+	buffer += msg;
+	buffer += '\n';
+	m_chatarea->set_text((m_chatarea->get_text() + buffer).c_str());
 }
 
 
@@ -206,21 +213,23 @@ void Fullscreen_Menu_InetLobby::chat_message(std::string user, std::string msg, 
  * A User entered the room
  */
 void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groom, bool enters) {
-   std::string name = gname;
+	std::string name = gname;
 
 	if (groom == m_gsc->get_room()) {
 		if (enters) m_userlist->add   (name.c_str(), 0);
 		else        m_userlist->remove(name.c_str());
 	}
 
-   m_userlist->sort();
+	m_userlist->sort();
 
-   std::string str = enters ? _("User %s has entered the room %s !\n") : _("User %s has left the room %s !\n");
-   server_message(str);
+	std::string str =
+		enters ?
+		_("User %s has entered the room %s !\n")
+		:
+		_("User %s has left the room %s !\n");
+	server_message(str);
 
-   // Get User Informations
-   Game_Server_Protocol_Packet_GetUserInfo *gui = new Game_Server_Protocol_Packet_GetUserInfo(gname);
-   m_gsc->send(gui);
+	m_gsc->send(new Game_Server_Protocol_Packet_GetUserInfo(gname));
 }
 
 /*
@@ -233,7 +242,7 @@ void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
 	UI::Modal_Message_Box mmb
 		(this, _("Critical Connection Error!"), str, UI::Modal_Message_Box::OK);
 	mmb.run();
-   m_disconnect_expected = true;
+	m_disconnect_expected = true;
 }
 
 /*
@@ -248,6 +257,6 @@ void Fullscreen_Menu_InetLobby::disconnect() {
 			 UI::Modal_Message_Box::OK);
 		mmb.run();
 	}
-   end_modal(0);
-   return;
+	end_modal(0);
+	return;
 }

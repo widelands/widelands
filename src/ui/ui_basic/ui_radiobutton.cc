@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ Radiobutton::~Radiobutton()
  */
 void Radiobutton::clicked()
 {
-   m_group->set_state(m_id);
+	m_group->set_state(m_id);
 	play_click();
 }
 
@@ -129,7 +129,7 @@ int32_t Radiogroup::add_button
 void Radiogroup::set_state(int32_t state)
 {
 	if (state == m_state) {
-      clicked.call();
+		clicked.call();
 		return;
 	}
 

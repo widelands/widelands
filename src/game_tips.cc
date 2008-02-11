@@ -33,12 +33,15 @@
 #define GAMETIPS_DEFAULT_PADDING      15
 
 GameTips::GameTips(UI::ProgressWindow & progressWindow)
-	: m_lastUpdated(0), m_updateAfter(0),
-	  m_progressWindow(progressWindow), m_registered(false),
-	  m_lastTip(0) {
-
-    // Loading texts-locals, for translating the tips
-    i18n::grab_textdomain("texts");
+:
+m_lastUpdated   (0),
+m_updateAfter   (0),
+m_progressWindow(progressWindow),
+m_registered    (false),
+m_lastTip       (0)
+{
+	// Loading texts-locals, for translating the tips
+	i18n::grab_textdomain("texts");
 
 	// Skip, if no triggers saved
 	// Load the TrueType Font
@@ -90,9 +93,7 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 		m_lastTip = m_tips.size();
 	}
 
-    // Now drop textdomain, to fall back to previous one.
-    i18n::release_textdomain();
-
+	i18n::release_textdomain(); //  Drop textdomain, fall back to previous one.
 }
 
 GameTips::~GameTips() {

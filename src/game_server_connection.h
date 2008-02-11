@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__META_SERVER_CONNECTION_H
-#define __S__META_SERVER_CONNECTION_H
+#ifndef GAME_SERVER_CONNECTION_H
+#define GAME_SERVER_CONNECTION_H
 
 #include <SDL_net.h>
 
@@ -46,68 +46,68 @@ typedef void (*ChatMessage_Handler)(std::string, std::string, uint8_t, void*);
 typedef void (*Disconnet_Handler)(void*);
 
 struct Game_Server_Connection {
-      Game_Server_Connection(std::string const & host, uint32_t port);
-      ~Game_Server_Connection();
+	Game_Server_Connection(std::string const & host, uint32_t port);
+	~Game_Server_Connection();
 
-      void connect();
+	void connect();
 
-      void send(Game_Server_Protocol_Packet*);
-      void handle_data();
+	void send(Game_Server_Protocol_Packet *);
+	void handle_data();
 
-      // Set callback functions (handlers)
-      void set_server_message_handler(ServerMessage_Handler, void*);
-      void set_user_entered_handler(UserEntered_Handler, void*);
-      void set_get_room_info_handler(RoomInfo_Handler, void*);
-      void set_get_user_info_handler(UserInfo_Handler, void*);
-      void set_chat_message_handler(ChatMessage_Handler, void*);
-      void set_critical_error_handler(CriticalError_Handler, void*);
-      void set_disconnect_handler(Disconnet_Handler, void*);
+	//  set callback functions (handlers)
+	void set_server_message_handler(ServerMessage_Handler, void *);
+	void set_user_entered_handler  (UserEntered_Handler,   void *);
+	void set_get_room_info_handler (RoomInfo_Handler,      void *);
+	void set_get_user_info_handler (UserInfo_Handler,      void *);
+	void set_chat_message_handler  (ChatMessage_Handler,   void *);
+	void set_critical_error_handler(CriticalError_Handler, void *);
+	void set_disconnect_handler    (Disconnet_Handler,     void *);
 
-      // Call callback functions
-      void server_message(std::string str);
-      void user_entered(std::string str, std::string, uint8_t);
-      void get_room_info(std::vector<std::string >);
-      void get_user_info(std::string, std::string, std::string);
-      void chat_message(std::string, std::string, uint8_t);
-      void critical_error(std::string str);
+	//  call callback functions
+	void server_message(std::string str);
+	void user_entered(std::string str, std::string, uint8_t);
+	void get_room_info(std::vector<std::string>);
+	void get_user_info(std::string, std::string, std::string);
+	void chat_message(std::string, std::string, uint8_t);
+	void critical_error(std::string str);
 
-      // Set user data
-      void set_username(const char* name) {m_username = name;}
-      const char* get_username() {return m_username.c_str();}
-      void set_group(const char* name) {m_group = name;}
-      const char* get_group() {return m_group.c_str();}
-      void set_room(const char* name);
-      const char* get_room() {return m_room.c_str();}
+	//  set user data
+	void set_username(char const * const name) {m_username = name;}
+	char const * get_username() {return m_username.c_str();}
+	void set_group(char const * const name) {m_group = name;}
+	char const * get_group() {return m_group.c_str();}
+	void set_room(char const * name);
+	char const * get_room() {return m_room.c_str();}
 
 private:
-      // Connection data
-      std::map<uint32_t, Game_Server_Protocol_Packet*> m_pending_packets;
-      TCPsocket m_socket;
-      SDLNet_SocketSet m_socketset;
-      std::string m_host;
-      uint32_t m_port;
-      uint32_t m_last_packet_index;
+	//  connection data
+	std::map<uint32_t, Game_Server_Protocol_Packet*> m_pending_packets;
+	TCPsocket m_socket;
+	SDLNet_SocketSet m_socketset;
+	std::string m_host;
+	uint32_t m_port;
+	uint32_t m_last_packet_index;
 
-      // User data
-      std::string m_username;
-      std::string m_group;
-      std::string m_room;
+	//  user data
+	std::string m_username;
+	std::string m_group;
+	std::string m_room;
 
-      // Callback functions
-      ServerMessage_Handler m_smh;
-      void* m_smhd;
-      UserEntered_Handler m_ueh;
-      void* m_uehd;
-      RoomInfo_Handler m_rih;
-      void* m_rihd;
-      UserInfo_Handler m_uih;
-      void* m_uihd;
-      ChatMessage_Handler m_cmh;
-      void* m_cmhd;
-      CriticalError_Handler m_ceh;
-      void* m_cehd;
-      Disconnet_Handler m_dch;
-      void* m_dchd;
+	//  callback functions
+	ServerMessage_Handler m_smh;
+	void * m_smhd;
+	UserEntered_Handler m_ueh;
+	void * m_uehd;
+	RoomInfo_Handler m_rih;
+	void * m_rihd;
+	UserInfo_Handler m_uih;
+	void * m_uihd;
+	ChatMessage_Handler m_cmh;
+	void * m_cmhd;
+	CriticalError_Handler m_ceh;
+	void * m_cehd;
+	Disconnet_Handler m_dch;
+	void * m_dchd;
 };
 
-#endif // __S__META_SERVER_CONNECTION_H
+#endif

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_MAP_DATA_PACKET_H
-#define __S__GAME_MAP_DATA_PACKET_H
+#ifndef GAME_MAP_DATA_PACKET_H
+#define GAME_MAP_DATA_PACKET_H
 
 #include "game_data_packet.h"
 
@@ -31,8 +31,8 @@ struct WL_Map_Loader;
  * This is just a wrapper around Map_Saver and Map_Loader
  */
 struct Game_Map_Data_Packet : public Game_Data_Packet {
-      Game_Map_Data_Packet() {m_mos = 0; m_mol = 0; m_wms = 0; m_wml = 0;}
-      virtual ~Game_Map_Data_Packet();
+	Game_Map_Data_Packet() : m_mos(0), m_mol(0), m_wms(0), m_wml(0) {}
+	virtual ~Game_Map_Data_Packet();
 
 
 	/// Ensures that the world gets loaded but does not much more.

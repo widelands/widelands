@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MAPSELECTMENUE_H
-#define __S__MAPSELECTMENUE_H
+#ifndef FULLSCREEN_MENU_MAPSELECT_H
+#define FULLSCREEN_MENU_MAPSELECT_H
 
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"

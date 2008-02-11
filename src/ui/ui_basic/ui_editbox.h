@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef included_ui_editbox_h
-#define included_ui_editbox_h
+#ifndef UI_EDITBOX_H
+#define UI_EDITBOX_H
 
 #include "ui_button.h"
 
@@ -32,15 +32,21 @@ editbox is unfocused, the keyboard released and
 a callback function is called
 */
 struct Edit_Box : private Basic_Button {
-     Edit_Box(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, uint32_t background, int32_t id);
-     virtual ~Edit_Box();
+	Edit_Box
+		(Panel *,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
+		 uint32_t background,
+		 int32_t id);
+	virtual ~Edit_Box();
 
-     Signal changed;
-     Signal1<int32_t> changedid;
+	Signal changed;
+	Signal1<int32_t> changedid;
 
 	const char* get_text() {return m_text.c_str();}
-     void set_text(const char* text) {m_lasttext=m_text=text; set_title(text);}
-     void set_maximum_chars(int32_t n) {m_maxchars=n;}
+	void set_text(char const * text) {
+		m_lasttext = m_text = text; set_title(text);
+	}
+	void set_maximum_chars(int32_t n) {m_maxchars=n;}
 	int32_t get_maximum_chars() const {return m_maxchars;}
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
@@ -48,17 +54,17 @@ struct Edit_Box : private Basic_Button {
 	bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool handle_key(bool down, SDL_keysym);
-     void handle_mousein(bool);
+	void handle_mousein(bool);
 
 protected:
 	void send_signal_clicked() const {};
 
 private:
-     bool m_keyboard_grabbed;
-     uint32_t m_maxchars;
-     std::string m_text, m_lasttext;
-     int32_t m_id;
+	bool                m_keyboard_grabbed;
+	uint32_t            m_maxchars;
+	std::string m_text, m_lasttext;
+	int32_t             m_id;
 };
 };
 
-#endif // included_ui_editbox_h
+#endif

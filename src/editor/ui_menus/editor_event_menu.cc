@@ -53,36 +53,44 @@ Editor_Event_Menu::Editor_Event_Menu
 :
 UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 {
-   const int32_t offsx=5;
-   const int32_t offsy=25;
-   const int32_t spacing=5;
-   int32_t posx=offsx;
-   int32_t posy=offsy;
-   const int32_t ls_width = 200;
+	int32_t const offsx    =   5;
+	int32_t const offsy    =  25;
+	int32_t const spacing  =   5;
+	int32_t       posx     = offsx;
+	int32_t       posy     = offsy;
+	int32_t const ls_width = 200;
 
-   // EventChain List
-   new UI::Textarea(this, posx, offsy, _("Event Chains: "), Align_Left);
-   m_eventchain_list=new UI::Listselect<Widelands::EventChain*>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
-   m_eventchain_list->selected.set(this, &Editor_Event_Menu::eventchain_list_selected);
-   m_eventchain_list->double_clicked.set(this, &Editor_Event_Menu::eventchain_double_clicked);
-   posx += ls_width + spacing;
+	new UI::Textarea(this, posx, offsy, _("Event Chains: "), Align_Left);
+	m_eventchain_list =
+		new UI::Listselect<Widelands::EventChain *>
+		(this, spacing, offsy + 20, ls_width, get_inner_h() - offsy - 55);
+	m_eventchain_list->selected.set
+		(this, &Editor_Event_Menu::eventchain_list_selected);
+	m_eventchain_list->double_clicked.set
+		(this, &Editor_Event_Menu::eventchain_double_clicked);
+	posx += ls_width + spacing;
 
-   // Event List
-   new UI::Textarea(this, posx, offsy, _("Registered Events: "), Align_Left);
-   m_event_list=new UI::Listselect<Widelands::Event*>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
-   m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
-   m_event_list->double_clicked.set(this, &Editor_Event_Menu::event_double_clicked);
-   posx += ls_width + spacing;
+	new UI::Textarea(this, posx, offsy, _("Registered Events: "), Align_Left);
+	m_event_list =
+		new UI::Listselect<Widelands::Event *>
+		(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
+	m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
+	m_event_list->double_clicked.set
+		(this, &Editor_Event_Menu::event_double_clicked);
+	posx += ls_width + spacing;
 
-   // Trigger List
-   new UI::Textarea(this, posx, offsy, _("Registered Triggers"), Align_Left);
-   m_trigger_list=new UI::Listselect<Widelands::Trigger*>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
-   m_trigger_list->selected.set(this, &Editor_Event_Menu::trigger_list_selected);
-   m_trigger_list->double_clicked.set(this, &Editor_Event_Menu::trigger_double_clicked);
-   posx += ls_width + spacing;
+	new UI::Textarea(this, posx, offsy, _("Registered Triggers"), Align_Left);
+	m_trigger_list =
+		new UI::Listselect<Widelands::Trigger *>
+		(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
+	m_trigger_list->selected.set
+		(this, &Editor_Event_Menu::trigger_list_selected);
+	m_trigger_list->double_clicked.set
+		(this, &Editor_Event_Menu::trigger_double_clicked);
+	posx += ls_width + spacing;
 
-   posy=get_inner_h()-30;
-   posx=spacing;
+	posy = get_inner_h() - 30;
+	posx = spacing;
 
 	new UI::Button<Editor_Event_Menu>
 		(this,
@@ -90,7 +98,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		 &Editor_Event_Menu::clicked_new_eventchain, this,
 		 _("New Event Chain"));
 
-   posx+=90+spacing;
+	posx += 90 + spacing;
 
 	m_btn_edit_eventchain = new UI::Button<Editor_Event_Menu>
 		(this,
@@ -101,7 +109,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		 std::string(),
 		 false);
 
-   posx+=50+spacing;
+	posx += 50 + spacing;
 
 	m_btn_del_eventchain = new UI::Button<Editor_Event_Menu>
 		(this,
@@ -112,7 +120,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		 std::string(),
 		 false);
 
-   posx=spacing + ls_width + spacing;
+	posx = spacing + ls_width + spacing;
 
 	new UI::Button<Editor_Event_Menu>
 		(this,
@@ -121,7 +129,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		 &Editor_Event_Menu::clicked_new_event, this,
 		 _("New Event"));
 
-   posx+=90+spacing;
+	posx += 90 + spacing;
 
 	m_btn_edit_event = new UI::Button<Editor_Event_Menu>
 		(this,
@@ -132,7 +140,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		 std::string(),
 		 false);
 
-   posx+=50+spacing;
+	posx += 50 + spacing;
 
 	m_btn_del_event = new UI::Button<Editor_Event_Menu>
 		(this,
@@ -144,7 +152,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		 false);
 
 
-   posx= 3* spacing + 2*ls_width;
+	posx = 3 * spacing + 2 * ls_width;
 
 	new UI::Button<Editor_Event_Menu>
 		(this,
@@ -153,7 +161,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		 &Editor_Event_Menu::clicked_new_trigger, this,
 		 _("New Trigger"));
 
-   posx+=90+spacing;
+	posx += 90 + spacing;
 
 	m_btn_edit_trigger = new UI::Button<Editor_Event_Menu>
 		(this,
@@ -164,7 +172,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		 std::string(),
 		 false);
 
-   posx+=50+spacing;
+	posx += 50 + spacing;
 
 	m_btn_del_trigger = new UI::Button<Editor_Event_Menu>
 		(this,
@@ -178,19 +186,15 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
 		center_to_parent();
-   update();
+	update();
 }
 
 /*
 ===============
-Editor_Event_Menu::~Editor_Event_Menu
-
 Unregister from the registry pointer
 ===============
 */
-Editor_Event_Menu::~Editor_Event_Menu()
-{
-}
+Editor_Event_Menu::~Editor_Event_Menu() {}
 
 /*
  * update all lists and stuff
@@ -211,7 +215,7 @@ void Editor_Event_Menu::update() {
 		}
 	}
 
-   m_event_list->clear();
+	m_event_list->clear();
 	{
 		Manager<Widelands::Event> & mem = map.mem();
 		Manager<Widelands::Event>::Index const nr_events = mem.size();
@@ -224,7 +228,7 @@ void Editor_Event_Menu::update() {
 		}
 	}
 
-   m_eventchain_list->clear();
+	m_eventchain_list->clear();
 	{
 		Manager<EventChain> & mcm = map.mcm();
 		Manager<EventChain>::Index const nr_eventchains = mcm.size();
@@ -235,25 +239,25 @@ void Editor_Event_Menu::update() {
 	}
 
 
-   m_trigger_list->sort();
-   m_event_list->sort();
+	m_trigger_list->sort();
+	m_event_list  ->sort();
 
 	if (not m_trigger_list->has_selection()) {
-      m_btn_del_trigger->set_enabled(false);
-      m_btn_edit_trigger->set_enabled(false);
+		m_btn_del_trigger ->set_enabled(false);
+		m_btn_edit_trigger->set_enabled(false);
 	}
 	if (not m_event_list->has_selection()) {
-      m_btn_del_event->set_enabled(false);
-      m_btn_edit_event->set_enabled(false);
+		m_btn_del_event ->set_enabled(false);
+		m_btn_edit_event->set_enabled(false);
 	}
 }
 
 
 void Editor_Event_Menu::clicked_new_event() {
-      // Create the event if needed
+	//  Create the event if needed.
 	Editor_Event_Menu_New_Event ntm(eia());
 	if (ntm.run()) {
-         update();
+		update();
 		eia().set_need_save(true);
 	}
 }
@@ -267,7 +271,7 @@ void Editor_Event_Menu::clicked_del_event() {
 		eia().egbase().map().mem().remove(event);
 		eia().unreference_player_tribe(0, &event);  // Remove all references done by this event
 		eia().set_need_save(true);
-      update();
+		update();
 	} else {
 		std::ostringstream s(_("Can't delete Event. It is in use by "));
 		Widelands::Event::Referencers::const_iterator
@@ -281,22 +285,21 @@ void Editor_Event_Menu::clicked_del_event() {
 		UI::Modal_Message_Box mmb
 			(&eia(), _("Error!"), s.str(), UI::Modal_Message_Box::OK);
 		mmb.run();
-         return;
+		return;
 	}
-
 }
 
 
 void Editor_Event_Menu::clicked_edit_event() {
 	m_event_list->get_selected()->option_menu(eia());
-      update();
+	update();
 }
 
 
 void Editor_Event_Menu::clicked_new_trigger() {
 	Editor_Event_Menu_New_Trigger ntm(eia());
 	if (ntm.run())  {
-         update();
+		update();
 		eia().set_need_save(true);
 	}
 }
@@ -310,7 +313,7 @@ void Editor_Event_Menu::clicked_del_trigger() {
 		eia().unreference_player_tribe(0, &trigger);  // Remove all references done by this trigger
 		eia().egbase().map().mtm().remove(trigger);
 		eia().set_need_save(true);
-      update();
+		update();
 	} else {
 		std::ostringstream s(_("Can't delete Trigger. It is in use by "));
 		Widelands::Trigger::Referencers::const_iterator const
@@ -331,7 +334,7 @@ void Editor_Event_Menu::clicked_del_trigger() {
 void Editor_Event_Menu::clicked_edit_trigger() {
 	m_trigger_list->get_selected()->option_menu(eia());
 	eia().set_need_save(true);
-      update();
+	update();
 }
 
 
@@ -342,8 +345,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 	if (menu.run()) { // TriggerConditional has been accepted
 		evch.set_trigcond(*menu.get_trigcond());
 
-         // Get the a name
-         char buffer[256];
+		char buffer[256];
 
 		Widelands::Map & map = eia().egbase().map();
 		for (uint32_t n = 1;; ++n) {
@@ -358,8 +360,9 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 		m_eventchain_list->sort();
 		clicked_edit_eventchain();
 	} else
-         // TriggerConditional was not accepted. Remove this EventChain straithly.
-         // No dereferencing of triggers is needed, since they are not referenced at all on cancel
+		//  TriggerConditional was not accepted. Remove this EventChain.
+		//  No dereferencing of triggers is needed, since they are not referenced
+		//  at all on cancel
 		delete &evch;
 }
 
@@ -368,9 +371,9 @@ void Editor_Event_Menu::clicked_del_eventchain() {
 	eia().egbase().map().mcm().remove
 		(m_eventchain_list->get_selected()->name());
 	m_eventchain_list->remove_selected();
-      m_btn_del_eventchain->set_enabled(false);
-      m_btn_edit_eventchain->set_enabled(false);
-      update();
+	m_btn_del_eventchain->set_enabled(false);
+	m_btn_edit_eventchain->set_enabled(false);
+	update();
 }
 
 
@@ -378,23 +381,23 @@ void Editor_Event_Menu::clicked_edit_eventchain() {
 	Editor_Event_Menu_Edit_EventChain menu
 		(eia(), *m_eventchain_list->get_selected());
 	menu.run();
-      update();
+	update();
 }
 
 /*
  * listbox was selected
  */
 void Editor_Event_Menu::trigger_list_selected(uint32_t) {
-   m_btn_del_trigger->set_enabled(true);
-   m_btn_edit_trigger->set_enabled(true);
+	m_btn_del_trigger ->set_enabled(true);
+	m_btn_edit_trigger->set_enabled(true);
 }
 void Editor_Event_Menu::event_list_selected(uint32_t) {
-   m_btn_del_event->set_enabled(true);
-   m_btn_edit_event->set_enabled(true);
+	m_btn_del_event ->set_enabled(true);
+	m_btn_edit_event->set_enabled(true);
 }
 void Editor_Event_Menu::eventchain_list_selected(uint32_t) {
-   m_btn_del_eventchain->set_enabled(true);
-   m_btn_edit_eventchain->set_enabled(true);
+	m_btn_del_eventchain ->set_enabled(true);
+	m_btn_edit_eventchain->set_enabled(true);
 }
 
 /*

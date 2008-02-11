@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_H
-#define __S__GAME_H
+#ifndef GAME_H
+#define GAME_H
 
 #include "cmd_queue.h"
 #include "editor_game_base.h"
@@ -221,4 +221,4 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 
 };
 
-#endif // __S__GAME_H
+#endif

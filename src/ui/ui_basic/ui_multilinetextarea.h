@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MULTILINE_TEXTAREA_H
-#define __S__MULTILINE_TEXTAREA_H
+#ifndef UI_MULTILINE_TEXTAREA_H
+#define UI_MULTILINE_TEXTAREA_H
 
 #include "ui_panel.h"
 #include "ui_scrollbar.h"
@@ -38,8 +38,8 @@ struct Scrollbar;
  */
 struct Multiline_Textarea : public Panel {
 	enum ScrollMode {
-         ScrollNormal = 0,    ///< (default) only explicit or forced scrolling
-         ScrollLog = 1,       ///< follow the bottom of the text
+		ScrollNormal = 0, ///< (default) only explicit or forced scrolling
+		ScrollLog = 1,    ///< follow the bottom of the text
 	};
 
 	Multiline_Textarea
@@ -48,15 +48,15 @@ struct Multiline_Textarea : public Panel {
 		 const std::string & text         = std::string(),
 		 const Align                      = Align_Left,
 		 const bool always_show_scrollbar = false);
-      ~Multiline_Textarea();
+	~Multiline_Textarea();
 
-      std::string get_text() const {return m_text;}
-      ScrollMode get_scrollmode() const {return m_scrollmode;}
+	std::string get_text() const {return m_text;}
+	ScrollMode get_scrollmode() const {return m_scrollmode;}
 
 	void set_text(const std::string &text);
-      void set_align(Align align);
-      void set_scrollpos(int32_t pixels);
-      void set_scrollmode(ScrollMode mode);
+	void set_align(Align align);
+	void set_scrollpos(int32_t pixels);
+	void set_scrollmode(ScrollMode mode);
 
 	uint32_t scrollbar_w() const throw () {return 24;}
 	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
@@ -78,9 +78,9 @@ struct Multiline_Textarea : public Panel {
 	RGBColor &    get_font_clr () {return m_fcolor;}
 
 private:
-	std::string  m_text;
-	Scrollbar    m_scrollbar;
-		ScrollMode     m_scrollmode;
+	std::string m_text;
+	Scrollbar   m_scrollbar;
+	ScrollMode  m_scrollmode;
 
 protected:
 	Align        m_align;
@@ -89,11 +89,11 @@ protected:
 	///set to Widget_Cache_Update if the whole textarea has to be rebuild
 	Widget_Cache m_cache_mode;
 
-		std::string    m_fontname;
-		int32_t            m_fontsize;
-		RGBColor       m_fcolor;
-		uint32_t m_textheight;  ///< total height of wrapped text, in pixels
-		uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
+	std::string  m_fontname;
+	int32_t  m_fontsize;
+	RGBColor m_fcolor;
+	uint32_t m_textheight;  ///< total height of wrapped text, in pixels
+	uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
 
 	int32_t get_m_textpos() const {return m_textpos;}
 	void draw_scrollbar();
@@ -101,4 +101,4 @@ protected:
 };
 };
 
-#endif // __S__MULTILINE_TEXTAREA_H
+#endif

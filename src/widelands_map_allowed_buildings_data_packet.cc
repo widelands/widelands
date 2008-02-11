@@ -45,9 +45,9 @@ void Map_Allowed_Buildings_Data_Packet::Read
 throw (_wexception)
 {
 	if (skip)
-      return;
+		return;
 
-   Profile prof;
+	Profile prof;
 	try {prof.read("allowed_buildings", 0, fs);} catch (...) {return;}
 	try {
 		int32_t const packet_version =
@@ -56,7 +56,7 @@ throw (_wexception)
 			Player_Number const nr_players = egbase->map().get_nrplayers();
 			upcast(Game const, game, egbase);
 
-      // Now read all players and buildings
+			//  Now read all players and buildings.
 			iterate_players_existing(p, nr_players, *egbase, player) {
 				Tribe_Descr const & tribe = player->tribe();
 				//  All building types default to false in the game (not in the
@@ -69,7 +69,7 @@ throw (_wexception)
 				try {
 					Section & s = *prof.get_safe_section(buffer);
 
-         // Write for all buildings if it is enabled
+					//  Write for all buildings if it is enabled.
 					bool allowed;
 					while (const char * const name = s.get_next_bool(0, &allowed)) {
 						if (Building_Index const index = tribe.building_index(name))
@@ -94,27 +94,26 @@ void Map_Allowed_Buildings_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   Profile prof;
+	Profile prof;
 	prof.create_section("global")
 		->set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	const Player_Number nr_players = egbase->map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, *egbase, player) {
 		const Tribe_Descr & tribe = player->tribe();
-			char buffer[10];
+		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
-			Section & section = *prof.create_section(buffer);
+		Section & section = *prof.create_section(buffer);
 
-      // Write for all buildings if it is enabled
-			const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
+		//  Write for all buildings if it is enabled.
+		Building_Descr::Index const nr_buildings = tribe.get_nrbuildings();
 		for (Building_Descr::Index b = 0; b < nr_buildings; ++b)
 			if (bool const allowed = player->is_building_allowed(b))
 				section.set_bool
 					(tribe.get_building_descr(b)->name().c_str(), true);
 	}
 
-   prof.write("allowed_buildings", false, fs);
-   // Done
+	prof.write("allowed_buildings", false, fs);
 }
 
 };

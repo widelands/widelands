@@ -16,8 +16,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-#ifndef __S__WIDELANDS_BATTLE__H__
-#define __S__WIDELANDS_BATTLE__H__
+#ifndef BATTLE_H
+#define BATTLE_H
 
 
 #include "immovable.h"

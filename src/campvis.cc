@@ -39,8 +39,7 @@ std::string Campaign_visiblity_save::get_path()
 	// Make sure ssave directory exists in any case.
 	g_fs->EnsureDirectoryExists(savepath);
 
-    // Now add the name of save-file
-	savepath += "/campvis";
+	savepath += "/campvis"; //  add the name of save-file
 
 	// check if campaigns visiblity-save is available
 	if (!(g_fs->FileExists(savepath))) {

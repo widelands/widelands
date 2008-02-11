@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__GAME_SERVER_PROTO_PACKET_H
-#define __S__GAME_SERVER_PROTO_PACKET_H
+#ifndef GAME_SERVER_PROTO_PACKET_H
+#define GAME_SERVER_PROTO_PACKET_H
 
 #include <stdint.h>
 
@@ -30,14 +30,14 @@ class Network_Buffer;
  * of a Game Server Protocoll packet
  */
 struct Game_Server_Protocol_Packet {
-      virtual ~Game_Server_Protocol_Packet() {}
+	virtual ~Game_Server_Protocol_Packet() {}
 
-      virtual uint16_t get_id() = 0;
+	virtual uint16_t get_id() = 0;
 
-	virtual void recv(Game_Server_Connection*, Network_Buffer *) = 0;
-	virtual void send(Network_Buffer *) = 0;
-      virtual void write_reply(Network_Buffer*) = 0;
-      virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) = 0;
+	virtual void recv         (Game_Server_Connection*, Network_Buffer *) = 0;
+	virtual void send                                  (Network_Buffer *) = 0;
+	virtual void write_reply                           (Network_Buffer *) = 0;
+	virtual void handle_reply(Game_Server_Connection *, Network_Buffer *) = 0;
 };
 
-#endif // __S__GAME_SERVER_PROTO_PACKET_H
+#endif

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_BOB_DATA_PACKET_H
-#define __S__WIDELANDS_MAP_BOB_DATA_PACKET_H
+#ifndef WIDELANDS_MAP_BOB_DATA_PACKET_H
+#define WIDELANDS_MAP_BOB_DATA_PACKET_H
 
 #include "widelands_fileread.h"
 #include "widelands_geometry.h"
