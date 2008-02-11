@@ -238,17 +238,16 @@ void Interactive_Base::think()
 	//  etc...)
 	g_gr->update_fullscreen();
 
-	// some of the UI windows need to think()
-	UI::Panel::think();
-
 	if (m_flag_to_connect) {
 		Widelands::Field & field = egbase().map()[m_flag_to_connect];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-			if (not flag->has_road())
+			if (not flag->has_road() and not m_buildroad)
 				start_build_road(m_flag_to_connect, field.get_owned_by());
 			m_flag_to_connect = Coords::Null();
 		}
 	}
+
+	UI::Panel::think(); //  some of the UI windows need to think()
 }
 
 
@@ -464,10 +463,10 @@ void Interactive_Base::start_build_road
 	assert(not m_buildroad);
 	m_buildroad = new CoordPath(_start);
 
-   m_road_build_player=player;
+	m_road_build_player = player;
 
    // If we are a game, we obviously build for the Interactive Player
-   assert
+	assert
 		(not dynamic_cast<const Game *>(&m_egbase)
 		 or
 		 player ==
