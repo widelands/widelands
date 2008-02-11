@@ -341,7 +341,6 @@ void World::parse_bobs()
  */
 bool World::exists_world(std::string worldname)
 {
-;
 	FileRead f;
 	return
 		f.TryOpen
