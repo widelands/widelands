@@ -86,7 +86,7 @@ private:
 
 	uint32_t   m_flags;
 
-	 ///max # of columns (or rows, depending on orientation) in the grid
+	/// max # of columns (or rows, depending on orientation) in the grid
 	int32_t m_columns;
 
 	///currently highlight (mouseover) icon idx (-1 = no highlight)

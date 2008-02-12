@@ -190,7 +190,7 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, W
 	  4,
 	  g_gr->get_picture(PicMod_Game, pic_cancel),
 	  &BulldozeConfirm::die, this))
-	 ->center_mouse();
+		->center_mouse();
 }
 
 
@@ -211,7 +211,7 @@ void BulldozeConfirm::think()
 	if
 		(!todestroy ||
 		 !building  ||
-	    !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+		 !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
 		die();
 }
 
@@ -825,7 +825,7 @@ void Building_Window::toggle_workarea() {
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(Workarea_Info::size_type i =
-				 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
+			 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
 			 i;
 			 ++it)
 		{
@@ -977,8 +977,8 @@ private:
 
 private:
 	WaresDisplay       * m_waresdisplay;
-   Interactive_Player*  m_parent;
-   int32_t                  m_curpage;
+	Interactive_Player * m_parent;
+	int32_t              m_curpage;
 };
 
 /*
@@ -1015,9 +1015,9 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
 		 &Warehouse_Window::clicked_help, this);
 
-   posx += button_w + spacing;
+	posx += button_w + spacing;
 
-   new UI::Button<Warehouse_Window>
+	new UI::Button<Warehouse_Window>
 		(this,
 		 posx, posy, button_w * 2 + spacing, 25,
 		 4,
@@ -1119,10 +1119,11 @@ ProductionSite UI IMPLEMENTATION
  * ProductionSite_Window_ListWorkerWindow
  */
 struct ProductionSite_Window_ListWorkerWindow : public UI::Window {
-      ProductionSite_Window_ListWorkerWindow(Interactive_Player*, ProductionSite* ps);
-      virtual ~ProductionSite_Window_ListWorkerWindow();
+	ProductionSite_Window_ListWorkerWindow
+		(Interactive_Player *, ProductionSite *);
+	virtual ~ProductionSite_Window_ListWorkerWindow();
 
-      virtual void think();
+	virtual void think();
 
 private:
 	void update();
@@ -1270,8 +1271,8 @@ struct PriorityButtonInfo {
 
 	PriorityButtonInfo
 		(UI::Basic_Button* btn, int32_t pic_enabled, int32_t pic_disabled)
-		: button(btn), picture_enabled(pic_enabled),
-		  picture_disabled(pic_disabled)
+		:
+		button(btn), picture_enabled(pic_enabled), picture_disabled(pic_disabled)
 	{}
 };
 
@@ -1302,7 +1303,7 @@ private:
 	UI::Window * * m_reg;
 	std::list<PriorityButtonHelper> m_priority_helpers;
 public:
-   void list_worker_clicked();
+	void list_worker_clicked();
 protected:
 	UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
 
@@ -1318,9 +1319,10 @@ protected:
 
 PriorityButtonHelper::PriorityButtonHelper
 (ProductionSite * ps, int32_t ware_type, int32_t ware_index)
-	: m_ps(ps),
-	  m_ware_type(ware_type),
-	  m_ware_index(ware_index)
+:
+m_ps        (ps),
+m_ware_type (ware_type),
+m_ware_index(ware_index)
 {}
 
 void PriorityButtonHelper::button_clicked (int32_t priority) {
@@ -1334,9 +1336,7 @@ void PriorityButtonHelper::update_buttons () {
 		bool enable = it->first != priority;
 		it->second.button->set_enabled(enable);
 		it->second.button->set_pic
-			(enable
-				? it->second.picture_enabled
-				: it->second.picture_disabled);
+			(enable ? it->second.picture_enabled : it->second.picture_disabled);
 	}
 }
 
@@ -1376,13 +1376,13 @@ UI::Basic_Button * ProductionSite_Window::create_priority_button
 		(g_gr->get_picture(PicMod_Game,  picture2),
 		 w, h, Graphic::ResizeMode_Clip);
 	UI::IDButton<PriorityButtonHelper, int32_t> * button =
-	 new UI::IDButton<PriorityButtonHelper, int32_t>
-	  (box,
-	   x, 0, w, h,
-	   4,
-	   pic_enabled,
-	   &PriorityButtonHelper::button_clicked, &helper, priority,
-	   button_tooltip, true, true);
+		new UI::IDButton<PriorityButtonHelper, int32_t>
+		(box,
+		 x, 0, w, h,
+		 4,
+		 pic_enabled,
+		 &PriorityButtonHelper::button_clicked, &helper, priority,
+		 button_tooltip, true, true);
 	helper[priority] = PriorityButtonInfo(button, pic_enabled, pic_disabled);
 	return button;
 }
@@ -1563,7 +1563,7 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 
 	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
-   // Soldiers view
+	//  soldiers view
 	m_table=new UI::Table<Soldier &>(box, 0, 0, 360, 200);
 	m_table->add_column(_("Name"),  100);
 	m_table->add_column(_("HP"),     40);
@@ -2017,7 +2017,7 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 {
 	UI::Box * sold_box = new UI::Box (panel, 0, 0, UI::Box::Vertical);
 
-      // Soldiers view
+	//  soldiers view
 	m_table = new UI::Table<Soldier &>(sold_box, 0, 0, 360, 200);
 	m_table->add_column(_("Name"),  100);
 	m_table->add_column(_("HP"),     40);
@@ -2025,10 +2025,10 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 	m_table->add_column(_("DE"),     40);
 	m_table->add_column(_("EV"),     40);
 	m_table->add_column(_("Level"), 100); // enough space for scrollbar
-   sold_box->add (m_table, Align_Left);
+	sold_box->add (m_table, Align_Left);
 
-      // Add drop soldier button
-   sold_box->add
+	//  add drop soldier button
+	sold_box->add
 		(new UI::Button<TrainingSite_Window>
 		 (sold_box,
 		  0, 0, 360, 32,
@@ -2037,9 +2037,9 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 		  &TrainingSite_Window::drop_button_clicked, this),
 		 Align_Left);
 
-      // Add TrainingSite Options and Capacity  buttons
-   UI::Box* box = new UI::Box (sold_box, 0, 0, UI::Box::Horizontal);
-   box->add
+	//  add TrainingSite options and capacity buttons
+	UI::Box * box = new UI::Box (sold_box, 0, 0, UI::Box::Horizontal);
+	box->add
 		(new UI::Button<TrainingSite_Window>
 		 (box,
 		  32, 0, 32, 32,
@@ -2048,8 +2048,7 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 		  &TrainingSite_Window::options_button_clicked, this),
 		 Align_Top);
 
-   box->add (new UI::Textarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
-      // Capacity buttons
+	box->add (new UI::Textarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
 	box->add
 		(new UI::Button<TrainingSite_Window>
 		 (box,
@@ -2181,7 +2180,7 @@ soldier from this training site.
 =============
 */
 void TrainingSite_Window::drop_button_clicked() {
-	 assert(*m_reg== this);
+	assert(*m_reg == this);
 	if
 		(m_table->selection_index()
 		 <

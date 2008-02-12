@@ -104,9 +104,8 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Main_Menu_New_Map::button_clicked, this, 3);
 
-   posy+=20+spacing+spacing;
+	posy += 20 + spacing + spacing;
 
-   // get all worlds
 	Widelands::World::get_all_worlds(&m_worlds);
 
 	assert(m_worlds.size());
@@ -119,14 +118,14 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 		 &Main_Menu_New_Map::button_clicked, this, 4,
 		 Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
 
-	posy+=height+spacing+spacing+spacing;
+	posy += height + spacing + spacing + spacing;
 
 	new UI::Button<Main_Menu_New_Map>
-		 (this,
-		  posx, posy, width, height,
-		  0,
-		  &Main_Menu_New_Map::clicked_create_map, this,
-		  _("Create Map"));
+		(this,
+		 posx, posy, width, height,
+		 0,
+		 &Main_Menu_New_Map::clicked_create_map, this,
+		 _("Create Map"));
 
 	posy += height + spacing;
 }

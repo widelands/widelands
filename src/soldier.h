@@ -142,7 +142,6 @@ public:
 	uint32_t get_max_evade_level  () const throw ()
 	{return descr().get_max_evade_level();}
 
-   // information functions
 	uint32_t get_current_hitpoints() const {return m_hp_current;}
 	uint32_t get_max_hitpoints    () const {return m_hp_max;}
 	uint32_t get_min_attack       () const {return m_min_attack;}
@@ -150,7 +149,6 @@ public:
 	uint32_t get_defense          () const {return m_defense;}
 	uint32_t get_evade            () const {return m_evade;}
 
-   // get pictures
 	uint32_t get_hp_level_pic     () const
 	{return descr().get_hp_level_pic     (m_hp_level);}
 	uint32_t get_attack_level_pic () const
@@ -160,15 +158,14 @@ public:
 	uint32_t get_evade_level_pic  () const
 	{return descr().get_evade_level_pic  (m_evade_level);}
 
-   /// Sets a random animation of desired type and start playing it
+	/// Sets a random animation of desired type and start playing it.
 	void start_animation
 		(Editor_Game_Base*, const char * const animname, const uint32_t time);
 
 	/// Heal quantity of hit points instantly
 	void heal (uint32_t);
 
-   /// Damage quantity of hit points
-	void damage (uint32_t);
+	void damage (uint32_t); /// Damage quantity of hit points
 
 	///  This are used to control Requests (only called by Warehouse)
 	bool is_marked () const throw () {return m_marked;}
@@ -208,7 +205,7 @@ private:
 
 	bool m_marked;
 
-   AttackController* m_attack_ctrl;
+	AttackController * m_attack_ctrl;
 };
 
 };

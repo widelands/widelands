@@ -338,8 +338,8 @@ bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
 	else if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		delete this; // is this 100% safe?
-			    // no, at least provide a flag for making a
-			    // window unclosable and provide a callback
+		//  FIXME No, at least provide a flag for making a window unclosable and
+		//  FIXME provide a callback.
 	}
 	return true;
 }
@@ -556,7 +556,7 @@ bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int3
 							dock_bottom();
 							new_top += BT_B_PIXMAP_THICKNESS;
 
-							 //  avoid jumping
+							//  avoid jumping
 							_drag_start_win_y += BT_B_PIXMAP_THICKNESS;
 						}
 					} else if (_docked_bottom) {

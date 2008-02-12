@@ -556,8 +556,8 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 		  m_player_area.radius));
 	m_trigger.m_building_type =
 		egbase.get_tribe
-		 (map.get_scenario_player_tribe(m_player_area.player_number).c_str())
-		 ->get_building_descr(m_building);
+		(map.get_scenario_player_tribe(m_player_area.player_number).c_str())
+		->get_building_descr(m_building);
 	m_trigger.m_count = m_count;
 	eia().set_need_save(true);
 	end_modal(1);

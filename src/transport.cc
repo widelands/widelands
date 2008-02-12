@@ -1920,7 +1920,6 @@ void Requeriments::Read
 void Requeriments::Write
 (FileWrite * fw, Editor_Game_Base *, Map_Map_Object_Saver *)
 {
-   // First, write version
 	fw->Unsigned16(REQUERIMENTS_VERSION);
 
 	// Hit Points
@@ -2016,7 +2015,7 @@ void Request::Read
 		m_required_interval = fr->Unsigned32();
 
 		if (version == REQUEST_VERSION)
-		  m_last_request_time = fr->Unsigned32();
+			m_last_request_time = fr->Unsigned32();
 
 		assert(!m_transfers.size());
 
@@ -3062,7 +3061,12 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 				return true;
 
 			if (wait)
-			  wait_cost = (current->m_item_filled + neighbour->m_item_filled) * neighbours[i].cost / 2;
+				wait_cost =
+				(current->m_item_filled + neighbour->m_item_filled)
+				*
+				neighbours[i].cost
+				/
+				2;
 			cost = current->mpf_realcost + neighbours[i].cost + wait_cost;
 
 			if (neighbour->mpf_cycle != mpf_cycle) {
@@ -3248,7 +3252,6 @@ void Economy::add_warehouse(Warehouse *wh)
 */
 void Economy::remove_warehouse(Warehouse *wh)
 {
-   //  fast remove
 	uint32_t i;
 	for (i = 0; i < m_warehouses.size(); ++i) {
 		if (m_warehouses[i] == wh) {
@@ -3909,7 +3912,6 @@ void Cmd_Call_Economy_Balance::Write
 
 	fw.Unsigned8 (m_player);
 
-   // Economy
 	const Player & player = egbase.player(m_player);
 	const bool has_eco = player.has_economy(m_economy);
 	fw.Unsigned8 (has_eco);

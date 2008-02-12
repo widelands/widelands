@@ -82,7 +82,7 @@ add a ware list to be displayed in this WaresDisplay
 void WaresDisplay::add_warelist
 (Widelands::WareList const * const wares, wdType const type)
 {
-   // If you register something twice, it is counted twice. Not my problem
+	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(wares);
 
 	int32_t rows, height;
@@ -151,7 +151,7 @@ void WaresDisplay::draw_ware
  uint32_t              const stock,
  bool                  const is_worker)
 {
-   // Draw a background
+	//  draw a background
 	const uint32_t picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
 	uint32_t w, h;
 	g_gr->get_picture_size(picid, w, h);

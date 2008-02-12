@@ -158,12 +158,15 @@ m_event   (event)
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_increase, this);
 
-   // Current Trigger
-   posy+=20+spacing;
-   new UI::Textarea(this, spacing, posy, 100, 20, _("Current: "), Align_CenterLeft);
-   m_current_trigger_ta=new UI::Textarea(this, spacing+15, posy+15+spacing, get_inner_w()/2, 20, _("No trigger selected!"), Align_CenterLeft);
+	posy += 20 + spacing;
+	new UI::Textarea
+		(this, spacing, posy, 100, 20, _("Current: "), Align_CenterLeft);
+	m_current_trigger_ta =
+		new UI::Textarea
+		(this,
+		 spacing + 15, posy + 15 + spacing, get_inner_w() / 2, 20,
+		 _("No trigger selected!"), Align_CenterLeft);
 
-   // Ok/Cancel Buttons
 	posx = get_inner_w() / 2 - 60 - spacing;
 	posy = get_inner_h()     - 30;
 	new UI::Button<Event_Message_Box_Option_Menu>

@@ -476,7 +476,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 			  m_soldiers[i]->get_level(atrDefense)
 			  >
 			  static_cast<uint32_t>(descr().get_max_level(atrDefense)))
-		    and
+			 and
 			 (descr().get_train_defense()))
 			++count;
 
@@ -810,9 +810,9 @@ void TrainingSite::change_soldier_capacity(int32_t how)
 			drop_soldier(m_soldiers[0]->get_serial());
 			break;
 		} else
-			throw
-			    wexception
-			    ("TrainingSite::change_soldier_capacity(): m_capacity<m_total_soldiers although m_total_soldiers==0");
+			throw wexception
+				("TrainingSite::change_soldier_capacity(): "
+				 "m_capacity<m_total_soldiers although m_total_soldiers = 0");
 	}
 
 	m_total_soldiers = m_soldiers.size() + m_soldier_requests.size();

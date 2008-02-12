@@ -451,11 +451,12 @@ bool Sound_Handler::play_or_not
 	//find out if an fx called fx_name is already running
 	bool already_running=false;
 	const std::map<uint32_t, std::string>::const_iterator active_fx_end =
-	   m_active_fx.end();
+		m_active_fx.end();
 	for
-	(std::map<uint32_t, std::string>::const_iterator it = m_active_fx.begin();
-	      it != active_fx_end;
-	      ++it)
+		(std::map<uint32_t, std::string>::const_iterator it =
+		 m_active_fx.begin();
+		 it != active_fx_end;
+		 ++it)
 	{
 		if (it->second == fx_name) {
 			already_running=true;

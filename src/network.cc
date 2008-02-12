@@ -677,7 +677,7 @@ NetClient::~NetClient ()
 	SDLNet_FreeSocketSet (sockset);
 
 	if (sock!=0)
-	    SDLNet_TCP_Close (sock);
+		SDLNet_TCP_Close (sock);
 }
 
 void NetClient::begin_game ()

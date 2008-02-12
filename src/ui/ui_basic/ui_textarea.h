@@ -74,9 +74,9 @@ private:
 	std::string m_text;
 	Align       m_align;
 	bool        m_multiline;
-   std::string    m_fontname;
-   int32_t            m_fontsize;
-   RGBColor       m_fcolor;
+	std::string m_fontname;
+	int32_t     m_fontsize;
+	RGBColor    m_fcolor;
 };
 };
 

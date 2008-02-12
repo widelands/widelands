@@ -211,12 +211,10 @@ void Editor_Event_Menu_Edit_EventChain::think()
 {if (m_edit_trigcond) clicked_edit_trigger_contitional();}
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
-      // Name
 	m_event_chain.set_name(m_name->get_text());
-      // Repeating
 	m_event_chain.set_repeating(m_morethanonce->get_state());
-      // Trigger Conditional is always updated
-      // Events
+	//  trigger conditional is always updated
+	//  events
 	m_event_chain.clear_events();
 	const uint32_t nr_events = m_events->size();
 	for (uint32_t i = 0; i < nr_events; ++i)

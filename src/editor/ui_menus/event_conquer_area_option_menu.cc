@@ -162,11 +162,12 @@ m_player_area(event.m_player_area)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Conquer_Area_Option_Menu::clicked, this, 14);
 
-   new UI::Textarea(this, spacing, posy+20, 20, 20, "Y: ", Align_CenterLeft);
-   m_y_ta=new UI::Textarea(this, spacing+20, posy+20, 20, 20, "Y: ", Align_CenterLeft);
-   spacing=oldspacing;
+	new UI::Textarea(this, spacing, posy+20, 20, 20, "Y: ", Align_CenterLeft);
+	m_y_ta =
+		new UI::Textarea
+		(this, spacing + 20, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
+	spacing = oldspacing;
 
-   // Player
 	posy += 60 + spacing;
 	new UI::Textarea
 		(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);

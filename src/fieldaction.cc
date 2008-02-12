@@ -178,9 +178,8 @@ struct FieldActionWindow : public UI::UniqueWindow {
 	void add_buttons_auto();
 	void add_buttons_build(int32_t buildcaps);
 	void add_buttons_road(bool flag);
-   void add_buttons_attack();
+	void add_buttons_attack();
 
-   // Action handlers
 	void act_watch();
 	void act_show_census();
 	void act_show_statistics();
@@ -226,10 +225,10 @@ private:
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
 	uint32_t workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 
-   /// Variables to use with attack dialog
-   UI::Textarea* m_text_attackers;
-   uint32_t     m_attackers;      // 0 - Number of available soldiers.
-   int32_t      m_attackers_type; // STRONGEST - WEAKEST ...
+	/// Variables to use with attack dialog.
+	UI::Textarea * m_text_attackers;
+	uint32_t       m_attackers;      //  0 - Number of available soldiers.
+	int32_t        m_attackers_type; //  STRONGEST - WEAKEST ...
 };
 
 static const char* const pic_tab_buildroad = "pics/menu_tab_buildroad.png";
@@ -848,7 +847,7 @@ void FieldActionWindow::building_icon_mouse_in(int32_t idx) {
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(Workarea_Info::size_type i =
-				 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
+			 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
 			 i;
 			 ++it)
 		{

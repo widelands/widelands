@@ -253,21 +253,21 @@ bool TriggerConditional_Binary::eval                (Game const & game) const {
  * The effective Trigger Conditionals
  */
 TriggerAND::TriggerAND(TriggerConditional & l, TriggerConditional & r)
-  : TriggerConditional_Binary(l, r)
+	: TriggerConditional_Binary(l, r)
 {}
 bool TriggerAND::do_eval(bool const t1, bool const t2) const {
 	return t1 && t2;
 }
 
 TriggerOR::TriggerOR (TriggerConditional & l, TriggerConditional & r)
-  : TriggerConditional_Binary(l, r)
+	: TriggerConditional_Binary(l, r)
 {}
 bool TriggerOR ::do_eval(bool const t1, bool const t2) const {
 	return t1 || t2;
 }
 
 TriggerXOR::TriggerXOR(TriggerConditional & l, TriggerConditional & r)
-  : TriggerConditional_Binary(l, r)
+	: TriggerConditional_Binary(l, r)
 {}
 bool TriggerXOR::do_eval(bool const t1, bool const t2) const {
 	return t1 && !t2 || !t1 && t2;

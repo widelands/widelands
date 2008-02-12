@@ -51,16 +51,15 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	label_campdescr  (this, 480, 305, _("Description:")),
 	tacampdescr      (this, 490, 330, 290, 190, ""),
 
-	// UI::Buttons
-	b_ok
-	(this, 490, 540, 142, 26, 2,
-	&Fullscreen_Menu_CampaignSelect::clicked_ok, this,
-	_("OK"), std::string(), false),
+b_ok
+(this, 490, 540, 142, 26, 2,
+ &Fullscreen_Menu_CampaignSelect::clicked_ok, this,
+ _("OK"), std::string(), false),
 
-	back
-	(this, 637, 540, 143, 26, 2,
-	&Fullscreen_Menu_CampaignSelect::end_modal, this, 0,
-	_("Back"))
+back
+(this, 637, 540, 143, 26, 2,
+ &Fullscreen_Menu_CampaignSelect::end_modal, this, 0,
+ _("Back"))
 
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
@@ -248,16 +247,15 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 	label_mapdescr  (this, 480, 305, _("Description:")),
 	tamapdescr      (this, 490, 330, 290, 190, ""),
 
-	// UI::Buttons
-	b_ok
-	(this, 490, 540, 142, 26, 2,
-	&Fullscreen_Menu_CampaignMapSelect::clicked_ok, this,
-	_("OK"), std::string(), false),
+b_ok
+(this, 490, 540, 142, 26, 2,
+ &Fullscreen_Menu_CampaignMapSelect::clicked_ok, this,
+ _("OK"), std::string(), false),
 
-	back
-	(this, 637, 540, 143, 26, 2,
-	&Fullscreen_Menu_CampaignMapSelect::end_modal, this, 0,
-	_("Back"))
+back
+(this, 637, 540, 143, 26, 2,
+ &Fullscreen_Menu_CampaignMapSelect::end_modal, this, 0,
+ _("Back"))
 
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);

@@ -109,7 +109,6 @@ m_allow_button
 	m_forbidden.selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
 	m_forbidden.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
 
-   // Fill the lists
 	Widelands::Tribe_Descr const & tribe = player.tribe();
 	const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
 	for (intptr_t i = 0; i < nr_buildings; ++i) {

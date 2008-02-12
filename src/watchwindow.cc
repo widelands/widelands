@@ -366,8 +366,7 @@ void WatchWindow::think()
 			(pos - Point(m_mapview.get_w() / 2, m_mapview.get_h() / 2));
 	}
 
-   // make sure that the view gets updated
-	m_mapview.need_complete_redraw();
+	m_mapview.need_complete_redraw(); //  make sure that the view gets updated
 }
 
 

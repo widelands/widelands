@@ -39,61 +39,55 @@ using Widelands::WL_Map_Loader;
 Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 (Widelands::Editor_Game_Base * g, Widelands::Map_Loader * * ml)
 :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
-	egbase(g),
+Fullscreen_Menu_Base("choosemapmenu.jpg"),
+egbase(g),
 
-	// Text
-	title(this, MENU_XRES / 2, 110, _("Choose your map!"), Align_HCenter),
+title(this, MENU_XRES / 2, 110, _("Choose your map!"), Align_HCenter),
 
-	// Checkbox
-	label_load_map_as_scenario
-	(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter),
-	load_map_as_scenario
-	(this,
-	label_load_map_as_scenario.get_x() + label_load_map_as_scenario.get_w() + 10,
-	170),
+label_load_map_as_scenario
+(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter),
+load_map_as_scenario
+(this,
+ label_load_map_as_scenario.get_x() + label_load_map_as_scenario.get_w() + 10,
+ 170),
 
+list(this, 15, 205, 455, 365),
 
-	// Create the list area
-	list(this, 15, 205, 455, 365),
+label_name    (this, 560, 205, _("Name:"),    Align_Right),
+taname        (this, 570, 205, ""),
+label_author  (this, 560, 225, _("Author:"),  Align_Right),
+taauthor      (this, 570, 225, ""),
+label_size    (this, 560, 245, _("Size:"),    Align_Right),
+tasize        (this, 570, 245, ""),
+label_world   (this, 560, 265, _("World:"),   Align_Right),
+taworld       (this, 570, 265, ""),
+label_nplayers(this, 560, 285, _("Players:"), Align_Right),
+tanplayers    (this, 570, 285, ""),
+label_descr   (this, 560, 305, _("Descr:"),   Align_Right),
+tadescr       (this, 570, 305, 200, 190, ""),
 
-	// Info fields
-	label_name    (this, 560, 205, _("Name:"),    Align_Right),
-	taname        (this, 570, 205, ""),
-	label_author  (this, 560, 225, _("Author:"),  Align_Right),
-	taauthor      (this, 570, 225, ""),
-	label_size    (this, 560, 245, _("Size:"),    Align_Right),
-	tasize        (this, 570, 245, ""),
-	label_world   (this, 560, 265, _("World:"),   Align_Right),
-	taworld       (this, 570, 265, ""),
-	label_nplayers(this, 560, 285, _("Players:"), Align_Right),
-	tanplayers    (this, 570, 285, ""),
-	label_descr   (this, 560, 305, _("Descr:"),   Align_Right),
-	tadescr       (this, 570, 305, 200, 190, ""),
+back
+(this,
+ 570, 505, 200, 26,
+ 0,
+ &Fullscreen_Menu_MapSelect::end_modal, this, 0,
+ _("Back")),
 
-	back
-	(this,
-	 570, 505, 200, 26,
-	 0,
-	 &Fullscreen_Menu_MapSelect::end_modal, this, 0,
-	 _("Back")),
+m_ok
+(this,
+ 570, 535, 200, 26,
+ 2,
+ &Fullscreen_Menu_MapSelect::ok, this,
+ _("OK"),
+ std::string(),
+ false),
 
-	m_ok
-	(this,
-	 570, 535, 200, 26,
-	 2,
-	 &Fullscreen_Menu_MapSelect::ok, this,
-	 _("OK"),
-	 std::string(),
-	 false),
+m_ml         (ml),
+m_map        (new Widelands::Map),
+m_is_scenario(false),
 
-	m_ml         (ml),
-	m_map        (new Widelands::Map),
-	m_is_scenario(false),
-
-	m_curdir ("maps"),
-	m_basedir("maps")
-
+m_curdir ("maps"),
+m_basedir("maps")
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	load_map_as_scenario.changedto.set

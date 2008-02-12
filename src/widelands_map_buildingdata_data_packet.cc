@@ -568,7 +568,6 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 	} else
 		fw.Unsigned32(0);
 
-   // ware queues
 	const uint16_t wares_size = constructionsite.m_wares.size();
 	fw.Unsigned16(wares_size);
 	for (uint16_t i = 0; i < wares_size; ++i)
@@ -608,7 +607,6 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	}
 	fw.Unsigned8(0);
 
-   // Request
 	const uint16_t requests_size = warehouse.m_requests.size();
 	fw.Unsigned16(requests_size);
 	for (uint16_t i = 0; i < warehouse.m_requests.size(); ++i)
@@ -633,9 +631,10 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	}
 
 	for
-		(std::map<uint32_t, const Worker *>::const_iterator it = workermap.begin();
+		(std::map<uint32_t, const Worker *>::const_iterator it =
+		 workermap.begin();
 		 it != workermap.end();
-		++it)
+		 ++it)
 	{
 		assert(os->is_object_known(it->second));
 		fw.Unsigned32(os->get_object_file_index(it->second));
@@ -652,13 +651,9 @@ void Map_Buildingdata_Data_Packet::write_militarysite
  Editor_Game_Base* egbase,
  Map_Map_Object_Saver * const os)
 {
-   // Write the version
-   fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
+	write_productionsite(militarysite, fw, egbase, os);
 
-   // Write for productionsite
-   write_productionsite(militarysite, fw, egbase, os);
-
-   // Request
 	const uint16_t soldier_requests_size =
 		militarysite.m_soldier_requests.size();
 	fw.Unsigned16(soldier_requests_size);
@@ -673,10 +668,7 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 		fw.Unsigned32(os->get_object_file_index(militarysite.m_soldiers[i]));
 	}
 
-   // did conquer
 	fw.Unsigned8(militarysite.m_didconquer);
-
-	// capacity
 	fw.Unsigned8(militarysite.m_capacity);
 }
 
@@ -687,11 +679,8 @@ void Map_Buildingdata_Data_Packet::write_productionsite
  Editor_Game_Base* egbase,
  Map_Map_Object_Saver * const os)
 {
-   // Write the version
-   fw.Unsigned16(CURRENT_PRODUCTIONSITE_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PRODUCTIONSITE_PACKET_VERSION);
 
-
-   // Requests
 	const uint16_t worker_requests_size =
 		productionsite.m_worker_requests.size();
 	fw.Unsigned16(worker_requests_size);
@@ -706,10 +695,9 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		fw.Unsigned32(os->get_object_file_index(productionsite.m_workers[i]));
 	}
 
-   // Items from flag
-   fw.Signed32(productionsite.m_fetchfromflag);
+	fw.Signed32(productionsite.m_fetchfromflag);
 
-   // State
+	//  state
 	const uint16_t program_size = productionsite.m_program.size();
 	fw.Unsigned16(program_size);
 	for (uint16_t i = 0; i < program_size; ++i) {
@@ -718,16 +706,14 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		fw.  Signed32(productionsite.m_program[i].phase);
 		fw.Unsigned32(productionsite.m_program[i].flags);
 	}
-   fw.Unsigned8(productionsite.m_program_timer);
-   fw.Signed32(productionsite.m_program_time);
+	fw.Unsigned8(productionsite.m_program_timer);
+	fw. Signed32(productionsite.m_program_time);
 
-   // Wares Queues
 	const uint16_t input_queues_size = productionsite.m_input_queues.size();
 	fw.Unsigned16(input_queues_size);
 	for (uint16_t i = 0; i < input_queues_size; ++i)
-      productionsite.m_input_queues[i]->Write(&fw, egbase, os);
+		productionsite.m_input_queues[i]->Write(&fw, egbase, os);
 
-   // Statistics
 	const uint16_t statistics_size = productionsite.m_statistics.size();
 	fw.Unsigned16(statistics_size);
 	for (uint32_t i = 0; i < statistics_size; ++i)

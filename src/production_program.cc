@@ -335,7 +335,7 @@ void ProductionProgram::parse
 			char* endp;
 			how_many = strtol(cmd[2].c_str(), &endp, 0);
 			if (endp && *endp)
-			  throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 
 			act.iparam1 = how_many;
 

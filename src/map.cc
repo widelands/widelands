@@ -386,7 +386,8 @@ void Map::cleanup() {
 
 	mvm().remove_all();
 
-   // Remove all extra datas. Pay attention here, maybe some freeing would be needed
+	//  Remove all extra datas. Pay attention here, maybe some freeing would be
+	//  needed.
 #ifdef DEBUG
 	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
 		assert(m_extradatainfos[i].type == Extradata_Info::PIC) ;
@@ -1020,10 +1021,10 @@ above recalc_brightness.
 */
 void Map::recalc_fieldcaps_pass1(FCoords f)
 {
-   uint8_t caps = CAPS_NONE;
+	uint8_t caps = CAPS_NONE;
 
 
-   // 1a) Get all the neighbours to make life easier
+	// 1a) Get all the neighbours to make life easier
 	const FCoords  r =  r_n(f);
 	const FCoords tr = tr_n(f);
 	const FCoords tl = tl_n(f);
@@ -1038,7 +1039,7 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 	uint8_t const  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
 	uint8_t const  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
 
-   // 1b) Collect some information about the neighbours
+	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unpassable = 0;
 	uint8_t cnt_water = 0;
 	uint8_t cnt_acid = 0;
@@ -2085,7 +2086,7 @@ uint32_t Map::change_height(Area<FCoords> area, int16_t const difference) {
 		do {
 			if
 				(difference < 0
-			    and
+				 and
 				 mr.location().field->height
 				 <
 				 static_cast<uint8_t>(-difference))

@@ -351,10 +351,6 @@ struct Map {
 	int32_t change_terrain
 		(const TCoords<FCoords>, const Terrain_Descr::Index terrain);
 
-   /*
-    * Get the a manager for registering or removing
-    * something
-    */
 	Manager<Variable>   const & mvm() const {return m_mvm;}
 	Manager<Variable>         & mvm()       {return m_mvm;}
 	Manager<Trigger>    const & mtm() const {return m_mtm;}
@@ -431,7 +427,7 @@ private:
 // FindImmovable functor
 struct FindImmovableSize : public FindImmovable {
 	FindImmovableSize(int32_t min, int32_t max) : m_min(min), m_max(max) {}
-   virtual ~FindImmovableSize() {}  // make gcc shut up
+	virtual ~FindImmovableSize() {} //  make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
 
@@ -439,7 +435,7 @@ struct FindImmovableSize : public FindImmovable {
 };
 struct FindImmovableType : public FindImmovable {
 	FindImmovableType(int32_t type) : m_type(type) {}
-   virtual ~FindImmovableType() {}  // make gcc shut up
+	virtual ~FindImmovableType() {} //  make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
 
@@ -447,7 +443,7 @@ struct FindImmovableType : public FindImmovable {
 };
 struct FindImmovableAttribute : public FindImmovable {
 	FindImmovableAttribute(uint32_t attrib) : m_attrib(attrib) {}
-   virtual ~FindImmovableAttribute() {}  // make gcc shut up
+	virtual ~FindImmovableAttribute() {} //  make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
 
@@ -455,14 +451,14 @@ struct FindImmovableAttribute : public FindImmovable {
 };
 struct FindImmovablePlayerImmovable : public FindImmovable {
 	FindImmovablePlayerImmovable() {}
-   virtual ~FindImmovablePlayerImmovable() {}  // make gcc shut up
+	virtual ~FindImmovablePlayerImmovable() {} //  make gcc shut up
 
 	virtual bool accept(BaseImmovable* imm) const;
 };
 
 struct FindNodeCaps : public FindNode {
 	FindNodeCaps(uint8_t mincaps) : m_mincaps(mincaps) {}
-   virtual ~FindNodeCaps() {}  // make gcc shut up
+	virtual ~FindNodeCaps() {} //  make gcc shut up
 
 	virtual bool accept(Map const &, FCoords) const;
 
@@ -499,7 +495,7 @@ struct FindNodeSize : public FindNode {
 	};
 
 	FindNodeSize(Size size) : m_size(size) {}
-   virtual ~FindNodeSize() {}  // make gcc shut up
+	virtual ~FindNodeSize() {} //  make gcc shut up
 
 	virtual bool accept(Map const &, FCoords) const;
 
@@ -509,12 +505,14 @@ struct FindNodeSize : public FindNode {
 // Accepts a field for a certain size if it has
 // a valid resource and amount on it
 struct FindNodeSizeResource : public FindNodeSize {
-   FindNodeSizeResource(Size size, int32_t res) : FindNodeSize(size) {m_res=res;}
-   virtual ~FindNodeSizeResource() {}  // make gcc shut up
+	FindNodeSizeResource(Size size, int32_t res)
+		: FindNodeSize(size), m_res(res)
+	{}
+	virtual ~FindNodeSizeResource() {} //  make gcc shut up
 
-   virtual bool accept(Map const &, FCoords) const;
+	virtual bool accept(Map const &, FCoords) const;
 
-   int32_t m_res;
+	int32_t m_res;
 };
 
 // Accepts fields based on the size of immovables on the field
@@ -527,7 +525,7 @@ struct FindNodeImmovableSize : public FindNode {
 	};
 
 	FindNodeImmovableSize(uint32_t sizes) : m_sizes(sizes) {}
-   virtual ~FindNodeImmovableSize() {}  // make gcc shut up
+	virtual ~FindNodeImmovableSize() {} //  make gcc shut up
 
 	virtual bool accept(Map const &, FCoords) const;
 
@@ -537,7 +535,7 @@ struct FindNodeImmovableSize : public FindNode {
 // Accepts a field if it has an immovable with a given attribute
 struct FindNodeImmovableAttribute : public FindNode {
 	FindNodeImmovableAttribute(uint32_t attrib) : m_attribute(attrib) {}
-   virtual ~FindNodeImmovableAttribute() {}  // make gcc shut up
+	virtual ~FindNodeImmovableAttribute() {} //  make gcc shut up
 
 	virtual bool accept(Map const &, FCoords) const;
 
@@ -548,7 +546,7 @@ struct FindNodeImmovableAttribute : public FindNode {
 // Accepts a field if it has the given resource
 struct FindNodeResource : public FindNode {
 	FindNodeResource(uint8_t res) : m_resource(res) {}
-   virtual ~FindNodeResource() {}  // make gcc shut up
+	virtual ~FindNodeResource() {}  //  make gcc shut up
 
 	virtual bool accept(Map const &, FCoords) const;
 

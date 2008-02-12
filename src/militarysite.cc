@@ -274,9 +274,9 @@ Issue the soldier request
 ===============
 */
 void MilitarySite::request_soldier() {
-   int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
+	int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
-   // TODO: This should be user-configurable through windows options (still nothing is done to support this)
+	//  TODO this should be user-configurable
 	Requeriments & r = *new Requeriments();
 	r = m_soldier_requeriments;
 

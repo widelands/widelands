@@ -64,12 +64,10 @@ void Map_Heights_Data_Packet::Write
  Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // Now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Now, all heights as uint8_ts in order
 	Map & map = egbase->map();
 	Map_Index const max_index = map.max_index();
 	for (Map_Index i = 0; i < max_index; ++i)

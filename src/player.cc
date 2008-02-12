@@ -745,12 +745,8 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
  * Gain an immovable
  */
 void Player::gain_immovable(PlayerImmovable* imm) {
-	if
-	(const Building * const building =
-		dynamic_cast<const Building *>(imm))
-	{
-		const ConstructionSite * const constructionsite =
-			dynamic_cast<const ConstructionSite *>(building);
+	if (upcast(Building const, building, imm)) {
+		upcast(ConstructionSite const, constructionsite, building);
 		const std::string & building_name =
 			constructionsite ?
 			constructionsite->building().name() : building->name();
@@ -776,12 +772,8 @@ void Player::gain_immovable(PlayerImmovable* imm) {
  */
 void Player::lose_immovable(PlayerImmovable* imm)
 {
-	if
-	(const Building * const building =
-		dynamic_cast<const Building *>(imm))
-	{
-		const ConstructionSite * const constructionsite =
-			dynamic_cast<const ConstructionSite *>(building);
+	if (upcast(Building const, building, imm)) {
+		upcast(ConstructionSite const, constructionsite, building);
 		const std::string & building_name =
 			constructionsite ?
 			constructionsite->building().name() : building->name();

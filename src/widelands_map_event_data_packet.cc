@@ -101,7 +101,6 @@ throw (_wexception)
 	prof.create_section("global")->set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-   // Now write all the events
 	Manager<Event> const & mem = egbase->map().mem();
 	Manager<Event>::Index const nr_events = mem.size();
 	for (Manager<Event>::Index i = 0; i < nr_events; ++i) {

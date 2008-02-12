@@ -88,7 +88,6 @@ throw (_wexception)
 	prof.create_section("global")->set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-   // Write all the objectives out
 	Manager<Objective> const & mom = egbase->map().mom();
 	Manager<Objective>::Index const nr_objectives = mom.size();
 	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i) {

@@ -349,11 +349,10 @@ void Building_Statistics_Menu::table_changed(uint32_t) {update();}
  * Update table
  */
 void Building_Statistics_Menu::update() {
-   m_owned->set_text("");
-   m_build->set_text("");
-   m_progbar->set_state(0);
+	m_owned  ->set_text("");
+	m_build  ->set_text("");
+	m_progbar->set_state(0);
 
-   // List all buildings
 	Widelands::Tribe_Descr const & tribe = m_parent->player().tribe();
 	Widelands::Map         const & map   = m_parent->get_game()->map();
 	for (Widelands::Building_Descr::Index i = 0; i < tribe.get_nrbuildings(); ++i) {

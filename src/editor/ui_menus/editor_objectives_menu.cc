@@ -138,8 +138,7 @@ bool Edit_Objective_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
  * a button has been clicked
  */
 void Edit_Objective_Window::clicked_ok() {
-   // Extract value
-	Objective & obj = UI::Table<Objective &>::get(m_te);
+	Objective & obj = UI::Table<Objective &>::get(m_te); //  extract value
 
 	obj.set_name(m_name->get_text());
 	obj.set_is_visible(m_visibleAtBegin->get_state());
@@ -167,17 +166,15 @@ UI::UniqueWindow(parent, registry, 410, 330, _("Objectives Menu")),
 m_parent(parent),
 m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 {
-
 	m_table.add_column(_("Name"),    270);
 	m_table.add_column(_("Optional"), 70);
 	m_table.add_column(_("Visible"),  60);
 	m_table.selected.set(this, &Editor_Objectives_Menu::table_selected);
 	m_table.double_clicked.set(this, &Editor_Objectives_Menu::table_dblclicked);
 
-   // Buttons
-   int32_t posx=spacing;
+	int32_t posx = spacing;
 
-   new UI::Button<Editor_Objectives_Menu>
+	new UI::Button<Editor_Objectives_Menu>
 		(this,
 		 spacing, get_inner_h() - 30, 60, 20,
 		 0,
@@ -206,14 +203,15 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 		 std::string(),
 		 false);
 
-   posx += 60 + spacing;
+	posx += 60 + spacing;
 
-   // Trigger name
-   new UI::Textarea(this, posx, get_inner_h() - 30, 80, 20, _("Trigger: "), Align_CenterLeft);
-   posx += 45 + spacing;
-   m_trigger = new UI::Textarea(this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
+	new UI::Textarea
+		(this, posx, get_inner_h() - 30, 80, 20, _("Trigger: "), Align_CenterLeft);
+	posx += 45 + spacing;
+	m_trigger =
+		new UI::Textarea
+		(this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
 
-   // Add all variables
 	Manager<Objective> & mom = m_parent->egbase().map().mom();
 	Manager<Objective>::Index const nr_objectives = mom.size();
 	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i)
@@ -255,7 +253,7 @@ void Editor_Objectives_Menu::clicked_new() {
 	objective.set_trigger(&trigger);
 	mtm.register_new(trigger);
 	insert_objective(objective);
-	   clicked_edit();// Fallthrough to edit
+	clicked_edit(); //  fallthrough to edit
 }
 
 void Editor_Objectives_Menu::clicked_edit() {
@@ -300,10 +298,10 @@ void Editor_Objectives_Menu::clicked_del() {
  * The table has been selected
  */
 void Editor_Objectives_Menu::table_selected(uint32_t n) {
-   m_edit_button->set_enabled(true);
-   m_delete_button->set_enabled(true);
+	m_edit_button->set_enabled(true);
+	m_delete_button->set_enabled(true);
 
-   // Baad stuff will happen, if trigger got deleted
+	//  Baad stuff will happen, if trigger got deleted.
 	m_trigger->set_text(m_table[n].get_trigger()->name());
 }
 

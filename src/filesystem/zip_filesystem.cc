@@ -65,11 +65,11 @@ bool ZipFilesystem::IsWritable() const {
  */
 int32_t ZipFilesystem::FindFiles
 (std::string const & path_in,
- std::string const &
 #ifndef NDEBUG
- pattern
+ std::string const & pattern,
+#else
+ std::string const &,
 #endif
-,
  filenameset_t     * const results,
  uint32_t)
 {
@@ -305,7 +305,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	unzOpenCurrentFile(m_unzipfile);
 	while
 		(const size_t len =
-		  unzReadCurrentFile(m_unzipfile, buffer, sizeof(buffer)))
+		 unzReadCurrentFile(m_unzipfile, buffer, sizeof(buffer)))
 		totallen += len;
 	unzCloseCurrentFile(m_unzipfile);
 

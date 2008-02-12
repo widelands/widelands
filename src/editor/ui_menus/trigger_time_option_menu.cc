@@ -140,9 +140,9 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 7);
 
-   posx+=width+spacing/2;
+	posx += width + spacing / 2;
 
-   // minutes second cipher
+	//  minutes second cipher
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -162,12 +162,12 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 9);
 
-   posx+=width+spacing;
+	posx += width + spacing;
 
-   // two points
-   tt=new UI::Textarea(this, posx, posy+23, ":", Align_Left);
-   posx+=spacing+tt->get_w();
-   // seconds, first cipher
+	tt = new UI::Textarea(this, posx, posy+23, ":", Align_Left);
+
+	posx += spacing + tt->get_w();
+	// seconds, first cipher
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -187,8 +187,8 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 11);
 
-   posx+=width+spacing/2;
-   // seconds, second cipher
+	posx += width + spacing / 2;
+	//  seconds, second cipher
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,

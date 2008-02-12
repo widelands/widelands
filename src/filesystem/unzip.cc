@@ -420,27 +420,27 @@ extern unzFile ZEXPORT unzOpen2 (const char* path, zlib_filefunc_def* pzlib_file
 	if
 		(ZSEEK
 		 (us.z_filefunc, us.filestream, central_pos, ZLIB_FILEFUNC_SEEK_SET))
-        err=UNZ_ERRNO;
+		err = UNZ_ERRNO;
 
-    /* the signature, already checked */
+	//  the signature, already checked
 	if (unzlocal_getLong(&us.z_filefunc, us.filestream, &uL) != UNZ_OK)
-        err=UNZ_ERRNO;
+		err = UNZ_ERRNO;
 
-    /* number of this disk */
+	//  number of this disk
 	if
 		(unzlocal_getShort(&us.z_filefunc, us.filestream, &number_disk)
 		 !=
 		 UNZ_OK)
-        err=UNZ_ERRNO;
+		err = UNZ_ERRNO;
 
-    /* number of the disk with the start of the central directory */
+	//  number of the disk with the start of the central directory
 	if
 		(unzlocal_getShort(&us.z_filefunc, us.filestream, &number_disk_with_CD)
 		 !=
 		 UNZ_OK)
-        err=UNZ_ERRNO;
+		err = UNZ_ERRNO;
 
-    /* total number of entries in the central dir on this disk */
+	//  total number of entries in the central dir on this disk
 	if
 		(unzlocal_getShort(&us.z_filefunc, us.filestream, &us.gi.number_entry)
 		 !=
@@ -461,22 +461,22 @@ extern unzFile ZEXPORT unzOpen2 (const char* path, zlib_filefunc_def* pzlib_file
 		 number_disk != 0)
 		err = UNZ_BADZIPFILE;
 
-    /* size of the central directory */
+	//  size of the central directory
 	if
 		(unzlocal_getLong(&us.z_filefunc, us.filestream, &us.size_central_dir)
 		 !=
 		 UNZ_OK)
-        err=UNZ_ERRNO;
+		err = UNZ_ERRNO;
 
-    /* offset of start of central directory with respect to the
-          starting disk number */
+	//  offset of start of central directory with respect to the starting disk
+	//  number
 	if
 		(unzlocal_getLong(&us.z_filefunc, us.filestream, &us.offset_central_dir)
 		 !=
 		 UNZ_OK)
-        err=UNZ_ERRNO;
+		err = UNZ_ERRNO;
 
-    /* zipfile comment length */
+	//  zipfile comment length
 	if
 		(unzlocal_getShort(&us.z_filefunc, us.filestream, &us.gi.size_comment)
 		 !=
@@ -596,10 +596,10 @@ local int32_t unzlocal_GetCurrentFileInfoInternal
 		 (s->z_filefunc, s->filestream,
 		  s->pos_in_central_dir + s->byte_before_the_zipfile,
 		  ZLIB_FILEFUNC_SEEK_SET))
-        err=UNZ_ERRNO;
+		err = UNZ_ERRNO;
 
 
-    /* we check the magic */
+	//  we check the magic
 	if (err == UNZ_OK)
 		if (unzlocal_getLong(&s->z_filefunc, s->filestream, &uMagic) != UNZ_OK)
 			err = UNZ_ERRNO;
@@ -873,11 +873,10 @@ extern int32_t ZEXPORT unzGoToNextFile (unzFile file)
 */
 extern int32_t ZEXPORT unzLocateFile (unzFile file, const char* szFileName, int32_t iCaseSensitivity)
 {
-    int32_t err;
+	int32_t err;
 
-    /* We remember the 'current' position in the file so that we can jump
-     * back there if we fail.
-     */
+	//  We remember the 'current' position in the file so that we can jump back
+	//  there if we fail.
 	unz_file_info cur_file_infoSaved;
 	unz_file_info_internal cur_file_info_internalSaved;
 	uLong num_fileSaved;
@@ -892,9 +891,9 @@ extern int32_t ZEXPORT unzLocateFile (unzFile file, const char* szFileName, int3
 
 	unz_s * const s = static_cast<unz_s *>(file);
 	if (!s->current_file_ok)
-        return UNZ_END_OF_LIST_OF_FILE;
+		return UNZ_END_OF_LIST_OF_FILE;
 
-    /* Save the current state */
+	//  save the current state
 	num_fileSaved               = s->num_file;
 	pos_in_central_dirSaved     = s->pos_in_central_dir;
 	cur_file_infoSaved          = s->cur_file_info;
@@ -1630,7 +1629,7 @@ extern int32_t ZEXPORT unzSetOffset (unzFile file, uLong pos)
 #  include <stdlib.h>
 #endif
 #ifdef NO_ERRNO_H
-    extern int32_t errno;
+extern int32_t errno;
 #else
 #   include <errno.h>
 #endif
@@ -1687,7 +1686,8 @@ extern int32_t ZEXPORT unzSetOffset (unzFile file, uLong pos)
 #endif
 #endif
 const char zip_copyright[] =
-   " zip 1.01 Copyright 1998-2004 Gilles Vollant - http://www.winimage.com/zLibDll";
+" zip 1.01 Copyright 1998-2004 Gilles Vollant - "
+"http://www.winimage.com/zLibDll";
 
 
 #define SIZEDATA_INDATABLOCK (4096-(4*4))
@@ -2093,7 +2093,7 @@ extern zipFile ZEXPORT zipOpen2
 		return NULL;
 	}
 
-    /* now we add file in a zipfile */
+	//  now we add file in a zipfile
 #    ifndef NO_ADDFILEINEXISTINGZIP
 	if (append == APPEND_STATUS_ADDINZIP) {
 		uLong byte_before_the_zipfile;/* byte before the zipfile, (>0 for sfx)*/
@@ -2356,7 +2356,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 		(zi->ci.central_header +  0,
 		 static_cast<uLong>(CENTRALHEADERMAGIC),
 		 4);
-    /* version info */
+	// version info
 	ziplocal_putValue_inmemory
 		(zi->ci.central_header +  4,
 		 static_cast<uLong>(VERSIONMADEBY),
@@ -2702,7 +2702,7 @@ extern int32_t ZEXPORT zipCloseFileInZipRaw (zipFile file, uLong uncompressed_si
 	}
 
 	if (err == Z_STREAM_END)
-        err=ZIP_OK; /* this is normal */
+		err = ZIP_OK; //  this is normal
 
 	if (zi->ci.pos_in_buffered_data > 0 && err == ZIP_OK)
 		if (zipFlushWriteBuffer(zi) == ZIP_ERRNO)
@@ -2841,7 +2841,7 @@ extern int32_t ZEXPORT zipClose (zipFile file, const char* global_comment)
 			 static_cast<uLong>(zi->number_entry),
 			 2);
 
-	 //  total number of entries in the central dir
+	//  total number of entries in the central dir
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue

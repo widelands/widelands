@@ -534,7 +534,6 @@ struct Request : public Trackable {
 	void start_transfer(Game *g, Supply* supp, int32_t ware);
 
 
-   // For savegames
 	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
 	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
 	Worker * get_transfer_worker();
@@ -614,7 +613,6 @@ struct WaresQueue {
 
 	Player * get_owner() const throw () {return m_owner->get_owner();}
 
-   // For savegames
 	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
 	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
 
@@ -690,20 +688,18 @@ struct Economy {
 		return m_request_timer && (gametime == m_request_timer_time);
 	}
 
-   // Informations over this economy
-	int32_t stock_ware(Ware_Index const i) {
+	int32_t stock_ware(Ware_Index const i) { /// informations over this economy
 		return m_wares  .stock(i.value());
 	}
 	int32_t stock_worker(Ware_Index const i) {
 		return m_workers.stock(i.value());
 	}
-   const WareList& get_wares() {return m_wares;}
-   const WareList& get_workers() {return m_workers;}
+	WareList const & get_wares  () {return m_wares;}
+	WareList const & get_workers() {return m_workers;}
 
-   // Called by cmd queue
-   void balance_requestsupply();
+	void balance_requestsupply(); ///  called by cmd queue
 
-   void rebalance_supply() {start_request_timer();}
+	void rebalance_supply() {start_request_timer();}
 
 private:
 	void do_remove_flag(Flag *f);
@@ -746,7 +742,7 @@ private:
 };
 
 struct Cmd_Call_Economy_Balance : public GameLogicCommand {
-      Cmd_Call_Economy_Balance () : GameLogicCommand (0) {} // For load and save
+	Cmd_Call_Economy_Balance () : GameLogicCommand (0) {} //  for load and save
 
 	Cmd_Call_Economy_Balance
 		(int32_t       const starttime,

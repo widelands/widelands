@@ -585,7 +585,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 		static_cast<uint32_t>
 		((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
 	if (static_cast<int32_t>(amount) < res->get_max_amount())
-      bestmatch+=1; // Resi start with 1, not 0
+		bestmatch += 1; // Resi start with 1, not 0
 
 	snprintf
 		(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), bestmatch);

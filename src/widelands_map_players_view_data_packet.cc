@@ -213,7 +213,7 @@ throw (_wexception)
 						const Map_Object_Descr * map_object_descr;
 						if
 							(const BaseImmovable * base_immovable =
-							f.field->get_immovable())
+							 f.field->get_immovable())
 						{
 							map_object_descr = &base_immovable->descr();
 							if (map_object_descr == &g_road_descr)
@@ -425,8 +425,8 @@ throw (_wexception)
 							 "\"%s\":%i & 0xf: node (%i, %i): Player thinks that "
 							 "this node is owned by player %u, but there are only %u "
 							 "players",
-						 plnum, owners_filename, owners_file.GetPos() - 1, f.x, f.y,
-						 owner, nr_players);
+							 plnum, owners_filename, owners_file.GetPos() - 1,
+							 f.x, f.y, owner, nr_players);
 
 					f_player_field.map_object_descr[TCoords<>::None] =
 						read_unseen_immovable
@@ -645,7 +645,7 @@ throw (_wexception)
 
 inline static void write_unseen_immovable
 (const Map_Object_Descr * const map_object_descr,
-  BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
+ BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
 {
 	assert(map_object_descr != &g_road_descr);
 	uint8_t immovable_kind;

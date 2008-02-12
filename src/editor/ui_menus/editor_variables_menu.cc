@@ -157,7 +157,7 @@ UI::Window(&parent, 0, 0, 250, 85, _("Edit Variable")),
 m_parent(parent),
 m_te(te),
 
-   // What type
+//  what type
 m_label_name(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft),
 m_name(this, 120, 5, 120, 20, 0, 0),
 
@@ -261,7 +261,7 @@ m_button_new
  &Editor_Variables_Menu::clicked_new, this,
  _("New")),
 
- m_button_edit
+m_button_edit
 (this,
  get_inner_w() / 2 - 60, get_inner_h() - 30, 120, 20,
  0,
@@ -278,15 +278,12 @@ m_button_del
  _("Delete"),
  std::string(),
  false)
-
 {
-
 	m_table.add_column(_("Variable"), 300);
 	m_table.add_column(_("Value"),    100);
-   m_table.selected.set(this, &Editor_Variables_Menu::table_selected);
-   m_table.double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
+	m_table.selected.set(this, &Editor_Variables_Menu::table_selected);
+	m_table.double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
 
-   // Add all variables
 	Manager<Variable> & mvm = m_parent.egbase().map().mvm();
 	Manager<Variable>::Index const nr_variables = mvm.size();
 	for (Manager<Variable>::Index i = 0; i < nr_variables; ++i)
@@ -321,7 +318,7 @@ void Editor_Variables_Menu::clicked_edit() {
 	if (evw.run()) m_table.sort();
 }
 void Editor_Variables_Menu::clicked_del()      {
-         // Otherwise, delete button should be disabled
+	//  Otherwise, delete button should be disabled.
 	assert(not m_table.get_selected().is_delete_protected());
 
 	m_parent.egbase().map().mvm().remove(m_table.get_selected());

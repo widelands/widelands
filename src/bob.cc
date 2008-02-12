@@ -928,8 +928,10 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 		spos.y += end.field->get_height() * HEIGHT_FACTOR;
 		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
-		float f = static_cast<float>(game.get_gametime() - m_walkstart) /
-		          (m_walkend - m_walkstart);
+		float f =
+			static_cast<float>(game.get_gametime() - m_walkstart)
+			/
+			(m_walkend - m_walkstart);
 
 		if (f < 0)
 			f = 0;

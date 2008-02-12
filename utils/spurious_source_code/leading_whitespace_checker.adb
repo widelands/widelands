@@ -61,28 +61,29 @@ procedure Leading_Whitespace_Checker is
       end loop;
    end Read_Macro;
 
+   --  Returns the depth parentheses increase (should be negative).
    function Read_Code return Integer;
    function Read_Code return Integer is
-      Number_Of_Open_Parentheses : Integer   := 0;
+      Depth_Parentheses_Increase : Integer := 0;
    begin
       Read_Code_Loop : loop
          case Current_Character is
-            when LF     =>
+            when LF        =>
                exit Read_Code_Loop;
-            when '('    =>
-               Number_Of_Open_Parentheses := Number_Of_Open_Parentheses + 1;
-            when ')'    =>
-               Number_Of_Open_Parentheses := Number_Of_Open_Parentheses - 1;
-            when '''    =>
+            when '(' | '[' =>
+               Depth_Parentheses_Increase := Depth_Parentheses_Increase + 1;
+            when ')' | ']' =>
+               Depth_Parentheses_Increase := Depth_Parentheses_Increase - 1;
+            when '''       =>
                Next_Character;
                case Current_Character is
-                  when LF     =>
+                  when LF  =>
                      Put_Error ("unterminated character constant");
                      exit Read_Code_Loop;
-                  when '''    =>
+                  when ''' =>
                      Raise_Exception
                        (Syntax_Error'Identity, "invalid character constant");
-                  when '\'    =>
+                  when '\' =>
                      Next_Character;
                      if Current_Character = LF then
                         Put_Error
@@ -99,14 +100,14 @@ procedure Leading_Whitespace_Checker is
                     (Syntax_Error'Identity,
                      "expected closing '\'' of character constant");
                end if;
-            when '"'    =>
+            when '"'       =>
                loop
                   Next_Character;
                   case Current_Character is
-                     when LF     =>
+                     when LF  =>
                         Put_Error ("unterminated string constant");
                         exit Read_Code_Loop;
-                     when '\'    =>
+                     when '\' =>
                         Next_Character;
                         if Current_Character = LF then
                            Put_Error
@@ -118,34 +119,31 @@ procedure Leading_Whitespace_Checker is
                         exit when Current_Character = '"';
                   end case;
                end loop;
-            when '*'    =>
+            when '*'       =>
                if Previous_Character = '/' then --  /* comment */
                   Read_Multiline_Comment;
                end if;
-            when '/'    =>
+            when '/'       =>
                if Previous_Character = '/' then --  // comment
                   loop
                      Next_Character;
                      exit Read_Code_Loop when Current_Character = LF;
                   end loop;
                end if;
-            when others =>
+            when others    =>
                null;
          end case;
          Next_Character;
       end loop Read_Code_Loop;
-      if 0 < Number_Of_Open_Parentheses then
-         Put_Error ("parenthesis not closed before end of line");
-      end if;
-      return Number_Of_Open_Parentheses;
+      return Depth_Parentheses_Increase;
    end Read_Code;
 
    Allowed_Indentation_Increase : Integer := 0;
    Previous_Depth_Indentation   : Natural := 0;
-   Previous_Depth_Padding       : Natural := 0;
    Depth_Indentation            : Natural := 0;
    Depth_Padding                : Natural := 0;
    Depth_Parentheses            : Natural := 0;
+   Parentheses_At_Line_Begin    : Natural := 0;
    Next_Character_Is_Read       : Boolean := False;
 begin
    Open (The_File, In_File, Argument (1));
@@ -155,19 +153,19 @@ begin
       end if;
       Next_Character_Is_Read := False;
       case Current_Character is
-         when LF     =>
+         when LF        =>
             Next_Line;
-            Depth_Padding := 0;
-         when '#'    =>
+         when '#'       =>
             Read_Macro;
-         when HT     =>
-            Depth_Indentation := Depth_Indentation + 1;
-         when ' '    =>
-            Depth_Padding     := Depth_Padding     + 1;
-         when '('    =>
-            Depth_Parentheses := Depth_Parentheses + 1;
+            Depth_Padding := 0;
+         when HT        =>
+            Depth_Indentation         := Depth_Indentation         + 1;
+         when ' '       =>
+            Depth_Padding             := Depth_Padding             + 1;
+         when '(' | '[' =>
+            Parentheses_At_Line_Begin := Parentheses_At_Line_Begin + 1;
             Allowed_Indentation_Increase := 2; --  hack for Nicolai's style
-         when others =>
+         when others    =>
             case Current_Character is
                when '}'                   =>
                   --  Must read the next character already so that we can see
@@ -189,24 +187,14 @@ begin
                      Allowed_Indentation_Increase := -1;
                   end if;
                when ')' | ';' =>
-                  --  Must allow "()" (empty parameter list) and "(;" for
-                  --  statement without loop variable declaration.
+                  --  Must allow "()" (empty parameter list) and "(;" (for
+                  --  statement without loop variable declaration).
                   if Previous_Character /= '(' then
                      Put_Error
                        ("illegal '" & Current_Character &
                         "' at beginning of line");
                   end if;
-               when ',' =>
-                  --  Must allow ',' at the beginning of a line, for
-                  --  situations like:
-                  --  some_member(0)
-                  --  #ifnded NDEBUG
-                  --  , member_that_is_initialized_in_debug_builds_only(0)
-                  --  #endif
-                  if Previous_Character /= LF then
-                     Put_Error ("illegal ',' at beginning of line");
-                  end if;
-               when ']' =>
+               when ']' | ',' =>
                   Put_Error
                     ("illegal '" & Current_Character &
                      "' at beginning of line");
@@ -215,41 +203,57 @@ begin
             end case;
 
 --            Put_Line
---              ("DEBUG: line number =" & Line_Number'Img &
---               ", Previous_Depth_Indentation =" &
---               Previous_Depth_Indentation'Img &
---               ", allowed indentation increase =" &
---               Allowed_Indentation_Increase'Img);
+--              ("DEBUG: line number ="  & Line_Number      'Img &
+--               ", Depth_Padding ="     & Depth_Padding    'Img &
+--               ", Depth_Parentheses =" & Depth_Parentheses'Img);
 
             if
+              0 < Depth_Parentheses
+              and then
+              Depth_Indentation /= Previous_Depth_Indentation
+            then
+               Put_Error
+                 ("wrong indentation level:" & Depth_Indentation'Img &
+                  " (should be" & Previous_Depth_Indentation'Img & ')');
+            elsif
               Previous_Depth_Indentation + Allowed_Indentation_Increase
               <
               Depth_Indentation
             then
                Put_Error ("indentation is too deep");
             end if;
-
-            if Previous_Depth_Padding < Depth_Padding then
-               Put_Error
-                 ("too much padding before the first non-whitespace " &
-                  "character:" & Depth_Padding'Img);
-            end if;
-
             Previous_Depth_Indentation   := Depth_Indentation;
             Depth_Indentation            := 0;
+
+            if Depth_Padding /= Depth_Parentheses then
+               Put_Error
+                 ("wrong amount of leading padding:" & Depth_Padding'Img &
+                  " (should be" & Depth_Parentheses'Img & ')');
+            end if;
+            Depth_Parentheses := Depth_Parentheses + Parentheses_At_Line_Begin;
+            Parentheses_At_Line_Begin := 0;
             declare
-               Integer_Previous_Depth_Padding : constant Integer :=
-                 Depth_Padding + Depth_Parentheses + Read_Code;
+               Depth_Parentheses_Increase_After_Line_Begin : constant Integer
+                 := Read_Code;
+               New_Depth_Parentheses : constant Integer :=
+                 Depth_Parentheses +
+                 Depth_Parentheses_Increase_After_Line_Begin;
             begin
-               if Integer_Previous_Depth_Padding < 0 then
+               pragma Assert (Current_Character = LF);
+               if 0 < Depth_Parentheses_Increase_After_Line_Begin then
                   Put_Error
-                    ("closing parenthesis without sufficient padding");
-                  Previous_Depth_Padding := 0;
+                    ("parenthesis not closed before end of line must be at " &
+                     "line begin");
+               end if;
+               if New_Depth_Parentheses < 0 then
+                  Put_Error ("unmatched parenthesis");
+                  Depth_Parentheses := 0;
                else
-                  Previous_Depth_Padding := Integer_Previous_Depth_Padding;
+                  Depth_Parentheses := New_Depth_Parentheses;
                end if;
             end;
-            pragma Assert (Current_Character = LF);
+            Depth_Padding := 0;
+
             case Previous_Character is
                when ',' | ';' | '}' =>
                   Allowed_Indentation_Increase :=  0;
@@ -267,5 +271,5 @@ exception
    when Error : Syntax_Error        =>
       Put_Error (Exception_Message (Error));
    when others =>
-      Put_Error ("INTERNAL ERROR: " & Argument (1) & Line_Number'Img);
+      Put_Error ("INTERNAL ERROR: " & Argument (1) &':' & Line_Number'Img);
 end Leading_Whitespace_Checker;

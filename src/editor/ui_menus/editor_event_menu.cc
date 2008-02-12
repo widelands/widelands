@@ -339,7 +339,7 @@ void Editor_Event_Menu::clicked_edit_trigger() {
 
 
 void Editor_Event_Menu::clicked_new_eventchain() {
-      // First, create new TriggerConditional
+	//  First, create new TriggerConditional.
 	Widelands::EventChain & evch = *new Widelands::EventChain("");
 	Editor_Event_Menu_Edit_TriggerConditional menu(eia(), 0, &evch);
 	if (menu.run()) { // TriggerConditional has been accepted

@@ -197,11 +197,11 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 			}
 	}
 
-   // Print the maximal value
-   sprintf(buffer, "%i", max);
-   int32_t w, h;
-   g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
-   g_fh->draw_string
+	//  print the maximal value
+	sprintf(buffer, "%i", max);
+	int32_t w, h;
+	g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
+	g_fh->draw_string
 		(*dst,
 		 UI_FONT_SMALL,
 		 RGBColor(120, 255, 0), RGBColor(255, 255, 255),
@@ -209,7 +209,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 		 buffer, Align_CenterLeft, -1,
 		 Widget_Cache_None, 0, -1, false);
 
-   // Now, plot the pixels
+	//  plot the pixels
 	sub =
 		xline_length
 		/
@@ -287,8 +287,8 @@ void WUIPlot_Area::register_plot_data(uint32_t id, const std::vector<uint32_t>* 
  * Show this plot data?
  */
 void WUIPlot_Area::show_plot(uint32_t id, bool t) {
-   assert(id < m_plotdata.size());
-   m_plotdata[id].showplot = t;
+	assert(id < m_plotdata.size());
+	m_plotdata[id].showplot = t;
 };
 
 /*

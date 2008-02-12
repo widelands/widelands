@@ -124,7 +124,7 @@ void Editor_Player_Menu::update() {
 		m_nr_of_players_ta->set_text(text);
 	}
 
-   // Now remove all the unneeded stuff
+	//  Now remove all the unneeded stuff.
 	for (Widelands::Player_Number i = nr_players; i < MAX_PLAYERS; ++i) {
 		delete m_plr_names          [i]; m_plr_names          [i] = 0;
 		delete m_plr_set_pos_buts   [i]; m_plr_set_pos_buts   [i] = 0;
@@ -134,8 +134,6 @@ void Editor_Player_Menu::update() {
 	int32_t const spacing =  5;
 	int32_t const size    = 20;
 
-
-   // And recreate the needed
 	iterate_player_numbers(p, nr_players) {
 		int32_t posx = spacing;
 		if (!m_plr_names[p - 1]) {
@@ -267,7 +265,6 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
-   // Tribe button has been clicked
 	if (not parent.is_player_tribe_referenced(n + 1)) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
 		if (!Widelands::Tribe_Descr::exists_tribe(t))
@@ -301,14 +298,14 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
-   // jump to the current field
+	//  jump to the current node
 	Widelands::Map & map =parent.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
 		parent.move_view_to(sp);
 
-   // If the player is already created in the editor, this means
-   // that there might be already a hq placed somewhere. This needs to be
-   // deleted before a starting position change can occure
+	//  If the player is already created in the editor, this means that there
+	//  might be already a hq placed somewhere. This needs to be deleted before
+	//  a starting position change can occur.
 	if (parent.egbase().get_player(n))
 		if (const Widelands::Coords sp = map.get_starting_pos(n))
 			if
@@ -316,11 +313,11 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 				 (map[sp].get_immovable()))
 				return;
 
-   // Select tool set mplayer
+	//  select tool set mplayer
 	parent.select_tool(parent.tools.set_starting_pos, Editor_Tool::First);
 	parent.tools.set_starting_pos.set_current_player(n);
 
-   // Reselect tool, so everything is in a defined state
+	//  reselect tool, so everything is in a defined state
 	parent.select_tool(parent.tools.current(), Editor_Tool::First);
 
 	//  Register callback function to make sure that only valid locations are

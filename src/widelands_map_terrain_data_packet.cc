@@ -86,15 +86,12 @@ void Map_Terrain_Data_Packet::Write
 throw (_wexception)
 {
 
-   FileWrite fw;
+	FileWrite fw;
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // This is a bit more complicated saved so that the order of loading
-   // of the terrains at run time doens't matter.
-   // This is slow like hell.
-   // Write the number of terrains
+	//  This is a bit more complicated saved so that the order of loading of the
+	//  terrains at run time doens't matter. This is slow like hell.
 	const Map & map = egbase->map();
 	const World & world = map.world();
 	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();
@@ -108,7 +105,6 @@ throw (_wexception)
 		fw.CString(name);
 	}
 
-   // Now, all terrains as uint8_ts in order
 	Map_Index const max_index = map.max_index();
 	for (Map_Index i = 0; i < max_index; ++i) {
 		Field & f = map[i];

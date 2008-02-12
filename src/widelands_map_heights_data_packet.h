@@ -34,7 +34,7 @@ struct Map_Heights_Data_Packet : public Map_Data_Packet {
 		 const bool,
 		 Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	 void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
+	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
 };
 

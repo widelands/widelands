@@ -90,13 +90,12 @@ void Map_Flag_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Write flags and owner, register this with the map_object_saver so that
-   // it's data can be saved later.
+	//  Write flags and owner, register this with the map_object_saver so that
+	//  it's data can be saved later.
 	Map   const & map        = egbase->map();
 	Field const & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field)

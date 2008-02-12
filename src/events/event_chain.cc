@@ -170,12 +170,8 @@ void Cmd_CheckEventChain::Read
 void Cmd_CheckEventChain::Write
 (FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
-   // First, write version
 	fw.Unsigned16(CMD_CHECK_EVENTCHAIN_VERSION);
-	// Write base classes
 	GameLogicCommand::Write(fw, egbase, mos);
-
-   // Now eventchain id
 	fw.Unsigned16(m_eventchain_id);
 }
 

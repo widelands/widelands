@@ -493,7 +493,6 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 
 	m_map = new_map;
 
-   // Register map_variable callback
 	g_fh->register_variable_callback(g_VariableCallback, m_map);
 }
 
@@ -734,7 +733,7 @@ void Editor_Game_Base::register_attack_controller(AttackController* ctrl)
 	assert
 		(std::find
 		 (m_attack_serials.begin(), m_attack_serials.end(), ctrl->get_serial())
-			==
+		 ==
 		 m_attack_serials.end());
 
 	m_attack_serials.push_back(ctrl->get_serial());
@@ -811,10 +810,9 @@ void Editor_Game_Base::remove_trackpointer(uint32_t serial)
  * make this object ready to load new data
  */
 void Editor_Game_Base::cleanup_for_load
-		(const bool flush_graphics, const bool flush_animations)
+	(bool const flush_graphics, bool const flush_animations)
 {
-   // Clean all the stuff up, so we can load
-	cleanup_objects();
+	cleanup_objects(); /// Clean all the stuff up, so we can load.
 
 	m_battle_serials.clear();
 	m_attack_serials.clear();

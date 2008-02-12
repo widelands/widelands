@@ -358,7 +358,7 @@ Ware_Statistics_Menu::Ware_Statistics_Menu
 UI::UniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
-	 // First, we must decide about the size
+	//  First, we must decide about the size.
 	const int32_t nr_wares = parent.get_player()->tribe().get_nrwares();
 	uint32_t wares_per_row = MIN_WARES_PER_LINE;
 	while (nr_wares % wares_per_row && wares_per_row <= MAX_WARES_PER_LINE)

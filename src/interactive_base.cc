@@ -224,9 +224,7 @@ void Interactive_Base::think()
 			set_rel_viewpoint(Point (scrollval, 0));
 	}
 
-   // Call game logic here
-   // The game advances
-	egbase().think();
+	egbase().think(); // Call game logic here. The game advances.
 
 	//  Update everything so and so many milliseconds, to make sure that the
 	//  whole screen is synced (another user may have done something, and the
@@ -285,9 +283,9 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 		//  show FPS
 		char buffer[100];
 		snprintf
-		   (buffer, sizeof(buffer),
-		    "%5.1f fps (avg: %5.1f fps)",
-		    1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
+			(buffer, sizeof(buffer),
+			 "%5.1f fps (avg: %5.1f fps)",
+			 1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
 		g_fh->draw_string
 			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(85, 5), buffer, Align_Left);
 	}
@@ -465,7 +463,7 @@ void Interactive_Base::start_build_road
 
 	m_road_build_player = player;
 
-   // If we are a game, we obviously build for the Interactive Player
+	//  If we are a game, we obviously build for the Interactive Player.
 	assert
 		(not dynamic_cast<const Game *>(&m_egbase)
 		 or
@@ -750,7 +748,7 @@ void Interactive_Base::roadb_remove_overlay()
 
 	//log("Remove overlay\n");
 
-   // preview of the road
+	//  preview of the road
 	Overlay_Manager & overlay_manager = egbase().map().overlay_manager();
 	if (m_jobid) overlay_manager.remove_road_overlay(m_jobid);
 	m_jobid = Overlay_Manager::Job_Id::Null();

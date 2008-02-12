@@ -97,7 +97,7 @@ Interactive_Base(e), m_egbase(e)
 		 &Editor_Interactive::toggle_minimap, this,
 		 _("Minimap"));
 
-   new UI::Button<Editor_Interactive>
+	new UI::Button<Editor_Interactive>
 		(this,
 		 x + 136, y, 34, 34,
 		 2,
@@ -113,7 +113,7 @@ Interactive_Base(e), m_egbase(e)
 		 &Editor_Interactive::toggle_playermenu, this,
 		 _("Players"));
 
-   new UI::Button<Editor_Interactive>
+	new UI::Button<Editor_Interactive>
 		(this,
 		 x + 204, y, 34, 34,
 		 2,
@@ -121,7 +121,7 @@ Interactive_Base(e), m_egbase(e)
 		 &Editor_Interactive::toggle_eventmenu, this,
 		 _("Events"));
 
-   new UI::Button<Editor_Interactive>
+	new UI::Button<Editor_Interactive>
 		(this,
 		 x + 238, y, 34, 34,
 		 2,

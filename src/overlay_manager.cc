@@ -32,7 +32,7 @@ m_callback(0)
 #ifndef NDEBUG
 //  No need to initialize (see comment for get_a_job_id) other than to shut up
 //  Valgrind.
-,
+/**/,
 m_current_job_id(Job_Id::Null())
 #endif
 {}
@@ -183,9 +183,9 @@ void Overlay_Manager::register_overlay
 		(std::pair<Widelands::Coords const, Registered_Overlays>
 		 (c, Registered_Overlays(jobid, picid, hotspot, level)));
 
-   // Now manually sort, so that they are ordered
-   //  * first by c (done by std::multimap)
-   //  * second by levels (done manually here)
+	//  Now manually sort, so that they are ordered
+	//    * first by c (done by std::multimap)
+	//    * second by levels (done manually here)
 
 	// there is at least one registered
 	Registered_Overlays_Map::iterator it = overlay_map.lower_bound(c), jt;

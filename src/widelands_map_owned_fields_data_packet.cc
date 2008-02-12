@@ -58,12 +58,10 @@ void Map_Owned_Fields_Data_Packet::Write
 (FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // Now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Now, all owned_fields as uint8_ts in order
 	Map & map = egbase->map();
 	Map_Index const max_index = map.max_index();
 	for (Map_Index i = 0; i < max_index; ++i)

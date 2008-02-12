@@ -206,9 +206,9 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 void RenderTarget::clear()
 {
 	if
-	(not m_rect.x and not m_rect.y
-		and
-		m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
+		(not m_rect.x and not m_rect.y
+		 and
+		 m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
 		m_surface->clear();
 	else m_surface->fill_rect(m_rect, RGBColor(0, 0, 0));
 }
@@ -1198,8 +1198,8 @@ void RenderTarget::drawanimrect
 	// Get the frame and its data
 	Surface * const frame = g_gr->get_animation(animation)->get_frame
 			((time / data->frametime) % g_gr->nr_frames(animation),
-			  player ? player->get_player_number() : 0,
-			  player);
+			 player ? player->get_player_number() : 0,
+			 player);
 
 	dst -= g_gr->get_animation(animation)->get_hotspot();
 

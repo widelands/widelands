@@ -65,7 +65,7 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 1,
 		 &Main_Menu_Save_Map_Make_Directory::end_modal, this, 0,
-	  _("Cancel"));
+		 _("Cancel"));
 
 	center_to_parent();
 }

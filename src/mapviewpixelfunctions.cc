@@ -286,7 +286,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 						TCoords<>
 						(Coords
 						 ((right_col == 0 ? mapwidth : right_col) - 1,
-						 next_row_number),
+						  next_row_number),
 						 TCoords<>::R);
 				}
 			}

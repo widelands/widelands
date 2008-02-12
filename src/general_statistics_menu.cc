@@ -135,7 +135,6 @@ m_parent(&parent) //  FIXME redundant (base already stores parent pointer)
 	posx = spacing;
 	posy += 25 + spacing + spacing;
 
-   // Below, Radiobuttons for what to display
 	m_radiogroup = new UI::Radiogroup();
 	button_size = (get_inner_w() - spacing * 8) / 7;
 	m_radiogroup->add_button

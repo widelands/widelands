@@ -408,10 +408,10 @@ void Computer_Player::think ()
 
 		// try to connect to another economy
 		if (economies.size() > 1)
-		    finish=connect_flag_to_another_economy(eco->flags.front());
+			finish = connect_flag_to_another_economy(eco->flags.front());
 
 		if (!finish)
-		    finish=improve_roads(eco->flags.front());
+			finish = improve_roads(eco->flags.front());
 
 		// cycle through flags one at a time
 		eco->flags.push_back (eco->flags.front());
@@ -422,7 +422,7 @@ void Computer_Player::think ()
 		economies.pop_front();
 
 		if (finish)
-		    return;
+			return;
 	}
 #endif
 
@@ -534,10 +534,10 @@ bool Computer_Player::construct_building ()
 
 			if (j->type==BuildingObserver::PRODUCTIONSITE) {
 				if (j->need_trees)
-				    prio+=bf->trees_nearby - 6*bf->tree_consumers_nearby - 2;
+					prio += bf->trees_nearby - 6*bf->tree_consumers_nearby - 2;
 
 				if (j->need_stones)
-				    prio+=bf->stones_nearby - 6*bf->stone_consumers_nearby - 2;
+					prio += bf->stones_nearby - 6*bf->stone_consumers_nearby - 2;
 
 				if
 					((j->need_trees || j->need_stones)
@@ -545,7 +545,7 @@ bool Computer_Player::construct_building ()
 					 j->cnt_built == 0
 					 &&
 					 j->cnt_under_construction == 0)
-				    prio*=2;
+					prio *= 2;
 
 				if (!j->need_trees && !j->need_stones) {
 					if (j->cnt_built+j->cnt_under_construction==0)
@@ -632,7 +632,7 @@ bool Computer_Player::construct_building ()
 	if (proposed_building<0)
 		return false;
 
-        // don't have too many construction sites
+	//  do not have too many construction sites
 	if (proposed_priority < total_constructionsites * total_constructionsites)
 		return false;
 
@@ -1257,7 +1257,7 @@ void Computer_Player::construct_roads ()
 		 ++i)
 	{
 		if ((player->get_buildcaps(*i)&MOVECAPS_WALK)==0)
-		    continue;
+			continue;
 
 		if (BaseImmovable * const imm = map.get_immovable(*i)) {
 			if (upcast(Road, road, imm)) {

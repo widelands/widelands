@@ -203,8 +203,7 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 		 encdata);
 
 	Section *sglobal = prof->get_safe_section("global");
-   const char* string;
-   // Read programs
+	char const * string;
 	while (sglobal->get_next_string("program", &string)) {
 		Critter_BobProgram* prog = 0;
 

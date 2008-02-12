@@ -87,7 +87,7 @@ throw (_wexception)
 	prof.create_section("global")->set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-   // Now, all positions in order, first x, then y
+	//  Now, all positions in order, first x, then y.
 	Manager<Variable> const & mvm = egbase->map().mvm();
 	Manager<Variable>::Index const nr_variables = mvm.size();
 	for (Manager<Variable>::Index i = 0; i < nr_variables; ++i) {

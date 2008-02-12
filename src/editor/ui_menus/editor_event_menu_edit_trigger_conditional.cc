@@ -215,8 +215,7 @@ m_event_chain(chain)
 		 &Editor_Event_Menu_Edit_TriggerConditional::end_modal, this, 0,
 		 _("Cancel"));
 
-   // Add conditional
-	if (cond) {
+	if (cond) { //  add conditional
 		TriggerConditional::token_vector tokens;
 		cond->get_infix_tokenlist(tokens);
 		TriggerConditional::token_vector::const_iterator const tokens_end =
@@ -261,7 +260,7 @@ bool Editor_Event_Menu_Edit_TriggerConditional::handle_mouserelease
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
-      // construct token list
+	//  construct token list
 	TriggerConditional::token_vector tok;
 
 	const uint32_t construction_size = m_construction->size();

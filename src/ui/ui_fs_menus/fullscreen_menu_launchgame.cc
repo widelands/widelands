@@ -88,7 +88,7 @@ m_is_scenario(false)
 		y += 30;
 
 		if (m_netgame!=0)
-		    m_netgame->set_player_description_group (p, pdg);
+			m_netgame->set_player_description_group (p, pdg);
 	}
 
 	if (not m_netgame) m_players[0]->set_player_type(Widelands::Player::Local);

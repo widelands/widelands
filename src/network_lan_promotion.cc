@@ -182,7 +182,7 @@ void LAN_Game_Promoter::run ()
 	sockaddr_in addr;
 
 	if (recv(magic, 8, &addr) < 8)
-	    continue;
+		continue;
 
 	printf ("Received %s packet\n", magic);
 

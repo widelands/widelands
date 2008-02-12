@@ -517,7 +517,7 @@ void Warehouse::act(Game* g, uint32_t data)
 		m_next_carrier_spawn = schedule_act(g, tdelta);
 	}
 
-      // Military stuff: Kill the soldiers that are dead
+	//  Military stuff: Kill the soldiers that are dead.
 	if (g->get_gametime() - m_next_military_act >= 0) {
 		const int32_t ware = tribe.get_safe_worker_index("soldier");
 		const Worker_Descr & workerdescr = *tribe.get_worker_descr(ware);
@@ -692,7 +692,7 @@ Worker * Warehouse::launch_worker(Game * game, int32_t const ware) {
 
 	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(ware);
 
-   // Look if we got one in stock of those
+	//  look if we got one of those in stock
 	const std::string & workername = workerdescr.name();
 	std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
 		m_incorporated_workers.end();
@@ -736,7 +736,7 @@ Soldier* Warehouse::launch_soldier
 	Soldier* soldier;
 
 	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(ware);
-   // Look if we got one in stock of those
+	//  look if we got one of those in stock
 	const std::string & workername = workerdescr.name();
 	std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
 	for (; i != m_incorporated_workers.end(); ++i)
@@ -794,7 +794,7 @@ void Warehouse::mark_as_used
 	Worker_Descr* workerdescr;
 
 	workerdescr = get_owner()->tribe().get_worker_descr(ware);
-   // Look if we got one in stock of those
+	//  look if we got one of those in stock
 	std::string workername=workerdescr->name();
 	std::vector<Object_Ptr>::iterator i;
 	for
@@ -841,7 +841,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	Ware_Index index = get_owner()->tribe().worker_index(w->name().c_str());
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
-   // We remove carrier, but we keep other workers around
+	//  We remove carriers, but we keep other workers around.
 	if (dynamic_cast<Carrier const *>(w)) {
 		w->remove(g);
 		w = 0;
@@ -866,8 +866,8 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
  * Sort the worker into the right position in m_incorporated_workers
  */
 void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Worker* w) {
-      // We insert this worker, but to keep some consistency in ordering, we tell him
-      // where to insert
+	//  We insert this worker, but to keep some consistency in ordering, we tell
+	//  him where to insert.
 
 	std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
 
@@ -990,9 +990,7 @@ int32_t Warehouse::get_soldiers_passing
 
 	assert(m_supply->stock_workers(w));
 
-   // Look if we got one in stock of those
-
-	for
+	for //  look if we got one of those in stock of
 		(std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
 		 i != m_incorporated_workers.end();
 		 ++i)

@@ -442,14 +442,8 @@ IMPLEMENTATION
 ==============================
 */
 
-/*
-===============
-Soldier::Soldier
-Soldier::~Soldier
-===============
-*/
+/// all done through init
 Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr) {}
-   // all done through init
 
 
 void Soldier::init(Editor_Game_Base* gg) {
@@ -592,9 +586,10 @@ void Soldier::draw
 		assert(2 <= r.w);
 		assert(2 <= r.h);
 		dst.fill_rect
-				(Rect
-				(r + Point(1, 1), static_cast<int32_t>(fraction * (r.w - 2)), r.h - 2),
-			color);
+			(Rect
+			 (r + Point(1, 1),
+			  static_cast<int32_t>(fraction * (r.w - 2)), r.h - 2),
+			 color);
 
 	// Draw information fields about levels
 	// first, gather informations

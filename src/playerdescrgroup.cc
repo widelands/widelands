@@ -203,7 +203,6 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
 			return;
 		}
 	}
-   // never here
 	throw wexception
 		("Map defines tribe %s, but it doens't exist!", str.c_str());
 }

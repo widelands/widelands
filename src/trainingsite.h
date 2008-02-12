@@ -87,11 +87,11 @@ private:
  */
 class TrainingSite:public ProductionSite {
 	friend struct Map_Buildingdata_Data_Packet;
-	 MO_DESCR(TrainingSite_Descr);
+	MO_DESCR(TrainingSite_Descr);
 	friend struct ::TrainingSite_Window;
 public:
-	 TrainingSite(const TrainingSite_Descr &);
-	 virtual ~ TrainingSite();
+	TrainingSite(TrainingSite_Descr const &);
+	virtual ~TrainingSite();
 
 	virtual int32_t get_building_type() const throw ()
 	{return Building::TRAININGSITE;}

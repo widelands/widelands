@@ -156,7 +156,7 @@ protected:  // TrainingSite must have access to this stuff
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
 	char                     m_statistics_buf[40];
-   int8_t                     m_last_stat_percent;
+	int8_t                   m_last_stat_percent;
 };
 
 /*

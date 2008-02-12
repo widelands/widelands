@@ -216,11 +216,10 @@ void Main_Menu_Load_Map::double_clicked(uint32_t) {clicked_ok();}
  * fill the file list
  */
 void Main_Menu_Load_Map::fill_list() {
-   // Fill it with all files we find.
-   g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
+	//  Fill it with all files we find.
+	g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
 
-   // First, we add all directorys
-   // We manually add the parent directory
+	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
 		m_parentdir = g_fs->FS_CanonicalizeName(m_curdir + "/..");
 		m_ls->add

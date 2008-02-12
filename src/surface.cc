@@ -169,7 +169,7 @@ void Surface::draw_field
  const Texture &  l_r_texture,
  const Texture &  f_d_texture,
  const Texture &  f_r_texture,
-bool draw_all)
+ bool const draw_all)
 {
 	set_subwin(subwin);
 
