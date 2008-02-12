@@ -212,8 +212,8 @@ void Tab_Panel::draw(RenderTarget* dst)
 			dst->fill_rect
 				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 1), 2, 1),
 				 black);
-			}
 		}
+	}
 
 	// draw the remaining separator
 	assert(x <= get_w());

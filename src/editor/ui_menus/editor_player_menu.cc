@@ -245,17 +245,17 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			set_starting_pos_clicked(nr_players); //  This calls update().
 		else
 			update();
-		} else {
-			UI::Modal_Message_Box mmb
-				(&parent,
-				 _("Error!"),
-				 _
-				 ("Can't remove player. It is referenced in some place. Remove "
-				  "all buildings, bobs, triggers and events that depend on this "
-				  "player and try again"),
-				 UI::Modal_Message_Box::OK);
-			mmb.run();
-		}
+	} else {
+		UI::Modal_Message_Box mmb
+			(&parent,
+			 _("Error!"),
+			 _
+			 ("Can't remove player. It is referenced in some place. Remove all "
+			  "buildings, bobs, triggers and events that depend on this player "
+			  "and try again"),
+			 UI::Modal_Message_Box::OK);
+		mmb.run();
+	}
 }
 
 

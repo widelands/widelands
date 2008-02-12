@@ -53,7 +53,7 @@ void Box::resize()
 		totaldepth += depth;
 		if (breadth > maxbreadth)
 			maxbreadth = breadth;
-		}
+	}
 
 	if (m_orientation == Horizontal)
 		set_size(totaldepth, maxbreadth);

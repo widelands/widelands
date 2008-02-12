@@ -64,7 +64,7 @@ template<typename T> struct Manager {
 				*i = *(items_end - 1);
 				items.pop_back();
 				return;
-		}
+			}
 		throw Nonexistent();
 	}
 

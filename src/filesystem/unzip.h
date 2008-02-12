@@ -341,7 +341,7 @@ extern int32_t ZEXPORT unzSetOffset (unzFile file, uLong pos);
 
 
 #ifdef __cplusplus
-};
+}
 #endif
 
 #endif

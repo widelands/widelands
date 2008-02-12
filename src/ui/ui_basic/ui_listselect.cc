@@ -185,7 +185,7 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 				m_entry_records[i]=erj;
 				m_entry_records[j]=eri;
 			}
-	}
+		}
 }
 
 /**

@@ -45,13 +45,15 @@ struct Editor_Tool {
 		 Widelands::Map & map, Widelands::Node_and_Triangle<> const center,
 		 Editor_Interactive & parent)
 	{
-		return (i == First ? *this : i == Second ? m_second : m_third)
+		return
+			(i == First ? *this : i == Second ? m_second : m_third)
 			.handle_click_impl(map, center, parent);
-		}
+	}
 	const char * get_sel(const Tool_Index i) {
 		return
-			(i == First ? *this : i == Second ? m_second : m_third).get_sel_impl();
-		}
+			(i == First ? *this : i == Second ? m_second : m_third)
+			.get_sel_impl();
+	}
 
 	virtual int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &)

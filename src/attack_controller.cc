@@ -440,30 +440,30 @@ void AttackController::Loader::load(FileRead & fr) {
 					 fr.GetPos() - 4, e.what());
 			}
 
-		bool attacker = fr.Unsigned8();
-		bool arrived = fr.Unsigned8();
-		bool fighting = fr.Unsigned8();
+			bool const attacker = fr.Unsigned8();
+			bool const arrived  = fr.Unsigned8();
+			bool const fighting = fr.Unsigned8();
 
-		BattleSoldierData bsd = {
-			soldier,
-			origin
-		};
-		BattleSoldier bs = {
-			0,
-			0,
-			battleGround,
-			attacker,
-			arrived,
-			fighting
-		};
+			BattleSoldierData bsd = {
+				soldier,
+				origin
+			};
+			BattleSoldier bs = {
+				0,
+				0,
+				battleGround,
+				attacker,
+				arrived,
+				fighting
+			};
 
-		ctrl->involvedSoldiers.push_back(bs);
-		soldiers.push_back(bsd);
-	}
+			ctrl->involvedSoldiers.push_back(bs);
+			soldiers.push_back(bsd);
+		}
 
-	uint32_t numInMs = fr.Unsigned32();
-	for (uint32_t j = 0; j < numInMs; ++j)
-		militarySites.push_back(fr.Unsigned32());
+		uint32_t numInMs = fr.Unsigned32();
+		for (uint32_t j = 0; j < numInMs; ++j)
+			militarySites.push_back(fr.Unsigned32());
 	} catch (_wexception const & e) {
 		throw wexception
 			("Error in AttackController: binary/mapobjects:%s", e.what());

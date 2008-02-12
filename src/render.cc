@@ -290,22 +290,23 @@ static void draw_minimap_int
 	} else {
 		Widelands::Player::Field const * const player_fields = player->fields();
 		for (uint32_t y = 0; y < rc.h; ++y) {
-		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-		Widelands::FCoords f(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
-		map.normalize_coords(&f);
-		f.field = &map[f];
-		Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
-		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
-			move_r(mapwidth, f, i);
-			Widelands::Player::Field const & player_field = player_fields[i];
-			Widelands::Vision const vision = player_field.vision;
-			*reinterpret_cast<T *>(pix) =
-				static_cast<T>
-				(vision ?
-				 calc_minimap_color
-				 (format, egbase, f, flags, player_field.owner, 1 < vision)
-				 :
-				 0);
+			Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
+			Widelands::FCoords f
+				(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
+			map.normalize_coords(&f);
+			f.field = &map[f];
+			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
+			for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
+				move_r(mapwidth, f, i);
+				Widelands::Player::Field const & player_field = player_fields[i];
+				Widelands::Vision const vision = player_field.vision;
+				*reinterpret_cast<T *>(pix) =
+					static_cast<T>
+					(vision ?
+					 calc_minimap_color
+					 (format, egbase, f, flags, player_field.owner, 1 < vision)
+					 :
+					 0);
 			}
 		}
 	}

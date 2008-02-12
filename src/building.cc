@@ -181,7 +181,7 @@ void Building_Descr::parse
 
 		while ((val = s->get_next_val(0)))
 			m_buildcost.push_back(CostItem(val->get_name(), val->get_int()));
-		}
+	}
 
 	m_stopable = global->get_bool("stopable", m_stopable);
 	if (m_stopable) {

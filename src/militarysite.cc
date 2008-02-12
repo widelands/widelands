@@ -418,7 +418,7 @@ void MilitarySite::drop_soldier (uint32_t serial)
 				drop_soldier(game, i);
 			} else
 				molog ("--Soldier NOT localized!\n");
-	}
+		}
 }
 
 /*

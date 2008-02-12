@@ -118,7 +118,7 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 					end_of_next_line
 					?
 					end_of_next_line : begin_of_next_line+m_cur_pos-begin_of_line;
-				}
+			}
 			break;
 
 		case SDLK_UP:

@@ -231,7 +231,7 @@ extern int32_t ZEXPORT zipClose OF((zipFile file, const char* global_comment));
 */
 
 #ifdef __cplusplus
-};
+}
 #endif
 
 #endif

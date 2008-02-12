@@ -64,8 +64,8 @@ throw (_wexception)
 						("Map_Seen_Fields_Data_Packet::Read: WARNING: Player %u, "
 						 "which does not exist, sees field %u.\n",
 						 j + 1, i);
-				}
 			}
+		}
 	else if (packet_version == CURRENT_PACKET_VERSION)
 		for (Map_Index i = 0; i < max_index; ++i) {
 			const uint32_t data = fr.Unsigned32();

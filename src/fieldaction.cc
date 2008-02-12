@@ -871,15 +871,17 @@ void FieldActionWindow::building_icon_mouse_in(int32_t idx) {
 		//  Improvement suggestion: add to sign explanation window instead.
 		for
 			(Workarea_Info::const_iterator it = workarea_info.begin();
-			 it != workarea_info.end(); ++it) {
+			 it != workarea_info.end();
+			 ++it)
+		{
 			const int32_t radius = it->first;
 			log("Radius: %i\n", radius);
 			const std::set<std::string> & descriptions = it->second;
 			for
 				(std::set<std::string>::const_iterator de = descriptions.begin();
-				 de != descriptions.end(); ++de) {
+				 de != descriptions.end();
+				 ++de)
 				log("        %s\n", (*de).c_str());
-			}
 		}
 #endif
 

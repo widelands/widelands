@@ -136,7 +136,7 @@ m_label_autosave
 				 or
 				 this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
 				m_resolutions.push_back(this_res);
-		}
+			}
 	fmt->BitsPerPixel = 32;
 	if
 		(SDL_Rect const * const * const modes =
@@ -193,7 +193,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 		m_music                             .get_state   (),
 		m_fx                                .get_state   (),
 		m_language_list                     .get_selected(),
-			(m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0)
+		m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0
 	};
 	return opt;
 }

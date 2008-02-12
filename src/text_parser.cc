@@ -77,7 +77,8 @@ Text_Parser::~Text_Parser() {}
 void Text_Parser::parse
 (std::string                 & text,
  std::vector<Richtext_Block> & blocks,
- Varibale_Callback vcb, void * const vcdata) {
+ Varibale_Callback vcb, void * const vcdata)
+{
 	bool more_richtext_blocks = true;
 	//First while loop parses all richtext blocks (images)
 	while (more_richtext_blocks) {

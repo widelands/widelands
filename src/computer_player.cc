@@ -847,7 +847,7 @@ void Computer_Player::update_mineable_field (MineableField* field)
 				(dynamic_cast<ConstructionSite const *>(bld) or
 				 dynamic_cast<ProductionSite   const *>(bld))
 				++field->mines_nearby;
-		}
+			}
 	}
 }
 

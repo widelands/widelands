@@ -42,8 +42,7 @@ class Signal : public Object {
 	fnT _fn;
 public:
 	Signal() {_obj = 0; _fn = 0;}
-	template<class T>
-		void set(Object *p, void (T::*f)()) {
+	template<class T> void set(Object * const p, void (T::*f)()) {
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}

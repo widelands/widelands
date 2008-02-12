@@ -459,7 +459,7 @@ void Player::flagaction(Flag* flag, int32_t action)
 		default:
 			log("Player sent bad flagaction = %i\n", action);
 		}
-	}
+		}
 }
 
 /*

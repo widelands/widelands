@@ -137,7 +137,7 @@ void Basic_Button::draw(RenderTarget* dst)
 			 (get_w() - static_cast<int32_t>(cpw) >> 1,
 			  get_h() - static_cast<int32_t>(cph) >> 1),
 			 m_pic_custom);
-		} else if (m_title.length()) { //  otherwise draw title string centered
+	} else if (m_title.length()) { //  otherwise draw title string centered
 		g_fh->draw_string
 			(*dst,
 			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,

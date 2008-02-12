@@ -171,14 +171,14 @@ void Interactive_Player::think()
 	// Check for chatmessages
 	if (NetGame * const ng = m_game->get_netgame())
 		if (ng->have_chat_message()) {
-		NetGame::Chat_Message t = ng->get_chat_message();
-		m_chatmsges.push_back(t);
+			NetGame::Chat_Message t = ng->get_chat_message();
+			m_chatmsges.push_back(t);
 
-		Overlay_Chat_Messages ov;
-		ov.msg =  t;
-		ov.starttime = WLApplication::get()->get_time();
-		m_show_chatmsg.push_back(ov);
-	}
+			Overlay_Chat_Messages ov;
+			ov.msg =  t;
+			ov.starttime = WLApplication::get()->get_time();
+			m_show_chatmsg.push_back(ov);
+		}
 
 	// If we have chat messages to overlay, show them now
 	m_chat_messages.set_text("");
