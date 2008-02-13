@@ -37,16 +37,17 @@ int32_t Editor_Noise_Height_Tool::handle_click_impl
 		(map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map.get_fcoords(center.node), parent.get_sel_radius()));
-	do max =
-		std::max
-		(max,
-		 map.set_height
-		 (mr.location(),
-		  m_interval.min
-		  +
-		  static_cast<int32_t>
-		  (static_cast<double>
-		   (m_interval.min - m_interval.max) * rand() / (RAND_MAX + 1.0))));
+	do
+		max =
+			std::max
+			(max,
+			 map.set_height
+			 (mr.location(),
+			  m_interval.min
+			  +
+			  static_cast<int32_t>
+			  (static_cast<double>
+			   (m_interval.min - m_interval.max) * rand() / (RAND_MAX + 1.0))));
 	while (mr.advance(map));
 	return mr.radius() + max;
 }

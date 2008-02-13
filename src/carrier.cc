@@ -580,7 +580,8 @@ bool Carrier::start_task_walktoflag(Game* g, int32_t flag, bool offset)
 			--idx;
 	}
 
-	return start_task_movepath
+	return
+		start_task_movepath
 		(g->map(),
 		 path,
 		 idx,

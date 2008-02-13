@@ -109,13 +109,11 @@ Panel::~Panel()
 void Panel::free_children() {while (_fchild) delete _fchild;}
 
 
-/**
- * Enters the event loop; all events will be handled by this panel.
- *
- * \return the return code passed to end_modal. This return code
- * will be negative when the event loop was quit in an abnormal way
- * (e.g. the user clicked the window's close button or similar).
- */
+/// Enters the event loop; all events will be handled by this panel.
+///
+///  \return the return code passed to end_modal. This return code will be
+/// negative when the event loop was quit in an abnormal way (e.g. the user
+/// clicked the window's close button or similar).
 int32_t Panel::run()
 {
 	WLApplication *app=WLApplication::get();

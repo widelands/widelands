@@ -165,7 +165,8 @@ Uint32 Texture::get_minimap_color(const char shade) {
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
 	uint32_t table = static_cast<uint8_t>(shade);
 
-	return is_32bit ?
+	return
+		is_32bit ?
 		static_cast<const Uint32 *>(m_colormap->get_colormap())
 		[clr | (table << 8)]
 		:

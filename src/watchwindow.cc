@@ -315,10 +315,11 @@ void WatchWindow::toggle_tracking()
 		(Widelands::Map_Object const * const obj =
 		 m_views[m_cur_index].tracking.get(m_game))
 		m_views[m_cur_index].tracking = 0;
-	else start_tracking
-		(m_mapview.get_viewpoint()
-		 +
-		 Point(m_mapview.get_w() / 2, m_mapview.get_h() / 2));
+	else
+		start_tracking
+			(m_mapview.get_viewpoint()
+			 +
+			 Point(m_mapview.get_w() / 2, m_mapview.get_h() / 2));
 }
 
 

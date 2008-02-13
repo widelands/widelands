@@ -130,13 +130,15 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 		assert(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
 		Widelands::MapTriangleRegion<> mr
 			(map, Area<TCoords<> >(center.triangle, m_sel.radius));
-		do overlay_manager.register_overlay
-			(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
+		do
+			overlay_manager.register_overlay
+				(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
 		Widelands::MapRegion<> mr(map, Area<>(center.node, m_sel.radius));
-		do overlay_manager.register_overlay
-			(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
+		do
+			overlay_manager.register_overlay
+				(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
 	}
 

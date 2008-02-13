@@ -8,7 +8,7 @@ for TEST in *; do
 			echo "$TEST failed to match all forbidden cases"
 			ERRORS+=1
 		fi
-		[[ -f $TEST/forbidden ]] && if [ "$(egrep -f $TEST/regexps $TEST/allowed | wc -l)" != "0" ]; then
+		[[ -f $TEST/allowed ]] && if [ "$(egrep -f $TEST/regexps $TEST/allowed | wc -l)" != "0" ]; then
 			echo "$TEST detected an allowed case as forbidden"
 			ERRORS+=1
 		fi

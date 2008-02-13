@@ -107,11 +107,12 @@ throw (_wexception)
 						const Field & first_map_field = map[0];
 						a.field = &map[a];
 						MapRegion<Area<FCoords> > mr(map, a);
-						do player_fields[mr.location().field - &first_map_field]
-							.military_influence
-							+=
-							egbase->map().calc_influence
-							(mr.location(), Area<>(a, a.radius));
+						do
+							player_fields[mr.location().field - &first_map_field]
+								.military_influence
+								+=
+								egbase->map().calc_influence
+								(mr.location(), Area<>(a, a.radius));
 						while (mr.advance(map));
 					}
 				} else

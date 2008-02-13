@@ -612,7 +612,8 @@ Convenience function: Adds a new tab to the main tab panel
 uint32_t FieldActionWindow::add_tab
 (const char * picname, UI::Panel * panel, const std::string & tooltip_text)
 {
-	return m_tabpanel->add
+	return
+		m_tabpanel->add
 		(g_gr->get_picture(PicMod_Game, picname), panel, tooltip_text);
 }
 
@@ -856,12 +857,13 @@ void FieldActionWindow::building_icon_mouse_in(int32_t idx) {
 			assert(hollow_area.radius);
 			assert(hollow_area.hole_radius < hollow_area.radius);
 			Widelands::MapHollowRegion<> mr(*m_map, hollow_area);
-			do m_overlay_manager.register_overlay
-				(mr.location(),
-				 workarea_cumulative_picid[i],
-				 0,
-				 Point::invalid(),
-				 m_workarea_preview_job_id);
+			do
+				m_overlay_manager.register_overlay
+					(mr.location(),
+					 workarea_cumulative_picid[i],
+					 0,
+					 Point::invalid(),
+					 m_workarea_preview_job_id);
 			while (mr.advance(*m_map));
 			hollow_area.hole_radius = hollow_area.radius;
 		}
@@ -940,7 +942,8 @@ void FieldActionWindow::act_attack_more() {
 }
 
 uint32_t FieldActionWindow::get_max_attackers() {
-	return getMaxAttackSoldiers
+	return
+		getMaxAttackSoldiers
 		(m_iabase->egbase(),
 		 dynamic_cast<Widelands::Flag const &>
 		 (*dynamic_cast<Building &>(*m_map->get_immovable(m_field))

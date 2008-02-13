@@ -22,6 +22,7 @@
 #define UI_LISTSELECT_H
 
 #include "ui_panel.h"
+#include "ui_scrollbar.h"
 #include "ui_signal.h"
 
 #include "font_handler.h"
@@ -120,7 +121,7 @@ private:
 	uint32_t m_lineheight;
 	Align m_align;
 	Entry_Record_vector m_entry_records;
-	Scrollbar* m_scrollbar;
+	Scrollbar m_scrollbar;
 	uint32_t m_scrollpos;         //  in pixels
 	uint32_t m_selection;
 	int32_t m_last_click_time;

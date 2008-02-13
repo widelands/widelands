@@ -29,7 +29,8 @@ struct Point {
 	Point(const int32_t px, const int32_t py) throw () : x(px), y(py) {}
 
 	static Point invalid() throw () {
-		return Point
+		return
+			Point
 			(std::numeric_limits<int32_t>::max(),
 			 std::numeric_limits<int32_t>::max());
 	}

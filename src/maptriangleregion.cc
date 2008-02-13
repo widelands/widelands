@@ -211,8 +211,9 @@ bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
 		if (m_remaining_in_row) {
 			if (m_location.t == TCoords<FCoords>::D)
 				m_location.t = TCoords<FCoords>::R;
-			else m_location =
-				TCoords<FCoords>(map.r_n(m_location), TCoords<FCoords>::D);
+			else
+				m_location =
+					TCoords<FCoords>(map.r_n(m_location), TCoords<FCoords>::D);
 		} else {
 			if (--m_remaining_rows_in_upper_phase) {
 				m_row_length += 2;
@@ -225,7 +226,8 @@ bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
 				} else if (m_location.t == TCoords<FCoords>::R) {
 					m_phase = Bottom;
 					m_row_length /= 2;
-				} else return false;
+				} else
+					return false;
 				m_left = map.br_n(m_left);
 			}
 			m_remaining_in_row = m_row_length;
@@ -236,8 +238,9 @@ bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
 		if (m_remaining_in_row) {
 			if (m_location.t == TCoords<FCoords>::D)
 				m_location.t = TCoords<FCoords>::R;
-			else m_location =
-				TCoords<FCoords>(map.r_n(m_location), TCoords<FCoords>::D);
+			else
+				m_location =
+					TCoords<FCoords>(map.r_n(m_location), TCoords<FCoords>::D);
 		} else {
 			if (--m_remaining_rows_in_lower_phase) {
 				assert(m_row_length >= 2);

@@ -30,7 +30,8 @@ int32_t Editor_Set_Height_Tool::handle_click_impl
  Widelands::Node_and_Triangle<> const center,
  Editor_Interactive                 & parent)
 {
-	return map.set_height
+	return
+		map.set_height
 		(Widelands::Area<Widelands::FCoords>
 		 (map.get_fcoords(center.node), parent.get_sel_radius()), m_interval);
 }

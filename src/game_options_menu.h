@@ -55,7 +55,8 @@ private:
 
 	/** Returns the width of a button in a row with nr_buttons buttons. */
 	uint32_t buttonw(const uint32_t nr_buttons) const {
-		return static_cast<uint32_t>
+		return
+			static_cast<uint32_t>
 			((get_inner_w() * 1.45 - (nr_buttons + 3) * hspacing()) / nr_buttons);
 	}
 

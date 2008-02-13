@@ -151,8 +151,10 @@ is received
 bool Edit_Box::handle_mousemove
 	(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
-	return m_keyboard_grabbed ?
-		true : Basic_Button::handle_mousemove(state, x, y, xdiff, ydiff);
+	return
+		m_keyboard_grabbed
+		or
+		Basic_Button::handle_mousemove(state, x, y, xdiff, ydiff);
 }
 
 /**

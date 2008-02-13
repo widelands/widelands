@@ -22,7 +22,6 @@
 #include "constants.h"
 #include "graphic.h"
 #include "rendertarget.h"
-#include "ui_scrollbar.h"
 #include "wlapplication.h"
 
 namespace UI {
@@ -41,7 +40,7 @@ BaseListselect::BaseListselect
 :
 Panel(parent, x, y, w, h),
 m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
-m_scrollbar     (new Scrollbar(parent, x + get_w() - 24, y, 24, h, false)),
+m_scrollbar      (this, get_w() - 24, 0, 24, h, false),
 m_scrollpos     (0),
 m_selection     (no_selection_index()),
 m_last_click_time(-10000),
@@ -52,9 +51,9 @@ m_show_check(show_check)
 
 	set_align(align);
 
-	m_scrollbar->moved.set(this, &BaseListselect::set_scrollpos);
-	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
-	m_scrollbar->set_steps(1);
+	m_scrollbar.moved.set(this, &BaseListselect::set_scrollpos);
+	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_SMALL));
+	m_scrollbar.set_steps(1);
 
 	if (show_check) {
 		uint32_t pic_h;
@@ -74,7 +73,6 @@ Free allocated resources
 */
 BaseListselect::~BaseListselect()
 {
-	m_scrollbar = 0;
 	clear();
 }
 
@@ -92,8 +90,7 @@ void BaseListselect::clear() {
 		free(*it);
 	m_entry_records.clear();
 
-	if (m_scrollbar)
-		m_scrollbar->set_steps(1);
+	m_scrollbar.set_steps(1);
 	m_scrollpos = 0;
 	m_selection = no_selection_index();
 	m_last_click_time = -10000;
@@ -138,7 +135,7 @@ void BaseListselect::add
 
 	m_entry_records.push_back(&er);
 
-	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - get_h());
+	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
 
@@ -361,34 +358,39 @@ void BaseListselect::draw(RenderTarget* dst)
  */
 bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 {
-	if (btn != SDL_BUTTON_LEFT)
+	switch (btn) {
+	case SDL_BUTTON_WHEELDOWN:
+	case SDL_BUTTON_WHEELUP:
+		return m_scrollbar.handle_mousepress(btn, 0, y);
+	case SDL_BUTTON_LEFT: {
+		int32_t const time = WLApplication::get()->get_time();
+
+		//  This hick hack is needed if any of the callback functions calls clear
+		//  to forget the last clicked time.
+		int32_t const real_last_click_time = m_last_click_time;
+
+		m_last_selection  = m_selection;
+		m_last_click_time = time;
+		play_click();
+
+		y = (y + m_scrollpos) / get_lineheight();
+		if (y >= 0 and y < static_cast<int32_t>(m_entry_records.size()))
+			select(y);
+
+
+		if //  check if doubleclicked
+			(time-real_last_click_time < DOUBLE_CLICK_INTERVAL
+			 and
+			 m_last_selection == m_selection
+			 and
+			 m_selection != no_selection_index())
+			double_clicked.call(m_selection);
+
+		return true;
+	}
+	default:
 		return false;
-
-	int32_t time=WLApplication::get()->get_time();
-
-	// This hick hack is needed if any of the
-	// callback functions calls clear to forget the last
-	// clicked time.
-	int32_t real_last_click_time=m_last_click_time;
-
-	m_last_selection=m_selection;
-	m_last_click_time=time;
-	play_click();
-
-	y = (y + m_scrollpos) / get_lineheight();
-	if (y >= 0 and y < static_cast<int32_t>(m_entry_records.size()))
-		select(y);
-
-	// check if doubleclicked
-	if
-		(time-real_last_click_time < DOUBLE_CLICK_INTERVAL
-		 and
-		 m_last_selection == m_selection
-		 and
-		 m_selection != no_selection_index())
-		double_clicked.call(m_selection);
-
-	return true;
+	}
 }
 
 bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)

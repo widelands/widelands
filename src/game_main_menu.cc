@@ -95,27 +95,39 @@ options_menu
 
 
 void GameMainMenu::clicked_general_stats() {
-	if (m_windows.general_stats.window) delete m_windows.general_stats.window;
-	else new General_Statistics_Menu(m_player, m_windows.general_stats);
+	if (m_windows.general_stats.window)
+		delete m_windows.general_stats.window;
+	else
+		new General_Statistics_Menu(m_player, m_windows.general_stats);
 }
 void GameMainMenu::clicked_ware_stats() {
-	if (m_windows.ware_stats.window) delete m_windows.ware_stats.window;
-	else new Ware_Statistics_Menu(m_player, m_windows.ware_stats);
+	if (m_windows.ware_stats.window)
+		delete m_windows.ware_stats.window;
+	else
+		new Ware_Statistics_Menu(m_player, m_windows.ware_stats);
 }
 void GameMainMenu::clicked_building_stats() {
-	if (m_windows.building_stats.window) delete m_windows.building_stats.window;
-	else new Building_Statistics_Menu(m_player, m_windows.building_stats);
+	if (m_windows.building_stats.window)
+		delete m_windows.building_stats.window;
+	else
+		new Building_Statistics_Menu(m_player, m_windows.building_stats);
 }
 void GameMainMenu::clicked_stock() {
-	if (m_windows.stock.window) delete m_windows.stock.window;
-	else new Stock_Menu(m_player, m_windows.stock);
+	if (m_windows.stock.window)
+		delete m_windows.stock.window;
+	else
+		new Stock_Menu(m_player, m_windows.stock);
 }
 void GameMainMenu::clicked_chat() {
-	if (m_windows.chat.window) delete m_windows.chat.window;
-	else new GameChatMenu
-			(m_player, m_windows.chat, m_player.get_game()->get_netgame());
+	if (m_windows.chat.window)
+		delete m_windows.chat.window;
+	else
+		new GameChatMenu
+			(m_player, m_windows.chat, m_player.game().get_netgame());
 }
 void GameMainMenu::clicked_options_menu() {
-	if (m_windows.options.window) delete m_windows.options.window;
-	else new GameOptionsMenu(m_player, m_windows.options, m_windows);
+	if (m_windows.options.window)
+		delete m_windows.options.window;
+	else
+		new GameOptionsMenu(m_player, m_windows.options, m_windows);
 }

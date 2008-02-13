@@ -527,7 +527,8 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
 	//  NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLY NEW BUILDING
 	cleanup(g);
 	get_base_flag()->schedule_destroy(g);
-	return static_cast<MilitarySite *>
+	return
+		static_cast<MilitarySite *>
 		(static_cast<const MilitarySite_Descr &>(*m_descr).create
 		 (*g, *winner, m_position, false));
 }

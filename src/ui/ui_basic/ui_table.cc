@@ -231,29 +231,35 @@ void Table<void *>::draw(RenderTarget * dst)
  * Handle mouse presses: select the appropriate entry
  */
 bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	switch (btn) {
+	case SDL_BUTTON_WHEELDOWN:
+	case SDL_BUTTON_WHEELUP:
+		return m_scrollbar ? m_scrollbar->handle_mousepress(btn, 0, y) : false;
+	case SDL_BUTTON_LEFT: {
+		int32_t const time = WLApplication::get()->get_time();
 
-	int32_t const time = WLApplication::get()->get_time();
+		//  This hick hack is needed if any of the callback functions calls clear
+		//  to forget the last clicked time.
+		int32_t const real_last_click_time = m_last_click_time;
 
-	//  This hick hack is needed if any of the callback functions calls clear to
-	//  forget the last clicked time.
-	int32_t real_last_click_time = m_last_click_time;
+		m_last_selection  = m_selection;
+		m_last_click_time = time;
 
-	m_last_selection  = m_selection;
-	m_last_click_time = time;
+		y = (y + m_scrollpos - m_columns[0].btn->get_h()) / get_lineheight();
+		if (static_cast<size_t>(y) < m_entry_records.size()) select(y);
 
-	y = (y + m_scrollpos - m_columns[0].btn->get_h()) / get_lineheight();
-	if (static_cast<size_t>(y) < m_entry_records.size()) select(y);
+		if //  check if doubleclicked
+			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
+			 and
+			 m_last_selection == m_selection
+			 and m_selection != no_selection_index())
+			double_clicked.call(m_selection);
 
-	if //  check if doubleclicked
-		(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
-		 and
-		 m_last_selection == m_selection
-		 and m_selection != no_selection_index())
-		double_clicked.call(m_selection);
-
-
-	return true;
+		return true;
+	}
+	default:
+		return false;
+	}
 }
 bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {return btn == SDL_BUTTON_LEFT;}

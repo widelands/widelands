@@ -832,12 +832,13 @@ void Building_Window::toggle_workarea() {
 			--i;
 			hollow_area.radius = it->first;
 			Widelands::MapHollowRegion<> mr(map, hollow_area);
-			do overlay_manager.register_overlay
-				(mr.location(),
-				 workarea_cumulative_picid[i],
-				 0,
-				 Point::invalid(),
-				 m_workarea_job_id);
+			do
+				overlay_manager.register_overlay
+					(mr.location(),
+					 workarea_cumulative_picid[i],
+					 0,
+					 Point::invalid(),
+					 m_workarea_job_id);
 			while (mr.advance(map));
 			hollow_area.hole_radius = hollow_area.radius;
 		}

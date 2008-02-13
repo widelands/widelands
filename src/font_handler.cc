@@ -312,8 +312,8 @@ SDL_Surface* Font_Handler::draw_string_sdl_surface
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 	TTF_SetFontStyle(&font, style);
-	return create_sdl_text_surface
-		(font, fg, bg, text, align, wrap, line_spacing);
+	return
+		create_sdl_text_surface(font, fg, bg, text, align, wrap, line_spacing);
 }
 
 /*
@@ -812,8 +812,11 @@ std::string Font_Handler::word_wrap_text
 (const std::string & fontname, const int32_t fontsize,
  const std::string & unwrapped_text, const int32_t max_width)
 {
-	return word_wrap_text
-		(*m_font_loader->get_font(fontname, fontsize), unwrapped_text, max_width);
+	return
+		word_wrap_text
+		(*m_font_loader->get_font(fontname, fontsize),
+		 unwrapped_text,
+		 max_width);
 }
 
 //removes a leading spacer

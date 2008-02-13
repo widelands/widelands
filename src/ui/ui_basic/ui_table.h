@@ -370,7 +370,8 @@ template <> struct Table<intptr_t> : public Table<void *> {
 		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{
-		return Base::add
+		return
+			Base::add
 			(reinterpret_cast<void *>(entry), picid, select_this);
 	}
 

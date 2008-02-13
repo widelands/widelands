@@ -31,15 +31,18 @@ Event::State Event_Unhide_Area::run(Game* game) {
 	assert(0 < m_player_area.player_number);
 	assert    (m_player_area.player_number <= game->map().get_nrplayers());
 
-	if (duration)
-		game->player(m_player_area.player_number).add_areawatcher(m_player_area)
-		.schedule_act(game, duration);
-	else game->player(m_player_area.player_number).see_area
-		(Player_Area<Area<FCoords> >
-		 (m_player_area.player_number,
-		  Area<FCoords>
-		  (game->map().get_fcoords(m_player_area), m_player_area.radius)),
-		 false);
+	{
+		Player & player = game->player(m_player_area.player_number);
+		if (duration)
+			player.add_areawatcher(m_player_area).schedule_act(game, duration);
+		else
+			player.see_area
+			(Player_Area<Area<FCoords> >
+			 (m_player_area.player_number,
+			  Area<FCoords>
+			  (game->map().get_fcoords(m_player_area), m_player_area.radius)),
+			 false);
+	}
 
 	return m_state = DONE;
 }

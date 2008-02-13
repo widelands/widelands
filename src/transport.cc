@@ -2175,9 +2175,9 @@ int32_t Request::get_priority (int32_t cost)
 	if (is_idle()) {
 		// idle requests are prioritized only by cost
 		int32_t weighted_cost = cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST;
-		return weighted_cost > MAX_IDLE_PRIORITY
-			? 0
-			: MAX_IDLE_PRIORITY - weighted_cost;
+		return
+			weighted_cost > MAX_IDLE_PRIORITY ?
+			0 : MAX_IDLE_PRIORITY - weighted_cost;
 	}
 
 	int32_t modifier = DEFAULT_PRIORITY;

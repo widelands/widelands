@@ -201,7 +201,8 @@ inline static uint32_t blend_color
 {
 	Uint8 r1, g1, b1;
 	SDL_GetRGB(clr1, &const_cast<SDL_PixelFormat &>(format), &r1, &g1, &b1);
-	return SDL_MapRGB
+	return
+		SDL_MapRGB
 		(&const_cast<SDL_PixelFormat &>(format),
 		 (r1 + r2) / 2, (g1 + g2) / 2, (b1 + b2) / 2);
 }

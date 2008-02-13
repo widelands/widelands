@@ -25,12 +25,9 @@
 #include <SDL_keyboard.h>
 
 namespace UI {
-/**
-a editbox can be clicked, then the user can change
-it's text (title). When return is pressed, the
-editbox is unfocused, the keyboard released and
-a callback function is called
-*/
+/// a editbox can be clicked, then the user can change its text (title). When
+/// return is pressed, the editbox is unfocused, the keyboard released and a
+/// callback function is called
 struct Edit_Box : private Basic_Button {
 	Edit_Box
 		(Panel *,

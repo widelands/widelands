@@ -748,7 +748,8 @@ Surface* Graphic::get_road_texture(int32_t roadtex)
 		get_picture_surface(m_roadtextures->pic_road_busy)->force_disable_alpha();
 	}
 
-	return get_picture_surface
+	return
+		get_picture_surface
 		(roadtex == Widelands::Road_Normal ?
 		 m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
 }
