@@ -235,7 +235,7 @@ private:
 	int32_t soldier;
 
 public:
-	Cmd_DropSoldier ():PlayerCommand() {} ; // For savegames
+	Cmd_DropSoldier () : PlayerCommand() {} //  for savegames
 	Cmd_DropSoldier(int32_t t, int32_t p, Building* b, int32_t _soldier):PlayerCommand(t, p)
 	{serial=b->get_serial(); soldier=_soldier;}
 
@@ -257,7 +257,7 @@ private:
 	int32_t val;
 
 public:
-	Cmd_ChangeSoldierCapacity ():PlayerCommand() {} ; // For savegames
+	Cmd_ChangeSoldierCapacity () : PlayerCommand() {} //  for savegames
 	Cmd_ChangeSoldierCapacity (int32_t t, int32_t p, Building* b, int32_t i):PlayerCommand(t, p)
 	{serial=b->get_serial(); val=i;}
 

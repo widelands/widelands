@@ -55,7 +55,7 @@ throw (_wexception)
 		fr.Open(fs, "binary/immovable_data");
 	} catch (...) {
 		// not there, so skip
-		return ;
+		return;
 	}
 
 	uint16_t const packet_version = fr.Unsigned16();

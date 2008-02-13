@@ -54,7 +54,7 @@ with Ada.Integer_Text_IO;    use Ada.Integer_Text_IO;
 with Ada.IO_Exceptions;
 with Ada.Sequential_IO;
 with Ada.Text_IO;            use Ada.Text_IO;
-procedure Leading_Whitespace_Checker is
+procedure Whitespace_Checker is
    package Character_IO is new Ada.Sequential_IO (Character); use Character_IO;
 
    type Line_Number       is range 1 .. 2**16 - 1;
@@ -145,6 +145,41 @@ procedure Leading_Whitespace_Checker is
       Depth_Parentheses_Increase : Integer := 0;
    begin
       Read_Code_Loop : loop
+         case Previous_Character is
+            when '(' | '[' =>
+               if
+                 Current_Character = HT  or
+                 Current_Character = ' ' or
+                 Current_Character = '#' or
+                 Current_Character = ':' or
+                 Current_Character = '?' or
+                 Current_Character = '%' or
+                 Current_Character = ','
+               then
+                  Put_Error
+                    ("""(" & Current_Character & """ is not allowed");
+               end if;
+            when '}'       =>
+               if
+                 Current_Character /= LF  and
+                 Current_Character /= ' ' and
+                 Current_Character /= ';' and
+                 Current_Character /= ','
+               then
+                  Put_Error
+                    ("""}" & Current_Character & """ is not allowed");
+               end if;
+            when ','       =>
+               if
+                 Current_Character /= LF  and
+                 Current_Character /= ' '
+               then
+                  Put_Error
+                    ("""," & Current_Character & """ is not allowed");
+               end if;
+            when others    =>
+               null;
+         end case;
          case Current_Character is
             when HT        =>
                Put_Error ("indentation is only allowed at line begin");
@@ -154,6 +189,13 @@ procedure Leading_Whitespace_Checker is
                end if;
                exit Read_Code_Loop;
             when '{'       =>
+               if
+                 Previous_Character /= LF and
+                 Previous_Character /= HT and
+                 Previous_Character /= ' '
+               then
+                  Put_Error ("""" & Previous_Character & "{"" not allowed");
+               end if;
                if Brace_Level = Brace_Index'Last then
                   Raise_Exception
                     (Giving_Up'Identity, "too many levels of braces");
@@ -162,6 +204,12 @@ procedure Leading_Whitespace_Checker is
                  (Current_Line_Number, Depth_Indentation, Depth_Parentheses);
                Brace_Level := Brace_Level + 1;
             when '}'       =>
+               case Previous_Character is
+                  when ',' | ' ' | '?' =>
+                     Put_Error ("""}" & Current_Character & """ not allowed");
+                  when others                =>
+                     null;
+               end case;
                if Brace_Level = Brace_Index'First then
                   Raise_Exception
                     (Giving_Up'Identity, "unmatched closing brace");
@@ -188,8 +236,8 @@ procedure Leading_Whitespace_Checker is
                case Previous_Character is
                   when ',' | ' ' | ':' | '?' =>
                      Put_Error
-                       ("illegal character '" & Previous_Character &
-                        "' before closing parenthesis");
+                       ("""" & Previous_Character & Current_Character &
+                        """ not allowed");
                   when others                =>
                      null;
                end case;
@@ -249,6 +297,15 @@ procedure Leading_Whitespace_Checker is
                      exit Read_Code_Loop when Current_Character = LF;
                   end loop;
                end if;
+            when ';' | ',' =>
+               if
+                 Previous_Character = LF or
+                 Previous_Character = HT or
+                 Previous_Character = ' '
+               then
+                  Put_Error
+                    ("illegal whitespace before '" & Current_Character & ''');
+               end if;
             when others    =>
                null;
          end case;
@@ -284,32 +341,18 @@ begin
             when LF        =>
                if Previous_Character = ' ' or Previous_Character = HT then
                   Put_Error ("trailing whitespace");
-                  Depth_Indentation := 0;
-                  Depth_Padding     := 0;
+               elsif Previous_Character = '(' or Previous_Character = '[' then
+                  Put_Error
+                    ("empty '" & Previous_Character & "' at end of line");
                end if;
                Next_Line;
+               Depth_Indentation := 0;
+               Depth_Padding     := 0;
             when '#'       =>
                Read_Macro;
                Depth_Indentation := 0;
                Depth_Padding     := 0;
             when others    =>
-               case Current_Character is
-                  when ')' | ';' =>
-                     --  Must allow "()" (empty parameter list) and "(;" (for
-                     --  statement without loop variable declaration).
-                     if Previous_Character /= '(' then
-                        Put_Error
-                       ("illegal '" & Current_Character &
-                        "' at beginning of line");
-                     end if;
-                  when ']' | ',' =>
-                     Put_Error
-                       ("illegal '" & Current_Character &
-                        "' at beginning of line");
-                  when others =>
-                     null;
-               end case;
-
 --            Put_Line
 --              ("DEBUG: line number ="  & Line_Number      'Img &
 --               ", Depth_Indentation =" & Depth_Indentation'Img &
@@ -394,4 +437,4 @@ exception
    when others =>
       Put_Error
         ("INTERNAL ERROR: " & Argument (1) & ':' & Current_Line_Number'Img);
-end Leading_Whitespace_Checker;
+end Whitespace_Checker;

@@ -71,11 +71,11 @@ enum FieldCaps {
 	 * If MOVECAPS_WALK, any walking being can walk to this field*/
 	MOVECAPS_WALK = 32,
 
-	/** If MOVECAPS_SWIM, any swimming being (including ships) can go there
-	* Additionally, swimming beings can temporarily visit fields that are walkable
-	* but not swimmable if those fields are at the start or end of their path.
-	* Without this clause, harbours would be kind of impossible ;)
-	* This clause stops ducks from "swimwalking" along the coast*/
+	/// If MOVECAPS_SWIM, any swimming being (including ships) can go there.
+	/// Additionally, swimming beings can temporarily visit nodes that are
+	/// walkable but not swimmable if those nodes are at the start or end of
+	/// their path. Without this clause, harbours would be kind of impossible ;)
+	/// This clause stops ducks from "swimwalking" along the coast.
 	MOVECAPS_SWIM = 64,
 };
 

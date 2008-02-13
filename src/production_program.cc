@@ -48,7 +48,7 @@ void ProductionProgram::parse
 {
 	Section* sprogram = prof->get_safe_section(name.c_str());
 
-	for (uint32_t idx = 0; ; ++idx) {
+	for (uint32_t idx = 0;; ++idx) {
 		char buffer[32];
 		snprintf(buffer, sizeof(buffer), "%i", idx);
 		const char * const string = sprogram->get_string(buffer, 0);

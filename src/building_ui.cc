@@ -1666,7 +1666,7 @@ void MilitarySite_Window::update() {
 	if (soldiers.size() < m_table->size()) m_table->clear();
 
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
-		Soldier & s = *soldiers[i] ;
+		Soldier & s = *soldiers[i];
 		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
 		if (not er)                          er = &m_table->add(s);
 		const uint32_t hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
@@ -2127,7 +2127,7 @@ void TrainingSite_Window::update() {
 	if (soldiers.size() != m_table->size()) m_table->clear();
 
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
-		Soldier & s = *soldiers[i] ;
+		Soldier & s = *soldiers[i];
 		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
 		if (not er)                           er = &m_table->add(s);
 		const uint32_t hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();

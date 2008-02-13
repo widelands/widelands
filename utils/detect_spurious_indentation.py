@@ -1,12 +1,9 @@
 #! /usr/bin/python -tt
 
+#  THIS PROGRAM IS DEPRECATED. USE whitespace_checker INSTEAD!"
+#
 #  Detect lines with too deep indentation. A line is not allowed to be indented
 #  more than 1 level deeper than the previous line.
-#
-#  Since there are still many lines that are indented with spaces, there is a
-#  special case that prevents lines that follow such lines and are correctly
-#  indented with tabs from being detected as indented too deep. This special
-#  case can be removed when everything is correctly indented with tabs.
 #
 #  There is another special case that allows a parameter list to be indented 2
 #  levels deeper than the previous line (which contains the function
@@ -24,7 +21,7 @@ for line in file:
 	for char in line:
 		if '\n' == char: #  the line is empty, skip it
 			break
-		if '#' == char: # the line is a macro, skip it
+		if '#'  == char: #  the line is a macro, skip it
 			break
 		if '\t' == char:
 			indentation_depth += 1
@@ -39,14 +36,6 @@ for line in file:
 
 			if indentation_depth > indentation_depth_previous_line + allowed_incr:
 				print "%s:%u: indentation is too deep" % (sys.argv[1], line_number)
-
-			#  The line starts with a space; assume that it is indented with
-			#  spaces.
-			if ' ' == line[0]:
-				#  Set the indentation depth to a high value so that a following
-				#  line that is correctly indented witht tabs is not detected as
-				#  indented too deep.
-				indentation_depth = 0xff
 
 			indentation_depth_previous_line = indentation_depth
 			break

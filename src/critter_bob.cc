@@ -64,7 +64,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 {
 	Section* sprogram = parser->prof->get_safe_section(name.c_str());
 
-	for (uint32_t idx = 0; ; ++idx) {
+	for (uint32_t idx = 0;; ++idx) {
 		try
 		{
 			char buffer[32];

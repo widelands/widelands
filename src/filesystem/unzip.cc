@@ -200,7 +200,7 @@ local int32_t unzlocal_getShort OF
 
 local int32_t unzlocal_getShort (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong* pX)
 {
-	uLong x ;
+	uLong x;
 	int32_t i = 0;
 	int32_t err;
 
@@ -222,7 +222,7 @@ local int32_t unzlocal_getLong OF
 
 local int32_t unzlocal_getLong (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong* pX)
 {
-	uLong x ;
+	uLong x;
 	int32_t i = 0;
 	int32_t err;
 
@@ -1198,9 +1198,9 @@ extern int32_t ZEXPORT unzOpenCurrentFile3 (unzFile file, int32_t* method, int32
 		//  I known the size of both compressed and uncompressed data.
 	}
 	pfile_in_zip_read_info->rest_read_compressed =
-		s->cur_file_info.compressed_size ;
+		s->cur_file_info.compressed_size;
 	pfile_in_zip_read_info->rest_read_uncompressed =
-		s->cur_file_info.uncompressed_size ;
+		s->cur_file_info.uncompressed_size;
 
 
 	pfile_in_zip_read_info->pos_in_zipfile =
@@ -1931,7 +1931,7 @@ local int32_t ziplocal_getShort OF
 
 local int32_t ziplocal_getShort (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong* pX)
 {
-	uLong x ;
+	uLong x;
 	int32_t i = 0;
 	int32_t err;
 
@@ -1953,7 +1953,7 @@ local int32_t ziplocal_getLong OF
 
 local int32_t ziplocal_getLong (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong* pX)
 {
-	uLong x ;
+	uLong x;
 	int32_t i = 0;
 	int32_t err;
 
@@ -2015,7 +2015,7 @@ local uLong ziplocal_SearchCentralDir(const zlib_filefunc_def* pzlib_filefunc_de
 			uBackRead = uMaxBack;
 		else
 			uBackRead+=BUFREADCOMMENT;
-		uReadPos = uSizeFile-uBackRead ;
+		uReadPos = uSizeFile-uBackRead;
 
 		uReadSize =
 			BUFREADCOMMENT + 4 < uSizeFile - uReadPos ?
@@ -2213,7 +2213,7 @@ extern zipFile ZEXPORT zipOpen2
 
 		byte_before_the_zipfile =
 			central_pos - (offset_central_dir + size_central_dir);
-		ziinit.add_position_when_writting_offset = byte_before_the_zipfile ;
+		ziinit.add_position_when_writting_offset = byte_before_the_zipfile;
 
 		{
 			uLong size_central_dir_to_read = size_central_dir;
@@ -2343,7 +2343,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 	zi->ci.stream_initialised   = 0;
 	zi->ci.pos_in_buffered_data = 0;
 	zi->ci.raw                  = raw;
-	zi->ci.pos_local_header     = ZTELL(zi->z_filefunc, zi->filestream) ;
+	zi->ci.pos_local_header     = ZTELL(zi->z_filefunc, zi->filestream);
 	zi->ci.size_centralheader   =
 		SIZECENTRALHEADER      +
 		size_filename          +
@@ -2783,7 +2783,7 @@ extern int32_t ZEXPORT zipClose (zipFile file, const char* global_comment)
 	zip_internal* zi;
 	int32_t err = 0;
 	uLong size_centraldir = 0;
-	uLong centraldir_pos_inzip ;
+	uLong centraldir_pos_inzip;
 	uInt size_global_comment;
 	if (file == NULL)
 		return ZIP_PARAMERROR;

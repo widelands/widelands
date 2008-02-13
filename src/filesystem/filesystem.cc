@@ -387,17 +387,16 @@ const char *FileSystem::FS_Filename(const char* buf) {
 	return buf;
 }
 
-/**
- * Create a filesystem from a zipfile or a real directory
- * \todo Catch FileType_error in all users
- * \todo Check for existence before doing anything with the file/dir
- * \todo Catch FileNotFound_error in all users
- * \throw FileNotFound_error if root does not exist, is some kind of special file,
- * loops around (via symlinks) or is too long for the OS/filesystem
- * \throw FileAccessDenied_error if the OS denies access (of course ;-)
- * \throw FileTypeError if root is neither a directory or regular file
- * \todo throw FileTypeError if root is not a zipfile (exception from ZipFilesystem)
- */
+/// Create a filesystem from a zipfile or a real directory
+/// \todo Catch FileType_error in all users
+/// \todo Check for existence before doing anything with the file/dir
+/// \todo Catch FileNotFound_error in all users
+/// \throw FileNotFound_error if root does not exist, is some kind of special
+/// file, loops around (via symlinks) or is too long for the OS/filesystem.
+/// \throw FileAccessDenied_error if the OS denies access (of course ;-)
+/// \throw FileTypeError if root is neither a directory or regular file
+/// \todo throw FileTypeError if root is not a zipfile (exception from
+/// ZipFilesystem)
 FileSystem * FileSystem::Create(std::string const & root)
 throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 {

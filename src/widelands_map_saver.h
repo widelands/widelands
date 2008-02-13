@@ -46,7 +46,7 @@ struct Map_Saver {
 	Map_Saver(FileSystem &, Editor_Game_Base*);
 	~Map_Saver();
 
-	void save() throw (_wexception) ;
+	void save() throw (_wexception);
 	Map_Map_Object_Saver * get_map_object_saver() {return m_mos;}
 
 private:

@@ -2801,23 +2801,39 @@ void Economy::check_merge(Flag *f1, Flag *f2)
 	e1->do_merge(e2);
 }
 
-/**
- * If the two flags can no longer reach each other (pathfinding!), the economy
- * gets split.
- *
- * Should we create the new economy starting at f1 or f2? Ideally, we'd split
- * off in a way that the new economy will be relatively small.
- *
- * Unfortunately, there's no easy way to tell in advance which of the two
- * resulting economies will be smaller (the problem is even NP-complete), so we
- * use a heuristic.
- *
- * Using f2 is just a guess, but if anything f2 is probably best: it will be
- * the end point of a road. Since roads are typically built from the center of
- * a country outwards, and since splits are more likely to happen outwards,
- * the economy at the end point is probably smaller in average. It's all just
- * guesswork though ;)
-*/
+/// If the two flags can no longer reach each other (pathfinding!), the economy
+/// gets split.
+///
+/// Should we create the new economy starting at f1 or f2? Ideally, we'd split
+/// off in a way that the new economy will be relatively small.
+///
+/// Unfortunately, there's no easy way to tell in advance which of the two
+/// resulting economies will be smaller (the problem is even NP-complete), so
+/// we use a heuristic.
+/// NOTE There is a way; parallel counting. If for example one has size 100 and
+/// NOTE the other has size 1, we start counting (to 1) in the first. Then we
+/// NOTE switch to the second and count (to 1) there. Then we switch to the
+/// NOTE first and count (to 2) there. Then we switch to the second and have
+/// NOTE nothing more to count. We are done and know that the second is not
+/// NOTE larger than the first.
+/// NOTE
+/// NOTE We have not done more than n * (s + 1) counting operations, where n is
+/// NOTE the number of parallel entities (2 in this example) and s is the size
+/// NOTE of the smallest entity (1 in this example). So instead of risking to
+/// NOTE make a bad guess and change 100 entities, we count 4 and change 1.
+/// NOTE                                                                --sigra
+///
+/// Using f2 is just a guess, but if anything f2 is probably best: it will be
+/// the end point of a road. Since roads are typically built from the center of
+/// a country outwards, and since splits are more likely to happen outwards,
+/// the economy at the end point is probably smaller in average. It's all just
+/// guesswork though ;)
+/// NOTE Many roads are built when a new building has just been placed. For
+/// NOTE those cases, the guess is bad because the user typically builds from
+/// NOTE the new building's flag to some existing flag (at the headquarter or
+/// NOTE somewhere in his larger road NOTE network). This is also what the user
+/// NOTE interface makes the player do when it enters roadbuilding mode after
+/// NOTE placing a flag that is not connected with roads.               --sigra
 void Economy::check_split(Flag *f1, Flag *f2)
 {
 	assert(f1 != f2);

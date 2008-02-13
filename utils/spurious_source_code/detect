@@ -1,23 +1,19 @@
 #! /bin/sh
-
-if [ ! -f utils/spurious_source_code/leading_whitespace_checker ]; then
-	echo "WARNING: utils/spurious_source_code/leading_whitespace_checker does not exist!"
+CHECKER=utils/spurious_source_code/whitespace_checker
+if [ ! -f $CHECKER ]; then
+	echo "WARNING: $CHECKER does not exist!"
 	echo "WARNING:    Go to utils/spurious_source_code and build it with make!"
-	echo "WARNING:    Leading whitespace will not be checked!"
+	echo "WARNING:    Many checks will not be done much slower or not at all!"
+	unset CHECKER
 fi
 
 REGEXPS_FILE="/tmp/spurious_source_code_regexps"
 rm -f $REGEXPS_FILE
 for r in utils/spurious_source_code/regexps/*; do
-	[[ -d $r ]] && if [ ! -f $r/disabled ]; then
-		cat $r/regexps >> $REGEXPS_FILE
-	fi
+	[[ -d $r && ! -f $r/disabled && ( ! $CHECKER || ! -f $r/redundant_with_whitespace_checker ) ]] && cat $r/regexps >> $REGEXPS_FILE
 done
 for i in $(find src -name *.h -o -name *.cc); do
 	egrep --color --with-filename --line-number -f $REGEXPS_FILE $i;
-	utils/detect_spurious_indentation.py $i;
-	if [ -f utils/spurious_source_code/leading_whitespace_checker ]; then
-		utils/spurious_source_code/leading_whitespace_checker $i
-	fi
+	[[ $CHECKER ]] && $CHECKER $i || utils/detect_spurious_indentation.py $i;
 done
 rm -f $REGEXPS_FILE

@@ -484,18 +484,12 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
 }
 
 
-/*
-===============
-Warehouse::act
-
-Act regularly to create carriers. According to intelligence, this is some
-highly advanced technology. Not only do the settlers have no problems with
-birth control, they don't even need anybody to procreate. They must have
-built-in DNA samples in those warehouses. And what the hell are they doing,
-killing useless tribesmen! The Borg? Or just like Soylent Green?
-Or maybe I should just stop writing comments that late at night ;-)
-===============
-*/
+/// Act regularly to create carriers. According to intelligence, this is some
+/// highly advanced technology. Not only do the settlers have no problems with
+/// birth control, they don't even need anybody to procreate. They must have
+/// built-in DNA samples in those warehouses. And what the hell are they doing,
+/// killing useless tribesmen! The Borg? Or just like Soylent Green?
+/// Or maybe I should just stop writing comments that late at night ;-)
 void Warehouse::act(Game* g, uint32_t data)
 {
 	const Tribe_Descr & tribe = owner().tribe();

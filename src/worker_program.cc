@@ -52,7 +52,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 {
 	Section* sprogram = parser->prof->get_safe_section(name.c_str());
 
-	for (uint32_t idx = 0; ; ++idx) {
+	for (uint32_t idx = 0;; ++idx) {
 		try
 		{
 			char buf[32];

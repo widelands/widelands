@@ -390,7 +390,7 @@ void Map::cleanup() {
 	//  needed.
 #ifdef DEBUG
 	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
-		assert(m_extradatainfos[i].type == Extradata_Info::PIC) ;
+		assert(m_extradatainfos[i].type == Extradata_Info::PIC);
 	}
 #endif
 	m_extradatainfos.clear();

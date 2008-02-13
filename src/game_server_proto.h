@@ -81,7 +81,7 @@ enum {
 const static uint32_t FIRST_CLIENT_PACKET_INDEX = 0;
 const static uint32_t LAST_CLIENT_PACKET_INDEX = 0xffff - 1;
 const static uint32_t FIRST_SERVER_PACKET_INDEX = 0xffff0001;
-const static uint32_t LAST_SERVER_PACKET_INDEX = 0xffffffff - 1 ;
+const static uint32_t LAST_SERVER_PACKET_INDEX = 0xffffffff - 1;
 
 /*
  * Standart port

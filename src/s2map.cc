@@ -130,16 +130,14 @@ int32_t S2_Map_Loader::load_map_complete
 }
 
 
-/**
- * Some of the original S2 maps have rather odd sizes. In that case, however,
- * width (and height?) are rounded up to some alignment. The in-file size of
- * a section is stored in the section header (I think ;)).
- * This is the work-around.
- *
- * Returns a pointer to the (packed) contents of the section. 0 if the read
- * failed.
- * If successful, you must free the returned pointer.
- */
+/// Some of the original S2 maps have rather odd sizes. In that case, however,
+/// width (and height?) are rounded up to some alignment. The in-file size of a
+/// section is stored in the section header (I think ;)).
+/// This is the work-around.
+///
+/// Returns a pointer to the (packed) contents of the section. 0 if the read
+/// failed.
+/// If successful, you must free the returned pointer.
 uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t height)
 {
 	uint16_t dw, dh;
@@ -270,9 +268,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		assert(mapheight == header.h);
 
 
-		/*
-          SWD-SECTION 1: Heights
-        */
+		//  SWD-SECTION 1: Heights
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 1 (Heights) not found");

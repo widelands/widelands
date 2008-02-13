@@ -349,7 +349,7 @@ void ZipFilesystem::Write
 	assert(err == ZIP_OK);
 
 	err = zipWriteInFileInZip (m_zipfile, data, length);
-	assert(err == ZIP_OK) ;
+	assert(err == ZIP_OK);
 
 	zipCloseFileInZip(m_zipfile);
 }
