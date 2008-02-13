@@ -23,7 +23,6 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "widelands.h"
 
 #include "ui_listselect.h"
 #include "ui_window.h"
@@ -48,7 +47,7 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 private:
 	Interactive_Player               & interactivePlayer;
 	UI::Listselect<Widelands::Ware_Index> wares;
-	UI::Listselect<Ware_Index>            prodSites;
+	UI::Listselect<Widelands::Building_Index> prodSites;
 	UI::Table     <intptr_t> condTable;
 	UI::Multiline_Textarea    descrTxt;
 	Widelands::Item_Ware_Descr const * selectedWare;
