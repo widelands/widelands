@@ -20,6 +20,8 @@
 #ifndef INTERACTIVE_SPECTATOR_H
 #define INTERACTIVE_SPECTATOR_H
 
+#include "ui_button.h"
+
 #include "interactive_base.h"
 #include <SDL_keyboard.h>
 
@@ -51,6 +53,9 @@ private:
 	void field_action();
 
 private:
+	UI::Button<Interactive_Spectator> m_exit;
+	UI::Button<Interactive_Spectator> m_toggle_minimap;
+
 	class Internals;
 
 	Internals* m;

@@ -38,8 +38,6 @@ private:
 	UI::Button<GameMainMenu> ware_stats;
 	UI::Button<GameMainMenu> building_stats;
 	UI::Button<GameMainMenu> stock;
-	UI::Button<GameMainMenu> chat;
-	UI::Button<GameMainMenu> options_menu;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint32_t hspacing() const {return 5;};
@@ -75,8 +73,6 @@ private:
 	void clicked_ware_stats    ();
 	void clicked_building_stats();
 	void clicked_stock         ();
-	void clicked_chat          ();
-	void clicked_options_menu  ();
 };
 
 #endif

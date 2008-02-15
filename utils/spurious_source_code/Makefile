@@ -1,4 +1,4 @@
-leading_whitespace_checker: whitespace_checker.adb
+whitespace_checker: whitespace_checker.adb
 	gnatmake -gnatafnN -gnatwa -gnaty whitespace_checker
 
 clean:

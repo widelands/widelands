@@ -30,6 +30,8 @@
 #include "editor_set_terrain_tool.h"
 #include "editor_set_starting_pos_tool.h"
 #include "interactive_base.h"
+
+#include "ui_button.h"
 #include "ui_unique_window.h"
 
 class Editor;
@@ -49,9 +51,6 @@ private:
 	~Editor_Interactive();
 
 public:
-	Widelands::Editor_Game_Base const & egbase() const {return m_egbase;}
-	Widelands::Editor_Game_Base       & egbase()       {return m_egbase;}
-
 	void load(std::string const & filename);
 
 	// leaf functions from base class
@@ -131,7 +130,6 @@ private:
 
 	int32_t m_realtime;
 
-	Widelands::Editor_Game_Base & m_egbase;
 	UI::UniqueWindow::Registry m_toolmenu;
 	UI::UniqueWindow::Registry m_toolsizemenu;
 	UI::UniqueWindow::Registry m_playermenu;
@@ -145,6 +143,16 @@ private:
 	UI::UniqueWindow::Registry m_immovablemenu;
 	UI::UniqueWindow::Registry m_bobmenu;
 	UI::UniqueWindow::Registry m_resourcesmenu;
+
+	UI::Button<Editor_Interactive> m_toggle_main_menu;
+	UI::Button<Editor_Interactive> m_toggle_tool_menu;
+	UI::Button<Editor_Interactive> m_toggle_toolsize_menu;
+	UI::Button<Editor_Interactive> m_toggle_minimap;
+	UI::Button<Editor_Interactive> m_toggle_buildhelp;
+	UI::Button<Editor_Interactive> m_toggle_player_menu;
+	UI::Button<Editor_Interactive> m_toggle_event_menu;
+	UI::Button<Editor_Interactive> m_toggle_variables_menu;
+	UI::Button<Editor_Interactive> m_toggle_objectives_menu;
 };
 
 #endif

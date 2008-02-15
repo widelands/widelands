@@ -1,16 +1,16 @@
 --  Detecs errors in leading whitespace and a few other things in C++ source
 --  code.
 --
---  It checks the beginning of each line, the so called line begin, which
---  consists of 3 parts:
+--  Checks the beginning of each line, the so called line begin, which consists
+--  of 3 parts:
 --    1. Indentation:
 --         A sequence of horizontal tab characters. Their count is called the
 --         indentation depth of that line. Some validation is done for the
 --         indentation depth of lines, for example a line with a closing brace
 --         must have the same indentation depth as the line with the matching
 --         opening brace.
---    2. Padding:
---         A sequence of space characters. Their count is called the padding
+--    2. Alignment:
+--         A sequence of space characters. Their count is called the alignment
 --         depth of that line. It must equal the depth of open parentheses from
 --         preceding lines.
 --    3. Opening parentheses:
@@ -19,12 +19,12 @@
 --  The line begin is read in 3 stages. First characters are read until one is
 --  found, that is not a horizontal tab. After this stage the indentation depth
 --  of the line is known. Then characters are read until one is found, that is
---  not a space. After this stage the padding depth of the line is known. Then
---  characters are reade until one is found that is not a '(' or '['. After
---  this stage the whole line begin has been read some errors are reported,
---  such as wrong amount of padding. If a '#' is found (a preprocessor macro),
---  the macro is read and ignored. Otherwise the rest of the line is read by
---  Read_Code.
+--  not a space. After this stage the alignment depth of the line is known.
+--  Then characters are reade until one is found that is not a '(' or '['.
+--  After this stage the whole line begin has been read some errors are
+--  reported, such as wrong amount of alignment. If a '#' is found (a
+--  preprocessor macro), the macro is read and ignored. Otherwise the rest of
+--  the line is read by Read_Code.
 --
 --  Read_Code reads everything that comes after the line begin, until the end
 --  of the line. Any opening parenthesis that it finds must be closed on that
@@ -68,6 +68,7 @@ procedure Whitespace_Checker is
       Indentation : Indentation_Level;
       Parentheses : Parentheses_Level;
    end record;
+   for Opening_Brace'Size use 32;
    type Brace_Index is range 0 .. 63;
    Opening_Braces : array (Brace_Index) of Opening_Brace;
    Brace_Level : Brace_Index := 0;
@@ -316,7 +317,7 @@ procedure Whitespace_Checker is
 
    Allowed_Indentation_Increase : Indentation_Level := 0;
    Previous_Depth_Indentation   : Indentation_Level := 0;
-   Depth_Padding                : Parentheses_Level := 0;
+   Depth_Alignment              : Parentheses_Level := 0;
 begin
    Open (The_File, In_File, Argument (1));
    while not End_Of_File (The_File) loop
@@ -329,7 +330,7 @@ begin
             Next_Character;
          end loop;
          while Current_Character = ' ' loop
-            Depth_Padding := Depth_Padding + 1;
+            Depth_Alignment := Depth_Alignment + 1;
             Next_Character;
          end loop;
          while Current_Character = '(' or Current_Character = '[' loop
@@ -347,11 +348,11 @@ begin
                end if;
                Next_Line;
                Depth_Indentation := 0;
-               Depth_Padding     := 0;
+               Depth_Alignment   := 0;
             when '#'       =>
                Read_Macro;
                Depth_Indentation := 0;
-               Depth_Padding     := 0;
+               Depth_Alignment   := 0;
             when others    =>
 --            Put_Line
 --              ("DEBUG: line number ="  & Line_Number      'Img &
@@ -374,9 +375,9 @@ begin
                   Put_Error ("indentation is too deep");
                end if;
 
-               if Depth_Padding /= Depth_Parentheses then
+               if Depth_Alignment /= Depth_Parentheses then
                   Put_Error
-                    ("wrong amount of leading padding:" & Depth_Padding'Img &
+                    ("wrong amount of leading padding:" & Depth_Alignment'Img &
                      " (should be" & Depth_Parentheses'Img & ')');
                end if;
                Depth_Parentheses :=
@@ -396,7 +397,7 @@ begin
                         "at line begin");
                   end if;
                   if
-                    (0 < Parentheses_At_Line_Begin or 0 < Depth_Padding)
+                    (0 < Parentheses_At_Line_Begin or 0 < Depth_Alignment)
                     and
                     Initial_Brace_Level < Brace_Level
                   then
@@ -415,7 +416,7 @@ begin
                end;
                Previous_Depth_Indentation := Depth_Indentation;
                Depth_Indentation          := 0;
-               Depth_Padding := 0;
+               Depth_Alignment            := 0;
 
                case Previous_Character is
                   when ',' | ';' | '}' =>

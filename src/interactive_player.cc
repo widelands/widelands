@@ -28,7 +28,9 @@
 #include "font_handler.h"
 #include "game_loader.h"
 #include "game_main_menu.h"
+#include "game_chat_menu.h"
 #include "game_objectives_menu.h"
+#include "game_options_menu.h"
 #include "graphic.h"
 #include "general_statistics_menu.h"
 #include "helper.h"
@@ -82,66 +84,54 @@ m_chat_messages(this, 10, 25, get_inner_w(), get_inner_h(), "", Align_TopLeft),
 m_type_message
 (this, 10, get_inner_h()-50, get_inner_w(), 50, "", Align_TopLeft),
 
+#define INIT_BUTTON(picture, callback, tooltip)                               \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
+ g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ &Interactive_Player::callback, this,                                         \
+ tooltip                                                                      \
 
-#define BUTTON_WIDTH  34
-#define BUTTON_HEIGHT 34
+m_toggle_chat
+(INIT_BUTTON("menu_chat",             toggle_chat,         _("Chat"))),
+
+m_toggle_options_menu
+(INIT_BUTTON("menu_options_menu",     toggle_options_menu, _("Options"))),
 
 m_toggle_main_menu
-(this,
- get_w() - 5 * BUTTON_WIDTH >> 1, get_h() - BUTTON_HEIGHT,
- BUTTON_WIDTH, BUTTON_HEIGHT,
- 2,
- g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png"),
- &Interactive_Player::toggle_main_menu, this,
- _("Menu")),
+(INIT_BUTTON("menu_toggle_menu",      toggle_main_menu,    _("Menu"))),
 
 m_toggle_objectives
-(this,
- m_toggle_main_menu.get_x() + BUTTON_WIDTH, m_toggle_main_menu.get_y(),
- BUTTON_WIDTH, BUTTON_HEIGHT,
- 2,
- g_gr->get_picture(PicMod_Game, "pics/menu_objectives.png"),
- &Interactive_Player::toggle_objectives, this,
- _("Objectives")),
+(INIT_BUTTON("menu_objectives",       toggle_objectives,   _("Objectives"))),
 
 m_toggle_minimap
-(this,
- m_toggle_objectives.get_x() + BUTTON_WIDTH, m_toggle_objectives.get_y(),
- BUTTON_WIDTH, BUTTON_HEIGHT,
- 2,
- g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png"),
- &Interactive_Player::toggle_minimap, this,
- _("Minimap")),
+(INIT_BUTTON("menu_toggle_minimap",   toggle_minimap,      _("Minimap"))),
 
 m_toggle_buildhelp
-(this,
- m_toggle_minimap.get_x() + BUTTON_WIDTH, m_toggle_minimap.get_y(),
- BUTTON_WIDTH, BUTTON_HEIGHT,
- 2,
- g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png"),
- &Interactive_Player::toggle_buildhelp, this,
- _("Buildhelp")),
+(INIT_BUTTON("menu_toggle_buildhelp", toggle_buildhelp,    _("Buildhelp"))),
 
+#if 0
 m_toggle_resources
-(this,
- m_toggle_buildhelp.get_x() + BUTTON_WIDTH, m_toggle_buildhelp.get_y(),
- BUTTON_WIDTH, BUTTON_HEIGHT,
- 2,
- g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_change_resources.png"),
- &Interactive_Player::toggle_resources, this,
- _("Geologic survey information")),
+(INIT_BUTTON
+ ("editor_menu_tool_change_resources",
+  toggle_resources,
+  _("Resource information"))),
+#endif
 
 m_toggle_help
-(this,
- m_toggle_resources.get_x()/* + BUTTON_WIDTH "hide the geologic survey button until it does something"*/, m_toggle_resources.get_y(),
- BUTTON_WIDTH, BUTTON_HEIGHT,
- 2,
- g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
- &Interactive_Player::toggle_help, this,
- _("Tribe's ware encyclopedia")),
+(INIT_BUTTON("menu_help",             toggle_help,         _("Ware help"))),
 
 m_do_chat_overlays(true), m_is_typing_msg(false)
 {
+	m_toolbar.add(&m_toggle_chat,         UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_main_menu,    UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_objectives,   UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_minimap,      UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_buildhelp,    UI::Box::AlignLeft);
+	//m_toolbar.add(&m_toggle_resources,    UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_help,         UI::Box::AlignLeft);
+	m_toolbar.resize();
+	adjust_toolbar_position();
+
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::field_action);
 }
@@ -246,43 +236,37 @@ void Interactive_Player::postload()
 }
 
 
-/*
-===============
-Interactive_Player::main_menu_btn
-
-Bring up or close the main menu
-===============
-*/
-void Interactive_Player::toggle_main_menu() {
+//  Toolbar button callback functions.
+void Interactive_Player::toggle_chat        () {
+	if (m_chat.window)
+		delete m_chat.window;
+	else
+		new GameChatMenu(*this, m_chat, game().get_netgame());
+}
+void Interactive_Player::toggle_options_menu() {
+	if (m_options.window)
+		delete m_options.window;
+	else
+		new GameOptionsMenu(*this, m_options, m_mainm_windows);
+}
+void Interactive_Player::toggle_main_menu   () {
 	if (m_mainmenu.window)
 		delete m_mainmenu.window;
 	else
 		new GameMainMenu(*this, m_mainmenu, m_mainm_windows);
 }
-
-void Interactive_Player::toggle_objectives() {
+void Interactive_Player::toggle_objectives  () {
 	if (m_objectives.window)
 		delete m_objectives.window;
 	else
 		new GameObjectivesMenu(*this, m_objectives);
 }
-
-//
-// Toggles buildhelp rendering in the main MapView
-//
-void Interactive_Player::toggle_buildhelp()
-{
+void Interactive_Player::toggle_buildhelp   () {
 	egbase().map().overlay_manager().toggle_buildhelp();
 }
-
-
-void Interactive_Player::toggle_resources() {}
-
-
-//
-// Shows wares encyclopedia for wares
-//
-void Interactive_Player::toggle_help() {
+void Interactive_Player::toggle_resources   () {
+}
+void Interactive_Player::toggle_help        () {
 	if (m_encyclopedia.window)
 		delete m_encyclopedia.window;
 	else

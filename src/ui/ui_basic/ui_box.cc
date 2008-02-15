@@ -26,10 +26,8 @@ namespace UI {
 Initialize an empty box
 */
 Box::Box(Panel* parent, int32_t x, int32_t y, uint32_t orientation)
-	: Panel(parent, x, y, 0, 0)
-{
-	m_orientation = orientation;
-}
+	: Panel(parent, x, y, 0, 0), m_orientation(orientation)
+{}
 
 
 /**

@@ -469,8 +469,8 @@ m_texture           (0)
 		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, texture);
 	else
 		snprintf
-		(fnametmpl, sizeof(fnametmpl),
-		 "%s/pics/%s_??.png", directory, m_name.c_str());
+			(fnametmpl, sizeof(fnametmpl),
+			 "%s/pics/%s_??.png", directory, m_name.c_str());
 
 	m_picnametempl = strdup(fnametmpl);
 }

@@ -24,7 +24,6 @@
 #include "i18n.h"
 
 #include "ui_editbox.h"
-#include "ui_button.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
@@ -40,30 +39,28 @@ struct Interactive_Spectator::Internals {
 Interactive_Spectator::Interactive_Spectator(Widelands::Game * const g)
 :
 Interactive_Base(*g),
+
+#define INIT_BUTTON(picture, callback, tooltip)                               \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
+ g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ &Interactive_Spectator::callback, this,                                      \
+ tooltip                                                                      \
+
+m_exit
+(INIT_BUTTON("menu_exit_game",      exit_btn,       _("Menu"))),
+
+m_toggle_minimap
+(INIT_BUTTON("menu_toggle_minimap", toggle_minimap, _("Minimap"))),
+
 m(new Internals)
 {
+	m_toolbar.add(&m_exit,           UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_minimap, UI::Box::AlignLeft);
+	m_toolbar.resize();
+	adjust_toolbar_position();
+
 	// Setup all screen elements
 	fieldclicked.set(this, &Interactive_Spectator::field_action);
-
-	// user interface buttons
-	int32_t x = (get_w() - (4*34)) >> 1;
-	int32_t y = get_h() - 34;
-
-	new UI::Button<Interactive_Spectator>
-		(this,
-		 x + 34, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
-		 &Interactive_Spectator::exit_btn, this,
-		 _("Menu"));
-
-	new UI::Button<Interactive_Spectator>
-		(this,
-		 x + 68, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png"),
-		 &Interactive_Spectator::toggle_minimap, this,
-		 _("Minimap"));
 
 	// Speed info
 	m->label_speed = new UI::Textarea(this, get_w(), 0, 0, 0, "", Align_TopRight);

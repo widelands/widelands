@@ -155,9 +155,9 @@ throw (_wexception)
 							event_chain.m_state = EventChain::DONE;
 						else
 							throw wexception
-							("state is \"%s\" but must be one of {init (default), "
-							 "running, done}",
-							 state);
+								("state is \"%s\" but must be one of {init (default), "
+								 "running, done}",
+								 state);
 					}
 				} catch (std::exception const & e) {
 					throw wexception("%s: %s", name, e.what());

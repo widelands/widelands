@@ -25,7 +25,7 @@
 #include "mapview.h"
 #include "overlay_manager.h"
 
-#include "ui_panel.h"
+#include "ui_box.h"
 #include "ui_unique_window.h"
 
 #include <SDL_keysym.h>
@@ -161,10 +161,16 @@ protected:
 
 	void unset_sel_picture();
 	void set_sel_picture(const char * const);
+	void adjust_toolbar_position() {
+		m_toolbar.set_pos
+			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));
+	}
+	UI::Box           m_toolbar;
 	Widelands::Coords m_flag_to_connect;
 	bool m_shift_down;
 	bool m_ctrl_down;
 };
 
+#define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, 2U
 
 #endif

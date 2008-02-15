@@ -37,11 +37,11 @@ Event::State Event_Unhide_Area::run(Game* game) {
 			player.add_areawatcher(m_player_area).schedule_act(game, duration);
 		else
 			player.see_area
-			(Player_Area<Area<FCoords> >
-			 (m_player_area.player_number,
-			  Area<FCoords>
-			  (game->map().get_fcoords(m_player_area), m_player_area.radius)),
-			 false);
+				(Player_Area<Area<FCoords> >
+				 (m_player_area.player_number,
+				  Area<FCoords>
+				  (game->map().get_fcoords(m_player_area), m_player_area.radius)),
+				 false);
 	}
 
 	return m_state = DONE;

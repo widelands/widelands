@@ -286,7 +286,8 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 	if (action->sparam1 == "immovable") {
 		std::vector<ImmovableFound> list;
 		if (action->iparam2 < 0)
-			map.find_reachable_immovables(area, &list, cstep);
+			map.find_reachable_immovables
+				(area, &list, cstep);
 		else
 			map.find_reachable_immovables
 				(area, &list, cstep, FindImmovableAttribute(action->iparam2));
@@ -304,7 +305,8 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 		std::vector<Bob*> list;
 		log("BOB: searching bob with attribute (%i)\n", action->iparam2);
 		if (action->iparam2 < 0)
-			map.find_reachable_bobs(area, &list, cstep);
+			map.find_reachable_bobs
+				(area, &list, cstep);
 		else
 			map.find_reachable_bobs
 				(area, &list, cstep, FindBobAttribute(action->iparam2));

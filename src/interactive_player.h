@@ -51,16 +51,12 @@ struct Interactive_Player : public Interactive_Base {
 		UI::UniqueWindow::Registry keys;
 		UI::UniqueWindow::Registry authors;
 		UI::UniqueWindow::Registry licence;
-		UI::UniqueWindow::Registry options;
 		UI::UniqueWindow::Registry sound_options;
 
 		UI::UniqueWindow::Registry building_stats;
 		UI::UniqueWindow::Registry general_stats;
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
-
-		UI::UniqueWindow::Registry chat;
-		UI::UniqueWindow::Registry objectives;
 	};
 
 	Interactive_Player(Widelands::Game &, Widelands::Player_Number);
@@ -71,6 +67,8 @@ struct Interactive_Player : public Interactive_Base {
 	void start();
 
 	void toggle_main_menu ();
+	void toggle_chat        ();
+	void toggle_options_menu();
 	void toggle_objectives();
 	void toggle_buildhelp ();
 	void toggle_resources ();
@@ -116,13 +114,18 @@ private:
 	UI::Textarea                   m_label_speed;
 	UI::Multiline_Textarea         m_chat_messages;
 	UI::Textarea                   m_type_message;
+	UI::Button<Interactive_Player> m_toggle_chat;
+	UI::Button<Interactive_Player> m_toggle_options_menu;
 	UI::Button<Interactive_Player> m_toggle_main_menu;
 	UI::Button<Interactive_Player> m_toggle_objectives;
 	UI::Button<Interactive_Player> m_toggle_minimap;
 	UI::Button<Interactive_Player> m_toggle_buildhelp;
-	UI::Button<Interactive_Player> m_toggle_resources;
+	//UI::Button<Interactive_Player> m_toggle_resources;
 	UI::Button<Interactive_Player> m_toggle_help;
 
+
+	UI::UniqueWindow::Registry m_chat;
+	UI::UniqueWindow::Registry m_options;
 	UI::UniqueWindow::Registry m_mainmenu;
 	UI::UniqueWindow::Registry m_objectives;
 	UI::UniqueWindow::Registry m_fieldaction;

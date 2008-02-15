@@ -35,7 +35,6 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "tribe.h"
-#include "ui_button.h"
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
 
@@ -47,8 +46,63 @@
 using Widelands::Building;
 
 Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
-Interactive_Base(e), m_egbase(e)
+Interactive_Base(e),
+m_need_save     (false),
+m_realtime      (WLApplication::get()->get_time()),
+
+#define INIT_BUTTON(picture, callback, tooltip)                               \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
+ g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ &Editor_Interactive::callback, this,                                         \
+ tooltip                                                                      \
+
+m_toggle_main_menu
+(INIT_BUTTON
+ ("menu_toggle_menu",              toggle_mainmenu,       _("Menu"))),
+
+m_toggle_tool_menu
+(INIT_BUTTON
+ ("editor_menu_toggle_tool_menu",  tool_menu_btn,         _("Tool"))),
+
+m_toggle_toolsize_menu
+(INIT_BUTTON
+ ("editor_menu_set_toolsize_menu", toolsize_menu_btn,     _("Toolsize"))),
+
+m_toggle_minimap
+(INIT_BUTTON
+ ("menu_toggle_minimap",           toggle_minimap,        _("Minimap"))),
+
+m_toggle_buildhelp
+(INIT_BUTTON
+ ("menu_toggle_buildhelp",         toggle_buildhelp,      _("Buildhelp"))),
+
+m_toggle_player_menu
+(INIT_BUTTON
+ ("editor_menu_player_menu",       toggle_playermenu,     _("Players"))),
+
+m_toggle_event_menu
+(INIT_BUTTON
+ ("menu_toggle_event_menu",        toggle_eventmenu,      _("Events"))),
+
+m_toggle_variables_menu
+(INIT_BUTTON
+ ("menu_toggle_variables_menu",    toggle_variablesmenu,  _("Variables"))),
+
+m_toggle_objectives_menu
+(INIT_BUTTON
+ ("menu_toggle_objectives_menu",   toggle_objectivesmenu, _("Objectives")))
 {
+	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_tool_menu,       UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_toolsize_menu,   UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_event_menu,      UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_variables_menu,  UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_objectives_menu, UI::Box::AlignLeft);
+	m_toolbar.resize();
+	adjust_toolbar_position();
 
 	//  Disable debug. It is no use for editor.
 #ifndef DEBUG
@@ -57,87 +111,7 @@ Interactive_Base(e), m_egbase(e)
 	set_display_flag(Interactive_Base::dfDebug, true);
 #endif
 
-	m_realtime = WLApplication::get()->get_time();
-
 	fieldclicked.set(this, &Editor_Interactive::map_clicked);
-
-	//  user interface buttons
-	int32_t x = (get_w() - (7*34)) >> 1;
-	int32_t y = get_h() - 34;
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png"),
-		 &Editor_Interactive::toggle_mainmenu, this,
-		 _("Menu"));
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x + 34, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.png"),
-		 &Editor_Interactive::tool_menu_btn, this,
-		 _("Tool"));
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x + 68, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/editor_menu_set_toolsize_menu.png"),
-		 &Editor_Interactive::toolsize_menu_btn, this,
-		 _("Toolsize"));
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x + 102, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png"),
-		 &Editor_Interactive::toggle_minimap, this,
-		 _("Minimap"));
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x + 136, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png"),
-		 &Editor_Interactive::toggle_buildhelp, this,
-		 _("Buildhelp"));
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x + 170, y, 34, 43,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/editor_menu_player_menu.png"),
-		 &Editor_Interactive::toggle_playermenu, this,
-		 _("Players"));
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x + 204, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_event_menu.png"),
-		 &Editor_Interactive::toggle_eventmenu, this,
-		 _("Events"));
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x + 238, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_variables_menu.png"),
-		 &Editor_Interactive::toggle_variablesmenu, this,
-		 _("Variables"));
-
-	new UI::Button<Editor_Interactive>
-		(this,
-		 x + 272, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_objectives_menu.png"),
-		 &Editor_Interactive::toggle_objectivesmenu, this,
-		 _("Objectives"));
-
-	m_need_save = false;
 }
 
 /// Restore default sel.

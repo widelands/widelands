@@ -67,6 +67,7 @@ m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
 m_buildroad                   (false),
 m_road_build_player           (0),
 m_flag_to_connect             (Coords::Null()),
+m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
 m_shift_down                  (false),
 m_ctrl_down                   (false)
 {
