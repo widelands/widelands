@@ -24,7 +24,7 @@
 #include "tribe.h"
 #include "player.h"
 
-using Widelands::Building_Descr;
+using Widelands::Building_Index;
 
 /*
 ===============
@@ -110,9 +110,9 @@ m_allow_button
 	m_forbidden.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
 
 	Widelands::Tribe_Descr const & tribe = player.tribe();
-	const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
-	for (intptr_t i = 0; i < nr_buildings; ++i) {
-		Building_Descr & building = *tribe.get_building_descr(i);
+	Building_Index::value_t const nr_buildings = tribe.get_nrbuildings();
+	for (Building_Index::value_t i = 0; i < nr_buildings; ++i) {
+		Widelands::Building_Descr & building = *tribe.get_building_descr(i);
 		if (not building.get_enhanced_building() and not building.get_buildable())
 			continue;
 		(m_player.is_building_allowed(i) ? m_allowed : m_forbidden).add
@@ -147,17 +147,17 @@ Editor_Player_Menu_Allowed_Buildings_Menu::
  */
 
 void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
-	UI::Listselect<intptr_t> & source = allow ? m_forbidden : m_allowed;
-	UI::Listselect<intptr_t> & target = allow ? m_allowed : m_forbidden;
+	UI::Listselect<Building_Index> & source = allow ? m_forbidden : m_allowed;
+	UI::Listselect<Building_Index> & target = allow ? m_allowed : m_forbidden;
 
 	assert //  The button should have been disabled if nothing is selected.
 		(source.selection_index()
 		 !=
 		 UI::Listselect<intptr_t>::no_selection_index());
 
-	const Building_Descr::Index building_index = source.get_selected();
+	Building_Index const building_index = source.get_selected();
 	source.remove_selected();
-	const Building_Descr & building =
+	Widelands::Building_Descr const & building =
 		*m_player.tribe().get_building_descr(building_index);
 	target.add
 		(building.descname().c_str(),

@@ -20,6 +20,8 @@
 #ifndef EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 #define EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 
+#include "widelands.h"
+
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_textarea.h"
@@ -40,7 +42,7 @@ struct Editor_Player_Menu_Allowed_Buildings_Menu : public UI::UniqueWindow {
 private:
 	Widelands::Player & m_player;
 	UI::Textarea              m_allowed_label, m_forbidden_label;
-	UI::Listselect<intptr_t> m_allowed,       m_forbidden;
+	UI::Listselect<Widelands::Building_Index> m_allowed, m_forbidden;
 	UI::IDButton<Editor_Player_Menu_Allowed_Buildings_Menu, const bool>
 		m_forbid_button, m_allow_button;
 	void allowed_selected        (uint32_t);
