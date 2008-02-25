@@ -743,6 +743,12 @@ const bool WLApplication::init_hardware()
 	else
 		sdl_flags=SDL_INIT_VIDEO;
 
+	//  NOTE Enable a workaround for bug #1784815, caused by SDL, which thinks
+	//  NOTE that it is perfectly fine for a library to tamper with the user's
+	//  NOTE privacy/powermanagement settings on the sly. The workaround was
+	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
+	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
+
 	if (SDL_Init(sdl_flags) == -1) {
 		//TODO: that's not handled yet!
 		throw wexception("Failed to initialize SDL: %s", SDL_GetError());
