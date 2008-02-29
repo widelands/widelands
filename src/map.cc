@@ -2372,13 +2372,8 @@ bool FindNodeImmovableAttribute::accept(const Map &, const FCoords coord) const
 
 
 bool FindNodeResource::accept(const Map &, const FCoords coord) const {
-	uint8_t res = coord.field->get_resources();
-	uint8_t amount = coord.field->get_resources_amount();
-
-	if ((res==m_resource) && amount)
-		return false;
-
-	return true;
+	return (m_resource == coord.field->get_resources()) &&
+	       coord.field->get_resources_amount();
 }
 
 
