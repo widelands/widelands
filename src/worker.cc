@@ -130,7 +130,9 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	if (totalres == 0) {
 		molog("  Run out of resources\n");
-		return false;
+		set_signal("fail"); // mine empty, abort program
+		pop_task();
+		return true;
 	}
 
 	// Second pass through fields
@@ -156,7 +158,9 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	if (pick >= 0) {
 		molog("  Not successful this time\n");
-		return false;
+		set_signal("fail"); // not successful, abort program
+		pop_task();
+		return true;
 	}
 
 	molog("  Mined one item\n");
