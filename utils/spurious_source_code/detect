@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 CHECKER=utils/spurious_source_code/whitespace_checker
 if [ ! -f $CHECKER ]; then
 	echo "WARNING: $CHECKER does not exist!"
