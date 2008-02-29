@@ -698,8 +698,8 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 	}
 }
 
-struct FindNodeUnowned:FindNode {
-	virtual bool accept (Map const &, FCoords) const;
+struct FindNodeUnowned {
+	bool accept (Map const &, FCoords) const;
 };
 
 bool FindNodeUnowned::accept (const Map &, const FCoords fc) const
@@ -938,9 +938,9 @@ void Computer_Player::lose_building (Building* b)
 }
 
 // Road building
-struct FindNodeWithFlagOrRoad:FindNode {
+struct FindNodeWithFlagOrRoad {
 	Economy* economy;
-	virtual bool accept(const Map &, FCoords) const;
+	bool accept(const Map &, FCoords) const;
 };
 
 bool FindNodeWithFlagOrRoad::accept (const Map &, FCoords fc) const {

@@ -357,23 +357,16 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 
 	CheckStepDefault cstep(get_movecaps());
 
-	int32_t const res =
-		action->sparam1.size() ? w->get_resource(action->sparam1.c_str()) : -1;
-
 	Area<FCoords> area(map.get_fcoords(get_position()), action->iparam1);
 
-	if
-		(!
-		 (res != -1 ?
-		  map.find_reachable_fields
-		  (area, &list, cstep,
-		   FindNodeSizeResource
-		   (static_cast<FindNodeSize::Size>(action->iparam2), res))
-		  :
-		  map.find_reachable_fields
-		  (area, &list, cstep,
-		   FindNodeSize
-		   (static_cast<FindNodeSize::Size>(action->iparam2)))))
+	FindNodeAnd functor;
+
+	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action->iparam2)));
+
+	if (action->sparam1.size())
+		functor.add(FindNodeResource(w->get_resource(action->sparam1.c_str())));
+
+	if (!map.find_reachable_fields(area, &list, cstep, functor))
 	{
 		molog("  no space found\n");
 		set_signal("fail");
@@ -2173,12 +2166,10 @@ void Worker::geologist_update(Game* g, State* state)
 		// Find a suitable field and walk towards it
 		std::vector<Coords> list;
 		CheckStepDefault cstep(get_movecaps());
-		FindNodeImmovableSize ffis(FindNodeImmovableSize::sizeNone);
-		FindNodeImmovableAttribute ffia(RESI);
 		FindNodeAnd ffa;
 
-		ffa.add(&ffis, false);
-		ffa.add(&ffia, true);
+		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
+		ffa.add(FindNodeImmovableAttribute(RESI), true);
 
 		if (map.find_reachable_fields(owner_area, &list, cstep, ffa)) {
 			FCoords target;

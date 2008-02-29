@@ -2279,14 +2279,14 @@ Field search functors
 */
 
 
-void FindNodeAnd::add(const FindNode* findfield, bool negate)
+FindNodeAnd::Subfunctor::Subfunctor(const FindNode& _ff, bool _negate)
+	: negate(_negate), findfield(_ff)
 {
-	Subfunctor sf;
+}
 
-	sf.negate = negate;
-	sf.findfield = findfield;
-
-	m_subfunctors.push_back(sf);
+void FindNodeAnd::add(const FindNode& findfield, bool negate)
+{
+	m_subfunctors.push_back(Subfunctor(findfield, negate));
 }
 
 bool FindNodeAnd::accept(const Map & map, const FCoords coord) const {
@@ -2295,7 +2295,7 @@ bool FindNodeAnd::accept(const Map & map, const FCoords coord) const {
 		 it != m_subfunctors.end();
 		 ++it)
 	{
-		if (it->findfield->accept(map, coord) == it->negate)
+		if (it->findfield.accept(map, coord) == it->negate)
 			return false;
 	}
 
@@ -2332,15 +2332,6 @@ bool FindNodeSize::accept(const Map &, const FCoords coord) const {
 	default:
 		return true;
 	}
-}
-
-bool FindNodeSizeResource::accept(const Map & map, const FCoords coord) const {
-	return
-		FindNodeSize::accept(map, coord)
-		and
-		coord.field->get_resources       () == m_res
-		and
-		coord.field->get_resources_amount();
 }
 
 bool FindNodeImmovableSize::accept(const Map &, const FCoords coord) const {

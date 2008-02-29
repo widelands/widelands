@@ -87,9 +87,55 @@ struct FindBob {
 	virtual ~FindBob() {}  // make gcc shut up
 };
 struct FindNode {
-	// Return true if this immovable should be returned by find_fields()
-	virtual bool accept(const Map &, const FCoords coord) const = 0;
-	virtual ~FindNode() {}  // make gcc shut up
+private:
+	struct BaseCapsule {
+		BaseCapsule() : refcount(1) {}
+		virtual ~BaseCapsule() {}
+
+		void addref() { refcount++; }
+		void deref() {
+			if (--refcount == 0)
+				delete this;
+		}
+		virtual bool accept(const Map &, const FCoords& coord) const = 0;
+
+		int refcount;
+	};
+	template<typename T>
+	struct Capsule : public BaseCapsule {
+		Capsule(const T& _op) : op(_op) {}
+		bool accept(const Map & map, const FCoords& coord) const { return op.accept(map, coord); }
+
+		const T op;
+	};
+
+	BaseCapsule* capsule;
+
+public:
+	FindNode(const FindNode& o) {
+		capsule = o.capsule;
+		capsule->addref();
+	}
+	~FindNode() {
+		capsule->deref();
+		capsule = 0;
+	}
+	FindNode& operator=(const FindNode& o) {
+		capsule->deref();
+		capsule = o.capsule;
+		capsule->addref();
+		return *this;
+	}
+
+	template<typename T>
+	FindNode(const T& op) {
+		capsule = new Capsule<T>(op);
+	}
+
+	// Return true if this node should be returned by find_fields()
+	bool accept(const Map & map, const FCoords& coord) const {
+		return capsule->accept(map, coord);
+	}
 };
 struct CheckStep {
 	enum StepId {
@@ -456,34 +502,36 @@ struct FindImmovablePlayerImmovable : public FindImmovable {
 	virtual bool accept(BaseImmovable* imm) const;
 };
 
-struct FindNodeCaps : public FindNode {
+struct FindNodeCaps {
 	FindNodeCaps(uint8_t mincaps) : m_mincaps(mincaps) {}
-	virtual ~FindNodeCaps() {} //  make gcc shut up
 
-	virtual bool accept(Map const &, FCoords) const;
+	bool accept(Map const &, FCoords) const;
 
+private:
 	uint8_t m_mincaps;
 };
 
 // Accepts fields if they are accepted by all subfunctors.
-struct FindNodeAnd : public FindNode {
+struct FindNodeAnd {
 	FindNodeAnd() {}
-	virtual ~FindNodeAnd() {}
 
-	void add(const FindNode* findfield, bool negate = false);
+	void add(const FindNode& findfield, bool negate = false);
 
-	virtual bool accept(Map const &, FCoords) const;
+	bool accept(Map const &, FCoords) const;
 
+private:
 	struct Subfunctor {
-		bool              negate;
-		const FindNode * findfield;
+		bool negate;
+		FindNode findfield;
+
+		Subfunctor(const FindNode& _ff, bool _negate);
 	};
 
 	std::vector<Subfunctor> m_subfunctors;
 };
 
 // Accepts fields based on what can be built there
-struct FindNodeSize : public FindNode {
+struct FindNodeSize {
 	enum Size {
 		sizeAny    = 0,   //  any field not occupied by a robust immovable
 		sizeBuild,        //  any field we can build on (flag or building)
@@ -495,28 +543,15 @@ struct FindNodeSize : public FindNode {
 	};
 
 	FindNodeSize(Size size) : m_size(size) {}
-	virtual ~FindNodeSize() {} //  make gcc shut up
 
-	virtual bool accept(Map const &, FCoords) const;
+	bool accept(Map const &, FCoords) const;
 
+private:
 	Size m_size;
 };
 
-// Accepts a field for a certain size if it has
-// a valid resource and amount on it
-struct FindNodeSizeResource : public FindNodeSize {
-	FindNodeSizeResource(Size size, int32_t res)
-		: FindNodeSize(size), m_res(res)
-	{}
-	virtual ~FindNodeSizeResource() {} //  make gcc shut up
-
-	virtual bool accept(Map const &, FCoords) const;
-
-	int32_t m_res;
-};
-
 // Accepts fields based on the size of immovables on the field
-struct FindNodeImmovableSize : public FindNode {
+struct FindNodeImmovableSize {
 	enum {
 		sizeNone   = 1 << 0,
 		sizeSmall  = 1 << 1,
@@ -525,31 +560,31 @@ struct FindNodeImmovableSize : public FindNode {
 	};
 
 	FindNodeImmovableSize(uint32_t sizes) : m_sizes(sizes) {}
-	virtual ~FindNodeImmovableSize() {} //  make gcc shut up
 
-	virtual bool accept(Map const &, FCoords) const;
+	bool accept(Map const &, FCoords) const;
 
+private:
 	uint32_t m_sizes;
 };
 
 // Accepts a field if it has an immovable with a given attribute
-struct FindNodeImmovableAttribute : public FindNode {
+struct FindNodeImmovableAttribute {
 	FindNodeImmovableAttribute(uint32_t attrib) : m_attribute(attrib) {}
-	virtual ~FindNodeImmovableAttribute() {} //  make gcc shut up
 
-	virtual bool accept(Map const &, FCoords) const;
+	bool accept(Map const &, FCoords) const;
 
+private:
 	uint32_t m_attribute;
 };
 
 
 // Accepts a field if it has the given resource
-struct FindNodeResource : public FindNode {
+struct FindNodeResource {
 	FindNodeResource(uint8_t res) : m_resource(res) {}
-	virtual ~FindNodeResource() {}  //  make gcc shut up
 
-	virtual bool accept(Map const &, FCoords) const;
+	bool accept(Map const &, FCoords) const;
 
+private:
 	uint8_t m_resource;
 };
 
