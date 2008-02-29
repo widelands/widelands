@@ -12,7 +12,7 @@ scythe=1
 
 [plant]
 0=setdescription tribe:field0
-1=findspace size:any radius:2
+1=findspace size:any radius:2 space
 2=walk coords
 3=animation idle 500
 4=plant

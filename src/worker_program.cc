@@ -270,8 +270,14 @@ void WorkerProgram::parse_findobject
  * Resource to search for. This is mainly intended for fisher and
  * therelike (non detectable Resources and default resources)
  *
+ * space
+ * Find only fields that are walkable such that all neighbours
+ * are also walkable (an exception is made if one of the neighbouring
+ * fields is owned by this worker's location).
+ *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
+ * iparam3 = whether the "space" flag is set
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace
@@ -285,6 +291,7 @@ void WorkerProgram::parse_findspace
 	act->function = &Worker::run_findspace;
 	act->iparam1 = -1;
 	act->iparam2 = -1;
+	act->iparam3 = 0;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -327,6 +334,8 @@ void WorkerProgram::parse_findspace
 			act->iparam2 = sizenames[index].val;
 		} else if (key == "resource") {
 			act->sparam1 = value;
+		} else if (key == "space") {
+			act->iparam3 = 1;
 		} else
 			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
 	}

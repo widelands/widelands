@@ -160,12 +160,14 @@ public:
 	// the enums tell us where we are going
 	enum WalkingDir {
 		IDLE = 0,
+		FIRST_DIRECTION = 1,
 		WALK_NE = 1,
 		WALK_E = 2,
 		WALK_SE = 3,
 		WALK_SW = 4,
 		WALK_W = 5,
 		WALK_NW = 6,
+		LAST_DIRECTION = 6,
 	};
 
 	struct LogSink {

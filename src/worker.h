@@ -51,10 +51,11 @@ class Worker : public Bob {
 			walkCoords, //  walk to coords
 		};
 
-		execute_t                function;
-		int32_t                      iparam1;
-		int32_t                      iparam2;
-		std::string              sparam1;
+		execute_t function;
+		int32_t iparam1;
+		int32_t iparam2;
+		int32_t iparam3;
+		std::string sparam1;
 
 		std::vector<std::string> sparamv;
 	};

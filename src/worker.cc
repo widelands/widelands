@@ -345,10 +345,40 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
  * Resource to search for. This is mainly intended for fisher and
  * therelike (non detectable Resources and default resources)
  *
+ * space
+ * Find only fields that are walkable such that all neighbours
+ * are also walkable (an exception is made if one of the neighbouring
+ * fields is owned by this worker's location).
+ *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
+ * iparam3 = whether the "space" flag is set
  * sparam1 = Resource
  */
+struct FindNodeSpace {
+	FindNodeSpace(BaseImmovable* ignoreimm)
+		: ignoreimmovable(ignoreimm) {
+	}
+
+	bool accept(const Map& map, const FCoords& coords) const {
+		if (!(coords.field->get_caps() & MOVECAPS_WALK))
+			return false;
+
+		for(uint8_t dir = Map_Object::FIRST_DIRECTION; dir <= Map_Object::LAST_DIRECTION; ++dir) {
+			FCoords neighb = map.get_neighbour(coords, dir);
+
+			if (!(neighb.field->get_caps() & MOVECAPS_WALK) &&
+			    neighb.field->get_immovable() != ignoreimmovable)
+				return false;
+		}
+
+		return true;
+	}
+
+private:
+	BaseImmovable* ignoreimmovable;
+};
+
 bool Worker::run_findspace(Game* g, State* state, const Action* action)
 {
 	std::vector<Coords> list;
@@ -360,11 +390,11 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 	Area<FCoords> area(map.get_fcoords(get_position()), action->iparam1);
 
 	FindNodeAnd functor;
-
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action->iparam2)));
-
 	if (action->sparam1.size())
 		functor.add(FindNodeResource(w->get_resource(action->sparam1.c_str())));
+	if (action->iparam3)
+		functor.add(FindNodeSpace(get_location(g)));
 
 	if (!map.find_reachable_fields(area, &list, cstep, functor))
 	{
