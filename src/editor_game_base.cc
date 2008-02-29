@@ -35,6 +35,7 @@
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"
+#include "findimmovable.h"
 
 #include "ui_progresswindow.h"
 

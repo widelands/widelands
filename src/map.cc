@@ -24,6 +24,7 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "s2map.h"
+#include "findimmovable.h"
 #include "tribe.h"
 #include "widelands_map_loader.h"
 #include "worlddata.h"
@@ -2223,36 +2224,6 @@ Military_Influence Map::calc_influence
 	influence *= influence;
 
 	return influence;
-}
-
-
-/*
-==============================================================================
-
-BaseImmovable search functors
-
-==============================================================================
-*/
-
-bool FindImmovableSize::accept(BaseImmovable *imm) const
-{
-	int32_t size = imm->get_size();
-	return (m_min <= size && size <= m_max);
-}
-
-bool FindImmovableType::accept(BaseImmovable *imm) const
-{
-	return (m_type == imm->get_type());
-}
-
-bool FindImmovableAttribute::accept(BaseImmovable *imm) const
-{
-	return imm->has_attribute(m_attrib);
-}
-
-bool FindImmovablePlayerImmovable::accept(BaseImmovable* imm) const
-{
-	return dynamic_cast<PlayerImmovable const *>(imm);
 }
 
 

@@ -21,6 +21,7 @@
 #include "carrier.h"
 #include "cmd_incorporate.h"
 #include "critter_bob.h"
+#include "findimmovable.h"
 #include "game.h"
 #include "graphic.h"
 #include "helper.h"
@@ -2013,6 +2014,18 @@ void Worker::start_task_fugitive(Game* g)
 	get_state()->ivar1 = g->get_gametime() + 120000 + 200*(g->logic_rand() % 600);
 }
 
+struct FindFlagWithPlayersWarehouse {
+	FindFlagWithPlayersWarehouse(Player const & owner) : m_owner(owner) {}
+	bool accept(BaseImmovable * const imm) const {
+		if (upcast(Flag const, flag, imm))
+			if (flag->get_owner() == &m_owner)
+				if (flag->economy().get_nr_warehouses())
+					return true;
+		return false;
+	}
+private:
+	Player const & m_owner;
+};
 
 void Worker::fugitive_update(Game* g, State* state)
 {
@@ -2045,18 +2058,6 @@ void Worker::fugitive_update(Game* g, State* state)
 
 	//  try to find a flag connected to a warehouse that we can return to
 	std::vector<ImmovableFound> flags;
-	struct FindFlagWithPlayersWarehouse : public FindImmovable {
-		FindFlagWithPlayersWarehouse(Player const & owner) : m_owner(owner) {}
-		bool accept(BaseImmovable * const imm) const {
-			if (upcast(Flag const, flag, imm))
-				if (flag->get_owner() == &m_owner)
-					if (flag->economy().get_nr_warehouses())
-						return true;
-			return false;
-		}
-	private:
-		Player const & m_owner;
-	};
 	if
 		(map.find_immovables
 		 (Area<FCoords>(map.get_fcoords(get_position()), vision_range()),

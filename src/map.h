@@ -76,11 +76,9 @@ CheckStep
 
 Predicates used in path finding and find functions.
 */
-struct FindImmovable {
-	// Return true if this immovable should be returned by find_immovables()
-	virtual bool accept(BaseImmovable *imm) const = 0;
-	virtual ~FindImmovable() {}  // make gcc shut up
-};
+struct FindImmovable;
+const FindImmovable& FindImmovableAlwaysTrue();
+
 struct FindBob {
 	// Return true if this immovable should be returned by find_bobs()
 	virtual bool accept(Bob *imm) const = 0;
@@ -158,10 +156,6 @@ struct CheckStep {
 /*
 Some very simple default predicates (more predicates below Map).
 */
-struct FindImmovableAlwaysTrue : public FindImmovable {
-	virtual bool accept(BaseImmovable *) const {return true;}
-	virtual ~FindImmovableAlwaysTrue() {}  // make gcc shut up
-};
 struct FindBobAlwaysTrue : public FindBob {
 	virtual bool accept(Bob *) const {return true;}
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
@@ -468,38 +462,6 @@ private:
 
 	Map & operator=(Map const &);
 	explicit Map   (Map const &);
-};
-
-// FindImmovable functor
-struct FindImmovableSize : public FindImmovable {
-	FindImmovableSize(int32_t min, int32_t max) : m_min(min), m_max(max) {}
-	virtual ~FindImmovableSize() {} //  make gcc shut up
-
-	virtual bool accept(BaseImmovable *imm) const;
-
-	int32_t m_min, m_max;
-};
-struct FindImmovableType : public FindImmovable {
-	FindImmovableType(int32_t type) : m_type(type) {}
-	virtual ~FindImmovableType() {} //  make gcc shut up
-
-	virtual bool accept(BaseImmovable *imm) const;
-
-	int32_t m_type;
-};
-struct FindImmovableAttribute : public FindImmovable {
-	FindImmovableAttribute(uint32_t attrib) : m_attrib(attrib) {}
-	virtual ~FindImmovableAttribute() {} //  make gcc shut up
-
-	virtual bool accept(BaseImmovable *imm) const;
-
-	int32_t m_attrib;
-};
-struct FindImmovablePlayerImmovable : public FindImmovable {
-	FindImmovablePlayerImmovable() {}
-	virtual ~FindImmovablePlayerImmovable() {} //  make gcc shut up
-
-	virtual bool accept(BaseImmovable* imm) const;
 };
 
 struct FindNodeCaps {

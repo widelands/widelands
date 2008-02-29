@@ -29,6 +29,7 @@
 #include "constructionsite.h"
 #include "productionsite.h"
 #include "militarysite.h"
+#include "findimmovable.h"
 
 #include "log.h"
 
