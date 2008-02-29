@@ -361,18 +361,18 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
  */
 struct FindNodeSpace {
 	FindNodeSpace(BaseImmovable* ignoreimm)
-		: ignoreimmovable(ignoreimm) {
-	}
+		: ignoreimmovable(ignoreimm) {}
 
 	bool accept(const Map& map, const FCoords& coords) const {
 		if (!(coords.field->get_caps() & MOVECAPS_WALK))
 			return false;
 
-		for(uint8_t dir = Map_Object::FIRST_DIRECTION; dir <= Map_Object::LAST_DIRECTION; ++dir) {
+		for (uint8_t dir = Map_Object::FIRST_DIRECTION; dir <= Map_Object::LAST_DIRECTION; ++dir) {
 			FCoords neighb = map.get_neighbour(coords, dir);
 
-			if (!(neighb.field->get_caps() & MOVECAPS_WALK) &&
-			    neighb.field->get_immovable() != ignoreimmovable)
+			if
+				(!(neighb.field->get_caps() & MOVECAPS_WALK) &&
+				 neighb.field->get_immovable() != ignoreimmovable)
 				return false;
 		}
 

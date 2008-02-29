@@ -92,7 +92,7 @@ private:
 		BaseCapsule() : refcount(1) {}
 		virtual ~BaseCapsule() {}
 
-		void addref() { refcount++; }
+		void addref() {refcount++;}
 		void deref() {
 			if (--refcount == 0)
 				delete this;
@@ -104,7 +104,7 @@ private:
 	template<typename T>
 	struct Capsule : public BaseCapsule {
 		Capsule(const T& _op) : op(_op) {}
-		bool accept(const Map & map, const FCoords& coord) const { return op.accept(map, coord); }
+		bool accept(const Map & map, const FCoords& coord) const {return op.accept(map, coord);}
 
 		const T op;
 	};
