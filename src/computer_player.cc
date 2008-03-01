@@ -25,6 +25,7 @@
 #include "world.h"
 #include "transport.h"
 #include "player.h"
+#include "findnode.h"
 #include "tribe.h"
 #include "constructionsite.h"
 #include "productionsite.h"

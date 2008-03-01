@@ -22,6 +22,7 @@
 #include "cmd_incorporate.h"
 #include "critter_bob.h"
 #include "findimmovable.h"
+#include "findnode.h"
 #include "game.h"
 #include "graphic.h"
 #include "helper.h"
