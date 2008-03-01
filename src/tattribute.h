@@ -22,6 +22,10 @@
 
 namespace Widelands {
 
+/**
+ * Indices for specific, individual attributes that \ref Map_Object instances
+ * may have. Used in conjunction with \ref Requirements.
+ */
 enum tAttribute {
 	atrHP = 0,
 	atrAttack,

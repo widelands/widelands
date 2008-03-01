@@ -437,6 +437,17 @@ void Map_Object::cleanup(Editor_Game_Base *g)
 	g->objects().remove(this);
 }
 
+// Default implementation
+int32_t Map_Object::get_tattribute(uint32_t attr) const
+{
+	return -1;
+}
+
+// Default implementation
+bool Map_Object::have_tattributes() const
+{
+	return false;
+}
 
 /*
 ===============

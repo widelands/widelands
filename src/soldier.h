@@ -158,6 +158,9 @@ public:
 	uint32_t get_evade_level_pic  () const
 	{return descr().get_evade_level_pic  (m_evade_level);}
 
+	bool have_tattributes() const;
+	int32_t get_tattribute(uint32_t attr) const;
+
 	/// Sets a random animation of desired type and start playing it.
 	void start_animation
 		(Editor_Game_Base*, const char * const animname, const uint32_t time);

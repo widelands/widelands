@@ -21,7 +21,7 @@
 #define MILITARYSITE_H
 
 #include "productionsite.h"
-#include "transport.h"
+#include "requirements.h"
 
 namespace Widelands {
 

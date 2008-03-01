@@ -20,6 +20,7 @@
 #include "game.h"
 #include "idleworkersupply.h"
 #include "player.h"
+#include "requirements.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "worker.h"
@@ -107,12 +108,7 @@ Soldier* IdleWorkerSupply::launch_soldier(Game *, int32_t, const Requirements & 
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
-	if
-		(req.check
-		 (s->get_level(atrHP),
-		  s->get_level(atrAttack),
-		  s->get_level(atrDefense),
-		  s->get_level(atrEvade)))
+	if (req.check(s))
 		return s;
 	else
 		throw wexception
@@ -127,10 +123,7 @@ int32_t IdleWorkerSupply::get_passing_requirements(Game *, int32_t, const Requir
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
-	return
-		req.check
-		(s->get_level(atrHP), s->get_level(atrAttack),
-		 s->get_level(atrDefense), s->get_level(atrEvade));
+	return req.check(s);
 }
 
 
@@ -142,10 +135,7 @@ void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, const Requirements & 
 
 		Soldier* s = static_cast<Soldier*>(m_worker);
 
-		if
-			(r.check
-			 (s->get_level(atrHP), s->get_level(atrAttack),
-			  s->get_level(atrDefense), s->get_level(atrEvade)))
+		if (r.check(s))
 			dynamic_cast<Soldier &>(*m_worker).mark(true);
 
 	} else {

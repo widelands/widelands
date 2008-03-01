@@ -20,8 +20,8 @@
 #ifndef REQUEST_H
 #define REQUEST_H
 
+#include "requirements.h"
 #include "trackptr.h"
-#include "transport.h" // for Requirements
 #include "widelands.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

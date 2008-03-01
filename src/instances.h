@@ -184,8 +184,32 @@ public:
 	virtual char const * type_name() const throw () {return "map object";}
 
 	Serial get_serial() const {return m_serial;}
+
+	/**
+	 * Attributes are fixed boolean properties of an object.
+	 * An object either has a certain attribute or it doesn't.
+	 * See the \ref Attribute enume.
+	 *
+	 * \return whether this object has the given attribute
+	 */
 	bool has_attribute(const uint32_t attr) const throw ()
 	{return descr().has_attribute(attr);}
+
+	/**
+	 * \return the value of the given \ref tAttribute. -1 if this object
+	 * doesn't have this kind of attribute.
+	 * The default behaviour returns \c -1 for all attributes.
+	 */
+	virtual int32_t get_tattribute(uint32_t attr) const;
+
+	/**
+	 * \return \c true if this object has at least one \ref tAttribute
+	 * that is unique to this object and not part of the object description.
+	 * This is used to decide whether a \ref Worker needs to be preserved
+	 * even while incorporated into a \ref Warehouse.
+	 * The default behaviour returns \c false.
+	 */
+	virtual bool have_tattributes() const;
 
 	void remove(Editor_Game_Base*);
 	virtual void destroy(Editor_Game_Base*);

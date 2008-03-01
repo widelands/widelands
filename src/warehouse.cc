@@ -26,6 +26,7 @@
 #include "player.h"
 #include "profile.h"
 #include "request.h"
+#include "requirements.h"
 #include "soldier.h"
 #include "transport.h"
 #include "wexception.h"
@@ -740,12 +741,7 @@ Soldier* Warehouse::launch_soldier
 		if (static_cast<Worker*>(i->get(g))->name()==workername)
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
-			if
-				(r.check
-				 (soldier->get_level(atrHP),
-				  soldier->get_level(atrAttack),
-				  soldier->get_level(atrDefense),
-				  soldier->get_level(atrEvade)))
+			if (r.check(soldier))
 				break;
 			else
 				continue;
@@ -801,12 +797,7 @@ void Warehouse::mark_as_used
 			Soldier & soldier = dynamic_cast<Soldier &>(*i->get(g));
 			if (!soldier.is_marked())
 			{
-				if
-					(r.check
-					 (soldier.get_level(atrHP),
-					  soldier.get_level(atrAttack),
-					  soldier.get_level(atrDefense),
-					  soldier.get_level(atrEvade)))
+				if (r.check(&soldier))
 					break;
 				else
 					continue;
@@ -990,12 +981,7 @@ int32_t Warehouse::get_soldiers_passing
 
 			// Its a marked soldier, we cann't supply it !
 			if (!soldier->is_marked()) {
-				if
-					(r.check
-					 (soldier->get_level(atrHP),
-					  soldier->get_level(atrAttack),
-					  soldier->get_level(atrDefense),
-					  soldier->get_level(atrEvade)))
+				if (r.check(soldier))
 				{
 					log ("+");
 					++number;

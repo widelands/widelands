@@ -184,13 +184,7 @@ Soldier * IdleSoldierSupply::launch_soldier
 {
 	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
-	if
-		(req.check
-		 (m_soldier->get_level(atrHP),
-		  m_soldier->get_level(atrAttack),
-		  m_soldier->get_level(atrDefense),
-		  m_soldier->get_level(atrEvade)))
-	{
+	if (req.check(m_soldier)) {
 		// Ensures that this soldier is used now
 		m_soldier->mark (false);
 		return m_soldier;
@@ -207,13 +201,7 @@ IdleSodlierSupply::mark_as_used
 void IdleSoldierSupply::mark_as_used(Game *, int32_t ware, const Requirements & req) {
 	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
-	if
-		(req.check
-		 (m_soldier->get_level(atrHP),
-		  m_soldier->get_level(atrAttack),
-		  m_soldier->get_level(atrDefense),
-		  m_soldier->get_level(atrEvade)))
-	{
+	if (req.check(m_soldier)) {
 		// Ensures that this soldier has a request now
 		m_soldier->mark (true);
 	}
@@ -239,14 +227,7 @@ int32_t IdleSoldierSupply::get_passing_requirements
 	if (m_soldier->is_marked())
 		return 0;
 
-	return
-		req.check
-		(m_soldier->get_level(atrHP),
-		 m_soldier->get_level(atrAttack),
-		 m_soldier->get_level(atrDefense),
-		 m_soldier->get_level(atrEvade))
-		?
-		1 : 0;
+	return req.check(m_soldier) ? 1 : 0;
 }
 
 
@@ -514,6 +495,25 @@ uint32_t Soldier::get_level(tAttribute const at) const {
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	}
 	throw wexception ("Soldier::get_level attribute not identified.");
+}
+
+bool Soldier::have_tattributes() const
+{
+	return true;
+}
+
+int32_t Soldier::get_tattribute(uint32_t attr) const
+{
+	switch (attr) {
+	case atrHP: return m_hp_level;
+	case atrAttack: return m_attack_level;
+	case atrDefense: return m_defense_level;
+	case atrEvade: return m_evade_level;
+	case atrTotal:
+		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
+	}
+
+	return Worker::get_tattribute(attr);
 }
 
 // Unsignedness ensures that we can only heal, don't hurt throught this method.

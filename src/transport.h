@@ -43,6 +43,7 @@ class Flag;
 class IdleWareSupply;
 class Item_Ware_Descr;
 class Request;
+class Requirements;
 class Road;
 class Soldier;
 class Transfer;
@@ -411,30 +412,6 @@ private:
 	bool m_idle; //  an idle transfer can be fail()ed if the item feels like it
 };
 
-
-struct MinMax {
-	int32_t min;
-	int32_t max;
-};
-
-struct Requirements {
-	Requirements (); //  init to allow all
-
-	void set (tAttribute at, int32_t min, int32_t max);
-
-	bool check (int32_t hp, int32_t attack, int32_t defense, int32_t evade) const;
-
-	// For Save/Load Games
-	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
-	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
-
-private:
-	MinMax m_hp;
-	MinMax m_attack;
-	MinMax m_defense;
-	MinMax m_evade;
-	MinMax m_total;
-};
 
 /**
  * A Supply is a virtual base class representing something that can offer
