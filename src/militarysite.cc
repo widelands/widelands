@@ -277,17 +277,13 @@ Issue the soldier request
 void MilitarySite::request_soldier() {
 	int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
-	//  TODO this should be user-configurable
-	Requeriments & r = *new Requeriments();
-	r = m_soldier_requeriments;
-
 	Request & req = *new Request
 		(this,
 		 soldierid,
 		 &MilitarySite::request_soldier_callback,
 		 this,
 		 Request::SOLDIER);
-	req.set_requeriments (&r);
+	req.set_requirements (m_soldier_requirements);
 
 	m_soldier_requests.push_back (&req);
 }
@@ -536,26 +532,23 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
 
 
 /*
-   MilitarySite::set_requeriments
+   MilitarySite::set_requirements
 
-   Easy to use, overwrite with given requeriments, pointer to faster running, so
-   in releases can avoid the assert
+   Easy to use, overwrite with given requirements.
 */
-void MilitarySite::set_requeriments (Requeriments* R)
+void MilitarySite::set_requirements (const Requirements& r)
 {
-	assert (R);
-	m_soldier_requeriments = *R;
+	m_soldier_requirements = r;
 }
 
 /*
-   MilitarySite::clear_requeriments
+   MilitarySite::clear_requirements
 
-   This should cancel any requeriment pushed at this house
+   This should cancel any requirement pushed at this house
 */
-void MilitarySite::clear_requeriments ()
+void MilitarySite::clear_requirements ()
 {
-	Requeriments R;
-	m_soldier_requeriments = R;
+	m_soldier_requirements = Requirements();
 }
 
 uint32_t MilitarySite::nr_not_marked_soldiers() {

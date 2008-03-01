@@ -57,8 +57,7 @@ Request::Request
 	m_callbackdata     (cbdata),
 	m_required_time    (target->owner().egbase().get_gametime()),
 	m_required_interval(0),
-	m_last_request_time(m_required_time),
-	m_requeriments     (0)
+	m_last_request_time(m_required_time)
 {
 	if (m_economy)
 		m_economy->add_request(this);
@@ -76,13 +75,9 @@ Request::~Request()
 	// Cancel all ongoing transfers
 	while (m_transfers.size())
 		cancel_transfer(0);
-
-	// Remove requeriments
-		delete m_requeriments;
-	m_requeriments = 0;
 }
 
-// Modified to allow Requeriments and SoldierRequests
+// Modified to allow Requirements and SoldierRequests
 #define REQUEST_VERSION            3
 #define REQUEST_SUPPORTED_VERSION  2
 
@@ -149,10 +144,8 @@ void Request::Read
 				trans->set_idle(fr->Unsigned8());
 				m_transfers.push_back(trans);
 
-				if (fr->Unsigned8()) { //  requeriments
-					m_requeriments = new Requeriments();
-					m_requeriments->Read (fr, egbase, mol);
-				}
+				if (fr->Unsigned8())
+					m_requirements.Read (fr, egbase, mol);
 			}
 		}
 
@@ -202,12 +195,8 @@ void Request::Write
 		}
 		fw->Unsigned8(trans.is_idle());
 
-		if (m_requeriments) {
-			fw->Unsigned8(true);
-			m_requeriments->Write (fw, egbase, mos);
-		}
-		else
-			fw->Unsigned8(false);
+		fw->Unsigned8(true); // for version compatibility
+		m_requirements.Write (fw, egbase, mos);
 	}
 }
 
@@ -413,7 +402,7 @@ void Request::start_transfer(Game* g, Supply* supp, int32_t ware)
 			// worker starts walking
 			log("Request: start soldier transfer for %i\n", get_index().value());
 
-			Soldier* s = supp->launch_soldier(g, ware, get_requeriments());
+			Soldier* s = supp->launch_soldier(g, ware, get_requirements());
 			t = new Transfer(g, this, s);
 		}
 		else if (get_type()==WORKER)
@@ -480,9 +469,6 @@ void Request::transfer_finish(Game *g, Transfer* t)
 		--m_count;
 	}
 
-	delete m_requeriments;
-	m_requeriments = 0;
-
 	// the callback functions are likely to delete us,
 	// therefore we musn't access member variables behind this
 	// point
@@ -512,9 +498,6 @@ void Request::transfer_fail(Game *, Transfer * t) {
 
 	if (!wasopen)
 		m_economy->add_request(this);
-
-	delete m_requeriments;
-	m_requeriments = 0;
 }
 
 /**

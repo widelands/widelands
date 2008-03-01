@@ -54,9 +54,9 @@ struct WarehouseSupply : public Supply {
 	virtual WareInstance & launch_item(Game *, int32_t ware);
 	virtual Worker* launch_worker(Game* g, int32_t ware);
 
-	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
-	virtual int32_t get_passing_requeriments(Game* g, int32_t ware, Requeriments* r);
-	virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r);
+	virtual Soldier* launch_soldier(Game* g, int32_t ware, const Requirements& req);
+	virtual int32_t get_passing_requirements(Game* g, int32_t ware, const Requirements& r);
+	virtual void mark_as_used (Game* g, int32_t ware, const Requirements& r);
 private:
 	Economy   * m_economy;
 	WareList    m_wares;

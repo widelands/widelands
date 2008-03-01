@@ -40,10 +40,10 @@ struct IdleWorkerSupply : public Supply {
 		__attribute__ ((noreturn));
 
 	virtual Worker * launch_worker(Game *, int32_t ware);
-	virtual Soldier* launch_soldier(Game *, int32_t ware, Requeriments *);
-	virtual int32_t get_passing_requeriments
-		(Game *, int32_t ware, Requeriments *);
-	virtual void mark_as_used (Game *, int32_t ware, Requeriments*);
+	virtual Soldier* launch_soldier(Game *, int32_t ware, const Requirements &);
+	virtual int32_t get_passing_requirements
+		(Game *, int32_t ware, const Requirements &);
+	virtual void mark_as_used (Game *, int32_t ware, const Requirements&);
 
 
 private:

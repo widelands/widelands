@@ -101,16 +101,14 @@ Worker* IdleWorkerSupply::launch_worker(Game *, int32_t ware)
 }
 
 
-Soldier* IdleWorkerSupply::launch_soldier(Game *, int32_t, Requeriments * req)
+Soldier* IdleWorkerSupply::launch_soldier(Game *, int32_t, const Requirements & req)
 {
 	assert (m_worker->get_worker_type()==Worker_Descr::SOLDIER);
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
 	if
-		(!req
-		 or
-		 req->check
+		(req.check
 		 (s->get_level(atrHP),
 		  s->get_level(atrAttack),
 		  s->get_level(atrDefense),
@@ -119,26 +117,24 @@ Soldier* IdleWorkerSupply::launch_soldier(Game *, int32_t, Requeriments * req)
 	else
 		throw wexception
 			("IdleWorkerSupply::launch_soldier try to launch a soldiers that "
-			 "doesn't accomplish the requeriments.");
+			 "doesn't accomplish the requirements.");
 }
 
 
-int32_t IdleWorkerSupply::get_passing_requeriments(Game *, int32_t, Requeriments * req)
+int32_t IdleWorkerSupply::get_passing_requirements(Game *, int32_t, const Requirements & req)
 {
 	assert (m_worker->get_worker_type()==Worker_Descr::SOLDIER);
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
 	return
-		!req
-		or
-		req->check
+		req.check
 		(s->get_level(atrHP), s->get_level(atrAttack),
 		 s->get_level(atrDefense), s->get_level(atrEvade));
 }
 
 
-void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, Requeriments * r)
+void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, const Requirements & r)
 {
 	assert(ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()));
 
@@ -147,9 +143,7 @@ void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, Requeriments * r)
 		Soldier* s = static_cast<Soldier*>(m_worker);
 
 		if
-			(!r
-			 or
-			 r->check
+			(r.check
 			 (s->get_level(atrHP), s->get_level(atrAttack),
 			  s->get_level(atrDefense), s->get_level(atrEvade)))
 			dynamic_cast<Soldier &>(*m_worker).mark(true);

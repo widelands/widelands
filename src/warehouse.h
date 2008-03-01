@@ -21,7 +21,6 @@
 #define WAREHOUSE_H
 
 #include "building.h"
-#include "transport.h"
 
 struct EncodeData;
 struct Interactive_Player;
@@ -30,6 +29,8 @@ struct Profile;
 namespace Widelands {
 
 class Editor_Game_Base;
+class Request;
+class Requirements;
 class Soldier;
 class Tribe_Descr;
 class WareInstance;
@@ -89,8 +90,8 @@ public:
 
 	virtual bool fetch_from_flag(Game* g);
 
-	void mark_as_used (Game *, Ware_Index, Requeriments *);
-	Soldier* launch_soldier(Game *, Ware_Index, Requeriments *);
+	void mark_as_used (Game *, Ware_Index, const Requirements&);
+	Soldier* launch_soldier(Game *, Ware_Index, const Requirements&);
 	Worker* launch_worker(Game* g, int32_t ware);
 	void incorporate_worker(Game *g, Worker *w);
 
@@ -98,7 +99,7 @@ public:
 	void do_launch_item(Game *, WareInstance &);
 	void incorporate_item(Game* g, WareInstance* item);
 
-	int32_t get_soldiers_passing (Game *, Ware_Index, Requeriments *);
+	int32_t get_soldiers_passing (Game *, Ware_Index, const Requirements&);
 	bool can_create_worker(Game *, Ware_Index);
 	void     create_worker(Game *, Ware_Index);
 

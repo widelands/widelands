@@ -267,7 +267,7 @@ WarehouseSupply::launch_soldier
 Launch a ware as soldier.
 ===============
 */
-Soldier* WarehouseSupply::launch_soldier(Game* g, int32_t ware, Requeriments* req)
+Soldier* WarehouseSupply::launch_soldier(Game* g, int32_t ware, const Requirements& req)
 {
 	assert(m_workers.stock(ware));
 
@@ -281,7 +281,7 @@ WarehouseSupply::get_passing_requeriments
 Launch a ware as soldier.
 ===============
 */
-int32_t WarehouseSupply::get_passing_requeriments(Game* g, int32_t ware, Requeriments* req)
+int32_t WarehouseSupply::get_passing_requirements(Game* g, int32_t ware, const Requirements& req)
 {
 	assert(m_workers.stock(ware));
 
@@ -293,7 +293,7 @@ int32_t WarehouseSupply::get_passing_requeriments(Game* g, int32_t ware, Requeri
 WarehouseSupply::mark_as_used
 ===============
 */
-void WarehouseSupply::mark_as_used (Game* g, int32_t ware, Requeriments* r)
+void WarehouseSupply::mark_as_used (Game* g, int32_t ware, const Requirements& r)
 {
 	m_warehouse->mark_as_used (g, ware, r);
 }
@@ -725,7 +725,7 @@ Start a soldier or certain level. The soldier will be assigned a job by the call
 ===============
 */
 Soldier* Warehouse::launch_soldier
-	(Game * g, Ware_Index const ware, Requeriments* r)
+	(Game * g, Ware_Index const ware, const Requirements& r)
 {
 	assert(m_supply->stock_workers(ware));
 
@@ -741,9 +741,7 @@ Soldier* Warehouse::launch_soldier
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
 			if
-				(not r
-				 or
-				 r->check
+				(r.check
 				 (soldier->get_level(atrHP),
 				  soldier->get_level(atrAttack),
 				  soldier->get_level(atrDefense),
@@ -783,7 +781,7 @@ Mark a soldier as used by a request.
 ===============
 */
 void Warehouse::mark_as_used
-	(Game * g, Ware_Index const  ware, Requeriments * const r)
+	(Game * g, Ware_Index const  ware, const Requirements & r)
 {
 	assert(m_supply->stock_workers(ware));
 
@@ -804,9 +802,7 @@ void Warehouse::mark_as_used
 			if (!soldier.is_marked())
 			{
 				if
-					(not r
-					 or
-					 r->check
+					(r.check
 					 (soldier.get_level(atrHP),
 					  soldier.get_level(atrAttack),
 					  soldier.get_level(atrDefense),
@@ -978,7 +974,7 @@ Warehouse::get_soldiers_passing
 ===============
 */
 int32_t Warehouse::get_soldiers_passing
-	(Game * game, Ware_Index const w, Requeriments * const r)
+	(Game * game, Ware_Index const w, const Requirements & r)
 {
 	int32_t number = 0;
 
@@ -994,19 +990,12 @@ int32_t Warehouse::get_soldiers_passing
 
 			// Its a marked soldier, we cann't supply it !
 			if (!soldier->is_marked()) {
-				if (r) {
-					if
-						(r->check
-						 (soldier->get_level(atrHP),
-						  soldier->get_level(atrAttack),
-						  soldier->get_level(atrDefense),
-						  soldier->get_level(atrEvade)))
-					{
-						log ("+");
-						++number;
-					}
-				}
-				else
+				if
+					(r.check
+					 (soldier->get_level(atrHP),
+					  soldier->get_level(atrAttack),
+					  soldier->get_level(atrDefense),
+					  soldier->get_level(atrEvade)))
 				{
 					log ("+");
 					++number;

@@ -417,12 +417,12 @@ struct MinMax {
 	int32_t max;
 };
 
-struct Requeriments {
-	Requeriments (); //  init to allow all
+struct Requirements {
+	Requirements (); //  init to allow all
 
 	void set (tAttribute at, int32_t min, int32_t max);
 
-	bool check (int32_t hp, int32_t attack, int32_t defense, int32_t evade);
+	bool check (int32_t hp, int32_t attack, int32_t defense, int32_t evade) const;
 
 	// For Save/Load Games
 	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
@@ -459,9 +459,9 @@ struct Supply : public Trackable {
 	virtual Worker* launch_worker(Game* g, int32_t ware) = 0;
 
 	// This is only for Soldier Requests correct use !
-	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req) = 0;
-	virtual int32_t get_passing_requeriments(Game* g, int32_t ware, Requeriments* r) = 0;
-	virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r) = 0;
+	virtual Soldier* launch_soldier(Game* g, int32_t ware, const Requirements& req) = 0;
+	virtual int32_t get_passing_requirements(Game* g, int32_t ware, const Requirements& r) = 0;
+	virtual void mark_as_used (Game* g, int32_t ware, const Requirements& r) = 0;
 
 };
 
@@ -587,7 +587,7 @@ struct Economy {
 
 // Soldier stuff
 	void    add_soldier_supply(Ware_Index, Supply *);
-	bool   have_soldier_supply(Ware_Index, Supply *, Requeriments * = 0);
+	bool   have_soldier_supply(Ware_Index, Supply *);
 	void remove_soldier_supply(Ware_Index, Supply *);
 
 	bool should_run_balance_check(int32_t const gametime) {

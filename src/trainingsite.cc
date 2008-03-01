@@ -280,7 +280,7 @@ void TrainingSite::request_soldier() {
 	int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
 	Request *req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::SOLDIER);
-	Requeriments *r = new Requeriments();
+	Requirements r;
 
 	// set requirements to match this site
 	int32_t totalmax = 0;
@@ -288,28 +288,28 @@ void TrainingSite::request_soldier() {
 	if (descr().get_train_attack()) {
 		totalmin += descr().get_min_level(atrAttack);
 		totalmax += descr().get_max_level(atrAttack);
-		r->set(atrAttack, descr().get_min_level(atrAttack), descr().get_max_level(atrAttack));
+		r.set(atrAttack, descr().get_min_level(atrAttack), descr().get_max_level(atrAttack));
 	}
 	if (descr().get_train_defense()) {
 		totalmin += descr().get_min_level(atrDefense);
 		totalmax += descr().get_max_level(atrDefense);
-		r->set(atrDefense, descr().get_min_level(atrDefense), descr().get_max_level(atrDefense));
+		r.set(atrDefense, descr().get_min_level(atrDefense), descr().get_max_level(atrDefense));
 	}
 	if (descr().get_train_evade()) {
 		totalmin += descr().get_min_level(atrEvade);
 		totalmax += descr().get_max_level(atrEvade);
-		r->set(atrEvade, descr().get_min_level(atrEvade), descr().get_max_level(atrEvade));
+		r.set(atrEvade, descr().get_min_level(atrEvade), descr().get_max_level(atrEvade));
 	}
 	if (descr().get_train_hp()) {
 		totalmin += descr().get_min_level(atrHP);
 		totalmax += descr().get_max_level(atrHP);
-		r->set(atrHP, descr().get_min_level(atrHP), descr().get_max_level(atrHP));
+		r.set(atrHP, descr().get_min_level(atrHP), descr().get_max_level(atrHP));
 	}
 
 	//  To make sure that fully trained soldiers are not requested.
-	r->set(atrTotal, totalmin, totalmax - 1);
+	r.set(atrTotal, totalmin, totalmax - 1);
 
-	req->set_requeriments(r);
+	req->set_requirements(r);
 
 	m_soldier_requests.push_back(req);
 	++m_total_soldiers;

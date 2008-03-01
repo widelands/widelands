@@ -21,6 +21,7 @@
 #define REQUEST_H
 
 #include "trackptr.h"
+#include "transport.h" // for Requirements
 #include "widelands.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
@@ -35,7 +36,7 @@ class Map_Map_Object_Loader;
 class Map_Map_Object_Saver;
 class PlayerImmovable;
 class RequestList;
-class Requeriments;
+class Requirements;
 class Supply;
 class Transfer;
 class Worker;
@@ -109,11 +110,10 @@ private:
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer* t);
 
-	bool has_requeriments () {return (m_requeriments != 0);}
 public:
-	void set_requeriments (Requeriments* r) {m_requeriments = r;}
+	void set_requirements (const Requirements& r) {m_requirements = r;}
 private:
-	Requeriments* get_requeriments () {return m_requeriments;}
+	const Requirements& get_requirements () {return m_requirements;}
 
 	typedef std::vector<Transfer*> TransferList;
 
@@ -133,7 +133,7 @@ private:
 
 	TransferList      m_transfers;         //  maximum size is m_count
 
-	Requeriments    * m_requeriments;      //  soldier requeriments
+	Requirements m_requirements;
 };
 
 

@@ -55,9 +55,9 @@ struct IdleSoldierSupply : public Supply {
 		__attribute__ ((noreturn));
 	virtual Worker* launch_worker(Game* g, int32_t ware);
 
-	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req);
-	virtual int32_t get_passing_requeriments(Game* g, int32_t ware, Requeriments* r);
-	virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r);
+	virtual Soldier* launch_soldier(Game* g, int32_t ware, const Requirements& req);
+	virtual int32_t get_passing_requirements(Game* g, int32_t ware, const Requirements& r);
+	virtual void mark_as_used (Game* g, int32_t ware, const Requirements& r);
 private:
 	Soldier * m_soldier;
 	Economy * m_economy;
@@ -168,7 +168,7 @@ Worker* IdleSoldierSupply::launch_worker(Game* g, int32_t ware)
 {
 	log ("IdleSoldierSupply::launch_worker() Warning something can go wrong around here.\n");
 
-	return launch_soldier(g, ware, NULL);
+	return launch_soldier(g, ware, Requirements());
 }
 
 
@@ -180,28 +180,23 @@ No need to explicitly launch the soldier.
 ===============
 */
 Soldier * IdleSoldierSupply::launch_soldier
-(Game *, int32_t ware, Requeriments * req)
+	(Game *, int32_t ware, const Requirements & req)
 {
 	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
-	if (req)
+	if
+		(req.check
+		 (m_soldier->get_level(atrHP),
+		  m_soldier->get_level(atrAttack),
+		  m_soldier->get_level(atrDefense),
+		  m_soldier->get_level(atrEvade)))
 	{
-		if
-			(req->check
-			 (m_soldier->get_level(atrHP),
-			  m_soldier->get_level(atrAttack),
-			  m_soldier->get_level(atrDefense),
-			  m_soldier->get_level(atrEvade)))
-		{
-			// Ensures that this soldier is used now
-			m_soldier->mark (false);
-			return m_soldier;
-		}
-		else
-			throw wexception ("IdleSoldierSupply::launch_soldier Fails. Requeriments aren't accomplished.");
+		// Ensures that this soldier is used now
+		m_soldier->mark (false);
+		return m_soldier;
 	}
 	else
-		return m_soldier;
+		throw wexception ("IdleSoldierSupply::launch_soldier Fails. Requirements aren't accomplished.");
 }
 
 /*
@@ -209,38 +204,34 @@ Soldier * IdleSoldierSupply::launch_soldier
 IdleSodlierSupply::mark_as_used
 ===============
 */
-void IdleSoldierSupply::mark_as_used(Game *, int32_t ware, Requeriments * req) {
+void IdleSoldierSupply::mark_as_used(Game *, int32_t ware, const Requirements & req) {
 	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
-	if (req)
+	if
+		(req.check
+		 (m_soldier->get_level(atrHP),
+		  m_soldier->get_level(atrAttack),
+		  m_soldier->get_level(atrDefense),
+		  m_soldier->get_level(atrEvade)))
 	{
-		if
-			(req->check
-			 (m_soldier->get_level(atrHP),
-			  m_soldier->get_level(atrAttack),
-			  m_soldier->get_level(atrDefense),
-			  m_soldier->get_level(atrEvade)))
-		{
-			// Ensures that this soldier has a request now
-			m_soldier->mark (true);
-		}
-		else
-			throw wexception ("IdleSoldierSupply::launch_soldier Fails. Requeriments aren't accomplished.");
+		// Ensures that this soldier has a request now
+		m_soldier->mark (true);
 	}
 	else
-		m_soldier->mark (true);
+		throw wexception ("IdleSoldierSupply::launch_soldier Fails. Requirements aren't accomplished.");
 }
 
 
 /*
 ===============
-IdleSodlierSupply::get_passing_requeriments
+IdleSodlierSupply::get_passing_requirements
 
-No need to explicitly launch the soldier.
+Return the number of soldiers that would satisfy the given requirement.
+The soldier isn't actually launched or otherwise affected.
 ===============
 */
-int32_t IdleSoldierSupply::get_passing_requeriments
-(Game *, int32_t ware, Requeriments * req)
+int32_t IdleSoldierSupply::get_passing_requirements
+(Game *, int32_t ware, const Requirements & req)
 {
 	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
@@ -248,11 +239,8 @@ int32_t IdleSoldierSupply::get_passing_requeriments
 	if (m_soldier->is_marked())
 		return 0;
 
-	if (!req)
-		return 1;
-
 	return
-		req->check
+		req.check
 		(m_soldier->get_level(atrHP),
 		 m_soldier->get_level(atrAttack),
 		 m_soldier->get_level(atrDefense),

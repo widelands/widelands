@@ -79,9 +79,9 @@ public: // implementation of Supply
 	virtual WareInstance & launch_item(Game * g, int32_t ware);
 	virtual Worker* launch_worker(Game* g, int32_t ware) __attribute__ ((noreturn));
 
-	virtual Soldier* launch_soldier(Game* g, int32_t ware, Requeriments* req) __attribute__ ((noreturn));
-	virtual int32_t get_passing_requeriments (Game* g, int32_t ware, Requeriments* r) __attribute__ ((noreturn));
-	virtual void mark_as_used (Game* g, int32_t ware, Requeriments* r) __attribute__ ((noreturn));
+	virtual Soldier* launch_soldier(Game* g, int32_t ware, const Requirements& req) __attribute__ ((noreturn));
+	virtual int32_t get_passing_requirements (Game* g, int32_t ware, const Requirements& r) __attribute__ ((noreturn));
+	virtual void mark_as_used (Game* g, int32_t ware, const Requirements& r) __attribute__ ((noreturn));
 private:
 	WareInstance * m_ware;
 	Economy      * m_economy;
@@ -165,17 +165,17 @@ Worker* IdleWareSupply::launch_worker(Game *, int32_t)
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
 
-Soldier* IdleWareSupply::launch_soldier(Game *, int32_t, Requeriments *)
+Soldier* IdleWareSupply::launch_soldier(Game *, int32_t, const Requirements &)
 {
 	throw wexception("IdleWareSupply::launch_soldier makes no sense");
 }
 
-int32_t IdleWareSupply::get_passing_requeriments(Game *, int32_t, Requeriments *)
+int32_t IdleWareSupply::get_passing_requirements(Game *, int32_t, const Requirements &)
 {
-	throw wexception("IdleWareSupply::get_passing_requeriments makes no sense");
+	throw wexception("IdleWareSupply::get_passing_requirements makes no sense");
 }
 
-void IdleWareSupply::mark_as_used (Game *, int32_t, Requeriments *) {
+void IdleWareSupply::mark_as_used (Game *, int32_t, const Requirements &) {
 	// By now, wares have not need to have this method
 	throw wexception("IdleWareSupply::mark_as_used makes no sense");
 }
@@ -1824,11 +1824,11 @@ void Transfer::tlog(const char* fmt, ...)
 
 /*
 ===============================================================================
-	Requeriments IMPLEMENTATION
+	Requirements IMPLEMENTATION
 ===============================================================================
 */
 
-Requeriments::Requeriments ()
+Requirements::Requirements ()
 {
 	m_hp     .min =  -1;
 	m_attack .min =  -1;
@@ -1843,7 +1843,7 @@ Requeriments::Requeriments ()
 	m_total  .max = 400;
 }
 
-void Requeriments::set (tAttribute at, int32_t min, int32_t max)
+void Requirements::set (tAttribute at, int32_t min, int32_t max)
 {
 	switch (at) {
 	case atrHP:
@@ -1866,12 +1866,12 @@ void Requeriments::set (tAttribute at, int32_t min, int32_t max)
 		m_total.min = min;
 		m_total.max = max;
 		break;
-		default:
-			throw wexception ("Requeriments::set Unknown attribute %d.", at);
+	default:
+		throw wexception ("Requirements::set Unknown attribute %d.", at);
 	}
 }
 
-bool Requeriments::check (int32_t hp, int32_t attack, int32_t defense, int32_t evade)
+bool Requirements::check (int32_t hp, int32_t attack, int32_t defense, int32_t evade) const
 {
 	int32_t total = hp + attack + defense + evade;
 
@@ -1883,8 +1883,8 @@ bool Requeriments::check (int32_t hp, int32_t attack, int32_t defense, int32_t e
 		m_total  .min <= total   and total   <= m_total  .max;
 }
 
-// Modified to allow Requeriments and Soldiers
-#define REQUERIMENTS_VERSION 1
+// Modified to allow Requirements and Soldiers
+#define REQUIREMENTS_VERSION 1
 /**
  * Read this requeriment from a file
  *
@@ -1892,13 +1892,12 @@ bool Requeriments::check (int32_t hp, int32_t attack, int32_t defense, int32_t e
  * It's called problably by some request loader, militarysite or trainingsite
  * loader.
  */
-void Requeriments::Read
+void Requirements::Read
 (FileRead * fr, Editor_Game_Base *, Map_Map_Object_Loader *)
 {
 	try {
 		uint16_t const packet_version = fr->Unsigned16();
-		if (packet_version == REQUERIMENTS_VERSION) {
-
+		if (packet_version == REQUIREMENTS_VERSION) {
 			// HitPoints Levels
 			m_hp.min = fr->Unsigned8();
 			m_hp.max = fr->Unsigned8();
@@ -1922,10 +1921,10 @@ void Requeriments::Read
 }
 
 
-void Requeriments::Write
+void Requirements::Write
 (FileWrite * fw, Editor_Game_Base *, Map_Map_Object_Saver *)
 {
-	fw->Unsigned16(REQUERIMENTS_VERSION);
+	fw->Unsigned16(REQUIREMENTS_VERSION);
 
 	// Hit Points
 	fw->Unsigned8(m_hp.min);
@@ -2871,7 +2870,7 @@ void Economy::add_soldier_supply
  * Return true if the given soldier_supply is registered with the economy.
 */
 bool Economy::have_soldier_supply
-	(Ware_Index const ware, Supply * const supply, Requeriments *)
+	(Ware_Index const ware, Supply * const supply)
 {
 	if (m_worker_supplies.size() <= ware.value())
 		return false;
@@ -3070,13 +3069,12 @@ Supply* Economy::find_best_supply
 
 		// Check requeriments
 		if (req->get_type() == Request::SOLDIER)
-			if (req->has_requeriments())
-				if
-					(supp.get_passing_requeriments
-					 (g, pware,  req->get_requeriments())
-					 <
-					 1)
-					continue;
+			if
+				(supp.get_passing_requirements
+				 (g, pware, req->get_requirements())
+				 <
+				 1)
+				continue;
 
 
 		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
@@ -3190,9 +3188,9 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		{
 			// This is to prevent a soldier to try to supply more than one Request.
 			// With this also ensures that you have enought soldiers
-			if (supp->get_passing_requeriments(g, req->get_index(), req->get_requeriments()) > 0)
+			if (supp->get_passing_requirements(g, req->get_index(), req->get_requirements()) > 0)
 			{
-				supp->mark_as_used (g, req->get_index(), req->get_requeriments());
+				supp->mark_as_used (g, req->get_index(), req->get_requirements());
 			}
 			else
 				continue;
@@ -3261,16 +3259,8 @@ void Economy::create_requested_workers(Game* g)
 					Supply* supp = m_worker_supplies[index].get_supply(i);
 
 					if (not supp->is_active()) {
-						if (req->has_requeriments())
-						{
-							if (supp->get_passing_requeriments (g, index, req->get_requeriments()))
-								++num_wares;
-						}
-						else
-						{
+						if (supp->get_passing_requirements (g, index, req->get_requirements()))
 							++num_wares;
-							continue;
-						}
 					} // if (supp->is_active)
 				} // for (int32_t i = 0; i < m_worker_supplies)
 

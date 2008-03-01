@@ -82,17 +82,17 @@ public:
 	virtual void soldier_capacity_down () {change_soldier_capacity (-1);}
 
 	/// This methods are helper for use at configure this site.
-	void set_requeriments (Requeriments *);
-	void  clear_requeriments ();
-	Requeriments get_requeriments () {return m_soldier_requeriments;}
+	void set_requirements (const Requirements&);
+	void  clear_requirements ();
+	const Requirements& get_requirements () const {return m_soldier_requirements;}
 
 	/*
-      So, to set a new requeriment to the request you should do something like:
+      So, to set a new requirement to the request you should do something like:
 
-         Requeriments new_req = ms->get_requeriments();
+         Requirements new_req;
          new_req.set (atribute, min_value, max_value);
          new_req.set (atribute, min_value, max_value);
-         ms->set_requeriments (&new_req);
+         ms->set_requirements (new_req);
 
 	*/
 
@@ -120,7 +120,7 @@ private:
 	void call_soldiers();
 	void change_soldier_capacity (int32_t);
 private:
-	Requeriments m_soldier_requeriments;
+	Requirements m_soldier_requirements;
 	std::vector<Request*> m_soldier_requests;
 	std::vector<Soldier*> m_soldiers;
 	bool                   m_didconquer;
