@@ -407,15 +407,16 @@ void Bob::do_act(Game* g, bool signalhandling)
 					(this->*signal)(g, get_state());
 
 				// If the initial signal handler doesn't mess with the stack,
-				// get out of here
+				// get out of here. Otherwise, the update handler of the task
+				// we popped to needs to be run.
 				if (!m_stack_dirty && signalhandling) {
 					m_in_act = false;
 					return;
 				}
+
+				signalhandling = false; // next pass will be a normal, non-signal handling pass
 			}
 		} while (m_stack_dirty);
-
-		signalhandling = false; // next pass will be a normal, non-signal handling pass
 	}
 
 	m_in_act = false;
