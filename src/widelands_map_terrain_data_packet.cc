@@ -48,36 +48,40 @@ throw (_wexception)
 	Map & map = egbase->map();
 	World & world = map.world();
 
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		const uint16_t nr_terrains = fr.Unsigned16();
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			uint16_t const nr_terrains = fr.Unsigned16();
 
-		typedef std::map<const uint16_t, Terrain_Descr::Index> terrain_id_map;
-		terrain_id_map smap;
-		for (uint16_t i = 0; i < nr_terrains; ++i) {
-			const uint16_t     id   = fr.Unsigned16();
-			char const * const name = fr.CString   ();
-			const terrain_id_map::const_iterator it = smap.find(id);
-			if (it != smap.end())
-				log
-					("Map_Terrain_Data_Packet::Read: WARNING: Found duplicate "
-					 "terrain id %i: Previously defined as \"%s\", now as \"%s\".",
-					 id, world.terrain_descr(it->second).name().c_str(), name);
-			if (not world.get_ter(name))
-				throw wexception("Terrain '%s' exists in map, not in world!", name);
-			smap[id] = world.index_of_terrain(name);
-		}
+			typedef std::map<const uint16_t, Terrain_Descr::Index> terrain_id_map;
+			terrain_id_map smap;
+			for (uint16_t i = 0; i < nr_terrains; ++i) {
+				uint16_t                       const id   = fr.Unsigned16();
+				char                   const * const name = fr.CString   ();
+				terrain_id_map::const_iterator const it   = smap.find(id);
+				if (it != smap.end())
+					log
+						("Map_Terrain_Data_Packet::Read: WARNING: Found duplicate "
+						 "terrain id %i: Previously defined as \"%s\", now as "
+						 "\"%s\".",
+						 id, world.terrain_descr(it->second).name().c_str(), name);
+				if (not world.get_ter(name))
+					throw wexception
+						("Terrain '%s' exists in map, not in world!", name);
+				smap[id] = world.index_of_terrain(name);
+			}
 
-		Map_Index const max_index = map.max_index();
-		for (Map_Index i = 0; i < max_index; ++i) {
-			Field & f = map[i];
-			f.set_terrain_r(smap[fr.Unsigned8()]);
-			f.set_terrain_d(smap[fr.Unsigned8()]);
-		}
-	} else
-		throw wexception
-			("Map Terrain Data Packet with unknown/unhandled version %u in map!",
-			 packet_version);
+			Map_Index const max_index = map.max_index();
+			for (Map_Index i = 0; i < max_index; ++i) {
+				Field & f = map[i];
+				f.set_terrain_r(smap[fr.Unsigned8()]);
+				f.set_terrain_d(smap[fr.Unsigned8()]);
+			}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("terrain: %s", e.what());
+	}
 }
 
 

@@ -138,6 +138,7 @@ struct Bob : public Map_Object {
 	int32_t get_animstart() const {return m_animstart;}
 
 	virtual int32_t get_type() const throw () {return BOB;}
+	virtual char const * type_name() const throw () {return "bob";}
 	virtual Type get_bob_type() const throw () = 0;
 	virtual uint32_t get_movecaps() const throw () {return 0;}
 	const std::string & name() const throw () {return descr().name();}

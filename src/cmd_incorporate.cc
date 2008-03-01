@@ -29,18 +29,21 @@ namespace Widelands {
 void Cmd_Incorporate::Read
 (FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == CMD_INCORPORATE_VERSION) {
-		// Read Base Commands
-		GameLogicCommand::Read(fr, egbase, mol);
-
-		// Serial of worker
-		uint32_t const fileserial = fr.Unsigned32();
-		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-		worker = dynamic_cast<Worker *>(mol.get_object_by_file_index(fileserial)); //  FIXME check
-	} else
-		throw wexception
-			("Unknown version in Cmd_Incorporate::Read: %u", packet_version);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CMD_INCORPORATE_VERSION) {
+			GameLogicCommand::Read(fr, egbase, mol);
+			uint32_t const worker_serial = fr.Unsigned32();
+			try {
+				worker = &mol.get<Worker>(worker_serial);
+			} catch (_wexception const & e) {
+				throw wexception("worker %u: %s", worker_serial, e.what());
+			}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("incorporate: %s", e.what());
+	}
 }
 
 

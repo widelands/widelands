@@ -58,59 +58,69 @@ throw (_wexception)
 		return;
 	}
 
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		for (;;) {
-			uint32_t const reg = fr.Unsigned32();
-			if (reg==0xffffffff) break; // Last immovable
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			for (;;) {
+				Serial const serial = fr.Unsigned32();
+				//  FIXME Just test EndOfFile instead in the next packet version.
+				if (serial == 0xffffffff) {
+					if (not fr.EndOfFile())
+						throw wexception
+							("expected end of file after serial 0xffffffff");
+					break;
+				}
+				try {
+					Immovable & imm = ol->get<Immovable>(serial);
+					Immovable_Descr const & descr = imm.descr();
 
-			assert(ol->is_object_known(reg));
-			Immovable* imm=static_cast<Immovable*>(ol->get_object_by_file_index(reg));
+					// Animation
+					char const * const animname = fr.CString();
+					try {
+						imm.m_anim = descr.get_animation(animname);
+					} catch (Map_Object_Descr::Animation_Nonexistent) {
+						imm.m_anim = descr.main_animation();
+						log
+							("WARNING: Animation \"%s\" not found, using animation "
+							 "%s).\n",
+							 animname, descr.get_animation_name(imm.m_anim).c_str());
+					}
+					imm.m_animstart = fr.Signed32();
 
-			// Animation
-			const char* animname = fr.CString();
-			try {
-				imm->m_anim = imm->descr().get_animation(animname);
-			}
-			catch (Map_Object_Descr::Animation_Nonexistent&) {
-				imm->m_anim = imm->descr().main_animation();
-				log
-					("Warning: Animation '%s' not found, using animation '%s').\n",
-					 animname,
-					 imm->descr().get_animation_name(imm->m_anim).c_str());
-			}
-			imm->m_animstart=fr.Signed32();
+					// Programm
+					if (fr.Unsigned8())
+						imm.m_program = descr.get_program(fr.CString());
+					else
+						imm.m_program = 0;
+					imm.m_program_ptr = fr.Unsigned32();
+					if (!imm.m_program) {
+						imm.m_program_ptr = 0;
+					} else {
+						if (imm.m_program->get_size() <= imm.m_program_ptr) {
+							//  Try to not fail if the program of some immovable has
+							//  changed significantly. Note that in some cases, the
+							//  immovable may end up broken despite the fixup, but
+							//  there is not really anything we can do against that.
+							log
+								("Warning: Immovable '%s', size of program '%s' seems "
+								 "to have changed.\n",
+								 descr.name().c_str(),
+								 imm.m_program->get_name().c_str());
+							imm.m_program_ptr = 0;
+						}
+					}
+					imm.m_program_step = fr.Signed32();
 
-			// Programm
-			if (fr.Unsigned8())
-				imm->m_program=imm->descr().get_program(fr.CString());
-			else
-				imm->m_program=0;
-			imm->m_program_ptr=fr.Unsigned32();
-			if (!imm->m_program) {
-				imm->m_program_ptr = 0;
-			} else {
-				if (imm->m_program_ptr >= imm->m_program->get_size()) {
-					// Try to not fail if the program of some immovable has changed
-					// significantly.
-					// Note that in some cases, the immovable may end up broken despite
-					// the fixup, but there isn't really anything we can do against that.
-					log
-						("Warning: Immovable '%s', size of program '%s' seems to "
-						 "have changed.\n",
-						 imm->descr().name().c_str(),
-						 imm->m_program->get_name().c_str());
-					imm->m_program_ptr = 0;
+					ol->mark_object_as_loaded(&imm);
+				} catch (_wexception const & e) {
+					throw wexception("immovable %u: %s", serial, e.what());
 				}
 			}
-			imm->m_program_step=fr.Signed32();
-
-			ol->mark_object_as_loaded(imm);
-		}
-	} else
-		throw wexception
-			("Unknown version %u in Map_Immovabledata_Data_Packet!",
-			 packet_version);
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("immovable data: %s", e.what());
+	}
 }
 
 

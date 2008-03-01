@@ -29,43 +29,10 @@ namespace Widelands {
 /*
  * Returns true if this object has already been inserted
  */
-bool Map_Map_Object_Loader::is_object_known(uint32_t const n)
-{
-	Reverse_Map_Object_Map::iterator i;
-	i = m_objects.find(n);
-	return (i != m_objects.end());
+bool Map_Map_Object_Loader::is_object_known(Serial const n) {
+	return m_objects.find(n) != m_objects.end();
 }
 
-/*
- * Registers this object as a new one
- */
-void Map_Map_Object_Loader::register_object
-		(Editor_Game_Base* egbase,
-		 uint32_t n,
-		 Map_Object* obj)
-{
-	assert(!is_object_known(n));
-
-	m_objects.insert(std::pair<uint32_t, Map_Object*>(n, obj));
-	m_loaded_obj[obj] = false;
-}
-
-/*
- * Returns the file index for this map object. This is used on load
- * to regenerate the depencies between the objects
- */
-Map_Object * Map_Map_Object_Loader::get_object_by_file_index(uint32_t const n)
-{
-	// This check should rather be an assert(), but we get more information
-	// from a throw and time's not soo much an issue here
-	if (!is_object_known(n))
-		throw wexception
-			("Map_Map_Object_Loader::get_object_by_file_index(): Map Object %u "
-			 "is not known!",
-			 n);
-
-	return m_objects[n];
-}
 
 /*
  * mark this object as saved

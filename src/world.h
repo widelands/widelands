@@ -157,7 +157,7 @@ struct World {
 	const Terrain_Descr * get_ter(const char * const name) const
 	{const int32_t i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
 	int32_t get_nr_terrains() const {return ters.get_nitems();}
-	int32_t get_bob(char const * const l) {return bobs.get_index(l);}
+	int32_t get_bob(char const * const l) const {return bobs.get_index(l);}
 	Bob::Descr * get_bob_descr(uint16_t const index) const {
 		return bobs.get(index);
 	}

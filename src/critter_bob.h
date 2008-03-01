@@ -64,6 +64,7 @@ public:
 	Critter_Bob(const Critter_Bob_Descr &);
 	virtual ~Critter_Bob();
 
+	char const * type_name() const throw () {return "critter";}
 	virtual Bob::Type get_bob_type() const throw () {return Bob::CRITTER;}
 	uint32_t get_movecaps() const throw ();
 

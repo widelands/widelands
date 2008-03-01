@@ -87,7 +87,7 @@ throw (_wexception)
 				}
 
 				if (set_id == -1)
-					throw "Unkown resource in map file. It is not in world!\n";
+					throw "Unknown resource in map file. It is not in world!\n";
 				egbase->map()[Coords(x, y)].set_resources(set_id, set_amount);
 				egbase->map()[Coords(x, y)].set_starting_res_amount(set_start_amount);
 			}

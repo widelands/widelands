@@ -75,7 +75,9 @@ throw (_wexception)
 						if (Building_Index const index = tribe.building_index(name))
 							player->allow_building(index, allowed);
 						else
-							throw wexception("building \"%s\" does not exist", name);
+							throw wexception
+								("tribe %s does not define building type \"%s\"",
+								 tribe.name().c_str(), name);
 					}
 				} catch (_wexception const & e) {
 					throw wexception

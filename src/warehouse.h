@@ -72,6 +72,7 @@ public:
 	virtual ~Warehouse();
 
 	virtual int32_t get_building_type() const throw () {return Building::WAREHOUSE;}
+	char const * type_name() const throw () {return "warehouse";}
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 

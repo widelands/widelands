@@ -164,12 +164,15 @@ void GameLogicCommand::Write
 void GameLogicCommand::Read
 (FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader &)
 {
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == BASE_CMD_VERSION)
-		set_duetime(fr.Unsigned32());
-	else
-		throw wexception
-			("GameLogicCommand::Read: unknown version %u\n", packet_version);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == BASE_CMD_VERSION)
+			set_duetime(fr.Unsigned32());
+		else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("game logic: %s", e.what());
+	}
 }
 
 };

@@ -53,18 +53,27 @@ throw (_wexception)
 	FileRead fr;
 	try {fr.Open(fs, "binary/ware");} catch (...) {return;}
 
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		//  now the rest data len
-		uint32_t const nr_files = fr.Unsigned32();
-		for (uint32_t i = 0; i < nr_files; ++i) {
-			WareInstance & w = *new WareInstance(0, 0); // data is read elsewhere
-			w.init(egbase);
-			ol->register_object(egbase, fr.Unsigned32(), &w);
-		}
-	} else
-		throw wexception
-			("Unknown version %u in Map_Ware_Data_Packet!", packet_version);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			//  now the rest data len
+			uint32_t const nr_files = fr.Unsigned32();
+			for (uint32_t i = 0; i < nr_files; ++i) {
+				//  data is read elsewhere
+				Serial const serial = fr.Unsigned32();
+				try {
+					ol->register_object<WareInstance>
+						(serial, *new WareInstance(0, 0))
+						.init(egbase);
+				} catch (_wexception const & e) {
+					throw wexception("%u: %s", serial, e.what());
+				}
+			}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("ware data: %s", e.what());
+	}
 }
 
 

@@ -883,7 +883,7 @@ void FieldActionWindow::building_icon_mouse_in(int32_t idx) {
 				(std::set<std::string>::const_iterator de = descriptions.begin();
 				 de != descriptions.end();
 				 ++de)
-				log("        %s\n", (*de).c_str());
+				log("        %s\n", de->c_str());
 		}
 #endif
 

@@ -55,96 +55,133 @@ throw (_wexception)
 	FileRead fr;
 	try {fr.Open(fs, "binary/flag_data");} catch (...) {return;}
 
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		const Extent extent = egbase->map().extent();
-		for (;;) {
-			const uint32_t ser = fr.Unsigned32();
-
-			if (ser == 0xffffffff)
-				break; // end of flags
-			assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-
-			upcast(Flag, flag, ol->get_object_by_file_index(ser));
-
-			//  The owner is already set, nothing to do from PlayerImmovable.
-
-			try {flag->m_position = fr.Coords32(extent);}
-			catch (_wexception const & e) {
-				throw wexception
-					("Map_Flagdata_Data_Packet::Read: in binary/flag_data:%u: "
-					 "Coordinates of flag %u: %s",
-					 fr.GetPos() - 4, ser, e.what());
-			}
-			flag->m_animstart = fr.Unsigned16();
-			if (int32_t const building = fr.Unsigned32()) {
-				assert(ol->is_object_known(building)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-				flag->m_building = dynamic_cast<Building *>(ol->get_object_by_file_index(building)); //  FIXME CHECK RESULT OF CAST
-			} else
-				flag->m_building = 0;
-
-
-			//  Roads are set somewhere else.
-
-			for (uint32_t i = 0; i < 6; ++i)
-				flag->m_items_pending[i] = fr.Unsigned32();
-			flag->m_item_capacity = fr.Unsigned32();
-			flag->m_item_filled = fr.Unsigned32();
-
-			for (int32_t i = 0; i < flag->m_item_filled; ++i) {
-				flag->m_items[i].pending=fr.Unsigned8();
-				uint32_t item = fr.Unsigned32();
-				assert(ol->is_object_known(item)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-				flag->m_items[i].item = dynamic_cast<WareInstance *>(ol->get_object_by_file_index(item)); //  FIXME CHECK RESULT OF CAST
-
-				if (uint32_t const nextstep = fr.Unsigned32()) {
-					assert(ol->is_object_known(nextstep)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-					flag->m_items[i].nextstep = dynamic_cast<PlayerImmovable *>(ol->get_object_by_file_index(nextstep)); //  FIXME CHECK RESULT OF CAST
-				} else
-					flag->m_items[i].nextstep = 0;
-			}
-
-			if (uint32_t const always_call = fr.Unsigned32()) {
-				assert(ol->is_object_known(always_call)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-				flag->m_always_call_for_flag = dynamic_cast<Flag *>(ol->get_object_by_file_index(always_call)); //  FIXME CHECK RESULT OF CAST
-			} else
-				flag->m_always_call_for_flag = 0;
-
-			//  workers waiting
-			const uint16_t nr_workers = fr.Unsigned16();
-			flag->m_capacity_wait.resize(nr_workers);
-			for (uint32_t i = 0; i < nr_workers; ++i) {
-				uint32_t const id = fr.Unsigned32();
-				assert(ol->is_object_known(id));
-				flag->m_capacity_wait[i]=ol->get_object_by_file_index(id);
-			}
-
-			//  flag jobs
-			const uint16_t nr_jobs = fr.Unsigned16();
-			assert(!flag->m_flag_jobs.size());
-			for (uint16_t i = 0; i < nr_jobs; ++i) {
-				Flag::FlagJob f;
-				if (fr.Unsigned8()) {
-					f.request =
-						new Request
-						(flag,
-						 1,
-						 &Flag::flag_job_request_callback, flag,
-						 Request::WORKER);
-					f.request->Read(&fr, egbase, ol);
-				} else {
-					f.request = 0;
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Extent const extent = egbase->map().extent();
+			for (;;) {
+				Serial const serial = fr.Unsigned32();
+				//  FIXME Just test EndOfFile instead in the next packet version.
+				if (serial == 0xffffffff) {
+					if (not fr.EndOfFile())
+						throw wexception
+							("expected end of file after serial 0xffffffff");
+					break;
 				}
-				f.program = fr.CString();
-				flag->m_flag_jobs.push_back(f);
-			}
+				try {
+					Flag & flag = ol->get<Flag>(serial);
 
-			ol->mark_object_as_loaded(flag);
-		}
-	} else
-		throw wexception
-			("Unknown version %u in Map_Flagdata_Data_Packet!", packet_version);
+					//  Owner is already set, nothing to do from PlayerImmovable.
+
+					flag.m_position = fr.Coords32(extent);
+					flag.m_animstart = fr.Unsigned16();
+
+					//  FIXME This should not be explicitly read from file. A flag's
+					//  FIXME building is always the one to the northwest (if any).
+					//  FIXME There is no way that a flag could have a building
+					//  FIXME somewhere else or not have the building to the
+					//  FIXME northwest.
+					if (int32_t const building_serial = fr.Unsigned32())
+						try {
+							flag.m_building = &ol->get<Building>(building_serial);
+						} catch (_wexception const & e) {
+							throw wexception
+								("building (%u): %s", building_serial, e.what());
+						}
+					else
+						flag.m_building = 0;
+
+
+					//  Roads are set somewhere else.
+
+					for (uint32_t i = 0; i < 6; ++i)
+						flag.m_items_pending[i] = fr.Unsigned32();
+					flag.m_item_capacity = fr.Unsigned32();
+
+					{
+						uint32_t const items_filled = fr.Unsigned32();
+						flag.m_item_filled = items_filled;
+						for (uint32_t i = 0; i < items_filled; ++i) {
+							flag.m_items[i].pending = fr.Unsigned8();
+							uint32_t const item_serial = fr.Unsigned32();
+							try {
+								flag.m_items[i].item =
+									&ol->get<WareInstance>(item_serial);
+
+								if (uint32_t const nextstep_serial = fr.Unsigned32()) {
+									try {
+										flag.m_items[i].nextstep =
+											&ol->get<PlayerImmovable>(nextstep_serial);
+									} catch (_wexception const & e) {
+										throw wexception
+											("next step (%u): %s",
+											 nextstep_serial, e.what());
+									}
+								} else
+									flag.m_items[i].nextstep = 0;
+							} catch (_wexception const & e) {
+								throw wexception
+									("item #%u (%u): %s", i, item_serial, e.what());
+							}
+						}
+
+						if (uint32_t const always_call_serial = fr.Unsigned32())
+							try {
+								flag.m_always_call_for_flag =
+									&ol->get<Flag>(always_call_serial);
+							} catch (_wexception const & e) {
+								throw wexception
+									("always_call (%u): %s",
+									 always_call_serial, e.what());
+							}
+						else
+							flag.m_always_call_for_flag = 0;
+
+						//  workers waiting
+						uint16_t const nr_workers = fr.Unsigned16();
+						flag.m_capacity_wait.resize(nr_workers);
+						for (uint32_t i = 0; i < nr_workers; ++i) {
+							uint32_t const worker_serial = fr.Unsigned32();
+							try {
+								flag.m_capacity_wait[i] =
+									&ol->get<Map_Object>(worker_serial);
+							} catch (_wexception const & e) {
+								throw wexception
+									("worker #%u (%u): %s", i, worker_serial, e.what());
+							}
+						}
+
+						//  flag jobs
+						uint16_t const nr_jobs = fr.Unsigned16();
+						assert(flag.m_flag_jobs.empty());
+						for (uint16_t i = 0; i < nr_jobs; ++i) {
+							Flag::FlagJob f;
+							if (fr.Unsigned8()) {
+								f.request =
+									new Request
+									(&flag,
+									 1,
+									 &Flag::flag_job_request_callback, &flag,
+									 Request::WORKER);
+								f.request->Read(&fr, egbase, ol);
+							} else {
+								f.request = 0;
+							}
+							f.program = fr.CString();
+							flag.m_flag_jobs.push_back(f);
+						}
+
+						ol->mark_object_as_loaded(&flag);
+					}
+				} catch (_wexception const & e) {
+					throw wexception("%u: %s", serial, e.what());
+				}
+			}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("flagdata: %s", e.what());
+	}
 }
 
 
@@ -175,6 +212,10 @@ throw (_wexception)
 		//  Animation is set by creator.
 		fw.Unsigned16(flag->m_animstart);
 
+		//  FIXME This should not be explicitly written to file. A flag's
+		//  FIXME building is always the one to the northwest (if any). There is
+		//  FIXME no way that a flag could have a building somewhere else or not
+		//  FIXME have the building to the northwest.
 		//  Building is not used, it is set by Building_Data packet through
 		//  attach building.
 		if (flag->m_building) {

@@ -50,6 +50,8 @@ inline Time Never() throw () {return 0xffffffff;}
 typedef uint32_t Duration;
 inline Duration Forever() throw () {return 0xffffffff;}
 
+typedef uint32_t Serial; /// Serial number for Map_Object.
+
 /// Index for ware (and worker) types. Boxed for type-safety. Has a special
 /// null value to indicate invalidity. Has operator bool so that an index can
 /// be tested for validity with code like "if (index) ...". Operator bool
@@ -135,6 +137,8 @@ struct Building_Index {
 private:
 	value_t i;
 };
+
+typedef uint8_t Direction;
 
 };
 

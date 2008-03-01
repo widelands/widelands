@@ -121,6 +121,7 @@ public:
 	Coords get_position() const {return m_position;}
 
 	virtual int32_t  get_type    () const throw ();
+	char const * type_name() const throw () {return "immovable";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 	std::string const & name() const throw ();

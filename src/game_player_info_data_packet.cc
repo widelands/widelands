@@ -37,48 +37,49 @@ void Game_Player_Info_Data_Packet::Read
 throw (_wexception)
 {
 	FileRead fr;
-	fr.Open(fs, "binary/player_info");
+	try {
+		fr.Open(fs, "binary/player_info");
+		uint16_t const packet_version = fr.Unsigned16();
+		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+			uint32_t const max_players = fr.Unsigned16();
+			for (uint32_t i = 1; i <= max_players; ++i) {
+				game->remove_player(i);
+				if (fr.Unsigned8()) {
+					bool    const see_all = fr.Unsigned8();
+					int32_t const type    = fr.Signed32();
+					int32_t const plnum   = fr.Signed32();
+					std::string tribe = fr.CString();
 
-	const uint16_t packet_version = fr.Unsigned16();
-	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-		uint32_t max_players = fr.Unsigned16();
-		for (uint32_t i = 1; i <= max_players; ++i) {
-			game->remove_player(i);
-			if (fr.Unsigned8()) {
-				bool see_all = fr.Unsigned8();
-				int32_t type = fr.Signed32();
-				int32_t plnum = fr.Signed32();
-				std::string tribe = fr.CString();
+					RGBColor rgb[4];
 
-				RGBColor rgb[4];
+					for (uint32_t j = 0; j < 4; ++j) {
+						uint8_t const r = fr.Unsigned8();
+						uint8_t const g = fr.Unsigned8();
+						uint8_t const b = fr.Unsigned8();
+						rgb[j] = RGBColor(r, g, b);
+					}
 
-				for (uint32_t j = 0; j < 4; ++j) {
-					uint8_t r = fr.Unsigned8();
-					uint8_t g = fr.Unsigned8();
-					uint8_t b = fr.Unsigned8();
-					rgb[j] = RGBColor(r, g, b);
+					std::string name = fr.CString();
+
+					game->add_player(plnum, type, tribe, name);
+					Player & player = game->player(plnum);
+					player.set_see_all(see_all);
+
+					for (uint32_t j = 0; j < 4; ++j)
+						player.m_playercolor[j] = rgb[j];
+
+					if (packet_version >= 2)
+						player.ReadStatistics(fr, 0);
 				}
-
-				std::string name = fr.CString();
-
-				game->add_player(plnum, type, tribe, name);
-				Player* plr = game->get_player(plnum);
-				plr->set_see_all(see_all);
-
-				for (uint32_t j = 0; j < 4; ++j)
-					plr->m_playercolor[j] = rgb[j];
-
-				if (packet_version >= 2)
-					plr->ReadStatistics(fr, 0);
 			}
-		}
 
-		if (packet_version >= 2)
-			game->ReadStatistics(fr, 1);
-	} else
-		throw wexception
-			("Unknown version in Game_Player_Info_Data_Packet: %u",
-			 packet_version);
+			if (packet_version >= 2)
+				game->ReadStatistics(fr, 1);
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("player info: %s", e.what());
+	}
 }
 
 

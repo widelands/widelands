@@ -162,6 +162,7 @@ public:
 	virtual int32_t get_building_type() const throw () = 0;
 
 	virtual int32_t  get_type    () const throw ();
+	char const * type_name() const throw () {return "building";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 	virtual uint32_t get_ui_anim () const;

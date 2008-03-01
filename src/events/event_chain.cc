@@ -157,15 +157,16 @@ void Cmd_CheckEventChain::execute (Game * game) {
 void Cmd_CheckEventChain::Read
 (FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == CMD_CHECK_EVENTCHAIN_VERSION) {
-		// Read Base Commands
-		GameLogicCommand::Read(fr, egbase, mol);
-
-		m_eventchain_id = fr.Unsigned16();
-	} else
-		throw wexception
-			("Unknown version in Cmd_CheckEventChain::Read: %u", packet_version);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CMD_CHECK_EVENTCHAIN_VERSION) {
+			GameLogicCommand::Read(fr, egbase, mol);
+			m_eventchain_id = fr.Unsigned16();
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("check eventchain: %s", e.what());
+	}
 }
 void Cmd_CheckEventChain::Write
 (FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)

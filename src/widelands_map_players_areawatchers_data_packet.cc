@@ -78,9 +78,8 @@ throw (_wexception)
 							 fr.GetPos() - 4, reg, e.what());
 					}
 					ol->register_object
-						(egbase,
-						 reg,
-						 &player->add_areawatcher
+						(reg,
+						 player->add_areawatcher
 						 (Player_Area<>(p, Area<>(c, fr.Unsigned16()))));
 				}
 			} else

@@ -37,11 +37,10 @@ void Game_Cmd_Queue_Data_Packet::Read
 throw (_wexception)
 {
 	FileRead fr;
-	fr.Open(fs, "binary/cmd_queue");
-
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version >= 1)
-		try {
+	try {
+		fr.Open(fs, "binary/cmd_queue");
+		uint16_t const packet_version = fr.Unsigned16();
+		if (1 <= packet_version) {
 			Cmd_Queue* cmdq=game->get_cmdqueue();
 
 			// nothing to be done for m_game
@@ -95,12 +94,11 @@ throw (_wexception)
 					++i;
 				}
 			}
-		} catch (const std::exception & e) {
-			throw wexception("Error loading Cmd_Queue_Data_Packet: %s", e.what());
-		}
-	else
-		throw wexception
-			("Unknown version in Game_Cmd_Queue_Data_Packet: %u", packet_version);
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("command queue: %s", e.what());
+	}
 }
 
 

@@ -33,6 +33,7 @@ struct Battle : public BaseImmovable {
 	Battle();
 	~Battle();
 	virtual int32_t  get_type    () const throw () {return BATTLE;}
+	char const * type_name() const throw () {return "battle";}
 	virtual int32_t  get_size    () const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return false;}
 
@@ -58,8 +59,8 @@ protected:
 		virtual void load(FileRead&);
 		virtual void load_pointers();
 
-		uint32_t m_first;
-		uint32_t m_second;
+		Serial m_first;
+		Serial m_second;
 	};
 
 public:

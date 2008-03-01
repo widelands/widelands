@@ -38,36 +38,36 @@ void Game_Interactive_Player_Data_Packet::Read
 throw (_wexception)
 {
 	FileRead fr;
-	fr.Open(fs, "binary/interactive_player");
+	try {
+		fr.Open(fs, "binary/interactive_player");
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
+			Player_Number const player_number =
+				fr.Player_Number8(game->map().get_nrplayers());
+			int32_t       const x             = fr.Unsigned16();
+			int32_t       const y             = fr.Unsigned16();
+			uint32_t      const display_flags = fr.Unsigned32();
 
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
-		uint8_t player_number = fr.Unsigned8();
-		int32_t x = fr.Unsigned16();
-		int32_t y = fr.Unsigned16();
-		uint32_t display_flags = fr.Unsigned32();
+			if (packet_version == 1)
+				game->m_last_stats_update = fr.Unsigned32();
 
-		if (packet_version == 1)
-			game->m_last_stats_update = fr.Unsigned32();
+			if (Interactive_Player* plr = game->get_ipl()) {
+				plr->set_player_number(player_number);
 
-		if (Interactive_Player* plr = game->get_ipl()) {
-			plr->set_player_number(player_number);
+				plr->set_viewpoint(Point(x, y));
 
-			// Map Position
-			plr->set_viewpoint(Point(x, y));
+				plr->set_display_flags(display_flags);
 
-			plr->set_display_flags(display_flags);
-
-			if (packet_version == 1) {
-
-				plr->get_player()->ReadStatistics(fr, 0);
-				game->ReadStatistics(fr, 0);
+				if (packet_version == 1) {
+					plr->get_player()->ReadStatistics(fr, 0);
+					game->ReadStatistics(fr, 0);
+				}
 			}
-		}
-	} else
-		throw wexception
-			("Unknown version in Game_Interactive_Player_Data_Packet: %u",
-			 packet_version);
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("interactive player: %s", e.what());
+	}
 }
 
 /*

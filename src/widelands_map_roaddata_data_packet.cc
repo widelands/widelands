@@ -52,74 +52,107 @@ throw (_wexception)
 	FileRead fr;
 	try {fr.Open(fs, "binary/road_data");} catch (...) {return;}
 
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION)
-		for (;;) {
-			uint32_t ser = fr.Unsigned32();
-			if (ser == 0xffffffff) // end of roaddata
-				break;
-			assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::ROAD); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-
-			upcast(Road, r, ol->get_object_by_file_index(ser)); //  FIXME CHECK RESULT OF CAST
-
-			assert(!ol->is_object_loaded(r)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-
-			Player* plr = egbase->get_safe_player(fr.Unsigned8());
-			assert(plr); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-
-			r->set_owner(plr);
-			r->m_type = fr.Unsigned32();
-			ser = fr.Unsigned32();
-			uint32_t const ser1 = fr.Unsigned32();
-			assert(ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			assert(ol->is_object_known(ser1)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			r->m_flags[0] = dynamic_cast<Flag *>(ol->get_object_by_file_index(ser)); //  FIXME CHECK RESULT OF CAST
-			r->m_flags[1] = dynamic_cast<Flag *>(ol->get_object_by_file_index(ser1)); //  FIXME CHECK RESULT OF CAST
-			r->m_flagidx[0] = fr.Unsigned32();
-			r->m_flagidx[1] = fr.Unsigned32();
-
-			r->m_cost[0] = fr.Unsigned32();
-			r->m_cost[1] = fr.Unsigned32();
-			const Path::Step_Vector::size_type nsteps = fr.Unsigned16();
-			assert(nsteps); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			Path p(r->m_flags[0]->get_position());
-			for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
-				p.append(egbase->map(), fr.Unsigned8()); //  FIXME validate that the value is a direction
-			r->set_path(egbase, p);
-
-			//  Now that all rudimentary data is set, init this road. Then
-			//  overwrite the initialization values.
-			r->link_into_flags(egbase);
-
-			r->m_idle_index      = fr.Unsigned32();
-			r->m_desire_carriers = fr.Unsigned32();
-			assert(!r->m_carrier.get(egbase));
-			if (uint32_t const carrierid = fr.Unsigned32()) {
-				assert(ol->is_object_known(carrierid));
-				r->m_carrier = ol->get_object_by_file_index(carrierid);
-			} else
-				r->m_carrier = 0;
-
-			delete r->m_carrier_request;
-			r->m_carrier_request = 0;
-
-			if (fr.Unsigned8()) {
-				if (dynamic_cast<Game const *>(egbase)) {
-					r->m_carrier_request =
-						new Request
-						(r, 0, &Road::request_carrier_callback, r, Request::WORKER);
-					r->m_carrier_request->Read(&fr, egbase, ol);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Map         const & map        = egbase->map();
+			Extent        const extent     = map.extent       ();
+			Player_Number const nr_players = map.get_nrplayers();
+			for (;;) {
+				Serial const serial = fr.Unsigned32();
+				//  FIXME Just test EndOfFile instead in the next packet version.
+				if (serial == 0xffffffff) {
+					if (not fr.EndOfFile())
+						throw wexception
+							("expected end of file after serial 0xffffffff");
+					break;
 				}
-			} else {
-				r->m_carrier_request = 0;
-			}
+				try {
+					Road & road = ol->get<Road>(serial);
+					if (ol->is_object_loaded(&road))
+						throw wexception("already loaded");
+					Player & plr = egbase->player(fr.Player_Number8(nr_players));
 
-			ol->mark_object_as_loaded(r);
-		}
-	else
-		throw wexception
-			("Unknown version %u in Map_Roaddata_Data_Packet!", packet_version);
+					road.set_owner(&plr);
+					road.m_type = fr.Unsigned32();
+					{
+						uint32_t const flag_0_serial = fr.Unsigned32();
+						try {
+							road.m_flags[0] = &ol->get<Flag>(flag_0_serial);
+						} catch (_wexception const & e) {
+							throw wexception
+								("flag 0 (%u): %s", flag_0_serial, e.what());
+						}
+					}
+					{
+						uint32_t const flag_1_serial = fr.Unsigned32();
+						try {
+							road.m_flags[1] = &ol->get<Flag>(flag_1_serial);
+						} catch (_wexception const & e) {
+							throw wexception
+								("flag 1 (%u): %s", flag_1_serial, e.what());
+						}
+					}
+					road.m_flagidx[0] = fr.Unsigned32();
+					road.m_flagidx[1] = fr.Unsigned32();
+
+					road.m_cost[0] = fr.Unsigned32();
+					road.m_cost[1] = fr.Unsigned32();
+					Path::Step_Vector::size_type const nr_steps = fr.Unsigned16();
+					if (not nr_steps)
+						throw wexception("nr_steps = 0");
+					Path p(road.m_flags[0]->get_position());
+					for (Path::Step_Vector::size_type i = nr_steps; i; --i)
+						try {
+							p.append(egbase->map(), fr.Direction8());
+						} catch (_wexception const & e) {
+							throw wexception("step #%u: %s", nr_steps - i, e.what());
+						}
+					road.set_path(egbase, p);
+
+					//  Now that all rudimentary data is set, init this road. Then
+					//  overwrite the initialization values.
+					road.link_into_flags(egbase);
+
+					road.m_idle_index      = fr.Unsigned32();
+					road.m_desire_carriers = fr.Unsigned32();
+					assert(!road.m_carrier.get(egbase));
+					if (uint32_t const carrier_serial = fr.Unsigned32())
+						try {
+							road.m_carrier = &ol->get<Map_Object>(carrier_serial);
+						} catch (_wexception const & e) {
+							throw wexception
+								("carrier (%u): %s", carrier_serial, e.what());
+						}
+					else
+						road.m_carrier = 0;
+
+					delete road.m_carrier_request; road.m_carrier_request = 0;
+
+					if (fr.Unsigned8()) {
+						if (dynamic_cast<Game const *>(egbase)) {
+							road.m_carrier_request =
+								new Request
+								(&road,
+								 0,
+								 &Road::request_carrier_callback,
+								 &road,
+								 Request::WORKER);
+							road.m_carrier_request->Read(&fr, egbase, ol);
+						}
+					} else
+						road.m_carrier_request = 0;
+
+					ol->mark_object_as_loaded(&road);
+				} catch (_wexception const & e) {
+					throw wexception("road %u: %s", serial, e.what());
+				}
+			}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("roaddata: %s", e.what());
+	}
 }
 
 

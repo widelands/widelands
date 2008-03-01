@@ -33,23 +33,18 @@ void Game_Game_Class_Data_Packet::Read
 throw (_wexception)
 {
 	FileRead fr;
-
-	fr.Open(fs, "binary/game_class");
-
-	// read packet version
-	uint16_t const packet_version = fr.Unsigned16();
-
-	if (packet_version <= CURRENT_PACKET_VERSION) {
-		// Can't load netgames
-		game->m_netgame=0;
-
-		game->m_speed=fr.Signed16();
-
-		game->m_gametime=fr.Unsigned32();
-	} else
-		throw wexception
-			("Unknown version in Game_Game_Class_Data_Packet: %u",
-			 packet_version);
+	try {
+		fr.Open(fs, "binary/game_class");
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version <= CURRENT_PACKET_VERSION) {
+			game->m_netgame  = 0; //  can not load netgames
+			game->m_speed    = fr.Signed16();
+			game->m_gametime = fr.Unsigned32();
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("check eventchain: %s", e.what());
+	}
 }
 
 /*

@@ -47,51 +47,53 @@ throw (_wexception)
 	Profile prof;
 	try {prof.read("extra_data", 0, fs);} catch (...) {return;}
 
-	int32_t const packet_version =
-		prof.get_section("global")->get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		Map & map = egbase->map();
-		//  Nothing more. But read all pics.
-		if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
-			filenameset_t pictures;
-			fs.FindFiles("pics", "*", &pictures);
-			for
-				(filenameset_t::iterator pname = pictures.begin();
-				 pname != pictures.end();
-				 ++pname)
-			{
-				if (fs.IsDirectory((*pname).c_str())) // Might be some dir, maybe CVS
-					continue;
+	try {
+		int32_t const packet_version =
+			prof.get_section("global")->get_int("packet_version");
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Map & map = egbase->map();
+			//  Nothing more. But read all pics.
+			if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
+				filenameset_t pictures;
+				fs.FindFiles("pics", "*", &pictures);
+				for
+					(filenameset_t::iterator pname = pictures.begin();
+					 pname != pictures.end();
+					 ++pname)
+				{
+					if (fs.IsDirectory(pname->c_str())) // Might be a dir, maybe CVS
+						continue;
 
-				FileRead fr;
+					FileRead fr;
 
-				fr.Open(fs, pname->c_str());
-				SDL_Surface * const surf =
-					IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-				if (!surf)
-					continue; //  Illegal pic. Skip it.
-				Surface & picsurf = *new Surface();
-				picsurf.set_sdl_surface(*surf);
+					fr.Open(fs, pname->c_str());
+					SDL_Surface * const surf =
+						IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+					if (!surf)
+						continue; //  Illegal pic. Skip it.
+					Surface & picsurf = *new Surface();
+					picsurf.set_sdl_surface(*surf);
 
-				std::string picname = FileSystem::FS_Filename((*pname).c_str());
-				picname = "map:" + picname;
+					std::string picname = FileSystem::FS_Filename(pname->c_str());
+					picname = "map:" + picname;
 
-				const uint32_t data =
-					g_gr->get_picture(PicMod_Game, picsurf, picname.c_str());
+					uint32_t const data =
+						g_gr->get_picture(PicMod_Game, picsurf, picname.c_str());
 
-				//  OK, the pic is now known to the game. But when the game is
-				//  saved, this data has to be regenerated.
-				Map::Extradata_Info info;
-				info.type     = Map::Extradata_Info::PIC;
-				info.filename = *pname;
-				info.data     = data;
-				map.m_extradatainfos.push_back(info);
+					//  OK, the pic is now known to the game. But when the game is
+					//  saved, this data has to be regenerated.
+					Map::Extradata_Info info;
+					info.type     = Map::Extradata_Info::PIC;
+					info.filename = *pname;
+					info.data     = data;
+					map.m_extradatainfos.push_back(info);
+				}
 			}
-		}
-	} else
-		throw wexception
-			("Map Terrain Extradata Data Packet with unknown version %u in map!",
-			 packet_version);
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("extradata: %s", e.what());
+	}
 }
 
 

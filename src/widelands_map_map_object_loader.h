@@ -20,6 +20,10 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 #define WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
+#include "upcast.h"
+
+#include <typeinfo>
+
 namespace Widelands {
 
 class Map_Object;
@@ -32,9 +36,44 @@ class Editor_Game_Base;
  */
 struct Map_Map_Object_Loader {
 	bool is_object_known(uint32_t);
-	void register_object(Editor_Game_Base*, uint32_t, Map_Object*);
 
-	Map_Object* get_object_by_file_index(uint32_t);
+	/// Registers the object as a new one.
+	///
+	/// \Returns a reference to the object.
+	/// \Throws _wexception if there is already an object registered with the
+	/// same serial. (not implemented: In that case, the object is deleted.)
+	///
+	/// \todo Currently the object must be passed as a parameter to this
+	/// function. This should be changed so that the object is allocated here.
+	/// The parameter object should then be removed and the function renamed to
+	/// create_object. Then there will no longer be necessary to delete the
+	/// object in case the serial number is alrealy known, since the object will
+	/// never even be allocated then. But this change can only be done when all
+	/// kinds of map objects have suitable default constructors.
+	template<typename T> T & register_object(Serial const n, T & object) {
+		Reverse_Map_Object_Map::const_iterator const existing =
+			m_objects.find(n);
+		if (existing != m_objects.end()) {
+			//delete &object; can not do this
+			throw wexception
+				("already loaded (%s)", existing->second->type_name());
+		}
+		m_objects.insert(std::pair<Serial, Map_Object *>(n, &object));
+		m_loaded_obj[&object] = false;
+		return object;
+	}
+
+	template<typename T> T & get(Serial const serial) {
+		Reverse_Map_Object_Map::iterator const it = m_objects.find(serial);
+		if (it == m_objects.end())
+			throw wexception("not found");
+		else if (upcast(T, result, it->second))
+			return *result;
+		else
+			throw wexception
+				("is a %s, expected a %s",
+				 it->second->type_name(), typeid(T).name());
+	}
 
 	int32_t get_nr_unloaded_objects();
 	bool is_object_loaded(Map_Object* obj) {return m_loaded_obj[obj];}
@@ -42,7 +81,7 @@ struct Map_Map_Object_Loader {
 	void mark_object_as_loaded(Map_Object* obj);
 
 private:
-	typedef std::map<uint32_t, Map_Object*> Reverse_Map_Object_Map;
+	typedef std::map<Serial, Map_Object *> Reverse_Map_Object_Map;
 
 	std::map<Map_Object*, bool> m_loaded_obj;
 	Reverse_Map_Object_Map m_objects;

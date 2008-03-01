@@ -80,7 +80,7 @@ bool Map_Map_Object_Saver::is_object_saved(const Map_Object * const obj) throw (
 /*
  * Registers this object as a new one
  */
-uint32_t Map_Map_Object_Saver::register_object(const Map_Object * const obj) {
+Serial Map_Map_Object_Saver::register_object(Map_Object const * const obj) {
 	MapObjectRec* rec = get_object_record(obj);
 
 	assert(!rec->registered);

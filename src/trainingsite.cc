@@ -143,7 +143,7 @@ int32_t TrainingSite_Descr::get_min_level(const tAttribute at) const {
 	case atrEvade:
 		return m_min_evade;
 	default:
-		throw wexception("Unkown attribute value!");
+		throw wexception("Unknown attribute value!");
 	}
 }
 
@@ -163,7 +163,7 @@ int32_t TrainingSite_Descr::get_max_level(const tAttribute at) const {
 	case atrEvade:
 		return m_max_evade;
 	default:
-		throw wexception("Unkown attribute value!");
+		throw wexception("Unknown attribute value!");
 	}
 }
 
@@ -569,7 +569,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 		else if (str[1] == "evade")
 			attrib = atrEvade;
 		else
-			throw wexception("Unkown attribute to upgrade %s.", str[1].c_str());
+			throw wexception("Unknown attribute to upgrade %s.", str[1].c_str());
 
 		if (m_soldiers.size()) {
 			max_level = descr().get_max_level(attrib);

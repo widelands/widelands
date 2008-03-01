@@ -20,6 +20,8 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 #define WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 
+#include "widelands.h"
+
 #include <map>
 
 namespace Widelands {
@@ -35,7 +37,7 @@ struct Map_Map_Object_Saver {
 	Map_Map_Object_Saver();
 
 	bool is_object_known(const Map_Object * const) const;
-	uint32_t register_object(const Map_Object * const);
+	Serial register_object(const Map_Object * const);
 
 	uint32_t get_object_file_index(const Map_Object * const);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,7 @@ struct AreaWatcher : public Map_Object, private Player_Area<> {
 	friend struct Map_Players_AreaWatchers_Data_Packet;
 	AreaWatcher(const Player_Area<>);
 	virtual int32_t get_type() const throw () {return AREAWATCHER;}
+	char const * type_name() const throw () {return "areawatcher";}
 	static AreaWatcher & create(Editor_Game_Base &, const Player_Area<>);
 	virtual void act(Game *, uint32_t data);
 };

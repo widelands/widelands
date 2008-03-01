@@ -52,78 +52,79 @@ throw (_wexception)
 	if (skip) return;
 	FileRead fr;
 	try {fr.Open(fs, "binary/building");} catch (...) {return;}
+	Interactive_Base & iabase = *egbase->get_iabase();
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version >= LOWEST_SUPPORTED_VERSION) {
+			Map & map = egbase->map();
+			X_Coordinate const width  = map.get_width ();
+			Y_Coordinate const height = map.get_height();
+			Player_Area<Area<FCoords> > a;
+			for (a.y = 0; a.y < height; ++a.y) for (a.x = 0; a.x < width; ++a.x) {
+				if (fr.Unsigned8()) {
+					// Ok, now read all the additional data
+					a.player_number                        = fr.Unsigned8 ();
+					Serial       const serial              = fr.Unsigned32();
+					char const * const name                = fr.CString   ();
+					bool         const is_constructionsite = fr.Unsigned8 ();
 
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version >= LOWEST_SUPPORTED_VERSION) {
-		Map & map = egbase->map();
-		const X_Coordinate width  = map.get_width ();
-		const Y_Coordinate height = map.get_height();
-		Player_Area<Area<FCoords> > a;
-		for (a.y = 0; a.y < height; ++a.y) for (a.x = 0; a.x < width; ++a.x) {
-			if (fr.Unsigned8()) {
-				// Ok, now read all the additional data
-				a.player_number = fr.Unsigned8();
-				const uint32_t serial=fr.Unsigned32();
-				const char * const name = fr.CString();
-				bool is_constructionsite=fr.Unsigned8();
+					//  No building lives on more than one main place.
 
-				//  No building lives on more than one main place.
-				assert(!ol->is_object_known(serial)); // FIXME NEVER USE assert TO VALIDATE INPUT!!!
+					//  Get the tribe and the building index.
+					if
+						(Player * const player =
+						 egbase->get_safe_player(a.player_number))
+					{
+						Tribe_Descr const & tribe = player->tribe();
+						int32_t const index = tribe.get_building_index(name);
+						if (index == -1)
+							throw wexception
+								("tribe %s does not define building type \"%s\"",
+								 tribe.name().c_str(), name);
 
-				//  Get the tribe and the building index.
-				if
-					(Player * const player =
-					 egbase->get_safe_player(a.player_number))
-				{
-					const Tribe_Descr & tribe = player->tribe();
-					int32_t index= tribe.get_building_index(name);
-					if (index==-1)
-						throw wexception
-							("Map_Building_Data_Packet::Read: Should create building "
-							 "%s in tribe %s, but building is unknown!",
-							 name, tribe.name().c_str());
+						//  Now, create this Building, take extra special care for
+						//  constructionsites. All data is read later.
+						Building & building =
+							ol->register_object<Building>
+							(serial,
+							 *
+							 (is_constructionsite ?
+							  egbase->warp_constructionsite
+							  (a, a.player_number, index, 0)
+							  :
+							  egbase->warp_building
+							  (a, a.player_number, index)));
 
-					// Now, create this Building, take extra special care for constructionsites
-					Building & building = // all data is read later
-						*
-						(is_constructionsite ?
-						 egbase->warp_constructionsite(a, a.player_number, index, 0)
-						 :
-						 egbase->warp_building        (a, a.player_number, index));
+						if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
+							read_priorities (building, fr);
 
-					if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION) {
-						read_priorities (building, fr);
-					}
+						//  Reference the players tribe if in editor.
+						iabase.reference_player_tribe(a.player_number, &tribe);
 
-					// Reference the players tribe if in editor
-					egbase->get_iabase()->reference_player_tribe
-						(a.player_number, &tribe);
-					// and register it with the object loader for further loading
-					ol->register_object(egbase, serial, &building);
-
-					a.radius = building.get_conquers();
-					if (a.radius) { //  Add to map of military influence.
-						Player::Field * const player_fields = player->m_fields;
-						const Field & first_map_field = map[0];
-						a.field = &map[a];
-						MapRegion<Area<FCoords> > mr(map, a);
-						do
-							player_fields[mr.location().field - &first_map_field]
+						a.radius = building.get_conquers();
+						if (a.radius) { //  Add to map of military influence.
+							Player::Field * const player_fields = player->m_fields;
+							Field const & first_map_field = map[0];
+							a.field = &map[a];
+							MapRegion<Area<FCoords> > mr(map, a);
+							do
+								player_fields[mr.location().field - &first_map_field]
 								.military_influence
 								+=
 								egbase->map().calc_influence
 								(mr.location(), Area<>(a, a.radius));
-						while (mr.advance(map));
-					}
-				} else
-					throw wexception
-						("Map_Building_Data_Packet::Read: player %u does not exist",
-						 a.player_number);
+							while (mr.advance(map));
+						}
+					} else
+						throw wexception
+							("player %u does not exist", a.player_number);
+				}
 			}
-		}
-	} else
-		throw wexception
-			("Unknown version %u in Map_Building_Data_Packet!", packet_version);
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("buildings: %s", e.what());
+	}
 }
 
 

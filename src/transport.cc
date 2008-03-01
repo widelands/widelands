@@ -153,7 +153,7 @@ WareInstance & IdleWareSupply::launch_item(Game *, int32_t ware) {
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
 			 m_ware->get_serial(),
-			 m_ware->descr_index(),
+			 m_ware->descr_index().value(),
 			 ware);
 
 	return *m_ware;
@@ -202,7 +202,7 @@ m_transfer   (0)
 WareInstance::~WareInstance()
 {
 	if (m_supply) {
-		molog("Ware %u still has supply %p\n", m_descr_index, m_supply);
+		molog("Ware %u still has supply %p\n", m_descr_index.value(), m_supply);
 		delete m_supply;
 	}
 }
@@ -1590,11 +1590,12 @@ void Route::load(LoadData& data, FileRead& fr)
  */
 void Route::load_pointers(const LoadData & data, Map_Map_Object_Loader & mol) {
 	for (uint32_t i = 0; i < data.flags.size(); ++i) {
-		uint32_t const idx = data.flags.size();
-		if (upcast(Flag, flag, mol.get_object_by_file_index(idx)))
-			m_route.push_back(flag);
-		else
-			throw wexception("Route step %u expected flag %u", i, idx);
+		uint32_t const flag_serial = data.flags.size();
+		try {
+			m_route.push_back(&mol.get<Flag>(flag_serial));
+		} catch (_wexception const & e) {
+			throw wexception("Route flag #%u (%u): %s", i, flag_serial, e.what());
+		}
 	}
 }
 
@@ -1893,27 +1894,30 @@ bool Requeriments::check (int32_t hp, int32_t attack, int32_t defense, int32_t e
 void Requeriments::Read
 (FileRead * fr, Editor_Game_Base *, Map_Map_Object_Loader *)
 {
-	const uint16_t packet_version = fr->Unsigned16();
-	if (packet_version == REQUERIMENTS_VERSION) {
+	try {
+		uint16_t const packet_version = fr->Unsigned16();
+		if (packet_version == REQUERIMENTS_VERSION) {
 
-		// HitPoints Levels
-		m_hp.min = fr->Unsigned8();
-		m_hp.max = fr->Unsigned8();
+			// HitPoints Levels
+			m_hp.min = fr->Unsigned8();
+			m_hp.max = fr->Unsigned8();
 
-		// Attack Levels
-		m_attack.min = fr->Unsigned8();
-		m_attack.max = fr->Unsigned8();
+			// Attack Levels
+			m_attack.min = fr->Unsigned8();
+			m_attack.max = fr->Unsigned8();
 
-		// Defense levels
-		m_defense.min = fr->Unsigned8();
-		m_defense.max = fr->Unsigned8();
+			// Defense levels
+			m_defense.min = fr->Unsigned8();
+			m_defense.max = fr->Unsigned8();
 
-		// Evade
-		m_evade.min = fr->Unsigned8();
-		m_evade.max = fr->Unsigned8();
-	} else
-		throw wexception
-			("Unknown requeriment version %i in file!", packet_version);
+			// Evade
+			m_evade.min = fr->Unsigned8();
+			m_evade.max = fr->Unsigned8();
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("requirements: %s", e.what());
+	}
 }
 
 
@@ -2042,21 +2046,18 @@ void Request::Read
 					new Transfer
 					(game,
 					 this,
-					 dynamic_cast<WareInstance *>
-					 (mol->get_object_by_file_index(reg)))
+					 &mol->get<WareInstance>(reg))
 					:
 					what_is == WORKER ?
 					new Transfer
 					(game,
 					 this,
-					 dynamic_cast<Worker       *>
-					 (mol->get_object_by_file_index(reg)))
+					 &mol->get<Worker>(reg))
 					:
 					new Transfer
 					(game,
 					 this,
-					 dynamic_cast<Soldier      *>
-					 (mol->get_object_by_file_index(reg)));
+					 &mol->get<Soldier>(reg));
 				trans->set_idle(fr->Unsigned8());
 				m_transfers.push_back(trans);
 
@@ -3567,7 +3568,7 @@ Supply* Economy::find_best_supply
 	Flag * const target_flag = req->get_target_flag();
 
 	// Look for matches in all possible supplies in this economy
-	if (use_supply.size() <= pware)
+	if (use_supply.size() <= pware.value())
 		return false; // tough luck, we have definitely no supplies for this ware
 
 	// if there are no resources of requested ware, try a substitute
@@ -3901,22 +3902,23 @@ void Cmd_Call_Economy_Balance::execute(Game* g) {
 void Cmd_Call_Economy_Balance::Read
 (FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
-		// Read Base Commands
-		GameLogicCommand::Read(fr, egbase, mol);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
+			GameLogicCommand::Read(fr, egbase, mol);
+			m_player  = fr.Unsigned8 ();
+			m_economy = fr.Unsigned8 () ?
+				egbase.get_player(m_player)->get_economy_by_number(fr.Unsigned16())
+				:
+				reinterpret_cast<Economy *>(0xffffffff); //  FIXME ?!?!?!
 
-		m_player  = fr.Unsigned8 ();
-		m_economy = fr.Unsigned8 () ?
-			egbase.get_player(m_player)->get_economy_by_number(fr.Unsigned16())
-			:
-			reinterpret_cast<Economy *>(0xffffffff); //  FIXME ?!?!?!
-
-		m_force_balance = true; //  on load, the first balance has to been forced
-	} else
-		throw wexception
-			("Unknown version %u in Cmd_Call_Economy_Balance::Read()!",
-			 packet_version);
+			//  On load, the first balance has to been forced.
+			m_force_balance = true;
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("call economy balance: %s", e.what());
+	}
 }
 void Cmd_Call_Economy_Balance::Write
 (FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)

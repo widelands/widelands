@@ -68,97 +68,92 @@ throw (_wexception)
 				fr.Unsigned32();
 				uint32_t const flagFilePos = fr.Unsigned32();
 				try {
-					if (ol->is_object_known(flagFilePos))
-						if
-							(upcast
-							 (Flag, flag, ol->get_object_by_file_index(flagFilePos)))
-							ctrl.flag = flag;
-						else
-							throw wexception ("not a flag");
-					else
-						throw wexception("nonexistent");
+					ctrl.flag = &ol->get<Flag>(flagFilePos);
 				} catch (_wexception const & e) {
-					throw wexception
-						("%u: flag %u: %s", fr.GetPos() - 4, flagFilePos, e.what());
+					throw wexception("flag (%u): %s", flagFilePos, e.what());
 				}
 				ctrl.attackingPlayer = fr.Unsigned32();
 				ctrl.defendingPlayer = fr.Unsigned32();
 				ctrl.totallyLaunched = fr.Unsigned32();
 				ctrl.attackedMsEmpty = fr.Unsigned8();
 
-				uint32_t const numBs = fr.Unsigned32();
+				{
+					uint32_t const numBs = fr.Unsigned32();
+					for (uint32_t j = 0; j < numBs; ++j) {
+						uint32_t const soldier_serial = fr.Unsigned32();
+						try {
+							Soldier & soldier = ol->get<Soldier>(soldier_serial);
 
-				for (uint32_t j = 0; j < numBs; ++j) {
-					upcast(Soldier, soldier, ol->get_object_by_file_index(fr.Unsigned32()));
-					assert(soldier); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+							uint32_t const origin_serial = fr.Unsigned32();
+							MilitarySite * origin;
+							try {
+								origin = &ol->get<MilitarySite>(origin_serial);
+							} catch (_wexception const & e) {
+								throw wexception
+									("origin (%u): %s", origin_serial, e.what());
+							}
 
-					upcast(MilitarySite, origin, ol->get_object_by_file_index(fr.Unsigned32()));
-					assert(origin); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+							Coords battleGround;
+							if (packet_version == 1) {
+								uint32_t const x = fr.Unsigned32();
+								if (extent.w <= x)
+									throw wexception
+									("Map_Attack_Controller_Data_Packet::Read: in "
+									 "binary/attackcontroller:%u: battleGround has x "
+									 "coordinate %i, but the map width is only %u",
+									 fr.GetPos() - 4, x, extent.w);
+								uint32_t const y = fr.Unsigned32();
+								if (extent.h <= y)
+									throw wexception
+									("Map_Attack_Controller_Data_Packet::Read: in "
+									 "binary/attackcontroller:%u: battleGround has y "
+									 "coordinate %i, but the map height is only %u",
+									 fr.GetPos() - 4, y, extent.h);
+								battleGround = Coords(x, y);
+							} else {
+								try {battleGround = fr.Coords32(extent);}
+								catch (_wexception const & e) {
+									throw wexception
+										("Map_Attack_Controller_Data_Packet::Read: in "
+										 "binary/attackcontroller:%u: reading coordinates of "
+										 "battleground: %s",
+										 fr.GetPos() - 4, e.what());
+								}
+							}
 
-					Coords battleGround;
-					if (packet_version == 1) {
-						const uint32_t x = fr.Unsigned32();
-						if (extent.w <= x)
+							{
+								bool const is_attacker = fr.Unsigned8();
+								bool const has_arrived = fr.Unsigned8();
+								bool const is_fighting = fr.Unsigned8();
+								AttackController::BattleSoldier bs = {
+									&soldier,
+									origin,
+									battleGround,
+									is_attacker,
+									has_arrived,
+									is_fighting
+								};
+								ctrl.involvedSoldiers.push_back(bs);
+							}
+							soldier.set_attack_ctrl(&ctrl);
+						} catch (_wexception const & e) {
 							throw wexception
-								("Map_Attack_Controller_Data_Packet::Read: in "
-								 "binary/attackcontroller:%u: battleGround has x "
-								 "coordinate %i, but the map width is only %u",
-								 fr.GetPos() - 4, x, extent.w);
-						const uint32_t y = fr.Unsigned32();
-						if (extent.h <= y)
-							throw wexception
-								("Map_Attack_Controller_Data_Packet::Read: in "
-								 "binary/attackcontroller:%u: battleGround has y "
-								 "coordinate %i, but the map height is only %u",
-								 fr.GetPos() - 4, y, extent.h);
-						battleGround = Coords(x, y);
-					} else {
-						try {battleGround = fr.Coords32(extent);}
-						catch (_wexception const & e) {
-							throw wexception
-								("Map_Attack_Controller_Data_Packet::Read: in "
-								 "binary/attackcontroller:%u: reading coordinates of "
-								 "battleground: %s",
-								 fr.GetPos() - 4, e.what());
+								("soldier #%u (%u): %s", i, soldier_serial, e.what());
 						}
 					}
-
-					bool attacker = fr.Unsigned8();
-					bool arrived = fr.Unsigned8();
-					bool fighting = fr.Unsigned8();
-					AttackController::BattleSoldier bs = {
-						soldier,
-						origin,
-						battleGround,
-						attacker,
-						arrived,
-						fighting
-					};
-					ctrl.involvedSoldiers.push_back(bs);
-					soldier->set_attack_ctrl(&ctrl);
 				}
 
 				uint32_t const numInMs = fr.Unsigned32();
-				for (uint32_t j = 0; j < numInMs; ++j) {
+				for (uint32_t j = numInMs; j; --j) {
 					uint32_t const ms_serial = fr.Unsigned32();
 					try {
-						if (ol->is_object_known(ms_serial)) {
-							if
-								(upcast
-								 (MilitarySite,
-								  ms,
-								  ol->get_object_by_file_index(ms_serial)))
-							{
-								ctrl.involvedMilitarySites.insert(ms);
-								ms->set_in_battle(true);
-							} else
-								throw wexception("not a militarysite");
-						} else
-							throw wexception("nonexistent");
+						MilitarySite & ms = ol->get<MilitarySite>(ms_serial);
+						ctrl.involvedMilitarySites.insert(&ms);
+						ms.set_in_battle(true);
 					} catch (_wexception const & e) {
 						throw wexception
-							("involved militarysite %u of %u with serial %u: %s",
-							 j, numInMs, ms_serial, e.what());
+							("involved militarysite #%u (%u): %s",
+							 numInMs - j, ms_serial, e.what());
 					}
 				}
 
@@ -168,8 +163,7 @@ throw (_wexception)
 					("Error in Attack_Controller_Data_Packet : Couldn't find "
 					 "0xffffffff.");
 		} else
-			throw wexception
-				("unkown/unhandled version %u", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
 		throw wexception("attack controller: %s", e.what());
 	}

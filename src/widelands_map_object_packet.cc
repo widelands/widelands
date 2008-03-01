@@ -53,7 +53,7 @@ void Map_Object_Packet::Read
 
 		const uint8_t packet_version = fr.Unsigned8();
 		if (packet_version != CURRENT_PACKET_VERSION)
-			throw wexception("Unknown version %u", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 
 		// Initial loading stage
 		for (;;)
@@ -73,10 +73,10 @@ void Map_Object_Packet::Read
 				break;
 
 			default:
-				throw wexception("Unknown object header %u", header);
+				throw wexception("unknown object header %u", header);
 			}
 	} catch (const std::exception & e) {
-		throw wexception("Loading map objects: %s", e.what());
+		throw wexception("map objects: %s", e.what());
 	} catch (...) {
 		throw;
 	}

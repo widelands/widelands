@@ -937,7 +937,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		 it != commandline_end;
 		 ++it)
 	{
-		//TODO: barf here on unkown option; the list of known options
+		//TODO: barf here on unknown option; the list of known options
 		//TODO: needs to be centralized
 
 		g_options.pull_section("global")->create_val

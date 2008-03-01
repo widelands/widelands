@@ -45,35 +45,42 @@ throw (_wexception)
 	try {prof.read("variable", 0, fs);} catch (...) {return;}
 	Manager<Variable> & mvm = egbase->map().mvm();
 
-	int32_t const packet_version =
-		prof.get_section("global")->get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		while (Section * const s = prof.get_next_section(0)) {
-			char const * const      name = s->get_name();
-			char const * const type_name = s->get_safe_string("type");
-			bool const delete_protected = s->get_safe_bool("delete_protected");
-			Variable * variable;
-			if      (not strcmp(type_name, "int")) {
-				Variable_Int    & v = *new Variable_Int   (delete_protected);
-				v.set_value(s->get_safe_int("value"));
-				variable = &v;
-			} else if (not strcmp(type_name, "string")) {
-				Variable_String & v = *new Variable_String(delete_protected);
-				v.set_value(s->get_safe_string("value"));
-				variable = &v;
-			} else
-				throw wexception
-					("Variable %s has invalid type \"%s\"", name, type_name);
-			variable->set_name(name);
-			try {
-				mvm.register_new(*variable);
-			} catch (Manager<Variable>::Already_Exists) {
-				throw wexception("Variable %s is duplicated.", name);
+	try {
+		int32_t const packet_version =
+			prof.get_section("global")->get_int("packet_version");
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			while (Section * const s = prof.get_next_section(0)) {
+				char const * const      name = s->get_name();
+				try {
+					char const * const type_name = s->get_safe_string("type");
+					bool const delete_protected =
+						s->get_safe_bool("delete_protected");
+					Variable * variable;
+					if      (not strcmp(type_name, "int")) {
+						Variable_Int    & v = *new Variable_Int   (delete_protected);
+						v.set_value(s->get_safe_int("value"));
+						variable = &v;
+					} else if (not strcmp(type_name, "string")) {
+						Variable_String & v = *new Variable_String(delete_protected);
+						v.set_value(s->get_safe_string("value"));
+						variable = &v;
+					} else
+						throw wexception("invalid type \"%s\"", type_name);
+					variable->set_name(name);
+					try {
+						mvm.register_new(*variable);
+					} catch (Manager<Variable>::Already_Exists) {
+						throw wexception("duplicated");
+					}
+				} catch (_wexception const & e) {
+					throw wexception("variable %s: %s", name, e.what());
+				}
 			}
-		}
-	} else
-		throw wexception
-			("Unknown version in Map Variable Data Packet: %i", packet_version);
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("variables: %s", e.what());
+	}
 }
 
 

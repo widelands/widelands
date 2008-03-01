@@ -60,21 +60,23 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 	Profile prof;
 	prof.read("player_names", 0, fs);
 
-	int32_t const packet_version =
-		prof.get_section("global")->get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		const Player_Number nr_players = map->get_nrplayers();
-		iterate_player_numbers(p, nr_players) {
-			char buffer[10];
-			snprintf(buffer, sizeof(buffer), "player_%u", p);
-			Section & s =*prof.get_section(buffer);
-			map->set_scenario_player_name (p, s.get_string("name", ""));
-			map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
-		}
-	} else
-		throw wexception
-			("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i",
-			 packet_version);
+	try {
+		int32_t const packet_version =
+			prof.get_section("global")->get_int("packet_version");
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Player_Number const nr_players = map->get_nrplayers();
+			iterate_player_numbers(p, nr_players) {
+				char buffer[10];
+				snprintf(buffer, sizeof(buffer), "player_%u", p);
+				Section & s =*prof.get_section(buffer);
+				map->set_scenario_player_name (p, s.get_string("name",  ""));
+				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
+			}
+		} else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("player names and tribes: %s", e.what());
+	}
 }
 
 

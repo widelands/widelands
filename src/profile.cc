@@ -505,7 +505,7 @@ Widelands::Player_Number Section::get_Player_Number
 		return value;
 	else
 		throw wexception
-			("player number is %i but there are only %u players on the map",
+			("player number is %i but there are only %u players",
 			 value, nr_players);
 }
 

@@ -71,19 +71,18 @@ throw
 			Map   const &       map        = egbase->map();
 			Extent        const extent     = map.extent();
 			Player_Number const nr_players = map.get_nrplayers();
-
 			for (;;) {
-				uint32_t const serial = fr.Unsigned32();
-				if (serial == 0xffffffff) //  FIXME test EndOfFile instead in the
-					break;                 //  FIXME next packet version
-
+				Serial const serial = fr.Unsigned32();
+				//  FIXME Just test EndOfFile instead in the next packet version.
+				if (serial == 0xffffffff) {
+					if (not fr.EndOfFile())
+						throw wexception
+							("expected end of file after serial 0xffffffff");
+					break;
+				}
 				try {
-					if (not ol->is_object_known(serial))
-						throw wexception("not known");
-					upcast(Bob, bob, ol->get_object_by_file_index(serial));
-					if (not bob)
-						throw wexception("not a bob");
-					Bob::Descr const & bob_descr = bob->descr();
+					Bob & bob = ol->get<Bob>(serial);
+					Bob::Descr const & bob_descr = bob.descr();
 
 					if (Player_Number const read_owner = fr.Player_Number8()) {
 						if (nr_players < read_owner)
@@ -91,28 +90,30 @@ throw
 								("owner number is %u but there are only %u players",
 								 read_owner, nr_players);
 						if (Player * const owner = egbase->get_player(read_owner))
-							bob->set_owner(owner);
+							bob.set_owner(owner);
 						else
 							throw wexception
 								("owning player %u does not exist", read_owner);
 					}
 
 					//  basic initialisation
-					bob->set_position(egbase, fr.Coords32(extent));
+					bob.set_position(egbase, fr.Coords32(extent));
 
 					Transfer * trans = 0;
 					if (fr.Unsigned8()) { //  look if we had an transfer
-						trans = bob->m_stack[0].transfer;
+						trans = bob.m_stack[0].transfer;
 						assert(trans);
 					}
 
-					bob->m_actid = fr.Unsigned32();
+					bob.m_actid = fr.Unsigned32();
 
-					bob->m_anim =
+					bob.m_anim =
 						fr.Unsigned8() ? bob_descr.get_animation(fr.CString()) : 0;
-					bob->m_animstart=fr.Signed32();
+					bob.m_animstart=fr.Signed32();
 
 					{
+						//  FIXME Use StreamRead::Direction8 in the next packet
+						//  FIXME version.
 						Map_Object::WalkingDir const walking_dir =
 							static_cast<Map_Object::WalkingDir>(fr.Signed32());
 						if (6 < walking_dir)
@@ -121,15 +122,16 @@ throw
 								 "(northeast), 2 (east), 3 (southeast), 4 "
 								 "(southwest), 5 (west), 6 (northwest)}",
 								 walking_dir);
-						bob->m_walking = walking_dir;
+						bob.m_walking = walking_dir;
 					}
-					bob->m_walkstart = fr.Signed32();
-					bob->m_walkend   = fr.Signed32();
+					bob.m_walkstart = fr.Signed32();
+					bob.m_walkend   = fr.Signed32();
 
-					uint32_t oldstacksize = bob->m_stack.size();
-					bob->m_stack.resize(fr.Unsigned16());
-					for (uint32_t i = 0; i < bob->m_stack.size(); ++i) {
-						Bob::State & state = bob->m_stack[i];
+					uint16_t const old_stacksize = bob.m_stack.size();
+					uint16_t const new_stacksize = fr.Unsigned16();
+					bob.m_stack.resize(new_stacksize);
+					for (uint32_t i = 0; i < new_stacksize; ++i) {
+						Bob::State & state = bob.m_stack[i];
 						try {
 
 							{ //  Task
@@ -144,9 +146,9 @@ throw
 								else if (not strcmp(taskname, "roam"))
 									task = &Critter_Bob::taskRoam;
 								else if (not strcmp(taskname, "program")) {
-									if (dynamic_cast<Worker const *>(bob))
+									if      (dynamic_cast<Worker      const *>(&bob))
 										task = &Worker::taskProgram;
-									else if (dynamic_cast<Critter_Bob const *>(bob))
+									else if (dynamic_cast<Critter_Bob const *>(&bob))
 										task = &Critter_Bob::taskProgram;
 									else
 										throw;
@@ -193,9 +195,14 @@ throw
 
 							state.transfer = 0;
 
-							if (int32_t const obj = fr.Unsigned32()) {
-								assert(ol->is_object_known(obj));
-								state.objvar1 = ol->get_object_by_file_index(obj);
+							if (Serial const objvar1_serial = fr.Unsigned32()) {
+								try {
+									state.objvar1 =
+										&ol->get<Map_Object>(objvar1_serial);
+								} catch (_wexception const & e) {
+									throw wexception
+										("objvar1 (%u): %s", objvar1_serial, e.what());
+								}
 							} else
 								state.objvar1 = 0;
 							state.svar1 = fr.CString();
@@ -217,22 +224,19 @@ throw
 								state.diranims = 0;
 
 							uint32_t const pathsteps = fr.Unsigned16();
-							if (i < oldstacksize)
+							if (i < old_stacksize)
 								delete state.path;
 							if (pathsteps) {
 								try {
 									Path * const path = new Path(fr.Coords32(extent));
-									for (uint32_t step = 0; step < pathsteps; ++step) {
-										Direction const direction = fr.Unsigned8();
-										if (direction == 0 or 6 < direction)
+									for (uint32_t step = pathsteps; step; --step)
+										try {
+											path->append(map, fr.Direction8());
+										} catch (_wexception const & e) {
 											throw wexception
-												("step %u: direction is %u but must be "
-												 "one of {0 (idle), 1 (northeast), 2 "
-												 "(east), 3 (southeast), 4 (southwest), 5 "
-												 "(west), 6 (northwest)}",
-												 step, direction);
-										path->append(map, direction);
-									}
+												("step #%u: %s",
+												 pathsteps - step, e.what());
+										}
 									state.path = path;
 								} catch (_wexception const & e) {
 									throw wexception("reading path: %s", e.what());
@@ -240,7 +244,7 @@ throw
 							} else
 								state.path = 0;
 
-							if (i < oldstacksize && !trans)
+							if (i < old_stacksize && !trans)
 								delete state.transfer;
 
 							state.transfer =
@@ -252,7 +256,7 @@ throw
 
 							{
 								bool has_route = fr.Unsigned8();
-								if (i < oldstacksize && state.route)
+								if (i < old_stacksize && state.route)
 									if (!has_route) {
 										delete state.route;
 										state.route = 0; // in case we get an exception further down
@@ -272,9 +276,9 @@ throw
 
 							if (fr.Unsigned8()) {
 								char const * const progname = fr.CString();
-								if      (upcast(Worker      const, wor,  bob))
+								if      (upcast(Worker      const, wor, &bob))
 									state.program = wor->descr().get_program(progname);
-								else if (upcast(Critter_Bob const, cri, bob))
+								else if (upcast(Critter_Bob const, cri, &bob))
 									state.program = cri->descr().get_program(progname);
 								else
 									throw;
@@ -287,38 +291,41 @@ throw
 					}
 
 					//  rest of bob stuff
-					bob->m_stack_dirty     = fr.Unsigned8();
-					bob->m_sched_init_task = fr.Unsigned8();
-					bob->m_signal          = fr.CString  ();
+					bob.m_stack_dirty     = fr.Unsigned8();
+					bob.m_sched_init_task = fr.Unsigned8();
+					bob.m_signal          = fr.CString  ();
 
-					if      (upcast(Critter_Bob, critter_bob, bob))
+					if      (upcast(Critter_Bob, critter_bob, &bob))
 						read_critter_bob(&fr, egbase, ol, critter_bob);
-					else if (upcast(Worker,      worker,      bob))
+					else if (upcast(Worker,      worker,      &bob))
 						read_worker_bob(&fr, egbase, ol, worker);
 					else
 						assert(false);
 
-					ol->mark_object_as_loaded(bob);
+					ol->mark_object_as_loaded(&bob);
 				} catch (_wexception const & e) {
-					throw wexception("reading object %u: %s", serial, e.what());
+					throw wexception("bob %u: %s", serial, e.what());
 				}
 			}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("reading bobdata: %s", e.what());
+		throw wexception("bobdata: %s", e.what());
 	}
 }
 
 void Map_Bobdata_Data_Packet::read_critter_bob
 	(FileRead * fr, Editor_Game_Base *, Map_Map_Object_Loader *, Critter_Bob *)
 {
-	const uint16_t packet_version = fr->Unsigned16();
-	if (packet_version == CRITTER_BOB_PACKET_VERSION) {
-		// No data for critter bob currently
-	} else
-		throw wexception
-			("Unknown version %u in Critter Bob Subpacket!", packet_version);
+	try {
+		uint16_t const packet_version = fr->Unsigned16();
+		if (packet_version == CRITTER_BOB_PACKET_VERSION) {
+			// No data for critter bob currently
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("critter bob: %s", e.what());
+	}
 }
 
 void Map_Bobdata_Data_Packet::read_worker_bob
@@ -327,103 +334,112 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 	 Map_Map_Object_Loader * ol,
 	 Worker                * worker)
 {
-	const uint16_t packet_version = fr->Unsigned16();
-	if (packet_version == WORKER_BOB_PACKET_VERSION) {
-		if (upcast(Soldier, soldier, worker)) {
-			const uint16_t soldier_worker_bob_packet_version = fr->Unsigned16();
-			if
-				(2 <= soldier_worker_bob_packet_version
-				 and
-				 soldier_worker_bob_packet_version
-				 <=
-				 SOLDIER_WORKER_BOB_PACKET_VERSION)
-			{
-				const uint32_t min_hp = soldier->descr().get_min_hp();
-				assert(min_hp);
-				{
-					//  Soldiers created by old versions of Widelands have wrong
-					//  values for m_hp_max and m_hp_current; they
-					//  were soldier->descr().get_min_hp() less than they should be,
-					//  see bug #1687368.
-					const uint32_t broken_hp_compensation =
-						soldier_worker_bob_packet_version < 3 ? min_hp : 0;
+	try {
+		uint16_t const packet_version = fr->Unsigned16();
+		if (packet_version == WORKER_BOB_PACKET_VERSION) {
+			if (upcast(Soldier, soldier, worker)) {
+				try {
+					uint16_t const soldier_worker_bob_packet_version =
+						fr->Unsigned16();
+					if
+						(2 <= soldier_worker_bob_packet_version
+						 and
+						 soldier_worker_bob_packet_version
+						 <=
+						 SOLDIER_WORKER_BOB_PACKET_VERSION)
+					{
+						uint32_t const min_hp = soldier->descr().get_min_hp();
+						assert(min_hp);
+						{
+							//  Soldiers created by old versions of Widelands have
+							//  wrong values for m_hp_max and m_hp_current; they were
+							//  soldier->descr().get_min_hp() less than they should
+							//  be, see bug #1687368.
+							uint32_t const broken_hp_compensation =
+								soldier_worker_bob_packet_version < 3 ? min_hp : 0;
 
-					soldier->m_hp_current =
-						broken_hp_compensation + fr->Unsigned32();
-					soldier->m_hp_max = broken_hp_compensation + fr->Unsigned32();
+							soldier->m_hp_current =
+								broken_hp_compensation + fr->Unsigned32();
+							soldier->m_hp_max =
+								broken_hp_compensation + fr->Unsigned32();
+						}
+						if (soldier->m_hp_max < min_hp)
+							throw wexception
+								("m_hp_max = %u but must be at least %u",
+								 soldier->m_hp_max, min_hp);
+						soldier->m_min_attack    = fr->Unsigned32();
+						soldier->m_max_attack    = fr->Unsigned32();
+						soldier->m_defense       = fr->Unsigned32();
+						soldier->m_evade         = fr->Unsigned32();
+						soldier->m_hp_level      = fr->Unsigned32();
+						soldier->m_attack_level  = fr->Unsigned32();
+						soldier->m_defense_level = fr->Unsigned32();
+						soldier->m_evade_level   = fr->Unsigned32();
+						soldier->m_marked        = fr->Unsigned8 ();
+					} else
+						throw wexception
+							("unknown/unhandled version %u",
+							 soldier_worker_bob_packet_version);
+				} catch (_wexception const & e) {
+					throw wexception("soldier: %s", e.what());
 				}
-				if (soldier->m_hp_max < min_hp)
-					throw wexception
-						("Map_Bobdata_Data_Packet::read_worker_bob: "
-						 "binary/bob_data:%u: soldier %p (serial %u): m_hp_max = %u "
-						 "but must be at least %u",
-						 fr->GetPos() - 4, worker, worker->get_serial(),
-						 soldier->m_hp_max, min_hp);
-				soldier->m_min_attack    = fr->Unsigned32();
-				soldier->m_max_attack    = fr->Unsigned32();
-				soldier->m_defense       = fr->Unsigned32();
-				soldier->m_evade         = fr->Unsigned32();
-				soldier->m_hp_level      = fr->Unsigned32();
-				soldier->m_attack_level  = fr->Unsigned32();
-				soldier->m_defense_level = fr->Unsigned32();
-				soldier->m_evade_level   = fr->Unsigned32();
-				soldier->m_marked        = fr->Unsigned8 ();
+			} else if (upcast(Carrier, carrier, worker)) {
+				try {
+					uint16_t const carrier_worker_bob_packet_version =
+						fr->Unsigned16();
+					if
+						(carrier_worker_bob_packet_version
+						 ==
+						 CARRIER_WORKER_BOB_PACKET_VERSION)
+						carrier->m_acked_ware = fr->Signed32();
+					else
+						throw wexception
+							("unknown/unhandled version %u",
+							 carrier_worker_bob_packet_version);
+				} catch (_wexception const & e) {
+					throw wexception("carrier: %s", e.what());
+				}
+			}
+
+			if (uint32_t const location_serial = fr->Unsigned32()) {
+				try {
+					worker->set_location(&ol->get<PlayerImmovable>(location_serial));
+				} catch (_wexception const & e) {
+					throw ("location (%u): %s", location_serial, e.what());
+				}
 			} else
-				throw wexception
-					("Map_Bobdata_Data_Packet::read_worker_bob: "
-					 "binary/bob_data:%u: soldier %p (serial %u): unknown soldier "
-					 "worker bob packet version %u",
-					 fr->GetPos() - 2,
-					 worker, worker->get_serial(),
-					 soldier_worker_bob_packet_version);
-		} else if (upcast(Carrier, carrier, worker)) {
-			const uint16_t carrier_worker_bob_packet_version = fr->Unsigned16();
+				worker->m_location = 0;
+
+			if (uint32_t const carried_item_serial = fr->Unsigned32()) {
+				try {
+					worker->m_carried_item =
+						&ol->get<Map_Object>(carried_item_serial);
+				} catch (_wexception const & e) {
+					throw wexception
+						("carried item (%u): %s", carried_item_serial, e.what());
+				}
+			} else
+				worker->m_carried_item = 0;
+
+			// Skip supply
+
+			worker->m_needed_exp  = fr->Signed32();
+			worker->m_current_exp = fr->Signed32();
+
+			Economy * economy = 0;
+			if (Map_Object * const location = worker->m_location.get(egbase))
+				economy = dynamic_cast<PlayerImmovable &>(*location).get_economy();
+			worker->set_economy(economy);
 			if
-				(carrier_worker_bob_packet_version
-				 ==
-				 CARRIER_WORKER_BOB_PACKET_VERSION)
-				carrier->m_acked_ware = fr->Signed32();
-			else
-				throw wexception
-					("Map_Bobdata_Data_Packet::read_worker_bob:"
-					 "binary/bob_data:%u: carrier %p (serial %u): unknown carrier "
-					 "worker bob packet version %u",
-					 fr->GetPos() - 2,
-					 worker, worker->get_serial(),
-					 carrier_worker_bob_packet_version);
-		}
-
-		if (uint32_t const reg = fr->Unsigned32()) {
-			assert(ol->is_object_known(reg)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			worker->set_location(dynamic_cast<PlayerImmovable*>(ol->get_object_by_file_index(reg))); //  FIXME CHECK RESULT OF CAST!!!
-			assert(worker->m_location.get(egbase)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+				(Map_Object * const carried_item =
+				 worker->m_carried_item.get(egbase))
+				dynamic_cast<WareInstance &>(*carried_item).set_economy(economy);
 		} else
-			worker->m_location = 0;
-
-
-		if (uint32_t const reg = fr->Unsigned32()) {
-			assert(ol->is_object_known(reg)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			worker->m_carried_item = ol->get_object_by_file_index(reg);
-		} else
-			worker->m_carried_item = 0;
-
-		// Skip supply
-
-		worker->m_needed_exp  = fr->Signed32();
-		worker->m_current_exp = fr->Signed32();
-
-		Economy * eco = 0;
-		if (Map_Object * const location = worker->m_location.get(egbase))
-			eco = dynamic_cast<PlayerImmovable &>(*location).get_economy();
-
-		worker->set_economy(eco);
-		if (Map_Object * const carried_item = worker->m_carried_item.get(egbase))
-			dynamic_cast<WareInstance &>(*carried_item).set_economy(eco);
-
-
-	} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
 		throw wexception
-			("Unknown version %i in Worker Bob Subpacket!", packet_version);
+			("worker %p (%u): %s", worker, worker->get_serial(), e.what());
+	}
 }
 
 
@@ -476,6 +492,8 @@ throw (_wexception)
 					fw.Unsigned8(0);
 				fw.Signed32(bob.m_animstart);
 
+				// FIXME Direction should only be 8 bits and of course not signed
+				// FIXME in the next packet version.
 				fw.Signed32(bob.m_walking);
 
 				fw.Signed32(bob.m_walkstart);
@@ -571,7 +589,9 @@ throw (_wexception)
 
 		}
 	}
-	fw.Unsigned32(0xffffffff); //  no more bobs
+
+	//  FIXME Remove this in the next packet version. End of file is enough.
+	fw.Unsigned32(0xffffffff);
 
 	fw.Write(fs, "binary/bob_data");
 }

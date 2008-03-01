@@ -119,8 +119,6 @@ struct FindBobAttribute : public FindBob {
 	virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 
-typedef uint8_t Direction;
-
 /** class Map
  *
  * This really identifies a map like it is in the game

@@ -62,6 +62,7 @@ public:
 
 	virtual int32_t get_building_type() const throw ()
 	{return Building::MILITARYSITE;}
+	char const * type_name() const throw () {return "militarysite";}
 	virtual std::string get_statistics_string();
 
 	void fill(Game &);

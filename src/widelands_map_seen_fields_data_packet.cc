@@ -46,44 +46,46 @@ throw (_wexception)
 	FileRead fr;
 	try {fr.Open(fs, "binary/seen_fields");} catch (...) {return;}
 
-	uint16_t const packet_version = fr.Unsigned16();
 
 	compile_assert(MAX_PLAYERS < 32);
 	Map & map = egbase->map();
 	const Player_Number nr_players = map.get_nrplayers();
 	Map_Index const max_index = map.max_index();
-	if (packet_version == 1)
-		for (Map_Index i = 0; i < max_index; ++i) {
-			const uint32_t data = fr.Unsigned16();
-			for (uint8_t j = 0; j < nr_players; ++j) {
-				bool see = data & (1 << j);
-				if (Player * const player = egbase->get_player(j+1))
-					player->m_fields[i].vision = see ? 1 : 0;
-				else if (see)
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == 1)
+			for (Map_Index i = 0; i < max_index; ++i) {
+				uint32_t const data = fr.Unsigned16();
+				for (uint8_t j = 0; j < nr_players; ++j) {
+					bool const see = data & (1 << j);
+					if (Player * const player = egbase->get_player(j + 1))
+						player->m_fields[i].vision = see ? 1 : 0;
+					else if (see)
+						log
+							("Map_Seen_Fields_Data_Packet::Read: WARNING: Player %u, "
+							 "which does not exist, sees field %u.\n",
+							 j + 1, i);
+				}
+			}
+		else if (packet_version == CURRENT_PACKET_VERSION)
+			for (Map_Index i = 0; i < max_index; ++i) {
+				uint32_t const data = fr.Unsigned32();
+				for (uint8_t j = 0; j < nr_players; ++j) {
+					bool see = data & (1 << j);
+					if (Player * const player = egbase->get_player(j + 1))
+						player->m_fields[i].vision = see ? 1 : 0;
+					else if (see)
 					log
 						("Map_Seen_Fields_Data_Packet::Read: WARNING: Player %u, "
 						 "which does not exist, sees field %u.\n",
 						 j + 1, i);
+				}
 			}
-		}
-	else if (packet_version == CURRENT_PACKET_VERSION)
-		for (Map_Index i = 0; i < max_index; ++i) {
-			const uint32_t data = fr.Unsigned32();
-			for (uint8_t j = 0; j < nr_players; ++j) {
-				bool see = data & (1 << j);
-				if (Player * const player = egbase->get_player(j+1))
-					player->m_fields[i].vision = see ? 1 : 0;
-				else if (see)
-					log
-						("Map_Seen_Fields_Data_Packet::Read: WARNING: Player %u, "
-						 "which does not exist, sees field %u.\n",
-						 j + 1, i);
-			}
-		}
-	else
-		throw wexception
-			("Unknown version in Map_Seen_Fields_Data_Packet: %u",
-			 packet_version);
+		else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("seen: %s", e.what());
+	}
 }
 
 

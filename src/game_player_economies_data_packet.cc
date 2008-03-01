@@ -38,57 +38,59 @@ throw (_wexception)
 {
 	FileRead fr;
 
-	fr.Open(fs, "binary/player_economies");
-
 	Map   const &       map        = game->map();
 	Map_Index     const max_index  = map.max_index();
 	Extent        const extent     = map.extent();
 	Player_Number const nr_players = map.get_nrplayers();
 
-	const uint16_t packet_version = fr.Unsigned16();
-	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-		iterate_players_existing(p, nr_players, *game, player) {
-			Player::economy_vector & economies = player->m_economies;
-			uint16_t const nr_economies = economies.size();
+	try {
+		fr.Open(fs, "binary/player_economies");
+		uint16_t const packet_version = fr.Unsigned16();
+		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+			iterate_players_existing(p, nr_players, *game, player)
+				try {
+					Player::economy_vector & economies = player->m_economies;
+					uint16_t const nr_economies = economies.size();
+					if (packet_version == 1) {
+						uint16_t const nr_economies_from_file = fr.Unsigned16();
+						if (nr_economies != nr_economies_from_file)
+							throw wexception
+								("read number of economies as %u, but this was read "
+								 "as %u elsewhere",
+								 nr_economies_from_file, nr_economies);
+					}
 
-			if (packet_version == 1) {
-				uint16_t const nr_economies_from_file = fr.Unsigned16();
-				if (nr_economies != nr_economies_from_file)
-					throw wexception
-						("Game_Player_Economies_Data_Packet::Read: in "
-						 "binary/player_economies:%u: player %u: read number of "
-						 "economies as %u, but this was read as %u elsewhere",
-						 fr.GetPos() - 2, p,
-						 nr_economies_from_file, nr_economies);
-			}
-
-			Player::economy_vector ecos(nr_economies);
-			Player::economy_vector::const_iterator const ecos_end = ecos.end();
-			for
-				(Player::economy_vector::iterator it = ecos.begin();
-				 it != ecos_end;
-				 ++it)
-				if
-					(upcast
-					 (Flag const,
-					  flag,
-					  (packet_version == 1 ?
-					   map[fr.Coords32(extent)] : map[fr.Map_Index32(max_index)])
-					  .get_immovable()))
-					*it = flag->get_economy();
-				else
-					throw wexception
-						("Game_Player_Economies_Data_Packet::Read: in "
-						 "binary/player_economies:%u: player %u: there is no flag "
-						 "at the specified location",
-						 fr.GetPos() - 4, p);
-			for (uint16_t j = 0; j < nr_economies; ++j) // Issue first balance
-				(economies[j] = ecos[j])->balance_requestsupply();
-		}
-	} else
-		throw wexception
-			("Unknown version in Game_Player_Economies_Data_Packet: %u",
-			 packet_version);
+					Player::economy_vector ecos(nr_economies);
+					Player::economy_vector::const_iterator const ecos_end =
+						ecos.end();
+					for
+						(Player::economy_vector::iterator it = ecos.begin();
+						 it != ecos_end;
+						 ++it)
+						if
+							(upcast
+							 (Flag const,
+							  flag,
+							  (packet_version == 1 ?
+							   map[fr.Coords32(extent)]
+							   :
+							   map[fr.Map_Index32(max_index)])
+							  .get_immovable()))
+							*it = flag->get_economy();
+					else
+						throw wexception
+							("there is no flag at the specified location");
+					//  issue first balance
+					for (uint16_t j = 0; j < nr_economies; ++j)
+						(economies[j] = ecos[j])->balance_requestsupply();
+				} catch (_wexception const & e) {
+					throw wexception("player %u: %s", p, e.what());
+				}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("economies: %s", e.what());
+	}
 }
 
 /*

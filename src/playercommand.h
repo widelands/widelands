@@ -36,12 +36,8 @@ namespace Widelands {
  * reasonably unique (to be precise, they must be unique per duetime) and
  * the same across all hosts, to ensure parallel simulation.
  */
-class PlayerCommand : public GameLogicCommand {
-	char sender;
-	uint32_t cmdserial;
-
-public:
-	PlayerCommand (int32_t, char);
+struct PlayerCommand : public GameLogicCommand {
+	PlayerCommand (int32_t time, Player_Number);
 	PlayerCommand() : GameLogicCommand(0), sender(0), cmdserial(0) {} // For savegame loading
 	virtual ~PlayerCommand ();
 
@@ -55,14 +51,16 @@ public:
 	// Call these from child classes
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+private:
+	Player_Number sender;
+	uint32_t cmdserial;
 };
 
-class Cmd_Bulldoze:public PlayerCommand {
-	int32_t serial;
-
-public:
+struct Cmd_Bulldoze:public PlayerCommand {
 	Cmd_Bulldoze() : PlayerCommand() {} // For savegame loading
-	Cmd_Bulldoze (int32_t t, int32_t p, PlayerImmovable* pi):PlayerCommand(t, p)
+	Cmd_Bulldoze (int32_t const t, int32_t const p, PlayerImmovable* pi)
+		: PlayerCommand(t, p)
 	{serial=pi->get_serial();}
 
 	Cmd_Bulldoze (StreamRead &);
@@ -74,6 +72,9 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
 };
 
 class Cmd_Build:public PlayerCommand {
@@ -141,12 +142,7 @@ public:
 	virtual void serialize (StreamWrite &);
 };
 
-class Cmd_FlagAction:public PlayerCommand {
-private:
-	int32_t serial;
-	int32_t action;
-
-public:
+struct Cmd_FlagAction:public PlayerCommand {
 	Cmd_FlagAction() : PlayerCommand() {} // For savegame loading
 	Cmd_FlagAction (int32_t t, int32_t p, Flag* f, int32_t a):PlayerCommand(t, p)
 	{serial=f->get_serial(); action=a;}
@@ -161,13 +157,13 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	int32_t action;
 };
 
-class Cmd_StartStopBuilding:public PlayerCommand {
-private:
-	int32_t serial;
-
-public:
+struct Cmd_StartStopBuilding : public PlayerCommand {
 	Cmd_StartStopBuilding() : PlayerCommand() {} // For savegame loading
 	Cmd_StartStopBuilding (int32_t t, int32_t p, Building* b):PlayerCommand(t, p)
 	{serial=b->get_serial();}
@@ -181,14 +177,12 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
 };
 
-class Cmd_EnhanceBuilding:public PlayerCommand {
-private:
-	int32_t serial;
-	int32_t id;
-
-public:
+struct Cmd_EnhanceBuilding:public PlayerCommand {
 	Cmd_EnhanceBuilding() : PlayerCommand() {} // For savegame loading
 	Cmd_EnhanceBuilding (int32_t t, int32_t p, Building* b, int32_t i):PlayerCommand(t, p)
 	{serial=b->get_serial(); id=i;}
@@ -203,16 +197,14 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	int32_t id;
 };
 
 
-class Cmd_ChangeTrainingOptions:public PlayerCommand {
-private:
-	int32_t serial;
-	int32_t attribute;
-	int32_t value;
-
-public:
+struct Cmd_ChangeTrainingOptions : public PlayerCommand {
 	Cmd_ChangeTrainingOptions() : PlayerCommand() {} // For savegame loading
 	Cmd_ChangeTrainingOptions(int32_t t, int32_t p, Building* b, int32_t at, int32_t val):PlayerCommand(t, p)
 	{serial=b->get_serial(); attribute=at; value=val;}
@@ -227,14 +219,14 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	int32_t attribute;
+	int32_t value;
 };
 
-class Cmd_DropSoldier:public PlayerCommand {
-private:
-	int32_t serial;
-	int32_t soldier;
-
-public:
+struct Cmd_DropSoldier : public PlayerCommand {
 	Cmd_DropSoldier () : PlayerCommand() {} //  for savegames
 	Cmd_DropSoldier(int32_t t, int32_t p, Building* b, int32_t _soldier):PlayerCommand(t, p)
 	{serial=b->get_serial(); soldier=_soldier;}
@@ -249,14 +241,13 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	Serial soldier;
 };
 
-class Cmd_ChangeSoldierCapacity:public PlayerCommand {
-private:
-	int32_t serial;
-	int32_t val;
-
-public:
+struct Cmd_ChangeSoldierCapacity : public PlayerCommand {
 	Cmd_ChangeSoldierCapacity () : PlayerCommand() {} //  for savegames
 	Cmd_ChangeSoldierCapacity (int32_t t, int32_t p, Building* b, int32_t i):PlayerCommand(t, p)
 	{serial=b->get_serial(); val=i;}
@@ -271,30 +262,27 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	int32_t val;
 };
 
 /////////////TESTING STUFF
-class Cmd_EnemyFlagAction:public PlayerCommand {
-private:
-	int32_t serial;
-	int32_t action;
-	int32_t attacker;
-	int32_t number;
-	int32_t type;
-
-public:
+struct Cmd_EnemyFlagAction : public PlayerCommand {
 	Cmd_EnemyFlagAction() : PlayerCommand() {} // For savegame loading
 	Cmd_EnemyFlagAction
-		(int32_t t,
-		 int32_t p,
-		 const Flag * const f,
-		 int32_t a,
-		 int32_t at,
-		 int32_t num,
-		 int32_t ty)
+		(int32_t      const t,
+		 int32_t      const p,
+		 Flag const * const f,
+		 int32_t      const a,
+		 int32_t      const at,
+		 int32_t      const num,
+		 int32_t      const ty)
 		:
-		PlayerCommand(t, p)
-	{serial=f->get_serial(); action=a; attacker=at; number=num; type=ty;}
+		PlayerCommand(t, p),
+		serial(f->get_serial()), action(a), attacker(at), number(num), type(ty)
+	{}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
@@ -306,6 +294,13 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Serial        serial;
+	uint8_t       action;
+	Player_Number attacker;
+	uint8_t       number;
+	uint8_t       type;
 };
 
 };

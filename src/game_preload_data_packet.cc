@@ -33,16 +33,18 @@ void Game_Preload_Data_Packet::Read
 throw (_wexception)
 {
 	Profile prof;
-	prof.read("preload", 0, fs);
-	Section & s = *prof.get_section("global");
-
-	int32_t const packet_version = s.get_int("packet_version");
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		m_gametime = s.get_safe_int   ("gametime");
-		m_mapname  = s.get_safe_string("mapname");
-	} else
-		throw wexception
-			("Unknown version in Game_Preload_Data_Packet: %i", packet_version);
+	try {
+		prof.read("preload", 0, fs);
+		Section & s = *prof.get_section("global");
+		int32_t const packet_version = s.get_int("packet_version");
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			m_gametime = s.get_safe_int   ("gametime");
+			m_mapname  = s.get_safe_string("mapname");
+		} else
+			throw wexception("unknown/unhandled version %i", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("preload: %s", e.what());
+	}
 }
 
 

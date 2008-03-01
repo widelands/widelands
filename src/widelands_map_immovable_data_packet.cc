@@ -62,14 +62,17 @@ throw (_wexception)
 		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			for (;;) {
-				uint32_t const reg = fr.Unsigned32();
-				if (reg == 0xffffffff)
+				Serial const serial = fr.Unsigned32();
+				//  FIXME Just test EndOfFile instead in the next packet version.
+				if (serial == 0xffffffff) {
+					if (not fr.EndOfFile())
+						throw wexception
+							("expected end of file after serial 0xffffffff");
 					break;
+				}
 				const char * const owner = fr.CString ();
 				const char * const name  = fr.CString ();
 				const Coords position    = fr.Coords32(map_extent);
-
-				assert(not ol->is_object_known(reg));
 
 				if (strcmp(owner, "world")) {
 					if (not skip) { //  do not load player immovables in normal maps
@@ -79,9 +82,8 @@ throw (_wexception)
 						int32_t idx = tribe.get_immovable_index(name);
 						if (idx != -1)
 							ol->register_object
-								(egbase,
-								 reg,
-								 &egbase->create_immovable(position, idx, &tribe));
+								(serial,
+								 egbase->create_immovable(position, idx, &tribe));
 						else
 							throw wexception
 								("tribe %s does not define immovable type \"%s\"",
@@ -94,7 +96,7 @@ throw (_wexception)
 						Immovable & immovable =
 							egbase->create_immovable(position, idx, 0);
 						if (not skip)
-							ol->register_object(egbase, reg, &immovable);
+							ol->register_object(serial, immovable);
 					} else
 						throw wexception
 							("world %s does not define immovable type \"%s\"",
@@ -102,10 +104,9 @@ throw (_wexception)
 				}
 			}
 		} else
-			throw wexception
-				("unknown/unhandled version %u", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("reading immovable data: %s", e.what());
+		throw wexception("immovable data: %s", e.what());
 	}
 }
 

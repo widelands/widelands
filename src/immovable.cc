@@ -689,7 +689,7 @@ Map_Object::Loader* Immovable::load
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != IMMOVABLE_SAVEGAME_VERSION)
-			throw wexception("Unknown version %u", version);
+			throw wexception("unknown/unhandled version %u", version);
 
 		const char * const owner = fr.CString ();
 		const char * const name  = fr.CString ();

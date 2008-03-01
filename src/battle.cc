@@ -194,24 +194,23 @@ void Battle::Loader::load(FileRead & fr)
 
 void Battle::Loader::load_pointers()
 {
-	BaseImmovable::Loader::load_pointers();
-
-	upcast(Battle, b, get_object());
-
-	if (m_first) {
-		b->m_first = dynamic_cast<Soldier*>(mol().get_object_by_file_index(m_first));
-		if (!b->m_first)
-			throw wexception
-					("Serial %u of first soldier doesn't point to Soldier object",
-					 m_first);
-	}
-
-	if (m_second) {
-		b->m_second = dynamic_cast<Soldier*>(mol().get_object_by_file_index(m_second));
-		if (!b->m_first)
-			throw wexception
-					("Serial %u of second soldier doesn't point to Soldier object",
-					 m_second);
+	Battle & battle = get<Battle>();
+	try {
+		BaseImmovable::Loader::load_pointers();
+		if (m_first)
+			try {
+				battle.m_first = &mol().get<Soldier>(m_first);
+			} catch (_wexception const & e) {
+				throw wexception("soldier 1 (%u): %s", m_first, e.what());
+			}
+		if (m_second)
+			try {
+				battle.m_second = &mol().get<Soldier>(m_second);
+			} catch (_wexception const & e) {
+				throw wexception("soldier 2 (%u): %s", m_second, e.what());
+			}
+	} catch (_wexception const & e) {
+		throw wexception("battle: %s", e.what());
 	}
 }
 
@@ -252,7 +251,7 @@ Map_Object::Loader* Battle::load
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != BATTLE_SAVEGAME_VERSION)
-			throw wexception("Unknown version %u", version);
+			throw wexception("unknown/unhandled version %u", version);
 
 		loader->init(egbase, mol, new Battle);
 		loader->load(fr);

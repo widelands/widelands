@@ -41,16 +41,18 @@ throw (_wexception)
 	if (skip) return;
 	FileRead fr;
 	try {fr.Open(fs, "binary/owned_fields");} catch (...) {return;}
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		Map & map = egbase->map();
-		Map_Index const max_index = map.max_index();
-		for (Map_Index i = 0; i < max_index; ++i)
-			map[i].set_owned_by(fr.Unsigned8());
-	} else
-		throw wexception
-			("Unknown version in Map_Owned_Fields_Data_Packet: %u",
-			 packet_version);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Map & map = egbase->map();
+			Map_Index const max_index = map.max_index();
+			for (Map_Index i = 0; i < max_index; ++i)
+				map[i].set_owned_by(fr.Unsigned8());
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("ownership: %s", e.what());
+	}
 }
 
 

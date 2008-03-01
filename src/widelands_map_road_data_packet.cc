@@ -49,20 +49,24 @@ throw (_wexception)
 	FileRead fr;
 	try {fr.Open(fs, "binary/road");} catch (...) {return;}
 
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		uint32_t ser;
-		while ((ser = fr.Unsigned32()) != 0xffffffff) {
-			//  If this is already known, get it.
-			//  Road data is read somewhere else
-			assert(!ol->is_object_known(ser)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			Road & road = *new Road();
-			road.init(egbase);
-			ol->register_object(egbase, ser, &road);
-		}
-	} else
-		throw wexception
-			("Unknown version %u in Map_Road_Data_Packet!", packet_version);
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Serial serial;
+			while ((serial = fr.Unsigned32()) != 0xffffffff) {
+				try {
+					//  If this is already known, get it.
+					//  Road data is read somewhere else
+					ol->register_object(serial, *new Road()).init(egbase);
+				} catch (_wexception const & e) {
+					throw wexception("%u: %s", serial, e.what());
+				}
+			}
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("road: %s");
+	}
 }
 
 

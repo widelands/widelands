@@ -58,20 +58,23 @@ void Cmd_Destroy_Map_Object::execute(Game* g)
 void Cmd_Destroy_Map_Object::Read
 (FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
-		// Read Base Commands
-		GameLogicCommand::Read(fr, egbase, mol);
-
-		if (uint32_t const fileserial = fr.Unsigned32()) {
-			assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
+			GameLogicCommand::Read(fr, egbase, mol);
+			if (Serial const serial = fr.Unsigned32())
+				try {
+					obj_serial = mol.get<Map_Object>(serial).get_serial();
+				} catch (_wexception const & e) {
+					throw wexception("%u: %s", serial, e.what());
+				}
+			else
+				obj_serial = 0;
 		} else
-			obj_serial = 0;
-	} else
-		throw wexception
-			("Unknown version in Cmd_Destroy_Map_Object::Read: %u",
-			 packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("destroy map object: %s", e.what());
+	}
 }
 void Cmd_Destroy_Map_Object::Write
 (FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
@@ -113,22 +116,24 @@ void Cmd_Act::execute(Game* g)
 void Cmd_Act::Read
 (FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
-	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == CMD_ACT_VERSION) {
-		// Read Base Commands
-		GameLogicCommand::Read(fr, egbase, mol);
-
-		// Serial
-		if (uint32_t const fileserial = fr.Unsigned32()) {
-			assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
-			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CMD_ACT_VERSION) {
+			GameLogicCommand::Read(fr, egbase, mol);
+			if (Serial const object_serial = fr.Unsigned32())
+				try {
+					obj_serial = mol.get<Map_Object>(object_serial).get_serial();
+				} catch (_wexception const & e) {
+					throw wexception("object %u: %s", object_serial, e.what());
+				}
+			else
+				obj_serial = 0;
+			arg = fr.Unsigned32();
 		} else
-			obj_serial = 0;
-
-		// arg
-		arg = fr.Unsigned32();
-	} else
-		throw wexception("Unknown version in Cmd_Act::Read: %u", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("act: %s", e.what());
+	}
 }
 void Cmd_Act::Write
 (FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
@@ -516,16 +521,25 @@ void Map_Object::molog(const char* fmt, ...) const
  */
 void Map_Object::Loader::load(FileRead& fr)
 {
-	uint8_t const header = fr.Unsigned8();
-	if (header != header_Map_Object)
-		throw wexception("Header %u expected (got %u)", header_Map_Object, header);
+	try {
+		uint8_t const header = fr.Unsigned8();
+		if (header != header_Map_Object)
+			throw wexception
+				("header is %u, expected %u", header, header_Map_Object);
 
-	uint8_t const version = fr.Unsigned8();
-	if (version != CURRENT_SAVEGAME_VERSION)
-		throw wexception("Map_Object: Unknown version %u", version);
+		uint8_t const version = fr.Unsigned8();
+		if (version != CURRENT_SAVEGAME_VERSION)
+			throw wexception("unknown/unhandled version %u", version);
 
-	uint32_t const fileindex = fr.Unsigned32();
-	mol().register_object(&egbase(), fileindex, get_object());
+		Serial const serial = fr.Unsigned32();
+		try {
+			mol().register_object<Map_Object>(serial, *get_object());
+		} catch (_wexception const & e) {
+			throw wexception("%u: %s", serial, e.what());
+		}
+	} catch (_wexception const & e) {
+		throw wexception("map object: %s", e.what());
+	}
 
 	egbase().objects().insert(get_object());
 }

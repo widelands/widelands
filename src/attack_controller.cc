@@ -473,33 +473,49 @@ void AttackController::Loader::load(FileRead & fr) {
 
 void AttackController::Loader::load_pointers()
 {
-	BaseImmovable::Loader::load_pointers();
+	AttackController & ctrl = get<AttackController>();
+	try {
+		BaseImmovable::Loader::load_pointers();
 
-	upcast(AttackController, ctrl, get_object());
+		try {
+			ctrl.flag = &mol().get<Flag>(flag);
+		} catch (_wexception const & e) {
+			throw wexception("flag (%u): %s", flag, e.what());
+		}
 
-	ctrl->flag = dynamic_cast<Flag*>(mol().get_object_by_file_index(flag));
-	assert(ctrl->flag);
+		Soldiers::size_type const nr_soldiers = soldiers.size();
+		for (Soldiers::size_type j = 0; j < nr_soldiers; ++j) {
+			BattleSoldierData const & bsd = soldiers[j];
+			BattleSoldier & bs = ctrl.involvedSoldiers[j];
+			try {
+				bs.soldier = &mol().get<Soldier>(bsd.soldier);
+				try {
+					bs.origin = &mol().get<MilitarySite>(bsd.origin);
+				} catch (_wexception const & e) {
+					throw wexception("origin (%u): %s", bsd.origin, e.what());
+				}
+			} catch (_wexception const & e) {
+				throw wexception
+					("battle soldier #%u (%u): %s", j, bsd.soldier, e.what());
+			}
+			bs.soldier->set_attack_ctrl(&ctrl);
+		}
 
-	for (uint32_t j = 0; j < soldiers.size(); ++j) {
-		const BattleSoldierData& bsd = soldiers[j];
-		BattleSoldier& bs = ctrl->involvedSoldiers[j];
-
-		bs.soldier = dynamic_cast<Soldier*>(mol().get_object_by_file_index(bsd.soldier));
-		assert(bs.soldier);
-		bs.origin = dynamic_cast<MilitarySite*>(mol().get_object_by_file_index(bsd.origin));
-		assert(bs.origin);
-
-		bs.soldier->set_attack_ctrl(ctrl);
-	}
-
-	for (uint32_t j = 0; j < militarySites.size(); ++j) {
-		MilitarySite* ms =
-			dynamic_cast<MilitarySite *>
-			(mol().get_object_by_file_index(militarySites[j]));
-
-		assert(ms);
-		ctrl->involvedMilitarySites.insert(ms);
-		ms->set_in_battle(true);
+		MilitarySites::const_iterator const militarySites_end =
+			militarySites.end();
+		for
+			(MilitarySites::const_iterator it = militarySites.begin();
+			 it != militarySites_end;
+			 ++it)
+			try {
+				MilitarySite & ms = mol().get<MilitarySite>(*it);
+				ctrl.involvedMilitarySites.insert(&ms);
+				ms.set_in_battle(true);
+			} catch (_wexception const & e) {
+				throw wexception("militarysite %u: %s", *it, e.what());
+			}
+	} catch (_wexception const & e) {
+		throw wexception("attack controller: %s", e.what());
 	}
 }
 
@@ -553,7 +569,7 @@ Map_Object::Loader* AttackController::load
 	try {
 		uint8_t const version = fr.Unsigned8();
 		if (version != ATTACKCONTROLLER_SAVEGAME_VERSION)
-			throw wexception("Unknown version %u", version);
+			throw wexception("unknown/unhandled version %u", version);
 
 		loader->init(egbase, mol, new AttackController(*dynamic_cast<Game*>(egbase)));
 		loader->load(fr);

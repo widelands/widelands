@@ -45,67 +45,64 @@ void Map_Bob_Data_Packet::ReadBob
 	 Map_Map_Object_Loader * const ol,
 	 Coords                  const coords)
 {
-	std::string owner = fr.CString();
-	std::string name = fr.CString();
+	char const * const owner = fr.CString();
+	char const * const name  = fr.CString();
 	uint8_t subtype = fr.Unsigned8();
 
-	uint32_t reg = fr.Unsigned32();
-	assert(not ol->is_object_known(reg));
+	Serial const serial = fr.Unsigned32();
 
-	Bob* bob = 0;
-	if (subtype != Bob::CRITTER && subtype != Bob::WORKER)
+	try {
+		if (subtype != Bob::CRITTER && subtype != Bob::WORKER)
+			throw wexception("unknown bob type %u", subtype);
+
+		if (not strcmp(owner, "world")) {
+			if (subtype != Bob::CRITTER)
+				throw wexception("world bob is not a critter!");
+
+			World const & world = egbase->map().world();
+			int32_t const idx = world.get_bob(name);
+			if (idx == -1)
+				throw wexception
+					("world %s does not define bob type \"%s\"",
+					 world.get_name(), name);
+			ol->register_object<Bob>(serial, *egbase->create_bob(coords, idx));
+		} else {
+			if (skip)
+				return; // We do no load player bobs when no scenario
+
+			// Make sure that the correct tribe is known and loaded
+			egbase->manually_load_tribe(owner);
+
+			if (Tribe_Descr const * const tribe = egbase->get_tribe(owner)) {
+				if        (subtype == Bob::WORKER)  {
+					int32_t const idx = tribe->get_worker_index(name);
+					if (idx != -1) {
+						Bob & bob =
+							ol->register_object<Bob>
+							(serial, *tribe->get_worker_descr(idx)->create_object());
+						bob.set_position(egbase, coords);
+						bob.init(egbase);
+					} else
+						throw wexception
+							("tribe %s does not define bob type \"%s\"", owner, name);
+				} else if (subtype == Bob::CRITTER) {
+					int32_t const idx = tribe->get_bob(name);
+					if (idx != -1)
+						ol->register_object<Bob>
+							(serial, *egbase->create_bob(coords, idx, tribe));
+					else
+						throw wexception
+							("tribe %s does not define defines bob type \"%s\"",
+							 owner, name);
+				}
+			} else
+				throw wexception("tribe \"%s\" does not exist", owner);
+		}
+	} catch (_wexception const & e) {
 		throw wexception
-			("Unknown bob type %i in Map_Bob_Data_Packet!", subtype);
-
-	if (owner == "world") {
-		if (subtype != Bob::CRITTER)
-			throw wexception("world bob is not a critter!");
-
-		int32_t const idx = egbase->map().world().get_bob(name.c_str());
-		if (idx == -1)
-			throw wexception
-					("Map defines Bob %s, but world doesn't deliver!\n",
-					 name.c_str());
-
-		bob = egbase->create_bob(coords, idx);
-	} else {
-		if (skip)
-			return; // We do no load player bobs when no scenario
-
-		// Make sure that the correct tribe is known and loaded
-		egbase->manually_load_tribe(owner.c_str());
-
-		if (const Tribe_Descr * const tribe = egbase->get_tribe(owner.c_str())) {
-
-			if        (subtype == Bob::WORKER)  {
-				int32_t idx = tribe->get_worker_index(name.c_str());
-				if (idx != -1) {
-					bob = tribe->get_worker_descr(idx)->create_object();
-					bob->set_position(egbase, coords);
-					bob->init(egbase);
-				} else
-					throw wexception
-						("Map defines Bob %s, but tribe %s doesn't deliver!",
-						 name.c_str(), owner.c_str());
-			} else if (subtype == Bob::CRITTER) {
-				int32_t idx = tribe->get_bob(name.c_str());
-				if (idx != -1)
-					bob = egbase->create_bob(coords, idx, tribe);
-				else
-					throw wexception
-						("Map defines Bob %s, but tribe %s doesn't deliver!",
-						 name.c_str(), owner.c_str());
-			}
-		} else
-			throw wexception
-				("Map asks for Tribe %s, but world doesn't deliver!",
-				 owner.c_str());
+			("%u (owner = \"%s\", name = \"%s\"): %s",
+			 serial, owner, name, e.what());
 	}
-
-	assert(bob);
-
-	// Register the bob for further loading
-	ol->register_object(egbase, reg, bob);
 }
 
 void Map_Bob_Data_Packet::Read
@@ -120,23 +117,24 @@ throw (_wexception)
 
 	Map* map = egbase->get_map();
 
-	// First packet version
-	const uint16_t packet_version = fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		// Now get all the the bobs
-		for (uint16_t y = 0; y < map->get_height(); ++y) {
-			for (uint16_t x = 0; x < map->get_width(); ++x) {
-				uint32_t nr_bobs = fr.Unsigned32();
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION)
+			for (uint16_t y = 0; y < map->get_height(); ++y) {
+				for (uint16_t x = 0; x < map->get_width(); ++x) {
+					uint32_t const nr_bobs = fr.Unsigned32();
 
-				assert(!egbase->map()[Coords(x, y)].get_first_bob());
+					assert(!egbase->map()[Coords(x, y)].get_first_bob());
 
-				for (uint32_t i = 0; i < nr_bobs; ++i)
-					ReadBob(fr, egbase, skip, ol, Coords(x, y));
+					for (uint32_t i = 0; i < nr_bobs; ++i)
+						ReadBob(fr, egbase, skip, ol, Coords(x, y));
+				}
 			}
-		}
-	} else
-		throw wexception
-			("Map_Bob_Data_Packet: Unknown packet version %u", packet_version);
+		else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("bobs: %s", e.what());
+	}
 }
 
 
@@ -172,7 +170,7 @@ throw (_wexception)
 			for (uint32_t i = 0; i < bobarr.size(); ++i) {
 				// write serial number
 				assert(not os->is_object_known(bobarr[i])); // a bob can't be owned by two fields
-				const uint32_t reg = os->register_object(bobarr[i]);
+				Serial const reg = os->register_object(bobarr[i]);
 
 				// Write its owner
 				std::string owner_tribe = bobarr[i]->descr().get_owner_tribe() ? bobarr[i]->descr().get_owner_tribe()->name() : "world";

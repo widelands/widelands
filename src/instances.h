@@ -181,8 +181,9 @@ protected:
 
 public:
 	virtual int32_t get_type() const throw () = 0;
+	virtual char const * type_name() const throw () {return "map object";}
 
-	uint32_t get_serial() const {return m_serial;}
+	Serial get_serial() const {return m_serial;}
 	bool has_attribute(const uint32_t attr) const throw ()
 	{return descr().has_attribute(attr);}
 
@@ -248,6 +249,7 @@ public:
 		Editor_Game_Base& egbase() {return *m_egbase;}
 		Map_Map_Object_Loader & mol   () {return *m_mol;}
 		Map_Object * get_object() {return m_object;}
+		template<typename T> T & get() {return dynamic_cast<T &>(*m_object);}
 
 	protected:
 		virtual void load(FileRead&);
@@ -273,7 +275,7 @@ protected:
 
 protected:
 	const Map_Object_Descr * m_descr;
-	uint32_t                     m_serial;
+	Serial                   m_serial;
 	LogSink                * m_logsink;
 
 private:
@@ -296,7 +298,7 @@ struct Object_Manager {
 
 	void cleanup(Editor_Game_Base *g);
 
-	Map_Object * get_object(const uint32_t serial) const {
+	Map_Object * get_object(Serial const serial) const {
 		const objmap_t::const_iterator it = m_objects.find(serial);
 		return it != m_objects.end() ? it->second : 0;
 	}
@@ -320,7 +322,7 @@ struct Object_Manager {
 	const objmap_t & get_objects() const throw () {return m_objects;}
 
 private:
-	uint32_t m_lastserial;
+	Serial   m_lastserial;
 	objmap_t m_objects;
 
 	Object_Manager & operator=(const Object_Manager &);
@@ -381,17 +383,13 @@ struct OPtr {
 		return m < other.m;
 	}
 
-	uint32_t get_serial() const {return m.get_serial();}
+	Serial get_serial() const {return m.get_serial();}
 
 private:
 	Object_Ptr m;
 };
 
-class Cmd_Destroy_Map_Object : public GameLogicCommand {
-private:
-	int32_t obj_serial;
-
-public:
+struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} // For savegame loading
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object* o);
 	virtual void execute (Game* g);
@@ -400,14 +398,12 @@ public:
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 	virtual int32_t get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} // Get this command id
+
+private:
+	Serial obj_serial;
 };
 
-class Cmd_Act : public GameLogicCommand {
-private:
-	int32_t obj_serial;
-	int32_t arg;
-
-public:
+struct Cmd_Act : public GameLogicCommand {
 	Cmd_Act() : GameLogicCommand(0) {} // For savegame loading
 	Cmd_Act (int32_t t, Map_Object* o, int32_t a);
 
@@ -417,6 +413,10 @@ public:
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 	virtual int32_t get_id() {return QUEUE_CMD_ACT;} // Get this command id
+
+private:
+	Serial obj_serial;
+	int32_t arg;
 };
 
 };

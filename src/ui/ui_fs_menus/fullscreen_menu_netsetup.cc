@@ -180,7 +180,7 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 	for (it = tables.begin(); it != tables.end(); ++it)
 	{
 		strncpy(info.hostname, "(ggz)", sizeof(info.hostname));
-		strncpy(info.map, (*it).c_str(), sizeof(info.map));
+		strncpy(info.map, it->c_str(), sizeof(info.map));
 		info.state = LAN_GAME_OPEN;
 		update_game_info(opengames.add(), info);
 	}

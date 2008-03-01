@@ -79,6 +79,7 @@ public:
 	~WareInstance();
 
 	virtual int32_t get_type() const throw ();
+	char const * type_name() const throw () {return "ware";}
 
 	Map_Object* get_location(Editor_Game_Base* g) {return m_location.get(g);}
 	Economy* get_economy() const throw () {return m_economy;}
@@ -154,6 +155,7 @@ public:
 	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords);
 
 	virtual int32_t  get_type    () const throw ();
+	char const * type_name() const throw () {return "flag";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 	std::string const & name() const throw ();
@@ -275,6 +277,7 @@ struct Road : public PlayerImmovable {
 	Flag* get_flag(FlagId flag) const {return m_flags[flag];}
 
 	virtual int32_t  get_type    () const throw ();
+	char const * type_name() const throw () {return "road";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 	std::string const & name() const throw ();
