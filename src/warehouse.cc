@@ -18,6 +18,7 @@
  */
 
 #include "warehouse.h"
+#include "warehousesupply.h"
 
 #include "carrier.h"
 #include "editor_game_base.h"
