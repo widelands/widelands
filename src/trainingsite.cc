@@ -178,19 +178,17 @@ class TrainingSite
 
 TrainingSite::TrainingSite(const TrainingSite_Descr & d) :
 ProductionSite   (d),
+m_soldier_request(0),
 m_capacity       (descr().get_max_number_of_soldiers()),
-m_total_soldiers (0),
 m_build_heros    (false),
-m_pri_hp         (descr().get_train_hp     () ? 6 : 0),
-m_pri_attack     (descr().get_train_attack () ? 6 : 0),
-m_pri_defense    (descr().get_train_defense() ? 6 : 0),
-m_pri_evade      (descr().get_train_evade  () ? 6 : 0),
-m_pri_hp_mod     (0),
-m_pri_attack_mod (0),
-m_pri_defense_mod(0),
-m_pri_evade_mod  (0),
 m_success        (false)
-{}
+{
+	// Initialize this in the constructor so that loading code may
+	// overwrite priorities.
+	calc_upgrades();
+	m_current_upgrade = 0;
+	set_post_timer(6000);
+}
 
 
 TrainingSite::~TrainingSite() {}
@@ -206,7 +204,7 @@ std::string TrainingSite::get_statistics_string()
 	state = get_current_program(); //may also be NULL if there is no current program
 
 	if (state) {
-		return m_prog_name;
+		return state->program->get_name();
 	} else if (m_success)
 		return _("Resting");
 	else
@@ -222,7 +220,7 @@ void TrainingSite::init(Editor_Game_Base * g)
 	assert(g);
 
 	ProductionSite::init(g);
-	call_soldiers();
+	update_soldier_request();
 }
 
 /**
@@ -234,10 +232,8 @@ void TrainingSite::set_economy(Economy * e)
 {
 	ProductionSite::set_economy(e);
 
-	for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
-		if (m_soldier_requests[i])
-			m_soldier_requests[i]->set_economy(e);
-	}
+	if (m_soldier_request)
+		m_soldier_request->set_economy(e);
 }
 
 /**
@@ -250,88 +246,110 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 {
 	assert(g);
 
-	if (m_soldier_requests.size()) {
-		for (uint32_t i = 0; i < m_soldier_requests.size(); ++i) {
-			delete m_soldier_requests[i];
-			m_soldier_requests[i] = 0;
-		}
-		m_soldier_requests.clear();
-	}
-
-	if (m_soldiers.size()) {
-		for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
-			Soldier *s = m_soldiers[i];
-			m_soldiers[i] = 0;
-
-			if (g->objects().object_still_available(s))
-				s->set_location(0);
-		}
-		m_soldiers.clear();
-	}
+	delete m_soldier_request;
+	m_soldier_request = 0;
 
 	ProductionSite::cleanup(g);
 }
 
 
-/**
- * Request exactly one soldier
- */
-void TrainingSite::request_soldier() {
-	int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
+void TrainingSite::add_worker(Worker* w)
+{
+	ProductionSite::add_worker(w);
 
-	Request *req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::WORKER);
-	Requirements r;
+	if (upcast(Soldier, soldier, w)) {
+		// Note that the given Soldier might already be in the array
+		// for loadgames.
+		if (std::find(m_soldiers.begin(), m_soldiers.end(), soldier) == m_soldiers.end())
+			m_soldiers.push_back(soldier);
+		if (upcast(Game, game, &owner().egbase()))
+			schedule_act(game, 100);
+	}
+}
 
-	// set requirements to match this site
-	int32_t totalmax = 0;
-	int32_t totalmin = 0;
-	if (descr().get_train_attack()) {
-		totalmin += descr().get_min_level(atrAttack);
-		totalmax += descr().get_max_level(atrAttack);
-		r.set(atrAttack, descr().get_min_level(atrAttack), descr().get_max_level(atrAttack));
-	}
-	if (descr().get_train_defense()) {
-		totalmin += descr().get_min_level(atrDefense);
-		totalmax += descr().get_max_level(atrDefense);
-		r.set(atrDefense, descr().get_min_level(atrDefense), descr().get_max_level(atrDefense));
-	}
-	if (descr().get_train_evade()) {
-		totalmin += descr().get_min_level(atrEvade);
-		totalmax += descr().get_max_level(atrEvade);
-		r.set(atrEvade, descr().get_min_level(atrEvade), descr().get_max_level(atrEvade));
-	}
-	if (descr().get_train_hp()) {
-		totalmin += descr().get_min_level(atrHP);
-		totalmax += descr().get_max_level(atrHP);
-		r.set(atrHP, descr().get_min_level(atrHP), descr().get_max_level(atrHP));
+void TrainingSite::remove_worker(Worker* w)
+{
+	if (upcast(Soldier, soldier, w)) {
+		std::vector<Soldier*>::iterator it = std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
+		if (it != m_soldiers.end()) {
+			m_soldiers.erase(it);
+			if (upcast(Game, game, &owner().egbase()))
+				schedule_act(game, 100);
+		}
 	}
 
-	//  To make sure that fully trained soldiers are not requested.
-	r.set(atrTotal, totalmin, totalmax - 1);
-
-	req->set_requirements(r);
-
-	m_soldier_requests.push_back(req);
-	++m_total_soldiers;
+	ProductionSite::remove_worker(w);
 }
 
 
 /**
- * When a soldier arrives, bring it into the fold
+ * Request soldiers up to capacity, or let go of surplus soldiers.
  */
-// this is a static method
+void TrainingSite::update_soldier_request() {
+	if (m_soldiers.size() < m_capacity) {
+		if (!m_soldier_request) {
+			int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
+			m_soldier_request = new Request
+				(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::WORKER);
+
+			Requirements r;
+
+			// set requirements to match this site
+			int32_t totalmax = 0;
+			int32_t totalmin = 0;
+			if (descr().get_train_attack()) {
+				totalmin += descr().get_min_level(atrAttack);
+				totalmax += descr().get_max_level(atrAttack);
+				r.set(atrAttack, descr().get_min_level(atrAttack), descr().get_max_level(atrAttack));
+			}
+			if (descr().get_train_defense()) {
+				totalmin += descr().get_min_level(atrDefense);
+				totalmax += descr().get_max_level(atrDefense);
+				r.set(atrDefense, descr().get_min_level(atrDefense), descr().get_max_level(atrDefense));
+			}
+			if (descr().get_train_evade()) {
+				totalmin += descr().get_min_level(atrEvade);
+				totalmax += descr().get_max_level(atrEvade);
+				r.set(atrEvade, descr().get_min_level(atrEvade), descr().get_max_level(atrEvade));
+			}
+			if (descr().get_train_hp()) {
+				totalmin += descr().get_min_level(atrHP);
+				totalmax += descr().get_max_level(atrHP);
+				r.set(atrHP, descr().get_min_level(atrHP), descr().get_max_level(atrHP));
+			}
+
+			//  To make sure that fully trained soldiers are not requested.
+			r.set(atrTotal, totalmin, totalmax - 1);
+
+			m_soldier_request->set_requirements(r);
+		}
+
+		m_soldier_request->set_count(m_capacity - m_soldiers.size());
+	} else if (m_soldiers.size() >= m_capacity) {
+		delete m_soldier_request;
+		m_soldier_request = 0;
+
+		while (m_soldiers.size() > m_capacity)
+			drop_soldier(m_soldiers[m_soldiers.size()-1]);
+	}
+}
+
+
+/**
+ * Soldier callback. Since the soldier was already added via add_worker,
+ * we only need to update the request structure.
+ */
 void TrainingSite::request_soldier_callback
 (Game * g, Request * rq, Ware_Index, Worker * w, void * data)
 {
-	assert(g);
-	assert(rq);
-	assert(w);
-	assert(data);
+	TrainingSite* const tsite = static_cast<TrainingSite *>(data);
+	Soldier* s = dynamic_cast<Soldier*>(w);
 
-	TrainingSite * const tsite = static_cast<TrainingSite *>(data);
-	Soldier & s = dynamic_cast<Soldier &>(*w);
+	assert(s->get_location(g) == tsite);
+	assert(tsite->m_soldier_request == rq);
 
-	assert(s.get_location(g) == tsite);
+	// bind the worker into this house, hide him on the map
+	s->start_task_idle(g, 0, -1);
 
 	g->conquer_area
 		(Player_Area<Area<FCoords> >
@@ -340,25 +358,9 @@ void TrainingSite::request_soldier_callback
 		  (g->map().get_fcoords(tsite->get_position()),
 		   tsite->descr().get_conquers())));
 
-	for (uint32_t i = 0; i < tsite->m_soldier_requests.size(); ++i) {
-		if (rq == tsite->m_soldier_requests[i]) {
-			tsite->m_soldier_requests.erase(tsite->m_soldier_requests.begin() + i);
-			break;
-		}
-	}
-
-	tsite->m_soldiers.push_back(&s);
-	tsite->m_total_soldiers = tsite->m_soldiers.size() + tsite->m_soldier_requests.size();
-
-	//  bind the worker into this house, hide him on the map
-	s.start_task_idle(g, 0, -1);
+	tsite->update_soldier_request();
 }
 
-/**
- * If the site is not fully staffed, request as many soldiers as can be accomodated
- */
-void TrainingSite::call_soldiers()
-{while (m_capacity > m_total_soldiers) request_soldier();}
 
 /**
  * Drop a given soldier.
@@ -368,411 +370,231 @@ void TrainingSite::call_soldiers()
  */
 void TrainingSite::drop_soldier(uint32_t serial)
 {
+	for (std::vector<Soldier*>::iterator it = m_soldiers.begin(); it != m_soldiers.end(); ++it) {
+		if ((*it)->get_serial() == serial) {
+			drop_soldier(*it);
+			return;
+		}
+	}
+
+	molog
+		("TrainingSite::drop_soldier(uint32_t serial): trying to drop nonexistent "
+		 "serial number %i !!",
+		 serial);
+}
+
+
+/**
+ * Drop a given soldier.
+ *
+ * 'Dropping' means releasing the soldier from the site. The soldier then becomes available
+ * to the economy.
+ */
+void TrainingSite::drop_soldier(Soldier* soldier)
+{
 	upcast(Game, g, &owner().egbase());
 
 	assert(g);
 
-	if (m_soldiers.size()) {
-		size_t i = 0;
-		Soldier *s = m_soldiers[i];
-		while (s->get_serial() != serial and i < m_soldiers.size()) {
-			++i;
-			s = m_soldiers.at(i);
-		}
-		if (i < m_soldiers.size() and s->get_serial() == serial) {
-			drop_soldier(g, i);
-		}
-	} else
-		molog
-			("TrainingSite::drop_soldier(uint32_t serial): trying to drop nonexistent "
-			 "serial number %i !!",
-			 serial);
+	std::vector<Soldier*>::iterator it = std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
+	if (it == m_soldiers.end())
+		throw wexception("TrainingSite::drop_soldier: soldier not in training site");
+
+	m_soldiers.erase(it);
+
+	soldier->reset_tasks(g);
+	soldier->start_task_leavebuilding(g, true);
+
+	// Schedule, so that we can call new soldiers on next act()
+	schedule_act(g, 100);
 }
 
-/**
- * Drop a given soldier.
- * \internal
- * 'Dropping' means releasing the soldier from the site. The soldier then becomes available
- * to the economy.
- * \note This function should \b NEVER be called directly, use \ref drop_soldier(uint32_t serial) instead.
- */
-void TrainingSite::drop_soldier(Game * g, uint32_t nr)
-{
-	Soldier *s;
-
-	assert(g);
-	assert(nr < m_soldiers.size());
-
-	s = m_soldiers[nr];
-	s->set_location(0);
-
-	//remove the soldier-to-be-dropped from m_soldiers (it is still alive in s) by overwriting any reference
-	//*must not* erase(), we still need the soldier
-	for (uint32_t i = nr; i < m_soldiers.size() - 1; ++i)
-		m_soldiers[i] = m_soldiers[i + 1];
-	m_soldiers.pop_back();
-
-	call_soldiers(); //  Call more soldiers if there is enough space.
-
-	// Walk the soldier home safely
-	s->reset_tasks(g);
-	s->set_location(this);
-	s->start_task_leavebuilding(g, true);
-}
 
 /**
  * Drop all the soldiers that can not be upgraded further at this building.
  */
-void TrainingSite::drop_unupgradable_soldiers(Game * g)
+void TrainingSite::drop_unupgradable_soldiers(Game *)
 {
-	uint32_t count_upgrades = 0;
-
-	assert(g);
-
-	if (descr().get_train_hp())
-		++count_upgrades;
-	if (descr().get_train_attack())
-		++count_upgrades;
-	if (descr().get_train_defense())
-		++count_upgrades;
-	if (descr().get_train_evade())
-		++count_upgrades;
+	std::vector<Soldier*> droplist;
 
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
-		uint32_t count;
-		count = 0;
-		if
-			((m_soldiers[i]->get_level(atrHP)
-			  <
-			  static_cast<uint32_t>(descr().get_min_level(atrHP))
-			  or
-			  m_soldiers[i]->get_level(atrHP)
-			  >
-			  static_cast<uint32_t>(descr().get_max_level(atrHP)))
-			 and
-			 (descr().get_train_hp()))
-			++count;
+		std::vector<Upgrade>::iterator it = m_upgrades.begin();
+		for (; it != m_upgrades.end(); ++it) {
+			int32_t level = m_soldiers[i]->get_level(it->attribute);
+			if (level >= it->min && level <= it->max)
+				break;
+		}
 
-		if
-			((m_soldiers[i]->get_level(atrAttack)
-			  <
-			  static_cast<uint32_t>(descr().get_min_level(atrAttack))
-			  or
-			  m_soldiers[i]->get_level(atrAttack)
-			  >
-			  static_cast<uint32_t>(descr().get_max_level(atrAttack)))
-			 and
-			 (descr().get_train_attack()))
-			++count;
-
-		if
-			((m_soldiers[i]->get_level(atrDefense)
-			  <
-			  static_cast<uint32_t>(descr().get_min_level(atrDefense))
-			  or
-			  m_soldiers[i]->get_level(atrDefense)
-			  >
-			  static_cast<uint32_t>(descr().get_max_level(atrDefense)))
-			 and
-			 (descr().get_train_defense()))
-			++count;
-
-		if
-			((m_soldiers[i]->get_level(atrEvade)
-			  <
-			  static_cast<uint32_t>(descr().get_min_level(atrEvade))
-			  or
-			  m_soldiers[i]->get_level(atrEvade)
-			  >
-			  static_cast<uint32_t>(descr().get_max_level(atrEvade)))
-			 and
-			 descr().get_train_evade())
-			++count;
-
-		if (count >= count_upgrades)
-			drop_soldier(g, i);
+		if (it == m_upgrades.end())
+			droplist.push_back(m_soldiers[i]);
 	}
+
+	// Drop soldiers only now, so that changes in the soldiers array don't
+	// mess things up
+	for (std::vector<Soldier*>::iterator it = droplist.begin(); it != droplist.end(); ++it)
+		drop_soldier(*it);
 }
 
 /**
- * Advance the program state (if a program is running) or call the training program
- * The real training is done by a normal \ref ProductionProgram that gets
- * executed by \ref ProductionSite::program_act() like all other production
- * programs.
-*/
+ * In addition to advancing the program, update soldier status.
+ */
 void TrainingSite::act(Game * g, uint32_t data)
 {
 	assert(g);
 
-	Building::act(g, data);
+	ProductionSite::act(g, data);
 
-	if (m_program_timer && static_cast<int32_t>(g->get_gametime() - m_program_time) >= 0) {
-		m_program_timer = false;
+	update_soldier_request();
+}
 
-		if (!m_program.size()) {
-			find_and_start_next_program(g);
-			return;
+
+void TrainingSite::program_end(Game* g, bool success)
+{
+	m_success = success;
+	ProductionSite::program_end(g, success);
+
+	if (m_current_upgrade) {
+		if (m_success) {
+			drop_unupgradable_soldiers(g);
+			m_current_upgrade->lastsuccess = m_current_upgrade->lastattempt;
 		}
-
-		State *state = get_current_program();
-
-		assert(state);
-
-		if (state->ip >= state->program->get_size()) {
-			program_end(g, true);
-			return;
-		}
-
-		if (m_anim != descr().get_animation("idle")) {
-			// Restart idle animation (which is the default animation)
-			start_animation(g, descr().get_animation("idle"));
-		}
-
-		program_act(g); //  this will do the actual training
+		m_current_upgrade = 0;
 	}
 }
 
+
 /**
  * Find and start the next training program.
+ *
+ * Prioritize such that if UpgradeA.prio is twice UpgradeB.prio, then
+ * start_upgrade will be called twice as often for UpgradeA.
+ * If all priorities are zero, nothing will happen.
  */
 void TrainingSite::find_and_start_next_program(Game * g)
 {
-	tAttribute attrib;
+	for (;;) {
+		uint32_t maxprio = 0;
+		uint32_t maxcredit = 0;
 
-	assert(g);
-
-	if (!m_list_upgrades.size())
-		calc_list_upgrades(g);
-
-	if (m_list_upgrades.size()) {
-		int32_t i = m_list_upgrades.size() - 1;
-		int32_t j;
-		int32_t min_level = 0;
-		int32_t max_level = 0;
-		int32_t level = 0;
-		int32_t MAX_level = 0;
-		bool done = false;
-		std::vector < std::string > str(split_string(m_list_upgrades[i], "_"));
-
-		molog(m_list_upgrades[i].c_str());
-		assert(str.size() == 2); //  upgrade what
-
-		if (str[1] == "hp")
-			attrib = atrHP;
-		else if (str[1] == "attack")
-			attrib = atrAttack;
-		else if (str[1] == "defense")
-			attrib = atrDefense;
-		else if (str[1] == "evade")
-			attrib = atrEvade;
-		else
-			throw wexception("Unknown attribute to upgrade %s.", str[1].c_str());
-
-		if (m_soldiers.size()) {
-			max_level = descr().get_max_level(attrib);
-			MAX_level = max_level;
-
-			if (m_build_heros) {
-
-				while ((min_level < max_level) && (!done)) {
-
-					for (j = 0; j < static_cast<int32_t>(m_soldiers.size()); ++j)
-						if (static_cast<int32_t>(m_soldiers[j]->get_level(attrib)) == max_level)
-							done = true;
-
-					if (!done)
-						--max_level;
-				}
-			} else {
-
-				while ((min_level < max_level) && (!done)) {
-
-					for (j = 0; j < static_cast<int32_t>(m_soldiers.size()); ++j)
-						if (static_cast<int32_t>(m_soldiers[j]->get_level(attrib)) == min_level)
-							done = true;
-
-					if (!done)
-						++min_level;
-				}
-			}
-
-			if (m_build_heros)
-				level = max_level;
-			else
-				level = min_level;
-
-			if (level > MAX_level)
-				level = 5000;
-		}
-
-		i = m_list_upgrades.size() - 1;
-
-		if (level < 10) {
-			char buf[200];
-
-			switch (attrib) {
-			case atrHP:
-				level += m_pri_hp_mod;
-				break;
-			case atrAttack:
-				level += m_pri_attack_mod;
-				break;
-			case atrDefense:
-				level += m_pri_defense_mod;
-				break;
-			case atrEvade:
-				level += m_pri_evade_mod;
-				break;
-			case atrTotal:
-				break;
-			}
-
-			if ((level >= 0) && (level <= MAX_level)) {
-				sprintf(buf, "%s%d", (m_list_upgrades[i]).c_str(), level);
-				m_list_upgrades[i] = buf;
-				program_start(g, m_list_upgrades[i]);
-			} else {
-				m_list_upgrades.pop_back();
-				program_start(g, "Sleep");
+		for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
+			if (it->credit >= 10) {
+				it->credit -= 10;
+				start_upgrade(g, &*it);
 				return;
 			}
 
-			switch (attrib) {
-			case atrHP:
-				m_pri_hp_mod = 0;
-				break;
-			case atrAttack:
-				m_pri_attack_mod = 0;
-				break;
-			case atrDefense:
-				m_pri_defense_mod = 0;
-				break;
-			case atrEvade:
-				m_pri_evade_mod = 0;
-				break;
-			case atrTotal:
-				break;
-			}
-		} else {
+			if (it->prio > maxprio)
+				maxprio = it->prio;
+			if (it->credit > maxcredit)
+				maxcredit = it->credit;
+		}
 
-			if (m_build_heros)
-				modif_priority(attrib, -1);
-			else
-				modif_priority(attrib, 1);
-			m_list_upgrades.pop_back();
+		if (maxprio == 0) {
 			program_start(g, "Sleep");
 			return;
 		}
 
-		m_list_upgrades.pop_back();
-		return;
-	} else
-		throw wexception("Critical Error: TrainingSite that hasn't  a list of upgrades!!");
-}
+		uint32_t multiplier = 1 + (10-maxcredit) / maxprio;
 
-/**
- * Change the priorities for training
- */
-void TrainingSite::modif_priority(enum tAttribute atr, int32_t value)
-{
-	switch (atr) {
-	case atrHP:
-		m_pri_hp_mod += value;
-		break;
-	case atrAttack:
-		m_pri_attack_mod += value;
-		break;
-	case atrDefense:
-		m_pri_defense_mod += value;
-		break;
-	case atrEvade:
-		m_pri_evade_mod += value;
-		break;
-	default:
-		throw wexception("Unknown attribute at %s:%d", __FILE__, __LINE__);
+		for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it)
+			it->credit += multiplier * it->prio;
 	}
 }
+
+
+/**
+ * The prioritizer decided that the given type of upgrade should run.
+ * Let's do our worst.
+ */
+void TrainingSite::start_upgrade(Game* g, Upgrade* upgrade)
+{
+	int32_t minlevel = upgrade->max;
+	int32_t maxlevel = upgrade->min;
+
+	for (std::vector<Soldier*>::const_iterator it = m_soldiers.begin(); it != m_soldiers.end(); ++it) {
+		int32_t level = (*it)->get_level(upgrade->attribute);
+
+		if (level > upgrade->max || level < upgrade->min)
+			continue;
+		if (level < minlevel)
+			minlevel = level;
+		if (level > maxlevel)
+			maxlevel = level;
+	}
+
+	if (minlevel > maxlevel) {
+		program_start(g, "Sleep");
+		return;
+	}
+
+	int32_t level;
+
+	if (upgrade->lastattempt == upgrade->lastsuccess) {
+		// We were successful the last time, so restart greedily
+		if (m_build_heros)
+			level = maxlevel;
+		else
+			level = minlevel;
+	} else {
+		// The last attempt wasn't successful;
+		// This happens e.g. when lots of low-level soldiers are present,
+		// but the prerequisites for improving them aren't.
+		if (m_build_heros) {
+			level = upgrade->lastattempt - 1;
+			if (level < minlevel)
+				level = maxlevel;
+		} else {
+			level = upgrade->lastattempt + 1;
+			if (level > maxlevel)
+				level = minlevel;
+		}
+	}
+
+	m_current_upgrade = upgrade;
+	upgrade->lastattempt = level;
+
+	char buf[200];
+	sprintf(buf, "%s%d", upgrade->prefix.c_str(), level);
+	program_start(g, buf);
+}
+
+TrainingSite::Upgrade* TrainingSite::get_upgrade(enum tAttribute atr)
+{
+	for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
+		if (it->attribute == atr)
+			return &*it;
+	}
+
+	return 0;
+}
+
 
 /**
  * Gets the priority of given attribute
  */
-uint32_t TrainingSite::get_pri(tAttribute atr)
+int32_t TrainingSite::get_pri(tAttribute atr)
 {
-	switch (atr) {
-	case atrHP:
-		return m_pri_hp;
-		break;
-	case atrAttack:
-		return m_pri_attack;
-		break;
-	case atrDefense:
-		return m_pri_defense;
-		break;
-	case atrEvade:
-		return m_pri_evade;
-		break;
-	default:
-		throw wexception("Invalid soldier attribute at %s:%d", __FILE__, __LINE__);
+	for (std::vector<Upgrade>::const_iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
+		if (it->attribute == atr)
+			return it->prio;
 	}
+
+	return 0;
 }
 
 /**
- * Adds a value of given priority. Also mantain the total value of 12 priorities
+ * Sets the priority of given attribute
  */
-void TrainingSite::add_pri(tAttribute atr)
+void TrainingSite::set_pri(tAttribute atr, int32_t prio)
 {
-	switch (atr) {
-	case atrHP:
-		if (m_pri_hp < 12)
-			++m_pri_hp;
-		break;
-	case atrAttack:
-		if (m_pri_attack < 12)
-			++m_pri_attack;
-		break;
-	case atrDefense:
-		if (m_pri_defense < 12)
-			++m_pri_defense;
-		break;
-	case atrEvade:
-		if (m_pri_evade < 12)
-			++m_pri_evade;
-		break;
-	default:
-		throw wexception("Invalid soldier attribute at %s:%d", __FILE__, __LINE__);
-	}
-}
+	if (prio < 0)
+		prio = 0;
 
-
-/**
- * Lower the given priority and make sure that the total of all priority points is >=2
- * \par atr  the priority to lower
- */
-void TrainingSite::sub_pri(tAttribute atr)
-{
-	switch (atr) {
-	case atrHP:
-		if (m_pri_hp > 0)
-			--m_pri_hp;
-		break;
-	case atrAttack:
-		if (m_pri_attack > 0)
-			--m_pri_attack;
-		break;
-	case atrDefense:
-		if (m_pri_defense > 0)
-			--m_pri_defense;
-		break;
-	case atrEvade:
-		if (m_pri_evade > 0)
-			--m_pri_evade;
-		break;
-	default:
-		throw wexception("Invalid soldier attribute at %s:%d", __FILE__, __LINE__);
-	}
-	if ((m_pri_hp + m_pri_attack + m_pri_defense + m_pri_evade == 1)) {
-		// At least we need to have TWO priority points on attributes
-		add_pri(atr);
+	for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
+		if (it->attribute == atr) {
+			it->prio = prio;
+			return;
+		}
 	}
 }
 
@@ -785,160 +607,51 @@ void TrainingSite::sub_pri(tAttribute atr)
  */
 void TrainingSite::change_soldier_capacity(int32_t how)
 {
-	int32_t temp_capacity;
-	temp_capacity = m_capacity + how;
+	int32_t new_capacity = m_capacity + how;
 
-	if (temp_capacity < 0)
-		m_capacity = 0;
-	else if (temp_capacity > descr().get_max_number_of_soldiers())
-		m_capacity = descr().get_max_number_of_soldiers();
-	else
-		m_capacity = temp_capacity;
+	if (new_capacity < 0)
+		new_capacity = 0;
+	else if (new_capacity > descr().get_max_number_of_soldiers())
+		new_capacity = descr().get_max_number_of_soldiers();
 
-	if (m_capacity > m_total_soldiers) call_soldiers();
-
-	while (m_capacity < m_total_soldiers) {
-		if (m_soldier_requests.size()) {
-			delete m_soldier_requests[0];
-			m_soldier_requests[0] = m_soldier_requests[m_soldier_requests.size() - 1];
-			m_soldier_requests.pop_back();
-			break;
-		} else if (m_soldiers.size()) {
-			drop_soldier(m_soldiers[0]->get_serial());
-			break;
-		} else
-			throw wexception
-				("TrainingSite::change_soldier_capacity(): "
-				 "m_capacity<m_total_soldiers although m_total_soldiers = 0");
+	if (static_cast<uint32_t>(new_capacity) != m_capacity) {
+		m_capacity = new_capacity;
+		update_soldier_request();
 	}
-
-	m_total_soldiers = m_soldiers.size() + m_soldier_requests.size();
 }
 
 
 /**
- * Get a list of possible upgrades ordered by priority. This list is used in
- * \par g  the curent game object
- * \sa find_and_start_next_program()
- * \return n/a, the output is in \ref m_list_upgrades
+ * Only called from \ref calc_upgrades
  */
-void TrainingSite::calc_list_upgrades(Game *) {
-	int32_t higher;
-	int32_t r_hp = m_pri_hp;
-	int32_t r_attack = m_pri_attack;
-	int32_t r_defense = m_pri_defense;
-	int32_t r_evade = m_pri_evade;
-	std::vector < std::string > list;
-
-	if (!descr().get_train_hp())
-		r_hp = 0;
-	if (!descr().get_train_attack())
-		r_attack = 0;
-	if (!descr().get_train_defense())
-		r_defense = 0;
-	if (!descr().get_train_evade())
-		r_evade = 0;
-
-	while ((r_hp > 0) || (r_attack > 0) || (r_defense > 0) || (r_evade > 0)) {
-		// Calculate the higher
-		if (r_hp >= r_attack) {
-			if (r_hp >= r_defense) {
-				if (r_hp >= r_evade)
-					higher = atrHP;
-				else
-					higher = atrEvade;
-			} else {
-				if (r_defense >= r_evade)
-					higher = atrDefense;
-				else
-					higher = atrEvade;
-			}
-		} else {
-			if (r_attack >= r_defense) {
-				if (r_attack >= r_evade)
-					higher = atrAttack;
-				else
-					higher = atrEvade;
-			} else {
-				if (r_defense >= r_evade)
-					higher = atrDefense;
-				else
-					higher = atrEvade;
-			}
-		}
-		switch (higher) {
-		case atrHP:
-			--r_hp;
-			list.push_back("upgrade_hp_");
-			molog(" Added upgrade_hp_#\n");
-			break;
-		case atrAttack:
-			--r_attack;
-			list.push_back("upgrade_attack_");
-			molog(" Added upgrade_attack_#\n");
-			break;
-		case atrDefense:
-			--r_defense;
-			list.push_back("upgrade_defense_");
-			molog(" Added upgrade_defense_#\n");
-			break;
-		case atrEvade:
-			--r_evade;
-			list.push_back("upgrade_evade_");
-			molog(" Added upgrade_evade_#\n");
-			break;
-		}
-	};
-
-	// Invert priorities
-	for (int32_t i = list.size() - 1; i >= 0; --i)
-		m_list_upgrades.push_back(list[i]);
-}
-
-/**
- * Start a training program
- * \param g             the current game object
- * \param program_name  the program to start
- */
-void TrainingSite::program_start(Game * g, std::string program_name)
+void TrainingSite::add_upgrade(tAttribute atr, const std::string& prefix)
 {
-	assert(g);
-
-	set_post_timer(6000);
-	m_prog_name = program_name;
-	ProductionSite::program_start(g, program_name);
+	Upgrade u;
+	u.attribute = atr;
+	u.prefix = prefix;
+	u.min = descr().get_min_level(atr);
+	u.max = descr().get_max_level(atr);
+	u.prio = 6;
+	u.credit = 0;
+	u.lastattempt = -1;
+	u.lastsuccess = -1;
+	m_upgrades.push_back(u);
 }
 
 /**
- * Clean up after the end of a training program and find the next program that should
- * be run at this training site
- * \param g        the current game object
- * \param success  whether the program was finished successfully
+ * Called once at initialization to populate \ref m_upgrades.
  */
-void TrainingSite::program_end(Game * g, bool success)
-{
-	bool relaunch = false;
-	std::string string;
+void TrainingSite::calc_upgrades() {
+	assert(m_upgrades.size() == 0);
 
-	assert(g);
-
-	assert(g);
-
-	m_success = success;
-
-	if (!m_success)
-		string = m_prog_name;
-
-	if (m_prog_name == "Sleep")
-		relaunch = true;
-
-	m_prog_name = "Not Working";
-	set_post_timer(6000);
-	drop_unupgradable_soldiers(g);
-	ProductionSite::program_end(g, success);
-
-	if (relaunch)
-		find_and_start_next_program(g);
+	if (descr().get_train_hp())
+		add_upgrade(atrHP, "upgrade_hp_");
+	if (descr().get_train_attack())
+		add_upgrade(atrAttack, "upgrade_attack_");
+	if (descr().get_train_defense())
+		add_upgrade(atrDefense, "upgrade_defense_");
+	if (descr().get_train_evade())
+		add_upgrade(atrEvade, "upgrade_evade_");
 }
 
 };

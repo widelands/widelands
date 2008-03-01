@@ -1100,6 +1100,7 @@ void Worker::transfer_update(Game * game, State * state) {
 	// the building, we may be somewhere else entirely (e.g. lumberjack, soldier)
 	// or we may be on the building's flag for a fetch_from_flag or dropoff
 	// task.
+	// Similarly for flags.
 	if (dynamic_cast<Building const *>(location)) {
 		BaseImmovable * const position = map[get_position()].get_immovable();
 
@@ -1107,6 +1108,19 @@ void Worker::transfer_update(Game * game, State * state) {
 			if (upcast(Flag, flag, position)) {
 				location = flag;
 				set_location(flag);
+			} else {
+				set_location(0);
+				return;
+			}
+		}
+	} else if (upcast(Flag, flag, location)) {
+		BaseImmovable * const position = map[get_position()].get_immovable();
+
+		if (position != flag) {
+			if (position == flag->get_building()) {
+				Building* building = static_cast<Building*>(position);
+				set_location(building);
+				location = building;
 			} else {
 				set_location(0);
 				return;
@@ -1161,9 +1175,6 @@ void Worker::transfer_update(Game * game, State * state) {
 			molog("[transfer]: move from flag to building\n");
 			start_task_forcemove
 				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
-			//  FIXME Here the worker enters the building before he arrives at it.
-			//  FIXME This has implications for vision.
-			set_location(nextbuild);
 		} else if (upcast(Flag,     nextflag,  nextstep)) { //  Flag to Flag
 			Road & road = *flag->get_road(nextflag);
 

@@ -131,11 +131,17 @@ protected:
 	static void request_worker_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
+	/**
+	 * Determine the next program to be run when the last program has finished.
+	 * The default implementation starts program "work".
+	 */
+	virtual void find_and_start_next_program(Game* g);
+
 	State* get_current_program() {return m_program.size() ? &*m_program.rbegin() : 0;}
 	void program_act(Game* g);
 	void program_step(const uint32_t phase = 0);
 	void program_start(Game* g, std::string name);
-	void program_end(Game* g, bool success);
+	virtual void program_end(Game* g, bool success);
 	void add_statistics_value(bool val);
 
 	void calc_statistics();

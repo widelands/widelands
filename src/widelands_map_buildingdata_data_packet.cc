@@ -55,7 +55,7 @@ namespace Widelands {
 #define CURRENT_WAREHOUSE_PACKET_VERSION        1
 #define CURRENT_MILITARYSITE_PACKET_VERSION     2
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   1
-#define CURRENT_TRAININGSITE_PACKET_VERSION     1
+#define CURRENT_TRAININGSITE_PACKET_VERSION     2
 
 
 void Map_Buildingdata_Data_Packet::Read
@@ -468,40 +468,54 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION) {
 			read_productionsite(trainingsite, fr, egbase, ol);
 
-			//  FIXME The reason for this code is probably that the constructor of
-			//  FIXME TrainingSite requests soldiers. That makes sense when a
-			//  FIXME TrainingSite is created in the game, but definitely not when
-			//  FIXME only allocating a TrainingSite to later fill it with
-			//  FIXME information from a savegame. Therefore this code here undoes
-			//  FIXME what the constructor just did. There should really be
-			//  FIXME different constructors for those cases.
-			for (uint16_t i = 0; i < trainingsite.m_soldier_requests.size(); ++i)
-				delete trainingsite.m_soldier_requests[i];
-
-			{
-				uint16_t const nr_requests = fr.Unsigned16();
-				trainingsite.m_soldier_requests.resize(nr_requests);
-				for (uint32_t i = 0; i < nr_requests; ++i) {
-					Request & req = *new Request
-						(&trainingsite,
-						 0,
-						 TrainingSite::request_soldier_callback,
-						 &trainingsite,
-						 Request::WORKER);
-					req.Read(&fr, egbase, ol);
-					trainingsite.m_soldier_requests[i] = &req;
-				}
+			delete trainingsite.m_soldier_request;
+			trainingsite.m_soldier_request = 0;
+			if (fr.Unsigned8()) {
+				trainingsite.m_soldier_request = new Request
+					(&trainingsite, 0, TrainingSite::request_soldier_callback, &trainingsite, Request::WORKER);
+				trainingsite.m_soldier_request->Read(&fr, egbase, ol);
 			}
 
-			assert(trainingsite.m_soldiers.empty());
+			trainingsite.m_capacity = fr.Unsigned8();
+			trainingsite.m_build_heros = fr.Unsigned8();
+
+			uint8_t const nr_upgrades = fr.Unsigned8();
+			for (uint8_t i = 0; i < nr_upgrades; ++i) {
+				tAttribute attribute = static_cast<tAttribute>(fr.Unsigned8());
+				TrainingSite::Upgrade* upgrade = trainingsite.get_upgrade(attribute);
+
+				if (upgrade) {
+					upgrade->prio = fr.Unsigned8();
+					upgrade->credit = fr.Unsigned8();
+					upgrade->lastattempt = fr.Signed32();
+					upgrade->lastsuccess = fr.Signed32();
+				} else {
+					fr.Unsigned8();
+					fr.Unsigned8();
+					fr.Signed32();
+					fr.Signed32();
+				}
+			}
+		} else if (trainingsite_packet_version == 1) {
+			read_productionsite(trainingsite, fr, egbase, ol);
+
+			// Compatibility: trainingsite used to require a list of soldiers
+			// This is now dealt with automatically via add_workers
+			{
+				uint16_t const nr_requests = fr.Unsigned16();
+				for (uint16_t i = 0; i < nr_requests; ++i) {
+					Request* req = new Request
+						(&trainingsite, 0, TrainingSite::request_soldier_callback, &trainingsite, Request::WORKER);
+					req->Read(&fr, egbase, ol);
+					delete req;
+				}
+			}
 			{
 				uint16_t const nr_soldiers = fr.Unsigned16();
-				trainingsite.m_soldiers.resize(nr_soldiers);
 				for (uint16_t i = 0; i < nr_soldiers; ++i) {
 					uint32_t const soldier_serial = fr.Unsigned32();
 					try {
-						trainingsite.m_soldiers[i] =
-							&ol->get<Soldier>(soldier_serial);
+						trainingsite.m_soldiers.push_back(&ol->get<Soldier>(soldier_serial));
 					} catch (_wexception const & e) {
 						throw wexception
 							("soldier #%u (%u): %s", i, soldier_serial, e.what());
@@ -515,30 +529,23 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			trainingsite.m_build_heros = fr.Unsigned8();
 
 			//  priority upgrades
-			trainingsite.m_pri_hp      = fr.Unsigned16();
-			trainingsite.m_pri_attack  = fr.Unsigned16();
-			trainingsite.m_pri_defense = fr.Unsigned16();
-			trainingsite.m_pri_evade   = fr.Unsigned16();
+			trainingsite.set_pri(atrHP, fr.Unsigned16());
+			trainingsite.set_pri(atrAttack, fr.Unsigned16());
+			trainingsite.set_pri(atrDefense, fr.Unsigned16());
+			trainingsite.set_pri(atrEvade, fr.Unsigned16());
 
-			//  priority modificators
-			trainingsite.m_pri_hp_mod      = fr.Unsigned16();
-			trainingsite.m_pri_attack_mod  = fr.Unsigned16();
-			trainingsite.m_pri_defense_mod = fr.Unsigned16();
-			trainingsite.m_pri_evade_mod   = fr.Unsigned16();
+			//  priority modificators (not compatible with new version)
+			fr.Unsigned16();
+			fr.Unsigned16();
+			fr.Unsigned16();
+			fr.Unsigned16();
 
 			//  capacity (modified by user)
 			trainingsite.m_capacity = fr.Unsigned8();
 
-			//  Need to read the m_prog_name as string !!
-			std::string prog = fr.CString();
-			trainingsite.m_prog_name = prog;
+			fr.CString(); //  m_prog_name -- this is obsolete
 
-			//  m_total_soldiers is just a convenience variable and not saved.
-			//  Recalculate it.
-			trainingsite.m_total_soldiers =
-				trainingsite.m_soldiers.size()
-				+
-				trainingsite.m_soldier_requests.size();
+			trainingsite.update_soldier_request();
 		} else
 			throw wexception
 				("unknown/unhandled version %u", trainingsite_packet_version);
@@ -837,42 +844,27 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	write_productionsite(trainingsite, fw, egbase, os);
 
 	//  requests
-	const uint16_t soldier_requests_size =
-		trainingsite.m_soldier_requests.size();
-	fw.Unsigned16(soldier_requests_size);
-	for (uint32_t i = 0; i < soldier_requests_size; ++i)
-		trainingsite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
-
-	//  soldiers
-	const uint16_t soldiers_size = trainingsite.m_soldiers.size();
-	fw.Unsigned16(soldiers_size);
-	for (uint32_t i = 0; i < trainingsite.m_soldiers.size(); ++i) {
-		assert(os->is_object_known(trainingsite.m_soldiers[i]));
-		fw.Unsigned32(os->get_object_file_index(trainingsite.m_soldiers[i]));
+	if (trainingsite.m_soldier_request) {
+		fw.Unsigned8(1);
+		trainingsite.m_soldier_request->Write(&fw, egbase, os);
+	} else {
+		fw.Unsigned8(0);
 	}
 
-	// Don't save m_list_upgrades (remake at load)
-
+	fw.Unsigned8(trainingsite.m_capacity);
 	fw.Unsigned8(trainingsite.m_build_heros);
 
-	//  priority upgrades
-	fw.Unsigned16(trainingsite.m_pri_hp);
-	fw.Unsigned16(trainingsite.m_pri_attack);
-	fw.Unsigned16(trainingsite.m_pri_defense);
-	fw.Unsigned16(trainingsite.m_pri_evade);
-
-	//  priority modificators
-	fw.Unsigned16(trainingsite.m_pri_hp_mod);
-	fw.Unsigned16(trainingsite.m_pri_attack_mod);
-	fw.Unsigned16(trainingsite.m_pri_defense_mod);
-	fw.Unsigned16(trainingsite.m_pri_evade_mod);
-
-	// capacity (modified by user)
-	fw.Unsigned8(trainingsite.m_capacity);
-
-	// Need to read the m_prog_name as string !!
-	fw.String(trainingsite.m_prog_name);
+	// upgrades
+	fw.Unsigned8(trainingsite.m_upgrades.size());
+	for (uint8_t i = 0; i < trainingsite.m_upgrades.size(); ++i) {
+		const TrainingSite::Upgrade& upgrade = trainingsite.m_upgrades[i];
+		fw.Unsigned8(upgrade.attribute);
+		fw.Unsigned8(upgrade.prio);
+		fw.Unsigned8(upgrade.credit);
+		fw.Signed32(upgrade.lastattempt);
+		fw.Signed32(upgrade.lastsuccess);
+	}
 
 	// DONE
 }

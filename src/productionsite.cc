@@ -519,7 +519,7 @@ void ProductionSite::act(Game* g, uint32_t data)
 
 		if (!m_program.size())
 		{
-			program_start(g, "work");
+			find_and_start_next_program(g);
 			return;
 		}
 
@@ -539,6 +539,12 @@ void ProductionSite::act(Game* g, uint32_t data)
 
 		program_act(g);
 	}
+}
+
+
+void ProductionSite::find_and_start_next_program(Game* g)
+{
+	program_start(g, "work");
 }
 
 

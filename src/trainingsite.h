@@ -89,6 +89,16 @@ class TrainingSite:public ProductionSite {
 	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(TrainingSite_Descr);
 	friend struct ::TrainingSite_Window;
+
+	struct Upgrade {
+		tAttribute attribute; // attribute for this upgrade
+		std::string prefix; // prefix for programs
+		int32_t min, max; // minimum and maximum program number (inclusive)
+		uint32_t prio; // relative priority
+		uint32_t credit; // whenever an upgrade gets credit >= 10, it can be run
+		int32_t lastattempt, lastsuccess;
+	};
+
 public:
 	TrainingSite(TrainingSite_Descr const &);
 	virtual ~TrainingSite();
@@ -101,6 +111,9 @@ public:
 	virtual void init(Editor_Game_Base * g);
 	virtual void cleanup(Editor_Game_Base * g);
 	virtual void act(Game * g, uint32_t data);
+
+	virtual void add_worker(Worker* w);
+	virtual void remove_worker(Worker* w);
 
 	bool get_build_heros() {
 		return m_build_heros;
@@ -118,10 +131,10 @@ public:
 	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
 	{return m_soldiers;}
 
-	virtual void drop_soldier(uint32_t nr);
-	uint32_t get_pri(enum tAttribute atr);
-	void add_pri(enum tAttribute atr);
-	void sub_pri(enum tAttribute atr);
+	virtual void drop_soldier(uint32_t serial);
+	void drop_soldier(Soldier* soldier);
+	int32_t get_pri(enum tAttribute atr);
+	void set_pri(enum tAttribute atr, int32_t prio);
 	uint32_t get_capacity() const throw () {return m_capacity;}
 	virtual void soldier_capacity_up() {
 		change_soldier_capacity(1);
@@ -129,31 +142,31 @@ public:
 	virtual void soldier_capacity_down() {
 		change_soldier_capacity(-1);
 	}
-protected:
 	virtual void change_soldier_capacity(int32_t);
+
+protected:
 	virtual UI::Window *create_options_window(Interactive_Player * plr, UI::Window ** registry);
+	virtual void program_end(Game* g, bool success);
 
 private:
-	void request_soldier();
+	void update_soldier_request();
 	static void request_soldier_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
-	void program_start(Game * g, std::string program_name);
-	void program_end(Game * g, bool success);
 	void find_and_start_next_program(Game * g);
-	void calc_list_upgrades(Game * g);
+	void start_upgrade(Game* g, Upgrade* upgrade);
+	void add_upgrade(tAttribute atr, const std::string& prefix);
+	void calc_upgrades();
 
-	void call_soldiers();
-	void drop_soldier(Game * g, uint32_t nr);
 	void drop_unupgradable_soldiers(Game * g);
+	Upgrade* get_upgrade(enum tAttribute atr);
 
-	void modif_priority(enum tAttribute, int32_t);
 private:
 	/** Open requests for soldiers. The soldiers can be under way or unavailable*/
-	std::vector < Request * >m_soldier_requests;
+	Request* m_soldier_request;
 
 	/** The soldiers currently at the training site*/
-	std::vector < Soldier * >m_soldiers;
+	std::vector<Soldier*> m_soldiers;
 
 	/** Number of soldiers that should be trained concurrently.
 	 * Equal or less to maximum number of soldiers supported by a training site. There is no
@@ -161,50 +174,15 @@ private:
 	 * still be under way or even not yet available*/
 	uint32_t m_capacity;
 
-	/** Number of available soldiers + number of requested soldiers. \todo Factor out this variable?*/
-	uint32_t m_total_soldiers;
-
-	/** Possible upgrades to be gained at this site*/
-	std::vector < std::string > m_list_upgrades;
-
-	/** True, \b always upgrade already experienced soldiers first
-	 * False, \b always upgrade inexperienced soldiers first*/
+	/** True, \b always upgrade already experienced soldiers first, when possible
+	 * False, \b always upgrade inexperienced soldiers first, when possible */
 	bool m_build_heros;
 
-	/** Priority for upgrading hitpoints (0 to 2) 0 = don't upgrade, 2 = upgrade urgently
-	 * \sa m_pri_attack, m_pri_defense, m_pri_evade*/
-	uint32_t m_pri_hp;
-
-	/** Priority for upgrading hitpoints (0 to 2) 0 = don't upgrade, 2 = upgrade urgently
-	 * \sa m_pri_hp, m_pri_defense, m_pri_evade*/
-	uint32_t m_pri_attack;
-
-	/** Priority for upgrading hitpoints (0 to 2) 0 = don't upgrade, 2 = upgrade urgently
-	 * \sa m_pri_hp, m_pri_attack, m_pri_evade*/
-	uint32_t m_pri_defense;
-
-	/** Priority for upgrading hitpoints (0 to 2) 0 = don't upgrade, 2 = upgrade urgently
-	 * \sa m_pri_hp, m_pri_attack, m_pri_defense*/
-	uint32_t m_pri_evade;
-
-	/** Modificator for m_pri_hp, needed to prevent infinite loop when upgrading is not
-	 * possible immediately*/
-	int32_t m_pri_hp_mod;
-	/** Modificator for m_pri_attack, needed to prevent infinite loop when upgrading is not
-	 * possible immediately*/
-	int32_t m_pri_attack_mod;
-	/** Modificator for m_pri_defense, needed to prevent infinite loop when upgrading is not
-	 * possible immediately*/
-	int32_t m_pri_defense_mod;
-	/** Modificator for m_pri_evade, needed to prevent infinite loop when upgrading is not
-	 * possible immediately*/
-	int32_t m_pri_evade_mod;
+	std::vector<Upgrade> m_upgrades;
+	Upgrade* m_current_upgrade;
 
 	/** Whether the last training program was finished successfully*/
 	bool m_success;
-
-	/** The training program that is currently executing*/
-	std::string m_prog_name;
 };
 
 };

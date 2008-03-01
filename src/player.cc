@@ -533,11 +533,11 @@ Change the training priotity values
 void Player::change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val) {
 	if (imm->get_owner() != this)
 		return;
-	if (upcast(TrainingSite, ts, imm))
-		if (val>0)
-			ts->add_pri(static_cast<tAttribute>(atr));
-		else
-			ts->sub_pri(static_cast<tAttribute>(atr));
+	if (upcast(TrainingSite, ts, imm)) {
+		tAttribute attr = static_cast<tAttribute>(atr);
+		int32_t prio = ts->get_pri(attr);
+		ts->set_pri(attr, prio+val);
+	}
 }
 
 /*
