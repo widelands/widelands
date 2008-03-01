@@ -107,7 +107,7 @@ void S2_Map_Loader::load_world() {
 
 
 /**
- * Completly loads the map, loads the
+ * Completely loads the map, loads the
  * corresponding world, loads the graphics
  * and places all the objects. From now on
  * the Map* can't be set to another one.
@@ -206,7 +206,7 @@ void S2_Map_Loader::load_s2mf_header()
 	S2MapDescrHeader header;
 	memcpy(&header, file.Data(sizeof(header)), sizeof(header));
 
-	//  Header must be swaped for big-endian Systems, works at the moment only //  FIXME generalize
+	//  Header must be swapped for big-endian Systems, works at the moment only //  FIXME generalize
 	//  for PowerPC architecture                                               //  FIXME generalize
 #if defined(__ppc__)                                                          //  FIXME generalize
 	header.w = Swap16(header.w);                                               //  FIXME generalize
@@ -252,7 +252,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		S2MapDescrHeader header;
 		memcpy(&header, file.Data(sizeof(header)), sizeof(header));
 
-		//  Header must be swaped for big-endian Systems, works at the moment //  FIXME generalize
+		//  Header must be swapped for big-endian Systems, works at the moment //  FIXME generalize
 		//  only for PowerPC architecture.                                    //  FIXME generalize
 #if defined(__ppc__)                                                        //  FIXME generalize
 		header.w = Swap16(header.w);                                          //  FIXME generalize

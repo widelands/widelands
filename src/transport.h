@@ -576,7 +576,7 @@ struct Economy {
 		return m_request_timer && (gametime == m_request_timer_time);
 	}
 
-	int32_t stock_ware(Ware_Index const i) { /// informations over this economy
+	int32_t stock_ware(Ware_Index const i) { /// information about this economy
 		return m_wares  .stock(i.value());
 	}
 	int32_t stock_worker(Ware_Index const i) {

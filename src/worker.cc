@@ -744,9 +744,7 @@ Worker::~Worker()
 }
 
 
-/**
- * Log basic informations
- */
+/// Log basic information.
 void Worker::log_general_info(Editor_Game_Base* egbase)
 {
 	Bob::log_general_info(egbase);
@@ -1271,7 +1269,7 @@ void Worker::transfer_mask(Game *, State * state)
 	std::string signal = get_signal();
 
 	if (signal == "cancel")
-		state->transfer = 0; // dont't call transfer_fail/finish when cancelled
+		state->transfer = 0; //  do not call transfer_fail/finish when cancelled
 }
 
 

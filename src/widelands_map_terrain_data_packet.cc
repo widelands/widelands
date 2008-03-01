@@ -95,7 +95,7 @@ throw (_wexception)
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	//  This is a bit more complicated saved so that the order of loading of the
-	//  terrains at run time doens't matter. This is slow like hell.
+	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase->map();
 	const World & world = map.world();
 	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();

@@ -131,10 +131,10 @@ struct Overlay_Manager {
 
 	void recalc_field_overlays(Widelands::FCoords);
 
-	//  Road overlays are registered like normal overlays and removed like normal
-	//  overlays but they use are handled internally completly different. When a
-	//  road overlay information is requested the same data as for a field is
-	//  returned (a uint8_t which needs to be ANDed).
+	//  Road overlays are registered like normal overlays and removed like
+	//  normal overlays but they use are handled internally completely
+	//  different. When a road overlay information is requested the same data a
+	//  s for a field is returned (a uint8_t which needs to be ANDed).
 	void register_road_overlay
 		(Widelands::Coords, uint8_t where, Job_Id = Job_Id::Null());
 	void remove_road_overlay(Widelands::Coords);

@@ -25,7 +25,7 @@
 namespace Widelands {
 
 /*
- * This packet cares for the existance of wares
+ * This packet cares for the existence of wares
  * on the map, the data is parsed somewhere else
  */
 struct Map_Ware_Data_Packet : public Map_Data_Packet {

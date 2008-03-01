@@ -783,22 +783,23 @@ void ProductionSite::program_act(Game* g)
 
 			molog("  Mined one item\n");
 		} else {
-			// Mine has reached it's limits, still try to produce something
-			// but independant of sourrunding resources. Do not decrease resources further
+			//  Mine has reached its limits, still try to produce something but
+			//  independent of sourrunding resources. Do not decrease resources
+			//  further.
 			assert(action->iparam3 >= 0);
 			if
 				(g->logic_rand() % 100
 				 >=
 				 static_cast<uint32_t>(action->iparam3))
 			{
-				// Not successfull
-				molog("  Not successful this time in fallback programm\n");
+				//  not successful
+				molog("  Not successful this time in fallback program\n");
 				program_end(g, false);
 				return;
 			}
 		}
 
-		// Done successfull
+		//  done successful
 		program_step();
 		m_program_timer = true;
 		m_program_time  = schedule_act(g, 10);

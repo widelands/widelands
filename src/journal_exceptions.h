@@ -23,7 +23,7 @@
 #include <stdexcept>
 
 /**
- * Thrown for IO-errors occuring with a journal file (unable to open file for any
+ * Thrown for IO-errors occurring with a journal file (unable to open file for any
  * reason, out of space, etc.) that a) are unrecoverable and b) have already been
  * dealt with.
  *

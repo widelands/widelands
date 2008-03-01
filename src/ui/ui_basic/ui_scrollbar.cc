@@ -197,9 +197,7 @@ void Scrollbar::set_knob_pos(int32_t pos)
 }
 
 
-/**
-Perform the action for klicking on the given area.
-*/
+/// Perform the action for clicking on the given area.
 void Scrollbar::action(Area area)
 {
 	int32_t diff;

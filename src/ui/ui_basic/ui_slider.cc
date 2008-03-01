@@ -39,7 +39,7 @@ namespace UI {
  * \param enabled The widget accessibility.
  * \param x_gap size between the cursor and the vertical border.
  * \param y_gap size between the cursor and the horizontal border.
- * \param bar_size Lenght of the cursor move.
+ * \param bar_size Length of the cursor move.
  */
 Slider::Slider
 	(Panel * const parent,

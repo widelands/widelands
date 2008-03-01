@@ -212,11 +212,11 @@ send_signal().
 To implement a new task, you need to create a new Task object, and at least an
 update() function. The signal() and mask() functions are optional (can be 0).
 The update() function is called once after the task is pushed, and whenever a
-previously scheduled CMD_ACT occured. It is also called when a sub-task is pops
+previously scheduled CMD_ACT occurred. It is also called when a sub-task pops
 itself.
 One of the following things must happen during update():
 - Call schedule_act() to schedule the next call to update()
-  This often happens indirectly by calls to start_task_* type fuctions
+  This often happens indirectly by calls to start_task_* type functions.
 - Call skip_act() if you really don't want a CMD_ACT to occur.
   Note that if you call skip_act(), your task MUST implement signal(),
   otherwise your bob will never wake up again.
@@ -1088,9 +1088,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	}
 }
 
-/**
- * Give debug informations
- */
+/// Give debug information.
 void Bob::log_general_info(Editor_Game_Base* egbase)
 {
 	molog("Owner: %p\n", m_owner);

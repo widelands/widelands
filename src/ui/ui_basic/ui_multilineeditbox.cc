@@ -203,7 +203,7 @@ void Multiline_Editbox::draw(RenderTarget* dst)
 			 get_eff_w(),
 			 m_cache_mode,
 			 &m_cache_id,
-			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1)); //explicit cast is neccessary to avoid a compiler warning
+			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1)); //  explicit cast is necessary to avoid a compiler warning
 		m_cache_mode = Widget_Cache_Use;
 	}
 	Multiline_Textarea::draw_scrollbar();

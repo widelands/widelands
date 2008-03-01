@@ -75,9 +75,7 @@ int32_t Descr_Maintainer<T>::add(T* item) {
 	return result;
 }
 
-//
-//returns elemt if it exists, 0 if it doesnt
-//
+/// Returns the element if it exists, 0 otherwise.
 template <class T>
 T* Descr_Maintainer<T>::exists(const char* name) {
 	for (typename T::Index i = 0; i < nitems; ++i)

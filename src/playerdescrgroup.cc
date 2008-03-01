@@ -61,7 +61,7 @@ UI::Panel(parent, x, y, 450, 20),
 m_game(game),
 m_plnum(plnum),
 m_enabled(false),
-m_playertype(Widelands::Player::Local), //just for initalization
+m_playertype(Widelands::Player::Local), //  just for initialization
 m_current_tribe(0),
 m_allow_changes(CHANGE_EVERYTHING),
 
@@ -204,7 +204,7 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
 		}
 	}
 	throw wexception
-		("Map defines tribe %s, but it doens't exist!", str.c_str());
+		("Map defines tribe %s, but it does not exist!", str.c_str());
 }
 
 /*

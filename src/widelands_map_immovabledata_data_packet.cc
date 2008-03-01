@@ -87,7 +87,7 @@ throw (_wexception)
 					}
 					imm.m_animstart = fr.Signed32();
 
-					// Programm
+					//  program
 					if (fr.Unsigned8())
 						imm.m_program = descr.get_program(fr.CString());
 					else

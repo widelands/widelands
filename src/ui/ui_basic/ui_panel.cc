@@ -761,7 +761,7 @@ bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
 }
 
 /**
- * Pass the key event to the focussed child.
+ * Pass the key event to the focused child.
  * If it doesn't process the key, we'll see if we can use the event.
 */
 bool Panel::do_key(bool down, SDL_keysym code)

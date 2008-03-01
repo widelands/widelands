@@ -164,7 +164,6 @@ void Fullscreen_Menu_InetLobby::room_info(std::vector<std::string > users) {
 		if (users[i] != m_gsc->get_username()) {
 			std::string name = users[i];
 			m_userlist->add(name.c_str(), 0);
-			// Get User Informations
 			Game_Server_Protocol_Packet_GetUserInfo *gui = new Game_Server_Protocol_Packet_GetUserInfo(users[i]);
 			m_gsc->send(gui);
 		}
@@ -233,7 +232,7 @@ void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groo
 }
 
 /*
- * A critical connection error has occured. It
+ * A critical connection error has occurred. It
  * is likely that the connection is terminated, but
  * we only have to care for showing the user the
  * message
@@ -245,9 +244,7 @@ void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
 	m_disconnect_expected = true;
 }
 
-/*
- * A disconnect occured
- */
+/// A disconnect occurred.
 void Fullscreen_Menu_InetLobby::disconnect() {
 	if (not m_disconnect_expected) {
 		UI::Modal_Message_Box mmb

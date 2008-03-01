@@ -104,7 +104,7 @@ Serial Map_Map_Object_Saver::register_object(Map_Object const * const obj) {
 
 /*
  * Returns the file index for this map object. This is used on load
- * to regenerate the depencies between the objects
+ * to regenerate the dependencies between the objects.
  */
 uint32_t Map_Map_Object_Saver::get_object_file_index
 (const Map_Object * const obj)

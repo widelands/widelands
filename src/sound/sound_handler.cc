@@ -51,7 +51,7 @@ Sound_Handler g_sound_handler;
 /** This is just a basic constructor. The \ref Sound_Handler must already exist
  * during command line parsing because --nosound needs to be known. At this
  * time, however, all other information is still unknown, so a real
- * intialization cannot take place.
+ * initialization cannot take place.
  * \sa Sound_Handler::init()
 */
 Sound_Handler::Sound_Handler():
@@ -83,7 +83,7 @@ Sound_Handler::~Sound_Handler()
 	}
 }
 
-/** The real intialization for Sound_Handler.
+/** The real initialization for Sound_Handler.
  *
  * \pre The locale must be known before calling this
  *
@@ -254,7 +254,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 
 	assert(fr);
 
-	//direct access to member variable is neccessary here
+	//  direct access to member variable is necessary here
 	src = SDL_RWFromMem(fr->Data(fr->GetSize(), 0), fr->GetSize());
 
 	if (NEW_SDL_MIXER == 1) {

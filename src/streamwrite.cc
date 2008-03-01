@@ -31,8 +31,8 @@ void StreamWrite::Flush()
 
 void StreamWrite::Printf(const char *fmt, ...)
 {
-	// Try to do formatting on the stack first, but fallback
-	// to heap allocations to accomodate strings of arbitrary length
+	//  Try to do formatting on the stack first, but fallback to heap
+	//  allocations to accommodate strings of arbitrary length.
 	char buffer[2048];
 	va_list va;
 

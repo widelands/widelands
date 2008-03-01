@@ -36,7 +36,7 @@ ProductionProgram::ProductionProgram(const std::string & name) : m_name(name) {}
 ===============
 ProductionProgram::parse
 
-Parse a program. The building is parsed completly. hopefully
+Parse a program. The building is parsed completely (hopefully).
 ===============
 */
 void ProductionProgram::parse

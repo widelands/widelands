@@ -572,7 +572,7 @@ throw (_wexception)
 
 			fw.Unsigned32(os->get_object_file_index(building));
 
-			//  player immovable owner is already in existance packet
+			//  player immovable owner is already in existence packet
 
 			//  write the general stuff
 			if (building->m_anim) {

@@ -130,7 +130,7 @@ void GameOptionsMenu::clicked_readme()
 {fileview_window(&m_player, &m_windows.readme,  "txts/README");}
 
 void GameOptionsMenu::clicked_license()
-{fileview_window(&m_player, &m_windows.licence, "txts/COPYING");}
+{fileview_window(&m_player, &m_windows.license, "txts/COPYING");}
 
 void GameOptionsMenu::clicked_authors()
 {fileview_window(&m_player, &m_windows.authors, "txts/developers");}

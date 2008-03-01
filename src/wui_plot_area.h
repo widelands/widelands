@@ -43,7 +43,7 @@ struct WUIPlot_Area : public UI::Panel {
 	};
 	enum PLOTMODE {
 		//  Always take the samples of some times together, so that the graph is
-		//  not completly zigg-zagged
+		//  not completely zigg-zagged.
 		PLOTMODE_RELATIVE,
 
 		PLOTMODE_ABSOLUTE

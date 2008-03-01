@@ -25,7 +25,7 @@
 namespace Widelands {
 
 /*
- * This packet cares for the existance of flags
+ * This packet cares for the existence of flags
  * on the map, the data is parsed somewhere else
  */
 struct Map_Flag_Data_Packet : public Map_Data_Packet {

@@ -64,8 +64,8 @@ void Journal::write(uint32_t v) {
 /// \overload
 /// SDLKey is an enum, and enums are implemented as int32_t. Consequently,
 /// SDLKey changes size on 64bit machines :-(
-/// So we force it to be 32bit, discarding the higher 32 bits (hopefully noone
-/// will have so man keys)
+/// So we force it to be 32bit, discarding the higher 32 bits (hopefully no-one
+/// will have so many keys).
 ///
 /// On 32bit systems, it does not matter whether this method or
 /// \ref write(Uint32 v) actually gets used.
@@ -321,7 +321,7 @@ void Journal::record_event(SDL_Event *e)
 		//   m_recordstream<<std::flush;
 		//If they were outside, they'd get executed on every mainloop
 		//iteration, which would yield a) huge files and b) lots of
-		//completely unneccessary overhad.
+		//completely unnecessary overhad.
 		switch (e->type) {
 		case SDL_KEYDOWN:
 			write(static_cast<uint8_t>(RFC_EVENT));

@@ -184,7 +184,7 @@ WLApplication *WLApplication::the_singleton=0;
  * The main entry point for the WLApplication singleton.
  *
  * Regardless of circumstances, this will return the one and only valid
- * WLApplication object when called. If neccessary, a new WLApplication instance
+ * WLApplication object when called. If necessary, a new WLApplication instance
  * is created.
  *
  * While you \e can do the first call to this method without parameters, it does
@@ -1223,7 +1223,7 @@ void WLApplication::mainmenu_multiplayer()
 		Fullscreen_Menu_InetServerOptions igo;
 		const int32_t igo_code = igo.run();
 
-		// Get informations here
+		//  get information here
 		const std::string host   = igo.get_server_name();
 		const std::string player = igo.get_player_name();
 

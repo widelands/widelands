@@ -412,8 +412,7 @@ void TrainingSite::drop_soldier(Game * g, uint32_t nr)
 		m_soldiers[i] = m_soldiers[i + 1];
 	m_soldiers.pop_back();
 
-	// Call more soldiers if are enought space
-	call_soldiers();
+	call_soldiers(); //  Call more soldiers if there is enough space.
 
 	// Walk the soldier home safely
 	s->reset_tasks(g);

@@ -604,7 +604,7 @@ void Immovable::Loader::load(FileRead& fr)
 	}
 	imm.m_animstart = fr.Signed32();
 
-	// Programm
+	//  program
 	imm.m_program = fr.Unsigned8() ? imm.descr().get_program(fr.CString()) : 0;
 	imm.m_program_ptr = fr.Unsigned32();
 

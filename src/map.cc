@@ -60,7 +60,7 @@ Map IMPLEMENTATION
 /** Map::Pathfield
  *
  * Used in pathfinding. For better encapsulation, pathfinding structures
- * are seperate from normal fields
+ * are separate from normal fields
  *
  * Costs are in milliseconds to walk.
  *
@@ -175,7 +175,7 @@ void Map::recalc_for_field_area(const Area<FCoords> area) {
 this recalculates all data that needs to be recalculated.
 This is only needed when all fields have change, this means
 a map has been loaded or newly created or in the editor that
-the overlays have completly changed
+the overlays have completely changed.
 ===========
 */
 void Map::recalc_whole_map()
@@ -388,7 +388,7 @@ void Map::cleanup() {
 
 	mvm().remove_all();
 
-	//  Remove all extra datas. Pay attention here, maybe some freeing would be
+	//  Remove all extra data. Pay attention here, maybe some freeing would be
 	//  needed.
 #ifdef DEBUG
 	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
@@ -2217,8 +2217,6 @@ Military_Influence Map::calc_influence
 		 (std::min(abs(a.y - area.y), abs(a.y - area.y + h)),
 		  abs(a.y - area.y - h)));
 
-	//  This method makes a "parabola" like x^4, but the maxium radius is
-	//  MAX_RADIUS,
 	if (influence > area.radius) influence = 0;
 	else if (influence == 0) influence = MAX_RADIUS;
 	else influence = MAX_RADIUS - influence;

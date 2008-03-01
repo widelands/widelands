@@ -238,7 +238,7 @@ void Main_Menu_Load_Map::fill_list() {
 		if
 			(strcmp(FileSystem::FS_Filename(name), ".")    and
 			 strcmp(FileSystem::FS_Filename(name), "..")   and // Upsy, appeared again. ignore
-			 strcmp(FileSystem::FS_Filename(name), ".svn") and // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
+			 strcmp(FileSystem::FS_Filename(name), ".svn") and // HACK: we skip .svn dir (which is in normal checkout present) for esthetic reasons
 			 g_fs->IsDirectory(name)                       and
 			 not WL_Map_Loader::is_widelands_map(name))
 

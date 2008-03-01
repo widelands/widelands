@@ -50,7 +50,7 @@ using Widelands::Player;
 
 #define CHECK_SYNC_INTERVAL     2000
 #define   DELAY_PROBE_INTERVAL 10000
-#define MINIMUM_NETWORK_DELAY     10 // to avoid unneccessary network congestion
+#define MINIMUM_NETWORK_DELAY     10 // avoid unnecessary network congestion
 #define INITIAL_NETWORK_DELAY    500
 
 

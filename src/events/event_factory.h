@@ -29,7 +29,7 @@ namespace Widelands {
 
 /// Functions that create an event of some type and returns a reference to it.
 /// The caller is given ownership of the created object and is therefore
-/// resposible for that it is deallocated with operator delete. The event's
+/// responsible for that it is deallocated with operator delete. The event's
 /// name and state are initialized to the given values.
 namespace Event_Factory {
 

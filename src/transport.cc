@@ -814,7 +814,7 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
  * nextstep is compared with the cached data, and a new carrier is only called
  * if that data hasn't changed.
  *
- * This behaviour is overriden by m_always_call_for_step, which is set by
+ * This behaviour is overridden by m_always_call_for_step, which is set by
  * update_items() to ensure that new carriers are called when roads are
  * split, for example.
 */

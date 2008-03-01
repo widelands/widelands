@@ -27,7 +27,7 @@
  * them again.
  *
  * Some of this Commands (the player commands) have another
- * index, but this one is completly independant and only for
+ * index, but this one is completley independent and only for
  * writing to files
  */
 

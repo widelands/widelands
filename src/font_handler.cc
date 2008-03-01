@@ -206,7 +206,7 @@ SDL_Surface* Font_Handler::create_single_line_text_surface
  * This function renders a longer (multiline) text passage, which should not change.
  * If it changes, this function is highly unperformant.
  *
- * This function also completly ignores vertical alignement
+ * This function also completely ignores vertical aligement.
  * Horizontal alignment is now recognized correctly
  */
 SDL_Surface* Font_Handler::create_static_long_text_surface

@@ -151,7 +151,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	if (programIt == program_map.end()) programIt = program_map.find("work");
 
 	if (programIt != program_map.end()) {
-		std::vector<ProductionAction> actions =
+		std::vector<ProductionAction> const & actions =
 			programIt->second->get_all_actions();
 
 		std::map<std::string, WareCondition> waresConsumed;

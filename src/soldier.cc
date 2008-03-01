@@ -323,7 +323,7 @@ int32_t Soldier::get_tattribute(uint32_t attr) const
 	return Worker::get_tattribute(attr);
 }
 
-// Unsignedness ensures that we can only heal, don't hurt throught this method.
+//  Unsignedness ensures that we can only heal, not hurt through this method.
 void Soldier::heal (const uint32_t hp) {
 	molog ("healing (%d+)%d/%d\n", hp, m_hp_current, m_hp_max);
 	m_hp_current += hp;
@@ -386,8 +386,7 @@ void Soldier::draw
 			  static_cast<int32_t>(fraction * (r.w - 2)), r.h - 2),
 			 color);
 
-	// Draw information fields about levels
-	// first, gather informations
+		//  Draw information fields about levels. First, gather information.
 		const uint32_t hppic = get_hp_level_pic();
 		const uint32_t attackpic = get_attack_level_pic();
 		const uint32_t defensepic = get_defense_level_pic();

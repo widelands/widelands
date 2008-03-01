@@ -121,7 +121,7 @@ extern class Sound_Handler g_sound_handler;
  * \ref start_music, \ref stop_music and of course \ref change_music.
  * Unfortunately, that's just the functions we'd need to execute from the
  * callback. As if that was not enough, SDL_mixer internally uses
- * two seperate threads, so you \e really don't want to play around with
+ * two separate threads, so you \e really don't want to play around with
  * locking.
  *
  * The only way around that resctriction is to send an SDL event(SDL_USEREVENT)
@@ -157,8 +157,8 @@ extern class Sound_Handler g_sound_handler;
  * \todo Describe play-or-not algo
  * \todo Environmental sound effects (e.g. wind)
  * \todo repair and reenable animation sound effects for 1-pic-animations
- * \todo accomodate runtime changes of i18n language
- * \todo ? accomodate sound activation if it was disabled at the beginning
+ * \todo accommodate runtime changes of i18n language
+ * \todo ? accommodate sound activation if it was disabled at the beginning
 */
 class Sound_Handler
 {
@@ -222,7 +222,7 @@ public:
 	Widelands::Game * m_the_game;
 
 	/** Only for buffering the command line option --nosound until real
-	 * intialization is done
+	 * initialization is done.
 	 * \see Sound_Handler::Sound_Handler()
 	 * \see Sound_Handler::init()
 	 * \todo This is ugly. Find a better way to do it

@@ -23,7 +23,7 @@
 #include <stdint.h>
 
 /*
- * This file delivers all informations needed to understand
+ * This file delivers all information needed to understand
  * and implement the general game server protocol.
  *
  * The protocol consist of packages. Each package passes four
@@ -43,7 +43,7 @@
  *
  * When a client connects to
  * a server it sends a hello package. This package also contains the ability of the client
- * (see the hello package source for more informations)
+ * (see the hello package source for more information)
  *
  * All strings are unicode!!
  */
@@ -129,7 +129,7 @@ enum CP_Answer {
  * Answer (Server):
  *  <2B id><2B index><2B FLAGS><1B return code><User Name to use><User Group><Initial room><Welcome message (MOTD)>
  *   if the return code is a failure, the other data might not contain
- *   really usefull data.
+ *   really useful data.
  */
 enum HP_Features {
 	FEATURES_NONE        = 0,
@@ -150,7 +150,7 @@ enum HP_RetVal {
 const uint8_t UEP_ACK = 1;
 
 /*
- * ROOM INFO : send informations about the current room.
+ * ROOM INFO : send information about the current room.
  * Request (Client):
  *  <2B id><2B index><2B Flags><Room name>
  * Answer (Server):
@@ -162,7 +162,7 @@ enum RI_AnswerFlags {
 };
 
 /*
- * USER INFO : send informations about a looged in user.
+ * USER INFO : send information about a logged in user.
  * Request (Client):
  *  <2B id><2B index><2B Flags><User name>
  * Answer (Server):

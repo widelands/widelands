@@ -161,7 +161,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 }
 
 /**
- * Prepend FS root and/or working directory (if neccessary) to make path absolute.
+ * Prepend FS root and/or working directory (if necessary) to make path absolute.
  * \param path A path that might or might not be absolute
  * \return An absolute path
  */
@@ -225,7 +225,7 @@ std::string FileSystem::GetHomedir()
 }
 
 /**
- * Split a string into components seperated by a certain character
+ * Split a string into components separated by a certain character.
  *
  * \param path The path to parse
  * \return a list of path components
@@ -355,7 +355,7 @@ std::string FileSystem::FS_CanonicalizeName
 	bool absolute=false;
 	std::string canonpath;
 
-	//  Is a ":" at the second position? If yes, it is allready absolute (like
+	//  Is a ":" at the second position? If yes, it is already absolute (like
 	//  "C:\...").
 	if (path[1] == ':')
 		absolute=true;

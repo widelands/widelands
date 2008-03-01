@@ -168,7 +168,7 @@ typedef struct
 /* ===========================================================================
      Read a byte from a gz_stream; update next_in and avail_in. Return EOF
    for end of file.
-   IN assertion: the stream s has been sucessfully opened for reading.
+   IN assertion: the stream s has been successfully opened for reading.
 */
 
 
@@ -280,8 +280,8 @@ local int32_t strcmpcasenosensitive_internal (const char* fileName1, const char*
 
 /*
    Compare two filename (fileName1, fileName2).
-   If iCaseSenisivity = 1, comparision is case sensitivity (like strcmp)
-   If iCaseSenisivity = 2, comparision is not case sensitivity (like strcmpi
+   If iCaseSenisivity = 1, comparison is case sensitivity (like strcmp)
+   If iCaseSenisivity = 2, comparison is not case sensitivity (like strcmpi
                                                                 or strcasecmp)
    If iCaseSenisivity = 0, case sensitivity is defaut of your operating system
         (like 1 on Unix, 2 on Windows)
@@ -1706,7 +1706,7 @@ typedef struct linkedlist_datablock_internal_s
 	struct linkedlist_datablock_internal_s* next_datablock;
 	uLong  avail_in_this_block;
 	uLong  filled_in_this_block;
-	uLong  unused; /* for future use and alignement */
+	uLong  unused; /* for future use and aligement */
 	unsigned char data[SIZEDATA_INDATABLOCK];
 } linkedlist_datablock_internal;
 
@@ -1720,21 +1720,21 @@ typedef struct linkedlist_data_s
 typedef struct
 {
 	z_stream stream;            /* zLib stream structure for inflate */
-	int32_t  stream_initialised;    /* 1 is stream is initialised */
+	int32_t stream_initialised; /* 1 is stream is initialised */
 	uInt pos_in_buffered_data;  /* last written byte in buffered_data */
 
 	uLong pos_local_header;     /* offset of the local header of the file
-                                     currenty writing */
-	char * central_header;       /* central header data for the current file */
+                                     currently writing */
+	char * central_header;      /* central header data for the current file */
 	uLong size_centralheader;   /* size of the central header for cur file */
 	uLong flag;                 /* flag of the file currently writing */
 
-	int32_t  method;                /* compression method of file currenty wr.*/
-	int32_t  raw;                   /* 1 for directly writing raw data */
+	int32_t method;             /* compression method of file currently wr.*/
+	int32_t raw;                /* 1 for directly writing raw data */
 	Byte buffered_data[Z_BUFSIZE];/* buffer contain compressed data to be writ*/
 	uLong dosDate;
 	uLong crc32;
-	int32_t  encrypt;
+	int32_t encrypt;
 } curfile_info;
 
 typedef struct

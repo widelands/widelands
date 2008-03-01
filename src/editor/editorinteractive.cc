@@ -135,7 +135,7 @@ void Editor_Interactive::load(std::string const & filename) {
 	ml->load_map_complete(&egbase(), true);
 	egbase().load_graphics(loader_ui);
 
-	// Now update all the visualisations
+	//  update all the visualizations
 	// Player positions
 	std::string text;
 	Widelands::Player_Number const nr_players = map.get_nrplayers();

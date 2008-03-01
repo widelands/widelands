@@ -104,10 +104,7 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
 	log("Game_Server_Connection: Send %i bytes over the line!\n", buf.size());
 }
 
-/*
- * Check if there is incomming data and if so, handle it
- * accordingly
- */
+/// Check if there is incoming data and if so, handle it accordingly.
 void Game_Server_Connection::handle_data() {
 	//  Check if data is available,
 	//  we only handle one packet per call
@@ -184,11 +181,7 @@ void Game_Server_Connection::handle_data() {
 	}
 }
 
-/*
- * Set Room
- *
- * The room has changed, request informations about the room members
- */
+/// The room has changed. Request information about the room members.
 void Game_Server_Connection::set_room(const char* room) {
 	m_room = room;
 	Game_Server_Protocol_Packet_GetRoomInfo & gri =

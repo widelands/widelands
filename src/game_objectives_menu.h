@@ -30,8 +30,7 @@ struct Objective;
 };
 class Interactive_Player;
 
-// The GameObjectives Menu shows the not already
-// fullfilled scenario objectives.
+///  Shows the not already fulfilled objectives.
 struct GameObjectivesMenu : public UI::UniqueWindow {
 	GameObjectivesMenu(Interactive_Player &, UI::UniqueWindow::Registry &);
 	void think();

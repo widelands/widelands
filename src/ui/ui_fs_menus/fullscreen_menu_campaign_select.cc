@@ -128,7 +128,6 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t i)
 		if (sizeof(dif_descriptions) / sizeof(*dif_descriptions) <= dif)
 			dif = 0;
 
-		// Print informations
 		tacampname .set_text(s->get_string(cname,        _("[No value found]")));
 		tadifficulty.set_text(dif_descriptions[dif]);
 		tacampdescr.set_text(s->get_string(cdescription, _("[No value found]")));
@@ -322,7 +321,6 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t const i) {
 		// enable OK button
 		b_ok.set_enabled(true);
 
-		// Print informations
 		tamapname .set_text(s->get_string("name",   _("[No value found]")));
 		taauthor  .set_text(s->get_string("author", _("[No value found]")));
 		tamapdescr.set_text(s->get_string("descr",  _("[No value found]")));

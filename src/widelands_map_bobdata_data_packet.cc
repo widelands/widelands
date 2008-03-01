@@ -476,7 +476,7 @@ throw (_wexception)
 
 				//  m_linknext, linkpprev are handled automatically
 
-				//  Are we currently transfering?
+				//  Are we currently transferring?
 				fw.Unsigned8(bob.m_stack.size() && bob.m_stack[0].transfer);
 
 				fw.Unsigned32(bob.m_actid);

@@ -224,7 +224,9 @@ public:
 
 	LogSink* get_logsink() {return m_logsink;}
 	void set_logsink(LogSink* sink);
-	virtual void log_general_info(Editor_Game_Base*); // Called when a new logsink is set, used to give general informations
+
+	/// Called when a new logsink is set. Used to give general information.
+	virtual void log_general_info(Editor_Game_Base *);
 
 	// saving and loading
 	/**

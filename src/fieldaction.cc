@@ -487,7 +487,7 @@ void FieldActionWindow::add_buttons_attack ()
 					(attackbox,
 					 pic_attack_strong,
 					 &FieldActionWindow::act_attack_strong,
-					 _("Most agressive attack"));
+					 _("Most aggressive attack"));
 				add_button
 					(attackbox,
 					 pic_attack_weak,
@@ -908,7 +908,7 @@ void FieldActionWindow::act_geologist()
 }
 
 /**
- * Here there are a problem: the sender of an event is allways the owner of were is done this even.
+ * Here there are a problem: the sender of an event is always the owner of were is done this even.
  * But for attacks, the owner of an event is the player who start an attack, so is needed to get an
  * extra parameter to the send_player_enemyflagaction, the player number
  *

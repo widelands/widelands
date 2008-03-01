@@ -20,7 +20,7 @@
 This file contains the options windows that are displayed when you click on
 a building, plus the necessary hook function(s) in the class Building itself.
 
-This is seperated out because options windows should _never_ manipulate
+This is separated out because options windows should _never_ manipulate
 buildings directly. Instead, they must send a player command through the Game
 class.
 */

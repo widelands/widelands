@@ -18,7 +18,7 @@
  */
 
 /// \file
-/// This is a place where the user iterface links into the game logic code.
+/// This is a place where the user interface links into the game logic code.
 
 #include "editor/ui_menus/event_allow_building_option_menu.h"
 #include "editor/ui_menus/event_conquer_area_option_menu.h"

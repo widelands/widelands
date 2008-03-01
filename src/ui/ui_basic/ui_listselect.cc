@@ -166,7 +166,7 @@ void BaseListselect::switch_entries(const uint32_t m, const uint32_t n)
  * Sort the listbox alphabetically. make sure that the current selection stays
  * valid (though it might scroll out of visibility).
  * start and end defines the beginning and the end of a subarea to
- * sort, for example you might want to sort directorys for themselves at the
+ * sort, for example you might want to sort directories for themselves at the
  * top of list and files at the bottom.
  */
 void BaseListselect::sort(const uint32_t Begin, uint32_t End)

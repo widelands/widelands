@@ -421,7 +421,7 @@ void MilitarySite::drop_soldier (uint32_t serial)
 MilitarySite::drop_soldier (Game *, int32_t)
 
 Drops a soldier at specific position at its table. SHOULD NOT be called directly.
-Use throught drop_soldier(int32_t)
+Use through drop_soldier(int32_t).
 ===============
  */
 
@@ -447,8 +447,7 @@ void MilitarySite::drop_soldier (Game *g, int32_t nr)
 
 	m_soldiers.pop_back();
 
-	//  call more soldiers if are enought space
-	call_soldiers ();
+	call_soldiers (); //  Call more soldiers if there is enough space.
 
 	//  walk the soldier home safely
 	s.reset_tasks (g);
@@ -518,7 +517,7 @@ void MilitarySite::conquer_area(Game & game) {
 }
 
 MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
-	//  NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLY NEW BUILDING
+	//  NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLEY NEW BUILDING
 	cleanup(g);
 	get_base_flag()->schedule_destroy(g);
 	return

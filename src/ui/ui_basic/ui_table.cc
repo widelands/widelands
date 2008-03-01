@@ -75,9 +75,7 @@ Table<void *>::~Table()
 		delete *it;
 }
 
-/*
- * Add a new colum to this table
- */
+/// Add a new column to this table.
 void Table<void *>::add_column(const std::string & name, const uint32_t width) {
 
 	//  If there would be existing entries, they would not get the new column.
@@ -342,7 +340,7 @@ void Table<void *>::remove(const uint32_t i) {
  * Sort the table alphabetically. make sure that the current selection stays
  * valid (though it might scroll out of visibility).
  * start and end defines the beginning and the end of a subarea to
- * sort, for example you might want to sort directorys for themselves at the
+ * sort, for example you might want to sort directories for themselves at the
  * top of list and files at the bottom.
  */
 void Table<void *>::sort(const uint32_t Begin, uint32_t End) {

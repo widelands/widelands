@@ -39,7 +39,7 @@ class StreamWrite;
  * \todo const correctness
  */
 struct FileSystem {
-	//TODO: this should be unneccessary. Make it so.
+	//  TODO This should be unnecessary. Make it so.
 	enum Type {
 		DIR,
 		ZIP

@@ -25,7 +25,7 @@
 namespace Widelands {
 
 /*
- * Informations about the interactive player. Mostly scrollpos,
+ * Information about the interactive player. Mostly scrollpos,
  * player number and so on
  */
 struct Game_Interactive_Player_Data_Packet : public Game_Data_Packet {

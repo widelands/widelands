@@ -51,7 +51,7 @@ SDL_Surface* LoadImage(const char * const filename);
  * Pictures are only loaded from disk once and thrown out of memory when the
  * graphics system is unloaded, or when \ref flush() is called with the
  * appropriate module flag; the user can request to flush one single picture
- * alone, but this is only used (and usefull) in the editor.
+ * alone, but this is only used (and useful) in the editor.
 */
 
 struct Graphic {

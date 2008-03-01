@@ -114,7 +114,7 @@ throw (_wexception)
 			fw.Unsigned8(1);
 			fw.Unsigned8(flag->owner().get_player_number());
 			fw.Unsigned32(os->register_object(flag));
-		} else //  no existance, no owner
+		} else //  no existence, no owner
 			fw.Unsigned8(0);
 
 	fw.Write(fs, "binary/flag");

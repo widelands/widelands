@@ -98,7 +98,7 @@ GameTips::~GameTips() {
 	stop();
 }
 
-// conver 2-char hex string into uint32_t
+/// convert 2-char hex string into uint32_t
 uint32_t GameTips::colorvalue_from_hex(char const c1, char const c2) {
 	uint32_t ret = 0;
 	if (c1 >= '0' && c1 <= '9')

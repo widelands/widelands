@@ -50,7 +50,7 @@ struct Interactive_Player : public Interactive_Base {
 		UI::UniqueWindow::Registry readme;
 		UI::UniqueWindow::Registry keys;
 		UI::UniqueWindow::Registry authors;
-		UI::UniqueWindow::Registry licence;
+		UI::UniqueWindow::Registry license;
 		UI::UniqueWindow::Registry sound_options;
 
 		UI::UniqueWindow::Registry building_stats;

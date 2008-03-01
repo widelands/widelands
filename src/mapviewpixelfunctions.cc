@@ -40,13 +40,13 @@ float MapviewPixelFunctions::calc_brightness
 
 // find normal
 // more guessed than thought about
-// but hey, results say i'm good at guessing :)
-// perhaps i'll paint an explanation for this someday
+// but hey, results say I am good at guessing :)
+// perhaps I will paint an explanation for this someday
 // florian
 #define COS60 0.5
 #define SIN60 0.86603
 #ifdef _MSC_VER
-// don't warn me about fuckin float conversion i know what i'm doing
+//  Do not warn me about fuckin float conversion. I know what I am doing.
 #pragma warning(disable:4244)
 #endif
 	normal = Vector(0, 0, TRIANGLE_WIDTH);

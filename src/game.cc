@@ -285,7 +285,7 @@ bool Game::run_single_player ()
 	set_iabase(new Interactive_Player(*this, 0));
 
 	loaderUI.step(_("Loading a map"));
-	// Now first, completly load the map
+	//  Now first, completely load the map.
 	m_maploader->load_map_complete(this, code==2); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
@@ -353,7 +353,7 @@ bool Game::run_multi_player (NetGame* ng)
 
 	set_iabase(new Interactive_Player(*this, 0)); //  FIXME memory leak???
 
-	// Now first, completly load the map
+	//  Now first, completely load the map.
 	loaderUI.step(_("Loading a map"));
 	m_maploader->load_map_complete(this, false); // if code==2 is a scenario
 	delete m_maploader;
@@ -853,7 +853,7 @@ void Game::sample_statistics()
 
 	std::vector< uint32_t > nr_production_sites; nr_production_sites.resize(map().get_nrplayers());
 
-	// We walk the map, to gain all needed informations
+	//  We walk the map, to gain all needed information.
 	Map const &  themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {

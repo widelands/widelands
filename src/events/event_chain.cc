@@ -55,7 +55,7 @@ EventChain::State EventChain::run(Game* g) {
 			m_trigconditional->reset_triggers(*g);
 			m_state = INIT;
 		} else {
-			//  This eventchain is completly done.
+			//  This eventchain is completely done.
 			m_state = DONE;
 		}
 	} else {

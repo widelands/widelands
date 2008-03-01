@@ -34,7 +34,7 @@ struct Textarea;
 
 class Main_Menu_Map_Options
 
-this is the Main Options Menu. Here, informations
+this is the Main Options Menu. Here, information
 about the current map are displayed and you can change
 author, name and description
 

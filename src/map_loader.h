@@ -32,9 +32,9 @@ class Editor_Game_Base;
 class Map_Loader
 
 This class loads a map from a file. It firsts only loads
-small junks of informations like size, nr of players for the
+small chunks of information like size, nr of players for the
 map select dialog. For this loading function the same class Map* can be reused.
-Then, when the player has a map selected, the Map is completly filled with
+Then, when the player has a map selected, the Map is completely filled with
 objects and information. When now the player selects another map, this class Map*
 must be deleted, a new one must be selected
 

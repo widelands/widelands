@@ -796,8 +796,8 @@ void Player::lose_immovable(PlayerImmovable* imm)
 		}
 
 		throw wexception
-			("Interactive_Player::loose_immovable(): A building shoud be removed "
-			 "at the location (%i, %i), but nothing is known about this building!",
+			("Interactive_Player::loose_immovable(): A building should be "
+			 "removed at (%i, %i), but nothing is known about this building!",
 			 building_position.x, building_position.y);
 	}
 }

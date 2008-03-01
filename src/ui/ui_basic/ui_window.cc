@@ -262,7 +262,7 @@ void Window::draw_border(RenderTarget* dst)
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
-			//  rigt bar
+			//  right bar
 			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst->blitrect

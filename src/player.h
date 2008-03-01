@@ -155,7 +155,7 @@ struct Player {
 		 * knownledge about resources. A node is considered continuously seen by a
 		 * player as long as it is within vision range of any person of that
 		 * player. If something on the node changes, the game engine will inform
-		 * that player about it. But resource knowledge is not continous. It is
+		 * that player about it. But resource knowledge is not continuous. It is
 		 * instant (given at the time when the geological survey completes) and
 		 * immediately starts aging. Mining implies geological surveying, so a
 		 * player will be informed about resource changes that he causes himself

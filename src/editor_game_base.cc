@@ -600,7 +600,7 @@ Editor_Game_Base::warp_constructionsite
 
 Create a building site at the given x/y location for the given building type.
 
-if oldi != -1 this is a constructionsite comming from an enhancing action
+if oldi != -1 this is a constructionsite coming from an enhancing action
 ===============
 */
 Building * Editor_Game_Base::warp_constructionsite
