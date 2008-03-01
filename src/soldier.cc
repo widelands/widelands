@@ -48,7 +48,6 @@ struct IdleSoldierSupply : public Supply {
 	void set_economy(Economy* e);
 
 	virtual PlayerImmovable* get_position(Game* g);
-	virtual int32_t get_amount(int32_t ware) const;
 	virtual bool is_active() const throw ();
 
 	virtual WareInstance & launch_item(Game *, int32_t ware)
@@ -121,21 +120,6 @@ Return the soldier's position.
 PlayerImmovable* IdleSoldierSupply::get_position(Game* g)
 {
 	return m_soldier->get_location(g);
-}
-
-
-/*
-===============
-IdleSoldierSupply::get_amount
-
-It's just the one soldier.
-===============
-*/
-int32_t IdleSoldierSupply::get_amount(const int32_t ware) const {
-	if (ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()))
-		return 1;
-
-	return 0;
 }
 
 

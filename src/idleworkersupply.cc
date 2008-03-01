@@ -73,18 +73,6 @@ PlayerImmovable* IdleWorkerSupply::get_position(Game* g)
 }
 
 
-/**
- * It's just the one worker.
- */
-int32_t IdleWorkerSupply::get_amount(const int32_t ware) const
-{
-	if (ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()))
-		return 1;
-
-	return 0;
-}
-
-
 WareInstance & IdleWorkerSupply::launch_item(Game *, int32_t)
 {
 	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");

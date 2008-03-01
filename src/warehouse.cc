@@ -215,17 +215,6 @@ PlayerImmovable* WarehouseSupply::get_position(Game *) {return m_warehouse;}
 
 /*
 ===============
-WarehouseSupply::get_amount
-
-Return our stock of the given ware.
-===============
-*/
-int32_t WarehouseSupply::get_amount(const int32_t ware) const
-{return m_wares.stock(ware);}
-
-
-/*
-===============
 WarehouseSupply::is_active
 
 Warehouse supplies are never active.

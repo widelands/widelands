@@ -429,7 +429,6 @@ private:
  */
 struct Supply : public Trackable {
 	virtual PlayerImmovable* get_position(Game* g) = 0;
-	virtual int32_t get_amount(const int32_t ware) const = 0;
 	virtual bool is_active() const throw () = 0;
 
 	virtual WareInstance & launch_item(Game *, int32_t ware) = 0;

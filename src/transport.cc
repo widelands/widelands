@@ -73,7 +73,6 @@ public:
 
 public: // implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
-	virtual int32_t get_amount(int32_t ware) const;
 	virtual bool is_active() const throw ();
 
 	virtual WareInstance & launch_item(Game * g, int32_t ware);
@@ -134,11 +133,6 @@ PlayerImmovable* IdleWareSupply::get_position(Game* g)
 		return worker->get_location(g);
 
 	return 0;
-}
-
-int32_t IdleWareSupply::get_amount(const int32_t ware) const
-{
-	return (ware == m_ware->descr_index()) ? 1 : 0;
 }
 
 bool IdleWareSupply::is_active()  const throw ()
