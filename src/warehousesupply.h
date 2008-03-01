@@ -50,12 +50,10 @@ struct WarehouseSupply : public Supply {
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual bool is_active() const throw ();
 
-	virtual WareInstance & launch_item(Game *, int32_t ware);
-	virtual Worker* launch_worker(Game* g, int32_t ware);
+	virtual uint32_t nr_supplies(Game*, const Request*);
+	virtual WareInstance & launch_item(Game *, const Request*);
+	virtual Worker* launch_worker(Game* g, const Request*);
 
-	virtual Soldier* launch_soldier(Game* g, int32_t ware, const Requirements& req);
-	virtual int32_t get_passing_requirements(Game* g, int32_t ware, const Requirements& r);
-	virtual void mark_as_used (Game* g, int32_t ware, const Requirements& r);
 private:
 	Economy   * m_economy;
 	WareList    m_wares;

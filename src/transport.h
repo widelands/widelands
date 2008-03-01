@@ -431,14 +431,29 @@ struct Supply : public Trackable {
 	virtual PlayerImmovable* get_position(Game* g) = 0;
 	virtual bool is_active() const throw () = 0;
 
-	virtual WareInstance & launch_item(Game *, int32_t ware) = 0;
-	virtual Worker* launch_worker(Game* g, int32_t ware) = 0;
+	/**
+	 * \return the number of items or workers that can be launched right
+	 * now for the thing requested by the given request
+	 */
+	virtual uint32_t nr_supplies(Game*, const Request*) = 0;
 
-	// This is only for Soldier Requests correct use !
-	virtual Soldier* launch_soldier(Game* g, int32_t ware, const Requirements& req) = 0;
-	virtual int32_t get_passing_requirements(Game* g, int32_t ware, const Requirements& r) = 0;
-	virtual void mark_as_used (Game* g, int32_t ware, const Requirements& r) = 0;
+	/**
+	 * Prepare an item to satisfy the given request. Note that the caller
+	 * must assign a transfer to the launched item.
+	 *
+	 * \throw wexception if the request is not an item request or no such
+	 * item is available in the supply.
+	 */
+	virtual WareInstance & launch_item(Game*, const Request*) = 0;
 
+	/**
+	 * Prepare a worker to satisfy the given request. Note that the caller
+	 * must assign a transfer to the launched item.
+	 *
+	 * \throw wexception if the request is not a worker request or no such
+	 * worker is available in the supply.
+	 */
+	virtual Worker* launch_worker(Game* g, const Request*) = 0;
 };
 
 
@@ -553,18 +568,9 @@ struct Economy {
 	bool have_request(Request* req);
 	void remove_request(Request* req);
 
-	void       add_ware_supply(Ware_Index, Supply *);
-	bool      have_ware_supply(Ware_Index, Supply *);
-	void    remove_ware_supply(Ware_Index, Supply *);
-
-	void     add_worker_supply(Ware_Index, Supply *);
-	bool    have_worker_supply(Ware_Index, Supply *);
-	void  remove_worker_supply(Ware_Index, Supply *);
-
-// Soldier stuff
-	void    add_soldier_supply(Ware_Index, Supply *);
-	bool   have_soldier_supply(Ware_Index, Supply *);
-	void remove_soldier_supply(Ware_Index, Supply *);
+	void add_supply(Supply *);
+	bool have_supply(Supply *);
+	void remove_supply(Supply *);
 
 	bool should_run_balance_check(int32_t const gametime) {
 		return m_request_timer && (gametime == m_request_timer_time);
@@ -591,12 +597,7 @@ private:
 
 	void start_request_timer(int32_t delta = 200);
 
-	Supply * find_best_supply
-		(Game                    *,
-		 Request                 *,
-		 Ware_Index              & ware,
-		 int32_t                 & pcost,
-		 std::vector<SupplyList> &);
+	Supply * find_best_supply(Game*, Request*, int32_t * pcost);
 	void process_requests(Game* g, RSPairStruct* s);
 	void create_requested_workers(Game* g);
 
@@ -613,9 +614,8 @@ private:
 	WareList m_workers;   //  virtual storage with all wares in this Economy
 	std::vector<Warehouse *> m_warehouses;
 
-	RequestList              m_requests; // requests
-	std::vector<SupplyList>  m_ware_supplies; // supplies by ware id
-	std::vector<SupplyList>  m_worker_supplies; // supplies by ware id
+	RequestList m_requests; // requests
+	SupplyList m_supplies;
 
 	bool m_request_timer; //  true if we started the request timer
 	int32_t                      m_request_timer_time;

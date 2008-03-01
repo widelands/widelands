@@ -90,16 +90,14 @@ public:
 
 	virtual bool fetch_from_flag(Game* g);
 
-	void mark_as_used (Game *, Ware_Index, const Requirements&);
-	Soldier* launch_soldier(Game *, Ware_Index, const Requirements&);
-	Worker* launch_worker(Game* g, int32_t ware);
+	uint32_t count_workers(Game* g, Ware_Index, const Requirements&);
+	Worker* launch_worker(Game* g, Ware_Index, const Requirements&);
 	void incorporate_worker(Game *g, Worker *w);
 
 	WareInstance & launch_item(Game *, Ware_Index);
 	void do_launch_item(Game *, WareInstance &);
 	void incorporate_item(Game* g, WareInstance* item);
 
-	int32_t get_soldiers_passing (Game *, Ware_Index, const Requirements&);
 	bool can_create_worker(Game *, Ware_Index);
 	void     create_worker(Game *, Ware_Index);
 

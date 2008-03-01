@@ -333,7 +333,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 						 0,
 						 MilitarySite::request_soldier_callback,
 						 &militarysite,
-						 Request::SOLDIER);
+						 Request::WORKER);
 					req.Read(&fr, egbase, ol);
 					militarysite.m_soldier_requests[i] = &req;
 				}
@@ -487,7 +487,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 						 0,
 						 TrainingSite::request_soldier_callback,
 						 &trainingsite,
-						 Request::SOLDIER);
+						 Request::WORKER);
 					req.Read(&fr, egbase, ol);
 					trainingsite.m_soldier_requests[i] = &req;
 				}

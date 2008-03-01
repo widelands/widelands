@@ -202,31 +202,26 @@ void AttackController::launchSoldiersOfMilitarySite
 }
 
 bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers) {
-	if (!soldier->is_marked()) {
-		soldier->set_attack_ctrl(this);
-		soldier->mark(true);
-		soldier->reset_tasks(dynamic_cast<Game*>(&egbase()));
+	soldier->set_attack_ctrl(this);
+	soldier->reset_tasks(dynamic_cast<Game*>(&egbase()));
 
-		BattleSoldier bs = {
-			soldier,
-			militarySite,
-			Coords::Null(),
-			attackers,
-			false,
-			false,
-		};
+	BattleSoldier bs = {
+		soldier,
+		militarySite,
+		Coords::Null(),
+		attackers,
+		false,
+		false,
+	};
 
-		calcBattleGround(&bs, totallyLaunched);
+	calcBattleGround(&bs, totallyLaunched);
 
-		soldier->startTaskMoveToBattle
-			(dynamic_cast<Game *>(&egbase()), flag, bs.battleGround);
+	soldier->startTaskMoveToBattle
+		(dynamic_cast<Game *>(&egbase()), flag, bs.battleGround);
 
-		involvedSoldiers.push_back(bs);
-		++totallyLaunched;
-		return true;
-	}
-
-	return false;
+	involvedSoldiers.push_back(bs);
+	++totallyLaunched;
+	return true;
 }
 
 void AttackController::moveToReached(Soldier* soldier)
@@ -254,16 +249,6 @@ void AttackController::soldierWon(Soldier* soldier)
 		startBattle(soldier, true);
 		return;
 	}
-
-	//if the last remaing was an attacker, check for
-	//remaining soldiers in the building
-	if (involvedSoldiers[idx].attacker)
-		if (upcast(MilitarySite, ms, flag->get_building()))
-			//  There are defending soldiers left in the building.
-			if (const uint32_t n = ms->nr_not_marked_soldiers()) {
-				launchSoldiersOfMilitarySite(ms, n, false);
-				return;
-			}
 
 	log("finishing battle...\n");
 

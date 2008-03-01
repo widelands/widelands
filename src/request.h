@@ -61,8 +61,7 @@ struct Request : public Trackable {
 
 	enum Type {
 		WARE    = 0,
-		WORKER  = 1,
-		SOLDIER = 2
+		WORKER  = 1
 	};
 
 	Request
@@ -91,7 +90,7 @@ struct Request : public Trackable {
 
 	void set_last_request_time(int32_t time) {m_last_request_time = time;}
 
-	void start_transfer(Game *g, Supply* supp, int32_t ware);
+	void start_transfer(Game *g, Supply* supp);
 
 
 	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
@@ -102,6 +101,9 @@ struct Request : public Trackable {
 	void transfer_finish(Game* g, Transfer* t);
 	void transfer_fail(Game* g, Transfer* t);
 
+	void set_requirements (const Requirements& r) {m_requirements = r;}
+	const Requirements& get_requirements () const {return m_requirements;}
+
 private:
 	int32_t get_base_required_time(Editor_Game_Base* g, int32_t nr);
 public:
@@ -109,11 +111,6 @@ public:
 private:
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer* t);
-
-public:
-	void set_requirements (const Requirements& r) {m_requirements = r;}
-private:
-	const Requirements& get_requirements () {return m_requirements;}
 
 	typedef std::vector<Transfer*> TransferList;
 

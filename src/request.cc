@@ -109,11 +109,11 @@ void Request::Read
 		const uint16_t nr_transfers = fr->Unsigned16();
 		for (uint16_t i = 0; i < nr_transfers; ++i) {
 			uint8_t const what_is = fr->Unsigned8();
-			if (what_is != WARE and what_is != WORKER and what_is != SOLDIER)
+			if (what_is != WARE and what_is != WORKER and what_is != 2)
 				throw wexception
 					("Request::Read: while reading transfer %u: type is %u but "
 					 "must be one of {%u (WARE), %u (WORKER), %u (SOLDIER)}",
-					 i, what_is, WARE, WORKER, SOLDIER);
+					 i, what_is, WARE, WORKER, 2);
 			uint32_t const reg = fr->Unsigned32();
 			if (upcast(Game, game, egbase)) {
 				if (not mol->is_object_known(reg))
@@ -131,16 +131,10 @@ void Request::Read
 					 this,
 					 &mol->get<WareInstance>(reg))
 					:
-					what_is == WORKER ?
 					new Transfer
 					(game,
 					 this,
-					 &mol->get<Worker>(reg))
-					:
-					new Transfer
-					(game,
-					 this,
-					 &mol->get<Soldier>(reg));
+					 &mol->get<Worker>(reg));
 				trans->set_idle(fr->Unsigned8());
 				m_transfers.push_back(trans);
 
@@ -385,43 +379,31 @@ void Request::set_required_interval(int32_t interval)
 }
 
 /**
- * Begin transfer of the requested ware from the given warehouse.
+ * Begin transfer of the requested ware from the given supply.
  * This function does not take ownership of route, i.e. the caller is
  * responsible for its deletion.
 */
-void Request::start_transfer(Game* g, Supply* supp, int32_t ware)
+void Request::start_transfer(Game* g, Supply* supp)
 {
 	assert(is_open());
 	Transfer* t = 0;
 	try
 	{
-		if (get_type()==SOLDIER)
+		if (get_type() == WORKER)
 		{
-			// Begin the transfer of a soldier.
-			// launch_soldier() creates the worker, set_job_request() makes sure the
-			// worker starts walking
-			log("Request: start soldier transfer for %i\n", get_index().value());
+			// Begin the transfer of a soldier or worker.
+			// launch_worker() creates or starts the worker
+			log("Request: start soldier or worker transfer for %i\n", get_index().value());
 
-			Soldier* s = supp->launch_soldier(g, ware, get_requirements());
+			Worker* s = supp->launch_worker(g, this);
 			t = new Transfer(g, this, s);
-		}
-		else if (get_type()==WORKER)
-		{
-			// Begin the transfer of a worker.
-			// launch_worker() creates the worker, set_job_request() makes sure the
-			// worker starts walking
-			log("Request: start worker transfer for %i\n", get_index().value());
-
-			Worker* w = supp->launch_worker(g, ware);
-
-			t = new Transfer(g, this, w);
 		}
 		else
 		{
 			// Begin the transfer of an item. The item itself is passive.
 			// launch_item() ensures the WareInstance is transported out of the warehouse
 			// Once it's on the flag, the flag code will decide what to do with it.
-			WareInstance & item = supp->launch_item(g, ware);
+			WareInstance & item = supp->launch_item(g, this);
 
 			t = new Transfer(g, this, &item);
 		}

@@ -41,181 +41,6 @@
 
 namespace Widelands {
 
-struct IdleSoldierSupply : public Supply {
-	IdleSoldierSupply(Soldier * const);
-	~IdleSoldierSupply();
-
-	void set_economy(Economy* e);
-
-	virtual PlayerImmovable* get_position(Game* g);
-	virtual bool is_active() const throw ();
-
-	virtual WareInstance & launch_item(Game *, int32_t ware)
-		__attribute__ ((noreturn));
-	virtual Worker* launch_worker(Game* g, int32_t ware);
-
-	virtual Soldier* launch_soldier(Game* g, int32_t ware, const Requirements& req);
-	virtual int32_t get_passing_requirements(Game* g, int32_t ware, const Requirements& r);
-	virtual void mark_as_used (Game* g, int32_t ware, const Requirements& r);
-private:
-	Soldier * m_soldier;
-	Economy * m_economy;
-};
-
-
-/*
-===============
-IdleSoldierSupply::IdleSoldierSupply
-
-Automatically register with the soldier's economy.
-===============
-*/
-IdleSoldierSupply::IdleSoldierSupply(Soldier * const s) :
-m_soldier(s), m_economy(0)
-{set_economy(s->get_economy());}
-
-
-/*
-===============
-IdleSoldierSupply::~IdleSoldierSupply
-
-Automatically unregister from economy.
-===============
-*/
-IdleSoldierSupply::~IdleSoldierSupply()
-{
-	set_economy(0);
-}
-
-
-/*
-===============
-IdleSoldierSupply::set_economy
-
-Add/remove this supply from the Economy as appropriate.
-===============
-*/
-void IdleSoldierSupply::set_economy(Economy* e)
-{
-	if (m_economy == e)
-		return;
-
-	if (m_economy)
-		m_economy->remove_soldier_supply(m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()), this);
-
-	m_economy = e;
-
-	if (m_economy)
-		m_economy->add_soldier_supply(m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()), this);
-}
-
-
-/*
-===============
-IdleSoldierSupply::get_position
-
-Return the soldier's position.
-===============
-*/
-PlayerImmovable* IdleSoldierSupply::get_position(Game* g)
-{
-	return m_soldier->get_location(g);
-}
-
-
-/*
-===============
-IdleSoldierSupply::is_active
-
-Idle soldiers are always active supplies, because they need to get into a
-Warehouse ASAP.
-===============
-*/
-bool IdleSoldierSupply::is_active() const throw () {return true;}
-
-
-/*
-===============
-IdleSoldierSupply::launch_item
-===============
-*/
-WareInstance & IdleSoldierSupply::launch_item(Game *, int32_t)
-{throw wexception("IdleSoldierSupply::launch_item() makes no sense.");}
-
-
-/*
-===============
-IdleSodlierSupply::launch_worker
-===============
-*/
-Worker* IdleSoldierSupply::launch_worker(Game* g, int32_t ware)
-{
-	log ("IdleSoldierSupply::launch_worker() Warning something can go wrong around here.\n");
-
-	return launch_soldier(g, ware, Requirements());
-}
-
-
-/*
-===============
-IdleSodlierSupply::launch_soldier
-
-No need to explicitly launch the soldier.
-===============
-*/
-Soldier * IdleSoldierSupply::launch_soldier
-	(Game *, int32_t ware, const Requirements & req)
-{
-	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
-
-	if (req.check(m_soldier)) {
-		// Ensures that this soldier is used now
-		m_soldier->mark (false);
-		return m_soldier;
-	}
-	else
-		throw wexception ("IdleSoldierSupply::launch_soldier Fails. Requirements aren't accomplished.");
-}
-
-/*
-===============
-IdleSodlierSupply::mark_as_used
-===============
-*/
-void IdleSoldierSupply::mark_as_used(Game *, int32_t ware, const Requirements & req) {
-	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
-
-	if (req.check(m_soldier)) {
-		// Ensures that this soldier has a request now
-		m_soldier->mark (true);
-	}
-	else
-		throw wexception ("IdleSoldierSupply::launch_soldier Fails. Requirements aren't accomplished.");
-}
-
-
-/*
-===============
-IdleSodlierSupply::get_passing_requirements
-
-Return the number of soldiers that would satisfy the given requirement.
-The soldier isn't actually launched or otherwise affected.
-===============
-*/
-int32_t IdleSoldierSupply::get_passing_requirements
-(Game *, int32_t ware, const Requirements & req)
-{
-	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
-
-	// Oops we find a marked soldied (in use)
-	if (m_soldier->is_marked())
-		return 0;
-
-	return req.check(m_soldier) ? 1 : 0;
-}
-
-
-
 
 /*
 ==============================================================
@@ -418,8 +243,6 @@ void Soldier::init(Editor_Game_Base* gg) {
 	}
 	m_hp_current=m_hp_max;
 
-	m_marked = false;
-
 	Worker::init(gg);
 }
 
@@ -598,24 +421,6 @@ void Soldier::start_animation
 		start_task_idle (game, descr().get_rand_anim(animname), time);
 }
 
-/**
-===============
-Soldier::start_task_gowarehouse
-
-Get the soldier to move to the nearest warehouse.
-The soldier is added to the list of usable wares, so he may be reassigned to
-a new task immediately.
-===============
-*/
-void Soldier::start_task_gowarehouse() {
-	assert(!m_supply);
-
-	push_task(taskGowarehouse);
-
-	m_supply =
-		reinterpret_cast<IdleWorkerSupply *>(new IdleSoldierSupply(this));
-}
-
 Bob::Task Soldier::taskMoveToBattle = {
 	"moveToBattle",
 	static_cast<Bob::Ptr>(&Soldier::moveToBattleUpdate),
@@ -665,7 +470,6 @@ void Soldier::moveToBattleUpdate(Game * game, State* state) {
 		{
 			molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
 			set_signal("fail");
-			mark(false);
 			pop_task();
 			return;
 		}
@@ -719,7 +523,6 @@ void Soldier::moveHomeUpdate(Game* g, State* state) {
 	}
 	else {
 		start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
-		mark (false);              // can be healed now
 	}
 }
 

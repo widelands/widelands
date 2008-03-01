@@ -20,6 +20,8 @@
 #include "warehouse.h"
 #include "warehousesupply.h"
 
+#include <algorithm>
+
 #include "carrier.h"
 #include "editor_game_base.h"
 #include "game.h"
@@ -89,17 +91,14 @@ void WarehouseSupply::set_economy(Economy* e)
 		return;
 
 	if (m_economy) {
+		m_economy->remove_supply(this);
 		for (Ware_Index::value_t i = 0; i < m_wares  .get_nrwareids(); ++i) {
-			if (m_wares.stock(i)) {
+			if (m_wares.stock(i))
 				m_economy->remove_wares(i, m_wares.stock(i));
-				m_economy->remove_ware_supply(i, this);
-			}
 		}
 		for (Ware_Index::value_t i = 0; i < m_workers.get_nrwareids(); ++i) {
-			if (m_workers.stock(i)) {
+			if (m_workers.stock(i))
 				m_economy->remove_workers(i, m_workers.stock(i));
-				m_economy->remove_worker_supply(i, this);
-			}
 		}
 	}
 
@@ -107,17 +106,14 @@ void WarehouseSupply::set_economy(Economy* e)
 
 	if (m_economy) {
 		for (Ware_Index::value_t i = 0; i < m_wares.get_nrwareids(); ++i) {
-			if (m_wares.stock(i)) {
+			if (m_wares.stock(i))
 				m_economy->add_wares(i, m_wares.stock(i));
-				m_economy->add_ware_supply(i, this);
-			}
 		}
 		for (Ware_Index::value_t i = 0; i < m_workers.get_nrwareids(); ++i) {
-			if (m_workers.stock(i)) {
+			if (m_workers.stock(i))
 				m_economy->add_workers(i, m_workers.stock(i));
-				m_economy->add_worker_supply(i, this);
-			}
 		}
+		m_economy->add_supply(this);
 	}
 }
 
@@ -133,9 +129,6 @@ void WarehouseSupply::add_wares     (Ware_Index const id, uint32_t const count)
 {
 	if (!count)
 		return;
-
-	if (!m_wares.stock(id))
-		m_economy->add_ware_supply(id, this);
 
 	m_economy->add_wares(id, count);
 	m_wares.add(id, count);
@@ -156,9 +149,6 @@ void WarehouseSupply::remove_wares  (Ware_Index const id, uint32_t const count)
 
 	m_wares.remove(id, count);
 	m_economy->remove_wares(id, count);
-
-	if (!m_wares.stock(id))
-		m_economy->remove_ware_supply(id, this);
 }
 
 /*
@@ -173,9 +163,6 @@ void WarehouseSupply::add_workers   (Ware_Index const id, uint32_t const count)
 {
 	if (!count)
 		return;
-
-	if (!m_workers.stock(id))
-		m_economy->add_worker_supply(id, this);
 
 	m_economy->add_workers(id, count);
 	m_workers.add(id, count);
@@ -198,9 +185,6 @@ void WarehouseSupply::remove_workers(Ware_Index const id, uint32_t const count)
 
 	m_workers.remove(id, count);
 	m_economy->remove_workers(id, count);
-
-	if (!m_workers.stock(id))
-		m_economy->remove_worker_supply(id, this);
 }
 
 /*
@@ -223,15 +207,27 @@ Warehouse supplies are never active.
 bool WarehouseSupply::is_active() const throw () {return false;}
 
 
+uint32_t WarehouseSupply::nr_supplies(Game* game, const Request* req) {
+	if (req->get_type() == Request::WARE) {
+		return m_wares.stock(req->get_index());
+	} else {
+		return m_warehouse->count_workers(game, req->get_index(), req->get_requirements());
+	}
+}
+
+
 /*
 ===============
 Launch a ware as item.
 ===============
 */
-WareInstance & WarehouseSupply::launch_item(Game * game, int32_t ware) {
-	assert(m_wares.stock(ware));
+WareInstance & WarehouseSupply::launch_item(Game * game, const Request* req) {
+	if (req->get_type() != Request::WARE)
+		throw wexception("WarehouseSupply::launch_item: called for non-ware request");
+	if (!m_wares.stock(req->get_index()))
+		throw wexception("WarehouseSupply::launch_item: called for non-existing ware");
 
-	return m_warehouse->launch_item(game, ware);
+	return m_warehouse->launch_item(game, req->get_index());
 }
 
 
@@ -242,52 +238,10 @@ WarehouseSupply::launch_worker
 Launch a ware as worker.
 ===============
 */
-Worker* WarehouseSupply::launch_worker(Game* g, int32_t ware)
+Worker* WarehouseSupply::launch_worker(Game* g, const Request* req)
 {
-	assert(m_workers.stock(ware));
-
-	return m_warehouse->launch_worker(g, ware);
+	return m_warehouse->launch_worker(g, req->get_index(), req->get_requirements());
 }
-
-
-/*
-===============
-WarehouseSupply::launch_soldier
-
-Launch a ware as soldier.
-===============
-*/
-Soldier* WarehouseSupply::launch_soldier(Game* g, int32_t ware, const Requirements& req)
-{
-	assert(m_workers.stock(ware));
-
-	return m_warehouse->launch_soldier(g, ware, req);
-}
-
-/*
-===============
-WarehouseSupply::get_passing_requeriments
-
-Launch a ware as soldier.
-===============
-*/
-int32_t WarehouseSupply::get_passing_requirements(Game* g, int32_t ware, const Requirements& req)
-{
-	assert(m_workers.stock(ware));
-
-	return m_warehouse->get_soldiers_passing (g, ware, req);
-}
-
-/*
-===============
-WarehouseSupply::mark_as_used
-===============
-*/
-void WarehouseSupply::mark_as_used (Game* g, int32_t ware, const Requirements& r)
-{
-	m_warehouse->mark_as_used (g, ware, r);
-}
-
 
 
 /*
@@ -658,9 +612,44 @@ bool Warehouse::fetch_from_flag(Game* g)
 	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
 		insert_workers(carrierid, 1);
 
-	launch_worker(g, carrierid)->start_task_fetchfromflag();
+	launch_worker(g, carrierid, Requirements())->start_task_fetchfromflag();
 
 	return true;
+}
+
+
+/**
+ * \return the number of workers that we can launch satisfying the given
+ * requirements.
+ */
+uint32_t Warehouse::count_workers(Game* g, Ware_Index ware, const Requirements& req) {
+	Tribe_Descr const & tribe = owner().tribe();
+	std::vector<Map_Object_Descr*> subs;
+	uint32_t sum = 0;
+
+	do {
+		subs.push_back(tribe.get_worker_descr(ware));
+		sum += m_supply->stock_workers(ware);
+		ware = tribe.get_worker_descr(ware)->becomes();
+	} while(ware != Ware_Index::Null());
+
+	// NOTE: This code lies about the tAttributes of non-instantiated workers.
+
+	std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
+		m_incorporated_workers.end();
+	for
+		(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
+		 it != incorporated_workers_end;
+		 ++it) {
+		Map_Object* w = it->get(g);
+		if (w && std::find(subs.begin(), subs.end(), &w->descr()) != subs.end()) {
+			// This is one of the workers in our sum
+			if (!req.check(w))
+				sum--;
+		}
+	}
+
+	return sum;
 }
 
 
@@ -671,132 +660,52 @@ Warehouse::launch_worker
 Start a worker of a given type. The worker will be assigned a job by the caller.
 ===============
 */
-Worker * Warehouse::launch_worker(Game * game, int32_t const ware) {
-	assert(m_supply->stock_workers(ware));
+Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requirements& req) {
+	Tribe_Descr const & tribe = owner().tribe();
 
-	Worker* worker;
+	do {
+		if (m_supply->stock_workers(ware)) {
+			uint32_t unincorporated = m_supply->stock_workers(ware);
+			const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(ware);
 
-	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(ware);
+			//  look if we got one of those in stock
+			const std::string & workername = workerdescr.name();
+			std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
+				m_incorporated_workers.end();
+			for
+				(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
+				it != incorporated_workers_end;
+				++it) {
+				if (upcast(Worker, worker, it->get(game))) {
+					if (worker->name() == workername) {
+						unincorporated--;
 
-	//  look if we got one of those in stock
-	const std::string & workername = workerdescr.name();
-	std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
-		m_incorporated_workers.end();
-	for
-		(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();;
-		 ++it)
-		if (it == m_incorporated_workers.end()) {
-			// None found, create a new one (if available)
-			worker = &workerdescr.create(*game, owner(), *this, m_position);
-			break;
-		} else {
-			worker = dynamic_cast<Worker *>(it->get(game));
-			if (worker->name() == workername) {
-				//  one found, make him available
-				worker->reset_tasks(game);  //  forget everything you did
-				worker->set_location(this); //  back in a economy
-				m_incorporated_workers.erase(it);
-				break;
+						if (req.check(worker)) {
+							worker->reset_tasks(game);  //  forget everything you did
+							worker->set_location(this); //  back in a economy
+							m_incorporated_workers.erase(it);
+
+							m_supply->remove_workers(ware, 1);
+							return worker;
+						}
+					}
+				}
+			}
+
+			assert(unincorporated <= m_supply->stock_workers(ware));
+
+			if (unincorporated) {
+				// Create a new one
+				// NOTE: This code lies about the tAttributes of the new worker
+				m_supply->remove_workers(ware, 1);
+				return &workerdescr.create(*game, owner(), *this, m_position);
 			}
 		}
 
-	m_supply->remove_workers(ware, 1);
+		ware = tribe.get_worker_descr(ware)->becomes();
+	} while(ware != Ware_Index::Null());
 
-
-	return worker;
-}
-
-
-/*
-===============
-Warehouse::launch_soldier
-
-Start a soldier or certain level. The soldier will be assigned a job by the caller.
-===============
-*/
-Soldier* Warehouse::launch_soldier
-	(Game * g, Ware_Index const ware, const Requirements& r)
-{
-	assert(m_supply->stock_workers(ware));
-
-	Soldier* soldier;
-
-	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(ware);
-	//  look if we got one of those in stock
-	const std::string & workername = workerdescr.name();
-	std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
-	for (; i != m_incorporated_workers.end(); ++i)
-	{
-		if (static_cast<Worker*>(i->get(g))->name()==workername)
-		{
-			soldier = static_cast<Soldier*>(i->get(g));
-			if (r.check(soldier))
-				break;
-			else
-				continue;
-		}
-	}
-
-	soldier = 0;
-	if (i == m_incorporated_workers.end()) {
-		//  None found, create a new one (if available).
-		soldier = &dynamic_cast<Soldier &>
-			(workerdescr.create(*g, owner(), *this, m_position));
-	} else {
-		//  one found, make him available
-		soldier = dynamic_cast<Soldier *>(i->get(g));
-		soldier->reset_tasks(g); // Forget everything you did
-		soldier->mark(false);
-		soldier->set_location(this);
-		m_incorporated_workers.erase(i);
-	}
-
-	m_supply->remove_workers(ware, 1);
-
-	return soldier;
-}
-
-
-
-/*
-===============
-Warehouse::mark_as_used
-
-Mark a soldier as used by a request.
-===============
-*/
-void Warehouse::mark_as_used
-	(Game * g, Ware_Index const  ware, const Requirements & r)
-{
-	assert(m_supply->stock_workers(ware));
-
-	Worker_Descr* workerdescr;
-
-	workerdescr = get_owner()->tribe().get_worker_descr(ware);
-	//  look if we got one of those in stock
-	std::string workername=workerdescr->name();
-	std::vector<Object_Ptr>::iterator i;
-	for
-		(i = m_incorporated_workers.begin();
-		 i != m_incorporated_workers.end();
-		 ++i)
-	{
-		if (static_cast<Worker*>(i->get(g))->name()==workername)
-		{
-			Soldier & soldier = dynamic_cast<Soldier &>(*i->get(g));
-			if (!soldier.is_marked())
-			{
-				if (r.check(&soldier))
-					break;
-				else
-					continue;
-			}
-		}
-	}
-
-	if (i != m_incorporated_workers.end())
-		// one found
-		dynamic_cast<Soldier &>(*i->get(g)).mark(true);
+	throw wexception("Warehouse::launch_worker: Worker doesn't actually exist");
 }
 
 
@@ -818,11 +727,6 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 		w->remove(g);
 		w = 0;
 	} else {
-		//  This is to prevent having soldiers that only are used one time and
-		//  become allways 'marked'
-		if (upcast(Soldier, soldier, w))
-			soldier->mark(false);
-
 		sort_worker_in(g, w->name(), w);
 		w->set_location(0); // No more in a economy
 		w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
@@ -833,6 +737,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	if (item)
 		incorporate_item(g, item);
 }
+
 
 /*
  * Sort the worker into the right position in m_incorporated_workers
@@ -947,41 +852,6 @@ Warehouse_Descr::create_object
 */
 Building * Warehouse_Descr::create_object() const
 {return new Warehouse(*this);}
-
-/*
-===============
-Warehouse::get_soldiers_passing
-===============
-*/
-int32_t Warehouse::get_soldiers_passing
-	(Game * game, Ware_Index const w, const Requirements & r)
-{
-	int32_t number = 0;
-
-	log ("Warehouse::get_soldiers_passing :");
-
-	assert(m_supply->stock_workers(w));
-
-	for //  look if we got one of those in stock of
-		(std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
-		 i != m_incorporated_workers.end();
-		 ++i)
-		if (upcast(Soldier, soldier, i->get(game))) {
-
-			// Its a marked soldier, we cann't supply it !
-			if (!soldier->is_marked()) {
-				if (r.check(soldier))
-				{
-					log ("+");
-					++number;
-				}
-			}
-			else
-				log ("M");
-		}
-	log ("\n");
-	return number;
-}
 
 
 /*

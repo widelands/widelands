@@ -170,12 +170,7 @@ public:
 
 	void damage (uint32_t); /// Damage quantity of hit points
 
-	///  This are used to control Requests (only called by Warehouse)
-	bool is_marked () const throw () {return m_marked;}
-	void mark (const bool b) {m_marked = b;}
 public: // Worker-specific redefinitions
-	virtual void start_task_gowarehouse();
-
 	void startTaskMoveToBattle(Game *, Flag *, Coords);
 	void startTaskMoveHome(Game *);
 
@@ -205,8 +200,6 @@ private:
 	uint32_t m_attack_level;
 	uint32_t m_defense_level;
 	uint32_t m_evade_level;
-
-	bool m_marked;
 
 	AttackController * m_attack_ctrl;
 };

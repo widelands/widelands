@@ -279,7 +279,7 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 void TrainingSite::request_soldier() {
 	int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
-	Request *req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::SOLDIER);
+	Request *req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::WORKER);
 	Requirements r;
 
 	// set requirements to match this site
@@ -352,8 +352,6 @@ void TrainingSite::request_soldier_callback
 
 	//  bind the worker into this house, hide him on the map
 	s.start_task_idle(g, 0, -1);
-
-	s.mark(false);
 }
 
 /**
@@ -420,7 +418,6 @@ void TrainingSite::drop_soldier(Game * g, uint32_t nr)
 	// Walk the soldier home safely
 	s->reset_tasks(g);
 	s->set_location(this);
-	s->mark(false);
 	s->start_task_leavebuilding(g, true);
 }
 

@@ -35,15 +35,10 @@ struct IdleWorkerSupply : public Supply {
 	/// into a Warehouse ASAP.
 	virtual bool is_active() const throw () {return true;}
 
-	virtual WareInstance & launch_item(Game *, int32_t ware)
+	virtual uint32_t nr_supplies(Game*, const Request*);
+	virtual WareInstance & launch_item(Game *, const Request*)
 		__attribute__ ((noreturn));
-
-	virtual Worker * launch_worker(Game *, int32_t ware);
-	virtual Soldier* launch_soldier(Game *, int32_t ware, const Requirements &);
-	virtual int32_t get_passing_requirements
-		(Game *, int32_t ware, const Requirements &);
-	virtual void mark_as_used (Game *, int32_t ware, const Requirements&);
-
+	virtual Worker * launch_worker(Game *, const Request*);
 
 private:
 	Worker  * m_worker;

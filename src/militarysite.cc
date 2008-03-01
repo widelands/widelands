@@ -282,7 +282,7 @@ void MilitarySite::request_soldier() {
 		 soldierid,
 		 &MilitarySite::request_soldier_callback,
 		 this,
-		 Request::SOLDIER);
+		 Request::WORKER);
 	req.set_requirements (m_soldier_requirements);
 
 	m_soldier_requests.push_back (&req);
@@ -319,8 +319,6 @@ void MilitarySite::request_soldier_callback
 
 	// bind the worker into this house, hide him on the map
 	s.start_task_idle(g, 0, -1);
-
-	s.mark (false);
 }
 
 
@@ -359,7 +357,7 @@ void MilitarySite::act(Game* g, uint32_t data)
 			continue;
 		}
 
-		if (s->is_marked()) //  Fighting soldiers couldn't be healed!
+		if (s->get_position() != get_position()) //  Fighting soldiers couldn't be healed!
 			continue;
 
 		//  Heal action
@@ -453,7 +451,6 @@ void MilitarySite::drop_soldier (Game *g, int32_t nr)
 	call_soldiers ();
 
 	//  walk the soldier home safely
-	s.mark (false);
 	s.reset_tasks (g);
 	s.set_location (this);
 	s.start_task_leavebuilding (g, true);
@@ -551,21 +548,14 @@ void MilitarySite::clear_requirements ()
 	m_soldier_requirements.clear();
 }
 
-uint32_t MilitarySite::nr_not_marked_soldiers() {
-	if (m_soldiers.size() <= 0)
-		return 0;
+uint32_t MilitarySite::nr_attack_soldiers() {
 	uint32_t nr_soldiers = 0;
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
-		if (!m_soldiers[i]->is_marked())
+		if (m_soldiers[i]->get_position() == get_position())
 			++nr_soldiers;
 	}
-	return nr_soldiers;
-}
-
-uint32_t MilitarySite::nr_attack_soldiers() {
-	uint32_t not_marked = nr_not_marked_soldiers();
-	if (not_marked > 1)
-		return not_marked - 1;
+	if (nr_soldiers > 1)
+		return nr_soldiers - 1;
 	return 0;
 }
 

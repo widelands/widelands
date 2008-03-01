@@ -133,7 +133,7 @@ public:
 	void start_task_return(Game* g, bool dropitem);
 	void start_task_program(const std::string & programname);
 
-	virtual void start_task_gowarehouse();
+	void start_task_gowarehouse();
 	void start_task_dropoff(Game* g, WareInstance* item);
 	void start_task_fetchfromflag();
 

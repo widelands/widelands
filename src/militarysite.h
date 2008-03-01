@@ -97,7 +97,6 @@ public:
 	*/
 
 	/// Testing stuff
-	uint32_t nr_not_marked_soldiers();
 	uint32_t nr_attack_soldiers();
 	void set_in_battle(bool const in_battle) {m_in_battle = in_battle;};
 

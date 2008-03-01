@@ -75,12 +75,10 @@ public: // implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual bool is_active() const throw ();
 
-	virtual WareInstance & launch_item(Game * g, int32_t ware);
-	virtual Worker* launch_worker(Game* g, int32_t ware) __attribute__ ((noreturn));
+	virtual uint32_t nr_supplies(Game*, const Request*);
+	virtual WareInstance & launch_item(Game * g, const Request*);
+	virtual Worker* launch_worker(Game* g, const Request*) __attribute__ ((noreturn));
 
-	virtual Soldier* launch_soldier(Game* g, int32_t ware, const Requirements& req) __attribute__ ((noreturn));
-	virtual int32_t get_passing_requirements (Game* g, int32_t ware, const Requirements& r) __attribute__ ((noreturn));
-	virtual void mark_as_used (Game* g, int32_t ware, const Requirements& r) __attribute__ ((noreturn));
 private:
 	WareInstance * m_ware;
 	Economy      * m_economy;
@@ -111,12 +109,12 @@ void IdleWareSupply::set_economy(Economy* e)
 	Ware_Index const ware = m_ware->descr_index();
 
 	if (m_economy)
-		m_economy->remove_ware_supply(ware, this);
+		m_economy->remove_supply(this);
 
 	m_economy = e;
 
 	if (m_economy)
-		m_economy->add_ware_supply(ware, this);
+		m_economy->add_supply(this);
 }
 
 /**
@@ -140,38 +138,33 @@ bool IdleWareSupply::is_active()  const throw ()
 	return not m_ware->is_moving();
 }
 
+uint32_t IdleWareSupply::nr_supplies(Game*, const Request* req)
+{
+	if (req->get_type() == Request::WARE && req->get_index() == m_ware->descr_index())
+		return 1;
+
+	return 0;
+}
+
 /**
  * The item is already "launched", so we only need to return it.
 */
-WareInstance & IdleWareSupply::launch_item(Game *, int32_t ware) {
-	if (ware != m_ware->descr_index())
+WareInstance & IdleWareSupply::launch_item(Game *, const Request* req) {
+	if (req->get_type() != Request::WARE)
+		throw wexception("IdleWareSupply::launch_item : called for non-item request");
+	if (req->get_index() != m_ware->descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
 			 m_ware->get_serial(),
 			 m_ware->descr_index().value(),
-			 ware);
+			 req->get_index());
 
 	return *m_ware;
 }
 
-Worker* IdleWareSupply::launch_worker(Game *, int32_t)
+Worker* IdleWareSupply::launch_worker(Game *, const Request*)
 {
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
-}
-
-Soldier* IdleWareSupply::launch_soldier(Game *, int32_t, const Requirements &)
-{
-	throw wexception("IdleWareSupply::launch_soldier makes no sense");
-}
-
-int32_t IdleWareSupply::get_passing_requirements(Game *, int32_t, const Requirements &)
-{
-	throw wexception("IdleWareSupply::get_passing_requirements makes no sense");
-}
-
-void IdleWareSupply::mark_as_used (Game *, int32_t, const Requirements &) {
-	// By now, wares have not need to have this method
-	throw wexception("IdleWareSupply::mark_as_used makes no sense");
 }
 
 
@@ -2108,9 +2101,7 @@ m_rebuilding(false),
 m_request_timer(false),
 mpf_cycle(0)
 {
-	m_worker_supplies.resize(player->tribe().get_nrworkers());
 	m_workers.set_nrwares(player->tribe().get_nrworkers());
-	m_ware_supplies.resize(player->tribe().get_nrwares());
 	m_wares.set_nrwares(player->tribe().get_nrwares());
 
 	player->add_economy(this);
@@ -2684,122 +2675,33 @@ void Economy::remove_request(Request* req)
 }
 
 /**
- * Add a worker_supply to our list of supplies.
+ * Add a supply to our list of supplies.
 */
-void Economy::add_worker_supply
-	(Ware_Index const ware, Supply * const supply)
+void Economy::add_supply(Supply * const supply)
 {
-	if (m_worker_supplies.size() <= ware.value())
-		m_worker_supplies.resize(ware.value() + 1);
-
-	m_worker_supplies[ware.value()].add_supply(supply);
-
+	m_supplies.add_supply(supply);
 	start_request_timer();
 }
 
 /**
- * \return true if the given worker_supply is registered with the economy, false
+ * \return true if the given supply is registered with the economy, false
  * otherwise
 */
-bool Economy::have_worker_supply
-	(Ware_Index const ware, Supply * const supply)
+bool Economy::have_supply(Supply * const supply)
 {
-	if (m_worker_supplies.size() <= ware.value())
-		return false;
-
-	for (int32_t i = 0; i < m_worker_supplies[ware.value()].get_nrsupplies(); ++i)
-		if (m_worker_supplies[ware.value()].get_supply(i) == supply)
+	for (int32_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
+		if (m_supplies.get_supply(i) == supply)
 			return true;
 
 	return false;
 }
 
 /**
- * Remove a worker_supply from our list of supplies.
+ * Remove a supply from our list of supplies.
 */
-void Economy::remove_worker_supply
-	(Ware_Index const ware, Supply * const supply)
+void Economy::remove_supply(Supply * const supply)
 {
-	m_worker_supplies[ware.value()].remove_supply(supply);
-}
-
-/**
- * Add a soldier_supply to our list of supplies.
-*/
-void Economy::add_soldier_supply
-	(Ware_Index const ware, Supply * const supply)
-{
-	//log("add_soldier_supply(%i, %p)\n", ware, supp);
-
-	if (m_worker_supplies.size() <= ware.value())
-		m_worker_supplies.resize(ware.value() + 1);
-
-	m_worker_supplies[ware.value()].add_supply(supply);
-
-	start_request_timer();
-}
-
-/**
- * Return true if the given soldier_supply is registered with the economy.
-*/
-bool Economy::have_soldier_supply
-	(Ware_Index const ware, Supply * const supply)
-{
-	if (m_worker_supplies.size() <= ware.value())
-		return false;
-
-	for (int32_t i = 0; i < m_worker_supplies[ware.value()].get_nrsupplies(); ++i)
-		if (m_worker_supplies[ware.value()].get_supply(i) == supply)
-			return true;
-
-	return false;
-}
-
-/**
- * Remove a soldier_supply from our list of supplies.
-*/
-void Economy::remove_soldier_supply
-	(Ware_Index const ware, Supply * const supply)
-{
-	m_worker_supplies[ware.value()].remove_supply(supply);
-}
-
-/**
- * Add a ware_supply to our list of supplies.
-*/
-void Economy::add_ware_supply
-	(Ware_Index const ware, Supply * const supply)
-{
-	if (m_ware_supplies.size() <= ware.value())
-		m_ware_supplies.resize(ware.value() + 1);
-
-	m_ware_supplies[ware.value()].add_supply(supply);
-
-	start_request_timer();
-}
-
-/**
- * Return true if the given ware_supply is registered with the economy.
-*/
-bool Economy::have_ware_supply
-	(Ware_Index const ware, Supply * const supply)
-{
-	if (m_ware_supplies.size() <= ware.value())
-		return false;
-
-	for (int32_t i = 0; i < m_ware_supplies[ware.value()].get_nrsupplies(); ++i)
-		if (m_ware_supplies[ware.value()].get_supply(i) == supply)
-			return true;
-
-	return false;
-}
-
-/**
- * Remove a ware_supply from our list of supplies.
-*/
-void Economy::remove_ware_supply(Ware_Index const ware, Supply * const supply)
-{
-	m_ware_supplies[ware.value()].remove_supply(supply);
+	m_supplies.remove_supply(supply);
 }
 
 /**
@@ -2900,13 +2802,9 @@ void Economy::start_request_timer(int32_t delta)
  * Find the supply that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
 */
-Supply* Economy::find_best_supply
-	(Game                    * g,
-	 Request                 * req,
-	 Ware_Index              & pware,
-	 int32_t                 & pcost,
-	 std::vector<SupplyList> & use_supply)
+Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 {
+	assert(pcost != 0);
 	assert(req->is_open());
 
 	Route buf_route0, buf_route1;
@@ -2915,40 +2813,17 @@ Supply* Economy::find_best_supply
 	int32_t best_cost = -1;
 	Flag * const target_flag = req->get_target_flag();
 
-	// Look for matches in all possible supplies in this economy
-	if (use_supply.size() <= pware.value())
-		return false; // tough luck, we have definitely no supplies for this ware
-
-	// if there are no resources of requested ware, try a substitute
-	// (for example, master fisher can work as an ordinary fisher)
-	Tribe_Descr const & tribe = req->get_target()->owner().tribe();
-	Ware_Index substitute = pware;
-	while (substitute and 0 == use_supply[substitute.value()].get_nrsupplies())
-	{
-		substitute =
-			req->get_type() == Request::WORKER ?
-			tribe.get_worker_descr(substitute)->becomes() : Ware_Index::Null();
-	}
-	if (substitute)
-		pware = substitute;
-
-	for (uint32_t i = 0; i < use_supply[pware.value()].get_nrsupplies(); ++i) {
-		Supply & supp = *use_supply[pware.value()].get_supply(i);
+	for (uint32_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
+		Supply & supp = *m_supplies.get_supply(i);
 		Route* route;
 
 		// idle requests only get active supplies
 		if (req->is_idle() and not supp.is_active())
 			continue;
 
-		// Check requeriments
-		if (req->get_type() == Request::SOLDIER)
-			if
-				(supp.get_passing_requirements
-				 (g, pware, req->get_requirements())
-				 <
-				 1)
-				continue;
-
+		// Check requirements
+		if (!supp.nr_supplies(g, req))
+			continue;
 
 		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
@@ -2969,8 +2844,6 @@ Supply* Economy::find_best_supply
 			continue;
 		}
 
-		//supp->mark_as_used(g, req->get_index(), req->get_requeriments());
-		// cost_cutoff guarantuees us that the route is better than what we have
 		best_supply = &supp;
 		best_route = route;
 		best_cost = route->get_totalcost();
@@ -2979,14 +2852,13 @@ Supply* Economy::find_best_supply
 	if (!best_route)
 		return 0;
 
-	pcost = best_cost;
+	*pcost = best_cost;
 	return best_supply;
 }
 
 struct RequestSupplyPair {
 	bool              is_item;
 	bool              is_worker;
-	bool              is_soldier;
 	int32_t               ware;
 	TrackPtr<Request> request;
 	TrackPtr<Supply>  supply;
@@ -3016,7 +2888,6 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 {
 	for (RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
 		Request* req = *it;
-		Supply* supp;
 		int32_t cost; // estimated time in milliseconds to fulfill Request
 
 		// We somehow get desynced request lists that don't trigger desync
@@ -3029,10 +2900,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		}
 
 		Ware_Index ware_index = req->get_index();
-		if (req->get_type()==Request::WARE)
-			supp = find_best_supply(g, req, ware_index, cost, m_ware_supplies);
-		else
-			supp = find_best_supply(g, req, ware_index, cost, m_worker_supplies);
+		Supply* supp = find_best_supply(g, req, &cost);
 
 		if (!supp)
 			continue;
@@ -3054,32 +2922,15 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		if (priority < 0)
 			continue;
 
-		// If its a soldier, then mark to prevent re-request this soldier.
-		// If we don't do this, then the same soldier can be re-requested, this cause a
-		// degrade of soldier levels
-		if (req->get_type() == Request::SOLDIER)
-		{
-			// This is to prevent a soldier to try to supply more than one Request.
-			// With this also ensures that you have enought soldiers
-			if (supp->get_passing_requirements(g, req->get_index(), req->get_requirements()) > 0)
-			{
-				supp->mark_as_used (g, req->get_index(), req->get_requirements());
-			}
-			else
-				continue;
-		}
-
 		// Otherwise, consider this request/supply pair for queueing
 		RequestSupplyPair rsp;
 
 		rsp.is_item = false;
 		rsp.is_worker = false;
-		rsp.is_soldier = false;
 
 		switch (req->get_type()) {
 		case Request::WARE:    rsp.is_item    = true; break;
 		case Request::WORKER:  rsp.is_worker  = true; break;
-		case Request::SOLDIER: rsp.is_soldier = true; break;
 		default:
 			assert(false);
 		}
@@ -3115,7 +2966,7 @@ void Economy::create_requested_workers(Game* g)
 		for (RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
 			Request* req = *it;
 
-			if (!req->is_idle() && ((req->get_type()==Request::WORKER) || (req->get_type()==Request::SOLDIER))) {
+			if (!req->is_idle() && req->get_type() == Request::WORKER) {
 				int32_t index = req->get_index();
 				int32_t num_wares = 0;
 				Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
@@ -3126,15 +2977,12 @@ void Economy::create_requested_workers(Game* g)
 
 				for
 					(int32_t i = 0;
-					 i < m_worker_supplies[index].get_nrsupplies();
+					 i < m_supplies.get_nrsupplies();
 					 ++i)
 				{
-					Supply* supp = m_worker_supplies[index].get_supply(i);
+					Supply* supp = m_supplies.get_supply(i);
 
-					if (not supp->is_active()) {
-						if (supp->get_passing_requirements (g, index, req->get_requirements()))
-							++num_wares;
-					} // if (supp->is_active)
+					num_wares += supp->nr_supplies(g, req);
 				} // for (int32_t i = 0; i < m_worker_supplies)
 
 				// If there aren't enough supplies...
@@ -3181,9 +3029,7 @@ void Economy::balance_requestsupply()
 				(!rsp.request               ||
 				 !rsp.supply                ||
 				 !have_request(rsp.request) ||
-				 ((rsp.is_soldier && !have_worker_supply(rsp.ware, rsp.supply)) ||
-				  (rsp.is_worker  && !have_worker_supply(rsp.ware, rsp.supply)) ||
-				  (rsp.is_item    && !have_ware_supply(rsp.ware, rsp.supply))))
+				 !rsp.supply->nr_supplies(game, rsp.request))
 			{
 				log("NO: ware %i, priority %i\n", rsp.ware, rsp.priority);
 
@@ -3198,7 +3044,7 @@ void Economy::balance_requestsupply()
 				 rsp.ware,
 				 rsp.priority);
 
-			rsp.request->start_transfer(game, rsp.supply, rsp.ware);
+			rsp.request->start_transfer(game, rsp.supply);
 			rsp.request->set_last_request_time(owner().egbase().get_gametime());
 
 			//  for multiple wares

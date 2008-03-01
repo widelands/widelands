@@ -20,6 +20,7 @@
 #include "game.h"
 #include "idleworkersupply.h"
 #include "player.h"
+#include "request.h"
 #include "requirements.h"
 #include "soldier.h"
 #include "tribe.h"
@@ -55,12 +56,12 @@ void IdleWorkerSupply::set_economy(Economy* e)
 		return;
 
 	if (m_economy)
-		m_economy->remove_worker_supply(m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()), this);
+		m_economy->remove_supply(this);
 
 	m_economy = e;
 
 	if (m_economy)
-		m_economy->add_worker_supply(m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()), this);
+		m_economy->add_supply(this);
 }
 
 
@@ -73,7 +74,18 @@ PlayerImmovable* IdleWorkerSupply::get_position(Game* g)
 }
 
 
-WareInstance & IdleWorkerSupply::launch_item(Game *, int32_t)
+uint32_t IdleWorkerSupply::nr_supplies(Game*, const Request* req)
+{
+	if
+		(req->get_type() == Request::WORKER &&
+		 m_worker->descr().can_act_as(req->get_index()) &&
+		 req->get_requirements().check(m_worker))
+		return 1;
+
+	return 0;
+}
+
+WareInstance & IdleWorkerSupply::launch_item(Game *, const Request*)
 {
 	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");
 }
@@ -82,53 +94,17 @@ WareInstance & IdleWorkerSupply::launch_item(Game *, int32_t)
 /**
  * No need to explicitly launch the worker.
  */
-Worker* IdleWorkerSupply::launch_worker(Game *, int32_t ware)
+Worker* IdleWorkerSupply::launch_worker(Game *, const Request* req)
 {
-	assert(m_worker->descr().can_act_as(ware));
+	if (req->get_type() != Request::WORKER)
+		throw wexception("IdleWorkerSupply: not a worker request");
+	if
+		(!m_worker->descr().can_act_as(req->get_index()) ||
+		 !req->get_requirements().check(m_worker))
+		throw wexception("IdleWorkerSupply: worker type mismatch");
 
 	return m_worker;
 }
 
-
-Soldier* IdleWorkerSupply::launch_soldier(Game *, int32_t, const Requirements & req)
-{
-	assert (m_worker->get_worker_type()==Worker_Descr::SOLDIER);
-
-	Soldier* s = static_cast<Soldier*>(m_worker);
-
-	if (req.check(s))
-		return s;
-	else
-		throw wexception
-			("IdleWorkerSupply::launch_soldier try to launch a soldiers that "
-			 "doesn't accomplish the requirements.");
-}
-
-
-int32_t IdleWorkerSupply::get_passing_requirements(Game *, int32_t, const Requirements & req)
-{
-	assert (m_worker->get_worker_type()==Worker_Descr::SOLDIER);
-
-	Soldier* s = static_cast<Soldier*>(m_worker);
-
-	return req.check(s);
-}
-
-
-void IdleWorkerSupply::mark_as_used (Game *, int32_t ware, const Requirements & r)
-{
-	assert(ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()));
-
-	if (m_worker->get_worker_type() == Worker_Descr::SOLDIER) {
-
-		Soldier* s = static_cast<Soldier*>(m_worker);
-
-		if (r.check(s))
-			dynamic_cast<Soldier &>(*m_worker).mark(true);
-
-	} else {
-		// Non-soldiers doesn't have any need to be marked (by now)
-	}
-}
 
 };
