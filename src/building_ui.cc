@@ -33,6 +33,7 @@ class.
 #include "interactive_player.h"
 #include "maphollowregion.h"
 #include "militarysite.h"
+#include "request.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "tribe.h"

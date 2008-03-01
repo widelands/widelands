@@ -18,6 +18,7 @@
  */
 
 #include "building.h"
+
 #include "constructionsite.h"
 #include "editor_game_base.h"
 #include "filesystem.h"
@@ -32,6 +33,7 @@
 #include "productionsite.h"
 #include "profile.h"
 #include "rendertarget.h"
+#include "request.h"
 #include "sound/sound_handler.h"
 #include "trainingsite.h"
 #include "transport.h"

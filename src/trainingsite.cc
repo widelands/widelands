@@ -26,6 +26,7 @@
 #include "player.h"
 #include "production_program.h"
 #include "profile.h"
+#include "request.h"
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"

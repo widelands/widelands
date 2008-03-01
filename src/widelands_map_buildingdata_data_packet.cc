@@ -27,6 +27,7 @@
 #include "player.h"
 #include "productionsite.h"
 #include "production_program.h"
+#include "request.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "transport.h"

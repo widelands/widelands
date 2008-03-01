@@ -24,6 +24,7 @@
 #include "i18n.h"
 #include "player.h"
 #include "profile.h"
+#include "request.h"
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"

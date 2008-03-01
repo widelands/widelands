@@ -23,6 +23,7 @@
 #include "game.h"
 #include "map.h"
 #include "player.h"
+#include "request.h"
 #include "transport.h"
 #include "tribe.h"
 #include "widelands_fileread.h"

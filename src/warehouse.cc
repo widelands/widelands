@@ -25,6 +25,7 @@
 #include "game.h"
 #include "player.h"
 #include "profile.h"
+#include "request.h"
 #include "soldier.h"
 #include "transport.h"
 #include "wexception.h"

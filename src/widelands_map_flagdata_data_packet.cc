@@ -23,6 +23,7 @@
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
+#include "request.h"
 #include "transport.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
