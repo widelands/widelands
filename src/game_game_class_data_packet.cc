@@ -37,7 +37,6 @@ throw (_wexception)
 		fr.Open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version <= CURRENT_PACKET_VERSION) {
-			game->m_netgame  = 0; //  can not load netgames
 			game->m_speed    = fr.Signed16();
 			game->m_gametime = fr.Unsigned32();
 		} else

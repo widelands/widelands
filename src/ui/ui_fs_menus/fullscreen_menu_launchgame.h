@@ -20,47 +20,31 @@
 #ifndef FULLSCREEN_MENU_LAUNCHGAME_H
 #define FULLSCREEN_MENU_LAUNCHGAME_H
 
-#include "constants.h"
 #include "fullscreen_menu_base.h"
 
-#include "ui_button.h"
-#include "ui_textarea.h"
-
-namespace Widelands {struct Game;
-struct Map_Loader;
-};
-class NetGame;
-class PlayerDescriptionGroup;
+class GameController;
+class GameSettingsProvider;
 
 /**
  * Fullscreen menu to select map and to set map options.
  */
+struct Fullscreen_Menu_LaunchGameImpl;
+
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchGame
-		(Widelands::Game *, NetGame *, Widelands::Map_Loader * *);
+	Fullscreen_Menu_LaunchGame(GameSettingsProvider* settings, GameController* ctrl = 0);
+	~Fullscreen_Menu_LaunchGame();
 
 	void start();
 	void think();
 
 	void refresh();
 
+private:
 	void select_map();
 	void back_clicked();
 	void start_clicked();
 
-private:
-	Widelands::Game                      * m_game;
-	NetGame                              * m_netgame;
-	Widelands::Map_Loader *              * m_ml;
-
-	UI::Textarea                           title;
-	UI::Button<Fullscreen_Menu_LaunchGame> back;
-	UI::Button<Fullscreen_Menu_LaunchGame> m_ok;
-	UI::Textarea                           m_mapname;
-	UI::Button<Fullscreen_Menu_LaunchGame> m_select_map;
-	PlayerDescriptionGroup* m_players[MAX_PLAYERS];
-
-	bool                    m_is_scenario;
+	Fullscreen_Menu_LaunchGameImpl* d;
 };
 
 

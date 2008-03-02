@@ -27,6 +27,7 @@
 #include "fullscreen_menu_intro.h"
 #include "fullscreen_menu_inet_lobby.h"
 #include "fullscreen_menu_inet_server_options.h"
+#include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_main.h"
 #include "fullscreen_menu_netsetup.h"
 #include "fullscreen_menu_options.h"
@@ -34,14 +35,19 @@
 #include "game.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
+#include "game_tips.h"
+#include "gamesettings.h"
 #include "graphic.h"
 #include "i18n.h"
+#include "interactive_player.h"
 #include "journal.h"
 #include "layered_filesystem.h"
 #include "network.h"
 #include "network_ggz.h"
 #include "profile.h"
 #include "sound/sound_handler.h"
+#include "tribe.h"
+#include "ui_progresswindow.h"
 #include "wexception.h"
 
 #include "log.h"
@@ -278,7 +284,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_load_game(true, m_loadgame_filename.c_str());
-		} catch(...) {
+		} catch (...) {
 			emergency_save(game);
 			throw;
 		}
@@ -286,7 +292,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_splayer_map_direct(m_tutorial_filename.c_str(), true);
-		} catch(...) {
+		} catch (...) {
 			emergency_save(game);
 			throw;
 		}
@@ -302,7 +308,8 @@ void WLApplication::run()
 		//TODO: what does this do? where does it belong? read up on GGZ! #fweber
 		if (NetGGZ::ref().used()) {
 			if (NetGGZ::ref().connect()) {
-				NetGame *netgame;
+				log("FIXME: Something related to GGZ goes here\n");
+/*				NetGame *netgame;
 
 				if (NetGGZ::ref().host()) netgame = new NetHost();
 				else
@@ -315,7 +322,7 @@ void WLApplication::run()
 					netgame = new NetClient(&peer);
 				}
 				netgame->run();
-				delete netgame;
+				delete netgame;*/
 			}
 		}
 
@@ -1084,7 +1091,7 @@ void WLApplication::mainmenu()
 			Widelands::Game game;
 			try {
 				game.run_replay();
-			} catch(...) {
+			} catch (...) {
 				emergency_save(game);
 				throw;
 			}
@@ -1135,23 +1142,15 @@ void WLApplication::mainmenu_singleplayer()
 		if (code == Fullscreen_Menu_SinglePlayer::Back) break;
 
 		switch (code) {
-		case Fullscreen_Menu_SinglePlayer::New_Game: {
-			Widelands::Game game;
-			try {
-				if (game.run_single_player())
-					done = true;
-			} catch(...) {
-				emergency_save(game);
-				throw;
-			}
+		case Fullscreen_Menu_SinglePlayer::New_Game:
+			new_game();
 			break;
-		}
 		case Fullscreen_Menu_SinglePlayer::Load_Game: {
 			Widelands::Game game;
 			try {
 				if (game.run_load_game(true))
 					done = true;
-			} catch(...) {
+			} catch (...) {
 				emergency_save(game);
 				throw;
 			}
@@ -1183,7 +1182,7 @@ void WLApplication::mainmenu_singleplayer()
 				// Load selected campaign-map-file
 				if (game.run_splayer_map_direct(filename.c_str(), true))
 					done = true;
-			} catch(...) {
+			} catch (...) {
 				emergency_save(game);
 				throw;
 			}
@@ -1274,7 +1273,7 @@ void WLApplication::mainmenu_multiplayer()
 
 			IPaddress peer;
 			SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
-			
+
 			NetClient netgame(&peer);
 			netgame.run();
 		}
@@ -1284,6 +1283,105 @@ void WLApplication::mainmenu_multiplayer()
 		return;
 	}
 }
+
+// The settings provider for normal singleplayer games:
+// The user can change everything, except that they are themselves human.
+class SinglePlayerGameSettingsProvider : public GameSettingsProvider {
+	GameSettings s;
+public:
+	SinglePlayerGameSettingsProvider() {
+		Widelands::Tribe_Descr::get_all_tribenames(s.tribes);
+	}
+
+	virtual const GameSettings& settings() {return s;}
+
+	virtual bool canChangeMap() {return true;}
+	virtual bool canChangePlayerState(uint8_t number) {return number != 0;}
+	virtual bool canChangePlayerTribe(uint8_t) {return true;}
+
+	virtual bool canLaunch() {
+		return s.mapname.size() != 0 && s.players.size() >= 1;
+	}
+
+	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers) {
+		s.mapname = mapname;
+		s.mapfilename = mapfilename;
+
+		uint32_t oldplayers = s.players.size();
+		s.players.resize(maxplayers);
+
+		while (oldplayers < maxplayers) {
+			PlayerSettings& player = s.players[oldplayers];
+			player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateComputer;
+			player.tribe = s.tribes[0];
+			char buf[200];
+			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers+1);
+			player.name = buf;
+			oldplayers++;
+		}
+	}
+	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) {
+		if (number == 0 || number >= s.players.size())
+			return;
+
+		if (state == PlayerSettings::stateOpen)
+			state = PlayerSettings::stateComputer;
+
+		s.players[number].state = state;
+	}
+	virtual void nextPlayerState(uint8_t number) {
+		if (number == 0 || number >= s.players.size())
+			return;
+
+		if (s.players[number].state == PlayerSettings::stateComputer)
+			s.players[number].state = PlayerSettings::stateClosed;
+		else
+			s.players[number].state = PlayerSettings::stateComputer;
+	}
+
+	virtual void setPlayerTribe(uint8_t number, const std::string& tribe) {
+		if (number >= s.players.size())
+			return;
+
+		if (std::find(s.tribes.begin(), s.tribes.end(), tribe) != s.tribes.end())
+			s.players[number].tribe = tribe;
+	}
+};
+
+/**
+ * Handle the "New game" menu option: Configure a single player game and
+ * run it.
+ *
+ * \return @c true if a game was played, @c false if the player pressed Back
+ * or aborted the game setup via some other means.
+ */
+bool WLApplication::new_game()
+{
+	SinglePlayerGameSettingsProvider sp;
+	Fullscreen_Menu_LaunchGame lgm(&sp);
+	const int32_t code = lgm.run();
+
+	if (code <= 0)
+		return false;
+
+	Widelands::Game game;
+	try {
+		UI::ProgressWindow loaderUI("pics/progress.png");
+		GameTips tips (loaderUI);
+
+		loaderUI.step(_("Preparing game"));
+
+		game.set_iabase(new Interactive_Player(game, 0));
+		game.init(loaderUI, sp.settings());
+		game.run(loaderUI);
+	} catch (...) {
+		emergency_save(game);
+		throw;
+	}
+
+	return true;
+}
+
 
 /**
 * Try to save the game instance if possible

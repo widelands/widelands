@@ -89,7 +89,7 @@ show_as_overlays(this, get_inner_w() - STATEBOX_WIDTH - 5, 250)
  * think: updates the chat area
  */
 void GameChatMenu::think() {
-	std::vector<NetGame::Chat_Message>const & msges = *m_player.get_chatmsges();
+/*	std::vector<NetGame::Chat_Message>const & msges = *m_player.get_chatmsges();
 	std::string str;
 
 	for (uint32_t i = 0; i < msges.size(); ++i) {
@@ -99,7 +99,7 @@ void GameChatMenu::think() {
 		str += '\n';
 	}
 
-	chatbox.set_text(str.c_str());
+	chatbox.set_text(str.c_str());*/
 }
 
 /*
@@ -109,7 +109,7 @@ void GameChatMenu::changed_show_as_overlays(bool t)
 {m_player.set_show_chat_overlay(t);}
 
 void GameChatMenu::clicked_send() {
-	std::string str = editbox.get_text();
+/*	std::string str = editbox.get_text();
 
 	if (str.size() && m_netgame) {
 		NetGame::Chat_Message t;
@@ -118,5 +118,5 @@ void GameChatMenu::clicked_send() {
 		t.msg = str;
 		m_netgame->send_chat_message(t);
 		editbox.set_text("");
-	}
+	}*/
 }

@@ -20,16 +20,11 @@
 #ifndef PLAYERDESCRGROUP_H
 #define PLAYERDESCRGROUP_H
 
-#include "widelands.h"
+#include "ui_panel.h"
 
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_signal.h"
-#include "ui_textarea.h"
+class GameSettingsProvider;
 
-#include <vector>
-
-namespace Widelands {struct Game;};
+struct PlayerDescriptionGroupImpl;
 
 /** class PlayerDescriptionGroup
  *
@@ -37,47 +32,21 @@ namespace Widelands {struct Game;};
  * - button to switch between: Human, Remote, AI
  */
 struct PlayerDescriptionGroup : public UI::Panel {
-	enum changemode_t {
-		CHANGE_NOTHING=0,
-		CHANGE_ENABLED=1,
-		CHANGE_TRIBE=2,
-		CHANGE_EVERYTHING=3
-	};
-
 	PlayerDescriptionGroup
-		(UI::Panel              * parent,
+		(UI::Panel * parent,
 		 int32_t x, int32_t y,
-		 Widelands::Game        * game,
-		 Widelands::Player_Number plnum,
-		 bool                     highlight = false);
+		 GameSettingsProvider * settings,
+		 uint32_t plnum);
+	~PlayerDescriptionGroup();
 
-	UI::Signal changed;
-
-	void set_enabled(bool enable);
-	void allow_changes(changemode_t);
-	void enable_player(bool on);
-	void set_player_tribe(std::string str);
-	void set_player_name(std::string name);
-	void set_player_type(int32_t);
+	void refresh();
 
 private:
+	void enable_player(bool on);
 	void toggle_playertype();
 	void toggle_playertribe();
 
-	Widelands::Game        * m_game;
-	Widelands::Player_Number m_plnum;
-
-	bool         m_enabled; //  is this player allowed at all (map-dependent)
-	int32_t          m_playertype;
-	uint32_t         m_current_tribe;
-	changemode_t m_allow_changes;
-
-	std::vector<std::string> m_tribes;
-
-	UI::Textarea                       m_plr_name;
-	UI::Checkbox                       m_btnEnablePlayer;
-	UI::Button<PlayerDescriptionGroup> m_btnPlayerType;
-	UI::Button<PlayerDescriptionGroup> m_btnPlayerTribe;
+	PlayerDescriptionGroupImpl* d;
 };
 
 

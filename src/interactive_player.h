@@ -97,13 +97,13 @@ struct Interactive_Player : public Interactive_Base {
 	// Chat messages
 	bool show_chat_overlay() {return m_do_chat_overlays;}
 	void set_show_chat_overlay(bool t) {m_do_chat_overlays = t;}
-	const std::vector< NetGame::Chat_Message >* get_chatmsges() {
+	const std::vector< Chat_Message >* get_chatmsges() {
 		return &m_chatmsges;
 	}
 
 private:
 	struct Overlay_Chat_Messages {
-		NetGame::Chat_Message msg;
+		Chat_Message msg;
 		uint32_t starttime;
 	};
 
@@ -133,7 +133,7 @@ private:
 	Game_Main_Menu_Windows  m_mainm_windows;
 
 	// Chat message stack
-	std::vector< NetGame::Chat_Message > m_chatmsges;
+	std::vector< Chat_Message > m_chatmsges;
 	std::vector< Overlay_Chat_Messages > m_show_chatmsg;
 	bool m_do_chat_overlays;
 	bool m_is_typing_msg; // Is the user typing a chat message

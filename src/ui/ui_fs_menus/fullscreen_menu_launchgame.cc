@@ -21,6 +21,8 @@
 
 #include "fullscreen_menu_mapselect.h"
 #include "game.h"
+#include "gamecontroller.h"
+#include "gamesettings.h"
 #include "i18n.h"
 #include "instances.h"
 #include "player.h"
@@ -28,70 +30,77 @@
 #include "map.h"
 #include "playerdescrgroup.h"
 
+#include "ui_button.h"
+#include "ui_textarea.h"
+
+struct Fullscreen_Menu_LaunchGameImpl {
+	GameSettingsProvider* settings;
+	GameController* ctrl; // optional
+
+	UI::Basic_Button* ok;
+	UI::Textarea* mapname;
+	UI::Basic_Button* select_map;
+	PlayerDescriptionGroup* players[MAX_PLAYERS];
+
+	bool is_scenario;
+};
+
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
-(Widelands::Game         * const game,
- NetGame                 * const ng,
- Widelands::Map_Loader * * const ml)
-:
-Fullscreen_Menu_Base("launchgamemenu.jpg"),
-m_game(game),
-m_netgame(ng),
-m_ml(ml),
-
-title(this, MENU_XRES/2, 120, _("Launch Game"), Align_HCenter),
-
-back
-(this,
- 550, 450, 200, 26,
- 0,
- &Fullscreen_Menu_LaunchGame::back_clicked, this,
- _("Back")),
-
-m_ok
-(this,
- 550, 480, 200, 26,
- 2,
- &Fullscreen_Menu_LaunchGame::start_clicked, this,
- _("Start game"),
- std::string(),
- false),
-
-m_mapname(this, 650, 250, "(no map)", Align_HCenter),
-m_select_map
-(this,
- 550, 280, 200, 26,
- 1,
- &Fullscreen_Menu_LaunchGame::select_map, this,
- _("Select map"),
- std::string(),
- not ng or ng->is_host()),
-
-
-m_is_scenario(false)
-
+(GameSettingsProvider* settings, GameController* ctrl)
+: Fullscreen_Menu_Base("launchgamemenu.jpg"), d(new Fullscreen_Menu_LaunchGameImpl)
 {
-	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	m_ok.set_visible(not ng or ng->is_host());
-// Player settings
-	int32_t y;
+	d->settings = settings;
+	d->ctrl = ctrl;
 
-	y = 250;
-	iterate_player_numbers(p, MAX_PLAYERS) {
-		PlayerDescriptionGroup *pdg = new PlayerDescriptionGroup
+	UI::Textarea* title = new UI::Textarea(this, MENU_XRES/2, 120, _("Launch Game"), Align_HCenter);
+	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+
+	new UI::Button<Fullscreen_Menu_LaunchGame>
+		(this,
+		 550, 450, 200, 26,
+		 0,
+		 &Fullscreen_Menu_LaunchGame::back_clicked, this,
+		 _("Back"));
+
+	d->ok = new UI::Button<Fullscreen_Menu_LaunchGame>
+		(this,
+		 550, 480, 200, 26,
+		 2,
+		 &Fullscreen_Menu_LaunchGame::start_clicked, this,
+		 _("Start game"),
+		 std::string(),
+		 false);
+
+	d->mapname = new UI::Textarea(this, 650, 250, std::string(), Align_HCenter);
+
+	d->select_map = new UI::Button<Fullscreen_Menu_LaunchGame>
+		(this,
+		 550, 280, 200, 26,
+		 1,
+		 &Fullscreen_Menu_LaunchGame::select_map, this,
+		 _("Select map"),
+		 std::string(),
+		 false);
+
+	d->is_scenario = false;
+
+	int y = 250;
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
+		d->players[i] = new PlayerDescriptionGroup
 			(this,
 			 50, y,
-			 m_game, p, m_netgame && m_netgame->get_playernum() == p);
-		pdg->changed.set(this, &Fullscreen_Menu_LaunchGame::refresh);
-
-		m_players[p - 1] = pdg;
+			 settings, i);
 		y += 30;
-
-		if (m_netgame!=0)
-			m_netgame->set_player_description_group (p, pdg);
 	}
+}
 
-	if (not m_netgame) m_players[0]->set_player_type(Widelands::Player::Local);
+
+Fullscreen_Menu_LaunchGame::~Fullscreen_Menu_LaunchGame()
+{
+	// sub-panels are deleted automatically by Panel destructor
+	delete d;
+	d = 0;
 }
 
 
@@ -101,95 +110,77 @@ m_is_scenario(false)
  */
 void Fullscreen_Menu_LaunchGame::start()
 {
-	if (m_netgame == 0 || m_netgame->is_host()) {
+	if (d->settings->settings().mapname.size() == 0 && d->settings->canChangeMap()) {
 		select_map();
 
-		if (!m_game->get_map())
+		if (d->settings->settings().mapname.size() == 0)
 			back_clicked();
 	}
+
+	refresh();
 }
 
 
 void Fullscreen_Menu_LaunchGame::think()
 {
-	m_game->think();
+	if (d->ctrl)
+		d->ctrl->think();
+
+	refresh();
 }
 
-/*
+
+/**
  * back-button has been pressed
- * */
+ */
 void Fullscreen_Menu_LaunchGame::back_clicked()
 {
-	m_game->cleanup_objects();
 	end_modal(0);
 }
 
 
-/*
+/**
  * start-button has been pressed
- * */
+ */
 void Fullscreen_Menu_LaunchGame::start_clicked()
 {
-	end_modal(m_is_scenario?2:1);
+	if (d->settings->canLaunch())
+		end_modal(d->is_scenario?2:1);
 }
 
 
 void Fullscreen_Menu_LaunchGame::refresh()
 {
-	Widelands::Map * const map = m_game->get_map();
-	uint32_t maxplayers = 0;
+	const GameSettings& settings = d->settings->settings();
 
-	// update the mapname
-	if (map) {
-		m_mapname.set_text(map->get_name());
-		maxplayers = map->get_nrplayers();
-	}
-	else m_mapname.set_text(_("(no map)"));
+	if (settings.mapname.size() != 0)
+		d->mapname->set_text(settings.mapname);
+	else
+		d->mapname->set_text("(no map)");
+
+	d->ok->set_enabled(d->settings->canLaunch());
+	d->select_map->set_visible(d->settings->canChangeMap());
+	d->select_map->set_enabled(d->settings->canChangeMap());
 
 	// update the player description groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
-		m_players[i]->set_enabled(i < maxplayers);
-		if (m_is_scenario && (i<maxplayers) && map) {
-			// set player to the by the map given
-			m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_NOTHING);
-			m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
-			m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
-		} else if (i<maxplayers && map) {
-			std::string name=_("Player ");
-			uint8_t const n = i + 1;
-			if (uint8_t const n_10 = n / 10) name += '0' + n_10;
-			name                                  += '0' + n % 10;
-			m_players[i]->set_player_name(name);
-			m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
-		}
-
-		if (m_netgame!=0) {
-			int32_t allow=PlayerDescriptionGroup::CHANGE_NOTHING;
-
-			if (m_netgame->is_host() && i>0)
-				allow|=PlayerDescriptionGroup::CHANGE_ENABLED;
-
-			if (m_netgame->get_playernum()==i+1)
-				allow|=PlayerDescriptionGroup::CHANGE_TRIBE;
-
-			m_players[i]->allow_changes
-				(static_cast<const PlayerDescriptionGroup::changemode_t>(allow));
-		}
-	}
-
-	m_ok.set_enabled(m_game->can_start());
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+		d->players[i]->refresh();
 }
+
 
 void Fullscreen_Menu_LaunchGame::select_map()
 {
-	{
-		Fullscreen_Menu_MapSelect msm(m_game, m_ml);
-		m_is_scenario = msm.run() == 2;
-	}
+	if (!d->settings->canChangeMap())
+		return;
 
-	if (m_netgame)
-		static_cast<NetHost*>(m_netgame)->update_map();
+	Fullscreen_Menu_MapSelect msm;
+	int code = msm.run();
 
-	refresh();
+	if (code <= 0)
+		return;
+
+	d->is_scenario = code == 2;
+
+	const MapData* map = msm.get_map();
+	d->settings->setMap(map->name, map->filename, map->nrplayers);
 }

@@ -19,6 +19,7 @@
 
 #include "fullscreen_menu_mapselect.h"
 
+
 #include "editor_game_base.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -28,6 +29,11 @@
 #include "s2map.h"
 #include "wexception.h"
 #include "widelands_map_loader.h"
+#include "ui_checkbox.h"
+#include "ui_button.h"
+#include "ui_listselect.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
 
 #include "log.h"
 
@@ -36,115 +42,110 @@
 using Widelands::WL_Map_Loader;
 
 
-Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
-(Widelands::Editor_Game_Base * g, Widelands::Map_Loader * * ml)
+struct Fullscreen_Menu_MapSelectImpl {
+	UI::Checkbox* load_map_as_scenario;
+	UI::Listselect<MapData>* list;
+	UI::Textarea* taname;
+	UI::Textarea* taauthor;
+	UI::Textarea* tasize;
+	UI::Textarea* taworld;
+	UI::Textarea* tanplayers;
+	UI::Multiline_Textarea* tadescr;
+	UI::Basic_Button* ok;
+
+	std::string curdir;
+	std::string basedir;
+};
+
+
+Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect()
 :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
-egbase(g),
-
-title(this, MENU_XRES / 2, 110, _("Choose your map!"), Align_HCenter),
-
-label_load_map_as_scenario
-(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter),
-load_map_as_scenario
-(this,
- label_load_map_as_scenario.get_x() + label_load_map_as_scenario.get_w() + 10,
- 170),
-
-list(this, 15, 205, 455, 365),
-
-label_name    (this, 560, 205, _("Name:"),    Align_Right),
-taname        (this, 570, 205, ""),
-label_author  (this, 560, 225, _("Author:"),  Align_Right),
-taauthor      (this, 570, 225, ""),
-label_size    (this, 560, 245, _("Size:"),    Align_Right),
-tasize        (this, 570, 245, ""),
-label_world   (this, 560, 265, _("World:"),   Align_Right),
-taworld       (this, 570, 265, ""),
-label_nplayers(this, 560, 285, _("Players:"), Align_Right),
-tanplayers    (this, 570, 285, ""),
-label_descr   (this, 560, 305, _("Descr:"),   Align_Right),
-tadescr       (this, 570, 305, 200, 190, ""),
-
-back
-(this,
- 570, 505, 200, 26,
- 0,
- &Fullscreen_Menu_MapSelect::end_modal, this, 0,
- _("Back")),
-
-m_ok
-(this,
- 570, 535, 200, 26,
- 2,
- &Fullscreen_Menu_MapSelect::ok, this,
- _("OK"),
- std::string(),
- false),
-
-m_ml         (ml),
-m_map        (new Widelands::Map),
-m_is_scenario(false),
-
-m_curdir ("maps"),
-m_basedir("maps")
+d(new Fullscreen_Menu_MapSelectImpl)
 {
-	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	load_map_as_scenario.changedto.set
-		(this, &Fullscreen_Menu_MapSelect::changed);
-	load_map_as_scenario.set_state(m_is_scenario);
-	list.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
-	list.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
-	delete *m_ml;
-	*m_ml=0;
+	UI::Textarea* title = new UI::Textarea(this, MENU_XRES / 2, 110, _("Choose your map!"), Align_HCenter);
+	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+
+	UI::Textarea* label = new UI::Textarea(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter);
+	d->load_map_as_scenario = new UI::Checkbox
+		(this,
+		 label->get_x() + label->get_w() + 10,
+		 170);
+	d->load_map_as_scenario->set_state(false);
+
+	d->list = new UI::Listselect<MapData>(this, 15, 205, 455, 365);
+	d->list->selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
+	d->list->double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
+
+	new UI::Textarea(this, 560, 205, _("Name:"), Align_Right);
+	d->taname = new UI::Textarea(this, 570, 205, "");
+	new UI::Textarea(this, 560, 225, _("Author:"), Align_Right);
+	d->taauthor = new UI::Textarea(this, 570, 225, "");
+	new UI::Textarea(this, 560, 245, _("Size:"), Align_Right);
+	d->tasize = new UI::Textarea(this, 570, 245, "");
+	new UI::Textarea(this, 560, 265, _("World:"), Align_Right);
+	d->taworld = new UI::Textarea(this, 570, 265, "");
+	new UI::Textarea(this, 560, 285, _("Players:"), Align_Right);
+	d->tanplayers = new UI::Textarea(this, 570, 285, "");
+	new UI::Textarea(this, 560, 305, _("Descr:"),   Align_Right);
+	d->tadescr = new UI::Multiline_Textarea(this, 570, 305, 200, 190, "");
+
+	new UI::IDButton<Fullscreen_Menu_MapSelect, int32_t>
+		(this,
+		 570, 505, 200, 26,
+		 0,
+		 &Fullscreen_Menu_MapSelect::end_modal, this, 0,
+		 _("Back"));
+
+	d->ok = new UI::Button<Fullscreen_Menu_MapSelect>
+		(this,
+		 570, 535, 200, 26,
+		 2,
+		 &Fullscreen_Menu_MapSelect::ok, this,
+		 _("OK"),
+		 std::string(),
+		 false);
+	d->ok->set_enabled(false);
+
+	d->curdir = d->basedir = "maps";
 	fill_list();
 }
 
 Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
 {
-	// if m_map is != 0, obviously ok was not pressed
-	delete m_map;
-	m_map=0;
+	delete d;
+	d = 0;
 }
 
-/**
- * Gets called when the Checkbox changes
- */
-void Fullscreen_Menu_MapSelect::changed(bool t)
+
+bool Fullscreen_Menu_MapSelect::is_scenario()
 {
-	m_is_scenario=t;
+	return d->load_map_as_scenario->get_state();
 }
+
+const MapData* Fullscreen_Menu_MapSelect::get_map() const
+{
+	if (d->list->has_selection())
+		return &d->list->get_selected();
+	return 0;
+}
+
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-	const std::string filename = list.get_selected();
+	const MapData& map = d->list->get_selected();
 
-	if
-		(g_fs->IsDirectory(filename.c_str())
-		 &&
-		 !WL_Map_Loader::is_widelands_map(filename))
-	{
-		m_curdir=g_fs->FS_CanonicalizeName(filename);
-		list.clear();
-		m_mapfiles.clear();
+	if (!map.width) {
+		d->curdir = g_fs->FS_CanonicalizeName(map.filename);
 		fill_list();
 	} else {
-		if (m_map)
-		{
-			assert(*m_ml);
-
-			egbase->set_map(&(*m_ml)->map());
-			(*m_ml)->preload_map(m_is_scenario);
-			(*m_ml)->load_world();
-			m_map = 0;
-		}
-
-		if (m_is_scenario)
+		if (is_scenario())
 			end_modal(2);
 		else
-		end_modal(1);
+			end_modal(1);
 	}
 }
+
 
 /**
  * Called when a different entry in the listbox gets selected.
@@ -153,53 +154,29 @@ void Fullscreen_Menu_MapSelect::ok()
  */
 void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
-	const char * const name = list.get_selected();
+	const MapData& map = d->list->get_selected();
 
-	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
-		// No directory
-		delete *m_ml;
-		*m_ml = 0;
+	if (map.width) {
+		char buf[256];
 
-		if (get_mapname())
-		{
-			assert(m_map);
-
-			try {
-				*m_ml = m_map->get_correct_loader(get_mapname()); //  FIXME memory leak!
-				(*m_ml)->preload_map(m_is_scenario);
-				m_map->set_filename(name);
-
-				char buf[256];
-				taname    .set_text(m_map->get_name());
-				taauthor  .set_text(m_map->get_author());
-				sprintf(buf, "%-4ix%4i", m_map->get_width(), m_map->get_height());
-				tasize    .set_text(buf);
-				sprintf(buf, "%i", m_map->get_nrplayers());
-				tanplayers.set_text(buf);
-				tadescr   .set_text(m_map->get_description());
-				taworld   .set_text
-					(Widelands::World::World(m_map->get_world_name()).get_name());
-				m_ok.set_enabled(true);
-			} catch (std::exception& e) {
-				log("Failed to load map %s: %s\n", get_mapname(), e.what());
-
-				taname    .set_text("(bad map file)");
-				taauthor  .set_text("");
-				tasize    .set_text("");
-				tanplayers.set_text("");
-				tadescr   .set_text("");
-				taworld   .set_text("");
-				m_ok.set_enabled(false);
-			}
-		} else {
-			// Directory
-			taname    .set_text("(bad map file)");
-			taauthor  .set_text("");
-			tasize    .set_text("");
-			tanplayers.set_text("");
-			tadescr   .set_text("");
-			taworld   .set_text("");
-		}
+		d->taname->set_text(map.name);
+		d->taauthor->set_text(map.author);
+		sprintf(buf, "%-4ux%4u", map.width, map.height);
+		d->tasize->set_text(buf);
+		sprintf(buf, "%i", map.nrplayers);
+		d->tanplayers->set_text(buf);
+		d->tadescr->set_text(map.description);
+		d->taworld->set_text(map.world);
+		d->ok->set_enabled(true);
+	} else {
+		// Directory
+		d->taname->set_text("(directory)");
+		d->taauthor->set_text("");
+		d->tasize->set_text("");
+		d->tanplayers->set_text("");
+		d->tadescr->set_text("");
+		d->taworld->set_text("");
+		d->ok->set_enabled(true);
 	}
 }
 
@@ -220,7 +197,6 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
  * map files here - the former are files, the latter are directories. Care must
  * be taken to sort uncompressed maps (which look like and really are
  * directories) with the files.
- * \todo This has not been accomplished yet
  *
  * The search starts in \ref m_curdir ("..../maps") and there is no possibility
  * to move further up. If the user moves down into subdirectories, we insert an
@@ -228,38 +204,44 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
  */
 void Fullscreen_Menu_MapSelect::fill_list()
 {
+	d->list->clear();
+
 	//  Fill it with all files we find in all directories.
-	g_fs->FindFiles(m_curdir, "*", &m_mapfiles);
+	filenameset_t files;
+	g_fs->FindFiles(d->curdir, "*", &files);
 
 	int32_t ndirs=0;
 
 	//If we are not at the top of the map directory hierarchy (we're not talking
 	//about the absolute filesystem top!) we manually add ".."
-	if (m_curdir!=m_basedir) {
-		m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
-		list.add
+	if (d->curdir != d->basedir) {
+		MapData map;
+		map.filename = g_fs->FS_CanonicalizeName(d->curdir + "/..");
+
+		d->list->add
 			("<parent>",
-			 m_parentdir.c_str(),
+			 map,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 		++ndirs;
 	}
 
-	//Add subdirectories to the list
-	//TODO: but skip uncompressed maps (which look like directories)
+	//Add subdirectories to the list (except for uncompressed maps)
 	for
-		(filenameset_t::iterator pname = m_mapfiles.begin();
-		 pname != m_mapfiles.end(); ++pname)
+		(filenameset_t::iterator pname = files.begin();
+		 pname != files.end(); ++pname)
 	{
 		const char * const name = pname->c_str();
 		if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
 		if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
 		if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for esthetic reasons
 		if (!g_fs->IsDirectory(name)) continue;
-		if (WL_Map_Loader::is_widelands_map(name))             continue;
+		if (WL_Map_Loader::is_widelands_map(name)) continue;
 
-		list.add
+		MapData dir;
+		dir.filename = name;
+		d->list->add
 			(FileSystem::FS_Filename(name),
-			 name,
+			 dir,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 		++ndirs;
 	}
@@ -269,8 +251,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		Widelands::Map map; //  Map_Loader needs a place to put it's preload data
 
 		for
-			(filenameset_t::iterator pname = m_mapfiles.begin();
-			 pname != m_mapfiles.end();
+			(filenameset_t::iterator pname = files.begin();
+			 pname != files.end();
 			 ++pname)
 		{
 			const char *name = pname->c_str();
@@ -282,9 +264,22 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			try {
 				map.set_filename(name);
 				ml->preload_map(true);
-				list.add
-					(map.get_name(),
-					 name,
+
+				MapData mapdata;
+				mapdata.filename = name;
+				mapdata.name = map.get_name();
+				mapdata.author = map.get_author();
+				mapdata.description = map.get_description();
+				mapdata.world = map.get_world_name();
+				mapdata.nrplayers = map.get_nrplayers();
+				mapdata.width = map.get_width();
+				mapdata.height = map.get_height();
+				if (!mapdata.width || !mapdata.height)
+					continue;
+
+				d->list->add
+					(mapdata.name.c_str(),
+					 mapdata,
 					 g_gr->get_picture
 					 (PicMod_Game,
 					  dynamic_cast<WL_Map_Loader const *>(ml) ?
@@ -299,8 +294,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		}
 	}
 
-	list.sort(0, ndirs);
-	list.sort(ndirs);
+	d->list->sort(0, ndirs);
+	d->list->sort(ndirs);
 
-	if (list.size()) list.select(0);
+	if (d->list->size())
+		d->list->select(0);
 }

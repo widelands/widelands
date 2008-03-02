@@ -30,8 +30,9 @@ namespace UI {struct ProgressWindow;};
 class Computer_Player;
 class Interactive_Base;
 struct Game_Main_Menu_Load_Game;
-struct NetGame;
 struct WLApplication;
+struct GameSettings;
+class GameController;
 
 namespace Widelands {
 
@@ -90,10 +91,11 @@ struct Game : public Editor_Game_Base {
 	~Game();
 
 	// life cycle
+	void set_game_controller(GameController* ctrl);
+	void init(UI::ProgressWindow & loader_ui, const GameSettings& settings);
 	bool run_splayer_map_direct(const char* mapname, bool scenario);
-	bool run_single_player ();
-	bool run_multi_player (NetGame*);
 	bool run_replay();
+	bool run (UI::ProgressWindow & loader_ui, bool = false);
 
 	/**
 	 * Loads a game from filename and runs it. If filename is empty, a dialog is
@@ -167,9 +169,6 @@ struct Game : public Editor_Game_Base {
 
 	Interactive_Player* get_ipl();
 
-	// If this has a netgame, return it
-	NetGame* get_netgame() {return m_netgame;}
-
 	SaveHandler* get_save_handler() {return &m_savehandler;}
 
 	// Statistics
@@ -181,15 +180,12 @@ struct Game : public Editor_Game_Base {
 	void WriteStatistics(FileWrite& fw);
 
 private:
-	bool run (UI::ProgressWindow & loader_ui, bool = false);
 	void sample_statistics();
 
 private:
 	GameInternals* m;
 
 	Map_Loader                   * m_maploader;
-
-	NetGame                      * m_netgame;
 
 	int32_t                            m_state;
 	Speed                          m_speed; //  frametime multiplier

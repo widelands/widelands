@@ -30,6 +30,7 @@
 #include "fullscreen_menu_loadreplay.h"
 #include "game_loader.h"
 #include "game_tips.h"
+#include "gamecontroller.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
@@ -103,6 +104,7 @@ struct GameInternals {
 #ifdef SYNC_DEBUG
 	SyncDebugWrapper syncwrapper;
 #endif
+	GameController* ctrl;
 
 	GameInternals(Game* g)
 #ifdef SYNC_DEBUG
@@ -133,10 +135,10 @@ m_replayreader(0),
 m_replaywriter(0),
 m_realtime(WLApplication::get()->get_time())
 {
+	m->ctrl = 0;
 	g_sound_handler.m_the_game = this;
 	m_last_stats_update = 0;
 	m_player_cmdserial = 0;
-	m_netgame = 0;
 }
 
 Game::~Game()
@@ -173,6 +175,12 @@ bool Game::get_allow_cheats()
 Interactive_Player* Game::get_ipl()
 {
 	return dynamic_cast<Interactive_Player*>(get_iabase());
+}
+
+
+void Game::set_game_controller(GameController* ctrl)
+{
+	m->ctrl = ctrl;
 }
 
 
@@ -264,32 +272,43 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 }
 
 
-bool Game::run_single_player ()
-{
-	m_state = gs_menu;
-
-	m_maploader=0;
-	Fullscreen_Menu_LaunchGame lgm(this, 0, &m_maploader);
-	const int32_t code = lgm.run();
-
-	if (code==0 || get_map()==0)
-		return false;
-
+/**
+ * Initialize the game based on the given settings.
+ */
+void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
+	m_state = gs_loading;
 	g_gr->flush(PicMod_Menu);
 
-	m_state = gs_loading;
-	UI::ProgressWindow loaderUI(map().get_background());
-	GameTips tips (loaderUI);
+	loaderUI.step(_("Preloading map"));
 
-	set_iabase(new Interactive_Player(*this, 0));
+	assert(!get_map());
+	set_map(new Map);
 
-	loaderUI.step(_("Loading a map"));
-	//  Now first, completely load the map.
-	m_maploader->load_map_complete(this, code==2); // if code==2 is a scenario
+	m_maploader = map().get_correct_loader(settings.mapfilename.c_str());
+	m_maploader->preload_map(false);
+
+	loaderUI.step(_("Configuring players"));
+	for (uint32_t i = 0; i < settings.players.size(); ++i) {
+		const PlayerSettings& player = settings.players[i];
+
+		if
+			(player.state == PlayerSettings::stateClosed ||
+			 player.state == PlayerSettings::stateOpen)
+			continue;
+
+		int32_t type = Player::Local;
+
+		if (player.state == PlayerSettings::stateComputer)
+			type = Player::AI;
+
+		add_player(i+1, type, player.tribe, player.name);
+		get_player(i+1)->init(false);
+	}
+
+	loaderUI.step(_("Loading map"));
+	m_maploader->load_map_complete(this, false); // if code==2 is a scenario
 	delete m_maploader;
-	m_maploader=0;
-
-	return run(loaderUI);
+	m_maploader = 0;
 }
 
 
@@ -330,40 +349,6 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 
 	return run(loaderUI, true);
 }
-
-bool Game::run_multi_player (NetGame* ng)
-{
-	m_state = gs_menu;
-	m_netgame=ng;
-
-	m_maploader=0;
-	Fullscreen_Menu_LaunchGame lgm(this, m_netgame, &m_maploader);
-	m_netgame->set_launch_menu (&lgm);
-	const int32_t code = lgm.run();
-	m_netgame->set_launch_menu (0);
-
-	if (code <= 0 || get_map() == 0)
-		return false;
-
-	UI::ProgressWindow loaderUI;
-	g_gr->flush(PicMod_Menu);
-
-	m_state = gs_loading;
-
-	set_iabase(new Interactive_Player(*this, 0)); //  FIXME memory leak???
-
-	//  Now first, completely load the map.
-	loaderUI.step(_("Loading a map"));
-	m_maploader->load_map_complete(this, false); // if code==2 is a scenario
-	delete m_maploader;
-	m_maploader=0;
-
-	loaderUI.step(_("Initializing a network game"));
-	m_netgame->begin_game();
-
-	return run(loaderUI);
-}
-
 
 /**
  * Display the fullscreen menu to choose a replay,
@@ -494,11 +479,8 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		std::string fname(REPLAY_DIR);
 		fname += '/';
 		fname += timestring();
-		if (m_netgame) {
-			char buf[100];
-			snprintf(buf, sizeof(buf), " - network game, player %u", m_netgame->get_playernum());
-			fname += buf;
-		}
+		if (m->ctrl)
+			fname += ' ' + m->ctrl->getGameDescription();
 		fname += REPLAY_SUFFIX;
 
 		m_replaywriter = new ReplayWriter(*this, fname);
@@ -541,8 +523,8 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
  */
 void Game::think()
 {
-	if (m_netgame!=0)
-		m_netgame->handle_network ();
+	if (m->ctrl)
+		m->ctrl->think();
 
 	if (m_state == gs_running) {
 		for (uint32_t i = 0;i < cpl.size(); ++i)
@@ -562,31 +544,27 @@ void Game::think()
 			m_last_stats_update = get_gametime();
 		}
 
-		int32_t frametime = -m_realtime;
-		m_realtime =  WLApplication::get()->get_time();
-		frametime += m_realtime;
+		int32_t frametime;
 
-		if (m_netgame!=0) {
-			int32_t max_frametime=m_netgame->get_max_frametime();
+		if (m->ctrl) {
+			frametime = m->ctrl->getFrametime();
+		} else {
+			frametime = -m_realtime;
+			m_realtime =  WLApplication::get()->get_time();
+			frametime += m_realtime;
 
-			if (frametime>max_frametime)
-				frametime = max_frametime; //  wait for the next server message
-			else if (max_frametime-frametime>500)
-				//  we are too long behind network time, so hurry a little
-				frametime += (max_frametime - frametime) / 2;
-		}
-		else
 			frametime *= get_speed();
 
-		// Maybe we are too fast...
-		// Note that the time reported by WLApplication might jump backwards
-		// when playback stops.
-		if (frametime <= 0)
-			return;
+			// Maybe we are too fast...
+			// Note that the time reported by WLApplication might jump backwards
+			// when playback stops.
+			if (frametime <= 0)
+				return;
 
-		// prevent frametime escalation in case the game logic is the performance bottleneck
-		if (frametime > 1000)
-			frametime = 1000;
+			// prevent frametime escalation in case the game logic is the performance bottleneck
+			if (frametime > 1000)
+				frametime = 1000;
+		}
 
 		if (m_replayreader) {
 			for (;;) {
@@ -605,9 +583,8 @@ void Game::think()
 
 		g_gr->animate_maptextures(get_gametime());
 
-		// check if autosave is needed, but only if that is not a network game
-		if (0 == m_netgame)
-			m_savehandler.think(*this, m_realtime);
+		// check if autosave is needed
+		m_savehandler.think(*this, m_realtime);
 	}
 }
 
@@ -721,13 +698,13 @@ uint32_t Game::logic_rand()
  */
 void Game::send_player_command (PlayerCommand* pc)
 {
-	// TODO: How are playercommand serials assigned in network games?
-	if (m_netgame and get_player(pc->get_sender())->get_type() == Player::Local) {
-		m_netgame->send_player_command (pc);
-	} else {
-		pc->set_cmdserial(++m_player_cmdserial);
-		enqueue_command (pc);
+	if (m->ctrl) {
+		m->ctrl->sendPlayerCommand(pc);
+		return;
 	}
+
+	pc->set_cmdserial(++m_player_cmdserial);
+	enqueue_command (pc);
 }
 
 

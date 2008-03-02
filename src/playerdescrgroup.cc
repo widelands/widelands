@@ -20,7 +20,7 @@
 #include "playerdescrgroup.h"
 
 #include "constants.h"
-#include "game.h"
+#include "gamesettings.h"
 #include "i18n.h"
 #include "player.h"
 #include "tribe.h"
@@ -31,203 +31,156 @@
 #include "ui_textarea.h"
 
 
-static const std::string default_names[MAX_PLAYERS + 1] = {
-	"",
-	_("Player 1"),
-	_("Player 2"),
-	_("Player 3"),
-	_("Player 4"),
-	_("Player 5"),
-	_("Player 6"),
-	_("Player 7"),
-	_("Player 8"),
-};
+struct PlayerDescriptionGroupImpl {
+	GameSettingsProvider* settings;
+	uint32_t plnum;
 
-void PlayerDescriptionGroup::allow_changes(changemode_t t) {
-	m_allow_changes = t;
-	m_btnEnablePlayer.set_visible(t & CHANGE_ENABLED);
-	m_btnPlayerType .set_enabled(false);
-	m_btnPlayerTribe.set_enabled(t & CHANGE_TRIBE);
-}
+	UI::Textarea* plr_name;
+	UI::Checkbox* btnEnablePlayer;
+	UI::Basic_Button* btnPlayerType;
+	UI::Basic_Button* btnPlayerTribe;
+};
 
 PlayerDescriptionGroup::PlayerDescriptionGroup
 (UI::Panel              * const parent,
  int32_t const x, int32_t const y,
- Widelands::Game        * const game,
- Widelands::Player_Number const plnum,
- bool                     const highlight)
+ GameSettingsProvider* settings,
+ uint32_t plnum)
 :
 UI::Panel(parent, x, y, 450, 20),
-m_game(game),
-m_plnum(plnum),
-m_enabled(false),
-m_playertype(Widelands::Player::Local), //  just for initialization
-m_current_tribe(0),
-m_allow_changes(CHANGE_EVERYTHING),
-
-//  create sub-panels
-m_plr_name(this, 0, 0, 100, 20, _("Player 1"), Align_Left),
-
-m_btnEnablePlayer(this, 88, 0),
-
-m_btnPlayerType
-(this,
- 116, 0, 120, 20,
- highlight ? 3 : 1,
- &PlayerDescriptionGroup::toggle_playertype, this,
- ""),
-
-m_btnPlayerTribe
-(this,
- 244, 0, 120, 20,
- highlight ? 3 : 1,
- &PlayerDescriptionGroup::toggle_playertribe, this,
- "")
-
+d(new PlayerDescriptionGroupImpl)
 {
-	set_visible(false);
-	m_btnEnablePlayer.set_state(true);
-	m_btnEnablePlayer.changedto.set(this, &PlayerDescriptionGroup::enable_player);
-	Widelands::Tribe_Descr::get_all_tribenames(m_tribes);
-	m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
+	d->settings = settings;
+	d->plnum = plnum;
 
-	set_player_type(Widelands::Player::AI);
+	d->plr_name = new UI::Textarea(this, 0, 0, 100, 20, std::string(), Align_Left);
+	d->btnEnablePlayer = new UI::Checkbox(this, 88, 0);
+	d->btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
+	d->btnPlayerType = new UI::Button<PlayerDescriptionGroup>
+		(this,
+		 116, 0, 120, 20,
+		 1,
+		 &PlayerDescriptionGroup::toggle_playertype, this,
+		 "");
+	d->btnPlayerTribe = new UI::Button<PlayerDescriptionGroup>
+		(this,
+		 244, 0, 120, 20,
+		 1,
+		 &PlayerDescriptionGroup::toggle_playertribe, this,
+		 "");
+
+	refresh();
 }
 
-/** PlayerDescriptionGroup::set_enabled(bool enable)
- *
- + The group is enabled if the map has got a starting position for this player.
- * We need to update the Game class accordingly.
+
+PlayerDescriptionGroup::~PlayerDescriptionGroup()
+{
+	delete d;
+	d = 0;
+}
+
+
+/**
+ * Update display and enabled buttons based on current settings.
  */
-void PlayerDescriptionGroup::set_enabled(bool enable)
+void PlayerDescriptionGroup::refresh()
 {
-	if (!m_allow_changes) return;
+	const GameSettings& settings = d->settings->settings();
 
-	if (enable == m_enabled)
-		return;
-
-	m_enabled = enable;
-
-	if (!m_enabled)
-	{
-		if (m_btnEnablePlayer.get_state()) m_game->remove_player(m_plnum);
+	if (d->plnum >= settings.players.size()) {
 		set_visible(false);
+		return;
 	}
-	else
-	{
-		if (m_btnEnablePlayer.get_state()) {
-			assert(m_current_tribe < m_tribes.size());
-			m_game->add_player
-				(m_plnum,
-				 m_playertype,
-				 m_tribes[m_current_tribe],
-				 default_names[m_plnum]);
-			m_game->get_player(m_plnum)->init(false); // Small initializes
+
+	set_visible(true);
+
+	const PlayerSettings& player = settings.players[d->plnum];
+	bool stateaccess = d->settings->canChangePlayerState(d->plnum);
+	bool tribeaccess = d->settings->canChangePlayerTribe(d->plnum);
+
+	d->btnEnablePlayer->set_enabled(stateaccess);
+
+	if (player.state == PlayerSettings::stateClosed) {
+		d->btnEnablePlayer->set_state(false);
+		d->btnPlayerType->set_visible(false);
+		d->btnPlayerType->set_enabled(false);
+		d->btnPlayerTribe->set_visible(false);
+		d->btnPlayerTribe->set_enabled(false);
+		d->plr_name->set_text(std::string());
+	} else {
+		d->btnEnablePlayer->set_state(true);
+		d->btnPlayerType->set_visible(true);
+		d->btnPlayerType->set_enabled(stateaccess);
+
+		if (player.state == PlayerSettings::stateOpen) {
+			d->btnPlayerType->set_title(_("Open"));
+			d->btnPlayerTribe->set_visible(false);
+			d->btnPlayerTribe->set_enabled(false);
+			d->plr_name->set_text(std::string());
+		} else {
+			std::string title;
+
+			if (player.state == PlayerSettings::stateComputer)
+				title = _("Computer");
+			else
+				title = _("Human");
+
+			d->btnPlayerType->set_title(title);
+			d->btnPlayerTribe->set_title(player.tribe);
+			d->plr_name->set_text(player.name);
+
+			d->btnPlayerTribe->set_visible(true);
+			d->btnPlayerTribe->set_enabled(tribeaccess);
 		}
-
-		m_btnPlayerType.set_title
-			(m_playertype == Widelands::Player::AI ? _("Computer") : _("Human"));
-		m_btnPlayerType .set_visible(m_btnEnablePlayer.get_state());
-		m_btnPlayerTribe.set_visible(m_btnEnablePlayer.get_state());
-
-		set_visible(true);
 	}
-
-	changed.call();
 }
 
-/** PlayerDescriptionGroup::enable_player(bool on)
- *
- * Update the Game when the checkbox is changed.
+
+/**
+ * The checkbox to open/close a player position has been pressed.
  */
 void PlayerDescriptionGroup::enable_player(bool on)
 {
-	//if (not (m_allow_changes & CHANGE_ENABLED)) return;
+	const GameSettings& settings = d->settings->settings();
+
+	if (d->plnum >= settings.players.size())
+		return;
 
 	if (on) {
-		m_game->add_player
-			(m_plnum,
-			 m_playertype,
-			 m_tribes[m_current_tribe],
-			 default_names[m_plnum]);
-		m_game->get_player(m_plnum)->init(false); // Small initializes
-	} else
-		m_game->remove_player(m_plnum);
-
-	m_btnPlayerType .set_visible(on);
-	m_btnPlayerTribe.set_visible(on);
-	changed.call();
+		if (settings.players[d->plnum].state == PlayerSettings::stateClosed)
+			d->settings->nextPlayerState(d->plnum);
+	} else {
+		if (settings.players[d->plnum].state != PlayerSettings::stateClosed)
+			d->settings->setPlayerState(d->plnum, PlayerSettings::stateClosed);
+	}
 }
+
 
 void PlayerDescriptionGroup::toggle_playertype()
 {
-	// NOOP: toggling the player type is currently not possible
+	d->settings->nextPlayerState(d->plnum);
 }
 
-/*
- * toggles the tribe the player will play
+/**
+ * Cycle through available tribes for the player.
  */
 void PlayerDescriptionGroup::toggle_playertribe()
 {
-	if (!(m_allow_changes&CHANGE_TRIBE))
+	const GameSettings& settings = d->settings->settings();
+
+	if (d->plnum >= settings.players.size())
 		return;
 
-	++m_current_tribe;
-	if (m_current_tribe==m_tribes.size()) m_current_tribe=0;
-	m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
+	const std::string& currenttribe = settings.players[d->plnum].tribe;
+	std::string nexttribe = settings.tribes[0];
 
-	// set the player
-	m_game->add_player
-		(m_plnum,
-		 m_playertype,
-		 m_tribes[m_current_tribe],
-		 default_names[m_plnum]);
-	m_game->get_player(m_plnum)->init(false); // Small initializes
-}
-
-/*
- * set the current player tribe
- */
-void PlayerDescriptionGroup::set_player_tribe(std::string str) {
-	for (uint32_t i = 0; i < m_tribes.size(); ++i) {
-		if (m_tribes[i] == str) {
-			m_current_tribe = i;
-			m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
-			//  set the player
-			m_game->add_player
-				(m_plnum,
-				 m_playertype,
-				 m_tribes[m_current_tribe].c_str(),
-				 default_names[m_plnum]);
-			m_game->get_player(m_plnum)->init(false); //  small initializes
-			return;
+	for (uint32_t i = 0; i < settings.tribes.size()-1; ++i) {
+		if (settings.tribes[i] == currenttribe) {
+			nexttribe = settings.tribes[i+1];
+			break;
 		}
 	}
-	throw wexception
-		("Map defines tribe %s, but it does not exist!", str.c_str());
+
+	d->settings->setPlayerTribe(d->plnum, nexttribe);
 }
 
-/*
- * Set players name
- */
-void PlayerDescriptionGroup::set_player_name(std::string str)
-{m_plr_name.set_text(str.c_str());}
-
-void PlayerDescriptionGroup::set_player_type(int32_t type)
-{
-	if (m_playertype==type)
-		return;
-
-	m_playertype=type;
-
-	if (m_enabled) {
-		m_btnPlayerType.set_title
-			(m_playertype == Widelands::Player::AI ? _("Computer") : _("Human"));
-
-		m_game->add_player
-			(m_plnum, m_playertype,
-			 m_tribes[m_current_tribe],
-			 default_names[m_plnum]);
-		m_game->get_player(m_plnum)->init(false); // Small initializes
-	}
-}

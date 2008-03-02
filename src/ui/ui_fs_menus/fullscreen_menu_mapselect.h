@@ -20,70 +20,50 @@
 #ifndef FULLSCREEN_MENU_MAPSELECT_H
 #define FULLSCREEN_MENU_MAPSELECT_H
 
-#include "filesystem.h"
 #include "fullscreen_menu_base.h"
 
-#include "ui_checkbox.h"
-#include "ui_button.h"
-#include "ui_listselect.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
+#include <string>
 
-namespace Widelands {
-class Editor_Game_Base;
-class Map;
-class Map_Loader;
+
+/**
+ * Data about a map that we're interested in.
+ */
+struct MapData {
+	std::string filename;
+	std::string name;
+	std::string author;
+	std::string description;
+	std::string world;
+	uint32_t width;
+	uint32_t height;
+	uint32_t nrplayers;
+
+	MapData()
+		: width(0), height(0), nrplayers(0) {}
 };
 
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
+struct Fullscreen_Menu_MapSelectImpl;
+
 class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base
 {
-	Widelands::Editor_Game_Base                * egbase;
-
-	UI::Textarea                                 title;
-	UI::Textarea                                 label_load_map_as_scenario;
-	UI::Checkbox                                 load_map_as_scenario;
-	UI::Listselect<const char *>                 list;
-	UI::Textarea                                 label_name;
-	UI::Textarea                                 taname;
-	UI::Textarea                                 label_author;
-	UI::Textarea                                 taauthor;
-	UI::Textarea                                 label_size;
-	UI::Textarea                                 tasize;
-	UI::Textarea                                 label_world;
-	UI::Textarea                                 taworld;
-	UI::Textarea                                 label_nplayers;
-	UI::Textarea                                 tanplayers;
-	UI::Textarea                                 label_descr;
-	UI::Multiline_Textarea                       tadescr;
-	UI::IDButton<Fullscreen_Menu_MapSelect, int32_t> back;
-	UI::Button<Fullscreen_Menu_MapSelect>        m_ok;
-
-	filenameset_t                                m_mapfiles;
-
-	Widelands::Map_Loader *                    * m_ml;
-	Widelands::Map                             * m_map;
-	bool              m_is_scenario;
-
 public:
-	Fullscreen_Menu_MapSelect
-		(Widelands::Editor_Game_Base *, Widelands::Map_Loader * *);
+	Fullscreen_Menu_MapSelect();
 	~Fullscreen_Menu_MapSelect();
 
-	const char * get_mapname() const throw () {return list.get_selected();}
+	bool is_scenario();
+	const MapData* get_map() const;
 
+private:
 	void ok();
-	void map_selected  (uint32_t);
+	void map_selected(uint32_t);
 	void changed(bool);
 	void double_clicked(uint32_t);
 	void fill_list();
 
-	std::string m_curdir;
-	std::string m_basedir;
-	std::string m_parentdir;
+	Fullscreen_Menu_MapSelectImpl* d;
 };
-
 
 #endif

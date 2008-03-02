@@ -159,23 +159,23 @@ void Interactive_Player::think()
 	}
 
 	// Check for chatmessages
-	if (NetGame * const ng = m_game->get_netgame())
-		if (ng->have_chat_message()) {
-			NetGame::Chat_Message t = ng->get_chat_message();
-			m_chatmsges.push_back(t);
-
-			Overlay_Chat_Messages ov;
-			ov.msg =  t;
-			ov.starttime = WLApplication::get()->get_time();
-			m_show_chatmsg.push_back(ov);
-		}
+// 	if (NetGame * const ng = m_game->get_netgame())
+// 		if (ng->have_chat_message()) {
+// 			NetGame::Chat_Message t = ng->get_chat_message();
+// 			m_chatmsges.push_back(t);
+//
+// 			Overlay_Chat_Messages ov;
+// 			ov.msg =  t;
+// 			ov.starttime = WLApplication::get()->get_time();
+// 			m_show_chatmsg.push_back(ov);
+// 		}
 
 	// If we have chat messages to overlay, show them now
 	m_chat_messages.set_text("");
 	if (m_show_chatmsg.size() && m_do_chat_overlays) {
 		std::string str;
 		for (uint32_t i = 0; i < m_show_chatmsg.size(); ++i) {
-			const NetGame::Chat_Message& t = m_show_chatmsg[i].msg;
+			const Chat_Message& t = m_show_chatmsg[i].msg;
 			str += get_game()->get_player(t.plrnum)->get_name();
 			str += ": ";
 			str += t.msg;
@@ -240,8 +240,8 @@ void Interactive_Player::postload()
 void Interactive_Player::toggle_chat        () {
 	if (m_chat.window)
 		delete m_chat.window;
-	else
-		new GameChatMenu(*this, m_chat, game().get_netgame());
+/*	else
+		new GameChatMenu(*this, m_chat, game().get_netgame());*/
 }
 void Interactive_Player::toggle_options_menu() {
 	if (m_options.window)
@@ -399,13 +399,13 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 	case SDLK_RETURN:
 		if (down) {
 			if (m_is_typing_msg && m_typed_message.size()) {
-				if (m_game->get_netgame()) {
+/*				if (m_game->get_netgame()) {
 					NetGame::Chat_Message t;
 
 					t.plrnum = get_player_number();
 					t.msg = m_typed_message;
 					m_game->get_netgame()->send_chat_message(t);
-				}
+				}*/
 				m_typed_message.clear();
 				m_is_typing_msg = false;
 			} else {

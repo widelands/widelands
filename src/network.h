@@ -21,6 +21,8 @@
 #define NETWORK_H
 
 #include "constants.h"
+#include "gamecontroller.h"
+#include "gamesettings.h"
 #include "md5.h"
 #include "widelands_streamread.h"
 #include "widelands_streamwrite.h"
@@ -32,224 +34,140 @@
 #include <cstring>
 #include <vector>
 
-namespace Widelands {
-struct Game;
-class PlayerCommand;
-};
-class PlayerDescriptionGroup;
-class Serializer;
-class Deserializer;
 
-class Fullscreen_Menu_LaunchGame;
+struct Deserializer;
+struct NetHostImpl;
+class RecvPacket;
+class SendPacket;
 
-class LAN_Game_Promoter;
-
-class NetStatusWindow;
-
-struct NetGame {
-	struct Chat_Message {
-		uint32_t plrnum;
-		std::string msg;
-	};
-
-	NetGame ();
-	virtual ~NetGame ();
-
-	uint32_t get_playernum () {return playernum;}
-
-	bool get_players_changed ()
-	{
-		bool ch=players_changed;
-		players_changed=false;
-		return ch;
-	}
-
-	void set_player_description_group (int32_t plnum, PlayerDescriptionGroup* pdg)
-	{
-		playerdescr[plnum-1]=pdg;
-	}
-
-	void set_launch_menu (Fullscreen_Menu_LaunchGame* lgm)
-	{
-		launch_menu=lgm;
-	}
-
-	void run ();
-
-	uint32_t get_max_frametime();
-
-	virtual bool is_host ()=0;
-	virtual void begin_game ();
-
-	virtual void handle_network ()=0;
-
-	virtual void send_player_command (Widelands::PlayerCommand *) = 0;
-	virtual void send_chat_message (Chat_Message)=0;
-
-	bool have_chat_message();
-	Chat_Message get_chat_message();
-
-	virtual void syncreport (const md5_checksum&)=0;
-
-protected:
-	void disconnect_player (int32_t);
-
-	enum {
-		PH_SETUP,
-		PH_PREGAME,
-		PH_INGAME
-	}                            phase;
-
-	Widelands::Game                       * game;
-
-	uint32_t                          playernum;
-	uint32_t                        net_game_time;
-
-	uint32_t                         common_rand_seed;
-
-	bool                         players_changed;
-
-	uint8_t                        player_enabled;
-	uint8_t                        player_human;
-	uint8_t                        player_ready;
-
-	PlayerDescriptionGroup     * playerdescr[MAX_PLAYERS];
-	Fullscreen_Menu_LaunchGame * launch_menu;
-
-	NetStatusWindow            * statuswnd;
-
-	std::queue<Chat_Message>     chat_msg_queue;
+struct Chat_Message {
+	uint32_t plrnum;
+	std::string msg;
 };
 
-struct NetHost:public NetGame {
+
+struct NetHost : public GameController {
 	NetHost ();
 	virtual ~NetHost ();
 
-	void update_map ();
+	void run();
 
-	virtual bool is_host () {return true;}
-	virtual void begin_game ();
+	// GameController interface
+	void think();
+	void sendPlayerCommand(Widelands::PlayerCommand* pc);
+	int32_t getFrametime();
+	std::string getGameDescription();
 
-	virtual void handle_network ();
+	// Pregame-related stuff
+	const GameSettings& settings();
+	bool canLaunch();
+	void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers);
+	void setPlayerState(uint8_t number, PlayerSettings::State state);
+	void setPlayerTribe(uint8_t number, const std::string& tribe);
 
-	virtual void send_player_command (Widelands::PlayerCommand *);
-	virtual void send_chat_message (Chat_Message);
-
-	virtual void syncreport (const md5_checksum&);
+	void handle_network ();
 
 private:
-	void send_game_message (const char*);
-	void send_chat_message_int (Chat_Message);
-	void send_player_info ();
-	void update_network_delay ();
+	void welcomeClient(uint32_t number);
 
-	struct Client {
-		TCPsocket        sock;
-		Deserializer   * deserializer;
-		int32_t              playernum;
-		std::queue<md5_checksum> syncreports;
-		uint32_t            lag;
-	};
+	void broadcast(SendPacket& packet);
+	void writeSettingMap(SendPacket& packet);
+	void writeSettingPlayer(SendPacket& packet, uint8_t number);
+	void writeSettingAllPlayers(SendPacket& packet);
 
-	LAN_Game_Promoter         * promoter;
+	void disconnectPlayer(uint8_t number);
+	void disconnectClient(uint32_t number);
+	void reaper();
 
-	TCPsocket                   svsock;
-	SDLNet_SocketSet            sockset;
-
-	std::queue<Widelands::PlayerCommand *> cmds;
-	std::vector<Client>         clients;
-
-	Serializer                * serializer;
-
-	std::queue<md5_checksum>    mysyncreports;
-
-	uint32_t                       net_delay;
-	uint32_t                       net_delay_history[8];
-
-	uint32_t                       next_ping_due;
-	uint32_t                       last_ping_sent;
-	uint32_t                        pongs_received;
+	NetHostImpl* d;
 };
 
-struct NetClient:public NetGame {
+struct NetClientImpl;
+
+struct NetClient : public GameController, public GameSettingsProvider {
 	NetClient (IPaddress*);
 	virtual ~NetClient ();
 
-	virtual bool is_host () {return false;}
-	virtual void begin_game ();
+	void run();
 
-	virtual void handle_network ();
+	// GameController interface
+	void think();
+	void sendPlayerCommand(Widelands::PlayerCommand* pc);
+	int32_t getFrametime();
+	std::string getGameDescription();
 
-	virtual void send_player_command (Widelands::PlayerCommand *);
-	virtual void send_chat_message (Chat_Message);
+	// GameSettingsProvider interface
+	virtual const GameSettings& settings();
 
-	virtual void syncreport (const md5_checksum&);
+	virtual bool canChangeMap();
+	virtual bool canChangePlayerState(uint8_t number);
+	virtual bool canChangePlayerTribe(uint8_t number);
+
+	virtual bool canLaunch();
+
+	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers);
+	virtual void setPlayerState(uint8_t number, PlayerSettings::State state);
+	virtual void nextPlayerState(uint8_t number);
+	virtual void setPlayerTribe(uint8_t number, const std::string& tribe);
 
 private:
+	void handle_network ();
+	void recvOnePlayer(uint8_t number, Widelands::StreamRead& packet);
 	void disconnect ();
 
-	TCPsocket        sock;
-	SDLNet_SocketSet sockset;
-
-	Serializer     * serializer;
-	Deserializer   * deserializer;
+	NetClientImpl* d;
 };
 
-struct Serializer : public Widelands::StreamWrite {
-	Serializer ();
-	~Serializer ();
-
-	void begin_packet ();
-	void end_packet ();
+/**
+ * Buffered StreamWrite object for assembling a packet that will be
+ * sent via the \ref send() function.
+ */
+struct SendPacket : public Widelands::StreamWrite {
+	SendPacket ();
 
 	void send (TCPsocket);
+	void reset ();
 
 	void Data(void const * data, size_t size);
-
-	void putchar (char v)
-	{
-		buffer.push_back (v);
-	}
-
-	void putshort (int16_t v)
-	{
-		buffer.push_back (v >> 8);
-		buffer.push_back (v & 0xFF);
-	}
-
-	void putlong (int32_t v)
-	{
-		buffer.push_back (v >> 24);
-		buffer.push_back ((v>>16) & 0xFF);
-		buffer.push_back ((v>>8) & 0xFF);
-		buffer.push_back (v & 0xFF);
-	}
-
-	void putstr (const char*);
 
 private:
 	std::vector<uint8_t> buffer;
 };
 
-struct Deserializer : public Widelands::StreamRead {
-	Deserializer ();
-	~Deserializer ();
 
-	int32_t read_packet (TCPsocket);
-
-	bool avail () const throw () {return not queue.empty();}
+/**
+ * One packet, as received by the deserializer.
+ */
+struct RecvPacket : public Widelands::StreamRead {
+public:
+	RecvPacket(Deserializer& des);
 
 	size_t Data(void * data, size_t bufsize);
 	bool EndOfFile() const;
 
-	char getchar ();
-	int16_t getshort ();
-	int32_t getlong ();
+private:
+	std::vector<uint8_t> buffer;
+	size_t m_index;
+};
 
-	void getstr (char*, int32_t);
+struct Deserializer {
+	/**
+	 * Read data from the given socket.
+	 * \return \c false if the socket was disconnected or another error occured.
+	 * \c true if some data could be read (this does not imply that \ref avail
+	 * will return \c true !)
+	 */
+	bool read (TCPsocket);
+
+	/**
+	 * \return \c true if an entire packet has been received.
+	 */
+	bool avail () const;
 
 private:
-	std::queue<uint8_t> queue;
+	friend class RecvPacket;
+	std::vector<uint8_t> queue;
+	size_t index;
 };
 
 #endif

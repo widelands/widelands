@@ -183,6 +183,8 @@ struct WLApplication {
 	void mainmenu_singleplayer();
 	void mainmenu_multiplayer();
 
+	bool new_game();
+
 #ifdef DEBUG
 #ifndef __WIN32__
 	//not all of these need to be public, but I consider signal handling
@@ -206,7 +208,7 @@ struct WLApplication {
 
 	static void show_usage();
 
-	void emergency_save(Widelands::Game& game);
+	static void emergency_save(Widelands::Game& game);
 
 protected:
 	WLApplication(const int argc, const char **argv);
