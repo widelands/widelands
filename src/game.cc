@@ -577,6 +577,9 @@ void Game::player_field_notification (const FCoords& fc, losegain_t lg)
 
 /**
  * Cleanup for load
+ * \deprecated
+ * \todo Get rid of this. Prefer to delete and recreate Game-style objects
+ * Note that this needs fixes in the editor.
  */
 void Game::cleanup_for_load
 (const bool flush_graphics, const bool flush_animations)

@@ -123,6 +123,8 @@ void Editor_Interactive::load(std::string const & filename) {
 
 	Widelands::Map & map = egbase().map();
 
+	// TODO: get rid of cleanup_for_load, it tends to be very messy
+	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load(true, false);
 
 	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
