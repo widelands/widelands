@@ -69,6 +69,8 @@ m_game(g), player_number(pid), tribe(0)
 void Computer_Player::late_initialization ()
 {
 	player = game().get_player(player_number);
+	NoteReceiver<NoteImmovable>::connect(*player);
+	NoteReceiver<NoteField>::connect(*player);
 	tribe = &player->tribe();
 
 	log ("ComputerPlayer(%d): initializing\n", player_number);
@@ -1104,6 +1106,21 @@ bool Computer_Player::improve_roads (Flag* flag)
 	return false;
 }
 
+
+void Computer_Player::receive(const NoteImmovable& note)
+{
+	if (note.lg == LOSE)
+		lose_immovable(note.pi);
+	else
+		gain_immovable(note.pi);
+}
+
+void Computer_Player::receive(const NoteField& note)
+{
+	if (note.lg == GAIN)
+		unusable_fields.push_back(note.fc);
+}
+
 // this is called whenever we gain ownership of a PlayerImmovable
 void Computer_Player::gain_immovable (PlayerImmovable* pi)
 {
@@ -1147,15 +1164,6 @@ void Computer_Player::lose_immovable (PlayerImmovable* pi)
 		break;
 	}
 }
-
-// this is called whenever we gain ownership of a field on the map
-void Computer_Player::gain_field (const FCoords& fc)
-{
-	unusable_fields.push_back (fc);
-}
-
-// we don't use this - instead we check or fields regularly, see think()
-void Computer_Player::lose_field (const FCoords &) {}
 
 
 /* CheckStepRoadAI */

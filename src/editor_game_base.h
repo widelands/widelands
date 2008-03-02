@@ -24,6 +24,7 @@
 #include "building.h"
 #include "constants.h"
 #include "map.h"
+#include "notification.h"
 #include "player_area.h"
 
 #include <cassert>
@@ -51,7 +52,7 @@ class Tribe_Descr;
 class Flag;
 class AttackController;
 
-struct Editor_Game_Base {
+struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
 	friend class Game_Game_Class_Data_Packet;
@@ -138,9 +139,8 @@ struct Editor_Game_Base {
 	void inform_players_about_immovable(Map_Index, Map_Object_Descr const *);
 	void inform_players_about_road     (FCoords,   Map_Object_Descr const *);
 
-	enum losegain_t {LOSE=0, GAIN};
-	virtual void player_immovable_notification (PlayerImmovable*, losegain_t);
-	virtual void player_field_notification (const FCoords&, losegain_t);
+	void receive(const NoteImmovable& note);
+	void receive(const NoteField& note);
 
 	void cleanup_objects() throw () {
 		objects().cleanup(this);

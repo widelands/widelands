@@ -144,15 +144,16 @@ void Editor_Game_Base::think()
 	// by a given number of milliseconds
 }
 
-void Editor_Game_Base::player_immovable_notification (PlayerImmovable*, losegain_t)
+void Editor_Game_Base::receive(const NoteImmovable& note)
 {
-	//TODO: Get rid of this; replace by general notification system
+	note.pi->get_owner()->receive(note);
 }
 
-void Editor_Game_Base::player_field_notification (const FCoords&, losegain_t)
+void Editor_Game_Base::receive(const NoteField& note)
 {
-	//TODO: Get rid of this; replace by general notification system
+	get_player(note.fc.field->get_owned_by())->receive(note);
 }
+
 
 /*
 ===============
@@ -280,10 +281,10 @@ void Editor_Game_Base::do_conquer_area
 				 or
 				 player(owner).military_influence(index) < new_influence_modified)
 			{
-				if (owner) player_field_notification(mr.location(), LOSE);
+				if (owner) receive(NoteField(mr.location(), LOSE));
 				mr.location().field->set_owned_by(player_area.player_number);
 				inform_players_about_ownership(index, player_area.player_number);
-				player_field_notification (mr.location(), GAIN);
+				receive (NoteField(mr.location(), GAIN));
 			}
 		} else if
 			(not (conquering_player.military_influence(index) -= influence)
@@ -319,10 +320,10 @@ void Editor_Game_Base::do_conquer_area
 				}
 			}
 			if (best_player != player_area.player_number) {
-				player_field_notification (mr.location(), LOSE);
+				receive (NoteField(mr.location(), LOSE));
 				mr.location().field->set_owned_by (best_player);
 				inform_players_about_ownership(index, best_player);
-				if (best_player) player_field_notification (mr.location(), GAIN);
+				if (best_player) receive (NoteField(mr.location(), GAIN));
 			}
 		}
 	} while (mr.advance(map()));

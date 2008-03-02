@@ -550,31 +550,6 @@ void Game::think()
 }
 
 
-void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
-{
-	for (uint32_t i = 0; i < cpl.size(); ++i)
-		if (cpl[i]->get_player_number()==pi->get_owner()->get_player_number())
-			if (lg==GAIN)
-				cpl[i]->gain_immovable (pi);
-			else
-				cpl[i]->lose_immovable (pi);
-
-	if (lg==GAIN)
-		pi->get_owner()->gain_immovable (pi);
-	else
-		pi->get_owner()->lose_immovable (pi);
-}
-
-void Game::player_field_notification (const FCoords& fc, losegain_t lg)
-{
-	for (uint32_t i = 0; i < cpl.size(); ++i)
-		if (cpl[i]->get_player_number()==fc.field->get_owned_by())
-			if (lg==GAIN)
-				cpl[i]->gain_field (fc);
-			else
-				cpl[i]->lose_field (fc);
-}
-
 /**
  * Cleanup for load
  * \deprecated

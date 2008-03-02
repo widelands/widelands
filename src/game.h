@@ -139,9 +139,6 @@ struct Game : public Editor_Game_Base {
 
 	bool get_allow_cheats();
 
-	virtual void player_immovable_notification (PlayerImmovable*, losegain_t);
-	virtual void player_field_notification (const FCoords&, losegain_t);
-
 	void enqueue_command (Command * const);
 
 	void send_player_command (Widelands::PlayerCommand *);

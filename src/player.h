@@ -24,6 +24,7 @@
 #include "building.h"
 #include "editor_game_base.h"
 #include "mapregion.h"
+#include "notification.h"
 #include "rgbcolor.h"
 
 #include "widelands.h"
@@ -52,7 +53,10 @@ class AttackController;
  * in the long run.
  *                      -- Nicolai
  */
-struct Player {
+struct Player
+	: NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>,
+	  public NoteSender<NoteImmovable>, public NoteSender<NoteField>
+{
 	struct Building_Stats {
 		bool is_constructionsite;
 		Coords pos;
@@ -440,8 +444,9 @@ struct Player {
 	void sample_statistics();
 	void ware_produced(Ware_Index);
 	void next_ware_production_period();
-	void gain_immovable(PlayerImmovable*);
-	void lose_immovable(PlayerImmovable*);
+
+	void receive(const NoteImmovable& note);
+	void receive(const NoteField& note);
 
 private:
 	/**

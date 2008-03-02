@@ -21,6 +21,7 @@
 #define COMPUTER_PLAYER_H
 
 #include "game.h"
+#include "notification.h"
 
 #include <list>
 
@@ -35,22 +36,21 @@ class Road;
 class ProductionSite;
 };
 
-struct Computer_Player {
+struct Computer_Player : Widelands::NoteReceiver<Widelands::NoteImmovable>, Widelands::NoteReceiver<Widelands::NoteField> {
 	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
 	~Computer_Player ();
 
 	void think ();
 
-	void gain_immovable (Widelands::PlayerImmovable *);
-	void lose_immovable (Widelands::PlayerImmovable *);
-
-	void gain_field (Widelands::FCoords const &);
-	void lose_field (Widelands::FCoords const &);
+	void receive(const Widelands::NoteImmovable& note);
+	void receive(const Widelands::NoteField& note);
 
 	Widelands::Game & game() const throw () {return m_game;}
 	Widelands::Player_Number get_player_number() {return player_number;}
 
 private:
+	void gain_immovable (Widelands::PlayerImmovable* pi);
+	void lose_immovable (Widelands::PlayerImmovable* pi);
 	void gain_building (Widelands::Building *);
 	void lose_building (Widelands::Building *);
 

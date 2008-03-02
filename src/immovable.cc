@@ -954,8 +954,7 @@ void PlayerImmovable::set_owner(Player * const new_owner) {
 
 	m_owner = new_owner;
 
-	m_owner->egbase().player_immovable_notification
-		(this, Editor_Game_Base::GAIN);
+	m_owner->egbase().receive(NoteImmovable(this, GAIN));
 }
 
 /**
@@ -975,8 +974,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base *g)
 		m_workers[0]->set_location(0);
 
 	if (m_owner)
-		m_owner->egbase().player_immovable_notification
-			(this, Editor_Game_Base::LOSE);
+		m_owner->egbase().receive(NoteImmovable(this, LOSE));
 
 	BaseImmovable::cleanup(g);
 }
