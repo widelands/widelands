@@ -262,6 +262,13 @@ void NetHost::run()
 	if (code <= 0)
 		return;
 
+	for(int32_t i = 0; i < d->clients.size(); ++i) {
+		if (d->clients[i].playernum == -1) {
+			log("[Host]: say goodbye to client %i, game is starting without him\n", i);
+			disconnectClient(i);
+		}
+	}
+
 	SendPacket s;
 	s.Unsigned8(NETCMD_LAUNCH);
 	broadcast(s);
@@ -515,7 +522,12 @@ void NetHost::handle_network ()
 		peer.playernum = -1;
 		d->clients.push_back (peer);
 
-		// Now we wait for the client to say Hi in the right language
+		// Now we wait for the client to say Hi in the right language,
+		// unless the game has already started
+		if (d->game) {
+			log("[Host]: client trying to connect, game is already running\n");
+			disconnectClient(d->clients.size()-1);
+		}
 	}
 
 	// check if we hear anything from our clients
@@ -543,6 +555,11 @@ void NetHost::handle_network ()
 			uint8_t cmd = r.Unsigned8();
 
 			if (client.playernum == -1) {
+				if (d->game) {
+					log("[Host]: client %i pre-connected but game is already running\n", i);
+					disconnectClient(i);
+					break;
+				}
 				if (cmd != NETCMD_HELLO) {
 					log("[Host]: client %i: HELLO expected instead of %u\n", i, cmd);
 					disconnectClient(i);
