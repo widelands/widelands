@@ -50,10 +50,8 @@ struct PlayerImmovable;
  * final statistics screen(s).
  */
 enum {
-	gs_none    = 0, //  not connected, nothing
-	gs_menu,        //  in the setup menu(s)
-	gs_loading,     //  menu has completed, but the game is still loading
-	gs_running      //  in-game
+	gs_notrunning = 0, // game is being prepared
+	gs_running      // game was fully prepared at some point and is now in-game
 };
 
 class Player;

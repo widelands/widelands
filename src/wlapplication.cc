@@ -1158,7 +1158,6 @@ void WLApplication::mainmenu_singleplayer()
 		}
 		case Fullscreen_Menu_SinglePlayer::Campaign: {
 			Widelands::Game game;
-			game.m_state = Widelands::gs_menu;
 			std::string filename;
 			for (;;) { // Campaign UI - Loop
 				int32_t campaign;

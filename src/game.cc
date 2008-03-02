@@ -128,7 +128,7 @@ struct GameInternals {
 
 Game::Game() :
 m(new GameInternals(this)),
-m_state   (gs_none),
+m_state   (gs_notrunning),
 m_speed   (1),
 cmdqueue  (this),
 m_replayreader(0),
@@ -216,8 +216,6 @@ bool Game::can_start()
 }
 
 bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
-	m_state = gs_loading;
-
 	assert(!get_map());
 
 	set_map(new Map);
@@ -276,7 +274,6 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
  * Initialize the game based on the given settings.
  */
 void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
-	m_state = gs_loading;
 	g_gr->flush(PicMod_Menu);
 
 	loaderUI.step(_("Preloading map"));
@@ -338,8 +335,6 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 		std::auto_ptr<FileSystem> const fs
 			(g_fs->MakeSubFileSystem(filename.c_str()));
 
-		m_state = gs_loading;
-
 		set_iabase(new Interactive_Player(*this, 0)); //  FIXME memory leak!!!
 
 		Game_Loader gl(*fs, this);
@@ -369,7 +364,6 @@ bool Game::run_replay()
 	// We have to create an empty map, otherwise nothing will load properly
 	set_map(new Map);
 
-	m_state = gs_loading;
 	set_iabase(new Interactive_Spectator(this)); //  FIXME memory leak???
 
 	loaderUI.step(_("Loading..."));
@@ -509,7 +503,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 	g_gr->flush(PicMod_Game);
 	g_anim.flush();
 
-	m_state = gs_none;
+	m_state = gs_notrunning;
 
 	return true;
 }
@@ -620,7 +614,7 @@ void Game::player_field_notification (const FCoords& fc, losegain_t lg)
 void Game::cleanup_for_load
 (const bool flush_graphics, const bool flush_animations)
 {
-	m_state = gs_loading;
+	m_state = gs_notrunning;
 
 	Editor_Game_Base::cleanup_for_load(flush_graphics, flush_animations);
 	for
