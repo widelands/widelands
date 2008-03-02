@@ -1,19 +1,101 @@
 #!/bin/bash
+#
+#  Detects style errors in the C++ source code. Run this from the top directory
+#  (which has the subdirectories build, src and utils).
+#
+#  The output may include colour codes if and only if standard output is a
+#  terminal.
+#
+#  Several check commands are used:
+#  * grep with a set of regular expressions
+#  * whitespace_checker (with detect_spurious_indentation.py as an inferior
+#    fallback)
+#
+#  Results are cached (there are separate caches for colour/nocolour). The
+#  check commands do not write directly to a file at the cahce file location
+#  because that could leave behind an incomplete cache file that is newer than
+#  the source file in case that the check commands are interrupted. Instead
+#  write the output from the check commands to a temporary file and when that
+#  file is complete, move it to the cache file location.
+
 CHECKER=utils/spurious_source_code/whitespace_checker
 if [ ! -f $CHECKER ]; then
 	echo "WARNING: $CHECKER does not exist!"
 	echo "WARNING:    Go to utils/spurious_source_code and build it with make!"
-	echo "WARNING:    Many checks will not be done much slower or not at all!"
+	echo "WARNING:    Else many checks will be done much slower or not at all!"
 	unset CHECKER
 fi
 
-REGEXPS_FILE="/tmp/spurious_source_code_regexps"
-rm -f $REGEXPS_FILE
+#  Make sure that several instances of this script running concurrently each
+#  have a separate temporary directory.
+TMP_DIR=/tmp/spurious_source_code_detect.$PPID
+rm -fr $TMP_DIR
+mkdir $TMP_DIR || { echo "ERROR: could not create $TMP_DIR"; exit; }
+
+
+REGEXPS_FILE=$TMP_DIR/regexps
 for r in utils/spurious_source_code/regexps/*; do
 	[[ -d $r && ! -f $r/disabled && ( ! $CHECKER || ! -f $r/redundant_with_whitespace_checker ) ]] && cat $r/regexps >> $REGEXPS_FILE
 done
-for i in $(find src -name *.h -o -name *.cc); do
-	egrep --color --with-filename --line-number -f $REGEXPS_FILE $i;
-	[[ $CHECKER ]] && $CHECKER $i || utils/detect_spurious_indentation.py $i;
-done
-rm -f $REGEXPS_FILE
+
+
+[[ -t 1 ]] && COLOUR=.colourized || unset COLOUR
+
+
+RESULT_FILE=$TMP_DIR/result
+
+#  Runs all checks on single source file. The result is written to
+#  $RESULT_FILE.
+#
+#  Requirements on the result:
+#  * Error message lines must begin with <filename>:<linenumber> so that they
+#    can be parsed by tools like KDevelop.
+#  * Any colour codes produced by commands like "grep --colour" must be
+#    included if and only if $COLOUR is set.
+#
+#  Parameters:
+#    $1
+#      The name of the source file to be checked.
+function check {
+	egrep --with-filename --line-number $([ $COLOUR ] && echo --colour=always) -f $REGEXPS_FILE $1 >  $RESULT_FILE
+	([[ $CHECKER ]] && $CHECKER $1 || utils/detect_spurious_indentation.py $1)                     >> $RESULT_FILE
+}
+
+
+CACHE_DIR="build/stylecheck"
+
+#  Detects errors recursively and stores the result in a cache. The cache
+#  content (if any) is echoed to standard output.
+#
+#  If a cached entry exists and is not older than the source file, no checks
+#  are done on that source file.
+#
+#  Calls itself recursively for each subdirectory. Then checks all the source
+#  files in the current directory.
+#
+#  Parameters:
+#    $1
+#      The name of the directory to start the search and check in.
+function detect {
+	mkdir -p $CACHE_DIR/$1
+	for d in $1/*; do
+		[[ -d $d ]] && detect $d
+	done
+	for f in $1/*.h $1/*.cc; do
+		CACHE=$CACHE_DIR/$f.stylecheck$COLOUR
+		if [ $f -nt $CACHE ]; then
+			echo "Checking for errors in $f..."
+			check $f
+			mv $RESULT_FILE $CACHE
+			cat $CACHE
+		elif [ -s $CACHE ]; then
+			echo "Showing cached errors in $f..."
+			cat $CACHE
+		fi
+	done
+}
+
+
+detect src
+
+rm -fr $TMP_DIR
