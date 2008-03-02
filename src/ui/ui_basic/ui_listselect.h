@@ -151,12 +151,12 @@ struct Listselect : public BaseListselect {
 		BaseListselect::add(name, m_entry_cache.size()-1, picid, select_this);
 	}
 
-	Entry operator[](const uint32_t i) const throw ()
+	const Entry& operator[](const uint32_t i) const throw ()
 	{
 		return m_entry_cache[BaseListselect::operator[](i)];
 	}
 
-	Entry get_selected() const
+	const Entry& get_selected() const
 	{
 		return m_entry_cache[BaseListselect::get_selected()];
 	}
