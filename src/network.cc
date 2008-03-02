@@ -282,7 +282,7 @@ void NetHost::run()
 
 		d->game = &game;
 		game.set_game_controller(this);
-		game.set_iabase(new Interactive_Player(game, 0));
+		game.set_iabase(new Interactive_Player(game, 1));
 		game.init(loaderUI, d->settings);
 
 		d->committime = game.get_gametime();
@@ -756,7 +756,7 @@ void NetClient::run ()
 
 		d->game = &game;
 		game.set_game_controller(this);
-		game.set_iabase(new Interactive_Player(game, 0));
+		game.set_iabase(new Interactive_Player(game, d->playernum+1));
 		game.init(loaderUI, d->settings);
 		game.run(loaderUI);
 	} catch (...) {

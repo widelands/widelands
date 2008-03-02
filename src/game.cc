@@ -184,37 +184,6 @@ void Game::set_game_controller(GameController* ctrl)
 }
 
 
-/** Game::can_start()
- *
- * Returns true if the game settings are valid.
- */
-bool Game::can_start()
-{
-	int32_t local_num;
-	int32_t i;
-
-	if (!get_map())
-		return false;
-
-	// we need exactly one local player
-	local_num = -1;
-	for (i = 1; i <= MAX_PLAYERS; ++i) {
-		if (!get_player(i))
-			continue;
-
-		if (get_player(i)->get_type() == Player::Local) {
-			if (local_num < 0)
-				local_num = i;
-			else
-				return false;
-		}
-	}
-	if (local_num < 0)
-		return false;
-
-	return true;
-}
-
 bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	assert(!get_map());
 
@@ -249,12 +218,12 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
 			(p,
-			 p == 1 ? Player::Local : Player::AI, //  FIXME allow the user to contorol another player than 1, and allow the computer to control player 1
+			 p == 1 ? Player::Human : Player::AI, //  FIXME allow the user to contorol another player than 1, and allow the computer to control player 1
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 	}
 
-	set_iabase(new Interactive_Player(*this, 0));
+	set_iabase(new Interactive_Player(*this, 1));
 
 	loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 
@@ -293,7 +262,7 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 			 player.state == PlayerSettings::stateOpen)
 			continue;
 
-		int32_t type = Player::Local;
+		int32_t type = Player::Human;
 
 		if (player.state == PlayerSettings::stateComputer)
 			type = Player::AI;
@@ -335,7 +304,7 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 		std::auto_ptr<FileSystem> const fs
 			(g_fs->MakeSubFileSystem(filename.c_str()));
 
-		set_iabase(new Interactive_Player(*this, 0)); //  FIXME memory leak!!!
+		set_iabase(new Interactive_Player(*this, 1)); //  FIXME memory leak!!!
 
 		Game_Loader gl(*fs, this);
 		loaderUI.step(_("Loading..."));
@@ -403,8 +372,6 @@ void Game::postload()
 		iterate_players_existing(p, nr_players, *this, plr) {
 			if      (plr->get_type() == Player::AI)
 				cpl.push_back (new Computer_Player(*this, p));
-			else if (plr->get_type() == Player::Local)
-				ipl->set_player_number(p);
 		}
 	}
 
@@ -440,10 +407,10 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 			step_description += ".";
 			loader_ui.step(step_description);
 			plr->init(true);
-
-			if (plr->get_type() == Player::Local)
-				get_ipl()->move_view_to(map().get_starting_pos(p));
 		}
+
+		if (get_ipl())
+			get_ipl()->move_view_to(map().get_starting_pos(get_ipl()->get_player_number()));
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();

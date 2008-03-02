@@ -1370,7 +1370,7 @@ bool WLApplication::new_game()
 
 		loaderUI.step(_("Preparing game"));
 
-		game.set_iabase(new Interactive_Player(game, 0));
+		game.set_iabase(new Interactive_Player(game, 1));
 		game.init(loaderUI, sp.settings());
 		game.run(loaderUI);
 	} catch (...) {

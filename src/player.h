@@ -47,9 +47,9 @@ class AttackController;
  * Commands are inserted by:
  *  - local player
  *  - network packets
- *  - AI code which is invoked from Game, _not_ from Player
- * So basically the Game knows whether a player is controlled
- * locally, remotely or by AI.
+ *  - AI code
+ * Player commands should be controlled by the \ref GameController
+ * in the long run.
  *                      -- Nicolai
  */
 struct Player {
@@ -68,9 +68,8 @@ struct Player {
 	friend struct Map_Seen_Fields_Data_Packet;
 
 	enum {
-		Local = 0,
-		Remote,
-		AI
+		Human = 0, // TODO: Get rid of this entirely
+		AI = 2
 	};
 
 	Player
