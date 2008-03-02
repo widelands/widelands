@@ -25,6 +25,7 @@
 #include <string>
 
 namespace Widelands {
+class Game;
 class PlayerCommand;
 }
 
@@ -39,14 +40,21 @@ class PlayerCommand;
  * handle all that.
  */
 class GameController {
-protected:
+public:
 	virtual ~GameController() {}
 
-public:
 	virtual void think() = 0;
 	virtual void sendPlayerCommand(Widelands::PlayerCommand* pc) = 0;
 	virtual int32_t getFrametime() = 0;
 	virtual std::string getGameDescription() = 0;
+
+	/**
+	 * Allocate a new \ref GameController suitable for normal singleplayer.
+	 * \param cpls is \c true when computer players should be generated
+	 * \return newly allocated \ref GameController object, must be freed
+	 * by the caller.
+	 */
+	static GameController* createSinglePlayer(Widelands::Game* game, bool cpls, Widelands::Player_Number local);
 };
 
 #endif // GAMECONTROLLER_H

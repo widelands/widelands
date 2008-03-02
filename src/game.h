@@ -185,7 +185,6 @@ private:
 
 	RNG                            rng;
 
-	std::vector<Computer_Player *> cpl;
 	Cmd_Queue                      cmdqueue;
 
 	SaveHandler                    m_savehandler;

@@ -1364,17 +1364,20 @@ bool WLApplication::new_game()
 		return false;
 
 	Widelands::Game game;
+	GameController* ctrl = GameController::createSinglePlayer(&game, true, 1);
 	try {
 		UI::ProgressWindow loaderUI("pics/progress.png");
 		GameTips tips (loaderUI);
 
 		loaderUI.step(_("Preparing game"));
 
+		game.set_game_controller(ctrl);
 		game.set_iabase(new Interactive_Player(game, 1));
 		game.init(loaderUI, sp.settings());
 		game.run(loaderUI);
 	} catch (...) {
 		emergency_save(game);
+		delete ctrl;
 		throw;
 	}
 

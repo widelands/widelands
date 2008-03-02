@@ -336,7 +336,7 @@ void Computer_Player::think ()
 	// now build something if possible
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
-		//printf("Computer_Player: Time to build.\n");
+		printf("Computer_Player: Time to build.\n");
 		if (construct_building()) {
 			//inhibit_road_building = gametime + 2500;
 			//Inhibiting roadbuilding is not a good idea, it causes

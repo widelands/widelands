@@ -235,7 +235,17 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		m_maploader->load_map_complete(this, false);
 	delete m_maploader; m_maploader = 0;
 
-	return run(loaderUI);
+	set_game_controller(GameController::createSinglePlayer(this, true, 1));
+	try {
+		bool ret = run(loaderUI);
+		delete m->ctrl;
+		m->ctrl = 0;
+		return ret;
+	} catch (...) {
+		delete m->ctrl;
+		m->ctrl = 0;
+		throw;
+	}
 }
 
 
@@ -311,7 +321,17 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 		gl.load_game();
 	}
 
-	return run(loaderUI, true);
+	set_game_controller(GameController::createSinglePlayer(this, true, 1));
+	try {
+		bool ret = run(loaderUI, true);
+		delete m->ctrl;
+		m->ctrl = 0;
+		return ret;
+	} catch (...) {
+		delete m->ctrl;
+		m->ctrl = 0;
+		throw;
+	}
 }
 
 /**
@@ -339,7 +359,17 @@ bool Game::run_replay()
 
 	m_replayreader = new ReplayReader(*this, rm.filename());
 
-	return run(loaderUI, true);
+	set_game_controller(GameController::createSinglePlayer(this, false, 1));
+	try {
+		bool ret = run(loaderUI, true);
+		delete m->ctrl;
+		m->ctrl = 0;
+		return ret;
+	} catch (...) {
+		delete m->ctrl;
+		m->ctrl = 0;
+		throw;
+	}
 }
 
 
@@ -364,16 +394,6 @@ void Game::postload()
 	Editor_Game_Base::postload();
 
 	assert(get_iabase() != 0);
-
-	// Set up computer controlled players
-	// unless we're watching a replay
-	if (upcast(Interactive_Player, ipl, get_iabase())) {
-		const Player_Number nr_players = map().get_nrplayers();
-		iterate_players_existing(p, nr_players, *this, plr) {
-			if      (plr->get_type() == Player::AI)
-				cpl.push_back (new Computer_Player(*this, p));
-		}
-	}
 
 	get_iabase()->postload();
 }
@@ -464,9 +484,6 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 	delete get_iabase();
 	set_iabase(0);
 
-	for (uint32_t i=0; i<cpl.size(); ++i)
-		delete cpl[i];
-
 	g_gr->flush(PicMod_Game);
 	g_anim.flush();
 
@@ -484,13 +501,11 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
  */
 void Game::think()
 {
-	if (m->ctrl)
-		m->ctrl->think();
+	assert(m->ctrl != 0);
+
+	m->ctrl->think();
 
 	if (m_state == gs_running) {
-		for (uint32_t i = 0;i < cpl.size(); ++i)
-			cpl[i]->think();
-
 		if
 			(not m_general_stats.size()
 			 or
@@ -505,27 +520,7 @@ void Game::think()
 			m_last_stats_update = get_gametime();
 		}
 
-		int32_t frametime;
-
-		if (m->ctrl) {
-			frametime = m->ctrl->getFrametime();
-		} else {
-			frametime = -m_realtime;
-			m_realtime =  WLApplication::get()->get_time();
-			frametime += m_realtime;
-
-			frametime *= get_speed();
-
-			// Maybe we are too fast...
-			// Note that the time reported by WLApplication might jump backwards
-			// when playback stops.
-			if (frametime <= 0)
-				return;
-
-			// prevent frametime escalation in case the game logic is the performance bottleneck
-			if (frametime > 1000)
-				frametime = 1000;
-		}
+		int32_t frametime = m->ctrl->getFrametime();
 
 		if (m_replayreader) {
 			for (;;) {
@@ -569,10 +564,6 @@ void Game::cleanup_for_load
 		delete *it;
 	m_tribes.clear();
 	get_cmdqueue()->flush();
-	while (cpl.size()) {
-		delete cpl[cpl.size()-1];
-		cpl.pop_back();
-	}
 
 	// Statistics
 	m_last_stats_update = 0;
@@ -637,13 +628,7 @@ uint32_t Game::logic_rand()
  */
 void Game::send_player_command (PlayerCommand* pc)
 {
-	if (m->ctrl) {
-		m->ctrl->sendPlayerCommand(pc);
-		return;
-	}
-
-	pc->set_cmdserial(++m_player_cmdserial);
-	enqueue_command (pc);
+	m->ctrl->sendPlayerCommand(pc);
 }
 
 
