@@ -1209,15 +1209,16 @@ void WLApplication::mainmenu_multiplayer()
 		throw wexception("Initialisation of Wsock2-library failed");
 #endif
 
-	NetGame* netgame = 0;
 	Fullscreen_Menu_NetSetup ns;
 
 	if (NetGGZ::ref().tables().size() > 0) ns.fill(NetGGZ::ref().tables());
 
 	switch (ns.run()) {
-	case Fullscreen_Menu_NetSetup::HOSTGAME:
-		netgame=new NetHost();
+	case Fullscreen_Menu_NetSetup::HOSTGAME: {
+		NetHost netgame;
+		netgame.run();
 		break;
+	}
 	case Fullscreen_Menu_NetSetup::JOINGAME: {
 		IPaddress peer;
 
@@ -1230,7 +1231,8 @@ void WLApplication::mainmenu_multiplayer()
 		peer.host=addr;
 		peer.port=port;
 
-		netgame=new NetClient(&peer);
+		NetClient netgame(&peer);
+		netgame.run();
 		break;
 	}
 	case Fullscreen_Menu_NetSetup::INTERNETGAME: {
@@ -1263,26 +1265,24 @@ void WLApplication::mainmenu_multiplayer()
 		NetGGZ::ref().launch();
 		//  fallthrough
 	case Fullscreen_Menu_NetSetup::JOINGGZGAME: {
-		if (NetGGZ::ref().host()) netgame = new NetHost();
-
-		else {
+		if (NetGGZ::ref().host()) {
+			NetHost netgame;
+			netgame.run();
+		} else {
 			while (!NetGGZ::ref().ip())
 				NetGGZ::ref().data();
 
 			IPaddress peer;
 			SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
-			netgame = new NetClient(&peer);
+			
+			NetClient netgame(&peer);
+			netgame.run();
 		}
+		break;
 	}
 	default:
-		assert(false);
+		return;
 	}
-
-	if (netgame!=0) {
-		netgame->run();
-		delete netgame;
-	}
-
 }
 
 /**
