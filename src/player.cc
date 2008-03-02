@@ -48,7 +48,6 @@ extern Map_Object_Descr g_road_descr;
 //
 Player::Player
 	(Editor_Game_Base  & the_egbase,
-	 int32_t               const type,
 	 Player_Number         const plnum,
 	 Tribe_Descr   const &       tribe_descr,
 	 std::string   const &       name,
@@ -56,7 +55,6 @@ Player::Player
 	:
 	m_see_all           (false),
 	m_egbase            (the_egbase),
-	m_type              (type),
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),
 	m_fields            (0),

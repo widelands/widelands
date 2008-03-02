@@ -406,7 +406,6 @@ the game starts. Similar for remote players.
 */
 Player * Editor_Game_Base::add_player
 (const Player_Number player_number,
- const int32_t type,
  const std::string & tribe,
  const std::string & name)
 {
@@ -420,7 +419,6 @@ Player * Editor_Game_Base::add_player
 		=
 		new Player
 		(*this,
-		 type,
 		 player_number,
 		 manually_load_tribe(tribe.c_str()),
 		 name,

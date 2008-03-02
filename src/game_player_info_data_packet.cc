@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 3
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -46,7 +46,8 @@ throw (_wexception)
 				game->remove_player(i);
 				if (fr.Unsigned8()) {
 					bool    const see_all = fr.Unsigned8();
-					int32_t const type    = fr.Signed32();
+					if (packet_version <= 2)
+						fr.Signed32(); // Used to be the player type, not needed anymore
 					int32_t const plnum   = fr.Signed32();
 					std::string tribe = fr.CString();
 
@@ -61,7 +62,7 @@ throw (_wexception)
 
 					std::string name = fr.CString();
 
-					game->add_player(plnum, type, tribe, name);
+					game->add_player(plnum, tribe, name);
 					Player & player = game->player(plnum);
 					player.set_see_all(see_all);
 
@@ -101,8 +102,6 @@ throw (_wexception)
 
 		fw.Unsigned8(plr->m_see_all);
 
-
-		fw.Signed32(plr->m_type);
 		fw.Signed32(plr->m_plnum);
 
 		fw.CString(plr->m_tribe.name().c_str());

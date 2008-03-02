@@ -218,7 +218,6 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
 			(p,
-			 p == 1 ? Player::Human : Player::AI, //  FIXME allow the user to contorol another player than 1, and allow the computer to control player 1
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 	}
@@ -272,12 +271,7 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 			 player.state == PlayerSettings::stateOpen)
 			continue;
 
-		int32_t type = Player::Human;
-
-		if (player.state == PlayerSettings::stateComputer)
-			type = Player::AI;
-
-		add_player(i+1, type, player.tribe, player.name);
+		add_player(i+1, player.tribe, player.name);
 		get_player(i+1)->init(false);
 	}
 

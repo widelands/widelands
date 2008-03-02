@@ -71,14 +71,8 @@ struct Player
 	friend struct Map_Players_View_Data_Packet;
 	friend struct Map_Seen_Fields_Data_Packet;
 
-	enum {
-		Human = 0, // TODO: Get rid of this entirely
-		AI = 2
-	};
-
 	Player
 		(Editor_Game_Base &,
-		 int32_t type,
 		 Player_Number,
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
@@ -89,7 +83,6 @@ struct Player
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
-	int32_t get_type() const {return m_type;}
 	Player_Number get_player_number() const throw () {return m_plnum;}
 	RGBColor const * get_playercolor() const {return m_playercolor;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &tribe();}
@@ -463,7 +456,6 @@ private:
 	bool m_see_all;
 	Editor_Game_Base&      m_egbase;
 	bool                   m_view_changed;
-	int32_t                    m_type;
 	const Player_Number    m_plnum;
 	const Tribe_Descr&     m_tribe; // buildings, wares, workers, sciences
 	RGBColor               m_playercolor[4];
