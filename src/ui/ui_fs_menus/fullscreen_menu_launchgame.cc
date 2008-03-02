@@ -26,7 +26,6 @@
 #include "i18n.h"
 #include "instances.h"
 #include "player.h"
-#include "network.h"
 #include "map.h"
 #include "playerdescrgroup.h"
 
