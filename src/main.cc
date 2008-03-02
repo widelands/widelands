@@ -65,7 +65,6 @@ int main(int argc, char* argv[])
 		"This should not happen. Please file a bug report "<<
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
-		g_app->emergency_save(e.what());
 		delete g_app;
 
 		return 1;
@@ -78,7 +77,6 @@ int main(int argc, char* argv[])
 		"This should not happen. Please file a bug report "<<
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
-		g_app->emergency_save(e.what());
 		delete g_app;
 
 		return 1;
@@ -89,7 +87,6 @@ int main(int argc, char* argv[])
 		"This should not happen. Please file a bug report "<<
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
-		g_app->emergency_save("Unhandled exception");
 		delete g_app;
 
 		return 1;

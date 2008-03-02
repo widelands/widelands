@@ -226,8 +226,7 @@ m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
 m_gfx_w(0), m_gfx_h(0),
-m_gfx_fullscreen       (false),
-m_game                 (0)
+m_gfx_fullscreen       (false)
 {
 	g_fs=new LayeredFileSystem();
 	g_fh=new Font_Handler();
@@ -248,11 +247,6 @@ m_game                 (0)
  */
 WLApplication::~WLApplication()
 {
-	//make sure there are no memory leaks
-	//don't just delete a still existing game, it's a bug if it's still here
-	//TODO: bail out gracefully instead
-	assert(m_game==0);
-
 	//Do use the opposite order of WLApplication::init()
 
 	shutdown_hardware();
@@ -281,17 +275,21 @@ void WLApplication::run()
 		//  FIXME add the ability to load a map directly
 		Editor_Interactive::run_editor(m_editor_filename);
 	} else if (m_loadgame_filename.size()) {
-		assert(not m_game);
-		m_game = new Widelands::Game;
-		m_game->run_load_game(true, m_loadgame_filename.c_str());
-		delete m_game;
-		m_game = 0;
+		Widelands::Game game;
+		try {
+			game.run_load_game(true, m_loadgame_filename.c_str());
+		} catch(...) {
+			emergency_save(game);
+			throw;
+		}
 	} else if (m_tutorial_filename.size()) {
-		assert(not m_game);
-		m_game = new Widelands::Game;
-		m_game->run_splayer_map_direct(m_tutorial_filename.c_str(), true);
-		delete m_game;
-		m_game = 0;
+		Widelands::Game game;
+		try {
+			game.run_splayer_map_direct(m_tutorial_filename.c_str(), true);
+		} catch(...) {
+			emergency_save(game);
+			throw;
+		}
 	} else {
 
 		g_sound_handler.start_music("intro");
@@ -1082,12 +1080,16 @@ void WLApplication::mainmenu()
 		case Fullscreen_Menu_Main::mm_multiplayer:
 			mainmenu_multiplayer();
 			break;
-		case Fullscreen_Menu_Main::mm_replay:
-			m_game = new Widelands::Game;
-			m_game->run_replay();
-			delete m_game;
-			m_game = 0;
+		case Fullscreen_Menu_Main::mm_replay: {
+			Widelands::Game game;
+			try {
+				game.run_replay();
+			} catch(...) {
+				emergency_save(game);
+				throw;
+			}
 			break;
+		}
 		case Fullscreen_Menu_Main::mm_options: {
 			Section *s = g_options.pull_section("global");
 			Options_Ctrl om(s);
@@ -1132,22 +1134,32 @@ void WLApplication::mainmenu_singleplayer()
 
 		if (code == Fullscreen_Menu_SinglePlayer::Back) break;
 
-		m_game = new Widelands::Game;
-
 		switch (code) {
-		case Fullscreen_Menu_SinglePlayer::New_Game:
-			if (m_game->run_single_player())
-				done=true;
+		case Fullscreen_Menu_SinglePlayer::New_Game: {
+			Widelands::Game game;
+			try {
+				if (game.run_single_player())
+					done = true;
+			} catch(...) {
+				emergency_save(game);
+				throw;
+			}
 			break;
-
-		case Fullscreen_Menu_SinglePlayer::Load_Game:
-			if (m_game->run_load_game(true))
-				done=true;
+		}
+		case Fullscreen_Menu_SinglePlayer::Load_Game: {
+			Widelands::Game game;
+			try {
+				if (game.run_load_game(true))
+					done = true;
+			} catch(...) {
+				emergency_save(game);
+				throw;
+			}
 			break;
-
+		}
 		case Fullscreen_Menu_SinglePlayer::Campaign: {
-			m_game->m_state = Widelands::gs_menu;
-			m_game->m_netgame = 0;
+			Widelands::Game game;
+			game.m_state = Widelands::gs_menu;
 			std::string filename;
 			for (;;) { // Campaign UI - Loop
 				int32_t campaign;
@@ -1167,17 +1179,19 @@ void WLApplication::mainmenu_singleplayer()
 				}
 			}
 
-			// Load selected campaign-map-file
-			if (m_game->run_splayer_map_direct(filename.c_str(), true))
-				done = true;
+			try {
+				// Load selected campaign-map-file
+				if (game.run_splayer_map_direct(filename.c_str(), true))
+					done = true;
+			} catch(...) {
+				emergency_save(game);
+				throw;
+			}
 			break;
 		}
 		default:
 			assert(false);
 		} end_campaign:;
-
-		delete m_game;
-		m_game = 0;
 	}
 
 }
@@ -1272,18 +1286,14 @@ void WLApplication::mainmenu_multiplayer()
 }
 
 /**
-* Try to save and delete the game instance if possible
+* Try to save the game instance if possible
  */
-void WLApplication::emergency_save(const std::string &) {
-	if (!m_game)
-		return;
-
-	if (m_game->is_loaded())
-	{
+void WLApplication::emergency_save(Widelands::Game& game) {
+	if (game.is_loaded()) {
 		try {
-			SaveHandler * save_handler = m_game->get_save_handler();
+			SaveHandler * save_handler = game.get_save_handler();
 			save_handler->save_game
-				(*m_game,
+				(game,
 				 save_handler->create_file_name
 				 (save_handler->get_base_dir(), timestring()));
 		} catch (...) {
@@ -1291,7 +1301,4 @@ void WLApplication::emergency_save(const std::string &) {
 			throw;
 		}
 	}
-
-	delete m_game;
-	m_game = 0;
 }

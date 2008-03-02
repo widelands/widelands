@@ -206,7 +206,7 @@ struct WLApplication {
 
 	static void show_usage();
 
-	void emergency_save(const std::string & message);
+	void emergency_save(Widelands::Game& game);
 
 protected:
 	WLApplication(const int argc, const char **argv);
@@ -262,9 +262,6 @@ protected:
 	///If true Widelands is (should be, we never know ;-) running
 	///in a fullscreen window
 	bool   m_gfx_fullscreen;
-
-	///The game that is currently being played (or NULL, if in main menu)
-	Widelands::Game * m_game;
 
 private:
 	///Holds this process' one and only instance of WLApplication, if it was

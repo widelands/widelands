@@ -136,6 +136,7 @@ m_realtime(WLApplication::get()->get_time())
 	g_sound_handler.m_the_game = this;
 	m_last_stats_update = 0;
 	m_player_cmdserial = 0;
+	m_netgame = 0;
 }
 
 Game::~Game()
@@ -207,7 +208,6 @@ bool Game::can_start()
 }
 
 bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
-	m_netgame = 0;
 	m_state = gs_loading;
 
 	assert(!get_map());
@@ -267,7 +267,6 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 bool Game::run_single_player ()
 {
 	m_state = gs_menu;
-	m_netgame=0;
 
 	m_maploader=0;
 	Fullscreen_Menu_LaunchGame lgm(this, 0, &m_maploader);
