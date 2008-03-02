@@ -81,12 +81,18 @@ function detect {
 	for d in $1/*; do
 		[[ -d $d ]] && detect $d
 	done
-	for f in $1/*.h $1/*.cc; do
-		CACHE=$CACHE_DIR/$f.stylecheck$COLOUR
-		if [ $f -nt $CACHE ]; then
+	for f in $(find $1 -maxdepth 1 -name *.h -o -name *.cc); do
+		CACHE_BASE=$CACHE_DIR/$f.stylecheck
+		CACHE=$CACHE_BASE$COLOUR
+		if [[ $f -nt $CACHE && ( ! $COLOUR || -s $CACHE_BASE || $f -nt $CACHE_BASE ) ]]; then
 			echo "Checking for errors in $f..."
 			check $f
-			mv $RESULT_FILE $CACHE
+			if [ -s $RESULT_FILE ]; then
+				mv $RESULT_FILE $CACHE
+			else
+				rm -f $CACHE_BASE $CACHE_BASE.colourized
+				touch --reference=$f $CACHE_BASE
+			fi
 			cat $CACHE
 		elif [ -s $CACHE ]; then
 			echo "Showing cached errors in $f..."
