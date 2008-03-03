@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-04-29 21:24+0200\n"
-"Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
+"PO-Revision-Date: 2008-03-03 23:12+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,125 +17,137 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../../campaigns/emp01.wmf/elemental:9
+#: ../../../campaigns/emp01.wmf\elemental:7
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Imperiales Tutorial 1 - Die Strände von Malac' Mor"
 
-#: ../../../campaigns/emp01.wmf/elemental:11
+#: ../../../campaigns/emp01.wmf\elemental:9
 msgid "First mission of the Empire campaign"
 msgstr "Erste Mission der imperialen Kampagne"
 
-#: ../../../campaigns/emp01.wmf/event:11 ../../../campaigns/emp01.wmf/event:30
-#: ../../../campaigns/emp01.wmf/event:49
-#: ../../../campaigns/emp01.wmf/event:647
+#: ../../../campaigns/emp01.wmf\event:8
+#: ../../../campaigns/emp01.wmf\event:22
+#: ../../../campaigns/emp01.wmf\event:36
+#: ../../../campaigns/emp01.wmf\event:226
+#: ../../../campaigns/emp01.wmf\event:243
 msgid "Diary of Lutius"
 msgstr "Lutius' Tagebuch"
 
-#: ../../../campaigns/emp01.wmf/event:13
+#: ../../../campaigns/emp01.wmf\event:10
 msgid "What has become of our Empire? I really ask this question, while my king disallowed me to fight against that monster of a barbarian tribe, that first acted like a peaceful friend and than attacked my army in the darkest night. <br>I got the the task to patrol on our northern frontier, which lies on the north of Galdin Mountains in a great, beautiful and ancient forest, with an army of 150 men. Soon we met a barbarian tribe, which at first was nice and friendly.  A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons. But in our fifth night in that region, they attacked us without reason. I lost hundreds of good men, was enprisoned and finally was brought to the chieftain. He spit at me, laughed about me and told me to leave this land forever. He told me he doesn't want new land and doesn't want our land, but THIS forest was their land and will stay theirs until the ghosts take the last man of his folk!<br>Three weeks later, I came back to Fremil, to speak with our king. He was furious at the Barbarians, but disallowed an attack of these tribes anyway. He believed, that our army was too weak to resist in a war against the barbarians.<br>I saw no way, how I could erase my guilt, without fighting against the Barbarians and so I left Fremil by boat, to find a new world and a new life for me somewhere in the south. And now I am sailing southwards on the perl-gulf with my family, a few of my friends and a few of my best warriors."
 msgstr "Was ist bloß aus unserem Land geworden?<br>Diese Frage stelle ich, weil mein König mir verboten hat, gegen diese Monster eines barbarischen Stammes zu kämpfen. Dabei haben diese sich verstellt und uns hinterhältig überfallen.<br><br>Vor einiger Zeit bekam ich die Aufgabe, mit meinen Soldaten, 150 an der Zahl, an unseren nördlichen Grenze zu patrolieren. Noch nördlich des Galdin-Gebirges, in einem uralten und mächtigen Wald. Schnell trafen wir dort auf einen barbarischen Stamm, der uns gegenüber sehr nett und freundlich war. Ein paar meiner Männer haben gar mit ihnen gehandelt und ihre Kinder liefen häufig zwischen uns herum und bestaunten unsere kunstvollen Waffen. Doch in der fünften Nacht in diesen Wäldern attackierte uns der Stamm ohne eine sichtbaren Grund und nutzte die Dunkelheit der Nacht, um fast meine gesamten Truppen zu ermorden.<br>Ich wurde zu ihrem Anführer gebracht, der auf mich spuckte, mich auslachte und mir sagte, dass ich dieses Gebiet sofort verlassen und nie wieder hierhin zurückkehren sollte. Seiner Meinung nach war dieser Wald sein Hoheitsgebiet, in dem er niemanden außer seinem eigenen Stamm haben wollte. Gottlob hatte er kein Interesse an unseren eigenen Ländereien.<br><br>Drei Wochen später kam ich wieder in unserer Hauptstadt Fremil an und sprach mit unserem König. Natürlich war er erbost über die Barbaren und über meine schlechten Wachen, die den Überfall hätten kommen sehen müssen. Dennoch verbot er mir einen Gegenschlag, da er der festen Überzeugung war, dass das zu einem Krieg führen würde, den wir nicht gewinnen könnten.<br>Ich war enttäuscht. Und da ich keine Möglichkeit sah, meine Schuld zu bereinigen, entschied ich mich, Fremil für immer zu verlassen und fortan im Exil zu leben. Ich war wirklich überrascht, wie viele Leute sich mir anschlossen und mit mir und meinem Schiff in den Süden segelten.<br>Und nun ist es so weit. Zusammen mit meiner Familie, einigen guten Kriegern und Handwerkern habe ich soeben die Segel gesetzt und Kurs auf den Perlen-Golf genommen."
 
-#: ../../../campaigns/emp01.wmf/event:15
+#: ../../../campaigns/emp01.wmf\event:12
 msgid "A dark night"
 msgstr "Eine dunkle Nacht"
 
-#: ../../../campaigns/emp01.wmf/event:32
+#: ../../../campaigns/emp01.wmf\event:24
 msgid "Seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us in a dark, wild storm. I really don't know how many hours have passed, since the waves got higher than our boat, but still it would be suicide to go outside.<br>Our ship is badly damaged and is taking more and more water. We can thank the Gods if we survive this black night with just our lifes."
 msgstr "Offensichtlich haben wir einen großen Fehler begangen, als wir gestern in den Perlen-Golf gesegelt sind. Die Natur scheint sich gegen uns aufzuwiegeln. Seit Stunden hängen wir nun in diesem dunklen, wilden Sturm fest. Unser Schiff taumelt zwischen den meterhohen Wellen, die längst höher als unser Mast geworden sind.<br>Und nun ist unser Schiff auch noch Leck geschlagen. Es füllt sich immer weiter mit Wasser. So schlecht wie es jetzt gerade aussieht, können wir den Göttern danken, wenn wir morgen früh noch unser nacktes Leben besitzen."
 
-#: ../../../campaigns/emp01.wmf/event:34
+#: ../../../campaigns/emp01.wmf\event:26
 msgid "The rough sea"
 msgstr "Die raue See"
 
-#: ../../../campaigns/emp01.wmf/event:51
+#: ../../../campaigns/emp01.wmf\event:38
 msgid "Finally the Gods were with us. We landed on an unknown coast and found a peaceful sleep under the palms growing at the strand. But that is about as good as it gets.<br>The truth is, when I woke up this morning, I saw nothing more than sand around us. It really seems as if we landed under the only palms existing in this far sandy desert. I fear, we won't find the help we need, to get our ship repaired in good time."
 msgstr "Schließlich waren die Götter doch noch mit uns. Wir landeten an einer unbekannten Küste und fanden einen friedlichen Schlaf unter einigen Palmen. Doch das ist auch das Beste, von dem ich berichten kann.<br>Die Wahrheit ist, dass ich heute morgen hinter den kleinen Palmenwald gegangen bin und hinter ihm nur eine ewig weite Wüste fand. Es scheint beinahe so, als ob wir unter den einzigen Palmen dieser Wüste gelandet sind.<br>Ich befürchte, dass wir hier leider nicht die nötige Hilfe bekommen werden, um unser Schiff schnell zu reparieren."
 
-#: ../../../campaigns/emp01.wmf/event:53
+#: ../../../campaigns/emp01.wmf\event:40
 msgid "Survivor"
 msgstr "Überlebende"
 
-#: ../../../campaigns/emp01.wmf/event:448
-#: ../../../campaigns/emp01.wmf/event:480
+#: ../../../campaigns/emp01.wmf\event:77
+#: ../../../campaigns/emp01.wmf\event:101
 msgid "Saledus speaks..."
 msgstr "Saledus sagt..."
 
-#: ../../../campaigns/emp01.wmf/event:450
+#: ../../../campaigns/emp01.wmf\event:79
 msgid "Sire, I fear we are not safe in this foreign land.<br>Who knows, what cruel creatures live behind this forest in that mighty desert?<br>And what if that creatures crawl in the woods and wait for the time to attack us?<br><br>Well, perhaps my fear is wrong, but it can't be wrong to watch out in the forests, so that we can be sure to see any potential enemies before they can see us.<br>We really should build a barrack in the easter-center of the forest. Than one of us will watch out in the darkness and will keep us save from evil attacks of these creatures.<br><br>- build a barrack at the red point on the east side of the forests right of your headquarters."
 msgstr "Herr, ich befürchte, dass wir hier in diesem fremden Land nicht sicher sein können.<br>Wer weiß schon, was für schreckliche Kreaturen in dieser Wüste und hinter ihr wohnen? Und vor allem: Was ist, wenn diese Kreaturen es bis in diesen Wald schaffen und dann aus dem Hinterhalt über unsere Leute herfallen?<br><br>Es mag sein, dass meine Angst übertrieben ist. Doch es scheint mir nur logisch und vorsichtig, wenn wir im Osten des Waldes eine kleine Baracke aufbauen, von der aus jemand in der Wüste nach potentiellen Gefahren Ausschau halten kann.<br><br>- Baue eine Baracke beim roten Punkt im Osten des Waldes, rechts von deinem Hauptquartier."
 
-#: ../../../campaigns/emp01.wmf/event:452
-#: ../../../campaigns/emp01.wmf/event:484
+#: ../../../campaigns/emp01.wmf\event:81
+#: ../../../campaigns/emp01.wmf\event:105
 msgid "A visitor"
 msgstr "Ein Besucher"
 
-#: ../../../campaigns/emp01.wmf/event:459
-#: ../../../campaigns/emp01.wmf/event:491
-#: ../../../campaigns/emp01.wmf/event:510
-#: ../../../campaigns/emp01.wmf/event:536
-#: ../../../campaigns/emp01.wmf/event:570
-#: ../../../campaigns/emp01.wmf/event:604
-#: ../../../campaigns/emp01.wmf/event:638
+#: ../../../campaigns/emp01.wmf\event:85
+#: ../../../campaigns/emp01.wmf\event:109
+#: ../../../campaigns/emp01.wmf\event:123
+#: ../../../campaigns/emp01.wmf\event:142
+#: ../../../campaigns/emp01.wmf\event:166
+#: ../../../campaigns/emp01.wmf\event:195
+#: ../../../campaigns/emp01.wmf\event:219
 msgid "OK"
 msgstr "OK"
 
-#: ../../../campaigns/emp01.wmf/event:482
+#: ../../../campaigns/emp01.wmf\event:103
 msgid "Sire, I saw that the construction of the barrack is completed, so I sent one of my best soldiers to it, to watch out in the deserts.<br>It is great. Now we can feel a bit more safe again and can look ahead to the next things waiting to be done."
 msgstr "Herr, ich habe gerade gesehen, dass die Baracke fertiggestellt ist. Ich habe gleich einen meiner besten Männer dorthin geschickt, der nun die Wüste beobachten und uns rechtzeitig vor jeder Gefahr warnen wird.<br>Wunderbar, jetzt können wir uns endlich etwas sicherer fühlen und uns auch den anderen wichtigen Sachen zuwenden."
 
-#: ../../../campaigns/emp01.wmf/event:499
-#: ../../../campaigns/emp01.wmf/event:525
+#: ../../../campaigns/emp01.wmf\event:115
+#: ../../../campaigns/emp01.wmf\event:134
 msgid "Amalea smiles..."
 msgstr "Amalea lächelt..."
 
-#: ../../../campaigns/emp01.wmf/event:501
+#: ../../../campaigns/emp01.wmf\event:117
 msgid "Hey Lutius, I just met Saledus outside. He told me about construction of the barracks. Well, I am not one of those girls, who think we need more barracks, but on the other hand, we might concentrate on other stuff now.<br>It is absolutely clear that we need wood, for repairing our ship. So I walked through the forest, yesterday and found a nice place for a lumberjack south of our headquarters.<br><br>- build a lumberjack at the red point, south of your headquarters"
 msgstr "Hallo, Lutius, ich habe gerade Saledus draußen getroffen. Er hat mir davon erzählt, dass die Baracke nun fertig ist und wir uns endlich etwas sicherer fühlen können. Na ja... Ich bin sicherlich nicht eine der Frauen, die sich viele Baracken wünscht. Doch nun da diese eine fertig gestellt ist, können wir uns um etwas anderes kümmern:<br>Gestern bin ich durch den Wald gelaufen und habe mich dabei etwas umgeschaut. Dabei habe ich im Süden unseres Hauptquartiers eine schöne Stelle gefunden, wo wir eine Holzfällerhütte aufbauen könnten. Und du weisst ja selbst genau so gut wie ich, dass wir Holz brauchen, um unser Schiff zu reparieren.<br><br>- Baue eine Holzfällerhütte beim roten Punkt südlich Deines Hauptquartiers."
 
-#: ../../../campaigns/emp01.wmf/event:503
-#: ../../../campaigns/emp01.wmf/event:529
-#: ../../../campaigns/emp01.wmf/event:563
+#: ../../../campaigns/emp01.wmf\event:119
+#: ../../../campaigns/emp01.wmf\event:138
+#: ../../../campaigns/emp01.wmf\event:162
 msgid "Young Amalea"
 msgstr "Die junge Amalea"
 
-#: ../../../campaigns/emp01.wmf/event:527
+#: ../../../campaigns/emp01.wmf\event:136
 msgid "Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjacks, so that we can faster harvest the trunks.<br>But unfortunally the trunks are useless for repairing our ship - We need refined wood, like every ship and every bigger building needs, too - so we should build up a sawmill, as soon as we have got enough space for this.<br><br>- Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
 msgstr "Hallo, Lutius! Ich bekam gerade die Nachricht, dass unser erster Holzfäller heute seine Arbeit aufgenommen hat. Vielleicht wäre es eine gute Idee, den Holzeinschlag etwas zu beschleunigen, indem wir zwei weitere Holzfäller einsetzen, sobald genug Platz vorhanden ist. Und was noch viel wichtiger ist: Wir brauchen ein Sägewerk. Denn mit den Stämmen alleine ist es schwer, ein Schiff zu reparieren.<br><br>- Baue zwei weitere Holzfäller und ein Sägewerk, sobald der Holzfäller Bauplätze freigeräumt hat."
 
-#: ../../../campaigns/emp01.wmf/event:559
+#: ../../../campaigns/emp01.wmf\event:158
 msgid "Amalea comes in..."
 msgstr "Amalea kommt herein..."
 
-#: ../../../campaigns/emp01.wmf/event:561
+#: ../../../campaigns/emp01.wmf\event:160
 msgid "Hi Lutius,<br>I've got two important things to talk about:<br>First the positive thing: I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting, to wood.<br>But that's just the only positive thing I know to talk about. The negative is, that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br>Lutius, this trees keep us safe from sandstorms out of the desert, they provide shade for the hot days and they are the home of so many smart little animals. We shouldn't leave this island as complete desert.<br>Lutius, I beg you: build a forester hut, so that someone cares about planting new trees.<br><br>- Build a forester hut, to save the wood resources of this island."
 msgstr "Sei gegrüßt, Lutius!<br>Ich habe zwei wichtige Dinge, über die ich mit dir reden möchte:<br>Erst die gute Nachricht: Ich habe gehört, dass das Sägewerk bereits fertiggestellt ist. Das ist gut, denn nun können wir endlich anfangen die vielen Stämme zu Nutzholz zu verarbeiten.<br>Aber das war dann auch das einzig Positive, was ich erzählen kann. Unsere Holzfäller schlagen in einem enormen Tempo Holz und ich befürchte, dass bald nicht ein einziger Baum mehr auf dieser Insel stehen wird. Wir sollten sofort eingreifen in dem wir eine Försterhütte bauen und jemanden dort einquartieren, der sich um die Pflanzung und Pflege junger Bäume kümmert - andernfalls wird bald der ganze Wald weg sein. Überlege doch nur, dass dieser Wald uns Schatten und kühle Luft spendet. Uns vor den Sandstürmen aus der nahen Wüste schützt und die Heimat von vielen Tieren ist. Wir sollten wirklich etwas unternehmen.<br><br>- Baue eine Försterhütte, damit die Waldressourcen der Insel gesichert werden."
 
-#: ../../../campaigns/emp01.wmf/event:593
-#: ../../../campaigns/emp01.wmf/event:627
+#: ../../../campaigns/emp01.wmf\event:187
+#: ../../../campaigns/emp01.wmf\event:211
 msgid "Saledus smiles..."
 msgstr "Saledus lächelt..."
 
-#: ../../../campaigns/emp01.wmf/event:595
+#: ../../../campaigns/emp01.wmf\event:189
 msgid "Hey my good old friend, I just thought about the rocks, standing on the south strand of this land. Perhaps we could cut out some usefull stones and beautiful marble.<br>The repair of our ship will take a few weeks anyway and the resources we harvest now might be the base of strong and big buildings in another land.<br><br>- Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
 msgstr "Hallo, mein alter Freund! Ich habe mir gerade ein paar Gedanken über die Felsen am Südstrand gemacht. Vielleicht könnten wir ein paar gute Steine und schöne Marmorblöcke aus den Felsen schlagen.<br>Die Schiffsreparatur wird noch einige Zeit dauern und die Baumaterialien, die wir jetzt zusätzlich abbauen könnten, wären die Grundlage für die mächtigen Gebäude unserer zukünftigen Siedlung.<br><br>- Baue im Süden einen Steinbruch, um Steine und Marmor aus den Felsen schlagen zu lassen. Diese könnten für spätere Gebäude gebraucht werden."
 
-#: ../../../campaigns/emp01.wmf/event:597
-#: ../../../campaigns/emp01.wmf/event:631
+#: ../../../campaigns/emp01.wmf\event:191
+#: ../../../campaigns/emp01.wmf\event:215
 msgid "A Visitor"
 msgstr "Ein Besucher"
 
-#: ../../../campaigns/emp01.wmf/event:629
+#: ../../../campaigns/emp01.wmf\event:213
 msgid "Hey Lutius,<br>today we got a big piece closer to our first castle. The quarry to the south began it's work today and will soon provide us with hard stones and beautiful marble. Now we really can look forward to settle down on another island."
 msgstr "Hallo, Lutius!<br>Heute sind wir endlich unseren ersten eigenen Burg ein Stück näher gekommen. Der Steinbruch im Süden hat heute seine Arbeit aufgenommen und wird uns schon bald mit Steinen und schönem Marmor versorgen. Jetzt können wir wirklich nach vorne schauen und uns darauf vorbereiten, eine bessere Insel zu besiedeln."
 
-#: ../../../campaigns/emp01.wmf/event:649
+#: ../../../campaigns/emp01.wmf\event:228
 msgid "Today I got the message that our ship is completely repaired. At the moment my people load everything on to this new repaired ship, hoping it will save us better than last time.<br> This night will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br>I still wonder if we will ever see Fremil again.<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
 msgstr "Heute bekam ich die Nachricht, dass unser Schiff wieder komplett repariert ist. Im Moment laden meine Leute alles Wichtige auf das Schiff in der Hoffnung, dass unsere Reise diesmal ruhiger verlaufen wird.<br> Diese Nacht wird unsere letzte auf dieser Insel sein. Morgen früh werden wir wieder aufbrechen und endlich nach einem geeigneten Ort für unsere neue Siedlung suchen.<br>Doch irgendwie frage ich mich immer noch, ob ich Fremil jemals wiedersehen werde.<br><br>----------------------SIEG!-----------------------<br><br>Du hast diese Mission abgeschlossen. Wenn du möchtest, kannst du weiterspielen, ansonsten starte einfach die nächste Mission."
 
-#: ../../../campaigns/emp01.wmf/event:651
+#: ../../../campaigns/emp01.wmf\event:230
 msgid "Mission Complete"
 msgstr "Mission erfüllt"
 
-#: ../../../campaigns/emp01.wmf/event:654
+#: ../../../campaigns/emp01.wmf\event:232
+#: ../../../campaigns/emp01.wmf\event:249
 msgid "Continue"
 msgstr "Weiter"
+
+#: ../../../campaigns/emp01.wmf\event:245
+msgid "You have made this peninsula a very secure place. It is time to move on!"
+msgstr "Du hast diese Insel zu einem sicheren Ort gemacht. Es ist Zeit fortzufahren!"
+
+#: ../../../campaigns/emp01.wmf\event:247
+msgid "Safe Peninsula"
+msgstr "Sichere Insel"
+

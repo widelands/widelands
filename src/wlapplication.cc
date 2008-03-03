@@ -754,7 +754,10 @@ const bool WLApplication::init_hardware()
 	//  NOTE that it is perfectly fine for a library to tamper with the user's
 	//  NOTE privacy/powermanagement settings on the sly. The workaround was
 	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
+	//  NOTE -> there is no such stdlib-function on win32
+	#ifndef __WIN32__
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
+	#endif
 
 	if (SDL_Init(sdl_flags) == -1) {
 		//TODO: that's not handled yet!

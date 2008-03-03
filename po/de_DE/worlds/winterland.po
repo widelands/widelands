@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-05-06 22:51+0100\n"
+"PO-Revision-Date: 2008-03-03 23:18+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,137 +15,158 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../../worlds/winterland/bobs/bunny/conf:1
+#: ../../../worlds/winterland\bobs\badger\conf:1
+msgid "Badger"
+msgstr "Dachs"
+
+#: ../../../worlds/winterland\bobs\bunny\conf:1
 msgid "Bunny"
 msgstr "Hase"
 
-#: ../../../worlds/winterland/bobs/bush1/conf:1
-#: ../../../worlds/winterland/bobs/bush2/conf:1
-#: ../../../worlds/winterland/bobs/bush3/conf:1
-#: ../../../worlds/winterland/bobs/bush4/conf:1
-#: ../../../worlds/winterland/bobs/bush5/conf:1
+#: ../../../worlds/winterland\bobs\bush1\conf:1
+#: ../../../worlds/winterland\bobs\bush2\conf:1
+#: ../../../worlds/winterland\bobs\bush3\conf:1
+#: ../../../worlds/winterland\bobs\bush4\conf:1
+#: ../../../worlds/winterland\bobs\bush5\conf:1
 msgid "Bush"
 msgstr "Busch"
 
-#: ../../../worlds/winterland/bobs/deadtree1/conf:1
-#: ../../../worlds/winterland/bobs/deadtree2/conf:1
-#: ../../../worlds/winterland/bobs/deadtree3/conf:1
-#: ../../../worlds/winterland/bobs/deadtree4/conf:1
+#: ../../../worlds/winterland\bobs\deadtree1\conf:1
+#: ../../../worlds/winterland\bobs\deadtree2\conf:1
+#: ../../../worlds/winterland\bobs\deadtree3\conf:1
+#: ../../../worlds/winterland\bobs\deadtree4\conf:1
 msgid "Dead Tree"
 msgstr "Toter Baum"
 
-#: ../../../worlds/winterland/bobs/deer/conf:1
+#: ../../../worlds/winterland\bobs\deer\conf:1
 msgid "Deer"
 msgstr "Hirsch"
 
-#: ../../../worlds/winterland/bobs/duck/conf:1
+#: ../../../worlds/winterland\bobs\duck\conf:1
 msgid "Duck"
 msgstr "Ente"
 
-#: ../../../worlds/winterland/bobs/fox/conf:1
+#: ../../../worlds/winterland\bobs\elk\conf:1
+msgid "Elk"
+msgstr "Elch"
+
+#: ../../../worlds/winterland\bobs\fox\conf:1
 msgid "Fox"
 msgstr "Fuchs"
 
-#: ../../../worlds/winterland/bobs/grass1/conf:1
-#: ../../../worlds/winterland/bobs/grass2/conf:1
-#: ../../../worlds/winterland/bobs/grass3/conf:1
+#: ../../../worlds/winterland\bobs\grass1\conf:1
+#: ../../../worlds/winterland\bobs\grass2\conf:1
+#: ../../../worlds/winterland\bobs\grass3\conf:1
 msgid "Grass"
 msgstr "Gras"
 
-#: ../../../worlds/winterland/bobs/mushroom1/conf:1
-#: ../../../worlds/winterland/bobs/mushroom2/conf:1
+#: ../../../worlds/winterland\bobs\lynx\conf:1
+msgid "Lynx"
+msgstr "Luchs"
+
+#: ../../../worlds/winterland\bobs\marten\conf:1
+msgid "Marten"
+msgstr "Mader"
+
+#: ../../../worlds/winterland\bobs\mushroom1\conf:1
+#: ../../../worlds/winterland\bobs\mushroom2\conf:1
 msgid "Mushroom"
 msgstr "Pilz"
 
-#: ../../../worlds/winterland/bobs/pebble1/conf:1
-#: ../../../worlds/winterland/bobs/pebble2/conf:1
-#: ../../../worlds/winterland/bobs/pebble3/conf:1
-#: ../../../worlds/winterland/bobs/pebble4/conf:1
-#: ../../../worlds/winterland/bobs/pebble5/conf:1
-#: ../../../worlds/winterland/bobs/pebble6/conf:1
+#: ../../../worlds/winterland\bobs\pebble1\conf:1
+#: ../../../worlds/winterland\bobs\pebble2\conf:1
+#: ../../../worlds/winterland\bobs\pebble3\conf:1
+#: ../../../worlds/winterland\bobs\pebble4\conf:1
+#: ../../../worlds/winterland\bobs\pebble5\conf:1
+#: ../../../worlds/winterland\bobs\pebble6\conf:1
 msgid "Pebble"
 msgstr "Kieselsteine"
 
-#: ../../../worlds/winterland/bobs/reindeer/conf:1
+#: ../../../worlds/winterland\bobs\reindeer\conf:1
 msgid "Reindeer"
 msgstr "Rentier"
 
-#: ../../../worlds/winterland/bobs/sheep/conf:1
+#: ../../../worlds/winterland\bobs\sheep\conf:1
 msgid "Sheep"
 msgstr "Schaf"
 
-#: ../../../worlds/winterland/bobs/skeleton1/conf:1
-#: ../../../worlds/winterland/bobs/skeleton2/conf:1
-#: ../../../worlds/winterland/bobs/skeleton3/conf:1
+#: ../../../worlds/winterland\bobs\skeleton1\conf:1
+#: ../../../worlds/winterland\bobs\skeleton2\conf:1
+#: ../../../worlds/winterland\bobs\skeleton3\conf:1
 msgid "Skeleton"
 msgstr "Skelett"
 
-#: ../../../worlds/winterland/bobs/sstones1/conf:1
-#: ../../../worlds/winterland/bobs/sstones2/conf:1
-#: ../../../worlds/winterland/bobs/sstones3/conf:1
-#: ../../../worlds/winterland/bobs/sstones4/conf:1
-#: ../../../worlds/winterland/bobs/sstones5/conf:1
-#: ../../../worlds/winterland/bobs/sstones6/conf:1
-#: ../../../worlds/winterland/bobs/sstones7/conf:1
+#: ../../../worlds/winterland\bobs\sstones1\conf:1
+#: ../../../worlds/winterland\bobs\sstones2\conf:1
+#: ../../../worlds/winterland\bobs\sstones3\conf:1
+#: ../../../worlds/winterland\bobs\sstones4\conf:1
+#: ../../../worlds/winterland\bobs\sstones5\conf:1
+#: ../../../worlds/winterland\bobs\sstones6\conf:1
+#: ../../../worlds/winterland\bobs\sstones7\conf:1
 msgid "Standing Stones"
 msgstr "Stehender Stein"
 
-#: ../../../worlds/winterland/bobs/stones1/conf:1
-#: ../../../worlds/winterland/bobs/stones2/conf:1
-#: ../../../worlds/winterland/bobs/stones3/conf:1
-#: ../../../worlds/winterland/bobs/stones4/conf:1
-#: ../../../worlds/winterland/bobs/stones5/conf:1
-#: ../../../worlds/winterland/bobs/stones6/conf:1
+#: ../../../worlds/winterland\bobs\stones1\conf:1
+#: ../../../worlds/winterland\bobs\stones2\conf:1
+#: ../../../worlds/winterland\bobs\stones3\conf:1
+#: ../../../worlds/winterland\bobs\stones4\conf:1
+#: ../../../worlds/winterland\bobs\stones5\conf:1
+#: ../../../worlds/winterland\bobs\stones6\conf:1
 msgid "Stones"
 msgstr "Steine"
 
-#: ../../../worlds/winterland/bobs/tree1/conf:4
-#: ../../../worlds/winterland/bobs/tree2/conf:4
-#: ../../../worlds/winterland/bobs/tree3/conf:4
-#: ../../../worlds/winterland/bobs/tree4/conf:4
-#: ../../../worlds/winterland/bobs/tree5/conf:4
-#: ../../../worlds/winterland/bobs/tree6/conf:4
-#: ../../../worlds/winterland/bobs/tree7/conf:4
-#: ../../../worlds/winterland/bobs/tree8/conf:4
+#: ../../../worlds/winterland\bobs\tree1\conf:4
+#: ../../../worlds/winterland\bobs\tree2\conf:4
+#: ../../../worlds/winterland\bobs\tree3\conf:4
+#: ../../../worlds/winterland\bobs\tree4\conf:4
+#: ../../../worlds/winterland\bobs\tree5\conf:4
+#: ../../../worlds/winterland\bobs\tree6\conf:4
+#: ../../../worlds/winterland\bobs\tree7\conf:4
+#: ../../../worlds/winterland\bobs\tree8\conf:4
 msgid "Tree"
 msgstr "Baum"
 
-#: ../../../worlds/winterland/bobs/wolf/conf:1
+#: ../../../worlds/winterland\bobs\wisent\conf:1
+msgid "Wisent"
+msgstr "Wisent"
+
+#: ../../../worlds/winterland\bobs\wolf\conf:1
 msgid "Wolf"
 msgstr "Wolf"
 
-#: ../../../worlds/winterland/conf:2
+#: ../../../worlds/winterland\conf:2
 msgid "The Widelands Development Team"
 msgstr "Das Widelands-Entwicklerteam"
 
-#: ../../../worlds/winterland/conf:3
+#: ../../../worlds/winterland\conf:3
 msgid "Winterland"
 msgstr "Winterland"
 
-#: ../../../worlds/winterland/conf:4
+#: ../../../worlds/winterland\conf:4
 msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
 msgstr "Dies ist das weiße, weite und frostige Winterland, in dem die Nordmänner hausen."
 
-#: ../../../worlds/winterland/resconf:4
+#: ../../../worlds/winterland\resconf:4
 msgid "Coal"
 msgstr "Kohle"
 
-#: ../../../worlds/winterland/resconf:12
+#: ../../../worlds/winterland\resconf:12
 msgid "Gold"
 msgstr "Gold"
 
-#: ../../../worlds/winterland/resconf:20
+#: ../../../worlds/winterland\resconf:20
 msgid "Iron"
 msgstr "Eisen"
 
-#: ../../../worlds/winterland/resconf:28
+#: ../../../worlds/winterland\resconf:28
 msgid "Granit"
 msgstr "Granit"
 
-#: ../../../worlds/winterland/resconf:36
+#: ../../../worlds/winterland\resconf:36
 msgid "Water"
 msgstr "Wasser"
 
-#: ../../../worlds/winterland/resconf:41
+#: ../../../worlds/winterland\resconf:41
 msgid "Fish"
 msgstr "Fisch"
+

@@ -126,7 +126,7 @@ void Map_Map_Object_Saver::mark_object_as_saved(Map_Object const * const obj) {
  * Return the number of unsaved objects
  */
 uint32_t Map_Map_Object_Saver::get_nr_unsaved_objects() const throw () {
-	uint retval = 0;
+	uint32_t retval = 0;
 
 	for
 		(Map_Object_Map::const_iterator it = m_objects.begin();
