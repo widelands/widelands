@@ -22,7 +22,7 @@
 #  errors, a per-directory timestamp file is stored. This drastically reduces
 #  the number of cache files. The drawback is that if the script is interrupted
 #  whilst checking a sequence of files with equal mtime, it will have to start
-#  over with that sequence the next time the it is executed. But reducing the
+#  over with that sequence the next time it is executed. But reducing the
 #  number of cache files is worth that minor inconvenience.
 
 CHECKER=utils/spurious_source_code/whitespace_checker
