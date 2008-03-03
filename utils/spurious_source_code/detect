@@ -17,6 +17,13 @@
 #  the source file in case that the check commands are interrupted. Instead
 #  write the output from the check commands to a temporary file and when that
 #  file is complete, move it to the cache file location.
+#
+#  Instead of storing empty cache files for source files that do not give any
+#  errors, a per-directory timestamp file is stored. This drastically reduces
+#  the number of cache files. The drawback is that if the script is interrupted
+#  whilst checking a sequence of files with equal mtime, it will have to start
+#  over with that sequence the next time the it is executed. But reducing the
+#  number of cache files is worth that minor inconvenience.
 
 CHECKER=utils/spurious_source_code/whitespace_checker
 if [ ! -f $CHECKER ]; then
@@ -35,7 +42,8 @@ mkdir $TMP_DIR || { echo "ERROR: could not create $TMP_DIR"; exit; }
 
 REGEXPS_FILE=$TMP_DIR/regexps
 for r in utils/spurious_source_code/regexps/*; do
-	[[ -d $r && ! -f $r/disabled && ( ! $CHECKER || ! -f $r/redundant_with_whitespace_checker ) ]] && cat $r/regexps >> $REGEXPS_FILE
+	[[ -d $r && ! -f $r/disabled && ( ! $CHECKER || ! -f $r/redundant_with_whitespace_checker ) ]] &&
+		cat $r/regexps >> $REGEXPS_FILE
 done
 
 
@@ -71,7 +79,9 @@ CACHE_DIR="build/stylecheck"
 #  are done on that source file.
 #
 #  Calls itself recursively for each subdirectory. Then checks all the source
-#  files in the current directory.
+#  files in the current directory that are newer than the timestamp file there.
+#  Files are checked in mtime order, oldest first. After checking group of
+#  files that have the same mtime, the timestamp is is set to that mtime.
 #
 #  Parameters:
 #    $1
@@ -81,24 +91,33 @@ function detect {
 	for d in $1/*; do
 		[[ -d $d ]] && detect $d
 	done
-	for f in $(find $1 -maxdepth 1 -name *.h -o -name *.cc); do
+	TIMESTAMP=$CACHE_DIR/$1/timestamp
+	PREVIOUS_FILE=$1
+	for f in $(ls -tr $1/*.h $1/*.cc 2>/dev/null); do
 		CACHE_BASE=$CACHE_DIR/$f.stylecheck
+		CACHE_COLOUR=$CACHE_BASE.colourized
 		CACHE=$CACHE_BASE$COLOUR
-		if [[ $f -nt $CACHE && ( ! $COLOUR || -s $CACHE_BASE || $f -nt $CACHE_BASE ) ]]; then
-			echo "Checking for errors in $f..."
-			check $f
-			if [ -s $RESULT_FILE ]; then
-				mv $RESULT_FILE $CACHE
-				cat $CACHE
+		if [[ $f -nt $TIMESTAMP || -s $CACHE_BASE || -s $CACHE_COLOUR ]]; then
+			if [ $f -nt $CACHE ]; then
+				echo "Checking for errors in $f ..."
+				check $f
+				if [ -s $RESULT_FILE ]; then
+					mv $RESULT_FILE $CACHE
+					[[ $f -nt $PREVIOUS_FILE && $PREVIOUS_FILE -nt $TIMESTAMP ]] &&
+						touch --reference=$PREVIOUS_FILE $TIMESTAMP
+					cat $CACHE
+				else
+					rm -f $CACHE_BASE $CACHE_COLOUR
+				fi
 			else
-				rm -f $CACHE_BASE $CACHE_BASE.colourized
-				touch --reference=$f $CACHE_BASE
+				echo "Showing cached errors in $f ..."
+				cat $CACHE
 			fi
-		elif [ -s $CACHE ]; then
-			echo "Showing cached errors in $f..."
-			cat $CACHE
 		fi
+		PREVIOUS_FILE=$f
 	done
+	[[ $PREVIOUS_FILE -nt $TIMESTAMP ]] &&
+		touch --reference=$PREVIOUS_FILE $TIMESTAMP
 }
 
 
