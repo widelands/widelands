@@ -25,6 +25,7 @@
 
 #include "network.h"
 
+#include "computer_player.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
 #include "game_tips.h"
@@ -52,10 +53,9 @@
 
 using Widelands::Player;
 
-#define CHECK_SYNC_INTERVAL     2000
-#define   DELAY_PROBE_INTERVAL 10000
-#define MINIMUM_NETWORK_DELAY     10 // avoid unnecessary network congestion
-#define INITIAL_NETWORK_DELAY    500
+#define CHECK_SYNC_INTERVAL 2000
+#define CLIENT_TIMESTAMP_INTERVAL 500
+#define SERVER_TIMESTAMP_INTERVAL 100
 
 #define PROTOCOL_VERSION 1
 
@@ -64,7 +64,8 @@ enum {
 
 	// Bidirectional messages
 	NETCMD_HELLO = 16, // must not be 1, since old versions didn't send PROTOCOL_VERSION
-	NETCMD_PLAYERCOMMAND = 18,
+	NETCMD_TIME = 22,
+	NETCMD_PLAYERCOMMAND = 24,
 
 	// Server->Client messages
 	NETCMD_SETTING_MAP = 4,
@@ -72,8 +73,9 @@ enum {
 	NETCMD_SETTING_ALLPLAYERS = 6,
 	NETCMD_SETTING_PLAYER = 7,
 	NETCMD_PING = 10,
-	NETCMD_TIME = 19,
 	NETCMD_LAUNCH = 20,
+	NETCMD_SETSPEED = 21,
+	NETCMD_WAIT = 23,
 
 	// Client->Server messages
 	NETCMD_PONG = 11,
@@ -127,6 +129,99 @@ they must not have advanced the game time past that point. When the host decides
 up to some point later than current network time it will not schedule any more player
 commands, than the network time will be advanced. Note that only the host has the
 authority to do this. */
+
+
+/**
+ * Keeping track of network time: This class answers the question of how
+ * far the local simulation time should proceed, given the history of network
+ * time messages.
+ */
+class NetworkTime {
+public:
+	NetworkTime();
+
+	void reset(int32_t ntime);
+	void fastforward();
+
+	void think(uint32_t speed);
+	int32_t time() const;
+	int32_t networktime() const;
+	bool recv(int32_t ntime);
+
+private:
+	int32_t m_networktime;
+	int32_t m_time;
+
+	int32_t m_lastframe;
+};
+
+NetworkTime::NetworkTime()
+{
+	reset(0);
+}
+
+void NetworkTime::reset(int32_t ntime)
+{
+	m_networktime = m_time = ntime;
+	m_lastframe = WLApplication::get()->get_time();
+}
+
+void NetworkTime::fastforward()
+{
+	m_time = m_networktime;
+	m_lastframe = WLApplication::get()->get_time();
+}
+
+void NetworkTime::think(uint32_t speed)
+{
+	int32_t curtime = WLApplication::get()->get_time();
+	int32_t delta = curtime - m_lastframe;
+	m_lastframe = curtime;
+
+	// in case weird things are happening with the system time
+	// (e.g. debugger, extremely slow simulation, ...)
+	if (delta < 0)
+		delta = 0;
+	else if (delta > 1000)
+		delta = 1000;
+
+	delta = (delta * speed) / 1000;
+
+	int32_t behind = m_networktime - m_time;
+
+	if (delta + static_cast<int32_t>(speed) < behind)
+		delta = (delta*9)/8; // speed up by 12%
+	if (delta > behind)
+		delta = behind;
+
+	m_time += delta;
+}
+
+int32_t NetworkTime::time() const
+{
+	return m_time;
+}
+
+int32_t NetworkTime::networktime() const
+{
+	return m_networktime;
+}
+
+bool NetworkTime::recv(int32_t ntime)
+{
+	if (ntime - m_networktime < 0) {
+		log("NetworkTime: running backwards\n");
+		return false;
+	}
+
+// 	log
+// 		("NetworkTime: New networktime %i (local time %i), behind %i\n",
+// 		 ntime, m_time, m_networktime - m_time);
+
+	m_networktime = ntime;
+
+	return true;
+}
 
 
 
@@ -196,6 +291,7 @@ struct Client {
 	Deserializer deserializer;
 	int32_t playernum; // -1 as long as the client hasn't said Hi.
 	std::queue<md5_checksum> syncreports;
+	int32_t time; // last time report
 };
 
 struct NetHostImpl {
@@ -213,9 +309,27 @@ struct NetHostImpl {
 	/// The game itself; only non-null while game is running
 	Widelands::Game* game;
 
-	/// Server has committed to allow simulation up to this point in time
-	/// New player commands must be scheduled after his point in time.
-	int32_t committime;
+	/// If we were to send out a plain networktime packet, this would be the time.
+	/// However, we have not yet committed to this networktime.
+	int32_t pseudo_networktime;
+	int32_t last_heartbeat;
+
+	/// The networktime we committed to by sending it across the network.
+	int32_t committed_networktime;
+
+	/// This is the time for local simulation
+	NetworkTime time;
+
+	/// The real speed used for simulation, in milliseconds per second
+	uint32_t realspeed;
+	int32_t lastframe;
+
+	/// The speed we want to have
+	uint32_t speed;
+
+	/// All currently running computer players, *NOT* in one-one correspondence
+	/// with \ref Player objects
+	std::vector<Computer_Player *> computerplayers;
 
 	std::queue<md5_checksum> mysyncreports;
 };
@@ -233,12 +347,17 @@ NetHost::NetHost ()
 	d->sockset = SDLNet_AllocSocketSet(16);
 	d->promoter = new LAN_Game_Promoter();
 	d->game = 0;
+	d->pseudo_networktime = 0;
+	d->realspeed = 0;
+	d->speed = 1000;
 
 	Widelands::Tribe_Descr::get_all_tribenames(d->settings.tribes);
 }
 
 NetHost::~NetHost ()
 {
+	clearComputerPlayers();
+
 	SDLNet_FreeSocketSet (d->sockset);
 
 	// close all open sockets
@@ -252,6 +371,29 @@ NetHost::~NetHost ()
 	d = 0;
 }
 
+void NetHost::clearComputerPlayers()
+{
+	for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
+		delete d->computerplayers[i];
+	d->computerplayers.clear();
+}
+
+void NetHost::initComputerPlayers()
+{
+	const Widelands::Player_Number nr_players = d->game->map().get_nrplayers();
+	iterate_players_existing(p, nr_players, *d->game, plr) {
+		if (p == 1)
+			continue;
+
+		uint32_t client;
+		for(client = 0; client < d->clients.size(); ++client)
+			if (d->clients[client].playernum+1 == p)
+				break;
+
+		if (client >= d->clients.size())
+			d->computerplayers.push_back(new Computer_Player(*d->game, p));
+	}
+}
 
 void NetHost::run()
 {
@@ -262,7 +404,7 @@ void NetHost::run()
 	if (code <= 0)
 		return;
 
-	for(int32_t i = 0; i < d->clients.size(); ++i) {
+	for(uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients[i].playernum == -1) {
 			log("[Host]: say goodbye to client %i, game is starting without him\n", i);
 			disconnectClient(i);
@@ -284,11 +426,22 @@ void NetHost::run()
 		game.set_game_controller(this);
 		game.set_iabase(new Interactive_Player(game, 1));
 		game.init(loaderUI, d->settings);
+		d->pseudo_networktime = game.get_gametime();
+		d->time.reset(d->pseudo_networktime);
+		d->lastframe = WLApplication::get()->get_time();
+		d->last_heartbeat = d->lastframe;
 
-		d->committime = game.get_gametime();
+		d->committed_networktime = d->pseudo_networktime;
+
+		for (uint32_t i = 0; i < d->clients.size(); ++i)
+			d->clients[i].time = d->committed_networktime-1;
+
+		initComputerPlayers();
 		game.run(loaderUI);
+		clearComputerPlayers();
 	} catch (...) {
 		WLApplication::emergency_save(game);
+		clearComputerPlayers();
 		d->game = 0;
 		throw;
 	}
@@ -298,15 +451,59 @@ void NetHost::run()
 void NetHost::think()
 {
 	handle_network();
+
+	if (d->game) {
+		int32_t curtime = WLApplication::get()->get_time();
+		int32_t delta = curtime - d->lastframe;
+		d->lastframe = curtime;
+
+		if (d->realspeed) {
+			int32_t diff = (delta * d->realspeed) / 1000;
+			d->pseudo_networktime += diff;
+		}
+
+		d->time.think(d->realspeed);
+
+		if (d->pseudo_networktime != d->committed_networktime)
+		{
+			if (d->pseudo_networktime - d->committed_networktime < 0) {
+				d->pseudo_networktime = d->committed_networktime;
+			} else if (curtime - d->last_heartbeat >= SERVER_TIMESTAMP_INTERVAL) {
+				d->last_heartbeat = curtime;
+
+				SendPacket s;
+				s.Unsigned8(NETCMD_TIME);
+				s.Signed32(d->pseudo_networktime);
+				broadcast(s);
+
+				committedNetworkTime(d->pseudo_networktime);
+
+				checkHungClients();
+			}
+		}
+
+		for(uint32_t i = 0; i < d->computerplayers.size(); ++i)
+			d->computerplayers[i]->think();
+	}
 }
 
 void NetHost::sendPlayerCommand(Widelands::PlayerCommand* pc)
 {
+	pc->set_duetime(d->committed_networktime+1);
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_PLAYERCOMMAND);
+	s.Signed32(pc->get_duetime());
+	pc->serialize(s);
+	broadcast(s);
+	d->game->enqueue_command(pc);
+
+	committedNetworkTime(d->committed_networktime+1);
 }
 
 int32_t NetHost::getFrametime()
 {
-	return 0;
+	return d->time.time() - d->game->get_gametime();
 }
 
 std::string NetHost::getGameDescription()
@@ -503,6 +700,100 @@ void NetHost::welcomeClient(uint32_t number)
 	s.send(client.sock);
 }
 
+void NetHost::committedNetworkTime(int32_t time)
+{
+	assert(time - d->committed_networktime > 0);
+
+	d->committed_networktime = time;
+	d->time.recv(time);
+}
+
+void NetHost::recvClientTime(uint32_t number, int32_t time)
+{
+	assert(number < d->clients.size());
+
+	Client& client = d->clients[number];
+
+	if (time - client.time < 0) {
+		log("[Host]: Client %i time running backwards\n", number);
+		disconnectClient(number);
+		return;
+	}
+	if (d->committed_networktime - time < 0) {
+		log("[Host]: Client %i rushes past committed networktime\n", number);
+		disconnectClient(number);
+		return;
+	}
+
+	client.time = time;
+	log("[Host]: Client %i: Time %i\n", number, time);
+
+	if (d->realspeed == 0) {
+		log
+			("[Host]: Client %i reports time %i (networktime = %i) during hang\n",
+			 number, time, d->committed_networktime);
+		checkHungClients();
+	}
+}
+
+
+void NetHost::checkHungClients()
+{
+	int nrready = 0;
+	int nrdelayed = 0;
+	int nrhung = 0;
+
+	for (uint32_t i = 0; i < d->clients.size(); ++i) {
+		if (d->clients[i].playernum == -1)
+			continue;
+
+		int32_t delta = d->committed_networktime - d->clients[i].time;
+
+		if (delta == 0) {
+			nrready++;
+		} else {
+			nrdelayed++;
+			if (delta > (5*CLIENT_TIMESTAMP_INTERVAL*static_cast<int32_t>(d->speed))/1000) {
+				log("[Host]: Client %i hung\n", i);
+				nrhung++;
+			}
+		}
+	}
+
+	if (d->realspeed) {
+		if (nrhung) {
+			log("[Host]: %i clients hung. Entering wait mode\n", nrhung);
+
+			// Brake and wait
+			setRealSpeed(0);
+
+			SendPacket s;
+			s.Unsigned8(NETCMD_WAIT);
+			broadcast(s);
+		}
+	} else {
+		if (nrdelayed == 0)
+			setRealSpeed(d->speed);
+	}
+}
+
+
+void NetHost::setRealSpeed(uint32_t speed)
+{
+	if (speed > std::numeric_limits<uint16_t>::max())
+		speed = std::numeric_limits<uint16_t>::max();
+
+	if (speed == d->realspeed)
+		return;
+
+	d->realspeed = speed;
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETSPEED);
+	s.Unsigned16(speed);
+	broadcast(s);
+}
+
 
 void NetHost::handle_network ()
 {
@@ -534,7 +825,6 @@ void NetHost::handle_network ()
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
 		for (size_t i = 0; i < d->clients.size(); ++i) {
 			while (SDLNet_SocketReady(d->clients[i].sock)) {
-				log("[Host] data from client %i\n", i);
 				if (d->clients[i].deserializer.read(d->clients[i].sock))
 					continue;
 
@@ -550,7 +840,6 @@ void NetHost::handle_network ()
 	for (size_t i = 0; i < d->clients.size(); ++i) {
 		Client& client = d->clients[i];
 		while (client.sock && client.deserializer.avail()) {
-			log("[Host] packet from client %i\n", i);
 			RecvPacket r(client.deserializer);
 			uint8_t cmd = r.Unsigned8();
 
@@ -581,12 +870,43 @@ void NetHost::handle_network ()
 				log("[Host] client %i: got pong\n", i);
 				break;
 
-			case NETCMD_SETTING_CHANGETRIBE: {
-				std::string tribe = r.String();
-				setPlayerTribe(client.playernum, tribe);
+			case NETCMD_SETTING_CHANGETRIBE:
+				// Don't be harsh about packets of this type arriving
+				// out of order - the client might just have had bad luck with the timing.
+				if (!d->game) {
+					std::string tribe = r.String();
+					setPlayerTribe(client.playernum, tribe);
+				}
 				break;
-			}
 
+			case NETCMD_TIME:
+				if (!d->game) {
+					log("[Host] client %i: sent time while game not running\n", i);
+					disconnectClient(i);
+					break;
+				}
+				recvClientTime(i, r.Signed32());
+				break;
+
+			case NETCMD_PLAYERCOMMAND: {
+				if (!d->game) {
+					log("[Host] client %i: sent playercommand while game not running\n", i);
+					disconnectClient(i);
+					break;
+				}
+				int32_t time = r.Signed32();
+				Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
+				log
+					("[Host] client %i (%i) sent player command for %i, time = %i\n",
+					 i, client.playernum, plcmd->get_sender(), time);
+				recvClientTime(i, time);
+				if (plcmd->get_sender() != client.playernum+1) {
+					log("[Host] client %i: trying to send playercommand for %i\n", i, plcmd->get_sender());
+					disconnectClient(i);
+					break;
+				}
+				sendPlayerCommand(plcmd);
+			} break;
 			default:
 				log("[Host] client %i: sent bad cmd %u\n", i, cmd);
 				disconnectClient(i);
@@ -600,6 +920,8 @@ void NetHost::handle_network ()
 
 void NetHost::disconnectPlayer(uint8_t number)
 {
+	bool needai = false;
+
 	for (uint32_t index = 0; index < d->clients.size(); ++index) {
 		Client& client = d->clients[index];
 		if (client.playernum != static_cast<int32_t>(number))
@@ -609,7 +931,11 @@ void NetHost::disconnectPlayer(uint8_t number)
 		disconnectClient(index);
 
 		setPlayerState(number, PlayerSettings::stateOpen);
+		needai = true;
 	}
+
+	if (needai && d->game)
+		d->computerplayers.push_back(new Computer_Player(*d->game, number+1));
 }
 
 void NetHost::disconnectClient(uint32_t number)
@@ -705,6 +1031,20 @@ struct NetClientImpl {
 
 	/// Current game. Only non-null if a game is actually running.
 	Widelands::Game* game;
+
+	NetworkTime time;
+
+	/// \c true if we received a message indicating that the server is waiting
+	/// Send a time message as soon as we caught up to networktime
+	bool server_is_waiting;
+
+	/// Data for the last time message we sent.
+	int32_t lasttimestamp;
+	int32_t lasttimestamp_realtime;
+
+	/// The real target speed, in milliseconds per second.
+	/// This is always set by the server
+	uint32_t realspeed;
 };
 
 NetClient::NetClient (IPaddress* svaddr)
@@ -720,6 +1060,7 @@ NetClient::NetClient (IPaddress* svaddr)
 	d->playernum = -1;
 	d->modal = 0;
 	d->game = 0;
+	d->realspeed = 0;
 }
 
 NetClient::~NetClient ()
@@ -747,6 +1088,8 @@ void NetClient::run ()
 	if (code <= 0)
 		return;
 
+	d->server_is_waiting = true;
+
 	Widelands::Game game;
 	try {
 		UI::ProgressWindow loaderUI("pics/progress.png");
@@ -758,6 +1101,9 @@ void NetClient::run ()
 		game.set_game_controller(this);
 		game.set_iabase(new Interactive_Player(game, d->playernum+1));
 		game.init(loaderUI, d->settings);
+		d->time.reset(game.get_gametime());
+		d->lasttimestamp = game.get_gametime();
+		d->lasttimestamp_realtime = WLApplication::get()->get_time();
 		game.run(loaderUI);
 	} catch (...) {
 		WLApplication::emergency_save(game);
@@ -768,15 +1114,46 @@ void NetClient::run ()
 void NetClient::think()
 {
 	handle_network();
+
+	if (d->game) {
+		if (d->realspeed == 0 || d->server_is_waiting) {
+			d->time.fastforward();
+		} else {
+			d->time.think(d->realspeed);
+		}
+
+		if (d->server_is_waiting && d->game->get_gametime() == d->time.networktime()) {
+			sendTime();
+			d->server_is_waiting = false;
+		} else if (d->game->get_gametime() != d->lasttimestamp) {
+			int32_t curtime = WLApplication::get()->get_time();
+			if (curtime - d->lasttimestamp_realtime > CLIENT_TIMESTAMP_INTERVAL)
+				sendTime();
+		}
+	}
 }
 
 void NetClient::sendPlayerCommand(Widelands::PlayerCommand* pc)
 {
+	assert(d->game);
+
+	log("[Client]: send playercommand at time %i\n", d->game->get_gametime());
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_PLAYERCOMMAND);
+	s.Signed32(d->game->get_gametime());
+	pc->serialize(s);
+	s.send(d->sock);
+
+	d->lasttimestamp = d->game->get_gametime();
+	d->lasttimestamp_realtime = WLApplication::get()->get_time();
+
+	delete pc;
 }
 
 int32_t NetClient::getFrametime()
 {
-	return 0;
+	return d->time.time() - d->game->get_gametime();
 }
 
 std::string NetClient::getGameDescription()
@@ -849,6 +1226,21 @@ void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
 	player.name = packet.String();
 	player.tribe = packet.String();
+}
+
+void NetClient::sendTime()
+{
+	assert(d->game);
+
+	log("[Client]: sending timestamp: %i\n", d->game->get_gametime());
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_TIME);
+	s.Signed32(d->game->get_gametime());
+	s.send(d->sock);
+
+	d->lasttimestamp = d->game->get_gametime();
+	d->lasttimestamp_realtime = WLApplication::get()->get_time();
 }
 
 void NetClient::handle_network ()
@@ -931,6 +1323,38 @@ void NetClient::handle_network ()
 			d->modal->end_modal(1);
 			break;
 		}
+		case NETCMD_SETSPEED:
+			d->realspeed = packet.Unsigned16();
+			log("[Client] speed: %u.%03u\n", d->realspeed / 1000, d->realspeed % 1000);
+			break;
+		case NETCMD_TIME: {
+			if (!d->time.recv(packet.Signed32())) {
+				disconnect();
+				return;
+			}
+			break;
+		}
+		case NETCMD_WAIT:
+			log("[Client]: server is waiting.\n");
+			d->server_is_waiting = true;
+			break;
+		case NETCMD_PLAYERCOMMAND: {
+			if (!d->game) {
+				log("[Client]: received PLAYERCOMMAND while game not running\n");
+				disconnect();
+				return;
+			}
+
+			int32_t time = packet.Signed32();
+			Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(packet);
+			plcmd->set_duetime(time);
+			d->game->enqueue_command(plcmd);
+			if (!d->time.recv(time)) {
+				disconnect();
+				return;
+			}
+			break;
+		}
 		default:
 			log("[Client] Invalid network data received (cmd = %u)\n", cmd);
 			disconnect();
@@ -1007,7 +1431,8 @@ void SendPacket::send (TCPsocket sock)
 	buffer[0] = length >> 8;
 	buffer[1] = length & 0xFF;
 
-	SDLNet_TCP_Send (sock, &(buffer[0]), buffer.size());
+	if (sock)
+		SDLNet_TCP_Send (sock, &(buffer[0]), buffer.size());
 }
 
 void SendPacket::reset ()

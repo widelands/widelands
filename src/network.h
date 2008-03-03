@@ -65,10 +65,18 @@ struct NetHost : public GameController {
 	void setPlayerState(uint8_t number, PlayerSettings::State state);
 	void setPlayerTribe(uint8_t number, const std::string& tribe);
 
+private:
+	void clearComputerPlayers();
+	void initComputerPlayers();
+
 	void handle_network ();
 
-private:
+	void checkHungClients();
+	void setRealSpeed(uint32_t speed);
+
 	void welcomeClient(uint32_t number);
+	void committedNetworkTime(int32_t time);
+	void recvClientTime(uint32_t number, int32_t time);
 
 	void broadcast(SendPacket& packet);
 	void writeSettingMap(SendPacket& packet);
@@ -112,6 +120,7 @@ struct NetClient : public GameController, public GameSettingsProvider {
 
 private:
 	void handle_network ();
+	void sendTime();
 	void recvOnePlayer(uint8_t number, Widelands::StreamRead& packet);
 	void disconnect ();
 
