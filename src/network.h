@@ -46,7 +46,13 @@ struct Chat_Message {
 };
 
 
-struct NetHost : public GameController {
+struct SyncCallback {
+	virtual ~SyncCallback() {}
+	virtual void syncreport() = 0;
+};
+
+
+struct NetHost : public GameController, private SyncCallback {
 	NetHost ();
 	virtual ~NetHost ();
 
@@ -66,6 +72,10 @@ struct NetHost : public GameController {
 	void setPlayerTribe(uint8_t number, const std::string& tribe);
 
 private:
+	void requestSyncReports();
+	void checkSyncReports();
+	void syncreport();
+
 	void clearComputerPlayers();
 	void initComputerPlayers();
 
@@ -92,7 +102,7 @@ private:
 
 struct NetClientImpl;
 
-struct NetClient : public GameController, public GameSettingsProvider {
+struct NetClient : public GameController, public GameSettingsProvider, private SyncCallback {
 	NetClient (IPaddress*);
 	virtual ~NetClient ();
 
@@ -119,6 +129,8 @@ struct NetClient : public GameController, public GameSettingsProvider {
 	virtual void setPlayerTribe(uint8_t number, const std::string& tribe);
 
 private:
+	void syncreport();
+
 	void handle_network ();
 	void sendTime();
 	void recvOnePlayer(uint8_t number, Widelands::StreamRead& packet);

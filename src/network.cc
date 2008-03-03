@@ -53,7 +53,7 @@
 
 using Widelands::Player;
 
-#define CHECK_SYNC_INTERVAL 2000
+#define SYNCREPORT_INTERVAL 1000
 #define CLIENT_TIMESTAMP_INTERVAL 500
 #define SERVER_TIMESTAMP_INTERVAL 100
 
@@ -76,31 +76,31 @@ enum {
 	NETCMD_LAUNCH = 20,
 	NETCMD_SETSPEED = 21,
 	NETCMD_WAIT = 23,
+	NETCMD_SYNCREQUEST = 25,
 
 	// Client->Server messages
 	NETCMD_PONG = 11,
-	NETCMD_SETTING_CHANGETRIBE = 17
+	NETCMD_SETTING_CHANGETRIBE = 17,
+	NETCMD_SYNCREPORT = 26
 };
 
 
-// class Cmd_NetCheckSync : public Widelands::Command {
-// private:
-// 	NetGame * netgame;
-//
-// public:
-// 	Cmd_NetCheckSync (int32_t dt, NetGame* ng) : Command (dt) {netgame=ng;}
-//
-// 	virtual void execute (Widelands::Game *);
-//
-// 	virtual int32_t get_id() {return QUEUE_CMD_NETCHECKSYNC;}
-// };
+class Cmd_NetCheckSync : public Widelands::Command {
+private:
+	SyncCallback * m_callback;
+
+public:
+	Cmd_NetCheckSync (int32_t dt, SyncCallback* cb) : Command (dt) {m_callback=cb;}
+
+	virtual void execute (Widelands::Game *);
+
+	virtual int32_t get_id() {return QUEUE_CMD_NETCHECKSYNC;}
+};
 
 
-// void Cmd_NetCheckSync::execute (Widelands::Game * g) {
-// 	netgame->syncreport (g->get_sync_hash());
-//
-// 	g->enqueue_command (new Cmd_NetCheckSync(get_duetime()+CHECK_SYNC_INTERVAL, netgame));
-// }
+void Cmd_NetCheckSync::execute (Widelands::Game *) {
+	m_callback->syncreport();
+}
 
 struct NetStatusWindow : public UI::Window {
 	NetStatusWindow (UI::Panel*);
@@ -290,7 +290,8 @@ struct Client {
 	TCPsocket sock;
 	Deserializer deserializer;
 	int32_t playernum; // -1 as long as the client hasn't said Hi.
-	std::queue<md5_checksum> syncreports;
+	md5_checksum syncreport;
+	bool syncreport_arrived;
 	int32_t time; // last time report
 };
 
@@ -331,7 +332,11 @@ struct NetHostImpl {
 	/// with \ref Player objects
 	std::vector<Computer_Player *> computerplayers;
 
-	std::queue<md5_checksum> mysyncreports;
+	/// \c true if a syncreport is currently in flight
+	bool syncreport_pending;
+	int32_t syncreport_time;
+	md5_checksum syncreport;
+	bool syncreport_arrived;
 };
 
 NetHost::NetHost ()
@@ -350,6 +355,8 @@ NetHost::NetHost ()
 	d->pseudo_networktime = 0;
 	d->realspeed = 0;
 	d->speed = 1000;
+	d->syncreport_pending = false;
+	d->syncreport_time = 0;
 
 	Widelands::Tribe_Descr::get_all_tribenames(d->settings.tribes);
 }
@@ -706,6 +713,9 @@ void NetHost::committedNetworkTime(int32_t time)
 
 	d->committed_networktime = time;
 	d->time.recv(time);
+
+	if (!d->syncreport_pending && d->committed_networktime - d->syncreport_time >= SYNCREPORT_INTERVAL)
+		requestSyncReports();
 }
 
 void NetHost::recvClientTime(uint32_t number, int32_t time)
@@ -723,6 +733,15 @@ void NetHost::recvClientTime(uint32_t number, int32_t time)
 		log("[Host]: Client %i rushes past committed networktime\n", number);
 		disconnectClient(number);
 		return;
+	}
+	if (d->syncreport_pending && !client.syncreport_arrived) {
+		if (time - d->syncreport_time > 0) {
+			log
+				("[Host]: client %i tries to skip syncreport (time %i, syncreport at %i)\n",
+				 number, time, d->syncreport_time);
+			disconnectClient(number);
+			return;
+		}
 	}
 
 	client.time = time;
@@ -772,8 +791,11 @@ void NetHost::checkHungClients()
 			broadcast(s);
 		}
 	} else {
-		if (nrdelayed == 0)
+		if (nrdelayed == 0) {
 			setRealSpeed(d->speed);
+			if (!d->syncreport_pending)
+				requestSyncReports();
+		}
 	}
 }
 
@@ -794,6 +816,76 @@ void NetHost::setRealSpeed(uint32_t speed)
 	broadcast(s);
 }
 
+/**
+ * Request sync reports from all clients at the next possible time.
+ */
+void NetHost::requestSyncReports()
+{
+	assert(!d->syncreport_pending);
+
+	d->syncreport_pending = true;
+	d->syncreport_arrived = false;
+	d->syncreport_time = d->committed_networktime+1;
+
+	for(uint32_t i = 0; i < d->clients.size(); ++i)
+		d->clients[i].syncreport_arrived = false;
+
+	log("[Host]: Requesting sync reports for time %i\n", d->syncreport_time);
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_SYNCREQUEST);
+	s.Signed32(d->syncreport_time);
+	broadcast(s);
+
+	d->game->enqueue_command(new Cmd_NetCheckSync(d->syncreport_time, this));
+
+	committedNetworkTime(d->syncreport_time);
+}
+
+/**
+ * Check whether all sync reports have arrived, and if so, compare.
+ */
+void NetHost::checkSyncReports()
+{
+	assert(d->syncreport_pending);
+
+	if (!d->syncreport_arrived)
+		return;
+
+	for(uint32_t i = 0; i < d->clients.size(); ++i) {
+		if (d->clients[i].playernum != -1 && !d->clients[i].syncreport_arrived)
+			return;
+	}
+
+	d->syncreport_pending = false;
+	log("[Host]: comparing syncreports for time %i\n", d->syncreport_time);
+
+	for(uint32_t i = 0; i < d->clients.size(); ++i) {
+		Client& client = d->clients[i];
+		if (client.playernum == -1)
+			continue;
+
+		if (client.syncreport != d->syncreport) {
+			log
+				("[Host] lost synchronization with client %u!\n"
+				 "I have:     %s\n"
+				 "Client has: %s\n",
+				 i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
+			disconnectClient(i);
+		}
+	}
+}
+
+void NetHost::syncreport()
+{
+	assert(d->game->get_gametime() == d->syncreport_time);
+
+	d->syncreport = d->game->get_sync_hash();
+	d->syncreport_arrived = true;
+
+	checkSyncReports();
+}
+
 
 void NetHost::handle_network ()
 {
@@ -811,6 +903,7 @@ void NetHost::handle_network ()
 		Client peer;
 		peer.sock = sock;
 		peer.playernum = -1;
+		peer.syncreport_arrived = false;
 		d->clients.push_back (peer);
 
 		// Now we wait for the client to say Hi in the right language,
@@ -907,6 +1000,21 @@ void NetHost::handle_network ()
 				}
 				sendPlayerCommand(plcmd);
 			} break;
+
+			case NETCMD_SYNCREPORT: {
+				if (!d->game || !d->syncreport_pending || client.syncreport_arrived) {
+					log("[Host] client %i: unexpected syncreport\n", i);
+					disconnectClient(i);
+					break;
+				}
+				int32_t time = r.Signed32();
+				r.Data(client.syncreport.data, 16);
+				client.syncreport_arrived = true;
+				recvClientTime(i, time);
+				checkSyncReports();
+				break;
+			}
+
 			default:
 				log("[Host] client %i: sent bad cmd %u\n", i, cmd);
 				disconnectClient(i);
@@ -951,6 +1059,9 @@ void NetHost::disconnectClient(uint32_t number)
 		SDLNet_TCP_Close (client.sock);
 		client.sock = 0;
 	}
+
+	if (d->game)
+		checkHungClients();
 }
 
 // Reap (i.e. delete) all disconnected clients.
@@ -966,50 +1077,6 @@ void NetHost::reaper()
 	}
 }
 
-
-// void NetHost::syncreport (const md5_checksum& newsync)
-// {
-// 	log("[Host] got local sync report\n");
-//
-// 	mysyncreports.push (newsync);
-//
-// 	while (mysyncreports.size()) {
-// 		// Now look whether there is at least one syncreport from everyone.
-// 		// If so, make sure they match.
-// 		for (size_t i = 0;i < clients.size(); ++i) {
-// 			if (clients[i].syncreports.empty()) {
-// 				// Complain if we get too far ahead
-// 				if (mysyncreports.size() > 1)
-// 					log
-// 						("[Host] no sync reports from client %u (my queue has %u "
-// 						 "entries)\n",
-// 						 i, mysyncreports.size());
-// 				return;
-// 			}
-// 		}
-//
-// 		md5_checksum sync = mysyncreports.front();
-// 		mysyncreports.pop();
-//
-// 		for (size_t i = 0; i < clients.size();  ++i) {
-// 			if (clients[i].syncreports.front() != sync) {
-// 				log
-// 					("[Host] lost synchronization with client %u!\n"
-// 					 "I have:     %s\n"
-// 					 "Client has: %s\n",
-// 					 i,
-// 					 sync.str().c_str(),
-// 					 clients[i].syncreports.front().str().c_str());
-//
-// 				// TODO: Actually handle the desync here
-// 			}
-//
-// 			clients[i].syncreports.pop();
-// 		}
-//
-// 		log("[Host] verified one synchronization report\n");
-// 	}
-// }
 
 /*** class NetClient ***/
 
@@ -1243,6 +1310,17 @@ void NetClient::sendTime()
 	d->lasttimestamp_realtime = WLApplication::get()->get_time();
 }
 
+void NetClient::syncreport()
+{
+	if (d->sock) {
+		SendPacket s;
+		s.Unsigned8(NETCMD_SYNCREPORT);
+		s.Signed32(d->game->get_gametime());
+		s.Data(d->game->get_sync_hash().data, 16);
+		s.send(d->sock);
+	}
+}
+
 void NetClient::handle_network ()
 {
 	// check if data is available on the socket
@@ -1353,6 +1431,20 @@ void NetClient::handle_network ()
 				disconnect();
 				return;
 			}
+			break;
+		}
+		case NETCMD_SYNCREQUEST: {
+			if (!d->game) {
+				log("[Client]: received SYNCREQUEST while game not running\n");
+				disconnect();
+				return;
+			}
+			int32_t time = packet.Signed32();
+			if (!d->time.recv(time)) {
+				disconnect();
+				return;
+			}
+			d->game->enqueue_command(new Cmd_NetCheckSync(time, this));
 			break;
 		}
 		default:
