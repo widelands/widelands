@@ -89,11 +89,11 @@ function detect {
 			check $f
 			if [ -s $RESULT_FILE ]; then
 				mv $RESULT_FILE $CACHE
+				cat $CACHE
 			else
 				rm -f $CACHE_BASE $CACHE_BASE.colourized
 				touch --reference=$f $CACHE_BASE
 			fi
-			cat $CACHE
 		elif [ -s $CACHE ]; then
 			echo "Showing cached errors in $f..."
 			cat $CACHE
