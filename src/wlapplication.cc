@@ -309,7 +309,8 @@ void WLApplication::run()
 		if (NetGGZ::ref().used()) {
 			if (NetGGZ::ref().connect()) {
 				log("FIXME: Something related to GGZ goes here\n");
-/*				NetGame *netgame;
+#if 0
+				NetGame *netgame;
 
 				if (NetGGZ::ref().host()) netgame = new NetHost();
 				else
@@ -322,7 +323,8 @@ void WLApplication::run()
 					netgame = new NetClient(&peer);
 				}
 				netgame->run();
-				delete netgame;*/
+				delete netgame;
+#endif
 			}
 		}
 

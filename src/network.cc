@@ -239,9 +239,11 @@ bool NetworkTime::recv(int32_t ntime)
 	else
 		m_latency = ((m_latency * 7) + behind) / 8;
 
-// 	log
-// 		("NetworkTime: New networktime %i (local time %i), behind %i, latency %u\n",
-// 		 ntime, m_time, m_networktime - m_time, m_latency);
+#if 0
+	log
+		("NetworkTime: New networktime %i (local time %i), behind %i, latency %u\n",
+		 ntime, m_time, m_networktime - m_time, m_latency);
+#endif
 
 	m_networktime = ntime;
 
@@ -418,7 +420,7 @@ void NetHost::initComputerPlayers()
 			continue;
 
 		uint32_t client;
-		for(client = 0; client < d->clients.size(); ++client)
+		for (client = 0; client < d->clients.size(); ++client)
 			if (d->clients[client].playernum+1 == p)
 				break;
 
@@ -436,7 +438,7 @@ void NetHost::run()
 	if (code <= 0)
 		return;
 
-	for(uint32_t i = 0; i < d->clients.size(); ++i) {
+	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients[i].playernum == -1) {
 			log("[Host]: say goodbye to client %i, game is starting without him\n", i);
 			disconnectClient(i);
@@ -514,7 +516,7 @@ void NetHost::think()
 			}
 		}
 
-		for(uint32_t i = 0; i < d->computerplayers.size(); ++i)
+		for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
 			d->computerplayers[i]->think();
 	}
 }
@@ -852,7 +854,7 @@ void NetHost::requestSyncReports()
 	d->syncreport_arrived = false;
 	d->syncreport_time = d->committed_networktime+1;
 
-	for(uint32_t i = 0; i < d->clients.size(); ++i)
+	for (uint32_t i = 0; i < d->clients.size(); ++i)
 		d->clients[i].syncreport_arrived = false;
 
 	log("[Host]: Requesting sync reports for time %i\n", d->syncreport_time);
@@ -877,7 +879,7 @@ void NetHost::checkSyncReports()
 	if (!d->syncreport_arrived)
 		return;
 
-	for(uint32_t i = 0; i < d->clients.size(); ++i) {
+	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients[i].playernum != -1 && !d->clients[i].syncreport_arrived)
 			return;
 	}
@@ -885,7 +887,7 @@ void NetHost::checkSyncReports()
 	d->syncreport_pending = false;
 	log("[Host]: comparing syncreports for time %i\n", d->syncreport_time);
 
-	for(uint32_t i = 0; i < d->clients.size(); ++i) {
+	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		Client& client = d->clients[i];
 		if (client.playernum == -1)
 			continue;

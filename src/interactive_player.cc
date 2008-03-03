@@ -158,17 +158,19 @@ void Interactive_Player::think()
 		m_label_speed.set_text(buffer);
 	}
 
+#if 0
 	// Check for chatmessages
-// 	if (NetGame * const ng = m_game->get_netgame())
-// 		if (ng->have_chat_message()) {
-// 			NetGame::Chat_Message t = ng->get_chat_message();
-// 			m_chatmsges.push_back(t);
-//
-// 			Overlay_Chat_Messages ov;
-// 			ov.msg =  t;
-// 			ov.starttime = WLApplication::get()->get_time();
-// 			m_show_chatmsg.push_back(ov);
-// 		}
+	if (NetGame * const ng = m_game->get_netgame())
+		if (ng->have_chat_message()) {
+			NetGame::Chat_Message t = ng->get_chat_message();
+			m_chatmsges.push_back(t);
+
+			Overlay_Chat_Messages ov;
+			ov.msg =  t;
+			ov.starttime = WLApplication::get()->get_time();
+			m_show_chatmsg.push_back(ov);
+		}
+#endif
 
 	// If we have chat messages to overlay, show them now
 	m_chat_messages.set_text("");
@@ -399,13 +401,15 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 	case SDLK_RETURN:
 		if (down) {
 			if (m_is_typing_msg && m_typed_message.size()) {
-/*				if (m_game->get_netgame()) {
+#if 0
+				if (m_game->get_netgame()) {
 					NetGame::Chat_Message t;
 
 					t.plrnum = get_player_number();
 					t.msg = m_typed_message;
 					m_game->get_netgame()->send_chat_message(t);
-				}*/
+				}
+#endif
 				m_typed_message.clear();
 				m_is_typing_msg = false;
 			} else {

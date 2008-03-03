@@ -53,9 +53,9 @@ class AttackController;
  * in the long run.
  *                      -- Nicolai
  */
-struct Player
-	: NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>,
-	  public NoteSender<NoteImmovable>, public NoteSender<NoteField>
+struct Player :
+	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteField>,
+	public NoteSender  <NoteImmovable>, public NoteSender  <NoteField>
 {
 	struct Building_Stats {
 		bool is_constructionsite;

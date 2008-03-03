@@ -631,7 +631,7 @@ uint32_t Warehouse::count_workers(Game* g, Ware_Index ware, const Requirements& 
 		subs.push_back(tribe.get_worker_descr(ware));
 		sum += m_supply->stock_workers(ware);
 		ware = tribe.get_worker_descr(ware)->becomes();
-	} while(ware != Ware_Index::Null());
+	} while (ware != Ware_Index::Null());
 
 	// NOTE: This code lies about the tAttributes of non-instantiated workers.
 
@@ -640,7 +640,8 @@ uint32_t Warehouse::count_workers(Game* g, Ware_Index ware, const Requirements& 
 	for
 		(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
 		 it != incorporated_workers_end;
-		 ++it) {
+		 ++it)
+	{
 		Map_Object* w = it->get(g);
 		if (w && std::find(subs.begin(), subs.end(), &w->descr()) != subs.end()) {
 			// This is one of the workers in our sum
@@ -674,8 +675,9 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 				m_incorporated_workers.end();
 			for
 				(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
-				it != incorporated_workers_end;
-				++it) {
+				 it != incorporated_workers_end;
+				 ++it)
+			{
 				if (upcast(Worker, worker, it->get(game))) {
 					if (worker->name() == workername) {
 						unincorporated--;
@@ -703,7 +705,7 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 		}
 
 		ware = tribe.get_worker_descr(ware)->becomes();
-	} while(ware != Ware_Index::Null());
+	} while (ware != Ware_Index::Null());
 
 	throw wexception("Warehouse::launch_worker: Worker doesn't actually exist");
 }

@@ -26,12 +26,12 @@ raw_stone=2
 
 [idle]
 pics=deeper_coalmine_i_??.png
-hotspot=42 42
+hotspot=45 45
 
 [working]
 pics=deeper_coalmine_i_??.png
-hotspot=42 42
+hotspot=45 45
 
 [build]
 pics=deeper_coalmine_i_??.png
-hotspot=42 42
+hotspot=45 45
