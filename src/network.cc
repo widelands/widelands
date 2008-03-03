@@ -135,6 +135,10 @@ authority to do this. */
  * Keeping track of network time: This class answers the question of how
  * far the local simulation time should proceed, given the history of network
  * time messages.
+ *
+ * In general, the time progresses as fast as given by the speed, but we
+ * introduce some elasticity to catch up with the network time if necessary,
+ * and we never progress past the received network time.
  */
 class NetworkTime {
 public:
@@ -153,6 +157,9 @@ private:
 	int32_t m_time;
 
 	int32_t m_lastframe;
+
+	/// This is an attempt to measure how far behind the network time we are.
+	uint32_t m_latency;
 };
 
 NetworkTime::NetworkTime()
@@ -164,6 +171,7 @@ void NetworkTime::reset(int32_t ntime)
 {
 	m_networktime = m_time = ntime;
 	m_lastframe = WLApplication::get()->get_time();
+	m_latency = 0;
 }
 
 void NetworkTime::fastforward()
@@ -189,8 +197,18 @@ void NetworkTime::think(uint32_t speed)
 
 	int32_t behind = m_networktime - m_time;
 
-	if (delta + static_cast<int32_t>(speed) < behind)
-		delta = (delta*9)/8; // speed up by 12%
+	// Play catch up
+	uint32_t speedup = 0;
+	if (m_latency > 10*delta)
+		speedup = m_latency/3; // just try to kill as much of the latency as possible if we're that far behind
+	else if (m_latency > delta)
+		speedup = delta/8; // speed up by 12.5%
+	if (delta + speedup > behind)
+		speedup = behind - delta;
+
+	delta += speedup;
+	m_latency -= speedup;
+
 	if (delta > behind)
 		delta = behind;
 
@@ -214,9 +232,16 @@ bool NetworkTime::recv(int32_t ntime)
 		return false;
 	}
 
+	uint32_t behind = m_networktime - m_time;
+
+	if (behind < m_latency)
+		m_latency = behind;
+	else
+		m_latency = ((m_latency * 7) + behind) / 8;
+
 // 	log
-// 		("NetworkTime: New networktime %i (local time %i), behind %i\n",
-// 		 ntime, m_time, m_networktime - m_time);
+// 		("NetworkTime: New networktime %i (local time %i), behind %i, latency %u\n",
+// 		 ntime, m_time, m_networktime - m_time, m_latency);
 
 	m_networktime = ntime;
 
