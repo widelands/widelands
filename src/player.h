@@ -442,6 +442,8 @@ struct Player :
 	void receive(const NoteField& note);
 
 private:
+	void update_building_statistics(Building* building, losegain_t lg);
+
 	/**
 	 * Called when a node becomes seen (not only the first time) before the
 	 * vision counter is incremented. Discovers the node and those of the 6

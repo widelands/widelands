@@ -739,43 +739,52 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
 }
 
 
-void Player::receive(const NoteImmovable& note)
+/**
+ * Add or remove the given building from building statistics.
+ * Only to be called by \ref receive
+ */
+void Player::update_building_statistics(Building* building, losegain_t lg)
 {
-	if (upcast(Building const, building, note.pi)) {
-		upcast(ConstructionSite const, constructionsite, building);
-		const std::string & building_name =
-			constructionsite ?
-			constructionsite->building().name() : building->name();
+	upcast(ConstructionSite const, constructionsite, building);
+	const std::string & building_name =
+		constructionsite ?
+		constructionsite->building().name() : building->name();
 
-		const Building_Descr::Index nr_buildings = tribe().get_nrbuildings();
+	const Building_Descr::Index nr_buildings = tribe().get_nrbuildings();
 
 		// Get the valid vector for this
-		if (m_building_stats.size() < nr_buildings)
-			m_building_stats.resize(nr_buildings);
+	if (m_building_stats.size() < nr_buildings)
+		m_building_stats.resize(nr_buildings);
 
-		std::vector<Building_Stats> & stat =
-			m_building_stats[tribe().get_building_index(building_name.c_str())];
+	std::vector<Building_Stats> & stat =
+		m_building_stats[tribe().get_building_index(building_name.c_str())];
 
-		if (note.lg == GAIN) {
-			Building_Stats new_building;
-			new_building.is_constructionsite = constructionsite;
-			new_building.pos = building->get_position();
-			stat.push_back(new_building);
-		} else {
-			const Coords building_position = building->get_position();
-			for (uint32_t i = 0; i < stat.size(); ++i) {
-				if (stat[i].pos == building_position) {
-					stat.erase(stat.begin() + i);
-					return;
-				}
+	if (lg == GAIN) {
+		Building_Stats new_building;
+		new_building.is_constructionsite = constructionsite;
+		new_building.pos = building->get_position();
+		stat.push_back(new_building);
+	} else {
+		const Coords building_position = building->get_position();
+		for (uint32_t i = 0; i < stat.size(); ++i) {
+			if (stat[i].pos == building_position) {
+				stat.erase(stat.begin() + i);
+				return;
 			}
-
-			throw wexception
-				("Interactive_Player::loose_immovable(): A building should be "
-				 "removed at (%i, %i), but nothing is known about this building!",
-				 building_position.x, building_position.y);
 		}
+
+		throw wexception
+			("Interactive_Player::loose_immovable(): A building should be "
+			 "removed at (%i, %i), but nothing is known about this building!",
+			 building_position.x, building_position.y);
 	}
+}
+
+
+void Player::receive(const NoteImmovable& note)
+{
+	if (upcast(Building, building, note.pi))
+		update_building_statistics(building, note.lg);
 
 	NoteSender<NoteImmovable>::send(note);
 }
