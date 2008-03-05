@@ -167,7 +167,7 @@ protected:  // TrainingSite must have access to this stuff
 };
 
 /**
- * Descripes, how many items of a certain ware can be stored in a house.
+ * Describes, how many items of a certain ware can be stored in a house.
  *
  * This class will be extended to support ordering of certain wares directly or
  * releasing some wares out of a building

@@ -99,8 +99,9 @@ extern Map_Object_Descr g_flag_descr;
  * key in the Object_Manager map, and in the safe Object_Ptr.
  *
  * Unless you're perfectly sure about when an object can be destroyed you
- * should use an Object_Ptr (there are some well-defined exceptions, such as
- * Building<->Flag relationships).
+ * should use an Object_Ptr or, better yet, the type safe OPtr template.
+ * This is not necessary when the relationship and lifetime between objects
+ * is well-defined, such as in the relationship between Building and Flag.
  *
  * Map_Objects can also have attributes. They are mainly useful for finding
  * objects of a given type (e.g. trees) within a certain radius.

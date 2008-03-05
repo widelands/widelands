@@ -45,10 +45,10 @@ class Worker;
  */
 struct BaseImmovable : public Map_Object {
 	enum {
-		NONE,   ///< \todo not robust
-		SMALL,
-		MEDIUM,
-		BIG
+		NONE,   ///< not robust (i.e. removable just by building something over it)
+		SMALL,  ///< small building or robust map element, including trees
+		MEDIUM, ///< medium size building
+		BIG     ///< big building
 	};
 
 	BaseImmovable(const Map_Object_Descr &);
@@ -105,7 +105,10 @@ protected:
 	EncodeData    m_default_encodedata;
 
 	ProgramMap    m_programs;
-	const Tribe_Descr * const m_owner_tribe; ///< 0 if world immovable
+	/**
+	 * the tribe to which this Immovable_Descr belongs or 0 if it is a world immovable
+	 */
+	const Tribe_Descr * const m_owner_tribe;
 };
 
 class Immovable : public BaseImmovable {
