@@ -405,7 +405,8 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				try {
 					worker->set_location(&ol->get<PlayerImmovable>(location_serial));
 				} catch (_wexception const & e) {
-					throw ("location (%u): %s", location_serial, e.what());
+					throw wexception
+						("location (%u): %s", location_serial, e.what());
 				}
 			} else
 				worker->m_location = 0;
