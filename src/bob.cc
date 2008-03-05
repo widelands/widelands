@@ -181,67 +181,6 @@ Bob::~Bob()
 }
 
 
-/*
-Bobs and tasks
---------------
-
-Bobs have a call-stack of "tasks". The top-most task is the one that is
-currently being executed. As soon as the task is finished (either successfully
-or with an error signal), it is popped from the top of the stack, and the task
-that is now on top will be asked to update() itself.
-
-Upon initialization, an object has no task at all. A CMD_ACT will be scheduled
-automatically. When it is executed, init_auto_task() is called to automatically
-select a fallback task.
-However, the creator of the bob can choose to push a specific task immediately
-after creating the bob. This will override the fallback behaviour.
-init_auto_task() is also called when the final task is popped from the stack.
-
-All state information that a task uses must be stored in the State structure
-returned by get_state(). Note that every task on the task stack has its own
-state structure, i.e. push_task() does not destroy the current task's state.
-
-In order to start a new sub-task, you have to call push_task(), and then fill
-the State structure returned by get_state() with any parameters that the task
-may need.
-A task is ended by pop_task(). Note, however, that you should only call
-pop_task() from a task's update() or signal() function.
-If you want to interrupt the current task for some reason, you should call
-send_signal().
-
-To implement a new task, you need to create a new Task object, and at least an
-update() function. The signal() and mask() functions are optional (can be 0).
-The update() function is called once after the task is pushed, and whenever a
-previously scheduled CMD_ACT occurred. It is also called when a sub-task pops
-itself.
-One of the following things must happen during update():
-- Call schedule_act() to schedule the next call to update()
-  This often happens indirectly by calls to start_task_* type functions.
-- Call skip_act() if you really don't want a CMD_ACT to occur.
-  Note that if you call skip_act(), your task MUST implement signal(),
-  otherwise your bob will never wake up again.
-- Call pop_task() to end the current task
-- Send a new signal. Note that in this case, the signal handler must ensure
-  continued operation of the bob by calling pop_task() or schedule_act().
-
-signal() is usually called by send_signal().
-signal() is also called when a sub-task returns while a signal is still set.
-Note that after signal() called, update() is also called.
-Also note that if a signal is sent during an update() or signal() routine,
-the signal delivery is delayed until that function is over.
-signal() must call schedule_act(), or pop_task(), or do nothing at all.
-If signal() is not implemented, it is equivalent to a signal() function that
-does nothing at all.
-In the latter case, the signal has no effect, but it is remembered. Once
-the current task is popped, its parent task will receive a signal() call.
-
-Whenever send_signal() is called, the mask() function of all tasks are called,
-starting with the highest-level task.
-The mask() function cannot schedule CMD_ACT, but it can use set_signal() to
-modify or even clear the signal before it reaches the normal signal handling
-functions.
-*/
-
 /**
  * Initialize the object
  *

@@ -39,7 +39,7 @@ namespace Widelands {struct Game;};
 struct Songset;
 
 /// How many milliseconds in the past to consider for
-/// \ref Sound_Handler::play_or_not()
+/// Sound_Handler::play_or_not()
 #define SLIDING_WINDOW_SIZE 300000
 
 extern class Sound_Handler g_sound_handler;
@@ -54,7 +54,7 @@ extern class Sound_Handler g_sound_handler;
  * \par Music
  *
  * Background music for different situations (e.g. 'Menu', 'Gameplay') is
- * collected in songsets. Each \ref Songset contains references to one or more
+ * collected in songsets. Each Songset contains references to one or more
  * songs in ogg format. The only ordering inside a soundset is from the order
  * in which the songs were loaded.
  *
@@ -78,7 +78,7 @@ extern class Sound_Handler g_sound_handler;
  * any name you want. All audio files below sound/ingame_01 will be played as
  * ingame music.
  *
- * For more information about the naming scheme, see \ref load_fx()
+ * For more information about the naming scheme, see load_fx()
  *
  * You should be using the ogg format for music.
  *
@@ -88,14 +88,14 @@ extern class Sound_Handler g_sound_handler;
  * e.g. "playFX blacksmith_hammer" in the appropriate conf file. The conf file
  * parser will then load one or more audio files for 'hammering blacksmith'
  * from the building's/worker's configuration directory and store them in an
- * \ref FXset for later access, similar to the way music is stored in songsets.
+ * FXset for later access, similar to the way music is stored in songsets.
  * For effects, however, the selection is always random. Sound effects are kept
  * in memory at all times, to avoid delays from disk access.
  *
  * The abovementioned sound effects are synchronized with a work program. It's
  * also possible to have sound effects that are synchronized with a
  * building/worker \e animation. For more information about this look at class
- * \ref AnimationManager.
+ * AnimationManager.
  *
  * \par Usage of callbacks
  *
@@ -104,21 +104,24 @@ extern class Sound_Handler g_sound_handler;
  * are a fine thing, they can also be a pain in the body part with which we
  * usually touch our chairs.
  *
- * Problem 1:\n
+ * Problem 1:
+ *
  * Callbacks must use global(or static) functions \e but \e not normal member
  * functions of a class. If you must know why: ask google. But how can a
  * static function share data with an instance of it's own class? Usually not at
- * all.\n
- * Fortunately, \ref g_sound_handler already is a global variable,
+ * all.
+ *
+ * Fortunately, g_sound_handler already is a global variable,
  * and therefore accessible to global functions. So problem 1 disappears.
  *
- * Problem 2:\n
+ * Problem 2:
+ *
  * Callbacks run in the caller's context. This means that when
- * \ref music_finished_callback() is called, SDL_mixer and SDL_audio <b>will
+ * music_finished_callback() is called, SDL_mixer and SDL_audio <b>will
  * be holding all of their locks!!</b> "So what?", you ask. The above means
  * that one \e must \e not call \b any SDL_mixer functions from inside the
  * callback, otherwise a deadlock is guaranteed. This indirectly does include
- * \ref start_music, \ref stop_music and of course \ref change_music.
+ * start_music(), stop_music() and of course change_music().
  * Unfortunately, that's just the functions we'd need to execute from the
  * callback. As if that was not enough, SDL_mixer internally uses
  * two separate threads, so you \e really don't want to play around with
@@ -136,7 +139,7 @@ extern class Sound_Handler g_sound_handler;
  * \par Stopping music without blocking
  *
  * When playing background music with SDL_mixer, we can fade the audio in/out.
- * Unfortunately, Mix_FadeOutMusic will return immediately - but, as the music
+ * Unfortunately, Mix_FadeOutMusic() will return immediately - but, as the music
  * is not yet stopped, starting a new piece of background music will block. So
  * the choice is to block (directly) after ordering to fade out or indirectly
  * when starting the next piece. Now imagine a fadeout-time of 30 seconds ...
@@ -144,17 +147,17 @@ extern class Sound_Handler g_sound_handler;
  *
  * The solution is to work asynchronously, which is doable, as we already use a
  * callback to tell us when the audio is \e completely finished. So in
- * \ref stop_music (or \ref change_music) we just start the fadeout. The
+ * stop_music() (or change_music() ) we just start the fadeout. The
  * callback then tells us when the audio has actually stopped and we can start
  * the next music. To differentiate between the two states we can just take a
  * peek with Mix_MusicPlaying() if there is music running. To make sure that
- * nothing bad happens, that check is not only required in \ref change_music
- * but also in \ref start_music, which causes the seemingly recursive call to
+ * nothing bad happens, that check is not only required in change_music()
+ * but also in start_music(), which causes the seemingly recursive call to
  * change_music from inside start_music. It really is not recursive, trust
  * me :-)
  *
- * \todo Describe priorities
- * \todo Describe play-or-not algo
+ * \todo DOC: priorities
+ * \todo DOC: play-or-not algorithm
  * \todo Environmental sound effects (e.g. wind)
  * \todo repair and reenable animation sound effects for 1-pic-animations
  * \todo accommodate runtime changes of i18n language
@@ -229,7 +232,7 @@ public:
 	*/
 	bool m_nosound;
 
-	/** Can \ref m_disable_music and \ref m_disable_fx be changed?
+	/** Can m_disable_music and m_disable_fx be changed?
 	 * true = they mustn't be changed (e.g. because hardware is missing)
 	 * false = can be changed at user request
 	*/
@@ -248,14 +251,14 @@ protected:
 	bool m_disable_music;
 	/// Whether to disable sound effects
 	bool m_disable_fx;
-	/// Volume of music (from 0 to \ref get_max_volume())
+	/// Volume of music (from 0 to get_max_volume())
 	int32_t m_music_volume;
-	/// Volume of sound effects (from 0 to \ref get_max_volume())
+	/// Volume of sound effects (from 0 to get_max_volume())
 	int32_t m_fx_volume;
 
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside
-	 * their \ref FXset, of course
+	 * their FXset, of course.
 	*/
 	bool m_random_order;
 
@@ -271,7 +274,7 @@ protected:
 	std::map<uint32_t, std::string> m_active_fx;
 
 	/** Which songset we are currently selecting songs from - not regarding
-	 * if there actually is a song playing \e right \e now
+	 * if there actually is a song playing \e right \e now.
 	*/
 	std::string m_current_songset;
 

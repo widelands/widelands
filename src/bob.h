@@ -46,6 +46,66 @@ struct BobProgramBase {
 
 /**
  * Bobs are moving map objects: Animals, humans, ships...
+ *
+ * The name comes from original Settlers2 terminology.
+ *
+ * \par Bobs, Tasks and their signalling
+ *
+ * Bobs have a call-stack of "tasks". The top-most Task is the one that is
+ * currently being executed. As soon as the Task is finished (either
+ * successfully or with an error signal), it is popped from the top of the
+ * stack, and the Task that is now on top will be asked to update() itself.
+ *
+ * Upon initialization, an object has no Task at all. A CMD_ACT will be
+ * scheduled automatically. When it is executed, init_auto_task() is called to
+ * automatically select a fallback Task.
+ *
+ * However, the creator of the Bob can choose to push a specific Task
+ * immediately after creating the Bob. This will override the fallback
+ * behaviour. init_auto_task() is also called when the final task is popped
+ * from the stack.
+ *
+ * All state information that a Task uses must be stored in the State structure
+ * returned by get_state(). Every Task on the Task stack has its own
+ * State structure, i.e. push_task() does not destroy the current Task's State.
+ *
+ * In order to start a new sub-task, you have to call push_task(), and then fill
+ * the State structure returned by get_state() with any parameters that the Task
+ * may need.
+ *
+ * A Task is ended by pop_task(). Note, however, that you should only call
+ * pop_task() from a Task's update() or signal() function.
+ *
+ * If you want to interrupt the current Task for some reason, you should call
+ * send_signal().
+ * \todo DOC: \em how should I call it?
+ *
+ * To implement a new Task, you need to create a new Task object, and at least
+ * an update() function. The signal() and mask() functions are optional (can be
+ * zero).
+ *
+ * One of the following things must happen during update():
+ * \li Call schedule_act() to schedule the next call to update()
+ *     This often happens indirectly by calls to start_task_* type functions.
+ * \li Call skip_act() if you really don't want a CMD_ACT to occur.
+ *     If you call skip_act(), your task MUST implement signal(),
+ *     otherwise your bob will never wake up again.
+ * \li Call pop_task() to end the current task
+ * \li Send a new signal. In this case, the signal handler must ensure
+ *     continued operation of the bob by calling pop_task() or schedule_act().
+ *
+ * Note that after signal() is called, update() is also called. Also note that
+ * if a signal is sent during an update() or signal() routine, the signal
+ * delivery is delayed until that function is over. signal() must call
+ * schedule_act(), or pop_task(), or do nothing at all. If signal() is not
+ * implemented, it is equivalent to a signal() function that does nothing at
+ * all.
+ *
+ * In the latter case, the signal has no effect, but it is remembered. Once
+ * the current Task is popped, its parent Task will receive a signal() call.
+ *
+ * Whenever send_signal() is called, the mask() function of all Tasks are
+ * called, starting with the highest-level Task.
  */
 struct Bob : public Map_Object {
 	friend struct Map_Bobdata_Data_Packet;
@@ -55,14 +115,28 @@ struct Bob : public Map_Object {
 	typedef void (Bob::*Ptr)(Game*, State*);
 	enum Type {CRITTER, WORKER};
 
+	/// \see class Bob for in-depth explanation
 	struct Task {
 		const char* name;
 
+		/** Called once after the task is pushed, and whenever a
+		 * previously scheduled CMD_ACT occurs. Also called when a
+		 * sub-task pops itself. */
 		Ptr update;
+
+		/** Usually called by send_signal()n and also when a sub-task
+		 * returns while a signal is still set. */
 		Ptr signal;
+
+		/** This cannot schedule CMD_ACT, but it can use set_signal() to
+		 * modify or even clear asignal before it reaches the normal
+		 * signal handling methods. */
 		Ptr mask;
 	};
 
+	/// \see class Bob for in-depth explanation
+	/// \todo While a State logically is a property of a task, the pointers
+	/// are just the other way around. Is this logical?
 	struct State {
 		State(const Task * const the_task = 0) :
 			task    (the_task),
@@ -78,8 +152,8 @@ struct Bob : public Map_Object {
 		{}
 
 		const Task           * task;
-		int32_t                    ivar1;
-		int32_t                    ivar2;
+		int32_t                ivar1;
+		int32_t                ivar2;
 		union                  {int32_t ivar3; uint32_t ui32var3;};
 		Object_Ptr             objvar1;
 		std::string            svar1;
@@ -89,7 +163,7 @@ struct Bob : public Map_Object {
 		Path                 * path;
 		Transfer             * transfer;
 		Route                * route;
-		const BobProgramBase * program; // pointer to current program class
+		const BobProgramBase * program; ///< pointer to current program
 	};
 
 	struct Descr: public Map_Object_Descr {
@@ -250,11 +324,11 @@ private:
 	static Task taskMovepath;
 	static Task taskForcemove;
 
-	Player   * m_owner; // can be 0
-	FCoords    m_position; // where are we right now?
-	Bob      * m_linknext; // next object on this field
+	Player   * m_owner; ///< can be 0
+	FCoords    m_position; ///< where are we right now?
+	Bob      * m_linknext; ///< next object on this field
 	Bob    * * m_linkpprev;
-	uint32_t       m_actid; // CMD_ACT counter, used to eliminate spurious act()s
+	uint32_t       m_actid; ///< CMD_ACT counter, used to eliminate spurious act()s
 	uint32_t       m_anim;
 	int32_t        m_animstart; ///< gametime when the animation was started
 	WalkingDir m_walking;
