@@ -19,8 +19,8 @@ stone=2
 
 [idle]
 pics=castle_i_??.png
-hotspot=92 108
+hotspot=90 106
 
 [build]
 pics=castle_i_??.png
-hotspot=92 108
+hotspot=90 106

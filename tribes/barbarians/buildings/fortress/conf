@@ -19,8 +19,8 @@ grindstone=2
 
 [idle]
 pics=fortress_i_??.png
-hotspot=81 68
+hotspot=81 66
 
 [build]
 pics=fortress_i_??.png
-hotspot=81 68
+hotspot=81 66

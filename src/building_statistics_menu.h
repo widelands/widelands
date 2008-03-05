@@ -20,7 +20,9 @@
 #ifndef BUILDING_STATISTICS_MENU_H
 #define BUILDING_STATISTICS_MENU_H
 
+#include "ui_progressbar.h"
 #include "ui_table.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 namespace Widelands {struct Building_Descr;};
@@ -39,16 +41,21 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 	void draw(RenderTarget *);
 
 private:
+	Interactive_Player & iaplayer() const;
 	enum Jump_Targets {
 		Prev_Owned,        Next_Owned,
 		Prev_Construction, Next_Construction,
 		Prev_Unproductive, Next_Unproductive
 	};
 
-	Interactive_Player      * m_parent;
 	UI::Table<const intptr_t> m_table;
-	UI::Progress_Bar        * m_progbar;
-	UI::Textarea * m_owned, * m_build;
+	UI::Progress_Bar          m_progbar;
+	UI::Textarea              m_total_productivity_label;
+	UI::Textarea              m_owned_label;
+	UI::Textarea              m_owned;
+	UI::Textarea              m_in_build_label;
+	UI::Textarea              m_in_build;
+	UI::Textarea              m_unproductive_label;
 	uint32_t                  m_anim;
 	uint32_t                  m_lastupdate;
 	uint32_t                  m_end_of_table_y;

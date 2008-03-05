@@ -29,12 +29,12 @@ thatchreed=2
 
 [idle]
 pics=micro-brewery_i_??.png  # ???
-hotspot=34 56
+hotspot=42 52
 
 [build]
 pics=micro-brewery_i_??.png  # ???
-hotspot=34 56
+hotspot=42 52
 
 [working]
 pics=micro-brewery_i_??.png  # ???
-hotspot=34 56
+hotspot=42 52

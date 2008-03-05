@@ -166,9 +166,9 @@ UI::UniqueWindow(parent, registry, 410, 330, _("Objectives Menu")),
 m_parent(parent),
 m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 {
-	m_table.add_column(_("Name"),    270);
-	m_table.add_column(_("Optional"), 70);
-	m_table.add_column(_("Visible"),  60);
+	m_table.add_column(270, _("Name"));
+	m_table.add_column (70, _("Optional"));
+	m_table.add_column (60, _("Visible"));
 	m_table.selected.set(this, &Editor_Objectives_Menu::table_selected);
 	m_table.double_clicked.set(this, &Editor_Objectives_Menu::table_dblclicked);
 
@@ -314,7 +314,7 @@ void Editor_Objectives_Menu::table_dblclicked(uint32_t) {clicked_edit();}
  * Insert this map variable into the table
  */
 void Editor_Objectives_Menu::insert_objective(Objective & var) {
-	UI::Table<Objective &>::Entry_Record & t = m_table.add(var, -1, true);
+	UI::Table<Objective &>::Entry_Record & t = m_table.add(var, true);
 
 	t.set_string(0, var.name());
 	t.set_string(1, var.get_is_visible() ? "Yes" : "No");

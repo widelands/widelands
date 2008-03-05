@@ -71,9 +71,10 @@ tribe(&interactivePlayer.get_player()->tribe())
 
 	prodSites.selected.set(this, &EncyclopediaWindow::prodSiteSelected);
 
-	condTable.add_column(_("Needs Ware"), 140); //was 240
-	condTable.add_column(_("Consumed"),    80);
-	condTable.add_column(_("Group"),       70);
+	condTable.add_column (32);
+	condTable.add_column(108, _("Needs Ware"));
+	condTable.add_column (80, _("Consumed"));
+	condTable.add_column (70, _("Group"));
 
 	fillWares();
 
@@ -239,8 +240,7 @@ void EncyclopediaWindow::createCondTableEntry
 	Item_Ware_Descr const & curWare =
 		*tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));
 
-	UI::Table<intptr_t>::Entry_Record & tableEntry =
-		condTable.add(index, curWare.get_icon());
+	UI::Table<intptr_t>::Entry_Record & tableEntry = condTable.add(index);
 	std::string rowText       = curWare.descname();
 	std::string consumeAmount = "0";
 	std::string groupId       = "";
@@ -254,7 +254,8 @@ void EncyclopediaWindow::createCondTableEntry
 	if (wareCondition.isGrouped)
 		for (uint32_t k = 0; k < wareCondition.groupId; ++k) groupId += '*';
 
-	tableEntry.set_string(0, rowText);
-	tableEntry.set_string(1, consumeAmount);
-	tableEntry.set_string(2, groupId);
+	tableEntry.set_picture(0, curWare.get_icon());
+	tableEntry.set_string (1, rowText);
+	tableEntry.set_string (2, consumeAmount);
+	tableEntry.set_string (3, groupId);
 }

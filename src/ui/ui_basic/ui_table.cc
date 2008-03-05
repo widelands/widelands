@@ -35,12 +35,10 @@ Args: parent  parent panel
       y
       w       dimensions, in pixels, of the Table
       h
-      align   alignment of text inside the Table
 */
 Table<void *>::Table
 	(Panel * const parent,
 	 int32_t x, int32_t y, uint32_t w, uint32_t h,
-	 const Align align,
 	 const bool descending)
 :
 	Panel             (parent, x, y, w, h),
@@ -52,12 +50,10 @@ Table<void *>::Table
 	m_last_click_time (-10000),
 	m_last_selection  (no_selection_index()),
 	m_sort_column     (0),
-	m_sort_descending  (descending)
+	m_sort_descending (descending)
 
 {
 	set_think(false);
-
-	set_align(align);
 }
 
 
@@ -75,8 +71,11 @@ Table<void *>::~Table()
 		delete *it;
 }
 
+#define HEADER_HEIGHT 15
 /// Add a new column to this table.
-void Table<void *>::add_column(const std::string & name, const uint32_t width) {
+void Table<void *>::add_column
+	(uint32_t const width, std::string const & title, Align const alignment)
+{
 
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
@@ -84,24 +83,30 @@ void Table<void *>::add_column(const std::string & name, const uint32_t width) {
 	uint32_t complete_width = 0;
 	const Columns::const_iterator columns_end = m_columns.end();
 	for (Columns::const_iterator it = m_columns.begin(); it != columns_end; ++it)
-		complete_width += it->btn->get_w();
+		complete_width += it->width;
 
-	Column c = {
-		name,
-		new IDButton<Table, Columns::size_type>
+	{
+		Column const c = {
+			title.size() ?
+			new IDButton<Table, Columns::size_type>
 			(this,
-			 complete_width, 0, width, 15,
+			 complete_width, 0, width, HEADER_HEIGHT,
 			 3,
 			 &Table::header_button_clicked, this, m_columns.size(),
-			 name)
-	};
-	m_columns.push_back(c);
+			 title)
+			:
+			0,
+			width,
+			alignment
+		};
+		m_columns.push_back(c);
+	}
 	if (not m_scrollbar) {
 		m_scrollbar =
 			new Scrollbar
 			(get_parent(),
-			 get_x() + get_w() - 24, get_y() + m_columns[0].btn->get_h(),
-			 24,                     get_h() - m_columns[0].btn->get_h(),
+			 get_x() + get_w() - 24, get_y() + HEADER_HEIGHT,
+			 24,                     get_h() - HEADER_HEIGHT,
 			 false);
 		m_scrollbar->moved.set(this, &Table::set_scrollpos);
 		m_scrollbar->set_steps(1);
@@ -126,7 +131,8 @@ Table<void *>::Entry_Record * Table<void *>::find
 /*
  * A header button has been clicked
  */
-void Table<void *>::header_button_clicked(Columns::size_type n) {
+void Table<void *>::header_button_clicked(Columns::size_type const n) {
+	assert(m_columns.at(n).btn);
 	if (get_sort_colum() == n) {
 		set_sort_descending(not get_sort_descending()); //  change sort direction
 		sort();
@@ -168,7 +174,7 @@ void Table<void *>::draw(RenderTarget * dst)
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
-	int32_t y = 1 + idx * lineheight - m_scrollpos + m_columns[0].btn->get_h();
+	int32_t y = 1 + idx * lineheight - m_scrollpos + HEADER_HEIGHT;
 
 	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
@@ -185,37 +191,39 @@ void Table<void *>::draw(RenderTarget * dst)
 				 -ms_darken_value);
 		}
 
-		//  first draw pictures
-		if (er.get_picid() != -1) {
-			uint32_t w, h;
-			g_gr->get_picture_size(er.get_picid(), w, h);
-			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.get_picid());
-		}
-
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
-		int32_t curx = 0;
-		int32_t curw;
-		for (uint32_t i = 0; i < get_nr_columns(); ++i) {
-			curw = m_columns[i].btn->get_w();
+		Columns::size_type const nr_columns = m_columns.size();
+		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
+			uint32_t const curw      = m_columns[i].width;
+			Align    const alignment = m_columns[i].alignment;
 
-			//  Horizontal center the string
-			g_fh->draw_string
-				(*dst,
-				 UI_FONT_SMALL,
-				 col,
-				 RGBColor(107, 87, 55),
-				 Point(curx, y)
-				 +
-				 Point
-				 (m_align & Align_Right     ? curw            -  1 :
-				  m_align & Align_HCenter   ? curw            >> 1 :
-				  // Pictures are always left aligned, leave some space here
-				  m_max_pic_width && i == 0 ? m_max_pic_width + 10 :
-				  1,
-				  (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
-				 er.get_string(i), m_align,
-				 -1);
+			int32_t             const entry_picture = er.get_picture(i);
+			std::string const &       entry_string  = er.get_string (i);
+			uint32_t w = 0, h = g_fh->get_fontheight(UI_FONT_SMALL);
+			if (entry_picture != -1)
+				g_gr->get_picture_size(entry_picture, w, h);
+			Point point =
+				Point(curx, y)
+				+
+				Point
+				(alignment & Align_Right   ?  curw - w  - 1 :
+				 alignment & Align_HCenter ? (curw - w) / 2 :
+				 1,
+				 (static_cast<int32_t>(get_lineheight()) - static_cast<int32_t>(h))
+				 /
+				 2);
+			if (entry_picture != -1)
+				dst->blit(point, entry_picture);
+			else
+				g_fh->draw_string
+					(*dst,
+					 UI_FONT_SMALL,
+					 col,
+					 RGBColor(107, 87, 55),
+					 point,
+					 entry_string, alignment,
+					 -1);
 
 			curx += curw;
 		}
@@ -243,7 +251,7 @@ bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
 		m_last_selection  = m_selection;
 		m_last_click_time = time;
 
-		y = (y + m_scrollpos - m_columns[0].btn->get_h()) / get_lineheight();
+		y = (y + m_scrollpos - HEADER_HEIGHT) / get_lineheight();
 		if (static_cast<size_t>(y) < m_entry_records.size()) select(y);
 
 		if //  check if doubleclicked
@@ -282,24 +290,20 @@ void Table<void *>::select(const uint32_t i)
 Add a new entry to the table.
 */
 Table<void *>::Entry_Record & Table<void *>::add
-	(void * const entry, const int32_t picid, const bool do_select)
+	(void * const entry, const bool do_select)
 {
 	int32_t entry_height = g_fh->get_fontheight(UI_FONT_SMALL);
-	if (picid != -1) {
-		uint32_t w, h;
-		g_gr->get_picture_size(picid, w, h);
-		entry_height = std::max<uint32_t>(entry_height, h);
-		if (m_max_pic_width < w)
-			m_max_pic_width = w;
-	}
 	if (entry_height > m_lineheight)
 		m_lineheight = entry_height;
 
-	Entry_Record & result = *new Entry_Record(entry, picid);
+	Entry_Record & result = *new Entry_Record(entry);
 	m_entry_records.push_back(&result);
-	result.m_data.resize(get_nr_columns());
+	result.m_data.resize(m_columns.size());
 
-	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2));
+	m_scrollbar->set_steps
+		(m_entry_records.size() * get_lineheight()
+		 -
+		 (get_h() - HEADER_HEIGHT - 2));
 
 	if (do_select)
 		select(m_entry_records.size() - 1);
@@ -316,14 +320,6 @@ void Table<void *>::set_scrollpos(int32_t i)
 	m_scrollpos = i;
 
 	update(0, 0, get_eff_w(), get_h());
-}
-
-/**
-Set the list alignment (only horizontal alignment works)
-*/
-void Table<void *>::set_align(Align align)
-{
-	m_align = static_cast<Align>(align & Align_Horizontal);
 }
 
 
@@ -344,6 +340,7 @@ void Table<void *>::remove(const uint32_t i) {
  * top of list and files at the bottom.
  */
 void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
+	assert(m_columns.at(m_sort_column).btn);
 	assert(m_sort_column < m_columns.size());
 	if (End > size()) End = size();
 	if (get_sort_descending())
@@ -371,16 +368,32 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 }
 
 
-Table<void *>::Entry_Record::Entry_Record(void * const e, const int32_t picid) :
-	m_entry(e), use_clr(false), m_picid(picid)
+Table<void *>::Entry_Record::Entry_Record(void * const e)
+	: m_entry(e), use_clr(false)
 {}
 
+void Table<void *>::Entry_Record::set_picture
+	(uint32_t const column, uint32_t const picid, std::string const & str)
+{
+	assert(column < m_data.size());
+
+	m_data[column].d_picture= picid;
+	m_data[column].d_string = str;
+}
 void Table<void *>::Entry_Record::set_string
 	(const uint32_t column, const std::string & str)
 {
 	assert(column < m_data.size());
 
+	m_data[column].d_picture = -1;
 	m_data[column].d_string = str;
+}
+int32_t Table<void *>::Entry_Record::get_picture
+	(uint32_t const column) const
+{
+	assert(column < m_data.size());
+
+	return m_data[column].d_picture;
 }
 const std::string & Table<void *>::Entry_Record::get_string
 	(const uint32_t column) const

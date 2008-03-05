@@ -106,8 +106,13 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
 	char buffer[256];
 
 	Manager<Variable> & mvm = m_parent.egbase().map().mvm();
-	for (uint32_t n = 1; mvm[buffer]; ++n)
-		snprintf(buffer, sizeof(buffer), _("Unnamed%u"), n);
+	{
+		uint32_t n = 1;
+		do {
+			snprintf(buffer, sizeof(buffer), _("Unnamed%u"), n);
+			++n;
+		} while (mvm[buffer]);
+	}
 
 	std::string name = buffer;
 	switch (i) {
@@ -179,8 +184,8 @@ m_back
 
 
 {
-	m_name .set_text(m_te.get_string(0).c_str());
-	m_value.set_text(m_te.get_string(1).c_str());
+	m_name .set_text(m_te.get_string(1).c_str());
+	m_value.set_text(m_te.get_string(2).c_str());
 	center_to_parent();
 }
 
@@ -223,15 +228,15 @@ void Edit_Variable_Window::clicked_ok() {
 		snprintf(buffer, sizeof(buffer), "%i", ivar);
 
 		variable_int   ->set_value(ivar);
-		m_te.set_string(1, buffer);
+		m_te.set_string(2, buffer);
 	} else if (upcast(Widelands::Variable_String, variable_string, &var)) {
 		variable_string->set_value(m_value.get_text());
-		m_te.set_string(1, m_value.get_text());
+		m_te.set_string(2, m_value.get_text());
 	} else
 		assert(false);
 
 	var.set_name(m_name.get_text());
-	m_te.set_string(0, var.name());
+	m_te.set_string(1, var.name());
 
 	end_modal(1);
 }
@@ -252,7 +257,7 @@ UI::UniqueWindow(&parent, registry, 410, 330, _("Variables Menu")),
 m_parent(parent),
 
 m_table
-(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60),
+(this, 5, 5, get_inner_w() - 2 * spacing, get_inner_h() - 40),
 
 m_button_new
 (this,
@@ -279,8 +284,10 @@ m_button_del
  std::string(),
  false)
 {
-	m_table.add_column(_("Variable"), 300);
-	m_table.add_column(_("Value"),    100);
+	m_table.add_column (14);
+	m_table.add_column(286, _("Variable"));
+	m_table.add_column(100, _("Value"));
+	m_table.set_sort_column(1);
 	m_table.selected.set(this, &Editor_Variables_Menu::table_selected);
 	m_table.double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
 
@@ -335,7 +342,7 @@ void Editor_Variables_Menu::table_selected(uint32_t n) {
 	assert(n < UI::Table<Variable &>::no_selection_index());
 	m_button_edit.set_enabled(true);
 
-	m_button_del.set_enabled(m_table[n].is_delete_protected());
+	m_button_del.set_enabled(not m_table[n].is_delete_protected());
 }
 
 /*
@@ -347,22 +354,22 @@ void Editor_Variables_Menu::table_dblclicked(uint32_t) {clicked_edit();}
  * Insert this map variable into the table
  */
 void Editor_Variables_Menu::insert_variable(Variable & var) {
-	char const * pic;
-	std::string val;
+	char const * pic         = "nothing";
+	char const * type_string = " ";
 	if        (upcast(Widelands::Variable_String const, svar, &var)) {
 		pic = "pics/map_variable_string.png";
-		val = svar->get_value();
+		type_string = "S";
 	} else if (upcast(Widelands::Variable_Int    const, ivar, &var)) {
 		pic = "pics/map_variable_int.png";
-		val = ivar->get_value();
+		type_string = "I";
 	} else
-		pic = "nothing";
+		assert(false);
 
-	UI::Table<Variable &>::Entry_Record & t =
-		m_table.add(var, g_gr->get_picture(PicMod_UI, pic), true);
+	UI::Table<Variable &>::Entry_Record & t = m_table.add(var, true);
 
-	t.set_string(0, var.name());
-	t.set_string(1, val);
+	t.set_picture(0, g_gr->get_picture(PicMod_UI, pic), type_string);
+	t.set_string (1, var.name                     ());
+	t.set_string (2, var.get_string_representation());
 
 	if (var.is_delete_protected()) t.set_color(RGBColor(255, 0, 0));
 

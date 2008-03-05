@@ -83,9 +83,9 @@ internetgame(false)
 	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::toggle_hostname);
 	hostname  .set_text("localhost");
 	playername.set_text  (_("nobody"));
-	opengames .add_column(_("Host"), 150);
-	opengames .add_column(_("Map"),  150);
-	opengames .add_column(_("State"), 90);
+	opengames .add_column(150, _("Host"));
+	opengames .add_column(150, _("Map"));
+	opengames .add_column (90, _("State"));
 	opengames .selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
 	discovery .set_callback (discovery_callback, this);
 }

@@ -1567,12 +1567,12 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 
 	//  soldiers view
 	m_table=new UI::Table<Soldier &>(box, 0, 0, 360, 200);
-	m_table->add_column(_("Name"),  100);
-	m_table->add_column(_("HP"),     40);
-	m_table->add_column(_("AT"),     40);
-	m_table->add_column(_("DE"),     40);
-	m_table->add_column(_("EV"),     40);
-	m_table->add_column(_("Level"), 100); // enough space for scrollbar
+	m_table->add_column(100, _("Name"));
+	m_table->add_column (40, _("HP"));
+	m_table->add_column (40, _("AT"));
+	m_table->add_column (40, _("DE"));
+	m_table->add_column (40, _("EV"));
+	m_table->add_column(100, _("Level")); // enough space for scrollbar
 
 	box->add(m_table, UI::Box::AlignCenter);
 
@@ -2021,12 +2021,12 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 
 	//  soldiers view
 	m_table = new UI::Table<Soldier &>(sold_box, 0, 0, 360, 200);
-	m_table->add_column(_("Name"),  100);
-	m_table->add_column(_("HP"),     40);
-	m_table->add_column(_("AT"),     40);
-	m_table->add_column(_("DE"),     40);
-	m_table->add_column(_("EV"),     40);
-	m_table->add_column(_("Level"), 100); // enough space for scrollbar
+	m_table->add_column(100, _("Name"));
+	m_table->add_column (40, _("HP"));
+	m_table->add_column (40, _("AT"));
+	m_table->add_column (40, _("DE"));
+	m_table->add_column (40, _("EV"));
+	m_table->add_column(100, _("Level")); // enough space for scrollbar
 	sold_box->add (m_table, Align_Left);
 
 	//  add drop soldier button

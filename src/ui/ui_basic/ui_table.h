@@ -47,11 +47,10 @@ template <typename T, typename ID> struct IDButton;
 template<typename Entry> struct Table {
 
 	struct Entry_Record {
-		Entry_Record(Entry entry, int32_t picid = -1);
+		Entry_Record(Entry entry);
 
 		void set_string(uint32_t column, const std::string &);
 		std::string & get_string(uint32_t column) const;
-		int32_t  get_picid() const throw ();
 		Entry entry() const throw ();
 		void set_color(RGBColor);
 
@@ -63,15 +62,17 @@ template<typename Entry> struct Table {
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left, bool up = false);
+		 bool descending = false);
 	~Table();
 
 	Signal1<uint32_t> selected;
 	Signal1<uint32_t> double_clicked;
 
-	void add_column(const std::string & name, uint32_t width);
-
-	uint32_t get_nr_columns() const throw ();
+	/// A column that has a title is sortable (by clicking on the title).
+	void add_column
+		(uint32_t width,
+		 std::string const & title = std::string(),
+		 Align                     = Align_Left);
 
 	void clear();
 	void set_sort_column(uint32_t col) throw ();
@@ -83,12 +84,7 @@ template<typename Entry> struct Table {
 		 uint32_t End   = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
-	void set_align(Align);
-
-	Entry_Record & add
-		(void * const entry,
-		 const int32_t picid = -1,
-		 const bool select_this = false);
+	Entry_Record & add(void * const entry, const bool select_this = false);
 
 	uint32_t size() const throw ();
 	Entry operator[](uint32_t) const throw ();
@@ -118,11 +114,14 @@ template<typename Entry> struct Table {
 template <> struct Table<void *> : public Panel {
 
 	struct Entry_Record {
-		Entry_Record(void * const entry, int32_t picid = -1);
+		Entry_Record(void * entry);
 
+		void set_picture
+			(uint32_t column,
+			 uint32_t picid, std::string const & = std::string());
 		void set_string(uint32_t column, const std::string &);
+		int32_t get_picture(uint32_t column) const;
 		const std::string & get_string(uint32_t column) const;
-		int32_t  get_picid() const throw () {return m_picid;}
 		void * entry() const throw () {return m_entry;}
 		void set_color(const  RGBColor c) {
 			use_clr = true;
@@ -137,8 +136,10 @@ template <> struct Table<void *> : public Panel {
 		void *   m_entry;
 		bool     use_clr;
 		RGBColor clr;
-		int32_t      m_picid;
-		struct _data {std::string d_string;};
+		struct _data {
+			int32_t     d_picture;
+			std::string d_string;
+		};
 		std::vector<_data> m_data;
 	};
 
@@ -146,16 +147,16 @@ public:
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 bool descending = false);
 	~Table();
 
 	Signal1<uint32_t> selected;
 	Signal1<uint32_t> double_clicked;
 
-	void add_column(std::string const & name, uint32_t width);
-
-	uint32_t get_nr_columns() const throw () {return m_columns.size();}
+	void add_column
+		(uint32_t width,
+		 std::string const & title = std::string(),
+		 Align                     = Align_Left);
 
 	void clear();
 	void set_sort_column(const uint32_t col) throw ()
@@ -170,10 +171,7 @@ public:
 		 uint32_t End   = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
-	void set_align(Align);
-
-	Entry_Record & add
-		(void * entry = 0, int32_t picid = -1, bool select = false);
+	Entry_Record & add(void * entry = 0, bool select = false);
 
 	uint32_t size() const throw () {return m_entry_records.size();}
 	void * operator[](const uint32_t i) const throw ()
@@ -214,8 +212,9 @@ private:
 	struct Column;
 	typedef std::vector<Column> Columns;
 	struct Column {
-		std::string name;
 		IDButton<Table, Columns::size_type> * btn;
+		uint32_t                              width;
+		Align                                 alignment;
 	};
 
 	static const int32_t ms_darken_value=-20;
@@ -224,7 +223,6 @@ private:
 	Columns m_columns;
 	uint32_t                m_max_pic_width;
 	int32_t            m_lineheight;
-	Align              m_align;
 	Scrollbar        * m_scrollbar;
 	int32_t                m_scrollpos; //  in pixels
 	uint32_t           m_selection;
@@ -246,18 +244,14 @@ template <typename Entry>
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 const bool descending = false)
-		: Base(parent, x, y, w, h, align, descending)
+		: Base(parent, x, y, w, h, descending)
 	{}
 
 	Entry_Record & add
-		(const Entry * const entry = 0,
-		 const int32_t picid = -1,
-		 const bool select_this = false)
+		(Entry const * const entry = 0, bool const select_this = false)
 	{
-		return
-			Base::add(const_cast<Entry *>(entry), picid, select_this);
+		return Base::add(const_cast<Entry *>(entry), select_this);
 	}
 
 	const Entry * operator[](const uint32_t i) const throw ()
@@ -275,16 +269,14 @@ template <typename Entry> struct Table<Entry * const> : public Table<void *> {
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 const bool descending = false)
-		: Base(parent, x, y, w, h, align, descending)
+		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add
-		(Entry * const entry = 0,
-		 const int32_t picid = -1,
-		 const bool select_this = false)
-	{return Base::add(entry, picid, select_this);}
+	Entry_Record & add(Entry * const entry = 0, bool const select_this = false)
+	{
+		return Base::add(entry, select_this);
+	}
 
 	Entry * operator[](const uint32_t i) const throw ()
 	{return static_cast<Entry *>(Base::operator[](i));}
@@ -301,16 +293,13 @@ template <typename Entry> struct Table<const Entry &> : public Table<void *> {
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 const bool descending = false)
-		: Base(parent, x, y, w, h, align, descending)
+		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add
-		(const Entry & entry,
-		 const int32_t picid = -1,
-		 const bool select_this = false)
-	{return Base::add(&const_cast<Entry &>(entry), picid, select_this);}
+	Entry_Record & add(Entry const & entry, bool const select_this = false) {
+		return Base::add(&const_cast<Entry &>(entry), select_this);
+	}
 
 	const Entry & operator[](const uint32_t i) const throw ()
 	{return *static_cast<const Entry *>(Base::operator[](i));}
@@ -330,16 +319,13 @@ template <typename Entry> struct Table<Entry &> : public Table<void *> {
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 const bool descending = false)
-		: Base(parent, x, y, w, h, align, descending)
+		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add
-		(Entry & entry,
-		 const int32_t picid = -1,
-		 const bool select_this = false)
-	{return Base::add(&entry, picid, select_this);}
+	Entry_Record & add(Entry & entry, bool const select_this = false) {
+		return Base::add(&entry, select_this);
+	}
 
 	Entry & operator[](const uint32_t i) const throw ()
 	{return *static_cast<Entry *>(Base::operator[](i));}
@@ -360,19 +346,12 @@ template <> struct Table<intptr_t> : public Table<void *> {
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 const bool descending = false)
-		: Base(parent, x, y, w, h, align, descending)
+		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add
-		(const intptr_t entry,
-		 const int32_t picid = -1,
-		 const bool select_this = false)
-	{
-		return
-			Base::add
-			(reinterpret_cast<void *>(entry), picid, select_this);
+	Entry_Record & add(intptr_t const entry, bool const select_this = false) {
+		return Base::add(reinterpret_cast<void *>(entry), select_this);
 	}
 
 	intptr_t operator[](const uint32_t i) const throw ()
@@ -391,9 +370,8 @@ template <> struct Table<const intptr_t> : public Table<intptr_t> {
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 const bool descending = false)
-		: Table<intptr_t>(parent, x, y, w, h, align, descending)
+		: Base(parent, x, y, w, h, descending)
 	{}
 };
 };
