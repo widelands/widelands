@@ -68,13 +68,9 @@ ProductionSite_Descr::~ProductionSite_Descr()
 }
 
 
-/*
-===============
-ProductionSite_Descr::parse
-
-Parse the additional information necessary for production buildings
-===============
-*/
+/**
+ * Parse the additional information necessary for production buildings
+ */
 void ProductionSite_Descr::parse
 	(char       const * const directory,
 	 Profile          * const prof,
@@ -137,13 +133,9 @@ void ProductionSite_Descr::parse
 }
 
 
-/*
-===============
-ProductionSite_Descr::get_program
-
-Get the program of the given name.
-===============
-*/
+/**
+ * Get the program of the given name.
+ */
 const ProductionProgram * ProductionSite_Descr::get_program
 (const std::string & program_name) const
 {
@@ -154,13 +146,9 @@ const ProductionProgram * ProductionSite_Descr::get_program
 	return it->second;
 }
 
-/*
-===============
-ProductionSite_Descr::create_object
-
-Create a new building of this type
-===============
-*/
+/**
+ * Create a new building of this type
+ */
 Building* ProductionSite_Descr::create_object() const
 {return new ProductionSite(*this);}
 
@@ -173,11 +161,6 @@ IMPLEMENTATION
 ==============================
 */
 
-/*
-===============
-ProductionSite::ProductionSite
-===============
-*/
 ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 Building            (ps_descr),
 m_fetchfromflag     (0),
@@ -190,13 +173,9 @@ m_last_stat_percent (0)
 {}
 
 
-/*
-===============
-ProductionSite::get_statistic_string
-
-Display whether we're occupied.
-===============
-*/
+/**
+ * Display whether we're occupied.
+ */
 std::string ProductionSite::get_statistics_string()
 {
 	if (!m_workers.size())
@@ -238,13 +217,9 @@ void ProductionSite::fill(Game & game) {
 	}
 }
 
-/*
-===============
-ProductionSite::calc_statistic
-
-Calculate statistic.
-===============
-*/
+/**
+ * Calculate statistic.
+ */
 void ProductionSite::calc_statistics()
 {
 	uint32_t pos;
@@ -276,13 +251,9 @@ void ProductionSite::calc_statistics()
 }
 
 
-/*
-===============
-ProductionSite::add_statistic_value
-
-Add a value to statistic vector.
-===============
-*/
+/**
+ * Add a value to statistic vector.
+ */
 void ProductionSite::add_statistics_value(bool val)
 {
 	m_statistics_changed = true;
@@ -290,13 +261,9 @@ void ProductionSite::add_statistics_value(bool val)
 	m_statistics.push_back(val);
 }
 
-/*
-===============
-ProductionSite::init
-
-Initialize the production site.
-===============
-*/
+/**
+ * Initialize the production site.
+ */
 void ProductionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
@@ -338,14 +305,11 @@ void ProductionSite::init(Editor_Game_Base* g)
 	}
 }
 
-/*
-===============
-ProductionSite::set_economy
-
-Change the economy for the wares queues.
-Note that the workers are dealt with in the PlayerImmovable code.
-===============
-*/
+/**
+ * Change the economy for the wares queues.
+ *
+ * \note Workers are dealt with in the PlayerImmovable code.
+ */
 void ProductionSite::set_economy(Economy* e)
 {
 	if (Economy * const old = get_economy()) {
@@ -375,13 +339,9 @@ void ProductionSite::set_economy(Economy* e)
 	}
 }
 
-/*
-===============
-ProductionSite::cleanup
-
-Cleanup after a production site is removed
-===============
-*/
+/**
+ * Cleanup after a production site is removed
+ */
 void ProductionSite::cleanup(Editor_Game_Base* g)
 {
 	// Release worker
@@ -419,13 +379,9 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 }
 
 
-/*
-===============
-ProductionSite::remove_worker
-
-Intercept remove_worker() calls to unassign our worker, if necessary.
-===============
-*/
+/**
+ * Intercept remove_worker() calls to unassign our worker, if necessary.
+ */
 void ProductionSite::remove_worker(Worker* w)
 {
 	for (size_t i = 0; i < m_workers.size(); ++i) {
@@ -441,13 +397,9 @@ void ProductionSite::remove_worker(Worker* w)
 }
 
 
-/*
-===============
-ProductionSite::request_worker
-
-Issue the worker requests
-===============
-*/
+/**
+ * Issue the worker requests
+ */
 void ProductionSite::request_worker(const char * const worker_name) {
 	assert(worker_name);
 
@@ -457,11 +409,9 @@ void ProductionSite::request_worker(const char * const worker_name) {
 }
 
 
-/*
-===============
-Called when our worker arrives.
-===============
-*/
+/**
+ * Called when our worker arrives.
+ */
 void ProductionSite::request_worker_callback
 (Game * g, Request * rq, Ware_Index, Worker * const w, void * const data)
 {
@@ -499,13 +449,9 @@ void ProductionSite::request_worker_callback
 }
 
 
-/*
-===============
-ProductionSite::act
-
-Advance the program state if applicable.
-===============
-*/
+/**
+ * Advance the program state if applicable.
+ */
 void ProductionSite::act(Game* g, uint32_t data)
 {
 	Building::act(g, data);
@@ -548,16 +494,14 @@ void ProductionSite::find_and_start_next_program(Game* g)
 }
 
 
-/*
-===============
-ProductionSite::program_act
-
-Perform the current program action.
-
-Pre: The program is running and in a valid state.
-Post: (Potentially indirect) scheduling for the next step has been done.
-===============
-*/
+/**
+ * Perform the current program action.
+ *
+ * \pre The program is running and in a valid state.
+ * \post (Potentially indirect) scheduling for the next step has been done.
+ *
+ * \todo Break up into smaller functions
+ */
 void ProductionSite::program_act(Game* g)
 {
 	State* state = get_current_program();
@@ -963,13 +907,9 @@ void ProductionSite::program_act(Game* g)
 }
 
 
-/*
-===============
-ProductionSite::fetch_from_flag
-
-Remember that we need to fetch an item from the flag.
-===============
-*/
+/**
+ * Remember that we need to fetch an item from the flag.
+ */
 bool ProductionSite::fetch_from_flag(Game* g)
 {
 	++m_fetchfromflag;
@@ -980,24 +920,20 @@ bool ProductionSite::fetch_from_flag(Game* g)
 	return true;
 }
 
-/*
- * returns true if this production site could
- * theoretically start working (if all workers
- * are present)
+/**
+ * \return True if this production site could theoretically start working (if
+ * all workers are present)
  */
 bool ProductionSite::can_start_working() const throw ()
 {
 	return not m_worker_requests.size();
 }
 
-/*
-===============
-ProductionSite::get_building_work
-
-There's currently nothing to do for the worker.
-Note: we assume that the worker is inside the building when this is called.
-===============
-*/
+/**
+ * There's currently nothing to do for the worker.
+ *
+ * \note We assume that the worker is inside the building when this is called.
+ */
 bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 {
 	assert(w == m_workers[0]);
@@ -1088,13 +1024,9 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 }
 
 
-/*
-===============
-ProductionSite::program_step
-
-Advance the program to the next step, but does not schedule anything.
-===============
-*/
+/**
+ * Advance the program to the next step, but does not schedule anything.
+ */
 void ProductionSite::program_step(const uint32_t phase) {
 	State* state = get_current_program();
 
@@ -1105,13 +1037,9 @@ void ProductionSite::program_step(const uint32_t phase) {
 }
 
 
-/*
-===============
-ProductionSite::program_start
-
-Push the given program onto the stack and schedule acting.
-===============
-*/
+/**
+ * Push the given program onto the stack and schedule acting.
+ */
 void ProductionSite::program_start(Game* g, std::string program_name)
 {
 	State state;
@@ -1128,16 +1056,12 @@ void ProductionSite::program_start(Game* g, std::string program_name)
 }
 
 
-/*
-===============
-ProductionSite::program_end
-
-Ends the current program now and updates the productivity statistics.
-
-Pre: Any program is running.
-Post: No program is running, acting is scheduled.
-===============
-*/
+/**
+ * Ends the current program now and updates the productivity statistics.
+ *
+ * \pre Any program is running
+ * \post No program is running, acting is scheduled
+ */
 void ProductionSite::program_end(Game* g, bool success)
 {
 	assert(m_program.size());

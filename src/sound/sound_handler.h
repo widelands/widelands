@@ -153,7 +153,7 @@ extern class Sound_Handler g_sound_handler;
  * peek with Mix_MusicPlaying() if there is music running. To make sure that
  * nothing bad happens, that check is not only required in change_music()
  * but also in start_music(), which causes the seemingly recursive call to
- * change_music from inside start_music. It really is not recursive, trust
+ * change_music() from inside start_music(). It really is not recursive, trust
  * me :-)
  *
  * \todo DOC: priorities

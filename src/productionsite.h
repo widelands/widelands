@@ -121,10 +121,10 @@ protected:
 
 protected:
 	struct State {
-		const ProductionProgram * program; //  currently running program
-		int32_t  ip;    //  instruction pointer
-		uint32_t phase; //  micro-step index (instruction dependent)
-		uint32_t flags; //  pfXXX flags
+		const ProductionProgram * program; ///< currently running program
+		int32_t  ip; ///< instruction pointer
+		uint32_t phase; ///< micro-step index (instruction dependent)
+		uint32_t flags; ///< pfXXX flags
 	};
 
 	void request_worker(const char * const worker_name);
@@ -152,32 +152,25 @@ protected:  // TrainingSite must have access to this stuff
 	std::vector<Request*> m_worker_requests;
 	std::vector<Worker *> m_workers;
 
-	int32_t m_fetchfromflag; // # of items to fetch from flag
+	int32_t m_fetchfromflag; ///< Number of items to fetch from flag
 
-	std::vector<State>        m_program;       //  program stack
-	bool                     m_program_timer; // execute next instruction based on pointer
-	int32_t                       m_program_time;  //  timer time
-	int32_t                      m_post_timer;    // Time to schedule after ends
+	std::vector<State>        m_program; ///<  program stack
+	bool                     m_program_timer; ///< execute next instruction based on pointer
+	int32_t                       m_program_time; ///< timer time
+	int32_t                      m_post_timer;    ///< Time to schedule after ends
 
-	std::vector<WaresQueue*> m_input_queues; //  input queues for all inputs
+	std::vector<WaresQueue*> m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
 	char                     m_statistics_buf[40];
 	int8_t                   m_last_stat_percent;
 };
 
-/*
-=============================
-
-class Input
-
-This class descripes, how many items of a certain
-ware can be stored in a house.
-This class will be extended to support ordering of
-certain wares directly or releasing some wares
-out of a building
-
-=============================
+/**
+ * Descripes, how many items of a certain ware can be stored in a house.
+ *
+ * This class will be extended to support ordering of certain wares directly or
+ * releasing some wares out of a building
 */
 struct Input {
 	Input(Item_Ware_Descr* ware, int32_t max) : m_ware(ware), m_max(max) {}

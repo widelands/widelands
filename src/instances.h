@@ -37,10 +37,10 @@ class Path;
 class Player;
 struct Map_Map_Object_Loader;
 
-//
-// Base class for descriptions of worker, files and so on. this must just
-// link them together
-//
+/**
+ * Base class for descriptions of worker, files and so on. This must just
+ * link them together
+ */
 struct Map_Object_Descr {
 	friend class ::DirAnimations;
 	typedef uint8_t Index;
@@ -58,7 +58,7 @@ struct Map_Object_Descr {
 		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
 	}
 
-	std::string get_animation_name(uint32_t) const; //  needed for save, debug
+	std::string get_animation_name(uint32_t) const; ///< needed for save, debug
 	bool has_attribute(uint32_t) const throw ();
 	static uint32_t get_attribute_id(std::string const & name);
 
@@ -77,7 +77,7 @@ struct Map_Object_Descr {
 
 		std::vector<uint32_t>           m_attributes;
 		std::map<std::string, uint32_t>  m_anims;
-		static uint32_t                 s_dyn_attribhigh; //  highest attribute ID used
+		static uint32_t                 s_dyn_attribhigh; ///< highest attribute ID used
 		static AttribMap            s_dyn_attribs;
 
 };
@@ -88,37 +88,37 @@ struct Map_Object_Descr {
  */
 extern Map_Object_Descr g_flag_descr;
 
-/*
-Notes on Map_Object
--------------------
-
-Map_Object is the base class for everything that can be on the map: buildings, animals,
-decorations, etc... most of the time, however, you'll deal with one of the derived
-classes, BaseImmovable or Bob.
-
-Every Map_Object has a unique serial number. This serial number is used as key in the
-Object_Manager map, and in the safe Object_Ptr.
-Unless you're perfectly sure about when an object can be destroyed you should use
-an Object_Ptr. (there are some well-defined exceptions, such as Building<->Flag
-relationships)
-
-Map_Objects can also have attributes. They are mainly useful for finding objects of a
-given type (e.g. trees) within a certain radius.
-
-DO NOT allocate/free Map_Objects directly.
-Use the appropriate type-dependent create() function for creation, and call
-die () for removal.
-Note that convenient creation functions are defined in class Game.
-
-When you do create a new object yourself (i.e. when you're implementing one
-of the create() functions), you need to allocate the object using new,
-potentially set it up by calling basic functions like set_position, set_owner,
-etc. and then call init(). After that, the object is supposed to be fully
-created.
+/**
+ * \par Notes on Map_Object
+ *
+ * Map_Object is the base class for everything that can be on the map:
+ * buildings, animals, decorations, etc... most of the time, however, you'll
+ * deal with one of the derived classes, BaseImmovable or Bob.
+ *
+ * Every Map_Object has a unique serial number. This serial number is used as
+ * key in the Object_Manager map, and in the safe Object_Ptr.
+ *
+ * Unless you're perfectly sure about when an object can be destroyed you
+ * should use an Object_Ptr (there are some well-defined exceptions, such as
+ * Building<->Flag relationships).
+ *
+ * Map_Objects can also have attributes. They are mainly useful for finding
+ * objects of a given type (e.g. trees) within a certain radius.
+ *
+ * \warning DO NOT allocate/free Map_Objects directly. Use the appropriate
+ * type-dependent create() function for creation, and call die() for removal.
+ *
+ * \note Convenient creation functions are defined in class Game.
+ *
+ * When you do create a new object yourself (i.e. when you're implementing one
+ * of the create() functions), you need to allocate the object using new,
+ * potentially set it up by calling basic functions like set_position(),
+ * set_owner(), etc. and then call init(). After that, the object is supposed to
+ * be fully created.
 */
 
-// If you find a better way to do this that doesn't cost a virtual function or additional
-// member variable, go ahead
+/// If you find a better way to do this that doesn't cost a virtual function or additional
+/// member variable, go ahead
 #define MO_DESCR(type) \
 public: __attribute__ ((deprecated)) const type* get_descr() const {return dynamic_cast<const type *>(m_descr);}\
 public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);}
@@ -146,18 +146,18 @@ public:
 		FLAG,
 		ROAD
 	};
-	// Some default, globally valid, attributes.
-	// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
+	/// Some default, globally valid, attributes.
+	/// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
 	enum Attribute {
-		CONSTRUCTIONSITE = 1, // assume BUILDING
-		WORKER,               //  assume BOB
-		SOLDIER,              //  assume WORKER
-		RESI,                 //  resource indicator, assume IMMOVABLE
+		CONSTRUCTIONSITE = 1, ///< assume BUILDING
+		WORKER,               ///< assume BOB
+		SOLDIER,              ///<  assume WORKER
+		RESI,                 ///<  resource indicator, assume IMMOVABLE
 
 		HIGHEST_FIXED_ATTRIBUTE
 	};
 
-	// the enums tell us where we are going
+	/// Constants for where we are going
 	enum WalkingDir {
 		IDLE = 0,
 		FIRST_DIRECTION = 1,
@@ -285,15 +285,15 @@ public:
 		virtual void load_finish();
 	};
 
-	// This is just a fail-safe guard for the time until we fully transition
-	// to the new Map_Object saving system
+	/// This is just a fail-safe guard for the time until we fully transition
+	/// to the new Map_Object saving system
 	virtual bool has_new_save_support() {return false;}
 
 	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
 	// Pure Map_Objects cannot be loaded
 
 protected:
-	// init for editor and game
+	/// init for editor and game
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
 
@@ -312,7 +312,7 @@ private:
 inline int32_t get_reverse_dir(int32_t dir) {return 1 + ((dir-1)+3)%6;}
 
 
-/** class Object_Manager
+/**
  *
  * Keeps the list of all objects currently in the game.
  */
@@ -416,21 +416,21 @@ private:
 };
 
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
-	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} // For savegame loading
+	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} ///< For savegame loading
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object* o);
 	virtual void execute (Game* g);
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} // Get this command id
+	virtual int32_t get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} ///< Get this command id
 
 private:
 	Serial obj_serial;
 };
 
 struct Cmd_Act : public GameLogicCommand {
-	Cmd_Act() : GameLogicCommand(0) {} // For savegame loading
+	Cmd_Act() : GameLogicCommand(0) {} ///< For savegame loading
 	Cmd_Act (int32_t t, Map_Object* o, int32_t a);
 
 	virtual void execute (Game* g);
@@ -438,7 +438,7 @@ struct Cmd_Act : public GameLogicCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_ACT;} // Get this command id
+	virtual int32_t get_id() {return QUEUE_CMD_ACT;} ///< Get this command id
 
 private:
 	Serial obj_serial;

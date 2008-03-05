@@ -33,14 +33,14 @@ class Profile;
 
 namespace Widelands {
 
-// Additional parameters for op parsing routines
+/// Additional parameters for op parsing routines
 struct ProgramParser {
 	Immovable_Descr * descr;
 	std::string       directory;
 	Profile         * prof;
 };
 
-// One action of a program
+/// One action of a program
 struct ImmovableAction {
 	typedef bool (Immovable::*execute_t)(Game* g, bool killable, const ImmovableAction& action);
 
@@ -51,7 +51,7 @@ struct ImmovableAction {
 	std::string sparam2;
 };
 
-// The ImmovableProgram
+/// The ImmovableProgram
 class ImmovableProgram {
 	typedef void (ImmovableProgram::*parse_t)
 		(ImmovableAction                *,

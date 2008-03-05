@@ -73,11 +73,11 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 private:
 	void parse(const char *directory, Profile *prof);
 
-	std::string m_name;       //< Ware's unique name into tribe
-	std::string m_descname;   //< Short localized name
-	std::string m_helptext;   //< Long descriptive text
-	std::string m_icon_fname; //< Filename of ware's main picture
-	uint32_t    m_icon;       //< Index of ware's picture in picture stack
+	std::string m_name;       ///< Ware's unique name into tribe
+	std::string m_descname;   ///< Short localized name
+	std::string m_helptext;   ///< Long descriptive text
+	std::string m_icon_fname; ///< Filename of ware's main picture
+	uint32_t    m_icon;       ///< Index of ware's picture in picture stack
 };
 
 };

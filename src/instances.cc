@@ -170,13 +170,9 @@ Object_Manager::~Object_Manager()
 	log("lastserial: %i\n", m_lastserial);
 }
 
-/*
-===============
-Object_Manager::cleanup
-
-Clear all objects
-===============
-*/
+/**
+ * Clear all objects
+ */
 void Object_Manager::cleanup(Editor_Game_Base *g)
 {
 	while (!m_objects.empty()) {
@@ -186,13 +182,9 @@ void Object_Manager::cleanup(Editor_Game_Base *g)
 	m_lastserial = 0;
 }
 
-/*
-===============
-Object_Manager::insert
-
-Insert the given Map_Object into the object manager
-===============
-*/
+/**
+ * Insert the given Map_Object into the object manager
+ */
 void Object_Manager::insert(Map_Object *obj)
 {
 	++m_lastserial;
@@ -201,23 +193,14 @@ void Object_Manager::insert(Map_Object *obj)
 	m_objects[m_lastserial] = obj;
 }
 
-/*
-===============
-Object_Manager::remove
-
-Remove the Map_Object from the manager
-===============
-*/
+/**
+ * Remove the Map_Object from the manager
+ */
 void Object_Manager::remove(Map_Object *obj)
 {
 	m_objects.erase(obj->m_serial);
 }
 
-/*
-===============
-Object_Ptr::get
-===============
-*/
 Map_Object * Object_Ptr::get(const Editor_Game_Base * const game)
 {
 	if (!m_serial) return 0;
@@ -227,11 +210,6 @@ Map_Object * Object_Ptr::get(const Editor_Game_Base * const game)
 	return obj;
 }
 
-/*
-===============
-Object_Ptr::get
-===============
-*/
 const Map_Object * Object_Ptr::get(const Editor_Game_Base * const game) const
 {return m_serial ? game->objects().get_object(m_serial) : 0;}
 
@@ -249,7 +227,7 @@ Map_Object_Descr IMPLEMENTATION
 uint32_t Map_Object_Descr::s_dyn_attribhigh = Map_Object::HIGHEST_FIXED_ATTRIBUTE;
 Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
 
-/*
+/**
  * Add this animation for this map object under this name
  */
 bool Map_Object_Descr::is_animation_known(const char* name) {
@@ -289,13 +267,9 @@ std::string Map_Object_Descr::get_animation_name(uint32_t anim) const {
 }
 
 
-/*
-===============
-Map_Object_Descr::has_attribute
-
-Search for the attribute in the attribute list
-===============
-*/
+/**
+ * Search for the attribute in the attribute list
+ */
 bool Map_Object_Descr::has_attribute(uint32_t attr) const throw () {
 	for (uint32_t i = 0; i < m_attributes.size(); ++i) {
 		if (m_attributes[i] == attr)
@@ -306,13 +280,9 @@ bool Map_Object_Descr::has_attribute(uint32_t attr) const throw () {
 }
 
 
-/*
-===============
-Map_Object_Descr::add_attribute
-
-Add an attribute to the attribute list if it's not already there
-===============
-*/
+/**
+ * Add an attribute to the attribute list if it's not already there
+ */
 void Map_Object_Descr::add_attribute(uint32_t attr)
 {
 	if (!has_attribute(attr))
@@ -320,14 +290,10 @@ void Map_Object_Descr::add_attribute(uint32_t attr)
 }
 
 
-/*
-===============
-Map_Object_Descr::get_attribute_id [static]
-
-Lookup an attribute by name. If the attribute name hasn't been encountered
-before, we add it to the map.
-===============
-*/
+/**
+ * Lookup an attribute by name. If the attribute name hasn't been encountered
+ * before, we add it to the map.
+ */
 uint32_t Map_Object_Descr::get_attribute_id(std::string const & name) {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
@@ -356,107 +322,84 @@ Map_Object IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-Map_Object::Map_Object
-
-Zero-initialize a map object
-===============
-*/
+/**
+ * Zero-initialize a map object
+ */
 Map_Object::Map_Object(const Map_Object_Descr * const the_descr) :
 m_descr(the_descr), m_serial(0), m_logsink(0)
 {}
 
 
-/*
-===============
-Map_Object::remove
-
-Call this function if you want to remove the object immediately, without
-any effects.
-===============
-*/
+/**
+ * Call this function if you want to remove the object immediately, without
+ * any effects.
+ */
 void Map_Object::remove(Editor_Game_Base *g)
 {
 	cleanup(g);
 	delete this;
 }
 
-/*
-===============
-Map_Object::destroy [virtual]
-
-Destroy the object immediately. Unlike remove(), special actions may be
-performed:
-- create a decaying skeleton (humans)
-- create a burning fire (buildings)
-...
-===============
-*/
+/**
+ * Destroy the object immediately. Unlike remove(), special actions may be
+ * performed:
+ * \li Create a decaying skeleton (humans)
+ * \li Create a burning fire (buildings)
+ * \li ...
+ */
 void Map_Object::destroy(Editor_Game_Base* g)
 {
 	remove(g);
 }
 
-/*
-===============
-Map_Object::schedule_destroy
-
-Schedule the object for immediate destruction.
-This can be used to safely destroy the object from within an act function.
-===============
-*/
+/**
+ * Schedule the object for immediate destruction.
+ * This can be used to safely destroy the object from within an act function.
+ */
 void Map_Object::schedule_destroy(Game *g)
 {
 	g->get_cmdqueue()->enqueue (new Cmd_Destroy_Map_Object(g->get_gametime(), this));
 }
 
-/*
-===============
-Map_Object::init
-
-Make sure you call this from derived classes!
-
-Initialize the object by adding it to the object manager.
-===============
-*/
+/**
+ * Initialize the object by adding it to the object manager.
+ *
+ * \warning Make sure you call this from derived classes!
+ */
 void Map_Object::init(Editor_Game_Base* g)
 {
 	g->objects().insert(this);
 }
 
-/*
-===============
-Map_Object::cleanup
-
-Make sure you call this from derived classes!
-===============
-*/
+/**
+ * \warning Make sure you call this from derived classes!
+ */
 void Map_Object::cleanup(Editor_Game_Base *g)
 {
 	g->objects().remove(this);
 }
 
-// Default implementation
+/**
+ * Default implementation
+ */
 int32_t Map_Object::get_tattribute(uint32_t attr) const
 {
 	return -1;
 }
 
-// Default implementation
+/**
+ * Default implementation
+ */
 bool Map_Object::have_tattributes() const
 {
 	return false;
 }
 
-/*
-===============
-Map_Object::schedule_act
-
-Queue a CMD_ACT tdelta milliseconds from now, using the given data.
-Returns the absolute gametime at which the CMD_ACT will occur.
-===============
-*/
+/**
+ * Queue a CMD_ACT tdelta milliseconds from now, using the given data.
+ *
+ * \return The absolute gametime at which the CMD_ACT will occur.
+ */
 uint32_t Map_Object::schedule_act(Game* g, uint32_t tdelta, uint32_t data)
 {
 	if (tdelta < Forever()) {
@@ -470,40 +413,28 @@ uint32_t Map_Object::schedule_act(Game* g, uint32_t tdelta, uint32_t data)
 }
 
 
-/*
-===============
-Map_Object::act
-
-Called when a CMD_ACT triggers.
-===============
-*/
+/**
+ * Called when a CMD_ACT triggers.
+ */
 void Map_Object::act(Game *, uint32_t) {}
 
 
-/*
-===============
-Map_Object::set_logsink
-
-Set the logsink. This should only be used by the debugging facilities.
-===============
-*/
+/**
+ * Set the logsink. This should only be used by the debugging facilities.
+ */
 void Map_Object::set_logsink(LogSink* sink)
 {
 	m_logsink = sink;
 }
 
-/*
+/**
  * General infos, nothing todo for a no object
  */
 void Map_Object::log_general_info(Editor_Game_Base*) {}
 
-/*
-===============
-Map_Object::molog
-
-Prints a log message prepended by the object's serial number.
-===============
-*/
+/**
+ * Prints a log message prepended by the object's serial number.
+ */
 void Map_Object::molog(const char* fmt, ...) const
 {
 	va_list va;

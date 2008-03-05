@@ -33,18 +33,19 @@ class Flag;
 class Tribe_Descr;
 class Worker;
 
-/*
-BaseImmovable is the base for all non-moving objects (immovables such as trees,
-buildings, flags, roads).
-
-The immovable's size influences building capabilities around it.
-If size is NONE, the immovable can simply be removed by placing something on it
-(this is usually true for decorations).
-For more information, see the Map::recalc_* functions.
-*/
+/**
+ * BaseImmovable is the base for all non-moving objects (immovables such as
+ * trees, buildings, flags, roads).
+ *
+ * The Immovable's size influences building capabilities around it.
+ * If size is NONE, the immovable can simply be removed by placing something on
+ * it (this is usually true for decorations).
+ *
+ * For more information, see the Map::recalc_* functions.
+ */
 struct BaseImmovable : public Map_Object {
 	enum {
-		NONE,   //  not robust
+		NONE,   ///< \todo not robust
 		SMALL,
 		MEDIUM,
 		BIG
@@ -70,9 +71,9 @@ class Immovable;
 class ImmovableProgram;
 struct ImmovableAction;
 
-/*
-Immovable represents a standard immovable such as trees or stones.
-*/
+/**
+ * Immovable represents a standard immovable such as trees or stones.
+ */
 struct Immovable_Descr : public Map_Object_Descr {
 	friend struct Map_Immovabledata_Data_Packet; // For writing (get_program)
 
@@ -104,7 +105,7 @@ protected:
 	EncodeData    m_default_encodedata;
 
 	ProgramMap    m_programs;
-	const Tribe_Descr * const m_owner_tribe; // 0 if world immovable
+	const Tribe_Descr * const m_owner_tribe; ///< 0 if world immovable
 };
 
 class Immovable : public BaseImmovable {
@@ -156,8 +157,8 @@ protected:
 	int32_t                      m_animstart;
 
 	const ImmovableProgram * m_program;
-	uint32_t m_program_ptr; //  index of next instruction to execute
-	int32_t                      m_program_step; //  time of next step
+	uint32_t m_program_ptr; ///< index of next instruction to execute
+	int32_t                      m_program_step; ///< time of next step
 
 
 	// Load/save support
@@ -169,7 +170,7 @@ protected:
 	};
 
 public:
-	// Remove as soon as we fully support the new system
+	/// \todo Remove as soon as we fully support the new system
 	virtual bool has_new_save_support() {return true;}
 
 	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);

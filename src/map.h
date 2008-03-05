@@ -46,7 +46,7 @@ class World;
 class Map;
 class Map_Loader;
 #define WLMF_SUFFIX ".wmf"
-#define S2MF_SUFFIX     ".swd"
+#define S2MF_SUFFIX ".swd"
 
 #define S2MF_MAGIC  "WORLD_V1.0"
 
