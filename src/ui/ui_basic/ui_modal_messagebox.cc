@@ -28,24 +28,48 @@
 #include "wlapplication.h"
 
 namespace UI {
+
+
+struct Modal_Message_BoxImpl {
+	Multiline_Textarea* textarea;
+};
+
+
 Modal_Message_Box::Modal_Message_Box
 	(Panel * const parent,
 	 const std::string & caption,
 	 const std::string & text,
 	 const MB_Type type)
 	:
-	Window(parent, 0, 0, 20, 20, caption.c_str())
+	Window(parent, 0, 0, 20, 20, caption.c_str()),
+	d(new Modal_Message_BoxImpl)
 {
+	d->textarea = new Multiline_Textarea
+		(this,
+		 5, 5, 30, 30,
+		 text.c_str(), Align_Center);
 
-	set_inner_size(320, 160);
+	const int32_t maxwidth = parent ? parent->get_inner_w() - 60 : 580;
+	int32_t width, height;
+	std::string font = d->textarea->get_font_name();
+	int32_t fontsize = d->textarea->get_font_size();
+
+	g_fh->get_size(font, fontsize, text, &width, &height, maxwidth);
+	// stupid heuristic to avoid excessively long lines
+	if (height < 2*fontsize)
+		g_fh->get_size(font, fontsize, text, &width, &height, maxwidth/2);
+
+	width += 14;
+	if (width < 100)
+		width = 100;
+	height += 70;
+
+	set_inner_size(width, height);
 	set_pos
 		(Point
-		 ((parent->get_inner_w() - 320) / 2, (parent->get_inner_h() - 100) / 2));
+		 ((parent->get_inner_w() - get_w()) / 2, (parent->get_inner_h() - get_h()) / 2));
 
-	new Multiline_Textarea
-		(this,
-		 5, 5, get_inner_w() - 10, get_inner_h() - 70,
-		 text.c_str(), Align_Center);
+	d->textarea->set_size(width-10, height-70);
 
 	if (type == OK) {
 		new IDButton<Modal_Message_Box, int32_t>
@@ -71,7 +95,18 @@ Modal_Message_Box::Modal_Message_Box
 	}
 }
 
-Modal_Message_Box::~Modal_Message_Box() {}
+Modal_Message_Box::~Modal_Message_Box()
+{
+	delete d;
+	d = 0;
+}
+
+
+void Modal_Message_Box::set_align(Align align)
+{
+	d->textarea->set_align(align);
+}
+
 
 /*
  * Handle mouseclick

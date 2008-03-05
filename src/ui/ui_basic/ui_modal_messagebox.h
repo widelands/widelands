@@ -20,9 +20,13 @@
 #ifndef UI_MODAL_MESSAGEBOX_H
 #define UI_MODAL_MESSAGEBOX_H
 
+#include "font_handler.h"
 #include "ui_window.h"
 
 namespace UI {
+
+struct Modal_Message_BoxImpl;
+
 /**
  * Shows a modal messagebox, user must click something
 */
@@ -38,9 +42,15 @@ struct Modal_Message_Box : public Window {
 		 MB_Type);
 	~Modal_Message_Box();
 
+	void set_align(Align);
+
 	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
 	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);
+
+private:
+	Modal_Message_BoxImpl* d;
 };
-};
+
+}
 
 #endif
