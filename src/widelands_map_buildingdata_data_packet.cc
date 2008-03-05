@@ -467,7 +467,8 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
 		if
 			(trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION ||
-			 trainingsite_packet_version == 2) {
+			 trainingsite_packet_version == 2)
+		{
 			read_productionsite(trainingsite, fr, egbase, ol);
 
 			delete trainingsite.m_soldier_request;

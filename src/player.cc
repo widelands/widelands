@@ -752,7 +752,7 @@ void Player::update_building_statistics(Building* building, losegain_t lg)
 
 	const Building_Descr::Index nr_buildings = tribe().get_nrbuildings();
 
-		// Get the valid vector for this
+	// Get the valid vector for this
 	if (m_building_stats.size() < nr_buildings)
 		m_building_stats.resize(nr_buildings);
 

@@ -217,8 +217,8 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 			loaderUI.stepf (_("Adding player %u"), p);
 			add_player
 				(p,
-				map().get_scenario_player_tribe(p),
-				map().get_scenario_player_name (p));
+				 map().get_scenario_player_tribe(p),
+				 map().get_scenario_player_name (p));
 		}
 
 		set_iabase(new Interactive_Player(*this, 1));
@@ -273,7 +273,7 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 
 			if
 				(player.state == PlayerSettings::stateClosed ||
-				player.state == PlayerSettings::stateOpen)
+				 player.state == PlayerSettings::stateOpen)
 				continue;
 
 			add_player(i+1, player.tribe, player.name);
