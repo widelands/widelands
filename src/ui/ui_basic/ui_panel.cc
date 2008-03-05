@@ -146,8 +146,7 @@ int32_t Panel::run()
 		app->handle_input(&icb);
 		if (app->should_die()) end_modal(dying_code);
 
-		if (_flags & pf_think)
-			think();
+		do_think();
 
 		if (g_gr->need_update()) {
 			RenderTarget* rt = g_gr->get_render_target();
@@ -390,14 +389,23 @@ void Panel::set_cache(bool) {}
 /**
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.
- * The default implementation calls the children's think function.
  */
 void Panel::think()
 {
-	for (Panel *child = _fchild; child; child = child->_next) {
-		if (child->get_think())
-			child->think();
-	}
+}
+
+
+/**
+ * Descend the panel hierarchy and call the \ref think() function of all
+ * (grand-)children for which set_think(false) has not been called.
+ */
+void Panel::do_think()
+{
+	if (get_think())
+		think();
+
+	for (Panel *child = _fchild; child; child = child->_next)
+		child->do_think();
 }
 
 

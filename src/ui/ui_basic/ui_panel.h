@@ -166,6 +166,7 @@ private:
 	void check_child_death();
 
 	void do_draw(RenderTarget* dst);
+	void do_think();
 
 	/**
 	 * Returns the child panel that receives mouse events at the given location.
