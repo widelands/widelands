@@ -48,6 +48,7 @@ Scrollbar::Scrollbar(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h
 
 	m_pos = 0;
 	m_pagesize = 5;
+	m_singlestepsize = 1;
 	m_steps = 100;
 
 	m_pressed = None;
@@ -84,6 +85,18 @@ void Scrollbar::set_steps(int32_t steps)
 	m_steps = steps;
 
 	update(0, 0, get_w(), get_h());
+}
+
+
+/**
+ * Change the number of steps one click on one of the arrow buttons will scroll.
+ */
+void Scrollbar::set_singlestepsize(uint32_t singlestepsize)
+{
+	if (singlestepsize < 1)
+		singlestepsize = 1;
+
+	m_singlestepsize = singlestepsize;
 }
 
 
@@ -204,9 +217,9 @@ void Scrollbar::action(Area area)
 	int32_t pos;
 
 	switch (area) {
-	case Minus: diff = -1; break;
+	case Minus: diff = -m_singlestepsize; break;
 	case MinusPage: diff = -m_pagesize; break;
-	case Plus: diff = 1; break;
+	case Plus: diff = m_singlestepsize; break;
 	case PlusPage: diff = m_pagesize; break;
 	default:
 		return;

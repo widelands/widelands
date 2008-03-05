@@ -53,9 +53,11 @@ public:
 	Signal1<int32_t> moved;
 
 	void set_steps(int32_t steps);
+	void set_singlestepsize(uint32_t singlestepsize);
 	void set_pagesize(int32_t pagesize);
 	void set_pos(int32_t pos);
 
+	uint32_t get_singlestepsize() const {return m_singlestepsize;}
 	uint32_t get_pagesize() const {return m_pagesize;}
 	uint32_t get_pos() const {return m_pos;}
 
@@ -84,6 +86,7 @@ private:
 	bool     m_force_draw; // draw this scrollbar, even if it can't do anything
 
 	uint32_t m_pos;            ///< from 0 to m_range - 1
+	uint32_t m_singlestepsize;
 	uint32_t m_pagesize;
 	uint32_t m_steps;
 
