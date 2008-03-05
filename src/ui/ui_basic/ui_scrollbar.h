@@ -68,6 +68,7 @@ public:
 private:
 	Area get_area_for_point(int32_t x, int32_t y);
 	int32_t get_knob_pos();
+	uint32_t get_knob_size();
 	void set_knob_pos(int32_t p);
 
 	void action(Area area);

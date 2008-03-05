@@ -136,7 +136,6 @@ Scrollbar::get_area_for_point
 Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 {
 	int32_t extent;
-	int32_t knob;
 
 	// Out of panel
 	if (x < 0 || x >= get_w() || y < 0 || y >= get_h())
@@ -154,15 +153,16 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 	}
 
 	// Determine the area
-	knob = get_knob_pos();
+	int32_t knob = get_knob_pos();
+	int32_t knobsize = get_knob_size();
 
 	if (y < Size)
 		return Minus;
 
-	if (y < knob - Size/2)
+	if (y < knob - knobsize/2)
 		return MinusPage;
 
-	if (y < knob + Size/2)
+	if (y < knob + knobsize/2)
 		return Knob;
 
 	if (y < extent - Size)
@@ -178,15 +178,18 @@ Return the center of the knob, in pixels, depending on the current position.
 int32_t Scrollbar::get_knob_pos()
 {
 	int32_t extent;
+	uint32_t knobsize = get_knob_size();
 
 	if (m_horizontal)
 		extent = get_w();
 	else
 		extent = get_h();
 
-	extent -= 3 * Size; // plus button, minus button, knob size
+	extent -= 2 * Size + knobsize; // plus button, minus button, knob size
 
-	return (3 * Size / 2) + (m_pos * extent) / m_steps;
+	if (m_steps == 1)
+		return Size + knobsize/2;
+	return (Size + knobsize/2) + (m_pos * extent) / (m_steps-1);
 }
 
 
@@ -195,6 +198,7 @@ Change the position according to knob movement.
 */
 void Scrollbar::set_knob_pos(int32_t pos)
 {
+	uint32_t knobsize = get_knob_size();
 	int32_t extent;
 
 	if (m_horizontal)
@@ -202,11 +206,27 @@ void Scrollbar::set_knob_pos(int32_t pos)
 	else
 		extent = get_h();
 
-	extent -= 3 * Size;
-	pos -= 3 * Size / 2;
+	extent -= 2 * Size + knobsize;
+	pos -= Size + knobsize/2;
 
 	pos = (pos * static_cast<int32_t>(m_steps)) / extent;
 	set_pos(pos);
+}
+
+
+/**
+ * Returns the desired size of the knob. The knob scales with the page size.
+ * The returned knob size is always a multiple of 2 to avoid problems in
+ * computations elsewhere.
+ */
+uint32_t Scrollbar::get_knob_size()
+{
+	uint32_t maxhalfsize = (m_horizontal ? get_w() : get_h())/2 - Size;
+	uint32_t halfsize = (maxhalfsize * get_pagesize()) / (m_steps + get_pagesize());
+	uint32_t size = 2*halfsize;
+	if (size < Size)
+		size = Size;
+	return size;
 }
 
 
@@ -297,6 +317,7 @@ Draw the scrollbar.
 void Scrollbar::draw(RenderTarget* dst)
 {
 	uint32_t knobpos = get_knob_pos();
+	uint32_t knobsize = get_knob_size();
 
 	if (m_steps == 1 && !m_force_draw)
 		return; // don't draw a not doing scrollbar
@@ -306,42 +327,42 @@ void Scrollbar::draw(RenderTarget* dst)
 		draw_button(*dst, Minus, Rect(Point(0, 0), Size, get_h()));
 		draw_button(*dst, Plus, Rect(Point(get_w() - Size, 0), Size, get_h()));
 		draw_button
-			(*dst, Knob, Rect(Point(knobpos - Size / 2, 0), Size, get_h()));
+			(*dst, Knob, Rect(Point(knobpos - knobsize / 2, 0), knobsize, get_h()));
 
-		assert(3 * Size / 2 <= knobpos);
+		assert(Size + knobsize/2 <= knobpos);
 		draw_area
 			(*dst,
 			 MinusPage,
-			 Rect(Point(Size, 0), knobpos - 3 * Size / 2, get_h()));
+			 Rect(Point(Size, 0), knobpos - Size - knobsize/2, get_h()));
 		assert(0 <= get_w());
-		assert(knobpos + 3 * Size / 2 <= static_cast<uint32_t>(get_w()));
+		assert(knobpos + knobsize/2 + Size <= static_cast<uint32_t>(get_w()));
 		draw_area
 			(*dst,
 			 PlusPage,
 			 Rect
-			 (Point(knobpos + Size / 2, 0),
-			  get_w() - knobpos - 3 * Size / 2, get_h()));
+			 (Point(knobpos + knobsize/2, 0),
+			  get_w() - knobpos - knobsize/2 - Size, get_h()));
 	}
 	else
 	{
 		draw_button(*dst, Minus, Rect(Point(0, 0), get_w(), Size));
 		draw_button(*dst, Plus, Rect(Point(0, get_h() - Size), get_w(), Size));
 		draw_button
-			(*dst, Knob, Rect(Point(0, knobpos - Size / 2), get_w(), Size));
+			(*dst, Knob, Rect(Point(0, knobpos - knobsize / 2), get_w(), knobsize));
 
-		assert(3 * Size / 2 <= knobpos);
+		assert(Size + knobsize/2 <= knobpos);
 		draw_area
 			(*dst,
 			 MinusPage,
-			 Rect(Point(0, Size), get_w(), knobpos - 3 * Size / 2));
+			 Rect(Point(0, Size), get_w(), knobpos - Size - knobsize/2));
 		assert(0 <= get_h());
-		assert(knobpos + 3 * Size / 2 <= static_cast<uint32_t>(get_h()));
+		assert(knobpos + knobsize/2 + Size <= static_cast<uint32_t>(get_h()));
 		draw_area
 			(*dst,
 			 PlusPage,
 			 Rect
-			 (Point(0, knobpos + Size / 2),
-			  get_w(), get_h() - knobpos - 3 * Size / 2));
+			 (Point(0, knobpos + knobsize/2),
+			  get_w(), get_h() - knobpos - knobsize/2 - Size));
 	}
 }
 
