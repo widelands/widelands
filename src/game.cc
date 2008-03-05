@@ -190,59 +190,65 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	set_map(new Map);
 
 	FileSystem* fs = g_fs->MakeSubFileSystem(mapname);
-	m_maploader = new WL_Map_Loader(*fs, &map());
-	UI::ProgressWindow loaderUI;
-	GameTips tips (loaderUI);
-
-	// Loading the locals for the campaign
-	if (scenario) {
-		loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
-		i18n::Textdomain textdomain(mapname);
-		log("Loading the locals for scenario. file: %s.mo\n", mapname);
-		m_maploader->preload_map(scenario);
-	} else {
-		//  We are not loading a scenario, so no ingame texts to be translated.
-		loaderUI.step (_("Preloading a map"));
-		m_maploader->preload_map(scenario);
-	}
-
-	const std::string background = map().get_background();
-	if (background.size() > 0)
-		loaderUI.set_background(background);
-	loaderUI.step (_("Loading a world"));
-	m_maploader->load_world();
-
-	// We have to create the players here.
-	const Player_Number nr_players = map().get_nrplayers();
-	iterate_player_numbers(p, nr_players) {
-		loaderUI.stepf (_("Adding player %u"), p);
-		add_player
-			(p,
-			 map().get_scenario_player_tribe(p),
-			 map().get_scenario_player_name (p));
-	}
-
-	set_iabase(new Interactive_Player(*this, 1));
-
-	loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
-
-	// Reload campaign textdomain
-	if (scenario) {
-		i18n::Textdomain textdomain(mapname);
-		m_maploader->load_map_complete(this, true);
-	} else
-		m_maploader->load_map_complete(this, false);
-	delete m_maploader; m_maploader = 0;
-
-	set_game_controller(GameController::createSinglePlayer(this, true, 1));
+	Map_Loader* maploader = new WL_Map_Loader(*fs, &map());
 	try {
-		bool ret = run(loaderUI);
-		delete m->ctrl;
-		m->ctrl = 0;
-		return ret;
+		UI::ProgressWindow loaderUI;
+		GameTips tips (loaderUI);
+
+		// Loading the locals for the campaign
+		if (scenario) {
+			loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
+			i18n::Textdomain textdomain(mapname);
+			log("Loading the locals for scenario. file: %s.mo\n", mapname);
+			maploader->preload_map(scenario);
+		} else {
+			//  We are not loading a scenario, so no ingame texts to be translated.
+			loaderUI.step (_("Preloading a map"));
+			maploader->preload_map(scenario);
+		}
+
+		const std::string background = map().get_background();
+		if (background.size() > 0)
+			loaderUI.set_background(background);
+		loaderUI.step (_("Loading a world"));
+		maploader->load_world();
+
+		// We have to create the players here.
+		const Player_Number nr_players = map().get_nrplayers();
+		iterate_player_numbers(p, nr_players) {
+			loaderUI.stepf (_("Adding player %u"), p);
+			add_player
+				(p,
+				map().get_scenario_player_tribe(p),
+				map().get_scenario_player_name (p));
+		}
+
+		set_iabase(new Interactive_Player(*this, 1));
+
+		loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
+
+		// Reload campaign textdomain
+		if (scenario) {
+			i18n::Textdomain textdomain(mapname);
+			maploader->load_map_complete(this, true);
+		} else
+			maploader->load_map_complete(this, false);
+		delete maploader;
+		maploader = 0;
+
+		set_game_controller(GameController::createSinglePlayer(this, true, 1));
+		try {
+			bool ret = run(loaderUI);
+			delete m->ctrl;
+			m->ctrl = 0;
+			return ret;
+		} catch (...) {
+			delete m->ctrl;
+			m->ctrl = 0;
+			throw;
+		}
 	} catch (...) {
-		delete m->ctrl;
-		m->ctrl = 0;
+		delete maploader;
 		throw;
 	}
 }
@@ -259,26 +265,31 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 	assert(!get_map());
 	set_map(new Map);
 
-	m_maploader = map().get_correct_loader(settings.mapfilename.c_str());
-	m_maploader->preload_map(false);
+	Map_Loader* maploader = map().get_correct_loader(settings.mapfilename.c_str());
+	try {
+		maploader->preload_map(false);
 
-	loaderUI.step(_("Configuring players"));
-	for (uint32_t i = 0; i < settings.players.size(); ++i) {
-		const PlayerSettings& player = settings.players[i];
+		loaderUI.step(_("Configuring players"));
+		for (uint32_t i = 0; i < settings.players.size(); ++i) {
+			const PlayerSettings& player = settings.players[i];
 
-		if
-			(player.state == PlayerSettings::stateClosed ||
-			 player.state == PlayerSettings::stateOpen)
-			continue;
+			if
+				(player.state == PlayerSettings::stateClosed ||
+				player.state == PlayerSettings::stateOpen)
+				continue;
 
-		add_player(i+1, player.tribe, player.name);
-		get_player(i+1)->init(false);
+			add_player(i+1, player.tribe, player.name);
+			get_player(i+1)->init(false);
+		}
+
+		loaderUI.step(_("Loading map"));
+		maploader->load_map_complete(this, false); // if code==2 is a scenario
+		delete maploader;
+		maploader = 0;
+	} catch (...) {
+		delete maploader;
+		throw;
 	}
-
-	loaderUI.step(_("Loading map"));
-	m_maploader->load_map_complete(this, false); // if code==2 is a scenario
-	delete m_maploader;
-	m_maploader = 0;
 }
 
 
@@ -364,15 +375,6 @@ bool Game::run_replay()
 		m->ctrl = 0;
 		throw;
 	}
-}
-
-
-void Game::load_map (const char* filename)
-{
-	m_maploader = (new Map())->get_correct_loader(filename);
-	assert (m_maploader!=0);
-	m_maploader->preload_map(0);
-	set_map (&m_maploader->map());
 }
 
 

@@ -103,8 +103,6 @@ struct Game : public Editor_Game_Base {
 	bool run_load_game
 		(const bool is_splayer, std::string filename = std::string());
 
-	void load_map (const char*);
-
 	virtual void postload();
 	void think();
 
@@ -177,8 +175,6 @@ private:
 
 private:
 	GameInternals* m;
-
-	Map_Loader                   * m_maploader;
 
 	int32_t                            m_state;
 	Speed                          m_speed; //  frametime multiplier
