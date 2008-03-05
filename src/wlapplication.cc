@@ -47,6 +47,7 @@
 #include "profile.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
+#include "ui_modal_messagebox.h"
 #include "ui_progresswindow.h"
 #include "wexception.h"
 
@@ -1083,46 +1084,79 @@ void WLApplication::yield_double_game()
  */
 void WLApplication::mainmenu()
 {
+	std::string messagetitle;
+	std::string message;
+
 	for (;;) {
 		Fullscreen_Menu_Main mm;
-		switch (mm.run()) {
-		case Fullscreen_Menu_Main::mm_singleplayer:
-			mainmenu_singleplayer();
-			break;
-		case Fullscreen_Menu_Main::mm_multiplayer:
-			mainmenu_multiplayer();
-			break;
-		case Fullscreen_Menu_Main::mm_replay: {
-			Widelands::Game game;
-			try {
-				game.run_replay();
-			} catch (...) {
-				emergency_save(game);
-				throw;
+
+		if (message.size()) {
+			log("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
+
+			UI::Modal_Message_Box mmb
+				(&mm,
+				 messagetitle,
+				 message,
+				 UI::Modal_Message_Box::OK);
+			mmb.set_align(Align_Left);
+			mmb.run();
+
+			message.clear();
+			messagetitle.clear();
+		}
+
+		try {
+			switch (mm.run()) {
+			case Fullscreen_Menu_Main::mm_singleplayer:
+				mainmenu_singleplayer();
+				break;
+			case Fullscreen_Menu_Main::mm_multiplayer:
+				mainmenu_multiplayer();
+				break;
+			case Fullscreen_Menu_Main::mm_replay: {
+				Widelands::Game game;
+				try {
+					game.run_replay();
+				} catch (...) {
+					emergency_save(game);
+					throw;
+				}
+				break;
 			}
-			break;
-		}
-		case Fullscreen_Menu_Main::mm_options: {
-			Section *s = g_options.pull_section("global");
-			Options_Ctrl om(s);
-			break;
-		}
-		case Fullscreen_Menu_Main::mm_readme: {
-			Fullscreen_Menu_FileView ff("txts/README");
-			ff.run();
-			break;
-		}
-		case Fullscreen_Menu_Main::mm_license: {
-			Fullscreen_Menu_FileView ff("txts/COPYING");
-			ff.run();
-			break;
-		}
-		case Fullscreen_Menu_Main::mm_editor:
-			Editor_Interactive::run_editor(m_editor_filename);
-			break;
-		default:
-		case Fullscreen_Menu_Main::mm_exit:
-			return;
+			case Fullscreen_Menu_Main::mm_options: {
+				Section *s = g_options.pull_section("global");
+				Options_Ctrl om(s);
+				break;
+			}
+			case Fullscreen_Menu_Main::mm_readme: {
+				Fullscreen_Menu_FileView ff("txts/README");
+				ff.run();
+				break;
+			}
+			case Fullscreen_Menu_Main::mm_license: {
+				Fullscreen_Menu_FileView ff("txts/COPYING");
+				ff.run();
+				break;
+			}
+			case Fullscreen_Menu_Main::mm_editor:
+				Editor_Interactive::run_editor(m_editor_filename);
+				break;
+			default:
+			case Fullscreen_Menu_Main::mm_exit:
+				return;
+			}
+		} catch (const std::exception& e) {
+			messagetitle = _("Unexpected error during the game");
+			message = e.what();
+			message += _("\n\nPlease report this problem to help us improve "
+			             "Widelands. You will find related messages in the "
+			             "standard output (stdout.txt on Windows). You are "
+			             "using build ");
+			message += BUILD_ID;
+			message += _(". Please add this information to your report."
+			             "\n\nWidelands attempts to create a savegame when "
+			             "errors occur during the game. It is often - though "
+			             "not always - possible to load it and continue playing.\n");
 		}
 	}
 }
