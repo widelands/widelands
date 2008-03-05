@@ -132,13 +132,11 @@ m_state   (gs_notrunning),
 m_speed   (1),
 cmdqueue  (this),
 m_replayreader(0),
-m_replaywriter(0),
-m_realtime(WLApplication::get()->get_time())
+m_replaywriter(0)
 {
 	m->ctrl = 0;
 	g_sound_handler.m_the_game = this;
 	m_last_stats_update = 0;
-	m_player_cmdserial = 0;
 }
 
 Game::~Game()
@@ -536,7 +534,7 @@ void Game::think()
 		g_gr->animate_maptextures(get_gametime());
 
 		// check if autosave is needed
-		m_savehandler.think(*this, m_realtime);
+		m_savehandler.think(*this, WLApplication::get()->get_time());
 	}
 }
 

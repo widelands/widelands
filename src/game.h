@@ -188,12 +188,8 @@ private:
 	ReplayReader* m_replayreader;
 	ReplayWriter* m_replaywriter;
 
-	int32_t m_realtime; // the real time (including) pauses in milliseconds
-
 	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;
-
-	uint32_t m_player_cmdserial;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {
