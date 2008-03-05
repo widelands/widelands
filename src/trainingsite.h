@@ -96,7 +96,8 @@ class TrainingSite:public ProductionSite {
 		int32_t min, max; // minimum and maximum program number (inclusive)
 		uint32_t prio; // relative priority
 		uint32_t credit; // whenever an upgrade gets credit >= 10, it can be run
-		int32_t lastattempt, lastsuccess;
+		int32_t lastattempt; // level of the last attempt in this upgrade category
+		bool lastsuccess; // whether the last attempt in this upgrade category was successful
 	};
 
 public:

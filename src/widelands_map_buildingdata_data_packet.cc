@@ -55,7 +55,7 @@ namespace Widelands {
 #define CURRENT_WAREHOUSE_PACKET_VERSION        1
 #define CURRENT_MILITARYSITE_PACKET_VERSION     2
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   1
-#define CURRENT_TRAININGSITE_PACKET_VERSION     2
+#define CURRENT_TRAININGSITE_PACKET_VERSION     3
 
 
 void Map_Buildingdata_Data_Packet::Read
@@ -465,7 +465,9 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 {
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
-		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION) {
+		if
+			(trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION ||
+			 trainingsite_packet_version == 2) {
 			read_productionsite(trainingsite, fr, egbase, ol);
 
 			delete trainingsite.m_soldier_request;
@@ -488,7 +490,10 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					upgrade->prio = fr.Unsigned8();
 					upgrade->credit = fr.Unsigned8();
 					upgrade->lastattempt = fr.Signed32();
-					upgrade->lastsuccess = fr.Signed32();
+					if (trainingsite_packet_version > 2)
+						upgrade->lastsuccess = fr.Unsigned8();
+					else
+						upgrade->lastsuccess = fr.Signed32() == upgrade->lastattempt;
 				} else {
 					fr.Unsigned8();
 					fr.Unsigned8();
@@ -863,7 +868,7 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 		fw.Unsigned8(upgrade.prio);
 		fw.Unsigned8(upgrade.credit);
 		fw.Signed32(upgrade.lastattempt);
-		fw.Signed32(upgrade.lastsuccess);
+		fw.Signed8(upgrade.lastsuccess);
 	}
 
 	// DONE

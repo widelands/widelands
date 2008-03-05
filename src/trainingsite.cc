@@ -456,7 +456,7 @@ void TrainingSite::program_end(Game* g, bool success)
 	if (m_current_upgrade) {
 		if (m_success) {
 			drop_unupgradable_soldiers(g);
-			m_current_upgrade->lastsuccess = m_current_upgrade->lastattempt;
+			m_current_upgrade->lastsuccess = true;
 		}
 		m_current_upgrade = 0;
 	}
@@ -529,7 +529,7 @@ void TrainingSite::start_upgrade(Game* g, Upgrade* upgrade)
 
 	int32_t level;
 
-	if (upgrade->lastattempt == upgrade->lastsuccess) {
+	if (upgrade->lastsuccess) {
 		// We were successful the last time, so restart greedily
 		if (m_build_heros)
 			level = maxlevel;
@@ -552,6 +552,7 @@ void TrainingSite::start_upgrade(Game* g, Upgrade* upgrade)
 
 	m_current_upgrade = upgrade;
 	upgrade->lastattempt = level;
+	upgrade->lastsuccess = false;
 
 	char buf[200];
 	sprintf(buf, "%s%d", upgrade->prefix.c_str(), level);
@@ -634,7 +635,7 @@ void TrainingSite::add_upgrade(tAttribute atr, const std::string& prefix)
 	u.prio = 6;
 	u.credit = 0;
 	u.lastattempt = -1;
-	u.lastsuccess = -1;
+	u.lastsuccess = false;
 	m_upgrades.push_back(u);
 }
 
