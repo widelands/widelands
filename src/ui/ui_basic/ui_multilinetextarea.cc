@@ -45,11 +45,11 @@ Multiline_Textarea::Multiline_Textarea
 	assert(scrollbar_w() <= w);
 	set_think(false);
 
-
 	set_align(align);
 
 	m_scrollbar.moved.set(this, &Multiline_Textarea::set_scrollpos);
 
+	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_BIG));
 	m_scrollbar.set_steps(1);
 	m_scrollbar.set_force_draw(always_show_scrollbar);

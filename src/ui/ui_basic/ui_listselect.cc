@@ -52,6 +52,7 @@ m_show_check(show_check)
 	set_align(align);
 
 	m_scrollbar.moved.set(this, &BaseListselect::set_scrollpos);
+	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar.set_steps(1);
 

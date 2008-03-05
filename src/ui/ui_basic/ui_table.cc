@@ -110,8 +110,10 @@ void Table<void *>::add_column
 			 false);
 		m_scrollbar->moved.set(this, &Table::set_scrollpos);
 		m_scrollbar->set_steps(1);
+		uint32_t lineheight = g_fh->get_fontheight(UI_FONT_SMALL);
+		m_scrollbar->set_singlestepsize(lineheight);
+		m_scrollbar->set_pagesize(get_h() - lineheight);
 	}
-
 }
 
 Table<void *>::Entry_Record * Table<void *>::find
