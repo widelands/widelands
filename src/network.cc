@@ -470,6 +470,9 @@ void NetHost::run()
 		for (uint32_t i = 0; i < d->clients.size(); ++i)
 			d->clients[i].time = d->committed_networktime-1;
 
+		// The call to checkHungClients ensures that the game leaves the
+		// wait mode (d->realspeed == 0) when there are no clients
+		checkHungClients();
 		initComputerPlayers();
 		game.run(loaderUI);
 		clearComputerPlayers();
