@@ -1618,7 +1618,6 @@ Transfer::Transfer(Game* g, Request* req, WareInstance* it) :
 	m_request(req),
 	m_item(it),
 	m_worker(0),
-	m_soldier(0),
 	m_idle(false)
 {
 	m_item->set_transfer(g, this);
@@ -1629,21 +1628,9 @@ Transfer::Transfer(Game* g, Request* req, Worker* w) :
 	m_request(req),
 	m_item(0),
 	m_worker(w),
-	m_soldier(0),
 	m_idle(false)
 {
 	m_worker->start_task_transfer(g, this);
-}
-
-Transfer::Transfer(Game* g, Request* req, Soldier* s) :
-	m_game(g),
-	m_request(req),
-	m_item(0),
-	m_worker(0),
-	m_soldier(s),
-	m_idle(false)
-{
-	m_soldier->start_task_transfer(g, this);
 }
 
 /**
@@ -1653,21 +1640,10 @@ Transfer::~Transfer()
 {
 	if (m_worker) {
 		assert(!m_item);
-		assert(!m_soldier);
 
-		if (m_game->objects().object_still_available(m_worker))
-			m_worker->cancel_task_transfer(m_game);
-	}
-	else if (m_item)
-	{
-		assert(!m_soldier);
-		if (m_game->objects().object_still_available(m_item))
-			m_item->cancel_transfer(m_game);
-	}
-	else if (m_soldier)
-	{
-		if (m_game->objects().object_still_available(m_soldier))
-			m_soldier->cancel_task_transfer(m_game);
+		m_worker->cancel_task_transfer(m_game);
+	} else if (m_item) {
+		m_item->cancel_transfer(m_game);
 	}
 }
 
@@ -1798,9 +1774,6 @@ void Transfer::tlog(const char* fmt, ...)
 	} else if (m_item) {
 		id = 'I';
 		serial = m_item->get_serial();
-	} else if (m_soldier) {
-		id = 'S';
-		serial = m_soldier->get_serial();
 	} else {
 		id = '?';
 		serial = 0;

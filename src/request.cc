@@ -183,9 +183,6 @@ void Request::Write
 		} else if (trans.m_worker) {
 			assert(mos->is_object_known(trans.m_worker));
 			fw->Unsigned32(mos->get_object_file_index(trans.m_worker));
-		} else if (trans.m_soldier) {
-			assert(mos->is_object_known(trans.m_soldier));
-			fw->Unsigned32(mos->get_object_file_index(trans.m_soldier));
 		}
 		fw->Unsigned8(trans.is_idle());
 
@@ -429,18 +426,11 @@ void Request::start_transfer(Game* g, Supply* supp)
 */
 void Request::transfer_finish(Game *g, Transfer* t)
 {
-	Worker* w = 0;
-	Soldier* s = 0;
-
-	if (t->m_worker)
-		w = t->m_worker;
-	else
-		s = t->m_soldier;
+	Worker* w = t->m_worker;
 
 	if (t->m_item)
 		t->m_item->destroy(g);
 
-	t->m_soldier = 0;
 	t->m_worker = 0;
 	t->m_item = 0;
 
@@ -454,10 +444,7 @@ void Request::transfer_finish(Game *g, Transfer* t)
 	// the callback functions are likely to delete us,
 	// therefore we musn't access member variables behind this
 	// point
-	if (w)
-		(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
-	else
-		(*m_callbackfn)(g, this, m_index, s, m_callbackdata);
+	(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
 
 
 	log ("<<Transfer::has_finished()\n");
@@ -472,7 +459,6 @@ void Request::transfer_finish(Game *g, Transfer* t)
 void Request::transfer_fail(Game *, Transfer * t) {
 	bool wasopen = is_open();
 
-	t->m_soldier = 0;
 	t->m_worker = 0;
 	t->m_item = 0;
 

@@ -386,7 +386,6 @@ struct Transfer {
 
 	Transfer(Game* g, Request* req, WareInstance* it);
 	Transfer(Game* g, Request* req, Worker* w);
-	Transfer(Game* g, Request* req, Soldier* s);
 	~Transfer();
 
 	Request* get_request() const {return m_request;}
@@ -407,7 +406,6 @@ private:
 	Request      * m_request;
 	WareInstance * m_item;    ///< non-null if ware is an item
 	Worker       * m_worker;  ///< non-null if ware is a worker
-	Soldier      * m_soldier; ///< non-null if ware is a soldier
 	Route          m_route;
 
 	bool m_idle; ///< an idle transfer can be fail()ed if the item feels like it
