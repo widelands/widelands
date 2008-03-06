@@ -44,9 +44,9 @@ throw ()
 	text  = "Journal file ";
 	text += _filename;
 	text += " contains record with type ";
-	text += toString(_code);
+	text += toString(static_cast<int>(_code));
 	text += " instead of the expected type ";
-	text += toString(_expectedcode);
+	text += toString(static_cast<int>(_expectedcode));
 }
 
 BadEvent_error::BadEvent_error
