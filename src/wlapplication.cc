@@ -371,6 +371,7 @@ restart:
 			// Since playbacks are intended precisely for debugging such
 			// crashes, we must ignore the error and continue.
 			log("JOURNAL: read error, continue without playback: %s\n", e.what());
+			journal->stop_playback();
 		}
 	} else {
 		haveevent=SDL_PollEvent(ev);
