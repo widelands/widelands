@@ -43,189 +43,212 @@
 void get_horiz_linearcomb
 (int32_t u1, int32_t u2, int32_t v1, int32_t v2, float& lambda, float& mu);
 
-template<typename T> static void render_top_triangle
-(Surface & dst,
- const Texture & tex,
- const Vertex & p1, const Vertex & p2, const Vertex & p3,
- int32_t y2)
-{
-	int32_t y, y1, ix1, ix2, count;
-	int32_t x1, x2, dx1, dx2;
-	int32_t b1, db1, tx1, dtx1, ty1, dty1;
-	int32_t b, tx, ty;
-	float lambda, mu;
-	uint8_t *texpixels;
-	T *texcolormap;
 
-	get_horiz_linearcomb
-		(p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, lambda, mu);
-	const int32_t db =  FTOFIX((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
-	const int32_t dty = FTOFIX((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
+struct LeftEdge {
+	/**
+	 * Height of the edge.
+	 *
+	 * This is the number of pixels spanned by the edge in a vertical direction
+	 */
+	uint32_t height;
 
-	const int32_t w = dst.get_w();
-	const int32_t h = dst.get_h();
+	// the following are all fixed point
+	int32_t x0;
+	int32_t tx0;
+	int32_t ty0;
+	int32_t b0;
+	int32_t dx;
+	int32_t dtx;
+	int32_t dty;
+	int32_t db;
+};
 
-	texpixels = tex.get_curpixels();
-	texcolormap = static_cast<T *>(tex.get_colormap());
+struct RightEdge {
+	uint32_t height;
 
-	y1 = p1.y;
+	int32_t x0;
+	int32_t dx;
+};
 
-	x1 = x2 =  ITOFIX(p1.x);
-	dx1     = (ITOFIX(p2.x) - x1)   / (p2.y - y1);
-	dx2     = (ITOFIX(p3.x) - x1)   / (p3.y - y1);
-
-	b1      =  ITOFIX(p1.b);
-	db1     = (ITOFIX(p2.b) - b1)   / (p2.y - y1);
-
-	tx1     =  ITOFIX(p1.tx);
-	dtx1    = (ITOFIX(p2.tx) - tx1) / (p2.y - y1);
-
-	ty1     =  ITOFIX(p1.ty);
-	dty1    = (ITOFIX(p2.ty) - ty1) / (p2.y - y1);
-
-	for (y = y1; y < y2 && y < h; ++y) {
-		if (y>=0) {
-			ix1=FIXTOI(x1);
-			ix2=FIXTOI(x2);
-
-			b=b1;
-			tx=tx1>>16;
-			ty=ty1;
-
-			if (ix2>w) ix2=w;
-			if (ix1<0) {
-				b-=ix1*db;
-				tx-=ix1;
-				ty-=ix1*dty;
-				ix1=0;
-			}
-
-			count=ix2-ix1;
-
-			T * scanline =
-				reinterpret_cast<T *>
-				(static_cast<Uint8 *>(dst.get_pixels())
-				 +
-				 y * dst.get_pitch())
-				+
-				ix1;
-
-			while (count-->0) {
-				int32_t texel=(tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
-
-				*scanline++ = texcolormap[texpixels[texel] | ((b >> 8) & 0xFF00)];
-
-				b+=db;
-				tx++;
-				ty+=dty;
-			}
-		}
-
-		x1+=dx1;
-		x2+=dx2;
-		b1+=db1;
-		tx1+=dtx1;
-		ty1+=dty1;
-	}
-}
-
-template<typename T> static void render_bottom_triangle
-(Surface & dst,
- const Texture & tex,
- const Vertex & p1, const Vertex & p2, const Vertex & p3,
- int32_t y1)
-{
-	int32_t y, y2, ix1, ix2, count;
-	int32_t x1, x2, dx1, dx2;
-	int32_t b1, db1, tx1, dtx1, ty1, dty1;
-	int32_t b, tx, ty;
-	float lambda, mu;
-	uint8_t *texpixels;
-	T *texcolormap;
-
-	get_horiz_linearcomb
-		(p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, lambda, mu);
-	const int32_t db  = FTOFIX((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
-	const int32_t dty = FTOFIX((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
-
-	const int32_t w = dst.get_w();
-	const int32_t h = dst.get_h();
-
-	texpixels = tex.get_curpixels();
-	texcolormap = static_cast<T *>(tex.get_colormap());
-
-	y2 = p3.y;
-
-	x1 = x2 =   ITOFIX(p3.x);
-	dx1     = -(ITOFIX(p1.x) - x1) / (p1.y - y2);
-	dx2     = -(ITOFIX(p2.x) - x1) / (p2.y - y2);
-
-	// this may seem redundant but reduces rounding artifacts
-	x1      =   ITOFIX(p1.x) + dx1 * (p1.y - y2);
-	x2      =   ITOFIX(p2.x) + dx2 * (p2.y - y2);
-
-	b1      =   ITOFIX(p3.b);
-	db1     = -(ITOFIX(p1.b) - b1)   / (p1.y - y2);
-
-	tx1     =   ITOFIX(p3.tx);
-	dtx1    = -(ITOFIX(p1.tx) - tx1) / (p1.y - y2);
-
-	ty1     =   ITOFIX(p3.ty);
-	dty1    = -(ITOFIX(p1.ty) - ty1) / (p1.y - y2);
-
-	for (y = y2; y >= y1 && y > 0; --y) {
-		if (y<h) {
-			ix1=FIXTOI(x1);
-			ix2=FIXTOI(x2);
-
-			b=b1;
-			tx=tx1>>16;
-			ty=ty1;
-
-			if (ix2>w) ix2=w;
-			if (ix1<0) {
-				b-=ix1*db;
-				tx-=ix1;
-				ty-=ix1*dty;
-				ix1=0;
-			}
-
-			count=ix2-ix1;
-
-			T * scanline =
-				reinterpret_cast<T *>
-				(static_cast<Uint8 *>(dst.get_pixels())
-				 +
-				 y * dst.get_pitch())
-				+
-				ix1;
-
-			while (count-->0) {
-				int32_t texel=(tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
-
-				*scanline++ = texcolormap[texpixels[texel] | ((b >> 8) & 0xFF00)];
-
-				b+=db;
-				tx++;
-				ty+=dty;
-			}
-		}
-
-		x1+=dx1;
-		x2+=dx2;
-		b1+=db1;
-		tx1+=dtx1;
-		ty1+=dty1;
-	}
-}
 
 /**
- * Render a triangle. It is being split into to triangles which have one
- * horizontal edge, so that the resulting triangles have only two edges
- * which are not horizontal, one on the left, the other on the right.
- * The actual rendering is performed by render_top_triangle and
- * render_bottom_triangle, which require a horizontal edge at the bottom
- * or at the top, respectively.
+ * Render a polygon based on the given edge lists.
+ *
+ * The edge lists will be overwritten with undefined values.
+ */
+template<typename T> static void render_edge_lists
+(Surface & dst, const Texture & tex,
+ int32_t y, int32_t height,
+ LeftEdge* left, RightEdge* right,
+ int32_t dbdx, int32_t dtydx)
+{
+	uint8_t *texpixels;
+	T *texcolormap;
+
+	texpixels = tex.get_curpixels();
+	texcolormap = static_cast<T *>(tex.get_colormap());
+
+	while(height > 0) {
+		int32_t leftx = FIXTOI(left->x0);
+		int32_t rightx = FIXTOI(right->x0);
+
+		T * scanline =
+			reinterpret_cast<T *>(static_cast<Uint8 *>(dst.get_pixels())
+			                      + y * dst.get_pitch()) + leftx;
+
+		int32_t tx = FIXTOI(left->tx0);
+		int32_t ty = left->ty0;
+		int32_t b = left->b0;
+		uint32_t count = rightx-leftx;
+		while(count--) {
+			int32_t texel = (tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
+
+			*scanline++ = texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
+
+			b += dbdx;
+			tx++;
+			ty += dtydx;
+		}
+
+		// Advance the line
+		y++;
+		left->x0 += left->dx;
+		left->tx0 += left->dtx;
+		left->ty0 += left->dty;
+		left->b0 += left->db;
+		right->x0 += right->dx;
+
+		if (--left->height == 0)
+			left++;
+		if (--right->height == 0)
+			right++;
+		height--;
+	}
+}
+
+
+struct Polygon {
+	const Vertex* p[7];
+	uint8_t nrpoints;
+
+	void intersect_edge(const Vertex& a, const Vertex& b, int32_t x, int32_t y, int32_t d, Vertex* out) {
+		int32_t da = a.x*x + a.y*y;
+		int32_t db = b.x*x + b.y*y;
+
+		out->x = a.x + (b.x-a.x)*(d-da)/(db-da);
+		out->y = a.y + (b.y-a.y)*(d-da)/(db-da);
+		out->tx = a.tx + (b.tx-a.tx)*(d-da)/(db-da);
+		out->ty = a.ty + (b.ty-a.ty)*(d-da)/(db-da);
+		out->b = a.b + (b.b-a.b)*(d-da)/(db-da);
+	}
+
+	/**
+	 * Remove points [start, end). Will remove nothing if start == end.
+	 */
+	void remove_points(uint8_t start, uint8_t end) {
+		if (start > end) {
+			nrpoints = start;
+			start = 0;
+		}
+		if (start < end) {
+			uint8_t remaining = nrpoints - end;
+			for (uint8_t i = 0; i < remaining; ++i)
+				p[start+i] = p[end+i];
+			nrpoints = start + remaining;
+		}
+	}
+
+	/**
+	 * Clip the polygon against the line defined by \p x, \p y and \p d.
+	 *
+	 * Use \p exit and \p entry as buffers to create new vertices if necessary.
+	 *
+	 * \return \c true if visible parts of polygon remain, or \c false if the
+	 * polygon has been culled away completely.
+	 */
+	bool clip(int32_t x, int32_t y, int32_t d, Vertex* exit, Vertex* entry) {
+		int8_t firstout = -1;
+		int8_t firstin = -1;
+
+		const Vertex* previous = p[nrpoints-1];
+		bool previousin = previous->x*x + previous->y*y >= d;
+		const Vertex* current;
+		bool currentin;
+		bool allin = true;
+		for(uint8_t index = 0; index < nrpoints; ++index, previous = current, previousin = currentin) {
+			current = p[index];
+			currentin = current->x*x + current->y*y >= d;
+			allin = allin && currentin;
+
+			if (currentin == previousin)
+				continue;
+
+			if (currentin)
+				firstin = index;
+			else
+				firstout = index;
+		}
+
+		if (allin)
+			return true;
+
+		if (firstout == -1)
+			return false; // triangle is completely outside
+
+		// Calculate intersection with the cutting line and replace points
+		// [firstout, firstin) by the two intersections, being careful
+		// not to introduce duplicate points.
+		intersect_edge(*p[(nrpoints+firstout-1)%nrpoints], *p[firstout], x, y, d, exit);
+		intersect_edge( *p[firstin], *p[(nrpoints+firstin-1)%nrpoints], x, y, d, entry);
+
+		bool putexit = true;
+		bool putentry = true;
+
+		if (entry->x == exit->x && entry->y == exit->y)
+			putentry = false;
+		else if (entry->x == p[firstin]->x && entry->y == p[firstin]->y)
+			putentry = false;
+
+		const Vertex* preexit = p[(nrpoints+firstout-1)%nrpoints]; // coalesce points
+		if (exit->x == preexit->x && exit->y == preexit->y)
+			putexit = false;
+
+		if (putentry && putexit) {
+			uint8_t nrout = (nrpoints + firstin - firstout) % nrpoints;
+
+			if (nrout == 1) {
+				assert(nrpoints <= 7);
+
+				p[firstout] = exit;
+				for(uint8_t i = nrpoints-1; i > firstout; --i)
+					p[i+1] = p[i];
+				nrpoints++;
+				p[firstout+1] = entry;
+			} else {
+				p[firstout] = exit;
+				p[(firstout+1)%nrpoints] = entry;
+
+				remove_points((firstout+2)%nrpoints, firstin);
+			}
+		} else if (putentry) {
+			p[firstout] = entry;
+			remove_points((firstout+1)%nrpoints, firstin);
+		} else if (putexit) {
+			p[firstout] = exit;
+			remove_points((firstout+1)%nrpoints, firstin);
+		} else {
+			remove_points(firstout, firstin);
+		}
+
+		return nrpoints >= 3;
+	}
+};
+
+
+/**
+ * Render a triangle into the given destination surface.
+ *
+ * \note It is assumed that p1, p2, p3 are sorted in counter-clockwise order.
  *
  * \note The rendering code assumes that d(tx)/d(x) = 1. This can be achieved
  * by making sure that there is a 1:1 relation between x coordinates and
@@ -234,35 +257,103 @@ template<typename T> static void render_bottom_triangle
 template<typename T> static void render_triangle
 (Surface & dst, const Vertex & p1, const Vertex & p2, const Vertex & p3, const Texture & tex)
 {
-	const Vertex * p[3]= {&p1, &p2, &p3};
-	int32_t top, bot, mid, y, ym;
+	if (p1.y == p2.y && p2.y == p3.y)
+		return; // degenerate triangle
 
-	top=bot=0; // to avoid compiler warning
+	// Clip the triangle
+	Polygon polygon;
 
-	y=0x7fffffff;
-	for (uint8_t i = 0; i < 3; ++i)
-		if (p[i]->y<y) {top=i; y=p[i]->y;}
+	polygon.p[0] = &p1;
+	polygon.p[1] = &p2;
+	polygon.p[2] = &p3;
+	polygon.nrpoints = 3;
 
-	y=-0x7fffffff;
-	for (uint8_t i = 0; i < 3; ++i)
-		if (p[i]->y>y) {bot=i; y=p[i]->y;}
+	Vertex buffer[8]; // up to two vertices per clipping line
 
-	for (mid = 0; mid == top || mid == bot; ++mid);
-	ym=p[mid]->y;
+	if (!polygon.clip(1, 0, 0, &buffer[0], &buffer[1]))
+		return;
+	if (!polygon.clip(-1, 0, -dst.get_w(), &buffer[2], &buffer[3]))
+		return;
+	if (!polygon.clip(0, 1, 0, &buffer[4], &buffer[5]))
+		return;
+	if (!polygon.clip(0, -1, -dst.get_h(), &buffer[6], &buffer[7]))
+		return;
 
-	if (p[top]->y < ym) {
-		if (p[mid]->x < p[bot]->x)
-			render_top_triangle<T>    (dst, tex, *p[top], *p[mid], *p[bot], ym);
-		else
-			render_top_triangle<T>    (dst, tex, *p[top], *p[bot], *p[mid], ym);
+	// Determine a top vertex
+	int32_t top, topy;
+
+	topy = 0x7fffffff;
+	for (uint8_t i = 0; i < polygon.nrpoints; ++i) {
+		if (polygon.p[i]->y < topy) {
+			top = i;
+			topy = polygon.p[i]->y;
+		}
 	}
 
-	if (ym < p[bot]->y) {
-		if (p[mid]->x < p[top]->x)
-			render_bottom_triangle<T> (dst, tex, *p[mid], *p[top], *p[bot], ym);
-		else
-			render_bottom_triangle<T> (dst, tex, *p[top], *p[mid], *p[bot], ym);
+	// Build left edges
+	int32_t boty = topy;
+	LeftEdge leftedges[3];
+	uint8_t nrleftedges = 0;
+
+	{
+		uint8_t start = top;
+		uint8_t end = (top+1)%polygon.nrpoints;
+		do {
+			if (polygon.p[end]->y > polygon.p[start]->y) {
+				boty = polygon.p[end]->y;
+
+				LeftEdge& edge = leftedges[nrleftedges++];
+				assert(nrleftedges <= 3);
+
+				edge.height = polygon.p[end]->y - polygon.p[start]->y;
+				edge.x0 = ITOFIX(polygon.p[start]->x);
+				edge.tx0 = ITOFIX(polygon.p[start]->tx);
+				edge.ty0 = ITOFIX(polygon.p[start]->ty);
+				edge.b0 = ITOFIX(polygon.p[start]->b);
+				edge.dx = ITOFIX(polygon.p[end]->x-polygon.p[start]->x)/static_cast<int32_t>(edge.height);
+				edge.dtx = ITOFIX(polygon.p[end]->tx-polygon.p[start]->tx)/static_cast<int32_t>(edge.height);
+				edge.dty = ITOFIX(polygon.p[end]->ty-polygon.p[start]->ty)/static_cast<int32_t>(edge.height);
+				edge.db = ITOFIX(polygon.p[end]->b-polygon.p[start]->b)/static_cast<int32_t>(edge.height);
+			}
+
+			start = end;
+			end = (start+1)%polygon.nrpoints;
+		} while(polygon.p[end]->y >= polygon.p[start]->y);
 	}
+
+	// Build right edges
+	RightEdge rightedges[3];
+	uint8_t nrrightedges = 0;
+
+	{
+		uint8_t start = top;
+		uint8_t end = (polygon.nrpoints+top-1)%polygon.nrpoints;
+		do {
+			if (polygon.p[end]->y > polygon.p[start]->y) {
+				RightEdge& edge = rightedges[nrrightedges++];
+				assert(nrrightedges <= 3);
+
+				edge.height = polygon.p[end]->y - polygon.p[start]->y;
+				edge.x0 = ITOFIX(polygon.p[start]->x);
+				edge.dx = ITOFIX(polygon.p[end]->x - polygon.p[start]->x)/static_cast<int32_t>(edge.height);
+			}
+
+			start = end;
+			end = (polygon.nrpoints+start-1)%polygon.nrpoints;
+		} while(polygon.p[end]->y >= polygon.p[start]->y);
+	}
+
+	// Calculate d(b)/d(x) and d(ty)/d(x) as fixed point variables.
+	// Remember that we assume d(tx)/d(x) == 1.
+
+	// lambda*(p2-p1) + mu*(p3-p1) = (1,0)
+	int32_t det = (p2.x-p1.x)*(p3.y-p1.y) - (p2.y-p1.y)*(p3.x-p1.x);
+	int32_t lambda = ITOFIX(p3.y-p1.y)/det;
+	int32_t mu = -ITOFIX(p2.y-p1.y)/det;
+	int32_t dbdx = lambda*(p2.b-p1.b) + mu*(p3.b-p1.b);
+	int32_t dtydx = lambda*(p2.ty-p1.ty) + mu*(p3.ty-p1.ty);
+
+	render_edge_lists<T>(dst, tex, topy, boty-topy, leftedges, rightedges, dbdx, dtydx);
 }
 
 /**
@@ -536,7 +627,7 @@ template<typename T> static void draw_field_int
 	Surface const & rt_busy   = *g_gr->get_road_texture(Widelands::Road_Busy);
 
 	render_triangle<T> (dst, f_vert, br_vert, r_vert, f_r_texture);
-	render_triangle<T> (dst, bl_vert, f_vert, br_vert, f_d_texture);
+	render_triangle<T> (dst, f_vert, bl_vert, br_vert, f_d_texture);
 
 	// Render roads and dither polygon edges
 	uint8_t road;

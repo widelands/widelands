@@ -429,25 +429,33 @@ void RenderTarget::rendermap
 				 node_brightness
 				 	(gametime, f_player_field.time_node_last_unseen,
 				 	 f_player_field.vision, f.field->get_brightness()),
-				 row_is_forward*(TRIANGLE_WIDTH/2), 0);
+				 0, 0);
 			Vertex r_vert
 				(r_posx, posy - r.field->get_height() * HEIGHT_FACTOR,
 				 node_brightness
 					(gametime, r_player_field->time_node_last_unseen,
 					 r_player_field->vision, r.field->get_brightness()),
-				 TRIANGLE_WIDTH + row_is_forward*(TRIANGLE_WIDTH/2), 0);
+				 TRIANGLE_WIDTH, 0);
 			Vertex bl_vert
 				(bl_posx, b_posy - bl.field->get_height() * HEIGHT_FACTOR,
 				 node_brightness
 					 (gametime, bl_player_field.time_node_last_unseen,
 					  bl_player_field.vision, bl.field->get_brightness()),
-				 (1-row_is_forward)*(TRIANGLE_WIDTH/2), 64);
+				 0, 64);
 			Vertex br_vert
 				(br_posx, b_posy - br.field->get_height() * HEIGHT_FACTOR,
 				 node_brightness
 					 (gametime, br_player_field->time_node_last_unseen,
 					  br_player_field->vision, br.field->get_brightness()),
-				 TRIANGLE_WIDTH + (1-row_is_forward)*(TRIANGLE_WIDTH/2), 64);
+				 TRIANGLE_WIDTH, 64);
+
+			if (row_is_forward) {
+				f_vert.tx += TRIANGLE_WIDTH/2;
+				r_vert.tx += TRIANGLE_WIDTH/2;
+			} else {
+				bl_vert.tx -= TRIANGLE_WIDTH/2;
+				br_vert.tx -= TRIANGLE_WIDTH/2;
+			}
 
 			m_surface->draw_field //  Render ground
 				(m_rect,
@@ -827,19 +835,27 @@ void RenderTarget::rendermap
 			Vertex f_vert
 				(f_posx, posy - f.field->get_height() * HEIGHT_FACTOR,
 				 f.field->get_brightness(),
-				 row_is_forward*(TRIANGLE_WIDTH/2), 0);
+				 0, 0);
 			Vertex r_vert
 				(r_posx, posy - r.field->get_height() * HEIGHT_FACTOR,
 				 r.field->get_brightness(),
-				 TRIANGLE_WIDTH + row_is_forward*(TRIANGLE_WIDTH/2), 0);
+				 TRIANGLE_WIDTH, 0);
 			Vertex bl_vert
 				(bl_posx, b_posy - bl.field->get_height() * HEIGHT_FACTOR,
 				 bl.field->get_brightness(),
-				 (1-row_is_forward)*(TRIANGLE_WIDTH/2), 64);
+				 0, 64);
 			Vertex br_vert
 				(br_posx, b_posy - br.field->get_height() * HEIGHT_FACTOR,
 				 br.field->get_brightness(),
-				 TRIANGLE_WIDTH + (1-row_is_forward)*(TRIANGLE_WIDTH/2), 64);
+				 TRIANGLE_WIDTH, 64);
+
+			if (row_is_forward) {
+				f_vert.tx += TRIANGLE_WIDTH/2;
+				r_vert.tx += TRIANGLE_WIDTH/2;
+			} else {
+				bl_vert.tx -= TRIANGLE_WIDTH/2;
+				br_vert.tx -= TRIANGLE_WIDTH/2;
+			}
 
 			m_surface->draw_field //  Render ground
 				(m_rect,
