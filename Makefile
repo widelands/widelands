@@ -157,6 +157,14 @@ LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lz -lpng -lSDL_image -lSD
 
 ##############################################################################
 # Building
+warning:
+	@echo "==============================================================="
+	@echo "    Building Widelands using the Makefile is deprecated."
+	@echo "    I'm trying to run scons now."
+	@echo "==============================================================="
+	@echo
+	scons
+
 all: makedirs tags $(OBJECT_DIR)/widelands
 	cp $(OBJECT_DIR)/widelands .
 	@echo
