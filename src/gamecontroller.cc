@@ -65,13 +65,13 @@ void SinglePlayerGameController::think()
 	int32_t frametime = curtime - m_lastframe;
 	m_lastframe = curtime;
 
-	frametime *= m_game.get_speed(); // TODO: move speed management into GameController
-
 	// prevent crazy frametimes
-	if (frametime <= 0)
+	if (frametime < 0)
 		frametime = 0;
 	else if (frametime > 1000)
 		frametime = 1000;
+
+	frametime *= m_game.get_speed(); // TODO: move speed management into GameController
 
 	m_time = m_game.get_gametime() + frametime;
 
