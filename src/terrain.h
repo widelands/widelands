@@ -60,7 +60,6 @@ template<typename T> static void render_top_triangle
 	get_horiz_linearcomb
 		(p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, lambda, mu);
 	const int32_t db =  FTOFIX((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
-	const int32_t dtx = FTOFIX((p2.tx - p1.tx) * lambda + (p3.tx - p1.tx) * mu);
 	const int32_t dty = FTOFIX((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
 
 	const int32_t w = dst.get_w();
@@ -90,13 +89,13 @@ template<typename T> static void render_top_triangle
 			ix2=FIXTOI(x2);
 
 			b=b1;
-			tx=tx1;
+			tx=tx1>>16;
 			ty=ty1;
 
 			if (ix2>w) ix2=w;
 			if (ix1<0) {
 				b-=ix1*db;
-				tx-=ix1*dtx;
+				tx-=ix1;
 				ty-=ix1*dty;
 				ix1=0;
 			}
@@ -112,12 +111,12 @@ template<typename T> static void render_top_triangle
 				ix1;
 
 			while (count-->0) {
-				int32_t texel=((tx>>16) & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
+				int32_t texel=(tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
 
 				*scanline++ = texcolormap[texpixels[texel] | ((b >> 8) & 0xFF00)];
 
 				b+=db;
-				tx+=dtx;
+				tx++;
 				ty+=dty;
 			}
 		}
@@ -147,7 +146,6 @@ template<typename T> static void render_bottom_triangle
 	get_horiz_linearcomb
 		(p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, lambda, mu);
 	const int32_t db  = FTOFIX((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
-	const int32_t dtx = FTOFIX((p2.tx - p1.tx) * lambda + (p3.tx - p1.tx) * mu);
 	const int32_t dty = FTOFIX((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
 
 	const int32_t w = dst.get_w();
@@ -181,13 +179,13 @@ template<typename T> static void render_bottom_triangle
 			ix2=FIXTOI(x2);
 
 			b=b1;
-			tx=tx1;
+			tx=tx1>>16;
 			ty=ty1;
 
 			if (ix2>w) ix2=w;
 			if (ix1<0) {
 				b-=ix1*db;
-				tx-=ix1*dtx;
+				tx-=ix1;
 				ty-=ix1*dty;
 				ix1=0;
 			}
@@ -203,12 +201,12 @@ template<typename T> static void render_bottom_triangle
 				ix1;
 
 			while (count-->0) {
-				int32_t texel=((tx>>16) & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
+				int32_t texel=(tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
 
 				*scanline++ = texcolormap[texpixels[texel] | ((b >> 8) & 0xFF00)];
 
 				b+=db;
-				tx+=dtx;
+				tx++;
 				ty+=dty;
 			}
 		}
@@ -228,6 +226,10 @@ template<typename T> static void render_bottom_triangle
  * The actual rendering is performed by render_top_triangle and
  * render_bottom_triangle, which require a horizontal edge at the bottom
  * or at the top, respectively.
+ *
+ * \note The rendering code assumes that d(tx)/d(x) = 1. This can be achieved
+ * by making sure that there is a 1:1 relation between x coordinates and
+ * texture x coordinates.
  */
 template<typename T> static void render_triangle
 (Surface & dst, const Vertex & p1, const Vertex & p2, const Vertex & p3, const Texture & tex)
