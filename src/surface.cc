@@ -154,22 +154,15 @@ void Surface::unset_subwin() {
 */
 void Surface::draw_field
 (Rect & subwin,
- Widelands::Field * const f,
- Widelands::Field * const rf,
- Widelands::Field * const fl,
- Widelands::Field * const rfl,
- int32_t const   posx, int32_t const   rposx, int32_t const   posy,
- int32_t const blposx, int32_t const rblposx, int32_t const blposy,
+ const Vertex& f_vert,
+ const Vertex& r_vert,
+ const Vertex& bl_vert,
+ const Vertex& br_vert,
  uint8_t roads,
- Sint8            f_brightness,
- Sint8            r_brightness,
- Sint8           bl_brightness,
- Sint8           br_brightness,
  const Texture & tr_d_texture,
  const Texture &  l_r_texture,
  const Texture &  f_d_texture,
- const Texture &  f_r_texture,
- bool const draw_all)
+ const Texture &  f_r_texture)
 {
 	set_subwin(subwin);
 
@@ -177,22 +170,16 @@ void Surface::draw_field
 	case 2:
 		draw_field_int<Uint16>
 			(*this,
-			 f, rf, fl, rfl,
-			 posx, rposx, posy, blposx, rblposx, blposy,
+			 f_vert, r_vert, bl_vert, br_vert,
 			 roads,
-			 f_brightness, r_brightness, bl_brightness, br_brightness,
-			 tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
-			 draw_all);
+			 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 		break;
 	case 4:
 		draw_field_int<Uint32>
 			(*this,
-			 f, rf, fl, rfl,
-			 posx, rposx, posy, blposx, rblposx, blposy,
+			 f_vert, r_vert, bl_vert, br_vert,
 			 roads,
-			 f_brightness, r_brightness, bl_brightness, br_brightness,
-			 tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
-			 draw_all);
+			 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 		break;
 	default:
 		assert(false);

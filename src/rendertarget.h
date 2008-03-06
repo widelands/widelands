@@ -76,16 +76,11 @@ struct RenderTarget {
 	 *
 	 * viewofs is the offset of the upper left corner of the window into the map,
 	 * in pixels.
-	 *
-	 * draw_all is used to check if the whole ground texture tiles have to be
-	 * redrawn or only the aniamted ones. If no animation took place, the ground
-	 * is not redrawn at all.
 	 */
 	void rendermap
 		(Widelands::Editor_Game_Base const &       egbase,
 		 Widelands::Player           const &       player,
-		 Point                                     viewofs,
-		 bool                                const draw_all);
+		 Point                                     viewofs);
 
 	/**
 	 * Same as above but not from a player's point of view. Used in game when
@@ -93,8 +88,7 @@ struct RenderTarget {
 	 */
 	void rendermap
 		(Widelands::Editor_Game_Base const & egbase,
-		 Point                               viewofs,
-		 bool                                draw_all);
+		 Point                               viewofs);
 
 	/**
 	 * Render the minimap. If player is not 0, it renders from that player's

@@ -46,7 +46,7 @@ void get_horiz_linearcomb
 template<typename T> static void render_top_triangle
 (Surface & dst,
  const Texture & tex,
- Vertex & p1, Vertex & p2, Vertex & p3,
+ const Vertex & p1, const Vertex & p2, const Vertex & p3,
  int32_t y2)
 {
 	int32_t y, y1, ix1, ix2, count;
@@ -133,7 +133,7 @@ template<typename T> static void render_top_triangle
 template<typename T> static void render_bottom_triangle
 (Surface & dst,
  const Texture & tex,
- Vertex & p1, Vertex & p2, Vertex & p3,
+ const Vertex & p1, const Vertex & p2, const Vertex & p3,
  int32_t y1)
 {
 	int32_t y, y2, ix1, ix2, count;
@@ -230,9 +230,9 @@ template<typename T> static void render_bottom_triangle
  * or at the top, respectively.
  */
 template<typename T> static void render_triangle
-(Surface & dst, Vertex & p1, Vertex & p2, Vertex & p3, const Texture & tex)
+(Surface & dst, const Vertex & p1, const Vertex & p2, const Vertex & p3, const Texture & tex)
 {
-	Vertex * p[3]= {&p1, &p2, &p3};
+	const Vertex * p[3]= {&p1, &p2, &p3};
 	int32_t top, bot, mid, y, ym;
 
 	top=bot=0; // to avoid compiler warning
@@ -520,54 +520,27 @@ template<typename T> static void render_road_vert
 
 template<typename T> static void draw_field_int
 (Surface & dst,
- Widelands::Field * const f,
- Widelands::Field * const r,
- Widelands::Field * const bl,
- Widelands::Field * const br,
- const int32_t     posx,
- const int32_t     rposx,
- const int32_t     posy,
- const int32_t     blposx,
- const int32_t     rblposx,
- const int32_t     blposy,
+ const Vertex& f_vert,
+ const Vertex& r_vert,
+ const Vertex& bl_vert,
+ const Vertex& br_vert,
  uint8_t         roads,
- Sint8            f_brightness,
- Sint8            r_brightness,
- Sint8           bl_brightness,
- Sint8           br_brightness,
  const Texture & tr_d_texture,
  const Texture &  l_r_texture,
  const Texture &  f_d_texture,
- const Texture &  f_r_texture,
- bool          draw_all)
+ const Texture &  f_r_texture)
 {
-	Vertex  r_vert
-		(rposx, posy - r->get_height() * HEIGHT_FACTOR, r_brightness, 0, 0);
-	Vertex  f_vert
-		(posx, posy - f->get_height() * HEIGHT_FACTOR, f_brightness, 64, 0);
-	Vertex br_vert
-		(rblposx, blposy - br->get_height() * HEIGHT_FACTOR, br_brightness, 0, 64);
-	Vertex bl_vert
-		(blposx, blposy - bl->get_height() * HEIGHT_FACTOR, bl_brightness, 64, 64);
-
 	Surface const & rt_normal = *g_gr->get_road_texture(Widelands::Road_Normal);
 	Surface const & rt_busy   = *g_gr->get_road_texture(Widelands::Road_Busy);
 
-	if (draw_all) {
-		render_triangle<T> (dst, r_vert,  f_vert, br_vert, f_r_texture);
-		render_triangle<T> (dst, f_vert, br_vert, bl_vert, f_d_texture);
-	} else {
-		if (f_r_texture.was_animated())
-			render_triangle<T> (dst, r_vert,  f_vert, br_vert, f_r_texture);
-		if (f_d_texture.was_animated())
-			render_triangle<T> (dst, f_vert, br_vert, bl_vert, f_d_texture);
-	}
+	render_triangle<T> (dst, f_vert, br_vert, r_vert, f_r_texture);
+	render_triangle<T> (dst, bl_vert, f_vert, br_vert, f_d_texture);
 
 	// Render roads and dither polygon edges
 	uint8_t road;
 
 	road = (roads >> Widelands::Road_East) & Widelands::Road_Mask;
-	if (-128 < f_brightness or -128 < r_brightness) {
+	if (-128 < f_vert.b or -128 < r_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -579,18 +552,13 @@ template<typename T> static void draw_field_int
 			default:
 				assert(false);
 			}
-		}
-		else if
-			((draw_all
-			  or
-			  f_r_texture.was_animated() or tr_d_texture.was_animated())
-			 and
-			 &f_r_texture != &tr_d_texture)
+		} else if (&f_r_texture != &tr_d_texture) {
 			dither_edge_horiz<T>(dst, f_vert, r_vert, f_r_texture, tr_d_texture);
+		}
 	}
 
 	road = (roads >> Widelands::Road_SouthEast) & Widelands::Road_Mask;
-	if (-128 < f_brightness or -128 < br_brightness) {
+	if (-128 < f_vert.b or -128 < br_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -602,16 +570,13 @@ template<typename T> static void draw_field_int
 			default:
 				assert(false);
 			}
-		}
-		else if
-			((draw_all or f_r_texture.was_animated() or f_d_texture.was_animated())
-			 and
-			 &f_r_texture != &f_d_texture)
+		} else if (&f_r_texture != &f_d_texture) {
 			dither_edge_vert<T>(dst, f_vert, br_vert, f_r_texture, f_d_texture);
+		}
 	}
 
 	road = (roads >> Widelands::Road_SouthWest) & Widelands::Road_Mask;
-	if (-128 < f_brightness or -128 < bl_brightness) {
+	if (-128 < f_vert.b or -128 < bl_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -623,12 +588,9 @@ template<typename T> static void draw_field_int
 			default:
 				assert(false);
 			}
-		}
-		else if
-			((draw_all or f_d_texture.was_animated() or l_r_texture.was_animated())
-			 and
-			 &l_r_texture != &f_d_texture)
+		} else if (&l_r_texture != &f_d_texture) {
 			dither_edge_vert<T>(dst, f_vert, bl_vert, f_d_texture, l_r_texture);
+		}
 	}
 
 	// FIXME: similar textures may not need dithering

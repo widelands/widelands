@@ -24,6 +24,7 @@
 #include "overlay_manager.h"
 #include "surface.h"
 #include "tribe.h"
+#include "vertex.h"
 
 #include "log.h"
 
@@ -351,10 +352,9 @@ static inline Sint8 node_brightness
 void RenderTarget::rendermap
 (Widelands::Editor_Game_Base const &       egbase,
  Player                      const &       player,
- Point                                     viewofs,
- bool                                const draw_all)
+ Point                                     viewofs)
 {
-	if (player.see_all()) return rendermap(egbase, viewofs, draw_all);
+	if (player.see_all()) return rendermap(egbase, viewofs);
 
 	RENDERMAP_INITIALIZANTONS;
 
@@ -424,25 +424,36 @@ void RenderTarget::rendermap
 			uint8_t const roads =
 				f_player_field.roads | overlay_manager.get_road_overlay(f);
 
+			Vertex f_vert
+				(f_posx, posy - f.field->get_height() * HEIGHT_FACTOR,
+				 node_brightness
+				 	(gametime, f_player_field.time_node_last_unseen,
+				 	 f_player_field.vision, f.field->get_brightness()),
+				 row_is_forward*(TRIANGLE_WIDTH/2), 0);
+			Vertex r_vert
+				(r_posx, posy - r.field->get_height() * HEIGHT_FACTOR,
+				 node_brightness
+					(gametime, r_player_field->time_node_last_unseen,
+					 r_player_field->vision, r.field->get_brightness()),
+				 TRIANGLE_WIDTH + row_is_forward*(TRIANGLE_WIDTH/2), 0);
+			Vertex bl_vert
+				(bl_posx, b_posy - bl.field->get_height() * HEIGHT_FACTOR,
+				 node_brightness
+					 (gametime, bl_player_field.time_node_last_unseen,
+					  bl_player_field.vision, bl.field->get_brightness()),
+				 (1-row_is_forward)*(TRIANGLE_WIDTH/2), 64);
+			Vertex br_vert
+				(br_posx, b_posy - br.field->get_height() * HEIGHT_FACTOR,
+				 node_brightness
+					 (gametime, br_player_field->time_node_last_unseen,
+					  br_player_field->vision, br.field->get_brightness()),
+				 TRIANGLE_WIDTH + (1-row_is_forward)*(TRIANGLE_WIDTH/2), 64);
+
 			m_surface->draw_field //  Render ground
 				(m_rect,
-				 f.field, r.field, bl.field, br.field,
-				 f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
+				 f_vert, r_vert, bl_vert, br_vert,
 				 roads,
-				 node_brightness
-				 (gametime, f_player_field.time_node_last_unseen,
-				  f_player_field.vision, f.field->get_brightness()),
-				 node_brightness
-				 (gametime, r_player_field->time_node_last_unseen,
-				  r_player_field->vision, r.field->get_brightness()),
-				 node_brightness
-				 (gametime, bl_player_field.time_node_last_unseen,
-				  bl_player_field.vision, bl.field->get_brightness()),
-				 node_brightness
-				 (gametime, br_player_field->time_node_last_unseen,
-				  br_player_field->vision, br.field->get_brightness()),
-				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
-				 draw_all);
+				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture);
 		}
 
 		++linear_fy;
@@ -756,8 +767,7 @@ void RenderTarget::rendermap
 
 void RenderTarget::rendermap
 (Widelands::Editor_Game_Base const &       egbase,
- Point                                     viewofs,
- bool                                const draw_all)
+ Point                                     viewofs)
 {
 	RENDERMAP_INITIALIZANTONS;
 
@@ -814,15 +824,28 @@ void RenderTarget::rendermap
 			const uint8_t roads =
 				f.field->get_roads() | overlay_manager.get_road_overlay(f);
 
+			Vertex f_vert
+				(f_posx, posy - f.field->get_height() * HEIGHT_FACTOR,
+				 f.field->get_brightness(),
+				 row_is_forward*(TRIANGLE_WIDTH/2), 0);
+			Vertex r_vert
+				(r_posx, posy - r.field->get_height() * HEIGHT_FACTOR,
+				 r.field->get_brightness(),
+				 TRIANGLE_WIDTH + row_is_forward*(TRIANGLE_WIDTH/2), 0);
+			Vertex bl_vert
+				(bl_posx, b_posy - bl.field->get_height() * HEIGHT_FACTOR,
+				 bl.field->get_brightness(),
+				 (1-row_is_forward)*(TRIANGLE_WIDTH/2), 64);
+			Vertex br_vert
+				(br_posx, b_posy - br.field->get_height() * HEIGHT_FACTOR,
+				 br.field->get_brightness(),
+				 TRIANGLE_WIDTH + (1-row_is_forward)*(TRIANGLE_WIDTH/2), 64);
+
 			m_surface->draw_field //  Render ground
 				(m_rect,
-				 f.field, r.field, bl.field, br.field,
-				 f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
+				 f_vert, r_vert, bl_vert, br_vert,
 				 roads,
-				 f .field->get_brightness(), r .field->get_brightness(),
-				 bl.field->get_brightness(), br.field->get_brightness(),
-				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
-				 draw_all);
+				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture);
 		}
 
 		++linear_fy;

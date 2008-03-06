@@ -31,6 +31,8 @@ struct Field;
 struct Player;
 };
 
+struct Vertex;
+
 /**
  * This was formerly called struct Bitmap. But now it manages an
  * SDL_Surface as it's core.
@@ -97,22 +99,15 @@ public:
 	/// sw16_terrain.cc
 	void draw_field
 		(Rect &,
-		 Widelands::Field * const f,
-		 Widelands::Field * const rf,
-		 Widelands::Field * const fl,
-		 Widelands::Field * const rfl,
-		 const int32_t posx, const int32_t rposx, const int32_t posy,
-		 const int32_t blposx, const int32_t rblposx, const int32_t blposy,
+		 const Vertex& f_vert,
+		 const Vertex& r_vert,
+		 const Vertex& bl_vert,
+		 const Vertex& br_vert,
 		 uint8_t roads,
-		 Sint8 f_brightness,
-		 Sint8 r_brightness,
-		 Sint8 bl_brightness,
-		 Sint8 br_brightness,
 		 const Texture & tr_d_texture,
 		 const Texture & l_r_texture,
 		 const Texture & f_d_texture,
-		 const Texture & f_r_texture,
-		 bool);
+		 const Texture & f_r_texture);
 
 private:
 	void set_subwin(Rect r);
