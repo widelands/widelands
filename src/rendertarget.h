@@ -126,8 +126,6 @@ protected:
 
 	void doblit(Point dst, Surface * const src, Rect srcrc);
 
-	///Only needed, when this is a mapview
-	Surface* m_ground_surface;
 	///The target surface
 	Surface * m_surface;
 	///The current clip rectangle

@@ -43,14 +43,12 @@ using Widelands::TCoords;
 RenderTarget::RenderTarget(Surface* bmp)
 {
 	m_surface = bmp;
-	m_ground_surface = 0;
 
 	reset();
 }
 
 RenderTarget::~RenderTarget()
 {
-	delete m_ground_surface;
 }
 
 /**
@@ -321,9 +319,6 @@ static inline Sint8 node_brightness
 
 
 #define RENDERMAP_INITIALIZANTONS                                             \
-	/* Check if we have the ground surface set up. */                          \
-	if (not m_ground_surface) m_ground_surface = new Surface(*m_surface);      \
-                                                                              \
 	viewofs -= m_offset;                                                       \
                                                                               \
 	Map                   const & map             = egbase.map();              \
@@ -429,7 +424,7 @@ void RenderTarget::rendermap
 			uint8_t const roads =
 				f_player_field.roads | overlay_manager.get_road_overlay(f);
 
-			m_ground_surface->draw_field //  Render ground
+			m_surface->draw_field //  Render ground
 				(m_rect,
 				 f.field, r.field, bl.field, br.field,
 				 f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
@@ -453,9 +448,6 @@ void RenderTarget::rendermap
 		++linear_fy;
 		row_is_forward = not row_is_forward;
 	}
-
-	// Copy ground where it belongs: on the screen
-	m_surface->blit(Point(m_rect.x, m_rect.y), m_ground_surface, m_rect);
 
 	{
 		const int32_t dx2        = maxfx - minfx + 1;
@@ -822,7 +814,7 @@ void RenderTarget::rendermap
 			const uint8_t roads =
 				f.field->get_roads() | overlay_manager.get_road_overlay(f);
 
-			m_ground_surface->draw_field //  Render ground
+			m_surface->draw_field //  Render ground
 				(m_rect,
 				 f.field, r.field, bl.field, br.field,
 				 f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
@@ -836,9 +828,6 @@ void RenderTarget::rendermap
 		++linear_fy;
 		row_is_forward = not row_is_forward;
 	}
-
-	// Copy ground where it belongs: on the screen
-	m_surface->blit(Point(m_rect.x, m_rect.y), m_ground_surface, m_rect);
 
 	{
 		const int32_t dx2 = maxfx - minfx + 1;
