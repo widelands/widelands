@@ -20,25 +20,13 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include "constants.h"
-#include "gamecontroller.h"
-#include "gamesettings.h"
-#include "md5.h"
+#include "cmd_queue.h"
 #include "widelands_streamread.h"
 #include "widelands_streamwrite.h"
 
 #include <SDL_net.h>
 
-#include <queue>
-#include <string>
-#include <cstring>
-#include <vector>
-
-
 struct Deserializer;
-struct NetHostImpl;
-class RecvPacket;
-class SendPacket;
 
 struct Chat_Message {
 	uint32_t plrnum;
@@ -52,94 +40,54 @@ struct SyncCallback {
 };
 
 
-struct NetHost : public GameController, private SyncCallback {
-	NetHost (const std::string& playername);
-	virtual ~NetHost ();
-
-	void run();
-
-	// GameController interface
-	void think();
-	void sendPlayerCommand(Widelands::PlayerCommand* pc);
-	int32_t getFrametime();
-	std::string getGameDescription();
-
-	// Pregame-related stuff
-	const GameSettings& settings();
-	bool canLaunch();
-	void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers);
-	void setPlayerState(uint8_t number, PlayerSettings::State state);
-	void setPlayerTribe(uint8_t number, const std::string& tribe);
-
+/**
+ * This non-gamelogic command is used by \ref NetHost and \ref NetClient
+ * to schedule taking a synchronization hash.
+ */
+class Cmd_NetCheckSync : public Widelands::Command {
 private:
-	void requestSyncReports();
-	void checkSyncReports();
-	void syncreport();
+	SyncCallback * m_callback;
 
-	void clearComputerPlayers();
-	void initComputerPlayers();
+public:
+	Cmd_NetCheckSync (int32_t dt, SyncCallback* cb);
 
-	void handle_network ();
+	virtual void execute (Widelands::Game *);
 
-	void checkHungClients();
-	void setRealSpeed(uint32_t speed);
-
-	std::string getComputerPlayerName(uint32_t playernum);
-	bool havePlayerName(const std::string& name, int32_t ignoreplayer = -1);
-	void welcomeClient(uint32_t number, const std::string& playername);
-	void committedNetworkTime(int32_t time);
-	void recvClientTime(uint32_t number, int32_t time);
-
-	void broadcast(SendPacket& packet);
-	void writeSettingMap(SendPacket& packet);
-	void writeSettingPlayer(SendPacket& packet, uint8_t number);
-	void writeSettingAllPlayers(SendPacket& packet);
-
-	void disconnectPlayer(uint8_t number);
-	void disconnectClient(uint32_t number);
-	void reaper();
-
-	NetHostImpl* d;
+	virtual int32_t get_id();
 };
 
-struct NetClientImpl;
 
-struct NetClient : public GameController, public GameSettingsProvider, private SyncCallback {
-	NetClient (IPaddress*, const std::string& playername);
-	virtual ~NetClient ();
+/**
+ * Keeping track of network time: This class answers the question of how
+ * far the local simulation time should proceed, given the history of network
+ * time messages forwarded to the \ref recv() method.
+ *
+ * In general, the time progresses as fast as given by the speed, but we
+ * introduce some elasticity to catch up with the network time if necessary,
+ * and we never advance simulation past the received network time.
+ */
+class NetworkTime {
+public:
+	NetworkTime();
 
-	void run();
+	void reset(int32_t ntime);
+	void fastforward();
 
-	// GameController interface
-	void think();
-	void sendPlayerCommand(Widelands::PlayerCommand* pc);
-	int32_t getFrametime();
-	std::string getGameDescription();
-
-	// GameSettingsProvider interface
-	virtual const GameSettings& settings();
-
-	virtual bool canChangeMap();
-	virtual bool canChangePlayerState(uint8_t number);
-	virtual bool canChangePlayerTribe(uint8_t number);
-
-	virtual bool canLaunch();
-
-	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers);
-	virtual void setPlayerState(uint8_t number, PlayerSettings::State state);
-	virtual void nextPlayerState(uint8_t number);
-	virtual void setPlayerTribe(uint8_t number, const std::string& tribe);
+	void think(uint32_t speed);
+	int32_t time() const;
+	int32_t networktime() const;
+	bool recv(int32_t ntime);
 
 private:
-	void syncreport();
+	int32_t m_networktime;
+	int32_t m_time;
 
-	void handle_network ();
-	void sendTime();
-	void recvOnePlayer(uint8_t number, Widelands::StreamRead& packet);
-	void disconnect ();
+	int32_t m_lastframe;
 
-	NetClientImpl* d;
+	/// This is an attempt to measure how far behind the network time we are.
+	uint32_t m_latency;
 };
+
 
 /**
  * Buffered StreamWrite object for assembling a packet that will be

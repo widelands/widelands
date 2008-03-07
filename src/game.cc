@@ -31,6 +31,7 @@
 #include "game_loader.h"
 #include "game_tips.h"
 #include "gamecontroller.h"
+#include "gamesettings.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
