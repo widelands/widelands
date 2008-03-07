@@ -49,8 +49,10 @@ Modal_Message_Box::Modal_Message_Box
 		 5, 5, 30, 30,
 		 text.c_str(), Align_Center);
 
-	const int32_t maxwidth = parent ? parent->get_inner_w() - 80 : 560;
-	const int32_t maxheight = parent ? parent->get_inner_h() - 60 : 420;
+	const int32_t outerwidth = parent ? parent->get_inner_w() : g_gr->get_xres();
+	const int32_t outerheight = parent ? parent->get_inner_h() : g_gr->get_yres();
+	const int32_t maxwidth = outerwidth - 80;
+	const int32_t maxheight = outerheight - 60;
 	int32_t width, height;
 	std::string font = d->textarea->get_font_name();
 	int32_t fontsize = d->textarea->get_font_size();
@@ -70,7 +72,7 @@ Modal_Message_Box::Modal_Message_Box
 	set_inner_size(width, height);
 	set_pos
 		(Point
-		 ((parent->get_inner_w() - get_w()) / 2, (parent->get_inner_h() - get_h()) / 2));
+		 ((outerwidth - get_w()) / 2, (outerheight - get_h()) / 2));
 
 	d->textarea->set_size(width-10, height-50);
 
