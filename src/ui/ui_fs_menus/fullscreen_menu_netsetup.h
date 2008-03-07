@@ -94,7 +94,7 @@ private:
 		 const LAN_Game_Info &);
 
 	void toggle_networktype();
-	void toggle_hostname   ();
+	void change_hostname   ();
 	void clicked_joingame();
 	void clicked_hostgame();
 };

@@ -36,7 +36,7 @@ joingame
  90, 220, 200, 26,
  1,
  &Fullscreen_Menu_NetSetup::clicked_joingame, this,
- _("Join a Game"), std::string(), false),
+ _("Join a Game")),
 
 hostgame
 (this,
@@ -80,14 +80,15 @@ internetgame(false)
 
 {
 	title     .set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::toggle_hostname);
-	hostname  .set_text("localhost");
+	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::change_hostname);
 	playername.set_text  (_("nobody"));
 	opengames .add_column(150, _("Host"));
 	opengames .add_column(150, _("Map"));
 	opengames .add_column (90, _("State"));
 	opengames .selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
 	discovery .set_callback (discovery_callback, this);
+
+	joingame.set_enabled(false);
 }
 
 void Fullscreen_Menu_NetSetup::think ()
@@ -130,9 +131,12 @@ std::string Fullscreen_Menu_NetSetup::get_playername()
 
 
 void Fullscreen_Menu_NetSetup::game_selected (uint32_t) {
-	if (const LAN_Open_Game * const game = opengames.get_selected())
-		hostname.set_text(game->info.hostname);
-		joingame.set_enabled(true);
+	if (opengames.has_selection()) {
+		if (const LAN_Open_Game * const game = opengames.get_selected()) {
+			hostname.set_text(game->info.hostname);
+			joingame.set_enabled(true);
+		}
+	}
 }
 
 void Fullscreen_Menu_NetSetup::update_game_info
@@ -199,6 +203,7 @@ void Fullscreen_Menu_NetSetup::toggle_networktype() {
 	internetgame = !internetgame;
 
 	opengames.clear();
+	joingame.set_enabled(false);
 
 	if (internetgame)
 	{
@@ -215,16 +220,15 @@ void Fullscreen_Menu_NetSetup::toggle_networktype() {
 	}
 	else
 	{
-		hostname.set_text("localhost");
+		hostname.set_text("");
 		discovery.reset();
 		networktype.set_title(_("LAN games"));
 	}
 }
 
-void Fullscreen_Menu_NetSetup::toggle_hostname()
+void Fullscreen_Menu_NetSetup::change_hostname()
 {
-	if (internetgame)
-	{
+	if (internetgame) {
 		Section *s;
 		s = g_options.pull_section("network");
 		s->set_string("defaultserver", hostname.get_text());
@@ -235,6 +239,10 @@ void Fullscreen_Menu_NetSetup::toggle_hostname()
 		networktype.set_title(_("GGZ games"));
 		if (NetGGZ::ref().tables().size() > 0)
 			fill(NetGGZ::ref().tables());
+	} else {
+		// Allow user to enter a hostname manually
+		opengames.select(opengames.no_selection_index());
+		joingame.set_enabled(*hostname.get_text());
 	}
 }
 
