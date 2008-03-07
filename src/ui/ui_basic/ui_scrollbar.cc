@@ -221,7 +221,12 @@ void Scrollbar::set_knob_pos(int32_t pos)
  */
 uint32_t Scrollbar::get_knob_size()
 {
-	uint32_t maxhalfsize = (m_horizontal ? get_w() : get_h())/2 - Size;
+	uint32_t extent = m_horizontal ? get_w() : get_h();
+
+	if (extent <= 3*Size)
+		return Size;
+
+	uint32_t maxhalfsize = extent/2 - Size;
 	uint32_t halfsize = (maxhalfsize * get_pagesize()) / (m_steps + get_pagesize());
 	uint32_t size = 2*halfsize;
 	if (size < Size)
@@ -324,6 +329,12 @@ void Scrollbar::draw(RenderTarget* dst)
 
 	if (m_horizontal)
 	{
+		if (static_cast<int32_t>(2*Size + knobsize) > get_w()) {
+			// Our owner obviously allocated too little space - draw something stupid
+			draw_button(*dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
+			return;
+		}
+
 		draw_button(*dst, Minus, Rect(Point(0, 0), Size, get_h()));
 		draw_button(*dst, Plus, Rect(Point(get_w() - Size, 0), Size, get_h()));
 		draw_button
@@ -345,6 +356,12 @@ void Scrollbar::draw(RenderTarget* dst)
 	}
 	else
 	{
+		if (static_cast<int32_t>(2*Size + knobsize) > get_h()) {
+			// Our owner obviously allocated too little space - draw something stupid
+			draw_button(*dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
+			return;
+		}
+
 		draw_button(*dst, Minus, Rect(Point(0, 0), get_w(), Size));
 		draw_button(*dst, Plus, Rect(Point(0, get_h() - Size), get_w(), Size));
 		draw_button
