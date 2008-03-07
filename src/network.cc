@@ -57,7 +57,7 @@ using Widelands::Player;
 #define CLIENT_TIMESTAMP_INTERVAL 500
 #define SERVER_TIMESTAMP_INTERVAL 100
 
-#define PROTOCOL_VERSION 1
+#define PROTOCOL_VERSION 2
 
 enum {
 	NETCMD_UNUSED = 0,
@@ -324,6 +324,7 @@ struct Client {
 
 struct NetHostImpl {
 	GameSettings settings;
+	std::string localplayername;
 
 	LAN_Game_Promoter * promoter;
 	TCPsocket svsock;
@@ -366,10 +367,12 @@ struct NetHostImpl {
 	bool syncreport_arrived;
 };
 
-NetHost::NetHost ()
+NetHost::NetHost (const std::string& playername)
 : d(new NetHostImpl)
 {
 	log("[Host] starting up.\n");
+
+	d->localplayername = playername;
 
 	// create a listening socket
 	IPaddress myaddr;
@@ -576,9 +579,8 @@ void NetHost::setMap(const std::string& mapname, const std::string& mapfilename,
 		PlayerSettings& player = d->settings.players[oldplayers];
 		player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateOpen;
 		player.tribe = d->settings.tribes[0];
-		char buf[200];
-		snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers+1);
-		player.name = buf;
+		if (oldplayers == 0)
+			player.name = d->localplayername;
 		oldplayers++;
 	}
 
@@ -606,6 +608,9 @@ void NetHost::setPlayerState(uint8_t number, PlayerSettings::State state)
 		return;
 
 	player.state = state;
+
+	if (player.state == PlayerSettings::stateComputer)
+		player.name = getComputerPlayerName(number);
 
 	// Broadcast change
 	SendPacket s;
@@ -683,8 +688,46 @@ void NetHost::writeSettingAllPlayers(SendPacket& packet)
 }
 
 
+/**
+ *
+ * \return a name for the given player.
+ */
+std::string NetHost::getComputerPlayerName(uint32_t playernum)
+{
+	std::string name;
+	uint32_t suffix = playernum+1;
+	do {
+		char buf[200];
+		snprintf(buf, sizeof(buf), "%s %u", _("Computer"), suffix++);
+		name = buf;
+	} while (havePlayerName(name, playernum));
+	return name;
+}
+
+
+/**
+ * Checks whether a player with the given name exists already.
+ *
+ * If \p ignoreplayer is non-negative, the player with this number will
+ * be ignored.
+ */
+bool NetHost::havePlayerName(const std::string& name, int32_t ignoreplayer)
+{
+	for (uint32_t i = 0; i < d->settings.players.size(); ++i) {
+		if (static_cast<int32_t>(i) != ignoreplayer) {
+			const PlayerSettings& player = d->settings.players[i];
+			if (player.state == PlayerSettings::stateHuman || player.state == PlayerSettings::stateComputer)
+				if (player.name == name)
+					return true;
+		}
+	}
+
+	return false;
+}
+
+
 /// Respond to a client's Hello message.
-void NetHost::welcomeClient(uint32_t number)
+void NetHost::welcomeClient(uint32_t number, const std::string& playername)
 {
 	assert(number < d->clients.size());
 
@@ -710,6 +753,23 @@ void NetHost::welcomeClient(uint32_t number)
 	// The client gets its own initial data set, so we set the player number
 	// after the broadcast related to setPlayerState have gone through.
 	client.playernum = playernum;
+
+	// Assign the player a name, preferably the name chosen by the client
+	std::string effective_name = playername;
+
+	if (effective_name.size() == 0)
+		effective_name = _("Player");
+
+	if (havePlayerName(effective_name, playernum)) {
+		uint32_t i = 2;
+		do {
+			char buf[32];
+			snprintf(buf, sizeof(buf), " %u", i++);
+			effective_name = playername + buf;
+		} while (havePlayerName(effective_name, playernum));
+	}
+
+	d->settings.players[playernum].name = effective_name;
 
 	log("[Host]: client %u: welcome to playernum %u\n", number, playernum);
 
@@ -984,7 +1044,9 @@ void NetHost::handle_network ()
 					break;
 				}
 
-				welcomeClient(i);
+				std::string playername = r.String();
+
+				welcomeClient(i, playername);
 				continue;
 			}
 
@@ -1113,6 +1175,7 @@ void NetHost::reaper()
 struct NetClientImpl {
 	GameSettings settings;
 	int32_t playernum; // is -1 until we are assigned our number, then it's 0-based
+	std::string localplayername;
 
 	/// The socket that connects us to the host
 	TCPsocket sock;
@@ -1144,7 +1207,7 @@ struct NetClientImpl {
 	uint32_t realspeed;
 };
 
-NetClient::NetClient (IPaddress* svaddr)
+NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
 : d(new NetClientImpl)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
@@ -1155,6 +1218,7 @@ NetClient::NetClient (IPaddress* svaddr)
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);
 
 	d->playernum = -1;
+	d->localplayername = playername;
 	d->modal = 0;
 	d->game = 0;
 	d->realspeed = 0;
@@ -1176,6 +1240,7 @@ void NetClient::run ()
 	SendPacket s;
 	s.Unsigned8(NETCMD_HELLO);
 	s.Unsigned8(PROTOCOL_VERSION);
+	s.String(d->localplayername);
 	s.send(d->sock);
 
 	Fullscreen_Menu_LaunchGame lgm(this, this);
@@ -1323,6 +1388,9 @@ void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
 	player.name = packet.String();
 	player.tribe = packet.String();
+
+	if (number == d->playernum)
+		d->localplayername = player.name;
 }
 
 void NetClient::sendTime()

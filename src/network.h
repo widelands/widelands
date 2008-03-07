@@ -53,7 +53,7 @@ struct SyncCallback {
 
 
 struct NetHost : public GameController, private SyncCallback {
-	NetHost ();
+	NetHost (const std::string& playername);
 	virtual ~NetHost ();
 
 	void run();
@@ -84,7 +84,9 @@ private:
 	void checkHungClients();
 	void setRealSpeed(uint32_t speed);
 
-	void welcomeClient(uint32_t number);
+	std::string getComputerPlayerName(uint32_t playernum);
+	bool havePlayerName(const std::string& name, int32_t ignoreplayer = -1);
+	void welcomeClient(uint32_t number, const std::string& playername);
 	void committedNetworkTime(int32_t time);
 	void recvClientTime(uint32_t number, int32_t time);
 
@@ -103,7 +105,7 @@ private:
 struct NetClientImpl;
 
 struct NetClient : public GameController, public GameSettingsProvider, private SyncCallback {
-	NetClient (IPaddress*);
+	NetClient (IPaddress*, const std::string& playername);
 	virtual ~NetClient ();
 
 	void run();

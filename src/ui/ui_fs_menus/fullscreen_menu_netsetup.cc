@@ -123,6 +123,12 @@ bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
 	return true;
 }
 
+std::string Fullscreen_Menu_NetSetup::get_playername()
+{
+	return playername.get_text();
+}
+
+
 void Fullscreen_Menu_NetSetup::game_selected (uint32_t) {
 	if (const LAN_Open_Game * const game = opengames.get_selected())
 		hostname.set_text(game->info.hostname);

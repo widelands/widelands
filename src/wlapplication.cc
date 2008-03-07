@@ -1255,7 +1255,7 @@ void WLApplication::mainmenu_multiplayer()
 
 	switch (ns.run()) {
 	case Fullscreen_Menu_NetSetup::HOSTGAME: {
-		NetHost netgame;
+		NetHost netgame(ns.get_playername());
 		netgame.run();
 		break;
 	}
@@ -1271,7 +1271,7 @@ void WLApplication::mainmenu_multiplayer()
 		peer.host=addr;
 		peer.port=port;
 
-		NetClient netgame(&peer);
+		NetClient netgame(&peer, ns.get_playername());
 		netgame.run();
 		break;
 	}
@@ -1306,7 +1306,7 @@ void WLApplication::mainmenu_multiplayer()
 		//  fallthrough
 	case Fullscreen_Menu_NetSetup::JOINGGZGAME: {
 		if (NetGGZ::ref().host()) {
-			NetHost netgame;
+			NetHost netgame(ns.get_playername());
 			netgame.run();
 		} else {
 			while (!NetGGZ::ref().ip())
@@ -1315,7 +1315,7 @@ void WLApplication::mainmenu_multiplayer()
 			IPaddress peer;
 			SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
 
-			NetClient netgame(&peer);
+			NetClient netgame(&peer, ns.get_playername());
 			netgame.run();
 		}
 		break;
