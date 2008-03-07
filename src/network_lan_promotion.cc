@@ -45,15 +45,15 @@ LAN_Base::LAN_Base ()
 	struct ifreq ifr;
 
 	for (int32_t i = 0; ifnames[i].if_index; ++i) {
-	strncpy (ifr.ifr_name, ifnames[i].if_name, IFNAMSIZ);
-	if (ioctl(sock, SIOCGIFFLAGS, &ifr) < 0)
-		continue;
+		strncpy (ifr.ifr_name, ifnames[i].if_name, IFNAMSIZ);
+		if (ioctl(sock, SIOCGIFFLAGS, &ifr) < 0)
+			continue;
 
-	if (!(ifr.ifr_flags & IFF_BROADCAST))
-		continue;
+		if (!(ifr.ifr_flags & IFF_BROADCAST))
+			continue;
 
-	if (ioctl(sock, SIOCGIFBRDADDR, &ifr) < 0)
-		continue;
+		if (ioctl(sock, SIOCGIFBRDADDR, &ifr) < 0)
+			continue;
 
 		broadcast_addresses.push_back
 			(reinterpret_cast<sockaddr_in *>(&ifr.ifr_broadaddr)
@@ -178,16 +178,16 @@ void LAN_Game_Promoter::run ()
 	}
 
 	while (avail()) {
-	char magic[8];
-	sockaddr_in addr;
+		char magic[8];
+		sockaddr_in addr;
 
-	if (recv(magic, 8, &addr) < 8)
-		continue;
+		if (recv(magic, 8, &addr) < 8)
+			continue;
 
-	printf ("Received %s packet\n", magic);
+		printf ("Received %s packet\n", magic);
 
-	if (!strncmp(magic, "QUERY", 6) && magic[6]==LAN_PROMOTION_PROTOCOL_VERSION)
-		send (&gameinfo, sizeof(gameinfo), &addr);
+		if (!strncmp(magic, "QUERY", 6) && magic[6]==LAN_PROMOTION_PROTOCOL_VERSION)
+			send (&gameinfo, sizeof(gameinfo), &addr);
 	}
 }
 
@@ -244,13 +244,14 @@ void LAN_Game_Finder::run ()
 
 		std::list<LAN_Open_Game *>::iterator i;
 		// if the game already is in the list, update the information
-		for (i = opengames.begin(); i != opengames.end(); ++i)
+		for (i = opengames.begin(); i != opengames.end(); ++i) {
 			if ((*i)->address == addr.sin_addr.s_addr) {
 				(*i)->info=info;
 
 				callback (GameUpdated, *i, userdata);
 				break;
 			}
+		}
 
 		//  otherwise just append it to the list
 		if (i==opengames.end()) {
