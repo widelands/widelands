@@ -129,6 +129,7 @@ private:
 		const TTF_Font * f;
 		RGBColor fg;
 		RGBColor bg;
+		int32_t caret;
 		uint32_t      w;
 		uint32_t      h;
 
@@ -137,7 +138,8 @@ private:
 				str == who.str &&
 				f   == who.f   &&
 				fg  == who.fg  &&
-				bg  == who.bg;
+				bg  == who.bg &&
+				caret == who.caret;
 		}
 	};
 

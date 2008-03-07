@@ -100,7 +100,7 @@ void Font_Handler::draw_string
 	//Fontrender takes care of caching
 	if (widget_cache == Widget_Cache_None) {
 		// look if text is cached
-		_Cache_Infos  ci = {0, text, &font, fg, bg, 0, 0};
+		_Cache_Infos  ci = {0, text, &font, fg, bg, caret, 0, 0};
 
 		std::list<_Cache_Infos>::iterator i=find(m_cache.begin(), m_cache.end(), ci);
 
