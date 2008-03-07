@@ -179,7 +179,7 @@ NetHost::~NetHost ()
 {
 	clearComputerPlayers();
 
-	while(d->clients.size() > 0) {
+	while (d->clients.size() > 0) {
 		disconnectClient(0, _("Server has left the game."));
 		reaper();
 	}
@@ -268,7 +268,7 @@ void NetHost::run()
 		clearComputerPlayers();
 		d->game = 0;
 
-		while(d->clients.size() > 0) {
+		while (d->clients.size() > 0) {
 			disconnectClient(0, _("Server has crashed and performed an emergency save."));
 			reaper();
 		}
@@ -837,9 +837,10 @@ void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 				(_("Game is running already, but client has not connected fully"));
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
-				(_("First command sent by client is %u instead of HELLO. "
-					"Most likely the client is running an incompatible version."),
-					cmd);
+				(_
+				 ("First command sent by client is %u instead of HELLO. "
+				  "Most likely the client is running an incompatible version."),
+				 cmd);
 		uint8_t version = r.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
 			throw DisconnectException(_("Server uses a different protocol version."));
@@ -879,7 +880,7 @@ void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 		Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
 		log
 			("[Host] client %i (%i) sent player command for %i, time = %i\n",
-			i, client.playernum, plcmd->get_sender(), time);
+			 i, client.playernum, plcmd->get_sender(), time);
 		recvClientTime(i, time);
 		if (plcmd->get_sender() != client.playernum+1)
 			throw DisconnectException

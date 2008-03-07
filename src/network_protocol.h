@@ -219,13 +219,13 @@ enum {
 	NETCMD_WAIT = 23,
 
 	/**
-	 * Sent by the host to request an MD5 synchronization hash. Payload is
+	 * Sent by the host to request an MD5 synchronization hash. Payload is:
 	 * \li Signed32: game time at which the hash must be taken
 	 *
 	 * The client must reply with a \ref NETCMD_SYNCREPORT command as soon
 	 * as the given game time has been reached on the client.
 	 *
-	 * \see Game::get_sync_hash()
+	 * \see Widelands::Game::get_sync_hash
 	 */
 	NETCMD_SYNCREQUEST = 25,
 
