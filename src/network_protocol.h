@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 2,
+	NETWORK_PROTOCOL_VERSION = 3,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -127,6 +127,25 @@ enum {
 	 *
 	 */
 	NETCMD_PLAYERCOMMAND = 24,
+
+	/**
+	 * Bidirectional command: Terminate the connection with a given reason.
+	 * Payload is:
+	 * \li String: reason for disconnect
+	 *
+	 * Both host and client can send this command, followed by immediately
+	 * closing the connection. The receiver of this command should just close
+	 * the connection.
+	 *
+	 * Note that either party is allowed to close the connection without
+	 * sending a \ref NETCMD_DISCONNECT command first (in any case, this can
+	 * happen when the program crashes or network connection is lost).
+	 *
+	 * \note If you want to change the payload of this command, change it only
+	 * by appending new items. The reason is that this is the only command
+	 * that can be sent by the server even when the protocol versions differ.
+	 */
+	NETCMD_DISCONNECT = 27,
 
 	// Server->Client messages
 	/**

@@ -20,6 +20,8 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+#include <exception>
+
 #include "cmd_queue.h"
 #include "widelands_streamread.h"
 #include "widelands_streamwrite.h"
@@ -76,7 +78,7 @@ public:
 	void think(uint32_t speed);
 	int32_t time() const;
 	int32_t networktime() const;
-	bool recv(int32_t ntime);
+	void recv(int32_t ntime);
 
 private:
 	int32_t m_networktime;
@@ -139,6 +141,25 @@ private:
 	friend class RecvPacket;
 	std::vector<uint8_t> queue;
 	size_t index;
+};
+
+
+/**
+ * This exception is used internally during protocol handling to indicate
+ * that the connection should be terminated with a reasonable error message.
+ *
+ * If the network handler catches a different exception from std::exception,
+ * it assumes that it is due to malformed data sent by the server.
+ */
+struct DisconnectException : public std::exception {
+	explicit DisconnectException
+		(const char * fmt, ...)
+		throw () PRINTF_FORMAT(2, 3);
+	virtual ~DisconnectException() throw ();
+
+	virtual const char * what() const throw ();
+private:
+	std::string m_what;
 };
 
 #endif

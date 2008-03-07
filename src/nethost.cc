@@ -179,14 +179,16 @@ NetHost::~NetHost ()
 {
 	clearComputerPlayers();
 
+	while(d->clients.size() > 0) {
+		disconnectClient(0, _("Server has left the game."));
+		reaper();
+	}
+
 	SDLNet_FreeSocketSet (d->sockset);
 
 	// close all open sockets
 	if (d->svsock != 0)
 		SDLNet_TCP_Close (d->svsock);
-
-	for (uint32_t i = 0; i < d->clients.size(); ++i)
-		SDLNet_TCP_Close (d->clients[i].sock);
 
 	delete d;
 	d = 0;
@@ -226,10 +228,8 @@ void NetHost::run()
 		return;
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
-		if (d->clients[i].playernum == -1) {
-			log("[Host]: say goodbye to client %i, game is starting without him\n", i);
-			disconnectClient(i);
-		}
+		if (d->clients[i].playernum == -1)
+			disconnectClient(i, _("The game has started just after you tried to connect."));
 	}
 
 	SendPacket s;
@@ -267,6 +267,11 @@ void NetHost::run()
 		WLApplication::emergency_save(game);
 		clearComputerPlayers();
 		d->game = 0;
+
+		while(d->clients.size() > 0) {
+			disconnectClient(0, _("Server has crashed and performed an emergency save."));
+			reaper();
+		}
 		throw;
 	}
 	d->game = 0;
@@ -354,7 +359,7 @@ void NetHost::setMap(const std::string& mapname, const std::string& mapfilename,
 
 	while (oldplayers > maxplayers) {
 		oldplayers--;
-		disconnectPlayer(oldplayers);
+		disconnectPlayer(oldplayers, _("Host has changed to a map that supports fewer players."));
 	}
 
 	d->settings.players.resize(maxplayers);
@@ -404,7 +409,7 @@ void NetHost::setPlayerState(uint8_t number, PlayerSettings::State state)
 	broadcast(s);
 
 	if (player.state != PlayerSettings::stateHuman)
-		disconnectPlayer(number);
+		disconnectPlayer(number, _("You were kicked by the host."));
 }
 
 
@@ -527,8 +532,7 @@ void NetHost::welcomeClient(uint32_t number, const std::string& playername)
 			break;
 
 	if (playernum >= d->settings.players.size()) {
-		log("[Host]: client %u: no open player slot\n", number);
-		disconnectClient(number);
+		disconnectClient(number, _("There are no open player slots left."));
 		return;
 	}
 
@@ -598,24 +602,13 @@ void NetHost::recvClientTime(uint32_t number, int32_t time)
 
 	Client& client = d->clients[number];
 
-	if (time - client.time < 0) {
-		log("[Host]: Client %i time running backwards\n", number);
-		disconnectClient(number);
-		return;
-	}
-	if (d->committed_networktime - time < 0) {
-		log("[Host]: Client %i rushes past committed networktime\n", number);
-		disconnectClient(number);
-		return;
-	}
+	if (time - client.time < 0)
+		throw DisconnectException(_("Client reports time to host that is running backwards."));
+	if (d->committed_networktime - time < 0)
+		throw DisconnectException(_("Client simulates beyond the game time allowed by the host."));
 	if (d->syncreport_pending && !client.syncreport_arrived) {
-		if (time - d->syncreport_time > 0) {
-			log
-				("[Host]: client %i tries to skip syncreport (time %i, syncreport at %i)\n",
-				 number, time, d->syncreport_time);
-			disconnectClient(number);
-			return;
-		}
+		if (time - d->syncreport_time > 0)
+			throw DisconnectException(_("Client did not submit sync report in time."));
 	}
 
 	client.time = time;
@@ -745,7 +738,7 @@ void NetHost::checkSyncReports()
 				 "I have:     %s\n"
 				 "Client has: %s\n",
 				 i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
-			disconnectClient(i);
+			disconnectClient(i, _("Client and host have become desynchronized."));
 		}
 	}
 }
@@ -768,7 +761,7 @@ void NetHost::handle_network ()
 	if (d->promoter != 0)
 		d->promoter->run ();
 
-	// if we are in the game initiation phase, check for new connections
+	// Check for new connections.
 	while (d->svsock != 0 && (sock = SDLNet_TCP_Accept(d->svsock)) != 0) {
 		log("[Host] Received a connection request\n");
 
@@ -782,119 +775,35 @@ void NetHost::handle_network ()
 
 		// Now we wait for the client to say Hi in the right language,
 		// unless the game has already started
-		if (d->game) {
-			log("[Host]: client trying to connect, game is already running\n");
-			disconnectClient(d->clients.size()-1);
-		}
+		if (d->game)
+			disconnectClient(d->clients.size()-1, _("The game has already started."));
 	}
 
-	// check if we hear anything from our clients
+	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
 		for (size_t i = 0; i < d->clients.size(); ++i) {
-			while (SDLNet_SocketReady(d->clients[i].sock)) {
-				if (d->clients[i].deserializer.read(d->clients[i].sock))
-					continue;
+			try {
+				Client& client = d->clients[i];
 
-				// the network connection to this player has been closed
-				log("[Host] client %i has left\n", i);
-				disconnectClient(i);
-				break;
-			}
-		}
-	}
+				while (client.sock && SDLNet_SocketReady(client.sock)) {
+					if (!client.deserializer.read(client.sock)) {
+						disconnectClient(i, _("Connection to client lost."), false);
+						break;
+					}
 
-	// Now process client messages
-	for (size_t i = 0; i < d->clients.size(); ++i) {
-		Client& client = d->clients[i];
-		while (client.sock && client.deserializer.avail()) {
-			RecvPacket r(client.deserializer);
-			uint8_t cmd = r.Unsigned8();
-
-			if (client.playernum == -1) {
-				if (d->game) {
-					log("[Host]: client %i pre-connected but game is already running\n", i);
-					disconnectClient(i);
-					break;
+					// Handle all available packets immediately after each read,
+					// so that we don't miss any commands (especially a DISCONNECT...)
+					while (client.sock && client.deserializer.avail()) {
+						RecvPacket r(client.deserializer);
+						handle_packet(i, r);
+					}
 				}
-				if (cmd != NETCMD_HELLO) {
-					log("[Host]: client %i: HELLO expected instead of %u\n", i, cmd);
-					disconnectClient(i);
-					break;
-				}
-				uint8_t version = r.Unsigned8();
-				if (version != NETWORK_PROTOCOL_VERSION) {
-					log("[Host]: client %i: talks unsupported version %u\n", i, version);
-					disconnectClient(i);
-					break;
-				}
-
-				std::string playername = r.String();
-
-				welcomeClient(i, playername);
-				continue;
-			}
-
-			switch (cmd) {
-			case NETCMD_PONG:
-				log("[Host] client %i: got pong\n", i);
-				break;
-
-			case NETCMD_SETTING_CHANGETRIBE:
-				// Don't be harsh about packets of this type arriving
-				// out of order - the client might just have had bad luck with the timing.
-				if (!d->game) {
-					std::string tribe = r.String();
-					setPlayerTribe(client.playernum, tribe);
-				}
-				break;
-
-			case NETCMD_TIME:
-				if (!d->game) {
-					log("[Host] client %i: sent time while game not running\n", i);
-					disconnectClient(i);
-					break;
-				}
-				recvClientTime(i, r.Signed32());
-				break;
-
-			case NETCMD_PLAYERCOMMAND: {
-				if (!d->game) {
-					log("[Host] client %i: sent playercommand while game not running\n", i);
-					disconnectClient(i);
-					break;
-				}
-				int32_t time = r.Signed32();
-				Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-				log
-					("[Host] client %i (%i) sent player command for %i, time = %i\n",
-					 i, client.playernum, plcmd->get_sender(), time);
-				recvClientTime(i, time);
-				if (plcmd->get_sender() != client.playernum+1) {
-					log("[Host] client %i: trying to send playercommand for %i\n", i, plcmd->get_sender());
-					disconnectClient(i);
-					break;
-				}
-				sendPlayerCommand(plcmd);
-			} break;
-
-			case NETCMD_SYNCREPORT: {
-				if (!d->game || !d->syncreport_pending || client.syncreport_arrived) {
-					log("[Host] client %i: unexpected syncreport\n", i);
-					disconnectClient(i);
-					break;
-				}
-				int32_t time = r.Signed32();
-				r.Data(client.syncreport.data, 16);
-				client.syncreport_arrived = true;
-				recvClientTime(i, time);
-				checkSyncReports();
-				break;
-			}
-
-			default:
-				log("[Host] client %i: sent bad cmd %u\n", i, cmd);
-				disconnectClient(i);
-				break;
+			} catch (const DisconnectException& e) {
+				disconnectClient(i, e.what());
+			} catch (const std::exception& e) {
+				std::string reason = _("Client sent malformed commands: ");
+				reason += e.what();
+				disconnectClient(i, reason);
 			}
 		}
 	}
@@ -902,8 +811,104 @@ void NetHost::handle_network ()
 	reaper();
 }
 
-void NetHost::disconnectPlayer(uint8_t number)
+
+/**
+ * Handle a single received packet.
+ *
+ * The caller must catch exceptions and disconnect the client as appropriate.
+ *
+ * \param i the client number
+ * \param r the received packet
+ */
+void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 {
+	Client& client = d->clients[i];
+	uint8_t cmd = r.Unsigned8();
+
+	if (cmd == NETCMD_DISCONNECT) {
+		std::string reason = r.String();
+		disconnectClient(i, reason, false);
+		return;
+	}
+
+	if (client.playernum == -1) {
+		if (d->game)
+			throw DisconnectException
+				(_("Game is running already, but client has not connected fully"));
+		if (cmd != NETCMD_HELLO)
+			throw DisconnectException
+				(_("First command sent by client is %u instead of HELLO. "
+					"Most likely the client is running an incompatible version."),
+					cmd);
+		uint8_t version = r.Unsigned8();
+		if (version != NETWORK_PROTOCOL_VERSION)
+			throw DisconnectException(_("Server uses a different protocol version."));
+
+		std::string playername = r.String();
+
+		welcomeClient(i, playername);
+		return;
+	}
+
+	switch (cmd) {
+	case NETCMD_PONG:
+		log("[Host] client %i: got pong\n", i);
+		break;
+
+	case NETCMD_SETTING_CHANGETRIBE:
+		// Don't be harsh about packets of this type arriving
+		// out of order - the client might just have had bad luck with the timing.
+		if (!d->game) {
+			std::string tribe = r.String();
+			setPlayerTribe(client.playernum, tribe);
+		}
+		break;
+
+	case NETCMD_TIME:
+		if (!d->game)
+			throw DisconnectException
+				(_("Client sent TIME command even though game is not running."));
+		recvClientTime(i, r.Signed32());
+		break;
+
+	case NETCMD_PLAYERCOMMAND: {
+		if (!d->game)
+			throw DisconnectException
+				(_("Client sent PLAYERCOMMAND command even though game is not running."));
+		int32_t time = r.Signed32();
+		Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
+		log
+			("[Host] client %i (%i) sent player command for %i, time = %i\n",
+			i, client.playernum, plcmd->get_sender(), time);
+		recvClientTime(i, time);
+		if (plcmd->get_sender() != client.playernum+1)
+			throw DisconnectException
+				(_("Client tries to sent a playercommand for a different player."));
+		sendPlayerCommand(plcmd);
+	} break;
+
+	case NETCMD_SYNCREPORT: {
+		if (!d->game || !d->syncreport_pending || client.syncreport_arrived)
+			throw DisconnectException
+				(_("Client sent unexpected synchronization report."));
+		int32_t time = r.Signed32();
+		r.Data(client.syncreport.data, 16);
+		client.syncreport_arrived = true;
+		recvClientTime(i, time);
+		checkSyncReports();
+		break;
+	}
+
+	default:
+		throw DisconnectException(_("Client sent unknown command number %u"), cmd);
+	}
+}
+
+
+void NetHost::disconnectPlayer(uint8_t number, const std::string& reason, bool sendreason)
+{
+	log("[Host]: disconnectPlayer(%u, %s)\n", number, reason.c_str());
+
 	bool needai = false;
 
 	for (uint32_t index = 0; index < d->clients.size(); ++index) {
@@ -912,7 +917,7 @@ void NetHost::disconnectPlayer(uint8_t number)
 			continue;
 
 		client.playernum = -1;
-		disconnectClient(index);
+		disconnectClient(index, reason, sendreason);
 
 		setPlayerState(number, PlayerSettings::stateOpen);
 		needai = true;
@@ -922,15 +927,27 @@ void NetHost::disconnectPlayer(uint8_t number)
 		d->computerplayers.push_back(new Computer_Player(*d->game, number+1));
 }
 
-void NetHost::disconnectClient(uint32_t number)
+void NetHost::disconnectClient(uint32_t number, const std::string& reason,  bool sendreason)
 {
 	assert(number < d->clients.size());
 
 	Client& client = d->clients[number];
-	if (client.playernum != -1)
-		disconnectPlayer(client.playernum);
+	if (client.playernum != -1) {
+		disconnectPlayer(client.playernum, reason, sendreason);
+		// disconnectPlayer calls us recursively
+		return;
+	}
+
+	log("[Host]: disconnectClient(%u, %s)\n", number, reason.c_str());
 
 	if (client.sock) {
+		if (sendreason) {
+			SendPacket s;
+			s.Unsigned8(NETCMD_DISCONNECT);
+			s.String(reason);
+			s.send(client.sock);
+		}
+
 		SDLNet_TCP_DelSocket (d->sockset, client.sock);
 		SDLNet_TCP_Close (client.sock);
 		client.sock = 0;
@@ -940,7 +957,13 @@ void NetHost::disconnectClient(uint32_t number)
 		checkHungClients();
 }
 
-// Reap (i.e. delete) all disconnected clients.
+/**
+ * The grim reaper. This finally erases disconnected clients from the clients
+ * array.
+ *
+ * Calls this when you're certain that nobody is holding any client indices or
+ * iterators, since this function will invalidate them.
+ */
 void NetHost::reaper()
 {
 	uint32_t index = 0;

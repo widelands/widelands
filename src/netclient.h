@@ -62,10 +62,11 @@ struct NetClient : public GameController, public GameSettingsProvider, private S
 private:
 	void syncreport();
 
+	void handle_packet(RecvPacket& packet);
 	void handle_network ();
 	void sendTime();
 	void recvOnePlayer(uint8_t number, Widelands::StreamRead& packet);
-	void disconnect ();
+	void disconnect (const std::string& reason, bool sendreason = true, bool showmsg = true);
 
 	NetClientImpl* d;
 };

@@ -60,6 +60,7 @@ private:
 	void clearComputerPlayers();
 	void initComputerPlayers();
 
+	void handle_packet(uint32_t i, RecvPacket& r);
 	void handle_network ();
 
 	void checkHungClients();
@@ -76,8 +77,8 @@ private:
 	void writeSettingPlayer(SendPacket& packet, uint8_t number);
 	void writeSettingAllPlayers(SendPacket& packet);
 
-	void disconnectPlayer(uint8_t number);
-	void disconnectClient(uint32_t number);
+	void disconnectPlayer(uint8_t number, const std::string& reason, bool sendreason = true);
+	void disconnectClient(uint32_t number, const std::string& reason, bool sendreason = true);
 	void reaper();
 
 	NetHostImpl* d;

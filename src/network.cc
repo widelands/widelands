@@ -103,12 +103,10 @@ int32_t NetworkTime::networktime() const
 	return m_networktime;
 }
 
-bool NetworkTime::recv(int32_t ntime)
+void NetworkTime::recv(int32_t ntime)
 {
-	if (ntime - m_networktime < 0) {
-		log("NetworkTime: running backwards\n");
-		return false;
-	}
+	if (ntime - m_networktime < 0)
+		throw wexception("NetworkTime: Time appears to be running backwards.");
 
 	uint32_t behind = m_networktime - m_time;
 
@@ -124,8 +122,6 @@ bool NetworkTime::recv(int32_t ntime)
 #endif
 
 	m_networktime = ntime;
-
-	return true;
 }
 
 
@@ -232,3 +228,23 @@ bool Deserializer::avail() const
 }
 
 
+DisconnectException::DisconnectException(const char * fmt, ...) throw ()
+{
+	char buffer[512];
+	{
+		va_list va;
+		va_start(va, fmt);
+		vsnprintf(buffer, sizeof(buffer), fmt, va);
+		va_end(va);
+	}
+	m_what = buffer;
+}
+
+DisconnectException::~DisconnectException() throw ()
+{
+}
+
+const char *DisconnectException::what() const throw ()
+{
+	return m_what.c_str();
+}
