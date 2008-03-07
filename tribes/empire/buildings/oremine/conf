@@ -33,12 +33,13 @@ wood=2
 
 [idle]
 pics=oremine_i_??.png
-hotspot=66 76
+hotspot=49 49
 
 [working]
-pics=oremine_i_??.png
-hotspot=66 76
+pics=oremine_w_??.png
+hotspot=49 49
+fps=10
 
 [build]
 pics=oremine_i_??.png
-hotspot=66 76
+hotspot=49 49

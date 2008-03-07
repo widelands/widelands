@@ -33,12 +33,13 @@ wood=2
 
 [idle]
 pics=deep_coalmine_i_??.png
-hotspot=66 76
+hotspot=49 62
 
 [working]
-pics=deep_coalmine_i_??.png
-hotspot=66 76
+pics=deep_coalmine_w_??.png
+hotspot=49 62
+fps=10
 
 [build]
 pics=deep_coalmine_i_??.png
-hotspot=66 76
+hotspot=49 62
