@@ -96,7 +96,9 @@ template<typename Entry> struct Table {
 	Entry_Record * find(Entry) const throw ();
 
 	void select(uint32_t);
-	struct No_Selection {};
+	struct No_Selection : public std::exception {
+		const char* what() const throw() {return "UI::Table<Entry>: No selection";}
+	};
 	Entry_Record & get_selected_record() const;
 	Entry get_selected() const;
 
@@ -188,7 +190,9 @@ public:
 	Entry_Record * find(const void * entry) const throw ();
 
 	void select(uint32_t);
-	struct No_Selection {};
+	struct No_Selection : public std::exception {
+		const char* what() const throw() {return "UI::Table<void*>: No selection";}
+	};
 	Entry_Record & get_selected_record() const {
 		if (m_selection == no_selection_index()) throw No_Selection();
 		return *m_entry_records[m_selection];
@@ -197,7 +201,7 @@ public:
 		if (m_selection == no_selection_index()) throw No_Selection();
 		remove(m_selection);
 	}
-	void * get_selected() const throw (No_Selection)
+	void * get_selected() const
 	{return get_selected_record().entry();};
 
 	uint32_t get_lineheight() const throw () {return m_lineheight + 2;}
