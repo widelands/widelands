@@ -1084,7 +1084,13 @@ void Worker::transfer_update(Game * game, State * state) {
 	Map & map = game->map();
 	PlayerImmovable * location = get_location(game);
 
-	assert(location); // 'location' signal expected otherwise
+	// We expect to always have a location at this point,
+	// but this assumption may fail when loading a corrupted savegame.
+	if (!location) {
+		set_signal("location");
+		pop_task();
+		return;
+	}
 
 	// The request is no longer valid, the task has failed
 	if (!state->transfer) {

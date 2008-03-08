@@ -101,8 +101,12 @@ throw
 
 					Transfer * trans = 0;
 					if (fr.Unsigned8()) { //  look if we had an transfer
-						trans = bob.m_stack[0].transfer;
-						assert(trans);
+						// stack should be non-empty at this point,
+						// but savegames can always be broken/corrupted...
+						if (bob.m_stack.size()) {
+							trans = bob.m_stack[0].transfer;
+							assert(trans);
+						}
 					}
 
 					bob.m_actid = fr.Unsigned32();
