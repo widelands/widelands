@@ -303,10 +303,22 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	char buffer[1024];
 	size_t totallen = 0;
 	unzOpenCurrentFile(m_unzipfile);
-	while
-		(const size_t len =
-		 unzReadCurrentFile(m_unzipfile, buffer, sizeof(buffer)))
+	for (;;) {
+		const int32_t len =  unzReadCurrentFile(m_unzipfile, buffer, sizeof(buffer));
+		if (len == 0)
+			break;
+		if (len < 0) {
+			char buf[200];
+			snprintf(buf, sizeof(buf), "read error %i", len);
+			throw ZipOperation_error
+				("ZipFilesystem::Load",
+				 fname,
+				 m_zipfilename,
+				 buf);
+		}
+
 		totallen += len;
+	}
 	unzCloseCurrentFile(m_unzipfile);
 
 	void * const result = malloc(totallen);
