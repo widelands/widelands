@@ -10,5 +10,5 @@ picture=fire_burn_00.png
 
 [burn]
 pics=fire_burn_??.png
-fps=5
-hotspot=22 130
+fps=10
+hotspot=40 57
