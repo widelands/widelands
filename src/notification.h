@@ -20,6 +20,11 @@
 #ifndef NOTIFICATION_H
 #define NOTIFICATION_H
 
+#include <algorithm>
+#include <vector>
+
+#include "widelands_geometry.h"
+
 namespace Widelands {
 
 class PlayerImmovable;
