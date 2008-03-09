@@ -67,6 +67,9 @@ struct NetClientImpl {
 	/// The real target speed, in milliseconds per second.
 	/// This is always set by the server
 	uint32_t realspeed;
+
+	/// Backlog of chat messages
+	std::vector<ChatMessage> chatmessages;
 };
 
 NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
@@ -124,7 +127,9 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 
-		game.set_iabase(new Interactive_Player(game, d->playernum+1));
+		Interactive_Player* ipl = new Interactive_Player(game, d->playernum+1);
+		game.set_iabase(ipl);
+		ipl->set_chat_provider(this);
 		game.init(loaderUI, d->settings);
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
@@ -258,6 +263,19 @@ void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 		d->localplayername = player.name;
 }
 
+void NetClient::send(const std::string& msg)
+{
+	SendPacket s;
+	s.Unsigned8(NETCMD_CHAT);
+	s.String(msg);
+	s.send(d->sock);
+}
+
+const std::vector<ChatMessage>& NetClient::getMessages() const
+{
+	return d->chatmessages;
+}
+
 void NetClient::sendTime()
 {
 	assert(d->game);
@@ -383,6 +401,15 @@ void NetClient::handle_packet(RecvPacket& packet)
 		int32_t time = packet.Signed32();
 		d->time.recv(time);
 		d->game->enqueue_command(new Cmd_NetCheckSync(time, this));
+		break;
+	}
+	case NETCMD_CHAT: {
+		ChatMessage c;
+		c.time = WLApplication::get()->get_time();
+		c.sender = packet.String();
+		c.msg = packet.String();
+		d->chatmessages.push_back(c);
+		ChatProvider::send(c); // NoteSender<ChatMessage>
 		break;
 	}
 	default:

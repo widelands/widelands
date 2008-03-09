@@ -24,6 +24,7 @@
 #include "gamesettings.h"
 #include "network.h"
 
+struct ChatMessage;
 struct NetHostImpl;
 
 /**
@@ -38,6 +39,7 @@ struct NetHost : public GameController, private SyncCallback {
 	virtual ~NetHost ();
 
 	void run();
+	const std::string& getLocalPlayername() const;
 
 	// GameController interface
 	void think();
@@ -52,7 +54,11 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerState(uint8_t number, PlayerSettings::State state);
 	void setPlayerTribe(uint8_t number, const std::string& tribe);
 
+	// Chat-related stuff
+	void send(const ChatMessage& msg);
+
 private:
+	void sendSystemChat(const char* fmt, ...) PRINTF_FORMAT(2,3);
 	void requestSyncReports();
 	void checkSyncReports();
 	void syncreport();

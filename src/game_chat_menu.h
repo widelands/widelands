@@ -20,6 +20,8 @@
 #ifndef GAME_CHAT_MENU_H
 #define GAME_CHAT_MENU_H
 
+#include "chat.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_multilineeditbox.h"
@@ -28,25 +30,33 @@
 #include "ui_unique_window.h"
 
 class Interactive_Player;
-class NetGame;
 
-// The GameChatMenu is a rather dumb window with lots of buttons
-struct GameChatMenu : public UI::UniqueWindow {
-	GameChatMenu(Interactive_Player &, UI::UniqueWindow::Registry &, NetGame *);
 
-	void think();
+/**
+ * Provides a window with chat message scrollback and the possibility to
+ * enter and send chat messages.
+ */
+struct GameChatMenu : public UI::UniqueWindow, public Widelands::NoteReceiver<ChatMessage> {
+	GameChatMenu(Interactive_Player &, UI::UniqueWindow::Registry &, ChatProvider&);
+
+	/**
+	 * Configure the menu so that it is useful for writing chat messages.
+	 * Put the focus on the message entry field, close the menu automatically
+	 * when return is pressed, etc.
+	 */
+	void enter_chat_message();
+
+	void receive(const ChatMessage& msg);
 
 private:
-	Interactive_Player & m_player;
-	NetGame            * m_netgame;
-	UI::Multiline_Textarea chatbox;
-	UI::Multiline_Editbox  editbox;
-	UI::Button<GameChatMenu> send;
-	UI::Textarea           show_as_overlays_label;
-	UI::Checkbox           show_as_overlays;
-
+	void recalculate();
 	void clicked_send();
-	void changed_show_as_overlays(bool);
+
+	ChatProvider & m_chat;
+	UI::Multiline_Textarea chatbox;
+	UI::Multiline_Editbox editbox;
+	UI::Button<GameChatMenu> send;
+	bool close_on_send;
 };
 
 #endif

@@ -22,10 +22,8 @@
 
 #include "game.h"
 #include "interactive_base.h"
-#include "network.h" // For chat
 
 #include "ui_button.h"
-#include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 
 #include <SDL_keyboard.h>
@@ -36,6 +34,9 @@ namespace UI {
 struct Multiline_Textarea;
 struct Textarea;
 };
+
+class ChatProvider;
+struct Interactive_PlayerImpl;
 
 /**
  * This is the interactive player. this one is
@@ -95,25 +96,15 @@ struct Interactive_Player : public Interactive_Base {
 	void postload();
 
 	// Chat messages
-	bool show_chat_overlay() {return m_do_chat_overlays;}
-	void set_show_chat_overlay(bool t) {m_do_chat_overlays = t;}
-	const std::vector< Chat_Message >* get_chatmsges() {
-		return &m_chatmsges;
-	}
+	void set_chat_provider(ChatProvider* chat);
+	ChatProvider* get_chat_provider();
 
 private:
-	struct Overlay_Chat_Messages {
-		Chat_Message msg;
-		uint32_t starttime;
-	};
-
-private:
+	Interactive_PlayerImpl* m;
 	Widelands::Game        * m_game;
 	Widelands::Player_Number m_player_number;
 
 	UI::Textarea                   m_label_speed;
-	UI::Multiline_Textarea         m_chat_messages;
-	UI::Textarea                   m_type_message;
 	UI::Button<Interactive_Player> m_toggle_chat;
 	UI::Button<Interactive_Player> m_toggle_options_menu;
 	UI::Button<Interactive_Player> m_toggle_main_menu;
@@ -131,13 +122,6 @@ private:
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_encyclopedia;
 	Game_Main_Menu_Windows  m_mainm_windows;
-
-	// Chat message stack
-	std::vector< Chat_Message > m_chatmsges;
-	std::vector< Overlay_Chat_Messages > m_show_chatmsg;
-	bool m_do_chat_overlays;
-	bool m_is_typing_msg; // Is the user typing a chat message
-	std::string m_typed_message;
 };
 
 

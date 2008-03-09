@@ -19,6 +19,7 @@
 
 #include "nethost.h"
 
+#include "chat.h"
 #include "computer_player.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
@@ -97,6 +98,31 @@ public:
 	}
 };
 
+class HostChatProvider : public ChatProvider {
+	NetHost* h;
+	std::vector<ChatMessage> messages;
+
+public:
+	HostChatProvider(NetHost* _h) : h(_h) {}
+
+	void send(const std::string& msg) {
+		ChatMessage c;
+		c.time = WLApplication::get()->get_time();
+		c.sender = h->getLocalPlayername();
+		c.msg = msg;
+		h->send(c);
+	}
+
+	const std::vector<ChatMessage>& getMessages() const {
+		return messages;
+	}
+
+	void receive(const ChatMessage& msg) {
+		messages.push_back(msg);
+		ChatProvider::send(msg);
+	}
+};
+
 struct Client {
 	TCPsocket sock;
 	Deserializer deserializer;
@@ -109,6 +135,7 @@ struct Client {
 struct NetHostImpl {
 	GameSettings settings;
 	std::string localplayername;
+	HostChatProvider chat;
 
 	LAN_Game_Promoter * promoter;
 	TCPsocket svsock;
@@ -149,10 +176,15 @@ struct NetHostImpl {
 	int32_t syncreport_time;
 	md5_checksum syncreport;
 	bool syncreport_arrived;
+
+	NetHostImpl(NetHost* h)
+		: chat(h)
+	{
+	}
 };
 
 NetHost::NetHost (const std::string& playername)
-: d(new NetHostImpl)
+: d(new NetHostImpl(this))
 {
 	log("[Host] starting up.\n");
 
@@ -192,6 +224,11 @@ NetHost::~NetHost ()
 
 	delete d;
 	d = 0;
+}
+
+const std::string& NetHost::getLocalPlayername() const
+{
+	return d->localplayername;
 }
 
 void NetHost::clearComputerPlayers()
@@ -245,7 +282,9 @@ void NetHost::run()
 
 		d->game = &game;
 		game.set_game_controller(this);
-		game.set_iabase(new Interactive_Player(game, 1));
+		Interactive_Player* ipl = new Interactive_Player(game, 1);
+		ipl->set_chat_provider(&d->chat);
+		game.set_iabase(ipl);
 		game.init(loaderUI, d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
@@ -328,6 +367,43 @@ void NetHost::sendPlayerCommand(Widelands::PlayerCommand* pc)
 	d->game->enqueue_command(pc);
 
 	committedNetworkTime(d->committed_networktime+1);
+}
+
+/**
+ * All chat messages go through this function.
+ * The message is sent to clients as needed, and it is forwarded
+ * to our local \ref ChatProvider.
+ */
+void NetHost::send(const ChatMessage& msg)
+{
+	if (msg.msg.size() == 0)
+		return;
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_CHAT);
+	s.String(msg.sender);
+	s.String(msg.msg);
+	broadcast(s);
+
+	d->chat.receive(msg);
+
+	log("[Host]: chat: %s\n", msg.toPrintable().c_str());
+}
+
+void NetHost::sendSystemChat(const char* fmt, ...)
+{
+	char buffer[500];
+	va_list va;
+
+	va_start(va, fmt);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
+	va_end(va);
+
+	ChatMessage c;
+	c.time = WLApplication::get()->get_time();
+	c.msg = buffer;
+	// c.sender remains empty to indicate a system message
+	send(c);
 }
 
 int32_t NetHost::getFrametime()
@@ -583,6 +659,8 @@ void NetHost::welcomeClient(uint32_t number, const std::string& playername)
 	s.Unsigned8(NETCMD_SETTING_ALLPLAYERS);
 	writeSettingAllPlayers(s);
 	s.send(client.sock);
+
+	sendSystemChat("%s has joined the game", effective_name.c_str());
 }
 
 void NetHost::committedNetworkTime(int32_t time)
@@ -900,6 +978,15 @@ void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 		break;
 	}
 
+	case NETCMD_CHAT: {
+		ChatMessage c;
+		c.time = WLApplication::get()->get_time();
+		c.sender = d->settings.players[client.playernum].name;
+		c.msg = r.String();
+		send(c);
+		break;
+	}
+
 	default:
 		throw DisconnectException(_("Client sent unknown command number %u"), cmd);
 	}
@@ -919,6 +1006,11 @@ void NetHost::disconnectPlayer(uint8_t number, const std::string& reason, bool s
 
 		client.playernum = -1;
 		disconnectClient(index, reason, sendreason);
+
+		sendSystemChat
+			("%s has left the game (%s)",
+			 d->settings.players[number].name.c_str(),
+			 reason.c_str());
 
 		setPlayerState(number, PlayerSettings::stateOpen);
 		needai = true;

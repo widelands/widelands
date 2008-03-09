@@ -36,7 +36,7 @@
 #include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
-#include "network.h"
+#include "chat.h"
 #include "player.h"
 #include "productionsite.h"
 #include "overlay_manager.h"
@@ -55,7 +55,88 @@
 using Widelands::Building;
 using Widelands::Map;
 
+
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
+
+class ChatDisplay : public UI::Panel {
+public:
+	ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
+
+	void setChatProvider(ChatProvider* chat);
+	virtual void draw(RenderTarget* dst);
+
+private:
+	ChatProvider* m_chat;
+};
+
+ChatDisplay::ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h)
+: UI::Panel(parent, x, y, w, h)
+{
+	m_chat = 0;
+}
+
+void ChatDisplay::setChatProvider(ChatProvider* chat)
+{
+	m_chat = chat;
+}
+
+struct Displayed {
+	std::string text;
+	int32_t h;
+};
+
+void ChatDisplay::draw(RenderTarget* dst)
+{
+	if (!m_chat)
+		return;
+
+	int32_t now = WLApplication::get()->get_time();
+
+	const std::vector<ChatMessage>& msgs = m_chat->getMessages();
+	std::vector<Displayed> displaylist;
+	uint32_t totalheight = 0;
+	uint32_t idx = msgs.size();
+
+	while(idx && now - msgs[idx-1].time <= CHAT_DISPLAY_TIME) {
+		int32_t w;
+
+		Displayed d = {msgs[idx-1].toPrintable(), 0};
+
+		g_fh->get_size(UI_FONT_SMALL, d.text, &w, &d.h, get_w());
+		if (d.h+static_cast<int32_t>(totalheight) > get_h())
+			break;
+
+		displaylist.push_back(d);
+		idx--;
+	}
+
+	uint32_t y = 0;
+
+	for
+		(std::vector<Displayed>::const_iterator it = displaylist.begin();
+		 it != displaylist.end();
+		 ++it)
+	{
+		g_fh->draw_string
+			(*dst,
+			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+			 Point(0, y),
+			 it->text,
+			 Align_Left);
+		y += it->h;
+	}
+}
+
+
+struct Interactive_PlayerImpl {
+	ChatProvider* chat;
+	ChatDisplay* chatDisplay;
+
+	Interactive_PlayerImpl()
+		: chat(0), chatDisplay(0)
+	{
+	}
+};
 
 
 // This function is the callback for recalculation of field overlays
@@ -76,13 +157,9 @@ Initialize
 ===============
 */
 Interactive_Player::Interactive_Player(Widelands::Game & g, uint8_t const plyn)
-: Interactive_Base(g), m_game(&g),
+: Interactive_Base(g), m(new Interactive_PlayerImpl), m_game(&g),
 
 m_label_speed(this, get_w(), 0, 0, 0, "", Align_TopRight),
-
-m_chat_messages(this, 10, 25, get_inner_w(), get_inner_h(), "", Align_TopLeft),
-m_type_message
-(this, 10, get_inner_h()-50, get_inner_w(), 50, "", Align_TopLeft),
 
 #define INIT_BUTTON(picture, callback, tooltip)                               \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
@@ -117,9 +194,7 @@ m_toggle_resources
 #endif
 
 m_toggle_help
-(INIT_BUTTON("menu_help",             toggle_help,         _("Ware help"))),
-
-m_do_chat_overlays(true), m_is_typing_msg(false)
+(INIT_BUTTON("menu_help",             toggle_help,         _("Ware help")))
 {
 	m_toolbar.add(&m_toggle_chat,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
@@ -134,10 +209,18 @@ m_do_chat_overlays(true), m_is_typing_msg(false)
 
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::field_action);
+
+	m->chatDisplay = new ChatDisplay(this, 10, 25, get_w()-10, get_h()-25);
+	m_toggle_chat.set_visible(false);
+	m_toggle_chat.set_enabled(false);
 }
 
 
-Interactive_Player::~Interactive_Player() {}
+Interactive_Player::~Interactive_Player()
+{
+	delete m;
+	m = 0;
+}
 
 
 /*
@@ -156,48 +239,6 @@ void Interactive_Player::think()
 		else
 			strncpy (buffer, _("PAUSE"), sizeof(buffer));
 		m_label_speed.set_text(buffer);
-	}
-
-#if 0
-	// Check for chatmessages
-	if (NetGame * const ng = m_game->get_netgame())
-		if (ng->have_chat_message()) {
-			NetGame::Chat_Message t = ng->get_chat_message();
-			m_chatmsges.push_back(t);
-
-			Overlay_Chat_Messages ov;
-			ov.msg =  t;
-			ov.starttime = WLApplication::get()->get_time();
-			m_show_chatmsg.push_back(ov);
-		}
-#endif
-
-	// If we have chat messages to overlay, show them now
-	m_chat_messages.set_text("");
-	if (m_show_chatmsg.size() && m_do_chat_overlays) {
-		std::string str;
-		for (uint32_t i = 0; i < m_show_chatmsg.size(); ++i) {
-			const Chat_Message& t = m_show_chatmsg[i].msg;
-			str += get_game()->get_player(t.plrnum)->get_name();
-			str += ": ";
-			str += t.msg;
-			str += "\n";
-
-			if (WLApplication::get()->get_time() - m_show_chatmsg[i].starttime > CHAT_DISPLAY_TIME) {
-				m_show_chatmsg.erase(m_show_chatmsg.begin() + i);
-				--i;
-			}
-		}
-
-		m_chat_messages.set_text(str.c_str());
-	}
-
-	// Is the user typing a message?
-	m_type_message.set_text("");
-	if (m_is_typing_msg) {
-		std::string text = _("Message: ");
-		text += m_typed_message;
-		m_type_message.set_text(text.c_str());
 	}
 }
 
@@ -242,8 +283,8 @@ void Interactive_Player::postload()
 void Interactive_Player::toggle_chat        () {
 	if (m_chat.window)
 		delete m_chat.window;
-/*	else
-		new GameChatMenu(*this, m_chat, game().get_netgame());*/
+	else if (m->chat)
+		new GameChatMenu(*this, m_chat, *m->chat);
 }
 void Interactive_Player::toggle_options_menu() {
 	if (m_options.window)
@@ -299,67 +340,71 @@ void Interactive_Player::field_action()
 	}
 }
 
+
+void Interactive_Player::set_chat_provider(ChatProvider* chat)
+{
+	m->chat = chat;
+	m->chatDisplay->setChatProvider(chat);
+
+	m_toggle_chat.set_visible(chat);
+	m_toggle_chat.set_enabled(chat);
+}
+
+ChatProvider* Interactive_Player::get_chat_provider()
+{
+	return m->chat;
+}
+
+
 /**
  * Global in-game keypresses:
- * Space: toggles buildhelp
- * F5: reveal map
- *
- * \todo Typing a message should really be handled differently: by using the
- * normal UI event handling. Even worse, this approach accepts non-printing
- * characters as text and discounts some printing non-ASCII.
+ * \li Space: toggles buildhelp
+ * \li m: show minimap
+ * \li o: show objectives window
+ * \li c: toggle census
+ * \li s: toggle building statistics
+ * \li Home: go to starting position
+ * \li PageUp/PageDown: change game speed
+ * \li Return: write chat message
+ * \li F5: reveal map (in debug builds)
 */
 bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 {
-	bool handled = Interactive_Base::handle_key(down, code);
-
-	if (m_is_typing_msg && down) {
-		if (is_printable(code)) {
-			m_typed_message.append(1, code.sym);
-			return true;
-		}
-	}
-
 	switch (code.sym) {
 	case SDLK_SPACE:
 		if (down)
 			toggle_buildhelp();
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_m:
 		if (down)
 			toggle_minimap();
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_o:
 		if (down)
 			toggle_objectives();
-		handled = true;
-		break;
+		return true;
 
 	case SDLK_c:
 		if (down)
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_s:
 		if (down)
 			set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_f:
 		if (down)
 			g_gr->toggle_fullscreen();
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_HOME:
-		if (down) move_view_to(m_game->map().get_starting_pos(m_player_number));
-		handled=true;
-		break;
+		if (down)
+			move_view_to(m_game->map().get_starting_pos(m_player_number));
+		return true;
 
 	case SDLK_PAGEUP:
 		if (down) {
@@ -367,8 +412,7 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 
 			m_game->set_speed(speed + 1);
 		}
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_PAGEDOWN:
 		if (down) {
@@ -376,62 +420,32 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 
 			m_game->set_speed(std::max(0, speed-1));
 		}
-		handled=true;
-		break;
-
-	case SDLK_BACKSPACE:
-		if (down) {
-			if (m_is_typing_msg && m_typed_message.size()) {
-				m_typed_message.erase(m_typed_message.begin() + m_typed_message.size() - 1);
-				handled=true;
-			}
-		}
-		break;
-
-	case SDLK_ESCAPE:
-		if (down) {
-			if (m_is_typing_msg) {
-				m_is_typing_msg = false;
-				m_typed_message.clear();
-				handled=true;
-			}
-		}
-		break;
+		return true;
 
 	case SDLK_RETURN:
-		if (down) {
-			if (m_is_typing_msg && m_typed_message.size()) {
-#if 0
-				if (m_game->get_netgame()) {
-					NetGame::Chat_Message t;
+		if (!m->chat)
+			return false;
 
-					t.plrnum = get_player_number();
-					t.msg = m_typed_message;
-					m_game->get_netgame()->send_chat_message(t);
-				}
-#endif
-				m_typed_message.clear();
-				m_is_typing_msg = false;
-			} else {
-				// Begin writing a message
-				m_is_typing_msg = true;
-			}
+		if (down) {
+			if (!m_chat.window)
+				new GameChatMenu(*this, m_chat, *m->chat);
+
+			upcast(GameChatMenu, chatmenu, m_chat.window);
+			chatmenu->enter_chat_message();
 		}
-		handled=true;
+		return true;
 
 #ifdef DEBUG
 	// Only in debug builds
 	case SDLK_F5:
 		if (down)
 			player().set_see_all(not player().see_all());
-		handled=true;
+		return true;
 #endif
 
 	default:
-		handled=false;
+		return Interactive_Base::handle_key(down, code);
 	}
-
-	return handled;
 }
 
 /**

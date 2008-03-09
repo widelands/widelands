@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 3,
+	NETWORK_PROTOCOL_VERSION = 4,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -70,7 +70,6 @@ enum {
 enum {
 	NETCMD_UNUSED = 0,
 
-	// Bidirectional messages
 	/**
 	 * Initiate a connection.
 	 *
@@ -147,7 +146,6 @@ enum {
 	 */
 	NETCMD_DISCONNECT = 27,
 
-	// Server->Client messages
 	/**
 	 * During game setup, this command is sent by the host to advise clients
 	 * of a map change. Payload is:
@@ -229,7 +227,6 @@ enum {
 	 */
 	NETCMD_SYNCREQUEST = 25,
 
-	// Client->Server messages
 	/**
 	 * Reply to a \ref NETCMD_PING command, with no payload.
 	 */
@@ -256,7 +253,22 @@ enum {
 	 * It is solely the host's responsibility to act when desyncs are
 	 * detected.
 	 */
-	NETCMD_SYNCREPORT = 26
+	NETCMD_SYNCREPORT = 26,
+
+	/**
+	 * Sent by both host and client to exchange chat messages, though with
+	 * different payloads.
+	 *
+	 * The client sends this message to the host with the following payload:
+	 * \li String: the message
+	 * The host will echo the message if the client is allowed to send
+	 * chat messages.
+	 *
+	 * The host sends this message with the following payload:
+	 * \li String: sender (may be empty to indicate system messages)
+	 * \li String: the message
+	 */
+	NETCMD_CHAT = 28
 };
 
 #endif // NETWORK_PROTOCOL_H

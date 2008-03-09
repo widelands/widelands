@@ -20,6 +20,7 @@
 #ifndef NETCLIENT_H
 #define NETCLIENT_H
 
+#include "chat.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "network.h"
@@ -33,7 +34,12 @@ struct NetClientImpl;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct NetClient : public GameController, public GameSettingsProvider, private SyncCallback {
+struct NetClient
+	: public GameController,
+	  public GameSettingsProvider,
+	  private SyncCallback,
+	  public ChatProvider
+{
 	NetClient (IPaddress*, const std::string& playername);
 	virtual ~NetClient ();
 
@@ -58,6 +64,10 @@ struct NetClient : public GameController, public GameSettingsProvider, private S
 	virtual void setPlayerState(uint8_t number, PlayerSettings::State state);
 	virtual void nextPlayerState(uint8_t number);
 	virtual void setPlayerTribe(uint8_t number, const std::string& tribe);
+
+	// ChatProvider interface
+	void send(const std::string& msg);
+	const std::vector<ChatMessage>& getMessages() const;
 
 private:
 	void syncreport();

@@ -30,12 +30,6 @@
 
 struct Deserializer;
 
-struct Chat_Message {
-	uint32_t plrnum;
-	std::string msg;
-};
-
-
 struct SyncCallback {
 	virtual ~SyncCallback() {}
 	virtual void syncreport() = 0;
