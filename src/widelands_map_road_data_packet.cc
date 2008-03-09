@@ -65,7 +65,7 @@ throw (_wexception)
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("road: %s");
+		throw wexception("road: %s", e.what());
 	}
 }
 
