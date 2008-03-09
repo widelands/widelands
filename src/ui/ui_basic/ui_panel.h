@@ -138,6 +138,8 @@ struct Panel : public Object {
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
 
+	bool get_key_state(const SDLKey key) const;
+
 	void set_handle_mouse(bool yes);
 	bool get_handle_mouse() const {return (_flags & pf_handle_mouse) ? true : false;}
 	void grab_mouse(bool grab);

@@ -67,9 +67,7 @@ m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
 m_buildroad                   (false),
 m_road_build_player           (0),
 m_flag_to_connect             (Coords::Null()),
-m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
-m_shift_down                  (false),
-m_ctrl_down                   (false)
+m_toolbar                     (this, 0, 0, UI::Box::Horizontal)
 {
 	warpview.set(this, &Interactive_Player::mainview_move);
 
@@ -105,12 +103,6 @@ Interactive_Base::~Interactive_Base()
 {
 	if (m_buildroad)
 		abort_build_road();
-}
-
-bool Interactive_Base::handle_key(bool const down, SDL_keysym const code) {
-	if (code.sym == SDLK_LSHIFT || code.sym == SDLK_RSHIFT) m_shift_down = down;
-	if (code.sym == SDLK_LCTRL  || code.sym == SDLK_RCTRL)  m_ctrl_down  = down;
-	return false;
 }
 
 
@@ -519,7 +511,7 @@ void Interactive_Base::finish_build_road()
 		if (upcast(Game, game, &egbase())) {
 			game->send_player_build_road
 				(m_road_build_player, *new Widelands::Path(*m_buildroad));
-			if (m_ctrl_down) { //  place flags
+			if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) { //  place flags
 				Map const & map = game->map();
 				std::vector<Coords>         const &       c_vector =
 					m_buildroad->get_coords();
@@ -527,7 +519,7 @@ void Interactive_Base::finish_build_road()
 					c_vector.begin() + 2;
 				std::vector<Coords>::const_iterator const last     =
 					c_vector.end  () - 2;
-				if (m_shift_down) { //  start to end
+				if (get_key_state(SDLK_LSHIFT) || get_key_state(SDLK_RSHIFT)) { //  start to end
 					for
 						(std::vector<Coords>::const_iterator it = first;
 						 it <= last;

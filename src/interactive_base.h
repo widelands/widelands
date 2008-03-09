@@ -49,8 +49,6 @@ struct Interactive_Base : public Map_View {
 	Interactive_Base(Widelands::Editor_Game_Base &);
 	virtual ~Interactive_Base();
 
-	virtual bool handle_key(bool down, SDL_keysym);
-
 	Widelands::Editor_Game_Base const & egbase() const {return m_egbase;}
 	Widelands::Editor_Game_Base       & egbase()       {return m_egbase;}
 	virtual void reference_player_tribe(const int32_t, const void * const) {}
@@ -167,8 +165,6 @@ protected:
 	}
 	UI::Box           m_toolbar;
 	Widelands::Coords m_flag_to_connect;
-	bool m_shift_down;
-	bool m_ctrl_down;
 };
 
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, 2U

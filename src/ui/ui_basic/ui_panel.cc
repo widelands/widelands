@@ -771,7 +771,7 @@ bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
 /**
  * Pass the key event to the focused child.
  * If it doesn't process the key, we'll see if we can use the event.
-*/
+ */
 bool Panel::do_key(bool down, SDL_keysym code)
 {
 	if (_focus) {
@@ -781,6 +781,16 @@ bool Panel::do_key(bool down, SDL_keysym code)
 
 	return handle_key(down, code);
 }
+
+
+/**
+ * \return \c true if the given key is currently pressed, or \c false otherwise
+ */
+bool Panel::get_key_state(const SDLKey key) const
+{
+	return WLApplication::get()->get_key_state(key);
+}
+
 
 /**
  * Determine which panel is to receive a mouse event.

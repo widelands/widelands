@@ -389,7 +389,7 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 			break;
 
 		case SDLK_l:
-			if (m_ctrl_down)
+			if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL))
 				new Main_Menu_Load_Map (this);
 			handled=true;
 			break;
@@ -400,7 +400,7 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 			break;
 
 		case SDLK_s:
-			if (m_ctrl_down)
+			if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL))
 				new Main_Menu_Save_Map (this);
 			handled=true;
 			break;
