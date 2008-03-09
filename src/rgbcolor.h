@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Wide Lands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,29 @@ struct RGBColor : protected SDL_Color {
 
 	bool operator==(const RGBColor & other) const throw ()
 	{return r() == other.r() and g() == other.g() and b() == other.b();}
+};
+
+struct RGBAColor {
+	// Colors are very straightforward; there's no need to encapsulate them further.
+	Uint8 r;
+	Uint8 g;
+	Uint8 b;
+	Uint8 a;
+
+	RGBAColor() {}
+	RGBAColor(Uint8 _r, Uint8 _g, Uint8 _b, Uint8 _a) {
+		r = _r;
+		g = _g;
+		b = _b;
+		a = _a;
+	}
+
+	Uint32 map(const SDL_PixelFormat & fmt) const {
+		return SDL_MapRGBA(&const_cast<SDL_PixelFormat &>(fmt), r, g, b, a);
+	}
+	void set(const SDL_PixelFormat& fmt, Uint32 clr) {
+		SDL_GetRGBA(clr, const_cast<SDL_PixelFormat *>(&fmt), &r, &g, &b, &a);
+	}
 };
 
 #endif

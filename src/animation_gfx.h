@@ -39,7 +39,8 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	{
 		assert(i < nr_frames());
 		assert(plyr <= MAX_PLAYERS);
-		if (not m_encodedata.hasplrclrs) return m_plrframes[0][i];
+		if (!m_encodedata.hasplrclrs || !plyr)
+			return m_plrframes[0][i];
 
 		assert(player);
 
@@ -51,9 +52,10 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 private:
 	void encode(uint8_t plyr, const RGBColor*);
 
-	Frames   * m_plrframes;
+	Frames * m_plrframes;
+	Frames m_pcmasks;
 	EncodeData m_encodedata;
-	Point      m_hotspot;
+	Point m_hotspot;
 };
 
 #endif

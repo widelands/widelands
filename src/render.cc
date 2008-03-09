@@ -363,7 +363,6 @@ static const uint32_t nextensions = 4;
 static const char extensions[nextensions][5] = {".bmp", ".png", ".gif", ".jpg"};
 AnimationGfx::AnimationGfx(const AnimationData* data)
 {
-
 	m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
 	m_encodedata.plrclr[0]  = data->encdata.plrclr[0];
 	m_encodedata.plrclr[1]  = data->encdata.plrclr[1];
@@ -375,43 +374,31 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 
 	std::vector<Surface *> frames;
 	for (;;) {
-		char fname[256];
+		//  create the base file name by reverse-scanning for '?' and replacing
+		char fnamebase[256];
+		snprintf(fnamebase, sizeof(fnamebase), "%s", data->picnametempl.c_str());
+
 		int32_t nr = frames.size();
-		char *p;
+		char *p = fnamebase + strlen(fnamebase);
+		while (p > fnamebase) {
+			if (*--p != '?')
+				continue;
 
-		bool alldone = false;
-		bool cycling = false;
+			*p = '0' + (nr % 10);
+			nr = nr / 10;
+		}
+		if (nr) // cycled up to maximum possible frame number
+			break;
 
-		for (uint32_t i = 0; i < nextensions; ++i) {
-
-			//  create the file name by reverse-scanning for '?' and replacing
-			nr = frames.size();
-			snprintf
-				(fname, sizeof(fname),
-				 "%s%s", data->picnametempl.c_str(), extensions[i]);
-			p = fname + strlen(fname);
-			while (p > fname) {
-				if (*--p != '?')
-					continue;
-
-				cycling = true;
-
-				*p = '0' + (nr % 10);
-				nr = nr / 10;
-			}
-
-			if (nr) // cycled up to maximum possible frame number
-				break;
-
+		// Load the base image
+		uint32_t extnr;
+		for (extnr = 0; extnr < nextensions; ++extnr) {
+			char fname[256];
+			snprintf(fname, sizeof(fname), "%s%s", fnamebase, extensions[extnr]);
 
 			//  is the frame actually there?
-			if (not g_fs->FileExists(fname)) {
-				if (i == nextensions - 1) {
-					alldone = true;
-					break;
-				}
+			if (not g_fs->FileExists(fname))
 				continue;
-			}
 
 			try {
 				SDL_Surface & bmp = *LoadImage(fname);
@@ -425,22 +412,80 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 				log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
 				continue;
 			}
-
-
-			if (!cycling)
-				alldone = true;
 			break;
 		}
-
-		if (alldone)
+		if (extnr == nextensions)
 			break;
+
+		// See if there's a player colour mask for this frame
+		if (m_encodedata.hasplrclrs) {
+			for (extnr = 0; extnr < nextensions; ++extnr) {
+				char fname[256];
+				snprintf(fname, sizeof(fname), "%s_pc%s", fnamebase, extensions[extnr]);
+
+				if (strstr(fname, "soldier"))
+					log("Try %s\n", fname);
+				if (not g_fs->FileExists(fname))
+					continue;
+
+				try {
+					SDL_Surface & bmp = *LoadImage(fname);
+					Surface & frame = *new Surface();
+					frame.set_sdl_surface(bmp);
+					m_pcmasks.push_back(&frame);
+					break;
+				}
+				catch (const std::exception & e) {
+					log("WARNING: Couldn't load animation pc frame %s: %s\n", fname, e.what());
+					continue;
+				}
+			}
+
+			if (extnr == nextensions) {
+				Surface & origsurface = *frames.back();
+				Surface & newsurface = *new Surface();
+				newsurface.set_sdl_surface(*SDL_DisplayFormat(origsurface.m_surface));
+
+				static const RGBColor whitecolors[4] = {
+					RGBColor(119, 119, 119),
+					RGBColor(166, 166, 166),
+					RGBColor(210, 210, 210),
+					RGBColor(255, 255, 255)
+				};
+				uint32_t white = RGBColor(255, 255, 255).map(newsurface.format());
+				uint32_t black = RGBColor(0, 0, 0).map(newsurface.format());
+				uint32_t plrclr[4];
+				uint32_t new_plrclr[4];
+
+				for(uint32_t i = 0; i < 4; ++i) {
+					plrclr[i] = m_encodedata.plrclr[i].map(origsurface.format());
+					new_plrclr[i] = whitecolors[i].map(origsurface.format());
+				}
+
+				//  Walk the surface, replace all playercolors.
+				for (uint32_t y = 0; y < newsurface.get_h(); ++y) {
+					for (uint32_t x = 0; x < newsurface.get_w(); ++x) {
+						const uint32_t clr = origsurface.get_pixel(x, y);
+						newsurface.set_pixel(x, y, black);
+						for(uint32_t i = 0; i < 4; ++i) {
+							if (clr == plrclr[i]) {
+								origsurface.set_pixel(x, y, new_plrclr[i]);
+								newsurface.set_pixel(x, y, white);
+								break;
+							}
+						}
+					}
+				}
+
+				m_pcmasks.push_back(&newsurface);
+			}
+		}
 	}
 
 	m_plrframes[0] = frames;
 
 	if (!frames.size())
 		throw wexception("Animation %s has no frames", data->picnametempl.c_str());
-
 }
 
 
@@ -459,6 +504,11 @@ AnimationGfx::~AnimationGfx()
 			delete frames[j];
 	}
 	delete[] m_plrframes;
+	m_plrframes = 0;
+
+	for (uint32_t j = 0; j < m_pcmasks.size(); ++j)
+		delete m_pcmasks[j];
+	m_pcmasks.clear();
 }
 
 
@@ -471,44 +521,43 @@ Encodes the given surface into a frame
 */
 void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 {
-	//  FIXME This playercolor conversion fails for indexed images. See bug
-	//  FIXME #1880277. The efficient way to handle this would of course be to
-	//  FIXME have all playercolor images in indexed format and set the
-	//  FIXME playercolor in the palette before blitting. Then there is no need
-	//  FIXME to keep a version of each image in memory for each player.
-	assert(m_encodedata.hasplrclrs);
+	assert(m_plrframes[0].size() == m_pcmasks.size());
 	std::vector<Surface*>& frames = m_plrframes[plr];
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
 		Surface & origsurface = *m_plrframes[0][i];
 		Surface & newsurface = *new Surface();
-		newsurface.set_sdl_surface
-			(*
-			 SDL_ConvertSurface
-			 (origsurface.m_surface,
-			  &const_cast<SDL_PixelFormat &>(origsurface.format()),
-			  SDL_HWSURFACE | SDL_SRCALPHA));
-		const SDL_PixelFormat & format = newsurface.format();
+		newsurface.set_sdl_surface(*SDL_DisplayFormatAlpha(origsurface.get_sdl_surface()));
 
-		uint32_t const     plrclr1 = m_encodedata.plrclr [0].map(format);
-		uint32_t const     plrclr2 = m_encodedata.plrclr [1].map(format);
-		uint32_t const     plrclr3 = m_encodedata.plrclr [2].map(format);
-		uint32_t const     plrclr4 = m_encodedata.plrclr [3].map(format);
+		Surface & pcmask = *m_pcmasks[i];
 
-		uint32_t const new_plrclr1 =              plrclrs[0].map(format);
-		uint32_t const new_plrclr2 =              plrclrs[1].map(format);
-		uint32_t const new_plrclr3 =              plrclrs[2].map(format);
-		uint32_t const new_plrclr4 =              plrclrs[3].map(format);
-
-		//  Walk the surface, replace all playercolors.
+		// This could be done significantly faster, but since we
+		// cache the result, let's keep it simple for now.
 		for (uint32_t y = 0; y < newsurface.get_h(); ++y) {
 			for (uint32_t x = 0; x < newsurface.get_w(); ++x) {
-				const uint32_t clr = newsurface.get_pixel(x, y);
-				if      (clr == plrclr1) newsurface.set_pixel(x, y, new_plrclr1);
-				else if (clr == plrclr2) newsurface.set_pixel(x, y, new_plrclr2);
-				else if (clr == plrclr3) newsurface.set_pixel(x, y, new_plrclr3);
-				else if (clr == plrclr4) newsurface.set_pixel(x, y, new_plrclr4);
+				RGBAColor source;
+				RGBAColor mask;
+
+				source.set(newsurface.format(), newsurface.get_pixel(x, y));
+				mask.set(pcmask.format(), pcmask.get_pixel(x, y));
+
+				uint32_t influence = static_cast<uint32_t>(mask.r)*mask.a;
+				if (influence > 0) {
+					uint32_t intensity = static_cast<uint32_t>(source.r + source.g + source.b) / 3;
+					RGBAColor plrclr;
+
+					plrclr.r = (plrclrs[3].r() * intensity) >> 8;
+					plrclr.g = (plrclrs[3].g() * intensity) >> 8;
+					plrclr.b = (plrclrs[3].b() * intensity) >> 8;
+
+					RGBAColor dest(source);
+					dest.r = (plrclr.r*influence + dest.r*(65536-influence)) >> 16;
+					dest.g = (plrclr.g*influence + dest.g*(65536-influence)) >> 16;
+					dest.b = (plrclr.b*influence + dest.b*(65536-influence)) >> 16;
+
+					newsurface.set_pixel(x, y, dest.map(newsurface.format()));
+				}
 			}
 		}
 

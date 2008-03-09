@@ -1161,13 +1161,15 @@ void RenderTarget::renderminimap
  * Plays sound effect that is registered with this frame (the Sound_Handler
  * decides if the fx really does get played)
  *
- * \par dstx, dsty
- * \par animation
- * \par time
- * \par player
+ * \param dstx, dsty the on-screen location of the animation hot spot
+ * \param animation the animation ID
+ * \param time the time, in milliseconds, in the animation
+ * \param player the player this object belongs to, for player colour
+ * purposes. May be 0 (for example, for world objects).
  *
- * \todo Document this method's parameters
  * \todo Correctly calculate the stereo position for sound effects
+ * \todo The chosen semantics of animation sound effects is problematic:
+ * What if the game runs very slowly or very quickly?
  */
 void RenderTarget::drawanim
 (Point                dst,
@@ -1178,7 +1180,6 @@ void RenderTarget::drawanim
 	const AnimationData* data = g_anim.get_animation(animation);
 	AnimationGfx* gfx = g_gr->get_animation(animation);
 
-	//TODO? assert(player);
 	assert(data);
 	assert(gfx);
 

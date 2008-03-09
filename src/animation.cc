@@ -53,7 +53,10 @@ shadowclr_[r, g, b]  color for shadow pixels
 */
 void EncodeData::parse(Section *s)
 {
-	// Read player color codes
+	if (s->get_bool("playercolor", false))
+		hasplrclrs = true;
+
+	// Read old-style player color codes
 	char key[] = "plrclr0_r";
 	for (uint8_t i = 0; i < 4; ++i, ++key[6]) {
 		key[8] = 'r'; const int32_t r = s->get_int(key, -1);
@@ -167,13 +170,12 @@ uint32_t AnimationManager::get
 		}
 	}
 	snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
+	if (pictempl[strlen(pictempl)-4]=='.') {
+		// delete extension
+		pictempl[strlen(pictempl)-4]='\0';
+	}
 
 	ad->picnametempl = pictempl;
-
-	if (ad->picnametempl[strlen(pictempl)-4]=='.') {
-		// delete extension
-		ad->picnametempl[strlen(pictempl)-4]='\0';
-	}
 
 	// Read mapping from frame numbers to sound effect names and load effects
 	// will yield strange results if there is a different number of sfx_frame and sfx_name
