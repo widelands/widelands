@@ -89,7 +89,7 @@ private:
 * possible direction
 */
 struct DirAnimations {
-	DirAnimations
+	explicit DirAnimations
 		(const uint32_t dir1 = 0,
 		 const uint32_t dir2 = 0,
 		 const uint32_t dir3 = 0,
