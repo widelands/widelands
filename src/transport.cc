@@ -157,7 +157,7 @@ WareInstance & IdleWareSupply::launch_item(Game *, const Request* req) {
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
 			 m_ware->get_serial(),
 			 m_ware->descr_index().value(),
-			 req->get_index());
+			 req->get_index().value());
 
 	return *m_ware;
 }
