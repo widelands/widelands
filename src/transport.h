@@ -569,10 +569,6 @@ struct Economy {
 	bool have_supply(Supply *);
 	void remove_supply(Supply *);
 
-	bool should_run_balance_check(int32_t const gametime) {
-		return m_request_timer && (gametime == m_request_timer_time);
-	}
-
 	/// information about this economy
 	int32_t stock_ware(Ware_Index const i) {
 		return m_wares  .stock(i.value());
@@ -630,7 +626,6 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 		 Economy     * const economy)
 		:
 		GameLogicCommand(starttime),
-		m_force_balance (false),
 		m_player        (player),
 		m_economy       (economy)
 	{}
@@ -643,7 +638,6 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 private:
-	bool          m_force_balance;
 	Player_Number m_player;
 	Economy     * m_economy;
 };

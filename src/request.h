@@ -68,6 +68,7 @@ struct Request : public Trackable {
 		(PlayerImmovable * target, Ware_Index, callback_t, void * cbdata, Type);
 	~Request();
 
+	std::string describe() const;
 	PlayerImmovable * get_target() const throw () {return m_target;}
 	Ware_Index get_index() const {return m_index;}
 	int32_t get_type() const {return m_type;}

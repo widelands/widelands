@@ -2758,15 +2758,24 @@ void Economy::start_request_timer(int32_t delta)
 {
 	if (upcast(Game, game, &m_owner->egbase())) {
 		const int32_t gametime = game->get_gametime();
+		int32_t nexttimer = gametime + delta;
 
-		if (m_request_timer and m_request_timer_time - (gametime + delta) <= 0)
-		return;
+		// The timing logic seems to be a little off.
+		// I believe the (m_request_timer_time - nexttimer <= 0) check should actually
+		// be enough, but bug 1910232 had a savegame where the balance command got lost
+		// and so the timer timed out. I'm not 100% certain how it happened, but I
+		// suspect that an unfortunate interaction with savegames was the culprit.
+		//
+		// In any case, let's err on the side of starting too many balance commands,
+		// especially to fix any older savegames that might suffer from similar problems.
+		if (m_request_timer && m_request_timer_time - gametime >= 0 && m_request_timer_time - nexttimer <= 0)
+			return;
 
 		m_request_timer = true;
-		m_request_timer_time = game->get_gametime() + delta;
+		m_request_timer_time = nexttimer;
 		game->get_cmdqueue()->enqueue
 			(new Cmd_Call_Economy_Balance
-			 (m_request_timer_time, m_owner->get_player_number(), this));
+			 (nexttimer, m_owner->get_player_number(), this));
 	}
 }
 
@@ -2914,10 +2923,10 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		rsp.priority = priority;
 
 		log
-			("REQ: %u (%i) <- %u (ware %i), priority %i\n",
+			("REQ: %u (%i, %s) <- %u (ware %i), priority %i\n",
 			 req->get_target()->get_serial(),
-			 req->get_required_time(), supp->get_position(g)->get_serial(),
-			 rsp.ware, rsp.priority);
+			 req->get_required_time(), req->describe().c_str(),
+			 supp->get_position(g)->get_serial(), rsp.ware, rsp.priority);
 
 		s->queue.push(rsp);
 	}
@@ -3043,13 +3052,6 @@ void Cmd_Call_Economy_Balance::execute(Game* g) {
 	if (!g->player(m_player).has_economy(m_economy))
 		return;
 
-	if
-		(!m_economy->should_run_balance_check(g->get_gametime())
-		 &&
-		 !m_force_balance)
-		return;
-
-	m_force_balance = false;
 	m_economy->balance_requestsupply();
 }
 
@@ -3065,13 +3067,7 @@ void Cmd_Call_Economy_Balance::Read
 		if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 			m_player  = fr.Unsigned8 ();
-			m_economy = fr.Unsigned8 () ?
-				egbase.get_player(m_player)->get_economy_by_number(fr.Unsigned16())
-				:
-				reinterpret_cast<Economy *>(0xffffffff); //  FIXME ?!?!?!
-
-			//  On load, the first balance has to been forced.
-			m_force_balance = true;
+			m_economy = fr.Unsigned8 () ? egbase.get_player(m_player)->get_economy_by_number(fr.Unsigned16()) : 0;
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
