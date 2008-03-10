@@ -56,7 +56,10 @@ throw (_wexception)
 
 				plr->set_viewpoint(Point(x, y));
 
-				plr->set_display_flags(display_flags);
+				const uint32_t loaded_df = ~(Interactive_Base::dfDebug);
+				uint32_t olddf = plr->get_display_flags();
+				uint32_t realdf = (olddf & ~loaded_df) | (display_flags & loaded_df);
+				plr->set_display_flags(realdf);
 
 				if (packet_version == 1) {
 					plr->get_player()->ReadStatistics(fr, 0);
