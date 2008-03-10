@@ -292,34 +292,25 @@ void TrainingSite::update_soldier_request() {
 			m_soldier_request = new Request
 				(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::WORKER);
 
-			Requirements r;
+			RequireOr r;
 
 			// set requirements to match this site
-			int32_t totalmax = 0;
-			int32_t totalmin = 0;
-			if (descr().get_train_attack()) {
-				totalmin += descr().get_min_level(atrAttack);
-				totalmax += descr().get_max_level(atrAttack);
-				r.set(atrAttack, descr().get_min_level(atrAttack), descr().get_max_level(atrAttack));
-			}
-			if (descr().get_train_defense()) {
-				totalmin += descr().get_min_level(atrDefense);
-				totalmax += descr().get_max_level(atrDefense);
-				r.set(atrDefense, descr().get_min_level(atrDefense), descr().get_max_level(atrDefense));
-			}
-			if (descr().get_train_evade()) {
-				totalmin += descr().get_min_level(atrEvade);
-				totalmax += descr().get_max_level(atrEvade);
-				r.set(atrEvade, descr().get_min_level(atrEvade), descr().get_max_level(atrEvade));
-			}
-			if (descr().get_train_hp()) {
-				totalmin += descr().get_min_level(atrHP);
-				totalmax += descr().get_max_level(atrHP);
-				r.set(atrHP, descr().get_min_level(atrHP), descr().get_max_level(atrHP));
-			}
-
-			//  To make sure that fully trained soldiers are not requested.
-			r.set(atrTotal, totalmin, totalmax - 1);
+			if (descr().get_train_attack())
+				r.add(RequireAttribute
+				      (atrAttack,
+				       descr().get_min_level(atrAttack), descr().get_max_level(atrAttack)));
+			if (descr().get_train_defense())
+				r.add(RequireAttribute
+				      (atrDefense,
+				       descr().get_min_level(atrDefense), descr().get_max_level(atrDefense)));
+			if (descr().get_train_evade())
+				r.add(RequireAttribute
+				      (atrEvade,
+				       descr().get_min_level(atrEvade), descr().get_max_level(atrEvade)));
+			if (descr().get_train_hp())
+				r.add(RequireAttribute
+				      (atrHP,
+				       descr().get_min_level(atrHP), descr().get_max_level(atrHP)));
 
 			m_soldier_request->set_requirements(r);
 		}

@@ -544,7 +544,7 @@ void MilitarySite::set_requirements (const Requirements& r)
 */
 void MilitarySite::clear_requirements ()
 {
-	m_soldier_requirements.clear();
+	m_soldier_requirements = Requirements();
 }
 
 uint32_t MilitarySite::nr_attack_soldiers() {

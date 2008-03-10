@@ -166,6 +166,35 @@ def CheckLinkerFlag(context, link_flag, env):
 	context.Result( ret )
 	return
 
+# Shamelessly copied from http://www.scons.org/wiki/CheckBoostVersion
+def CheckBoost(context, version):
+	# Boost versions are in format major.minor.subminor
+	v_arr = version.split(".")
+	version_n = 0
+	if len(v_arr) > 0:
+		version_n += int(v_arr[0])*100000
+	if len(v_arr) > 1:
+		version_n += int(v_arr[1])*100
+	if len(v_arr) > 2:
+		version_n += int(v_arr[2])
+
+	context.Message('Checking for Boost version >= %s... ' % (version))
+	ret = context.TryCompile("""
+#include <boost/version.hpp>
+
+#if BOOST_VERSION < %d
+#error Installed boost is too old!
+#endif
+
+int main()
+{
+	return 0;
+}
+""" % version_n, '.cpp')
+	context.Result(ret)
+	return ret
+
+
 ################################################################################
 
 def do_configure(config_h_file, conf, env):
@@ -285,6 +314,10 @@ def do_configure(config_h_file, conf, env):
 		if env.efence:
 			print 'Could not find efence, so doing a debug-efence build is impossible !'
 			env.Exit(1)
+
+	if not (conf.CheckBoost('1.33')):
+		print 'Boost version >= 1.33 needed. Make sure Boost development packages are installed.'
+		env.Exit(1)
 
 	conf.CheckCompilerFlag('-fstack-protector-all', env)
 	conf.CheckCompilerFlag('-fbounds-check', env)

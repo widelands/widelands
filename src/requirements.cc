@@ -24,52 +24,28 @@
 
 namespace Widelands {
 
-Requirements::Requirements ()
-{
-}
-
-void Requirements::clear()
-{
-	r.clear();
-}
-
-void Requirements::set(tAttribute at, int32_t min, int32_t max)
-{
-	for (std::vector<MinMax>::iterator it = r.begin(); it != r.end(); ++it) {
-		if (it->at == at) {
-			it->min = min;
-			it->max = max;
-			return;
-		}
-	}
-
-	r.push_back(MinMax(at, min, max));
-}
-
 bool Requirements::check(Map_Object* obj) const
 {
-	for (std::vector<MinMax>::const_iterator it = r.begin(); it != r.end(); ++it) {
-		int32_t value = obj->get_tattribute(it->at);
-
-		if (value > it->max || value < it->min)
-			return false;
-	}
-
-	return true;
+	if (!m)
+		return true;
+	return m->check(obj);
 }
 
-
-#define REQUIREMENTS_VERSION 2
+#define REQUIREMENTS_VERSION 3
 
 /**
  * Read this requirement from a file
  */
 void Requirements::Read
-(FileRead * fr, Editor_Game_Base *, Map_Map_Object_Loader *)
+(FileRead * fr, Editor_Game_Base *egbase, Map_Map_Object_Loader *mol)
 {
 	try {
 		const uint16_t packet_version = fr->Unsigned16();
 		if (packet_version == REQUIREMENTS_VERSION) {
+			*this = RequirementsStorage::read(fr, egbase, mol);
+		} else if (packet_version == 2) {
+			RequireAnd req;
+
 			for (;;) {
 				uint32_t at = fr->Unsigned32();
 
@@ -79,30 +55,35 @@ void Requirements::Read
 				int32_t min = fr->Signed32();
 				int32_t max = fr->Signed32();
 
-				set(static_cast<tAttribute>(at), min, max);
+				req.add(RequireAttribute(static_cast<tAttribute>(at), min, max));
 			}
+
+			*this = req;
 		} else if (packet_version == 1) {
+			RequireAnd req;
 			int32_t min, max;
 
 			// HitPoints Levels
 			min = fr->Unsigned8();
 			max = fr->Unsigned8();
-			set(atrHP, min, max);
+			req.add(RequireAttribute(atrHP, min, max));
 
 			// Attack Levels
 			min = fr->Unsigned8();
 			max = fr->Unsigned8();
-			set(atrAttack, min, max);
+			req.add(RequireAttribute(atrAttack, min, max));
 
 			// Defense levels
 			min = fr->Unsigned8();
 			max = fr->Unsigned8();
-			set(atrDefense, min, max);
+			req.add(RequireAttribute(atrDefense, min, max));
 
 			// Evade
 			min = fr->Unsigned8();
 			max = fr->Unsigned8();
-			set(atrEvade, min, max);
+			req.add(RequireAttribute(atrEvade, min, max));
+
+			*this = req;
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -111,19 +92,161 @@ void Requirements::Read
 }
 
 void Requirements::Write
-(FileWrite * fw, Editor_Game_Base *, Map_Map_Object_Saver *)
+(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver *mos) const
 {
 	fw->Unsigned16(REQUIREMENTS_VERSION);
 
-	for (std::vector<MinMax>::iterator it = r.begin(); it != r.end(); ++it) {
-		assert(static_cast<uint32_t>(it->at) != 0xffffffff);
-		fw->Unsigned32(it->at);
-		fw->Signed32(it->min);
-		fw->Signed32(it->max);
+	if (!m) {
+		fw->Unsigned16(0);
+	} else {
+		fw->Unsigned16(m->storage().id());
+		m->write(fw, egbase, mos);
+	}
+}
+
+RequirementsStorage::RequirementsStorage(uint32_t _id, Reader reader)
+	: m_id(_id), m_reader(reader)
+{
+	StorageMap& s = storageMap();
+
+	assert(_id > 0 && _id < 65535);
+	assert(s.find(_id) == s.end());
+
+	s.insert(std::make_pair(_id, this));
+}
+
+uint32_t RequirementsStorage::id() const
+{
+	return m_id;
+}
+
+Requirements RequirementsStorage::read(FileRead *fr, Editor_Game_Base *egbase, Map_Map_Object_Loader *mol)
+{
+	uint32_t id = fr->Unsigned16();
+
+	if (id == 0)
+		return Requirements();
+
+	StorageMap& s = storageMap();
+	StorageMap::iterator it = s.find(id);
+
+	if (it == s.end())
+		throw wexception("unknown requirement id %u", id);
+
+	return it->second->m_reader(fr, egbase, mol);
+}
+
+RequirementsStorage::StorageMap& RequirementsStorage::storageMap()
+{
+	static StorageMap map;
+	return map;
+}
+
+
+void RequireOr::add(const Requirements& req)
+{
+	m.push_back(req);
+}
+
+bool RequireOr::check(Map_Object* obj) const
+{
+	for(std::vector<Requirements>::const_iterator it = m.begin(); it != m.end(); ++it)
+		if (it->check(obj))
+			return true;
+
+	return false;
+}
+
+void RequireOr::write(FileWrite *fw, Editor_Game_Base * egbase, Map_Map_Object_Saver *mos) const
+{
+	assert(m.size() < 65535);
+	fw->Unsigned16(m.size());
+
+	for(std::vector<Requirements>::const_iterator it = m.begin(); it != m.end(); ++it)
+		it->Write(fw, egbase, mos);
+}
+
+static Requirements readOr(FileRead* fr, Editor_Game_Base* egbase, Map_Map_Object_Loader* mol)
+{
+	uint32_t count = fr->Unsigned16();
+	RequireOr req;
+
+	for(uint32_t i = 0; i < count; ++i) {
+		Requirements sub;
+		sub.Read(fr, egbase, mol);
+		req.add(sub);
 	}
 
-	fw->Unsigned32(0xffffffff);
+	return req;
 }
+
+const RequirementsStorage RequireOr::storage(requirementIdOr, readOr);
+
+
+void RequireAnd::add(const Requirements& req)
+{
+	m.push_back(req);
+}
+
+bool RequireAnd::check(Map_Object* obj) const
+{
+	for(std::vector<Requirements>::const_iterator it = m.begin(); it != m.end(); ++it)
+		if (!it->check(obj))
+			return false;
+
+	return true;
+}
+
+void RequireAnd::write(FileWrite *fw, Editor_Game_Base * egbase, Map_Map_Object_Saver *mos) const
+{
+	assert(m.size() < 65535);
+	fw->Unsigned16(m.size());
+
+	for(std::vector<Requirements>::const_iterator it = m.begin(); it != m.end(); ++it)
+		it->Write(fw, egbase, mos);
+}
+
+static Requirements readAnd(FileRead* fr, Editor_Game_Base* egbase, Map_Map_Object_Loader* mol)
+{
+	uint32_t count = fr->Unsigned16();
+	RequireAnd req;
+
+	for(uint32_t i = 0; i < count; ++i) {
+		Requirements sub;
+		sub.Read(fr, egbase, mol);
+		req.add(sub);
+	}
+
+	return req;
+}
+
+const RequirementsStorage RequireAnd::storage(requirementIdAnd, readAnd);
+
+
+bool RequireAttribute::check(Map_Object* obj) const
+{
+	int32_t value = obj->get_tattribute(at);
+
+	return value >= min && value <= max;
+}
+
+void RequireAttribute::write(FileWrite *fw, Editor_Game_Base *, Map_Map_Object_Saver *) const
+{
+	fw->Unsigned32(at);
+	fw->Signed32(min);
+	fw->Signed32(max);
+}
+
+static Requirements readAttribute(FileRead* fr, Editor_Game_Base*, Map_Map_Object_Loader*)
+{
+	tAttribute at = static_cast<tAttribute>(fr->Unsigned32());
+	int32_t min = fr->Signed32();
+	int32_t max = fr->Signed32();
+
+	return RequireAttribute(at, min, max);
+}
+
+const RequirementsStorage RequireAttribute::storage(requirementIdAttribute, readAttribute);
 
 }
 

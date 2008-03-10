@@ -20,7 +20,10 @@
 #ifndef REQUIREMENTS_H
 #define REQUIREMENTS_H
 
+#include <map>
 #include <vector>
+
+#include <boost/shared_ptr.hpp>
 
 #include "tattribute.h"
 #include "widelands_fileread.h"
@@ -33,6 +36,7 @@ class Editor_Game_Base;
 class Map_Map_Object_Loader;
 class Map_Map_Object_Saver;
 
+class RequirementsStorage;
 
 /**
  * Requirements can be attached to Requests.
@@ -41,10 +45,40 @@ class Map_Map_Object_Saver;
  * returned by \ref get_tattribute .
  */
 struct Requirements {
-	Requirements ();
+private:
+	struct BaseCapsule {
+		virtual ~BaseCapsule() {}
 
-	void clear();
-	void set(tAttribute at, int32_t min, int32_t max);
+		virtual bool check(Map_Object* obj) const = 0;
+		virtual void write(FileWrite*, Editor_Game_Base*, Map_Map_Object_Saver*) const = 0;
+		virtual const RequirementsStorage& storage() const = 0;
+	};
+
+	template<typename T>
+	struct Capsule : public BaseCapsule {
+		Capsule(const T& _m) : m(_m) {}
+
+		bool check(Map_Object* obj) const {
+			return m.check(obj);
+		}
+
+		void write(FileWrite* fw, Editor_Game_Base* egbase, Map_Map_Object_Saver* mos) const {
+			m.write(fw, egbase, mos);
+		}
+
+		const RequirementsStorage& storage() const {
+			return T::storage;
+		}
+
+		T m;
+	};
+
+public:
+	Requirements() {}
+
+	template<typename T>
+	Requirements(const T& req)
+		: m(new Capsule<T>(req)) {}
 
 	/**
 	 * \return \c true if the object satisfies the requirements.
@@ -52,20 +86,100 @@ struct Requirements {
 	bool check(Map_Object* obj) const;
 
 	// For Save/Load Games
-	void Read(FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
-	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
+	void Read(FileRead *, Editor_Game_Base *, Map_Map_Object_Loader *);
+	void Write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
 
 private:
-	struct MinMax {
-		tAttribute at;
-		int32_t min;
-		int32_t max;
+	boost::shared_ptr<BaseCapsule> m;
+};
 
-		MinMax(tAttribute _at, int32_t _min, int32_t _max)
-			: at(_at), min(_min), max(_max) {}
-	};
 
-	std::vector<MinMax> r;
+/**
+ * On-disk IDs for certain requirements.
+ *
+ * Only add enums at the end, and make their value explicit.
+ */
+enum {
+	requirementIdOr = 1,
+	requirementIdAnd = 2,
+	requirementIdAttribute = 3,
+};
+
+/**
+ * Factory-like system for requirement loading from files.
+ */
+class RequirementsStorage {
+public:
+	typedef Requirements (*Reader)(FileRead *, Editor_Game_Base *, Map_Map_Object_Loader *);
+
+	RequirementsStorage(uint32_t _id, Reader reader);
+	uint32_t id() const;
+
+	static Requirements read(FileRead *, Editor_Game_Base *, Map_Map_Object_Loader *);
+
+private:
+	typedef std::map<uint32_t, RequirementsStorage*> StorageMap;
+
+	uint32_t m_id;
+	Reader m_reader;
+
+	static StorageMap& storageMap();
+};
+
+
+/**
+ * Require that at least one of the sub-requirements added with \ref add()
+ * is met. Defaults to \c false if no sub-requirement is added.
+ */
+struct RequireOr {
+public:
+	void add(const Requirements& req);
+
+	bool check(Map_Object* obj) const;
+	void write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
+
+	static const RequirementsStorage storage;
+
+private:
+	std::vector<Requirements> m;
+};
+
+
+/**
+ * Require that all sub-requirements added \ref add() are met.
+ * Defaults to \c true if no sub-requirement is added.
+ */
+struct RequireAnd {
+public:
+	void add(const Requirements& req);
+
+	bool check(Map_Object* obj) const;
+	void write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
+
+	static const RequirementsStorage storage;
+
+private:
+	std::vector<Requirements> m;
+};
+
+
+/**
+ * Require that a \ref tAttribute lies in the given, inclusive, range.
+ */
+struct RequireAttribute {
+public:
+	RequireAttribute(tAttribute _at, int32_t _min, int32_t _max)
+		: at(_at), min(_min), max(_max) {}
+
+	bool check(Map_Object* obj) const;
+	void write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
+
+	static const RequirementsStorage storage;
+
+private:
+	tAttribute at;
+	int32_t min;
+	int32_t max;
 };
 
 }
