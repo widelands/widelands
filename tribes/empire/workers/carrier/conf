@@ -8,49 +8,18 @@ menu_pic=carrier_menu.png
 
 [idle]
 pics=idle_??.png
-hotspot=7 20
-plrclr0_r=2
-plrclr0_g=2
-plrclr0_b=74
-plrclr1_r=2
-plrclr1_g=2
-plrclr1_b=112
-plrclr2_r=2
-plrclr2_g=2
-plrclr2_b=149
-plrclr3_r=255
-plrclr3_g=0
-plrclr3_b=255
-fps=2
+hotspot=6 21
+fps=1
+playercolor=true
 
 [walk]
-hotspot=7 20
-plrclr0_r=2
-plrclr0_g=2
-plrclr0_b=74
-plrclr1_r=2
-plrclr1_g=2
-plrclr1_b=112
-plrclr2_r=2
-plrclr2_g=2
-plrclr2_b=149
-plrclr3_r=255
-plrclr3_g=0
-plrclr3_b=255
-fps=12
+dirpics=walk_!!_??.png
+hotspot=8 21
+fps=10
+playercolor=true
 
 [walkload]
-hotspot=7 20
-plrclr0_r=2
-plrclr0_g=2
-plrclr0_b=74
-plrclr1_r=2
-plrclr1_g=2
-plrclr1_b=112
-plrclr2_r=2
-plrclr2_g=2
-plrclr2_b=149
-plrclr3_r=255
-plrclr3_g=0
-plrclr3_b=255
-fps=12
+dirpics=walkload_!!_??.png
+hotspot=9 22
+fps=10
+playercolor=true
