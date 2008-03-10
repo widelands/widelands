@@ -32,7 +32,6 @@ namespace Widelands {
 Bob::Task Carrier::taskRoad = {
 	"road",
 	static_cast<Bob::Ptr>(&Carrier::road_update),
-	static_cast<Bob::Ptr>(&Carrier::road_signal),
 	0,
 };
 
@@ -40,9 +39,9 @@ Bob::Task Carrier::taskRoad = {
 /**
  * Work on the given road, assume the location is correct.
 */
-void Carrier::start_task_road()
+void Carrier::start_task_road(Game* g)
 {
-	push_task(taskRoad);
+	push_task(g, taskRoad);
 
 	get_state()->ivar1 = 0;
 
@@ -61,6 +60,18 @@ void Carrier::update_task_road(Game* g)
 
 void Carrier::road_update(Game* g, State* state)
 {
+	std::string signal = get_signal();
+
+	if (signal == "road" || signal == "ware") {
+		// The road changed under us or we're supposed to pick up some ware
+		signal_handled();
+	} else if (signal.size()) {
+		// Something else happened (probably a location signal)
+		molog("[road]: Terminated by signal '%s'\n", signal.c_str());
+		pop_task(g);
+		return;
+	}
+
 	Road & road = dynamic_cast<Road &>(*get_location(g));
 
 	// Check for pending items
@@ -70,7 +81,7 @@ void Carrier::road_update(Game* g, State* state)
 	if (m_acked_ware >= 0) {
 		if (state->ivar1) {
 			state->ivar1 = 0;
-			start_task_transport(m_acked_ware);
+			start_task_transport(g, m_acked_ware);
 		} else {
 			// Short delay before we move to pick up
 			molog("[road]: delay (acked for %i)\n", m_acked_ware);
@@ -86,7 +97,7 @@ void Carrier::road_update(Game* g, State* state)
 	// Move into idle position if necessary
 	if
 		(start_task_movepath
-		 (g->map(),
+		 (g, g->map(),
 		  road.get_path(),
 		  road.get_idle_index(),
 		  descr().get_right_walk_anims(does_carry_ware())))
@@ -100,21 +111,6 @@ void Carrier::road_update(Game* g, State* state)
 }
 
 
-void Carrier::road_signal(Game * g, State *)
-{
-	std::string signal = get_signal();
-
-	if (signal == "road" || signal == "ware") {
-		set_signal(""); // update() will do the rest
-		schedule_act(g, 10);
-		return;
-	}
-
-	molog("[road]: Terminated by signal '%s'\n", signal.c_str());
-	pop_task();
-}
-
-
 /**
  * Fetch an item from a flag, drop it on the other flag.
  * ivar1 is the flag we fetch from, or -1 when we're in the target building.
@@ -124,7 +120,6 @@ void Carrier::road_signal(Game * g, State *)
 Bob::Task Carrier::taskTransport = {
 	"transport",
 	static_cast<Bob::Ptr>(&Carrier::transport_update),
-	static_cast<Bob::Ptr>(&Carrier::transport_signal),
 	0,
 };
 
@@ -132,11 +127,11 @@ Bob::Task Carrier::taskTransport = {
 /**
  * Begin the transport task.
  */
-void Carrier::start_task_transport(int32_t fromflag)
+void Carrier::start_task_transport(Game* g, int32_t fromflag)
 {
 	State* state;
 
-	push_task(taskTransport);
+	push_task(g, taskTransport);
 
 	state = get_state();
 	state->ivar1 = fromflag;
@@ -145,6 +140,16 @@ void Carrier::start_task_transport(int32_t fromflag)
 
 void Carrier::transport_update(Game* g, State* state)
 {
+	std::string signal = get_signal();
+
+	if (signal == "road") {
+		signal_handled();
+	} else if (signal.size()) {
+		molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
+		pop_task(g);
+		return;
+	}
+
 	Road & road = dynamic_cast<Road &>(*get_location(g));
 
 	if (state->ivar1 == -1)
@@ -198,7 +203,7 @@ void Carrier::deliver_to_building(Game * game, State * state)
 	BaseImmovable * const pos = game->map()[get_position()].get_immovable();
 
 	if (dynamic_cast<Flag const *>(pos))
-		pop_task(); //  we are done
+		pop_task(game); //  we are done
 	else if (upcast(Building, building, pos)) {
 		molog("[Carrier]: Arrived at building.\n");
 
@@ -229,8 +234,8 @@ void Carrier::deliver_to_building(Game * game, State * state)
 
 		// No more deliverable items. Walk out to the flag.
 		molog("[Carrier]: Move out of building.\n");
-		start_task_forcemove
-			(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
+		start_task_move
+			(game, WALK_SE, &descr().get_right_walk_anims(does_carry_ware()), true);
 	} else {
 		//  tough luck, the building has disappeared
 		molog("[Carrier]: Building disappeared while in building.\n");
@@ -247,8 +252,6 @@ void Carrier::deliver_to_building(Game * game, State * state)
  * \param g Game the carrier lives on
  * \param s Flags sent to the task
  */
-
-/// \todo Upgrade this function to support many-wares-at-a-time (TM)
 void Carrier::pickup_from_flag(Game* g, State* s)
 {
 	int32_t const ivar1 = s->ivar1;
@@ -268,7 +271,7 @@ void Carrier::pickup_from_flag(Game* g, State* s)
 			schedule_act(g, 20);
 		} else {
 			molog("[Carrier]: Nothing suitable on flag.\n");
-			pop_task();
+			pop_task(g);
 		}
 	}
 }
@@ -280,7 +283,6 @@ void Carrier::pickup_from_flag(Game* g, State* s)
  * \param g Game the carrier lives on.
  * \param s Flags sent to the task
  */
-/// \todo Upgrade this function to really support many-wares-at-a-time
 void Carrier::drop_item(Game* g, State* s)
 {
 	WareInstance* other = 0;
@@ -321,10 +323,8 @@ void Carrier::drop_item(Game* g, State* s)
 		schedule_act(g, 20);
 	} else {
 		molog("[Carrier]: back to idle.\n");
-		pop_task();
+		pop_task(g);
 	}
-
-	return;
 }
 
 
@@ -339,12 +339,10 @@ void Carrier::enter_building(Game* g, State* s)
 {
 	if (!start_task_walktoflag(g, s->ivar1 ^ 1)) {
 		molog("[Carrier]: Move into building.\n");
-		start_task_forcemove
-			(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
+		start_task_move
+			(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
 		s->ivar1 = -1;
 	}
-
-	return;
 }
 
 
@@ -357,7 +355,6 @@ void Carrier::enter_building(Game* g, State* s)
  *
  * \return true if the carrier must wait before delivering his wares.
  */
-/// \todo Upgrade this function to truly support many-wares-at-a-time
 bool Carrier::swap_or_wait(Game *g, State* s)
 {
 	// Road that employs us
@@ -386,21 +383,6 @@ bool Carrier::swap_or_wait(Game *g, State* s)
 	}
 
 	return true;
-}
-
-
-void Carrier::transport_signal(Game * g, State *)
-{
-	std::string signal = get_signal();
-
-	if (signal == "road") {
-		set_signal("");
-		schedule_act(g, 10);
-		return;
-	}
-
-	molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
-	pop_task();
 }
 
 
@@ -582,7 +564,7 @@ bool Carrier::start_task_walktoflag(Game* g, int32_t flag, bool offset)
 
 	return
 		start_task_movepath
-		(g->map(),
+		(g, g->map(),
 		 path,
 		 idx,
 		 descr().get_right_walk_anims(does_carry_ware()));

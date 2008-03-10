@@ -51,10 +51,8 @@ struct BobProgramBase {
  *
  * \par Bobs, Tasks and their signalling
  *
- * Bobs have a call-stack of "tasks". The top-most Task is the one that is
- * currently being executed. As soon as the Task is finished (either
- * successfully or with an error signal), it is popped from the top of the
- * stack, and the Task that is now on top will be asked to update() itself.
+ * Bobs have a call-stack of "tasks". The top-most \ref Task is the one that is
+ * currently being executed.
  *
  * Upon initialization, an object has no Task at all. A CMD_ACT will be
  * scheduled automatically. When it is executed, init_auto_task() is called to
@@ -73,39 +71,42 @@ struct BobProgramBase {
  * the State structure returned by get_state() with any parameters that the Task
  * may need.
  *
- * A Task is ended by pop_task(). Note, however, that you should only call
- * pop_task() from a Task's update() or signal() function.
+ * A Task is ended by \ref pop_task(). Note, however, that pop_task() can only
+ * be called from a Task's update() function. If you want to interrupt the
+ * current \ref Task for some reason, you should call \ref send_signal().
+ * The signal semantics are explained below in more detail.
  *
- * If you want to interrupt the current Task for some reason, you should call
- * send_signal().
- * \todo DOC: \em how should I call it?
- *
- * To implement a new Task, you need to create a new Task object, and at least
- * an update() function. The signal() and mask() functions are optional (can be
- * zero).
+ * To implement a new Task, you need to create a new Task object with an
+ * update() function. This update() function is called in one of the following
+ * situations:
+ * \li a timeout set by \ref schedule_act() has occured
+ * \li the task has just been started via \ref push_task()
+ * \li the child task has ended via \ref pop_task()
+ * \li a signal has been sent via \ref send_signal()
+ * It is the responsibility of the update() function to distinguish between
+ * these situations as appropriate.
  *
  * One of the following things must happen during update():
- * \li Call schedule_act() to schedule the next call to update()
- *     This often happens indirectly by calls to start_task_* type functions.
- * \li Call skip_act() if you really don't want a CMD_ACT to occur.
- *     If you call skip_act(), your task MUST implement signal(),
- *     otherwise your bob will never wake up again.
- * \li Call pop_task() to end the current task
- * \li Send a new signal. In this case, the signal handler must ensure
- *     continued operation of the bob by calling pop_task() or schedule_act().
+ * \li Call \ref schedule_act() to schedule the next call to update()
+ * \li Call \ref skip_act() if you really don't want to act until a signal occurs.
+ * \li Call \ref pop_task() to end the current task
+ * \li Send a new signal via \ref send_signal(). Note that in this case,
+ *     the update() function will be called again after some delay, and it remains
+ *     the responsibility of the update() function to deal with the signal.
+ * The last case is mostly useful when signals are sent from functions that
+ * can be called at any time, such as \ref set_location().
  *
- * Note that after signal() is called, update() is also called. Also note that
- * if a signal is sent during an update() or signal() routine, the signal
- * delivery is delayed until that function is over. signal() must call
- * schedule_act(), or pop_task(), or do nothing at all. If signal() is not
- * implemented, it is equivalent to a signal() function that does nothing at
- * all.
+ * Whenever \ref send_signal() is called, any current signal is overwritten
+ * by the new signal and the signal_immediate() functions of all Tasks on the
+ * stack are called if available. Note that these functions are not supposed
+ * to perform any actions besides bookkeeping actions that must be performed
+ * in all situations (for example, one might zero some pointer in signal_immediate()
+ * to avoid dangling pointers).
  *
- * In the latter case, the signal has no effect, but it is remembered. Once
- * the current Task is popped, its parent Task will receive a signal() call.
- *
- * Whenever send_signal() is called, the mask() function of all Tasks are
- * called, starting with the highest-level Task.
+ * Then, \ref send_signal() schedules a future call to the top-most task's
+ * update() function. Often, update() functions will just call \ref pop_task()
+ * and leave the signal handling to their parent tasks. To ultimately handle
+ * a signal, the update() function must call \ref signal_handled().
  */
 struct Bob : public Map_Object {
 	friend struct Map_Bobdata_Data_Packet;
@@ -113,30 +114,37 @@ struct Bob : public Map_Object {
 
 	struct State;
 	typedef void (Bob::*Ptr)(Game*, State*);
+	typedef void (Bob::*PtrSignal)(Game*, State*, const std::string&);
 	enum Type {CRITTER, WORKER};
 
 	/// \see class Bob for in-depth explanation
 	struct Task {
 		const char* name;
 
-		/** Called once after the task is pushed, and whenever a
-		 * previously scheduled CMD_ACT occurs. Also called when a
-		 * sub-task pops itself. */
+		/**
+		 * Called to update the current task and schedule the next
+		 * actions etc.
+		 *
+		 * \see Bob for in-depth explanation
+		 */
 		Ptr update;
 
-		/** Usually called by send_signal()n and also when a sub-task
-		 * returns while a signal is still set. */
-		Ptr signal;
-
-		/** This cannot schedule CMD_ACT, but it can use set_signal() to
-		 * modify or even clear asignal before it reaches the normal
-		 * signal handling methods. */
-		Ptr mask;
+		/**
+		 * Called by \ref send_signal() to perform bookkeeping tasks that
+		 * must be performed immediately. May be zero.
+		 */
+		PtrSignal signal_immediate;
 	};
 
-	/// \see class Bob for in-depth explanation
-	/// \todo While a State logically is a property of a task, the pointers
-	/// are just the other way around. Is this logical?
+	/**
+	 * The current state of a task on the stack.
+	 *
+	 * If you think in terms of functions, \ref Task represents the code
+	 * of a function, while \ref State represents the stackframe of an
+	 * actual execution of the function.
+	 *
+	 * \see class Bob for in-depth explanation
+	 */
 	struct State {
 		State(const Task * const the_task = 0) :
 			task    (the_task),
@@ -223,7 +231,6 @@ struct Bob : public Map_Object {
 	void schedule_destroy(Game* g);
 	void schedule_act(Game* g, uint32_t tdelta);
 	void skip_act();
-	void force_skip_act();
 	Point calc_drawpos(Editor_Game_Base const &, Point) const;
 	void set_owner(Player *player);
 	Player * get_owner() const {return m_owner;}
@@ -255,20 +262,22 @@ struct Bob : public Map_Object {
 		 const int32_t         only_step = -1);
 
 	void start_task_movepath
-		(const Path          &,
+		(Game*,
+		 const Path          &,
 		 const DirAnimations &,
 		 const bool            forceonlast  = false,
 		 const int32_t         only_step = -1);
 
 	bool start_task_movepath
-		(const Map           &,
+		(Game*,
+		 const Map           &,
 		 const Path          &,
 		 const int32_t         index,
 		 const DirAnimations &,
 		 const bool            forceonlast = false,
 		 const int32_t         only_step = -1);
 
-	void start_task_forcemove(int32_t dir, DirAnimations const &);
+	void start_task_move(Game* g, int32_t dir, DirAnimations const *, bool);
 
 	// higher level handling (task-based)
 	State* get_state()
@@ -279,29 +288,16 @@ struct Bob : public Map_Object {
 
 	std::string get_signal() {return m_signal;}
 	State* get_state(Task* task);
-	void push_task(const Task & task);
-	void pop_task();
+	void push_task(Game* g, const Task & task);
+	void pop_task(Game* g);
 
-	/**
-	 * Simply set the signal string without calling any functions.
-	 *
-	 * You should use this function to unset a signal, or to set a signal
-	 * just before calling pop_task().
-	 */
-	void set_signal(std::string sig) {m_signal = sig;};
+	void signal_handled();
 
 	/// Automatically select a task.
 	virtual void init_auto_task(Game*) {};
 
 	// low level animation and walking handling
 	void set_animation(Editor_Game_Base* g, uint32_t anim);
-	int32_t start_walk(Game* g, WalkingDir dir, uint32_t anim, bool force = false);
-
-	/**
-	 * Call this from your task_act() function that was scheduled after
-	 * start_walk().
-	 */
-	void end_walk() {m_walking = IDLE;}
 
 	/// \return true if we're currently walking
 	bool is_walking() {return m_walking != IDLE;}
@@ -313,22 +309,29 @@ protected:
 
 
 private:
-	void do_act(Game* g, bool signalhandling);
+	void do_act(Game* g);
+	void do_pop_task();
 	void idle_update(Game* g, State* state);
-	void idle_signal(Game* g, State* state);
 	void movepath_update(Game* g, State* state);
-	void movepath_signal(Game* g, State* state);
-	void forcemove_update(Game* g, State* state);
+	void move_update(Game* g, State* state);
+
+	int32_t start_walk(Game* g, WalkingDir dir, uint32_t anim, bool force = false);
+
+	/**
+	 * Call this from your task_act() function that was scheduled after
+	 * start_walk().
+	 */
+	void end_walk() {m_walking = IDLE;}
+
 
 	static Task taskIdle;
 	static Task taskMovepath;
-	static Task taskForcemove;
+	static Task taskMove;
 
 	Player   * m_owner; ///< can be 0
 	FCoords    m_position; ///< where are we right now?
 	Bob      * m_linknext; ///< next object on this field
 	Bob    * * m_linkpprev;
-	uint32_t       m_actid; ///< CMD_ACT counter, used to eliminate spurious act()s
 	uint32_t       m_anim;
 	int32_t        m_animstart; ///< gametime when the animation was started
 	WalkingDir m_walking;
@@ -338,9 +341,24 @@ private:
 	// Task framework variables
 	std::vector<State> m_stack;
 
-	bool        m_stack_dirty;
-	bool        m_sched_init_task; ///< if init_auto_task was scheduled
-	bool        m_in_act; ///< if do_act is currently running (blocking signals)
+	/**
+	 * Every time a Bob acts, this counter is incremented.
+	 *
+	 * All scheduled \ref Cmd_Act are given this ID as data, so that
+	 * only the earliest \ref Cmd_Act issued during one act phase is actually
+	 * executed. Subsequent \ref Cmd_Act could interfere and are eliminated.
+	 */
+	uint32_t m_actid;
+
+	/**
+	 * Whether something was scheduled during this act phase.
+	 *
+	 * The only purpose of this variable is to act as an integrity check to avoid
+	 * Bobs that hang themselves up. So e.g. \ref skip_act() also sets this
+	 * to \c true, even though it technically doesn't schedule anything.
+	 */
+	bool m_actscheduled;
+	bool m_in_act; ///< if do_act is currently running
 	std::string m_signal;
 };
 

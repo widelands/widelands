@@ -70,16 +70,13 @@ public:
 
 	virtual void init_auto_task(Game* g);
 
-	void start_task_program(const std::string & name);
+	void start_task_program(Game* g, const std::string & name);
 	const std::string & descname() const throw () {return descr().descname();}
 	__attribute__ ((deprecated)) const char * get_descname() const throw ()  {return descname().c_str();}
 
 private:
 	void roam_update(Game* g, State* state);
-	void roam_signal(Game* g, State* state);
-
 	void program_update(Game* g, State* state);
-	void program_signal(Game* g, State* state);
 
 private:
 	bool run_remove(Game *, State *, Critter_BobAction const *);

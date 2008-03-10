@@ -48,9 +48,9 @@ struct Carrier : public Worker {
 
 	bool notify_ware(Game *, int32_t flag);
 
-	void start_task_road();
+	void start_task_road(Game*);
 	void update_task_road(Game *);
-	void start_task_transport(int32_t fromflag);
+	void start_task_transport(Game*, int32_t fromflag);
 	bool start_task_walktoflag(Game *, int32_t flag, bool offset = false);
 
 
@@ -62,10 +62,7 @@ private:
 
 	// internal task stuff
 	void road_update        (Game *, State *);
-	void road_signal        (Game *, State *);
-
 	void transport_update   (Game *, State *);
-	void transport_signal   (Game *, State *);
 
 	static Task taskRoad;
 	static Task taskTransport;

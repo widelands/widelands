@@ -612,7 +612,7 @@ bool Warehouse::fetch_from_flag(Game* g)
 	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
 		insert_workers(carrierid, 1);
 
-	launch_worker(g, carrierid, Requirements())->start_task_fetchfromflag();
+	launch_worker(g, carrierid, Requirements())->start_task_fetchfromflag(g);
 
 	return true;
 }
@@ -731,6 +731,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	} else {
 		sort_worker_in(g, w->name(), w);
 		w->set_location(0); // No more in a economy
+		w->reset_tasks(g);
 		w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
 	}
 

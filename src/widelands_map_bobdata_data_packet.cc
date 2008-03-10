@@ -40,7 +40,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 // Bob subtype versions
 #define CRITTER_BOB_PACKET_VERSION 1
@@ -67,7 +67,7 @@ throw
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
 			Map   const &       map        = egbase->map();
 			Extent        const extent     = map.extent();
 			Player_Number const nr_players = map.get_nrplayers();
@@ -137,6 +137,7 @@ throw
 					for (uint32_t i = 0; i < new_stacksize; ++i) {
 						Bob::State & state = bob.m_stack[i];
 						try {
+							bool task_forcemove_hack = false;
 
 							{ //  Task
 								Bob::Task * task;
@@ -145,8 +146,11 @@ throw
 									task = &Bob::taskIdle;
 								else if (not strcmp(taskname, "movepath"))
 									task = &Bob::taskMovepath;
-								else if (not strcmp(taskname, "forcemove"))
-									task = &Bob::taskForcemove;
+								else if (packet_version == 1 && not strcmp(taskname, "forcemove")) {
+									task = &Bob::taskMove;
+									task_forcemove_hack = true;
+								} else if (not strcmp(taskname, "move"))
+									task = &Bob::taskMove;
 								else if (not strcmp(taskname, "roam"))
 									task = &Critter_Bob::taskRoam;
 								else if (not strcmp(taskname, "program")) {
@@ -196,6 +200,9 @@ throw
 							state.ivar1 = fr.Signed32();
 							state.ivar2 = fr.Signed32();
 							state.ivar3 = fr.Signed32();
+
+							if (state.task == &Bob::taskMove && task_forcemove_hack)
+								state.ivar2 = 1;
 
 							state.transfer = 0;
 
@@ -295,8 +302,10 @@ throw
 					}
 
 					//  rest of bob stuff
-					bob.m_stack_dirty     = fr.Unsigned8();
-					bob.m_sched_init_task = fr.Unsigned8();
+					if (packet_version == 1) {
+						fr.Unsigned8(); // used to be m_stack_dirty
+						fr.Unsigned8(); // used to be m_sched_init_task
+					}
 					bob.m_signal          = fr.CString  ();
 
 					if      (upcast(Critter_Bob, critter_bob, &bob))
@@ -485,6 +494,7 @@ throw (_wexception)
 				fw.Unsigned8(bob.m_stack.size() && bob.m_stack[0].transfer);
 
 				fw.Unsigned32(bob.m_actid);
+				// Don't have to save m_actscheduled, as that's only used for integrity checks
 
 				//  Animation
 				//  FIXME Just write the string without the 1 first:
@@ -578,8 +588,6 @@ throw (_wexception)
 
 				}
 
-				fw.Unsigned8(bob.m_stack_dirty);
-				fw.Unsigned8(bob.m_sched_init_task);
 				fw.CString(bob.m_signal.c_str());
 
 				if      (upcast(Critter_Bob const, critter_bob, &bob))

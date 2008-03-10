@@ -155,14 +155,13 @@ m_owner          (0),
 m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere
 m_linknext       (0),
 m_linkpprev      (0),
-m_actid          (0),
 m_anim           (0),
 m_animstart      (0),
 m_walking        (IDLE),
 m_walkstart      (0),
 m_walkend        (0),
-m_stack_dirty    (false),
-m_sched_init_task(false),
+m_actid          (0),
+m_actscheduled   (false),
 m_in_act         (false)
 {}
 
@@ -190,8 +189,6 @@ void Bob::init(Editor_Game_Base* gg)
 {
 	Map_Object::init(gg);
 
-	m_sched_init_task = true;
-
 	if (upcast(Game, game, gg))
 		schedule_act(game, 1);
 	else
@@ -205,10 +202,8 @@ void Bob::init(Editor_Game_Base* gg)
  */
 void Bob::cleanup(Editor_Game_Base *gg)
 {
-	while (m_stack.size()) {
-		pop_task();
-		m_stack_dirty = false;
-	}
+	while (m_stack.size())
+		do_pop_task();
 
 	set_owner(0); // implicitly remove ourselves from owner's map
 
@@ -231,132 +226,51 @@ void Bob::cleanup(Editor_Game_Base *gg)
  */
 void Bob::act(Game* g, uint32_t data)
 {
-	if (!m_stack.size()) {
-		assert(m_sched_init_task);
-
-		m_sched_init_task = false;
-		m_signal = "";
-
-		m_stack_dirty = false;
-		init_auto_task(g);
-		m_sched_init_task = false;
-
-		if (!m_stack.size())
-			throw wexception
-				("MO(%u): init_auto_task() failed to set a task", get_serial());
-
-		assert(m_stack_dirty);
-
-		m_stack_dirty = false;
-		do_act(g, false);
-		return;
-	}
-
 	// Eliminate spurious calls of act().
 	// These calls are to be expected and perfectly normal, e.g. when a carrier's
 	// idle task is interrupted by the request to pick up a ware from a flag.
 	if (data != m_actid)
 		return;
 
-	do_act(g, false);
+	m_actid++;
+	m_actscheduled = false;
+
+	if (!m_stack.size()) {
+		m_signal = "";
+		init_auto_task(g);
+
+		if (!m_stack.size())
+			throw wexception
+				("MO(%u): init_auto_task() failed to set a task", get_serial());
+		if (!m_actscheduled)
+			throw wexception
+				("MO(%u): init_auto_task() failed to schedule something", get_serial());
+
+		return;
+	}
+
+	do_act(g);
 }
 
 
 /**
- * Handle the actual calls to update() and signal() as appropriate.
- *
- * signalhandling is true when do_act() is called by send_signal(), and false
- * otherwise.
+ * Perform the actual call to update() as appropriate.
  */
-void Bob::do_act(Game* g, bool signalhandling)
+void Bob::do_act(Game* g)
 {
 	assert(!m_in_act);
+	assert(m_stack.size());
+
 	m_in_act = true;
 
-	for (;;) {
-		uint32_t origactid;
+	const Task & task = *top_state().task;
 
-		origactid = m_actid;
+	(this->*task.update)(g, &top_state());
 
-		if (m_stack_dirty) {
-			if (m_sched_init_task) {
-				// Consider the following sequence of events:
-				//  (1) Owner of worker calls reset_tasks
-				//  (2) Owner of worker calls start_task_XYZ
-				//  (3) Worker receives a signal before the first scheduled
-				//      call to act.
-				// In particular, this may happen when a builder leaves a
-				// construction site and is immediately given a transfer to
-				// another construction site.
-				//
-				// In this case, the stack will still be dirty at this point.
-				m_sched_init_task = false;
-				m_stack_dirty = false;
-			} else {
-				throw wexception
-					("MO(%u): stack dirty before update[%s]",
-					 get_serial(), get_state() ? get_state()->task->name : "(nil)");
-			}
-		}
-
-		// Run the task if we're not coming from signalhandling
-		if (!signalhandling) {
-			const Task & task = *top_state().task;
-			std::string oldsignal = m_signal;
-
-			(this->*task.update)(g, &top_state());
-
-			// If a new signal is sent during update, we want
-			// to deliver it now. Note that if the signal had been
-			// pending before, and the update() routine ignores that
-			// signal, then we ignore it as well.
-			bool newsignal = m_signal.size() && m_signal != oldsignal;
-
-			if (origactid != m_actid && m_stack_dirty)
-				throw wexception
-					("MO(%u): [%s] changes both stack and act",
-					 get_serial(), task.name);
-			if (origactid == m_actid && !m_stack_dirty && !newsignal)
-				throw wexception
-					("MO(%u): update[%s] failed to act",
-					 get_serial(), task.name);
-
-			if (!m_stack_dirty && !newsignal)
-				break; // we did our work, now get out of here until the next CMD_ACT
-		}
-
-		do {
-			m_stack_dirty = false;
-
-			// Get a new task as soon as possible
-			// Sometimes, the owner of a bob will want to force it to stop all
-			// tasks and start a new task afterwards, which is why we don't
-			// call init_auto_task() immediately.
-			if (!m_stack.size()) {
-				set_signal("");
-				schedule_act(g, 1);
-				m_sched_init_task = true;
-				m_in_act = false;
-				return;
-			}
-
-			// Prepare the new task
-			if (m_signal.size()) {
-				if (Ptr signal = top_state().task->signal)
-					(this->*signal)(g, get_state());
-
-				// If the initial signal handler doesn't mess with the stack,
-				// get out of here. Otherwise, the update handler of the task
-				// we popped to needs to be run.
-				if (!m_stack_dirty && signalhandling) {
-					m_in_act = false;
-					return;
-				}
-
-				signalhandling = false; // next pass will be a normal, non-signal handling pass
-			}
-		} while (m_stack_dirty);
-	}
+	if (!m_actscheduled)
+		throw wexception
+			("MO(%u): update[%s] failed to act",
+			 get_serial(), task.name);
 
 	m_in_act = false;
 }
@@ -368,7 +282,8 @@ void Bob::do_act(Game* g, bool signalhandling)
 void Bob::schedule_destroy(Game* g)
 {
 	Map_Object::schedule_destroy(g);
-	++m_actid;
+	++m_actid; // to skip over any updates that may be scheduled
+	m_actscheduled = true;
 }
 
 
@@ -378,31 +293,19 @@ void Bob::schedule_destroy(Game* g)
  */
 void Bob::schedule_act(Game* g, uint32_t tdelta)
 {
-	Map_Object::schedule_act(g, tdelta, ++m_actid);
+	Map_Object::schedule_act(g, tdelta, m_actid);
+	m_actscheduled = true;
 }
 
 
 /**
  * Explicitly state that we don't want to act.
  */
-void Bob::skip_act() {
-	if (!get_state()->task->signal)
-		throw wexception
-			("MO(%u): %s calls skip_act(), but has no signal() function",
-			 get_serial(), get_state()->task->name);
-
-	++m_actid;
-}
-
-
-/**
- * Explicitly state that we don't want to act, even if we cannot be awoken by a
- * signal. Use with great care.
- */
-void Bob::force_skip_act()
+void Bob::skip_act()
 {
-	m_stack_dirty = false;
-	++m_actid;
+	assert(m_in_act);
+
+	m_actscheduled = true;
 }
 
 
@@ -412,31 +315,21 @@ void Bob::force_skip_act()
  * push_task() itself does not call any functions of the task, so the caller
  * can fill the state information with parameters for the task.
  */
-void Bob::push_task(const Task & task)
+void Bob::push_task(Game* g, const Task & task)
 {
-	if (m_stack_dirty && m_stack.size())
-		throw wexception
-			("MO(%u): push_task(%s): stack already dirty",
-			 get_serial(), task.name);
+	assert(m_in_act || !m_stack.size());
+
 	m_stack.push_back(State(&task));
-	m_stack_dirty = true;
+	schedule_act(g, 10);
 }
 
 
 /**
- * Remove the current task from the stack.
- *
- * pop_task() itself does not call any parent task functions, but it sets a
- * flag to make it happen.
+ * Actually pop the top-most task, but don't schedule anything.
  */
-void Bob::pop_task()
+void Bob::do_pop_task()
 {
 	State* state = get_state();
-
-	if (m_stack_dirty)
-		throw wexception
-			("MO(%u): pop_task(%s): stack already dirty",
-			 get_serial(), state->task->name);
 
 	delete state->path;
 	delete state->route;
@@ -444,7 +337,22 @@ void Bob::pop_task()
 		state->transfer->has_failed();
 
 	m_stack.pop_back();
-	m_stack_dirty = true;
+}
+
+
+/**
+ * Remove the current task from the stack.
+ *
+ * pop_task() itself does not call any parent task functions, but it ensures
+ * that it will happen.
+ */
+void Bob::pop_task(Game* g)
+{
+	assert(m_in_act);
+
+	do_pop_task();
+
+	schedule_act(g, 10);
 }
 
 
@@ -466,29 +374,41 @@ Bob::State* Bob::get_state(Task* task)
 	return 0;
 }
 
+/**
+ * Mark the current signal as handled.
+ */
+void Bob::signal_handled()
+{
+	assert(m_in_act);
+
+	m_signal.clear();
+}
 
 /**
- * Sets the signal string and calls the current task's signal function, if any.
+ * Send the given signal to this bob.
+ *
+ * Signal delivery is asynchronous, i.e. this functions guarantees that
+ * the top-most task's update() function is called, but only with a certain
+ * delay.
+ *
+ * This function also calls all task's mask() function immediately.
+ *
+ * \param g the \ref Game object
+ * \param sig the signal string
  */
 void Bob::send_signal(Game* g, std::string sig)
 {
 	assert(sig.size()); //  use set_signal() for signal removal
 
-	m_signal = sig;
-
 	for (uint32_t i = 0; i < m_stack.size(); ++i) {
 		State* state = &m_stack[i];
 
-		if (state->task->mask) {
-			(this->*state->task->mask)(g, state);
-
-			if (!m_signal.size())
-				return;
-		}
+		if (state->task->signal_immediate)
+			(this->*state->task->signal_immediate)(g, state, sig);
 	}
 
-	if (!m_in_act)
-		do_act(g, true); // signal handler act
+	m_signal = sig;
+	schedule_act(g, 10);
 }
 
 
@@ -500,15 +420,13 @@ void Bob::send_signal(Game* g, std::string sig)
  */
 void Bob::reset_tasks(Game* g)
 {
-	while (m_stack.size()) {
-		m_stack_dirty = false;
-		pop_task();
-	}
+	while (m_stack.size())
+		do_pop_task();
 
-	set_signal("");
-	schedule_act(g, 1);
-	m_sched_init_task = true;
-	m_stack_dirty = false;
+	m_signal.clear();
+
+	m_actid++;
+	schedule_act(g, 10);
 }
 
 
@@ -523,8 +441,7 @@ Bob::Task Bob::taskIdle = {
 	"idle",
 
 	&Bob::idle_update,
-	&Bob::idle_signal,
-	0, // mask
+	0, // signal_immediate
 };
 
 
@@ -544,7 +461,7 @@ void Bob::start_task_idle(Game* g, uint32_t anim, int32_t timeout)
 
 	set_animation(g, anim);
 
-	push_task(taskIdle);
+	push_task(g, taskIdle);
 
 	state = get_state();
 	state->ivar1 = timeout;
@@ -553,8 +470,8 @@ void Bob::start_task_idle(Game* g, uint32_t anim, int32_t timeout)
 
 void Bob::idle_update(Game* g, State* state)
 {
-	if (!state->ivar1) {
-		pop_task();
+	if (!state->ivar1 || get_signal().size()) {
+		pop_task(g);
 		return;
 	}
 
@@ -564,12 +481,6 @@ void Bob::idle_update(Game* g, State* state)
 		skip_act();
 
 	state->ivar1 = 0;
-}
-
-
-void Bob::idle_signal(Game*, State*)
-{
-	pop_task();
 }
 
 
@@ -586,8 +497,7 @@ Bob::Task Bob::taskMovepath = {
 	"movepath",
 
 	&Bob::movepath_update,
-	&Bob::movepath_signal, //  lazy signal handling, only act on one signal
-	0,                     //  mask
+	0 // signal_immediate
 };
 
 /**
@@ -624,7 +534,7 @@ bool Bob::start_task_movepath
 		return false;
 	}
 
-	push_task(taskMovepath);
+	push_task(game, taskMovepath);
 	State & state  = top_state();
 	state.path     = path;
 	state.ivar1    = 0; // step #
@@ -640,14 +550,15 @@ bool Bob::start_task_movepath
  * Start moving along the given, precalculated path.
  */
 void Bob::start_task_movepath
-(const Path          & path,
+(Game* g,
+ const Path          & path,
  const DirAnimations & anims,
  const bool            forceonlast,
  const int32_t         only_step)
 {
 	assert(path.get_start() == get_position());
 
-	push_task(taskMovepath);
+	push_task(g, taskMovepath);
 	State & state  = top_state();
 	state.path     = new Path(path);
 	state.ivar1    = 0;
@@ -665,7 +576,8 @@ void Bob::start_task_movepath
  * the given path index.
  */
 bool Bob::start_task_movepath
-(const Map           & map,
+(Game* g,
+ const Map           & map,
  const Path          & origpath,
  const int32_t         index,
  const DirAnimations & anims,
@@ -684,13 +596,13 @@ bool Bob::start_task_movepath
 			path.truncate(index);
 			path.starttrim(curidx);
 
-			start_task_movepath(path, anims, forceonlast, only_step);
+			start_task_movepath(g, path, anims, forceonlast, only_step);
 		} else {
 			path.truncate(curidx);
 			path.starttrim(index);
 			path.reverse();
 
-			start_task_movepath(path, anims, forceonlast, only_step);
+			start_task_movepath(g, path, anims, forceonlast, only_step);
 		}
 
 		return true;
@@ -702,35 +614,30 @@ bool Bob::start_task_movepath
 
 void Bob::movepath_update(Game* g, State* state)
 {
-	if (state->ivar1)
-		end_walk();
-
-	// We ignore signals when they arrive, but interrupt as soon as possible,
-	// i.e. when the next step has finished
 	if (get_signal().size()) {
 		molog("[movepath]: Interrupted by signal '%s'.\n", get_signal().c_str());
 
-		pop_task();
+		pop_task(g);
 		return;
 	}
 
 	assert(state->ivar1 >= 0);
 	const Path * const path = state->path;
+	assert(path);
+
 	if
-		(not path
-		 or
-		 static_cast<const Path::Step_Vector::size_type>(state->ivar1)
+		(static_cast<const Path::Step_Vector::size_type>(state->ivar1)
 		 >=
 		 path->get_nsteps())
 	{
 		assert(not path or m_position == path->get_end());
-		pop_task(); // success
+		pop_task(g); // success
 		return;
 	} else if (state->ivar1==state->ivar3) {
 		// We have stepped all steps that we were asked for.
 		// This is some kind of success, though we do not are were we wanted
 		// to go
-		pop_task();
+		pop_task(g);
 		return;
 	}
 
@@ -747,70 +654,64 @@ void Bob::movepath_update(Game* g, State* state)
 		forcemove = true;
 	}
 
-	int32_t tdelta =
-		start_walk
-		(g,
-		 static_cast<WalkingDir>(dir),
-		 state->diranims->get_animation(dir),
-		 forcemove);
-
-	if (tdelta < 0) {
-		molog("[movepath]: Can't walk.\n");
-		set_signal("fail"); // failure to reach goal
-		pop_task();
-		return;
-	}
-
 	++state->ivar1;
-	schedule_act(g, tdelta);
+	start_task_move(g, dir, state->diranims, forcemove);
+	// Note: state pointer is invalid beyond this point
 }
 
 
-void Bob::movepath_signal(Game *, State *)
-{
-	if (get_signal()=="interrupt_now")
-		// User requests an immediate interrupt.
-		// Well, he better nows what he's doing
-		pop_task();
-}
+/**
+ * Move into one direction for one step.
+ * \li ivar1: direction
+ * \li ivar2: non-zero if the move should be forced
+ */
+Bob::Task Bob::taskMove = {
+	"move",
 
-
-Bob::Task Bob::taskForcemove = {
-	"forcemove",
-
-	&Bob::forcemove_update,
-	0,
-	0,
+	&Bob::move_update,
+	0
 };
 
 
 /**
  * Move into the given direction, without passability checks.
  */
-void Bob::start_task_forcemove(const int32_t dir, const DirAnimations & anims)
+void Bob::start_task_move(Game* g, const int32_t dir, const DirAnimations* anims, bool forcemove)
 {
-	push_task(taskForcemove);
+	push_task(g, taskMove);
 	State & state  = top_state();
 	state.ivar1    = dir;
-	state.diranims = &anims;
+	state.ivar2    = forcemove;
+	state.diranims = anims;
 }
 
 
-void Bob::forcemove_update(Game* g, State* state)
+void Bob::move_update(Game* g, State* state)
 {
 	if (state->diranims) {
 		int32_t tdelta = start_walk
 			(g,
 			 static_cast<WalkingDir>(state->ivar1),
 			 state->diranims->get_animation(state->ivar1),
-			 true);
-
+			 state->ivar2);
 		state->diranims = 0;
-		schedule_act(g, tdelta);
 
+		if (tdelta < 0) {
+			send_signal(g, "fail");
+			pop_task(g);
+			return;
+		}
+
+		schedule_act(g, tdelta);
 	} else {
-		end_walk();
-		pop_task();
+		if (g->get_gametime() - m_walkend >= 0) {
+			end_walk();
+			pop_task(g);
+		} else {
+			// Only end the task once we've actually completed the step
+			// Ignore signals until then
+			schedule_act(g, m_walkend - g->get_gametime());
+		}
 	}
 }
 
@@ -1033,6 +934,7 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 	molog("Owner: %p\n", m_owner);
 	molog("Postition: (%i, %i)\n", m_position.x, m_position.y);
 	molog("ActID: %i\n", m_actid);
+	molog("ActScheduled: %s\n", m_actscheduled ? "true" : "false");
 	molog
 		("Animation: %s\n",
 		 m_anim ? descr().get_animation_name(m_anim).c_str() : "<none>");
@@ -1042,9 +944,7 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 	molog("WalkingStart: %i\n", m_walkstart);
 	molog("WalkEnd: %i\n", m_walkend);
 
-	molog("Stack dirty: %i\n", m_stack_dirty);
-	molog("Init auto task: %i\n", m_sched_init_task);
-	molog("Signale: %s\n", m_signal.c_str());
+	molog("Signal: %s\n", m_signal.c_str());
 
 	molog("Stack size: %i\n", m_stack.size());
 

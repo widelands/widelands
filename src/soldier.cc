@@ -423,13 +423,12 @@ void Soldier::start_animation
 Bob::Task Soldier::taskMoveToBattle = {
 	"moveToBattle",
 	static_cast<Bob::Ptr>(&Soldier::moveToBattleUpdate),
-	static_cast<Bob::Ptr>(&Soldier::moveToBattleSignal),
 	0,
 };
 
 void Soldier::startTaskMoveToBattle(Game * g, Flag *, Coords coords) {
-	log ("Soldier::startTaskMoveToBattle\n");
-	push_task(taskMoveToBattle);
+	molog ("Soldier::startTaskMoveToBattle\n");
+	push_task(g, taskMoveToBattle);
 
 	State* s = get_state();
 
@@ -441,6 +440,33 @@ void Soldier::startTaskMoveToBattle(Game * g, Flag *, Coords coords) {
 }
 
 void Soldier::moveToBattleUpdate(Game * game, State* state) {
+	std::string signal = get_signal();
+
+	if (signal.size()) {
+		molog("moveToBattleSignal got signal: %s", signal.c_str());
+
+		if (signal == "won_battle") {
+			signal_handled();
+			skip_act();
+			m_attack_ctrl->soldierWon(this);
+			return;
+		} else if (signal == "die") {
+			signal_handled();
+			skip_act();
+			m_attack_ctrl->soldierDied(this);
+			return;
+		} else if (signal == "return_home") {
+			signal_handled();
+			pop_task(game);
+			startTaskMoveHome(game);
+			return;
+		} else {
+			// "location" et al: interrupt what we're doing
+			pop_task(game);
+			return;
+		}
+	}
+
 	// See if soldier is at building and drop of it
 	if (state->ivar1 == 1) {
 		if
@@ -468,44 +494,23 @@ void Soldier::moveToBattleUpdate(Game * game, State* state) {
 			  descr().get_right_walk_anims(does_carry_ware())))
 		{
 			molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
-			set_signal("fail");
-			pop_task();
+			send_signal(game, "fail");
+			pop_task(game);
 			return;
 		}
 	}
 }
 
-void Soldier::moveToBattleSignal(Game * g, State *) {
-	std::string signal = get_signal();
-	set_signal("");
-
-	log("moveToBattleSignal got signal: %s", signal.c_str());
-
-	if (signal == "won_battle") {
-		m_attack_ctrl->soldierWon(this);
-		return;
-	}
-	else if (signal == "die") {
-		m_attack_ctrl->soldierDied(this);
-		return;
-	}
-	else if (signal == "return_home") {
-		pop_task();
-		startTaskMoveHome(g);
-		return;
-	}
-}
 
 Bob::Task Soldier::taskMoveHome = {
 	"moveHome",
 	static_cast<Bob::Ptr>(&Soldier::moveHomeUpdate),
-	static_cast<Bob::Ptr>(&Soldier::moveHomeSignal),
 	0,
 };
 
 void Soldier::startTaskMoveHome(Game* g) {
-	log ("Soldier::startTaskMoveHome\n");
-	push_task(taskMoveHome);
+	molog ("Soldier::startTaskMoveHome\n");
+	push_task(g, taskMoveHome);
 
 	State* s = get_state();
 	s->ivar1 = 1;
@@ -514,6 +519,12 @@ void Soldier::startTaskMoveHome(Game* g) {
 }
 
 void Soldier::moveHomeUpdate(Game* g, State* state) {
+	if (get_signal().size()) {
+		molog("moveToSignal: abort due to signal %s\n", get_signal().c_str());
+		pop_task(g);
+		return;
+	}
+
 	// Move home
 	if (state->ivar1 == 1) {
 		state->ivar1 = 2;
@@ -523,13 +534,6 @@ void Soldier::moveHomeUpdate(Game* g, State* state) {
 	else {
 		start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
 	}
-}
-
-void Soldier::moveHomeSignal(Game *, State *) {
-	std::string signal = get_signal();
-	set_signal("");
-
-	log("moveToSignal got signal, don't know what to do with it.: %s", signal.c_str());
 }
 
 void Soldier::log_general_info(Editor_Game_Base* egbase)

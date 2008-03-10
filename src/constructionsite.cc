@@ -369,7 +369,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		if (builder) {
 			builder->reset_tasks(dynamic_cast<Game *>(g));
 			builder->set_location(bld);
-			builder->start_task_gowarehouse();
+			builder->start_task_gowarehouse(dynamic_cast<Game *>(g));
 		}
 	}
 }
@@ -419,7 +419,7 @@ Called by transfer code when the builder has arrived on site.
 ===============
 */
 void ConstructionSite::request_builder_callback
-(Game *, Request * rq, Ware_Index, Worker * const w, void * const data)
+(Game *g, Request * rq, Ware_Index, Worker * const w, void * const data)
 {
 	assert(w);
 
@@ -430,7 +430,7 @@ void ConstructionSite::request_builder_callback
 	delete rq;
 	cs.m_builder_request = 0;
 
-	w->start_task_buildingwork();
+	w->start_task_buildingwork(g);
 }
 
 
@@ -483,7 +483,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 	// Fetch items from flag
 	if (m_fetchfromflag) {
 		--m_fetchfromflag;
-		w->start_task_fetchfromflag();
+		w->start_task_fetchfromflag(g);
 		return true;
 	}
 

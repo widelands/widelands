@@ -212,7 +212,7 @@ void ProductionSite::fill(Game & game) {
 		Worker & worker =
 			tribe.get_worker_descr(tribe.worker_index(it->c_str()))->create
 			(game, owner(), *get_base_flag(), get_position());
-		worker.start_task_buildingwork();
+		worker.start_task_buildingwork(&game);
 		m_workers.push_back(&worker);
 	}
 }
@@ -444,7 +444,7 @@ void ProductionSite::request_worker_callback
 
 	if (can_start_working) {
 		if (w_is_not_main_worker) main_worker->send_signal(g, "wakeup");
-		psite.m_workers[0]->start_task_buildingwork();
+		psite.m_workers[0]->start_task_buildingwork(g);
 	}
 }
 
@@ -966,7 +966,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 
 	if (m_fetchfromflag) {
 		--m_fetchfromflag;
-		w->start_task_fetchfromflag();
+		w->start_task_fetchfromflag(g);
 		return true;
 	}
 
@@ -983,7 +983,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 		if (action->type == ProductionAction::actWorker) {
 			if (state->phase == 0)
 			{
-				w->start_task_program(action->sparam1);
+				w->start_task_program(g, action->sparam1);
 				++state->phase;
 				return true;
 			}

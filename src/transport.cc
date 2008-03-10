@@ -1009,7 +1009,7 @@ void Flag::add_flag_job(Game *, int32_t workerware, std::string programname) {
  * the flag. Give him his job.
 */
 void Flag::flag_job_request_callback
-(Game *, Request * rq, Ware_Index, Worker * w, void * data)
+(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
 {
 	Flag * const flag = static_cast<Flag *>(data);
 
@@ -1021,7 +1021,7 @@ void Flag::flag_job_request_callback
 
 		delete rq;
 
-		w->start_task_program(it->program);
+		w->start_task_program(g, it->program);
 
 		flag->m_flag_jobs.erase(it);
 		return;
@@ -1099,7 +1099,7 @@ void Road::create
 			dynamic_cast<Carrier &>
 			(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
 			 (egbase, owner, start, idle_position));
-		carrier.start_task_road();
+		carrier.start_task_road(dynamic_cast<Game*>(&egbase));
 		road.m_carrier = &carrier;
 	}
 	log("Road::create: &road = %p\n", &road);
@@ -1336,7 +1336,7 @@ void Road::request_carrier(Game * g) {
  * The carrier has arrived successfully.
 */
 void Road::request_carrier_callback
-(Game *, Request * rq, Ware_Index, Worker * w, void * data)
+(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
 {
 	assert(w);
 
@@ -1347,7 +1347,7 @@ void Road::request_carrier_callback
 	road.m_carrier_request = 0;
 
 	road.m_carrier = &carrier;
-	carrier.start_task_road();
+	carrier.start_task_road(g);
 }
 
 /**

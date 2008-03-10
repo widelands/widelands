@@ -132,7 +132,6 @@ void Critter_BobProgram::parse_remove
 
 bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 {
-
 	++state->ivar1;
 	// Bye, bye cruel world
 	schedule_destroy(g);
@@ -270,7 +269,6 @@ coords is used to store target coordinates found by findspace
 Bob::Task Critter_Bob::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Critter_Bob::program_update),
-	static_cast<Bob::Ptr>(&Critter_Bob::program_signal),
 	0
 };
 
@@ -282,8 +280,8 @@ Critter_Bob::start_task_program
 Start the given program.
 ===============
 */
-void Critter_Bob::start_task_program(const std::string & programname) {
-	push_task(taskProgram);
+void Critter_Bob::start_task_program(Game* g, const std::string & programname) {
+	push_task(g, taskProgram);
 	State & state = top_state();
 	state.program = descr().get_program(programname);
 	state.ivar1   = 0;
@@ -297,6 +295,12 @@ Critter_Bob::program_update
 */
 void Critter_Bob::program_update(Game* g, State* state)
 {
+	if (get_signal().size()) {
+		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
+		pop_task(g);
+		return;
+	}
+
 	const Critter_BobAction* action;
 
 	for (;;) {
@@ -305,7 +309,7 @@ void Critter_Bob::program_update(Game* g, State* state)
 
 		if (state->ivar1 >= program.get_size()) {
 			molog("  End of program\n");
-			pop_task();
+			pop_task(g);
 			return;
 		}
 
@@ -315,18 +319,6 @@ void Critter_Bob::program_update(Game* g, State* state)
 			return;
 	}
 }
-
-
-/*
-===============
-Critter_Bob::program_signal
-===============
-*/
-void Critter_Bob::program_signal(Game *, State *) {
-	molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
-	pop_task();
-}
-
 
 
 /*
@@ -342,16 +334,15 @@ Simply roam the map
 Bob::Task Critter_Bob::taskRoam = {
 	"roam",
 	static_cast<Bob::Ptr>(&Critter_Bob::roam_update),
-	static_cast<Bob::Ptr>(&Critter_Bob::roam_signal),
 	0,
 };
 
 void Critter_Bob::roam_update(Game* g, State* state)
 {
-
-	// ignore all signals
-	if (get_signal().size())
-		set_signal("");
+	if (get_signal().size()) {
+		pop_task(g);
+		return;
+	}
 
 	// alternately move and idle
 	if (state->ivar1) {
@@ -380,10 +371,8 @@ void Critter_Bob::roam_update(Game* g, State* state)
 	}
 }
 
-void Critter_Bob::roam_signal(Game *, State *) {pop_task();}
-
-void Critter_Bob::init_auto_task(Game *) {
-	push_task(taskRoam);
+void Critter_Bob::init_auto_task(Game *g) {
+	push_task(g, taskRoam);
 	top_state().ivar1 = 0;
 }
 

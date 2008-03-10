@@ -132,8 +132,8 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	if (totalres == 0) {
 		molog("  Run out of resources\n");
-		set_signal("fail"); // mine empty, abort program
-		pop_task();
+		send_signal(g, "fail"); // mine empty, abort program
+		pop_task(g);
 		return true;
 	}
 
@@ -160,8 +160,8 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	if (pick >= 0) {
 		molog("  Not successful this time\n");
-		set_signal("fail"); // not successful, abort program
-		pop_task();
+		send_signal(g, "fail"); // not successful, abort program
+		pop_task(g);
 		return true;
 	}
 
@@ -205,8 +205,8 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 
 	if (state->ivar2 < 0) {
 		molog("  WARNING: Unknown immovable %s\n", action->sparamv[idx].c_str());
-		set_signal("fail");
-		pop_task();
+		send_signal(g, "fail");
+		pop_task(g);
 		return true;
 	}
 
@@ -248,8 +248,8 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
 
 	if (state->ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", action->sparamv[idx].c_str());
-		set_signal("fail");
-		pop_task();
+		send_signal(g, "fail");
+		pop_task(g);
 		return true;
 	}
 
@@ -299,8 +299,8 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 				(area, &list, cstep, FindImmovableAttribute(action->iparam2));
 
 		if (!list.size()) {
-			set_signal("fail"); // no object found, cannot run program
-			pop_task();
+			send_signal(g, "fail"); // no object found, cannot run program
+			pop_task(g);
 			return true;
 		}
 
@@ -318,8 +318,8 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 				(area, &list, cstep, FindBobAttribute(action->iparam2));
 
 		if (!list.size()) {
-			set_signal("fail"); // no object found, cannot run program
-			pop_task();
+			send_signal(g, "fail"); // no object found, cannot run program
+			pop_task(g);
 			return true;
 		}
 		int32_t sel = g->logic_rand() % list.size();
@@ -405,8 +405,8 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 	if (!map.find_reachable_fields(area, &list, cstep, functor))
 	{
 		molog("  no space found\n");
-		set_signal("fail");
-		pop_task();
+		send_signal(g, "fail");
+		pop_task(g);
 		return true;
 	}
 
@@ -456,8 +456,8 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 
 		if (!obj) {
 			molog("  object(nil)\n");
-			set_signal("fail");
-			pop_task();
+			send_signal(g, "fail");
+			pop_task(g);
 			return true;
 		}
 
@@ -503,8 +503,8 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 		  forceonlast, max_steps))
 	{
 		molog("  couldn't find path\n");
-		set_signal("fail");
-		pop_task();
+		send_signal(g, "fail");
+		pop_task(g);
 		return true;
 	}
 
@@ -563,8 +563,8 @@ bool Worker::run_object(Game* g, State* state, const Action* action)
 
 	if (!obj) {
 		molog("  object(nil)\n");
-		set_signal("fail");
-		pop_task();
+		send_signal(g, "fail");
+		pop_task(g);
 		return true;
 	}
 
@@ -574,11 +574,11 @@ bool Worker::run_object(Game* g, State* state, const Action* action)
 		immovable->switch_program(g, action->sparam1);
 	else if (upcast(Bob,       bob,       obj)) {
 		if        (upcast(Critter_Bob, crit, bob)) {
-			crit->send_signal(g, "interrupt_now");
-			crit->start_task_program(action->sparam1);
+			crit->reset_tasks(g); //TODO: We should ask the critter more nicely
+			crit->start_task_program(g, action->sparam1);
 		} else if (upcast(Worker,      w,    bob)) {
-			w   ->send_signal(g, "interrupt_now");
-			w   ->start_task_program(action->sparam1);
+			w   ->reset_tasks(g); //TODO: We should ask the worker more nicely
+			w   ->start_task_program(g, action->sparam1);
 		} else
 			throw wexception
 				("MO(%i): [actObject]: bab bob type = %i",
@@ -608,8 +608,8 @@ bool Worker::run_plant(Game * g, State * state, const Action *)
 	if (BaseImmovable const * const imm = g->map()[pos].get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL) {
 			molog("  field no longer free\n");
-			set_signal("fail");
-			pop_task();
+			send_signal(g, "fail");
+			pop_task(g);
 			return true;
 		}
 
@@ -679,7 +679,7 @@ bool Worker::run_geologist(Game* g, State* state, const Action* action)
 		 action->iparam1, action->iparam2, action->sparam1.c_str());
 
 	++state->ivar1;
-	start_task_geologist(action->iparam1, action->iparam2, action->sparam1);
+	start_task_geologist(g, action->iparam1, action->iparam2, action->sparam1);
 	return true;
 }
 
@@ -938,7 +938,7 @@ WareInstance* Worker::fetch_carried_item(Game* g)
 void Worker::schedule_incorporate(Game* g)
 {
 	g->get_cmdqueue()->enqueue (new Cmd_Incorporate(g->get_gametime(), this));
-	force_skip_act();
+	skip_act();
 }
 
 
@@ -1029,7 +1029,7 @@ void Worker::init_auto_task(Game * game) {
 		if (get_economy()->get_nr_warehouses()) {
 			molog("init_auto_task: go warehouse\n");
 
-			start_task_gowarehouse();
+			start_task_gowarehouse(game);
 			return;
 		}
 
@@ -1050,8 +1050,7 @@ void Worker::init_auto_task(Game * game) {
 Bob::Task Worker::taskTransfer = {
 	"transfer",
 	static_cast<Bob::Ptr>(&Worker::transfer_update),
-	static_cast<Bob::Ptr>(&Worker::transfer_signal),
-	static_cast<Bob::Ptr>(&Worker::transfer_mask),
+	static_cast<Bob::PtrSignal>(&Worker::transfer_signalimmediate)
 };
 
 
@@ -1067,28 +1066,29 @@ void Worker::start_task_transfer(Game* g, Transfer* t)
 	if (state) {
 		assert(!state->transfer);
 
+		molog("start_task_transfer while in gowarehouse\n");
 		state->transfer = t;
 		send_signal(g, "transfer");
 		return;
 	}
 
 	// just start a normal transfer
-	push_task(taskTransfer);
+	push_task(g, taskTransfer);
 
 	state = get_state();
 	state->transfer = t;
 }
 
 
-void Worker::transfer_update(Game * game, State * state) {
-	Map & map = game->map();
-	PlayerImmovable * location = get_location(game);
+void Worker::transfer_update(Game * g, State * state) {
+	Map & map = g->map();
+	PlayerImmovable * location = get_location(g);
 
 	// We expect to always have a location at this point,
 	// but this assumption may fail when loading a corrupted savegame.
 	if (!location) {
-		set_signal("location");
-		pop_task();
+		send_signal(g, "location");
+		pop_task(g);
 		return;
 	}
 
@@ -1096,9 +1096,27 @@ void Worker::transfer_update(Game * game, State * state) {
 	if (!state->transfer) {
 		molog("[transfer]: Fail (without transfer)\n");
 
-		set_signal("fail");
-		pop_task();
+		send_signal(g, "fail");
+		pop_task(g);
 		return;
+	}
+
+	// Signal handling
+	std::string signal = get_signal();
+
+	if (signal.size()) {
+		// The caller requested a route update, or the previously calulcated route
+		// failed.
+		// We will recalculate the route on the next update().
+		if (signal == "road" || signal == "fail") {
+			molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
+
+			signal_handled();
+		} else {
+			molog("[transfer]: Cancel due to signal '%s'\n", signal.c_str());
+			pop_task(g);
+			return;
+		}
 	}
 
 	// If our location is a building, make sure we're actually in it.
@@ -1146,14 +1164,14 @@ void Worker::transfer_update(Game * game, State * state) {
 
 		if (success) {
 			molog("[transfer]: Success\n");
-			pop_task();
+			pop_task(g);
 
 			t->has_finished();
 			return;
 		} else {
 			molog("[transfer]: Failed\n");
-			set_signal("fail");
-			pop_task();
+			send_signal(g, "fail");
+			pop_task(g);
 
 			t->has_failed();
 			return;
@@ -1169,7 +1187,7 @@ void Worker::transfer_update(Game * game, State * state) {
 				 get_serial());
 
 		molog("[transfer]: move from building to flag\n");
-		start_task_leavebuilding(game, true);
+		start_task_leavebuilding(g, true);
 	} else if (upcast(Flag,     flag,     location)) {
 		if        (upcast(Building, nextbuild, nextstep)) { //  Flag to Building
 			if (nextbuild->get_base_flag() != location)
@@ -1179,8 +1197,8 @@ void Worker::transfer_update(Game * game, State * state) {
 					 get_serial());
 
 			molog("[transfer]: move from flag to building\n");
-			start_task_forcemove
-				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
+			start_task_move
+				(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
 		} else if (upcast(Flag,     nextflag,  nextstep)) { //  Flag to Flag
 			Road & road = *flag->get_road(nextflag);
 
@@ -1193,7 +1211,7 @@ void Worker::transfer_update(Game * game, State * state) {
 				path.reverse();
 
 			start_task_movepath
-				(path, descr().get_right_walk_anims(does_carry_ware()));
+				(g, path, descr().get_right_walk_anims(does_carry_ware()));
 			set_location(&road);
 		} else if (upcast(Road,    road,      nextstep)) { //  Flag to Road
 			if
@@ -1206,8 +1224,8 @@ void Worker::transfer_update(Game * game, State * state) {
 
 			molog("[transfer]: set location to road %u\n", road->get_serial());
 			set_location(road);
-			set_animation(game, descr().get_animation("idle"));
-			schedule_act(game, 10); //  wait a little
+			set_animation(g, descr().get_animation("idle"));
+			schedule_act(g, 10); //  wait a little
 		} else
 			throw wexception
 				("MO(%u): [transfer]: flag to bad nextstep %u",
@@ -1232,7 +1250,7 @@ void Worker::transfer_update(Game * game, State * state) {
 			if (index >= 0) {
 				if
 					(start_task_movepath
-					 (map,
+					 (g, map,
 					  path,
 					  index,
 					  descr().get_right_walk_anims(does_carry_ware())))
@@ -1249,8 +1267,8 @@ void Worker::transfer_update(Game * game, State * state) {
 
 			molog("[transfer]: arrive at flag %u\n", nextstep->get_serial());
 			set_location(dynamic_cast<Flag *>(nextstep));
-			set_animation(game, descr().get_animation("idle"));
-			schedule_act(game, 10); //  wait a little
+			set_animation(g, descr().get_animation("idle"));
+			schedule_act(g, 10); //  wait a little
 		} else
 			throw wexception
 				("MO(%u): [transfer]: from road to bad nextstep %u",
@@ -1262,29 +1280,8 @@ void Worker::transfer_update(Game * game, State * state) {
 }
 
 
-void Worker::transfer_signal(Game *, State *)
+void Worker::transfer_signalimmediate(Game *, State * state, const std::string& signal)
 {
-	std::string signal = get_signal();
-
-	// The caller requested a route update, or the previously calulcated route
-	// failed.
-	// We will recalculate the route on the next update().
-	if (signal == "road" || signal == "fail") {
-		molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
-
-		set_signal("");
-		return;
-	}
-
-	molog("[transfer]: Cancel due to signal '%s'\n", signal.c_str());
-	pop_task();
-}
-
-
-void Worker::transfer_mask(Game *, State * state)
-{
-	std::string signal = get_signal();
-
 	if (signal == "cancel")
 		state->transfer = 0; //  do not call transfer_fail/finish when cancelled
 }
@@ -1311,7 +1308,6 @@ void Worker::cancel_task_transfer(Game* g)
 Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
 	static_cast<Bob::Ptr>(&Worker::buildingwork_update),
-	static_cast<Bob::Ptr>(&Worker::buildingwork_signal),
 	0
 };
 
@@ -1319,9 +1315,9 @@ Bob::Task Worker::taskBuildingwork = {
 /**
  * Begin work at a building.
  */
-void Worker::start_task_buildingwork()
+void Worker::start_task_buildingwork(Game* g)
 {
-	push_task(taskBuildingwork);
+	push_task(g, taskBuildingwork);
 	top_state().ivar1 = 0;
 }
 
@@ -1331,13 +1327,12 @@ void Worker::buildingwork_update(Game* g, State* state)
 	std::string signal = get_signal();
 
 	if (signal == "location") {
-		pop_task();
+		pop_task(g);
 		return;
 	}
 
 	// Reset any other signals
-
-	set_signal("");
+	signal_handled();
 
 	if (state->ivar1 == 1)
 	{
@@ -1371,17 +1366,6 @@ void Worker::buildingwork_update(Game* g, State* state)
 }
 
 
-void Worker::buildingwork_signal(Game * g, State *)
-{
-	std::string signal = get_signal();
-
-	if (signal == "update")
-		set_signal("");
-
-	schedule_act(g, 1);
-}
-
-
 /**
  * Wake up the buildingwork task if it was sleeping.
  * Otherwise, the buildingwork task will update as soon as the previous task
@@ -1405,7 +1389,6 @@ void Worker::update_task_buildingwork(Game* g)
 Bob::Task Worker::taskReturn = {
 	"return",
 	static_cast<Bob::Ptr>(&Worker::return_update),
-	static_cast<Bob::Ptr>(&Worker::return_signal),
 	0,
 };
 
@@ -1422,23 +1405,29 @@ void Worker::start_task_return(Game* g, bool dropitem)
 	if (!location || location->get_type() != BUILDING)
 		throw wexception("MO(%u): start_task_return(): not owned by building", get_serial());
 
-	push_task(taskReturn);
-
-	molog("pushed task\n");
-
+	push_task(g, taskReturn);
 	get_state()->ivar1 = dropitem ? 1 : 0;
-
-	molog("done\n");
 }
 
 
 void Worker::return_update(Game* g, State* state)
 {
+	std::string signal = get_signal();
+
+	if (signal == "location") {
+		molog("[return]: Interrupted by signal '%s'\n", signal.c_str());
+		pop_task(g);
+		return;
+	}
+
+	molog("[return]: Ignoring and blocking signal '%s'\n", signal.c_str());
+	signal_handled();
+
 	Building & location = dynamic_cast<Building &>(*get_location(g));
 	if (BaseImmovable * const pos = g->map().get_immovable(get_position())) {
 		if (pos == &location) {
 			set_animation(g, 0);
-			pop_task();
+			pop_task(g);
 			return;
 		}
 
@@ -1461,8 +1450,8 @@ void Worker::return_update(Game* g, State* state)
 
 				molog("[return]: Move back into building\n");
 
-				start_task_forcemove
-					(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
+				start_task_move
+					(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
 				return;
 			}
 		}
@@ -1488,20 +1477,6 @@ void Worker::return_update(Game* g, State* state)
 }
 
 
-void Worker::return_signal(Game *, State *)
-{
-	std::string signal = get_signal();
-
-	if (signal == "location") {
-		molog("[return]: Interrupted by signal '%s'\n", signal.c_str());
-		pop_task();
-		return;
-	}
-
-	molog("[return]: Blocking signal '%s'\n", signal.c_str());
-	set_signal("");
-}
-
 
 /**
  * Follow the steps of a configuration-defined program.
@@ -1513,7 +1488,6 @@ void Worker::return_signal(Game *, State *)
 Bob::Task Worker::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Worker::program_update),
-	static_cast<Bob::Ptr>(&Worker::program_signal),
 	0
 };
 
@@ -1521,9 +1495,9 @@ Bob::Task Worker::taskProgram = {
 /**
  * Start the given program.
  */
-void Worker::start_task_program(const std::string & programname)
+void Worker::start_task_program(Game* g, const std::string & programname)
 {
-	push_task(taskProgram);
+	push_task(g, taskProgram);
 	State & state = top_state();
 	state.program = descr().get_program(programname);
 	state.ivar1 = 0;
@@ -1532,6 +1506,12 @@ void Worker::start_task_program(const std::string & programname)
 
 void Worker::program_update(Game* g, State* state)
 {
+	if (get_signal().size()) {
+		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
+		pop_task(g);
+		return;
+	}
+
 	const Action* action;
 
 	for (;;) {
@@ -1540,7 +1520,7 @@ void Worker::program_update(Game* g, State* state)
 
 		if (state->ivar1 >= program->get_size()) {
 			molog("  End of program\n");
-			pop_task();
+			pop_task(g);
 			return;
 		}
 
@@ -1552,18 +1532,10 @@ void Worker::program_update(Game* g, State* state)
 }
 
 
-void Worker::program_signal(Game *, State *)
-{
-	molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
-	pop_task();
-}
-
-
 Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",
 	static_cast<Bob::Ptr>(&Worker::gowarehouse_update),
-	static_cast<Bob::Ptr>(&Worker::gowarehouse_signal),
-	0,
+	static_cast<Bob::PtrSignal>(&Worker::gowarehouse_signalimmediate),
 };
 
 
@@ -1572,13 +1544,11 @@ Bob::Task Worker::taskGowarehouse = {
  * The worker is added to the list of usable wares, so he may be reassigned to
  * a new task immediately.
  */
-void Worker::start_task_gowarehouse()
+void Worker::start_task_gowarehouse(Game* g)
 {
 	assert(!m_supply);
 
-	push_task(taskGowarehouse);
-
-	m_supply = new IdleWorkerSupply(this);
+	push_task(g, taskGowarehouse);
 }
 
 
@@ -1586,7 +1556,32 @@ void Worker::gowarehouse_update(Game* g, State* state)
 {
 	PlayerImmovable *location = get_location(g);
 
-	assert(location); // 'location' signal expected otherwise
+	if (!location) {
+		send_signal(g, "location");
+		pop_task(g);
+		return;
+	}
+
+	// Signal handling
+	std::string signal = get_signal();
+
+	if (signal.size()) {
+		// if routing has failed, try a different warehouse/route on next update()
+		if (signal == "fail") {
+			molog("[gowarehouse]: caught 'fail'\n");
+			signal_handled();
+		} else if (signal == "transfer") {
+			molog("[gowarehouse]: transfer signal\n");
+			signal_handled();
+		} else {
+			molog("[gowarehouse]: cancel for signal '%s'\n", signal.c_str());
+
+			delete m_supply;
+			m_supply = 0;
+			pop_task(g);
+			return;
+		}
+	}
 
 	if (dynamic_cast<Warehouse const *>(location)) {
 		molog("[gowarehouse]: Back in warehouse, schedule incorporate\n");
@@ -1608,7 +1603,7 @@ void Worker::gowarehouse_update(Game* g, State* state)
 		delete m_supply;
 		m_supply = 0;
 
-		pop_task();
+		pop_task(g);
 		start_task_transfer(g, t);
 		return;
 	}
@@ -1619,7 +1614,7 @@ void Worker::gowarehouse_update(Game* g, State* state)
 		delete m_supply;
 		m_supply = 0;
 
-		pop_task();
+		pop_task(g);
 		return;
 	}
 
@@ -1630,45 +1625,25 @@ void Worker::gowarehouse_update(Game* g, State* state)
 	// flag is removed or a warehouse connects to the Economy).
 	molog("[gowarehouse]: Idle\n");
 
+	if (!m_supply)
+		m_supply = new IdleWorkerSupply(this);
+
 	start_task_idle(g, get_animation("idle"), 1000);
 }
 
-
-void Worker::gowarehouse_signal(Game * g, State *)
+void Worker::gowarehouse_signalimmediate(Game* g, State* state, const std::string& signal)
 {
-	std::string signal = get_signal();
-
-	// if routing has failed, try a different warehouse/route on next update()
-	if (signal == "fail") {
-		molog("[gowarehouse]: caught 'fail'\n");
-
-		set_signal("");
-		return;
-	}
-
 	if (signal == "transfer") {
-		molog("[gowarehouse]: transfer signal\n");
-
+		// We are assigned a transfer, make sure our supply disappears immediately
 		delete m_supply;
 		m_supply = 0;
-
-		schedule_act(g, 1);
-		set_signal("");
-		return;
 	}
-
-	molog("[gowarehouse]: cancel for signal '%s'\n", signal.c_str());
-
-	delete m_supply;
-	m_supply = 0;
-	pop_task();
 }
 
 
 Bob::Task Worker::taskDropoff = {
 	"dropoff",
 	static_cast<Bob::Ptr>(&Worker::dropoff_update),
-	0,
 	0,
 };
 
@@ -1681,7 +1656,7 @@ void Worker::start_task_dropoff(Game* g, WareInstance* item)
 
 	set_carried_item(g, item);
 
-	push_task(taskDropoff);
+	push_task(g, taskDropoff);
 }
 
 
@@ -1691,7 +1666,7 @@ void Worker::dropoff_update(Game * g, State *)
 
 	if (signal.size()) {
 		molog("[dropoff]: Interrupted by signal '%s'\n", signal.c_str());
-		pop_task();
+		pop_task(g);
 		return;
 	}
 
@@ -1731,8 +1706,8 @@ void Worker::dropoff_update(Game * g, State *)
 			}
 
 			molog("[dropoff]: flag is overloaded\n");
-			start_task_forcemove
-				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
+			start_task_move
+				(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
 			return;
 		}
 
@@ -1741,8 +1716,8 @@ void Worker::dropoff_update(Game * g, State *)
 
 	// We don't have the item any more, return home
 	if (location->get_type() == Map_Object::FLAG) {
-		start_task_forcemove
-			(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
+		start_task_move
+			(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
 		return;
 	}
 
@@ -1756,7 +1731,7 @@ void Worker::dropoff_update(Game * g, State *)
 
 	// Our parent task should know what to do
 	molog("[dropoff]: back in building\n");
-	pop_task();
+	pop_task(g);
 }
 
 
@@ -1768,7 +1743,6 @@ Bob::Task Worker::taskFetchfromflag = {
 	"fetchfromflag",
 	static_cast<Bob::Ptr>(&Worker::fetchfromflag_update),
 	0,
-	0,
 };
 
 
@@ -1776,9 +1750,9 @@ Bob::Task Worker::taskFetchfromflag = {
  * Walk to the building's flag, fetch an item from the flag that is destined for
  * the building, and walk back inside.
  */
-void Worker::start_task_fetchfromflag()
+void Worker::start_task_fetchfromflag(Game* g)
 {
-	push_task(taskFetchfromflag);
+	push_task(g, taskFetchfromflag);
 	top_state().ivar1 = 0;
 }
 
@@ -1815,8 +1789,8 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	if (dynamic_cast<Flag const *>(location)) {
 		molog("[fetchfromflag]: return to building\n");
 
-		start_task_forcemove
-			(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
+		start_task_move
+			(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
 		return;
 	}
 
@@ -1838,7 +1812,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 		return;
 	}
 
-	pop_task(); // assume our parent task knows what to do
+	pop_task(g); // assume our parent task knows what to do
 }
 
 
@@ -1848,7 +1822,6 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 Bob::Task Worker::taskWaitforcapacity = {
 	"waitforcapacity",
 	static_cast<Bob::Ptr>(&Worker::waitforcapacity_update),
-	static_cast<Bob::Ptr>(&Worker::waitforcapacity_signal),
 	0,
 };
 
@@ -1865,7 +1838,7 @@ bool Worker::start_task_waitforcapacity(Game* g, Flag* flag)
 	if (flag->has_capacity())
 		return false;
 
-	push_task(taskWaitforcapacity);
+	push_task(g, taskWaitforcapacity);
 
 	get_state()->objvar1 = flag;
 
@@ -1875,19 +1848,18 @@ bool Worker::start_task_waitforcapacity(Game* g, Flag* flag)
 }
 
 
-void Worker::waitforcapacity_update(Game *, State *)
+void Worker::waitforcapacity_update(Game * g, State *)
 {
+	std::string signal = get_signal();
+
+	if (signal.size()) {
+		if (signal == "wakeup")
+			signal_handled();
+		pop_task(g);
+		return;
+	}
+
 	skip_act(); // wait indefinitely
-}
-
-
-void Worker::waitforcapacity_signal(Game *, State *)
-{
-	// The 'wakeup' signal is to be expected; don't propagate it
-	if (get_signal() == "wakeup")
-		set_signal("");
-
-	pop_task();
 }
 
 
@@ -1921,7 +1893,6 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 Bob::Task Worker::taskLeavebuilding = {
 	"leavebuilding",
 	static_cast<Bob::Ptr>(&Worker::leavebuilding_update),
-	static_cast<Bob::Ptr>(&Worker::leavebuilding_signal),
 	0,
 };
 
@@ -1938,7 +1909,7 @@ void Worker::start_task_leavebuilding(Game* g, bool changelocation)
 	Building & building = dynamic_cast<Building &>(*get_location(g));
 
 	// Set the wait task
-	push_task(taskLeavebuilding);
+	push_task(g, taskLeavebuilding);
 
 	get_state()->ivar1 = changelocation ? 1 : 0;
 	get_state()->objvar1 = &building;
@@ -1947,6 +1918,17 @@ void Worker::start_task_leavebuilding(Game* g, bool changelocation)
 
 void Worker::leavebuilding_update(Game* g, State* state)
 {
+	std::string signal = get_signal();
+
+	if (signal == "wakeup") {
+		molog("[leavebuilding]: Wake up\n");
+		signal_handled();
+	} else if (signal.size()) {
+		molog("[leavebuilding]: Interrupted by signal '%s'\n", signal.c_str());
+		pop_task(g);
+		return;
+	}
+
 	if (upcast(Building, building, g->map().get_immovable(get_position()))) {
 		assert(building == state->objvar1.get(g));
 
@@ -1963,26 +1945,10 @@ void Worker::leavebuilding_update(Game* g, State* state)
 		if (state->ivar1)
 			set_location(building->get_base_flag());
 
-		start_task_forcemove
-			(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
+		start_task_move
+			(g, WALK_SE, &descr().get_right_walk_anims(does_carry_ware()), true);
 	} else
-		pop_task();
-}
-
-
-void Worker::leavebuilding_signal(Game * g, State *)
-{
-	std::string signal = get_signal();
-
-	if (signal == "wakeup") {
-		molog("[leavebuilding]: Wake up\n");
-		set_signal("");
-		schedule_act(g, 1);
-		return;
-	}
-
-	molog("[leavebuilding]: Interrupted by signal '%s'\n", signal.c_str());
-	pop_task();
+		pop_task(g);
 }
 
 
@@ -2017,14 +1983,13 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
 Bob::Task Worker::taskFugitive = {
 	"fugitive",
 	static_cast<Bob::Ptr>(&Worker::fugitive_update),
-	static_cast<Bob::Ptr>(&Worker::fugitive_signal),
 	0,
 };
 
 
 void Worker::start_task_fugitive(Game* g)
 {
-	push_task(taskFugitive);
+	push_task(g, taskFugitive);
 
 	// Fugitives survive for two to four minutes
 	get_state()->ivar1 = g->get_gametime() + 120000 + 200*(g->logic_rand() % 600);
@@ -2045,6 +2010,12 @@ private:
 
 void Worker::fugitive_update(Game* g, State* state)
 {
+	if (get_signal().size()) {
+		molog("[fugitive]: interrupted by signal '%s'\n", get_signal().c_str());
+		pop_task(g);
+		return;
+	}
+
 	Map & map = g->map();
 	PlayerImmovable *location = get_location(g);
 
@@ -2061,16 +2032,17 @@ void Worker::fugitive_update(Game* g, State* state)
 	}
 
 	// check whether we're on a flag and it's time to return home
-	if (upcast(Flag, flag, map[get_position()].get_immovable()))
+	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
 		if
 			(flag->get_owner() == get_owner()
 			 and
 			 flag->economy().get_nr_warehouses())
 		{
 			set_location(flag);
-			pop_task();
+			pop_task(g);
 			return;
 		}
+	}
 
 	//  try to find a flag connected to a warehouse that we can return to
 	std::vector<ImmovableFound> flags;
@@ -2137,13 +2109,6 @@ void Worker::fugitive_update(Game* g, State* state)
 }
 
 
-void Worker::fugitive_signal(Game *, State *)
-{
-	molog("[fugitive]: interrupted by signal '%s'\n", get_signal().c_str());
-	pop_task();
-}
-
-
 /**
  * Walk in a circle around our owner, calling a subprogram on currently
  * empty fields.
@@ -2158,16 +2123,16 @@ Bob::Task Worker::taskGeologist = {
 	"geologist",
 	static_cast<Bob::Ptr>(&Worker::geologist_update),
 	0,
-	0,
 };
 
 
 void Worker::start_task_geologist
-	(int32_t             const attempts,
+	(Game* g,
+	 int32_t             const attempts,
 	 int32_t             const radius,
 	 std::string const &       subcommand)
 {
-	push_task(taskGeologist);
+	push_task(g, taskGeologist);
 	State & state = top_state();
 	state.ivar1   = attempts;
 	state.ivar2   = radius;
@@ -2181,10 +2146,10 @@ void Worker::geologist_update(Game* g, State* state)
 
 	if (signal == "fail") {
 		molog("[geologist]: Caught signal '%s'\n", signal.c_str());
-		set_signal("");
+		signal_handled();
 	} else if (signal.size()) {
 		molog("[geologist]: Interrupted by signal '%s'\n", signal.c_str());
-		pop_task();
+		pop_task(g);
 		return;
 	}
 
@@ -2210,7 +2175,7 @@ void Worker::geologist_update(Game* g, State* state)
 			molog("[geologist]: Starting program '%s'\n", state->svar1.c_str());
 
 			--state->ivar1;
-			start_task_program(state->svar1);
+			start_task_program(g, state->svar1);
 			return;
 		}
 
@@ -2272,8 +2237,8 @@ void Worker::geologist_update(Game* g, State* state)
 				{
 
 					molog("[geologist]: BUG: couldn't find path\n");
-					set_signal("fail");
-					pop_task();
+					send_signal(g, "fail");
+					pop_task(g);
 					return;
 				}
 				return;
@@ -2286,7 +2251,7 @@ void Worker::geologist_update(Game* g, State* state)
 
 	if (get_position() == owner_area) {
 		molog("[geologist]: We're home\n");
-		pop_task();
+		pop_task(g);
 		return;
 	}
 
@@ -2300,8 +2265,8 @@ void Worker::geologist_update(Game* g, State* state)
 		  descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[geologist]: Couldn't find path home\n");
-		set_signal("fail");
-		pop_task();
+		send_signal(g, "fail");
+		pop_task(g);
 		return;
 	}
 }

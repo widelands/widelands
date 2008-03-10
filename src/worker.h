@@ -127,22 +127,23 @@ public:
 	void start_task_transfer(Game* g, Transfer* t);
 	void cancel_task_transfer(Game* g);
 
-	void start_task_buildingwork();
+	void start_task_buildingwork(Game* g);
 	void update_task_buildingwork(Game* g);
 
 	void start_task_return(Game* g, bool dropitem);
-	void start_task_program(const std::string & programname);
+	void start_task_program(Game* g, const std::string & programname);
 
-	void start_task_gowarehouse();
+	void start_task_gowarehouse(Game* g);
 	void start_task_dropoff(Game* g, WareInstance* item);
-	void start_task_fetchfromflag();
+	void start_task_fetchfromflag(Game* g);
 
 	bool start_task_waitforcapacity(Game* g, Flag* flag);
 	void start_task_leavebuilding(Game* g, bool changelocation);
 	void start_task_fugitive(Game* g);
 
 	void start_task_geologist
-			(const int32_t attempts, const int32_t radius,
+			(Game* g,
+			 const int32_t attempts, const int32_t radius,
 			 const std::string & subcommand);
 
 
@@ -168,34 +169,17 @@ protected:
 private:
 	// task details
 	void transfer_update(Game* g, State* state);
-	void transfer_signal(Game* g, State* state);
-	void transfer_mask(Game* g, State* state);
-
+	void transfer_signalimmediate(Game* g, State* state, const std::string& signal);
 	void buildingwork_update(Game* g, State* state);
-	void buildingwork_signal(Game* g, State* state);
-
 	void return_update(Game* g, State* state);
-	void return_signal(Game* g, State* state);
-
 	void program_update(Game* g, State* state);
-	void program_signal(Game* g, State* state);
-
 	void gowarehouse_update(Game* g, State* state);
-	void gowarehouse_signal(Game* g, State* state);
-
+	void gowarehouse_signalimmediate(Game* g, State* state, const std::string& signal);
 	void dropoff_update(Game* g, State* state);
-
 	void fetchfromflag_update(Game* g, State* state);
-
 	void waitforcapacity_update(Game* g, State* state);
-	void waitforcapacity_signal(Game* g, State* state);
-
 	void leavebuilding_update(Game* g, State* state);
-	void leavebuilding_signal(Game* g, State* state);
-
 	void fugitive_update(Game* g, State* state);
-	void fugitive_signal(Game* g, State* state);
-
 	void geologist_update(Game* g, State* state);
 
 	// Program commands

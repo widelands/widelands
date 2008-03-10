@@ -180,10 +180,7 @@ public: // Worker-specific redefinitions
 
 private:
 	void moveToBattleUpdate (Game *, State *);
-	void moveToBattleSignal (Game *, State *);
-
 	void moveHomeUpdate     (Game *, State *);
-	void moveHomeSignal     (Game *, State *);
 protected:
 	static Task taskMoveToBattle;
 	static Task taskMoveHome;
