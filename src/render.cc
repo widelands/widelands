@@ -423,8 +423,6 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 				char fname[256];
 				snprintf(fname, sizeof(fname), "%s_pc%s", fnamebase, extensions[extnr]);
 
-				if (strstr(fname, "soldier"))
-					log("Try %s\n", fname);
 				if (not g_fs->FileExists(fname))
 					continue;
 
