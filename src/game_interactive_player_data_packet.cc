@@ -85,16 +85,18 @@ throw (_wexception)
 	Interactive_Player* plr = game->get_ipl();
 
 	// Player number
-	fw.Unsigned8(plr->get_player_number());
+	fw.Unsigned8(plr ? plr->get_player_number() : 1);
 
 	// Map Position
-	assert(0 <= plr->get_viewpoint().x);
-	assert(0 <= plr->get_viewpoint().y);
-	fw.Unsigned16(plr->get_viewpoint().x);
-	fw.Unsigned16(plr->get_viewpoint().y);
+	if (plr) {
+		assert(0 <= plr->get_viewpoint().x);
+		assert(0 <= plr->get_viewpoint().y);
+	}
+	fw.Unsigned16(plr ? plr->get_viewpoint().x : 0);
+	fw.Unsigned16(plr ? plr->get_viewpoint().y : 0);
 
 	// Display flags
-	fw.Unsigned32(plr->get_display_flags());
+	fw.Unsigned32(plr ? plr->get_display_flags() : 0);
 
 	fw.Write(fs, "binary/interactive_player");
 }
