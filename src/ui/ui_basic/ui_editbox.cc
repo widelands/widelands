@@ -17,70 +17,185 @@
  *
  */
 
-#include "helper.h"
 #include "ui_editbox.h"
 
+#include "graphic.h"
+#include "helper.h"
+
+#include <limits>
 #include <SDL_keysym.h>
 
 namespace UI {
 
+struct EditBoxImpl {
+	/**
+	 * Background tile style.
+	 */
+	uint32_t background;
+
+	/**
+	 * ID. Only used for the id-flavoured signals.
+	 */
+	int32_t id;
+
+	/**
+	 * Maximum number of characters in the input
+	 */
+	uint32_t maxLength;
+
+	/**
+	 * Current text in the box.
+	 */
+	std::string text;
+
+	/**
+	 * Position of the caret.
+	 */
+	uint32_t caret;
+
+	/**
+	 * Alignment of the text. Vertical alignment is always centered.
+	 */
+	Align align;
+};
+
 /**
 constructor
 */
-Edit_Box::Edit_Box
+EditBox::EditBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const uint32_t background,
-	 const int32_t id)
+	 const int32_t id,
+	 Align _align)
 	:
-	Basic_Button
-	(parent,
-	 x, y, w, h,
-	 true, false,
-	 background,
-	 0,
-	 "",
-	 "")
+	Panel(parent, x, y, w, h),
+	m(new EditBoxImpl)
 {
-
 	set_think(false);
 
-	m_keyboard_grabbed = false;
-	m_maxchars         = 0xffff;
-	m_text             = "";
-	m_lasttext         = "";
+	char buf[256];
+	snprintf(buf, sizeof(buf), "pics/but%u.png", background);
+	m->background = g_gr->get_picture(PicMod_UI,  buf);
 
-	m_id = id;
+	m->id = id;
+	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
+	// yes, use *signed* max as maximum length; just a small safe-guard.
+	m->caret = 0;
+	m->maxLength = std::numeric_limits<int32_t>::max();
 
 	set_handle_mouse(true);
-	set_can_focus   (true);
-	set_draw_caret  (true);
+	set_can_focus(true);
+}
+
+EditBox::~EditBox()
+{
+	// place a destructor where the compiler can find the EditBoxImpl destructor
 }
 
 /**
-destructor
-*/
-Edit_Box::~Edit_Box() {
-	grab_mouse   (false);
-	set_can_focus(false);
+ * \return the current text entered in the edit box
+ */
+const std::string& EditBox::text() const
+{
+	return m->text;
 }
+
+
+/**
+ * Set the current text in the edit box.
+ *
+ * The text is truncated if it is longer than the maximum length set by
+ * \ref setMaxLength().
+ */
+void EditBox::setText(const std::string& t)
+{
+	if (t == m->text)
+		return;
+
+	bool caretatend = m->caret == m->text.size();
+
+	m->text = t;
+	if (m->text.size() > m->maxLength)
+		m->text.erase(m->text.begin() + m->maxLength, m->text.end());
+	if (caretatend || m->caret > m->text.size())
+		m->caret = m->text.size();
+
+	update();
+}
+
+
+/**
+ * \return the maximum length of the input string
+ */
+uint32_t EditBox::maxLength() const
+{
+	return m->maxLength;
+}
+
+
+/**
+ * Set the maximum length of the input string.
+ *
+ * If the current string is longer than the new maximum length,
+ * its end is cut off to fit into the maximum length.
+ */
+void EditBox::setMaxLength(uint32_t n)
+{
+	m->maxLength = n;
+
+	if (m->text.size() > m->maxLength) {
+		m->text.erase(m->text.begin() + m->maxLength, m->text.end());
+		if (m->caret > m->text.size())
+			m->caret = m->text.size();
+
+		update();
+	}
+}
+
+
+/**
+ * \return the text alignment
+ */
+Align EditBox::align() const
+{
+	return m->align;
+}
+
+
+/**
+ * Set the new alignment.
+ *
+ * Note that vertical alignment is always centered, independent of what
+ * you select here.
+ */
+void EditBox::setAlign(Align _align)
+{
+	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
+	if (_align != m->align) {
+		m->align = _align;
+		update();
+	}
+}
+
 
 /**
 the mouse was clicked on this editbox
 */
-bool Edit_Box::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
-	if (btn != SDL_BUTTON_LEFT) return false;
-
-	if (not m_keyboard_grabbed) {
-		set_can_focus(true);
+bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+{
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
-		m_lasttext         = m_text;
-		m_keyboard_grabbed = true;
+		update();
+		return true;
 	}
-	return m_keyboard_grabbed;
+
+	return false;
 }
-bool Edit_Box::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
-{return btn == SDL_BUTTON_LEFT and m_keyboard_grabbed;}
+bool EditBox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
+{
+	return btn == SDL_BUTTON_LEFT && get_can_focus();
+}
 
 /**
  * Handle keypress/release events
@@ -89,81 +204,142 @@ bool Edit_Box::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
  * ASCII characters (--> //HERE). Instead, all user editable strings should be
  * real unicode.
 */
-bool Edit_Box::handle_key(bool down, SDL_keysym code)
+bool EditBox::handle_key(bool down, SDL_keysym code)
 {
-	if (down)
-	{
-		switch (code.sym)
-		{
+	if (down) {
+		switch (code.sym) {
 		case SDLK_ESCAPE:
-			set_text (m_lasttext.c_str());
-			Basic_Button::handle_mouserelease (0, 0, 0);
-			set_can_focus (false);
-			m_keyboard_grabbed=false;
-			grab_mouse (false);
+			cancel.call();
+			cancelid.call(m->id);
 			return true;
 
 		case SDLK_RETURN:
-			m_lasttext=m_text;
-			Basic_Button::handle_mouserelease (0, 0, 0);
-			set_can_focus (false);
-			m_keyboard_grabbed=false;
-			grab_mouse (false);
+			ok.call();
+			okid.call(m->id);
 			return true;
 
 		case SDLK_BACKSPACE:
-			if (m_text.size()) {
-				m_text.erase (m_text.end() - 1);
-				set_title (m_text.c_str());
-				changed  .call();
-				changedid.call(m_id);
+			if (m->caret > 0) {
+				--m->caret;
+				m->text.erase(m->text.begin() + m->caret);
+				changed.call();
+				changedid.call(m->id);
+				update();
 			}
 			return true;
 
 		case SDLK_DELETE:
-			if (m_text.size()) {
-				m_text.clear();
-				set_title (m_text.c_str());
-				changed  .call();
-				changedid.call(m_id);
+			if (m->caret < m->text.size()) {
+				m->text.erase(m->text.begin() + m->caret);
+				changed.call();
+				changedid.call(m->id);
+				update();
+			}
+			return true;
+
+		case SDLK_LEFT:
+			if (m->caret > 0) {
+				--m->caret;
+				update();
+			}
+			return true;
+
+		case SDLK_RIGHT:
+			if (m->caret < m->text.size()) {
+				++m->caret;
+				update();
+			}
+			return true;
+
+		case SDLK_HOME:
+			if (m->caret != 0) {
+				m->caret = 0;
+				update();
+			}
+			return true;
+
+		case SDLK_END:
+			if (m->caret != m->text.size()) {
+				m->caret = m->text.size();
+				update();
 			}
 			return true;
 
 		default:
-			if (is_printable(code) && m_text.size() < m_maxchars) {
-				m_text+=code.unicode;
-				set_title (m_text.c_str());
-				changed  .call();
-				changedid.call(m_id);
+			if (is_printable(code)) {
+				if (m->text.size() < m->maxLength) {
+					m->text.insert(m->text.begin() + m->caret, code.unicode);
+					++m->caret;
+					changed.call();
+					changedid.call(m->id);
+					update();
+				}
+				return true;
 			}
-			return true;
 		}
 	}
 
-	return false;
+	return Panel::handle_key(down, code);
 }
 
-/**
-handles the mousemove for this panel.
-does not much, suppresses messages when the focus
-is received
-*/
-bool Edit_Box::handle_mousemove
-	(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
+
+void EditBox::draw(RenderTarget* dst)
 {
-	return
-		m_keyboard_grabbed
-		or
-		Basic_Button::handle_mousemove(state, x, y, xdiff, ydiff);
+	// Draw the background
+	dst->tile
+		(Rect(Point(0, 0), get_w(), get_h()),
+		 m->background,
+		 Point(get_x(), get_y()));
+
+	// Draw border.
+	if (get_w() >= 4 && get_h() >= 4) {
+		static const RGBColor black(0, 0, 0);
+
+		// bottom edge
+		dst->brighten_rect
+			(Rect(Point(0, get_h() - 2), get_w(), 2),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
+		// right edge
+		dst->brighten_rect
+			(Rect(Point(get_w() - 2, 0), 2, get_h() - 2),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
+		// top edge
+		dst->fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
+		dst->fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
+		// left edge
+		dst->fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
+		dst->fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
+	}
+
+	if (has_focus())
+		dst->brighten_rect
+			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+
+	int32_t caret = has_focus() ? static_cast<int32_t>(m->caret) : -1;
+	Point pos(4, get_h() >> 1);
+
+	switch(m->align & Align_Horizontal) {
+	case Align_HCenter:
+		pos.x = get_w() >> 1;
+		break;
+	case Align_Right:
+		pos.x = get_w() - 4;
+		break;
+	default:
+		break;
+	}
+
+	g_fh->draw_string
+		(*dst,
+		 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+		 pos,
+		 m->text,
+		 align(),
+		 -1,
+		 Widget_Cache_None,
+		 0,
+		 caret);
 }
 
-/**
-Handles mouseins or rather mouse outs.
-Hides a mouseout event from the underlying button
-*/
-void Edit_Box::handle_mousein(bool inside) {
-	if (m_keyboard_grabbed)
-		return;
-	Basic_Button::handle_mousein(inside);
-}
+
 };

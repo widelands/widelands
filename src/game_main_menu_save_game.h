@@ -25,7 +25,7 @@
 class Interactive_Player;
 namespace UI {
 template <typename T> struct Button;
-struct Edit_Box;
+struct EditBox;
 template <typename T> struct Listselect;
 struct Textarea;
 };
@@ -45,7 +45,7 @@ private:
 	bool save_game(std::string);
 
 	Interactive_Player * m_parent; //  FIXME redundant (base already stores parent pointer)
-	UI::Edit_Box * m_editbox;
+	UI::EditBox * m_editbox;
 	UI::Textarea * m_name, * m_gametime;
 	UI::Listselect<const char *> * m_ls;
 

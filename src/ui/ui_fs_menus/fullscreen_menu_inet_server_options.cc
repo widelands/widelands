@@ -47,8 +47,8 @@ hostname  (this, 288, 210, 174, 24, 2, 0)
 
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	hostname  .set_text("localhost");
-	playername.set_text(_("nobody"));
+	hostname.setText("localhost");
+	playername.setText(_("nobody"));
 }
 
 Fullscreen_Menu_InetServerOptions::~Fullscreen_Menu_InetServerOptions () {}

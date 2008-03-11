@@ -31,7 +31,7 @@ namespace UI {
 template <typename T> struct Listselect;
 template <typename T> struct Button;
 struct Checkbox;
-struct Edit_Box;
+struct EditBox;
 };
 
 /*
@@ -67,7 +67,7 @@ private:
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvup_btn;
 	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvdown_btn;
 	UI::Checkbox                                  * m_morethanonce;
-	UI::Edit_Box                                  * m_name;
+	UI::EditBox                                   * m_name;
 	Widelands::EventChain              & m_event_chain;
 	bool                                            m_edit_trigcond;
 };

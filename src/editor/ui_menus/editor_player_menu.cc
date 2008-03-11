@@ -138,11 +138,11 @@ void Editor_Player_Menu::update() {
 		int32_t posx = spacing;
 		if (!m_plr_names[p - 1]) {
 			m_plr_names[p - 1] =
-				new UI::Edit_Box(this, posx, posy, 140, size, 0, p - 1);
+				new UI::EditBox(this, posx, posy, 140, size, 0, p - 1);
 			m_plr_names[p - 1]->changedid.set
 				(this, &Editor_Player_Menu::name_changed);
 			posx += 140 + spacing;
-			m_plr_names[p - 1]->set_text(map.get_scenario_player_name(p).c_str());
+			m_plr_names[p - 1]->setText(map.get_scenario_player_name(p));
 		}
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
@@ -333,15 +333,15 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
  */
 void Editor_Player_Menu::name_changed(int32_t m) {
 	//  Player name has been changed.
-	std::string text=m_plr_names[m]->get_text();
+	std::string text = m_plr_names[m]->text();
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
 	Widelands::Map & map = parent.egbase().map();
 	if (text == "") {
 		text = map.get_scenario_player_name(m + 1);
-		m_plr_names[m]->set_text(text.c_str());
+		m_plr_names[m]->setText(text);
 	}
 	map.set_scenario_player_name(m + 1, text);
-	m_plr_names[m]->set_text(map.get_scenario_player_name(m + 1).c_str());
+	m_plr_names[m]->setText(map.get_scenario_player_name(m + 1));
 	parent.set_need_save(true);
 }

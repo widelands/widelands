@@ -28,7 +28,7 @@ class Editor_Interactive;
 namespace Widelands {struct Event_Move_View;};
 
 namespace UI {
-struct Edit_Box;
+struct EditBox;
 struct Textarea;
 };
 
@@ -51,7 +51,7 @@ private:
 
 	Widelands::Event_Move_View & m_event;
 
-	UI::Edit_Box    * m_name;
+	UI::EditBox * m_name;
 	Widelands::Coords m_location;
 	UI::Textarea* m_x_ta, *m_y_ta;
 };

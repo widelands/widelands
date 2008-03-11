@@ -370,6 +370,18 @@ void Panel::update(int32_t x, int32_t y, int32_t w, int32_t h)
 	}
 }
 
+
+/**
+ * Overload for convenience.
+ *
+ * Equivalent to update(0, 0, get_w(), get_h());
+ */
+void Panel::update()
+{
+	update(0, 0, get_w(), get_h());
+}
+
+
 /**
  * Mark a part of a panel for updating.
  */

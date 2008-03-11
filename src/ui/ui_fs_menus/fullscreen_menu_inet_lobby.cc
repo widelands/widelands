@@ -79,7 +79,7 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
 	m_chatarea->set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 
 	m_chatbox =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this,
 		 5, get_inner_h() - 45,
 		 static_cast<int32_t>(get_inner_w() * 0.75) - 5, 25,
@@ -129,8 +129,8 @@ void Fullscreen_Menu_InetLobby::think() {
  * The editbox has changed, this is to send something over the net
  */
 void Fullscreen_Menu_InetLobby::changed() {
-	std::string text = m_chatbox->get_text();
-	m_chatbox->set_text("");
+	const std::string& text = m_chatbox->text();
+	m_chatbox->setText("");
 
 	//  TODO check here if this is a Server message
 	Game_Server_Protocol_Packet_ChatMessage* cm = new Game_Server_Protocol_Packet_ChatMessage(0, text);
@@ -199,12 +199,11 @@ void Fullscreen_Menu_InetLobby::chat_message(std::string user, std::string msg, 
 		return;
 	}
 
-	std::string text = m_chatbox->get_text();
 	buffer  = user;
 	buffer += ": ";
 	buffer += msg;
 	buffer += '\n';
-	m_chatarea->set_text((m_chatarea->get_text() + buffer).c_str());
+	m_chatarea->set_text(m_chatarea->get_text() + buffer);
 }
 
 

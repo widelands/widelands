@@ -27,7 +27,7 @@
 #include <vector>
 
 namespace UI {
-struct Edit_Box;
+struct EditBox;
 struct Multiline_Textarea;
 template <typename T> struct Listselect;
 };
@@ -53,7 +53,7 @@ struct Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
 
 private:
 	Game_Server_Connection * m_gsc;
-	UI::Edit_Box           * m_chatbox;
+	UI::EditBox            * m_chatbox;
 	UI::Multiline_Textarea * m_chatarea;
 	UI::Listselect<void *> * m_userlist;
 	bool                     m_disconnect_expected;

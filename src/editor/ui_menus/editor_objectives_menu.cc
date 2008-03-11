@@ -53,7 +53,7 @@ struct Edit_Objective_Window : public UI::Window {
 private:
 	Editor_Interactive                   * m_parent;
 	UI::Table<Objective &>::Entry_Record & m_te;
-	UI::Edit_Box                         * m_name;
+	UI::EditBox                          * m_name;
 	UI::Multiline_Editbox                * m_descr;
 	UI::Checkbox                         * m_visibleAtBegin;
 
@@ -74,8 +74,8 @@ m_te      (te)
 	Objective & obj = UI::Table<Objective &>::get(te);
 
 	new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
-	m_name = new UI::Edit_Box(this, 120, 5, 120, 20, 0, 0);
-	m_name->set_text(obj.name().c_str());
+	m_name = new UI::EditBox(this, 120, 5, 120, 20, 0, 0);
+	m_name->setText(obj.name());
 	posy += 20 + spacing;
 
 	new UI::Textarea
@@ -140,13 +140,13 @@ bool Edit_Objective_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
 void Edit_Objective_Window::clicked_ok() {
 	Objective & obj = UI::Table<Objective &>::get(m_te); //  extract value
 
-	obj.set_name(m_name->get_text());
+	obj.set_name(m_name->text());
 	obj.set_is_visible(m_visibleAtBegin->get_state());
 	obj.set_descr(m_descr->get_text().c_str());
 	m_te.set_string(0, obj.name());
 	m_te.set_string(1, obj.get_is_visible() ? "Yes" : "No");
 
-	obj.get_trigger()->set_name(m_name->get_text());
+	obj.get_trigger()->set_name(m_name->text());
 
 	end_modal(1);
 }

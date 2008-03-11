@@ -28,7 +28,7 @@
 class Editor_Interactive;
 namespace Widelands {struct Event_Conquer_Area;};
 namespace UI {
-struct Edit_Box;
+struct EditBox;
 struct Checkbox;
 struct Textarea;
 };
@@ -53,7 +53,7 @@ private:
 	Widelands::Event_Conquer_Area & m_event;
 	UI::Textarea * m_player_ta, * m_area_ta, * m_x_ta, * m_y_ta;
 	UI::Checkbox                  * m_enable;
-	UI::Edit_Box                  * m_name;
+	UI::EditBox                   * m_name;
 	Widelands::Player_Area<>        m_player_area;
 };
 

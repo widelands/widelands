@@ -64,7 +64,7 @@ m_parent(parent) //  FIXME redundant (base already stores parent pointer)
 	m_ls->selected.set(this, &Game_Main_Menu_Save_Game::selected);
 	m_ls->double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
 	m_editbox =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this,
 		 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 		 get_inner_w() / 2 - spacing, 20,
@@ -123,7 +123,7 @@ called when the ok button has been clicked
 ===========
 */
 void Game_Main_Menu_Save_Game::clicked_ok() {
-	std::string filename=m_editbox->get_text();
+	std::string filename = m_editbox->text();
 
 	if (save_game(filename))
 		delete this;
@@ -143,7 +143,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	{
 		char * const fname = strdup(FileSystem::FS_Filename(name));
 		FileSystem::FS_StripExtension(fname);
-		m_editbox->set_text(fname);
+		m_editbox->setText(fname);
 		free(fname);
 	}
 	m_ok_btn->set_enabled(true);

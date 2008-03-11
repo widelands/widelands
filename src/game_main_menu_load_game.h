@@ -26,7 +26,7 @@ class Interactive_Player;
 
 namespace UI {
 template <typename T> struct Button;
-struct Edit_Box;
+struct EditBox;
 struct Textarea;
 template <typename T> struct Listselect;
 };

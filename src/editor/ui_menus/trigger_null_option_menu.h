@@ -24,7 +24,7 @@
 
 class Editor_Interactive;
 namespace Widelands {class Trigger_Null;};
-namespace UI {struct Edit_Box;};
+namespace UI {struct EditBox;};
 
 /*
  * This is a modal box - The user must end this first
@@ -41,7 +41,7 @@ private:
 	void clicked_ok();
 
 	Widelands::Trigger_Null & m_trigger;
-	UI::Edit_Box            * m_name;
+	UI::EditBox * m_name;
 };
 
 #endif

@@ -55,7 +55,7 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	int32_t       posy    = offsy;
 	UI::Textarea * ta =
 		new UI::Textarea(this, posx, posy - 2, _("Map Name:"), Align_Left);
-	m_name=new UI::Edit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
+	m_name=new UI::EditBox(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
 	m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
@@ -77,7 +77,7 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy-2, _("Author:"), Align_Left);
 	m_author =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this,
 		 posx + ta->get_w()+spacing, posy,
 		 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20, 1, 1);
@@ -106,8 +106,8 @@ void Main_Menu_Map_Options::update() {
 	char buf[200];
 	sprintf(buf, "%ix%i", map.get_width(), map.get_height());
 	m_size->set_text(buf);
-	m_author->set_text(map.get_author());
-	m_name  ->set_text(map.get_name());
+	m_author->setText(map.get_author());
+	m_name  ->setText(map.get_name());
 	sprintf(buf, "%i", map.get_nrplayers());
 	m_nrplayers->set_text(buf);
 	m_world->set_text(Widelands::World::World(map.get_world_name()).get_name());
@@ -132,9 +132,9 @@ called when one of the editboxes are changed
 */
 void Main_Menu_Map_Options::changed(int32_t const id) {
 	if        (id == 0) {
-		m_parent->egbase().map().set_name(m_name->get_text());
+		m_parent->egbase().map().set_name(m_name->text().c_str());
 	} else if (id == 1) {
-		m_parent->egbase().map().set_author(m_author->get_text());
+		m_parent->egbase().map().set_author(m_author->text().c_str());
 	}
 	update();
 }

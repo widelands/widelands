@@ -59,11 +59,11 @@ m_player_area(event.m_player_area)
 	new UI::Textarea
 		(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
 	m_name =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this,
 		 spacing + 60, posy, get_inner_w() - 2 * spacing - 60, 20,
 		 0, 0);
-	m_name->set_text(event.name().c_str());
+	m_name->setText(event.name());
 	posy += 20 + spacing;
 
 	new UI::Textarea
@@ -282,7 +282,8 @@ bool Event_Unhide_Area_Option_Menu::handle_mouserelease(const Uint8, int32_t, in
 
 
 void Event_Unhide_Area_Option_Menu::clicked_ok() {
-	if (char const * const name = m_name->get_text()) {
+	const std::string& name = m_name->text();
+	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =
 			 eia().egbase().map().mem()[name])
@@ -293,7 +294,7 @@ void Event_Unhide_Area_Option_Menu::clicked_ok() {
 					 _
 					 ("There is another event registered with the name \"%s\". "
 					  "Choose another name."),
-					 name);
+					 name.c_str());
 				UI::Modal_Message_Box mb
 					(get_parent(),
 					 _("Name in use"), buffer,

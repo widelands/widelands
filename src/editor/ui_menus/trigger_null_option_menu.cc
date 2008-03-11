@@ -55,9 +55,9 @@ m_trigger (trigger)
 
 	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
 	m_name =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this, spacing + 50, posy, get_inner_w() - 50 - 2 * spacing, 20, 0, 0);
-	m_name->set_text(trigger.name().c_str());
+	m_name->setText(trigger.name());
 
 	posx = get_inner_w() / 2 - 60 - spacing;
 	posy += 20 + spacing;
@@ -99,7 +99,8 @@ bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t
  * a button has been clicked
  */
 void Trigger_Null_Option_Menu::clicked_ok() {
-	if (char const * const name = m_name->get_text()) {
+	const std::string& name = m_name->text();
+	if (name.size()) {
 		if
 			(Widelands::Trigger * const registered_trigger =
 			 eia().egbase().map().mtm()[name])
@@ -110,7 +111,7 @@ void Trigger_Null_Option_Menu::clicked_ok() {
 					 _
 					 ("There is another trigger registered with the name \"%s\". "
 					  "Choose another name."),
-					 name);
+					 name.c_str());
 				UI::Modal_Message_Box mb
 					(get_parent(),
 					 _("Name in use"), buffer,

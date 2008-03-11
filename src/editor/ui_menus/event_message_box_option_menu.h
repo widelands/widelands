@@ -29,7 +29,7 @@ class Editor_Interactive;
 namespace Widelands {struct Event_Message_Box;};
 namespace UI {
 template <typename T> struct Button;
-struct Edit_Box;
+struct EditBox;
 struct Checkbox;
 template <typename T> struct Listselect;
 struct Multiline_Editbox;
@@ -68,10 +68,10 @@ private:
 	} m_buttons[MAX_BUTTONS];
 
 	UI::Checkbox           * m_is_modal;
-	UI::Edit_Box           * m_caption;
-	UI::Edit_Box           * m_name;
-	UI::Edit_Box           * m_window_title;
-	UI::Edit_Box           * m_button_name;
+	UI::EditBox            * m_caption;
+	UI::EditBox            * m_name;
+	UI::EditBox            * m_window_title;
+	UI::EditBox            * m_button_name;
 	UI::Textarea           * m_nr_buttons_ta;
 	uint32_t                 m_nr_buttons;
 	uint32_t                 m_ls_selected;

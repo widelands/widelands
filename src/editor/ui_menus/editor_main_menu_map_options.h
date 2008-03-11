@@ -24,7 +24,7 @@
 
 class Editor_Interactive;
 namespace UI {
-class Edit_Box;
+class EditBox;
 class Multiline_Editbox;
 struct Textarea;
 };
@@ -50,7 +50,7 @@ private:
 	Editor_Interactive  * m_parent; //  FIXME redundant (base has parent pointer)
 	UI::Multiline_Editbox * m_descr;
 	UI::Textarea * m_world, * m_nrplayers, * m_size;
-	UI::Edit_Box * m_name, * m_author;
+	UI::EditBox * m_name, * m_author;
 	void update();
 };
 

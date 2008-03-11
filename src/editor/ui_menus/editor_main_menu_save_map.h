@@ -27,7 +27,7 @@
 class Editor_Interactive;
 namespace UI {
 template <typename T> struct Button;
-struct Edit_Box;
+struct EditBox;
 template <typename T> struct Listselect;
 struct Multiline_Textarea;
 struct Textarea;
@@ -56,7 +56,7 @@ private:
 	void fill_list();
 	bool save_map(std::string, bool);
 
-	UI::Edit_Box * m_editbox;
+	UI::EditBox * m_editbox;
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
 	Editor_Interactive * m_parent; //  FIXME redundant (base stores parent pointer)

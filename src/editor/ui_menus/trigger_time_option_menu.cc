@@ -67,9 +67,9 @@ m_trigger (trigger)
 	m_values[5] = wait_time        %   10;
 
 	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-	m_name = new UI::Edit_Box
+	m_name = new UI::EditBox
 		(this, spacing + 50, posy, get_inner_w() - 50 - 2 * spacing, 20, 0, 0);
-	m_name->set_text(trigger.name().c_str());
+	m_name->setText(trigger.name());
 
 	posy += 20 + spacing;
 
@@ -258,7 +258,8 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 		 (m_values[2] * 10 + m_values[3]) * 60
 		 +
 		 (m_values[4] * 10 + m_values[5]));
-	if (char const * const name = m_name->get_text()) {
+	const std::string& name = m_name->text();
+	if (name.size()) {
 		if
 			(Widelands::Trigger * const registered_trigger =
 			 eia().egbase().map().mtm()[name])
@@ -269,7 +270,7 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 					 _
 					 ("There is another trigger registered with the name \"%s\". "
 					  "Choose another name."),
-					 name);
+					 name.c_str());
 				UI::Modal_Message_Box mb
 					(get_parent(),
 					 _("Name in use"), buffer,

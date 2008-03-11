@@ -31,15 +31,15 @@ struct Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_InetServerOptions ();
 	~Fullscreen_Menu_InetServerOptions ();
 
-	const char * get_player_name() {return playername.get_text();}
-	const char * get_server_name() {return hostname.get_text();}
+	const std::string& get_player_name() {return playername.text();}
+	const std::string& get_server_name() {return hostname.text();}
 
 private:
 	UI::Textarea                                         title;
 	UI::IDButton<Fullscreen_Menu_InetServerOptions, int32_t> rungame;
 	UI::IDButton<Fullscreen_Menu_InetServerOptions, int32_t> back;
-	UI::Edit_Box                                         playername;
-	UI::Edit_Box                                         hostname;
+	UI::EditBox playername;
+	UI::EditBox hostname;
 };
 
 #endif

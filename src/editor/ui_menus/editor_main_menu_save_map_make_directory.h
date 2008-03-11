@@ -26,7 +26,7 @@
 #include <cstring>
 
 namespace UI {
-struct Edit_Box;
+struct EditBox;
 template <typename T, typename ID> struct IDButton;
 };
 
@@ -44,7 +44,7 @@ struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 
 private:
 	std::string                                                m_dirname;
-	UI::Edit_Box                                             * m_edit;
+	UI::EditBox                                              * m_edit;
 	UI::IDButton<Main_Menu_Save_Map_Make_Directory, int32_t> * m_ok_button;
 	void edit_changed();
 };

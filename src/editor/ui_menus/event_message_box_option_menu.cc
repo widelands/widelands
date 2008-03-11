@@ -67,11 +67,11 @@ m_event   (event)
 
 	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
 	m_name =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this,
 		 spacing + 60, posy, get_inner_w() / 2 - 60 - 2 * spacing, 20,
 		 0, 0);
-	m_name->set_text(event.name().c_str());
+	m_name->setText(event.name());
 	posy += 20 + spacing;
 
 	new UI::Textarea
@@ -87,9 +87,9 @@ m_event   (event)
 	new UI::Textarea
 		(this, spacing, posy, 50, 20, _("Window Title:"), Align_CenterLeft);
 	m_window_title =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this, spacing + 100, posy, get_inner_w() - 100 - 2 * spacing, 20, 0, 2);
-	m_window_title->set_text(m_event.get_window_title());
+	m_window_title->setText(m_event.get_window_title());
 
 	posy += 20 + spacing;
 	new UI::Textarea(this, spacing, posy, 50, 20, _("Text:"), Align_CenterLeft);
@@ -127,7 +127,7 @@ m_event   (event)
 	new UI::Textarea
 		(this, spacing, posy, 100, 20, _("Button Name: "), Align_CenterLeft);
 	m_button_name =
-		new UI::Edit_Box(this, spacing+110, posy, 100, 20, 0, 3);
+		new UI::EditBox(this, spacing+110, posy, 100, 20, 0, 3);
 	m_button_name->changedid.set
 		(this, &Event_Message_Box_Option_Menu::edit_box_edited);
 
@@ -225,7 +225,8 @@ bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int32_t, in
 
 
 void Event_Message_Box_Option_Menu::clicked_ok() {
-	if (char const * const name = m_name->get_text()) {
+	const std::string& name = m_name->text();
+	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =
 			 eia().egbase().map().mem()[name])
@@ -236,7 +237,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 					 _
 					 ("There is another event registered with the name \"%s\". "
 					  "Choose another name."),
-					 name);
+					 name.c_str());
 				UI::Modal_Message_Box mb
 					(get_parent(),
 					 _("Name in use"), buffer,
@@ -248,8 +249,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 	}
 	if (m_text->get_text().c_str())
 		m_event.set_text(m_text->get_text().c_str());
-	if (m_window_title->get_text())
-		m_event.set_window_title(m_window_title->get_text());
+	m_event.set_window_title(m_window_title->text().c_str());
 	m_event.set_is_modal(m_is_modal->get_state());
 	m_event.set_nr_buttons(m_nr_buttons);
 	Manager<Widelands::Trigger> & mtm = eia().egbase().map().mtm();
@@ -324,7 +324,7 @@ void Event_Message_Box_Option_Menu::update() {
 	}
 
 
-	m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());
+	m_button_name->setText(m_buttons[m_ls_selected].name);
 
 	if (m_nr_buttons && m_null_triggers.size()) {
 		m_current_trigger_ta->set_text
@@ -351,6 +351,6 @@ void Event_Message_Box_Option_Menu::ls_selected(uint32_t const i) {
  * Button name edit box edited
  */
 void Event_Message_Box_Option_Menu::edit_box_edited(int32_t) {
-	m_buttons[m_ls_selected].name = m_button_name->get_text();
+	m_buttons[m_ls_selected].name = m_button_name->text();
 	update();
 }

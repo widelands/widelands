@@ -34,7 +34,7 @@
 
 class Editor_Interactive;
 namespace UI {
-struct Edit_Box;
+struct EditBox;
 struct Textarea;
 };
 
@@ -69,7 +69,7 @@ private:
 	Widelands::Trigger_Building::Count_Type             m_count;
 	Widelands::Building_Index                           m_building;
 	UI::Textarea                                        m_label_name;
-	UI::Edit_Box                                        m_name;
+	UI::EditBox                                         m_name;
 	UI::Textarea                                        m_label_player;
 	UI::IDButton<Trigger_Building_Option_Menu, bool>    m_decrement_player;
 	UI::IDButton<Trigger_Building_Option_Menu, bool>    m_increment_player;

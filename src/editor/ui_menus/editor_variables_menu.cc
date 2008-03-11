@@ -143,9 +143,9 @@ private:
 	Editor_Interactive                     & m_parent;
 	UI::Table<Variable &>::Entry_Record    & m_te;
 	UI::Textarea                             m_label_name;
-	UI::Edit_Box                             m_name;
+	UI::EditBox                              m_name;
 	UI::Textarea                             m_label_value;
-	UI::Edit_Box                             m_value;
+	UI::EditBox                              m_value;
 	UI::Button<Edit_Variable_Window>         m_ok;
 	UI::IDButton<Edit_Variable_Window, int32_t>  m_back;
 
@@ -184,8 +184,8 @@ m_back
 
 
 {
-	m_name .set_text(m_te.get_string(1).c_str());
-	m_value.set_text(m_te.get_string(2).c_str());
+	m_name .setText(m_te.get_string(1));
+	m_value.setText(m_te.get_string(2));
 	center_to_parent();
 }
 
@@ -212,13 +212,13 @@ void Edit_Variable_Window::clicked_ok() {
 	Variable & var = UI::Table<Variable &>::get(m_te);
 	if (upcast(Widelands::Variable_Int, variable_int, &var)) {
 		char * endp;
-		int32_t const ivar = strtol(m_value.get_text(), &endp, 0);
+		int32_t const ivar = strtol(m_value.text().c_str(), &endp, 0);
 
 		if (endp and *endp) {
 			char buffer[1024];
 			snprintf
 				(buffer, sizeof(buffer),
-				 _("\"%s\" is not a valid integer!"), m_value.get_text());
+				 _("\"%s\" is not a valid integer!"), m_value.text().c_str());
 			UI::Modal_Message_Box mb
 				(&m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
 			mb.run();
@@ -230,12 +230,12 @@ void Edit_Variable_Window::clicked_ok() {
 		variable_int   ->set_value(ivar);
 		m_te.set_string(2, buffer);
 	} else if (upcast(Widelands::Variable_String, variable_string, &var)) {
-		variable_string->set_value(m_value.get_text());
-		m_te.set_string(2, m_value.get_text());
+		variable_string->set_value(m_value.text().c_str());
+		m_te.set_string(2, m_value.text());
 	} else
 		assert(false);
 
-	var.set_name(m_name.get_text());
+	var.set_name(m_name.text());
 	m_te.set_string(1, var.name());
 
 	end_modal(1);

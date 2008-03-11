@@ -26,7 +26,7 @@
 
 class Editor_Interactive;
 namespace UI {
-struct Edit_Box;
+struct EditBox;
 template <typename T> struct Listselect;
 struct Textarea;
 struct Multiline_Textarea;

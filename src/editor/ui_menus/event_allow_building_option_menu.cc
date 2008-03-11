@@ -158,7 +158,7 @@ m_button_cancel
 		m_increment_player.set_enabled(has_several_players);
 	}
 
-	m_name.set_text(event.name().c_str());
+	m_name.setText(event.name());
 
 	set_inner_size
 		(get_inner_w(), m_button_ok.get_y() + m_button_ok.get_h() + spacing);
@@ -187,7 +187,8 @@ bool Event_Allow_Building_Option_Menu::handle_mouserelease
 
 
 void Event_Allow_Building_Option_Menu::clicked_ok() {
-	if (char const * const name = m_name.get_text()) {
+	const std::string& name = m_name.text();
+	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =
 			 eia().egbase().map().mem()[name])
@@ -198,7 +199,7 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 					 _
 					 ("There is another event registered with the name \"%s\". "
 					  "Choose another name."),
-					 name);
+					 name.c_str());
 				UI::Modal_Message_Box mb
 					(get_parent(),
 					 _("Name in use"), buffer,

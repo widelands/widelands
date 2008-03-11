@@ -27,7 +27,7 @@ namespace Widelands {class Trigger_Time;}
 namespace UI {
 template <typename T> struct Button;
 struct Textarea;
-struct Edit_Box;
+struct EditBox;
 };
 
 /*
@@ -47,7 +47,7 @@ private:
 	void update();
 
 	Widelands::Trigger_Time & m_trigger;
-	UI::Edit_Box            * m_name;
+	UI::EditBox             * m_name;
 	UI::Textarea            * m_textareas[6];
 	int32_t                   m_values[6];
 };

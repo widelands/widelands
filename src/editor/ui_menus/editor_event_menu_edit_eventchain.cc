@@ -57,8 +57,8 @@ m_event_chain(chain)
 	int32_t const ls_width = 200;
 
 	new UI::Textarea(this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
-	m_name = new UI::Edit_Box(this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-	m_name->set_text(m_event_chain.name().c_str());
+	m_name = new UI::EditBox(this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
+	m_name->setText(m_event_chain.name());
 	posy += 20 + spacing;
 
 	new UI::Textarea
@@ -211,7 +211,7 @@ void Editor_Event_Menu_Edit_EventChain::think()
 {if (m_edit_trigcond) clicked_edit_trigger_contitional();}
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
-	m_event_chain.set_name(m_name->get_text());
+	m_event_chain.set_name(m_name->text());
 	m_event_chain.set_repeating(m_morethanonce->get_state());
 	//  trigger conditional is always updated
 	//  events

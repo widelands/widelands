@@ -20,48 +20,52 @@
 #ifndef UI_EDITBOX_H
 #define UI_EDITBOX_H
 
+#include "font_handler.h"
 #include "ui_button.h"
 
+#include <boost/scoped_ptr.hpp>
 #include <SDL_keyboard.h>
 
 namespace UI {
+
+struct EditBoxImpl;
+
 /// a editbox can be clicked, then the user can change its text (title). When
 /// return is pressed, the editbox is unfocused, the keyboard released and a
 /// callback function is called
-struct Edit_Box : private Basic_Button {
-	Edit_Box
+struct EditBox : public Panel {
+	EditBox
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 uint32_t background,
-		 int32_t id);
-	virtual ~Edit_Box();
+		 uint32_t background = 2,
+		 int32_t id = 0,
+		 Align align = Align_Center);
+	virtual ~EditBox();
 
 	Signal changed;
 	Signal1<int32_t> changedid;
+	Signal ok;
+	Signal1<int32_t> okid;
+	Signal cancel;
+	Signal1<int32_t> cancelid;
 
-	const char* get_text() {return m_text.c_str();}
-	void set_text(char const * text) {
-		m_lasttext = m_text = text; set_title(text);
-	}
-	void set_maximum_chars(int32_t n) {m_maxchars=n;}
-	int32_t get_maximum_chars() const {return m_maxchars;}
+	const std::string& text() const;
+	void setText(const std::string& t);
+	uint32_t maxLength() const;
+	void setMaxLength(uint32_t n);
+	Align align() const;
+	void setAlign(Align);
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	bool handle_mousemove
-		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool handle_key(bool down, SDL_keysym);
-	void handle_mousein(bool);
 
-protected:
-	void send_signal_clicked() const {};
+	void draw(RenderTarget* dst);
 
 private:
-	bool                m_keyboard_grabbed;
-	uint32_t            m_maxchars;
-	std::string m_text, m_lasttext;
-	int32_t             m_id;
+	boost::scoped_ptr<EditBoxImpl> m;
 };
-};
+
+}
 
 #endif

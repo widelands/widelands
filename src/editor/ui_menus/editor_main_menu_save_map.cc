@@ -71,7 +71,7 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 	m_ls->selected.set(this, &Main_Menu_Save_Map::selected);
 	m_ls->double_clicked.set(this, &Main_Menu_Save_Map::double_clicked);
 	m_editbox =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this,
 		 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 		 get_inner_w() / 2 - spacing, 20,
@@ -165,7 +165,7 @@ called when the ok button has been clicked
 ===========
 */
 void Main_Menu_Save_Map::clicked_ok() {
-	std::string filename = m_editbox->get_text();
+	std::string filename = m_editbox->text();
 
 	if (filename == "") //  Maybe a directory is selected.
 		filename = m_ls->get_selected();
@@ -217,7 +217,7 @@ void Main_Menu_Save_Map::selected(uint32_t) {
 		}
 
 
-		m_editbox->set_text(FileSystem::FS_Filename(name));
+		m_editbox->setText(FileSystem::FS_Filename(name));
 		m_ok_btn->set_enabled(true);
 
 		m_name  ->set_text(map.get_name       ());
@@ -238,7 +238,7 @@ void Main_Menu_Save_Map::selected(uint32_t) {
 		m_world    ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
-		m_editbox  ->set_text("");
+		m_editbox  ->setText("");
 		m_ok_btn   ->set_enabled(false);
 	}
 }

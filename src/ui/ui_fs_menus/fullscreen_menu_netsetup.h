@@ -61,7 +61,7 @@ struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	/**
 	 * \return the name chosen by the player
 	 */
-	std::string get_playername();
+	const std::string& get_playername();
 
 	//bool is_internetgame();
 	// return true if game should be played over GGZ
@@ -74,8 +74,8 @@ private:
 	UI::Button<Fullscreen_Menu_NetSetup>        hostgame;
 	//UI::IDButton<Fullscreen_Menu_NetSetup, int32_t> playinternet;
 	UI::IDButton<Fullscreen_Menu_NetSetup, int32_t> back;
-	UI::Edit_Box                                hostname;
-	UI::Edit_Box                                playername;
+	UI::EditBox                                 hostname;
+	UI::EditBox                                 playername;
 	UI::Table<const LAN_Open_Game * const>      opengames;
 	LAN_Game_Finder                             discovery;
 	UI::Button<Fullscreen_Menu_NetSetup>        networktype;

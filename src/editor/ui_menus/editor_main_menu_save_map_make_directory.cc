@@ -42,9 +42,9 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 	posy += 20 + spacing;
 
 	m_edit =
-		new UI::Edit_Box
+		new UI::EditBox
 		(this, spacing, posy, get_inner_w() - 2 * spacing, 20, 1, 0);
-	m_edit->set_text(dirname);
+	m_edit->setText(dirname);
 	m_dirname = dirname;
 	m_edit->changed.set(this, &Main_Menu_Save_Map_Make_Directory::edit_changed);
 
@@ -85,7 +85,7 @@ bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
  * Editbox changed
  */
 void Main_Menu_Save_Map_Make_Directory::edit_changed() {
-	std::string const & text = m_edit->get_text();
+	std::string const & text = m_edit->text();
 	if (text.size()) {
 		m_ok_button->set_enabled(true);
 		m_dirname=text;
