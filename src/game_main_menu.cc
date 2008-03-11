@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,6 @@
 #include "game_main_menu.h"
 
 #include "building_statistics_menu.h"
-#include "game_main_menu_save_game.h"
-#include "game_main_menu_load_game.h"
 #include "general_statistics_menu.h"
 #include "graphic.h"
 #include "i18n.h"

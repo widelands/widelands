@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "game_options_menu.h"
 #include "game_options_sound_menu.h"
 #include "game_main_menu_save_game.h"
-#include "game_main_menu_load_game.h"
 #include "general_statistics_menu.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -96,16 +95,6 @@ save_game
  &GameOptionsMenu::clicked_save_game, this,
  _("Save game")),
 
-load_game
-(this,
- posx(1, 2),
- vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
- buttonw(2), 35,
- 4,
- g_gr->get_picture(PicMod_Game, "pics/menu_load_game.png"),
- &GameOptionsMenu::clicked_load_game, this,
- _("Load game")),
-
 exit_game
 (this,
  posx(0, 1),
@@ -142,11 +131,6 @@ void GameOptionsMenu::clicked_sound() {
 
 void GameOptionsMenu::clicked_save_game() {
 	new Game_Main_Menu_Save_Game(&m_player, &m_windows.savegame);
-	die();
-}
-
-void GameOptionsMenu::clicked_load_game() {
-	new Game_Main_Menu_Load_Game(&m_player, &m_windows.loadgame);
 	die();
 }
 

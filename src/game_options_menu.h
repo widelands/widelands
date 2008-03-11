@@ -41,7 +41,6 @@ private:
 	UI::Button<GameOptionsMenu> authors;
 	UI::Button<GameOptionsMenu> sound;
 	UI::Button<GameOptionsMenu> save_game;
-	UI::Button<GameOptionsMenu> load_game;
 	UI::Button<GameOptionsMenu> exit_game;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
@@ -72,7 +71,6 @@ private:
 	void clicked_authors  ();
 	void clicked_sound    ();
 	void clicked_save_game();
-	void clicked_load_game();
 	void clicked_exit_game();
 };
 
