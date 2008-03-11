@@ -205,6 +205,60 @@ void Game_Main_Menu_Save_Game::edit_box_changed() {
 	m_ok_btn->set_enabled(true);
 }
 
+
+static void dosave(Interactive_Player* parent, const std::string& complete_filename)
+{
+	SaveHandler * savehandler = parent->get_game()->get_save_handler();
+
+	std::string error;
+	if
+		(!savehandler->save_game
+			(*parent->get_game(), complete_filename, &error))
+	{
+		std::string s =
+			_
+			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
+			 "Reason given:\n");
+		s += error;
+		UI::MessageBox mbox
+			(parent, _("Save Game Error!!"), s, UI::MessageBox::OK);
+		mbox.run();
+	}
+}
+
+class SaveWarnMessageBox : public UI::MessageBox {
+public:
+	SaveWarnMessageBox(Interactive_Player* parent, const std::string& filename)
+		: UI::MessageBox
+			(parent,
+			 _("Save Game Error!!"),
+			 std::string(_("A File with the name "))
+			 	+FileSystem::FS_Filename(filename.c_str())+_(" already exists. Overwrite?"),
+			 YESNO)
+	{
+		m_parent = parent;
+		m_filename = filename;
+	}
+
+
+	void pressedYes()
+	{
+		g_fs->Unlink(m_filename);
+
+		die();
+		dosave(m_parent, m_filename);
+	}
+
+	void pressedNo()
+	{
+		die();
+	}
+
+private:
+	Interactive_Player* m_parent;
+	std::string m_filename;
+};
+
 /*
  * Save the game
  *
@@ -218,31 +272,11 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->FileExists(complete_filename)) {
-		std::string s = _("A File with the name ");
-		s            += FileSystem::FS_Filename(filename.c_str());
-		s            += _(" already exists. Overwrite?");
-		UI::MessageBox mbox
-			(m_parent, _("Save Game Error!!"), s, UI::MessageBox::YESNO);
-		if (not mbox.run()) return false;
-
-		g_fs->Unlink(complete_filename); //  delete this
+		new SaveWarnMessageBox(m_parent, complete_filename);
+		die();
+		return true;
 	}
 
-	std::string error;
-	if
-		(!
-		 savehandler->save_game
-		 (*m_parent->get_game(), complete_filename, &error))
-	{
-		std::string s =
-			_
-			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
-			 "Reason given:\n");
-		s += error;
-		UI::MessageBox mbox
-			(m_parent, _("Save Game Error!!"), s, UI::MessageBox::OK);
-		mbox.run();
-	}
-
+	dosave(m_parent, complete_filename);
 	return true;
 }
