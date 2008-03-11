@@ -220,13 +220,20 @@ Return the completion "percentage", where 2^16 = completely built,
 uint32_t ConstructionSite::get_built_per64k()
 {
 	const uint32_t time = owner().egbase().get_gametime();
-	uint32_t thisstep = m_working ? (CONSTRUCTIONSITE_STEP_TIME - m_work_steptime + time) : 0;
-	uint32_t total;
+	uint32_t thisstep = 0;
 
+	if (m_working) {
+		thisstep = CONSTRUCTIONSITE_STEP_TIME - (m_work_steptime - time);
+		// The check below is necessary because we drive construction via
+		// the construction worker in get_building_work(), and there can be
+		// a small delay between the worker completing his job and requesting
+		// new work.
+		if (thisstep > CONSTRUCTIONSITE_STEP_TIME)
+			thisstep = CONSTRUCTIONSITE_STEP_TIME;
+	}
 	thisstep = (thisstep << 16) / CONSTRUCTIONSITE_STEP_TIME;
-	total = (thisstep + (m_work_completed << 16)) / m_work_steps;
+	uint32_t total = (thisstep + (m_work_completed << 16)) / m_work_steps;
 
-	assert(thisstep <= (1 << 16));
 	assert(total <= (1 << 16));
 
 	return total;
