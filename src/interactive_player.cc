@@ -284,7 +284,7 @@ void Interactive_Player::toggle_chat        () {
 	if (m_chat.window)
 		delete m_chat.window;
 	else if (m->chat)
-		new GameChatMenu(*this, m_chat, *m->chat);
+		new GameChatMenu(this, m_chat, *m->chat);
 }
 void Interactive_Player::toggle_options_menu() {
 	if (m_options.window)
@@ -428,7 +428,7 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 
 		if (down) {
 			if (!m_chat.window)
-				new GameChatMenu(*this, m_chat, *m->chat);
+				new GameChatMenu(this, m_chat, *m->chat);
 
 			upcast(GameChatMenu, chatmenu, m_chat.window);
 			chatmenu->enter_chat_message();

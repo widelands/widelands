@@ -108,12 +108,15 @@ void NetClient::run ()
 	s.String(d->localplayername);
 	s.send(d->sock);
 
-	Fullscreen_Menu_LaunchGame lgm(this, this);
-	d->modal = &lgm;
-	int32_t code = lgm.run();
-	d->modal = 0;
-	if (code <= 0)
-		return;
+	{
+		Fullscreen_Menu_LaunchGame lgm(this, this);
+		lgm.setChatProvider(this);
+		d->modal = &lgm;
+		int32_t code = lgm.run();
+		d->modal = 0;
+		if (code <= 0)
+			return;
+	}
 
 	d->server_is_waiting = true;
 

@@ -21,6 +21,7 @@
 
 #include "fullscreen_menu_mapselect.h"
 #include "game.h"
+#include "gamechatpanel.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "i18n.h"
@@ -39,6 +40,7 @@ struct Fullscreen_Menu_LaunchGameImpl {
 	UI::Basic_Button* ok;
 	UI::Textarea* mapname;
 	UI::Basic_Button* select_map;
+	GameChatPanel* chat;
 	PlayerDescriptionGroup* players[MAX_PLAYERS];
 
 	bool is_scenario;
@@ -51,8 +53,9 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 {
 	d->settings = settings;
 	d->ctrl = ctrl;
+	d->chat = 0;
 
-	UI::Textarea* title = new UI::Textarea(this, MENU_XRES/2, 120, _("Launch Game"), Align_HCenter);
+	UI::Textarea* title = new UI::Textarea(this, MENU_XRES/2, 80, _("Launch Game"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	new UI::Button<Fullscreen_Menu_LaunchGame>
@@ -71,11 +74,11 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		 std::string(),
 		 false);
 
-	d->mapname = new UI::Textarea(this, 650, 250, std::string(), Align_HCenter);
+	d->mapname = new UI::Textarea(this, 650, 180, std::string(), Align_HCenter);
 
 	d->select_map = new UI::Button<Fullscreen_Menu_LaunchGame>
 		(this,
-		 550, 280, 200, 26,
+		 550, 210, 200, 26,
 		 1,
 		 &Fullscreen_Menu_LaunchGame::select_map, this,
 		 _("Select map"),
@@ -84,7 +87,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 
 	d->is_scenario = false;
 
-	int y = 250;
+	int y = 180;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		d->players[i] = new PlayerDescriptionGroup
 			(this,
@@ -126,6 +129,21 @@ void Fullscreen_Menu_LaunchGame::think()
 		d->ctrl->think();
 
 	refresh();
+}
+
+
+/**
+ * Set a new chat provider.
+ *
+ * This automatically creates and display a chat panel when appropriate.
+ */
+void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider* chat)
+{
+	delete d->chat;
+	d->chat = 0;
+
+	if (chat)
+		d->chat = new GameChatPanel(this, 50, 420, 480, 160, *chat);
 }
 
 

@@ -22,6 +22,7 @@
 
 #include "fullscreen_menu_base.h"
 
+class ChatProvider;
 class GameController;
 class GameSettingsProvider;
 
@@ -33,6 +34,8 @@ struct Fullscreen_Menu_LaunchGameImpl;
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LaunchGame(GameSettingsProvider* settings, GameController* ctrl = 0);
 	~Fullscreen_Menu_LaunchGame();
+
+	void setChatProvider(ChatProvider* chat);
 
 	void start();
 	void think();

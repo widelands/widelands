@@ -20,24 +20,16 @@
 #ifndef GAME_CHAT_MENU_H
 #define GAME_CHAT_MENU_H
 
-#include "chat.h"
-
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_editbox.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
+#include "gamechatpanel.h"
 #include "ui_unique_window.h"
-
-class Interactive_Player;
 
 
 /**
  * Provides a window with chat message scrollback and the possibility to
  * enter and send chat messages.
  */
-struct GameChatMenu : public UI::UniqueWindow, public Widelands::NoteReceiver<ChatMessage> {
-	GameChatMenu(Interactive_Player &, UI::UniqueWindow::Registry &, ChatProvider&);
+struct GameChatMenu : public UI::UniqueWindow {
+	GameChatMenu(UI::Panel*, UI::UniqueWindow::Registry &, ChatProvider&);
 
 	/**
 	 * Configure the menu so that it is useful for writing chat messages.
@@ -46,16 +38,10 @@ struct GameChatMenu : public UI::UniqueWindow, public Widelands::NoteReceiver<Ch
 	 */
 	void enter_chat_message();
 
-	void receive(const ChatMessage& msg);
-
 private:
-	void recalculate();
-	void keyEnter();
-	void keyEscape();
+	void acknowledge();
 
-	ChatProvider & m_chat;
-	UI::Multiline_Textarea chatbox;
-	UI::EditBox editbox;
+	GameChatPanel m_chat;
 	bool close_on_send;
 };
 

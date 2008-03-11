@@ -258,11 +258,14 @@ void NetHost::initComputerPlayers()
 void NetHost::run()
 {
 	HostGameSettingsProvider hp(this);
-	Fullscreen_Menu_LaunchGame lgm(&hp, this);
-	const int32_t code = lgm.run();
+	{
+		Fullscreen_Menu_LaunchGame lgm(&hp, this);
+		lgm.setChatProvider(&d->chat);
+		const int32_t code = lgm.run();
 
-	if (code <= 0)
-		return;
+		if (code <= 0)
+			return;
+	}
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients[i].playernum == -1)

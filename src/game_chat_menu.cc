@@ -19,9 +19,7 @@
 
 #include "game_chat_menu.h"
 
-#include "chat.h"
-#include "interactive_player.h"
-
+#include "i18n.h"
 
 /*
 ==============================================================================
@@ -39,76 +37,35 @@ Create all the buttons etc...
 ===============
 */
 GameChatMenu::GameChatMenu
-(Interactive_Player & plr,
+(UI::Panel * parent,
  UI::UniqueWindow::Registry & registry,
  ChatProvider & chat)
 :
 UI::UniqueWindow
-(&plr, &registry,
- 440, 5 + 200 + 5 + 20 + 5,
+(parent, &registry,
+ 440, 235,
  _("Chat Menu")),
-m_chat(chat),
-chatbox(this,  5,   5, get_inner_w() - 10, 200, "", Align_Left, 1),
-editbox(this,  5, 210, get_inner_w() - 10,  20)
+m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 {
 	if (get_usedefaultpos())
 		center_to_parent();
 
-	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
-	editbox.ok.set(this, &GameChatMenu::keyEnter);
-	editbox.cancel.set(this, &GameChatMenu::keyEscape);
-	editbox.setAlign(Align_Left);
 	close_on_send = false;
 
-	connect(m_chat);
-	recalculate();
+	m_chat.sent.set(this, &GameChatMenu::acknowledge);
+	m_chat.aborted.set(this, &GameChatMenu::acknowledge);
 }
 
 
 void GameChatMenu::enter_chat_message()
 {
-	editbox.focus();
+	m_chat.focusEdit();
 	close_on_send = true;
 }
 
 
-/**
- * Updates the chat message area.
- */
-void GameChatMenu::recalculate()
+void GameChatMenu::acknowledge()
 {
-	const std::vector<ChatMessage> msgs = m_chat.getMessages();
-
-	std::string str;
-	for (uint32_t i = 0; i < msgs.size(); ++i) {
-		str += msgs[i].toPrintable();
-		str += '\n';
-	}
-
-	chatbox.set_text(str);
-}
-
-void GameChatMenu::receive(const ChatMessage&)
-{
-	recalculate();
-}
-
-
-void GameChatMenu::keyEnter()
-{
-	const std::string& str = editbox.text();
-
-	if (str.size())
-		m_chat.send(str);
-
-	editbox.setText("");
-	if (close_on_send)
-		die();
-}
-
-void GameChatMenu::keyEscape()
-{
-	editbox.setText("");
 	if (close_on_send)
 		die();
 }
