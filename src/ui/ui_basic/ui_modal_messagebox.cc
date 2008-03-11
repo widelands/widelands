@@ -62,7 +62,7 @@ Modal_Message_Box::Modal_Message_Box
 	if (height < 2*fontsize)
 		g_fh->get_size(font, fontsize, text, &width, &height, maxwidth/2);
 
-	width += 10+d->textarea->scrollbar_w();
+	width += 10+2*d->textarea->scrollbar_w();
 	if (width < 100)
 		width = 100;
 	height += 50;
