@@ -24,7 +24,7 @@
 
 #include "ui_button.h"
 #include "ui_checkbox.h"
-#include "ui_multilineeditbox.h"
+#include "ui_editbox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
@@ -50,12 +50,12 @@ struct GameChatMenu : public UI::UniqueWindow, public Widelands::NoteReceiver<Ch
 
 private:
 	void recalculate();
-	void clicked_send();
+	void keyEnter();
+	void keyEscape();
 
 	ChatProvider & m_chat;
 	UI::Multiline_Textarea chatbox;
-	UI::Multiline_Editbox editbox;
-	UI::Button<GameChatMenu> send;
+	UI::EditBox editbox;
 	bool close_on_send;
 };
 

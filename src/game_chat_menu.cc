@@ -45,23 +45,19 @@ GameChatMenu::GameChatMenu
 :
 UI::UniqueWindow
 (&plr, &registry,
- 340, 5 + 150 + 5 + 85 + 5 + STATEBOX_HEIGHT + 5,
+ 440, 5 + 200 + 5 + 20 + 5,
  _("Chat Menu")),
 m_chat(chat),
-chatbox(this,  5,   5, get_inner_w() - 10,             150, "", Align_Left, 1),
-editbox(this,  5, 160, get_inner_w() - 10,              85, ""),
-
-send
-(this,
- 5, 250, 80, STATEBOX_HEIGHT,
- 4,
- &GameChatMenu::clicked_send, this,
- _("Send"))
+chatbox(this,  5,   5, get_inner_w() - 10, 200, "", Align_Left, 1),
+editbox(this,  5, 210, get_inner_w() - 10,  20)
 {
 	if (get_usedefaultpos())
 		center_to_parent();
 
 	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
+	editbox.ok.set(this, &GameChatMenu::keyEnter);
+	editbox.cancel.set(this, &GameChatMenu::keyEscape);
+	editbox.setAlign(Align_Left);
 	close_on_send = false;
 
 	connect(m_chat);
@@ -98,14 +94,21 @@ void GameChatMenu::receive(const ChatMessage&)
 }
 
 
-void GameChatMenu::clicked_send()
+void GameChatMenu::keyEnter()
 {
-	std::string str = editbox.get_text();
-	editbox.set_text("");
+	const std::string& str = editbox.text();
 
 	if (str.size())
 		m_chat.send(str);
 
+	editbox.setText("");
+	if (close_on_send)
+		die();
+}
+
+void GameChatMenu::keyEscape()
+{
+	editbox.setText("");
 	if (close_on_send)
 		die();
 }
