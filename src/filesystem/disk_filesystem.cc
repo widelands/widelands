@@ -27,7 +27,8 @@
 #include <sys/stat.h>
 
 #ifdef __WIN32__
-#include "windows.h"
+#include <windows.h>
+#include <dos.h>
 #else
 #include <glob.h>
 #endif

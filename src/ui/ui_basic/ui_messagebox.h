@@ -19,6 +19,7 @@
 
 #ifndef UI_MESSAGEBOX_H
 #define UI_MESSAGEBOX_H
+#undef MessageBox //Don't ask, this is just because of Windows ;-)
 
 #include <boost/scoped_ptr.hpp>
 
