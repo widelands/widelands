@@ -184,6 +184,7 @@ struct WLApplication {
 	void mainmenu_multiplayer();
 
 	bool new_game();
+	void replay();
 
 #ifdef DEBUG
 #ifndef __WIN32__

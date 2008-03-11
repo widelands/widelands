@@ -27,11 +27,9 @@
 #include "replay.h"
 
 
-Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay
-(Widelands::Game * const g)
+Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay()
 :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
-m_game              (g),
 
 m_back
 (this,
@@ -94,7 +92,8 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 		try {
 			Widelands::Game_Preload_Data_Packet gpdp;
 			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(savename));
-			Widelands::Game_Loader gl(*fs, m_game);
+			Widelands::Game game;
+			Widelands::Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);
 
 			char* fname = strdup(FileSystem::FS_Filename(pname->c_str()));

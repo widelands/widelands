@@ -27,13 +27,12 @@
 #include "ui_listselect.h"
 #include "ui_textarea.h"
 
-namespace Widelands {struct Game;};
 
 /**
  * Select a replay from a list of replays.
  */
 struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadReplay(Widelands::Game *);
+	Fullscreen_Menu_LoadReplay();
 	~Fullscreen_Menu_LoadReplay();
 
 	const std::string& filename() {return m_filename;}
@@ -44,8 +43,6 @@ struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
 	void fill_list();
 
 private:
-	Widelands::Game * m_game;
-
 	UI::IDButton<Fullscreen_Menu_LoadReplay, int32_t> m_back;
 	UI::Button<Fullscreen_Menu_LoadReplay> m_ok;
 	UI::Listselect<std::string> m_list;

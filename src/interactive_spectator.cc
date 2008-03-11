@@ -123,15 +123,6 @@ void Interactive_Spectator::think()
 
 
 /**
- * Called by the game when the end of the game has been reached.
- */
-void Interactive_Spectator::end_of_game()
-{
-	get_game()->set_speed(0);
-}
-
-
-/**
  * Called just before the game starts, after postload, init and gfxload
  */
 void Interactive_Spectator::start()

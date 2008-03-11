@@ -28,6 +28,7 @@
 #include "fullscreen_menu_inet_lobby.h"
 #include "fullscreen_menu_inet_server_options.h"
 #include "fullscreen_menu_launchgame.h"
+#include "fullscreen_menu_loadreplay.h"
 #include "fullscreen_menu_main.h"
 #include "fullscreen_menu_netsetup.h"
 #include "fullscreen_menu_options.h"
@@ -40,12 +41,15 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
+#include "interactive_spectator.h"
 #include "journal.h"
 #include "layered_filesystem.h"
+#include "map.h"
 #include "netclient.h"
 #include "nethost.h"
 #include "network_ggz.h"
 #include "profile.h"
+#include "replay.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "ui_modal_messagebox.h"
@@ -56,6 +60,7 @@
 
 #include "timestring.h"
 
+#include <boost/scoped_ptr.hpp>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -1115,16 +1120,9 @@ void WLApplication::mainmenu()
 			case Fullscreen_Menu_Main::mm_multiplayer:
 				mainmenu_multiplayer();
 				break;
-			case Fullscreen_Menu_Main::mm_replay: {
-				Widelands::Game game;
-				try {
-					game.run_replay();
-				} catch (...) {
-					emergency_save(game);
-					throw;
-				}
+			case Fullscreen_Menu_Main::mm_replay:
+				replay();
 				break;
-			}
 			case Fullscreen_Menu_Main::mm_options: {
 				Section *s = g_options.pull_section("global");
 				Options_Ctrl om(s);
@@ -1407,24 +1405,130 @@ bool WLApplication::new_game()
 		return false;
 
 	Widelands::Game game;
-	GameController* ctrl = GameController::createSinglePlayer(&game, true, 1);
+	boost::scoped_ptr<GameController> ctrl(GameController::createSinglePlayer(&game, true, 1));
 	try {
 		UI::ProgressWindow loaderUI("pics/progress.png");
 		GameTips tips (loaderUI);
 
 		loaderUI.step(_("Preparing game"));
 
-		game.set_game_controller(ctrl);
+		game.set_game_controller(ctrl.get());
 		game.set_iabase(new Interactive_Player(game, 1));
 		game.init(loaderUI, sp.settings());
 		game.run(loaderUI);
 	} catch (...) {
 		emergency_save(game);
-		delete ctrl;
 		throw;
 	}
 
 	return true;
+}
+
+
+class ReplayGameController : public GameController {
+public:
+	ReplayGameController(Widelands::Game& game, const std::string& filename)
+		: m_game(game)
+	{
+		m_game.set_game_controller(this);
+		m_endofgame = false;
+		m_lastframe = WLApplication::get()->get_time();
+		m_time = m_game.get_gametime();
+
+		// We have to create an empty map, otherwise nothing will load properly
+		game.set_map(new Widelands::Map);
+		m_replayreader.reset(new Widelands::ReplayReader(m_game, filename));
+	}
+
+	~ReplayGameController()
+	{
+	}
+
+	void think() {
+		int32_t curtime = WLApplication::get()->get_time();
+		int32_t frametime = curtime - m_lastframe;
+		m_lastframe = curtime;
+
+		// prevent crazy frametimes
+		if (frametime < 0)
+			frametime = 0;
+		else if (frametime > 1000)
+			frametime = 1000;
+
+		frametime *= m_game.get_speed(); // TODO: move speed management into GameController
+
+		m_time = m_game.get_gametime() + frametime;
+
+		for (;;) {
+			Widelands::Command* cmd = m_replayreader->GetNextCommand(m_time);
+			if (!cmd)
+				break;
+
+			m_game.enqueue_command(cmd);
+		}
+
+		if (m_replayreader->EndOfReplay() && !m_endofgame) {
+			m_game.set_speed(0);
+			UI::Modal_Message_Box mmb
+				(m_game.get_iabase(),
+					_("End of replay"),
+					_("The end of the replay has been reached and the game has been paused. "
+					"You may unpause the game and continue watching if you want to."),
+					UI::Modal_Message_Box::OK);
+			mmb.run();
+			m_endofgame = true;
+		}
+	}
+
+	void sendPlayerCommand(Widelands::PlayerCommand*) {
+		throw wexception("Trying to send a player command during replay");
+	}
+	int32_t getFrametime() {
+		return m_time - m_game.get_gametime();
+	}
+	std::string getGameDescription() {
+		return "replay";
+	}
+
+private:
+	Widelands::Game& m_game;
+	boost::scoped_ptr<Widelands::ReplayReader> m_replayreader;
+	bool m_endofgame; ///< used to show the end-of-replay message box only once
+	int32_t m_lastframe;
+	int32_t m_time;
+};
+
+/**
+ * Show the replay menu and play a replay.
+ */
+void WLApplication::replay()
+{
+	std::string fname;
+
+	{
+		Fullscreen_Menu_LoadReplay rm;
+		if (rm.run() <= 0)
+			return;
+
+		fname = rm.filename();
+	}
+
+	Widelands::Game game;
+	try {
+		UI::ProgressWindow loaderUI;
+		GameTips tips (loaderUI);
+
+		loaderUI.step(_("Loading..."));
+
+		game.set_iabase(new Interactive_Spectator(&game));
+		game.set_write_replay(false);
+		ReplayGameController rgc(game, fname);
+
+		game.run(loaderUI, true);
+	} catch (...) {
+		emergency_save(game);
+		throw;
+	}
 }
 
 

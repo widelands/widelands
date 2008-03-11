@@ -27,7 +27,6 @@
 #include "interactive_spectator.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
-#include "fullscreen_menu_loadreplay.h"
 #include "game_loader.h"
 #include "game_tips.h"
 #include "gamecontroller.h"
@@ -107,6 +106,13 @@ struct GameInternals {
 #endif
 	GameController* ctrl;
 
+	/**
+	 * Whether a replay writer should be created.
+	 * Defaults to \c true, and should only be set to \c false
+	 * for playing back replays.
+	 */
+	bool writereplay;
+
 	GameInternals(Game* g)
 #ifdef SYNC_DEBUG
 		: syncwrapper(g, &synchash)
@@ -132,24 +138,18 @@ m(new GameInternals(this)),
 m_state   (gs_notrunning),
 m_speed   (1),
 cmdqueue  (this),
-m_replayreader(0),
 m_replaywriter(0)
 {
 	m->ctrl = 0;
+	m->writereplay = true;
 	g_sound_handler.m_the_game = this;
 	m_last_stats_update = 0;
 }
 
 Game::~Game()
 {
-	if (m_replayreader) {
-		delete m_replayreader;
-		m_replayreader = 0;
-	}
-	if (m_replaywriter) {
-		delete m_replaywriter;
-		m_replaywriter = 0;
-	}
+	delete m_replaywriter;
+	m_replaywriter = 0;
 	g_sound_handler.m_the_game = NULL;
 
 	delete m;
@@ -180,6 +180,13 @@ Interactive_Player* Game::get_ipl()
 void Game::set_game_controller(GameController* ctrl)
 {
 	m->ctrl = ctrl;
+}
+
+void Game::set_write_replay(bool wr)
+{
+	assert(m_state == gs_notrunning);
+
+	m->writereplay = wr;
 }
 
 
@@ -339,45 +346,6 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 }
 
 /**
- * Display the fullscreen menu to choose a replay,
- * then start the interactive replay.
- */
-bool Game::run_replay()
-{
-	Fullscreen_Menu_LoadReplay rm(this);
-
-	if (rm.run() <= 0)
-		return false;
-
-	log("Selected replay: %s\n", rm.filename().c_str());
-
-	UI::ProgressWindow loaderUI;
-	GameTips tips (loaderUI);
-
-	// We have to create an empty map, otherwise nothing will load properly
-	set_map(new Map);
-
-	set_iabase(new Interactive_Spectator(this)); //  FIXME memory leak???
-
-	loaderUI.step(_("Loading..."));
-
-	m_replayreader = new ReplayReader(*this, rm.filename());
-
-	set_game_controller(GameController::createSinglePlayer(this, false, 1));
-	try {
-		bool ret = run(loaderUI, true);
-		delete m->ctrl;
-		m->ctrl = 0;
-		return ret;
-	} catch (...) {
-		delete m->ctrl;
-		m->ctrl = 0;
-		throw;
-	}
-}
-
-
-/**
  * Called for every game after loading (from a savegame or just from a map
  * during single/multiplayer/scenario).
  *
@@ -448,7 +416,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		enqueue_command (new Cmd_CheckEventChain(get_gametime(), -1));
 	}
 
-	if (!m_replayreader) {
+	if (m->writereplay) {
 		log("Starting replay writer\n");
 
 		// Derive a replay filename from the current time
@@ -516,19 +484,6 @@ void Game::think()
 		}
 
 		int32_t frametime = m->ctrl->getFrametime();
-
-		if (m_replayreader) {
-			for (;;) {
-				Command* cmd = m_replayreader->GetNextCommand(get_gametime() + frametime);
-				if (!cmd)
-					break;
-
-				enqueue_command(cmd);
-			}
-
-			if (m_replayreader->EndOfReplay())
-				dynamic_cast<Interactive_Spectator*>(get_iabase())->end_of_game();
-		}
 
 		cmdqueue.run_queue(frametime, get_game_time_pointer());
 

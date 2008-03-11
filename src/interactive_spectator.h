@@ -46,7 +46,6 @@ struct Interactive_Spectator : public Interactive_Base {
 	Widelands::Player * get_player() const throw ();
 
 	bool handle_key(bool down, SDL_keysym);
-	void end_of_game();
 
 private:
 	void exit_btn();
