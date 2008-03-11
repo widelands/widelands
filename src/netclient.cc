@@ -141,9 +141,11 @@ void NetClient::run ()
 		d->modal = game.get_iabase();
 		game.run(loaderUI);
 		d->modal = 0;
+		d->game = 0;
 	} catch (...) {
 		d->modal = 0;
 		WLApplication::emergency_save(game);
+		d->game = 0;
 		disconnect(_("Client crashed and performed an emergency save."));
 		throw;
 	}
@@ -469,14 +471,24 @@ void NetClient::disconnect (const std::string& reason, bool sendreason, bool sho
 		d->sock = 0;
 	}
 
+	bool trysave = showmsg && d->game;
+
 	if (showmsg) {
+		std::string msg = reason;
+
+		if (trysave)
+			msg += _(" An automatic savegame will be created.");
+
 		UI::MessageBox mmb
 			(d->modal,
 			 "Disconnected from Host",
-			 reason,
+			 msg,
 			 UI::MessageBox::OK);
 		mmb.run();
 	}
+
+	if (trysave)
+		WLApplication::emergency_save(*d->game);
 
 	if (d->modal) {
 		d->modal->end_modal(0);
