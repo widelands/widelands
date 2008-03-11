@@ -151,16 +151,10 @@ void Multiline_Textarea::draw_scrollbar() {
 	if (m_cache_mode != Widget_Cache_Use) {
 		bool setbottom = false;
 
-		if (m_scrollmode == ScrollLog)
-			if
-				(m_textpos
-				 >=
-				 m_textheight
-				 -
-				 get_h()
-				 -
-				 g_fh->get_fontheight(m_fontname, m_fontsize))
+		if (m_scrollmode == ScrollLog) {
+			if (m_scrollbar.get_pos() >= m_scrollbar.get_steps()-1)
 				setbottom = true;
+		}
 
 		uint32_t m_width = 0;
 		if (m_cache_id)
