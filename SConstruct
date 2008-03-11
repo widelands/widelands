@@ -28,11 +28,11 @@ print
 #TODO: optional recursion
 
 def simpleglob(pattern='*', directory='.'):
-        entries=[]
+	entries=[]
 
 	for entry in os.listdir(Dir(directory).srcnode().abspath):
 		if fnmatch.fnmatchcase(entry, pattern):
-			entries.append(entry)
+			entries.append(directory + '/' + entry)
 
 	return entries
 
