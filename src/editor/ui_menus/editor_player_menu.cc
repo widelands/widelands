@@ -31,7 +31,7 @@
 #include "wexception.h"
 
 #include "ui_editbox.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_textarea.h"
 
 
@@ -246,14 +246,14 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 		else
 			update();
 	} else {
-		UI::Modal_Message_Box mmb
+		UI::MessageBox mmb
 			(&parent,
 			 _("Error!"),
 			 _
 			 ("Can't remove player. It is referenced in some place. Remove all "
 			  "buildings, bobs, triggers and events that depend on this player "
 			  "and try again"),
-			 UI::Modal_Message_Box::OK);
+			 UI::MessageBox::OK);
 		mmb.run();
 	}
 }
@@ -278,14 +278,14 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 		parent.egbase().map().set_scenario_player_tribe(n+1, t);
 		parent.set_need_save(true);
 	} else {
-		UI::Modal_Message_Box mmb
+		UI::MessageBox mmb
 			(&parent,
 			 _("Error!"),
 			 _
 			 ("Can't change player tribe. It is referenced in some place. Remove "
 			  "all buildings, bobs, triggers and events that depend on this "
 			  "tribe and try again"),
-			 UI::Modal_Message_Box::OK);
+			 UI::MessageBox::OK);
 		mmb.run();
 	}
 	update();

@@ -25,7 +25,7 @@
 #include "map.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
 #include "trigger/trigger.h"
@@ -276,13 +276,13 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 		m_given_cond = &cond;
 		end_modal(1);
 	} catch (Widelands::TriggerConditional_Factory::SyntaxError) {
-		UI::Modal_Message_Box mb
+		UI::MessageBox mb
 			(&eia(),
 			 _("Syntax Error"),
 			 _
 			 ("Your conditional contains at least one syntax error. Please "
 			  "correct!\n"),
-			 UI::Modal_Message_Box::OK);
+			 UI::MessageBox::OK);
 		mb.run();
 		return;
 	}

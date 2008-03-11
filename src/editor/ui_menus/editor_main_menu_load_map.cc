@@ -35,7 +35,6 @@
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
-#include "ui_modal_messagebox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_progresswindow.h"
 #include "ui_textarea.h"

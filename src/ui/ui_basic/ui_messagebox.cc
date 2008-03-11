@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 
 #include "constants.h"
 #include "i18n.h"
@@ -30,20 +30,22 @@
 namespace UI {
 
 
-struct Modal_Message_BoxImpl {
+struct MessageBoxImpl {
 	Multiline_Textarea* textarea;
+	MessageBox::MB_Type type;
 };
 
 
-Modal_Message_Box::Modal_Message_Box
+MessageBox::MessageBox
 	(Panel * const parent,
 	 const std::string & caption,
 	 const std::string & text,
 	 const MB_Type type)
 	:
 	Window(parent, 0, 0, 20, 20, caption.c_str()),
-	d(new Modal_Message_BoxImpl)
+	d(new MessageBoxImpl)
 {
+	d->type = type;
 	d->textarea = new Multiline_Textarea
 		(this,
 		 5, 5, 30, 30,
@@ -77,54 +79,83 @@ Modal_Message_Box::Modal_Message_Box
 	d->textarea->set_size(width-10, height-50);
 
 	if (type == OK) {
-		new IDButton<Modal_Message_Box, int32_t>
+		new Button<MessageBox>
 			(this,
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
 			 0,
-			 &Modal_Message_Box::end_modal, this, 0,
+			 &MessageBox::pressedOk, this,
 			 _("OK"));
 	} else if (type == YESNO) {
-		new IDButton<Modal_Message_Box, int32_t>
+		new Button<MessageBox>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
 			 0,
-			 &Modal_Message_Box::end_modal, this, 1,
+			 &MessageBox::pressedYes, this,
 			 _("Yes"));
-		new IDButton<Modal_Message_Box, int32_t>
+		new Button<MessageBox>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
 			 1,
-			 &Modal_Message_Box::end_modal, this, 0,
+			 &MessageBox::pressedNo, this,
 			 _("No"));
 	}
 }
 
-Modal_Message_Box::~Modal_Message_Box()
+MessageBox::~MessageBox()
 {
-	delete d;
-	d = 0;
 }
 
 
-void Modal_Message_Box::set_align(Align align)
+void MessageBox::set_align(Align align)
 {
 	d->textarea->set_align(align);
 }
 
 
-/*
- * Handle mouseclick
+/**
+ * Handle mouseclick.
  *
- * we're a modal, therefore we can not delete ourself
- * on close (the caller must do this) instead
- * we call end_modal() with NO (=0)
- * We are not draggable.
+ * Clicking the right mouse button inside the window acts like pressing
+ * Ok or No, depending on the message box type.
  */
-bool Modal_Message_Box::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_RIGHT) {play_click(); end_modal(0); return true;}
-	return false;
+bool MessageBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		play_click();
+		if (d->type == OK)
+			pressedOk();
+		else
+			pressedNo();
+	}
+	return true;
 }
-bool Modal_Message_Box::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
-};
+
+bool MessageBox::handle_mouserelease(const Uint8, int32_t, int32_t)
+{
+	return true;
+}
+
+void MessageBox::pressedOk()
+{
+	ok.call();
+	if (is_modal())
+		end_modal(0);
+}
+
+void MessageBox::pressedYes()
+{
+	yes.call();
+	if (is_modal())
+		end_modal(1);
+}
+
+void MessageBox::pressedNo()
+{
+	no.call();
+	if (is_modal())
+		end_modal(0);
+}
+
+
+}

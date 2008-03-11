@@ -28,7 +28,7 @@
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_multilineeditbox.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
@@ -278,8 +278,8 @@ void Editor_Objectives_Menu::clicked_del() {
 			str += "; ";
 		}
 		str.erase(str.end() - 2, str.end());
-		UI::Modal_Message_Box mmb
-			(m_parent, _("Error!"), str.c_str(), UI::Modal_Message_Box::OK);
+		UI::MessageBox mmb
+			(m_parent, _("Error!"), str.c_str(), UI::MessageBox::OK);
 		mmb.run();
 		return;
 	}

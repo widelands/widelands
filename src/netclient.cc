@@ -30,7 +30,7 @@
 #include "wexception.h"
 #include "wlapplication.h"
 
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_progresswindow.h"
 
 
@@ -470,11 +470,11 @@ void NetClient::disconnect (const std::string& reason, bool sendreason, bool sho
 	}
 
 	if (showmsg) {
-		UI::Modal_Message_Box mmb
+		UI::MessageBox mmb
 			(d->modal,
 			 "Disconnected from Host",
 			 reason,
-			 UI::Modal_Message_Box::OK);
+			 UI::MessageBox::OK);
 		mmb.run();
 	}
 

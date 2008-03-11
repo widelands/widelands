@@ -35,7 +35,7 @@
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 
@@ -347,8 +347,8 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		std::string s = _("A File with the name ");
 		s += FileSystem::FS_Filename(filename.c_str());
 		s += _(" exists already. Overwrite?");
-		UI::Modal_Message_Box mbox
-			(m_parent, _("Save Map Error!!"), s, UI::Modal_Message_Box::YESNO);
+		UI::MessageBox mbox
+			(m_parent, _("Save Map Error!!"), s, UI::MessageBox::YESNO);
 		if (not mbox.run()) return false;
 
 		g_fs->Unlink(complete_filename);
@@ -367,8 +367,8 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 			("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason "
 			 "given:\n");
 		s += e.what();
-		UI::Modal_Message_Box  mbox
-			(m_parent, _("Save Map Error!!"), s, UI::Modal_Message_Box::OK);
+		UI::MessageBox  mbox
+			(m_parent, _("Save Map Error!!"), s, UI::MessageBox::OK);
 		mbox.run();
 	}
 	delete &fs;

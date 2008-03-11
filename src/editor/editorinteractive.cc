@@ -38,7 +38,7 @@
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
 
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_progresswindow.h"
 
 #include <SDL_keysym.h>
@@ -208,11 +208,11 @@ void Editor_Interactive::think()
 
 void Editor_Interactive::exit() {
 	if (m_need_save) {
-		UI::Modal_Message_Box mmb
+		UI::MessageBox mmb
 			(this,
 			 _("Map unsaved"),
 			 _("The Map is unsaved, do you really want to quit?"),
-			 UI::Modal_Message_Box::YESNO);
+			 UI::MessageBox::YESNO);
 		if (mmb.run() == 0) return;
 	}
 	end_modal(0);

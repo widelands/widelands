@@ -52,7 +52,7 @@
 #include "replay.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_progresswindow.h"
 #include "wexception.h"
 
@@ -1100,11 +1100,11 @@ void WLApplication::mainmenu()
 		if (message.size()) {
 			log("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
-			UI::Modal_Message_Box mmb
+			UI::MessageBox mmb
 				(&mm,
 				 messagetitle,
 				 message,
-				 UI::Modal_Message_Box::OK);
+				 UI::MessageBox::OK);
 			mmb.set_align(Align_Left);
 			mmb.run();
 
@@ -1469,12 +1469,12 @@ public:
 
 		if (m_replayreader->EndOfReplay() && !m_endofgame) {
 			m_game.set_speed(0);
-			UI::Modal_Message_Box mmb
+			UI::MessageBox mmb
 				(m_game.get_iabase(),
 					_("End of replay"),
 					_("The end of the replay has been reached and the game has been paused. "
 					"You may unpause the game and continue watching if you want to."),
-					UI::Modal_Message_Box::OK);
+					UI::MessageBox::OK);
 			mmb.run();
 			m_endofgame = true;
 		}

@@ -33,7 +33,7 @@
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_textarea.h"
 
 
@@ -221,8 +221,8 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
 		std::string s = _("A File with the name ");
 		s            += FileSystem::FS_Filename(filename.c_str());
 		s            += _(" already exists. Overwrite?");
-		UI::Modal_Message_Box mbox
-			(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::YESNO);
+		UI::MessageBox mbox
+			(m_parent, _("Save Game Error!!"), s, UI::MessageBox::YESNO);
 		if (not mbox.run()) return false;
 
 		g_fs->Unlink(complete_filename); //  delete this
@@ -239,8 +239,8 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
 			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
 			 "Reason given:\n");
 		s += error;
-		UI::Modal_Message_Box mbox
-			(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::OK);
+		UI::MessageBox mbox
+			(m_parent, _("Save Game Error!!"), s, UI::MessageBox::OK);
 		mbox.run();
 	}
 

@@ -34,7 +34,7 @@
 
 #include "ui_button.h"
 #include "ui_listselect.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 
@@ -282,8 +282,8 @@ void Editor_Event_Menu::clicked_del_event() {
 			 it != event_referencers_end;
 			 ++it)
 			s << it->first->identifier() << '\n';
-		UI::Modal_Message_Box mmb
-			(&eia(), _("Error!"), s.str(), UI::Modal_Message_Box::OK);
+		UI::MessageBox mmb
+			(&eia(), _("Error!"), s.str(), UI::MessageBox::OK);
 		mmb.run();
 		return;
 	}
@@ -324,8 +324,8 @@ void Editor_Event_Menu::clicked_del_trigger() {
 			 it != trigger_referencers_end;
 			 ++it)
 			s << it->first->identifier() << '\n';
-		UI::Modal_Message_Box messagebox
-			(&eia(), _("Error!"), s.str(), UI::Modal_Message_Box::OK);
+		UI::MessageBox messagebox
+			(&eia(), _("Error!"), s.str(), UI::MessageBox::OK);
 		messagebox.run();
 	}
 }

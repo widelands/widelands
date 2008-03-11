@@ -192,6 +192,16 @@ void Panel::end_modal(int32_t code)
 	_retcode = code;
 }
 
+
+/**
+ * \return \c true if this is the currently modal panel
+ */
+bool Panel::is_modal()
+{
+	return _running;
+}
+
+
 /**
  * Called once before the event loop in run is started
  */

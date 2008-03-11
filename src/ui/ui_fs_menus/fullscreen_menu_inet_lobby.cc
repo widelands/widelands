@@ -30,7 +30,7 @@
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 
@@ -237,8 +237,8 @@ void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groo
  * message
  */
 void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
-	UI::Modal_Message_Box mmb
-		(this, _("Critical Connection Error!"), str, UI::Modal_Message_Box::OK);
+	UI::MessageBox mmb
+		(this, _("Critical Connection Error!"), str, UI::MessageBox::OK);
 	mmb.run();
 	m_disconnect_expected = true;
 }
@@ -246,11 +246,11 @@ void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
 /// A disconnect occurred.
 void Fullscreen_Menu_InetLobby::disconnect() {
 	if (not m_disconnect_expected) {
-		UI::Modal_Message_Box mmb
+		UI::MessageBox mmb
 			(this,
 			 _("Critical Connection Error!"),
 			 _("Server disconnected unexpectedly!"),
-			 UI::Modal_Message_Box::OK);
+			 UI::MessageBox::OK);
 		mmb.run();
 	}
 	end_modal(0);

@@ -26,7 +26,7 @@
 
 #include "ui_button.h"
 #include "ui_editbox.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 
@@ -219,8 +219,8 @@ void Edit_Variable_Window::clicked_ok() {
 			snprintf
 				(buffer, sizeof(buffer),
 				 _("\"%s\" is not a valid integer!"), m_value.text().c_str());
-			UI::Modal_Message_Box mb
-				(&m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
+			UI::MessageBox mb
+				(&m_parent, _("Parse error!"), buffer, UI::MessageBox::OK);
 			mb.run();
 			return;
 		}

@@ -71,6 +71,7 @@ struct Panel : public Object {
 	static const int32_t dying_code = -1;
 	int32_t run();
 	void end_modal(int32_t code);
+	bool is_modal();
 
 	virtual void start();
 	virtual void end();

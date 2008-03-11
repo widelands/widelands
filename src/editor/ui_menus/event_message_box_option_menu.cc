@@ -30,7 +30,7 @@
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
-#include "ui_modal_messagebox.h"
+#include "ui_messagebox.h"
 #include "ui_multilineeditbox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
@@ -238,10 +238,10 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 					 ("There is another event registered with the name \"%s\". "
 					  "Choose another name."),
 					 name.c_str());
-				UI::Modal_Message_Box mb
+				UI::MessageBox mb
 					(get_parent(),
 					 _("Name in use"), buffer,
-					 UI::Modal_Message_Box::OK);
+					 UI::MessageBox::OK);
 				mb.run();
 				return;
 			}
