@@ -154,17 +154,18 @@ protected:
 
 	bool does_carry_ware() {return m_carried_item.is_set();}
 
-	static Task taskTransfer;
-	static Task taskBuildingwork;
-	static Task taskReturn;
-	static Task taskProgram;
-	static Task taskGowarehouse;
-	static Task taskDropoff;
-	static Task taskFetchfromflag;
-	static Task taskWaitforcapacity;
-	static Task taskLeavebuilding;
-	static Task taskFugitive;
-	static Task taskGeologist;
+public:
+	static const Task taskTransfer;
+	static const Task taskBuildingwork;
+	static const Task taskReturn;
+	static const Task taskProgram;
+	static const Task taskGowarehouse;
+	static const Task taskDropoff;
+	static const Task taskFetchfromflag;
+	static const Task taskWaitforcapacity;
+	static const Task taskLeavebuilding;
+	static const Task taskFugitive;
+	static const Task taskGeologist;
 
 private:
 	// task details

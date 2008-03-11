@@ -1047,7 +1047,7 @@ void Worker::init_auto_task(Game * game) {
  *
  * Signal "cancel" to cancel the transfer.
  */
-Bob::Task Worker::taskTransfer = {
+const Bob::Task Worker::taskTransfer = {
 	"transfer",
 	static_cast<Bob::Ptr>(&Worker::transfer_update),
 	static_cast<Bob::PtrSignal>(&Worker::transfer_signalimmediate)
@@ -1305,7 +1305,7 @@ void Worker::cancel_task_transfer(Game* g)
  * ivar1 - 0: no task has failed; 1: currently in buildingwork;
  *         2: signal failure of buildingwork
  */
-Bob::Task Worker::taskBuildingwork = {
+const Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
 	static_cast<Bob::Ptr>(&Worker::buildingwork_update),
 	0
@@ -1386,7 +1386,7 @@ void Worker::update_task_buildingwork(Game* g)
  * building's flag, if possible.
  * Blocks all signals except for "location".
  */
-Bob::Task Worker::taskReturn = {
+const Bob::Task Worker::taskReturn = {
 	"return",
 	static_cast<Bob::Ptr>(&Worker::return_update),
 	0,
@@ -1485,7 +1485,7 @@ void Worker::return_update(Game* g, State* state)
  * objvar1 is used to store objects found by findobject
  * coords is used to store target coordinates found by findspace
  */
-Bob::Task Worker::taskProgram = {
+const Bob::Task Worker::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Worker::program_update),
 	0
@@ -1532,7 +1532,7 @@ void Worker::program_update(Game* g, State* state)
 }
 
 
-Bob::Task Worker::taskGowarehouse = {
+const Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",
 	static_cast<Bob::Ptr>(&Worker::gowarehouse_update),
 	static_cast<Bob::PtrSignal>(&Worker::gowarehouse_signalimmediate),
@@ -1641,7 +1641,7 @@ void Worker::gowarehouse_signalimmediate(Game* g, State* state, const std::strin
 }
 
 
-Bob::Task Worker::taskDropoff = {
+const Bob::Task Worker::taskDropoff = {
 	"dropoff",
 	static_cast<Bob::Ptr>(&Worker::dropoff_update),
 	0,
@@ -1739,7 +1739,7 @@ void Worker::dropoff_update(Game * g, State *)
  * ivar1 is set to 0 if we should move to the flag and fetch the item, and it
  * is set to 1 if we should move into the building.
  */
-Bob::Task Worker::taskFetchfromflag = {
+const Bob::Task Worker::taskFetchfromflag = {
 	"fetchfromflag",
 	static_cast<Bob::Ptr>(&Worker::fetchfromflag_update),
 	0,
@@ -1819,7 +1819,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 /**
  * Wait for available capacity on a flag.
  */
-Bob::Task Worker::taskWaitforcapacity = {
+const Bob::Task Worker::taskWaitforcapacity = {
 	"waitforcapacity",
 	static_cast<Bob::Ptr>(&Worker::waitforcapacity_update),
 	0,
@@ -1890,7 +1890,7 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
  * ivar1 - 0: don't change location; 1: change location to the flag
  * objvar1 - the building we're leaving
  */
-Bob::Task Worker::taskLeavebuilding = {
+const Bob::Task Worker::taskLeavebuilding = {
 	"leavebuilding",
 	static_cast<Bob::Ptr>(&Worker::leavebuilding_update),
 	0,
@@ -1980,7 +1980,7 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
 /**
  * Run around aimlessly until we find a warehouse.
  */
-Bob::Task Worker::taskFugitive = {
+const Bob::Task Worker::taskFugitive = {
 	"fugitive",
 	static_cast<Bob::Ptr>(&Worker::fugitive_update),
 	0,
@@ -2119,7 +2119,7 @@ void Worker::fugitive_update(Game* g, State* state)
  *
  * Failure of path movement is caught, all other signals terminate this task.
  */
-Bob::Task Worker::taskGeologist = {
+const Bob::Task Worker::taskGeologist = {
 	"geologist",
 	static_cast<Bob::Ptr>(&Worker::geologist_update),
 	0,

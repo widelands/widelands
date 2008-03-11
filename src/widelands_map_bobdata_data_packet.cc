@@ -140,7 +140,7 @@ throw
 							bool task_forcemove_hack = false;
 
 							{ //  Task
-								Bob::Task * task;
+								const Bob::Task * task;
 								char const * const taskname = fr.CString();
 								if      (not strcmp(taskname, "idle"))
 									task = &Bob::taskIdle;

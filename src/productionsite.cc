@@ -436,15 +436,25 @@ void ProductionSite::request_worker_callback
 
 	delete rq;
 
-	Worker * const main_worker = psite.m_workers[0];
-	const bool can_start_working = psite.can_start_working();
-	const bool w_is_not_main_worker = w != main_worker;
-	if (not can_start_working or w_is_not_main_worker)
-		w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
+	// It's always the first worker doing building work,
+	// the others only idle. Still, we need to wake up the
+	// primary worker if the worker that has just arrived is
+	// the last one we need to start working.
+	if (w == psite.m_workers[0]) {
+		w->start_task_buildingwork(g);
+	} else {
+		w->start_task_idle(g, 0, -1);
 
-	if (can_start_working) {
-		if (w_is_not_main_worker) main_worker->send_signal(g, "wakeup");
-		psite.m_workers[0]->start_task_buildingwork(g);
+		if (psite.can_start_working()) {
+			// This is for compatibility with older savegames, where the first
+			// worker was set to idle if more workers were needed.
+			if (psite.m_workers[0]->top_state().task != &Worker::taskBuildingwork) {
+				psite.m_workers[0]->reset_tasks(g);
+				psite.m_workers[0]->start_task_buildingwork(g);
+			} else {
+				psite.m_workers[0]->update_task_buildingwork(g);
+			}
+		}
 	}
 }
 
@@ -952,7 +962,6 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 	}
 
 	// Default actions first
-
 	if (WareInstance * const item = w->fetch_carried_item(g)) {
 		const char * const ware_name = item->descr().name().c_str();
 		if (not descr().is_output(ware_name))
@@ -969,6 +978,10 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 		w->start_task_fetchfromflag(g);
 		return true;
 	}
+
+	// Check if all workers are there
+	if (!can_start_working())
+		return false;
 
 	// Start program if we haven't already done so
 	if (!state)

@@ -360,7 +360,7 @@ void Bob::pop_task(Game* g)
  * Get the bottom-most (usually the only) state of this task from the stack.
  * \return 0 if this task is not running at all.
  */
-Bob::State* Bob::get_state(Task* task)
+Bob::State* Bob::get_state(const Task* task)
 {
 	std::vector<State>::iterator it = m_stack.end();
 
