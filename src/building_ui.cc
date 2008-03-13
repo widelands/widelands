@@ -51,6 +51,9 @@ class.
 
 #include "upcast.h"
 
+#include <SDL_types.h>
+#include <sys/types.h>
+
 using Widelands::Building;
 using Widelands::ConstructionSite;
 using Widelands::MilitarySite;
@@ -1784,7 +1787,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 
 	// Add priority buttons for every attribute, if there is more than one
 	Widelands::TrainingSite_Descr const & ts_descr = ps->descr();
-	uint atrcount = 0;
+	uint32_t atrcount = 0;
 	if (ts_descr.get_train_hp())
 		atrcount++;
 	if (ts_descr.get_train_attack())

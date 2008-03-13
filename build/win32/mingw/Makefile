@@ -57,7 +57,7 @@ VERSION:=build11
 WINDRES = windres.exe
 icon.o: Widelands_win.rc
 
--include Makefile_local.h
+-include Makefile.local
 
 ####################################################################
 #  NO USER CHANGES BELOW THIS POINT											 #
@@ -117,7 +117,7 @@ endif
 ##############################################################################
 # Object files and directories, final compilation flags
 
-OBJECT_DIR:=../../src/$(TARGET)-$(BUILD)
+OBJECT_DIR:=../../../src/$(TARGET)-$(BUILD)
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
 LDFLAGS:=$(shell $(SDL_CONFIG) --libs) icon.o $(ADD_LDFLAGS) -lz -lpng -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net  -lSDL_gfx -lwsock32
@@ -125,46 +125,46 @@ LDFLAGS:=$(shell $(SDL_CONFIG) --libs) icon.o $(ADD_LDFLAGS) -lz -lpng -lSDL_ima
 ##############################################################################
 # Building
 all: win32tool makedirs tags $(OBJECT_DIR)/widelands.exe
-	cp -r $(OBJECT_DIR)/widelands.exe ../../
+	cp -r $(OBJECT_DIR)/widelands.exe ../../../
 	@echo
 	@echo "    Congratulations. Build seems to be completed without error."
 
 clean:
-	@-rm -rf ../../widelands.exe
-	@-rm -rf ../../*.da ../../src/*.da
+	@-rm -rf ../../../widelands.exe
+	@-rm -rf ../../../*.da ../../../src/*.da
 	@-rm -rf $(OBJECT_DIR)/*.o $(OBJECT_DIR)/*/*.o $(OBJECT_DIR)/*/*/*.o $(OBJECT_DIR)/*/*/*/*.o
 	@-rm -rf $(OBJECT_DIR)/*.d $(OBJECT_DIR)/*/*.d $(OBJECT_DIR)/*/*/*.d $(OBJECT_DIR)/*/*/*/*.d
 	@-rm -rf $(OBJECT_DIR)/widelands.exe
-	@-rm -rf ../../*~ ../../*/*~ ../../*/*/*~ ../../*/*/*/*~ ../../*/*/*/*/*~
+	@-rm -rf ../../../*~ ../../../*/*~ ../../../*/*/*~ ../../../*/*/*/*~ ../../../*/*/*/*/*~
 
 doc: $(SRC) $(HEADERS)
 	@doxygen Doxyfile
 
 dist:
-	@rm -rf ../../widelands-$(VERSION)
-	@mkdir ../../widelands-$(VERSION)
-	@cp -r ../../campaigns ../../doc ../../fonts ../../game_server ../../locale ../../maps ../../music ../../pics ../../sound ../../tribes ../../txts ../../worlds ../../ChangeLog ../../COPYING ../../CREDITS ../../widelands.exe ../../widelands-$(VERSION)
-	@find ../../widelands-$(VERSION) -name .svn | xargs rm -rf
-	@find ../../widelands-$(VERSION) -name .cvsignore | xargs rm -f
+	@rm -rf ../../../widelands-$(VERSION)
+	@mkdir ../../../widelands-$(VERSION)
+	@cp -r ../../../campaigns ../../../doc ../../../fonts ../../../game_server ../../../locale ../../../maps ../../../music ../../../pics ../../../sound ../../../tribes ../../../txts ../../../worlds ../../../ChangeLog ../../../COPYING ../../../CREDITS ../../../widelands.exe ../../../widelands-$(VERSION)
+	@find ../../../widelands-$(VERSION) -name .svn | xargs rm -rf
+	@find ../../../widelands-$(VERSION) -name .cvsignore | xargs rm -f
 	@echo "    Your build was exported to widelands-$(VERSION)"
 	@echo
 	@echo "         THE WIDELANDS DEVELOPMENT TEAM            "
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=../../src ../../src/ui/ui_fs_menus ../../src/ui/ui_basic ../../src/editor ../../src/editor/ui_menus ../../src/editor/tools ../../src/filesystem ../../src/events ../../src/sound ../../src/trigger
+SUBDIRS=../../../src ../../../src/ui/ui_fs_menus ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/filesystem ../../../src/events ../../../src/sound ../../../src/trigger
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 SRC := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.cc))
 HEADERS := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.h))
-OBJ := $(patsubst ../../src/%.cc,$(OBJECT_DIR)/%.o$,$(SRC))
+OBJ := $(patsubst ../../../src/%.cc,$(OBJECT_DIR)/%.o$,$(SRC))
 DEP := $(OBJ:.o=.d)
 
 Q = @
 
 makedirs:
-	$(Q)-mkdir -p $(OBJECT_DIR) $(patsubst ../../src/%,$(OBJECT_DIR)/%,$(SUBDIRS))
+	$(Q)-mkdir -p $(OBJECT_DIR) $(patsubst ../../../src/%,$(OBJECT_DIR)/%,$(SUBDIRS))
 
 $(OBJECT_DIR)/widelands.exe: $(OBJ)
 	@echo "===> LD $@"
@@ -172,7 +172,7 @@ $(OBJECT_DIR)/widelands.exe: $(OBJ)
 
 -include $(DEP)
 
-$(OBJECT_DIR)/%.o: ../../src/%.cc
+$(OBJECT_DIR)/%.o: ../../../src/%.cc
 	@echo "===> CXX $<"
 	$(Q)$(CXX) -pipe $(CXXFLAGS) -MMD -MP -MF $@.d -c -o $@ $<
 	$(Q)sed -e 's@^\(.*\)\.o:@\1.d \1.o:@' $@.d > $(OBJECT_DIR)/$*.d
@@ -184,5 +184,5 @@ tags: $(SRC) $(HEADERS)
 win32tool:
 	@echo "===> Creating icon.o for win32"
 	@$(WINDRES) -i Widelands_win.rc --input-format=rc -o icon.o -O coff
-	@-rm -rf ../../src/config.h
-	@cp -r ./config.h ../../src
+	@-rm -rf ../../../src/config.h
+	@cp -r ./config.h ../../../src
