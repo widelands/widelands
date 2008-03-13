@@ -520,8 +520,9 @@ void TrainingSite::start_upgrade(Game* g, Upgrade* upgrade)
 
 	int32_t level;
 
-	if (upgrade->lastsuccess) {
-		// We were successful the last time, so restart greedily
+	if (upgrade->lastsuccess || upgrade->lastattempt < 0) {
+		// Start greedily on the first ever attempt, and restart greedily
+		// after a sucessful upgrade
 		if (m_build_heros)
 			level = maxlevel;
 		else
