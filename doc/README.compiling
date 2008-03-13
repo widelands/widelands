@@ -16,6 +16,7 @@ for Widelands makes direct use of them:
    - SDL_net
    - SDL_ttf >= 2.0.0
    - SDL_gfx
+   - boost >= 1.33
    - gettext (look at FAQ if you have problems with -lintl)
    - libpng
    - zlib
@@ -122,7 +123,7 @@ under Windows and compiling Widelands.
 Bloodshed's DevCpp
 ------------------
 Since Build10, we support a DevCpp-Project file for Bloodshed's free GPLed IDE.
-DevCpp uses mingw and can be set up to use an allready installed mingw-environment
+DevCpp uses mingw and can be set up to use an already installed mingw-environment
 (like the one you can set up via the instructions above).
 You can get the newest version of DevCpp at http://www.bloodshed.net
 
@@ -135,7 +136,7 @@ can change and save anything and of course can compile Widelands.
 
 InnoSetup
 ------------------
-Since Build10 we support a Innosetup file, which can be used for compiling a Setup
+Since Build10 we support an Innosetup file, which can be used for compiling a Setup
 (like the official Widelands-Setup available on sourceforge.net-mirrors).
 Innosetup can be downloaded from http://www.jrsoftware.org 
 
