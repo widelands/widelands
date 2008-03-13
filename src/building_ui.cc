@@ -1731,15 +1731,16 @@ struct TrainingSite_Options_Window : public UI::Window {
 
 	void think();
 private:
+	struct PrioritySet {
+		Widelands::tAttribute attr;
+		UI::Textarea* priority;
+	};
+
+	void addPrioritySet(Widelands::tAttribute attr, const std::string& text);
+
 	void heros_clicked        () {get_trainingsite ()->switch_heros ();}
-	void up_hp_clicked        () {act_change_priority (atrHP,       1);}
-	void up_attack_clicked    () {act_change_priority (atrAttack,   1);}
-	void up_defense_clicked   () {act_change_priority (atrDefense,  1);}
-	void up_evade_clicked     () {act_change_priority (atrEvade,    1);}
-	void down_hp_clicked      () {act_change_priority (atrHP,      -1);}
-	void down_attack_clicked  () {act_change_priority (atrAttack,  -1);}
-	void down_defense_clicked () {act_change_priority (atrDefense, -1);}
-	void down_evade_clicked   () {act_change_priority (atrEvade,   -1);}
+	void up_clicked(uint32_t idx) {act_change_priority(m_priorities[idx].attr, 1);}
+	void down_clicked(uint32_t idx) {act_change_priority(m_priorities[idx].attr, -1);}
 
 	void act_change_priority (int32_t atr, int32_t how);
 
@@ -1749,10 +1750,7 @@ private:
 	Interactive_Player* m_parent;
 	UI::Window *       * m_reg;
 	UI::Textarea       * m_style_train;
-	UI::Textarea       * m_hp_pri;
-	UI::Textarea       * m_attack_pri;
-	UI::Textarea       * m_defense_pri;
-	UI::Textarea       * m_evade_pri;
+	std::vector<PrioritySet> m_priorities;
 	TrainingSite       * m_trainingsite;
 };
 
@@ -1767,10 +1765,6 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	m_parent=parent;
 	m_trainingsite = ps;
 	m_ms_location=ps->get_position();
-	m_hp_pri = 0;
-	m_attack_pri = 0;
-	m_defense_pri = 0;
-	m_evade_pri = 0;
 
 	set_inner_size(250, _bs*9);
 	move_inside_parent();
@@ -1788,87 +1782,26 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	new UI::Textarea(this, _cn - 15, _bs + 2, _("Training mode : "), Align_Left);
 	m_style_train = new UI::Textarea (this, _cb + 4, _bs+2, _("Balanced"), Align_Left);
 
-
-	m_hp_pri      = new UI::Textarea (this, _cb + 3 * _bs / 2, 3 + (3 + _bs) * 2, "XX", Align_Center);
-	m_attack_pri  = new UI::Textarea (this, _cb + 3 * _bs / 2, 3 + (3 + _bs) * 3, "XX", Align_Center);
-	m_defense_pri = new UI::Textarea (this, _cb + 3 * _bs / 2, 3 + (3 + _bs) * 4, "XX", Align_Center);
-	m_evade_pri   = new UI::Textarea (this, _cb + 3 * _bs / 2, 3 + (3 + _bs) * 5, "XX", Align_Center);
-
-	m_hp_pri->set_visible(false);
-	m_attack_pri->set_visible(false);
-	m_defense_pri->set_visible(false);
-	m_evade_pri->set_visible(false);
-
-	// Add priority buttons for every attribute
+	// Add priority buttons for every attribute, if there is more than one
 	Widelands::TrainingSite_Descr const & ts_descr = ps->descr();
-	if (ts_descr.get_train_hp()) {
-		// HP buttons
-		new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb, 2 * (_bs + 2), _bs, _bs,
-			 4,
-			 g_gr->get_picture(PicMod_Game, pic_down_train),
-			 &TrainingSite_Options_Window::down_hp_clicked, this);
-		new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb + 2 * _bs, 2 * (_bs + 2), _bs, _bs,
-			 4,
-			 g_gr->get_picture(PicMod_Game, pic_up_train),
-			 &TrainingSite_Options_Window::up_hp_clicked, this);
-		new UI::Textarea (this, _cn, (3+_bs)*2, _("Hit Points"), Align_Left);
-		m_hp_pri->set_visible(true);
-	}
-	if (ts_descr.get_train_attack()) {
-		// Attack buttons
-		new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb, 3 * (_bs + 2), _bs, _bs,
-			 4,
-			 g_gr->get_picture(PicMod_Game, pic_down_train),
-			 &TrainingSite_Options_Window::down_attack_clicked, this);
-		new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb + 2 * _bs, 3 * (_bs + 2), _bs, _bs,
-			 4,
-			 g_gr->get_picture(PicMod_Game, pic_up_train),
-			 &TrainingSite_Options_Window::up_attack_clicked, this);
-		new UI::Textarea (this, _cn, (3+_bs)*3, _("Attack"), Align_Left);
-		m_attack_pri->set_visible(true);
-	}
-	if (ts_descr.get_train_defense()) {
-		// Defense buttons
-		new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb, 4 * (_bs + 2), _bs, _bs,
-			 4,
-			 g_gr->get_picture(PicMod_Game, pic_down_train),
-			 &TrainingSite_Options_Window::down_defense_clicked, this);
-		new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb + 2 * _bs, 4 * (_bs + 2), _bs, _bs,
-			 4,
-			 g_gr->get_picture(PicMod_Game, pic_up_train),
-			 &TrainingSite_Options_Window::up_defense_clicked, this);
-		new UI::Textarea (this, _cn, (3+_bs)*4, _("Defense"), Align_Left);
-		m_defense_pri->set_visible(true);
-	}
-	if (ts_descr.get_train_evade()) {
-		// Evade buttons
-		new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb, 5 * (_bs + 2), _bs, _bs,
-			 4,
-			 g_gr->get_picture(PicMod_Game, pic_down_train),
-			 &TrainingSite_Options_Window::down_evade_clicked, this);
-		new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb + 2 * _bs,
-			 5 * (_bs + 2), _bs, _bs,
-			 4,
-			 g_gr->get_picture(PicMod_Game, pic_up_train),
-			 &TrainingSite_Options_Window::up_evade_clicked, this);
-		new UI::Textarea (this, _cn, (3+_bs)*5, _("Evade"), Align_Left);
-		m_evade_pri->set_visible(true);
+	uint atrcount = 0;
+	if (ts_descr.get_train_hp())
+		atrcount++;
+	if (ts_descr.get_train_attack())
+		atrcount++;
+	if (ts_descr.get_train_defense())
+		atrcount++;
+	if (ts_descr.get_train_evade())
+		atrcount++;
+	if (atrcount >= 2) {
+		if (ts_descr.get_train_hp())
+			addPrioritySet(atrHP, _("Hit points"));
+		if (ts_descr.get_train_attack())
+			addPrioritySet(atrAttack, _("Attack"));
+		if (ts_descr.get_train_defense())
+			addPrioritySet(atrDefense, _("Defense"));
+		if (ts_descr.get_train_evade())
+			addPrioritySet(atrEvade, _("Evade"));
 	}
 
 	center_to_parent();
@@ -1876,6 +1809,34 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 }
 
 TrainingSite_Options_Window::~TrainingSite_Options_Window() {}
+
+void TrainingSite_Options_Window::addPrioritySet(Widelands::tAttribute attr, const std::string& text)
+{
+	int32_t _bs = 22;
+	int32_t _cb = 100;
+	int32_t _cn = 20;
+	int32_t y = (3+_bs)*(2+m_priorities.size());
+	PrioritySet set;
+
+	set.attr = attr;
+	set.priority = new UI::Textarea (this, _cb + 3 * _bs / 2, y+3, "XX", Align_Center);
+
+	new UI::IDButton<TrainingSite_Options_Window, uint32_t>
+		(this,
+		 _cb, y, _bs, _bs,
+		 4,
+		 g_gr->get_picture(PicMod_Game, pic_down_train),
+		 &TrainingSite_Options_Window::down_clicked, this, m_priorities.size());
+	new UI::IDButton<TrainingSite_Options_Window, uint32_t>
+		(this,
+		 _cb + 2 * _bs, y, _bs, _bs,
+		 4,
+		 g_gr->get_picture(PicMod_Game, pic_up_train),
+		 &TrainingSite_Options_Window::up_clicked, this, m_priorities.size());
+	new UI::Textarea (this, _cn, y+3, text, Align_Left);
+
+	m_priorities.push_back(set);
+}
 
 void TrainingSite_Options_Window::act_change_priority (int32_t atr, int32_t val) {
 
@@ -1909,9 +1870,6 @@ void TrainingSite_Options_Window::think()
 }
 
 void TrainingSite_Options_Window::update() {
-	char buf[200];
-	std::string str;
-
 	TrainingSite *ts = get_trainingsite();
 
 	if (ts->get_build_heros())
@@ -1919,22 +1877,11 @@ void TrainingSite_Options_Window::update() {
 	else
 		m_style_train->set_text(_("Balanced army"));
 
-	sprintf (buf, "%2d", ts->get_pri(atrHP));
-	str = static_cast<const char *>(buf);
-	m_hp_pri->set_text (str);
-
-	sprintf (buf, "%2d", ts->get_pri(atrAttack));
-	str = static_cast<const char *>(buf);
-	m_attack_pri->set_text (str);
-
-	sprintf (buf, "%2d", ts->get_pri(atrDefense));
-	str = static_cast<const char *>(buf);
-	m_defense_pri->set_text (str);
-
-	sprintf (buf, "%2d", ts->get_pri(atrEvade));
-	str = static_cast<const char *>(buf);
-	m_evade_pri->set_text (str);
-
+	for(uint32_t i = 0; i < m_priorities.size(); ++i) {
+		char buf[200];
+		sprintf(buf, "%2d", ts->get_pri(m_priorities[i].attr));
+		m_priorities[i].priority->set_text(buf);
+	}
 }
 
 /*
