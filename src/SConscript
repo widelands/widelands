@@ -4,15 +4,6 @@ Import('*')
 #      scons-tools/astyle.py
 
 SRC=simpleglob("*.cc")
-SRC+=simpleglob("*.cc", "./events")
-SRC+=simpleglob("*.cc", "./ui/ui_basic")
-SRC+=simpleglob("*.cc", "./ui/ui_fs_menus")
-SRC+=simpleglob("*.cc", "./editor")
-SRC+=simpleglob("*.cc", "./trigger")
-SRC+=simpleglob("*.cc", "./editor/ui_menus")
-SRC+=simpleglob("*.cc", "./editor/tools")
-SRC+=simpleglob("*.cc", "./filesystem")
-SRC+=simpleglob("*.cc", "./sound")
 
 srcenv=env.Copy()
 
@@ -27,23 +18,23 @@ srcenv.Append(CPPPATH=[
 		])
 
 Export('srcenv')
-#srcenv.Append(LIBS='events', LIBPATH='events')
-#srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')
-#srcenv.Append(LIBS='uifsmenus', LIBPATH='ui/ui_fs_menus')
-#srcenv.Append(LIBS='editor', LIBPATH='editor')
-#srcenv.Append(LIBS='trigger', LIBPATH='trigger') # as long as this contains ui code, this line must be before editoruimenus
-#srcenv.Append(LIBS='editoruimenus', LIBPATH='editor/ui_menus')
-#srcenv.Append(LIBS='editortools', LIBPATH='editor/tools')
-#srcenv.Append(LIBS='filesystem', LIBPATH='filesystem')
-#srcenv.Append(LIBS='sound', LIBPATH='sound')
+srcenv.Append(LIBS='events', LIBPATH='events')
+srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')
+srcenv.Append(LIBS='uifsmenus', LIBPATH='ui/ui_fs_menus')
+srcenv.Append(LIBS='editor', LIBPATH='editor')
+srcenv.Append(LIBS='trigger', LIBPATH='trigger') # as long as this contains ui code, this line must be before editoruimenus
+srcenv.Append(LIBS='editoruimenus', LIBPATH='editor/ui_menus')
+srcenv.Append(LIBS='editortools', LIBPATH='editor/tools')
+srcenv.Append(LIBS='filesystem', LIBPATH='filesystem')
+srcenv.Append(LIBS='sound', LIBPATH='sound')
 
-#SConscript('editor/SConscript')
-#SConscript('ui/ui_basic/SConscript')
-#SConscript('ui/ui_fs_menus/SConscript')
-#SConscript('filesystem/SConscript')
-#SConscript('sound/SConscript')
-#SConscript('trigger/SConscript')
-#SConscript('events/SConscript')
+SConscript('editor/SConscript')
+SConscript('ui/ui_basic/SConscript')
+SConscript('ui/ui_fs_menus/SConscript')
+SConscript('filesystem/SConscript')
+SConscript('sound/SConscript')
+SConscript('trigger/SConscript')
+SConscript('events/SConscript')
 
 srcenv.Append(INDENTLIST=[
 	'geometry.h',
