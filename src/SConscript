@@ -19,12 +19,12 @@ srcenv.Append(CPPPATH=[
 
 Export('srcenv')
 srcenv.Append(LIBS='events', LIBPATH='events')
-srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')
-srcenv.Append(LIBS='uifsmenus', LIBPATH='ui/ui_fs_menus')
 srcenv.Append(LIBS='editor', LIBPATH='editor')
 srcenv.Append(LIBS='trigger', LIBPATH='trigger') # as long as this contains ui code, this line must be before editoruimenus
 srcenv.Append(LIBS='editoruimenus', LIBPATH='editor/ui_menus')
 srcenv.Append(LIBS='editortools', LIBPATH='editor/tools')
+srcenv.Append(LIBS='uifsmenus', LIBPATH='ui/ui_fs_menus')
+srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')
 srcenv.Append(LIBS='filesystem', LIBPATH='filesystem')
 srcenv.Append(LIBS='sound', LIBPATH='sound')
 
