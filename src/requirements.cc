@@ -150,7 +150,10 @@ void RequireOr::add(const Requirements& req)
 
 bool RequireOr::check(Map_Object* obj) const
 {
-	for(std::vector<Requirements>::const_iterator it = m.begin(); it != m.end(); ++it)
+	for
+		(std::vector<Requirements>::const_iterator it = m.begin();
+		 it != m.end();
+		 ++it)
 		if (it->check(obj))
 			return true;
 
@@ -162,7 +165,10 @@ void RequireOr::write(FileWrite *fw, Editor_Game_Base * egbase, Map_Map_Object_S
 	assert(m.size() < 65535);
 	fw->Unsigned16(m.size());
 
-	for(std::vector<Requirements>::const_iterator it = m.begin(); it != m.end(); ++it)
+	for
+		(std::vector<Requirements>::const_iterator it = m.begin();
+		 it != m.end();
+		 ++it)
 		it->Write(fw, egbase, mos);
 }
 
@@ -171,7 +177,7 @@ static Requirements readOr(FileRead* fr, Editor_Game_Base* egbase, Map_Map_Objec
 	uint32_t count = fr->Unsigned16();
 	RequireOr req;
 
-	for(uint32_t i = 0; i < count; ++i) {
+	for (uint32_t i = 0; i < count; ++i) {
 		Requirements sub;
 		sub.Read(fr, egbase, mol);
 		req.add(sub);
@@ -190,7 +196,10 @@ void RequireAnd::add(const Requirements& req)
 
 bool RequireAnd::check(Map_Object* obj) const
 {
-	for(std::vector<Requirements>::const_iterator it = m.begin(); it != m.end(); ++it)
+	for
+		(std::vector<Requirements>::const_iterator it = m.begin();
+		 it != m.end();
+		 ++it)
 		if (!it->check(obj))
 			return false;
 
@@ -202,7 +211,10 @@ void RequireAnd::write(FileWrite *fw, Editor_Game_Base * egbase, Map_Map_Object_
 	assert(m.size() < 65535);
 	fw->Unsigned16(m.size());
 
-	for(std::vector<Requirements>::const_iterator it = m.begin(); it != m.end(); ++it)
+	for
+		(std::vector<Requirements>::const_iterator it = m.begin();
+		 it != m.end();
+		 ++it)
 		it->Write(fw, egbase, mos);
 }
 
@@ -211,7 +223,7 @@ static Requirements readAnd(FileRead* fr, Editor_Game_Base* egbase, Map_Map_Obje
 	uint32_t count = fr->Unsigned16();
 	RequireAnd req;
 
-	for(uint32_t i = 0; i < count; ++i) {
+	for (uint32_t i = 0; i < count; ++i) {
 		Requirements sub;
 		sub.Read(fr, egbase, mol);
 		req.add(sub);

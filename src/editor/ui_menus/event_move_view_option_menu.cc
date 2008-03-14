@@ -211,19 +211,19 @@ void Event_Move_View_Option_Menu::clicked_ok() {
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =
-				eia().egbase().map().mem()[name])
+			 eia().egbase().map().mem()[name])
 			if (registered_event != & m_event) {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
-						_
-						("There is another event registered with the name \"%s\". "
-						 "Choose another name."),
+					 _
+					 ("There is another event registered with the name \"%s\". "
+					  "Choose another name."),
 					 name.c_str());
 				UI::MessageBox mb
 					(get_parent(),
-						_("Name in use"), buffer,
-						UI::MessageBox::OK);
+					 _("Name in use"), buffer,
+					 UI::MessageBox::OK);
 				mb.run();
 				return;
 			}

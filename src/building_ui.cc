@@ -1880,7 +1880,7 @@ void TrainingSite_Options_Window::update() {
 	else
 		m_style_train->set_text(_("Balanced army"));
 
-	for(uint32_t i = 0; i < m_priorities.size(); ++i) {
+	for (uint32_t i = 0; i < m_priorities.size(); ++i) {
 		char buf[200];
 		sprintf(buf, "%2d", ts->get_pri(m_priorities[i].attr));
 		m_priorities[i].priority->set_text(buf);

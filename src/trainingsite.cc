@@ -296,21 +296,29 @@ void TrainingSite::update_soldier_request() {
 
 			// set requirements to match this site
 			if (descr().get_train_attack())
-				r.add(RequireAttribute
-				      (atrAttack,
-				       descr().get_min_level(atrAttack), descr().get_max_level(atrAttack)));
+				r.add
+					(RequireAttribute
+					 (atrAttack,
+					  descr().get_min_level(atrAttack),
+					  descr().get_max_level(atrAttack)));
 			if (descr().get_train_defense())
-				r.add(RequireAttribute
-				      (atrDefense,
-				       descr().get_min_level(atrDefense), descr().get_max_level(atrDefense)));
+				r.add
+					(RequireAttribute
+					 (atrDefense,
+					  descr().get_min_level(atrDefense),
+					  descr().get_max_level(atrDefense)));
 			if (descr().get_train_evade())
-				r.add(RequireAttribute
-				      (atrEvade,
-				       descr().get_min_level(atrEvade), descr().get_max_level(atrEvade)));
+				r.add
+					(RequireAttribute
+					 (atrEvade,
+					  descr().get_min_level(atrEvade),
+					  descr().get_max_level(atrEvade)));
 			if (descr().get_train_hp())
-				r.add(RequireAttribute
-				      (atrHP,
-				       descr().get_min_level(atrHP), descr().get_max_level(atrHP)));
+				r.add
+					(RequireAttribute
+					 (atrHP,
+					  descr().get_min_level(atrHP),
+					  descr().get_max_level(atrHP)));
 
 			m_soldier_request->set_requirements(r);
 		}

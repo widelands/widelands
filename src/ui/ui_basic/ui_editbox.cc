@@ -318,7 +318,7 @@ void EditBox::draw(RenderTarget* dst)
 	int32_t caret = has_focus() ? static_cast<int32_t>(m->caret) : -1;
 	Point pos(4, get_h() >> 1);
 
-	switch(m->align & Align_Horizontal) {
+	switch (m->align & Align_Horizontal) {
 	case Align_HCenter:
 		pos.x = get_w() >> 1;
 		break;

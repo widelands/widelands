@@ -1471,10 +1471,12 @@ public:
 			m_game.set_speed(0);
 			UI::MessageBox mmb
 				(m_game.get_iabase(),
-					_("End of replay"),
-					_("The end of the replay has been reached and the game has been paused. "
-					"You may unpause the game and continue watching if you want to."),
-					UI::MessageBox::OK);
+				 _("End of replay"),
+				 _
+				 ("The end of the replay has been reached and the game has been "
+				  "paused. You may unpause the game and continue watching if you "
+				  "want to."),
+				 UI::MessageBox::OK);
 			mmb.run();
 			m_endofgame = true;
 		}

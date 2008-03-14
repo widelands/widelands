@@ -34,11 +34,11 @@ struct NetClientImpl;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-struct NetClient
-	: public GameController,
-	  public GameSettingsProvider,
-	  private SyncCallback,
-	  public ChatProvider
+struct NetClient :
+	public  GameController,
+	public  GameSettingsProvider,
+	private SyncCallback,
+	public  ChatProvider
 {
 	NetClient (IPaddress*, const std::string& playername);
 	virtual ~NetClient ();

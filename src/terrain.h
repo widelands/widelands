@@ -88,19 +88,21 @@ template<typename T> static void render_edge_lists
 	texpixels = tex.get_curpixels();
 	texcolormap = static_cast<T *>(tex.get_colormap());
 
-	while(height > 0) {
+	while (height > 0) {
 		int32_t leftx = FIXTOI(left->x0);
 		int32_t rightx = FIXTOI(right->x0);
 
 		T * scanline =
-			reinterpret_cast<T *>(static_cast<Uint8 *>(dst.get_pixels())
-			                      + y * dst.get_pitch()) + leftx;
+			reinterpret_cast<T *>
+			(static_cast<Uint8 *>(dst.get_pixels()) + y * dst.get_pitch())
+			+
+			leftx;
 
 		int32_t tx = FIXTOI(left->tx0);
 		int32_t ty = left->ty0;
 		int32_t b = left->b0;
 		uint32_t count = rightx-leftx;
-		while(count--) {
+		while (count--) {
 			int32_t texel = (tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
 
 			*scanline++ = texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
@@ -175,7 +177,11 @@ struct Polygon {
 		const Vertex* current;
 		bool currentin;
 		bool allin = true;
-		for(uint8_t index = 0; index < nrpoints; ++index, previous = current, previousin = currentin) {
+		for
+			(uint8_t index = 0;
+			 index < nrpoints;
+			 ++index, previous = current, previousin = currentin)
+		{
 			current = p[index];
 			currentin = current->x*x + current->y*y >= d;
 			allin = allin && currentin;
@@ -198,8 +204,14 @@ struct Polygon {
 		// Calculate intersection with the cutting line and replace points
 		// [firstout, firstin) by the two intersections, being careful
 		// not to introduce duplicate points.
-		intersect_edge(*p[(nrpoints+firstout-1)%nrpoints], *p[firstout], x, y, d, exit);
-		intersect_edge( *p[firstin], *p[(nrpoints+firstin-1)%nrpoints], x, y, d, entry);
+		intersect_edge
+			(*p[(nrpoints + firstout - 1) % nrpoints],
+			 *p[firstout],
+			 x, y, d, exit);
+		intersect_edge
+			(*p[firstin],
+			 *p[(nrpoints + firstin  - 1) % nrpoints],
+			 x, y, d, entry);
 
 		bool putexit = true;
 		bool putentry = true;
@@ -220,7 +232,7 @@ struct Polygon {
 				assert(nrpoints <= 7);
 
 				p[firstout] = exit;
-				for(uint8_t i = nrpoints-1; i > firstout; --i)
+				for (uint8_t i = nrpoints-1; i > firstout; --i)
 					p[i+1] = p[i];
 				nrpoints++;
 				p[firstout+1] = entry;
@@ -318,7 +330,7 @@ template<typename T> static void render_triangle
 
 			start = end;
 			end = (start+1)%polygon.nrpoints;
-		} while(polygon.p[end]->y >= polygon.p[start]->y);
+		} while (polygon.p[end]->y >= polygon.p[start]->y);
 	}
 
 	// Build right edges
@@ -340,7 +352,7 @@ template<typename T> static void render_triangle
 
 			start = end;
 			end = (polygon.nrpoints+start-1)%polygon.nrpoints;
-		} while(polygon.p[end]->y >= polygon.p[start]->y);
+		} while (polygon.p[end]->y >= polygon.p[start]->y);
 	}
 
 	// Calculate d(b)/d(x) and d(ty)/d(x) as fixed point variables.

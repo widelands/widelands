@@ -455,7 +455,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 				uint32_t plrclr[4];
 				uint32_t new_plrclr[4];
 
-				for(uint32_t i = 0; i < 4; ++i) {
+				for (uint32_t i = 0; i < 4; ++i) {
 					plrclr[i] = m_encodedata.plrclr[i].map(origsurface.format());
 					new_plrclr[i] = whitecolors[i].map(origsurface.format());
 				}
@@ -465,7 +465,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 					for (uint32_t x = 0; x < newsurface.get_w(); ++x) {
 						const uint32_t clr = origsurface.get_pixel(x, y);
 						newsurface.set_pixel(x, y, black);
-						for(uint32_t i = 0; i < 4; ++i) {
+						for (uint32_t i = 0; i < 4; ++i) {
 							if (clr == plrclr[i]) {
 								origsurface.set_pixel(x, y, new_plrclr[i]);
 								newsurface.set_pixel(x, y, white);

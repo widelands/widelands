@@ -97,7 +97,7 @@ void ChatDisplay::draw(RenderTarget* dst)
 	uint32_t totalheight = 0;
 	uint32_t idx = msgs.size();
 
-	while(idx && now - msgs[idx-1].time <= CHAT_DISPLAY_TIME) {
+	while (idx && now - msgs[idx - 1].time <= CHAT_DISPLAY_TIME) {
 		int32_t w;
 
 		Displayed d = {msgs[idx-1].toPrintable(), 0};

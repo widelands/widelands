@@ -97,7 +97,9 @@ template<typename Entry> struct Table {
 
 	void select(uint32_t);
 	struct No_Selection : public std::exception {
-		const char* what() const throw() {return "UI::Table<Entry>: No selection";}
+		char const * what() const throw () {
+			return "UI::Table<Entry>: No selection";
+		}
 	};
 	Entry_Record & get_selected_record() const;
 	Entry get_selected() const;
@@ -191,7 +193,9 @@ public:
 
 	void select(uint32_t);
 	struct No_Selection : public std::exception {
-		const char* what() const throw() {return "UI::Table<void*>: No selection";}
+		char const * what() const throw () {
+			return "UI::Table<void *>: No selection";
+		}
 	};
 	Entry_Record & get_selected_record() const {
 		if (m_selection == no_selection_index()) throw No_Selection();

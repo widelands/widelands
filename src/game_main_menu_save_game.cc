@@ -211,9 +211,7 @@ static void dosave(Interactive_Player* parent, const std::string& complete_filen
 	SaveHandler * savehandler = parent->get_game()->get_save_handler();
 
 	std::string error;
-	if
-		(!savehandler->save_game
-			(*parent->get_game(), complete_filename, &error))
+	if (!savehandler->save_game(*parent->get_game(), complete_filename, &error))
 	{
 		std::string s =
 			_
@@ -229,12 +227,16 @@ static void dosave(Interactive_Player* parent, const std::string& complete_filen
 class SaveWarnMessageBox : public UI::MessageBox {
 public:
 	SaveWarnMessageBox(Interactive_Player* parent, const std::string& filename)
-		: UI::MessageBox
-			(parent,
-			 _("Save Game Error!!"),
-			 std::string(_("A File with the name "))
-			 	+FileSystem::FS_Filename(filename.c_str())+_(" already exists. Overwrite?"),
-			 YESNO)
+		:
+		UI::MessageBox
+		(parent,
+		 _("Save Game Error!!"),
+		 std::string(_("A File with the name "))
+		 +
+		 FileSystem::FS_Filename(filename.c_str())
+		 +
+		 _(" already exists. Overwrite?"),
+		 YESNO)
 	{
 		m_parent = parent;
 		m_filename = filename;

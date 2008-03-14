@@ -58,7 +58,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void send(const ChatMessage& msg);
 
 private:
-	void sendSystemChat(const char* fmt, ...) PRINTF_FORMAT(2,3);
+	void sendSystemChat(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 	void requestSyncReports();
 	void checkSyncReports();
 	void syncreport();

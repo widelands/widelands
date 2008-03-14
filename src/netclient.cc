@@ -442,7 +442,7 @@ void NetClient::handle_network ()
 			while (d->sock && d->deserializer.avail()) {
 				RecvPacket packet(d->deserializer);
 				handle_packet(packet);
- 			}
+			}
 		}
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
