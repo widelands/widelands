@@ -9,7 +9,7 @@ menu_pic=soldier_menu.png
 # SOLDIER SPECIFIC STUFF STARTS HERE
 max_hp_level=4
 max_evade_level=2
-max_attack_level=5
+max_attack_level=4
 max_defense_level=0
 
 # initial values and per level increasements
