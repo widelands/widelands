@@ -488,11 +488,11 @@ void Soldier::moveToBattleUpdate(Game * game, State* state) {
 	}
 	if
 		(!
-			start_task_movepath
-			(game,
-			state->coords,
-			0,
-			descr().get_right_walk_anims(does_carry_ware())))
+		 start_task_movepath
+		 (game,
+		  state->coords,
+		  0,
+		  descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
 		send_signal(game, "fail");

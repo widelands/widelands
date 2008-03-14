@@ -34,7 +34,11 @@ namespace UI {
  * Serves as base for Checkbox and Radiobutton.
  */
 struct Statebox : public Panel {
-	Statebox(Panel *parent, int32_t x, int32_t y, uint32_t picid = 0);
+	Statebox
+		(Panel * parent,
+		 int32_t x, int32_t y,
+		 uint32_t picid                   = 0,
+		 std::string const & tooltip_text = std::string());
 	~Statebox();
 
 	Signal changed;
@@ -80,7 +84,13 @@ private:
 */
 class Checkbox : public Statebox {
 public:
-	Checkbox(Panel *parent, int32_t x, int32_t y, int32_t picid=0) : Statebox(parent, x, y, picid) {}
+	Checkbox
+		(Panel * parent,
+		 int32_t x, int32_t y,
+		 int32_t picid                    = 0,
+		 std::string const & tooltip_text = std::string())
+		: Statebox(parent, x, y, picid, tooltip_text)
+	{}
 
 private:
 	void clicked();

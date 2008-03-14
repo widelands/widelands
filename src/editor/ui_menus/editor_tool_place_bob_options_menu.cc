@@ -19,6 +19,7 @@
 
 #include "editor_tool_place_bob_options_menu.h"
 
+#include "critter_bob.h"
 #include "editor_place_bob_tool.h"
 #include "editorinteractive.h"
 #include "graphic.h"
@@ -32,6 +33,8 @@
 #include "ui_checkbox.h"
 #include "ui_tabpanel.h"
 #include "ui_textarea.h"
+
+#include "upcast.h"
 
 #include <SDL_keysym.h>
 
@@ -85,11 +88,13 @@ m_pit                   (pit)
 			m_tabpanel.add(tab_icon, box);
 		}
 
+		Widelands::Bob::Descr const & descr = *world.get_bob_descr(i);
+		upcast(Widelands::Critter_Bob_Descr const, critter_descr, &descr);
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,
 			 xpos, ypos,
-			 g_gr->get_picture
-			 (PicMod_Game, world.get_bob_descr(i)->get_picture()));
+			 g_gr->get_picture(PicMod_Game, descr.get_picture()),
+			 critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_size(width, height);
 		cb.set_id(i);

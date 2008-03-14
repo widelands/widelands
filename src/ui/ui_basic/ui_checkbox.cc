@@ -37,8 +37,12 @@ Stateboxes start out enabled and unchecked.
 If picid is non-zero, the given picture is used instead of the normal checkbox
 graphics.
 */
-Statebox::Statebox(Panel *parent, int32_t x, int32_t y, uint32_t picid)
-	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
+Statebox::Statebox
+	(Panel * parent,
+	 int32_t x, int32_t y,
+	 uint32_t picid,
+	 std::string const & tooltip_text)
+	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text)
 {
 	if (picid)
 	{
