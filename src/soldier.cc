@@ -477,27 +477,27 @@ void Soldier::moveToBattleUpdate(Game * game, State* state) {
 			start_task_leavebuilding (game, 1);
 			return;
 		}
-	} else {
-		if (get_position() == state->coords) {
-			if (state->ivar1 != 3)
-				m_attack_ctrl->moveToReached(this);
-			state->ivar1 = 3;
-			start_task_idle(game, descr().get_animation("idle"), 1000);
-			return;
-		}
-		if
-			(!
-			 start_task_movepath
-			 (game,
-			  state->coords,
-			  0,
-			  descr().get_right_walk_anims(does_carry_ware())))
-		{
-			molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
-			send_signal(game, "fail");
-			pop_task(game);
-			return;
-		}
+		// fall-through, because we're already outside the building
+	}
+	if (get_position() == state->coords) {
+		if (state->ivar1 != 3)
+			m_attack_ctrl->moveToReached(this);
+		state->ivar1 = 3;
+		start_task_idle(game, descr().get_animation("idle"), 1000);
+		return;
+	}
+	if
+		(!
+			start_task_movepath
+			(game,
+			state->coords,
+			0,
+			descr().get_right_walk_anims(does_carry_ware())))
+	{
+		molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
+		send_signal(game, "fail");
+		pop_task(game);
+		return;
 	}
 }
 
