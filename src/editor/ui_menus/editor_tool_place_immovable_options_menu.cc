@@ -121,9 +121,7 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked.
 	const bool multiselect =
-		WLApplication::get()->get_key_state(SDLK_LCTRL)
-		|
-		WLApplication::get()->get_key_state(SDLK_RCTRL);
+		get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
 	if (not t and (not multiselect or m_pit.get_nr_enabled() == 1))
 		m_checkboxes[n]->set_state(true);
 	else {

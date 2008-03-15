@@ -319,9 +319,10 @@ void Window::think() {if (not is_minimal()) Panel::think();}
  * Right-click: close the window
  */
 bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
-	const WLApplication & wla = *WLApplication::get();
+	//  FIXME This code is erroneous. It checks the current key state. What it
+	//  FIXME needs is the key state at the time the mouse button was pressed.
 	if
-		(((wla.get_key_state(SDLK_LCTRL) | wla.get_key_state(SDLK_RCTRL))
+		(((get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
 		  and
 		  btn == SDL_BUTTON_LEFT)
 		 or

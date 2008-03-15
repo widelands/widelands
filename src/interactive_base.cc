@@ -206,16 +206,14 @@ void Interactive_Base::think()
 	// If one of the arrow keys is pressed, scroll here
 	const uint32_t scrollval = 10;
 
-	WLApplication & app = *WLApplication::get();
-
 	if (keyboard_free()) {
-		if (app.get_key_state(SDLK_UP))
+		if (get_key_state(SDLK_UP))
 			set_rel_viewpoint(Point(0, -scrollval));
-		if (app.get_key_state(SDLK_DOWN))
+		if (get_key_state(SDLK_DOWN))
 			set_rel_viewpoint(Point(0,  scrollval));
-		if (app.get_key_state(SDLK_LEFT))
+		if (get_key_state(SDLK_LEFT))
 			set_rel_viewpoint(Point(-scrollval, 0));
-		if (app.get_key_state(SDLK_RIGHT))
+		if (get_key_state(SDLK_RIGHT))
 			set_rel_viewpoint(Point (scrollval, 0));
 	}
 

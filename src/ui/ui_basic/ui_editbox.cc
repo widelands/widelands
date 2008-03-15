@@ -240,6 +240,13 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 		case SDLK_LEFT:
 			if (m->caret > 0) {
 				--m->caret;
+				//  FIXME This code is erroneous. It checks the current CTRL key
+				//  FIXME state. What it needs is the CTRL key state at the time
+				//  FIXME the SDLK_LEFT key was pressed.
+				if (get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
+					for (uint32_t new_caret = m->caret;; m->caret = new_caret)
+						if (0 == new_caret or isspace(m->text[--new_caret]))
+							break;
 				update();
 			}
 			return true;
@@ -247,6 +254,19 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 		case SDLK_RIGHT:
 			if (m->caret < m->text.size()) {
 				++m->caret;
+				//  FIXME This code is erroneous. It checks the current CTRL key
+				//  FIXME state. What it needs is the CTRL key state at the time
+				//  FIXME the SDLK_RIGHT key was pressed.
+				if (get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
+					for (uint32_t new_caret = m->caret;; ++new_caret)
+						if
+							(new_caret == m->text.size()
+							 or
+							 isspace(m->text[new_caret - 1]))
+						{
+							m->caret = new_caret;
+							break;
+						}
 				update();
 			}
 			return true;
