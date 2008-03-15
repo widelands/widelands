@@ -819,6 +819,13 @@ void NetHost::checkSyncReports()
 				 "I have:     %s\n"
 				 "Client has: %s\n",
 				 i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
+
+			d->game->save_syncstream(true);
+
+			SendPacket s;
+			s.Unsigned8(NETCMD_INFO_DESYNC);
+			broadcast(s);
+
 			disconnectClient(i, _("Client and host have become desynchronized."));
 		}
 	}

@@ -63,23 +63,52 @@ namespace Widelands {
 /// Define this to get lots of debugging output concerned with syncs
 //#define SYNC_DEBUG
 
-#ifdef SYNC_DEBUG
-struct SyncDebugWrapper : public StreamWrite {
-	SyncDebugWrapper(Game* g, StreamWrite* target)
+struct SyncWrapper : public StreamWrite {
+	SyncWrapper(Game* g, StreamWrite* target)
 	{
 		m_game = g;
 		m_target = target;
 		m_counter = 0;
+		m_dump = 0;
+		m_syncstreamsave = false;
+	}
+
+	~SyncWrapper()
+	{
+		if (m_dump) {
+			delete m_dump;
+			m_dump = 0;
+
+			if (!m_syncstreamsave)
+				g_fs->Unlink(m_dumpfname);
+		}
+	}
+
+	/**
+	 * Start dumping the entire syncstream into a file.
+	 *
+	 * Note that this file is deleted at the end of the game, unless
+	 * \ref m_syncstreamsave has been set.
+	 */
+	void StartDump(const std::string& fname)
+	{
+		m_dumpfname = fname + ".wss";
+		m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 	}
 
 	void Data(const void * const data, const size_t size)
 	{
 		assert(m_target);
 
+#ifdef SYNC_DEBUG
 		log("[sync:%08u t=%6u]", m_counter, m_game->get_gametime());
 		for (size_t i = 0; i < size; ++i)
 			log(" %02x", (static_cast<uint8_t const *>(data))[i]);
 		log("\n");
+#endif
+
+		if (m_dump)
+			m_dump->Data(data, size);
 
 		m_target->Data(data, size);
 		m_counter += size;
@@ -96,14 +125,14 @@ public:
 	Game* m_game;
 	StreamWrite* m_target;
 	uint32_t m_counter;
+	::StreamWrite* m_dump;
+	std::string m_dumpfname;
+	bool m_syncstreamsave;
 };
-#endif
 
 struct GameInternals {
 	MD5Checksum<StreamWrite> synchash;
-#ifdef SYNC_DEBUG
-	SyncDebugWrapper syncwrapper;
-#endif
+	SyncWrapper syncwrapper;
 	GameController* ctrl;
 
 	/**
@@ -114,18 +143,14 @@ struct GameInternals {
 	bool writereplay;
 
 	GameInternals(Game* g)
-#ifdef SYNC_DEBUG
 		: syncwrapper(g, &synchash)
-#endif
 	{
 		static_cast<void>(g);
 	}
 
 	void SyncReset()
 	{
-#ifdef SYNC_DEBUG
 		syncwrapper.m_counter = 0;
-#endif
 
 		synchash.Reset();
 		log("[sync] Reset\n");
@@ -187,6 +212,16 @@ void Game::set_write_replay(bool wr)
 	assert(m_state == gs_notrunning);
 
 	m->writereplay = wr;
+}
+
+
+/**
+ * Set whether the syncstream dump should be copied to a permanent location
+ * at the end of the game.
+ */
+void Game::save_syncstream(bool save)
+{
+	m->syncwrapper.m_syncstreamsave = save;
 }
 
 
@@ -428,6 +463,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		fname += REPLAY_SUFFIX;
 
 		m_replaywriter = new ReplayWriter(*this, fname);
+		m->syncwrapper.StartDump(fname);
 		log("Replay writer has started\n");
 	}
 
@@ -533,11 +569,7 @@ void Game::cleanup_for_load
  */
 StreamWrite & Game::syncstream()
 {
-#ifdef SYNC_DEBUG
 	return m->syncwrapper;
-#else
-	return m->synchash;
-#endif
 }
 
 

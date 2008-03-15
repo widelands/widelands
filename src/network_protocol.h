@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 4,
+	NETWORK_PROTOCOL_VERSION = 5,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -268,7 +268,18 @@ enum {
 	 * \li String: sender (may be empty to indicate system messages)
 	 * \li String: the message
 	 */
-	NETCMD_CHAT = 28
+	NETCMD_CHAT = 28,
+
+	/**
+	 * Sent by the host to indicate that a desync has been detected. This command
+	 * has no payload.
+	 *
+	 * The only purpose of this command is to instruct clients to store data that
+	 * may be helpful for debugging. In particular, clients should not disconnect
+	 * when receiving this packet. It is the host's job to decide how to proceed
+	 * after a desync has been detected.
+	 */
+	NETCMD_INFO_DESYNC = 29
 };
 
 #endif // NETWORK_PROTOCOL_H

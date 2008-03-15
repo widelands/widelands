@@ -417,6 +417,11 @@ void NetClient::handle_packet(RecvPacket& packet)
 		ChatProvider::send(c); // NoteSender<ChatMessage>
 		break;
 	}
+	case NETCMD_INFO_DESYNC:
+		log("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some information for debugging.\n");
+		if (d->game)
+			d->game->save_syncstream(true);
+		break;
 	default:
 		throw DisconnectException(_("Server sent an unknown command (command number %u)"), cmd);
 	}
