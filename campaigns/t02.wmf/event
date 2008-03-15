@@ -638,7 +638,7 @@ type=immovable
 version=1
 point=57 14
 tribe=barbarians
-name=field2
+name=field0s
 
 [Village Northern Farm Field 3]
 type=immovable
@@ -652,14 +652,14 @@ type=immovable
 version=1
 point=57 15
 tribe=barbarians
-name=field1
+name=field2
 
 [Village Northern Farm Field 5]
 type=immovable
 version=1
 point=54 16
 tribe=barbarians
-name=field0
+name=field2
 
 [Village Northern Farm Field 6]
 type=immovable
@@ -687,7 +687,7 @@ type=immovable
 version=1
 point=55 17
 tribe=barbarians
-name=field1
+name=field0
 
 [Village Northern Farm Field 10]
 type=immovable
@@ -713,72 +713,86 @@ name=field2
 [Village Southern Farm Field 1]
 type=immovable
 version=1
-point=54 31
+point=53 31
 tribe=barbarians
 name=field2
 
 [Village Southern Farm Field 2]
 type=immovable
 version=1
-point=55 31
+point=54 31
 tribe=barbarians
-name=field1
+name=field2
 
 [Village Southern Farm Field 3]
+type=immovable
+version=1
+point=55 31
+tribe=barbarians
+name=field0
+
+[Village Southern Farm Field 4]
 type=immovable
 version=1
 point=56 32
 tribe=barbarians
 name=field2
 
-[Village Southern Farm Field 4]
+[Village Southern Farm Field 5]
+type=immovable
+version=1
+point=52 33
+tribe=barbarians
+name=field2
+
+[Village Southern Farm Field 6]
 type=immovable
 version=1
 point=55 33
 tribe=barbarians
-name=field0
+name=field0s
 
-[Village Southern Farm Field 5]
+[Village Southern Farm Field 7]
 type=immovable
 version=1
 point=56 33
 tribe=barbarians
-name=field0
+name=field2
 
-[Village Southern Farm Field 6]
+[Village Southern Farm Field 8]
 type=immovable
 version=1
 point=53 34
 tribe=barbarians
 name=field2
 
-[Village Southern Farm Field 7]
-type=immovable
-version=1
-point=54 34
-tribe=barbarians
-name=field0
-
-[Village Southern Farm Field 8]
-type=immovable
-version=1
-point=56 34
-tribe=barbarians
-name=field2
-
 [Village Southern Farm Field 9]
 type=immovable
 version=1
-point=53 35
+point=54 34
 tribe=barbarians
 name=field1
 
 [Village Southern Farm Field 10]
 type=immovable
 version=1
+point=56 34
+tribe=barbarians
+name=field2
+
+[Village Southern Farm Field 11]
+type=immovable
+version=1
+point=53 35
+tribe=barbarians
+name=field2
+
+[Village Southern Farm Field 12]
+type=immovable
+version=1
 point=55 35
 tribe=barbarians
-name=field1
+name=field2
 
 [Village Northern Sentry]
 type=building

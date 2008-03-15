@@ -2,23 +2,11 @@
 type=immovable
 size=big
 program=program
-picture=field0t_00.png
+picture=field0m_00.png
 
 [program]
-0=animation tiny 30000
-1=animation small 45000
-2=animation midd 50000
-3=transform tribe:field1
-
-[tiny]
-pics=field0t_??.png
-ftp=5
-hotspot=15 18
-
-[small]
-pics=field0s_??.png
-ftp=5
-hotspot=15 18
+0=animation midd 50000
+1=transform tribe:field1
 
 [midd]
 pics=field0m_??.png

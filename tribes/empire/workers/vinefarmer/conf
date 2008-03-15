@@ -12,7 +12,7 @@ shovel=1
 basket=1
 
 [plantvine]
-0=setdescription tribe:wine0
+0=setdescription tribe:wine0t
 1=findspace size:any radius:1
 2=walk coords
 3=animation idle 500 # Play a planting animation

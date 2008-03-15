@@ -1,0 +1,14 @@
+[global]
+type=immovable
+size=normal
+program=program
+picture=field0s_00.png
+
+[program]
+0=animation small 28000
+1=transform tribe:reed0
+
+[small]
+pics=field0s_??.png
+ftp=5
+hotspot=15 18
