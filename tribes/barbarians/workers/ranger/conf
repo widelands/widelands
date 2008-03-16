@@ -13,15 +13,27 @@ carrier=1
 0=setdescription tree1_t tree2_t tree3_t tree4_t tree5_t tree6_t tree7_t tree8_t
 1=findspace size:any radius:5
 2=walk coords
-3=animation idle 2000 # Play a planting animation
-4=plant
-5=animation water 2000
-6=return
+3=animation dig 2000 # Play a planting animation
+4=animation crop 1000 # Play a planting animation
+5=plant
+6=animation water 2000
+7=return
 
 [idle]
 pics=idle_??.png
+hotspot=12 24
+playercolor=true
+
+[dig]
+pics=dig_??.png
 hotspot=14 25
 fps=5
+playercolor=true
+
+[crop]
+pics=plant_??.png
+hotspot=20 25
+fps=10
 playercolor=true
 
 [water]
@@ -37,7 +49,7 @@ fps=10
 playercolor=true
 
 [walkload]
-dirpics=walk_!!_??.png
+dirpics=walkload_!!_??.png
 hotspot=12 24
 fps=10
 playercolor=true
