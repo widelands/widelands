@@ -33,7 +33,7 @@ template <typename T> struct Listselect;
 };
 class Game_Server_Connection;
 
-/*
+/**
  * This class represents the 'lobby'. this is where the user can join games
  * and chat.
  */

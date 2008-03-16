@@ -456,7 +456,7 @@ void Editor_Interactive::select_tool
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
-/*
+/**
  * Reference functions
  *
  *  data is either a pointer to a trigger, event
@@ -475,8 +475,8 @@ void Editor_Interactive::reference_player_tribe
 	m_player_tribe_references.push_back(r);
 }
 
-/*
- * unreference !once!, if referenced many times, this
+/**
+ * Unreference !once!, if referenced many times, this
  * will leace a reference
  */
 void Editor_Interactive::unreference_player_tribe

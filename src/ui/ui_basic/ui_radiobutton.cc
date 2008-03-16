@@ -22,13 +22,6 @@
 #include "ui_checkbox.h"
 
 namespace UI {
-/*
-==============================================================================
-
-Radiobutton
-
-==============================================================================
-*/
 
 struct Radiobutton : public Statebox {
 	friend class Radiogroup;
@@ -45,7 +38,7 @@ private:
 };
 
 /**
-Initialize the radiobutton and link it into the group's linked list
+ * Initialize the radiobutton and link it into the group's linked list
 */
 Radiobutton::Radiobutton(Panel *parent, int32_t x, int32_t y, uint32_t picid, Radiogroup *group, int32_t id)
 	: Statebox(parent, x, y, picid)
@@ -106,8 +99,8 @@ Radiogroup::~Radiogroup() {while (m_buttons) delete m_buttons;}
 
 
 /**
-Create a new radio button with the given attributes
-Returns the ID of the new button.
+ * Create a new radio button with the given attributes
+ * Returns the ID of the new button.
 */
 int32_t Radiogroup::add_button
 (Panel * parent,

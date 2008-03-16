@@ -34,7 +34,7 @@
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 
-/*
+/**
  * Static callback functions for various packets
  */
 static void user_entered(std::string name, std::string room, bool enters, void* data) {
@@ -60,7 +60,7 @@ static void disconnect(void* data) {
 	static_cast<Fullscreen_Menu_InetLobby *>(data)->disconnect();
 }
 
-/*
+/**
  * Init this, send a hello packet
  */
 Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc)
@@ -118,14 +118,14 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
 
 Fullscreen_Menu_InetLobby::~Fullscreen_Menu_InetLobby() {}
 
-/*
+/**
  * Check if there is network data for us
  */
 void Fullscreen_Menu_InetLobby::think() {
 	m_gsc->handle_data();
 }
 
-/*
+/**
  * The editbox has changed, this is to send something over the net
  */
 void Fullscreen_Menu_InetLobby::changed() {
@@ -137,7 +137,7 @@ void Fullscreen_Menu_InetLobby::changed() {
 	m_gsc->send(cm);
 }
 
-/*
+/**
  * A button has been clicked
  */
 void Fullscreen_Menu_InetLobby::clicked_back() {
@@ -145,8 +145,8 @@ void Fullscreen_Menu_InetLobby::clicked_back() {
 	end_modal(0);
 }
 
-/*
- * a server message has reached us. This is text for the user
+/**
+ * A server message has reached us. This is text for the user
  * but not written by any other user, but send by the
  * server (as response to a packet mostly)
  */
@@ -154,7 +154,7 @@ void Fullscreen_Menu_InetLobby::server_message(std::string str) {
 	m_chatarea->set_text((m_chatarea->get_text() + str).c_str());
 }
 
-/*
+/**
  * A room info request has returned
  */
 void Fullscreen_Menu_InetLobby::room_info(std::vector<std::string > users) {
@@ -170,7 +170,7 @@ void Fullscreen_Menu_InetLobby::room_info(std::vector<std::string > users) {
 	m_userlist->sort();
 }
 
-/*
+/**
  * A user info request has returned
  */
 void Fullscreen_Menu_InetLobby::user_info(std::string user, std::string game, std::string room) {
@@ -183,7 +183,7 @@ void Fullscreen_Menu_InetLobby::user_info(std::string user, std::string game, st
 	server_message(buffer);
 }
 
-/*
+/**
  * A chat message has arrived
  */
 void Fullscreen_Menu_InetLobby::chat_message(std::string user, std::string msg, bool is_action) {
@@ -207,7 +207,7 @@ void Fullscreen_Menu_InetLobby::chat_message(std::string user, std::string msg, 
 }
 
 
-/*
+/**
  * A User entered the room
  */
 void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groom, bool enters) {
@@ -230,7 +230,7 @@ void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groo
 	m_gsc->send(new Game_Server_Protocol_Packet_GetUserInfo(gname));
 }
 
-/*
+/**
  * A critical connection error has occurred. It
  * is likely that the connection is terminated, but
  * we only have to care for showing the user the

@@ -42,7 +42,6 @@ namespace UI {
  * A click with the middle mouse button (or STRG+LClick) minimizes a window. Minimize means, that
  * the window is only the caption bar, nothing inside. Another click on this bar resizes the window again
  */
-
 struct Window : public Panel {
 	Window(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const char *title);
 	~Window();

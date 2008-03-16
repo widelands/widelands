@@ -185,7 +185,7 @@ m_event_chain(chain)
 }
 
 
-/*
+/**
  * Handle mousepress/-release
  *
  * we're a modal, therefore we can not delete ourself
@@ -201,7 +201,7 @@ bool Editor_Event_Menu_Edit_EventChain::handle_mouserelease
 {return false;}
 
 
-/*
+/**
  * Think.
  *
  * Maybe we have to simulate a click
@@ -267,7 +267,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_move_down() {
 	m_events->switch_entries(n, n + 1);
 }
 
-/*
+/**
  * the listbox got selected
  */
 void Editor_Event_Menu_Edit_EventChain::tl_selected(uint32_t) {
@@ -279,8 +279,8 @@ void Editor_Event_Menu_Edit_EventChain::cs_selected(uint32_t) {
 	m_delete_btn->set_enabled(true);
 }
 
-/*
- * listbox got double clicked
+/**
+ * Listbox got double clicked
  */
 void Editor_Event_Menu_Edit_EventChain::tl_double_clicked(uint32_t)
 {clicked_ins_event();}

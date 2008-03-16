@@ -28,40 +28,25 @@
 namespace UI {
 
 struct EditBoxImpl {
-	/**
-	 * Background tile style.
-	 */
+	/// Background tile style.
 	uint32_t background;
 
-	/**
-	 * ID. Only used for the id-flavoured signals.
-	 */
+	/// ID. Only used for the id-flavoured signals.
 	int32_t id;
 
-	/**
-	 * Maximum number of characters in the input
-	 */
+	/// Maximum number of characters in the input
 	uint32_t maxLength;
 
-	/**
-	 * Current text in the box.
-	 */
+	/// Current text in the box.
 	std::string text;
 
-	/**
-	 * Position of the caret.
-	 */
+	/// Position of the caret.
 	uint32_t caret;
 
-	/**
-	 * Alignment of the text. Vertical alignment is always centered.
-	 */
+	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
 };
 
-/**
-constructor
-*/
 EditBox::EditBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
@@ -180,7 +165,7 @@ void EditBox::setAlign(Align _align)
 
 
 /**
-the mouse was clicked on this editbox
+ * The mouse was clicked on this editbox
 */
 bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {

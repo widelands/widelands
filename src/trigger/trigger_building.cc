@@ -68,8 +68,8 @@ void Trigger_Building::Write
 	s.set_Building_Type("building", *m_building_type);
 }
 
-/*
- * check if trigger conditions are done
+/**
+ * Check if trigger conditions are done
  */
 void Trigger_Building::check_set_conditions(Game const & game) {
 	Map const & map = game.map();

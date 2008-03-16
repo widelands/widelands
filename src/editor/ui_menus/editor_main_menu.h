@@ -25,14 +25,8 @@
 
 class Editor_Interactive;
 
-/*
-=============================
-
-class Editor_Main_Menu
-
-this represents the main menu
-
-=============================
+/**
+ * This represents the main menu
 */
 struct Editor_Main_Menu : public UI::UniqueWindow {
 	Editor_Main_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);

@@ -31,7 +31,7 @@ namespace UI {
 
 
 /**
-Initialize an empty Tab_Panel
+ * Initialize an empty Tab_Panel
 */
 Tab_Panel::Tab_Panel(Panel* parent, int32_t x, int32_t y, uint32_t background)
 	: Panel(parent, x, y, 0, 0)
@@ -56,9 +56,9 @@ Tab_Panel::Tab_Panel(Panel* parent, int32_t x, int32_t y, uint32_t background)
 
 
 /**
-Resize according to number of tabs and the size of the currently visible
-contents.
-Resize the parent if snapparent is enabled.
+ * Resize according to number of tabs and the size of the currently visible
+ * contents.
+ * Resize the parent if snapparent is enabled.
 */
 void Tab_Panel::resize()
 {
@@ -89,9 +89,9 @@ void Tab_Panel::resize()
 
 
 /**
-If snapparent is enabled, the parent window will be adjusted to the size of the
-Tab_Panel whenever the Tab_Panel's size changes.
-The default for snapparent behaviour is off.
+ * If snapparent is enabled, the parent window will be adjusted to the size of
+ * the Tab_Panel whenever the Tab_Panel's size changes.
+ * The default for snapparent behaviour is off.
 */
 void Tab_Panel::set_snapparent(bool snapparent)
 {
@@ -100,7 +100,7 @@ void Tab_Panel::set_snapparent(bool snapparent)
 
 
 /**
-Add a new tab
+ * Add a new tab
 */
 uint32_t Tab_Panel::add(uint32_t picid, Panel* panel, const std::string & tooltip_text)
 {
@@ -125,7 +125,7 @@ uint32_t Tab_Panel::add(uint32_t picid, Panel* panel, const std::string & toolti
 
 
 /**
-Make a different tab the currently active tab.
+ * Make a different tab the currently active tab.
 */
 void Tab_Panel::activate(uint32_t idx)
 {
@@ -141,7 +141,7 @@ void Tab_Panel::activate(uint32_t idx)
 
 
 /**
-Draw the buttons and the tab
+ * Draw the buttons and the tab
 */
 void Tab_Panel::draw(RenderTarget* dst)
 {
@@ -224,7 +224,7 @@ void Tab_Panel::draw(RenderTarget* dst)
 
 
 /**
-Cancel all highlights when the mouse leaves the panel
+ * Cancel all highlights when the mouse leaves the panel
 */
 void Tab_Panel::handle_mousein(bool inside)
 {
@@ -238,7 +238,7 @@ void Tab_Panel::handle_mousein(bool inside)
 
 
 /**
-Update highlighting
+ * Update highlighting
 */
 bool Tab_Panel::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
 	int32_t hl;
@@ -273,7 +273,7 @@ bool Tab_Panel::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int
 
 
 /**
-Change the active tab if a tab button has been clicked
+ * Change the active tab if a tab button has been clicked
 */
 bool Tab_Panel::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {

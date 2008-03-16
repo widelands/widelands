@@ -243,7 +243,7 @@ m_event_chain(chain)
 }
 
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -335,8 +335,8 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
 	m_construction->switch_entries(n, n + 1);
 }
 
-/*
- * the listbox got selected
+/**
+ * The listbox got selected
  */
 void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(uint32_t) {
 	m_insert_btn->set_enabled(true);
@@ -347,8 +347,8 @@ void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint32_t const i) {
 	m_delete_btn->set_enabled(true);
 }
 
-/*
- * listbox got double clicked
+/**
+ * Listbox got double clicked
  */
 void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(uint32_t)
 {clicked_ins_trigger();}

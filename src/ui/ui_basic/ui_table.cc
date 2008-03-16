@@ -28,13 +28,13 @@
 
 namespace UI {
 /**
-Initialize a panel
-
-Args: parent  parent panel
-      x       coordinates of the Table
-      y
-      w       dimensions, in pixels, of the Table
-      h
+ * Initialize a panel
+ *
+ * Args: parent  parent panel
+ *       x       coordinates of the Table
+ *       y
+ *       w       dimensions, in pixels, of the Table
+ *       h
 */
 Table<void *>::Table
 	(Panel * const parent,
@@ -58,7 +58,7 @@ Table<void *>::Table
 
 
 /**
-Free allocated resources
+ * Free allocated resources
 */
 Table<void *>::~Table()
 {
@@ -130,7 +130,7 @@ Table<void *>::Entry_Record * Table<void *>::find
 	return 0;
 }
 
-/*
+/**
  * A header button has been clicked
  */
 void Table<void *>::header_button_clicked(Columns::size_type const n) {
@@ -147,7 +147,7 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 }
 
 /**
-Remove all entries from the table
+ * Remove all entries from the table
 */
 void Table<void *>::clear()
 {
@@ -169,7 +169,7 @@ void Table<void *>::clear()
 }
 
 /**
-Redraw the table
+ * Redraw the table
 */
 void Table<void *>::draw(RenderTarget * dst)
 {
@@ -289,7 +289,7 @@ void Table<void *>::select(const uint32_t i)
 }
 
 /**
-Add a new entry to the table.
+ * Add a new entry to the table.
 */
 Table<void *>::Entry_Record & Table<void *>::add
 	(void * const entry, const bool do_select)
@@ -315,7 +315,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 }
 
 /**
-Scroll to the given position, in pixels.
+ * Scroll to the given position, in pixels.
 */
 void Table<void *>::set_scrollpos(int32_t i)
 {
@@ -334,7 +334,7 @@ void Table<void *>::remove(const uint32_t i) {
 	if (m_selection == i) m_selection = no_selection_index();
 }
 
-/*
+/**
  * Sort the table alphabetically. make sure that the current selection stays
  * valid (though it might scroll out of visibility).
  * start and end defines the beginning and the end of a subarea to

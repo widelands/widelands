@@ -101,7 +101,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 }
 
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -115,8 +115,8 @@ bool Editor_Event_Menu_New_Trigger::handle_mousepress
 bool Editor_Event_Menu_New_Trigger::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
-/*
- * a button has been clicked
+/**
+ * A button has been clicked
  */
 void Editor_Event_Menu_New_Trigger::clicked_ok() {
 	assert(m_trigger_type_list->has_selection());
@@ -128,8 +128,8 @@ void Editor_Event_Menu_New_Trigger::clicked_ok() {
 		delete &trigger;
 }
 
-/*
- * the listbox got selected
+/**
+ * The listbox got selected
  */
 void Editor_Event_Menu_New_Trigger::selected(uint32_t) {
 	m_description->set_text
@@ -137,7 +137,7 @@ void Editor_Event_Menu_New_Trigger::selected(uint32_t) {
 	m_ok_button->set_enabled(true);
 }
 
-/*
- * listbox got double clicked
+/**
+ * Listbox got double clicked
  */
 void Editor_Event_Menu_New_Trigger::double_clicked(uint32_t) {clicked_ok();}

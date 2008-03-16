@@ -30,7 +30,7 @@ struct Multiline_Textarea;
 template <typename T> struct Button;
 };
 
-/*
+/**
  * This is a modal box - The user must end this first
  * before it can return
  */

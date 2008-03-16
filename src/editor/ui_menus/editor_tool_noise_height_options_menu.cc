@@ -114,10 +114,8 @@ m_noise_tool(noise_tool)
 
 {update();}
 
-/*
-===============
-Update all textareas
-===============
+/**
+ * Update all textareas
 */
 void Editor_Tool_Noise_Height_Options_Menu::update() {
 	char buffer[200];

@@ -28,12 +28,8 @@
 #include "world.h"
 #include "overlay_manager.h"
 
-/*
-===========
-Editor_Set_Resources_Tool::handle_click_impl()
-
-sets the resources of the current to a fixed value
-===========
+/**
+ * Sets the resources of the current to a fixed value
 */
 int32_t Editor_Set_Resources_Tool::handle_click_impl
 (Widelands::Map                     & map,

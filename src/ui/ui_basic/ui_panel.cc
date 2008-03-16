@@ -109,11 +109,13 @@ Panel::~Panel()
 void Panel::free_children() {while (_fchild) delete _fchild;}
 
 
-/// Enters the event loop; all events will be handled by this panel.
-///
-///  \return the return code passed to end_modal. This return code will be
-/// negative when the event loop was quit in an abnormal way (e.g. the user
-/// clicked the window's close button or similar).
+/**
+ * Enters the event loop; all events will be handled by this panel.
+ *
+ * \return the return code passed to end_modal. This return code will be
+ * negative when the event loop was quit in an abnormal way (e.g. the user
+ * clicked the window's close button or similar).
+ */
 int32_t Panel::run()
 {
 	WLApplication *app=WLApplication::get();
@@ -622,8 +624,7 @@ void Panel::die()
 void Panel::play_click()
 {g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);}
 
-/** [private]
- *
+/**
  * Recursively walk the panel tree, killing panels that are marked for death
  * using die().
  */
@@ -709,7 +710,11 @@ void Panel::do_draw(RenderTarget* dst)
 	*/
 }
 
-
+/**
+ * Returns the child panel that receives mouse events at the given location.
+ * Starts the search with child (which should usually be set to _fchild) and
+ * returns the first match.
+ */
 inline Panel * Panel::child_at_mouse_cursor(int32_t x, int32_t y, Panel * child) {
 
 	for (; child; child = child->_next) {

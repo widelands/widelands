@@ -33,14 +33,8 @@ struct Multiline_Textarea;
 struct Textarea;
 };
 
-/*
-=================================================
-
-class Main_Menu_Save_Map
-
-Choose a filename and save your brand new created map
-
-=================================================
+/**
+ * Choose a filename and save your brand new created map
 */
 struct Main_Menu_Save_Map : public UI::Window {
 	Main_Menu_Save_Map(Editor_Interactive *);

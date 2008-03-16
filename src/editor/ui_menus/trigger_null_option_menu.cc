@@ -82,7 +82,7 @@ m_trigger (trigger)
 }
 
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -95,8 +95,8 @@ bool Trigger_Null_Option_Menu::handle_mousepress(const Uint8 btn, int32_t, int32
 bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
-/*
- * a button has been clicked
+/**
+ * A button has been clicked
  */
 void Trigger_Null_Option_Menu::clicked_ok() {
 	const std::string& name = m_name->text();

@@ -29,7 +29,7 @@
 
 namespace Widelands {struct Player;};
 
-/*
+/**
  * Let's the user choose which buildings should be available
  * for this player for this scenario. Used to throttle AI and
  * to advance technology slowly through the missions

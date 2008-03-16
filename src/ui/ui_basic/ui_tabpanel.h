@@ -26,13 +26,13 @@
 
 namespace UI {
 /**
-Provides a tab view; every tab is a panel that can contain any number of
-sub-panels (such as buttons, other Tab_Panels, etc..) and an associated
-picture.
-The picture is displayed as a button the user can click to bring the panel
-to the top.
-
-The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
+ * Provides a tab view; every tab is a panel that can contain any number of
+ * sub-panels (such as buttons, other Tab_Panels, etc..) and an associated
+ * picture.
+ * The picture is displayed as a button the user can click to bring the panel
+ * to the top.
+ *
+ * The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
 */
 struct Tab_Panel : public Panel {
 	Tab_Panel(Panel* parent, int32_t x, int32_t y, uint32_t background);

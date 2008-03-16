@@ -40,6 +40,7 @@ namespace Widelands {
 
 namespace Event_Factory {
 
+///\todo This information belongs into the event classes
 Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	{
 		"allow_building",         _("Allow building type"),

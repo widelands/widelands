@@ -30,7 +30,7 @@ template <typename T> struct Listselect;
 template <typename T> struct Button;
 };
 
-/*
+/**
  * This is a modal box - The user must end this first
  * before it can return
  */

@@ -61,7 +61,7 @@ Multiline_Textarea::Multiline_Textarea
 
 
 /**
-Free allocated resources
+ * Free allocated resources
 */
 Multiline_Textarea::~Multiline_Textarea() {
 	if (m_cache_id)
@@ -70,8 +70,8 @@ Multiline_Textarea::~Multiline_Textarea() {
 
 
 /**
-Replace the current text with a new one.
-Fix up scrolling state if necessary.
+ * Replace the current text with a new one.
+ * Fix up scrolling state if necessary.
 */
 void Multiline_Textarea::set_text(const std::string & text) {
 	m_text = text;
@@ -86,7 +86,7 @@ void Multiline_Textarea::set_text(const std::string & text) {
 }
 
 /**
-Change alignment of the textarea
+ * Change alignment of the textarea
 */
 void Multiline_Textarea::set_align(Align align)
 {
@@ -96,7 +96,7 @@ void Multiline_Textarea::set_align(Align align)
 
 
 /**
-Scroll to the given position.
+ * Scroll to the given position.
 */
 void Multiline_Textarea::set_scrollpos(int32_t pixels)
 {
@@ -107,8 +107,8 @@ void Multiline_Textarea::set_scrollpos(int32_t pixels)
 
 
 /**
-Change the scroll mode. This will not change the current scroll position;
-it only affects the behaviour of set_text().
+ * Change the scroll mode. This will not change the current scroll position;
+ * it only affects the behaviour of set_text().
 */
 void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 {
@@ -117,7 +117,7 @@ void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 
 
 /**
-Redraw the textarea
+ * Redraw the textarea
 */
 void Multiline_Textarea::draw(RenderTarget* dst)
 {

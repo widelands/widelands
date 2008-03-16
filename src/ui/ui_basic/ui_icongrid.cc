@@ -26,7 +26,7 @@
 
 namespace UI {
 /**
-Initialize the grid
+ * Initialize the grid
 */
 Icon_Grid::Icon_Grid(Panel* parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, uint32_t flags, int32_t cols)
 	: Panel(parent, x, y, 0, 0)
@@ -47,8 +47,8 @@ Icon_Grid::Icon_Grid(Panel* parent, int32_t x, int32_t y, int32_t cellw, int32_t
 
 
 /**
-Add a new icon to the list and resize appropriately.
-Returns the index of the newly added icon.
+ * Add a new icon to the list and resize appropriately.
+ * Returns the index of the newly added icon.
 */
 int32_t Icon_Grid::add(uint32_t picid, void* data, std::string descr)
 {
@@ -89,7 +89,7 @@ int32_t Icon_Grid::add(uint32_t picid, void* data, std::string descr)
 
 
 /**
-Returns the user-defined data of the icon with the given index.
+ * Returns the user-defined data of the icon with the given index.
 */
 void* Icon_Grid::get_data(int32_t idx)
 {
@@ -100,7 +100,7 @@ void* Icon_Grid::get_data(int32_t idx)
 
 
 /**
-Set the currently selected icon for persistant grids.
+ * Set the currently selected icon for persistant grids.
 */
 void Icon_Grid::set_selection(int32_t idx)
 {
@@ -116,7 +116,7 @@ void Icon_Grid::set_selection(int32_t idx)
 
 
 /**
-Change the color of the selection box (default is yellow).
+ * Change the color of the selection box (default is yellow).
 */
 void Icon_Grid::set_selectbox_color(RGBColor clr)
 {
@@ -125,7 +125,7 @@ void Icon_Grid::set_selectbox_color(RGBColor clr)
 
 
 /**
-Draw the building symbols
+ * Draw the building symbols
 */
 void Icon_Grid::draw(RenderTarget* dst)
 {
@@ -197,8 +197,8 @@ void Icon_Grid::draw(RenderTarget* dst)
 }
 
 /**
-Return the item index for a given point inside the Icon_Grid.
-Returns -1 if no item is below the point.
+ * Return the item index for a given point inside the Icon_Grid.
+ * Returns -1 if no item is below the point.
 */
 int32_t Icon_Grid::index_for_point(int32_t x, int32_t y)
 {
@@ -222,7 +222,7 @@ int32_t Icon_Grid::index_for_point(int32_t x, int32_t y)
 
 
 /**
-Calculate the upper left corner of the cell with the given index.
+ * Calculate the upper left corner of the cell with the given index.
 */
 void Icon_Grid::get_cell_position(int32_t idx, int32_t* px, int32_t* py)
 {
@@ -240,7 +240,7 @@ void Icon_Grid::get_cell_position(int32_t idx, int32_t* px, int32_t* py)
 
 
 /**
-Issue an update() call for the cell with the given idx.
+ * Issue an update() call for the cell with the given idx.
 */
 void Icon_Grid::update_for_index(int32_t idx)
 {
@@ -254,7 +254,7 @@ void Icon_Grid::update_for_index(int32_t idx)
 
 
 /**
-Turn highlight off when the mouse leaves the grid
+ * Turn highlight off when the mouse leaves the grid
 */
 void Icon_Grid::handle_mousein(bool inside)
 {
@@ -270,7 +270,7 @@ void Icon_Grid::handle_mousein(bool inside)
 
 
 /**
-Update highlight under the mouse and send signals.
+ * Update highlight under the mouse and send signals.
 */
 bool Icon_Grid::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
 	int32_t hl = index_for_point(x, y);
@@ -288,8 +288,8 @@ bool Icon_Grid::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int
 
 
 /**
-Left mouse down selects the building, left mouse up acknowledges and sends the
-signal.
+ * Left mouse down selects the building, left mouse up acknowledges and sends
+ * the signal.
 */
 bool Icon_Grid::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;

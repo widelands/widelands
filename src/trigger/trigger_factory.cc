@@ -33,6 +33,7 @@ namespace Widelands {
 
 namespace Trigger_Factory {
 
+///\todo This data belongs into the triggers themselves
 Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 	{
 		"building",           _("Building Trigger"),

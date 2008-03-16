@@ -33,14 +33,8 @@ struct Multiline_Textarea;
 template <typename T> struct Button;
 };
 
-/*
-=================================================
-
-class Main_Menu_Load_Map
-
-Choose a filename and save your brand new created map
-
-=================================================
+/**
+ * Choose a filename and save your brand new created map
 */
 struct Main_Menu_Load_Map : public UI::Window {
 	Main_Menu_Load_Map(Editor_Interactive *);

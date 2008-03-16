@@ -35,7 +35,7 @@ namespace Widelands {
 struct Editor_Game_Base;
 class Game;
 
-/*
+/**
  * Event is a in game event of some kind
  */
 struct Event : public Named, public Referenced<Event> {

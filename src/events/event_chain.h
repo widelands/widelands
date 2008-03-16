@@ -35,7 +35,7 @@ class Game;
 struct Trigger;
 class TriggerConditional;
 
-/*
+/**
  * The Chain defined
  *
  * A eventchain is a succession of events, which are run

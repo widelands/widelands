@@ -38,7 +38,7 @@ struct EditBox;
 struct Textarea;
 };
 
-/*
+/**
  * This is a modal box - The user must end this first
  * before it can return
  */

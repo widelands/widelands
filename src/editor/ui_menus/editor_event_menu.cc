@@ -189,15 +189,13 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	update();
 }
 
-/*
-===============
-Unregister from the registry pointer
-===============
+/**
+ * Unregister from the registry pointer
 */
 Editor_Event_Menu::~Editor_Event_Menu() {}
 
-/*
- * update all lists and stuff
+/**
+ * Update all lists and stuff
  */
 void Editor_Event_Menu::update() {
 	Widelands::Map & map = eia().egbase().map();
@@ -384,8 +382,8 @@ void Editor_Event_Menu::clicked_edit_eventchain() {
 	update();
 }
 
-/*
- * listbox was selected
+/**
+ * Listbox was selected
  */
 void Editor_Event_Menu::trigger_list_selected(uint32_t) {
 	m_btn_del_trigger ->set_enabled(true);
@@ -400,8 +398,8 @@ void Editor_Event_Menu::eventchain_list_selected(uint32_t) {
 	m_btn_edit_eventchain->set_enabled(true);
 }
 
-/*
- * listbox was double clicked
+/**
+ * Listbox was double clicked
  */
 void Editor_Event_Menu::trigger_double_clicked(uint32_t) {clicked_edit_trigger();}
 void Editor_Event_Menu::event_double_clicked  (uint32_t) {clicked_edit_event  ();}

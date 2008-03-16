@@ -23,12 +23,8 @@
 #include "multi_select.h"
 #include "editor_delete_immovable_tool.h"
 
-/*
-=============================
-class Editor_Place_Immovable_Tool
-
-this places immovables on the map
-=============================
+/**
+ * This places immovables on the map
 */
 struct Editor_Place_Immovable_Tool : public Editor_Tool, public MultiSelect {
 	Editor_Place_Immovable_Tool(Editor_Delete_Immovable_Tool & tool)

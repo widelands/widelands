@@ -31,11 +31,7 @@ namespace Widelands {
 const char * const TriggerConditional_Factory::operators[] =
 {"NOT", "AND", "OR", "XOR", "(", ")", "trigger"};
 
-/*
- * TriggerConditional_Factory
- */
-
-/*
+/**
  * Creates trigger conditionals, throws SyntaxError on error
  * This basically only converts the infix into postfix notation
  */
@@ -93,7 +89,7 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 	return create_from_postfix(evchain, postfix);
 }
 
-/*
+/**
  * This effectivly creates a trigger conditional
  * out of a token list.
  *
@@ -139,11 +135,7 @@ TriggerConditional & TriggerConditional_Factory::create_from_postfix
 }
 
 
-/*
- * BASE CLASSES
- */
-
-/*
+/**
  * TriggerConditional_Unary
  */
 TriggerConditional_Unary ::TriggerConditional_Unary
@@ -181,7 +173,7 @@ bool TriggerConditional_Unary ::eval                (Game const & game) const {
 }
 
 
-/*
+/**
  * TriggerConditional_Var
  */
 TriggerConditional_Var ::TriggerConditional_Var (Trigger & trig)
@@ -210,7 +202,7 @@ bool TriggerConditional_Var   ::eval                (Game const & game) const {
 }
 
 
-/*
+/**
  * TriggerConditional_Binary
  */
 TriggerConditional_Binary::TriggerConditional_Binary
@@ -249,7 +241,7 @@ bool TriggerConditional_Binary::eval                (Game const & game) const {
 	return do_eval(m_lconditional.eval(game), m_rconditional.eval(game));
 }
 
-/*
+/**
  * The effective Trigger Conditionals
  */
 TriggerAND::TriggerAND(TriggerConditional & l, TriggerConditional & r)

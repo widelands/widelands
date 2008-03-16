@@ -25,12 +25,8 @@
 
 #include <stdio.h>
 
-/*
-===============
-Editor_Toolsize_Menu::Editor_Toolsize_Menu
-
-Create all the buttons etc...
-===============
+/**
+ * Create all the buttons etc...
 */
 Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
 :
@@ -64,11 +60,10 @@ m_decrease
 }
 
 
-/*
-===========
-called, when one of the up/down buttons is pressed
-id: 0 is up, 1 is down
-===========
+/**
+ * Called, when one of the up/down buttons is pressed
+ *
+ * id: 0 is up, 1 is down
 */
 void Editor_Toolsize_Menu::change_radius(const bool increase) {
 	Interactive_Base & intbase = dynamic_cast<Interactive_Base &>(*get_parent());

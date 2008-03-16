@@ -22,13 +22,6 @@
 #include "../../build_id.h"
 #include "i18n.h"
 
-/*
-==============================================================================
-
-Fullscreen_Menu_Main
-
-==============================================================================
-*/
 Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 :
 Fullscreen_Menu_Base("mainmenu.jpg"),

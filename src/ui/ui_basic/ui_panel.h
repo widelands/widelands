@@ -172,11 +172,6 @@ private:
 	void do_draw(RenderTarget* dst);
 	void do_think();
 
-	/**
-	 * Returns the child panel that receives mouse events at the given location.
-	 * Starts the search with child (which should usually be set to _fchild) and
-	 * returns the first match.
-	 */
 	Panel * child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel * child);
 	void do_mousein(bool inside);
 	bool do_mousepress  (const Uint8 btn, int32_t x, int32_t y);

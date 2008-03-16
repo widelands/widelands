@@ -30,8 +30,8 @@
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 
-/*
- * The message box himself
+/**
+ * The message box itself
  */
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box
 (Widelands::Game              * game,
@@ -89,7 +89,7 @@ m_game    (game)
 }
 
 
-/*
+/**
  * Handle mouse button events
  *
  * If the dialog has only one button, then it can be closed by right-clicking,
@@ -114,8 +114,8 @@ bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int32_t, 
 bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
-/*
- * clicked
+/**
+ * Clicked
  */
 void Message_Box_Event_Message_Box::clicked(int32_t i) {
 	if (i == -1) { // we should end this dialog

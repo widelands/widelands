@@ -26,7 +26,7 @@ class Editor_Interactive;
 namespace Widelands {class Trigger_Null;};
 namespace UI {struct EditBox;};
 
-/*
+/**
  * This is a modal box - The user must end this first
  * before it can return
  */

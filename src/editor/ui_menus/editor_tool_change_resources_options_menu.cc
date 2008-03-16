@@ -193,7 +193,7 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
 	update();
 }
 
-/*
+/**
  * called when a resource has been selected
  */
 void Editor_Tool_Change_Resources_Options_Menu::selected() {
@@ -213,12 +213,8 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 	update();
 }
 
-/*
-===========
-Editor_Tool_Change_Resources_Options_Menu::update()
-
-Update all the textareas, so that they represent the correct values
-===========
+/**
+ * Update all the textareas, so that they represent the correct values
 */
 void Editor_Tool_Change_Resources_Options_Menu::update() {
 	char buf[250];

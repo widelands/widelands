@@ -63,8 +63,8 @@ void Event_Move_View::Write(Section & s, Editor_Game_Base const & egbase) const
 		s.set_int ("player",  m_player);
 }
 
-/*
- * check if trigger conditions are done
+/**
+ * Check if trigger conditions are done
  */
 Event::State Event_Move_View::run(Game* game) {
 	assert(m_location);

@@ -30,16 +30,10 @@ template <typename T, typename ID> struct IDButton;
 struct Textarea;
 };
 
-/*
-=================================================
-
-class Main_Menu_New_Map
-
-This is the new map selection menu. It offers
-the user to choose the new world and a few other
-things like size, world ....
-
-=================================================
+/**
+ * This is the new map selection menu. It offers
+ * the user to choose the new world and a few other
+ * things like size, world ....
 */
 struct Main_Menu_New_Map : public UI::Window {
 	Main_Menu_New_Map(Editor_Interactive *);

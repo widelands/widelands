@@ -260,7 +260,7 @@ m_player_area(event.m_player_area)
 }
 
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -345,8 +345,8 @@ void Event_Conquer_Area_Option_Menu::clicked(int32_t const i) {
 	update();
 }
 
-/*
- * update function: update all UI elements
+/**
+ * Update function: update all UI elements
  */
 void Event_Conquer_Area_Option_Menu::update() {
 	Widelands::Map    const & map    = eia().egbase().map();

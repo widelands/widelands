@@ -29,7 +29,7 @@
 
 namespace UI {
 /**
-Initialize the progress bar.
+ * Initialize the progress bar.
 */
 Progress_Bar::Progress_Bar(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation)
 	: Panel(parent, x, y, w, h)
@@ -42,7 +42,7 @@ Progress_Bar::Progress_Bar(Panel* parent, int32_t x, int32_t y, int32_t w, int32
 
 
 /**
-Set the current state of progress.
+ * Set the current state of progress.
 */
 void Progress_Bar::set_state(uint32_t state)
 {
@@ -53,7 +53,7 @@ void Progress_Bar::set_state(uint32_t state)
 
 
 /**
-Set the maximum state
+ * Set the maximum state
 */
 void Progress_Bar::set_total(uint32_t total)
 {
@@ -65,7 +65,7 @@ void Progress_Bar::set_total(uint32_t total)
 
 
 /**
-Draw the progressbar.
+ * Draw the progressbar.
 */
 void Progress_Bar::draw(RenderTarget* dst)
 {

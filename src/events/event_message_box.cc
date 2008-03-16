@@ -59,8 +59,8 @@ Event_Message_Box::~Event_Message_Box() {
 }
 
 
-/*
- * functions for button handling
+/**
+ * Functions for button handling
  */
 void Event_Message_Box::set_nr_buttons(int32_t i) {
 	int32_t oldsize = m_buttons.size();
@@ -193,8 +193,8 @@ void Event_Message_Box::Write(Section & s, Editor_Game_Base const &) const {
 	}
 }
 
-/*
- * check if trigger conditions are done
+/**
+ * Check if trigger conditions are done
  */
 Event::State Event_Message_Box::run(Game* game) {
 	Message_Box_Event_Message_Box * mb =

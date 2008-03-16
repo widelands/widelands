@@ -26,7 +26,7 @@
 #include "map.h"
 #include "player.h"
 
-/*
+/**
  * Callback function to calculate correct overlays
  */
 int32_t Editor_Make_Infrastructure_Tool_Callback
@@ -38,15 +38,11 @@ int32_t Editor_Make_Infrastructure_Tool_Callback
 }
 
 
-/*
-===========
-Editor_Make_Infrastructure_Tool::handle_click_impl()
-
-This is the most complex of all tool functions: check where was clicked,
-offer the correct user dialog and act accordingly.
-
-Obviously, this function ignores the sel radius
-===========
+/**
+ * This is the most complex of all tool functions: check where was clicked,
+ * offer the correct user dialog and act accordingly.
+ *
+ * Obviously, this function ignores the sel radius
 */
 int32_t Editor_Make_Infrastructure_Tool::handle_click_impl
 (Widelands::Map                     &,

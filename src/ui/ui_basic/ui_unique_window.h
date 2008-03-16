@@ -27,9 +27,9 @@ struct Panel;
 
 
 /**
-  can only be created once, when it is requested to
-  open a second one, it will implicitly kill the old one
-  */
+ * Can only be created once, when it is requested to
+ * open a second one, it will implicitly kill the old one
+*/
 struct UniqueWindow : public Window {
 
 	struct Registry {

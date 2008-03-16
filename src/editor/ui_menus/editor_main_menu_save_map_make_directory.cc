@@ -70,8 +70,8 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 	center_to_parent();
 }
 
-/*
- * handle mouseclick for a modal
+/**
+ * Handle mouseclick for a modal
  * We are not draggable.
  */
 bool Main_Menu_Save_Map_Make_Directory::handle_mousepress
@@ -81,7 +81,7 @@ bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
 (const Uint8, int32_t, int32_t)
 {return false;}
 
-/*
+/**
  * Editbox changed
  */
 void Main_Menu_Save_Map_Make_Directory::edit_changed() {

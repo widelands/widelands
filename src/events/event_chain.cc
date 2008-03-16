@@ -65,7 +65,7 @@ EventChain::State EventChain::run(Game* g) {
 	return m_state;
 }
 
-/*
+/**
  * Clear all events, events are not delted.
  */
 void EventChain::clear_events() {
@@ -77,7 +77,7 @@ void EventChain::clear_events() {
 	evs.clear();
 }
 
-/*
+/**
  * Add an event
  */
 void EventChain::add_event(Event* ev) {
@@ -92,7 +92,7 @@ void EventChain::add_event(Event* ev) {
 
 namespace Widelands {
 
-/*
+/**
  * Check trigger cmd
  */
 Cmd_CheckEventChain::Cmd_CheckEventChain (int32_t t, int32_t tid) : GameLogicCommand (t)

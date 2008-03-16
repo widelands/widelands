@@ -93,12 +93,8 @@ FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* re
 }
 
 
-/*
-===============
-fileview_screen
-
-Display the contents of a text file in a scrollable window.
-===============
+/**
+ * Display the contents of a text file in a scrollable window.
 */
 void fileview_window(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename)
 {

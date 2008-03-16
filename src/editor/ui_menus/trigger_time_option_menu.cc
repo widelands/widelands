@@ -237,7 +237,7 @@ m_trigger (trigger)
 }
 
 
-/*
+/**
  * Handle mousepress/-release
  *
  * we're a modal, therefore we can not delete ourself
@@ -304,7 +304,7 @@ void Trigger_Time_Option_Menu::clicked(int32_t const i) {
 	update();
 }
 
-/*
+/**
  * Update the Textareas
  */
 void Trigger_Time_Option_Menu::update() {

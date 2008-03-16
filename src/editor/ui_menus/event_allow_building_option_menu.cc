@@ -170,7 +170,7 @@ m_button_cancel
 }
 
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself

@@ -114,12 +114,8 @@ m_pit                   (pit)
 }
 
 
-/*
-===========
-   void Editor_Tool_Place_Bob_Options_Menu::clicked()
-
-this is called when one of the state boxes is toggled
-===========
+/**
+ * This is called when one of the state boxes is toggled
 */
 void Editor_Tool_Place_Bob_Options_Menu::clicked(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it
@@ -148,5 +144,7 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int32_t n, bool t) {
 	select_correct_tool();
 }
 
-/* do nothing */
+/**
+ * Do nothing
+*/
 void Editor_Tool_Place_Bob_Options_Menu::do_nothing(int32_t, bool) {}

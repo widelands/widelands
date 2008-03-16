@@ -25,15 +25,11 @@
 #include <climits>
 #include <cstdlib>
 
-/*
-=============================
-class MultiSelect
-
-this class allows for selection of more than just one
-thing. Like more than one texture, more than one map object
-
-This is a helper class, no Editor Tool (might be usable in game too)
-=============================
+/**
+ * This class allows for selection of more than just one
+ * thing. Like more than one texture, more than one map object
+ *
+ * This is a helper class, no Editor Tool (might be usable in game too)
 */
 struct MultiSelect {
 	MultiSelect() : m_nr_enabled(0) {}

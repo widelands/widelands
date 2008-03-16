@@ -22,7 +22,7 @@
 
 #include "editor_set_height_tool.h"
 
-//  Set the height of a node to a random value within a defined interval.
+/// Set the height of a node to a random value within a defined interval.
 struct Editor_Noise_Height_Tool : public Editor_Tool {
 	Editor_Noise_Height_Tool
 		(Editor_Set_Height_Tool & the_set_tool,

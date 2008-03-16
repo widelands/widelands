@@ -24,10 +24,10 @@
 
 namespace UI {
 /**
-A very simple panel that displays progress or productivity in percent,
-graphically enhanced with a coloured bar.
-
-The actual state of progress
+ * A very simple panel that displays progress or productivity in percent,
+ * graphically enhanced with a coloured bar.
+ *
+ * The actual state of progress
 */
 struct Progress_Bar : public Panel {
 	enum {

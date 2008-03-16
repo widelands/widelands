@@ -26,7 +26,7 @@
 
 namespace UI {
 /**
-Initialize a Basic_Button
+ * Initialize a Basic_Button
 */
 Basic_Button::Basic_Button
 	(Panel * const parent,
@@ -68,7 +68,7 @@ Basic_Button::Basic_Button
 
 
 /**
-Sets a new picture for the Basic_Button.
+ * Sets a new picture for the Basic_Button.
 */
 void Basic_Button::set_pic(uint32_t picid)
 {
@@ -81,7 +81,7 @@ void Basic_Button::set_pic(uint32_t picid)
 
 
 /**
-Set a text title for the Basic_Button
+ * Set a text title for the Basic_Button
 */
 void Basic_Button::set_title(const std::string & title) {
 	m_pic_custom = 0;
@@ -93,8 +93,8 @@ void Basic_Button::set_title(const std::string & title) {
 
 
 /**
-Enable/Disable the button (disabled buttons can't be clicked).
-Buttons are enabled by default
+ * Enable/Disable the button (disabled buttons can't be clicked).
+ * Buttons are enabled by default
 */
 void Basic_Button::set_enabled(bool on)
 {
@@ -111,7 +111,7 @@ void Basic_Button::set_enabled(bool on)
 
 
 /**
-Redraw the button
+ * Redraw the button
 */
 void Basic_Button::draw(RenderTarget* dst)
 {
@@ -200,7 +200,7 @@ void Basic_Button::draw(RenderTarget* dst)
 
 
 /**
-Update highlighted status
+ * Update highlighted status
 */
 void Basic_Button::handle_mousein(bool inside)
 {
@@ -213,7 +213,7 @@ void Basic_Button::handle_mousein(bool inside)
 
 
 /**
-Update the pressed status of the button
+ * Update the pressed status of the button
 */
 bool Basic_Button::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT) return false;

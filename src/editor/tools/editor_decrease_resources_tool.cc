@@ -30,13 +30,9 @@
 #include "overlay_manager.h"
 
 
-/*
-===========
-Editor_Decrease_Resources_Tool::handle_click_impl()
-
-decrease the resources of the current field by one if
-there is not already another resource there.
-===========
+/**
+ * Decrease the resources of the current field by one if
+ * there is not already another resource there.
 */
 int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 (Widelands::Map                     & map,

@@ -30,13 +30,13 @@ UniqueWindow IMPLEMENTATION
 
 
 /**
-In order to avoid dangling pointers, we need to kill our contained window here.
+ * In order to avoid dangling pointers, we need to kill our contained window here.
 */
 UniqueWindow::Registry::~Registry() {delete window;}
 
 
 /**
-Register, position according to the registry information.
+ * Register, position according to the registry information.
 */
 UniqueWindow::UniqueWindow(Panel* parent, UniqueWindow::Registry* reg, int32_t w, int32_t h, std::string title)
 	: Window(parent, 0, 0, w, h, title.c_str())
@@ -58,7 +58,7 @@ UniqueWindow::UniqueWindow(Panel* parent, UniqueWindow::Registry* reg, int32_t w
 
 
 /**
-Unregister, save latest position.
+ * Unregister, save latest position.
 */
 UniqueWindow::~UniqueWindow()
 {

@@ -192,7 +192,7 @@ m_location(event.location())
 }
 
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -254,8 +254,8 @@ void Event_Move_View_Option_Menu::clicked(int32_t const i) {
 	update();
 }
 
-/*
- * update function: update all UI elements
+/**
+ * Update function: update all UI elements
  */
 void Event_Move_View_Option_Menu::update() {
 	Widelands::Extent const extent = eia().egbase().map().extent();

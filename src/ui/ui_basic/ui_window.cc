@@ -28,25 +28,25 @@
 #include <SDL_keysym.h>
 
 namespace UI {
-//  Width the horizontal border graphics must have.
+/// Width the horizontal border graphics must have.
 #define HZ_B_TOTAL_PIXMAP_LEN 100
 
-//  Height the top border must have
+/// Height the top border must have
 #define TP_B_PIXMAP_THICKNESS 20
 
-//  Height the bottom border must have
+/// Height the bottom border must have
 #define BT_B_PIXMAP_THICKNESS 20
 
-//  Width to use as the corner. This must be >= VT_B_PIXMAP_THICKNESS.
+/// Width to use as the corner. This must be >= VT_B_PIXMAP_THICKNESS.
 #define HZ_B_CORNER_PIXMAP_LEN 20
 
 #define HZ_B_MIDDLE_PIXMAP_LEN (HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
 
-//  Width/height the vertical border graphics must have.
+/// Width/height the vertical border graphics must have.
 #define VT_B_PIXMAP_THICKNESS 20
 #define VT_B_TOTAL_PIXMAP_LEN 100
 
-//  Height to use as the thingy.
+/// Height to use as the thingy.
 #define VT_B_THINGY_PIXMAP_LEN 20
 
 #define VT_B_MIDDLE_PIXMAP_LEN (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)

@@ -121,7 +121,7 @@ m_te      (te)
 	center_to_parent();
 }
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -134,8 +134,8 @@ bool Edit_Objective_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 bool Edit_Objective_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
-/*
- * a button has been clicked
+/**
+ * A button has been clicked
  */
 void Edit_Objective_Window::clicked_ok() {
 	Objective & obj = UI::Table<Objective &>::get(m_te); //  extract value
@@ -152,12 +152,8 @@ void Edit_Objective_Window::clicked_ok() {
 }
 
 
-/*
-===============
-Editor_Objectives_Menu::Editor_Objectives_Menu
-
-Create all the buttons etc...
-===============
+/**
+ * Create all the buttons etc...
 */
 #define spacing 5
 Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
@@ -223,14 +219,12 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 		center_to_parent();
 }
 
-/*
-===============
-Unregister from the registry pointer
-===============
+/**
+ * Unregister from the registry pointer
 */
 Editor_Objectives_Menu::~Editor_Objectives_Menu() {}
 
-/*
+/**
  * A Button has been clicked
  */
 void Editor_Objectives_Menu::clicked_new() {
@@ -294,7 +288,7 @@ void Editor_Objectives_Menu::clicked_del() {
 }
 
 
-/*
+/**
  * The table has been selected
  */
 void Editor_Objectives_Menu::table_selected(uint32_t n) {
@@ -305,12 +299,12 @@ void Editor_Objectives_Menu::table_selected(uint32_t n) {
 	m_trigger->set_text(m_table[n].get_trigger()->name());
 }
 
-/*
+/**
  * Table has been doubleclicked
  */
 void Editor_Objectives_Menu::table_dblclicked(uint32_t) {clicked_edit();}
 
-/*
+/**
  * Insert this map variable into the table
  */
 void Editor_Objectives_Menu::insert_objective(Objective & var) {

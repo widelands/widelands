@@ -37,7 +37,7 @@
 class Editor;
 class Editor_Tool;
 
-/*
+/**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game
  */

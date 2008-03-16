@@ -43,12 +43,8 @@
 
 using Widelands::WL_Map_Loader;
 
-/*
-===============
-Main_Menu_Load_Map::Main_Menu_Load_Map
-
-Create all the buttons etc...
-===============
+/**
+ * Create all the buttons etc...
 */
 Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 :
@@ -139,17 +135,13 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	move_to_top();
 }
 
-/*
-===============
-Unregister from the registry pointer
-===============
+/**
+ * Unregister from the registry pointer
 */
 Main_Menu_Load_Map::~Main_Menu_Load_Map() {}
 
-/*
-===========
-called when the ok button has been clicked
-===========
+/**
+ * Called when the ok button has been clicked
 */
 void Main_Menu_Load_Map::clicked_ok() {
 	std::string filename(m_ls->get_selected());
@@ -169,8 +161,8 @@ void Main_Menu_Load_Map::clicked_ok() {
 	}
 }
 
-/*
- * called when a item is selected
+/**
+ * Called when a item is selected
  */
 void Main_Menu_Load_Map::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
@@ -206,12 +198,12 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 	}
 }
 
-/*
+/**
  * An Item has been doubleclicked
  */
 void Main_Menu_Load_Map::double_clicked(uint32_t) {clicked_ok();}
 
-/*
+/**
  * fill the file list
  */
 void Main_Menu_Load_Map::fill_list() {

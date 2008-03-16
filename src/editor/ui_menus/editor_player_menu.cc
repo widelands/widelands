@@ -89,7 +89,7 @@ m_remove_last_player
 	set_think(true);
 }
 
-/*
+/**
  * Think function. Some things may change while this window
  * is open
  */
@@ -97,12 +97,8 @@ void Editor_Player_Menu::think() {
 	update();
 }
 
-/*
-===============
-Editor_Player_Menu::update()
-
-Update all
-===============
+/**
+ * Update all
 */
 void Editor_Player_Menu::update() {
 	if (is_minimal()) return;
@@ -259,7 +255,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 }
 
 
-/*
+/**
  * Player Tribe Button clicked
  */
 void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
@@ -292,7 +288,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 }
 
 
-/*
+/**
  * Set Current Start Position button selected
  */
 void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
@@ -328,7 +324,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 	update();
 }
 
-/*
+/**
  * Player name has changed
  */
 void Editor_Player_Menu::name_changed(int32_t m) {

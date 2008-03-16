@@ -26,14 +26,14 @@
 
 namespace UI {
 /**
-Initialize a list select panel
-
-Args: parent  parent panel
-      x       coordinates of the Listselect
-      y
-      w       dimensions, in pixels, of the Listselect
-      h
-      align   alignment of text inside the Listselect
+ * Initialize a list select panel
+ *
+ * Args: parent  parent panel
+ *       x       coordinates of the Listselect
+ *       y
+ *       w       dimensions, in pixels, of the Listselect
+ *       h
+ *       align   alignment of text inside the Listselect
 */
 BaseListselect::BaseListselect
 (Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align, bool show_check)
@@ -70,7 +70,7 @@ m_show_check(show_check)
 
 
 /**
-Free allocated resources
+ * Free allocated resources
 */
 BaseListselect::~BaseListselect()
 {
@@ -79,7 +79,7 @@ BaseListselect::~BaseListselect()
 
 
 /**
-Remove all entries from the listselect
+ * Remove all entries from the listselect
 */
 void BaseListselect::clear() {
 	const Entry_Record_vector::const_iterator entry_records_end =
@@ -100,11 +100,11 @@ void BaseListselect::clear() {
 
 
 /**
-Add a new entry to the listselect.
-
-Args: name   name that will be displayed
-      entry  value returned by get_select()
-      sel    if true, directly select the new entry
+ * Add a new entry to the listselect.
+ *
+ * Args: name   name that will be displayed
+ * entry  value returned by get_select()
+ *       sel    if true, directly select the new entry
 */
 void BaseListselect::add
 (const char * const name,
@@ -144,7 +144,7 @@ void BaseListselect::add
 		select(m_entry_records.size() - 1);
 }
 
-/*
+/**
  * Switch two entries
  */
 void BaseListselect::switch_entries(const uint32_t m, const uint32_t n)
@@ -163,7 +163,7 @@ void BaseListselect::switch_entries(const uint32_t m, const uint32_t n)
 	}
 }
 
-/*
+/**
  * Sort the listbox alphabetically. make sure that the current selection stays
  * valid (though it might scroll out of visibility).
  * start and end defines the beginning and the end of a subarea to
@@ -187,7 +187,7 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 }
 
 /**
-Set the list alignment (only horizontal alignment works)
+ * Set the list alignment (only horizontal alignment works)
 */
 void BaseListselect::set_align(const Align align)
 {
@@ -196,7 +196,7 @@ void BaseListselect::set_align(const Align align)
 
 
 /**
-Scroll to the given position, in pixels.
+ * Scroll to the given position, in pixels.
 */
 void BaseListselect::set_scrollpos(const int32_t i)
 {
@@ -220,7 +220,6 @@ void BaseListselect::set_entry_color(const uint32_t n, const RGBColor col) throw
 
 
 /**
- *
  * Change the currently selected entry
  *
  * Args: i  the entry to select
@@ -399,7 +398,7 @@ bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 	return btn == SDL_BUTTON_LEFT;
 }
 
-/*
+/**
  * Remove entry
  */
 void BaseListselect::remove(const uint32_t i)
@@ -412,7 +411,7 @@ void BaseListselect::remove(const uint32_t i)
 		selected.call(m_selection = no_selection_index());
 }
 
-/*
+/**
  * Remove an entry by name. This only removes
  * the first entry with this name. If none is found, nothing
  * is done

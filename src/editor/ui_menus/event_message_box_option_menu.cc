@@ -210,7 +210,7 @@ m_event   (event)
 }
 
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -302,8 +302,8 @@ void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
 }
 
 
-/*
- * update function: update all UI elements
+/**
+ * Update function: update all UI elements
  */
 void Event_Message_Box_Option_Menu::update() {
 	if (m_ls_selected >= m_nr_buttons)
@@ -339,7 +339,7 @@ void Event_Message_Box_Option_Menu::update() {
 	}
 }
 
-/*
+/**
  * Listbox got selected
  */
 void Event_Message_Box_Option_Menu::ls_selected(uint32_t const i) {
@@ -347,7 +347,7 @@ void Event_Message_Box_Option_Menu::ls_selected(uint32_t const i) {
 	update();
 }
 
-/*
+/**
  * Button name edit box edited
  */
 void Event_Message_Box_Option_Menu::edit_box_edited(int32_t) {

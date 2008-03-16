@@ -30,7 +30,7 @@ namespace Widelands {
 
 class Editor_Game_Base;
 
-/*
+/**
  * Allows/denies the player to build a certain building
  */
 struct Event_Allow_Building : public Event {

@@ -31,7 +31,7 @@ namespace Widelands {
 
 struct Building_Descr;
 
-/*
+/**
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
  */

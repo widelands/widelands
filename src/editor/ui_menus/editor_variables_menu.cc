@@ -34,7 +34,7 @@
 
 using Widelands::Variable;
 
-/*
+/**
  * This is a modal box - The user must end this first
  * before it can return
  */
@@ -86,7 +86,7 @@ button_back
 
 {center_to_parent();}
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -99,8 +99,8 @@ bool New_Variable_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 bool New_Variable_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
-/*
- * a button has been clicked
+/**
+ * A button has been clicked
  */
 void New_Variable_Window::clicked_new(const Variable_Type i) {
 	char buffer[256];
@@ -128,7 +128,7 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
 	return;
 }
 
-/*
+/**
  * This is a modal box - The user must end this first
  * before it can return
  */
@@ -189,7 +189,7 @@ m_back
 	center_to_parent();
 }
 
-/*
+/**
  * Handle mouseclick
  *
  * we're a modal, therefore we can not delete ourself
@@ -202,8 +202,8 @@ bool Edit_Variable_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 bool Edit_Variable_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
-/*
- * a button has been clicked
+/**
+ * A button has been clicked
  */
 void Edit_Variable_Window::clicked_ok() {
 	//  Get the a name
@@ -242,12 +242,8 @@ void Edit_Variable_Window::clicked_ok() {
 }
 
 
-/*
-===============
-Editor_Variables_Menu::Editor_Variables_Menu
-
-Create all the buttons etc...
-===============
+/**
+ * Create all the buttons etc...
 */
 #define spacing 5
 Editor_Variables_Menu::Editor_Variables_Menu
@@ -301,16 +297,12 @@ m_button_del
 		center_to_parent();
 }
 
-/*
-===============
-Editor_Variables_Menu::~Editor_Variables_Menu
-
-Unregister from the registry pointer
-===============
+/**
+ * Unregister from the registry pointer
 */
 Editor_Variables_Menu::~Editor_Variables_Menu() {}
 
-/*
+/**
  * A Button has been clicked
  */
 void Editor_Variables_Menu::clicked_new() {
@@ -335,7 +327,7 @@ void Editor_Variables_Menu::clicked_del()      {
 	m_button_del .set_enabled(false);
 }
 
-/*
+/**
  * The table has been selected
  */
 void Editor_Variables_Menu::table_selected(uint32_t n) {
@@ -345,12 +337,12 @@ void Editor_Variables_Menu::table_selected(uint32_t n) {
 	m_button_del.set_enabled(not m_table[n].is_delete_protected());
 }
 
-/*
+/**
  * Table has been doubleclicked
  */
 void Editor_Variables_Menu::table_dblclicked(uint32_t) {clicked_edit();}
 
-/*
+/**
  * Insert this map variable into the table
  */
 void Editor_Variables_Menu::insert_variable(Variable & var) {

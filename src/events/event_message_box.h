@@ -32,7 +32,7 @@ struct Trigger;
 class Trigger_Null;
 class Editor_Game_Base;
 
-/*
+/**
  * This event shows a message box
  */
 struct Event_Message_Box : public Event, public Referencer<Trigger> {

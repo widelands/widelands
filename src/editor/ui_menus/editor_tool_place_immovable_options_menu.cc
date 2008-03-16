@@ -115,7 +115,7 @@ Editor_Tool_Place_Immovable_Options_Menu::
 {}
 
 /**
- * called when one of the state boxes is toggled
+ * Called when one of the state boxes is toggled
 */
 void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it

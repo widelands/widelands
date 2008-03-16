@@ -30,7 +30,7 @@
 
 namespace UI {
 /**
-Initialize a edibox that supports multiline strings.
+ * Initialize a edibox that supports multiline strings.
 */
 Multiline_Editbox::Multiline_Editbox
 	(Panel * parent,
@@ -50,14 +50,14 @@ Multiline_Editbox::Multiline_Editbox
 
 
 /**
-Free allocated resources
+ * Free allocated resources
 */
 Multiline_Editbox::~Multiline_Editbox() {
 	changed.call();
 }
 
 /**
-a key event must be handled
+ * A key event must be handled
 */
 bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 	char c = code.unicode & 0xff80 ? '\0' : code.unicode;
@@ -208,8 +208,8 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 	return false;
 }
 
-/*
- * handle mousebutton events
+/**
+ * Handle mousebutton events
  */
 bool Multiline_Editbox::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
@@ -224,7 +224,7 @@ bool Multiline_Editbox::handle_mouserelease(const Uint8, int32_t, int32_t)
 {return false;}
 
 /**
-Redraw the Editbox
+ * Redraw the Editbox
 */
 void Multiline_Editbox::draw(RenderTarget* dst)
 {
@@ -249,7 +249,7 @@ void Multiline_Editbox::draw(RenderTarget* dst)
 	Multiline_Textarea::draw_scrollbar();
 }
 
-/*
+/**
  * Set text function needs to take care of the current
  * position
  */

@@ -29,14 +29,14 @@
 
 namespace UI {
 /**
-Arranges clickable pictures of common size in a regular grid.
-
-Arrangement can be horizontal (pictures fill the grid from left to right, top
-to bottom) or vertical (pictures fill the grid from top to bottom, then left to
-right).
-
-An Icon_Grid can be persistant, which means that one of the pictures can be
-the currently selected picture. This picture is highlighted all the time.
+ * Arranges clickable pictures of common size in a regular grid.
+ *
+ * Arrangement can be horizontal (pictures fill the grid from left to right, top
+ * to bottom) or vertical (pictures fill the grid from top to bottom, then left
+ * to right).
+ *
+ * An Icon_Grid can be persistant, which means that one of the pictures can be
+ * the currently selected picture. This picture is highlighted all the time.
 */
 struct Icon_Grid : public Panel {
 	enum {

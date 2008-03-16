@@ -73,7 +73,7 @@ Scrollbar::Scrollbar(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h
 
 
 /**
-Change the number of steps of the scrollbar.
+ * Change the number of steps of the scrollbar.
 */
 void Scrollbar::set_steps(int32_t steps)
 {
@@ -110,7 +110,7 @@ void Scrollbar::set_singlestepsize(uint32_t singlestepsize)
 
 
 /**
-Change the number of steps a pageup/down will scroll.
+ * Change the number of steps a pageup/down will scroll.
 */
 void Scrollbar::set_pagesize(int32_t pagesize)
 {
@@ -141,9 +141,6 @@ void Scrollbar::set_pos(int32_t pos)
 }
 
 
-/**
-Scrollbar::get_area_for_point
-*/
 Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 {
 	int32_t extent;
@@ -184,7 +181,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 
 
 /**
-Return the center of the knob, in pixels, depending on the current position.
+ * Return the center of the knob, in pixels, depending on the current position.
 */
 int32_t Scrollbar::get_knob_pos()
 {
@@ -205,7 +202,7 @@ int32_t Scrollbar::get_knob_pos()
 
 
 /**
-Change the position according to knob movement.
+ * Change the position according to knob movement.
 */
 void Scrollbar::set_knob_pos(int32_t pos)
 {
@@ -328,7 +325,7 @@ void Scrollbar::draw_area(RenderTarget & dst, const Area area, const Rect r) {
 
 
 /**
-Draw the scrollbar.
+ * Draw the scrollbar.
 */
 void Scrollbar::draw(RenderTarget* dst)
 {
@@ -396,7 +393,7 @@ void Scrollbar::draw(RenderTarget* dst)
 
 
 /**
-Check for possible auto-repeat scrolling.
+ * Check for possible auto-repeat scrolling.
 */
 void Scrollbar::think()
 {
@@ -473,7 +470,7 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 
 
 /**
-Move the knob while pressed.
+ * Move the knob while pressed.
 */
 bool Scrollbar::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int32_t) {
 	if (m_pressed == Knob)

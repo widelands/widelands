@@ -199,8 +199,9 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 }
 
 
-//Class Options_Ctrl
-//Handles communication between window class and options
+/**
+ * Handles communication between window class and options
+ */
 Options_Ctrl::Options_Ctrl(Section* s) {
 	m_opt_dialog = new Fullscreen_Menu_Options(options_struct(s));
 	m_opt_section = s;

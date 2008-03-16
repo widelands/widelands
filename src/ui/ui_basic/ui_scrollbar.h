@@ -26,8 +26,7 @@
 #include "rect.h"
 
 namespace UI {
-/** class Scrollbar
- *
+/**
  * This class provides a scrollbar
  */
 struct Scrollbar : public Panel {
@@ -41,10 +40,7 @@ struct Scrollbar : public Panel {
 	};
 
 	enum {
-		/**
-		 * default width for vertical scrollbars, height for horizontal scrollbars
-		 */
-		Size = 24,
+		Size = 24, ///< default width for vertical scrollbars, height for horizontal scrollbars
 	};
 
 public:

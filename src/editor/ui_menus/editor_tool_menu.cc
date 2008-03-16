@@ -117,12 +117,8 @@ UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 	if (get_usedefaultpos()) center_to_parent();
 }
 
-/*
-===========
-Editor_Tool_Menu::changed_to()
-
-called when the radiogroup changes or is reclicked
-===========
+/**
+ * Called when the radiogroup changes or is reclicked
 */
 void Editor_Tool_Menu::changed_to() {
 	const int32_t n = m_radioselect.get_state();

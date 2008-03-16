@@ -26,12 +26,8 @@
 
 #include "ui_unique_window.h"
 
-/*
-=============================
-class Editor_Make_Infrastructure_Tool
-
-this places immovables on the map
-=============================
+/**
+ * This places immovables on the map
 */
 struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this), m_player(1) {}

@@ -56,7 +56,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 
 
 /**
-Draw the splash screen
+ * Draw the splash screen
 */
 void Fullscreen_Menu_Base::draw(RenderTarget* dst)
 {dst->blit(Point(0, 0), m_pic_background);}

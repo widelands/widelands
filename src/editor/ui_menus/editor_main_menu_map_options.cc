@@ -30,12 +30,8 @@
 
 #include <stdio.h>
 
-/*
-===============
-Main_Menu_Map_Options::Main_Menu_Map_Options
-
-Create all the buttons etc...
-===============
+/**
+ * Create all the buttons etc...
 */
 Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
 	:
@@ -92,13 +88,9 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	update();
 }
 
-/*
-===============
-Main_Menu_Map_Options::update()
-
-Updates all UI::Textareas in the UI::Window to represent currently
-set values
-==============
+/**
+ * Updates all UI::Textareas in the UI::Window to represent currently
+ * set values
 */
 void Main_Menu_Map_Options::update() {
 	Widelands::Map const & map = m_parent->egbase().map();
@@ -114,21 +106,13 @@ void Main_Menu_Map_Options::update() {
 	m_descr ->set_text(map.get_description());
 }
 
-
-
-/*
-===============
-Unregister from the registry pointer
-===============
+/**
+ * Unregister from the registry pointer
 */
 Main_Menu_Map_Options::~Main_Menu_Map_Options() {}
 
-/*
-===========
-Main_Menu_Map_Options::changed()
-
-called when one of the editboxes are changed
-===========
+/**
+ * Called when one of the editboxes are changed
 */
 void Main_Menu_Map_Options::changed(int32_t const id) {
 	if        (id == 0) {
@@ -139,8 +123,8 @@ void Main_Menu_Map_Options::changed(int32_t const id) {
 	update();
 }
 
-/*
- * called when the editbox has changed
+/**
+ * Called when the editbox has changed
  */
 void Main_Menu_Map_Options::editbox_changed()
 {m_parent->egbase().map().set_description(m_descr->get_text().c_str());}

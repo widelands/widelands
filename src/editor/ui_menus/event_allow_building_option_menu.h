@@ -35,7 +35,7 @@
 class Editor_Interactive;
 namespace Widelands {struct Event_Allow_Building;};
 
-/*
+/**
  * This is a modal box - The user must end this first
  * before it can return
  */

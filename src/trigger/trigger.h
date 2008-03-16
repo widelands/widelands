@@ -57,7 +57,7 @@ struct Trigger : public Named, public Referenced<Trigger> {
 	bool is_set() const {return m_is_set;}
 
 protected:
-	// This is only for child classes to toggle the trigger
+	/// This is only for child classes to toggle the trigger
 	void set_trigger(bool t) {m_is_set = t;}
 
 private:

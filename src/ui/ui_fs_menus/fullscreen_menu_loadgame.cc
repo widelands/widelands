@@ -99,15 +99,15 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 	}
 }
 
-/*
- * listbox got double clicked
+/**
+ * Listbox got double clicked
  */
 void Fullscreen_Menu_LoadGame::double_clicked(uint32_t) {
 	clicked_ok();
 }
 
-/*
- * fill the file list
+/**
+ * Fill the file list
  */
 void Fullscreen_Menu_LoadGame::fill_list() {
 	//  Fill it with all files we find.

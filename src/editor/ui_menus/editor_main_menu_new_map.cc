@@ -39,12 +39,8 @@
 
 using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 
-/*
-===============
-Main_Menu_New_Map::Main_Menu_New_Map
-
-Create all the buttons etc...
-===============
+/**
+ * Create all the buttons etc...
 */
 Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 :
@@ -131,12 +127,8 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 }
 
 
-/*
-===========
-Main_Menu_New_Map UI::Button functions
-
-called, when button get clicked
-===========
+/**
+ * Called, when button get clicked
 */
 void Main_Menu_New_Map::button_clicked(int32_t n) {
 	switch (n) {

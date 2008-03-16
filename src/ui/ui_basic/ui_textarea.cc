@@ -73,8 +73,8 @@ Textarea:: Textarea
 }
 
 /**
-  Set the text of the Textarea. Size is automatically adjusted
-  */
+ * Set the text of the Textarea. Size is automatically adjusted
+ */
 void Textarea::set_text(const std::string & text) {
 	collapse(); // collapse() implicitly updates
 
@@ -84,8 +84,8 @@ void Textarea::set_text(const std::string & text) {
 
 
 /**
-  Change the alignment
-  */
+ * Change the alignment
+ */
 void Textarea::set_align(const Align align) {
 	collapse();
 	m_align = align;
@@ -94,8 +94,8 @@ void Textarea::set_align(const Align align) {
 
 
 /**
-  Redraw the Textarea
-  */
+ * Redraw the Textarea
+ */
 void Textarea::draw(RenderTarget* dst)
 {
 	if (m_text.length())
@@ -114,8 +114,8 @@ void Textarea::draw(RenderTarget* dst)
 
 
 /**
-  Reduce the Textarea to size 0x0 without messing up the alignment
-  */
+ * Reduce the Textarea to size 0x0 without messing up the alignment
+ */
 void Textarea::collapse()
 {
 	int32_t x = get_x();
@@ -141,8 +141,8 @@ void Textarea::collapse()
 
 
 /**
-  Expand the size of the Textarea until it fits the size of the text
-  */
+ * Expand the size of the Textarea until it fits the size of the text
+ */
 void Textarea::expand()
 {
 	if (!m_text.length())

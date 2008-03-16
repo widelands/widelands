@@ -29,16 +29,10 @@ class Multiline_Editbox;
 struct Textarea;
 };
 
-/*
-=================================================
-
-class Main_Menu_Map_Options
-
-this is the Main Options Menu. Here, information
-about the current map are displayed and you can change
-author, name and description
-
-=================================================
+/**
+ * This is the Main Options Menu. Here, information
+ * about the current map are displayed and you can change
+ * author, name and description
 */
 struct Main_Menu_Map_Options : public UI::Window {
 	Main_Menu_Map_Options(Editor_Interactive *);

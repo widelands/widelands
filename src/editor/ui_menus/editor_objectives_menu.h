@@ -31,13 +31,6 @@ template <typename T> struct Table;
 struct Textarea;
 };
 
-/*
-=============================
-
-class Editor_Objectives_Menu
-
-=============================
-*/
 struct Editor_Objectives_Menu : public UI::UniqueWindow {
 	Editor_Objectives_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
 	virtual ~Editor_Objectives_Menu();

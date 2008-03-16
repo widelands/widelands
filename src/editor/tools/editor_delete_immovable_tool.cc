@@ -26,12 +26,8 @@
 
 #include "upcast.h"
 
-/*
-===========
-Editor_Delete_Immovable_Tool::handle_click_impl()
-
-deletes the immovable at the given location
-===========
+/**
+ * Deletes the immovable at the given location
 */
 int32_t Editor_Delete_Immovable_Tool::handle_click_impl
 (Widelands::Map                     & map,

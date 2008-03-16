@@ -54,8 +54,8 @@ void Trigger_Time::Write(Section & s, Editor_Game_Base const &) const {
 	s.set_int   ("last_start_time", m_last_start_time);
 }
 
-/*
- * check if trigger conditions are done
+/**
+ * Check if trigger conditions are done
  */
 void Trigger_Time::check_set_conditions(Game const & game) {
 	if ((game.get_gametime() - m_last_start_time) / 1000 < m_wait_time)
@@ -65,7 +65,7 @@ void Trigger_Time::check_set_conditions(Game const & game) {
 	set_trigger(true);
 }
 
-/*
+/**
  * Reset this trigger. This is only valid for non one timers
  */
 void Trigger_Time::reset_trigger       (Game const & game) {

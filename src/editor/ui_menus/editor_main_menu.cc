@@ -26,19 +26,17 @@
 #include "fullscreen_menu_fileview.h"
 #include "i18n.h"
 
-/*
-===============
-Editor_Main_Menu::Editor_Main_Menu
-
-Create all the buttons etc...
-===============
-*/
+//TODO: these should be defined globally for the whole UI
 #define width 120
 #define height 20
 #define margin 15
 #define hmargin margin
 #define vmargin margin
 #define vspacing 15
+
+/**
+ * Create all the buttons etc...
+*/
 Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
 :
 UI::UniqueWindow(parent, registry, 2 * hmargin + width, 225, _("Main Menu")),
@@ -90,12 +88,8 @@ m_button_exit_editor
 		center_to_parent();
 }
 
-/*
-===========
-Editor_Main_Menu UI::Button functions
-
-called, when buttons get clicked
-===========
+/**
+ * Called, when buttons get clicked
 */
 void Editor_Main_Menu::new_map_btn() {
 	new Main_Menu_New_Map(&m_parent);

@@ -30,12 +30,8 @@
 #include <stdio.h>
 
 
-/*
-===========
-Editor_Info_Tool::handle_click()
-
-show a simple info dialog with infos about this field
-===========
+/**
+ * Show a simple info dialog with infos about this field
 */
 int32_t Editor_Info_Tool::handle_click_impl
 (Widelands::Map                     & map,

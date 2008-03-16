@@ -24,12 +24,8 @@
 #include "editorinteractive.h"
 #include "bob.h"
 
-/*
-===========
-Editor_Delete_Bob_Tool::handle_click_impl()
-
-deletes the bob at the given location
-===========
+/**
+ * Deletes the bob at the given location
 */
 int32_t Editor_Delete_Bob_Tool::handle_click_impl
 (Widelands::Map                     & map,

@@ -23,19 +23,10 @@
 #include "rendertarget.h"
 
 namespace UI {
-/*
-==============================================================================
-
-Statebox
-
-==============================================================================
-*/
-
-
 /**
-Stateboxes start out enabled and unchecked.
-If picid is non-zero, the given picture is used instead of the normal checkbox
-graphics.
+ * Stateboxes start out enabled and unchecked.
+ * If picid is non-zero, the given picture is used instead of the normal
+ * checkbox graphics.
 */
 Statebox::Statebox
 	(Panel * parent,
@@ -114,7 +105,7 @@ void Statebox::set_state(bool on)
 
 
 /**
-Redraw the entire checkbox
+ * Redraw the entire checkbox
 */
 void Statebox::draw(RenderTarget* dst)
 {
@@ -173,14 +164,6 @@ bool Statebox::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 bool Statebox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {return btn == SDL_BUTTON_LEFT;}
 
-
-/*
-==============================================================================
-
-Checkbox
-
-==============================================================================
-*/
 
 /**
  * Toggle the checkbox state

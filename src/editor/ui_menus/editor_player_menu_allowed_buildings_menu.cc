@@ -26,12 +26,8 @@
 
 using Widelands::Building_Index;
 
-/*
-===============
-Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu
-
-Create all the buttons etc...
-===============
+/**
+ * Create all the buttons etc...
 */
 #define margin                0
 #define hmargin margin
@@ -123,18 +119,14 @@ m_allow_button
 	update();
 }
 
-/*
-===============
-Updates all UI::Textareas in the UI::Window to represent currently
-set values
-==============
+/**
+ * Updates all UI::Textareas in the UI::Window to represent currently
+ * set values
 */
 void Editor_Player_Menu_Allowed_Buildings_Menu::update() {}
 
-/*
-===============
-Unregister from the registry pointer
-===============
+/**
+ * Unregister from the registry pointer
 */
 Editor_Player_Menu_Allowed_Buildings_Menu::
 ~Editor_Player_Menu_Allowed_Buildings_Menu
@@ -142,7 +134,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu::
 {}
 
 
-/*
+/**
  * UI Action callback functions
  */
 

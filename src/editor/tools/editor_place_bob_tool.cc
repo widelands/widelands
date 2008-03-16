@@ -24,13 +24,9 @@
 #include "editor_game_base.h"
 #include "bob.h"
 
-/*
-===========
-Editor_Place_Bob_Tool::handle_click_impl()
-
-choses an object to place randomly from all enabled
-and places this on the current field
-===========
+/**
+ * Choses an object to place randomly from all enabled
+ * and places this on the current field
 */
 int32_t Editor_Place_Bob_Tool::handle_click_impl
 (Widelands::Map                     & map,
