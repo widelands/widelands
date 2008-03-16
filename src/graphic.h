@@ -35,9 +35,9 @@
 
 #define MAX_RECTS 20
 
-class RenderTarget;
+struct RenderTarget;
 class Surface;
-class Graphic;
+struct Graphic;
 
 ///\todo Get rid of this global function
 SDL_Surface* LoadImage(const char * const filename);

@@ -27,10 +27,10 @@
 namespace Widelands {
 
 /// \todo (Antonio Trueba#1#): Get rid of forward declarations (cleanup of other headers needed)
-class Map;
-class Route;
-class Transfer;
-class Tribe_Descr;
+struct Map;
+struct Route;
+struct Transfer;
+struct Tribe_Descr;
 
 
 /**

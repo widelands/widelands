@@ -24,7 +24,7 @@
 
 #include "ui_window.h"
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace Widelands {struct Event_Move_View;};
 
 namespace UI {

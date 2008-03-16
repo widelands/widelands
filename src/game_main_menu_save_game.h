@@ -22,7 +22,7 @@
 
 #include "ui_unique_window.h"
 
-class Interactive_Player;
+struct Interactive_Player;
 namespace UI {
 template <typename T> struct Button;
 struct EditBox;

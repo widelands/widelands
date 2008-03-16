@@ -23,7 +23,7 @@
 #include "ui_table.h"
 #include "ui_unique_window.h"
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace Widelands {struct Objective;};
 namespace UI {
 template <typename T> struct Button;

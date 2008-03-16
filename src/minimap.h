@@ -23,7 +23,7 @@
 #include "ui_button.h"
 #include "ui_unique_window.h"
 
-class Interactive_Base;
+struct Interactive_Base;
 
 struct MiniMap : public UI::UniqueWindow {
 	MiniMap(Interactive_Base & parent, UI::UniqueWindow::Registry *);

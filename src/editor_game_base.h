@@ -40,17 +40,17 @@ struct Interactive_Base;
 namespace Widelands {
 
 struct AreaWatcher;
-class Battle;
+struct Battle;
 class Bob;
-class Building_Descr;
+struct Building_Descr;
 class Immovable;
-class Map;
-class Object_Manager;
-class Player;
-class PlayerImmovable;
-class Tribe_Descr;
+struct Map;
+struct Object_Manager;
+struct Player;
+struct PlayerImmovable;
+struct Tribe_Descr;
 class Flag;
-class AttackController;
+struct AttackController;
 
 struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	friend struct ::Fullscreen_Menu_LaunchGame;

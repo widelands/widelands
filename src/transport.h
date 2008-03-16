@@ -38,15 +38,15 @@
 namespace Widelands {
 
 class Building;
-class Economy;
+struct Economy;
 class Flag;
 class IdleWareSupply;
-class Item_Ware_Descr;
-class Request;
-class Requirements;
-class Road;
+struct Item_Ware_Descr;
+struct Request;
+struct Requirements;
+struct Road;
 class Soldier;
-class Transfer;
+struct Transfer;
 class Warehouse;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
@@ -132,7 +132,7 @@ private:
  * Map_Object::WALK_xx in all "direction" parameters.
  */
 class Flag : public PlayerImmovable {
-	friend class Economy;
+	friend struct Economy;
 	friend class FlagQueue;
 	friend struct Map_Ware_Data_Packet;     // has to look at pending items
 	friend struct Map_Waredata_Data_Packet; // has to look at pending items
@@ -339,8 +339,8 @@ private:
  * The number of steps is the number of flags stored minus one.
  */
 struct Route {
-	friend class Economy;
-	friend class Request;
+	friend struct Economy;
+	friend struct Request;
 
 	Route();
 
@@ -382,7 +382,7 @@ private:
  * \todo The mentioned function fail() does not exist!
  */
 struct Transfer {
-	friend class Request;
+	friend struct Request;
 
 	Transfer(Game* g, Request* req, WareInstance* it);
 	Transfer(Game* g, Request* req, Worker* w);
@@ -532,7 +532,7 @@ private:
 struct RSPairStruct;
 
 struct Economy {
-	friend class Request;
+	friend struct Request;
 
 	Economy(Player *player);
 	~Economy();

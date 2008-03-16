@@ -385,7 +385,7 @@ void Map_Object::cleanup(Editor_Game_Base *g)
 /**
  * Default implementation
  */
-int32_t Map_Object::get_tattribute(uint32_t attr) const
+int32_t Map_Object::get_tattribute(uint32_t) const
 {
 	return -1;
 }

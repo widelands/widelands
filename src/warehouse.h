@@ -28,13 +28,13 @@ struct Profile;
 
 namespace Widelands {
 
-class Editor_Game_Base;
-class Request;
-class Requirements;
+struct Editor_Game_Base;
+struct Request;
+struct Requirements;
 class Soldier;
-class Tribe_Descr;
+struct Tribe_Descr;
 class WareInstance;
-class WareList;
+struct WareList;
 
 
 /*

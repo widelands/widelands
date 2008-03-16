@@ -28,7 +28,7 @@ class FileSystem;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+struct Editor_Game_Base;
 struct Map_Map_Object_Loader;
 
 /// Takes ownership of the filesystem that is passed to it.

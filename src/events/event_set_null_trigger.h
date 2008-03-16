@@ -25,7 +25,7 @@
 
 namespace Widelands {
 
-class Editor_Game_Base;
+struct Editor_Game_Base;
 
 /**
  * This event is able to set a null trigger to a certain state

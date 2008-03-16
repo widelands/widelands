@@ -26,7 +26,7 @@
 #include "ui_unique_window.h"
 
 class WaresDisplay;
-class Interactive_Player;
+struct Interactive_Player;
 namespace Widelands {struct Economy;};
 
 /*

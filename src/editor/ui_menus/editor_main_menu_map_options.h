@@ -22,10 +22,10 @@
 
 #include "ui_window.h"
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace UI {
-class EditBox;
-class Multiline_Editbox;
+struct EditBox;
+struct Multiline_Editbox;
 struct Textarea;
 };
 

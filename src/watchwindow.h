@@ -22,7 +22,7 @@
 
 #include "widelands_geometry.h"
 
-class Interactive_Player;
+struct Interactive_Player;
 
 void show_watch_window(Interactive_Player & parent, Widelands::Coords coords);
 

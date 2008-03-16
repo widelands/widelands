@@ -26,8 +26,8 @@ struct FileSystem;
 
 namespace Widelands {
 
-class Game;
-class Game_Preload_Data_Packet;
+struct Game;
+struct Game_Preload_Data_Packet;
 
 /*
  * This class reads a complete state

@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-class Editor_Game_Base;
+struct Editor_Game_Base;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;
 
@@ -57,7 +57,7 @@ enum {
 // This is finally the command queue. It is fully widelands specific,
 // it needs to know nearly all modules.
 //
-class Game;
+struct Game;
 
 /**
  * A command that is supposed to be executed at a certain gametime.

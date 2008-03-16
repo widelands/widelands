@@ -24,7 +24,7 @@
 
 #include "ui_window.h"
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace UI {
 struct EditBox;
 template <typename T> struct Listselect;

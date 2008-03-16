@@ -25,7 +25,7 @@
 #include "ui_unique_window.h"
 
 
-class Editor_Interactive;
+struct Editor_Interactive;
 
 
 /**

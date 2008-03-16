@@ -33,7 +33,7 @@ struct Section;
 namespace Widelands {
 
 struct Editor_Game_Base;
-class Game;
+struct Game;
 
 struct Trigger : public Named, public Referenced<Trigger> {
 	friend struct Map_Trigger_Data_Packet;

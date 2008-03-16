@@ -30,10 +30,10 @@
 
 namespace Widelands {
 
-class Event;
-class Game;
+struct Event;
+struct Game;
 struct Trigger;
-class TriggerConditional;
+struct TriggerConditional;
 
 /**
  * The Chain defined

@@ -31,7 +31,7 @@
 #include <cstring>
 #include <vector>
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace UI {
 struct Textarea;
 struct EditBox;

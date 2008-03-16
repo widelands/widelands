@@ -30,12 +30,12 @@
 #include "ui_textarea.h"
 
 namespace Widelands {
-class Editor_Game_Base;
-class Game;
-class Map;
-class Map_Loader;
+struct Editor_Game_Base;
+struct Game;
+struct Map;
+struct Map_Loader;
 };
-class RenderTarget;
+struct RenderTarget;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {

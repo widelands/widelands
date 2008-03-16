@@ -31,13 +31,13 @@
 
 namespace Widelands {
 
-class Economy;
-class Path;
-class PlayerImmovable;
+struct Economy;
+struct Path;
+struct PlayerImmovable;
 class Soldier;
 class Flag;
-class Tribe_Descr;
-class AttackController;
+struct Tribe_Descr;
+struct AttackController;
 
 /** class Player
  *
@@ -64,7 +64,7 @@ struct Player :
 	typedef std::vector<Building_Stats> Building_Stats_vector;
 	typedef std::vector<Building_Stats_vector> BuildingStats;
 
-	friend class Editor_Game_Base;
+	friend struct Editor_Game_Base;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Player_Economies_Data_Packet;
 	friend struct Map_Building_Data_Packet;

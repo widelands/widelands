@@ -26,8 +26,8 @@
 
 #include <vector>
 
-class Editor_Interactive;
-class Editor_Set_Terrain_Tool;
+struct Editor_Interactive;
+struct Editor_Set_Terrain_Tool;
 namespace UI {struct Checkbox;};
 
 struct Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Menu {

@@ -28,8 +28,8 @@
 #include <vector>
 
 namespace Widelands {
-class Editor_Game_Base;
-class Player;
+struct Editor_Game_Base;
+struct Player;
 };
 class Surface;
 

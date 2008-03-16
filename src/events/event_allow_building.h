@@ -28,7 +28,7 @@ struct Event_Allow_Building_Option_Menu;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+struct Editor_Game_Base;
 
 /**
  * Allows/denies the player to build a certain building

@@ -22,11 +22,11 @@
 
 #include "ui_unique_window.h"
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace Widelands {
-class Event;
-class EventChain;
-class Trigger;
+struct Event;
+struct EventChain;
+struct Trigger;
 };
 namespace UI {
 template <typename T> struct Button;

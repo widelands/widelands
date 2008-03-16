@@ -22,8 +22,8 @@
 
 #include "ui_window.h"
 
-class Editor_Interactive;
-namespace Widelands {class Trigger_Null;};
+struct Editor_Interactive;
+namespace Widelands {struct Trigger_Null;};
 namespace UI {struct EditBox;};
 
 /**

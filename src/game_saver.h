@@ -26,7 +26,7 @@ class FileSystem;
 
 namespace Widelands {
 
-class Game;
+struct Game;
 
 /**
  * This class writes a complete state

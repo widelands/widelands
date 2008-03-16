@@ -40,11 +40,11 @@ struct S2_Map_Loader;
 
 namespace Widelands {
 
-class BaseImmovable;
-class Player;
-class World;
-class Map;
-class Map_Loader;
+struct BaseImmovable;
+struct Player;
+struct World;
+struct Map;
+struct Map_Loader;
 #define WLMF_SUFFIX ".wmf"
 #define S2MF_SUFFIX ".swd"
 
@@ -58,7 +58,7 @@ const uint16_t MAP_DIMENSIONS[] = {
 };
 
 
-class Path;
+struct Path;
 class Immovable;
 
 
@@ -134,9 +134,9 @@ struct FindBobAttribute : public FindBob {
  * Warning: width and height must be even
  */
 struct Map {
-	friend class Editor_Game_Base;
-	friend class Map_Loader;
-	friend class ::S2_Map_Loader;
+	friend struct Editor_Game_Base;
+	friend struct Map_Loader;
+	friend struct ::S2_Map_Loader;
 	friend struct WL_Map_Loader;
 	friend struct Map_Elemental_Data_Packet;
 	friend struct Map_Extradata_Data_Packet;
@@ -500,7 +500,7 @@ private:
 class CoordPath;
 
 struct Path {
-	friend class Map;
+	friend struct Map;
 
 	Path() {}
 	Path(Coords c) : m_start(c), m_end(c) {}

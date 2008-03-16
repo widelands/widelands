@@ -38,7 +38,7 @@ namespace Widelands {
  */
 class Worker : public Bob {
 	friend class Soldier; //  allow access to m_supply
-	friend class WorkerProgram;
+	friend struct WorkerProgram;
 	friend struct Map_Bobdata_Data_Packet;
 
 	MO_DESCR(Worker_Descr);

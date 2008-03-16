@@ -27,9 +27,9 @@ class FileSystem;
 
 namespace Widelands {
 
-class Editor_Game_Base;
-class Map_Map_Object_Loader;
-class Map_Map_Object_Saver;
+struct Editor_Game_Base;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
 
 /** This class represents a data packet in a widelands map file. it is an
  * abstract base class

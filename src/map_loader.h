@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-class Editor_Game_Base;
+struct Editor_Game_Base;
 
 /*
 =============================

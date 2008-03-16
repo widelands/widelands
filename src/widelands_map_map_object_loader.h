@@ -27,7 +27,7 @@
 namespace Widelands {
 
 class Map_Object;
-class Editor_Game_Base;
+struct Editor_Game_Base;
 
 /*
  * This class helps to

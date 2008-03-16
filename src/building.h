@@ -39,7 +39,7 @@ struct Profile;
 namespace Widelands {
 
 class Flag;
-class Tribe_Descr;
+struct Tribe_Descr;
 
 class Building;
 
@@ -134,7 +134,7 @@ public:
 
 
 class Building : public PlayerImmovable {
-	friend class Building_Descr;
+	friend struct Building_Descr;
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Building_Descr)

@@ -24,9 +24,9 @@
 
 namespace Widelands {
 
-class EventChain;
-class Trigger;
-class Game;
+struct EventChain;
+struct Trigger;
+struct Game;
 
 /*
  * This class creates TriggerConditionals
@@ -35,7 +35,7 @@ class Game;
  * Either from a file (prefix notation)
  * or from a array of tokens.
  */
-class TriggerConditional;
+struct TriggerConditional;
 namespace TriggerConditional_Factory {
 enum TokenNames { //  NOTE these are ordered for easy precendence parsing
 	NOT,

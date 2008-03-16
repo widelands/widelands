@@ -31,7 +31,7 @@
 #include <string>
 #include <cstring>
 
-class RenderTarget;
+struct RenderTarget;
 
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
 #define MOUSE_OVER_BRIGHT_FACTOR 15

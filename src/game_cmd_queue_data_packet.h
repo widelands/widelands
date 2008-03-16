@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-class Game;
+struct Game;
 
 /*
  * This contains all the preload data needed to identify

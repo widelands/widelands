@@ -22,8 +22,8 @@
 
 #include "ui_window.h"
 
-class Editor_Interactive;
-namespace Widelands {class Trigger_Time;}
+struct Editor_Interactive;
+namespace Widelands {struct Trigger_Time;}
 namespace UI {
 template <typename T> struct Button;
 struct Textarea;

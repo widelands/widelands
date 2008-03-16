@@ -29,8 +29,8 @@ namespace UI {struct Panel;};
 namespace Widelands {
 
 struct Trigger;
-class Trigger_Null;
-class Editor_Game_Base;
+struct Trigger_Null;
+struct Editor_Game_Base;
 
 /**
  * This event shows a message box

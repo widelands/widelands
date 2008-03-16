@@ -24,12 +24,12 @@
 
 #include "ui_unique_window.h"
 
-class Interactive_Player;
+struct Interactive_Player;
 namespace UI {
 struct Checkbox;
 struct Radiogroup;
 };
-class WUIPlot_Area;
+struct WUIPlot_Area;
 
 struct General_Statistics_Menu : public UI::UniqueWindow {
 	General_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);

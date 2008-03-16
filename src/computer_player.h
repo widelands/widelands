@@ -28,11 +28,11 @@
 class BuildingHints;
 
 namespace Widelands {
-class Economy;
-class Player;
-class PlayerImmovable;
-class Tribe_Descr;
-class Road;
+struct Economy;
+struct Player;
+struct PlayerImmovable;
+struct Tribe_Descr;
+struct Road;
 class ProductionSite;
 };
 

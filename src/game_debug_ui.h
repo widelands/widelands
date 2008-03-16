@@ -23,7 +23,7 @@
 
 #include "widelands_geometry.h"
 
-class Interactive_Base;
+struct Interactive_Base;
 namespace Widelands {struct Map_Object;};
 
 // Open debug window for the given coordinates

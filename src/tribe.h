@@ -33,10 +33,10 @@
 
 namespace Widelands {
 
-class Building_Descr;
-class Editor_Game_Base;
-class Item_Ware_Descr;
-class Resource_Descr;
+struct Building_Descr;
+struct Editor_Game_Base;
+struct Item_Ware_Descr;
+struct Resource_Descr;
 class Worker_Descr;
 class Warehouse;
 struct World;

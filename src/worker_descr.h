@@ -27,14 +27,14 @@ namespace Widelands {
 
 /// \todo (Antonio Trueba#1#): Get rid of forward class declaration (chicked-and-egg problem)
 class Worker;
-class WorkerProgram;
+struct WorkerProgram;
 
 
 class Worker_Descr : public Bob::Descr
 {
-	friend class Tribe_Descr;
+	friend struct Tribe_Descr;
 	friend class Warehouse;
-	friend class WorkerProgram;
+	friend struct WorkerProgram;
 
 	typedef std::map<std::string, WorkerProgram*> ProgramMap;
 

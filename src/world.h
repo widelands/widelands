@@ -31,7 +31,7 @@ class Section;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+struct Editor_Game_Base;
 
 #define WORLD_NAME_LEN 30
 #define WORLD_AUTHOR_LEN 30
@@ -78,8 +78,8 @@ private:
 };
 
 struct Terrain_Descr {
-	friend class Descr_Maintainer<Terrain_Descr>;
-	friend class World;
+	friend struct Descr_Maintainer<Terrain_Descr>;
+	friend struct World;
 
 	typedef Terrain_Index Index;
 	Terrain_Descr
@@ -128,7 +128,7 @@ private:
   * it can read a world file.
   */
 struct World {
-	friend class Game;
+	friend struct Game;
 
 	enum {
 		OK = 0,

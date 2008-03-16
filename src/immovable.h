@@ -28,9 +28,9 @@ struct Profile;
 
 namespace Widelands {
 
-class Economy;
+struct Economy;
 class Flag;
-class Tribe_Descr;
+struct Tribe_Descr;
 class Worker;
 
 /**
@@ -112,7 +112,7 @@ protected:
 };
 
 class Immovable : public BaseImmovable {
-	friend class Immovable_Descr;
+	friend struct Immovable_Descr;
 	friend class ImmovableProgram;
 	friend struct Map_Immovabledata_Data_Packet; // for writing (obsolete since build-11)
 

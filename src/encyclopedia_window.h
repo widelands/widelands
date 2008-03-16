@@ -31,8 +31,8 @@
 #include "ui_multilinetextarea.h"
 
 namespace Widelands {
-class Item_Ware_Descr;
-class Tribe_Descr;
+struct Item_Ware_Descr;
+struct Tribe_Descr;
 };
 
 struct WareCondition {

@@ -28,13 +28,13 @@
 #include <vector>
 
 struct DirAnimations;
-class RenderTarget;
+struct RenderTarget;
 namespace UI {struct Tab_Panel;};
 
 namespace Widelands {
 
-class Path;
-class Player;
+struct Path;
+struct Player;
 struct Map_Map_Object_Loader;
 
 /**
@@ -125,8 +125,8 @@ public: __attribute__ ((deprecated)) const type* get_descr() const {return dynam
 public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);}
 
 class Map_Object {
-	friend class Object_Manager;
-	friend class Object_Ptr;
+	friend struct Object_Manager;
+	friend struct Object_Ptr;
 
 	MO_DESCR(Map_Object_Descr);
 
@@ -356,8 +356,7 @@ private:
 	Object_Manager            (const Object_Manager &);
 };
 
-/** class Object_Ptr
- *
+/**
  * Provides a safe pointer to a Map_Object
  */
 struct Object_Ptr {

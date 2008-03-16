@@ -28,17 +28,17 @@
 
 namespace Widelands {
 
-class Economy;
-class Editor_Game_Base;
+struct Economy;
+struct Editor_Game_Base;
 class Flag;
-class Game;
-class Map_Map_Object_Loader;
-class Map_Map_Object_Saver;
-class PlayerImmovable;
+struct Game;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
+struct PlayerImmovable;
 class RequestList;
-class Requirements;
-class Supply;
-class Transfer;
+struct Requirements;
+struct Supply;
+struct Transfer;
 class Worker;
 
 /**

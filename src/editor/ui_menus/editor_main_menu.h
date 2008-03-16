@@ -23,7 +23,7 @@
 #include "ui_button.h"
 #include "ui_unique_window.h"
 
-class Editor_Interactive;
+struct Editor_Interactive;
 
 /**
  * This represents the main menu

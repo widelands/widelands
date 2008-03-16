@@ -25,7 +25,7 @@
 #include "ui_window.h"
 
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace Widelands {struct Event_Conquer_Area;};
 namespace UI {
 struct EditBox;

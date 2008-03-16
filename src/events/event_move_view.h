@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-class Editor_Game_Base;
+struct Editor_Game_Base;
 
 struct Event_Move_View : public Event {
 	Event_Move_View(char const * Name, State const S)

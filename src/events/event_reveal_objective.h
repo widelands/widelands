@@ -24,8 +24,8 @@
 
 namespace Widelands {
 
-class Editor_Game_Base;
-class Objective;
+struct Editor_Game_Base;
+struct Objective;
 
 struct Event_Reveal_Objective : public Event {
 	Event_Reveal_Objective(char const * const Name, State const S)

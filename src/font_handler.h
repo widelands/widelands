@@ -30,9 +30,9 @@
 #include <cstring>
 #include <vector>
 
-class Font_Loader;
-class RenderTarget;
-class Text_Block;
+struct Font_Loader;
+struct RenderTarget;
+struct Text_Block;
 
 enum Align {
 	Align_Left         =  0,

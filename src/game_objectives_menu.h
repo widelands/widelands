@@ -25,10 +25,10 @@
 #include "ui_unique_window.h"
 
 namespace Widelands {
-class Game;
+struct Game;
 struct Objective;
 };
-class Interactive_Player;
+struct Interactive_Player;
 
 ///  Shows the not already fulfilled objectives.
 struct GameObjectivesMenu : public UI::UniqueWindow {

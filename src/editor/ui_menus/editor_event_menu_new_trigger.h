@@ -22,7 +22,7 @@
 
 #include "ui_window.h"
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace Widelands {namespace Trigger_Factory {struct Type_Descr;};};
 namespace UI {
 struct BaseListselect;

@@ -31,12 +31,12 @@
 
 namespace Widelands {
 
-class Input;
-class Item_Ware_Descr;
-class ProductionProgram;
+struct Input;
+struct Item_Ware_Descr;
+struct ProductionProgram;
 class Soldier;
-class Request;
-class WaresQueue;
+struct Request;
+struct WaresQueue;
 
 
 /**
@@ -50,7 +50,7 @@ class WaresQueue;
  * wares type has an associated store.
  */
 struct ProductionSite_Descr : public Building_Descr {
-	friend class ProductionProgram; // To add animations
+	friend struct ProductionProgram; // To add animations
 	typedef std::map<std::string, ProductionProgram*> ProgramMap;
 
 	ProductionSite_Descr

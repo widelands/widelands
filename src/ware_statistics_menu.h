@@ -22,8 +22,8 @@
 
 #include "ui_unique_window.h"
 
-class Interactive_Player;
-class WUIPlot_Area;
+struct Interactive_Player;
+struct WUIPlot_Area;
 
 struct Ware_Statistics_Menu : public UI::UniqueWindow {
 	Ware_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);

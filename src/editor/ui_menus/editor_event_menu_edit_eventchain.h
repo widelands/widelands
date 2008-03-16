@@ -22,10 +22,10 @@
 
 #include "ui_window.h"
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace Widelands {
-class Event;
-class EventChain;
+struct Event;
+struct EventChain;
 };
 namespace UI {
 template <typename T> struct Listselect;

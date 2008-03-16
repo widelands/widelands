@@ -27,8 +27,8 @@
 namespace Widelands {
 
 class Building;
-class Request;
-class WaresQueue;
+struct Request;
+struct WaresQueue;
 
 /*
 ConstructionSite

@@ -25,7 +25,7 @@
 #include "ui_panel.h"
 #include "ui_signal.h"
 
-class Interactive_Base;
+struct Interactive_Base;
 
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.

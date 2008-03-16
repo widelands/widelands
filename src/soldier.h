@@ -30,8 +30,8 @@ namespace Widelands {
 #define WEAKEST   0
 #define STRONGEST 1
 
-class Editor_Game_Base;
-class AttackController;
+struct Editor_Game_Base;
+struct AttackController;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 

@@ -91,16 +91,16 @@ enum Roads {
 	Road_SouthWest = 4,
 };
 
-class Terrain_Descr;
+struct Terrain_Descr;
 class Bob;
-class BaseImmovable;
+struct BaseImmovable;
 
 /// a field like it is represented in the game
 /// \todo This is all one evil hack :(
 struct Field {
-	friend class Map;
+	friend struct Map;
 	friend class Bob;
-	friend class BaseImmovable;
+	friend struct BaseImmovable;
 
 	enum Buildhelp_Index {
 		Buildhelp_Flag   = 0,

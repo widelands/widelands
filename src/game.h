@@ -27,8 +27,8 @@
 #include "save_handler.h"
 
 namespace UI {struct ProgressWindow;};
-class Computer_Player;
-class Interactive_Base;
+struct Computer_Player;
+struct Interactive_Base;
 struct Game_Main_Menu_Load_Game;
 struct WLApplication;
 struct GameSettings;
@@ -54,11 +54,11 @@ enum {
 	gs_running      // game was fully prepared at some point and is now in-game
 };
 
-class Player;
-class Map_Loader;
-class PlayerCommand;
-class ReplayReader;
-class ReplayWriter;
+struct Player;
+struct Map_Loader;
+struct PlayerCommand;
+struct ReplayReader;
+struct ReplayWriter;
 
 struct GameInternals;
 

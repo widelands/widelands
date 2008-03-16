@@ -33,7 +33,7 @@ struct Section;
 namespace Widelands {
 
 struct Editor_Game_Base;
-class Game;
+struct Game;
 
 /**
  * Event is a in game event of some kind

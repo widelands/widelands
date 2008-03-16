@@ -26,8 +26,8 @@
 
 #include <vector>
 
-class Editor_Interactive;
-class Editor_Place_Immovable_Tool;
+struct Editor_Interactive;
+struct Editor_Place_Immovable_Tool;
 namespace UI {struct Checkbox;};
 
 struct Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu {

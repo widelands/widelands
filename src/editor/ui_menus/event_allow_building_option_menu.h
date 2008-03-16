@@ -32,7 +32,7 @@
 #include <cstring>
 #include <vector>
 
-class Editor_Interactive;
+struct Editor_Interactive;
 namespace Widelands {struct Event_Allow_Building;};
 
 /**
