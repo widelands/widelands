@@ -81,15 +81,29 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 			break;
 
 		case SDLK_LEFT:
-			m_cur_pos -= 1;
-			if (static_cast<int32_t>(m_cur_pos) < 0)
-				m_cur_pos = 0;
+			if (0 < m_cur_pos) {
+				--m_cur_pos;
+				if (get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
+					for (uint32_t new_cur_pos = m_cur_pos;; m_cur_pos = new_cur_pos)
+						if (0 == new_cur_pos or isspace(txt[--new_cur_pos]))
+							break;
+			}
 			break;
 
 		case SDLK_RIGHT:
-			m_cur_pos += 1;
-			if (m_cur_pos >= txt.size())
-				m_cur_pos = txt.size();
+			if (m_cur_pos < txt.size()) {
+				++m_cur_pos;
+				if (get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
+					for (uint32_t new_cur_pos = m_cur_pos;; ++new_cur_pos)
+						if
+							(new_cur_pos == txt.size()
+							 or
+							 isspace(txt[new_cur_pos - 1]))
+						{
+							m_cur_pos = new_cur_pos;
+							break;
+						}
+			}
 			break;
 
 		case SDLK_DOWN:
@@ -147,6 +161,32 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 					?
 					end_of_last_line : begin_of_lastline+(m_cur_pos-begin_of_line);
 			}
+			break;
+
+		case SDLK_HOME:
+			if (get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
+				m_cur_pos = 0;
+			else
+				while (0 < m_cur_pos) {
+					uint32_t const preceding_cur_pos = m_cur_pos - 1;
+					if (txt[preceding_cur_pos] == '\n')
+						break;
+					else
+						m_cur_pos = preceding_cur_pos;
+				}
+			break;
+
+		case SDLK_END:
+			if (get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
+				m_cur_pos = txt.size();
+			else
+				while (m_cur_pos < txt.size()) {
+					uint32_t const following_cur_pos = m_cur_pos + 1;
+					if (txt[following_cur_pos] == '\n')
+						break;
+					else
+						m_cur_pos = following_cur_pos;
+				}
 			break;
 
 		case SDLK_RETURN:

@@ -191,7 +191,7 @@ SDL_Surface* Font_Handler::create_single_line_text_surface
 		 (&font, text.c_str(), sdl_fg, sdl_bg))
 	{
 		if (caret != -1) {
-			std::string text_caret_pos = text.substr(0, caret);
+			std::string const text_caret_pos = text.substr(0, caret);
 			render_caret(font, *surface, text_caret_pos);
 		}
 		return surface;
@@ -247,7 +247,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 		if (caret != -1) {
 			if (new_text_pos >= caret - i) {
 				int32_t caret_line_pos = caret - cur_text_pos - i;
-				std::string text_caret_pos = line.substr(0, caret_line_pos);
+				std::string const text_caret_pos = line.substr(0, caret_line_pos);
 				render_caret(font, *surface, text_caret_pos);
 				caret = -1;
 			}

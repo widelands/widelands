@@ -335,7 +335,6 @@ void EditBox::draw(RenderTarget* dst)
 		dst->brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
-	int32_t caret = has_focus() ? static_cast<int32_t>(m->caret) : -1;
 	Point pos(4, get_h() >> 1);
 
 	switch (m->align & Align_Horizontal) {
@@ -358,7 +357,7 @@ void EditBox::draw(RenderTarget* dst)
 		 -1,
 		 Widget_Cache_None,
 		 0,
-		 caret);
+		 has_focus() ? static_cast<int32_t>(m->caret) : -1);
 }
 
 
