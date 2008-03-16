@@ -38,8 +38,8 @@ struct Event_Building : Event {
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base       &);
-	void Write(Section &, Editor_Game_Base const &) const;
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &, Editor_Game_Base &) const;
 
 private:
 	Coords         m_location;

@@ -54,8 +54,8 @@ struct Event : public Named, public Referenced<Event> {
 
 	virtual int32_t option_menu(Editor_Interactive &) = 0;
 
-	virtual void Read (Section &, Editor_Game_Base       &)       = 0;
-	virtual void Write(Section &, Editor_Game_Base const &) const = 0;
+	virtual void Read (Section &, Editor_Game_Base &)       = 0;
+	virtual void Write(Section &, Editor_Game_Base &) const = 0;
 
 	virtual State run(Game *) = 0;
 

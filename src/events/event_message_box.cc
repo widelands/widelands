@@ -166,7 +166,7 @@ void Event_Message_Box::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Message_Box::Write(Section & s, Editor_Game_Base const &) const {
+void Event_Message_Box::Write(Section & s, Editor_Game_Base &) const {
 	s.set_string("type",         "message_box");
 	s.set_int   ("version",      EVENT_VERSION);
 	s.set_string("text",         m_text);

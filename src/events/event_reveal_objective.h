@@ -36,8 +36,8 @@ struct Event_Reveal_Objective : public Event {
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base       &);
-	void Write(Section &, Editor_Game_Base const &) const;
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_objective(Objective * objective) {m_objective = objective;}
 	Objective * get_objective() {return m_objective;}

@@ -42,7 +42,7 @@ void Event_Flag::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Flag::Write(Section & s, Editor_Game_Base const &) const {
+void Event_Flag::Write(Section & s, Editor_Game_Base &) const {
 	s.set_string ("type",    "flag");
 	s.set_int    ("version", EVENT_VERSION);
 	s.set_Coords ("point",   m_location);

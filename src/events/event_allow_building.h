@@ -41,8 +41,8 @@ struct Event_Allow_Building : public Event {
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base       &);
-	void Write(Section &, Editor_Game_Base const &) const;
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_allow(bool t) {m_allow = t;}
 	bool get_allow() {return m_allow;}

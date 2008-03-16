@@ -44,8 +44,8 @@ struct Event_Unhide_Area : public Event_Player_Area {
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base       &);
-	void Write(Section &, Editor_Game_Base const &) const;
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &, Editor_Game_Base &) const;
 
 private:
 	Duration duration;

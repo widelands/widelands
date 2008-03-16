@@ -60,7 +60,7 @@ void Event_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
 }
 
 
-void Event_Player_Area::Write(Section & s, Editor_Game_Base const &) const {
+void Event_Player_Area::Write(Section & s, Editor_Game_Base &) const {
 	s.set_int   ("version", EVENT_VERSION);
 	s.set_Coords("point",   m_player_area);
 	if (m_player_area.radius)

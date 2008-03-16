@@ -33,7 +33,7 @@ struct Event_Reveal_Scenario : public Event_Reveal {
 
 	State run(Game*);
 
-	void Write(Section &, Editor_Game_Base const &) const;
+	void Write(Section &, Editor_Game_Base &) const;
 };
 
 };

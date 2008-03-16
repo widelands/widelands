@@ -638,15 +638,17 @@ void Section::set_Immovable_Type
 
 
 void Section::set_Building_Index
-(char const * const name,
- Widelands::Building_Index           const value,
- Widelands::Editor_Game_Base const &       egbase,
- Widelands::Player_Number            const player,
- bool                                const duplicate)
+(char const                  * const name,
+ Widelands::Building_Index     const value,
+ Widelands::Editor_Game_Base &       egbase,
+ Widelands::Player_Number      const player,
+ bool                          const duplicate)
 {
 	create_val
 		(name,
-		 egbase.player(player).tribe().get_building_descr(value)->name().c_str(),
+		 egbase.manually_load_tribe
+		 (egbase.map().get_scenario_player_tribe(player).c_str())
+		 .get_building_descr(value)->name().c_str(),
 		 duplicate)
 		->mark_used();
 }

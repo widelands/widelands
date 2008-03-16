@@ -54,8 +54,7 @@ void Event_Move_View::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Move_View::Write(Section & s, Editor_Game_Base const & egbase) const
-{
+void Event_Move_View::Write(Section & s, Editor_Game_Base &) const {
 	s.set_string ("type",    "move_view");
 	s.set_int    ("version", EVENT_VERSION);
 	s.set_Coords ("point",   m_location);

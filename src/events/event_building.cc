@@ -47,7 +47,7 @@ void Event_Building::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Building::Write(Section & s, Editor_Game_Base const & egbase) const
+void Event_Building::Write(Section & s, Editor_Game_Base & egbase) const
 {
 	s.set_string        ("type",     "building");
 	s.set_int           ("version",  EVENT_VERSION);

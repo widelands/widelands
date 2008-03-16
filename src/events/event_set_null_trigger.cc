@@ -67,7 +67,7 @@ void Event_Set_Null_Trigger::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Set_Null_Trigger::Write(Section & s, Editor_Game_Base const &) const {
+void Event_Set_Null_Trigger::Write(Section & s, Editor_Game_Base &) const {
 	assert(m_trigger);
 	s.set_string ("type",    "set_null_trigger");
 	s.set_int    ("version", EVENT_VERSION);

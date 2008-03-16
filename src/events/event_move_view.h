@@ -37,8 +37,8 @@ struct Event_Move_View : public Event {
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base       &);
-	void Write(Section &, Editor_Game_Base const &) const;
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_location(Coords const c) {m_location = c;}
 	Coords location() {return m_location;}

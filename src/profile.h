@@ -173,7 +173,7 @@ public:
 	void set_Building_Index
 		(char const * name,
 		 Widelands::Building_Index value,
-		 Widelands::Editor_Game_Base const &, Widelands::Player_Number,
+		 Widelands::Editor_Game_Base &, Widelands::Player_Number,
 		 bool duplicate = false);
 	void set_Building_Type
 		(char const * name,

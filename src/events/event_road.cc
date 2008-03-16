@@ -77,7 +77,7 @@ void Event_Road::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Event_Road::Write(Section & s, Editor_Game_Base const &) const {
+void Event_Road::Write(Section & s, Editor_Game_Base &) const {
 	s.set_string ("type",    "road");
 	s.set_int    ("version", EVENT_VERSION);
 	s.set_Coords ("point",   m_path.get_start());

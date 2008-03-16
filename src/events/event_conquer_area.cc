@@ -41,9 +41,7 @@ Event::State Event_Conquer_Area::run(Game* game) {
 }
 
 
-void Event_Conquer_Area::Write
-	(Section & s, Editor_Game_Base const & egbase) const
-{
+void Event_Conquer_Area::Write(Section & s, Editor_Game_Base & egbase) const {
 	s.set_string("type", "conquer_area");
 	Event_Player_Area::Write(s, egbase);
 }

@@ -29,8 +29,8 @@ struct Event_Reveal : public Event {
 		: Event(Name, S)
 	{}
 
-	void Read (Section &, Editor_Game_Base       &);
-	void Write(Section &, Editor_Game_Base const &) const;
+	void Read (Section &, Editor_Game_Base &);
+	void Write(Section &, Editor_Game_Base &) const;
 
 protected:
 	std::string reveal;

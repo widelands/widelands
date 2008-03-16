@@ -1482,7 +1482,8 @@ public:
 		}
 	}
 
-	void sendPlayerCommand(Widelands::PlayerCommand*) {
+	__attribute__((noreturn)) void sendPlayerCommand(Widelands::PlayerCommand *)
+	{
 		throw wexception("Trying to send a player command during replay");
 	}
 	int32_t getFrametime() {
