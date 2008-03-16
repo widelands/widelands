@@ -140,6 +140,12 @@ struct Panel : public Object {
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
 
+	/// \Returns whether a certain key is currently down.
+	///
+	/// \note Never call this function from a keyboard event handler (a function
+	/// that overrides bool handle_key(bool, SDL_keysym code)) to get the state
+	/// of a modifier key. In that case code.mod must be used. It contains the
+	/// state of the modifier keys at the time of the event.
 	bool get_key_state(SDLKey) const;
 
 	void set_handle_mouse(bool yes);
