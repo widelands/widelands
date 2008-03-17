@@ -898,17 +898,27 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 	if (m_commandline.count("editor")>0) {
 		m_editor_filename = m_commandline["editor"];
+		if (m_editor_filename.size() and *m_editor_filename.rbegin() == '/')
+			m_editor_filename.erase(m_editor_filename.size() - 1);
 		editor_commandline=1;
 		m_commandline.erase("editor");
 	}
 
 	if (m_commandline.count("loadgame") > 0) {
 		m_loadgame_filename = m_commandline["loadgame"];
+		if (m_loadgame_filename.empty())
+			throw wexception("empty value of command line parameter --loadgame");
+		if (*m_loadgame_filename.rbegin() == '/')
+			m_loadgame_filename.erase(m_loadgame_filename.size() - 1);
 		m_commandline.erase("loadgame");
 	}
 
 	if (m_commandline.count("tutorial") > 0) {
 		m_tutorial_filename = m_commandline["tutorial"];
+		if (m_tutorial_filename.empty())
+			throw wexception("empty value of command line parameter --tutorial");
+		if (*m_tutorial_filename.rbegin() == '/')
+			m_tutorial_filename.erase(m_tutorial_filename.size() - 1);
 		m_commandline.erase("tutorial");
 	}
 
