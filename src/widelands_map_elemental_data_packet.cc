@@ -35,13 +35,13 @@ void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map* map)
 throw (_wexception)
 {
 	Profile prof;
+	i18n::Textdomain textdomain("maps");
 	prof.read("elemental", 0, fs);
 	Section & s = *prof.get_section("global");
 
 	try {
 		int32_t const packet_version = s.get_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			i18n::Textdomain textdomain("maps");
 			map->m_width       = s.get_int   ("map_w");
 			map->m_height      = s.get_int   ("map_h");
 			map->set_nrplayers  (s.get_int   ("nr_players"));
