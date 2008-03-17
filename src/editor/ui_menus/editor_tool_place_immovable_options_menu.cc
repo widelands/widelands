@@ -119,7 +119,8 @@ Editor_Tool_Place_Immovable_Options_Menu::
 */
 void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it
-	//  FIXME needs is the key state at the time the mouse was clicked.
+	//  FIXME needs is the key state at the time the mouse was clicked. See the
+	//  FIXME usage comment for get_key_state.
 	const bool multiselect =
 		get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
 	if (not t and (not multiselect or m_pit.get_nr_enabled() == 1))

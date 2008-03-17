@@ -84,10 +84,18 @@ int32_t Fullscreen_Menu_CampaignSelect::get_campaign()
 }
 
 
+/// Textual descriptions of difficulty levels.
+static char const * const dif_descriptions[] = {
+	_("[No value found]"),
+	_("Easy living"),
+	_("Be vigilant"),
+	_("Hard struggle")
+};
+
 /**
  * an entry of campaignlist got selected.
  */
-void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t i)
+void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 {
 	if (list.get_selected()) { //gets false, if the selected entry has no value.
 		campaign=i;
@@ -116,20 +124,12 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t i)
 		sprintf(cdifficulty, "campdiff%i", i);
 		sprintf(cdescription, "campdesc%i", i);
 
-		// Convert difficulty level to something understandable
-		std::string const dif_descriptions[] = {
-			_("[No value found]"),
-			_("Easy living"),
-			_("Be vigilant"),
-			_("Hard struggle")
-		};
-
 		uint32_t dif = s->get_int(cdifficulty);
 		if (sizeof(dif_descriptions) / sizeof(*dif_descriptions) <= dif)
 			dif = 0;
 
 		tacampname .set_text(s->get_string(cname,        _("[No value found]")));
-		tadifficulty.set_text(dif_descriptions[dif]);
+		tadifficulty.set_text(i18n::translate(dif_descriptions[dif]));
 		tacampdescr.set_text(s->get_string(cdescription, _("[No value found]")));
 
 	} else { // normally never here

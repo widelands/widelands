@@ -145,7 +145,11 @@ struct Panel : public Object {
 	/// \note Never call this function from a keyboard event handler (a function
 	/// that overrides bool handle_key(bool, SDL_keysym code)) to get the state
 	/// of a modifier key. In that case code.mod must be used. It contains the
-	/// state of the modifier keys at the time of the event.
+	/// state of the modifier keys at the time of the event. Unfortunately there
+	/// is no information about modifier key states in mouse events (tracker
+	/// item #1916453). That is "a huge oversight" in SDL 1.2 and a fix is
+	/// promised in SDL 1.3:
+	/// http://lists.libsdl.org/pipermail/sdl-libsdl.org/2008-March/064560.html
 	bool get_key_state(SDLKey) const;
 
 	void set_handle_mouse(bool yes);

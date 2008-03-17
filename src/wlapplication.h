@@ -158,8 +158,7 @@ struct WLApplication {
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	const bool get_key_state(const SDLKey key) const
-		{return SDL_GetKeyState(0)[key];}
+	bool get_key_state(SDLKey const key) const {return SDL_GetKeyState(0)[key];}
 
 	//@{
 	void warp_mouse(Point);

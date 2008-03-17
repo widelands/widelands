@@ -181,7 +181,8 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing(int32_t, bool) {}
 
 void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it
-	//  FIXME needs is the key state at the time the mouse was clicked.
+	//  FIXME needs is the key state at the time the mouse was clicked. See the
+	//  FIXME usage comment for get_key_state.
 	const bool multiselect =
 		get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
 	if (not t and (not multiselect or m_tool.get_nr_enabled() == 1))
