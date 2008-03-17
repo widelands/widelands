@@ -117,7 +117,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t i)
 		sprintf(cdescription, "campdesc%i", i);
 
 		// Convert difficulty level to something understandable
-		static const std::string dif_descriptions[] = {
+		std::string const dif_descriptions[] = {
 			_("[No value found]"),
 			_("Easy living"),
 			_("Be vigilant"),
