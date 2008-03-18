@@ -312,14 +312,14 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 
 		loaderUI.step(_("Configuring players"));
 		for (uint32_t i = 0; i < settings.players.size(); ++i) {
-			const PlayerSettings& player = settings.players[i];
+			PlayerSettings const & playersettings = settings.players[i];
 
 			if
-				(player.state == PlayerSettings::stateClosed ||
-				 player.state == PlayerSettings::stateOpen)
+				(playersettings.state == PlayerSettings::stateClosed ||
+				 playersettings.state == PlayerSettings::stateOpen)
 				continue;
 
-			add_player(i+1, player.tribe, player.name);
+			add_player(i + 1, playersettings.tribe, playersettings.name);
 			get_player(i+1)->init(false);
 		}
 

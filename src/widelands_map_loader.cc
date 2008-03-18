@@ -64,8 +64,8 @@
 
 namespace Widelands {
 
-WL_Map_Loader::WL_Map_Loader(FileSystem & fs, Map* map) :
-Map_Loader("", *map), m_fs(fs), m_mol(0)
+WL_Map_Loader::WL_Map_Loader(FileSystem & fs, Map * const m)
+	: Map_Loader("", *m), m_fs(fs), m_mol(0)
 {}
 
 

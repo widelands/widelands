@@ -118,6 +118,25 @@ template<typename Base> struct basic_FileRead : public Base {
 	}
 	char const * CString() {return CString(Pos::Null());}
 
+char * ReadLine() {
+	if (EndOfFile())
+		return 0;
+	char * result = data + filepos;
+	for (; data[filepos] and data[filepos] != '\n'; ++filepos)
+		if (data[filepos] == '\r') {
+			data[filepos] = '\0';
+			++filepos;
+			if (data[filepos] == '\n')
+				break;
+			else
+				throw typename Base::_data_error
+					(__FILE__, __LINE__, "CR not immediately followed by LF");
+		}
+	data[filepos] = '\0';
+	++filepos;
+	return result;
+}
+
 private:
 	char * data;
 	size_t length;

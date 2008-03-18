@@ -106,11 +106,12 @@ void ProductionSite_Descr::parse
 		is_only_production_site() ?
 		sglobal->get_safe_string("worker") : sglobal->get_string("worker", "");
 
-	std::vector<std::string> workers(split_string(workerstr, ","));
-	const std::vector<std::string>::const_iterator workers_end = workers.end();
+	std::vector<std::string> workernames(split_string(workerstr, ","));
+	std::vector<std::string>::const_iterator const workernames_end =
+		workernames.end();
 	for
-		(std::vector<std::string>::iterator it = workers.begin();
-		 it != workers_end;
+		(std::vector<std::string>::iterator it = workernames.begin();
+		 it != workernames_end;
 		 ++it)
 		m_workers.push_back(*it);
 

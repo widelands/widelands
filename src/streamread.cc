@@ -104,21 +104,3 @@ std::string StreamRead::String()
 
 	return x;
 }
-
-bool StreamRead::ReadLine(char * buf, const char * const buf_end) {
-	assert(buf < buf_end);
-
-	if (EndOfFile()) return false;
-	for (char c; Data(&c, 1) and c != '\n';) {
-		if (c == '\r') continue;
-		*buf = c;
-		if (c == 0)
-			throw null_in_line();
-		if (++buf == buf_end) {
-			buf[-1] = 0;
-			throw Buffer_Overflow();
-		}
-	}
-	*buf = 0;
-	return true;
-}

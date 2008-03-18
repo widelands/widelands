@@ -883,25 +883,19 @@ void Profile::read
  const char * const global_section,
  FileSystem & fs)
 {
+	uint32_t linenr = 0;
 	try {
 		FileRead fr;
 		fr.Open(fs, filename);
 
-		// line can become quite big. But this should be enough
-		//  Previously this was allocated with new and then simply leaked.
-		//  We (Valgrind and I) did not like that.
-		char buffer[1024 * 30];
-		const char * const buf_end = buffer + sizeof(buffer);
-		char * line = buffer;
 		char *p = 0;
-		uint32_t linenr = 0;
 		Section *s = 0;
 
 		bool reading_multiline = 0;
 		std::string data;
-		std::string key;
+		char * key;
 		bool translate_line = false;
-		while (fr.ReadLine(line, buf_end)) {
+		while (char * line = fr.ReadLine()) {
 			++linenr;
 
 			if (!reading_multiline)
@@ -923,8 +917,7 @@ void Profile::read
 					rtrim(p);
 					while (*line != '\'' && *line != '"') {
 						if (*line == 0)
-							throw wexception
-								("line %i: runaway multiline string", linenr);
+							throw wexception("runaway multiline string");
 						if (*line == '_')
 							translate_line = true;
 						++line;
@@ -943,7 +936,7 @@ void Profile::read
 				} else {
 					tail = strchr(p, '=');
 					if (!tail)
-						throw wexception("line %i: invalid syntax: %s", linenr, line);
+						throw wexception("invalid syntax: %s", line);
 					*tail++ = 0;
 					key = p;
 					if (*tail == '_') {
@@ -957,28 +950,25 @@ void Profile::read
 
 					// first, check for multiline string
 					if
-						(strlen(tail) >= 2
+						((tail[0] == '\'' or tail[0] == '"')
 						 and
-						 ((tail[0] == '\'' or tail[0] == '\"')
-						  and
-						  (tail[1] == '\'' or tail[1] == '\"')))
+						 (tail[1] == '\'' or tail[1] == '"'))
 					{
 						reading_multiline = true;
 						tail += 2;
 					}
 
 					// then remove surrounding '' or ""
-					if (tail[0] == '\'' || tail[0] == '\"') {
+					if (tail[0] == '\'' || tail[0] == '"')
 						++tail;
-					}
 				}
 				if (tail) {
 					char *eot = tail+strlen(tail)-1;
-					if (*eot == '\'' || *eot == '\"') {
+					if (*eot == '\'' || *eot == '"') {
 						*eot = 0;
-						if (strlen(tail)) {
+						if (*tail) {
 							char *eot2 = tail+strlen(tail)-1;
-							if (*eot2 == '\'' || *eot2 == '\"') {
+							if (*eot2 == '\'' || *eot2 == '"') {
 								reading_multiline = false;
 								*eot2 = 0;
 							}
@@ -990,20 +980,19 @@ void Profile::read
 						if (global_section)
 							s = create_section(global_section, true);
 						else
-							throw wexception("line %i: key %s outside section", linenr, p);
+							throw wexception("key %s outside section", p);
 					}
 
-					if (translate_line && strlen(tail))
+					if (translate_line && *tail)
 						data += i18n::translate(tail);
 					else
 						data += tail;
 					if (s && ! reading_multiline) { // error() may or may not throw
-						s->create_val(key.c_str(), data.c_str(), true); // may create duplicate
-						data = "";
+						s->create_val(key, data.c_str(), true);
+						data.clear();
 					}
-				} else {
-					throw wexception("line %i: syntax error", linenr);
-				}
+				} else
+					throw wexception("syntax error");
 			}
 		}
 	}
@@ -1013,7 +1002,7 @@ void Profile::read
 		log("There's no configuration file, using default values.\n");
 	}
 	catch (std::exception &e) {
-		error("%s: %s", filename, e.what());
+		error("%s:%u: %s", filename, linenr, e.what());
 	}
 }
 

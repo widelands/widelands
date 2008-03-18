@@ -69,7 +69,7 @@ throw (_wexception)
 						throw wexception
 							("references nonexistent trigger \"%s\"", trigger_name);
 				} catch (_wexception const & e) {
-					throw wexception("%s: %s", e.what());
+					throw wexception("%s: %s", name, e.what());
 				}
 			}
 		} else

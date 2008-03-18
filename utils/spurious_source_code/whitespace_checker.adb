@@ -148,36 +148,30 @@ procedure Whitespace_Checker is
       Read_Code_Loop : loop
          case Previous_Character is
             when '(' | '[' =>
-               if
-                 Current_Character = HT  or
-                 Current_Character = ' ' or
-                 Current_Character = '#' or
-                 Current_Character = ':' or
-                 Current_Character = '?' or
-                 Current_Character = '%' or
-                 Current_Character = ','
-               then
-                  Put_Error
-                    ("""(" & Current_Character & """ is not allowed");
-               end if;
+               case Current_Character is
+                  when HT | ' ' | '#' | ':' | '?' | '%' | ',' =>
+                     Put_Error
+                       ('"' & Previous_Character & Current_Character &
+                        """ is not allowed");
+                  when others                                 =>
+                     null;
+               end case;
             when '}'       =>
-               if
-                 Current_Character /= LF  and
-                 Current_Character /= ' ' and
-                 Current_Character /= ';' and
-                 Current_Character /= ','
-               then
-                  Put_Error
-                    ("""}" & Current_Character & """ is not allowed");
-               end if;
+               case Current_Character  is
+                  when LF | ' ' | ';' | ',' =>
+                     null;
+                  when others               =>
+                     Put_Error
+                       ("""}" & Current_Character & """ is not allowed");
+               end case;
             when ','       =>
-               if
-                 Current_Character /= LF  and
-                 Current_Character /= ' '
-               then
-                  Put_Error
-                    ("""," & Current_Character & """ is not allowed");
-               end if;
+               case Current_Character is
+                  when LF | ' '  =>
+                     null;
+                  when others =>
+                     Put_Error
+                       ("""," & Current_Character & """ is not allowed");
+               end case;
             when others    =>
                null;
          end case;
@@ -190,13 +184,12 @@ procedure Whitespace_Checker is
                end if;
                exit Read_Code_Loop;
             when '{'       =>
-               if
-                 Previous_Character /= LF and
-                 Previous_Character /= HT and
-                 Previous_Character /= ' '
-               then
-                  Put_Error ("""" & Previous_Character & "{"" not allowed");
-               end if;
+               case Previous_Character is
+                  when LF | HT | ' ' =>
+                     null;
+                  when others        =>
+                     Put_Error ("""" & Previous_Character & "{"" not allowed");
+               end case;
                if Brace_Level = Brace_Index'Last then
                   Raise_Exception
                     (Giving_Up'Identity, "too many levels of braces");
@@ -245,20 +238,23 @@ procedure Whitespace_Checker is
             when '''       =>
                Next_Character;
                case Current_Character is
-                  when LF  =>
+                  when LF     =>
                      Put_Error ("unterminated character constant");
                      exit Read_Code_Loop;
-                  when ''' =>
+                  when '''    =>
                      Raise_Exception
                        (Giving_Up'Identity, "invalid character constant");
-                  when '\' =>
+                  when '\'    =>
                      Next_Character;
-                     if Current_Character = LF then
-                        Put_Error
-                          ("unterminated escape sequence in character " &
-                           "constant");
-                        exit Read_Code_Loop;
-                     end if;
+                     case Current_Character is
+                        when '0' | ''' | '\' | 'n' | 'r' | 't' | 'v' =>
+                           null;
+                        when others                                  =>
+                           Put_Error
+                             ("illegal escaped character constant: " &
+                              Current_Character'Img);
+                           exit Read_Code_Loop when Current_Character = LF;
+                     end case;
                   when others =>
                      null;
                end case;
@@ -272,17 +268,20 @@ procedure Whitespace_Checker is
                loop
                   Next_Character;
                   case Current_Character is
-                     when LF  =>
+                     when LF     =>
                         Put_Error ("unterminated string constant");
                         exit Read_Code_Loop;
-                     when '\' =>
+                     when '\'    =>
                         Next_Character;
-                        if Current_Character = LF then
-                           Put_Error
-                             ("unterminated escape sequence in string " &
-                              "constant constant");
-                           exit Read_Code_Loop;
-                        end if;
+                        case Current_Character is
+                           when '0' | '"' | '\' | 'n' | 'r' | 't' | 'v' =>
+                              null;
+                           when others                                  =>
+                              Put_Error
+                                ("illegal escaped character in string " &
+                                 "constant: " & Current_Character'Img);
+                              exit Read_Code_Loop when Current_Character = LF;
+                        end case;
                      when others =>
                         exit when Current_Character = '"';
                   end case;
@@ -421,7 +420,7 @@ begin
                case Previous_Character is
                   when ',' | ';' | '}' =>
                      Allowed_Indentation_Increase :=  0;
-                  when others    =>
+                  when others          =>
                      Allowed_Indentation_Increase :=  1;
                end case;
                Next_Line;
@@ -429,13 +428,13 @@ begin
       end;
    end loop;
 exception
-   when Ada.IO_Exceptions.End_Error =>
+   when Ada.IO_Exceptions.End_Error  =>
       Put_Error ("unexpected end of file");
    when Ada.IO_Exceptions.Name_Error =>
       Put_Error ("could not open file");
-   when Error : Giving_Up        =>
+   when Error : Giving_Up            =>
       Put_Error (Exception_Message (Error));
-   when others =>
+   when others                       =>
       Put_Error
         ("INTERNAL ERROR: " & Argument (1) & ':' & Current_Line_Number'Img);
 end Whitespace_Checker;
