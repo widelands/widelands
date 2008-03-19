@@ -1,18 +1,18 @@
 # Widelands po/fr_FR/texts.po
 # Copyright (C) 2007 Widelands Development Team.
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net.TLD>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-02-24 18:30+0100\n"
+"PO-Revision-Date: 2008-03-19 16:07-0500\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../../txts/COPYING:1
 msgid "License"
@@ -268,7 +268,7 @@ msgstr "- Sur quelle carte vous jouiez"
 
 #: ../../txts/README:97
 msgid "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-game. For more explanation, see the section on Replays below."
-msgstr ""
+msgstr "- envoyez-nous un fichier compressé (zip, gzip, bzip2) d'un enregistrement playback (replay) si le bug est apparu dans le jeu. Pour plus d'informations, voir la section Replays ci-dessous."
 
 #: ../../txts/README:99
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
@@ -276,19 +276,19 @@ msgstr "- Envoyez nous un enregistrement compressé de votre partie (zip, gzip, 
 
 #: ../../txts/README:104
 msgid "Replays</p>"
-msgstr ""
+msgstr "Replays</p>"
 
 #: ../../txts/README:107
 msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands enregistre tous vos parties dans deux fichiers. L'un de ces fichiers a une extension .wrpl.wgf et contient une sauvegarde initiale. L'autre fichier a une extension .wrpl et contient toutes les commandes qui ont été exécutées par tous les joueurs, comme la construction d'une route ou l'attaque d'un ennemi. Le reste des noms des fichiers vous dira quand le jeu a été démarré."
 
 #: ../../txts/README:109
 msgid "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
-msgstr ""
+msgstr "En utilisant l'option \"Watch Replay\" dans le menu principal, une partie jouée précédemment sera précisément reconstruite pour que vous puissiez l'observer. Notez, toutefois, que même des petits changements dans les fichiers de données ou des exécutables de Widelands peuvent causer l'incompatibilité d'un fichier de Replay, et le rendre hors-synchronisation. C'est similaire à la façon dont des jeux réseaux peuvent souffrir de désynchronisation si l'un des joueurs a une version différente du jeu."
 
 #: ../../txts/README:111
 msgid "Replays are a very useful to tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
-msgstr ""
+msgstr "Les Replays sont un outil très utiles pour trouver les bugs dans le code de la logique du jeu. Nous vous demandons donc d'attacher des fichiers de Replay à tous les rapports de bug que vous nous envoyez. Les fichiers Replay sont sauvés dans le répertoire ~/.widelands/replays de votre répertoire personnel sous Linux et dans le sous-répertoire replays de votre installation de Widelands sous Windows."
 
 #: ../../txts/README:115
 msgid "Creating a Session Record</p>"
@@ -320,123 +320,123 @@ msgstr "Développement"
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Équipe de développement de Widelands"
 
 #: ../../txts/developers:9
 msgid "Chieftain"
-msgstr ""
+msgstr "Chef"
 
 #: ../../txts/developers:15
 msgid "Elders"
-msgstr ""
+msgstr "Sages"
 
 #: ../../txts/developers:19
 msgid "Graphics"
-msgstr ""
+msgstr "Graphismes"
 
 #: ../../txts/developers:24
 msgid "Homepage"
-msgstr ""
+msgstr "Page d'accueil"
 
 #: ../../txts/developers:29
 msgid "Sound"
-msgstr ""
+msgstr "Son"
 
 #: ../../txts/developers:32
 msgid "vacant"
-msgstr ""
+msgstr "inoccupé"
 
 #: ../../txts/developers:36
 msgid "Translation"
-msgstr ""
+msgstr "Traduction"
 
 #: ../../txts/developers:44
 msgid "Coders"
-msgstr ""
+msgstr "Développeurs"
 
 #: ../../txts/developers:66
 msgid "Graphicians"
-msgstr ""
+msgstr "Graphistes"
 
 #: ../../txts/developers:88
 msgid "Musicians"
-msgstr ""
+msgstr "Musiciens"
 
 #: ../../txts/developers:95
 msgid "Sound Effects"
-msgstr ""
+msgstr "Effets sonores"
 
 #: ../../txts/developers:101
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Cartes et missions"
 
 #: ../../txts/developers:109
 msgid "Barbarian Campaign Story"
-msgstr ""
+msgstr "Histoire de la campagne des Barbares"
 
 #: ../../txts/developers:115
 msgid "Translators"
-msgstr ""
+msgstr "Traducteurs"
 
 #: ../../txts/developers:119
 msgid "Czech"
-msgstr ""
+msgstr "Tchèques"
 
 #: ../../txts/developers:125
 msgid "Dutch"
-msgstr ""
+msgstr "Néérlandais"
 
 #: ../../txts/developers:131
 msgid "Finnish"
-msgstr ""
+msgstr "Finnois"
 
 #: ../../txts/developers:136
 msgid "French"
-msgstr ""
+msgstr "Français"
 
 #: ../../txts/developers:142
 msgid "Galician"
-msgstr ""
+msgstr "Galicien"
 
 #: ../../txts/developers:147
 msgid "German"
-msgstr ""
+msgstr "Allemand"
 
 #: ../../txts/developers:154
 msgid "Hebrew"
-msgstr ""
+msgstr "Hébreux"
 
 #: ../../txts/developers:159
 msgid "Hungarian"
-msgstr ""
+msgstr "Hongrois"
 
 #: ../../txts/developers:164
 msgid "Polish"
-msgstr ""
+msgstr "Polonais"
 
 #: ../../txts/developers:170
 msgid "Russian"
-msgstr ""
+msgstr "Russe"
 
 #: ../../txts/developers:175
 msgid "Spanish"
-msgstr ""
+msgstr "Espagnol"
 
 #: ../../txts/developers:180
 msgid "Slovak"
-msgstr ""
+msgstr "Slovaque"
 
 #: ../../txts/developers:185
 msgid "Swedish"
-msgstr ""
+msgstr "Suédois"
 
 #: ../../txts/developers:193
 msgid "Packagers"
-msgstr ""
+msgstr "Paqueteurs"
 
 #: ../../txts/developers:212
 msgid "Other"
-msgstr ""
+msgstr "Autres"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
@@ -457,11 +457,11 @@ msgstr "Cet Editeur est destiné aux joueurs désireux de concevoir leurs propre
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
-msgstr ""
+msgstr "Veuillez jeter un oeil à notre manuel utilisateur dans nos pages du wiki:"
 
 #: ../../txts/editor_readme:14
 msgid "Those pages might be more complete and up to date than this file. And there you further can find a short tutorial about building a map."
-msgstr ""
+msgstr "Ces pages pourraient être plus complètes et à jour que ce fichier. Vous pourrez aussi y trouver un court tutorial sur la création de cartes."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -521,40 +521,41 @@ msgstr "ALT      (Tenir) Selectionne l'outil secondaire"
 
 #: ../../txts/gametips:13
 msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Certains bâtiments, comme le vignoble, ont de très petites zones de travail. Si le bâtiment est entourés d'arbres ou de routes, la production s'arrêtera."
 
 #: ../../txts/gametips:17
 msgid "Keep an eye on fisherman's huts; after fish resources are exhausted in the working area, production will stop."
-msgstr ""
+msgstr "Gardez un oeil sur les cabanes de pêcheurs, si les ressources de poisson sont épuisées dans la zone de travail, la production s'arrêtera."
 
 #: ../../txts/gametips:21
 msgid "The building process will only start after a road is built to the construction site."
-msgstr ""
+msgstr "Le processus de construction commence seulement après qu'une route soit construite jusqu'au site de construction."
 
 #: ../../txts/gametips:25
 msgid "Be sure to send a geologist to survey sites before building a well or a mine."
-msgstr ""
+msgstr "Assurez-vous d'envoyer un géologue étudier les sites avant de construire une mine ou un puits."
 
 #: ../../txts/gametips:29
 msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Barracks, etc."
-msgstr ""
+msgstr "Votre territoire peut être étendu en construisant des bâtiments de guerre - Poste de garde, forteresse, casernes, etc."
 
 #: ../../txts/gametips:33
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Les mineurs ne travaillent que s'ils ont à manger."
 
 #: ../../txts/gametips:37
 msgid "Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares."
-msgstr ""
+msgstr "Divisez vos routes en plus petites sections en plantant des drapeaux. Cela accélèrera le transport de vos biens."
 
 #: ../../txts/gametips:41
 msgid "Always build a forester and a ranger's hut, so you will not run out of trunks and food."
-msgstr ""
+msgstr "Construisez toujours une cabane de forrestier et une hutte de garde champêtre pour ne pas tomber à bout de troncs et de viande."
 
 #: ../../txts/gametips:45
 msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
-msgstr ""
+msgstr "Des questions? Venez nous rendre visite sur www.widelands.org. Vous y trouverez nos FAQs, le wiki et bien sûr le forum de la communauté."
 
 #: ../../txts/gametips:49
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
-msgstr ""
+msgstr "Utilisez les boutons de priorité dans les fenêtre des bâtiments pour ajuster la livraison de biens spécifiques."
+
