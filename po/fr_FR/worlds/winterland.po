@@ -1,18 +1,18 @@
 # Widelands po/fr_FR/worlds/winterland.po
 # Copyright (C) 2007 Widelands Development Team.
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Emmanuel Andry <eandry@mandriva.org.TLD>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2006-12-10 21:02+0100\n"
+"PO-Revision-Date: 2008-03-19 16:09-0500\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../../../worlds/winterland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -111,7 +111,7 @@ msgstr "Arbre"
 
 #: ../../../worlds/winterland/bobs/wolf/conf:1
 msgid "Wolf"
-msgstr ""
+msgstr "Loup"
 
 #: ../../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
@@ -148,3 +148,4 @@ msgstr "Eau"
 #: ../../../worlds/winterland/resconf:41
 msgid "Fish"
 msgstr "Poisson"
+

@@ -7,14 +7,12 @@ msgstr ""
 "Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2006-12-10 21:03+0100\n"
+"PO-Revision-Date: 2008-03-19 16:08-0500\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../../../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -123,7 +121,7 @@ msgstr "Arbre"
 
 #: ../../../worlds/greenland/bobs/wolf/conf:1
 msgid "Wolf"
-msgstr ""
+msgstr "Loup"
 
 #: ../../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -160,3 +158,4 @@ msgstr "Eau"
 #: ../../../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Poisson"
+
