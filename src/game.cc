@@ -773,9 +773,9 @@ void Game::sample_statistics()
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy* eco = plr->get_economy_by_number(j);
 			const Tribe_Descr & tribe = plr->tribe();
-			for (int32_t wareid = 0; wareid < tribe.get_nrwares(); ++wareid)
+			for (Ware_Index::value_t wareid = 0; wareid < tribe.get_nrwares(); ++wareid)
 				wastock += eco->stock_ware(wareid);
-			for (int32_t workerid = 0; workerid < tribe.get_nrworkers(); ++workerid) {
+			for (Ware_Index::value_t workerid = 0; workerid < tribe.get_nrworkers(); ++workerid) {
 				if (tribe.get_worker_descr(workerid)->get_worker_type() == Worker_Descr::CARRIER)
 					continue;
 				wostock += eco->stock_worker(workerid);

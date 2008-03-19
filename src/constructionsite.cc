@@ -151,7 +151,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 		molog
 			("* Owner: %i (player nr)\n",
 			 m_wares[i]->get_owner()->get_player_number());
-		molog("* Ware: %i (index)\n", m_wares[i]->get_ware());
+		molog("* Ware: %u (index)\n", m_wares[i]->get_ware().value());
 		molog("* Size: %i\n", m_wares[i]->get_size());
 		molog("* Filled: %i\n", m_wares[i]->get_filled());
 		molog("* Consume Interval: %i\n", m_wares[i]->get_consume_interval());

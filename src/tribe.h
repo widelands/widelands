@@ -66,7 +66,7 @@ struct Tribe_Descr {
 	__attribute__ ((deprecated)) const std::string & get_name() const throw () {return m_name;}
 	const World & world() const throw () {return m_world;}
 
-	int32_t get_nrworkers() const {return m_workers.get_nitems();}
+	Ware_Index::value_t get_nrworkers() const {return m_workers.get_nitems();}
 	Worker_Descr * get_worker_descr(Ware_Index const index) const {
 		return m_workers.get(index);
 	}
@@ -76,7 +76,7 @@ struct Tribe_Descr {
 	int32_t get_worker_index(const char * const workername) const {
 		return m_workers.get_index(workername);
 	}
-	int32_t get_nrwares() const {return m_wares.get_nitems();}
+	Ware_Index::value_t get_nrwares() const {return m_wares.get_nitems();}
 	Ware_Index ware_index(char const * const warename) const {
 		return m_wares.get_index(warename);
 	}

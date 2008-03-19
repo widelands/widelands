@@ -1631,7 +1631,8 @@ void Worker::gowarehouse_update(Game* g, State* state)
 	start_task_idle(g, get_animation("idle"), 1000);
 }
 
-void Worker::gowarehouse_signalimmediate(Game* g, State* state, const std::string& signal)
+void Worker::gowarehouse_signalimmediate
+	(Game *, State *, std::string const & signal)
 {
 	if (signal == "transfer") {
 		// We are assigned a transfer, make sure our supply disappears immediately

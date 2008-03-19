@@ -487,7 +487,7 @@ struct WaresQueue {
 	WaresQueue(PlayerImmovable* bld);
 	~WaresQueue();
 
-	int32_t get_ware() const {return m_ware;}
+	Ware_Index get_ware() const {return m_ware;}
 	uint32_t get_size            () const throw () {return m_size;}
 	uint32_t get_filled          () const throw () {return m_filled;}
 	uint32_t get_consume_interval() const throw () {return m_consume_interval;}
@@ -515,7 +515,7 @@ private:
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
 	PlayerImmovable * m_owner;
-	int32_t               m_ware; ///< ware ID
+	Ware_Index        m_ware;    ///< ware ID
 	uint32_t m_size;             ///< number of items that fit into the queue
 	uint32_t m_filled;           ///< number of items that are currently in the queue
 	uint32_t m_consume_interval; ///< time in ms between consumption at full speed
@@ -551,11 +551,11 @@ struct Economy {
 	void add_flag(Flag *flag);
 	void remove_flag(Flag *flag);
 
-	void add_wares(int32_t id, int32_t count = 1);
-	void remove_wares(int32_t id, int32_t count = 1);
+	void    add_wares  (Ware_Index, uint32_t count = 1);
+	void remove_wares  (Ware_Index, uint32_t count = 1);
 
-	void    add_workers(int32_t id, int32_t count = 1);
-	void remove_workers(int32_t id, int32_t count = 1);
+	void    add_workers(Ware_Index, uint32_t count = 1);
+	void remove_workers(Ware_Index, uint32_t count = 1);
 
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);

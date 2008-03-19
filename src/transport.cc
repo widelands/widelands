@@ -1839,31 +1839,30 @@ WaresQueue IMPLEMENTATION
  * Pre-initialize a WaresQueue
 */
 WaresQueue::WaresQueue(PlayerImmovable* bld)
-{
-	m_owner = bld;
-	m_ware = -1;
-	m_size = 0;
-	m_filled = 0;
-	m_request = 0;
-	m_consume_interval = 0;
-
-	m_callback_fn = 0;
-	m_callback_data = 0;
-}
+	:
+	m_owner           (bld),
+	m_ware            (Ware_Index::Null()),
+	m_size            (0),
+	m_filled          (0),
+	m_request         (0),
+	m_consume_interval(0),
+	m_callback_fn     (0),
+	m_callback_data   (0)
+{}
 
 /**
  * cleanup() must be called!
 */
 WaresQueue::~WaresQueue()
 {
-	assert(m_ware == -1);
+	assert(not m_ware);
 }
 
 /**
  * Initialize the queue. This also issues the first request, if necessary.
 */
 void WaresQueue::init(const int32_t ware, const uint32_t size) {
-	assert(m_ware == -1);
+	assert(not m_ware);
 
 	m_ware = ware;
 	m_size = size;
@@ -1876,7 +1875,7 @@ void WaresQueue::init(const int32_t ware, const uint32_t size) {
  * Clear the queue appropriately.
 */
 void WaresQueue::cleanup() {
-	assert(m_ware != -1);
+	assert(m_ware);
 
 	if (m_filled)
 		m_owner->get_economy()->remove_wares(m_ware, m_filled);
@@ -1886,7 +1885,7 @@ void WaresQueue::cleanup() {
 
 	update();
 
-	m_ware = -1;
+	m_ware = Ware_Index::Null();
 }
 
 /**
@@ -1894,7 +1893,7 @@ void WaresQueue::cleanup() {
  * You must call this after every call to set_*()
 */
 void WaresQueue::update() {
-	assert(m_ware != -1);
+	assert(m_ware);
 
 	if (m_filled > m_size) {
 		m_owner->get_economy()->remove_wares(m_ware, m_filled - m_size);
@@ -1954,7 +1953,7 @@ void WaresQueue::request_callback
 */
 void WaresQueue::remove_from_economy(Economy* e)
 {
-	if (m_ware == -1)
+	if (not m_ware)
 		return;
 
 	e->remove_wares(m_ware, m_filled);
@@ -1967,7 +1966,8 @@ void WaresQueue::remove_from_economy(Economy* e)
 */
 void WaresQueue::add_to_economy(Economy* e)
 {
-	if (m_ware==-1) return;
+	if (not m_ware)
+		return;
 
 	e->add_wares(m_ware, m_filled);
 	if (m_request)
@@ -2520,7 +2520,7 @@ void Economy::do_remove_flag(Flag *flag)
  * This is also called when a ware is added to the economy through trade or
  * a merger.
 */
-void Economy::add_wares(int32_t id, int32_t count)
+void Economy::add_wares(Ware_Index const id, uint32_t const count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -2528,7 +2528,7 @@ void Economy::add_wares(int32_t id, int32_t count)
 
 	// TODO: add to global player inventory?
 }
-void Economy::add_workers(int32_t id, int32_t count)
+void Economy::add_workers(Ware_Index const id, uint32_t const count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -2543,7 +2543,7 @@ void Economy::add_workers(int32_t id, int32_t count)
  * This is also called when a ware is removed from the economy through trade or
  * a split of the Economy.
 */
-void Economy::remove_wares(int32_t id, int32_t count)
+void Economy::remove_wares(Ware_Index const id, uint32_t const count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
 
@@ -2557,7 +2557,7 @@ void Economy::remove_wares(int32_t id, int32_t count)
  * This is also called when a worker is removed from the economy through
  * a split of the Economy.
  */
-void Economy::remove_workers(int32_t id, int32_t count)
+void Economy::remove_workers(Ware_Index const id, uint32_t const count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_workers.stock(id));
 
@@ -2795,7 +2795,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 	int32_t best_cost = -1;
 	Flag * const target_flag = req->get_target_flag();
 
-	for (uint32_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
+	for (Ware_Index::value_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = *m_supplies.get_supply(i);
 		Route* route;
 

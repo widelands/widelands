@@ -355,7 +355,7 @@ void Warehouse::init(Editor_Game_Base* gg)
 	m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());//  FIXME
 
 	if (upcast(Game, game, gg)) {
-		for (int32_t i = 0; i < get_owner()->tribe().get_nrwares(); ++i) {//  FIXME
+		for (Ware_Index::value_t i = 0; i < owner().tribe().get_nrwares(); ++i) {//  FIXME
 			Request & req =
 				*new Request
 				(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
@@ -364,7 +364,7 @@ void Warehouse::init(Editor_Game_Base* gg)
 
 			m_requests.push_back(&req);
 		}
-		for (int32_t i = 0; i < get_owner()->tribe().get_nrworkers(); ++i) {//  FIXME
+		for (Ware_Index::value_t i = 0; i < owner().tribe().get_nrworkers(); ++i) {//  FIXME
 			Request & req =
 				*new Request
 				(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
@@ -440,7 +440,7 @@ void Warehouse::act(Game* g, uint32_t data)
 {
 	const Tribe_Descr & tribe = owner().tribe();
 	if (g->get_gametime() - m_next_carrier_spawn >= 0) {
-		const int32_t id = tribe.get_safe_worker_index("carrier");
+		Ware_Index::value_t const id = tribe.get_safe_worker_index("carrier");
 		int32_t stock = m_supply->stock_workers(id);
 		int32_t tdelta = CARRIER_SPAWN_INTERVAL;
 
@@ -459,7 +459,7 @@ void Warehouse::act(Game* g, uint32_t data)
 
 	//  Military stuff: Kill the soldiers that are dead.
 	if (g->get_gametime() - m_next_military_act >= 0) {
-		const int32_t ware = tribe.get_safe_worker_index("soldier");
+		Ware_Index::value_t const ware = tribe.get_safe_worker_index("soldier");
 		const Worker_Descr & workerdescr = *tribe.get_worker_descr(ware);
 		const std::string & workername = workerdescr.name();
 		//  Look if we got one in stock of those.
@@ -544,7 +544,7 @@ Warehouse::create_wares
 Magically create wares in this warehouse. Updates the economy accordingly.
 ===============
 */
-void Warehouse::insert_wares(int32_t id, int32_t count)
+void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
 
@@ -559,7 +559,7 @@ Warehouse::destroy_wares
 Magically destroy wares.
 ===============
 */
-void Warehouse::remove_wares(int32_t id, int32_t count)
+void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
 
@@ -573,7 +573,7 @@ Warehouse::create_workers
 Magically create workers in this warehouse. Updates the economy accordingly.
 ===============
 */
-void Warehouse::insert_workers(int32_t id, int32_t count)
+void Warehouse::insert_workers(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
 
@@ -588,7 +588,7 @@ Warehouse::destroy_workers
 Magically destroy workers.
 ===============
 */
-void Warehouse::remove_workers(int32_t id, int32_t count)
+void Warehouse::remove_workers(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
 

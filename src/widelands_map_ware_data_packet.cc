@@ -63,7 +63,8 @@ throw (_wexception)
 				Serial const serial = fr.Unsigned32();
 				try {
 					ol->register_object<WareInstance>
-						(serial, *new WareInstance(0, 0))
+						(serial,
+						 *new WareInstance(static_cast<Ware_Index::value_t>(0), 0))
 						.init(egbase);
 				} catch (_wexception const & e) {
 					throw wexception("%u: %s", serial, e.what());

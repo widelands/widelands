@@ -1404,7 +1404,7 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 
 	hbox->add(wqd, UI::Box::AlignTop);
 
-	if (wq->get_ware() >= 0) {
+	if (wq->get_ware() >= static_cast<Widelands::Ware_Index::value_t>(0)) {
 		m_priority_helpers.push_back
 			(PriorityButtonHelper(ps, Widelands::Request::WARE, wq->get_ware()));
 		PriorityButtonHelper & helper = m_priority_helpers.back();

@@ -105,7 +105,7 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	// warping stuff. instantly creating map_objects
 	Building * warp_building(Coords, Player_Number, Building_Descr::Index);
 	Building * warp_constructionsite
-		(Coords, Player_Number, int32_t idx, int32_t oldid = -1);
+		(Coords, Player_Number, Building_Index, int32_t oldid = -1);
 	Bob * create_bob(Coords, Bob::Descr::Index, const Tribe_Descr * const = 0);
 	Immovable & create_immovable(Coords, int32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable

@@ -130,7 +130,7 @@ char * ReadLine() {
 				break;
 			else
 				throw typename Base::_data_error
-					(__FILE__, __LINE__, "CR not immediately followed by LF");
+					("CR not immediately followed by LF");
 		}
 	data[filepos] = '\0';
 	++filepos;

@@ -116,7 +116,7 @@ void Computer_Player::late_initialization ()
 	wares[tribe->get_safe_ware_index(ware4)].preciousness=1;
 
 	// collect information about which buildings our tribe can construct
-	for (int32_t i = 0; i < tribe->get_nrbuildings(); ++i) {
+	for (Building_Index::value_t i = 0; i < tribe->get_nrbuildings(); ++i) {
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
 

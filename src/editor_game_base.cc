@@ -595,8 +595,6 @@ Building * Editor_Game_Base::warp_building
 
 /*
 ===============
-Editor_Game_Base::warp_constructionsite
-
 Create a building site at the given x/y location for the given building type.
 
 if oldi != -1 this is a constructionsite coming from an enhancing action
@@ -604,7 +602,7 @@ if oldi != -1 this is a constructionsite coming from an enhancing action
 */
 Building * Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
-	 int32_t const idx, int32_t const old_id)
+	 Building_Index const idx, int32_t const old_id)
 {
 	Player            & plr   = player(owner);
 	Tribe_Descr const & tribe = plr.tribe();

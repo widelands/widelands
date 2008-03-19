@@ -83,10 +83,10 @@ public:
 
 	const WareList &get_wares() const;
 	const WareList &get_workers() const;
-	void insert_wares(int32_t id, int32_t count);
-	void remove_wares(int32_t id, int32_t count);
-	void insert_workers(int32_t id, int32_t count);
-	void remove_workers(int32_t id, int32_t count);
+	void insert_wares  (Ware_Index, uint32_t count);
+	void remove_wares  (Ware_Index, uint32_t count);
+	void insert_workers(Ware_Index, uint32_t count);
+	void remove_workers(Ware_Index, uint32_t count);
 
 	virtual bool fetch_from_flag(Game* g);
 

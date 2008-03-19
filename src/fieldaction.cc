@@ -61,11 +61,11 @@ struct BuildGrid : public UI::Icon_Grid {
 		 const int32_t x, const int32_t y,
 		 int32_t cols);
 
-	UI::Signal1<int32_t> buildclicked;
-	UI::Signal1<int32_t> buildmouseout;
-	UI::Signal1<int32_t> buildmousein;
+	UI::Signal1<Widelands::Building_Index::value_t> buildclicked;
+	UI::Signal1<Widelands::Building_Index::value_t> buildmouseout;
+	UI::Signal1<Widelands::Building_Index::value_t> buildmousein;
 
-	void add(int32_t id);
+	void add(Widelands::Building_Index::value_t);
 
 private:
 	void clickslot(int32_t idx);
@@ -106,7 +106,7 @@ BuildGrid::add
 Add a new building to the list of buildable buildings
 ===============
 */
-void BuildGrid::add(int32_t id)
+void BuildGrid::add(Widelands::Building_Index::value_t const id)
 {
 	Widelands::Building_Descr const & descr = *m_tribe.get_building_descr(id);
 	UI::Icon_Grid::add
@@ -189,9 +189,9 @@ struct FieldActionWindow : public UI::UniqueWindow {
 	void act_buildroad();
 	void act_abort_buildroad();
 	void act_removeroad();
-	void act_build(int32_t idx);
-	void building_icon_mouse_out(int32_t idx);
-	void building_icon_mouse_in(int32_t idx);
+	void act_build              (Widelands::Building_Index::value_t);
+	void building_icon_mouse_out(Widelands::Building_Index::value_t);
+	void building_icon_mouse_in (Widelands::Building_Index::value_t);
 	void act_geologist();
 	void act_attack();         /// Launch the attack
 	void act_attack_more();    /// Increase the number of soldiers to be launched
@@ -525,7 +525,11 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 	m_fastclick = false;
 
-	for (int32_t id = 0; id < tribe.get_nrbuildings(); ++id) {
+	for
+		(Widelands::Building_Index::value_t id = 0;
+		 id < tribe.get_nrbuildings();
+		 ++id)
+	{
 		Widelands::Building_Descr const & descr = *tribe.get_building_descr(id);
 		BuildGrid** ppgrid;
 
@@ -800,7 +804,7 @@ void FieldActionWindow::act_removeroad()
 Start construction of the building with the give description index
 ===============
 */
-void FieldActionWindow::act_build(int32_t idx)
+void FieldActionWindow::act_build(Widelands::Building_Index::value_t const idx)
 {
 	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
 	if (upcast(Game, game, &egbase))
@@ -823,7 +827,9 @@ FieldActionWindow::building_icon_mouse_out
 The mouse pointer has moved away from the icon for the building with the index idx.
 ===============
 */
-void FieldActionWindow::building_icon_mouse_out(int32_t) {
+void FieldActionWindow::building_icon_mouse_out
+(Widelands::Building_Index::value_t)
+{
 	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 		m_workarea_preview_job_id = Overlay_Manager::Job_Id::Null();
@@ -838,7 +844,9 @@ FieldActionWindow::building_icon_mouse_in
 The mouse pointer has moved to the icon for the building with the index idx.
 ===============
 */
-void FieldActionWindow::building_icon_mouse_in(int32_t idx) {
+void FieldActionWindow::building_icon_mouse_in
+(Widelands::Building_Index::value_t const idx)
+{
 	if (m_iabase->m_show_workarea_preview) {
 		assert(not m_workarea_preview_job_id);
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
