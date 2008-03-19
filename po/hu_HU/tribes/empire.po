@@ -1,13 +1,13 @@
 # Widelands po/hu_HU/tribes/empire.po
-# Copyright (C) 2007 Widelands Development Team.
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2008 Widelands Development Team.
+# Dániel Varga <vargad88@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn2988\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-03-19 20:31+0100\n"
+"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"PO-Revision-Date: 2007-09-01 12:04+0200\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,11 +18,6 @@ msgstr ""
 #: ../../../tribes/empire/buildings/arena/conf:2
 msgid "Arena"
 msgstr "Aréna"
-
-#: ../../../tribes/empire/buildings/armoursmith/conf:2
-#: ../../../tribes/empire/workers/armoursmith/conf:2
-msgid "Armoursmith"
-msgstr "Páncélkészítő"
 
 #: ../../../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
@@ -42,7 +37,7 @@ msgstr "Sörfőzde"
 
 #: ../../../tribes/empire/buildings/burner/conf:2
 msgid "Charcoal Burner"
-msgstr "Faszéngyártó"
+msgstr "Szénégető"
 
 #: ../../../tribes/empire/buildings/carpenter/conf:2
 msgid "Carpenter's workshop"
@@ -113,9 +108,8 @@ msgid "Inn"
 msgstr "Vendéglő"
 
 #: ../../../tribes/empire/buildings/lumberjack/conf:2
-#, fuzzy
 msgid "Lumberjack's Hut"
-msgstr "Favágó"
+msgstr "Favágókunyhó"
 
 #: ../../../tribes/empire/buildings/marblemine/conf:2
 msgid "Marble Mine"
@@ -157,11 +151,6 @@ msgstr "Birkafarm"
 msgid "Smelting Works"
 msgstr "Vasolvasztó"
 
-#: ../../../tribes/empire/buildings/stonemason/conf:2
-#: ../../../tribes/empire/workers/stonemason/conf:2
-msgid "Stonemason"
-msgstr "Kőfaragó"
-
 #: ../../../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr "Kocsma"
@@ -180,16 +169,11 @@ msgstr "Szőlőskert"
 
 #: ../../../tribes/empire/buildings/vintagery/conf:2
 msgid "Vintagery"
-msgstr ""
+msgstr "Borház"
 
 #: ../../../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Raktár"
-
-#: ../../../tribes/empire/buildings/weaponsmith/conf:2
-#: ../../../tribes/empire/workers/weaponsmith/conf:2
-msgid "Weaponsmith"
-msgstr "Fegyverkészítő"
 
 #: ../../../tribes/empire/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -297,7 +281,7 @@ msgstr "Nyers szén"
 
 #: ../../../tribes/empire/wares/coalearth/conf:3
 msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
-msgstr "A nyers szenet a mély szénbányában termelik ki. Tisztítást igényel, hogy megfelelő minőségű szenet kapjuk."
+msgstr "A nyers szenet a mély szénbányában termelik ki. Tisztítást igényel, hogy megfelelő minőségű szenet kapjunk"
 
 #: ../../../tribes/empire/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
@@ -425,7 +409,7 @@ msgstr "Márvány"
 
 #: ../../../tribes/empire/wares/marble/conf:3
 msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
-msgstr "A márvány nagyon szép kő, amit a hegyekben bányásznak. Amit felhasználnak a gyönyörű épületekhez és oszlopokhoz."
+msgstr "A márvány nagyon szép kő, amit a hegyekben bányásznak. Gyönyörű épületekhez és oszlopok készítésére használják."
 
 #: ../../../tribes/empire/wares/marblecolumn/conf:2
 msgid "Marblecolumn"
@@ -550,7 +534,7 @@ msgstr "A bor elég erőt ad, hogy márványt és aranyat bányásszanak, és a 
 
 #: ../../../tribes/empire/wares/wood/conf:2
 msgid "Wood"
-msgstr "Fa"
+msgstr "Deszka"
 
 #: ../../../tribes/empire/wares/wood_lance/conf:2
 msgid "Wood Lance"
@@ -567,6 +551,11 @@ msgstr "Gyapjú"
 #: ../../../tribes/empire/wares/wool/conf:3
 msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
 msgstr "Gyapjú a birka szőre. A birodalmi szövöde szövetkészítéshez használja."
+
+#: ../../../tribes/empire/workers/armoursmith/conf:2
+#: ../../../tribes/empire/buildings/armoursmith/conf:2
+msgid "Armoursmith"
+msgstr "Páncélkészítő"
 
 #: ../../../tribes/empire/workers/baker/conf:2
 msgid "Baker"
@@ -648,6 +637,11 @@ msgstr "Olvasztómester"
 msgid "Soldier"
 msgstr "Harcos"
 
+#: ../../../tribes/empire/workers/stonemason/conf:2
+#: ../../../tribes/empire/buildings/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Kőfaragó"
+
 #: ../../../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Edző"
@@ -655,6 +649,11 @@ msgstr "Edző"
 #: ../../../tribes/empire/workers/vinefarmer/conf:2
 msgid "Vinefarmer"
 msgstr "Szőlőtermelő"
+
+#: ../../../tribes/empire/workers/weaponsmith/conf:2
+#: ../../../tribes/empire/buildings/weaponsmith/conf:2
+msgid "Weaponsmith"
+msgstr "Fegyverkészítő"
 
 #: ../../../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"

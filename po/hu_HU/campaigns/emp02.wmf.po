@@ -1,13 +1,13 @@
 # Widelands po/hu_HU/campaigns/emp02.wmf.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team.
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn2988\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-03-19 22:06+0100\n"
+"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"PO-Revision-Date: 2007-08-30 08:52+0200\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -17,24 +17,23 @@ msgstr ""
 
 #: ../../../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Birodalom oktató 2 - Száműzés egy távoli előőrsre"
+msgstr "Birodalom oktató 2 - Száműzetés egy távoli előőrsre"
 
 #: ../../../campaigns/emp02.wmf/elemental:11
 msgid "Second mission of the Empire campaign"
 msgstr "A Birodalom hadjárat második küldetése"
 
-#: ../../../campaigns/emp02.wmf/event:11 ../../../campaigns/emp02.wmf/event:45
-#: ../../../campaigns/emp02.wmf/event:88
-#: ../../../campaigns/emp02.wmf/event:427
-#: ../../../campaigns/emp02.wmf/event:446
-#: ../../../campaigns/emp02.wmf/event:866
-#: ../../../campaigns/emp02.wmf/event:925
-#: ../../../campaigns/emp02.wmf/event:960
-#: ../../../campaigns/emp02.wmf/event:996
+#: ../../../campaigns/emp02.wmf/event:10 ../../../campaigns/emp02.wmf/event:36
+#: ../../../campaigns/emp02.wmf/event:68 ../../../campaigns/emp02.wmf/event:88
+#: ../../../campaigns/emp02.wmf/event:102
+#: ../../../campaigns/emp02.wmf/event:389
+#: ../../../campaigns/emp02.wmf/event:430
+#: ../../../campaigns/emp02.wmf/event:455
+#: ../../../campaigns/emp02.wmf/event:481
 msgid "Diary of Lutius"
 msgstr "Lutius naplója"
 
-#: ../../../campaigns/emp02.wmf/event:13
+#: ../../../campaigns/emp02.wmf/event:12
 msgid "Finally!<br>This island seems to be made for us, it is a present of the Gods to my people and me.<br>Until now, we have only seen a small part of this island, but this part is allready leading sunbeams to my mind, feeling as if we found an unpayable treasure, a land like paradise.<br>On this island, we will start our new life, we will build up an outpost for our exile, which perhaps will become a new, beautiful home to everyone of us."
 msgstr ""
 "Végre!\n"
@@ -42,167 +41,167 @@ msgstr ""
 " Még csak egy részét láttuk, de máris úgy érzem, hogy egy megfizethetetlen kincset kaptunk, egy paradicsomot.\n"
 " Ezen a szigeten új életet kezdhetünk, építünk egy előőrsöt ami talán egy új, gyönyörű otthona lesz mindnyájunknak."
 
-#: ../../../campaigns/emp02.wmf/event:15
+#: ../../../campaigns/emp02.wmf/event:14
 msgid "A new islands"
 msgstr "Egy új sziget"
 
-#: ../../../campaigns/emp02.wmf/event:47
+#: ../../../campaigns/emp02.wmf/event:38
 msgid "As Saledus and I walked through these wonderful forests in the north, we felt that our new future had just begun. This land is so peaceful, nice and beautiful, I could stay here until the end of my life.<br>But until that day, a lot of years will hopefully go by. For now, we should concentrate on the present and build a few lumberjacks and a sawmill, to produce some good build-materials.<br>But we shouldn't forget to save this natural bounty. These forests should last forever, so we really should build up a forester too.<br><br>"
 msgstr "Ahogy Salendus és én sétáltunk északra e csodálatos erdőben, úgy éreztük az új életünk elkezdődött. Ez a föld olyan békés, barátságos és gyönyörű, életem végéig itt tudnék élni.<br>De addig a napig, még remélhetőleg sok év van hátra. Most a jelennel kell foglalkoznunk és építenünk kell néhány fatelepet és egy malmot, hogy megfelelő építőanyagot termeljünk.<br>Azonban meg kell óvnunk ezt a csodálatos paradicsomot. Meg kell őriznünk ezeket az erdőket, ezért építenünk kellene egy erdészkunyhót is.<br><br>"
 
-#: ../../../campaigns/emp02.wmf/event:48
+#: ../../../campaigns/emp02.wmf/event:39
 msgid "* Build up three lumberjacks, a forester and a sawmill."
 msgstr "* Építs három favágókunyhót, egy erdészkunyhót és egy malmot."
 
-#: ../../../campaigns/emp02.wmf/event:50
+#: ../../../campaigns/emp02.wmf/event:41
 msgid "The green forests"
 msgstr "A zöld erdők"
 
-#: ../../../campaigns/emp02.wmf/event:90
+#: ../../../campaigns/emp02.wmf/event:70
 msgid "Later, I walked down to the rocks in the south and looked for a place where we can build a quarry, to get some hard stone for our bigger buildings.<br>Again I feel like i'm in paradise when I noticed that some marble-like stones where among those rocks. Seems as if we can start a life in luxury in the not so distant future.<br><br>"
 msgstr "Később lesétáltam délre a sziklákhoz és kerestem egy helyet ahol kőfejtőt építhetünk, szükségünk van kemény kőre a nagyobb épületekhez.<br>Ismét úgy érzem, egy paradicsomban vagyok, mikor találtam pár márványszerű követ a sziklák között. Úgy tűnik, hogy jólétben fogunk élni a nem is távoli jövőben.<br><br>"
 
-#: ../../../campaigns/emp02.wmf/event:91
+#: ../../../campaigns/emp02.wmf/event:71
 msgid "* Build a quarry to the south of your headquarters."
 msgstr "* Építs egy kőfejtőt délre a főhadiszállásodtól."
 
-#: ../../../campaigns/emp02.wmf/event:93
+#: ../../../campaigns/emp02.wmf/event:73
 msgid "The rocks"
 msgstr "A sziklák"
 
-#: ../../../campaigns/emp02.wmf/event:429
+#: ../../../campaigns/emp02.wmf/event:90
 msgid "Wonderful, today our wood economy was completely built up. Now we can be sure to have enough wood for our future building-projects."
 msgstr "Csodálatos, ma a fatelepek teljesen elkészültek. Mostmár biztosak lehetünk benne, hogy elég fa lesz a további épületekhez."
 
-#: ../../../campaigns/emp02.wmf/event:431
+#: ../../../campaigns/emp02.wmf/event:92
 msgid "Wood for the colony"
 msgstr "Fa a kolóniának"
 
-#: ../../../campaigns/emp02.wmf/event:448
+#: ../../../campaigns/emp02.wmf/event:104
 msgid "Great, today the building of the quarry was completed. Now we get enough stone for all our future building projects."
 msgstr "Nagyszerű, ma elkészült a kőfejtő. Ezzel biztosítottuk a kő termelést."
 
-#: ../../../campaigns/emp02.wmf/event:450
+#: ../../../campaigns/emp02.wmf/event:106
 msgid "Stone for the colony"
 msgstr "Kő a kolóniának"
 
-#: ../../../campaigns/emp02.wmf/event:480
+#: ../../../campaigns/emp02.wmf/event:129
 msgid "Saledus looks unhappy"
 msgstr "Saledus szomorúnak tűnik"
 
-#: ../../../campaigns/emp02.wmf/event:482
+#: ../../../campaigns/emp02.wmf/event:131
 msgid "Hey Lutius,<br>I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart.<br>You might wonder about the cause. Well, I will tell you:<br>As I walked down to the southern strands of this island I found some parts of another ship. I don't know whether these parts are everything left of that ship, but in any case these parts don't seem to be old. Perhaps the owners of that ship came in the same storm which brought us to Malac' Mor and were also brought to this island.<br>However, I beg you to be cautious and to build some barracks or sentrys around our colony.<br><br>"
 msgstr "Lutius!<br>Nem akarok pánikba esni, de találtam valamit, amitől görcsbe szorul a gyomrom és félelem érinti meg a szívem.<br> Talán csodálkozni fogsz, de elmesélem neked:<br> Ahogy sétáltam a parton, megtaláltam egy hajó maradványait. Lehet, hogy nem ez minden ami megmarad a hajóból, a maradványok nem tűnnek túl réginek. Talán a hajó tulajdonosai ugyanabban a viharban kerültek ide ami minket Malac'Mor-ba vitt, aztán elhozott minket erre a szigetre.<br>Azonban, nagyon kérlek légy óvatos és építs pár laktanyát vagy őrkunyhót a kolóniánk köré.<br><br>"
 
-#: ../../../campaigns/emp02.wmf/event:483
+#: ../../../campaigns/emp02.wmf/event:132
 msgid "* Build some barracks and sentrys around the colony."
 msgstr "* Építs pár laktanyát és őrkunyhót a kolónia köré."
 
-#: ../../../campaigns/emp02.wmf/event:485
+#: ../../../campaigns/emp02.wmf/event:134
 msgid "Dangerous shipparts"
 msgstr "Veszélyes hajódarabok"
 
-#: ../../../campaigns/emp02.wmf/event:547
-#: ../../../campaigns/emp02.wmf/event:613
+#: ../../../campaigns/emp02.wmf/event:171
+#: ../../../campaigns/emp02.wmf/event:220
 msgid "Saledus smiles"
 msgstr "Saledus mosolyog"
 
-#: ../../../campaigns/emp02.wmf/event:549
+#: ../../../campaigns/emp02.wmf/event:173
 msgid "Hey Lutius,<br>I've got good news for you: As I walked to the east, I found a bigger mountain. I am not absolutely sure, a geologist should check if I am right, but I believe we could mine marble from some places on the mountain. It would be absolutely great. Perhaps you were right, when you said that this island is like paradise.<br>Let's expand to that mountain and start mining marble.<br><br>"
 msgstr "Lutius! <br>Híreim vannak számodra: sétálgattam keleten, és találtam egy nagyobb hegyet. Nem vagyok teljesen biztos benne, egy geológusnak ellenőriznie kellene, de úgy érzem hegy belseje márványt rejt, csak ki kell bányásznunk. Azt hiszem igazad volt amikor azt mondtad, hogy ez a sziget olyan mint egy paradicsom. <br>Terjeszkedjünk a hegy felé és kezdjünk márványt bányászni."
 
-#: ../../../campaigns/emp02.wmf/event:550
+#: ../../../campaigns/emp02.wmf/event:174
 msgid "* Expand to the east, to start mining marble on the mountain."
 msgstr "* Terjeszkedj délfelé, hogy márványt tudjunk bányászni a hegyekből."
 
-#: ../../../campaigns/emp02.wmf/event:552
+#: ../../../campaigns/emp02.wmf/event:176
 msgid "Marble on the mountain"
 msgstr "Márvány a hegyen"
 
-#: ../../../campaigns/emp02.wmf/event:615
+#: ../../../campaigns/emp02.wmf/event:222
 msgid "By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, carpenter's shops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
 msgstr "Az Istenek újabb nagyszerű és hihetetlen ajándéka: van még két másik hegy is, és úgy tűnik sok szenet és vasércet rejtenek. Mostmár úgy élhetünk mint Fremil-ben. El kell kezdenünk bányákat, faszénégetőket, vasolvasztót, szerszámkészítő és fegyverkovács-műhelyet építeni. Azonban ezekhez a nagyobb épületekhez jobb építőanyag szükséges. Építsünk egy kőfaragó műhelyt, ami felvágja a márványt a megfelelő méretre."
 
-#: ../../../campaigns/emp02.wmf/event:616
+#: ../../../campaigns/emp02.wmf/event:223
 msgid "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 msgstr "* Építs fel egy teljes bányászati és termelő infrastruktúrát (szénbánya, kőbánya, szerszámkovács-, fegyverkovács-, páncélkovács-műhelyt, vasolvasztót, és faszéngyártót) és egy kőfaragóműhelyt."
 
-#: ../../../campaigns/emp02.wmf/event:618
+#: ../../../campaigns/emp02.wmf/event:225
 msgid "Further mountains"
 msgstr "A többi hegy"
 
-#: ../../../campaigns/emp02.wmf/event:728
+#: ../../../campaigns/emp02.wmf/event:296
 msgid "Amalea comes in..."
 msgstr "Amalea belép..."
 
-#: ../../../campaigns/emp02.wmf/event:730
+#: ../../../campaigns/emp02.wmf/event:298
 msgid "Hi Lutius,<br>I hope you forgive my criticism, but it seems to me as if you forgot something. It's nice, and of course a good idea, to build up mines, which will give us a more luxury life, but the people working in the mines are unhappy with the current situation, they have to do hard work and have no time for making their own food.<br>What do you think about helping them out? Let's build up a tavern, which can produce some nice food for our miners, and a brewery and a vineyard, which can produce some good drinks.<br>Of course this will mean we need more resources for this food. I suggest you build a fisher, a farm, a mill and a baker. A hunter, a piggery, a vineyard and a well would also be needed.<br>Don't understand me wrong, but the miners need good food and drinks to have enough power for their hard work."
 msgstr "Szia Lutius,<br> Remélem megbocsájtod a kritikámat, de úgy tűnik, hogy elfelejtettél valamit. Szép és jó ötlet bányákat építeni, ami majd luxus életet biztosít nekünk, de a bányában dolgozó emberek nem boldogok, keményen dolgoznak és nincs idejük elkészíteni a saját ennivalójukat.<br> Mit gondolsz nem kellene segítenünk nekik? Építsünk egy kocsmát, ami élelmet készít a bányászainknak, de szükségünk van egy sörfőzdére és szőlőskertre is ami  megfelelő italt biztosítja.<br> Természetesen ez azt jelenti, hogy több erőforrásra és élelemre van szükségünk. Azt javaslom, hogy építsünk halászkunyhót, farmot, malmot és péket. Vadászkunyhó, disznóól és egy kút is hasznos lehet.<br> Nem érts félre, de a bányászoknak jó étel is ital kell, hogy elég erejük legyen a kemény munkához."
 
-#: ../../../campaigns/emp02.wmf/event:732
+#: ../../../campaigns/emp02.wmf/event:300
 msgid "Food for the miners"
 msgstr "Étel a bányászoknak"
 
-#: ../../../campaigns/emp02.wmf/event:868
+#: ../../../campaigns/emp02.wmf/event:391
 msgid "By the Gods!<br>This is absolutely awful. It seems as if we stand close to a test AND it seems as if Saledus was right with his fear concerning the shipwreck.<br>Today as I walked down to the eastern strands, I suddenly got a shock. There was one of those hated, evil, barbarian tribes with whom we had so many problems before.<br>First I was a bit naive and hoped that they are peaceful, but as soon as one of them saw me they ran towards me and started attacking me with their throwing-spears. Thanks to the Gods that I was able to hide myself and could silently go back to our colony.<br>Anyway, we MUST build up bigger military buildings, as soon as possible.<br><br>"
 msgstr "Az Istenekre!<br> Ez szörnyű. Úgy tűnik, hogy közel vagyunk egy törzshöz, Saledusnak igaza volt a hajóroncsot illetőleg.<br> Ma elsétáltam a keleti partokhoz és hirtelen megfagyott az ereimben a vér. Megláttam azt az ördögi barbár törzset amivel oly sok problémánk volt korábban.<br> Először kicsit naiv voltam és azt hittem, hogy békések, de amint megláttak szaladni kezdtek felém és megtámadtak a dárdáikkal. Csak az Isteneknek köszönhetem, hogy megmenekültem és vissza tudtam jönni a kolóniához.<br> Amilyen hamar csak lehet építenünk KELL nagyobb katonai épületeket."
 
-#: ../../../campaigns/emp02.wmf/event:869
+#: ../../../campaigns/emp02.wmf/event:392
 msgid "* Build up bigger military buildings, like an outpost, a barrier or a tower, on the eastern frontier."
 msgstr "* Építs nagyobb katonai épületeket, megfelelő lesz előőrsnek egy erődítmény vagy egy torony a keleti határon."
 
-#: ../../../campaigns/emp02.wmf/event:871
+#: ../../../campaigns/emp02.wmf/event:394
 msgid "The Barbarians"
 msgstr "A barbárok"
 
-#: ../../../campaigns/emp02.wmf/event:927
+#: ../../../campaigns/emp02.wmf/event:432
 msgid "That's good. The first large military building is built up and the mining infrastructure is getting better and better. Now we should think of preparing ourselves for a bigger fight.<br>As soon as we have enough soldiers we should attack and remove the barbarians. And than, when this island is ours again, I will build up a big fortress at the place where the barbarian headquarters stands now, to avoid new settlements of these barbarian bastards.<br><br>"
 msgstr "Nagyszerű. Az első nagyobb katonai létesítmény elkészült és a bányászati infrastruktúra egyre jobban működik. Fel kell készülnünk egy nagyobb ütközetre.<br> Amint elég katonánk lesz, meg kell támadnunk a barbárokat és felmorzsolni őket. Aztán, hogy a sziget a miénk lett újra, nagy erődöt építhetünk ott ahol most a barbár főhadiszállás áll, így megakadályozhatjuk, hogy újra visszatelepüljenek.<br><br>"
 
-#: ../../../campaigns/emp02.wmf/event:928
+#: ../../../campaigns/emp02.wmf/event:433
 msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr "* Amint elég katonánk lesz távolítsd el a barbár épületeket végleg.<br> * Végül építs egy várat a barbár főhadiszállás helyén, hogy megelőzd más barbár népek betelepülését arra a területre."
 
-#: ../../../campaigns/emp02.wmf/event:930
+#: ../../../campaigns/emp02.wmf/event:435
 msgid "Command for Attack"
 msgstr "Parancs a támadásra"
 
-#: ../../../campaigns/emp02.wmf/event:962
+#: ../../../campaigns/emp02.wmf/event:457
 msgid "Today makes me proud. We fought for our new home and rose victorious.<br>There are still a few barbarians hiding on our island, but I am sure that we will find them soon. Every barbarian, who doesn't attack us, will be put in a boat with the other peaceful ones and will be sent back to their country.<br><br>----------------------VICTORY!-----------------------"
 msgstr "A mai napon nagy tettet vittünk véghez. Harcoltunk az új otthonunkért és győzelmet arattunk.<br> Még mindig bujkál néhány barbár a szigeten, de biztos vagyok benne, hogy nemsokára megtaláljuk őket. Azokat a barbárokat akik nem támadnak meg minket hajón hazaküldjük az otthunokba."
 
-#: ../../../campaigns/emp02.wmf/event:964
+#: ../../../campaigns/emp02.wmf/event:459
 msgid "Victory"
 msgstr "Győzelem"
 
-#: ../../../campaigns/emp02.wmf/event:979
+#: ../../../campaigns/emp02.wmf/event:469
 msgid "7 days later..."
 msgstr "7 nappal később"
 
-#: ../../../campaigns/emp02.wmf/event:981
+#: ../../../campaigns/emp02.wmf/event:471
 msgid "As time is running by"
 msgstr "Ahogy az idő telik"
 
-#: ../../../campaigns/emp02.wmf/event:988
+#: ../../../campaigns/emp02.wmf/event:475
 msgid "Continue"
 msgstr "Folytatás"
 
-#: ../../../campaigns/emp02.wmf/event:998
+#: ../../../campaigns/emp02.wmf/event:483
 msgid "Today a pigeon landed on our island. It brought a message which is filling me with dark thoughts, fears and horror.<br>The message was adressed to me, begging me to come back to Fremil.<br>It says that the Empire is at war with the Barbarians. They were attacked from the north, from the tribe I wanted to attack before going in exile.<br>For me, it is clear what I have to do...<br><br>You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
-msgstr "Ma egy galamb száll le a szigetünkön. Üzenetet hozott nekünk, ettől tartottam, a szöveget olvasása félelemmel töltötte meg szívemet.<br> Az üzenetet nekem címezték, arra kértek, hogy térjek vissza Fremilbe.<br> Azt mondták, hogy a Birodalom harcban áll a barbárokkal. Északról támadnak, az a törzs amit meg akartam támadni mielőtt száműzetésbe vonultunk.<br> Nekem világos volt, hogy meg kell tennünk... <br><br> Befejezted ezt a küldetést. Folytathatod a játékot, ha akarod különben lépj a következő pályára."
+msgstr "Ma egy galamb száll le a szigetünkön. Üzenetet hozott nekünk, ettől tartottam, a szöveget olvasása félelemmel töltötte meg szívemet.<br> Az üzenetet nekem címezték, arra kértek, hogy térjek vissza Fremilbe.<br> Azt mondták, hogy a Birodalom harcban áll a barbárokkal. Északról támadnak, az a törzs amit meg akartam támadni mielőtt száműzetésbe vonultunk.<br> Nekem világos volt, hogy meg kell tennünk... <br><br> Befejezted ezt a küldetést. Folytathatod a játékot, ha akarod vagy továbbléphetsz a következő küldetésre."
 
-#: ../../../campaigns/emp02.wmf/event:1000
+#: ../../../campaigns/emp02.wmf/event:485
 msgid "A Message"
 msgstr "Az üzenet"
 
-#: ../../../campaigns/emp02.wmf/event:1016
+#: ../../../campaigns/emp02.wmf/event:496
 msgid "Amalea smiles"
 msgstr "Amalea mosolyog"
 
-#: ../../../campaigns/emp02.wmf/event:1018
+#: ../../../campaigns/emp02.wmf/event:498
 msgid "Hey my friend,<br>just visited our new tavern 'At the palms'. The beer, they have got, is really tasty, you really should take a drink there, too.<br>Nice to see, that we get a warmer and more familiar environment on our island. <br>Thank you Lutius."
 msgstr "Hé barátom,<br> épp most látogattam meg az új kocsmánkat. \"A pálmáknál\" nevet kapta. A sör nagyon ízletes, neked is innod kellene ott.<br> Jó látni egy kellemesebb, barátságosabb környezetet a szigetünkön.<br> Köszönöm Lutius."
 
-#: ../../../campaigns/emp02.wmf/event:1020
+#: ../../../campaigns/emp02.wmf/event:500
 msgid "A drink at 'At the palms'"
 msgstr "Egy ital 'A pálmáknál' "

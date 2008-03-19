@@ -1,36 +1,40 @@
 # Widelands po/hu_HU/worlds/winterland.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team.
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn2988\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2006-07-01 11:59+0200\n"
+"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"PO-Revision-Date: 2007-12-23 11:23+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../../../worlds/winterland/bobs/badger/conf:1
+msgid "Badger"
+msgstr "Borz"
 
 #: ../../../worlds/winterland/bobs/bunny/conf:1
 msgid "Bunny"
 msgstr "Nyuszi"
 
-#: ../../../worlds/winterland/bobs/bush1/conf:1
-#: ../../../worlds/winterland/bobs/bush2/conf:1
 #: ../../../worlds/winterland/bobs/bush3/conf:1
+#: ../../../worlds/winterland/bobs/bush2/conf:1
 #: ../../../worlds/winterland/bobs/bush4/conf:1
 #: ../../../worlds/winterland/bobs/bush5/conf:1
+#: ../../../worlds/winterland/bobs/bush1/conf:1
 msgid "Bush"
 msgstr "Bokor"
 
 #: ../../../worlds/winterland/bobs/deadtree1/conf:1
-#: ../../../worlds/winterland/bobs/deadtree2/conf:1
 #: ../../../worlds/winterland/bobs/deadtree3/conf:1
 #: ../../../worlds/winterland/bobs/deadtree4/conf:1
+#: ../../../worlds/winterland/bobs/deadtree2/conf:1
 msgid "Dead Tree"
 msgstr "Elpusztult fa"
 
@@ -42,27 +46,39 @@ msgstr "Szarvas"
 msgid "Duck"
 msgstr "Kacsa"
 
+#: ../../../worlds/winterland/bobs/elk/conf:1
+msgid "Elk"
+msgstr "Jávorszarvas"
+
 #: ../../../worlds/winterland/bobs/fox/conf:1
 msgid "Fox"
 msgstr "Róka"
 
-#: ../../../worlds/winterland/bobs/grass1/conf:1
 #: ../../../worlds/winterland/bobs/grass2/conf:1
 #: ../../../worlds/winterland/bobs/grass3/conf:1
+#: ../../../worlds/winterland/bobs/grass1/conf:1
 msgid "Grass"
 msgstr "Fű"
 
-#: ../../../worlds/winterland/bobs/mushroom1/conf:1
+#: ../../../worlds/winterland/bobs/lynx/conf:1
+msgid "Lynx"
+msgstr "Hiúz"
+
+#: ../../../worlds/winterland/bobs/marten/conf:1
+msgid "Marten"
+msgstr "Nyest"
+
 #: ../../../worlds/winterland/bobs/mushroom2/conf:1
+#: ../../../worlds/winterland/bobs/mushroom1/conf:1
 msgid "Mushroom"
 msgstr "Gomba"
 
-#: ../../../worlds/winterland/bobs/pebble1/conf:1
-#: ../../../worlds/winterland/bobs/pebble2/conf:1
-#: ../../../worlds/winterland/bobs/pebble3/conf:1
 #: ../../../worlds/winterland/bobs/pebble4/conf:1
+#: ../../../worlds/winterland/bobs/pebble3/conf:1
 #: ../../../worlds/winterland/bobs/pebble5/conf:1
 #: ../../../worlds/winterland/bobs/pebble6/conf:1
+#: ../../../worlds/winterland/bobs/pebble1/conf:1
+#: ../../../worlds/winterland/bobs/pebble2/conf:1
 msgid "Pebble"
 msgstr "Hegyikristály"
 
@@ -74,45 +90,49 @@ msgstr "Rénszarvas"
 msgid "Sheep"
 msgstr "Bárány"
 
-#: ../../../worlds/winterland/bobs/skeleton1/conf:1
 #: ../../../worlds/winterland/bobs/skeleton2/conf:1
 #: ../../../worlds/winterland/bobs/skeleton3/conf:1
+#: ../../../worlds/winterland/bobs/skeleton1/conf:1
 msgid "Skeleton"
 msgstr "Csontváz"
 
-#: ../../../worlds/winterland/bobs/sstones1/conf:1
-#: ../../../worlds/winterland/bobs/sstones2/conf:1
-#: ../../../worlds/winterland/bobs/sstones3/conf:1
-#: ../../../worlds/winterland/bobs/sstones4/conf:1
 #: ../../../worlds/winterland/bobs/sstones5/conf:1
-#: ../../../worlds/winterland/bobs/sstones6/conf:1
 #: ../../../worlds/winterland/bobs/sstones7/conf:1
+#: ../../../worlds/winterland/bobs/sstones4/conf:1
+#: ../../../worlds/winterland/bobs/sstones6/conf:1
+#: ../../../worlds/winterland/bobs/sstones2/conf:1
+#: ../../../worlds/winterland/bobs/sstones1/conf:1
+#: ../../../worlds/winterland/bobs/sstones3/conf:1
 msgid "Standing Stones"
 msgstr "Szikla"
 
-#: ../../../worlds/winterland/bobs/stones1/conf:1
-#: ../../../worlds/winterland/bobs/stones2/conf:1
-#: ../../../worlds/winterland/bobs/stones3/conf:1
 #: ../../../worlds/winterland/bobs/stones4/conf:1
+#: ../../../worlds/winterland/bobs/stones2/conf:1
 #: ../../../worlds/winterland/bobs/stones5/conf:1
+#: ../../../worlds/winterland/bobs/stones3/conf:1
+#: ../../../worlds/winterland/bobs/stones1/conf:1
 #: ../../../worlds/winterland/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Kő"
 
-#: ../../../worlds/winterland/bobs/tree1/conf:4
-#: ../../../worlds/winterland/bobs/tree2/conf:4
 #: ../../../worlds/winterland/bobs/tree3/conf:4
-#: ../../../worlds/winterland/bobs/tree4/conf:4
 #: ../../../worlds/winterland/bobs/tree5/conf:4
 #: ../../../worlds/winterland/bobs/tree6/conf:4
-#: ../../../worlds/winterland/bobs/tree7/conf:4
 #: ../../../worlds/winterland/bobs/tree8/conf:4
+#: ../../../worlds/winterland/bobs/tree7/conf:4
+#: ../../../worlds/winterland/bobs/tree2/conf:4
+#: ../../../worlds/winterland/bobs/tree4/conf:4
+#: ../../../worlds/winterland/bobs/tree1/conf:4
 msgid "Tree"
 msgstr "Fa"
 
+#: ../../../worlds/winterland/bobs/wisent/conf:1
+msgid "Wisent"
+msgstr "Bölény"
+
 #: ../../../worlds/winterland/bobs/wolf/conf:1
 msgid "Wolf"
-msgstr ""
+msgstr "Farkas"
 
 #: ../../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"

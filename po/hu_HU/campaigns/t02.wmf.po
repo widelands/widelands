@@ -1,13 +1,13 @@
 # Widelands po/hu_HU/campaigns/t02.wmf.po
-# Copyright (C) 2007 Widelands Development Team.
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2008 Widelands Development Team.
+# Dániel Varga <vargad88@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn2988\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-03-19 21:38+0100\n"
+"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"PO-Revision-Date: 2008-03-07 20:23+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,269 +15,291 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../../campaigns/t02.wmf/event:10 ../../../campaigns/t02.wmf/event:685
-#: ../../../campaigns/t02.wmf/event:807 ../../../campaigns/t02.wmf/event:822
+#: ../../../campaigns/t02.wmf/event:87 ../../../campaigns/t02.wmf/event:354
+#: ../../../campaigns/t02.wmf/event:453 ../../../campaigns/t02.wmf/event:465
 msgid "Thron speaks..."
 msgstr "Thron:"
 
-#: ../../../campaigns/t02.wmf/event:12
+#: ../../../campaigns/t02.wmf/event:89
 msgid " \"The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees. The stories they tell about the deeds of our kin are sad to hear. I've spent nights laying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart.\" "
-msgstr "\"A harc folytatódik. Egyre több és több testvérünk adja fel a brutális harcot a fővárosunkért. Szomorú hallani a történeteket a rokonaink bűneikről. Éjjeleket töltöttem álmatlanul, fáradtabb lettem, mint ahogy azt valaha el tudtam képzelni. Mág amikor becsuktam a szemem akkor is lángokban láttam az erődöt amit az apám épített. A trón a két fa között, az egység és a béke szimbóluma, most a széthúzást jelenti."
+msgstr "\"A harc folytatódik. Egyre több és több testvérünk adja fel a brutális harcot a fővárosunkért. Szomorú hallani a történeteket a rokonaink bűneiről. Éjjeleket töltöttem álmatlanul, fáradtabb lettem, mint ahogy azt valaha el tudtam képzelni. Még amikor becsuktam a szemem, akkor is lángokban láttam az erődöt, amit az apám épített. A trón a két fa között, az egység és a béke szimbóluma, most a széthúzást jelenti.\""
 
-#: ../../../campaigns/t02.wmf/event:14
+#: ../../../campaigns/t02.wmf/event:91
 msgid "The Story goes on..."
 msgstr "A történet folytatódik..."
 
-#: ../../../campaigns/t02.wmf/event:17 ../../../campaigns/t02.wmf/event:30
-#: ../../../campaigns/t02.wmf/event:43 ../../../campaigns/t02.wmf/event:506
-#: ../../../campaigns/t02.wmf/event:521 ../../../campaigns/t02.wmf/event:536
-#: ../../../campaigns/t02.wmf/event:551 ../../../campaigns/t02.wmf/event:566
-#: ../../../campaigns/t02.wmf/event:582 ../../../campaigns/t02.wmf/event:597
-#: ../../../campaigns/t02.wmf/event:613 ../../../campaigns/t02.wmf/event:629
-#: ../../../campaigns/t02.wmf/event:645 ../../../campaigns/t02.wmf/event:660
-#: ../../../campaigns/t02.wmf/event:676 ../../../campaigns/t02.wmf/event:692
-#: ../../../campaigns/t02.wmf/event:708 ../../../campaigns/t02.wmf/event:724
-#: ../../../campaigns/t02.wmf/event:741 ../../../campaigns/t02.wmf/event:757
-#: ../../../campaigns/t02.wmf/event:773 ../../../campaigns/t02.wmf/event:789
-#: ../../../campaigns/t02.wmf/event:814 ../../../campaigns/t02.wmf/event:829
-#: ../../../campaigns/t02.wmf/event:914
+#: ../../../campaigns/t02.wmf/event:93 ../../../campaigns/t02.wmf/event:103
+#: ../../../campaigns/t02.wmf/event:113 ../../../campaigns/t02.wmf/event:210
+#: ../../../campaigns/t02.wmf/event:222 ../../../campaigns/t02.wmf/event:234
+#: ../../../campaigns/t02.wmf/event:246 ../../../campaigns/t02.wmf/event:258
+#: ../../../campaigns/t02.wmf/event:271 ../../../campaigns/t02.wmf/event:283
+#: ../../../campaigns/t02.wmf/event:296 ../../../campaigns/t02.wmf/event:309
+#: ../../../campaigns/t02.wmf/event:322 ../../../campaigns/t02.wmf/event:334
+#: ../../../campaigns/t02.wmf/event:347 ../../../campaigns/t02.wmf/event:360
+#: ../../../campaigns/t02.wmf/event:373 ../../../campaigns/t02.wmf/event:386
+#: ../../../campaigns/t02.wmf/event:400 ../../../campaigns/t02.wmf/event:413
+#: ../../../campaigns/t02.wmf/event:426 ../../../campaigns/t02.wmf/event:439
+#: ../../../campaigns/t02.wmf/event:459 ../../../campaigns/t02.wmf/event:471
+#: ../../../campaigns/t02.wmf/event:538 ../../../campaigns/t02.wmf/event:1105
 msgid "Continue"
 msgstr "Folytatás"
 
-#: ../../../campaigns/t02.wmf/event:25
+#: ../../../campaigns/t02.wmf/event:99
 msgid " \"Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me? Rise against whoever threatens our very existance may it even be one of your blood or mind?\" "
-msgstr ""
+msgstr " \"Ma a vadászaim hoztak egy férfit, egy nőt és egy kis gyereket akik a fák között rejtőztek, próbáltak elmenekülni háboruzó törzsek közötti harcok, a gyűlölet és bosszú elől. A helyzet emlékeztet a régi időkre mikor nem voltunk többek állatoknál amit ösztönök irányítanak. Egyik testvérem sem fogja tudni megszerezni és megtartani az irányítást a fa trón fölött, egyik törzs sem elég erős, hogy legyőzze a többit. Sohasem lesz vége ennek a mészárlásnak, kivéve ha...csak nem? Ahogy az apám mondta? Rise against threatens our very existance may it even be one of your blood or mind?\" "
 
-#: ../../../campaigns/t02.wmf/event:27 ../../../campaigns/t02.wmf/event:40
+#: ../../../campaigns/t02.wmf/event:101 ../../../campaigns/t02.wmf/event:111
 msgid "The Story continues..."
 msgstr "A történet folytatódik..."
 
-#: ../../../campaigns/t02.wmf/event:38
+#: ../../../campaigns/t02.wmf/event:109
+#, fuzzy
 msgid " \"Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br>Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home...\" "
 msgstr ""
+"\"Ahogy a napok múlnak Boldreth egyre határozatlanabb. A társaim lelke elsüllyedt ahogy a hideg évszak beköszönött, és mi még mindig kunyhókban és barakkokban élünk. Sohasem gondoltam, hogy ilyen sokáig itt maradunk a vadonban - de ezt sem gondoltam, hogy a testvéreim ilyen sokáig folytatják ezt a kegyetlen háborúskodást.\n"
+"Talán ideje, hogy egy kicsit kényelmesebb lakhelyet alakítsunk ki itt. Talán ideje biztosítani egy új otthont azoknak akik még élnek és még mindig úgy gondolják, hogy összetartozunk? Addig amíg vissza nem térhetünk arra a helyre amit valaha otthonnak hívtunk...\""
 
-#: ../../../campaigns/t02.wmf/event:499
+#: ../../../campaigns/t02.wmf/event:204
 msgid "Brave Boldreth steps aside you..."
-msgstr ""
+msgstr "A bátor Boldreth melléd lép..."
 
-#: ../../../campaigns/t02.wmf/event:501
+#: ../../../campaigns/t02.wmf/event:206
 msgid " \"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren fought on the battlefield, and our axes and swords have turned rusty over time.\"</p>"
-msgstr ""
+msgstr "\"Tehát, hosszabb időre szeretnél berendezkedni a fák között, Thron?Nos, az eszem azt mondja, hogy így lesz jó, de a szívem azt diktálja, hogy győztesen térjünk vissza Al'thunranban. Túl sokat vártunk, míg a barátaink harcoltak a csatatéren, a mi fejszéink és kardjaink rozsdásodni kezdtek.\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:503 ../../../campaigns/t02.wmf/event:518
-#: ../../../campaigns/t02.wmf/event:533 ../../../campaigns/t02.wmf/event:548
-#: ../../../campaigns/t02.wmf/event:563 ../../../campaigns/t02.wmf/event:579
-#: ../../../campaigns/t02.wmf/event:594 ../../../campaigns/t02.wmf/event:610
-#: ../../../campaigns/t02.wmf/event:626 ../../../campaigns/t02.wmf/event:657
-#: ../../../campaigns/t02.wmf/event:673 ../../../campaigns/t02.wmf/event:705
-#: ../../../campaigns/t02.wmf/event:721 ../../../campaigns/t02.wmf/event:738
-#: ../../../campaigns/t02.wmf/event:754 ../../../campaigns/t02.wmf/event:770
-#: ../../../campaigns/t02.wmf/event:786
+#: ../../../campaigns/t02.wmf/event:208 ../../../campaigns/t02.wmf/event:220
+#: ../../../campaigns/t02.wmf/event:232 ../../../campaigns/t02.wmf/event:244
+#: ../../../campaigns/t02.wmf/event:256 ../../../campaigns/t02.wmf/event:269
+#: ../../../campaigns/t02.wmf/event:281 ../../../campaigns/t02.wmf/event:294
+#: ../../../campaigns/t02.wmf/event:307 ../../../campaigns/t02.wmf/event:332
+#: ../../../campaigns/t02.wmf/event:345 ../../../campaigns/t02.wmf/event:371
+#: ../../../campaigns/t02.wmf/event:384 ../../../campaigns/t02.wmf/event:398
+#: ../../../campaigns/t02.wmf/event:411 ../../../campaigns/t02.wmf/event:424
+#: ../../../campaigns/t02.wmf/event:437
 msgid "Advisor"
 msgstr "Tanácsadó"
 
-#: ../../../campaigns/t02.wmf/event:514
+#: ../../../campaigns/t02.wmf/event:216
 msgid "Khantrukh joins the both of you"
-msgstr ""
+msgstr "Khantrukh csatlakozik a beszélgetéshez"
 
-#: ../../../campaigns/t02.wmf/event:516
+#: ../../../campaigns/t02.wmf/event:218
 msgid " \"I beg your forgiveness, chieftain, but I have a grief concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools and it is only a matter of little time before they are all gone.\"</p>"
-msgstr ""
+msgstr "\"Elnézést kérek, törzsfőnök, de van egy aggasztó dolgo amit meg kellene beszélnünk. A kövek közel a táborunkhoz gyorsan fogynak, idő kérdése és mindet kibányásszuk.\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:529
+#: ../../../campaigns/t02.wmf/event:228
 msgid "Boldreth jumps up."
 msgstr "Boldreth felugrik."
 
-#: ../../../campaigns/t02.wmf/event:531
+#: ../../../campaigns/t02.wmf/event:230
 msgid " \"While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?\" <br><br>--NEW OBJECTIVES--<br>- build military buildings (like Sentries and Strongholds) to expand your territory. Get to the rocks north-east from you and build a Quarry there.</p>"
 msgstr ""
+"\"Nincs semmi dolguk a harcosoknak, de most végre akad valami amit csinálhatunk! Thron, mit szólnál ha elvinném pár nyugtalan harcosomat közelebb mennénk Kal'mavrath hegyeihez - talán találnánk még követ amivel boldoggá tehetjük az öregembert?\" \n"
+"\n"
+"--ÚJ FELADATOK--\n"
+"-építs katonai épületeket (mint pl: őrbódé és erőd), hogy növeld a területed. Juss el a kövekhez észak-keletre, és építs egy kővejtőt ott."
 
-#: ../../../campaigns/t02.wmf/event:544
+#: ../../../campaigns/t02.wmf/event:240
 msgid "Khantrukh grumbles..."
-msgstr ""
+msgstr "Khantrukh morog..."
 
-#: ../../../campaigns/t02.wmf/event:546
+#: ../../../campaigns/t02.wmf/event:242
 msgid " \"Old man? Disrespectful youth...\"</p>"
 msgstr "\"Vénember? Tiszteletlen fiatal...\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:559
+#: ../../../campaigns/t02.wmf/event:252
 msgid "Khantrukh nods satisfied."
 msgstr "Khantrukh elégedetten biccent."
 
-#: ../../../campaigns/t02.wmf/event:561
+#: ../../../campaigns/t02.wmf/event:254
 msgid " \"At least. These rocks should last for a while.\"</p>"
-msgstr ""
+msgstr "\"Legaláb ezek a kövek kitartanak egy ideig.\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:575
+#: ../../../campaigns/t02.wmf/event:265
 msgid "Boldreth exclaims..."
-msgstr ""
+msgstr "Boldreth panaszkodik..."
 
-#: ../../../campaigns/t02.wmf/event:577
+#: ../../../campaigns/t02.wmf/event:267
 msgid " \"Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!\"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 msgstr ""
+"\"Ezt nézd meg! Kal'mavrath hatalmas hegye! El sem tudom képzelni milyen kincseket rejthet a természet e fenséges hegy alatt.\n"
+"Most az öregek is esélyt kapnak, hogy hasznosak legyenek a törzsnek! Küldjük el néhányukat, akik értenek a kövek nyelvén, hogy derítsék ki mit rejt a hegység!\"\n"
+"\n"
+"--ÚJ FELADATOK--\n"
+"- A zászlóra kattintva geológust küldhetsz oda. ha a zászló a hegyekben van a geológus érc után kezd kutatni a hegyekben; különben vizet keres. Helyezz egy zászlót a hegyoldalba keletre (ne a fűre hanem a bányászatra alkalmas területre) és küldj egy geológust oda. Építs egy-egy bányát mindkét ércfajtához amit talál, a bánya helyet megfelelően kiválasztva:\n"
+"Fekete - szén\n"
+"Vörös - vasérc\n"
+"Sárga - aranyérc\n"
+"Szürke -gránit\n"
+"A bányák csak bányászatra alkalmas területen építhetőek. Ezeket a helyeket a térkép világosszürke ponttal jelöli.</p>"
 
-#: ../../../campaigns/t02.wmf/event:590
+#: ../../../campaigns/t02.wmf/event:277
 msgid "Boldreth laughs..."
 msgstr "Boldreth nevet..."
 
-#: ../../../campaigns/t02.wmf/event:592
+#: ../../../campaigns/t02.wmf/event:279
 msgid " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for! It might even be enough to -\"</p>"
-msgstr ""
+msgstr "\"Chat'Karuth szakállára, ez hihetelten! Képzeld el mi mindenre tudjuk használni ezt a szenet és vasércet. Talán elég lehet \"</p>"
 
-#: ../../../campaigns/t02.wmf/event:606
+#: ../../../campaigns/t02.wmf/event:290
 msgid "Khantrukh interrupts..."
-msgstr ""
+msgstr "Khantrukh félbeszakítja..."
 
-#: ../../../campaigns/t02.wmf/event:608
+#: ../../../campaigns/t02.wmf/event:292
 msgid " \"While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not prove easy.\"</p>"
-msgstr ""
+msgstr "\"Ez igaz, de el kell halasztanunk későbbre, előbb más akadályokat kell leküzdeni. A bányászoknak több ellátás kell a munkához. A magas hegyekben hidegebb van, az ellátás megoldása nem olyan egyszerű.\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:621
+#: ../../../campaigns/t02.wmf/event:302
 msgid "Boldreth nods..."
-msgstr ""
+msgstr "Boldreth bólint..."
 
-#: ../../../campaigns/t02.wmf/event:623
+#: ../../../campaigns/t02.wmf/event:304
 msgid " \"I have to give it to you, you are right here, old man.<br>There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!\"<br><br>"
 msgstr ""
+"\"Igazad van bölcs öregember.\n"
+"Rengeteg állat van az erdkben - lehet, hogy csak többet kellene vadásznunk. És, természetesen, az emberek örülnének egy új kocsmának - héj! hívhatnánk Thorn büszkeségének vagy aminek szeretnéd.\""
 
-#: ../../../campaigns/t02.wmf/event:624
+#: ../../../campaigns/t02.wmf/event:305
 msgid "--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>"
 msgstr ""
+"--ÚJ FELADATOK--\n"
+"- Ahhoz, hogy a bánya működjön, a bányászoknak szükségük van ételre. A vadászattal élelemhez juthatsz, a vadőr pedig megakadályozza az állatok kipusztulását. A húst a kocsmákban dolgozzák fel, így készül a bányász ebédje.\n"
+"Ez az első példa olyan termékre amit előbb fel kell dolgozni mielőtt egy másik épületben felhasználják - később több ilyen termékkel fogsz találkozni.\n"
+"Építs egy vadászkunyhót, egy vadőrt és egy kocsmát.</p>"
 
-#: ../../../campaigns/t02.wmf/event:637
+#: ../../../campaigns/t02.wmf/event:315
 msgid "The elder laughs..."
 msgstr "Az öreg nevet..."
 
-#: ../../../campaigns/t02.wmf/event:639
+#: ../../../campaigns/t02.wmf/event:317
 msgid " \"Wisdom commands to seek variety. North of the great mountain is a big plane - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pittabread for a change...\"<br><br>"
-msgstr ""
+msgstr "\"A bölcs ember szereti a változatosságot. Északon a hatalmas hegy tetején van egy fennsík - miért nem használjuk a helyet amit adott az Anyatermészet, és építünk egy farmot? Biztos vagyok benne, hogy mindenki kedvelné a frissen sült kenyeret.\"<br><br>"
 
-#: ../../../campaigns/t02.wmf/event:640
+#: ../../../campaigns/t02.wmf/event:318
 msgid "--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source. Build a well, a farm and a bakery.</p>"
-msgstr ""
+msgstr "--ÚJ FELADATOK--<br>- Más módos is juthatunk élelmiszerhez, persze másfajta élelemhez, halat foghat a halász és búzát termelhetünk a farmokon. A búzát fogyasztás előtt vízzel együtt a pékségben dolgozzák fel. Vízhez juthatsz ha olyan helyen kutat építessz ahol a geológusok vizet találnak. Építs kutat, farmot és pékséget.</p>"
 
-#: ../../../campaigns/t02.wmf/event:653
+#: ../../../campaigns/t02.wmf/event:328
 msgid "Boldreth cheers up..."
-msgstr ""
+msgstr "Boldreth felkiált örömében..."
 
-#: ../../../campaigns/t02.wmf/event:655
+#: ../../../campaigns/t02.wmf/event:330
 msgid " \"Our hunters are out in the forests, Thron. I promise you, before the sun sets today you will have a feast as magnificent as is right for the chieftain of all clans!\"</p>"
-msgstr ""
+msgstr "\"A vadászaink kint vannak az erdőben, Thron. Igérem, hogy mielőtt a nap lenyugszik olyan fenséges lakomát csapunk neked, mint amilyen az összes törzs vezetőjének járna.\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:669
+#: ../../../campaigns/t02.wmf/event:341
 msgid "Khantrukh gazes over the plains..."
-msgstr ""
+msgstr "Khantrukh végig néz a síkságokon..."
 
-#: ../../../campaigns/t02.wmf/event:671
+#: ../../../campaigns/t02.wmf/event:343
 msgid " \"Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread for our chieftain alone!\"</p>"
-msgstr ""
+msgstr "\"Hát nem gyönyörűek az arany mezők, ahogy békésen növekszik táncol a búzakalász? A pék is úton van már ide, hogy elhozza a legfinomabb kenyerét a vezetőnknek!\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:687
-msgid " \"The new tavern opened yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br>Maybe we actually are slowly creating a place here which we can... call home.\"</p>"
-msgstr ""
+#: ../../../campaigns/t02.wmf/event:356
+#, fuzzy
+msgid " \"A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br>Maybe we actually are slowly creating a place here which we can... call home.\"</p>"
+msgstr "\"Az új kocsma tegnap nyílt meg. Még mindig nagyon ünnepi hangulatban vagyok, és észrevettem, hogy ez a kis darab otthon az embereknek milyen sokat jelent. Az énekük még késő éjszaka is hallatszott, és másnap mindenki sokkal vidámabban ébredt.<br>Talán lassan elkészül az a hely ami... otthonnak hívhatunk.\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:689
+#: ../../../campaigns/t02.wmf/event:358
 msgid "A beautiful morning..."
 msgstr "Egy gyönyörű reggelen.."
 
-#: ../../../campaigns/t02.wmf/event:700
+#: ../../../campaigns/t02.wmf/event:366
 msgid "Boldreth remarks..."
 msgstr "Boldreth megjegyzi..."
 
-#: ../../../campaigns/t02.wmf/event:702
+#: ../../../campaigns/t02.wmf/event:368
 msgid " \"So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. We have the iron ore to be melt into steel ready to be forged into whatever we see fit and the coal to keep the smelter's ovens burning.\"<br><br>"
-msgstr ""
+msgstr "\"Szóval mostmár van bányánk és élelmünk is az ellátásukhoz, most fel kell dolgoznunk azt amit kibányásztak a bátor bányászaink. Van vasércünk, készen a megolvasztásra, így kapott acélból könnyen bármit elkészíthetünk amire szükségünk van, és van elég szén, hogy a vasolvasztó kohóját ellássuk.\"<br><br>"
 
-#: ../../../campaigns/t02.wmf/event:703
+#: ../../../campaigns/t02.wmf/event:369
 msgid "--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the coalearth from your coalmines must be refined into coal - for that, build a Coal Burner.</p>"
-msgstr ""
+msgstr "--ÚJ FELADATOK--<br>- Az érc amit a bányászaid felhoznak még nem használható, meg kell olvasztani, hogy acélt kapjunk. Építs egy Vasolvasztóműhelyt. Hasonlóan a nyers szént is meg kell tisztítani - ehhez építened kell egy Szénégetőt.</p>"
 
-#: ../../../campaigns/t02.wmf/event:716
+#: ../../../campaigns/t02.wmf/event:379
 msgid "Khantrukh speaks..."
-msgstr ""
+msgstr "Khantrukh beszél..."
 
-#: ../../../campaigns/t02.wmf/event:718
+#: ../../../campaigns/t02.wmf/event:381
 msgid " \"Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's roots, if we want more of its treasures!<br>Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them.\"<br><br>"
-msgstr ""
+msgstr "\"A bányászaink napról napra kevesebbet tudnak kitermelni! Mélyebbre kell mennünk, hogy ki tudjuk termelni a hegy kincseit.<br>Természetesen, olyna mélyen sötét és hideg van és csak néhány vállalkozó hajlandó olyan mélyre menni. Ezt a bátorságot nagyobb választékkal kellene jutalmaznunk.\"<br><br>"
 
-#: ../../../campaigns/t02.wmf/event:719
+#: ../../../campaigns/t02.wmf/event:382
 msgid "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
-msgstr ""
+msgstr "--ÚJ FELADATOK--<br>- A normális bánya csak egyharmadát tudja kitermelni az ásványkincseknek amik a föld mélyén rejtőznek. Tovább kell fejleszteni mély bányává, hogy tovább tudjon működni. Hogy továbbfejlessz egy épületet kattints a megfelelő gombra a megjelenő ablakban.<br>A munkások tapasztalatot szereznek munkájuk során. Megfelelő tapasztalattal jobb munkásokká válnak, akik tudják működtetni a fejletebb épületeket is. Ne fejlessz tovább épületeket mielőtt nincs megfelelő tapasztalattal rendelkező munkásod, és az épület ellátásához szükséges infrastruktúra! Ezeknek az épületeknek gyakran magasabb igényeik vannak - például a mélyebb bányának élelmiszerre van szüksége, uzsonna helyett. Tovább kell fejlesztened a kocsmát vendéglővé, hogy a pittakenyérből élelmiszert készítsenek ÉS egy másik fajta ételt (húst vagy halat). Megjegyzés: a vendéglő nem teszi elavulttá a kocsmákat, mert a kisebb bányáknak továbbrais uzsonnára van szükségük. Természetesen az össze bányát továbbfejlesztheted egyszerre - a nagyobb bányák egy kicsit gyorsabban termelnek, de a kisebb bányáknak olcsóbb élelem kell. Rajtad áll melyiket váalsztod.<br> Fejleszd tovább a Szénbányát és a kocsmát, hogy minkét épületből a jobb legyen.</p>"
 
-#: ../../../campaigns/t02.wmf/event:733
+#: ../../../campaigns/t02.wmf/event:393
 msgid "Boldreth seems concerned..."
-msgstr ""
+msgstr "Boldreth izgatottnak tűnik..."
 
-#: ../../../campaigns/t02.wmf/event:735
+#: ../../../campaigns/t02.wmf/event:395
 msgid " \"As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even more not so in times as dangerous as ours! We need a woodhardener, and we need one now!\"<br><br>"
-msgstr ""
+msgstr "\"Ahogy látom, nemsokára elfogy az összes gerendánk! Nem tehetjük a harcosainkat omladozó kunyhókba, főleg nem ilyen veszélyes időkben! Szükségünk van Fűrészmalomra, mégpedig azonnal!\"<br><br>"
 
-#: ../../../campaigns/t02.wmf/event:736
+#: ../../../campaigns/t02.wmf/event:396
 msgid "--NEW OBJECTIVES--<br>- Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a Woodhardener first. Always remember to build a Woodhardener before you run out of blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
-msgstr ""
+msgstr "--ÚJ FELADATOK--<br>- Nagyobb és jobb épületek, beleértve minden katonai épületet, jobb építőanyagokat igényel. Nem épülhetnek egyszerű rönkökből, a fát fel kell dolgozni a fűrészmalomban, hogy gerendát kapjunk. Mindig építs fűrészmalmot mielőtt kifogysz a gerendákból, nélkülök nem tudsz tovább terjeszkedni.<br>Építs egy Fűrészmalmot.</p>"
 
-#: ../../../campaigns/t02.wmf/event:749
+#: ../../../campaigns/t02.wmf/event:406
 msgid "Boldreth smiles..."
-msgstr ""
+msgstr "Boldreth mosolyog..."
 
-#: ../../../campaigns/t02.wmf/event:751
+#: ../../../campaigns/t02.wmf/event:408
 msgid " \"Well, old friend, this should ensure that our fortifications do not break down with our foes first battle cry! Now we can expand safely!<br>Still, it could not hurt to assemble some grindstone for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!\"<br><br>"
-msgstr ""
+msgstr "\"Nos, öreg barátom, mostmár biztosak lehetünk abban, hogy az erődítményeink nem dőlnek össze az ellenség első rohamára! Mostmár biztonságosan terjeszkedhetünk!<br>Mégis nem árthat, ha felhalmozunk faragott követ a további építkezéskehez, hiszen a nehéz időkben akkora erődöt kell építenünk amit még senki sem látott!\"<br><br>"
 
-#: ../../../campaigns/t02.wmf/event:752
+#: ../../../campaigns/t02.wmf/event:409
 msgid "--NEW OBJECTIVES--<br>- Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a Stonegrinder. You can obtain water by building a Well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu.<br>Build a Stonegrinder and a Well.</p>"
-msgstr ""
+msgstr "--ÚJ FELADATOK--<br>-Nagyobb épületek gerendát és jobb építőanyagot igényelnek. Mint a faragott kő, ami vízből és nyers kőből készül. Vizet a kútból nyerhetsz. Természetesen vízforráshoz kell építeni, amit a geológusok segítenek megtalálni. Kattints egy zászlóra ami nem hegyen van, aztán a geológus ikonra a felbukkanó ablakban.<br>Építs egy Kőfaragót és egy Kutat.</p>"
 
-#: ../../../campaigns/t02.wmf/event:765
+#: ../../../campaigns/t02.wmf/event:419
 msgid "Khantrukh steps in..."
-msgstr ""
+msgstr "Khantrukh belép..."
 
-#: ../../../campaigns/t02.wmf/event:767
+#: ../../../campaigns/t02.wmf/event:421
 msgid " \"Chieftain, this is a disgrace! It is well that we can produce grindstone for mighty fortifications and great buildings now - only, this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping onto my face! Now there is a problem we should do something about!\"<br><br>"
-msgstr ""
+msgstr "\"Törzsfőnök, ez szégyen! Nagyszerű, hogy faragott köveket készítünk a legendás erődítményeinkhez és hatalmas épületeinkhez, de a tetőink lyukasak! Talán a fiatalabbakat nem zavarja, hogy az éjszakájukat az esőben töltik, de én nem tudok aludni ha esőcseppek hullanak az arcomra! Ezzel a problémával sürgősen csinálni kell valamit!\"<br><br>"
 
-#: ../../../campaigns/t02.wmf/event:768
+#: ../../../campaigns/t02.wmf/event:422
 msgid "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
-msgstr ""
+msgstr "--ÚJ FELADATOK--<br>-A harmadik építőanyagot, ami a nagy épületekhez szükséges, a tetők fedésére használják. Nádattermel a nádtermelő.<br>Építs egy nádtermelőt.</p>"
 
-#: ../../../campaigns/t02.wmf/event:782
+#: ../../../campaigns/t02.wmf/event:433
 msgid "Khantrukh seems reliefed..."
-msgstr ""
+msgstr "Khantrukh megkönnyebbült..."
 
-#: ../../../campaigns/t02.wmf/event:784
+#: ../../../campaigns/t02.wmf/event:435
 msgid " \"Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!\"</p>"
-msgstr ""
+msgstr "\"Csodálatos! A tetőink nem lyukasak többé, és megvan minden alapanyag amire szükségünk van, bármilyen nagy épületet épíhetünk,az alapanyag megvan hozzá!\"<br>"
 
-#: ../../../campaigns/t02.wmf/event:809
+#: ../../../campaigns/t02.wmf/event:455
 msgid " \"One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?\"</p>"
-msgstr ""
+msgstr "\"Egy este mikor a Hold fényesen világotott, felmásztam Kal'mavrath csúcsára. Mikor ránéztem a horizontra vörös lángokat láttam lobogni a távolban. Hihetetlen, hogy felebarátaink milyen kegyetlen harcot vívnak. Félek, hogy mikor újra viszontlátom Al'thunran városát nem lesz ott semmi. Csak hamu és törmelék marad egykor olyan szép fővárosunkból mire oda visszajutunk?\""
 
-#: ../../../campaigns/t02.wmf/event:811
+#: ../../../campaigns/t02.wmf/event:457
 msgid "One fullmoon night..."
-msgstr ""
+msgstr "Egy teliholdas éjszakán..."
 
-#: ../../../campaigns/t02.wmf/event:824
+#: ../../../campaigns/t02.wmf/event:467
 msgid " \"The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore. I prayed it might get warmer again, as I prayed the war would finally come to an end.<br>So far, it does not seem either of my prayers was fulfilled.\"</p>"
-msgstr ""
+msgstr "\"A tél már a nyakunkon van. Sokan fáznak a hidegben, de ki kell tartanunk. A nap amikor visszatérünk nincs már túl messze, nemlehet túl messze. Imádkoztam, hogy melegebb legyen, mint ahogy azért is, hogy a háború mihamarabb befejeződjön.<br>Úgy tűnik egyik imám sem teljesült.\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:826
+#: ../../../campaigns/t02.wmf/event:469
 msgid "Another cold day..."
-msgstr ""
+msgstr "Egy másik hideg nap..."
 
-#: ../../../campaigns/t02.wmf/event:907
+#: ../../../campaigns/t02.wmf/event:532
 msgid "Victory!"
-msgstr ""
+msgstr "Győzelem!"
 
-#: ../../../campaigns/t02.wmf/event:909
+#: ../../../campaigns/t02.wmf/event:534
 msgid "Thron speaks:<br>\"The other day Boldreth talked me into accompanying him to the new inn. It would cheer me up, he said.<br>When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br>The news he brought were to change everything...\"<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.</p>"
-msgstr ""
+msgstr "Thron:<br>\"Minap Boldreth rábeszélt, hogy kísérjem el az új kocsmába. Nagyon feldobott amit ott láttam.<br>Mikor körbenéztem hű arcokat láttam, akik bíznak abban, hogy át tudom vezetni őket ezeken a sötét napokon. Még mielőtt beszélhettem volna hálámról vagy bátoríthattam volna őket, az egyik harcosom berontott a kocsmába. Az elmúlt napokban kint volt az erdőben, láttam milyne fáradt volt.<br>A hírek amit hozott mindent megváltoztatnak...\"<br><br>--------------------GYŐZELEM!---------------------<br><br> Befejezted ezt a küldetést. Folytathatod a játékot ha akarod, vagy továbbléphetsz a következő hadjáratra.</p>"
 
-#: ../../../campaigns/t02.wmf/event:911
+#: ../../../campaigns/t02.wmf/event:536
 msgid "Mission Complete!"
-msgstr ""
+msgstr "Feladat teljesítve!"
 
-#~ msgid "<p>The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the coalearth from your coalmines must be refined into coal - for that, build a Coal Burner.</p>"
-#~ msgstr "<p>Az érc amit a bányászaink felhoznak nem használható még, ki kell olvasztani belőle a vasat. Építs egy vasolvasztót. Hasonlóan a  nyers szenet meg kell tisztítani, ezért építs egy Szénégetőt.</p>"
-
-#~ msgid "<p>The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
-#~ msgstr "<p>A harmadik anyag ami szükséges a továbbfejlesztett épületekhez, a nád, ebből készül a tető. <p/>"
+#: ../../../campaigns/t02.wmf/event:1102
+msgid "A friendly village joined us!"
+msgstr "Egy barátságos falu csatlakozott hozzánk!"

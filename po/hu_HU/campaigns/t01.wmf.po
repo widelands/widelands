@@ -1,13 +1,13 @@
 # Widelands po/hu_HU/campaigns/t01.wmf.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team.
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn2988\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2006-12-09 14:49+0100\n"
+"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"PO-Revision-Date: 2007-08-30 08:53+0200\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,66 +15,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../../campaigns/t01.wmf/event:11 ../../../campaigns/t01.wmf/event:608
-#: ../../../campaigns/t01.wmf/event:627 ../../../campaigns/t01.wmf/event:646
-#: ../../../campaigns/t01.wmf/event:665
+#: ../../../campaigns/t01.wmf/event:10 ../../../campaigns/t01.wmf/event:204
+#: ../../../campaigns/t01.wmf/event:219 ../../../campaigns/t01.wmf/event:234
+#: ../../../campaigns/t01.wmf/event:248
 msgid "Thron speaks..."
 msgstr "Thron:"
 
-#: ../../../campaigns/t01.wmf/event:13
+#: ../../../campaigns/t01.wmf/event:12
 msgid "It's been months and we are still hiding where the forests are old and dark. My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr "Hónapok teltek el és mi még mindig rejtőzködünk a sötét erdő mélyén. A harcosaim egész nap vadásznak, és éjjel is ébren maradnak - hallgatják a kegyetlen mészárlás visszhangját a messzi öreg erdőben."
 
-#: ../../../campaigns/t01.wmf/event:15 ../../../campaigns/t01.wmf/event:32
-#: ../../../campaigns/t01.wmf/event:49 ../../../campaigns/t01.wmf/event:66
+#: ../../../campaigns/t01.wmf/event:14 ../../../campaigns/t01.wmf/event:27
+#: ../../../campaigns/t01.wmf/event:40 ../../../campaigns/t01.wmf/event:53
 msgid "The Story begins..."
 msgstr "A történet elkezdődik..."
 
-#: ../../../campaigns/t01.wmf/event:22 ../../../campaigns/t01.wmf/event:39
-#: ../../../campaigns/t01.wmf/event:56 ../../../campaigns/t01.wmf/event:73
-#: ../../../campaigns/t01.wmf/event:465 ../../../campaigns/t01.wmf/event:484
-#: ../../../campaigns/t01.wmf/event:503 ../../../campaigns/t01.wmf/event:523
-#: ../../../campaigns/t01.wmf/event:542 ../../../campaigns/t01.wmf/event:562
-#: ../../../campaigns/t01.wmf/event:581 ../../../campaigns/t01.wmf/event:619
-#: ../../../campaigns/t01.wmf/event:638 ../../../campaigns/t01.wmf/event:657
-#: ../../../campaigns/t01.wmf/event:676 ../../../campaigns/t01.wmf/event:723
+#: ../../../campaigns/t01.wmf/event:19 ../../../campaigns/t01.wmf/event:32
+#: ../../../campaigns/t01.wmf/event:45 ../../../campaigns/t01.wmf/event:58
+#: ../../../campaigns/t01.wmf/event:97 ../../../campaigns/t01.wmf/event:111
+#: ../../../campaigns/t01.wmf/event:125 ../../../campaigns/t01.wmf/event:140
+#: ../../../campaigns/t01.wmf/event:154 ../../../campaigns/t01.wmf/event:169
+#: ../../../campaigns/t01.wmf/event:183 ../../../campaigns/t01.wmf/event:213
+#: ../../../campaigns/t01.wmf/event:228 ../../../campaigns/t01.wmf/event:242
+#: ../../../campaigns/t01.wmf/event:256 ../../../campaigns/t01.wmf/event:290
 msgid "OK"
 msgstr "OK"
 
-#: ../../../campaigns/t01.wmf/event:30
+#: ../../../campaigns/t01.wmf/event:25
 msgid "We can see the raging flames that swallow Al'thunran, miles away, from here. The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares."
 msgstr "Látjuk a dühöngő tűzet amely Al'thunran városát nyaldossa, mérföldekre innen. A vörös lángok világítanak a sötétben, és táncolnak harci dobok dalára. Ez a látvány kísért engem még a rémálmaimban is."
 
-#: ../../../campaigns/t01.wmf/event:47
+#: ../../../campaigns/t01.wmf/event:38
 msgid "My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br>Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well"
 msgstr ""
 "Az édesapám csontjai békésen nyugszanak a földben amit megtisztított az értelmetlen vérontástól ami kitört köztünk.\n"
 "Boldreth a hű társam és barátom, nyugtat meg engem ezekben a sötét időkben. Ő tartja bennem a lelket és a harcosaimat is ébren. Nem hagyja, hogy a kapzsiság vagy a kétségbeesés megsemmisítse kötelékünket."
 
-#: ../../../campaigns/t01.wmf/event:64
+#: ../../../campaigns/t01.wmf/event:51
 msgid "As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait."
 msgstr "Ahogy apám mondta, időnként harcolni kell, máskor meghúzni magunkat és megpróbálni életben maradni míg eljön a megfelelő idő. Én is így teszek... várok."
 
-#: ../../../campaigns/t01.wmf/event:454
+#: ../../../campaigns/t01.wmf/event:89
 msgid "An old man approaches you..."
 msgstr "Egy öreg ember közeledik feléd..."
 
-#: ../../../campaigns/t01.wmf/event:456
+#: ../../../campaigns/t01.wmf/event:91
 msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days.\" "
 msgstr "\"Üdvözöllek, törzsfőnök. A nevem Khantrukh és sok telet megértem már. Kérlek engedd meg, hogy tanácsot adjak neked ezekben a sötét időkben.\""
 
-#: ../../../campaigns/t01.wmf/event:458 ../../../campaigns/t01.wmf/event:477
-#: ../../../campaigns/t01.wmf/event:496 ../../../campaigns/t01.wmf/event:516
-#: ../../../campaigns/t01.wmf/event:535 ../../../campaigns/t01.wmf/event:555
-#: ../../../campaigns/t01.wmf/event:574
+#: ../../../campaigns/t01.wmf/event:93 ../../../campaigns/t01.wmf/event:107
+#: ../../../campaigns/t01.wmf/event:121 ../../../campaigns/t01.wmf/event:136
+#: ../../../campaigns/t01.wmf/event:150 ../../../campaigns/t01.wmf/event:165
+#: ../../../campaigns/t01.wmf/event:179
 msgid "Advisor"
 msgstr "Tanácsadó"
 
-#: ../../../campaigns/t01.wmf/event:473
+#: ../../../campaigns/t01.wmf/event:103
 msgid "Khantrukh continues..."
 msgstr "Khantrukh folytatja..."
 
-#: ../../../campaigns/t01.wmf/event:475
+#: ../../../campaigns/t01.wmf/event:105
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br>We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise some lumberjacks' huts.\"<br><br>--NEW OBJECTIVES--<br>- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- built a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack."
 msgstr ""
 "\"Isten tudja meddig kell észrevétlenül maradnunk itt. A harcosok azt remélik, hogy bármikor dicsőségesen vonulunk haza, de én erősen kétlem, hogy ez rövidesen megtörténik. A napok egyre rövidebben és hidegebbek...\n"
@@ -84,23 +84,24 @@ msgstr ""
 "- Nyomj SPACE-t, hogy lásd hová építhetsz. A vörös pontokra építhetsz kis épületet, például favágókunyhót.\n"
 " - Építs egy favágókunyhót jobbra a főhadiszállástól. Kattints jobb gombbal a vörös pontra és az ablakban válaszd ki a favágót."
 
-#: ../../../campaigns/t01.wmf/event:492
+#: ../../../campaigns/t01.wmf/event:117
 msgid "The elder remarks..."
 msgstr "Az idős megjegyzi..."
 
-#: ../../../campaigns/t01.wmf/event:494
-msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+#: ../../../campaigns/t01.wmf/event:119
+#, fuzzy
+msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. Wheb you place the lumberjack hut, a flag is created for it. You are expected to connect it to another flag with a road. Little symbols appear around the flag show in which directions you can build the road. The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it. You can click on any of those symbols to build the first step of the road to it. New symbols will appear to show you where the next step can go, and so on. But you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
 "\"Nyilvánvaló, hogy túl fárasztó lenne az embereinknek ha az egész utat a vadonban kellene megtenniük a favágóig. Utat kell építenünk a házunk és a favágókunyhó között. Az emberek bizonyára méltányolják az utat, a fa úgyis elég nehéz. \"\n"
 "\n"
 "--ÚJ FELADAT--\n"
 "- Építs utat a főhadiszállás és a kunyhó között. Kattints az egyik épület előtti zászlóra majd az út gombra. A zászló körül jeleknek kell megjelenniük, amik az irányt és az út meredekségét mutatják. Minél meredekebb annál nehezebb az embereidnek közlekedni rajta. Ha rákattintasz egy szimbólumra az út egy darabja elkészül. Kösd össze a két épület előtti zászlót. Próbáld a lehető legrövidebb utat kiépíteni."
 
-#: ../../../campaigns/t01.wmf/event:512
+#: ../../../campaigns/t01.wmf/event:132
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh:"
 
-#: ../../../campaigns/t01.wmf/event:514
+#: ../../../campaigns/t01.wmf/event:134
 msgid " \"There is an old saying: 'A burden divided is easier to endure.' A crossroad on the way between our site and the lumberjack would ease the work of our carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road."
 msgstr ""
 "\"Egy bölcs ember egyszer azt mondta: 'A megosztott teher könnyebben szállítható.' Egy kereszteződés a favágókunyhók és az otthonunk között megkönnyíti a munkások dolgát.\"\n"
@@ -108,23 +109,24 @@ msgstr ""
 "--ÚJ FELADAT--\n"
 "Van egy zászló szimbólum az út közepén amit éppen most építettél. Ha rákattintasz a felbukkanó ablakban a zászló gombbal készíthetsz egy zászlót, ezzel megosztva a munkát két munkás között. Ha sok tárgyat kell szállítani több zászló felgyorsítja a szállítást, ezzel javítva az infrastruktúrádat. Helyezz egy zászlót az útra."
 
-#: ../../../campaigns/t01.wmf/event:531
+#: ../../../campaigns/t01.wmf/event:146
 msgid "The old man looks to the sky..."
 msgstr "A bölcs az égre néz..."
 
-#: ../../../campaigns/t01.wmf/event:533
-msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+#: ../../../campaigns/t01.wmf/event:148
+#, fuzzy
+msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards."
 msgstr ""
 "\"Az északi szelek azt mondják, az érkező tél hosszú és kegyetlen lesz. Egy favágó nem lesz elég, hogy kielégítse az emberek igényét. Több fa várja a fejszéinket délre az útkereszteződéstől. Húzzunk fel oda még egy favágót.\"\n"
 "\n"
 "--ÚJ FELADAT--\n"
 "- Építs még egy favágókunyhót délre a zászlótól, az utat se felejtsd el. Nem szükséges lépésről lépésre felépíteni elég a célra kattintani, hogy elkészítsd az egész utat."
 
-#: ../../../campaigns/t01.wmf/event:551
+#: ../../../campaigns/t01.wmf/event:161
 msgid "Khantrukh nods..."
 msgstr "Khantrukh biccent..."
 
-#: ../../../campaigns/t01.wmf/event:553
+#: ../../../campaigns/t01.wmf/event:163
 msgid " \"Of course, if we intended to build a bigger settlement much more Lumberjacks would be advisable, but this should do for now.<br>But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give again.<br>So, in order to replace the trees we chop down, we should build a Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--<br>- Build a Ranger's Hut to the east of the first Lumberjack."
 msgstr ""
 "\"Természetesen, mi egy nagyobb települést szeretnénk létrehozni, sokkal több favágóra lesz szükségünk, de most ennyi elég lesz\n"
@@ -134,11 +136,11 @@ msgstr ""
 "--ÚJ FELADAT-- \n"
 "- Építs egy erdészkunyhót keletre a favágóktól."
 
-#: ../../../campaigns/t01.wmf/event:570
+#: ../../../campaigns/t01.wmf/event:175
 msgid "The elder speaks..."
 msgstr "Bölcs:"
 
-#: ../../../campaigns/t01.wmf/event:572
+#: ../../../campaigns/t01.wmf/event:177
 msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations. I would advise that we store stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
 msgstr ""
 "\"Elővigyázatos vagyok, törzsfőnök, sem te sem harcosaid nem szeretnének ezen az elhagyott helyen maradni. Ennek ellenére, az otthonunk visszafoglalása sok időbe fog telni, bölcs dolog lenne felkészülni rá. Azt javaslom tartalékoljuk követ, ki tudja milyen erődítményeket kell majd hamarosan építenünk? A sors ajándéka, nagyszerű kövek vannak a közelben...\"\n"
@@ -146,77 +148,60 @@ msgstr ""
 "--ÚJ FELADAT--\n"
 "-Építs két kőfejtőt délnyugatra a főhadiszállástól."
 
-#: ../../../campaigns/t01.wmf/event:610
+#: ../../../campaigns/t01.wmf/event:206
 msgid "In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br>They are a constant reminder why we had to hide here.<br>And a constant reminder why we must return in the end."
 msgstr ""
 "Egy másik álmatlan éjszakán felmentem a hegyre és nyugat felé néztem. A tűzek még mindig égnek, felemésztve apám örökségét\n"
 "Állandóan emlékeztetnek, miért bujkálunk mi itt.\n"
 "És állandó emlékeztető miért kell visszatérnünk a végén."
 
-#: ../../../campaigns/t01.wmf/event:612
+#: ../../../campaigns/t01.wmf/event:208
 msgid "In the night..."
 msgstr "Éjjel..."
 
-#: ../../../campaigns/t01.wmf/event:629
+#: ../../../campaigns/t01.wmf/event:221
 msgid "Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br>Somehow it felt like farewell. For the first time I wondered what the future might hold for me..."
 msgstr ""
 "Egyszer, mikor elmentem az édesapám sírjához. A hatalmas Kal'mavrath hegy lábánál, egy szent sír mellett álltam, és nem éreztem az idő múlását, sem a jeges eső kopogását a vállamon...\n"
 "Úgy éreztem magam mint búcsúzáskor. Először éreztem, hogy a jövő még tartogat nekem valamit..."
 
-#: ../../../campaigns/t01.wmf/event:631
+#: ../../../campaigns/t01.wmf/event:223
 msgid "At the grave"
 msgstr "A síroknál"
 
-#: ../../../campaigns/t01.wmf/event:648
+#: ../../../campaigns/t01.wmf/event:236
 msgid "Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br>But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side..."
 msgstr ""
 "Nem is olyan régen Boldreth eljött hozzám. Azt javasolta, hogy költözzünk közelebb az otthonunkhoz, hogy bármikor támadhassunk.\n"
 "Azonban, az otthonunk felett még mindig sötét füst száll fel az égre, és érzem, hogy még túl korai, és amit remél nem fog megtörténni a közel jövőben.Talán igaza van, de én attól félek egy meggondolatlan visszatérés nekünk és az ellenségnek is nagy veszteségeket okozna..."
 
-#: ../../../campaigns/t01.wmf/event:650
+#: ../../../campaigns/t01.wmf/event:238
 msgid "The other day..."
 msgstr "Másnap..."
 
-#: ../../../campaigns/t01.wmf/event:667
+#: ../../../campaigns/t01.wmf/event:250
 msgid "Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br>I hereby renew my oath - I will stop this madness at any cost!"
 msgstr ""
 "Ma a harcosaim találkoztak egy öregemberrel aki sérülten ment a sötét erdőben. Nagy megdöbbenéssel hallgattuk, milyen kegyetlenség történt Al'thunranban.\n"
 "Ezért most megújítom eskümet: megállítom ezt az őrültséget mindenáron!"
 
-#: ../../../campaigns/t01.wmf/event:669
+#: ../../../campaigns/t01.wmf/event:252
 msgid "Another evening..."
 msgstr "Éjszaka..."
 
-#: ../../../campaigns/t01.wmf/event:712
+#: ../../../campaigns/t01.wmf/event:282
 msgid "Victory!"
 msgstr "Győzelem!"
 
-#: ../../../campaigns/t01.wmf/event:714
+#: ../../../campaigns/t01.wmf/event:284
 msgid "Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may continue if you wish. Otherwise, move on to the next mission."
 msgstr ""
 "Nagyszerű munka, törzsfőnök. Mindenünk megvan, hogy szembenézzünk a kemény téllel és felkészüljünk az előttünk álló csatákra.\n"
 "\n"
 "GYŐZELEM\n"
 "\n"
-"Folytathatod az építést ha akarod vagy lépj a következő pályára."
+"Folytathatod az építést, ha akarod, vagy továbbléphetsz a következő küldetésre."
 
-#: ../../../campaigns/t01.wmf/event:716
+#: ../../../campaigns/t01.wmf/event:286
 msgid "Mission Complete"
 msgstr "Feladat teljesítve"
-
-#~ msgid "- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- build a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack.<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-#~ msgstr ""
-#~ "- nyomj SPACE-t, hogy lásd hová tudsz építeni. A piros pontokra kis épületet építhetsz mint például a favágókunyhó.\n"
-#~ "-Kattints a pontra és építs egy favágókunyhót balra a főhadiszállástól.\n"
-#~ "-Építs utat a főhadiszállás és a kunyhó között. Kattints az egyik épület előtti zászlóra majd az út gombra. A zászló körül jeleknek kell megjelenniük, amik az irányt és az út meredekségét mutatják. Minél meredekebb annál nehezebb az embereidnek közlekedni rajta. Ha rákattintasz egy szimbólumra az út egy darabja elkészül. Kösd össze a két épület előtti zászlót. Próbáld a lehető legrövidebb utat kiépíteni."
-
-#~ msgid "- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-#~ msgstr ""
-#~ "- Van egy zászló szimbólum az út közepén amit éppen most építettél. Ha rákattintasz a felbukkanó ablakban a zászló gombbal készíthetsz egy zászlót, ezzel megosztva a munkát két munkás között. Ha sok tárgyat kell szállítani több zászló felgyorsítja a szállítást, ezzel javítva az infrastruktúrádat. Helyezz egy zászlót az útra.\n"
-#~ "Építs egy favágókunyhót délre a zászlótól. Aztán kösd össze a zászlót a kunyhóval. Nem kell az utat lépésről lépésre megépítened, elég a célra kattintani és az egész út felépül egyszerre."
-
-#~ msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-#~ msgstr "- Építs egy erdészkunyhót keletre a favágókunyhótól."
-
-#~ msgid "- Build two Quarries south-west of your headquarters."
-#~ msgstr "- Építs két kőfejtőt délnyugatra a főhadiszállásodtól."

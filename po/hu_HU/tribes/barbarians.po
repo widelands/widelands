@@ -1,13 +1,13 @@
 # Widelands po/hu_HU/tribes/barbarians.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team.
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn2988\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-03-19 20:33+0100\n"
+"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"PO-Revision-Date: 2007-08-30 08:04+0200\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Sörfőzde"
 
 #: ../../../tribes/barbarians/buildings/burner/conf:2
 msgid "Charcoal Burner"
-msgstr "Faszéngyártó"
+msgstr "Szénégető"
 
 #: ../../../tribes/barbarians/buildings/citadel/conf:2
 msgid "Citadel"
@@ -98,7 +98,7 @@ msgstr "Farm"
 # fern - nád?
 #: ../../../tribes/barbarians/buildings/fernery/conf:2
 msgid "Fernery"
-msgstr "Nádtermesztő"
+msgstr "Nádtermelő"
 
 #: ../../../tribes/barbarians/buildings/fisher/conf:2
 msgid "Fisher Hut"
@@ -128,11 +128,6 @@ msgstr "Fűrészmalom"
 msgid "Headquarters"
 msgstr "Főhadiszállás"
 
-#: ../../../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../../../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Sisakkészítő"
-
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Vadászkunyhó"
@@ -142,9 +137,8 @@ msgid "Inn"
 msgstr "Vendéglő"
 
 #: ../../../tribes/barbarians/buildings/lumberjack/conf:2
-#, fuzzy
 msgid "Lumberjack's Hut"
-msgstr "Favágó"
+msgstr "Favágókunyhó"
 
 #: ../../../tribes/barbarians/buildings/metalworks/conf:2
 msgid "Metalworks"
@@ -445,7 +439,7 @@ msgstr "A barbár pékek a legjobban ennek a lapos és ízletes pitta kenyér el
 
 #: ../../../tribes/barbarians/wares/ration/conf:2
 msgid "Ration"
-msgstr "Szendvics"
+msgstr "Élelmiszer"
 
 #: ../../../tribes/barbarians/wares/ration/conf:3
 msgid "A small bite to keep miners strong and working."
@@ -485,7 +479,7 @@ msgstr "A lapát fontos a növények ültetéséhez, ezért minden erdésznek sz
 
 #: ../../../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
-msgstr "Étel"
+msgstr "Uzsonna"
 
 #: ../../../tribes/barbarians/wares/snack/conf:3
 msgid "A bit bigger, for the advanced minors will need a big morsel."
@@ -594,6 +588,11 @@ msgstr "Vadőr"
 #: ../../../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
 msgstr "Geológus"
+
+#: ../../../tribes/barbarians/workers/helmsmith/conf:2
+#: ../../../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Sisakkészítő"
 
 #: ../../../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
