@@ -7,20 +7,20 @@ msgstr ""
 "Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-02-24 18:30+0100\n"
+"PO-Revision-Date: 2008-03-19 15:43-0500\n"
 "Last-Translator: Pierre Salagnac <pierre.salagnac@free.fr>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../../campaigns/cconfig:16
 msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Tutoriel) Les Barbares - Le second empire"
+msgstr "(Tutoriel) Les Barbares - Le Second Empire"
 
 #: ../../campaigns/cconfig:19
 msgid "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
-msgstr ""
+msgstr "Lorsque Chat'Karuth quitta ce monde, il était vieux, le père de trois garçons forts et ambitieux, et à la tête d'une armée qui pouvait vaincre tout ennemi désirant se dresser contre les forêts ancestrales. Au cours de son reigne glorieux, Chat'Karuth éleva son fils aîné, Thron, comme son successeur en tant que seigneur de guerre - une décision qui laissa ses deux frères insatisfaits. Le vieux seigneur le savait. Thron quitta la capitale de Al'thunran, le domaine du trône parmi les arbres, comme son père le lui avait commandé, retira ses forces dans les hautes collines où il enterra la dépouille de son père et jura devant ses dieux et son honneur qu'il reviendrait pour établir l'ordre. Alors que ses frères ragent dans une guerre aveugle contre Thron et les forces qu'il avait laissées en garde aux frontières de Al'thunran, le jeune seigneur tente de réunir ses frères ambitieux et de forcer les tribus à marcher une nouvelle fois sous le même étendard."
 
 #: ../../campaigns/cconfig:22
 msgid "Empire - The months of exile"
@@ -28,7 +28,7 @@ msgstr "L'Empire - Les mois d'exil"
 
 #: ../../campaigns/cconfig:25
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
-msgstr ""
+msgstr "Six mois plus tôt, Lutius - un jeune général de l'Empire - fût envoyé avec 150 soldats à la frontière au-delà des forêts du Nord, où les terres des tribus barbares et de l'Empire se rencontrent. Sa tâche était de défendre les terres de l'Empire. Au début, tout était calme, il parla même à quelques jeunes barbares et se prît à rêver d'une vie paisible - côte à côte avec ce peuple archaïque. Il commençait à se sentir plus sauf et son armée commençait à baisser son attention sur leurs ennemis potentiels - ce fût leur erreur. Une nuit de mars, son armée manquant d'entraînement fût attaquée par une centaine de soldats barbares et ce fût la débandade. Seule la chance leur permit à lui et une poignée de soldats de survivre."
 
 #: ../../campaigns/cconfig:42
 msgid "Tutorial1 - Eyes in the Dark"
@@ -52,7 +52,7 @@ msgstr "Tutoriel de l'Empire 1 - Les Rives de Malac' Mor"
 
 #: ../../campaigns/cconfig:60
 msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
-msgstr ""
+msgstr "Après avoir perdu une bataille importante contre les Barbares, qui mena à la perte d'une partie importante du territoire de l'Empire, Lutius abandonne Fremil pour démarrer une nouvelle vie. Mais son destin prend son bateau dans une puissante tempête, qui n'en épargne que quelques morceaux. C'est grâce à un coup de chance qu'il parvient à sauver ses gens et le bateau endommagé sur une terre de sable inconnue."
 
 #: ../../campaigns/cconfig:65
 msgid "Empire Tutorial2 - An outpost for exile"
@@ -60,7 +60,7 @@ msgstr "Turoriel de l'Empire 2 - Un poste avancé pour l'exil"
 
 #: ../../campaigns/cconfig:67
 msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
-msgstr ""
+msgstr "Enfin, le bateau fût réparé, et Lutius et ses gens purent continuer leur quête d'une bonne terre pour un nouveau départ. Quelques jours plus tard seulement, ils accostent sur une île verdoyante et paradisiaque."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid "Checkmate"
@@ -156,7 +156,7 @@ msgstr "Les Pays des Rivières"
 
 #: ../../maps/Riverlands.wmf/elemental:11
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
-msgstr ""
+msgstr "Une contrée mystique, pleine de paysages variés, qui sont tous lacérés de larges rivières."
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "The Oasis Triangle"
@@ -172,7 +172,7 @@ msgstr "Le grand lac"
 
 #: ../../maps/The big lake.wmf/elemental:11
 msgid "This island once came out of the deepest grounds of the sea. In those days, fire rose out of the salty seawater and brought ash, stones and earth to daylight. And the fire came nearer and nearer to the sun, while the mountain grew and grew. Until one day, when the whole firemountain exploded. Nowadays only this ring is left from that mighty firemountain. Do you think, that it is big enough for more than one tribe?"
-msgstr ""
+msgstr "Cette île surgît un jour des profondeurs de la met. En ces jours, le feu jaillit de l'eau salée et apporta des cendres, des pierres et de la terre à la lumière du jour. Et le feu se rapprocha du soleil, encore et encore, alors que les montagnes grandissaient et grandissaient... Jusqu'à ce qu'un jour le volcan explose. Aujourd'hui, seul ce cercle présente une trace de ce puissant volcan. Pensez-vous qu'il est assez grand pour plus d'une tribu?"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid "The long way"
@@ -180,7 +180,7 @@ msgstr "Le long chemin"
 
 #: ../../maps/The long way.wmf/elemental:11
 msgid "Another strange test by the Gods. To reach the other side, there seems to be no other way, than occupying the land of your enemies."
-msgstr ""
+msgstr "Un nouveau test curieux des dieux. Pour atteindre l'autre côté, on dirait qu'il n'y a aucun autre moyen qu'occuper les terres de vos ennemis."
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "Two Frontiers"
@@ -188,7 +188,7 @@ msgstr "Deux Frontières"
 
 #: ../../maps/Two frontiers.wmf/elemental:11
 msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr ""
+msgstr "Une carte de combat multi-joueurs sur une petite île circulaire."
 
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "War of the Valleys"
@@ -197,3 +197,4 @@ msgstr "La Guerre des Vallées"
 #: ../../maps/War of the Valleys.wmf/elemental:11
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr "On dit que même le soleil et la lune doivent trouver leur chemin entre les pics de ces montagnes. ASTUCE: Les monolithes indiquent des gisements de minerai. Ne vous embêtez pas à envoyer des géologues partout."
+
