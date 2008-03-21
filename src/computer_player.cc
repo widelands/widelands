@@ -25,6 +25,7 @@
 #include "world.h"
 #include "transport.h"
 #include "player.h"
+#include "profile.h"
 #include "findnode.h"
 #include "tribe.h"
 #include "constructionsite.h"
@@ -82,38 +83,37 @@ void Computer_Player::late_initialization ()
 		wares[i].preciousness = 0;
 	}
 
-// Tribe specific stuff
-// ToDo: This should be defined in tribes "conf-file"
+	// Building hints for computer player
+	std::string stoneproducer = "lumberjack";
+	std::string trunkproducer = "forester";
+	std::string forester = "forester";
 
-//These buildings might be named different in differnt tribes
-	const char* quarry="quarry";
-	const char* lumberjack="lumberjack";
-	const char* ranger="ranger";
-	const char* granitmine="granitmine";
+	// Read the computerplayer hints of the tribe
+	// FIXME: this is only a temporary workaround. Better define all this stuff
+	//        in each buildings conf-file.
+	std::string tribehints = "tribes/"+ tribe->name() + "/cphints";
+	if (g_fs->FileExists(tribehints)) {
+		Profile prof(tribehints.c_str());
+		Section *hints;
+		hints = prof.get_section("global");
 
-//Safe-ware, listed after preciousness
-	const char* ware1="trunk";
-	const char* ware2="raw_stone";
-	const char* ware3="blackwood";
-	const char* ware4="grindstone";
+		char warename[32];
+		char wareprec[32];
+		for (int32_t i = 0; i < hints->get_safe_int("numofwares"); ++i) {
+			sprintf(warename, "ware_n_%i", i);
+			sprintf(wareprec, "ware_p_%i", i);
+			int32_t wprec = hints->get_safe_int(wareprec);
+			wares[tribe->get_safe_ware_index(hints->get_safe_string(warename))
+					].preciousness=wprec;
+		}
+		stoneproducer = hints->get_safe_string("stoneproducer");
+		trunkproducer = hints->get_safe_string("trunkproducer");
+		forester = hints->get_safe_string("forester");
 
-/*=====================*/
-//Here comes the empire
-	if (tribe->name() == "empire") {
-		ware1      = "stone";
-		ware2      = "trunk";
-		ware3      = "wood";
-		ware4      = "marble";
-
-		ranger     = "forester";
-		granitmine = "marblemine";
+	} else {
+		log("   WARNING: No computerplayer hints for tribe %s found\n", tribe->name().c_str());
+		log("   This will lead to stupid behaviour of said player!\n");
 	}
-/*=====================*/
-
-	wares[tribe->get_safe_ware_index(ware1)].preciousness=4;
-	wares[tribe->get_safe_ware_index(ware2)].preciousness=3;
-	wares[tribe->get_safe_ware_index(ware3)].preciousness=2;
-	wares[tribe->get_safe_ware_index(ware4)].preciousness=1;
 
 	// collect information about which buildings our tribe can construct
 	for (Building_Index::value_t i = 0; i < tribe->get_nrbuildings(); ++i) {
@@ -122,27 +122,24 @@ void Computer_Player::late_initialization ()
 
 		buildings.push_back (BuildingObserver());
 
-		BuildingObserver& bo=buildings.back();
+		BuildingObserver& bo      = buildings.back();
 		bo.name                   = building_name.c_str();
-		bo.id=i;
+		bo.id                     = i;
 		bo.desc                   = &bld;
 		bo.hints                  = &bld.hints();
-		bo.type=BuildingObserver::BORING;
-		bo.cnt_built=0;
-		bo.cnt_under_construction=0;
-		bo.production_hint=-1;
+		bo.type                   = BuildingObserver::BORING;
+		bo.cnt_built              = 0;
+		bo.cnt_under_construction = 0;
+		bo.production_hint        = -1;
 
-		bo.is_buildable = bld.get_buildable();
+		bo.is_buildable           = bld.get_buildable();
 
-		bo.need_trees=false;
-		bo.need_stones=false;
+		bo.need_trees             = false;
+		bo.need_stones            = false;
 
-		// FIXME: define these properties in the building's conf file
-		if (building_name == quarry)     bo.need_stones = true;
-		if (building_name == lumberjack) bo.need_trees  = true;
-		if (building_name == granitmine) bo.need_stones = true;
-		if (building_name == lumberjack) bo.need_trees  = true;
-		if (building_name == ranger)
+		if (building_name == stoneproducer.c_str()) bo.need_stones = true;
+		if (building_name == trunkproducer.c_str()) bo.need_trees  = true;
+		if (building_name == forester.c_str())
 			bo.production_hint = tribe->get_safe_ware_index("trunk");
 
 		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
