@@ -663,6 +663,13 @@ void NetHost::welcomeClient(uint32_t number, const std::string& playername)
 	writeSettingAllPlayers(s);
 	s.send(client.sock);
 
+	// Broadcast new information about the player to everybody
+	s.reset();
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(playernum);
+	writeSettingPlayer(s, playernum);
+	broadcast(s);
+
 	sendSystemChat("%s has joined the game", effective_name.c_str());
 }
 
