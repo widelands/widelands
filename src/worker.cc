@@ -1050,7 +1050,8 @@ void Worker::init_auto_task(Game * game) {
 const Bob::Task Worker::taskTransfer = {
 	"transfer",
 	static_cast<Bob::Ptr>(&Worker::transfer_update),
-	static_cast<Bob::PtrSignal>(&Worker::transfer_signalimmediate)
+	static_cast<Bob::PtrSignal>(&Worker::transfer_signalimmediate),
+	0
 };
 
 
@@ -1308,6 +1309,7 @@ void Worker::cancel_task_transfer(Game* g)
 const Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
 	static_cast<Bob::Ptr>(&Worker::buildingwork_update),
+	0,
 	0
 };
 
@@ -1390,6 +1392,7 @@ const Bob::Task Worker::taskReturn = {
 	"return",
 	static_cast<Bob::Ptr>(&Worker::return_update),
 	0,
+	0
 };
 
 
@@ -1488,6 +1491,7 @@ void Worker::return_update(Game* g, State* state)
 const Bob::Task Worker::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Worker::program_update),
+	0,
 	0
 };
 
@@ -1536,6 +1540,7 @@ const Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",
 	static_cast<Bob::Ptr>(&Worker::gowarehouse_update),
 	static_cast<Bob::PtrSignal>(&Worker::gowarehouse_signalimmediate),
+	static_cast<Bob::Ptr>(&Worker::gowarehouse_pop)
 };
 
 
@@ -1575,9 +1580,6 @@ void Worker::gowarehouse_update(Game* g, State* state)
 			signal_handled();
 		} else {
 			molog("[gowarehouse]: cancel for signal '%s'\n", signal.c_str());
-
-			delete m_supply;
-			m_supply = 0;
 			pop_task(g);
 			return;
 		}
@@ -1600,9 +1602,6 @@ void Worker::gowarehouse_update(Game* g, State* state)
 		molog("[gowarehouse]: Got a Transfer\n");
 
 		state->transfer = 0;
-		delete m_supply;
-		m_supply = 0;
-
 		pop_task(g);
 		start_task_transfer(g, t);
 		return;
@@ -1610,10 +1609,6 @@ void Worker::gowarehouse_update(Game* g, State* state)
 
 	if (!get_economy()->get_nr_warehouses()) {
 		molog("[gowarehouse]: No warehouse left in Economy\n");
-
-		delete m_supply;
-		m_supply = 0;
-
 		pop_task(g);
 		return;
 	}
@@ -1631,14 +1626,20 @@ void Worker::gowarehouse_update(Game* g, State* state)
 	start_task_idle(g, get_animation("idle"), 1000);
 }
 
-void Worker::gowarehouse_signalimmediate
-	(Game *, State *, std::string const & signal)
+void Worker::gowarehouse_signalimmediate(Game*, State*, const std::string& signal)
 {
 	if (signal == "transfer") {
 		// We are assigned a transfer, make sure our supply disappears immediately
+		// Otherwise, we might receive two transfers in a row.
 		delete m_supply;
 		m_supply = 0;
 	}
+}
+
+void Worker::gowarehouse_pop(Game*, State*)
+{
+	delete m_supply;
+	m_supply = 0;
 }
 
 
@@ -1646,6 +1647,7 @@ const Bob::Task Worker::taskDropoff = {
 	"dropoff",
 	static_cast<Bob::Ptr>(&Worker::dropoff_update),
 	0,
+	0
 };
 
 /**
@@ -1744,6 +1746,7 @@ const Bob::Task Worker::taskFetchfromflag = {
 	"fetchfromflag",
 	static_cast<Bob::Ptr>(&Worker::fetchfromflag_update),
 	0,
+	0
 };
 
 
@@ -1824,6 +1827,7 @@ const Bob::Task Worker::taskWaitforcapacity = {
 	"waitforcapacity",
 	static_cast<Bob::Ptr>(&Worker::waitforcapacity_update),
 	0,
+	0
 };
 
 /**
@@ -1895,6 +1899,7 @@ const Bob::Task Worker::taskLeavebuilding = {
 	"leavebuilding",
 	static_cast<Bob::Ptr>(&Worker::leavebuilding_update),
 	0,
+	0
 };
 
 
@@ -1985,6 +1990,7 @@ const Bob::Task Worker::taskFugitive = {
 	"fugitive",
 	static_cast<Bob::Ptr>(&Worker::fugitive_update),
 	0,
+	0
 };
 
 
@@ -2124,6 +2130,7 @@ const Bob::Task Worker::taskGeologist = {
 	"geologist",
 	static_cast<Bob::Ptr>(&Worker::geologist_update),
 	0,
+	0
 };
 
 

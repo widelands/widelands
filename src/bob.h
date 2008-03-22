@@ -55,7 +55,7 @@ struct BobProgramBase {
  * currently being executed.
  *
  * Upon initialization, an object has no Task at all. A CMD_ACT will be
- * scheduled automatically. When it is executed, init_auto_task() is called to
+ * scheduled automatically. When it is executed, \ref init_auto_task() is called to
  * automatically select a fallback Task.
  *
  * However, the creator of the Bob can choose to push a specific Task
@@ -67,7 +67,7 @@ struct BobProgramBase {
  * returned by get_state(). Every Task on the Task stack has its own
  * State structure, i.e. push_task() does not destroy the current Task's State.
  *
- * In order to start a new sub-task, you have to call push_task(), and then fill
+ * In order to start a new sub-task, you have to call \ref push_task(), and then fill
  * the State structure returned by get_state() with any parameters that the Task
  * may need.
  *
@@ -107,6 +107,11 @@ struct BobProgramBase {
  * update() function. Often, update() functions will just call \ref pop_task()
  * and leave the signal handling to their parent tasks. To ultimately handle
  * a signal, the update() function must call \ref signal_handled().
+ *
+ * If a task maintains state outside of its \ref State structure, it may have
+ * to do certain bookkeeping tasks whenever the task is popped from the stack.
+ * To this end, a task may have a \ref Task::pop method. If this method exists, it
+ * is always called just before the task is popped from the stack.
  */
 struct Bob : public Map_Object {
 	friend struct Map_Bobdata_Data_Packet;
@@ -134,6 +139,12 @@ struct Bob : public Map_Object {
 		 * must be performed immediately. May be zero.
 		 */
 		PtrSignal signal_immediate;
+
+		/**
+		 * Called by \ref pop_task() just before the task is popped from
+		 * the task. Must only perform bookkeeping tasks. May be zero.
+		 */
+		Ptr pop;
 	};
 
 	/**
@@ -310,7 +321,7 @@ protected:
 
 private:
 	void do_act(Game* g);
-	void do_pop_task();
+	void do_pop_task(Game* g);
 	void idle_update(Game* g, State* state);
 	void movepath_update(Game* g, State* state);
 	void move_update(Game* g, State* state);

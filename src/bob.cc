@@ -203,7 +203,7 @@ void Bob::init(Editor_Game_Base* gg)
 void Bob::cleanup(Editor_Game_Base *gg)
 {
 	while (m_stack.size())
-		do_pop_task();
+		do_pop_task(dynamic_cast<Game*>(gg));
 
 	set_owner(0); // implicitly remove ourselves from owner's map
 
@@ -327,9 +327,12 @@ void Bob::push_task(Game* g, const Task & task)
 /**
  * Actually pop the top-most task, but don't schedule anything.
  */
-void Bob::do_pop_task()
+void Bob::do_pop_task(Game* g)
 {
 	State* state = get_state();
+
+	if (state->task->pop)
+		(this->*state->task->pop)(g, state);
 
 	delete state->path;
 	delete state->route;
@@ -350,7 +353,7 @@ void Bob::pop_task(Game* g)
 {
 	assert(m_in_act);
 
-	do_pop_task();
+	do_pop_task(g);
 
 	schedule_act(g, 10);
 }
@@ -421,7 +424,7 @@ void Bob::send_signal(Game* g, std::string sig)
 void Bob::reset_tasks(Game* g)
 {
 	while (m_stack.size())
-		do_pop_task();
+		do_pop_task(g);
 
 	m_signal.clear();
 
@@ -442,6 +445,7 @@ Bob::Task Bob::taskIdle = {
 
 	&Bob::idle_update,
 	0, // signal_immediate
+	0
 };
 
 
@@ -497,7 +501,8 @@ Bob::Task Bob::taskMovepath = {
 	"movepath",
 
 	&Bob::movepath_update,
-	0 // signal_immediate
+	0, // signal_immediate
+	0
 };
 
 /**
@@ -669,6 +674,7 @@ Bob::Task Bob::taskMove = {
 	"move",
 
 	&Bob::move_update,
+	0,
 	0
 };
 

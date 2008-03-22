@@ -176,6 +176,7 @@ private:
 	void program_update(Game* g, State* state);
 	void gowarehouse_update(Game* g, State* state);
 	void gowarehouse_signalimmediate(Game* g, State* state, const std::string& signal);
+	void gowarehouse_pop(Game* g, State* state);
 	void dropoff_update(Game* g, State* state);
 	void fetchfromflag_update(Game* g, State* state);
 	void waitforcapacity_update(Game* g, State* state);
