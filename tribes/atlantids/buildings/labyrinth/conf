@@ -1,0 +1,69 @@
+[global]
+descname=_"Labyrinth"
+type=training
+size=big
+buildable=yes
+buildicon=labyrinth_build.png
+worker=carrier
+max_soldiers=8
+train=defense
+program=Sleep
+program=upgrade_defense_0 # This is needed to run the scripts
+program=upgrade_defense_1
+
+[Sleep]
+0=sleep 5000
+
+[defense]
+min_level=0
+max_level=2
+
+[upgrade_defense_0]
+0=sleep 30000
+1=check bread
+2=check smoked_fish,smoked_meat
+3=check steel_shield
+4=check_soldier defense 0 # Fails when aren't any soldier of level 0 defense
+5=consume bread
+6=consume smoked_fish,smoked_meat
+7=consume steel_shield
+8=train defense 0 1
+
+[upgrade_defense_1]
+0=sleep 30000
+1=check bread
+2=check smoked_fish,smoked_meat
+3=check advanced_shield
+4=check_soldier defense 1 # Fails when aren't any soldier of level 0 defense
+5=consume bread
+6=consume smoked_fish,smoked_meat
+7=consume advanced_shield
+8=train defense 1 2
+
+[inputs]
+bread=10
+smoked_fish=6
+smoked_meat=6
+steel_shield=4
+advanced_shield=4
+
+
+[buildcost]
+trunk=3
+stone=4
+planks=5
+spidercloth=5
+diamond=2
+mountain_crystal=2
+
+[idle]
+pics=labyrinth_i_??.png  # ???
+hotspot=82 88
+
+[working]
+pics=labyrinth_i_??.png  # ???
+hotspot=82 88
+
+[build]
+pics=labyrinth_i_??.png  # ???
+hotspot=82 88

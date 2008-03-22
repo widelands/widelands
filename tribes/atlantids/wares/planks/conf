@@ -1,0 +1,8 @@
+[global]
+descname=_"Planks"
+help=_"Planks are an important build material of the Atlantids."
+menu_pic=menu.png
+
+[idle]
+pics=idle.png
+hotspot=10 17

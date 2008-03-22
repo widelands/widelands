@@ -1,0 +1,29 @@
+[global]
+descname=_"Warehouse"
+soundfx=warehouse-bringitin
+type=warehouse
+subtype=none
+size=medium
+buildable=yes
+buildicon=warehouse_build.png
+
+[buildcost]
+trunk=2
+planks=2
+stone=2
+mountain_crystal=1
+spidercloth=1
+
+[idle]
+pics=warehouse_i_??.png  # ???
+hotspot=60 72
+
+[build]
+pics=warehouse_i_??.png  # ???
+hotspot=60 72
+
+[working]
+pics=warehouse_i_??.png  # ???
+sfx_frame=1
+sfx_name=warehouse-bringitin
+hotspot=60 72

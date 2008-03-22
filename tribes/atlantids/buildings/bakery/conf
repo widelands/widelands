@@ -1,0 +1,44 @@
+[global]
+descname=_"Bakery"
+type=production
+size=medium
+buildable=yes
+buildicon=bakery_build.png
+worker=baker
+program=work
+output=bread
+stopable=yes
+
+[inputs]
+blackrootflour=4
+cornflour=4
+water=8
+
+[work]
+0=sleep 35000
+1=check water 2
+2=check blackrootflour
+3=check cornflour
+4=consume water 2
+5=consume blackrootflour
+6=consume cornflour
+7=animation working 30000
+8=produce bread
+9=produce bread
+
+[buildcost]
+trunk=2
+planks=2
+stone=3
+
+[idle]
+pics=bakery_i_??.png  # ???
+hotspot=55 55
+
+[working]
+pics=bakery_i_??.png  # ???
+hotspot=55 55
+
+[build]
+pics=bakery_i_??.png  # ???
+hotspot=55 55

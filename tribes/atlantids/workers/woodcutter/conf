@@ -1,0 +1,35 @@
+[global]
+descname=_"Woodcutter"
+help=_"Fells trees."
+type=generic
+menu_pic=menu.png
+program=harvest
+
+[buildcost]
+carrier=1
+saw=1
+
+[harvest]
+0=findobject attrib:tree radius:8
+1=walk object
+2=animation sawing 10000
+3=object fall
+4=animation idle 2000
+5=createitem trunk
+6=return
+
+[sawing]
+pics=sawing_??.png
+hotspot=5 13
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=5 13
+
+[walkload]
+dirpics=walkload_!!_??.png
+hotspot=5 13

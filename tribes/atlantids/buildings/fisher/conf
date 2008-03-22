@@ -1,0 +1,25 @@
+[global]
+descname=_"Fisher Hut"
+type=production
+size=small
+buildable=yes
+buildicon=fisher_build.png
+worker=fisher
+output=fish
+program=work
+
+[buildcost]
+trunk=1
+planks=2
+
+[work]
+0=sleep 17000
+1=worker fish
+
+[idle]
+pics=fisher_i_??.png  # ???
+hotspot=50 65
+
+[build]
+pics=fisher_i_??.png  # ???
+hotspot=50 65

@@ -1,0 +1,36 @@
+[global]
+descname=_"Fisher"
+help=_"The fisher fishes delicious fish."
+type=generic
+menu_pic=menu.png
+program=fish
+
+[buildcost]
+carrier=1
+fishing_net=1
+
+[fish]
+0=findspace size:any radius:7 resource:fish
+1=walk coords
+2=mine fish 1
+3=animation fishing 3000 # Play a fishing animation
+4=return
+
+[idle]
+pics=fishing_??.png
+hotspot=12 25
+
+[fishing]
+pics=fishing_??.png
+hotspot=12 25
+fps=20
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=12 25
+fps=20
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=12 25
+fps=20

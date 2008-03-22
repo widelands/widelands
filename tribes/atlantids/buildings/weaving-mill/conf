@@ -1,0 +1,54 @@
+[global]
+descname=_"Weaving-Mill"
+type=production
+size=big
+buildable=yes
+buildicon=weaving_mill_build.png
+worker=weaver
+program=work
+program=produce_spidercloth
+program=produce_tabard
+output=spidercloth
+output=tabard
+
+[inputs]
+spideryarn=6
+goldyarn=4
+
+[work]
+0=set +nostats
+1=call produce_spidercloth
+2=call produce_tabard
+
+[produce_spidercloth]
+0=set +catch
+1=sleep 40000
+2=check spideryarn
+3=consume spideryarn
+4=produce spidercloth
+
+[produce_tabard]
+0=set +catch
+1=sleep 40000
+2=check spideryarn
+3=check goldyarn
+4=consume spideryarn
+5=consume goldyarn
+6=produce tabard
+
+[buildcost]
+trunk=3
+stone=4
+planks=2
+
+[idle]
+pics=weaving_mill_i_??.png  # ???
+hotspot=94 86
+
+[build]
+pics=weaving_mill_i_??.png  # ???
+hotspot=94 86
+
+[working]
+pics=weaving_mill_i_??.png  # ???
+hotspot=94 86

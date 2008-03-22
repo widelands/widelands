@@ -1,0 +1,26 @@
+[global]
+descname=_"Hunter Hut"
+type=production
+size=small
+help="The Hunter brings fresh, raw meat to the atlantids"
+buildable=yes
+buildicon=hunter_build.png
+worker=hunter
+program=work
+
+[work]
+0=sleep 35000
+1=worker hunt
+
+[buildcost]
+trunk=1
+planks=1
+stone=1
+
+[idle]
+pics=hunter_i_??.png
+hotspot=55 60
+
+[build]
+pics=hunter_i_??.png
+hotspot=55 60

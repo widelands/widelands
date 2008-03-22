@@ -1,0 +1,55 @@
+[global]
+descname=_"Soldier"
+help=Defend and Conquer!
+type=soldier
+buildable=1
+menu_pic=menu.png
+
+
+# SOLDIER SPECIFIC STUFF STARTS HERE
+max_hp_level=3
+max_evade_level=2
+max_attack_level=4
+max_defense_level=2
+
+# initial values and per level increasements
+hp=90-130
+hp_incr_per_level=30
+attack=14-16
+attack_incr_per_level=3
+defense=6
+defense_incr_per_level=5
+evade=30
+evade_incr_per_level=10
+
+hp_level_0_pic=hp_level0.png
+hp_level_1_pic=hp_level1.png
+hp_level_2_pic=hp_level2.png
+hp_level_3_pic=hp_level3.png
+evade_level_0_pic=evade_level0.png
+evade_level_1_pic=evade_level1.png
+evade_level_2_pic=evade_level2.png
+attack_level_0_pic=attack_level0.png
+attack_level_1_pic=attack_level1.png
+attack_level_2_pic=attack_level2.png
+attack_level_3_pic=attack_level3.png
+attack_level_4_pic=attack_level4.png
+attack_level_5_pic=attack_level5.png
+defense_level_0_pic=defense_level0.png
+defense_level_1_pic=defense_level1.png
+defense_level_2_pic=defense_level2.png
+
+# SOLDIER SPECIFIC STUFF ENDS HERE
+
+[buildcost]
+tabard=1
+light_trident=1
+carrier=1
+
+[idle]
+pics=idle_??.png
+hotspot=10 23
+
+[walk]
+hotspot=10 23
+fps=20

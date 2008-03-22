@@ -1,0 +1,39 @@
+[global]
+descname=_"Spiderfarm"
+type=production
+size=big
+buildable=yes
+buildicon=spiderfarm_build.png
+worker=spiderbreeder
+program=work
+output=spideryarn
+
+[inputs]
+corn=7
+water=7
+
+[work]
+0=sleep 25000
+1=check corn
+2=check water
+3=consume corn
+4=consume water
+5=animation working 30000
+6=produce spideryarn
+
+[buildcost]
+trunk=2
+stone=2
+planks=2
+
+[idle]
+pics=spiderfarm_i_??.png  # ???
+hotspot=66 92
+
+[build]
+pics=spiderfarm_i_??.png  # ???
+hotspot=66 92
+
+[working]
+pics=spiderfarm_i_??.png  # ???
+hotspot=66 92

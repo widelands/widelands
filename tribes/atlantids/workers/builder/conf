@@ -1,0 +1,42 @@
+[global]
+descname=_Builder
+help=Works at construction sites to create a new building.
+type=generic
+menu_pic=menu.png
+
+[buildcost]
+hammer=1
+carrier=1
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk_e]
+pics=walk_e_??.png
+hotspot=5 13
+
+[walk_w]
+pics=walk_w_??.png
+hotspot=5 13
+
+[walk_se]
+pics=walk_se_??.png
+hotspot=5 13
+
+[walk_sw]
+pics=walk_sw_??.png
+hotspot=5 13
+
+[walk_nw]
+pics=walk_nw_??.png
+hotspot=5 13
+
+[walk_ne]
+pics=walk_ne_??.png
+hotspot=5 13
+
+# Walking with a ware, not needed for builder
+[walkload]
+pics=walk_ne_00.png
+hotspot=5 13

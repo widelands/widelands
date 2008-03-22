@@ -1,0 +1,96 @@
+[global]
+descname=_"Dungeon"
+type=training
+size=medium
+buildable=yes
+enhanced_building=yes
+buildicon=dungeon_build.png
+worker=trainer
+max_soldiers=8
+train=attack
+program=Sleep
+program=upgrade_attack_1
+program=upgrade_attack_2
+program=upgrade_attack_3
+program=upgrade_attack_4
+
+[Sleep]
+0=sleep 5000
+
+[attack]
+min_level=0
+max_level=4
+
+[upgrade_attack_1]
+0=sleep 30000
+1=check bread
+2=check smoked_fish,smoked_meat
+3=check long_trident
+4=check_soldier attack 0 # Fails when aren't any soldier of level 0 attack
+5=consume bread
+6=consume smoked_fish,smoked_meat
+7=consume long_trident
+8=train attack 0 1
+
+[upgrade_attack_2]
+0=sleep 30000
+1=check bread
+2=check smoked_fish,smoked_meat
+3=check steel_trident
+4=check_soldier attack 1 # Fails when aren't any soldier of level 0 attack
+5=consume bread
+6=consume smoked_fish,smoked_meat
+7=consume steel_trident
+8=train attack 1 2
+
+[upgrade_attack_3]
+0=sleep 30000
+1=check bread
+2=check smoked_fish,smoked_meat
+3=check double_trident
+4=check_soldier attack 2 # Fails when aren't any soldier of level 0 attack
+5=consume bread
+6=consume smoked_fish,smoked_meat
+7=consume double_trident
+8=train attack 2 3
+
+[upgrade_attack_4]
+0=sleep 30000
+1=check bread
+2=check smoked_fish,smoked_meat
+3=check heavy_double_trident
+4=check_soldier attack 3 # Fails when aren't any soldier of level 0 attack
+5=consume bread
+6=consume smoked_fish,smoked_meat
+7=consume heavy_double_trident
+8=train attack 3 4
+
+[inputs]
+bread=10
+smoked_fish=6
+smoked_meat=6
+long_trident=4
+steel_trident=4
+double_trident=4
+heavy_double_trident=4
+
+[buildcost]
+planks=2
+stone=4
+diamond=2
+mountain_crystal=2
+spidercloth=2
+gold=2
+trunk=4
+
+[idle]
+pics=dungeon_i_??.png  # ???
+hotspot=82 80
+
+[working]
+pics=dungeon_i_??.png  # ???
+hotspot=82 80
+
+[build]
+pics=dungeon_i_??.png  # ???
+hotspot=82 80

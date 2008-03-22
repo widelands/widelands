@@ -1,0 +1,9 @@
+[global]
+descname=_"Steel Shield"
+help=_"This steel shield is used by experienced soldiers"
+menu_pic=menu.png
+
+# A shield with the sign of the atlantids on it.
+[idle]
+pics=idle.png
+hotspot=10 17

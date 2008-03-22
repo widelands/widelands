@@ -1,0 +1,188 @@
+[global]
+descname=_"Toolsmith"
+type=production
+size=medium
+buildable=yes
+buildicon=toolsmith_build.png
+worker=toolsmith
+output=bakingtray
+output=bucket
+output=fire_tongs
+output=fishing_net
+output=hammer
+output=hook_pole
+output=hunting_bow
+output=milking_tongs
+output=pick
+output=saw
+output=scythe
+output=shovel
+program=work
+program=produce_bakingtray
+program=produce_bucket
+program=produce_fire_tongs
+program=produce_fishing_net
+program=produce_hammer
+program=produce_hook_pole
+program=produce_hunting_bow
+program=produce_milking_tongs
+program=produce_pick
+program=produce_saw
+program=produce_scythe
+program=produce_shovel
+
+[buildcost]
+trunk=1
+stone=2
+planks=2
+spidercloth=1
+
+[inputs]
+iron=6
+trunk=6
+spidercloth=4
+
+[work]
+0=set +nostats
+1=call produce_bakingtray
+2=call produce_bucket
+3=call produce_fire_tongs
+4=call produce_fishing_net
+5=call produce_hammer
+6=call produce_hook_pole
+7=call produce_hunting_bow
+8=call produce_milking_tongs
+9=call produce_pick
+10=call produce_saw
+11=call produce_scythe
+12=call produce_shovel
+
+[produce_bakingtray]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce bakingtray
+
+[produce_bucket]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce bucket
+
+[produce_fire_tongs]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce fire_tongs
+
+[produce_fishing_net]
+0=set +catch
+1=sleep 32000
+2=check spidercloth 2
+3=consume spidercloth 2
+4=animation working 35000
+5=produce fishing_net
+
+[produce_hammer]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce hammer
+
+[produce_hook_pole]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce hook_pole
+
+[produce_hunting_bow]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check spidercloth
+4=consume iron
+5=consume spidercloth
+6=animation working 35000
+7=produce hunting_bow
+
+[produce_milking_tongs]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce milking_tongs
+
+[produce_pick]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce pick
+
+[produce_saw]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce saw
+
+[produce_scythe]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce scythe
+
+[produce_shovel]
+0=set +catch
+1=sleep 32000
+2=check trunk
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce shovel
+
+[idle]
+pics=toolsmith_i_??.png
+hotspot=63 63
+
+[build]
+pics=toolsmith_i_??.png
+hotspot=63 63
+
+[working]
+pics=toolsmith_i_??.png
+hotspot=63 63

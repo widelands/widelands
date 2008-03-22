@@ -1,0 +1,14 @@
+[global]
+descname=_"Headquarters"
+soundfx=warehouse-bringitin
+type=warehouse
+size=big
+buildable=no
+subtype=HQ
+conquers=9
+
+[idle]
+pics=hq_i_??.png
+sfx_frame=0
+sfx_name=warehouse-bringitin
+hotspot=66 92

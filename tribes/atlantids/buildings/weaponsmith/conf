@@ -1,0 +1,115 @@
+[global]
+descname=_"Weaponsmith"
+type=production
+size=medium
+buildable=yes
+buildicon=weaponsmith_build.png
+worker=weaponsmith
+output=light_trident
+output=long_trident
+output=steel_trident
+output=double_trident
+output=heavy_double_trident
+
+program=work
+program=produce_light_trident
+program=produce_long_trident
+program=produce_steel_trident
+program=produce_double_trident
+program=produce_heavy_double_trident
+
+[inputs]
+iron=8
+gold=8
+coal=8
+planks=8
+
+[work]
+0=set +nostats
+1=call produce_light_trident
+2=call produce_long_trident
+3=call produce_steel_trident
+4=call produce_double_trident
+5=call produce_heavy_double_trident
+
+[produce_light_trident]
+0=set +catch
+1=sleep 20000
+2=check planks
+3=consume planks
+4=animation working 30000
+5=produce light_trident
+
+
+[produce_long_trident]
+0=set +catch
+1=sleep 32000
+2=check iron
+3=check coal
+4=check planks
+5=consume iron
+6=consume coal
+7=consume planks
+8=animation working 45000
+9=produce long_trident
+
+
+[produce_steel_trident]
+0=set +catch
+1=sleep 32000
+2=check iron 2
+3=check coal
+4=check planks
+5=consume iron 2
+6=consume coal
+7=consume planks
+8=animation working 45000
+9=produce steel_trident
+
+[produce_double_trident]
+0=set +catch
+1=sleep 32000
+2=check iron
+3=check coal 2
+4=check planks
+5=check gold
+6=consume iron
+7=consume coal 2
+8=consume planks
+9=consume gold
+10=animation working 45000
+11=produce double_trident
+
+[produce_heavy_double_trident]
+0=set +catch
+1=sleep 32000
+2=check iron 2
+3=check coal 2
+4=check planks
+5=check gold
+6=consume iron 2
+7=consume coal 2
+8=consume planks
+9=consume gold
+10=animation working 45000
+11=produce heavy_double_trident
+
+
+[buildcost]
+trunk=2
+stone=2
+planks=2
+spidercloth=1
+mountain_crystal=1
+
+[idle]
+pics=weaponsmith_i_??.png  # ???
+hotspot=55 80
+
+[build]
+pics=weaponsmith_i_??.png  # ???
+hotspot=55 80
+
+[working]
+pics=weaponsmith_i_??.png  # ???
+hotspot=55 80

@@ -1,0 +1,25 @@
+[global]
+descname=_"Guardhall"
+type=military
+size=medium
+buildable=yes
+buildicon=guardhall_build.png
+max_soldiers=7
+heal_per_second=5
+conquers=7
+max_medics=3
+heal_increase_per_medic=4
+
+[buildcost]
+trunk=2
+planks=3
+stone=4
+diamond=1
+
+[idle]
+pics=guardhall_i_??.png
+hotspot=55 92
+
+[build]
+pics=guardhall_i_??.png
+hotspot=55 92

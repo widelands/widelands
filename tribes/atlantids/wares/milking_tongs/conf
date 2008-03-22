@@ -1,0 +1,8 @@
+[global]
+descname=_"Milking Tongs"
+help=_"Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
+menu_pic=menu.png
+
+[idle]
+pics=idle.png
+hotspot=8 11

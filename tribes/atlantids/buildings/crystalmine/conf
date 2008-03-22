@@ -1,0 +1,81 @@
+[global]
+descname=_"Crystal Mine"
+type=production
+size=mine
+buildable=yes
+buildicon=crystalmine_build.png
+worker=miner,miner,miner
+program=work
+program=mine_stone
+program=mine_crystal
+program=mine_diamond
+output=diamond
+output=mountain_crystal
+output=stone
+stopable=yes
+
+[inputs]
+bread=6
+smoked_fish=6
+smoked_meat=6
+
+[work]
+0=set +nostats
+1=call mine_stone
+2=call mine_crystal
+3=call mine_diamond
+
+[mine_stone]
+0=set +catch
+1=sleep 45000
+2=consume smoked_fish,smoked_meat 2
+3=consume bread 2
+4=animation working 20000
+5=mine granit 4 100 5
+6=produce stone
+7=mine granit 4 100 5
+8=produce stone
+9=mine granit 4 100 5
+10=produce mountain_crystal
+
+[mine_crystal]
+0=set +catch
+1=sleep 45000
+2=consume smoked_fish,smoked_meat 2
+3=consume bread 2
+4=animation working 20000
+5=mine granit 4 100 5
+6=produce stone
+7=mine granit 4 100 5
+8=produce mountain_crystal
+9=mine granit 4 100 5
+10=produce mountain_crystal
+
+[mine_diamond]
+0=set +catch
+1=sleep 45000
+2=consume smoked_fish,smoked_meat 2
+3=consume bread 2
+4=animation working 20000
+5=mine granit 4 100 5
+6=produce diamond
+7=mine granit 4 100 5
+8=produce diamond
+9=mine granit 4 100 5
+
+[buildcost]
+trunk=6
+planks=3
+spidercloth=1
+
+[idle]
+pics=crystalmine_i_??.png
+hotspot=66 76
+
+[working]
+pics=crystalmine_i_??.png
+hotspot=66 76
+
+[build]
+pics=crystalmine_i_??.png
+hotspot=66 76

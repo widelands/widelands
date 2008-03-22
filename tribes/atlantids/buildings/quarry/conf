@@ -1,0 +1,25 @@
+[global]
+descname=_"Quarry"
+type=production
+size=small
+buildable=yes
+buildicon=quarry_build.png
+output=stone
+program=work
+worker=stonecutter
+
+[work]
+0=sleep 25000
+1=worker cut_stone
+
+[buildcost]
+trunk=2
+planks=1
+
+[idle]
+pics=quarry_i_??.png  # ???
+hotspot=46 63
+
+[build]
+pics=quarry_i_??.png  # ???
+hotspot=46 63

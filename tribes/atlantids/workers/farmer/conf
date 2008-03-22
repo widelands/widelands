@@ -1,0 +1,41 @@
+[global]
+descname=_"Farmer"
+help=plants fields.
+type=generic
+menu_pic=menu.png
+program=plant
+program=harvest
+
+[buildcost]
+carrier=1
+scythe=1
+
+[plant]
+0=setdescription tribe:cornfield_t
+1=findspace size:any radius:2
+2=walk coords
+3=animation idle 500
+4=plant
+5=animation idle 500
+6=return
+
+[harvest]
+0=findobject attrib:cornfield radius:2
+1=walk object
+2=animation idle 10000
+3=object harvest
+4=animation idle 2000
+5=createitem corn
+6=return
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=5 13
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=5 13

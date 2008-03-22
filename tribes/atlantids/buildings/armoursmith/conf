@@ -1,0 +1,62 @@
+[global]
+descname=_"Armoursmith"
+type=production
+size=medium
+buildable=yes
+buildicon=armoursmith_build.png
+worker=armoursmith
+output=advanced_shield
+output=steel_shield
+program=work
+program=produce_s_shield
+program=produce_a_shield
+
+[buildcost]
+trunk=2
+stone=2
+planks=2
+mountain_crystal=1
+
+[inputs]
+iron=8
+gold=8
+coal=8
+
+[work]
+0=set +nostats
+1=call produce_s_shield
+2=call produce_a_shield
+
+[produce_s_shield]
+0=set +catch
+1=sleep 32000
+2=check iron 2
+3=check coal 2
+4=consume iron 2
+5=consume coal 2
+6=animation working 35000
+7=produce steel_shield
+
+[produce_a_shield]
+0=set +catch
+1=sleep 32000
+2=check iron 2
+3=check coal 2
+4=check gold
+5=consume iron 2
+6=consume coal 2
+7=consume gold
+8=animation working 45000
+9=produce advanced_shield
+
+[idle]
+pics=armoursmith_i_??.png
+hotspot=68 56
+
+[build]
+pics=armoursmith_i_??.png
+hotspot=68 56
+
+[working]
+pics=armoursmith_i_??.png
+hotspot=68 56

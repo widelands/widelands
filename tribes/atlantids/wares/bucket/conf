@@ -1,0 +1,9 @@
+[global]
+descname=_"Buckets"
+help=_"Big buckets for the fish breeder - produced by the toolsmith."
+menu_pic=menu.png
+
+# Two big buckets
+[idle]
+pics=idle.png
+hotspot=10 17

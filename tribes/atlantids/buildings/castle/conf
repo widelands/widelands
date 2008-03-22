@@ -1,0 +1,27 @@
+[global]
+descname=_"Castle"
+type=military
+size=big
+buildable=yes
+buildicon=castle_build.png
+max_soldiers=12
+heal_per_second=6
+conquers=12
+max_medics=4
+heal_increase_per_medic=3
+
+[buildcost]
+planks=4
+stone=7
+trunk=5
+spidercloth=2
+diamond=1
+mountain_crystal=1
+
+[idle]
+pics=castle_i_??.png
+hotspot=92 90
+
+[build]
+pics=castle_i_??.png
+hotspot=92 90

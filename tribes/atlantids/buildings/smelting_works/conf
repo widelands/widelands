@@ -1,0 +1,60 @@
+[global]
+descname=_"Smelting Works"
+type=production
+size=medium
+buildable=yes
+buildicon=smelting_works_build.png
+worker=smelter
+output=iron
+output=gold
+program=work
+program=smelt_iron
+program=smelt_gold
+
+[inputs]
+ironore=8
+goldore=8
+coal=8
+
+[work]
+0=set +nostats
+1=call smelt_iron
+2=call smelt_gold
+
+[smelt_iron]
+0=set +catch
+1=sleep 25000
+2=check ironore
+3=check coal
+4=consume ironore
+5=consume coal
+6=animation working 35000
+7=produce iron
+
+[smelt_gold]
+0=set +catch
+1=sleep 25000
+2=check goldore
+3=check coal
+4=consume goldore
+5=consume coal
+6=animation working 35000
+7=produce gold
+
+[buildcost]
+trunk=1
+stone=4
+planks=1
+spidercloth=1
+
+[idle]
+pics=smelting_works_i_??.png  # ???
+hotspot=45 45
+
+[build]
+pics=smelting_works_i_??.png  # ???
+hotspot=45 45
+
+[working]
+pics=smelting_works_i_??.png  # ???
+hotspot=45 45

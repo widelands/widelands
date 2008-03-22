@@ -1,0 +1,8 @@
+[global]
+descname=_"Mountain Crystal"
+help=_"These transparent mountain crystals are used for some exclusive buildings and tools."
+menu_pic=menu.png
+
+[idle]
+pics=idle.png
+hotspot=10 17

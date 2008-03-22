@@ -1,0 +1,9 @@
+[global]
+descname=_"Bread"
+help=_"This tasty bread is made out of corn- and blackrootflour and is one part of miners meal."
+menu_pic=menu.png
+
+# No description yet
+[idle]
+pics=idle.png
+hotspot=10 17

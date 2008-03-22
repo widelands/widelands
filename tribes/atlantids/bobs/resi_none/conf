@@ -1,0 +1,14 @@
+[global]
+type=immovable
+size=none
+program=program
+picture=resi_00.png
+attrib=resi
+
+[program]
+0=animation idle 600000
+1=remove
+
+[idle]
+pics=resi_??.png
+hotspot=7 10

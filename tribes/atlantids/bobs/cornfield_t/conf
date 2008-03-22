@@ -1,0 +1,14 @@
+[global]
+type=immovable
+size=big
+program=program
+picture=cornfield_t_00.png
+
+[program]
+0=animation tiny 30000
+1=transform tribe:cornfield_s
+
+[tiny]
+pics=cornfield_t_??.png
+ftp=5
+hotspot=35 45

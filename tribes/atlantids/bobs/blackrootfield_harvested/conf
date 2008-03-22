@@ -1,0 +1,12 @@
+[global]
+type="diminishing"
+size=none
+program=disappear
+
+[disappear]
+0=animation idle 50000
+1=remove
+
+[idle]
+pics=blackrootfield_harvested_??.png
+hotspot=31 37

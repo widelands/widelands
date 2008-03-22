@@ -1,0 +1,38 @@
+[global]
+descname=_"Sawmill"
+help=
+type=production
+size=medium
+buildable=yes
+buildicon=sawmill_build.png
+worker=sawyer
+program=work
+output=planks
+soundfx=sawmill
+
+[inputs]
+trunk=8
+
+[work]
+0=sleep 16500 # much faster than barbarians hardener
+1=check trunk 2
+2=consume trunk 2
+3=playFX sawmill 192
+4=animation working 20000 # much more faster than barbarians hardener
+5=produce planks
+
+[buildcost]
+trunk=2
+stone=3
+
+[idle]
+pics=sawmill_i_??.png  # ???
+hotspot=56 80
+
+[build]
+pics=sawmill_i_??.png  # ???
+hotspot=56 80
+
+[working]
+pics=sawmill_i_??.png  # ???
+hotspot=56 80

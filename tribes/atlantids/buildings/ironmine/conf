@@ -1,0 +1,45 @@
+[global]
+descname=_"Iron Mine"
+type=production
+size=mine
+buildable=yes
+buildicon=ironmine_build.png
+worker=miner,miner,miner
+program=work
+output=ironore
+stopable=yes
+
+[inputs]
+bread=6
+smoked_fish=6
+smoked_meat=6
+
+[work]
+0=sleep 45000
+1=consume smoked_fish,smoked_meat 2
+2=consume bread 2
+3=animation working 20000
+4=mine iron 4 100 5
+5=produce ironore
+6=mine iron 4 100 5
+7=produce ironore
+8=mine iron 4 100 5
+9=produce ironore
+
+
+[buildcost]
+trunk=6
+planks=3
+spidercloth=1
+
+[idle]
+pics=ironmine_i_??.png
+hotspot=66 76
+
+[working]
+pics=ironmine_i_??.png
+hotspot=66 76
+
+[build]
+pics=ironmine_i_??.png
+hotspot=66 76

@@ -1,0 +1,44 @@
+[global]
+descname=_"Blackroot-Farm"
+type=production
+size=big
+buildable=yes
+buildicon=blackroot-farm_build.png
+worker=blackroot_farmer
+stopable=yes
+output=blackroot
+program=work
+program=plant
+program=harvest
+
+[work]
+0=set +nostats
+1=call plant
+2=call harvest
+
+[plant]
+0=set +catch
+1=sleep 20000
+2=worker plant
+
+[harvest]
+0=set +catch
+1=sleep 5000
+2=worker harvest
+
+[buildcost]
+planks=3
+stone=2
+trunk=4
+
+[idle]
+pics=blackroot-farm_i_??.png  # ???
+hotspot=66 92
+
+[working]
+pics=blackroot-farm_i_??.png  # ???
+hotspot=66 92
+
+[build]
+pics=blackroot-farm_i_??.png  # ???
+hotspot=66 92
