@@ -11,7 +11,7 @@ srcenv.Append(INDENTLIST=[
 	'sound/sound_handler.cc',
 	])
 
-lib=srcenv.StaticLibrary(target='sound', source=SRC)
+lib=srcenv.StaticLibrary(target='wlsound', source=SRC)
 
 srcenv.Append(INDENTLIST=[
 	'fxset.h',
