@@ -7,34 +7,29 @@ SRC=simpleglob("*.cc")
 
 srcenv=env.Copy()
 
-srcenv.Append(CPPPATH=[
-		'#/src',
-		'#/src/ui/ui_basic',
-		'#/src/ui/ui_fs_menus',
-		'#/src/editor',
-		'#/src/editor/tools',
-		'#/src/editor/ui_menus',
-		'#/src/filesystem',
-		])
+srcenv.Append(CPPPATH=['#/src'])
 
 Export('srcenv')
-srcenv.Append(LIBS='events', LIBPATH='events')
-srcenv.Append(LIBS='editor', LIBPATH='editor')
-srcenv.Append(LIBS='trigger', LIBPATH='trigger') # as long as this contains ui code, this line must be before editoruimenus
-srcenv.Append(LIBS='editoruimenus', LIBPATH='editor/ui_menus')
-srcenv.Append(LIBS='editortools', LIBPATH='editor/tools')
-srcenv.Append(LIBS='uifsmenus', LIBPATH='ui/ui_fs_menus')
-srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')
-srcenv.Append(LIBS='filesystem', LIBPATH='filesystem')
-srcenv.Append(LIBS='wlsound', LIBPATH='sound')
 
-SConscript('editor/SConscript')
-SConscript('ui/ui_basic/SConscript')
-SConscript('ui/ui_fs_menus/SConscript')
-SConscript('filesystem/SConscript')
-SConscript('sound/SConscript')
-SConscript('trigger/SConscript')
-SConscript('events/SConscript')
+# Ordering is paramount in the SConscript calls!
+#
+# Each SConscript returns one or more SCons.Node(s) that will be used for
+# linking the library.
+#
+# The final reverse() is needed because the linker scans it's parameter list
+# in reverse. Do not simply reverse the order of the SConscript calls
+# themselves: other things might be happening in there that profit from correct
+# ordering (ordering of compilation is always controlled directly by scons
+# itself, though)
+libs=[]
+libs+=SConscript('filesystem/SConscript')
+libs+=SConscript('sound/SConscript')
+libs+=SConscript('ui/ui_basic/SConscript')
+libs+=SConscript('ui/ui_fs_menus/SConscript')
+libs+=list(SConscript('editor/SConscript'))
+libs+=SConscript('trigger/SConscript')
+libs+=SConscript('events/SConscript')
+libs.reverse()
 
 srcenv.Append(INDENTLIST=[
 	'geometry.h',
@@ -51,7 +46,7 @@ srcenv.Append(INDENTLIST=[
 indent=srcenv.astyle(source=srcenv['INDENTLIST'])
 env.Alias("indent", indent)
 
-binary=srcenv.Program(target='widelands', source=SRC)
+binary=srcenv.Program(target='widelands', source=SRC+libs)
 copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', BUILDDIR+'/widelands'))
 
 Return('copybinary')

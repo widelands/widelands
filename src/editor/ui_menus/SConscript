@@ -2,7 +2,8 @@ Import('*')
 
 SRC=simpleglob("*.cc")
 
-localenv=editorenv.Copy()
+srcenv.Append(CPPPATH=['#/src/editor/ui_menus'])
 
-lib=localenv.StaticLibrary(target='editoruimenus', source=SRC)
+lib=srcenv.StaticLibrary(target='editoruimenus', source=SRC)
+Return('lib')
 

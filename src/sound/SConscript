@@ -11,14 +11,8 @@ srcenv.Append(INDENTLIST=[
 	'sound/sound_handler.cc',
 	])
 
-lib=srcenv.StaticLibrary(target='wlsound', source=SRC)
+srcenv.Append(CPPPATH=['#/src/sound'])
 
-srcenv.Append(INDENTLIST=[
-	'fxset.h',
-	'fxset.cc',
-	'songset.h',
-	'songset.cc',
-	'sound_handler.h',
-	'sound_handler.cc',
-        ])
+lib=srcenv.StaticLibrary(target='sound', source=SRC)
+Return('lib')
 

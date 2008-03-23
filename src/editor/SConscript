@@ -2,12 +2,13 @@ Import('*')
 
 SRC=simpleglob("*.cc")
 
-editorenv=srcenv.Copy()
+srcenv.Append(CPPPATH=['#/src/editor'])
 
-Export('editorenv')
+# Ordering is important in the following calls!
+libs=[]
+libs+=SConscript('tools/SConscript')
+libs+=SConscript('ui_menus/SConscript')
+libs+=srcenv.StaticLibrary(target='editor', source=SRC)
 
-SConscript('ui_menus/SConscript')
-SConscript('tools/SConscript')
-
-lib=editorenv.StaticLibrary(target='editor', source=SRC)
+Return('libs')
 

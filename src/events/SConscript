@@ -31,5 +31,8 @@ srcenv.Append(INDENTLIST=[
 	'events/event_unhide_objective.h',
 	])
 
+srcenv.Append(CPPPATH=['#/src/events'])
+
 lib=srcenv.StaticLibrary(target='events', source=SRC)
+Return('lib')
 

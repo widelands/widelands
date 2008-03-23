@@ -2,7 +2,8 @@ Import('*')
 
 SRC=simpleglob("*.cc")
 
-localenv=srcenv.Copy()
+srcenv.Append(CPPPATH=['#/src/ui/ui_basic'])
 
-lib=localenv.StaticLibrary(target='uibasic', source=SRC)
+lib=srcenv.StaticLibrary(target='uibasic', source=SRC)
+Return('lib')
 
