@@ -110,8 +110,6 @@ private:
 	IdleWareSupply  * m_supply;
 	Transfer*         m_transfer;
 	Object_Ptr        m_transfer_nextstep; ///< cached PlayerImmovable, can be 0
-
-private:
 };
 
 
