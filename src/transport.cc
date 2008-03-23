@@ -2103,7 +2103,7 @@ Economy IMPLEMENTATION
 Economy::Economy(Player *player) :
 m_owner(player),
 m_rebuilding(false),
-m_request_timer(false),
+m_request_timerid(0),
 mpf_cycle(0)
 {
 	m_workers.set_nrwares(player->tribe().get_nrworkers());
@@ -2789,25 +2789,11 @@ void Economy::do_split(Flag *f)
 void Economy::start_request_timer(int32_t delta)
 {
 	if (upcast(Game, game, &m_owner->egbase())) {
-		const int32_t gametime = game->get_gametime();
-		int32_t nexttimer = gametime + delta;
+		int32_t nexttimer = game->get_gametime() + delta;
 
-		// The timing logic seems to be a little off.
-		// I believe the (m_request_timer_time - nexttimer <= 0) check should actually
-		// be enough, but bug 1910232 had a savegame where the balance command got lost
-		// and so the timer timed out. I'm not 100% certain how it happened, but I
-		// suspect that an unfortunate interaction with savegames was the culprit.
-		//
-		// In any case, let's err on the side of starting too many balance commands,
-		// especially to fix any older savegames that might suffer from similar problems.
-		if (m_request_timer && m_request_timer_time - gametime >= 0 && m_request_timer_time - nexttimer <= 0)
-			return;
-
-		m_request_timer = true;
-		m_request_timer_time = nexttimer;
 		game->get_cmdqueue()->enqueue
 			(new Cmd_Call_Economy_Balance
-			 (nexttimer, m_owner->get_player_number(), this));
+			 (nexttimer, m_owner->get_player_number(), this, m_request_timerid));
 	}
 }
 
@@ -3034,12 +3020,13 @@ void Economy::create_requested_workers(Game* g)
  * Balance Requests and Supplies by collecting and weighing pairs, and
  * starting transfers for them.
 */
-void Economy::balance_requestsupply()
+void Economy::balance_requestsupply(uint32_t timerid)
 {
+	if (m_request_timerid != timerid)
+		return;
+	m_request_timerid++;
+
 	RSPairStruct rsps;
-
-	m_request_timer = false;
-
 	rsps.nexttimer = -1;
 
 	if (upcast(Game, game, &m_owner->egbase())) {
@@ -3089,31 +3076,61 @@ void Economy::balance_requestsupply()
 	}
 }
 
+#define CURRENT_ECONOMY_VERSION 1
+
+void Economy::Read(FileRead& fr, Game*, Map_Map_Object_Loader*)
+{
+	uint16_t version = fr.Unsigned16();
+
+	try {
+		if (version == CURRENT_ECONOMY_VERSION) {
+			m_request_timerid = fr.Unsigned32();
+		} else {
+			throw wexception("unknown version %u", version);
+		}
+	} catch (std::exception& e) {
+		throw wexception("economy: %s", e.what());
+	}
+}
+
+void Economy::Write(FileWrite& fw, Game*, Map_Map_Object_Saver*)
+{
+	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
+	fw.Unsigned32(m_request_timerid);
+}
+
+
 /**
  * Called by Cmd_Queue as requested by start_request_timer().
  * Call economy functions to balance supply and request.
-*/
-void Cmd_Call_Economy_Balance::execute(Game* g) {
+ */
+void Cmd_Call_Economy_Balance::execute(Game* g)
+{
 	//  If this economy has vanished, drop this call silently
 	if (!g->player(m_player).has_economy(m_economy))
 		return;
 
-	m_economy->balance_requestsupply();
+	m_economy->balance_requestsupply(m_timerid);
 }
+
+#define CURRENT_CMD_CALL_ECONOMY_VERSION 2
 
 /**
  * Read and write
  */
-#define CURRENT_CMD_CALL_ECONOMY_VERSION 1
 void Cmd_Call_Economy_Balance::Read
 (FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
+		if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION || packet_version == 1) {
 			GameLogicCommand::Read(fr, egbase, mol);
 			m_player  = fr.Unsigned8 ();
 			m_economy = fr.Unsigned8 () ? egbase.get_player(m_player)->get_economy_by_number(fr.Unsigned16()) : 0;
+			if (packet_version >= 2)
+				m_timerid = fr.Unsigned32();
+			else
+				m_timerid = 0;
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -3133,7 +3150,9 @@ void Cmd_Call_Economy_Balance::Write
 	const Player & player = egbase.player(m_player);
 	const bool has_eco = player.has_economy(m_economy);
 	fw.Unsigned8 (has_eco);
-	if (has_eco) fw.Unsigned16(player.get_economy_number(m_economy));
+	if (has_eco)
+		fw.Unsigned16(player.get_economy_number(m_economy));
+	fw.Unsigned32(m_timerid);
 }
 
 };

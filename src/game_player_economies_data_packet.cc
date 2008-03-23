@@ -29,11 +29,11 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 3
 
 
 void Game_Player_Economies_Data_Packet::Read
-(FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
+(FileSystem & fs, Game * game, Map_Map_Object_Loader * const mol)
 throw (_wexception)
 {
 	FileRead fr;
@@ -67,6 +67,7 @@ throw (_wexception)
 						(Player::economy_vector::iterator it = ecos.begin();
 						 it != ecos_end;
 						 ++it)
+					{
 						if
 							(upcast
 							 (Flag const,
@@ -76,13 +77,15 @@ throw (_wexception)
 							   :
 							   map[fr.Map_Index32(max_index)])
 							  .get_immovable()))
+						{
 							*it = flag->get_economy();
-					else
-						throw wexception
-							("there is no flag at the specified location");
-					//  issue first balance
-					for (uint16_t j = 0; j < nr_economies; ++j)
-						(economies[j] = ecos[j])->balance_requestsupply();
+							if (packet_version >= 3)
+								flag->get_economy()->Read(fr, game, mol);
+						}
+						else
+							throw wexception
+								("there is no flag at the specified location");
+					}
 				} catch (_wexception const & e) {
 					throw wexception("player %u: %s", p, e.what());
 				}
@@ -97,7 +100,7 @@ throw (_wexception)
  * Write Function
  */
 void Game_Player_Economies_Data_Packet::Write
-(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
+(FileSystem & fs, Game * game, Map_Map_Object_Saver * const mos)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -115,15 +118,19 @@ throw (_wexception)
 			(Player::economy_vector::const_iterator it = economies.begin();
 			 it != economies_end;
 			 ++it)
-			//  Walk the map so that we find a representant.
+		{
+			// Walk the map so that we find a representant.
 			for (Field const * field = &field_0;; ++field) {
 				assert(field < &map[map.max_index()]); //  should never reach end
-				if (upcast(Flag const, flag, field->get_immovable()))
+				if (upcast(Flag const, flag, field->get_immovable())) {
 					if (flag->get_economy() == *it) {
 						fw.Map_Index32(field - &field_0);
+						flag->get_economy()->Write(fw, game, mos);
 						break;
 					}
+				}
 			}
+		}
 	}
 
 	fw.Write(fs, "binary/player_economies");

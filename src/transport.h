@@ -578,9 +578,12 @@ struct Economy {
 	WareList const & get_wares  () {return m_wares;}
 	WareList const & get_workers() {return m_workers;}
 
-	void balance_requestsupply(); ///< called by cmd queue
+	void balance_requestsupply(uint timerid); ///< called by \ref Cmd_Call_Economy_Balance
 
 	void rebalance_supply() {start_request_timer();}
+
+	void Read(FileRead&, Game*, Map_Map_Object_Loader*);
+	void Write(FileWrite&, Game*, Map_Map_Object_Saver*);
 
 private:
 	void do_remove_flag(Flag *f);
@@ -609,8 +612,11 @@ private:
 	RequestList m_requests; ///< requests
 	SupplyList m_supplies;
 
-	bool m_request_timer; ///< true if we started the request timer
-	int32_t                      m_request_timer_time;
+	/**
+	 * ID for the next request balancing timer. Used to throttle
+	 * excessive calls to the request/supply balancing logic.
+	 */
+	uint32_t m_request_timerid;
 
 	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
 };
@@ -621,11 +627,13 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 	Cmd_Call_Economy_Balance
 		(int32_t       const starttime,
 		 Player_Number const player,
-		 Economy     * const economy)
+		 Economy     * const economy,
+		 uint32_t timerid)
 		:
 		GameLogicCommand(starttime),
 		m_player        (player),
-		m_economy       (economy)
+		m_economy       (economy),
+		m_timerid(timerid)
 	{}
 
 	void execute (Game *);
@@ -638,6 +646,7 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 private:
 	Player_Number m_player;
 	Economy     * m_economy;
+	uint32_t m_timerid;
 };
 
 };
