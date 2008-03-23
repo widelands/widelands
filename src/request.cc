@@ -384,6 +384,12 @@ void Request::set_required_interval(int32_t interval)
 void Request::start_transfer(Game* g, Supply* supp)
 {
 	assert(is_open());
+
+	::StreamWrite & ss = g->syncstream();
+	ss.Unsigned32(0x01decafa); // appears as facade01 in sync stream
+	ss.Unsigned32(get_target()->get_serial());
+	ss.Unsigned32(supp->get_position(g)->get_serial());
+
 	Transfer* t = 0;
 	try
 	{
@@ -394,6 +400,7 @@ void Request::start_transfer(Game* g, Supply* supp)
 			log("Request: start soldier or worker transfer for %i\n", get_index().value());
 
 			Worker* s = supp->launch_worker(g, this);
+			ss.Unsigned32(s->get_serial());
 			t = new Transfer(g, this, s);
 		}
 		else
@@ -402,7 +409,7 @@ void Request::start_transfer(Game* g, Supply* supp)
 			// launch_item() ensures the WareInstance is transported out of the warehouse
 			// Once it's on the flag, the flag code will decide what to do with it.
 			WareInstance & item = supp->launch_item(g, this);
-
+			ss.Unsigned32(item.get_serial());
 			t = new Transfer(g, this, &item);
 		}
 	}
