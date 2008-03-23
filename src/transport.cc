@@ -2871,16 +2871,26 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 }
 
 struct RequestSupplyPair {
-	bool              is_item;
-	bool              is_worker;
-	int32_t               ware;
+	bool is_item;
+	bool is_worker;
+	int32_t ware;
 	TrackPtr<Request> request;
 	TrackPtr<Supply>  supply;
-	int32_t               priority;
+	int32_t priority;
+
+	/**
+	 * pairid is an explicit tie-breaker for comparison.
+	 *
+	 * Without it, the pair priority queue would use an implicit, system dependent
+	 * tie breaker, which in turn causes desyncs.
+	 */
+	uint32_t pairid;
 
 	struct Compare {
 		bool operator()(const RequestSupplyPair& p1, const RequestSupplyPair& p2) {
-			return p1.priority < p2.priority;
+			if (p1.priority != p2.priority)
+				return p1.priority < p2.priority;
+			return p1.pairid < p2.pairid;
 		}
 	};
 };
@@ -2892,7 +2902,10 @@ RSPairQueue;
 
 struct RSPairStruct {
 	RSPairQueue queue;
-	int32_t         nexttimer;
+	uint32_t pairid;
+	int32_t nexttimer;
+
+	RSPairStruct() : pairid(0) {}
 };
 
 /**
@@ -2953,6 +2966,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		rsp.request = req;
 		rsp.supply = supp;
 		rsp.priority = priority;
+		rsp.pairid = ++s->pairid;
 
 		log
 			("REQ: %u (%i, %s) <- %u (ware %i), priority %i\n",
