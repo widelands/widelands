@@ -180,6 +180,7 @@ private:
 	void dropoff_update(Game* g, State* state);
 	void fetchfromflag_update(Game* g, State* state);
 	void waitforcapacity_update(Game* g, State* state);
+	void waitforcapacity_pop(Game* g, State* state);
 	void leavebuilding_update(Game* g, State* state);
 	void leavebuilding_pop(Game* g, State* state);
 	void fugitive_update(Game* g, State* state);

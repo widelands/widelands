@@ -1827,7 +1827,7 @@ const Bob::Task Worker::taskWaitforcapacity = {
 	"waitforcapacity",
 	static_cast<Bob::Ptr>(&Worker::waitforcapacity_update),
 	0,
-	0
+	static_cast<Bob::Ptr>(&Worker::waitforcapacity_pop)
 };
 
 /**
@@ -1853,7 +1853,7 @@ bool Worker::start_task_waitforcapacity(Game* g, Flag* flag)
 }
 
 
-void Worker::waitforcapacity_update(Game * g, State *)
+void Worker::waitforcapacity_update(Game * g, State * state)
 {
 	std::string signal = get_signal();
 
@@ -1865,6 +1865,13 @@ void Worker::waitforcapacity_update(Game * g, State *)
 	}
 
 	skip_act(); // wait indefinitely
+}
+
+
+void Worker::waitforcapacity_pop(Game* g, State* state)
+{
+	if (upcast(Flag, flag, state->objvar1.get(g)))
+		flag->skip_wait_for_capacity(g, this);
 }
 
 

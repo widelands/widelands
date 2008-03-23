@@ -185,6 +185,7 @@ public:
 
 	bool has_capacity();
 	void wait_for_capacity(Game* g, Worker* bob);
+	void skip_wait_for_capacity(Game* g, Worker* w);
 	void add_item(Game* g, WareInstance* item);
 	bool has_pending_item(Game* g, Flag* destflag);
 	bool ack_pending_item(Game* g, Flag* destflag);
@@ -228,7 +229,8 @@ private:
 	/// the given flag
 	Flag                  * m_always_call_for_flag;
 
-	std::vector<Object_Ptr> m_capacity_wait; ///< workers waiting for capacity
+	typedef std::vector<OPtr<Worker> > CapacityWaitQueue;
+	CapacityWaitQueue m_capacity_wait; ///< workers waiting for capacity
 
 	std::list<FlagJob>      m_flag_jobs;
 

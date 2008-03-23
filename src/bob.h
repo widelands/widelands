@@ -299,6 +299,7 @@ struct Bob : public Map_Object {
 
 	std::string get_signal() {return m_signal;}
 	State* get_state(const Task* task);
+	const State* get_state(const Task* task) const;
 	void push_task(Game* g, const Task & task);
 	void pop_task(Game* g);
 

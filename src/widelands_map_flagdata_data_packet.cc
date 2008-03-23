@@ -30,6 +30,7 @@
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
+#include "worker.h"
 
 #include "upcast.h"
 
@@ -140,12 +141,14 @@ throw (_wexception)
 
 						//  workers waiting
 						uint16_t const nr_workers = fr.Unsigned16();
-						flag.m_capacity_wait.resize(nr_workers);
 						for (uint32_t i = 0; i < nr_workers; ++i) {
 							uint32_t const worker_serial = fr.Unsigned32();
 							try {
-								flag.m_capacity_wait[i] =
-									&ol->get<Map_Object>(worker_serial);
+								// Hack to support old savegames.
+								// See the corresponding section in Write().
+								if (worker_serial)
+									flag.m_capacity_wait.push_back
+										(&ol->get<Worker>(worker_serial));
 							} catch (_wexception const & e) {
 								throw wexception
 									("worker #%u (%u): %s", i, worker_serial, e.what());
@@ -248,20 +251,26 @@ throw (_wexception)
 		} else fw.Unsigned32(0);
 
 		//  worker waiting for capacity
-		const std::vector<Object_Ptr> & capacity_wait = flag->m_capacity_wait;
-		const std::vector<Object_Ptr>::const_iterator capacity_wait_end =
+		const std::vector<OPtr<Worker> > & capacity_wait = flag->m_capacity_wait;
+		const std::vector<OPtr<Worker> >::const_iterator capacity_wait_end =
 			capacity_wait.end();
 		fw.Unsigned16(capacity_wait.size());
 		for
-			(std::vector<Object_Ptr>::const_iterator it = capacity_wait.begin();
+			(std::vector<OPtr<Worker> >::const_iterator it = capacity_wait.begin();
 			 it != capacity_wait_end;
 			 ++it)
 		{
-			const Map_Object * const obj = it->get(egbase);
-			assert(os->is_object_known(obj));
-			fw.Unsigned32(os->get_object_file_index(obj));
+			const Worker * const obj = it->get(egbase);
+			// This is a very crude hack to support old and broken savegames,
+			// where workers weren't correctly removed from the capacity wait queue.
+			// See bug #1919495.
+			if (obj && obj->get_state(&Worker::taskWaitforcapacity)) {
+				assert(os->is_object_known(obj));
+				fw.Unsigned32(os->get_object_file_index(obj));
+			} else {
+				fw.Unsigned32(0);
+			}
 		}
-
 		const std::list<Flag::FlagJob> & flag_jobs = flag->m_flag_jobs;
 		const std::list<Flag::FlagJob>::const_iterator flag_jobs_end =
 			flag_jobs.end();

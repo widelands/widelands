@@ -665,11 +665,24 @@ bool Flag::has_capacity()
 /**
  * Signal the given bob by interrupting its task as soon as capacity becomes
  * free.
-*/
+ *
+ * The capacity queue is a simple FIFO queue.
+ */
 void Flag::wait_for_capacity(Game *, Worker* bob)
 {
 	m_capacity_wait.push_back(bob);
 }
+
+/**
+ * Remove the worker from the list of workers waiting for free capacity.
+ */
+void Flag::skip_wait_for_capacity(Game* g, Worker* w)
+{
+	CapacityWaitQueue::iterator it = std::find(m_capacity_wait.begin(), m_capacity_wait.end(), w);
+	if (it != m_capacity_wait.end())
+		m_capacity_wait.erase(it);
+}
+
 
 void Flag::add_item(Game* g, WareInstance* item)
 {
@@ -736,7 +749,7 @@ bool Flag::ack_pending_item(Game *, Flag * destflag) {
 void Flag::wake_up_capacity_queue(Game* g)
 {
 	while (m_capacity_wait.size()) {
-		upcast(Worker, w, m_capacity_wait[0].get(g));
+		Worker* w = m_capacity_wait[0].get(g);
 		m_capacity_wait.erase(m_capacity_wait.begin());
 		if (w and w->wakeup_flag_capacity(g, this))
 			break;

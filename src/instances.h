@@ -411,6 +411,8 @@ struct OPtr {
 		return m < other.m;
 	}
 
+	bool operator==(const OPtr<T>& other) const {return m == other.m;}
+
 	Serial get_serial() const {return m.get_serial();}
 
 private:

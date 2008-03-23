@@ -377,6 +377,21 @@ Bob::State* Bob::get_state(const Task* task)
 	return 0;
 }
 
+const Bob::State* Bob::get_state(const Task* task) const
+{
+	std::vector<State>::const_iterator it = m_stack.end();
+
+	while (it != m_stack.begin()) {
+		--it;
+
+		if (it->task == task)
+			return &*it;
+	}
+
+	return 0;
+}
+
+
 /**
  * Mark the current signal as handled.
  */
