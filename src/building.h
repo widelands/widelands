@@ -193,6 +193,7 @@ public:
 	virtual bool get_building_work(Game* g, Worker* w, bool success) __attribute__ ((noreturn));
 
 	bool leave_check_and_wait(Game* g, Worker* w);
+	void leave_skip(Game* g, Worker* w);
 	uint32_t get_conquers() const throw () {return descr().get_conquers();}
 	virtual uint32_t vision_range() const throw () {return descr().vision_range();}
 

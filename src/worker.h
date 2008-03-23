@@ -181,6 +181,7 @@ private:
 	void fetchfromflag_update(Game* g, State* state);
 	void waitforcapacity_update(Game* g, State* state);
 	void leavebuilding_update(Game* g, State* state);
+	void leavebuilding_pop(Game* g, State* state);
 	void fugitive_update(Game* g, State* state);
 	void geologist_update(Game* g, State* state);
 

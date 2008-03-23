@@ -375,6 +375,8 @@ struct Object_Ptr {
 
 	bool operator<(const Object_Ptr other) const throw ()
 	{return m_serial < other.m_serial;}
+	bool operator==(const Object_Ptr other) const throw ()
+	{return m_serial == other.m_serial;}
 
 	uint32_t get_serial() const {return m_serial;}
 

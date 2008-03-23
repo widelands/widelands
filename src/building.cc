@@ -613,15 +613,18 @@ bool Building::get_building_work(Game *, Worker * w, bool)
 }
 
 
-/*
-===============
-Building::leave_check_and_wait
-
-Return true if the given worker can leave the building immediately.
-Otherwise, return false. The worker's wakeup_leave_building() will be called as
-soon as the worker can leave the building.
-===============
-*/
+/**
+ * Maintains the building leave queue. This ensures that workers don't leave
+ * a building (in particular a military building or warehouse) all at once.
+ * This is mostly for aesthetic purpose.
+ *
+ * \return \c true if the given worker can leave the building immediately.
+ * Otherwise, the worker will be added to the buildings leave queue, and
+ * \ref Worker::wakeup_leave_building() will be called as soon as the worker
+ * can leave the building.
+ *
+ * \see Worker::start_task_leavebuilding(), leave_skip()
+ */
 bool Building::leave_check_and_wait(Game* g, Worker* w)
 {
 	Map_Object* allow = m_leave_allow.get(g);
@@ -646,6 +649,23 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
 
 	m_leave_queue.push_back(w);
 	return false;
+}
+
+
+/**
+ * Indicate that the given worker wants to leave the building leave queue.
+ * This function must be called when a worker aborts the waiting task for
+ * some reason (e.g. the worker is carrying a ware, and the ware's transfer
+ * has been cancelled).
+ *
+ * \see Building::leave_check_and_wait()
+ */
+void Building::leave_skip(Game* g, Worker* w)
+{
+	Leave_Queue::iterator it = std::find(m_leave_queue.begin(), m_leave_queue.end(), Object_Ptr(w));
+
+	if (it != m_leave_queue.end())
+		m_leave_queue.erase(it);
 }
 
 

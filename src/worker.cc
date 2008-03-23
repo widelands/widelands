@@ -1899,7 +1899,7 @@ const Bob::Task Worker::taskLeavebuilding = {
 	"leavebuilding",
 	static_cast<Bob::Ptr>(&Worker::leavebuilding_update),
 	0,
-	0
+	static_cast<Bob::Ptr>(&Worker::leavebuilding_pop)
 };
 
 
@@ -1955,6 +1955,17 @@ void Worker::leavebuilding_update(Game* g, State* state)
 			(g, WALK_SE, &descr().get_right_walk_anims(does_carry_ware()), true);
 	} else
 		pop_task(g);
+}
+
+
+void Worker::leavebuilding_pop(Game* g, State* state)
+{
+	// As of this writing, this is only really necessary when the task
+	// is interrupted by a signal. Putting this in the pop() method is just
+	// defensive programming, in case leavebuilding_update() changes
+	// in the future.
+	if (upcast(Building, building, state->objvar1.get(g)))
+		building->leave_skip(g, this);
 }
 
 
