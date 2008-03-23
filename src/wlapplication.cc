@@ -1553,7 +1553,8 @@ void WLApplication::emergency_save(Widelands::Game& game) {
 		try {
 			SaveHandler * save_handler = game.get_save_handler();
 			std::string error;
-			if (!save_handler->save_game
+			if
+				(!save_handler->save_game
 					(game,
 					 save_handler->create_file_name
 						 (save_handler->get_base_dir(), timestring()),
