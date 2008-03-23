@@ -213,8 +213,8 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 	if (upcast(Flag, flag, m_location.get(g)))
 		flag->remove_item(g, this);
 
-		delete m_supply;
-		m_supply = 0;
+	delete m_supply;
+	m_supply = 0;
 
 	if (upcast(Game, game, g)) {
 		cancel_moving();
@@ -280,10 +280,12 @@ void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
 }
 
 /**
- * Callback for the return-to-warehouse timer.
-*/
-void WareInstance::act(Game *, uint32_t)
-{}
+ * Handle delayed updates.
+ */
+void WareInstance::act(Game* g, uint32_t)
+{
+	update(g);
+}
 
 /**
  * Performs the state updates necessary for the current location:
@@ -292,8 +294,13 @@ void WareInstance::act(Game *, uint32_t)
  * and issue a Supply
  *
  * \note \ref update() may result in the deletion of this object.
-*/
-void WareInstance::update(Game * game) {
+ * \note It is important that this function is idempotent, i.e. calling
+ *       \ref update() twice in a row should have the same effect as calling
+ *       it only once, \em unless the instance is deleted as a side-effect of
+ *       \ref update().
+ */
+void WareInstance::update(Game * game)
+{
 	Map_Object * const loc = m_location.get(game);
 
 	if (!m_descr) // Upsy, we're not even intialized. Happens on load
@@ -377,9 +384,13 @@ void WareInstance::update(Game * game) {
 
 /**
  * Set ware state so that it follows the given transfer.
-*/
+ *
+ * \param t the new transfer (non-zero; use \ref cancel_transfer to stop a transfer).
+ */
 void WareInstance::set_transfer(Game* g, Transfer* t)
 {
+	assert(t != 0);
+
 	// Reset current transfer
 	if (m_transfer) {
 		m_transfer->has_failed();
@@ -389,7 +400,15 @@ void WareInstance::set_transfer(Game* g, Transfer* t)
 	// Set transfer state
 	m_transfer = t;
 
-	update(g);
+	delete m_supply;
+	m_supply = 0;
+
+	// Schedule an update.
+	// Do not update immediately, because update() could try to reference
+	// the Transfer object in a way that is not valid yet (note that this
+	// function is called in the Transfer constructor before the Transfer
+	// is linked to the corresponding Request).
+	schedule_act(g, 1, 0);
 }
 
 /**
