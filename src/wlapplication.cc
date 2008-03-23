@@ -1552,10 +1552,15 @@ void WLApplication::emergency_save(Widelands::Game& game) {
 	if (game.is_loaded()) {
 		try {
 			SaveHandler * save_handler = game.get_save_handler();
-			save_handler->save_game
-				(game,
-				 save_handler->create_file_name
-				 (save_handler->get_base_dir(), timestring()));
+			std::string error;
+			if (!save_handler->save_game
+					(game,
+					 save_handler->create_file_name
+						 (save_handler->get_base_dir(), timestring()),
+					 &error))
+			{
+				log("Emergency save failed: %s\n", error.c_str());
+			}
 		} catch (...) {
 			log ("Emergency save failed");
 			throw;
