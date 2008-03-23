@@ -361,7 +361,11 @@ void FieldDebugWindow::think()
 		}
 		switch (vision) {
 		case 0: str += "  never seen\n"; break;
-		case 1:
+		case 1: {
+			const AnimationData* data = 0;
+			if (player_field.map_object_descr[Widelands::TCoords<>::None])
+				data = g_anim.get_animation
+					(player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation());
 			snprintf
 				(buffer, sizeof(buffer),
 				 "  last seen at %u:\n"
@@ -370,15 +374,10 @@ void FieldDebugWindow::think()
 				 "      ",
 				 player_field.time_node_last_unseen,
 				 player_field.owner,
-				 player_field.map_object_descr[Widelands::TCoords<>::None] ?
-				 g_anim.get_animation
-				 (player_field.map_object_descr[Widelands::TCoords<>::None]
-				  ->main_animation())
-				 ->picnametempl.c_str()
-				 :
-				 "(none)");
+				 data ? data->picnametempl.c_str() : "(none)");
 			str += buffer;
 			break;
+		}
 		default:
 			snprintf(buffer, sizeof(buffer), "  seen %u times\n", vision - 1);
 			str +=  buffer;
