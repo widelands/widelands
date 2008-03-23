@@ -539,7 +539,6 @@ struct Economy {
 
 	Player & owner() const throw () {return *m_owner;}
 	Player *get_owner() const {return m_owner;}
-	uint32_t get_serial() const {return m_trackserial;}
 
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
@@ -597,8 +596,7 @@ private:
 
 	typedef std::vector<Request*> RequestList;
 
-	Player*   m_owner;
-	uint32_t      m_trackserial;
+	Player* m_owner;
 
 	/// True while rebuilding Economies (i.e. during split/merge)
 	bool m_rebuilding;
