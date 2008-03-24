@@ -50,11 +50,17 @@ def write_configh_footer(config_h_file):
 
 ################################################################################
 
+def print_build_info(env):
+	print
+	print 'Platform:         ', env['PLATFORM']
+	print 'Build type:       ', env['build']
+	print 'Build ID:         ', env['build_id']
+
 def do_buildid(env):
 	#This is just a default value, don't change it here in the code.
 	#Use the commandline option 'build_id' instead
 	if env['build_id']=='':
-	        env['build_id']='svn'+detect_revision()
+	        env['build_id']=detect_revision()
 
 	build_id_file=open('src/build_id.h', "w")
 
@@ -67,8 +73,6 @@ def do_buildid(env):
 #endif
 """)
 	build_id_file.close()
-
-	print 'Build ID:         ', env['build_id']
 
 ################################################################################
 
@@ -480,8 +484,4 @@ def do_configure(conf, env):
 
 	write_configh(config_h_file, env)
 	write_configh_footer(config_h_file)
-
-def print_build_info(env):
-	print 'Platform:         ', env['PLATFORM']
-	print 'Build type:       ', env['build']
 
