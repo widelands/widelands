@@ -133,7 +133,7 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 				'CheckCompilerFlag': CheckCompilerFlag,
 				'CheckLinkerFlag': CheckLinkerFlag,
 				#'CheckParaguiConfig': CheckParaguiConfig,
-				'CheckBoost': CheckBoost
+				'CheckBoostVersion': CheckBoostVersion
 		   }
 )
 
