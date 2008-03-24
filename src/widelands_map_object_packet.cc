@@ -123,7 +123,10 @@ void Map_Object_Packet::Write
 		if (os->is_object_known(obj))
 			continue;
 
-		assert(obj->has_new_save_support());
+		if (!obj->has_new_save_support())
+			throw wexception
+				("MO(%u) without new style save support not saved explicitly",
+				 obj->get_serial());
 
 		os->register_object(obj);
 		obj->save(egbase, os, fw);
