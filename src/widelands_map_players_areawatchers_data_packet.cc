@@ -117,6 +117,7 @@ throw (_wexception)
 				dynamic_cast<const AreaWatcher &>(*it->get(egbase));
 			fw.Unsigned32(os->register_object(&areawatcher));
 			fw.Area48    (areawatcher);
+			os->mark_object_as_saved(&areawatcher);
 		}
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
