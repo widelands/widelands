@@ -16,9 +16,9 @@ def generate(env):
 def find_ctags(env):
 	b=env.WhereIs('ctags')
 	if b==None:
-		print 'WARNING: Could not find ctags. Tags will not be built.'
+		print 'Searching for ctags:       not found. Tags will not be built'
 	else:
-		print 'Found ctags:      ', b
+		print 'Searching for ctags:      ', b
 	return b
 
 def exists(env):

@@ -1,5 +1,7 @@
-import os
+import os, sys
 import string
+
+from detect_revision import *
 
 ################################################################################
 
@@ -13,8 +15,6 @@ def write_configh_header():
 
 """)
 	return config_h_file
-
-################################################################################
 
 # TODO: split this up and write the data where it originates
 def write_configh(config_h_file, env):
@@ -50,22 +50,104 @@ def write_configh_footer(config_h_file):
 
 ################################################################################
 
-def write_buildid(build_id):
+def do_buildid(env):
+	#This is just a default value, don't change it here in the code.
+	#Use the commandline option 'build_id' instead
+	if env['build_id']=='':
+	        env['build_id']='svn'+detect_revision()
+
 	build_id_file=open('src/build_id.h', "w")
 
 	build_id_file.write("""
 #ifndef BUILD_ID_H
 #define BUILD_ID_H
 
-#define BUILD_ID \""""+build_id+"""\"
+#define BUILD_ID \""""+env['build_id']+"""\"
 
 #endif
 """)
 	build_id_file.close()
 
+	print 'Build ID:         ', env['build_id']
+
 ################################################################################
 
 def parse_cli(env):
+	TARGET='native'
+        env.enable_configuration=True
+	env.debug=0
+	env.optimize=0
+	env.strip=0
+	env.efence=0
+	env.profile=0
+
+        if env.GetOption('clean'):
+                env.enable_configuration=False
+		return TARGET
+        if '-h' in sys.argv[1:]:
+                env.enable_configuration=False
+		return TARGET
+        if '-H' in sys.argv[1:]:
+                env.enable_configuration=False
+		return TARGET
+	
+	#This makes LIBPATH work correctly - I just don't know why :-(
+	#Obviously, env.LIBPATH must be forced to be a list instead of a string. Is this
+	#a scons problem? Or rather our problem???
+	env.Append(LIBPATH=[])
+	env.Append(CPPPATH=[])
+	env.Append(PATH=[])
+
+	#TODO: should be detected automagically
+	if env['PLATFORM']!='win32':
+	        env.Append(PATH=['/usr/bin', '/usr/local/bin'])
+
+	#TODO: should be detected automagically
+	if env['PLATFORM']=='darwin':
+	        if os.path.exists("/opt/local") :
+	                # this is where DarwinPorts puts stuff by default
+	                env.Append(CPPPATH='/opt/local/include')
+	                env.Append(LIBPATH='/opt/local/lib')
+	                env.Append(PATH='/opt/local/bin')
+	        if os.path.exists("/sw") :
+	                # and here's for fink
+	                env.Append(CPPPATH='/sw/include')
+	                env.Append(LIBPATH='/sw/lib')
+	                env.Append(PATH='/sw/bin')
+
+	env.AppendUnique(CPPPATH=string.split(env['extra_include_path']))
+	env.AppendUnique(LIBPATH=string.split(env['extra_lib_path']))
+	env.AppendUnique(CCFLAGS=string.split(env['extra_compile_flags']))
+	env.AppendUnique(LINKFLAGS=string.split(env['extra_link_flags']))
+
+	if env['build'] not in ['debug', 'profile', 'release']:
+		print "\nERROR: unknown buildtype:", env['build']
+		print "       Please specify a valid build type."
+		Exit(1)
+
+	if env['build']=='debug':
+		env.debug=1
+		env.Append(CCFLAGS='-DNOPARACHUTE')
+
+	if env['build']=='profile':
+		env.debug=1
+		env.optimize=1
+		env.profile=1
+		env.Append(CCFLAGS='-DNOPARACHUTE')
+
+	if env['build']=='release':
+		env.optimize=1
+		env.strip=1
+		SDL_PARACHUTE=1
+
+	if env.debug==1:
+		env.Append(CCFLAGS='-DDEBUG')
+	else:
+		env.Append(CCFLAGS='-DNDEBUG')
+
+	if env['enable_efence']=='1':
+		env.efence=1
+
 	if env['enable_ggz']:
 		env.Append(CCFLAGS='-DUSE_GGZ')
 		env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
@@ -82,7 +164,6 @@ def parse_cli(env):
 	#	#env['sdlconfig']=PREFIX+'/'+TARGET+'/bin/'+TARGET+'-sdl-config'
 	#else:
 	#	TARGET='native'
-	TARGET='native'
 
 	return TARGET
 
@@ -167,7 +248,7 @@ def CheckLinkerFlag(context, link_flag, env):
 	return
 
 # Shamelessly copied from http://www.scons.org/wiki/CheckBoostVersion
-def CheckBoost(context, version):
+def CheckBoostVersion(context, version):
 	# Boost versions are in format major.minor.subminor
 	v_arr = version.split(".")
 	version_n = 0
@@ -197,9 +278,7 @@ int main()
 
 ################################################################################
 
-def do_configure(config_h_file, conf, env):
-	print #prettyprinting
-
+def do_configure_basic_compiling(config_h_file, conf, env):
 	print "Checking for a working C++ compiler ...",
 	if not conf.TryLink("""class c{}; int main(){class c the_class;}""", '.cc'):
 		print "no"
@@ -224,6 +303,7 @@ def do_configure(config_h_file, conf, env):
 		print "Your compiler does not support __attribute__((format(printf, 2, 3))) which is neccessary for widelands. Please get a decent compiler."
 		env.Exit(1)
 
+def do_configure_locale(config_h_file, conf, env):
 	setlocalefound=0
 	if (conf.CheckFunc('setlocale') or conf.CheckLibWithHeader('', 'locale.h', 'C', 'setlocale("LC_ALL", "C");', autoadd=0)):
 		setlocalefound=1
@@ -244,6 +324,7 @@ def do_configure(config_h_file, conf, env):
 	else:
 		config_h_file.write("#define HAS_GETENV\n");
 
+def do_configure_libraries(config_h_file, conf, env):
 	if not conf.CheckSDLConfig(env):
 		print 'Could not find sdl-config! Is SDL installed?'
 		env.Exit(1)
@@ -253,6 +334,10 @@ def do_configure(config_h_file, conf, env):
 		env.Exit(1)
 	else:
 		env.ParseConfig(env['sdlconfig']+' --libs --cflags')
+
+	if not (conf.CheckBoostVersion('1.33')):
+		print 'Boost version >= 1.33 needed. Make sure Boost development packages are installed.'
+		env.Exit(1)
 
 	#disabled until somebody finds time and courage to actually work on this #fweber
 	#if not conf.CheckParaguiConfig(env):
@@ -305,6 +390,7 @@ def do_configure(config_h_file, conf, env):
 		config_h_file.write("#define NEW_SDL_MIXER 0\n");
 		print 'Your SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
 
+def do_configure_debugtools(config_h_file, conf, env):
 	if conf.CheckLib('efence', symbol='EF_newFrame', language='C', autoadd=0):
 		if env.efence:
 			conf.CheckCompilerFlag('-include stdlib.h -include string.h -include efence.h', env)
@@ -315,13 +401,7 @@ def do_configure(config_h_file, conf, env):
 			print 'Could not find efence, so doing a debug-efence build is impossible !'
 			env.Exit(1)
 
-	if not (conf.CheckBoost('1.33')):
-		print 'Boost version >= 1.33 needed. Make sure Boost development packages are installed.'
-		env.Exit(1)
-
-	conf.CheckCompilerFlag('-fstack-protector-all', env)
-	conf.CheckCompilerFlag('-fbounds-check', env)
-	conf.CheckCompilerFlag('-pipe', env)
+def do_configure_compiler_warnings(config_h_file, conf, env):
 	conf.CheckCompilerFlag('-Wall', env)
 	conf.CheckCompilerFlag('-Wcast-align', env)
 	conf.CheckCompilerFlag('-Wcast-qual', env)
@@ -348,10 +428,17 @@ def do_configure(config_h_file, conf, env):
 	#conf.CheckCompilerFlag('-Wunreachable-code', env)
 	conf.CheckCompilerFlag('-Wwrite-strings', env)
 
+	# Use this to temporarily disable some warnings
+	#TODO: make available via commandline parameters
 	#conf.CheckCompilerFlag('-Wno-deprecated-declarations', env)
 	#conf.CheckCompilerFlag('-Wno-unused-variable', env)
 	#conf.CheckCompilerFlag('-Wno-unused-parameter', env)
 	#conf.CheckCompilerFlag('-Werror', env)
+
+def do_configure_compiler_features(config_h_file, conf, env):
+	conf.CheckCompilerFlag('-fstack-protector-all', env)
+	conf.CheckCompilerFlag('-fbounds-check', env)
+	conf.CheckCompilerFlag('-pipe', env)
 
 	if env.optimize:
 		# !!!! -fomit-frame-pointer breaks execeptions !!!!
@@ -366,12 +453,35 @@ def do_configure(config_h_file, conf, env):
 	if env.profile:
 		conf.CheckCompilerFlag('-pg', env)
 		conf.CheckCompilerFlag('-fprofile-arcs', env)
-		conf.CheckLinkerFlag('-pg', env)
-		conf.CheckLinkerFlag('-fprofile-arcs', env)
 
 	if env.debug:
 		conf.CheckCompilerFlag('-g', env)
 		conf.CheckCompilerFlag('-fmessage-length=0', env)
 
+def do_configure_linker_features(config_h_file, conf, env):
+	if env.profile:
+		conf.CheckLinkerFlag('-pg', env)
+		conf.CheckLinkerFlag('-fprofile-arcs', env)
+
 	if env.strip:
 		conf.CheckLinkerFlag('-s', env)
+
+def do_configure(conf, env):
+	config_h_file=write_configh_header()
+
+	do_configure_basic_compiling(config_h_file, conf, env)
+	do_configure_locale(config_h_file, conf, env)
+	do_configure_libraries(config_h_file, conf, env)
+	do_configure_debugtools(config_h_file, conf, env)
+
+	do_configure_compiler_warnings(config_h_file, conf, env)
+	do_configure_compiler_features(config_h_file, conf, env)
+	do_configure_linker_features(config_h_file, conf, env)
+
+	write_configh(config_h_file, env)
+	write_configh_footer(config_h_file)
+
+def print_build_info(env):
+	print 'Platform:         ', env['PLATFORM']
+	print 'Build type:       ', env['build']
+

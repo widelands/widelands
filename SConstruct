@@ -1,25 +1,26 @@
-import os
-import shutil
-import fnmatch
-import SCons
-import time
-import glob
-from SCons.Script.SConscript import SConsEnvironment
-import string
+#!/usr/bin/python
 
-import sys
+import os, sys, string
 sys.path.append("build/scons-tools")
+import shutil, fnmatch, time, glob
+import SCons
+from SCons.Script.SConscript import SConsEnvironment
+
 from scons_configure import *
 from Distribute import *
-from detect_revision import *
 
-#Sanity checks
+# Sanity checks
 EnsurePythonVersion(2, 3)
 EnsureSConsVersion(0, 97)
 
-#Speedup. If you have problems with inconsistent or wrong builds, look here first
+# Speedup. If you have problems with inconsistent or wrong builds, look here first
 SetOption('max_drift', 1)
 SetOption('implicit_cache', 1)
+SourceSignatures('MD5')
+#SourceSignatures('timestamp')
+
+# write only *one* signature file in a place where we don't care
+SConsignFile('build/scons-signatures') 
 
 # Pretty output
 print
@@ -108,16 +109,19 @@ def cli_options():
 
 ################################################################################
 # Environment setup
-
-# write only *one* signature file in a place where we don't care
-SConsignFile('build/scons-signatures')
-
+#
 # Create configuration objects
 
 opts=cli_options()
 
 env=Environment(options=opts)
+env.Tool("ctags", toolpath=['build/scons-tools'])
+env.Tool("PNGShrink", toolpath=['build/scons-tools'])
+env.Tool("astyle", toolpath=['build/scons-tools'])
+env.Tool("Distribute", toolpath=['build/scons-tools'])
 env.Help(opts.GenerateHelpText(env))
+
+opts.Save('build/scons-config.py',env)
 
 conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 		   custom_tests={
@@ -128,7 +132,7 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 				'CheckCompilerAttribute': CheckCompilerAttribute,
 				'CheckCompilerFlag': CheckCompilerFlag,
 				'CheckLinkerFlag': CheckLinkerFlag,
-				'CheckParaguiConfig': CheckParaguiConfig,
+				#'CheckParaguiConfig': CheckParaguiConfig,
 				'CheckBoost': CheckBoost
 		   }
 )
@@ -136,121 +140,23 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 ################################################################################
 # Environment setup
 #
-# Register tools
-
-env.Tool("ctags", toolpath=['build/scons-tools'])
-env.Tool("PNGShrink", toolpath=['build/scons-tools'])
-env.Tool("astyle", toolpath=['build/scons-tools'])
-env.Tool("Distribute", toolpath=['build/scons-tools'])
-
-################################################################################
-# Environment setup
-#
-# Initial debug info
-
-#This makes LIBPATH work correctly - I just don't know why :-(
-#Obviously, env.LIBPATH must be forced to be a list instead of a string. Is this
-#a scons problem? Or rather our problem???
-env.Append(LIBPATH=[])
-env.Append(CPPPATH=[])
-env.Append(PATH=[])
-
-print 'Platform:         ', env['PLATFORM']
-print 'Build type:       ', env['build']
-
-#TODO: should be detected automagically
-if env['PLATFORM']!='win32':
-	env.Append(PATH=['/usr/bin', '/usr/local/bin'])
-
-#TODO: should be detected automagically
-if env['PLATFORM']=='darwin':
-	if os.path.exists("/opt/local") :
-		# this is where DarwinPorts puts stuff by default
-		env.Append(CPPPATH='/opt/local/include')
-		env.Append(LIBPATH='/opt/local/lib')
-		env.Append(PATH='/opt/local/bin')
-	if os.path.exists("/sw") :
-		# and here's for fink
-		env.Append(CPPPATH='/sw/include')
-		env.Append(LIBPATH='/sw/lib')
-		env.Append(PATH='/sw/bin')
-
-################################################################################
-# Autoconfiguration
-#
-# Parse build type
-
-env.debug=0
-env.optimize=0
-env.strip=0
-env.efence=0
-env.profile=0
-
-if env['build'] not in ['debug', 'profile', 'release']:
-	print "\nERROR: unknown buildtype:", env['build']
-	print "       Please specify a valid build type."
-	Exit(1)
-
-if env['build']=='debug':
-	env.debug=1
-	env.Append(CCFLAGS='-DNOPARACHUTE')
-
-if env['build']=='profile':
-	env.debug=1
-	env.optimize=1
-	env.profile=1
-	env.Append(CCFLAGS='-DNOPARACHUTE')
-
-if env['build']=='release':
-	env.optimize=1
-	env.strip=1
-	SDL_PARACHUTE=1
-
-if env.debug==1:
-	env.Append(CCFLAGS='-DDEBUG')
-else:
-	env.Append(CCFLAGS='-DNDEBUG')
-
-if env['enable_efence']=='1':
-	env.efence=1
-
-################################################################################
+# Parse commandline and autoconfigure
 
 TARGET=parse_cli(env)
+BUILDDIR='build/'+TARGET+'-'+env['build']
 
-env.Append(CPPPATH=env['extra_include_path'])
-env.Append(LIBPATH=env['extra_lib_path'])
-env.AppendUnique(CCFLAGS=Split(env['extra_compile_flags']))
-env.AppendUnique(LINKFLAGS=env['extra_link_flags'])
-
-################################################################################
-
-#build_id must be saved *before* it might be set to a fixed date
-opts.Save('build/scons-config.py',env)
-
-#This is just a default, don't change it here in the code.
-#Use the commandline option 'build_id' instead
-if env['build_id']=='':
-	env['build_id']='svn'+detect_revision()
-print 'Build ID:          '+env['build_id']
-
-config_h=write_configh_header()
-do_configure(config_h, conf, env)
-write_configh(config_h, env)
-write_configh_footer(config_h)
-write_buildid(env['build_id'])
+if env.enable_configuration:
+	do_buildid(env)
+	print_build_info(env)
+	print #prettyprinting
+	do_configure(conf, env)
 
 env=conf.Finish()
-
-# Pretty output
-print
-
-################################################################### Build things
-
-BUILDDIR='build/'+TARGET+'-'+env['build']
-Export('env', 'BUILDDIR', 'PhonyTarget', 'simpleglob')
+print # Pretty output
 
 #######################################################################
+
+Export('env', 'BUILDDIR', 'PhonyTarget', 'simpleglob')
 
 SConscript('build/SConscript')
 SConscript('campaigns/SConscript')

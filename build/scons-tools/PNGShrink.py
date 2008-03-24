@@ -38,17 +38,17 @@ def generate(env):
 def find_pngrewrite(env):
 	b=env.WhereIs('pngrewrite')
 	if b==None:
-		print 'WARNING: Could not find pngwrite. PNG compatification disabled.'
+		print 'Searching for pngrewrite:  not found. PNG compatification disabled.'
 	else:
-		print 'Found pngrewrite: ', b
+		print 'Searching for pngrewrite: ', b
 	return b
 
 def find_optipng(env):
 	b=env.WhereIs('optipng')
 	if b==None:
-		print 'WARNING: Could not find optipng. PNG compatification disabled.'
+		print 'Searching for optipng:     not found. PNG compatification disabled.'
 	else:
-		print 'Found optipng:    ', b
+		print 'Searching for optipng:    ', b
 	return b
 
 def exists(env):
