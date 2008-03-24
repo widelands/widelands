@@ -163,7 +163,6 @@ m_parent(parent),
 m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 {
 	m_table.add_column(270, _("Name"));
-	m_table.add_column (70, _("Optional"));
 	m_table.add_column (60, _("Visible"));
 	m_table.selected.set(this, &Editor_Objectives_Menu::table_selected);
 	m_table.double_clicked.set(this, &Editor_Objectives_Menu::table_dblclicked);

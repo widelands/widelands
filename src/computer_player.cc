@@ -103,8 +103,10 @@ void Computer_Player::late_initialization ()
 			sprintf(warename, "ware_n_%i", i);
 			sprintf(wareprec, "ware_p_%i", i);
 			int32_t wprec = hints->get_safe_int(wareprec);
-			wares[tribe->get_safe_ware_index(hints->get_safe_string(warename))
-					].preciousness=wprec;
+			wares[tribe->get_safe_ware_index(hints->get_safe_string(warename))]
+				.preciousness
+				=
+				wprec;
 		}
 		stoneproducer = hints->get_safe_string("stoneproducer");
 		trunkproducer = hints->get_safe_string("trunkproducer");

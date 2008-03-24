@@ -33,6 +33,7 @@ Bob::Task Carrier::taskRoad = {
 	"road",
 	static_cast<Bob::Ptr>(&Carrier::road_update),
 	0,
+	0
 };
 
 
@@ -121,6 +122,7 @@ Bob::Task Carrier::taskTransport = {
 	"transport",
 	static_cast<Bob::Ptr>(&Carrier::transport_update),
 	0,
+	0
 };
 
 

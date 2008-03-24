@@ -26,7 +26,7 @@ namespace Widelands {
 
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"mine",              &WorkerProgram::parse_mine},
- 	{"breed",             &WorkerProgram::parse_breed},
+	{"breed",             &WorkerProgram::parse_breed},
 	{"createitem",        &WorkerProgram::parse_createitem},
 	{"setdescription",    &WorkerProgram::parse_setdescription},
 	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
