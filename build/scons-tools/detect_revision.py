@@ -31,6 +31,20 @@ def detect_revision():
 			else:
 				revstring='unofficial-svk%s(=svn%s)' % (svk_revnum, svn_revnum)
 
+	is_git_workdir=os.system('git show >/dev/null 2>&1')==0
+	if is_git_workdir:
+		git_revnum=os.popen('git show --pretty=format:%h | head -n 1').read().rstrip()
+		is_pristine=os.popen('git show --pretty=format:%b | grep ^git-svn-id\\:').read().find("git-svn-id:") == 0
+		common_ancestor=os.popen('git show-branch --sha1-name refs/remotes/git-svn HEAD | tail -n 1 | sed "s@++ \\[\\([0-9a-f]*\\)\\] .*@\\1@"').read().rstrip()
+		svn_revnum=os.popen('git show --pretty=format:%b%n '+common_ancestor+' | grep ^git-svn-id\\: -m 1 | sed "sM.*@\\([0-9]*\\) .*M\\1M"').read().rstrip()
+
+		if svn_revnum=='':
+			revstring='unofficial-git-%s' % (git_revnum,)
+		elif is_pristine:
+			revstring='unofficial-git-%s(svn%s)' % (git_revnum, svn_revnum)
+		else:
+			revstring='unofficial-git-%s(svn%s+changes)' % (git_revnum, svn_revnum)
+
 	return revstring
 
 if __name__ == "__main__":
