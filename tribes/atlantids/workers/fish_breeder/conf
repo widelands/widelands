@@ -10,10 +10,10 @@ carrier=1
 bucket=1
 
 [breed]
-0=findspace size:any radius:7 resource:fish
+0=findspace size:any radius:7 breed resource:fish
 1=walk coords
-2=mine fish -1
-3=animation freeing 3000 # Play a freeing animation
+2=animation freeing 3000 # Play a freeing animation
+3=breed fish 1
 4=return
 
 [idle]

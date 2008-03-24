@@ -156,9 +156,20 @@ private:
 };
 
 
-// Accepts a field if it has the given resource
+// Accepts a field if it has at least one of the given resource
 struct FindNodeResource {
 	FindNodeResource(uint8_t res) : m_resource(res) {}
+
+	bool accept(Map const &, const FCoords&) const;
+
+private:
+	uint8_t m_resource;
+};
+
+
+// Accepts a field if it has the given resource but the amount is 0
+struct FindNodeResourceEmpty {
+	FindNodeResourceEmpty(uint8_t res) : m_resource(res) {}
 
 	bool accept(Map const &, const FCoords&) const;
 

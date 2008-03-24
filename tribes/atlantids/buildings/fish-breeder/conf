@@ -14,7 +14,7 @@ stone=1
 
 [work]
 0=sleep 20000
-# 1=worker breed # not yet working
+1=worker breed
 
 [idle]
 pics=fish-breeder_i_??.png  # ???

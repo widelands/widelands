@@ -26,6 +26,7 @@ namespace Widelands {
 
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"mine",              &WorkerProgram::parse_mine},
+ 	{"breed",             &WorkerProgram::parse_breed},
 	{"createitem",        &WorkerProgram::parse_createitem},
 	{"setdescription",    &WorkerProgram::parse_setdescription},
 	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
@@ -135,6 +136,33 @@ void WorkerProgram::parse_mine
 		throw wexception("Usage: mine <ware type> <area>");
 
 	act->function = &Worker::run_mine;
+	act->sparam1 = cmd[1];
+	char * endp;
+	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
+
+	if (endp && *endp)
+		throw wexception("Bad area '%s'", cmd[2].c_str());
+}
+
+/**
+ * breed \<resource\> \<area\>
+ *
+ * Breed on the current coordinates (from walk or so) for resource increase,
+ * go home
+ *
+ * iparam1 = area
+ * sparam1 = resource
+ */
+void WorkerProgram::parse_breed
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
+{
+	if (cmd.size() != 3)
+		throw wexception("Usage: breed <ware type> <area>");
+
+	act->function = &Worker::run_breed;
 	act->sparam1 = cmd[1];
 	char * endp;
 	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
@@ -267,6 +295,11 @@ void WorkerProgram::parse_findobject
  * size:[any|build|small|medium|big|mine|port]
  * Search for fields with the given amount of space.
  *
+ * breed
+ * in resource:\<resname\>, also accept fields where the resource has been
+ * depleted. Use this when looking for a place for breeding. Should be used
+ * before resource:\<resname\>
+ *
  * resource:\<resname\>
  * Resource to search for. This is mainly intended for fisher and
  * therelike (non detectable Resources and default resources)
@@ -279,6 +312,7 @@ void WorkerProgram::parse_findobject
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
  * iparam3 = whether the "space" flag is set
+ * iparam4 = whether the "breed" flag is set
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace
@@ -293,6 +327,7 @@ void WorkerProgram::parse_findspace
 	act->iparam1 = -1;
 	act->iparam2 = -1;
 	act->iparam3 = 0;
+	act->iparam4 = 0;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -333,6 +368,8 @@ void WorkerProgram::parse_findspace
 				throw wexception("Bad findspace size '%s'", value.c_str());
 
 			act->iparam2 = sizenames[index].val;
+		} else if (key == "breed") {
+			act->iparam4 = 1;
 		} else if (key == "resource") {
 			act->sparam1 = value;
 		} else if (key == "space") {

@@ -77,13 +77,17 @@ bool Worker::run_createitem(Game* g, State* state, const Action* action)
 
 
 /**
- * mine \<resource\> \<area\>
+ * Mine on the current coordinates for resources decrease, go home.
  *
- * Mine on the current coordinates (from walk or so) for resources decrease,
- * go home
+ * Syntax in conffile: mine \<resource\> \<area\>
  *
- * iparam1 = area
- * sparam1 = resource
+ * \param g
+ * \param state
+ * \param action Which resource to mine (action.sparam1) and where to look for
+ * it (in a radius of action.iparam1 around current location)
+ *
+ * \todo Lots of magic numbers in here
+ * \todo Document parameters g and state
  */
 bool Worker::run_mine(Game* g, State* state, const Action* action)
 {
@@ -91,6 +95,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	Map & map = *g->get_map();
 
+	//Make sure that the specified resource is available in this world
 	const Resource_Descr::Index res =
 		map.get_world()->get_resource(action->sparam1.c_str());
 	if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!!
@@ -142,7 +147,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = mr.location().field->get_resources_amount();;
+		uint32_t amount = mr.location().field->get_resources_amount();
 
 		if (fres != res)
 			amount = 0;
@@ -167,6 +172,110 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	molog("  Mined one item\n");
 
+	// Advance program state
+	++state->ivar1;
+	schedule_act(g, 10);
+	return true;
+}
+
+
+/**
+ * Breed on the current coordinates for resource increase, go home.
+ *
+ * Syntax in conffile: breed \<resource\> \<area\>
+ *
+ * \param g
+ * \param state
+ * \param action Which resource to breed (action.sparam1) and where to put
+ * it (in a radius of action.iparam1 around current location)
+ *
+ * \todo Lots of magic numbers in here
+ * \todo Document parameters g and state
+ */
+bool Worker::run_breed(Game* g, State* state, const Action* action)
+{
+	molog(" Breed(%s, %i)\n", action->sparam1.c_str(), action->iparam1);
+
+	Map & map = *g->get_map();
+
+	//Make sure that the specified resource is available in this world
+	const Resource_Descr::Index res =
+		map.get_world()->get_resource(action->sparam1.c_str());
+	if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!!
+		throw wexception
+			(" Worker::run_breed: Should breed resource %s, which "
+			 "doesn't exist in world. Tribe is not compatible with "
+			 "world!!\n",  action->sparam1.c_str());
+
+	// Select one of the fields randomly
+	uint32_t totalres = 0;
+	uint32_t totalchance = 0;
+	int32_t pick;
+	MapRegion<Area<FCoords> > mr
+		(map, Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
+	do {
+		uint8_t fres  = mr.location().field->get_resources();
+		uint32_t amount = 15 - mr.location().field->get_resources_amount();
+
+		// In the future, we might want to support amount = 0 for
+		// fields that can produce an infinite amount of resources.
+		// Rather -1 or something similar. not 0
+		if (fres != res)
+			amount = 0;
+
+		totalres += amount;
+		totalchance += 8 * amount;
+
+		// Add penalty for fields that are running out
+		if (amount == 0)
+			// we already know it's completely empty, so punish is less
+			totalchance += 1;
+		else if (amount <= 2)
+			totalchance += 6;
+		else if (amount <= 4)
+			totalchance += 4;
+		else if (amount <= 6)
+			totalchance += 2;
+	} while (mr.advance(map));
+
+	if (totalres == 0) {
+		molog("  All resources full\n");
+		send_signal(g, "fail"); // no space for more, abort program
+		pop_task(g);
+		return true;
+	}
+
+	// Second pass through fields
+	pick = g->logic_rand() % totalchance;
+
+	do {
+		uint8_t fres  = mr.location().field->get_resources();
+		uint32_t amount = 15 - mr.location().field->get_resources_amount();
+
+		if (fres != res)
+			amount = 0;
+
+		pick -= 8*amount;
+		if (pick < 0) {
+			assert(amount > 0);
+
+			--amount;
+
+			mr.location().field->set_resources(res, 15 - amount);
+			break;
+		}
+	} while (mr.advance(map));
+
+	if (pick >= 0) {
+		molog("  Not successful this time\n");
+		send_signal(g, "fail"); // not successful, abort program
+		pop_task(g);
+		return true;
+	}
+
+	molog("  Bred one item\n");
+
+	// Advance program state
 	++state->ivar1;
 	schedule_act(g, 10);
 	return true;
@@ -359,6 +468,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
  * iparam3 = whether the "space" flag is set
+ * iparam4 = whether the "breed" flag is set
  * sparam1 = Resource
  */
 struct FindNodeSpace {
@@ -399,6 +509,9 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action->iparam2)));
 	if (action->sparam1.size())
 		functor.add(FindNodeResource(w->get_resource(action->sparam1.c_str())));
+	if (action->iparam4)
+		functor.add(FindNodeResourceEmpty(w->get_resource(action->sparam1.c_str())));
+
 	if (action->iparam3)
 		functor.add(FindNodeSpace(get_location(g)));
 

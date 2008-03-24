@@ -70,6 +70,7 @@ struct ProductionAction {
 	int32_t         iparam1;
 	int32_t         iparam2;
 	int32_t         iparam3;
+	int32_t         iparam4;
 	std::string sparam1;
 };
 

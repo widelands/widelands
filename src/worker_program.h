@@ -70,6 +70,11 @@ private:
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
+	void parse_breed
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
 	void parse_createitem
 		(Worker_Descr                   *,
 		 Worker::Action                 *,

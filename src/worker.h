@@ -55,6 +55,7 @@ class Worker : public Bob {
 		int32_t iparam1;
 		int32_t iparam2;
 		int32_t iparam3;
+		int32_t iparam4;
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
@@ -188,6 +189,7 @@ private:
 
 	// Program commands
 	bool run_mine(Game* g, State* state, const Action* act);
+	bool run_breed(Game* g, State* state, const Action* act);
 	bool run_createitem(Game* g, State* state, const Action* act);
 	bool run_setdescription(Game* g, State* state, const Action* act);
 	bool run_setbobdescription(Game* g, State* state, const Action* act);

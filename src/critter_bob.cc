@@ -33,6 +33,7 @@ namespace Widelands {
 const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
 #if 0
 	{"mine",              &Critter_BobProgram::parse_mine},
+	{"breed",             &Critter_BobProgram::parse_breed},
 	{"createitem",        &Critter_BobProgram::parse_createitem},
 	{"setdescription",    &Critter_BobProgram::parse_setdescription},
 	{"setbobdescription", &Critter_BobProgram::parse_setbobdescription},
