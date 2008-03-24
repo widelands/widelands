@@ -23,13 +23,13 @@ def detect_revision():
 		is_svk_workdir = os.system('svk co -l|grep '+cwd+' >/dev/null 2>&1')==0
 
 		if is_svk_workdir:
-			svk_revnum=os.popen('svk info|grep Revision|cut -d" " -f 2').read().rstrip()
-			svn_revnum=os.popen('svk info|grep Mirrored|cut -d" " -f 5').read().rstrip()
+			svk_revnum=os.popen('LANG=C svk info|grep Revision|cut -d" " -f 2').read().rstrip()
+			svn_revnum=os.popen('LANG=C svk info|grep Mirrored|cut -d" " -f 5').read().rstrip()
 
 			if svn_revnum=='':
 				revstring='unofficial-svk%s' % (svk_revnum,)
 			else:
-				revstring='unofficial-svk%s(svn%s)' % (svk_revnum, svn_revnum)
+				revstring='unofficial-svk%s(=svn%s)' % (svk_revnum, svn_revnum)
 
 	return revstring
 
