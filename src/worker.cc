@@ -215,7 +215,7 @@ bool Worker::run_breed(Game* g, State* state, const Action* action)
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = 15 - mr.location().field->get_resources_amount();
+		uint32_t amount = mr.location().field->get_starting_res_amount() - mr.location().field->get_resources_amount();
 
 		// In the future, we might want to support amount = 0 for
 		// fields that can produce an infinite amount of resources.
@@ -250,7 +250,7 @@ bool Worker::run_breed(Game* g, State* state, const Action* action)
 
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = 15 - mr.location().field->get_resources_amount();
+		uint32_t amount = mr.location().field->get_starting_res_amount() - mr.location().field->get_resources_amount();
 
 		if (fres != res)
 			amount = 0;
@@ -261,7 +261,7 @@ bool Worker::run_breed(Game* g, State* state, const Action* action)
 
 			--amount;
 
-			mr.location().field->set_resources(res, 15 - amount);
+			mr.location().field->set_resources(res, mr.location().field->get_starting_res_amount() - amount);
 			break;
 		}
 	} while (mr.advance(map));
@@ -508,9 +508,10 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 	FindNodeAnd functor;
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action->iparam2)));
 	if (action->sparam1.size())
-		functor.add(FindNodeResource(w->get_resource(action->sparam1.c_str())));
-	if (action->iparam4)
-		functor.add(FindNodeResourceEmpty(w->get_resource(action->sparam1.c_str())));
+		if (action->iparam4)
+			functor.add(FindNodeResourceBreedable(w->get_resource(action->sparam1.c_str())));
+		else
+			functor.add(FindNodeResource(w->get_resource(action->sparam1.c_str())));
 
 	if (action->iparam3)
 		functor.add(FindNodeSpace(get_location(g)));

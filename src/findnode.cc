@@ -116,10 +116,10 @@ bool FindNodeResource::accept(const Map &, const FCoords& coord) const {
 }
 
 
-bool FindNodeResourceEmpty::accept(const Map &, const FCoords& coord) const {
+bool FindNodeResourceBreedable::accept(const Map &, const FCoords& coord) const {
 	return
 		((m_resource == coord.field->get_resources()) &&
-		 ! coord.field->get_resources_amount());
+		 (coord.field->get_resources_amount() < coord.field->get_starting_res_amount()));
 }
 
 

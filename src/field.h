@@ -159,11 +159,9 @@ private:
 	compile_assert(MAX_PLAYERS <= Player_Number_Bitmask);
 	Owner_Info_and_Selections_Type owner_info_and_selections;
 
-	Resource_Index m_resources;
-
-	/** how much has there been*/
-	uint8_t m_starting_res_amount;
-	uint8_t m_res_amount;
+	Resource_Index m_resources; ///< Resource type on this field, if any
+	uint8_t m_starting_res_amount; ///< Initial amount of m_resources
+	uint8_t m_res_amount; ///< Current amount of m_resources
 
 	Terrains terrains;
 
@@ -241,11 +239,11 @@ public:
 		roads |= type << dir;
 	}
 
-	uint8_t get_resources() const {return m_resources;}
+	uint8_t get_resources() const {return m_resources;} ///<\todo This should return Resource_Index
 	uint8_t get_resources_amount() const {return m_res_amount;}
 	void set_resources(uint8_t res, uint8_t amount) {m_resources = res; m_res_amount=amount;}
-	void set_starting_res_amount(int32_t amount) {m_starting_res_amount=amount;}
-	int32_t get_starting_res_amount() const {return m_starting_res_amount;}
+	void set_starting_res_amount(int32_t amount) {m_starting_res_amount=amount;} ///<\todo This should take uint8_t
+	int32_t get_starting_res_amount() const {return m_starting_res_amount;} ///<\todo This should return uint8_t
 
 	/// \note you must reset this field's + neighbor's brightness when you
 	/// change the height. Map::change_height does this. This function is not

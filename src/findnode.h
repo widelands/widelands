@@ -89,7 +89,7 @@ private:
 	uint8_t m_mincaps;
 };
 
-// Accepts fields if they are accepted by all subfunctors.
+/// Accepts fields if they are accepted by all subfunctors.
 struct FindNodeAnd {
 	FindNodeAnd() {}
 
@@ -108,7 +108,7 @@ private:
 	std::vector<Subfunctor> m_subfunctors;
 };
 
-// Accepts fields based on what can be built there
+/// Accepts fields based on what can be built there
 struct FindNodeSize {
 	enum Size {
 		sizeAny    = 0,   //  any field not occupied by a robust immovable
@@ -128,7 +128,7 @@ private:
 	Size m_size;
 };
 
-// Accepts fields based on the size of immovables on the field
+/// Accepts fields based on the size of immovables on the field
 struct FindNodeImmovableSize {
 	enum {
 		sizeNone   = 1 << 0,
@@ -145,7 +145,7 @@ private:
 	uint32_t m_sizes;
 };
 
-// Accepts a field if it has an immovable with a given attribute
+/// Accepts a field if it has an immovable with a given attribute
 struct FindNodeImmovableAttribute {
 	FindNodeImmovableAttribute(uint32_t attrib) : m_attribute(attrib) {}
 
@@ -156,7 +156,7 @@ private:
 };
 
 
-// Accepts a field if it has at least one of the given resource
+/// Accepts a field if it has at least one of the given resource
 struct FindNodeResource {
 	FindNodeResource(uint8_t res) : m_resource(res) {}
 
@@ -167,9 +167,9 @@ private:
 };
 
 
-// Accepts a field if it has the given resource but the amount is 0
-struct FindNodeResourceEmpty {
-	FindNodeResourceEmpty(uint8_t res) : m_resource(res) {}
+/// Accepts a field if it has the given resource but the amount is 0
+struct FindNodeResourceBreedable {
+	FindNodeResourceBreedable(uint8_t res) : m_resource(res) {}
 
 	bool accept(Map const &, const FCoords&) const;
 
