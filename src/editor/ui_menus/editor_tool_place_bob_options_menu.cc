@@ -77,8 +77,8 @@ m_pit                   (pit)
 	int32_t xpos = xstart;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;
+	UI::Box * box;
 	while (i < nr_bobs) {
-		UI::Box * box;
 		if (cur_x == bobs_in_row) {
 			cur_x = 0;
 			ypos  = ystart;
