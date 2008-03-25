@@ -3,7 +3,7 @@ descname=_"Fish Breeder Hut"
 type=production
 size=small
 buildable=yes
-buildicon=fish-breeder_build.png
+buildicon=fish_breeder_build.png
 worker=fish_breeder
 program=work
 
@@ -17,9 +17,9 @@ stone=1
 1=worker breed
 
 [idle]
-pics=fish-breeder_i_??.png  # ???
+pics=fish_breeder_i_??.png  # ???
 hotspot=50 65
 
 [build]
-pics=fish-breeder_i_??.png  # ???
+pics=fish_breeder_i_??.png  # ???
 hotspot=50 65

@@ -1,9 +1,9 @@
 [global]
-descname=_"Blackroot-Farm"
+descname=_"Blackroot Farm"
 type=production
 size=big
 buildable=yes
-buildicon=blackroot-farm_build.png
+buildicon=blackroot_farm_build.png
 worker=blackroot_farmer
 stopable=yes
 output=blackroot
@@ -32,13 +32,13 @@ stone=2
 trunk=4
 
 [idle]
-pics=blackroot-farm_i_??.png  # ???
+pics=blackroot_farm_i_??.png  # ???
 hotspot=66 92
 
 [working]
-pics=blackroot-farm_i_??.png  # ???
+pics=blackroot_farm_i_??.png  # ???
 hotspot=66 92
 
 [build]
-pics=blackroot-farm_i_??.png  # ???
+pics=blackroot_farm_i_??.png  # ???
 hotspot=66 92
