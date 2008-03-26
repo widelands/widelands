@@ -313,6 +313,20 @@ void MilitarySite::act(Game* g, uint32_t data)
 
 
 /**
+ * The worker is about to be removed.
+ *
+ * After the removal of the worker, check whether we need to request
+ * new soldiers.
+ */
+void MilitarySite::remove_worker(Worker* w)
+{
+	ProductionSite::remove_worker(w);
+
+	update_soldier_request();
+}
+
+
+/**
  * Called by soldiers in the building.
  */
 bool MilitarySite::get_building_work(Game* g, Worker* w, bool)

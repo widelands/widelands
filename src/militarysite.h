@@ -69,6 +69,7 @@ public:
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
 	virtual void act(Game* g, uint32_t data);
+	virtual void remove_worker(Worker*);
 
 	virtual void set_economy(Economy* e);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
