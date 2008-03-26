@@ -9,19 +9,19 @@ worker=trainer
 max_soldiers=8
 train=attack
 program=Sleep
+program=upgrade_attack_0
 program=upgrade_attack_1
 program=upgrade_attack_2
 program=upgrade_attack_3
-program=upgrade_attack_4
 
 [Sleep]
 0=sleep 5000
 
 [attack]
 min_level=0
-max_level=4
+max_level=3
 
-[upgrade_attack_1]
+[upgrade_attack_0]
 0=sleep 30000
 1=check bread
 2=check smoked_fish,smoked_meat
@@ -32,7 +32,7 @@ max_level=4
 7=consume long_trident
 8=train attack 0 1
 
-[upgrade_attack_2]
+[upgrade_attack_1]
 0=sleep 30000
 1=check bread
 2=check smoked_fish,smoked_meat
@@ -43,7 +43,7 @@ max_level=4
 7=consume steel_trident
 8=train attack 1 2
 
-[upgrade_attack_3]
+[upgrade_attack_2]
 0=sleep 30000
 1=check bread
 2=check smoked_fish,smoked_meat
@@ -54,7 +54,7 @@ max_level=4
 7=consume double_trident
 8=train attack 2 3
 
-[upgrade_attack_4]
+[upgrade_attack_3]
 0=sleep 30000
 1=check bread
 2=check smoked_fish,smoked_meat

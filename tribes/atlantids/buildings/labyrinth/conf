@@ -16,7 +16,7 @@ program=upgrade_defense_1
 
 [defense]
 min_level=0
-max_level=2
+max_level=1
 
 [upgrade_defense_0]
 0=sleep 30000
