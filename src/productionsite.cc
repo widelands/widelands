@@ -30,6 +30,7 @@
 #include "profile.h"
 #include "request.h"
 #include "soldier.h"
+#include "soldiercontrol.h"
 #include "transport.h"
 #include "tribe.h"
 #include "wexception.h"
@@ -785,11 +786,13 @@ void ProductionSite::program_act(Game* g)
 		return;
 
 	case ProductionAction::actCheckSoldier: {
-		const std::vector<Soldier *> & soldiers = get_soldiers();
+		upcast(SoldierControl, ctrl, this);
+		assert(ctrl);
+		const std::vector<Soldier *> soldiers = ctrl->presentSoldiers();
 		const std::vector<Soldier *>::const_iterator soldiers_end =
 			soldiers.end();
 
-			molog
+		molog
 			("  Checking soldier (%s) level %d)\n",
 			 action->sparam1.c_str(), action->iparam1);
 
@@ -837,7 +840,9 @@ void ProductionSite::program_act(Game* g)
 	}
 
 	case ProductionAction::actTrain: {
-		const std::vector<Soldier *> & soldiers = get_soldiers();
+		upcast(SoldierControl, ctrl, this);
+		assert(ctrl);
+		const std::vector<Soldier *> soldiers = ctrl->presentSoldiers();
 		const std::vector<Soldier *>::const_iterator soldiers_end =
 			soldiers.end();
 		std::vector<Soldier *>::const_iterator it = soldiers.begin();

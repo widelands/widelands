@@ -53,7 +53,7 @@ namespace Widelands {
 // Subversions
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        1
-#define CURRENT_MILITARYSITE_PACKET_VERSION     2
+#define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   1
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
 
@@ -310,55 +310,55 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION) {
+		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION || packet_version == 2) {
 			read_productionsite(militarysite, fr, egbase, ol);
 
-			//  FIXME The reason for this code is probably that the constructor of
-			//  FIXME MilitarySite requests soldiers. That makes sense when a
-			//  FIXME MilitarySite is created in the game, but definitely not when
-			//  FIXME only allocating a MilitarySite to later fill it with
-			//  FIXME information from a savegame. Therefore this code here undoes
-			//  FIXME what the constructor just did. There should really be
-			//  FIXME different constructors for those cases.
-			for (uint16_t i = 0; i < militarysite.m_soldier_requests.size(); ++i)
-				delete militarysite.m_soldier_requests[i];
+			if (packet_version >= 3) {
+				delete militarysite.m_soldier_request;
+				militarysite.m_soldier_request = 0;
 
-			{
+				if (fr.Unsigned8()) {
+					militarysite.m_soldier_request =
+						new Request
+							(&militarysite,
+							0,
+							MilitarySite::request_soldier_callback,
+							&militarysite,
+							Request::WORKER);
+					militarysite.m_soldier_request->Read(&fr, egbase, ol);
+				}
+			} else if (packet_version == 2) {
 				uint16_t const nr_requests = fr.Unsigned16();
-				militarysite.m_soldier_requests.resize(nr_requests);
 				for (uint16_t i = 0; i < nr_requests; ++i) {
-					Request & req =
-						*new Request
+					// Oh well...
+					Request* req =
+						new Request
 						(&militarysite,
 						 0,
 						 MilitarySite::request_soldier_callback,
 						 &militarysite,
 						 Request::WORKER);
-					req.Read(&fr, egbase, ol);
-					militarysite.m_soldier_requests[i] = &req;
+					req->Read(&fr, egbase, ol);
+					delete req;
 				}
 			}
 
-			assert(militarysite.m_soldiers.empty());
-			{
+			if (packet_version == 2) {
+				// We don't keep soldier lists anymore, but we do have to fix
+				// existing soldiers
 				uint16_t const nr_soldiers = fr.Unsigned16();
-				militarysite.m_soldiers.resize(nr_soldiers);
-				for (uint16_t i = 0; i < nr_soldiers; ++i) {
-					uint32_t const soldier_serial = fr.Unsigned32();
-					try {
-						militarysite.m_soldiers[i] =
-							&ol->get<Soldier>(soldier_serial);
-					} catch (_wexception const & e) {
-						throw wexception
-							("soldier #%u (%u): %s", i, soldier_serial, e.what());
-					}
-				}
+				for (uint16_t i = 0; i < nr_soldiers; ++i)
+					fr.Unsigned32();
 			}
 
 			militarysite.m_didconquer = fr.Unsigned8();
 
 			//  capacity (modified by user)
 			militarysite.m_capacity = fr.Unsigned8();
+
+			if (packet_version >= 3) {
+				militarysite.m_nexthealtime = fr.Signed32();
+			}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -765,22 +765,16 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
 	write_productionsite(militarysite, fw, egbase, os);
 
-	const uint16_t soldier_requests_size =
-		militarysite.m_soldier_requests.size();
-	fw.Unsigned16(soldier_requests_size);
-	for (uint16_t i = 0; i < soldier_requests_size; ++i)
-		militarysite.m_soldier_requests[i]->Write(&fw, egbase, os);
-
-	//  soldier
-	const uint16_t soldiers_size = militarysite.m_soldiers.size();
-	fw.Unsigned16(soldiers_size);
-	for (uint32_t i = 0; i < soldiers_size; ++i) {
-		assert(os->is_object_known(militarysite.m_soldiers[i]));
-		fw.Unsigned32(os->get_object_file_index(militarysite.m_soldiers[i]));
+	if (militarysite.m_soldier_request) {
+		fw.Unsigned8(1);
+		militarysite.m_soldier_request->Write(&fw, egbase, os);
+	} else {
+		fw.Unsigned8(0);
 	}
 
 	fw.Unsigned8(militarysite.m_didconquer);
 	fw.Unsigned8(militarysite.m_capacity);
+	fw.Signed32(militarysite.m_nexthealtime);
 }
 
 

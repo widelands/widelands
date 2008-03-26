@@ -216,17 +216,9 @@ public:
 
 	void log_general_info(Editor_Game_Base *);
 
-	//  Use on military and training sites.
-	virtual void drop_soldier(uint32_t) {};
-	virtual void soldier_capacity_up   () {}
-	virtual void soldier_capacity_down () {}
-
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {};
 	virtual void switch_train_mode () {};
-
-	/// testing stuff
-	virtual bool has_soldiers() {return false;};
 
 	///  Stores the Player_Number of the player who has defeated this building.
 	void set_defeating_player(const Player_Number player_number) throw ()

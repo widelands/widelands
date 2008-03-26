@@ -21,6 +21,7 @@
 #define TRAININGSITE_H
 
 #include "productionsite.h"
+#include "soldiercontrol.h"
 #include "tattribute.h"
 
 struct TrainingSite_Window;
@@ -85,7 +86,7 @@ private:
  *        surrounding strongholds, the training site will burn even if it
  *        contains soldiers!
  */
-class TrainingSite:public ProductionSite {
+class TrainingSite : public ProductionSite, public SoldierControl {
 	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(TrainingSite_Descr);
 	friend struct ::TrainingSite_Window;
@@ -129,21 +130,16 @@ public:
 
 	virtual void set_economy(Economy * e);
 
-	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
-	{return m_soldiers;}
+	// Begin implementation of SoldierControl
+	virtual std::vector<Soldier *> presentSoldiers() const;
+	virtual std::vector<Soldier *> stationedSoldiers() const;
+	virtual uint32_t soldierCapacity() const;
+	virtual void setSoldierCapacity(uint32_t capacity);
+	virtual void dropSoldier(Soldier* soldier);
+	// End implementation of SoldierControl
 
-	virtual void drop_soldier(uint32_t serial);
-	void drop_soldier(Soldier* soldier);
 	int32_t get_pri(enum tAttribute atr);
 	void set_pri(enum tAttribute atr, int32_t prio);
-	uint32_t get_capacity() const throw () {return m_capacity;}
-	virtual void soldier_capacity_up() {
-		change_soldier_capacity(1);
-	}
-	virtual void soldier_capacity_down() {
-		change_soldier_capacity(-1);
-	}
-	virtual void change_soldier_capacity(int32_t);
 
 protected:
 	virtual UI::Window *create_options_window(Interactive_Player * plr, UI::Window ** registry);

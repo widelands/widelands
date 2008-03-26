@@ -474,7 +474,7 @@ void Soldier::moveToBattleUpdate(Game * game, State* state) {
 			 (game->map()[get_position()].get_immovable()))
 		{
 			state->ivar1 = 2;
-			start_task_leavebuilding (game, 1);
+			start_task_leavebuilding(game, false);
 			return;
 		}
 		// fall-through, because we're already outside the building
@@ -532,7 +532,8 @@ void Soldier::moveHomeUpdate(Game* g, State* state) {
 		return;
 	}
 	else {
-		start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
+		pop_task(g);
+		start_task_buildingwork(g); // bind the worker into this house, hide him on the map
 	}
 }
 

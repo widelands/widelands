@@ -329,7 +329,7 @@ void TrainingSite::update_soldier_request() {
 		m_soldier_request = 0;
 
 		while (m_soldiers.size() > m_capacity)
-			drop_soldier(m_soldiers[m_soldiers.size()-1]);
+			dropSoldier(m_soldiers[m_soldiers.size()-1]);
 	}
 }
 
@@ -361,43 +361,51 @@ void TrainingSite::request_soldier_callback
 }
 
 
-/**
- * Drop a given soldier.
- *
- * 'Dropping' means releasing the soldier from the site. The soldier then becomes available
- * to the economy.
- */
-void TrainingSite::drop_soldier(uint32_t serial)
+std::vector<Soldier *> TrainingSite::presentSoldiers() const
 {
-	for (std::vector<Soldier*>::iterator it = m_soldiers.begin(); it != m_soldiers.end(); ++it) {
-		if ((*it)->get_serial() == serial) {
-			drop_soldier(*it);
-			return;
-		}
-	}
-
-	molog
-		("TrainingSite::drop_soldier(uint32_t serial): trying to drop nonexistent "
-		 "serial number %i !!",
-		 serial);
+	return m_soldiers;
 }
 
+std::vector<Soldier *> TrainingSite::stationedSoldiers() const
+{
+	return m_soldiers;
+}
+
+uint32_t TrainingSite::soldierCapacity() const
+{
+	return m_capacity;
+}
+
+void TrainingSite::setSoldierCapacity(uint32_t capacity)
+{
+	if (capacity > descr().get_max_number_of_soldiers())
+		capacity = descr().get_max_number_of_soldiers();
+
+	if (capacity != m_capacity) {
+		m_capacity = capacity;
+		update_soldier_request();
+	}
+}
 
 /**
  * Drop a given soldier.
  *
  * 'Dropping' means releasing the soldier from the site. The soldier then becomes available
  * to the economy.
+ *
+ * \note This is called from player commands, so we need to verify that the soldier
+ * is actually stationed here, without breaking anything if he isn't.
  */
-void TrainingSite::drop_soldier(Soldier* soldier)
+void TrainingSite::dropSoldier(Soldier* soldier)
 {
 	upcast(Game, g, &owner().egbase());
-
 	assert(g);
 
 	std::vector<Soldier*>::iterator it = std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
-	if (it == m_soldiers.end())
-		throw wexception("TrainingSite::drop_soldier: soldier not in training site");
+	if (it == m_soldiers.end()) {
+		molog("TrainingSite::dropSoldier: soldier not in training site");
+		return;
+	}
 
 	m_soldiers.erase(it);
 
@@ -431,7 +439,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game *)
 	// Drop soldiers only now, so that changes in the soldiers array don't
 	// mess things up
 	for (std::vector<Soldier*>::iterator it = droplist.begin(); it != droplist.end(); ++it)
-		drop_soldier(*it);
+		dropSoldier(*it);
 }
 
 /**
@@ -598,29 +606,6 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
 		}
 	}
 }
-
-/**
- * Change the soldier capacity at the trainingsite.
- * \post Minimum and maximum capacity will be observed.
- * \param how  number to add/subtract from the current capacity
- * \note Unlike the influence-defining military buildings, a training site can actually be empty of soldiers.
- *
- */
-void TrainingSite::change_soldier_capacity(int32_t how)
-{
-	int32_t new_capacity = m_capacity + how;
-
-	if (new_capacity < 0)
-		new_capacity = 0;
-	else if (new_capacity > descr().get_max_number_of_soldiers())
-		new_capacity = descr().get_max_number_of_soldiers();
-
-	if (static_cast<uint32_t>(new_capacity) != m_capacity) {
-		m_capacity = new_capacity;
-		update_soldier_request();
-	}
-}
-
 
 /**
  * Only called from \ref calc_upgrades

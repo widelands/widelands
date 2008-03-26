@@ -109,12 +109,10 @@ public:
 	std::vector<WaresQueue*>* get_warequeues() {
 		return &m_input_queues;
 	}
-	std::vector<Worker*>* get_workers() {
+	std::vector<Worker*>* get_production_workers() {
 		return &m_workers;
 	}
 
-	__attribute__ ((noreturn)) virtual const std::vector<Soldier *> & get_soldiers() const
-	{throw wexception ("ProductionSite::get_soldiers makes no sense");}
 protected:
 	virtual UI::Window * create_options_window
 		(Interactive_Player *, UI::Window * * registry);

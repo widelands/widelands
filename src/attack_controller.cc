@@ -182,7 +182,7 @@ void AttackController::launchSoldiersOfMilitarySite
 	assert(nrLaunch);
 	uint32_t launched = 0;
 
-	const std::vector<Soldier *> & soldiers = militarySite->get_soldiers();
+	std::vector<Soldier *> soldiers = militarySite->presentSoldiers();
 	std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 	for
 		(std::vector<Soldier *>::const_iterator it = soldiers.begin();

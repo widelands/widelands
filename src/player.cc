@@ -26,6 +26,7 @@
 #include "game.h"
 #include "militarysite.h"
 #include "soldier.h"
+#include "soldiercontrol.h"
 #include "sound/sound_handler.h"
 #include "transport.h"
 #include "trainingsite.h"
@@ -392,10 +393,6 @@ void Player::enhance_building
 		//  Make copies of the vectors, because the originals are destroyed with
 		//  the building.
 		const std::vector<Worker  *> workers  = building->get_workers();
-		const std::vector<Soldier *> soldiers = building->has_soldiers() ?
-			dynamic_cast<ProductionSite &>(*building).get_soldiers()
-			:
-			std::vector<Soldier *>();
 
 		building->remove(&egbase()); //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
@@ -417,18 +414,6 @@ void Player::enhance_building
 		{
 			Worker & worker = **it;
 			worker.set_location(building);
-		}
-
-		// Reassign the soldier
-		const std::vector<Soldier *>::const_iterator soldiers_end =
-			soldiers.end();
-		for
-			(std::vector<Soldier *>::const_iterator it = soldiers.begin();
-			 it != soldiers_end;
-			 ++it)
-		{
-			Soldier & soldier = **it;
-			soldier.set_location(building);
 		}
 	}
 }
@@ -548,25 +533,23 @@ Forces the drop of given soldier at given house
 void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
 	if (imm->get_owner() != this)
 		return;
-	if
-		(soldier->get_worker_type() == Worker_Descr::SOLDIER
-		 and
-		 imm->get_type() >= Map_Object::BUILDING)
-	{
-		Building* ms= static_cast<Building*>(imm);
-		ms->drop_soldier (soldier->get_serial());
-	}
+	if (soldier->get_worker_type() != Worker_Descr::SOLDIER)
+		return;
+	if (upcast(SoldierControl, ctrl, imm))
+		ctrl->dropSoldier(soldier);
 }
 
-//TODO val might (theoretically) be >1 or <-1, but there's always an inc/dec by one
 void Player::change_soldier_capacity (PlayerImmovable* imm, int32_t val) {
 	if (imm->get_owner() != this)
 		return;
-	if (upcast(Building, building, imm)) {
-		if (val>0)
-			building->soldier_capacity_up  ();
-		else
-			building->soldier_capacity_down();
+	if (upcast(SoldierControl, ctrl, imm)) {
+		uint32_t current = ctrl->soldierCapacity();
+		uint32_t capacity = current + val;
+
+		if (!capacity || (val < 0 && capacity > current))
+			capacity = 1;
+
+		ctrl->setSoldierCapacity(capacity);
 	}
 }
 

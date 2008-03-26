@@ -206,6 +206,11 @@ struct PlayerImmovable : public BaseImmovable {
 	virtual void add_worker(Worker *w);
 	virtual void remove_worker(Worker *w);
 
+	/**
+	 * \return a list of workers that are currently located at this
+	 * immovable. This is not the same as the list of production
+	 * workers returned by \ref ProductionSite::get_production_workers
+	 */
 	const std::vector<Worker*>& get_workers() const {return m_workers;}
 
 	void log_general_info(Editor_Game_Base*);

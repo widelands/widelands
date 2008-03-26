@@ -791,7 +791,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 
 				if (v > 0)
 					field->military_influence +=
-						v * v * militarysite->get_capacity();
+						v * v * militarysite->soldierCapacity();
 			}
 
 			if (dynamic_cast<const ProductionSite *>(building))

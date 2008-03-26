@@ -22,6 +22,7 @@
 
 #include "productionsite.h"
 #include "requirements.h"
+#include "soldiercontrol.h"
 
 namespace Widelands {
 
@@ -52,7 +53,7 @@ private:
 	int32_t m_heal_incr_per_medic;
 };
 
-class MilitarySite : public ProductionSite {
+class MilitarySite : public ProductionSite, public SoldierControl {
 	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(MilitarySite_Descr);
 
@@ -65,42 +66,31 @@ public:
 	char const * type_name() const throw () {return "militarysite";}
 	virtual std::string get_statistics_string();
 
-	void fill(Game &);
-
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
 	virtual void act(Game* g, uint32_t data);
 
 	virtual void set_economy(Economy* e);
-	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
-	{return m_soldiers;}
+	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
-	uint32_t get_capacity () const throw () {return m_capacity;}
-	//  overload of building functions
-	virtual void drop_soldier (uint32_t serial);
-	virtual void soldier_capacity_up   () {change_soldier_capacity  (1);}
-	virtual void soldier_capacity_down () {change_soldier_capacity (-1);}
+	// Begin implementation of SoldierControl
+	virtual std::vector<Soldier *> presentSoldiers() const;
+	virtual std::vector<Soldier *> stationedSoldiers() const;
+	virtual uint32_t soldierCapacity() const;
+	virtual void setSoldierCapacity(uint32_t capacity);
+	virtual void dropSoldier(Soldier* soldier);
+	// End implementation of SoldierControl
 
 	/// This methods are helper for use at configure this site.
 	void set_requirements (const Requirements&);
 	void  clear_requirements ();
 	const Requirements& get_requirements () const {return m_soldier_requirements;}
 
-	/*
-      So, to set a new requirement to the request you should do something like:
-
-         Requirements new_req;
-         new_req.set (atribute, min_value, max_value);
-         new_req.set (atribute, min_value, max_value);
-         ms->set_requirements (new_req);
-
-	*/
-
 	/// Testing stuff
 	uint32_t nr_attack_soldiers();
 	void set_in_battle(bool const in_battle) {m_in_battle = in_battle;};
 
-	virtual bool has_soldiers() {return m_soldiers.size() > 0;}
+	void update_soldier_request();
 
 protected:
 	void conquer_area(Game &);
@@ -109,20 +99,21 @@ protected:
 		(Interactive_Player * plr, UI::Window * * registry);
 
 private:
-	void request_soldier();
+	bool isPresent(Soldier* soldier) const;
 	static void request_soldier_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
-	void drop_soldier (Game *g, int32_t i);
-	void call_soldiers();
-	void change_soldier_capacity (int32_t);
 private:
 	Requirements m_soldier_requirements;
-	std::vector<Request*> m_soldier_requests;
-	std::vector<Soldier*> m_soldiers;
-	bool                   m_didconquer;
-	uint32_t                   m_capacity;
-	bool     m_in_battle;
+	Request* m_soldier_request;
+	bool m_didconquer;
+	uint32_t m_capacity;
+	bool m_in_battle;
+
+	/**
+	 * Next gametime where we should heal something.
+	 */
+	int32_t m_nexthealtime;
 };
 
 };

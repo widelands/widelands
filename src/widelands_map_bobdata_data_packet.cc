@@ -25,6 +25,7 @@
 #include "critter_bob_program.h"
 #include "game.h"
 #include "map.h"
+#include "militarysite.h"
 #include "player.h"
 #include "soldier.h"
 #include "transport.h"
@@ -47,7 +48,7 @@ namespace Widelands {
 #define WORKER_BOB_PACKET_VERSION 1
 
 // Worker subtype versions
-#define SOLDIER_WORKER_BOB_PACKET_VERSION 3
+#define SOLDIER_WORKER_BOB_PACKET_VERSION 4
 #define CARRIER_WORKER_BOB_PACKET_VERSION 1
 
 
@@ -350,6 +351,8 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 	try {
 		uint16_t const packet_version = fr->Unsigned16();
 		if (packet_version == WORKER_BOB_PACKET_VERSION) {
+			bool oldsoldier_fix = false;
+
 			if (upcast(Soldier, soldier, worker)) {
 				try {
 					uint16_t const soldier_worker_bob_packet_version =
@@ -388,7 +391,10 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						soldier->m_attack_level  = fr->Unsigned32();
 						soldier->m_defense_level = fr->Unsigned32();
 						soldier->m_evade_level   = fr->Unsigned32();
-						fr->Unsigned8 (); // old soldier->m_marked
+						if (soldier_worker_bob_packet_version <= 3) {
+							fr->Unsigned8 (); // old soldier->m_marked
+							oldsoldier_fix = true;
+						}
 					} else
 						throw wexception
 							("unknown/unhandled version %u",
@@ -448,6 +454,21 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				(Map_Object * const carried_item =
 				 worker->m_carried_item.get(egbase))
 				dynamic_cast<WareInstance &>(*carried_item).set_economy(economy);
+
+			if (oldsoldier_fix) {
+				if (upcast(Soldier, soldier, worker)) {
+					if (upcast(Game, g, egbase)) {
+						if (upcast(MilitarySite, ms, soldier->get_location(egbase))){
+							if (soldier->get_position() == ms->get_position()) {
+								// Fix behaviour of soldiers in buildings
+								soldier->reset_tasks(g);
+								soldier->start_task_buildingwork(g);
+								ms->update_soldier_request();
+							}
+						}
+					}
+				}
+			}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -624,7 +645,7 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 {
 	fw->Unsigned16(WORKER_BOB_PACKET_VERSION);
 
-	if        (upcast(Soldier const, soldier, &worker)) {
+	if (upcast(Soldier const, soldier, &worker)) {
 		fw->Unsigned16(SOLDIER_WORKER_BOB_PACKET_VERSION);
 		fw->Unsigned32(soldier->m_hp_current);
 		fw->Unsigned32(soldier->m_hp_max);
@@ -636,7 +657,6 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 		fw->Unsigned32(soldier->m_attack_level);
 		fw->Unsigned32(soldier->m_defense_level);
 		fw->Unsigned32(soldier->m_evade_level);
-		fw->Unsigned8 (false); // old soldier->m_marked
 	} else if (upcast(Carrier const, carrier, &worker)) {
 		fw->Unsigned16(CARRIER_WORKER_BOB_PACKET_VERSION);
 		fw->Signed32(carrier->m_acked_ware);

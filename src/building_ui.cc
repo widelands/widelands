@@ -1220,7 +1220,7 @@ void ProductionSite_Window_ListWorkerWindow::think() {
 void ProductionSite_Window_ListWorkerWindow::fill_list() {
 	const uint32_t m_last_select = m_ls->selection_index();
 	m_ls->clear();
-	std::vector<Widelands::Worker *> & workers = *m_ps->get_workers();
+	const std::vector<Widelands::Worker *> & workers = *m_ps->get_production_workers();
 
 	for (uint32_t i = 0; i < workers.size(); ++i) {
 		Widelands::Worker & worker = *workers[i];
@@ -1660,16 +1660,15 @@ void MilitarySite_Window::think()
 ==============
 MilitarySite_Window::update()
 
-Update the listselect, maybe there are new
-FIXME What if a soldier has been removed and another added? This needs review.
-soldiers
+Update the listselect, maybe there are new soldiers
 =============
 */
 void MilitarySite_Window::update() {
-	const std::vector<Soldier *> & soldiers = get_militarysite()->get_soldiers();
+	std::vector<Soldier *> soldiers = get_militarysite()->presentSoldiers();
 
 	char buf[200];
-	if (soldiers.size() < m_table->size()) m_table->clear();
+	if (soldiers.size() < m_table->size())
+		m_table->clear();
 
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		Soldier & s = *soldiers[i];
@@ -1696,17 +1695,15 @@ void MilitarySite_Window::update() {
 	std::string str;
 	sprintf
 		(buf,
-		 "%2d", dynamic_cast<MilitarySite &>(*get_building()).get_capacity());
+		 "%2d", dynamic_cast<MilitarySite&>(*get_building()).soldierCapacity());
 	str = static_cast<const char *>(buf);
 	m_capacity->set_text (str);
 }
 
-void MilitarySite_Window::drop_button_clicked() {
+void MilitarySite_Window::drop_button_clicked()
+{
 	assert(*m_reg== this);
-	if //  FIXME should be assert
-		(m_table->selection_index()
-		 <
-		 get_militarysite()->get_soldiers().size())
+	if (m_table->selection_index() != m_table->no_selection_index())
 		act_drop_soldier(m_table->get_selected().get_serial());
 }
 
@@ -2074,10 +2071,11 @@ FIXME What if a soldier have been removed and another added? This needs review.
 =============
 */
 void TrainingSite_Window::update() {
-	const std::vector<Soldier*> & soldiers = get_trainingsite()->get_soldiers();
+	std::vector<Soldier*> soldiers = get_trainingsite()->presentSoldiers();
 
 	char buffer[200];
-	if (soldiers.size() != m_table->size()) m_table->clear();
+	if (soldiers.size() != m_table->size())
+		m_table->clear();
 
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		Soldier & s = *soldiers[i];
@@ -2106,7 +2104,7 @@ void TrainingSite_Window::update() {
 	snprintf
 		(buffer, sizeof(buffer),
 		 "%2d",
-		 dynamic_cast<const TrainingSite &>(*get_building()).get_capacity());
+		 dynamic_cast<const TrainingSite &>(*get_building()).soldierCapacity());
 	m_capacity->set_text (buffer);
 }
 
@@ -2132,12 +2130,10 @@ Handle the click at drop soldier. Enqueue a command at command queue to get out 
 soldier from this training site.
 =============
 */
-void TrainingSite_Window::drop_button_clicked() {
+void TrainingSite_Window::drop_button_clicked()
+{
 	assert(*m_reg == this);
-	if
-		(m_table->selection_index()
-		 <
-		 get_trainingsite()->get_soldiers().size())
+	if (m_table->selection_index() != m_table->no_selection_index())
 		act_drop_soldier(m_table->get_selected().get_serial());
 }
 
