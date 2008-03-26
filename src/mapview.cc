@@ -187,5 +187,5 @@ void Map_View::track_sel(Point m) {
 	m += m_viewpoint;
 	m_intbase.set_sel_pos
 		(MapviewPixelFunctions::calc_node_and_triangle
-		 (intbase().egbase().map(), m.x, m.y));
+		 	(intbase().egbase().map(), m.x, m.y));
 }

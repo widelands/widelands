@@ -32,6 +32,7 @@ int32_t Editor_Set_Height_Tool::handle_click_impl
 {
 	return
 		map.set_height
-		(Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), parent.get_sel_radius()), m_interval);
+			(Widelands::Area<Widelands::FCoords>
+			 	(map.get_fcoords(center.node), parent.get_sel_radius()),
+			 m_interval);
 }

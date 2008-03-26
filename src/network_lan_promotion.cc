@@ -231,7 +231,7 @@ void LAN_Game_Finder::run ()
 
 		if
 			(recv
-			 (&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
+			 	(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
 			continue;
 
 		printf ("Received %s packet\n", info.magic);

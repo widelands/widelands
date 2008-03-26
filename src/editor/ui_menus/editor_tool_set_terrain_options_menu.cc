@@ -93,7 +93,8 @@ m_tool(tool)
 			uint32_t picw, pich;
 			g_gr->get_picture_size
 				(g_gr->get_picture
-				 (PicMod_Game, g_gr->get_maptexture_picture(i + 1)), picw, pich);
+				 	(PicMod_Game, g_gr->get_maptexture_picture(i + 1)),
+				 picw, pich);
 			uint32_t surface = g_gr->create_surface(picw, pich);
 
 			//  get the rendertarget for this
@@ -103,7 +104,7 @@ m_tool(tool)
 			target.blit
 				(Point(0, 0),
 				 g_gr->get_picture
-				 (PicMod_Game, g_gr->get_maptexture_picture(i + 1)));
+				 	(PicMod_Game, g_gr->get_maptexture_picture(i + 1)));
 
 			Point pic(1, pich - small_pich - 1);
 
@@ -220,6 +221,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 		m_cur_selection.set_text(buf.c_str());
 		m_cur_selection.set_pos
 			(Point
-			 ((get_inner_w() - m_cur_selection.get_w()) / 2, m_cur_selection.get_y()));
+			 	((get_inner_w() - m_cur_selection.get_w()) / 2,
+			 	 m_cur_selection.get_y()));
 	}
 }

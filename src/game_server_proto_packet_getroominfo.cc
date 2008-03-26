@@ -64,8 +64,8 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 		snprintf
 			(buffer, sizeof(buffer),
 			 _
-			 ("The Room %s is currently not logged in or unknown to the "
-			  "server.\n"),
+			 	("The Room %s is currently not logged in or unknown to the "
+			 	 "server.\n"),
 			 m_roomname.c_str());
 
 		gsc->server_message(buffer);

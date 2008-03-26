@@ -1483,9 +1483,9 @@ public:
 				(m_game.get_iabase(),
 				 _("End of replay"),
 				 _
-				 ("The end of the replay has been reached and the game has been "
-				  "paused. You may unpause the game and continue watching if you "
-				  "want to."),
+				 	("The end of the replay has been reached and the game has "
+				 	 "been paused. You may unpause the game and continue watching "
+				 	 "if you want to."),
 				 UI::MessageBox::OK);
 			mmb.run();
 			m_endofgame = true;
@@ -1556,10 +1556,10 @@ void WLApplication::emergency_save(Widelands::Game& game) {
 			if
 				(!
 				 save_handler->save_game
-				 (game,
-				  save_handler->create_file_name
-				  (save_handler->get_base_dir(), timestring()),
-				  &error))
+				 	(game,
+				 	 save_handler->create_file_name
+				 	 	(save_handler->get_base_dir(), timestring()),
+				 	 &error))
 			{
 				log("Emergency save failed: %s\n", error.c_str());
 			}

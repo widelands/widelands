@@ -36,7 +36,7 @@ int32_t Editor_Delete_Bob_Tool::handle_click_impl
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), radius));
+		 	(map.get_fcoords(center.node), radius));
 	do if (Widelands::Bob * const bob = mr.location().field->get_first_bob())
 		bob->remove(&parent.egbase());
 	while (mr.advance(map));

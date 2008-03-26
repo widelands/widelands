@@ -286,7 +286,7 @@ static void draw_minimap_int
 			move_r(mapwidth, f, i);
 			*reinterpret_cast<T *>(pix) = static_cast<T>
 				(calc_minimap_color
-				 (format, egbase, f, flags, f.field->get_owned_by(), true));
+				 	(format, egbase, f, flags, f.field->get_owned_by(), true));
 		}
 	} else {
 		Widelands::Player::Field const * const player_fields = player->fields();
@@ -305,7 +305,7 @@ static void draw_minimap_int
 					static_cast<T>
 					(vision ?
 					 calc_minimap_color
-					 (format, egbase, f, flags, player_field.owner, 1 < vision)
+					 	(format, egbase, f, flags, player_field.owner, 1 < vision)
 					 :
 					 0);
 			}

@@ -502,7 +502,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 				for (int32_t i = 0; i < it->second; ++i) {
 					Soldier & soldier = static_cast<Soldier &>
 						(dynamic_cast<Soldier_Descr const *>
-						 (get_worker_descr(get_worker_index("soldier")))
+						 	(get_worker_descr(get_worker_index("soldier")))
 						 ->create(*game, wh.owner(), wh, wh.get_position()));
 					soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
 					wh.incorporate_worker(game, &soldier);

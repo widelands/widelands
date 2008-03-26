@@ -655,14 +655,17 @@ void Game::send_player_flagaction (Flag* flag, int32_t action)
 {
 	send_player_command
 		(new Cmd_FlagAction
-		 (get_gametime(), flag->get_owner()->get_player_number(), flag, action));
+		 	(get_gametime(),
+		 	 flag->get_owner()->get_player_number(),
+		 	 flag,
+		 	 action));
 }
 
 void Game::send_player_start_stop_building (Building* b)
 {
 	send_player_command
 		(new Cmd_StartStopBuilding
-		 (get_gametime(), b->get_owner()->get_player_number(), b));
+		 	(get_gametime(), b->get_owner()->get_player_number(), b));
 }
 
 void Game::send_player_enhance_building (Building* b, int32_t id)
@@ -671,14 +674,14 @@ void Game::send_player_enhance_building (Building* b, int32_t id)
 
 	send_player_command
 		(new Cmd_EnhanceBuilding
-		 (get_gametime(), b->get_owner()->get_player_number(), b, id));
+		 	(get_gametime(), b->get_owner()->get_player_number(), b, id));
 }
 
 void Game::send_player_change_training_options(Building* b, int32_t atr, int32_t val)
 {
 	send_player_command
 		(new Cmd_ChangeTrainingOptions
-		 (get_gametime(), b->get_owner()->get_player_number(), b, atr, val));
+		 	(get_gametime(), b->get_owner()->get_player_number(), b, atr, val));
 }
 
 void Game::send_player_drop_soldier (Building* b, int32_t ser)
@@ -686,17 +689,17 @@ void Game::send_player_drop_soldier (Building* b, int32_t ser)
 	assert(ser != -1);
 	send_player_command
 		(new Cmd_DropSoldier
-		 (get_gametime(), b->get_owner()->get_player_number(), b, ser));
+		 	(get_gametime(), b->get_owner()->get_player_number(), b, ser));
 }
 
 void Game::send_player_change_soldier_capacity (Building* b, int32_t val)
 {
 	send_player_command
 		(new Cmd_ChangeSoldierCapacity
-		 (get_gametime(),
-		  b->get_owner()->get_player_number(),
-		  b,
-		  val));
+		 	(get_gametime(),
+		 	 b->get_owner()->get_player_number(),
+		 	 b,
+		 	 val));
 }
 
 /////////////////////// TESTING STUFF
@@ -709,13 +712,13 @@ void Game::send_player_enemyflagaction
 {
 	send_player_command
 		(new Cmd_EnemyFlagAction
-		 (get_gametime(),
-		  who_attacks,
-		  flag,
-		  action,
-		  who_attacks,
-		  num_soldiers,
-		  type));
+		 	(get_gametime(),
+		 	 who_attacks,
+		 	 flag,
+		 	 action,
+		 	 who_attacks,
+		 	 num_soldiers,
+		 	 type));
 }
 
 

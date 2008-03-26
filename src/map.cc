@@ -673,11 +673,11 @@ void Map::find_reachable
 			if
 				(not
 				 checkstep.allowed
-				 (this,
-				  cur,
-				  neighb,
-				  dir,
-				  cur == area ? CheckStep::stepFirst : CheckStep::stepNormal))
+				 	(this,
+				 	 cur,
+				 	 neighb,
+				 	 dir,
+				 	 cur == area ? CheckStep::stepFirst : CheckStep::stepNormal))
 				continue;
 
 			// Queue this field
@@ -1108,7 +1108,7 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 		//  4b) Flags must be at least 2 edges apart
 		if
 			(find_immovables
-			 (Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
+			 	(Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
 			goto end;
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1218,7 +1218,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 			(not (br.field->caps & BUILDCAPS_FLAG)
 			 and
 			 not find_immovables
-			 (Area<FCoords>(br, 0), 0, FindImmovableType(Map_Object::FLAG)))
+			 	(Area<FCoords>(br, 0), 0, FindImmovableType(Map_Object::FLAG)))
 			goto end;
 
 	// === passability and flags allow us to build something beyond this point ===
@@ -1654,7 +1654,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
 	if
 		(!
 		 strcasecmp
-		 (filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+		 	(filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
 		try {
 			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
@@ -1665,7 +1665,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
 	else if
 		(!
 		 strcasecmp
-		 (filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
 		//  It is a S2 Map file. Load it as such.
 		result = new S2_Map_Loader(filename, *this);
 
@@ -1958,15 +1958,15 @@ int32_t Map::findpath
 			if
 				(not
 				 checkstep.allowed
-				 (this,
-				  cur,
-				  neighb,
-				  *direction,
-				  neighb == end
-				  ?
-				  CheckStep::stepLast
-				  :
-				  cur == start ? CheckStep::stepFirst : CheckStep::stepNormal))
+				 	(this,
+				 	 cur,
+				 	 neighb,
+				 	 *direction,
+				 	 neighb == end
+				 	 ?
+				 	 CheckStep::stepLast
+				 	 :
+				 	 cur == start ? CheckStep::stepFirst : CheckStep::stepNormal))
 				continue;
 
 			// Calculate cost
@@ -2211,11 +2211,11 @@ Military_Influence Map::calc_influence
 	const Y_Coordinate h = get_height();
 	Military_Influence influence = std::max
 		(std::min
-		 (std::min(abs(a.x - area.x), abs(a.x - area.x + w)),
-		  abs(a.x - area.x - w)),
+		 	(std::min(abs(a.x - area.x), abs(a.x - area.x + w)),
+		 	 abs(a.x - area.x - w)),
 		 std::min
-		 (std::min(abs(a.y - area.y), abs(a.y - area.y + h)),
-		  abs(a.y - area.y - h)));
+		 	(std::min(abs(a.y - area.y), abs(a.y - area.y + h)),
+		 	 abs(a.y - area.y - h)));
 
 	if (influence > area.radius) influence = 0;
 	else if (influence == 0) influence = MAX_RADIUS;

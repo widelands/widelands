@@ -280,8 +280,8 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 			(&eia(),
 			 _("Syntax Error"),
 			 _
-			 ("Your conditional contains at least one syntax error. Please "
-			  "correct!\n"),
+			 	("Your conditional contains at least one syntax error. Please "
+			 	 "correct!\n"),
 			 UI::MessageBox::OK);
 		mb.run();
 		return;
@@ -306,7 +306,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger() {
 	m_construction->add
 		(trigger.name().c_str(),
 		 *new Widelands::TriggerConditional_Factory::Token
-		 (Widelands::TriggerConditional_Factory::TRIGGER, &trigger),
+		 	(Widelands::TriggerConditional_Factory::TRIGGER, &trigger),
 		 -1,
 		 true);
 }

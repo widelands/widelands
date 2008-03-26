@@ -163,12 +163,13 @@ uint32_t Font_Handler::create_text_surface
 {
 	return
 		convert_sdl_surface
-		(*
-		 (wrap > 0 ?
-		  create_static_long_text_surface(f, fg, bg, text, align, wrap, 0, caret)
-		  :
-		  create_single_line_text_surface(f, fg, bg, text, align, caret)),
-		 bg, transparent);
+			(*
+			 (wrap > 0 ?
+			  create_static_long_text_surface
+			  	(f, fg, bg, text, align, wrap, 0, caret)
+			  :
+			  create_single_line_text_surface(f, fg, bg, text, align, caret)),
+			 bg, transparent);
 }
 
 /*
@@ -187,8 +188,8 @@ SDL_Surface* Font_Handler::create_single_line_text_surface
 		text = " ";
 
 	if
-		(SDL_Surface * const surface = TTF_RenderUTF8_Shaded
-		 (&font, text.c_str(), sdl_fg, sdl_bg))
+		(SDL_Surface * const surface =
+		 	TTF_RenderUTF8_Shaded(&font, text.c_str(), sdl_fg, sdl_bg))
 	{
 		if (caret != -1) {
 			std::string const text_caret_pos = text.substr(0, caret);
@@ -240,8 +241,8 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 
 		// render this block in a SDL Surface
 		if
-			(SDL_Surface * const surface = TTF_RenderUTF8_Shaded
-			 (&font, line.c_str(), sdl_fg, sdl_bg))
+			(SDL_Surface * const surface =
+			 	TTF_RenderUTF8_Shaded(&font, line.c_str(), sdl_fg, sdl_bg))
 		{
 		uint32_t new_text_pos = cur_text_pos + line.size();
 		if (caret != -1) {
@@ -327,7 +328,7 @@ SDL_Surface* Font_Handler::create_sdl_text_surface
 	return
 		(wrap > 0  ?
 		 create_static_long_text_surface
-		 (font, fg, bg, text, align, wrap, line_spacing)
+		 	(font, fg, bg, text, align, wrap, line_spacing)
 		 :
 		 create_single_line_text_surface(font, fg, bg, text, align));
 }
@@ -399,7 +400,7 @@ void Font_Handler::draw_richtext
 				if
 					(Surface * const image =
 					 g_gr->get_picture_surface //  Not Font, but Game.
-					 (g_gr->get_picture(PicMod_Game, img_it->c_str())))
+					 	(g_gr->get_picture(PicMod_Game, img_it->c_str())))
 				{
 					img_surf_h =
 						img_surf_h < static_cast<int32_t>(image->get_h()) ?

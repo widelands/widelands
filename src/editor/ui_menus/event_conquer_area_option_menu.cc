@@ -286,8 +286,8 @@ void Event_Conquer_Area_Option_Menu::clicked_ok() {
 				snprintf
 					(buffer, sizeof(buffer),
 					 _
-					 ("There is another event registered with the name \"%s\". "
-					  "Choose another name."),
+					 	("There is another event registered with the name \"%s\". "
+					 	 "Choose another name."),
 					 name.size());
 				UI::MessageBox mb
 					(get_parent(),

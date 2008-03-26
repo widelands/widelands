@@ -1129,8 +1129,8 @@ void Road::create
 		Tribe_Descr const & tribe = owner.tribe();
 		Carrier & carrier =
 			dynamic_cast<Carrier &>
-			(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
-			 (egbase, owner, start, idle_position));
+				(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
+				 	(egbase, owner, start, idle_position));
 		carrier.start_task_road(dynamic_cast<Game*>(&egbase));
 		road.m_carrier = &carrier;
 	}
@@ -1471,7 +1471,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 			Map const & map = g->map();
 			if
 				(dynamic_cast<Building const *>
-				 (map.get_immovable(w->get_position())))
+				 	(map.get_immovable(w->get_position())))
 			{
 				Coords pos;
 				map.get_brn(w->get_position(), &pos);
@@ -2788,13 +2788,13 @@ void Economy::do_split(Flag *f)
 */
 void Economy::start_request_timer(int32_t delta)
 {
-	if (upcast(Game, game, &m_owner->egbase())) {
-		int32_t nexttimer = game->get_gametime() + delta;
-
+	if (upcast(Game, game, &m_owner->egbase()))
 		game->get_cmdqueue()->enqueue
 			(new Cmd_Call_Economy_Balance
-			 (nexttimer, m_owner->get_player_number(), this, m_request_timerid));
-	}
+			 	(game->get_gametime() + delta,
+			 	 m_owner->get_player_number(),
+			 	 this,
+			 	 m_request_timerid));
 }
 
 
@@ -2833,11 +2833,11 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 		if
 			(!
 			 find_route
-			 (supp.get_position(g)->get_base_flag(),
-			  target_flag,
-			  route,
-			  false,
-			  cost_cutoff))
+			 	(supp.get_position(g)->get_base_flag(),
+			 	 target_flag,
+			 	 route,
+			 	 false,
+			 	 cost_cutoff))
 		{
 			if (!best_route)
 				throw wexception("Economy::find_best_supply: COULDN'T FIND A ROUTE!");

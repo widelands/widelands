@@ -235,8 +235,8 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 				snprintf
 					(buffer, sizeof(buffer),
 					 _
-					 ("There is another event registered with the name \"%s\". "
-					  "Choose another name."),
+					 	("There is another event registered with the name \"%s\". "
+					 	 "Choose another name."),
 					 name.c_str());
 				UI::MessageBox mb
 					(get_parent(),
@@ -261,7 +261,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 			 0
 			 :
 			 dynamic_cast<Widelands::Trigger_Null *>
-			 (&mtm[m_null_triggers[m_buttons[b].trigger]]));
+			 	(&mtm[m_null_triggers[m_buttons[b].trigger]]));
 	}
 	end_modal(1);
 }

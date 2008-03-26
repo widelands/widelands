@@ -87,14 +87,14 @@ throw (_wexception)
 						//  constructionsites. All data is read later.
 						Building & building =
 							ol->register_object<Building>
-							(serial,
-							 *
-							 (is_constructionsite ?
-							  egbase->warp_constructionsite
-							  (a, a.player_number, index, 0)
-							  :
-							  egbase->warp_building
-							  (a, a.player_number, index)));
+								(serial,
+								 *
+								 (is_constructionsite ?
+								  egbase->warp_constructionsite
+								  	(a, a.player_number, index, 0)
+								  :
+								  egbase->warp_building
+								  	(a, a.player_number, index)));
 
 						if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
 							read_priorities (building, fr);

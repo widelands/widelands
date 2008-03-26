@@ -211,8 +211,9 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 					screen_y_base
 					-
 					map
-					[Coords
-					 (left_col + 1 == mapwidth ? 0 : left_col + 1, next_row_number)]
+						[Coords
+						 	(left_col + 1 == mapwidth ? 0 : left_col + 1,
+						 	 next_row_number)]
 					.get_height()
 					*
 					HEIGHT_FACTOR;
@@ -270,8 +271,9 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 					screen_y_base
 					-
 					map
-					[Coords
-					 ((right_col == 0 ? mapwidth : right_col) - 1, next_row_number)]
+						[Coords
+						 	((right_col == 0 ? mapwidth : right_col) - 1,
+						 	 next_row_number)]
 					.get_height()
 					*
 					HEIGHT_FACTOR;
@@ -284,10 +286,10 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 					//  (x, y) is in the lower triangle.
 					result.triangle =
 						TCoords<>
-						(Coords
-						 ((right_col == 0 ? mapwidth : right_col) - 1,
-						  next_row_number),
-						 TCoords<>::R);
+							(Coords
+							 	((right_col == 0 ? mapwidth : right_col) - 1,
+							 	 next_row_number),
+							 TCoords<>::R);
 				}
 			}
 		}

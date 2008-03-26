@@ -789,7 +789,7 @@ bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
 			if (not child) break;
 			if
 				(child->do_mousemove
-				 (state, x - child->_x, y - child->_y, xdiff, ydiff))
+				 	(state, x - child->_x, y - child->_y, xdiff, ydiff))
 				return true;
 		}
 	return handle_mousemove(state, x, y, xdiff, ydiff);

@@ -98,10 +98,10 @@ void Carrier::road_update(Game* g, State* state)
 	// Move into idle position if necessary
 	if
 		(start_task_movepath
-		 (g, g->map(),
-		  road.get_path(),
-		  road.get_idle_index(),
-		  descr().get_right_walk_anims(does_carry_ware())))
+		 	(g, g->map(),
+		 	 road.get_path(),
+		 	 road.get_idle_index(),
+		 	 descr().get_right_walk_anims(does_carry_ware())))
 		return;
 
 	// Be bored. There's nothing good on TV, either.
@@ -453,12 +453,12 @@ void Carrier::find_pending_item(Game* g)
 
 	if
 		(road.get_flag(Road::FlagStart)->has_pending_item
-		 (g, road.get_flag(Road::FlagEnd)))
+		 	(g, road.get_flag(Road::FlagEnd)))
 		haveitembits |= 1;
 
 	if
 		(road.get_flag(Road::FlagEnd)->has_pending_item
-		 (g, road.get_flag(Road::FlagStart)))
+		 	(g, road.get_flag(Road::FlagStart)))
 		haveitembits |= 2;
 
 	// If both roads have an item, we pick the one closer to us

@@ -668,9 +668,9 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		(site.bo->need_trees
 		 and
 		 map.find_immovables
-		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-		  0,
-		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
+		 	(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
+		 	 0,
+		 	 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
 		 ==
 		 0)
 	{
@@ -686,9 +686,9 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		(site.bo->need_stones
 		 and
 		 map.find_immovables
-		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-		  0,
-		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))
+		 	(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
+		 	 0,
+		 	 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))
 		 ==
 		 0)
 	{
@@ -1088,7 +1088,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 			Path & path = *new Path();
 			if
 				(map.findpath
-				 (flag->get_position(), nf.flag->get_position(), 0, path, check)
+				 	(flag->get_position(), nf.flag->get_position(), 0, path, check)
 				 >=
 				 0
 				 and

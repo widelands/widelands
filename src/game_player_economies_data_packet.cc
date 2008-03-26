@@ -70,13 +70,13 @@ throw (_wexception)
 					{
 						if
 							(upcast
-							 (Flag const,
-							  flag,
-							  (packet_version == 1 ?
-							   map[fr.Coords32(extent)]
-							   :
-							   map[fr.Map_Index32(max_index)])
-							  .get_immovable()))
+							 	(Flag const,
+							 	 flag,
+							 	 (packet_version == 1 ?
+							 	  map[fr.Coords32(extent)]
+							 	  :
+							 	  map[fr.Map_Index32(max_index)])
+							 	 .get_immovable()))
 						{
 							*it = flag->get_economy();
 							if (packet_version >= 3)

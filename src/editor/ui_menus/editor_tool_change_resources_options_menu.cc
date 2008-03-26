@@ -119,7 +119,8 @@ m_increase_tool(increase_tool)
 		uint32_t w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture
-			 (PicMod_Game, world.get_resource(i)->get_editor_pic(100000).c_str()),
+			 	(PicMod_Game,
+			 	 world.get_resource(i)->get_editor_pic(100000).c_str()),
 			 w, h);
 		resource_pic_max_width  = std::max(resource_pic_max_width,  w);
 		resource_pic_max_height = std::max(resource_pic_max_height, h);
@@ -152,7 +153,8 @@ m_increase_tool(increase_tool)
 			(this,
 			 pos.x, pos.y,
 			 g_gr->get_picture
-			 (PicMod_Game, world.get_resource(i)->get_editor_pic(100000).c_str()));
+			 	(PicMod_Game,
+			 	 world.get_resource(i)->get_editor_pic(100000).c_str()));
 	}
 	pos.y += resource_pic_max_height + vspacing();
 
@@ -231,5 +233,5 @@ void Editor_Tool_Change_Resources_Options_Menu::update() {
 		 "");
 	m_cur_selection.set_pos
 		(Point
-		 ((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));
+		 	((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));
 }

@@ -76,10 +76,10 @@ void Bob::Descr::parse
 	add_animation
 		("idle",
 		 g_anim.get
-		 (directory,
-		  prof->get_safe_section("idle"),
-		  (m_name + "_??.png").c_str(),
-		  encdata));
+		 	(directory,
+		 	 prof->get_safe_section("idle"),
+		 	 (m_name + "_??.png").c_str(),
+		 	 encdata));
 
 	// Parse attributes
 	const char* string;

@@ -246,9 +246,9 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			(&parent,
 			 _("Error!"),
 			 _
-			 ("Can't remove player. It is referenced in some place. Remove all "
-			  "buildings, bobs, triggers and events that depend on this player "
-			  "and try again"),
+			 	("Can't remove player. It is referenced in some place. Remove "
+			 	 "all buildings, bobs, triggers and events that depend on this "
+			 	 "player and try again"),
 			 UI::MessageBox::OK);
 		mmb.run();
 	}
@@ -278,9 +278,9 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 			(&parent,
 			 _("Error!"),
 			 _
-			 ("Can't change player tribe. It is referenced in some place. Remove "
-			  "all buildings, bobs, triggers and events that depend on this "
-			  "tribe and try again"),
+			 	("Can't change player tribe. It is referenced in some place. "
+			 	 "Remove all buildings, bobs, triggers and events that depend on "
+			 	 "this tribe and try again"),
 			 UI::MessageBox::OK);
 		mmb.run();
 	}
@@ -306,7 +306,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 		if (const Widelands::Coords sp = map.get_starting_pos(n))
 			if
 				(dynamic_cast<Widelands::Building const *>
-				 (map[sp].get_immovable()))
+				 	(map[sp].get_immovable()))
 				return;
 
 	//  select tool set mplayer

@@ -40,7 +40,7 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), radius));
+		 	(map.get_fcoords(center.node), radius));
 	do if
 		(not mr.location().field->get_immovable()
 		 or

@@ -102,9 +102,9 @@ void Player::init(const bool place_headquarters) {
 		//try {
 			Warehouse & headquarter = dynamic_cast<Warehouse &>
 				(*egbase().warp_building
-				 (starting_area,
-				  starting_area.player_number,
-				  trdesc.get_building_index("headquarters")));
+				 	(starting_area,
+				 	 starting_area.player_number,
+				 	 trdesc.get_building_index("headquarters")));
 			starting_area.radius = headquarter.get_conquers();
 			egbase().conquer_area(starting_area);
 			trdesc.load_warehouse_with_start_wares(egbase(), headquarter);
@@ -251,7 +251,7 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 		egbase().conquer_area
 			(Player_Area<Area<FCoords> >
-			 (get_player_number(), Area<FCoords>(c, 1)));
+			 	(get_player_number(), Area<FCoords>(c, 1)));
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
 			assert(immovable != &end);
@@ -284,7 +284,7 @@ void Player::force_building
 		for (size_t i = 0; i < nr_locations; ++i) {
 			egbase().conquer_area
 				(Player_Area<Area<FCoords> >
-				 (get_player_number(), Area<FCoords>(c[i], 1)));
+				 	(get_player_number(), Area<FCoords>(c[i], 1)));
 			if (BaseImmovable * const immovable = c[i].field->get_immovable())
 				immovable->remove(&egbase());
 		}

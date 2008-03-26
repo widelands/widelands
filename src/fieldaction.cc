@@ -574,9 +574,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		if (bbg_house[i])
 			m_tabpanel->activate
 				(m_best_tab = add_tab
-				 (pic_tab_buildhouse[i],
-				  bbg_house[i],
-				  i18n::translate(tooltip_tab_build[i])));
+				 	(pic_tab_buildhouse[i],
+				 	 bbg_house[i],
+				 	 i18n::translate(tooltip_tab_build[i])));
 
 	if (bbg_mine)
 		m_tabpanel->activate
@@ -631,11 +631,11 @@ void FieldActionWindow::add_button(UI::Box* box, const char* picname, void (Fiel
 {
 	box->add
 		(new UI::Button<FieldActionWindow>
-		 (box,
-		  0, 0, 34, 34,
-		  2,
-		  g_gr->get_picture(PicMod_Game, picname),
-		  fn, this, tooltip_text),
+		 	(box,
+		 	 0, 0, 34, 34,
+		 	 2,
+		 	 g_gr->get_picture(PicMod_Game, picname),
+		 	 fn, this, tooltip_text),
 		 UI::Box::AlignTop);
 }
 
@@ -954,8 +954,8 @@ uint32_t FieldActionWindow::get_max_attackers() {
 		getMaxAttackSoldiers
 		(m_iabase->egbase(),
 		 dynamic_cast<Widelands::Flag const &>
-		 (*dynamic_cast<Building &>(*m_map->get_immovable(m_field))
-		  .get_base_flag()),
+		 	(*dynamic_cast<Building &>(*m_map->get_immovable(m_field))
+		 	 .get_base_flag()),
 		 m_plr->get_player_number());
 }
 

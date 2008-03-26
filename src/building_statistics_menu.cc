@@ -276,9 +276,9 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 			if (not vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
-					 (Widelands::ProductionSite,
-					  productionsite,
-					  map[vec[m_last_building_index].pos].get_immovable()))
+					 	(Widelands::ProductionSite,
+					 	 productionsite,
+					 	 map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
 						found = true;
 						break;
@@ -287,9 +287,9 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		if (not found) // Now look at the old
 			if
 				(upcast
-				 (Widelands::ProductionSite,
-				  productionsite,
-				  map[vec[m_last_building_index].pos].get_immovable()))
+				 	(Widelands::ProductionSite,
+				 	 productionsite,
+				 	 map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
 					found = true;
 		break;
@@ -302,9 +302,9 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 			if (not vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
-					 (Widelands::ProductionSite,
-					  productionsite,
-					  map[vec[m_last_building_index].pos].get_immovable()))
+					 	(Widelands::ProductionSite,
+					 	 productionsite,
+					 	 map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
 						found = true;
 						break;
@@ -313,9 +313,9 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		if (not found) // Now look at the old
 			if
 				(upcast
-				 (Widelands::ProductionSite,
-				  productionsite,
-				  map[vec[m_last_building_index].pos].get_immovable()))
+				 	(Widelands::ProductionSite,
+				 	 productionsite,
+				 	 map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
 					found = true;
 		break;

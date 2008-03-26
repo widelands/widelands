@@ -72,9 +72,7 @@ MessageBox::MessageBox
 		height = maxheight;
 
 	set_inner_size(width, height);
-	set_pos
-		(Point
-		 ((outerwidth - get_w()) / 2, (outerheight - get_h()) / 2));
+	set_pos(Point((outerwidth - get_w()) / 2, (outerheight - get_h()) / 2));
 
 	d->textarea->set_size(width-10, height-50);
 

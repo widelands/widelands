@@ -39,11 +39,11 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords> > mr
 			(map,
 			 Widelands::Area<TCoords<Widelands::FCoords> >
-			 (TCoords<Widelands::FCoords>
-			  (Widelands::FCoords(map.get_fcoords(center.triangle)),
-			   static_cast<TCoords<Widelands::FCoords>::TriangleIndex>
-			   (center.triangle.t)),
-			  radius));
+			 	(TCoords<Widelands::FCoords>
+			 	 	(Widelands::FCoords(map.get_fcoords(center.triangle)),
+			 	 	 static_cast<TCoords<Widelands::FCoords>::TriangleIndex>
+			 	 	 	(center.triangle.t)),
+			 	 radius));
 		do {
 			Widelands::Terrain_Descr::Index const new_terrain_index =
 				get_random_enabled();

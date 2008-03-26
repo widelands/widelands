@@ -427,26 +427,26 @@ void RenderTarget::rendermap
 			Vertex f_vert
 				(f_posx, posy - f.field->get_height() * HEIGHT_FACTOR,
 				 node_brightness
-				 (gametime, f_player_field.time_node_last_unseen,
-				  f_player_field.vision, f.field->get_brightness()),
+				 	(gametime, f_player_field.time_node_last_unseen,
+				 	 f_player_field.vision, f.field->get_brightness()),
 				 0, 0);
 			Vertex r_vert
 				(r_posx, posy - r.field->get_height() * HEIGHT_FACTOR,
 				 node_brightness
-				 (gametime, r_player_field->time_node_last_unseen,
-				  r_player_field->vision, r.field->get_brightness()),
+				 	(gametime, r_player_field->time_node_last_unseen,
+				 	 r_player_field->vision, r.field->get_brightness()),
 				 TRIANGLE_WIDTH, 0);
 			Vertex bl_vert
 				(bl_posx, b_posy - bl.field->get_height() * HEIGHT_FACTOR,
 				 node_brightness
-				 (gametime, bl_player_field.time_node_last_unseen,
-				  bl_player_field.vision, bl.field->get_brightness()),
+				 	(gametime, bl_player_field.time_node_last_unseen,
+				 	 bl_player_field.vision, bl.field->get_brightness()),
 				 0, 64);
 			Vertex br_vert
 				(br_posx, b_posy - br.field->get_height() * HEIGHT_FACTOR,
 				 node_brightness
-				 (gametime, br_player_field->time_node_last_unseen,
-				  br_player_field->vision, br.field->get_brightness()),
+				 	(gametime, br_player_field->time_node_last_unseen,
+				 	 br_player_field->vision, br.field->get_brightness()),
 				 TRIANGLE_WIDTH, 64);
 
 			if (row_is_forward) {
@@ -671,7 +671,7 @@ void RenderTarget::rendermap
 							(overlay_info
 							 +
 							 overlay_manager.get_overlays
-							 (TCoords<>(f, TCoords<>::R), overlay_info));
+							 	(TCoords<>(f, TCoords<>::R), overlay_info));
 
 						for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
@@ -679,20 +679,20 @@ void RenderTarget::rendermap
 							 ++it)
 							blit
 								(Point
-								 (posx,
-								  posy
-								  +
-								  (TRIANGLE_HEIGHT
-								   -
-								   (f.field->get_height()
-								    +
-								    r.field->get_height()
-								    +
-								    b.field->get_height())
-								   *
-								   HEIGHT_FACTOR)
-								  /
-								  3)
+								 	(posx,
+								 	 posy
+								 	 +
+								 	 (TRIANGLE_HEIGHT
+								 	  -
+								 	  (f.field->get_height()
+								 	   +
+								 	   r.field->get_height()
+								 	   +
+								 	   b.field->get_height())
+								 	  *
+								 	  HEIGHT_FACTOR)
+								 	 /
+								 	 3)
 								 -
 								 it->hotspot,
 								 it->picid);
@@ -743,20 +743,20 @@ void RenderTarget::rendermap
 							 ++it)
 							blit
 								(Point
-								 (posx,
-								  posy
-								  +
-								  ((TRIANGLE_HEIGHT * 2)
-								   -
-								   (f.field->get_height()
-								    +
-								    bl.field->get_height()
-								    +
-								    br.field->get_height())
-								   *
-								   HEIGHT_FACTOR)
-								  /
-								  3)
+								 	(posx,
+								 	 posy
+								 	 +
+								 	 ((TRIANGLE_HEIGHT * 2)
+								 	  -
+								 	  (f.field->get_height()
+								 	   +
+								 	   bl.field->get_height()
+								 	   +
+								 	   br.field->get_height())
+								 	  *
+								 	  HEIGHT_FACTOR)
+								 	 /
+								 	 3)
 								 -
 								 it->hotspot,
 								 it->picid);
@@ -1036,7 +1036,7 @@ void RenderTarget::rendermap
 							(overlay_info
 							 +
 							 overlay_manager.get_overlays
-							 (TCoords<>(f, TCoords<>::R), overlay_info));
+							 	(TCoords<>(f, TCoords<>::R), overlay_info));
 
 						for
 							(const Overlay_Manager::Overlay_Info * it =
@@ -1045,20 +1045,20 @@ void RenderTarget::rendermap
 							 ++it)
 							blit
 								(Point
-								 (posx,
-								  posy
-								  +
-								  (TRIANGLE_HEIGHT
-								   -
-								   (f.field->get_height()
-								    +
-								    r.field->get_height()
-								    +
-								    b.field->get_height())
-								   *
-								   HEIGHT_FACTOR)
-								  /
-								  3)
+								 	(posx,
+								 	 posy
+								 	 +
+								 	 (TRIANGLE_HEIGHT
+								 	  -
+								 	  (f.field->get_height()
+								 	   +
+								 	   r.field->get_height()
+								 	   +
+								 	   b.field->get_height())
+								 	  *
+								 	  HEIGHT_FACTOR)
+								 	 /
+								 	 3)
 								 -
 								 it->hotspot,
 								 it->picid);
@@ -1100,7 +1100,7 @@ void RenderTarget::rendermap
 							(overlay_info
 							 +
 							 overlay_manager.get_overlays
-							 (TCoords<>(f, TCoords<>::D), overlay_info));
+							 	(TCoords<>(f, TCoords<>::D), overlay_info));
 
 						for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
@@ -1108,20 +1108,20 @@ void RenderTarget::rendermap
 							 ++it)
 							blit
 								(Point
-								 (posx,
-								  posy
-								  +
-								  ((TRIANGLE_HEIGHT * 2)
-								   -
-								   (f.field->get_height()
-								    +
-								    bl.field->get_height()
-								    +
-								    br.field->get_height())
-								   *
-								   HEIGHT_FACTOR)
-								  /
-								  3)
+								 	(posx,
+								 	 posy
+								 	 +
+								 	 ((TRIANGLE_HEIGHT * 2)
+								 	  -
+								 	  (f.field->get_height()
+								 	   +
+								 	   bl.field->get_height()
+								 	   +
+								 	   br.field->get_height())
+								 	  *
+								 	  HEIGHT_FACTOR)
+								 	 /
+								 	 3)
 								 -
 								 it->hotspot,
 								 it->picid);

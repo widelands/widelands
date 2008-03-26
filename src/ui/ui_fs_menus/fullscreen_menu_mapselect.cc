@@ -281,9 +281,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					(mapdata.name.c_str(),
 					 mapdata,
 					 g_gr->get_picture
-					 (PicMod_Game,
-					  dynamic_cast<WL_Map_Loader const *>(ml) ?
-					  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+					 	(PicMod_Game,
+					 	 dynamic_cast<WL_Map_Loader const *>(ml) ?
+					 	 "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const std::exception & e) {
 				log("Mapselect: Skip %s due to preload error: %s\n", name, e.what());
 			} catch (...) {

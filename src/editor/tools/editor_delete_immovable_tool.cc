@@ -37,10 +37,12 @@ int32_t Editor_Delete_Immovable_Tool::handle_click_impl
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), parent.get_sel_radius()));
+		 	(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do if
 		(upcast
-		 (Widelands::Immovable, immovable, mr.location().field->get_immovable()))
+		 	(Widelands::Immovable,
+		 	 immovable,
+		 	 mr.location().field->get_immovable()))
 		immovable->remove(&parent.egbase()); //  Delete no buildings or stuff.
 	while (mr.advance(map));
 	return mr.radius() + 2;

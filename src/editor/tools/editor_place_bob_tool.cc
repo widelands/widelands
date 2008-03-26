@@ -37,7 +37,7 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), parent.get_sel_radius()));
+		 	(map.get_fcoords(center.node), parent.get_sel_radius()));
 	if (get_nr_enabled()) {
 		do {
 			if (Widelands::Bob * const bob = mr.location().field->get_first_bob())

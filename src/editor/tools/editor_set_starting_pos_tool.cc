@@ -93,7 +93,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 			 old_sp
 			 and
 			 dynamic_cast<const Widelands::Building *>
-			 (map[old_sp].get_immovable()))
+			 	(map[old_sp].get_immovable()))
 			return 1;
 
 		char picname[] = "pics/editor_player_00_starting_pos.png";
@@ -106,7 +106,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 		//  check if field is valid
 		if
 			(Editor_Tool_Set_Starting_Pos_Callback
-			 (map.get_fcoords(center.node), &map, 0))
+			 	(map.get_fcoords(center.node), &map, 0))
 		{
 			Overlay_Manager & overlay_manager = map.overlay_manager();
 			//  remove old overlay if any

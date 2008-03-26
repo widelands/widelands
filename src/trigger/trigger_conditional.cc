@@ -186,7 +186,7 @@ void TriggerConditional_Var ::get_infix_tokenlist
 {
 	result.push_back
 		(TriggerConditional_Factory::Token
-		 (TriggerConditional_Factory::TRIGGER, &m_trigger));
+		 	(TriggerConditional_Factory::TRIGGER, &m_trigger));
 }
 void TriggerConditional_Var   ::unreference_triggers
 	(EventChain const & evch) const

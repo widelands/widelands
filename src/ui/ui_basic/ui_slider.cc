@@ -214,11 +214,12 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 	if (m_cursor_pos > get_bar_size()) m_cursor_pos = get_bar_size();
 
 	//  absolute value
-	int32_t new_value = static_cast<int32_t>
-		(rint
-		 (static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
-		  /
-		  get_bar_size()));
+	int32_t new_value =
+		static_cast<int32_t>
+			(rint
+			 	(static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
+			 	 /
+			 	 get_bar_size()));
 
 	//  relative value in bounds
 	new_value += m_min_value;
@@ -266,11 +267,12 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 	m_cursor_pos = pointer - ofs;
 
 	//  absolute value
-	m_value = static_cast<int32_t>
-		(rint
-		 (static_cast<double>((m_max_value-m_min_value) * m_cursor_pos)
-		  /
-		  get_bar_size()));
+	m_value =
+		static_cast<int32_t>
+			(rint
+			 	(static_cast<double>((m_max_value-m_min_value) * m_cursor_pos)
+			 	 /
+			 	 get_bar_size()));
 
 	//  relative value in bounds
 	if (m_value < m_min_value) m_value = m_min_value;

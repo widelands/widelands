@@ -341,8 +341,8 @@ void WSM_Checkbox::draw(RenderTarget* dst) {
 
 	//  and the item
 	dst->blit
-		(Point
-		 ((get_inner_w() - WARE_MENU_PIC_WIDTH) / 2, COLOR_BOX_HEIGHT), m_pic);
+		(Point((get_inner_w() - WARE_MENU_PIC_WIDTH) / 2, COLOR_BOX_HEIGHT),
+		 m_pic);
 }
 
 /*

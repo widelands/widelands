@@ -40,14 +40,14 @@
 
 #include <errno.h>
 #ifdef _WIN32
-  #include <windows.h>
-  #include <io.h>
-  #define stat _stat
-  #include <sys/stat.h>
+#include <windows.h>
+#include <io.h>
+#define stat _stat
+#include <sys/stat.h>
 #else
-  #include <glob.h>
-  #include <sys/stat.h>
-  #include <sys/types.h>
+#include <glob.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #endif
 #include <unistd.h>
 

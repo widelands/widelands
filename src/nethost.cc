@@ -933,8 +933,8 @@ void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
 				(_
-				 ("First command sent by client is %u instead of HELLO. "
-				  "Most likely the client is running an incompatible version."),
+				 	("First command sent by client is %u instead of HELLO. "
+				 	 "Most likely the client is running an incompatible version."),
 				 cmd);
 		uint8_t version = r.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)

@@ -75,9 +75,9 @@ throw
 							ol->register_object<Flag>
 								(serial,
 								 *Flag::create
-								 (egbase,
-								  egbase->get_safe_player(owner),
-								  Coords(x, y)));
+								 	(egbase,
+								 	 egbase->get_safe_player(owner),
+								 	 Coords(x, y)));
 						} catch (_wexception const & e) {
 							throw wexception
 								("%u (at (%i, %i), owned by player %u): %s",

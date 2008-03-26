@@ -41,7 +41,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), parent.get_sel_radius()));
+		 	(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
 		int32_t res        = mr.location().field->get_resources();
 		int32_t amount     = mr.location().field->get_resources_amount();
@@ -58,9 +58,9 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 			//  Ok, we're doing something. First remove the current overlays.
 			int32_t picid =
 				g_gr->get_picture
-				(PicMod_Menu,
-				 world.get_resource(res)->get_editor_pic
-				 (mr.location().field->get_resources_amount()).c_str());
+					(PicMod_Menu,
+					 world.get_resource(res)->get_editor_pic
+					 	(mr.location().field->get_resources_amount()).c_str());
 			overlay_manager.remove_overlay(mr.location(), picid);
 
 			if (not amount) {

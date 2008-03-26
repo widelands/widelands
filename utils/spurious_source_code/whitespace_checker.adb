@@ -1,30 +1,23 @@
---  Detecs errors in leading whitespace and a few other things in C++ source
---  code.
+--  Detecs errors in whitespace and a few other things in C++ source code.
 --
 --  Checks the beginning of each line, the so called line begin, which consists
---  of 3 parts:
---    1. Indentation:
---         A sequence of horizontal tab characters. Their count is called the
---         indentation depth of that line. Some validation is done for the
---         indentation depth of lines, for example a line with a closing brace
---         must have the same indentation depth as the line with the matching
---         opening brace.
---    2. Alignment:
---         A sequence of space characters. Their count is called the alignment
---         depth of that line. It must equal the depth of open parentheses from
---         preceding lines.
---    3. Opening parentheses:
---         A sequence of '(' or '[' characters. The matching closing
---         parenthesis does not have to be on the same line.
---  The line begin is read in 3 stages. First characters are read until one is
---  found, that is not a horizontal tab. After this stage the indentation depth
---  of the line is known. Then characters are read until one is found, that is
---  not a space. After this stage the alignment depth of the line is known.
---  Then characters are reade until one is found that is not a '(' or '['.
---  After this stage the whole line begin has been read some errors are
---  reported, such as wrong amount of alignment. If a '#' is found (a
---  preprocessor macro), the macro is read and ignored. Otherwise the rest of
---  the line is read by Read_Code.
+--  of 2 parts in order:
+--    1. Whitespace:
+--         A sequence of characters in the set {horizontal tab, space}.
+--    2. Opening parentheses:
+--         A sequence of characters in the set {'(', '['}. Their matching
+--         closing parentheses do not have to be on the same line.
+--  A whitespace character in the line begin must be a space if and only if the
+--  Character at the same index in the previous line is also in the line begin
+--  and is a space or opening parenthesis. (Otherwise it must be a tab.)
+--
+--  A line with a closing brace must have identical line begin as the line with
+--  the matching opening brace. Any line in between must have a line begin that
+--  starts with the line begin of the opening/closing lines (but may be
+--  longer).
+--
+--  If a '#' is found (a preprocessor macro) in the first column, the macro is
+--  read and ignored. Otherwise the rest of the line is read by Read_Code.
 --
 --  Read_Code reads everything that comes after the line begin, until the end
 --  of the line. Any opening parenthesis that it finds must be closed on that
@@ -34,11 +27,6 @@
 --  is no problem because the compiler will take care of that. However some
 --  errors that the compiler detects are also reported here, such as
 --  unterminated character or string constants.
---
---  When Read_Code encounters a closing brace, it checks if the indentation
---  depth of the line equals the indentation depth of the line with the
---  matching opening brace. When an opening brace is encountered, information
---  is stored for later checking of the line with the matching closing brace.
 --
 --  Errors are reported in <filename>:<linenumber>: <message> format so that
 --  they are understood by other tools. Therefore you can run this program in
@@ -61,25 +49,30 @@ procedure Whitespace_Checker is
    for Line_Number      'Size use 16;
    type Indentation_Level is range 0 .. 2** 8 - 1;
    for Indentation_Level'Size use  8;
-   type Parentheses_Level is range 0 .. 2** 8 - 1;
-   for Parentheses_Level'Size use  8;
+   type Leading_Whitespace_Kind is (Tab, Space);
+   for Leading_Whitespace_Kind'Size use 1;
+   type Leading_Whitespace_Index is range 0 .. 63;
+   for Leading_Whitespace_Index'Size use 8;
+   type Leading_Whitespace_Array is
+     array (Leading_Whitespace_Index) of Leading_Whitespace_Kind;
+   pragma Pack (Leading_Whitespace_Array);
+   for Leading_Whitespace_Array'Size use 64;
+   Leading_Whitespace : Leading_Whitespace_Array;
+   Next_Leading_Whitespace_Index : Leading_Whitespace_Index := 0;
    type Opening_Brace is record
-      Line        : Line_Number;
-      Indentation : Indentation_Level;
-      Parentheses : Parentheses_Level;
+      Line                      : Line_Number;
+      Leading_Whitespace_Amount : Leading_Whitespace_Index;
    end record;
    for Opening_Brace'Size use 32;
    type Brace_Index is range 0 .. 63;
-   Opening_Braces : array (Brace_Index) of Opening_Brace;
-   Brace_Level : Brace_Index := 0;
+   Opening_Braces : array (Brace_Index) of aliased Opening_Brace;
+   Next_Brace_Level : Brace_Index := 0;
 
    Giving_Up           : exception;
    The_File            : Character_IO.File_Type;
    Previous_Character  : Character;
    Current_Character   : Character := LF; --  So empty file has newline at end.
-   Current_Line_Number : Line_Number       := 1;
-   Depth_Indentation   : Indentation_Level := 0;
-   Depth_Parentheses   : Parentheses_Level := 0;
+   Current_Line_Number : Line_Number := 1;
 
 
 
@@ -166,9 +159,9 @@ procedure Whitespace_Checker is
                end case;
             when ','       =>
                case Current_Character is
-                  when LF | ' '  =>
+                  when LF | ' ' =>
                      null;
-                  when others =>
+                  when others   =>
                      Put_Error
                        ("""," & Current_Character & """ is not allowed");
                end case;
@@ -190,37 +183,44 @@ procedure Whitespace_Checker is
                   when others        =>
                      Put_Error ("""" & Previous_Character & "{"" not allowed");
                end case;
-               if Brace_Level = Brace_Index'Last then
+               if Next_Brace_Level = Brace_Index'Last then
                   Raise_Exception
                     (Giving_Up'Identity, "too many levels of braces");
                end if;
-               Opening_Braces (Brace_Level) :=
-                 (Current_Line_Number, Depth_Indentation, Depth_Parentheses);
-               Brace_Level := Brace_Level + 1;
+               Opening_Braces (Next_Brace_Level)
+                 := (Current_Line_Number, Next_Leading_Whitespace_Index);
+               Next_Brace_Level := Next_Brace_Level + 1;
             when '}'       =>
                case Previous_Character is
                   when ',' | ' ' | '?' =>
-                     Put_Error ("""}" & Current_Character & """ not allowed");
+                     Put_Error
+                       ("""" & Previous_Character & Current_Character &
+                        """ not allowed");
                   when others                =>
                      null;
                end case;
-               if Brace_Level = Brace_Index'First then
+               if Brace_Index'First = Next_Brace_Level then
                   Raise_Exception
                     (Giving_Up'Identity, "unmatched closing brace");
                end if;
-               Brace_Level := Brace_Level - 1;
+               Next_Brace_Level := Next_Brace_Level - 1;
                declare
-                  Opening_Depth_Indentation : constant Indentation_Level :=
-                    Opening_Braces (Brace_Level).Indentation;
+                  Matching_Opening_Brace : constant access Opening_Brace
+                    := Opening_Braces (Next_Brace_Level)'Access;
                begin
-                  if Depth_Indentation /= Opening_Depth_Indentation then
+                  if
+                    Next_Leading_Whitespace_Index
+                    /=
+                    Matching_Opening_Brace.Leading_Whitespace_Amount
+                  then
                      Put_Error
-                       ("wrong indentation depth (closing brace):" &
-                        Depth_Indentation'Img);
+                       ("wrong amount of leading whitespace before closing " &
+                        "brace:" & Next_Leading_Whitespace_Index'Img);
                      Put_Error
-                       ("note: should be" & Opening_Depth_Indentation'Img &
+                       ("note: must be"                                      &
+                        Matching_Opening_Brace.Leading_Whitespace_Amount'Img &
                         " (matching opening brace)",
-                        Opening_Braces (Brace_Level).Line);
+                        Matching_Opening_Brace.Line);
                   end if;
                end;
             when '(' | '[' =>
@@ -314,118 +314,176 @@ procedure Whitespace_Checker is
       return Depth_Parentheses_Increase;
    end Read_Code;
 
-   Allowed_Indentation_Increase : Indentation_Level := 0;
-   Previous_Depth_Indentation   : Indentation_Level := 0;
-   Depth_Alignment              : Parentheses_Level := 0;
+   Indentation_Increase_Allowed : Indentation_Level := 0;
 begin
    Open (The_File, In_File, Argument (1));
    while not End_Of_File (The_File) loop
       declare
-         Parentheses_At_Line_Begin : Parentheses_Level := 0;
+         Current_Leading_Whitespace_Index : Leading_Whitespace_Index := 0;
+         Indentation_Increase             : Indentation_Level        := 0;
       begin
-         Next_Character;
-         while Current_Character = HT loop
-            Depth_Indentation := Depth_Indentation + 1;
+         Read_Leading_Whitespace : loop
             Next_Character;
-         end loop;
-         while Current_Character = ' ' loop
-            Depth_Alignment := Depth_Alignment + 1;
-            Next_Character;
-         end loop;
-         while Current_Character = '(' or Current_Character = '[' loop
-            Parentheses_At_Line_Begin := Parentheses_At_Line_Begin + 1;
-            Next_Character;
-            Allowed_Indentation_Increase := 2; --  hack for Nicolai's style
-         end loop;
-         case Current_Character is
-            when LF        =>
-               if Previous_Character = ' ' or Previous_Character = HT then
-                  Put_Error ("trailing whitespace");
-               elsif Previous_Character = '(' or Previous_Character = '[' then
-                  Put_Error
-                    ("empty '" & Previous_Character & "' at end of line");
-               end if;
-               Next_Line;
-               Depth_Indentation := 0;
-               Depth_Alignment   := 0;
-            when '#'       =>
-               Read_Macro;
-               Depth_Indentation := 0;
-               Depth_Alignment   := 0;
-            when others    =>
---            Put_Line
---              ("DEBUG: line number ="  & Line_Number      'Img &
---               ", Depth_Indentation =" & Depth_Indentation'Img &
---               ", Depth_Parentheses =" & Depth_Parentheses'Img);
-
-               if
-                 0 < Depth_Parentheses
-                 and then
-                 Depth_Indentation /= Previous_Depth_Indentation
-               then
-                  Put_Error
-                    ("wrong indentation level:" & Depth_Indentation'Img &
-                     " (should be" & Previous_Depth_Indentation'Img & ')');
-               elsif
-                 Previous_Depth_Indentation + Allowed_Indentation_Increase
-                 <
-                 Depth_Indentation
-               then
-                  Put_Error ("indentation is too deep");
-               end if;
-
-               if Depth_Alignment /= Depth_Parentheses then
-                  Put_Error
-                    ("wrong amount of leading padding:" & Depth_Alignment'Img &
-                     " (should be" & Depth_Parentheses'Img & ')');
-               end if;
-               Depth_Parentheses :=
-                 Depth_Parentheses + Parentheses_At_Line_Begin;
-               declare
-                  Initial_Brace_Level : constant Brace_Index := Brace_Level;
-                  Depth_Parentheses_Increase_After_Line_Begin :
-                    constant Integer := Read_Code;
-                  New_Depth_Parentheses : constant Integer :=
-                    Integer'Val (Depth_Parentheses) +
-                    Depth_Parentheses_Increase_After_Line_Begin;
-               begin
-                  pragma Assert (Current_Character = LF);
-                  if 0 < Depth_Parentheses_Increase_After_Line_Begin then
-                     Put_Error
-                       ("parenthesis not closed before end of line must be " &
-                        "at line begin");
-                  end if;
+            case Current_Character is
+               when HT     =>
+                  pragma Assert
+                    (Current_Leading_Whitespace_Index
+                     <=
+                     Next_Leading_Whitespace_Index);
                   if
-                    (0 < Parentheses_At_Line_Begin or 0 < Depth_Alignment)
-                    and
-                    Initial_Brace_Level < Brace_Level
+                    Current_Leading_Whitespace_Index
+                    =
+                    Next_Leading_Whitespace_Index
+                  then
+                     Indentation_Increase := Indentation_Increase + 1;
+                     Leading_Whitespace (Current_Leading_Whitespace_Index)
+                       := Tab;
+                     Next_Leading_Whitespace_Index
+                       := Next_Leading_Whitespace_Index + 1;
+                  elsif
+                    Leading_Whitespace (Current_Leading_Whitespace_Index)
+                    =
+                    Space
                   then
                      Put_Error
-                       ("opening brace at line with leading padding or "  &
-                        "parentheses must be matched by a closing brace " &
-                        "on the same line");
+                       ("leading whitespace character #"               &
+                        Leading_Whitespace_Index
+                        (Current_Leading_Whitespace_Index + 1)
+                        'Img                                           &
+                        " is 'HT' but should be ' ' according to the " &
+                        "previous line");
                   end if;
-                  if New_Depth_Parentheses < 0 then
-                     Put_Error ("unmatched parenthesis");
-                     Depth_Parentheses := 0;
-                  else
-                     Depth_Parentheses :=
-                       Parentheses_Level'Val (New_Depth_Parentheses);
+               when ' '    =>
+                  if
+                    Current_Leading_Whitespace_Index
+                    =
+                    Next_Leading_Whitespace_Index
+                  then
+                     Put_Error
+                       ("found ' ' as leading whitespace character #"   &
+                        Leading_Whitespace_Index
+                        (Current_Leading_Whitespace_Index + 1)
+                        'Img                                            &
+                        " but only" & Next_Leading_Whitespace_Index'Img &
+                        " leading whitespace characters are allowed");
+                  elsif
+                    Leading_Whitespace (Current_Leading_Whitespace_Index) = Tab
+                  then
+                     Put_Error
+                       ("leading whitespace character #"               &
+                        Leading_Whitespace_Index
+                        (Current_Leading_Whitespace_Index + 1)
+                        'Img                                           &
+                        " is ' ' but should be 'HT' according to the " &
+                        "previous line");
+                  end if;
+               when others =>
+                  exit Read_Leading_Whitespace;
+            end case;
+            Current_Leading_Whitespace_Index
+              := Current_Leading_Whitespace_Index + 1;
+         end loop Read_Leading_Whitespace;
+         if Current_Character = '(' or Current_Character = '[' then
+            Indentation_Increase_Allowed := 2; --  hack for Nicolai's style
+         end if;
+         if Indentation_Increase_Allowed < Indentation_Increase then
+            Put_Error ("indentation is too deep");
+         end if;
+         if Current_Character /= LF and Current_Character /= '#' then
+            Next_Leading_Whitespace_Index := Current_Leading_Whitespace_Index;
+         end if;
+      end;
+      while Current_Character = '(' or Current_Character = '[' loop
+         Leading_Whitespace (Next_Leading_Whitespace_Index) := Space;
+         Next_Leading_Whitespace_Index :=  Next_Leading_Whitespace_Index + 1;
+         Next_Character;
+      end loop;
+      case Current_Character is
+         when LF        =>
+            if    Previous_Character = ' ' or Previous_Character = HT  then
+               Put_Error ("trailing whitespace");
+            elsif Previous_Character = '(' or Previous_Character = '[' then
+               Put_Error ("empty '" & Previous_Character & "' at end of line");
+            end if;
+            Next_Line;
+         when '#'       =>
+            Read_Macro;
+         when others    =>
+            if
+              Brace_Index'First < Next_Brace_Level
+            then
+               declare
+                  Matching_Opening_Brace : constant access Opening_Brace
+                    := Opening_Braces (Next_Brace_Level - 1)'Access;
+               begin
+                  if
+                    Next_Leading_Whitespace_Index
+                    <
+                    Matching_Opening_Brace.Leading_Whitespace_Amount
+                  then
+                     Put_Error
+                       ("insuficient amount of leading whitespace:" &
+                        Next_Leading_Whitespace_Index'Img);
+                     Put_Error
+                       ("note: must be at least" &
+                        Matching_Opening_Brace.Leading_Whitespace_Amount'Img &
+                        " (opening brace)",
+                        Matching_Opening_Brace.Line);
                   end if;
                end;
-               Previous_Depth_Indentation := Depth_Indentation;
-               Depth_Indentation          := 0;
-               Depth_Alignment            := 0;
+            end if;
+            declare
+               Initial_Next_Brace_Level : constant Brace_Index
+                 := Next_Brace_Level;
+               Depth_Parentheses_Increase_After_Line_Begin : Integer
+                 := Read_Code;
+            begin
+               pragma Assert (Current_Character = LF);
+               if 0 < Depth_Parentheses_Increase_After_Line_Begin then
+                  Put_Error
+                    ("parenthesis not closed before end of line must be at " &
+                     "line begin");
+               end if;
+               while Depth_Parentheses_Increase_After_Line_Begin < 0 loop
+                  if 0 = Next_Leading_Whitespace_Index then
+                     Put_Error
+                       ("closing parenthesis without matching leading " &
+                        "alignment");
+                     exit;
+                  end if;
+                  Next_Leading_Whitespace_Index
+                    := Next_Leading_Whitespace_Index - 1;
+                  if
+                    Leading_Whitespace (Next_Leading_Whitespace_Index) = Space
+                  then
+                     Depth_Parentheses_Increase_After_Line_Begin
+                       := Depth_Parentheses_Increase_After_Line_Begin + 1;
+                  end if;
+               end loop;
+               if
+                 0 < Next_Leading_Whitespace_Index
+                 and then
+                 Leading_Whitespace (Next_Leading_Whitespace_Index - 1)
+                 =
+                 Space
+                 and then
+                 Initial_Next_Brace_Level < Next_Brace_Level
+               then
+                  Put_Error
+                    ("opening brace at line with leading alignment or "  &
+                     "parentheses must be matched by a closing brace on " &
+                     "the same line");
+               end if;
+            end;
 
-               case Previous_Character is
-                  when ',' | ';' | '}' =>
-                     Allowed_Indentation_Increase :=  0;
-                  when others          =>
-                     Allowed_Indentation_Increase :=  1;
-               end case;
-               Next_Line;
-         end case;
-      end;
+            case Previous_Character is
+               when ',' | ';' | '}' =>
+                  Indentation_Increase_Allowed :=  0;
+               when others          =>
+                  Indentation_Increase_Allowed :=  1;
+            end case;
+            Next_Line;
+      end case;
    end loop;
 exception
    when Ada.IO_Exceptions.End_Error  =>

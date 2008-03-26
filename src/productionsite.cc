@@ -300,7 +300,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 			//wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->init
 				(owner().tribe().get_safe_ware_index
-				 (inputs[i].ware_descr().name().c_str()),
+				 	(inputs[i].ware_descr().name().c_str()),
 				 inputs[i].get_max());
 		}
 	}
@@ -716,7 +716,7 @@ void ProductionSite::program_act(Game* g)
 				MapRegion<Area<FCoords> > mr
 					(map,
 					 Area<FCoords>
-					 (map.get_fcoords(get_position()), action->iparam1));
+					 	(map.get_fcoords(get_position()), action->iparam1));
 				do {
 					uint8_t  fres   = mr.location().field->get_resources();
 					uint32_t amount = mr.location().field->get_resources_amount();

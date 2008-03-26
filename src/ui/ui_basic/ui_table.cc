@@ -209,12 +209,14 @@ void Table<void *>::draw(RenderTarget * dst)
 				Point(curx, y)
 				+
 				Point
-				(alignment & Align_Right   ?  curw - w  - 1 :
-				 alignment & Align_HCenter ? (curw - w) / 2 :
-				 1,
-				 (static_cast<int32_t>(get_lineheight()) - static_cast<int32_t>(h))
-				 /
-				 2);
+					(alignment & Align_Right   ?  curw - w  - 1 :
+					 alignment & Align_HCenter ? (curw - w) / 2 :
+					 1,
+					 (static_cast<int32_t>(get_lineheight())
+					  -
+					  static_cast<int32_t>(h))
+					 /
+					 2);
 			if (entry_picture != -1)
 				dst->blit(point, entry_picture);
 			else

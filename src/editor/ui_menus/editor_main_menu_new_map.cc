@@ -141,7 +141,7 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 		if (m_currentworld == m_worlds.size()) m_currentworld=0;
 		m_world->set_title
 			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name
-			 ());
+			 	());
 		break;
 	}
 

@@ -89,7 +89,7 @@ m_pit     (pit)
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box, xpos, ypos,
 			 g_gr->get_picture
-			 (PicMod_Game, world.get_immovable_descr(i)->get_picture()));
+			 	(PicMod_Game, world.get_immovable_descr(i)->get_picture()));
 
 		cb.set_size(width, height);
 		cb.set_id(i);

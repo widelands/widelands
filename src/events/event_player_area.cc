@@ -39,12 +39,12 @@ void Event_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
 			m_player_area = Player_Area<>
 				(s.get_Player_Number("player", map.get_nrplayers(), 1),
 				 Area<>
-				 (event_version == 1
-				  ?
-				  Coords(s.get_safe_int("point_x"), s.get_safe_int("point_y"))
-				  :
-				  s.get_safe_Coords("point", extent),
-				  s.get_int("area", 0)));
+				 	(event_version == 1
+				 	 ?
+				 	 Coords(s.get_safe_int("point_x"), s.get_safe_int("point_y"))
+				 	 :
+				 	 s.get_safe_Coords("point", extent),
+				 	 s.get_int("area", 0)));
 			if
 				(m_player_area.x < 0 or extent.w <= m_player_area.x
 				 or

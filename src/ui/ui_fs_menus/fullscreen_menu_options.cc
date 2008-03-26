@@ -114,8 +114,8 @@ m_label_autosave
 	snprintf
 		(buffer, sizeof(buffer),
 		 ngettext
-		 ("Autosave game every %d minute", "Autosave game every %d minutes",
-		  DEFAULT_AUTOSAVE_INTERVAL),
+		 	("Autosave game every %d minute", "Autosave game every %d minutes",
+		 	 DEFAULT_AUTOSAVE_INTERVAL),
 		 DEFAULT_AUTOSAVE_INTERVAL);
 	m_label_autosave.set_text(buffer);
 

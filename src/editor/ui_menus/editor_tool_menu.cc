@@ -59,42 +59,42 @@ UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
-		 (PicMod_Game, "pics/editor_menu_tool_change_height.png"),
+		 	(PicMod_Game, "pics/editor_menu_tool_change_height.png"),
 		 _("Change height"));
 	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
-		 (PicMod_Game, "pics/editor_menu_tool_noise_height.png"),
+		 	(PicMod_Game, "pics/editor_menu_tool_noise_height.png"),
 		 _("Noise height"));
 	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
-		 (PicMod_Game, "pics/editor_menu_tool_set_terrain.png"),
+		 	(PicMod_Game, "pics/editor_menu_tool_set_terrain.png"),
 		 _("Terrain"));
 	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
-		 (PicMod_Game, "pics/editor_menu_tool_place_immovable.png"),
+		 	(PicMod_Game, "pics/editor_menu_tool_place_immovable.png"),
 		 _("Immovable"));
 	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
-		 (PicMod_Game, "pics/editor_menu_tool_place_bob.png"),
+		 	(PicMod_Game, "pics/editor_menu_tool_place_bob.png"),
 		 _("Bob"));
 	posx += width + spacing;
 	m_radioselect.add_button
 		(this,
 		 posx, posy,
 		 g_gr->get_picture
-		 (PicMod_Game, "pics/editor_menu_tool_change_resources.png"),
+		 	(PicMod_Game, "pics/editor_menu_tool_change_resources.png"),
 		 _("Resource"));
 
 	set_inner_size

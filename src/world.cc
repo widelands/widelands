@@ -344,7 +344,7 @@ bool World::exists_world(std::string worldname)
 		f.TryOpen
 		(*
 		 std::auto_ptr<FileSystem>
-		 (g_fs->MakeSubFileSystem("worlds/" + worldname)),
+		 	(g_fs->MakeSubFileSystem("worlds/" + worldname)),
 		 "conf");
 }
 

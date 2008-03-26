@@ -255,9 +255,9 @@ void Main_Menu_Load_Map::fill_list() {
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->get_picture
-					 (PicMod_Game,
-					  dynamic_cast<WL_Map_Loader const *>(m_ml) ?
-					  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+					 	(PicMod_Game,
+					 	 dynamic_cast<WL_Map_Loader const *>(m_ml) ?
+					 	 "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (_wexception&) {} //  we simply skip illegal entries
 			delete m_ml;
 		}

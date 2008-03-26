@@ -359,8 +359,8 @@ void Scrollbar::draw(RenderTarget* dst)
 			(*dst,
 			 PlusPage,
 			 Rect
-			 (Point(knobpos + knobsize/2, 0),
-			  get_w() - knobpos - knobsize/2 - Size, get_h()));
+			 	(Point(knobpos + knobsize / 2, 0),
+			 	 get_w() - knobpos - knobsize/2 - Size, get_h()));
 	}
 	else
 	{
@@ -386,8 +386,8 @@ void Scrollbar::draw(RenderTarget* dst)
 			(*dst,
 			 PlusPage,
 			 Rect
-			 (Point(0, knobpos + knobsize/2),
-			  get_w(), get_h() - knobpos - knobsize/2 - Size));
+			 	(Point(0, knobpos + knobsize / 2),
+			 	 get_w(), get_h() - knobpos - knobsize/2 - Size));
 	}
 }
 

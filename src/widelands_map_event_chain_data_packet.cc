@@ -83,7 +83,7 @@ throw (_wexception)
 								if (Trigger * const tr = mtm[trigname])
 									toklist.push_back
 										(TriggerConditional_Factory::Token
-										 (TriggerConditional_Factory::TRIGGER, tr));
+										 	(TriggerConditional_Factory::TRIGGER, tr));
 								else
 									throw wexception
 										("trigger \"%s\" does not exist", trigname);
@@ -92,7 +92,8 @@ throw (_wexception)
 								uint8_t i = 0;
 								while
 									(strcmp
-									 (type, TriggerConditional_Factory::operators[i]))
+									 	(type,
+									 	 TriggerConditional_Factory::operators[i]))
 									if (i++ == TriggerConditional_Factory::TRIGGER)
 										throw wexception
 											("\"%s=%s\": token type \"%s\" is not "
@@ -101,7 +102,7 @@ throw (_wexception)
 											 key, type, type);
 								toklist.push_back
 									(static_cast<TriggerConditional_Factory::TokenNames>
-									 (i));
+									 	(i));
 							}
 
 							//  Increment the number in the key string.
@@ -117,7 +118,7 @@ throw (_wexception)
 						}
 						event_chain.set_trigcond
 							(TriggerConditional_Factory::create_from_infix
-							 (event_chain, toklist));
+							 	(event_chain, toklist));
 					}
 
 					{ //  Events

@@ -560,7 +560,7 @@ bool Interactive_Base::append_build_road(Coords const field) {
 		Widelands::CheckStepRoad cstep(player, Widelands::MOVECAPS_WALK);
 		if
 			(map.findpath
-			 (m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
+			 	(m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
 			 <
 			 0)
 			return false; //  could not find a path

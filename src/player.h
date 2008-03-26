@@ -410,7 +410,7 @@ struct Player :
 		assert(player_area.player_number == get_player_number());
 		see_area
 			(Area<FCoords>
-			 (egbase().map().get_fcoords(player_area), player_area.radius));
+			 	(egbase().map().get_fcoords(player_area), player_area.radius));
 		AreaWatcher & result = AreaWatcher::create(egbase(), player_area);
 		m_areawatchers.insert(&result);
 		return result;
@@ -419,7 +419,7 @@ struct Player :
 	void remove_areawatcher(AreaWatcher & areawatcher) {
 		unsee_area
 			(Area<FCoords>
-			 (egbase().map().get_fcoords(areawatcher), areawatcher.radius));
+			 	(egbase().map().get_fcoords(areawatcher), areawatcher.radius));
 		m_areawatchers.erase(&areawatcher);
 	}
 

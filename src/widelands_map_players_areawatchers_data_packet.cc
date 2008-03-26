@@ -80,7 +80,7 @@ throw (_wexception)
 					ol->register_object
 						(reg,
 						 player->add_areawatcher
-						 (Player_Area<>(p, Area<>(c, fr.Unsigned16()))));
+						 	(Player_Area<>(p, Area<>(c, fr.Unsigned16()))));
 				}
 			} else
 				throw wexception

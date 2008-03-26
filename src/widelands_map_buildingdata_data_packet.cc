@@ -737,8 +737,8 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		assert(os->is_object_known(it->get(egbase)));
 		workermap.insert
 			(std::pair<uint32_t, const Worker *>
-			 (os->get_object_file_index(it->get(egbase)),
-			  static_cast<const Worker *>(it->get(egbase))));
+			 	(os->get_object_file_index(it->get(egbase)),
+			 	 static_cast<const Worker *>(it->get(egbase))));
 	}
 
 	for

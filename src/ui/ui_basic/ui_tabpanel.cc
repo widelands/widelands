@@ -157,8 +157,8 @@ void Tab_Panel::draw(RenderTarget* dst)
 	assert(TP_BUTTON_HEIGHT - 2 <= get_h());
 	dst->tile
 		(Rect
-		 (Point(0, TP_BUTTON_HEIGHT - 2),
-		  get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
+		 	(Point(0, TP_BUTTON_HEIGHT - 2),
+		 	 get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
 		 m_pic_background,
 		 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
 

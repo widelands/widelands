@@ -181,7 +181,7 @@ void Overlay_Manager::register_overlay
 
 	overlay_map.insert
 		(std::pair<Widelands::Coords const, Registered_Overlays>
-		 (c, Registered_Overlays(jobid, picid, hotspot, level)));
+		 	(c, Registered_Overlays(jobid, picid, hotspot, level)));
 
 	//  Now manually sort, so that they are ordered
 	//    * first by c (done by std::multimap)

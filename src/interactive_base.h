@@ -118,8 +118,10 @@ private:
 		Sel_Data
 			(const bool Freeze = false, const bool Triangles = false,
 			 const Widelands::Node_and_Triangle<> Pos       =
-			 Widelands::Node_and_Triangle<>
-			 (Widelands::Coords(0, 0), Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
+			 	Widelands::Node_and_Triangle<>
+			 		(Widelands::Coords(0, 0),
+			 		 Widelands::TCoords<>
+			 		 	(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
 			 const int32_t Pic                       = 0,
 			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())

@@ -273,10 +273,14 @@ void WatchWindow::start_tracking(Point pos)
 	// Scan progressively larger circles around the given position for suitable bobs
 	for
 		(Widelands::Area<Widelands::FCoords> area
-		 (map.get_fcoords
-		  (MapviewPixelFunctions::calc_node_and_triangle(map, pos.x, pos.y).node),
-		  2); area.radius <= 32; area.radius *= 2)
-		if (map.find_bobs(area, &bobs)) break;
+		 	(map.get_fcoords
+		 	 	(MapviewPixelFunctions::calc_node_and_triangle(map, pos.x, pos.y)
+		 	 	 .node),
+		 	 2);
+		 area.radius <= 32;
+		 area.radius *= 2)
+		if (map.find_bobs(area, &bobs))
+			break;
 
 	// Find the bob closest to us
 	int32_t closest_dist = -1;

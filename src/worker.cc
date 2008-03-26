@@ -610,11 +610,11 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 	if
 		(not
 		 start_task_movepath
-		 (g,
-		  dest,
-		  10,
-		  descr().get_right_walk_anims(does_carry_ware()),
-		  forceonlast, max_steps))
+		 	(g,
+		 	 dest,
+		 	 10,
+		 	 descr().get_right_walk_anims(does_carry_ware()),
+		 	 forceonlast, max_steps))
 	{
 		molog("  couldn't find path\n");
 		send_signal(g, "fail");
@@ -818,9 +818,9 @@ bool Worker::run_geologist_find(Game * g, State * state, const Action *)
 		g->create_immovable
 			(position,
 			 t.get_resource_indicator
-			 (rdescr,
-			  rdescr->is_detectable() ?
-			  position.field->get_resources_amount() : 0),
+			 	(rdescr,
+			 	 rdescr->is_detectable() ?
+			 	 position.field->get_resources_amount() : 0),
 			 &t);
 	}
 
@@ -1365,10 +1365,11 @@ void Worker::transfer_update(Game * g, State * state) {
 			if (index >= 0) {
 				if
 					(start_task_movepath
-					 (g, map,
-					  path,
-					  index,
-					  descr().get_right_walk_anims(does_carry_ware())))
+					 	(g,
+					 	 map,
+					 	 path,
+					 	 index,
+					 	 descr().get_right_walk_anims(does_carry_ware())))
 				{
 					molog
 						("[transfer]: from road %u to flag %u nextstep %u\n",
@@ -1581,10 +1582,10 @@ void Worker::return_update(Game* g, State* state)
 	if
 		(not
 		 start_task_movepath
-		 (g,
-		  location.get_base_flag()->get_position(),
-		  15,
-		  descr().get_right_walk_anims(does_carry_ware())))
+		 	(g,
+		 	 location.get_base_flag()->get_position(),
+		 	 15,
+		 	 descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
 
@@ -2187,8 +2188,8 @@ void Worker::fugitive_update(Game* g, State* state)
 	std::vector<ImmovableFound> flags;
 	if
 		(map.find_immovables
-		 (Area<FCoords>(map.get_fcoords(get_position()), vision_range()),
-		  &flags, FindFlagWithPlayersWarehouse(*get_owner())))
+		 	(Area<FCoords>(map.get_fcoords(get_position()), vision_range()),
+		 	 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
 		int32_t bestdist = -1;
 		Flag *  best     =  0;
@@ -2218,10 +2219,10 @@ void Worker::fugitive_update(Game* g, State* state)
 				// the warehouse could be on a different island, so check for failure
 				if
 					(start_task_movepath
-					 (g,
-					  best->get_position(),
-					  0,
-					  descr().get_right_walk_anims(does_carry_ware())))
+					 	(g,
+					 	 best->get_position(),
+					 	 0,
+					 	 descr().get_right_walk_anims(does_carry_ware())))
 
 					return;
 			}
@@ -2238,10 +2239,10 @@ void Worker::fugitive_update(Game* g, State* state)
 
 	if
 		(start_task_movepath
-		 (g,
-		  g->random_location(get_position(), vision_range()),
-		  4,
-		  descr().get_right_walk_anims(does_carry_ware())))
+		 	(g,
+		 	 g->random_location(get_position(), vision_range()),
+		 	 4,
+		 	 descr().get_right_walk_anims(does_carry_ware())))
 		return;
 
 	start_task_idle(g, descr().get_animation("idle"), 50);
@@ -2370,10 +2371,10 @@ void Worker::geologist_update(Game* g, State* state)
 				if
 					(!
 					 start_task_movepath
-					 (g,
-					  target,
-					  0,
-					  descr().get_right_walk_anims(does_carry_ware())))
+					 	(g,
+					 	 target,
+					 	 0,
+					 	 descr().get_right_walk_anims(does_carry_ware())))
 				{
 
 					molog("[geologist]: BUG: couldn't find path\n");
@@ -2399,10 +2400,7 @@ void Worker::geologist_update(Game* g, State* state)
 	if
 		(not
 		 start_task_movepath
-		 (g,
-		  owner_area,
-		  0,
-		  descr().get_right_walk_anims(does_carry_ware())))
+		 	(g, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[geologist]: Couldn't find path home\n");
 		send_signal(g, "fail");

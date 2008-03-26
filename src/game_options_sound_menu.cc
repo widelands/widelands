@@ -102,8 +102,8 @@ ingame_sound_volume
 
 	set_inner_size
 		(std::max
-		 (static_cast<uint32_t>(get_inner_w()),
-		  2 * hmargin() + std::max(boxes_width, labels_width)),
+		 	(static_cast<uint32_t>(get_inner_w()),
+		 	 2 * hmargin() + std::max(boxes_width, labels_width)),
 		 2 * vmargin() + 2 * (STATEBOX_HEIGHT + vspacing())
 		 + vbigspacing() + 3 * vspacing() + 2 * slideh()
 		 + ingame_music_volume_label.get_h() + ingame_music_volume_label.get_h());

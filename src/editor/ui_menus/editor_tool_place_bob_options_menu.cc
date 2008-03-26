@@ -56,7 +56,7 @@ m_pit                   (pit)
 	const uint32_t bobs_in_row =
 		std::max
 		(std::min
-		 (static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U),
+		 	(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U),
 		 12U);
 
 	m_tabpanel.set_snapparent(true);
@@ -66,7 +66,8 @@ m_pit                   (pit)
 		uint32_t w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture
-			 (PicMod_Game, world.get_bob_descr(j)->get_picture()), w, h);
+			 	(PicMod_Game, world.get_bob_descr(j)->get_picture()),
+			 w, h);
 		if (w > width)  width  = w;
 		if (h > height) height = h;
 	}

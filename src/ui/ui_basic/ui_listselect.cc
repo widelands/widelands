@@ -337,7 +337,9 @@ void BaseListselect::draw(RenderTarget* dst)
 			 col,
 			 RGBColor(107, 87, 55),
 			 Point
-			 (x, y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
+			 	(x,
+			 	 y +
+			 	 (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
 			 er.name, m_align,
 			 -1);
 

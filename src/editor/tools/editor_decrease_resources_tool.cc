@@ -42,7 +42,7 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), parent.get_sel_radius()));
+		 	(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
 		int32_t res    = mr.location().field->get_resources();
 		int32_t amount = mr.location().field->get_resources_amount();

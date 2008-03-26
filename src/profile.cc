@@ -647,7 +647,7 @@ void Section::set_Building_Index
 	create_val
 		(name,
 		 egbase.manually_load_tribe
-		 (egbase.map().get_scenario_player_tribe(player).c_str())
+		 	(egbase.map().get_scenario_player_tribe(player).c_str())
 		 .get_building_descr(value)->name().c_str(),
 		 duplicate)
 		->mark_used();

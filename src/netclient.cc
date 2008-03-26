@@ -326,10 +326,11 @@ void NetClient::handle_packet(RecvPacket& packet)
 	if (d->playernum == -1) {
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
-			(_
-			 ("Expected a HELLO packet from server, but received command number %u."
-			  "Maybe the server is running a different version of Widelands?"),
-			 cmd);
+				(_
+				 	("Expected a HELLO packet from server, but received command "
+				 	 "number %u. Maybe the server is running a different version "
+				 	 "of Widelands?"),
+				 cmd);
 		uint8_t version = packet.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
 			throw DisconnectException(_("Server uses a different protocol version"));

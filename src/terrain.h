@@ -577,15 +577,15 @@ template<typename T> static void render_road_horiz
 		for (int32_t i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
 			*
 			(reinterpret_cast<T *>
-			 (static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
+			 	(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 			 +
 			 x)
 			=
 			*
 			(reinterpret_cast<const T *>
-			 (static_cast<const uint8_t *>(src.get_pixels())
-			  +
-			  i * src.get_pitch())
+			 	(static_cast<const uint8_t *>(src.get_pixels())
+			 	 +
+			 	 i * src.get_pitch())
 			 +
 			 sx);
 	}
@@ -609,15 +609,15 @@ template<typename T> static void render_road_vert
 		for (int32_t i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
 			*
 			(reinterpret_cast<T *>
-			 (static_cast<uint8_t *>(dst.get_pixels()) +  y * dst.get_pitch())
+			 	(static_cast<uint8_t *>(dst.get_pixels()) +  y * dst.get_pitch())
 			 +
 			 x)
 			=
 			*
 			(reinterpret_cast<const T *>
-			 (static_cast<const uint8_t *>(src.get_pixels())
-			  +
-			  sy * src.get_pitch())
+			 	(static_cast<const uint8_t *>(src.get_pixels())
+			 	 +
+			 	 sy * src.get_pitch())
 			 +
 			 i);
 	}

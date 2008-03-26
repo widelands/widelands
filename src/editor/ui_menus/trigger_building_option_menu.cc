@@ -528,8 +528,8 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 				snprintf
 					(buffer, sizeof(buffer),
 					 _
-					 ("There is another trigger registered with the name \"%s\". "
-					  "Choose another name."),
+					 	("There is another trigger registered with the name "
+					 	 "\"%s\". Choose another name."),
 					 name.c_str());
 				UI::MessageBox mb
 					(get_parent(),
@@ -553,8 +553,8 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 		Widelands::Player_Area<Widelands::Area<Widelands::FCoords> >
 		(m_player_area.player_number,
 		 Widelands::Area<Widelands::FCoords>
-		 (Widelands::FCoords(m_player_area, &egbase.map()[m_player_area]),
-		  m_player_area.radius));
+		 	(Widelands::FCoords(m_player_area, &egbase.map()[m_player_area]),
+		 	 m_player_area.radius));
 	m_trigger.m_building_type =
 		egbase.get_tribe
 		(map.get_scenario_player_tribe(m_player_area.player_number).c_str())

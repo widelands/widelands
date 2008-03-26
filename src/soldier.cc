@@ -382,8 +382,8 @@ void Soldier::draw
 		assert(2 <= r.h);
 		dst.fill_rect
 			(Rect
-			 (r + Point(1, 1),
-			  static_cast<int32_t>(fraction * (r.w - 2)), r.h - 2),
+			 	(r + Point(1, 1),
+			 	 static_cast<int32_t>(fraction * (r.w - 2)), r.h - 2),
 			 color);
 
 		//  Draw information fields about levels. First, gather information.
@@ -489,10 +489,10 @@ void Soldier::moveToBattleUpdate(Game * game, State* state) {
 	if
 		(!
 		 start_task_movepath
-		 (game,
-		  state->coords,
-		  0,
-		  descr().get_right_walk_anims(does_carry_ware())))
+		 	(game,
+		 	 state->coords,
+		 	 0,
+		 	 descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
 		send_signal(game, "fail");

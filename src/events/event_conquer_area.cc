@@ -33,9 +33,9 @@ Event::State Event_Conquer_Area::run(Game* game) {
 
 	game->conquer_area_no_building
 		(Player_Area<Area<FCoords> >
-		 (m_player_area.player_number,
-		  Area<FCoords>
-		  (game->map().get_fcoords(m_player_area), m_player_area.radius)));
+		 	(m_player_area.player_number,
+		 	 Area<FCoords>
+		 	 	(game->map().get_fcoords(m_player_area), m_player_area.radius)));
 
 	return m_state = DONE;
 }

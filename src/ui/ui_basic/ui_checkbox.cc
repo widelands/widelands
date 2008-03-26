@@ -132,8 +132,8 @@ void Statebox::draw(RenderTarget* dst)
 			(Point(0, 0),
 			 m_pic_graphics,
 			 Rect
-			 (Point
-			  (m_state ? STATEBOX_WIDTH : 0, 0), STATEBOX_WIDTH, STATEBOX_HEIGHT));
+			 	(Point(m_state ? STATEBOX_WIDTH : 0, 0),
+			 	 STATEBOX_WIDTH, STATEBOX_HEIGHT));
 
 		if (m_highlighted)
 			dst->draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_highlight);

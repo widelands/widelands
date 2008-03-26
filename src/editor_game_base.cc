@@ -730,7 +730,9 @@ void Editor_Game_Base::register_attack_controller(AttackController* ctrl)
 {
 	assert
 		(std::find
-		 (m_attack_serials.begin(), m_attack_serials.end(), ctrl->get_serial())
+		 	(m_attack_serials.begin(),
+		 	 m_attack_serials.end(),
+		 	 ctrl->get_serial())
 		 ==
 		 m_attack_serials.end());
 

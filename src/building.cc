@@ -271,8 +271,8 @@ Building * Building_Descr::create_constructionsite
 {
 	if
 		(Building_Descr * const descr =
-		 m_tribe.get_building_descr
-		 (m_tribe.get_building_index("constructionsite")))
+		 	m_tribe.get_building_descr
+		 		(m_tribe.get_building_index("constructionsite")))
 	{
 
 		ConstructionSite & csite = *static_cast<ConstructionSite *>

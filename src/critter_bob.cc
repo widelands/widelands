@@ -349,10 +349,10 @@ void Critter_Bob::roam_update(Game* g, State* state)
 	if (state->ivar1) {
 		if
 			(start_task_movepath
-			 (g,
-			  g->random_location(get_position(), 2), //  Pick a target at random.
-			  3,
-			  descr().get_walk_anims()))
+			 	(g,
+			 	 g->random_location(get_position(), 2), //  Pick a random target.
+			 	 3,
+			 	 descr().get_walk_anims()))
 		{
 			state->ivar1 = 0;
 			return;

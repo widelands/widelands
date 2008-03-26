@@ -135,14 +135,13 @@ std::string MilitarySite::get_statistics_string()
 	if (m_soldier_requests.size())
 		snprintf
 			(buffer, sizeof(buffer),
-			 ngettext
-			 ("%u soldier (+%u)", "%u soldiers (+%u)",
-			  m_soldiers.size()), m_soldiers.size(), m_soldier_requests.size());
+			 ngettext("%u soldier (+%u)", "%u soldiers (+%u)", m_soldiers.size()),
+			 m_soldiers.size(), m_soldier_requests.size());
 	else
 		snprintf
 			(buffer, sizeof(buffer),
-			 ngettext
-			 ("%u soldier", "%u soldiers", m_soldiers.size()), m_soldiers.size());
+			 ngettext("%u soldier", "%u soldiers", m_soldiers.size()),
+			 m_soldiers.size());
 
 	return buffer;
 }
@@ -159,8 +158,8 @@ void MilitarySite::fill(Game & game) {
 	for (uint32_t i = descr().get_max_number_of_soldiers(); i; --i) {
 		Soldier & soldier =
 			dynamic_cast<Soldier &>
-			(tribe.get_worker_descr(tribe.worker_index("soldier"))->create
-			 (game, owner(), *get_base_flag(), get_position()));
+				(tribe.get_worker_descr(tribe.worker_index("soldier"))->create
+				 	(game, owner(), *get_base_flag(), get_position()));
 		soldier.start_task_idle(&game, 0, -1);
 		m_soldiers.push_back(&soldier);
 	}
@@ -259,8 +258,9 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
 	if (m_didconquer)
 		g->unconquer_area
 			(Player_Area<Area<FCoords> >
-			 (owner().get_player_number(),
-			  Area<FCoords>(g->map().get_fcoords(get_position()), get_conquers())),
+			 	(owner().get_player_number(),
+			 	 Area<FCoords>
+			 	 	(g->map().get_fcoords(get_position()), get_conquers())),
 			 m_defeating_player);
 
 	ProductionSite::cleanup(g);
@@ -510,9 +510,9 @@ void MilitarySite::conquer_area(Game & game) {
 	assert(not m_didconquer);
 	game.conquer_area
 		(Player_Area<Area<FCoords> >
-		 (owner().get_player_number(),
-		  Area<FCoords>
-		  (game.map().get_fcoords(get_position()), get_conquers())));
+		 	(owner().get_player_number(),
+		 	 Area<FCoords>
+		 	 	(game.map().get_fcoords(get_position()), get_conquers())));
 	m_didconquer = true;
 }
 
@@ -523,7 +523,7 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
 	return
 		static_cast<MilitarySite *>
 		(static_cast<const MilitarySite_Descr &>(*m_descr).create
-		 (*g, *winner, m_position, false));
+		 	(*g, *winner, m_position, false));
 }
 
 

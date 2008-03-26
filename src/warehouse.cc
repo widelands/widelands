@@ -415,9 +415,9 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
 	if (const uint32_t conquer_raduis = get_conquers())
 		gg->unconquer_area
 			(Player_Area<Area<FCoords> >
-			 (owner().get_player_number(),
-			  Area<FCoords>
-			  (gg->map().get_fcoords(get_position()), conquer_raduis)),
+			 	(owner().get_player_number(),
+			 	 Area<FCoords>
+			 	 	(gg->map().get_fcoords(get_position()), conquer_raduis)),
 			 m_defeating_player);
 
 	// Unsee the area that we started seeing in init()
