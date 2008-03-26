@@ -68,6 +68,11 @@ struct NetClientImpl {
 	/// This is always set by the server
 	uint32_t realspeed;
 
+	/**
+	 * The speed desired by the local player.
+	 */
+	uint32_t desiredspeed;
+
 	/// Backlog of chat messages
 	std::vector<ChatMessage> chatmessages;
 };
@@ -87,6 +92,7 @@ NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
 	d->modal = 0;
 	d->game = 0;
 	d->realspeed = 0;
+	d->desiredspeed = 1000;
 }
 
 NetClient::~NetClient ()
@@ -253,6 +259,32 @@ void NetClient::setPlayerTribe(uint8_t number, const std::string& tribe)
 	s.String(tribe);
 	s.send(d->sock);
 }
+
+uint32_t NetClient::realSpeed()
+{
+	return d->realspeed;
+}
+
+uint32_t NetClient::desiredSpeed()
+{
+	return d->desiredspeed;
+}
+
+void NetClient::setDesiredSpeed(uint32_t speed)
+{
+	if (speed > std::numeric_limits<uint16_t>::max())
+		speed = std::numeric_limits<uint16_t>::max();
+
+	if (speed != d->desiredspeed) {
+		d->desiredspeed = speed;
+
+		SendPacket s;
+		s.Unsigned8(NETCMD_SETSPEED);
+		s.Unsigned16(d->desiredspeed);
+		s.send(d->sock);
+	}
+}
+
 
 void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 {

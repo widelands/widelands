@@ -159,8 +159,6 @@ Initialize
 Interactive_Player::Interactive_Player(Widelands::Game & g, uint8_t const plyn)
 : Interactive_Base(g), m(new Interactive_PlayerImpl), m_game(&g),
 
-m_label_speed(this, get_w(), 0, 0, 0, "", Align_TopRight),
-
 #define INIT_BUTTON(picture, callback, tooltip)                               \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
@@ -213,6 +211,8 @@ m_toggle_help
 	m->chatDisplay = new ChatDisplay(this, 10, 25, get_w()-10, get_h()-25);
 	m_toggle_chat.set_visible(false);
 	m_toggle_chat.set_enabled(false);
+
+	set_display_flag(dfSpeed, true);
 }
 
 
@@ -221,27 +221,6 @@ Interactive_Player::~Interactive_Player()
 	delete m;
 	m = 0;
 }
-
-
-/*
-===============
-Update the speed display, check for chatmessages.
-===============
-*/
-void Interactive_Player::think()
-{
-	Interactive_Base::think();
-
-	{//  draw speed display
-		char buffer[32];
-		if (uint32_t speed = m_game->get_speed())
-			snprintf(buffer, sizeof(buffer), _("%ux"), speed);
-		else
-			strncpy (buffer, _("PAUSE"), sizeof(buffer));
-		m_label_speed.set_text(buffer);
-	}
-}
-
 
 /*
 ===============
@@ -406,25 +385,9 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 			move_view_to(m_game->map().get_starting_pos(m_player_number));
 		return true;
 
-	case SDLK_PAGEUP:
-		if (down) {
-			int32_t speed = m_game->get_speed();
-
-			m_game->set_speed(speed + 1);
-		}
-		return true;
-
-	case SDLK_PAGEDOWN:
-		if (down) {
-			int32_t speed = m_game->get_speed();
-
-			m_game->set_speed(std::max(0, speed-1));
-		}
-		return true;
-
 	case SDLK_RETURN:
 		if (!m->chat)
-			return false;
+			break;
 
 		if (down) {
 			if (!m_chat.window)
@@ -444,8 +407,10 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 #endif
 
 	default:
-		return Interactive_Base::handle_key(down, code);
+		break;
 	}
+
+	return Interactive_Base::handle_key(down, code);
 }
 
 /**

@@ -51,6 +51,11 @@ struct NetClient :
 	int32_t getFrametime();
 	std::string getGameDescription();
 
+	uint32_t realSpeed();
+	uint32_t desiredSpeed();
+	void setDesiredSpeed(uint32_t speed);
+	// End GameController interface
+
 	// GameSettingsProvider interface
 	virtual const GameSettings& settings();
 

@@ -23,6 +23,7 @@
 #include "constants.h"
 #include "font_handler.h"
 #include "game.h"
+#include "gamecontroller.h"
 #include "graphic.h"
 #include "immovable.h"
 #include "interactive_player.h"
@@ -36,9 +37,9 @@
 #include "player.h"
 #include "profile.h"
 #include "transport.h"
-#include "wlapplication.h"
-
+#include "ui_textarea.h"
 #include "upcast.h"
+#include "wlapplication.h"
 
 using Widelands::Area;
 using Widelands::CoordPath;
@@ -48,6 +49,10 @@ using Widelands::Game;
 using Widelands::Map;
 using Widelands::Map_Object;
 using Widelands::TCoords;
+
+struct Interactive_BaseImpl {
+	UI::Textarea* label_speed;
+};
 
 Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
 :
@@ -67,7 +72,8 @@ m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
 m_buildroad                   (false),
 m_road_build_player           (0),
 m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
-m_flag_to_connect             (Coords::Null())
+m_flag_to_connect             (Coords::Null()),
+m(new Interactive_BaseImpl)
 {
 	warpview.set(this, &Interactive_Player::mainview_move);
 
@@ -90,6 +96,9 @@ m_flag_to_connect             (Coords::Null())
 	//  Having this in the initializer list (before Sys_InitGraphics) will given
 	//  funny results.
 	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png");
+
+	m->label_speed = new UI::Textarea(this, get_w(), 0, std::string(), Align_TopRight);
+	m->label_speed->set_visible(false);
 }
 
 /*
@@ -186,6 +195,48 @@ int32_t Interactive_Base::get_yres()
  */
 void Interactive_Base::postload() {}
 
+static std::string speedString(uint32_t speed)
+{
+	if (speed) {
+		char buffer[32];
+		snprintf(buffer, sizeof(buffer), _("%u.%ux"), speed/1000, (speed/100)%10);
+		return buffer;
+	}
+	return _("PAUSE");
+}
+
+/**
+ * Bring the label that display in-game speed uptodate.
+ */
+void Interactive_Base::update_speedlabel()
+{
+	if (get_display_flag(dfSpeed)) {
+		upcast(Game, g, &m_egbase);
+		if (g && g->gameController()) {
+			uint32_t real = g->gameController()->realSpeed();
+			uint32_t desired = g->gameController()->desiredSpeed();
+			if (real == desired) {
+				if (real == 1000)
+					m->label_speed->set_text(std::string());
+				else
+					m->label_speed->set_text(speedString(real));
+			} else {
+				char buffer[128];
+				snprintf
+					(buffer, sizeof(buffer),
+					 _("%s (%s)"),
+					 speedString(real).c_str(), speedString(desired).c_str());
+				m->label_speed->set_text(buffer);
+			}
+		} else {
+			m->label_speed->set_text(_("NO GAME CONTROLLER"));
+		}
+		m->label_speed->set_visible(true);
+	} else {
+		m->label_speed->set_visible(false);
+	}
+}
+
 
 /*
 ===============
@@ -238,7 +289,9 @@ void Interactive_Base::think()
 		}
 	}
 
-	UI::Panel::think(); //  some of the UI windows need to think()
+	update_speedlabel();
+
+	UI::Panel::think();
 }
 
 
@@ -416,6 +469,8 @@ Change the display flags that modify the view of the map.
 void Interactive_Base::set_display_flags(uint32_t flags)
 {
 	m_display_flags = flags;
+
+	update_speedlabel();
 }
 
 
@@ -438,6 +493,8 @@ void Interactive_Base::set_display_flag(uint32_t flag, bool on)
 
 	if (on)
 		m_display_flags |= flag;
+
+	update_speedlabel();
 }
 
 /*
@@ -751,3 +808,43 @@ void Interactive_Base::roadb_remove_overlay()
 		overlay_manager.remove_overlay(m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
 }
+
+
+bool Interactive_Base::handle_key(bool down, SDL_keysym code)
+{
+	switch (code.sym) {
+	case SDLK_PAGEUP:
+		if (!get_display_flag(dfSpeed))
+			break;
+
+		if (down) {
+			if (upcast(Game, g, &m_egbase)) {
+				if (GameController* ctrl = g->gameController()) {
+					int32_t speed = ctrl->desiredSpeed();
+					ctrl->setDesiredSpeed(speed+1000);
+				}
+			}
+		}
+		return true;
+
+	case SDLK_PAGEDOWN:
+		if (!get_display_flag(dfSpeed))
+			break;
+
+		if (down) {
+			if (upcast(Widelands::Game, g, &m_egbase)) {
+				if (GameController* ctrl = g->gameController()) {
+					int32_t speed = ctrl->desiredSpeed();
+					ctrl->setDesiredSpeed(std::max(0,speed-1000));
+				}
+			}
+		}
+		return true;
+
+	default:
+		break;
+	}
+
+	return Map_View::handle_key(down, code);
+}
+

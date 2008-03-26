@@ -34,11 +34,16 @@ public:
 	int32_t getFrametime();
 	std::string getGameDescription();
 
+	uint32_t realSpeed();
+	uint32_t desiredSpeed();
+	void setDesiredSpeed(uint32_t speed);
+
 private:
 	Widelands::Game& m_game;
 	bool m_useai;
 	int32_t m_lastframe;
 	int32_t m_time;
+	uint32_t m_speed; ///< current game speed, in milliseconds per second
 	uint32_t m_player_cmdserial;
 	Widelands::Player_Number m_local;
 	std::vector<Computer_Player *> m_computerplayers;
@@ -49,6 +54,7 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game* game, bo
 {
 	m_lastframe = WLApplication::get()->get_time();
 	m_time = m_game.get_gametime();
+	m_speed = 1000;
 	m_player_cmdserial = 0;
 }
 
@@ -71,7 +77,7 @@ void SinglePlayerGameController::think()
 	else if (frametime > 1000)
 		frametime = 1000;
 
-	frametime *= m_game.get_speed(); // TODO: move speed management into GameController
+	frametime = (frametime*m_speed)/1000;
 
 	m_time = m_game.get_gametime() + frametime;
 
@@ -103,6 +109,21 @@ int32_t SinglePlayerGameController::getFrametime()
 std::string SinglePlayerGameController::getGameDescription()
 {
 	return "singleplayer";
+}
+
+uint32_t SinglePlayerGameController::realSpeed()
+{
+	return m_speed;
+}
+
+uint32_t SinglePlayerGameController::desiredSpeed()
+{
+	return m_speed;
+}
+
+void SinglePlayerGameController::setDesiredSpeed(uint32_t speed)
+{
+	m_speed = speed;
 }
 
 

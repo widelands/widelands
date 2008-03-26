@@ -37,7 +37,7 @@ throw (_wexception)
 		fr.Open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version <= CURRENT_PACKET_VERSION) {
-			game->m_speed    = fr.Signed16();
+			fr.Signed16(); // This used to be game speed
 			game->m_gametime = fr.Unsigned32();
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
@@ -60,7 +60,7 @@ throw (_wexception)
 
 	// State is running, we do not need to save this
 	// Save speed
-	fw.Signed16(game->m_speed);
+	fw.Signed16(1000);
 
 	// From the interactive player, is saved somewhere else
 	// Computer players are saved somewhere else

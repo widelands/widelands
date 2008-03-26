@@ -19,6 +19,7 @@
 
 #include "game.h"
 #include "game_loader.h"
+#include "gamecontroller.h"
 #include "layered_filesystem.h"
 #include "md5.h"
 #include "playercommand.h"
@@ -63,7 +64,8 @@ struct Cmd_ReplaySyncRead : public Command {
 				 "Replay has: %s\n",
 				 get_duetime(), myhash.str().c_str(), m_hash.str().c_str());
 
-			g->set_speed(0);
+			// There has to be a better way to do this.
+			g->gameController()->setDesiredSpeed(0);
 		} else {
 			log("REPLAY: Sync checked successfully.\n");
 		}

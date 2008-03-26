@@ -20,6 +20,8 @@
 #ifndef INTERACTIVE_BASE_H
 #define INTERACTIVE_BASE_H
 
+#include <boost/scoped_ptr.hpp>
+
 #include "editor_game_base.h"
 #include "map.h"
 #include "mapview.h"
@@ -33,6 +35,8 @@
 namespace Widelands {struct CoordPath;};
 class MiniMap;
 
+struct Interactive_BaseImpl;
+
 /**
  * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
@@ -41,9 +45,10 @@ struct Interactive_Base : public Map_View {
 	friend class Sound_Handler;
 
 	enum {
-		dfShowCensus     = 1, //  show census report on buildings
-		dfShowStatistics = 2, //  show statistics report on buildings
-		dfDebug          = 4, //  general debugging info
+		dfShowCensus     = 1, ///< show census report on buildings
+		dfShowStatistics = 2, ///< show statistics report on buildings
+		dfDebug          = 4, ///< general debugging info
+		dfSpeed          = 8, ///< show game speed and speed controls
 	};
 
 	Interactive_Base(Widelands::Editor_Game_Base &);
@@ -158,6 +163,7 @@ protected:
 	void minimap_warp(int32_t x, int32_t y);
 
 	virtual void draw_overlay(RenderTarget &);
+	bool handle_key(bool down, SDL_keysym);
 
 	void unset_sel_picture();
 	void set_sel_picture(const char * const);
@@ -167,6 +173,11 @@ protected:
 	}
 	UI::Box           m_toolbar;
 	Widelands::Coords m_flag_to_connect;
+
+private:
+	void update_speedlabel();
+
+	boost::scoped_ptr<Interactive_BaseImpl> m;
 };
 
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, 2U

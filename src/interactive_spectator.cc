@@ -28,11 +28,6 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 
-struct Interactive_Spectator::Internals {
-	UI::Textarea* label_speed;
-};
-
-
 /**
  * Setup the replay UI for the given game.
  */
@@ -50,9 +45,7 @@ m_exit
 (INIT_BUTTON("menu_exit_game",      exit_btn,       _("Menu"))),
 
 m_toggle_minimap
-(INIT_BUTTON("menu_toggle_minimap", toggle_minimap, _("Minimap"))),
-
-m(new Internals)
+(INIT_BUTTON("menu_toggle_minimap", toggle_minimap, _("Minimap")))
 {
 	m_toolbar.add(&m_exit,           UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap, UI::Box::AlignLeft);
@@ -62,8 +55,7 @@ m(new Internals)
 	// Setup all screen elements
 	fieldclicked.set(this, &Interactive_Spectator::field_action);
 
-	// Speed info
-	m->label_speed = new UI::Textarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
+	set_display_flag(dfSpeed, true);
 }
 
 
@@ -72,8 +64,6 @@ m(new Internals)
  */
 Interactive_Spectator::~Interactive_Spectator()
 {
-	delete m;
-	m = 0;
 }
 
 
@@ -95,30 +85,6 @@ Widelands::Game * Interactive_Spectator::get_game()
 Widelands::Player * Interactive_Spectator::get_player() const throw ()
 {
 	return 0;
-}
-
-
-/**
- * Update the speed display, check for chatmessages.
- */
-void Interactive_Spectator::think()
-{
-	Interactive_Base::think();
-
-	//  draw speed display
-	{
-		std::string text;
-
-		if (uint32_t speed = get_game()->get_speed()) {
-			char buffer[32];
-			snprintf(buffer, sizeof(buffer), _("%ux"), speed);
-			text = buffer;
-		} else {
-			text = _("PAUSE");
-		}
-
-		m->label_speed->set_text(text);
-	}
 }
 
 
@@ -158,56 +124,31 @@ void Interactive_Spectator::field_action() {}
  */
 bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 {
-	bool handled = Interactive_Base::handle_key(down, code);
-
 	switch (code.sym) {
 	case SDLK_m:
 		if (down)
 			toggle_minimap();
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_c:
 		if (down)
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_s:
 		if (down)
 			set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-		handled=true;
-		break;
+		return true;
 
 	case SDLK_f:
 		if (down)
 			g_gr->toggle_fullscreen();
-		handled=true;
-		break;
-
-	case SDLK_PAGEUP:
-		if (down) {
-			int32_t speed = get_game()->get_speed();
-
-			get_game()->set_speed(speed + 1);
-		}
-		handled=true;
-		break;
-
-	case SDLK_PAGEDOWN:
-		if (down) {
-			int32_t speed = get_game()->get_speed();
-
-			get_game()->set_speed(std::max(0, speed-1));
-		}
-		handled=true;
-		break;
+		return true;
 
 	default:
-		handled=false;
 		break;
 	}
 
-	return handled;
+	return Interactive_Base::handle_key(down, code);
 }
 

@@ -63,8 +63,6 @@ struct Interactive_Player : public Interactive_Base {
 	Interactive_Player(Widelands::Game &, Widelands::Player_Number);
 	~Interactive_Player();
 
-	virtual void think();
-
 	void start();
 
 	void toggle_main_menu ();
@@ -104,7 +102,6 @@ private:
 	Widelands::Game        * m_game;
 	Widelands::Player_Number m_player_number;
 
-	UI::Textarea                   m_label_speed;
 	UI::Button<Interactive_Player> m_toggle_chat;
 	UI::Button<Interactive_Player> m_toggle_options_menu;
 	UI::Button<Interactive_Player> m_toggle_main_menu;

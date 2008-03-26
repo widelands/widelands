@@ -40,7 +40,6 @@ struct Interactive_Spectator : public Interactive_Base {
 	~Interactive_Spectator();
 
 	void start();
-	virtual void think();
 
 	Widelands::Game * get_game();
 	Widelands::Player * get_player() const throw ();
@@ -54,10 +53,6 @@ private:
 private:
 	UI::Button<Interactive_Spectator> m_exit;
 	UI::Button<Interactive_Spectator> m_toggle_minimap;
-
-	class Internals;
-
-	Internals* m;
 };
 
 

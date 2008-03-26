@@ -47,6 +47,11 @@ struct NetHost : public GameController, private SyncCallback {
 	int32_t getFrametime();
 	std::string getGameDescription();
 
+	uint32_t realSpeed();
+	uint32_t desiredSpeed();
+	void setDesiredSpeed(uint32_t speed);
+	// End GameController interface
+
 	// Pregame-related stuff
 	const GameSettings& settings();
 	bool canLaunch();
@@ -70,7 +75,8 @@ private:
 	void handle_network ();
 
 	void checkHungClients();
-	void setRealSpeed(uint32_t speed);
+	void broadcastRealSpeed(uint32_t speed);
+	void updateNetworkSpeed();
 
 	std::string getComputerPlayerName(uint32_t playernum);
 	bool havePlayerName(const std::string& name, int32_t ignoreplayer = -1);

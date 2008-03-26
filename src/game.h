@@ -90,6 +90,7 @@ struct Game : public Editor_Game_Base {
 
 	// life cycle
 	void set_game_controller(GameController* ctrl);
+	GameController* gameController();
 	void set_write_replay(bool wr);
 	void save_syncstream(bool save);
 	void init(UI::ProgressWindow & loader_ui, const GameSettings& settings);
@@ -131,10 +132,6 @@ struct Game : public Editor_Game_Base {
 
 	StreamWrite& syncstream();
 	md5_checksum get_sync_hash() const;
-
-	typedef uint8_t Speed;
-	Speed get_speed() const {return m_speed;}
-	void set_speed(Speed const speed) {m_speed = speed;}
 
 	bool get_allow_cheats();
 
@@ -178,7 +175,6 @@ private:
 	GameInternals* m;
 
 	int32_t                            m_state;
-	Speed                          m_speed; //  frametime multiplier
 
 	RNG                            rng;
 

@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 5,
+	NETWORK_PROTOCOL_VERSION = 6,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -194,13 +194,18 @@ enum {
 	NETCMD_LAUNCH = 20,
 
 	/**
-	 * Sent by the host to change the simulation speed. Payload is
+	 * Sent by both the host and the client to indicate speed change.
+	 * The payload is:
 	 * \li Unsigned16 game speed in milliseconds per second
 	 *
-	 * This advises the client of how fast it should simulate the game
-	 * to avoid a choppy "stop-and-go" simulation. However, the client
-	 * must never simulate beyond the game time allowed by (explicit or
-	 * implicit) \ref NETCMD_TIME commands.
+	 * If sent by the host, this command advises the client of how fast
+	 * it should simulate the game to avoid a choppy "stop-and-go"
+	 * simulation. However, the client must never simulate beyond the
+	 * game time allowed by (explicit or implicit) \ref NETCMD_TIME commands.
+	 *
+	 * If sent by the client, it indicates the speed at which the client's
+	 * player would like to play. It is up to the host to decide whether
+	 * the simulation speed should be changed or not.
 	 */
 	NETCMD_SETSPEED = 21,
 

@@ -49,6 +49,23 @@ public:
 	virtual std::string getGameDescription() = 0;
 
 	/**
+	 * \return the effective speed, in milliseconds per second,
+	 * that the game is running at.
+	 */
+	virtual uint32_t realSpeed() = 0;
+
+	/**
+	 * \return the speed that the local player wants the game to run at.
+	 */
+	virtual uint32_t desiredSpeed() = 0;
+
+	/**
+	 * Indicate to the game controller the speed (in milliseconds per second)
+	 * that the local player wants the game to run at.
+	 */
+	virtual void setDesiredSpeed(uint32_t speed) = 0;
+
+	/**
 	 * Allocate a new \ref GameController suitable for normal singleplayer.
 	 * \param cpls is \c true when computer players should be generated
 	 * \return newly allocated \ref GameController object, must be freed

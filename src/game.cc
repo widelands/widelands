@@ -161,7 +161,6 @@ struct GameInternals {
 Game::Game() :
 m(new GameInternals(this)),
 m_state   (gs_notrunning),
-m_speed   (1),
 cmdqueue  (this),
 m_replaywriter(0)
 {
@@ -205,6 +204,11 @@ Interactive_Player* Game::get_ipl()
 void Game::set_game_controller(GameController* ctrl)
 {
 	m->ctrl = ctrl;
+}
+
+GameController* Game::gameController()
+{
+	return m->ctrl;
 }
 
 void Game::set_write_replay(bool wr)

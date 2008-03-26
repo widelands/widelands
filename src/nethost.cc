@@ -130,11 +130,13 @@ struct Client {
 	md5_checksum syncreport;
 	bool syncreport_arrived;
 	int32_t time; // last time report
+	uint32_t desiredspeed;
 };
 
 struct NetHostImpl {
 	GameSettings settings;
 	std::string localplayername;
+	uint32_t localdesiredspeed;
 	HostChatProvider chat;
 
 	LAN_Game_Promoter * promoter;
@@ -160,12 +162,15 @@ struct NetHostImpl {
 	/// This is the time for local simulation
 	NetworkTime time;
 
-	/// The real speed used for simulation, in milliseconds per second
-	uint32_t realspeed;
+	/// Whether we're waiting for all clients to report back.
+	bool waiting;
 	int32_t lastframe;
 
-	/// The speed we want to have
-	uint32_t speed;
+	/**
+	 * The speed, in milliseconds per second, that is effective as long
+	 * as we're not \ref waiting.
+	 */
+	uint32_t networkspeed;
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
@@ -199,8 +204,9 @@ NetHost::NetHost (const std::string& playername)
 	d->promoter = new LAN_Game_Promoter();
 	d->game = 0;
 	d->pseudo_networktime = 0;
-	d->realspeed = 0;
-	d->speed = 1000;
+	d->waiting = true;
+	d->networkspeed = 1000;
+	d->localdesiredspeed = 1000;
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
@@ -300,7 +306,7 @@ void NetHost::run()
 			d->clients[i].time = d->committed_networktime-1;
 
 		// The call to checkHungClients ensures that the game leaves the
-		// wait mode (d->realspeed == 0) when there are no clients
+		// wait mode when there are no clients
 		checkHungClients();
 		initComputerPlayers();
 		game.run(loaderUI);
@@ -328,12 +334,12 @@ void NetHost::think()
 		int32_t delta = curtime - d->lastframe;
 		d->lastframe = curtime;
 
-		if (d->realspeed) {
-			int32_t diff = (delta * d->realspeed) / 1000;
+		if (!d->waiting) {
+			int32_t diff = (delta * d->networkspeed) / 1000;
 			d->pseudo_networktime += diff;
 		}
 
-		d->time.think(d->realspeed);
+		d->time.think(realSpeed()); // must be called even when d->waiting
 
 		if (d->pseudo_networktime != d->committed_networktime)
 		{
@@ -515,6 +521,27 @@ void NetHost::setPlayerTribe(uint8_t number, const std::string& tribe)
 	s.Unsigned8(number);
 	writeSettingPlayer(s, number);
 	broadcast(s);
+}
+
+
+uint32_t NetHost::realSpeed()
+{
+	if (d->waiting)
+		return 0;
+	return d->networkspeed;
+}
+
+uint32_t NetHost::desiredSpeed()
+{
+	return d->localdesiredspeed;
+}
+
+void NetHost::setDesiredSpeed(uint32_t speed)
+{
+	if (speed != d->localdesiredspeed) {
+		d->localdesiredspeed = speed;
+		updateNetworkSpeed();
+	}
 }
 
 
@@ -702,7 +729,7 @@ void NetHost::recvClientTime(uint32_t number, int32_t time)
 	client.time = time;
 	log("[Host]: Client %i: Time %i\n", number, time);
 
-	if (d->realspeed == 0) {
+	if (d->waiting) {
 		log
 			("[Host]: Client %i reports time %i (networktime = %i) during hang\n",
 			 number, time, d->committed_networktime);
@@ -727,19 +754,20 @@ void NetHost::checkHungClients()
 			nrready++;
 		} else {
 			nrdelayed++;
-			if (delta > (5*CLIENT_TIMESTAMP_INTERVAL*static_cast<int32_t>(d->speed))/1000) {
+			if (delta > (5*CLIENT_TIMESTAMP_INTERVAL*static_cast<int32_t>(d->networkspeed))/1000) {
 				log("[Host]: Client %i hung\n", i);
 				nrhung++;
 			}
 		}
 	}
 
-	if (d->realspeed) {
+	if (!d->waiting) {
 		if (nrhung) {
 			log("[Host]: %i clients hung. Entering wait mode\n", nrhung);
 
 			// Brake and wait
-			setRealSpeed(0);
+			d->waiting = true;
+			broadcastRealSpeed(0);
 
 			SendPacket s;
 			s.Unsigned8(NETCMD_WAIT);
@@ -747,7 +775,8 @@ void NetHost::checkHungClients()
 		}
 	} else {
 		if (nrdelayed == 0) {
-			setRealSpeed(d->speed);
+			d->waiting = false;
+			broadcastRealSpeed(d->networkspeed);
 			if (!d->syncreport_pending)
 				requestSyncReports();
 		}
@@ -755,21 +784,51 @@ void NetHost::checkHungClients()
 }
 
 
-void NetHost::setRealSpeed(uint32_t speed)
+void NetHost::broadcastRealSpeed(uint32_t speed)
 {
-	if (speed > std::numeric_limits<uint16_t>::max())
-		speed = std::numeric_limits<uint16_t>::max();
-
-	if (speed == d->realspeed)
-		return;
-
-	d->realspeed = speed;
+	assert(speed <= std::numeric_limits<uint16_t>::max());
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETSPEED);
 	s.Unsigned16(speed);
 	broadcast(s);
 }
+
+
+/**
+ * This is the algorithm that decides upon the effective network speed,
+ * given the desired speed of all clients.
+ *
+ * This function is supposed to be the only code that ever changes
+ * \ref NetHostImpl::networkspeed.
+ *
+ * The current implementation picks the median, or the average of
+ * lower and upper median.
+ */
+void NetHost::updateNetworkSpeed()
+{
+	uint32_t oldnetworkspeed = d->networkspeed;
+	std::vector<uint32_t> speeds;
+
+	speeds.push_back(d->localdesiredspeed);
+	for(uint32_t i = 0; i < d->clients.size(); ++i) {
+		if (d->clients[i].playernum >= 0)
+			speeds.push_back(d->clients[i].desiredspeed);
+	}
+	std::sort(speeds.begin(), speeds.end());
+
+	if (speeds.size() % 2)
+		d->networkspeed = speeds[speeds.size() / 2];
+	else
+		d->networkspeed = (speeds[speeds.size() / 2] + speeds[(speeds.size() / 2) - 1])/2;
+
+	if (d->networkspeed > std::numeric_limits<uint16_t>::max())
+		d->networkspeed = std::numeric_limits<uint16_t>::max();
+
+	if (d->networkspeed != oldnetworkspeed && !d->waiting)
+		broadcastRealSpeed(d->networkspeed);
+}
+
 
 /**
  * Request sync reports from all clients at the next possible time.
@@ -866,6 +925,7 @@ void NetHost::handle_network ()
 		peer.sock = sock;
 		peer.playernum = -1;
 		peer.syncreport_arrived = false;
+		peer.desiredspeed = 1000;
 		d->clients.push_back (peer);
 
 		// Now we wait for the client to say Hi in the right language,
@@ -1001,6 +1061,12 @@ void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 		c.sender = d->settings.players[client.playernum].name;
 		c.msg = r.String();
 		send(c);
+		break;
+	}
+
+	case NETCMD_SETSPEED: {
+		client.desiredspeed = r.Unsigned16();
+		updateNetworkSpeed();
 		break;
 	}
 

@@ -1444,6 +1444,7 @@ public:
 		m_endofgame = false;
 		m_lastframe = WLApplication::get()->get_time();
 		m_time = m_game.get_gametime();
+		m_speed = 1000;
 
 		// We have to create an empty map, otherwise nothing will load properly
 		game.set_map(new Widelands::Map);
@@ -1465,7 +1466,7 @@ public:
 		else if (frametime > 1000)
 			frametime = 1000;
 
-		frametime *= m_game.get_speed(); // TODO: move speed management into GameController
+		frametime = frametime*m_speed/1000;
 
 		m_time = m_game.get_gametime() + frametime;
 
@@ -1478,7 +1479,8 @@ public:
 		}
 
 		if (m_replayreader->EndOfReplay() && !m_endofgame) {
-			m_game.set_speed(0);
+			m_speed = 0;
+			m_time = m_game.get_gametime();
 			UI::MessageBox mmb
 				(m_game.get_iabase(),
 				 _("End of replay"),
@@ -1502,6 +1504,9 @@ public:
 	std::string getGameDescription() {
 		return "replay";
 	}
+	uint32_t realSpeed() {return m_speed;}
+	uint32_t desiredSpeed() {return m_speed;}
+	void setDesiredSpeed(uint32_t speed) {m_speed=speed;}
 
 private:
 	Widelands::Game& m_game;
@@ -1509,6 +1514,7 @@ private:
 	bool m_endofgame; ///< used to show the end-of-replay message box only once
 	int32_t m_lastframe;
 	int32_t m_time;
+	uint32_t m_speed;
 };
 
 /**

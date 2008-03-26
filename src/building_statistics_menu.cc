@@ -196,13 +196,7 @@ void Building_Statistics_Menu::think() {
 	Widelands::Game const & game = iaplayer().game();
 	int32_t const gametime = game.get_gametime();
 
-	if
-		((gametime - m_lastupdate)
-		 /
-		 std::max<Widelands::Game::Speed>(1, game.get_speed())
-		 >
-		 UPDATE_TIME)
-	{
+	if ((gametime - m_lastupdate) > UPDATE_TIME) {
 		update();
 		m_lastupdate = gametime;
 	}
