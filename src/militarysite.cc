@@ -501,11 +501,6 @@ void MilitarySite::change_soldier_capacity(int32_t how)
 	}
 }
 
-void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldiers) {
-	conquer_area(*g);
-	m_soldiers.insert(m_soldiers.begin(), soldiers->begin(), soldiers->end());
-}
-
 void MilitarySite::conquer_area(Game & game) {
 	assert(not m_didconquer);
 	game.conquer_area
@@ -514,16 +509,6 @@ void MilitarySite::conquer_area(Game & game) {
 		 	 Area<FCoords>
 		 	 	(game.map().get_fcoords(get_position()), get_conquers())));
 	m_didconquer = true;
-}
-
-MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
-	//  NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLEY NEW BUILDING
-	cleanup(g);
-	get_base_flag()->schedule_destroy(g);
-	return
-		static_cast<MilitarySite *>
-		(static_cast<const MilitarySite_Descr &>(*m_descr).create
-		 	(*g, *winner, m_position, false));
 }
 
 

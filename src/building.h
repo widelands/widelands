@@ -227,7 +227,6 @@ public:
 
 	/// testing stuff
 	virtual bool has_soldiers() {return false;};
-	virtual void conquered_by (Player*);
 
 	///  Stores the Player_Number of the player who has defeated this building.
 	void set_defeating_player(const Player_Number player_number) throw ()

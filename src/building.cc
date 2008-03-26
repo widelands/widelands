@@ -851,9 +851,6 @@ void Building::set_priority(int32_t type, int32_t ware_index, int32_t new_priori
 	}
 }
 
-void Building::conquered_by (Player *)
-{molog ("Building::conquered_by - Building hasn't conquered code yet !\n");}
-
 /**
  * Log basic infos
  */

@@ -971,13 +971,4 @@ bool Warehouse::has_soldiers()
 	return false;
 }
 
-// A warhouse couldn't be conquered, this building is destroyed ...
-void Warehouse::conquered_by (Player* pl)
-{
-	molog ("Warehouse::conquered_by- ");
-	assert (pl);
-	molog ("destroying\n");
-	cleanup(&pl->egbase());
-}
-
 };

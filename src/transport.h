@@ -196,7 +196,6 @@ public:
 
 	void add_flag_job(Game* g, int32_t workerware, std::string programname);
 
-	void conquered_by (Player * const who) {assert(who); set_owner(who);}
 protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
