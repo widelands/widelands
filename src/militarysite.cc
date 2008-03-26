@@ -193,9 +193,6 @@ Cleanup after a military site is removed
 */
 void MilitarySite::cleanup(Editor_Game_Base* g)
 {
-	delete m_soldier_request;
-	m_soldier_request = 0;
-
 	// unconquer land
 	if (m_didconquer)
 		g->unconquer_area
@@ -206,6 +203,11 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
 			 m_defeating_player);
 
 	ProductionSite::cleanup(g);
+
+	// Note that removing workers during ProductionSite::cleanup can generate
+	// new requests; that's why we delete it at the end of this function.
+	delete m_soldier_request;
+	m_soldier_request = 0;
 }
 
 
