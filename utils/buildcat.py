@@ -24,7 +24,7 @@ from detect_revision import detect_revision
 from time import strftime,gmtime
 
 # The current version of source
-SRCVERSION="svn" + str(detect_revision())
+SRCVERSION=detect_revision()
 NO_HEADER_REWRITE = 0
 HEADER_YEAR = strftime("%Y",gmtime())
 
