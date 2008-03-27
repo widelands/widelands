@@ -34,6 +34,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <boost/scoped_ptr.hpp>
 
 struct Overlay_Manager;
 struct S2_Map_Loader;
@@ -41,6 +42,7 @@ struct S2_Map_Loader;
 namespace Widelands {
 
 struct BaseImmovable;
+struct PathfieldManager;
 struct Player;
 struct World;
 struct Map;
@@ -134,8 +136,6 @@ struct Map {
 		fpBidiCost = 1,
 
 	};
-
-	struct Pathfield;
 
 	Map ();
 	~Map();
@@ -342,7 +342,6 @@ private:
 	void load_world();
 	void recalc_border(FCoords);
 
-	uint16_t m_pathcycle;
 	Player_Number m_nrplayers; // # of players this map supports (!= Game's number of players)
 	X_Coordinate m_width;
 	Y_Coordinate m_height;
@@ -357,9 +356,9 @@ private:
 
 	Field     * m_fields;
 
-	Pathfield * m_pathfields;
 	Overlay_Manager * m_overlay_manager;
 
+	boost::scoped_ptr<PathfieldManager> m_pathfieldmgr;
 	std::vector<std::string> m_scenario_tribes; // o nly alloced when needed
 	std::vector<std::string>  m_scenario_names;
 
@@ -384,7 +383,6 @@ private:
 	void recalc_fieldcaps_pass1(FCoords);
 	void recalc_fieldcaps_pass2(FCoords);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
-	void increase_pathcycle();
 
 	template<typename functorT>
 		void find_reachable

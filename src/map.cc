@@ -30,6 +30,7 @@
 #include "s2map.h"
 #include "findimmovable.h"
 #include "tribe.h"
+#include "pathfield.h"
 #include "widelands_map_loader.h"
 #include "worlddata.h"
 #include "wexception.h"
@@ -60,27 +61,6 @@ Map IMPLEMENTATION
 ==============================================================================
 */
 
-/** Map::Pathfield
- *
- * Used in pathfinding. For better encapsulation, pathfinding structures
- * are separate from normal fields
- *
- * Costs are in milliseconds to walk.
- *
- * Note: member sizes chosen so that we get a 16byte (=nicely aligned)
- * structure
- */
-struct Map::Pathfield {
-	int32_t    heap_index; //  index of this field in heap, for backlinking
-	int32_t    real_cost;  //  true cost up to this field
-	int32_t    estim_cost; //  estimated cost till goal
-	uint16_t cycle;
-	uint8_t  backlink;   //  how we got here (Map_Object::WALK_*)
-
-	int32_t cost() const throw () {return real_cost + estim_cost;}
-};
-
-
 
 /** class Map
  *
@@ -95,15 +75,14 @@ Inits a clean, empty map
 ===============
 */
 Map::Map() :
-m_pathcycle      (0),
 m_nrplayers      (0),
 m_width          (0),
 m_height         (0),
 m_world          (0),
 m_starting_pos   (0),
 m_fields         (0),
-m_pathfields     (0),
-m_overlay_manager(0)
+m_overlay_manager(0),
+m_pathfieldmgr(new PathfieldManager)
 {}
 
 
@@ -335,12 +314,9 @@ go back to your initial state
 void Map::cleanup() {
 	m_nrplayers = 0;
 	m_width = m_height = 0;
-	m_pathcycle = 0;
 
 	free(m_fields);
 	m_fields = 0;
-	free(m_pathfields);
-	m_pathfields = 0;
 	free(m_starting_pos);
 	m_starting_pos = 0;
 	delete m_world;
@@ -448,7 +424,6 @@ Set the size of the map. This should only happen once during initial load.
 void Map::set_size(const uint32_t w, const uint32_t h)
 {
 	assert(!m_fields);
-	assert(!m_pathfields);
 
 	m_width  = w;
 	m_height = h;
@@ -456,9 +431,7 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 	m_fields = static_cast<Field *>(malloc(sizeof(Field) * w * h));
 	memset(m_fields, 0, sizeof(Field)*w*h);
 
-	m_pathcycle = 0;
-	m_pathfields = static_cast<Pathfield *>(malloc(sizeof(Pathfield) * w * h));
-	memset(m_pathfields, 0, sizeof(Pathfield)*w*h);
+	m_pathfieldmgr->setSize(w*h);
 
 	if (not m_overlay_manager) m_overlay_manager = new Overlay_Manager();
 }
@@ -637,8 +610,7 @@ void Map::find_reachable
  functorT & functor)
 {
 	std::vector<Field*> queue;
-
-	increase_pathcycle();
+	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
 
 	queue.push_back(area.field);
 
@@ -648,13 +620,13 @@ void Map::find_reachable
 
 		// Pop the last item from the queue
 		cur.field = queue[queue.size() - 1];
-		curpf = m_pathfields + (cur.field-m_fields);
+		curpf = &pathfields->fields[cur.field-m_fields];
 		get_coords(*cur.field, cur);
 		queue.pop_back();
 
 		// Handle this field
 		functor(*this, cur);
-		curpf->cycle = m_pathcycle;
+		curpf->cycle = pathfields->cycle;
 
 		// Get neighbours
 		for (Direction dir = 1; dir <= 6; ++dir) {
@@ -662,10 +634,10 @@ void Map::find_reachable
 			FCoords neighb;
 
 			get_neighbour(cur, dir, &neighb);
-			neighbpf = m_pathfields + (neighb.field-m_fields);
+			neighbpf = &pathfields->fields[neighb.field-m_fields];
 
 			// Have we already visited this field?
-			if (neighbpf->cycle == m_pathcycle)
+			if (neighbpf->cycle == pathfields->cycle)
 				continue;
 
 			// Is the field still within the radius?
@@ -1679,7 +1651,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
  * Provides the flexible priority queue to maintain the open list.
  */
 class StarQueue {
-	std::vector<Map::Pathfield*> m_data;
+	std::vector<Pathfield*> m_data;
 
 public:
 	void flush() {m_data.clear();}
@@ -1696,12 +1668,12 @@ public:
 	//       put slot[_size] in its place and stop
 	//     if only the left child is there
 	//       arrange left child and slot[_size] correctly and stop
-	Map::Pathfield* pop()
+	Pathfield* pop()
 	{
 		if (m_data.empty())
 			return 0;
 
-		Map::Pathfield* head = m_data[0];
+		Pathfield* head = m_data[0];
 
 		uint32_t nsize = m_data.size()-1;
 		uint32_t fix = 0;
@@ -1755,7 +1727,7 @@ public:
 	//  1. Put the new node in the last slot
 	//  2. If parent slot is worse than self, exchange places and recurse
 	// Note that I rearranged this a bit so swap isn't necessary
-	void push(Map::Pathfield *t)
+	void push(Pathfield *t)
 	{
 		uint32_t slot = m_data.size();
 		m_data.push_back(0);
@@ -1779,7 +1751,7 @@ public:
 	// Rearrange the tree after a node has become better, i.e. move the
 	// node up
 	// Pushing algorithm is basically the same as in push()
-	void boost(Map::Pathfield *t)
+	void boost(Pathfield *t)
 	{
 		uint32_t slot = t->heap_index;
 
@@ -1827,19 +1799,6 @@ public:
 	}
 
 };
-
-
-/**
- * Increment pathcycle and clear the pathfields array if necessary.
-*/
-void Map::increase_pathcycle()
-{
-	++m_pathcycle;
-	if (!m_pathcycle) {
-		memset(m_pathfields, 0, sizeof(Pathfield)*m_height*m_width);
-		++m_pathcycle;
-	}
-}
 
 
 /**
@@ -1899,22 +1858,18 @@ int32_t Map::findpath
 	if (not checkstep.reachabledest(this, end))
 		return -1;
 
-	// Increase the counter
-	// If the counter wrapped, clear the entire pathfinding array
-	// This means we clear the array only every 65536 runs
-	increase_pathcycle();
-
 	if (!persist)
 		upper_cost_limit = 0;
 	else
 		upper_cost_limit = persist * calc_cost_estimate(start, end); // assume flat terrain
 
 	// Actual pathfinding
+	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
 	StarQueue Open;
 	Pathfield *curpf;
 
-	curpf = m_pathfields + (start.field-m_fields);
-	curpf->cycle = m_pathcycle;
+	curpf = &pathfields->fields[start.field-m_fields];
+	curpf->cycle = pathfields->cycle;
 	curpf->real_cost = 0;
 	curpf->estim_cost = calc_cost_lowerbound(start, end);
 	curpf->backlink = Map_Object::IDLE;
@@ -1923,7 +1878,7 @@ int32_t Map::findpath
 
 	while ((curpf = Open.pop()))
 	{
-		cur.field = m_fields + (curpf-m_pathfields);
+		cur.field = m_fields + (curpf-pathfields->fields.get());
 		get_coords(*cur.field, cur);
 
 		if (upper_cost_limit && curpf->real_cost > upper_cost_limit)
@@ -1951,10 +1906,10 @@ int32_t Map::findpath
 			int32_t cost;
 
 			get_neighbour(cur, *direction, &neighb);
-			neighbpf = m_pathfields + (neighb.field-m_fields);
+			neighbpf = &pathfields->fields[neighb.field-m_fields];
 
 			// Is the field Closed already?
-			if (neighbpf->cycle == m_pathcycle && neighbpf->heap_index < 0)
+			if (neighbpf->cycle == pathfields->cycle && neighbpf->heap_index < 0)
 				continue;
 
 			// Check passability
@@ -1978,9 +1933,9 @@ int32_t Map::findpath
 
 			cost = curpf->real_cost + stepcost;
 
-			if (neighbpf->cycle != m_pathcycle) {
+			if (neighbpf->cycle != pathfields->cycle) {
 				// add to open list
-				neighbpf->cycle = m_pathcycle;
+				neighbpf->cycle = pathfields->cycle;
 				neighbpf->real_cost = cost;
 				neighbpf->estim_cost = calc_cost_lowerbound(neighb, end);
 				neighbpf->backlink = *direction;
@@ -2014,7 +1969,7 @@ int32_t Map::findpath
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
 		get_neighbour(cur, get_reverse_dir(curpf->backlink), &cur);
-		curpf = m_pathfields + (cur.field-m_fields);
+		curpf = &pathfields->fields[cur.field-m_fields];
 	}
 
 	return retval;
