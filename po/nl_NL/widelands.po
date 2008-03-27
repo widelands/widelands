@@ -1,471 +1,458 @@
 # Widelands po/nl_NL/widelands.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team.
 # Rob Snelders <programming@ertai.nl>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3109\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 18:19+0200\n"
-"PO-Revision-Date: 2007-09-01 22:04+0100\n"
+"POT-Creation-Date: 2008-03-26 21:36+0100\n"
+"PO-Revision-Date: 2008-03-26 20:54+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../src/game_server_proto_packet_getroominfo.cc:66
-#, c-format
-msgid "The Room %s is currently not logged in or unknown to the server.\n"
-msgstr "De kamer %s is nu niet ingelogd of is onbekend bij de server.\n"
+#: ../../src/game_main_menu.cc:38
+#: ../../src/editor/ui_menus/editor_main_menu.cc:42
+msgid "Main Menu"
+msgstr "Hoofdmenu"
 
-#: ../../src/interactive_spectator.cc:60 ../../src/interactive_player.cc:90
-#: ../../src/editor/editorinteractive.cc:68
-msgid "Menu"
-msgstr "Menu"
+#: ../../src/game_main_menu.cc:48
+msgid "General statistics"
+msgstr "Algemene statistieken"
 
-#: ../../src/interactive_spectator.cc:68 ../../src/interactive_player.cc:99
-#: ../../src/editor/editorinteractive.cc:92
-msgid "Minimap"
-msgstr "Minikaart"
-
-#: ../../src/interactive_spectator.cc:119 ../../src/interactive_player.cc:160
-#, c-format
-msgid "%ux"
-msgstr "%ux"
-
-#: ../../src/interactive_spectator.cc:122 ../../src/interactive_player.cc:161
-msgid "PAUSE"
-msgstr "PAUZE"
-
-#: ../../src/ware_statistics_menu.cc:351
-msgid "Ware Statistics"
+#: ../../src/game_main_menu.cc:56
+msgid "Ware statistics"
 msgstr "Goederenstatistieken"
 
-#: ../../src/ware_statistics_menu.cc:416
-#: ../../src/general_statistics_menu.cc:196
-msgid "15 m"
-msgstr "15 m"
+#: ../../src/game_main_menu.cc:64
+msgid "Building statistics"
+msgstr "Gebouwstatistieken"
 
-#: ../../src/ware_statistics_menu.cc:425
-#: ../../src/general_statistics_menu.cc:205
-msgid "30 m"
-msgstr "30 m"
+#: ../../src/game_main_menu.cc:72 ../../src/stock_menu.cc:32
+#: ../../src/waresdisplay.cc:42
+msgid "Stock"
+msgstr "Voorraad"
 
-#: ../../src/ware_statistics_menu.cc:434
-#: ../../src/general_statistics_menu.cc:214
-msgid "1 h"
-msgstr "1 u"
+#: ../../src/editor_game_base.cc:558 ../../src/editor/editorinteractive.cc:135
+msgid "Loading world data"
+msgstr "Wereldgegevens laden"
 
-#: ../../src/ware_statistics_menu.cc:443
-#: ../../src/general_statistics_menu.cc:223
-msgid "2 h"
-msgstr "2 u"
-
-#: ../../src/ware_statistics_menu.cc:454
-#: ../../src/general_statistics_menu.cc:234
-msgid "Help"
-msgstr "Help"
-
-#: ../../src/ware_statistics_menu.cc:463
-#: ../../src/general_statistics_menu.cc:243
-msgid "4 h"
-msgstr "4 u"
-
-#: ../../src/ware_statistics_menu.cc:472
-#: ../../src/general_statistics_menu.cc:251
-msgid "8 h"
-msgstr "8 u"
-
-#: ../../src/ware_statistics_menu.cc:481
-#: ../../src/general_statistics_menu.cc:260
-msgid "16 h"
-msgstr "16 u"
-
-#: ../../src/map_variable_manager.cc:30
-msgid "Next scenario"
-msgstr "Volgend scenario"
-
-#: ../../src/map_variable_manager.cc:31
-msgid "<undefined>"
-msgstr "<ongedefinieerd>"
-
-#: ../../src/interactive_player.cc:108
-#: ../../src/editor/editorinteractive.cc:100
-msgid "Buildhelp"
-msgstr "Bouwhulp"
-
-#: ../../src/interactive_player.cc:117
-msgid "Geologic survey information"
-msgstr "Informatie geologisch onderzoek"
-
-#: ../../src/interactive_player.cc:126
-msgid "Tribe's ware encyclopedia"
-msgstr "Stam waren encyclopedie"
-
-#: ../../src/interactive_player.cc:200
-msgid "Message: "
-msgstr "Bericht:"
-
-#: ../../src/wlapplication.cc:931
-msgid "Sorry, no double-instance debugging on WIN32."
-msgstr "Sorry, double-instance debuggen niet mogelijk op WIN32."
-
-#: ../../src/wlapplication.cc:935
-msgid "--double is disabled. This is not a debug build!"
-msgstr "--double is uitgeschakeld. Dit is geen debug-build!"
-
-#: ../../src/wlapplication.cc:1014
+#: ../../src/editor_game_base.cc:567
 #, c-format
-msgid "This is Widelands-%s"
-msgstr "Dit is Widelands-%s"
+msgid "Loading tribe: %s"
+msgstr "Laden stam: %s"
 
-#: ../../src/wlapplication.cc:1016
-msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Gebruik: widelands <optie0=waarde0> ... <optieN>=<waardeN>"
+#: ../../src/game_debug_ui.cc:273
+msgid "Debug Field"
+msgstr "Debugveld"
 
-#: ../../src/wlapplication.cc:1018
-msgid "Options:"
-msgstr "Opties: "
+#: ../../src/game_debug_ui.cc:322
+#, c-format
+msgid "%i, %i - height: %u\n"
+msgstr "%i, %i - hoogte: %u\n"
 
-#: ../../src/wlapplication.cc:1019
-msgid ""
-" --<config-entry-name>=value overwrites any config file setting\n"
-"\n"
-" --record=FILENAME    Record all events to the given filename for later playback\n"
-" --playback=FILENAME  Playback given filename (see --record)\n"
-"\n"
-" --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n"
-msgstr ""
-"--<configuratie-instelling-naam>=waarde overschrijft de instelling in het configuratiebestand\n"
-"\n"
+#: ../../src/productionsite.cc:184
+msgid "(not occupied)"
+msgstr "(niet bezet)"
 
-#: ../../src/wlapplication.cc:1025
-msgid " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
-msgstr "--ggz            Start spel als GGZ Gaming Zone client (niet gebruiken!)"
+#: ../../src/productionsite.cc:189
+#, c-format
+msgid "Waiting for %u workers!"
+msgstr "Wacht op %u arbeiders!"
 
-#: ../../src/wlapplication.cc:1028
-msgid ""
-" --nosound            Starts the game with sound disabled\n"
-" --nozip              Do not save files as binary zip archives.\n"
-"\n"
-" --editor             Directly starts the Widelands editor.\n"
-msgstr ""
-"--nosound        Start het spel zonder geluid.\n"
-"--nozip            Sla bestanden niet op als binair zip-bestand.\n"
-"\n"
-"-editor             Start direct de editor.\n"
+#: ../../src/productionsite.cc:197
+msgid "(stopped)"
+msgstr "(gestopt)"
 
-#: ../../src/wlapplication.cc:1034
-msgid " --double             Start the game twice (for localhost network testing)\n"
-msgstr "--double       Start het spel tweemaal (voor netwerktest op de locale computer)\n"
+#: ../../src/productionsite.cc:242
+msgid "UP"
+msgstr "OMHOOG"
 
-#: ../../src/wlapplication.cc:1038
-msgid " --help               Show this help\n"
-msgstr "--help           Toon deze help\n"
+#: ../../src/productionsite.cc:242
+msgid "DOWN"
+msgstr "OMLAAG"
 
-#: ../../src/wlapplication.cc:1039
-msgid ""
-"Bug reports? Suggestions? Check out the project website:\n"
-"        http://www.sourceforge.net/projects/widelands\n"
-"\n"
-"Hope you enjoy this game!\n"
-msgstr ""
-"Bug rapporten? Suggesties? Kijk ook eens op de website van het project:\n"
-"       http://www.sourceforge.net/projects/widelands\n"
-"\n"
-"Veel plezier met dit spel!\n"
-
-#: ../../src/item_ware_descr.cc:39 ../../src/worker_descr.cc:110
-msgid "Doh... someone forgot the help text!"
-msgstr "Doh... iemand is de helptekst vergeten!"
-
-#: ../../src/game_main_menu_load_game.cc:47
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:46
-msgid "Load Game"
-msgstr "Laad spel"
-
-#: ../../src/game_main_menu_load_game.cc:65
-#: ../../src/game_main_menu_save_game.cc:71
-msgid "Map Name: "
-msgstr "Kaartnaam: "
-
-#: ../../src/game_main_menu_load_game.cc:70
-#: ../../src/game_main_menu_save_game.cc:76
-msgid "Game Time: "
-msgstr "Speeltijd:"
-
-#: ../../src/game_main_menu_load_game.cc:82
-#: ../../src/game_main_menu_save_game.cc:88
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:60
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:253
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:50
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:82
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:42
-#: ../../src/ui/ui_basic/ui_modal_messagebox.cc:52
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:116
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:113
-msgid "OK"
-msgstr "OK"
-
-#: ../../src/game_main_menu_load_game.cc:90
-#: ../../src/game_main_menu_save_game.cc:96
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:48
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:67
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:173
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:242
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:85
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:205
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:125
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:84
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:122
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:244
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:143
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:157
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:304
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:211
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:167
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: ../../src/game_main_menu_load_game.cc:216
-msgid ""
-"Game Loading Error!\n"
-"Reason given:\n"
-msgstr ""
-"Fout in het laden van het spel!\n"
-"Reden gegeven:\n"
-
-#: ../../src/game_main_menu_load_game.cc:220
-msgid "Load Game Error!!"
-msgstr "Fout in het laden van het spel!!"
-
-#: ../../src/watchwindow.cc:99 ../../src/fieldaction.cc:427
+#: ../../src/watchwindow.cc:108 ../../src/fieldaction.cc:447
 msgid "Watch"
 msgstr "Bekijk"
 
-#: ../../src/watchwindow.cc:113
+#: ../../src/watchwindow.cc:122
 msgid "Follow"
 msgstr "Volg"
 
-#: ../../src/watchwindow.cc:121
+#: ../../src/watchwindow.cc:130
 msgid "Center mainview on this"
 msgstr "Centreer beeld op dit"
 
-#: ../../src/watchwindow.cc:139
+#: ../../src/watchwindow.cc:148
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:39
 msgid "Close"
 msgstr "Sluit"
 
-#: ../../src/game.cc:221 ../../src/game.cc:230
-msgid "Preloading a map"
-msgstr "Een kaart voorladen"
-
-#: ../../src/game.cc:237
-msgid "Loading a world"
-msgstr "Een wereld laden"
-
-#: ../../src/game.cc:243
+#: ../../src/graphic.cc:605
 #, c-format
-msgid "Adding player %u"
-msgstr "Speler %u toevoegen"
+msgid "Loading animations: %d%% complete"
+msgstr "Animaties laden: %d%% compleet"
 
-#: ../../src/game.cc:253 ../../src/game.cc:290 ../../src/game.cc:396
-msgid "Loading a map"
-msgstr "Een kaart laden"
+#: ../../src/minimap.cc:135
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:86
+msgid "Map"
+msgstr "Kaart"
 
-#: ../../src/game.cc:367 ../../src/game.cc:430
-msgid "Loading..."
-msgstr "Laden..."
+#: ../../src/minimap.cc:144 ../../src/editor/ui_menus/editor_tool_menu.cc:77
+msgid "Terrain"
+msgstr "Terrein"
 
-#: ../../src/game.cc:401
-msgid "Initializing a network game"
-msgstr "Een netwerkspel initialiseren"
+#: ../../src/minimap.cc:152
+msgid "Owner"
+msgstr "Bezet door"
 
-#: ../../src/game.cc:499
-msgid "Creating player infrastructure"
-msgstr "Creëren speler's infrastructuur"
+#: ../../src/minimap.cc:160
+msgid "Flags"
+msgstr "Vlaggen"
 
-#: ../../src/game_objectives_menu.cc:32
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:172
-msgid "Objectives Menu"
-msgstr "Doelenmenu"
+#: ../../src/minimap.cc:168
+msgid "Roads"
+msgstr "Wegen"
 
-#: ../../src/map.cc:422
-msgid "No Name"
-msgstr "Geen naam"
+#: ../../src/minimap.cc:176 ../../src/general_statistics_menu.cc:156
+msgid "Buildings"
+msgstr "Gebouwen"
 
-#: ../../src/map.cc:423
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:141
-msgid "Unknown"
-msgstr "Onbekend"
+#: ../../src/building_ui.cc:165
+msgid "Destroy building?"
+msgstr "Vernietig gebouw?"
 
-#: ../../src/map.cc:424
-msgid "no description defined"
-msgstr "geen omschijving gedefinieerd"
+#: ../../src/building_ui.cc:179
+msgid "Do you really want to destroy this "
+msgstr "Wil je deze "
 
-#: ../../src/map.cc:431 ../../src/playerdescrgroup.cc:37
-#: ../../src/playerdescrgroup.cc:65
-msgid "Player 1"
-msgstr "Speler 1"
+#: ../../src/building_ui.cc:181
+msgid "?"
+msgstr " echt vernietigen?"
 
-#: ../../src/game_server_proto_packet_getuserinfo.cc:66
+#: ../../src/building_ui.cc:662 ../../src/events/event_message_box.cc:49
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:58
+msgid "Continue"
+msgstr "Ga verder"
+
+#: ../../src/building_ui.cc:662
+msgid "Stop"
+msgstr "Stop"
+
+#: ../../src/building_ui.cc:686
 #, c-format
-msgid "The User %s is currently not logged in or unknown to the server.\n"
-msgstr "De gebruiker %s is nu niet ingelogd of is niet bekend bij de server.\n"
+msgid "Enhance to %s"
+msgstr "Verbeter naar %s"
+
+#: ../../src/building_ui.cc:705
+msgid "Destroy"
+msgstr "Vernietig"
+
+#: ../../src/building_ui.cc:716 ../../src/building_ui.cc:823
+msgid "Show workarea"
+msgstr "Laat werkgebied zien"
+
+#: ../../src/building_ui.cc:727
+msgid "Debug"
+msgstr "Debug"
+
+#: ../../src/building_ui.cc:850
+msgid "Hide workarea"
+msgstr "Verberg werkgebied"
+
+#: ../../src/building_ui.cc:1150
+msgid "Worker Listing"
+msgstr "Werkerslijst"
+
+#: ../../src/building_ui.cc:1170
+msgid "Type: "
+msgstr "Type:"
+
+#: ../../src/building_ui.cc:1177
+msgid "Experience: "
+msgstr "Ervaring:"
+
+#: ../../src/building_ui.cc:1184
+msgid "Trying to become: "
+msgstr "Probeert te worden:"
+
+#: ../../src/building_ui.cc:1422
+msgid "Highest priority"
+msgstr "Hoogste prioriteit"
+
+#: ../../src/building_ui.cc:1431
+msgid "Normal priority"
+msgstr "Normale prioriteit"
+
+#: ../../src/building_ui.cc:1440
+msgid "Lowest priority"
+msgstr "Laagste prioriteit"
+
+#: ../../src/building_ui.cc:1474
+msgid "Show worker listing"
+msgstr "Laat werkerslijst zien"
+
+#: ../../src/building_ui.cc:1574 ../../src/building_ui.cc:1972
+#: ../../src/building_statistics_menu.cc:120
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:166
+msgid "Name"
+msgstr "Naam"
+
+#: ../../src/building_ui.cc:1575 ../../src/building_ui.cc:1973
+msgid "HP"
+msgstr "HP"
+
+#: ../../src/building_ui.cc:1576 ../../src/building_ui.cc:1974
+msgid "AT"
+msgstr "AT"
+
+#: ../../src/building_ui.cc:1577 ../../src/building_ui.cc:1975
+msgid "DE"
+msgstr "DE"
+
+#: ../../src/building_ui.cc:1578 ../../src/building_ui.cc:1976
+msgid "EV"
+msgstr "EV"
+
+#: ../../src/building_ui.cc:1579 ../../src/building_ui.cc:1977
+msgid "Level"
+msgstr "Niveau"
+
+#: ../../src/building_ui.cc:1600 ../../src/building_ui.cc:2001
+msgid "Capacity"
+msgstr "Capaciteit"
+
+#: ../../src/building_ui.cc:1759
+msgid "Training Options"
+msgstr "Trainingopties"
+
+#: ../../src/building_ui.cc:1783
+msgid "Training mode : "
+msgstr "Trainingsmodus:"
+
+#: ../../src/building_ui.cc:1784
+msgid "Balanced"
+msgstr "Gebalanceerd"
+
+#: ../../src/building_ui.cc:1799
+msgid "Hit points"
+msgstr "Levenspunten"
+
+#: ../../src/building_ui.cc:1801 ../../src/fieldaction.cc:508
+msgid "Attack"
+msgstr "Aanval"
+
+#: ../../src/building_ui.cc:1803
+msgid "Defense"
+msgstr "Verdediging"
+
+#: ../../src/building_ui.cc:1805
+msgid "Evade"
+msgstr "Vermijd"
+
+#: ../../src/building_ui.cc:1877
+msgid "Make heroes"
+msgstr "Maak helden"
+
+#: ../../src/building_ui.cc:1879
+msgid "Balanced army"
+msgstr "Gebalanceerd leger"
+
+#: ../../src/building_ui.cc:2011
+msgid "xx"
+msgstr "xx"
+
+#: ../../src/game_chat_menu.cc:47
+msgid "Chat Menu"
+msgstr "Chat menu"
+
+#: ../../src/netclient.cc:95
+msgid "Client has left the game."
+msgstr "Client heeft het spel verlaten."
+
+#: ../../src/netclient.cc:128 ../../src/wlapplication.cc:1423
+#: ../../src/nethost.cc:284
+msgid "Preparing game"
+msgstr "Spel voorbereiden"
+
+#: ../../src/netclient.cc:149
+msgid "Client crashed and performed an emergency save."
+msgstr "Cient is gecrashed en heeft een reddingsbestand opgeslagen."
+
+#: ../../src/netclient.cc:260
+msgid "Server sent a player update for a player that does not exist."
+msgstr "Server heeft een spelersupdate gestuurd voor een speler die niet bestaat."
+
+#: ../../src/netclient.cc:330
+#, c-format
+msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
+msgstr "Verwachtte een \"HELLO\" pakket van de server, maar ontving commando nummer %u. Misschien draait de server een andere versie van Widelands?"
+
+#: ../../src/netclient.cc:336
+msgid "Server uses a different protocol version"
+msgstr "Server gebruikt een andere versie van het protocol."
+
+#: ../../src/netclient.cc:378
+msgid "Unexpectedly received LAUNCH command from server."
+msgstr "Ontving onverwacht een \"LAUNCH\" commando van de server."
+
+#: ../../src/netclient.cc:395
+msgid "Server sent a PLAYERCOMMAND even though no game is running."
+msgstr "Server zond een \"PLAYERCOMMAND\" hoewel er geen spel draait."
+
+#: ../../src/netclient.cc:406
+msgid "Server sent a SYNCREQUEST even though no game is running."
+msgstr "Server zond een \"SYNCREQUEST\" hoewel er geen spel draait."
+
+#: ../../src/netclient.cc:427
+#, c-format
+msgid "Server sent an unknown command (command number %u)"
+msgstr "Server zond een onbekend commando (commando nummer %u)"
+
+#: ../../src/netclient.cc:456
+msgid "Server sent malformed commands: "
+msgstr "Server zond misvormde commando's: "
+
+#: ../../src/netclient.cc:486
+msgid " An automatic savegame will be created."
+msgstr "Een automatische kopie wordt opgeslagen."
+
+#: ../../src/general_statistics_menu.cc:64
+msgid "General Statistics"
+msgstr "Algemene statistieken"
+
+#: ../../src/general_statistics_menu.cc:144
+msgid "Land"
+msgstr "Land"
+
+#: ../../src/general_statistics_menu.cc:150
+msgid "Workers"
+msgstr "Werkers"
+
+#: ../../src/general_statistics_menu.cc:162
+msgid "Wares"
+msgstr "Goederen"
+
+#: ../../src/general_statistics_menu.cc:168
+msgid "Productivity"
+msgstr "Productiviteit"
+
+#: ../../src/general_statistics_menu.cc:174
+msgid "Kills"
+msgstr "Gedood"
+
+#: ../../src/general_statistics_menu.cc:180
+msgid "Military"
+msgstr "Leger"
+
+#: ../../src/general_statistics_menu.cc:198
+#: ../../src/ware_statistics_menu.cc:428
+msgid "15 m"
+msgstr "15 m"
+
+#: ../../src/general_statistics_menu.cc:207
+#: ../../src/ware_statistics_menu.cc:437
+msgid "30 m"
+msgstr "30 m"
+
+#: ../../src/general_statistics_menu.cc:216
+#: ../../src/ware_statistics_menu.cc:446
+msgid "1 h"
+msgstr "1 u"
+
+#: ../../src/general_statistics_menu.cc:225
+#: ../../src/ware_statistics_menu.cc:455
+msgid "2 h"
+msgstr "2 u"
+
+#: ../../src/general_statistics_menu.cc:236
+#: ../../src/ware_statistics_menu.cc:466
+msgid "Help"
+msgstr "Help"
+
+#: ../../src/general_statistics_menu.cc:245
+#: ../../src/ware_statistics_menu.cc:475
+msgid "4 h"
+msgstr "4 u"
+
+#: ../../src/general_statistics_menu.cc:253
+#: ../../src/ware_statistics_menu.cc:484
+msgid "8 h"
+msgstr "8 u"
+
+#: ../../src/general_statistics_menu.cc:262
+#: ../../src/ware_statistics_menu.cc:493
+msgid "16 h"
+msgstr "16 u"
+
+#: ../../src/interactive_player.cc:171
+msgid "Chat"
+msgstr "Chat"
+
+#: ../../src/interactive_player.cc:174 ../../src/game_options_menu.cc:48
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:55
+msgid "Options"
+msgstr "Opties"
+
+#: ../../src/interactive_player.cc:177 ../../src/interactive_spectator.cc:50
+#: ../../src/editor/editorinteractive.cc:61
+msgid "Menu"
+msgstr "Menu"
+
+#: ../../src/interactive_player.cc:180
+#: ../../src/editor/editorinteractive.cc:93
+msgid "Objectives"
+msgstr "Doelen"
+
+#: ../../src/interactive_player.cc:183 ../../src/interactive_spectator.cc:53
+#: ../../src/editor/editorinteractive.cc:73
+msgid "Minimap"
+msgstr "Minikaart"
+
+#: ../../src/interactive_player.cc:186
+#: ../../src/editor/editorinteractive.cc:77
+msgid "Buildhelp"
+msgstr "Bouwhulp"
+
+#: ../../src/interactive_player.cc:193
+msgid "Resource information"
+msgstr "Grondstofinformatie"
+
+#: ../../src/interactive_player.cc:197
+msgid "Ware help"
+msgstr "Goederenhulp"
+
+#: ../../src/interactive_player.cc:238 ../../src/interactive_spectator.cc:114
+#, c-format
+msgid "%ux"
+msgstr "%ux"
+
+#: ../../src/interactive_player.cc:240 ../../src/interactive_spectator.cc:117
+msgid "PAUSE"
+msgstr "PAUZE"
 
 #: ../../src/game_server_proto_packet_connect.cc:67
 #, c-format
 msgid "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"
 msgstr "Server geeft een verbindingsfout. Je protocol (%i.%02i) is te oud. Server heeft %i.%02i\n"
 
-#: ../../src/game_server_proto_packet_connect.cc:76
+#: ../../src/game_server_proto_packet_connect.cc:75
 #, c-format
 msgid "Server is full!\n"
 msgstr "Server is vol!\n"
 
-#: ../../src/game_server_proto_packet_connect.cc:83
+#: ../../src/game_server_proto_packet_connect.cc:81
 #, c-format
 msgid "This server doesn't serve widelands!\n"
 msgstr "Deze server heeft geen widelands!\n"
 
-#: ../../src/building_statistics_menu.cc:56
-msgid "Building Statistics"
-msgstr "Gebouw Statistieken"
-
-#: ../../src/building_statistics_menu.cc:74 ../../src/building_ui.cc:1563
-#: ../../src/building_ui.cc:2016
-#: ../../src/editor/tools/editor_info_tool.cc:104
-#: ../../src/editor/tools/editor_info_tool.cc:114
-#: ../../src/editor/tools/editor_info_tool.cc:123
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:168
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:80
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:177
-msgid "Name"
-msgstr "Naam"
-
-#: ../../src/building_statistics_menu.cc:75
-msgid "Prod"
-msgstr "Prod"
-
-#: ../../src/building_statistics_menu.cc:76
-msgid "Owned"
-msgstr "Bezet door"
-
-#: ../../src/building_statistics_menu.cc:77
-msgid "Build"
-msgstr "Bouw"
-
-#: ../../src/building_statistics_menu.cc:87
-msgid "Total Productivity: "
-msgstr "Totale productiviteit"
-
-#: ../../src/building_statistics_menu.cc:93
-msgid "Owned: "
-msgstr "Bezet door:"
-
-#: ../../src/building_statistics_menu.cc:103
-#: ../../src/building_statistics_menu.cc:128
-#: ../../src/building_statistics_menu.cc:151
-msgid "Snow previous"
-msgstr "Vorige"
-
-#: ../../src/building_statistics_menu.cc:112
-#: ../../src/building_statistics_menu.cc:137
-#: ../../src/building_statistics_menu.cc:160
-msgid "Snow next"
-msgstr "Volgende"
-
-#: ../../src/building_statistics_menu.cc:118
-msgid "In Build: "
-msgstr "Wordt gebouwd:"
-
-#: ../../src/building_statistics_menu.cc:143
-msgid "Jump to unproductive: "
-msgstr "Ga naar werkeloze:"
-
-#: ../../src/waresdisplay.cc:41 ../../src/stock_menu.cc:33
-#: ../../src/game_main_menu.cc:77
-msgid "Stock"
-msgstr "Voorraad"
-
-#: ../../src/criterr.cc:62
-msgid "!! CRITICAL ERROR !!"
-msgstr "!! KRITIEKE FOUT !!"
-
-#: ../../src/criterr.cc:71
-msgid "Exit"
-msgstr "Exit"
-
-#: ../../src/criterr.cc:78
-msgid "!! Continue execution !!"
-msgstr "!! Ga verder met uitvoeren !!"
-
-#: ../../src/criterr.cc:87
-msgid "Crash"
-msgstr "Crash"
-
-#: ../../src/criterr.cc:122
-msgid "Widelands"
-msgstr "Widelands"
-
-#: ../../src/minimap.cc:134
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
-msgid "Map"
-msgstr "Kaart"
-
-#: ../../src/minimap.cc:143
-msgid "Terrain"
-msgstr "Terrein"
-
-#: ../../src/minimap.cc:151
-msgid "Owner"
-msgstr "Bezet door"
-
-#: ../../src/minimap.cc:159
-msgid "Flags"
-msgstr "Vlaggen"
-
-#: ../../src/minimap.cc:167
-msgid "Roads"
-msgstr "Wegen"
-
-#: ../../src/minimap.cc:175 ../../src/general_statistics_menu.cc:155
-msgid "Buildings"
-msgstr "Gebouwen"
-
-#: ../../src/stock_menu.cc:73
-msgid "Show wares"
-msgstr "Laat goederen zien"
-
-#: ../../src/stock_menu.cc:78
-msgid "Show workers"
-msgstr "Laat werkers zien"
-
-#: ../../src/productionsite.cc:229
-msgid "(not occupied)"
-msgstr "(niet bezet)"
-
-#: ../../src/productionsite.cc:240
-msgid "(stopped)"
-msgstr "(gestopt)"
-
-#: ../../src/productionsite.cc:269
-msgid "UP"
-msgstr "OMHOOG"
-
-#: ../../src/productionsite.cc:269
-msgid "DOWN"
-msgstr "OMLAAG"
-
-#: ../../src/graphic.cc:602
-#, c-format
-msgid "Loading animations: %d%% complete"
-msgstr "Animaties laden: %d%% compleet"
-
-#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:87
+#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:86
 msgid "Sound options"
 msgstr "Geluidsopties"
 
@@ -485,41 +472,177 @@ msgstr "Muziekvolume tijdens spel"
 msgid "Sound FX Volume"
 msgstr "Volume geluidseffecten"
 
-#: ../../src/encyclopedia_window.cc:49
+#: ../../src/s2map.cc:223
+msgid "Bluebyte Settlers II Map. No comment defined!"
+msgstr "Bleubyte Settlers II Kaart. Geen commentaar gedefinieerd!"
+
+#: ../../src/game_server_proto_packet_getroominfo.cc:67
+#, c-format
+msgid "The Room %s is currently not logged in or unknown to the server.\n"
+msgstr "De kamer %s is nu niet ingelogd of is onbekend bij de server.\n"
+
+#: ../../src/stock_menu.cc:74
+msgid "Show wares"
+msgstr "Laat goederen zien"
+
+#: ../../src/stock_menu.cc:79
+msgid "Show workers"
+msgstr "Laat werkers zien"
+
+#: ../../src/militarysite.cc:77 ../../src/warehouse.cc:303
+msgid " conquer"
+msgstr " verover"
+
+#: ../../src/militarysite.cc:140
+#, c-format
+msgid "%u soldier"
+msgid_plural "%u soldiers"
+msgstr[0] "%u soldaat"
+msgstr[1] "%u soldaten"
+
+#: ../../src/militarysite.cc:145
+#, c-format
+msgid "%u(+%u) soldier"
+msgid_plural "%u(+%u) soldiers"
+msgstr[0] "%u(+%u) soldaat"
+msgstr[1] "%u(+%u) soldaten"
+
+#: ../../src/playerdescrgroup.cc:116
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:150
+msgid "Open"
+msgstr "Open"
+
+#: ../../src/playerdescrgroup.cc:124 ../../src/nethost.cc:569
+msgid "Computer"
+msgstr "Computer"
+
+#: ../../src/playerdescrgroup.cc:126
+msgid "Human"
+msgstr "Mens"
+
+#: ../../src/game_objectives_menu.cc:36
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:161
+msgid "Objectives Menu"
+msgstr "Doelenmenu"
+
+#: ../../src/item_ware_descr.cc:41 ../../src/worker_descr.cc:120
+msgid "Doh... someone forgot the help text!"
+msgstr "Doh... iemand is de helptekst vergeten!"
+
+#: ../../src/encyclopedia_window.cc:54
 msgid "Tribe ware encyclopedia"
 msgstr "Stam waren encyclopedie"
 
-#: ../../src/encyclopedia_window.cc:69
+#: ../../src/encyclopedia_window.cc:75
 msgid "Needs Ware"
 msgstr "Benodigde waren"
 
-#: ../../src/encyclopedia_window.cc:70
+#: ../../src/encyclopedia_window.cc:76
 msgid "Consumed"
 msgstr "Geconsumeerd"
 
-#: ../../src/encyclopedia_window.cc:71
+#: ../../src/encyclopedia_window.cc:77
 msgid "Group"
 msgstr "Groep"
+
+#: ../../src/ware_statistics_menu.cc:358
+msgid "Ware Statistics"
+msgstr "Goederenstatistieken"
+
+#: ../../src/building_statistics_menu.cc:80
+msgid "Building Statistics"
+msgstr "Gebouw Statistieken"
+
+#: ../../src/building_statistics_menu.cc:93
+msgid "Total Productivity: "
+msgstr "Totale productiviteit"
+
+#: ../../src/building_statistics_menu.cc:96
+msgid "Owned: "
+msgstr "Bezet door:"
+
+#: ../../src/building_statistics_menu.cc:104
+msgid "In Build: "
+msgstr "Wordt gebouwd:"
+
+#: ../../src/building_statistics_menu.cc:112
+msgid "Jump to unproductive: "
+msgstr "Ga naar werkeloze:"
+
+#: ../../src/building_statistics_menu.cc:121
+msgid "Size"
+msgstr "Grootte"
+
+#: ../../src/building_statistics_menu.cc:122
+msgid "Prod"
+msgstr "Prod"
+
+#: ../../src/building_statistics_menu.cc:123
+msgid "Owned"
+msgstr "Bezet door"
+
+#: ../../src/building_statistics_menu.cc:124
+msgid "Build"
+msgstr "Bouw"
+
+#: ../../src/building_statistics_menu.cc:136
+#: ../../src/building_statistics_menu.cc:154
+#: ../../src/building_statistics_menu.cc:172
+msgid "Snow previous"
+msgstr "Vorige"
+
+#: ../../src/building_statistics_menu.cc:145
+#: ../../src/building_statistics_menu.cc:163
+#: ../../src/building_statistics_menu.cc:181
+msgid "Snow next"
+msgstr "Volgende"
 
 #: ../../src/game_main_menu_save_game.cc:49
 msgid "Save Game"
 msgstr "Sla spel op"
 
-#: ../../src/game_main_menu_save_game.cc:217
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:344
-msgid "A File with the name "
-msgstr "Een bestand met de naam"
+#: ../../src/game_main_menu_save_game.cc:77
+msgid "Map Name: "
+msgstr "Kaartnaam: "
 
-#: ../../src/game_main_menu_save_game.cc:219
-msgid " already exists. Overwrite?"
-msgstr " bestaat al. Overschrijven?"
+#: ../../src/game_main_menu_save_game.cc:83
+msgid "Game Time: "
+msgstr "Speeltijd:"
 
-#: ../../src/game_main_menu_save_game.cc:221
-#: ../../src/game_main_menu_save_game.cc:233
-msgid "Save Game Error!!"
-msgstr "Fout in het opslaan van het spel!!"
+#: ../../src/game_main_menu_save_game.cc:95
+#: ../../src/ui/ui_basic/ui_messagebox.cc:85
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:105
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:43
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:48
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:57
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:252
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:118
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:127
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
+msgid "OK"
+msgstr "OK"
 
-#: ../../src/game_main_menu_save_game.cc:230
+#: ../../src/game_main_menu_save_game.cc:103
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:46
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:143
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:263
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:256
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:93
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:175
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:216
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:98
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:78
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:188
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:320
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:233
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:183
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../../src/game_main_menu_save_game.cc:218
 msgid ""
 "Game Saving Error!\n"
 "Saved Game-File may be corrupt!\n"
@@ -531,782 +654,659 @@ msgstr ""
 "\n"
 "Reden gegeven:\n"
 
+#: ../../src/game_main_menu_save_game.cc:222
+#: ../../src/game_main_menu_save_game.cc:233
+msgid "Save Game Error!!"
+msgstr "Fout in het opslaan van het spel!!"
+
+#: ../../src/game_main_menu_save_game.cc:234
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:347
+msgid "A File with the name "
+msgstr "Een bestand met de naam"
+
+#: ../../src/game_main_menu_save_game.cc:238
+msgid " already exists. Overwrite?"
+msgstr " bestaat al. Overschrijven?"
+
+#: ../../src/game.cc:241 ../../src/game.cc:247
+msgid "Preloading a map"
+msgstr "Een kaart voorladen"
+
+#: ../../src/game.cc:254
+msgid "Loading a world"
+msgstr "Een wereld laden"
+
+#: ../../src/game.cc:260
+#, c-format
+msgid "Adding player %u"
+msgstr "Speler %u toevoegen"
+
+#: ../../src/game.cc:269
+msgid "Loading a map"
+msgstr "Een kaart laden"
+
+#: ../../src/game.cc:304
+msgid "Preloading map"
+msgstr "Kaart voorladen"
+
+#: ../../src/game.cc:313
+msgid "Configuring players"
+msgstr "Spelers configureren"
+
+#: ../../src/game.cc:326
+msgid "Loading map"
+msgstr "Kaart laden"
+
+#: ../../src/game.cc:366 ../../src/wlapplication.cc:1534
+msgid "Loading..."
+msgstr "Laden..."
+
+#: ../../src/game.cc:421
+msgid "Creating player infrastructure"
+msgstr "Creëren speler's infrastructuur"
+
+#: ../../src/game_options_menu.cc:59
+msgid "README"
+msgstr "LEESMIJ"
+
+#: ../../src/game_options_menu.cc:68
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:76
+msgid "License"
+msgstr "Licentie"
+
+#: ../../src/game_options_menu.cc:77
+msgid "Authors"
+msgstr "Auteurs"
+
+#: ../../src/game_options_menu.cc:96
+msgid "Save game"
+msgstr "Sla spel op"
+
+#: ../../src/game_options_menu.cc:107
+msgid "Exit game"
+msgstr "Verlaat spel"
+
+#: ../../src/wlapplication.cc:890
+msgid ""
+"\n"
+"Sorry, no double-instance debugging on WIN32.\n"
+"\n"
+msgstr ""
+"\n"
+"Sorry, double-instance debuggen niet mogelijk op WIN32.\n"
+"\n"
+
+#: ../../src/wlapplication.cc:893
+msgid "--double is disabled. This is not a debug build!"
+msgstr "--double is uitgeschakeld. Dit is geen debug-build!"
+
+#: ../../src/wlapplication.cc:982
+#, c-format
+msgid ""
+"This is Widelands-%s\n"
+"\n"
+msgstr ""
+"Dit is Widelands-%s\n"
+"\n"
+
+#: ../../src/wlapplication.cc:984
+msgid ""
+"Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
+"\n"
+msgstr ""
+"Gebruik: widelands <optie0=waarde0> ... <optieN>=<waardeN>\n"
+"\n"
+
+#: ../../src/wlapplication.cc:985
+msgid ""
+"Options:\n"
+"\n"
+msgstr ""
+"Opties: \n"
+"\n"
+
+#: ../../src/wlapplication.cc:989
+msgid ""
+" --<config-entry-name>=value overwrites any config file setting\n"
+"\n"
+" --record=FILENAME    Record all events to the given filename for later playback\n"
+" --playback=FILENAME  Playback given filename (see --record)\n"
+"\n"
+" --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n"
+msgstr ""
+"--<configuratie-instelling-naam>=waarde overschrijft de instelling in het configuratiebestand\n"
+"\n"
+
+#: ../../src/wlapplication.cc:999
+msgid " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
+msgstr "--ggz            Start spel als GGZ Gaming Zone client (niet gebruiken!)"
+
+#: ../../src/wlapplication.cc:1005
+msgid ""
+" --nosound            Starts the game with sound disabled\n"
+" --nozip              Do not save files as binary zip archives.\n"
+"\n"
+" --editor             Directly starts the Widelands editor.\n"
+"\n"
+msgstr ""
+"--nosound        Start het spel zonder geluid.\n"
+"--nozip            Sla bestanden niet op als binair zip-bestand.\n"
+"\n"
+"-editor             Start direct de editor.\n"
+"\n"
+
+#: ../../src/wlapplication.cc:1013
+msgid ""
+" --double             Start the game twice (for localhost network testing)\n"
+"\n"
+msgstr ""
+"--double       Start het spel tweemaal (voor netwerktest op de locale computer)\n"
+"\n"
+
+#: ../../src/wlapplication.cc:1017
+msgid " --help               Show this help\n"
+msgstr "--help           Toon deze help\n"
+
+#: ../../src/wlapplication.cc:1021
+msgid ""
+"Bug reports? Suggestions? Check out the project website:\n"
+"        http://www.sourceforge.net/projects/widelands\n"
+"\n"
+"Hope you enjoy this game!\n"
+"\n"
+msgstr ""
+"Bug rapporten? Suggesties? Kijk ook eens op de website van het project:\n"
+"       http://www.sourceforge.net/projects/widelands\n"
+"\n"
+"Veel plezier met dit spel!\n"
+"\n"
+
+#: ../../src/wlapplication.cc:1159
+msgid "Unexpected error during the game"
+msgstr "Onverwachte fout tijdens het spel"
+
+#: ../../src/wlapplication.cc:1162
+msgid ""
+"\n"
+"\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build "
+msgstr ""
+"\n"
+"\n"
+"Rapporteer dit probleem om ons te helpen Widelands te verbeteren. Je kunt gerelateerde berichten vinden op de standaarduitvoer (stdout.txt onder Windows). Je gebruikt build "
+
+#: ../../src/wlapplication.cc:1168
+msgid ""
+". Please add this information to your report.\n"
+"\n"
+"Widelands attempts to create a savegame when errors occur during the game. It is often - though not always - possible to load it and continue playing.\n"
+msgstr ""
+". Voeg deze informatie toe aan je rapport.\n"
+"\n"
+"Widelands probeert een savegame (bewaard spel) te creëren als er een fout ontstaat tijdens het spel. Vaak -helaas niet altijd- is het mogelijk om deze te laden en ermee verder te spelen.\n"
+
+#: ../../src/wlapplication.cc:1368 ../../src/nethost.cc:628
+msgid "Player"
+msgstr "Speler"
+
+#: ../../src/wlapplication.cc:1484
+msgid "End of replay"
+msgstr "Einde herhaling"
+
+#: ../../src/wlapplication.cc:1486
+msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
+msgstr "Het einde van de herhaling is bereikt en het spel is gepauzeerd. Je mag het spel uit de pauzestand halen en verder kijken als je dat wilt."
+
+#: ../../src/game_server_proto_packet_getuserinfo.cc:67
+#, c-format
+msgid "The User %s is currently not logged in or unknown to the server.\n"
+msgstr "De gebruiker %s is nu niet ingelogd of is niet bekend bij de server.\n"
+
+#: ../../src/fieldaction.cc:242
+msgid "Build small buildings"
+msgstr "Bouw kleine gebouwen"
+
+#: ../../src/fieldaction.cc:243
+msgid "Build medium buildings"
+msgstr "Bouw middelgrote gebouwen"
+
+#: ../../src/fieldaction.cc:244
+msgid "Build large buildings"
+msgstr "Bouw grote gebouwen"
+
+#: ../../src/fieldaction.cc:280
+msgid "Action"
+msgstr "Actie"
+
+#: ../../src/fieldaction.cc:383
+msgid "Build road"
+msgstr "Leg weg aan"
+
+#: ../../src/fieldaction.cc:391
+msgid "Destroy this flag"
+msgstr "Vernietig deze vlag"
+
+#: ../../src/fieldaction.cc:398
+msgid "Send geologist to explore site"
+msgstr "Stuur geoloog om locatie te verkennen"
+
+#: ../../src/fieldaction.cc:414
+msgid "Put a flag"
+msgstr "Plaats een vlag"
+
+#: ../../src/fieldaction.cc:417
+msgid "Destroy a road"
+msgstr "Vernietig weg"
+
+#: ../../src/fieldaction.cc:428
+msgid "Watch field in a separate window"
+msgstr "Bekijk veld in apart scherm"
+
+#: ../../src/fieldaction.cc:433
+msgid "Toggle building statistics display"
+msgstr "Gebouwstatistieken aan/uit"
+
+#: ../../src/fieldaction.cc:435
+msgid "Toggle building label display"
+msgstr "Gebouwlabels aan/uit"
+
+#: ../../src/fieldaction.cc:438
+msgid "Debug window"
+msgstr "Debug venster"
+
+#: ../../src/fieldaction.cc:443 ../../src/fieldaction.cc:605
+msgid "Build roads"
+msgstr "Leg wegen aan"
+
+#: ../../src/fieldaction.cc:474
+msgid "Send less soldiers"
+msgstr "Stuur minder soldaten"
+
+#: ../../src/fieldaction.cc:484
+msgid "Send more soldiers"
+msgstr "Stuur meer soldaten"
+
+#: ../../src/fieldaction.cc:490
+msgid "Most aggressive attack"
+msgstr "Aggressiefste aanval"
+
+#: ../../src/fieldaction.cc:495
+msgid "Cautious attack"
+msgstr "Voorzichtigste aanval"
+
+#: ../../src/fieldaction.cc:501
+msgid "Start attack"
+msgstr "Start aanval"
+
+#: ../../src/fieldaction.cc:583
+msgid "Build mines"
+msgstr "Bouw mijnen"
+
+#: ../../src/fieldaction.cc:599
+msgid "Build flag"
+msgstr "Plaats vlag"
+
+#: ../../src/fieldaction.cc:601
+msgid "Cancel road"
+msgstr "Weg annuleren"
+
+#: ../../src/constructionsite.cc:207
+#, c-format
+msgid "%u%% built"
+msgstr "%u%% gebouwd"
+
+#: ../../src/trainingsite.cc:209
+msgid "Resting"
+msgstr "Rustend"
+
+#: ../../src/trainingsite.cc:211
+msgid "Not Working"
+msgstr "Niet werkend"
+
+#: ../../src/map.cc:413
+msgid "No Name"
+msgstr "Geen naam"
+
+#: ../../src/map.cc:414
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:152
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: ../../src/map.cc:415
+msgid "no description defined"
+msgstr "geen omschijving gedefinieerd"
+
+#: ../../src/map.cc:422
+msgid "Player 1"
+msgstr "Speler 1"
+
 #: ../../src/game_server_proto_packet_chatmessage.cc:67
 #, c-format
 msgid "Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"
 msgstr "Server antwoordde met illegale chat-bericht pakket. Hij moest %i sturen maar stuurde %i. Genegeerd"
 
-#: ../../src/militarysite.cc:74
-msgid " conquer"
-msgstr " verover"
+#: ../../src/nethost.cc:215
+msgid "Server has left the game."
+msgstr "Server heeft het spel verlaten."
 
-#: ../../src/militarysite.cc:138
+#: ../../src/nethost.cc:272
+msgid "The game has started just after you tried to connect."
+msgstr "Het spel is begonnen nadat je probeerde verbinding te maken."
+
+#: ../../src/nethost.cc:314
+msgid "Server has crashed and performed an emergency save."
+msgstr "Server is gecrashed en heeft een reddingsbestand opgeslagen."
+
+#: ../../src/nethost.cc:441
+msgid "Host has changed to a map that supports fewer players."
+msgstr "Host is gewijzigd naar een kaart die minder spelers ondersteunt."
+
+#: ../../src/nethost.cc:491
+msgid "You were kicked by the host."
+msgstr "U bent geweerd door de host."
+
+#: ../../src/nethost.cc:614
+msgid "There are no open player slots left."
+msgstr "Er zijn geen open spelerssloten over."
+
+#: ../../src/nethost.cc:694
+msgid "Client reports time to host that is running backwards."
+msgstr "Client rapport teruglopende tijd aan de host."
+
+#: ../../src/nethost.cc:696
+msgid "Client simulates beyond the game time allowed by the host."
+msgstr "Client simuleert langer dan de speltijd toegestaan door de host."
+
+#: ../../src/nethost.cc:699
+msgid "Client did not submit sync report in time."
+msgstr "Client heeft niet op tijd een synchronisatierapport ingestuurd."
+
+#: ../../src/nethost.cc:836
+msgid "Client and host have become desynchronized."
+msgstr "Client en host zijn niet langer gesynchroniseerd."
+
+#: ../../src/nethost.cc:874
+msgid "The game has already started."
+msgstr "Het spel is al gestart."
+
+#: ../../src/nethost.cc:885
+msgid "Connection to client lost."
+msgstr "Verbinding met client verloren."
+
+#: ../../src/nethost.cc:899
+msgid "Client sent malformed commands: "
+msgstr "Client zond misvormde commando's: "
+
+#: ../../src/nethost.cc:932
+msgid "Game is running already, but client has not connected fully"
+msgstr "Spel draait al, maar client is niet volledig verbonden."
+
+#: ../../src/nethost.cc:936
 #, c-format
-msgid "%u soldier (+%u)"
-msgid_plural "%u soldiers (+%u)"
-msgstr[0] "%u soldaat (+%u)"
-msgstr[1] "%u soldaten (+%u)"
+msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
+msgstr "Eerste commando gezonden door de client is %u in plaats van \"HELLO\". Waarschijnlijk draait de client een versie die niet met die op de host samengaat."
 
-#: ../../src/militarysite.cc:144
+#: ../../src/nethost.cc:941
+msgid "Server uses a different protocol version."
+msgstr "Server gebruikt een andere versie van het protocol."
+
+#: ../../src/nethost.cc:966
+msgid "Client sent TIME command even though game is not running."
+msgstr "Client zond \"TIME\" commando hoewel het spel niet draait."
+
+#: ../../src/nethost.cc:973
+msgid "Client sent PLAYERCOMMAND command even though game is not running."
+msgstr "Client zond \"PLAYERCOMMAND\"  commando hoewel het spel niet draait."
+
+#: ../../src/nethost.cc:982
+msgid "Client tries to sent a playercommand for a different player."
+msgstr "Client probeert een spelerscommando te zenden voor een andere speler."
+
+#: ../../src/nethost.cc:989
+msgid "Client sent unexpected synchronization report."
+msgstr "Client zond een onverwacht synchronisatierapport."
+
+#: ../../src/nethost.cc:1008
 #, c-format
-msgid "%u soldier"
-msgid_plural "%u soldiers"
-msgstr[0] "%u soldaat"
-msgstr[1] "%u soldaten"
+msgid "Client sent unknown command number %u"
+msgstr "Client zond onbekend commando nummer %u"
 
-#: ../../src/s2map.cc:248
-msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Bleubyte Settlers II Kaart. Geen commentaar gedefinieerd!"
-
-#: ../../src/playerdescrgroup.cc:38
-msgid "Player 2"
-msgstr "Speler 2"
-
-#: ../../src/playerdescrgroup.cc:39
-msgid "Player 3"
-msgstr "Speler 3"
-
-#: ../../src/playerdescrgroup.cc:40
-msgid "Player 4"
-msgstr "Speler 4"
-
-#: ../../src/playerdescrgroup.cc:41
-msgid "Player 5"
-msgstr "Speler 5"
-
-#: ../../src/playerdescrgroup.cc:42
-msgid "Player 6"
-msgstr "Speler 6"
-
-#: ../../src/playerdescrgroup.cc:43
-msgid "Player 7"
-msgstr "Speler 7"
-
-#: ../../src/playerdescrgroup.cc:44
-msgid "Player 8"
-msgstr "Speler 8"
-
-#: ../../src/playerdescrgroup.cc:125 ../../src/playerdescrgroup.cc:224
-msgid "Computer"
-msgstr "Computer"
-
-#: ../../src/playerdescrgroup.cc:125 ../../src/playerdescrgroup.cc:224
-msgid "Human"
-msgstr "Mens"
-
-#: ../../src/trainingsite.cc:214
-msgid "Resting"
-msgstr "Rustend"
-
-#: ../../src/trainingsite.cc:216
-msgid "Not Working"
-msgstr "Niet werkend"
-
-#: ../../src/game_options_menu.cc:49 ../../src/game_main_menu.cc:101
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-msgid "Options"
-msgstr "Opties"
-
-#: ../../src/game_options_menu.cc:60
-msgid "README"
-msgstr "LEESMIJ"
-
-#: ../../src/game_options_menu.cc:69
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
-msgid "License"
-msgstr "Licentie"
-
-#: ../../src/game_options_menu.cc:78
-msgid "Authors"
-msgstr "Auteurs"
-
-#: ../../src/game_options_menu.cc:97
-msgid "Save game"
-msgstr "Sla spel op"
-
-#: ../../src/game_options_menu.cc:107
-msgid "Load game"
-msgstr "Laad spel"
-
-#: ../../src/game_options_menu.cc:118
-msgid "Exit game"
-msgstr "Verlaat spel"
-
-#: ../../src/editor_game_base.cc:571
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:286
-msgid "Loading world data"
-msgstr "Wereldgegevens laden"
-
-#: ../../src/editor_game_base.cc:580
-#, c-format
-msgid "Loading tribe: %s"
-msgstr "Laden stam: %s"
-
-#: ../../src/general_statistics_menu.cc:64
-msgid "General Statistics"
-msgstr "Algemene statistieken"
-
-#: ../../src/general_statistics_menu.cc:143
-msgid "Land"
-msgstr "Land"
-
-#: ../../src/general_statistics_menu.cc:149
-msgid "Workers"
-msgstr "Werkers"
-
-#: ../../src/general_statistics_menu.cc:161
-msgid "Wares"
-msgstr "Goederen"
-
-#: ../../src/general_statistics_menu.cc:167
-msgid "Productivity"
-msgstr "Productiviteit"
-
-#: ../../src/general_statistics_menu.cc:173
-msgid "Kills"
-msgstr "Gedood"
-
-#: ../../src/general_statistics_menu.cc:179
-msgid "Military"
-msgstr "Leger"
-
-#: ../../src/game_debug_ui.cc:263
-msgid "Debug Field"
-msgstr "Debugveld"
-
-#: ../../src/game_debug_ui.cc:321
-msgid "height:"
-msgstr "hoogte:"
-
-#: ../../src/building_ui.cc:148
-msgid "Destroy building?"
-msgstr "Vernietig gebouw?"
-
-#: ../../src/building_ui.cc:162
-msgid "Do you really want to destroy this "
-msgstr "Wil je deze "
-
-#: ../../src/building_ui.cc:164
-msgid "?"
-msgstr " echt vernietigen?"
-
-#: ../../src/building_ui.cc:653 ../../src/events/event_message_box.cc:48
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:56
-msgid "Continue"
-msgstr "Ga verder"
-
-#: ../../src/building_ui.cc:653
-msgid "Stop"
-msgstr "Stop"
-
-#: ../../src/building_ui.cc:680
-#, c-format
-msgid "Enhance to %s"
-msgstr "Verbeter naar %s"
-
-#: ../../src/building_ui.cc:699
-msgid "Destroy"
-msgstr "Vernietig"
-
-#: ../../src/building_ui.cc:710 ../../src/building_ui.cc:846
-msgid "Show workarea"
-msgstr "Laat werkgebied zien"
-
-#: ../../src/building_ui.cc:721
-msgid "Debug"
-msgstr "Debug"
-
-#: ../../src/building_ui.cc:842
-msgid "Hide workarea"
-msgstr "Verberg werkgebied"
-
-#: ../../src/building_ui.cc:1144 ../../src/building_ui.cc:1151
-msgid "Worker Listing"
-msgstr "Werkerslijst"
-
-#: ../../src/building_ui.cc:1166
-msgid "Type: "
-msgstr "Type:"
-
-#: ../../src/building_ui.cc:1171
-msgid "Experience: "
-msgstr "Ervaring:"
-
-#: ../../src/building_ui.cc:1176
-msgid "Trying to become: "
-msgstr "Probeert te worden:"
-
-#: ../../src/building_ui.cc:1412
-msgid "Highest priority"
-msgstr "Hoogste prioriteit"
-
-#: ../../src/building_ui.cc:1420
-msgid "Normal priority"
-msgstr "Normale prioriteit"
-
-#: ../../src/building_ui.cc:1428
-msgid "Lowest priority"
-msgstr "Laagste prioriteit"
-
-#: ../../src/building_ui.cc:1462
-msgid "Show worker listing"
-msgstr "Laat werkerslijst zien"
-
-#: ../../src/building_ui.cc:1564 ../../src/building_ui.cc:2017
-msgid "HP"
-msgstr "HP"
-
-#: ../../src/building_ui.cc:1565 ../../src/building_ui.cc:2018
-msgid "AT"
-msgstr "AT"
-
-#: ../../src/building_ui.cc:1566 ../../src/building_ui.cc:2019
-msgid "DE"
-msgstr "DE"
-
-#: ../../src/building_ui.cc:1567 ../../src/building_ui.cc:2020
-msgid "EV"
-msgstr "EV"
-
-#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:2021
-msgid "Level"
-msgstr "Niveau"
-
-#: ../../src/building_ui.cc:1589 ../../src/building_ui.cc:2045
-msgid "Capacity"
-msgstr "Capaciteit"
-
-#: ../../src/building_ui.cc:1754
-msgid "Training Options"
-msgstr "Trainingopties"
-
-#: ../../src/building_ui.cc:1781
-msgid "Training mode : "
-msgstr "Trainingsmodus:"
-
-#: ../../src/building_ui.cc:1782
-msgid "Balanced"
-msgstr "Gebalanceerd"
-
-#: ../../src/building_ui.cc:1811
-msgid "Hit Points"
-msgstr "Levenspunten"
-
-#: ../../src/building_ui.cc:1828 ../../src/fieldaction.cc:474
-msgid "Attack"
-msgstr "Aanval"
-
-#: ../../src/building_ui.cc:1845
-msgid "Defense"
-msgstr "Verdediging"
-
-#: ../../src/building_ui.cc:1863
-msgid "Evade"
-msgstr "Vermijd"
-
-#: ../../src/building_ui.cc:1907
-msgid "Make heroes"
-msgstr "Maak helden"
-
-#: ../../src/building_ui.cc:1909
-msgid "Balanced army"
-msgstr "Gebalanceerd leger"
-
-#: ../../src/building_ui.cc:2056
-msgid "xx"
-msgstr "xx"
-
-#: ../../src/network.cc:345
-msgid "I have no name"
-msgstr "Ik heb geen naam"
-
-#: ../../src/network.cc:897
-msgid "Starting network game"
-msgstr "Netwerkspel starten"
-
-#: ../../src/network.cc:900 ../../src/network.cc:908
-msgid "Player"
-msgstr "Speler"
-
-#: ../../src/network.cc:901
-msgid "Status"
-msgstr "Status"
-
-#: ../../src/network.cc:912
-msgid "Waiting"
-msgstr "Wachtend"
-
-#: ../../src/network.cc:923
-msgid "Ready"
-msgstr "Klaar"
-
-#: ../../src/game_chat_menu.cc:56
-msgid "Chat Menu"
-msgstr "Chat menu"
-
-#: ../../src/game_chat_menu.cc:67
-msgid "Send"
-msgstr "Verstuur"
-
-#: ../../src/game_chat_menu.cc:72
-msgid "Show messages as overlays:"
-msgstr "Toon berichten als bekledingen:"
-
-#: ../../src/game_main_menu.cc:43
-#: ../../src/editor/ui_menus/editor_main_menu.cc:42
-msgid "Main Menu"
-msgstr "Hoofdmenu"
-
-#: ../../src/game_main_menu.cc:53
-msgid "General statistics"
-msgstr "Algemene statistieken"
-
-#: ../../src/game_main_menu.cc:61
-msgid "Ware statistics"
-msgstr "Goederenstatistieken"
-
-#: ../../src/game_main_menu.cc:69
-msgid "Building statistics"
-msgstr "Gebouwstatistieken"
-
-#: ../../src/game_main_menu.cc:85 ../../src/editor/editorinteractive.cc:132
-msgid "Objectives"
-msgstr "Doelen"
-
-#: ../../src/game_main_menu.cc:93
-msgid "Chat"
-msgstr "Chat"
-
-#: ../../src/constructionsite.cc:212
-msgid "built"
-msgstr "gebouwd"
-
-#: ../../src/fieldaction.cc:238
-msgid "Build small buildings"
-msgstr "Bouw kleine gebouwen"
-
-#: ../../src/fieldaction.cc:239
-msgid "Build medium buildings"
-msgstr "Bouw middelgrote gebouwen"
-
-#: ../../src/fieldaction.cc:240
-msgid "Build large buildings"
-msgstr "Bouw grote gebouwen"
-
-#: ../../src/fieldaction.cc:274
-msgid "Action"
-msgstr "Actie"
-
-#: ../../src/fieldaction.cc:380
-msgid "Build road"
-msgstr "Leg weg aan"
-
-#: ../../src/fieldaction.cc:385
-msgid "Destroy this flag"
-msgstr "Vernietig deze vlag"
-
-#: ../../src/fieldaction.cc:388
-msgid "Send geologist to explore site"
-msgstr "Stuur geoloog om locatie te verkennen"
-
-#: ../../src/fieldaction.cc:401
-msgid "Put a flag"
-msgstr "Plaats een vlag"
-
-#: ../../src/fieldaction.cc:404
-msgid "Destroy a road"
-msgstr "Vernietig weg"
-
-#: ../../src/fieldaction.cc:411
-msgid "Watch field in a separate window"
-msgstr "Bekijk veld in apart scherm"
-
-#: ../../src/fieldaction.cc:412
-msgid "Toggle building statistics display"
-msgstr "Gebouwstatistieken aan/uit"
-
-#: ../../src/fieldaction.cc:414
-msgid "Toggle building label display"
-msgstr "Gebouwlabels aan/uit"
-
-#: ../../src/fieldaction.cc:417
-msgid "Debug window"
-msgstr "Debug venster"
-
-#: ../../src/fieldaction.cc:423 ../../src/fieldaction.cc:573
-msgid "Build roads"
-msgstr "Leg wegen aan"
-
-#: ../../src/fieldaction.cc:455
-msgid "Send less soldiers"
-msgstr "Stuur minder soldaten"
-
-#: ../../src/fieldaction.cc:460
-msgid "Send more soldiers"
-msgstr "Stuur meer soldaten"
-
-#: ../../src/fieldaction.cc:462
-msgid "Most agressive attack"
-msgstr "Aggressiefste aanval"
-
-#: ../../src/fieldaction.cc:463
-msgid "Cautious attack"
-msgstr "Voorzichtigste aanval"
-
-#: ../../src/fieldaction.cc:465
-msgid "Start attack"
-msgstr "Start aanval"
-
-#: ../../src/fieldaction.cc:551
-msgid "Build mines"
-msgstr "Bouw mijnen"
-
-#: ../../src/fieldaction.cc:567
-msgid "Build flag"
-msgstr "Plaats vlag"
-
-#: ../../src/fieldaction.cc:569
-msgid "Cancel road"
-msgstr "Weg annuleren"
-
-#: ../../src/editor/editorinteractive.cc:76
-msgid "Tool"
-msgstr "Gereedschap"
-
-#: ../../src/editor/editorinteractive.cc:84
-msgid "Toolsize"
-msgstr "Gereedschapsgrootte"
-
-#: ../../src/editor/editorinteractive.cc:108
-msgid "Players"
-msgstr "Spelers"
-
-#: ../../src/editor/editorinteractive.cc:116
-msgid "Events"
-msgstr "Gebeurtenissen"
-
-#: ../../src/editor/editorinteractive.cc:124
-msgid "Variables"
-msgstr "Variabelen"
-
-#: ../../src/editor/editorinteractive.cc:160
-msgid "Map unsaved"
-msgstr "Kaart niet opgeslagen"
-
-#: ../../src/editor/editorinteractive.cc:161
-msgid "The Map is unsaved, do you really want to quit?"
-msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wil afsluiten?"
-
-#: ../../src/events/event_allow_building.cc:39
-#: ../../src/events/event_factory.cc:49
-msgid "Allow Building"
-msgstr "Sta gebouw toe"
-
-#: ../../src/events/event_message_box.cc:40
-#: ../../src/events/event_factory.cc:45
-msgid "Message Box"
-msgstr "Berichtenruimte"
-
-#: ../../src/events/event_message_box.cc:41
-msgid "No text defined"
-msgstr "Geen tekst bepaald"
-
-#: ../../src/events/event_message_box.cc:42
-msgid "Window Title"
-msgstr "Schermtitel"
-
-#: ../../src/events/event_move_view.cc:38
-#: ../../src/events/event_unhide_objective.cc:39
-#: ../../src/events/event_factory.cc:46
-msgid "Move View"
-msgstr "Verplaats beeld"
-
-#: ../../src/events/event_factory.cc:45
-msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
-msgstr "Deze gebeurtenis geeft een berichtenscherm weer. De gebruiker kan het modaal/niet-modaal maken en een plaatje toevoegen. Gebeurtenissen kunnen aan iedere knop toegevoegd worden om hiervan een keuzedialoog te maken"
-
-#: ../../src/events/event_factory.cc:46
-msgid "This Event centers the Players View on a certain field"
-msgstr "Deze gebeurtenis centreert het scherm van de Speler op een bepaald veld"
-
-#: ../../src/events/event_factory.cc:47
-#: ../../src/events/event_unhide_area.h:39
-msgid "Unhide Area"
-msgstr "Maak gebied zichtbaar"
-
-#: ../../src/events/event_factory.cc:47
-msgid "This Event makes a user definable part of the map visible for a selectable user"
-msgstr "Deze gebeurtenis maakt een door de gebruiker definieerbaar deel van de map zichtbaar voor een bepaalde gebruiker"
-
-#: ../../src/events/event_factory.cc:48
-#: ../../src/events/event_conquer_area.h:32
-msgid "Conquer Area"
-msgstr "Verover gebied"
-
-#: ../../src/events/event_factory.cc:48
-msgid "This Event conquers a user definable part of the map for one player if there isn't a player already there"
-msgstr "Deze Gebeurtenis verovert een door de gebruiker definieerbaar deel van de kaart voor één speler als daar nog geen speler is"
-
-#: ../../src/events/event_factory.cc:49
-msgid "Allows/Disables a certain building for a player so that it can be build or it can't any longer"
-msgstr "Staat toe/Verbiedt een bepaald gebouw voor een speler zodat hij het kan bouwen of juist niet."
-
-#: ../../src/events/event_set_null_trigger.cc:40
-msgid "Set Null Trigger"
-msgstr "Zet beginconditie"
-
-#: ../../src/trigger/trigger_null.cc:32
-#: ../../src/trigger/trigger_factory.cc:37
-msgid "Null Trigger"
-msgstr "Beginconditie"
-
-#: ../../src/trigger/trigger_building.cc:38
-#: ../../src/trigger/trigger_factory.cc:38
+#: ../../src/trigger/trigger_factory.cc:39
 msgid "Building Trigger"
 msgstr "Bouwconditie"
 
-#: ../../src/trigger/trigger_building.cc:40
-msgid "<unset>"
-msgstr "<niet gezet>"
+#: ../../src/trigger/trigger_factory.cc:41
+msgid "Triggers when the player has the specified number of buildings of the specified type in the specified area."
+msgstr "Conditie dat de speler het aangegeven aantal gebouwen van het aangegeven type in het aangegeven gebied heeft."
 
-#: ../../src/trigger/trigger_time.cc:35
-#: ../../src/trigger/trigger_factory.cc:36
+#: ../../src/trigger/trigger_factory.cc:45
+msgid "Military influence Trigger"
+msgstr "Militaire invloed conditie"
+
+#: ../../src/trigger/trigger_factory.cc:47
+msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
+msgstr "Conditie dat de speler enige (of de meeste) militaire invloed heeft over het aangegeven aantal knooppunten in het aangegeven gebied."
+
+#: ../../src/trigger/trigger_factory.cc:51
+msgid "Null Trigger"
+msgstr "Beginconditie"
+
+#: ../../src/trigger/trigger_factory.cc:53
+msgid "Never triggers by itself. It is useful to pass it to some event which changes triggers"
+msgstr "Deze conditie veranderd zelf nooit van status. Deze is zinvol om door te geven aan gebeurtenissen die condities veranderen."
+
+#: ../../src/trigger/trigger_factory.cc:57
+msgid "Own Area Trigger"
+msgstr "bezet gebied conditie"
+
+#: ../../src/trigger/trigger_factory.cc:59
+msgid "Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
+msgstr "Conditie dat de speler in ieder geval het aangegeven aantal locaties bezit in het aangegeven gebied. Wordt op onwaar gezet als er niet meer aan voldoen wordt, tenzij het een tijdsgebonden conditie is."
+
+#: ../../src/trigger/trigger_factory.cc:64
 msgid "Time Trigger"
 msgstr "Tijdsconditie"
 
-#: ../../src/trigger/trigger_factory.cc:36
+#: ../../src/trigger/trigger_factory.cc:66
 msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
 msgstr "Deze conditie wacht een bepaalde tijd voor hij waar wordt. Deze kan worden geconfigureerd om zichzelf continu te herstarten wanneer de wachttijd is over, zodat gebeurtenissen kunnen worden herhaald."
 
-#: ../../src/trigger/trigger_factory.cc:37
-msgid "This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers"
-msgstr "Deze conditie veranderd zelf nooit van status. Deze is echter zinvol om door te geven aan gebeurtenissen die condities veranderen."
+#: ../../src/trigger/trigger_factory.cc:71
+msgid "Vision Trigger"
+msgstr "Zichtconditie"
 
-#: ../../src/trigger/trigger_factory.cc:38
-msgid "This trigger gets set when a number of a building type of one player is available in an area."
-msgstr "Deze conditie wordt gezet als een aantal gebouwen van een type van een speler beschikbaar is in een gebied."
+#: ../../src/trigger/trigger_factory.cc:73
+msgid "Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
+msgstr "gebouwnamen "
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:78
-msgid "Lobby"
-msgstr "Hal"
+#: ../../src/events/event_factory.cc:46
+msgid "Allow building type"
+msgstr "Sta gebouwtype toe"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:98
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:60
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:65
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:258
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:46
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:47
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:60
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:43
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:75
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:38
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:87
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:185
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:118
-msgid "Back"
-msgstr "Terug"
+#: ../../src/events/event_factory.cc:48
+msgid "Allows (or forbids) the construction of a building type for a player"
+msgstr "Sta toe (of verbied) het oprichten van een gebouw voor een speler"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:182
-#, c-format
-msgid "User %s is using \"%s\" in room \"%s\"\n"
-msgstr "Gebruiker %s gebruikt \"%s\" in kamer \"%s\"\n"
+#: ../../src/events/event_factory.cc:51
+msgid "Create building"
+msgstr "Richt gebouw op"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
-#, c-format
-msgid "User %s has entered the room %s !\n"
-msgstr "Gebruiker %s is de kamer %s binnengekomen !\n"
+#: ../../src/events/event_factory.cc:52
+msgid "Create a building and optionally place workers in it"
+msgstr "Richt een gebouw op en plaats er eventueel arbeiders in"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
-#, c-format
-msgid "User %s has left the room %s !\n"
-msgstr "Gebruiker %s heeft de kamer %s verlaten!\n"
+#: ../../src/events/event_factory.cc:55
+msgid "Conquer area"
+msgstr "Verover gebied"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:234
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:246
-msgid "Critical Connection Error!"
-msgstr "Kritieke verbindingsfout!"
+#: ../../src/events/event_factory.cc:57
+msgid "Gives ownership of all unowned locations whithin an area to the player"
+msgstr "Geeft het eigendom van alle niet bezette locaties in een gebied aan de speler"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:247
-msgid "Server disconnected unexpectedly!"
-msgstr "Verbinding met server is onverwacht afgebroken!"
+#: ../../src/events/event_factory.cc:61
+msgid "Create flag"
+msgstr "Plaats vlag"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:55
-msgid "Apply"
-msgstr "Toepassen"
+#: ../../src/events/event_factory.cc:62
+msgid "Create a flag"
+msgstr "Plaats een vlag"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
-msgid "General Options"
-msgstr "Algemene opties"
+#: ../../src/events/event_factory.cc:65
+msgid "Create immovable"
+msgstr "Creëer onverplaatsbare"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:62
-msgid "Fullscreen"
-msgstr "Volledig scherm"
+#: ../../src/events/event_factory.cc:66
+msgid "Create an immovable"
+msgstr "Creëer een onverplaatsbare"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
-msgid "Grab Input"
-msgstr "Pak invoer"
+#: ../../src/events/event_factory.cc:69
+msgid "Show message box"
+msgstr "Toon berichtvenster"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:70
-msgid "Enable Music"
-msgstr "Zet muziek aan"
+#: ../../src/events/event_factory.cc:71
+msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
+msgstr "Deze gebeurtenis geeft een berichtenscherm weer. De gebruiker kan het modaal/niet-modaal maken en een plaatje toevoegen. Gebeurtenissen kunnen aan iedere knop toegevoegd worden om hiervan een keuzedialoog te maken"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
-msgid "Enable Sound"
-msgstr "Zet geluid aan"
+#: ../../src/events/event_factory.cc:76
+msgid "Move view"
+msgstr "Verplaats beeld"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:78
-msgid "In-game resolution"
-msgstr "Spelresolutie"
+#: ../../src/events/event_factory.cc:77
+msgid "This Event centers the Players View on a certain location"
+msgstr "Deze gebeurtenis centreert het scherm van de Speler op een bepaalde locatie"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:81
-msgid "Language"
-msgstr "Taal"
+#: ../../src/events/event_factory.cc:80
+msgid "Reveal campaign"
+msgstr "Toon campagne"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:85
-msgid "In-game Options"
-msgstr "Spelopties"
+#: ../../src/events/event_factory.cc:81
+msgid "Reveal a campaign"
+msgstr "Toon een campagne"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:91
-msgid "Use single Watchwindow Mode"
-msgstr "Gebruik een enkel Detailscherm"
+#: ../../src/events/event_factory.cc:84
+msgid "Reveal objective"
+msgstr "Toon doel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:95
-msgid "Show buildings area preview"
-msgstr "Werkgebied van gebouw tonen"
+#: ../../src/events/event_factory.cc:85
+msgid "Reveal (or hide) an objective"
+msgstr "Toon (of verberg) een doel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:99
-msgid "Snap windows only when overlapping"
-msgstr "Haak schermen alleen bij overlappen"
+#: ../../src/events/event_factory.cc:88
+msgid "Reveal scenario"
+msgstr "Toon scenario"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:103
-msgid "Dock windows to edges"
-msgstr "Zet schermen vast aan de randen"
+#: ../../src/events/event_factory.cc:89
+msgid "Reveal a scenario"
+msgstr "Toon een scenario"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:126
-#, c-format
-msgid "Autosave game every %d minute"
-msgid_plural "Autosave game every %d minutes"
-msgstr[0] "Spel automatisch elke %d minuut opslaan"
-msgstr[1] "Spel automatisch elke %d minuten opslaan"
+#: ../../src/events/event_factory.cc:92
+msgid "Create road"
+msgstr "Leg weg aan"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:182
-msgid "System default language"
-msgstr "Standaard systeemtaal"
+#: ../../src/events/event_factory.cc:93
+msgid "Create a road and optionally place a carrier on it"
+msgstr "Leg een weg aan en plaats er eventueel een drager op"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:30
-msgid "Single Player Menu"
-msgstr "Enige speler menu"
+#: ../../src/events/event_factory.cc:96
+msgid "Set null trigger"
+msgstr "Zet beginconditie"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:39
-msgid "New Game"
-msgstr "Nieuw Spel"
+#: ../../src/events/event_factory.cc:97
+msgid "Manually set a Null Trigger to a given value"
+msgstr "Zet handmatig een beginconditie op een bepaalde waarde"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:53
-msgid "Campaigns"
-msgstr "Campagnes"
+#: ../../src/events/event_factory.cc:100
+msgid "Unhide area"
+msgstr "Maak gebied zichtbaar"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:43
-msgid "Select a campaign"
-msgstr "Selecteer campagne"
+#: ../../src/events/event_factory.cc:102
+msgid "Gives vision for a specified amount of time of all locations whithin an area to the player."
+msgstr "Geeft voor een bepaalde tijd zich op alle locaties binnen een gebied aan de speler"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:49
-msgid "Campaign:"
-msgstr "Campagne:"
+#: ../../src/events/event_message_box.cc:42
+msgid "No text defined"
+msgstr "Geen tekst bepaald"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:51
-msgid "Difficulty:"
-msgstr "Moeilijkheidsgraad:"
+#: ../../src/events/event_message_box.cc:43
+msgid "Window Title"
+msgstr "Schermtitel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:53
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:246
-msgid "Description:"
-msgstr "Omschrijving:"
+#: ../../src/editor/editorinteractive.cc:65
+msgid "Tool"
+msgstr "Gereedschap"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:124
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:135
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:137
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:206
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:328
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:329
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:330
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:388
-msgid "[No value found]"
-msgstr "[Geen waarde gevonden]"
+#: ../../src/editor/editorinteractive.cc:69
+msgid "Toolsize"
+msgstr "Gereedschapsgrootte"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:125
-msgid "Easy living"
-msgstr "Luilekkerland"
+#: ../../src/editor/editorinteractive.cc:81
+msgid "Players"
+msgstr "Spelers"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:126
-msgid "Be vigilant"
-msgstr "Op je hoede"
+#: ../../src/editor/editorinteractive.cc:85
+msgid "Events"
+msgstr "Gebeurtenissen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:127
-msgid "Hard struggle"
-msgstr "Harde strijd"
+#: ../../src/editor/editorinteractive.cc:89
+msgid "Variables"
+msgstr "Variabelen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:141
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:334
-msgid "[Invalid entry]"
-msgstr "[Ongeldige invoer]"
+#: ../../src/editor/editorinteractive.cc:213
+msgid "Map unsaved"
+msgstr "Kaart niet opgeslagen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:236
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:42
-msgid "Choose your map!"
-msgstr "Kies je kaart!"
+#: ../../src/editor/editorinteractive.cc:214
+msgid "The Map is unsaved, do you really want to quit?"
+msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wil afsluiten?"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:242
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:57
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:46
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:51
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:51
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:53
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:73
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:64
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:72
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:58
-msgid "Name:"
-msgstr "Naam:"
+#: ../../src/ui/ui_basic/ui_messagebox.cc:92
+#: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
+msgid "Yes"
+msgstr "Ja"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:244
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:59
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:65
-msgid "Author:"
-msgstr "Auteur:"
+#: ../../src/ui/ui_basic/ui_messagebox.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
+msgid "No"
+msgstr "Nee"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:30
-msgid "Internet Options"
-msgstr "Internetopties"
+#: ../../src/ui/ui_basic/ui_progresswindow.cc:42
+msgid "Preparing..."
+msgstr "Voorbereiden..."
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:39
-msgid "Run Game"
-msgstr "Speel spel"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:34
+msgid "Single Player"
+msgstr "Alleen spelen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:54
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:85
-msgid "nobody"
-msgstr "niemand"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:41
+msgid "Multi Player"
+msgstr "Meerdere spelers"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:40
-msgid "Launch Game"
-msgstr "lanceer spel"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:48
+msgid "Watch Replay"
+msgstr "Bekijk herhaling"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:54
-msgid "Start game"
-msgstr "Start spel"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:62
+msgid "Editor"
+msgstr "Editor"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:65
-msgid "Select map"
-msgstr "Selecteer kaart"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu.cc:77
+msgid "View Readme"
+msgstr "Bekijk de leesmij"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:144
-msgid "(no map)"
-msgstr "(geen kaart)"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:83
+msgid "Exit Game"
+msgstr "Sluit spel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:156
-#: ../../src/editor/ui_menus/editor_player_menu.cc:240
-msgid "Player "
-msgstr "Speler"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:89
+msgid "Version "
+msgstr "Versie"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:93
+msgid "(C) 2002-2008 by the Widelands Development Team"
+msgstr "(C) 2002-2008 door het Widelands ontwikkelingsteam"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
 msgid "Begin Network Game"
@@ -1320,563 +1320,744 @@ msgstr "Sluit je aan bij spel"
 msgid "Host a New Game"
 msgstr "Organiseer een nieuw spel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:53
-msgid "Play in Internet"
-msgstr "Speel over internet"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:65
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:43
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:98
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:66
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:38
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:56
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:41
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:103
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:62
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:257
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:115
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:85
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:183
+msgid "Back"
+msgstr "Terug"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:77
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:214
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:225
 msgid "LAN games"
 msgstr "Netwerkspel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:86
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:84
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:51
+msgid "nobody"
+msgstr "niemand"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:85
 msgid "Host"
 msgstr "Host"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:88
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
 msgid "State"
 msgstr "Status"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
-msgid "Open"
-msgstr "Open"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:140
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:151
 msgid "Closed"
 msgstr "Gesloten"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:207
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:229
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:217
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:239
 msgid "GGZ games"
 msgstr "GGZ-spelen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:57
-msgid "Choose saved game!"
-msgstr "Kies opgeslagen spel!"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:53
+msgid "Apply"
+msgstr "Toepassen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:60
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:52
-msgid "Map Name:"
-msgstr "Kaartnaam:"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:55
+msgid "General Options"
+msgstr "Algemene opties"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:62
-msgid "Gametime:"
-msgstr "Speeltijd:"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
+msgid "Fullscreen"
+msgstr "Volledig scherm"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:46
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:61
+msgid "Grab Input"
+msgstr "Pak invoer"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:64
+msgid "Enable Music"
+msgstr "Zet muziek aan"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:67
+msgid "Enable Sound"
+msgstr "Zet geluid aan"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:70
+msgid "In-game resolution"
+msgstr "Spelresolutie"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:72
+msgid "Language"
+msgstr "Taal"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:76
+msgid "In-game Options"
+msgstr "Spelopties"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:80
+msgid "Use single Watchwindow Mode"
+msgstr "Gebruik een enkel Detailscherm"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:84
+msgid "Show buildings area preview"
+msgstr "Werkgebied van gebouw tonen"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:88
+msgid "Snap windows only when overlapping"
+msgstr "Haak schermen alleen bij overlappen"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:92
+msgid "Dock windows to edges"
+msgstr "Zet schermen vast aan de randen"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:117
+#, c-format
+msgid "Autosave game every %d minute"
+msgid_plural "Autosave game every %d minutes"
+msgstr[0] "Spel automatisch elke %d minuut opslaan"
+msgstr[1] "Spel automatisch elke %d minuten opslaan"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:169
+msgid "System default language"
+msgstr "Standaard systeemtaal"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
+msgid "Internet Options"
+msgstr "Internetopties"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:36
+msgid "Run Game"
+msgstr "Speel spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:66
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:236
+msgid "Choose your map!"
+msgstr "Kies je kaart!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:69
 msgid "Load Map as scenario: "
 msgstr "Laad kaart als scenario:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:61
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:56
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:80
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:242
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:71
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:60
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:56
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:57
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:108
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:68
+msgid "Name:"
+msgstr "Naam:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:82
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:244
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:74
+msgid "Author:"
+msgstr "Auteur:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:84
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 msgid "Size:"
 msgstr "Grootte:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:63
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:62
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:67
 msgid "World:"
 msgstr "Wereld:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:65
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:88
 msgid "Players:"
 msgstr "Spelers:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:67
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:90
 msgid "Descr:"
 msgstr "Omschrijving:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
-msgid "Single Player"
-msgstr "Alleen spelen"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:58
+msgid "Launch Game"
+msgstr "lanceer spel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
-msgid "Multi Player"
-msgstr "Meerdere spelers"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:73
+msgid "Start game"
+msgstr "Start spel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
-msgid "Watch Replay"
-msgstr "Bekijk herhaling"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:84
+msgid "Select map"
+msgstr "Selecteer kaart"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:70
-msgid "Editor"
-msgstr "Editor"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:77
-#: ../../src/editor/ui_menus/editor_main_menu.cc:104
-msgid "View Readme"
-msgstr "Bekijk de leesmij"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-msgid "Exit Game"
-msgstr "Sluit spel"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:94
-msgid "Version"
-msgstr "Versie"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:98
-msgid "(C) 2002-2008 by the Widelands Development Team"
-msgstr "(C) 2002-2008 door het Widelands ontwikkelingsteam"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:47
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:48
 msgid "Choose a replay!"
 msgstr "Kies herhaling!"
 
-#: ../../src/ui/ui_basic/ui_modal_messagebox.cc:59
-msgid "Yes"
-msgstr "Ja"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:28
+msgid "Single Player Menu"
+msgstr "Enige speler menu"
 
-#: ../../src/ui/ui_basic/ui_modal_messagebox.cc:66
-msgid "No"
-msgstr "Nee"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:35
+msgid "New Game"
+msgstr "Nieuw Spel"
 
-#: ../../src/ui/ui_basic/ui_progresswindow.cc:42
-msgid "Preparing..."
-msgstr "Voorbereiden..."
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:42
+msgid "Load Game"
+msgstr "Laad spel"
 
-#: ../../src/editor/tools/editor_info_tool.cc:45
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:49
+msgid "Campaigns"
+msgstr "Campagnes"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:54
+msgid "Choose saved game!"
+msgstr "Kies opgeslagen spel!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:57
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:53
+msgid "Map Name:"
+msgstr "Kaartnaam:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:59
+msgid "Gametime:"
+msgstr "Speeltijd:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:71
+msgid "Lobby"
+msgstr "Hal"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:181
+#, c-format
+msgid "User %s is using \"%s\" in room \"%s\"\n"
+msgstr "Gebruiker %s gebruikt \"%s\" in kamer \"%s\"\n"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:225
+#, c-format
+msgid "User %s has entered the room %s !\n"
+msgstr "Gebruiker %s is de kamer %s binnengekomen !\n"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:227
+#, c-format
+msgid "User %s has left the room %s !\n"
+msgstr "Gebruiker %s heeft de kamer %s verlaten!\n"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:241
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:251
+msgid "Critical Connection Error!"
+msgstr "Kritieke verbindingsfout!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:252
+msgid "Server disconnected unexpectedly!"
+msgstr "Verbinding met server is onverwacht afgebroken!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:41
+msgid "Select a campaign"
+msgstr "Selecteer campagne"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:47
+msgid "Campaign:"
+msgstr "Campagne:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:49
+msgid "Difficulty:"
+msgstr "Moeilijkheidsgraad:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:51
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:246
+msgid "Description:"
+msgstr "Omschrijving:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:89
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:131
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:133
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:206
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:324
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:325
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:326
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:390
+msgid "[No value found]"
+msgstr "[Geen waarde gevonden]"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:90
+msgid "Easy living"
+msgstr "Luilekkerland"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:91
+msgid "Be vigilant"
+msgstr "Op je hoede"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:92
+msgid "Hard struggle"
+msgstr "Harde strijd"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:137
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:330
+msgid "[Invalid entry]"
+msgstr "[Ongeldige invoer]"
+
+#: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
 msgstr "Veldinformatie"
 
-#: ../../src/editor/tools/editor_info_tool.cc:53
-msgid "1) Field Infos"
-msgstr "1) Veldinformatie"
+#: ../../src/editor/tools/editor_info_tool.cc:56
+#, c-format
+msgid ""
+"1) Node infos\n"
+" Coordinates: (%i, %i)\n"
+" Height: %u\n"
+" Caps: "
+msgstr ""
+"1) Knooppuntinfo\n"
+" Coördinaten: (%i, %i)\n"
+" Hoogte: %u\n"
+" Mogelijkheden:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:57
-msgid "Coordinates"
-msgstr "Coördinaten"
-
-#: ../../src/editor/tools/editor_info_tool.cc:60
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:81
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:156
-msgid "Height"
-msgstr "Hoogte"
-
-#: ../../src/editor/tools/editor_info_tool.cc:61
-msgid " Caps: "
-msgstr " Kappen:"
-
-#: ../../src/editor/tools/editor_info_tool.cc:63
+#: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "small"
 msgstr "klein"
 
-#: ../../src/editor/tools/editor_info_tool.cc:64
+#: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "medium"
 msgstr "gemiddeld"
 
-#: ../../src/editor/tools/editor_info_tool.cc:65
+#: ../../src/editor/tools/editor_info_tool.cc:64
 msgid "big"
 msgstr "groot"
 
-#: ../../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " flag"
 msgstr " vlag"
 
-#: ../../src/editor/tools/editor_info_tool.cc:68
+#: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " mine"
 msgstr " mijn"
 
-#: ../../src/editor/tools/editor_info_tool.cc:69
+#: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " port"
 msgstr " haven"
 
-#: ../../src/editor/tools/editor_info_tool.cc:70
+#: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " walk"
 msgstr " loop"
 
-#: ../../src/editor/tools/editor_info_tool.cc:71
+#: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " swim"
 msgstr " zwem"
 
-#: ../../src/editor/tools/editor_info_tool.cc:73
-msgid "Owned by"
-msgstr "Bezet door"
-
 #: ../../src/editor/tools/editor_info_tool.cc:74
-msgid "Has base immovable"
-msgstr "Heeft geen verplaatsbare basis"
+#, c-format
+msgid ""
+"\n"
+" Owned by %i\n"
+" Has base immovable: %s\n"
+" Has bobs: %s\n"
+msgstr ""
+"\n"
+" Bezet door %i\n"
+" Heeft onverplaatsbare basis: %s\n"
+" Heeft bobs: %s\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:75
-msgid "Has bobs"
-msgstr "Heeft bobs"
-
-#: ../../src/editor/tools/editor_info_tool.cc:82
-msgid "Has resources: Yes"
-msgstr "Heeft middelen: Ja"
-
-#: ../../src/editor/tools/editor_info_tool.cc:84
-msgid "amount of"
-msgstr "aantal van"
+#: ../../src/editor/tools/editor_info_tool.cc:80
+msgid ""
+"2) Terrain Info\n"
+" Name: "
+msgstr ""
+"2) Terreininformatie\n"
+" Naam:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
-msgid " Has resources: No\n"
-msgstr " Heeft middelen: Nee\n"
+msgid ""
+"\n"
+" Texture Number: %i\n"
+msgstr ""
+"\n"
+" Patroonnummer:%i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:91
-msgid "Start resources amount"
-msgstr "Startmiddelen"
+#: ../../src/editor/tools/editor_info_tool.cc:92
+msgid ""
+"4) Map Info\n"
+" Name: "
+msgstr ""
+"4) Kaartinformatie\n"
+" Naam:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:94
+#: ../../src/editor/tools/editor_info_tool.cc:96
 #, c-format
-msgid " Roads: TODO!\n"
-msgstr " Wegen: Nog te doen!\n"
+msgid ""
+"Size: %ix%i\n"
+" Author: "
+msgstr ""
+"Formaat: %ix%i\n"
+" Auteur:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:97
-msgid "2) Terrain Info\n"
-msgstr "2) Terreininformatie\n"
+#: ../../src/editor/tools/editor_info_tool.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:110
+msgid ""
+"\n"
+" Descr: "
+msgstr ""
+"\n"
+" Omschr:"
+
+#: ../../src/editor/tools/editor_info_tool.cc:103
+#, c-format
+msgid ""
+"\n"
+" Number of Players: %i\n"
+msgstr ""
+"\n"
+" Aantal spelers: %i\n"
+
+#: ../../src/editor/tools/editor_info_tool.cc:106
+msgid ""
+"5) World Info\n"
+" Name: "
+msgstr ""
+"5) Wereldinformatie\n"
+" Naam:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
-msgid "Texture Number"
-msgstr "Patroonnummer"
+msgid ""
+"\n"
+" Author: "
+msgstr ""
+"\n"
+" Auteur:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:113
-msgid "4) Map Info"
-msgstr "4) Kaartinformatie"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:45
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
+#, c-format
+msgid "Player: %u"
+msgstr "Speler: %u"
 
-#: ../../src/editor/tools/editor_info_tool.cc:115
-msgid "Size"
-msgstr "Grootte"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:55
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
+#, c-format
+msgid "Building: %s"
+msgstr "Gebouw: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:116
-#: ../../src/editor/tools/editor_info_tool.cc:125
-msgid "Author"
-msgstr "Auteur"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:67
+msgid "Allow Building Event Options"
+msgstr "Sta gebouwengebeurtenis toe opties"
 
-#: ../../src/editor/tools/editor_info_tool.cc:117
-#: ../../src/editor/tools/editor_info_tool.cc:127
-msgid "Descr"
-msgstr "Omschrijving"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:124
+msgid "Allow Building: "
+msgstr "Sta gebouw toe: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:118
-#: ../../src/editor/ui_menus/editor_player_menu.cc:74
-msgid "Number of Players"
-msgstr "Aantal spelers"
-
-#: ../../src/editor/tools/editor_info_tool.cc:119
-msgid " TODO: more information (number of resources, number of terrains...)"
-msgstr " Nog te doen: meer informatie (aantal middelen, aantal terreinen...)"
-
-#: ../../src/editor/tools/editor_info_tool.cc:122
-msgid "5) World Info"
-msgstr "5) Wereldinformatie"
-
-#: ../../src/editor/tools/editor_info_tool.cc:129
-msgid " TODO -- More information (Number of bobs/number of wares...)\n"
-msgstr "TE DOEN -- Meer informatie (aantal bobs/hoeveelheid goederen...)\n"
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:35
-msgid "Null Trigger Options"
-msgstr "Beginconditie opties"
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:58
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:164
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:233
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:74
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:196
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:73
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:235
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:179
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:134
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:150
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:111
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:296
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:202
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:158
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:135
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:247
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:82
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:166
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:207
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:87
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:179
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:312
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:224
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:108
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:177
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:176
 msgid "Ok"
 msgstr "Ok"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
-msgid "Make Directory"
-msgstr "Maak map"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:200
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:295
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:289
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:220
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:238
+#, c-format
+msgid "There is another event registered with the name \"%s\". Choose another name."
+msgstr "Er is een andere gebeurtenis geregistreerd met de naam \"%s\". Kies een andere naam."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
-msgid "Enter Directory Name: "
-msgstr "Voer mapnaam in:"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:205
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:300
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:294
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:117
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:225
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:536
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:276
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:243
+msgid "Name in use"
+msgstr "Naam in gebruik"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:57
-msgid "Event Menu"
-msgstr "Gebeurtenissenmenu"
+#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
+msgid "Bobs Menu"
+msgstr "Bobs Menu"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:68
-msgid "Event Chains: "
-msgstr "Gebeurtenissenketens:"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:75
-msgid "Registered Events: "
-msgstr "Geregistreerde gebeurtenissen:"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:82
-msgid "Registered Triggers"
-msgstr "Geregistreerde condities"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:95
-msgid "New Event Chain"
-msgstr "Nieuwe gebeurtenissenketen"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:104
-#: ../../src/editor/ui_menus/editor_event_menu.cc:135
-#: ../../src/editor/ui_menus/editor_event_menu.cc:167
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:283
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:200
-msgid "Edit"
-msgstr "Bewerk"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:115
-#: ../../src/editor/ui_menus/editor_event_menu.cc:146
-#: ../../src/editor/ui_menus/editor_event_menu.cc:178
-msgid "Del"
-msgstr "Verwijder"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:126
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:39
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:91
-msgid "New Event"
-msgstr "Nieuwe gebeurtenis"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:158
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:39
-msgid "New Trigger"
-msgstr "Nieuwe conditie"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:277
-msgid "Can't delete Event. It is in use by "
-msgstr "Kan gebeurtenis niet verwijderen. Het is in gebruik door"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:287
-#: ../../src/editor/ui_menus/editor_event_menu.cc:332
-#: ../../src/editor/ui_menus/editor_player_menu.cc:295
-#: ../../src/editor/ui_menus/editor_player_menu.cc:326
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:295
-msgid "Error!"
-msgstr "Fout!"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:322
-msgid "Can't delete Trigger. It is in use by "
-msgstr "Kan conditie niet verwijderen. Deze is in gebruik door"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:360
-#: ../../src/editor/ui_menus/editor_event_menu.cc:368
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:114
-msgid "Unnamed"
-msgstr "Niet benoemd"
-
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:39
-msgid "Move View Event Options"
-msgstr "Verplaatsbeeldgebeurtenis opties"
-
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:57
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:57
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:139
-msgid "Current position: "
-msgstr "Huidige positie:"
-
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:38
-msgid "Unhide Area Event Options"
-msgstr "Maak gebeid zichtbaargebeurtenisopties"
-
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:158
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:160
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:79
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
-msgid "Player: "
-msgstr "Speler:"
-
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:177
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:179
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:240
-msgid "Area: "
-msgstr "Gebied:"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:43
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:44
 msgid "Resources Tools Options"
 msgstr "Hulpmiddelenopties"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:49
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
 msgid "In-/Decrease Value"
 msgstr "Waarde Verhogen/Verlagen"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:82
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:83
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 msgid "Set Value"
 msgstr "Zet waarde"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:109
 msgid "Current Selection"
 msgstr "Huidige selectie"
 
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:54
-msgid "Allowed Buildings"
-msgstr "Toegestane gebouwen"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:60
-msgid "Allowed Buildings:"
-msgstr "Toegestane gebouwen:"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:67
-msgid "Forbidden Buildings:"
-msgstr "Verboden gebouwen:"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:87
-msgid "Forbid"
-msgstr "Verbied"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:138
-msgid "<-"
-msgstr "<-"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:98
-msgid "Allow"
-msgstr "Laat toe"
-
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:48
-#: ../../src/editor/ui_menus/editor_main_menu.cc:60
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:50
+#: ../../src/editor/ui_menus/editor_main_menu.cc:49
 msgid "New Map"
 msgstr "Nieuwe kaart"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:62
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:154
-msgid "Width"
-msgstr "Breedte"
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:63
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:155
+#, c-format
+msgid "Width: %u"
+msgstr "Breedte: %u"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:121
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:85
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:159
+#, c-format
+msgid "Height: %u"
+msgstr "Hoogte: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:124
 msgid "Create Map"
 msgstr "Maak kaart"
 
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:50
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:138
-msgid "Available Events: "
-msgstr "Beschikbare gebeurtenissen:"
+#: ../../src/editor/ui_menus/editor_player_menu.cc:41
+msgid "Player Options"
+msgstr "Speleropties"
 
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:63
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:62
-msgid "Description: "
-msgstr "Omschrijving:"
+#: ../../src/editor/ui_menus/editor_player_menu.cc:49
+msgid "Add player"
+msgstr "Speler toevoegen"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:39
-msgid "Edit Trigger Conditional"
-msgstr "Bewerk voorwaardelijke conditie"
+#: ../../src/editor/ui_menus/editor_player_menu.cc:58
+msgid "Remove last player"
+msgstr "Verwijder laatste speler"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:53
-msgid "Trigger Conditional: "
-msgstr "Voorwaardelijke conditie:"
+#: ../../src/editor/ui_menus/editor_player_menu.cc:71
+msgid "Number of Players"
+msgstr "Aantal spelers"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:69
-msgid "("
-msgstr "("
+#: ../../src/editor/ui_menus/editor_player_menu.cc:194
+msgid "Player "
+msgstr "Speler"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:81
-msgid ")"
-msgstr ")"
+#: ../../src/editor/ui_menus/editor_player_menu.cc:247
+#: ../../src/editor/ui_menus/editor_player_menu.cc:279
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:275
+#: ../../src/editor/ui_menus/editor_event_menu.cc:284
+#: ../../src/editor/ui_menus/editor_event_menu.cc:326
+msgid "Error!"
+msgstr "Fout!"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:93
-msgid "AND"
-msgstr "EN"
+#: ../../src/editor/ui_menus/editor_player_menu.cc:249
+msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again"
+msgstr "Kan de speler niet verwijderen. Er wordt ergens nog naar deze speler verwezen. Verwijder all gebouwen, bobs, condities en gebeurtenissen die naar deze speler verwijderen en probeer het opnieuw."
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:105
-msgid "OR"
-msgstr "OF"
+#: ../../src/editor/ui_menus/editor_player_menu.cc:281
+msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr "Kan de stam van de speler niet wijzigen. Er wordt ergens naar verwezen. Verwijder alle gebouwen, bobs, condities en gebeurtenissen die van de stam afhangen en probeer het opnieuw"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:117
-msgid "XOR"
-msgstr "EXCLUSIEF OF"
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:51
+#: ../../src/editor/ui_menus/editor_main_menu.cc:56
+msgid "Load Map"
+msgstr "Laad kaart"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:129
-msgid "NOT"
-msgstr "NIET"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:139
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:101
-msgid "Insert"
-msgstr "Tussenvoegen"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:149
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:292
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:211
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:111
-msgid "Delete"
-msgstr "Verwijder"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:176
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:50
-msgid "Available Triggers: "
-msgstr "Beschikbare condities:"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:266
-msgid "Syntax Error"
-msgstr "Syntaxfout"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:267
-msgid "Your conditional contains at least one syntax error. Please correct!\n"
-msgstr "Je conditie bevat minstens een syntaxfout. Graag verbeteren!\n"
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:41
-#: ../../src/editor/ui_menus/editor_main_menu.cc:93
-msgid "Map Options"
-msgstr "Kaartopties"
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:59
-msgid "Nr Players:"
-msgstr "Aantal spelers:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
-msgid "Nothing defined!"
-msgstr "Niets bepaald!"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
-#: ../../src/editor/ui_menus/editor_main_menu.cc:82
-msgid "Save Map"
-msgstr "Sla kaart op"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:77
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:76
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:69
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:58
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
 msgid "Name: "
 msgstr "Naam:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:82
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:81
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:76
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:88
 msgid "Author: "
 msgstr "Auteur:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:87
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:93
 msgid "Size: "
 msgstr "Grootte:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:92
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:88
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:98
 msgid "World: "
 msgstr "Wereld:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:96
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:95
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
 msgid "Players: "
 msgstr "Spelers:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:103
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:102
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
 msgid "Descr: "
 msgstr "Omschrijving:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:180
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
+msgid "Unhide Area Event Options"
+msgstr "Maak gebeid zichtbaargebeurtenisopties"
+
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:72
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:67
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:67
+msgid "Current position: "
+msgstr "Huidige positie:"
+
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:178
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:173
+msgid "Player: "
+msgstr "Speler:"
+
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:198
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:192
+msgid "Area: "
+msgstr "Gebied:"
+
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
+msgid "Height Tools Options"
+msgstr "Hoogte gereedschap opties"
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:49
+msgid "Conquer Area Event Options"
+msgstr "Verovergebeurtenis opties"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:45
+msgid "Tool Menu"
+msgstr "Gereedschapsmenu"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:63
+msgid "Change height"
+msgstr "Verander hoogte"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:70
+msgid "Noise height"
+msgstr "Lawaaivolume"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:84
+msgid "Immovable"
+msgstr "Onbeweegbaar"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:91
+msgid "Bob"
+msgstr "Bob"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:98
+msgid "Resource"
+msgstr "Grondstof"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:44
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:97
+#: ../../src/editor/ui_menus/editor_event_menu.cc:130
+msgid "New Event"
+msgstr "Nieuwe gebeurtenis"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:54
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:144
+msgid "Available Events: "
+msgstr "Beschikbare gebeurtenissen:"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:66
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:71
+msgid "Description: "
+msgstr "Omschrijving:"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:55
+msgid "Allowed Buildings"
+msgstr "Toegestane gebouwen"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:61
+msgid "Allowed Buildings:"
+msgstr "Toegestane gebouwen:"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:68
+msgid "Forbidden Buildings:"
+msgstr "Verboden gebouwen:"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:88
+msgid "Forbid"
+msgstr "Verbied"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:98
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:145
+msgid "<-"
+msgstr "<-"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:99
+msgid "Allow"
+msgstr "Laat toe"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:45
+msgid "Terrain Select"
+msgstr "Selecteer terrein"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:158
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:209
+msgid "Current:"
+msgstr "Huidig:"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:48
+msgid "Edit Event Chain"
+msgstr "Bewerk gebeurtenissenketen"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:66
+msgid "Runs multiple times"
+msgstr "Loopt meerdere keren"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:72
+msgid "Events: "
+msgstr "Gebeurtenissen:"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:88
+msgid "Conditional"
+msgstr "Voorwaardelijk"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:107
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:146
+msgid "Insert"
+msgstr "Tussenvoegen"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:117
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:156
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:197
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:279
+msgid "Delete"
+msgstr "Verwijder"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:129
+msgid "Up"
+msgstr "Omhoog"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:57
+#: ../../src/editor/ui_menus/editor_main_menu.cc:63
+msgid "Save Map"
+msgstr "Sla kaart op"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:143
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
+msgid "Make Directory"
+msgstr "Maak map"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:191
 msgid "unnamed"
 msgstr "niet benaamd"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:346
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:349
 msgid " exists already. Overwrite?"
 msgstr " bestaat al. Overschrijven?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:348
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:351
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:371
 msgid "Save Map Error!!"
 msgstr "Fout in het opslaan van de map!!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:368
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:367
 msgid ""
 "Map Saving Error!\n"
 "Saved Map-File may be corrupt!\n"
@@ -1888,294 +2069,502 @@ msgstr ""
 "\n"
 "Reden gegeven:\n"
 
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:37
-msgid "Toolsize Menu"
-msgstr "Gereedschapsgroottemenu"
-
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:57
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:80
-#, c-format
-msgid "Current Size: %u"
-msgstr "Huidige grootte: %u"
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:40
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
 msgstr "Ruisvolumeopties"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:126
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:123
 #, c-format
 msgid "Minimum: %u"
 msgstr "Minimum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:128
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:125
 #, c-format
 msgid "Maximum: %u"
 msgstr "Maximum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:133
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
 #, c-format
 msgid "Set value: %u"
 msgstr "Zet waarde: %u"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu.cc:71
-msgid "Load Map"
-msgstr "Laad kaart"
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:41
+#: ../../src/editor/ui_menus/editor_main_menu.cc:70
+msgid "Map Options"
+msgstr "Kaartopties"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
-msgid "Height Tools Options"
-msgstr "Hoogte gereedschap opties"
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:62
+msgid "Nr Players:"
+msgstr "Aantal spelers:"
 
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:41
-msgid "Conquer Area Event Options"
-msgstr "Verovergebeurtenis opties"
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:86
+msgid "Nothing defined!"
+msgstr "Niets bepaald!"
 
-#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:50
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:46
+msgid "Edit Trigger Conditional"
+msgstr "Bewerk voorwaardelijke conditie"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:58
+msgid "Trigger Conditional: "
+msgstr "Voorwaardelijke conditie:"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:76
+msgid "("
+msgstr "("
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:88
+msgid ")"
+msgstr ")"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:100
+msgid "AND"
+msgstr "EN"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:112
+msgid "OR"
+msgstr "OF"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:124
+msgid "XOR"
+msgstr "EXCLUSIEF OF"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:136
+msgid "NOT"
+msgstr "NIET"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:183
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
+msgid "Available Triggers: "
+msgstr "Beschikbare condities:"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:281
+msgid "Syntax Error"
+msgstr "Syntaxfout"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:283
+msgid "Your conditional contains at least one syntax error. Please correct!\n"
+msgstr "Je conditie bevat minstens een syntaxfout. Graag verbeteren!\n"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
+msgid "Enter Directory Name: "
+msgstr "Voer mapnaam in:"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:84
+msgid "Exit Editor"
+msgstr "Sluit editor"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
+#: ../../src/editor/ui_menus/editor_event_menu.cc:162
+msgid "New Trigger"
+msgstr "Nieuwe conditie"
+
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:47
+msgid "Null Trigger Options"
+msgstr "Beginconditie opties"
+
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:112
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:531
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:271
+#, c-format
+msgid "There is another trigger registered with the name \"%s\". Choose another name."
+msgstr "Er is een andere gebeurtenis geregistreerd met de naam \"%s\". Kies een andere naam."
+
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:47
+msgid "Move View Event Options"
+msgstr "Verplaatsbeeldgebeurtenis opties"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
+#, c-format
+msgid "How many: %u"
+msgstr "Aantal: %u"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
+#, c-format
+msgid "(X, Y): (%i, %i)"
+msgstr "(X, Y): (%i, %i)"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:87
+#, c-format
+msgid "Radius: %u"
+msgstr "Straal: %u"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:99
+msgid "Building Trigger Options"
+msgstr "Bouwconditie opties"
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:48
+msgid "Trigger Option Menu"
+msgstr "Conditieoptiesmenu"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:67
+msgid "Edit Objective"
+msgstr "Bewerk doel"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:84
+msgid "Visible at Begin: "
+msgstr "Zichtbaar aan het begin:"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:93
+msgid "Objective text: "
+msgstr "Doeltekst:"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:166
+msgid "Visible"
+msgstr "Zichtbaar"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:177
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:263
+msgid "New"
+msgstr "Nieuw"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:186
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:270
+#: ../../src/editor/ui_menus/editor_event_menu.cc:108
+#: ../../src/editor/ui_menus/editor_event_menu.cc:139
+#: ../../src/editor/ui_menus/editor_event_menu.cc:171
+msgid "Edit"
+msgstr "Bewerk"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:204
+msgid "Trigger: "
+msgstr "Conditie:"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:236
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:112
+#: ../../src/editor/ui_menus/editor_event_menu.cc:350
+#, c-format
+msgid "Unnamed%u"
+msgstr "Niet benoemde%u"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:265
+msgid "Can't delete Objective, because it's trigger is in use by "
+msgstr "Kan doel niet verwijderen, omdat de conditie wordt gebruikt door"
+
+#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:44
 msgid "Immovable Bobs Menu"
 msgstr "Menu onbeweegbare Bobs"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:43
-msgid "Player Options"
-msgstr "Speleropties"
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:33
+msgid "Toolsize Menu"
+msgstr "Gereedschapsgroottemenu"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:51
-msgid "Add player"
-msgstr "Speler toevoegen"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:60
-msgid "Remove last player"
-msgstr "Verwijder laatste speler"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:205
-msgid "I"
-msgstr "I"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:206
-msgid "Make infrastructure"
-msgstr "Maak infrastructuur"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:219
-msgid "B"
-msgstr "B"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:220
-msgid "Allow/forbid buildidngs"
-msgstr "Gebouwen Toestaan/Verbieden"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:296
-msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again"
-msgstr "Kan de speler niet verwijderen. Er wordt ergens nog naar deze speler verwezen. Verwijder all gebouwen, bobs, condities en gebeurtenissen die naar deze speler verwijderen en probeer het opnieuw."
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:327
-msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr "Kan de stam van de speler niet wijzigen. Er wordt ergens naar verwezen. Verwijder alle gebouwen, bobs, condities en gebeurtenissen die van de stam afhangen en probeer het opnieuw"
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:55
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:75
+#, c-format
+msgid "Current Size: %u"
+msgstr "Huidige grootte: %u"
 
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:61
 msgid "New Variable"
 msgstr "Nieuwe variabele"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:73
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:71
 msgid "Integer"
 msgstr "Getal"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:80
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:78
 msgid "String"
 msgstr "Regel"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:162
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:160
 msgid "Edit Variable"
 msgstr "Bewerk variable"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:171
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:299
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:169
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:285
 msgid "Value"
 msgstr "Waarde"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:227
-msgid "is not a valid integer!"
-msgstr "is geen geldig getal!"
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:221
+#, c-format
+msgid "\"%s\" is not a valid integer!"
+msgstr "\"%s\" is geen geldig getal!"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:229
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:223
 msgid "Parse error!"
 msgstr "Parsefout!"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:265
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:252
 msgid "Variables Menu"
 msgstr "Variabelemenu"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:276
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:191
-msgid "New"
-msgstr "Nieuw"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:298
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:284
 msgid "Variable"
 msgstr "Variabele"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:45
-msgid "Tool Menu"
-msgstr "Gereedschapsmenu"
+#: ../../src/editor/ui_menus/editor_event_menu.cc:54
+msgid "Event Menu"
+msgstr "Gebeurtenissenmenu"
 
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:43
-msgid "Allow Building Event Options"
-msgstr "Sta gebouwengebeurtenis toe opties"
+#: ../../src/editor/ui_menus/editor_event_menu.cc:63
+msgid "Event Chains: "
+msgstr "Gebeurtenissenketens:"
 
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:99
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:98
-msgid "Building: "
-msgstr "Gebouw:"
+#: ../../src/editor/ui_menus/editor_event_menu.cc:73
+msgid "Registered Events: "
+msgstr "Geregistreerde gebeurtenissen:"
 
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:116
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:115
-msgid "Headquarters"
-msgstr "Hoofdkwartier"
+#: ../../src/editor/ui_menus/editor_event_menu.cc:82
+msgid "Registered Triggers"
+msgstr "Geregistreerde condities"
 
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:120
-msgid "Allow Building: "
-msgstr "Sta gebouw toe: "
+#: ../../src/editor/ui_menus/editor_event_menu.cc:99
+msgid "New Event Chain"
+msgstr "Nieuwe gebeurtenissenketen"
 
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:210
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:403
-msgid "<invalid player tribe>"
-msgstr "<onmogelijke spelersstam>"
+#: ../../src/editor/ui_menus/editor_event_menu.cc:119
+#: ../../src/editor/ui_menus/editor_event_menu.cc:150
+#: ../../src/editor/ui_menus/editor_event_menu.cc:182
+msgid "Del"
+msgstr "Verwijder"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:43
+#: ../../src/editor/ui_menus/editor_event_menu.cc:274
+msgid "Can't delete Event. It is in use by "
+msgstr "Kan gebeurtenis niet verwijderen. Het is in gebruik door"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:316
+msgid "Can't delete Trigger. It is in use by "
+msgstr "Kan conditie niet verwijderen. Deze is in gebruik door"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:357
+msgid "Unnamed"
+msgstr "Niet benoemd"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
 msgid "Message Box Event Options"
 msgstr "Berichtenveldgebeurtenis opties"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:57
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:59
 msgid "Button 1"
 msgstr "Knop 1"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:58
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:60
 msgid "Button 2"
 msgstr "Knop 3"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:59
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:61
 msgid "Button 3"
 msgstr "Knop 3"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:70
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:80
 msgid "Is Modal: "
 msgstr "Is modaal:"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:77
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:88
 msgid "Window Title:"
 msgstr "Schermtitel:"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:83
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:95
 msgid "Text:"
 msgstr "Tekst:"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:90
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:106
 msgid "Number of Buttons: "
 msgstr "Aantal knoppen:"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:112
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:128
 msgid "Button Name: "
 msgstr "Knopnaam:"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:122
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:145
 msgid "Select Trigger: "
 msgstr "Selecteer conditie:"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:140
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:163
 msgid "Current: "
 msgstr "Huidig:"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:141
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:168
 msgid "No trigger selected!"
 msgstr "Geen condities geselecteerd!"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:115
-msgid "Exit Editor"
-msgstr "Sluit editor"
-
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:45
-msgid "Terrain Select"
-msgstr "Selecteer terrein"
-
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:205
-msgid "Current:"
-msgstr "Huidig:"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:70
-msgid "Edit Objective"
-msgstr "Bewerk doel"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:85
-msgid "Visible at Begin: "
-msgstr "Zichtbaar aan het begin:"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:90
-msgid "Optional Objective: "
-msgstr "Optioneel doel:"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:96
-msgid "Objective text: "
-msgstr "Doeltekst:"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:178
-msgid "Optional"
-msgstr "Optioneel"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:179
-msgid "Visible"
-msgstr "Zichtbaar"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:218
-msgid "Trigger: "
-msgstr "Conditie:"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:255
-#, c-format
-msgid "Unnamed%u"
-msgstr "Niet benoemde%u"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:285
-msgid "Can't delete Objective, because it's trigger is in use by "
-msgstr "Kan doel niet verwijderen, omdat de conditie wordt gebruikt door"
-
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:41
-msgid "Building Trigger Options"
-msgstr "Bouwconditie opties"
-
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:119
-msgid "How many: "
-msgstr "Hoeveel:"
-
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:36
-msgid "Trigger Option Menu"
-msgstr "Conditieoptiesmenu"
-
-#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:44
-msgid "Bobs Menu"
-msgstr "Bobs Menu"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:43
-msgid "Edit Event Chain"
-msgstr "Bewerk gebeurtenissenketen"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:61
-msgid "Runs multiple times"
-msgstr "Loopt meerdere keren"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:68
-msgid "Events: "
-msgstr "Gebeurtenissen:"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:82
-msgid "Conditional"
-msgstr "Voorwaardelijk"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:123
-msgid "Up"
-msgstr "Omhoog"
-
-#: ../../src/map_objective_manager.h:53
+#: ../../src/objective.h:46
 msgid "no descr"
 msgstr "geen omschrijving"
+
+#~ msgid "%u soldier (+%u)"
+#~ msgid_plural "%u soldiers (+%u)"
+#~ msgstr[0] "%u soldaat (+%u)"
+#~ msgstr[1] "%u soldaten (+%u)"
+
+#~ msgid "Optional"
+#~ msgstr "Optioneel"
+
+#~ msgid "Load game"
+#~ msgstr "Laad spel"
+
+#~ msgid ""
+#~ "Game Loading Error!\n"
+#~ "Reason given:\n"
+#~ msgstr ""
+#~ "Fout in het laden van het spel!\n"
+#~ "Reden gegeven:\n"
+
+#~ msgid "Load Game Error!!"
+#~ msgstr "Fout in het laden van het spel!!"
+
+#~ msgid "Send"
+#~ msgstr "Verstuur"
+
+#~ msgid "Show messages as overlays:"
+#~ msgstr "Toon berichten als bekledingen:"
+
+#~ msgid "Message: "
+#~ msgstr "Bericht:"
+
+#~ msgid "I have no name"
+#~ msgstr "Ik heb geen naam"
+
+#~ msgid "Starting network game"
+#~ msgstr "Netwerkspel starten"
+
+#~ msgid "Status"
+#~ msgstr "Status"
+
+#~ msgid "Player %d"
+#~ msgstr "Speler %d"
+
+#~ msgid "Waiting"
+#~ msgstr "Wachtend"
+
+#~ msgid "Ready"
+#~ msgstr "Klaar"
+
+#~ msgid "Player 2"
+#~ msgstr "Speler 2"
+
+#~ msgid "Player 3"
+#~ msgstr "Speler 3"
+
+#~ msgid "Player 4"
+#~ msgstr "Speler 4"
+
+#~ msgid "Player 5"
+#~ msgstr "Speler 5"
+
+#~ msgid "Player 6"
+#~ msgstr "Speler 6"
+
+#~ msgid "Player 7"
+#~ msgstr "Speler 7"
+
+#~ msgid "Player 8"
+#~ msgstr "Speler 8"
+
+#~ msgid "Initializing a network game"
+#~ msgstr "Een netwerkspel initialiseren"
+
+#~ msgid "(no map)"
+#~ msgstr "(geen kaart)"
+
+#~ msgid "<undefined>"
+#~ msgstr "<ongedefinieerd>"
+
+#~ msgid "Tribe's ware encyclopedia"
+#~ msgstr "Stam waren encyclopedie"
+
+#~ msgid "!! CRITICAL ERROR !!"
+#~ msgstr "!! KRITIEKE FOUT !!"
+
+#~ msgid "Exit"
+#~ msgstr "Exit"
+
+#~ msgid "!! Continue execution !!"
+#~ msgstr "!! Ga verder met uitvoeren !!"
+
+#~ msgid "Crash"
+#~ msgstr "Crash"
+
+#~ msgid "Widelands"
+#~ msgstr "Widelands"
+
+#~ msgid "Allow Building"
+#~ msgstr "Sta gebouw toe"
+
+#~ msgid "Message Box"
+#~ msgstr "Berichtenruimte"
+
+#~ msgid "This Event makes a user definable part of the map visible for a selectable user"
+#~ msgstr "Deze gebeurtenis maakt een door de gebruiker definieerbaar deel van de map zichtbaar voor een bepaalde gebruiker"
+
+#~ msgid "This Event conquers a user definable part of the map for one player if there isn't a player already there"
+#~ msgstr "Deze Gebeurtenis verovert een door de gebruiker definieerbaar deel van de kaart voor één speler als daar nog geen speler is"
+
+#~ msgid "Allows/Disables a certain building for a player so that it can be build or it can't any longer"
+#~ msgstr "Staat toe/Verbiedt een bepaald gebouw voor een speler zodat hij het kan bouwen of juist niet."
+
+#~ msgid "<unset>"
+#~ msgstr "<niet gezet>"
+
+#~ msgid "This trigger gets set when a number of a building type of one player is available in an area."
+#~ msgstr "Deze conditie wordt gezet als een aantal gebouwen van een type van een speler beschikbaar is in een gebied."
+
+#~ msgid "Play in Internet"
+#~ msgstr "Speel over internet"
+
+#~ msgid "1) Field Infos"
+#~ msgstr "1) Veldinformatie"
+
+#~ msgid "Coordinates"
+#~ msgstr "Coördinaten"
+
+#~ msgid " Caps: "
+#~ msgstr " Kappen:"
+
+#~ msgid "Owned by"
+#~ msgstr "Bezet door"
+
+#~ msgid "Has bobs"
+#~ msgstr "Heeft bobs"
+
+#~ msgid "Has resources: Yes"
+#~ msgstr "Heeft middelen: Ja"
+
+#~ msgid "amount of"
+#~ msgstr "aantal van"
+
+#~ msgid " Has resources: No\n"
+#~ msgstr " Heeft middelen: Nee\n"
+
+#~ msgid "Start resources amount"
+#~ msgstr "Startmiddelen"
+
+#~ msgid " Roads: TODO!\n"
+#~ msgstr " Wegen: Nog te doen!\n"
+
+#~ msgid "Author"
+#~ msgstr "Auteur"
+
+#~ msgid "Descr"
+#~ msgstr "Omschrijving"
+
+#~ msgid " TODO: more information (number of resources, number of terrains...)"
+#~ msgstr " Nog te doen: meer informatie (aantal middelen, aantal terreinen...)"
+
+#~ msgid " TODO -- More information (Number of bobs/number of wares...)\n"
+#~ msgstr "TE DOEN -- Meer informatie (aantal bobs/hoeveelheid goederen...)\n"
+
+#~ msgid "I"
+#~ msgstr "I"
+
+#~ msgid "Make infrastructure"
+#~ msgstr "Maak infrastructuur"
+
+#~ msgid "B"
+#~ msgstr "B"
+
+#~ msgid "Allow/forbid buildidngs"
+#~ msgstr "Gebouwen Toestaan/Verbieden"
+
+#~ msgid "Headquarters"
+#~ msgstr "Hoofdkwartier"
+
+#~ msgid "<invalid player tribe>"
+#~ msgstr "<onmogelijke spelersstam>"
+
+#~ msgid "Optional Objective: "
+#~ msgstr "Optioneel doel:"
 
 #~ msgid "Malformed option: "
 #~ msgstr "Misvormde optie: "

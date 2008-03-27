@@ -1,12 +1,12 @@
 # Widelands po/nl_NL/tribes/empire.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team.
 # Rob Snelders <programming@ertai.nl>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3109\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-03-26 20:36+0000\n"
 "PO-Revision-Date: 2007-09-01 21:52+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
@@ -17,11 +17,6 @@ msgstr ""
 #: ../../../tribes/empire/buildings/arena/conf:2
 msgid "Arena"
 msgstr "Arena"
-
-#: ../../../tribes/empire/buildings/armoursmith/conf:2
-#: ../../../tribes/empire/workers/armoursmith/conf:2
-msgid "Armoursmith"
-msgstr "Harnassensmid"
 
 #: ../../../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
@@ -155,11 +150,6 @@ msgstr "Schapenboerderij"
 msgid "Smelting Works"
 msgstr "Hoogoven"
 
-#: ../../../tribes/empire/buildings/stonemason/conf:2
-#: ../../../tribes/empire/workers/stonemason/conf:2
-msgid "Stonemason"
-msgstr "Steenhouwer"
-
 #: ../../../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr "Kroeg"
@@ -183,11 +173,6 @@ msgstr "Wijnmakerij"
 #: ../../../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Magazijn"
-
-#: ../../../tribes/empire/buildings/weaponsmith/conf:2
-#: ../../../tribes/empire/workers/weaponsmith/conf:2
-msgid "Weaponsmith"
-msgstr "Wapensmid"
 
 #: ../../../tribes/empire/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -566,6 +551,11 @@ msgstr "Wol"
 msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
 msgstr "Wol is het haar van schapen. Weverijen van het Keizerrijk maken er doek van."
 
+#: ../../../tribes/empire/workers/armoursmith/conf:2
+#: ../../../tribes/empire/buildings/armoursmith/conf:2
+msgid "Armoursmith"
+msgstr "Harnassensmid"
+
 #: ../../../tribes/empire/workers/baker/conf:2
 msgid "Baker"
 msgstr "Bakker"
@@ -646,6 +636,11 @@ msgstr "Smelter"
 msgid "Soldier"
 msgstr "Soldaat"
 
+#: ../../../tribes/empire/workers/stonemason/conf:2
+#: ../../../tribes/empire/buildings/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Steenhouwer"
+
 #: ../../../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Trainer"
@@ -653,6 +648,11 @@ msgstr "Trainer"
 #: ../../../tribes/empire/workers/vinefarmer/conf:2
 msgid "Vinefarmer"
 msgstr "Wijngaardier"
+
+#: ../../../tribes/empire/workers/weaponsmith/conf:2
+#: ../../../tribes/empire/buildings/weaponsmith/conf:2
+msgid "Weaponsmith"
+msgstr "Wapensmid"
 
 #: ../../../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
