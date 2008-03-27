@@ -51,6 +51,40 @@ const CheckStep& CheckStep::alwaysfalse()
 	return cstep;
 }
 
+
+void CheckStepAnd::add(const CheckStep& sub)
+{
+	subs.push_back(sub);
+}
+
+bool CheckStepAnd::allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const
+{
+	for
+		(std::vector<CheckStep>::const_iterator it = subs.begin();
+		 it != subs.end();
+		 ++it)
+	{
+		if (!it->allowed(map, start, end, dir, id))
+			return false;
+	}
+
+	return true;
+}
+
+bool CheckStepAnd::reachabledest(Map* map, FCoords dest) const
+{
+	for
+		(std::vector<CheckStep>::const_iterator it = subs.begin();
+		 it != subs.end();
+		 ++it)
+	{
+		if (!it->reachabledest(map, dest))
+			return false;
+	}
+
+	return true;
+}
+
 /*
 ===============
 CheckStepDefault

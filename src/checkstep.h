@@ -20,8 +20,9 @@
 #ifndef CHECKSTEP_H
 #define CHECKSTEP_H
 
-#include <set>
 #include <boost/shared_ptr.hpp>
+#include <set>
+#include <vector>
 
 #include "widelands_geometry.h"
 
@@ -84,6 +85,20 @@ public:
 	}
 };
 
+
+/**
+ * CheckStep implementation that returns the logic and of all sub-implementations
+ * that have been added via \ref add().
+ */
+struct CheckStepAnd {
+	void add(const CheckStep& sub);
+
+	bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
+	bool reachabledest(Map* map, FCoords dest) const;
+
+private:
+	std::vector<CheckStep> subs;
+};
 
 /**
  * Implements the default step checking behaviours that should be used for all

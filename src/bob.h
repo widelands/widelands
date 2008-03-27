@@ -252,9 +252,10 @@ struct Bob : public Map_Object {
 
 	uint32_t vision_range() const {return descr().vision_range();}
 
+	virtual bool checkFieldBlocked(Game* g, const FCoords& field, bool commit);
+
 	virtual void draw
 		(Editor_Game_Base const &, RenderTarget &, Point) const;
-
 
 	// For debug
 	virtual void log_general_info(Editor_Game_Base* egbase);

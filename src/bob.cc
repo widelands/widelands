@@ -521,6 +521,95 @@ Bob::Task Bob::taskMovepath = {
 	0
 };
 
+struct BlockedTracker {
+	struct CoordData {
+		Coords coord;
+		int dist;
+	};
+	// Distance-based ordering as a heuristic for unblock()
+	struct CoordOrdering {
+		bool operator()(const CoordData& a, const CoordData& b) const throw () {
+			if (a.dist != b.dist)
+				return a.dist < b.dist;
+			return a.coord.all < b.coord.all;
+		}
+	};
+	typedef std::map<CoordData, bool, CoordOrdering> Cache;
+
+	BlockedTracker(Game* game, Bob* bob, const Coords& finaldest)
+		: m_game(game), m_bob(bob), m_map(game->map()), m_finaldest(finaldest)
+	{
+		nrblocked = 0;
+		disabled = false;
+	}
+
+	// This heuristic tries to unblock fields that are close to the destination,
+	// in the hope that subsequent pathfinding will find a way to bring us
+	// closer, if not complete to, the destination
+	void unblock() {
+		uint32_t origblocked = nrblocked;
+		int unblockprob = nrblocked;
+
+		for
+			(Cache::iterator it = nodes.begin();
+			 it != nodes.end() && unblockprob > 0;
+			 ++it)
+		{
+			if (it->second) {
+				if (static_cast<int32_t>(m_game->logic_rand() % origblocked) < unblockprob) {
+					it->second = false;
+					nrblocked--;
+					unblockprob -= 2;
+				}
+			}
+		}
+	}
+
+	bool isBlocked(const FCoords& field) {
+		if (disabled)
+			return false;
+
+		CoordData cd;
+		cd.coord = field;
+		cd.dist = m_map.calc_distance(field, m_finaldest);
+
+		Cache::iterator it = nodes.find(cd);
+		if (it != nodes.end())
+			return it->second;
+
+		bool blocked = m_bob->checkFieldBlocked(m_game, field, false);
+		nodes.insert(std::make_pair(cd, blocked));
+		if (blocked)
+			nrblocked++;
+		return blocked;
+	}
+
+	Game* m_game;
+	Bob* m_bob;
+	Map& m_map;
+	Coords m_finaldest;
+	Cache nodes;
+	int nrblocked;
+	bool disabled;
+};
+
+struct CheckStepBlocked {
+	CheckStepBlocked(BlockedTracker& tracker)
+		: m_tracker(tracker) {}
+
+	bool allowed(Map*, FCoords, FCoords end, int32_t, CheckStep::StepId) const {
+		if (end == m_tracker.m_finaldest)
+			return true;
+
+		return !m_tracker.isBlocked(end);
+	}
+	bool reachabledest(Map*, FCoords) const {
+		return true;
+	}
+
+	BlockedTracker& m_tracker;
+};
+
 /**
  * Start moving to the given destination. persist is the same parameter as
  * for Map::findpath().
@@ -529,7 +618,7 @@ Bob::Task Bob::taskMovepath = {
  *
  * \note The task finishes once the goal has been reached. It may fail.
  *
- * \par only_step defines how many steps should be taken, before this
+ * \param only_step defines how many steps should be taken, before this
  * returns as a success
  */
 bool Bob::start_task_movepath
@@ -540,27 +629,38 @@ bool Bob::start_task_movepath
 	 bool            const forceonlast,
 	 int32_t         const only_step)
 {
-	Path* path = new Path;
-	CheckStep cstep;
+	Path path;
+	BlockedTracker tracker(game, this, dest);
+	CheckStepAnd cstep;
 
 	if (forceonlast)
-		cstep = CheckStepWalkOn(get_movecaps(), true);
+		cstep.add(CheckStepWalkOn(get_movecaps(), true));
 	else
-		cstep = CheckStepDefault(get_movecaps());
+		cstep.add(CheckStepDefault(get_movecaps()));
+	cstep.add(CheckStepBlocked(tracker));
 
-	if (game->map().findpath(m_position, dest, persist, *path, cstep) < 0) {
-		delete path;
-		return false;
+	if (game->map().findpath(m_position, dest, persist, path, cstep) < 0) {
+		if (!tracker.nrblocked)
+			return false;
+
+		tracker.unblock();
+		if (game->map().findpath(m_position, dest, persist, path, cstep) < 0) {
+			if (!tracker.nrblocked)
+				return false;
+
+			tracker.disabled = true;
+			if (game->map().findpath(m_position, dest, persist, path, cstep) < 0)
+				return false;
+		}
 	}
 
 	push_task(game, taskMovepath);
 	State & state  = top_state();
-	state.path     = path;
+	state.path     = new Path(path);
 	state.ivar1    = 0; // step #
 	state.ivar2    = forceonlast ? 1 : 0;
 	state.ivar3    = only_step;
 	state.diranims = &anims;
-
 	return true;
 }
 
@@ -716,7 +816,11 @@ void Bob::move_update(Game* g, State* state)
 			 state->ivar2);
 		state->diranims = 0;
 
-		if (tdelta < 0) {
+		if (tdelta == -2) {
+			send_signal(g, "blocked");
+			pop_task(g);
+			return;
+		} else if (tdelta < 0) {
 			send_signal(g, "fail");
 			pop_task(g);
 			return;
@@ -843,10 +947,8 @@ void Bob::set_animation(Editor_Game_Base* g, uint32_t anim)
  * using movecaps. If force is true, the passability check is skipped.
  *
  * \return the number of milliseconds after which the walk has ended. You must
- * call end_walk() after this time, so schedule a task_act().
- *
- * \note Returns a negative value when we can't walk into the requested
- * direction.
+ * call end_walk() after this time, so schedule a task_act(). Returns -1
+ * if the step is forbidden, and -2 if it is currently blocked.
  */
 int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 {
@@ -855,22 +957,20 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 	Map & map = g->map();
 	map.get_neighbour(m_position, dir, &newf);
 
-	// Move capability check by ANDing with the field caps
-	//
-	// The somewhat crazy check involving MOVECAPS_SWIM should allow swimming objects to
-	// temporarily land.
-	const uint32_t movecaps = get_movecaps();
+	// Move capability check
+	if (!force) {
+		CheckStepDefault cstep(get_movecaps());
 
-	if
-		(not force
-		 and
-		 (not
-		  (m_position.field->get_caps() & movecaps & MOVECAPS_SWIM
-		   and
-		   newf.field->get_caps() & MOVECAPS_WALK)
-		  and
-		  not (newf.field->get_caps() & movecaps)))
-		return -1;
+		if (!cstep.allowed(&map, m_position, newf, dir, CheckStep::stepNormal))
+			return -1;
+	}
+
+	// Always call checkFieldBlocked, because it might communicate
+	// with other bobs (as is the case for soldiers on the battlefield)
+	if (checkFieldBlocked(g, newf, true)) {
+		if (!force)
+			return -2;
+	}
 
 	// Move is go
 	int32_t const tdelta = map.calc_cost(m_position, dir);
@@ -883,6 +983,20 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 	set_animation(g, a);
 
 	return tdelta; // yep, we were successful
+}
+
+
+/**
+ * Check whether this bob should be able to move onto the given field.
+ *
+ * \param commit indicates whether this function is called from the \ref start_walk
+ *    function, i.e. whether the bob will actually move onto the \p to field if this
+ *    function allows it to.
+ */
+bool Bob::checkFieldBlocked(Game*, const FCoords&, bool commit)
+{
+	(void)commit;
+	return false;
 }
 
 
