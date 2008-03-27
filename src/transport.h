@@ -577,7 +577,7 @@ struct Economy {
 	WareList const & get_wares  () {return m_wares;}
 	WareList const & get_workers() {return m_workers;}
 
-	void balance_requestsupply(uint timerid); ///< called by \ref Cmd_Call_Economy_Balance
+	void balance_requestsupply(uint32_t timerid); ///< called by \ref Cmd_Call_Economy_Balance
 
 	void rebalance_supply() {start_request_timer();}
 
