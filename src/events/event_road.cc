@@ -19,6 +19,7 @@
 
 #include "event_road.h"
 
+#include "checkstep.h"
 #include "game.h"
 #include "player.h"
 #include "profile.h"

@@ -17,8 +17,10 @@
  *
  */
 
+#include "worker.h"
 
 #include "carrier.h"
+#include "checkstep.h"
 #include "cmd_incorporate.h"
 #include "critter_bob.h"
 #include "findimmovable.h"
@@ -34,7 +36,6 @@
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
-#include "worker.h"
 #include "worker_program.h"
 
 #include "upcast.h"

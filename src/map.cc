@@ -17,6 +17,9 @@
  *
  */
 
+#include "map.h"
+
+#include "checkstep.h"
 #include "events/event.h"
 #include "events/event_chain.h"
 #include "findnode.h"
@@ -2236,149 +2239,6 @@ Bob search functors
 bool FindBobAttribute::accept(Bob *bob) const
 {
 	return bob->has_attribute(m_attrib);
-}
-
-
-
-/*
-==============================================================================
-
-CheckStep implementations
-
-==============================================================================
-*/
-
-
-/*
-===============
-CheckStepDefault
-===============
-*/
-bool CheckStepDefault::allowed
-(Map *, FCoords start, FCoords end, int32_t, StepId) const
-{
-	uint8_t endcaps = end.field->get_caps();
-
-	if (endcaps & m_movecaps)
-		return true;
-
-	// Swimming bobs are allowed to move from a water field to a shore field
-	uint8_t startcaps = start.field->get_caps();
-
-	if ((endcaps & MOVECAPS_WALK) && (startcaps & m_movecaps & MOVECAPS_SWIM))
-		return true;
-
-	return false;
-}
-
-bool CheckStepDefault::reachabledest(Map* map, FCoords dest) const
-{
-	uint8_t caps = dest.field->get_caps();
-
-	if (!(caps & m_movecaps)) {
-		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
-			return false;
-
-		if (!map->can_reach_by_water(dest))
-			return false;
-	}
-
-	return true;
-}
-
-
-/*
-===============
-CheckStepWalkOn
-===============
-*/
-bool CheckStepWalkOn::allowed
-(Map *, FCoords start, FCoords end, int32_t, StepId id) const
-{
-	uint8_t startcaps = start.field->get_caps();
-	uint8_t endcaps = end.field->get_caps();
-
-	// Make sure that we don't find paths where we walk onto an unwalkable field,
-	// then move back onto a walkable field.
-	if (!m_onlyend && id != stepFirst && !(startcaps & m_movecaps))
-		return false;
-
-	if (endcaps & m_movecaps)
-		return true;
-
-	// We can't move onto the field using normal rules.
-	// If onlyend is true, exception rules only apply for the last step.
-	if (m_onlyend && id != stepLast)
-		return false;
-
-	// If the previous field was walkable, we can move onto this one
-	if (startcaps & m_movecaps)
-		return true;
-
-	return false;
-}
-
-bool CheckStepWalkOn::reachabledest(Map *, FCoords) const {
-	// Don't bother solving this.
-	return true;
-}
-
-
-bool CheckStepRoad::allowed
-(Map* map, FCoords start, FCoords end, int32_t, StepId id) const
-{
-	uint8_t const endcaps = m_player.get_buildcaps(end);
-
-	// Calculate cost and passability
-	if
-		(not (endcaps & m_movecaps)
-		 and
-		 not
-		 ((endcaps & MOVECAPS_WALK)
-		  and
-		  (m_player.get_buildcaps(start) & m_movecaps & MOVECAPS_SWIM)))
-		return false;
-
-	// Check for blocking immovables
-	BaseImmovable *imm = map->get_immovable(end);
-	if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-		if (id != stepLast)
-			return false;
-
-		if
-			(not
-			 (dynamic_cast<const Flag *>(imm)
-			  or
-			  (dynamic_cast<const Road *>(imm) and endcaps & BUILDCAPS_FLAG)))
-			return false;
-	}
-
-	return true;
-}
-
-bool CheckStepRoad::reachabledest(Map* map, FCoords dest) const
-{
-	uint8_t caps = dest.field->get_caps();
-
-	if (!(caps & m_movecaps)) {
-		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
-			return false;
-
-		if (!map->can_reach_by_water(dest))
-			return false;
-	}
-
-	return true;
-}
-
-
-bool CheckStepLimited::allowed
-	(Map *, FCoords, FCoords const end, int32_t, StepId) const
-{
-	return m_allowed_locations.find(end) != m_allowed_locations.end();
-}
-bool CheckStepLimited::reachabledest(Map *, FCoords) const {
-	return true;
 }
 
 

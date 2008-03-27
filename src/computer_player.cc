@@ -20,6 +20,7 @@
 
 #include "computer_player.h"
 
+#include "checkstep.h"
 #include "computer_player_hints.h"
 #include "map.h"
 #include "world.h"
@@ -45,7 +46,7 @@
 
 using namespace Widelands;
 
-struct CheckStepRoadAI : public CheckStep {
+struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* pl, uint8_t mc, bool oe)
 		: player(pl), movecaps(mc), openend(oe)
 	{}
@@ -53,8 +54,8 @@ struct CheckStepRoadAI : public CheckStep {
 	void set_openend (bool oe)
 	{openend=oe;}
 
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const;
-	virtual bool reachabledest(Map* map, FCoords dest) const;
+	bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
+	bool reachabledest(Map* map, FCoords dest) const;
 
 //private:
 	Player * player;
@@ -1167,7 +1168,7 @@ void Computer_Player::lose_immovable (PlayerImmovable* pi)
 
 /* CheckStepRoadAI */
 bool CheckStepRoadAI::allowed
-(Map * map, FCoords, FCoords end, int32_t, StepId id) const
+(Map * map, FCoords, FCoords end, int32_t, CheckStep::StepId id) const
 {
 	uint8_t endcaps = player->get_buildcaps(end);
 
@@ -1183,7 +1184,7 @@ bool CheckStepRoadAI::allowed
 	// Check for blocking immovables
 	BaseImmovable *imm = map->get_immovable(end);
 	if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-		if (id!=stepLast && !openend)
+		if (id!=CheckStep::stepLast && !openend)
 			return false;
 
 		if (imm->get_type()==Map_Object::FLAG)

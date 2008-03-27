@@ -17,8 +17,9 @@
  *
  */
 
-
 #include "bob.h"
+
+#include "checkstep.h"
 #include "critter_bob.h"
 #include "game.h"
 #include "mapviewpixelconstants.h"
@@ -540,16 +541,14 @@ bool Bob::start_task_movepath
 	 int32_t         const only_step)
 {
 	Path* path = new Path;
-	CheckStepDefault cstep_default(get_movecaps());
-	CheckStepWalkOn cstep_walkon(get_movecaps(), true);
-	CheckStep* cstep;
+	CheckStep cstep;
 
 	if (forceonlast)
-		cstep = &cstep_walkon;
+		cstep = CheckStepWalkOn(get_movecaps(), true);
 	else
-		cstep = &cstep_default;
+		cstep = CheckStepDefault(get_movecaps());
 
-	if (game->map().findpath(m_position, dest, persist, *path, *cstep) < 0) {
+	if (game->map().findpath(m_position, dest, persist, *path, cstep) < 0) {
 		delete path;
 		return false;
 	}

@@ -85,23 +85,7 @@ struct FindBob {
 	virtual ~FindBob() {}  // make gcc shut up
 };
 struct FindNode;
-struct CheckStep {
-	enum StepId {
-		stepNormal, //  normal step treatment
-		stepFirst,  //  first step of a path
-		stepLast,   //  last step of a path
-	};
-
-	// Return true if moving from start to end (single step in the given
-	// direction) is allowed.
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const = 0;
-
-	// Return true if the destination field can be reached at all
-	// (e.g. return false for land-based bobs when dest is in water).
-	virtual bool reachabledest(Map* map, FCoords dest) const = 0;
-	virtual ~CheckStep() {}  // make gcc shut up
-};
-
+struct CheckStep;
 
 /*
 Some very simple default predicates (more predicates below Map).
@@ -410,85 +394,6 @@ private:
 
 	Map & operator=(Map const &);
 	explicit Map   (Map const &);
-};
-
-
-/*
-CheckStepDefault
-----------------
-Implements the default step checking behaviours that should be used for all
-normal bobs.
-
-Simply check whether the movecaps are matching (basic exceptions for water bobs
-moving onto the shore).
-*/
-struct CheckStepDefault : public CheckStep {
-	CheckStepDefault(uint8_t movecaps) : m_movecaps(movecaps) {}
-	virtual ~CheckStepDefault() {} //  make gcc shut up
-
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const;
-	virtual bool reachabledest(Map* map, FCoords dest) const;
-
-private:
-	uint8_t m_movecaps;
-};
-
-
-/*
-CheckStepWalkOn
----------------
-Implements the default step checking behaviours with one exception: we can move
-from a walkable field onto an unwalkable one.
-If onlyend is true, we can only do this on the final step.
-*/
-struct CheckStepWalkOn : public CheckStep {
-	CheckStepWalkOn(uint8_t movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) {}
-	virtual ~CheckStepWalkOn() {} //  make gcc shut up
-
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const;
-	virtual bool reachabledest(Map* map, FCoords dest) const;
-
-private:
-	uint8_t m_movecaps;
-	bool  m_onlyend;
-};
-
-
-/*
--------------
-Implements the step checking behaviour for road building.
-
-player is the player who is building the road.
-movecaps are the capabilities with which the road is to be built (swimming
-for boats, walking for normal roads).
-*/
-struct CheckStepRoad : public CheckStep {
-	CheckStepRoad(Player const & player, uint8_t const movecaps)
-		: m_player(player), m_movecaps(movecaps)
-	{}
-	virtual ~CheckStepRoad() {} //  make gcc shut up
-
-	virtual bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, StepId id) const;
-	virtual bool reachabledest(Map* map, FCoords dest) const;
-
-private:
-	const Player                                     &       m_player;
-	const uint8_t                                            m_movecaps;
-};
-
-/// A version of CheckStep that is limited to a set of allowed locations. It
-/// only checks whether the target is an allowed location.
-struct CheckStepLimited : CheckStep {
-	void add_allowed_location(Coords const c) {m_allowed_locations.insert(c);}
-	virtual bool allowed
-		(Map *, FCoords start, FCoords end, int32_t dir, StepId id) const;
-	bool reachabledest(Map *, FCoords dest)                        const;
-
-private:
-	//  It is OK to use Coords::ordering_functor because the ordering of the set
-	//  does not matter. The only thing that matters is whether a location is
-	//  in the set.
-	std::set<Coords, Coords::ordering_functor> m_allowed_locations;
 };
 
 

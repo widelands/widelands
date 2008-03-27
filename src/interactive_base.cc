@@ -19,6 +19,7 @@
 
 #include "interactive_base.h"
 
+#include "checkstep.h"
 #include "cmd_queue.h"
 #include "constants.h"
 #include "font_handler.h"

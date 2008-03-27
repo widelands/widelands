@@ -20,6 +20,7 @@
 #include "attack_controller.h"
 
 #include "battle.h"
+#include "checkstep.h"
 #include "game.h"
 #include "widelands_geometry.h"
 #include "immovable.h"
