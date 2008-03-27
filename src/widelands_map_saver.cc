@@ -26,8 +26,6 @@
 #include "tribe.h"
 #include "wexception.h"
 #include "widelands_map_allowed_buildings_data_packet.h"
-#include "widelands_map_attack_controller_data_packet.h"
-#include "widelands_map_battle_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
 #include "widelands_map_building_data_packet.h"

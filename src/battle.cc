@@ -37,113 +37,151 @@ Battle::Descr g_Battle_Descr;
 
 Battle::Battle ()
 	:
-	BaseImmovable(g_Battle_Descr),
-	m_first      (0),
-	m_second     (0),
-	m_last_try   (0),
-	m_next_assault(0)
+	Map_Object(&g_Battle_Descr),
+	m_first(0),
+	m_second(0),
+	m_readyflags(0),
+	m_first_strikes(true)
 {}
-
 
 Battle::~Battle ()
 {
-	if (m_first) log ("Battle : first wasn't removed yet!\n");
-	if (m_second) log ("Battle : second wasn't removed yet!\n");
 }
 
-
-void Battle::init (Editor_Game_Base* eg, Soldier* s1, Soldier* s2)
+Battle* Battle::create(Game* g, Soldier* first, Soldier* second)
 {
-	assert (eg);
-	assert (s1);
-	assert (s2);
+	{
+		StreamWrite& ss = g->syncstream();
+		ss.Unsigned32(0x00e111ba); // appears as ba111e00 in a hexdump
+		ss.Unsigned32(first->get_serial());
+		ss.Unsigned32(second->get_serial());
+	}
 
-	log ("Battle::init\n");
-	Map_Object::init(eg);
-	m_first = s1;
-	m_second = s2;
-	if (upcast(Game, game, eg))
-		m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
+	Battle* battle = new Battle;
+	battle->m_first = first;
+	battle->m_second = second;
+	battle->init(g);
+	return battle;
 }
 
 
 void Battle::init (Editor_Game_Base* eg)
 {
-	assert (eg);
-
 	Map_Object::init(eg);
 
-	if (upcast(Game, game, eg))
-		m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
-}
+	m_creationtime = eg->get_gametime();
 
-
-void Battle::soldiers (Soldier* s1, Soldier* s2)
-{
-	assert (s1);
-	assert (s2);
-	log ("Battle::init\n");
-
-	m_first = s1;
-	m_second = s2;
+	if (upcast(Game, g, eg)) {
+		if (m_first->getBattle())
+			m_first->getBattle()->cancel(g, m_first);
+		m_first->setBattle(g, this);
+		if (m_second->getBattle())
+			m_second->getBattle()->cancel(g, m_second);
+		m_second->setBattle(g, this);
+	}
 }
 
 
 void Battle::cleanup (Editor_Game_Base* eg)
 {
-	log ("Battle::cleanup\n");
-	m_first = 0;
-	m_second = 0;
+	if (upcast(Game, g, eg)) {
+		if (m_first)
+			m_first->setBattle(g, 0);
+		if (m_second)
+			m_second->setBattle(g, 0);
+		m_first = m_second = 0;
+	}
+
 	Map_Object::cleanup(eg);
 }
 
 
-void Battle::act (Game * g, uint32_t)
+/**
+ * Called by one of the soldiers if it has to cancel the battle immediately.
+ */
+void Battle::cancel(Game* g, Soldier* soldier)
 {
-	log ("Battle::act\n");
+	if (soldier != m_first && soldier != m_second)
+		return;
 
+	if (soldier == m_first) {
+		m_first = 0;
+		soldier->setBattle(g, 0);
+	} else if (soldier == m_second) {
+		m_second = 0;
+		soldier->setBattle(g, 0);
+	}
+
+	schedule_destroy(g);
+}
+
+
+bool Battle::locked(Game* g)
+{
+	if (!m_first || !m_second)
+		return false;
+	if (g->get_gametime() - m_creationtime < 1000)
+		return true; // don't change battles around willy-nilly
+	return m_first->get_position() == m_second->get_position();
+}
+
+Soldier* Battle::getOpponent(Soldier* soldier)
+{
+	if (m_first == soldier)
+		return m_second;
+	assert(soldier == m_second);
+	return m_first;
+}
+
+void Battle::getBattleWork(Game* g, Soldier* soldier)
+{
+	if (soldier->get_current_hitpoints() < 1) {
+		molog("soldier %u has died\n", soldier->get_serial());
+		soldier->schedule_destroy(g);
+		destroy(g);
+		return;
+	}
+
+	if (!m_first || !m_second) {
+		soldier->skip_act();
+		return;
+	}
+
+	// So both soldiers are alive; are we ready to trade the next blow?
+	uint8_t thisflag = soldier == m_first ? 1 : 2;
+
+	if ((m_readyflags | thisflag) != 3) {
+		soldier->start_task_idle(g, soldier->descr().get_animation("idle"), -1);
+		m_readyflags |= thisflag;
+		return;
+	}
+	if (m_readyflags != 3) {
+		m_readyflags |= thisflag;
+		calculateTurn(g);
+		getOpponent(soldier)->send_signal(g, "wakeup");
+	} else {
+		m_readyflags = 0;
+	}
+
+	soldier->start_task_idle(g, soldier->descr().get_animation("idle"), 1000);
+}
+
+void Battle::calculateTurn(Game* g)
+{
 	Soldier* attacker;
 	Soldier* defender;
 
-	attacker = m_second;
-	defender = m_first;
-
-	m_last_try = !m_last_try;
-	if (m_last_try) {
+	if (m_first_strikes) {
 		attacker = m_first;
 		defender = m_second;
-
 	} else {
 		attacker = m_second;
 		defender = m_first;
 	}
 
-	if (attacker->get_current_hitpoints() < 1) {
-		attacker->send_signal(g, "die");
-		defender->send_signal(g, "won_battle");
+	m_first_strikes = !m_first_strikes;
 
-		m_first = 0;
-		m_second = 0;
-		schedule_destroy (g);
-		return;
-	}
-
-	if (defender->get_current_hitpoints() < 1)
-	{
-		defender->send_signal(g, "die");
-		attacker->send_signal(g, "won_battle");
-
-		m_first = 0;
-		m_second = 0;
-		schedule_destroy (g);
-		return;
-	}
-
-	// Put attack animation
-	//attacker->start_animation(g, "attack", 1000);
 	uint32_t hit = g->logic_rand() % 100;
-	log (" hit=%d ", hit);
-	//FIXME: correct implementaion
 	if (hit > defender->get_evade()) {
 		uint32_t attack =
 			attacker->get_min_attack() +
@@ -154,18 +192,8 @@ void Battle::act (Game * g, uint32_t)
 		uint32_t defend = defender->get_defense();
 		defend = (attack * defend) / 100;
 
-		log (" attack(%d)=%d ", attacker->get_serial(), attack);
-		log (" defense(%d)=%d ", defender->get_serial(), defend);
-		log (" damage=%d\n", attack-defend);
-
-		defender->damage (attack-defend);
-		// defender->start_animation(g, "defend", 1000);
-
-	} else {
-		log (" evade(%d)=%d\n", defender->get_serial(), defender->get_evade());
-		//defender->start_animation(g, "evade", 1000);
+		defender->damage(attack-defend);
 	}
-	m_next_assault = schedule_act(g, 1000);
 }
 
 
@@ -181,12 +209,13 @@ Load/Save support
 
 void Battle::Loader::load(FileRead & fr)
 {
-	BaseImmovable::Loader::load(fr);
+	Map_Object::Loader::load(fr);
 
-	upcast(Battle, b, get_object());
+	Battle & battle = get<Battle>();
 
-	b->m_next_assault = fr.Unsigned32();
-	b->m_last_try = fr.Unsigned32();
+	battle.m_creationtime = fr.Signed32();
+	battle.m_readyflags = fr.Unsigned8();
+	battle.m_first_strikes = fr.Unsigned8();
 
 	m_first = fr.Unsigned32();
 	m_second = fr.Unsigned32();
@@ -196,7 +225,7 @@ void Battle::Loader::load_pointers()
 {
 	Battle & battle = get<Battle>();
 	try {
-		BaseImmovable::Loader::load_pointers();
+		Map_Object::Loader::load_pointers();
 		if (m_first)
 			try {
 				battle.m_first = &mol().get<Soldier>(m_first);
@@ -220,24 +249,15 @@ void Battle::save
 	fw.Unsigned8(header_Battle);
 	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
 
-	BaseImmovable::save(egbase, mos, fw);
+	Map_Object::save(egbase, mos, fw);
 
-	// Write time to next assault
-	fw.Unsigned32(m_next_assault);
-
-	// Write the last try
-	fw.Unsigned32(m_last_try);
+	fw.Signed32(m_creationtime);
+	fw.Unsigned8(m_readyflags);
+	fw.Unsigned8(m_first_strikes);
 
 	// And now, the serials of the soldiers !
-	if (m_first)
-		fw.Unsigned32(mos->get_object_file_index(m_first));
-	else
-		fw.Unsigned32(0);
-
-	if (m_second)
-		fw.Unsigned32(mos->get_object_file_index(m_second));
-	else
-		fw.Unsigned32(0);
+	fw.Unsigned32(m_first ? mos->get_object_file_index(m_first) : 0);
+	fw.Unsigned32(m_second ? mos->get_object_file_index(m_second) : 0);
 }
 
 

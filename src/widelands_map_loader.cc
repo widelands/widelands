@@ -25,8 +25,6 @@
 #include "player.h"
 #include "tribe.h"
 #include "widelands_map_allowed_buildings_data_packet.h"
-#include "widelands_map_attack_controller_data_packet.h"
-#include "widelands_map_battle_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
 #include "widelands_map_building_data_packet.h"
@@ -289,21 +287,9 @@ int32_t WL_Map_Loader::load_map_complete
 
 	//  This should be at least after loading Soldiers (Bobs).
 	//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
-	log("Reading Battle Data ... ");
-	{Map_Battle_Data_Packet          p; p.Read(m_fs, egbase, !scenario, m_mol);}
-	log("done!\n ");
-
 	//  Must be loaded after every kind of object that can see.
 	log("Reading Players View Data ... ");
 	{Map_Players_View_Data_Packet    p; p.Read(m_fs, egbase, !scenario, m_mol);}
-	log("done!\n ");
-
-	//  This should be done after loading of soldiers and military sites.
-	log("Reading Attack Controller Data ... ");
-	{
-		Map_Attack_Controller_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, m_mol);
-	}
 	log("done!\n ");
 
 	log("Reading Variable Data ... ");

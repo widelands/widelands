@@ -19,6 +19,7 @@
 
 #include "militarysite.h"
 
+#include "battle.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "i18n.h"
@@ -106,7 +107,6 @@ ProductionSite(ms_descr),
 m_soldier_request(0),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
-m_in_battle   (false),
 m_nexthealtime(0)
 {}
 
@@ -324,6 +324,9 @@ void MilitarySite::remove_worker(Worker* w)
 {
 	ProductionSite::remove_worker(w);
 
+	if (upcast(Soldier, soldier, w))
+		popSoldierJob(soldier);
+
 	update_soldier_request();
 }
 
@@ -333,11 +336,28 @@ void MilitarySite::remove_worker(Worker* w)
  */
 bool MilitarySite::get_building_work(Game* g, Worker* w, bool)
 {
-	// Evict soldiers that have returned home if the capacity is too low
-	if (m_capacity < presentSoldiers().size()) {
-		w->reset_tasks(g);
-		w->start_task_leavebuilding(g, true);
-		return true;
+	if (upcast(Soldier, soldier, w)) {
+		// Evict soldiers that have returned home if the capacity is too low
+		if (m_capacity < presentSoldiers().size()) {
+			w->reset_tasks(g);
+			w->start_task_leavebuilding(g, true);
+			return true;
+		}
+
+		bool stayhome;
+		if (Map_Object* enemy = popSoldierJob(soldier, &stayhome)) {
+			if (upcast(Building, building, enemy)) {
+				soldier->startTaskAttack(g, building);
+				return true;
+			} else if (upcast(Soldier, opponent, enemy)) {
+				if (!opponent->getBattle()) {
+					soldier->startTaskDefense(g, stayhome);
+					Battle::create(g, soldier, opponent);
+					return true;
+				}
+			} else
+				throw wexception("MilitarySite::get_building_work: bad SoldierJob");
+		}
 	}
 
 	return false;
@@ -443,6 +463,95 @@ void MilitarySite::conquer_area(Game & game) {
 }
 
 
+bool MilitarySite::canAttack()
+{
+	return m_didconquer;
+}
+
+void MilitarySite::aggressor(Soldier* enemy)
+{
+	upcast(Game, g, &owner().egbase());
+	if
+		(enemy->get_owner() == get_owner() ||
+		 enemy->getBattle() ||
+		 g->map().calc_distance(enemy->get_position(), get_position()) >= get_conquers())
+		return;
+
+	if
+		(g->map().find_bobs
+		 	(Area<FCoords>(g->map().get_fcoords(get_base_flag()->get_position()), 2),
+		 	 0,
+		 	 FindBobEnemySoldier(&owner())))
+		return;
+
+	// We're dealing with a soldier that we might want to keep busy
+	// Now would be the time to implement some player-definable
+	// policy as to how many soldiers are allowed to leave as defenders
+	std::vector<Soldier*> present = presentSoldiers();
+
+	if (present.size() > 1) {
+		for
+			(std::vector<Soldier*>::const_iterator it = present.begin();
+			 it != present.end();
+			 ++it)
+		{
+			if (!haveSoldierJob(*it)) {
+				SoldierJob sj;
+				sj.soldier = *it;
+				sj.enemy = enemy;
+				sj.stayhome = false;
+				m_soldierjobs.push_back(sj);
+				(*it)->update_task_buildingwork(g);
+				return;
+			}
+		}
+	}
+}
+
+bool MilitarySite::attack(Soldier* enemy)
+{
+	upcast(Game, g, &owner().egbase());
+	std::vector<Soldier*> present = presentSoldiers();
+
+	Soldier* defender = 0;
+
+	if (present.size()) {
+		defender = present[0];
+	} else {
+		// If one of our stationed soldiers is currently walking into the
+		// building, give us another chance.
+		std::vector<Soldier*> stationed = stationedSoldiers();
+		for
+			(std::vector<Soldier*>::const_iterator it = stationed.begin();
+			 it != stationed.end();
+			 ++it)
+		{
+			if ((*it)->get_position() == get_position()) {
+				defender = *it;
+				break;
+			}
+		}
+	}
+
+	if (defender) {
+		popSoldierJob(defender); // defense overrides all other jobs
+
+		SoldierJob sj;
+		sj.soldier = defender;
+		sj.enemy = enemy;
+		sj.stayhome = true;
+		m_soldierjobs.push_back(sj);
+
+		defender->update_task_buildingwork(g);
+		return true;
+	} else {
+		//TODO: Conquer building
+		schedule_destroy(g);
+		return false;
+	}
+}
+
+
 /*
    MilitarySite::set_requirements
 
@@ -463,10 +572,61 @@ void MilitarySite::clear_requirements ()
 	m_soldier_requirements = Requirements();
 }
 
-uint32_t MilitarySite::nr_attack_soldiers() {
-	uint32_t nr_soldiers = presentSoldiers().size();
-	if (nr_soldiers > 1)
-		return nr_soldiers - 1;
+void MilitarySite::sendAttacker(Soldier* soldier, Building* target)
+{
+	assert(isPresent(soldier));
+	assert(target);
+
+	upcast(Game, g, &owner().egbase());
+	assert(g);
+
+	if (haveSoldierJob(soldier))
+		return;
+
+	SoldierJob sj;
+	sj.soldier = soldier;
+	sj.enemy = target;
+	sj.stayhome = false;
+	m_soldierjobs.push_back(sj);
+
+	soldier->update_task_buildingwork(g);
+}
+
+
+bool MilitarySite::haveSoldierJob(Soldier* soldier)
+{
+	for
+		(std::vector<SoldierJob>::iterator it = m_soldierjobs.begin();
+		 it != m_soldierjobs.end();
+		 ++it)
+	{
+		if (it->soldier == soldier)
+			return true;
+	}
+
+	return false;
+}
+
+
+/**
+ * \return the enemy, if any, that the given soldier was scheduled
+ * to attack, and remove the job.
+ */
+Map_Object* MilitarySite::popSoldierJob(Soldier* soldier, bool* stayhome)
+{
+	for
+		(std::vector<SoldierJob>::iterator it = m_soldierjobs.begin();
+		 it != m_soldierjobs.end();
+		 ++it)
+	{
+		if (it->soldier == soldier) {
+			Map_Object* enemy = it->enemy.get(&owner().egbase());
+			if (stayhome)
+				*stayhome = it->stayhome;
+			m_soldierjobs.erase(it);
+			return enemy;
+		}
+	}
 	return 0;
 }
 

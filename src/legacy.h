@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,29 +17,35 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_BATTLE_DATA_PACKET_H
-#define WIDELANDS_MAP_BATTLE_DATA_PACKET_H
+#ifndef LEGACY_H
+#define LEGACY_H
 
-#include "widelands_map_data_packet.h"
+#include "instances.h"
 
 namespace Widelands {
 
-/*
- * This data packet contains the active battles of
- * the map
- *
+/**
+ * This namespace contains functions whose only purpose is to maintain
+ * backwards compatibility with old savegames and the like.
  */
-struct Map_Battle_Data_Packet : public Map_Data_Packet {
-	virtual void Read
-		(FileSystem &,
-		 Editor_Game_Base*,
-		 const bool,
-		 Map_Map_Object_Loader * = 0)
-		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
-		throw (_wexception) __attribute__ ((noreturn));
-};
+namespace Legacy {
 
-};
+/**
+ * Deal with old AttackControllers in savegames.
+ *
+ * AttackControllers have been outdated since build-12 (April 2008).
+ */
+Map_Object::Loader* loadAttackController(Editor_Game_Base *, Map_Map_Object_Loader *, FileRead &);
 
-#endif
+/**
+ * Deal with old Battle objects in savegames.
+ *
+ * These old Battle objects have been outdated since build-12 (April 2008).
+ */
+Map_Object::Loader* loadBattle(Editor_Game_Base *, Map_Map_Object_Loader *, FileRead &);
+
+}
+
+}
+
+#endif // LEGACY_H

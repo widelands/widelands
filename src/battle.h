@@ -25,37 +25,72 @@
 
 namespace Widelands {
 
-struct Battle : public BaseImmovable {
-	friend struct Map_Battle_Data_Packet;
-
+/**
+ * Manages the battle between two opposing soldiers.
+ *
+ * A \ref Battle object is created using the \ref create() function
+ * as soon as a soldier decides he wants to attack someone else.
+ */
+struct Battle : public Map_Object {
 	typedef Map_Object_Descr Descr;
 
 	Battle();
 	~Battle();
-	virtual int32_t  get_type    () const throw () {return BATTLE;}
+
+	static Battle* create(Game* g, Soldier* first, Soldier* second);
+
+	virtual int32_t get_type() const throw () {return BATTLE;}
 	char const * type_name() const throw () {return "battle";}
-	virtual int32_t  get_size    () const throw () {return SMALL;}
-	virtual bool get_passable() const throw () {return false;}
 
-	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
-	{}
+	void init(Editor_Game_Base*);
+	void cleanup(Editor_Game_Base*);
+	void cancel(Game*, Soldier*);
 
-	void init (Editor_Game_Base*);
-	void init (Editor_Game_Base*, Soldier*, Soldier*);
-	void soldiers (Soldier*, Soldier*);
-	virtual void cleanup (Editor_Game_Base*);
-	virtual void act (Game*, uint32_t);
+	Soldier* first() {return m_first;}
+	Soldier* second() {return m_second;}
+
+	/**
+	 * \return \c true if the battle should not be interrupted.
+	 */
+	bool locked(Game* g);
+
+	/**
+	 * \param soldier must be one of the soldier involved in this battle
+	 * \return the other soldier
+	 */
+	Soldier* getOpponent(Soldier* soldier);
+
+	/**
+	 * Called by the battling soldiers once they've met on a common node
+	 * and are idle.
+	 */
+	void getBattleWork(Game* g, Soldier* soldier);
 
 private:
+	void calculateTurn(Game* g);
+
 	Soldier* m_first;
 	Soldier* m_second;
-	int32_t      m_last_try;
-	int32_t      m_next_assault;
+
+	/**
+	 * Gametime when the battle was created.
+	 */
+	int32_t m_creationtime;
+
+	/**
+	 * 1 if only the first soldier is ready, 2 if only the second soldier
+	 * is ready, 3 if both are ready.
+	 */
+	uint8_t m_readyflags;
+
+	/**
+	 * \c true if the first soldier is the next to strike.
+	 */
+	bool m_first_strikes;
 
 	// Load/save support
 protected:
-	struct Loader : public BaseImmovable::Loader {
+	struct Loader : public Map_Object::Loader {
 		virtual void load(FileRead&);
 		virtual void load_pointers();
 

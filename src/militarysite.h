@@ -20,6 +20,7 @@
 #ifndef MILITARYSITE_H
 #define MILITARYSITE_H
 
+#include "attackable.h"
 #include "productionsite.h"
 #include "requirements.h"
 #include "soldiercontrol.h"
@@ -53,7 +54,7 @@ private:
 	int32_t m_heal_incr_per_medic;
 };
 
-class MilitarySite : public ProductionSite, public SoldierControl {
+class MilitarySite : public ProductionSite, public SoldierControl, public Attackable {
 	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(MilitarySite_Descr);
 
@@ -82,14 +83,22 @@ public:
 	virtual void dropSoldier(Soldier* soldier);
 	// End implementation of SoldierControl
 
+	// Begin implementation of Attackable
+	virtual bool canAttack();
+	virtual void aggressor(Soldier* soldier);
+	virtual bool attack(Soldier* soldier);
+	// End implementation of Attackable
+
+	/**
+	 * Launch the given soldier on an attack towards the given
+	 * target building.
+	 */
+	void sendAttacker(Soldier* soldier, Building* target);
+
 	/// This methods are helper for use at configure this site.
 	void set_requirements (const Requirements&);
 	void  clear_requirements ();
 	const Requirements& get_requirements () const {return m_soldier_requirements;}
-
-	/// Testing stuff
-	uint32_t nr_attack_soldiers();
-	void set_in_battle(bool const in_battle) {m_in_battle = in_battle;};
 
 	void update_soldier_request();
 
@@ -104,17 +113,26 @@ private:
 	static void request_soldier_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
+	Map_Object* popSoldierJob(Soldier* soldier, bool* stayhome = 0);
+	bool haveSoldierJob(Soldier* soldier);
+
 private:
 	Requirements m_soldier_requirements;
 	Request* m_soldier_request;
 	bool m_didconquer;
 	uint32_t m_capacity;
-	bool m_in_battle;
 
 	/**
 	 * Next gametime where we should heal something.
 	 */
 	int32_t m_nexthealtime;
+
+	struct SoldierJob {
+		Soldier* soldier;
+		Object_Ptr enemy;
+		bool stayhome;
+	};
+	std::vector<SoldierJob> m_soldierjobs;
 };
 
 };

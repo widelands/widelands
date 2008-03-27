@@ -110,14 +110,6 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	Immovable & create_immovable(Coords, int32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
 		(Coords, std::string const & name, Tribe_Descr const *);
-	Battle* create_battle ();
-	AttackController* create_attack_controller(Flag* flag, int32_t attacker, int32_t defender, uint32_t num);
-	AttackController* create_attack_controller();
-	void remove_attack_controller(uint32_t serial);
-	void register_attack_controller(AttackController* ctrl);
-	const std::vector<uint32_t>& get_attack_controller_serials() const {return m_attack_serials;}
-
-	std::vector<int32_t> get_battle_serials() const {return m_battle_serials;}
 
 	int32_t get_gametime() const {return m_gametime;}
 	Interactive_Base * get_iabase() const {return m_iabase;}
@@ -201,9 +193,6 @@ private:
 
 	uint32_t                       m_lasttrackserial;
 	std::map<uint32_t, void *>     m_trackpointers;
-public:
-	std::vector<int32_t>           m_battle_serials;    // The serials of the battles only used to load/save
-	std::vector<uint32_t>          m_attack_serials;
 
 private:
 	Editor_Game_Base & operator=(Editor_Game_Base const &);

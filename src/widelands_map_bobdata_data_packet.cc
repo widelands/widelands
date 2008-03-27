@@ -19,6 +19,7 @@
 
 #include "widelands_map_bobdata_data_packet.h"
 
+#include "battle.h"
 #include "bob.h"
 #include "carrier.h"
 #include "critter_bob.h"
@@ -48,7 +49,7 @@ namespace Widelands {
 #define WORKER_BOB_PACKET_VERSION 1
 
 // Worker subtype versions
-#define SOLDIER_WORKER_BOB_PACKET_VERSION 4
+#define SOLDIER_WORKER_BOB_PACKET_VERSION 5
 #define CARRIER_WORKER_BOB_PACKET_VERSION 1
 
 
@@ -186,10 +187,14 @@ throw
 									task = &Carrier::taskRoad;
 								else if (not strcmp(taskname, "transport"))
 									task = &Carrier::taskTransport;
-								else if (not strcmp(taskname, "moveToBattle"))
-									task = &Soldier::taskMoveToBattle;
-								else if (not strcmp(taskname, "moveHome"))
-									task = &Soldier::taskMoveHome;
+								else if (not strcmp(taskname, "attack"))
+									task = &Soldier::taskAttack;
+								else if (not strcmp(taskname, "defense"))
+									task = &Soldier::taskDefense;
+								else if (not strcmp(taskname, "battle"))
+									task = &Soldier::taskBattle;
+								else if (not strcmp(taskname, "moveToBattle") || not strcmp(taskname, "moveHome"))
+									task = &Worker::taskBuildingwork; // Weird hack to support legacy games
 								else if (*taskname == '\0')
 									continue; // Skip task
 								else
@@ -394,6 +399,11 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						if (soldier_worker_bob_packet_version <= 3) {
 							fr->Unsigned8 (); // old soldier->m_marked
 							oldsoldier_fix = true;
+						}
+						if (soldier_worker_bob_packet_version >= 5) {
+							Serial battle = fr->Unsigned32();
+							if (battle)
+								soldier->m_battle = &ol->get<Battle>(battle);
 						}
 					} else
 						throw wexception
@@ -657,6 +667,10 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 		fw->Unsigned32(soldier->m_attack_level);
 		fw->Unsigned32(soldier->m_defense_level);
 		fw->Unsigned32(soldier->m_evade_level);
+		if (soldier->m_battle)
+			fw->Unsigned32(os->get_object_file_index(soldier->m_battle));
+		else
+			fw->Unsigned32(0);
 	} else if (upcast(Carrier const, carrier, &worker)) {
 		fw->Unsigned16(CARRIER_WORKER_BOB_PACKET_VERSION);
 		fw->Signed32(carrier->m_acked_ware);

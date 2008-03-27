@@ -19,9 +19,10 @@
 
 #include "player.h"
 
-#include "attack_controller.h"
+#include "checkstep.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
+#include "findimmovable.h"
 #include "log.h"
 #include "game.h"
 #include "militarysite.h"
@@ -553,39 +554,94 @@ void Player::change_soldier_capacity (PlayerImmovable* imm, int32_t val) {
 	}
 }
 
-/*
-===============
-Player::enemyflagaction
+/**
+ * Get a list of soldiers that this player can be used to attack the
+ * building at the given flag.
+ *
+ * The default attack should just take the first N soldiers of the
+ * returned array.
+ *
+ * \todo Perform a meaningful sort on the soldiers array.
+ */
+uint32_t Player::findAttackSoldiers(Flag* flag, std::vector<Soldier*>* soldiers)
+{
+	uint32_t count = 0;
 
-Perform an action on the given enemy flag.
-===============
-*/
+	if (soldiers)
+		soldiers->clear();
+
+	Map& map = egbase().map();
+	std::vector<BaseImmovable*> immovables;
+
+	map.find_reachable_immovables_unique
+		(Area<FCoords>(map.get_fcoords(flag->get_position()), 25),
+		 &immovables,
+		 CheckStepWalkOn(MOVECAPS_WALK, false),
+		 FindImmovablePlayerMilitarySite(this));
+
+	if (!immovables.size())
+		return 0;
+
+	for
+		(std::vector<BaseImmovable*>::const_iterator it = immovables.begin();
+		 it != immovables.end();
+		 ++it)
+	{
+		upcast(MilitarySite, ms, *it);
+		std::vector<Soldier*> present = ms->presentSoldiers();
+
+		if (present.size() > 1) {
+			if (soldiers)
+				soldiers->insert(soldiers->end(), present.begin()+1, present.end());
+			count += present.size() - 1;
+		}
+	}
+
+	return count;
+}
+
+
+/**
+ * \todo Clean this mess up. The only action we really have right now is
+ * to attack, so pretending we have more types is pointless.
+ */
 void Player::enemyflagaction(Flag* flag, int32_t action, int32_t attacker, int32_t num, int32_t)
 {
-	if (attacker != get_player_number())
-		throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
+	upcast(Game, game, &egbase());
+	assert(game);
 
-	if (upcast(Game, game, &egbase())) {
-		assert (num >= 0);
+	if (attacker != get_player_number()) {
+		log("Player (%d) is not the sender of an attack (%d)\n", attacker, get_player_number());
+		return;
+	}
+	if (action != ENEMYFLAGACTION_ATTACK) {
+		log("enemyflagaction: unsupported action\n");
+		return;
+	}
+	if (num <= 0) {
+		log("enemyflagaction: num == %i\n", num);
+		return;
+	}
 
-		log("++Player::EnemyFlagAction()\n");
-		// Additional security check LOOK, if equal exit!!
-		if (flag->get_owner() == this)
-			return;
-		log("--Player::EnemyFlagAction() Checkpoint!\n");
+	if (flag->get_owner() == this)
+		return;
+	Building* building = flag->get_building();
+	if (!building)
+		return;
 
-		switch (action) {
-		case ENEMYFLAGACTION_ATTACK:
-			game->create_attack_controller
-				(flag,
-				 attacker,
-				 flag->get_owner()->get_player_number(),
-				 static_cast<uint32_t>(num));
-			break;
+	upcast(Attackable, attackable, building);
+	if (!attackable || !attackable->canAttack())
+		return;
 
-		default:
-			log("Player sent bad enemyflagaction = %i\n", action);
-		}
+	std::vector<Soldier*> attackers;
+	findAttackSoldiers(flag, &attackers);
+
+	num = std::min(static_cast<int32_t>(attackers.size()), num);
+	for(int32_t i = 0; i < num; ++i) {
+		Soldier* soldier = attackers[i];
+		upcast(MilitarySite, ms, soldier->get_location(&egbase()));
+
+		ms->sendAttacker(soldier, building);
 	}
 }
 

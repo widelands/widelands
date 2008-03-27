@@ -22,6 +22,7 @@
 
 #include <algorithm>
 
+#include "battle.h"
 #include "carrier.h"
 #include "editor_game_base.h"
 #include "game.h"
@@ -412,12 +413,12 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
 			m_incorporated_workers.erase(m_incorporated_workers.begin());
 		}
 	}
-	if (const uint32_t conquer_raduis = get_conquers())
+	if (const uint32_t conquer_radius = get_conquers())
 		gg->unconquer_area
 			(Player_Area<Area<FCoords> >
 			 	(owner().get_player_number(),
 			 	 Area<FCoords>
-			 	 	(gg->map().get_fcoords(get_position()), conquer_raduis)),
+			 	 	(gg->map().get_fcoords(get_position()), conquer_radius)),
 			 m_defeating_player);
 
 	// Unsee the area that we started seeing in init()
@@ -951,23 +952,62 @@ void Warehouse::create_worker(Game * game, Ware_Index const worker) {
 	} else
 		throw wexception
 			("Can not create worker of desired type : %d", worker.value());
-
-
 }
 
-/// Down here, only military methods !! ;)
 
-bool Warehouse::has_soldiers()
+bool Warehouse::canAttack()
 {
-	const Editor_Game_Base & egbase = owner().egbase();
-	const std::vector<Object_Ptr>::const_iterator end =
-		m_incorporated_workers.end();
-	for
-		(std::vector<Object_Ptr>::const_iterator it =
-		 m_incorporated_workers.begin();
-		 it != end;
-		 ++it)
-		if (dynamic_cast<const Soldier *>(it->get(&egbase))) return true;
+	return get_conquers() > 0;
+}
+
+void Warehouse::aggressor(Soldier* enemy)
+{
+	if (!get_conquers())
+		return;
+
+	upcast(Game, g, &owner().egbase());
+	if
+		(enemy->get_owner() == get_owner() ||
+		 enemy->getBattle() ||
+		 g->map().calc_distance(enemy->get_position(), get_position()) >= get_conquers())
+		return;
+
+	if
+		(g->map().find_bobs
+		 (Area<FCoords>(g->map().get_fcoords(get_base_flag()->get_position()), 2),
+		  0,
+		  FindBobEnemySoldier(&owner())))
+		return;
+
+	Ware_Index soldier_index = owner().tribe().get_worker_index("soldier");
+	Requirements noreq;
+
+	if (!count_workers(g, soldier_index, noreq))
+		return;
+
+	Worker* w = launch_worker(g, soldier_index, noreq);
+	upcast(Soldier, defender, w);
+	assert(defender);
+	defender->startTaskDefense(g, false);
+	Battle::create(g, defender, enemy);
+}
+
+bool Warehouse::attack(Soldier* enemy)
+{
+	upcast(Game, g, &owner().egbase());
+	Ware_Index soldier_index = owner().tribe().get_worker_index("soldier");
+	Requirements noreq;
+
+	if (count_workers(g, soldier_index, noreq)) {
+		Worker* w = launch_worker(g, soldier_index, noreq);
+		upcast(Soldier, defender, w);
+		assert(defender);
+		defender->startTaskDefense(g, true);
+		Battle::create(g, defender, enemy);
+		return true;
+	}
+
+	schedule_destroy(g);
 	return false;
 }
 

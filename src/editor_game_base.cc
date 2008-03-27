@@ -20,7 +20,6 @@
 #include "editor_game_base.h"
 
 #include "areawatcher.h"
-#include "attack_controller.h"
 #include "battle.h"
 #include "building.h"
 #include "font_handler.h"
@@ -673,72 +672,6 @@ Immovable & Editor_Game_Base::create_immovable
 	return create_immovable(c, idx, tribe);
 }
 
-Battle* Editor_Game_Base::create_battle ()
-{
-	Battle & b = *new Battle ();
-	b.init (this);
-	m_battle_serials.push_back (b.get_serial());
-	return &b;
-}
-
-AttackController* Editor_Game_Base::create_attack_controller
-		(Flag* flag, int32_t attacker, int32_t defender, uint32_t num)
-{
-	for (uint32_t i = 0; i < m_attack_serials.size(); ++i) {
-		AttackController* curCtrl =
-			dynamic_cast<AttackController *>
-			(objects().get_object(m_attack_serials[i]));
-		if (curCtrl->getFlag() == flag) {
-			curCtrl->launchAttack(num);
-			return curCtrl;
-		}
-	}
-
-	AttackController & ctrl =
-		*new AttackController(this, flag, attacker, defender);
-	ctrl.init(this);
-	ctrl.launchAttack(num);
-	m_attack_serials.push_back(ctrl.get_serial());
-	return &ctrl;
-}
-
-AttackController* Editor_Game_Base::create_attack_controller()
-{
-	AttackController * const ctrl =
-		new AttackController(static_cast<Game &>(*this));
-	ctrl->init(this);
-	m_attack_serials.push_back(ctrl->get_serial());
-	return ctrl;
-}
-
-void Editor_Game_Base::remove_attack_controller(uint32_t serial)
-{
-	for (uint32_t i = 0; i < m_attack_serials.size(); ++i) {
-		if (m_attack_serials[i] == serial) {
-			dynamic_cast<AttackController *>(objects().get_object(serial))
-				->destroy(this);
-
-			if (i < m_attack_serials.size() - 1)
-				m_attack_serials[i] = m_attack_serials[m_attack_serials.size() - 1];
-			m_attack_serials.pop_back();
-			return;
-		}
-	}
-}
-
-void Editor_Game_Base::register_attack_controller(AttackController* ctrl)
-{
-	assert
-		(std::find
-		 	(m_attack_serials.begin(),
-		 	 m_attack_serials.end(),
-		 	 ctrl->get_serial())
-		 ==
-		 m_attack_serials.end());
-
-	m_attack_serials.push_back(ctrl->get_serial());
-}
-
 /*
 ================
 Returns the correct player, creates it
@@ -813,9 +746,6 @@ void Editor_Game_Base::cleanup_for_load
 	(bool const flush_graphics, bool const flush_animations)
 {
 	cleanup_objects(); /// Clean all the stuff up, so we can load.
-
-	m_battle_serials.clear();
-	m_attack_serials.clear();
 
 	// We do not flush the animations in the editor since all tribes are loaded and
 	// animations can not change a lot, or?

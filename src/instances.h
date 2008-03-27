@@ -136,11 +136,10 @@ public:
 		BOB,  //  class Bob
 
 		WARE, //  class WareInstance
+		BATTLE,
 
 		// everything below is at least a BaseImmovable
 		IMMOVABLE,
-		BATTLE,
-		ATTACKCONTROLLER,
 
 		// everything below is at least a PlayerImmovable
 		BUILDING,
@@ -239,8 +238,9 @@ public:
 	enum {
 		header_Map_Object = 1,
 		header_Immovable = 2,
-		header_Battle = 3,
-		header_AttackController = 4
+		header_Legacy_Battle = 3,
+		header_Legacy_AttackController = 4,
+		header_Battle = 5
 	};
 
 	/**

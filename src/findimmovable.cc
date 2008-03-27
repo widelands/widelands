@@ -19,7 +19,10 @@
 
 #include "findimmovable.h"
 
+#include "attackable.h"
 #include "immovable.h"
+#include "militarysite.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -53,5 +56,18 @@ bool FindImmovablePlayerImmovable::accept(BaseImmovable* imm) const
 {
 	return dynamic_cast<PlayerImmovable const *>(imm);
 }
+
+bool FindImmovablePlayerMilitarySite::accept(BaseImmovable* imm) const {
+	if (upcast(MilitarySite, ms, imm))
+		return &ms->owner() == player;
+	return false;
+}
+
+bool FindImmovableAttackable::accept(BaseImmovable* imm) const {
+	if (upcast(Attackable, attackable, imm))
+		return true;
+	return false;
+}
+
 
 }

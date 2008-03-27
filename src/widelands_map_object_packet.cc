@@ -19,10 +19,10 @@
 
 #include "widelands_map_object_packet.h"
 
-#include "attack_controller.h"
 #include "battle.h"
 #include "editor_game_base.h"
 #include "immovable.h"
+#include "legacy.h"
 #include "map.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
@@ -64,8 +64,12 @@ void Map_Object_Packet::Read
 				loaders.insert(Immovable::load(egbase, ol, fr));
 				break;
 
-			case Map_Object::header_AttackController:
-				loaders.insert(AttackController::load(egbase, ol, fr));
+			case Map_Object::header_Legacy_AttackController:
+				loaders.insert(Legacy::loadAttackController(egbase, ol, fr));
+				break;
+
+			case Map_Object::header_Legacy_Battle:
+				loaders.insert(Legacy::loadBattle(egbase, ol, fr));
 				break;
 
 			case Map_Object::header_Battle:

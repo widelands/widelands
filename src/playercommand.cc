@@ -739,7 +739,6 @@ void Cmd_ChangeSoldierCapacity::Write
 
 }
 
-/// TESTING STUFF
 /*** Cmd_EnemyFlagAction ***/
 
 Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (StreamRead & des) :

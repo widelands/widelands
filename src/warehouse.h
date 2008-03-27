@@ -20,6 +20,7 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
+#include "attackable.h"
 #include "building.h"
 
 struct EncodeData;
@@ -63,7 +64,7 @@ private:
 };
 
 
-class Warehouse : public Building {
+class Warehouse : public Building, public Attackable {
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
@@ -101,8 +102,11 @@ public:
 	bool can_create_worker(Game *, Ware_Index);
 	void     create_worker(Game *, Ware_Index);
 
-	/// Military stuff
-	virtual bool has_soldiers();
+	// Begin Attackable implementation
+	virtual bool canAttack();
+	virtual void aggressor(Soldier* soldier);
+	virtual bool attack(Soldier* soldier);
+	// End Attackable implementation
 
 protected:
 	virtual UI::Window *create_options_window(Interactive_Player *plr, UI::Window **registry);

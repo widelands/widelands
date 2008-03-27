@@ -403,7 +403,8 @@ struct Player :
 	void drop_soldier(PlayerImmovable* imm, Soldier* worker);
 	void change_soldier_capacity (PlayerImmovable*, int32_t val);
 	void change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val);
-	//  launch an attack
+
+	uint32_t findAttackSoldiers(Flag* flag, std::vector<Soldier*>* soldiers = 0);
 	void enemyflagaction(Flag* flag, int32_t action, int32_t param, int32_t param2, int32_t param3);
 
 	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {

@@ -31,7 +31,7 @@ namespace Widelands {
 #define STRONGEST 1
 
 struct Editor_Game_Base;
-struct AttackController;
+struct Battle;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
@@ -115,6 +115,7 @@ public:
 	Soldier(const Soldier_Descr &);
 
 	virtual void init(Editor_Game_Base *);
+	virtual void cleanup(Editor_Game_Base *);
 
 	void set_level
 		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
@@ -167,23 +168,36 @@ public:
 
 	/// Heal quantity of hit points instantly
 	void heal (uint32_t);
-
 	void damage (uint32_t); /// Damage quantity of hit points
-
-public: // Worker-specific redefinitions
-	void startTaskMoveToBattle(Game *, Flag *, Coords);
-	void startTaskMoveHome(Game *);
 
 	void log_general_info(Editor_Game_Base *);
 
-	void set_attack_ctrl(AttackController* ctrl) {m_attack_ctrl = ctrl;};
+	bool isOnBattlefield();
+	Battle* getBattle();
+	bool canBeChallenged();
+	virtual bool checkFieldBlocked(Game* g, const FCoords& field, bool commit);
+
+	void setBattle(Game* g, Battle* battle);
+
+	void startTaskAttack(Game* g, Building* building);
+	void startTaskDefense(Game* g, bool stayhome);
+	void startTaskBattle(Game* g);
 
 private:
-	void moveToBattleUpdate (Game *, State *);
-	void moveHomeUpdate     (Game *, State *);
+	void attack_update(Game*, State*);
+	void attack_pop(Game*, State*);
+	void defense_update(Game*, State*);
+	void defense_pop(Game*, State*);
+	void battle_update(Game*, State*);
+	void battle_pop(Game*, State*);
+
+	void sendSpaceSignals(Game*);
+	bool stayHome();
+
 protected:
-	static Task taskMoveToBattle;
-	static Task taskMoveHome;
+	static Task taskAttack;
+	static Task taskDefense;
+	static Task taskBattle;
 
 private:
 	uint32_t m_hp_current;
@@ -198,7 +212,11 @@ private:
 	uint32_t m_defense_level;
 	uint32_t m_evade_level;
 
-	AttackController * m_attack_ctrl;
+	/**
+	 * If the soldier is involved in a challenge, it is assigned a battle
+	 * object.
+	 */
+	Battle* m_battle;
 };
 
 };

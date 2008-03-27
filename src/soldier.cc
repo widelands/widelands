@@ -19,9 +19,11 @@
 
 #include "soldier.h"
 
-#include "attack_controller.h"
+#include "attackable.h"
 #include "battle.h"
+#include "checkstep.h"
 #include "editor_game_base.h"
+#include "findimmovable.h"
 #include "game.h"
 #include "graphic.h"
 #include "helper.h"
@@ -221,10 +223,14 @@ IMPLEMENTATION
 */
 
 /// all done through init
-Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr) {}
+Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr)
+{
+	m_battle = 0;
+}
 
 
-void Soldier::init(Editor_Game_Base* gg) {
+void Soldier::init(Editor_Game_Base* gg)
+{
 	m_hp_level=0;
 	m_attack_level=0;
 	m_defense_level=0;
@@ -244,6 +250,11 @@ void Soldier::init(Editor_Game_Base* gg) {
 	m_hp_current=m_hp_max;
 
 	Worker::init(gg);
+}
+
+void Soldier::cleanup(Editor_Game_Base* gg)
+{
+	Worker::cleanup(gg);
 }
 
 /*
@@ -420,122 +431,476 @@ void Soldier::start_animation
 		start_task_idle (game, descr().get_rand_anim(animname), time);
 }
 
-Bob::Task Soldier::taskMoveToBattle = {
-	"moveToBattle",
-	static_cast<Bob::Ptr>(&Soldier::moveToBattleUpdate),
-	0,
-};
 
-void Soldier::startTaskMoveToBattle(Game * g, Flag *, Coords coords) {
-	molog ("Soldier::startTaskMoveToBattle\n");
-	push_task(g, taskMoveToBattle);
-
-	State* s = get_state();
-
-	// First step (we must exit from building), and set what is the target
-	s->ivar1 = 1;
-	s->ivar2 = 0;     // Not requested to attack (used by signal 'combat')
-	s->objvar1 = get_location(g);   // objvar1 is the owner flag (where is attached the FRIEND military site)
-	s->coords = coords; // Destination
+/**
+ * \return \c true if this soldier is considered to be on the battlefield
+ */
+bool Soldier::isOnBattlefield()
+{
+	return get_state(&taskAttack) || get_state(&taskDefense);
 }
 
-void Soldier::moveToBattleUpdate(Game * game, State* state) {
+
+Battle* Soldier::getBattle()
+{
+	return m_battle;
+}
+
+
+/**
+ * Determine whether this soldier can be challenged by an opponent.
+ *
+ * Such a challenge might override a battle that the soldier is currently
+ * walking towards, to avoid lockups when the combatants cannot reach
+ * each other.
+ */
+bool Soldier::canBeChallenged()
+{
+	if (!isOnBattlefield())
+		return false;
+	if (!m_battle)
+		return true;
+	return !m_battle->locked(dynamic_cast<Game*>(&get_owner()->egbase()));
+}
+
+/**
+ * Assign the soldier to a battle (may be zero).
+ *
+ * \note must only be called by the \ref Battle object
+ */
+void Soldier::setBattle(Game* g, Battle* battle)
+{
+	if (m_battle != battle) {
+		m_battle = battle;
+		send_signal(g, "battle");
+	}
+}
+
+
+/**
+ * Leave our home building and single-mindedly try to attack
+ * and conquer the given building.
+ *
+ * The following variables are used:
+ * \li objvar1 the \ref Building we're attacking.
+ */
+Bob::Task Soldier::taskAttack = {
+	"attack",
+	static_cast<Bob::Ptr>(&Soldier::attack_update),
+	0,
+	static_cast<Bob::Ptr>(&Soldier::attack_pop)
+};
+
+void Soldier::startTaskAttack(Game* g, Building* building)
+{
+	assert(dynamic_cast<Attackable*>(building));
+
+	push_task(g, taskAttack);
+
+	State* s = get_state();
+	s->objvar1 = building;
+}
+
+void Soldier::attack_update(Game* g, State* state)
+{
 	std::string signal = get_signal();
 
 	if (signal.size()) {
-		molog("moveToBattleSignal got signal: %s", signal.c_str());
-
-		if (signal == "won_battle") {
+		if (signal == "blocked" || signal == "battle" || signal == "wakeup") {
 			signal_handled();
-			skip_act();
-			m_attack_ctrl->soldierWon(this);
-			return;
-		} else if (signal == "die") {
+		} else if (signal == "fail") {
 			signal_handled();
-			skip_act();
-			m_attack_ctrl->soldierDied(this);
-			return;
-		} else if (signal == "return_home") {
-			signal_handled();
-			pop_task(game);
-			startTaskMoveHome(game);
-			return;
+			if (state->objvar1.get(g)) {
+				molog("[attack] failed to reach enemy\n");
+				state->objvar1 = 0;
+			} else {
+				molog("[attack] unexpected fail\n");
+				pop_task(g);
+				return;
+			}
 		} else {
-			// "location" et al: interrupt what we're doing
-			pop_task(game);
+			molog("[attack] cancelled by unexpected signal '%s'\n", signal.c_str());
+			pop_task(g);
 			return;
 		}
 	}
 
-	// See if soldier is at building and drop of it
-	if (state->ivar1 == 1) {
-		if
-			(dynamic_cast<Building const *>
-			 (game->map()[get_position()].get_immovable()))
-		{
-			state->ivar1 = 2;
-			start_task_leavebuilding(game, false);
+	PlayerImmovable* location = get_location(g);
+
+	BaseImmovable* imm = g->map()[get_position()].get_immovable();
+	upcast(Building, enemy, state->objvar1.get(g));
+	if (imm == location) {
+		if (!enemy) {
+			molog("[attack] returned home\n");
+			pop_task(g);
 			return;
 		}
-		// fall-through, because we're already outside the building
-	}
-	if (get_position() == state->coords) {
-		if (state->ivar1 != 3)
-			m_attack_ctrl->moveToReached(this);
-		state->ivar1 = 3;
-		start_task_idle(game, descr().get_animation("idle"), 1000);
+
+		start_task_leavebuilding(g, false);
 		return;
 	}
-	if
-		(!
-		 start_task_movepath
-		 	(game,
-		 	 state->coords,
-		 	 0,
-		 	 descr().get_right_walk_anims(does_carry_ware())))
-	{
-		molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
-		send_signal(game, "fail");
-		pop_task(game);
+
+	if (m_battle) {
+		startTaskBattle(g);
 		return;
 	}
+
+	if (signal == "blocked") {
+		// Wait before we try again. Note that this must come *after*
+		// we check for a battle
+		start_task_idle(g, get_animation("idle"), 5000);
+		return;
+	}
+
+	if (!location) {
+		molog("[attack] our location disappeared during a battle\n");
+		pop_task(g);
+		return;
+	}
+
+	if (!enemy) {
+		Flag* baseflag = location->get_base_flag();
+		if (imm == baseflag) {
+			start_task_move
+				(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
+			return;
+		}
+
+		molog("[attack] return home\n");
+		start_task_movepath
+			(g, baseflag->get_position(), 0,
+			 descr().get_right_walk_anims(does_carry_ware()));
+		return;
+	}
+
+	if (enemy->get_owner() == get_owner()) {
+		if (upcast(SoldierControl, ctrl, enemy)) {
+			if (ctrl->stationedSoldiers().size() < ctrl->soldierCapacity()) {
+				molog("[attack] enemy belongs to us now, move in\n");
+				set_location(enemy);
+			}
+		}
+
+		state->objvar1 = 0;
+		schedule_act(g, 10);
+		return;
+	}
+
+	// At this point, we know that the enemy building still stands,
+	// and that we're outside in the plains.
+	if (imm != enemy->get_base_flag()) {
+		molog("[attack] move towards building flag\n");
+		start_task_movepath
+			(g, enemy->get_base_flag()->get_position(), 2,
+			 descr().get_right_walk_anims(does_carry_ware()));
+		return;
+	}
+
+	upcast(Attackable, attackable, enemy);
+	assert(attackable);
+
+	molog("[attack] attacking target building\n");
+	if (attackable->attack(this))
+		schedule_act(g, 1000); // give the enemy soldier some time to act
+	else
+		schedule_act(g, 10);
+}
+
+void Soldier::attack_pop(Game* g, State*)
+{
+	if (m_battle)
+		m_battle->cancel(g, this);
 }
 
 
-Bob::Task Soldier::taskMoveHome = {
-	"moveHome",
-	static_cast<Bob::Ptr>(&Soldier::moveHomeUpdate),
+/**
+ * We are defending our home.
+ *
+ * Variables used:
+ * \li ivar1 is \c true when the soldier is supposed to stay on the home flag
+ * \li ivar2 used to pause before finally going home
+ */
+Bob::Task Soldier::taskDefense = {
+	"defense",
+	static_cast<Bob::Ptr>(&Soldier::defense_update),
 	0,
+	static_cast<Bob::Ptr>(&Soldier::defense_pop)
 };
 
-void Soldier::startTaskMoveHome(Game* g) {
-	molog ("Soldier::startTaskMoveHome\n");
-	push_task(g, taskMoveHome);
+void Soldier::startTaskDefense(Game* g, bool stayhome)
+{
+	push_task(g, taskDefense);
 
-	State* s = get_state();
-	s->ivar1 = 1;
-	s->ivar2 = 0;
-	s->objvar1 = get_location(g);
+	State* state = get_state();
+	state->ivar1 = stayhome;
+	state->ivar2 = 0;
 }
 
-void Soldier::moveHomeUpdate(Game* g, State* state) {
-	if (get_signal().size()) {
-		molog("moveToSignal: abort due to signal %s\n", get_signal().c_str());
+void Soldier::defense_update(Game* g, State* state)
+{
+	std::string signal = get_signal();
+
+	if (signal.size()) {
+		if (signal == "blocked" || signal == "battle" || signal == "wakeup") {
+			signal_handled();
+		} else {
+			molog("[defense] cancelled by signal '%s'\n", signal.c_str());
+			pop_task(g);
+			return;
+		}
+	}
+
+	PlayerImmovable* location = get_location(g);
+	BaseImmovable* position = g->map()[get_position()].get_immovable();
+	if (m_battle) {
+		if (position == location) {
+			start_task_leavebuilding(g, false);
+			return;
+		}
+
+		state->ivar2 = 0;
+		startTaskBattle(g);
+		return;
+	}
+
+	if (!location) {
+		molog("[defense] location disappeared during battle\n");
 		pop_task(g);
 		return;
 	}
 
-	// Move home
-	if (state->ivar1 == 1) {
-		state->ivar1 = 2;
-		start_task_return(g, false);
+	if (signal == "blocked") {
+		// Wait before we try again. Note that this must come *after*
+		// we check for a battle
+		start_task_idle(g, get_animation("idle"), 5000);
 		return;
 	}
-	else {
+
+	if (position == location) {
+		molog("[defense] returned home\n");
 		pop_task(g);
-		start_task_buildingwork(g); // bind the worker into this house, hide him on the map
+		return;
+	}
+
+	Flag* baseflag = location->get_base_flag();
+	if (position == baseflag) {
+		if (state->ivar1 && !state->ivar2) {
+			state->ivar2 = 1;
+			start_task_idle(g, get_animation("idle"), 250);
+			return;
+		}
+		start_task_move
+			(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
+		return;
+	}
+
+	molog("[defense] return home\n");
+	start_task_movepath
+		(g, baseflag->get_position(), 0,
+		 descr().get_right_walk_anims(does_carry_ware()));
+}
+
+void Soldier::defense_pop(Game* g, State*)
+{
+	if (m_battle)
+		m_battle->cancel(g, this);
+}
+
+
+/**
+ * \return \c true if the defending soldier should not stray from
+ * his home flag.
+ */
+bool Soldier::stayHome()
+{
+	if (State* state = get_state(&taskDefense))
+		return state->ivar1;
+	return false;
+}
+
+
+/**
+ * We are out in the open and involved in a challenge/battle.
+ * Meet with the other soldier and fight.
+ */
+Bob::Task Soldier::taskBattle = {
+	"battle",
+	static_cast<Bob::Ptr>(&Soldier::battle_update),
+	0,
+	static_cast<Bob::Ptr>(&Soldier::battle_pop)
+};
+
+void Soldier::startTaskBattle(Game* g)
+{
+	assert(m_battle);
+
+	push_task(g, taskBattle);
+}
+
+void Soldier::battle_update(Game* g, State*)
+{
+	if (m_serial == 176 && g->get_gametime() == 1498183) {
+		printf("Huh\n");
+	}
+
+	std::string signal = get_signal();
+
+	if (signal.size()) {
+		if (signal == "blocked") {
+			signal_handled();
+			start_task_idle(g, get_animation("idle"), 5000);
+			return;
+		} else if (signal == "location" || signal == "battle" || signal == "wakeup") {
+			signal_handled();
+		} else {
+			molog("[battle] interrupted by unexpected signal '%s'\n", signal.c_str());
+			pop_task(g);
+			return;
+		}
+	}
+
+	if (!m_battle) {
+		molog("[battle] is over\n");
+		sendSpaceSignals(g);
+		pop_task(g);
+		return;
+	}
+
+	if (!m_battle->getOpponent(this)) {
+		start_task_idle(g, get_animation("idle"), -1);
+		return;
+	}
+
+	if (stayHome()) {
+		if (this == m_battle->first()) {
+			molog("[battle] stayHome, so reverse roles\n");
+			Battle::create(g, m_battle->second(), m_battle->first());
+			skip_act(); // we will get a signal via setBattle()
+			return;
+		}
+	} else {
+		Soldier* opponent = m_battle->getOpponent(this);
+
+		if (opponent->get_position() != get_position()) {
+			Map& map = g->map();
+			int dist = map.calc_distance(get_position(), opponent->get_position());
+
+			if (dist >= 2 || this == m_battle->first()) {
+				// Only make small steps at a time, so we can adjust to the opponent's
+				// change of position
+				Coords dest = opponent->get_position();
+				if (upcast(Building, building, map[dest].get_immovable()))
+					dest = building->get_base_flag()->get_position();
+				start_task_movepath
+					(g, dest, 0,
+					 descr().get_right_walk_anims(does_carry_ware()),
+					 false, (dist+3)/4);
+				return;
+			}
+		}
+	}
+
+	m_battle->getBattleWork(g, this);
+}
+
+void Soldier::battle_pop(Game* g, State*)
+{
+	if (m_battle)
+		m_battle->cancel(g, this);
+}
+
+
+struct FindSoldierOnBattlefield : public FindBob {
+	bool accept(Bob* bob) const
+	{
+		if (upcast(Soldier, soldier, bob))
+			return soldier->isOnBattlefield();
+		return false;
+	}
+};
+
+
+/**
+ * Override \ref Bob::checkFieldBlocked.
+ *
+ * As long as we're on the battlefield, check for other soldiers.
+ */
+bool Soldier::checkFieldBlocked(Game* g, const FCoords& field, bool commit)
+{
+	if (!isOnBattlefield())
+		return false;
+
+	if (upcast(Building, building, get_location(g))) {
+		if (field == building->get_position()) {
+			if (commit)
+				sendSpaceSignals(g);
+			return false; // we can always walk home
+		}
+	}
+
+	std::vector<Bob*> soldiers;
+	g->map().find_bobs(Area<FCoords>(field, 0), &soldiers, FindSoldierOnBattlefield());
+
+	if
+		(soldiers.size() &&
+		 (!m_battle ||
+		  std::find(soldiers.begin(), soldiers.end(), m_battle->getOpponent(this)) == soldiers.end()))
+	{
+		if (commit && soldiers.size() == 1) {
+			upcast(Soldier, soldier, soldiers[0]);
+			if (soldier->get_owner() != get_owner() && soldier->canBeChallenged()) {
+				molog("[checkFieldBlocked] attacking a soldier\n");
+				Battle::create(g, this, soldier);
+			}
+		}
+		return true;
+	}
+
+	if (commit)
+		sendSpaceSignals(g);
+	return false;
+}
+
+
+/**
+ * Send a "wakeup" signal to all surrounding soldiers that are out in the open,
+ * so that they may repeat pathfinding.
+ */
+void Soldier::sendSpaceSignals(Game* g)
+{
+	std::vector<Bob*> soldiers;
+
+	g->map().find_bobs(Area<FCoords>(get_position(), 1), &soldiers, FindSoldierOnBattlefield());
+
+	for(uint32_t i = 0; i < soldiers.size(); ++i) {
+		if (upcast(Soldier, soldier, soldiers[i])) {
+			if (soldier != this)
+				soldier->send_signal(g, "wakeup");
+		}
+	}
+
+	if (get_position().field->get_owned_by() != get_owner()->get_player_number()) {
+		std::vector<BaseImmovable*> attackables;
+		g->map().find_reachable_immovables_unique
+			(Area<FCoords>(get_position(), MaxProtectionRadius),
+			 &attackables,
+			 CheckStepWalkOn(get_movecaps(), false),
+			 FindImmovableAttackable());
+
+		for
+			(std::vector<BaseImmovable*>::const_iterator it = attackables.begin();
+			 it != attackables.end();
+			 ++it)
+		{
+			upcast(PlayerImmovable, pimm, *it);
+			if (pimm->get_owner() != get_owner()) {
+				upcast(Attackable, att, *it);
+				att->aggressor(this);
+			}
+		}
 	}
 }
+
 
 void Soldier::log_general_info(Editor_Game_Base* egbase)
 {

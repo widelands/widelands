@@ -104,6 +104,13 @@ struct FindBobAttribute : public FindBob {
 	int32_t m_attrib;
 	virtual ~FindBobAttribute() {}  // make gcc shut up
 };
+struct FindBobEnemySoldier : public FindBob {
+	FindBobEnemySoldier(Player* _player) : player(_player) {}
+
+	virtual bool accept(Bob *imm) const;
+
+	Player* player;
+};
 
 /** class Map
  *
@@ -212,6 +219,11 @@ struct Map {
 	uint32_t find_reachable_immovables
 		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
+		 const CheckStep &,
+		 const FindImmovable & = FindImmovableAlwaysTrue());
+	uint32_t find_reachable_immovables_unique
+		(const Area<FCoords>,
+		 std::vector<BaseImmovable*> * list,
 		 const CheckStep &,
 		 const FindImmovable & = FindImmovableAlwaysTrue());
 	uint32_t find_fields

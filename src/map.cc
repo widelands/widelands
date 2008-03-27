@@ -31,6 +31,8 @@
 #include "findimmovable.h"
 #include "tribe.h"
 #include "pathfield.h"
+#include "soldier.h"
+#include "upcast.h"
 #include "widelands_map_loader.h"
 #include "worlddata.h"
 #include "wexception.h"
@@ -841,6 +843,40 @@ uint32_t Map::find_reachable_immovables
 	find_reachable(area, checkstep, cb);
 
 	return cb.m_found;
+}
+
+
+/**
+ * Find all immovables that are reachable without moving out of the
+ * given area with the additional constraints given by checkstep,
+ * and store them uniquely in a list.
+ *
+ * \return the number of immovables found.
+ */
+uint32_t Map::find_reachable_immovables_unique
+	(const Area<FCoords> area,
+	 std::vector<BaseImmovable*> * list,
+	 const CheckStep & checkstep,
+	 const FindImmovable & functor)
+{
+	std::vector<ImmovableFound> duplist;
+	FindImmovablesCallback cb(&duplist, FindImmovableAlwaysTrue());
+
+	find_reachable(area, checkstep, cb);
+
+	for
+		(std::vector<ImmovableFound>::const_iterator it = duplist.begin();
+		 it != duplist.end();
+		 ++it)
+	{
+		BaseImmovable* obj = it->object;
+		if (std::find(list->begin(), list->end(), obj) == list->end()) {
+			if (functor.accept(obj))
+				list->push_back(obj);
+		}
+	}
+
+	return list->size();
 }
 
 /*
@@ -2194,6 +2230,16 @@ Bob search functors
 bool FindBobAttribute::accept(Bob *bob) const
 {
 	return bob->has_attribute(m_attrib);
+}
+
+bool FindBobEnemySoldier::accept(Bob *imm) const
+{
+	if (upcast(Soldier, soldier, imm)) {
+		if (soldier->isOnBattlefield() && soldier->get_owner() != player)
+			return true;
+	}
+
+	return false;
 }
 
 

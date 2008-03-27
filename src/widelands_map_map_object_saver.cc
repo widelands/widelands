@@ -93,7 +93,6 @@ Serial Map_Map_Object_Saver::register_object(Map_Object const * const obj) {
 	case Map_Object::WARE:             ++m_nr_wares;              break;
 	case Map_Object::BOB:              ++m_nr_bobs;               break;
 	case Map_Object::BATTLE:           ++m_nr_battles;            break;
-	case Map_Object::ATTACKCONTROLLER: ++m_nr_attack_controllers; break;
 	default:
 		throw wexception("Map_Map_Object_Saver: Unknown MapObject type");
 	}

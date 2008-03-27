@@ -52,7 +52,6 @@ struct Map_Map_Object_Saver {
 	uint32_t get_nr_bobs           () const throw () {return m_nr_bobs;}
 	uint32_t get_nr_immovables     () const throw () {return m_nr_immovables;}
 	uint32_t get_nr_battles        () const throw () {return m_nr_battles;}
-	uint32_t get_nr_attack_controllers() const throw () {return m_nr_attack_controllers;}
 
 	bool is_object_saved(const Map_Object * const obj) throw ();
 
@@ -74,7 +73,6 @@ private:
 	uint32_t m_nr_wares;
 	uint32_t m_nr_immovables;
 	uint32_t m_nr_battles;
-	uint32_t m_nr_attack_controllers;
 	uint32_t m_lastserial;
 };
 

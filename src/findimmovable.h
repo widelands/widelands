@@ -25,6 +25,7 @@
 namespace Widelands {
 
 class BaseImmovable;
+class Player;
 
 struct FindImmovable {
 private:
@@ -108,6 +109,19 @@ struct FindImmovablePlayerImmovable {
 
 	bool accept(BaseImmovable* imm) const;
 };
+struct FindImmovablePlayerMilitarySite {
+	FindImmovablePlayerMilitarySite(Player* _player) : player(_player) {}
+
+	bool accept(BaseImmovable* imm) const;
+
+	Player* player;
+};
+struct FindImmovableAttackable {
+	FindImmovableAttackable()  {}
+
+	bool accept(BaseImmovable* imm) const;
+};
+
 
 }
 

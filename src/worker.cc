@@ -1442,14 +1442,8 @@ void Worker::start_task_buildingwork(Game* g)
 
 void Worker::buildingwork_update(Game* g, State* state)
 {
+	// Reset any signals that are not related to location
 	std::string signal = get_signal();
-
-	if (signal == "location") {
-		pop_task(g);
-		return;
-	}
-
-	// Reset any other signals
 	signal_handled();
 
 	if (state->ivar1 == 1)
@@ -1461,9 +1455,13 @@ void Worker::buildingwork_update(Game* g, State* state)
 	}
 
 	// Return to building, if necessary
-	Building & building = dynamic_cast<Building &>(*get_location(g));
+	Building* building = dynamic_cast<Building*>(get_location(g));
+	if (!building) {
+		pop_task(g);
+		return;
+	}
 
-	if (g->map().get_immovable(get_position()) != &building) {
+	if (g->map().get_immovable(get_position()) != building) {
 		molog("[buildingwork]: Something went wrong, return home.\n");
 
 		start_task_return(g, false); // don't drop item
@@ -1477,7 +1475,7 @@ void Worker::buildingwork_update(Game* g, State* state)
 	// state pointer might become invalid
 	state->ivar1 = 1;
 
-	if (not building.get_building_work(g, this, success)) {
+	if (not building->get_building_work(g, this, success)) {
 		set_animation(g, 0);
 		skip_act();
 	}

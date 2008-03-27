@@ -19,13 +19,13 @@
 
 #include "fieldaction.h"
 
-#include "attack_controller.h"
-#include "interactive_player.h"
+#include "attackable.h"
 #include "cmd_queue.h"
 #include "editorinteractive.h"
 #include "game_debug_ui.h"
 #include "graphic.h"
 #include "i18n.h"
+#include "interactive_player.h"
 #include "maphollowregion.h"
 #include "militarysite.h"
 #include "overlay_manager.h"
@@ -457,14 +457,8 @@ void FieldActionWindow::add_buttons_attack ()
 		// The box with attack buttons
 		attackbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
-		if (upcast(Building, building, m_map->get_immovable(m_field)))
-			if
-				(dynamic_cast<const Game *>(&m_iabase->egbase())
-				 and
-				 (dynamic_cast<Widelands::MilitarySite const *>(building)
-				  or
-				  dynamic_cast<Widelands::Warehouse    const *>(building)))
-			{
+		if (upcast(Widelands::Attackable, attackable, m_map->get_immovable(m_field)))
+			if (attackable->canAttack()) {
 				m_attackers = 0;
 				m_attackers_type = STRONGEST;
 				add_button
@@ -950,13 +944,10 @@ void FieldActionWindow::act_attack_more() {
 }
 
 uint32_t FieldActionWindow::get_max_attackers() {
-	return
-		getMaxAttackSoldiers
-		(m_iabase->egbase(),
-		 dynamic_cast<Widelands::Flag const &>
-		 	(*dynamic_cast<Building &>(*m_map->get_immovable(m_field))
-		 	 .get_base_flag()),
-		 m_plr->get_player_number());
+	upcast(Building, building, m_map->get_immovable(m_field));
+	if (building && building->get_owner() != m_plr)
+		return m_plr->findAttackSoldiers(building->get_base_flag());
+	return 0;
 }
 
 void FieldActionWindow::act_attack_less() {
