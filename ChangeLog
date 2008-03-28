@@ -1,41 +1,70 @@
+build-12:
+- New feature: Additional scenario event types and trigger types.
+- New feature: Flags are automatically placed when holding down Ctrl while building a road.
+- New feature: Start the editor from the command line (widelands --editor=<filename>).
+- New feature: Navigation in edit boxes.
+- New feature: Multiplayer games.
+- New and greatly improved animations for a number of workers.
+- New animals and new animations for existing animals.
+- New singleplayer/multiplayer map.
+- New tribe 'Atlantids'
+- Improved the usability of scrollbars, listselects and tables.
+- Improvements of Campaign UI (show only revealed campaigns/scenarios).
+- Improvements of all single-/multiplayer maps (rebalancing resources).
+- Improved the building statistics menu.
+- Improved the scenarios to make use of new features.
+- Improved the performance of terrain rendering.
+- Improved usability of roadbuilding.
+- Improved the handling of player colours.
+- Improved recovery from bugs during gameplay.
+- Improved the battle system.
+- Fixed bugs: Several invalid memory accesses which may have caused random bugs.
+- Fixed bug: Workers that become fugitives have a higher chance of finding back to a warehouse. A flag connected to a warehouse must be close to the worker.
+- Fixed bug that the objectives menu was not updated when objectives were fulfilled during the game.
+- Fixed bug that workers would enter a building before arriving at it (entering it when passing the flag in front of the building). This caused the worker to start seeing from the building too early.
+- Fixed network support for direct IP and LAN games.
+- Fixed many gamelogic bugs.
+- Removed support for GGZ. Please use the forums and IRC channel to meet for multiplayer games.
+- Many other bugfixes, optimizations and cleanups.
+
 build-11:
-- New feature: Game Tips during loading 
-- New feature: Progress message windows (Loading-screens) 
-- New feature: Fog of war 
-- New feature: Autosave (and emergency-save) 
-- New feature: Visible Range for bobs and buildings 
-- New feature: Replay-function 
-- New feature: volume-sliders for sound and music 
-- New animations for animals 
-- New animations for bobs (few trees are falling after they are choped) 
-- Improvements of the transportationsystem (f.e. ware priority-buttons) 
-- Improvements of the S2-Map-importation-system. 
-- Improvements of Multiplayercode. 
-- Improvements of Campaign UI 
-- Improvement of "growing tree patch" (seperation of different steps) 
-- Improvement of single-line-edit-box handling (buttons aren't locked anymore) 
-- Improvement of Ware-image visualisation program. 
-- Added 2 new multiplayer maps 
-- Fix of bug 1633431 (Attacking headquarters crashes game.) 
-- Fix of bug 1451851 (Upgrade building while delievering to/from cause crash/hang) 
-- Fix of bug 1690070 (ware: can't move from building A to B) 
+- New feature: Game Tips during loading
+- New feature: Progress message windows (Loading-screens)
+- New feature: Fog of war
+- New feature: Autosave (and emergency-save)
+- New feature: Visible Range for bobs and buildings
+- New feature: Replay-function
+- New feature: volume-sliders for sound and music
+- New animations for animals
+- New animations for bobs (few trees are falling after they are choped)
+- Improvements of the transportationsystem (f.e. ware priority-buttons)
+- Improvements of the S2-Map-importation-system.
+- Improvements of Multiplayercode.
+- Improvements of Campaign UI
+- Improvement of "growing tree patch" (seperation of different steps)
+- Improvement of single-line-edit-box handling (buttons aren't locked anymore)
+- Improvement of Ware-image visualisation program.
+- Added 2 new multiplayer maps
+- Fix of bug 1633431 (Attacking headquarters crashes game.)
+- Fix of bug 1451851 (Upgrade building while delievering to/from cause crash/hang)
+- Fix of bug 1690070 (ware: can't move from building A to B)
 - Many other bugfixes
 
 build-10:
 - Addition of new tribe "The Empire"
 - Tribe "Barbarians" was completly overhauled
 - New blender graphics for the Barbarians and the Empire by bithunter32
-- New blender graphics for the Empire by AlexiaDeath 
-- Addition of new worlds (Blackland, winterland and desert) 
+- New blender graphics for the Empire by AlexiaDeath
+- Addition of new worlds (Blackland, winterland and desert)
 - Addition of few new maps
-- Addition of two new Empire-campaign-maps 
-- Addition of three new ingame music-tracks 
+- Addition of two new Empire-campaign-maps
+- Addition of three new ingame music-tracks
 - A lot of localisation-bugs were fixed and new strings for translation were added.
-- Widelands now supports 14 languages (cz_CZ, de_DE, en_EN, es_ES, fi_FI, fr_FR, gl_ES , he_HE, hu_HU, nl_NL, pl_PL, ru_RU, sk_SK, sv_SE) 
+- Widelands now supports 14 languages (cz_CZ, de_DE, en_EN, es_ES, fi_FI, fr_FR, gl_ES , he_HE, hu_HU, nl_NL, pl_PL, ru_RU, sk_SK, sv_SE)
 - New feature: Mouse-over-hover-help
 - New feature: Tribe ware encyclopedia
-- Mousewheel support integrated (textarea) 
-- Now using new fonts (FreeSans and FreeSerif) licensed under GPL 
+- Mousewheel support integrated (textarea)
+- Now using new fonts (FreeSans and FreeSerif) licensed under GPL
 - Battlecode was reworked
 - Menu-resolution set to 800x600 (before 640x480) and added new splash
 - Work on ingame window-system
@@ -43,7 +72,7 @@ build-10:
 - A lot of menu texts and alignments were fixed
 - A lot of new button-, icon-, background- and campaign-graphics added.
 - A lot of code-cleanup
-- Bug fixes, bug fixes, bug fixes 
+- Bug fixes, bug fixes, bug fixes
 
 build-9half:
 - Updated Campaign Missions
@@ -51,7 +80,7 @@ build-9half:
 - Font renderer now renders multiple newlines correctly and in richtext
   accepts <br> as newline
 - added localisation patch by Josef + beginning of localisation
-- f now triggers fullscreen ingame 
+- f now triggers fullscreen ingame
 - added new maps from winterwind
 - implemented new trigger system. This invalidates every scenario, campaign and map.
 - save now changes into zip files, added option nozip for debugging reasons
@@ -80,14 +109,14 @@ build-9:
 - fixed "Worker Type 11 not found" bug
 - new Tree Graphics from Wolfgang Weidner
 - Added patch from Florian Falkner
-  * new Option Dialog 
+  * new Option Dialog
   * UIListselect can have now a selection-indicator
   * WatchWindow functionality is user selectable
 - Windows can be minimized (middle mouse or CTRL+left mouse)
 - fixed crash when using 32-bit fullscreen mode under win32
 
 build-8:
-- some ui ergonomics (new mapselect dialog, 
+- some ui ergonomics (new mapselect dialog,
   double click function in listselects)
 - resources and default resources support
 - loading/saving of maps
@@ -95,7 +124,7 @@ build-8:
 - enhancing buildings support
 - build animation support
 - editor events/trigger
-- editor player menu 
+- editor player menu
 - editor bob tool
 
 build-7:
