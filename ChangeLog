@@ -1,7 +1,7 @@
 build-12:
 - New feature: Additional scenario event types and trigger types.
 - New feature: Flags are automatically placed when holding down Ctrl while building a road.
-- New feature: Start the editor from the command line (widelands --editor=<filename>).
+- New feature: Load maps directly into the editor from the command line (widelands --editor=<filename>).
 - New feature: Navigation in edit boxes.
 - New feature: Multiplayer games.
 - New and greatly improved animations for a number of workers.
