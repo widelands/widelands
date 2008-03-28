@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1100C5A50D8D6BF000244D29 /* chat.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1100C5A10D8D6BF000244D29 /* chat.cc */; };
+		1100C5A70D8D6BF000244D29 /* gamechatpanel.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1100C5A30D8D6BF000244D29 /* gamechatpanel.cc */; };
+		1100C5AB0D8D6C3C00244D29 /* ui_messagebox.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1100C5A90D8D6C3C00244D29 /* ui_messagebox.cc */; };
 		1110298F0D8229E600C4555E /* widelands.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF76C7840B9B7C75003E2C5A /* widelands.icns */; };
 		1110E9350D8205F800C4555E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1110E9340D8205F800C4555E /* libz.dylib */; };
 		1110EB1B0D82210F00C4555E /* libpng.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 11EF59640D81F0CA0026C4FA /* libpng.framework */; };
 		1110EB1C0D82211400C4555E /* libintl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 11EF5A8A0D8203960026C4FA /* libintl.framework */; };
+		11454D490D9D3B4900325CAD /* checkstep.cc in Sources */ = {isa = PBXBuildFile; fileRef = 11454D410D9D3B4900325CAD /* checkstep.cc */; };
+		11454D4B0D9D3B4900325CAD /* legacy.cc in Sources */ = {isa = PBXBuildFile; fileRef = 11454D430D9D3B4900325CAD /* legacy.cc */; };
+		11454D4D0D9D3B4900325CAD /* pathfield.cc in Sources */ = {isa = PBXBuildFile; fileRef = 11454D450D9D3B4900325CAD /* pathfield.cc */; };
 		11EF58800D81EAAE0026C4FA /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F3A2C09D0888800EBEB88 /* SDLMain.m */; };
 		11EF58870D81EB140026C4FA /* trigger_military_influence_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = 11EF58840D81EB140026C4FA /* trigger_military_influence_option_menu.cc */; };
 		11EF58880D81EB140026C4FA /* trigger_ownership_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = 11EF58850D81EB140026C4FA /* trigger_ownership_option_menu.cc */; };
@@ -160,7 +166,6 @@
 		BF22DE330A5FB72B00D0292B /* game_interactive_player_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC250A5FB72B00D0292B /* game_interactive_player_data_packet.cc */; };
 		BF22DE350A5FB72B00D0292B /* game_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC270A5FB72B00D0292B /* game_loader.cc */; };
 		BF22DE370A5FB72B00D0292B /* game_main_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC290A5FB72B00D0292B /* game_main_menu.cc */; };
-		BF22DE390A5FB72B00D0292B /* game_main_menu_load_game.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC2B0A5FB72B00D0292B /* game_main_menu_load_game.cc */; };
 		BF22DE3B0A5FB72B00D0292B /* game_main_menu_save_game.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC2D0A5FB72B00D0292B /* game_main_menu_save_game.cc */; };
 		BF22DE3D0A5FB72B00D0292B /* game_map_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC2F0A5FB72B00D0292B /* game_map_data_packet.cc */; };
 		BF22DE3F0A5FB72B00D0292B /* game_objectives_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC310A5FB72B00D0292B /* game_objectives_menu.cc */; };
@@ -169,14 +174,6 @@
 		BF22DE450A5FB72B00D0292B /* game_player_info_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC370A5FB72B00D0292B /* game_player_info_data_packet.cc */; };
 		BF22DE470A5FB72B00D0292B /* game_preload_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC390A5FB72B00D0292B /* game_preload_data_packet.cc */; };
 		BF22DE490A5FB72B00D0292B /* game_saver.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC3B0A5FB72B00D0292B /* game_saver.cc */; };
-		BF22DE4B0A5FB72B00D0292B /* game_server_connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC3D0A5FB72B00D0292B /* game_server_connection.cc */; };
-		BF22DE500A5FB72B00D0292B /* game_server_proto_packet_chatmessage.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC420A5FB72B00D0292B /* game_server_proto_packet_chatmessage.cc */; };
-		BF22DE520A5FB72B00D0292B /* game_server_proto_packet_connect.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC440A5FB72B00D0292B /* game_server_proto_packet_connect.cc */; };
-		BF22DE540A5FB72B00D0292B /* game_server_proto_packet_getroominfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC460A5FB72B00D0292B /* game_server_proto_packet_getroominfo.cc */; };
-		BF22DE560A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC480A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.cc */; };
-		BF22DE580A5FB72B00D0292B /* game_server_proto_packet_hello.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC4A0A5FB72B00D0292B /* game_server_proto_packet_hello.cc */; };
-		BF22DE5A0A5FB72B00D0292B /* game_server_proto_packet_ping.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC4C0A5FB72B00D0292B /* game_server_proto_packet_ping.cc */; };
-		BF22DE5C0A5FB72B00D0292B /* game_server_proto_packet_userentered.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC4E0A5FB72B00D0292B /* game_server_proto_packet_userentered.cc */; };
 		BF22DE5E0A5FB72B00D0292B /* general_statistics_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC500A5FB72B00D0292B /* general_statistics_menu.cc */; };
 		BF22DE610A5FB72B00D0292B /* graphic.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC530A5FB72B00D0292B /* graphic.cc */; };
 		BF22DE640A5FB72B00D0292B /* helper.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC560A5FB72B00D0292B /* helper.cc */; };
@@ -194,8 +191,6 @@
 		BF22DE8F0A5FB72B00D0292B /* militarysite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC810A5FB72B00D0292B /* militarysite.cc */; };
 		BF22DE910A5FB72B00D0292B /* minimap.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC830A5FB72B00D0292B /* minimap.cc */; };
 		BF22DE930A5FB72B00D0292B /* network.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC850A5FB72B00D0292B /* network.cc */; };
-		BF22DE950A5FB72B00D0292B /* network_buffer.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC870A5FB72B00D0292B /* network_buffer.cc */; };
-		BF22DE970A5FB72B00D0292B /* network_ggz.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC890A5FB72B00D0292B /* network_ggz.cc */; };
 		BF22DE990A5FB72B00D0292B /* network_lan_promotion.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC8B0A5FB72B00D0292B /* network_lan_promotion.cc */; };
 		BF22DE9C0A5FB72B00D0292B /* overlay_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC8E0A5FB72B00D0292B /* overlay_manager.cc */; };
 		BF22DE9E0A5FB72B00D0292B /* player.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC900A5FB72B00D0292B /* player.cc */; };
@@ -221,7 +216,6 @@
 		BF22DEE10A5FB72B00D0292B /* ui_editbox.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCD50A5FB72B00D0292B /* ui_editbox.cc */; };
 		BF22DEE30A5FB72B00D0292B /* ui_icongrid.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCD70A5FB72B00D0292B /* ui_icongrid.cc */; };
 		BF22DEE50A5FB72B00D0292B /* ui_listselect.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCD90A5FB72B00D0292B /* ui_listselect.cc */; };
-		BF22DEE70A5FB72B00D0292B /* ui_modal_messagebox.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCDB0A5FB72B00D0292B /* ui_modal_messagebox.cc */; };
 		BF22DEE90A5FB72B00D0292B /* ui_multilineeditbox.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCDD0A5FB72B00D0292B /* ui_multilineeditbox.cc */; };
 		BF22DEEB0A5FB72B00D0292B /* ui_multilinetextarea.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCDF0A5FB72B00D0292B /* ui_multilinetextarea.cc */; };
 		BF22DEEE0A5FB72B00D0292B /* ui_panel.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCE20A5FB72B00D0292B /* ui_panel.cc */; };
@@ -235,8 +229,6 @@
 		BF22DEFF0A5FB72B00D0292B /* ui_window.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCF30A5FB72B00D0292B /* ui_window.cc */; };
 		BF22DF010A5FB72B00D0292B /* fullscreen_menu_base.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCF60A5FB72B00D0292B /* fullscreen_menu_base.cc */; };
 		BF22DF030A5FB72B00D0292B /* fullscreen_menu_fileview.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCF80A5FB72B00D0292B /* fullscreen_menu_fileview.cc */; };
-		BF22DF050A5FB72B00D0292B /* fullscreen_menu_inet_lobby.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCFA0A5FB72B00D0292B /* fullscreen_menu_inet_lobby.cc */; };
-		BF22DF070A5FB72B00D0292B /* fullscreen_menu_inet_server_options.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCFC0A5FB72B00D0292B /* fullscreen_menu_inet_server_options.cc */; };
 		BF22DF090A5FB72B00D0292B /* fullscreen_menu_intro.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCFE0A5FB72B00D0292B /* fullscreen_menu_intro.cc */; };
 		BF22DF0B0A5FB72B00D0292B /* fullscreen_menu_launchgame.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD000A5FB72B00D0292B /* fullscreen_menu_launchgame.cc */; };
 		BF22DF0D0A5FB72B00D0292B /* fullscreen_menu_loadgame.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD020A5FB72B00D0292B /* fullscreen_menu_loadgame.cc */; };
@@ -250,7 +242,6 @@
 		BF22DF240A5FB72B00D0292B /* waresdisplay.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD190A5FB72B00D0292B /* waresdisplay.cc */; };
 		BF22DF260A5FB72B00D0292B /* watchwindow.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD1B0A5FB72B00D0292B /* watchwindow.cc */; };
 		BF22DF290A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD1E0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.cc */; };
-		BF22DF2B0A5FB72B00D0292B /* widelands_map_battle_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD200A5FB72B00D0292B /* widelands_map_battle_data_packet.cc */; };
 		BF22DF2D0A5FB72B00D0292B /* widelands_map_bob_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD220A5FB72B00D0292B /* widelands_map_bob_data_packet.cc */; };
 		BF22DF2F0A5FB72B00D0292B /* widelands_map_bobdata_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD240A5FB72B00D0292B /* widelands_map_bobdata_data_packet.cc */; };
 		BF22DF310A5FB72B00D0292B /* widelands_map_building_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD260A5FB72B00D0292B /* widelands_map_building_data_packet.cc */; };
@@ -317,10 +308,8 @@
 		BF800FB00BAC1B5C00ADE70F /* SDL_net.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF800F650BAC1B2800ADE70F /* SDL_net.framework */; };
 		BF800FB10BAC1B5C00ADE70F /* SDL_ttf.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF800F660BAC1B2800ADE70F /* SDL_ttf.framework */; };
 		BF800FB20BAC1B5C00ADE70F /* SDL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF800F670BAC1B2800ADE70F /* SDL.framework */; };
-		BFA98F390B4F01DA00FB5075 /* attack_controller.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F270B4F01D900FB5075 /* attack_controller.cc */; };
 		BFA98F3F0B4F01DA00FB5075 /* encyclopedia_window.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F2D0B4F01D900FB5075 /* encyclopedia_window.cc */; };
 		BFA98F460B4F01DA00FB5075 /* transport_draw.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F340B4F01D900FB5075 /* transport_draw.cc */; };
-		BFA98F480B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F360B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.cc */; };
 		BFFB200A0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEA0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc */; };
 		BFFB200C0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEC0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc */; };
 		BFFB200E0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEE0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc */; };
@@ -363,7 +352,21 @@
 		002F3A2C09D0888800EBEB88 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = SOURCE_ROOT; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1100C5A10D8D6BF000244D29 /* chat.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = chat.cc; sourceTree = "<group>"; };
+		1100C5A20D8D6BF000244D29 /* chat.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chat.h; sourceTree = "<group>"; };
+		1100C5A30D8D6BF000244D29 /* gamechatpanel.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = gamechatpanel.cc; sourceTree = "<group>"; };
+		1100C5A40D8D6BF000244D29 /* gamechatpanel.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = gamechatpanel.h; sourceTree = "<group>"; };
+		1100C5A90D8D6C3C00244D29 /* ui_messagebox.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ui_messagebox.cc; sourceTree = "<group>"; };
+		1100C5AA0D8D6C3C00244D29 /* ui_messagebox.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ui_messagebox.h; sourceTree = "<group>"; };
 		1110E9340D8205F800C4555E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = /usr/lib/libz.dylib; sourceTree = "<absolute>"; };
+		11454D400D9D3B4900325CAD /* attackable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = attackable.h; sourceTree = "<group>"; };
+		11454D410D9D3B4900325CAD /* checkstep.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = checkstep.cc; sourceTree = "<group>"; };
+		11454D420D9D3B4900325CAD /* checkstep.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = checkstep.h; sourceTree = "<group>"; };
+		11454D430D9D3B4900325CAD /* legacy.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = legacy.cc; sourceTree = "<group>"; };
+		11454D440D9D3B4900325CAD /* legacy.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = legacy.h; sourceTree = "<group>"; };
+		11454D450D9D3B4900325CAD /* pathfield.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = pathfield.cc; sourceTree = "<group>"; };
+		11454D460D9D3B4900325CAD /* pathfield.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = pathfield.h; sourceTree = "<group>"; };
+		11454D470D9D3B4900325CAD /* soldiercontrol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = soldiercontrol.h; sourceTree = "<group>"; };
 		11EF58840D81EB140026C4FA /* trigger_military_influence_option_menu.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = trigger_military_influence_option_menu.cc; sourceTree = "<group>"; };
 		11EF58850D81EB140026C4FA /* trigger_ownership_option_menu.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = trigger_ownership_option_menu.cc; sourceTree = "<group>"; };
 		11EF58860D81EB140026C4FA /* trigger_visison_option_menu.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = trigger_visison_option_menu.cc; sourceTree = "<group>"; };
@@ -562,7 +565,7 @@
 		38EAFF610BF6E34500578DA1 /* idleworkersupply.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = idleworkersupply.h; sourceTree = "<group>"; };
 		38EAFF670BF6E73B00578DA1 /* doc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = doc; path = ../../doc; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* Widelands.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Widelands.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* Widelands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Widelands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF22DB5F0A5FB72A00D0292B /* animation.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cc; sourceTree = "<group>"; };
 		BF22DB600A5FB72A00D0292B /* animation.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = animation.h; sourceTree = "<group>"; };
 		BF22DB610A5FB72A00D0292B /* battle.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = battle.cc; sourceTree = "<group>"; };
@@ -683,8 +686,6 @@
 		BF22DC280A5FB72B00D0292B /* game_loader.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_loader.h; sourceTree = "<group>"; };
 		BF22DC290A5FB72B00D0292B /* game_main_menu.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_main_menu.cc; sourceTree = "<group>"; };
 		BF22DC2A0A5FB72B00D0292B /* game_main_menu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_main_menu.h; sourceTree = "<group>"; };
-		BF22DC2B0A5FB72B00D0292B /* game_main_menu_load_game.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_main_menu_load_game.cc; sourceTree = "<group>"; };
-		BF22DC2C0A5FB72B00D0292B /* game_main_menu_load_game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_main_menu_load_game.h; sourceTree = "<group>"; };
 		BF22DC2D0A5FB72B00D0292B /* game_main_menu_save_game.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_main_menu_save_game.cc; sourceTree = "<group>"; };
 		BF22DC2E0A5FB72B00D0292B /* game_main_menu_save_game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_main_menu_save_game.h; sourceTree = "<group>"; };
 		BF22DC2F0A5FB72B00D0292B /* game_map_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_map_data_packet.cc; sourceTree = "<group>"; };
@@ -701,24 +702,6 @@
 		BF22DC3A0A5FB72B00D0292B /* game_preload_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_preload_data_packet.h; sourceTree = "<group>"; };
 		BF22DC3B0A5FB72B00D0292B /* game_saver.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_saver.cc; sourceTree = "<group>"; };
 		BF22DC3C0A5FB72B00D0292B /* game_saver.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_saver.h; sourceTree = "<group>"; };
-		BF22DC3D0A5FB72B00D0292B /* game_server_connection.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_server_connection.cc; sourceTree = "<group>"; };
-		BF22DC3E0A5FB72B00D0292B /* game_server_connection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_connection.h; sourceTree = "<group>"; };
-		BF22DC3F0A5FB72B00D0292B /* game_server_proto.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto.h; sourceTree = "<group>"; };
-		BF22DC410A5FB72B00D0292B /* game_server_proto_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto_packet.h; sourceTree = "<group>"; };
-		BF22DC420A5FB72B00D0292B /* game_server_proto_packet_chatmessage.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_server_proto_packet_chatmessage.cc; sourceTree = "<group>"; };
-		BF22DC430A5FB72B00D0292B /* game_server_proto_packet_chatmessage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto_packet_chatmessage.h; sourceTree = "<group>"; };
-		BF22DC440A5FB72B00D0292B /* game_server_proto_packet_connect.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_server_proto_packet_connect.cc; sourceTree = "<group>"; };
-		BF22DC450A5FB72B00D0292B /* game_server_proto_packet_connect.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto_packet_connect.h; sourceTree = "<group>"; };
-		BF22DC460A5FB72B00D0292B /* game_server_proto_packet_getroominfo.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_server_proto_packet_getroominfo.cc; sourceTree = "<group>"; };
-		BF22DC470A5FB72B00D0292B /* game_server_proto_packet_getroominfo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto_packet_getroominfo.h; sourceTree = "<group>"; };
-		BF22DC480A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_server_proto_packet_getuserinfo.cc; sourceTree = "<group>"; };
-		BF22DC490A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto_packet_getuserinfo.h; sourceTree = "<group>"; };
-		BF22DC4A0A5FB72B00D0292B /* game_server_proto_packet_hello.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_server_proto_packet_hello.cc; sourceTree = "<group>"; };
-		BF22DC4B0A5FB72B00D0292B /* game_server_proto_packet_hello.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto_packet_hello.h; sourceTree = "<group>"; };
-		BF22DC4C0A5FB72B00D0292B /* game_server_proto_packet_ping.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_server_proto_packet_ping.cc; sourceTree = "<group>"; };
-		BF22DC4D0A5FB72B00D0292B /* game_server_proto_packet_ping.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto_packet_ping.h; sourceTree = "<group>"; };
-		BF22DC4E0A5FB72B00D0292B /* game_server_proto_packet_userentered.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_server_proto_packet_userentered.cc; sourceTree = "<group>"; };
-		BF22DC4F0A5FB72B00D0292B /* game_server_proto_packet_userentered.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_server_proto_packet_userentered.h; sourceTree = "<group>"; };
 		BF22DC500A5FB72B00D0292B /* general_statistics_menu.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = general_statistics_menu.cc; sourceTree = "<group>"; };
 		BF22DC510A5FB72B00D0292B /* general_statistics_menu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = general_statistics_menu.h; sourceTree = "<group>"; };
 		BF22DC530A5FB72B00D0292B /* graphic.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = graphic.cc; sourceTree = "<group>"; };
@@ -756,10 +739,6 @@
 		BF22DC840A5FB72B00D0292B /* minimap.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = minimap.h; sourceTree = "<group>"; };
 		BF22DC850A5FB72B00D0292B /* network.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = network.cc; sourceTree = "<group>"; };
 		BF22DC860A5FB72B00D0292B /* network.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = network.h; sourceTree = "<group>"; };
-		BF22DC870A5FB72B00D0292B /* network_buffer.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = network_buffer.cc; sourceTree = "<group>"; };
-		BF22DC880A5FB72B00D0292B /* network_buffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = network_buffer.h; sourceTree = "<group>"; };
-		BF22DC890A5FB72B00D0292B /* network_ggz.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = network_ggz.cc; sourceTree = "<group>"; };
-		BF22DC8A0A5FB72B00D0292B /* network_ggz.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = network_ggz.h; sourceTree = "<group>"; };
 		BF22DC8B0A5FB72B00D0292B /* network_lan_promotion.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = network_lan_promotion.cc; sourceTree = "<group>"; };
 		BF22DC8C0A5FB72B00D0292B /* network_lan_promotion.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = network_lan_promotion.h; sourceTree = "<group>"; };
 		BF22DC8D0A5FB72B00D0292B /* network_system.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = network_system.h; sourceTree = "<group>"; };
@@ -815,8 +794,6 @@
 		BF22DCD80A5FB72B00D0292B /* ui_icongrid.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ui_icongrid.h; sourceTree = "<group>"; };
 		BF22DCD90A5FB72B00D0292B /* ui_listselect.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ui_listselect.cc; sourceTree = "<group>"; };
 		BF22DCDA0A5FB72B00D0292B /* ui_listselect.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ui_listselect.h; sourceTree = "<group>"; };
-		BF22DCDB0A5FB72B00D0292B /* ui_modal_messagebox.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ui_modal_messagebox.cc; sourceTree = "<group>"; };
-		BF22DCDC0A5FB72B00D0292B /* ui_modal_messagebox.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ui_modal_messagebox.h; sourceTree = "<group>"; };
 		BF22DCDD0A5FB72B00D0292B /* ui_multilineeditbox.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ui_multilineeditbox.cc; sourceTree = "<group>"; };
 		BF22DCDE0A5FB72B00D0292B /* ui_multilineeditbox.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ui_multilineeditbox.h; sourceTree = "<group>"; };
 		BF22DCDF0A5FB72B00D0292B /* ui_multilinetextarea.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ui_multilinetextarea.cc; sourceTree = "<group>"; };
@@ -845,10 +822,6 @@
 		BF22DCF70A5FB72B00D0292B /* fullscreen_menu_base.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fullscreen_menu_base.h; sourceTree = "<group>"; };
 		BF22DCF80A5FB72B00D0292B /* fullscreen_menu_fileview.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = fullscreen_menu_fileview.cc; sourceTree = "<group>"; };
 		BF22DCF90A5FB72B00D0292B /* fullscreen_menu_fileview.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fullscreen_menu_fileview.h; sourceTree = "<group>"; };
-		BF22DCFA0A5FB72B00D0292B /* fullscreen_menu_inet_lobby.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = fullscreen_menu_inet_lobby.cc; sourceTree = "<group>"; };
-		BF22DCFB0A5FB72B00D0292B /* fullscreen_menu_inet_lobby.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fullscreen_menu_inet_lobby.h; sourceTree = "<group>"; };
-		BF22DCFC0A5FB72B00D0292B /* fullscreen_menu_inet_server_options.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = fullscreen_menu_inet_server_options.cc; sourceTree = "<group>"; };
-		BF22DCFD0A5FB72B00D0292B /* fullscreen_menu_inet_server_options.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fullscreen_menu_inet_server_options.h; sourceTree = "<group>"; };
 		BF22DCFE0A5FB72B00D0292B /* fullscreen_menu_intro.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = fullscreen_menu_intro.cc; sourceTree = "<group>"; };
 		BF22DCFF0A5FB72B00D0292B /* fullscreen_menu_intro.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fullscreen_menu_intro.h; sourceTree = "<group>"; };
 		BF22DD000A5FB72B00D0292B /* fullscreen_menu_launchgame.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = fullscreen_menu_launchgame.cc; sourceTree = "<group>"; };
@@ -876,8 +849,6 @@
 		BF22DD1D0A5FB72B00D0292B /* wexception.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = wexception.h; sourceTree = "<group>"; };
 		BF22DD1E0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = widelands_map_allowed_buildings_data_packet.cc; sourceTree = "<group>"; };
 		BF22DD1F0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = widelands_map_allowed_buildings_data_packet.h; sourceTree = "<group>"; };
-		BF22DD200A5FB72B00D0292B /* widelands_map_battle_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = widelands_map_battle_data_packet.cc; sourceTree = "<group>"; };
-		BF22DD210A5FB72B00D0292B /* widelands_map_battle_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = widelands_map_battle_data_packet.h; sourceTree = "<group>"; };
 		BF22DD220A5FB72B00D0292B /* widelands_map_bob_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = widelands_map_bob_data_packet.cc; sourceTree = "<group>"; };
 		BF22DD230A5FB72B00D0292B /* widelands_map_bob_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = widelands_map_bob_data_packet.h; sourceTree = "<group>"; };
 		BF22DD240A5FB72B00D0292B /* widelands_map_bobdata_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = widelands_map_bobdata_data_packet.cc; sourceTree = "<group>"; };
@@ -970,16 +941,12 @@
 		BF800F650BAC1B2800ADE70F /* SDL_net.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_net.framework; path = /Library/Frameworks/ManuallyInstalled/SDL_net.framework; sourceTree = "<absolute>"; };
 		BF800F660BAC1B2800ADE70F /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/ManuallyInstalled/SDL_ttf.framework; sourceTree = "<absolute>"; };
 		BF800F670BAC1B2800ADE70F /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/ManuallyInstalled/SDL.framework; sourceTree = "<absolute>"; };
-		BFA98F270B4F01D900FB5075 /* attack_controller.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = attack_controller.cc; sourceTree = "<group>"; };
-		BFA98F280B4F01D900FB5075 /* attack_controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = attack_controller.h; sourceTree = "<group>"; };
 		BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = cmd_check_eventchain.h; sourceTree = "<group>"; };
 		BFA98F2A0B4F01D900FB5075 /* compile_assert.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = compile_assert.h; sourceTree = "<group>"; };
 		BFA98F2D0B4F01D900FB5075 /* encyclopedia_window.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = encyclopedia_window.cc; sourceTree = "<group>"; };
 		BFA98F2E0B4F01D900FB5075 /* encyclopedia_window.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = encyclopedia_window.h; sourceTree = "<group>"; };
 		BFA98F310B4F01D900FB5075 /* helper.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = helper.h; sourceTree = "<group>"; };
 		BFA98F340B4F01D900FB5075 /* transport_draw.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = transport_draw.cc; sourceTree = "<group>"; };
-		BFA98F360B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = widelands_map_attack_controller_data_packet.cc; sourceTree = "<group>"; };
-		BFA98F370B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = widelands_map_attack_controller_data_packet.h; sourceTree = "<group>"; };
 		BFF8CEB90B6CC6AF005E6AF1 /* animation_gfx.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = animation_gfx.h; sourceTree = "<group>"; };
 		BFF8CEBC0B6CC6AF005E6AF1 /* player_area.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = player_area.h; sourceTree = "<group>"; };
 		BFF8CEBD0B6CC6AF005E6AF1 /* widelands_fileread.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = widelands_fileread.h; sourceTree = "<group>"; };
@@ -1114,17 +1081,17 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF22DF970A5FB7D400D0292B /* Libraries */,
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 				11EF5A8A0D8203960026C4FA /* libintl.framework */,
 				11EF59640D81F0CA0026C4FA /* libpng.framework */,
+				BF800F670BAC1B2800ADE70F /* SDL.framework */,
 				38EAFE540BF3722300578DA1 /* SDL_gfx.framework */,
 				BF800F630BAC1B2800ADE70F /* SDL_image.framework */,
 				BF800F640BAC1B2800ADE70F /* SDL_mixer.framework */,
 				BF800F650BAC1B2800ADE70F /* SDL_net.framework */,
 				BF800F660BAC1B2800ADE70F /* SDL_ttf.framework */,
-				BF800F670BAC1B2800ADE70F /* SDL.framework */,
-				BF22DF970A5FB7D400D0292B /* Libraries */,
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1171,43 +1138,43 @@
 		3881ED0C0C2189FE0014F097 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				3881ED0F0C2189FE0014F097 /* event_allow_building.cc */,
 				11EF589A0D81EB710026C4FA /* event_building.cc */,
-				11EF589B0D81EB710026C4FA /* event_building.h */,
+				3881ED110C2189FE0014F097 /* event_chain.cc */,
+				3881ED130C2189FE0014F097 /* event_conquer_area.cc */,
+				3881ED150C2189FE0014F097 /* event_factory.cc */,
 				11EF589C0D81EB710026C4FA /* event_flag.cc */,
-				11EF589D0D81EB710026C4FA /* event_flag.h */,
 				11EF589E0D81EB710026C4FA /* event_immovable.cc */,
-				11EF589F0D81EB710026C4FA /* event_immovable.h */,
-				11EF58A00D81EB710026C4FA /* event_reveal_campaign.cc */,
-				11EF58A10D81EB710026C4FA /* event_reveal_campaign.h */,
-				11EF58A20D81EB710026C4FA /* event_reveal_objective.cc */,
-				11EF58A30D81EB710026C4FA /* event_reveal_objective.h */,
-				11EF58A40D81EB710026C4FA /* event_reveal_scenario.cc */,
-				11EF58A50D81EB710026C4FA /* event_reveal_scenario.h */,
+				3881ED170C2189FE0014F097 /* event_message_box.cc */,
+				3881ED190C2189FE0014F097 /* event_message_box_message_box.cc */,
+				3881ED1B0C2189FE0014F097 /* event_move_view.cc */,
+				3881ED1D0C2189FE0014F097 /* event_player_area.cc */,
 				11EF58A60D81EB710026C4FA /* event_reveal.cc */,
-				11EF58A70D81EB710026C4FA /* event_reveal.h */,
+				11EF58A00D81EB710026C4FA /* event_reveal_campaign.cc */,
+				11EF58A20D81EB710026C4FA /* event_reveal_objective.cc */,
+				11EF58A40D81EB710026C4FA /* event_reveal_scenario.cc */,
 				11EF58A80D81EB710026C4FA /* event_road.cc */,
-				11EF58A90D81EB710026C4FA /* event_road.h */,
+				3881ED210C2189FE0014F097 /* event_set_null_trigger.cc */,
+				3881ED230C2189FE0014F097 /* event_unhide_area.cc */,
 				11EF58AA0D81EB710026C4FA /* option_menus.cc */,
 				3881ED0E0C2189FE0014F097 /* event.h */,
-				3881ED0F0C2189FE0014F097 /* event_allow_building.cc */,
 				3881ED100C2189FE0014F097 /* event_allow_building.h */,
-				3881ED110C2189FE0014F097 /* event_chain.cc */,
+				11EF589B0D81EB710026C4FA /* event_building.h */,
 				3881ED120C2189FE0014F097 /* event_chain.h */,
-				3881ED130C2189FE0014F097 /* event_conquer_area.cc */,
 				3881ED140C2189FE0014F097 /* event_conquer_area.h */,
-				3881ED150C2189FE0014F097 /* event_factory.cc */,
 				3881ED160C2189FE0014F097 /* event_factory.h */,
-				3881ED170C2189FE0014F097 /* event_message_box.cc */,
+				11EF589D0D81EB710026C4FA /* event_flag.h */,
+				11EF589F0D81EB710026C4FA /* event_immovable.h */,
 				3881ED180C2189FE0014F097 /* event_message_box.h */,
-				3881ED190C2189FE0014F097 /* event_message_box_message_box.cc */,
 				3881ED1A0C2189FE0014F097 /* event_message_box_message_box.h */,
-				3881ED1B0C2189FE0014F097 /* event_move_view.cc */,
 				3881ED1C0C2189FE0014F097 /* event_move_view.h */,
-				3881ED1D0C2189FE0014F097 /* event_player_area.cc */,
 				3881ED1E0C2189FE0014F097 /* event_player_area.h */,
-				3881ED210C2189FE0014F097 /* event_set_null_trigger.cc */,
+				11EF58A70D81EB710026C4FA /* event_reveal.h */,
+				11EF58A10D81EB710026C4FA /* event_reveal_campaign.h */,
+				11EF58A30D81EB710026C4FA /* event_reveal_objective.h */,
+				11EF58A50D81EB710026C4FA /* event_reveal_scenario.h */,
+				11EF58A90D81EB710026C4FA /* event_road.h */,
 				3881ED220C2189FE0014F097 /* event_set_null_trigger.h */,
-				3881ED230C2189FE0014F097 /* event_unhide_area.cc */,
 				3881ED240C2189FE0014F097 /* event_unhide_area.h */,
 			);
 			path = events;
@@ -1217,18 +1184,18 @@
 			isa = PBXGroup;
 			children = (
 				38EAFDA00BEF4EFA00578DA1 /* disk_filesystem.cc */,
-				38EAFDA10BEF4EFA00578DA1 /* disk_filesystem.h */,
 				38EAFDA20BEF4EFA00578DA1 /* filesystem.cc */,
+				38EAFDA60BEF4EFA00578DA1 /* layered_filesystem.cc */,
+				38EAFDAA0BEF4EFA00578DA1 /* unzip.cc */,
+				38EAFDAE0BEF4EFA00578DA1 /* zip_filesystem.cc */,
+				38EAFDA10BEF4EFA00578DA1 /* disk_filesystem.h */,
 				38EAFDA30BEF4EFA00578DA1 /* filesystem.h */,
 				38EAFDA40BEF4EFA00578DA1 /* filesystem_exceptions.h */,
 				38EAFDA50BEF4EFA00578DA1 /* ioapi.h */,
-				38EAFDA60BEF4EFA00578DA1 /* layered_filesystem.cc */,
 				38EAFDA70BEF4EFA00578DA1 /* layered_filesystem.h */,
-				38EAFDAA0BEF4EFA00578DA1 /* unzip.cc */,
 				38EAFDAB0BEF4EFA00578DA1 /* unzip.h */,
 				38EAFDAC0BEF4EFA00578DA1 /* zip.h */,
 				38EAFDAD0BEF4EFA00578DA1 /* zip_exceptions.h */,
-				38EAFDAE0BEF4EFA00578DA1 /* zip_filesystem.cc */,
 				38EAFDAF0BEF4EFA00578DA1 /* zip_filesystem.h */,
 			);
 			path = filesystem;
@@ -1245,71 +1212,15 @@
 				BF22DCCC0A5FB72B00D0292B /* ui */,
 				BF22DB5F0A5FB72A00D0292B /* animation.cc */,
 				38EAFD630BEF4EA000578DA1 /* areawatcher.cc */,
-				11EF58CA0D81EC440026C4FA /* basic_fileread.h */,
-				11EF58CB0D81EC440026C4FA /* basic_filewrite.h */,
-				11EF58CC0D81EC440026C4FA /* campvis.cc */,
-				11EF58CD0D81EC440026C4FA /* campvis.h */,
-				11EF58CE0D81EC440026C4FA /* findimmovable.cc */,
-				11EF58CF0D81EC440026C4FA /* findimmovable.h */,
-				11EF58D00D81EC440026C4FA /* findnode.cc */,
-				11EF58D10D81EC440026C4FA /* findnode.h */,
-				11EF58D20D81EC440026C4FA /* game_options_sound_menu.cc */,
-				11EF58D30D81EC440026C4FA /* game_options_sound_menu.h */,
-				11EF58D40D81EC440026C4FA /* gamecontroller.cc */,
-				11EF58D50D81EC440026C4FA /* gamecontroller.h */,
-				11EF58D60D81EC440026C4FA /* gamesettings.h */,
-				11EF58D70D81EC440026C4FA /* interactive_spectator.cc */,
-				11EF58D80D81EC440026C4FA /* interactive_spectator.h */,
-				11EF58D90D81EC440026C4FA /* log.cc */,
-				11EF58DA0D81EC440026C4FA /* log.h */,
-				11EF58DB0D81EC440026C4FA /* manager.h */,
-				11EF58DC0D81EC440026C4FA /* md5.cc */,
-				11EF58DD0D81EC440026C4FA /* md5.h */,
-				11EF58DE0D81EC440026C4FA /* named.h */,
-				11EF58DF0D81EC440026C4FA /* netclient.cc */,
-				11EF58E00D81EC440026C4FA /* netclient.h */,
-				11EF58E10D81EC440026C4FA /* nethost.cc */,
-				11EF58E20D81EC440026C4FA /* nethost.h */,
-				11EF58E30D81EC440026C4FA /* network_protocol.h */,
-				11EF58E40D81EC440026C4FA /* notification.h */,
-				11EF58E50D81EC440026C4FA /* objective.h */,
-				11EF58E60D81EC440026C4FA /* point.h */,
-				11EF58E70D81EC440026C4FA /* rect.h */,
-				11EF58E80D81EC440026C4FA /* referenced.h */,
-				11EF58E90D81EC440026C4FA /* referencer.h */,
-				11EF58EA0D81EC440026C4FA /* replay.cc */,
-				11EF58EB0D81EC440026C4FA /* replay.h */,
-				11EF58EC0D81EC440026C4FA /* request.cc */,
-				11EF58ED0D81EC440026C4FA /* request.h */,
-				11EF58EE0D81EC440026C4FA /* requirements.cc */,
-				11EF58EF0D81EC440026C4FA /* requirements.h */,
-				11EF58F00D81EC440026C4FA /* streamread.cc */,
-				11EF58F10D81EC440026C4FA /* streamread.h */,
-				11EF58F20D81EC440026C4FA /* streamwrite.cc */,
-				11EF58F30D81EC440026C4FA /* streamwrite.h */,
-				11EF58F40D81EC440026C4FA /* tattribute.h */,
-				11EF58F50D81EC440026C4FA /* timestring.cc */,
-				11EF58F60D81EC440026C4FA /* timestring.h */,
-				11EF58F70D81EC440026C4FA /* upcast.h */,
-				11EF58F80D81EC440026C4FA /* variable.h */,
-				11EF58F90D81EC440026C4FA /* vector.h */,
-				11EF58FA0D81EC440026C4FA /* vertex.h */,
-				11EF58FB0D81EC440026C4FA /* warehousesupply.h */,
-				11EF58FC0D81EC440026C4FA /* widelands_geometry.h */,
-				11EF58FD0D81EC440026C4FA /* widelands_map_object_packet.cc */,
-				11EF58FE0D81EC440026C4FA /* widelands_map_object_packet.h */,
-				11EF58FF0D81EC440026C4FA /* widelands_streamread_inlines.h */,
-				11EF59000D81EC440026C4FA /* widelands_streamread.h */,
-				11EF59010D81EC440026C4FA /* widelands_streamwrite_inlines.h */,
-				11EF59020D81EC440026C4FA /* widelands_streamwrite.h */,
-				11EF59030D81EC440026C4FA /* widelands.h */,
-				BFA98F270B4F01D900FB5075 /* attack_controller.cc */,
 				BF22DB610A5FB72A00D0292B /* battle.cc */,
 				BF22DB630A5FB72A00D0292B /* bob.cc */,
 				BF22DB650A5FB72A00D0292B /* building.cc */,
 				BF22DB670A5FB72A00D0292B /* building_statistics_menu.cc */,
 				BF22DB690A5FB72A00D0292B /* building_ui.cc */,
+				11EF58CC0D81EC440026C4FA /* campvis.cc */,
 				38EAFF520BF6E2F700578DA1 /* carrier.cc */,
+				1100C5A10D8D6BF000244D29 /* chat.cc */,
+				11454D410D9D3B4900325CAD /* checkstep.cc */,
 				38EAFF540BF6E2F700578DA1 /* cmd_incorporate.cc */,
 				BF22DB6A0A5FB72A00D0292B /* cmd_queue.cc */,
 				38EAFD680BEF4EA100578DA1 /* colormap.cc */,
@@ -1321,6 +1232,8 @@
 				BFA98F2D0B4F01D900FB5075 /* encyclopedia_window.cc */,
 				BF22DC040A5FB72B00D0292B /* field.cc */,
 				BF22DC060A5FB72B00D0292B /* fieldaction.cc */,
+				11EF58CE0D81EC440026C4FA /* findimmovable.cc */,
+				11EF58D00D81EC440026C4FA /* findnode.cc */,
 				BF22DC0E0A5FB72B00D0292B /* font_handler.cc */,
 				BF22DC100A5FB72B00D0292B /* font_loader.cc */,
 				BF22DC140A5FB72B00D0292B /* game.cc */,
@@ -1331,24 +1244,18 @@
 				BF22DC250A5FB72B00D0292B /* game_interactive_player_data_packet.cc */,
 				BF22DC270A5FB72B00D0292B /* game_loader.cc */,
 				BF22DC290A5FB72B00D0292B /* game_main_menu.cc */,
-				BF22DC2B0A5FB72B00D0292B /* game_main_menu_load_game.cc */,
 				BF22DC2D0A5FB72B00D0292B /* game_main_menu_save_game.cc */,
 				BF22DC2F0A5FB72B00D0292B /* game_map_data_packet.cc */,
 				BF22DC310A5FB72B00D0292B /* game_objectives_menu.cc */,
 				BF22DC330A5FB72B00D0292B /* game_options_menu.cc */,
+				11EF58D20D81EC440026C4FA /* game_options_sound_menu.cc */,
 				BF22DC350A5FB72B00D0292B /* game_player_economies_data_packet.cc */,
 				BF22DC370A5FB72B00D0292B /* game_player_info_data_packet.cc */,
 				BF22DC390A5FB72B00D0292B /* game_preload_data_packet.cc */,
 				BF22DC3B0A5FB72B00D0292B /* game_saver.cc */,
-				BF22DC3D0A5FB72B00D0292B /* game_server_connection.cc */,
-				BF22DC420A5FB72B00D0292B /* game_server_proto_packet_chatmessage.cc */,
-				BF22DC440A5FB72B00D0292B /* game_server_proto_packet_connect.cc */,
-				BF22DC460A5FB72B00D0292B /* game_server_proto_packet_getroominfo.cc */,
-				BF22DC480A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.cc */,
-				BF22DC4A0A5FB72B00D0292B /* game_server_proto_packet_hello.cc */,
-				BF22DC4C0A5FB72B00D0292B /* game_server_proto_packet_ping.cc */,
-				BF22DC4E0A5FB72B00D0292B /* game_server_proto_packet_userentered.cc */,
 				38EAFF5C0BF6E32D00578DA1 /* game_tips.cc */,
+				1100C5A30D8D6BF000244D29 /* gamechatpanel.cc */,
+				11EF58D40D81EC440026C4FA /* gamecontroller.cc */,
 				BF22DC500A5FB72B00D0292B /* general_statistics_menu.cc */,
 				BF22DC530A5FB72B00D0292B /* graphic.cc */,
 				BF22DC560A5FB72B00D0292B /* helper.cc */,
@@ -1358,9 +1265,12 @@
 				BF22DC5C0A5FB72B00D0292B /* instances.cc */,
 				BF22DC5E0A5FB72B00D0292B /* interactive_base.cc */,
 				BF22DC600A5FB72B00D0292B /* interactive_player.cc */,
+				11EF58D70D81EC440026C4FA /* interactive_spectator.cc */,
 				38EAFF350BF38D5700578DA1 /* item_ware_descr.cc */,
 				BF22DC630A5FB72B00D0292B /* journal.cc */,
 				BF22DC650A5FB72B00D0292B /* journal_exceptions.cc */,
+				11454D430D9D3B4900325CAD /* legacy.cc */,
+				11EF58D90D81EC440026C4FA /* log.cc */,
 				BF22DC6C0A5FB72B00D0292B /* main.cc */,
 				BF22DC6D0A5FB72B00D0292B /* map.cc */,
 				38EAFD6B0BEF4EA100578DA1 /* mapdifferenceregion.cc */,
@@ -1369,13 +1279,15 @@
 				38EAFD720BEF4EA100578DA1 /* maptriangleregion.cc */,
 				BF22DC7A0A5FB72B00D0292B /* mapview.cc */,
 				BF22DC7D0A5FB72B00D0292B /* mapviewpixelfunctions.cc */,
+				11EF58DC0D81EC440026C4FA /* md5.cc */,
 				BF22DC810A5FB72B00D0292B /* militarysite.cc */,
 				BF22DC830A5FB72B00D0292B /* minimap.cc */,
+				11EF58DF0D81EC440026C4FA /* netclient.cc */,
+				11EF58E10D81EC440026C4FA /* nethost.cc */,
 				BF22DC850A5FB72B00D0292B /* network.cc */,
-				BF22DC870A5FB72B00D0292B /* network_buffer.cc */,
-				BF22DC890A5FB72B00D0292B /* network_ggz.cc */,
 				BF22DC8B0A5FB72B00D0292B /* network_lan_promotion.cc */,
 				BF22DC8E0A5FB72B00D0292B /* overlay_manager.cc */,
+				11454D450D9D3B4900325CAD /* pathfield.cc */,
 				BF22DC900A5FB72B00D0292B /* player.cc */,
 				BF22DC920A5FB72B00D0292B /* playercommand.cc */,
 				BF22DC940A5FB72B00D0292B /* playerdescrgroup.cc */,
@@ -1386,14 +1298,20 @@
 				BF22DC9F0A5FB72B00D0292B /* random.cc */,
 				BF22DCA30A5FB72B00D0292B /* render.cc */,
 				38EAFD750BEF4EA100578DA1 /* rendertarget.cc */,
+				11EF58EA0D81EC440026C4FA /* replay.cc */,
+				11EF58EC0D81EC440026C4FA /* request.cc */,
+				11EF58EE0D81EC440026C4FA /* requirements.cc */,
 				BF22DCA60A5FB72B00D0292B /* s2map.cc */,
 				38EAFD760BEF4EA100578DA1 /* save_handler.cc */,
 				BF22DCAA0A5FB72B00D0292B /* soldier.cc */,
 				BF22DCB00A5FB72B00D0292B /* stock_menu.cc */,
+				11EF58F00D81EC440026C4FA /* streamread.cc */,
+				11EF58F20D81EC440026C4FA /* streamwrite.cc */,
 				38EAFD780BEF4EA100578DA1 /* surface.cc */,
 				BF22DCB20A5FB72B00D0292B /* terrain.cc */,
 				BF22DCB30A5FB72B00D0292B /* text_parser.cc */,
 				38EAFD7B0BEF4EA100578DA1 /* texture.cc */,
+				11EF58F50D81EC440026C4FA /* timestring.cc */,
 				BF22DCB60A5FB72B00D0292B /* trainingsite.cc */,
 				BF22DCB80A5FB72B00D0292B /* transport.cc */,
 				BFA98F340B4F01D900FB5075 /* transport_draw.cc */,
@@ -1404,8 +1322,6 @@
 				BF22DD190A5FB72B00D0292B /* waresdisplay.cc */,
 				BF22DD1B0A5FB72B00D0292B /* watchwindow.cc */,
 				BF22DD1E0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.cc */,
-				BFA98F360B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.cc */,
-				BF22DD200A5FB72B00D0292B /* widelands_map_battle_data_packet.cc */,
 				BF22DD220A5FB72B00D0292B /* widelands_map_bob_data_packet.cc */,
 				BF22DD240A5FB72B00D0292B /* widelands_map_bobdata_data_packet.cc */,
 				BF22DD260A5FB72B00D0292B /* widelands_map_building_data_packet.cc */,
@@ -1422,6 +1338,7 @@
 				BF22DD3F0A5FB72B00D0292B /* widelands_map_loader.cc */,
 				BF22DD410A5FB72B00D0292B /* widelands_map_map_object_loader.cc */,
 				BF22DD430A5FB72B00D0292B /* widelands_map_map_object_saver.cc */,
+				11EF58FD0D81EC440026C4FA /* widelands_map_object_packet.cc */,
 				BF22DD450A5FB72B00D0292B /* widelands_map_objective_data_packet.cc */,
 				BF22DD470A5FB72B00D0292B /* widelands_map_owned_fields_data_packet.cc */,
 				BF22DD490A5FB72B00D0292B /* widelands_map_player_names_and_tribes_data_packet.cc */,
@@ -1447,7 +1364,9 @@
 				BF22DB600A5FB72A00D0292B /* animation.h */,
 				BFF8CEB90B6CC6AF005E6AF1 /* animation_gfx.h */,
 				38EAFD640BEF4EA000578DA1 /* areawatcher.h */,
-				BFA98F280B4F01D900FB5075 /* attack_controller.h */,
+				11454D400D9D3B4900325CAD /* attackable.h */,
+				11EF58CA0D81EC440026C4FA /* basic_fileread.h */,
+				11EF58CB0D81EC440026C4FA /* basic_filewrite.h */,
 				BF22DB620A5FB72A00D0292B /* battle.h */,
 				38EAFD650BEF4EA000578DA1 /* bitinbuffer.h */,
 				38EAFD660BEF4EA000578DA1 /* bitoutbuffer.h */,
@@ -1455,7 +1374,10 @@
 				38EAFD670BEF4EA000578DA1 /* build_id.h */,
 				BF22DB660A5FB72A00D0292B /* building.h */,
 				BF22DB680A5FB72A00D0292B /* building_statistics_menu.h */,
+				11EF58CD0D81EC440026C4FA /* campvis.h */,
 				38EAFF530BF6E2F700578DA1 /* carrier.h */,
+				1100C5A20D8D6BF000244D29 /* chat.h */,
+				11454D420D9D3B4900325CAD /* checkstep.h */,
 				BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */,
 				38EAFF550BF6E2F700578DA1 /* cmd_incorporate.h */,
 				BF22DB6B0A5FB72A00D0292B /* cmd_queue.h */,
@@ -1475,6 +1397,8 @@
 				BF22DC070A5FB72B00D0292B /* fieldaction.h */,
 				BF22DC090A5FB72B00D0292B /* fileread.h */,
 				BF22DC0D0A5FB72B00D0292B /* filewrite.h */,
+				11EF58CF0D81EC440026C4FA /* findimmovable.h */,
+				11EF58D10D81EC440026C4FA /* findnode.h */,
 				BF22DC0F0A5FB72B00D0292B /* font_handler.h */,
 				BF22DC110A5FB72B00D0292B /* font_loader.h */,
 				BF22DC150A5FB72B00D0292B /* game.h */,
@@ -1486,26 +1410,19 @@
 				BF22DC260A5FB72B00D0292B /* game_interactive_player_data_packet.h */,
 				BF22DC280A5FB72B00D0292B /* game_loader.h */,
 				BF22DC2A0A5FB72B00D0292B /* game_main_menu.h */,
-				BF22DC2C0A5FB72B00D0292B /* game_main_menu_load_game.h */,
 				BF22DC2E0A5FB72B00D0292B /* game_main_menu_save_game.h */,
 				BF22DC300A5FB72B00D0292B /* game_map_data_packet.h */,
 				BF22DC320A5FB72B00D0292B /* game_objectives_menu.h */,
 				BF22DC340A5FB72B00D0292B /* game_options_menu.h */,
+				11EF58D30D81EC440026C4FA /* game_options_sound_menu.h */,
 				BF22DC360A5FB72B00D0292B /* game_player_economies_data_packet.h */,
 				BF22DC380A5FB72B00D0292B /* game_player_info_data_packet.h */,
 				BF22DC3A0A5FB72B00D0292B /* game_preload_data_packet.h */,
 				BF22DC3C0A5FB72B00D0292B /* game_saver.h */,
-				BF22DC3E0A5FB72B00D0292B /* game_server_connection.h */,
-				BF22DC3F0A5FB72B00D0292B /* game_server_proto.h */,
-				BF22DC410A5FB72B00D0292B /* game_server_proto_packet.h */,
-				BF22DC430A5FB72B00D0292B /* game_server_proto_packet_chatmessage.h */,
-				BF22DC450A5FB72B00D0292B /* game_server_proto_packet_connect.h */,
-				BF22DC470A5FB72B00D0292B /* game_server_proto_packet_getroominfo.h */,
-				BF22DC490A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.h */,
-				BF22DC4B0A5FB72B00D0292B /* game_server_proto_packet_hello.h */,
-				BF22DC4D0A5FB72B00D0292B /* game_server_proto_packet_ping.h */,
-				BF22DC4F0A5FB72B00D0292B /* game_server_proto_packet_userentered.h */,
 				38EAFF5D0BF6E32D00578DA1 /* game_tips.h */,
+				1100C5A40D8D6BF000244D29 /* gamechatpanel.h */,
+				11EF58D50D81EC440026C4FA /* gamecontroller.h */,
+				11EF58D60D81EC440026C4FA /* gamesettings.h */,
 				BF22DC510A5FB72B00D0292B /* general_statistics_menu.h */,
 				BF22DC540A5FB72B00D0292B /* graphic.h */,
 				BFA98F310B4F01D900FB5075 /* helper.h */,
@@ -1516,12 +1433,16 @@
 				BF22DC5D0A5FB72B00D0292B /* instances.h */,
 				BF22DC5F0A5FB72B00D0292B /* interactive_base.h */,
 				BF22DC610A5FB72B00D0292B /* interactive_player.h */,
+				11EF58D80D81EC440026C4FA /* interactive_spectator.h */,
 				38EAFD6A0BEF4EA100578DA1 /* interval.h */,
 				38EAFF360BF38D5700578DA1 /* item_ware_descr.h */,
 				BF22DC640A5FB72B00D0292B /* journal.h */,
 				BF22DC660A5FB72B00D0292B /* journal_exceptions.h */,
 				BF22DC680A5FB72B00D0292B /* languages.h */,
+				11454D440D9D3B4900325CAD /* legacy.h */,
+				11EF58DA0D81EC440026C4FA /* log.h */,
 				BF22DC6B0A5FB72B00D0292B /* machdep.h */,
+				11EF58DB0D81EC440026C4FA /* manager.h */,
 				BF22DC6E0A5FB72B00D0292B /* map.h */,
 				BF22DC730A5FB72B00D0292B /* map_loader.h */,
 				38EAFD6C0BEF4EA100578DA1 /* mapdifferenceregion.h */,
@@ -1532,52 +1453,75 @@
 				BF22DC7B0A5FB72B00D0292B /* mapview.h */,
 				BF22DC7C0A5FB72B00D0292B /* mapviewpixelconstants.h */,
 				BF22DC7E0A5FB72B00D0292B /* mapviewpixelfunctions.h */,
+				11EF58DD0D81EC440026C4FA /* md5.h */,
 				BF22DC820A5FB72B00D0292B /* militarysite.h */,
 				BF22DC840A5FB72B00D0292B /* minimap.h */,
+				11EF58DE0D81EC440026C4FA /* named.h */,
+				11EF58E00D81EC440026C4FA /* netclient.h */,
+				11EF58E20D81EC440026C4FA /* nethost.h */,
 				BF22DC860A5FB72B00D0292B /* network.h */,
-				BF22DC880A5FB72B00D0292B /* network_buffer.h */,
-				BF22DC8A0A5FB72B00D0292B /* network_ggz.h */,
 				BF22DC8C0A5FB72B00D0292B /* network_lan_promotion.h */,
+				11EF58E30D81EC440026C4FA /* network_protocol.h */,
 				BF22DC8D0A5FB72B00D0292B /* network_system.h */,
+				11EF58E40D81EC440026C4FA /* notification.h */,
+				11EF58E50D81EC440026C4FA /* objective.h */,
 				BF22DC8F0A5FB72B00D0292B /* overlay_manager.h */,
+				11454D460D9D3B4900325CAD /* pathfield.h */,
 				38EAFD740BEF4EA100578DA1 /* picture.h */,
 				BF22DC910A5FB72B00D0292B /* player.h */,
 				BFF8CEBC0B6CC6AF005E6AF1 /* player_area.h */,
 				BF22DC930A5FB72B00D0292B /* playercommand.h */,
 				BF22DC950A5FB72B00D0292B /* playerdescrgroup.h */,
+				11EF58E60D81EC440026C4FA /* point.h */,
 				BF22DC970A5FB72B00D0292B /* production_program.h */,
 				BF22DC990A5FB72B00D0292B /* productionsite.h */,
 				BF22DC9B0A5FB72B00D0292B /* profile.h */,
 				BF22DC9D0A5FB72B00D0292B /* queue_cmd_factory.h */,
 				BF22DC9E0A5FB72B00D0292B /* queue_cmd_ids.h */,
 				BF22DCA00A5FB72B00D0292B /* random.h */,
+				11EF58E70D81EC440026C4FA /* rect.h */,
+				11EF58E80D81EC440026C4FA /* referenced.h */,
+				11EF58E90D81EC440026C4FA /* referencer.h */,
 				BF22DCA40A5FB72B00D0292B /* rendertarget.h */,
+				11EF58EB0D81EC440026C4FA /* replay.h */,
+				11EF58ED0D81EC440026C4FA /* request.h */,
+				11EF58EF0D81EC440026C4FA /* requirements.h */,
 				BF22DCA50A5FB72B00D0292B /* rgbcolor.h */,
 				BF22DCA70A5FB72B00D0292B /* s2map.h */,
 				38EAFD770BEF4EA100578DA1 /* save_handler.h */,
 				BF22DCA90A5FB72B00D0292B /* singleton.h */,
 				BF22DCAB0A5FB72B00D0292B /* soldier.h */,
+				11454D470D9D3B4900325CAD /* soldiercontrol.h */,
 				BF22DCB10A5FB72B00D0292B /* stock_menu.h */,
+				11EF58F10D81EC440026C4FA /* streamread.h */,
+				11EF58F30D81EC440026C4FA /* streamwrite.h */,
 				38EAFD790BEF4EA100578DA1 /* surface.h */,
+				11EF58F40D81EC440026C4FA /* tattribute.h */,
 				38EAFD7A0BEF4EA100578DA1 /* terrain.h */,
 				BF22DCB40A5FB72B00D0292B /* text_parser.h */,
 				38EAFD7C0BEF4EA100578DA1 /* texture.h */,
+				11EF58F60D81EC440026C4FA /* timestring.h */,
 				BF22DCB50A5FB72B00D0292B /* trackptr.h */,
 				BF22DCB70A5FB72B00D0292B /* trainingsite.h */,
 				BF22DCB90A5FB72B00D0292B /* transport.h */,
 				BF22DCBB0A5FB72B00D0292B /* tribe.h */,
 				BF22DCBC0A5FB72B00D0292B /* tribedata.h */,
+				11EF58F70D81EC440026C4FA /* upcast.h */,
+				11EF58F80D81EC440026C4FA /* variable.h */,
+				11EF58F90D81EC440026C4FA /* vector.h */,
+				11EF58FA0D81EC440026C4FA /* vertex.h */,
 				BF22DD160A5FB72B00D0292B /* ware_statistics_menu.h */,
 				BF22DD180A5FB72B00D0292B /* warehouse.h */,
+				11EF58FB0D81EC440026C4FA /* warehousesupply.h */,
 				38EAFF320BF38D4800578DA1 /* warelist.h */,
 				BF22DD1A0A5FB72B00D0292B /* waresdisplay.h */,
 				BF22DD1C0A5FB72B00D0292B /* watchwindow.h */,
 				BF22DD1D0A5FB72B00D0292B /* wexception.h */,
+				11EF59030D81EC440026C4FA /* widelands.h */,
 				BFF8CEBD0B6CC6AF005E6AF1 /* widelands_fileread.h */,
 				BFF8CEBE0B6CC6AF005E6AF1 /* widelands_filewrite.h */,
+				11EF58FC0D81EC440026C4FA /* widelands_geometry.h */,
 				BF22DD1F0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.h */,
-				BFA98F370B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.h */,
-				BF22DD210A5FB72B00D0292B /* widelands_map_battle_data_packet.h */,
 				BF22DD230A5FB72B00D0292B /* widelands_map_bob_data_packet.h */,
 				BF22DD250A5FB72B00D0292B /* widelands_map_bobdata_data_packet.h */,
 				BF22DD270A5FB72B00D0292B /* widelands_map_building_data_packet.h */,
@@ -1596,6 +1540,7 @@
 				BF22DD400A5FB72B00D0292B /* widelands_map_loader.h */,
 				BF22DD420A5FB72B00D0292B /* widelands_map_map_object_loader.h */,
 				BF22DD440A5FB72B00D0292B /* widelands_map_map_object_saver.h */,
+				11EF58FE0D81EC440026C4FA /* widelands_map_object_packet.h */,
 				BF22DD460A5FB72B00D0292B /* widelands_map_objective_data_packet.h */,
 				BF22DD480A5FB72B00D0292B /* widelands_map_owned_fields_data_packet.h */,
 				BF22DD4A0A5FB72B00D0292B /* widelands_map_player_names_and_tribes_data_packet.h */,
@@ -1612,6 +1557,10 @@
 				BF22DD5C0A5FB72B00D0292B /* widelands_map_variable_data_packet.h */,
 				BF22DD5E0A5FB72B00D0292B /* widelands_map_ware_data_packet.h */,
 				BF22DD600A5FB72B00D0292B /* widelands_map_waredata_data_packet.h */,
+				11EF59000D81EC440026C4FA /* widelands_streamread.h */,
+				11EF58FF0D81EC440026C4FA /* widelands_streamread_inlines.h */,
+				11EF59020D81EC440026C4FA /* widelands_streamwrite.h */,
+				11EF59010D81EC440026C4FA /* widelands_streamwrite_inlines.h */,
 				BF22DD620A5FB72B00D0292B /* wlapplication.h */,
 				BF22DD630A5FB72B00D0292B /* workarea_info.h */,
 				BF22DD650A5FB72B00D0292B /* worker.h */,
@@ -1628,10 +1577,10 @@
 		BF22DB790A5FB72A00D0292B /* editor */ = {
 			isa = PBXGroup;
 			children = (
-				BF22DB7C0A5FB72A00D0292B /* editorinteractive.cc */,
-				BF22DB7D0A5FB72A00D0292B /* editorinteractive.h */,
 				BF22DB7F0A5FB72A00D0292B /* tools */,
 				BF22DBA70A5FB72A00D0292B /* ui_menus */,
+				BF22DB7C0A5FB72A00D0292B /* editorinteractive.cc */,
+				BF22DB7D0A5FB72A00D0292B /* editorinteractive.h */,
 			);
 			path = editor;
 			sourceTree = "<group>";
@@ -1640,34 +1589,34 @@
 			isa = PBXGroup;
 			children = (
 				BFFB1FEA0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc */,
-				BFFB1FEB0B60FAD000EBF1A3 /* editor_decrease_height_tool.h */,
 				BFFB1FEC0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc */,
-				BFFB1FED0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h */,
 				BFFB1FEE0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc */,
-				BFFB1FEF0B60FAD000EBF1A3 /* editor_delete_bob_tool.h */,
 				BFFB1FF00B60FAD000EBF1A3 /* editor_delete_immovable_tool.cc */,
-				BFFB1FF10B60FAD000EBF1A3 /* editor_delete_immovable_tool.h */,
 				BFFB1FF20B60FAD000EBF1A3 /* editor_increase_height_tool.cc */,
-				BFFB1FF30B60FAD000EBF1A3 /* editor_increase_height_tool.h */,
 				BFFB1FF40B60FAD000EBF1A3 /* editor_increase_resources_tool.cc */,
-				BFFB1FF50B60FAD000EBF1A3 /* editor_increase_resources_tool.h */,
 				BFFB1FF60B60FAD000EBF1A3 /* editor_info_tool.cc */,
-				BFFB1FF70B60FAD000EBF1A3 /* editor_info_tool.h */,
 				BFFB1FF80B60FAD000EBF1A3 /* editor_make_infrastructure_tool.cc */,
-				BFFB1FF90B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h */,
 				BFFB1FFA0B60FAD000EBF1A3 /* editor_noise_height_tool.cc */,
-				BFFB1FFB0B60FAD000EBF1A3 /* editor_noise_height_tool.h */,
 				BFFB1FFC0B60FAD000EBF1A3 /* editor_place_bob_tool.cc */,
-				BFFB1FFD0B60FAD000EBF1A3 /* editor_place_bob_tool.h */,
 				BFFB1FFE0B60FAD000EBF1A3 /* editor_place_immovable_tool.cc */,
-				BFFB1FFF0B60FAD000EBF1A3 /* editor_place_immovable_tool.h */,
 				BFFB20000B60FAD000EBF1A3 /* editor_set_height_tool.cc */,
-				BFFB20010B60FAD000EBF1A3 /* editor_set_height_tool.h */,
 				BFFB20020B60FAD000EBF1A3 /* editor_set_resources_tool.cc */,
-				BFFB20030B60FAD000EBF1A3 /* editor_set_resources_tool.h */,
 				BFFB20040B60FAD000EBF1A3 /* editor_set_starting_pos_tool.cc */,
-				BFFB20050B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h */,
 				BFFB20060B60FAD000EBF1A3 /* editor_set_terrain_tool.cc */,
+				BFFB1FEB0B60FAD000EBF1A3 /* editor_decrease_height_tool.h */,
+				BFFB1FED0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h */,
+				BFFB1FEF0B60FAD000EBF1A3 /* editor_delete_bob_tool.h */,
+				BFFB1FF10B60FAD000EBF1A3 /* editor_delete_immovable_tool.h */,
+				BFFB1FF30B60FAD000EBF1A3 /* editor_increase_height_tool.h */,
+				BFFB1FF50B60FAD000EBF1A3 /* editor_increase_resources_tool.h */,
+				BFFB1FF70B60FAD000EBF1A3 /* editor_info_tool.h */,
+				BFFB1FF90B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h */,
+				BFFB1FFB0B60FAD000EBF1A3 /* editor_noise_height_tool.h */,
+				BFFB1FFD0B60FAD000EBF1A3 /* editor_place_bob_tool.h */,
+				BFFB1FFF0B60FAD000EBF1A3 /* editor_place_immovable_tool.h */,
+				BFFB20010B60FAD000EBF1A3 /* editor_set_height_tool.h */,
+				BFFB20030B60FAD000EBF1A3 /* editor_set_resources_tool.h */,
+				BFFB20050B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h */,
 				BFFB20070B60FAD000EBF1A3 /* editor_set_terrain_tool.h */,
 				BFFB20080B60FAD000EBF1A3 /* editor_tool.h */,
 				BFFB20090B60FAD000EBF1A3 /* multi_select.h */,
@@ -1678,72 +1627,72 @@
 		BF22DBA70A5FB72A00D0292B /* ui_menus */ = {
 			isa = PBXGroup;
 			children = (
-				11EF58840D81EB140026C4FA /* trigger_military_influence_option_menu.cc */,
-				11EF58850D81EB140026C4FA /* trigger_ownership_option_menu.cc */,
-				11EF58860D81EB140026C4FA /* trigger_visison_option_menu.cc */,
 				BF22DBA80A5FB72A00D0292B /* editor_event_menu.cc */,
-				BF22DBA90A5FB72B00D0292B /* editor_event_menu.h */,
 				BF22DBAA0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc */,
-				BF22DBAB0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.h */,
 				BF22DBAC0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.cc */,
-				BF22DBAD0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.h */,
 				BF22DBAE0A5FB72B00D0292B /* editor_event_menu_new_event.cc */,
-				BF22DBAF0A5FB72B00D0292B /* editor_event_menu_new_event.h */,
 				BF22DBB00A5FB72B00D0292B /* editor_event_menu_new_trigger.cc */,
-				BF22DBB10A5FB72B00D0292B /* editor_event_menu_new_trigger.h */,
 				BF22DBB20A5FB72B00D0292B /* editor_main_menu.cc */,
-				BF22DBB30A5FB72B00D0292B /* editor_main_menu.h */,
 				BF22DBB40A5FB72B00D0292B /* editor_main_menu_load_map.cc */,
-				BF22DBB50A5FB72B00D0292B /* editor_main_menu_load_map.h */,
 				BF22DBB60A5FB72B00D0292B /* editor_main_menu_map_options.cc */,
-				BF22DBB70A5FB72B00D0292B /* editor_main_menu_map_options.h */,
 				BF22DBB80A5FB72B00D0292B /* editor_main_menu_new_map.cc */,
-				BF22DBB90A5FB72B00D0292B /* editor_main_menu_new_map.h */,
 				BF22DBBA0A5FB72B00D0292B /* editor_main_menu_save_map.cc */,
-				BF22DBBB0A5FB72B00D0292B /* editor_main_menu_save_map.h */,
 				BF22DBBC0A5FB72B00D0292B /* editor_main_menu_save_map_make_directory.cc */,
-				BF22DBBD0A5FB72B00D0292B /* editor_main_menu_save_map_make_directory.h */,
 				BF22DBBE0A5FB72B00D0292B /* editor_objectives_menu.cc */,
-				BF22DBBF0A5FB72B00D0292B /* editor_objectives_menu.h */,
 				BF22DBC00A5FB72B00D0292B /* editor_player_menu.cc */,
-				BF22DBC10A5FB72B00D0292B /* editor_player_menu.h */,
 				BF22DBC20A5FB72B00D0292B /* editor_player_menu_allowed_buildings_menu.cc */,
-				BF22DBC30A5FB72B00D0292B /* editor_player_menu_allowed_buildings_menu.h */,
 				BF22DBC40A5FB72B00D0292B /* editor_tool_change_height_options_menu.cc */,
-				BF22DBC50A5FB72B00D0292B /* editor_tool_change_height_options_menu.h */,
 				BF22DBC60A5FB72B00D0292B /* editor_tool_change_resources_options_menu.cc */,
-				BF22DBC70A5FB72B00D0292B /* editor_tool_change_resources_options_menu.h */,
 				BF22DBC80A5FB72B00D0292B /* editor_tool_menu.cc */,
-				BF22DBC90A5FB72B00D0292B /* editor_tool_menu.h */,
 				BF22DBCA0A5FB72B00D0292B /* editor_tool_noise_height_options_menu.cc */,
-				BF22DBCB0A5FB72B00D0292B /* editor_tool_noise_height_options_menu.h */,
 				BF22DBCC0A5FB72B00D0292B /* editor_tool_options_menu.cc */,
-				BF22DBCD0A5FB72B00D0292B /* editor_tool_options_menu.h */,
 				BF22DBCE0A5FB72B00D0292B /* editor_tool_place_bob_options_menu.cc */,
-				BF22DBCF0A5FB72B00D0292B /* editor_tool_place_bob_options_menu.h */,
 				BF22DBD00A5FB72B00D0292B /* editor_tool_place_immovable_options_menu.cc */,
-				BF22DBD10A5FB72B00D0292B /* editor_tool_place_immovable_options_menu.h */,
 				BF22DBD20A5FB72B00D0292B /* editor_tool_set_terrain_options_menu.cc */,
-				BF22DBD30A5FB72B00D0292B /* editor_tool_set_terrain_options_menu.h */,
 				BF22DBD40A5FB72B00D0292B /* editor_toolsize_menu.cc */,
-				BF22DBD50A5FB72B00D0292B /* editor_toolsize_menu.h */,
 				BF22DBD60A5FB72B00D0292B /* editor_variables_menu.cc */,
-				BF22DBD70A5FB72B00D0292B /* editor_variables_menu.h */,
 				BF22DBD80A5FB72B00D0292B /* event_allow_building_option_menu.cc */,
-				BF22DBD90A5FB72B00D0292B /* event_allow_building_option_menu.h */,
 				BF22DBDA0A5FB72B00D0292B /* event_conquer_area_option_menu.cc */,
-				BF22DBDB0A5FB72B00D0292B /* event_conquer_area_option_menu.h */,
 				BF22DBDC0A5FB72B00D0292B /* event_message_box_option_menu.cc */,
-				BF22DBDD0A5FB72B00D0292B /* event_message_box_option_menu.h */,
 				BF22DBDE0A5FB72B00D0292B /* event_move_view_option_menu.cc */,
-				BF22DBDF0A5FB72B00D0292B /* event_move_view_option_menu.h */,
 				BF22DBE00A5FB72B00D0292B /* event_unhide_area_option_menu.cc */,
-				BF22DBE10A5FB72B00D0292B /* event_unhide_area_option_menu.h */,
 				BF22DBE30A5FB72B00D0292B /* trigger_building_option_menu.cc */,
-				BF22DBE40A5FB72B00D0292B /* trigger_building_option_menu.h */,
+				11EF58840D81EB140026C4FA /* trigger_military_influence_option_menu.cc */,
 				BF22DBE50A5FB72B00D0292B /* trigger_null_option_menu.cc */,
-				BF22DBE60A5FB72B00D0292B /* trigger_null_option_menu.h */,
+				11EF58850D81EB140026C4FA /* trigger_ownership_option_menu.cc */,
 				BF22DBE70A5FB72B00D0292B /* trigger_time_option_menu.cc */,
+				11EF58860D81EB140026C4FA /* trigger_visison_option_menu.cc */,
+				BF22DBA90A5FB72B00D0292B /* editor_event_menu.h */,
+				BF22DBAB0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.h */,
+				BF22DBAD0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.h */,
+				BF22DBAF0A5FB72B00D0292B /* editor_event_menu_new_event.h */,
+				BF22DBB10A5FB72B00D0292B /* editor_event_menu_new_trigger.h */,
+				BF22DBB30A5FB72B00D0292B /* editor_main_menu.h */,
+				BF22DBB50A5FB72B00D0292B /* editor_main_menu_load_map.h */,
+				BF22DBB70A5FB72B00D0292B /* editor_main_menu_map_options.h */,
+				BF22DBB90A5FB72B00D0292B /* editor_main_menu_new_map.h */,
+				BF22DBBB0A5FB72B00D0292B /* editor_main_menu_save_map.h */,
+				BF22DBBD0A5FB72B00D0292B /* editor_main_menu_save_map_make_directory.h */,
+				BF22DBBF0A5FB72B00D0292B /* editor_objectives_menu.h */,
+				BF22DBC10A5FB72B00D0292B /* editor_player_menu.h */,
+				BF22DBC30A5FB72B00D0292B /* editor_player_menu_allowed_buildings_menu.h */,
+				BF22DBC50A5FB72B00D0292B /* editor_tool_change_height_options_menu.h */,
+				BF22DBC70A5FB72B00D0292B /* editor_tool_change_resources_options_menu.h */,
+				BF22DBC90A5FB72B00D0292B /* editor_tool_menu.h */,
+				BF22DBCB0A5FB72B00D0292B /* editor_tool_noise_height_options_menu.h */,
+				BF22DBCD0A5FB72B00D0292B /* editor_tool_options_menu.h */,
+				BF22DBCF0A5FB72B00D0292B /* editor_tool_place_bob_options_menu.h */,
+				BF22DBD10A5FB72B00D0292B /* editor_tool_place_immovable_options_menu.h */,
+				BF22DBD30A5FB72B00D0292B /* editor_tool_set_terrain_options_menu.h */,
+				BF22DBD50A5FB72B00D0292B /* editor_toolsize_menu.h */,
+				BF22DBD70A5FB72B00D0292B /* editor_variables_menu.h */,
+				BF22DBD90A5FB72B00D0292B /* event_allow_building_option_menu.h */,
+				BF22DBDB0A5FB72B00D0292B /* event_conquer_area_option_menu.h */,
+				BF22DBDD0A5FB72B00D0292B /* event_message_box_option_menu.h */,
+				BF22DBDF0A5FB72B00D0292B /* event_move_view_option_menu.h */,
+				BF22DBE10A5FB72B00D0292B /* event_unhide_area_option_menu.h */,
+				BF22DBE40A5FB72B00D0292B /* trigger_building_option_menu.h */,
+				BF22DBE60A5FB72B00D0292B /* trigger_null_option_menu.h */,
 				BF22DBE80A5FB72B00D0292B /* trigger_time_option_menu.h */,
 			);
 			path = ui_menus;
@@ -1761,6 +1710,8 @@
 		BF22DCCD0A5FB72B00D0292B /* ui_basic */ = {
 			isa = PBXGroup;
 			children = (
+				1100C5A90D8D6C3C00244D29 /* ui_messagebox.cc */,
+				1100C5AA0D8D6C3C00244D29 /* ui_messagebox.h */,
 				11EF58BE0D81EB9E0026C4FA /* ui_slider.cc */,
 				11EF58BF0D81EB9E0026C4FA /* ui_slider.h */,
 				38EAFDCE0BF36A0E00578DA1 /* ui_progresswindow.cc */,
@@ -1777,8 +1728,6 @@
 				BF22DCD80A5FB72B00D0292B /* ui_icongrid.h */,
 				BF22DCD90A5FB72B00D0292B /* ui_listselect.cc */,
 				BF22DCDA0A5FB72B00D0292B /* ui_listselect.h */,
-				BF22DCDB0A5FB72B00D0292B /* ui_modal_messagebox.cc */,
-				BF22DCDC0A5FB72B00D0292B /* ui_modal_messagebox.h */,
 				BF22DCDD0A5FB72B00D0292B /* ui_multilineeditbox.cc */,
 				BF22DCDE0A5FB72B00D0292B /* ui_multilineeditbox.h */,
 				BF22DCDF0A5FB72B00D0292B /* ui_multilinetextarea.cc */,
@@ -1818,10 +1767,6 @@
 				BF22DCF70A5FB72B00D0292B /* fullscreen_menu_base.h */,
 				BF22DCF80A5FB72B00D0292B /* fullscreen_menu_fileview.cc */,
 				BF22DCF90A5FB72B00D0292B /* fullscreen_menu_fileview.h */,
-				BF22DCFA0A5FB72B00D0292B /* fullscreen_menu_inet_lobby.cc */,
-				BF22DCFB0A5FB72B00D0292B /* fullscreen_menu_inet_lobby.h */,
-				BF22DCFC0A5FB72B00D0292B /* fullscreen_menu_inet_server_options.cc */,
-				BF22DCFD0A5FB72B00D0292B /* fullscreen_menu_inet_server_options.h */,
 				BF22DCFE0A5FB72B00D0292B /* fullscreen_menu_intro.cc */,
 				BF22DCFF0A5FB72B00D0292B /* fullscreen_menu_intro.h */,
 				BF22DD000A5FB72B00D0292B /* fullscreen_menu_launchgame.cc */,
@@ -1966,7 +1911,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# test for config.h, we use the default config.h since we do not really need any options\n\nSRCDIR=$PROJECT_DIR/../../src\n\nif [ ! -e $SRCDIR/config.h ]; then\n   cat > $SRCDIR/config.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef CONFIG_H\n#define CONFIG_H\n\n#define HAS_GETENV\n#define NEW_SDL_MIXER 1\n\n// The following lines are not needed. \n// We set them to save paths\n#define INSTALL_PREFIX \"/tmp\"\n#define INSTALL_BINDIR \"/tmp\"\n#define INSTALL_DATADIR \"/tmp\"\n\n#ifdef INSTALL_LOCALEDIR\n#undef INSTALL_LOCALEDIR\n#define INSTALL_LOCALEDIR \"Widelands.app/Contents/Resources/locale\"\n\n#endif\n#endif\nEOF\n\nfi\n";
+			shellScript = "# test for config.h, we use the default config.h since we do not really need any options\n\nSRCDIR=$PROJECT_DIR/../../src\n\nif [ ! -e $SRCDIR/config.h ]; then\n   cat > $SRCDIR/config.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef CONFIG_H\n#define CONFIG_H\n\n#define HAS_GETENV\n#define NEW_SDL_MIXER 1\n\n// The following lines are not needed. \n// We set them to save paths\n#define INSTALL_PREFIX \"/tmp\"\n#define INSTALL_BINDIR \"/tmp\"\n#define INSTALL_DATADIR \"/tmp\"\n\n#define INSTALL_LOCALEDIR \"Widelands.app/Contents/Resources/locale\"\n\n#endif\nEOF\n\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2032,7 +1977,6 @@
 				BF22DE330A5FB72B00D0292B /* game_interactive_player_data_packet.cc in Sources */,
 				BF22DE350A5FB72B00D0292B /* game_loader.cc in Sources */,
 				BF22DE370A5FB72B00D0292B /* game_main_menu.cc in Sources */,
-				BF22DE390A5FB72B00D0292B /* game_main_menu_load_game.cc in Sources */,
 				BF22DE3B0A5FB72B00D0292B /* game_main_menu_save_game.cc in Sources */,
 				BF22DE3D0A5FB72B00D0292B /* game_map_data_packet.cc in Sources */,
 				BF22DE3F0A5FB72B00D0292B /* game_objectives_menu.cc in Sources */,
@@ -2041,14 +1985,6 @@
 				BF22DE450A5FB72B00D0292B /* game_player_info_data_packet.cc in Sources */,
 				BF22DE470A5FB72B00D0292B /* game_preload_data_packet.cc in Sources */,
 				BF22DE490A5FB72B00D0292B /* game_saver.cc in Sources */,
-				BF22DE4B0A5FB72B00D0292B /* game_server_connection.cc in Sources */,
-				BF22DE500A5FB72B00D0292B /* game_server_proto_packet_chatmessage.cc in Sources */,
-				BF22DE520A5FB72B00D0292B /* game_server_proto_packet_connect.cc in Sources */,
-				BF22DE540A5FB72B00D0292B /* game_server_proto_packet_getroominfo.cc in Sources */,
-				BF22DE560A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.cc in Sources */,
-				BF22DE580A5FB72B00D0292B /* game_server_proto_packet_hello.cc in Sources */,
-				BF22DE5A0A5FB72B00D0292B /* game_server_proto_packet_ping.cc in Sources */,
-				BF22DE5C0A5FB72B00D0292B /* game_server_proto_packet_userentered.cc in Sources */,
 				BF22DE5E0A5FB72B00D0292B /* general_statistics_menu.cc in Sources */,
 				BF22DE610A5FB72B00D0292B /* graphic.cc in Sources */,
 				BF22DE640A5FB72B00D0292B /* helper.cc in Sources */,
@@ -2066,8 +2002,6 @@
 				BF22DE8F0A5FB72B00D0292B /* militarysite.cc in Sources */,
 				BF22DE910A5FB72B00D0292B /* minimap.cc in Sources */,
 				BF22DE930A5FB72B00D0292B /* network.cc in Sources */,
-				BF22DE950A5FB72B00D0292B /* network_buffer.cc in Sources */,
-				BF22DE970A5FB72B00D0292B /* network_ggz.cc in Sources */,
 				BF22DE990A5FB72B00D0292B /* network_lan_promotion.cc in Sources */,
 				BF22DE9C0A5FB72B00D0292B /* overlay_manager.cc in Sources */,
 				BF22DE9E0A5FB72B00D0292B /* player.cc in Sources */,
@@ -2093,7 +2027,6 @@
 				BF22DEE10A5FB72B00D0292B /* ui_editbox.cc in Sources */,
 				BF22DEE30A5FB72B00D0292B /* ui_icongrid.cc in Sources */,
 				BF22DEE50A5FB72B00D0292B /* ui_listselect.cc in Sources */,
-				BF22DEE70A5FB72B00D0292B /* ui_modal_messagebox.cc in Sources */,
 				BF22DEE90A5FB72B00D0292B /* ui_multilineeditbox.cc in Sources */,
 				BF22DEEB0A5FB72B00D0292B /* ui_multilinetextarea.cc in Sources */,
 				BF22DEEE0A5FB72B00D0292B /* ui_panel.cc in Sources */,
@@ -2107,8 +2040,6 @@
 				BF22DEFF0A5FB72B00D0292B /* ui_window.cc in Sources */,
 				BF22DF010A5FB72B00D0292B /* fullscreen_menu_base.cc in Sources */,
 				BF22DF030A5FB72B00D0292B /* fullscreen_menu_fileview.cc in Sources */,
-				BF22DF050A5FB72B00D0292B /* fullscreen_menu_inet_lobby.cc in Sources */,
-				BF22DF070A5FB72B00D0292B /* fullscreen_menu_inet_server_options.cc in Sources */,
 				BF22DF090A5FB72B00D0292B /* fullscreen_menu_intro.cc in Sources */,
 				BF22DF0B0A5FB72B00D0292B /* fullscreen_menu_launchgame.cc in Sources */,
 				BF22DF0D0A5FB72B00D0292B /* fullscreen_menu_loadgame.cc in Sources */,
@@ -2122,7 +2053,6 @@
 				BF22DF240A5FB72B00D0292B /* waresdisplay.cc in Sources */,
 				BF22DF260A5FB72B00D0292B /* watchwindow.cc in Sources */,
 				BF22DF290A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.cc in Sources */,
-				BF22DF2B0A5FB72B00D0292B /* widelands_map_battle_data_packet.cc in Sources */,
 				BF22DF2D0A5FB72B00D0292B /* widelands_map_bob_data_packet.cc in Sources */,
 				BF22DF2F0A5FB72B00D0292B /* widelands_map_bobdata_data_packet.cc in Sources */,
 				BF22DF310A5FB72B00D0292B /* widelands_map_building_data_packet.cc in Sources */,
@@ -2157,10 +2087,8 @@
 				BF22DF6F0A5FB72B00D0292B /* worker.cc in Sources */,
 				BF22DF720A5FB72B00D0292B /* world.cc in Sources */,
 				BF22DF750A5FB72B00D0292B /* wui_plot_area.cc in Sources */,
-				BFA98F390B4F01DA00FB5075 /* attack_controller.cc in Sources */,
 				BFA98F3F0B4F01DA00FB5075 /* encyclopedia_window.cc in Sources */,
 				BFA98F460B4F01DA00FB5075 /* transport_draw.cc in Sources */,
-				BFA98F480B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.cc in Sources */,
 				BFFB200A0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc in Sources */,
 				BFFB200C0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc in Sources */,
 				BFFB200E0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc in Sources */,
@@ -2257,6 +2185,12 @@
 				11EF592C0D81EC440026C4FA /* streamwrite.cc in Sources */,
 				11EF592F0D81EC440026C4FA /* timestring.cc in Sources */,
 				11EF59370D81EC440026C4FA /* widelands_map_object_packet.cc in Sources */,
+				1100C5A50D8D6BF000244D29 /* chat.cc in Sources */,
+				1100C5A70D8D6BF000244D29 /* gamechatpanel.cc in Sources */,
+				1100C5AB0D8D6C3C00244D29 /* ui_messagebox.cc in Sources */,
+				11454D490D9D3B4900325CAD /* checkstep.cc in Sources */,
+				11454D4B0D9D3B4900325CAD /* legacy.cc in Sources */,
+				11454D4D0D9D3B4900325CAD /* pathfield.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
