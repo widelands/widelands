@@ -40,10 +40,7 @@ struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	enum {
 		CANCEL = 0,
 		HOSTGAME,
-		JOINGAME,
-		INTERNETGAME,
-		HOSTGGZGAME,
-		JOINGGZGAME
+		JOINGAME
 	};
 
 	Fullscreen_Menu_NetSetup ();
@@ -63,11 +60,6 @@ struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	 */
 	const std::string& get_playername();
 
-	//bool is_internetgame();
-	// return true if game should be played over GGZ
-
-	void fill(std::list<std::string> tables);
-
 private:
 	UI::Textarea                                title;
 	UI::Button<Fullscreen_Menu_NetSetup>        joingame;
@@ -78,8 +70,6 @@ private:
 	UI::EditBox                                 playername;
 	UI::Table<const LAN_Open_Game * const>      opengames;
 	LAN_Game_Finder                             discovery;
-	UI::Button<Fullscreen_Menu_NetSetup>        networktype;
-	bool                                        internetgame;
 
 	void game_selected (uint32_t);
 
@@ -93,7 +83,6 @@ private:
 		(UI::Table<const LAN_Open_Game * const>::Entry_Record &,
 		 const LAN_Game_Info &);
 
-	void toggle_networktype();
 	void change_hostname   ();
 	void clicked_joingame();
 	void clicked_hostgame();

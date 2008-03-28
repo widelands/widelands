@@ -21,7 +21,6 @@
 #include "constants.h"
 #include "i18n.h"
 #include "network.h"
-#include "network_ggz.h"
 #include "profile.h"
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
@@ -45,18 +44,6 @@ hostgame
  &Fullscreen_Menu_NetSetup::clicked_hostgame, this,
  _("Host a New Game")),
 
-// Internetgaming via game_server protocol does not work at the moment.
-// So I took the button out of the menu, to avoid crashes and confusion
-// for the players --Nasenbaer
-/*
-playinternet
-(this,
- 90, 300, 200, 26,
- 1,
- &Fullscreen_Menu_NetSetup::end_modal, this, INTERNETGAME,
- _("Play in Internet")),
- */
-
 back
 (this,
  90, 340, 200, 26,
@@ -66,18 +53,7 @@ back
 
 hostname  (this, 310, 220, 200, 26, 2, 0),
 playername(this, 310, 260, 200, 26, 2, 0),
-opengames (this, 310, 300, 390, 180),
-
-// LAN or GGZ game
-networktype
-(this,
- 550, 220, 150, 26,
- 0,
- &Fullscreen_Menu_NetSetup::toggle_networktype, this,
- _("LAN games")),
-
-internetgame(false)
-
+opengames (this, 310, 300, 390, 180)
 {
 	title     .set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::change_hostname);
@@ -95,8 +71,7 @@ void Fullscreen_Menu_NetSetup::think ()
 {
 	Fullscreen_Menu_Base::think ();
 
-	if (not NetGGZ::ref().usedcore())
-		discovery.run();
+	discovery.run();
 }
 
 bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
@@ -183,80 +158,17 @@ void Fullscreen_Menu_NetSetup::discovery_callback (int32_t type, const LAN_Open_
 	}
 }
 
-void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
-{
-	LAN_Game_Info info;
-	std::list<std::string>::iterator it;
-	for (it = tables.begin(); it != tables.end(); ++it)
-	{
-		strncpy(info.hostname, "(ggz)", sizeof(info.hostname));
-		strncpy(info.map, it->c_str(), sizeof(info.map));
-		info.state = LAN_GAME_OPEN;
-		update_game_info(opengames.add(), info);
-	}
-}
-
-void Fullscreen_Menu_NetSetup::toggle_networktype() {
-	if (internetgame)
-		NetGGZ::ref().deinitcore();
-
-	internetgame = !internetgame;
-
-	opengames.clear();
-	joingame.set_enabled(false);
-
-	if (internetgame)
-	{
-		Section *s;
-		const char *defaultserver;
-		s = g_options.pull_section("network");
-		defaultserver = s->get_string("defaultserver", "live.ggzgamingzone.org");
-		hostname.setText(defaultserver);
-
-		NetGGZ::ref().initcore(hostname.text().c_str(), playername.text().c_str());
-		networktype.set_title(_("GGZ games"));
-		if (NetGGZ::ref().tables().size() > 0)
-			fill(NetGGZ::ref().tables());
-	}
-	else
-	{
-		hostname.setText("");
-		discovery.reset();
-		networktype.set_title(_("LAN games"));
-	}
-}
-
 void Fullscreen_Menu_NetSetup::change_hostname()
 {
-	if (internetgame) {
-		Section *s;
-		s = g_options.pull_section("network");
-		s->set_string("defaultserver", hostname.text());
-		g_options.write("config", true);
-
-		NetGGZ::ref().deinitcore();
-		NetGGZ::ref().initcore(hostname.text().c_str(), playername.text().c_str());
-		networktype.set_title(_("GGZ games"));
-		if (NetGGZ::ref().tables().size() > 0)
-			fill(NetGGZ::ref().tables());
-	} else {
-		// Allow user to enter a hostname manually
-		opengames.select(opengames.no_selection_index());
-		joingame.set_enabled(hostname.text().size());
-	}
+	// Allow user to enter a hostname manually
+	opengames.select(opengames.no_selection_index());
+	joingame.set_enabled(hostname.text().size());
 }
 
-//bool Fullscreen_Menu_NetSetup::is_internetgame() {return internetgame;}
-
 void Fullscreen_Menu_NetSetup::clicked_joingame() {
-	if (NetGGZ::ref().usedcore()) {
-		NetGGZ::ref().join
-			(opengames.get_selected_record().get_string(1).c_str());
-		end_modal(JOINGGZGAME);
-	}
-	else end_modal(JOINGAME);
+	end_modal(JOINGAME);
 }
 
 void Fullscreen_Menu_NetSetup::clicked_hostgame() {
-	end_modal(NetGGZ::ref().usedcore() ? HOSTGGZGAME : HOSTGAME);
+	end_modal(HOSTGAME);
 }

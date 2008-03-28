@@ -25,8 +25,6 @@
 #include "fullscreen_menu_campaign_select.h"
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
-#include "fullscreen_menu_inet_lobby.h"
-#include "fullscreen_menu_inet_server_options.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadreplay.h"
 #include "fullscreen_menu_main.h"
@@ -34,8 +32,6 @@
 #include "fullscreen_menu_options.h"
 #include "fullscreen_menu_singleplayer.h"
 #include "game.h"
-#include "game_server_connection.h"
-#include "game_server_proto.h"
 #include "game_tips.h"
 #include "gamesettings.h"
 #include "graphic.h"
@@ -47,7 +43,6 @@
 #include "map.h"
 #include "netclient.h"
 #include "nethost.h"
-#include "network_ggz.h"
 #include "profile.h"
 #include "replay.h"
 #include "sound/sound_handler.h"
@@ -312,29 +307,6 @@ void WLApplication::run()
 			intro.run();
 		}
 
-		//TODO: what does this do? where does it belong? read up on GGZ! #fweber
-		if (NetGGZ::ref().used()) {
-			if (NetGGZ::ref().connect()) {
-				log("FIXME: Something related to GGZ goes here\n");
-#if 0
-				NetGame *netgame;
-
-				if (NetGGZ::ref().host()) netgame = new NetHost();
-				else
-				{
-					while (!NetGGZ::ref().ip())
-						NetGGZ::ref().data();
-
-					IPaddress peer;
-					SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
-					netgame = new NetClient(&peer);
-				}
-				netgame->run();
-				delete netgame;
-#endif
-			}
-		}
-
 		g_sound_handler.change_music("menu", 1000);
 		mainmenu();
 
@@ -472,9 +444,6 @@ void WLApplication::handle_input(const InputCallback *cb)
 	// by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
 	// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
 	// by 0x81427A6: main (main.cc:39)
-
-	NetGGZ::ref().data();
-	NetGGZ::ref().datacore();
 
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
@@ -867,11 +836,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		throw Parameter_error(); //no message on purpose
 	}
 
-	if (m_commandline.count("ggz")>0) {
-		NetGGZ::ref().init();
-		m_commandline.erase("ggz");
-	}
-
 	if (m_commandline.count("nosound")>0) {
 		g_sound_handler.m_nosound=true;
 		m_commandline.erase("nosound");
@@ -992,13 +956,6 @@ void WLApplication::show_usage()
 		 " --playback=FILENAME  Playback given filename (see --record)\n\n"
 		 " --coredump=[yes|no]  Generates a core dump on segfaults instead of "
 		 "using the SDL\n");
-#ifdef USE_GGZ
-	cout
-		<<
-		_
-		(" --ggz                Starts game as GGZ Gaming Zone client (don't "
-		 "use!)");
-#endif
 	cout
 		<<
 		_
@@ -1260,8 +1217,6 @@ void WLApplication::mainmenu_multiplayer()
 
 	Fullscreen_Menu_NetSetup ns;
 
-	if (NetGGZ::ref().tables().size() > 0) ns.fill(NetGGZ::ref().tables());
-
 	switch (ns.run()) {
 	case Fullscreen_Menu_NetSetup::HOSTGAME: {
 		NetHost netgame(ns.get_playername());
@@ -1282,51 +1237,6 @@ void WLApplication::mainmenu_multiplayer()
 
 		NetClient netgame(&peer, ns.get_playername());
 		netgame.run();
-		break;
-	}
-	case Fullscreen_Menu_NetSetup::INTERNETGAME: {
-		Fullscreen_Menu_InetServerOptions igo;
-		const int32_t igo_code = igo.run();
-
-		//  get information here
-		const std::string host   = igo.get_server_name();
-		const std::string player = igo.get_player_name();
-
-		if (igo_code) {
-			Game_Server_Connection csc(host, GAME_SERVER_PORT);
-
-			try {
-				csc.connect();
-			} catch (...) {
-				// TODO: error handling here
-				throw;
-			}
-
-			csc.set_username(player.c_str());
-
-			// Wowi, we are connected. Let's start the lobby
-			Fullscreen_Menu_InetLobby il(&csc);
-			il.run();
-		}
-		break;
-	}
-	case Fullscreen_Menu_NetSetup::HOSTGGZGAME:
-		NetGGZ::ref().launch();
-		//  fallthrough
-	case Fullscreen_Menu_NetSetup::JOINGGZGAME: {
-		if (NetGGZ::ref().host()) {
-			NetHost netgame(ns.get_playername());
-			netgame.run();
-		} else {
-			while (!NetGGZ::ref().ip())
-				NetGGZ::ref().data();
-
-			IPaddress peer;
-			SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
-
-			NetClient netgame(&peer, ns.get_playername());
-			netgame.run();
-		}
 		break;
 	}
 	default:
