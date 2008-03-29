@@ -20,7 +20,7 @@ SourceSignatures('MD5')
 #SourceSignatures('timestamp')
 
 # write only *one* signature file in a place where we don't care
-SConsignFile('build/scons-signatures') 
+SConsignFile('build/scons-signatures')
 
 # Pretty output
 print
@@ -162,7 +162,6 @@ SConscript('build/SConscript')
 SConscript('campaigns/SConscript')
 SConscript('doc/SConscript')
 SConscript('fonts/SConscript')
-SConscript('game_server/SConscript')
 SConscript('maps/SConscript')
 SConscript('music/SConscript')
 SConscript('pics/SConscript')
