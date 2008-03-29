@@ -146,6 +146,7 @@ struct Game : public Editor_Game_Base {
 	void send_player_flagaction (Flag*, int32_t);
 	void send_player_start_stop_building (Building*);
 	void send_player_enhance_building (Building*, int32_t);
+	void send_player_set_ware_priority (PlayerImmovable*, int32_t type, Ware_Index index, int32_t prio);
 	void send_player_change_training_options(Building*, int32_t, int32_t);
 	void send_player_drop_soldier(Building*, int32_t);
 	void send_player_change_soldier_capacity(Building*, int32_t);

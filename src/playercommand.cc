@@ -23,6 +23,7 @@
 #include "game.h"
 #include "instances.h"
 #include "player.h"
+#include "productionsite.h"
 #include "soldier.h"
 #include "streamwrite.h"
 #include "wexception.h"
@@ -47,8 +48,8 @@ enum {
 	PLCMD_CHANGETRAININGOPTIONS,
 	PLCMD_DROPSOLDIER,
 	PLCMD_CHANGESOLDIERCAPACITY,
-/// TESTING STUFF
 	PLCMD_ENEMYFLAGACTION,
+	PLCMD_SETWAREPRIORITY
 };
 
 /*** class PlayerCommand ***/
@@ -69,10 +70,10 @@ PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_FLAGACTION:            return new Cmd_FlagAction           (des);
 	case PLCMD_STARTSTOPBUILDING:     return new Cmd_StartStopBuilding    (des);
 	case PLCMD_ENHANCEBUILDING:       return new Cmd_EnhanceBuilding      (des);
+	case PLCMD_SETWAREPRIORITY:       return new Cmd_SetWarePriority      (des);
 	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
 	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
 	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
-	///   TESTING STUFF
 	case PLCMD_ENEMYFLAGACTION:       return new Cmd_EnemyFlagAction      (des);
 	default:
 		throw wexception
@@ -525,6 +526,89 @@ void Cmd_EnhanceBuilding::Write
 
 	// Now id
 	fw.Unsigned16(id);
+}
+
+
+/*** class Cmd_SetWarePriority ***/
+Cmd_SetWarePriority::Cmd_SetWarePriority
+	(int32_t duetime, Player_Number _sender,
+	 PlayerImmovable* imm,
+	 int32_t type, Ware_Index index, int32_t priority)
+	: PlayerCommand(duetime, _sender)
+{
+	m_serial = imm->get_serial();
+	m_type = type;
+	m_index = index;
+	m_priority = priority;
+}
+
+void Cmd_SetWarePriority::execute(Game* g)
+{
+	upcast(ProductionSite, psite, g->objects().get_object(m_serial));
+
+	if (!psite)
+		return;
+	if (psite->get_owner()->get_player_number() != get_sender())
+		return;
+
+	psite->set_priority(m_type, m_index, m_priority);
+}
+
+#define PLAYER_CMD_SETWAREPRIORITY_VERSION 1
+
+void Cmd_SetWarePriority::Write(FileWrite& fw, Editor_Game_Base& egbase, Map_Map_Object_Saver& mos)
+{
+	fw.Unsigned16(PLAYER_CMD_SETWAREPRIORITY_VERSION);
+
+	PlayerCommand::Write(fw, egbase, mos);
+
+	const Map_Object * const obj = egbase.objects().get_object(m_serial);
+	fw.Unsigned32(mos.get_object_file_index(obj));
+	fw.Unsigned8(m_type);
+	fw.Signed32(m_index);
+	fw.Signed32(m_priority);
+}
+
+void Cmd_SetWarePriority::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_Object_Loader& mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_SETWAREPRIORITY_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			uint32_t const serial = fr.Unsigned32();
+			try {
+				m_serial = mol.get<Map_Object>(serial).get_serial();
+			} catch (_wexception const & e) {
+				throw wexception("site %u: %s", serial, e.what());
+			}
+
+			m_type = fr.Unsigned8();
+			m_index = fr.Signed32();
+			m_priority = fr.Signed32();
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("enhance building: %s", e.what());
+	}
+}
+
+Cmd_SetWarePriority::Cmd_SetWarePriority(StreamRead& des)
+	: PlayerCommand(0, des.Unsigned8())
+{
+	m_serial = des.Unsigned32();
+	m_type = des.Unsigned8();
+	m_index = des.Signed32();
+	m_priority = des.Signed32();
+}
+
+void Cmd_SetWarePriority::serialize(StreamWrite& ser)
+{
+	ser.Unsigned8(PLCMD_SETWAREPRIORITY);
+	ser.Unsigned8(get_sender());
+	ser.Unsigned32(m_serial);
+	ser.Unsigned8(m_type);
+	ser.Signed32(m_index);
+	ser.Signed32(m_priority);
 }
 
 

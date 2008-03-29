@@ -203,6 +203,30 @@ private:
 	int32_t id;
 };
 
+struct Cmd_SetWarePriority : public PlayerCommand {
+	Cmd_SetWarePriority() : PlayerCommand() {} // For savegame loading
+	Cmd_SetWarePriority
+		(int32_t duetime, Player_Number sender,
+		 PlayerImmovable* imm,
+		 int32_t type, Ware_Index index, int32_t priority);
+
+	// Write these commands to a file (for savegames)
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual int32_t get_id() {return QUEUE_CMD_ENHANCEBUILDING;}
+
+	Cmd_SetWarePriority(StreamRead &);
+
+	virtual void execute (Game* g);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial m_serial;
+	int32_t m_type; ///< this is always WARE right now
+	Ware_Index m_index;
+	int32_t m_priority;
+};
 
 struct Cmd_ChangeTrainingOptions : public PlayerCommand {
 	Cmd_ChangeTrainingOptions() : PlayerCommand() {} // For savegame loading

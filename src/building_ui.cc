@@ -1283,12 +1283,13 @@ struct PriorityButtonInfo {
 };
 
 struct PriorityButtonHelper : std::map<int32_t, PriorityButtonInfo> {
-	PriorityButtonHelper(ProductionSite * ps, int32_t ware_type, int32_t ware_index);
+	PriorityButtonHelper(Widelands::Game& g, ProductionSite * ps, int32_t ware_type, int32_t ware_index);
 
 	void button_clicked (int32_t priority);
 	void update_buttons ();
 
 private:
+	Widelands::Game& m_game;
 	ProductionSite * m_ps;
 	int32_t m_ware_type;
 	int32_t m_ware_index;
@@ -1324,16 +1325,16 @@ protected:
 
 
 PriorityButtonHelper::PriorityButtonHelper
-(ProductionSite * ps, int32_t ware_type, int32_t ware_index)
+(Widelands::Game& g, ProductionSite * ps, int32_t ware_type, int32_t ware_index)
 :
+m_game(g),
 m_ps        (ps),
 m_ware_type (ware_type),
 m_ware_index(ware_index)
 {}
 
 void PriorityButtonHelper::button_clicked (int32_t priority) {
-	m_ps->set_priority (m_ware_type, m_ware_index, priority);
-	update_buttons();
+	m_game.send_player_set_ware_priority(m_ps, m_ware_type, m_ware_index, priority);
 }
 
 void PriorityButtonHelper::update_buttons () {
@@ -1407,7 +1408,7 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 
 	if (wq->get_ware() >= static_cast<Widelands::Ware_Index::value_t>(0)) {
 		m_priority_helpers.push_back
-			(PriorityButtonHelper(ps, Widelands::Request::WARE, wq->get_ware()));
+			(PriorityButtonHelper(get_player()->game(), ps, Widelands::Request::WARE, wq->get_ware()));
 		PriorityButtonHelper & helper = m_priority_helpers.back();
 
 		UI::Box* vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
@@ -1506,6 +1507,14 @@ Make sure the window is redrawn when necessary.
 void ProductionSite_Window::think()
 {
 	Building_Window::think();
+
+	for
+		(std::list<PriorityButtonHelper>::iterator it = m_priority_helpers.begin();
+		 it != m_priority_helpers.end();
+		 ++it)
+	{
+		it->update_buttons();
+	}
 }
 
 

@@ -681,6 +681,14 @@ void Game::send_player_enhance_building (Building* b, int32_t id)
 		 	(get_gametime(), b->get_owner()->get_player_number(), b, id));
 }
 
+void Game::send_player_set_ware_priority
+	(PlayerImmovable* imm, int32_t type, Ware_Index index, int32_t prio)
+{
+	send_player_command
+		(new Cmd_SetWarePriority
+		 (get_gametime(), imm->get_owner()->get_player_number(), imm, type, index, prio));
+}
+
 void Game::send_player_change_training_options(Building* b, int32_t atr, int32_t val)
 {
 	send_player_command
