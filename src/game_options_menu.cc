@@ -87,9 +87,9 @@ sound
 
 save_game
 (this,
- posx(0, 2),
+ posx(0, 1),
  vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
- buttonw(2), 35,
+ buttonw(1), 35,
  4,
  g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
  &GameOptionsMenu::clicked_save_game, this,
