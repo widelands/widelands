@@ -50,6 +50,7 @@ public:
 
 	void add(Panel* panel, uint32_t align);
 	void add_space(uint32_t space);
+	bool is_snap_target() const {return true;}
 
 private:
 	void get_item_size(uint32_t idx, int32_t* depth, int32_t* breadth);

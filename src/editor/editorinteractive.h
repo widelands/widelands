@@ -110,6 +110,10 @@ public:
 	bool is_player_tribe_referenced(int32_t);
 	void set_need_save(bool const t) {m_need_save = t;}
 
+	/// Must be called when the world is changed. Takes care of closing the tool
+	/// menus that are showing elements from the old world.
+	void change_world();
+
 private:
 	void toggle_buildhelp     ();
 	void tool_menu_btn        ();

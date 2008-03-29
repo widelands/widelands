@@ -130,7 +130,12 @@ void Editor_Interactive::load(std::string const & filename) {
 	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 
 	UI::ProgressWindow loader_ui;
-	ml->preload_map(true);
+	{
+		std::string const old_world_name = map.get_world_name();
+		ml->preload_map(true);
+		if (strcmp(map.get_world_name(), old_world_name.c_str()))
+			change_world();
+	}
 
 	loader_ui.step (_("Loading world data"));
 	ml->load_world();
@@ -507,6 +512,14 @@ bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
 			return true;
 
 	return false;
+}
+
+
+void Editor_Interactive::change_world() {
+	delete m_terrainmenu  .window;
+	delete m_immovablemenu.window;
+	delete m_bobmenu      .window;
+	delete m_resourcesmenu.window;
 }
 
 

@@ -168,6 +168,8 @@ void Main_Menu_New_Map::clicked_create_map() {
 	// Clean all the stuff up, so we can load
 	egbase.cleanup_for_load(true, false);
 
+	if (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
+		m_parent->change_world();
 	map.create_empty_map
 		(Widelands::MAP_DIMENSIONS[m_w], Widelands::MAP_DIMENSIONS[m_h],
 		 m_worlds[m_currentworld]);
