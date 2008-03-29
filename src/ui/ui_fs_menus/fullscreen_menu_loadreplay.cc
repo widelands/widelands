@@ -40,7 +40,9 @@ m_back
 m_ok
 (this, 570, 535, 200, 26, 2,
  &Fullscreen_Menu_LoadReplay::clicked_ok, this,
- _("OK")),
+ _("OK"),
+ std::string(),
+ false),
 
 // Create the list area
 	m_list(this, 15, 205, 455, 365),
@@ -67,9 +69,11 @@ void Fullscreen_Menu_LoadReplay::double_clicked(uint32_t)
 }
 
 
-void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t)
+void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const n)
 {
 	// TODO: Extract quick info about the replay
+	m_ok.set_enabled
+		(n != UI::Listselect<Fullscreen_Menu_LoadReplay>::no_selection_index());
 }
 
 
