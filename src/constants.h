@@ -73,7 +73,7 @@
 #define UI_FONT_BIG_CLR UI_FONT_CLR_FG, RGBColor(107, 87, 55)
 /// small is used for ultrasmall, too
 #define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, RGBColor(107, 87, 55)
-#define UI_FONT_TOOLTIP_CLR RGBColor(100, 100, 255), RGBColor(230, 200, 50)
+#define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0), RGBColor(63, 52, 34)
 //@}
 
 /// the actual game logic doesn't know about frames
