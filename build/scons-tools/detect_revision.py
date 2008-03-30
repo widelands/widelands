@@ -14,7 +14,7 @@ def detect_revision():
 	if os.path.exists('.svn'):
 		has_svn = os.system('svn >/dev/null 2>&1')==256
 		if has_svn:
-			svn_revnum=os.popen('svn info|grep Revision:|cut -d" " -f 2').read().rstrip()
+			svn_revnum=os.popen('LANG=C svn info|grep Revision:|cut -d" " -f 2').read().rstrip()
 			revstring='svn%s' % (svn_revnum,)
 
 	has_svk = os.system('svk >/dev/null 2>&1')==0
