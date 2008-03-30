@@ -23,6 +23,7 @@
 #include "wexception.h"
 
 #include <sys/stat.h>
+#include <stdlib.h>
 
 /**
  * Get the path of campaign visiblity save-file
