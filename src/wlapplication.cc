@@ -664,7 +664,7 @@ const bool WLApplication::init_settings()
 	s=g_options.pull_section("global");
 
 	// Set Locale and grab default domain
-	i18n::set_locale(s->get_string("language", "en_EN"));
+	i18n::set_locale(s->get_string("language", i18n::get_locale().c_str()));
 	i18n::grab_textdomain("widelands");
 
 	//then parse the commandline - overwrites conffile settings
