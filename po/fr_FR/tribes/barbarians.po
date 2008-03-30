@@ -1,14 +1,14 @@
 # Widelands po/fr_FR/tribes/barbarians.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team.
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3131\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-03-28 18:41+0000\n"
 "PO-Revision-Date: 2007-02-25 19:07+0100\n"
-"Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
+"Last-Translator: Pierre Salagnac <pierre.salagnac@free.fr>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -129,7 +129,7 @@ msgstr "Quartier Général"
 #: ../../../tribes/barbarians/buildings/helmsmith/conf:2
 #: ../../../tribes/barbarians/workers/helmsmith/conf:2
 msgid "Helmsmith"
-msgstr "Ouvrier Naval"
+msgstr "Forgeron de heaumes"
 
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
@@ -140,9 +140,8 @@ msgid "Inn"
 msgstr "Auberge"
 
 #: ../../../tribes/barbarians/buildings/lumberjack/conf:2
-#, fuzzy
 msgid "Lumberjack's Hut"
-msgstr "Bûcheron"
+msgstr "Hutte du Bûcheron"
 
 #: ../../../tribes/barbarians/buildings/metalworks/conf:2
 msgid "Metalworks"
@@ -162,7 +161,7 @@ msgstr "Carrière"
 
 #: ../../../tribes/barbarians/buildings/ranger/conf:2
 msgid "Ranger Hut"
-msgstr "Hutte de garde Forestier"
+msgstr "Hutte de Garde Forestier"
 
 #: ../../../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
@@ -234,7 +233,7 @@ msgstr "La plaque de cuisson est l'outil du boulanger. Chaque boulanger en a bes
 
 #: ../../../tribes/barbarians/wares/battleaxe/conf:2
 msgid "Battle Axe"
-msgstr "Hache de Guerre"
+msgstr "Hache de Battaille"
 
 #: ../../../tribes/barbarians/wares/battleaxe/conf:3
 msgid "This is the second most dangerous weapon, the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produce in the Axefactory."
@@ -270,7 +269,7 @@ msgstr "Hache de Bronze"
 
 #: ../../../tribes/barbarians/wares/bronzeaxe/conf:3
 msgid "The bronzeaxe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axefactory."
-msgstr "La hache de bronze est considérée comme difficile à manier : elle cause beaucoup de dommages, mais sa durée de vie n'est pas la meilleure. Seul les guerriers chevronnés peux l'utiliser. Elle est produite à la fabrique de haches."
+msgstr "La hache de bronze est considérée comme difficile à manier : elle cause beaucoup de dommages, mais sa durée de vie n'est pas la meilleure. Seul les guerriers chevronnés peuvent l'utiliser. Elle est produite à la fabrique de haches."
 
 #: ../../../tribes/barbarians/wares/cloth/conf:2
 msgid "Cloth"
@@ -350,7 +349,7 @@ msgstr "Chaux"
 
 #: ../../../tribes/barbarians/wares/grindstone/conf:3
 msgid "Raw stone can be enhanced to grind stone which delivers solid, non burning build material."
-msgstr "La pierre brute peut être transformée en chaux qui fournit un matériau de construction solide et ignifugé."
+msgstr "La pierre brute peut être transformée en chaux, qui fournit un matériau de construction solide et ignifugé."
 
 #: ../../../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -362,7 +361,7 @@ msgstr "Le marteau est un outil essentiel. Il est utilisé par le géologue, l'o
 
 #: ../../../tribes/barbarians/wares/helm/conf:2
 msgid "Helm"
-msgstr "Gouvernail"
+msgstr "Casque"
 
 #: ../../../tribes/barbarians/wares/helm/conf:3
 msgid "Basic defence of a warrior"
@@ -406,7 +405,7 @@ msgstr "Masque"
 
 #: ../../../tribes/barbarians/wares/mask/conf:3
 msgid "An enhanced version of the helm."
-msgstr "Une version améliorée du gouvernail."
+msgstr "Une version améliorée du casque."
 
 #: ../../../tribes/barbarians/wares/meal/conf:2
 msgid "Meal"
@@ -470,7 +469,7 @@ msgstr "Hache Pointue"
 
 #: ../../../tribes/barbarians/wares/sharpaxe/conf:3
 msgid "Real warriors consider the Sharp axe the first real weapon, after being able to handle an ordinary axe, this weapon is tackled. It is heavier and sharper than the ordinary axe. Build in the axefactory."
-msgstr "Les vrais guerriers considèrent la hache pointue comme la première vrai arme. Elle ne peut être abordée qu'après être capable de manier une hache ordinaire. Elle est plus lourde et plus aiguisée que la hache ordinaire. Elle est construite à la fabrique de hache."
+msgstr "Les vrais guerriers considèrent la hache pointue comme la première vraie arme, une fois qu'ils sont capables de manier la hache ordinaire. Elle est plus lourde et plus aiguisée que la hache ordinaire. Elle est construite à la fabrique de haches."
 
 #: ../../../tribes/barbarians/wares/shovel/conf:2
 msgid "Shovel"
@@ -526,7 +525,7 @@ msgstr "Hache de Guerrier"
 
 #: ../../../tribes/barbarians/wares/warriorsaxe/conf:3
 msgid "The Warriors Axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerfull axes. Build at the axefactory."
-msgstr "La hache des guerriers est la plus dangereuse de toutes les armes. Seul quelques guerriers sont capables de manipuler ces gigantesques et puissantes haches. Elles sont faites à la fabrique de haches."
+msgstr "La hache des guerriers est la plus dangereuse de toutes les armes. Seuls quelques guerriers sont capables de manipuler ces gigantesques et puissantes haches. Elles sont faites à la fabrique de haches."
 
 #: ../../../tribes/barbarians/wares/water/conf:2
 msgid "Water"
@@ -534,7 +533,7 @@ msgstr "Eau"
 
 #: ../../../tribes/barbarians/wares/water/conf:3
 msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to grind stones."
-msgstr "L'eau est l'essence même de la vie ! Cette eau est utilisée à beaucoup d'endroits, pour le pain et la bière ou fabriquer la chaux."
+msgstr "L'eau est l'essence même de la vie ! Cette eau est utilisée à beaucoup d'endroits, pour le pain et la bière, ou fabriquer la chaux."
 
 #: ../../../tribes/barbarians/wares/wheat/conf:2
 msgid "Wheat"
@@ -558,7 +557,7 @@ msgstr "Brasseur"
 
 #: ../../../tribes/barbarians/workers/builder/conf:2
 msgid "Builder"
-msgstr "Constructeur"
+msgstr "Batisseur"
 
 #: ../../../tribes/barbarians/workers/burner/conf:2
 msgid "Burner"
@@ -643,6 +642,3 @@ msgstr "Entraîneur"
 #: ../../../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Tisserand"
-
-#~ msgid "Presser"
-#~ msgstr "Presseur"
