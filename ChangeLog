@@ -60,7 +60,7 @@ build-10:
 - Addition of two new Empire-campaign-maps
 - Addition of three new ingame music-tracks
 - A lot of localisation-bugs were fixed and new strings for translation were added.
-- Widelands now supports 14 languages (cz_CZ, de_DE, en_EN, es_ES, fi_FI, fr_FR, gl_ES , he_HE, hu_HU, nl_NL, pl_PL, ru_RU, sk_SK, sv_SE)
+- Widelands now supports 14 languages (cs_CZ, de_DE, en_EN, es_ES, fi_FI, fr_FR, gl_ES , he_HE, hu_HU, nl_NL, pl_PL, ru_RU, sk_SK, sv_SE)
 - New feature: Mouse-over-hover-help
 - New feature: Tribe ware encyclopedia
 - Mousewheel support integrated (textarea)

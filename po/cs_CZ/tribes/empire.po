@@ -1,4 +1,4 @@
-# Widelands po/cz_CZ/tribes/empire.po
+# Widelands po/cs_CZ/tribes/empire.po
 # Copyright (C) 2007 Widelands Development Team.
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #

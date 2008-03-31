@@ -46,7 +46,7 @@ struct Languages {
 static Languages available_languages[NR_LANGUAGES] = {
 	{"Default system language", ""},
 // EXTRACT BEGIN (leaves this line untouched)
-	{"česky",                  "cz_CZ"},
+	{"česky",                  "cs_CZ"},
 	{"Deutsch",                 "de_DE"},
 	{"English",                 "en_EN"},
 	{"Español",                "es_ES"},

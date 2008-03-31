@@ -270,7 +270,7 @@ distcleanactions=[
 	Delete('locale/da_DK'),
 	Delete('locale/nl_NL'),
 	Delete('locale/pl_PL'),
-	Delete('locale/cz_CZ'),
+	Delete('locale/cs_CZ'),
 	Delete('locale/he_HE'),
 	Delete('locale/hu_HU'),
 	Delete('locale/gl_ES'),

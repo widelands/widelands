@@ -1,4 +1,4 @@
-# Widelands po/cz_CZ/campaigns/emp02.wmf.po
+# Widelands po/cs_CZ/campaigns/emp02.wmf.po
 # Copyright (C) 2007 Widelands Development Team.
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
