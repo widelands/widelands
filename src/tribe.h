@@ -41,6 +41,20 @@ class Worker_Descr;
 class Warehouse;
 struct World;
 
+
+/**
+ * Stores basic information about the tribe that is determined
+ * only from the conf file.
+ */
+struct TribeBasicInfo {
+	std::string name;
+
+	/**
+	 * Relative position of this tribe in a list of tribes.
+	 */
+	int32_t uiposition;
+};
+
 /*
 Tribes
 ------
@@ -58,7 +72,7 @@ struct Tribe_Descr {
 	Tribe_Descr(const std::string & tribename, const World &);
 
 	//  Static function to check for tribes.
-	static bool exists_tribe(const std::string & name);
+	static bool exists_tribe(const std::string & name, TribeBasicInfo* info = 0);
 	static void get_all_tribenames(std::vector<std::string> &);
 
 

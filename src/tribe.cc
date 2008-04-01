@@ -516,22 +516,41 @@ void Tribe_Descr::load_warehouse_with_start_wares
 /*
  * does this tribe exist?
  */
-bool Tribe_Descr::exists_tribe(const std::string & name) {
+bool Tribe_Descr::exists_tribe(const std::string & name, TribeBasicInfo* info) {
 	std::string buf = "tribes/";
 	buf            += name;
 	buf            += "/conf";
 
 	FileRead f;
-	return f.TryOpen(*g_fs, buf.c_str());
+	if (f.TryOpen(*g_fs, buf.c_str())) {
+		if (info) {
+			Profile prof(buf.c_str());
+			Section *s = prof.get_safe_section("tribe");
+
+			info->name = name;
+			info->uiposition = s->get_int("uiposition", 0);
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
-/*
- * Returns all tribes that exists
+struct TribeBasicComparator {
+	bool operator()(const TribeBasicInfo& t1, const TribeBasicInfo& t2) {
+		return t1.uiposition < t2.uiposition;
+	}
+};
+
+/**
+ * Fills the given string vector with the names of all tribes that exist.
  */
 void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
 	assert(target.empty());
 
 	//  get all tribes
+	std::vector<TribeBasicInfo> tribes;
 	filenameset_t m_tribes;
 	g_fs->FindFiles("tribes", "*", &m_tribes);
 	for
@@ -540,7 +559,18 @@ void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
 		 ++pname)
 	{
 		const std::string name = pname->substr(7);
-		if (Tribe_Descr::exists_tribe(name)) target.push_back(name);
+		TribeBasicInfo info;
+		if (Tribe_Descr::exists_tribe(name, &info))
+			tribes.push_back(info);
+	}
+
+	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
+	for
+		(std::vector<TribeBasicInfo>::const_iterator it = tribes.begin();
+		 it != tribes.end();
+		 ++it)
+	{
+		target.push_back(it->name);
 	}
 }
 

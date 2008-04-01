@@ -19,6 +19,7 @@ author=_ The Widelands Development Team
 name=_ Barbarians
 descr=_ The mighty tribes of the east-lands!
 bob_vision_range=2
+uiposition=10
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
