@@ -1007,6 +1007,7 @@ bool Warehouse::attack(Soldier* enemy)
 		return true;
 	}
 
+	set_defeating_player(enemy->get_owner()->get_player_number());
 	schedule_destroy(g);
 	return false;
 }

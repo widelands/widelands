@@ -546,6 +546,7 @@ bool MilitarySite::attack(Soldier* enemy)
 		return true;
 	} else {
 		//TODO: Conquer building
+		set_defeating_player(enemy->get_owner()->get_player_number());
 		schedule_destroy(g);
 		return false;
 	}
