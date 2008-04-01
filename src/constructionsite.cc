@@ -468,7 +468,13 @@ Called by our builder to get instructions.
 ===============
 */
 bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
-	assert(w == m_builder.get(g));
+	if (w != m_builder.get(g)) {
+		// Not our construction worker; e.g. a miner leaving a mine
+		// that is supposed to be enhanced. Make him return to a warehouse
+		w->pop_task(g);
+		w->start_task_leavebuilding(g, true);
+		return true;
+	}
 
 	// Check if one step has completed
 	if (m_working) {
