@@ -548,6 +548,7 @@ struct Economy {
 	int32_t get_nrflags() const {return m_flags.size();}
 	void add_flag(Flag *flag);
 	void remove_flag(Flag *flag);
+	Flag* get_arbitrary_flag();
 
 	void    add_wares  (Ware_Index, uint32_t count = 1);
 	void remove_wares  (Ware_Index, uint32_t count = 1);
@@ -624,16 +625,9 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 	Cmd_Call_Economy_Balance () : GameLogicCommand (0) {} ///< for load and save
 
 	Cmd_Call_Economy_Balance
-		(int32_t       const starttime,
-		 Player_Number const player,
-		 Economy     * const economy,
-		 uint32_t timerid)
-		:
-		GameLogicCommand(starttime),
-		m_player        (player),
-		m_economy       (economy),
-		m_timerid(timerid)
-	{}
+		(int32_t starttime,
+		 Economy* economy,
+		 uint32_t timerid);
 
 	void execute (Game *);
 
@@ -643,8 +637,7 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 private:
-	Player_Number m_player;
-	Economy     * m_economy;
+	OPtr<Flag> m_flag;
 	uint32_t m_timerid;
 };
 

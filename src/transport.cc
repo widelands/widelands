@@ -2126,6 +2126,17 @@ Economy::~Economy()
 		log("Warning: Economy still has warehouses left on destruction\n");
 }
 
+
+/**
+ * \return an arbitrary flag in this economy, or 0 if no flag exists
+ */
+Flag* Economy::get_arbitrary_flag()
+{
+	if (m_flags.size())
+		return m_flags[0];
+	return 0;
+}
+
 /**
  * Two flags have been connected; check whether their economies should be
  * merged.
@@ -2781,18 +2792,22 @@ void Economy::do_split(Flag *f)
 	// Fix Supply/Request after rebuilding
 	m_rebuilding = false;
 	e->m_rebuilding = false;
+
+	// As long as rebalance commands are tied to specific flags, we
+	// need this, because the flag that rebalance commands for us were
+	// tied to might have been moved into the other economy
+	start_request_timer();
 }
 
 /**
  * Make sure the request timer is running.
-*/
+ */
 void Economy::start_request_timer(int32_t delta)
 {
 	if (upcast(Game, game, &m_owner->egbase()))
 		game->get_cmdqueue()->enqueue
 			(new Cmd_Call_Economy_Balance
 			 	(game->get_gametime() + delta,
-			 	 m_owner->get_player_number(),
 			 	 this,
 			 	 m_request_timerid));
 }
@@ -3100,20 +3115,29 @@ void Economy::Write(FileWrite& fw, Game*, Map_Map_Object_Saver*)
 }
 
 
+Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
+	(int32_t starttime,
+	 Economy* economy,
+	 uint32_t timerid)
+	: GameLogicCommand(starttime)
+{
+	m_flag = economy->get_arbitrary_flag();
+	m_timerid = timerid;
+}
+
 /**
  * Called by Cmd_Queue as requested by start_request_timer().
  * Call economy functions to balance supply and request.
  */
 void Cmd_Call_Economy_Balance::execute(Game* g)
 {
-	//  If this economy has vanished, drop this call silently
-	if (!g->player(m_player).has_economy(m_economy))
-		return;
+	Flag* flag = m_flag.get(g);
 
-	m_economy->balance_requestsupply(m_timerid);
+	if (flag)
+		flag->get_economy()->balance_requestsupply(m_timerid);
 }
 
-#define CURRENT_CMD_CALL_ECONOMY_VERSION 2
+#define CURRENT_CMD_CALL_ECONOMY_VERSION 3
 
 /**
  * Read and write
@@ -3123,10 +3147,17 @@ void Cmd_Call_Economy_Balance::Read
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION || packet_version == 1) {
+		if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
-			m_player  = fr.Unsigned8 ();
-			m_economy = fr.Unsigned8 () ? egbase.get_player(m_player)->get_economy_by_number(fr.Unsigned16()) : 0;
+			uint32_t serial = fr.Unsigned32();
+			if (serial)
+				m_flag = &mol.get<Flag>(serial);
+			m_timerid = fr.Unsigned32();
+		} else if (packet_version == 1 || packet_version == 2) {
+			GameLogicCommand::Read(fr, egbase, mol);
+			Player* player = egbase.get_player(fr.Unsigned8());
+			Economy* economy = fr.Unsigned8 () ? player->get_economy_by_number(fr.Unsigned16()) : 0;
+			m_flag = economy->get_arbitrary_flag();
 			if (packet_version >= 2)
 				m_timerid = fr.Unsigned32();
 			else
@@ -3144,14 +3175,10 @@ void Cmd_Call_Economy_Balance::Write
 
 	// Write Base Commands
 	GameLogicCommand::Write(fw, egbase, mos);
-
-	fw.Unsigned8 (m_player);
-
-	const Player & player = egbase.player(m_player);
-	const bool has_eco = player.has_economy(m_economy);
-	fw.Unsigned8 (has_eco);
-	if (has_eco)
-		fw.Unsigned16(player.get_economy_number(m_economy));
+	if (Flag* flag = m_flag.get(&egbase))
+		fw.Unsigned32(mos.get_object_file_index(flag));
+	else
+		fw.Unsigned32(0);
 	fw.Unsigned32(m_timerid);
 }
 
