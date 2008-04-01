@@ -196,8 +196,6 @@ struct FieldActionWindow : public UI::UniqueWindow {
 	void act_attack();         /// Launch the attack
 	void act_attack_more();    /// Increase the number of soldiers to be launched
 	void act_attack_less();    /// Decrease the number of soldiers to be launched
-	void act_attack_strong();  /// Prepare to launch strongest soldiers
-	void act_attack_weak();    /// Prepare to launch weakest soldiers
 	uint32_t get_max_attackers();  /// Total number of attackers available for a specific enemy flag
 
 private:
@@ -476,17 +474,6 @@ void FieldActionWindow::add_buttons_attack ()
 					 pic_attack_more,
 					 &FieldActionWindow::act_attack_more,
 					 _("Send more soldiers"));
-
-				add_button
-					(attackbox,
-					 pic_attack_strong,
-					 &FieldActionWindow::act_attack_strong,
-					 _("Most aggressive attack"));
-				add_button
-					(attackbox,
-					 pic_attack_weak,
-					 &FieldActionWindow::act_attack_weak,
-					 _("Cautious attack"));
 
 				add_button
 					(attackbox,
@@ -958,17 +945,6 @@ void FieldActionWindow::act_attack_less() {
 
 	sprintf(buf, "%d/%d", m_attackers, available);
 	m_text_attackers->set_text (buf);
-}
-
-void FieldActionWindow::act_attack_strong()
-{
-	m_attackers_type = STRONGEST;
-}
-
-
-void FieldActionWindow::act_attack_weak()
-{
-	m_attackers_type = WEAKEST;
 }
 
 /*
