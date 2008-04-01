@@ -72,6 +72,7 @@ private:
 	LAN_Game_Finder                             discovery;
 
 	void game_selected (uint32_t);
+	void game_doubleclicked (uint32_t);
 
 	static void discovery_callback (int32_t, LAN_Open_Game const *, void *);
 

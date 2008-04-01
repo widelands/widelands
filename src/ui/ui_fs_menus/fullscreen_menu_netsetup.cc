@@ -62,6 +62,8 @@ opengames (this, 310, 300, 390, 180)
 	opengames .add_column(150, _("Map"));
 	opengames .add_column (90, _("State"));
 	opengames .selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
+	opengames .double_clicked.set
+		(this, &Fullscreen_Menu_NetSetup::game_doubleclicked);
 	discovery .set_callback (discovery_callback, this);
 
 	joingame.set_enabled(false);
@@ -112,6 +114,10 @@ void Fullscreen_Menu_NetSetup::game_selected (uint32_t) {
 			joingame.set_enabled(true);
 		}
 	}
+}
+
+void Fullscreen_Menu_NetSetup::game_doubleclicked (uint32_t) {
+	clicked_joingame();
 }
 
 void Fullscreen_Menu_NetSetup::update_game_info
