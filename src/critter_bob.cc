@@ -270,6 +270,7 @@ coords is used to store target coordinates found by findspace
 Bob::Task Critter_Bob::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Critter_Bob::program_update),
+	0,
 	0
 };
 
@@ -336,6 +337,7 @@ Bob::Task Critter_Bob::taskRoam = {
 	"roam",
 	static_cast<Bob::Ptr>(&Critter_Bob::roam_update),
 	0,
+	0
 };
 
 void Critter_Bob::roam_update(Game* g, State* state)
