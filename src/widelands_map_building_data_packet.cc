@@ -177,9 +177,9 @@ throw (_wexception)
  * Priorities are writen in format:
  0    - ware type (8 bits), for example Request:WARE
  2    - count of priorities for this type (8 bits)
-   fish  - ware name (32 bits)
+   fish  - ware name (32 bits) //  FIXME ???
    4     - priority assigned to a ware (32 bits)
-   water - ware name (32 bits)
+   water - ware name (32 bits) //  FIXME ???
    1     - ware priority(32 bits)
  0xff - end of ware types
  */
@@ -188,8 +188,8 @@ void Map_Building_Data_Packet::write_priorities
 {
 	fw.Unsigned32(building.get_base_priority());
 
-	std::map<int32_t, std::map<int32_t, int32_t> > type_to_priorities;
-	std::map<int32_t, std::map<int32_t, int32_t> >::iterator it;
+	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
+	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
 
 	const Tribe_Descr & tribe = building.get_owner()->tribe();
 	building.collect_priorities(type_to_priorities);
@@ -203,11 +203,11 @@ void Map_Building_Data_Packet::write_priorities
 		fw.Unsigned8(ware_type);
 		fw.Unsigned8(it->second.size());
 
-		std::map<int32_t, int32_t>::iterator it2;
+		std::map<Ware_Index, int32_t>::iterator it2;
 		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2)
 		{
 			std::string name;
-			const int32_t ware_index = it2->first;
+			Ware_Index const ware_index = it2->first;
 			if (Request::WARE == ware_type)
 				name = tribe.get_ware_descr(ware_index)->name();
 			else if (Request::WORKER == ware_type)

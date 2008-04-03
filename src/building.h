@@ -209,7 +209,8 @@ public:
 	void set_priority(int32_t new_priority);
 	void set_priority(int32_t type, int32_t ware_index, int32_t new_priority);
 
-	void collect_priorities(std::map<int32_t, std::map<int32_t, int32_t> > & p) const;
+	void collect_priorities
+		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
 	const std::vector<char *> & enhances_to() const throw ()
 	{return descr().enhances_to();}
@@ -260,7 +261,7 @@ protected:
 	Player_Number           m_defeating_player;
 
 	int32_t m_priority; // base priority
-	std::map<int32_t, int32_t> m_ware_priorities;
+	std::map<Ware_Index, int32_t> m_ware_priorities;
 };
 
 };
