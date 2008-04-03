@@ -130,18 +130,15 @@ template<typename T> static void render_edge_lists
 
 
 struct Polygon {
-	const Vertex* p[7];
+	Point p[7];
 	uint8_t nrpoints;
 
-	void intersect_edge(const Vertex& a, const Vertex& b, int32_t x, int32_t y, int32_t d, Vertex* out) {
+	void intersect_edge(const Point& a, const Point& b, int32_t x, int32_t y, int32_t d, Point* out) {
 		int32_t da = a.x*x + a.y*y;
 		int32_t db = b.x*x + b.y*y;
 
 		out->x = a.x + (b.x-a.x)*(d-da)/(db-da);
 		out->y = a.y + (b.y-a.y)*(d-da)/(db-da);
-		out->tx = a.tx + (b.tx-a.tx)*(d-da)/(db-da);
-		out->ty = a.ty + (b.ty-a.ty)*(d-da)/(db-da);
-		out->b = a.b + (b.b-a.b)*(d-da)/(db-da);
 	}
 
 	/**
@@ -168,22 +165,20 @@ struct Polygon {
 	 * \return \c true if visible parts of polygon remain, or \c false if the
 	 * polygon has been culled away completely.
 	 */
-	bool clip(int32_t x, int32_t y, int32_t d, Vertex* exit, Vertex* entry) {
+	bool clip(int32_t x, int32_t y, int32_t d) {
 		int8_t firstout = -1;
 		int8_t firstin = -1;
 
-		const Vertex* previous = p[nrpoints-1];
-		bool previousin = previous->x*x + previous->y*y >= d;
-		const Vertex* current;
+		bool previousin = p[nrpoints-1].x*x + p[nrpoints-1].y*y >= d;
 		bool currentin;
 		bool allin = true;
 		for
 			(uint8_t index = 0;
 			 index < nrpoints;
-			 ++index, previous = current, previousin = currentin)
+			 ++index, previousin = currentin)
 		{
-			current = p[index];
-			currentin = current->x*x + current->y*y >= d;
+			const Point& current = p[index];
+			currentin = current.x*x + current.y*y >= d;
 			allin = allin && currentin;
 
 			if (currentin == previousin)
@@ -204,25 +199,27 @@ struct Polygon {
 		// Calculate intersection with the cutting line and replace points
 		// [firstout, firstin) by the two intersections, being careful
 		// not to introduce duplicate points.
+		Point exit;
+		Point entry;
 		intersect_edge
-			(*p[(nrpoints + firstout - 1) % nrpoints],
-			 *p[firstout],
-			 x, y, d, exit);
+			(p[(nrpoints + firstout - 1) % nrpoints],
+			 p[firstout],
+			 x, y, d, &exit);
 		intersect_edge
-			(*p[firstin],
-			 *p[(nrpoints + firstin  - 1) % nrpoints],
-			 x, y, d, entry);
+			(p[firstin],
+			 p[(nrpoints + firstin  - 1) % nrpoints],
+			 x, y, d, &entry);
 
 		bool putexit = true;
 		bool putentry = true;
 
-		if (entry->x == exit->x && entry->y == exit->y)
+		if (entry.x == exit.x && entry.y == exit.y)
 			putentry = false;
-		else if (entry->x == p[firstin]->x && entry->y == p[firstin]->y)
+		else if (entry.x == p[firstin].x && entry.y == p[firstin].y)
 			putentry = false;
 
-		const Vertex* preexit = p[(nrpoints+firstout-1)%nrpoints]; // coalesce points
-		if (exit->x == preexit->x && exit->y == preexit->y)
+		const Point& preexit = p[(nrpoints+firstout-1)%nrpoints]; // coalesce points
+		if (exit.x == preexit.x && exit.y == preexit.y)
 			putexit = false;
 
 		if (putentry && putexit) {
@@ -275,20 +272,18 @@ template<typename T> static void render_triangle
 	// Clip the triangle
 	Polygon polygon;
 
-	polygon.p[0] = &p1;
-	polygon.p[1] = &p2;
-	polygon.p[2] = &p3;
+	polygon.p[0] = p1;
+	polygon.p[1] = p2;
+	polygon.p[2] = p3;
 	polygon.nrpoints = 3;
 
-	Vertex buffer[8]; // up to two vertices per clipping line
-
-	if (!polygon.clip(1, 0, 0, &buffer[0], &buffer[1]))
+	if (!polygon.clip(1, 0, 0))
 		return;
-	if (!polygon.clip(-1, 0, -dst.get_w(), &buffer[2], &buffer[3]))
+	if (!polygon.clip(-1, 0, -dst.get_w()))
 		return;
-	if (!polygon.clip(0, 1, 0, &buffer[4], &buffer[5]))
+	if (!polygon.clip(0, 1, 0))
 		return;
-	if (!polygon.clip(0, -1, -dst.get_h(), &buffer[6], &buffer[7]))
+	if (!polygon.clip(0, -1, -dst.get_h()))
 		return;
 
 	// Determine a top vertex
@@ -296,11 +291,26 @@ template<typename T> static void render_triangle
 
 	topy = 0x7fffffff;
 	for (uint8_t i = 0; i < polygon.nrpoints; ++i) {
-		if (polygon.p[i]->y < topy) {
+		if (polygon.p[i].y < topy) {
 			top = i;
-			topy = polygon.p[i]->y;
+			topy = polygon.p[i].y;
 		}
 	}
+
+	// Calculate d(b)/d(x) etc. as fixed point variables.
+	// Remember that we assume d(tx)/d(x) == 1 and d(tx)/d(y) == 0.
+
+	// lA*(p2-p1) + lB*(p3-p1) = (1,0)
+	// mA*(p2-p1) + mB*(p3-p1) = (0,1)
+	int32_t det = (p2.x-p1.x)*(p3.y-p1.y) - (p2.y-p1.y)*(p3.x-p1.x);
+	int32_t lA = ITOFIX(p3.y-p1.y)/det;
+	int32_t lB = -ITOFIX(p2.y-p1.y)/det;
+	int32_t mA = -ITOFIX(p3.x-p1.x)/det;
+	int32_t mB = ITOFIX(p2.x-p1.x)/det;
+	int32_t dbdx = lA*(p2.b-p1.b) + lB*(p3.b-p1.b);
+	int32_t dbdy = mA*(p2.b-p1.b) + mB*(p3.b-p1.b);
+	int32_t dtydx = lA*(p2.ty-p1.ty) + lB*(p3.ty-p1.ty);
+	int32_t dtydy = mA*(p2.ty-p1.ty) + mB*(p3.ty-p1.ty);
 
 	// Build left edges
 	int32_t boty = topy;
@@ -311,26 +321,32 @@ template<typename T> static void render_triangle
 		uint8_t start = top;
 		uint8_t end = (top+1)%polygon.nrpoints;
 		do {
-			if (polygon.p[end]->y > polygon.p[start]->y) {
-				boty = polygon.p[end]->y;
+			if (polygon.p[end].y > polygon.p[start].y) {
+				boty = polygon.p[end].y;
 
 				LeftEdge& edge = leftedges[nrleftedges++];
 				assert(nrleftedges <= 3);
 
-				edge.height = polygon.p[end]->y - polygon.p[start]->y;
-				edge.x0 = ITOFIX(polygon.p[start]->x);
-				edge.tx0 = ITOFIX(polygon.p[start]->tx);
-				edge.ty0 = ITOFIX(polygon.p[start]->ty);
-				edge.b0 = ITOFIX(polygon.p[start]->b);
-				edge.dx = ITOFIX(polygon.p[end]->x-polygon.p[start]->x)/static_cast<int32_t>(edge.height);
-				edge.dtx = ITOFIX(polygon.p[end]->tx-polygon.p[start]->tx)/static_cast<int32_t>(edge.height);
-				edge.dty = ITOFIX(polygon.p[end]->ty-polygon.p[start]->ty)/static_cast<int32_t>(edge.height);
-				edge.db = ITOFIX(polygon.p[end]->b-polygon.p[start]->b)/static_cast<int32_t>(edge.height);
+				edge.height = polygon.p[end].y - polygon.p[start].y;
+				edge.x0 = ITOFIX(polygon.p[start].x);
+				edge.dx = ITOFIX(polygon.p[end].x-polygon.p[start].x)/static_cast<int32_t>(edge.height);
+
+				int32_t startdx = polygon.p[start].x - p1.x;
+				int32_t startdy = polygon.p[start].y - p1.y;
+				int32_t dx = polygon.p[end].x - polygon.p[start].x;
+				int32_t dy = polygon.p[end].y - polygon.p[start].y;
+
+				edge.tx0 = ITOFIX(p1.tx + startdx);
+				edge.ty0 = ITOFIX(p1.ty) + startdx*dtydx + startdy*dtydy;
+				edge.b0 = ITOFIX(p1.b) + startdx*dbdx + startdy*dbdy;
+				edge.dtx = ITOFIX(dx)/static_cast<int32_t>(edge.height);
+				edge.dty = (dx*dtydx + dy*dtydy)/static_cast<int32_t>(edge.height);
+				edge.db = (dx*dbdx + dy*dbdy)/static_cast<int32_t>(edge.height);
 			}
 
 			start = end;
 			end = (start+1)%polygon.nrpoints;
-		} while (polygon.p[end]->y >= polygon.p[start]->y);
+		} while (polygon.p[end].y >= polygon.p[start].y);
 	}
 
 	// Build right edges
@@ -341,29 +357,19 @@ template<typename T> static void render_triangle
 		uint8_t start = top;
 		uint8_t end = (polygon.nrpoints+top-1)%polygon.nrpoints;
 		do {
-			if (polygon.p[end]->y > polygon.p[start]->y) {
+			if (polygon.p[end].y > polygon.p[start].y) {
 				RightEdge& edge = rightedges[nrrightedges++];
 				assert(nrrightedges <= 3);
 
-				edge.height = polygon.p[end]->y - polygon.p[start]->y;
-				edge.x0 = ITOFIX(polygon.p[start]->x);
-				edge.dx = ITOFIX(polygon.p[end]->x - polygon.p[start]->x)/static_cast<int32_t>(edge.height);
+				edge.height = polygon.p[end].y - polygon.p[start].y;
+				edge.x0 = ITOFIX(polygon.p[start].x);
+				edge.dx = ITOFIX(polygon.p[end].x - polygon.p[start].x)/static_cast<int32_t>(edge.height);
 			}
 
 			start = end;
 			end = (polygon.nrpoints+start-1)%polygon.nrpoints;
-		} while (polygon.p[end]->y >= polygon.p[start]->y);
+		} while (polygon.p[end].y >= polygon.p[start].y);
 	}
-
-	// Calculate d(b)/d(x) and d(ty)/d(x) as fixed point variables.
-	// Remember that we assume d(tx)/d(x) == 1.
-
-	// lambda*(p2-p1) + mu*(p3-p1) = (1,0)
-	int32_t det = (p2.x-p1.x)*(p3.y-p1.y) - (p2.y-p1.y)*(p3.x-p1.x);
-	int32_t lambda = ITOFIX(p3.y-p1.y)/det;
-	int32_t mu = -ITOFIX(p2.y-p1.y)/det;
-	int32_t dbdx = lambda*(p2.b-p1.b) + mu*(p3.b-p1.b);
-	int32_t dtydx = lambda*(p2.ty-p1.ty) + mu*(p3.ty-p1.ty);
 
 	render_edge_lists<T>(dst, tex, topy, boty-topy, leftedges, rightedges, dbdx, dtydx);
 }
