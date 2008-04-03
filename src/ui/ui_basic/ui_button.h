@@ -66,6 +66,7 @@ private:
 
 	uint32_t        m_pic_background; //  background texture (picture ID)
 	uint32_t        m_pic_custom;     //  custom icon on the button
+	uint32_t        m_pic_custom_disabled;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"
 	bool        m_draw_caret;

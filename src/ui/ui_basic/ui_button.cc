@@ -64,6 +64,12 @@ Basic_Button::Basic_Button
 		m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but4.png"); break;
 	}
 
+	if (foreground_picture_id) { //  Create greyed out version of picture.
+		Surface & s =
+			*new Surface(*g_gr->get_picture_surface(foreground_picture_id));
+		SDL_SetAlpha(s.get_sdl_surface(), SDL_SRCALPHA, 175);
+		m_pic_custom_disabled = g_gr->get_picture(PicMod_UI, s);
+	}
 }
 
 
@@ -136,7 +142,7 @@ void Basic_Button::draw(RenderTarget* dst)
 			(Point
 			 	(get_w() - static_cast<int32_t>(cpw) >> 1,
 			 	 get_h() - static_cast<int32_t>(cph) >> 1),
-			 m_pic_custom);
+			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
 	} else if (m_title.length()) { //  otherwise draw title string centered
 		g_fh->draw_string
 			(*dst,
