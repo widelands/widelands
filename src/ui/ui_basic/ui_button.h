@@ -38,6 +38,7 @@ struct Basic_Button : public Panel {
 		 const uint32_t foreground_picture_id,
 		 const std::string & title_text,
 		 const std::string & tooltip_text);
+	~Basic_Button();
 
 	void set_pic(uint32_t picid);
 	void set_title(const std::string &);
