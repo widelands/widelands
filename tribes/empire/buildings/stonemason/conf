@@ -14,8 +14,8 @@ marble=6
 
 [work]
 0=sleep 50000
-1=check marble 3
-2=consume marble 3
+1=check marble 2
+2=consume marble 2
 3=playFX stonemason 192
 4=animation working 32000
 5=produce marblecolumn
