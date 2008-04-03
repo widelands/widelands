@@ -25,6 +25,11 @@
 
 #include <stdio.h>
 
+inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
 /**
  * Create all the buttons etc...
 */
@@ -39,14 +44,18 @@ m_increase
  60, 25, 20, 20,
  0,
  g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
- &Editor_Toolsize_Menu::change_radius, this, true),
+ &Editor_Toolsize_Menu::increase_radius, this,
+ std::string(),
+ parent->get_sel_radius() < MAX_TOOL_AREA),
 
 m_decrease
 (this,
  80, 25, 20, 20,
  0,
  g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
- &Editor_Toolsize_Menu::change_radius, this, false)
+ &Editor_Toolsize_Menu::decrease_radius, this,
+ std::string(),
+ 0 < parent->get_sel_radius())
 
 {
 	char buffer[250];
@@ -60,19 +69,24 @@ m_decrease
 }
 
 
-/**
- * Called, when one of the up/down buttons is pressed
- *
- * id: 0 is up, 1 is down
-*/
-void Editor_Toolsize_Menu::change_radius(const bool increase) {
-	Interactive_Base & intbase = dynamic_cast<Interactive_Base &>(*get_parent());
-	const uint32_t val = intbase.get_sel_radius() +
-		(increase ? 1 : std::numeric_limits<uint32_t>::max());
-	if (val <= MAX_TOOL_AREA) {
-		intbase.set_sel_radius(val);
-		char buffer[250];
-		snprintf(buffer, sizeof(buffer), _("Current Size: %u"), val + 1);
-		m_textarea.set_text(buffer);
-	}
+inline static void update_label_size(UI::Textarea & ta, uint32_t const val) {
+	char buffer[250];
+	snprintf(buffer, sizeof(buffer), _("Current Size: %u"), val + 1);
+	ta.set_text(buffer);
+}
+void Editor_Toolsize_Menu::decrease_radius() {
+	assert(0 < eia().get_sel_radius());
+	uint32_t const val = eia().get_sel_radius() - 1;
+	m_decrease.set_enabled(0 < val);
+	m_increase.set_enabled(true);
+	eia().set_sel_radius(val);
+	update_label_size(m_textarea, val);
+}
+void Editor_Toolsize_Menu::increase_radius() {
+	assert(eia().get_sel_radius() < MAX_TOOL_AREA);
+	uint32_t const val = eia().get_sel_radius() + 1;
+	m_decrease.set_enabled(true);
+	m_increase.set_enabled(val < MAX_TOOL_AREA);
+	eia().set_sel_radius(val);
+	update_label_size(m_textarea, val);
 }

@@ -37,10 +37,12 @@ struct Editor_Toolsize_Menu : public UI::UniqueWindow {
 	Editor_Toolsize_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
 
 private:
-	void change_radius(bool increase);
+	Editor_Interactive & eia();
+	void decrease_radius();
+	void increase_radius();
 
 	UI::Textarea                                   m_textarea;
-	UI::IDButton<Editor_Toolsize_Menu, const bool> m_increase, m_decrease;
+	UI::Button<Editor_Toolsize_Menu> m_increase, m_decrease;
 };
 
 
