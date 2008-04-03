@@ -5,7 +5,7 @@ program=program
 picture=s2tree7_00.png
 
 [program]
-0=animation small 420000
+0=animation small 42000
 1=transform tree7_m
 
 [small]
