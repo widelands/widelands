@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,6 +57,8 @@
 
 /// Global UI font color
 #define UI_FONT_CLR_FG RGBColor(255, 255, 0)
+#define UI_FONT_CLR_BG       RGBColor(107,  87,  55)
+#define UI_FONT_CLR_DISABLED RGBColor(127, 127, 127)
 /// Prosa font color
 #define PROSA_FONT_CLR_FG RGBColor(255, 255, 0)
 
@@ -70,9 +72,9 @@
  * backgrounds.
  */
 //@{
-#define UI_FONT_BIG_CLR UI_FONT_CLR_FG, RGBColor(107, 87, 55)
+#define UI_FONT_BIG_CLR UI_FONT_CLR_FG, UI_FONT_CLR_BG
 /// small is used for ultrasmall, too
-#define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, RGBColor(107, 87, 55)
+#define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, UI_FONT_CLR_BG
 #define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0), RGBColor(63, 52, 34)
 //@}
 

@@ -140,7 +140,8 @@ void Basic_Button::draw(RenderTarget* dst)
 	} else if (m_title.length()) { //  otherwise draw title string centered
 		g_fh->draw_string
 			(*dst,
-			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+			 UI_FONT_SMALL,
+			 m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED, UI_FONT_CLR_BG,
 			 Point(get_w() >> 1, get_h() >> 1),
 			 m_title.c_str(),
 			 Align_Center,
