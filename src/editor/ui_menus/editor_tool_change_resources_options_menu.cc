@@ -183,7 +183,7 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
 	case Change_By_Decrease: change_by -= 1 < change_by;         break;
 	case    Set_To_Increase:
 		set_to += set_to < std::numeric_limits<int32_t>::max();       break;
-	case    Set_To_Decrease: set_to    -= 0 < set_to;
+	case    Set_To_Decrease: set_to    -= 0 < set_to;                break;
 	default:
 		assert(false);
 	}
