@@ -1,3 +1,6 @@
 a(b);
 operator==(b) and
 operator!=(b) or
+(I const) const;
+(I const) const
+(I)const

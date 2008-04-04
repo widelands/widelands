@@ -22,3 +22,15 @@ return (PIL*)odr;
 	(enum arb) agr
 		(struct arb) agr
 			(const arb) agr
+(I const) a;
+(I const) ca;
+(I const) coa;
+(I const) cona;
+(I const) consa;
+(I const) consta;
+(I)a;
+(I)ca;
+(I)coa;
+(I)cona;
+(I)consa;
+(I)consta;
