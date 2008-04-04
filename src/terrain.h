@@ -83,34 +83,86 @@ template<typename T> static void render_edge_lists
 	 LeftEdge * left, RightEdge * right,
 	 int32_t dbdx, int32_t dtydx)
 {
+	if (-y >= height)
+		return; // completely above screen
+
 	uint8_t *texpixels;
 	T *texcolormap;
 
 	texpixels = tex.get_curpixels();
 	texcolormap = static_cast<T *>(tex.get_colormap());
 
+	// Skip lines that are above the screen
+	while (y < 0) {
+		int32_t skip = -y;
+		if (skip > static_cast<int32_t>(left->height))
+			skip = left->height;
+		if (skip > static_cast<int32_t>(right->height))
+			skip = right->height;
+
+		if (skip < static_cast<int32_t>(left->height)) {
+			left->x0 += skip*left->dx;
+			left->tx0 += skip*left->dtx;
+			left->ty0 += skip*left->dty;
+			left->b0 += skip*left->db;
+			left->height -= skip;
+		} else {
+			++left;
+		}
+
+		if (skip < static_cast<int32_t>(right->height)) {
+			right->x0 += skip*right->dx;
+			right->height -= skip;
+		} else {
+			++right;
+		}
+
+		height -= skip;
+		y += skip;
+	}
+
+	// Cut off lines below screen
+	if (y + height > static_cast<int32_t>(dst.get_h()))
+		height = dst.get_h() - y;
+
+	int32_t dstw = dst.get_w();
 	while (height > 0) {
 		int32_t leftx = FIXTOI(left->x0);
 		int32_t rightx = FIXTOI(right->x0);
 
-		T * scanline =
-			reinterpret_cast<T *>
-			(static_cast<Uint8 *>(dst.get_pixels()) + y * dst.get_pitch())
-			+
-			leftx;
+		if (leftx < 0)
+			leftx = 0;
+		if (rightx > dstw)
+			rightx = dstw;
 
-		int32_t tx = FIXTOI(left->tx0);
-		int32_t ty = left->ty0;
-		int32_t b = left->b0;
-		uint32_t count = rightx-leftx;
-		while (count--) {
-			int32_t texel = (tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
+		if (leftx < rightx) {
+			int32_t tx = left->tx0;
+			int32_t ty = left->ty0;
+			int32_t b = left->b0;
 
-			*scanline++ = texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
+			int32_t adjust = ITOFIX(leftx) - left->x0;
+			tx += adjust; // note: dtx/dx = 1
+			ty += FIXTOI(static_cast<long long>(adjust)*dtydx);
+			b += FIXTOI(static_cast<long long>(adjust)*dbdx);
 
-			b += dbdx;
-			tx++;
-			ty += dtydx;
+			tx = FIXTOI(tx);
+
+			T * scanline =
+				reinterpret_cast<T *>
+				(static_cast<Uint8 *>(dst.get_pixels()) + y * dst.get_pitch())
+				+
+				leftx;
+
+			uint32_t count = rightx-leftx;
+			while (count--) {
+				int32_t texel = (tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
+
+				*scanline++ = texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
+
+				b += dbdx;
+				tx++;
+				ty += dtydx;
+			}
 		}
 
 		// Advance the line
@@ -129,129 +181,9 @@ template<typename T> static void render_edge_lists
 	}
 }
 
-
 struct Polygon {
-	Point p[7];
+	Point p[3];
 	uint8_t nrpoints;
-
-	void intersect_edge(const Point& a, const Point& b, int32_t x, int32_t y, int32_t d, Point* out) {
-		int32_t da = a.x*x + a.y*y;
-		int32_t db = b.x*x + b.y*y;
-
-		out->x = a.x + (b.x-a.x)*(d-da)/(db-da);
-		out->y = a.y + (b.y-a.y)*(d-da)/(db-da);
-	}
-
-	/**
-	 * Remove points [start, end). Will remove nothing if start == end.
-	 */
-	void remove_points(uint8_t start, uint8_t end) {
-		if (start > end) {
-			nrpoints = start;
-			start = 0;
-		}
-		if (start < end) {
-			uint8_t remaining = nrpoints - end;
-			for (uint8_t i = 0; i < remaining; ++i)
-				p[start+i] = p[end+i];
-			nrpoints = start + remaining;
-		}
-	}
-
-	/**
-	 * Clip the polygon against the line defined by \p x, \p y and \p d.
-	 *
-	 * Use \p exit and \p entry as buffers to create new vertices if necessary.
-	 *
-	 * \return \c true if visible parts of polygon remain, or \c false if the
-	 * polygon has been culled away completely.
-	 */
-	bool clip(int32_t x, int32_t y, int32_t d) {
-		int8_t firstout = -1;
-		int8_t firstin = -1;
-
-		bool previousin = p[nrpoints-1].x*x + p[nrpoints-1].y*y >= d;
-		bool currentin;
-		bool allin = true;
-		for
-			(uint8_t index = 0;
-			 index < nrpoints;
-			 ++index, previousin = currentin)
-		{
-			const Point& current = p[index];
-			currentin = current.x*x + current.y*y >= d;
-			allin = allin && currentin;
-
-			if (currentin == previousin)
-				continue;
-
-			if (currentin)
-				firstin = index;
-			else
-				firstout = index;
-		}
-
-		if (allin)
-			return true;
-
-		if (firstout == -1)
-			return false; // triangle is completely outside
-
-		// Calculate intersection with the cutting line and replace points
-		// [firstout, firstin) by the two intersections, being careful
-		// not to introduce duplicate points.
-		Point exit;
-		Point entry;
-		intersect_edge
-			(p[(nrpoints + firstout - 1) % nrpoints],
-			 p[firstout],
-			 x, y, d, &exit);
-		intersect_edge
-			(p[firstin],
-			 p[(nrpoints + firstin  - 1) % nrpoints],
-			 x, y, d, &entry);
-
-		bool putexit = true;
-		bool putentry = true;
-
-		if (entry.x == exit.x && entry.y == exit.y)
-			putentry = false;
-		else if (entry.x == p[firstin].x && entry.y == p[firstin].y)
-			putentry = false;
-
-		const Point& preexit = p[(nrpoints+firstout-1)%nrpoints]; // coalesce points
-		if (exit.x == preexit.x && exit.y == preexit.y)
-			putexit = false;
-
-		if (putentry && putexit) {
-			uint8_t nrout = (nrpoints + firstin - firstout) % nrpoints;
-
-			if (nrout == 1) {
-				assert(nrpoints <= 7);
-
-				p[firstout] = exit;
-				for (uint8_t i = nrpoints-1; i > firstout; --i)
-					p[i+1] = p[i];
-				nrpoints++;
-				p[firstout+1] = entry;
-			} else {
-				p[firstout] = exit;
-				p[(firstout+1)%nrpoints] = entry;
-
-				remove_points((firstout+2)%nrpoints, firstin);
-			}
-		} else if (putentry) {
-			p[firstout] = entry;
-			remove_points((firstout+1)%nrpoints, firstin);
-		} else if (putexit) {
-			p[firstout] = exit;
-			remove_points((firstout+1)%nrpoints, firstin);
-		} else {
-			remove_points(firstout, firstin);
-		}
-
-		return nrpoints >= 3;
-	}
 };
 
 
@@ -279,15 +211,6 @@ template<typename T> static void render_triangle
 	polygon.p[1] = p2;
 	polygon.p[2] = p3;
 	polygon.nrpoints = 3;
-
-	if (!polygon.clip(1, 0, 0))
-		return;
-	if (!polygon.clip(-1, 0, -dst.get_w()))
-		return;
-	if (!polygon.clip(0, 1, 0))
-		return;
-	if (!polygon.clip(0, -1, -dst.get_h()))
-		return;
 
 	// Determine a top vertex
 	int32_t top, topy;
