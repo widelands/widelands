@@ -35,9 +35,9 @@ BadMagic_error::BadMagic_error(std::string const & _filename) throw ()
 }
 
 BadRecord_error::BadRecord_error
-(std::string const & _filename,
- const uint8_t     _code,
- const uint8_t     _expectedcode)
+	(std::string const &       _filename,
+	 uint8_t             const _code,
+	 uint8_t             const _expectedcode)
 throw ()
 : Journalfile_error(_filename), code(_code), expectedcode(_expectedcode)
 {
@@ -50,7 +50,7 @@ throw ()
 }
 
 BadEvent_error::BadEvent_error
-(std::string const & _filename, uint8_t const _type)
+	(std::string const & _filename, uint8_t const _type)
 throw ()
 : Journalfile_error(_filename), type(_type)
 {

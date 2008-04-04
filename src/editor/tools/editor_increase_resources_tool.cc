@@ -31,7 +31,7 @@
 using Widelands::TCoords;
 
 int32_t Editor_Change_Resource_Tool_Callback
-(const TCoords<Widelands::FCoords> c, void * data, int32_t curres)
+	(TCoords<Widelands::FCoords> const c, void * data, int32_t curres)
 {
 	Widelands::Map   & map   = *static_cast<Widelands::Map *>(data);
 	Widelands::World & world = map.world();
@@ -71,9 +71,9 @@ there is not already another resource there.
 ===========
 */
 int32_t Editor_Increase_Resources_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	Widelands::World const & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();

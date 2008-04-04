@@ -200,7 +200,7 @@ void Sound_Handler::load_system_sounds()
  * \param recursive  Whether to recurse into subdirectories
 */
 void Sound_Handler::load_fx
-(std::string const & dir, std::string const & fxname, bool const recursive)
+	(std::string const & dir, std::string const & fxname, bool const recursive)
 {
 	filenameset_t dirs, files;
 	filenameset_t::const_iterator i;
@@ -354,7 +354,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
  * until the game is finished.
 */
 void Sound_Handler::load_one_fx
-(char const * const filename, std::string const & fx_name)
+	(char const * const filename, std::string const & fx_name)
 {
 	FileRead fr;
 	if (not fr.TryOpen(*g_fs, filename)) {
@@ -421,9 +421,9 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
  * \todo What is the selection algorithm? cf class documentation
 */
 bool Sound_Handler::play_or_not
-(std::string const &       fx_name,
- int32_t             const stereo_pos,
- uint32_t            const priority)
+	(std::string const &       fx_name,
+	 int32_t             const stereo_pos,
+	 uint32_t            const priority)
 {
 	bool allow_multiple=false; //convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
@@ -498,9 +498,9 @@ bool Sound_Handler::play_or_not
  *         (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-(std::string const &       fx_name,
- Widelands::Coords   const map_position,
- uint32_t            const priority)
+	(std::string const &       fx_name,
+	 Widelands::Coords   const map_position,
+	 uint32_t            const priority)
 {play_fx(fx_name, stereo_position(map_position), priority);}
 
 /** \overload
@@ -511,9 +511,9 @@ void Sound_Handler::play_fx
  *                         played? (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-(std::string const &       fx_name,
- int32_t             const stereo_pos,
- uint32_t            const priority)
+	(std::string const &       fx_name,
+	 int32_t             const stereo_pos,
+	 uint32_t            const priority)
 {
 	assert(stereo_pos >= -1);
 	assert(stereo_pos <= 254);
@@ -562,7 +562,8 @@ void Sound_Handler::play_fx
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
 */
 void Sound_Handler::register_song
-(std::string const & dir, std::string const & basename, bool const recursive)
+	(std::string const & dir, std::string const & basename,
+	 bool const recursive)
 {
 	filenameset_t files;
 	filenameset_t::const_iterator i;
@@ -595,7 +596,7 @@ void Sound_Handler::register_song
  * or \ref change_music() this function will block until the fadeout is complete
 */
 void Sound_Handler::start_music
-(std::string const & songset_name, int32_t fadein_ms)
+	(std::string const & songset_name, int32_t fadein_ms)
 {
 	if (get_disable_music())
 		return;
@@ -648,8 +649,8 @@ void Sound_Handler::stop_music(int32_t fadeout_ms)
  * be selected
 */
 void Sound_Handler::change_music
-(std::string const & songset_name,
- int32_t const fadeout_ms, int32_t const fadein_ms)
+	(std::string const & songset_name,
+	 int32_t const fadeout_ms, int32_t const fadein_ms)
 {
 	std::string s = songset_name;
 

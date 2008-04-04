@@ -386,7 +386,7 @@ the given data
 ===========
 */
 void Map::create_empty_map
-(uint32_t const w, uint32_t const h, std::string const & worldname)
+	(uint32_t const w, uint32_t const h, std::string const & worldname)
 {
 	set_world_name(worldname.c_str());
 	load_world();
@@ -458,7 +458,7 @@ const std::string & Map::get_scenario_player_name(const Player_Number p) const
 }
 
 void Map::set_scenario_player_tribe
-(const Player_Number p, const std::string & tribename)
+	(Player_Number const p, std::string const & tribename)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -467,7 +467,7 @@ void Map::set_scenario_player_tribe
 }
 
 void Map::set_scenario_player_name
-(const Player_Number p, const std::string & playername)
+	(Player_Number const p, std::string const & playername)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -607,9 +607,7 @@ Functor is of the form: functor(Map*, FCoords)
 */
 template<typename functorT>
 void Map::find_reachable
-(const Area<FCoords> area,
- const CheckStep & checkstep,
- functorT & functor)
+	(Area<FCoords> const area, CheckStep const & checkstep, functorT & functor)
 {
 	std::vector<Field*> queue;
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
@@ -725,7 +723,9 @@ Returns the number of objects found.
 ===============
 */
 uint32_t Map::find_bobs
-(const Area<FCoords> area, std::vector<Bob*> * list, const FindBob & functor)
+	(Area<FCoords>        const area,
+	 std::vector<Bob *> * const list,
+	 FindBob      const &       functor)
 {
 	FindBobsCallback cb(list, functor);
 
@@ -749,10 +749,10 @@ Returns the number of objects found.
 ===============
 */
 uint32_t Map::find_reachable_bobs
-(const Area<FCoords> area,
- std::vector<Bob*> * list,
- const CheckStep & checkstep,
- const FindBob & functor)
+	(Area<FCoords>        const area,
+	 std::vector<Bob *> * const list,
+	 CheckStep    const &       checkstep,
+	 FindBob      const &       functor)
 {
 	FindBobsCallback cb(list, functor);
 
@@ -808,9 +808,9 @@ If list is not 0, found immovables are stored in list.
 ===============
 */
 uint32_t Map::find_immovables
-(const Area<FCoords>           area,
- std::vector<ImmovableFound> * list,
- const FindImmovable & functor)
+	(Area<FCoords>                 const area,
+	 std::vector<ImmovableFound> * const list,
+	 FindImmovable const         &       functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
@@ -833,10 +833,10 @@ Returns the number of immovables we found.
 ===============
 */
 uint32_t Map::find_reachable_immovables
-(const Area<FCoords>           area,
- std::vector<ImmovableFound> * list,
- const CheckStep & checkstep,
- const FindImmovable & functor)
+	(Area<FCoords>                 const area,
+	 std::vector<ImmovableFound> * const list,
+	 CheckStep             const &       checkstep,
+	 FindImmovable         const &       functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
@@ -915,9 +915,9 @@ Note that list can be 0.
 ===============
 */
 uint32_t Map::find_fields
-(const Area<FCoords>   area,
- std::vector<Coords> * list,
- const FindNode & functor)
+	(Area<FCoords>         const area,
+	 std::vector<Coords> *       list,
+	 FindNode const      &       functor)
 {
 	FindNodesCallback cb(list, functor);
 
@@ -937,10 +937,10 @@ Note that list can be 0.
 ===============
 */
 uint32_t Map::find_reachable_fields
-(const Area<FCoords>   area,
- std::vector<Coords> * list,
- const CheckStep & checkstep,
- const FindNode & functor)
+	(Area<FCoords>         const area,
+	 std::vector<Coords> *       list,
+	 CheckStep     const &       checkstep,
+	 FindNode      const &       functor)
 {
 	FindNodesCallback cb(list, functor);
 
@@ -1627,7 +1627,7 @@ Get a field's neighbour by direction
 ===============
 */
 void Map::get_neighbour
-(const Coords f, const Direction dir, Coords * const o) const
+	(Coords const f, Direction const dir, Coords * const o) const
 {
 	switch (dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
@@ -1642,7 +1642,7 @@ void Map::get_neighbour
 }
 
 void Map::get_neighbour
-(const FCoords f, const Direction dir, FCoords * const o) const
+	(FCoords const f, Direction const dir, FCoords * const o) const
 {
 	switch (dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
@@ -1864,12 +1864,12 @@ public:
  * \todo Document parameters instart, inend, path, flags
  */
 int32_t Map::findpath
-(Coords instart,
- Coords inend,
- const int32_t persist,
- Path & path,
- const CheckStep & checkstep,
- const uint32_t flags)
+	(Coords                  instart,
+	 Coords                  inend,
+	 int32_t           const persist,
+	 Path            &       path,
+	 CheckStep const &       checkstep,
+	 uint32_t          const flags)
 {
 	FCoords start;
 	FCoords end;
@@ -2056,7 +2056,7 @@ returns the radius of changes (which are always 2)
 ===========
 */
 int32_t Map::change_terrain
-(const TCoords<FCoords> c, const Terrain_Descr::Index terrain)
+	(TCoords<FCoords> const c, Terrain_Descr::Index const terrain)
 {
 	c.field->set_terrain(c.t, terrain);
 	recalc_for_field_area(Area<FCoords>(c, 2));
@@ -2108,7 +2108,7 @@ uint32_t Map::change_height(Area<FCoords> area, int16_t const difference) {
 }
 
 uint32_t Map::set_height
-(Area<FCoords> area, interval<Field::Height> height_interval)
+	(Area<FCoords> area, interval<Field::Height> height_interval)
 {
 	assert(height_interval.valid());
 	assert(height_interval.max <= MAX_FIELD_HEIGHT);
@@ -2199,7 +2199,7 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 
 #define MAX_RADIUS 32
 Military_Influence Map::calc_influence
-(const Coords a, const Area<> area) const
+	(Coords const a, Area<> const area) const
 {
 	const X_Coordinate w = get_width();
 	const Y_Coordinate h = get_height();

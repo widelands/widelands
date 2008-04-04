@@ -41,7 +41,8 @@
 #define FIXTOI(f) ((f)>>16)
 
 void get_horiz_linearcomb
-(int32_t u1, int32_t u2, int32_t v1, int32_t v2, float& lambda, float& mu);
+	(int32_t u1, int32_t u2, int32_t v1, int32_t v2,
+	 float & lambda, float & mu);
 
 
 struct LeftEdge {
@@ -77,10 +78,10 @@ struct RightEdge {
  * The edge lists will be overwritten with undefined values.
  */
 template<typename T> static void render_edge_lists
-(Surface & dst, const Texture & tex,
- int32_t y, int32_t height,
- LeftEdge* left, RightEdge* right,
- int32_t dbdx, int32_t dtydx)
+	(Surface & dst, Texture const & tex,
+	 int32_t y, int32_t height,
+	 LeftEdge * left, RightEdge * right,
+	 int32_t dbdx, int32_t dtydx)
 {
 	uint8_t *texpixels;
 	T *texcolormap;
@@ -264,7 +265,9 @@ struct Polygon {
  * texture x coordinates.
  */
 template<typename T> static void render_triangle
-(Surface & dst, const Vertex & p1, const Vertex & p2, const Vertex & p3, const Texture & tex)
+	(Surface & dst,
+	 Vertex const & p1, Vertex const & p2, Vertex const & p3,
+	 Texture const & tex)
 {
 	if (p1.y == p2.y && p2.y == p3.y)
 		return; // degenerate triangle
@@ -391,9 +394,9 @@ template<typename T> static void render_triangle
  * rendering could be handled as a special case then.
 */
 template<typename T> static void dither_edge_horiz
-(Surface & dst,
- const Vertex & start, const Vertex & end,
- const Texture & ttex, const Texture & btex)
+	(Surface & dst,
+	 Vertex const & start, Vertex const & end,
+	 Texture const & ttex, Texture const & btex)
 {
 	uint8_t *tpixels, *bpixels;
 	T *tcolormap, *bcolormap;
@@ -481,9 +484,9 @@ template<typename T> static void dither_edge_horiz
  * \see dither_edge_horiz
  */
 template<typename T> static void dither_edge_vert
-(Surface & dst,
- const Vertex & start, const Vertex & end,
- const Texture & ltex, const Texture & rtex)
+	(Surface & dst,
+	 Vertex const & start, Vertex const & end,
+	 Texture const & ltex, Texture const & rtex)
 {
 	uint8_t *lpixels, *rpixels;
 	T* lcolormap, *rcolormap;
@@ -566,7 +569,7 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-(Surface & dst, const Point start, const Point end, const Surface & src)
+	(Surface & dst, Point const start, Point const end, Surface const & src)
 {
 	int32_t dstw = dst.get_w();
 	int32_t dsth = dst.get_h();
@@ -598,7 +601,7 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-(Surface & dst, const Point start, const Point end, const Surface & src)
+	(Surface & dst, Point const start, Point const end, Surface const & src)
 {
 	int32_t dstw = dst.get_w();
 	int32_t dsth = dst.get_h();
@@ -630,16 +633,16 @@ template<typename T> static void render_road_vert
 }
 
 template<typename T> static void draw_field_int
-(Surface & dst,
- const Vertex& f_vert,
- const Vertex& r_vert,
- const Vertex& bl_vert,
- const Vertex& br_vert,
- uint8_t         roads,
- const Texture & tr_d_texture,
- const Texture &  l_r_texture,
- const Texture &  f_d_texture,
- const Texture &  f_r_texture)
+	(Surface       & dst,
+	 Vertex  const &  f_vert,
+	 Vertex  const &  r_vert,
+	 Vertex  const & bl_vert,
+	 Vertex  const & br_vert,
+	 uint8_t         roads,
+	 Texture const & tr_d_texture,
+	 Texture const &  l_r_texture,
+	 Texture const &  f_d_texture,
+	 Texture const &  f_r_texture)
 {
 	Surface const & rt_normal = *g_gr->get_road_texture(Widelands::Road_Normal);
 	Surface const & rt_busy   = *g_gr->get_road_texture(Widelands::Road_Busy);

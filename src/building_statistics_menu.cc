@@ -74,43 +74,34 @@ Create all the buttons etc...
 ===============
 */
 Building_Statistics_Menu::Building_Statistics_Menu
-(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
-(&parent, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Building Statistics")),
-
+	(&parent, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Building Statistics")),
 m_table
-(this, HMARGIN, VMARGIN, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT),
-
+	(this, HMARGIN, VMARGIN, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT),
 m_progbar
-(this,
- LABEL_X, PROGRESS_BAR_Y, WINDOW_WIDTH - LABEL_X - HMARGIN, 20,
- UI::Progress_Bar::Horizontal),
-
+	(this,
+	 LABEL_X, PROGRESS_BAR_Y, WINDOW_WIDTH - LABEL_X - HMARGIN, 20,
+	 UI::Progress_Bar::Horizontal),
 m_total_productivity_label
-(this,
- LABEL_X, TOTAL_PRODUCTIVITY_Y, LABEL_WIDTH, 24,
- _("Total Productivity: "), Align_CenterLeft),
-
+	(this,
+	 LABEL_X, TOTAL_PRODUCTIVITY_Y, LABEL_WIDTH, 24,
+	 _("Total Productivity: "), Align_CenterLeft),
 m_owned_label
-(this, LABEL_X, OWNED_Y, LABEL_WIDTH, 24, _("Owned: "), Align_CenterLeft),
-
+	(this, LABEL_X, OWNED_Y, LABEL_WIDTH, 24, _("Owned: "), Align_CenterLeft),
 m_owned
-(this, VALUE_X, OWNED_Y, 100, 24, Align_CenterLeft),
-
+	(this, VALUE_X, OWNED_Y, 100, 24, Align_CenterLeft),
 m_in_build_label
-(this,
- LABEL_X, IN_BUILD_Y, LABEL_WIDTH, 24,
- _("In Build: "), Align_CenterLeft),
-
+	(this,
+	 LABEL_X, IN_BUILD_Y, LABEL_WIDTH, 24,
+	 _("In Build: "), Align_CenterLeft),
 m_in_build
-(this, VALUE_X, IN_BUILD_Y, 100, 24, Align_CenterLeft),
-
+	(this, VALUE_X, IN_BUILD_Y, 100, 24, Align_CenterLeft),
 m_unproductive_label
-(this,
- LABEL_X, UNPRODUCTIVE_Y, LABEL_WIDTH, 24,
- _("Jump to unproductive: "), Align_CenterLeft),
-
+	(this,
+	 LABEL_X, UNPRODUCTIVE_Y, LABEL_WIDTH, 24,
+	 _("Jump to unproductive: "), Align_CenterLeft),
 m_anim               (0),
 m_lastupdate         (0),
 m_last_building_index(0)

@@ -33,7 +33,7 @@ namespace Widelands {
 
 
 void Game_Cmd_Queue_Data_Packet::Read
-(FileSystem & fs, Game* game, Map_Map_Object_Loader * const ol)
+	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	FileRead fr;
@@ -103,7 +103,7 @@ throw (_wexception)
 
 
 void Game_Cmd_Queue_Data_Packet::Write
-(FileSystem & fs, Game* game, Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;

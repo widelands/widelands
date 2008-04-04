@@ -40,7 +40,7 @@
 #include "editor_decrease_resources_tool.h"
 
 Editor_Tool_Menu::Editor_Tool_Menu
-(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 {

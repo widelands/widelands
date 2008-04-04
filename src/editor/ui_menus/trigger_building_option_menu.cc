@@ -43,7 +43,7 @@ inline Editor_Interactive & Trigger_Building_Option_Menu::eia() {
 
 
 inline static void update_label_player
-(UI::Textarea & ta, Widelands::Player_Number const p)
+	(UI::Textarea & ta, Widelands::Player_Number const p)
 {
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), _("Player: %u"), p);
@@ -52,7 +52,7 @@ inline static void update_label_player
 
 
 inline static void update_label_count
-(UI::Textarea & ta, Trigger_Building::Count_Type const count)
+	(UI::Textarea & ta, Trigger_Building::Count_Type const count)
 {
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), _("How many: %u"), count);
@@ -61,7 +61,7 @@ inline static void update_label_count
 
 
 inline static void update_label_building
-(UI::Textarea & ta, Widelands::Building_Descr const & building)
+	(UI::Textarea & ta, Widelands::Building_Descr const & building)
 {
 	char buffer[128];
 	snprintf
@@ -71,7 +71,7 @@ inline static void update_label_building
 
 
 inline static void update_label_coords
-(UI::Textarea & ta, Widelands::Coords const coords)
+	(UI::Textarea & ta, Widelands::Coords const coords)
 {
 	char buffer[32];
 	snprintf
@@ -81,7 +81,7 @@ inline static void update_label_coords
 
 
 inline static void update_label_radius
-(UI::Textarea & ta, Widelands::Player_Area<>::Radius_type const radius)
+	(UI::Textarea & ta, Widelands::Player_Area<>::Radius_type const radius)
 {
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), _("Radius: %u"), radius);
@@ -94,230 +94,206 @@ inline static void update_label_radius
 #define button_height 20U
 #define button_size button_width, button_height
 Trigger_Building_Option_Menu::Trigger_Building_Option_Menu
-(Editor_Interactive & parent, Trigger_Building & trigger)
+	(Editor_Interactive & parent, Trigger_Building & trigger)
 :
 UI::Window(&parent, 0, 0, 280, 280, _("Building Trigger Options")),
 m_trigger (trigger),
-
 m_player_area
-(Widelands::Player_Area<>
- (trigger.m_player_area.player_number,
-  Widelands::Area<>(trigger.m_player_area, trigger.m_player_area.radius))),
-
+	(Widelands::Player_Area<>
+	 	(trigger.m_player_area.player_number,
+	 	 Widelands::Area<>
+	 	 	(trigger.m_player_area, trigger.m_player_area.radius))),
 m_count      (m_trigger.m_count),
 m_label_name(this, spacing, spacing, 50, 20, _("Name:"), Align_CenterLeft),
-
 m_name
-(this,
- m_label_name.get_x() + m_label_name.get_w() + spacing, m_label_name.get_y(),
- get_inner_w() - m_label_name.get_x() - m_label_name.get_w() - 3 * spacing, 20,
- 0, 0),
-
+	(this,
+	 m_label_name.get_x() + m_label_name.get_w() + spacing,
+	 m_label_name.get_y(),
+	 get_inner_w() - m_label_name.get_x() - m_label_name.get_w() - 3 * spacing,
+	 20,
+	 0, 0),
 m_label_player
-(this,
- spacing, m_label_name.get_y() + m_label_name.get_h() + spacing,
- get_inner_w() - 2 * (2 * spacing + button_width), 20,
- " ", Align_Left),
-
+	(this,
+	 spacing, m_label_name.get_y() + m_label_name.get_h() + spacing,
+	 get_inner_w() - 2 * (2 * spacing + button_width), 20,
+	 " ", Align_Left),
 m_decrement_player
-(this,
- get_inner_w() - 2 * (spacing + 20), m_label_player.get_y(), 20, 20,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Trigger_Building_Option_Menu::clicked_change_player, this, false),
-
+	(this,
+	 get_inner_w() - 2 * (spacing + 20), m_label_player.get_y(), 20, 20,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Trigger_Building_Option_Menu::clicked_change_player, this, false),
 m_increment_player
-(this,
- get_inner_w() - 1 * (spacing + 20), m_label_player.get_y(), 20, 20,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Trigger_Building_Option_Menu::clicked_change_player, this, true),
-
+	(this,
+	 get_inner_w() - 1 * (spacing + 20), m_label_player.get_y(), 20, 20,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Trigger_Building_Option_Menu::clicked_change_player, this, true),
 m_label_building
-(this,
- spacing, m_label_player.get_y() + m_label_player.get_h() + spacing,
- m_label_player.get_w(), 20,
- " ", Align_Left),
-
+	(this,
+	 spacing, m_label_player.get_y() + m_label_player.get_h() + spacing,
+	 m_label_player.get_w(), 20,
+	 " ", Align_Left),
 m_decrement_building
-(this,
- get_inner_w() - 2 * (spacing + 20), m_label_building.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Trigger_Building_Option_Menu::clicked_decrement_building, this),
-
+	(this,
+	 get_inner_w() - 2 * (spacing + 20), m_label_building.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrement_building, this),
 m_increment_building
-(this,
- get_inner_w() - 1 * (spacing + 20), m_label_building.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Trigger_Building_Option_Menu::clicked_increment_building, this),
-
+	(this,
+	 get_inner_w() - 1 * (spacing + 20), m_label_building.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Trigger_Building_Option_Menu::clicked_increment_building, this),
 m_label_count
-(this,
- spacing, m_label_building.get_y() + m_label_building.get_h() + spacing,
- m_label_building.get_w(), 20,
- " ", Align_Left),
-
+	(this,
+	 spacing, m_label_building.get_y() + m_label_building.get_h() + spacing,
+	 m_label_building.get_w(), 20,
+	 " ", Align_Left),
 m_decrement_count
-(this,
- m_decrement_building.get_x(), m_label_count.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Trigger_Building_Option_Menu::clicked_decrement_count, this,
- std::string(),
- 0 < m_count),
-
+	(this,
+	 m_decrement_building.get_x(), m_label_count.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrement_count, this,
+	 std::string(),
+	 0 < m_count),
 m_increment_count
-(this,
- m_increment_building.get_x(), m_label_count.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Trigger_Building_Option_Menu::clicked_increment_count, this,
- std::string(),
- m_count
- <
- std::numeric_limits<Trigger_Building::Count_Type>::max()),
-
+	(this,
+	 m_increment_building.get_x(), m_label_count.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Trigger_Building_Option_Menu::clicked_increment_count, this,
+	 std::string(),
+	 m_count < std::numeric_limits<Trigger_Building::Count_Type>::max()),
 m_label_coords
-(this,
- spacing, m_label_count.get_y() + m_label_count.get_h() + spacing,
- get_inner_w() - 2 * spacing, 20,
- " ", Align_Left),
-
+	(this,
+	 spacing, m_label_count.get_y() + m_label_count.get_h() + spacing,
+	 get_inner_w() - 2 * spacing, 20,
+	 " ", Align_Left),
 m_decrease_y_100
-(this,
- get_inner_w() - button_width >> 1,
- m_label_coords.get_y() + m_label_coords.get_h(),
- button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
- &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this, 100),
-
+	(this,
+	 get_inner_w() - button_width >> 1,
+	 m_label_coords.get_y() + m_label_coords.get_h(),
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this, 100),
 m_decrease_y_10
-(this,
- m_decrease_y_100.get_x(), m_decrease_y_100.get_y() + button_height,
- button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
- &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this,  10),
-
+	(this,
+	 m_decrease_y_100.get_x(), m_decrease_y_100.get_y() + button_height,
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this,  10),
 m_decrease_y_1
-(this,
- m_decrease_y_10.get_x(), m_decrease_y_10.get_y() + button_height,
- button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
- &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this,   1),
-
+	(this,
+	 m_decrease_y_10.get_x(), m_decrease_y_10.get_y() + button_height,
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrease_y_coordinate, this,   1),
 m_decrease_x_100
-(this,
- m_decrease_y_1.get_x() - 3 * button_width,
- m_decrease_y_1.get_y() + button_height,
- button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this, 100),
-
+	(this,
+	 m_decrease_y_1.get_x() - 3 * button_width,
+	 m_decrease_y_1.get_y() + button_height,
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this, 100),
 m_decrease_x_10
-(this,
- m_decrease_x_100.get_x() + button_width, m_decrease_x_100.get_y(),
- button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this,  10),
-
+	(this,
+	 m_decrease_x_100.get_x() + button_width, m_decrease_x_100.get_y(),
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this,  10),
 m_decrease_x_1
-(this,
- m_decrease_x_10.get_x() + button_width, m_decrease_x_10.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this,   1),
-
+	(this,
+	 m_decrease_x_10.get_x() + button_width, m_decrease_x_10.get_y(),
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrease_x_coordinate, this,   1),
 m_increase_x_1
-(this,
- m_decrease_x_1.get_x() + 2 * button_width, m_decrease_x_1.get_y(),
- button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this,   1),
-
+	(this,
+	 m_decrease_x_1.get_x() + 2 * button_width, m_decrease_x_1.get_y(),
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this,   1),
 m_increase_x_10
-(this,
- m_increase_x_1.get_x() + button_width, m_increase_x_1.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this,  10),
-
+	(this,
+	 m_increase_x_1.get_x() + button_width, m_increase_x_1.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this,  10),
 m_increase_x_100
-(this,
- m_increase_x_10.get_x() + button_width, m_increase_x_10.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this, 100),
-
+	(this,
+	 m_increase_x_10.get_x() + button_width, m_increase_x_10.get_y(),
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Trigger_Building_Option_Menu::clicked_increase_x_coordinate, this, 100),
 m_increase_y_1
-(this,
- m_decrease_y_1.get_x(), m_increase_x_100.get_y() + button_height, button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
- &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this,   1),
-
+	(this,
+	 m_decrease_y_1.get_x(), m_increase_x_100.get_y() + button_height,
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+	 &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this,   1),
 m_increase_y_10
-(this,
- m_increase_y_1.get_x(), m_increase_y_1.get_y() + button_height, button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
- &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this,  10),
-
+	(this,
+	 m_increase_y_1.get_x(), m_increase_y_1.get_y() + button_height,
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+	 &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this,  10),
 m_increase_y_100
-(this,
- m_increase_y_10.get_x(), m_increase_y_10.get_y() + button_height, button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
- &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this, 100),
-
+	(this,
+	 m_increase_y_10.get_x(), m_increase_y_10.get_y() + button_height,
+	 button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+	 &Trigger_Building_Option_Menu::clicked_increase_y_coordinate, this, 100),
 m_label_radius
-(this,
- spacing, m_increase_y_100.get_y() + button_height, 20, 20,
- " ", Align_Left),
-
+	(this,
+	 spacing, m_increase_y_100.get_y() + button_height, 20, 20,
+	 " ", Align_Left),
 m_decrement_radius
-(this,
- m_decrement_count.get_x(), m_label_radius.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Trigger_Building_Option_Menu::clicked_decrement_radius, this,
- std::string(),
- 0 < m_player_area.radius),
-
+	(this,
+	 m_decrement_count.get_x(), m_label_radius.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Trigger_Building_Option_Menu::clicked_decrement_radius, this,
+	 std::string(),
+	 0 < m_player_area.radius),
 m_increment_radius
-(this,
- m_increment_count.get_x(), m_label_radius.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Trigger_Building_Option_Menu::clicked_increment_radius, this,
- std::string(),
- m_player_area.radius
- <
- std::numeric_limits<Widelands::Player_Area<>::Radius_type>::max()),
-
+	(this,
+	 m_increment_count.get_x(), m_label_radius.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Trigger_Building_Option_Menu::clicked_increment_radius, this,
+	 std::string(),
+	 m_player_area.radius
+	 <
+	 std::numeric_limits<Widelands::Player_Area<>::Radius_type>::max()),
 m_button_ok
-(this,
- (get_inner_w() >> 1) - 60 - spacing,
- m_label_radius.get_y() + m_label_radius.get_h() + spacing,
- 3 * button_width, button_height,
- 0,
- &Trigger_Building_Option_Menu::clicked_ok, this,
- _("Ok")),
-
+	(this,
+	 (get_inner_w() >> 1) - 60 - spacing,
+	 m_label_radius.get_y() + m_label_radius.get_h() + spacing,
+	 3 * button_width, button_height,
+	 0,
+	 &Trigger_Building_Option_Menu::clicked_ok, this,
+	 _("Ok")),
 m_button_cancel
-(this,
- m_button_ok.get_x() + m_button_ok.get_w() + spacing, m_button_ok.get_y(),
- 3 * button_width, button_height,
- 1,
- &Trigger_Building_Option_Menu::end_modal, this, 0,
- _("Cancel"))
+	(this,
+	 m_button_ok.get_x() + m_button_ok.get_w() + spacing, m_button_ok.get_y(),
+	 3 * button_width, button_height,
+	 1,
+	 &Trigger_Building_Option_Menu::end_modal, this, 0,
+	 _("Cancel"))
 {
 	if (m_player_area.player_number == 0)
 		m_player_area.player_number = 1;
@@ -456,7 +432,7 @@ void Trigger_Building_Option_Menu::clicked_decrement_count() {
 
 
 void Trigger_Building_Option_Menu::clicked_decrease_x_coordinate
-(const uint8_t d)
+	(uint8_t const d)
 {
 	Widelands::X_Coordinate const w = eia().egbase().map().extent().w;
 	while (m_player_area.x < d) m_player_area.x += w;
@@ -466,7 +442,7 @@ void Trigger_Building_Option_Menu::clicked_decrease_x_coordinate
 
 
 void Trigger_Building_Option_Menu::clicked_increase_x_coordinate
-(const uint8_t d)
+	(uint8_t const d)
 {
 	m_player_area.x += d;
 	m_player_area.x %= eia().egbase().map().extent().w;
@@ -475,7 +451,7 @@ void Trigger_Building_Option_Menu::clicked_increase_x_coordinate
 
 
 void Trigger_Building_Option_Menu::clicked_decrease_y_coordinate
-(const uint8_t d)
+	(uint8_t const d)
 {
 	Widelands::Y_Coordinate const h = eia().egbase().map().extent().h;
 	while (m_player_area.y < d) m_player_area.y += h;
@@ -485,7 +461,7 @@ void Trigger_Building_Option_Menu::clicked_decrease_y_coordinate
 
 
 void Trigger_Building_Option_Menu::clicked_increase_y_coordinate
-(const uint8_t d)
+	(uint8_t const d)
 {
 	m_player_area.y += d;
 	m_player_area.y %= eia().egbase().map().extent().h;

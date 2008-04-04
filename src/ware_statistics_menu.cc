@@ -314,10 +314,10 @@ private:
 
 
 WSM_Checkbox::WSM_Checkbox
-(UI::Panel * const parent,
- int32_t const x, int32_t const y,
- int32_t const id, uint32_t const picid,
- RGBColor const color)
+	(UI::Panel * const parent,
+	 int32_t const x, int32_t const y,
+	 int32_t const id, uint32_t const picid,
+	 RGBColor const color)
 : UI::Checkbox(parent, x, y, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG))
 {
 
@@ -353,7 +353,7 @@ Create all the buttons etc...
 ===============
 */
 Ware_Statistics_Menu::Ware_Statistics_Menu
-(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)

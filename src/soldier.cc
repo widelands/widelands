@@ -59,7 +59,7 @@ Soldier_Descr::~Soldier_Descr
 ===============
 */
 Soldier_Descr::Soldier_Descr
-(const Tribe_Descr & tribe_descr, const std::string & soldier_name)
+	(Tribe_Descr const & tribe_descr, std::string const & soldier_name)
 : Worker_Descr(tribe_descr, soldier_name)
 {
 	add_attribute(Map_Object::SOLDIER);
@@ -261,7 +261,10 @@ void Soldier::cleanup(Editor_Game_Base* gg)
  * Set this soldiers level. Automatically sets the new values
  */
 void Soldier::set_level
-(const uint32_t hp, const uint32_t attack, const uint32_t defense, const uint32_t evade)
+	(uint32_t const hp,
+	 uint32_t const attack,
+	 uint32_t const defense,
+	 uint32_t const evade)
 {
 	set_hp_level(hp);
 	set_attack_level(attack);
@@ -361,7 +364,7 @@ void Soldier::damage (const uint32_t value)
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
 void Soldier::draw
-(const Editor_Game_Base & game, RenderTarget & dst, const Point pos) const
+	(Editor_Game_Base const & game, RenderTarget & dst, Point const pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
 
@@ -425,7 +428,7 @@ void Soldier::draw
  *
  */
 void Soldier::start_animation
-(Editor_Game_Base* gg, const char * const animname, const uint32_t time)
+	(Editor_Game_Base * gg, char const * const animname, uint32_t const time)
 {
 	if (upcast(Game, game, gg))
 		start_task_idle (game, descr().get_rand_anim(animname), time);
@@ -872,7 +875,7 @@ void Soldier::sendSpaceSignals(Game* g)
 
 	g->map().find_bobs(Area<FCoords>(get_position(), 1), &soldiers, FindSoldierOnBattlefield());
 
-	for(uint32_t i = 0; i < soldiers.size(); ++i) {
+	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		if (upcast(Soldier, soldier, soldiers[i])) {
 			if (soldier != this)
 				soldier->send_signal(g, "wakeup");

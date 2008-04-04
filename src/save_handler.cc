@@ -119,11 +119,12 @@ std::string SaveHandler::create_file_name(std::string dir, std::string filename)
  * returns true if saved
  */
 bool SaveHandler::save_game
-(Widelands::Game   &       game,
- std::string const &       complete_filename,
- std::string       * const error)
+	(Widelands::Game   &       game,
+	 std::string const &       complete_filename,
+	 std::string       * const error)
 {
-	bool binary = !g_options.pull_section("global")->get_bool("nozip", false);
+	bool const binary =
+		!g_options.pull_section("global")->get_bool("nozip", false);
 	// Make sure that the base directory exists
 	g_fs->EnsureDirectoryExists(get_base_dir());
 

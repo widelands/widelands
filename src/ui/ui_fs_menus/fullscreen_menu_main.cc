@@ -25,70 +25,60 @@
 Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 :
 Fullscreen_Menu_Base("mainmenu.jpg"),
-
 singleplayer
-(this,
- 100, 140, 220, 26,
- 3,
- &Fullscreen_Menu_Main::end_modal, this, mm_singleplayer,
- _("Single Player")),
-
+	(this,
+	 100, 140, 220, 26,
+	 3,
+	 &Fullscreen_Menu_Main::end_modal, this, mm_singleplayer,
+	 _("Single Player")),
 multiplayer
-(this,
- 100, 180, 220, 26,
- 3,
- &Fullscreen_Menu_Main::end_modal, this, mm_multiplayer,
- _("Multi Player")),
-
+	(this,
+	 100, 180, 220, 26,
+	 3,
+	 &Fullscreen_Menu_Main::end_modal, this, mm_multiplayer,
+	 _("Multi Player")),
 replay
-(this,
- 100, 220, 220, 26,
- 3,
- &Fullscreen_Menu_Main::end_modal, this, mm_replay,
- _("Watch Replay")),
-
+	(this,
+	 100, 220, 220, 26,
+	 3,
+	 &Fullscreen_Menu_Main::end_modal, this, mm_replay,
+	 _("Watch Replay")),
 options
-(this,
- 100, 260, 220, 26,
- 3,
- &Fullscreen_Menu_Main::end_modal, this, mm_options,
- _("Options")),
-
+	(this,
+	 100, 260, 220, 26,
+	 3,
+	 &Fullscreen_Menu_Main::end_modal, this, mm_options,
+	 _("Options")),
 editor
-(this,
- 100, 300, 220, 26,
- 3,
- &Fullscreen_Menu_Main::end_modal, this, mm_editor,
- _("Editor")),
-
+	(this,
+	 100, 300, 220, 26,
+	 3,
+	 &Fullscreen_Menu_Main::end_modal, this, mm_editor,
+	 _("Editor")),
 readme
-(this,
- 100, 340, 220, 26,
- 3,
- &Fullscreen_Menu_Main::end_modal, this, mm_readme,
- _("View Readme")),
-
+	(this,
+	 100, 340, 220, 26,
+	 3,
+	 &Fullscreen_Menu_Main::end_modal, this, mm_readme,
+	 _("View Readme")),
 license
-(this,
- 100, 380, 220, 26,
- 3,
- &Fullscreen_Menu_Main::end_modal, this, mm_license,
- _("License")),
-
+	(this,
+	 100, 380, 220, 26,
+	 3,
+	 &Fullscreen_Menu_Main::end_modal, this, mm_license,
+	 _("License")),
 exit
-(this,
- 100, 440, 220, 26,
- 3,
- &Fullscreen_Menu_Main::end_modal, this, mm_exit,
- _("Exit Game")),
-
+	(this,
+	 100, 440, 220, 26,
+	 3,
+	 &Fullscreen_Menu_Main::end_modal, this, mm_exit,
+	 _("Exit Game")),
 version
-(this,
- MENU_XRES - 25,
- MENU_YRES - 29,
- std::string(_("Version ")) + BUILD_ID, Align_Right),
+	(this,
+	 MENU_XRES - 25, MENU_YRES - 29,
+	 std::string(_("Version ")) + BUILD_ID, Align_Right),
 copyright
-(this,
- 15, MENU_YRES - 29,
- _("(C) 2002-2008 by the Widelands Development Team"), Align_TopLeft)
+	(this,
+	 15, MENU_YRES - 29,
+	 _("(C) 2002-2008 by the Widelands Development Team"), Align_TopLeft)
 {}

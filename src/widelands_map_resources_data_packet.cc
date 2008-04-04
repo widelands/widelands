@@ -33,10 +33,10 @@ namespace Widelands {
 
 
 void Map_Resources_Data_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base * egbase,
- const bool,
- Map_Map_Object_Loader * const)
+	(FileSystem            & fs,
+	 Editor_Game_Base      * egbase,
+	 bool,
+	 Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	FileRead fr;
@@ -106,7 +106,7 @@ throw (_wexception)
  * in nearly all cases.
  */
 void Map_Resources_Data_Packet::Write
-(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	FileWrite fw;

@@ -140,10 +140,10 @@ void AnimationManager::flush()
  * \param encdefaults   default values for player colors, see \ref EncodeData
 */
 uint32_t AnimationManager::get
-(char       const * const directory,
- Section          * const s,
- char       const *       picnametempl,
- EncodeData const * const encdefaults)
+	(char       const * const directory,
+	 Section          * const s,
+	 char       const *       picnametempl,
+	 EncodeData const * const encdefaults)
 {
 	uint32_t id;
 	AnimationData* ad;
@@ -277,12 +277,12 @@ DirAnimations::~DirAnimations
 ===============
 */
 DirAnimations::DirAnimations
-(const uint32_t dir1,
- const uint32_t dir2,
- const uint32_t dir3,
- const uint32_t dir4,
- const uint32_t dir5,
- const uint32_t dir6)
+	(uint32_t const dir1,
+	 uint32_t const dir2,
+	 uint32_t const dir3,
+	 uint32_t const dir4,
+	 uint32_t const dir5,
+	 uint32_t const dir6)
 {
 	m_animations[0] = dir1;
 	m_animations[1] = dir2;
@@ -308,12 +308,12 @@ are used.
 ===============
 */
 void DirAnimations::parse
-(Widelands::Map_Object_Descr * const b,
- char                  const * const directory,
- Profile                     * const prof,
- char                  const * const sectnametempl,
- Section                     * const defaults,
- EncodeData            const * const encdefaults)
+	(Widelands::Map_Object_Descr * const b,
+	 char                  const * const directory,
+	 Profile                     * const prof,
+	 char                  const * const sectnametempl,
+	 Section                     * const defaults,
+	 EncodeData            const * const encdefaults)
 {
 	char dirpictempl[256];
 	char sectnamebase[256];

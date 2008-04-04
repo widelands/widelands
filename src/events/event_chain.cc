@@ -155,7 +155,7 @@ void Cmd_CheckEventChain::execute (Game * game) {
 
 #define CMD_CHECK_EVENTCHAIN_VERSION 1
 void Cmd_CheckEventChain::Read
-(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -169,7 +169,7 @@ void Cmd_CheckEventChain::Read
 	}
 }
 void Cmd_CheckEventChain::Write
-(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned16(CMD_CHECK_EVENTCHAIN_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);

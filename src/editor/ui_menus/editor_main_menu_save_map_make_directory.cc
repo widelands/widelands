@@ -75,10 +75,10 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
  * We are not draggable.
  */
 bool Main_Menu_Save_Map_Make_Directory::handle_mousepress
-(const Uint8 btn, int32_t, int32_t)
+	(Uint8 const btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
-(const Uint8, int32_t, int32_t)
+	(Uint8,           int32_t, int32_t)
 {return false;}
 
 /**

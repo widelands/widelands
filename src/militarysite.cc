@@ -42,7 +42,7 @@
 namespace Widelands {
 
 MilitarySite_Descr::MilitarySite_Descr
-(const Tribe_Descr & tribe_descr, const std::string & militarysite_name)
+	(Tribe_Descr const & tribe_descr, std::string const & militarysite_name)
 :
 ProductionSite_Descr (tribe_descr, militarysite_name),
 m_conquer_radius     (0),
@@ -219,7 +219,7 @@ Called when our soldier arrives.
 ===============
 */
 void MilitarySite::request_soldier_callback
-(Game * g, Request *, Ware_Index, Worker * w, void * data)
+	(Game * g, Request *, Ware_Index, Worker * w, void * data)
 {
 	MilitarySite & msite = *static_cast<MilitarySite *>(data);
 	Soldier & s = dynamic_cast<Soldier &>(*w);
@@ -268,7 +268,7 @@ void MilitarySite::update_soldier_request()
 
 	if (present.size() > m_capacity) {
 		if (upcast(Game, g, &owner().egbase())) {
-			for(uint32_t i = 0; i < present.size()-m_capacity; ++i) {
+			for (uint32_t i = 0; i < present.size()-m_capacity; ++i) {
 				Soldier* soldier = present[i];
 				soldier->reset_tasks(g);
 				soldier->start_task_leavebuilding(g, true);
@@ -403,8 +403,8 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 	const std::vector<Worker*>& w = get_workers();
 	for
 		(std::vector<Worker*>::const_iterator it = w.begin();
-		it != w.end();
-		++it)
+		 it != w.end();
+		 ++it)
 	{
 		if (upcast(Soldier, soldier, *it))
 			soldiers.push_back(soldier);

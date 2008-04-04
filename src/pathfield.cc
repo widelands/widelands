@@ -45,7 +45,7 @@ void PathfieldManager::setSize(uint32_t nrfields)
 
 boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 {
-	for(List::iterator it = m_list.begin(); it != m_list.end(); ++it) {
+	for (List::iterator it = m_list.begin(); it != m_list.end(); ++it) {
 		if (it->use_count() == 1) {
 			(*it)->cycle++;
 			if (!(*it)->cycle)
@@ -65,7 +65,7 @@ boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 
 void PathfieldManager::clear(const boost::shared_ptr<Pathfields>& pf)
 {
-	for(uint32_t i = 0; i < m_nrfields; ++i)
+	for (uint32_t i = 0; i < m_nrfields; ++i)
 		pf->fields[i].cycle = 0;
 	pf->cycle = 1;
 }

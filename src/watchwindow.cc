@@ -100,10 +100,10 @@ Initialize a watch window.
 ===============
 */
 WatchWindow::WatchWindow
-(Interactive_Player &       parent,
- int32_t const x, int32_t const y, int32_t const w, int32_t const h,
- Widelands::Coords    const coords,
- bool                 const single_window)
+	(Interactive_Player &       parent,
+	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+	 Widelands::Coords    const coords,
+	 bool                 const single_window)
 :
 UI::Window     (&parent, x, y, w, h, _("Watch")),
 m_game         (parent.get_game()),
@@ -114,21 +114,19 @@ last_visit     (m_game->get_gametime()),
 //  UI::Buttons
 
 m_follow
-(this,
- 0, h - 34, 34, 34,
- 20,
- g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
- &WatchWindow::toggle_tracking, this,
- _("Follow")),
-
+	(this,
+	 0, h - 34, 34, 34,
+	 20,
+	 g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
+	 &WatchWindow::toggle_tracking, this,
+	 _("Follow")),
 m_goto
-(this,
- 34, h - 34, 34, 34,
- 21,
- g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
- &WatchWindow::act_mainview_goto, this,
- _("Center mainview on this"))
-
+	(this,
+	 34, h - 34, 34, 34,
+	 21,
+	 g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
+	 &WatchWindow::act_mainview_goto, this,
+	 _("Center mainview on this"))
 {
 	if (m_single_window) {
 		for (uint8_t i = 0; i < NUM_VIEWS; ++i)
@@ -399,7 +397,7 @@ Open a watch window.
 ===============
 */
 void show_watch_window
-(Interactive_Player & parent, Widelands::Coords const coords)
+	(Interactive_Player & parent, Widelands::Coords const coords)
 {
 	Section *s = g_options.pull_section("global");
 	WatchWindow* win;

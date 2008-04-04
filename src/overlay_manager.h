@@ -54,7 +54,7 @@
 #define MAX_OVERLAYS_PER_NODE 5
 #define MAX_OVERLAYS_PER_TRIANGLE 3
 typedef int32_t (*Overlay_Callback_Function)
-(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 struct Overlay_Manager {
 	struct Job_Id { //  Boxing
 		static Job_Id Null() throw ()//  Constant value for no job.

@@ -42,7 +42,7 @@ inline Editor_Interactive & Trigger_Null_Option_Menu::eia() {
 
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu
-(Editor_Interactive & parent, Widelands::Trigger_Null & trigger)
+	(Editor_Interactive & parent, Widelands::Trigger_Null & trigger)
 :
 UI::Window(&parent, 0, 0, 164, 100, _("Null Trigger Options")),
 m_trigger (trigger)

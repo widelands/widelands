@@ -36,7 +36,9 @@ namespace UI {
  *       align   alignment of text inside the Listselect
 */
 BaseListselect::BaseListselect
-(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align, bool show_check)
+	(Panel * const parent,
+	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
+	 Align const align, bool const show_check)
 :
 Panel(parent, x, y, w, h),
 m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
@@ -107,10 +109,10 @@ void BaseListselect::clear() {
  *       sel    if true, directly select the new entry
 */
 void BaseListselect::add
-(const char * const name,
- uint32_t entry,
- const int32_t picid,
- const bool sel)
+	(char const * const name,
+	 uint32_t           entry,
+	 int32_t      const picid,
+	 bool         const sel)
 {
 	Entry_Record & er = *static_cast<Entry_Record *>
 		(malloc(sizeof(Entry_Record) + strlen(name)));

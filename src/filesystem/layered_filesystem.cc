@@ -88,10 +88,10 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem * const fs)
  */
 //TODO: return type is wrong
 int32_t LayeredFileSystem::FindFiles
-(std::string const &       path,
- std::string const &       pattern,
- filenameset_t     * const results,
- uint32_t                  depth)
+	(std::string const &       path,
+	 std::string const &       pattern,
+	 filenameset_t     * const results,
+	 uint32_t                  depth)
 {
 	uint32_t i=0;
 	if (depth==0)
@@ -177,7 +177,7 @@ void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
  * Throws an exception if it fails.
  */
 void LayeredFileSystem::Write
-(std::string const & fname, void const * const data, int32_t const length)
+	(std::string const & fname, void const * const data, int32_t const length)
 {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -198,9 +198,7 @@ void LayeredFileSystem::Write
  * Analogously to Read, open the file from the first sub-filesystem where
  * it exists.
  */
-StreamRead * LayeredFileSystem::OpenStreamRead
-(const std::string & fname)
-{
+StreamRead  * LayeredFileSystem::OpenStreamRead (const std::string & fname) {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
@@ -216,9 +214,7 @@ StreamRead * LayeredFileSystem::OpenStreamRead
 /**
  * Analogously to Write, create the file in the first writable sub-FS.
  */
-StreamWrite * LayeredFileSystem::OpenStreamWrite
-(const std::string & fname)
-{
+StreamWrite * LayeredFileSystem::OpenStreamWrite(std::string const & fname) {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
@@ -296,7 +292,7 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(std::string const & dirname)
  * Create a subfilesystem from a new file/directory
  */
 FileSystem * LayeredFileSystem::CreateSubFileSystem
-(std::string const & dirname, Type const type)
+	(std::string const & dirname, Type const type)
 {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -339,7 +335,7 @@ void LayeredFileSystem::Unlink(std::string const & file) {
 }
 
 void LayeredFileSystem::Rename
-(const std::string & old_name, const std::string & new_name)
+	(std::string const & old_name, std::string const & new_name)
 {
 	if (!FileExists(old_name))
 		return;

@@ -423,10 +423,10 @@ void WorkerProgram::parse_walk
  *
  */
 void WorkerProgram::parse_animation
-(Worker_Descr                   * descr,
- Worker::Action                 * act,
- Parser                         * parser,
- const std::vector<std::string> & cmd)
+	(Worker_Descr                   * descr,
+	 Worker::Action                 * act,
+	 Parser                         * parser,
+	 std::vector<std::string> const & cmd)
 {
 	char* endp;
 

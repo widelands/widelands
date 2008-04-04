@@ -30,14 +30,12 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(const std::string & filename)
 Fullscreen_Menu_Base("fileviewmenu.jpg"),
 title               (this, 50, 50, std::string(), Align_Left),
 textview            (this, 30, 170, 735, 330),
-
 close_button
-(this,
- 300, 545, 200, 26,
- 0,
- &Fullscreen_Menu_TextView::end_modal, this, 0,
- _("Close"))
-
+	(this,
+	 300, 545, 200, 26,
+	 0,
+	 &Fullscreen_Menu_TextView::end_modal, this, 0,
+	 _("Close"))
 {
 	{
 		i18n::Textdomain textdomain("texts");

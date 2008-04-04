@@ -45,7 +45,9 @@ Map_Object_Packet::~Map_Object_Packet() {
 
 
 void Map_Object_Packet::Read
-(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Loader * const ol)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 Map_Map_Object_Loader * const ol)
 {
 	try {
 		FileRead fr;
@@ -108,7 +110,9 @@ void Map_Object_Packet::LoadFinish() {
 
 
 void Map_Object_Packet::Write
-(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
+	(FileSystem           &       fs,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 {
 	FileWrite fw;
 

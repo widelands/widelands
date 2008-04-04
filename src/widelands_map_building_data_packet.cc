@@ -44,10 +44,10 @@ namespace Widelands {
 
 
 void Map_Building_Data_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- const bool skip,
- Map_Map_Object_Loader * const ol)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip) return;
@@ -133,7 +133,9 @@ throw (_wexception)
  * Write Function
  */
 void Map_Building_Data_Packet::Write
-(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
+	(FileSystem           &       fs,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -184,7 +186,7 @@ throw (_wexception)
  0xff - end of ware types
  */
 void Map_Building_Data_Packet::write_priorities
-(Building const & building, FileWrite & fw)
+	(Building const & building, FileWrite & fw)
 {
 	fw.Unsigned32(building.get_base_priority());
 
@@ -225,7 +227,7 @@ void Map_Building_Data_Packet::write_priorities
 }
 
 void Map_Building_Data_Packet::read_priorities
-(Building & building, FileRead & fr)
+	(Building & building, FileRead & fr)
 {
 	building.set_priority(fr.Unsigned32());
 

@@ -57,40 +57,32 @@ m_realtime      (WLApplication::get()->get_time()),
  tooltip                                                                      \
 
 m_toggle_main_menu
-(INIT_BUTTON
- ("menu_toggle_menu",              toggle_mainmenu,       _("Menu"))),
-
+	(INIT_BUTTON
+	 ("menu_toggle_menu",              toggle_mainmenu,       _("Menu"))),
 m_toggle_tool_menu
-(INIT_BUTTON
- ("editor_menu_toggle_tool_menu",  tool_menu_btn,         _("Tool"))),
-
+	(INIT_BUTTON
+	 ("editor_menu_toggle_tool_menu",  tool_menu_btn,         _("Tool"))),
 m_toggle_toolsize_menu
-(INIT_BUTTON
- ("editor_menu_set_toolsize_menu", toolsize_menu_btn,     _("Toolsize"))),
-
+	(INIT_BUTTON
+	 ("editor_menu_set_toolsize_menu", toolsize_menu_btn,     _("Toolsize"))),
 m_toggle_minimap
-(INIT_BUTTON
- ("menu_toggle_minimap",           toggle_minimap,        _("Minimap"))),
-
+	(INIT_BUTTON
+	 ("menu_toggle_minimap",           toggle_minimap,        _("Minimap"))),
 m_toggle_buildhelp
-(INIT_BUTTON
- ("menu_toggle_buildhelp",         toggle_buildhelp,      _("Buildhelp"))),
-
+	(INIT_BUTTON
+	 ("menu_toggle_buildhelp",         toggle_buildhelp,      _("Buildhelp"))),
 m_toggle_player_menu
-(INIT_BUTTON
- ("editor_menu_player_menu",       toggle_playermenu,     _("Players"))),
-
+	(INIT_BUTTON
+	 ("editor_menu_player_menu",       toggle_playermenu,     _("Players"))),
 m_toggle_event_menu
-(INIT_BUTTON
- ("menu_toggle_event_menu",        toggle_eventmenu,      _("Events"))),
-
+	(INIT_BUTTON
+	 ("menu_toggle_event_menu",        toggle_eventmenu,      _("Events"))),
 m_toggle_variables_menu
-(INIT_BUTTON
- ("menu_toggle_variables_menu",    toggle_variablesmenu,  _("Variables"))),
-
+	(INIT_BUTTON
+	 ("menu_toggle_variables_menu",    toggle_variablesmenu,  _("Variables"))),
 m_toggle_objectives_menu
-(INIT_BUTTON
- ("menu_toggle_objectives_menu",   toggle_objectivesmenu, _("Objectives")))
+	(INIT_BUTTON
+	 ("menu_toggle_objectives_menu",   toggle_objectivesmenu, _("Objectives")))
 {
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_tool_menu,       UI::Box::AlignLeft);
@@ -443,7 +435,7 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 
 
 void Editor_Interactive::select_tool
-(Editor_Tool & primary, const Editor_Tool::Tool_Index which)
+	(Editor_Tool & primary, Editor_Tool::Tool_Index const which)
 {
 	if (which == Editor_Tool::First and &primary != tools.current_pointer) {
 		Widelands::Map & map = egbase().map();
@@ -468,7 +460,7 @@ void Editor_Interactive::select_tool
  *  or a tribe (for buildings)
  */
 void Editor_Interactive::reference_player_tribe
-(Widelands::Player_Number const player, const void * const data)
+	(Widelands::Player_Number const player, void const * const data)
 {
 	assert(0 < player);
 	assert    (player <= egbase().map().get_nrplayers());
@@ -485,7 +477,7 @@ void Editor_Interactive::reference_player_tribe
  * will leace a reference
  */
 void Editor_Interactive::unreference_player_tribe
-(Widelands::Player_Number const player, const void * const data)
+	(Widelands::Player_Number const player, void const * const data)
 {
 	assert(player <= egbase().map().get_nrplayers());
 	assert(data);

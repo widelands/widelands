@@ -35,17 +35,14 @@ Interactive_Spectator::Interactive_Spectator(Widelands::Game * const g)
 :
 Interactive_Base(*g),
 
-#define INIT_BUTTON(picture, callback, tooltip)                               \
+#define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  &Interactive_Spectator::callback, this,                                      \
  tooltip                                                                      \
 
-m_exit
-(INIT_BUTTON("menu_exit_game",      exit_btn,       _("Menu"))),
-
-m_toggle_minimap
-(INIT_BUTTON("menu_toggle_minimap", toggle_minimap, _("Minimap")))
+m_exit          (INIT_BTN("menu_exit_game",      exit_btn,       _("Menu"))),
+m_toggle_minimap(INIT_BTN("menu_toggle_minimap", toggle_minimap, _("Minimap")))
 {
 	m_toolbar.add(&m_exit,           UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap, UI::Box::AlignLeft);

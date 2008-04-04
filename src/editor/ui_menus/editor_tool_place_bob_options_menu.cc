@@ -39,9 +39,9 @@
 #include <SDL_keysym.h>
 
 Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
-(Editor_Interactive         & parent,
- Editor_Place_Bob_Tool      & pit,
- UI::UniqueWindow::Registry & registry)
+	(Editor_Interactive         & parent,
+	 Editor_Place_Bob_Tool      & pit,
+	 UI::UniqueWindow::Registry & registry)
 :
 Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs Menu")),
 

@@ -42,7 +42,7 @@ m_current_job_id(Job_Id::Null())
  * Returns the currently registered overlays and the buildhelp for a node.
  */
 uint8_t Overlay_Manager::get_overlays
-(Widelands::FCoords const c, Overlay_Info * const overlays) const
+	(Widelands::FCoords const c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
 
@@ -80,7 +80,7 @@ end:
  * Returns the currently registered overlays for a triangle.
  */
 uint8_t Overlay_Manager::get_overlays
-(Widelands::TCoords<> const c, Overlay_Info * const overlays) const
+	(Widelands::TCoords<> const c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
 	assert(c.t == Widelands::TCoords<>::D or c.t == Widelands::TCoords<>::R);
@@ -148,11 +148,11 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
  * finally, register a new overlay
  */
 void Overlay_Manager::register_overlay
-(Widelands::TCoords<> const c,
- const int32_t picid,
- const int32_t level,
- Point            hotspot,
- const Job_Id jobid)
+	(Widelands::TCoords<> const c,
+	 int32_t              const picid,
+	 int32_t              const level,
+	 Point                      hotspot,
+	 Job_Id               const jobid)
 {
 	assert(c.t <= 2);
 	assert(level!=5); // level == 5 is undefined behavior
@@ -209,7 +209,7 @@ void Overlay_Manager::register_overlay
  * remove one (or many) overlays from a node or triangle
  */
 void Overlay_Manager::remove_overlay
-(Widelands::TCoords<> const c, int32_t const picid)
+	(Widelands::TCoords<> const c, int32_t const picid)
 {
 	assert(c.t <= 2);
 
@@ -245,7 +245,7 @@ void Overlay_Manager::remove_overlay(const Job_Id jobid) {
  * Register road overlays
  */
 void Overlay_Manager::register_road_overlay
-(Widelands::Coords const c, uint8_t const where, Job_Id const jobid)
+	(Widelands::Coords const c, uint8_t const where, Job_Id const jobid)
 {
 	const Registered_Road_Overlays overlay = {jobid, where};
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);

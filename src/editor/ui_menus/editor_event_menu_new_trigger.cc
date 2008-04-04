@@ -40,7 +40,7 @@ inline Editor_Interactive & Editor_Event_Menu_New_Trigger::eia() {
 
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
-(Editor_Interactive & parent)
+	(Editor_Interactive & parent)
 : UI::Window(&parent, 0, 0, 400, 240, _("New Trigger"))
 {
 
@@ -110,9 +110,10 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
  * We are not draggable.
  */
 bool Editor_Event_Menu_New_Trigger::handle_mousepress
-(const Uint8 btn, int32_t, int32_t)
+	(Uint8 const btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Editor_Event_Menu_New_Trigger::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool Editor_Event_Menu_New_Trigger::handle_mouserelease
+	(Uint8,           int32_t, int32_t)
 {return false;}
 
 /**

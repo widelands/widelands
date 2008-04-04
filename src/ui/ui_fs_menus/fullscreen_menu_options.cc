@@ -37,64 +37,48 @@
 Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt)
 :
 Fullscreen_Menu_Base("optionsmenu.jpg"),
-
 m_cancel
-(this,
- 410, 530, 190, 24,
- 0,
- &Fullscreen_Menu_Options::end_modal, this, om_cancel,
- _("Cancel")),
-
+	(this,
+	 410, 530, 190, 24,
+	 0,
+	 &Fullscreen_Menu_Options::end_modal, this, om_cancel,
+	 _("Cancel")),
 m_apply
-(this,
- 200, 530, 190, 24,
- 2,
- &Fullscreen_Menu_Options::end_modal, this, om_ok,
- _("Apply")),
-
+	(this,
+	 200, 530, 190, 24,
+	 2,
+	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
+	 _("Apply")),
 m_title(this, MENU_XRES / 2, 30, _("General Options"), Align_HCenter),
-
 m_fullscreen(this, 300, 110),
 m_label_fullscreen(this, 325, 120, _("Fullscreen"), Align_VCenter),
-
 m_inputgrab(this, 300, 140),
 m_label_inputgrab(this, 325, 150, _("Grab Input"), Align_VCenter),
-
 m_music(this, 300, 170),
 m_label_music(this, 325, 180, _("Enable Music"), Align_VCenter),
-
 m_fx(this, 300, 200),
 m_label_fx(this, 325, 210, _("Enable Sound"), Align_VCenter),
-
 m_reslist(this, 80, 110, 190, 150, Align_Left, true),
 m_label_resolution(this, 85, 95, _("In-game resolution"), Align_VCenter),
-
 m_label_language(this, MENU_XRES / 2 + 85, 95, _("Language"), Align_VCenter),
 m_language_list(this, MENU_XRES / 2 + 75, 110, 210, 150, Align_Left, true),
-
 m_label_game_options
-(this, MENU_XRES / 2, 300, _("In-game Options"), Align_HCenter),
-
+	(this, MENU_XRES / 2, 300, _("In-game Options"), Align_HCenter),
 m_single_watchwin(this, 85, 355),
 m_label_single_watchwin
-(this, 110, 365, _("Use single Watchwindow Mode"), Align_VCenter),
-
+	(this, 110, 365, _("Use single Watchwindow Mode"), Align_VCenter),
 m_show_workarea_preview(this, 85, 385),
 m_label_show_workarea_preview
-(this, 110, 395, _("Show buildings area preview"), Align_VCenter),
-
+	(this, 110, 395, _("Show buildings area preview"), Align_VCenter),
 m_snap_windows_only_when_overlapping(this, 85, 415),
 m_label_snap_windows_only_when_overlapping
-(this, 110, 425, _("Snap windows only when overlapping"), Align_VCenter),
-
+	(this, 110, 425, _("Snap windows only when overlapping"), Align_VCenter),
 m_dock_windows_to_edges(this, 85, 445),
 m_label_dock_windows_to_edges
-(this, 110, 455, _("Dock windows to edges"), Align_VCenter),
-
+	(this, 110, 455, _("Dock windows to edges"), Align_VCenter),
 m_autosave(this, 85, 475),
 m_label_autosave
-(this, 110, 485, "Autosave game every XXX minutes", Align_VCenter)
-
+	(this, 110, 485, "Autosave game every XXX minutes", Align_VCenter)
 {
 	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	m_fullscreen.set_state(opt.fullscreen);

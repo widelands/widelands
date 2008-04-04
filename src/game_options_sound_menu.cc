@@ -22,52 +22,47 @@
 #include "i18n.h"
 
 GameOptionsSoundMenu::GameOptionsSoundMenu
-(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
+	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&plr, &registry, 160, 160, _("Sound options")),
-
 ingame_music(this, hmargin(), vmargin()),
-
 ingame_music_label
-(this, hmargin() + STATEBOX_WIDTH + hspacing(), vmargin(), _("Ingame Music")),
-
+	(this,
+	 hmargin() + STATEBOX_WIDTH + hspacing(), vmargin(),
+	 _("Ingame Music")),
 ingame_sound(this, hmargin(), vmargin() + STATEBOX_HEIGHT + vspacing()),
-
 ingame_sound_label
-(this,
- hmargin() + STATEBOX_WIDTH  + hspacing(),
- vmargin() + STATEBOX_HEIGHT + vspacing(),
- _("Sound FX")),
-
+	(this,
+	 hmargin() + STATEBOX_WIDTH  + hspacing(),
+	 vmargin() + STATEBOX_HEIGHT + vspacing(),
+	 _("Sound FX")),
 ingame_music_volume_label
-(this,
- hmargin(), vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing(),
- _("Ingame Music Volume")),
-
+	(this,
+	 hmargin(), vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing(),
+	 _("Ingame Music Volume")),
 ingame_music_volume
-(this,
- hmargin(),
- vmargin() + 2 * (STATEBOX_HEIGHT+vspacing()) + vbigspacing() + 1 * vspacing() +
- ingame_music_volume_label.get_h(),
- get_inner_w() - 2 * hmargin(), slideh(),
- 0, g_sound_handler.get_max_volume(), g_sound_handler.get_music_volume(),
- 1),
-
+	(this,
+	 hmargin(),
+	 vmargin() + 2 * (STATEBOX_HEIGHT+vspacing()) + vbigspacing()
+	 + 1 * vspacing() + ingame_music_volume_label.get_h(),
+	 get_inner_w() - 2 * hmargin(), slideh(),
+	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_music_volume(),
+	 1),
 ingame_sound_volume_label
-(this,
- hmargin(),
- vmargin() + 2 * (STATEBOX_HEIGHT+vspacing()) + vbigspacing() + 2 * vspacing() +
- slideh() + ingame_music_volume_label.get_h(),
- _("Sound FX Volume")),
-
+	(this,
+	 hmargin(),
+	 vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing()
+	 + 2 * vspacing() + slideh() + ingame_music_volume_label.get_h(),
+	 _("Sound FX Volume")),
 ingame_sound_volume
-(this,
- hmargin(),
- vmargin() + 2 * (STATEBOX_HEIGHT+vspacing()) + vbigspacing() + 3 * vspacing() +
- slideh() + ingame_music_volume_label.get_h()+ingame_music_volume_label.get_h(),
- get_inner_w() - 2 * hmargin(), slideh(),
- 0, g_sound_handler.get_max_volume(), g_sound_handler.get_fx_volume(),
- 1)
+	(this,
+	 hmargin(),
+	 vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing()
+	 + 3 * vspacing() + slideh()
+	 + ingame_music_volume_label.get_h() + ingame_music_volume_label.get_h(),
+	 get_inner_w() - 2 * hmargin(), slideh(),
+	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_fx_volume(),
+	 1)
 {
 	ingame_music.set_state(not g_sound_handler.get_disable_music());
 	ingame_sound.set_state(not g_sound_handler.get_disable_fx   ());

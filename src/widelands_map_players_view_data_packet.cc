@@ -101,9 +101,9 @@ extern const Map_Object_Descr g_road_descr;
 //              bl------br
 
 inline static const Map_Object_Descr * read_unseen_immovable
-(const Editor_Game_Base & egbase,
- BitInBuffer<2>         & immovable_kinds_file,
- FileRead               & immovables_file)
+	(Editor_Game_Base const & egbase,
+	 BitInBuffer<2>         & immovable_kinds_file,
+	 FileRead               & immovables_file)
 {
 	const Map_Object_Descr * map_object_descr;
 	try {
@@ -143,11 +143,11 @@ inline static const Map_Object_Descr * read_unseen_immovable
 			 plnum, (file).GetSize() - (file).GetPos(), filename);               \
 
 void Map_Players_View_Data_Packet::Read
-(FileSystem       & fs,
- Editor_Game_Base * egbase,
- const bool         skip,
- Map_Map_Object_Loader * const)
-throw (_wexception)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const)
+	throw (_wexception)
 {
 	if (skip) return;
 
@@ -644,8 +644,8 @@ throw (_wexception)
 
 
 inline static void write_unseen_immovable
-(const Map_Object_Descr * const map_object_descr,
- BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
+	(Map_Object_Descr const * const map_object_descr,
+	 BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
 {
 	assert(map_object_descr != &g_road_descr);
 	uint8_t immovable_kind;
@@ -668,7 +668,7 @@ inline static void write_unseen_immovable
 	(file).Write(fs, filename);                                                \
 
 void Map_Players_View_Data_Packet::Write
-(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");

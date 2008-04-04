@@ -542,7 +542,7 @@ void Game::think()
  * Note that this needs fixes in the editor.
  */
 void Game::cleanup_for_load
-(const bool flush_graphics, const bool flush_animations)
+	(bool const flush_graphics, bool const flush_animations)
 {
 	m_state = gs_notrunning;
 
@@ -716,11 +716,11 @@ void Game::send_player_change_soldier_capacity (Building* b, int32_t val)
 
 /////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction
-(const Flag * const flag,
- const int32_t action,
- const Player_Number who_attacks,
- const int32_t num_soldiers,
- const int32_t type)
+	(Flag  const * const flag,
+	 int32_t       const action,
+	 Player_Number const who_attacks,
+	 int32_t       const num_soldiers,
+	 int32_t       const type)
 {
 	send_player_command
 		(new Cmd_EnemyFlagAction

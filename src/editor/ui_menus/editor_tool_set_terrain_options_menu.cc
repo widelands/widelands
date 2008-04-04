@@ -38,9 +38,9 @@ using Widelands::Terrain_Descr;
 
 Editor_Tool_Set_Terrain_Tool_Options_Menu::
 Editor_Tool_Set_Terrain_Tool_Options_Menu
-(Editor_Interactive         & parent,
- Editor_Set_Terrain_Tool    & tool,
- UI::UniqueWindow::Registry & registry)
+	(Editor_Interactive         & parent,
+	 Editor_Set_Terrain_Tool    & tool,
+	 UI::UniqueWindow::Registry & registry)
 :
 Editor_Tool_Options_Menu(parent, registry, 0, 0, _("Terrain Select")),
 

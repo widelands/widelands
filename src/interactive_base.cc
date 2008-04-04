@@ -506,7 +506,7 @@ Begin building a road
 ===============
 */
 void Interactive_Base::start_build_road
-(Coords _start, Widelands::Player_Number const player)
+	(Coords _start, Widelands::Player_Number const player)
 {
 	// create an empty path
 	assert(not m_buildroad);
@@ -836,7 +836,7 @@ bool Interactive_Base::handle_key(bool down, SDL_keysym code)
 			if (upcast(Widelands::Game, g, &m_egbase)) {
 				if (GameController* ctrl = g->gameController()) {
 					int32_t speed = ctrl->desiredSpeed();
-					ctrl->setDesiredSpeed(std::max(0,speed-1000));
+					ctrl->setDesiredSpeed(std::max(0, speed - 1000));
 				}
 			}
 		}

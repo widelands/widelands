@@ -30,10 +30,10 @@ inline Interactive_Player & GameObjectivesMenu::iaplayer() const {
 
 
 GameObjectivesMenu::GameObjectivesMenu
-(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
+	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
-(&plr, &registry, 340, 5 + 120 + 5 + 240 + 5, _("Objectives Menu")),
+	(&plr, &registry, 340, 5 + 120 + 5 + 240 + 5, _("Objectives Menu")),
 list         (this, 5,   5, get_inner_w() - 10, 120, Align_Left, false),
 objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
 {

@@ -153,16 +153,16 @@ void Surface::unset_subwin() {
  * into the bitmap.
 */
 void Surface::draw_field
-(Rect & subwin,
- const Vertex& f_vert,
- const Vertex& r_vert,
- const Vertex& bl_vert,
- const Vertex& br_vert,
- uint8_t roads,
- const Texture & tr_d_texture,
- const Texture &  l_r_texture,
- const Texture &  f_d_texture,
- const Texture &  f_r_texture)
+	(Rect          & subwin,
+	 Vertex  const &  f_vert,
+	 Vertex  const &  r_vert,
+	 Vertex  const & bl_vert,
+	 Vertex  const & br_vert,
+	 uint8_t         roads,
+	 Texture const & tr_d_texture,
+	 Texture const &  l_r_texture,
+	 Texture const &  f_d_texture,
+	 Texture const &  f_r_texture)
 {
 	set_subwin(subwin);
 

@@ -36,27 +36,23 @@ inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
 Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
 :
 UI::UniqueWindow(parent, registry, 160, 50, _("Toolsize Menu")),
-
 m_textarea(this, 5, 5, 150, 10, std::string(), Align_HCenter),
-
 m_increase
-(this,
- 60, 25, 20, 20,
- 0,
- g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
- &Editor_Toolsize_Menu::increase_radius, this,
- std::string(),
- parent->get_sel_radius() < MAX_TOOL_AREA),
-
+	(this,
+	 60, 25, 20, 20,
+	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+	 &Editor_Toolsize_Menu::increase_radius, this,
+	 std::string(),
+	 parent->get_sel_radius() < MAX_TOOL_AREA),
 m_decrease
-(this,
- 80, 25, 20, 20,
- 0,
- g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
- &Editor_Toolsize_Menu::decrease_radius, this,
- std::string(),
- 0 < parent->get_sel_radius())
-
+	(this,
+	 80, 25, 20, 20,
+	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+	 &Editor_Toolsize_Menu::decrease_radius, this,
+	 std::string(),
+	 0 < parent->get_sel_radius())
 {
 	char buffer[250];
 	snprintf

@@ -324,7 +324,9 @@ Initialize the panel.
 ===============
 */
 WaresQueueDisplay::WaresQueueDisplay
-(UI::Panel * parent, int32_t x, int32_t y, uint32_t maxw, Widelands::WaresQueue* queue, Widelands::Game *)
+	(UI::Panel * const parent,
+	 int32_t const x, int32_t const y, uint32_t const maxw,
+	 Widelands::WaresQueue * const queue, Widelands::Game *)
 :
 UI::Panel(parent, x, y, 0, Height),
 m_queue(queue),
@@ -443,11 +445,13 @@ void WaresQueueDisplay::draw(RenderTarget* dst)
 			dst->blitrect
 				(Point(x, 0), m_fade_mask,
 				 Rect
-				 (Point
-				  	(cells + 1 == m_display_size and
-				  	 m_cache_size > m_display_size ?
-				  	 BG_ContinueCellX : BG_CellX, 0),
-				  CellWidth, Height));
+				 	(Point
+				 	 	(cells + 1 == m_display_size and
+				 	 	 m_cache_size > m_display_size
+				 	 	 ?
+				 	 	 BG_ContinueCellX : BG_CellX,
+				 	 	 0),
+				 	 CellWidth, Height));
 	}
 
 	compile_assert(0 <= BG_RightBorderX);
@@ -883,9 +887,9 @@ Create the window and its panels
 ===============
 */
 ConstructionSite_Window::ConstructionSite_Window
-(Interactive_Player          * const parent,
- Widelands::ConstructionSite * const cs,
- UI::Window *                * const registry)
+	(Interactive_Player          * const parent,
+	 Widelands::ConstructionSite * const cs,
+	 UI::Window *                * const registry)
 	: Building_Window(parent, cs, registry)
 {
 	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
@@ -1193,7 +1197,7 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 
 
 ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow
-()
+	()
 {}
 
 
@@ -1325,7 +1329,10 @@ protected:
 
 
 PriorityButtonHelper::PriorityButtonHelper
-(Widelands::Game& g, ProductionSite * ps, int32_t ware_type, int32_t ware_index)
+	(Widelands::Game &       g,
+	 ProductionSite  *       ps,
+	 int32_t           const ware_type,
+	 int32_t           const ware_index)
 :
 m_game(g),
 m_ps        (ps),
@@ -1369,10 +1376,10 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 }
 
 UI::Basic_Button * ProductionSite_Window::create_priority_button
-(UI::Box* box, PriorityButtonHelper & helper,
- int32_t priority, int32_t x, int32_t, int32_t w, int32_t h,
- const char * picture1, const char * picture2,
- const std::string & button_tooltip)
+	(UI::Box * box, PriorityButtonHelper & helper,
+	 int32_t priority, int32_t x, int32_t, int32_t w, int32_t h,
+	 char const * picture1, char const * picture2,
+	 std::string const & button_tooltip)
 {
 	int32_t const pic_enabled  =
 		g_gr->get_resized_picture

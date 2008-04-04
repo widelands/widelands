@@ -32,23 +32,20 @@
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
 game(g),
-
 back
-(this,
- 570, 505, 200, 26,
- 0,
- &Fullscreen_Menu_LoadGame::end_modal, this, 0,
- _("Back")),
-
+	(this,
+	 570, 505, 200, 26,
+	 0,
+	 &Fullscreen_Menu_LoadGame::end_modal, this, 0,
+	 _("Back")),
 m_ok
-(this,
- 570, 535, 200, 26,
- 2,
- &Fullscreen_Menu_LoadGame::clicked_ok, this,
- _("OK"),
- std::string(),
- false),
-
+	(this,
+	 570, 535, 200, 26,
+	 2,
+	 &Fullscreen_Menu_LoadGame::clicked_ok, this,
+	 _("OK"),
+	 std::string(),
+	 false),
 list(this, 15, 205, 455, 365),
 
 title(this, MENU_XRES / 2, 90, _("Choose saved game!"), Align_HCenter),

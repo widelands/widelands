@@ -308,7 +308,7 @@ uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 }
 
 uint32_t Graphic::get_picture
-(uint32_t const module, Surface & surf, char const * const fname)
+	(uint32_t const module, Surface & surf, char const * const fname)
 {
 	const std::vector<Picture>::size_type id = find_free_picture();
 	Picture & pic = m_pictures[id];
@@ -329,10 +329,13 @@ uint32_t Graphic::get_picture
  * Might return same id if dimensions are the same
  */
 uint32_t Graphic::get_resized_picture
-(const uint32_t index, const uint32_t w, const uint32_t h, ResizeMode mode)
+	(uint32_t const index,
+	 uint32_t const w, uint32_t const h,
+	 ResizeMode const mode)
 {
 	if (index >= m_pictures.size() or !m_pictures[index].module)
-		throw wexception("get_resized_picture(%i): picture doesn't exist", index);
+		throw wexception
+			("get_resized_picture(%i): picture doesn't exist", index);
 
 	Surface* orig = m_pictures[index].surface;
 	if (orig->get_w() == w and orig->get_h() == h)
@@ -628,7 +631,7 @@ AnimationGfx::Index Graphic::nr_frames(const uint32_t anim) const
  * \return the size of the animation at the given time.
 */
 void Graphic::get_animation_size
-(const uint32_t anim, const uint32_t time, uint32_t & w, uint32_t & h)
+	(uint32_t const anim, uint32_t const time, uint32_t & w, uint32_t & h)
 {
 	const AnimationData* data = g_anim.get_animation(anim);
 	AnimationGfx* gfx = get_animation(anim);
@@ -673,7 +676,7 @@ const char* Graphic::get_maptexture_picture(uint32_t id)
  * Save and load pictures
  */
 void Graphic::m_png_write_function
-(png_structp png_ptr, png_bytep data, png_size_t length)
+	(png_structp png_ptr, png_bytep data, png_size_t length)
 {
 	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Data(data, length);
 }

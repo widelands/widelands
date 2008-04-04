@@ -50,7 +50,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 ===============
 */
 ConstructionSite_Descr::ConstructionSite_Descr
-(const Tribe_Descr & tribe_descr, const std::string & building_name)
+	(Tribe_Descr const & tribe_descr, std::string const & building_name)
 :
 Building_Descr(tribe_descr, building_name)
 {}
@@ -259,7 +259,7 @@ void ConstructionSite::set_building(const Building_Descr & building_descr) {
  * an enhancement
  */
 void ConstructionSite::set_previous_building
-(const Building_Descr * const previous_building_descr)
+	(Building_Descr const * const previous_building_descr)
 {
 	assert(!m_prev_building);
 
@@ -426,7 +426,7 @@ Called by transfer code when the builder has arrived on site.
 ===============
 */
 void ConstructionSite::request_builder_callback
-(Game *g, Request * rq, Ware_Index, Worker * const w, void * const data)
+	(Game * g, Request * rq, Ware_Index, Worker * const w, void * const data)
 {
 	assert(w);
 
@@ -535,7 +535,7 @@ Called by WaresQueue code when an item has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback
-(Game * g, WaresQueue *, Ware_Index, void * data)
+	(Game * g, WaresQueue *, Ware_Index, void * data)
 {
 	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 
@@ -553,10 +553,10 @@ Draw the construction site.
 ===============
 */
 void ConstructionSite::draw
-(const Editor_Game_Base & game,
- RenderTarget & dst,
- const FCoords coords,
- const Point pos)
+	(Editor_Game_Base const & game,
+	 RenderTarget           & dst,
+	 FCoords          const   coords,
+	 Point            const   pos)
 {
 	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();

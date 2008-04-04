@@ -222,7 +222,7 @@ void RenderTarget::blit(const Point dst, const uint32_t picture)
 }
 
 void RenderTarget::blitrect
-(const Point dst, const uint32_t picture, const Rect srcrc)
+	(Point const dst, uint32_t const picture, Rect const srcrc)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -291,16 +291,16 @@ void RenderTarget::tile(Rect r, uint32_t picture, Point ofs)
 
 
 static inline Sint8 node_brightness
-(Widelands::Time   gametime,
- Widelands::Time   last_seen,
- Widelands::Vision vision,
- Sint8             result)
+	(Widelands::Time   gametime,
+	 Widelands::Time   last_seen,
+	 Widelands::Vision vision,
+	 Sint8             result)
 __attribute__((const));
 static inline Sint8 node_brightness
-(Widelands::Time   const gametime,
- Widelands::Time   const last_seen,
- Widelands::Vision const vision,
- Sint8                   result)
+	(Widelands::Time   const gametime,
+	 Widelands::Time   const last_seen,
+	 Widelands::Vision const vision,
+	 Sint8                   result)
 {
 	if      (vision == 0) result = -128;
 	else if (vision == 1) {
@@ -350,9 +350,9 @@ static inline Sint8 node_brightness
  * roads, then immovables, then bobs, then overlay stuff (build icons etc...)
  */
 void RenderTarget::rendermap
-(Widelands::Editor_Game_Base const &       egbase,
- Player                      const &       player,
- Point                                     viewofs)
+	(Widelands::Editor_Game_Base const &       egbase,
+	 Player                      const &       player,
+	 Point                                     viewofs)
 {
 	if (player.see_all()) return rendermap(egbase, viewofs);
 
@@ -774,8 +774,8 @@ void RenderTarget::rendermap
 
 
 void RenderTarget::rendermap
-(Widelands::Editor_Game_Base const &       egbase,
- Point                                     viewofs)
+	(Widelands::Editor_Game_Base const &       egbase,
+	 Point                                     viewofs)
 {
 	RENDERMAP_INITIALIZANTONS;
 
@@ -1147,10 +1147,10 @@ void RenderTarget::rendermap
  * The entire clipping rect will be used for drawing.
  */
 void RenderTarget::renderminimap
-(Widelands::Editor_Game_Base const &       egbase,
- Player                      const * const player,
- Point                               const viewpoint,
- uint32_t                            const flags)
+	(Widelands::Editor_Game_Base const &       egbase,
+	 Player                      const * const player,
+	 Point                               const viewpoint,
+	 uint32_t                            const flags)
 {
 	m_surface->draw_minimap
 			(egbase, player, m_rect, viewpoint - m_offset, flags);
@@ -1172,10 +1172,10 @@ void RenderTarget::renderminimap
  * What if the game runs very slowly or very quickly?
  */
 void RenderTarget::drawanim
-(Point                dst,
- const uint32_t       animation,
- const uint32_t       time,
- const Player * const player)
+	(Point                dst,
+	 uint32_t       const animation,
+	 uint32_t       const time,
+	 Player const * const player)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	AnimationGfx* gfx = g_gr->get_animation(animation);
@@ -1212,11 +1212,11 @@ void RenderTarget::drawanim
  * Draws a part of a frame of an animation at the given location
  */
 void RenderTarget::drawanimrect
-(Point                dst,
- const uint32_t       animation,
- const uint32_t       time,
- const Player * const player,
- Rect                 srcrc)
+	(Point                dst,
+	 uint32_t       const animation,
+	 uint32_t       const time,
+	 Player const * const player,
+	 Rect                 srcrc)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	if (!data || !g_gr) {

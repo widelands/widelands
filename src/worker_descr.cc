@@ -83,10 +83,10 @@ const WorkerProgram* Worker_Descr::get_program(std::string programname) const
  * Custom creation routing that accounts for the location.
  */
 Worker & Worker_Descr::create
-(Editor_Game_Base & egbase,
- Player           & owner,
- PlayerImmovable  & location,
- const Coords       coords)
+	(Editor_Game_Base &       egbase,
+	 Player           &       owner,
+	 PlayerImmovable  &       location,
+	 Coords             const coords)
 const
 {
 	Worker & worker = dynamic_cast<Worker &>(*create_object());
@@ -102,10 +102,10 @@ const
  * Parse the worker data from configuration
  */
 void Worker_Descr::parse
-(char const       * const directory,
- Profile          * const prof,
- becomes_map_t    &       becomes_map,
- const EncodeData * const encdata)
+	(char const       * const directory,
+	 Profile          * const prof,
+	 becomes_map_t    &       becomes_map,
+	 EncodeData const * const encdata)
 {
 	char buffer[256];
 	char fname[256];

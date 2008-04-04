@@ -173,9 +173,9 @@ typedef struct
 
 
 local int32_t unzlocal_getByte OF
-((zlib_filefunc_def const * pzlib_filefunc_def,
-  voidpf                    filestream,
-  int32_t                 * pi));
+	((zlib_filefunc_def const * pzlib_filefunc_def,
+	  voidpf                    filestream,
+	  int32_t                 * pi));
 
 local int32_t unzlocal_getByte(const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, int32_t* pi)
 {
@@ -194,9 +194,9 @@ local int32_t unzlocal_getByte(const zlib_filefunc_def* pzlib_filefunc_def, void
    Reads a long in LSB order from the given gz_stream. Sets
 */
 local int32_t unzlocal_getShort OF
-((zlib_filefunc_def const * pzlib_filefunc_def,
-  voidpf                    filestream,
-  uLong                   * pX));
+	((zlib_filefunc_def const * pzlib_filefunc_def,
+	  voidpf                    filestream,
+	  uLong                   * pX));
 
 local int32_t unzlocal_getShort (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong* pX)
 {
@@ -216,9 +216,9 @@ local int32_t unzlocal_getShort (const zlib_filefunc_def* pzlib_filefunc_def, vo
 }
 
 local int32_t unzlocal_getLong OF
-((zlib_filefunc_def const * pzlib_filefunc_def,
-  voidpf                    filestream,
-  uLong                   * pX));
+	((zlib_filefunc_def const * pzlib_filefunc_def,
+	  voidpf                    filestream,
+	  uLong                   * pX));
 
 local int32_t unzlocal_getLong (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong* pX)
 {
@@ -307,7 +307,7 @@ extern int32_t ZEXPORT unzStringFileNameCompare (const char* fileName1, const ch
     the global comment)
 */
 local uLong unzlocal_SearchCentralDir OF
-((zlib_filefunc_def const * pzlib_filefunc_def, voidpf filestream));
+	((zlib_filefunc_def const * pzlib_filefunc_def, voidpf filestream));
 
 local uLong unzlocal_SearchCentralDir(const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream)
 {
@@ -570,20 +570,20 @@ local void unzlocal_DosDateToTmuDate (uLong ulDosDate, tm_unz* ptm)
   Get Info about the current file in the zipfile, with internal only info
 */
 local int32_t unzlocal_GetCurrentFileInfoInternal OF
-((unzFile file,
-  unz_file_info          * const pfile_info,
-  unz_file_info_internal * const pfile_info_internal,
-  char * const szFileName, uLong fileNameBufferSize,
-  void * const extraField, uLong extraFieldBufferSize,
-  char * const szComment,  uLong commentBufferSize));
+	((unzFile file,
+	  unz_file_info          * const pfile_info,
+	  unz_file_info_internal * const pfile_info_internal,
+	  char * const szFileName, uLong fileNameBufferSize,
+	  void * const extraField, uLong extraFieldBufferSize,
+	  char * const szComment,  uLong commentBufferSize));
 
 local int32_t unzlocal_GetCurrentFileInfoInternal
-(unzFile file,
- unz_file_info * pfile_info,
- unz_file_info_internal * pfile_info_internal,
- char * const szFileName, uLong fileNameBufferSize,
- void * const extraField, uLong extraFieldBufferSize,
- char * const szComment,  uLong commentBufferSize)
+	(unzFile file,
+	 unz_file_info          * pfile_info,
+	 unz_file_info_internal * pfile_info_internal,
+	 char * const szFileName, uLong fileNameBufferSize,
+	 void * const extraField, uLong extraFieldBufferSize,
+	 char * const szComment,  uLong commentBufferSize)
 {
 	unz_file_info file_info;
 	unz_file_info_internal file_info_internal;
@@ -799,18 +799,17 @@ local int32_t unzlocal_GetCurrentFileInfoInternal
   return UNZ_OK if there is no problem.
 */
 extern int32_t ZEXPORT unzGetCurrentFileInfo
-(unzFile file,
- unz_file_info * const pfile_info,
- char * const szFileName, uLong fileNameBufferSize,
- void * const extraField, uLong extraFieldBufferSize,
- char * const szComment,  uLong commentBufferSize)
+	(unzFile file, unz_file_info * const pfile_info,
+	 char * const szFileName, uLong fileNameBufferSize,
+	 void * const extraField, uLong extraFieldBufferSize,
+	 char * const szComment,  uLong commentBufferSize)
 {
 	return
 		unzlocal_GetCurrentFileInfoInternal
-		(file, pfile_info, NULL,
-		 szFileName, fileNameBufferSize,
-		 extraField, extraFieldBufferSize,
-		 szComment,  commentBufferSize);
+			(file, pfile_info, NULL,
+			 szFileName, fileNameBufferSize,
+			 extraField, extraFieldBufferSize,
+			 szComment,  commentBufferSize);
 }
 
 /*
@@ -995,8 +994,10 @@ extern int32_t ZEXPORT unzGoToFilePos(unzFile file, unz_file_pos* file_pos)
         (filename and size of extra field data)
 */
 local int32_t unzlocal_CheckCurrentFileCoherencyHeader
-(unz_s * const s, uInt * const piSizeVar,
- uLong * const poffset_local_extrafield, uInt * const psize_local_extrafield)
+	(unz_s * const s,
+	 uInt  * const piSizeVar,
+	 uLong * const poffset_local_extrafield,
+	 uInt  * const psize_local_extrafield)
 {
 	uLong uMagic, uData, uFlags;
 	uLong size_filename;
@@ -1852,10 +1853,10 @@ local int32_t add_data_in_datablock(linkedlist_data* ll, const void* buf, uLong 
 */
 
 local int32_t ziplocal_putValue OF
-((zlib_filefunc_def const * pzlib_filefunc_def,
-  voidpf                    filestream,
-  uLong                     x,
-  int32_t                   nbByte));
+	((zlib_filefunc_def const * pzlib_filefunc_def,
+	  voidpf                    filestream,
+	  uLong                     x,
+	  int32_t                   nbByte));
 local int32_t ziplocal_putValue (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong x, int32_t nbByte)
 {
 	unsigned char buf[4];
@@ -1911,9 +1912,9 @@ local uLong ziplocal_TmzDateToDosDate(const tm_zip* ptm, uLong) {
 /****************************************************************************/
 
 local int32_t ziplocal_getByte OF
-((zlib_filefunc_def const * pzlib_filefunc_def,
-  voidpf                    filestream,
-  int32_t                 * pi));
+	((zlib_filefunc_def const * pzlib_filefunc_def,
+	  voidpf                    filestream,
+	  int32_t                 * pi));
 
 local int32_t ziplocal_getByte(const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, int32_t* pi)
 {
@@ -1932,9 +1933,9 @@ local int32_t ziplocal_getByte(const zlib_filefunc_def* pzlib_filefunc_def, void
    Reads a long in LSB order from the given gz_stream. Sets
 */
 local int32_t ziplocal_getShort OF
-((zlib_filefunc_def const * pzlib_filefunc_def,
-  voidpf                    filestream,
-  uLong                   * pX));
+	((zlib_filefunc_def const * pzlib_filefunc_def,
+	  voidpf                    filestream,
+	  uLong                   * pX));
 
 local int32_t ziplocal_getShort (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong* pX)
 {
@@ -1954,9 +1955,9 @@ local int32_t ziplocal_getShort (const zlib_filefunc_def* pzlib_filefunc_def, vo
 }
 
 local int32_t ziplocal_getLong OF
-((zlib_filefunc_def const * pzlib_filefunc_def,
-  voidpf                    filestream,
-  uLong                   * pX));
+	((zlib_filefunc_def const * pzlib_filefunc_def,
+	  voidpf                    filestream,
+	  uLong                   * pX));
 
 local int32_t ziplocal_getLong (const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, uLong* pX)
 {
@@ -1991,7 +1992,7 @@ local int32_t ziplocal_getLong (const zlib_filefunc_def* pzlib_filefunc_def, voi
     the global comment)
 */
 local uLong ziplocal_SearchCentralDir OF
-((zlib_filefunc_def const * pzlib_filefunc_def, voidpf filestream));
+	((zlib_filefunc_def const * pzlib_filefunc_def, voidpf filestream));
 
 local uLong ziplocal_SearchCentralDir(const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream)
 {
@@ -2059,10 +2060,10 @@ local uLong ziplocal_SearchCentralDir(const zlib_filefunc_def* pzlib_filefunc_de
 
 /************************************************************/
 extern zipFile ZEXPORT zipOpen2
-(const char * pathname,
- int32_t append,
- zipcharpc *,
- zlib_filefunc_def * pzlib_filefunc_def)
+	(const char        * pathname,
+	 int32_t             append,
+	 zipcharpc         *,
+	 zlib_filefunc_def * pzlib_filefunc_def)
 {
 	zip_internal ziinit;
 	zip_internal * zi;
@@ -2288,22 +2289,22 @@ extern zipFile ZEXPORT zipOpen (const char* pathname, int32_t append)
 }
 
 extern int32_t ZEXPORT zipOpenNewFileInZip3
-(zipFile file,
- const char * filename,
- const zip_fileinfo * zipfi,
- const void * extrafield_local,
- uInt size_extrafield_local,
- const void * extrafield_global,
- uInt size_extrafield_global,
- const char * comment,
- int32_t method,
- int32_t level,
- int32_t raw,
- int32_t windowBits,
- int32_t memLevel,
- int32_t strategy,
- const char * password,
- uLong)
+	(zipFile              file,
+	 char         const * filename,
+	 zip_fileinfo const * zipfi,
+	 void         const * extrafield_local,
+	 uInt                 size_extrafield_local,
+	 void         const * extrafield_global,
+	 uInt                 size_extrafield_global,
+	 char         const * comment,
+	 int32_t              method,
+	 int32_t              level,
+	 int32_t              raw,
+	 int32_t              windowBits,
+	 int32_t              memLevel,
+	 int32_t              strategy,
+	 char         const * password,
+	 uLong)
 {
 	zip_internal * zi;
 	uInt size_filename;
@@ -2568,43 +2569,43 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 }
 
 extern int32_t ZEXPORT zipOpenNewFileInZip2
-(zipFile file, char const * filename, zip_fileinfo const * zipfi,
- void const * extrafield_local,  uInt size_extrafield_local,
- void const * extrafield_global, uInt size_extrafield_global,
- char const * comment,
- int32_t method,
- int32_t level,
- int32_t raw)
+	(zipFile file, char const * filename, zip_fileinfo const * zipfi,
+	 void const * extrafield_local,  uInt size_extrafield_local,
+	 void const * extrafield_global, uInt size_extrafield_global,
+	 char const * comment,
+	 int32_t method,
+	 int32_t level,
+	 int32_t raw)
 {
 	return
 		zipOpenNewFileInZip3
-		(file, filename, zipfi,
-		 extrafield_local,  size_extrafield_local,
-		 extrafield_global, size_extrafield_global,
-		 comment,
-		 method,
-		 level,
-		 raw,
-		 -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, NULL, 0);
+			(file, filename, zipfi,
+			 extrafield_local,  size_extrafield_local,
+			 extrafield_global, size_extrafield_global,
+			 comment,
+			 method,
+			 level,
+			 raw,
+			 -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, NULL, 0);
 }
 
 extern int32_t ZEXPORT zipOpenNewFileInZip
-(zipFile file, char const * filename, zip_fileinfo const * zipfi,
- void const * extrafield_local,  uInt size_extrafield_local,
- void const * extrafield_global, uInt size_extrafield_global,
- char const * comment,
- int32_t method,
- int32_t level)
+	(zipFile file, char const * filename, zip_fileinfo const * zipfi,
+	 void const * extrafield_local,  uInt size_extrafield_local,
+	 void const * extrafield_global, uInt size_extrafield_global,
+	 char const * comment,
+	 int32_t method,
+	 int32_t level)
 {
 	return
 		zipOpenNewFileInZip2
-		(file, filename, zipfi,
-		 extrafield_local,  size_extrafield_local,
-		 extrafield_global, size_extrafield_global,
-		 comment,
-		 method,
-		 level,
-		 0);
+			(file, filename, zipfi,
+			 extrafield_local,  size_extrafield_local,
+			 extrafield_global, size_extrafield_global,
+			 comment,
+			 method,
+			 level,
+			 0);
 }
 
 local int32_t zipFlushWriteBuffer(zip_internal* zi)
@@ -2939,25 +2940,25 @@ extern int32_t ZEXPORT zipClose (zipFile file, const char* global_comment)
 #endif
 
 voidpf ZCALLBACK fopen_file_func   OF
-((voidpf opaque, const char * filename, int32_t mode));
+	((voidpf opaque, const char * filename, int32_t mode));
 
 uLong ZCALLBACK fread_file_func    OF
-((voidpf opaque, voidpf stream, void * buf, uLong size));
+	((voidpf opaque, voidpf stream, void * buf, uLong size));
 
 uLong ZCALLBACK fwrite_file_func   OF
-((voidpf opaque, voidpf stream, const void * buf, uLong size));
+	((voidpf opaque, voidpf stream, const void * buf, uLong size));
 
 long ZCALLBACK ftell_file_func     OF
-((voidpf opaque, voidpf stream));
+	((voidpf opaque, voidpf stream));
 
 long ZCALLBACK fseek_file_func     OF
-((voidpf opaque, voidpf stream, uLong offset, int32_t origin));
+	((voidpf opaque, voidpf stream, uLong offset, int32_t origin));
 
 int32_t ZCALLBACK fclose_file_func OF
-((voidpf opaque, voidpf stream));
+	((voidpf opaque, voidpf stream));
 
 int32_t ZCALLBACK ferror_file_func OF
-((voidpf opaque, voidpf stream));
+	((voidpf opaque, voidpf stream));
 
 
 voidpf ZCALLBACK fopen_file_func (voidpf, const char* filename, int32_t mode) {

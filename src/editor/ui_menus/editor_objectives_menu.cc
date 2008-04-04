@@ -61,8 +61,8 @@ private:
 };
 
 Edit_Objective_Window::Edit_Objective_Window
-(Editor_Interactive * const parent,
- UI::Table<Objective &>::Entry_Record & te)
+	(Editor_Interactive                   * const parent,
+	 UI::Table<Objective &>::Entry_Record &       te)
 :
 UI::Window(parent, 0, 0, 250, 85, _("Edit Objective")),
 m_parent  (parent),

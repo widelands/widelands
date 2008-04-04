@@ -26,9 +26,9 @@
 using Widelands::TCoords;
 
 int32_t Editor_Set_Terrain_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	assert
 		(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);

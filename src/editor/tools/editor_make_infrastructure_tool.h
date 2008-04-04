@@ -47,6 +47,6 @@ private:
 };
 
 int32_t Editor_Make_Infrastructure_Tool_Callback
-(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 
 #endif

@@ -32,9 +32,9 @@
  * be changed to load a 8 bit file directly, however.
  */
 Texture::Texture
-(const char            & fnametmpl,
- const uint32_t              frametime,
- const SDL_PixelFormat & format)
+	(char            const &       fnametmpl,
+	 uint32_t                const frametime,
+	 SDL_PixelFormat const &       format)
 :
 m_colormap (0),
 m_pixels   (0),

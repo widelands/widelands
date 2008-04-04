@@ -33,7 +33,7 @@ namespace Widelands {
 
 
 void Game_Player_Economies_Data_Packet::Read
-(FileSystem & fs, Game * game, Map_Map_Object_Loader * const mol)
+	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const mol)
 throw (_wexception)
 {
 	FileRead fr;
@@ -100,7 +100,7 @@ throw (_wexception)
  * Write Function
  */
 void Game_Player_Economies_Data_Packet::Write
-(FileSystem & fs, Game * game, Map_Map_Object_Saver * const mos)
+	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const mos)
 throw (_wexception)
 {
 	FileWrite fw;

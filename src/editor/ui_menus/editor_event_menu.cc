@@ -49,7 +49,7 @@ inline Editor_Interactive & Editor_Event_Menu::eia() {
 
 
 Editor_Event_Menu::Editor_Event_Menu
-(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
 :
 UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 {

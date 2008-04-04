@@ -195,9 +195,9 @@ void Surface::fast_blit(Surface* src) {
  * Blend to colors; only needed for calc_minimap_color below
  */
 inline static uint32_t blend_color
-(const SDL_PixelFormat & format,
- const uint32_t clr1,
- const Uint8 r2, const Uint8 g2, const Uint8 b2)
+	(SDL_PixelFormat const &       format,
+	 uint32_t                const clr1,
+	 Uint8 const r2, Uint8 const g2, Uint8 const b2)
 {
 	Uint8 r1, g1, b1;
 	SDL_GetRGB(clr1, &const_cast<SDL_PixelFormat &>(format), &r1, &g1, &b1);
@@ -215,12 +215,12 @@ Return the color to be used in the minimap for the given field.
 ===============
 */
 inline static uint32_t calc_minimap_color
-(const SDL_PixelFormat & format,
- Widelands::Editor_Game_Base const & egbase,
- Widelands::FCoords          const   f,
- const uint32_t flags,
- Widelands::Player_Number    const owner,
- const bool see_details)
+	(SDL_PixelFormat             const &       format,
+	 Widelands::Editor_Game_Base const &       egbase,
+	 Widelands::FCoords                  const f,
+	 uint32_t                            const flags,
+	 Widelands::Player_Number            const owner,
+	 bool                                const see_details)
 {
 	uint32_t pixelcolor = 0;
 
@@ -265,15 +265,15 @@ inline static uint32_t calc_minimap_color
 
 template<typename T>
 static void draw_minimap_int
-(Uint8 * const             pixels,
- const uint16_t              pitch,
- const SDL_PixelFormat   & format,
- const uint32_t                mapwidth,
- Widelands::Editor_Game_Base const &       egbase,
- Widelands::Player           const * const player,
- const Rect                rc,
- const Point               viewpoint,
- const uint32_t                flags)
+	(Uint8                             * const pixels,
+	 uint16_t                            const pitch,
+	 SDL_PixelFormat             const &       format,
+	 uint32_t                            const mapwidth,
+	 Widelands::Editor_Game_Base const &       egbase,
+	 Widelands::Player           const * const player,
+	 Rect                                const rc,
+	 Point                               const viewpoint,
+	 uint32_t                            const flags)
 {
 	Widelands::Map const & map = egbase.map();
 	if (not player or player->see_all()) for (uint32_t y = 0; y < rc.h; ++y) {
@@ -320,11 +320,11 @@ viewpt is the field at the top left of the rectangle.
 ===============
 */
 void Surface::draw_minimap
-(Widelands::Editor_Game_Base const &       egbase,
- Widelands::Player           const * const player,
- const Rect                rc,
- const Point               viewpt,
- const uint32_t                flags)
+	(Widelands::Editor_Game_Base const &       egbase,
+	 Widelands::Player           const * const player,
+	 Rect                                const rc,
+	 Point                               const viewpt,
+	 uint32_t                            const flags)
 {
 	//TODO: this const_cast is evil and should be exorcised.
 	Uint8 * const pixels = const_cast<Uint8 *>(static_cast<const Uint8 *>(get_pixels()));

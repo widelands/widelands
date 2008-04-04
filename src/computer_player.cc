@@ -856,7 +856,7 @@ void Computer_Player::update_mineable_field (MineableField* field)
 }
 
 void Computer_Player::consider_productionsite_influence
-(BuildableField * field, Coords const, const BuildingObserver & bo)
+	(BuildableField * const field, Coords, BuildingObserver const & bo)
 {
 	if (bo.need_trees)
 		++field->tree_consumers_nearby;
@@ -1168,7 +1168,8 @@ void Computer_Player::lose_immovable (PlayerImmovable* pi)
 
 /* CheckStepRoadAI */
 bool CheckStepRoadAI::allowed
-(Map * map, FCoords, FCoords end, int32_t, CheckStep::StepId id) const
+	(Map * const map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
+	const
 {
 	uint8_t endcaps = player->get_buildcaps(end);
 

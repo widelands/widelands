@@ -32,10 +32,10 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 void Map_Variable_Data_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- const bool skip,
- Map_Map_Object_Loader * const)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	if (skip)
@@ -85,9 +85,7 @@ throw (_wexception)
 
 
 void Map_Variable_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	Profile prof;

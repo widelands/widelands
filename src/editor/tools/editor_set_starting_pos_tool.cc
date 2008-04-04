@@ -33,7 +33,7 @@ static int32_t m_current_player;
  * static callback function for overlay calculation
  */
 int32_t Editor_Tool_Set_Starting_Pos_Callback
-(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t)
+	(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t)
 {
 	Widelands::Map const & map = *static_cast<Widelands::Map const *>(data);
 
@@ -65,9 +65,9 @@ Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
 
 
 int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
@@ -125,7 +125,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 }
 
 Widelands::Player_Number Editor_Set_Starting_Pos_Tool::get_current_player
-() const
+	() const
 throw ()
 {return m_current_player;}
 

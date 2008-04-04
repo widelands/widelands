@@ -28,9 +28,9 @@
  * Deletes the bob at the given location
 */
 int32_t Editor_Delete_Bob_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	const int32_t radius = parent.get_sel_radius();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr

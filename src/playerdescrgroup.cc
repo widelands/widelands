@@ -42,10 +42,10 @@ struct PlayerDescriptionGroupImpl {
 };
 
 PlayerDescriptionGroup::PlayerDescriptionGroup
-(UI::Panel              * const parent,
- int32_t const x, int32_t const y,
- GameSettingsProvider* settings,
- uint32_t plnum)
+	(UI::Panel            * const parent,
+	 int32_t const x, int32_t const y,
+	 GameSettingsProvider * const settings,
+	 uint32_t               const plnum)
 :
 UI::Panel(parent, x, y, 450, 20),
 d(new PlayerDescriptionGroupImpl)

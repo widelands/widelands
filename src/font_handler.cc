@@ -81,17 +81,17 @@ uint32_t Font_Handler::get_fontheight(const std::string & name, const int32_t si
  */
 // TODO: rename this to draw text
 void Font_Handler::draw_string
-(RenderTarget & dst,
- const std::string & fontname,
- const int32_t fontsize, const RGBColor fg, const RGBColor bg,
- Point dstpoint,
- const std::string & text,
- const Align align,
- const int32_t wrap,
- const Widget_Cache widget_cache,
- uint32_t * const widget_cache_id,
- const int32_t caret,
- bool transparent)
+	(RenderTarget & dst,
+	 std::string const & fontname,
+	 int32_t const fontsize, RGBColor const fg, RGBColor const bg,
+	 Point                     dstpoint,
+	 std::string const &       text,
+	 Align               const align,
+	 int32_t             const wrap,
+	 Widget_Cache        const widget_cache,
+	 uint32_t          * const widget_cache_id,
+	 int32_t             const caret,
+	 bool                const transparent)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 	//Width and height of text, needed for alignment
@@ -157,9 +157,9 @@ void Font_Handler::draw_string
 * Creates a Widelands surface of the given text, checks if multiline or not
 */
 uint32_t Font_Handler::create_text_surface
-(TTF_Font & f, const RGBColor fg, const RGBColor bg,
- const std::string & text, const Align align, const int32_t wrap,
- const int32_t caret, bool transparent)
+	(TTF_Font & f, RGBColor const fg, RGBColor const bg,
+	 std::string const & text, Align const align, int32_t const wrap,
+	 int32_t const caret, bool const transparent)
 {
 	return
 		convert_sdl_surface
@@ -176,9 +176,11 @@ uint32_t Font_Handler::create_text_surface
  * This function renders a short (single line) text surface
  */
 SDL_Surface* Font_Handler::create_single_line_text_surface
-(TTF_Font & font, const RGBColor fg, const RGBColor bg,
- std::string text, const Align,
- const int32_t caret)
+	(TTF_Font & font,
+	 RGBColor const fg, RGBColor const bg,
+	 std::string       text,
+	 Align,
+	 int32_t     const caret)
 {
 	// render this block in a SDL Surface
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
@@ -211,10 +213,13 @@ SDL_Surface* Font_Handler::create_single_line_text_surface
  * Horizontal alignment is now recognized correctly
  */
 SDL_Surface* Font_Handler::create_static_long_text_surface
-(TTF_Font & font,
- const RGBColor fg, const RGBColor bg,
- std::string text, const Align align, const int32_t wrap, const int32_t line_spacing,
- int32_t caret)
+	(TTF_Font & font,
+	 RGBColor const fg, RGBColor const bg,
+	 std::string       text,
+	 Align       const align,
+	 int32_t     const wrap,
+	 int32_t     const line_spacing,
+	 int32_t           caret)
 {
 	assert(wrap > 0);
 	assert(text.size() > 0);
@@ -280,9 +285,9 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 }
 
 void Font_Handler::render_caret
-(TTF_Font & font,
- SDL_Surface & line,
- const std::string & text_caret_pos)
+	(TTF_Font          & font,
+	 SDL_Surface       & line,
+	 std::string const & text_caret_pos)
 {
 	int32_t caret_x, caret_y;
 
@@ -306,10 +311,13 @@ void Font_Handler::render_caret
 * is blit into one big surface by the richtext widget itself
 */
 SDL_Surface* Font_Handler::draw_string_sdl_surface
-(const std::string & fontname, const int32_t fontsize,
- const RGBColor fg, const RGBColor bg,
- const std::string & text,
- const Align align, const int32_t wrap, const int32_t style, const int32_t line_spacing)
+	(std::string const & fontname, int32_t const fontsize,
+	 RGBColor const fg, RGBColor const bg,
+	 std::string const &       text,
+	 Align               const align,
+	 int32_t             const wrap,
+	 int32_t             const style,
+	 int32_t             const line_spacing)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 	TTF_SetFontStyle(&font, style);
@@ -321,9 +329,9 @@ SDL_Surface* Font_Handler::draw_string_sdl_surface
 * Creates the SDL surface, checks if multiline or not
 */
 SDL_Surface* Font_Handler::create_sdl_text_surface
-(TTF_Font & font, const RGBColor fg, const RGBColor bg,
- const std::string & text,
- const Align align, const int32_t wrap, const int32_t line_spacing)
+	(TTF_Font & font, RGBColor const fg, RGBColor const bg,
+	 std::string const & text,
+	 Align const align, int32_t const wrap, int32_t const line_spacing)
 {
 	return
 		(wrap > 0  ?
@@ -340,14 +348,14 @@ SDL_Surface* Font_Handler::create_sdl_text_surface
  * and \param bg is used only for antialiasing
  */
 void Font_Handler::draw_richtext
-(RenderTarget & dst,
- RGBColor bg,
- Point dstpoint,
- std::string text,
- int32_t wrap,
- Widget_Cache widget_cache,
- uint32_t * const widget_cache_id,
- bool transparent)
+	(RenderTarget &       dst,
+	 RGBColor       const bg,
+	 Point          const dstpoint,
+	 std::string          text,
+	 int32_t              wrap,
+	 Widget_Cache         widget_cache,
+	 uint32_t     * const widget_cache_id,
+	 bool           const transparent)
 {
 	uint32_t picid;
 	if (widget_cache == Widget_Cache_Use) {
@@ -409,15 +417,16 @@ void Font_Handler::draw_richtext
 					rend_cur_images.push_back(image->m_surface);
 				}
 			}
-			SDL_Surface * const block_images = rend_cur_images.size() ?
+			SDL_Surface * const block_images =
+				rend_cur_images.size() ?
 				join_sdl_surfaces
-				(img_surf_w, img_surf_h,
-				 rend_cur_images,
-				 bg,
-				 Align_Left,
-				 0,
-				 true,
-				 true)
+					(img_surf_w, img_surf_h,
+					 rend_cur_images,
+					 bg,
+					 Align_Left,
+					 0,
+					 true,
+					 true)
 				:
 				0;
 
@@ -601,22 +610,24 @@ SDL_Surface* Font_Handler::render_space(Text_Block &block, RGBColor bg, int32_t 
 	SDL_Surface *rend_space = 0;
 	rend_space =
 		draw_string_sdl_surface
-		(block.get_font_face (),
-		 block.get_font_size (),
-		 block.get_font_color(),
-		 bg,
-		 " ",
-		 Align_Left,
-		 -1,
-		 style,
-		 block.get_line_spacing());
+			(block.get_font_face (),
+			 block.get_font_size (),
+			 block.get_font_color(),
+			 bg,
+			 " ",
+			 Align_Left,
+			 -1,
+			 style,
+			 block.get_line_spacing());
 	return rend_space;
 }
 
 //gets size of picid
 void Font_Handler::get_size_from_cache
-(const uint32_t widget_cache_id, uint32_t & w, uint32_t & h)
-{g_gr->get_picture_size(widget_cache_id, w, h);}
+	(uint32_t const widget_cache_id, uint32_t & w, uint32_t & h)
+{
+	g_gr->get_picture_size(widget_cache_id, w, h);
+}
 
 //creates an empty sdl surface of given size
 SDL_Surface* Font_Handler::create_empty_sdl_surface(uint32_t w, uint32_t h) {
@@ -634,13 +645,13 @@ SDL_Surface* Font_Handler::create_empty_sdl_surface(uint32_t w, uint32_t h) {
 
 //joins a vectror of surfaces in one big surface
 SDL_Surface * Font_Handler::join_sdl_surfaces
-(const uint32_t w, const uint32_t h,
- const std::vector<SDL_Surface *> & surfaces,
- const RGBColor bg,
- const Align align,
- const int32_t spacing,
- const bool vertical,
- const bool keep_surfaces)
+	(uint32_t const w, uint32_t const h,
+	 std::vector<SDL_Surface *> const &       surfaces,
+	 RGBColor                           const bg,
+	 Align                              const align,
+	 int32_t                            const spacing,
+	 bool                               const vertical,
+	 bool                               const keep_surfaces)
 {
 	SDL_Surface * global_surface = create_empty_sdl_surface
 		(h ? w : 0, w ? h + spacing * surfaces.size() : 0);
@@ -685,7 +696,7 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
  * If transparent is true, background is transparent
  */
 uint32_t Font_Handler::convert_sdl_surface
-(SDL_Surface & surface, const RGBColor bg, bool transparent)
+	(SDL_Surface & surface, RGBColor const bg, bool const transparent)
 {
 	Surface & surf = *new Surface();
 
@@ -738,7 +749,9 @@ void Font_Handler::delete_widget_cache(uint32_t widget_cache_id) {
 //Method taken from Wesnoth.
 //http://www.wesnoth.org
 std::string Font_Handler::word_wrap_text
-(TTF_Font & font, const std::string & unwrapped_text, const int32_t max_width)
+	(TTF_Font          &       font,
+	 std::string const &       unwrapped_text,
+	 int32_t             const max_width)
 {
 	//std::cerr << "Wrapping word " << unwrapped_text << "\n";
 
@@ -810,14 +823,14 @@ std::string Font_Handler::word_wrap_text
 }
 
 std::string Font_Handler::word_wrap_text
-(const std::string & fontname, const int32_t fontsize,
- const std::string & unwrapped_text, const int32_t max_width)
+	(std::string const & fontname,       int32_t const fontsize,
+	 std::string const & unwrapped_text, int32_t const max_width)
 {
 	return
 		word_wrap_text
-		(*m_font_loader->get_font(fontname, fontsize),
-		 unwrapped_text,
-		 max_width);
+			(*m_font_loader->get_font(fontname, fontsize),
+			 unwrapped_text,
+			 max_width);
 }
 
 //removes a leading spacer
@@ -831,9 +844,9 @@ std::string Font_Handler::remove_first_space(const std::string &text) {
 
 //calculates size of a given text
 void Font_Handler::get_size
-(const std::string & fontname, const int32_t fontsize,
- std::string text,
- int32_t *w, int32_t *h, int32_t wrap)
+	(std::string const & fontname, int32_t const fontsize,
+	 std::string text,
+	 int32_t * const w, int32_t * const h, int32_t const wrap)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 

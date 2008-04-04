@@ -48,24 +48,18 @@
 
 using namespace Widelands;
 
-EncyclopediaWindow::EncyclopediaWindow (Interactive_Player& plr, UI::UniqueWindow::Registry& registry) :
-
+EncyclopediaWindow::EncyclopediaWindow
+	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
+:
 UI::UniqueWindow
-(&plr, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribe ware encyclopedia")),
-
+	(&plr, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribe ware encyclopedia")),
 interactivePlayer(plr),
-
-wares(this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
-
-prodSites(this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140),
-
+wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
+prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140),
 condTable
-(this, WINDOW_WIDTH / 2, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140),
-
-descrTxt(this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, ""),
-
-tribe(&interactivePlayer.get_player()->tribe())
-
+	(this, WINDOW_WIDTH / 2, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140),
+descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, ""),
+tribe            (&interactivePlayer.get_player()->tribe())
 {
 	wares.selected.set(this, &EncyclopediaWindow::wareSelected);
 
@@ -232,10 +226,10 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 }
 
 void EncyclopediaWindow::createCondTableEntry
-(const uint32_t            index,
- const std::string   & wareName,
- const bool            consumed,
- const WareCondition & wareCondition)
+	(uint32_t              const index,
+	 std::string   const &       wareName,
+	 bool                  const consumed,
+	 WareCondition const &       wareCondition)
 {
 	Item_Ware_Descr const & curWare =
 		*tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));

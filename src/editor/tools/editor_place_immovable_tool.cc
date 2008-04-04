@@ -30,9 +30,9 @@
  * and places this on the current field
 */
 int32_t Editor_Place_Immovable_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	const int32_t radius = parent.get_sel_radius();
 	if (not get_nr_enabled()) return radius;

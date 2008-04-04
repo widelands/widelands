@@ -29,7 +29,7 @@ namespace Widelands {
 
 
 void Game_Preload_Data_Packet::Read
-(FileSystem & fs, Game *, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game *, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	Profile prof;
@@ -49,7 +49,7 @@ throw (_wexception)
 
 
 void Game_Preload_Data_Packet::Write
-(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 

@@ -42,7 +42,7 @@ inline Editor_Interactive & Event_Move_View_Option_Menu::eia() {
 
 
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu
-(Editor_Interactive & parent, Widelands::Event_Move_View & event)
+	(Editor_Interactive & parent, Widelands::Event_Move_View & event)
 :
 UI::Window(&parent, 0, 0, 180, 200, _("Move View Event Options")),
 m_event   (event),

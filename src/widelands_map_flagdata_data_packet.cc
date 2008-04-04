@@ -45,10 +45,10 @@ Map_Flagdata_Data_Packet::~Map_Flagdata_Data_Packet() {}
 
 
 void Map_Flagdata_Data_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- const bool skip,
- Map_Map_Object_Loader * const ol)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip)
@@ -190,10 +190,10 @@ throw (_wexception)
 
 
 void Map_Flagdata_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const os)
-throw (_wexception)
+	(FileSystem           &       fs,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
+	throw (_wexception)
 {
 	FileWrite fw;
 

@@ -85,10 +85,10 @@ Initialize the grid
 ===============
 */
 BuildGrid::BuildGrid
-(UI::Panel* parent,
- Widelands::Tribe_Descr const & tribe,
- const int32_t x, const int32_t y,
- int32_t cols)
+	(UI::Panel                    * parent,
+	 Widelands::Tribe_Descr const & tribe,
+	 int32_t const x, int32_t const y,
+	 int32_t                        cols)
 :
 UI::Icon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols),
 m_tribe(tribe)
@@ -272,9 +272,10 @@ Initialize a field action window, creating the appropriate buttons.
 ===============
 */
 FieldActionWindow::FieldActionWindow
-(Interactive_Base           * const iabase,
- Widelands::Player          * const plr,
- UI::UniqueWindow::Registry * const registry) :
+	(Interactive_Base           * const iabase,
+	 Widelands::Player          * const plr,
+	 UI::UniqueWindow::Registry * const registry)
+:
 	UI::UniqueWindow(iabase, registry, 68, 34, _("Action")),
 	m_iabase(iabase),
 	m_plr(plr),
@@ -595,7 +596,7 @@ Convenience function: Adds a new tab to the main tab panel
 ===============
 */
 uint32_t FieldActionWindow::add_tab
-(const char * picname, UI::Panel * panel, const std::string & tooltip_text)
+	(char const * picname, UI::Panel * panel, std::string const & tooltip_text)
 {
 	return
 		m_tabpanel->add
@@ -809,7 +810,7 @@ The mouse pointer has moved away from the icon for the building with the index i
 ===============
 */
 void FieldActionWindow::building_icon_mouse_out
-(Widelands::Building_Index::value_t)
+	(Widelands::Building_Index::value_t)
 {
 	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
@@ -826,7 +827,7 @@ The mouse pointer has moved to the icon for the building with the index idx.
 ===============
 */
 void FieldActionWindow::building_icon_mouse_in
-(Widelands::Building_Index::value_t const idx)
+	(Widelands::Building_Index::value_t const idx)
 {
 	if (m_iabase->m_show_workarea_preview) {
 		assert(not m_workarea_preview_job_id);
@@ -956,9 +957,9 @@ Bring up a field action window or continue road building.
 ===============
 */
 void show_field_action
-(Interactive_Base           * const iabase,
- Widelands::Player          * const player,
- UI::UniqueWindow::Registry * const registry)
+	(Interactive_Base           * const iabase,
+	 Widelands::Player          * const player,
+	 UI::UniqueWindow::Registry * const registry)
 {
 	FieldActionWindow *faw;
 

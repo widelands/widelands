@@ -37,7 +37,7 @@ bool Requirements::check(Map_Object* obj) const
  * Read this requirement from a file
  */
 void Requirements::Read
-(FileRead * fr, Editor_Game_Base *egbase, Map_Map_Object_Loader *mol)
+	(FileRead * fr, Editor_Game_Base * egbase, Map_Map_Object_Loader * mol)
 {
 	try {
 		const uint16_t packet_version = fr->Unsigned16();
@@ -92,7 +92,8 @@ void Requirements::Read
 }
 
 void Requirements::Write
-(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver *mos) const
+	(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * mos)
+	const
 {
 	fw->Unsigned16(REQUIREMENTS_VERSION);
 

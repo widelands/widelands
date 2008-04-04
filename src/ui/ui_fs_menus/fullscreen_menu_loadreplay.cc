@@ -30,24 +30,19 @@
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay()
 :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
-
 m_back
-(this,
- 570, 505, 200, 26, 0,
- &Fullscreen_Menu_LoadReplay::end_modal, this, 0,
- _("Back")),
-
+	(this,
+	 570, 505, 200, 26, 0,
+	 &Fullscreen_Menu_LoadReplay::end_modal, this, 0,
+	 _("Back")),
 m_ok
-(this, 570, 535, 200, 26, 2,
- &Fullscreen_Menu_LoadReplay::clicked_ok, this,
- _("OK"),
- std::string(),
- false),
-
-// Create the list area
-	m_list(this, 15, 205, 455, 365),
-
-	m_title(this, MENU_XRES / 2, 90, _("Choose a replay!"), Align_HCenter)
+	(this, 570, 535, 200, 26, 2,
+	 &Fullscreen_Menu_LoadReplay::clicked_ok, this,
+	 _("OK"),
+	 std::string(),
+	 false),
+m_list(this, 15, 205, 455, 365),
+m_title(this, MENU_XRES / 2, 90, _("Choose a replay!"), Align_HCenter)
 {
 	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	m_list.selected.set(this, &Fullscreen_Menu_LoadReplay::replay_selected);

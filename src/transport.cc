@@ -178,7 +178,7 @@ WareInstance IMPLEMENTATION
 
 
 WareInstance::WareInstance
-(Ware_Index const i, const Item_Ware_Descr * const ware_descr)
+	(Ware_Index const i, const Item_Ware_Descr * const ware_descr)
 :
 Map_Object   (ware_descr),
 m_economy    (0),
@@ -1026,11 +1026,10 @@ void Flag::add_flag_job(Game *, int32_t workerware, std::string programname) {
 
 	j.request =
 		new Request
-		(this,
-		 workerware,
-		 &Flag::flag_job_request_callback,
-		 this,
-		 Request::WORKER);
+			(this,
+			 workerware,
+			 &Flag::flag_job_request_callback, this,
+			 Request::WORKER);
 	j.program = programname;
 
 	m_flag_jobs.push_back(j);
@@ -1041,7 +1040,7 @@ void Flag::add_flag_job(Game *, int32_t workerware, std::string programname) {
  * the flag. Give him his job.
 */
 void Flag::flag_job_request_callback
-(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
+	(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
 {
 	Flag * const flag = static_cast<Flag *>(data);
 
@@ -1359,16 +1358,16 @@ void Road::request_carrier(Game * g) {
 
 	m_carrier_request =
 		new Request
-		(this,
-		 get_owner()->tribe().get_safe_worker_index("carrier"),
-		 &Road::request_carrier_callback, this, Request::WORKER);
+			(this,
+			 get_owner()->tribe().get_safe_worker_index("carrier"),
+			 &Road::request_carrier_callback, this, Request::WORKER);
 }
 
 /**
  * The carrier has arrived successfully.
 */
 void Road::request_carrier_callback
-(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
+	(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
 {
 	assert(w);
 
@@ -1560,7 +1559,7 @@ void Route::clear()
  * Every route has at least one flag.
 */
 Flag * Route::get_flag
-(Editor_Game_Base * const g, std::vector<Flag *>::size_type const idx)
+	(Editor_Game_Base * const g, std::vector<Flag *>::size_type const idx)
 {
 	assert(idx < m_route.size());
 	return dynamic_cast<Flag *>(m_route[idx].get(g));
@@ -1935,7 +1934,12 @@ void WaresQueue::update() {
 	if (m_filled < m_size)
 	{
 		if (!m_request)
-			m_request = new Request(m_owner, m_ware, &WaresQueue::request_callback, this, Request::WARE);
+			m_request =
+				new Request
+					(m_owner,
+					 m_ware,
+					 &WaresQueue::request_callback, this,
+					 Request::WARE);
 
 		m_request->set_count(m_size - m_filled);
 		m_request->set_required_interval(m_consume_interval);
@@ -1960,11 +1964,11 @@ void WaresQueue::set_callback(callback_t* fn, void* data)
  * Called when an item arrives at the owning building.
 */
 void WaresQueue::request_callback
-(Game     * game,
- Request  *,
- Ware_Index const ware,
- Worker   * const w,
- void     * const data)
+	(Game     *       game,
+	 Request  *,
+	 Ware_Index const ware,
+	 Worker   * const w,
+	 void     * const data)
 {
 	WaresQueue & wq = *static_cast<WaresQueue *>(data);
 
@@ -2079,7 +2083,10 @@ void WaresQueue::Read
 		if (request) {
 			m_request =
 				new Request
-				(m_owner, 0, &WaresQueue::request_callback, this, Request::WORKER);
+					(m_owner,
+					 0,
+					 &WaresQueue::request_callback, this,
+					 Request::WORKER);
 			m_request->Read(fr, egbase, ol);
 		} else {
 			m_request = 0;
@@ -3143,7 +3150,7 @@ void Cmd_Call_Economy_Balance::execute(Game* g)
  * Read and write
  */
 void Cmd_Call_Economy_Balance::Read
-(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -3169,7 +3176,7 @@ void Cmd_Call_Economy_Balance::Read
 	}
 }
 void Cmd_Call_Economy_Balance::Write
-(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 

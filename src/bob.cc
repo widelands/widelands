@@ -669,11 +669,11 @@ bool Bob::start_task_movepath
  * Start moving along the given, precalculated path.
  */
 void Bob::start_task_movepath
-(Game* g,
- const Path          & path,
- const DirAnimations & anims,
- const bool            forceonlast,
- const int32_t         only_step)
+	(Game                *       g,
+	 Path          const &       path,
+	 DirAnimations const &       anims,
+	 bool                  const forceonlast,
+	 int32_t               const only_step)
 {
 	assert(path.get_start() == get_position());
 
@@ -695,13 +695,13 @@ void Bob::start_task_movepath
  * the given path index.
  */
 bool Bob::start_task_movepath
-(Game* g,
- const Map           & map,
- const Path          & origpath,
- const int32_t         index,
- const DirAnimations & anims,
- const bool            forceonlast,
- const int32_t         only_step)
+	(Game                *       g,
+	 Map           const &       map,
+	 Path          const &       origpath,
+	 int32_t               const index,
+	 DirAnimations const &       anims,
+	 bool                  const forceonlast,
+	 int32_t               const only_step)
 {
 	CoordPath path(map, origpath);
 	int32_t curidx = path.get_index(get_position());
@@ -995,7 +995,7 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
  */
 bool Bob::checkFieldBlocked(Game*, const FCoords&, bool commit)
 {
-	(void)commit;
+	static_cast<void>(commit);
 	return false;
 }
 

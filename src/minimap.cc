@@ -30,10 +30,9 @@
 
 
 MiniMap::View::View
-(UI::Panel & parent,
- const  int32_t x, const  int32_t y,
- const uint32_t w, const uint32_t h,
- Interactive_Base & iabase)
+	(UI::Panel & parent,
+	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
+	 Interactive_Base & iabase)
 :
 UI::Panel       (&parent, x, y, 10, 10),
 m_iabase      (iabase),
@@ -130,51 +129,47 @@ inline uint32_t MiniMap::number_of_button_rows    () const throw () {return 2;}
 inline uint32_t MiniMap::but_w() const throw ()
 {return m_view.get_w() / number_of_buttons_per_row();}
 inline uint32_t MiniMap::but_h() const throw () {return 20;}
-MiniMap::MiniMap(Interactive_Base & iabase, UI::UniqueWindow::Registry * registry)
+MiniMap::MiniMap
+	(Interactive_Base & iabase, UI::UniqueWindow::Registry * registry)
 :
 UI::UniqueWindow(&iabase, registry, 0, 0, _("Map")),
 m_view(*this, 0, 0, 0, 0, iabase),
 
 button_terrn
-(this,
- but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
- 0,
- g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"),
- &MiniMap::toggle, this, Terrn,
- _("Terrain")),
-
+	(this,
+	 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"),
+	 &MiniMap::toggle, this, Terrn,
+	 _("Terrain")),
 button_owner
-(this,
- but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
- 0,
- g_gr->get_picture(PicMod_UI, "pics/button_owner.png"),
- &MiniMap::toggle, this, Owner,
- _("Owner")),
-
+	(this,
+	 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/button_owner.png"),
+	 &MiniMap::toggle, this, Owner,
+	 _("Owner")),
 button_flags
-(this,
- but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
- 0,
- g_gr->get_picture(PicMod_UI, "pics/button_flags.png"),
- &MiniMap::toggle, this, Flags,
- _("Flags")),
-
+	(this,
+	 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/button_flags.png"),
+	 &MiniMap::toggle, this, Flags,
+	 _("Flags")),
 button_roads
-(this,
- but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
- 0,
- g_gr->get_picture(PicMod_UI, "pics/button_roads.png"),
- &MiniMap::toggle, this, Roads,
- _("Roads")),
-
+	(this,
+	 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
+	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/button_roads.png"),
+	 &MiniMap::toggle, this, Roads,
+	 _("Roads")),
 button_bldns
-(this,
- but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
- 0,
- g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
- &MiniMap::toggle, this, Bldns,
- _("Buildings"))
-
+	(this,
+	 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
+	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
+	 &MiniMap::toggle, this, Bldns,
+	 _("Buildings"))
 {
 	set_inner_size
 		(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());

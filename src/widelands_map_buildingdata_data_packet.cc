@@ -59,10 +59,10 @@ namespace Widelands {
 
 
 void Map_Buildingdata_Data_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- const bool skip,
- Map_Map_Object_Loader * const ol)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip) return;
@@ -160,10 +160,10 @@ throw (_wexception)
 
 
 void Map_Buildingdata_Data_Packet::read_constructionsite
-(ConstructionSite & constructionsite,
- FileRead & fr,
- Editor_Game_Base* egbase,
- Map_Map_Object_Loader * const ol)
+	(ConstructionSite      &       constructionsite,
+	 FileRead              &       fr,
+	 Editor_Game_Base      *       egbase,
+	 Map_Map_Object_Loader * const ol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -180,12 +180,13 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 
 			delete constructionsite.m_builder_request;
 			if (fr.Unsigned8()) {
-				constructionsite.m_builder_request = new Request
-					(&constructionsite,
-					 0,
-					 ConstructionSite::request_builder_callback,
-					 &constructionsite,
-					 Request::WORKER);
+				constructionsite.m_builder_request =
+					new Request
+						(&constructionsite,
+						 0,
+						 ConstructionSite::request_builder_callback,
+						 &constructionsite,
+						 Request::WORKER);
 				constructionsite.m_builder_request->Read(&fr, egbase, ol);
 			} else
 				constructionsite.m_builder_request = 0;
@@ -231,10 +232,10 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 
 
 void Map_Buildingdata_Data_Packet::read_warehouse
-(Warehouse & warehouse,
- FileRead & fr,
- Editor_Game_Base* egbase,
- Map_Map_Object_Loader * const ol)
+	(Warehouse             &       warehouse,
+	 FileRead              &       fr,
+	 Editor_Game_Base      *       egbase,
+	 Map_Map_Object_Loader * const ol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -258,12 +259,12 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				delete warehouse.m_requests[i];
 			warehouse.m_requests.resize(fr.Unsigned16());
 			for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i) {
-				Request & req = *new Request
-					(&warehouse,
-					 0,
-					 Warehouse::idle_request_cb,
-					 &warehouse,
-					 Request::WORKER);
+				Request & req =
+					*new Request
+						(&warehouse,
+						 0,
+						 Warehouse::idle_request_cb, &warehouse,
+						 Request::WORKER);
 				req.Read(&fr, egbase, ol);
 				warehouse.m_requests[i] = &req;
 			}
@@ -303,10 +304,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 
 
 void Map_Buildingdata_Data_Packet::read_militarysite
-(MilitarySite & militarysite,
- FileRead & fr,
- Editor_Game_Base* egbase,
- Map_Map_Object_Loader * const ol)
+	(MilitarySite          &       militarysite,
+	 FileRead              &       fr,
+	 Editor_Game_Base      *       egbase,
+	 Map_Map_Object_Loader * const ol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -321,10 +322,9 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 					militarysite.m_soldier_request =
 						new Request
 							(&militarysite,
-							0,
-							MilitarySite::request_soldier_callback,
-							&militarysite,
-							Request::WORKER);
+							 0,
+							 MilitarySite::request_soldier_callback, &militarysite,
+							 Request::WORKER);
 					militarysite.m_soldier_request->Read(&fr, egbase, ol);
 				}
 			} else if (packet_version == 2) {
@@ -333,11 +333,10 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 					// Oh well...
 					Request* req =
 						new Request
-						(&militarysite,
-						 0,
-						 MilitarySite::request_soldier_callback,
-						 &militarysite,
-						 Request::WORKER);
+							(&militarysite,
+							 0,
+							 MilitarySite::request_soldier_callback, &militarysite,
+							 Request::WORKER);
 					req->Read(&fr, egbase, ol);
 					delete req;
 				}
@@ -367,10 +366,10 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 }
 
 void Map_Buildingdata_Data_Packet::read_productionsite
-(ProductionSite & productionsite,
- FileRead & fr,
- Editor_Game_Base* egbase,
- Map_Map_Object_Loader * const ol)
+	(ProductionSite        &       productionsite,
+	 FileRead              &       fr,
+	 Editor_Game_Base      *       egbase,
+	 Map_Map_Object_Loader * const ol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -391,11 +390,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				for (uint16_t i = 0; i < nr_requests; ++i) {
 					Request & req =
 						*new Request
-						(&productionsite,
-						 0,
-						 ProductionSite::request_worker_callback,
-						 &productionsite,
-						 Request::WORKER);
+							(&productionsite,
+							 0,
+							 ProductionSite::request_worker_callback, &productionsite,
+							 Request::WORKER);
 					req.Read(&fr, egbase, ol);
 					productionsite.m_worker_requests[i] = &req;
 				}
@@ -458,10 +456,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 
 
 void Map_Buildingdata_Data_Packet::read_trainingsite
-(TrainingSite & trainingsite,
- FileRead & fr,
- Editor_Game_Base* egbase,
- Map_Map_Object_Loader * const ol)
+	(TrainingSite          &       trainingsite,
+	 FileRead              &       fr,
+	 Editor_Game_Base      *       egbase,
+	 Map_Map_Object_Loader * const ol)
 {
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
@@ -474,8 +472,12 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			delete trainingsite.m_soldier_request;
 			trainingsite.m_soldier_request = 0;
 			if (fr.Unsigned8()) {
-				trainingsite.m_soldier_request = new Request
-					(&trainingsite, 0, TrainingSite::request_soldier_callback, &trainingsite, Request::WORKER);
+				trainingsite.m_soldier_request =
+					new Request
+						(&trainingsite,
+						 0,
+						 TrainingSite::request_soldier_callback, &trainingsite,
+						 Request::WORKER);
 				trainingsite.m_soldier_request->Read(&fr, egbase, ol);
 			}
 
@@ -510,8 +512,12 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			{
 				uint16_t const nr_requests = fr.Unsigned16();
 				for (uint16_t i = 0; i < nr_requests; ++i) {
-					Request* req = new Request
-						(&trainingsite, 0, TrainingSite::request_soldier_callback, &trainingsite, Request::WORKER);
+					Request* req =
+						new Request
+							(&trainingsite,
+							 0,
+							 TrainingSite::request_soldier_callback, &trainingsite,
+							 Request::WORKER);
 					req->Read(&fr, egbase, ol);
 					delete req;
 				}
@@ -562,9 +568,9 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 
 
 void Map_Buildingdata_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const os)
+	(FileSystem           &       fs,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -645,10 +651,10 @@ throw (_wexception)
 
 
 void Map_Buildingdata_Data_Packet::write_constructionsite
-(const ConstructionSite & constructionsite,
- FileWrite & fw,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const os)
+	(ConstructionSite const &       constructionsite,
+	 FileWrite              &       fw,
+	 Editor_Game_Base       *       egbase,
+	 Map_Map_Object_Saver   * const os)
 {
 
 	fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
@@ -694,10 +700,10 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 
 
 void Map_Buildingdata_Data_Packet::write_warehouse
-(const Warehouse & warehouse,
- FileWrite & fw,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const os)
+	(Warehouse      const &       warehouse,
+	 FileWrite            &       fw,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 {
 	fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
@@ -757,10 +763,10 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 
 
 void Map_Buildingdata_Data_Packet::write_militarysite
-(const MilitarySite & militarysite,
- FileWrite & fw,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const os)
+	(MilitarySite   const &       militarysite,
+	 FileWrite            &       fw,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 {
 	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
 	write_productionsite(militarysite, fw, egbase, os);
@@ -779,10 +785,10 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 
 
 void Map_Buildingdata_Data_Packet::write_productionsite
-(const ProductionSite & productionsite,
- FileWrite & fw,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const os)
+	(ProductionSite const &       productionsite,
+	 FileWrite            &       fw,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 {
 	fw.Unsigned16(CURRENT_PRODUCTIONSITE_PACKET_VERSION);
 
@@ -834,10 +840,10 @@ void Map_Buildingdata_Data_Packet::write_productionsite
  * write for trainingsite
  */
 void Map_Buildingdata_Data_Packet::write_trainingsite
-(const TrainingSite & trainingsite,
- FileWrite & fw,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const os)
+	(TrainingSite   const &       trainingsite,
+	 FileWrite            &       fw,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 {
 	fw.Unsigned16(CURRENT_TRAININGSITE_PACKET_VERSION);
 

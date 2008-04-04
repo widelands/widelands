@@ -42,10 +42,10 @@ Map_Player_Names_And_Tribes_Data_Packet::
  * this is a scenario packet, it might be that we have to skip it
  */
 void Map_Player_Names_And_Tribes_Data_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- const bool skip,
- Map_Map_Object_Loader * const)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	Pre_Read(fs, egbase->get_map(), skip);
@@ -53,7 +53,7 @@ throw (_wexception)
 
 
 void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
-(FileSystem & fs, Map* map, const bool skip)
+	(FileSystem & fs, Map * const map, bool const skip)
 {
 	if (skip) return;
 
@@ -81,9 +81,9 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 
 
 void Map_Player_Names_And_Tribes_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Map_Map_Object_Saver * const)
+	(FileSystem           &       fs,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	Profile prof;

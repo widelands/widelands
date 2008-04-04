@@ -29,7 +29,7 @@
  * split a string by whitespace
  */
 std::vector<std::string> split_string
-(const std::string & s, const char * const separators)
+	(std::string const & s, char const * const separators)
 {
 	std::vector<std::string> result;
 	for

@@ -20,10 +20,10 @@
 #include "editor_tool_options_menu.h"
 
 Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
-(Editor_Interactive         &       parent,
- UI::UniqueWindow::Registry &       registry,
- const uint32_t width, const uint32_t height,
- const char                 * const title)
+	(Editor_Interactive         &       parent,
+	 UI::UniqueWindow::Registry &       registry,
+	 uint32_t const width, uint32_t const height,
+	 char                 const * const title)
 :
 UI::UniqueWindow(&parent, &registry, width, height, title),
 m_current_pointer(parent.tools.current_pointer)

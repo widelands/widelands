@@ -39,10 +39,10 @@ namespace Widelands {
 #define FILENAME_SIZE 32
 
 void Map_Players_AreaWatchers_Data_Packet::Read
-(FileSystem       & fs,
- Editor_Game_Base * egbase,
- const bool         skip,
- Map_Map_Object_Loader * const ol)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip) return;
@@ -96,7 +96,9 @@ throw (_wexception)
 
 
 void Map_Players_AreaWatchers_Data_Packet::Write
-(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
+	(FileSystem           &       fs,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");

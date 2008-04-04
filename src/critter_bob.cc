@@ -123,7 +123,7 @@ Remove this critter
 ==============================
 */
 void Critter_BobProgram::parse_remove
-(Critter_BobAction * act, Parser *, const std::vector<std::string> & cmd)
+	(Critter_BobAction * act, Parser *, std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: remove");
@@ -149,7 +149,8 @@ bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 */
 
 Critter_Bob_Descr::Critter_Bob_Descr
-(const Tribe_Descr * const tribe_descr, const std::string & critter_bob_name)
+	(Tribe_Descr const * const tribe_descr,
+	 std::string const &       critter_bob_name)
 : Bob::Descr(tribe_descr, critter_bob_name), m_swimming(0)
 {}
 
@@ -172,8 +173,7 @@ Get a program from the workers description.
 ===============
 */
 const Critter_BobProgram* Critter_Bob_Descr::get_program
-(std::string const & programname)
-const
+	(std::string const & programname) const
 {
 	const ProgramMap::const_iterator it = m_programs.find(programname);
 	if (it == m_programs.end())

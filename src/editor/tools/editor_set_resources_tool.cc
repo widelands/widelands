@@ -32,9 +32,9 @@
  * Sets the resources of the current to a fixed value
 */
 int32_t Editor_Set_Resources_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	Widelands::World const & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();

@@ -30,7 +30,9 @@
  * Callback function to calculate correct overlays
  */
 int32_t Editor_Make_Infrastructure_Tool_Callback
-(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t player)
+	(Widelands::TCoords<Widelands::FCoords> const c,
+	 void                                 *       data,
+	 int32_t                                const player)
 {
 	return
 		static_cast<Widelands::Editor_Game_Base const *>(data)->player(player)
@@ -45,9 +47,9 @@ int32_t Editor_Make_Infrastructure_Tool_Callback
  * Obviously, this function ignores the sel radius
 */
 int32_t Editor_Make_Infrastructure_Tool::handle_click_impl
-(Widelands::Map                     &,
- Widelands::Node_and_Triangle<> const,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &,
+	 Widelands::Node_and_Triangle<> const,
+	 Editor_Interactive           &       parent)
 {
 	show_field_action
 		(&parent, parent.egbase().get_player(m_player), &m_registry);

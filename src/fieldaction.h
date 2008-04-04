@@ -31,15 +31,15 @@ struct Interactive_Base;
 
 // fieldaction.cc
 void show_field_action
-(Interactive_Base           * parent,
- Widelands::Player          * player,
- UI::UniqueWindow::Registry * registry);
+	(Interactive_Base           * parent,
+	 Widelands::Player          * player,
+	 UI::UniqueWindow::Registry * registry);
 
 // building_ui.cc
 void show_bulldoze_confirm
-(Interactive_Base           * player,
- Widelands::Building        * building,
- Widelands::PlayerImmovable * todestroy);
+	(Interactive_Base           * player,
+	 Widelands::Building        * building,
+	 Widelands::PlayerImmovable * todestroy);
 
 // battle.cc
 //void show_attack_dialog((Interactive_Base* player, Building* building);

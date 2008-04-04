@@ -123,9 +123,7 @@ uint32_t GameTips::colorvalue_from_hex(char const c1, char const c2) {
 }
 
 // convert CSS hex color value to RGBColor
-RGBColor GameTips::color_from_hex
-(const char * hexcode, const RGBColor & def)
-{
+RGBColor GameTips::color_from_hex(char const * hexcode, RGBColor const & def) {
 	if (NULL == hexcode)
 		return def;
 	const int32_t len = strlen(hexcode);

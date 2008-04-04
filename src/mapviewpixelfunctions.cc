@@ -32,7 +32,12 @@ using namespace Widelands;
  * Calculate brightness based upon the slopes.
  */
 float MapviewPixelFunctions::calc_brightness
-(const int32_t l, const int32_t r, const int32_t tl, const int32_t tr, const int32_t bl, const int32_t br)
+	(int32_t const  l,
+	 int32_t const  r,
+	 int32_t const tl,
+	 int32_t const tr,
+	 int32_t const bl,
+	 int32_t const br)
 {
 	static Vector sun_vect = Vector(V3, -V3, -V3); //  |sun_vect| = 1
 
@@ -76,7 +81,7 @@ float MapviewPixelFunctions::calc_brightness
  * taking wrap-arounds into account.
 */
 uint32_t MapviewPixelFunctions::calc_pix_distance
-(const Map & map, Point a, Point b)
+	(Map const & map, Point a, Point b)
 {
 	normalize_pix(map, a);
 	normalize_pix(map, b);
@@ -94,7 +99,7 @@ uint32_t MapviewPixelFunctions::calc_pix_distance
 
 
 Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
-(const Map & map, uint32_t x, uint32_t y)
+	(Map const & map, uint32_t x, uint32_t y)
 {
 	const uint16_t mapwidth = map.get_width();
 	const uint16_t mapheight = map.get_height();

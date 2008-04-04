@@ -44,7 +44,7 @@ inline Editor_Interactive & Event_Unhide_Area_Option_Menu::eia() {
 
 
 Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu
-(Editor_Interactive & parent, Widelands::Event_Unhide_Area & event)
+	(Editor_Interactive & parent, Widelands::Event_Unhide_Area & event)
 :
 UI::Window   (&parent, 0, 0, 180, 280, _("Unhide Area Event Options")),
 m_event   (event),

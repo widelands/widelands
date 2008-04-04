@@ -161,7 +161,8 @@ is a building placed on this field
 ===============
 */
 void Editor_Game_Base::unconquer_area
-(Player_Area<Area<FCoords> > player_area, const Player_Number destroying_player)
+	(Player_Area<Area<FCoords> > player_area,
+	 Player_Number         const destroying_player)
 {
 	assert(0 <= player_area.x);
 	assert     (player_area.x < map().get_width());
@@ -200,9 +201,9 @@ that is set there.
 */
 void Editor_Game_Base::conquer_area(Player_Area<Area<FCoords> > player_area) {
 	assert(0 <= player_area.x);
-	assert(player_area.x < map().get_width());
+	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
-	assert(player_area.y < map().get_height());
+	assert     (player_area.y < map().get_height());
 	const Field & first_field = map()[0];
 	assert(&first_field <= player_area.field);
 	assert                (player_area.field < &first_field + map().max_index());
@@ -230,7 +231,7 @@ and might be consumed..
 ===============
 */
 void Editor_Game_Base::conquer_area_no_building
-(const Player_Area<Area<FCoords> > player_area)
+	(Player_Area<Area<FCoords> > const player_area)
 {do_conquer_area(player_area, true);}
 
 
@@ -241,12 +242,12 @@ Additionally, it updates the visible area for that player.
 ===============
 */
 void Editor_Game_Base::do_conquer_area
-(Player_Area<Area<FCoords> > player_area,
- const bool conquer,
- const Player_Number preferred_player,
- const bool neutral_when_no_influence,
- const bool neutral_when_competing_influence,
- const bool conquer_guarded_location_by_superior_influence)
+	(Player_Area<Area<FCoords> > player_area,
+	 bool          const conquer,
+	 Player_Number const preferred_player,
+	 bool          const neutral_when_no_influence,
+	 bool          const neutral_when_competing_influence,
+	 bool          const conquer_guarded_location_by_superior_influence)
 {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
@@ -404,9 +405,9 @@ the game starts. Similar for remote players.
 ===============
 */
 Player * Editor_Game_Base::add_player
-(const Player_Number player_number,
- const std::string & tribe,
- const std::string & name)
+	(Player_Number       const player_number,
+	 std::string const &       tribe,
+	 std::string const &       name)
 {
 	assert(1 <= player_number);
 	assert(player_number <= MAX_PLAYERS);
@@ -428,7 +429,7 @@ Player * Editor_Game_Base::add_player
  * Load the given tribe into structure
  */
 const Tribe_Descr & Editor_Game_Base::manually_load_tribe
-(const std::string & tribe)
+	(std::string const & tribe)
 {
 	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
 	for
@@ -458,7 +459,7 @@ const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 }
 
 void Editor_Game_Base::inform_players_about_ownership
-(Map_Index const i, Player_Number const new_owner)
+	(Map_Index const i, Player_Number const new_owner)
 {
 	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
 		if (Player * const p = m_players[plnum]) {
@@ -467,7 +468,7 @@ void Editor_Game_Base::inform_players_about_ownership
 		}
 }
 void Editor_Game_Base::inform_players_about_immovable
-(Map_Index const i, Map_Object_Descr const * const descr)
+	(Map_Index const i, Map_Object_Descr const * const descr)
 {
 	if (descr != &g_road_descr)
 		for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
@@ -583,9 +584,9 @@ idx is the building type index.
 ===============
 */
 Building * Editor_Game_Base::warp_building
-(const Coords c,
- const Player_Number owner,
- const Building_Descr::Index i)
+	(Coords                const c,
+	 Player_Number         const owner,
+	 Building_Descr::Index const i)
 {
 	Player & plr = player(owner);
 	return plr.tribe().get_building_descr(i)->create(*this, plr, c, false);
@@ -621,7 +622,8 @@ idx is the bob type.
 ===============
 */
 Bob * Editor_Game_Base::create_bob
-(const Coords c, const Bob::Descr::Index idx, const Tribe_Descr * const tribe)
+	(Coords const c,
+	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe)
 {
 	Bob::Descr & descr =
 		*
@@ -642,7 +644,7 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & Editor_Game_Base::create_immovable
-(Coords const c, int32_t const idx, Tribe_Descr const * const tribe)
+	(Coords const c, int32_t const idx, Tribe_Descr const * const tribe)
 {
 	Immovable_Descr & descr =
 		*
@@ -656,7 +658,7 @@ Immovable & Editor_Game_Base::create_immovable
 }
 
 Immovable & Editor_Game_Base::create_immovable
-(Coords const c, std::string const & name, Tribe_Descr const * const tribe)
+	(Coords const c, std::string const & name, Tribe_Descr const * const tribe)
 {
 	const int32_t idx =
 		tribe ?
@@ -766,7 +768,7 @@ void Editor_Game_Base::cleanup_for_load
 
 
 void Editor_Game_Base::set_road
-(const FCoords f, uint8_t const direction, uint8_t const roadtype)
+	(FCoords const f, uint8_t const direction, uint8_t const roadtype)
 {
 	const Map & m = map();
 	const Field & first_field = m[0];

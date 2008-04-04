@@ -39,7 +39,8 @@
 namespace Widelands {
 
 TrainingSite_Descr::TrainingSite_Descr
-(const Tribe_Descr & tribe_descr, const std::string & trainingsite_name) :
+	(Tribe_Descr const & tribe_descr, std::string const & trainingsite_name)
+:
 ProductionSite_Descr(tribe_descr, trainingsite_name),
 m_num_soldiers      (0),
 m_train_hp          (false),
@@ -339,7 +340,7 @@ void TrainingSite::update_soldier_request() {
  * we only need to update the request structure.
  */
 void TrainingSite::request_soldier_callback
-(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
+	(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
 {
 	TrainingSite* const tsite = static_cast<TrainingSite *>(data);
 	Soldier* s = dynamic_cast<Soldier*>(w);

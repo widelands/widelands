@@ -43,7 +43,7 @@ inline Editor_Interactive & Trigger_Time_Option_Menu::eia() {
 
 
 Trigger_Time_Option_Menu::Trigger_Time_Option_Menu
-(Editor_Interactive & parent, Widelands::Trigger_Time & trigger)
+	(Editor_Interactive & parent, Widelands::Trigger_Time & trigger)
 :
 UI::Window(&parent, 0, 0, 164, 180, _("Trigger Option Menu")),
 m_trigger (trigger)

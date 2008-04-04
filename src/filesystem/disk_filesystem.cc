@@ -70,10 +70,10 @@ bool RealFSImpl::IsWritable() const {
  */
 // note: the Win32 version may be broken, feel free to fix it
 int32_t RealFSImpl::FindFiles
-(std::string const & path,
- std::string const & pattern,
- filenameset_t     * results,
- uint32_t            depth)
+	(std::string const & path,
+	 std::string const & pattern,
+	 filenameset_t     * results,
+	 uint32_t            depth)
 #ifdef _WIN32
 {
 	std::string buf;
@@ -179,7 +179,7 @@ FileSystem * RealFSImpl::MakeSubFileSystem(std::string const & path) {
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* RealFSImpl::CreateSubFileSystem
-(std::string const & path, Type const fs)
+	(std::string const & path, Type const fs)
 {
 	if (FileExists(path))
 		throw wexception
@@ -380,7 +380,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
  * Throws an exception if it fails.
  */
 void RealFSImpl::Write
-(std::string const & fname, void const * const data, int32_t const length)
+	(std::string const & fname, void const * const data, int32_t const length)
 {
 	std::string fullname;
 	FILE *f;
@@ -401,7 +401,7 @@ void RealFSImpl::Write
 
 // rename a file or directory
 void RealFSImpl::Rename
-(const std::string & old_name, const std::string & new_name)
+	(std::string const & old_name, std::string const & new_name)
 {
 	const std::string fullname1 = FS_CanonicalizeName(old_name);
 	const std::string fullname2 = FS_CanonicalizeName(new_name);
@@ -446,9 +446,7 @@ private:
 
 };
 
-StreamRead * RealFSImpl::OpenStreamRead
-(const std::string & fname)
-{
+StreamRead * RealFSImpl::OpenStreamRead(std::string const & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
 
 	return new RealFSStreamRead(fullname);
@@ -494,9 +492,7 @@ private:
 
 };
 
-StreamWrite * RealFSImpl::OpenStreamWrite
-(const std::string & fname)
-{
+StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
 
 	return new RealFSStreamWrite(fullname);

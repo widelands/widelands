@@ -56,7 +56,7 @@ void Cmd_Destroy_Map_Object::execute(Game* g)
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
 void Cmd_Destroy_Map_Object::Read
-(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -77,7 +77,7 @@ void Cmd_Destroy_Map_Object::Read
 	}
 }
 void Cmd_Destroy_Map_Object::Write
-(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
@@ -114,7 +114,7 @@ void Cmd_Act::execute(Game* g)
 
 #define CMD_ACT_VERSION 1
 void Cmd_Act::Read
-(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -136,7 +136,7 @@ void Cmd_Act::Read
 	}
 }
 void Cmd_Act::Write
-(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);

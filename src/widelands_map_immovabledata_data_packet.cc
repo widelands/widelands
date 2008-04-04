@@ -41,10 +41,10 @@ namespace Widelands {
 
 
 void Map_Immovabledata_Data_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base *,
- const bool skip,
- Map_Map_Object_Loader * const ol)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip)
@@ -125,7 +125,7 @@ throw (_wexception)
 
 
 void Map_Immovabledata_Data_Packet::Write
-(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * const)
+	(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	throw wexception("Immovable_Data_Packet is obsolete");

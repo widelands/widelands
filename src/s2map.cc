@@ -113,7 +113,7 @@ void S2_Map_Loader::load_world() {
  * the Map* can't be set to another one.
  */
 int32_t S2_Map_Loader::load_map_complete
-(Widelands::Editor_Game_Base * const game, bool)
+	(Widelands::Editor_Game_Base * const game, bool)
 {
 	assert(get_state() == STATE_WORLD_LOADED);
 

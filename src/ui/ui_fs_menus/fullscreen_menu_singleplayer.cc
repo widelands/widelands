@@ -28,31 +28,27 @@ Fullscreen_Menu_Base("singleplmenu.jpg"),
 title(this, MENU_XRES/2, 130, _("Single Player Menu"), Align_HCenter),
 
 new_game
-(this,
- 90, 220, 200, 26,
- 1,
- &Fullscreen_Menu_SinglePlayer::end_modal, this, New_Game,
- _("New Game")),
-
+	(this,
+	 90, 220, 200, 26,
+	 1,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, this, New_Game,
+	 _("New Game")),
 load_game
-(this,
- 90, 260, 200, 26,
- 1,
- &Fullscreen_Menu_SinglePlayer::end_modal, this, Load_Game,
- _("Load Game")),
-
+	(this,
+	 90, 260, 200, 26,
+	 1,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Load_Game,
+	 _("Load Game")),
 campaign
-(this,
- 90, 300, 200, 26,
- 1,
- &Fullscreen_Menu_SinglePlayer::end_modal, this, Campaign,
- _("Campaigns")),
-
+	(this,
+	 90, 300, 200, 26,
+	 1,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Campaign,
+	 _("Campaigns")),
 back
-(this,
- 90, 400, 200, 26,
- 0,
- &Fullscreen_Menu_SinglePlayer::end_modal, this, Back,
- _("Back"))
-
+	(this,
+	 90, 400, 200, 26,
+	 0,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Back,
+	 _("Back"))
 {title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);}

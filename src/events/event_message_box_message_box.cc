@@ -34,9 +34,9 @@
  * The message box itself
  */
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box
-(Widelands::Game              * game,
- Widelands::Event_Message_Box * event,
- int32_t gposx, int32_t gposy, int32_t w, int32_t h)
+	(Widelands::Game              * game,
+	 Widelands::Event_Message_Box * event,
+	 int32_t gposx, int32_t gposy, int32_t w, int32_t h)
 :
 UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()),
 m_game    (game)

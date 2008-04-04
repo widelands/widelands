@@ -70,7 +70,7 @@ FileSystem::FileSystem()
  * want two consecutive dots)
  */
 std::string FileSystem::AutoExtension
-(std::string const & filename, std::string const & extension)
+	(std::string const & filename, std::string const & extension)
 {
 	const SSS_T suffix_length=extension.size()+1;
 	const SSS_T startpos=filename.size()-suffix_length;
@@ -233,7 +233,7 @@ std::string FileSystem::GetHomedir()
  * \todo This does not really belong into a filesystem class
  */
 std::vector<std::string> FileSystem::FS_Tokenize
-(std::string const & path) const
+	(std::string const & path) const
 {
 	std::vector<std::string> components;
 	SSS_T pos;  //start of token
@@ -265,9 +265,7 @@ std::vector<std::string> FileSystem::FS_Tokenize
  *
  * \todo Enable non-Unix paths
  */
-std::string FileSystem::FS_CanonicalizeName
-(std::string const & path) const
-{
+std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
 

@@ -141,7 +141,7 @@ struct Interactive_PlayerImpl {
 
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
-(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t)
+	(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t)
 {
 	return
 		static_cast<const Interactive_Player *>(data)->get_player()->
@@ -159,40 +159,33 @@ Initialize
 Interactive_Player::Interactive_Player(Widelands::Game & g, uint8_t const plyn)
 : Interactive_Base(g), m(new Interactive_PlayerImpl), m_game(&g),
 
-#define INIT_BUTTON(picture, callback, tooltip)                               \
+#define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  &Interactive_Player::callback, this,                                         \
  tooltip                                                                      \
 
 m_toggle_chat
-(INIT_BUTTON("menu_chat",             toggle_chat,         _("Chat"))),
-
+	(INIT_BTN("menu_chat",             toggle_chat,         _("Chat"))),
 m_toggle_options_menu
-(INIT_BUTTON("menu_options_menu",     toggle_options_menu, _("Options"))),
-
+	(INIT_BTN("menu_options_menu",     toggle_options_menu, _("Options"))),
 m_toggle_main_menu
-(INIT_BUTTON("menu_toggle_menu",      toggle_main_menu,    _("Menu"))),
-
+	(INIT_BTN("menu_toggle_menu",      toggle_main_menu,    _("Menu"))),
 m_toggle_objectives
-(INIT_BUTTON("menu_objectives",       toggle_objectives,   _("Objectives"))),
-
+	(INIT_BTN("menu_objectives",       toggle_objectives,   _("Objectives"))),
 m_toggle_minimap
-(INIT_BUTTON("menu_toggle_minimap",   toggle_minimap,      _("Minimap"))),
-
+	(INIT_BTN("menu_toggle_minimap",   toggle_minimap,      _("Minimap"))),
 m_toggle_buildhelp
-(INIT_BUTTON("menu_toggle_buildhelp", toggle_buildhelp,    _("Buildhelp"))),
-
+	(INIT_BTN("menu_toggle_buildhelp", toggle_buildhelp,    _("Buildhelp"))),
 #if 0
 m_toggle_resources
-(INIT_BUTTON
- ("editor_menu_tool_change_resources",
-  toggle_resources,
-  _("Resource information"))),
+	(INIT_BTN
+	 	("editor_menu_tool_change_resources",
+	 	 toggle_resources,
+	 	 _("Resource information"))),
 #endif
-
 m_toggle_help
-(INIT_BUTTON("menu_help",             toggle_help,         _("Ware help")))
+	(INIT_BTN("menu_help",             toggle_help,         _("Ware help")))
 {
 	m_toolbar.add(&m_toggle_chat,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);

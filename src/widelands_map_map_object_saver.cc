@@ -106,7 +106,7 @@ Serial Map_Map_Object_Saver::register_object(Map_Object const * const obj) {
  * to regenerate the dependencies between the objects.
  */
 uint32_t Map_Map_Object_Saver::get_object_file_index
-(const Map_Object * const obj)
+	(Map_Object const * const obj)
 {
 	MapObjectRec* rec = get_object_record(obj);
 	return rec->fileserial;

@@ -212,7 +212,7 @@ Immovable_Descr IMPLEMENTATION
  * Initialize with sane defaults
 */
 Immovable_Descr::Immovable_Descr
-(const Tribe_Descr * const owner_tribe, const std::string & immovable_name)
+	(Tribe_Descr const * const owner_tribe, std::string const & immovable_name)
 :
 m_name(immovable_name), m_size(BaseImmovable::NONE), m_owner_tribe(owner_tribe)
 {m_default_encodedata.clear();}
@@ -234,7 +234,7 @@ Immovable_Descr::~Immovable_Descr()
  * Find the program of the given name.
 */
 const ImmovableProgram* Immovable_Descr::get_program
-(std::string programname) const
+	(std::string programname) const
 {
 	ProgramMap::const_iterator it = m_programs.find(programname);
 
@@ -561,10 +561,10 @@ void Immovable::run_program(Game* g, bool killable)
  * coords is the field that draw() was called for.
 */
 void Immovable::draw
-(const Editor_Game_Base & game,
- RenderTarget & dst,
- const FCoords,
- const Point pos)
+	(Editor_Game_Base const &       game,
+	 RenderTarget           &       dst,
+	 FCoords,
+	 Point                    const pos)
 {
 	if (m_anim)
 		dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);
@@ -736,9 +736,9 @@ Map_Object::Loader* Immovable::load
  * animation \<name\> \<duration\>
 */
 void ImmovableProgram::parse_animation
-(ImmovableAction                * act,
- const ProgramParser            * parser,
- const std::vector<std::string> & cmd)
+	(ImmovableAction                * act,
+	 ProgramParser            const * parser,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 3)
 		throw wexception("Syntax: animation [name] [duration]");
@@ -769,9 +769,9 @@ bool Immovable::run_animation(Game* g, bool, const ImmovableAction & action)
 */
 
 void ImmovableProgram::parse_playFX
-(ImmovableAction* act,
- const ProgramParser *,
- const std::vector<std::string> & cmd)
+	(ImmovableAction                * act,
+	 ProgramParser            const *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size()<2 || cmd.size()>3)
 		throw wexception("Syntax: playFX <fxname> [priority]");
@@ -800,9 +800,9 @@ bool Immovable::run_playFX(Game *, bool, const ImmovableAction & action)
  * transform \<name of immovable\>
 */
 void ImmovableProgram::parse_transform
-(ImmovableAction* act,
- const ProgramParser *,
- const std::vector<std::string> & cmd)
+	(ImmovableAction                * act,
+	 ProgramParser            const *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Syntax: transform [bob name]");
@@ -850,9 +850,9 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
  * remove
 */
 void ImmovableProgram::parse_remove
-(ImmovableAction * act,
- const ProgramParser *,
- const std::vector<std::string> & cmd)
+	(ImmovableAction                * act,
+	 ProgramParser            const *,
+	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Syntax: remove");

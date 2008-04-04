@@ -103,9 +103,9 @@ Radiogroup::~Radiogroup() {while (m_buttons) delete m_buttons;}
  * Returns the ID of the new button.
 */
 int32_t Radiogroup::add_button
-(Panel * parent,
- const int32_t x, const int32_t y,
- const uint32_t picid, const char * const tooltip)
+	(Panel * const parent,
+	 int32_t const x, int32_t const y,
+	 uint32_t const picid, char const * const tooltip)
 {
 	++m_highestid;
 	(new Radiobutton(parent, x, y, picid, this, m_highestid))->set_tooltip

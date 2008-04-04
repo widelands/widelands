@@ -35,32 +35,23 @@
  * Loads a list of all visible campaigns
  */
 Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
-
-	// Text
-	title (this, MENU_XRES / 2, 90, _("Select a campaign"), Align_HCenter),
-
-	// List of visible, available campaigns
-	list(this, 15, 205, 455, 365),
-
-	// Info fields
-	label_campname   (this, 480, 205, _("Campaign:")),
-	tacampname       (this, 490, 225, ""),
-	label_difficulty (this, 480, 255, _("Difficulty:")),
-	tadifficulty     (this, 490, 275, ""),
-	label_campdescr  (this, 480, 305, _("Description:")),
-	tacampdescr      (this, 490, 330, 290, 190, ""),
-
+Fullscreen_Menu_Base("choosemapmenu.jpg"),
+title (this, MENU_XRES / 2, 90, _("Select a campaign"), Align_HCenter),
+list(this, 15, 205, 455, 365),
+label_campname   (this, 480, 205, _("Campaign:")),
+tacampname       (this, 490, 225, ""),
+label_difficulty (this, 480, 255, _("Difficulty:")),
+tadifficulty     (this, 490, 275, ""),
+label_campdescr  (this, 480, 305, _("Description:")),
+tacampdescr      (this, 490, 330, 290, 190, ""),
 b_ok
-(this, 490, 540, 142, 26, 2,
- &Fullscreen_Menu_CampaignSelect::clicked_ok, this,
- _("OK"), std::string(), false),
-
+	(this, 490, 540, 142, 26, 2,
+	 &Fullscreen_Menu_CampaignSelect::clicked_ok, this,
+	 _("OK"), std::string(), false),
 back
-(this, 637, 540, 143, 26, 2,
- &Fullscreen_Menu_CampaignSelect::end_modal, this, 0,
- _("Back"))
-
+	(this, 637, 540, 143, 26, 2,
+	 &Fullscreen_Menu_CampaignSelect::end_modal, this, 0,
+	 _("Back"))
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	list.selected.set(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
@@ -229,33 +220,23 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
  * Loads a list of all visible maps of selected campaign and let's the user choose one.
  */
 Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
-
-	// Text
-	title
-	(this, MENU_XRES / 2, 90, _("Choose your map!"), Align_HCenter),
-
-	// List of visible, available campaigns
-	list(this, 15, 205, 455, 365),
-
-	// Info fields
-	label_mapname   (this, 480, 205, _("Name:")),
-	tamapname       (this, 490, 225, ""),
-	label_author    (this, 480, 255, _("Author:")),
-	taauthor        (this, 490, 275, ""),
-	label_mapdescr  (this, 480, 305, _("Description:")),
-	tamapdescr      (this, 490, 330, 290, 190, ""),
-
+Fullscreen_Menu_Base("choosemapmenu.jpg"),
+title(this, MENU_XRES / 2, 90, _("Choose your map!"), Align_HCenter),
+list(this, 15, 205, 455, 365),
+label_mapname   (this, 480, 205, _("Name:")),
+tamapname       (this, 490, 225, ""),
+label_author    (this, 480, 255, _("Author:")),
+taauthor        (this, 490, 275, ""),
+label_mapdescr  (this, 480, 305, _("Description:")),
+tamapdescr      (this, 490, 330, 290, 190, ""),
 b_ok
-(this, 490, 540, 142, 26, 2,
- &Fullscreen_Menu_CampaignMapSelect::clicked_ok, this,
- _("OK"), std::string(), false),
-
+	(this, 490, 540, 142, 26, 2,
+	 &Fullscreen_Menu_CampaignMapSelect::clicked_ok, this,
+	 _("OK"), std::string(), false),
 back
-(this, 637, 540, 143, 26, 2,
- &Fullscreen_Menu_CampaignMapSelect::end_modal, this, 0,
- _("Back"))
-
+	(this, 637, 540, 143, 26, 2,
+	 &Fullscreen_Menu_CampaignMapSelect::end_modal, this, 0,
+	 _("Back"))
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);

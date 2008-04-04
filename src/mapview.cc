@@ -32,7 +32,9 @@
 #include "upcast.h"
 
 Map_View::Map_View
-(UI::Panel * parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Interactive_Base & player)
+	(UI::Panel * parent,
+	 int32_t x, int32_t y, uint32_t w, uint32_t h,
+	 Interactive_Base & player)
 :
 UI::Panel               (parent, x, y, w, h),
 m_intbase               (player),
@@ -159,7 +161,7 @@ Scroll the view according to mouse movement.
 ===============
 */
 bool Map_View::handle_mousemove
-(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
+	(Uint8 const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
 	if (m_dragging)
 	{

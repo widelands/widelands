@@ -37,9 +37,9 @@
 using Widelands::Immovable_Descr;
 
 Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu
-(Editor_Interactive          & parent,
- Editor_Place_Immovable_Tool & pit,
- UI::UniqueWindow::Registry  & registry)
+	(Editor_Interactive          & parent,
+	 Editor_Place_Immovable_Tool & pit,
+	 UI::UniqueWindow::Registry  & registry)
 :
 Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Immovable Bobs Menu")),
 m_tabpanel(this, 0, 0, 1),
@@ -111,7 +111,7 @@ m_pit     (pit)
  */
 Editor_Tool_Place_Immovable_Options_Menu::
 ~Editor_Tool_Place_Immovable_Options_Menu
-()
+	()
 {}
 
 /**

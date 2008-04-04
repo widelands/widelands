@@ -56,7 +56,7 @@ template<typename T> std::string toString(const T& x) {
 }
 
 std::vector<std::string> split_string
-(const std::string &, const char * const separators);
+	(std::string const &, char const * const separators);
 void remove_spaces(std::string &);
 void log(const char *fmt, ...);
 

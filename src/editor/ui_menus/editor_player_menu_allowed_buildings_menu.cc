@@ -41,64 +41,58 @@ using Widelands::Building_Index;
 #define middle_button_height 20
 #define label_height         20
 Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu
-(UI::Panel                  * parent,
- Widelands::Player          & player,
- UI::UniqueWindow::Registry * registry)
+	(UI::Panel                  * parent,
+	 Widelands::Player          & player,
+	 UI::UniqueWindow::Registry * registry)
 :
 UI::UniqueWindow
-(parent,
- registry,
- hmargin +
- list_width + hspacing + middle_button_width + hspacing + list_width
- + hmargin,
- vmargin + label_height + vspacing + list_height + vmargin,
- _("Allowed Buildings")),
+	(parent,
+	 registry,
+	 hmargin +
+	 list_width + hspacing + middle_button_width + hspacing + list_width
+	 + hmargin,
+	 vmargin + label_height + vspacing + list_height + vmargin,
+	 _("Allowed Buildings")),
 m_player(player),
-
 m_allowed_label
-(this,
- hmargin, vmargin, list_width, label_height,
- _("Allowed Buildings:"), Align_CenterLeft),
-
+	(this,
+	 hmargin, vmargin, list_width, label_height,
+	 _("Allowed Buildings:"), Align_CenterLeft),
 m_forbidden_label
-(this,
- hmargin + list_width + hspacing + middle_button_width + hspacing,
- m_allowed_label.get_y(),
- list_width, label_height,
- _("Forbidden Buildings:"), Align_CenterLeft),
-
+	(this,
+	 hmargin + list_width + hspacing + middle_button_width + hspacing,
+	 m_allowed_label.get_y(),
+	 list_width, label_height,
+	 _("Forbidden Buildings:"), Align_CenterLeft),
 m_allowed
-(this,
- m_allowed_label.get_x(),
- vmargin + label_height + vspacing,
- list_width, list_height),
-
+	(this,
+	 m_allowed_label.get_x(),
+	 vmargin + label_height + vspacing,
+	 list_width, list_height),
 m_forbidden
-(this,
- m_forbidden_label.get_x(), m_allowed.get_y(), list_width, list_height),
-
+	(this,
+	 m_forbidden_label.get_x(), m_allowed.get_y(), list_width, list_height),
 m_forbid_button
-(this,
- hmargin + list_width + hspacing,
- m_allowed.get_y() + (list_height - middle_button_height * 2 - vspacing) / 2,
- middle_button_width, middle_button_height,
- 1,
- &Editor_Player_Menu_Allowed_Buildings_Menu::clicked, this, false,
- ("->"),
- _("Forbid"),
- false),
-
+	(this,
+	 hmargin + list_width + hspacing,
+	 m_allowed.get_y()
+	 + (list_height - middle_button_height * 2 - vspacing) / 2,
+	 middle_button_width, middle_button_height,
+	 1,
+	 &Editor_Player_Menu_Allowed_Buildings_Menu::clicked, this, false,
+	 ("->"),
+	 _("Forbid"),
+	 false),
 m_allow_button
-(this,
- m_forbid_button.get_x(),
- m_forbid_button.get_y() + middle_button_height + vspacing,
- middle_button_width, middle_button_height,
- 1,
- &Editor_Player_Menu_Allowed_Buildings_Menu::clicked, this, true,
- _("<-"),
- _("Allow"),
- false)
-
+	(this,
+	 m_forbid_button.get_x(),
+	 m_forbid_button.get_y() + middle_button_height + vspacing,
+	 middle_button_width, middle_button_height,
+	 1,
+	 &Editor_Player_Menu_Allowed_Buildings_Menu::clicked, this, true,
+	 _("<-"),
+	 _("Allow"),
+	 false)
 {
 	m_allowed.selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
 	m_allowed.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
@@ -130,7 +124,7 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::update() {}
 */
 Editor_Player_Menu_Allowed_Buildings_Menu::
 ~Editor_Player_Menu_Allowed_Buildings_Menu
-()
+	()
 {}
 
 

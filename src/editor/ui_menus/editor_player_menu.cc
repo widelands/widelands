@@ -36,28 +36,25 @@
 
 
 Editor_Player_Menu::Editor_Player_Menu
-(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
 :
 UI::UniqueWindow(&parent, registry, 340, 400, _("Player Options")),
-
 m_add_player
-(this,
- 5, 5, 20, 20,
- 1,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
- &Editor_Player_Menu::clicked_add_player, this,
- _("Add player"),
- parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
-
+	(this,
+	 5, 5, 20, 20,
+	 1,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+	 &Editor_Player_Menu::clicked_add_player, this,
+	 _("Add player"),
+	 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 m_remove_last_player
-(this,
- get_inner_w() - 5 - 20, 5, 20, 20,
- 1,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
- &Editor_Player_Menu::clicked_remove_last_player, this,
- _("Remove last player"),
- 1 < parent.egbase().map().get_nrplayers())
-
+	(this,
+	 get_inner_w() - 5 - 20, 5, 20, 20,
+	 1,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+	 &Editor_Player_Menu::clicked_remove_last_player, this,
+	 _("Remove last player"),
+	 1 < parent.egbase().map().get_nrplayers())
 {
 	int32_t const spacing = 5;
 	int32_t const width   =20;

@@ -26,31 +26,25 @@
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 :
 Fullscreen_Menu_Base("singleplmenu.jpg"), // change this
-
-	// Text
 title(this, MENU_XRES/2, 120, _("Begin Network Game"), Align_HCenter),
-
 joingame
-(this,
- 90, 220, 200, 26,
- 1,
- &Fullscreen_Menu_NetSetup::clicked_joingame, this,
- _("Join a Game")),
-
+	(this,
+	 90, 220, 200, 26,
+	 1,
+	 &Fullscreen_Menu_NetSetup::clicked_joingame, this,
+	 _("Join a Game")),
 hostgame
-(this,
- 90, 260, 200, 26,
- 1,
- &Fullscreen_Menu_NetSetup::clicked_hostgame, this,
- _("Host a New Game")),
-
+	(this,
+	 90, 260, 200, 26,
+	 1,
+	 &Fullscreen_Menu_NetSetup::clicked_hostgame, this,
+	 _("Host a New Game")),
 back
-(this,
- 90, 340, 200, 26,
- 0,
- &Fullscreen_Menu_NetSetup::end_modal, this, CANCEL,
- _("Back")),
-
+	(this,
+	 90, 340, 200, 26,
+	 0,
+	 &Fullscreen_Menu_NetSetup::end_modal, this, CANCEL,
+	 _("Back")),
 hostname  (this, 310, 220, 200, 26, 2, 0),
 playername(this, 310, 260, 200, 26, 2, 0),
 opengames (this, 310, 300, 390, 180)
@@ -121,8 +115,8 @@ void Fullscreen_Menu_NetSetup::game_doubleclicked (uint32_t) {
 }
 
 void Fullscreen_Menu_NetSetup::update_game_info
-(UI::Table<const LAN_Open_Game * const>::Entry_Record & er,
- const LAN_Game_Info & info)
+	(UI::Table<LAN_Open_Game const * const>::Entry_Record & er,
+	 LAN_Game_Info const & info)
 {
 	er.set_string (0, info.hostname);
 	er.set_string (1, info.map);

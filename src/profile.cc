@@ -141,7 +141,7 @@ Point Section::Value::get_Point() const
 }
 
 Widelands::Coords Section::Value::get_Coords
-(Widelands::Extent const extent) const
+	(Widelands::Extent const extent) const
 {
 	char * endp = m_value;
 	long int const x = strtol(endp, &endp, 0);
@@ -346,7 +346,7 @@ const char *Section::get_safe_string(const char *name)
  * doesn't exist
  */
 Widelands::Coords Section::get_safe_Coords
-(const char * const name, Widelands::Extent const extent)
+	(char const * const name, Widelands::Extent const extent)
 {
 	if (const Value * const v = get_val(name))
 		return v->get_Coords(extent);
@@ -356,8 +356,8 @@ Widelands::Coords Section::get_safe_Coords
 
 
 Widelands::Immovable_Descr const & Section::get_safe_Immovable_Type
-(char const * tribe, char const * name,
- Widelands::Editor_Game_Base & egbase)
+	(char const * tribe, char const * name,
+	 Widelands::Editor_Game_Base & egbase)
 {
 	char const * const immname = get_safe_string(name);
 	if (char const * const tribename = get_string(tribe, 0)) {
@@ -388,9 +388,9 @@ Widelands::Immovable_Descr const & Section::get_safe_Immovable_Type
 
 
 Widelands::Building_Index Section::get_safe_Building_Index
-(const char * const name,
- Widelands::Editor_Game_Base &       egbase,
- Widelands::Player_Number      const player)
+	(char const * const name,
+	 Widelands::Editor_Game_Base &       egbase,
+	 Widelands::Player_Number      const player)
 {
 	Widelands::Tribe_Descr const & tribe =
 		egbase.manually_load_tribe
@@ -406,9 +406,9 @@ Widelands::Building_Index Section::get_safe_Building_Index
 
 
 Widelands::Building_Descr const & Section::get_safe_Building_Type
-(const char * const name,
- Widelands::Editor_Game_Base &       egbase,
- Widelands::Player_Number      const player)
+	(char const * const name,
+	 Widelands::Editor_Game_Base &       egbase,
+	 Widelands::Player_Number      const player)
 {
 	Widelands::Tribe_Descr const & tribe =
 		egbase.manually_load_tribe
@@ -496,9 +496,9 @@ Point Section::get_Point(const char * const name, const Point def)
 
 
 Widelands::Player_Number Section::get_Player_Number
-(const char * const name,
- Widelands::Player_Number const nr_players,
- Widelands::Player_Number const def)
+	(char const * const name,
+	 Widelands::Player_Number const nr_players,
+	 Widelands::Player_Number const def)
 {
 	int32_t const value = get_int(name, def);
 	if (1 <= value and value <= nr_players)
@@ -618,7 +618,8 @@ void Section::set_string(const char *name, const char *string, bool duplicate)
  * exists.
  */
 void Section::set_Coords
-(const char * const name, const Widelands::Coords value, const bool duplicate)
+	(char const * const name, Widelands::Coords const value,
+	 bool const duplicate)
 {
 	char buffer[64];
 
@@ -628,8 +629,8 @@ void Section::set_Coords
 
 
 void Section::set_Immovable_Type
-(char const * const tribe, char const * const name,
- Widelands::Immovable_Descr const & descr)
+	(char const * const tribe, char const * const name,
+	 Widelands::Immovable_Descr const & descr)
 {
 	if (Widelands::Tribe_Descr const * const tridescr = descr.get_owner_tribe())
 		create_val(tribe, tridescr->name().c_str(), false)->mark_used();
@@ -638,11 +639,11 @@ void Section::set_Immovable_Type
 
 
 void Section::set_Building_Index
-(char const                  * const name,
- Widelands::Building_Index     const value,
- Widelands::Editor_Game_Base &       egbase,
- Widelands::Player_Number      const player,
- bool                          const duplicate)
+	(char const                  * const name,
+	 Widelands::Building_Index     const value,
+	 Widelands::Editor_Game_Base &       egbase,
+	 Widelands::Player_Number      const player,
+	 bool                          const duplicate)
 {
 	create_val
 		(name,
@@ -655,9 +656,9 @@ void Section::set_Building_Index
 
 
 void Section::set_Building_Type
-(char const * const name,
- Widelands::Building_Descr const &       value,
- bool                              const duplicate)
+	(char                      const * const name,
+	 Widelands::Building_Descr const &       value,
+	 bool                              const duplicate)
 {
 	create_val(name, value.name().c_str(), duplicate)->mark_used();
 }
@@ -879,9 +880,9 @@ inline char *setEndAt(char *str, char c)
  * Args: filename  name of the source file
  */
 void Profile::read
-(const char * const filename,
- const char * const global_section,
- FileSystem & fs)
+	(char const * const filename,
+	 char const * const global_section,
+	 FileSystem & fs)
 {
 	uint32_t linenr = 0;
 	try {
@@ -1011,7 +1012,7 @@ void Profile::read
  * If used_only is true, only used sections and keys are written to the file.
  */
 void Profile::write
-(const char * const filename, const bool used_only, FileSystem & fs)
+	(char const * const filename, bool const used_only, FileSystem & fs)
 {
 	FileWrite fw;
 

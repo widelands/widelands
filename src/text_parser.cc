@@ -75,9 +75,9 @@ Text_Parser::Text_Parser() {}
 Text_Parser::~Text_Parser() {}
 
 void Text_Parser::parse
-(std::string                 & text,
- std::vector<Richtext_Block> & blocks,
- Varibale_Callback vcb, void * const vcdata)
+	(std::string                 & text,
+	 std::vector<Richtext_Block> & blocks,
+	 Varibale_Callback vcb, void * const vcdata)
 {
 	bool more_richtext_blocks = true;
 	//First while loop parses all richtext blocks (images)
@@ -116,11 +116,11 @@ void Text_Parser::parse
 }
 
 bool Text_Parser::parse_textblock
-(std::string                                       & block,
- std::string                                       & block_format,
- std::vector<std::string>                          & words,
- std::vector<std::vector<std::string>::size_type>  & line_breaks,
- Varibale_Callback vcb, void * const vcdata)
+	(std::string                                      & block,
+	 std::string                                      & block_format,
+	 std::vector<std::string>                         & words,
+	 std::vector<std::vector<std::string>::size_type> & line_breaks,
+	 Varibale_Callback vcb, void * const vcdata)
 {
 	std::string block_text;
 
@@ -183,12 +183,12 @@ void Text_Parser::split_words(std::string in, std::vector<std::string>* plist) {
 }
 
 bool Text_Parser::extract_format_block
-(std      ::string & block,
- std      ::string & block_text,
- std      ::string & block_format,
- const std::string & block_start,
- const std::string & format_end,
- const std::string & block_end)
+	(std::string       & block,
+	 std::string       & block_text,
+	 std::string       & block_format,
+	 std::string const & block_start,
+	 std::string const & format_end,
+	 std::string const & block_end)
 {
 	if (block.substr(0, block_start.size()) != block_start) {
 		const std::string::size_type format_begin_pos = block.find(block_start);

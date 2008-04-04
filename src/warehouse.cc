@@ -261,7 +261,7 @@ Initialize with sane defaults
 ===============
 */
 Warehouse_Descr::Warehouse_Descr
-(const Tribe_Descr & tribe_descr, const std::string & warehouse_name)
+	(Tribe_Descr const & tribe_descr, std::string const & warehouse_name)
 :
 Building_Descr(tribe_descr, warehouse_name),
 m_subtype     (Subtype_Normal),
@@ -836,11 +836,11 @@ Called when a transfer for one of the idle Requests completes.
 ===============
 */
 void Warehouse::idle_request_cb
-(Game     *       game,
- Request  *,
- Ware_Index const ware,
- Worker   * const w,
- void     * const data)
+	(Game     *       game,
+	 Request  *,
+	 Ware_Index const ware,
+	 Worker   * const w,
+	 void     * const data)
 {
 	if (w)
 		w->schedule_incorporate(game);

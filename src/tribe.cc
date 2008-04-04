@@ -451,7 +451,7 @@ the conf files
 ===========
 */
 void Tribe_Descr::load_warehouse_with_start_wares
-(Editor_Game_Base & egbase, Warehouse & wh) const
+	(Editor_Game_Base & egbase, Warehouse & wh) const
 {
 	typedef starting_resources_map::const_iterator smit;
 	{
@@ -582,7 +582,7 @@ Find the best matching indicator for the given amount.
 ==============
 */
 uint32_t Tribe_Descr::get_resource_indicator
-(const Resource_Descr * const res, const uint32_t amount) const
+	(Resource_Descr const * const res, uint32_t const amount) const
 {
 	if (not res or not amount) {
 		int32_t idx = get_immovable_index("resi_none");

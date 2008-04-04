@@ -27,27 +27,24 @@
 
 
 Stock_Menu::Stock_Menu
-(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
+	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&plr, &registry, 640, 480, _("Stock")),
 m_player(plr),
 waresdisplay(this, 0, 0, plr.player().tribe()),
-
 help
-(this,
- 0, 0, buttonw(3),                  30,
- 4,
- g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
- &Stock_Menu::clicked_help, this),
-
+	(this,
+	 0, 0, buttonw(3),                  30,
+	 4,
+	 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+	 &Stock_Menu::clicked_help, this),
 switchpage
-(this,
- 0, 0, buttonw(3) * 2 + hspacing(), 30,
- 4,
- g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
- &Stock_Menu::clicked_switch_page, this),
+	(this,
+	 0, 0, buttonw(3) * 2 + hspacing(), 30,
+	 4,
+	 g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
+	 &Stock_Menu::clicked_switch_page, this),
 current_page(Wares)
-
 {
 	fill_waredisplay_with_wares();
 	help      .set_pos(Point(posx(0, 3), waresdisplay.get_h()));

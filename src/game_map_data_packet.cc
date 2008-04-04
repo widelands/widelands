@@ -35,7 +35,7 @@ Game_Map_Data_Packet::~Game_Map_Data_Packet() {
 
 
 void Game_Map_Data_Packet::Read
-(FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	if (not fs.FileExists("map") or not fs.IsDirectory("map"))
@@ -62,7 +62,7 @@ void Game_Map_Data_Packet::Read_Complete(Game & game) {
 
 
 void Game_Map_Data_Packet::Write
-(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 

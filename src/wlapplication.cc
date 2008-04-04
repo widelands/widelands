@@ -627,7 +627,7 @@ void WLApplication::set_input_grab(bool grab)
  * \todo Document parameters
  */
 void WLApplication::init_graphics
-(int32_t const w, int32_t const h, int32_t const bpp, bool const fullscreen)
+	(int32_t const w, int32_t const h, int32_t const bpp, bool const fullscreen)
 {
 	if (w == m_gfx_w && h == m_gfx_h && fullscreen == m_gfx_fullscreen)
 		return;

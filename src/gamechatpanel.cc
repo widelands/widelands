@@ -24,8 +24,9 @@
  * Create a game chat panel
  */
 GameChatPanel::GameChatPanel
-(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h,
- ChatProvider & chat)
+	(UI::Panel * parent,
+	 int32_t x, int32_t y, uint32_t w, uint32_t h,
+	 ChatProvider & chat)
 :
 UI::Panel(parent, x, y, w, h),
 m_chat(chat),

@@ -29,9 +29,9 @@
  * and places this on the current field
 */
 int32_t Editor_Place_Bob_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	Widelands::Editor_Game_Base & editor = parent.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr

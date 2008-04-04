@@ -22,7 +22,7 @@
 namespace Widelands {
 
 template <> MapHollowRegion<Area<> >::MapHollowRegion
-(const Map & map, const HollowArea<Area<> > hollow_area)
+	(Map const & map, HollowArea<Area<> > const hollow_area)
 :
 m_hollow_area (hollow_area),
 m_phase       (Top),

@@ -59,7 +59,7 @@ Initialize with sane defaults
 ===============
 */
 Building_Descr::Building_Descr
-(const Tribe_Descr & tribe_descr, const std::string & building_name)
+	(Tribe_Descr const & tribe_descr, std::string const & building_name)
 :
 m_stopable       (false),
 m_tribe          (tribe_descr),
@@ -95,13 +95,13 @@ if old != 0 this is an enhancing
 ===============
 */
 Building* Building_Descr::create
-(Editor_Game_Base & egbase,
- Player & owner,
- const Coords pos,
- const bool construct,
- bool const fill,
- const Building_Descr * const old)
-const
+	(Editor_Game_Base     &       egbase,
+	 Player               &       owner,
+	 Coords                 const pos,
+	 bool                   const construct,
+	 bool                   const fill,
+	 Building_Descr const * const old)
+	const
 {
 	Building* b = construct ? create_constructionsite(old) : create_object();
 	b->m_position = pos;
@@ -267,7 +267,7 @@ if old != 0 this is an enhancement from an older building
 ===============
 */
 Building * Building_Descr::create_constructionsite
-(const Building_Descr * const old) const
+	(Building_Descr const * const old) const
 {
 	if
 		(Building_Descr * const descr =
@@ -298,9 +298,9 @@ May return 0.
 ===============
 */
 Building_Descr* Building_Descr::create_from_dir
-(const Tribe_Descr & tribe,
- const char * const directory,
- const EncodeData * const encdata)
+	(Tribe_Descr const &       tribe,
+	 char        const * const directory,
+	 EncodeData  const * const encdata)
 {
 	const char* name;
 
@@ -740,10 +740,10 @@ Draw the building.
 ===============
 */
 void Building::draw
-(const Editor_Game_Base & game,
- RenderTarget & dst,
- const FCoords coords,
- const Point pos)
+	(Editor_Game_Base const &       game,
+	 RenderTarget           &       dst,
+	 FCoords                  const coords,
+	 Point                    const pos)
 {
 	if (coords == m_position) { // draw big buildings only once
 		dst.drawanim
@@ -765,10 +765,10 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_help
-(const Editor_Game_Base & game,
- RenderTarget & dst,
- const FCoords,
- const Point pos)
+	(Editor_Game_Base const &       game,
+	 RenderTarget           &       dst,
+	 FCoords,
+	 Point                    const pos)
 {
 	const uint32_t dpyflags = game.get_iabase()->get_display_flags();
 

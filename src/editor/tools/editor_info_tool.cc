@@ -34,9 +34,9 @@
  * Show a simple info dialog with infos about this field
 */
 int32_t Editor_Info_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	Widelands::World const & world = map.world();
 	UI::Window * w =

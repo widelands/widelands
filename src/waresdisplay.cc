@@ -31,15 +31,15 @@
 #include <stdio.h>
 
 WaresDisplay::WaresDisplay
-(UI::Panel * const parent,
- int32_t const x, int32_t const y,
- Widelands::Tribe_Descr const & tribe)
+	(UI::Panel * const parent,
+	 int32_t const x, int32_t const y,
+	 Widelands::Tribe_Descr const & tribe)
 :
 UI::Panel(parent, x, y, Width, 0),
 m_tribe (tribe),
 
 m_curware
-(this, 0, get_inner_h()-25, get_inner_w(), 20, _("Stock"), Align_Center)
+	(this, 0, get_inner_h() - 25, get_inner_w(), 20, _("Stock"), Align_Center)
 
 {set_size(Width, 100);}
 
@@ -80,7 +80,7 @@ add a ware list to be displayed in this WaresDisplay
 ===============
 */
 void WaresDisplay::add_warelist
-(Widelands::WareList const * const wares, wdType const type)
+	(Widelands::WareList const * const wares, wdType const type)
 {
 	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(wares);
@@ -145,11 +145,11 @@ Draw one ware icon + additional information.
 ===============
 */
 void WaresDisplay::draw_ware
-(RenderTarget              & dst,
- Point                 const p,
- Widelands::Ware_Index const id,
- uint32_t              const stock,
- bool                  const is_worker)
+	(RenderTarget        &       dst,
+	 Point                 const p,
+	 Widelands::Ware_Index const id,
+	 uint32_t              const stock,
+	 bool                  const is_worker)
 {
 	//  draw a background
 	const uint32_t picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");

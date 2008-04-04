@@ -30,9 +30,9 @@
  * Deletes the immovable at the given location
 */
 int32_t Editor_Delete_Immovable_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,

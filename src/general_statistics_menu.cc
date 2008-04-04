@@ -59,7 +59,7 @@ Create all the buttons etc...
 ===============
 */
 General_Statistics_Menu::General_Statistics_Menu
-(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&parent, &registry, 400, 400, _("General Statistics")),
 m_parent(&parent) //  FIXME redundant (base already stores parent pointer)

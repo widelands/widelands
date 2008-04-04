@@ -811,7 +811,7 @@ void NetHost::updateNetworkSpeed()
 	std::vector<uint32_t> speeds;
 
 	speeds.push_back(d->localdesiredspeed);
-	for(uint32_t i = 0; i < d->clients.size(); ++i) {
+	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients[i].playernum >= 0)
 			speeds.push_back(d->clients[i].desiredspeed);
 	}

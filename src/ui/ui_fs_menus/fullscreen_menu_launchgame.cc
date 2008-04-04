@@ -48,8 +48,10 @@ struct Fullscreen_Menu_LaunchGameImpl {
 
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
-(GameSettingsProvider* settings, GameController* ctrl)
-: Fullscreen_Menu_Base("launchgamemenu.jpg"), d(new Fullscreen_Menu_LaunchGameImpl)
+	(GameSettingsProvider * settings, GameController * ctrl)
+:
+Fullscreen_Menu_Base("launchgamemenu.jpg"),
+d(new Fullscreen_Menu_LaunchGameImpl)
 {
 	d->settings = settings;
 	d->ctrl = ctrl;

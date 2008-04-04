@@ -147,7 +147,7 @@ GameLogicCommand::GameLogicCommand (int32_t const duetime)
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Write
-(FileWrite & fw, Editor_Game_Base &, Map_Map_Object_Saver &)
+	(FileWrite & fw, Editor_Game_Base &, Map_Map_Object_Saver &)
 {
 	// First version
 	fw.Unsigned16(BASE_CMD_VERSION);
@@ -162,7 +162,7 @@ void GameLogicCommand::Write
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Read
-(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader &)
+	(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader &)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

@@ -54,12 +54,11 @@ namespace Widelands {
 
 
 void Map_Bobdata_Data_Packet::Read
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- const bool skip,
- Map_Map_Object_Loader * const ol)
-throw
-(_wexception)
+	(FileSystem            &       fs,
+	 Editor_Game_Base      *       egbase,
+	 bool                    const skip,
+	 Map_Map_Object_Loader * const ol)
+	throw (_wexception)
 {
 	if (skip)
 		return;
@@ -465,20 +464,16 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				 worker->m_carried_item.get(egbase))
 				dynamic_cast<WareInstance &>(*carried_item).set_economy(economy);
 
-			if (oldsoldier_fix) {
-				if (upcast(Soldier, soldier, worker)) {
-					if (upcast(Game, g, egbase)) {
-						if (upcast(MilitarySite, ms, soldier->get_location(egbase))){
+			if (oldsoldier_fix)
+				if (upcast(Soldier, soldier, worker))
+					if (upcast(Game, g, egbase))
+						if (upcast(MilitarySite, ms, soldier->get_location(egbase)))
 							if (soldier->get_position() == ms->get_position()) {
 								// Fix behaviour of soldiers in buildings
 								soldier->reset_tasks(g);
 								soldier->start_task_buildingwork(g);
 								ms->update_soldier_request();
 							}
-						}
-					}
-				}
-			}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -489,7 +484,9 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 
 void Map_Bobdata_Data_Packet::Write
-(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const os)
+	(FileSystem           &       fs,
+	 Editor_Game_Base     *       egbase,
+	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -641,10 +638,10 @@ throw (_wexception)
 }
 
 void Map_Bobdata_Data_Packet::write_critter_bob
-(FileWrite            * fw,
- Editor_Game_Base     *,
- Map_Map_Object_Saver *,
- Critter_Bob    const &)
+	(FileWrite            * fw,
+	 Editor_Game_Base     *,
+	 Map_Map_Object_Saver *,
+	 Critter_Bob    const &)
 {fw->Unsigned16(CRITTER_BOB_PACKET_VERSION);}
 
 void Map_Bobdata_Data_Packet::write_worker_bob

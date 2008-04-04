@@ -36,9 +36,9 @@
 Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
 	:
 UI::Window
-(parent,
- (parent->get_w() - 200) / 2, (parent->get_h() - 300) / 2, 200, 300,
- _("Map Options")),
+	(parent,
+	 (parent->get_w() - 200) / 2, (parent->get_h() - 300) / 2, 200, 300,
+	 _("Map Options")),
 
 m_parent(parent) //  FIXME redundant (base stores parent pointer)
 {

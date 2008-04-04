@@ -37,7 +37,7 @@ Map_Object(&g_areawatcher_descr), Player_Area<>(player_area)
 
 
 AreaWatcher & AreaWatcher::create
-(Editor_Game_Base & egbase, const Player_Area<> player_area)
+	(Editor_Game_Base & egbase, Player_Area<> const player_area)
 {
 	AreaWatcher & result = *new AreaWatcher(player_area);
 	result.init(&egbase);

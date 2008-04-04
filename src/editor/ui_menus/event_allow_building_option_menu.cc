@@ -39,7 +39,7 @@ inline Editor_Interactive & Event_Allow_Building_Option_Menu::eia() {
 
 
 inline static void update_label_player
-(UI::Textarea & ta, Widelands::Player_Number const p)
+	(UI::Textarea & ta, Widelands::Player_Number const p)
 {
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), _("Player: %u"), p);
@@ -48,7 +48,7 @@ inline static void update_label_player
 
 
 inline static void update_label_building
-(UI::Textarea & ta, Widelands::Building_Descr const & building)
+	(UI::Textarea & ta, Widelands::Building_Descr const & building)
 {
 	char buffer[128];
 	snprintf
@@ -62,7 +62,7 @@ inline static void update_label_building
 #define button_height 20U
 #define button_size button_width, button_height
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu
-(Editor_Interactive & parent, Widelands::Event_Allow_Building & event)
+	(Editor_Interactive & parent, Widelands::Event_Allow_Building & event)
 :
 UI::Window(&parent, 0, 0, 200, 280, _("Allow Building Event Options")),
 m_event   (event),
@@ -71,76 +71,68 @@ m_building(m_event.m_building),
 m_label_name(this, spacing, spacing, 50, 20, _("Name:"), Align_CenterLeft),
 
 m_name
-(this,
- m_label_name.get_x() + m_label_name.get_w() + spacing, m_label_name.get_y(),
- get_inner_w() - m_label_name.get_x() - m_label_name.get_w() - 3 * spacing, 20,
- 0, 0),
-
+	(this,
+	 m_label_name.get_x() + m_label_name.get_w() + spacing,
+	 m_label_name.get_y(),
+	 get_inner_w() - m_label_name.get_x() - m_label_name.get_w() - 3 * spacing,
+	 20,
+	 0, 0),
 m_label_player
-(this,
- spacing, m_label_name.get_y() + m_label_name.get_h() + spacing,
- get_inner_w() - 2 * (2 * spacing + button_width), 20,
- " ", Align_Left),
-
+	(this,
+	 spacing, m_label_name.get_y() + m_label_name.get_h() + spacing,
+	 get_inner_w() - 2 * (2 * spacing + button_width), 20,
+	 " ", Align_Left),
 m_decrement_player
-(this,
- get_inner_w() - 2 * (spacing + 20), m_label_player.get_y(), 20, 20,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Event_Allow_Building_Option_Menu::clicked_change_player, this, false),
-
+	(this,
+	 get_inner_w() - 2 * (spacing + 20), m_label_player.get_y(), 20, 20,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Event_Allow_Building_Option_Menu::clicked_change_player, this, false),
 m_increment_player
-(this,
- get_inner_w() - 1 * (spacing + 20), m_label_player.get_y(), 20, 20,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Event_Allow_Building_Option_Menu::clicked_change_player, this, true),
-
+	(this,
+	 get_inner_w() - 1 * (spacing + 20), m_label_player.get_y(), 20, 20,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Event_Allow_Building_Option_Menu::clicked_change_player, this, true),
 m_label_building
-(this,
- spacing, m_label_player.get_y() + m_label_player.get_h() + spacing,
- m_label_player.get_w(), 20,
- " ", Align_Left),
-
+	(this,
+	 spacing, m_label_player.get_y() + m_label_player.get_h() + spacing,
+	 m_label_player.get_w(), 20,
+	 " ", Align_Left),
 m_decrement_building
-(this,
- get_inner_w() - 2 * (spacing + 20), m_label_building.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
- &Event_Allow_Building_Option_Menu::clicked_decrement_building, this),
-
+	(this,
+	 get_inner_w() - 2 * (spacing + 20), m_label_building.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
+	 &Event_Allow_Building_Option_Menu::clicked_decrement_building, this),
 m_increment_building
-(this,
- get_inner_w() - 1 * (spacing + 20), m_label_building.get_y(), button_size,
- 0,
- g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
- &Event_Allow_Building_Option_Menu::clicked_increment_building, this),
-
+	(this,
+	 get_inner_w() - 1 * (spacing + 20), m_label_building.get_y(), button_size,
+	 0,
+	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
+	 &Event_Allow_Building_Option_Menu::clicked_increment_building, this),
 m_label_allow
-(this,
- spacing,
- m_increment_building.get_y() + m_increment_building.get_h() + spacing,
- get_inner_w() - 3 * spacing - 20, 20,
- _("Allow Building: "), Align_CenterLeft),
-
+	(this,
+	 spacing,
+	 m_increment_building.get_y() + m_increment_building.get_h() + spacing,
+	 get_inner_w() - 3 * spacing - 20, 20,
+	 _("Allow Building: "), Align_CenterLeft),
 m_allow(this, get_inner_w() - spacing - 20, m_label_allow.get_y()),
-
 m_button_ok
-(this,
- (get_inner_w() >> 1) - 60 - spacing,
- m_label_allow.get_y() + m_label_allow.get_h() + spacing,
- 3 * button_width, button_height,
- 0,
- &Event_Allow_Building_Option_Menu::clicked_ok, this,
- _("Ok")),
-
+	(this,
+	 (get_inner_w() >> 1) - 60 - spacing,
+	 m_label_allow.get_y() + m_label_allow.get_h() + spacing,
+	 3 * button_width, button_height,
+	 0,
+	 &Event_Allow_Building_Option_Menu::clicked_ok, this,
+	 _("Ok")),
 m_button_cancel
-(this,
- m_button_ok.get_x() + m_button_ok.get_w() + spacing, m_button_ok.get_y(),
- 3 * button_width, button_height,
- 1,
- &Event_Allow_Building_Option_Menu::end_modal, this, 0,
- _("Cancel"))
+	(this,
+	 m_button_ok.get_x() + m_button_ok.get_w() + spacing, m_button_ok.get_y(),
+	 3 * button_width, button_height,
+	 1,
+	 &Event_Allow_Building_Option_Menu::end_modal, this, 0,
+	 _("Cancel"))
 {
 	if (m_player == 0)
 		m_player = 1;
@@ -179,10 +171,10 @@ m_button_cancel
  * We are not draggable.
  */
 bool Event_Allow_Building_Option_Menu::handle_mousepress
-(const Uint8 btn, int32_t, int32_t)
+	(Uint8 const btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Event_Allow_Building_Option_Menu::handle_mouserelease
-(const Uint8, int32_t, int32_t)
+	(Uint8,           int32_t, int32_t)
 {return false;}
 
 

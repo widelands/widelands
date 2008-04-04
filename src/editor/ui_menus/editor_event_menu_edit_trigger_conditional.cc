@@ -39,9 +39,9 @@ inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
 
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
-(Editor_Interactive &       parent,
- TriggerConditional * const cond,
- Widelands::EventChain         *       chain)
+	(Editor_Interactive    &       parent,
+	 TriggerConditional    * const cond,
+	 Widelands::EventChain *       chain)
 :
 UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional")),
 m_given_cond (cond),
@@ -252,10 +252,10 @@ m_event_chain(chain)
  * We are not draggable.
  */
 bool Editor_Event_Menu_Edit_TriggerConditional::handle_mousepress
-(const Uint8 btn, int32_t, int32_t)
+	(Uint8 const btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Editor_Event_Menu_Edit_TriggerConditional::handle_mouserelease
-(const Uint8, int32_t, int32_t)
+	(Uint8,           int32_t, int32_t)
 {return false;}
 
 
@@ -290,7 +290,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_operator
-(Widelands::TriggerConditional_Factory::TokenNames const i)
+	(Widelands::TriggerConditional_Factory::TokenNames const i)
 {
 	assert(i <= Widelands::TriggerConditional_Factory::TRIGGER);
 	m_construction->add

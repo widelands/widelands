@@ -383,7 +383,7 @@ void Player::start_stop_building(PlayerImmovable* imm) {
  * an idea of enhancing
  */
 void Player::enhance_building
-(Building * building, const Building_Descr::Index index_of_new_building)
+	(Building * building, Building_Descr::Index const index_of_new_building)
 {
 	if (building->get_owner() == this) {
 		const Building_Descr::Index index_of_old_building =
@@ -491,7 +491,7 @@ bool Player::has_economy(Economy * const economy) const throw () {
 }
 
 std::vector<Economy *>::size_type Player::get_economy_number
-(Economy const * const economy) const
+	(Economy const * const economy) const
 throw ()
 {
 	economy_vector::const_iterator const
@@ -637,7 +637,7 @@ void Player::enemyflagaction(Flag* flag, int32_t action, int32_t attacker, int32
 	findAttackSoldiers(flag, &attackers);
 
 	num = std::min(static_cast<int32_t>(attackers.size()), num);
-	for(int32_t i = 0; i < num; ++i) {
+	for (int32_t i = 0; i < num; ++i) {
 		Soldier* soldier = attackers[i];
 		upcast(MilitarySite, ms, soldier->get_location(&egbase()));
 
@@ -647,10 +647,10 @@ void Player::enemyflagaction(Flag* flag, int32_t action, int32_t attacker, int32
 
 
 inline void Player::discover_node
-(const Map     & map,
- const Widelands::Field & first_map_field,
- const FCoords   f,
- Field         & field)
+	(Map              const &       map,
+	 Widelands::Field const &       first_map_field,
+	 FCoords                  const f,
+	 Field                  &       field)
 throw ()
 {
 	assert(0 <= f.x);
@@ -713,11 +713,11 @@ throw ()
 }
 
 void Player::see_node
-(const Map                  & map,
- const Widelands::Field & first_map_field,
- const FCoords                f,
- const Time    gametime,
- const bool                   lasting)
+	(Map              const &       map,
+	 Widelands::Field const &       first_map_field,
+	 FCoords                  const f,
+	 Time                     const gametime,
+	 bool                     const lasting)
 throw ()
 {
 	assert(0 <= f.x);

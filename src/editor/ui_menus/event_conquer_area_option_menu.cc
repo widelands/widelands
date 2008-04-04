@@ -44,7 +44,7 @@ Editor_Interactive & Event_Conquer_Area_Option_Menu::eia() {
 
 
 Event_Conquer_Area_Option_Menu::Event_Conquer_Area_Option_Menu
-(Editor_Interactive & parent, Widelands::Event_Conquer_Area & event)
+	(Editor_Interactive & parent, Widelands::Event_Conquer_Area & event)
 :
 UI::Window(&parent, 0, 0, 180, 280, _("Conquer Area Event Options")),
 m_event(event),
@@ -269,9 +269,10 @@ m_player_area(event.m_player_area)
  * We are not draggable.
  */
 bool Event_Conquer_Area_Option_Menu::handle_mousepress
-(const Uint8 btn, int32_t, int32_t)
+	(Uint8 const btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Event_Conquer_Area_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool Event_Conquer_Area_Option_Menu::handle_mouserelease
+	(Uint8,           int32_t, int32_t)
 {return false;}
 
 

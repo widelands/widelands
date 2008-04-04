@@ -28,9 +28,9 @@
 
 /// Sets the heights to random values. Chages surrounding nodes if necessary.
 int32_t Editor_Noise_Height_Tool::handle_click_impl
-(Widelands::Map & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	uint32_t max = 0;
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr

@@ -139,7 +139,7 @@ void ProductionSite_Descr::parse
  * Get the program of the given name.
  */
 const ProductionProgram * ProductionSite_Descr::get_program
-(const std::string & program_name) const
+	(std::string const & program_name) const
 {
 	const ProgramMap::const_iterator it = m_programs.find(program_name);
 	if (it == m_programs.end())
@@ -415,7 +415,7 @@ void ProductionSite::request_worker(const char * const worker_name) {
  * Called when our worker arrives.
  */
 void ProductionSite::request_worker_callback
-(Game * g, Request * rq, Ware_Index, Worker * const w, void * const data)
+	(Game * g, Request * rq, Ware_Index, Worker * const w, void * const data)
 {
 	ProductionSite & psite = *static_cast<ProductionSite *>(data);
 

@@ -40,10 +40,9 @@ inline Editor_Interactive & Editor_Event_Menu_New_Event::eia() {
 
 
 Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
-(Editor_Interactive & parent)
+	(Editor_Interactive & parent)
 : UI::Window(&parent, 0, 0, 400, 240, _("New Event"))
 {
-
 	int32_t const offsx   =  5;
 	int32_t const offsy   = 25;
 	int32_t const spacing =  5;
@@ -105,9 +104,10 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
  * We are not draggable.
  */
 bool Editor_Event_Menu_New_Event::handle_mousepress
-(const Uint8 btn, int32_t, int32_t)
+	(Uint8 const btn, int32_t, int32_t)
 {if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Editor_Event_Menu_New_Event::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool Editor_Event_Menu_New_Event::handle_mouserelease
+	(Uint8,           int32_t, int32_t)
 {return false;}
 
 /**

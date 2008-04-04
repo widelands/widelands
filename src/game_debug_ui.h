@@ -27,8 +27,7 @@ struct Interactive_Base;
 namespace Widelands {struct Map_Object;};
 
 // Open debug window for the given coordinates
-void show_mapobject_debug
-(Interactive_Base & parent, Widelands::Map_Object &);
+void show_mapobject_debug(Interactive_Base & parent, Widelands::Map_Object &);
 void show_field_debug(Interactive_Base & parent, Widelands::Coords coords);
 
 #endif

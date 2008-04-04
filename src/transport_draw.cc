@@ -25,10 +25,10 @@
 namespace Widelands {
 
 void Flag::draw
-(const Editor_Game_Base & game,
- RenderTarget & dst,
- const FCoords,
- const Point pos)
+	(Editor_Game_Base const &       game,
+	 RenderTarget           &       dst,
+	 FCoords,
+	 Point                    const pos)
 {
 	static struct {int32_t x, y;} ware_offsets[8] = {
 		{-5,  1},
@@ -60,8 +60,6 @@ void Flag::draw
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw
-(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
-{}
+void Road::draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point) {}
 
 };

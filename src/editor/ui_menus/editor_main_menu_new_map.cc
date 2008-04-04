@@ -45,9 +45,9 @@ using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 :
 UI::Window
-(parent,
- (parent->get_w() - 140) / 2, (parent->get_h() - 150) / 2, 140, 150,
- _("New Map")),
+	(parent,
+	 (parent->get_w() - 140) / 2, (parent->get_h() - 150) / 2, 140, 150,
+	 _("New Map")),
 m_parent(parent) //  FIXME redundant (base stores parent pointer)
 {
 	char buffer[250];

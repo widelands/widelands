@@ -64,14 +64,14 @@ bool ZipFilesystem::IsWritable() const {
  * cross-platform way of doing this
  */
 int32_t ZipFilesystem::FindFiles
-(std::string const & path_in,
+	(std::string const & path_in,
 #ifndef NDEBUG
- std::string const & pattern,
+	 std::string const & pattern,
 #else
- std::string const &,
+	 std::string const &,
 #endif
- filenameset_t     * const results,
- uint32_t)
+	 filenameset_t     * const results,
+	 uint32_t)
 {
 	m_OpenUnzip();
 
@@ -199,7 +199,7 @@ FileSystem * ZipFilesystem::MakeSubFileSystem(std::string const & path) {
  * \throw ZipOperation_error
  */
 FileSystem * ZipFilesystem::CreateSubFileSystem
-(std::string const & path, Type const type)
+	(std::string const & path, Type const type)
 {
 	assert(!FileExists(path));
 
@@ -336,7 +336,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
  * Throws an exception if it fails.
  */
 void ZipFilesystem::Write
-(std::string const & fname, void const * const data, int32_t const length)
+	(std::string const & fname, void const * const data, int32_t const length)
 {
 	m_OpenZip();
 
@@ -366,16 +366,16 @@ void ZipFilesystem::Write
 	zipCloseFileInZip(m_zipfile);
 }
 
-StreamRead * ZipFilesystem::OpenStreamRead
-(const std::string & fname)
-{
-	throw wexception("OpenStreamRead(%s) not yet supported in ZipFilesystem", fname.c_str());
+StreamRead  * ZipFilesystem::OpenStreamRead (std::string const & fname) {
+	throw wexception
+		("OpenStreamRead(%s) not yet supported in ZipFilesystem",
+		 fname.c_str());
 }
 
-StreamWrite * ZipFilesystem::OpenStreamWrite
-(const std::string & fname)
-{
-	throw wexception("OpenStreamWrite(%s) not yet supported in ZipFilesystem", fname.c_str());
+StreamWrite * ZipFilesystem::OpenStreamWrite(std::string const & fname) {
+	throw wexception
+		("OpenStreamWrite(%s) not yet supported in ZipFilesystem",
+		 fname.c_str());
 }
 
 
@@ -427,8 +427,6 @@ void ZipFilesystem::m_OpenUnzip() {
 	m_state = STATE_UNZIPPPING;
 }
 
-void ZipFilesystem::Rename
-(const std::string &, const std::string &)
-{
+void ZipFilesystem::Rename(std::string const &, std::string const &) {
 	assert (false and "rename inside zip FS is not implemented yet");
 }

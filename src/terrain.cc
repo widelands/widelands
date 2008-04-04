@@ -24,7 +24,8 @@
  * v=(v1 v2)^T
 */
 void get_horiz_linearcomb
-(int32_t u1, int32_t u2, int32_t v1, int32_t v2, float& lambda, float& mu)
+	(int32_t const u1, int32_t const u2, int32_t const v1, int32_t const v2,
+	 float & lambda, float & mu)
 {
 	float det;
 

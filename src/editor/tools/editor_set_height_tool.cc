@@ -26,9 +26,9 @@
 #include "editorinteractive.h"
 
 int32_t Editor_Set_Height_Tool::handle_click_impl
-(Widelands::Map                     & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive                 & parent)
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       parent)
 {
 	return
 		map.set_height

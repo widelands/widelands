@@ -31,46 +31,45 @@
 
 
 GameMainMenu::GameMainMenu
-(Interactive_Player & plr,
- UI::UniqueWindow::Registry & registry,
- Interactive_Player::Game_Main_Menu_Windows & windows)
+	(Interactive_Player                         & plr,
+	 UI::UniqueWindow::Registry                 & registry,
+	 Interactive_Player::Game_Main_Menu_Windows & windows)
 :
 UI::UniqueWindow(&plr, &registry, 180, 55, _("Main Menu")),
 m_player      (plr),
 m_windows     (windows),
-
 general_stats
-(this,
- posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
- 4,
- g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
- &GameMainMenu::clicked_general_stats, this,
- _("General statistics")),
-
+	(this,
+	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
+	 4,
+	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
+	 &GameMainMenu::clicked_general_stats, this,
+	 _("General statistics")),
 ware_stats
-(this,
- posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
- 4,
- g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
- &GameMainMenu::clicked_ware_stats, this,
- _("Ware statistics")),
-
+	(this,
+	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
+	 4,
+	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
+	 &GameMainMenu::clicked_ware_stats, this,
+	 _("Ware statistics")),
 building_stats
-(this,
- posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
- 4,
- g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
- &GameMainMenu::clicked_building_stats, this,
- _("Building statistics")),
-
+	(this,
+	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
+	 4,
+	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
+	 &GameMainMenu::clicked_building_stats, this,
+	 _("Building statistics")),
 stock
-(this,
- posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
- 4,
- g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
- &GameMainMenu::clicked_stock, this,
- _("Stock"))
-{if (get_usedefaultpos()) center_to_parent();}
+	(this,
+	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
+	 4,
+	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
+	 &GameMainMenu::clicked_stock, this,
+	 _("Stock"))
+{
+	if (get_usedefaultpos())
+		center_to_parent();
+}
 
 
 void GameMainMenu::clicked_general_stats() {

@@ -42,7 +42,7 @@ inline Editor_Interactive & Event_Message_Box_Option_Menu::eia() {
 
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
-(Editor_Interactive & parent, Widelands::Event_Message_Box & event)
+	(Editor_Interactive & parent, Widelands::Event_Message_Box & event)
 :
 UI::Window(&parent, 0, 0, 430, 400, _("Message Box Event Options")),
 m_event   (event)
