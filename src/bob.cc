@@ -742,14 +742,20 @@ void Bob::movepath_update(Game* g, State* state)
 
 	assert(state->ivar1 >= 0);
 	const Path * const path = state->path;
-	assert(path);
+
+	if (!path) {
+		// probably success; this can happen when loading a game
+		// that contains a zero-length path.
+		pop_task(g);
+		return;
+	}
 
 	if
 		(static_cast<const Path::Step_Vector::size_type>(state->ivar1)
 		 >=
 		 path->get_nsteps())
 	{
-		assert(not path or m_position == path->get_end());
+		assert(m_position == path->get_end());
 		pop_task(g); // success
 		return;
 	} else if (state->ivar1==state->ivar3) {

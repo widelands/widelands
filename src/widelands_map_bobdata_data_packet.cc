@@ -593,12 +593,14 @@ throw (_wexception)
 						const Path::Step_Vector::size_type nr_steps =
 							s.path->get_nsteps();
 						fw.Unsigned16(nr_steps);
-						fw.Coords32(path->get_start());
-						for
-							(Path::Step_Vector::size_type idx = 0;
-							 idx < nr_steps;
-							 ++idx)
-							fw.Unsigned8((*path)[idx]);
+						if (nr_steps) {
+							fw.Coords32(path->get_start());
+							for
+								(Path::Step_Vector::size_type idx = 0;
+								idx < nr_steps;
+								++idx)
+								fw.Unsigned8((*path)[idx]);
+						}
 					} else
 						fw.Unsigned16(0);
 
