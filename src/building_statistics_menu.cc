@@ -227,7 +227,9 @@ int32_t Building_Statistics_Menu::validate_pointer(int32_t* id, int32_t size) {
 void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 	assert(m_table.has_selection());
 	const std::vector<Widelands::Player::Building_Stats> & vec =
-		iaplayer().get_player()->get_building_statistics(m_table.get_selected());
+		iaplayer().get_player()->get_building_statistics
+			(static_cast<Widelands::Building_Index::value_t>
+			 	(m_table.get_selected()));
 	Widelands::Map const & map = iaplayer().egbase().map();
 
 	bool found = true; //  we think, we always find a proper building
@@ -332,7 +334,12 @@ void Building_Statistics_Menu::update() {
 
 	Widelands::Tribe_Descr const & tribe = iaplayer().player().tribe();
 	Widelands::Map         const & map   = iaplayer().game().map();
-	for (Widelands::Building_Descr::Index i = 0; i < tribe.get_nrbuildings(); ++i) {
+	Widelands::Building_Index      const nr_buildings = tribe.get_nrbuildings();
+	for
+		(Widelands::Building_Index i = Widelands::Building_Index::First();
+		 i < nr_buildings;
+		 ++i)
+	{
 		Widelands::Building_Descr const & building = *tribe.get_building_descr(i);
 		{
 			const std::string & name = building.name();
@@ -347,7 +354,7 @@ void Building_Statistics_Menu::update() {
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
 			UI::Table<const intptr_t>::Entry_Record & er = m_table.get_record(l);
-			if (UI::Table<const intptr_t>::get(er) == i) {
+			if (UI::Table<const intptr_t>::get(er) == i.value()) {
 				te = &er;
 				break;
 			}
@@ -357,7 +364,7 @@ void Building_Statistics_Menu::update() {
 		if (not te) {
 			if (! iaplayer().player().is_building_allowed(i))
 				continue;
-			te = &m_table.add(i);
+			te = &m_table.add(i.value());
 		}
 
 		uint32_t nr_owned   = 0;
@@ -376,7 +383,7 @@ void Building_Statistics_Menu::update() {
 		}
 
 		const bool is_selected = //  Is this entry selected?
-			m_table.has_selection() and m_table.get_selected() == i;
+			m_table.has_selection() and m_table.get_selected() == i.value();
 
 		if (is_selected) {
 			m_anim = building.get_ui_anim();

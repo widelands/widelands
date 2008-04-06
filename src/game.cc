@@ -19,6 +19,7 @@
 
 #include "game.h"
 
+#include "carrier.h"
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
 #include "events/event.h"
@@ -640,8 +641,9 @@ void Game::send_player_bulldoze (PlayerImmovable* pi)
 	send_player_command (new Cmd_Bulldoze(get_gametime(), pi->get_owner()->get_player_number(), pi));
 }
 
-void Game::send_player_build (int32_t pid, const Coords& coords, int32_t id)
+void Game::send_player_build (int32_t pid, const Coords& coords, Building_Index id)
 {
+	assert(id);
 	send_player_command (new Cmd_Build(get_gametime(), pid, coords, id));
 }
 
@@ -672,9 +674,9 @@ void Game::send_player_start_stop_building (Building* b)
 		 	(get_gametime(), b->get_owner()->get_player_number(), b));
 }
 
-void Game::send_player_enhance_building (Building* b, int32_t id)
+void Game::send_player_enhance_building (Building* b, Building_Index id)
 {
-	assert(id!=-1);
+	assert(id);
 
 	send_player_command
 		(new Cmd_EnhanceBuilding
@@ -788,13 +790,22 @@ void Game::sample_statistics()
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy* eco = plr->get_economy_by_number(j);
 			const Tribe_Descr & tribe = plr->tribe();
-			for (Ware_Index::value_t wareid = 0; wareid < tribe.get_nrwares(); ++wareid)
+			Ware_Index const tribe_wares = tribe.get_nrwares();
+			for
+				(Ware_Index wareid = Ware_Index::First();
+				 wareid < tribe_wares;
+				 ++wareid)
 				wastock += eco->stock_ware(wareid);
-			for (Ware_Index::value_t workerid = 0; workerid < tribe.get_nrworkers(); ++workerid) {
-				if (tribe.get_worker_descr(workerid)->get_worker_type() == Worker_Descr::CARRIER)
-					continue;
-				wostock += eco->stock_worker(workerid);
-			}
+			Ware_Index const tribe_workers = tribe.get_nrworkers();
+			for
+				(Ware_Index workerid = Ware_Index::First();
+				 workerid < tribe_workers;
+				 ++workerid)
+				if
+					(not
+					 dynamic_cast<Carrier::Descr const *>
+					 	(tribe.get_worker_descr(workerid)))
+					wostock += eco->stock_worker(workerid);
 		}
 		nr_wares  [p - 1] = wastock;
 		nr_workers[p - 1] = wostock;

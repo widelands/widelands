@@ -75,8 +75,8 @@ void Map_Bob_Data_Packet::ReadBob
 
 			if (Tribe_Descr const * const tribe = egbase->get_tribe(owner)) {
 				if        (subtype == Bob::WORKER)  {
-					int32_t const idx = tribe->get_worker_index(name);
-					if (idx != -1) {
+					const Ware_Index idx = tribe->worker_index(name);
+					if (idx) {
 						Bob & bob =
 							ol->register_object<Bob>
 							(serial, *tribe->get_worker_descr(idx)->create_object());

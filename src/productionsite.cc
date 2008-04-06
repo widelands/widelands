@@ -300,7 +300,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 			m_input_queues.push_back(wq);
 			//wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->init
-				(owner().tribe().get_safe_ware_index
+				(owner().tribe().safe_ware_index
 				 	(inputs[i].ware_descr().name().c_str()),
 				 inputs[i].get_max());
 		}
@@ -405,7 +405,7 @@ void ProductionSite::remove_worker(Worker* w)
 void ProductionSite::request_worker(const char * const worker_name) {
 	assert(worker_name);
 
-	int32_t wareid = owner().tribe().get_safe_worker_index(worker_name);
+	Ware_Index wareid = owner().tribe().safe_worker_index(worker_name);
 
 	m_worker_requests.push_back(new Request(this, wareid, &ProductionSite::request_worker_callback, this, Request::WORKER));
 }

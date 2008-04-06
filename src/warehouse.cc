@@ -66,12 +66,12 @@ WarehouseSupply::~WarehouseSupply()
  * Inform this supply, how much wares
  * are to be handled
  */
-void WarehouseSupply::set_nrwares(int32_t i) {
+void WarehouseSupply::set_nrwares(Ware_Index const i) {
 	assert(m_wares.get_nrwareids() == 0);
 
 	m_wares.set_nrwares(i);
 }
-void WarehouseSupply::set_nrworkers(int32_t i) {
+void WarehouseSupply::set_nrworkers(Ware_Index const i) {
 	assert(m_workers.get_nrwareids() == 0);
 
 	m_workers.set_nrwares(i);
@@ -93,27 +93,35 @@ void WarehouseSupply::set_economy(Economy* e)
 
 	if (m_economy) {
 		m_economy->remove_supply(this);
-		for (Ware_Index::value_t i = 0; i < m_wares  .get_nrwareids(); ++i) {
+		for
+			(Ware_Index i = Ware_Index::First();
+			 i.value() < m_wares  .get_nrwareids();
+			 ++i)
 			if (m_wares.stock(i))
 				m_economy->remove_wares(i, m_wares.stock(i));
-		}
-		for (Ware_Index::value_t i = 0; i < m_workers.get_nrwareids(); ++i) {
+		for
+			(Ware_Index i = Ware_Index::First();
+			 i.value() < m_workers.get_nrwareids();
+			 ++i)
 			if (m_workers.stock(i))
 				m_economy->remove_workers(i, m_workers.stock(i));
-		}
 	}
 
 	m_economy = e;
 
 	if (m_economy) {
-		for (Ware_Index::value_t i = 0; i < m_wares.get_nrwareids(); ++i) {
+		for
+			(Ware_Index i = Ware_Index::First();
+			 i.value() < m_wares.get_nrwareids  ();
+			 ++i)
 			if (m_wares.stock(i))
 				m_economy->add_wares(i, m_wares.stock(i));
-		}
-		for (Ware_Index::value_t i = 0; i < m_workers.get_nrwareids(); ++i) {
+		for
+			(Ware_Index i = Ware_Index::First();
+			 i.value() < m_workers.get_nrwareids();
+			 ++i)
 			if (m_workers.stock(i))
 				m_economy->add_workers(i, m_workers.stock(i));
-		}
 		m_economy->add_supply(this);
 	}
 }
@@ -352,23 +360,26 @@ void Warehouse::init(Editor_Game_Base* gg)
 {
 	Building::init(gg);
 
-	m_supply->set_nrwares(get_owner()->tribe().get_nrwares());//  FIXME
-	m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());//  FIXME
+	Tribe_Descr const & tribe = owner().tribe();
+	Ware_Index const nr_wares   = tribe.get_nrwares  ();
+	Ware_Index const nr_workers = tribe.get_nrworkers();
+	m_supply->set_nrwares  (nr_wares  .value());
+	m_supply->set_nrworkers(nr_workers.value());
 
 	if (upcast(Game, game, gg)) {
-		for (Ware_Index::value_t i = 0; i < owner().tribe().get_nrwares(); ++i) {//  FIXME
+		for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
 			Request & req =
 				*new Request
-				(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
+					(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
 			req.set_idle(true);
 
 			m_requests.push_back(&req);
 		}
-		for (Ware_Index::value_t i = 0; i < owner().tribe().get_nrworkers(); ++i) {//  FIXME
+		for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
 			Request & req =
 				*new Request
-				(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
+					(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
 
 			req.set_idle(true);
 
@@ -441,7 +452,7 @@ void Warehouse::act(Game* g, uint32_t data)
 {
 	const Tribe_Descr & tribe = owner().tribe();
 	if (g->get_gametime() - m_next_carrier_spawn >= 0) {
-		Ware_Index::value_t const id = tribe.get_safe_worker_index("carrier");
+		Ware_Index const id = tribe.safe_worker_index("carrier");
 		int32_t stock = m_supply->stock_workers(id);
 		int32_t tdelta = CARRIER_SPAWN_INTERVAL;
 
@@ -460,7 +471,7 @@ void Warehouse::act(Game* g, uint32_t data)
 
 	//  Military stuff: Kill the soldiers that are dead.
 	if (g->get_gametime() - m_next_military_act >= 0) {
-		Ware_Index::value_t const ware = tribe.get_safe_worker_index("soldier");
+		Ware_Index const ware = tribe.safe_worker_index("soldier");
 		const Worker_Descr & workerdescr = *tribe.get_worker_descr(ware);
 		const std::string & workername = workerdescr.name();
 		//  Look if we got one in stock of those.
@@ -606,9 +617,9 @@ Launch a carrier to fetch an item from our flag.
 */
 bool Warehouse::fetch_from_flag(Game* g)
 {
-	int32_t carrierid;
+	Ware_Index carrierid;
 
-	carrierid = get_owner()->tribe().get_safe_worker_index("carrier");
+	carrierid = get_owner()->tribe().safe_worker_index("carrier");
 
 	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
 		insert_workers(carrierid, 1);
@@ -936,12 +947,15 @@ void Warehouse::create_worker(Game * game, Ware_Index const worker) {
 			 ++it)
 		{
 			const char & material_name = *it->name.c_str();
-			int32_t id_w = tribe.get_ware_index(&material_name);
-			if (id_w != -1) remove_wares(id_w, it->amount);
-			else {
-				id_w = tribe.get_safe_worker_index(&material_name);
-				remove_workers(id_w, it->amount);
-			}
+			if (Ware_Index const id_ware   = tribe.ware_index  (&material_name))
+				remove_wares  (id_ware,   it->amount);
+			else if
+				(Ware_Index const id_worker = tribe.worker_index(&material_name))
+				remove_workers(id_worker, it->amount);
+			else
+				throw wexception
+					("tribe %s does not define worker or ware type \"%s\"",
+					 tribe.name().c_str(), &material_name);
 		}
 
 		incorporate_worker
@@ -979,7 +993,7 @@ void Warehouse::aggressor(Soldier* enemy)
 		  FindBobEnemySoldier(&owner())))
 		return;
 
-	Ware_Index soldier_index = owner().tribe().get_worker_index("soldier");
+	Ware_Index soldier_index = owner().tribe().worker_index("soldier");
 	Requirements noreq;
 
 	if (!count_workers(g, soldier_index, noreq))
@@ -995,7 +1009,7 @@ void Warehouse::aggressor(Soldier* enemy)
 bool Warehouse::attack(Soldier* enemy)
 {
 	upcast(Game, g, &owner().egbase());
-	Ware_Index soldier_index = owner().tribe().get_worker_index("soldier");
+	Ware_Index soldier_index = owner().tribe().worker_index("soldier");
 	Requirements noreq;
 
 	if (count_workers(g, soldier_index, noreq)) {

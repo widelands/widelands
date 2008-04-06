@@ -168,16 +168,17 @@ void Editor_Game_Base::unconquer_area
 	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
 	assert     (player_area.y < map().get_height());
-	const Field & first_field = map()[0];
-	assert(&first_field <= player_area.field);
-	assert                (player_area.field < &first_field + map().max_index());
+	assert(&map()[0] <= player_area.field);
+	assert             (player_area.field < &map()[map().max_index()]);
 	assert(0 < player_area.player_number);
 	assert    (player_area.player_number <= map().get_nrplayers());
 
 	//  Here must be a building.
-	const Building & building =
-		dynamic_cast<const Building &>(*map().get_immovable(player_area));
-	assert(building.owner().get_player_number() == player_area.player_number);
+	assert
+		(dynamic_cast<const Building &>(*map().get_immovable(player_area))
+		 .owner().get_player_number()
+		 ==
+		 player_area.player_number);
 
 	//  step 1: unconquer area of this building
 	do_conquer_area(player_area, false, destroying_player);
@@ -584,9 +585,7 @@ idx is the building type index.
 ===============
 */
 Building * Editor_Game_Base::warp_building
-	(Coords                const c,
-	 Player_Number         const owner,
-	 Building_Descr::Index const i)
+	(Coords const c, Player_Number const owner, Building_Index const i)
 {
 	Player & plr = player(owner);
 	return plr.tribe().get_building_descr(i)->create(*this, plr, c, false);
@@ -602,7 +601,7 @@ if oldi != -1 this is a constructionsite coming from an enhancing action
 */
 Building * Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
-	 Building_Index const idx, int32_t const old_id)
+	 Building_Index idx, Building_Index old_id)
 {
 	Player            & plr   = player(owner);
 	Tribe_Descr const & tribe = plr.tribe();

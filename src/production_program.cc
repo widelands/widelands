@@ -159,7 +159,7 @@ void ProductionProgram::parse
 			char const * const main_worker_name = building->workers()[0].c_str();
 			const Tribe_Descr & tribe = building->tribe();
 			const Workarea_Info & worker_workarea_info
-				= tribe.get_worker_descr(tribe.get_safe_worker_index(main_worker_name))
+				= tribe.get_worker_descr(tribe.safe_worker_index(main_worker_name))
 				->get_program(act.sparam1.c_str())->get_workarea_info();
 			const Workarea_Info::const_iterator worker_workarea_info_end =
 				worker_workarea_info.end();

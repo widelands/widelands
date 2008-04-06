@@ -695,7 +695,7 @@ void Flag::wait_for_capacity(Game *, Worker* bob)
 /**
  * Remove the worker from the list of workers waiting for free capacity.
  */
-void Flag::skip_wait_for_capacity(Game* g, Worker* w)
+void Flag::skip_wait_for_capacity(Game * g, Worker* w)
 {
 	CapacityWaitQueue::iterator it = std::find(m_capacity_wait.begin(), m_capacity_wait.end(), w);
 	if (it != m_capacity_wait.end())
@@ -1021,7 +1021,7 @@ void Flag::destroy(Editor_Game_Base* g)
  * Add a new flag job to request the worker with the given ID, and to execute
  * the given program once it's completed.
 */
-void Flag::add_flag_job(Game *, int32_t workerware, std::string programname) {
+void Flag::add_flag_job(Game *, Ware_Index workerware, std::string programname) {
 	FlagJob j;
 
 	j.request =
@@ -1359,7 +1359,7 @@ void Road::request_carrier(Game * g) {
 	m_carrier_request =
 		new Request
 			(this,
-			 get_owner()->tribe().get_safe_worker_index("carrier"),
+			 get_owner()->tribe().safe_worker_index("carrier"),
 			 &Road::request_carrier_callback, this, Request::WORKER);
 }
 
@@ -1875,8 +1875,8 @@ WaresQueue::WaresQueue(PlayerImmovable* bld)
 	m_ware            (Ware_Index::Null()),
 	m_size            (0),
 	m_filled          (0),
-	m_request         (0),
 	m_consume_interval(0),
+	m_request         (0),
 	m_callback_fn     (0),
 	m_callback_data   (0)
 {}
@@ -1892,7 +1892,7 @@ WaresQueue::~WaresQueue()
 /**
  * Initialize the queue. This also issues the first request, if necessary.
 */
-void WaresQueue::init(const int32_t ware, const uint32_t size) {
+void WaresQueue::init(Ware_Index ware, const uint32_t size) {
 	assert(not m_ware);
 
 	m_ware = ware;
@@ -2074,7 +2074,7 @@ void WaresQueue::Read
 {
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
-		m_ware = m_owner->get_owner()->tribe().get_ware_index(fr->CString());
+		m_ware = m_owner->get_owner()->tribe().ware_index(fr->CString());
 		m_size = fr->Signed32();
 		m_filled = fr->Signed32();
 		m_consume_interval = fr->Signed32();
@@ -2084,7 +2084,7 @@ void WaresQueue::Read
 			m_request =
 				new Request
 					(m_owner,
-					 0,
+					 Ware_Index(),
 					 &WaresQueue::request_callback, this,
 					 Request::WORKER);
 			m_request->Read(fr, egbase, ol);
@@ -2712,7 +2712,10 @@ void Economy::add_supply(Supply * const supply)
 */
 bool Economy::have_supply(Supply * const supply)
 {
-	for (int32_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
+	for
+		(Ware_Index i = Ware_Index::First();
+		 i < m_supplies.get_nrsupplies();
+		 ++i)
 		if (m_supplies.get_supply(i) == supply)
 			return true;
 
@@ -2835,7 +2838,12 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 	int32_t best_cost = -1;
 	Flag * const target_flag = req->get_target_flag();
 
-	for (Ware_Index::value_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
+
+	for
+		(Ware_Index i = Ware_Index::First();
+		 i < m_supplies.get_nrsupplies();
+		 ++i)
+	{
 		Supply & supp = *m_supplies.get_supply(i);
 		Route* route;
 
@@ -2881,7 +2889,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 struct RequestSupplyPair {
 	bool is_item;
 	bool is_worker;
-	int32_t ware;
+	Ware_Index ware;
 	TrackPtr<Request> request;
 	TrackPtr<Supply>  supply;
 	int32_t priority;
@@ -2980,7 +2988,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 			("REQ: %u (%i, %s) <- %u (ware %i), priority %i\n",
 			 req->get_target()->get_serial(),
 			 req->get_required_time(), req->describe().c_str(),
-			 supp->get_position(g)->get_serial(), rsp.ware, rsp.priority);
+			 supp->get_position(g)->get_serial(), rsp.ware.value(), rsp.priority);
 
 		s->queue.push(rsp);
 	}
@@ -3003,7 +3011,7 @@ void Economy::create_requested_workers(Game* g)
 			Request* req = *it;
 
 			if (!req->is_idle() && req->get_type() == Request::WORKER) {
-				int32_t index = req->get_index();
+				Ware_Index index = req->get_index();
 				int32_t num_wares = 0;
 				Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
 
@@ -3012,7 +3020,7 @@ void Economy::create_requested_workers(Game* g)
 					continue;
 
 				for
-					(int32_t i = 0;
+					(Ware_Index i = Ware_Index::First();
 					 i < m_supplies.get_nrsupplies();
 					 ++i)
 				{
@@ -3068,7 +3076,7 @@ void Economy::balance_requestsupply(uint32_t timerid)
 				 !have_request(rsp.request) ||
 				 !rsp.supply->nr_supplies(game, rsp.request))
 			{
-				log("NO: ware %i, priority %i\n", rsp.ware, rsp.priority);
+				log("NO: ware %i, priority %i\n", rsp.ware.value(), rsp.priority);
 
 				rsps.nexttimer = 200;
 				continue;
@@ -3078,7 +3086,7 @@ void Economy::balance_requestsupply(uint32_t timerid)
 				("HANDLE: %u -> %u, ware %i, priority %i\n",
 				 rsp.request->get_target()->get_serial(),
 				 rsp.supply->get_position(game)->get_serial(),
-				 rsp.ware,
+				 rsp.ware.value(),
 				 rsp.priority);
 
 			rsp.request->start_transfer(game, rsp.supply);

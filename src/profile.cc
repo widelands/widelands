@@ -396,7 +396,7 @@ Widelands::Building_Index Section::get_safe_Building_Index
 		egbase.manually_load_tribe
 		(egbase.map().get_scenario_player_tribe(player).c_str());
 	char const * const b = get_safe_string(name);
-	if (Widelands::Building_Index const idx = tribe.get_building_index(b))
+	if (Widelands::Building_Index const idx = tribe.building_index(b))
 		return idx;
 	else
 		throw wexception

@@ -77,8 +77,8 @@ throw (_wexception)
 						 egbase->get_safe_player(a.player_number))
 					{
 						Tribe_Descr const & tribe = player->tribe();
-						int32_t const index = tribe.get_building_index(name);
-						if (index == -1)
+						Building_Index const index = tribe.building_index(name);
+						if (not index)
 							throw wexception
 								("tribe %s does not define building type \"%s\"",
 								 tribe.name().c_str(), name);
@@ -91,10 +91,12 @@ throw (_wexception)
 								 *
 								 (is_constructionsite ?
 								  egbase->warp_constructionsite
-								  	(a, a.player_number, index, 0)
+								  	(a, a.player_number, index,
+								  	 Building_Index::Null())
 								  :
 								  egbase->warp_building
-								  	(a, a.player_number, index)));
+								  	(a, a.player_number,
+								  	 index.value())));
 
 						if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
 							read_priorities (building, fr);
@@ -238,11 +240,11 @@ void Map_Building_Data_Packet::read_priorities
 		// read count of priorities assigned for this ware type
 		const uint8_t count = fr.Unsigned8();
 		for (uint8_t i = 0; i < count; ++i) {
-			int32_t idx = -1;
+			Ware_Index idx;
 			if (Request::WARE == ware_type)
-				idx = tribe.get_safe_ware_index(fr.CString());
+				idx = tribe.safe_ware_index(fr.CString());
 			else if (Request::WORKER == ware_type)
-				idx = tribe.get_safe_worker_index(fr.CString());
+				idx = tribe.safe_worker_index(fr.CString());
 			else
 				throw wexception("unrecognized ware type %d while reading priorities", ware_type);
 

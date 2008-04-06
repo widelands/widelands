@@ -55,12 +55,13 @@ void WareList::add(Ware_Index const i, const count_type count) {
 
 void WareList::add(const WareList &wl)
 {
-	if (wl.m_wares.size() > m_wares.size())
-		m_wares.reserve(wl.m_wares.size());
-
-	for (Ware_Index::value_t i = 0; i < wl.m_wares.size(); ++i)
-		if (wl.m_wares[i])
-			add(i, wl.m_wares[i]);
+	Ware_Index const nr_wares =
+		static_cast<Ware_Index::value_t>(wl.m_wares.size());
+	if (m_wares.size() < nr_wares.value())
+		m_wares.reserve(nr_wares.value());
+	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i)
+		if (wl.m_wares[i.value()])
+			add(i, wl.m_wares[i.value()]);
 }
 
 
@@ -79,9 +80,11 @@ void WareList::remove(Ware_Index const i, const count_type count) {
 
 void WareList::remove(const WareList &wl)
 {
-	for (Ware_Index::value_t i = 0; i < wl.m_wares.size(); ++i)
-		if (wl.m_wares[i])
-			remove(i, wl.m_wares[i]);
+	Ware_Index const nr_wares =
+		static_cast<Ware_Index::value_t>(wl.m_wares.size());
+	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i)
+		if (wl.m_wares[i.value()])
+			remove(i, wl.m_wares[i.value()]);
 }
 
 /**

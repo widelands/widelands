@@ -80,40 +80,32 @@ struct Tribe_Descr {
 	__attribute__ ((deprecated)) const std::string & get_name() const throw () {return m_name;}
 	const World & world() const throw () {return m_world;}
 
-	Ware_Index::value_t get_nrworkers() const {return m_workers.get_nitems();}
+	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
 	Worker_Descr * get_worker_descr(Ware_Index const index) const {
 		return m_workers.get(index);
 	}
 	Ware_Index worker_index(char const * const workername) const {
 		return m_workers.get_index(workername);
 	}
-	int32_t get_worker_index(const char * const workername) const {
-		return m_workers.get_index(workername);
-	}
-	Ware_Index::value_t get_nrwares() const {return m_wares.get_nitems();}
+	Ware_Index get_nrwares() const {return m_wares.get_nitems();}
+	Ware_Index safe_ware_index(const char * const warename) const;
 	Ware_Index ware_index(char const * const warename) const {
-		return m_wares.get_index(warename);
-	}
-	int32_t get_safe_ware_index(const char * const warename) const;
-	int32_t get_ware_index(const char * const warename) const {
 		return m_wares.get_index(warename);
 	}
 	Item_Ware_Descr* get_ware_descr(Ware_Index const index) const {
 		return m_wares.get(index);
 	}
-	int32_t get_safe_worker_index(const char * const workername) const;
-	Building_Index::value_t get_nrbuildings() const {
+	Ware_Index safe_worker_index(const char * const workername) const;
+	Building_Index get_nrbuildings() const {
 		return m_buildings.get_nitems();
 	}
-	int32_t get_safe_building_index(const char *name) const;
+	Building_Index safe_building_index(const char *name) const;
 	Building_Descr * get_building_descr(Building_Index const index) const {
 		return m_buildings.get(index);
 	}
 	Building_Index building_index(char const * const buildingname) const {
 		return m_buildings.get_index(buildingname);
 	}
-	int32_t get_building_index(const char * const buildingname) const
-	{return m_buildings.get_index(buildingname);}
 	int32_t get_immovable_index(const char* l) const {return m_immovables.get_index(l);}
 	int32_t get_nr_immovables() {return m_immovables.get_nitems();}
 	Immovable_Descr* get_immovable_descr(int32_t index) const {return m_immovables.get(index);}
@@ -143,9 +135,9 @@ private:
 	uint32_t m_anim_flag;
 	uint32_t m_bob_vision_range;
 
-	Descr_Maintainer<Worker_Descr>    m_workers;
-	Descr_Maintainer<Building_Descr>  m_buildings;
-	Descr_Maintainer<Item_Ware_Descr> m_wares;
+	Indexed_Descr_Maintainer<Worker_Descr, Ware_Index>    m_workers;
+	Indexed_Descr_Maintainer<Building_Descr, Building_Index>  m_buildings;
+	Indexed_Descr_Maintainer<Item_Ware_Descr, Ware_Index> m_wares;
 	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
 	Descr_Maintainer<Bob::Descr>      m_bobs;  // The player critters
 

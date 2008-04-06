@@ -171,7 +171,7 @@ void Cmd_Bulldoze::Write
 Cmd_Build::Cmd_Build (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	id     = des.Signed16  ();
+	id     = static_cast<Building_Index::value_t>(des.Signed16  ());
 	coords = des.Coords32  ();
 }
 
@@ -184,7 +184,7 @@ void Cmd_Build::execute (Game* g)
 void Cmd_Build::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_BUILD);
 	ser.Unsigned8 (get_sender());
-	ser.Signed16  (id);
+	ser.Signed16  (id.value());
 	ser.Coords32  (coords);
 }
 #define PLAYER_CMD_BUILD_VERSION 1
@@ -195,7 +195,7 @@ void Cmd_Build::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_BUILD_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			id     = fr.Unsigned16();
+			id     = static_cast<Building_Index::value_t>(fr.Unsigned16());
 			coords = fr.Coords32  (egbase.map().extent());
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
@@ -211,7 +211,7 @@ void Cmd_Build::Write
 	fw.Unsigned16(PLAYER_CMD_BUILD_VERSION);
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
-	fw.Unsigned16(id);
+	fw.Unsigned16(id.value());
 	fw.Coords32  (coords);
 }
 
@@ -474,7 +474,7 @@ Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
-	id     = des.Unsigned16();
+	id     = static_cast<Building_Index::value_t>(des.Unsigned16());
 }
 
 void Cmd_EnhanceBuilding::execute (Game* g)
@@ -488,7 +488,7 @@ void Cmd_EnhanceBuilding::serialize (StreamWrite & ser)
 	ser.Unsigned8 (PLCMD_ENHANCEBUILDING);
 	ser.Unsigned8 (get_sender());
 	ser.Unsigned32(serial);
-	ser.Unsigned16(id);
+	ser.Unsigned16(id.value());
 }
 #define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
 void Cmd_EnhanceBuilding::Read
@@ -504,7 +504,7 @@ void Cmd_EnhanceBuilding::Read
 			} catch (_wexception const & e) {
 				throw wexception("building %u: %s", building_serial, e.what());
 			}
-			id     = fr.Unsigned16();
+			id = static_cast<Building_Index::value_t>(fr.Unsigned16());
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -525,7 +525,7 @@ void Cmd_EnhanceBuilding::Write
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now id
-	fw.Unsigned16(id);
+	fw.Unsigned16(id.value());
 }
 
 
@@ -551,7 +551,7 @@ void Cmd_SetWarePriority::execute(Game* g)
 	if (psite->get_owner()->get_player_number() != get_sender())
 		return;
 
-	psite->set_priority(m_type, m_index, m_priority);
+	psite->set_priority(m_type, m_index.value(), m_priority);
 }
 
 #define PLAYER_CMD_SETWAREPRIORITY_VERSION 1
@@ -565,7 +565,7 @@ void Cmd_SetWarePriority::Write(FileWrite& fw, Editor_Game_Base& egbase, Map_Map
 	const Map_Object * const obj = egbase.objects().get_object(m_serial);
 	fw.Unsigned32(mos.get_object_file_index(obj));
 	fw.Unsigned8(m_type);
-	fw.Signed32(m_index);
+	fw.Signed32(m_index.value());
 	fw.Signed32(m_priority);
 }
 
@@ -583,7 +583,7 @@ void Cmd_SetWarePriority::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_O
 			}
 
 			m_type = fr.Unsigned8();
-			m_index = fr.Signed32();
+			m_index = static_cast<Ware_Index::value_t>(fr.Signed32());
 			m_priority = fr.Signed32();
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
@@ -597,7 +597,7 @@ Cmd_SetWarePriority::Cmd_SetWarePriority(StreamRead& des)
 {
 	m_serial = des.Unsigned32();
 	m_type = des.Unsigned8();
-	m_index = des.Signed32();
+	m_index = static_cast<Ware_Index::value_t>(des.Signed32());
 	m_priority = des.Signed32();
 }
 
@@ -607,7 +607,7 @@ void Cmd_SetWarePriority::serialize(StreamWrite& ser)
 	ser.Unsigned8(get_sender());
 	ser.Unsigned32(m_serial);
 	ser.Unsigned8(m_type);
-	ser.Signed32(m_index);
+	ser.Signed32(m_index.value());
 	ser.Signed32(m_priority);
 }
 

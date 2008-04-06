@@ -52,9 +52,9 @@ struct WareList {
 	void remove(WareList const & wl);
 	int32_t stock(Ware_Index) const;
 
-	void set_nrwares(const size_type i) {
+	void set_nrwares(Ware_Index const i) {
 		assert(m_wares.size()==0);
-		m_wares.resize(i, 0);
+		m_wares.resize(i.value(), 0);
 	}
 
 	bool operator==(const WareList  &wl) const;

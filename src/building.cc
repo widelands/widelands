@@ -272,7 +272,7 @@ Building * Building_Descr::create_constructionsite
 	if
 		(Building_Descr * const descr =
 		 	m_tribe.get_building_descr
-		 		(m_tribe.get_building_index("constructionsite")))
+		 		(m_tribe.building_index("constructionsite")))
 	{
 
 		ConstructionSite & csite = *static_cast<ConstructionSite *>
@@ -805,7 +805,9 @@ void Building::set_stop(bool stop) {
 * Get priority of a requested ware.
 * Currently always returns base priority - to be extended later
  */
-int32_t Building::get_priority(int32_t type, int32_t ware_index, bool adjust) const {
+int32_t Building::get_priority
+	(int32_t const type, Ware_Index const ware_index, bool const adjust) const
+{
 	int32_t priority = m_priority;
 
 	if (type == Request::WARE) {
@@ -847,7 +849,11 @@ void Building::set_priority(int32_t new_priority) {
 	m_priority = new_priority;
 }
 
-void Building::set_priority(int32_t type, int32_t ware_index, int32_t new_priority) {
+void Building::set_priority
+	(int32_t    const type,
+	 Ware_Index const ware_index,
+	 int32_t    const new_priority)
+{
 	if (type == Request::WARE) {
 		m_ware_priorities[ware_index] = new_priority;
 	}

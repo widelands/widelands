@@ -359,7 +359,7 @@ UI::UniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
 	//  First, we must decide about the size.
-	const int32_t nr_wares = parent.get_player()->tribe().get_nrwares();
+	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
 	uint32_t wares_per_row = MIN_WARES_PER_LINE;
 	while (nr_wares % wares_per_row && wares_per_row <= MAX_WARES_PER_LINE)
 		++wares_per_row;
@@ -384,7 +384,7 @@ m_parent(&parent)
 	m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	//  all wares
-	int32_t cur_ware = 0;
+	Widelands::Item_Ware_Descr::Index cur_ware = 0;
 	int32_t dposy    = 0;
 	posy += PLOT_HEIGHT+ 2 * spacing;
 	Widelands::Tribe_Descr const & tribe = parent.get_player()->tribe();

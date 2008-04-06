@@ -93,7 +93,7 @@ throw (_wexception)
 								Tribe_Descr const & tribe =
 									player_immovable->owner().tribe();
 								if
-									(tribe.get_nrwares()
+									(tribe.get_nrwares().value()
 									 <=
 									 static_cast<int32_t>(ware_index_from_file))
 									throw wexception
@@ -113,7 +113,7 @@ throw (_wexception)
 							//  FIXME was saved.
 							Tribe_Descr const & tribe = *worker->get_tribe();
 							if
-								(tribe.get_nrwares()
+								(tribe.get_nrwares().value()
 								 <=
 								 static_cast<int32_t>(ware_index_from_file))
 								throw wexception
@@ -217,7 +217,7 @@ void Map_Waredata_Data_Packet::write_ware
 
 	//  FIXME We can not assume that ware index is the same when the game is
 	//  FIXME loaded again. This must be changed to write the name instead.
-	fw->Signed32(ware->descr_index());
+	fw->Signed32(ware->descr_index().value());
 
 	if (Map_Object const * const obj = ware->m_transfer_nextstep.get(egbase)) {
 		assert(os->is_object_known(obj));

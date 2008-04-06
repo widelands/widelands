@@ -116,18 +116,25 @@ void WaresDisplay::draw(RenderTarget* dst)
 {
 	Point p(2, 2);
 
-	int32_t number = m_tribe.get_nrwares();
+	Widelands::Ware_Index number = m_tribe.get_nrwares();
 	bool is_worker = false;
 
 	if (m_type == WORKER) {
 		number = m_tribe.get_nrworkers();
 		is_worker = true;
 	}
-	int32_t totid = 0;
-	for (Widelands::Ware_Index::value_t id = 0; id < number; ++id, ++totid) {
+	uint8_t totid = 0;
+	for
+		(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+		 id < number;
+		 ++id, ++totid)
+	{
 		uint32_t totalstock = 0;
-		for (Widelands::Ware_Index::value_t i = 0; i < m_warelists.size(); ++i)
-			totalstock += m_warelists[i]->stock(id);
+		for
+			(Widelands::Ware_Index i = Widelands::Ware_Index::First();
+			 i.value() < m_warelists.size();
+			 ++i)
+			totalstock += m_warelists[i.value()]->stock(id);
 
 		draw_ware(*dst, p, id, totalstock, is_worker);
 

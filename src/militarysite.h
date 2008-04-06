@@ -40,18 +40,25 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	virtual bool is_only_production_site() const throw () {return false;}
 
 	virtual uint32_t get_conquers() const {return m_conquer_radius;}
-	int32_t get_max_number_of_soldiers () const throw () {return m_num_soldiers;}
-	int32_t get_max_number_of_medics   () const throw () {return m_num_medics;}
-	int32_t get_heal_per_second        () const throw () {return m_heal_per_second;}
-	int32_t get_heal_increase_per_medic() const throw ()
-	{return m_heal_incr_per_medic;}
+	uint32_t get_max_number_of_soldiers () const throw () {
+		return m_num_soldiers;
+	}
+	uint32_t get_max_number_of_medics   () const throw () {
+		return m_num_medics;
+	}
+	uint32_t get_heal_per_second        () const throw () {
+		return m_heal_per_second;
+	}
+	uint32_t get_heal_increase_per_medic() const throw () {
+		return m_heal_incr_per_medic;
+	}
 
 private:
-	int32_t m_conquer_radius;
-	int32_t m_num_soldiers;
-	int32_t m_num_medics;
-	int32_t m_heal_per_second;
-	int32_t m_heal_incr_per_medic;
+	uint32_t m_conquer_radius;
+	uint32_t m_num_soldiers;
+	uint32_t m_num_medics;
+	uint32_t m_heal_per_second;
+	uint32_t m_heal_incr_per_medic;
 };
 
 class MilitarySite : public ProductionSite, public SoldierControl, public Attackable {

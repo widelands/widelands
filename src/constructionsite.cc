@@ -327,7 +327,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
 			wq->init
-				(tribe.get_safe_ware_index(buildcost[i].name.c_str()),
+				(tribe.safe_ware_index(buildcost[i].name.c_str()),
 				 buildcost[i].amount);
 
 			m_work_steps += buildcost[i].amount;
@@ -414,7 +414,7 @@ void ConstructionSite::request_builder(Game *) {
 	m_builder_request =
 		new Request
 		(this,
-		 get_owner()->tribe().get_safe_worker_index("builder"),
+		 get_owner()->tribe().safe_worker_index("builder"),
 		 &ConstructionSite::request_builder_callback, this,
 		 Request::WORKER);
 }

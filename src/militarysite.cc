@@ -249,7 +249,7 @@ void MilitarySite::update_soldier_request()
 
 	if (stationed < m_capacity) {
 		if (!m_soldier_request) {
-			int32_t soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
+			Ware_Index soldierid = get_owner()->tribe().safe_worker_index("soldier");
 
 			m_soldier_request = new Request
 				(this,

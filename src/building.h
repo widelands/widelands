@@ -53,6 +53,8 @@ class Building;
 struct Building_Descr : public Map_Object_Descr {
 	friend struct Map_Buildingdata_Data_Packet;
 
+	typedef Building_Index::value_t Index;
+
 	struct CostItem {
 		std::string name;   // name of ware
 		int32_t         amount; // amount
@@ -205,9 +207,9 @@ public:
 	virtual void set_stop(bool stop);
 
 	int32_t get_base_priority() const {return m_priority;}
-	int32_t get_priority(int32_t type, int32_t ware_index, bool adjust = true) const;
+	int32_t get_priority(int32_t type, Ware_Index ware_index, bool adjust = true) const;
 	void set_priority(int32_t new_priority);
-	void set_priority(int32_t type, int32_t ware_index, int32_t new_priority);
+	void set_priority(int32_t type, Ware_Index ware_index, int32_t new_priority);
 
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;

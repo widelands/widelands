@@ -304,9 +304,10 @@ m_button_cancel
 		(egbase.map()
 		 .get_scenario_player_tribe(m_player_area.player_number).c_str());
 	{
-		const int i =
-			tribe.get_building_index(trigger.m_building_type->name().c_str());
-		m_building = i == -1 ? 0 : i;
+		m_building  =
+			tribe.building_index(trigger.m_building_type->name().c_str());
+		if (not m_building)
+			m_building = Widelands::Building_Index::First();
 	}
 	{
 		const bool has_several_players = 1 < egbase.map().get_nrplayers();
@@ -370,14 +371,16 @@ void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
 		//  previously selected building. If not, select the first building in
 		//  the new player's tribe.
 		{
-			const int i =
-				new_tribe.get_building_index
+			m_building =
+				new_tribe.building_index
 				(old_tribe.get_building_descr(m_building)->name().c_str());
-			m_building = i == -1 ? 0 : i;
+			if (not m_building)
+				m_building = Widelands::Building_Index::First();
 		}
 		update_label_building
 			(m_label_building, *new_tribe.get_building_descr(m_building));
-		const bool has_several_buildings = 1 < new_tribe.get_nrbuildings();
+		bool const has_several_buildings =
+			1 < new_tribe.get_nrbuildings().value();
 		m_decrement_building.set_enabled(has_several_buildings);
 		m_increment_building.set_enabled(has_several_buildings);
 	}
@@ -389,9 +392,10 @@ void Trigger_Building_Option_Menu::clicked_increment_building() {
 	Widelands::Editor_Game_Base const & egbase = eia().egbase();
 	Widelands::Tribe_Descr      const & tribe  =
 		egbase.player(m_player_area.player_number).tribe();
-	m_building = m_building.value() + 1;
-	if (m_building.value() == tribe.get_nrbuildings())
-		m_building = 0;
+	m_building =
+		static_cast<Widelands::Building_Index::value_t>(m_building.value() + 1);
+	if (m_building == tribe.get_nrbuildings())
+		m_building = Widelands::Building_Index::First();
 	update_label_building
 		(m_label_building, *tribe.get_building_descr(m_building));
 }
@@ -401,9 +405,10 @@ void Trigger_Building_Option_Menu::clicked_decrement_building() {
 	Widelands::Editor_Game_Base const & egbase = eia().egbase();
 	Widelands::Tribe_Descr      const & tribe  =
 		egbase.player(m_player_area.player_number).tribe();
-	if (0 == m_building)
+	if (0 == m_building.value())
 		m_building = tribe.get_nrbuildings();
-	m_building = m_building.value() - 1;
+	m_building =
+		static_cast<Widelands::Building_Index::value_t>(m_building.value() - 1);
 	update_label_building
 		(m_label_building, *tribe.get_building_descr(m_building));
 }

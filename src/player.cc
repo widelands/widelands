@@ -60,9 +60,9 @@ Player::Player
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),
 	m_fields            (0),
-	m_allowed_buildings (tribe_descr.get_nrbuildings(), true),
-	m_current_statistics(tribe().get_nrwares()),
-	m_ware_productions  (tribe().get_nrwares())
+	m_allowed_buildings (tribe_descr.get_nrbuildings().value(), true),
+	m_current_statistics(tribe_descr.get_nrwares    ().value()),
+	m_ware_productions  (tribe_descr.get_nrwares    ().value())
 {
 	for (int32_t i = 0; i < 4; ++i)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
@@ -106,7 +106,7 @@ void Player::init(const bool place_headquarters) {
 				(*egbase().warp_building
 				 	(starting_area,
 				 	 starting_area.player_number,
-				 	 trdesc.get_building_index("headquarters")));
+				 	 trdesc.building_index("headquarters").value()));
 			starting_area.radius = headquarter.get_conquers();
 			egbase().conquer_area(starting_area);
 			trdesc.load_warehouse_with_start_wares(egbase(), headquarter);
@@ -302,13 +302,13 @@ Player::build
 Place a construction site, checking that it's legal to do so.
 ===============
 */
-void Player::build(Coords c, int32_t idx)
+void Player::build(Coords c, Building_Index idx)
 {
 	int32_t buildcaps;
 	Building_Descr* descr;
 
 	// Validate building type
-	if (idx < 0 || idx >= tribe().get_nrbuildings())
+	if (not (idx < tribe().get_nrbuildings()))
 		return;
 	descr = tribe().get_building_descr(idx);
 
@@ -383,11 +383,11 @@ void Player::start_stop_building(PlayerImmovable* imm) {
  * an idea of enhancing
  */
 void Player::enhance_building
-	(Building * building, Building_Descr::Index const index_of_new_building)
+	(Building * building, Building_Index const index_of_new_building)
 {
 	if (building->get_owner() == this) {
-		const Building_Descr::Index index_of_old_building =
-			tribe().get_building_index(building->name().c_str());
+		Building_Index const index_of_old_building =
+			tribe().building_index(building->name().c_str());
 		const Coords position = building->get_position();
 
 		//  Get workers and soldiers
@@ -435,7 +435,7 @@ void Player::flagaction(Flag* flag, int32_t action)
 		case FLAGACTION_GEOLOGIST:
 			//try {
 				flag->add_flag_job
-					(game, tribe().get_worker_index("geologist"), "expedition");
+					(game, tribe().worker_index("geologist"), "expedition");
 			/*} catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
 				log("Tribe defines no geologist\n");
 			} */
@@ -746,7 +746,7 @@ throw ()
  */
 void Player::sample_statistics()
 {
-	assert (m_ware_productions.size() == static_cast<uint32_t>(tribe().get_nrwares()));
+	assert (m_ware_productions.size() == tribe().get_nrwares().value());
 
 	for (uint32_t i = 0; i < m_ware_productions.size(); ++i) {
 		m_ware_productions[i].push_back(m_current_statistics[i]);
@@ -759,8 +759,8 @@ void Player::sample_statistics()
  * A ware was produced. Update the corresponding statistics.
  */
 void Player::ware_produced(Ware_Index const wareid) {
-	assert (m_ware_productions.size() == static_cast<uint32_t>(tribe().get_nrwares()));
-	assert(wareid.value() < static_cast<uint32_t>(tribe().get_nrwares()));
+	assert (m_ware_productions.size() == tribe().get_nrwares().value());
+	assert(wareid.value() < tribe().get_nrwares().value());
 
 	++m_current_statistics[wareid.value()];
 }
@@ -770,11 +770,11 @@ void Player::ware_produced(Ware_Index const wareid) {
  * Get current ware production statistics
  */
 const std::vector<uint32_t> * Player::get_ware_production_statistics
-		(const int32_t ware) const
+		(Ware_Index const ware) const
 {
-	assert(ware < static_cast<int32_t>(m_ware_productions.size()));
+	assert(ware.value() < m_ware_productions.size());
 
-	return &m_ware_productions[ware];
+	return &m_ware_productions[ware.value()];
 }
 
 
@@ -789,14 +789,14 @@ void Player::update_building_statistics(Building* building, losegain_t lg)
 		constructionsite ?
 		constructionsite->building().name() : building->name();
 
-	const Building_Descr::Index nr_buildings = tribe().get_nrbuildings();
+	Building_Index const nr_buildings = tribe().get_nrbuildings();
 
 	// Get the valid vector for this
-	if (m_building_stats.size() < nr_buildings)
-		m_building_stats.resize(nr_buildings);
+	if (m_building_stats.size() < nr_buildings.value())
+		m_building_stats.resize(nr_buildings.value());
 
 	std::vector<Building_Stats> & stat =
-		m_building_stats[tribe().get_building_index(building_name.c_str())];
+		m_building_stats[tribe().building_index(building_name.c_str()).value()];
 
 	if (lg == GAIN) {
 		Building_Stats new_building;
@@ -854,11 +854,10 @@ void Player::ReadStatistics(FileRead& fr, uint32_t version)
 		uint16_t nr_entries = fr.Unsigned16();
 
 		if (nr_wares > 0) {
-			if (nr_wares != tribe().get_nrwares())
+			if (nr_wares != tribe().get_nrwares().value())
 				throw wexception
 					("Statistics for %u has bad number of wares (%u != %u)",
-					 get_player_number(),
-					 nr_wares, tribe().get_nrwares());
+					 get_player_number(), nr_wares, tribe().get_nrwares().value());
 
 			assert(m_ware_productions.size() == nr_wares);
 			assert(m_current_statistics.size() == nr_wares);

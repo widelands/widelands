@@ -100,8 +100,8 @@ m_allow_button
 	m_forbidden.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
 
 	Widelands::Tribe_Descr const & tribe = player.tribe();
-	Building_Index::value_t const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index::value_t i = 0; i < nr_buildings; ++i) {
+	Building_Index const nr_buildings = tribe.get_nrbuildings();
+	for (Building_Index i = 0; i < nr_buildings; ++i) {
 		Widelands::Building_Descr & building = *tribe.get_building_descr(i);
 		if (not building.get_enhanced_building() and not building.get_buildable())
 			continue;

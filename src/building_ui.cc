@@ -507,7 +507,7 @@ protected:
 	void act_debug();
 	void toggle_workarea();
 	void act_start_stop();
-	void act_enhance(Widelands::Building_Descr::Index);
+	void act_enhance(Widelands::Building_Index);
 	void act_drop_soldier(uint32_t);
 	void act_change_soldier_capacity(int32_t);
 
@@ -676,11 +676,12 @@ void Building_Window::setup_capsbuttons()
 			 it != buildings_end;
 			 ++it)
 		{
-			const int32_t id = tribe.get_building_index(*it);
-			if (id == -1)
+			Widelands::Building_Index const id = tribe.building_index(*it);
+			if (not id)
 				throw wexception("Should enhance to unknown building: %s", *it);
 
-			if (not m_player->player().is_building_allowed(id)) continue;
+			if (not m_player->player().is_building_allowed(id))
+				continue;
 
 			Widelands::Building_Descr const & building =
 				*tribe.get_building_descr(id);
@@ -688,7 +689,7 @@ void Building_Window::setup_capsbuttons()
 			snprintf
 				(buffer, sizeof(buffer),
 				 _("Enhance to %s"), building.descname().c_str());
-			new UI::IDButton<Building_Window, Widelands::Building_Descr::Index>
+			new UI::IDButton<Building_Window, Widelands::Building_Index>
 				(m_capsbuttons,
 				 x, 0, 34, 34,
 				 4,
@@ -766,7 +767,7 @@ Building_Window::act_bulldoze
 Callback for bulldozing request
 ===============
 */
-void Building_Window::act_enhance(Widelands::Building_Descr::Index const id)
+void Building_Window::act_enhance(Widelands::Building_Index const id)
 {
 	if
 		(m_building
@@ -1287,7 +1288,11 @@ struct PriorityButtonInfo {
 };
 
 struct PriorityButtonHelper : std::map<int32_t, PriorityButtonInfo> {
-	PriorityButtonHelper(Widelands::Game& g, ProductionSite * ps, int32_t ware_type, int32_t ware_index);
+	PriorityButtonHelper
+		(Widelands::Game     & g,
+		 ProductionSite      * ps,
+		 int32_t               ware_type,
+		 Widelands::Ware_Index ware_index);
 
 	void button_clicked (int32_t priority);
 	void update_buttons ();
@@ -1296,7 +1301,7 @@ private:
 	Widelands::Game& m_game;
 	ProductionSite * m_ps;
 	int32_t m_ware_type;
-	int32_t m_ware_index;
+	Widelands::Ware_Index m_ware_index;
 };
 
 struct ProductionSite_Window : public Building_Window {
@@ -1329,10 +1334,10 @@ protected:
 
 
 PriorityButtonHelper::PriorityButtonHelper
-	(Widelands::Game &       g,
-	 ProductionSite  *       ps,
-	 int32_t           const ware_type,
-	 int32_t           const ware_index)
+	(Widelands::Game     &       g,
+	 ProductionSite      *       ps,
+	 int32_t               const ware_type,
+	 Widelands::Ware_Index const ware_index)
 :
 m_game(g),
 m_ps        (ps),
@@ -1413,7 +1418,7 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 
 	hbox->add(wqd, UI::Box::AlignTop);
 
-	if (wq->get_ware() >= static_cast<Widelands::Ware_Index::value_t>(0)) {
+	if (wq->get_ware()) {
 		m_priority_helpers.push_back
 			(PriorityButtonHelper(get_player()->game(), ps, Widelands::Request::WARE, wq->get_ware()));
 		PriorityButtonHelper & helper = m_priority_helpers.back();

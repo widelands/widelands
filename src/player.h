@@ -369,8 +369,8 @@ struct Player :
 	{return m_fields[i].military_influence;}
 
 	// Allowed buildings
-	bool is_building_allowed(const Building_Descr::Index i) const throw () {
-		return m_allowed_buildings[i];
+	bool is_building_allowed(Building_Index const i) const throw () {
+		return m_allowed_buildings[i.value()];
 	}
 	void allow_building(Building_Index, bool allow);
 
@@ -381,12 +381,12 @@ struct Player :
 	void   force_road(Path const &, bool create_carrier = false);
 	void   build_road(Path const &); /// Build a road if it is allowed.
 	void force_building(Coords, Building_Index, bool fill);
-	void build(Coords c, int32_t idx);
+	void build(Coords c, Building_Index idx);
 	void bulldoze(PlayerImmovable* imm);
 	void flagaction(Flag* flag, int32_t action);
 	void start_stop_building(PlayerImmovable* imm);
 	void enhance_building
-		(Building *, Building_Descr::Index index_of_new_building);
+		(Building *, Building_Index index_of_new_building);
 
 	// Economy stuff
 	void add_economy(Economy*);
@@ -428,10 +428,13 @@ struct Player :
 	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
 
 	// Statistics
-	const Building_Stats_vector & get_building_statistics(const int32_t i) const {
-		return m_building_stats[i];
+	Building_Stats_vector const & get_building_statistics
+		(Building_Index const i) const
+	{
+		return m_building_stats[i.value()];
 	}
-	const std::vector<uint32_t> * get_ware_production_statistics(const int32_t ware) const;
+	std::vector<uint32_t> const * get_ware_production_statistics
+		(Ware_Index const) const;
 
 	void ReadStatistics(FileRead& fr, uint32_t version);
 	void WriteStatistics(FileWrite &) const;

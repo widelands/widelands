@@ -87,13 +87,16 @@ Load tribe graphics
 */
 void Tribe_Descr::load_graphics()
 {
-	for (int32_t i = 0; i < m_workers.get_nitems(); ++i)
+	for (Ware_Index i = Ware_Index::First(); i < m_workers.get_nitems(); ++i)
 		m_workers.get(i)->load_graphics();
 
-	for (int32_t i = 0; i < m_wares.get_nitems(); ++i)
+	for (Ware_Index i = Ware_Index::First(); i < m_wares.get_nitems  (); ++i)
 		m_wares.get(i)->load_graphics();
 
-	for (int32_t i = 0; i < m_buildings.get_nitems(); ++i)
+	for
+		(Building_Index i = Building_Index::First();
+		 i < m_buildings.get_nitems();
+		 ++i)
 		m_buildings.get(i)->load_graphics();
 }
 
@@ -221,15 +224,19 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 	//  m_recursive_workarea_info from every building that can be reached through
 	//  at least 1 sequence of enhancement operations (including the empty
 	//  sequence).
-	for (int32_t i = 0; i < m_buildings.get_nitems(); ++i) {
+	for
+		(Building_Index i = Building_Index::First();
+		 i < m_buildings.get_nitems();
+		 ++i)
+	{
 		Workarea_Info & collected_info
 			= get_building_descr(i)->m_recursive_workarea_info;
-		std::set<int32_t> to_consider, considered;
-		to_consider.insert(i);
+		std::set<Building_Descr::Index> to_consider, considered;
+		to_consider.insert(i.value());
 		while (not to_consider.empty()) {
-			const std::set<int32_t>::iterator consider_now_iterator
+			const std::set<Building_Descr::Index>::iterator consider_now_iterator
 				= to_consider.begin();
-			const int32_t consider_now = *consider_now_iterator;
+			const Building_Descr::Index consider_now = *consider_now_iterator;
 			const Building_Descr & considered_building_descr
 				= *get_building_descr(consider_now);
 			to_consider.erase(consider_now_iterator);
@@ -244,16 +251,16 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 					 it != enhancements_end;
 					 ++it)
 				{
-					const int32_t index = m_buildings.get_index(*it);
-					if (index < 0) {
+					const Building_Index index = m_buildings.get_index(*it);
+					if (not index) {
 						log
 							("        Warning: building %s (%i) does not exist\n",
-							 *it, index);
+							 *it, index.value());
 					}
-					else if (considered.find(index) == considered.end()) {
+					else if (considered.find(index.value()) == considered.end()) {
 						//  The building index has not been considered. Add it to
 						//  to_consider.
-						to_consider.insert(index);
+						to_consider.insert(index.value());
 					}
 				}
 			}
@@ -339,7 +346,6 @@ and is called by the Game class
 */
 void Tribe_Descr::parse_wares(const char* directory)
 {
-	Descr_Maintainer<Item_Ware_Descr>* wares=&m_wares;
 	char subdir[256];
 	filenameset_t dirs;
 
@@ -367,7 +373,7 @@ void Tribe_Descr::parse_wares(const char* directory)
 		else
 			warename = it->c_str();
 
-		if (wares->exists(warename))
+		if (m_wares.exists(warename))
 			log("Ware %s is already known in world init\n", it->c_str());
 
 		Item_Ware_Descr* descr = 0;
@@ -386,7 +392,7 @@ void Tribe_Descr::parse_wares(const char* directory)
 		}
 
 		if (descr)
-			wares->add(descr);
+			m_wares.add(descr);
 	}
 }
 
@@ -458,7 +464,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 		const smit startwares_end = m_startwares.end();
 		for (smit it = m_startwares.begin(); it != startwares_end; ++it)
 			wh.insert_wares
-			(get_safe_ware_index(it->first.c_str()), it->second);
+			(safe_ware_index(it->first.c_str()), it->second);
 	}
 	{
 		const smit startworkers_end = m_startworkers.end();
@@ -467,7 +473,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 			 it != startworkers_end;
 			 ++it)
 			wh.insert_workers
-				(get_safe_worker_index(it->first.c_str()), it->second);
+				(safe_worker_index(it->first.c_str()), it->second);
 	}
 	{
 		const smit startsoldiers_end = m_startsoldiers.end();
@@ -502,7 +508,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 				for (int32_t i = 0; i < it->second; ++i) {
 					Soldier & soldier = static_cast<Soldier &>
 						(dynamic_cast<Soldier_Descr const *>
-						 	(get_worker_descr(get_worker_index("soldier")))
+						 	(get_worker_descr(worker_index("soldier")))
 						 ->create(*game, wh.owner(), wh, wh.get_position()));
 					soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
 					wh.incorporate_worker(game, &soldier);
@@ -631,10 +637,10 @@ uint32_t Tribe_Descr::get_resource_indicator
 /*
  * Return the given ware or die trying
  */
-int32_t Tribe_Descr::get_safe_ware_index(const char * const warename) const {
-	int32_t const result = get_ware_index(warename);
+Ware_Index Tribe_Descr::safe_ware_index(const char * const warename) const {
+	Ware_Index const result = ware_index(warename);
 
-	if (result == -1)
+	if (not result)
 		throw wexception
 			("tribe %s does not define ware type \"%s\"",
 			 name().c_str(), warename);
@@ -644,10 +650,10 @@ int32_t Tribe_Descr::get_safe_ware_index(const char * const warename) const {
 /*
  * Return the given worker or die trying
  */
-int32_t Tribe_Descr::get_safe_worker_index(const char * const workername) const {
-	int32_t const result = get_worker_index(workername);
+Ware_Index Tribe_Descr::safe_worker_index(const char * const workername) const {
+	Ware_Index const result = worker_index(workername);
 
-	if (result == -1)
+	if (not result)
 		throw wexception
 			("tribe %s does not define worker type \"%s\"",
 			 name().c_str(), workername);
@@ -657,10 +663,10 @@ int32_t Tribe_Descr::get_safe_worker_index(const char * const workername) const 
 /*
  * Return the given building or die trying
  */
-int32_t Tribe_Descr::get_safe_building_index(const char *buildingname) const {
-	int32_t const result = get_building_index(buildingname);
+Building_Index Tribe_Descr::safe_building_index(const char *buildingname) const {
+	Building_Index const result = building_index(buildingname);
 
-	if (result == -1)
+	if (not result)
 		throw wexception
 			("tribe %s does not define building type \"%s\"",
 			 name().c_str(), buildingname);

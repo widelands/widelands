@@ -78,7 +78,6 @@ private:
 };
 
 struct Terrain_Descr {
-	friend struct Descr_Maintainer<Terrain_Descr>;
 	friend struct World;
 
 	typedef Terrain_Index Index;

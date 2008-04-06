@@ -24,10 +24,10 @@
 #include <stdexcept>
 
 /**
- * This template is used to have a typesafe maintaining class for Bob_Descr,
+ * This template is used to have a typesafe maintainer for Bob_Descr,
  * Worker_Descr and so on.
  */
-template <class T> struct Descr_Maintainer {
+template <typename T> struct Descr_Maintainer {
 	Descr_Maintainer() : capacity(0), nitems(0), items(0) {}
 	~Descr_Maintainer();
 
@@ -66,7 +66,7 @@ private:
 };
 
 
-template <class T>
+template <typename T>
 int32_t Descr_Maintainer<T>::add(T* item) {
 	int32_t const result = nitems;
 	if (++nitems >= capacity)
@@ -76,16 +76,42 @@ int32_t Descr_Maintainer<T>::add(T* item) {
 }
 
 /// Returns the element if it exists, 0 otherwise.
-template <class T>
+template <typename T>
 T* Descr_Maintainer<T>::exists(const char* name) {
 	for (typename T::Index i = 0; i < nitems; ++i)
 		if (name == items[i]->name()) return items[i];
 	return 0;
 }
 
-template<class T> Descr_Maintainer<T>::~Descr_Maintainer() {
+template<typename T> Descr_Maintainer<T>::~Descr_Maintainer() {
 	for (typename T::Index i = 0; i < nitems; ++i) delete items[i];
 	free(items);
 }
+/// This template is used to have a typesafe maintainer for Bob_Descr,
+/// Worker_Descr and so on. This version uses boxed Index type for indexing.
+/// Usage: Indexed_Descr_Maintainer<Worker_Descr, Ware_Index> workers;
+template <typename T, typename T_Index> struct Indexed_Descr_Maintainer :
+private Descr_Maintainer<T>
+{
+	T * exists(char const * const name) {
+		return Descr_Maintainer<T>::exists(name);
+	}
+	T_Index add(T * const t) {
+		return
+			static_cast<typename T_Index::value_t>(Descr_Maintainer<T>::add(t));
+	}
+	T_Index get_nitems() const throw () {
+		return Descr_Maintainer<T>::get_nitems();
+	}
+	T_Index get_index(const char * const name) const throw () {
+		int32_t idx = Descr_Maintainer<T>::get_index(name);
+		return
+			idx == -1 ? T_Index::Null() :
+			T_Index(static_cast<typename T_Index::value_t>(idx));
+	}
+	T * get(T_Index const idx) const {
+		return idx ? Descr_Maintainer<T>::get(idx.value()) : 0;
+	}
+};
 
 #endif

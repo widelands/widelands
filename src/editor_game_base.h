@@ -103,9 +103,10 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building * warp_building(Coords, Player_Number, Building_Descr::Index);
+	Building * warp_building(Coords, Player_Number, Building_Index);
 	Building * warp_constructionsite
-		(Coords, Player_Number, Building_Index, int32_t oldid = -1);
+		(Coords, Player_Number, Building_Index,
+		 Building_Index oldid = Building_Index::Null());
 	Bob * create_bob(Coords, Bob::Descr::Index, const Tribe_Descr * const = 0);
 	Immovable & create_immovable(Coords, int32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable

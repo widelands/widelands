@@ -34,13 +34,17 @@ struct WarehouseSupply : public Supply {
 
 	void set_economy(Economy* e);
 
-	void set_nrworkers(int32_t i);
-	void set_nrwares(int32_t i);
+	void set_nrworkers(Ware_Index);
+	void set_nrwares  (Ware_Index);
 
 	const WareList &get_wares() const {return m_wares;}
 	const WareList &get_workers() const {return m_workers;}
-	int32_t stock_wares  (Ware_Index const i) const {return m_wares  .stock(i);}
-	int32_t stock_workers(Ware_Index const i) const {return m_workers.stock(i);}
+	uint32_t stock_wares  (Ware_Index const i) const {
+		return m_wares  .stock(i);
+	}
+	uint32_t stock_workers(Ware_Index const i) const {
+		return m_workers.stock(i);
+	}
 	void add_wares     (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
 	void add_workers   (Ware_Index, uint32_t count);

@@ -164,7 +164,7 @@ throw (_wexception)
 								f.request =
 									new Request
 									(&flag,
-									 1,
+									 Ware_Index(),
 									 &Flag::flag_job_request_callback, &flag,
 									 Request::WORKER);
 								f.request->Read(&fr, egbase, ol);

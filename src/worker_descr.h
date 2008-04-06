@@ -40,7 +40,7 @@ class Worker_Descr : public Bob::Descr
 
 	struct CostItem {
 		std::string name;   // name of ware
-		int32_t         amount; // amount
+		uint32_t    amount;
 
 		CostItem(const char* iname, int32_t iamount)
 			: name(iname), amount(iamount)

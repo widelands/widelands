@@ -170,11 +170,11 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 		if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
 			Tribe_Descr const & tribe = constructionsite.owner().tribe();
 			constructionsite.m_building =
-				tribe.get_building_descr(tribe.get_safe_building_index(fr.CString()));
+				tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 			if (fr.Unsigned8()) {
 				constructionsite.m_prev_building =
 					tribe.get_building_descr
-					(tribe.get_safe_building_index(fr.CString()));
+					(tribe.safe_building_index(fr.CString()));
 			} else
 				constructionsite.m_prev_building = 0;
 
@@ -183,7 +183,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 				constructionsite.m_builder_request =
 					new Request
 						(&constructionsite,
-						 0,
+						 Ware_Index::First(),
 						 ConstructionSite::request_builder_callback,
 						 &constructionsite,
 						 Request::WORKER);
@@ -244,12 +244,12 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			//  supply
 			Tribe_Descr const & tribe = warehouse.owner().tribe();
 			while (fr.Unsigned8()) {
-				int32_t const id = tribe.get_safe_ware_index(fr.CString());
+				Ware_Index const id = tribe.safe_ware_index(fr.CString());
 				warehouse.remove_wares(id, warehouse.m_supply->stock_wares(id));
 				warehouse.insert_wares(id, fr.Unsigned16());
 			}
 			while (fr.Unsigned8()) {
-				int32_t const id = tribe.get_safe_worker_index(fr.CString());
+				Ware_Index const id = tribe.safe_worker_index(fr.CString());
 				warehouse.remove_workers
 					(id, warehouse.m_supply->stock_workers(id));
 				warehouse.insert_workers(id, fr.Unsigned16());
@@ -262,7 +262,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				Request & req =
 					*new Request
 						(&warehouse,
-						 0,
+						 Ware_Index::First(),
 						 Warehouse::idle_request_cb, &warehouse,
 						 Request::WORKER);
 				req.Read(&fr, egbase, ol);
@@ -279,7 +279,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						char const * const name = fr.CString();
 						//  Worker might not yet be loaded so that get ware would not
 						//  work but make sure that such a worker type exists.
-						if (tribe.get_worker_index(name) == -1)
+						if (not tribe.worker_index(name))
 							throw wexception("unknown worker type \"%s\"", name);
 
 						warehouse.sort_worker_in
@@ -322,7 +322,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 					militarysite.m_soldier_request =
 						new Request
 							(&militarysite,
-							 0,
+							 Ware_Index::First(),
 							 MilitarySite::request_soldier_callback, &militarysite,
 							 Request::WORKER);
 					militarysite.m_soldier_request->Read(&fr, egbase, ol);
@@ -334,7 +334,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 					Request* req =
 						new Request
 							(&militarysite,
-							 0,
+							 Ware_Index::First(),
 							 MilitarySite::request_soldier_callback, &militarysite,
 							 Request::WORKER);
 					req->Read(&fr, egbase, ol);
@@ -391,7 +391,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 					Request & req =
 						*new Request
 							(&productionsite,
-							 0,
+							 Ware_Index::First(),
 							 ProductionSite::request_worker_callback, &productionsite,
 							 Request::WORKER);
 					req.Read(&fr, egbase, ol);
@@ -475,7 +475,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 				trainingsite.m_soldier_request =
 					new Request
 						(&trainingsite,
-						 0,
+						 Ware_Index::First(),
 						 TrainingSite::request_soldier_callback, &trainingsite,
 						 Request::WORKER);
 				trainingsite.m_soldier_request->Read(&fr, egbase, ol);
@@ -515,7 +515,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					Request* req =
 						new Request
 							(&trainingsite,
-							 0,
+							 Ware_Index::First(),
 							 TrainingSite::request_soldier_callback, &trainingsite,
 							 Request::WORKER);
 					req->Read(&fr, egbase, ol);

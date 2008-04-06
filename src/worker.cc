@@ -949,7 +949,7 @@ void Worker::set_economy(Economy *economy)
 		return;
 
 	if (m_economy)
-		m_economy->remove_workers(descr().tribe().get_worker_index(name().c_str()), 1);
+		m_economy->remove_workers(descr().tribe().worker_index(name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -959,7 +959,7 @@ void Worker::set_economy(Economy *economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(descr().tribe().get_worker_index(name().c_str()), 1);
+		m_economy->add_workers(descr().tribe().worker_index(name().c_str()), 1);
 }
 
 
@@ -1122,7 +1122,7 @@ Ware_Index Worker::level(Game & game) {
 	// circumstances)
 	assert(becomes());
 	const Tribe_Descr & t = tribe();
-	Ware_Index const old_index = t.get_worker_index(descr().name().c_str());
+	Ware_Index const old_index = t.worker_index(descr().name().c_str());
 	Ware_Index const new_index = becomes();
 	m_descr = t.get_worker_descr(new_index);
 	assert(new_index);

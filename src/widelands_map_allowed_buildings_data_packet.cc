@@ -62,7 +62,9 @@ throw (_wexception)
 				//  All building types default to false in the game (not in the
 				//  editor).
 				if (game)
-					for (Building_Index::value_t i = tribe.get_nrbuildings(); i;)
+					for
+						(Building_Index::value_t i = tribe.get_nrbuildings().value();
+						 i;)
 						player->allow_building(--i, false);
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
@@ -108,8 +110,8 @@ throw (_wexception)
 		Section & section = *prof.create_section(buffer);
 
 		//  Write for all buildings if it is enabled.
-		Building_Descr::Index const nr_buildings = tribe.get_nrbuildings();
-		for (Building_Descr::Index b = 0; b < nr_buildings; ++b)
+		Building_Index const nr_buildings = tribe.get_nrbuildings();
+		for (Building_Index b = Building_Index::First(); b < nr_buildings; ++b)
 			if (bool const allowed = player->is_building_allowed(b))
 				section.set_bool
 					(tribe.get_building_descr(b)->name().c_str(), true);

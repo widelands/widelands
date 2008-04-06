@@ -114,7 +114,7 @@ private:
 
 	struct BuildingObserver {
 		char                      const * name;
-		int32_t                           id;
+		Widelands::Building_Index         id;
 		Widelands::Building_Descr const * desc;
 		BuildingHints             const * hints;
 

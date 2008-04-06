@@ -36,7 +36,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	virtual void parse(const char *directory, Profile * prof, const EncodeData * encdata);
 	virtual Building * create_object() const;
 
-	int32_t get_max_number_of_soldiers() const throw () {return m_num_soldiers;}
+	uint32_t get_max_number_of_soldiers() const throw () {
+		return m_num_soldiers;
+	}
 	bool get_train_hp     () const throw () {return m_train_hp;}
 	bool get_train_attack () const throw () {return m_train_attack;}
 	bool get_train_defense() const throw () {return m_train_defense;}
@@ -46,7 +48,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_max_level(tAttribute) const;
 private:
 	/** Maximum number of soldiers for a training site*/
-	int32_t m_num_soldiers;
+	uint32_t m_num_soldiers;
 	/** Whether this site can train hitpoints*/
 	bool m_train_hp;
 	/** Whether this site can train attack*/

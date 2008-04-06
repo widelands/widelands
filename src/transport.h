@@ -194,7 +194,7 @@ public:
 
 	void remove_item(Editor_Game_Base* g, WareInstance* item);
 
-	void add_flag_job(Game* g, int32_t workerware, std::string programname);
+	void add_flag_job(Game* g, Ware_Index workerware, std::string programname);
 
 protected:
 	virtual void init(Editor_Game_Base*);
@@ -465,8 +465,12 @@ struct SupplyList {
 	void add_supply(Supply* supp);
 	void remove_supply(Supply* supp);
 
-	int32_t get_nrsupplies() const {return m_supplies.size();}
-	Supply* get_supply(int32_t idx) const {return m_supplies[idx];}
+	Ware_Index get_nrsupplies() const {
+		return static_cast<Ware_Index::value_t>(m_supplies.size());
+	}
+	Supply * get_supply(Ware_Index const idx) const {
+		return m_supplies[idx.value()];
+	}
 
 private:
 	std::vector<Supply *> m_supplies;
@@ -491,7 +495,7 @@ struct WaresQueue {
 	uint32_t get_filled          () const throw () {return m_filled;}
 	uint32_t get_consume_interval() const throw () {return m_consume_interval;}
 
-	void init(int32_t ware, uint32_t size);
+	void init(Ware_Index ware, uint32_t size);
 	void cleanup();
 	void update();
 

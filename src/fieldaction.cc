@@ -507,9 +507,10 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 	m_fastclick = false;
 
+	Widelands::Building_Index const nr_buildings = tribe.get_nrbuildings();
 	for
-		(Widelands::Building_Index::value_t id = 0;
-		 id < tribe.get_nrbuildings();
+		(Widelands::Building_Index id = Widelands::Building_Index::First();
+		 id < nr_buildings;
 		 ++id)
 	{
 		Widelands::Building_Descr const & descr = *tribe.get_building_descr(id);
@@ -548,7 +549,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		}
 
 		// Add it to the grid
-		(*ppgrid)->add(id);
+		(*ppgrid)->add(id.value());
 	}
 
 	// Add all necessary tabs

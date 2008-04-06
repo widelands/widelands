@@ -77,11 +77,12 @@ void Computer_Player::late_initialization ()
 
 	log ("ComputerPlayer(%d): initializing\n", player_number);
 
-	wares=new WareObserver[tribe->get_nrwares()];
-	for (int32_t i = 0; i < tribe->get_nrwares(); ++i) {
-		wares[i].producers    = 0;
-		wares[i].consumers    = 0;
-		wares[i].preciousness = 0;
+	Ware_Index const nr_wares = tribe->get_nrwares();
+	wares = new WareObserver[nr_wares.value()];
+	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+		wares[i.value()].producers    = 0;
+		wares[i.value()].consumers    = 0;
+		wares[i.value()].preciousness = 0;
 	}
 
 	// Building hints for computer player
@@ -104,7 +105,7 @@ void Computer_Player::late_initialization ()
 			sprintf(warename, "ware_n_%i", i);
 			sprintf(wareprec, "ware_p_%i", i);
 			int32_t wprec = hints->get_safe_int(wareprec);
-			wares[tribe->get_safe_ware_index(hints->get_safe_string(warename))]
+			wares[tribe->safe_ware_index(hints->get_safe_string(warename)).value()]
 				.preciousness
 				=
 				wprec;
@@ -119,7 +120,8 @@ void Computer_Player::late_initialization ()
 	}
 
 	// collect information about which buildings our tribe can construct
-	for (Building_Index::value_t i = 0; i < tribe->get_nrbuildings(); ++i) {
+	Building_Index const nr_buildings = tribe->get_nrbuildings();
+	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
 
@@ -143,7 +145,7 @@ void Computer_Player::late_initialization ()
 		if (building_name == stoneproducer.c_str()) bo.need_stones = true;
 		if (building_name == trunkproducer.c_str()) bo.need_trees  = true;
 		if (building_name == forester.c_str())
-			bo.production_hint = tribe->get_safe_ware_index("trunk");
+			bo.production_hint = tribe->safe_ware_index("trunk").value();
 
 		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
 			bo.type=BuildingObserver::CONSTRUCTIONSITE;
@@ -170,7 +172,7 @@ void Computer_Player::late_initialization ()
 				 it != inputs_end;
 				 ++it)
 				bo.inputs.push_back
-					(tribe->get_safe_ware_index(it->ware_descr().name().c_str()));
+					(tribe->safe_ware_index(it->ware_descr().name().c_str()).value());
 
 			const std::set<std::string>::const_iterator outputs_end =
 				prod.get_outputs()->end();
@@ -179,7 +181,7 @@ void Computer_Player::late_initialization ()
 				 prod.get_outputs()->begin();
 				 it != outputs_end;
 				 ++it)
-				bo.outputs.push_back(tribe->get_safe_ware_index(it->c_str()));
+				bo.outputs.push_back(tribe->safe_ware_index(it->c_str()).value());
 
 			continue;
 		}
@@ -487,7 +489,7 @@ bool Computer_Player::construct_building ()
 	if (spots_avail[BUILDCAPS_SMALL]+spots_avail[BUILDCAPS_MEDIUM]+spots_avail[BUILDCAPS_BIG]<8)
 		++expand_factor;
 
-	int32_t proposed_building=-1;
+	Building_Index proposed_building;
 	int32_t proposed_priority=0;
 	Coords proposed_coords;
 
@@ -633,7 +635,7 @@ bool Computer_Player::construct_building ()
 	}
 #endif
 
-	if (proposed_building<0)
+	if (not proposed_building)
 		return false;
 
 	//  do not have too many construction sites
@@ -641,7 +643,9 @@ bool Computer_Player::construct_building ()
 		return false;
 
 	// if we want to construct a new building, send the command now
-	log ("ComputerPlayer(%d): want to construct building %d\n", player_number, proposed_building);
+	log
+		("ComputerPlayer(%d): want to construct building %d\n",
+		 player_number, proposed_building.value());
 	game().send_player_build (player_number, proposed_coords, proposed_building);
 
 	return true;

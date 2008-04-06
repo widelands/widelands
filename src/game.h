@@ -140,12 +140,12 @@ struct Game : public Editor_Game_Base {
 	void send_player_command (Widelands::PlayerCommand *);
 
 	void send_player_bulldoze (PlayerImmovable*);
-	void send_player_build (int32_t, const Coords&, int32_t);
+	void send_player_build (int32_t, const Coords&, Building_Index);
 	void send_player_build_flag (int32_t, const Coords&);
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag*, int32_t);
 	void send_player_start_stop_building (Building*);
-	void send_player_enhance_building (Building*, int32_t);
+	void send_player_enhance_building (Building*, Building_Index);
 	void send_player_set_ware_priority (PlayerImmovable*, int32_t type, Ware_Index index, int32_t prio);
 	void send_player_change_training_options(Building*, int32_t, int32_t);
 	void send_player_drop_soldier(Building*, int32_t);

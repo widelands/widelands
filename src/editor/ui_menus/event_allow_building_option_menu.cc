@@ -143,7 +143,7 @@ m_button_cancel
 		(egbase.map()
 		 .get_scenario_player_tribe(m_player).c_str());
 	if (not m_building)
-		m_building = static_cast<Widelands::Building_Index::value_t>(0);
+		m_building = Widelands::Building_Index::First();
 	{
 		const bool has_several_players = 1 < egbase.map().get_nrplayers();
 		m_decrement_player.set_enabled(has_several_players);
@@ -243,15 +243,15 @@ void Event_Allow_Building_Option_Menu::clicked_change_player(const bool up) {
 		//  previously selected building. If not, select the first building in
 		//  the new player's tribe.
 		{
-			const int i =
-				new_tribe.get_building_index
+			Widelands::Building_Index i =
+				new_tribe.building_index
 				(old_tribe.get_building_descr(m_building)->name().c_str());
-			m_building =
-				static_cast<Widelands::Building_Index::value_t>(i == -1 ? 0 : i);
+			m_building = i ? i : Widelands::Building_Index::First();
 		}
 		update_label_building
 			(m_label_building, *new_tribe.get_building_descr(m_building));
-		const bool has_several_buildings = 1 < new_tribe.get_nrbuildings();
+		bool const has_several_buildings =
+			1 < new_tribe.get_nrbuildings().value();
 		m_decrement_building.set_enabled(has_several_buildings);
 		m_increment_building.set_enabled(has_several_buildings);
 	}
@@ -266,8 +266,8 @@ void Event_Allow_Building_Option_Menu::clicked_increment_building() {
 			(egbase.map().get_scenario_player_tribe(m_player).c_str());
 	m_building =
 		static_cast<Widelands::Building_Index::value_t>(m_building.value() + 1);
-	if (m_building.value() == tribe.get_nrbuildings())
-		m_building = static_cast<Widelands::Building_Index::value_t>(0);
+	if (m_building == tribe.get_nrbuildings())
+		m_building = Widelands::Building_Index::First();
 	update_label_building
 		(m_label_building, *tribe.get_building_descr(m_building));
 }

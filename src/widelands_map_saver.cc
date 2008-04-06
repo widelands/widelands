@@ -139,9 +139,8 @@ void Map_Saver::save() throw (_wexception) {
 	//  allowed buildings
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, *m_egbase, player) {
-		const Building_Descr::Index nr_buildings =
-			player->tribe().get_nrbuildings();
-		for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
+		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
+		for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i)
 			if (not player->is_building_allowed(i)) {
 				log("Writing Allowed Buildings Data ... ");
 				Map_Allowed_Buildings_Data_Packet p;

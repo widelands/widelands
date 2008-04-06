@@ -79,8 +79,8 @@ tribe            (&interactivePlayer.get_player()->tribe())
 EncyclopediaWindow::~EncyclopediaWindow() {}
 
 void EncyclopediaWindow::fillWares() {
-	Ware_Index::value_t const nrWares = tribe->get_nrwares();
-	for (Ware_Index::value_t i = 0; i < nrWares; ++i) {
+	Ware_Index const nr_wares = tribe->get_nrwares();
+	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 		Item_Ware_Descr const & ware = *tribe->get_ware_descr(i);
 		wares.add(ware.descname().c_str(), i, ware.get_icon());
 	}
@@ -96,8 +96,8 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 	bool found = false;
 
-	const Building_Descr::Index nr_buildings = tribe->get_nrbuildings();
-	for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
+	Building_Index const nr_buildings = tribe->get_nrbuildings();
+	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i)
 		if (upcast(ProductionSite_Descr const, de, tribe->get_building_descr(i)))
 		{
 
@@ -232,7 +232,7 @@ void EncyclopediaWindow::createCondTableEntry
 	 WareCondition const &       wareCondition)
 {
 	Item_Ware_Descr const & curWare =
-		*tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));
+		*tribe->get_ware_descr(tribe->safe_ware_index(wareName.c_str()));
 
 	UI::Table<intptr_t>::Entry_Record & tableEntry = condTable.add(index);
 	std::string rowText       = curWare.descname();

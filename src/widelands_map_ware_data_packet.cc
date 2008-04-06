@@ -64,7 +64,7 @@ throw (_wexception)
 				try {
 					ol->register_object<WareInstance>
 						(serial,
-						 *new WareInstance(static_cast<Ware_Index::value_t>(0), 0))
+						 *new WareInstance(Ware_Index::First(), 0))
 						.init(egbase);
 				} catch (_wexception const & e) {
 					throw wexception("%u: %s", serial, e.what());

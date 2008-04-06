@@ -80,11 +80,11 @@ private:
 class Cmd_Build:public PlayerCommand {
 private:
 	Coords coords;
-	int32_t id;
+	Building_Index id;
 
 public:
 	Cmd_Build() : PlayerCommand() {} // For savegame loading
-	Cmd_Build (int32_t t, int32_t p, const Coords& c, int32_t i):PlayerCommand(t, p)
+	Cmd_Build (int32_t t, int32_t p, const Coords& c, Building_Index i):PlayerCommand(t, p)
 	{coords=c; id=i;}
 
 	Cmd_Build (StreamRead &);
@@ -184,7 +184,7 @@ private:
 
 struct Cmd_EnhanceBuilding:public PlayerCommand {
 	Cmd_EnhanceBuilding() : PlayerCommand() {} // For savegame loading
-	Cmd_EnhanceBuilding (int32_t t, int32_t p, Building* b, int32_t i):PlayerCommand(t, p)
+	Cmd_EnhanceBuilding (int32_t t, int32_t p, Building* b, Building_Index i):PlayerCommand(t, p)
 	{serial=b->get_serial(); id=i;}
 
 	// Write these commands to a file (for savegames)
@@ -200,7 +200,7 @@ struct Cmd_EnhanceBuilding:public PlayerCommand {
 
 private:
 	Serial serial;
-	int32_t id;
+	Building_Index id;
 };
 
 struct Cmd_SetWarePriority : public PlayerCommand {
