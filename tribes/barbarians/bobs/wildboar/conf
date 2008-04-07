@@ -9,10 +9,10 @@ program=remove
 
 [idle]
 pics=wildboar_idle_nw_??.png
-hotspot=5 9
+hotspot=20 30
 fps=20
 
 [walk]
 dirpics=wildboar_walk_!!_??.png
-hotspot=5 9
+hotspot=20 30
 fps=20

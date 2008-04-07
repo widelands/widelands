@@ -1,5 +1,5 @@
 descname=_ Wolf #Wolf for greenlands
-type="critter" #graphics: Toralf Bethke 
+type="critter" #graphics: Toralf Bethke
 swimming=0
 attrib=eatable
 program=remove
@@ -8,12 +8,12 @@ program=remove
 0=remove
 
 [idle]
-hotspot=5 9
+hotspot=20 20
 pics=wolf_idle_se_??.png
 fps=10
 
 [walk]
-hotspot=5 9
+hotspot=20 20
 dirpics=wolf_walk_!!_??.png
 fps=20
 

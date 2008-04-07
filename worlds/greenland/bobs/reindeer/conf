@@ -8,11 +8,11 @@ program=remove
 0=remove
 
 [idle]
-hotspot=5 9
+hotspot=25 30
 pics=reindeer_idle_wnw_??.png
 fps=20
 
 [walk]
-hotspot=5 9
+hotspot=25 30
 fps=20
 

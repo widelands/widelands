@@ -9,9 +9,9 @@ program=remove
 
 [idle]
 pics=deer_idle_sw_??.png
-hotspot=5 9
+hotspot=25 30
 fps=20
 
 [walk]
-hotspot=5 9
+hotspot=25 30
 fps=20
