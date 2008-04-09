@@ -255,12 +255,9 @@ static const char* const pic_debug = "pics/menu_debug.png";
 static const char* const pic_abort = "pics/menu_abort.png";
 static const char* const pic_geologist = "pics/menu_geologist.png";
 
-/// TESTING STUFF
 static const char* const pic_tab_attack    = "pics/menu_tab_attack.png";
 static const char* const pic_attack_more   = "pics/attack_add_soldier.png";
 static const char* const pic_attack_less   = "pics/attack_sub_soldier.png";
-static const char* const pic_attack_strong = "pics/attack_strongest.png";
-static const char* const pic_attack_weak   = "pics/attack_weakest.png";
 static const char* const pic_attack        = "pics/menu_attack.png";
 
 
@@ -415,7 +412,13 @@ void FieldActionWindow::add_buttons_auto()
 			if (dynamic_cast<Widelands::Road const *>(imm))
 				add_button(buildbox, pic_remroad, &FieldActionWindow::act_removeroad, _("Destroy a road"));
 		}
-	} else add_buttons_attack ();
+	} else if
+		(1
+		 <
+		 m_plr->vision
+		 	(Widelands::Map::get_index
+		 	 	(m_field, m_iabase->egbase().map().get_width())))
+		add_buttons_attack ();
 
 	//  Watch actions, only when game (no use in editor) same for statistics.
 	//  census is ok

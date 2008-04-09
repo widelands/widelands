@@ -165,7 +165,7 @@ public:
 
 	virtual void set_economy(Economy *e);
 
-	Building *get_building() {return m_building;}
+	Building * get_building() const {return m_building;}
 	void attach_building(Editor_Game_Base *g, Building *building);
 	void detach_building(Editor_Game_Base *g);
 

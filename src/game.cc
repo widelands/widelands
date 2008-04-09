@@ -724,6 +724,12 @@ void Game::send_player_enemyflagaction
 	 int32_t       const num_soldiers,
 	 int32_t       const type)
 {
+	assert
+		(1
+		 <
+		 player(who_attacks).vision
+		 	(Map::get_index
+		 	 	(flag->get_building()->get_position(), map().get_width())));
 	send_player_command
 		(new Cmd_EnemyFlagAction
 		 	(get_gametime(),

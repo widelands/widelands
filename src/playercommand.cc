@@ -849,10 +849,18 @@ void Cmd_EnemyFlagAction::execute (Game* g)
 		 real_player->get_player_number());
 
 	if (upcast(Flag, flag, obj)) {
-		if (imm->get_owner() != real_player)
+		if (Building const * const building = flag->get_building())
+			if
+				(imm->get_owner() != real_player
+				 and
+				 1
+				 <
+				 real_player->vision
+				 	(Map::get_index
+				 	 	(building->get_position(), g->map().get_width())))
 			real_player->enemyflagaction (flag, action, attacker, number, type);
 	} else
-		log ("Cmd_EnemyFlagAction Player invalid.\n");
+		log ("Cmd_EnemyFlagAction Player invalid or not seeing target.\n");
 }
 
 void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
