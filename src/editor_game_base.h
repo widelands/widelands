@@ -124,6 +124,9 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 
 	// Manually load a tribe into memory. Used by the editor
 	const Tribe_Descr & manually_load_tribe(const std::string & tribe);
+	Tribe_Descr const & manually_load_tribe(Player_Number const p) {
+		return manually_load_tribe(map().get_scenario_player_tribe(p));
+	}
 	// Get a tribe from the loaded list, when available
 	Tribe_Descr const * get_tribe(const char * tribe) const;
 

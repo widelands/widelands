@@ -218,8 +218,8 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			map.overlay_manager().remove_overlay
 				(sp, g_gr->get_picture(PicMod_Game, picsname));
 		}
-		std::string name  = map.get_scenario_player_name (nr_players);
-		std::string tribe = map.get_scenario_player_tribe(nr_players);
+		std::string const & name  = map.get_scenario_player_name (nr_players);
+		std::string const & tribe = map.get_scenario_player_tribe(nr_players);
 		map.set_nrplayers(nr_players);
 		map.set_scenario_player_name(nr_players, name);
 		map.set_scenario_player_tribe(nr_players, tribe);

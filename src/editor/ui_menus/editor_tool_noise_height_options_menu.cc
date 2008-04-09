@@ -39,6 +39,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 :
 Editor_Tool_Options_Menu
 	(parent, registry, 200, 115, _("Noise Height Options")),
+m_noise_tool(noise_tool),
 m_lower_label
 	(this,
 	 hmargin(),
@@ -57,8 +58,9 @@ m_lower_increase
 	 width, height,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this,
-	 Lower_Increase),
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, this,
+	 std::string(),
+	 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
 m_lower_decrease
 	(this,
 	 m_lower_increase.get_x() + m_lower_increase.get_w(),
@@ -66,8 +68,9 @@ m_lower_decrease
 	 width, height,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this,
-	 Lower_Decrease),
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, this,
+	 std::string(),
+	 0 < noise_tool.get_interval().min),
 m_upper_increase
 	(this,
 	 m_lower_decrease.get_x() + width
@@ -77,8 +80,9 @@ m_upper_increase
 	 width, height,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this,
-	 Upper_Increase),
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, this,
+	 std::string(),
+	 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
 m_upper_decrease
 	(this,
 	 m_upper_increase.get_x() + m_upper_increase.get_w(),
@@ -86,32 +90,36 @@ m_upper_decrease
 	 width, height,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this,
-	 Upper_Decrease),
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, this,
+	 std::string(),
+	 0 < noise_tool.get_interval().max),
 m_set_label
 	(this,
 	 hspacing(),
 	 m_upper_decrease.get_y() + m_upper_decrease.get_h() + vspacing(),
 	 get_inner_w() - 2 * hspacing(), height,
 	 Align_BottomCenter),
-m_set_increase
+m_setto_increase
 	(this,
 	 get_inner_w() / 2 - width,
 	 m_set_label.get_y() + m_set_label.get_h() + vspacing(),
 	 width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this,
-	 Set_To_Increase),
-m_set_decrease
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, this,
+	 std::string(),
+	 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT),
+m_setto_decrease
 	(this,
-	 get_inner_w() / 2, m_set_increase.get_y(), width, height,
+	 get_inner_w() / 2, m_setto_increase.get_y(), width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this,
-	 Set_To_Decrease),
-m_noise_tool(noise_tool)
-{update();}
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, this,
+	 std::string(),
+	 0 < noise_tool.set_tool().get_interval().min)
+{
+	update();
+}
 
 /**
  * Update all textareas
@@ -133,33 +141,108 @@ void Editor_Tool_Noise_Height_Options_Menu::update() {
 }
 
 
-void Editor_Tool_Noise_Height_Options_Menu::clicked_button(const Button n) {
+void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease() {
 	interval<Field::Height> height_interval = m_noise_tool.get_interval();
-	Field::Height set_to = m_noise_tool.set_tool().get_interval().min;
-	switch (n) {
-	case Lower_Increase:
-		height_interval.min += height_interval.min  < MAX_FIELD_HEIGHT;
-		height_interval.max = std::max(height_interval.min, height_interval.max);
-		break;
-	case Lower_Decrease: height_interval.min -= 0 < height_interval.min; break;
-	case Upper_Increase:
-		height_interval.max += height_interval.max  < MAX_FIELD_HEIGHT;
-		break;
-	case Upper_Decrease:
-		if (0 < height_interval.max) {
-			if (--height_interval.max < height_interval.min)
-				height_interval.min = height_interval.max;
-		}
-		break;
-	case Set_To_Increase: set_to +=     set_to < MAX_FIELD_HEIGHT; break;
-	case Set_To_Decrease: set_to -= 0 < set_to;                    break;
-	default:
-		assert(false);
-	}
+
+	assert(height_interval.valid());
+	assert(0 < height_interval.min);
+
+	--height_interval.min;
+
+	assert(height_interval.valid());
 
 	m_noise_tool.set_interval(height_interval);
-	m_noise_tool.set_tool()
-		.set_interval(interval<Field::Height>(set_to, set_to));
+	m_lower_decrease.set_enabled(0 < height_interval.min);
+	m_lower_increase.set_enabled(true);
+	update();
+}
 
+
+void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase() {
+	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+
+	assert(height_interval.valid());
+	assert(height_interval.min < MAX_FIELD_HEIGHT);
+
+	++height_interval.min;
+	height_interval.max = std::max(height_interval.min, height_interval.max);
+
+	assert(height_interval.valid());
+
+	m_noise_tool.set_interval(height_interval);
+	m_lower_decrease.set_enabled(true);
+	m_lower_increase.set_enabled(height_interval.min < MAX_FIELD_HEIGHT);
+	m_upper_decrease.set_enabled(true);
+	m_upper_increase.set_enabled(height_interval.max < MAX_FIELD_HEIGHT);
+
+	update();
+}
+
+
+void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease() {
+	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+
+	assert(height_interval.valid());
+	assert(0 < m_noise_tool.get_interval().max);
+
+	--height_interval.max;
+	height_interval.min = std::min(height_interval.min, height_interval.max);
+
+	assert(height_interval.valid());
+
+	m_noise_tool.set_interval(height_interval);
+	m_lower_decrease.set_enabled(0 < height_interval.min);
+	m_lower_increase.set_enabled(true);
+	m_upper_decrease.set_enabled(0 < height_interval.max);
+	m_upper_increase.set_enabled(true);
+	update();
+}
+
+
+void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase() {
+	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+
+	assert(m_noise_tool.get_interval().valid());
+	assert(m_noise_tool.get_interval().max < MAX_FIELD_HEIGHT);
+
+	++height_interval.max;
+
+	assert(m_noise_tool.get_interval().valid());
+
+	m_noise_tool.set_interval(height_interval);
+	m_upper_decrease.set_enabled(true);
+	m_upper_increase.set_enabled(height_interval.max < MAX_FIELD_HEIGHT);
+	update();
+}
+
+
+void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease() {
+	Editor_Set_Height_Tool & set_tool = m_noise_tool.set_tool();
+	Field::Height h = set_tool.get_interval().min;
+
+	assert(h == set_tool.get_interval().max);
+	assert(0 < h);
+
+	--h;
+
+	set_tool.set_interval(interval<Field::Height>(h, h));
+	m_setto_decrease.set_enabled(0 < h);
+	m_setto_increase.set_enabled(true);
+	update();
+}
+
+
+void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase() {
+	Editor_Set_Height_Tool & set_tool = m_noise_tool.set_tool();
+	Field::Height h = set_tool.get_interval().min;
+
+	assert(h == set_tool.get_interval().max);
+	assert(h < MAX_FIELD_HEIGHT);
+
+	++h;
+
+	set_tool.set_interval(interval<Field::Height>(h, h));
+	m_setto_decrease.set_enabled(true);
+	m_setto_increase.set_enabled(h < MAX_FIELD_HEIGHT);
 	update();
 }

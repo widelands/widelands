@@ -67,12 +67,12 @@ WarehouseSupply::~WarehouseSupply()
  * are to be handled
  */
 void WarehouseSupply::set_nrwares(Ware_Index const i) {
-	assert(m_wares.get_nrwareids() == 0);
+	assert(Ware_Index::First() == m_wares.get_nrwareids());
 
 	m_wares.set_nrwares(i);
 }
 void WarehouseSupply::set_nrworkers(Ware_Index const i) {
-	assert(m_workers.get_nrwareids() == 0);
+	assert(Ware_Index::First() == m_workers.get_nrwareids());
 
 	m_workers.set_nrwares(i);
 }
@@ -94,14 +94,12 @@ void WarehouseSupply::set_economy(Economy* e)
 	if (m_economy) {
 		m_economy->remove_supply(this);
 		for
-			(Ware_Index i = Ware_Index::First();
-			 i.value() < m_wares  .get_nrwareids();
-			 ++i)
+			(Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
 			if (m_wares.stock(i))
 				m_economy->remove_wares(i, m_wares.stock(i));
 		for
 			(Ware_Index i = Ware_Index::First();
-			 i.value() < m_workers.get_nrwareids();
+			 i < m_workers.get_nrwareids();
 			 ++i)
 			if (m_workers.stock(i))
 				m_economy->remove_workers(i, m_workers.stock(i));
@@ -111,14 +109,12 @@ void WarehouseSupply::set_economy(Economy* e)
 
 	if (m_economy) {
 		for
-			(Ware_Index i = Ware_Index::First();
-			 i.value() < m_wares.get_nrwareids  ();
-			 ++i)
+			(Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
 			if (m_wares.stock(i))
 				m_economy->add_wares(i, m_wares.stock(i));
 		for
 			(Ware_Index i = Ware_Index::First();
-			 i.value() < m_workers.get_nrwareids();
+			 i < m_workers.get_nrwareids();
 			 ++i)
 			if (m_workers.stock(i))
 				m_economy->add_workers(i, m_workers.stock(i));
@@ -875,10 +871,10 @@ Warehouse::can_create_worker
 ===============
 */
 bool Warehouse::can_create_worker(Game *, Ware_Index const worker) {
-	if (m_supply->get_workers().get_nrwareids() <= worker.value())
+	if (not (worker < m_supply->get_workers().get_nrwareids()))
 		throw wexception
 			("Worker type %d doesn't exists! (max is %d)",
-			 worker.value(), m_supply->get_workers().get_nrwareids());
+			 worker.value(), m_supply->get_workers().get_nrwareids().value());
 
 	const Tribe_Descr & tribe = owner().tribe();
 	if (Worker_Descr const * const w_desc = tribe.get_worker_descr(worker)) {

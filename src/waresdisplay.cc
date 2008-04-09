@@ -61,7 +61,7 @@ bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, 
 		+
 		x / (WARE_MENU_PIC_WIDTH + 4);
 	m_curware.set_text
-		(index < m_warelists[0]->get_nrwareids() ?
+		(index < m_warelists[0]->get_nrwareids().value() ?
 		 (m_type == WORKER ?
 		  m_tribe.get_worker_descr(static_cast<uint8_t>(index))->descname()
 		  :
@@ -87,7 +87,7 @@ void WaresDisplay::add_warelist
 
 	int32_t rows, height;
 
-	rows = (wares->get_nrwareids() + WaresPerRow - 1) / WaresPerRow;
+	rows = (wares->get_nrwareids().value() + WaresPerRow - 1) / WaresPerRow;
 	height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
 
 	set_size(get_inner_w(), height+30);

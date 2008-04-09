@@ -482,13 +482,14 @@ void WLApplication::handle_input(const InputCallback *cb)
 			}
 			if (ev.key.keysym.sym == SDLK_F11) // take screenshot
 			{
-				if (ev.type == SDL_KEYDOWN) for (uint32_t nr = 0; nr < 10000; ++nr) {
-					char buffer[256];
-					snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr);
-					if (g_fs->FileExists(buffer)) continue;
-					g_gr->screenshot(*buffer);
-					break;
-				}
+				if (ev.type == SDL_KEYDOWN)
+					for (uint32_t nr = 0; nr < 10000; ++nr) {
+						char buffer[256];
+						snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr); //  FIXME
+						if (g_fs->FileExists(buffer)) continue;
+						g_gr->screenshot(*buffer);
+						break;
+					}
 				break;
 			}
 			if (cb && cb->key) {
@@ -925,7 +926,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_commandline.end();
 	for
 		(std::map<std::string, std::string>::const_iterator it =
-		 m_commandline.begin();
+		 	m_commandline.begin();
 		 it != commandline_end;
 		 ++it)
 	{
@@ -950,34 +951,34 @@ void WLApplication::show_usage()
 	cout
 		<<
 		_
-		(" --<config-entry-name>=value overwrites any config file setting\n\n"
-		 " --record=FILENAME    Record all events to the given filename for "
-		 "later playback\n"
-		 " --playback=FILENAME  Playback given filename (see --record)\n\n"
-		 " --coredump=[yes|no]  Generates a core dump on segfaults instead of "
-		 "using the SDL\n");
+			(" --<config-entry-name>=value overwrites any config file setting\n\n"
+			 " --record=FILENAME    Record all events to the given filename for "
+			 "later playback\n"
+			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
+			 " --coredump=[yes|no]  Generates a core dump on segfaults instead "
+			 "of using the SDL\n");
 	cout
 		<<
 		_
-		(" --nosound            Starts the game with sound disabled\n"
-		 " --nozip              Do not save files as binary zip archives.\n\n"
-		 " --editor             Directly starts the Widelands editor.\n\n");
+			(" --nosound            Starts the game with sound disabled\n"
+			 " --nozip              Do not save files as binary zip archives.\n\n"
+			 " --editor             Directly starts the Widelands editor.\n\n");
 #ifdef DEBUG
 #ifndef __WIN32__
 	cout
 		<<
 		_
-		(" --double             Start the game twice (for localhost network "
-		 "testing)\n\n");
+			(" --double             Start the game twice (for localhost network "
+			 "testing)\n\n");
 #endif
 #endif
 	cout << _(" --help               Show this help\n") << endl;
 	cout
 		<<
 		_
-		("Bug reports? Suggestions? Check out the project website:\n"
-		 "        http://www.sourceforge.net/projects/widelands\n\n"
-		 "Hope you enjoy this game!\n\n");
+			("Bug reports? Suggestions? Check out the project website:\n"
+			 "        http://www.sourceforge.net/projects/widelands\n\n"
+			 "Hope you enjoy this game!\n\n");
 }
 
 #ifdef DEBUG
@@ -1115,17 +1116,18 @@ void WLApplication::mainmenu()
 		} catch (const std::exception& e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
-			message += _
-				("\n\nPlease report this problem to help us improve "
-				 "Widelands. You will find related messages in the "
-				 "standard output (stdout.txt on Windows). You are "
-				 "using build ");
+			message +=
+				_
+					("\n\nPlease report this problem to help us improve Widelands. "
+					 "You will find related messages in the standard output "
+					 "(stdout.txt on Windows). You are using build ");
 			message += BUILD_ID;
-			message += _
-				(". Please add this information to your report."
-				 "\n\nWidelands attempts to create a savegame when "
-				 "errors occur during the game. It is often - though "
-				 "not always - possible to load it and continue playing.\n");
+			message +=
+				_
+					(". Please add this information to your report.\n\n"
+					 "Widelands attempts to create a savegame when errors occur "
+					 "during the game. It is often - though not always - possible "
+					 "to load it and continue playing.\n");
 		}
 	}
 }

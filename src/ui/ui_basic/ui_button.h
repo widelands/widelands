@@ -101,7 +101,7 @@ template <typename T> struct Button : public Basic_Button {
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this)
 	{}
-	Button ///  for pictoral buttons
+	Button ///  for pictorial buttons
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const uint32_t background_pictute_id,
@@ -163,7 +163,7 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		_callback_argument_this(callback_argument_this),
 		_callback_argument_id  (callback_argument_id)
 	{}
-	IDButton ///  for pictoral buttons
+	IDButton ///  for pictorial buttons
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const uint32_t background_pictute_id,

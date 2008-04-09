@@ -158,7 +158,7 @@ m_decrement_count
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
 	 &Trigger_Building_Option_Menu::clicked_decrement_count, this,
 	 std::string(),
-	 0 < m_count),
+	 1 < m_count),
 m_increment_count
 	(this,
 	 m_increment_building.get_x(), m_label_count.get_y(), button_size,
@@ -297,20 +297,19 @@ m_button_cancel
 {
 	if (m_player_area.player_number == 0)
 		m_player_area.player_number = 1;
-	Widelands::Editor_Game_Base const & egbase = parent.egbase();
-	assert(m_player_area.player_number <= egbase.map().get_nrplayers());
+	assert(m_count);
+	Widelands::Editor_Game_Base & egbase = parent.egbase();
+	Widelands::Player_Number const nr_players = egbase.map().get_nrplayers();
+	assert(m_player_area.player_number <= nr_players);
 	Widelands::Tribe_Descr const & tribe =
-		*egbase.get_tribe
-		(egbase.map()
-		 .get_scenario_player_tribe(m_player_area.player_number).c_str());
+		egbase.manually_load_tribe(m_player_area.player_number);
+	m_building =
+		trigger.m_building_type ?
+		tribe.building_index(trigger.m_building_type->name().c_str())
+		:
+		Widelands::Building_Index::First();
 	{
-		m_building  =
-			tribe.building_index(trigger.m_building_type->name().c_str());
-		if (not m_building)
-			m_building = Widelands::Building_Index::First();
-	}
-	{
-		const bool has_several_players = 1 < egbase.map().get_nrplayers();
+		bool const has_several_players = 1 < nr_players;
 		m_decrement_player.set_enabled(has_several_players);
 		m_increment_player.set_enabled(has_several_players);
 	}
@@ -345,12 +344,10 @@ bool Trigger_Building_Option_Menu::handle_mouserelease(const Uint8, int32_t, int
 
 ///  Change the player number 1 step in any direction. Wraps around.
 void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
-	Widelands::Editor_Game_Base const & egbase    = eia().egbase();
-	Widelands::Map              const & map       = egbase.map();
-	Widelands::Tribe_Descr      const & old_tribe =
-		*egbase.get_tribe
-		(map.get_scenario_player_tribe(m_player_area.player_number).c_str());
-	Widelands::Player_Number const nr_players = map.get_nrplayers();
+	Widelands::Editor_Game_Base       & egbase     = eia().egbase();
+	Widelands::Tribe_Descr      const & old_tribe  =
+		egbase.manually_load_tribe(m_player_area.player_number);
+	Widelands::Player_Number const nr_players = egbase.map().get_nrplayers();
 	assert(1 < nr_players);
 	assert(1 <= m_player_area.player_number);
 	assert     (m_player_area.player_number <= nr_players);
@@ -364,7 +361,7 @@ void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
 			m_player_area.player_number = nr_players;
 	}
 	Widelands::Tribe_Descr const & new_tribe =
-		egbase.player(m_player_area.player_number).tribe();
+		egbase.manually_load_tribe(m_player_area.player_number);
 	if (&old_tribe != &new_tribe) {
 		//  The new player belongs to another tribe than the old player. See if
 		//  the new player's tribe has a building with the same name as the
@@ -373,7 +370,7 @@ void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
 		{
 			m_building =
 				new_tribe.building_index
-				(old_tribe.get_building_descr(m_building)->name().c_str());
+					(old_tribe.get_building_descr(m_building)->name().c_str());
 			if (not m_building)
 				m_building = Widelands::Building_Index::First();
 		}
@@ -389,11 +386,10 @@ void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
 
 
 void Trigger_Building_Option_Menu::clicked_increment_building() {
-	Widelands::Editor_Game_Base const & egbase = eia().egbase();
+	Widelands::Editor_Game_Base       & egbase = eia().egbase();
 	Widelands::Tribe_Descr      const & tribe  =
-		egbase.player(m_player_area.player_number).tribe();
-	m_building =
-		static_cast<Widelands::Building_Index::value_t>(m_building.value() + 1);
+		egbase.manually_load_tribe(m_player_area.player_number);
+	++m_building;
 	if (m_building == tribe.get_nrbuildings())
 		m_building = Widelands::Building_Index::First();
 	update_label_building
@@ -402,13 +398,12 @@ void Trigger_Building_Option_Menu::clicked_increment_building() {
 
 
 void Trigger_Building_Option_Menu::clicked_decrement_building() {
-	Widelands::Editor_Game_Base const & egbase = eia().egbase();
+	Widelands::Editor_Game_Base       & egbase = eia().egbase();
 	Widelands::Tribe_Descr      const & tribe  =
-		egbase.player(m_player_area.player_number).tribe();
-	if (0 == m_building.value())
+		egbase.manually_load_tribe(m_player_area.player_number);
+	if (m_building == Widelands::Building_Index::First())
 		m_building = tribe.get_nrbuildings();
-	m_building =
-		static_cast<Widelands::Building_Index::value_t>(m_building.value() - 1);
+	--m_building;
 	update_label_building
 		(m_label_building, *tribe.get_building_descr(m_building));
 }
@@ -529,17 +524,15 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 		eia().reference_player_tribe(m_player_area.player_number, &m_trigger);
 	}
 	Widelands::Editor_Game_Base & egbase = eia().egbase();
-	Widelands::Map        const & map    = egbase.map();
 	m_trigger.m_player_area =
 		Widelands::Player_Area<Widelands::Area<Widelands::FCoords> >
-		(m_player_area.player_number,
-		 Widelands::Area<Widelands::FCoords>
-		 	(Widelands::FCoords(m_player_area, &egbase.map()[m_player_area]),
-		 	 m_player_area.radius));
+			(m_player_area.player_number,
+			 Widelands::Area<Widelands::FCoords>
+			 	(Widelands::FCoords(m_player_area, &egbase.map()[m_player_area]),
+			 	 m_player_area.radius));
 	m_trigger.m_building_type =
-		egbase.get_tribe
-		(map.get_scenario_player_tribe(m_player_area.player_number).c_str())
-		->get_building_descr(m_building);
+		egbase.manually_load_tribe(m_player_area.player_number)
+		.get_building_descr(m_building);
 	m_trigger.m_count = m_count;
 	eia().set_need_save(true);
 	end_modal(1);

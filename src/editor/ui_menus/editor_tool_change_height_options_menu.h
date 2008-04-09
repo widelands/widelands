@@ -35,21 +35,21 @@ struct Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu 
 		 UI::UniqueWindow::Registry  &);
 
 private:
-	enum Button {
-		Change_By_Increase, Change_By_Decrease,
-		Set_To_Increase,    Set_To_Decrease
-	};
-	void clicked_button(Button);
-	void update();
+	Editor_Increase_Height_Tool & m_increase_tool;
 	UI::Textarea                  m_change_by_label;
-	UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Button>
+	UI::Button<Editor_Tool_Change_Height_Options_Menu>
 		m_change_by_increase, m_change_by_decrease;
 	UI::Textarea                  m_change_by_value;
-	UI::Textarea                  m_set_to_label;
-	UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Button>
-		m_set_to_increase,    m_set_to_decrease;
-	UI::Textarea                  m_set_to_value;
-	Editor_Increase_Height_Tool & m_increase_tool;
+	UI::Textarea                  m_setto_label;
+	UI::Button<Editor_Tool_Change_Height_Options_Menu>
+		m_setto_increase,     m_setto_decrease;
+	UI::Textarea                  m_setto_value;
+
+	void clicked_change_by_decrement();
+	void clicked_change_by_increment();
+	void clicked_setto_decrement    ();
+	void clicked_setto_increment    ();
+	void update();
 };
 
 #endif

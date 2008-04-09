@@ -136,16 +136,14 @@ m_button_cancel
 {
 	if (m_player == 0)
 		m_player = 1;
-	Widelands::Editor_Game_Base const & egbase = parent.egbase();
-	assert(m_player <= egbase.map().get_nrplayers());
-	Widelands::Tribe_Descr const & tribe =
-		*egbase.get_tribe
-		(egbase.map()
-		 .get_scenario_player_tribe(m_player).c_str());
+	Widelands::Editor_Game_Base & egbase = parent.egbase();
+	Widelands::Player_Number const nr_players = egbase.map().get_nrplayers();
+	assert(m_player <= nr_players);
+	Widelands::Tribe_Descr const & tribe = egbase.manually_load_tribe(m_player);
 	if (not m_building)
 		m_building = Widelands::Building_Index::First();
 	{
-		const bool has_several_players = 1 < egbase.map().get_nrplayers();
+		bool const has_several_players = 1 < nr_players;
 		m_decrement_player.set_enabled(has_several_players);
 		m_increment_player.set_enabled(has_several_players);
 	}
@@ -217,11 +215,10 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 ///  Change the player number 1 step in any direction. Wraps around.
 void Event_Allow_Building_Option_Menu::clicked_change_player(const bool up) {
 	Widelands::Editor_Game_Base       & egbase    = eia().egbase();
-	Widelands::Map              const & map       = egbase.map();
 	Widelands::Tribe_Descr      const & old_tribe =
-		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(m_player).c_str());
-	Widelands::Player_Number const nr_players = map.get_nrplayers();
+		egbase.manually_load_tribe(m_player);
+	Widelands::Player_Number const nr_players =
+		eia().egbase().map().get_nrplayers();
 	assert(1 < nr_players);
 	assert(1 <= m_player);
 	assert     (m_player <= nr_players);
@@ -235,8 +232,7 @@ void Event_Allow_Building_Option_Menu::clicked_change_player(const bool up) {
 			m_player = nr_players;
 	}
 	Widelands::Tribe_Descr const & new_tribe =
-		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(m_player).c_str());
+		egbase.manually_load_tribe(m_player);
 	if (&old_tribe != &new_tribe) {
 		//  The new player belongs to another tribe than the old player. See if
 		//  the new player's tribe has a building with the same name as the
@@ -260,12 +256,9 @@ void Event_Allow_Building_Option_Menu::clicked_change_player(const bool up) {
 
 
 void Event_Allow_Building_Option_Menu::clicked_increment_building() {
-	Widelands::Editor_Game_Base       & egbase = eia().egbase();
-	Widelands::Tribe_Descr      const & tribe =
-		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(m_player).c_str());
-	m_building =
-		static_cast<Widelands::Building_Index::value_t>(m_building.value() + 1);
+	Widelands::Tribe_Descr const & tribe =
+		eia().egbase().manually_load_tribe(m_player);
+	++m_building;
 	if (m_building == tribe.get_nrbuildings())
 		m_building = Widelands::Building_Index::First();
 	update_label_building
@@ -274,14 +267,11 @@ void Event_Allow_Building_Option_Menu::clicked_increment_building() {
 
 
 void Event_Allow_Building_Option_Menu::clicked_decrement_building() {
-	Widelands::Editor_Game_Base       & egbase = eia().egbase();
-	Widelands::Tribe_Descr      const & tribe =
-		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(m_player).c_str());
-	if (0 == m_building.value())
+	Widelands::Tribe_Descr const & tribe =
+		eia().egbase().manually_load_tribe(m_player);
+	if (Widelands::Building_Index::First() == m_building)
 		m_building = tribe.get_nrbuildings();
-	m_building =
-		static_cast<Widelands::Building_Index::value_t>(m_building.value() - 1);
+	--m_building;
 	update_label_building
 		(m_label_building, *tribe.get_building_descr(m_building));
 }

@@ -710,14 +710,14 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	//  supply
 	Tribe_Descr const & tribe = warehouse.owner().tribe();
 	WareList const & wares = warehouse.m_supply->get_wares();
-	for (Ware_Index::value_t i = 0; i < wares.get_nrwareids(); ++i) {
+	for (Ware_Index i = Ware_Index::First(); i < wares.get_nrwareids  (); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_ware_descr(i)->name());
 		fw.Unsigned16(wares.stock(i));
 	}
 	fw.Unsigned8(0);
 	WareList const & workers = warehouse.m_supply->get_workers();
-	for (Ware_Index::value_t i = 0; i < workers.get_nrwareids(); ++i) {
+	for (Ware_Index i = Ware_Index::First(); i < workers.get_nrwareids(); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_worker_descr(i)->name());
 		fw.Unsigned16(workers.stock(i));

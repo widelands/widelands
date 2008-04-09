@@ -35,20 +35,20 @@ struct Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
 		 UI::UniqueWindow::Registry &);
 
 private:
-	enum Button {
-		Lower_Increase,  Lower_Decrease,
-		Upper_Increase,  Upper_Decrease,
-		Set_To_Increase, Set_To_Decrease
-	};
+	Editor_Noise_Height_Tool & m_noise_tool;
 	UI::Textarea m_lower_label, m_upper_label;
-	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, const Button>
+	UI::Button<Editor_Tool_Noise_Height_Options_Menu>
 		m_lower_increase, m_lower_decrease, m_upper_increase, m_upper_decrease;
 	UI::Textarea m_set_label;
-	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, const Button>
-		m_set_increase, m_set_decrease;
-	Editor_Noise_Height_Tool & m_noise_tool;
+	UI::Button<Editor_Tool_Noise_Height_Options_Menu>
+		m_setto_increase, m_setto_decrease;
 
-	void clicked_button(Button);
+	void clicked_lower_decrease();
+	void clicked_lower_increase();
+	void clicked_upper_decrease();
+	void clicked_upper_increase();
+	void clicked_setto_decrease();
+	void clicked_setto_increase();
 	void update();
 };
 

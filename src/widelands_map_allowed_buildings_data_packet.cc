@@ -63,8 +63,8 @@ throw (_wexception)
 				//  editor).
 				if (game)
 					for
-						(Building_Index::value_t i = tribe.get_nrbuildings().value();
-						 i;)
+						(Building_Index i = tribe.get_nrbuildings();
+						 Building_Index::First() < i;)
 						player->allow_building(--i, false);
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);

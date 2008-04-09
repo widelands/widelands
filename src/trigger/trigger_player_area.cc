@@ -38,7 +38,7 @@ Trigger_Player_Area::Trigger_Player_Area
 :
 Trigger      (Name, set),
 m_player_area(0, Area<FCoords>(FCoords(Coords(0, 0)), 0)),
-m_count      (0)
+m_count      (1)
 {}
 
 
@@ -62,7 +62,8 @@ void Trigger_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
 			 m_player_area.y < 0 or extent.h <= m_player_area.y)
 			throw wexception
 				("illegal coordinates (%i, %i)", m_player_area.x, m_player_area.y);
-		m_count = s.get_int("count", 1);
+		if ((m_count = s.get_int("count", 1)) < 1)
+			throw wexception("illegal count %u, must be positive", m_count);
 	} catch (std::exception const & e) {
 		throw wexception("(player prea): %s", e.what());
 	}

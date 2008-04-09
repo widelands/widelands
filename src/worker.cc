@@ -2421,8 +2421,7 @@ void Worker::draw_inner
 		 game.get_gametime() - get_animstart(),
 		 get_owner());
 
-	const WareInstance * const carried_item = get_carried_item(&game);
-	if (carried_item)
+	if (WareInstance const * const carried_item = get_carried_item(&game))
 		dst.drawanim
 			(drawpos - Point(0, 15),
 			 carried_item->descr().get_animation("idle"),

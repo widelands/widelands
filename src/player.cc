@@ -308,7 +308,7 @@ void Player::build(Coords c, Building_Index idx)
 	Building_Descr* descr;
 
 	// Validate building type
-	if (not (idx < tribe().get_nrbuildings()))
+	if (not (idx and idx < tribe().get_nrbuildings()))
 		return;
 	descr = tribe().get_building_descr(idx);
 

@@ -101,7 +101,7 @@ m_allow_button
 
 	Widelands::Tribe_Descr const & tribe = player.tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
+	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
 		Widelands::Building_Descr & building = *tribe.get_building_descr(i);
 		if (not building.get_enhanced_building() and not building.get_buildable())
 			continue;

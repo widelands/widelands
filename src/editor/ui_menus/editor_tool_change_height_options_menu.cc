@@ -39,6 +39,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 :
 Editor_Tool_Options_Menu
 	(parent, registry, 135, 135, _("Height Tools Options")),
+m_increase_tool(increase_tool),
 m_change_by_label
 	(this,
 	 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), height,
@@ -50,16 +51,18 @@ m_change_by_increase
 	 width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_button,
-	 this, Change_By_Increase),
+	 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, this,
+	 std::string(),
+	 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
 m_change_by_decrease
 	(this,
 	 get_inner_w() - hmargin() - width, m_change_by_increase.get_y(),
 	 width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_button,
-	 this, Change_By_Decrease),
+	 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, this,
+	 std::string(),
+	 1 < increase_tool.get_change_by()),
 m_change_by_value
 	(this,
 	 m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing(),
@@ -69,64 +72,104 @@ m_change_by_value
 	 (m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing()),
 	 height,
 	 Align_BottomCenter),
-m_set_to_label
+m_setto_label
 	(this,
 	 vmargin(),
 	 m_change_by_increase.get_y() + m_change_by_increase.get_h() + vspacing(),
 	 get_inner_w() - 2 * hmargin(), height,
 	 _("Set Value"), Align_BottomCenter),
-m_set_to_increase
+m_setto_increase
 	(this,
-	 hmargin(), m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
+	 hmargin(), m_setto_label.get_y() + m_setto_label.get_h() + vspacing(),
 	 width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_button,
-	 this, Set_To_Increase),
-m_set_to_decrease
+	 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, this,
+	 std::string(),
+	 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
+m_setto_decrease
 	(this,
-	 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
+	 m_change_by_decrease.get_x(), m_setto_increase.get_y(), width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_button,
-	 this, Set_To_Decrease),
-m_set_to_value
+	 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, this,
+	 std::string(),
+	 0 < increase_tool.set_tool().get_interval().min),
+m_setto_value
 	(this,
-	 m_change_by_value.get_x(), m_set_to_increase.get_y(),
+	 m_change_by_value.get_x(), m_setto_increase.get_y(),
 	 m_change_by_value.get_w(), height,
-	 Align_BottomCenter),
-m_increase_tool(increase_tool)
-{update();}
+	 Align_BottomCenter)
+{
+	update();
+}
 
 
-void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
-	assert
-		(m_increase_tool                .get_change_by()
-		 ==
-		 m_increase_tool.decrease_tool().get_change_by());
-
+void Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement() {
 	int32_t change_by = m_increase_tool.get_change_by();
-	Widelands::Field::Height set_to =
-		m_increase_tool.set_tool().get_interval().min;
-	switch (n) {
-	case Change_By_Increase:
-		change_by +=     change_by < MAX_FIELD_HEIGHT_DIFF;
-		break;
-	case Change_By_Decrease: change_by -= 1 < change_by;                 break;
-	case    Set_To_Increase: set_to    +=     set_to < MAX_FIELD_HEIGHT; break;
-	case    Set_To_Decrease: set_to    -= 0 < set_to;                    break;
-	default:
-		assert(false);
-	}
+	assert(change_by == m_increase_tool.decrease_tool().get_change_by());
+	assert(1 < change_by);
+
+	--change_by;
 
 	m_increase_tool                .set_change_by(change_by);
 	m_increase_tool.decrease_tool().set_change_by(change_by);
-	m_increase_tool.set_tool()
-		.set_interval(interval<Widelands::Field::Height>(set_to, set_to));
-
+	m_change_by_decrease.set_enabled(1 < change_by);
+	m_change_by_increase.set_enabled(true);
 	select_correct_tool();
 	update();
 }
+
+
+void Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment() {
+	int32_t change_by = m_increase_tool.get_change_by();
+	assert(change_by == m_increase_tool.decrease_tool().get_change_by());
+	assert(change_by < MAX_FIELD_HEIGHT_DIFF);
+
+	++change_by;
+
+	m_increase_tool                .set_change_by(change_by);
+	m_increase_tool.decrease_tool().set_change_by(change_by);
+	m_change_by_decrease.set_enabled(true);
+	m_change_by_increase.set_enabled(change_by < MAX_FIELD_HEIGHT_DIFF);
+	select_correct_tool();
+	update();
+}
+
+
+void Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement() {
+	Widelands::Field::Height setto =
+		m_increase_tool.set_tool().get_interval().min;
+	assert(setto == m_increase_tool.set_tool().get_interval().max);
+	assert(0 < setto);
+
+	--setto;
+
+	m_increase_tool.set_tool().set_interval
+		(interval<Widelands::Field::Height>(setto, setto));
+	m_setto_decrease.set_enabled(0 < setto);
+	m_setto_increase.set_enabled(true);
+	select_correct_tool();
+	update();
+}
+
+
+void Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment() {
+	Widelands::Field::Height setto =
+		m_increase_tool.set_tool().get_interval().min;
+	assert(setto == m_increase_tool.set_tool().get_interval().max);
+	assert(setto < MAX_FIELD_HEIGHT);
+
+	++setto;
+
+	m_increase_tool.set_tool().set_interval
+		(interval<Widelands::Field::Height>(setto, setto));
+	m_setto_decrease.set_enabled(true);
+	m_setto_increase.set_enabled(setto < MAX_FIELD_HEIGHT);
+	select_correct_tool();
+	update();
+}
+
 
 /// Update all the textareas, so that they represent the correct values.
 void Editor_Tool_Change_Height_Options_Menu::update() {
@@ -134,5 +177,5 @@ void Editor_Tool_Change_Height_Options_Menu::update() {
 	sprintf(buf, "%i", m_increase_tool.get_change_by());
 	m_change_by_value.set_text(buf);
 	sprintf(buf, "%i", m_increase_tool.set_tool().get_interval().min);
-	m_set_to_value.set_text(buf);
+	m_setto_value.set_text(buf);
 }
