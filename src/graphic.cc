@@ -542,6 +542,27 @@ void Graphic::free_surface(uint32_t const picid) {
 	pic.module = 0;
 }
 
+
+uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
+	if (picid) {
+		Surface & s =
+			*new Surface(*get_picture_surface(picid));
+		SDL_PixelFormat const & format = s.format();
+		uint32_t const w = s.get_w(), h = s.get_h();
+		for (uint32_t y = 0; y < h; ++y)
+			for (uint32_t x = 0; x < w; ++x) {
+				uint8_t r, g, b, a;
+				SDL_GetRGBA(s.get_pixel(x, y), &const_cast<SDL_PixelFormat &>(format), &r, &g, &b, &a); //  FIXME need for const_cast is SDL bug #421
+				uint8_t const gray =
+					static_cast<uint8_t>(.30 * r + .59 * g + .11 * b);
+				s.set_pixel(x, y, SDL_MapRGBA(&format, gray, gray, gray, a));
+			}
+		return get_picture(PicSurface, s);
+	} else
+		return 0;
+}
+
+
 /**
  * Returns the RenderTarget for the given surface
 */

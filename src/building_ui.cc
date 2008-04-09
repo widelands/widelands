@@ -277,20 +277,11 @@ class WaresQueueDisplay
 This passive class displays the status of a WaresQueue.
 It updates itself automatically through think().
 */
-class WaresQueueDisplay : public UI::Panel {
-public:
+struct WaresQueueDisplay : public UI::Panel {
 	enum {
 		CellWidth = WARE_MENU_PIC_WIDTH,
-		CellHeight = WARE_MENU_PIC_HEIGHT,
 		Border = 4,
-
-		Height = CellHeight + 2 * Border,
-
-		BG_LeftBorderX = 0,
-		BG_CellX = BG_LeftBorderX + Border,
-		BG_RightBorderX = BG_CellX + CellWidth,
-		BG_ContinueCellX = BG_RightBorderX + Border,
-		BG_ContinueBorderX = BG_ContinueCellX + CellWidth,
+		Height = WARE_MENU_PIC_HEIGHT + 2 * Border,
 	};
 
 public:
@@ -307,7 +298,6 @@ private:
 	Widelands::WaresQueue * m_queue;
 	uint32_t         m_max_width;
 	uint32_t         m_icon;            //< Index to ware's picture
-	uint32_t         m_fade_mask;       //< Mask to show faded version of icons
 	uint32_t         m_pic_background;
 
 	uint32_t         m_cache_size;
@@ -341,12 +331,7 @@ m_display_size(0)
 	set_tooltip(ware.descname().c_str());
 
 	m_icon = ware.get_icon();
-
-	// Prepare a fadeout mask for undelivered wares
-	Surface *s = new Surface(*g_gr->get_picture_surface(m_pic_background));
-
-	SDL_SetAlpha(s->get_sdl_surface(), SDL_SRCALPHA, 175);
-	m_fade_mask = g_gr->get_picture(PicMod_Game, *s);
+	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
 
 	recalc_size();
 
@@ -359,7 +344,9 @@ m_display_size(0)
 Cleanup
 ===============
 */
-WaresQueueDisplay::~WaresQueueDisplay() {}
+WaresQueueDisplay::~WaresQueueDisplay() {
+	g_gr->free_surface(m_pic_background);
+}
 
 
 /*
@@ -408,62 +395,18 @@ Render the current WaresQueue state.
 */
 void WaresQueueDisplay::draw(RenderTarget* dst)
 {
-	int32_t x;
-
 	if (!m_display_size)
 		return;
 
 	m_cache_filled = m_queue->get_filled();
 
-	// Draw it
-	compile_assert(0 <= BG_LeftBorderX);
-	dst->blitrect
-		(Point(0, 0),
-		 m_pic_background,
-		 Rect(Point(BG_LeftBorderX, 0), Border, Height));
-
-	x = Border;
-
-	compile_assert(0 <= BG_ContinueCellX);
-	compile_assert(0 <= BG_CellX);
-	for (uint32_t cells = 0; cells < m_display_size; ++cells, x += CellWidth) {
-		dst->blitrect
-			(Point(x, 0),
-			 m_pic_background,
-			 Rect
-			 	(Point
-			 	 	(cells + 1 == m_display_size and m_cache_size > m_display_size
-			 	 	 ? BG_ContinueCellX : BG_CellX,
-			 	 	 0),
-			 	 CellWidth, Height));
-
-		// Fill ware queue with ware's icon
-		dst->blit(Point(x, Border), m_icon);
-
-		// If ware is undelivered, gray it out.
-		if (cells >= m_cache_filled)
-			dst->blitrect
-				(Point(x, 0), m_fade_mask,
-				 Rect
-				 	(Point
-				 	 	(cells + 1 == m_display_size and
-				 	 	 m_cache_size > m_display_size
-				 	 	 ?
-				 	 	 BG_ContinueCellX : BG_CellX,
-				 	 	 0),
-				 	 CellWidth, Height));
-	}
-
-	compile_assert(0 <= BG_RightBorderX);
-	dst->blitrect
-		(Point(x, 0),
-		 m_pic_background,
-		 Rect
-		 	(Point
-		 	 	(m_cache_size > m_display_size ?
-		 	 	 BG_ContinueBorderX : BG_RightBorderX,
-		 	 	 0),
-		 	 Border, Height));
+	uint32_t nr_wares_to_draw = std::min(m_cache_filled, m_display_size);
+	uint32_t nr_empty_to_draw = m_display_size - nr_wares_to_draw;
+	Point point(Border, Border);
+	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth)
+		dst->blit(point, m_icon);
+	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth)
+		dst->blit(point, m_pic_background);
 }
 
 

@@ -47,11 +47,15 @@ using Widelands::Road;
 /*
  * Create a Surface from a surface
  */
-Surface::Surface(const Surface& surf) {
-	m_w = surf.m_w;
-	m_h = surf.m_h;
-	m_surface = SDL_DisplayFormat(surf.m_surface); // HACK: assume this should be picture format; there is no SDL_CopySurface
-}
+Surface::Surface(Surface const & other)
+:
+
+// HACK: assume this should be picture format; there is no SDL_CopySurface
+m_surface(SDL_DisplayFormatAlpha(other.m_surface)),
+
+m_offsx(other.m_offsx), m_offsy(other.m_offsx), m_w(other.m_w), m_h(other.m_h)
+{}
+
 
 /*
  * Updating the whole Surface

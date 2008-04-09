@@ -26,17 +26,6 @@
 
 namespace UI {
 
-static uint32_t create_grayed_out_pic(uint32_t const picid) {
-	if (picid) {
-		Surface & s =
-			*new Surface(*g_gr->get_picture_surface(picid));
-		SDL_SetAlpha(s.get_sdl_surface(), SDL_SRCALPHA, 175);
-		return g_gr->get_picture(PicSurface, s);
-	} else
-		return 0;
-}
-
-
 /**
  * Initialize a Basic_Button
 */
@@ -57,7 +46,7 @@ Basic_Button::Basic_Button
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
-	m_pic_custom_disabled(create_grayed_out_pic(foreground_picture_id)),
+	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
@@ -95,7 +84,7 @@ void Basic_Button::set_pic(uint32_t picid)
 	m_pic_custom = picid;
 	if (m_pic_custom_disabled)
 		g_gr->free_surface(m_pic_custom_disabled);
-	m_pic_custom_disabled = create_grayed_out_pic(picid);
+	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
 
 	update(0, 0, get_w(), get_h());
 }

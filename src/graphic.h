@@ -77,6 +77,7 @@ struct Graphic {
 	void save_png(uint32_t, StreamWrite *);
 	uint32_t create_surface(int32_t w, int32_t h);
 	void free_surface(uint32_t pic);
+	uint32_t create_grayed_out_pic(uint32_t const picid);
 	RenderTarget* get_surface_renderer(uint32_t pic);
 
 	enum  ResizeMode {

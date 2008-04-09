@@ -58,7 +58,11 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	int32_t const height  = 20;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
-	m_w = 0; m_h = 0;
+	{
+		Widelands::Extent const map_extent = parent->egbase().map().extent();
+		for (m_w = 0; Widelands::MAP_DIMENSIONS[m_w] < map_extent.w; ++m_w);
+		for (m_h = 0; Widelands::MAP_DIMENSIONS[m_h] < map_extent.h; ++m_h);
+	}
 	snprintf
 		(buffer, sizeof(buffer), _("Width: %u"), Widelands::MAP_DIMENSIONS[m_w]);
 	m_width =
