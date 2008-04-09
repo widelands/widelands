@@ -555,7 +555,7 @@ uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
 				SDL_GetRGBA(s.get_pixel(x, y), &const_cast<SDL_PixelFormat &>(format), &r, &g, &b, &a); //  FIXME need for const_cast is SDL bug #421
 				uint8_t const gray =
 					static_cast<uint8_t>(.30 * r + .59 * g + .11 * b);
-				s.set_pixel(x, y, SDL_MapRGBA(&format, gray, gray, gray, a));
+				s.set_pixel(x, y, SDL_MapRGBA(&const_cast<SDL_PixelFormat &>(format), gray, gray, gray, a)); // NOTE const_cast is needed for SDL-1.2 older than revision 3008
 			}
 		return get_picture(PicSurface, s);
 	} else
