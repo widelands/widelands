@@ -359,8 +359,8 @@ void Warehouse::init(Editor_Game_Base* gg)
 	Tribe_Descr const & tribe = owner().tribe();
 	Ware_Index const nr_wares   = tribe.get_nrwares  ();
 	Ware_Index const nr_workers = tribe.get_nrworkers();
-	m_supply->set_nrwares  (nr_wares  .value());
-	m_supply->set_nrworkers(nr_workers.value());
+	m_supply->set_nrwares  (nr_wares);
+	m_supply->set_nrworkers(nr_workers);
 
 	if (upcast(Game, game, gg)) {
 		for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {

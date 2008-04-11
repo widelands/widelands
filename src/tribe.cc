@@ -231,12 +231,12 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 	{
 		Workarea_Info & collected_info
 			= get_building_descr(i)->m_recursive_workarea_info;
-		std::set<Building_Descr::Index> to_consider, considered;
-		to_consider.insert(i.value());
+		std::set<Building_Index> to_consider, considered;
+		to_consider.insert(i);
 		while (not to_consider.empty()) {
-			const std::set<Building_Descr::Index>::iterator consider_now_iterator
+			std::set<Building_Index>::iterator const consider_now_iterator
 				= to_consider.begin();
-			const Building_Descr::Index consider_now = *consider_now_iterator;
+			Building_Index const consider_now = *consider_now_iterator;
 			const Building_Descr & considered_building_descr
 				= *get_building_descr(consider_now);
 			to_consider.erase(consider_now_iterator);
@@ -254,14 +254,13 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 					const Building_Index index = m_buildings.get_index(*it);
 					if (not index) {
 						log
-							("        Warning: building %s (%i) does not exist\n",
+							("        Warning: building %s (%u) does not exist\n",
 							 *it, index.value());
 					}
-					else if (considered.find(index.value()) == considered.end()) {
+					else if (considered.find(index) == considered.end())
 						//  The building index has not been considered. Add it to
 						//  to_consider.
-						to_consider.insert(index.value());
-					}
+						to_consider.insert(index);
 				}
 			}
 			{

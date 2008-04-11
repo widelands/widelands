@@ -228,8 +228,8 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 	assert(m_table.has_selection());
 	const std::vector<Widelands::Player::Building_Stats> & vec =
 		iaplayer().get_player()->get_building_statistics
-			(static_cast<Widelands::Building_Index::value_t>
-			 	(m_table.get_selected()));
+			(Widelands::Building_Index
+			 	(static_cast<size_t>(m_table.get_selected())));
 	Widelands::Map const & map = iaplayer().egbase().map();
 
 	bool found = true; //  we think, we always find a proper building

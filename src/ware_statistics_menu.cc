@@ -396,7 +396,7 @@ m_parent(&parent)
 			 ++x, ++cur_ware)
 		{
 			Widelands::Item_Ware_Descr const & ware =
-				*tribe.get_ware_descr(cur_ware);
+				*tribe.get_ware_descr(Widelands::Ware_Index(cur_ware));
 			WSM_Checkbox & cb = *new WSM_Checkbox
 				(this, posx, posy, cur_ware, ware.get_icon(), colors[cur_ware]);
 			cb.set_tooltip(ware.descname().c_str());
@@ -407,7 +407,8 @@ m_parent(&parent)
 				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
 			m_plot->register_plot_data
 				(cur_ware,
-				 parent.get_player()->get_ware_production_statistics(cur_ware),
+				 parent.get_player()->get_ware_production_statistics
+				 	(Widelands::Ware_Index(cur_ware)),
 				 colors[cur_ware]);
 		}
 		posy += dposy;

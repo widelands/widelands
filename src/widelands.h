@@ -21,6 +21,7 @@
 #define WIDELANDS_H
 
 #include <cassert>
+#include <cstddef>
 #include <limits>
 
 #include <stdint.h>
@@ -56,18 +57,25 @@ typedef uint32_t Serial; /// Serial number for Map_Object.
 /// Boxed for type-safety. Has a special null value to indicate invalidity.
 /// Has operator bool so that an index can be tested for validity with code
 /// like "if (index) ...". Operator bool asserts that the index is not null.
+/// The null value is guaranteed to be greater than any valid value. Therefore
+/// validity and upper limit can be tested using "if (index < nrItems)".
 template <typename T> struct _Index {
 	typedef uint8_t value_t;
 	_Index(_Index const & other = Null()) : i(other.i) {}
-	_Index(value_t const I)               : i(I)       {}
+	explicit _Index(value_t const I) : i(I) {}
+	explicit _Index(size_t  const I)
+		: i(static_cast<value_t>(I))
+	{
+		assert(I < std::numeric_limits<value_t>::max());
+	}
 
 	/// For compatibility with old code that use int32_t for building index
 	/// and use -1 to indicate invalidity.
 
-	static T First() {return static_cast<value_t>(0);}
+	static T First() {return T(static_cast<value_t>(0));}
 
 	/// Returns a special value indicating invalidity.
-	static T Null() {return std::numeric_limits<value_t>::max();}
+	static T Null() {return T(std::numeric_limits<value_t>::max());}
 
 	///  Get a value for array subscripting.
 	value_t value() const {assert(*this); return i;}
@@ -76,10 +84,13 @@ template <typename T> struct _Index {
 	bool operator!=(_Index const other) const {return i != other.i;}
 	bool operator< (_Index const other) const {return i <  other.i;}
 
-	T operator++() {return ++i;}
-	T operator--() {return --i;}
+	T operator++() {return T(++i);}
+	T operator--() {return T(--i);}
 
 	operator bool() const throw () {return operator!=(Null());}
+
+	/// Implicit conversion to size_t type for array indexing.
+	operator size_t() const throw () {return static_cast<size_t>(i);}
 
 	// DO NOT REMOVE THE DECLARATION OF operator int32_t
 	// Rationale: If only operator bool() is present, the compiler may
@@ -97,8 +108,9 @@ private:
 #define DEFINE_INDEX(NAME)                                                    \
    struct NAME : public _Index<NAME> {                                        \
    NAME(NAME const & other = Null()) : _Index<NAME>(other) {}                 \
-   NAME(value_t const I) : _Index<NAME>(I) {}                                 \
-   NAME(int32_t const I) __attribute__((deprecated));                         \
+   explicit NAME(value_t const I) : _Index<NAME>(I) {}                        \
+   explicit NAME(size_t  const I) : _Index<NAME>(I) {}                        \
+   explicit NAME(int32_t const I) __attribute__((deprecated));                \
 };
 DEFINE_INDEX(Building_Index)
 DEFINE_INDEX(Ware_Index)

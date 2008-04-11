@@ -465,12 +465,8 @@ struct SupplyList {
 	void add_supply(Supply* supp);
 	void remove_supply(Supply* supp);
 
-	Ware_Index get_nrsupplies() const {
-		return static_cast<Ware_Index::value_t>(m_supplies.size());
-	}
-	Supply * get_supply(Ware_Index const idx) const {
-		return m_supplies[idx.value()];
-	}
+	Ware_Index get_nrsupplies() const {return Ware_Index(m_supplies.size());}
+	Supply * get_supply(Ware_Index const idx) const {return m_supplies[idx];}
 
 private:
 	std::vector<Supply *> m_supplies;
@@ -549,7 +545,7 @@ struct Economy {
 	bool find_route(Flag *start, Flag *end, Route *route, bool wait, int32_t cost_cutoff = -1);
 	Warehouse *find_nearest_warehouse(Flag *base, Route *route);
 
-	int32_t get_nrflags() const {return m_flags.size();}
+	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
 	void add_flag(Flag *flag);
 	void remove_flag(Flag *flag);
 	Flag* get_arbitrary_flag();
@@ -573,11 +569,11 @@ struct Economy {
 	void remove_supply(Supply *);
 
 	/// information about this economy
-	int32_t stock_ware(Ware_Index const i) {
-		return m_wares  .stock(i.value());
+	WareList::count_type stock_ware  (Ware_Index const i) {
+		return m_wares  .stock(i);
 	}
-	int32_t stock_worker(Ware_Index const i) {
-		return m_workers.stock(i.value());
+	WareList::count_type stock_worker(Ware_Index const i) {
+		return m_workers.stock(i);
 	}
 	WareList const & get_wares  () {return m_wares;}
 	WareList const & get_workers() {return m_workers;}

@@ -60,9 +60,9 @@ Player::Player
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),
 	m_fields            (0),
-	m_allowed_buildings (tribe_descr.get_nrbuildings().value(), true),
-	m_current_statistics(tribe_descr.get_nrwares    ().value()),
-	m_ware_productions  (tribe_descr.get_nrwares    ().value())
+	m_allowed_buildings (tribe_descr.get_nrbuildings(), true),
+	m_current_statistics(tribe_descr.get_nrwares    ()),
+	m_ware_productions  (tribe_descr.get_nrwares    ())
 {
 	for (int32_t i = 0; i < 4; ++i)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
@@ -106,7 +106,7 @@ void Player::init(const bool place_headquarters) {
 				(*egbase().warp_building
 				 	(starting_area,
 				 	 starting_area.player_number,
-				 	 trdesc.building_index("headquarters").value()));
+				 	 trdesc.building_index("headquarters")));
 			starting_area.radius = headquarter.get_conquers();
 			egbase().conquer_area(starting_area);
 			trdesc.load_warehouse_with_start_wares(egbase(), headquarter);
@@ -453,7 +453,7 @@ void Player::flagaction(Flag* flag, int32_t action)
  */
 void Player::allow_building(Building_Index const i, bool const allow) {
 	assert(i.value() < m_allowed_buildings.size());
-	m_allowed_buildings[i.value()] = allow;
+	m_allowed_buildings[i] = allow;
 }
 
 /*
@@ -762,7 +762,7 @@ void Player::ware_produced(Ware_Index const wareid) {
 	assert (m_ware_productions.size() == tribe().get_nrwares().value());
 	assert(wareid.value() < tribe().get_nrwares().value());
 
-	++m_current_statistics[wareid.value()];
+	++m_current_statistics[wareid];
 }
 
 
@@ -774,7 +774,7 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
 {
 	assert(ware.value() < m_ware_productions.size());
 
-	return &m_ware_productions[ware.value()];
+	return &m_ware_productions[ware];
 }
 
 
@@ -796,7 +796,7 @@ void Player::update_building_statistics(Building* building, losegain_t lg)
 		m_building_stats.resize(nr_buildings.value());
 
 	std::vector<Building_Stats> & stat =
-		m_building_stats[tribe().building_index(building_name.c_str()).value()];
+		m_building_stats[tribe().building_index(building_name.c_str())];
 
 	if (lg == GAIN) {
 		Building_Stats new_building;

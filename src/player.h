@@ -370,7 +370,7 @@ struct Player :
 
 	// Allowed buildings
 	bool is_building_allowed(Building_Index const i) const throw () {
-		return m_allowed_buildings[i.value()];
+		return m_allowed_buildings[i];
 	}
 	void allow_building(Building_Index, bool allow);
 
@@ -431,7 +431,7 @@ struct Player :
 	Building_Stats_vector const & get_building_statistics
 		(Building_Index const i) const
 	{
-		return m_building_stats[i.value()];
+		return m_building_stats[i];
 	}
 	std::vector<uint32_t> const * get_ware_production_statistics
 		(Ware_Index const) const;

@@ -98,10 +98,12 @@ private Descr_Maintainer<T>
 	}
 	T_Index add(T * const t) {
 		return
-			static_cast<typename T_Index::value_t>(Descr_Maintainer<T>::add(t));
+			T_Index
+				(static_cast<typename T_Index::value_t>
+				 	(Descr_Maintainer<T>::add(t)));
 	}
 	T_Index get_nitems() const throw () {
-		return Descr_Maintainer<T>::get_nitems();
+		return T_Index(Descr_Maintainer<T>::get_nitems());
 	}
 	T_Index get_index(const char * const name) const throw () {
 		int32_t idx = Descr_Maintainer<T>::get_index(name);

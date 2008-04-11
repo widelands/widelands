@@ -44,15 +44,13 @@ struct WareList {
 	typedef vector_type::size_type size_type;
 
 	/// \return Highest possible ware id
-	Ware_Index get_nrwareids() const {
-		return static_cast<Ware_Index::value_t>(m_wares.size());
-	}
+	Ware_Index get_nrwareids() const {return Ware_Index(m_wares.size());}
 
 	void add   (Ware_Index, count_type = 1);
 	void add(const WareList &wl);
 	void remove(Ware_Index, count_type = 1);
 	void remove(WareList const & wl);
-	int32_t stock(Ware_Index) const;
+	count_type stock(Ware_Index) const;
 
 	void set_nrwares(Ware_Index const i) {
 		assert(m_wares.size()==0);

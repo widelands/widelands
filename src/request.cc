@@ -96,7 +96,7 @@ void Request::Read
 	uint16_t const version = fr->Unsigned16();
 	if (version >= REQUEST_SUPPORTED_VERSION) {
 		m_type              = static_cast<Type>(fr->Unsigned8());
-		m_index             = static_cast<Ware_Index::value_t>(fr->Unsigned32());
+		m_index = Ware_Index(static_cast<Ware_Index::value_t>(fr->Unsigned32()));
 		m_idle              = fr->Unsigned8();
 		m_count             = fr->Unsigned32();
 		m_required_time     = fr->Unsigned32();

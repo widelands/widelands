@@ -2738,14 +2738,11 @@ void Economy::remove_supply(Supply * const supply)
 */
 void Economy::do_merge(Economy *e)
 {
-	int32_t i;
-
 	m_rebuilding = true;
 
 	// Be careful around here. The last e->remove_flag() will cause the other
 	// economy to delete itself.
-	i = e->get_nrflags();
-	while (i--) {
+	for (std::vector<Flag *>::size_type i = e->get_nrflags(); i--;) {
 		assert(i+1 == e->get_nrflags());
 
 		Flag *flag = e->m_flags[0];

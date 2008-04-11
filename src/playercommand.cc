@@ -171,7 +171,7 @@ void Cmd_Bulldoze::Write
 Cmd_Build::Cmd_Build (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	id     = static_cast<Building_Index::value_t>(des.Signed16  ());
+	id = Building_Index(static_cast<Building_Index::value_t>(des.Signed16()));
 	coords = des.Coords32  ();
 }
 
@@ -195,7 +195,7 @@ void Cmd_Build::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_BUILD_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			id     = static_cast<Building_Index::value_t>(fr.Unsigned16());
+			id     = Building_Index(static_cast<Building_Index::value_t>(fr.Unsigned16()));
 			coords = fr.Coords32  (egbase.map().extent());
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
@@ -474,7 +474,7 @@ Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
-	id     = static_cast<Building_Index::value_t>(des.Unsigned16());
+	id = Building_Index(static_cast<Building_Index::value_t>(des.Unsigned16()));
 }
 
 void Cmd_EnhanceBuilding::execute (Game* g)
@@ -504,7 +504,9 @@ void Cmd_EnhanceBuilding::Read
 			} catch (_wexception const & e) {
 				throw wexception("building %u: %s", building_serial, e.what());
 			}
-			id = static_cast<Building_Index::value_t>(fr.Unsigned16());
+			id =
+				Building_Index
+					(static_cast<Building_Index::value_t>(fr.Unsigned16()));
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -551,7 +553,7 @@ void Cmd_SetWarePriority::execute(Game* g)
 	if (psite->get_owner()->get_player_number() != get_sender())
 		return;
 
-	psite->set_priority(m_type, m_index.value(), m_priority);
+	psite->set_priority(m_type, m_index, m_priority);
 }
 
 #define PLAYER_CMD_SETWAREPRIORITY_VERSION 1
@@ -583,7 +585,7 @@ void Cmd_SetWarePriority::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_O
 			}
 
 			m_type = fr.Unsigned8();
-			m_index = static_cast<Ware_Index::value_t>(fr.Signed32());
+			m_index = Ware_Index(static_cast<Ware_Index::value_t>(fr.Signed32()));
 			m_priority = fr.Signed32();
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
@@ -597,7 +599,7 @@ Cmd_SetWarePriority::Cmd_SetWarePriority(StreamRead& des)
 {
 	m_serial = des.Unsigned32();
 	m_type = des.Unsigned8();
-	m_index = static_cast<Ware_Index::value_t>(des.Signed32());
+	m_index    = Ware_Index(static_cast<Ware_Index::value_t>(des.Signed32()));
 	m_priority = des.Signed32();
 }
 

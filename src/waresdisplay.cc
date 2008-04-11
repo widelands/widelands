@@ -53,19 +53,22 @@ WaresDisplay::~WaresDisplay()
 bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
 	assert(m_warelists.size());
 
-	const vector_type::size_type index =
+	Widelands::Ware_Index const index =
 		x < 0 | y < 0 ?
-		std::numeric_limits<vector_type::size_type>::max()
+		Widelands::Ware_Index
+			(static_cast<Widelands::Ware_Index::value_t>
+			 	(y / (WARE_MENU_PIC_HEIGHT + 8 + 3) * WaresPerRow
+			 	 +
+			 	 x / (WARE_MENU_PIC_WIDTH + 4)))
 		:
-		y / (WARE_MENU_PIC_HEIGHT + 8 + 3) * WaresPerRow
-		+
-		x / (WARE_MENU_PIC_WIDTH + 4);
+		Widelands::Ware_Index::Null();
+
 	m_curware.set_text
-		(index < m_warelists[0]->get_nrwareids().value() ?
+		(index < m_warelists[0]->get_nrwareids() ?
 		 (m_type == WORKER ?
-		  m_tribe.get_worker_descr(static_cast<uint8_t>(index))->descname()
+		  m_tribe.get_worker_descr(index)->descname()
 		  :
-		  m_tribe.get_ware_descr  (static_cast<uint8_t>(index))->descname())
+		  m_tribe.get_ware_descr  (index)->descname())
 		 .c_str()
 		 :
 		 "");
@@ -134,7 +137,7 @@ void WaresDisplay::draw(RenderTarget* dst)
 			(Widelands::Ware_Index i = Widelands::Ware_Index::First();
 			 i.value() < m_warelists.size();
 			 ++i)
-			totalstock += m_warelists[i.value()]->stock(id);
+			totalstock += m_warelists[i]->stock(id);
 
 		draw_ware(*dst, p, id, totalstock, is_worker);
 

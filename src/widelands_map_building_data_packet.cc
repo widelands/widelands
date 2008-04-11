@@ -94,9 +94,7 @@ throw (_wexception)
 								  	(a, a.player_number, index,
 								  	 Building_Index::Null())
 								  :
-								  egbase->warp_building
-								  	(a, a.player_number,
-								  	 index.value())));
+								  egbase->warp_building(a, a.player_number, index)));
 
 						if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
 							read_priorities (building, fr);

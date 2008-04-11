@@ -108,7 +108,8 @@ Add a new building to the list of buildable buildings
 */
 void BuildGrid::add(Widelands::Building_Index::value_t const id)
 {
-	Widelands::Building_Descr const & descr = *m_tribe.get_building_descr(id);
+	Widelands::Building_Descr const & descr =
+		*m_tribe.get_building_descr(Widelands::Building_Index(id));
 	UI::Icon_Grid::add
 		(descr.get_buildicon(), reinterpret_cast<void *>(id), descr.descname());
 }
@@ -792,16 +793,14 @@ Start construction of the building with the give description index
 */
 void FieldActionWindow::act_build(Widelands::Building_Index::value_t const idx)
 {
-	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
-	if (upcast(Game, game, &egbase))
-		game->send_player_build
+	Widelands::Game & game = dynamic_cast<Game &>(m_iabase->egbase());
+	game.send_player_build
 		(static_cast<Interactive_Player*>(m_iabase)->get_player_number(),
 		 m_field,
-		 idx);
-	else egbase.warp_building(m_field, m_plr->get_player_number(), idx);
+		 Widelands::Building_Index(idx));
 	m_iabase->reference_player_tribe
 		(m_plr->get_player_number(), &m_plr->tribe());
-	m_iabase->set_flag_to_connect(egbase.map().br_n(m_field));
+	m_iabase->set_flag_to_connect(game.map().br_n(m_field));
 	okdialog();
 }
 
@@ -838,7 +837,8 @@ void FieldActionWindow::building_icon_mouse_in
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
 		Widelands::HollowArea<> hollow_area(Widelands::Area<>(m_field, 0), 0);
 		const Workarea_Info & workarea_info =
-			m_plr->tribe().get_building_descr(idx)->m_recursive_workarea_info;
+			m_plr->tribe().get_building_descr(Widelands::Building_Index(idx))
+			->m_recursive_workarea_info;
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(Workarea_Info::size_type i =

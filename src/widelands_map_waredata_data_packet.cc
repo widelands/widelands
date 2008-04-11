@@ -73,7 +73,8 @@ throw (_wexception)
 					//  FIXME is the same as when the game was saved.
 					uint32_t const ware_index_from_file = fr.Unsigned32();
 					ware.m_descr_index =
-						static_cast<Ware_Index::value_t>(ware_index_from_file);
+						Ware_Index
+							(static_cast<Ware_Index::value_t>(ware_index_from_file));
 
 					try {
 						Map_Object & location = ol->get<Map_Object>(location_serial);
