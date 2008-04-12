@@ -91,6 +91,7 @@ m(new Interactive_BaseImpl)
 			(get_xres(), get_yres(),
 			 s.get_int("depth", 16), s.get_bool("fullscreen", false));
 
+		m_auto_roadbuild_mode   = s.get_bool("auto_roadbuild_mode", true);
 		m_show_workarea_preview = s.get_bool("workareapreview", false);
 	}
 
@@ -285,7 +286,8 @@ void Interactive_Base::think()
 		Widelands::Field & field = egbase().map()[m_flag_to_connect];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
 			if (not flag->has_road() and not m_buildroad)
-				start_build_road(m_flag_to_connect, field.get_owned_by());
+				if (m_auto_roadbuild_mode)
+					start_build_road(m_flag_to_connect, field.get_owned_by());
 			m_flag_to_connect = Coords::Null();
 		}
 	}

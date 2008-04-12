@@ -49,24 +49,27 @@ m_apply
 	 2,
 	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
 	 _("Apply")),
-m_title(this, MENU_XRES / 2, 30, _("General Options"), Align_HCenter),
-m_fullscreen(this, 300, 110),
-m_label_fullscreen(this, 325, 120, _("Fullscreen"), Align_VCenter),
+m_title(this, MENU_XRES / 2, 0, _("General Options"), Align_HCenter),
+m_fullscreen(this, 300, 80),
+m_label_fullscreen(this, 325, 90, _("Fullscreen"), Align_VCenter),
 m_inputgrab(this, 300, 140),
-m_label_inputgrab(this, 325, 150, _("Grab Input"), Align_VCenter),
-m_music(this, 300, 170),
-m_label_music(this, 325, 180, _("Enable Music"), Align_VCenter),
-m_fx(this, 300, 200),
-m_label_fx(this, 325, 210, _("Enable Sound"), Align_VCenter),
-m_reslist(this, 80, 110, 190, 150, Align_Left, true),
-m_label_resolution(this, 85, 95, _("In-game resolution"), Align_VCenter),
-m_label_language(this, MENU_XRES / 2 + 85, 95, _("Language"), Align_VCenter),
-m_language_list(this, MENU_XRES / 2 + 75, 110, 210, 150, Align_Left, true),
+m_label_inputgrab(this, 325, 120, _("Grab Input"), Align_VCenter),
+m_music(this, 300, 140),
+m_label_music(this, 325, 150, _("Enable Music"), Align_VCenter),
+m_fx(this, 300, 170),
+m_label_fx(this, 325, 180, _("Enable Sound"), Align_VCenter),
+m_reslist(this, 80, 80, 190, 150, Align_Left, true),
+m_label_resolution(this, 85, 65, _("In-game resolution"), Align_VCenter),
+m_label_language(this, MENU_XRES / 2 + 85, 65, _("Language"), Align_VCenter),
+m_language_list(this, MENU_XRES / 2 + 75, 80, 210, 150, Align_Left, true),
 m_label_game_options
-	(this, MENU_XRES / 2, 300, _("In-game Options"), Align_HCenter),
-m_single_watchwin(this, 85, 355),
+	(this, MENU_XRES / 2, 270, _("In-game Options"), Align_HCenter),
+m_single_watchwin(this, 85, 325),
 m_label_single_watchwin
-	(this, 110, 365, _("Use single Watchwindow Mode"), Align_VCenter),
+	(this, 110, 335, _("Use single Watchwindow Mode"), Align_VCenter),
+m_auto_roadbuild_mode(this, 85, 355),
+m_label_auto_roadbuild_mode
+	(this, 110, 365, _("Start roadbuilding after placing flag"), Align_VCenter),
 m_show_workarea_preview(this, 85, 385),
 m_label_show_workarea_preview
 	(this, 110, 395, _("Show buildings area preview"), Align_VCenter),
@@ -88,6 +91,7 @@ m_label_autosave
 	m_fx        .set_state(opt.fx);
 	m_fx   .set_enabled(not g_sound_handler.m_lock_audio_disabling);
 	m_single_watchwin                   .set_state(opt.single_watchwin);
+	m_auto_roadbuild_mode               .set_state(opt.auto_roadbuild_mode);
 	m_show_workarea_preview             .set_state(opt.show_warea);
 	m_snap_windows_only_when_overlapping.set_state
 		(opt.snap_windows_only_when_overlapping);
@@ -171,6 +175,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 		m_inputgrab                         .get_state   (),
 		m_fullscreen                        .get_state   (),
 		m_single_watchwin                   .get_state   (),
+		m_auto_roadbuild_mode               .get_state   (),
 		m_show_workarea_preview             .get_state   (),
 		m_snap_windows_only_when_overlapping.get_state   (),
 		m_dock_windows_to_edges             .get_state   (),
@@ -207,6 +212,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	opt.inputgrab             =  s->get_bool("inputgrab",             false);
 	opt.fullscreen            =  s->get_bool("fullscreen",            false);
 	opt.single_watchwin       =  s->get_bool("single_watchwin",       false);
+	opt.auto_roadbuild_mode   =  s->get_bool("auto_roadbuild_mode",    true);
 	opt.show_warea            =  s->get_bool("workareapreview",       false);
 	opt.snap_windows_only_when_overlapping
 		= s->get_bool("snap_windows_only_when_overlapping", false);
@@ -225,6 +231,7 @@ void Options_Ctrl::save_options() {
 	m_opt_section->set_bool("fullscreen",            opt.fullscreen);
 	m_opt_section->set_bool("inputgrab",             opt.inputgrab);
 	m_opt_section->set_bool("single_watchwin",       opt.single_watchwin);
+	m_opt_section->set_bool("auto_roadbuild_mode",   opt.auto_roadbuild_mode);
 	m_opt_section->set_bool("workareapreview",       opt.show_warea);
 	m_opt_section->set_bool
 		("snap_windows_only_when_overlapping",

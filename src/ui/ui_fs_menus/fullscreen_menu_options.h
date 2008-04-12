@@ -44,6 +44,7 @@ struct Options_Ctrl {
 		bool inputgrab;
 		bool fullscreen;
 		bool single_watchwin;
+		bool auto_roadbuild_mode;
 		bool show_warea;
 		bool snap_windows_only_when_overlapping;
 		bool dock_windows_to_edges;
@@ -92,6 +93,8 @@ private:
 	UI::Textarea                      m_label_game_options;
 	UI::Checkbox                      m_single_watchwin;
 	UI::Textarea                      m_label_single_watchwin;
+	UI::Checkbox                      m_auto_roadbuild_mode;
+	UI::Textarea                      m_label_auto_roadbuild_mode;
 	UI::Checkbox                      m_show_workarea_preview;
 	UI::Textarea                      m_label_show_workarea_preview;
 	UI::Checkbox                      m_snap_windows_only_when_overlapping;

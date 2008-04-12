@@ -60,6 +60,7 @@ struct Interactive_Base : public Map_View {
 
 	static int32_t get_xres();
 	static int32_t get_yres();
+	bool m_auto_roadbuild_mode;
 	bool m_show_workarea_preview;
 
 	//  point of view for drawing
