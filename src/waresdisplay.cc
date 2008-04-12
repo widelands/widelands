@@ -55,13 +55,13 @@ bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, 
 
 	Widelands::Ware_Index const index =
 		x < 0 | y < 0 ?
+		Widelands::Ware_Index::Null()
+		:
 		Widelands::Ware_Index
 			(static_cast<Widelands::Ware_Index::value_t>
 			 	(y / (WARE_MENU_PIC_HEIGHT + 8 + 3) * WaresPerRow
 			 	 +
-			 	 x / (WARE_MENU_PIC_WIDTH + 4)))
-		:
-		Widelands::Ware_Index::Null();
+			 	 x / (WARE_MENU_PIC_WIDTH + 4)));
 
 	m_curware.set_text
 		(index < m_warelists[0]->get_nrwareids() ?
