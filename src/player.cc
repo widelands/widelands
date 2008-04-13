@@ -540,19 +540,6 @@ void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
 		ctrl->dropSoldier(soldier);
 }
 
-void Player::change_soldier_capacity (PlayerImmovable* imm, int32_t val) {
-	if (imm->get_owner() != this)
-		return;
-	if (upcast(SoldierControl, ctrl, imm)) {
-		uint32_t current = ctrl->soldierCapacity();
-		uint32_t capacity = current + val;
-
-		if (!capacity || (val < 0 && capacity > current))
-			capacity = 1;
-
-		ctrl->setSoldierCapacity(capacity);
-	}
-}
 
 /**
  * Get a list of soldiers that this player can be used to attack the

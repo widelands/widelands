@@ -401,7 +401,6 @@ struct Player :
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable* imm, Soldier* worker);
-	void change_soldier_capacity (PlayerImmovable*, int32_t val);
 	void change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val);
 
 	uint32_t findAttackSoldiers(Flag* flag, std::vector<Soldier*>* soldiers = 0);

@@ -241,7 +241,6 @@ void TrainingSite::set_economy(Economy * e)
  * Cleanup after a Training site is removed
  *
  * Cancel all soldier requests and release all soldiers
- * \todo code audit, cf. change_soldier_capacity()
  */
 void TrainingSite::cleanup(Editor_Game_Base * g)
 {
@@ -372,20 +371,23 @@ std::vector<Soldier *> TrainingSite::stationedSoldiers() const
 	return m_soldiers;
 }
 
+uint32_t TrainingSite::minSoldierCapacity() const throw () {
+	return 0;
+}
+uint32_t TrainingSite::maxSoldierCapacity() const throw () {
+	return descr().get_max_number_of_soldiers();
+}
 uint32_t TrainingSite::soldierCapacity() const
 {
 	return m_capacity;
 }
 
-void TrainingSite::setSoldierCapacity(uint32_t capacity)
-{
-	if (capacity > descr().get_max_number_of_soldiers())
-		capacity = descr().get_max_number_of_soldiers();
-
-	if (capacity != m_capacity) {
-		m_capacity = capacity;
-		update_soldier_request();
-	}
+void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
+	assert(minSoldierCapacity() <= capacity);
+	assert                        (capacity <= maxSoldierCapacity());
+	assert(m_capacity != capacity);
+	m_capacity = capacity;
+	update_soldier_request();
 }
 
 /**

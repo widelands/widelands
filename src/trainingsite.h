@@ -135,6 +135,8 @@ public:
 	// Begin implementation of SoldierControl
 	virtual std::vector<Soldier *> presentSoldiers() const;
 	virtual std::vector<Soldier *> stationedSoldiers() const;
+	virtual uint32_t minSoldierCapacity() const throw ();
+	virtual uint32_t maxSoldierCapacity() const throw ();
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
 	virtual void dropSoldier(Soldier* soldier);

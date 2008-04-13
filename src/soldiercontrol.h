@@ -50,6 +50,18 @@ struct SoldierControl {
 	virtual std::vector<Soldier*> stationedSoldiers() const = 0;
 
 	/**
+	 * \return the minimum number of soldiers that this building can be
+	 * configured to hold.
+	 */
+	virtual uint32_t minSoldierCapacity() const = 0;
+
+	/**
+	 * \return the minimum number of soldiers that this building can be
+	 * configured to hold.
+	 */
+	virtual uint32_t maxSoldierCapacity() const = 0;
+
+	/**
 	 * \return the number of soldiers this building is configured to hold
 	 * right now.
 	 */
@@ -63,6 +75,18 @@ struct SoldierControl {
 	 */
 	virtual void setSoldierCapacity(uint32_t capacity) = 0;
 
+	void changeSoldierCapacity(int32_t const difference) {
+		uint32_t const old_capacity = soldierCapacity();
+		uint32_t const new_capacity =
+			std::min
+				(static_cast<uint32_t>
+				 	(std::max
+				 	 	(static_cast<int32_t>(old_capacity) + difference,
+				 	 	 static_cast<int32_t>(minSoldierCapacity()))),
+				 maxSoldierCapacity());
+	if (old_capacity != new_capacity)
+		setSoldierCapacity(new_capacity);
+}
 	/**
 	 * Evict the given soldier from the building immediately,
 	 * without changing the building's capacity.

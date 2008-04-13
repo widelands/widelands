@@ -25,6 +25,7 @@
 #include "player.h"
 #include "productionsite.h"
 #include "soldier.h"
+#include "soldiercontrol.h"
 #include "streamwrite.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
@@ -772,7 +773,9 @@ PlayerCommand (0, des.Unsigned8())
 void Cmd_ChangeSoldierCapacity::execute (Game* g)
 {
 	if (upcast(Building, building, g->objects().get_object(serial)))
-		g->get_player(get_sender())->change_soldier_capacity(building, val);
+		if (building->get_owner() == g->get_player(get_sender()))
+			if (upcast(SoldierControl, ctrl, building))
+				ctrl->changeSoldierCapacity(val);
 }
 
 void Cmd_ChangeSoldierCapacity::serialize (StreamWrite & ser)

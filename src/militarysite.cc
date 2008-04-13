@@ -413,20 +413,23 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 	return soldiers;
 }
 
+uint32_t MilitarySite::minSoldierCapacity() const throw () {
+	return 1;
+}
+uint32_t MilitarySite::maxSoldierCapacity() const throw () {
+	return descr().get_max_number_of_soldiers();
+}
 uint32_t MilitarySite::soldierCapacity() const
 {
 	return m_capacity;
 }
 
-void MilitarySite::setSoldierCapacity(uint32_t capacity)
-{
-	if (capacity > static_cast<uint32_t>(descr().get_max_number_of_soldiers()))
-		capacity = descr().get_max_number_of_soldiers();
-
-	if (capacity != m_capacity) {
-		m_capacity = capacity;
-		update_soldier_request();
-	}
+void MilitarySite::setSoldierCapacity(uint32_t const capacity) {
+	assert(minSoldierCapacity() <= capacity);
+	assert                        (capacity <= maxSoldierCapacity());
+	assert(m_capacity != capacity);
+	m_capacity = capacity;
+	update_soldier_request();
 }
 
 void MilitarySite::dropSoldier(Soldier* soldier)
