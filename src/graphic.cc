@@ -59,6 +59,10 @@ SDL_Surface* LoadImage(const char * const filename)
 	return surf;
 }
 
+static uint32_t luminance_table_r[0x100];
+static uint32_t luminance_table_g[0x100];
+static uint32_t luminance_table_b[0x100];
+
 /**
  * Initialize the SDL video mode.
 */
@@ -68,6 +72,16 @@ m_nr_update_rects   (0),
 m_update_fullscreen(false),
 m_roadtextures     (0)
 {
+	for
+		(uint32_t i = 0, r = 0, g = 0, b = 0;
+		 i < 0x100;
+		 ++i, r += 5016388U, g += 9848226U, b += 1912603U)
+	{
+		luminance_table_r[i] = r;
+		luminance_table_g[i] = g;
+		luminance_table_b[i] = b;
+	}
+
 	// Set video mode using SDL
 	int32_t flags = SDL_SWSURFACE;
 
@@ -559,7 +573,11 @@ uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
 				a >>= 1;
 
 				uint8_t const gray =
-					static_cast<uint8_t>(.30 * r + .59 * g + .11 * b);
+					(luminance_table_r[r] +
+					 luminance_table_g[g] +
+					 luminance_table_b[b] +
+					 8388608U) //  compensate for truncation:  .5 * 2^24
+					>> 24;
 				s.set_pixel(x, y, SDL_MapRGBA(&const_cast<SDL_PixelFormat &>(format), gray, gray, gray, a)); // NOTE const_cast is needed for SDL-1.2 older than revision 3008
 			}
 		return get_picture(PicSurface, s);

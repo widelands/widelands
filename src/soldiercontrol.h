@@ -84,9 +84,10 @@ struct SoldierControl {
 				 	 	(static_cast<int32_t>(old_capacity) + difference,
 				 	 	 static_cast<int32_t>(minSoldierCapacity()))),
 				 maxSoldierCapacity());
-	if (old_capacity != new_capacity)
-		setSoldierCapacity(new_capacity);
-}
+		if (old_capacity != new_capacity)
+			setSoldierCapacity(new_capacity);
+	}
+
 	/**
 	 * Evict the given soldier from the building immediately,
 	 * without changing the building's capacity.
