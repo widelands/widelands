@@ -137,11 +137,11 @@ throw (_wexception)
 						if (dynamic_cast<Game const *>(egbase)) {
 							road.m_carrier_request =
 								new Request
-								(&road,
-								 Ware_Index(),
-								 &Road::request_carrier_callback,
-								 &road,
-								 Request::WORKER);
+									(&road,
+									 Ware_Index(),
+									 &Road::request_carrier_callback,
+									 &road,
+									 Request::WORKER);
 							road.m_carrier_request->Read(&fr, egbase, ol);
 						}
 					} else

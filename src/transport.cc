@@ -231,7 +231,7 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 */
 void WareInstance::set_economy(Economy* e)
 {
-	if (m_economy == e)
+	if (m_descr_index == Ware_Index::Null() or m_economy == e)
 		return;
 
 	if (m_economy) m_economy->remove_wares(m_descr_index, 1);
@@ -1353,7 +1353,13 @@ void Road::set_economy(Economy *e)
  * Only call this if the road can handle a new carrier, and if no request has
  * been issued.
 */
-void Road::request_carrier(Game * g) {
+void Road::request_carrier
+#ifndef NDEBUG
+	(Game * g)
+#else
+	(Game *)
+#endif
+{
 	assert(!m_carrier.get(g) && !m_carrier_request);
 
 	m_carrier_request =
@@ -1967,7 +1973,11 @@ void WaresQueue::request_callback
 	(Game     *       game,
 	 Request  *,
 	 Ware_Index const ware,
+#ifndef NDEBUG
 	 Worker   * const w,
+#else
+	 Worker   *,
+#endif
 	 void     * const data)
 {
 	WaresQueue & wq = *static_cast<WaresQueue *>(data);
