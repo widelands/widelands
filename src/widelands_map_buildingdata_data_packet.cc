@@ -104,9 +104,9 @@ throw (_wexception)
 									*it = &ol->get<Map_Object>(leaver_serial);
 								} catch (_wexception const & e) {
 									throw wexception
-										("leave queue item #%u (%u): %s",
-										 it - leave_queue.begin(), leaver_serial,
-										 e.what());
+										("leave queue item #%lu (%u): %s",
+										 static_cast<long int>(it - leave_queue.begin()),
+										 leaver_serial, e.what());
 								}
 						else
 							*it = 0;

@@ -107,7 +107,10 @@ throw (_wexception)
 						try {
 							p.append(egbase->map(), fr.Direction8());
 						} catch (_wexception const & e) {
-							throw wexception("step #%u: %s", nr_steps - i, e.what());
+							throw wexception
+								("step #%lu: %s",
+								 static_cast<long unsigned int>(nr_steps - i),
+								 e.what());
 						}
 					road.set_path(egbase, p);
 

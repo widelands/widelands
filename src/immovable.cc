@@ -893,7 +893,9 @@ PlayerImmovable::PlayerImmovable(const Map_Object_Descr & mo_descr) :
 PlayerImmovable::~PlayerImmovable()
 {
 	if (m_workers.size())
-		log("Building::~Building: %u workers left!\n", m_workers.size());
+		log
+			("Building::~Building: %lu workers left!\n",
+			 static_cast<long unsigned int>(m_workers.size()));
 }
 
 /**
