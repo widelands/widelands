@@ -26,28 +26,34 @@ namespace UI {
 struct Radiobutton : public Statebox {
 	friend class Radiogroup;
 
-	Radiobutton(Panel *parent, int32_t x, int32_t y, uint32_t picid, Radiogroup *group, int32_t id);
+	Radiobutton
+		(Panel * parent, Point, uint32_t picid, Radiogroup &, int32_t id);
 	~Radiobutton();
 
 private:
 	void clicked();
 
 	Radiobutton * m_nextbtn;
-	Radiogroup  * m_group;
+	Radiogroup  & m_group;
 	int32_t           m_id;
 };
 
 /**
  * Initialize the radiobutton and link it into the group's linked list
 */
-Radiobutton::Radiobutton(Panel *parent, int32_t x, int32_t y, uint32_t picid, Radiogroup *group, int32_t id)
-	: Statebox(parent, x, y, picid)
+Radiobutton::Radiobutton
+	(Panel      * const parent,
+	 Point        const p,
+	 uint32_t     const picid,
+	 Radiogroup &       group,
+	 int32_t      const id)
+	:
+	Statebox (parent, p, picid),
+	m_nextbtn(group.m_buttons),
+	m_group  (group),
+	m_id     (id)
 {
-	m_group = group;
-	m_id = id;
-
-	m_nextbtn = group->m_buttons;
-	group->m_buttons = this;
+	group.m_buttons = this;
 }
 
 /**
@@ -55,7 +61,7 @@ Radiobutton::Radiobutton(Panel *parent, int32_t x, int32_t y, uint32_t picid, Ra
  */
 Radiobutton::~Radiobutton()
 {
-	for (Radiobutton **pp = &m_group->m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
+	for (Radiobutton **pp = &m_group.m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
 		if (*pp == this) {
 			*pp = m_nextbtn;
 			break;
@@ -69,7 +75,7 @@ Radiobutton::~Radiobutton()
  */
 void Radiobutton::clicked()
 {
-	m_group->set_state(m_id);
+	m_group.set_state(m_id);
 	play_click();
 }
 
@@ -103,12 +109,13 @@ Radiogroup::~Radiogroup() {while (m_buttons) delete m_buttons;}
  * Returns the ID of the new button.
 */
 int32_t Radiogroup::add_button
-	(Panel * const parent,
-	 int32_t const x, int32_t const y,
-	 uint32_t const picid, char const * const tooltip)
+	(Panel      * const parent,
+	 Point        const p,
+	 uint32_t     const picid,
+	 char const * const tooltip)
 {
 	++m_highestid;
-	(new Radiobutton(parent, x, y, picid, this, m_highestid))->set_tooltip
+	(new Radiobutton(parent, p, picid, *this, m_highestid))->set_tooltip
 		(tooltip);
 	return m_highestid;
 }
@@ -119,8 +126,7 @@ int32_t Radiogroup::add_button
  *
  * Args: state  the ID of the checked button (-1 means don't check any button)
  */
-void Radiogroup::set_state(int32_t state)
-{
+void Radiogroup::set_state(int32_t const state) {
 	if (state == m_state) {
 		clicked.call();
 		return;

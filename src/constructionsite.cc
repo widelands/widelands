@@ -41,7 +41,7 @@
 
 namespace Widelands {
 
-static const int32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
+#define CONSTRUCTIONSITE_STEP_TIME 30000
 
 
 /*
@@ -144,10 +144,15 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 	molog("m_work_completed: %i\n", m_work_completed);
 	molog("m_work_steps: %i\n", m_work_steps);
 
-	molog("WaresQueue size: %i\n", m_wares.size());
+	molog
+		("WaresQueue size: %lu\n",
+		 static_cast<long unsigned int>(m_wares.size()));
 	const std::vector<WaresQueue *>::size_type nr_wares = m_wares.size();
 	for (std::vector<WaresQueue *>::size_type i = 0; i < nr_wares; ++i) {
-		molog("Dumping WaresQueue %i/%i\n", i + 1, m_wares.size());
+		molog
+			("Dumping WaresQueue %lu/%lu\n",
+			 static_cast<long unsigned int>(i + 1),
+			 static_cast<long unsigned int>(m_wares.size()));
 		molog
 			("* Owner: %i (player nr)\n",
 			 m_wares[i]->get_owner()->get_player_number());

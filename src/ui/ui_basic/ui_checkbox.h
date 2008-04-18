@@ -36,7 +36,7 @@ namespace UI {
 struct Statebox : public Panel {
 	Statebox
 		(Panel * parent,
-		 int32_t x, int32_t y,
+		 Point,
 		 uint32_t picid                   = 0,
 		 std::string const & tooltip_text = std::string());
 	~Statebox();
@@ -47,10 +47,14 @@ struct Statebox : public Panel {
 
 	void set_enabled(bool enabled);
 
-	bool get_state() const throw () {return m_state;}
+	bool get_state() const throw () {return m_flags & Is_Checked;}
 	void set_state(bool on);
 
 	void set_id(int32_t n) {m_id = n;}
+	void set_owns_custom_picture() throw () {
+		assert(m_flags & Has_Custom_Picture);
+		set_flags(Owns_Custom_Picture, true);
+	}
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
@@ -63,16 +67,18 @@ private:
 	virtual void clicked() = 0;
 
 	int32_t  m_id;
-
-	bool     m_custom_picture; ///< the statebox displays a custom picture
+	enum Flags {
+		Is_Highlighted      = 0x01,
+		Is_Enabled          = 0x02,
+		Is_Checked          = 0x04,
+		Has_Custom_Picture  = 0x08,
+		Owns_Custom_Picture = 0x10
+	};
+	uint8_t m_flags;
+	void set_flags(uint8_t const flags, bool const enable) throw () {
+		m_flags &=~flags; if (enable) m_flags |= flags;
+	}
 	uint32_t     m_pic_graphics;
-
-	bool     m_highlighted;
-	bool     m_enabled;        ///< true if the checkbox can be clicked
-	bool     m_state;          ///< true if the box is checked
-
-	RGBColor m_clr_state; ///< color of border when checked (custom picture only)
-	RGBColor m_clr_highlight;  ///< color of border when highlighted
 };
 
 
@@ -82,14 +88,13 @@ private:
  * A checkbox only differs from a Statebox in that clicking on it toggles the
  * state
 */
-class Checkbox : public Statebox {
-public:
+struct Checkbox : public Statebox {
 	Checkbox
-		(Panel * parent,
-		 int32_t x, int32_t y,
-		 int32_t picid                    = 0,
-		 std::string const & tooltip_text = std::string())
-		: Statebox(parent, x, y, picid, tooltip_text)
+		(Panel             * const parent,
+		 Point               const p,
+		 uint32_t            const picid        = 0,
+		 std::string const &       tooltip_text = std::string())
+		: Statebox(parent, p, picid, tooltip_text)
 	{}
 
 private:

@@ -47,11 +47,8 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
 UI::Window(&parent, 0, 0, 430, 400, _("Message Box Event Options")),
 m_event   (event)
 {
-	int32_t const offsx   =  5;
-	int32_t const offsy   = 25;
 	int32_t const spacing =  5;
-	int32_t       posx    = offsx;
-	int32_t       posy    = offsy;
+	Point         pos       (spacing, 25);
 	m_nr_buttons  = m_event.get_nr_buttons();
 	m_ls_selected =0;
 
@@ -65,119 +62,130 @@ m_event   (event)
 	m_buttons[3].trigger = -1;
 
 
-	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+	new UI::Textarea(this, pos.x, pos.y, 50, 20, _("Name:"), Align_CenterLeft);
 	m_name =
 		new UI::EditBox
 		(this,
-		 spacing + 60, posy, get_inner_w() / 2 - 60 - 2 * spacing, 20,
+		 spacing + 60, pos.y, get_inner_w() / 2 - 60 - 2 * spacing, 20,
 		 0, 0);
 	m_name->setText(event.name());
-	posy += 20 + spacing;
+	pos.y += 20 + spacing;
 
 	new UI::Textarea
 		(this,
-		 get_inner_w() / 2 + spacing, posy, 150, 20,
+		 get_inner_w() / 2 + spacing, pos.y, 150, 20,
 		 _("Is Modal: "), Align_CenterLeft);
-	m_is_modal =
-		new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
+	pos.x = get_inner_w() - STATEBOX_WIDTH - spacing;
+	m_is_modal = new UI::Checkbox(this, pos);
 	m_is_modal->set_state(m_event.get_is_modal());
 
-	posy += 20 + spacing;
+	pos.x  =      spacing;
+	pos.y += 20 + spacing;
 
 	new UI::Textarea
-		(this, spacing, posy, 50, 20, _("Window Title:"), Align_CenterLeft);
+		(this, pos.x, pos.y, 50, 20, _("Window Title:"), Align_CenterLeft);
+	pos.x += 100;
 	m_window_title =
 		new UI::EditBox
-		(this, spacing + 100, posy, get_inner_w() - 100 - 2 * spacing, 20, 0, 2);
+		(this, pos.x, pos.y, get_inner_w() - 100 - 2 * spacing, 20, 0, 2);
 	m_window_title->setText(m_event.get_window_title());
 
-	posy += 20 + spacing;
-	new UI::Textarea(this, spacing, posy, 50, 20, _("Text:"), Align_CenterLeft);
-	posy += 20 + spacing;
+	pos.x  =      spacing;
+	pos.y += 20 + spacing;
+	new UI::Textarea(this, pos.x, pos.y, 50, 20, _("Text:"), Align_CenterLeft);
+	pos.y += 20 + spacing;
 	m_text =
 		new UI::Multiline_Editbox
-		(this, spacing, posy, get_inner_w()-2*spacing, 80, event.get_text());
+		(this, pos.x, pos.y, get_inner_w() - 2 * spacing, 80, event.get_text());
 
-	posy += 80 + spacing;
+	pos.y += 80 + spacing;
 
 	new UI::Textarea
 		(this,
-		 spacing, posy, 130, 20,
+		 pos.x, pos.y, 130, 20,
 		 _("Number of Buttons: "), Align_CenterLeft);
 
+	pos.x += 140;
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,
-		 spacing + 140, posy, 20, 20,
+		 pos.x, pos.y, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease,
 		 this);
 
-	m_nr_buttons_ta=new UI::Textarea(this, spacing+160+spacing, posy, 15, 20, "1", Align_CenterLeft);
+	m_nr_buttons_ta =
+		new UI::Textarea(this, spacing + 160 + spacing, pos.y, 15, 20, "1", Align_CenterLeft);
 
+	pos.x += 30 + spacing;
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,
-		 spacing + 175 + spacing, posy, 20, 20,
+		 pos.x, pos.y, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase,
 		 this);
 
-	posy += 20 + spacing;
+	pos.x  =      spacing;
+	pos.y += 20 + spacing;
 	new UI::Textarea
-		(this, spacing, posy, 100, 20, _("Button Name: "), Align_CenterLeft);
-	m_button_name =
-		new UI::EditBox(this, spacing+110, posy, 100, 20, 0, 3);
+		(this, pos.x, pos.y, 100, 20, _("Button Name: "), Align_CenterLeft);
+	pos.x += 110;
+	m_button_name = new UI::EditBox(this, pos.x, pos.y, 100, 20, 0, 3);
 	m_button_name->changedid.set
 		(this, &Event_Message_Box_Option_Menu::edit_box_edited);
 
 	//  Listbox for buttons
+	pos.x = get_inner_w() / 2 + spacing;
 	m_buttons_ls =
 		new UI::Listselect<void *>
 		(this,
-		 get_inner_w() / 2 + spacing, posy, get_inner_w() / 2 - 2 * spacing, 80,
+		 pos.x, pos.y, get_inner_w() / 2 - 2 * spacing, 80,
 		 Align_Left);
 	m_buttons_ls->selected.set
 		(this, &Event_Message_Box_Option_Menu::ls_selected);
 
-	posy += 20 + spacing;
+	pos.x  =      spacing;
+	pos.y += 20 + spacing;
 	new UI::Textarea
-		(this, spacing, posy, 100, 20, _("Select Trigger: "), Align_CenterLeft);
+		(this, pos.x, pos.y, 100, 20, _("Select Trigger: "), Align_CenterLeft);
 
+	pos.x += 110;
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,
-		 spacing + 110, posy, 20, 20,
+		 pos.x, pos.y, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease, this);
 
+	pos.x += 20 + spacing;
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,
-		 spacing + 130 + spacing, posy, 20, 20,
+		 pos.x, pos.y, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_increase, this);
 
-	posy += 20 + spacing;
+	pos.x  =      spacing;
+	pos.y += 20 + spacing;
 	new UI::Textarea
-		(this, spacing, posy, 100, 20, _("Current: "), Align_CenterLeft);
+		(this, pos.x, pos.y, 100, 20, _("Current: "), Align_CenterLeft);
 	m_current_trigger_ta =
 		new UI::Textarea
 		(this,
-		 spacing + 15, posy + 15 + spacing, get_inner_w() / 2, 20,
+		 pos.x + 15, pos.y + 15 + spacing, get_inner_w() / 2, 20,
 		 _("No trigger selected!"), Align_CenterLeft);
 
-	posx = get_inner_w() / 2 - 60 - spacing;
-	posy = get_inner_h()     - 30;
+	pos = Point(get_inner_w() / 2 - 60 - spacing, get_inner_h() - 30);
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,
-		 posx, posy, 60, 20, 0,
+		 pos.x, pos.y, 60, 20, 0,
 		 &Event_Message_Box_Option_Menu::clicked_ok, this,
 		 _("Ok"));
-	posx = get_inner_w() / 2 + spacing;
+	pos.x = get_inner_w() / 2 + spacing;
 	new UI::IDButton<Event_Message_Box_Option_Menu, int32_t>
 		(this,
-		 posx, posy, 60, 20,
+		 pos.x, pos.y, 60, 20,
 		 1,
 		 &Event_Message_Box_Option_Menu::end_modal, this, 0,
 		 _("Cancel"));

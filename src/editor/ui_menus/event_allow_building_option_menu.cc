@@ -117,7 +117,7 @@ m_label_allow
 	 m_increment_building.get_y() + m_increment_building.get_h() + spacing,
 	 get_inner_w() - 3 * spacing - 20, 20,
 	 _("Allow Building: "), Align_CenterLeft),
-m_allow(this, get_inner_w() - spacing - 20, m_label_allow.get_y()),
+m_allow(this, Point(get_inner_w() - spacing - 20, m_label_allow.get_y())),
 m_button_ok
 	(this,
 	 (get_inner_w() >> 1) - 60 - spacing,

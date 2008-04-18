@@ -50,13 +50,13 @@ m_apply
 	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
 	 _("Apply")),
 m_title(this, MENU_XRES / 2, 0, _("General Options"), Align_HCenter),
-m_fullscreen(this, 300, 80),
+m_fullscreen                        (this, Point(300, 80)),
 m_label_fullscreen(this, 325, 90, _("Fullscreen"), Align_VCenter),
-m_inputgrab(this, 300, 140),
+m_inputgrab                         (this, Point(300, 140)),
 m_label_inputgrab(this, 325, 120, _("Grab Input"), Align_VCenter),
-m_music(this, 300, 140),
+m_music                             (this, Point(300, 140)),
 m_label_music(this, 325, 150, _("Enable Music"), Align_VCenter),
-m_fx(this, 300, 170),
+m_fx                                (this, Point(300, 170)),
 m_label_fx(this, 325, 180, _("Enable Sound"), Align_VCenter),
 m_reslist(this, 80, 80, 190, 150, Align_Left, true),
 m_label_resolution(this, 85, 65, _("In-game resolution"), Align_VCenter),
@@ -64,22 +64,22 @@ m_label_language(this, MENU_XRES / 2 + 85, 65, _("Language"), Align_VCenter),
 m_language_list(this, MENU_XRES / 2 + 75, 80, 210, 150, Align_Left, true),
 m_label_game_options
 	(this, MENU_XRES / 2, 270, _("In-game Options"), Align_HCenter),
-m_single_watchwin(this, 85, 325),
+m_single_watchwin                   (this, Point(85, 325)),
 m_label_single_watchwin
 	(this, 110, 335, _("Use single Watchwindow Mode"), Align_VCenter),
-m_auto_roadbuild_mode(this, 85, 355),
+m_auto_roadbuild_mode               (this, Point(85, 355)),
 m_label_auto_roadbuild_mode
 	(this, 110, 365, _("Start roadbuilding after placing flag"), Align_VCenter),
-m_show_workarea_preview(this, 85, 385),
+m_show_workarea_preview             (this, Point(85, 385)),
 m_label_show_workarea_preview
 	(this, 110, 395, _("Show buildings area preview"), Align_VCenter),
-m_snap_windows_only_when_overlapping(this, 85, 415),
+m_snap_windows_only_when_overlapping(this, Point(85, 415)),
 m_label_snap_windows_only_when_overlapping
 	(this, 110, 425, _("Snap windows only when overlapping"), Align_VCenter),
-m_dock_windows_to_edges(this, 85, 445),
+m_dock_windows_to_edges             (this, Point(85, 445)),
 m_label_dock_windows_to_edges
 	(this, 110, 455, _("Dock windows to edges"), Align_VCenter),
-m_autosave(this, 85, 475),
+m_autosave                          (this, Point(85, 475)),
 m_label_autosave
 	(this, 110, 485, "Autosave game every XXX minutes", Align_VCenter)
 {

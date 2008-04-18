@@ -46,8 +46,6 @@ m_tabpanel(this, 0, 0, 1),
 m_pit     (pit)
 {
 	int32_t const space  =  5;
-	int32_t const xstart =  5;
-	int32_t const ystart = 15;
 	Widelands::World const & world = parent.egbase().map().world();
 	const Immovable_Descr::Index nr_immovables = world.get_nr_immovables();
 	const uint32_t immovables_in_row = std::min
@@ -71,15 +69,13 @@ m_pit     (pit)
 	const uint32_t tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 
-	int32_t ypos = ystart;
-	int32_t xpos = xstart;
+	Point pos;
 	uint32_t cur_x = immovables_in_row;
-	UI::Box * box = 0;
+	UI::Box * box;
 	for (Immovable_Descr::Index i = 0; i < nr_immovables; ++cur_x, ++i) {
-		if (cur_x==immovables_in_row) {
+		if (cur_x == immovables_in_row) {
 			cur_x = 0;
-			ypos = ystart;
-			xpos = xstart;
+			pos = Point(5, 15);
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 			box->resize();
 			m_tabpanel.add(tab_icon, box);
@@ -87,7 +83,7 @@ m_pit     (pit)
 		assert(box);
 
 		UI::Checkbox & cb = *new UI::Checkbox
-			(box, xpos, ypos,
+			(box, pos,
 			 g_gr->get_picture
 			 	(PicMod_Game, world.get_immovable_descr(i)->get_picture()));
 
@@ -98,9 +94,8 @@ m_pit     (pit)
 		m_checkboxes.push_back(&cb);
 		box->add(&cb, Align_Left);
 		box->add_space(space);
-		xpos += width + 1 + space;
+		pos.x += width + 1 + space;
 	}
-	ypos += height + 1 + space + 5;
 
 	m_tabpanel.activate(0);
 	m_tabpanel.resize();
@@ -133,7 +128,11 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 			//TODO: the uint32_t cast is ugly!
 			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n)) {
 				m_checkboxes[i]->changedtoid.set
-					(this, &Editor_Tool_Place_Immovable_Options_Menu::do_nothing);
+				(this,
+				 static_cast
+				 	<void (Editor_Tool_Place_Immovable_Options_Menu::*)
+				 	(int32_t, bool)>
+				 	(0));
 				m_checkboxes[i]->set_state(false);
 				m_checkboxes[i]->changedtoid.set
 					(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
@@ -144,6 +143,3 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 		select_correct_tool();
 	}
 }
-
-void Editor_Tool_Place_Immovable_Options_Menu::do_nothing(int32_t, bool)
-{}

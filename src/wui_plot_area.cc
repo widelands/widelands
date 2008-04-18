@@ -70,7 +70,9 @@ static const uint32_t time_in_ms[] = {
 #define LINE_COLOR RGBColor(0, 0, 0)
 
 
-WUIPlot_Area::WUIPlot_Area(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h)
+WUIPlot_Area::WUIPlot_Area
+	(UI::Panel * const parent,
+	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 :
 UI::Panel (parent, x, y, w, h),
 m_time    (TIME_ONE_HOUR),
@@ -125,7 +127,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 	float sub = xline_length / how_many_ticks[m_time];
 	float posx = get_inner_w() - space_at_right;
 	char buffer[200];
-	for (size_t i = 0; static_cast<int32_t>(i) <= how_many_ticks[m_time]; ++i) {
+	for (int32_t i = 0; i <= how_many_ticks[m_time]; ++i) {
 		dst->draw_line
 			(static_cast<int32_t>(posx), get_inner_h() - space_at_bottom,
 			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
@@ -274,7 +276,11 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 /*
  * Register a new plot data stream
  */
-void WUIPlot_Area::register_plot_data(uint32_t id, const std::vector<uint32_t>* data, RGBColor color) {
+void WUIPlot_Area::register_plot_data
+	(uint32_t const id,
+	 std::vector<uint32_t> const * const data,
+	 RGBColor const color)
+{
 	if (id >= m_plotdata.size())
 		m_plotdata.resize(id + 1);
 
@@ -286,7 +292,7 @@ void WUIPlot_Area::register_plot_data(uint32_t id, const std::vector<uint32_t>* 
 /*
  * Show this plot data?
  */
-void WUIPlot_Area::show_plot(uint32_t id, bool t) {
+void WUIPlot_Area::show_plot(uint32_t const id, bool const t) {
 	assert(id < m_plotdata.size());
 	m_plotdata[id].showplot = t;
 };
@@ -294,11 +300,11 @@ void WUIPlot_Area::show_plot(uint32_t id, bool t) {
 /*
  * set time
  */
-void WUIPlot_Area::set_time(TIME id) {m_time = id;}
+void WUIPlot_Area::set_time(TIME const id) {m_time = id;}
 
 /*
  * Set sample rate the data uses
  */
-void WUIPlot_Area::set_sample_rate(uint32_t id) {
+void WUIPlot_Area::set_sample_rate(uint32_t const id) {
 	m_sample_rate = id;
 }

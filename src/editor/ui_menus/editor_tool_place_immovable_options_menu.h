@@ -42,7 +42,6 @@ private:
 	UI::Tab_Panel m_tabpanel;
 	Editor_Place_Immovable_Tool & m_pit;
 	void clicked(int32_t, bool);
-	void do_nothing(int32_t, bool);
 };
 
 #endif

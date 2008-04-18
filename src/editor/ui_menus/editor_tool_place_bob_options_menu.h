@@ -40,7 +40,6 @@ private:
 	std::vector<UI::Checkbox *> m_checkboxes;
 	Editor_Place_Bob_Tool     & m_pit;
 	void clicked(int32_t, bool);
-	void do_nothing(int32_t, bool);
 };
 
 #endif

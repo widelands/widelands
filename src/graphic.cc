@@ -67,10 +67,7 @@ static uint32_t luminance_table_b[0x100];
  * Initialize the SDL video mode.
 */
 Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
-:
-m_nr_update_rects   (0),
-m_update_fullscreen(false),
-m_roadtextures     (0)
+: m_nr_update_rects(0), m_update_fullscreen(false), m_roadtextures(0)
 {
 	for
 		(uint32_t i = 0, r = 0, g = 0, b = 0;

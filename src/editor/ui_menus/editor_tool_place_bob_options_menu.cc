@@ -49,15 +49,14 @@ m_tabpanel              (this, 0, 0, 1),
 m_pit                   (pit)
 {
 	int32_t const space  =  5;
-	int32_t const xstart =  5;
-	int32_t const ystart = 15;
 	Widelands::World const & world = parent.egbase().map().world();
 	int32_t const nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
 		std::max
-		(std::min
-		 	(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U),
-		 12U);
+			(std::min
+			 	(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))),
+			 	 24U),
+			 12U);
 
 	m_tabpanel.set_snapparent(true);
 
@@ -74,16 +73,14 @@ m_pit                   (pit)
 
 	const uint32_t tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
-	int32_t ypos = ystart;
-	int32_t xpos = xstart;
+	Point pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;
 	UI::Box * box;
 	while (i < nr_bobs) {
 		if (cur_x == bobs_in_row) {
 			cur_x = 0;
-			ypos  = ystart;
-			xpos  = xstart;
+			pos   = Point(5, 15);
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 			box->resize();
 			m_tabpanel.add(tab_icon, box);
@@ -93,7 +90,7 @@ m_pit                   (pit)
 		upcast(Widelands::Critter_Bob_Descr const, critter_descr, &descr);
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,
-			 xpos, ypos,
+			 pos,
 			 g_gr->get_picture(PicMod_Game, descr.get_picture()),
 			 critter_descr ? critter_descr->descname() : std::string());
 
@@ -104,11 +101,10 @@ m_pit                   (pit)
 		m_checkboxes.push_back(&cb);
 		box->add(&cb, Align_Left);
 		box->add_space(space);
-		xpos += width + 1 + space;
+		pos.x += width + 1 + space;
 		++cur_x;
 		++i;
 	}
-	ypos += height + 1 + space + 5;
 
 	m_tabpanel.activate(0);
 	m_tabpanel.resize();
@@ -118,7 +114,9 @@ m_pit                   (pit)
 /**
  * This is called when one of the state boxes is toggled
 */
-void Editor_Tool_Place_Bob_Options_Menu::clicked(int32_t n, bool t) {
+void Editor_Tool_Place_Bob_Options_Menu::clicked
+	(int32_t const n, bool const t)
+{
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
 	//  FIXME usage comment for get_key_state.
@@ -135,7 +133,10 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int32_t n, bool t) {
 		//  TODO The uint32_t cast is ugly!
 		for (uint32_t i = 0; i < m_checkboxes.size(); ++i, i += i == static_cast<uint32_t>(n)) {
 			m_checkboxes[i]->changedtoid.set
-				(this, &Editor_Tool_Place_Bob_Options_Menu::do_nothing);
+				(this,
+				 static_cast
+				 	<void (Editor_Tool_Place_Bob_Options_Menu::*)(int32_t, bool)>
+				 	(0));
 			m_checkboxes[i]->set_state(false);
 			m_checkboxes[i]->changedtoid.set
 				(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);
@@ -145,8 +146,3 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int32_t n, bool t) {
 	m_pit.enable(n, t);
 	select_correct_tool();
 }
-
-/**
- * Do nothing
-*/
-void Editor_Tool_Place_Bob_Options_Menu::do_nothing(int32_t, bool) {}

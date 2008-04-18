@@ -143,7 +143,7 @@ m_increase_tool(increase_tool)
 		}
 		m_radiogroup.add_button
 			(this,
-			 pos.x, pos.y,
+			 pos,
 			 g_gr->get_picture
 			 	(PicMod_Game,
 			 	 world.get_resource(i)->get_editor_pic(100000).c_str()));

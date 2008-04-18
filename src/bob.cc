@@ -1086,10 +1086,13 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 
 	molog("Signal: %s\n", m_signal.c_str());
 
-	molog("Stack size: %i\n", m_stack.size());
+	molog("Stack size: %lu\n", static_cast<long unsigned int>(m_stack.size()));
 
-	for (uint32_t i = 0; i < m_stack.size(); ++i) {
-		molog("Stack dump %i/%i\n", i+1, m_stack.size());
+	for (size_t i = 0; i < m_stack.size(); ++i) {
+		molog
+			("Stack dump %lu/%lu\n",
+			 static_cast<long unsigned int>(i + 1),
+			 static_cast<long unsigned int>(m_stack.size()));
 
 		molog("* task->name: %s\n", m_stack[i].task->name);
 
@@ -1106,11 +1109,16 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 		if (m_stack[i].path) {
 			const Path & path = *m_stack[i].path;
 			Path::Step_Vector::size_type nr_steps = path.get_nsteps();
-			molog("** Path length: %i\n", nr_steps);
+			molog
+				("** Path length: %lu\n",
+				 static_cast<long unsigned int>(nr_steps));
 			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
 			for (Path::Step_Vector::size_type j = 0; j < nr_steps; ++j)
-				molog("** Step %i/%i: %i\n", j + 1, nr_steps, path[j]);
+				molog
+					("** Step %lu/%lu: %i\n",
+					 static_cast<long unsigned int>(j + 1),
+					 static_cast<long unsigned int>(nr_steps), path[j]);
 		}
 		molog("* transfer: %p\n",  m_stack[i].transfer);
 		molog("* route: %p\n",  m_stack[i].route);

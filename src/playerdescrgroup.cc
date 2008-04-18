@@ -54,7 +54,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->plnum = plnum;
 
 	d->plr_name = new UI::Textarea(this, 0, 0, 100, 20, std::string(), Align_Left);
-	d->btnEnablePlayer = new UI::Checkbox(this, 88, 0);
+	d->btnEnablePlayer = new UI::Checkbox(this, Point(88, 0));
 	d->btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
 	d->btnPlayerType = new UI::Button<PlayerDescriptionGroup>
 		(this,

@@ -48,81 +48,80 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain
 UI::Window   (&parent, 0, 0, 505, 340, _("Edit Event Chain")),
 m_event_chain(chain)
 {
-	int32_t const offsx    =   5;
-	int32_t const offsy    =  25;
 	int32_t const spacing  =   5;
-	int32_t       posx     = offsx;
-	int32_t       posy     = offsy;
 	int32_t const ls_width = 200;
+	Point         pos        (5, 25);
 
-	new UI::Textarea(this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
-	m_name = new UI::EditBox(this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
+	new UI::Textarea(this, pos.x, pos.y, 60, 20, _("Name: "), Align_CenterLeft);
+	m_name =
+		new UI::EditBox
+			(this, pos.x + 60, pos.y, get_inner_w() - 2 * spacing - 60, 20, 0, 0);
 	m_name->setText(m_event_chain.name());
-	posy += 20 + spacing;
+	pos.y += 20 + spacing;
 
 	new UI::Textarea
 		(this,
-		 posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT,
+		 pos.x + STATEBOX_WIDTH + spacing, pos.y, 120, STATEBOX_HEIGHT,
 		 _("Runs multiple times"), Align_CenterLeft);
-	m_morethanonce = new UI::Checkbox(this, posx, posy);
+	m_morethanonce = new UI::Checkbox(this, pos);
 	m_morethanonce->set_state(m_event_chain.get_repeating());
-	posy += STATEBOX_HEIGHT + spacing;
-	int32_t const lsoffsy = posy;
+	pos.y += STATEBOX_HEIGHT + spacing;
+	int32_t const lsoffsy = pos.y;
 
-	new UI::Textarea(this, posx, lsoffsy, _("Events: "), Align_Left);
+	new UI::Textarea(this, pos.x, lsoffsy, _("Events: "), Align_Left);
 	m_events =
 		new UI::Listselect<Widelands::Event &>
-		(this, spacing, lsoffsy + 20, ls_width, get_inner_h() - lsoffsy - 55);
+			(this, spacing, lsoffsy + 20, ls_width, get_inner_h() - lsoffsy - 55);
 	m_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::cs_selected);
 	m_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::cs_double_clicked);
-	posx += ls_width + spacing;
+	pos.x += ls_width + spacing;
 
-	posy = 75;
+	pos.y = 75;
 
 	new UI::Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
-		 posx, posy, 80, 20,
+		 pos.x, pos.y, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional,
 		 this,
 		 _("Conditional"));
 
-	posy += 20 + spacing + spacing;
+	pos.y += 20 + spacing + spacing;
 
 	new UI::Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
-		 posx, posy, 80, 20,
+		 pos.x, pos.y, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_EventChain::clicked_new_event, this,
 		 _("New Event"));
 
-	posy += 20 + spacing + spacing;
+	pos.y += 20 + spacing + spacing;
 
 	m_insert_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
-		 posx, posy, 80, 20,
+		 pos.x, pos.y, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_EventChain::clicked_ins_event, this,
 		 "<-",
 		 _("Insert"),
 		 false);
 
-	posy += 20 + spacing + spacing;
+	pos.y += 20 + spacing + spacing;
 
 	m_delete_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
-		 posx, posy, 80, 20,
+		 pos.x, pos.y, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_EventChain::clicked_del_event, this,
 		 _("Delete"),
 		 std::string(),
 		 false);
 
-	posy += 20 + spacing + spacing + spacing;
+	pos.y += 20 + spacing + spacing + spacing;
 
 	m_mvup_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
-		 posx + 5, posy, 24, 24,
+		 pos.x + 5, pos.y, 24, 24,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_move_up, this,
@@ -131,18 +130,19 @@ m_event_chain(chain)
 
 	m_mvdown_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
-		 posx + 51, posy, 24, 24,
+		 pos.x + 51, pos.y, 24, 24,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_move_down, this,
 		 std::string(),
 		 false);
 
-	posy += 24 + spacing + spacing;
-
-	posx += 80 + spacing;
-	new UI::Textarea(this, posx, lsoffsy, _("Available Events: "), Align_Left);
-	m_available_events=new UI::Listselect<Widelands::Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
+	pos += Point(80 + spacing, 24 + spacing + spacing);
+	new UI::Textarea
+		(this, pos.x, lsoffsy, _("Available Events: "), Align_Left);
+	m_available_events =
+		new UI::Listselect<Widelands::Event &>
+			(this, pos.x, lsoffsy + 20, ls_width, get_inner_h() - lsoffsy - 55);
 	m_available_events->selected.set
 		(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
 	m_available_events->double_clicked.set
@@ -155,21 +155,20 @@ m_event_chain(chain)
 	}
 	m_available_events->sort();
 
-	posy = get_inner_h()     - 30;
-	posx = get_inner_w() / 2 - 80 - spacing;
+	pos = Point(get_inner_h() - 30, get_inner_w() / 2 - 80 - spacing);
 
 	new UI::Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
-		 posx, posy, 80, 20,
+		 pos.x, pos.y, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_EventChain::clicked_ok, this,
 		 _("Ok"));
 
-	posx=(get_inner_w()/2)+spacing;
+	pos.x = get_inner_w() / 2 + spacing;
 
 	new UI::IDButton<Editor_Event_Menu_Edit_EventChain, int32_t>
 		(this,
-		 posx, posy, 80, 20,
+		 pos.x, pos.y, 80, 20,
 		 1,
 		 &Editor_Event_Menu_Edit_EventChain::end_modal, this, 0,
 		 _("Cancel"));

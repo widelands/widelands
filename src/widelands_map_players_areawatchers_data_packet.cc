@@ -67,15 +67,16 @@ throw (_wexception)
 					uint32_t const reg = fr.Unsigned32();
 					if (ol->is_object_known(reg))
 						throw wexception
-							("%u: read object with reg %u, but an object with that "
+							("%lu: read object with reg %u, but an object with that "
 							 "reg has already been loaded",
-							 fr.GetPos() - 4, reg);
+							 static_cast<long unsigned int>(fr.GetPos() - 4), reg);
 					Coords c;
 					try {c = fr.Coords32(extent);}
 					catch (_wexception const & e) {
 						throw wexception
-							("%u: coordinates of watcher %u: %s",
-							 fr.GetPos() - 4, reg, e.what());
+							("%lu: coordinates of watcher %u: %s",
+							 static_cast<long unsigned int>(fr.GetPos() - 4), reg,
+							 e.what());
 					}
 					ol->register_object
 						(reg,

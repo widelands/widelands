@@ -139,8 +139,10 @@ inline static const Map_Object_Descr * read_unseen_immovable
 	if (not (file).EndOfFile())                                                \
 		throw wexception                                                        \
 			("Map_Players_View_Data_Packet::Read: player %u:"                    \
-			 "Found %u trailing bytes in \"%s\"",                                \
-			 plnum, (file).GetSize() - (file).GetPos(), filename);               \
+			 "Found %lu trailing bytes in \"%s\"",                               \
+			 plnum,                                                              \
+			 static_cast<long unsigned int>((file).GetSize() - (file).GetPos()), \
+			 filename);                                                          \
 
 void Map_Players_View_Data_Packet::Read
 	(FileSystem            &       fs,
@@ -400,11 +402,12 @@ void Map_Players_View_Data_Packet::Read
 					} catch (const FileRead::File_Boundary_Exceeded) {
 						throw wexception
 							("Map_Players_View_Data_Packet::Read: player %u: in "
-							 "\"%s\":%u: node (%i, %i): unexpected end of file while "
-							 "reading time_node_last_unseen",
+							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
+							 "while reading time_node_last_unseen",
 							 plnum,
 							 unseen_times_filename,
-							 unseen_times_file.GetPos() - 4,
+							 static_cast<long unsigned int>
+							 	(unseen_times_file.GetPos() - 4),
 							 f.x, f.y);
 					}
 
@@ -412,20 +415,22 @@ void Map_Players_View_Data_Packet::Read
 					catch (const FileRead::File_Boundary_Exceeded) {
 						throw wexception
 							("Map_Players_View_Data_Packet::Read: player %u: in "
-							 "\"%s\":%u: node (%i, %i): unexpected end of file while "
-							 "reading owner",
+							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
+							 "while reading owner",
 							 plnum,
 							 unseen_times_filename,
-							 unseen_times_file.GetPos() - 1,
+							 static_cast<long unsigned int>
+							 	(unseen_times_file.GetPos() - 1),
 							 f.x, f.y);
 					}
 					if (nr_players < owner)
 						throw wexception
 							("Map_Players_View_Data_Packet::Read: player %u: in "
-							 "\"%s\":%i & 0xf: node (%i, %i): Player thinks that "
+							 "\"%s\":%lu & 0xf: node (%i, %i): Player thinks that "
 							 "this node is owned by player %u, but there are only %u "
 							 "players",
-							 plnum, owners_filename, owners_file.GetPos() - 1,
+							 plnum, owners_filename,
+							 static_cast<long unsigned int>(owners_file.GetPos() - 1),
 							 f.x, f.y, owner, nr_players);
 
 					f_player_field.map_object_descr[TCoords<>::None] =
@@ -575,10 +580,12 @@ void Map_Players_View_Data_Packet::Read
 						} catch (const FileRead::File_Boundary_Exceeded) {
 							throw wexception
 								("Map_Players_View_Data_Packet::Read: player %u: in "
-								 "\"%s\":%u: node (%i, %i) t = D: unexpected end of "
+								 "\"%s\":%lu: node (%i, %i) t = D: unexpected end of "
 								 "file while reading time_triangle_last_surveyed",
 								 plnum, survey_times_filename,
-								 survey_times_file.GetPos() - 4, f.x, f.y);
+								 static_cast<long unsigned int>
+								 	(survey_times_file.GetPos() - 4),
+								 f.x, f.y);
 						}
 					}
 				} catch (const FileRead::File_Boundary_Exceeded) {
@@ -610,10 +617,12 @@ void Map_Players_View_Data_Packet::Read
 						} catch (const FileRead::File_Boundary_Exceeded) {
 							throw wexception
 								("Map_Players_View_Data_Packet::Read: player %u: in "
-								 "\"%s\":%u: node (%i, %i) t = R: unexpected end of "
+								 "\"%s\":%lu: node (%i, %i) t = R: unexpected end of "
 								 "file while reading time_triangle_last_surveyed",
 								 plnum, survey_times_filename,
-								 survey_times_file.GetPos() - 4, f.x, f.y);
+								 static_cast<long unsigned int>
+								 	(survey_times_file.GetPos() - 4),
+								 f.x, f.y);
 						}
 					}
 				} catch (const FileRead::File_Boundary_Exceeded) {

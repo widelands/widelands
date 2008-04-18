@@ -45,60 +45,31 @@ Editor_Tool_Menu::Editor_Tool_Menu
 UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 {
 
-	int32_t const offsx   =  5;
-	int32_t const offsy   =  5;
-	int32_t const spacing =  5;
+#define spacing 5
+	Point   const offs     (spacing, spacing);
+	Point         pos    = offs;
 	int32_t const width   = 34;
 	int32_t const height  = 34;
-	int32_t       posx    = offsx;
-	int32_t       posy    = offsy;
 
 
 	int32_t const num_tools = 6;
-	m_radioselect.add_button
-		(this,
-		 posx, posy,
-		 g_gr->get_picture
-		 	(PicMod_Game, "pics/editor_menu_tool_change_height.png"),
-		 _("Change height"));
-	posx += width + spacing;
-	m_radioselect.add_button
-		(this,
-		 posx, posy,
-		 g_gr->get_picture
-		 	(PicMod_Game, "pics/editor_menu_tool_noise_height.png"),
-		 _("Noise height"));
-	posx += width + spacing;
-	m_radioselect.add_button
-		(this,
-		 posx, posy,
-		 g_gr->get_picture
-		 	(PicMod_Game, "pics/editor_menu_tool_set_terrain.png"),
-		 _("Terrain"));
-	posx += width + spacing;
-	m_radioselect.add_button
-		(this,
-		 posx, posy,
-		 g_gr->get_picture
-		 	(PicMod_Game, "pics/editor_menu_tool_place_immovable.png"),
-		 _("Immovable"));
-	posx += width + spacing;
-	m_radioselect.add_button
-		(this,
-		 posx, posy,
-		 g_gr->get_picture
-		 	(PicMod_Game, "pics/editor_menu_tool_place_bob.png"),
-		 _("Bob"));
-	posx += width + spacing;
-	m_radioselect.add_button
-		(this,
-		 posx, posy,
-		 g_gr->get_picture
-		 	(PicMod_Game, "pics/editor_menu_tool_change_resources.png"),
-		 _("Resource"));
+#define ADD_BUTTON(pic, tooltip)                                              \
+	m_radioselect.add_button                                                   \
+		(this,                                                                  \
+		 pos,                                                                   \
+		 g_gr->get_picture                                                      \
+		 	(PicMod_Game, "pics/editor_menu_tool_" pic ".png"),                  \
+		 tooltip);                                                              \
+	pos.x += width + spacing;
+	ADD_BUTTON("change_height",    _("Change height"));
+	ADD_BUTTON("noise_height",     _("Noise height"));
+	ADD_BUTTON("set_terrain",      _("Terrain"));
+	ADD_BUTTON("place_immovable",  _("Immovable"));
+	ADD_BUTTON("place_bob",        _("Bob"));
+	ADD_BUTTON("change_resources", _("Resource"));
 
 	set_inner_size
-		(offsx + (width + spacing) * num_tools, offsy + (height + spacing));
+		(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));
 
 	{
 		const Editor_Tool & current = parent.tools.current();

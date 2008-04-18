@@ -1317,7 +1317,9 @@ void Computer_Player::construct_roads ()
 		}
 
 	log
-		("Computer_Player(%u): %u spots for road building (%f seconds) \n", player_number, spots.size(), static_cast<double>(clock() - time_before) / CLOCKS_PER_SEC);
+		("Computer_Player(%u): %lu spots for road building (%f seconds) \n",
+		 player_number, static_cast<long unsigned int>(spots.size()),
+		 static_cast<double>(clock() - time_before) / CLOCKS_PER_SEC);
 
 	while (!queue.empty()) {
 		WalkableSpot & from = spots[queue.front()];
@@ -1364,9 +1366,8 @@ void Computer_Player::construct_roads ()
 					game().send_player_build_flag (player_number, pc.front());
 
 				log
-					("Computer_Player(%u): New road has length %u\n",
-					 player_number,
-					 pc.size());
+					("Computer_Player(%u): New road has length %lu\n",
+					 player_number, static_cast<long unsigned int>(pc.size()));
 				Path & path = *new Path(pc.front());
 				pc.pop_front();
 

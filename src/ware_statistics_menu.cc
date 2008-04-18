@@ -299,11 +299,7 @@ static const RGBColor colors[] = {
  * of the graph and it needs a picture
  */
 struct WSM_Checkbox : public UI::Checkbox {
-	WSM_Checkbox
-		(UI::Panel *,
-		 int32_t x, int32_t y,
-		 int32_t id, uint32_t picid,
-		 RGBColor);
+	WSM_Checkbox(UI::Panel *, Point, int32_t id, uint32_t picid, RGBColor);
 
 	virtual void draw(RenderTarget *t);
 
@@ -315,15 +311,16 @@ private:
 
 WSM_Checkbox::WSM_Checkbox
 	(UI::Panel * const parent,
-	 int32_t const x, int32_t const y,
-	 int32_t const id, uint32_t const picid,
-	 RGBColor const color)
-: UI::Checkbox(parent, x, y, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG))
+	 Point       const p,
+	 int32_t     const id,
+	 uint32_t    const picid,
+	 RGBColor    const color)
+:
+UI::Checkbox(parent, p, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG)),
+m_pic       (picid),
+m_color     (color)
 {
-
-	m_pic = picid;
 	set_id(id);
-	m_color = color;
 }
 
 /*
@@ -366,30 +363,30 @@ m_parent(&parent)
 	const uint32_t nr_rows =
 		nr_wares / wares_per_row + (nr_wares % wares_per_row ? 1 : 0);
 
-	int32_t const spacing = 5;
-	int32_t       offsx   = spacing;
-	int32_t       offsy   = 30;
-	int32_t       posx    = offsx;
-	int32_t       posy    = offsy;
-
+#define spacing 5
+	Point const offs(spacing, 30);
+	Point       pos (offs);
 
 	set_inner_size
 		(10,
-		 (offsy + spacing + PLOT_HEIGHT + spacing +
+		 (offs.y + spacing + PLOT_HEIGHT + spacing +
 		  nr_rows * (WARE_MENU_PIC_HEIGHT + spacing) + 100));
 
 
-	m_plot = new WUIPlot_Area(this, spacing, offsy+spacing, get_inner_w()-2*spacing, PLOT_HEIGHT);
+	m_plot =
+		new WUIPlot_Area
+			(this,
+			 spacing, offs.y + spacing, get_inner_w() - 2 * spacing, PLOT_HEIGHT);
 	m_plot->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	//  all wares
 	Widelands::Item_Ware_Descr::Index cur_ware = 0;
 	int32_t dposy    = 0;
-	posy += PLOT_HEIGHT+ 2 * spacing;
+	pos.y += PLOT_HEIGHT+ 2 * spacing;
 	Widelands::Tribe_Descr const & tribe = parent.get_player()->tribe();
 	for (uint32_t y = 0; y < nr_rows; ++y) {
-		posx = spacing;
+		pos.x = spacing;
 		for
 			(uint32_t x = 0;
 			 x < wares_per_row and cur_ware < nr_wares;
@@ -397,11 +394,12 @@ m_parent(&parent)
 		{
 			Widelands::Item_Ware_Descr const & ware =
 				*tribe.get_ware_descr(Widelands::Ware_Index(cur_ware));
-			WSM_Checkbox & cb = *new WSM_Checkbox
-				(this, posx, posy, cur_ware, ware.get_icon(), colors[cur_ware]);
+			WSM_Checkbox & cb =
+				*new WSM_Checkbox
+					(this, pos, cur_ware, ware.get_icon(), colors[cur_ware]);
 			cb.set_tooltip(ware.descname().c_str());
 			cb.changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
-			posx += cb.get_w() + spacing;
+			pos.x += cb.get_w() + spacing;
 			dposy = cb.get_h() + spacing;
 			set_inner_size
 				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
@@ -411,92 +409,91 @@ m_parent(&parent)
 				 	(Widelands::Ware_Index(cur_ware)),
 				 colors[cur_ware]);
 		}
-		posy += dposy;
+		pos.y += dposy;
 	}
 
 	m_plot->set_size(get_inner_w()-2*spacing, PLOT_HEIGHT);
 
 
 	int32_t button_size = (get_inner_w() - spacing * 5) / 4;
-	posx = spacing;
-	posy +=spacing+spacing;
+	pos.x  = spacing;
+	pos.y += spacing + spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
-		 posx, posy, button_size, 25,
+		 pos.x, pos.y, button_size, 25,
 		 4,
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_15_MINS,
 		 _("15 m"));
 
-	posx += button_size+spacing;
+	pos.x += button_size + spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
-		 posx, posy, button_size, 25,
+		 pos.x, pos.y, button_size, 25,
 		 4,
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_30_MINS,
 		 _("30 m"));
 
-	posx += button_size+spacing;
+	pos.x += button_size + spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
-		 posx, posy, button_size, 25,
+		 pos.x, pos.y, button_size, 25,
 		 4,
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_ONE_HOUR,
 		 _("1 h"));
 
-	posx += button_size+spacing;
+	pos.x += button_size + spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
-		 posx, posy, button_size, 25,
+		 pos.x, pos.y, button_size, 25,
 		 4,
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_TWO_HOURS,
 		 _("2 h"));
 
-	posy += 25 + spacing;
-	posx = spacing;
+	pos.y += 25 + spacing;
+	pos.x  =      spacing;
 
 	new UI::Button<Ware_Statistics_Menu>
 		(this,
-		 posx, posy, 32, 32,
+		 pos.x, pos.y, 32, 32,
 		 4,
 		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
 		 &Ware_Statistics_Menu::clicked_help, this,
 		 _("Help"));
 
-	posx += button_size+spacing;
+	pos.x += button_size+spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
-		 posx, posy, button_size, 25,
+		 pos.x, pos.y, button_size, 25,
 		 4,
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_FOUR_HOURS,
 		 _("4 h"));
 
-	posx += button_size+spacing;
+	pos.x += button_size + spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
-		 posx, posy, button_size, 25,
+		 pos.x, pos.y, button_size, 25,
 		 4,
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_EIGHT_HOURS,
 		 _("8 h"));
 
-	posx += button_size+spacing;
+	pos.x += button_size + spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
-		 posx, posy, button_size, 25,
+		 pos.x, pos.y, button_size, 25,
 		 4,
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_16_HOURS,
 		 _("16 h"));
 
-	posx += button_size + spacing;
-	posy += 32 + spacing;
+	pos += Point(button_size + spacing, 32 + spacing);
 
-	set_inner_size(get_inner_w(), posy);
+	set_inner_size(get_inner_w(), pos.y);
 }
 
 /*
@@ -516,6 +513,6 @@ void Ware_Statistics_Menu::clicked_help() {}
 /*
  * Cb has been changed to this state
  */
-void Ware_Statistics_Menu::cb_changed_to(int32_t id, bool what) {
+void Ware_Statistics_Menu::cb_changed_to(int32_t const id, bool const what) {
 	m_plot->show_plot(id, what);
 }

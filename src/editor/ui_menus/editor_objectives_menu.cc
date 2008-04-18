@@ -69,55 +69,54 @@ m_parent  (parent),
 m_te      (te)
 {
 	int32_t const spacing = 5;
-	int32_t       posy    = 5;
+	Point         pos       (get_inner_w() - STATEBOX_WIDTH - spacing, 5);
 
 	Objective & obj = UI::Table<Objective &>::get(te);
 
 	new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
 	m_name = new UI::EditBox(this, 120, 5, 120, 20, 0, 0);
 	m_name->setText(obj.name());
-	posy += 20 + spacing;
+	pos.y += 20 + spacing;
 
 	new UI::Textarea
 		(this,
-		 5, posy, 120, STATEBOX_HEIGHT,
+		 5, pos.y, 120, STATEBOX_HEIGHT,
 		 _("Visible at Begin: "), Align_CenterLeft);
-	m_visibleAtBegin =
-		new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
+	m_visibleAtBegin = new UI::Checkbox(this, pos);
 	m_visibleAtBegin->set_state(obj.get_is_visible());
-	posy += STATEBOX_HEIGHT + spacing;
+	pos.x  = 5;
+	pos.y += STATEBOX_HEIGHT + spacing;
 
 	new UI::Textarea
 		(this,
-		 5, posy, 120, STATEBOX_HEIGHT,
+		 pos.x, pos.y, 120, STATEBOX_HEIGHT,
 		 _("Objective text: "), Align_CenterLeft);
-	posy += 20 + spacing;
+	pos.y += 20 + spacing;
 
 	int32_t const editbox_height = 140;
 	m_descr = new UI::Multiline_Editbox
 		(this,
-		 5, posy, get_inner_w() - 2 * spacing, editbox_height,
+		 pos.x, pos.y, get_inner_w() - 2 * spacing, editbox_height,
 		 obj.descr().c_str());
-	posy += editbox_height + spacing + spacing;
+	pos.x  = get_inner_w() / 2 - 80 - spacing;
+	pos.y += editbox_height + spacing + spacing;
 
 	new UI::Button<Edit_Objective_Window>
 		(this,
-		 get_inner_w() / 2 - 80 - spacing, posy, 80, 20,
+		 pos.x, pos.y, 80, 20,
 		 1,
 		 &Edit_Objective_Window::clicked_ok, this,
 		 _("Ok"));
 
+	pos.x += 80 + 2 * spacing;
 	new UI::IDButton<Edit_Objective_Window, int32_t>
 		(this,
-		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 pos.x, pos.y, 80, 20,
 		 1,
 		 &Edit_Objective_Window::end_modal, this, 0,
 		 _("Back"));
 
-	posy += 20 + spacing;
-
-	set_inner_size(get_inner_w(), posy);
-
+	set_inner_size(get_inner_w(), pos.y + 20 + spacing);
 	center_to_parent();
 }
 

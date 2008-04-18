@@ -136,7 +136,7 @@ m_tool(tool)
 			//  Save this surface, so we can free it later on.
 			m_surfaces.push_back(surface);
 
-			UI::Checkbox & cb = *new UI::Checkbox(this, pos.x, pos.y, surface);
+			UI::Checkbox & cb = *new UI::Checkbox(this, pos, surface);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_id(i);
 			cb.set_state(m_tool.is_enabled(i));

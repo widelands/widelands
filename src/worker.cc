@@ -416,7 +416,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 
 		int32_t sel = g->logic_rand() % list.size();
 		state->objvar1 = list[sel].object;
-		molog("  %i found\n", list.size());
+		molog("  %lu found\n", static_cast<long unsigned int>(list.size()));
 	} else {
 		std::vector<Bob*> list;
 		log("BOB: searching bob with attribute (%i)\n", action->iparam2);
@@ -434,7 +434,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 		}
 		int32_t sel = g->logic_rand() % list.size();
 		state->objvar1 = list[sel];
-		molog("  %i found\n", list.size());
+		molog("  %lu found\n", static_cast<long unsigned int>(list.size()));
 	}
 
 	++state->ivar1;

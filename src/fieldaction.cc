@@ -605,7 +605,7 @@ uint32_t FieldActionWindow::add_tab
 {
 	return
 		m_tabpanel->add
-		(g_gr->get_picture(PicMod_Game, picname), panel, tooltip_text);
+			(g_gr->get_picture(PicMod_Game, picname), panel, tooltip_text);
 }
 
 

@@ -67,10 +67,8 @@ d(new Fullscreen_Menu_MapSelectImpl)
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	UI::Textarea* label = new UI::Textarea(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter);
-	d->load_map_as_scenario = new UI::Checkbox
-		(this,
-		 label->get_x() + label->get_w() + 10,
-		 170);
+	d->load_map_as_scenario =
+		new UI::Checkbox(this, Point(label->get_x() + label->get_w() + 10, 170));
 	d->load_map_as_scenario->set_state(false);
 
 	d->list = new UI::Listselect<MapData>(this, 15, 205, 455, 365);

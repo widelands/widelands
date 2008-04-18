@@ -44,10 +44,10 @@ void Event_Road::Read(Section & s, Editor_Game_Base & egbase) {
 			for (char const * p = steps; *p; ++p) {
 				if (*p < '1' or '6' < *p)
 					throw wexception
-						("step %u has direction '%c', must be one of {1 "
+						("step %li has direction '%c', must be one of {1 "
 						 "(northeast), 2 (east), 3 (southeast), 4 (southwest), 5 "
 						 "(west), 6 (northwest)}",
-						 p - steps, *p);
+						 static_cast<long int>(p - steps), *p);
 				m_path.append(map, *p - '0');
 				cstep.add_allowed_location(m_path.get_end());
 			}

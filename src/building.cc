@@ -877,7 +877,9 @@ void Building::log_general_info(Editor_Game_Base* egbase) {
 	molog("m_leave_time: %i\n", m_leave_time);
 	molog("m_stop: %i\n", m_stop);
 
-	molog("m_leave_queue.size(): %i\n", m_leave_queue.size());
+	molog
+		("m_leave_queue.size(): %lu\n",
+		 static_cast<long unsigned int>(m_leave_queue.size()));
 	molog("m_leave_allow.get(): %p\n", m_leave_allow.get(egbase));
 }
 
