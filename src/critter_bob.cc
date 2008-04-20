@@ -299,8 +299,7 @@ void Critter_Bob::program_update(Game* g, State* state)
 {
 	if (get_signal().size()) {
 		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	const Critter_BobAction* action;
@@ -342,36 +341,30 @@ Bob::Task Critter_Bob::taskRoam = {
 
 void Critter_Bob::roam_update(Game* g, State* state)
 {
-	if (get_signal().size()) {
-		pop_task(g);
-		return;
-	}
+	if (get_signal().size())
+		return pop_task(g);
 
 	// alternately move and idle
+	Time idle_time_min = 1000;
+	Time idle_time_rnd = CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
 	if (state->ivar1) {
+		idle_time_min =    1;
+		idle_time_rnd = 1000;
+		state->ivar1  =    0;
 		if
 			(start_task_movepath
 			 	(g,
 			 	 g->random_location(get_position(), 2), //  Pick a random target.
 			 	 3,
 			 	 descr().get_walk_anims()))
-		{
-			state->ivar1 = 0;
 			return;
-		}
-
-		//molog("        Failed\n");
-
-		start_task_idle(g, descr().get_animation("idle"), 1 + g->logic_rand()%1000);
 	}
-	else
-	{
-		state->ivar1 = 1;
-
-		//molog("[roam]: Idle\n");
-
-		start_task_idle(g, descr().get_animation("idle"), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
-	}
+	state->ivar1 = 1;
+	return
+		start_task_idle
+			(g,
+			 descr().get_animation("idle"),
+			 idle_time_min + g->logic_rand() % idle_time_rnd);
 }
 
 void Critter_Bob::init_auto_task(Game *g) {

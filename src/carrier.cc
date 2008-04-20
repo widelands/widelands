@@ -69,8 +69,7 @@ void Carrier::road_update(Game* g, State* state)
 	} else if (signal.size()) {
 		// Something else happened (probably a location signal)
 		molog("[road]: Terminated by signal '%s'\n", signal.c_str());
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	Road & road = dynamic_cast<Road &>(*get_location(g));
@@ -82,17 +81,15 @@ void Carrier::road_update(Game* g, State* state)
 	if (m_acked_ware >= 0) {
 		if (state->ivar1) {
 			state->ivar1 = 0;
-			start_task_transport(g, m_acked_ware);
+			return start_task_transport(g, m_acked_ware);
 		} else {
 			// Short delay before we move to pick up
 			molog("[road]: delay (acked for %i)\n", m_acked_ware);
 			state->ivar1 = 1;
 
 			set_animation(g, descr().get_animation("idle"));
-			schedule_act(g, 50);
+			return schedule_act(g, 50);
 		}
-
-		return;
 	}
 
 	// Move into idle position if necessary
@@ -148,8 +145,7 @@ void Carrier::transport_update(Game* g, State* state)
 		signal_handled();
 	} else if (signal.size()) {
 		molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	Road & road = dynamic_cast<Road &>(*get_location(g));
@@ -186,8 +182,6 @@ void Carrier::transport_update(Game* g, State* state)
 			// Drop the item, possible exchanging it with another one
 			drop_item(g, state);
 	}
-
-	return;
 }
 
 

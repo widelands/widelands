@@ -490,10 +490,8 @@ void Bob::start_task_idle(Game* g, uint32_t anim, int32_t timeout)
 
 void Bob::idle_update(Game* g, State* state)
 {
-	if (!state->ivar1 || get_signal().size()) {
-		pop_task(g);
-		return;
-	}
+	if (!state->ivar1 || get_signal().size())
+		return pop_task(g);
 
 	if (state->ivar1 > 0)
 		schedule_act(g, state->ivar1);
@@ -714,16 +712,12 @@ bool Bob::start_task_movepath
 		if (curidx < index) {
 			path.truncate(index);
 			path.starttrim(curidx);
-
-			start_task_movepath(g, path, anims, forceonlast, only_step);
 		} else {
 			path.truncate(curidx);
 			path.starttrim(index);
 			path.reverse();
-
-			start_task_movepath(g, path, anims, forceonlast, only_step);
 		}
-
+		start_task_movepath(g, path, anims, forceonlast, only_step);
 		return true;
 	}
 
@@ -735,20 +729,16 @@ void Bob::movepath_update(Game* g, State* state)
 {
 	if (get_signal().size()) {
 		molog("[movepath]: Interrupted by signal '%s'.\n", get_signal().c_str());
-
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	assert(state->ivar1 >= 0);
 	const Path * const path = state->path;
 
-	if (!path) {
+	if (!path)
 		// probably success; this can happen when loading a game
 		// that contains a zero-length path.
-		pop_task(g);
-		return;
-	}
+		return pop_task(g);
 
 	if
 		(static_cast<const Path::Step_Vector::size_type>(state->ivar1)
@@ -756,15 +746,12 @@ void Bob::movepath_update(Game* g, State* state)
 		 path->get_nsteps())
 	{
 		assert(m_position == path->get_end());
-		pop_task(g); // success
-		return;
-	} else if (state->ivar1==state->ivar3) {
+		return pop_task(g); // success
+	} else if (state->ivar1 == state->ivar3)
 		// We have stepped all steps that we were asked for.
 		// This is some kind of success, though we do not are were we wanted
 		// to go
-		pop_task(g);
-		return;
-	}
+		return pop_task(g);
 
 	const Direction dir = (*path)[state->ivar1];
 	bool forcemove = false;
@@ -780,7 +767,7 @@ void Bob::movepath_update(Game* g, State* state)
 	}
 
 	++state->ivar1;
-	start_task_move(g, dir, state->diranims, forcemove);
+	return start_task_move(g, dir, state->diranims, forcemove);
 	// Note: state pointer is invalid beyond this point
 }
 
@@ -815,34 +802,27 @@ void Bob::start_task_move(Game* g, const int32_t dir, const DirAnimations* anims
 void Bob::move_update(Game* g, State* state)
 {
 	if (state->diranims) {
-		int32_t tdelta = start_walk
-			(g,
-			 static_cast<WalkingDir>(state->ivar1),
-			 state->diranims->get_animation(state->ivar1),
-			 state->ivar2);
+		int32_t const tdelta =
+			start_walk
+				(g,
+				 static_cast<WalkingDir>(state->ivar1),
+				 state->diranims->get_animation(state->ivar1),
+				 state->ivar2);
 		state->diranims = 0;
 
-		if (tdelta == -2) {
-			send_signal(g, "blocked");
-			pop_task(g);
-			return;
-		} else if (tdelta < 0) {
-			send_signal(g, "fail");
-			pop_task(g);
-			return;
-		}
-
-		schedule_act(g, tdelta);
-	} else {
+		if (tdelta < 0) {
+			send_signal(g, tdelta == -2 ? "blocked" : "fail");
+			return pop_task(g);
+		} else
+			return schedule_act(g, tdelta);
+	} else
 		if (g->get_gametime() - m_walkend >= 0) {
 			end_walk();
-			pop_task(g);
-		} else {
+			return pop_task(g);
+		} else
 			// Only end the task once we've actually completed the step
 			// Ignore signals until then
-			schedule_act(g, m_walkend - g->get_gametime());
-		}
-	}
+			return schedule_act(g, m_walkend - g->get_gametime());
 }
 
 

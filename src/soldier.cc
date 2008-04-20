@@ -518,13 +518,11 @@ void Soldier::attack_update(Game* g, State* state)
 				state->objvar1 = 0;
 			} else {
 				molog("[attack] unexpected fail\n");
-				pop_task(g);
-				return;
+				return pop_task(g);
 			}
 		} else {
 			molog("[attack] cancelled by unexpected signal '%s'\n", signal.c_str());
-			pop_task(g);
-			return;
+			return pop_task(g);
 		}
 	}
 
@@ -535,39 +533,34 @@ void Soldier::attack_update(Game* g, State* state)
 	if (imm == location) {
 		if (!enemy) {
 			molog("[attack] returned home\n");
-			pop_task(g);
-			return;
+			return pop_task(g);
 		}
 
-		start_task_leavebuilding(g, false);
-		return;
+		return start_task_leavebuilding(g, false);
 	}
 
-	if (m_battle) {
-		startTaskBattle(g);
-		return;
-	}
+	if (m_battle)
+		return startTaskBattle(g);
 
-	if (signal == "blocked") {
+	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
-		start_task_idle(g, get_animation("idle"), 5000);
-		return;
-	}
+		return start_task_idle(g, get_animation("idle"), 5000);
 
 	if (!location) {
 		molog("[attack] our location disappeared during a battle\n");
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	if (!enemy) {
 		Flag* baseflag = location->get_base_flag();
-		if (imm == baseflag) {
-			start_task_move
-				(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
-			return;
-		}
+		if (imm == baseflag)
+			return
+				start_task_move
+					(g,
+					 WALK_NW,
+					 &descr().get_right_walk_anims(does_carry_ware()),
+					 true);
 
 		molog("[attack] return home\n");
 		start_task_movepath
@@ -585,8 +578,7 @@ void Soldier::attack_update(Game* g, State* state)
 		}
 
 		state->objvar1 = 0;
-		schedule_act(g, 10);
-		return;
+		return schedule_act(g, 10);
 	}
 
 	// At this point, we know that the enemy building still stands,
@@ -603,10 +595,8 @@ void Soldier::attack_update(Game* g, State* state)
 	assert(attackable);
 
 	molog("[attack] attacking target building\n");
-	if (attackable->attack(this))
-		schedule_act(g, 1000); // give the enemy soldier some time to act
-	else
-		schedule_act(g, 10);
+	//  give the enemy soldier some time to act
+	schedule_act(g, attackable->attack(this) ? 1000 : 10);
 }
 
 void Soldier::attack_pop(Game* g, State*)
@@ -656,20 +646,16 @@ void Soldier::defense_update(Game* g, State* state)
 	PlayerImmovable* location = get_location(g);
 	BaseImmovable* position = g->map()[get_position()].get_immovable();
 	if (m_battle) {
-		if (position == location) {
-			start_task_leavebuilding(g, false);
-			return;
-		}
+		if (position == location)
+			return start_task_leavebuilding(g, false);
 
 		state->ivar2 = 0;
-		startTaskBattle(g);
-		return;
+		return startTaskBattle(g);
 	}
 
 	if (!location) {
 		molog("[defense] location disappeared during battle\n");
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	if (signal == "blocked") {
@@ -681,20 +667,21 @@ void Soldier::defense_update(Game* g, State* state)
 
 	if (position == location) {
 		molog("[defense] returned home\n");
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	Flag* baseflag = location->get_base_flag();
 	if (position == baseflag) {
 		if (state->ivar1 && !state->ivar2) {
 			state->ivar2 = 1;
-			start_task_idle(g, get_animation("idle"), 250);
-			return;
+			return start_task_idle(g, get_animation("idle"), 250);
 		}
-		start_task_move
-			(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
-		return;
+		return
+			start_task_move
+				(g,
+				 WALK_NW,
+				 &descr().get_right_walk_anims(does_carry_ware()),
+				 true);
 	}
 
 	molog("[defense] return home\n");
