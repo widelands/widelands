@@ -32,10 +32,12 @@
 
 #include "ui_button.h"
 #include "ui_editbox.h"
-#include "ui_listselect.h"
 #include "ui_messagebox.h"
 #include "ui_textarea.h"
 
+Interactive_Player & Game_Main_Menu_Save_Game::iaplayer() {
+	return dynamic_cast<Interactive_Player &>(*get_parent());
+}
 
 /*
 ===============
@@ -46,23 +48,19 @@ Create all the buttons etc...
 */
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UI::UniqueWindow::Registry* registry)
 :
+#define spacing 5
 UI::UniqueWindow(parent, registry, 400, 270, _("Save Game")),
-m_parent(parent) //  FIXME redundant (base already stores parent pointer)
-
+m_ls
+	(this,
+	 spacing, 30,
+	 get_inner_w() / 2 - spacing, get_inner_h() - spacing - 90)
 {
-	int32_t const spacing =  5;
-	int32_t const offsx   = spacing;
 	int32_t const offsy   = 30;
-	int32_t       posx    = offsx;
+	int32_t       posx    =  5;
 	int32_t       posy    = offsy;
 
-	m_ls =
-		new UI::Listselect<char const *>
-		(this,
-		 posx, posy,
-		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
-	m_ls->selected.set(this, &Game_Main_Menu_Save_Game::selected);
-	m_ls->double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
+	m_ls.selected.set(this, &Game_Main_Menu_Save_Game::selected);
+	m_ls.double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
 	m_editbox =
 		new UI::EditBox
 		(this,
@@ -117,34 +115,24 @@ Unregister from the registry pointer
 */
 Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game() {}
 
-/*
-===========
-called when the ok button has been clicked
-===========
-*/
-void Game_Main_Menu_Save_Game::clicked_ok() {
-	std::string filename = m_editbox->text();
-
-	if (save_game(filename))
-		delete this;
-}
 
 /**
  * called when a item is selected
  */
 void Game_Main_Menu_Save_Game::selected(uint32_t) {
-	const char * const name = m_ls->get_selected();
+	std::string const & name = m_ls.get_selected();
 
 	std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-	Widelands::Game_Loader gl(*fs, m_parent->get_game());
+	Widelands::Game_Loader gl(*fs, iaplayer().get_game());
 	Widelands::Game_Preload_Data_Packet gpdp;
 	gl.preload_game(&gpdp); // This has worked before, no problem
 
 	{
-		char * const fname = strdup(FileSystem::FS_Filename(name));
-		FileSystem::FS_StripExtension(fname);
-		m_editbox->setText(fname);
-		free(fname);
+		char const * const fname = FileSystem::FS_Filename(name.c_str());
+		char fname_without_extension[strlen(fname) + 1];
+		strcpy(fname_without_extension, fname);
+		FileSystem::FS_StripExtension(fname_without_extension);
+		m_editbox->setText(fname_without_extension);
 	}
 	m_ok_btn->set_enabled(true);
 
@@ -186,16 +174,18 @@ void Game_Main_Menu_Save_Game::fill_list() {
 
 		try {
 			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-			Widelands::Game_Loader gl(*fs, m_parent->get_game());
+			Widelands::Game_Loader gl(*fs, iaplayer().get_game());
 			gl.preload_game(&gpdp);
-			char* fname = strdup(FileSystem::FS_Filename(name));
-			FileSystem::FS_StripExtension(fname);
-			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
-			free(fname);
+			char const * const fname = FileSystem::FS_Filename(name);
+			char fname_without_extension[strlen(fname) + 1];
+			strcpy(fname_without_extension, fname);
+			FileSystem::FS_StripExtension(fname_without_extension);
+			m_ls.add(fname_without_extension, name);
 		} catch (_wexception&) {} //  we simply skip illegal entries
 	}
 
-	if (m_ls->size()) m_ls->select(0);
+	if (m_ls.size())
+		m_ls.select(0);
 }
 
 /*
@@ -206,12 +196,13 @@ void Game_Main_Menu_Save_Game::edit_box_changed() {
 }
 
 
-static void dosave(Interactive_Player* parent, const std::string& complete_filename)
+static void dosave
+	(Interactive_Player & iaplayer, std::string const & complete_filename)
 {
-	SaveHandler * savehandler = parent->get_game()->get_save_handler();
+	Widelands::Game & game = iaplayer.game();
 
 	std::string error;
-	if (!savehandler->save_game(*parent->get_game(), complete_filename, &error))
+	if (!game.get_save_handler()->save_game(game, complete_filename, &error))
 	{
 		std::string s =
 			_
@@ -219,36 +210,37 @@ static void dosave(Interactive_Player* parent, const std::string& complete_filen
 			 "Reason given:\n");
 		s += error;
 		UI::MessageBox mbox
-			(parent, _("Save Game Error!!"), s, UI::MessageBox::OK);
+			(&iaplayer, _("Save Game Error!!"), s, UI::MessageBox::OK);
 		mbox.run();
 	}
 }
 
-class SaveWarnMessageBox : public UI::MessageBox {
-public:
-	SaveWarnMessageBox(Interactive_Player* parent, const std::string& filename)
+struct SaveWarnMessageBox : public UI::MessageBox {
+	SaveWarnMessageBox
+		(Game_Main_Menu_Save_Game & parent, std::string const & filename)
 		:
 		UI::MessageBox
-		(parent,
-		 _("Save Game Error!!"),
-		 std::string(_("A File with the name "))
-		 +
-		 FileSystem::FS_Filename(filename.c_str())
-		 +
-		 _(" already exists. Overwrite?"),
-		 YESNO)
-	{
-		m_parent = parent;
-		m_filename = filename;
+			(&parent,
+			 _("Save Game Error!!"),
+			 std::string(_("A File with the name "))
+			 +
+			 FileSystem::FS_Filename(filename.c_str())
+			 +
+			 _(" already exists. Overwrite?"),
+			 YESNO),
+		m_filename(filename)
+	{}
+
+	Game_Main_Menu_Save_Game & menu_save_game() {
+		return dynamic_cast<Game_Main_Menu_Save_Game &>(*get_parent());
 	}
 
 
 	void pressedYes()
 	{
 		g_fs->Unlink(m_filename);
-
-		die();
-		dosave(m_parent, m_filename);
+		dosave(menu_save_game().iaplayer(), m_filename);
+		menu_save_game().die();
 	}
 
 	void pressedNo()
@@ -257,28 +249,24 @@ public:
 	}
 
 private:
-	Interactive_Player* m_parent;
-	std::string m_filename;
+	std::string const m_filename;
 };
 
 /*
- * Save the game
- *
- * returns true if dialog should close, false if it
- * should stay open
- */
-bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
-	SaveHandler * savehandler = m_parent->get_game()->get_save_handler();
-	std::string complete_filename =
-		savehandler->create_file_name(m_curdir, filename);
+===========
+called when the ok button has been clicked
+===========
+*/
+void Game_Main_Menu_Save_Game::clicked_ok() {
+	std::string const complete_filename =
+		iaplayer().game().get_save_handler()->create_file_name
+			(m_curdir, m_editbox->text());
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->FileExists(complete_filename)) {
-		new SaveWarnMessageBox(m_parent, complete_filename);
+		new SaveWarnMessageBox(*this, complete_filename);
+	} else {
+		dosave(iaplayer(), complete_filename);
 		die();
-		return true;
 	}
-
-	dosave(m_parent, complete_filename);
-	return true;
 }

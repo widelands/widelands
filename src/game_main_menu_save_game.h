@@ -20,6 +20,7 @@
 #ifndef GAME_MAIN_MENU_SAVE_GAME_H
 #define GAME_MAIN_MENU_SAVE_GAME_H
 
+#include "ui_listselect.h"
 #include "ui_unique_window.h"
 
 struct Interactive_Player;
@@ -30,12 +31,15 @@ template <typename T> struct Listselect;
 struct Textarea;
 };
 
+struct SaveWarnMessageBox;
 struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
+	friend struct SaveWarnMessageBox;
 	Game_Main_Menu_Save_Game
 		(Interactive_Player * plr, UI::UniqueWindow::Registry * registry);
 	virtual ~Game_Main_Menu_Save_Game();
 
 private:
+	Interactive_Player & iaplayer();
 	void clicked_ok    ();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
@@ -44,14 +48,15 @@ private:
 	void fill_list();
 	bool save_game(std::string);
 
-	Interactive_Player * m_parent; //  FIXME redundant (base already stores parent pointer)
 	UI::EditBox * m_editbox;
 	UI::Textarea * m_name, * m_gametime;
-	UI::Listselect<const char *> * m_ls;
+	UI::Listselect<std::string> m_ls;
 
 	UI::Button<Game_Main_Menu_Save_Game> * m_ok_btn;
 	std::string m_curdir;
 	std::string m_parentdir;
+	std::string m_filename;
+	bool m_overwrite;
 };
 
 #endif

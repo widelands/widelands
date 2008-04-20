@@ -205,9 +205,8 @@ void Editor_Game_Base::conquer_area(Player_Area<Area<FCoords> > player_area) {
 	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
 	assert     (player_area.y < map().get_height());
-	const Field & first_field = map()[0];
-	assert(&first_field <= player_area.field);
-	assert                (player_area.field < &first_field + map().max_index());
+	assert(&map()[0] <= player_area.field);
+	assert             (player_area.field < &map()[map().max_index()]);
 	assert(0 < player_area.player_number);
 	assert    (player_area.player_number <= map().get_nrplayers());
 
