@@ -94,7 +94,7 @@ def parse_cli(env):
         if '-H' in sys.argv[1:]:
                 env.enable_configuration=False
 		return TARGET
-	
+
 	#This makes LIBPATH work correctly - I just don't know why :-(
 	#Obviously, env.LIBPATH must be forced to be a list instead of a string. Is this
 	#a scons problem? Or rather our problem???
@@ -408,29 +408,42 @@ def do_configure_debugtools(config_h_file, conf, env):
 def do_configure_compiler_warnings(config_h_file, conf, env):
 	conf.CheckCompilerFlag('-Wall', env)
 	conf.CheckCompilerFlag('-Wcast-align', env)
+	conf.CheckCompilerFlag('-Werror=cast-align', env)
 	conf.CheckCompilerFlag('-Wcast-qual', env)
-	conf.CheckCompilerFlag('-Wconversion', env)
+	conf.CheckCompilerFlag('-Werror=cast-qual', env)
+	#conf.CheckCompilerFlag('-Wconversion', env)
 	conf.CheckCompilerFlag('-Wdisabled-optimization', env)
 	conf.CheckCompilerFlag('-Wextra', env)
-	#conf.CheckCompilerFlag('-Wfloat-equal', env)
-	#conf.CheckCompilerFlag('-Wformat=2', env)
-	conf.CheckCompilerFlag('-Winline', env)
+	conf.CheckCompilerFlag('-Werror=extra', env)
+	conf.CheckCompilerFlag('-Wfloat-equal', env)
 	conf.CheckCompilerFlag('-Winvalid-pch', env)
+	conf.CheckCompilerFlag('-Werror=invalid-pch', env)
 	conf.CheckCompilerFlag('-Wmissing-format-attribute', env)
+	conf.CheckCompilerFlag('-Werror=missing-format-attribute', env)
 	conf.CheckCompilerFlag('-Wmissing-include-dirs', env)
+	conf.CheckCompilerFlag('-Werror=missing-include-dirs', env)
 	conf.CheckCompilerFlag('-Wmissing-noreturn', env)
-	conf.CheckCompilerFlag('-Wno-comment', env)
+	conf.CheckCompilerFlag('-Werror=missing-noreturn', env)
+	conf.CheckCompilerFlag('-Wcomment', env)
+	conf.CheckCompilerFlag('-Werror=comment', env)
 	conf.CheckCompilerFlag('-Wnormalized=nfc', env)
 	conf.CheckCompilerFlag('-Wold-style-cast', env)
 	#conf.CheckCompilerFlag('-Werror=old-style-cast', env) Some SDL macros still use old-style casts. Get them fixed!
-	#conf.CheckCompilerFlag('-Wpadded', env)
+	conf.CheckCompilerFlag('-Werror=parentheses', env)
 	conf.CheckCompilerFlag('-Wpointer-arith', env)
-	conf.CheckCompilerFlag('-Wunsafe-loop-optimizations', env)
+	conf.CheckCompilerFlag('-Werror=pointer-arith', env)
+	conf.CheckCompilerFlag('-Werror=sequence-point', env)
 	conf.CheckCompilerFlag('-Wshadow', env)
-	conf.CheckCompilerFlag('-Wstack-protector', env)
+	conf.CheckCompilerFlag('-Werror=shadow', env)
 	conf.CheckCompilerFlag('-Wstrict-aliasing=2', env)
-	#conf.CheckCompilerFlag('-Wunreachable-code', env)
+	conf.CheckCompilerFlag('-Werror=switch', env)
 	conf.CheckCompilerFlag('-Wwrite-strings', env)
+	conf.CheckCompilerFlag('-Werror=trigraphs', env)
+	conf.CheckCompilerFlag('-Wunsafe-loop-optimizations', env)
+	conf.CheckCompilerFlag('-Werror=unused-function', env)
+	conf.CheckCompilerFlag('-Werror=unused-label', env)
+	conf.CheckCompilerFlag('-Werror=unused-value', env)
+	conf.CheckCompilerFlag('-Werror=write-strings', env)
 
 	# Use this to temporarily disable some warnings
 	#TODO: make available via commandline parameters
@@ -453,6 +466,7 @@ def do_configure_compiler_features(config_h_file, conf, env):
 		conf.CheckCompilerFlag('-O3', env)
 	else:
 		conf.CheckCompilerFlag('-O0', env)
+		conf.CheckCompilerFlag('-funit-at-a-time', env)
 
 	if env.profile:
 		conf.CheckCompilerFlag('-pg', env)
