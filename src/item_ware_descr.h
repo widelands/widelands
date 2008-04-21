@@ -56,7 +56,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	virtual ~Item_Ware_Descr() {};
 
 	/// \return index to ware's icon inside picture stack
-	const uint32_t get_icon() const throw () {return m_icon;}
+	uint32_t get_icon() const throw () {return m_icon;}
 
 	/// \return ware's unique name
 	const std::string & name() const throw () {return m_name;}

@@ -603,10 +603,10 @@ local int32_t unzlocal_GetCurrentFileInfoInternal
 
 
 	//  we check the magic
-	if (err == UNZ_OK)
+	if (err == UNZ_OK) {
 		if (unzlocal_getLong(&s->z_filefunc, s->filestream, &uMagic) != UNZ_OK)
 			err = UNZ_ERRNO;
-	else if (uMagic!=0x02014b50)
+	} else if (uMagic!=0x02014b50)
 		err = UNZ_BADZIPFILE;
 
 	if
@@ -736,7 +736,7 @@ local int32_t unzlocal_GetCurrentFileInfoInternal
 			file_info.size_file_extra < extraFieldBufferSize ?
 			file_info.size_file_extra : extraFieldBufferSize;
 
-		if (lSeek)
+		if (lSeek) {
 			if
 				(ZSEEK(s->z_filefunc, s->filestream, lSeek, ZLIB_FILEFUNC_SEEK_CUR)
 				 ==
@@ -744,6 +744,7 @@ local int32_t unzlocal_GetCurrentFileInfoInternal
 				lSeek = 0;
 			else
 				err = UNZ_ERRNO;
+		}
 		if
 			(file_info.size_file_extra > 0 && extraFieldBufferSize > 0
 			 and
@@ -764,13 +765,13 @@ local int32_t unzlocal_GetCurrentFileInfoInternal
 		} else
 			uSizeRead = commentBufferSize;
 
-		if (lSeek != 0)
+		if (lSeek != 0) {
 			if
 				(ZSEEK(s->z_filefunc, s->filestream, lSeek, ZLIB_FILEFUNC_SEEK_CUR)
 				 ==
 				 0)
 				lSeek = 0;
-		else
+		} else
 			err = UNZ_ERRNO;
 		if (file_info.size_file_comment > 0 && commentBufferSize > 0)
 			if
@@ -1018,11 +1019,12 @@ local int32_t unzlocal_CheckCurrentFileCoherencyHeader
 		return UNZ_ERRNO;
 
 
-	if (err == UNZ_OK)
+	if (err == UNZ_OK) {
 		if (unzlocal_getLong(&s->z_filefunc, s->filestream, &uMagic) != UNZ_OK)
 			err = UNZ_ERRNO;
 		else if (uMagic != 0x04034b50)
 			err = UNZ_BADZIPFILE;
+	}
 
 	if (unzlocal_getShort(&s->z_filefunc, s->filestream, &uData) != UNZ_OK)
 		err = UNZ_ERRNO;
@@ -1901,11 +1903,11 @@ local uLong ziplocal_TmzDateToDosDate(const tm_zip* ptm, uLong) {
 		year -= 80;
 	return
 		static_cast<uLong>
-		((ptm->tm_mday + 32 * (ptm->tm_mon + 1) + 512 * year) << 16)
+			((ptm->tm_mday + 32 * (ptm->tm_mon + 1) + 512 * year) << 16)
 		|
-		ptm->tm_sec / 2 +
-		32 * ptm->tm_min +
-		2048 * static_cast<uLong>(ptm->tm_hour);
+		(ptm->tm_sec / 2 +
+		 32 * ptm->tm_min +
+		 2048 * static_cast<uLong>(ptm->tm_hour));
 }
 
 

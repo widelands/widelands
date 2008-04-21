@@ -146,15 +146,15 @@ struct InputCallback {
  */
 
 struct WLApplication {
-	static WLApplication * const get(const int argc=0, const char **argv=0);
+	static WLApplication * get(int const argc = 0, char const * * argv = 0);
 	~WLApplication();
 
 	void run();
 
 	/// \warning true if an external entity wants us to quit
-	const bool should_die() {return m_should_die;}
+	bool should_die() {return m_should_die;}
 
-	const int32_t get_time();
+	int32_t get_time();
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
@@ -213,12 +213,12 @@ struct WLApplication {
 protected:
 	WLApplication(const int argc, const char **argv);
 
-	const bool poll_event(SDL_Event *ev, const bool throttle);
+	bool poll_event(SDL_Event *ev, const bool throttle);
 
-	const bool init_settings();
+	bool init_settings();
 	void shutdown_settings();
 
-	const bool init_hardware();
+	bool init_hardware();
 	void shutdown_hardware();
 
 	void parse_commandline(const int argc, const char **argv);

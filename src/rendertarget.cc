@@ -558,27 +558,27 @@ void RenderTarget::rendermap
 							 and
 							 r_owner_number == f_owner_number
 							 and
-							 (tr_owner_number == f_owner_number
+							 ((tr_owner_number == f_owner_number)
 							  xor
-							  br_owner_number == f_owner_number))
+							  (br_owner_number == f_owner_number)))
 							drawanim(middle(f_pos, r_pos), anim, 0, &owner);
 						if
 							((f_vision | bl_vision)
 							 and
 							 bl_owner_number == f_owner_number
 							 and
-							 (l_owner_number == f_owner_number
+							 ((l_owner_number == f_owner_number)
 							  xor
-							  br_owner_number == f_owner_number))
+							  (br_owner_number == f_owner_number)))
 							drawanim(middle(f_pos, bl_pos), anim, 0, &owner);
 						if
 							((f_vision | br_vision)
 							 and
 							 br_owner_number == f_owner_number
 							 and
-							 (r_owner_number == f_owner_number
+							 ((r_owner_number == f_owner_number)
 							  xor
-							  bl_owner_number == f_owner_number))
+							  (bl_owner_number == f_owner_number)))
 							drawanim(middle(f_pos, br_pos), anim, 0, &owner);
 					}
 
@@ -943,23 +943,23 @@ void RenderTarget::rendermap
 						if
 							(r_owner_number == f_owner_number
 							 and
-							 (tr_owner_number == f_owner_number
+							 ((tr_owner_number == f_owner_number)
 							  xor
-							  br_owner_number == f_owner_number))
+							  (br_owner_number == f_owner_number)))
 							drawanim(middle(f_pos, r_pos), anim, 0, &owner);
 						if
 							(bl_owner_number == f_owner_number
 							 and
-							 (l_owner_number == f_owner_number
+							 ((l_owner_number == f_owner_number)
 							  xor
-							  br_owner_number == f_owner_number))
+							  (br_owner_number == f_owner_number)))
 							drawanim(middle(f_pos, bl_pos), anim, 0, &owner);
 						if
 							(br_owner_number == f_owner_number
 							 and
-							 (r_owner_number == f_owner_number
+							 ((r_owner_number == f_owner_number)
 							  xor
-							  bl_owner_number == f_owner_number))
+							  (bl_owner_number == f_owner_number)))
 							drawanim(middle(f_pos, br_pos), anim, 0, &owner);
 					}
 

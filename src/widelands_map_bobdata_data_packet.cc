@@ -271,13 +271,14 @@ void Map_Bobdata_Data_Packet::Read
 								trans : 0;
 
 							{
-								bool has_route = fr.Unsigned8();
-								if (i < old_stacksize && state.route)
+								bool const has_route = fr.Unsigned8();
+								if (i < old_stacksize && state.route) {
 									if (!has_route) {
 										delete state.route;
 										state.route = 0; // in case we get an exception further down
 									} else
 										state.route->clear();
+								}
 
 								if (has_route) {
 									Route * const route =

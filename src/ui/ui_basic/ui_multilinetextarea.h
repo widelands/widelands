@@ -74,7 +74,7 @@ struct Multiline_Textarea : public Panel {
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 
 	const char *  get_font_name() {return m_fontname.c_str();}
-	const int32_t get_font_size() {return m_fontsize;}
+	int32_t      get_font_size() {return m_fontsize;}
 	RGBColor &    get_font_clr () {return m_fcolor;}
 
 private:

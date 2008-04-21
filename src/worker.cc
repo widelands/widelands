@@ -508,11 +508,12 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 
 	FindNodeAnd functor;
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action->iparam2)));
-	if (action->sparam1.size())
+	if (action->sparam1.size()) {
 		if (action->iparam4)
 			functor.add(FindNodeResourceBreedable(w->get_resource(action->sparam1.c_str())));
 		else
 			functor.add(FindNodeResource(w->get_resource(action->sparam1.c_str())));
+	}
 
 	if (action->iparam3)
 		functor.add(FindNodeSpace(get_location(g)));
@@ -2300,13 +2301,13 @@ void Worker::geologist_update(Game* g, State* state)
 
 			// is center a mountain piece?
 			bool is_center_mountain =
-				world.terrain_descr(owner_area.field->terrain_d()).get_is()
-				&
-				TERRAIN_MOUNTAIN
+				(world.terrain_descr(owner_area.field->terrain_d()).get_is()
+				 &
+				 TERRAIN_MOUNTAIN)
 				|
-				world.terrain_descr(owner_area.field->terrain_r()).get_is()
-				&
-				TERRAIN_MOUNTAIN;
+				(world.terrain_descr(owner_area.field->terrain_r()).get_is()
+				 &
+				 TERRAIN_MOUNTAIN);
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2317,13 +2318,13 @@ void Worker::geologist_update(Game* g, State* state)
 				target =
 					map.get_fcoords(list[g->logic_rand() % list.size()]);
 				is_target_mountain =
-					world.terrain_descr(target.field->terrain_d()).get_is()
-					&
-					TERRAIN_MOUNTAIN
+					(world.terrain_descr(target.field->terrain_d()).get_is()
+					 &
+					 TERRAIN_MOUNTAIN)
 					|
-					world.terrain_descr(target.field->terrain_r()).get_is()
-					&
-					TERRAIN_MOUNTAIN;
+					(world.terrain_descr(target.field->terrain_r()).get_is()
+					 &
+					 TERRAIN_MOUNTAIN);
 				if (i==0) i=list.size();
 				--i;
 				--n;

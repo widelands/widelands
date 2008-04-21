@@ -38,7 +38,7 @@ template<uint8_t const Size> struct BitInBuffer {
 	size_t GetPos () const throw () {return fr.GetPos   ();}
 	uint8_t get() {
 		if (mask == 0x00) {buffer = fr.Unsigned8(); mask = 0xff;}
-		uint8_t const result = buffer >> 8 - Size;
+		uint8_t const result = buffer >> (8 - Size);
 		buffer <<= Size;
 		mask   <<= Size;
 		assert(result < (1 << Size));

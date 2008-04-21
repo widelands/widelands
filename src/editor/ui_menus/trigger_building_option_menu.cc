@@ -174,7 +174,7 @@ m_label_coords
 	 " ", Align_Left),
 m_decrease_y_100
 	(this,
-	 get_inner_w() - button_width >> 1,
+	 (get_inner_w() - button_width) >> 1,
 	 m_label_coords.get_y() + m_label_coords.get_h(),
 	 button_size,
 	 0,

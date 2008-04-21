@@ -450,5 +450,5 @@ void ZipFilesystem::m_OpenUnzip() {
 }
 
 void ZipFilesystem::Rename(std::string const &, std::string const &) {
-	assert (false and "rename inside zip FS is not implemented yet");
+	throw wexception("rename inside zip FS is not implemented yet");
 }

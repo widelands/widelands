@@ -262,7 +262,7 @@ TriggerXOR::TriggerXOR(TriggerConditional & l, TriggerConditional & r)
 	: TriggerConditional_Binary(l, r)
 {}
 bool TriggerXOR::do_eval(bool const t1, bool const t2) const {
-	return t1 && !t2 || !t1 && t2;
+	return (t1 && !t2) || (!t1 && t2);
 }
 
 TriggerNOT::TriggerNOT(TriggerConditional & cond)

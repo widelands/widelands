@@ -339,7 +339,13 @@ void TrainingSite::update_soldier_request() {
  * we only need to update the request structure.
  */
 void TrainingSite::request_soldier_callback
-	(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
+	(Game * g,
+#ifndef NDEBUG
+	 Request * rq,
+#else
+	 Request *,
+#endif
+	 Ware_Index, Worker * w, void * data)
 {
 	TrainingSite* const tsite = static_cast<TrainingSite *>(data);
 	Soldier* s = dynamic_cast<Soldier*>(w);

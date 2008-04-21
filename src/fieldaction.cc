@@ -726,7 +726,7 @@ void FieldActionWindow::act_ripflag()
 {
 	okdialog();
 	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
-	if (upcast(Widelands::Flag, flag, m_field.field->get_immovable()))
+	if (upcast(Widelands::Flag, flag, m_field.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				show_bulldoze_confirm(m_iabase, building, flag);
@@ -737,6 +737,7 @@ void FieldActionWindow::act_ripflag()
 				flag->remove(&egbase);
 			m_iabase->need_complete_redraw();
 		}
+	}
 }
 
 

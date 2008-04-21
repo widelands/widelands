@@ -344,9 +344,7 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
  * argument defines if this is a single player game (true)
  * or networked (false)
  */
-bool Game::run_load_game(const bool is_splayer, std::string filename) {
-	assert(is_splayer); // TODO: net game saving not supported
-
+bool Game::run_load_game(bool, std::string filename) {
 	if (filename.empty()) {
 		Fullscreen_Menu_LoadGame ssg(*this);
 		if (ssg.run() > 0)

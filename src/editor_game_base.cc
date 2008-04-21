@@ -309,6 +309,7 @@ void Editor_Game_Base::do_conquer_area
 					if
 						(const Military_Influence value =
 						 plr->military_influence(index))
+					{
 						if        (value >  highest_military_influence) {
 							highest_military_influence = value;
 							best_player = p;
@@ -317,6 +318,7 @@ void Editor_Game_Base::do_conquer_area
 							best_player = neutral_when_competing_influence ?
 								0 : player_area.player_number;
 						}
+					}
 				}
 			}
 			if (best_player != player_area.player_number) {
@@ -814,7 +816,7 @@ void Editor_Game_Base::set_road
 			Player::Field & player_field = (&first_player_field)[i];
 			if
 				(1 < player_field                      .vision
-				 |
+				 or
 				 1 < (&first_player_field)[neighbour_i].vision)
 			{
 				player_field.roads &= ~mask;

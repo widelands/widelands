@@ -265,11 +265,13 @@ template <typename Entry>
 	const Entry * operator[](const uint32_t i) const throw ()
 	{return static_cast<const Entry *>(Base::operator[](i));}
 
-	static const Entry * const get(const Entry_Record & er)
-	{return static_cast<const Entry *>(er.entry());}
+	static Entry const * get(const Entry_Record & er) {
+		return static_cast<Entry const *>(er.entry());
+	}
 
-	const Entry * const get_selected() const
-	{return static_cast<const Entry *>(Base::get_selected());}
+	Entry const * get_selected() const {
+		return static_cast<Entry const *>(Base::get_selected());
+	}
 };
 
 template <typename Entry> struct Table<Entry * const> : public Table<void *> {
@@ -289,11 +291,13 @@ template <typename Entry> struct Table<Entry * const> : public Table<void *> {
 	Entry * operator[](const uint32_t i) const throw ()
 	{return static_cast<Entry *>(Base::operator[](i));}
 
-	static Entry * const get(const Entry_Record & er)
-	{return static_cast<Entry *>(er.entry());}
+	static Entry * get(Entry_Record const & er) {
+		return static_cast<Entry *>(er.entry());
+	}
 
-	Entry * const get_selected() const
-	{return static_cast<Entry *>(Base::get_selected());}
+	Entry * get_selected() const {
+		return static_cast<Entry *>(Base::get_selected());
+	}
 };
 
 template <typename Entry> struct Table<const Entry &> : public Table<void *> {

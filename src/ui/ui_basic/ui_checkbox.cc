@@ -88,7 +88,7 @@ void Statebox::set_enabled(bool enabled)
  * Args: on  true if the checkbox should be checked
  */
 void Statebox::set_state(bool const on) {
-	if (on xor m_flags & Is_Checked) {
+	if (on xor (m_flags & Is_Checked)) {
 		set_flags(Is_Checked, on);
 		changed    .call        ();
 		changedto  .call      (on);

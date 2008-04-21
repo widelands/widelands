@@ -54,7 +54,7 @@ bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, 
 	assert(m_warelists.size());
 
 	Widelands::Ware_Index const index =
-		x < 0 | y < 0 ?
+		x < 0 or y < 0 ?
 		Widelands::Ware_Index::Null()
 		:
 		Widelands::Ware_Index

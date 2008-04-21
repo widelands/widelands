@@ -226,10 +226,10 @@ void ProductionProgram::parse
 			if (endp && *endp)
 				throw wexception("Bad area '%s'", cmd[2].c_str());
 			act.iparam2=strtol(cmd[3].c_str(), &endp, 0);
-			if (endp && *endp || act.iparam2 > 100)
+			if ((endp && *endp) || act.iparam2 > 100)
 				throw wexception("Bad maximum amount: '%s'", cmd[3].c_str());
 			act.iparam3=strtol(cmd[4].c_str(), &endp, 0);
-			if (endp && *endp || act.iparam3 > 100)
+			if ((endp && *endp) || act.iparam3 > 100)
 				throw wexception
 					("Bad chance after maximum amount is empty: '%s'",
 					 cmd[4].c_str());

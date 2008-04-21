@@ -751,9 +751,9 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 		if
 			(dynamic_cast<Flag const *>(imm)
 			 or
-			 dynamic_cast<Road const *>(imm)
-			 &&
-			 fse.field->get_caps() & BUILDCAPS_FLAG)
+			 (dynamic_cast<Road const *>(imm)
+			  &&
+			  fse.field->get_caps() & BUILDCAPS_FLAG))
 		field->preferred=true;
 
 	for (uint32_t i = 0;i < immovables.size(); ++i) {
@@ -835,9 +835,9 @@ void Computer_Player::update_mineable_field (MineableField* field)
 		if
 			(dynamic_cast<Flag const *>(imm)
 			 or
-			 dynamic_cast<Road const *>(imm)
-			 &&
-			 fse.field->get_caps() & BUILDCAPS_FLAG)
+			 (dynamic_cast<Road const *>(imm)
+			  &&
+			  fse.field->get_caps() & BUILDCAPS_FLAG))
 		field->preferred=true;
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {

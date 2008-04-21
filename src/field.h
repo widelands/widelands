@@ -225,7 +225,7 @@ public:
 
 	void set_border(const bool b) throw () {
 		owner_info_and_selections =
-			owner_info_and_selections & ~Border_Bitmask | b << Border_Bit;
+			(owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
 	}
 
 	uint8_t get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}

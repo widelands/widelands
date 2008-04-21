@@ -91,7 +91,7 @@ protected:
 	 * Returns the position in the playback file
 	 * \return byte offset into the playback file, used with file reading
 	 */
-	const int32_t get_playback_offset() {return m_playbackstream.tellg();}
+	int32_t get_playback_offset() {return m_playbackstream.tellg();}
 
 	void write(int8_t   v);
 	void write(uint8_t  v);

@@ -204,8 +204,7 @@ WLApplication *WLApplication::the_singleton=0;
  *
  * \todo Return a reference - the return value is always valid anyway
  */
-WLApplication * const WLApplication::get(const int argc, const char **argv)
-{
+WLApplication * WLApplication::get(int const argc, char const * * argv) {
 	if (the_singleton==0) {
 		the_singleton=new WLApplication(argc, argv);
 	}
@@ -333,8 +332,7 @@ void WLApplication::run()
  *
  * \todo Catch Journalfile_error
  */
-const bool WLApplication::poll_event(SDL_Event *ev, const bool throttle)
-{
+bool WLApplication::poll_event(SDL_Event *ev, const bool throttle) {
 	bool haveevent=false;
 
 restart:
@@ -560,8 +558,7 @@ void WLApplication::handle_input(const InputCallback *cb)
  * Return the current time, in milliseconds
  * \todo Use our internally defined time type
  */
-const int32_t WLApplication::get_time()
-{
+int32_t WLApplication::get_time() {
 	Uint32 time;
 
 	time=SDL_GetTicks();
@@ -653,8 +650,7 @@ void WLApplication::init_graphics
  * Read the config file, parse the commandline and give all other internal
  * parameters sensible default values
  */
-const bool WLApplication::init_settings()
-{
+bool WLApplication::init_settings() {
 	Section *s=0;
 
 	//create a journal so that handle_commandline_parameters can open the journal files
@@ -717,8 +713,7 @@ void WLApplication::shutdown_settings()
  *
  * \return true if there were no fatal errors that prevent the game from running
  */
-const bool WLApplication::init_hardware()
-{
+bool WLApplication::init_hardware() {
 	Uint32 sdl_flags=0;
 	Section *s = g_options.pull_section("global");
 

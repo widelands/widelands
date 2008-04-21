@@ -184,12 +184,13 @@ void Player::build_flag(Coords const c) {
 Flag & Player::force_flag(FCoords const c) {
 	log("Forcing flag at (%i, %i)\n", c.x, c.y);
 	Map const & map = egbase().map();
-	if (BaseImmovable * const immovable = c.field->get_immovable())
+	if (BaseImmovable * const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
 			if (&existing_flag->owner() == this)
 				return *existing_flag;
 		} else if (not dynamic_cast<Road const *>(immovable)) //  A road is OK.
 			immovable->remove(&egbase()); //  Make room for the flag.
+	}
 	MapRegion<Area<FCoords> > mr(map, Area<FCoords>(c, 1));
 	do if (upcast(Flag, flag, mr.location().field->get_immovable()))
 		flag->remove(&egbase()); //  Remove all flags that are too close.

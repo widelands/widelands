@@ -553,7 +553,7 @@ bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int3
 					new_left -= VT_B_PIXMAP_THICKNESS;
 					_drag_start_win_x -= VT_B_PIXMAP_THICKNESS; //  avoid jumping
 				}
-				if (not _is_minimal) //  Minimal windows can not be bottom-docked.
+				if (not _is_minimal) { //  minimal windows can not be bottom-docked
 					if (new_top == max_y_minus_h) {
 						if (not _docked_bottom) {
 							dock_bottom();
@@ -567,6 +567,7 @@ bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int3
 						new_top -= BT_B_PIXMAP_THICKNESS;
 						_drag_start_win_y -= BT_B_PIXMAP_THICKNESS; //  avoid jumping
 					}
+				}
 			}
 		}
 		set_pos(Point(new_left, new_top));

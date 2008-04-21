@@ -203,7 +203,9 @@ struct Bob : public Map_Object {
 
 		const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
 
-		const Tribe_Descr * const get_owner_tribe() const throw () {return m_owner_tribe;}
+		Tribe_Descr const * get_owner_tribe() const throw () {
+			return m_owner_tribe;
+		}
 
 		static Descr *create_from_dir
 				(const char *name,

@@ -110,7 +110,7 @@ template<typename Base> struct basic_FileRead : public Base {
 		Pos i = pos.isNull() ? filepos : pos;
 		if (i >= length) throw File_Boundary_Exceeded();
 		char * const result = data + i;
-		for (char * p = result; *p; ++p, ++i);
+		for (char * p = result; *p; ++p, ++i) {}
 		++i; //  beyond the null
 		if (i > length) throw File_Boundary_Exceeded();
 		if (pos.isNull()) filepos = i;
