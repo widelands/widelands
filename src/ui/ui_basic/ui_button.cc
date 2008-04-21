@@ -241,15 +241,17 @@ bool Basic_Button::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_pressed) {
+		m_pressed = false;
 		grab_mouse(false);
+		update(0, 0, get_w(), get_h());
 		if (m_highlighted && m_enabled) {
 			play_click();
 			send_signal_clicked();
+			//  The button may not exist at this point (for example if the button
+			//  closed the dialog that it is part of). So member variables may no
+			//  longer be accessed.
 		}
-		m_pressed = false;
 	}
-	update(0, 0, get_w(), get_h());
-
 	return true;
 }
 };

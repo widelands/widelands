@@ -348,9 +348,7 @@ void Critter_Bob::roam_update(Game* g, State* state)
 	Time idle_time_min = 1000;
 	Time idle_time_rnd = CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
 	if (state->ivar1) {
-		idle_time_min =    1;
-		idle_time_rnd = 1000;
-		state->ivar1  =    0;
+		state->ivar1 = 0;
 		if
 			(start_task_movepath
 			 	(g,
@@ -358,6 +356,7 @@ void Critter_Bob::roam_update(Game* g, State* state)
 			 	 3,
 			 	 descr().get_walk_anims()))
 			return;
+		idle_time_min = 1, idle_time_rnd = 1000;
 	}
 	state->ivar1 = 1;
 	return

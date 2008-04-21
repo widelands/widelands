@@ -28,6 +28,7 @@
 #include <cstring>
 #include <cstdlib>
 
+#include <errno.h>
 
 /**
  * Initialize the real file-system
@@ -267,23 +268,30 @@ void ZipFilesystem::MakeDirectory(std::string const & dirname) {
 	if (complete_file[complete_file.size() - 1] != '/')
 		complete_file += '/';
 
-#ifndef NDEBUG
-	int32_t err =
-#endif
-		zipOpenNewFileInZip3
-		(m_zipfile,
-		 complete_file.c_str(),
-		 &zi,
-		 NULL, 0, NULL, 0, NULL /* comment*/,
-		 Z_DEFLATED,
-		 Z_BEST_COMPRESSION,
-		 0,
-		 -MAX_WBITS,
-		 DEF_MEM_LEVEL,
-		 Z_DEFAULT_STRATEGY,
-		 0,
-		 0);
-	assert(err == ZIP_OK);
+	switch
+		(zipOpenNewFileInZip3
+		 	(m_zipfile,
+		 	 complete_file.c_str(),
+		 	 &zi,
+		 	 NULL, 0, NULL, 0, NULL /* comment*/,
+		 	 Z_DEFLATED,
+		 	 Z_BEST_COMPRESSION,
+		 	 0,
+		 	 -MAX_WBITS,
+		 	 DEF_MEM_LEVEL,
+		 	 Z_DEFAULT_STRATEGY,
+		 	 0,
+		 	 0))
+	{
+	case ZIP_OK:
+		break;
+	case ZIP_ERRNO:
+		throw File_error
+			("ZipFilesystem::MakeDirectory", complete_file, strerror(errno));
+	default:
+		throw File_error
+			("ZipFilesystem::MakeDirectory", complete_file);
+	}
 
 	zipCloseFileInZip(m_zipfile);
 }
@@ -350,18 +358,32 @@ void ZipFilesystem::Write
 
 	//  create file
 	std::string const complete_file = m_basename + '/' + fname;
-	int32_t err =
-		zipOpenNewFileInZip3
-		(m_zipfile, complete_file.c_str(), &zi,
-		 NULL, 0, NULL, 0, NULL /* comment*/,
-		 Z_DEFLATED,
-		 Z_BEST_COMPRESSION, 0,
-		 -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
-		 0, 0);
-	assert(err == ZIP_OK);
+	switch
+		(zipOpenNewFileInZip3
+		 	(m_zipfile, complete_file.c_str(), &zi,
+		 	 NULL, 0, NULL, 0, NULL /* comment*/,
+		 	 Z_DEFLATED,
+		 	 Z_BEST_COMPRESSION, 0,
+		 	 -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
+		 	 0, 0))
+	{
+	case ZIP_OK:
+		break;
+	default:
+		throw ZipOperation_error
+			("ZipFilesystem::Write", complete_file, m_zipfilename);
+	}
 
-	err = zipWriteInFileInZip (m_zipfile, data, length);
-	assert(err == ZIP_OK);
+	switch (zipWriteInFileInZip (m_zipfile, data, length)) {
+	case ZIP_OK:
+		break;
+	case ZIP_ERRNO:
+		throw File_error
+			("ZipFilesystem::Write", complete_file, strerror(errno));
+	default:
+		throw File_error
+			("ZipFilesystem::Write", complete_file);
+	}
 
 	zipCloseFileInZip(m_zipfile);
 }

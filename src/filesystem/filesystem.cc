@@ -376,12 +376,9 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
  * Returns the filename of this path, everything after the last
  * / or \  (or the whole string)
  */
-const char *FileSystem::FS_Filename(const char* buf) {
-	int32_t i=strlen(buf)-1;
-	while (i>=0) {
+char const * FileSystem::FS_Filename(char const * buf) {
+	for (size_t i = strlen(buf); i; --i)
 		if (buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
-		--i;
-	}
 	return buf;
 }
 

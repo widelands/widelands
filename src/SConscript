@@ -32,7 +32,6 @@ libs+=SConscript('events/SConscript')
 libs.reverse()
 
 srcenv.Append(INDENTLIST=[
-	'geometry.h',
 	'helper.h',
 	'helper.cc',
 	'journal.h',

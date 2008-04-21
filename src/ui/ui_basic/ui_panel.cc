@@ -759,24 +759,24 @@ bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	y -= _tborder;
 	if (_flags & pf_top_on_click) move_to_top();
 	if (_g_mousegrab != this)
-		if (Panel * child = _fchild) for (;; child = child->_next) {
-			child = child_at_mouse_cursor(x, y, child);
-			if (not child) break;
+		for
+			(Panel * child = _fchild;
+			 (child = child_at_mouse_cursor(x, y, child));
+			 child = child->_next)
 			if (child->do_mousepress(btn, x - child->_x, y - child->_y))
 				return true;
-		}
 	return handle_mousepress(btn, x, y);
 }
 bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
-		if (Panel * child = _fchild) for (;; child = child->_next) {
-			child = child_at_mouse_cursor(x, y, child);
-			if (not child) break;
+		for
+			(Panel * child = _fchild;
+			 (child = child_at_mouse_cursor(x, y, child));
+			 child = child->_next)
 			if (child->do_mouserelease(btn, x - child->_x, y - child->_y))
 				return true;
-		}
 	return handle_mouserelease(btn, x, y);
 }
 bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
@@ -784,14 +784,14 @@ bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
-		if (Panel * child = _fchild) for (;; child = child->_next) {
-			child = child_at_mouse_cursor(x, y, child);
-			if (not child) break;
+		for
+			(Panel * child = _fchild;
+			 (child = child_at_mouse_cursor(x, y, child));
+			 child = child->_next)
 			if
 				(child->do_mousemove
 				 	(state, x - child->_x, y - child->_y, xdiff, ydiff))
 				return true;
-		}
 	return handle_mousemove(state, x, y, xdiff, ydiff);
 }
 

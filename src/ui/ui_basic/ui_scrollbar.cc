@@ -183,21 +183,12 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 /**
  * Return the center of the knob, in pixels, depending on the current position.
 */
-int32_t Scrollbar::get_knob_pos()
-{
-	int32_t extent;
-	uint32_t knobsize = get_knob_size();
-
-	if (m_horizontal)
-		extent = get_w();
-	else
-		extent = get_h();
-
-	extent -= 2 * Size + knobsize; // plus button, minus button, knob size
-
-	if (m_steps == 1)
-		return Size + knobsize/2;
-	return (Size + knobsize/2) + (m_pos * extent) / (m_steps-1);
+uint32_t Scrollbar::get_knob_pos() {
+	assert(0 != m_steps);
+	uint32_t result = Size + get_knob_size() / 2;
+	if (uint32_t const d = m_steps - 1)
+		result += m_pos * ((m_horizontal ? get_w() : get_h()) - 2 * result) / d;
+	return result;
 }
 
 

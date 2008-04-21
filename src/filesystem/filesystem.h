@@ -111,7 +111,7 @@ struct FileSystem {
 	bool pathIsAbsolute(std::string const & path) const;
 	std::string              AbsolutePath(std::string const & path) const;
 	std::vector<std::string> FS_Tokenize (std::string const & path) const;
-	static const char *FS_Filename(const char* buf);
+	static char const * FS_Filename(char const *);
 	static std::string GetHomedir();
 
 protected:

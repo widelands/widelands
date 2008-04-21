@@ -384,16 +384,14 @@ void RealFSImpl::Write
 	(std::string const & fname, void const * const data, int32_t const length)
 {
 	std::string fullname;
-	FILE *f;
-	int32_t c;
 
 	fullname=FS_CanonicalizeName(fname);
 
-	f = fopen(fullname.c_str(), "wb");
+	FILE * const f = fopen(fullname.c_str(), "wb");
 	if (!f)
 		throw wexception("Couldn't open %s (%s) for writing", fname.c_str(), fullname.c_str());
 
-	c = fwrite(data, length, 1, f);
+	size_t const c = fwrite(data, length, 1, f);
 	fclose(f);
 
 	if (c != 1)

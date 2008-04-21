@@ -210,50 +210,57 @@ void Graphic::refresh(bool force)
  * \note flush(0) does nothing
 */
 void Graphic::flush(uint8_t const module) {
-	assert(not (module & (PicMod_Font | PicSurface)));
+	assert(not (module & ~(PicMod_UI | PicMod_Menu | PicMod_Game)));
 	// Flush pictures
 
-	for (uint32_t i = 0; i < m_pictures.size(); ++i) {
-		Picture & pic = m_pictures[i];
-
-		//      NoLog("Flushing picture: %i while flushing all!\n", i);
-
-		if (!pic.module)
-			continue;
-
-
-		if (pic.module == PicSurface) {
-			if (!module)
-				log("LEAK: SW16: flush(0): non-picture %i left.\n", i+1);
-
-			continue;
-		}
-
-		pic.module &= ~module; // unmask the modules that should be flushed
-
-		// Once the picture is no longer in any mods, free it
-
-		if (!pic.module) {
-
-			if (pic.u.fname) {
-				m_picturemap.erase(pic.u.fname);
-				free(pic.u.fname);
-				pic.u.fname = 0;
+	{
+		std::vector<Picture>::const_iterator const pictures_end =
+			m_pictures.end();
+		for
+			(std::vector<Picture>::iterator picture = m_pictures.begin();
+			 picture != pictures_end;
+			 ++picture)
+		{
+			if (!picture->module) {
+				assert(0 == picture->surface);
+				assert(0 == picture->u.fname);
+				continue;
 			}
 
-			delete pic.surface;
-			pic.surface = 0;
+			// unmask the modules that should be flushed
+			if (! (picture->module &= ~module)) {
+			// Once the picture is no longer in any mods, free it.
+				delete picture->surface; picture->surface = 0;
+				if (picture->u.fname) {
+					m_picturemap.erase(picture->u.fname);
+					free(picture->u.fname); picture->u.fname = 0;
+				}
+			}
 		}
 	}
 
 	// Flush game items
 	if (!module || module & PicMod_Game) {
-		for (uint32_t i = 0; i < m_maptextures.size(); ++i)
-			delete m_maptextures[i];
+		{
+			std::vector<Texture *>::const_iterator const maptextures_end =
+				m_maptextures.end();
+			for
+				(std::vector<Texture *>::iterator it = m_maptextures.begin();
+				 it != maptextures_end;
+				 ++it)
+			delete *it;
+		}
 		m_maptextures.clear();
 
-		for (uint32_t i = 0; i < m_animations.size(); ++i)
-			delete m_animations[i];
+		{
+			std::vector<AnimationGfx *>::const_iterator const animations_end =
+				m_animations.end();
+			for
+				(std::vector<AnimationGfx *>::iterator it = m_animations.begin();
+				 it != animations_end;
+				 ++it)
+			delete *it;
+		}
 		m_animations.clear();
 
 		delete m_roadtextures;
@@ -446,7 +453,7 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 	// Save a png
 	png_structp png_ptr =
 		png_create_write_struct
-		(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(0), 0, 0);
+			(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(0), 0, 0);
 
 	if (!png_ptr)
 		throw wexception("Graphic::save_png: Couldn't create png struct!");
