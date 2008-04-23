@@ -30,11 +30,6 @@
 #include "layered_filesystem.h"
 #include "profile.h"
 
-#include "ui_button.h"
-#include "ui_editbox.h"
-#include "ui_messagebox.h"
-#include "ui_textarea.h"
-
 Interactive_Player & Game_Main_Menu_Save_Game::iaplayer() {
 	return dynamic_cast<Interactive_Player &>(*get_parent());
 }
@@ -48,59 +43,52 @@ Create all the buttons etc...
 */
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UI::UniqueWindow::Registry* registry)
 :
-#define spacing 5
-UI::UniqueWindow(parent, registry, 400, 270, _("Save Game")),
-m_ls
+#define WINDOW_WIDTH                                                        440
+#define WINDOW_HEIGHT                                                       440
+#define VMARGIN                                                               5
+#define HMARGIN                                                               5
+#define VSPACING                                                              5
+#define HSPACING                                                              5
+#define EDITBOX_HEIGHT                                                       20
+#define BUTTON_HEIGHT                                                        20
+#define LIST_WIDTH                                                          280
+#define LIST_HEIGHT   (WINDOW_HEIGHT - 2 * VMARGIN - VSPACING - EDITBOX_HEIGHT)
+#define EDITBOX_Y                    (WINDOW_HEIGHT - EDITBOX_HEIGHT - VMARGIN)
+#define DESCRIPTION_X                         (VMARGIN + LIST_WIDTH + VSPACING)
+#define DESCRIPTION_WIDTH              (WINDOW_WIDTH - DESCRIPTION_X - VMARGIN)
+#define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
+#define OK_Y                              (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
+UI::UniqueWindow
+	(parent, registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
+m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
+m_editbox(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT, 1, 0),
+m_name_label
+	(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  Align_CenterLeft),
+m_name
+	(this, DESCRIPTION_X, 20, 0, 20, " ",              Align_CenterLeft),
+m_gametime_label
+	(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), Align_CenterLeft),
+m_gametime
+	(this, DESCRIPTION_X, 60, 0, 20, " ",              Align_CenterLeft),
+m_button_ok
 	(this,
-	 spacing, 30,
-	 get_inner_w() / 2 - spacing, get_inner_h() - spacing - 90)
+	 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+	 4,
+	 &Game_Main_Menu_Save_Game::clicked_ok, this,
+	 _("OK"),
+	 std::string(),
+	 false),
+m_button_cancel
+	(this,
+	 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+	 4,
+	 &Game_Main_Menu_Save_Game::die, this,
+	 _("Cancel")),
+m_curdir(SaveHandler::get_base_dir())
 {
-	int32_t const offsy   = 30;
-	int32_t       posx    =  5;
-	int32_t       posy    = offsy;
-
 	m_ls.selected.set(this, &Game_Main_Menu_Save_Game::selected);
 	m_ls.double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
-	m_editbox =
-		new UI::EditBox
-		(this,
-		 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
-		 get_inner_w() / 2 - spacing, 20,
-		 1, 0);
-	m_editbox->changed.set(this, &Game_Main_Menu_Save_Game::edit_box_changed);
-
-	posx = get_inner_w() / 2 + spacing;
-	posy += 20;
-	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Map Name: "), Align_CenterLeft);
-	m_name =
-		new UI::Textarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
-	posy += 20 + spacing;
-
-	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Game Time: "), Align_CenterLeft);
-	m_gametime =
-		new UI::Textarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
-	posy += 20 + spacing;
-
-	posx = 5;
-	posy = get_inner_h() - 30;
-	m_ok_btn = new UI::Button<Game_Main_Menu_Save_Game>
-		(this,
-		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 4,
-		 &Game_Main_Menu_Save_Game::clicked_ok, this,
-		 _("OK"),
-		 std::string(),
-		 false);
-	new UI::Button<Game_Main_Menu_Save_Game>
-		(this,
-		 get_inner_w() / 2 + spacing, posy, 80, 20,
-		 4,
-		 &Game_Main_Menu_Save_Game::die, this,
-		 _("Cancel"));
-
-	m_curdir = SaveHandler::get_base_dir();
+	m_editbox.changed.set(this, &Game_Main_Menu_Save_Game::edit_box_changed);
 
 	fill_list();
 
@@ -132,21 +120,23 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		char fname_without_extension[strlen(fname) + 1];
 		strcpy(fname_without_extension, fname);
 		FileSystem::FS_StripExtension(fname_without_extension);
-		m_editbox->setText(fname_without_extension);
+		m_editbox.setText(fname_without_extension);
 	}
-	m_ok_btn->set_enabled(true);
+	m_button_ok.set_enabled(true);
 
-	m_name->set_text(gpdp.get_mapname());
-
+	m_name.set_text(gpdp.get_mapname());
 	char buf[200];
 	uint32_t gametime = gpdp.get_gametime();
-
-	int32_t hours = gametime / 3600000;
-	gametime -= hours * 3600000;
-	int32_t minutes = gametime / 60000;
-
-	sprintf(buf, "%02i:%02i", hours, minutes);
-	m_gametime->set_text(buf);
+#define SPLIT_GAMETIME(unit, factor) \
+	uint32_t const unit = gametime / factor; gametime %= factor;
+	SPLIT_GAMETIME(days, 86400000);
+	SPLIT_GAMETIME(hours, 3600000);
+	SPLIT_GAMETIME(minutes, 60000);
+	SPLIT_GAMETIME(seconds,  1000);
+	sprintf
+		(buf,
+		 _("%02ud%02uh%02u'%u\"%03u"), days, hours, minutes, seconds, gametime);
+	m_gametime.set_text(buf);
 }
 
 /**
@@ -192,7 +182,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
  * The editbox was changed. Enable ok button
  */
 void Game_Main_Menu_Save_Game::edit_box_changed() {
-	m_ok_btn->set_enabled(true);
+	m_button_ok.set_enabled(m_editbox.text().size());
 }
 
 
@@ -202,8 +192,7 @@ static void dosave
 	Widelands::Game & game = iaplayer.game();
 
 	std::string error;
-	if (!game.get_save_handler()->save_game(game, complete_filename, &error))
-	{
+	if (!game.get_save_handler()->save_game(game, complete_filename, &error)) {
 		std::string s =
 			_
 			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
@@ -260,7 +249,7 @@ called when the ok button has been clicked
 void Game_Main_Menu_Save_Game::clicked_ok() {
 	std::string const complete_filename =
 		iaplayer().game().get_save_handler()->create_file_name
-			(m_curdir, m_editbox->text());
+			(m_curdir, m_editbox.text());
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->FileExists(complete_filename)) {

@@ -20,16 +20,14 @@
 #ifndef GAME_MAIN_MENU_SAVE_GAME_H
 #define GAME_MAIN_MENU_SAVE_GAME_H
 
+#include "ui_button.h"
+#include "ui_editbox.h"
 #include "ui_listselect.h"
+#include "ui_messagebox.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 struct Interactive_Player;
-namespace UI {
-template <typename T> struct Button;
-struct EditBox;
-template <typename T> struct Listselect;
-struct Textarea;
-};
 
 struct SaveWarnMessageBox;
 struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
@@ -48,11 +46,10 @@ private:
 	void fill_list();
 	bool save_game(std::string);
 
-	UI::EditBox * m_editbox;
-	UI::Textarea * m_name, * m_gametime;
 	UI::Listselect<std::string> m_ls;
-
-	UI::Button<Game_Main_Menu_Save_Game> * m_ok_btn;
+	UI::EditBox m_editbox;
+	UI::Textarea m_name_label, m_name, m_gametime_label, m_gametime;
+	UI::Button<Game_Main_Menu_Save_Game> m_button_ok, m_button_cancel;
 	std::string m_curdir;
 	std::string m_parentdir;
 	std::string m_filename;
