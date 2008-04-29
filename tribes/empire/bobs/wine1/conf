@@ -4,7 +4,12 @@ stock=1
 
 size=normal
 attrib=grown_wine
+program=program
 program=harvestwine
+
+[program]
+0=animation idle 500000
+1=remove
 
 [harvestwine]
 0=remove

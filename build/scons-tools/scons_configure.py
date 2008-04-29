@@ -419,7 +419,7 @@ def do_configure_compiler_warnings(config_h_file, conf, env):
 	conf.CheckCompilerFlag('-Winvalid-pch', env)
 	conf.CheckCompilerFlag('-Werror=invalid-pch', env)
 	conf.CheckCompilerFlag('-Wmissing-format-attribute', env)
-	conf.CheckCompilerFlag('-Werror=missing-format-attribute', env)
+	#conf.CheckCompilerFlag('-Werror=missing-format-attribute', env) the C++ library on amd64 has this error
 	conf.CheckCompilerFlag('-Wmissing-include-dirs', env)
 	conf.CheckCompilerFlag('-Werror=missing-include-dirs', env)
 	conf.CheckCompilerFlag('-Wmissing-noreturn', env)
