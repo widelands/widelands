@@ -125,7 +125,7 @@ void Computer_Player::late_initialization ()
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
 
-		buildings.push_back (BuildingObserver());
+		buildings.resize (buildings.size() + 1);
 
 		BuildingObserver& bo      = buildings.back();
 		bo.name                   = building_name.c_str();
@@ -139,12 +139,9 @@ void Computer_Player::late_initialization ()
 
 		bo.is_buildable           = bld.get_buildable();
 
-		bo.need_trees             = false;
-		bo.need_stones            = false;
-
-		if (building_name == stoneproducer.c_str()) bo.need_stones = true;
-		if (building_name == trunkproducer.c_str()) bo.need_trees  = true;
-		if (building_name == forester.c_str())
+		bo.need_trees             = building_name == trunkproducer;
+		bo.need_stones            = building_name == stoneproducer;
+		if (building_name == forester)
 			bo.production_hint = tribe->safe_ware_index("trunk").value();
 
 		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
@@ -478,7 +475,7 @@ bool Computer_Player::construct_building ()
 		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
 		 i != buildable_fields.end();
 		 ++i)
-		spots_avail[(*i)->coords.field->get_caps() & BUILDCAPS_SIZEMASK]++;
+		++spots_avail[(*i)->coords.field->get_caps() & BUILDCAPS_SIZEMASK];
 
 	int32_t expand_factor=1;
 
@@ -504,8 +501,8 @@ bool Computer_Player::construct_building ()
 		if (!bf->reachable)
 			continue;
 
-		int32_t maxsize=bf->coords.field->get_caps() & BUILDCAPS_SIZEMASK;
-		int32_t prio;
+		int32_t const maxsize =
+			player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
 
 		for
 			(std::list<BuildingObserver>::iterator j = buildings.begin();
@@ -521,7 +518,7 @@ bool Computer_Player::construct_building ()
 			if (j->desc->get_size() > maxsize)
 				continue;
 
-			prio = 0;
+			int32_t prio = 0;
 
 			if (j->type==BuildingObserver::MILITARYSITE) {
 				prio  = bf->unowned_land_nearby - bf->military_influence * 2;
