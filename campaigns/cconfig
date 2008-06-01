@@ -2,23 +2,31 @@
 #      Campaign configuration - file     #
 ##########################################
 
+
+
 #####
 # Section "global"
 #
-# campname??	= name of the Campaign with the number ??.
-# campsect??	= name of section, to be loaded, if this campaign is selected.
-# campdiff??	= level of difficulty 1-3 (easy to hard) (this is only a visualisation, it has no influences on the real difficulty).
-# campdesc??	= Description of the campaign
-# campvisi??	= Is campaign visible by default? (1=yes, 0=no)
+# version     = Version-number of this file - used to check, whether campvis-
+#               file needs to be updated. Higher the value, if you added a map
+#               or campaign or if you changed a visiblity-value.
+# campname??  = Name of the Campaign with the number ??.
+# campsect??  = Name of section, to be loaded, if this campaign is selected.
+# campdiff??  = Level of difficulty 1-3 (easy to hard) (this is only a visua-
+#               lisation, it has no influences on the real difficulty).
+# campdesc??  = Description of the campaign
+# campvisi??  = Is campaign visible by default? (1=yes, 0=no)
 #####
 
 [global]
+version = 1
+# Barbarian Tutorial Campaign
 campname0=_"(Tutorial) Barbarians - The second Empire"
 campsect0=barbariantut
 campdiff0=1
 campdesc0=_"When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
 campvisi0=1
-
+# Empire Campaign
 campname1=_"Empire - The months of exile"
 campsect1=empiretut
 campdiff1=2
@@ -31,11 +39,11 @@ campvisi1=0
 # Sections of the campaign - maps
 # Naming MUST be the name of the campaign-section + "??" where ?? is an increasing number.
 #
-# name		= name of the map.
-# descr		= description of the map.
-# author	= name of the author of the map.
-# visible	= is this map visible(1), or does it need another map to be played first(0).
-# path		= path to the map.
+# name      = name of the map.
+# descr     = description of the map.
+# author    = name of the author of the map.
+# visible   = is this map visible(1), or does it need another map to be played first(0).
+# path      = path to the map.
 #####
 
 [barbariantut00]
@@ -51,7 +59,6 @@ author=Winterwind
 descr=_"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
 visible=0
 path="campaigns/t02.wmf"
-
 
 
 [empiretut00]
