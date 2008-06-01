@@ -22,6 +22,12 @@
 
 #include "fullscreen_menu_base.h"
 
+#include "ui_button.h"
+#include "ui_checkbox.h"
+#include "ui_listselect.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
+
 #include <string>
 
 
@@ -45,13 +51,9 @@ struct MapData {
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-struct Fullscreen_Menu_MapSelectImpl;
 
-class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base
-{
-public:
+struct Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_MapSelect();
-	~Fullscreen_Menu_MapSelect();
 
 	bool is_scenario();
 	const MapData* get_map() const;
@@ -63,7 +65,20 @@ private:
 	void double_clicked(uint32_t);
 	void fill_list();
 
-	Fullscreen_Menu_MapSelectImpl* d;
+	UI::Textarea m_title;
+	UI::Textarea m_label_load_map_as_scenario;
+	UI::Textarea m_label_name,       m_name;
+	UI::Textarea m_label_author,     m_author;
+	UI::Textarea m_label_size,       m_size;
+	UI::Textarea m_label_world,      m_world;
+	UI::Textarea m_label_nr_players, m_nr_players;
+	UI::Textarea m_label_descr;
+	UI::Multiline_Textarea m_descr;
+	UI::IDButton<Fullscreen_Menu_MapSelect, int32_t> m_back;
+	UI::  Button<Fullscreen_Menu_MapSelect>          m_ok;
+	UI::Checkbox                                     m_load_map_as_scenario;
+	UI::Listselect<MapData>                          m_list;
+	std::string                                      m_curdir, m_basedir;
 };
 
 #endif

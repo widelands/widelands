@@ -64,14 +64,13 @@ Map_Object_Descr g_flag_descr;
 /**
  * Whenever a WareInstance is idle, it issues an IdleWareSupply.
 */
-class IdleWareSupply : public Supply {
-public:
+struct IdleWareSupply : public Supply {
 	IdleWareSupply(WareInstance* ware);
 	virtual ~IdleWareSupply();
 
 	void set_economy(Economy* e);
 
-public: // implementation of Supply
+	//  implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual bool is_active() const throw ();
 
@@ -3061,7 +3060,7 @@ void Economy::balance_requestsupply(uint32_t timerid)
 {
 	if (m_request_timerid != timerid)
 		return;
-	m_request_timerid++;
+	++m_request_timerid;
 
 	RSPairStruct rsps;
 	rsps.nexttimer = -1;

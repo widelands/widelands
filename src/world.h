@@ -137,7 +137,7 @@ struct World {
 	World(std::string const & name);
 
 	static bool exists_world(std::string); ///  check if a world really exists
-	static void get_all_worlds(std::vector<std::string>*);
+	static void get_all_worlds(std::vector<std::string> &);
 
 	void postload(Editor_Game_Base *);
 	void load_graphics();

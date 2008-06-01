@@ -62,31 +62,28 @@ void Bob::Descr::parse
 	char buffer [256];
 	char picname[256];
 
-	Section* global = prof->get_safe_section("idle");
+	{ //  global options
+		Section & idle_s = prof->get_safe_section("idle");
 
-	// Global options
-	snprintf(buffer, sizeof(buffer), "%s_00.png", m_name.c_str());
-	snprintf
-		(picname, sizeof(picname),
-		 "%s/%s", directory, global->get_string("picture", buffer));
+		snprintf(buffer, sizeof(buffer), "%s_00.png", m_name.c_str());
+		snprintf
+			(picname, sizeof(picname),
+			 "%s/%s", directory, idle_s.get_string("picture", buffer));
 
-	m_picture = picname;
+		m_picture = picname;
 
-	m_default_encodedata.parse(global);
+		m_default_encodedata.parse(idle_s);
 
-	add_animation
-		("idle",
-		 g_anim.get
-		 	(directory,
-		 	 prof->get_safe_section("idle"),
-		 	 (m_name + "_??.png").c_str(),
-		 	 encdata));
+		add_animation
+			("idle",
+			 g_anim.get
+			 	(directory, idle_s, (m_name + "_??.png").c_str(), encdata));
+	}
 
 	// Parse attributes
+	Section & global_s = prof->get_safe_section("global");
 	const char* string;
-	global= prof->get_safe_section("global");
-
-	while (global->get_next_string("attrib", &string)) {
+	while (global_s.get_next_string("attrib", &string)) {
 		uint32_t attrib = get_attribute_id(string);
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
@@ -124,8 +121,8 @@ Bob::Descr * Bob::Descr::create_from_dir
 	Bob::Descr *bob = 0;
 
 	try {
-		Section *s = prof->get_safe_section("global");
-		const char *type = s->get_safe_string("type");
+		char const * const type =
+			prof->get_safe_section("global").get_safe_string("type");
 
 		if (!strcasecmp(type, "critter"))
 			bob = new Critter_Bob_Descr(tribe, name);
@@ -233,7 +230,7 @@ void Bob::act(Game* g, uint32_t data)
 	if (data != m_actid)
 		return;
 
-	m_actid++;
+	++m_actid;
 	m_actscheduled = false;
 
 	if (!m_stack.size()) {
@@ -444,7 +441,7 @@ void Bob::reset_tasks(Game* g)
 
 	m_signal.clear();
 
-	m_actid++;
+	++m_actid;
 	schedule_act(g, 10);
 }
 
@@ -556,7 +553,7 @@ struct BlockedTracker {
 			if (it->second) {
 				if (static_cast<int32_t>(m_game->logic_rand() % origblocked) < unblockprob) {
 					it->second = false;
-					nrblocked--;
+					--nrblocked;
 					unblockprob -= 2;
 				}
 			}
@@ -578,7 +575,7 @@ struct BlockedTracker {
 		bool blocked = m_bob->checkFieldBlocked(m_game, field, false);
 		nodes.insert(std::make_pair(cd, blocked));
 		if (blocked)
-			nrblocked++;
+			++nrblocked;
 		return blocked;
 	}
 

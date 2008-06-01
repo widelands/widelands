@@ -64,8 +64,7 @@ struct ChatMessage {
  * received chat messages. Note that this class is a \ref Widelands::NoteSender<ChatMessage>
  * and sends a notification every time a new message is received.
  */
-class ChatProvider : public Widelands::NoteSender<ChatMessage> {
-public:
+struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	virtual ~ChatProvider() {}
 
 	/**

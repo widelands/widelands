@@ -51,7 +51,7 @@ throw (_wexception)
 	try {prof.read("allowed_buildings", 0, fs);} catch (...) {return;}
 	try {
 		int32_t const packet_version =
-			prof.get_section("global")->get_int("packet_version");
+			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Player_Number const nr_players = egbase->map().get_nrplayers();
 			upcast(Game const, game, egbase);
@@ -69,7 +69,7 @@ throw (_wexception)
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				try {
-					Section & s = *prof.get_safe_section(buffer);
+					Section & s = prof.get_safe_section(buffer);
 
 					//  Write for all buildings if it is enabled.
 					bool allowed;

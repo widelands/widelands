@@ -39,9 +39,7 @@
 
 
 
-class HostGameSettingsProvider : public GameSettingsProvider {
-	NetHost* h;
-public:
+struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(NetHost* _h)
 		: h(_h) {}
 
@@ -96,13 +94,12 @@ public:
 		if (number == 0 || settings().players[number].state == PlayerSettings::stateComputer)
 			h->setPlayerTribe(number, tribe);
 	}
+
+private:
+	NetHost * h;
 };
 
-class HostChatProvider : public ChatProvider {
-	NetHost* h;
-	std::vector<ChatMessage> messages;
-
-public:
+struct HostChatProvider : public ChatProvider {
 	HostChatProvider(NetHost* _h) : h(_h) {}
 
 	void send(const std::string& msg) {
@@ -121,6 +118,10 @@ public:
 		messages.push_back(msg);
 		ChatProvider::send(msg);
 	}
+
+private:
+	NetHost                * h;
+	std::vector<ChatMessage> messages;
 };
 
 struct Client {
@@ -443,7 +444,7 @@ void NetHost::setMap(const std::string& mapname, const std::string& mapfilename,
 	uint32_t oldplayers = d->settings.players.size();
 
 	while (oldplayers > maxplayers) {
-		oldplayers--;
+		--oldplayers;
 		disconnectPlayer(oldplayers, _("Host has changed to a map that supports fewer players."));
 	}
 
@@ -455,7 +456,7 @@ void NetHost::setMap(const std::string& mapname, const std::string& mapfilename,
 		player.tribe = d->settings.tribes[0];
 		if (oldplayers == 0)
 			player.name = d->localplayername;
-		oldplayers++;
+		++oldplayers;
 	}
 
 	// Broadcast new map info
@@ -750,13 +751,13 @@ void NetHost::checkHungClients()
 
 		int32_t delta = d->committed_networktime - d->clients[i].time;
 
-		if (delta == 0) {
-			nrready++;
-		} else {
-			nrdelayed++;
+		if (delta == 0)
+			++nrready;
+		else {
+			++nrdelayed;
 			if (delta > (5*CLIENT_TIMESTAMP_INTERVAL*static_cast<int32_t>(d->networkspeed))/1000) {
 				log("[Host]: Client %i hung\n", i);
-				nrhung++;
+				++nrhung;
 			}
 		}
 	}
@@ -1143,11 +1144,9 @@ void NetHost::disconnectClient(uint32_t number, const std::string& reason,  bool
 void NetHost::reaper()
 {
 	uint32_t index = 0;
-	while (index < d->clients.size()) {
-		if (d->clients[index].sock) {
-			index++;
-		} else {
+	while (index < d->clients.size())
+		if (d->clients[index].sock)
+			++index;
+		else
 			d->clients.erase(d->clients.begin() + index);
-		}
-	}
 }

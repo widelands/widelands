@@ -125,98 +125,98 @@ void Building_Descr::parse
 	 Profile          * const prof,
 	 EncodeData const * const encdata)
 {
-	Section* global = prof->get_safe_section("global");
-	Section* s;
-	const char* string;
 	char fname[256];
 
-	m_descname = global->get_safe_string("descname");
-
-	string = global->get_safe_string("size");
-	if (!strcasecmp(string, "small")) {
-		m_size = BaseImmovable::SMALL;
-	} else if (!strcasecmp(string, "medium")) {
-		m_size = BaseImmovable::MEDIUM;
-	} else if (!strcasecmp(string, "big")) {
-		m_size = BaseImmovable::BIG;
-	} else if (!strcasecmp(string, "mine")) {
-		m_size = BaseImmovable::SMALL;
-		m_mine = true;
-	} else
-		throw wexception
-			("Section [global], unknown size '%s'. Valid values are small, "
-			 "medium, big, mine",
-			 string);
+	Section & global_s = prof->get_safe_section("global");
+	m_descname = global_s.get_safe_string("descname");
+	{
+		char const * const string = global_s.get_safe_string("size");
+		if      (!strcasecmp(string, "small"))
+			m_size = BaseImmovable::SMALL;
+		else if (!strcasecmp(string, "medium"))
+			m_size = BaseImmovable::MEDIUM;
+		else if (!strcasecmp(string, "big"))
+			m_size = BaseImmovable::BIG;
+		else if (!strcasecmp(string, "mine")) {
+			m_size = BaseImmovable::SMALL;
+			m_mine = true;
+		} else
+			throw wexception
+				("Section [global], unknown size '%s'. Valid values are small, "
+				 "medium, big, mine",
+				 string);
+	}
 
 	// Parse build options
-	m_buildable = global->get_bool("buildable", true);
-	while (global->get_next_string("enhances_to", &string))
-		if (string)
-			m_enhances_to.push_back(strdup(string));
-	m_enhanced_building = global->get_bool("enhanced_building", false);
+	m_buildable = global_s.get_bool("buildable", true);
+	{
+		char const * string;
+		while (global_s.get_next_string("enhances_to", &string))
+			if (string)
+				m_enhances_to.push_back(strdup(string));
+	}
+	m_enhanced_building = global_s.get_bool("enhanced_building", false);
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
-		string =
-			global->get_string("buildicon", (m_name + "_build.png").c_str());
-
-		snprintf(fname, sizeof(fname), "%s/%s", directory, string);
+		snprintf
+			(fname, sizeof(fname),
+			 "%s/%s",
+			 directory,
+			 global_s.get_string("buildicon", (m_name + "_build.png").c_str()));
 
 		//  Prevent memory leak in case someone would try to call parse twice.
 		assert(not m_buildicon_fname);
 		m_buildicon_fname = strdup(fname);
 
 		//  build animation
-		s = prof->get_section("build");
-		if (!s)
+		if (Section * const build_s = prof->get_section("build")) {
+			if (build_s->get_int("fps", -1) != -1)
+				throw wexception("fps defined for build animation!");
+			if (!is_animation_known("build"))
+				add_animation
+					("build", g_anim.get(directory, *build_s, 0, encdata));
+		} else
 			throw wexception("Missing build animation");
 
-		if (s->get_int("fps", -1) != -1)
-			throw wexception("fps defined for build animation!");
-
-		if (!is_animation_known("build"))
-			add_animation("build", g_anim.get(directory, s, 0, encdata));
-
 		// Get costs
-		s = prof->get_safe_section("buildcost");
-
-		Section::Value* val;
-
-		while ((val = s->get_next_val(0)))
+		Section & buildcost_s = prof->get_safe_section("buildcost");
+		while (Section::Value const * const val = buildcost_s.get_next_val(0))
 			m_buildcost.push_back(CostItem(val->get_name(), val->get_int()));
 	}
 
-	m_stopable = global->get_bool("stopable", m_stopable);
-	if (m_stopable) {
-		if (global->get_string("stopicon")) {
+	if ((m_stopable = global_s.get_bool("stopable", m_stopable))) {
+		if (global_s.get_string("stopicon")) {
 			m_stop_icon = directory;
 			m_stop_icon+="/";
-			m_stop_icon+=global->get_string("stopicon");
+			m_stop_icon += global_s.get_string("stopicon");
 		}
 		else
 			m_stop_icon = "pics/stop.png";
-		if (global->get_string("continueicon")) {
+		if (global_s.get_string("continueicon")) {
 			m_continue_icon = directory;
 			m_continue_icon+="/";
-			m_continue_icon+=global->get_string("continueicon");
+			m_continue_icon += global_s.get_string("continueicon");
 		}
 		else
 			m_continue_icon = "pics/continue.png";
 	}
 
-	// Parse basic animation data
-	s = prof->get_section("idle");
-	if (!s)
-		throw wexception("Missing idle animation");
-	if (!is_animation_known("idle"))
-		add_animation("idle", g_anim.get(directory, s, 0, encdata));
+	{ //  parse basic animation data
+		Section & idle_s = prof->get_safe_section("idle");
+		if (!is_animation_known("idle"))
+			add_animation("idle", g_anim.get(directory, idle_s, 0, encdata));
+	}
 
-	while (global->get_next_string("soundfx", &string)) {
-		if (string) g_sound_handler.load_fx(directory, string);
+	{
+		char const * string;
+		while (global_s.get_next_string("soundfx", &string))
+			if (string)
+				g_sound_handler.load_fx(directory, string);
 	}
 
 	m_hints.parse (prof);
 
-	m_vision_range = global->get_int("vision_range");
+	m_vision_range = global_s.get_int("vision_range");
 }
 
 /**
@@ -328,8 +328,8 @@ Building_Descr* Building_Descr::create_from_dir
 	try
 	{
 		Profile prof(fname, "global"); // section-less file
-		Section* s = prof.get_safe_section("global");
-		const char* type = s->get_safe_string("type");
+		char const * const type =
+			prof.get_safe_section("global").get_safe_string("type");
 
 		if (!strcasecmp(type, "warehouse"))
 			descr = new Warehouse_Descr(tribe, name);

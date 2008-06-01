@@ -227,7 +227,7 @@ public:
 		 FileSystem & = *g_fs);
 
 	Section *get_section(const char *name);
-	Section *get_safe_section(const char *name);
+	Section & get_safe_section(char const *);
 	Section *pull_section(const char *name);
 	Section *get_next_section(const char *name);
 

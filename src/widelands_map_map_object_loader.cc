@@ -47,15 +47,16 @@ void Map_Map_Object_Loader::mark_object_as_loaded(Map_Object * const obj)
  */
 int32_t Map_Map_Object_Loader::get_nr_unloaded_objects()
 {
-	std::map<Map_Object*, bool>::iterator i = m_loaded_obj.begin();
-	int32_t retval = 0;
-
-	while (i != m_loaded_obj.end()) {
-		if (!i->second)
-			++retval;
-		++i;
-	}
-	return retval;
+	int32_t result = 0;
+	std::map<Map_Object *, bool>::const_iterator const loaded_obj_end =
+		m_loaded_obj.end();
+	for
+		(std::map<Map_Object*, bool>::const_iterator it = m_loaded_obj.begin();
+		 it != loaded_obj_end;
+		 ++it)
+		if (!it->second)
+			++result;
+	return result;
 }
 
 };

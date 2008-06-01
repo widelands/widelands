@@ -1988,12 +1988,7 @@ int32_t Map::findpath
 		return -1;
 
 	// Now unwind the taken route (even if we couldn't find a complete one!)
-	int32_t retval;
-
-	if (cur == end)
-		retval = curpf->real_cost;
-	else
-		retval = -1;
+	int32_t const result = cur == end ? curpf->real_cost : -1;
 
 	path.m_start = start;
 	path.m_end = cur;
@@ -2008,7 +2003,7 @@ int32_t Map::findpath
 		curpf = &pathfields->fields[cur.field-m_fields];
 	}
 
-	return retval;
+	return result;
 }
 
 

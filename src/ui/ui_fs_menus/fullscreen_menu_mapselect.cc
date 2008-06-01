@@ -29,11 +29,6 @@
 #include "s2map.h"
 #include "wexception.h"
 #include "widelands_map_loader.h"
-#include "ui_checkbox.h"
-#include "ui_button.h"
-#include "ui_listselect.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
 
 #include "log.h"
 
@@ -42,106 +37,77 @@
 using Widelands::WL_Map_Loader;
 
 
-struct Fullscreen_Menu_MapSelectImpl {
-	UI::Checkbox* load_map_as_scenario;
-	UI::Listselect<MapData>* list;
-	UI::Textarea* taname;
-	UI::Textarea* taauthor;
-	UI::Textarea* tasize;
-	UI::Textarea* taworld;
-	UI::Textarea* tanplayers;
-	UI::Multiline_Textarea* tadescr;
-	UI::Basic_Button* ok;
-
-	std::string curdir;
-	std::string basedir;
-};
-
-
 Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect()
 :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
-d(new Fullscreen_Menu_MapSelectImpl)
+m_title(this, MENU_XRES / 2, 110, _("Choose your map!"), Align_HCenter),
+m_label_load_map_as_scenario
+	(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter),
+m_label_name      (this, 560, 205, _("Name:"),    Align_Right),
+m_name            (this, 570, 205, ""),
+m_label_author    (this, 560, 225, _("Author:"),  Align_Right),
+m_author          (this, 570, 225, ""),
+m_label_size      (this, 560, 245, _("Size:"),    Align_Right),
+m_size            (this, 570, 245, ""),
+m_label_world     (this, 560, 265, _("World:"),   Align_Right),
+m_world           (this, 570, 265, ""),
+m_label_nr_players(this, 560, 285, _("Players:"), Align_Right),
+m_nr_players      (this, 570, 285, ""),
+m_label_descr     (this, 560, 305, _("Descr:"),   Align_Right),
+m_descr           (this, 570, 305, 200, 190, ""),
+m_back
+	(this,
+	 570, 505, 200, 26,
+	 0,
+	 &Fullscreen_Menu_MapSelect::end_modal, this, 0,
+	 _("Back")),
+m_ok
+	(this,
+	 570, 535, 200, 26,
+	 2,
+	 &Fullscreen_Menu_MapSelect::ok, this,
+	 _("OK"),
+	 std::string(),
+	 false),
+m_load_map_as_scenario
+	(this,
+	 Point
+	 	(m_label_load_map_as_scenario.get_x() +
+	 	 m_label_load_map_as_scenario.get_w() + 10,
+	 	 170)),
+m_list(this, 15, 205, 455, 365),
+m_curdir("maps"), m_basedir("maps")
 {
-	UI::Textarea* title = new UI::Textarea(this, MENU_XRES / 2, 110, _("Choose your map!"), Align_HCenter);
-	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	UI::Textarea* label = new UI::Textarea(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter);
-	d->load_map_as_scenario =
-		new UI::Checkbox(this, Point(label->get_x() + label->get_w() + 10, 170));
-	d->load_map_as_scenario->set_state(false);
+	m_load_map_as_scenario.set_state(false);
 
-	d->list = new UI::Listselect<MapData>(this, 15, 205, 455, 365);
-	d->list->selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
-	d->list->double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
+	m_list.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
+	m_list.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
 
-	new UI::Textarea(this, 560, 205, _("Name:"), Align_Right);
-	d->taname = new UI::Textarea(this, 570, 205, "");
-	new UI::Textarea(this, 560, 225, _("Author:"), Align_Right);
-	d->taauthor = new UI::Textarea(this, 570, 225, "");
-	new UI::Textarea(this, 560, 245, _("Size:"), Align_Right);
-	d->tasize = new UI::Textarea(this, 570, 245, "");
-	new UI::Textarea(this, 560, 265, _("World:"), Align_Right);
-	d->taworld = new UI::Textarea(this, 570, 265, "");
-	new UI::Textarea(this, 560, 285, _("Players:"), Align_Right);
-	d->tanplayers = new UI::Textarea(this, 570, 285, "");
-	new UI::Textarea(this, 560, 305, _("Descr:"),   Align_Right);
-	d->tadescr = new UI::Multiline_Textarea(this, 570, 305, 200, 190, "");
-
-	new UI::IDButton<Fullscreen_Menu_MapSelect, int32_t>
-		(this,
-		 570, 505, 200, 26,
-		 0,
-		 &Fullscreen_Menu_MapSelect::end_modal, this, 0,
-		 _("Back"));
-
-	d->ok = new UI::Button<Fullscreen_Menu_MapSelect>
-		(this,
-		 570, 535, 200, 26,
-		 2,
-		 &Fullscreen_Menu_MapSelect::ok, this,
-		 _("OK"),
-		 std::string(),
-		 false);
-	d->ok->set_enabled(false);
-
-	d->curdir = d->basedir = "maps";
 	fill_list();
 }
 
-Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
-{
-	delete d;
-	d = 0;
-}
-
-
 bool Fullscreen_Menu_MapSelect::is_scenario()
 {
-	return d->load_map_as_scenario->get_state();
+	return m_load_map_as_scenario.get_state();
 }
 
 const MapData* Fullscreen_Menu_MapSelect::get_map() const
 {
-	if (d->list->has_selection())
-		return &d->list->get_selected();
-	return 0;
+	return m_list.has_selection() ? &m_list.get_selected() : 0;
 }
 
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-	const MapData& map = d->list->get_selected();
+	MapData const & mapdata = m_list.get_selected();
 
-	if (!map.width) {
-		d->curdir = g_fs->FS_CanonicalizeName(map.filename);
+	if (!mapdata.width) {
+		m_curdir = g_fs->FS_CanonicalizeName(mapdata.filename);
 		fill_list();
-	} else {
-		if (is_scenario())
-			end_modal(2);
-		else
-			end_modal(1);
-	}
+	} else
+		end_modal(1 + is_scenario());
 }
 
 
@@ -152,30 +118,29 @@ void Fullscreen_Menu_MapSelect::ok()
  */
 void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
-	const MapData& map = d->list->get_selected();
+	MapData const & map = m_list.get_selected();
 
 	if (map.width) {
 		char buf[256];
 
-		d->taname->set_text(map.name);
-		d->taauthor->set_text(map.author);
+		m_name      .set_text(map.name);
+		m_author    .set_text(map.author);
 		sprintf(buf, "%-4ux%4u", map.width, map.height);
-		d->tasize->set_text(buf);
+		m_size      .set_text(buf);
 		sprintf(buf, "%i", map.nrplayers);
-		d->tanplayers->set_text(buf);
-		d->tadescr->set_text(map.description);
-		d->taworld->set_text(map.world);
-		d->ok->set_enabled(true);
+		m_nr_players.set_text(buf);
+		m_descr     .set_text(map.description);
+		m_world     .set_text(map.world);
 	} else {
 		// Directory
-		d->taname->set_text("(directory)");
-		d->taauthor->set_text("");
-		d->tasize->set_text("");
-		d->tanplayers->set_text("");
-		d->tadescr->set_text("");
-		d->taworld->set_text("");
-		d->ok->set_enabled(true);
+		m_name      .set_text("(directory)");
+		m_author    .set_text("");
+		m_size      .set_text("");
+		m_nr_players.set_text("");
+		m_descr     .set_text("");
+		m_world     .set_text("");
 	}
+	m_ok.set_enabled(true);
 }
 
 /**
@@ -202,21 +167,21 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
  */
 void Fullscreen_Menu_MapSelect::fill_list()
 {
-	d->list->clear();
+	m_list.clear();
 
 	//  Fill it with all files we find in all directories.
 	filenameset_t files;
-	g_fs->FindFiles(d->curdir, "*", &files);
+	g_fs->FindFiles(m_curdir, "*", &files);
 
 	int32_t ndirs=0;
 
 	//If we are not at the top of the map directory hierarchy (we're not talking
 	//about the absolute filesystem top!) we manually add ".."
-	if (d->curdir != d->basedir) {
+	if (m_curdir != m_basedir) {
 		MapData map;
-		map.filename = g_fs->FS_CanonicalizeName(d->curdir + "/..");
+		map.filename = g_fs->FS_CanonicalizeName(m_curdir + "/..");
 
-		d->list->add
+		m_list.add
 			("<parent>",
 			 map,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
@@ -226,7 +191,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	//Add subdirectories to the list (except for uncompressed maps)
 	for
 		(filenameset_t::iterator pname = files.begin();
-		 pname != files.end(); ++pname)
+		 pname != files.end();
+		 ++pname)
 	{
 		const char * const name = pname->c_str();
 		if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
@@ -237,7 +203,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 		MapData dir;
 		dir.filename = name;
-		d->list->add
+		m_list.add
 			(FileSystem::FS_Filename(name),
 			 dir,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
@@ -275,7 +241,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				if (!mapdata.width || !mapdata.height)
 					continue;
 
-				d->list->add
+				m_list.add
 					(mapdata.name.c_str(),
 					 mapdata,
 					 g_gr->get_picture
@@ -292,9 +258,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		}
 	}
 
-	d->list->sort(0, ndirs);
-	d->list->sort(ndirs);
+	m_list.sort(0, ndirs);
+	m_list.sort(ndirs);
 
-	if (d->list->size())
-		d->list->select(0);
+	if (m_list.size())
+		m_list.select(0);
 }

@@ -25,9 +25,9 @@
 
 #include "point.h"
 
+#include <cstring>
 #include <map>
 #include <string>
-#include <cstring>
 #include <vector>
 
 class Profile;
@@ -38,7 +38,7 @@ struct EncodeData {
 	RGBColor plrclr[4];
 
 	void clear();
-	void parse(Section *s);
+	void parse(Section &);
 	void add(const EncodeData *o);
 };
 
@@ -70,7 +70,7 @@ struct AnimationManager {
 	void flush();
 	uint32_t get
 		(char       const * directory,
-		 Section          *,
+		 Section          &,
 		 char       const * picnametempl = 0,
 		 EncodeData const * = 0);
 

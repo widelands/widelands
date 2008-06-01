@@ -24,8 +24,7 @@
 #include "playercommand.h"
 #include "wlapplication.h"
 
-class SinglePlayerGameController : public GameController {
-public:
+struct SinglePlayerGameController : public GameController {
 	SinglePlayerGameController(Widelands::Game* game, bool useai, Widelands::Player_Number local);
 	~SinglePlayerGameController();
 

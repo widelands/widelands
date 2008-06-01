@@ -77,7 +77,7 @@ void ProductionSite_Descr::parse
 	 Profile          * const prof,
 	 EncodeData const * const encdata)
 {
-	Section* sglobal = prof->get_section("global");
+	Section & global_s = prof->get_safe_section("global");
 	const char* string;
 
 	// Stopabple defaults to true for Production sites
@@ -86,7 +86,7 @@ void ProductionSite_Descr::parse
 	Building_Descr::parse(directory, prof, encdata);
 
 	// Get inputs and outputs
-	while (sglobal->get_next_string("output", &string))
+	while (global_s.get_next_string("output", &string))
 		m_output.insert(string);
 
 	if (Section * const s = prof->get_section("inputs"))
@@ -105,7 +105,7 @@ void ProductionSite_Descr::parse
 	// If not, we might not have a worker
 	std::string workerstr =
 		is_only_production_site() ?
-		sglobal->get_safe_string("worker") : sglobal->get_string("worker", "");
+		global_s.get_safe_string("worker") : global_s.get_string("worker", "");
 
 	std::vector<std::string> workernames(split_string(workerstr, ","));
 	std::vector<std::string>::const_iterator const workernames_end =
@@ -117,7 +117,7 @@ void ProductionSite_Descr::parse
 		m_workers.push_back(*it);
 
 	// Get programs
-	while (sglobal->get_next_string("program", &string)) {
+	while (global_s.get_next_string("program", &string)) {
 		ProductionProgram* program = 0;
 
 		try

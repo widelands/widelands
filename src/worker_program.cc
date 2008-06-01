@@ -52,16 +52,15 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
  */
 void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 {
-	Section* sprogram = parser->prof->get_safe_section(name.c_str());
+	Section & program_s = parser->prof->get_safe_section(name.c_str());
 
 	for (uint32_t idx = 0;; ++idx) {
 		try
 		{
 			char buf[32];
-			const char* string;
 
 			snprintf(buf, sizeof(buf), "%i", idx);
-			string = sprogram->get_string(buf, 0);
+			char const * const string = program_s.get_string(buf, 0);
 			if (!string)
 				break;
 
@@ -91,7 +90,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 	}
 
 	// Check for line numbering problems
-	if (sprogram->get_num_values() != m_actions.size())
+	if (program_s.get_num_values() != m_actions.size())
 		throw wexception("Line numbers appear to be wrong");
 }
 
@@ -437,10 +436,13 @@ void WorkerProgram::parse_animation
 
 	if (!descr->is_animation_known(cmd[1].c_str())) {
 		// dynamically allocate animations here
-		Section* s = parser->prof->get_safe_section(cmd[1].c_str());
 		descr->add_animation
 			(cmd[1].c_str(),
-			 (g_anim.get(parser->directory.c_str(), s, 0, parser->encdata)));
+			 (g_anim.get
+			  	(parser->directory.c_str(),
+			  	 parser->prof->get_safe_section(cmd[1].c_str()),
+			  	 0,
+			  	 parser->encdata)));
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 

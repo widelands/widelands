@@ -938,7 +938,7 @@ inline void Map::get_brn(const Coords f, Coords * const o) const
 	assert(f.y < m_height);
 	o->x = f.x;
 	if (f.y & 1) {
-		(o->x)++;
+		++o->x;
 		if (o->x == m_width) o->x = 0;
 	}
 	o->y = f.y + 1;

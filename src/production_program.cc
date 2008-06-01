@@ -46,12 +46,12 @@ void ProductionProgram::parse
 	 ProductionSite_Descr * const building,
 	 EncodeData     const * const encdata)
 {
-	Section* sprogram = prof->get_safe_section(name.c_str());
+	Section & program_s = prof->get_safe_section(name.c_str());
 
 	for (uint32_t idx = 0;; ++idx) {
 		char buffer[32];
 		snprintf(buffer, sizeof(buffer), "%i", idx);
-		const char * const string = sprogram->get_string(buffer, 0);
+		char const * const string = program_s.get_string(buffer, 0);
 		if (!string)
 			break;
 
@@ -80,7 +80,7 @@ void ProductionProgram::parse
 					 idx);
 
 			{
-				Section * const section = prof->get_safe_section("inputs");
+				Section & section = prof->get_safe_section("inputs");
 				const std::vector<std::string> wares(split_string(cmd[1], ","));
 				const std::vector<std::string>::const_iterator wares_end =
 					wares.end();
@@ -88,7 +88,7 @@ void ProductionProgram::parse
 					(std::vector<std::string>::const_iterator it = wares.begin();
 					 it != wares_end;
 					 ++it)
-					if (not section->get_string(it->c_str(), 0))
+					if (not section.get_string(it->c_str(), 0))
 						throw wexception
 							("Line %i: Ware %s is not in [inputs]",
 							 idx, cmd[1].c_str());
@@ -111,7 +111,7 @@ void ProductionProgram::parse
 				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
 			{
-				Section * const section = prof->get_safe_section("inputs");
+				Section & section = prof->get_safe_section("inputs");
 				const std::vector<std::string> wares(split_string(cmd[1], ","));
 				const std::vector<std::string>::const_iterator wares_end =
 					wares.end();
@@ -119,7 +119,7 @@ void ProductionProgram::parse
 					(std::vector<std::string>::const_iterator it = wares.begin();
 					 it != wares_end;
 					 ++it)
-					if (not section->get_string(it->c_str(), 0))
+					if (not section.get_string(it->c_str(), 0))
 						throw wexception
 							("Line %i: Ware %s is not in [inputs]",
 							 idx, cmd[1].c_str());
@@ -198,7 +198,7 @@ void ProductionProgram::parse
 
 			// dynamically allocate animations here
 			if (not building->is_animation_known(cmd[1].c_str())) {
-				Section* s = prof->get_safe_section(cmd[1].c_str());
+				Section & s = prof->get_safe_section(cmd[1].c_str());
 				act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
 				building->add_animation(cmd[1].c_str(), act.iparam1);
 			} else
@@ -368,7 +368,7 @@ void ProductionProgram::parse
 	}
 
 	// Check for numbering problems
-	if (sprogram->get_num_values() != m_actions.size())
+	if (program_s.get_num_values() != m_actions.size())
 		throw wexception("Line numbers appear to be wrong");
 }
 

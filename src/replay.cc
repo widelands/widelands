@@ -205,8 +205,7 @@ bool ReplayReader::EndOfReplay()
  * Command / timer that regularly inserts synchronization hashes into
  * the replay.
  */
-class Cmd_ReplaySyncWrite : public Command {
-public:
+struct Cmd_ReplaySyncWrite : public Command {
 	Cmd_ReplaySyncWrite(uint32_t t) : Command(t) {}
 
 	int32_t get_id() {return QUEUE_CMD_REPLAYSYNCWRITE;}

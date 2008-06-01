@@ -73,10 +73,10 @@ void Soldier_Descr::parse
 	 EncodeData const * encdata)
 {
 	Worker_Descr::parse(directory, prof, becomes_map, encdata);
-	Section* sglobal=prof->get_section("global");
+	Section & global_s = prof->get_safe_section("global");
 
 	{ //  hitpoints
-		const char * const hp = sglobal->get_safe_string("hp");
+		const char * const hp = global_s.get_safe_string("hp");
 		std::vector<std::string> list(split_string(hp, "-"));
 		if (list.size() != 2)
 			throw wexception
@@ -106,7 +106,7 @@ void Soldier_Descr::parse
 	}
 
 	{ //  parse attack
-		const char * const attack = sglobal->get_safe_string("attack");
+		const char * const attack = global_s.get_safe_string("attack");
 		std::vector<std::string> list(split_string(attack, "-"));
 		if (list.size() != 2)
 			throw wexception
@@ -132,22 +132,22 @@ void Soldier_Descr::parse
 	}
 
 	// Parse defend
-	m_defense=sglobal->get_safe_int("defense");
+	m_defense           = global_s.get_safe_int("defense");
 
 	// Parse evade
-	m_evade=sglobal->get_safe_int("evade");
+	m_evade             = global_s.get_safe_int("evade");
 
 	// Parse increases per level
-	m_hp_incr=sglobal->get_safe_int("hp_incr_per_level");
-	m_attack_incr=sglobal->get_safe_int("attack_incr_per_level");
-	m_defense_incr=sglobal->get_safe_int("defense_incr_per_level");
-	m_evade_incr=sglobal->get_safe_int("evade_incr_per_level");
+	m_hp_incr           = global_s.get_safe_int("hp_incr_per_level");
+	m_attack_incr       = global_s.get_safe_int("attack_incr_per_level");
+	m_defense_incr      = global_s.get_safe_int("defense_incr_per_level");
+	m_evade_incr        = global_s.get_safe_int("evade_incr_per_level");
 
 	// Parse max levels
-	m_max_hp_level=sglobal->get_safe_int("max_hp_level");
-	m_max_attack_level=sglobal->get_safe_int("max_attack_level");
-	m_max_defense_level=sglobal->get_safe_int("max_defense_level");
-	m_max_evade_level=sglobal->get_safe_int("max_evade_level");
+	m_max_hp_level      = global_s.get_safe_int("max_hp_level");
+	m_max_attack_level  = global_s.get_safe_int("max_attack_level");
+	m_max_defense_level = global_s.get_safe_int("max_defense_level");
+	m_max_evade_level   = global_s.get_safe_int("max_evade_level");
 
 	// Load the filenames
 	m_hp_pics_fn.resize(m_max_hp_level+1);
@@ -160,22 +160,22 @@ void Soldier_Descr::parse
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
 		snprintf(buffer, sizeof(buffer), "hp_level_%u_pic",      i);
 		m_hp_pics_fn[i]=dir;
-		m_hp_pics_fn[i]+=sglobal->get_safe_string(buffer);
+		m_hp_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
 		snprintf(buffer, sizeof(buffer), "attack_level_%u_pic",  i);
 		m_attack_pics_fn[i]=dir;
-		m_attack_pics_fn[i]+=sglobal->get_safe_string(buffer);
+		m_attack_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
 		snprintf(buffer, sizeof(buffer), "defense_level_%u_pic", i);
 		m_defense_pics_fn[i]=dir;
-		m_defense_pics_fn[i]+=sglobal->get_safe_string(buffer);
+		m_defense_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
 		snprintf(buffer, sizeof(buffer), "evade_level_%i_pic",   i);
 		m_evade_pics_fn[i]=dir;
-		m_evade_pics_fn[i]+=sglobal->get_safe_string(buffer);
+		m_evade_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
 }
 

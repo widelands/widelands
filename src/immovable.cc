@@ -136,7 +136,7 @@ void ImmovableProgram::add_action(const ImmovableAction& act)
 void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Profile* prof)
 {
 	ProgramParser p;
-	Section* s = prof->get_safe_section(m_name.c_str());
+	Section & s = prof->get_safe_section(m_name.c_str());
 	uint32_t line=0;
 
 	p.descr = descr;
@@ -152,7 +152,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 			uint32_t mapidx;
 
 			snprintf(buffer, sizeof(buffer), "%i", line);
-			string = s->get_string(buffer, 0);
+			string = s.get_string(buffer, 0);
 
 			if (!string)
 				break;
@@ -179,7 +179,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 		}
 	}
 
-	if (s->get_num_values() != m_actions.size())
+	if (s.get_num_values() != m_actions.size())
 		log
 			("WARNING: %s:%s: program line numbers appear to be wrong\n",
 			 directory.c_str(), m_name.c_str());
@@ -264,8 +264,7 @@ const ImmovableProgram* Immovable_Descr::get_program
 */
 void Immovable_Descr::parse(const char *directory, Profile *prof)
 {
-	Section* global = prof->get_safe_section("global");
-	const char* string;
+	Section & global_s = prof->get_safe_section("global");
 	char buffer [256];
 	char picname[256];
 
@@ -273,13 +272,12 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 	snprintf(buffer, sizeof(buffer), "%s_00.png", m_name.c_str());
 	snprintf
 		(picname, sizeof(picname),
-		 "%s/%s", directory, global->get_string("picture", buffer));
+		 "%s/%s", directory, global_s.get_string("picture", buffer));
 	m_picture = picname;
 
-	m_default_encodedata.parse(global);
+	m_default_encodedata.parse(global_s);
 
-	string = global->get_string("size", 0);
-	if (string) {
+	if (char const * const string = global_s.get_string("size", 0)) {
 		if (!strcasecmp(string, "volatile") || !strcasecmp(string, "none"))
 		{
 			m_size = BaseImmovable::NONE;
@@ -301,29 +299,26 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 	}
 
 
-	// Parse attributes
-	while (global->get_next_string("attrib", &string)) {
-		uint32_t attrib = get_attribute_id(string);
-
-		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-		{
-			if (attrib != Map_Object::RESI)
-				throw wexception("Bad attribute '%s'", string);
+	{ //  parse attributes
+		char const * string;
+		while (global_s.get_next_string("attrib", &string)) {
+			uint32_t attrib = get_attribute_id(string);
+			if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
+				if (attrib != Map_Object::RESI)
+					throw wexception("Bad attribute '%s'", string);
+			add_attribute(attrib);
 		}
-
-		add_attribute(attrib);
 	}
 
 
-	// Parse the programs
-	while (global->get_next_string("program", &string))
-		parse_program(directory, prof, string);
+	{ //  parse the programs
+		char const * string;
+		while (global_s.get_next_string("program", &string))
+			parse_program(directory, prof, string);
+	}
 
 	if (m_programs.find("program") == m_programs.end()) {
-		Section* program = prof->get_section("program");
-
-		if (program)
-		{
+		if (prof->get_section("program")) {
 			log
 				("WARNING: %s: obsolete implicit [program] section; use "
 				 "program=program in [global]\n",
@@ -406,7 +401,8 @@ uint32_t Immovable_Descr::parse_animation
 	}
 
 	if (not is_animation_known(animation_name.c_str())) {
-		animid = g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
+		animid =
+			g_anim.get(directory.c_str(), *anim, picname, &m_default_encodedata);
 		add_animation(animation_name.c_str(), animid);
 	} else animid = get_animation(animation_name.c_str());
 

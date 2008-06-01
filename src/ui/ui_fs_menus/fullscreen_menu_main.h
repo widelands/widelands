@@ -29,18 +29,7 @@
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
 */
-class Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
-	UI::IDButton<Fullscreen_Menu_Main, int32_t> singleplayer;
-	UI::IDButton<Fullscreen_Menu_Main, int32_t> multiplayer;
-	UI::IDButton<Fullscreen_Menu_Main, int32_t> replay;
-	UI::IDButton<Fullscreen_Menu_Main, int32_t> options;
-	UI::IDButton<Fullscreen_Menu_Main, int32_t> editor;
-	UI::IDButton<Fullscreen_Menu_Main, int32_t> readme;
-	UI::IDButton<Fullscreen_Menu_Main, int32_t> license;
-	UI::IDButton<Fullscreen_Menu_Main, int32_t> exit;
-	UI::Textarea                            version;
-	UI::Textarea                            copyright;
-public:
+struct Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Main();
 	enum {
 		mm_singleplayer,
@@ -52,6 +41,17 @@ public:
 		mm_license,
 		mm_exit
 	};
+private:
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> singleplayer;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> multiplayer;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> replay;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> options;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> editor;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> readme;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> license;
+	UI::IDButton<Fullscreen_Menu_Main, int32_t> exit;
+	UI::Textarea                                version;
+	UI::Textarea                                copyright;
 };
 
 #endif

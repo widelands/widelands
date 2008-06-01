@@ -134,8 +134,7 @@ class BulldozeConfirm
  * Confirm the bulldoze request for a building.
  * \todo move this into it's own set of files
  */
-class BulldozeConfirm : public UI::Window {
-public:
+struct BulldozeConfirm : public UI::Window {
 	BulldozeConfirm(Interactive_Base* parent, Building* building, Widelands::PlayerImmovable* todestroy = 0);
 	virtual ~BulldozeConfirm();
 
@@ -423,15 +422,13 @@ class Building_Window
 ---------------------
 Baseclass providing common tools for building windows.
 */
-class Building_Window : public UI::Window {
+struct Building_Window : public UI::Window {
 	friend class TrainingSite_Window;
 	friend class MilitarySite_Window;
-public:
 	enum {
 		Width = 4 * 34 //  4 normally sized buttons
 	};
 
-public:
 	Building_Window(Interactive_Player* parent, Building* building, UI::Window** registry);
 	virtual ~Building_Window();
 
@@ -913,8 +910,7 @@ Warehouse UI IMPLEMENTATION
 ==============================================================================
 */
 
-class Warehouse_Window : public Building_Window {
-public:
+struct Warehouse_Window : public Building_Window {
 	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry);
 	virtual ~Warehouse_Window();
 
@@ -1751,13 +1747,13 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	Widelands::TrainingSite_Descr const & ts_descr = ps->descr();
 	uint32_t atrcount = 0;
 	if (ts_descr.get_train_hp())
-		atrcount++;
+		++atrcount;
 	if (ts_descr.get_train_attack())
-		atrcount++;
+		++atrcount;
 	if (ts_descr.get_train_defense())
-		atrcount++;
+		++atrcount;
 	if (ts_descr.get_train_evade())
-		atrcount++;
+		++atrcount;
 	if (atrcount >= 2) {
 		if (ts_descr.get_train_hp())
 			addPrioritySet(atrHP, _("Hit points"));

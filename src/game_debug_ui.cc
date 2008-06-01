@@ -41,14 +41,14 @@ struct MapObjectDebugPanel
 {
 	MapObjectDebugPanel
 		(UI::Panel                   & parent,
-		 Widelands::Editor_Game_Base &,
+		 Widelands::Editor_Game_Base const &,
 		 Widelands::Map_Object       &);
 	~MapObjectDebugPanel();
 
 	virtual void log(std::string str);
 
 private:
-	Widelands::Editor_Game_Base & m_egbase;
+	Widelands::Editor_Game_Base const & m_egbase;
 	Widelands::Object_Ptr         m_object;
 
 	UI::Multiline_Textarea        m_log;
@@ -64,7 +64,7 @@ Initialize logging.
 */
 MapObjectDebugPanel::MapObjectDebugPanel
 	(UI::Panel                   & parent,
-	 Widelands::Editor_Game_Base & egbase,
+	 Widelands::Editor_Game_Base const & egbase,
 	 Widelands::Map_Object       & obj)
 :
 UI::Panel(&parent, 0, 0, 280, 150),
@@ -107,8 +107,6 @@ void MapObjectDebugPanel::log(std::string str)
 
 /*
 ===============
-Map_Object::create_debug_panels
-
 Create tabs for the debugging UI.
 
 This is separated out of instances.cc here, so we don't have to include
@@ -117,11 +115,11 @@ building_ui.cc).
 ===============
 */
 void Widelands::Map_Object::create_debug_panels
-	(Widelands::Editor_Game_Base * egbase, UI::Tab_Panel * const tabs)
+	(Widelands::Editor_Game_Base const & egbase, UI::Tab_Panel & tabs)
 {
-	tabs->add
-		(g_gr->get_picture(PicMod_Game,  "pics/menu_debug.png"),
-		 new MapObjectDebugPanel(*tabs, *egbase, *this));
+	tabs.add
+		(g_gr->get_picture(PicMod_Game, "pics/menu_debug.png"),
+		 new MapObjectDebugPanel(tabs, egbase, *this));
 }
 
 
@@ -153,7 +151,7 @@ private:
 	bool                  m_log_general_info;
 	Widelands::Object_Ptr m_object;
 	uint32_t            m_serial;
-	UI::Tab_Panel * m_tabs;
+	UI::Tab_Panel         m_tabs;
 };
 
 
@@ -170,7 +168,8 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	:
 	UI::Window        (&parent, 0, 0, 100, 100, ""),
 	m_log_general_info(true),
-	m_object          (&obj)
+	m_object          (&obj),
+	m_tabs            (this, 0, 0, 1)
 {
 	char buffer[128];
 
@@ -179,12 +178,11 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	snprintf(buffer, sizeof(buffer), "%u", m_serial);
 	set_title(buffer);
 
-	m_tabs = new UI::Tab_Panel(this, 0, 0, 1);
 
-	obj.create_debug_panels(&parent.egbase(), m_tabs);
+	obj.create_debug_panels(parent.egbase(), m_tabs);
 
-	m_tabs->set_snapparent(true);
-	m_tabs->resize();
+	m_tabs.set_snapparent(true);
+	m_tabs.resize();
 
 }
 

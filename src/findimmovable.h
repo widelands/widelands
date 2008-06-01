@@ -33,7 +33,7 @@ private:
 		BaseCapsule() : refcount(1) {}
 		virtual ~BaseCapsule() {}
 
-		void addref() {refcount++;}
+		void addref() {++refcount;}
 		void deref() {
 			if (--refcount == 0)
 				delete this;

@@ -47,7 +47,7 @@ boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 {
 	for (List::iterator it = m_list.begin(); it != m_list.end(); ++it) {
 		if (it->use_count() == 1) {
-			(*it)->cycle++;
+			++(*it)->cycle;
 			if (!(*it)->cycle)
 				clear(*it);
 			return *it;

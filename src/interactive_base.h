@@ -20,22 +20,19 @@
 #ifndef INTERACTIVE_BASE_H
 #define INTERACTIVE_BASE_H
 
-#include <boost/scoped_ptr.hpp>
-
 #include "editor_game_base.h"
 #include "map.h"
 #include "mapview.h"
 #include "overlay_manager.h"
 
 #include "ui_box.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 #include <SDL_keysym.h>
 
 namespace Widelands {struct CoordPath;};
 class MiniMap;
-
-struct Interactive_BaseImpl;
 
 /**
  * This is used to represent the code that Interactive_Player and
@@ -178,7 +175,7 @@ protected:
 private:
 	void update_speedlabel();
 
-	boost::scoped_ptr<Interactive_BaseImpl> m;
+	UI::Textarea m_label_speed;
 };
 
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, 2U

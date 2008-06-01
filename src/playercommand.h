@@ -77,12 +77,7 @@ private:
 	Serial serial;
 };
 
-class Cmd_Build:public PlayerCommand {
-private:
-	Coords coords;
-	Building_Index id;
-
-public:
+struct Cmd_Build:public PlayerCommand {
 	Cmd_Build() : PlayerCommand() {} // For savegame loading
 	Cmd_Build (int32_t t, int32_t p, const Coords& c, Building_Index i):PlayerCommand(t, p)
 	{coords=c; id=i;}
@@ -96,13 +91,13 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Coords         coords;
+	Building_Index id;
 };
 
-class Cmd_BuildFlag:public PlayerCommand {
-private:
-	Coords coords;
-
-public:
+struct Cmd_BuildFlag:public PlayerCommand {
 	Cmd_BuildFlag() : PlayerCommand() {} // For savegame loading
 	Cmd_BuildFlag (int32_t t, int32_t p, const Coords& c):PlayerCommand(t, p)
 	{coords=c;}
@@ -116,17 +111,12 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Coords coords;
 };
 
-class Cmd_BuildRoad:public PlayerCommand {
-private:
-	Path* path;
-
-	Coords start;
-	Path::Step_Vector::size_type nsteps;
-	char* steps;
-
-public:
+struct Cmd_BuildRoad:public PlayerCommand {
 	Cmd_BuildRoad() : PlayerCommand() {} // For savegame loading
 	Cmd_BuildRoad (int32_t, int32_t, Path &);
 	Cmd_BuildRoad (StreamRead &);
@@ -140,6 +130,12 @@ public:
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
+
+private:
+	Path                       * path;
+	Coords                       start;
+	Path::Step_Vector::size_type nsteps;
+	char                       * steps;
 };
 
 struct Cmd_FlagAction:public PlayerCommand {

@@ -48,11 +48,10 @@ m_lastTip       (0)
 	std::string filename = "txts/gametips";
 
 	try {
-		Profile prof(filename.c_str(), NULL);
-		Section* s = prof.get_section("global");
-		if (NULL != s) {
-			const char *text = s->get_string("background", NULL);
-			if (NULL != text)
+		Profile prof(filename.c_str());
+		if (Section * const s = prof.get_section("global")) {
+			const char *text = s->get_string("background");
+			if (text)
 				m_background_picture = text;
 			m_width = s->get_int("width", GAMETIPS_DEFAULT_TEXTAREA_W);
 			m_height = s->get_int("height", GAMETIPS_DEFAULT_TEXTAREA_H);
@@ -61,18 +60,19 @@ m_lastTip       (0)
 			m_pading_t = s->get_int("padding-top", GAMETIPS_DEFAULT_PADDING);
 			m_pading_b = s->get_int("padding-bottom", GAMETIPS_DEFAULT_PADDING);
 			m_font_size = s->get_int("text-size", UI_FONT_SIZE_SMALL);
-			m_bgcolor = color_from_hex
-				(s->get_string("background-color", NULL),
-				 GAMETIPS_TEXTAREA_COLOR_BG);
-			m_color   = color_from_hex
-				(s->get_string("text-color", NULL), GAMETIPS_FONT_COLOR_FG);
+			m_bgcolor =
+				color_from_hex
+					(s->get_string("background-color"), GAMETIPS_TEXTAREA_COLOR_BG);
+			m_color   =
+				color_from_hex
+					(s->get_string("text-color"),       GAMETIPS_FONT_COLOR_FG);
 		}
 
-		while ((s = prof.get_next_section(0))) {
+		while (Section * const s = prof.get_next_section(0)) {
 
 
-			const char *text = s->get_string("text", NULL);
-			if (NULL == text)
+			char const * const text = s->get_string("text");
+			if (0 == text)
 				continue;
 
 			Tip tip;
@@ -124,7 +124,7 @@ uint32_t GameTips::colorvalue_from_hex(char const c1, char const c2) {
 
 // convert CSS hex color value to RGBColor
 RGBColor GameTips::color_from_hex(char const * hexcode, RGBColor const & def) {
-	if (NULL == hexcode)
+	if (0 == hexcode)
 		return def;
 	const int32_t len = strlen(hexcode);
 	if (len < 3)

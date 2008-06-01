@@ -66,8 +66,7 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
 
 	// read in the campaign config
 	Profile prof("campaigns/cconfig");
-	Section *cconf;
-	cconf = prof.get_section("global");
+	Section & cconf_s = prof.get_safe_section("global");
 
 	// Write down visiblity of campaigns
 	Profile campvis(savepath.c_str());
@@ -76,8 +75,8 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
 
 	sprintf(cvisible, "campvisi%i", i);
 	sprintf(csection, "campsect%i", i);
-	while (cconf->get_string(csection)) {
-		vis->set_bool(csection, cconf->get_bool(cvisible), "0");
+	while (cconf_s.get_string(csection)) {
+		vis->set_bool(csection, cconf_s.get_bool(cvisible), "0");
 
 		++i;
 		sprintf(cvisible, "campvisi%i", i);
@@ -89,15 +88,15 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
 	i = 0;
 
 	sprintf(csection, "campsect%i", i);
-	while (cconf->get_string(csection)) {
-		mapsection = cconf->get_string(csection);
+	while (cconf_s.get_string(csection)) {
+		mapsection = cconf_s.get_string(csection);
 
 		cms = mapsection;
 		sprintf(number, "%02i", imap);
 		cms += number;
 
-		while ((cconf = prof.get_section(cms.c_str()))) {
-			vis->set_bool(cms.c_str(), cconf->get_bool("visible"), "0");
+		while (Section * const s = prof.get_section(cms.c_str())) {
+			vis->set_bool(cms.c_str(), s->get_bool("visible"), "0");
 
 			++imap;
 			cms = mapsection;
@@ -107,7 +106,6 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
 
 		++i;
 		sprintf(csection, "campsect%i", i);
-		cconf = prof.get_section("global");
 		imap = 0;
 	}
 

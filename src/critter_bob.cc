@@ -63,7 +63,7 @@ Parse a program
 */
 void Critter_BobProgram::parse(Parser* parser, std::string name)
 {
-	Section* sprogram = parser->prof->get_safe_section(name.c_str());
+	Section & program_s = parser->prof->get_safe_section(name.c_str());
 
 	for (uint32_t idx = 0;; ++idx) {
 		try
@@ -71,7 +71,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 			char buffer[32];
 
 			snprintf(buffer, sizeof(buffer), "%i", idx);
-			const char * const string = sprogram->get_string(buffer, 0);
+			char const * const string = program_s.get_string(buffer, 0);
 			if (!string)
 				break;
 
@@ -101,7 +101,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 	}
 
 	// Check for line numbering problems
-	if (sprogram->get_num_values() != m_actions.size())
+	if (program_s.get_num_values() != m_actions.size())
 		throw wexception("Line numbers appear to be wrong");
 }
 
@@ -187,12 +187,12 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 {
 	Bob::Descr::parse(directory, prof, encdata);
 
-	Section *s = prof->get_safe_section("global");
+	Section & global_s = prof->get_safe_section("global");
 
-	m_swimming = s->get_bool("swimming", false);
+	m_swimming = global_s.get_bool("swimming", false);
 
 	// Pretty name
-	m_descname = s->get_safe_string("descname");
+	m_descname = global_s.get_safe_string("descname");
 
 	m_walk_anims.parse
 		(this,
@@ -202,9 +202,8 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 		 prof->get_section("walk"),
 		 encdata);
 
-	Section *sglobal = prof->get_safe_section("global");
 	char const * string;
-	while (sglobal->get_next_string("program", &string)) {
+	while (global_s.get_next_string("program", &string)) {
 		Critter_BobProgram* prog = 0;
 
 		try {

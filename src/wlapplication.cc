@@ -1010,7 +1010,7 @@ void WLApplication::init_double_game ()
 /**
  * On SIGUSR1, allow ourselves to continue running
  */
-void WLApplication::signal_handler(int32_t) {may_run++;}
+void WLApplication::signal_handler(int32_t) {++may_run;}
 
 /**
  * Kill the other instance when exiting
@@ -1243,9 +1243,7 @@ void WLApplication::mainmenu_multiplayer()
 
 // The settings provider for normal singleplayer games:
 // The user can change everything, except that they are themselves human.
-class SinglePlayerGameSettingsProvider : public GameSettingsProvider {
-	GameSettings s;
-public:
+struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	SinglePlayerGameSettingsProvider() {
 		Widelands::Tribe_Descr::get_all_tribenames(s.tribes);
 	}
@@ -1274,7 +1272,7 @@ public:
 			char buf[200];
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers+1);
 			player.name = buf;
-			oldplayers++;
+			++oldplayers;
 		}
 	}
 	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) {
@@ -1303,6 +1301,9 @@ public:
 		if (std::find(s.tribes.begin(), s.tribes.end(), tribe) != s.tribes.end())
 			s.players[number].tribe = tribe;
 	}
+
+private:
+	GameSettings s;
 };
 
 /**
@@ -1342,8 +1343,7 @@ bool WLApplication::new_game()
 }
 
 
-class ReplayGameController : public GameController {
-public:
+struct ReplayGameController : public GameController {
 	ReplayGameController(Widelands::Game& game, const std::string& filename)
 		: m_game(game)
 	{

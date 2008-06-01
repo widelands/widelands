@@ -286,10 +286,8 @@ void Warehouse_Descr::parse
 {
 	Building_Descr::parse(directory, prof, encdata);
 
-	Section* global = prof->get_safe_section("global");
-	const char* string;
-
-	string = global->get_safe_string("subtype");
+	Section & global = prof->get_safe_section("global");
+	char const * const string = global.get_safe_string("subtype");
 	if (!strcasecmp(string, "HQ")) {
 		m_subtype = Subtype_HQ;
 	} else if (!strcasecmp(string, "port")) {
@@ -303,7 +301,7 @@ void Warehouse_Descr::parse
 			 string);
 
 	if (m_subtype == Subtype_HQ) {
-		m_conquers = global->get_int("conquers");
+		m_conquers = global.get_int("conquers");
 		if (0 < m_conquers)
 			m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
 	}
@@ -654,7 +652,7 @@ uint32_t Warehouse::count_workers(Game* g, Ware_Index ware, const Requirements& 
 		if (w && std::find(subs.begin(), subs.end(), &w->descr()) != subs.end()) {
 			// This is one of the workers in our sum
 			if (!req.check(w))
-				sum--;
+				--sum;
 		}
 	}
 
@@ -688,7 +686,7 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 			{
 				if (upcast(Worker, worker, it->get(game))) {
 					if (worker->name() == workername) {
-						unincorporated--;
+						--unincorporated;
 
 						if (req.check(worker)) {
 							worker->reset_tasks(game);  //  forget everything you did

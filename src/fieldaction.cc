@@ -218,7 +218,7 @@ private:
 
 	Widelands::FCoords  m_field;
 
-	UI::Tab_Panel    * m_tabpanel;
+	UI::Tab_Panel      m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
@@ -280,18 +280,16 @@ FieldActionWindow::FieldActionWindow
 	m_map(&iabase->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_field(iabase->get_sel_pos().node, &(*m_map)[iabase->get_sel_pos().node]),
+	m_tabpanel(this, 0, 0, 1),
+	m_fastclick(true),
 	m_best_tab(0),
-	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null())
+	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null()),
+	m_text_attackers(0)
 {
-
-
 	iabase->set_sel_freeze(true);
 
-	m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
-	m_tabpanel->set_snapparent(true);
-	m_text_attackers = 0;
+	m_tabpanel.set_snapparent(true);
 
-	m_fastclick = true;
 	char filename[] = "pics/workarea0cumulative.png";
 	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
 	for (Workarea_Info::size_type i = 0; i < NUMBER_OF_WORKAREA_PICS; ++i) {
@@ -313,7 +311,6 @@ FieldActionWindow::~FieldActionWindow()
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	m_iabase->set_sel_freeze(false);
 	delete m_text_attackers;
-	m_text_attackers = 0;
 }
 
 
@@ -327,7 +324,7 @@ This mainly deals with mouse placement
 */
 void FieldActionWindow::init()
 {
-	m_tabpanel->resize();
+	m_tabpanel.resize();
 
 	center_to_parent(); // override UI::UniqueWindow position
 
@@ -365,7 +362,7 @@ void FieldActionWindow::add_buttons_auto()
 	UI::Box* buildbox = 0;
 	UI::Box* watchbox;
 
-	watchbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
+	watchbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	// Add road-building actions
 	if (m_field.field->get_owned_by() == m_plr->get_player_number()) {
@@ -373,7 +370,7 @@ void FieldActionWindow::add_buttons_auto()
 		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_field);
 
 		// The box with road-building buttons
-		buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
+		buildbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
@@ -458,7 +455,7 @@ void FieldActionWindow::add_buttons_attack ()
 	if (m_field.field->get_owned_by() != m_plr->get_player_number()) {
 
 		// The box with attack buttons
-		attackbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
+		attackbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Attackable, attackable, m_map->get_immovable(m_field)))
 			if (attackable->canAttack()) {
@@ -546,7 +543,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
-			*ppgrid = new BuildGrid(m_tabpanel, tribe, 0, 0, 5);
+			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
 			(*ppgrid)->buildclicked.set(this, &FieldActionWindow::act_build);
 			(*ppgrid)->buildmouseout.set(this, &FieldActionWindow::building_icon_mouse_out);
 			(*ppgrid)->buildmousein.set(this, &FieldActionWindow::building_icon_mouse_in);
@@ -559,14 +556,14 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 	// Add all necessary tabs
 	for (int32_t i = 0; i < 3; ++i)
 		if (bbg_house[i])
-			m_tabpanel->activate
+			m_tabpanel.activate
 				(m_best_tab = add_tab
 				 	(pic_tab_buildhouse[i],
 				 	 bbg_house[i],
 				 	 i18n::translate(tooltip_tab_build[i])));
 
 	if (bbg_mine)
-		m_tabpanel->activate
+		m_tabpanel.activate
 			(m_best_tab = add_tab(pic_tab_buildmine, bbg_mine, _("Build mines")));
 }
 
@@ -580,16 +577,20 @@ Buttons used during road building: Set flag here and Abort
 */
 void FieldActionWindow::add_buttons_road(bool flag)
 {
-	UI::Box* buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
+	UI::Box & buildbox = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	if (flag)
-		add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag, _("Build flag"));
+		add_button
+			(&buildbox,
+			 pic_buildflag, &FieldActionWindow::act_buildflag, _("Build flag"));
 
-	add_button(buildbox, pic_abort, &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
+	add_button
+		(&buildbox,
+		 pic_abort, &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
 
 	// Add the box as tab
-	buildbox->resize();
-	add_tab(pic_tab_buildroad, buildbox, _("Build roads"));
+	buildbox.resize();
+	add_tab(pic_tab_buildroad, &buildbox, _("Build roads"));
 }
 
 
@@ -604,7 +605,7 @@ uint32_t FieldActionWindow::add_tab
 	(char const * picname, UI::Panel * panel, std::string const & tooltip_text)
 {
 	return
-		m_tabpanel->add
+		m_tabpanel.add
 			(g_gr->get_picture(PicMod_Game, picname), panel, tooltip_text);
 }
 

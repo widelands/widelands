@@ -58,7 +58,7 @@ throw (_wexception)
 	try {
 		prof.read("event_chain", 0, fs);
 		int32_t const packet_version =
-			prof.get_section("global")->get_int("packet_version");
+			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (1 <= packet_version  and packet_version <= CURRENT_PACKET_VERSION)
 			while (Section * const s = prof.get_next_section(0)) {
 				char const * const name = s->get_name();

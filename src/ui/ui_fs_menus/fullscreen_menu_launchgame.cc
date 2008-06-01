@@ -30,81 +30,46 @@
 #include "map.h"
 #include "playerdescrgroup.h"
 
-#include "ui_button.h"
-#include "ui_textarea.h"
-
-struct Fullscreen_Menu_LaunchGameImpl {
-	GameSettingsProvider* settings;
-	GameController* ctrl; // optional
-
-	UI::Basic_Button* ok;
-	UI::Textarea* mapname;
-	UI::Basic_Button* select_map;
-	GameChatPanel* chat;
-	PlayerDescriptionGroup* players[MAX_PLAYERS];
-
-	bool is_scenario;
-};
-
-
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
-	(GameSettingsProvider * settings, GameController * ctrl)
+	(GameSettingsProvider * const settings, GameController * const ctrl)
 :
 Fullscreen_Menu_Base("launchgamemenu.jpg"),
-d(new Fullscreen_Menu_LaunchGameImpl)
+m_select_map
+	(this,
+	 550, 210, 200, 26,
+	 1,
+	 &Fullscreen_Menu_LaunchGame::select_map, this,
+	 _("Select map"),
+	 std::string(),
+	 false),
+m_back
+	(this,
+	 550, 450, 200, 26,
+	 0,
+	 &Fullscreen_Menu_LaunchGame::back_clicked, this,
+	 _("Back")),
+m_ok
+	(this,
+	 550, 480, 200, 26,
+	 2,
+	 &Fullscreen_Menu_LaunchGame::start_clicked, this,
+	 _("Start game"),
+	 std::string(),
+	 false),
+m_title      (this, MENU_XRES / 2,  80, _("Launch Game"), Align_HCenter),
+m_mapname    (this, 650,           180, std::string(),    Align_HCenter),
+m_settings   (settings),
+m_ctrl       (ctrl),
+m_chat       (0),
+m_is_scenario(false)
 {
-	d->settings = settings;
-	d->ctrl = ctrl;
-	d->chat = 0;
 
-	UI::Textarea* title = new UI::Textarea(this, MENU_XRES/2, 80, _("Launch Game"), Align_HCenter);
-	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	new UI::Button<Fullscreen_Menu_LaunchGame>
-		(this,
-		 550, 450, 200, 26,
-		 0,
-		 &Fullscreen_Menu_LaunchGame::back_clicked, this,
-		 _("Back"));
-
-	d->ok = new UI::Button<Fullscreen_Menu_LaunchGame>
-		(this,
-		 550, 480, 200, 26,
-		 2,
-		 &Fullscreen_Menu_LaunchGame::start_clicked, this,
-		 _("Start game"),
-		 std::string(),
-		 false);
-
-	d->mapname = new UI::Textarea(this, 650, 180, std::string(), Align_HCenter);
-
-	d->select_map = new UI::Button<Fullscreen_Menu_LaunchGame>
-		(this,
-		 550, 210, 200, 26,
-		 1,
-		 &Fullscreen_Menu_LaunchGame::select_map, this,
-		 _("Select map"),
-		 std::string(),
-		 false);
-
-	d->is_scenario = false;
-
-	int y = 180;
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		d->players[i] = new PlayerDescriptionGroup
-			(this,
-			 50, y,
-			 settings, i);
-		y += 30;
-	}
-}
-
-
-Fullscreen_Menu_LaunchGame::~Fullscreen_Menu_LaunchGame()
-{
-	// sub-panels are deleted automatically by Panel destructor
-	delete d;
-	d = 0;
+	uint32_t y = 150;
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+		m_players[i] =
+			new PlayerDescriptionGroup(this, 50, y += 30, settings, i);
 }
 
 
@@ -114,10 +79,14 @@ Fullscreen_Menu_LaunchGame::~Fullscreen_Menu_LaunchGame()
  */
 void Fullscreen_Menu_LaunchGame::start()
 {
-	if (d->settings->settings().mapname.size() == 0 && d->settings->canChangeMap()) {
+	if
+		(m_settings->settings().mapname.size() == 0
+		 &&
+		 m_settings->canChangeMap())
+	{
 		select_map();
 
-		if (d->settings->settings().mapname.size() == 0)
+		if (m_settings->settings().mapname.size() == 0)
 			back_clicked();
 	}
 
@@ -127,8 +96,8 @@ void Fullscreen_Menu_LaunchGame::start()
 
 void Fullscreen_Menu_LaunchGame::think()
 {
-	if (d->ctrl)
-		d->ctrl->think();
+	if (m_ctrl)
+		m_ctrl->think();
 
 	refresh();
 }
@@ -139,13 +108,10 @@ void Fullscreen_Menu_LaunchGame::think()
  *
  * This automatically creates and display a chat panel when appropriate.
  */
-void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider* chat)
+void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider * const chat)
 {
-	delete d->chat;
-	d->chat = 0;
-
-	if (chat)
-		d->chat = new GameChatPanel(this, 50, 420, 480, 160, *chat);
+	delete m_chat;
+	m_chat = chat ? new GameChatPanel(this, 50, 420, 480, 160, *chat) : 0;
 }
 
 
@@ -163,33 +129,31 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
  */
 void Fullscreen_Menu_LaunchGame::start_clicked()
 {
-	if (d->settings->canLaunch())
-		end_modal(d->is_scenario?2:1);
+	if (m_settings->canLaunch())
+		end_modal(1 + m_is_scenario);
 }
 
 
 void Fullscreen_Menu_LaunchGame::refresh()
 {
-	const GameSettings& settings = d->settings->settings();
+	GameSettings const & settings = m_settings->settings();
 
-	if (settings.mapname.size() != 0)
-		d->mapname->set_text(settings.mapname);
-	else
-		d->mapname->set_text("(no map)");
+	m_mapname.set_text
+		(settings.mapname.size() != 0 ? settings.mapname : _("(no map)"));
 
-	d->ok->set_enabled(d->settings->canLaunch());
-	d->select_map->set_visible(d->settings->canChangeMap());
-	d->select_map->set_enabled(d->settings->canChangeMap());
+	m_ok.set_enabled(m_settings->canLaunch());
+	m_select_map.set_visible(m_settings->canChangeMap());
+	m_select_map.set_enabled(m_settings->canChangeMap());
 
 	// update the player description groups
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-		d->players[i]->refresh();
+		m_players[i]->refresh();
 }
 
 
 void Fullscreen_Menu_LaunchGame::select_map()
 {
-	if (!d->settings->canChangeMap())
+	if (!m_settings->canChangeMap())
 		return;
 
 	Fullscreen_Menu_MapSelect msm;
@@ -198,8 +162,8 @@ void Fullscreen_Menu_LaunchGame::select_map()
 	if (code <= 0)
 		return;
 
-	d->is_scenario = code == 2;
+	m_is_scenario = code == 2;
 
-	const MapData* map = msm.get_map();
-	d->settings->setMap(map->name, map->filename, map->nrplayers);
+	MapData const & mapdata = *msm.get_map();
+	m_settings->setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
 }

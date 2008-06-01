@@ -38,7 +38,6 @@
 #include "player.h"
 #include "profile.h"
 #include "transport.h"
-#include "ui_textarea.h"
 #include "upcast.h"
 #include "wlapplication.h"
 
@@ -50,10 +49,6 @@ using Widelands::Game;
 using Widelands::Map;
 using Widelands::Map_Object;
 using Widelands::TCoords;
-
-struct Interactive_BaseImpl {
-	UI::Textarea* label_speed;
-};
 
 Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
 :
@@ -74,7 +69,7 @@ m_buildroad                   (false),
 m_road_build_player           (0),
 m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
 m_flag_to_connect             (Coords::Null()),
-m(new Interactive_BaseImpl)
+m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 {
 	warpview.set(this, &Interactive_Player::mainview_move);
 
@@ -99,8 +94,7 @@ m(new Interactive_BaseImpl)
 	//  funny results.
 	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png");
 
-	m->label_speed = new UI::Textarea(this, get_w(), 0, std::string(), Align_TopRight);
-	m->label_speed->set_visible(false);
+	m_label_speed.set_visible(false);
 }
 
 /*
@@ -197,7 +191,7 @@ int32_t Interactive_Base::get_yres()
  */
 void Interactive_Base::postload() {}
 
-static std::string speedString(uint32_t speed)
+static std::string speedString(uint32_t const speed)
 {
 	if (speed) {
 		char buffer[32];
@@ -217,26 +211,22 @@ void Interactive_Base::update_speedlabel()
 		if (g && g->gameController()) {
 			uint32_t real = g->gameController()->realSpeed();
 			uint32_t desired = g->gameController()->desiredSpeed();
-			if (real == desired) {
-				if (real == 1000)
-					m->label_speed->set_text(std::string());
-				else
-					m->label_speed->set_text(speedString(real));
-			} else {
+			if (real == desired)
+				m_label_speed.set_text
+					(real == 1000 ? std::string() : speedString(real));
+			else {
 				char buffer[128];
 				snprintf
 					(buffer, sizeof(buffer),
 					 _("%s (%s)"),
 					 speedString(real).c_str(), speedString(desired).c_str());
-				m->label_speed->set_text(buffer);
+				m_label_speed.set_text(buffer);
 			}
-		} else {
-			m->label_speed->set_text(_("NO GAME CONTROLLER"));
-		}
-		m->label_speed->set_visible(true);
-	} else {
-		m->label_speed->set_visible(false);
-	}
+		} else
+			m_label_speed.set_text(_("NO GAME CONTROLLER"));
+		m_label_speed.set_visible(true);
+	} else
+		m_label_speed.set_visible(false);
 }
 
 

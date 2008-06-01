@@ -64,16 +64,16 @@ void MilitarySite_Descr::parse
 	 Profile          * const prof,
 	 EncodeData const * const encdata)
 {
-	Section* sglobal = prof->get_section("global");
+	Section & global_s = prof->get_safe_section("global");
 
 	ProductionSite_Descr::parse(directory, prof, encdata);
 	m_stopable = false; //  Militarysites are not stopable.
 
-	m_conquer_radius=sglobal->get_safe_int("conquers");
-	m_num_soldiers=sglobal->get_safe_int("max_soldiers");
-	m_num_medics=sglobal->get_safe_int("max_medics");
-	m_heal_per_second=sglobal->get_safe_int("heal_per_second");
-	m_heal_incr_per_medic=sglobal->get_safe_int("heal_increase_per_medic");
+	m_conquer_radius      = global_s.get_safe_int("conquers");
+	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
+	m_num_medics          = global_s.get_safe_int("max_medics");
+	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
+	m_heal_incr_per_medic = global_s.get_safe_int("heal_increase_per_medic");
 	if (m_conquer_radius > 0)
 		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
 }

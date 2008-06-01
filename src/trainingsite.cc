@@ -69,20 +69,18 @@ TrainingSite_Descr::~TrainingSite_Descr() {}
  */
 void TrainingSite_Descr::parse(const char *directory, Profile * prof, const EncodeData * encdata)
 {
-	Section *sglobal;
-
 	assert(directory);
 	assert(prof);
 
 	ProductionSite_Descr::parse(directory, prof, encdata);
-	sglobal = prof->get_section("global");
+	Section & sglobal = prof->get_safe_section("global");
 	//TODO: what if there is no global section? can this happen?
 
 	m_stopable = true; // (defaults to false)
-	m_num_soldiers = sglobal->get_safe_int("max_soldiers");
+	m_num_soldiers = sglobal.get_safe_int("max_soldiers");
 
 	const std::vector<std::string> str_list
-		(split_string(sglobal->get_safe_string("train"), ","));
+		(split_string(sglobal.get_safe_string("train"), ","));
 	const std::vector<std::string>::const_iterator str_list_end = str_list.end();
 	for
 		(std::vector<std::string>::const_iterator it = str_list.begin();
@@ -98,28 +96,24 @@ void TrainingSite_Descr::parse(const char *directory, Profile * prof, const Enco
 
 	// Read the range of levels that can update this building
 	if (m_train_hp) {
-		Section *sect = prof->get_section("hp");
-		assert(sect);
-		m_min_hp = sect->get_safe_int("min_level");
-		m_max_hp = sect->get_safe_int("max_level");
+		Section & sect = prof->get_safe_section("hp");
+		m_min_hp = sect.get_safe_int("min_level");
+		m_max_hp = sect.get_safe_int("max_level");
 	}
 	if (m_train_attack) {
-		Section *sect = prof->get_section("attack");
-		assert(sect);
-		m_min_attack = sect->get_safe_int("min_level");
-		m_max_attack = sect->get_safe_int("max_level");
+		Section & sect = prof->get_safe_section("attack");
+		m_min_attack = sect.get_safe_int("min_level");
+		m_max_attack = sect.get_safe_int("max_level");
 	}
 	if (m_train_defense) {
-		Section *sect = prof->get_section("defense");
-		assert(sect);
-		m_min_defense = sect->get_safe_int("min_level");
-		m_max_defense = sect->get_safe_int("max_level");
+		Section & sect = prof->get_safe_section("defense");
+		m_min_defense = sect.get_safe_int("min_level");
+		m_max_defense = sect.get_safe_int("max_level");
 	}
 	if (m_train_evade) {
-		Section *sect = prof->get_section("evade");
-		assert(sect);
-		m_min_evade = sect->get_safe_int("min_level");
-		m_max_evade = sect->get_safe_int("max_level");
+		Section & sect = prof->get_safe_section("evade");
+		m_min_evade = sect.get_safe_int("min_level");
+		m_max_evade = sect.get_safe_int("max_level");
 	}
 }
 

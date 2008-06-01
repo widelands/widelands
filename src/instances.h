@@ -220,7 +220,8 @@ public:
 	virtual void act(Game*, uint32_t data);
 
 	// implementation is in game_debug_ui.cc
-	virtual void create_debug_panels(Editor_Game_Base* egbase, UI::Tab_Panel* tabs);
+	virtual void create_debug_panels
+		(Editor_Game_Base const & egbase, UI::Tab_Panel & tabs);
 
 	LogSink* get_logsink() {return m_logsink;}
 	void set_logsink(LogSink* sink);

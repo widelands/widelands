@@ -49,7 +49,7 @@ throw (_wexception)
 
 	try {
 		int32_t const packet_version =
-			prof.get_section("global")->get_int("packet_version");
+			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Map & map = egbase->map();
 			//  Nothing more. But read all pics.

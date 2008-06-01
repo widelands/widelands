@@ -62,13 +62,13 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 
 	try {
 		int32_t const packet_version =
-			prof.get_section("global")->get_int("packet_version");
+			prof.get_safe_section("global").get_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Player_Number const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
-				Section & s =*prof.get_section(buffer);
+				Section & s = prof.get_safe_section(buffer);
 				map->set_scenario_player_name (p, s.get_string("name",  ""));
 				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
 			}

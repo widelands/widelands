@@ -39,10 +39,10 @@ throw (_wexception)
 {
 	Profile prof;
 	prof.read("player_position", 0, fs);
-	Section & s = *prof.get_section("global");
+	Section & s = prof.get_safe_section("global");
 
 	try {
-		int32_t const packet_version = s.get_int("packet_version");
+		int32_t const packet_version = s.get_safe_int("packet_version");
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			//  Read all the positions
 			//  This could bring trouble if one player position/ is not set (this

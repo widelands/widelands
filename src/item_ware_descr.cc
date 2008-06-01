@@ -33,16 +33,16 @@ namespace Widelands {
 void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 {
 	char buffer[256];
-	const char* string;
-	Section* global = prof->get_safe_section("global");
+	Section & global = prof->get_safe_section("global");
 
-	m_descname = global->get_string("descname", name().c_str());
-	m_helptext = global->get_string
+	m_descname = global.get_string("descname", name().c_str());
+	m_helptext = global.get_string
 		("help", _("Doh... someone forgot the help text!"));
 
 	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
-	string = global->get_string("menu_pic", buffer);
-	snprintf(buffer, sizeof(buffer), "%s/%s", directory, string);
+	snprintf
+		(buffer, sizeof(buffer),
+		 "%s/%s", directory, global.get_string("menu_pic", buffer));
 	m_icon_fname = buffer;
 
 	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle")));

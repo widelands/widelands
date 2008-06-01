@@ -37,7 +37,7 @@ throw (_wexception)
 	Profile prof;
 	i18n::Textdomain textdomain("maps");
 	prof.read("elemental", 0, fs);
-	Section & s = *prof.get_section("global");
+	Section & s = prof.get_safe_section("global");
 
 	try {
 		int32_t const packet_version = s.get_int("packet_version");

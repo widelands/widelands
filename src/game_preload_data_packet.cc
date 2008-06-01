@@ -35,7 +35,7 @@ throw (_wexception)
 	Profile prof;
 	try {
 		prof.read("preload", 0, fs);
-		Section & s = *prof.get_section("global");
+		Section & s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			m_gametime = s.get_safe_int   ("gametime");

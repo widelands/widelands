@@ -51,17 +51,17 @@ clrkey_[r, g, b]     color key
 shadowclr_[r, g, b]  color for shadow pixels
 ===============
 */
-void EncodeData::parse(Section *s)
+void EncodeData::parse(Section & s)
 {
-	if (s->get_bool("playercolor", false))
+	if (s.get_bool("playercolor", false))
 		hasplrclrs = true;
 
 	// Read old-style player color codes
 	char key[] = "plrclr0_r";
 	for (uint8_t i = 0; i < 4; ++i, ++key[6]) {
-		key[8] = 'r'; const int32_t r = s->get_int(key, -1);
-		key[8] = 'g'; const int32_t g = s->get_int(key, -1);
-		key[8] = 'b'; const int32_t b = s->get_int(key, -1);
+		key[8] = 'r'; int32_t const r = s.get_int(key, -1);
+		key[8] = 'g'; int32_t const g = s.get_int(key, -1);
+		key[8] = 'b'; int32_t const b = s.get_int(key, -1);
 
 		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 			return;
@@ -141,7 +141,7 @@ void AnimationManager::flush()
 */
 uint32_t AnimationManager::get
 	(char       const * const directory,
-	 Section          * const s,
+	 Section          &       s,
 	 char       const *       picnametempl,
 	 EncodeData const * const encdefaults)
 {
@@ -158,31 +158,34 @@ uint32_t AnimationManager::get
 	ad->picnametempl = "";
 
 	// Determine picture name template
-	char templbuf[256]; // used when picnametempl == 0
-	char pictempl[256];
 
-	if (s->get_string("pics"))
-		picnametempl = s->get_string("pics");
-	else {
-		if (!picnametempl) {
-			snprintf(templbuf, sizeof(templbuf), "%s_??.png", s->get_name());
-			picnametempl = templbuf;
-		}
+	if (char const * const pics = s.get_string("pics"))
+		picnametempl = pics;
+	else if (!picnametempl) {
+		char templbuf[256];
+		snprintf(templbuf, sizeof(templbuf), "%s_??.png", s.get_name());
+		picnametempl = templbuf;
 	}
-	snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
-	if (pictempl[strlen(pictempl)-4]=='.') {
-		// delete extension
-		pictempl[strlen(pictempl)-4]='\0';
+	{
+		char pictempl[256];
+		snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
+		assert(4 <= strlen(pictempl));
+		size_t const len = strlen(pictempl) - 4;
+		if (pictempl[len] == '.')
+			pictempl[len] = '\0'; // delete extension
+		ad->picnametempl = pictempl;
 	}
-
-	ad->picnametempl = pictempl;
 
 	// Read mapping from frame numbers to sound effect names and load effects
 	// will yield strange results if there is a different number of sfx_frame and sfx_name
 	int32_t framenum;
 	const char *fxname;
 	ad->sfx_cues[123456]="dummy";
-	while (s->get_next_int("sfx_frame", &framenum)!=0 && s->get_next_string("sfx_name", &fxname)!=0) {
+	while
+		(s.get_next_int("sfx_frame", &framenum)
+		 &&
+		 s.get_next_string("sfx_name", &fxname))
+	{
 		//TODO: error handling
 		g_sound_handler.load_fx(directory, fxname);
 		ad->sfx_cues[framenum]=fxname;
@@ -195,12 +198,12 @@ uint32_t AnimationManager::get
 
 	ad->encdata.parse(s);
 
-	int32_t fps = s->get_int("fps");
+	int32_t fps = s.get_int("fps");
 	if (fps > 0)
 		ad->frametime = 1000 / fps;
 
 	// TODO: Frames of varying size / hotspot?
-	ad->hotspot = s->get_Point("hotspot");
+	ad->hotspot = s.get_Point("hotspot");
 
 	return id;
 }
@@ -344,14 +347,12 @@ void DirAnimations::parse
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		static const char *dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 		char sectname[300];
-		Section *s;
-
 
 		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
 
-		std::string anim_name = sectname;
+		std::string const anim_name = sectname;
 
-		s = prof->get_section(sectname);
+		Section * s = prof->get_section(sectname);
 		if (!s) {
 			if (!defaults)
 				throw wexception("Section [%s] missing and no default supplied", sectname);
@@ -359,7 +360,7 @@ void DirAnimations::parse
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir-1]);
-		m_animations[dir - 1] = g_anim.get(directory, s, sectname, encdefaults);
+		m_animations[dir - 1] = g_anim.get(directory, *s, sectname, encdefaults);
 		b->add_animation(anim_name.c_str(), m_animations[dir-1]);
 	}
 }

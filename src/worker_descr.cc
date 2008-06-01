@@ -109,36 +109,31 @@ void Worker_Descr::parse
 {
 	char buffer[256];
 	char fname[256];
-	Section* sglobal;
 
 	Bob::Descr::parse(directory, prof, encdata);
 
-	sglobal = prof->get_safe_section("global");
+	Section & global_s = prof->get_safe_section("global");
 
-	m_descname = sglobal->get_string("descname", name().c_str());
+	m_descname = global_s.get_string("descname", name().c_str());
 	m_helptext =
-		sglobal->get_string("help", _("Doh... someone forgot the help text!"));
+		global_s.get_string("help", _("Doh... someone forgot the help text!"));
 
 	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
-	const char * string = sglobal->get_string("menu_pic", buffer);
-	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
+	snprintf
+		(fname, sizeof(fname),
+		 "%s/%s", directory, global_s.get_string("menu_pic", buffer));
 	m_menu_pic_fname = strdup(fname);
 
 	// Read the costs of building
-	if (get_worker_type() == CARRIER || get_worker_type() == SOLDIER)
-		m_buildable = sglobal->get_bool("buildable", false);
-	else
-		m_buildable = sglobal->get_bool("buildable", true);
-
-	if (m_buildable) {
-		Section *s;
-
+	if
+		((m_buildable =
+		  	global_s.get_bool
+		  		("buildable",
+		  		 get_worker_type() != CARRIER and get_worker_type() != SOLDIER)))
+	{
 		// Get the buildcost
-		s = prof->get_safe_section("buildcost");
-
-		Section::Value *val;
-
-		while ((val = s->get_next_val(0)))
+		Section & s = prof->get_safe_section("buildcost");
+		while (Section::Value const * const val = s.get_next_val(0))
 			m_buildcost.push_back (CostItem(val->get_name(), val->get_int()));
 	}
 
@@ -155,14 +150,16 @@ void Worker_Descr::parse
 			 prof->get_section("walkload"),
 			 encdata);
 
-	// Read the sound effects
-	while (sglobal->get_next_string("soundfx", &string))
-		g_sound_handler.load_fx(directory, string);
+	{ // read the sound effects
+		char const * string;
+		while (global_s.get_next_string("soundfx", &string))
+			g_sound_handler.load_fx(directory, string);
+	}
 
 	// Read the becomes and experience
-	if (char const * const becomes_name = sglobal->get_string("becomes"))
+	if (char const * const becomes_name = global_s.get_string("becomes"))
 		becomes_map[this] = becomes_name;
-	std::string exp=sglobal->get_string("experience", "");
+	std::string const exp = global_s.get_string("experience", "");
 	m_min_experience=m_max_experience=-1;
 	if (exp.size()) {
 		std::vector<std::string> list(split_string(exp, "-"));
@@ -181,7 +178,8 @@ void Worker_Descr::parse
 	}
 
 	// Read programs
-	while (sglobal->get_next_string("program", &string)) {
+	char const * string;
+	while (global_s.get_next_string("program", &string)) {
 		WorkerProgram* prog = 0;
 
 		try {
@@ -250,8 +248,8 @@ Worker_Descr * Worker_Descr::create_from_dir
 	try
 	{
 		Profile prof(fname);
-		Section *s = prof.get_safe_section("global");
-		const char *type = s->get_safe_string("type");
+		char const * const type =
+			prof.get_safe_section("global").get_safe_string("type");
 
 		if (!strcasecmp(type, "generic"))
 			descr = new Worker_Descr(tribe, name);

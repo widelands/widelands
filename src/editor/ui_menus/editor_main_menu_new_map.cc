@@ -106,7 +106,7 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 
 	posy += 20 + spacing + spacing;
 
-	Widelands::World::get_all_worlds(&m_worlds);
+	Widelands::World::get_all_worlds(m_worlds);
 
 	assert(m_worlds.size());
 	m_currentworld = 0;

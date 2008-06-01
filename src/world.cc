@@ -216,20 +216,13 @@ void World::parse_root_conf(const char *name)
 	try
 	{
 		Profile prof(fname);
-		Section* s;
-
-		s = prof.get_safe_section("world");
-
-		const char* str;
-
-		str = s->get_string("name", name);
-		snprintf(hd.name, sizeof(hd.name), "%s", str);
-
-		str = s->get_safe_string("author");
-		snprintf(hd.author, sizeof(hd.author), "%s", str);
-
-		str = s->get_safe_string("descr");
-		snprintf(hd.descr, sizeof(hd.descr), "%s", str);
+		Section & s = prof.get_safe_section("world");
+		snprintf
+			(hd.name,   sizeof(hd.name),   "%s", s.get_string     ("name", name));
+		snprintf
+			(hd.author, sizeof(hd.author), "%s", s.get_safe_string("author"));
+		snprintf
+			(hd.descr,  sizeof(hd.descr),  "%s", s.get_safe_string("descr"));
 
 		prof.check_used();
 	}
@@ -314,8 +307,8 @@ void World::parse_bobs()
 		try
 		{
 			Profile prof(fname, "global"); // section-less file
-			Section *s = prof.get_safe_section("global");
-			const char *type = s->get_safe_string("type");
+			char const * const type =
+				prof.get_safe_section("global").get_safe_string("type");
 
 			if (!strcasecmp(type, "critter")) {
 				Bob::Descr *descr;
@@ -348,11 +341,8 @@ bool World::exists_world(std::string worldname)
 		 "conf");
 }
 
-/*
- * World::get_all_worlds()
- */
-void World::get_all_worlds(std::vector<std::string>* retval) {
-	retval->clear();
+void World::get_all_worlds(std::vector<std::string> & result) {
+	result.clear();
 
 	//  get all worlds
 	filenameset_t m_worlds;
@@ -365,7 +355,7 @@ void World::get_all_worlds(std::vector<std::string>* retval) {
 		std::string world = *pname;
 		world.erase(0, 7); //  remove worlds/
 		if (World::exists_world(world.c_str()))
-			retval->push_back(world);
+			result.push_back(world);
 	}
 }
 

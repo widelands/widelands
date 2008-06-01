@@ -298,13 +298,15 @@ void RealFSImpl::MakeDirectory(std::string const & dirname) {
 
 	std::string const fullname = FS_CanonicalizeName(dirname);
 
-	int32_t retval=0;
+	if
+		(mkdir
 #ifdef WIN32
-	retval=mkdir(fullname.c_str());
+		 	(fullname.c_str())
 #else
-	retval=mkdir(fullname.c_str(), 0x1FF);
+		 	(fullname.c_str(), 0x1FF)
 #endif
-	if (retval == -1)
+		 ==
+		 -1)
 		throw wexception
 			("Couldn't create directory %s: %s",
 			 dirname.c_str(), strerror(errno));

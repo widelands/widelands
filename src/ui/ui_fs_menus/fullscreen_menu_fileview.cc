@@ -41,7 +41,7 @@ close_button
 		i18n::Textdomain textdomain("texts");
 
 		Profile prof(filename.c_str(), "global"); //  section-less file
-		Section & section = *prof.get_section("global");
+		Section & section = prof.get_safe_section("global");
 
 		title   .set_text(section.get_safe_string("title"));
 		textview.set_text(section.get_safe_string("text"));
@@ -76,12 +76,12 @@ FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* re
 	i18n::grab_textdomain("texts");
 
 	Profile prof(filename.c_str(), "global"); // section-less file
-	Section * const s = prof.get_section("global");
+	Section & s = prof.get_safe_section("global");
 	i18n::release_textdomain();
 
-	set_title(s->get_safe_string("title"));
+	set_title(s.get_safe_string("title"));
 
-	textview.set_text(s->get_safe_string("text"));
+	textview.set_text(s.get_safe_string("text"));
 	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);

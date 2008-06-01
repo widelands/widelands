@@ -177,9 +177,6 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::~Editor_Tool_Set_Terrain_Tool_Options
 }
 
 
-void Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing(int32_t, bool) {}
-
-
 void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
@@ -196,7 +193,11 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 			//TODO: the uint32_t cast is ugly!
 			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n)) {
 				m_checkboxes[i]->changedtoid.set
-					(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing);
+					(this,
+					 static_cast
+					 	<void (Editor_Tool_Set_Terrain_Tool_Options_Menu::*)
+					 	(int32_t, bool)>
+					 	(0));
 				m_checkboxes[i]->set_state(false);
 				m_checkboxes[i]->changedtoid.set
 					(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);

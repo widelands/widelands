@@ -30,13 +30,13 @@
  * A fullscreen menu is a menu which takes the full screen; it has the size
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
-class Fullscreen_Menu_Base : public UI::Panel {
-	uint32_t m_pic_background;
-
-public:
+struct Fullscreen_Menu_Base : public UI::Panel {
 	Fullscreen_Menu_Base(const char *bgpic);
 
 	virtual void draw(RenderTarget* dst);
+
+private:
+	uint32_t m_pic_background;
 };
 
 

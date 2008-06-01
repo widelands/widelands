@@ -96,23 +96,22 @@ void Computer_Player::late_initialization ()
 	std::string tribehints = "tribes/"+ tribe->name() + "/cphints";
 	if (g_fs->FileExists(tribehints)) {
 		Profile prof(tribehints.c_str());
-		Section *hints;
-		hints = prof.get_section("global");
+		Section & hints = prof.get_safe_section("global");
 
 		char warename[32];
 		char wareprec[32];
-		for (int32_t i = 0; i < hints->get_safe_int("numofwares"); ++i) {
+		for (int32_t i = 0; i < hints.get_safe_int("numofwares"); ++i) {
 			sprintf(warename, "ware_n_%i", i);
 			sprintf(wareprec, "ware_p_%i", i);
-			int32_t wprec = hints->get_safe_int(wareprec);
-			wares[tribe->safe_ware_index(hints->get_safe_string(warename)).value()]
+			int32_t const wprec = hints.get_safe_int(wareprec);
+			wares[tribe->safe_ware_index(hints.get_safe_string(warename)).value()]
 				.preciousness
 				=
 				wprec;
 		}
-		stoneproducer = hints->get_safe_string("stoneproducer");
-		trunkproducer = hints->get_safe_string("trunkproducer");
-		forester = hints->get_safe_string("forester");
+		stoneproducer = hints.get_safe_string("stoneproducer");
+		trunkproducer = hints.get_safe_string("trunkproducer");
+		forester = hints.get_safe_string("forester");
 
 	} else {
 		log("   WARNING: No computerplayer hints for tribe %s found\n", tribe->name().c_str());

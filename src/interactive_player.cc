@@ -58,8 +58,7 @@ using Widelands::Map;
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
 
-class ChatDisplay : public UI::Panel {
-public:
+struct ChatDisplay : public UI::Panel {
 	ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	void setChatProvider(ChatProvider* chat);
@@ -107,7 +106,7 @@ void ChatDisplay::draw(RenderTarget* dst)
 			break;
 
 		displaylist.push_back(d);
-		idx--;
+		--idx;
 	}
 
 	uint32_t y = 0;

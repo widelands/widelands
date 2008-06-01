@@ -762,17 +762,16 @@ Section *Profile::get_section(const char *name)
 	return 0;
 }
 
-/** Profile::get_safe_section(const char *name)
- *
+/**
  * Safely get a section of the given name.
  * If the section doesn't exist, an exception is thrown.
  */
-Section *Profile::get_safe_section(const char *name)
+Section & Profile::get_safe_section(char const * const name)
 {
-	Section *s = get_section(name);
-	if (!s)
+	if (Section * const s = get_section(name))
+		return *s;
+	else
 		throw wexception("Section [%s] not found", name);
-	return s;
 }
 
 /** Profile::pull_section(const char *name)

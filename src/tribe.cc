@@ -121,66 +121,61 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 	try
 	{
 		Profile prof(fname);
-		Section *s;
 
-		// Section [tribe]
-		s = prof.get_safe_section("tribe");
-
-		s->get_string("author");
-		s->get_string("name"); // descriptive name
-		s->get_string("descr"); // long description
-
-		m_bob_vision_range = s->get_int("bob_vision_range");
-
-		// Section [defaults]
-		s = prof.get_section("defaults");
-
-		if (s)
-			m_default_encdata.parse(s);
-
-		// Section [frontier]
-		s = prof.get_section("frontier");
-		if (!s)
-			throw wexception("Missing section [frontier]");
-
-		m_anim_frontier = g_anim.get(directory, s, 0, &m_default_encdata);
-
-		// Section [flag]
-		s = prof.get_section("flag");
-		if (!s)
-			throw wexception("Missing section [flag]");
-
-		m_anim_flag = g_anim.get(directory, s, 0, &m_default_encdata);
-
-		s = prof.get_safe_section("startwares");
-		Section::Value * value;
-
-		while ((value = s->get_next_val(0))) {
-			if (not m_wares.exists(value->get_name()))
-				throw wexception
-					("In section [startwares], ware %s is not know!", value->get_name());
-
-			std::string valuename   = value->get_name();
-			m_startwares[valuename] = value->get_int();
+		{
+			Section & tribe_s = prof.get_safe_section("tribe");
+			tribe_s.get_string("author");
+			tribe_s.get_string("name"); // descriptive name
+			tribe_s.get_string("descr"); // long description
+			m_bob_vision_range = tribe_s.get_int("bob_vision_range");
 		}
 
-		s = prof.get_safe_section("startworkers");
-		while ((value = s->get_next_val(0)))
-			if (strcmp(value->get_name(), "soldier")) { // Ignore soldiers here
-				if (not m_workers.exists(value->get_name()))
+		if (Section * const defaults_s = prof.get_section("defaults"))
+			m_default_encdata.parse(*defaults_s);
+
+		m_anim_frontier =
+			g_anim.get
+				(directory,
+				 prof.get_safe_section("frontier"),
+				 0,
+				 &m_default_encdata);
+
+		m_anim_flag =
+			g_anim.get
+				(directory,
+				 prof.get_safe_section("flag"),
+				 0,
+				 &m_default_encdata);
+
+		{
+			Section & swa_s = prof.get_safe_section("startwares");
+			while (Section::Value const * const value = swa_s.get_next_val(0)) {
+				if (not m_wares.exists(value->get_name()))
 					throw wexception
-						("In section [startworkers], worker %s is not know!",
+						("In section [startwares], ware %s is not know!",
 						 value->get_name());
-
-				std::string valuename     = value->get_name();
-				m_startworkers[valuename] = value->get_int();
+				m_startwares[value->get_name()] = value->get_int();
 			}
+		}
 
-		s = prof.get_safe_section("startsoldiers");
-		while ((value = s->get_next_val(0))) {
-			//  NOTE no check here since we do not know about max levels and so on
-			std::string soldier=value->get_name();
-			m_startsoldiers[soldier]=value->get_int();
+		{
+			Section & swo_s = prof.get_safe_section("startworkers");
+			while (Section::Value const * const value = swo_s.get_next_val(0)) {
+				if (strcmp(value->get_name(), "soldier")) { // Ignore soldiers here
+					if (not m_workers.exists(value->get_name()))
+						throw wexception
+							("In section [startworkers], worker %s is not know!",
+							 value->get_name());
+					m_startworkers[value->get_name()] = value->get_int();
+				}
+			}
+		}
+
+		{
+			Section & sso_s = prof.get_safe_section("startsoldiers");
+			while (Section::Value const * const value = sso_s.get_next_val(0))
+				//  NOTE no check here; we do not know about max levels and so on
+				m_startsoldiers[value->get_name()] = value->get_int();
 		}
 	} catch (const std::exception & e) {
 		throw wexception("%s: %s", fname, e.what());
@@ -429,18 +424,18 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 		try
 		{
 			Profile prof(fname, "global"); // section-less file
-			Section *s = prof.get_safe_section("global");
-			const char *type = s->get_safe_string("type");
-
-			if (!strcasecmp(type, "critter")) {
-				Bob::Descr *descr;
-				descr = Bob::Descr::create_from_dir(dirname, it->c_str(), &prof, this);
-				m_bobs.add(descr);
-			} else {
+			if
+				(strcasecmp
+				 	(prof.get_safe_section("global").get_safe_string("type"),
+				 	 "critter"))
+			{
 				Immovable_Descr * const descr = new Immovable_Descr(this, dirname);
 				descr->parse(it->c_str(), &prof);
 				m_immovables.add(descr);
-			}
+			} else
+				m_bobs.add
+					(Bob::Descr::create_from_dir
+					 	(dirname, it->c_str(), &prof, this));
 		} catch (std::exception &e) {
 			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
 		} catch (...) {
@@ -530,10 +525,9 @@ bool Tribe_Descr::exists_tribe(const std::string & name, TribeBasicInfo* info) {
 	if (f.TryOpen(*g_fs, buf.c_str())) {
 		if (info) {
 			Profile prof(buf.c_str());
-			Section *s = prof.get_safe_section("tribe");
-
 			info->name = name;
-			info->uiposition = s->get_int("uiposition", 0);
+			info->uiposition =
+				prof.get_safe_section("tribe").get_int("uiposition", 0);
 		}
 
 		return true;

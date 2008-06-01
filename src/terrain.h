@@ -166,13 +166,13 @@ template<typename T> static void render_edge_lists
 				*scanline++ = texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
 
 				b += dbdx;
-				tx++;
+				++tx;
 				ty += dtydx;
 			}
 		}
 
 		// Advance the line
-		y++;
+		++y;
 		left->x0 += left->dx;
 		left->tx0 += left->dtx;
 		left->ty0 += left->dty;
@@ -180,10 +180,10 @@ template<typename T> static void render_edge_lists
 		right->x0 += right->dx;
 
 		if (--left->height == 0)
-			left++;
+			++left;
 		if (--right->height == 0)
-			right++;
-		height--;
+			++right;
+		--height;
 	}
 }
 
