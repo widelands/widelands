@@ -22,6 +22,7 @@
 #include "config.h"
 
 #include <libintl.h>
+#include <stdlib.h>
 
 namespace i18n {
 
@@ -94,6 +95,11 @@ void set_locale(char const * const name) {
 
 #ifdef _WIN32
 	putenv((std::string("LANG=") + name).c_str());
+#endif
+
+#ifdef linux
+	setenv ("LANG",     name, 1);
+	setenv ("LANGUAGE", name, 1);
 #endif
 
 	setlocale(LC_ALL, name); //  call to libintl
