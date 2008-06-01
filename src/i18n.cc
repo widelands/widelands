@@ -22,7 +22,6 @@
 #include "config.h"
 
 #include <libintl.h>
-#include <stdlib.h>
 
 namespace i18n {
 
