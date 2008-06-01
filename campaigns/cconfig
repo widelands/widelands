@@ -9,7 +9,7 @@
 #
 # version     = Version-number of this file - used to check, whether campvis-
 #               file needs to be updated. Higher the value, if you added a map
-#               or campaign or if you changed a visiblity-value.
+#               or campaign or if you changed a visibility-value.
 # campname??  = Name of the Campaign with the number ??.
 # campsect??  = Name of section, to be loaded, if this campaign is selected.
 # campdiff??  = Level of difficulty 1-3 (easy to hard) (this is only a visua-
