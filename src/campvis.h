@@ -32,6 +32,7 @@ struct Campaign_visiblity_save {
 
 private:
 	void make_campvis(std::string);
+	void update_campvis(std::string);
 };
 
 
