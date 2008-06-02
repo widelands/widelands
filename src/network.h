@@ -119,7 +119,8 @@ private:
 struct Deserializer {
 	/**
 	 * Read data from the given socket.
-	 * \return \c false if the socket was disconnected or another error occured.
+	 * \return \c false if the socket was disconnected or another error
+	 * occurred.
 	 * \c true if some data could be read (this does not imply that \ref avail
 	 * will return \c true !)
 	 */

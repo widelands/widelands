@@ -59,7 +59,7 @@ enum {
  * These are the command codes used in the in-game network protocol.
  *
  * The in-game network protocol is responsible for the game setup phase, i.e.
- * setting up the map, chosing tribes and so on, as well as for the actual
+ * setting up the map, choosing tribes and so on, as well as for the actual
  * running game itself. It is \em not responsible for game discovery and
  * other "lobby" functionality.
  *

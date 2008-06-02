@@ -79,7 +79,7 @@ struct BobProgramBase {
  * To implement a new Task, you need to create a new Task object with an
  * update() function. This update() function is called in one of the following
  * situations:
- * \li a timeout set by \ref schedule_act() has occured
+ * \li a timeout set by \ref schedule_act() has occurred
  * \li the task has just been started via \ref push_task()
  * \li the child task has ended via \ref pop_task()
  * \li a signal has been sent via \ref send_signal()

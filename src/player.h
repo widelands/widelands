@@ -205,15 +205,15 @@ struct Player :
 		Widelands::Field::Resource_Amounts resource_amounts;
 
 		/**
-		 * Wether there is a road between this node and the node to the east,
+		 * Whether there is a road between this node and the node to the east,
 		 * as far as this player knows.
 		 * Only valid when this player has seen this node or the node to the east.
 		 */
 		uint8_t road_e() const throw () {return roads & Road_Mask;}
 
 		/**
-		 * Wether there is a road between this node and the node to the southeast,
-		 * as far as this player knows.
+		 * Whether there is a road between this node and the node to the
+		 * southeast, as far as this player knows.
 		 * Only valid when this player has seen this node or the node to the
 		 * southeast.
 		 */
@@ -221,8 +221,8 @@ struct Player :
 		{return roads >> Road_SouthEast & Road_Mask;}
 
 		/**
-		 * Wether there is a road between this node and the node to the southwest,
-		 * as far as this player knows.
+		 * Whether there is a road between this node and the node to the
+		 * southwest, as far as this player knows.
 		 * Only valid when this player has seen this node or the node to the
 		 * southwest.
 		 */

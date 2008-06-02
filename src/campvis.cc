@@ -26,7 +26,7 @@
 #include <stdlib.h>
 
 /**
- * Get the path of campaign visiblity save-file
+ * Get the path of campaign visibility save-file
  */
 std::string Campaign_visiblity_save::get_path()
 {
@@ -40,11 +40,11 @@ std::string Campaign_visiblity_save::get_path()
 	g_fs->EnsureDirectoryExists(savepath); // Make sure ssave directory exists
 	savepath += "/campvis"; // add the name of save-file
 
-	// check if campaigns visiblity-save is available
+	// check if campaigns visibility-save is available
 	if (!(g_fs->FileExists(savepath)))
 		make_campvis(savepath);
 
-	// check if campaigns visiblity-save is up to date
+	// check if campaigns visibility-save is up to date
 	Profile ca(savepath.c_str());
 	if(!ca.get_section("global")) // 1st version of campvis had no global section
 		update_campvis(savepath);
@@ -61,7 +61,7 @@ std::string Campaign_visiblity_save::get_path()
 
 
 /**
- * Create the campaign visiblity save-file of the user
+ * Create the campaign visibility save-file of the user
  */
 void Campaign_visiblity_save::make_campvis(std::string savepath)
 {
@@ -78,7 +78,7 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
 
 
 /**
- * Update the campaign visiblity save-file of the user
+ * Update the campaign visibility save-file of the user
  */
 void Campaign_visiblity_save::update_campvis(std::string savepath)
 {
@@ -102,7 +102,7 @@ void Campaign_visiblity_save::update_campvis(std::string savepath)
 	vis = campvisw.pull_section("global");
 	vis->set_int("version", cconf_s.get_int("version"), 1);
 
-	// Write down visiblity of campaigns
+	// Write down visibility of campaigns
 	Section & campv_s = campvisr.get_safe_section("campaigns");
 	vis = campvisw.pull_section("campaigns");
 	sprintf(cvisible, "campvisi%i", i);
@@ -116,7 +116,7 @@ void Campaign_visiblity_save::update_campvis(std::string savepath)
 		sprintf(csection, "campsect%i", i);
 	}
 
-	// Write down visiblity of campaign maps
+	// Write down visibility of campaign maps
 	campv_s = campvisr.get_safe_section("campmaps");
 	vis = campvisw.pull_section("campmaps");
 	i = 0;
