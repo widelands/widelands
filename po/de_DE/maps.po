@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2008-01-29 21:41+0100\n"
+"POT-Creation-Date: 2008-06-03 15:53+0000\n"
+"PO-Revision-Date: 2008-06-03 17:59+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,203 +16,203 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: ../../campaigns/cconfig:16
+#: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
 msgstr "(Tutorial) Barbaren - Das zweite Kaiserreich"
 
-#: ../../campaigns/cconfig:19
+#: ../../campaigns/cconfig:27
 msgid "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
 msgstr "Als Chat’Karuth starb, war er ein alter Mann, Vater von drei starken und tapferen Söhnen und Kriegsherr über eine Armee, die sich gegen eine jede Armee behaupten konnte, die sich gegen die alten Wälder wandten. Nach seiner glorreichen Regierung, überließ Chat’Karuth seinem ältesten Sohn den Thron in der Hoffnung, dass dieser ihn noch als Kriegsherr übertreffen würde. – Eine Entscheidung, die die beiden jüngeren Brüder unzufrieden ließ. Der alte Kriegsherr wusste das. Wie sein Vater im riet, verließ er die Hauptstadt von Al’thunran, um seine Regierung und seine Kräfte zwischen den alten Bäumen auf den Hügeln im Westen zu sammeln. Dort beerdigte er den Körper seines Vaters und schwor zu den Göttern und den Geistern, das er zurückkehren würde, um die Ordnung wieder herzustellen. Und während seine Brüder in blinder Wut gegen ihn und die wenigen hinterbliebenen Kräfte an den Grenzen von Al’thunran zogen, suchte er nach einer Möglichkeit für eine Wiedervereinigung um die vielen einzelnen Stämme endlich wieder unter einem Banner zu vereinen."
 
-#: ../../campaigns/cconfig:22
+#: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
 msgstr "Imperium - Die Monate im Exil"
 
-#: ../../campaigns/cconfig:25
+#: ../../campaigns/cconfig:33
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr "Vor sechs Monaten, wurde Lutius - ein junger General des Imperiums - mit 150 Soldaten an die Grenze zwischen den nördlichen Wäldern geschickt. In diesem Gebiet, wo sich das Einflussgebiet der Barbaren und imperiale Grenzen schneiden, sollte er für die Sicherheit des Imperiums sorgen. Zu erst war alles ruhig, er sprach sogar mit einigen Kindern der Barbaren und träumte von einem friedlichen Miteinander mit diesem archaischen Volk. Schon bald fühlte er sich immer sicherer und seine Soldaten ließen immer mehr die Aufmerksamkeit von ihrem potentiellen Feind fallen. Das war ihr Fehler. In einer Nacht im März wurde seine unvorbereitete Truppe von 100 barbarischen Kriegern angegriffen und total aufgerieben. Nur mit dem puren Leben, konnten Lutius und eine kleine Gruppe seiner Soldaten entkommen."
 
-#: ../../campaigns/cconfig:42
+#: ../../campaigns/cconfig:50
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Tutorial1 - Augen im Dunkeln"
 
-#: ../../campaigns/cconfig:44
+#: ../../campaigns/cconfig:52
 msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
 msgstr "Erste Mission des Tutorials der Barbaren. In dieser Karte werden die Grundzüge des Spiels, wie Kontrollen und Spielsteuerungen gezeigt. Auch der Aufbau einer Grundwirtschaft (Holz, Steine, etc.) wird erklärt."
 
-#: ../../campaigns/cconfig:49
+#: ../../campaigns/cconfig:57
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Tutorial2 - Ein Ort wie zuhause"
 
-#: ../../campaigns/cconfig:51
+#: ../../campaigns/cconfig:59
 msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
 msgstr "Zweite Mission des Tutorials der Barbaren. In dieser Karte werden die weiteren Wirtschaftszweige, inklusive des Bergbaus und die Vergrößerung des Einflussbereichs erklärt."
 
-#: ../../campaigns/cconfig:58
+#: ../../campaigns/cconfig:65
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Tutorial1 - Die Strände von Malac' Mor"
 
-#: ../../campaigns/cconfig:60
+#: ../../campaigns/cconfig:67
 msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
 msgstr "Nach dem er eine wichtige Schlacht gegen die Barbaren - die zum Verlust eines größeren Gebietes des Imperium führte - verloren hatte, verließ Lutius Fremil, um ein neues Leben zu beginnen. Doch sein Schicksal trieb sein Schiff in einen schweren Sturm, der diesem großen Schaden zufügte. Nur mit viel Glück konnte er sich und seine Leute an einen unbekannten Wüstenstrand retten."
 
-#: ../../campaigns/cconfig:65
+#: ../../campaigns/cconfig:72
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Tutorial2 - Ein Außenposten für das Exil"
 
-#: ../../campaigns/cconfig:67
+#: ../../campaigns/cconfig:74
 msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
 msgstr "Schließlich war das Schiff endlich repariert. Und so fuhren Lutius und seine Leute wieder los, um sich wieder auf die Suche nach einen Platz für ihren Neuanfang zu machen. Und so vergingen einige Tage auf See, bis sie schließlich eine grüne, mediterrane Insel erreichten, die dem Paradies sehr nahe kam."
 
-#: ../../maps\Checkmate.wmf\elemental:7
+#: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
 msgstr "Freundschaftstest"
 
-#: ../../maps\Checkmate.wmf\elemental:9
+#: ../../maps/Checkmate.wmf/elemental:9
 msgid "Whether just one of nature's strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
 msgstr "Vielleicht ist es eine der seltsamsten Launen der Natur oder ein Gedanke im Kopf eines bösartigen (und spielsüchtigen) Gottes, doch so oder so ruft dieses verrückte Kriegsgebiet nach zwei neuen Gegnern und einer neuen Konfrontation."
 
-#: ../../maps\Comet Island.wmf\elemental:7
+#: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
 msgstr "Kometen Insel"
 
-#: ../../maps\Comet Island.wmf\elemental:9
+#: ../../maps/Comet Island.wmf/elemental:9
 msgid "A few miles in front of Gerion Coast lies a small unnamed island. Until now, you have not seen any reason, to ship there, but yesterday a big fireball came from the sky and touched down in it's middle. Is this a sign of the Gods? You believe it is and you hope, that your tribe will find the treasure of this island, before other tribes will follow."
 msgstr "Ein paar Meilen vor der Gerion Küste liegt seit eh und je eine kleine, namenlose Insel. Bisher gab es für dich nie einen Grund zu ihr herüber zu fahren, doch gestern kam urplötzlich ein Feuerball vom Himmel, der in der Mitte der Insel zu Boden ging. War das ein Zeichen der Götter? Du bist dir sicher, dass es eines war und du hoffst, dass dein Stamm die Schätze dieser Insel finden kann, bevor es einer der anderen Stämme tut."
 
-#: ../../maps\Dry Riverbed.wmf\elemental:7
+#: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
 msgstr "Trockenes Flussbett"
 
-#: ../../maps\Dry Riverbed.wmf\elemental:9
+#: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
 msgstr "Es ist lange her, seit der letzte Regentropfen den staubigen Boden dieser Landschaft berührte. Und so ist es auch nicht verwunderlich, dass dieses Flussbett schon fast völlig trocken liegt. Jeder weiß, dass bald ein Krieg um das letzte verbliebene Wasser ausbrechen wird..."
 
-#: ../../maps\Elven Forests.wmf\elemental:7
+#: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Elfenwälder"
 
-#: ../../maps\Elven Forests.wmf\elemental:9
+#: ../../maps/Elven Forests.wmf/elemental:9
 msgid "The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
 msgstr "Die atemberaubende Schönheit dieses magischen Landes hat schon häufiger einen Stamm dazu getrieben, es für sich zu beanspruchen."
 
-#: ../../maps\Enemy in sight.wmf\elemental:7
+#: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
 msgstr "Feind in Sicht"
 
-#: ../../maps\Enemy in sight.wmf\elemental:9
+#: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr "Eine Mehrspielerkarte auf einer X-förmigen Insel"
 
-#: ../../maps\Finlakes.wmf\elemental:9
+#: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finish Lakes"
 msgstr "Finnische Seen"
 
-#: ../../maps\Finlakes.wmf\elemental:11
+#: ../../maps/Finlakes.wmf/elemental:11
 msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr "Dies sind die wunderschönen finnischen Lande, die sich vor allem durch Seen, Flüsse, uralte Wälder und Berge auszeichnen. Nun ist es an Dir, Deinen Weg zu finden..."
 
-#: ../../maps\Firegames.wmf\elemental:7
+#: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
 msgstr "Feuerspiele"
 
-#: ../../maps\Firegames.wmf\elemental:9
-msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but noone knows, what might happen if you meet an opponent tribe?"
+#: ../../maps/Firegames.wmf/elemental:9
+msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but no-one knows, what might happen if you meet an opponent tribe?"
 msgstr "Ist es ein Test der Götter oder ein böser Plan von jemand anderem, dass Deine Gefolgschaft und Du heute morgen auf dieser Insel zwischen Feuer und Lava erwachen musstet? Bisher scheint alles ruhig und verlassen zu sein. Doch niemand weiß was kommen mag, wenn Du auf andere Menschen triffst."
 
-#: ../../maps\Four Castles.wmf\elemental:7
+#: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
 msgstr "Vier Burgen"
 
-#: ../../maps\Four Castles.wmf\elemental:9
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
 msgstr "Gut geschützt in ihren kraftstrotzenden Festungen sitzen vier machtgierige Anführer. Und jeder für sich schmieden Sie Pläne, wie dieser Landstrich einzunehmen sei."
 
-#: ../../maps\Glacier Lake.wmf\elemental:7
+#: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
 msgstr "Gletschersee"
 
-#: ../../maps\Glacier Lake.wmf\elemental:9
+#: ../../maps/Glacier Lake.wmf/elemental:9
 msgid "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
 msgstr "Schon seit geraumer Zeit wohnten die Leute unter Deiner Führung an diesem schönen, einsamen Gletschersee. Niemand störte Euch. An Rohstoffen mangelte es nicht. Doch vor einigen Monaten gelangte ein zweiter Stamm über die Berge und ließ sich nieder. Du bist Dir sicher, dass der Raum nur für einen Stamm vorgesehen ist."
 
-#: ../../maps\Golden Peninsula.wmf\elemental:7
+#: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
 msgstr "Goldene Insel"
 
-#: ../../maps\Golden Peninsula.wmf\elemental:9
+#: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr "Zwei Imperien breiten sich aus, um den Schatz einer legendären Halbinsel zu finden..."
 
-#: ../../maps\Impact.wmf\elemental:7
+#: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
 msgstr "Einschlag"
 
-#: ../../maps\Impact.wmf\elemental:9
+#: ../../maps/Impact.wmf/elemental:9
 msgid "After an impact of an asteroid and the following harsh winter, three isles are connected by ice and stone, setting an end to the peaceful coexistence of three tribes."
 msgstr "Nach dem Einschlag eines Asteroiden und dem darauffolgenden, harten Winter werden urplötzlich drei Inseln durch Eis und Felstrümmer verbunden. Dies ist das Ende des friedlichen Miteinander der drei Inselstämme."
 
-#: ../../maps\Lake of tranquility.wmf\elemental:7
+#: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr "See der Ruhe"
 
-#: ../../maps\Lake of tranquility.wmf\elemental:9
+#: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
 msgstr "Dieser See, in den Tiefen der ältesten Wälder, war lange Zeit für seine Schönheit und den idyllischen Frieden bekannt. Doch seit kurzer Zeit streifen zwei gefährliche Stämme um ihn herum."
 
-#: ../../maps\Plateau.wmf\elemental:7
+#: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
 msgstr "Das grüne Plateau"
 
-#: ../../maps\Plateau.wmf\elemental:9
+#: ../../maps/Plateau.wmf/elemental:9
 msgid "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
 msgstr "Du stehst auf einer Insel, die von einem mächtigen Berg gekrönt wird. In ihm steckt der große Schatz dieser Insel - das grüne Plateau. Es ist schwer zu bekommen und schnell wieder verloren. Wenn Du es also halten willst, beobachte jeden Schritt Deiner Gegner."
 
-#: ../../maps\Riverlands.wmf\elemental:7
+#: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
 msgstr "Land der Flüsse"
 
-#: ../../maps\Riverlands.wmf\elemental:9
+#: ../../maps/Riverlands.wmf/elemental:9
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
 msgstr "Ein mystisches Land, voll von verschiedenen Landschaften, die alle durch eine handvoll großer Flüsse durchflossen werden."
 
-#: ../../maps\The Oasis Triangle.wmf\elemental:7
+#: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
 msgstr "Das Oasen-Dreieck"
 
-#: ../../maps\The Oasis Triangle.wmf\elemental:9
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
 msgstr "Es ist etwas Mystisches, wie eine graue Atmosphäre, dass diese drei Oasen umhüllt. Und doch hat bisher niemand den Grund hierfür finden können. Vielleicht wirst Du der Erste sein, der das Geheimnis lüftet. Doch bedenke, dass Du nicht der Einzige bist, der danach sucht."
 
-#: ../../maps\The big lake.wmf\elemental:7
+#: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
 msgstr "Der große See"
 
-#: ../../maps\The big lake.wmf\elemental:9
+#: ../../maps/The big lake.wmf/elemental:9
 msgid "This island once came out of the deepest grounds of the sea. In those days, fire rose out of the salty seawater and brought ash, stones and earth to daylight. And the fire came nearer and nearer to the sun, while the mountain grew and grew. Until one day, when the whole firemountain exploded. Nowadays only this ring is left from that mighty firemountain. Do you think, that it is big enough for more than one tribe?"
 msgstr "Diese Insel kam einst aus den tiefsten Gründen des Meeres. In jenen Tagen kam Feuer aus den salzigen Wasser des Meeres und brachte Asche, Steine und Erde ans Tageslicht. Und das Feuer kam näher und näher an die Sonne, während der Berg immer weiter wuchs. Bis zu dem Tage, als der ganze Feuerberg explodierte. In den heutigen Tagen ist nur noch dieser Ring von jenem mächtigen Feuerberg übrig. Denkst du dass er für mehr als einen Stamm Platz bietet?"
 
-#: ../../maps\The long way.wmf\elemental:7
+#: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
 msgstr "Der lange Weg"
 
-#: ../../maps\The long way.wmf\elemental:9
+#: ../../maps/The long way.wmf/elemental:9
 msgid "Another strange test by the Gods. To reach the other side, there seems to be no other way, than occupying the land of your enemies."
 msgstr "Ein anderer seltsamer Test der Götter. Um die andere Seite zu erreichen, scheint es keinen anderen Weg zu geben, als das Land deiner Gegner zu besetzen."
 
-#: ../../maps\Two frontiers.wmf\elemental:7
+#: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "Zwei Grenzen"
 
-#: ../../maps\Two frontiers.wmf\elemental:9
+#: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
 msgstr "Eine Mehrspielerkarte auf einer kleinen, kreisförmigen Insel."
 
-#: ../../maps\War of the Valleys.wmf\elemental:7
+#: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Krieg der Täler"
 
-#: ../../maps\War of the Valleys.wmf\elemental:9
+#: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr "Man sagt, dass sogar Sonne und Mond ihren Weg durch die Täler dieser Berge suchen müssen. TIPP: Obelisken markieren Erzvorkommen. Andernorts lohnt es sich nicht, Geologen auszusenden."
 
