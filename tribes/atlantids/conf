@@ -37,7 +37,6 @@ fps=6
 # different tribes to make sure that they'll stay even
 [startwares]
  # Resources
-coalearth=5
 diamond=7
 goldore=0
 ironore=5

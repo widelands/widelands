@@ -1,8 +1,0 @@
-[global]
-descname=_Coalearth
-help=_This earth is found in the deep coal mines. It needs to be enhanced to get proper coal
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=4 4
