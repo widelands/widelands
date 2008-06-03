@@ -6,7 +6,7 @@ buildable=yes
 buildicon=coalmine_build.png
 worker=miner
 program=work
-output=coalearth
+output=coal
 stopable=yes
 enhances_to=deep_coalmine
 
@@ -22,10 +22,10 @@ beer=6
 4=consume beer
 5=animation working 20000
 6=mine coal 2 50 5
-7=produce coalearth
+7=produce coal
 8=animation working 20000
 9=mine coal 2 50 5
-10=produce coalearth
+10=produce coal
 
 [buildcost]
 trunk=4

@@ -7,7 +7,7 @@ buildicon=deep_coalmine_build.png
 enhanced_building=yes
 worker=chief-miner,miner
 program=work
-output=coalearth
+output=coal
 stopable=yes
 enhances_to=deeper_coalmine
 
@@ -19,7 +19,7 @@ snack=6
 1=consume snack
 2=animation working 18000
 3=mine coal 2 66 5
-4=produce coalearth
+4=produce coal
 
 [buildcost]
 trunk=4

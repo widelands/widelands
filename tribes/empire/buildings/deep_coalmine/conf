@@ -7,7 +7,7 @@ buildicon=deep_coalmine_build.png
 enhanced_building=yes
 worker=master-miner,miner
 program=work
-output=coalearth
+output=coal
 stopable=yes
 
 [inputs]
@@ -22,10 +22,10 @@ beer=6
 4=consume beer
 5=animation working 18000
 6=mine coal 2 100 5
-7=produce coalearth
+7=produce coal
 8=animation working 18000
 9=mine coal 2 100 5
-10=produce coalearth
+10=produce coal
 
 [buildcost]
 trunk=4

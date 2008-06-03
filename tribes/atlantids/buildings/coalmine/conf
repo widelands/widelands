@@ -6,7 +6,7 @@ buildable=yes
 buildicon=coalmine_build.png
 worker=miner,miner,miner
 program=work
-output=coalearth
+output=coal
 stopable=yes
 
 [inputs]
@@ -20,11 +20,11 @@ smoked_meat=6
 2=consume bread 2
 3=animation working 20000
 4=mine coal 4 100 5
-5=produce coalearth
+5=produce coal
 6=mine coal 4 100 5
-7=produce coalearth
+7=produce coal
 8=mine coal 4 100 5
-9=produce coalearth
+9=produce coal
 
 
 [buildcost]

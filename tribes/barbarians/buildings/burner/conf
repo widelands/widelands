@@ -10,16 +10,13 @@ program=work
 
 [inputs]
 trunk=8
-coalearth=8
 
 [work]
-0=sleep 32000
-1=check trunk
-2=check coalearth
-3=consume trunk
-4=consume coalearth
-5=animation working 35000
-6=produce coal
+0=sleep 30000
+1=check trunk 6
+2=consume trunk 6
+3=animation working 35000
+4=produce coal
 
 [buildcost]
 trunk=3

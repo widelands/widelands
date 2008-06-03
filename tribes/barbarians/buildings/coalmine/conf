@@ -6,7 +6,7 @@ buildable=yes
 buildicon=coalmine_build.png
 worker=miner
 program=work
-output=coalearth
+output=coal
 stopable=yes
 enhances_to=deep_coalmine
 
@@ -18,7 +18,7 @@ ration=6
 1=consume ration
 2=animation working 20000
 3=mine coal 2 33 5
-4=produce coalearth
+4=produce coal
 
 [buildcost]
 trunk=4
