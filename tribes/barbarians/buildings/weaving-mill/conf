@@ -2,7 +2,7 @@
 descname=_ Weaving-Mill
 type=production
 size=big
-buildable=yes
+buildable=no
 buildicon=build.png
 worker=weaver
 program=work
