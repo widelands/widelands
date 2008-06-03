@@ -1,7 +1,7 @@
 # Hints for the computer player
 
 [global]
-numofwares=17
+numofwares=16
 stoneproducer=quarry
 trunkproducer=lumberjack
 forester=ranger
