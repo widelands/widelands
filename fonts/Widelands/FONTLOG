@@ -13,6 +13,9 @@ The font is not created to be used in normal texts, as it is too complex and not
 
 3. ChangeLog
 ============
+22 June 2008 (Peter Schwanemann) -> Version 1.0.2.1
+- Added default character, created new German "double s", fixed some other fonts
+
 18 January 2008 (Peter Schwanemann) -> Version 1.0.1.2
 - Improved and updated small and big S, Z and X.
 
