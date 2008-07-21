@@ -5,6 +5,7 @@ numofwares=5
 stoneproducer=quarry
 trunkproducer=woodcutter
 forester=forester
+fisher=fisher
 ware_n_0=trunk
 ware_p_0=6
 ware_n_1=stone

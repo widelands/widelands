@@ -78,17 +78,18 @@ void Computer_Player::late_initialization ()
 	log ("ComputerPlayer(%d): initializing\n", player_number);
 
 	Ware_Index const nr_wares = tribe->get_nrwares();
-	wares = new WareObserver[nr_wares.value()];
+	wares.resize(nr_wares.value());
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-		wares[i.value()].producers    = 0;
-		wares[i.value()].consumers    = 0;
-		wares[i.value()].preciousness = 0;
+		wares[i].producers    = 0;
+		wares[i].consumers    = 0;
+		wares[i].preciousness = 0;
 	}
 
 	// Building hints for computer player
 	std::string stoneproducer = "lumberjack";
 	std::string trunkproducer = "forester";
 	std::string forester = "forester";
+	std::string fisher = "fisher";
 
 	// Read the computerplayer hints of the tribe
 	// FIXME: this is only a temporary workaround. Better define all this stuff
@@ -111,7 +112,8 @@ void Computer_Player::late_initialization ()
 		}
 		stoneproducer = hints.get_safe_string("stoneproducer");
 		trunkproducer = hints.get_safe_string("trunkproducer");
-		forester = hints.get_safe_string("forester");
+		forester      = hints.get_safe_string("forester");
+		fisher        = hints.get_safe_string("fisher");
 
 	} else {
 		log("   WARNING: No computerplayer hints for tribe %s found\n", tribe->name().c_str());
@@ -142,6 +144,7 @@ void Computer_Player::late_initialization ()
 		bo.need_stones            = building_name == stoneproducer;
 		if (building_name == forester)
 			bo.production_hint = tribe->safe_ware_index("trunk").value();
+		bo.need_water = (building_name == fisher);
 
 		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
 			bo.type=BuildingObserver::CONSTRUCTIONSITE;
@@ -553,39 +556,80 @@ bool Computer_Player::construct_building ()
 					if (j->cnt_built+j->cnt_under_construction==0)
 						prio += 2;
 
+					// Pull type economy, build consumeres until 
+					// input resource usage is overbooked 2 to 1, 
+					// then throttle down.
 					for (uint32_t k = 0; k < j->inputs.size(); ++k) {
 						prio += 8 * wares[j->inputs[k]].producers;
 						prio -= 4 * wares[j->inputs[k]].consumers;
 					}
 
-					for (uint32_t k = 0; k < j->outputs.size(); ++k) {
-						prio -= 12 * wares[j->outputs[k]].producers;
-						prio +=  8 * wares[j->outputs[k]].consumers;
-						prio +=  4 * wares[j->outputs[k]].preciousness;
+					// don't make more than one building, if supply line is broken.
+					if (!check_supply(*j) && 
+					    j->get_total_count() > 0)
+						prio -= 12;
 
-						if
-							(j->cnt_built+j->cnt_under_construction == 0
-							 &&
-							 wares[j->outputs[k]].consumers > 0)
-							prio += 8; // add a big bonus
+					// normalize by output count so that multipurpose 
+					// buildings are not too good
+					int32_t output_prio=0;
+					for (uint32_t k = 0; k < j->outputs.size(); ++k) {
+						WareObserver & wo = wares[j->outputs[k]]; 
+						output_prio -= 12 * wo.producers;
+						output_prio +=  8 * wo.consumers;
+						output_prio +=  4 * wo.preciousness;
+
+						if (j->get_total_count() == 0 && wo.consumers > 0)
+							output_prio += 8; // add a big bonus
+						// kick first building priority with preciousness
+						// to get economy running
+						if (j->get_total_count() == 0)
+							prio += wo.preciousness;
 					}
 
+					if (j->outputs.size()>0)
+						output_prio = static_cast<int32_t>
+							(ceil(output_prio / sqrt(j->outputs.size())));
+					prio += output_prio;
+
+					// production hint associates forester with trunk production
 					if (j->production_hint >= 0) {
 						prio -= 6 * (j->cnt_built + j->cnt_under_construction);
 						prio += 4 * wares[j->production_hint].consumers;
 						prio += 2 * wares[j->production_hint].preciousness;
+						
+						// add bonus near buildings outputting hinted ware
+						if (bf->producers_nearby[j->production_hint] > 0)
+							++prio;
 					}
-				}
 
+					int32_t iosum=0;
+					for(size_t k=0;k<j->inputs.size();k++)
+						if (bf->producers_nearby[j->inputs[k]]>0) ++iosum;
+						else if (bf->consumers_nearby[j->inputs[k]]>0) --iosum;
+					if (iosum < -2) iosum = -2;
+					for(size_t k=0;k<j->outputs.size();k++)
+						if (bf->consumers_nearby[j->outputs[k]]>0) ++iosum;
+					prio += 2*iosum;
+				}
 				prio -=
 					2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
 			}
 
-			prio += bf->preferred ? prio / 2 + 1 : -1;
+			// ad big penalty if water is needed, but is not near
+			if (j->need_water)
+			{
+				int effect = bf->water_nearby - 12;
+				prio += effect > 0 ? static_cast<int>(sqrt(effect)) : effect;
+				// if same producers are nearby, then give some penalty
+				for(size_t k=0;k<j->outputs.size();k++)
+					if (bf->producers_nearby[j->outputs[k]]>0) prio-=3;
+			}
+
+			// Prefer road side fields
+			prio += bf->preferred ?  1 : 0;
 
 			//  don't waste good land for small huts
 			prio -= (maxsize - j->desc->get_size()) * 3;
-
 			if (prio > proposed_priority) {
 				proposed_building = j->id;
 				proposed_priority = prio;
@@ -713,6 +757,16 @@ bool FindNodeUnowned::accept (const Map &, const FCoords fc) const
 	return fc.field->get_owned_by()==0 && (fc.field->get_caps()&MOVECAPS_WALK);
 }
 
+
+struct FindNodeWater 
+{
+	bool accept(const Map & map, const FCoords& coord) const {
+		return 
+			(map.world().terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
+			(map.world().terrain_descr(coord.field->terrain_r()).get_is() & TERRAIN_WATER);
+	}
+};
+
 void Computer_Player::update_buildable_field (BuildableField* field)
 {
 	// look if there is any unowned land nearby
@@ -739,7 +793,15 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	field->stones_nearby=0;
 	field->tree_consumers_nearby=0;
 	field->stone_consumers_nearby=0;
-
+	field->producers_nearby.clear();
+	field->producers_nearby.resize(wares.size());
+	field->consumers_nearby.clear();
+	field->consumers_nearby.resize(wares.size());
+	std::vector<Coords> water_list;
+	FindNodeWater find_water;
+	map.find_fields(Area<FCoords>(field->coords, 4), &water_list, find_water);
+	field->water_nearby = water_list.size();
+	
 	FCoords fse;
 	map.get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
 
@@ -856,13 +918,17 @@ void Computer_Player::update_mineable_field (MineableField* field)
 }
 
 void Computer_Player::consider_productionsite_influence
-	(BuildableField * const field, Coords, BuildingObserver const & bo)
+	(BuildableField * field, Coords, BuildingObserver const & bo)
 {
 	if (bo.need_trees)
 		++field->tree_consumers_nearby;
 
 	if (bo.need_stones)
 		++field->stone_consumers_nearby;
+	for (size_t i=0;i<bo.inputs.size();++i)
+		++field->consumers_nearby[bo.inputs[i]];
+	for (size_t i=0;i<bo.outputs.size();++i)
+		++field->producers_nearby[bo.outputs[i]];
 }
 
 Computer_Player::EconomyObserver* Computer_Player::get_economy_observer (Economy* economy)
@@ -884,10 +950,11 @@ void Computer_Player::gain_building (Building* b)
 	BuildingObserver & bo = get_building_observer(b->name().c_str());
 
 	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
-		++get_building_observer
-			(dynamic_cast<const ConstructionSite &>(*b)
-			 .building().name().c_str())
-			.cnt_under_construction;
+		BuildingObserver &target_bo = 
+			get_building_observer
+				(dynamic_cast<const ConstructionSite &>(*b)
+				 .building().name().c_str());
+		++target_bo.cnt_under_construction;
 		++total_constructionsites;
 	}
 	else {
@@ -912,10 +979,11 @@ void Computer_Player::lose_building (Building* b)
 	BuildingObserver & bo = get_building_observer(b->name().c_str());
 
 	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
-		--get_building_observer
+		BuildingObserver &target_bo = 
+			get_building_observer
 			(dynamic_cast<const ConstructionSite &>(*b)
-			 .building().name().c_str())
-			.cnt_under_construction;
+			 .building().name().c_str());
+		--target_bo.cnt_under_construction;
 		--total_constructionsites;
 	}
 	else {
@@ -1382,4 +1450,27 @@ void Computer_Player::construct_roads ()
 			}
 		}
 	}
+}
+
+/// Checks that supply line exists for given building.
+/// Recurcsively verify that all inputs have a producer.
+bool Computer_Player::check_supply(BuildingObserver const &bo)
+{
+	size_t supplied = 0;
+	for (size_t i=0;i<bo.inputs.size();++i)
+	{
+		for (std::list<BuildingObserver>::iterator it = buildings.begin();
+		it != buildings.end();
+		++it)
+		{
+			if (it->cnt_built && 
+			    std::find(it->outputs.begin(), it->outputs.end(), bo.inputs[i]) != it->outputs.end() &&
+			    check_supply(*it)) 
+			{
+				++supplied;
+				break;
+			}
+		}
+	}
+	return supplied == bo.inputs.size();
 }

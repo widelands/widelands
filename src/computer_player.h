@@ -24,6 +24,7 @@
 #include "notification.h"
 
 #include <list>
+#include <map>
 
 class BuildingHints;
 
@@ -75,8 +76,11 @@ private:
 		uint8_t stones_nearby;
 		uint8_t tree_consumers_nearby;
 		uint8_t stone_consumers_nearby;
-
+		uint8_t water_nearby;
+		
 		int16_t         military_influence;
+		std::vector<uint8_t> consumers_nearby;
+		std::vector<uint8_t> producers_nearby;
 
 		BuildableField (Widelands::FCoords const & fc)
 			:
@@ -130,6 +134,7 @@ private:
 
 		bool                              need_trees;
 		bool                              need_stones;
+		bool                              need_water;
 
 		std::vector<int16_t>              inputs;
 		std::vector<int16_t>              outputs;
@@ -168,7 +173,7 @@ private:
 	std::list<EconomyObserver *>      economies;
 	std::list<ProductionSiteObserver> productionsites;
 
-	WareObserver*         wares;
+	std::vector<WareObserver>         wares;
 
 	EconomyObserver * get_economy_observer (Widelands::Economy *);
 
@@ -186,6 +191,8 @@ private:
 	void check_productionsite (ProductionSiteObserver &);
 
 	BuildingObserver& get_building_observer(char const *);
+
+	bool check_supply(BuildingObserver const &);
 };
 
 #endif
