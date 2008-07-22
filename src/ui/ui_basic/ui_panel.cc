@@ -22,6 +22,7 @@
 #include "constants.h"
 #include "font_handler.h"
 #include "graphic.h"
+#include "profile.h"
 #include "rendertarget.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
@@ -136,8 +137,19 @@ int32_t Panel::run()
 	// Panel-specific startup code. This might call end_modal()!
 	start();
 	g_gr->update_fullscreen();
+
+	uint32_t startTime;
+	uint32_t diffTime;
+	uint32_t minTime;
+	{
+		Section *s = g_options.pull_section("global");
+		minTime=(1000/s->get_int("maxfps", 25));
+	}
+
 	while (_running)
 	{
+		startTime = SDL_GetTicks();
+
 		static InputCallback icb = {
 			Panel::ui_mousepress,
 			Panel::ui_mouserelease,
@@ -175,6 +187,10 @@ int32_t Panel::run()
 		WLApplication::yield_double_game ();
 #endif
 #endif
+     // Wait until 1second/maxfps are over
+		diffTime = SDL_GetTicks()-startTime;
+		if(diffTime<minTime)
+			SDL_Delay(minTime-diffTime);
 	}
 	g_gr->update_fullscreen();
 	end();
