@@ -2,7 +2,7 @@
 packet_version=1
 
 [Build Barracks]
-descr=_"Build a barrack at the red point in the east of the forest."
+descr=_"Build a barracks at the red point in the east of the forest."
 visible=false
 trigger=Barracks complete
 
@@ -17,7 +17,7 @@ visible=false
 trigger=Sawmill and Lumberjacks complete
 
 [Build Forester]
-descr=_"Build a forester hut, to save the wood resources of this island."
+descr=_"Build a forester hut, to preserve the wood resources of this island."
 visible=false
 trigger=Forester complete
 

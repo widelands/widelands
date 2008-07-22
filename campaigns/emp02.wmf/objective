@@ -19,7 +19,7 @@ visible=false
 trigger=Military buildings complete
 
 [Build Marblemine]
-descr=_"* Expand to the east, to start mining marble on the mountain."
+descr=_"* Expand to the east, to start mining marble from the mountain."
 visible=false
 trigger=Marblemine complete
 
@@ -34,6 +34,6 @@ visible=false
 trigger=Bigger military building complete
 
 [Remove the barbarians]
-descr=_"* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+descr=_"* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 visible=false
 trigger=Victory

@@ -7,7 +7,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"What has become of our Empire? I really ask this question, while my king disallowed me to fight against that monster of a barbarian tribe, that first acted like a peaceful friend and than attacked my army in the darkest night. <br>I got the the task to patrol on our northern frontier, which lies on the north of Galdin Mountains in a great, beautiful and ancient forest, with an army of 150 men. Soon we met a barbarian tribe, which at first was nice and friendly.  A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons. But in our fifth night in that region, they attacked us without reason. I lost hundreds of good men, was enprisoned and finally was brought to the chieftain. He spit at me, laughed about me and told me to leave this land forever. He told me he doesn't want new land and doesn't want our land, but THIS forest was their land and will stay theirs until the ghosts take the last man of his folk!<br>Three weeks later, I came back to Fremil, to speak with our king. He was furious at the Barbarians, but disallowed an attack of these tribes anyway. He believed, that our army was too weak to resist in a war against the barbarians.<br>I saw no way, how I could erase my guilt, without fighting against the Barbarians and so I left Fremil by boat, to find a new world and a new life for me somewhere in the south. And now I am sailing southwards on the perl-gulf with my family, a few of my friends and a few of my best warriors."
+_"What has become of our Empire? I really ask this question - why did my king forbid me from fighting against that monsterous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night. <br>I was assigned the the task to patrol on our northern frontier, which lies on the north of Galdin Mountains in a great, beautiful and ancient forest, with an army of 150 men. Soon we met a barbarian tribe, which at first was friendly.  A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons. But in our fifth night in that region, they attacked us without reason. I lost dozens of good men, was imprisoned, and finally was brought to their chieftain. He spit at me, mocked me, and told me to leave this land forever. He told me he doesn't want new land and doesn't want our land, but THIS forest was their land and will stay theirs until the ghosts take the last man of his folk!<br>Three weeks later I came back to Fremil to speak with our king. He was furious at the Barbarians, but disallowed an attack of these tribes anyway. He believed, that our army was too weak to resist in a war against the barbarians.<br>I saw no way that I could erase my guilt - without fighting against the Barbarians. So I left Fremil by boat to find a new world and a new life for me somewhere in the south. Now I am sailing southwards on the perl-gulf with my family, a few of my friends and a few of my best warriors."
 "</p></rt>""
 window_title=_A dark night
 is_modal=true
@@ -21,7 +21,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us in a dark, wild storm. I really don't know how many hours have passed, since the waves got higher than our boat, but still it would be suicide to go outside.<br>Our ship is badly damaged and is taking more and more water. We can thank the Gods if we survive this black night with just our lifes."
+_"It seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us in a dark, wild storm. I really don't know how many hours have passed since the waves rose higher than our boat, but still it would be suicide to go outside.<br>Our ship is badly damaged and is taking on more and more water. We can thank the Gods if we survive this black night with just our lives."
 "</p></rt>""
 window_title=_The rough sea
 is_modal=true
@@ -35,7 +35,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Finally the Gods were with us. We landed on an unknown coast and found a peaceful sleep under the palms growing at the strand. But that is about as good as it gets.<br>The truth is, when I woke up this morning, I saw nothing more than sand around us. It really seems as if we landed under the only palms existing in this far sandy desert. I fear, we won't find the help we need, to get our ship repaired in good time."
+_"Finally the Gods were with us. We landed on an unknown coast and found peaceful rest under the palms growing at the strand. But that is about as good as it gets.<br>The truth is: when I woke up this morning I saw nothing more than sand around us. It really seems as if we landed under the only palms existing in this far sandy desert. I fear we won't find the help we need to get our ship repaired in good time."
 "</p></rt>""
 window_title=_Survivor
 is_modal=true
@@ -76,7 +76,7 @@ version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
-_"Sire, I fear we are not safe in this foreign land.<br>Who knows, what cruel creatures live behind this forest in that mighty desert?<br>And what if that creatures crawl in the woods and wait for the time to attack us?<br><br>Well, perhaps my fear is wrong, but it can't be wrong to watch out in the forests, so that we can be sure to see any potential enemies before they can see us.<br>We really should build a barrack in the easter-center of the forest. Than one of us will watch out in the darkness and will keep us save from evil attacks of these creatures.<br><br>- build a barrack at the red point on the east side of the forests right of your headquarters."
+_"Sire, I fear we are not safe in this foreign land.<br>Who knows what terrible creatures live beyond this forest, in that mighty desert?<br>What if these creatures enter the woods and await the time to attack us?<br><br>Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br>We really should build a barracks in the eastern portion of the forest. Than one of us will keep watch in the darkness and keep us safe from these creatures.<br><br>- build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 "</p></rt>""
 window_title=_A visitor
 is_modal=true
@@ -100,7 +100,7 @@ version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus speaks..."
 "</p><p line-spacing=3 font-size=12><br>"
-_"Sire, I saw that the construction of the barrack is completed, so I sent one of my best soldiers to it, to watch out in the deserts.<br>It is great. Now we can feel a bit more safe again and can look ahead to the next things waiting to be done."
+_"Sire, I saw that the construction of the barracks was complete, so I assigned one of my best soldiers to it to keep watch on the desert.<br>This is a good step forward. Now we can feel a bit safer and can look ahead to the job ahead."
 "</p></rt>""
 window_title=_A visitor
 is_modal=true
@@ -114,7 +114,7 @@ version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea smiles..."
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hey Lutius, I just met Saledus outside. He told me about construction of the barracks. Well, I am not one of those girls, who think we need more barracks, but on the other hand, we might concentrate on other stuff now.<br>It is absolutely clear that we need wood, for repairing our ship. So I walked through the forest, yesterday and found a nice place for a lumberjack south of our headquarters.<br><br>- build a lumberjack at the red point, south of your headquarters"
+_"Hey Lutius, I just met Saledus outside. He told me about construction of the barracks. Well, I am not one of those girls who think we need more barracks, but on the other hand we might concentrate on other things, now.<br>It is absolutely clear that we need wood to repair our ship. So I walked through the forest yesterday and found a nice place for a lumberjack, south of our headquarters.<br><br>- build a lumberjack at the red point, south of your headquarters"
 "</p></rt>""
 window_title=_Young Amalea
 is_modal=true
@@ -133,7 +133,7 @@ version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea smiles..."
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjacks, so that we can faster harvest the trunks.<br>But unfortunally the trunks are useless for repairing our ship - We need refined wood, like every ship and every bigger building needs, too - so we should build up a sawmill, as soon as we have got enough space for this.<br><br>- Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
+_"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjacks, so that we can faster harvest the trunks.<br>But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have got enough space for this.<br><br>- Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
 "</p></rt>""
 window_title=_Young Amalea
 is_modal=true
@@ -157,7 +157,7 @@ version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea comes in..."
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hi Lutius,<br>I've got two important things to talk about:<br>First the positive thing: I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting, to wood.<br>But that's just the only positive thing I know to talk about. The negative is, that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br>Lutius, this trees keep us safe from sandstorms out of the desert, they provide shade for the hot days and they are the home of so many smart little animals. We shouldn't leave this island as complete desert.<br>Lutius, I beg you: build a forester hut, so that someone cares about planting new trees.<br><br>- Build a forester hut, to save the wood resources of this island."
+_"Hi Lutius,<br>I've got two important things to talk about:<br>First the good news: I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting, to wood.<br>But that's just the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br>Lutius, these trees provide shelter from the sandstorms from the desert, they provide shade for the hot days and they are the home of so many gentle animals. We shouldn't leave this island as complete desert.<br>Lutius, I beg you: build a forester hut, so that someone takes care to plant new trees.<br><br>- Build a forester hut, to preserve the wood resources of this island."
 "</p></rt>""
 window_title=_Young Amalea
 is_modal=true
@@ -186,7 +186,7 @@ version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles..."
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hey my good old friend, I just thought about the rocks, standing on the south strand of this land. Perhaps we could cut out some usefull stones and beautiful marble.<br>The repair of our ship will take a few weeks anyway and the resources we harvest now might be the base of strong and big buildings in another land.<br><br>- Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
+_"Hey my good old friend, I just thought about the rocks, standing on the south strand of this land. Perhaps we could cut out some usefull stones and beautiful marble.<br>The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.<br><br>- Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
 "</p></rt>""
 window_title=_A Visitor
 is_modal=true
@@ -210,7 +210,7 @@ version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles..."
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hey Lutius,<br>today we got a big piece closer to our first castle. The quarry to the south began it's work today and will soon provide us with hard stones and beautiful marble. Now we really can look forward to settle down on another island."
+_"Hey Lutius,<br>today we got a lot closer to our first castle. The quarry to the south began its work today and will soon provide us with hard stones and beautiful marble. Now we truly can look forward to settling down on another island."
 "</p></rt>""
 window_title=_A Visitor
 is_modal=true
@@ -225,7 +225,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Today I got the message that our ship is completely repaired. At the moment my people load everything on to this new repaired ship, hoping it will save us better than last time.<br> This night will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br>I still wonder if we will ever see Fremil again.<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
+_"Today I got the message that our ship is completely repaired. At the moment my people loading everything onto our newly repaired ship, hoping it will serve us better than last time.<br> Tonight will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br>I still wonder if we will ever see Fremil again.<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
 "</p></rt>""
 window_title=_Mission Complete
 is_modal=false

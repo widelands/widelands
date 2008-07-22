@@ -9,7 +9,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Finally!<br>This island seems to be made for us, it is a present of the Gods to my people and me.<br>Until now, we have only seen a small part of this island, but this part is already leading sunbeams to my mind, feeling as if we found an unpayable treasure, a land like paradise.<br>On this island, we will start our new life, we will build up an outpost for our exile, which perhaps will become a new, beautiful home to everyone of us."
+_"Finally!<br>This island seems to be made for us, it is a gift from the Gods to my people and myself.<br>Until now, we have only seen a small part of this island, but this part is already leading sunbeams to my mind, feeling as if we found a priceless treasure, a land like paradise.<br>On this island, we will start our new life, we will build up an outpost for our exile, which perhaps will become a new, beautiful home to every one of us."
 "</p></rt>""
 window_title=_A new islands
 is_modal=true
@@ -35,8 +35,8 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"As Saledus and I walked through these wonderful forests in the north, we felt that our new future had just begun. This land is so peaceful, nice and beautiful, I could stay here until the end of my life.<br>But until that day, a lot of years will hopefully go by. For now, we should concentrate on the present and build a few lumberjacks and a sawmill, to produce some good build-materials.<br>But we shouldn't forget to save this natural bounty. These forests should last forever, so we really should build up a forester too.<br><br>"
-_"* Build up three lumberjacks, a forester and a sawmill."
+_"As Saledus and I walked through these wonderful forests in the north, we felt that our future had just begun. This land is so peaceful, good and beautiful, I could stay here until the end of my life.<br>But until that day, may many years pass! For now we must concentrate on the present and build a few lumberjacks and a sawmill, to produce some basic building-materials.<br>But we shouldn't forget to preserve this natural bounty. These forests should last forever, so we really should build a forester too.<br><br>"
+_"* Build three lumberjacks, a forester and a sawmill."
 "</p></rt>""
 window_title=_The green forests
 is_modal=true
@@ -67,7 +67,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Later, I walked down to the rocks in the south and looked for a place where we can build a quarry, to get some hard stone for our bigger buildings.<br>Again I feel like i'm in paradise when I noticed that some marble-like stones where among those rocks. Seems as if we can start a life in luxury in the not so distant future.<br><br>"
+_"Later, I walked down to the rocks in the south and looked for a place where we can build a quarry to get some hard stone for our larger buildings.<br>Again I feel like I'm in paradise when I noticed that some marble-like stones were among the rocks. It seems that we will soon be able to build strong, luxurious buildings, like those we were accustomed to in Fremil.<br><br>"
 _"* Build a quarry to the south of your headquarters."
 "</p></rt>""
 window_title=_The rocks
@@ -87,7 +87,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Wonderful, today our wood economy was completely built up. Now we can be sure to have enough wood for our future building-projects."
+_"Good news! Today our wood economy was completed. Now we can be sure to have enough wood for our future building projects."
 "</p></rt>""
 window_title=_Wood for the colony
 is_modal=true
@@ -101,7 +101,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Great, today the building of the quarry was completed. Now we get enough stone for all our future building projects."
+_"Great, today the building of the quarry was completed. Now we get enough stone to construct larger buildings."
 "</p></rt>""
 window_title=_Stone for the colony
 is_modal=true
@@ -128,8 +128,8 @@ version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus looks unhappy"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hey Lutius,<br>I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart.<br>You might wonder about the cause. Well, I will tell you:<br>As I walked down to the southern strands of this island I found some parts of another ship. I don't know whether these parts are everything left of that ship, but in any case these parts don't seem to be old. Perhaps the owners of that ship came in the same storm which brought us to Malac' Mor and were also brought to this island.<br>However, I beg you to be cautious and to build some barracks or sentrys around our colony.<br><br>"
-_"* Build some barracks and sentrys around the colony."
+_"Greetings Lutius,<br>I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart.<br>You might wonder about the cause. Well, I will tell you:<br>As I walked down to the southern strands of this island I found the remains of another ship. I don't know whether these parts are all that is left of that ship, but in any case: these parts do not seem to be old. Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br>I beg you to be cautious and to build some barracks or sentries around our colony.<br><br>"
+_"* Build some barracks and sentries around the colony."
 "</p></rt>""
 window_title=_Dangerous shipparts
 is_modal=true
@@ -170,8 +170,8 @@ version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hey Lutius,<br>I've got good news for you: As I walked to the east, I found a bigger mountain. I am not absolutely sure, a geologist should check if I am right, but I believe we could mine marble from some places on the mountain. It would be absolutely great. Perhaps you were right, when you said that this island is like paradise.<br>Let's expand to that mountain and start mining marble.<br><br>"
-_"* Expand to the east, to start mining marble on the mountain."
+_"Greetings Lutius,<br>I've got good news for you: As I walked to the east, I found a larger mountain. I am not absolutely sure, a geologist should check if I am right, but I believe we could mine marble from some places on the mountain. It would make a good source to bolster our supply of good quality marble, beyond the meagre quantities available from the quarry. Perhaps you were right when you said that this island is like paradise.<br>Let us expand to that mountain and start mining marble.<br><br>"
+_"* Expand to the east, to start mining marble from the mountain."
 "</p></rt>""
 window_title=_Marble on the mountain
 is_modal=true
@@ -219,8 +219,8 @@ version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles"
 "</p><p line-spacing=3 font-size=12><br>"
-_"By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, toolsmith's workshops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
-_"* Build up a complete Mining and production infrastructure (Coalmine, Oremine, Toolsmith's workshop, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+_"By the Gods, this is an unbelievable stroke of fortune. There are two more mountains and it seems that one has a large quantity of coal, and the other of iron. Now we can begin living as we did in Fremil. We should immediately start to build mines, charcoal burners, smelting works, toolsmith workshops and smithworks. But for all these bigger buildings we need better and more elegant building-materials. Let's build a stonemason, who cuts columns from marble.<br><br>"
+_"* Build up a complete mining and production infrastructure (coalmine, oremine, toolsmith, weaponsmith, armoursmith, smelter, burner) and a stonemason."
 "</p></rt>""
 window_title=_Further mountains
 is_modal=true
@@ -295,7 +295,7 @@ version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea comes in..."
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hi Lutius,<br>I hope you forgive my criticism, but it seems to me as if you forgot something. It's nice, and of course a good idea, to build up mines, which will give us a more luxury life, but the people working in the mines are unhappy with the current situation, they have to do hard work and have no time for making their own food.<br>What do you think about helping them out? Let's build up a tavern, which can produce some nice food for our miners, and a brewery and a vineyard, which can produce some good drinks.<br>Of course this will mean we need more resources for this food. I suggest you build a fisher, a farm, a mill and a baker. A hunter, a piggery, a vineyard and a well would also be needed.<br>Don't understand me wrong, but the miners need good food and drinks to have enough power for their hard work."
+_"Hi Lutius,<br>I hope you forgive my criticism, but it seems to me as if you forgot something. It's nice, and of course a good idea, to build up mines, which will give us a more comfortable life, but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.<br>What do you think about helping them out? Let's build up a tavern, which can produce some sustaining food for our miners, and a brewery and a vineyard, which can produce some good strong drinks.<br>Of course this will mean we need more resources for this food. I suggest you build a fisher, a farm, a mill and a baker. A hunter, a piggery, a vineyard and a well would also be needed.<br>Don't misunderstand me, but the miners need good food and drinks to have enough energy for their hard labours."
 "</p></rt>""
 window_title=_Food for the miners
 is_modal=true
@@ -388,8 +388,8 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"By the Gods!<br>This is absolutely awful. It seems as if we stand close to a test AND it seems as if Saledus was right with his fear concerning the shipwreck.<br>Today as I walked down to the eastern strands, I suddenly got a shock. There was one of those hated, evil, barbarian tribes with whom we had so many problems before.<br>First I was a bit naive and hoped that they are peaceful, but as soon as one of them saw me they ran towards me and started attacking me with their throwing-spears. Thanks to the Gods that I was able to hide myself and could silently go back to our colony.<br>Anyway, we MUST build up bigger military buildings, as soon as possible.<br><br>"
-_"* Build up bigger military buildings, like an outpost, a barrier or a tower, on the eastern frontier."
+_"By the Gods!<br>This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br>Today, as I walked down to the eastern strands, I got a shock. There was one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br>At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br>Anyway, we must build up stronger military buildings, as soon as possible.<br><br>"
+_"* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier."
 "</p></rt>""
 window_title=_The Barbarians
 is_modal=true
@@ -429,8 +429,8 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"That's good. The first large military building is built up and the mining infrastructure is getting better and better. Now we should think of preparing ourselves for a bigger fight.<br>As soon as we have enough soldiers we should attack and remove the barbarians. And than, when this island is ours again, I will build up a big fortress at the place where the barbarian headquarters stands now, to avoid new settlements of these barbarian bastards.<br><br>"
-_"* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+_"That's good. The first large military building is complete and the mining infrastructure is getting better and better. Now we should think of preparing ourselves for battle.<br>As soon as we have enough soldiers we should attack and remove the barbarian threat. Then, when this island is ours again, I will build a large fortress where the barbarian headquarters stands now, to prevent new settlements of these barbarians in future<br><br>"
+_"* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally, build up a fortress on the peninsula (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 "</p></rt>""
 window_title=_Command for Attack
 is_modal=true
@@ -454,7 +454,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Today makes me proud. We fought for our new home and rose victorious.<br>There are still a few barbarians hiding on our island, but I am sure that we will find them soon. Every barbarian, who doesn't attack us, will be put in a boat with the other peaceful ones and will be sent back to their country.<br><br>----------------------VICTORY!-----------------------"
+_"Today is a proud day. We fought for our new home and rose victorious.<br>There are still a few barbarians hiding on our island, but I am sure that we will find them soon. Every barbarian, who doesn't attack us, will be put in a boat with the other peaceful ones and will be sent back to their country.<br><br>----------------------VICTORY!-----------------------"
 "</p></rt>""
 window_title=_Victory
 is_modal=true
@@ -480,7 +480,7 @@ version=2
 text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Diary of Lutius"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Today a pigeon landed on our island. It brought a message which is filling me with dark thoughts, fears and horror.<br>The message was adressed to me, begging me to come back to Fremil.<br>It says that the Empire is at war with the Barbarians. They were attacked from the north, from the tribe I wanted to attack before going in exile.<br>For me, it is clear what I have to do...<br><br>You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
+_"Today a pigeon landed on our island. It brought a message which fills me with dark thoughts and brings back my fears.<br>The message was adressed to me, begging me to come back to Fremil.<br>It says that the Empire is at war with the Barbarians. They were attacked from the north, by the tribe I was forbidden from attacking.<br>For me, it is clear what I must do...<br><br>You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
 "</p></rt>""
 window_title=_A Message
 is_modal=true
@@ -495,7 +495,7 @@ version=2
 text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
 _"Amalea smiles"
 "</p><p line-spacing=3 font-size=12><br>"
-_"Hey my friend,<br>just visited our new tavern 'At the palms'. The beer, they have got, is really tasty, you really should take a drink there, too.<br>Nice to see, that we get a warmer and more familiar environment on our island. <br>Thank you Lutius."
+_"Greetings my friend,<br>I just visited our new tavern, 'At the palms'. The beer they have got is really tasty. You really should take a drink there, too.<br>It is good to see that we have now got a warmer and more familiar environment on our island. <br>Thank you, Lutius."
 "</p></rt>""
 window_title=_"A drink at 'At the palms'"
 is_modal=true
