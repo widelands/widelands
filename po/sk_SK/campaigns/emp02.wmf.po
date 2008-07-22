@@ -119,7 +119,7 @@ msgid "By the Gods, that's great, that's an unbelievable present. There are two 
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:616
-msgid "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+msgid "* Build up a complete Mining and production infrastructure (Coalmine, Oremine, Toolsmith's workshop, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:618

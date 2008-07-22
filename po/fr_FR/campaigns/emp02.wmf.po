@@ -115,11 +115,11 @@ msgid "Marble on the mountain"
 msgstr "Marbre de la montagne"
 
 #: ../../../campaigns/emp02.wmf/event:615
-msgid "By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, carpenter's shops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
+msgid "By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, toolsmith's workshops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
 msgstr "Par les Dieux, c'est un présent incroyable. Il y a deux montagnes de plus et il semblerait que l'une d'entre elles a beaucoup de charbon et l'autre beaucoup de fer. Nous pouvons maintenant commencer à vivre comme à Fremil. Nous devrions directement commencer à construire des mines, un brûleur, une fonderie, un atelier de charpentier et des forgerons. Mais pour tous ces grands bâtiments nous avons besoin de meilleurs et de plus beaux matériaux de construction. Construisons un tailleur de pierre, pour tailler les colonnes de marbre.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:616
-msgid "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+msgid "* Build up a complete Mining and production infrastructure (Coalmine, Oremine, Toolsmith's workshop, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 msgstr "* Construisez une infrastructure de minage et de production complète (Mine de charbon, Mine de fer, Charpentier, Forgeron d'arme, Forgeron d'armure, une Fonderie, un Brûleur) et un Tailleur de pierre."
 
 #: ../../../campaigns/emp02.wmf/event:618

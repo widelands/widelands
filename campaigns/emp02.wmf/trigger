@@ -94,12 +94,12 @@ point=36 20
 area=80
 building=stonemason
 
-[Carpenter complete]
+[Toolsmith complete]
 type=building
 version=3
 point=36 20
 area=80
-building=carpenter
+building=toolsmith
 
 [Armoursmith complete]
 type=building

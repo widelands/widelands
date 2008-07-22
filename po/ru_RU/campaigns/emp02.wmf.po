@@ -122,7 +122,7 @@ msgid "By the Gods, that's great, that's an unbelievable present. There are two 
 msgstr "Хвала Богам, это здорово, это невероятный подарок. Ещё две горы и похоже, что в одной из них большие залежи угля, а в другой - железа. Теперь мы можем начать жить, как во Фремиле. Нам следует немедленно начать строительство шахт, плавильни, обжига угля, кузницы и лесообработки. Но для всех этих больших строений нам необходимы улучшенные и совершенные стройматериалы. Давай построим обработку камня, где для нас из мрамора будут производиться колонны.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:616
-msgid "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+msgid "* Build up a complete Mining and production infrastructure (Coalmine, Oremine, Toolsmith's workshop, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 msgstr "* Постройте полную инфраструктуру добычи и производства (Угольные шахты, Железоносные шахты, Деревообработку, Цех оружия, Цех доспехов, Плавильню, Обжиг угля) и Обработку камня."
 
 #: ../../../campaigns/emp02.wmf/event:618

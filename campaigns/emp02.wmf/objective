@@ -24,7 +24,7 @@ visible=false
 trigger=Marblemine complete
 
 [Build Mining infrastructure]
-descr=_"* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+descr=_"* Build up a complete Mining and production infrastructure (Coalmine, Oremine, Toolsmith's workshop, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 visible=false
 trigger=Mining infrastructure complete
 

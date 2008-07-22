@@ -1,6 +1,6 @@
 [global]
 descname=_Pick
-help=_This pick is used by the stonemasons and the miners. It is produced by the carpenter.
+help=_This pick is used by the stonemasons and the miners. It is produced by the toolsmith.
 menu_pic=menu.png
 
 [idle]

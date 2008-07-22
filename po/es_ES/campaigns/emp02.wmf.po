@@ -122,7 +122,7 @@ msgid "By the Gods, that's great, that's an unbelievable present. There are two 
 msgstr "Por todos los Dioses, esto es magnífico, un regalo increíble. Hay otras dos montañas, y parece que una tiene un yacimiento de carbón y la otra de hierro. Ahora podemos comenzar a vivir como en Fremil. Deberíamos empezar inmediatamente a construir minas, quemadores, fundiciones, carpinterías y herrerías. Pero para todos esos edificios necesitamos más y mejores materiales. Construyamos un cantero, que nos provea de columnas a partir de los bloques de mármol.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:616
-msgid "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+msgid "* Build up a complete Mining and production infrastructure (Coalmine, Oremine, Toolsmith's workshop, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 msgstr "* Construye una infraestructura de minería y producción completa (minas de carbón y hierro, carpintería, armería, herrería, forja y quemador de turba) y un cantero."
 
 #: ../../../campaigns/emp02.wmf/event:618

@@ -43,10 +43,6 @@ msgstr "Brasserie"
 msgid "Charcoal Burner"
 msgstr "Charbonnier"
 
-#: ../../../tribes/empire/buildings/carpenter/conf:2
-msgid "Carpenter's workshop"
-msgstr "Atelier du charpentier"
-
 #: ../../../tribes/empire/buildings/castle/conf:2
 msgid "Castle"
 msgstr "Château"
@@ -164,6 +160,11 @@ msgstr "Tailleur de Pierres"
 msgid "Tavern"
 msgstr "Taverne"
 
+#: ../../../tribes/empire/buildings/toolsmith/conf:2
+#: ../../../tribes/empire/workers/toolsmith/conf:2
+msgid "Toolsmith"
+msgstr "Atelier du charpentier"
+
 #: ../../../tribes/empire/buildings/tower/conf:2
 msgid "Tower"
 msgstr "Tour"
@@ -230,7 +231,7 @@ msgid "Axe"
 msgstr "Hache"
 
 #: ../../../tribes/empire/wares/axe/conf:3
-msgid "The Axe is the tool for the lumberjack. It is produced by the carpenter."
+msgid "The Axe is the tool for the lumberjack. It is produced by the toolsmith."
 msgstr "La hache est l'outil du bûcheron. Elle est produite par le charpentier."
 
 #: ../../../tribes/empire/wares/bakingtray/conf:2
@@ -238,7 +239,7 @@ msgid "Bakingtray"
 msgstr "Plaque de Cuisson"
 
 #: ../../../tribes/empire/wares/bakingtray/conf:3
-msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the carpenter."
+msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
 msgstr "La plaque de cuisson est l'outil du boulanger. Chaque boulanger en a besoin d'une. Elle est produite par le charpentier."
 
 #: ../../../tribes/empire/wares/basket/conf:2
@@ -246,7 +247,7 @@ msgid "Basket"
 msgstr "Panier"
 
 #: ../../../tribes/empire/wares/basket/conf:3
-msgid "This basket is needed by the wine-grower, for harvesting the wine-grapes. It is produced by the carpenter."
+msgid "This basket is needed by the wine-grower, for harvesting the wine-grapes. It is produced by the toolsmith."
 msgstr "Ce panier est utilisé par le vigneron pour les vendanges. Il est produit par le charpentier."
 
 #: ../../../tribes/empire/wares/beer/conf:2
@@ -302,7 +303,7 @@ msgid "Fire Tongs"
 msgstr "Pinces"
 
 #: ../../../tribes/empire/wares/fire_tongs/conf:3
-msgid "The fire tongs are the tool of the smelter, working in the Smelting works. They are produced by the carpenter."
+msgid "The fire tongs are the tool of the smelter, working in the Smelting works. They are produced by the toolsmith."
 msgstr "Les pinces sont l'outil du fondeur, qui travaille à la fonderie. Elles sont produites par le charpentier."
 
 #: ../../../tribes/empire/wares/fish/conf:2
@@ -318,7 +319,7 @@ msgid "Fishing Rod"
 msgstr "Canne à pêche"
 
 #: ../../../tribes/empire/wares/fishing_rod/conf:3
-msgid "Fishing rods are needed by fishers, to catch fish. Produced by the carpenter."
+msgid "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr "Les cannes à pêche sont utilisées par les pêcheurs pour attraper du poisson. Elles sont produites par le charpentier."
 
 #: ../../../tribes/empire/wares/flour/conf:2
@@ -358,7 +359,7 @@ msgid "Hammer"
 msgstr "Marteau"
 
 #: ../../../tribes/empire/wares/hammer/conf:3
-msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the carpenter and both blacksmiths. Make sure you always got some in reserve! It is produced by the carpenter."
+msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the toolsmith and both blacksmiths. Make sure you always got some in reserve! It is produced by the toolsmith."
 msgstr "Le marteau est un outil essentiel. Il est utilisé par le géologue, l'ouvrier, le charpentier et les forgerons. Assurez-vous de toujours en avoir en réserve ! Il est produit par le charpentier."
 
 #: ../../../tribes/empire/wares/heavy_lance/conf:2
@@ -454,7 +455,7 @@ msgid "Pick"
 msgstr "Pioche"
 
 #: ../../../tribes/empire/wares/pick/conf:3
-msgid "This pick is used by the stonemasons and the miners. It is produced by the carpenter."
+msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
 msgstr "Cette pioche est utilisée par les tailleurs de pierre et les mineurs. Elle est produite par le charpentier. "
 
 #: ../../../tribes/empire/wares/plate_armour/conf:2
@@ -478,7 +479,7 @@ msgid "Saw"
 msgstr "Scie"
 
 #: ../../../tribes/empire/wares/saw/conf:3
-msgid "This saw is needed by the carpenter, to create all the usefull tools. It is produced by the carpenter."
+msgid "This saw is needed by the sawyer, to create all the usefull tools. It is produced by the toolsmith."
 msgstr "La scie est utilisée par le charpentier pour la création des autres outils. Elle est produite par lui-même. "
 
 #: ../../../tribes/empire/wares/scythe/conf:2
@@ -486,7 +487,7 @@ msgid "Scythe"
 msgstr "Faux"
 
 #: ../../../tribes/empire/wares/scythe/conf:3
-msgid "The Scythe is the tool of the farmers. It is produced by the carpenter."
+msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
 msgstr "La faux est l'outil des fermiers. Elle est produite par le charpentier."
 
 #: ../../../tribes/empire/wares/shovel/conf:2
@@ -494,7 +495,7 @@ msgid "Shovel"
 msgstr "Pelle"
 
 #: ../../../tribes/empire/wares/shovel/conf:3
-msgid "The shovel is needed for proper handling of plants. Therefore the forester use it. It is produced by the carpenter."
+msgid "The shovel is needed for proper handling of plants. Therefore the forester use it. It is produced by the toolsmith."
 msgstr "La pelle est nécessaire à la plantation. Elle est utilisée par le garde forestier et produite par le charpentier. "
 
 #: ../../../tribes/empire/wares/stone/conf:2

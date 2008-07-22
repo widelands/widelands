@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn2651\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-06-03 17:53+0200\n"
-"PO-Revision-Date: 2008-06-03 18:00+0100\n"
+"POT-Creation-Date: 2008-07-22 20:50+0200\n"
+"PO-Revision-Date: 2008-07-22 20:51+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgstr "16 Std"
 #: ../../src/interactive_player.cc:172
 #: ../../src/editor/editorinteractive.cc:61
 msgid "Menu"
-msgstr "Hauptmenü"
+msgstr "Statistiken"
 
 #: ../../src/interactive_spectator.cc:45
 #: ../../src/interactive_player.cc:176
@@ -100,7 +100,7 @@ msgstr "Rohstoff-Information"
 msgid "Ware help"
 msgstr "Waren Hilfe"
 
-#: ../../src/wlapplication.cc:850
+#: ../../src/wlapplication.cc:851
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -110,11 +110,11 @@ msgstr ""
 "Entschuldigung, aber der Doppelstart läuft unter Windows nicht.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:853
+#: ../../src/wlapplication.cc:854
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double ist nicht möglich, dies ist kein Debug-Build!"
 
-#: ../../src/wlapplication.cc:942
+#: ../../src/wlapplication.cc:943
 #, c-format
 msgid ""
 "This is Widelands-%s\n"
@@ -123,7 +123,7 @@ msgstr ""
 "Dies ist Widelands-%s\n"
 "\n"
 
-#: ../../src/wlapplication.cc:944
+#: ../../src/wlapplication.cc:945
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -131,7 +131,7 @@ msgstr ""
 "Benutzung: widelands <Option0>=<Wert0> ... <OptionN>=<WertN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:945
+#: ../../src/wlapplication.cc:946
 msgid ""
 "Options:\n"
 "\n"
@@ -139,7 +139,7 @@ msgstr ""
 "Optionen:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:949
+#: ../../src/wlapplication.cc:950
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -157,7 +157,7 @@ msgstr ""
 " --coredump=[yes|no]  Erzeugt ein Speicherabbild bei Segmentfehlern.\n"
 "                      Schaltet den Mechanismus von SDL ab.\n"
 
-#: ../../src/wlapplication.cc:958
+#: ../../src/wlapplication.cc:959
 msgid ""
 " --nosound            Starts the game with sound disabled\n"
 " --nozip              Do not save files as binary zip archives.\n"
@@ -171,7 +171,7 @@ msgstr ""
 " --editor             Startet direkt den Widelands Karten Editor.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:966
+#: ../../src/wlapplication.cc:967
 msgid ""
 " --double             Start the game twice (for localhost network testing)\n"
 "\n"
@@ -179,11 +179,11 @@ msgstr ""
 " --double             Startet das Spiel doppelt (Für Tests über das localhost Netz)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:970
+#: ../../src/wlapplication.cc:971
 msgid " --help               Show this help\n"
 msgstr " --help               Zeigt diese Hilfe\n"
 
-#: ../../src/wlapplication.cc:974
+#: ../../src/wlapplication.cc:975
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -197,11 +197,11 @@ msgstr ""
 "Wir wünschen Dir viel Spaß beim Spielen!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1112
+#: ../../src/wlapplication.cc:1113
 msgid "Unexpected error during the game"
 msgstr "Unerwarteter Fehler im Spielverlauf"
 
-#: ../../src/wlapplication.cc:1116
+#: ../../src/wlapplication.cc:1117
 msgid ""
 "\n"
 "\n"
@@ -211,7 +211,7 @@ msgstr ""
 "\n"
 "Bitte melde dieses Problem, um uns die Möglichkeit zu geben Widelands zu verbessern. Weitere Informationen findest du in der Standard-Ausgabe (stdout.txt unter Windows). Du benutzt Version "
 
-#: ../../src/wlapplication.cc:1122
+#: ../../src/wlapplication.cc:1123
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -221,26 +221,26 @@ msgstr ""
 "\n"
 "Widelands versucht eine Speicherung durchzuführen, wenn ein Fehler auftrat. Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden und fortzusetzen.\n"
 
-#: ../../src/wlapplication.cc:1273
+#: ../../src/wlapplication.cc:1274
 #: ../../src/nethost.cc:656
 msgid "Player"
 msgstr "Spieler"
 
-#: ../../src/wlapplication.cc:1331
+#: ../../src/wlapplication.cc:1332
 #: ../../src/nethost.cc:291
 #: ../../src/netclient.cc:134
 msgid "Preparing game"
 msgstr "Bereite Spiel vor"
 
-#: ../../src/wlapplication.cc:1393
+#: ../../src/wlapplication.cc:1394
 msgid "End of replay"
 msgstr "Ende der Spielaufzeichnung"
 
-#: ../../src/wlapplication.cc:1395
+#: ../../src/wlapplication.cc:1396
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weitergucken."
 
-#: ../../src/wlapplication.cc:1447
+#: ../../src/wlapplication.cc:1448
 #: ../../src/game.cc:369
 msgid "Loading..."
 msgstr "Laden..."
@@ -978,7 +978,7 @@ msgstr "Chat-Menü"
 #: ../../src/game_main_menu.cc:38
 #: ../../src/editor/ui_menus/editor_main_menu.cc:42
 msgid "Main Menu"
-msgstr "Hauptmenü"
+msgstr "Statistiken"
 
 #: ../../src/game_main_menu.cc:47
 msgid "General statistics"
@@ -1156,7 +1156,7 @@ msgstr "Decke Aufgabe auf"
 
 #: ../../src/events/event_factory.cc:85
 msgid "Reveal (or hide) an objective"
-msgstr "Decke eine Aufgabe auf/verstecke sie"
+msgstr "Decke eine Aufgabe auf oder verstecke sie"
 
 #: ../../src/events/event_factory.cc:88
 msgid "Reveal scenario"
@@ -1393,7 +1393,7 @@ msgstr "Nimm an einem Spiel teil"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:41
 msgid "Host a New Game"
-msgstr "Betreue ein neues Spiel"
+msgstr "Eröffne ein neues Spiel"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:54
 msgid "nobody"

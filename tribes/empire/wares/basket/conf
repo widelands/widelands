@@ -1,6 +1,6 @@
 [global]
 descname=_Basket
-help=_This basket is needed by the wine-grower, for harvesting the wine-grapes. It is produced by the carpenter.
+help=_This basket is needed by the wine-grower, for harvesting the wine-grapes. It is produced by the toolsmith.
 menu_pic=menu.png
 
 [idle]

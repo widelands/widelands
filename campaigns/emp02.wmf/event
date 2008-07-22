@@ -219,8 +219,8 @@ version=2
 text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
 _"Saledus smiles"
 "</p><p line-spacing=3 font-size=12><br>"
-_"By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, carpenter's shops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
-_"* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+_"By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, toolsmith's workshops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
+_"* Build up a complete Mining and production infrastructure (Coalmine, Oremine, Toolsmith's workshop, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 "</p></rt>""
 window_title=_Further mountains
 is_modal=true
@@ -258,10 +258,10 @@ type=allow_building
 version=1
 building=stonemason
 
-[Enable Carpenter]
+[Enable Toolsmith]
 type=allow_building
 version=1
-building=carpenter
+building=toolsmith
 
 [Enable Armoursmith]
 type=allow_building

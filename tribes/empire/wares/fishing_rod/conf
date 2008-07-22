@@ -1,6 +1,6 @@
 [global]
 descname=_Fishing Rod
-help=_Fishing rods are needed by fishers, to catch fish. Produced by the carpenter.
+help=_Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith.
 menu_pic=menu.png
 
 [idle]

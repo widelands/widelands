@@ -37,7 +37,7 @@ msgid "Diary of Lutius"
 msgstr "Tagebuch von Lutius"
 
 #: ../../../campaigns/emp02.wmf/event:13
-msgid "Finally!<br>This island seems to be made for us, it is a present of the Gods to my people and me.<br>Until now, we have only seen a small part of this island, but this part is allready leading sunbeams to my mind, feeling as if we found an unpayable treasure, a land like paradise.<br>On this island, we will start our new life, we will build up an outpost for our exile, which perhaps will become a new, beautiful home to everyone of us."
+msgid "Finally!<br>This island seems to be made for us, it is a present of the Gods to my people and me.<br>Until now, we have only seen a small part of this island, but this part is already leading sunbeams to my mind, feeling as if we found an unpayable treasure, a land like paradise.<br>On this island, we will start our new life, we will build up an outpost for our exile, which perhaps will become a new, beautiful home to everyone of us."
 msgstr "Endlich!<br>Diese Insel scheint für uns gemacht zu sein, sie ist ein Geschenk der Götter an meine Leute und mich.<br>Bis jetzt haben wir nur einen kleinen Teil der Insel erkundet, doch schon alleine dieser Teil lässt mich das Sonnenlicht in meinem Herzen spüren und schenkt mir das Gefühl, einen unbezahlbaren Schatz, ein Land wie das Paradies gefunden zu haben.<br>Auf dieser Insel werden wir unser neues Leben beginnen, unseren Außenposten für unser Exil errichten, das vielleicht schon bald ein wunderschönes Zuhause für jeden von uns werden kann."
 
 #: ../../../campaigns/emp02.wmf/event:15
@@ -118,12 +118,12 @@ msgid "Marble on the mountain"
 msgstr "Das Marmor der Berge"
 
 #: ../../../campaigns/emp02.wmf/event:615
-msgid "By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, carpenter's shops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
-msgstr "Bei den Göttern, das ist großartig, das ist ein unglaubliches Geschenk! Dort sind zwei weitere Berge und es scheint beinahe so, als ob einer eine größere Menge Steinkohle verbirgt und der andere einige Eisenadern hat. Nun können wir wirklich ein Leben wie in Fremil führen. Wir sollten sofort anfangen, Minen, eine Köhlerei, einen Hochofen, Schmieden und einen Schreiner zu bauen. Allerdings brauchen wir für diese größeren Gebäude bessere und schönere Baumaterialien. Lass uns einen Steinmetz beauftragen, der uns ein paar wunderschöne Säulen aus Marmor schlägt.<br><br>"
+msgid "By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, toolsmith's workshops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
+msgstr "Bei den Göttern, das ist großartig, das ist ein unglaubliches Geschenk! Dort sind zwei weitere Berge und es scheint beinahe so, als ob einer eine größere Menge Steinkohle verbirgt und der andere einige Eisenadern hat. Nun können wir wirklich ein Leben wie in Fremil führen. Wir sollten sofort anfangen, Minen, eine Köhlerei, einen Hochofen, Schmieden und eine Werkzeugschmiede zu bauen. Allerdings brauchen wir für diese größeren Gebäude bessere und schönere Baumaterialien. Lass uns einen Steinmetz beauftragen, der uns ein paar wunderschöne Säulen aus Marmor schlägt.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:616
-msgid "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
-msgstr "* Baue eine komplette Bergbau- und Produktionsinfrastruktur auf: Kohlen- und Eisenmine, Köhlerei und Hochofen, Schreiner, Waffen- und Rüstungsschmied, zusätzlich einen Steinmetz."
+msgid "* Build up a complete Mining and production infrastructure (Coalmine, Oremine, Toolsmith's workshop, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+msgstr "* Baue eine komplette Bergbau- und Produktionsinfrastruktur auf: Kohlen- und Eisenmine, Köhlerei und Hochofen, Werkzeugschmiede, Waffen- und Rüstungsschmied, zusätzlich einen Steinmetz."
 
 #: ../../../campaigns/emp02.wmf/event:618
 msgid "Further mountains"

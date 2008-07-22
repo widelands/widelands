@@ -1,6 +1,6 @@
 [global]
 descname=_Saw
-help=_This saw is needed by the carpenter, to create all the usefull tools. It is produced by the carpenter.
+help=_This saw is needed by the sawyer, to create all the usefull tools. It is produced by the toolsmith.
 menu_pic=menu.png
 
 [idle]
