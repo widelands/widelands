@@ -82,6 +82,10 @@ void Textarea::set_text(const std::string & text) {
 	expand();
 }
 
+std::string Textarea::get_text() {
+	return m_text;
+}
+
 
 /**
  * Change the alignment

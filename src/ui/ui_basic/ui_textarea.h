@@ -55,6 +55,7 @@ struct Textarea : public Panel {
 		 Align align = Align_Left, bool multiline = false);
 
 	void set_text(const std::string &);
+	std::string get_text();
 	void set_align(Align);
 
 	// Drawing and event handlers

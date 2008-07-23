@@ -49,19 +49,22 @@ m_apply
 	 2,
 	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
 	 _("Apply")),
-//ToDo: Implement working Interface for setting up maxfps
-/*m_fps_plus
+m_fps_plus
 	(this,
 	 MENU_XRES / 2 + 35, 230, 20, 20,
 	 1,
-	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
-	 "+"),
+	 &Fullscreen_Menu_Options::maxFpsPlus, this,
+	 "+",
+	 _("Higher maximum FPS"),
+	 true),
 m_fps_minus
 	(this,
 	 MENU_XRES / 2 + 95, 230, 20, 20,
 	 1,
-	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
-	 "-"),*/
+	 &Fullscreen_Menu_Options::maxFpsMinus, this,
+	 "-",
+	 _("Lower maximum FPS"),
+	 true),
 m_title(this, MENU_XRES / 2, 20, _("General Options"), Align_HCenter),
 m_fullscreen                        (this, Point(285, 100)),
 m_label_fullscreen(this, 315, 110, _("Fullscreen"), Align_VCenter),
@@ -72,7 +75,7 @@ m_label_music(this, 315, 170, _("Enable Music"), Align_VCenter),
 m_fx                                (this, Point(285, 190)),
 m_label_fx(this, 315, 200, _("Enable Sound"), Align_VCenter),
 m_label_maxfps(this, 285, 240, _("Maximum FPS:"), Align_VCenter),
-m_value_maxfps(this, MENU_XRES / 2 + 65, 240, "25", Align_VCenter),
+m_value_maxfps(this, MENU_XRES / 2 + 68, 240, "25", Align_VCenter),
 m_reslist(this, 80, 100, 190, 170, Align_Left, true),
 m_label_resolution(this, 85, 85, _("In-game resolution"), Align_VCenter),
 m_label_language(this, MENU_XRES / 2 + 135, 85, _("Language"), Align_VCenter),
@@ -116,6 +119,7 @@ m_label_autosave
 	char textmaxfps[2];
 	sprintf(textmaxfps, "%i", opt.maxfps);
 	m_value_maxfps                      .set_text(textmaxfps);
+	maxfpstemp = opt.maxfps;
 
 	char buffer[255];
 	snprintf
@@ -185,6 +189,22 @@ m_label_autosave
 	m_label_game_options.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 }
 
+void Fullscreen_Menu_Options::maxFpsPlus() {
+	if(maxfpstemp<99){
+		char textmaxfps[2];
+		sprintf(textmaxfps, "%i", ++maxfpstemp);
+		m_value_maxfps.set_text(textmaxfps);
+	}
+}
+
+void Fullscreen_Menu_Options::maxFpsMinus() {
+	if(maxfpstemp>5){
+		char textmaxfps[2];
+		sprintf(textmaxfps, "%i", --maxfpstemp);
+		m_value_maxfps.set_text(textmaxfps);
+	}
+}
+
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
 	Options_Ctrl::Options_Struct opt = {
@@ -202,6 +222,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 		m_fx                                .get_state   (),
 		m_language_list                     .get_selected(),
 		m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0,
+		atoi((m_value_maxfps.get_text()).c_str())
 	};
 	return opt;
 }
@@ -261,7 +282,7 @@ void Options_Ctrl::save_options() {
 	m_opt_section->set_bool("disable_fx",           !opt.fx);
 	m_opt_section->set_string("language",            opt.language);
 	m_opt_section->set_int("autosave",               opt.autosave * 60);
-	//m_opt_section->set_int("maxfps",                 opt.maxfps);
+	m_opt_section->set_int("maxfps",                 opt.maxfps);
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language.c_str());
 	g_sound_handler.set_disable_music(!opt.music);
