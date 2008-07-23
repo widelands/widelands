@@ -52,6 +52,7 @@ struct Options_Ctrl {
 		bool fx;
 		std::string language;
 		int32_t autosave; // autosave interval in minutes
+		uint32_t maxfps;
 	};
 
 	Options_Ctrl(Section *);
@@ -76,7 +77,7 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	};
 
 private:
-	UI::IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;
+	UI::IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;//, m_fps_plus, m_fps_minus;
 	UI::Textarea                      m_title;
 	UI::Checkbox                      m_fullscreen;
 	UI::Textarea                      m_label_fullscreen;
@@ -86,6 +87,8 @@ private:
 	UI::Textarea                      m_label_music;
 	UI::Checkbox                      m_fx;
 	UI::Textarea                      m_label_fx;
+	UI::Textarea                      m_label_maxfps;
+	UI::Textarea                      m_value_maxfps;
 	UI::Listselect<void *>            m_reslist;
 	UI::Textarea                      m_label_resolution;
 	UI::Textarea                      m_label_language;

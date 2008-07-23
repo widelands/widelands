@@ -39,57 +39,72 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 Fullscreen_Menu_Base("optionsmenu.jpg"),
 m_cancel
 	(this,
-	 410, 530, 190, 24,
+	 410, 570, 190, 24,
 	 0,
 	 &Fullscreen_Menu_Options::end_modal, this, om_cancel,
 	 _("Cancel")),
 m_apply
 	(this,
-	 200, 530, 190, 24,
+	 200, 570, 190, 24,
 	 2,
 	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
 	 _("Apply")),
-m_title(this, MENU_XRES / 2, 0, _("General Options"), Align_HCenter),
-m_fullscreen                        (this, Point(300, 80)),
-m_label_fullscreen(this, 325, 90, _("Fullscreen"), Align_VCenter),
-m_inputgrab                         (this, Point(300, 140)),
-m_label_inputgrab(this, 325, 120, _("Grab Input"), Align_VCenter),
-m_music                             (this, Point(300, 140)),
-m_label_music(this, 325, 150, _("Enable Music"), Align_VCenter),
-m_fx                                (this, Point(300, 170)),
-m_label_fx(this, 325, 180, _("Enable Sound"), Align_VCenter),
-m_reslist(this, 80, 80, 190, 150, Align_Left, true),
-m_label_resolution(this, 85, 65, _("In-game resolution"), Align_VCenter),
-m_label_language(this, MENU_XRES / 2 + 85, 65, _("Language"), Align_VCenter),
-m_language_list(this, MENU_XRES / 2 + 75, 80, 210, 150, Align_Left, true),
+//ToDo: Implement working Interface for setting up maxfps
+/*m_fps_plus
+	(this,
+	 MENU_XRES / 2 + 35, 230, 20, 20,
+	 1,
+	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
+	 "+"),
+m_fps_minus
+	(this,
+	 MENU_XRES / 2 + 95, 230, 20, 20,
+	 1,
+	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
+	 "-"),*/
+m_title(this, MENU_XRES / 2, 20, _("General Options"), Align_HCenter),
+m_fullscreen                        (this, Point(285, 100)),
+m_label_fullscreen(this, 315, 110, _("Fullscreen"), Align_VCenter),
+m_inputgrab                         (this, Point(285, 160)),
+m_label_inputgrab(this, 315, 140, _("Grab Input"), Align_VCenter),
+m_music                             (this, Point(285, 160)),
+m_label_music(this, 315, 170, _("Enable Music"), Align_VCenter),
+m_fx                                (this, Point(285, 190)),
+m_label_fx(this, 315, 200, _("Enable Sound"), Align_VCenter),
+m_label_maxfps(this, 285, 240, _("Maximum FPS:"), Align_VCenter),
+m_value_maxfps(this, MENU_XRES / 2 + 65, 240, "25", Align_VCenter),
+m_reslist(this, 80, 100, 190, 170, Align_Left, true),
+m_label_resolution(this, 85, 85, _("In-game resolution"), Align_VCenter),
+m_label_language(this, MENU_XRES / 2 + 135, 85, _("Language"), Align_VCenter),
+m_language_list(this, MENU_XRES / 2 + 125, 100, 210, 170, Align_Left, true),
 m_label_game_options
-	(this, MENU_XRES / 2, 270, _("In-game Options"), Align_HCenter),
-m_single_watchwin                   (this, Point(85, 325)),
+	(this, MENU_XRES / 2, 300, _("In-game Options"), Align_HCenter),
+m_single_watchwin                   (this, Point(76, 350)),
 m_label_single_watchwin
-	(this, 110, 335, _("Use single Watchwindow Mode"), Align_VCenter),
-m_auto_roadbuild_mode               (this, Point(85, 355)),
+	(this, 105, 360, _("Use single Watchwindow Mode"), Align_VCenter),
+m_auto_roadbuild_mode               (this, Point(76, 378)),
 m_label_auto_roadbuild_mode
-	(this, 110, 365, _("Start roadbuilding after placing flag"), Align_VCenter),
-m_show_workarea_preview             (this, Point(85, 385)),
+	(this, 105, 388, _("Start roadbuilding after placing flag"), Align_VCenter),
+m_show_workarea_preview             (this, Point(76, 406)),
 m_label_show_workarea_preview
-	(this, 110, 395, _("Show buildings area preview"), Align_VCenter),
-m_snap_windows_only_when_overlapping(this, Point(85, 415)),
+	(this, 105, 416, _("Show buildings area preview"), Align_VCenter),
+m_snap_windows_only_when_overlapping(this, Point(76, 434)),
 m_label_snap_windows_only_when_overlapping
-	(this, 110, 425, _("Snap windows only when overlapping"), Align_VCenter),
-m_dock_windows_to_edges             (this, Point(85, 445)),
+	(this, 105, 444, _("Snap windows only when overlapping"), Align_VCenter),
+m_dock_windows_to_edges             (this, Point(76, 462)),
 m_label_dock_windows_to_edges
-	(this, 110, 455, _("Dock windows to edges"), Align_VCenter),
-m_autosave                          (this, Point(85, 475)),
+	(this, 105, 472, _("Dock windows to edges"), Align_VCenter),
+m_autosave                          (this, Point(76, 490)),
 m_label_autosave
-	(this, 110, 485, "Autosave game every XXX minutes", Align_VCenter)
+	(this, 105, 500, "Autosave game every XXX minutes", Align_VCenter)
 {
-	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	m_title     .set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	m_fullscreen.set_state(opt.fullscreen);
 	m_inputgrab .set_state(opt.inputgrab);
 	m_music     .set_state(opt.music);
-	m_music.set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_music     .set_enabled(not g_sound_handler.m_lock_audio_disabling);
 	m_fx        .set_state(opt.fx);
-	m_fx   .set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_fx        .set_enabled(not g_sound_handler.m_lock_audio_disabling);
 	m_single_watchwin                   .set_state(opt.single_watchwin);
 	m_auto_roadbuild_mode               .set_state(opt.auto_roadbuild_mode);
 	m_show_workarea_preview             .set_state(opt.show_warea);
@@ -97,6 +112,10 @@ m_label_autosave
 		(opt.snap_windows_only_when_overlapping);
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
 	m_autosave                          .set_state(opt.autosave > 0);
+
+	char textmaxfps[2];
+	sprintf(textmaxfps, "%i", opt.maxfps);
+	m_value_maxfps                      .set_text(textmaxfps);
 
 	char buffer[255];
 	snprintf
@@ -182,7 +201,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 		m_music                             .get_state   (),
 		m_fx                                .get_state   (),
 		m_language_list                     .get_selected(),
-		m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0
+		m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0,
 	};
 	return opt;
 }
@@ -203,7 +222,6 @@ Options_Ctrl::~Options_Ctrl() {
 	delete m_opt_dialog;
 }
 
-
 Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	Options_Struct opt;
 	opt.xres                  =  s->get_int ("xres",                    640);
@@ -221,6 +239,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	opt.music                 = !s->get_bool("disable_music", false);
 	opt.fx                    = !s->get_bool("disable_fx", false);
 	opt.autosave = s->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.maxfps                =  s->get_int("maxfps", 25);
 	return opt;
 }
 
@@ -242,6 +261,7 @@ void Options_Ctrl::save_options() {
 	m_opt_section->set_bool("disable_fx",           !opt.fx);
 	m_opt_section->set_string("language",            opt.language);
 	m_opt_section->set_int("autosave",               opt.autosave * 60);
+	//m_opt_section->set_int("maxfps",                 opt.maxfps);
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language.c_str());
 	g_sound_handler.set_disable_music(!opt.music);
