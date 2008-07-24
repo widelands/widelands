@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3215\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-06-03 15:53+0000\n"
+"POT-Creation-Date: 2008-07-24 16:33+0000\n"
 "PO-Revision-Date: 2008-06-03 17:59+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -215,4 +215,3 @@ msgstr "Krieg der Täler"
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr "Man sagt, dass sogar Sonne und Mond ihren Weg durch die Täler dieser Berge suchen müssen. TIPP: Obelisken markieren Erzvorkommen. Andernorts lohnt es sich nicht, Geologen auszusenden."
-

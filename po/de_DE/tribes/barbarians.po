@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3215\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-07-24 16:33+0000\n"
 "PO-Revision-Date: 2007-04-29 21:06+0200\n"
 "Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -289,14 +289,6 @@ msgstr "Kohle"
 #: ../../../tribes/barbarians/wares/coal/conf:3
 msgid "The fires of the barbarians are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
 msgstr "Die Feuer der Barbaren werden meist mit Holz geschürt, falls das allerdings nicht heiß genug sein sollte, wird gerne Kohle benutzt."
-
-#: ../../../tribes/barbarians/wares/coalearth/conf:2
-msgid "Coalearth"
-msgstr "Rohkohle"
-
-#: ../../../tribes/barbarians/wares/coalearth/conf:3
-msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
-msgstr "Diese Rohkohle wird in tiefen Minen abgebaut und muss erst in einer Köhlerei weiterverarbeitet werden, um die volle Energie nutzbar zu machen."
 
 #: ../../../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
@@ -645,3 +637,9 @@ msgstr "Trainer"
 #: ../../../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Weber"
+
+#~ msgid "Coalearth"
+#~ msgstr "Rohkohle"
+
+#~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
+#~ msgstr "Diese Rohkohle wird in tiefen Minen abgebaut und muss erst in einer Köhlerei weiterverarbeitet werden, um die volle Energie nutzbar zu machen."

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2651\n"
+"Project-Id-Version: Widelands svn3215\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-07-22 20:50+0200\n"
-"PO-Revision-Date: 2008-07-22 20:51+0100\n"
+"POT-Creation-Date: 2008-07-24 18:33+0200\n"
+"PO-Revision-Date: 2008-07-24 18:40+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1270,66 +1270,78 @@ msgstr "Die Karte ist nicht gespeichert! Willst du den Editor wirklich beenden?"
 msgid "Apply"
 msgstr "Übernehmen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
+msgid "Higher maximum FPS"
+msgstr "Erhöhe max.FPS"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
+msgid "Lower maximum FPS"
+msgstr "Verkleinere max.FPS"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:68
 msgid "General Options"
 msgstr "Allgemeine Optionen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:54
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:70
 msgid "Fullscreen"
 msgstr "Vollbild"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:56
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:72
 msgid "Grab Input"
 msgstr "Feste Maus"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
 msgid "Enable Music"
 msgstr "Musik"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:60
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:76
 msgid "Enable Sound"
 msgstr "Geräusche"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:62
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:77
+msgid "Maximum FPS:"
+msgstr "Maximum FPS:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:80
 msgid "In-game resolution"
 msgstr "Grafikauflösung im Spiel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:63
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:81
 msgid "Language"
 msgstr "Sprache"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:84
 msgid "In-game Options"
 msgstr "Spieloptionen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:69
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:87
 msgid "Use single Watchwindow Mode"
 msgstr "Benutze ein Beobachtungsfenster"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:72
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:90
 msgid "Start roadbuilding after placing flag"
 msgstr "Beginne mit dem Wegbau nach dem Flaggensetzen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:75
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:93
 msgid "Show buildings area preview"
 msgstr "Zeige Vorschau des Einflussbereichs der Gebäude"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:78
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:96
 msgid "Snap windows only when overlapping"
 msgstr "Fenster nur andocken, wenn sie sich überlappen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:81
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:99
 msgid "Dock windows to edges"
 msgstr "Fenster an den Rand andockbar"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:105
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:132
 #, c-format
 msgid "Autosave game every %d minute"
 msgid_plural "Autosave game every %d minutes"
 msgstr[0] "Speichere das Spiel automatisch einmal pro Minute"
 msgstr[1] "Speichere das Spiel automatisch jede %d. Minute"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:157
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:184
 msgid "System default language"
 msgstr "Systemstandard"
 
@@ -2353,32 +2365,20 @@ msgstr "(Keine Beschreibung vorhanden.)"
 #~ msgstr "Agressivste Attacke"
 #~ msgid "Cautious attack"
 #~ msgstr "Schwächste Attacke"
-#~ msgid ""
-#~ " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
-#~ msgstr ""
-#~ " --ggz                Started das Spiel als GGZ Gaming Zone Klienten "
-#~ "(nicht benutzen!)"
+#~ msgid " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
+#~ msgstr " --ggz                Started das Spiel als GGZ Gaming Zone Klienten (nicht benutzen!)"
 #~ msgid "The Room %s is currently not logged in or unknown to the server.\n"
 #~ msgstr "Der Raum %s ist zur Zeit nicht online oder dem Server unbekannt.\n"
 #~ msgid "The User %s is currently not logged in or unknown to the server.\n"
-#~ msgstr ""
-#~ "Der Benutzer %s ist zur Zeit nicht online oder dem Server unbekannt.\n"
-#~ msgid ""
-#~ "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
-#~ "Server runs %i.%02i\n"
-#~ msgstr ""
-#~ "Server gab einen Verbindungsfehler zurück. Dein Protokoll (%i.%02i) ist "
-#~ "zu alt, der Server benutzt %i.%02i\n"
+#~ msgstr "Der Benutzer %s ist zur Zeit nicht online oder dem Server unbekannt.\n"
+#~ msgid "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"
+#~ msgstr "Server gab einen Verbindungsfehler zurück. Dein Protokoll (%i.%02i) ist zu alt, der Server benutzt %i.%02i\n"
 #~ msgid "Server is full!\n"
 #~ msgstr "Server ist voll!\n"
 #~ msgid "This server doesn't serve widelands!\n"
 #~ msgstr "Auf diesen Server läuft Widelands nicht!\n"
-#~ msgid ""
-#~ "Server replied illegally to ChatMessage package. Should have sent %i but "
-#~ "sent %i. Ignored"
-#~ msgstr ""
-#~ "Ungültige Antwort vom Server auf ein Chat-Nachricht-Paket erhalten. Statt "
-#~ "%i wurde %i gesendet, Antwort ignoriert."
+#~ msgid "Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"
+#~ msgstr "Ungültige Antwort vom Server auf ein Chat-Nachricht-Paket erhalten. Statt %i wurde %i gesendet, Antwort ignoriert."
 #~ msgid "LAN games"
 #~ msgstr "Spiele im LAN"
 #~ msgid "GGZ games"

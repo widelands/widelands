@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3215\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-07-22 19:35+0000\n"
+"POT-Creation-Date: 2008-07-24 16:33+0000\n"
 "PO-Revision-Date: 2008-07-22 21:44+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -25,8 +25,7 @@ msgstr "Imperiales Tutorial 1 - Die Strände von Malac' Mor"
 msgid "First mission of the Empire campaign"
 msgstr "Erste Mission der imperialen Kampagne"
 
-#: ../../../campaigns/emp01.wmf/event:8
-#: ../../../campaigns/emp01.wmf/event:22
+#: ../../../campaigns/emp01.wmf/event:8 ../../../campaigns/emp01.wmf/event:22
 #: ../../../campaigns/emp01.wmf/event:36
 #: ../../../campaigns/emp01.wmf/event:226
 #: ../../../campaigns/emp01.wmf/event:243
@@ -150,4 +149,3 @@ msgstr "Du hast diese Insel zu einem sicheren Ort gemacht. Es ist Zeit fortzufah
 #: ../../../campaigns/emp01.wmf/event:247
 msgid "Safe Peninsula"
 msgstr "Sichere Insel"
-

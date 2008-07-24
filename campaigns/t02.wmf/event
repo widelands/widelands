@@ -366,7 +366,7 @@ text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold
 _"Boldreth remarks..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
 _" "So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. We have the iron ore to be melt into steel ready to be forged into whatever we see fit and the coal to keep the smelter's ovens burning."<br><br>"
-_"--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the coalearth from your coalmines must be refined into coal - for that, build a Coal Burner.</p>"
+_"--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the pit coal from your coalmines must be refined into coal - for that, build a charcoal burner.</p>"
 "</rt>""
 window_title=_Advisor
 is_modal=true

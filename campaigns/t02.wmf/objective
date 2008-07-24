@@ -38,7 +38,7 @@ trigger=Farming Began
 
 [Refine Ores]
 descr=_""<rt>"
-_"<p>The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the coalearth from your coalmines must be refined into coal - for that, build a Coal Burner.</p>"
+_"<p>The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the pit coal from your coalmines must be refined into coal - for that, build a charcoal burner.</p>"
 "</rt>""
 visible=false
 trigger=Refining Began
