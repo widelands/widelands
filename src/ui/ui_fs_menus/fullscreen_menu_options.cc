@@ -68,7 +68,7 @@ m_fps_minus
 m_title(this, MENU_XRES / 2, 20, _("General Options"), Align_HCenter),
 m_fullscreen                        (this, Point(285, 100)),
 m_label_fullscreen(this, 315, 110, _("Fullscreen"), Align_VCenter),
-m_inputgrab                         (this, Point(285, 160)),
+m_inputgrab                         (this, Point(285, 130)),
 m_label_inputgrab(this, 315, 140, _("Grab Input"), Align_VCenter),
 m_music                             (this, Point(285, 160)),
 m_label_music(this, 315, 170, _("Enable Music"), Align_VCenter),
