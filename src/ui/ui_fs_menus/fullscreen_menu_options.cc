@@ -75,7 +75,7 @@ m_label_music(this, 315, 170, _("Enable Music"), Align_VCenter),
 m_fx                                (this, Point(285, 190)),
 m_label_fx(this, 315, 200, _("Enable Sound"), Align_VCenter),
 m_label_maxfps(this, 285, 240, _("Maximum FPS:"), Align_VCenter),
-m_value_maxfps(this, MENU_XRES / 2 + 68, 240, "25", Align_VCenter),
+m_value_maxfps(this, MENU_XRES / 2 + 85, 228, "25", Align_Right),
 m_reslist(this, 80, 100, 190, 170, Align_Left, true),
 m_label_resolution(this, 85, 85, _("In-game resolution"), Align_VCenter),
 m_label_language(this, MENU_XRES / 2 + 135, 85, _("Language"), Align_VCenter),
@@ -120,6 +120,10 @@ m_label_autosave
 	sprintf(textmaxfps, "%i", opt.maxfps);
 	m_value_maxfps                      .set_text(textmaxfps);
 	maxfpstemp = opt.maxfps;
+	if(maxfpstemp==99)
+		m_fps_plus.set_enabled(false);
+	if(maxfpstemp==5)
+		m_fps_minus.set_enabled(false);
 
 	char buffer[255];
 	snprintf
@@ -190,19 +194,23 @@ m_label_autosave
 }
 
 void Fullscreen_Menu_Options::maxFpsPlus() {
-	if(maxfpstemp<99){
-		char textmaxfps[2];
-		sprintf(textmaxfps, "%i", ++maxfpstemp);
-		m_value_maxfps.set_text(textmaxfps);
-	}
+	if(maxfpstemp==5)
+		m_fps_minus.set_enabled(true);
+	char textmaxfps[2];
+	sprintf(textmaxfps, "%i", ++maxfpstemp);
+	m_value_maxfps.set_text(textmaxfps);
+	if(maxfpstemp==99)
+		m_fps_plus.set_enabled(false);
 }
 
 void Fullscreen_Menu_Options::maxFpsMinus() {
-	if(maxfpstemp>5){
-		char textmaxfps[2];
-		sprintf(textmaxfps, "%i", --maxfpstemp);
-		m_value_maxfps.set_text(textmaxfps);
-	}
+	if(maxfpstemp==99)
+		m_fps_plus.set_enabled(true);
+	char textmaxfps[2];
+	sprintf(textmaxfps, "%i", --maxfpstemp);
+	m_value_maxfps.set_text(textmaxfps);
+	if(maxfpstemp==5)
+		m_fps_minus.set_enabled(false);
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
