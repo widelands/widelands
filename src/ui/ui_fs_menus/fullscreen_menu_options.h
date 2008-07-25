@@ -72,13 +72,18 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
 	Options_Ctrl::Options_Struct get_values();
 	enum {
-		om_cancel = 0,
-		om_ok     = 1
+		om_cancel =   0,
+		om_ok     =   1,
+		plus      =   1,
+		minus     =  -1,
+		plusTen   =  10,
+		minusTen  = -10
 	};
 
 private:
-	UI::IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;
-	UI::Button<Fullscreen_Menu_Options> m_fps_plus, m_fps_minus;
+	UI::IDButton<Fullscreen_Menu_Options, int32_t>
+			m_cancel, m_apply, m_fps_plus, m_fps_minus, m_autosave_plus,
+			m_autosave_minus, m_autosave_tenplus, m_autosave_tenminus;
 	UI::Textarea                      m_title;
 	UI::Checkbox                      m_fullscreen;
 	UI::Textarea                      m_label_fullscreen;
@@ -107,11 +112,15 @@ private:
 	UI::Textarea                      m_label_dock_windows_to_edges;
 	UI::Checkbox                      m_autosave;
 	UI::Textarea                      m_label_autosave;
+	UI::Textarea                      m_value_autosave;
+	UI::Textarea                      m_label_minute;
 
 	int32_t m_maxfps;
-	void maxFpsPlus();
-	void maxFpsMinus();
+	int32_t m_asvalue;
+	void maxFpsChange(int32_t);
 	void update_maxfps();
+	void autosaveChange(int32_t);
+	void update_autosave();
 
 	struct res {
 		int32_t xres;

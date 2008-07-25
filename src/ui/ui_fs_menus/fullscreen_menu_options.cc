@@ -53,17 +53,49 @@ m_fps_plus
 	(this,
 	 MENU_XRES / 2 + 35, 230, 20, 20,
 	 1,
-	 &Fullscreen_Menu_Options::maxFpsPlus, this,
+	 &Fullscreen_Menu_Options::maxFpsChange, this, plus,
 	 "+",
-	 _("Higher maximum FPS"),
+	 _("Increase maximum FPS"),
 	 true),
 m_fps_minus
 	(this,
 	 MENU_XRES / 2 + 95, 230, 20, 20,
 	 1,
-	 &Fullscreen_Menu_Options::maxFpsMinus, this,
+	 &Fullscreen_Menu_Options::maxFpsChange, this, minus,
 	 "-",
-	 _("Lower maximum FPS"),
+	 _("Decrease maximum FPS"),
+	 true),
+m_autosave_plus
+	(this,
+	 MENU_XRES / 2 + 35, 490, 20, 20,
+	 1,
+	 &Fullscreen_Menu_Options::autosaveChange, this, plus,
+	 "+",
+	 _("Increase autosave interval"),
+	 true),
+m_autosave_minus
+	(this,
+	 MENU_XRES / 2 + 130, 490, 20, 20,
+	 1,
+	 &Fullscreen_Menu_Options::autosaveChange, this, minus,
+	 "-",
+	 _("Decrease autosave interval"),
+	 true),
+m_autosave_tenplus
+	(this,
+	 MENU_XRES / 2 + 5, 490, 25, 20,
+	 1,
+	 &Fullscreen_Menu_Options::autosaveChange, this, plusTen,
+	 "++",
+	 _("Increase autosave interval at 10"),
+	 true),
+m_autosave_tenminus
+	(this,
+	 MENU_XRES / 2 + 155, 490, 25, 20,
+	 1,
+	 &Fullscreen_Menu_Options::autosaveChange, this, minusTen,
+	 "--",
+	 _("Decrease autosave interval at 10"),
 	 true),
 m_title(this, MENU_XRES / 2, 20, _("General Options"), Align_HCenter),
 m_fullscreen                        (this, Point(285, 100)),
@@ -75,7 +107,7 @@ m_label_music(this, 315, 170, _("Enable Music"), Align_VCenter),
 m_fx                                (this, Point(285, 190)),
 m_label_fx(this, 315, 200, _("Enable Sound"), Align_VCenter),
 m_label_maxfps(this, 285, 240, _("Maximum FPS:"), Align_VCenter),
-m_value_maxfps(this, MENU_XRES / 2 + 85, 228, "25", Align_Right),
+m_value_maxfps(this, MENU_XRES / 2 + 85, 227, "25", Align_Right),
 m_reslist(this, 80, 100, 190, 170, Align_Left, true),
 m_label_resolution(this, 85, 85, _("In-game resolution"), Align_VCenter),
 m_label_language(this, MENU_XRES / 2 + 135, 85, _("Language"), Align_VCenter),
@@ -99,7 +131,11 @@ m_label_dock_windows_to_edges
 	(this, 105, 472, _("Dock windows to edges"), Align_VCenter),
 m_autosave                          (this, Point(76, 490)),
 m_label_autosave
-	(this, 105, 500, "Autosave game every XXX minutes", Align_VCenter)
+	(this, 105, 500, _("Save game automatically every"), Align_VCenter),
+m_value_autosave
+	(this, MENU_XRES / 2 + 87, 487, "15", Align_Right),
+m_label_minute
+	(this, MENU_XRES / 2 + 90, 500, _("min."), Align_VCenter)
 {
 	m_title     .set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	m_fullscreen.set_state(opt.fullscreen);
@@ -115,18 +151,11 @@ m_label_autosave
 		(opt.snap_windows_only_when_overlapping);
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
 	m_autosave                          .set_state(opt.autosave > 0);
+	m_autosave.changed.set(this, &Fullscreen_Menu_Options::update_autosave);
+	m_asvalue = opt.autosave / 60;
+	update_autosave();
 	m_maxfps = opt.maxfps;
 	update_maxfps();
-
-	char buffer[255];
-	snprintf
-		(buffer, sizeof(buffer),
-		 ngettext
-		 	("Autosave game every %d minute", "Autosave game every %d minutes",
-		 	 DEFAULT_AUTOSAVE_INTERVAL),
-		 DEFAULT_AUTOSAVE_INTERVAL);
-	m_label_autosave.set_text(buffer);
-
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
@@ -186,13 +215,33 @@ m_label_autosave
 	m_label_game_options.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 }
 
-void Fullscreen_Menu_Options::maxFpsPlus() {
-	m_maxfps++;
-	update_maxfps();
+void Fullscreen_Menu_Options::autosaveChange(int32_t arg) {
+	if(arg == plus)
+		m_asvalue++;
+	if(arg == minus)
+		m_asvalue--;
+	if(arg == plusTen)
+		m_asvalue += 10;
+	if(arg == minusTen)
+		m_asvalue -= 10;
+	update_autosave();
 }
 
-void Fullscreen_Menu_Options::maxFpsMinus() {
-	m_maxfps--;
+void Fullscreen_Menu_Options::update_autosave() {
+	m_autosave_plus.set_enabled    (m_autosave.get_state() & (m_asvalue < 300));
+	m_autosave_minus.set_enabled   (m_autosave.get_state() & (m_asvalue >   1));
+	m_autosave_tenplus.set_enabled (m_autosave.get_state() & (m_asvalue < 291));
+	m_autosave_tenminus.set_enabled(m_autosave.get_state() & (m_asvalue >  10));
+	char text[32];
+	snprintf(text, sizeof(text), "%i", m_asvalue);
+	m_value_autosave.set_text(text);
+}
+
+void Fullscreen_Menu_Options::maxFpsChange(int32_t arg) {
+	if(arg == plus)
+		m_maxfps++;
+	if(arg == minus)
+		m_maxfps--;
 	update_maxfps();
 }
 
@@ -221,7 +270,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 		m_music                             .get_state   (),
 		m_fx                                .get_state   (),
 		m_language_list                     .get_selected(),
-		m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0,
+		m_autosave.get_state() ? m_asvalue : 0,
 		m_maxfps
 	};
 	return opt;
