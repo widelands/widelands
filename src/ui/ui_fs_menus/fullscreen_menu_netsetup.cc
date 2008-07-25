@@ -49,9 +49,12 @@ hostname  (this, 310, 220, 200, 26, 2, 0),
 playername(this, 310, 260, 200, 26, 2, 0),
 opengames (this, 310, 300, 390, 180)
 {
+	Section *s = g_options.pull_section("global");//for playername
+
 	title     .set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::change_hostname);
-	playername.setText  (_("nobody"));
+	playername.setText  (s->get_string("nickname", (_("nobody"))));
+	playername.changed.set(this, &Fullscreen_Menu_NetSetup::change_playername);
 	opengames .add_column(150, _("Host"));
 	opengames .add_column(150, _("Map"));
 	opengames .add_column (90, _("State"));
@@ -163,6 +166,12 @@ void Fullscreen_Menu_NetSetup::change_hostname()
 	// Allow user to enter a hostname manually
 	opengames.select(opengames.no_selection_index());
 	joingame.set_enabled(hostname.text().size());
+}
+
+void Fullscreen_Menu_NetSetup::change_playername()
+{
+	Section *s = g_options.pull_section("global");
+	s->set_string("nickname", playername.text());
 }
 
 void Fullscreen_Menu_NetSetup::clicked_joingame() {

@@ -84,7 +84,8 @@ private:
 		(UI::Table<const LAN_Open_Game * const>::Entry_Record &,
 		 const LAN_Game_Info &);
 
-	void change_hostname   ();
+	void change_hostname();
+	void change_playername();
 	void clicked_joingame();
 	void clicked_hostgame();
 };
