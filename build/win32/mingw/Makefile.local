@@ -1,7 +1,5 @@
 # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                               #
-#   !!! !!! THIS IS NO REAL *.h - FILE !!! !!!  #
-#                                               #
 #          PLEASE DEFINE BUILDTYPE HERE         #
 #                                               #
 # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -14,7 +12,4 @@ BUILD=release
 #Build=debug
 
 #### Version #### // Needed for 'make dist'
-Version="SVNbuild"
-
-#### GGZ-Build ####
-USE_GGZ=YES
+Version="Build13"

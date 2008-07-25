@@ -1,16 +1,8 @@
 #####################################################################
-#     W I D E L A N D S			M A K E F I L E                       #
+#     W I D E L A N D S       M A K E F I L E                       #
 #####################################################################
 # Do not change this file, instead create a new Makefile.local
-# and overwrite the vaiables listed here
-
-
-########################### GLOBAL SECTION ##########################
-# Compile time includes
-# Use the GGZ Gamingzone? Enable for releases.
-ifndef USE_GGZ
-USE_GGZ:=NO
-endif
+# and overwrite the variables listed here
 
 #doxygen
 DOXYGEN=/usr/bin/doxygen
@@ -60,15 +52,8 @@ icon.o: Widelands_win.rc
 -include Makefile.local
 
 ####################################################################
-#  NO USER CHANGES BELOW THIS POINT											 #
+#  NO USER CHANGES BELOW THIS POINT                                #
 ####################################################################
-
-# COMPILE TIME configuration
-ifeq ($(USE_GGZ),YES)
-ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ
-ADD_LDFLAGS:=-lggzmod -lggzcore -lggz -lexpat
-endif
-
 
 ##############################################################################
 # Flags configuration
