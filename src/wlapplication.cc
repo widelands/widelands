@@ -681,6 +681,8 @@ bool WLApplication::init_settings() {
 	s->get_string("yres");
 	s->get_bool("workareapreview");
 	s->get_bool("nozip");
+	s->get_bool("snap_windows_only_when_overlapping");
+	s->get_bool("dock_windows_to_edges");
 	s->get_int("border_snap_distance");
 	s->get_int("maxfps");
 	s->get_int("panel_snap_distance");

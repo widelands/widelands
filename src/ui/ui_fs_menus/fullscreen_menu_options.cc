@@ -115,15 +115,8 @@ m_label_autosave
 		(opt.snap_windows_only_when_overlapping);
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
 	m_autosave                          .set_state(opt.autosave > 0);
-
-	char textmaxfps[2];
-	sprintf(textmaxfps, "%i", opt.maxfps);
-	m_value_maxfps                      .set_text(textmaxfps);
-	maxfpstemp = opt.maxfps;
-	if(maxfpstemp==99)
-		m_fps_plus.set_enabled(false);
-	if(maxfpstemp==5)
-		m_fps_minus.set_enabled(false);
+	m_maxfps = opt.maxfps;
+	update_maxfps();
 
 	char buffer[255];
 	snprintf
@@ -194,24 +187,23 @@ m_label_autosave
 }
 
 void Fullscreen_Menu_Options::maxFpsPlus() {
-	if(maxfpstemp==5)
-		m_fps_minus.set_enabled(true);
-	char textmaxfps[2];
-	sprintf(textmaxfps, "%i", ++maxfpstemp);
-	m_value_maxfps.set_text(textmaxfps);
-	if(maxfpstemp==99)
-		m_fps_plus.set_enabled(false);
+	m_maxfps++;
+	update_maxfps();
 }
 
 void Fullscreen_Menu_Options::maxFpsMinus() {
-	if(maxfpstemp==99)
-		m_fps_plus.set_enabled(true);
-	char textmaxfps[2];
-	sprintf(textmaxfps, "%i", --maxfpstemp);
-	m_value_maxfps.set_text(textmaxfps);
-	if(maxfpstemp==5)
-		m_fps_minus.set_enabled(false);
+	m_maxfps--;
+	update_maxfps();
 }
+
+void Fullscreen_Menu_Options::update_maxfps() {
+	m_fps_plus.set_enabled(m_maxfps < 99);
+	m_fps_minus.set_enabled(m_maxfps > 5);
+	char text[32];
+	snprintf(text, sizeof(text), "%i", m_maxfps);
+	m_value_maxfps.set_text(text);
+}
+
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
@@ -230,7 +222,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 		m_fx                                .get_state   (),
 		m_language_list                     .get_selected(),
 		m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0,
-		atoi((m_value_maxfps.get_text()).c_str())
+		m_maxfps
 	};
 	return opt;
 }

@@ -71,9 +71,6 @@ private:
 struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
 	Options_Ctrl::Options_Struct get_values();
-	uint32_t maxfpstemp;
-	void maxFpsPlus();
-	void maxFpsMinus();
 	enum {
 		om_cancel = 0,
 		om_ok     = 1
@@ -110,6 +107,11 @@ private:
 	UI::Textarea                      m_label_dock_windows_to_edges;
 	UI::Checkbox                      m_autosave;
 	UI::Textarea                      m_label_autosave;
+
+	int32_t m_maxfps;
+	void maxFpsPlus();
+	void maxFpsMinus();
+	void update_maxfps();
 
 	struct res {
 		int32_t xres;
