@@ -22,6 +22,12 @@
 
 std::string ChatMessage::toPrintable() const
 {
+	if ((msg.size() > 3) & (msg.substr(0,3) == "/me")) {
+		if (sender.size())
+			return "-> " + sender + msg.substr(3,msg.length()-1);
+		else
+			return "-> ***"       + msg.substr(3,msg.length()-1);
+	}
 	if (sender.size())
 		return sender + ": " + msg;
 	else
