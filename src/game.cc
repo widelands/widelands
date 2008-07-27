@@ -269,7 +269,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 				 map().get_scenario_player_name (p));
 		}
 
-		set_iabase(new Interactive_Player(*this, 1));
+		set_iabase(new Interactive_Player(*this, 1, scenario, false));
 
 		loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 
@@ -341,10 +341,10 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 
 /**
  * Load a game
- * argument defines if this is a single player game (true)
- * or networked (false)
+ * argument defines if this is a single player game (false)
+ * or networked (true)
  */
-bool Game::run_load_game(bool, std::string filename) {
+bool Game::run_load_game(bool multiplayer, std::string filename) {
 	if (filename.empty()) {
 		Fullscreen_Menu_LoadGame ssg(*this);
 		if (ssg.run() > 0)
@@ -363,7 +363,7 @@ bool Game::run_load_game(bool, std::string filename) {
 		std::auto_ptr<FileSystem> const fs
 			(g_fs->MakeSubFileSystem(filename.c_str()));
 
-		set_iabase(new Interactive_Player(*this, 1)); //  FIXME memory leak!!!
+		set_iabase(new Interactive_Player(*this, 1, !multiplayer, multiplayer)); // FIXME memory leak!!!
 
 		Game_Loader gl(*fs, this);
 		loaderUI.step(_("Loading..."));

@@ -60,7 +60,7 @@ struct Interactive_Player : public Interactive_Base {
 		UI::UniqueWindow::Registry stock;
 	};
 
-	Interactive_Player(Widelands::Game &, Widelands::Player_Number);
+	Interactive_Player(Widelands::Game &, Widelands::Player_Number, bool, bool);
 	~Interactive_Player();
 
 	void start();

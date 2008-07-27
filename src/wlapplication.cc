@@ -284,7 +284,7 @@ void WLApplication::run()
 	} else if (m_loadgame_filename.size()) {
 		Widelands::Game game;
 		try {
-			game.run_load_game(true, m_loadgame_filename.c_str());
+			game.run_load_game(false, m_loadgame_filename.c_str());
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -1333,7 +1333,7 @@ bool WLApplication::new_game()
 		loaderUI.step(_("Preparing game"));
 
 		game.set_game_controller(ctrl.get());
-		game.set_iabase(new Interactive_Player(game, 1));
+		game.set_iabase(new Interactive_Player(game, 1, false, false));
 		game.init(loaderUI, sp.settings());
 		game.run(loaderUI);
 	} catch (...) {

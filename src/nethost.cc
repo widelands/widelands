@@ -292,7 +292,7 @@ void NetHost::run()
 
 		d->game = &game;
 		game.set_game_controller(this);
-		Interactive_Player* ipl = new Interactive_Player(game, 1);
+		Interactive_Player* ipl = new Interactive_Player(game, 1, false, true);
 		ipl->set_chat_provider(&d->chat);
 		game.set_iabase(ipl);
 		game.init(loaderUI, d->settings);

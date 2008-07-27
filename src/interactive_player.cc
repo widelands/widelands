@@ -119,7 +119,7 @@ void ChatDisplay::draw(RenderTarget* dst)
 		g_fh->draw_string
 			(*dst,
 			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
-			 Point(0, y),
+			 Point(0, get_inner_h() -55 -y),
 			 it->text,
 			 Align_Left);
 		y += it->h;
@@ -155,8 +155,9 @@ Interactive_Player::Interactive_Player
 Initialize
 ===============
 */
-Interactive_Player::Interactive_Player(Widelands::Game & g, uint8_t const plyn)
-: Interactive_Base(g), m(new Interactive_PlayerImpl), m_game(&g),
+Interactive_Player::Interactive_Player
+		(Widelands::Game & g, uint8_t const plyn, bool scenario, bool multiplayer)
+		: Interactive_Base(g), m(new Interactive_PlayerImpl), m_game(&g),
 
 #define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
@@ -189,20 +190,26 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_chat,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_main_menu,    UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_objectives,   UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,    UI::Box::AlignLeft);
 	//m_toolbar.add(&m_toggle_resources,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_help,         UI::Box::AlignLeft);
-	m_toolbar.resize();
-	adjust_toolbar_position();
+	m_toolbar.add(&m_toggle_objectives,   UI::Box::AlignLeft);
 
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::field_action);
 
-	m->chatDisplay = new ChatDisplay(this, 10, 25, get_w()-10, get_h()-25);
-	m_toggle_chat.set_visible(false);
-	m_toggle_chat.set_enabled(false);
+	if(multiplayer == true) {
+		m->chatDisplay = new ChatDisplay(this, 10, 25, get_w()-10, get_h()-25);
+		m_toggle_chat.set_visible(false);
+		m_toggle_chat.set_enabled(false);
+	} else
+		m_toggle_chat.set_visible(false);
+	if(scenario == false)
+		m_toggle_objectives.set_visible(false);
+
+	m_toolbar.resize();
+	adjust_toolbar_position();
 
 	set_display_flag(dfSpeed, true);
 }

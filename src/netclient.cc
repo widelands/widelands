@@ -136,7 +136,8 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 
-		Interactive_Player* ipl = new Interactive_Player(game, d->playernum+1);
+		Interactive_Player* ipl = new Interactive_Player
+				(game, d->playernum+1, false, true);
 		game.set_iabase(ipl);
 		ipl->set_chat_provider(this);
 		game.init(loaderUI, d->settings);
