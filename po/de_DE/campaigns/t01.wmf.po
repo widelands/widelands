@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3215\n"
+"Project-Id-Version: Widelands svn3224\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-07-24 16:33+0000\n"
+"POT-Creation-Date: 2008-07-28 17:44+0000\n"
 "PO-Revision-Date: 2008-03-03 23:13+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -159,3 +159,20 @@ msgstr "Gut gemacht! Jetzt haben wir alles, um sicher über den Winter zu kommen
 #: ../../../campaigns/t01.wmf/event:286
 msgid "Mission Complete"
 msgstr "Mission erfüllt"
+
+#: ../../../campaigns/t01.wmf/objective:6
+msgid "- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- build a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack.<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+msgstr ""
+
+#: ../../../campaigns/t01.wmf/objective:13
+#, fuzzy
+msgid "- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+msgstr " \"Es gibt ein altes Sprichwort, das besagt: 'Geteilte Last ist halbe Last.' Ein Trägerwechsel zwischen dem Holzfäller und unserem Lager würde die Arbeit unserer Träger vereinfachen.\"<br><br>--NEUES ZIEL--<br>- Es gibt ein Flaggensymbol in der Mitte des Weges, den Du eben gebaut hast. Wenn Du es anklickst und im aufspringenden Menü das Flaggensymbol wählst, setzt Du dort eine Flagge. Das teilt die Arbeit des Holztragens auf zwei Träger auf. Wenn viele Waren zwischen zwei Punkten transportiert werden, ist das Hinzufügen von Flaggen sinnvoll, da der Transport so viel schneller voran geht. Setze eine Flagge auf die Mitte der Straße!"
+
+#: ../../../campaigns/t01.wmf/objective:20
+msgid "- Build a Ranger's Hut to the east of the Lumberjack."
+msgstr ""
+
+#: ../../../campaigns/t01.wmf/objective:27
+msgid "- Build two Quarries south-west of your headquarters."
+msgstr ""

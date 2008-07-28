@@ -199,6 +199,9 @@ m_toggle_help
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::field_action);
 
+
+	// TODO : instead of making unneeded buttons invisible after generation,
+	// they should not at all be generated. -> implement more dynamic toolbar UI
 	if(multiplayer == true) {
 		m->chatDisplay = new ChatDisplay(this, 10, 25, get_w()-10, get_h()-25);
 		m_toggle_chat.set_visible(false);

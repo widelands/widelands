@@ -3,8 +3,8 @@
 ##############################################################################
 #
 # This script holds the common functions for locale handling & generation.
-# 
-# Usage: add non-iterative catalogs to MAINPOT list, or iterative catalogs 
+#
+# Usage: add non-iterative catalogs to MAINPOT list, or iterative catalogs
 # (i.e., tribes) to ITERATIVEPOTS as explained below
 #
 # This file assumes to be called from base directory. Accepts a list of
@@ -54,9 +54,9 @@ MAINPOTS = [( "maps", ["../../maps/*/elemental", "../../campaigns/cconfig"] ),
 #
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
-ITERATIVEPOTS = [ ("campaigns/%s", "campaigns/", 
+ITERATIVEPOTS = [ ("campaigns/%s", "campaigns/",
 											["../../../campaigns/%s/e*",
-											"../../campaigns/%s/objective"] ),
+											"../../../campaigns/%s/objective"] ),
 				  ("tribes/%s", "tribes/", ["../../../tribes/%s/conf",
 											 "../../../tribes/%s/*/*/conf"] ),
 				  ("worlds/%s", "worlds/", ["../../../worlds/%s/*conf",
@@ -179,7 +179,7 @@ def do_find_dirs(preffix, pattern):
 
 ##############################################################################
 #
-# Build a list of catalogs from iterative rules above. Returns a list of 
+# Build a list of catalogs from iterative rules above. Returns a list of
 # type ("catalog_name", ["source_paths_list"])
 #
 ##############################################################################
@@ -241,7 +241,7 @@ def do_update_potfiles():
 						do_compile_src( potfile, srcfiles )
 				else:
 						do_compile( potfile, srcfiles )
-		
+
 				os.chdir(oldcwd)
 
 		print("")
@@ -254,7 +254,7 @@ def do_update_potfiles():
 #
 ##############################################################################
 def do_buildpo(po, pot, dst):
-		return os.system("msgmerge %s %s %s -o %s" % 
+		return os.system("msgmerge %s %s %s -o %s" %
 						(MSGMERGEOPTS, po, pot, dst))
 
 
@@ -271,7 +271,7 @@ def do_buildpo(po, pot, dst):
 #
 ##############################################################################
 def do_header_check(filename, filehandle, lines):
-	
+
 	# Array of regex to match lines that will be checked. Place all matches
 	# that have a template before those that do not. Templates are used by
 	# re_compiled_array index numbers.
@@ -291,7 +291,7 @@ def do_header_check(filename, filehandle, lines):
 		re.compile(r"^\"MIME-Version: 1\.0\\n\"$"),
 		re.compile(r"^\"Content-Type: text/plain; charset=UTF-8\\n\"$"),
 		re.compile(r"^\"Content-Transfer-Encoding: 8bit\\n\"$"),
-		re.compile(r"^\"Plural-Forms: nplurals=[0-9]+; plural=.*;\\n\"$")
+		re.compile(r"^\"Plural-Forms: nplurals=[0-9] plural=.+\\n\"$")
 	]
 
 	# Create an array of template strings to output on header line
@@ -351,10 +351,10 @@ def do_header_check(filename, filehandle, lines):
 		if re_extended_header.match(line):
 			results.append(line)
 			lines.remove(line)
-	
+
 	for line in results:
 		filehandle.write(line)
-	
+
 	if len(lines) != 0:
 		print "\nDiscarded the following lines from " + filename + "!"
 		for line in lines:
@@ -414,7 +414,7 @@ def do_update_po(lang, files):
 
 		for f in files:
 				# File names to use
-				po = os.path.normpath(("po/%s/%s" % 
+				po = os.path.normpath(("po/%s/%s" %
 						(lang, f.rstrip("t").lstrip("/"))))
 				pot = os.path.normpath(("po/pot/%s" % f))
 				tmp = "tmp.po"
