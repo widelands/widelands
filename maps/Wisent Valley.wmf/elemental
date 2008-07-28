@@ -1,0 +1,11 @@
+# Automatically created by Widelands svn3224
+
+[global]
+packet_version="1"
+map_w="96"
+map_h="96"
+nr_players="5"
+world="greenland"
+name=_"Wisent Valley"
+author="Nasenbaer"
+descr=_"It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"

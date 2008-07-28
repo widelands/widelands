@@ -1,0 +1,9 @@
+# Automatically created by Widelands svn3224
+
+[global]
+packet_version="1"
+
+[Nächstes Szenario]
+delete_protected="true"
+type="string"
+value="<undefiniert>"
