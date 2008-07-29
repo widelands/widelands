@@ -43,6 +43,7 @@ namespace Widelands {
 struct Objective : public Named, public Referencer<Trigger> {
 	Objective()
 		:
+		m_visname   (name()),
 		m_descr     (_("no descr")),
 		m_trigger   (0),
 		m_is_visible(true)
@@ -51,7 +52,9 @@ struct Objective : public Named, public Referencer<Trigger> {
 
 	std::string identifier() const {return "Objective: " + name();}
 
+	const std::string & visname() const throw ()  {return m_visname;}
 	const std::string & descr() const throw ()    {return m_descr;}
+	void set_visname(const std::string & new_name){m_visname = new_name;}
 	void set_descr(const std::string & new_descr) {m_descr = new_descr;}
 	bool get_is_visible()       const throw ()    {return m_is_visible;}
 	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
@@ -69,6 +72,7 @@ struct Objective : public Named, public Referencer<Trigger> {
 	}
 
 private:
+	std::string m_visname;
 	std::string m_descr;
 	Trigger *   m_trigger;
 	bool        m_is_visible;

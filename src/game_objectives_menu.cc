@@ -54,7 +54,7 @@ void GameObjectivesMenu::think() {
 		for (uint32_t j = 0;; ++j)
 			if (j == list_size) { //  the objective is not in our list
 				if     (should_show)
-					list.add(mom[i].name().c_str(), mom[i]);
+					list.add(mom[i].visname().c_str(), mom[i]);
 				break;
 			} else if (&list[j] == &mom[i]) { //  the objective is in our list
 				if (not should_show)

@@ -61,6 +61,7 @@ throw (_wexception)
 					} catch (Manager<Objective>::Already_Exists) {
 						throw wexception("duplicated");
 					}
+					objective.set_visname    (s->get_string("name", name));
 					objective.set_descr      (s->get_safe_string("descr"));
 					objective.set_is_visible (s->get_safe_bool  ("visible"));
 					if (Trigger * const trig = mtm[trigger_name])
@@ -93,6 +94,7 @@ throw (_wexception)
 	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i) {
 		Objective const & objective = mom[i];
 		Section & s = *prof.create_section(objective.name().c_str());
+		s.set_string("name",     objective.visname());
 		s.set_string("descr",    objective.descr());
 		s.set_bool  ("visible",  objective.get_is_visible());
 		s.set_string("trigger",  objective.get_trigger()->name());

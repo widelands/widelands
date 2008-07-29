@@ -2,32 +2,36 @@
 packet_version=1
 
 [Build Lumberjack 1]
+name=_ "Build a lumberjack's hut"
 descr=_ ""<rt><p>"
-_"* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a Lumberjacks Hut - may be built.<br>"
-_"* Build a Lumberjacks Hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
-_"* Build a road between your headquarters and the Lumberjacks Hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+_"* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a lumberjack's hut - may be built.<br>"
+_"* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
+_"* Build a road between your headquarters and the lumberjack's hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
 "</p></rt>""
 visible=false
 trigger=Built Lumberjack 1
 
 [Build Lumberjack 2]
+name=_ "Build another lumberjack's hut"
 descr=_ ""<rt><p>"
 _"* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
-_"* Place a Lumberjacks Hut directly south of the flag you are about to place on the road. Connect the implied flag with the new Lumberjacks Hut afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+_"* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 "</p></rt>""
 visible=false
 trigger=Built Lumberjack 2
 
 [Build Ranger]
+name=_ "Build a ranger's hut"
 descr=_ ""<rt><p>"
-_"* Build a Rangers Hut to the east of the first Lumberjacks Hut."
+_"* Build a ranger's hut to the east of the first lumberjack's hut."
 "</p></rt>""
 visible=false
 trigger=Built Ranger
 
 [Build Quarries]
+name=_ "Build two quarries"
 descr=_ ""<rt><p>"
-_"* Build two Quarries south-west of your headquarters."
+_"* Build two quarries south-west of your headquarters."
 "</p></rt>""
 visible=false
 trigger=Built Quarries
