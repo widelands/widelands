@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3224\n"
+"Project-Id-Version: Widelands svn3229\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-07-28 17:44+0000\n"
-"PO-Revision-Date: 2007-04-29 21:06+0200\n"
-"Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
+"POT-Creation-Date: 2008-07-29 19:42+0000\n"
+"PO-Revision-Date: 2008-07-29 21:43+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -102,7 +102,7 @@ msgid "Fernery"
 msgstr "Reet- und Flachshof"
 
 #: ../../../tribes/barbarians/buildings/fisher/conf:2
-msgid "Fisher Hut"
+msgid "Fisher's Hut"
 msgstr "Fischerhütte"
 
 #: ../../../tribes/barbarians/buildings/fortress/conf:2
@@ -135,8 +135,8 @@ msgid "Helmsmith"
 msgstr "Helmschmied"
 
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
-msgid "Hunters Hut"
-msgstr "Jägerhütte"
+msgid "Hunter's Hut"
+msgstr "Jagdhütte"
 
 #: ../../../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
@@ -163,8 +163,8 @@ msgid "Quarry"
 msgstr "Steinbruch"
 
 #: ../../../tribes/barbarians/buildings/ranger/conf:2
-msgid "Ranger Hut"
-msgstr "Förster"
+msgid "Ranger's Hut"
+msgstr "Forsthaus"
 
 #: ../../../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
@@ -640,6 +640,6 @@ msgstr "Weber"
 
 #~ msgid "Coalearth"
 #~ msgstr "Rohkohle"
-
 #~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
 #~ msgstr "Diese Rohkohle wird in tiefen Minen abgebaut und muss erst in einer Köhlerei weiterverarbeitet werden, um die volle Energie nutzbar zu machen."
+

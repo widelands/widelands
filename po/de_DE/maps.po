@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3224\n"
+"Project-Id-Version: Widelands svn3229\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-07-28 17:44+0000\n"
-"PO-Revision-Date: 2008-06-03 17:59+0100\n"
+"POT-Creation-Date: 2008-07-29 19:42+0000\n"
+"PO-Revision-Date: 2008-07-29 21:35+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -215,3 +215,11 @@ msgstr "Krieg der Täler"
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr "Man sagt, dass sogar Sonne und Mond ihren Weg durch die Täler dieser Berge suchen müssen. TIPP: Obelisken markieren Erzvorkommen. Andernorts lohnt es sich nicht, Geologen auszusenden."
+
+#: ../../maps/Wisent Valley.wmf/elemental:9
+msgid "Wisent Valley"
+msgstr "Das Tal der Wisente"
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
+msgstr "Es scheint, als ob dieses magische Tal schon seit dem Anbeginn der Zeit von Wisenten bewohnt und beherrscht wurde. Als dein Volk an diesen Platz kam, warst du dir noch sicher, dass es hier mehr als genug Platz für ein friedliches Leben gibt, doch kann dein Volk auch wirklich friedlich mit euren Nachbarn zusammenleben?"
