@@ -163,6 +163,7 @@ void Fullscreen_Menu_LaunchGame::select_map()
 		return;
 
 	m_is_scenario = code == 2;
+	m_settings->setScenario(m_is_scenario);
 
 	MapData const & mapdata = *msm.get_map();
 	m_settings->setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);

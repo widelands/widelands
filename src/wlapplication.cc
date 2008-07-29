@@ -74,8 +74,6 @@ volatile int32_t WLApplication::may_run=0;
 #endif // WIN32
 #endif // DEBUG
 
-int32_t editor_commandline=0; // Enable the User to start the Editor directly.
-
 //Always specifying namespaces is good, but let's not go too far ;-)
 using std::cout;
 using std::endl;
@@ -277,7 +275,7 @@ WLApplication::~WLApplication()
  */
 void WLApplication::run()
 {
-	if (editor_commandline) {
+	if (m_editor_commandline) {
 		g_sound_handler.start_music("ingame");
 		//  FIXME add the ability to load a map directly
 		Editor_Interactive::run_editor(m_editor_filename);
@@ -289,10 +287,10 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
-	} else if (m_tutorial_filename.size()) {
+	} else if (m_scenario_filename.size()) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_map_direct(m_tutorial_filename.c_str(), true);
+			game.run_splayer_map_direct(m_scenario_filename.c_str(), true);
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -745,7 +743,7 @@ bool WLApplication::init_hardware() {
 
 	uint32_t xres = 800;
 	uint32_t yres = 600;
-	if (m_loadgame_filename.size() or m_tutorial_filename.size()) {
+	if (m_loadgame_filename.size() or m_scenario_filename.size()) {
 		// main menu will not be shown, so set in-game resolution
 		xres = s->get_int("xres", xres);
 		yres = s->get_int("yres", yres);
@@ -862,7 +860,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_editor_filename = m_commandline["editor"];
 		if (m_editor_filename.size() and *m_editor_filename.rbegin() == '/')
 			m_editor_filename.erase(m_editor_filename.size() - 1);
-		editor_commandline=1;
+		m_editor_commandline=true;
 		m_commandline.erase("editor");
 	}
 
@@ -875,13 +873,13 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_commandline.erase("loadgame");
 	}
 
-	if (m_commandline.count("tutorial") > 0) {
-		m_tutorial_filename = m_commandline["tutorial"];
-		if (m_tutorial_filename.empty())
-			throw wexception("empty value of command line parameter --tutorial");
-		if (*m_tutorial_filename.rbegin() == '/')
-			m_tutorial_filename.erase(m_tutorial_filename.size() - 1);
-		m_commandline.erase("tutorial");
+	if (m_commandline.count("scenario") > 0) {
+		m_scenario_filename = m_commandline["scenario"];
+		if (m_scenario_filename.empty())
+			throw wexception("empty value of command line parameter --scenario");
+		if (*m_scenario_filename.rbegin() == '/')
+			m_scenario_filename.erase(m_scenario_filename.size() - 1);
+		m_commandline.erase("scenario");
 	}
 
 	//Note: it should be possible to record and playback at the same time,
@@ -940,6 +938,8 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
  */
 void WLApplication::show_usage()
 {
+	i18n::grab_textdomain("widelands");// uses system standard language
+
 	char buffer[80];
 	snprintf(buffer, sizeof(buffer), _("This is Widelands-%s\n\n"), BUILD_ID);
 	cout << buffer;
@@ -949,24 +949,29 @@ void WLApplication::show_usage()
 		<<
 		_
 			(" --<config-entry-name>=value overwrites any config file setting\n\n"
-			 " --record=FILENAME    Record all events to the given filename for "
-			 "later playback\n"
+			 " --record=FILENAME    Record all events to the given filename for\n"
+			 "                      later playback\n"
 			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
-			 " --coredump=[yes|no]  Generates a core dump on segfaults instead "
-			 "of using the SDL\n");
+			 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
+			 "                      of using the SDL\n");
 	cout
 		<<
 		_
-			(" --nosound            Starts the game with sound disabled\n"
+			(" --nosound            Starts the game with sound disabled.\n"
 			 " --nozip              Do not save files as binary zip archives.\n\n"
-			 " --editor             Directly starts the Widelands editor.\n\n");
+			 " --editor             Directly starts the Widelands editor.\n"
+			 "                      You can add a =FILENAME to directly load\n"
+			 "                      the map FILENAME in editor.\n"
+			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
+			 "                      map.\n"
+			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n\n");
 #ifdef DEBUG
 #ifndef __WIN32__
 	cout
 		<<
 		_
-			(" --double             Start the game twice (for localhost network "
-			 "testing)\n\n");
+			(" --double             Start the game twice (for localhost network\n"
+			 "                      testing)\n\n");
 #endif
 #endif
 	cout << _(" --help               Show this help\n") << endl;
@@ -976,6 +981,8 @@ void WLApplication::show_usage()
 			("Bug reports? Suggestions? Check out the project website:\n"
 			 "        http://www.sourceforge.net/projects/widelands\n\n"
 			 "Hope you enjoy this game!\n\n");
+
+	i18n::release_textdomain();
 }
 
 #ifdef DEBUG
@@ -1248,16 +1255,23 @@ void WLApplication::mainmenu_multiplayer()
 struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	SinglePlayerGameSettingsProvider() {
 		Widelands::Tribe_Descr::get_all_tribenames(s.tribes);
+		s.scenario = false;
 	}
+
+	virtual void setScenario(bool set) { s.scenario = set; }
 
 	virtual const GameSettings& settings() {return s;}
 
 	virtual bool canChangeMap() {return true;}
-	virtual bool canChangePlayerState(uint8_t number) {return number != 0;}
-	virtual bool canChangePlayerTribe(uint8_t) {return true;}
+	virtual bool canChangePlayerState(uint8_t number) {return (!s.scenario & (number != 0));}
+	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
 
 	virtual bool canLaunch() {
 		return s.mapname.size() != 0 && s.players.size() >= 1;
+	}
+
+	virtual std::string getMap() {
+		return s.mapfilename;
 	}
 
 	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers) {
@@ -1320,27 +1334,35 @@ bool WLApplication::new_game()
 	SinglePlayerGameSettingsProvider sp;
 	Fullscreen_Menu_LaunchGame lgm(&sp);
 	const int32_t code = lgm.run();
+	Widelands::Game game;
 
 	if (code <= 0)
 		return false;
+	if (code == 2) { // scenario
+		try {
+			game.run_splayer_map_direct(sp.getMap().c_str(), true);
+		} catch (...) {
+			emergency_save(game);
+			throw;
+		}
+	} else { // normal singleplayer
+		boost::scoped_ptr<GameController> ctrl
+				(GameController::createSinglePlayer(&game, true, 1));
+		try {
+			UI::ProgressWindow loaderUI("pics/progress.png");
+			GameTips tips (loaderUI);
 
-	Widelands::Game game;
-	boost::scoped_ptr<GameController> ctrl(GameController::createSinglePlayer(&game, true, 1));
-	try {
-		UI::ProgressWindow loaderUI("pics/progress.png");
-		GameTips tips (loaderUI);
+			loaderUI.step(_("Preparing game"));
 
-		loaderUI.step(_("Preparing game"));
-
-		game.set_game_controller(ctrl.get());
-		game.set_iabase(new Interactive_Player(game, 1, false, false));
-		game.init(loaderUI, sp.settings());
-		game.run(loaderUI);
-	} catch (...) {
-		emergency_save(game);
-		throw;
+			game.set_game_controller(ctrl.get());
+			game.set_iabase(new Interactive_Player(game, 1, false, false));
+			game.init(loaderUI, sp.settings());
+			game.run(loaderUI);
+		} catch (...) {
+			emergency_save(game);
+			throw;
+		}
 	}
-
 	return true;
 }
 

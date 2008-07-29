@@ -43,6 +43,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(NetHost* _h)
 		: h(_h) {}
 
+	virtual void setScenario(bool) {};//no scenario for multiplayer
+
 	virtual const GameSettings& settings() {return h->settings();}
 
 	virtual bool canChangeMap() {return true;}

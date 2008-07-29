@@ -46,6 +46,7 @@ struct GameSettings {
 	/// Name of the selected map
 	std::string mapname;
 	std::string mapfilename;
+	bool scenario;
 
 	/// List of tribes that players are allowed to choose
 	std::vector<std::string> tribes;
@@ -69,6 +70,7 @@ public:
 
 	virtual const GameSettings& settings() = 0;
 
+	virtual void setScenario(bool set) = 0;
 	virtual bool canChangeMap() = 0;
 	virtual bool canChangePlayerState(uint8_t number) = 0;
 	virtual bool canChangePlayerTribe(uint8_t number) = 0;

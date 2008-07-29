@@ -233,7 +233,8 @@ protected:
 	 */
 	std::map<std::string, std::string> m_commandline;
 
-	std::string m_loadgame_filename, m_tutorial_filename, m_editor_filename;
+	bool m_editor_commandline; // Enable the User to start the Editor directly.
+	std::string m_loadgame_filename, m_scenario_filename, m_editor_filename;
 
 	///the event recorder object
 	Journal *journal;
