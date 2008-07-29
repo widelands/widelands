@@ -88,6 +88,7 @@ conditional_element_00=trigger
 conditional_element_00_data=Story Timer 2
 event_00=Goto Grave
 event_01=Story Msg 2
+event_02=Goto Home
 current_event=0
 state=init
 

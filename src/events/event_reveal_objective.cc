@@ -40,7 +40,7 @@ void Event_Reveal_Objective::Read(Section & s, Editor_Game_Base & egbase) {
 			if (Objective * const obj = egbase.map().mom()[objective_name])
 				set_objective(obj);
 			else
-				throw wexception("objecive \"%s\" does not exist", objective_name);
+				throw wexception("objective \"%s\" does not exist", objective_name);
 		} else
 			throw wexception("unknown/unhandled version %i", packet_version);
 	} catch (std::exception const & e) {
