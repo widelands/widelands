@@ -4,6 +4,7 @@ help=_"Fells trees."
 type=generic
 menu_pic=menu.png
 program=harvest
+soundfx=../../../../sound/sawmill/sawmill
 
 [buildcost]
 carrier=1
@@ -12,11 +13,12 @@ saw=1
 [harvest]
 0=findobject attrib:tree radius:8
 1=walk object
-2=animation sawing 10000
-3=object fall
-4=animation idle 2000
-5=createitem trunk
-6=return
+2=playFX ../../../../sound/sawmill/sawmill 230
+3=animation sawing 10000
+4=object fall
+5=animation idle 2000
+6=createitem trunk
+7=return
 
 [sawing]
 pics=sawing_??.png

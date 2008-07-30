@@ -4,8 +4,8 @@ help=Fells trees.
 type=generic
 menu_pic=lumberjack_menu.png
 program=chop
-soundfx=timber
-soundfx=lumberjack
+soundfx=../../../../sound/spoken/timber
+soundfx=../../../../woodcutting/fast_woodcutting
 
 [buildcost]
 carrier=1
@@ -14,9 +14,9 @@ axe=1
 [chop]
 0=findobject attrib:tree radius:8
 1=walk object
-2=playFX lumberjack 192
+2=playFX ../../../../woodcutting/fast_woodcutting 250
 3=animation hacking 10000
-4=playFX timber 192
+4=playFX ../../../../sound/spoken/timber 156
 5=object fall
 6=animation idle 2000
 7=createitem trunk

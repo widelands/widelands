@@ -1,5 +1,7 @@
 [global]
 descname=_ Weaponsmith
+soundfx=../../../../smiths/smith
+soundfx=../../../../smiths/sharpening
 type=production
 size=big
 buildable=yes
@@ -37,8 +39,10 @@ wood=8
 1=sleep 20000
 2=check wood
 3=consume wood
-4=animation working 30000
-5=produce wood_lance
+4=playFX ../../../../smiths/smith 192
+5=animation working 30000
+6=playFX ../../../../smiths/sharpening 120
+7=produce wood_lance
 
 
 [produce_lance]
@@ -50,8 +54,10 @@ wood=8
 5=consume iron
 6=consume coal
 7=consume wood
-8=animation working 45000
-9=produce lance
+8=playFX ../../../../smiths/smith 192
+9=animation working 45000
+10=playFX ../../../../smiths/sharpening 120
+11=produce lance
 
 
 [produce_advanced_lance]
@@ -63,8 +69,10 @@ wood=8
 5=consume iron 2
 6=consume coal
 7=consume wood
-8=animation working 45000
-9=produce advanced_lance
+8=playFX ../../../../smiths/smith 192
+9=animation working 45000
+10=playFX ../../../../smiths/sharpening 120
+11=produce advanced_lance
 
 [produce_heavy_lance]
 0=set +catch
@@ -77,8 +85,10 @@ wood=8
 7=consume coal 2
 8=consume wood
 9=consume gold
-10=animation working 45000
-11=produce heavy_lance
+10=playFX ../../../../smiths/smith 192
+11=animation working 45000
+12=playFX ../../../../smiths/sharpening 120
+13=produce heavy_lance
 
 [produce_war_lance]
 0=set +catch
@@ -91,8 +101,10 @@ wood=8
 7=consume coal 2
 8=consume wood
 9=consume gold
-10=animation working 45000
-11=produce war_lance
+10=playFX ../../../../smiths/smith 192
+11=animation working 45000
+12=playFX ../../../../smiths/sharpening 120
+13=produce war_lance
 
 
 [buildcost]

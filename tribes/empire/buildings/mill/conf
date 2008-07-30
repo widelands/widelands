@@ -8,7 +8,7 @@ worker=miller
 program=work
 output=flour
 stopable=yes
-soundfx=mill_turning
+soundfx=../../../../sound/mill/mill_turning
 
 [inputs]
 wheat=6
@@ -17,7 +17,7 @@ wheat=6
 0=sleep 5000
 1=check wheat
 2=consume wheat
-3=playFX mill_turning 192
+3=playFX ../../../../sound/mill/mill_turning 240
 4=animation working 10000
 5=produce flour
 

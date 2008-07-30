@@ -7,7 +7,7 @@ buildicon=stonemason_build.png
 worker=stonemason # like quary
 program=work
 output=marblecolumn
-soundfx=stonemason
+soundfx=../../../../sound/stonecutting/stonemason
 
 [inputs]
 marble=6
@@ -16,7 +16,7 @@ marble=6
 0=sleep 50000
 1=check marble 2
 2=consume marble 2
-3=playFX stonemason 192
+3=playFX ../../../../sound/stonecutting/stonemason 192
 4=animation working 32000
 5=produce marblecolumn
 

@@ -1,5 +1,6 @@
 [global]
 descname=_ Sheepfarm
+soundfx=../../../../sound/farm/sheep
 type=production
 size=big
 buildable=yes
@@ -18,8 +19,9 @@ water=7
 2=check water
 3=consume wheat
 4=consume water
-5=animation working 30000
-6=produce wool
+5=playFX ../../../../sound/farm/sheep 192
+6=animation working 30000
+7=produce wool
 
 [buildcost]
 trunk=2

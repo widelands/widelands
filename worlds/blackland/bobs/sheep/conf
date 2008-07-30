@@ -3,7 +3,7 @@ type="critter"
 swimming=0  # defaults to 0, is only in the water?
 attrib=eatable
 program=remove
-soundfx=sheep
+soundfx=../../../../sound/farm/sheep
 
 [remove]
 0=remove
@@ -11,7 +11,7 @@ soundfx=sheep
 [idle]
 pics=sheep_??.png
 sfx_frame=0
-sfx_name=sheep
+sfx_name=../../../../sound/farm/sheep
 hotspot=15 25
 fps=20
 

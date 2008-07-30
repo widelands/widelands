@@ -23,7 +23,7 @@ scythe=1
 [harvest]
 0=findobject attrib:cornfield radius:2
 1=walk object
-2=playFX ../../../../sound/farm/scythe 192
+2=playFX ../../../../sound/farm/scythe 220
 3=animation idle 10000
 4=object harvest
 5=animation idle 2000

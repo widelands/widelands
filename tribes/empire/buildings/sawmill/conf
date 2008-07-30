@@ -8,7 +8,7 @@ buildicon=sawmill_build.png
 worker=toolsmith # like Toolsmith's Workshop
 program=work
 output=wood
-soundfx=sawmill
+soundfx=../../../../sound/sawmill/sawmill
 
 [inputs]
 trunk=8
@@ -17,7 +17,7 @@ trunk=8
 0=sleep 16500 # much faster than barbarians hardener
 1=check trunk 2
 2=consume trunk 2
-3=playFX sawmill 192
+3=playFX ../../../../sound/sawmill/sawmill 180
 4=animation working 20000 # much more faster than barbarians hardener
 5=produce wood
 
