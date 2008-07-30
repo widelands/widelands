@@ -1,6 +1,6 @@
 [global]
 descname=_"Farm"
-soundfx=farm_animal
+soundfx=../../../../sound/farm/farm_animal
 type=production
 size=big
 buildable=yes
@@ -16,7 +16,7 @@ program=harvest
 0=set +nostats
 1=call plant
 2=call harvest
-3=playFX farm_animal 192
+3=playFX ../../../../sound/farm/farm_animal 192
 
 [plant]
 0=set +catch

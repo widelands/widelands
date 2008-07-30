@@ -1,5 +1,6 @@
 [global]
 descname=_Farmer
+soundfx=../../../../sound/farm/scythe
 help=plants fields.
 type=generic
 menu_pic=menu.png
@@ -22,11 +23,12 @@ scythe=1
 [harvest]
 0=findobject attrib:barbarian_field radius:2
 1=walk object
-2=animation idle 10000
-3=object harvest
-4=animation idle 2000
-5=createitem wheat
-6=return
+2=playFX ../../../../sound/smiths/scythe 192
+3=animation idle 10000
+4=object harvest
+5=animation idle 2000
+6=createitem wheat
+7=return
 
 [idle]
 pics=idle_??.png

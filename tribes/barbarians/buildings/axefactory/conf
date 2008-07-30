@@ -1,5 +1,7 @@
 [global]
 descname=_ Axefactory
+soundfx=../../../../sound/smiths/smith
+soundfx=../../../../sound/smiths/sharpening
 type=production
 size=medium
 buildable=no
@@ -32,8 +34,10 @@ coal=8
 3=check iron
 4=consume iron
 5=consume coal
-6=animation working 25000
-7=produce axe
+6=playFX ../../../../sound/smiths/smith 192
+7=animation working 25000
+8=playFX ../../../../sound/smiths/sharpening 192
+9=produce axe
 
 [produce_sharpaxe]
 0=set +catch
@@ -42,8 +46,10 @@ coal=8
 3=check iron 2
 4=consume iron 2
 5=consume coal
-6=animation working 25000
-7=produce sharpaxe
+6=playFX ../../../../sound/smiths/smith 192
+7=animation working 25000
+8=playFX ../../../../sound/smiths/sharpening 192
+9=produce sharpaxe
 
 [produce_broadaxe]
 0=set +catch
@@ -52,8 +58,10 @@ coal=8
 3=check iron 2
 4=consume iron 2
 5=consume coal 2
-6=animation working 25000
-7=produce broadaxe
+6=playFX ../../../../sound/smiths/smith 192
+7=animation working 25000
+8=playFX ../../../../sound/smiths/sharpening 192
+9=produce broadaxe
 
 
 [buildcost]

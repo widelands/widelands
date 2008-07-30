@@ -40,7 +40,7 @@ struct Songset;
 
 /// How many milliseconds in the past to consider for
 /// Sound_Handler::play_or_not()
-#define SLIDING_WINDOW_SIZE 5000
+#define SLIDING_WINDOW_SIZE 500
 
 extern class Sound_Handler g_sound_handler;
 

@@ -1,5 +1,6 @@
 [global]
 descname=_ Metalworks
+soundfx=../../../../sound/smiths/toolsmith
 type=production
 size=medium
 buildable=yes
@@ -49,8 +50,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce bakingtray
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce bakingtray
 
 [produce_fire_tongs]
 0=set +catch
@@ -59,8 +61,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce fire_tongs
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce fire_tongs
 
 [produce_fishing_rod]
 0=set +catch
@@ -69,8 +72,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce fishing_rod
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce fishing_rod
 
 [produce_hammer]
 0=set +catch
@@ -79,8 +83,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce hammer
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce hammer
 
 [produce_kitchen_tools]
 0=set +catch
@@ -89,8 +94,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce kitchen_tools
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce kitchen_tools
 
 [produce_pick]
 0=set +catch
@@ -99,8 +105,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce pick
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce pick
 
 [produce_scythe]
 0=set +catch
@@ -109,8 +116,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce scythe
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce scythe
 
 [produce_shovel]
 0=set +catch
@@ -119,8 +127,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce shovel
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce shovel
 
 [produce_hunting_spear]
 0=set +catch
@@ -129,8 +138,9 @@ trunk=8
 3=check iron
 4=consume iron
 5=consume trunk
-6=animation working 35000
-7=produce hunting_spear
+6=playFX ../../../../sound/smiths/toolsmith 192
+7=animation working 35000
+8=produce hunting_spear
 
 [buildcost]
 trunk=2

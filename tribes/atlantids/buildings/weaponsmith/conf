@@ -1,5 +1,7 @@
 [global]
 descname=_"Weaponsmith"
+soundfx=../../../../sound/smiths/smith
+soundfx=../../../../sound/smith/sharpening
 type=production
 size=medium
 buildable=yes
@@ -37,8 +39,10 @@ planks=8
 1=sleep 20000
 2=check planks
 3=consume planks
-4=animation working 30000
-5=produce light_trident
+4=playFX ../../../../sound/smiths/smith 192
+5=animation working 30000
+6=playFX ../../../../sound/smiths/sharpening 192
+7=produce light_trident
 
 
 [produce_long_trident]
@@ -50,8 +54,10 @@ planks=8
 5=consume iron
 6=consume coal
 7=consume planks
-8=animation working 45000
-9=produce long_trident
+8=playFX ../../../../sound/smiths/smith 192
+9=animation working 45000
+10=playFX ../../../../sound/smiths/sharpening 192
+11=produce long_trident
 
 
 [produce_steel_trident]
@@ -63,8 +69,10 @@ planks=8
 5=consume iron 2
 6=consume coal
 7=consume planks
-8=animation working 45000
-9=produce steel_trident
+8=playFX ../../../../sound/smiths/smith 192
+9=animation working 45000
+10=playFX ../../../../sound/smiths/sharpening 192
+11=produce steel_trident
 
 [produce_double_trident]
 0=set +catch
@@ -77,8 +85,10 @@ planks=8
 7=consume coal 2
 8=consume planks
 9=consume gold
-10=animation working 45000
-11=produce double_trident
+10=playFX ../../../../sound/smiths/smith 192
+11=animation working 45000
+12=playFX ../../../../sound/smiths/sharpening 192
+13=produce double_trident
 
 [produce_heavy_double_trident]
 0=set +catch
@@ -91,8 +101,10 @@ planks=8
 7=consume coal 2
 8=consume planks
 9=consume gold
-10=animation working 45000
-11=produce heavy_double_trident
+10=playFX ../../../../sound/smiths/smith 192
+11=animation working 45000
+12=playFX ../../../../sound/smiths/sharpening 192
+13=produce heavy_double_trident
 
 
 [buildcost]
