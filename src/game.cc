@@ -313,7 +313,7 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 
 	Map_Loader* maploader = map().get_correct_loader(settings.mapfilename.c_str());
 	try {
-		maploader->preload_map(false);
+		maploader->preload_map(settings.scenario);
 
 		loaderUI.step(_("Configuring players"));
 		for (uint32_t i = 0; i < settings.players.size(); ++i) {
@@ -329,7 +329,7 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 		}
 
 		loaderUI.step(_("Loading map"));
-		maploader->load_map_complete(this, false); // if code==2 is a scenario
+		maploader->load_map_complete(this, settings.scenario);
 		delete maploader;
 		maploader = 0;
 	} catch (...) {

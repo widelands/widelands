@@ -1,5 +1,5 @@
 [global]
-descname=_ Gamekeeper Hut
+descname=_ Gamekeeper's Hut
 type=production
 size=small
 help=The Gamekeeper makes sure that the natural population of animals never drops to low.

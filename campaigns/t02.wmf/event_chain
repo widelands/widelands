@@ -81,7 +81,7 @@ event_12=Reveal Build a Tavern
 current_event=0
 state=init
 
-[Advisor 4 Hunt Began]
+[Advisor 4 Basic Food Began]
 repeating=false
 conditional_element_00=trigger
 conditional_element_00_data=Mission Mines
@@ -91,7 +91,7 @@ conditional_element_02_data=Built Hunter
 conditional_element_03=AND
 conditional_element_04=trigger
 conditional_element_04_data=Built Gamekeeper
-event_00=Order Msg 11 Hunt Began
+event_00=Order Msg 11 Basic Food Began
 current_event=0
 state=init
 
@@ -126,7 +126,7 @@ conditional_element_00=trigger
 conditional_element_00_data=Built Tavern
 conditional_element_01=AND
 conditional_element_02=trigger
-conditional_element_02_data=Hunt Began
+conditional_element_02_data=Basic Food Began
 conditional_element_03=AND
 conditional_element_04=trigger
 conditional_element_04_data=Farming Began
@@ -226,6 +226,9 @@ state=init
 repeating=false
 conditional_element_00=trigger
 conditional_element_00_data=Story Timer 1
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Discovered Mountain
 event_00=Story Msg 1
 current_event=0
 state=init

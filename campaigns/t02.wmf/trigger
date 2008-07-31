@@ -147,7 +147,7 @@ last_start_time=0
 [Mission Mines]
 type=null
 
-[Hunt Began]
+[Basic Food Began]
 type=null
 
 [Farming Began]
@@ -171,13 +171,13 @@ type=null
 [Story Timer 1]
 type=time
 version=1
-wait_time=240
+wait_time=300
 last_start_time=0
 
 [Story Timer 2]
 type=time
 version=1
-wait_time=520
+wait_time=200
 last_start_time=0
 
 [Saw Village From North]

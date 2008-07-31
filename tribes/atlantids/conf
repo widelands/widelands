@@ -24,7 +24,7 @@ uiposition=100
 # Some blue fires would be fine, but just an idea
 [frontier]
 pics=pics/frontier_??.png
-hotspot=1 19
+hotspot=3 12
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]

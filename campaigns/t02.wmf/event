@@ -1,4 +1,5 @@
 # Changed by Nasenbaer -> fixed few translation bugs
+
 [global]
 packet_version=2
 
@@ -83,32 +84,32 @@ steps=56
 [Briefing Msg 1]
 type=message_box
 version=2
-text=_""<rt image=map:chieftain.png image-align=left ><p font-size=24 text-align=left font-weight=bold font-face=FreeSerif font-color=2F9131>"
+text=_""<rt><p font-size=24 font-weight=bold font-face=FreeSerif font-color=2F9131>"
 _"Thron speaks..."
-"</p><p line-spacing=3 font-size=12><br>"
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
 _" "The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees. The stories they tell about the deeds of our kin are sad to hear. I've spent nights laying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart." "
 "</p></rt>""
-window_title=_The Story goes on...
+window_title=_The story continues...
 is_modal=true
 button_00=_Continue
 
 [Briefing Msg 2]
 type=message_box
 version=2
-text=_""<rt image=map:chieftain.png image-align=left ><p line-spacing=3 font-size=12>"
+text=_""<rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
 _" "Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me? Rise against whoever threatens our very existance may it even be one of your blood or mind?" "
 "</p></rt>""
-window_title=_The Story continues...
+window_title=_The story continues...
 is_modal=true
 button_00=_Continue
 
 [Briefing Msg 3]
 type=message_box
 version=2
-text=_""<rt image=map:chieftain.png image-align=left ><pline-spacing=3 font-size=12>"
+text=_""<rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
 _" "Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br>Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home..." "
 "</p></rt>""
-window_title=_The Story continues...
+window_title=_The story continues...
 is_modal=true
 button_00=_Continue
 
@@ -200,60 +201,61 @@ building=fernery
 [Order Msg 01]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Brave Boldreth steps aside you..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
-_" "So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren fought on the battlefield, and our axes and swords have turned rusty over time."</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren fought on the battlefield, and our axes and swords have turned rusty over time." "
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
 
 [Order Msg 02]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh joins the both of you"
-"</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
-_" "I beg your forgiveness, chieftain, but I have a grief concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools and it is only a matter of little time before they are all gone."</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "I beg your forgiveness, chieftain, but I have a grief concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools and it is only a matter of little time before they are all gone." "
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 
 [Order Msg 03]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth jumps up."
-"</p></rt><rt image=map:boldreth.png image-align=left><p line-spacing=3 font-size=12>"
-_" "While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?" <br><br>--NEW OBJECTIVES--<br>- build military buildings (like Sentries and Strongholds) to expand your territory. Get to the rocks north-east from you and build a Quarry there.</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?"<br><br>-- NEW OBJECTIVE --<br> "
+_"* Build military buildings (like sentries and strongholds) to expand your territory. Get to the rocks north-east from you and build a quarry there."
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
 
 [Order Msg 04]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh grumbles..."
-"</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
-_" "Old man? Disrespectful youth..."</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "Old man? Disrespectful youth..." "
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 
 [Order Msg 05 Quarry]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh nods satisfied."
-"</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
-_" "At least. These rocks should last for a while."</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "At least. These rocks should last for a while." "
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 button_00_trigger=Mission Quarry
@@ -261,24 +263,25 @@ button_00_trigger=Mission Quarry
 [Order Msg 06 Geologist]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth exclaims..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>-- NEW OBJECTIVE --<br> "
+_"* When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot."
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
 
 [Order Msg 07 Mines Up]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth laughs..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
-_" "By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for! It might even be enough to -"</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for! It might even be enough to..." "
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
 button_00_trigger=Mission Mines
@@ -286,63 +289,63 @@ button_00_trigger=Mission Mines
 [Order Msg 08 Mines Up]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh interrupts..."
-"</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
-_" "While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not prove easy."</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not prove easy." "
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 
 [Order Msg 09 Hunter]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth nods..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
-_" "I have to give it to you, you are right here, old man.<br>There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!"<br><br>"
-_"--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "I have to give it to you, you are right here, old man.<br>There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!"<br><br>-- NEW OBJECTIVE --<br> "
+_"* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners need food.<br> A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow."
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
 
 [Order Msg 10 Bread]
 type=message_box
 version=2
-text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The elder laughs..."
-"</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Wisdom commands to seek variety. North of the great mountain is a big plane - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pittabread for a change..."<br><br>"
-_"--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source. Build a well, a farm and a bakery.</p>"
-"</rt>""
-window_title=Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "Wisdom commands to seek variety. North of the great mountain is a big plane - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pittabread for a change..."<br><br>-- NEW OBJECTIVE --<br> "
+_"* Build a well, a farm and a bakery.<br> Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source."
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 
-[Order Msg 11 Hunt Began]
+[Order Msg 11 Basic Food Began]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth cheers up..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Our hunters are out in the forests, Thron. I promise you, before the sun sets today you will have a feast as magnificent as is right for the chieftain of all clans!"</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "Our hunters are out in the forests, Thron. I promise you, before the sun sets today you will have a feast as magnificent as is right for the chieftain of all clans!" "
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
-button_00_trigger=Hunt Began
+button_00_trigger=Basic Food Began
 
 [Order Msg 12 Farming Began]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh gazes over the plains..."
-"</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread for our chieftain alone!"</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread for our chieftain alone!" "
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 button_00_trigger=Farming Began
@@ -350,11 +353,11 @@ button_00_trigger=Farming Began
 [Order Msg 13 Tavern]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
-"</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
-_" "A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br>Maybe we actually are slowly creating a place here which we can... call home."</p>"
-"</rt>""
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
+_" "A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br> Maybe we actually are slowly creating a place here which we can... call home." "
+"</p></rt>""
 window_title=_A beautiful morning...
 is_modal=true
 button_00=_Continue
@@ -362,26 +365,26 @@ button_00=_Continue
 [Order Msg 14 Refine Ore]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth remarks..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
-_" "So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. We have the iron ore to be melt into steel ready to be forged into whatever we see fit and the coal to keep the smelter's ovens burning."<br><br>"
-_"--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the pit coal from your coalmines must be refined into coal - for that, build a charcoal burner.</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. We have the iron ore to be melt into iron ready to be forged into whatever we see fit and the coal to keep the smelter's ovens burning."<br><br>-- NEW OBJECTIVE --<br> "
+_"* Build a smeltery and a charcoal burner. The iron ore your miners bring up is not usable yet - it has to be melted into iron first. Likewise, the pit coal from your coal mines must be refined into coal."
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
 
 [Order Msg 15 Mines Exhausted]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh speaks..."
-"</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's roots, if we want more of its treasures!<br>Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them."<br><br>"
-_"--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's roots, if we want more of its treasures!<br> Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them."<br><br>-- NEW OBJECTIVE --<br> "
+_"* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly.<br> To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer."
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 button_00_trigger=Refining Began
@@ -389,39 +392,39 @@ button_00_trigger=Refining Began
 [Order Msg 16 Blackwood]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth seems concerned..."
-"</p></rt><rt image=map:boldreth.png image-align=left><p line-spacing=3 font-size=12>"
-_" "As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even more not so in times as dangerous as ours! We need a woodhardener, and we need one now!"<br><br>"
-_"--NEW OBJECTIVES--<br>- Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a Woodhardener first. Always remember to build a Woodhardener before you run out of blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even more not so in times as dangerous as ours! We need a wood hardener, and we need one now!"<br><br>-- NEW OBJECTIVE --<br> "
+_"* Build a wood hardener.<br> Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, without it you cannot expand."
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
 
 [Order Msg 17 Grindstone]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth smiles..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Well, old friend, this should ensure that our fortifications do not break down with our foes first battle cry! Now we can expand safely!<br>Still, it could not hurt to assemble some grindstone for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!"<br><br>"
-_"--NEW OBJECTIVES--<br>- Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a Stonegrinder. You can obtain water by building a Well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu.<br>Build a Stonegrinder and a Well.</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
+_" "Well, old friend, this should ensure that our fortifications do not break down with our foes first battle cry! Now we can expand safely!<br>Still, it could not hurt to assemble some grindstone for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!"<br><br>-- NEW OBJECTIVE --<br> "
+_"* Build a stonegrinder and a well.<br> Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a stonegrinder. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking implied flag and the Geologist-symbol in the consecutively appearing menu."
+"</p></rt>""
+window_title=_Your loyal companion
 is_modal=true
 button_00=_Continue
 
 [Order Msg 18 Fernery]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh steps in..."
-"</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Chieftain, this is a disgrace! It is well that we can produce grindstone for mighty fortifications and great buildings now - only, this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping onto my face! Now there is a problem we should do something about!"<br><br>"
-_"--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "Chieftain, this is a disgrace! It is well that we can produce grindstone for mighty fortifications and great buildings now - only, this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping onto my face! Now there is a problem we should do something about!"<br><br>-- NEW OBJECTIVE --<br> "
+_"* Build a fernery.<br> The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery."
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 button_00_trigger=Mission Grindstone
@@ -429,12 +432,12 @@ button_00_trigger=Mission Grindstone
 [Order Msg 19 All Material]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh seems reliefed..."
-"</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!"</p>"
-"</rt>""
-window_title=_Advisor
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!" "
+"</p></rt>""
+window_title=_The advisor
 is_modal=true
 button_00=_Continue
 button_00_trigger=Mission Fernery
@@ -449,11 +452,11 @@ duration=5000
 [Story Msg 1]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
-"</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
-_" "One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?"</p>"
-"</rt>""
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
+_" "One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?" "
+"</p></rt>""
 window_title=_One fullmoon night...
 is_modal=true
 button_00=_Continue
@@ -461,11 +464,11 @@ button_00=_Continue
 [Story Msg 2]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
-"</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
 _" "The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore. I prayed it might get warmer again, as I prayed the war would finally come to an end.<br>So far, it does not seem either of my prayers was fulfilled."</p>"
-"</rt>""
+"</p></rt>""
 window_title=_Another cold day...
 is_modal=true
 button_00=_Continue
@@ -483,12 +486,12 @@ objective=Build Mines
 [Reveal Begin the Hunt]
 type=reveal_objective
 version=2
-objective=Begin the Hunt
+objective=Basic Food
 
 [Reveal Build a Tavern]
 type=reveal_objective
 version=2
-objective=Build a Tavern
+objective=Basic Food
 
 [Reveal Begin Farming]
 type=reveal_objective
@@ -528,11 +531,11 @@ trigger=Enhance Buildings
 [Mission Complete]
 type=message_box
 version=2
-text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
+text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Victory!"
-"</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
-_"Thron speaks:<br>"The other day Boldreth talked me into accompanying him to the new inn. It would cheer me up, he said.<br>When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br>The news he brought were to change everything..."<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.</p>"
-"</rt>""
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
+_"Thron speaks:<br>"The other day Boldreth talked me into accompanying him to the new inn. It would cheer me up, he said.<br> When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br>The news he brought were to change everything..."<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
+"</p></rt>""
 window_title=_Mission Complete!
 is_modal=true
 button_00=_Continue
@@ -1110,9 +1113,9 @@ point=55 25
 [Village]
 type=message_box
 version=2
-text=""<rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
-_"Thron speaks:<br>"We found a village with friendly and productive people, impressed by our wealth, technology and strengt. They have decided to join us!"</p>"
-"</rt>""
+text=_""<rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
+_"Thron speaks:<br> "We found a village with friendly and productive people, impressed by our wealth, technology and strengt. They have decided to join us!" "
+"</p></rt>""
 window_title=_A friendly village joined us!
 posx=0
 is_modal=false
