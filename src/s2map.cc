@@ -85,7 +85,7 @@ int32_t S2_Map_Loader::preload_map(bool scenario) {
 
 		Widelands::Player_Number const nr_players = m_map.get_nrplayers();
 		iterate_player_numbers(i, nr_players) {
-			m_map.set_scenario_player_tribe(i, "empire"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
+			m_map.set_scenario_player_tribe(i, "empire");
 			m_map.set_scenario_player_name(i, names[i - 1]);
 		}
 	}
@@ -115,10 +115,12 @@ void S2_Map_Loader::load_world() {
 int32_t S2_Map_Loader::load_map_complete
 	(Widelands::Editor_Game_Base * const game, bool)
 {
+	if (get_state() == STATE_PRELOADED)
+		load_world();
 	assert(get_state() == STATE_WORLD_LOADED);
 
 	//  Postload the world which provides all the immovables found on a map.
-	m_map.m_world->postload(game);
+	m_map.world().postload(game);
 	m_map.set_size(m_map.m_width, m_map.m_height);
 	load_s2mf(game);
 
@@ -266,6 +268,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		Widelands::Y_Coordinate const mapheight = m_map.get_height();
 		assert(mapwidth  == header.w);
 		assert(mapheight == header.h);
+		game->allocate_player_maps(); // initalises player_fields.vision
 
 
 		//  SWD-SECTION 1: Heights
@@ -695,8 +698,14 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 				case BOB_SKELETON2:        bobname = "skeleton2"; break;
 				case BOB_SKELETON3:        bobname = "skeleton3"; break;
 
-				case BOB_CACTUS1:          bobname = "cactus1";   break;
-				case BOB_CACTUS2:          bobname = "cactus2";   break;
+				case BOB_CACTUS1:
+					if(!strcmp(m_map.get_world_name(), "winterland")){
+						bobname = "snowman";   break; }
+						bobname = "cactus1";   break;
+				case BOB_CACTUS2:
+					if(!strcmp(m_map.get_world_name(), "winterland")){
+						bobname = "track";     break; }
+						bobname = "cactus2";   break;
 
 				case BOB_BUSH1:            bobname = "bush1";     break;
 				case BOB_BUSH2:            bobname = "bush2";     break;

@@ -1676,7 +1676,10 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
 	else if
 		(!
 		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX)
+		|!
+		 strcasecmp
+		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX2)), S2MF_SUFFIX2))
 		//  It is a S2 Map file. Load it as such.
 		result = new S2_Map_Loader(filename, *this);
 
