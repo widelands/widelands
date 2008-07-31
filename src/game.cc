@@ -235,8 +235,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
 	set_map(new Map);
 
-	FileSystem* fs = g_fs->MakeSubFileSystem(mapname);
-	Map_Loader* maploader = new WL_Map_Loader(*fs, &map());
+	Map_Loader* maploader = map().get_correct_loader(mapname);
 	try {
 		UI::ProgressWindow loaderUI;
 		GameTips tips (loaderUI);
