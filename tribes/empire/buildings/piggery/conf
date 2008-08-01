@@ -5,7 +5,7 @@ type=production
 size=big
 buildable=yes
 buildicon=piggery_build.png
-worker=herdsman # same as sheepfarm
+worker=pig-breeder
 program=work
 output=meat
 

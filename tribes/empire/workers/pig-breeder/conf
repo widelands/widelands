@@ -1,5 +1,5 @@
 [global]
-descname=_Pig-breeder
+descname=_Pig Breeder
 help=breeds pigs
 type=generic
 menu_pic=menu.png

@@ -1,5 +1,5 @@
 [global]
-descname=_Vinefarmer
+descname=_Vine Farmer
 help=Grows Wine
 type=generic
 menu_pic=menu.png

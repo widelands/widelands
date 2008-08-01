@@ -1,5 +1,5 @@
 [global]
-descname=_Herdsman
+descname=_Shepherd
 help=Keeping sheeps
 type=generic
 menu_pic=menu.png
