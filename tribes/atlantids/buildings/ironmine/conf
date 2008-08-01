@@ -23,13 +23,15 @@ smoked_meat=6
 5=produce ironore
 6=mine iron 4 100 5
 7=produce ironore
-8=mine iron 4 100 5
-9=produce ironore
+8=produce ironore
+9=mine iron 4 100 5
+10=produce ironore
+11=produce ironore
 
 
 [buildcost]
-trunk=6
-planks=3
+trunk=7
+planks=4
 spidercloth=1
 
 [idle]

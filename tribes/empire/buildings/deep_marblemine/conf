@@ -8,6 +8,7 @@ enhanced_building=yes
 worker=master-miner,miner
 program=work
 output=marble
+output=stone
 stopable=yes
 
 [inputs]
@@ -23,9 +24,12 @@ wine=6
 5=animation working 18000
 6=mine granit 2 100 5
 7=produce marble
-8=animation working 18000
-9=mine granit 2 100 5
-10=produce marble
+8=produce marble
+9=animation working 18000
+10=mine granit 2 100 5
+11=produce marble
+12=produce marble
+13=produce stone
 
 [buildcost]
 trunk=4

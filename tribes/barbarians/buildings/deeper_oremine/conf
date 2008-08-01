@@ -19,6 +19,14 @@ meal=6
 2=animation working 16000
 3=mine iron 2 100 10
 4=produce ironore
+5=animation working 16000
+6=mine iron 2 100 10
+7=produce ironore
+8=produce ironore
+9=animation working 16000
+10=mine iron 2 100 10
+11=produce ironore
+12=produce ironore
 
 [buildcost]
 trunk=4

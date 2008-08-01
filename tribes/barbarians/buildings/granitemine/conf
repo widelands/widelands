@@ -19,6 +19,7 @@ ration=8
 3=animation working 20000
 4=mine granit 2 100 5
 5=produce raw_stone
+6=produce raw_stone
 
 [buildcost]
 trunk=4

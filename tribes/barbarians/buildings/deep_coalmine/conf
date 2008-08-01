@@ -20,6 +20,11 @@ snack=6
 2=animation working 18000
 3=mine coal 2 66 5
 4=produce coal
+5=produce coal
+6=animation working 18000
+7=mine coal 2 66 5
+8=produce coal
+9=produce coal
 
 [buildcost]
 trunk=4

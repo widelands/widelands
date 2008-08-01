@@ -19,6 +19,7 @@ ration=6
 2=animation working 20000
 3=mine coal 2 33 5
 4=produce coal
+5=produce coal
 
 [buildcost]
 trunk=4

@@ -26,6 +26,7 @@ beer=6
 8=animation working 20000
 9=mine iron 2 50 5
 10=produce ironore
+11=produce ironore
 
 [buildcost]
 trunk=4

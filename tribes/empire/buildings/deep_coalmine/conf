@@ -23,9 +23,12 @@ beer=6
 5=animation working 18000
 6=mine coal 2 100 5
 7=produce coal
-8=animation working 18000
-9=mine coal 2 100 5
-10=produce coal
+8=produce coal
+9=animation working 18000
+10=mine coal 2 100 5
+11=produce coal
+12=produce coal
+13=produce coal
 
 [buildcost]
 trunk=4

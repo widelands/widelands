@@ -19,6 +19,11 @@ meal=6
 2=animation working 16000
 3=mine coal 2 100 10
 4=produce coal
+5=produce coal
+6=mine coal 2 100 10
+7=produce coal
+8=produce coal
+9=produce coal
 
 [buildcost]
 trunk=4

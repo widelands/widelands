@@ -21,15 +21,19 @@ smoked_meat=6
 3=animation working 20000
 4=mine coal 4 100 5
 5=produce coal
-6=mine coal 4 100 5
-7=produce coal
-8=mine coal 4 100 5
+6=produce coal
+7=mine coal 4 100 5
+8=produce coal
 9=produce coal
+10=mine coal 4 100 5
+11=produce coal
+12=produce coal
+13=produce coal
 
 
 [buildcost]
-trunk=6
-planks=3
+trunk=7
+planks=4
 spidercloth=1
 
 [idle]

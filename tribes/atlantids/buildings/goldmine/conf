@@ -21,15 +21,18 @@ smoked_meat=6
 3=animation working 20000
 4=mine gold 4 100 5
 5=produce goldore
-6=mine gold 4 100 5
-7=produce goldore
-8=mine gold 4 100 5
-9=produce goldore
+6=animation working 20000
+7=mine gold 4 100 5
+8=produce goldore
+9=animation working 20000
+10=mine gold 4 100 5
+11=produce goldore
+12=produce goldore
 
 
 [buildcost]
-trunk=6
-planks=3
+trunk=7
+planks=4
 spidercloth=1
 
 [idle]

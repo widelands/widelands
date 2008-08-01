@@ -19,6 +19,10 @@ meal=6
 2=animation working 16000
 3=mine gold 2 100 10
 4=produce goldstone
+5=animation working 18000
+6=mine gold 2 100 10
+7=produce goldstone
+8=produce goldstone
 
 [buildcost]
 trunk=4

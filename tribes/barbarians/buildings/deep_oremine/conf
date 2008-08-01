@@ -20,6 +20,10 @@ snack=6
 2=animation working 18000
 3=mine iron 2 66 5
 4=produce ironore
+5=animation working 18000
+6=mine iron 2 66 5
+7=produce ironore
+8=produce ironore
 
 [buildcost]
 trunk=4

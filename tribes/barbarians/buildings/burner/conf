@@ -15,7 +15,7 @@ trunk=8
 0=sleep 30000
 1=check trunk 6
 2=consume trunk 6
-3=animation working 35000
+3=animation working 90000 # charcoal fires are burning some days in real life
 4=produce coal
 
 [buildcost]

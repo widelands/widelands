@@ -26,6 +26,7 @@ wine=6
 8=animation working 18000
 9=mine gold 2 100 5
 10=produce goldstone
+11=produce goldstone
 
 [buildcost]
 trunk=4

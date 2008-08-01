@@ -32,9 +32,11 @@ wine=6
 6=animation working 20000
 7=mine granit 2 50 5
 8=produce marble
-9=animation working 20000
-10=mine granit 2 50 5
-11=produce marble
+9=produce marble
+10=animation working 20000
+11=mine granit 2 50 5
+12=produce marble
+13=produce stone
 
 [prog_stone]
 0=set +catch
@@ -46,9 +48,11 @@ wine=6
 6=animation working 20000
 7=mine granit 2 50 5
 8=produce stone
-9=animation working 20000
-10=mine granit 2 50 5
-11=produce stone
+9=produce marble
+10=animation working 20000
+11=mine granit 2 50 5
+12=produce stone
+13=produce stone
 
 [buildcost]
 trunk=4
