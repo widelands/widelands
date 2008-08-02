@@ -20,6 +20,7 @@
 #include "s2map.h"
 
 #include "editor_game_base.h"
+#include "field.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
 #include "map.h"
@@ -725,6 +726,145 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 					game->create_immovable(Widelands::Coords(x, y), idx, 0);
 				}
 			}
+
+		// WORKAROUND: unfortunally the widelands-engine is not complete compatible
+		// to the one of settlers 2 : space for buildings is differently defined.
+		// To allow a loading of settlers 2 maps in the majority of cases, check
+		// all startingpositions and try to make it widelands-compatible, if
+		// it's size is too small.
+		m_map.recalc_whole_map(); // without this buildcaps won't be initialised
+
+		char msg[128];
+		const Widelands::Player_Number nr_players = m_map.get_nrplayers();
+		snprintf(msg, sizeof(msg),
+				"Checking starting position for all %i players:\n", nr_players);
+		log(msg);
+		for (Widelands::Player_Number p = 1; p <= nr_players; ++p) {
+			snprintf(msg, sizeof(msg), "-> Player %i: ", p);
+			log(msg);
+
+			Widelands::Coords starting_pos = m_map.get_starting_pos(p);
+			if (!starting_pos)
+				// TODO don't use wexception as this is not a "bug" in this case
+				throw wexception("Player %u has no starting point. Please try "
+						"to fix this in the widelands editor", p);
+			Widelands::FCoords fpos = m_map.get_fcoords(starting_pos);
+
+			// WTF? can anyone tell me why get_caps() returns 39 for
+			// BUILDCAPS_BIG and 36 for BUILDCAPS_SMALL ?
+			// Below is a hack to make it work - but I didn't found the reason yet.
+			int32_t BIG = 39;
+			if (fpos.field->get_caps() != BIG) { //Widelands::BUILDCAPS_BIG) {
+
+				snprintf(msg, sizeof(msg),
+						"wrong size - trying to fix it:\n");
+				log(msg);
+				// Try to find a BUILDCAPS_BIG place near original start point
+				Widelands::FCoords tl = m_map.tl_n(fpos);
+				Widelands::FCoords  l = m_map .l_n(fpos);
+				Widelands::FCoords bl = m_map.bl_n(fpos);
+				Widelands::FCoords br = m_map.br_n(fpos);
+				Widelands::FCoords  r = m_map .r_n(fpos);
+				Widelands::FCoords tr = m_map.tr_n(fpos);
+				bool fixed = false;
+
+				// Begin with a circle of radius = 1 :
+				if (!fixed & (tl.field->get_caps() == BIG)) {
+					m_map.set_starting_pos(p, tl);
+					fixed=true;
+				}
+				if (!fixed & ( l.field->get_caps() == BIG)) {
+					m_map.set_starting_pos(p,  l);
+					fixed=true;
+				}
+				if (!fixed & (bl.field->get_caps() == BIG)) {
+					m_map.set_starting_pos(p, bl);
+					fixed=true;
+				}
+				if (!fixed & (br.field->get_caps() == BIG)) {
+					m_map.set_starting_pos(p, br);
+					fixed=true;
+				}
+				if (!fixed & ( r.field->get_caps() == BIG)) {
+					m_map.set_starting_pos(p,  r);
+					fixed=true;
+				}
+				if (!fixed & (tr.field->get_caps() == BIG)) {
+					m_map.set_starting_pos(p, tr);
+					fixed=true;
+				}
+				// check whether starting position was fixed.
+				if(fixed == true) {
+					log("   Starting position was successfully fixed "
+						"during 1st try!\n");
+				} else {
+					// Second try - with a circle of radius = 2 :
+						// the three points at the top of the circle
+					if (!fixed & (m_map.tl_n(tl).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map.tl_n(tl));
+						fixed=true;
+					}
+					if (!fixed & (m_map.tr_n(tl).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map.tr_n(tl));
+						fixed=true;
+					}
+					if (!fixed & (m_map.tr_n(tr).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map.tr_n(tr));
+						fixed=true;
+					}
+						// the three points at the bottom of the circle
+					if (!fixed & (m_map.bl_n(bl).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map.bl_n(bl));
+						fixed=true;
+					}
+					if (!fixed & (m_map.br_n(bl).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map.br_n(bl));
+						fixed=true;
+					}
+					if (!fixed & (m_map.br_n(br).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map.br_n(br));
+						fixed=true;
+					}
+						// the three points at the left side of the circle
+					if (!fixed & (m_map .l_n(tl).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map .l_n(tl));
+						fixed=true;
+					}
+					if (!fixed & (m_map .l_n( l).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map .l_n( l));
+						fixed=true;
+					}
+					if (!fixed & (m_map .l_n(bl).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map .l_n(bl));
+						fixed=true;
+					}
+						// the three points at the right side of the circle
+					if (!fixed & (m_map .r_n(tr).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map .r_n(tr));
+						fixed=true;
+					}
+					if (!fixed & (m_map .r_n( r).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map .r_n( r));
+						fixed=true;
+					}
+					if (!fixed & (m_map .r_n(br).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map .r_n(br));
+						fixed=true;
+					}
+					// check whether starting position was fixed.
+					if(fixed == true) {
+						log("   Starting position was successfully fixed "
+							"during 2nd try!\n");
+					} else {
+						// TODO don't use wexception as this is not a "bug" in this case
+						throw wexception("Player %u has invalid starting point, "
+								"that couldn't be fixed. Please try to fix it "
+								"manually in the editor.", p);
+					}
+				}
+			} else
+				log("OK\n");
+		}
 	}
 	catch (...)
 	{
