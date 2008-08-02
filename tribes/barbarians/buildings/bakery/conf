@@ -15,12 +15,14 @@ water=6
 
 [work]
 0=sleep 20000
-1=check water
-2=check wheat
-3=consume wheat
-4=consume water
+1=check water 3 # this seems to be more expensive as in other tribes, but
+2=check wheat 3 # other tribes use flour - so one step less for the barbarians
+3=consume wheat 3
+4=consume water 3
 5=animation working 20000
 6=produce pittabread
+7=animation working 20000
+8=produce pittabread
 
 [buildcost]
 trunk=4
