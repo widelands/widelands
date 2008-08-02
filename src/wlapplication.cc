@@ -236,6 +236,7 @@ m_gfx_fullscreen       (false)
 	g_fs=new LayeredFileSystem();
 	g_fh=new Font_Handler();
 
+	m_editor_commandline = false;
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 
 	setup_searchpaths(m_commandline["EXENAME"]);

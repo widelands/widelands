@@ -13,7 +13,7 @@ enhanced_building=true
 
 [buildcost]
 blackwood=5
-grindstone=3
+grout=3
 
 [idle]
 pics=barrier_i_??.png

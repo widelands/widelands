@@ -1,25 +1,29 @@
 [global]
-descname=_ Stonegrinder
+descname=_ Lime Kiln
 type=production
 size=medium
 buildable=yes
 buildicon=stonegrinder_build.png
-worker=stonemason # like quary
+worker=lime-burner
 program=work
-output=grindstone
+output=grout
 
 [inputs]
-raw_stone=4
-water=4
+raw_stone=6
+water=6
+coal=3
 
 [work]
 0=sleep 50000
-1=check raw_stone
-2=check water
-3=consume raw_stone
-4=consume water
-5=animation working 32000
-6=produce grindstone
+1=check raw_stone 2
+2=check water 2
+3=check coal
+4=consume raw_stone 2
+5=consume water 2
+6=consume coal
+7=animation working 32000
+8=produce grout
+9=produce grout
 
 [buildcost]
 trunk=4

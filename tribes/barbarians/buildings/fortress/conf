@@ -15,7 +15,7 @@ enhances_to=citadel
 blackwood=9
 trunk=5
 raw_stone=4
-grindstone=2
+grout=2
 
 [idle]
 pics=fortress_i_??.png

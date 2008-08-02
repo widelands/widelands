@@ -115,7 +115,7 @@ gold=8
 [buildcost]
 trunk=2
 raw_stone=2
-grindstone=1
+grout=1
 thatchreed=1
 
 [idle]

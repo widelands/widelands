@@ -60,7 +60,7 @@ coal=8
 [buildcost]
 trunk=4
 raw_stone=2
-grindstone=2
+grout=2
 thatchreed=3
 
 [idle]

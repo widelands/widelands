@@ -10,7 +10,7 @@ buildicon=warehouse_build.png
 [buildcost]
 trunk=5
 raw_stone=2
-grindstone=3
+grout=3
 thatchreed=1
 
 [idle]
