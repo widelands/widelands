@@ -47,6 +47,7 @@ struct GameSettings {
 	std::string mapname;
 	std::string mapfilename;
 	bool scenario;
+	bool multiplayer;
 
 	/// List of tribes that players are allowed to choose
 	std::vector<std::string> tribes;

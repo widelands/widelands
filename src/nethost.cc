@@ -214,6 +214,7 @@ NetHost::NetHost (const std::string& playername)
 	d->syncreport_time = 0;
 
 	Widelands::Tribe_Descr::get_all_tribenames(d->settings.tribes);
+	setMultiplayerGameSettings();
 }
 
 NetHost::~NetHost ()
@@ -524,6 +525,12 @@ void NetHost::setPlayerTribe(uint8_t number, const std::string& tribe)
 	s.Unsigned8(number);
 	writeSettingPlayer(s, number);
 	broadcast(s);
+}
+
+void NetHost::setMultiplayerGameSettings()
+{
+	d->settings.scenario = false;
+	d->settings.multiplayer = true;
 }
 
 

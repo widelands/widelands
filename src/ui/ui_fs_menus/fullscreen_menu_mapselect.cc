@@ -93,6 +93,12 @@ bool Fullscreen_Menu_MapSelect::is_scenario()
 	return m_load_map_as_scenario.get_state();
 }
 
+void Fullscreen_Menu_MapSelect::setScenarioSelectionVisible(bool vis)
+{
+	m_load_map_as_scenario.set_visible(vis);
+	m_label_load_map_as_scenario.set_visible(vis);
+}
+
 const MapData* Fullscreen_Menu_MapSelect::get_map() const
 {
 	return m_list.has_selection() ? &m_list.get_selected() : 0;

@@ -1257,6 +1257,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	SinglePlayerGameSettingsProvider() {
 		Widelands::Tribe_Descr::get_all_tribenames(s.tribes);
 		s.scenario = false;
+		s.multiplayer = false;
 	}
 
 	virtual void setScenario(bool set) { s.scenario = set; }

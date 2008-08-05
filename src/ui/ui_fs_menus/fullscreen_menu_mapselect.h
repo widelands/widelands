@@ -57,6 +57,7 @@ struct Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 
 	bool is_scenario();
 	const MapData* get_map() const;
+	void setScenarioSelectionVisible(bool);
 
 private:
 	void ok();

@@ -156,7 +156,9 @@ void Fullscreen_Menu_LaunchGame::select_map()
 	if (!m_settings->canChangeMap())
 		return;
 
+	GameSettings const & settings = m_settings->settings();
 	Fullscreen_Menu_MapSelect msm;
+	msm.setScenarioSelectionVisible(!settings.multiplayer);
 	int code = msm.run();
 
 	if (code <= 0)
