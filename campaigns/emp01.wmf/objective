@@ -3,30 +3,40 @@ packet_version=1
 
 [Build Barracks]
 name=_"Build a barracks"
-descr=_"Build a barracks at the red point in the east of the forest."
+descr=_""<rt><p>"
+_"* Build a barracks at the red point in the east of the forest."
+"</p></rt>""
 visible=false
 trigger=Barracks complete
 
 [Build Lumberjack]
 name=_"Build a lumberjack's house"
-descr=_"Build a lumberjack's house, at the red point at the south of your headquarters."
+descr=_""<rt><p>"
+_"* Build a lumberjack's house, at the red point at the south of your headquarters."
+"</p></rt>""
 visible=false
 trigger=Lumberjack complete
 
 [Build Sawmill and Lumberjacks]
 name=_"Build two lumberjack's houses and a sawmill"
-descr=_"Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+descr=_""<rt><p>"
+_"* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+"</p></rt>""
 visible=false
 trigger=Sawmill and Lumberjacks complete
 
 [Build Forester]
 name=_"Build a forester's house"
-descr=_"Build a forester's house to preserve the wood resources of this island."
+descr=_""<rt><p>"
+_"* Build a forester's house to preserve the wood resources of this island."
+"</p></rt>""
 visible=false
 trigger=Forester complete
 
 [Build Quarry]
 name=_"Build a quarry"
-descr=_"Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+descr=_""<rt><p>"
+_"* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+"</p></rt>""
 visible=false
 trigger=Quarry complete

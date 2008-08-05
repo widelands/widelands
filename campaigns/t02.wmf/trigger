@@ -123,7 +123,7 @@ type=building
 version=3
 point=27 48
 area=100
-building=stonegrinder
+building=lime_kiln
 
 [Built Fernery]
 type=building
@@ -171,13 +171,13 @@ type=null
 [Story Timer 1]
 type=time
 version=1
-wait_time=300
+wait_time=600
 last_start_time=0
 
 [Story Timer 2]
 type=time
 version=1
-wait_time=200
+wait_time=180
 last_start_time=0
 
 [Saw Village From North]

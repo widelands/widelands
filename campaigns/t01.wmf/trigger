@@ -48,25 +48,25 @@ type=null
 [Story Timer 1]
 type=time
 version=1
-wait_time=90
+wait_time=75
 last_start_time=0
 
 [Story Timer 2]
 type=time
 version=1
-wait_time=165
+wait_time=160
 last_start_time=0
 
 [Story Timer 3]
 type=time
 version=1
-wait_time=240
+wait_time=260
 last_start_time=0
 
 [Story Timer 4]
 type=time
 version=1
-wait_time=380
+wait_time=365
 last_start_time=0
 
 [Wait]

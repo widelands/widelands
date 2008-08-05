@@ -7,11 +7,11 @@ packet_version=2
 type=message_box
 version=2
 text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
-_"Thron speaks..."
+_"Thron sighs..."
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
 _" "It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees." "
 "</p></rt>""
-window_title=_The story begins...
+window_title=_The story begins
 is_modal=true
 width=400
 height=300
@@ -24,7 +24,7 @@ version=2
 text=_ ""<rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
 _" "We can see the raging flames that swallow Al'thunran, miles away, from here.<br> The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares." "
 "</p></rt>""
-window_title=_The story begins...
+window_title=_The story begins
 is_modal=true
 width=400
 height=300
@@ -35,9 +35,9 @@ button_00=_ OK
 type=message_box
 version=2
 text=_ ""<rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
-_" "My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br>Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well." "
+_" "My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well." "
 "</p></rt>""
-window_title=_The story begins...
+window_title=_The story begins
 is_modal=true
 width=400
 height=300
@@ -50,7 +50,7 @@ version=2
 text=_ ""<rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
 _" "As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait." "
 "</p></rt>""
-window_title=_The story begins...
+window_title=_The story begins
 is_modal=true
 width=400
 height=300
@@ -119,7 +119,7 @@ text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=808
 _"The elder remarks..."
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
 _" "Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough."<br><br>-- NEW OBJECTIVE --<br> "
-_"* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You are expected to connect it to another flag with a road. If you click on a flag little symbols will appear around it to show you in which directions you can build the road. The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it. You can click on any of those symbols to build the first step of the road to it. New symbols will appear to show you where the next step can go, and so on. But you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
+_"* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You are expected to connect it to another flag with a road.<br> If you click on a flag little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of those symbols to build the first step of the road to it. New symbols will appear to show you where the next step can go, and so on. But you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 "</p></rt>""
 window_title=_The advisor
 is_modal=true
@@ -132,10 +132,10 @@ button_00_trigger=Order3
 type=message_box
 version=2
 text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
-_"Khantrukh speaks..."
+_"Khantrukh remembers..."
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
 _" "There is an old saying:<br> 'A burden divided is easier to endure.'<br> A crossroad on the way between our site and the lumberjack's hut would ease the work of our carriers."<br><br>-- NEW OBJECTIVE --<br> "
-_"* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
+_"* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
 "</p></rt>""
 window_title=_The advisor
 is_modal=true
@@ -150,7 +150,7 @@ text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=808
 _"The old man looks to the sky..."
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
 _" "The northern winds tell us, the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!"<br><br>-- NEW OBJECTIVE --<br> "
-_"* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+_"* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 "</p></rt>""
 window_title=_The advisor
 is_modal=true
@@ -165,7 +165,7 @@ version=2
 text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh nods..."
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
-_" "Of course, if we intended to build a bigger settlement much more lumberjack's huts would be advisable, but this should do for now.<br>But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br>So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut."<br><br>-- NEW OBJECTIVE --<br> "
+_" "Of course, if we intended to build a bigger settlement much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut."<br><br>-- NEW OBJECTIVE --<br> "
 _"* Build a ranger's hut to the east of the first lumberjack's hut."
 "</p></rt>""
 window_title=_The advisor
@@ -180,7 +180,7 @@ version=2
 text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The elder speaks..."
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
-_" "I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations. I would advise that we store stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby..."<br><br>-- NEW OBJECTIVE --<br> "
+_" "I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby..."<br><br>-- NEW OBJECTIVE --<br> "
 _"* Build two quarries south-west of your headquarters."
 "</p></rt>""
 window_title=_The advisor
@@ -210,9 +210,9 @@ version=2
 text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
-_" "In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br>They are a constant reminder why we had to hide here. And a constant reminder why we must return in the end." "
+_" "In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!" "
 "</p></rt>""
-window_title=_In the night...
+window_title=_In the night
 is_modal=true
 width=400
 height=300
@@ -225,7 +225,7 @@ version=2
 text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
-_" "Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br>Somehow it felt like farewell. For the first time I wondered what the future might hold for me..." "
+_" "Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like farewell. For the first time I wondered what the future might hold for me..." "
 "</p></rt>""
 window_title=_At the grave
 is_modal=true
@@ -238,11 +238,11 @@ button_00=_ OK
 type=message_box
 version=2
 text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
-_"Thron speaks..."
+_"Thron says thoughtfully..."
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
-_" "Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br>But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side..." "
+_" "Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side..." "
 "</p></rt>""
-window_title=_The other day...
+window_title=_The other day
 is_modal=true
 width=400
 height=300
@@ -253,11 +253,11 @@ button_00=_ OK
 type=message_box
 version=2
 text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
-_"Thron speaks..."
+_"Thron looks furious..."
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
-_" "Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br>I hereby renew my oath - I will stop this madness at any cost!" "
+_" "Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will stop this madness at any cost!" "
 "</p></rt>""
-window_title=_Another evening...
+window_title=_The oath
 is_modal=true
 width=400
 height=300
@@ -287,13 +287,11 @@ objective=Build Quarries
 [Mission Complete]
 type=message_box
 version=2
-text=_ ""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
-_"Victory!"
-"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
-_" "Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may continue if you wish. Otherwise, move on to the next mission." "
+text=_ ""<rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
+_" "Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>--------------------- VICTORY! ----------------------<br><br> You may continue if you wish. Otherwise, move on to the next mission." "
 "</p></rt>""
 window_title=_Mission Complete
-is_modal=false
+is_modal=true
 width=400
 height=300
 button_00=_ OK

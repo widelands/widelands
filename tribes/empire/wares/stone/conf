@@ -1,6 +1,6 @@
 [global]
 descname=_Stones
-help=_Stones and wood are the basic build ware of the Empire.
+help=_Stones and wood are the basic build material of the Empire.
 menu_pic=menu.png
 
 # The roman workers know how to work on stones.

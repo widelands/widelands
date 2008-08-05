@@ -176,7 +176,7 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, W
 		m_todestroy = todestroy;
 
 	text = _("Do you really want to destroy this ");
-	text += building->name();
+	text += building->descname();
 	text += _("?");
 	new UI::Textarea(this, 0, 0, 160, 44, text, Align_Center, true);
 

@@ -1,6 +1,6 @@
 [global]
-descname=_Marblecolumn
-help=_Marblecolumns present the high culture of the Empire, so they are needed for nearly every bigger building.
+descname=_Marble Column
+help=_Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building.
 menu_pic=menu.png
 
 [idle]

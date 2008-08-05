@@ -1,6 +1,6 @@
 [global]
 descname=_Plate-Armour
-help=_The strongest armour existing, for the Empire soldiers.
+help=_The strongest armour existing for the Empire soldiers.
 menu_pic=menu.png
 
 [idle]

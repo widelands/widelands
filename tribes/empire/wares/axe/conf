@@ -1,6 +1,6 @@
 [global]
 descname=_Axe
-help=_The Axe is the tool for the lumberjack. It is produced by the toolsmith.
+help=_The axe is the tool for the lumberjack. It is produced by the toolsmith.
 menu_pic=menu.png
 
 [idle]

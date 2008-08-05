@@ -1,6 +1,6 @@
 [global]
 descname=_Ferner
-help=Grows flax and thatchreed
+help=Grows flax and thatch reed
 type=generic
 menu_pic=menu.png
 program=plantflax

@@ -1,6 +1,6 @@
 [global]
 descname=_ Wool
-help=_Wool is the hair of sheeps. Empire weavingmills use it to make cloth.
+help=_Wool is the hair of sheeps. Weaving mills use it to make cloth.
 menu_pic=menu.png
 
 [idle]

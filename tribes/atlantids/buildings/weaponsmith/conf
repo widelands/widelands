@@ -1,5 +1,5 @@
 [global]
-descname=_"Weaponsmith"
+descname=_"Weapon Smithy"
 soundfx=../../../../sound/smiths/smith
 soundfx=../../../../sound/smith/sharpening
 type=production

@@ -1,6 +1,6 @@
 [global]
 descname=_Meat
-help=_Meat contains a lot of energy. It is used in the Inns and Taverns to fix lunch for the miners and in the soldier trainingcamps to keep warriors strong.
+help=_Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong.
 menu_pic=meat_menu.png
 
 [idle]

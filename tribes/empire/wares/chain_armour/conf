@@ -1,6 +1,6 @@
 [global]
 descname=_Chain-Armour
-help=_This is a medium armour for Empire soldiers
+help=_This is a medium armour for Empire soldiers.
 menu_pic=menu.png
 
 [idle]

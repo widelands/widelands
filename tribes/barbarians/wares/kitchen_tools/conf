@@ -1,6 +1,6 @@
 [global]
 descname=_Kitchen Tools
-help=_How to create a meal, snack or ration, if there are no kitchentools?
+help=_How to create a meal, snack or ration, if there are no kitchen tools?
 menu_pic=menu.png
 
 [idle]

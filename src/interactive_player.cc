@@ -170,7 +170,7 @@ m_toggle_chat
 m_toggle_options_menu
 	(INIT_BTN("menu_options_menu",     toggle_options_menu, _("Options"))),
 m_toggle_main_menu
-	(INIT_BTN("menu_toggle_menu",      toggle_main_menu,    _("Menu"))),
+	(INIT_BTN("menu_toggle_menu",      toggle_main_menu,    _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN("menu_objectives",       toggle_objectives,   _("Objectives"))),
 m_toggle_minimap

@@ -14,8 +14,8 @@ trigger=Built Lumberjack 1
 [Build Lumberjack 2]
 name=_ "Build another lumberjack's hut"
 descr=_ ""<rt><p>"
-_"* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
-_"* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+_"* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built.<br> By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
+_"* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 "</p></rt>""
 visible=false
 trigger=Built Lumberjack 2

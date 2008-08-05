@@ -1,6 +1,6 @@
 [global]
 descname=_War Helmet
-help=_An enhanced mask, for barbarian warriors.
+help=_An enhanced mask for barbarian warriors.
 menu_pic=menu.png
 
 [idle]

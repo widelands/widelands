@@ -2,7 +2,7 @@
 descname=_Hunter's House
 type=production
 size=small
-help=The Hunter brings good meat to the colonists
+help=The Hunter brings good meat to the colonists.
 buildable=yes
 buildicon=hunter_build.png
 worker=hunter

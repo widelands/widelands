@@ -1,6 +1,6 @@
 [global]
 descname=_Fish
-help=_Besides bread and meat, fish is also a food deliverer for the Empire.
+help=_Besides bread and meat, fish is also a foodstuff for the Empire.
 menu_pic=menu.png
 
 [idle]

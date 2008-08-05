@@ -1,6 +1,6 @@
 [global]
-descname=_Bakingtray
-help=_The bakingtray is the tool of the baker, each baker needs its own. It is produced in the metalworks like all tools.
+descname=_Peel
+help=_The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools.
 menu_pic=menu.png
 
 [idle]

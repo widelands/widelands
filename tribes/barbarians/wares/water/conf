@@ -1,6 +1,6 @@
 [global]
 descname=_Water
-help=_Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to grind stones.
+help=_Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to produce grout.
 menu_pic=water_menu.png
 
 [idle]

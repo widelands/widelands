@@ -133,6 +133,45 @@ building=weaponsmith
 type=null
 # End of mining infrastructure part
 
+# Everything needed for food infrastructure
+[Brewery complete]
+type=building
+version=3
+point=36 20
+area=80
+building=brewery
+
+[Fisher complete]
+type=building
+version=3
+point=36 20
+area=80
+building=fisher
+
+[Hunter complete]
+type=building
+version=3
+point=36 20
+area=80
+building=hunter
+
+[Piggery complete]
+type=building
+version=3
+point=36 20
+area=80
+building=piggery
+
+[Bakery complete]
+type=building
+version=3
+point=36 20
+area=80
+building=bakery
+
+[Food infrastructure complete]
+type=null
+
 [Outpost complete]
 type=building
 version=3

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3229\n"
+"Project-Id-Version: Widelands svn3240\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-07-29 21:42+0200\n"
-"PO-Revision-Date: 2008-07-29 21:32+0100\n"
+"POT-Creation-Date: 2008-08-05 22:17+0200\n"
+"PO-Revision-Date: 2008-08-05 22:05+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -60,10 +60,10 @@ msgstr "8 Std"
 msgid "16 h"
 msgstr "16 Std"
 
-#: ../../src/interactive_spectator.cc:44 ../../src/interactive_player.cc:173
+#: ../../src/interactive_spectator.cc:44
 #: ../../src/editor/editorinteractive.cc:61
 msgid "Menu"
-msgstr "Statistiken"
+msgstr "Menü"
 
 #: ../../src/interactive_spectator.cc:45 ../../src/interactive_player.cc:177
 #: ../../src/editor/editorinteractive.cc:70
@@ -78,6 +78,10 @@ msgstr "Chat"
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:51
 msgid "Options"
 msgstr "Optionen"
+
+#: ../../src/interactive_player.cc:173
+msgid "Statistics"
+msgstr "Statistik"
 
 #: ../../src/interactive_player.cc:175
 #: ../../src/editor/editorinteractive.cc:85
@@ -97,7 +101,7 @@ msgstr "Rohstoff-Information"
 msgid "Ware help"
 msgstr "Waren Hilfe"
 
-#: ../../src/wlapplication.cc:850
+#: ../../src/wlapplication.cc:851
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -107,11 +111,11 @@ msgstr ""
 "Entschuldigung, aber der Doppelstart läuft unter Windows nicht.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:853
+#: ../../src/wlapplication.cc:854
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double ist nicht möglich, dies ist kein Debug-Build!"
 
-#: ../../src/wlapplication.cc:944
+#: ../../src/wlapplication.cc:945
 #, c-format
 msgid ""
 "This is Widelands-%s\n"
@@ -120,7 +124,7 @@ msgstr ""
 "Dies ist Widelands-%s\n"
 "\n"
 
-#: ../../src/wlapplication.cc:946
+#: ../../src/wlapplication.cc:947
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -128,7 +132,7 @@ msgstr ""
 "Benutzung: widelands <Option0>=<Wert0> ... <OptionN>=<WertN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:947
+#: ../../src/wlapplication.cc:948
 msgid ""
 "Options:\n"
 "\n"
@@ -136,7 +140,7 @@ msgstr ""
 "Optionen:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:951
+#: ../../src/wlapplication.cc:952
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -156,7 +160,7 @@ msgstr ""
 " --coredump=[yes|no]  Erzeugt ein Speicherabbild bei Segmentfehlern.\n"
 "                      Schaltet den Mechanismus von SDL ab.\n"
 
-#: ../../src/wlapplication.cc:960
+#: ../../src/wlapplication.cc:961
 msgid ""
 " --nosound            Starts the game with sound disabled.\n"
 " --nozip              Do not save files as binary zip archives.\n"
@@ -183,7 +187,7 @@ msgstr ""
 "                      direkt.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:973
+#: ../../src/wlapplication.cc:974
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -193,11 +197,11 @@ msgstr ""
 "                      localhost Netz)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:977
+#: ../../src/wlapplication.cc:978
 msgid " --help               Show this help\n"
 msgstr " --help               Zeigt diese Hilfe\n"
 
-#: ../../src/wlapplication.cc:981
+#: ../../src/wlapplication.cc:982
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -211,11 +215,11 @@ msgstr ""
 "Wir wünschen Dir viel Spaß beim Spielen!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1121
+#: ../../src/wlapplication.cc:1122
 msgid "Unexpected error during the game"
 msgstr "Unerwarteter Fehler im Spielverlauf"
 
-#: ../../src/wlapplication.cc:1125
+#: ../../src/wlapplication.cc:1126
 msgid ""
 "\n"
 "\n"
@@ -225,7 +229,7 @@ msgstr ""
 "\n"
 "Bitte melde dieses Problem, um uns die Möglichkeit zu geben Widelands zu verbessern. Weitere Informationen findest du in der Standard-Ausgabe (stdout.txt unter Windows). Du benutzt Version "
 
-#: ../../src/wlapplication.cc:1131
+#: ../../src/wlapplication.cc:1132
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -235,113 +239,113 @@ msgstr ""
 "\n"
 "Widelands versucht eine Speicherung durchzuführen, wenn ein Fehler auftrat. Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden und fortzusetzen.\n"
 
-#: ../../src/wlapplication.cc:1289 ../../src/nethost.cc:658
+#: ../../src/wlapplication.cc:1291 ../../src/nethost.cc:661
 msgid "Player"
 msgstr "Spieler"
 
-#: ../../src/wlapplication.cc:1355 ../../src/nethost.cc:293
+#: ../../src/wlapplication.cc:1357 ../../src/nethost.cc:296
 #: ../../src/netclient.cc:134
 msgid "Preparing game"
 msgstr "Bereite Spiel vor"
 
-#: ../../src/wlapplication.cc:1417
+#: ../../src/wlapplication.cc:1419
 msgid "End of replay"
 msgstr "Ende der Spielaufzeichnung"
 
-#: ../../src/wlapplication.cc:1419
+#: ../../src/wlapplication.cc:1421
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weitergucken."
 
-#: ../../src/wlapplication.cc:1471 ../../src/game.cc:369
+#: ../../src/wlapplication.cc:1473 ../../src/game.cc:368
 msgid "Loading..."
 msgstr "Laden..."
 
-#: ../../src/nethost.cc:224
+#: ../../src/nethost.cc:227
 msgid "Server has left the game."
 msgstr "Der Server hat das Spiel verlassen."
 
-#: ../../src/nethost.cc:281
+#: ../../src/nethost.cc:284
 msgid "The game has started just after you tried to connect."
 msgstr "Das Spiel wurde, kurz nachdem du dich verbinden wolltest, gestartet."
 
-#: ../../src/nethost.cc:323
+#: ../../src/nethost.cc:326
 msgid "Server has crashed and performed an emergency save."
 msgstr "Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
 
-#: ../../src/nethost.cc:450
+#: ../../src/nethost.cc:453
 msgid "Host has changed to a map that supports fewer players."
 msgstr "Der Gastgeber hat zu einer Karte gewechselt, die weniger Spieler unterstützt.."
 
-#: ../../src/nethost.cc:500
+#: ../../src/nethost.cc:503
 msgid "You were kicked by the host."
 msgstr "Du wurdest vom Gastgeber rausgeschmissen."
 
-#: ../../src/nethost.cc:599 ../../src/playerdescrgroup.cc:124
+#: ../../src/nethost.cc:602 ../../src/playerdescrgroup.cc:124
 msgid "Computer"
 msgstr "Computer"
 
-#: ../../src/nethost.cc:644
+#: ../../src/nethost.cc:647
 msgid "There are no open player slots left."
 msgstr "Alle Plätze für dieses Spiel sind bereits belegt."
 
-#: ../../src/nethost.cc:724
+#: ../../src/nethost.cc:727
 msgid "Client reports time to host that is running backwards."
 msgstr "Der Client hat dem Gastgeber eine Zeit genannt, die zurück läuft."
 
-#: ../../src/nethost.cc:726
+#: ../../src/nethost.cc:729
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Der Client simuliert ausserhalb der vom Server erlaubten Zeit."
 
-#: ../../src/nethost.cc:729
+#: ../../src/nethost.cc:732
 msgid "Client did not submit sync report in time."
 msgstr "Der Client hat der Synchronisationsreport nicht rechtzeitig gesendet."
 
-#: ../../src/nethost.cc:898
+#: ../../src/nethost.cc:901
 msgid "Client and host have become desynchronized."
 msgstr "Client und Server sind unsynchron geworden."
 
-#: ../../src/nethost.cc:937
+#: ../../src/nethost.cc:940
 msgid "The game has already started."
 msgstr "Das Spiel hat bereits begonnen."
 
-#: ../../src/nethost.cc:948
+#: ../../src/nethost.cc:951
 msgid "Connection to client lost."
 msgstr "Verbindung zum Client verloren."
 
-#: ../../src/nethost.cc:962
+#: ../../src/nethost.cc:965
 msgid "Client sent malformed commands: "
 msgstr "Der Client hat einen unverständlichen Befehl gesendet:"
 
-#: ../../src/nethost.cc:995
+#: ../../src/nethost.cc:998
 msgid "Game is running already, but client has not connected fully"
 msgstr "Das Spiel läuft bereits, aber der Client ist noch nicht richtig verbunden."
 
-#: ../../src/nethost.cc:999
+#: ../../src/nethost.cc:1002
 #, c-format
 msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
 msgstr "Der Erste vom Clienten gesendete Befehl ist %u stattdessen hätte HELLO kommen müssen. Höchstwahrscheinlich verwenden Server und Client inkompatible Versionen."
 
-#: ../../src/nethost.cc:1004
+#: ../../src/nethost.cc:1007
 msgid "Server uses a different protocol version."
 msgstr "Der Server verwendet eine andere Protokollversion"
 
-#: ../../src/nethost.cc:1029
+#: ../../src/nethost.cc:1032
 msgid "Client sent TIME command even though game is not running."
 msgstr "Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/nethost.cc:1036
+#: ../../src/nethost.cc:1039
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/nethost.cc:1045
+#: ../../src/nethost.cc:1048
 msgid "Client tries to sent a playercommand for a different player."
 msgstr "Der Client versucht einen Spielerbefehl für einen anderen Spieler zu senden."
 
-#: ../../src/nethost.cc:1052
+#: ../../src/nethost.cc:1055
 msgid "Client sent unexpected synchronization report."
 msgstr "Der Client hat einen unerwarteten Synchronisationsreport geschickt."
 
-#: ../../src/nethost.cc:1077
+#: ../../src/nethost.cc:1080
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
@@ -409,36 +413,36 @@ msgstr "Zentriere Hauptfenster hierauf"
 msgid "Close"
 msgstr "Schließen"
 
-#: ../../src/game.cc:246 ../../src/game.cc:252
+#: ../../src/game.cc:245 ../../src/game.cc:251
 msgid "Preloading a map"
 msgstr "Lese Teile der Karte"
 
-#: ../../src/game.cc:259
+#: ../../src/game.cc:258
 msgid "Loading a world"
 msgstr "Lade eine Welt"
 
-#: ../../src/game.cc:265
+#: ../../src/game.cc:264
 #, c-format
 msgid "Adding player %u"
 msgstr "Füge Spieler %u hinzu"
 
-#: ../../src/game.cc:274
+#: ../../src/game.cc:273
 msgid "Loading a map"
 msgstr "Lade eine Karte"
 
-#: ../../src/game.cc:309
+#: ../../src/game.cc:308
 msgid "Preloading map"
 msgstr "Lade Teile der Karte vor"
 
-#: ../../src/game.cc:318
+#: ../../src/game.cc:317
 msgid "Configuring players"
 msgstr "Konfiguriere Spieler"
 
-#: ../../src/game.cc:331
+#: ../../src/game.cc:330
 msgid "Loading map"
 msgstr "Lade Karte"
 
-#: ../../src/game.cc:424
+#: ../../src/game.cc:423
 msgid "Creating player infrastructure"
 msgstr "Erstelle Infrastruktur eines Spielers"
 
@@ -718,7 +722,7 @@ msgid_plural "%u(+%u) soldiers"
 msgstr[0] "%u(+%u) Soldat"
 msgstr[1] "%u(+%u) Soldaten"
 
-#: ../../src/s2map.cc:223
+#: ../../src/s2map.cc:226
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar definiert!"
 

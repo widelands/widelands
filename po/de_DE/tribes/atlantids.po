@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3224\n"
+"Project-Id-Version: Widelands svn3240\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-07-28 17:44+0000\n"
-"PO-Revision-Date: 2008-07-22 20:52+0100\n"
+"POT-Creation-Date: 2008-08-05 20:17+0000\n"
+"PO-Revision-Date: 2008-08-05 22:17+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -132,8 +132,7 @@ msgid "Spiderfarm"
 msgstr "Spinnenfarm"
 
 #: ../../../tribes/atlantids/buildings/toolsmith/conf:2
-#: ../../../tribes/atlantids/workers/toolsmith/conf:2
-msgid "Toolsmith"
+msgid "Toolsmith's Shop"
 msgstr "Werkzeugmacher"
 
 #: ../../../tribes/atlantids/buildings/tower/conf:2
@@ -145,8 +144,7 @@ msgid "Warehouse"
 msgstr "Lagerhaus"
 
 #: ../../../tribes/atlantids/buildings/weaponsmith/conf:2
-#: ../../../tribes/atlantids/workers/weaponsmith/conf:2
-msgid "Weaponsmith"
+msgid "Weapon Smithy"
 msgstr "Waffenschmied"
 
 #: ../../../tribes/atlantids/buildings/weaving-mill/conf:2
@@ -609,9 +607,17 @@ msgstr "Steinmetz"
 msgid "Cuts raw pieces of granit out of laying stones."
 msgstr "Hackt Granitblöcke aus Steinbergen heraus."
 
+#: ../../../tribes/atlantids/workers/toolsmith/conf:2
+msgid "Toolsmith"
+msgstr "Werkzeugmacher"
+
 #: ../../../tribes/atlantids/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Trainer"
+
+#: ../../../tribes/atlantids/workers/weaponsmith/conf:2
+msgid "Weaponsmith"
+msgstr "Waffenschmied"
 
 #: ../../../tribes/atlantids/workers/weaver/conf:2
 msgid "Weaver"

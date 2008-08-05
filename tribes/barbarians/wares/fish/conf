@@ -1,6 +1,6 @@
 [global]
 descname=_Fish
-help=_Besides pittabread and meat, fish is also a food deliverer for the barbarians.
+help=_Besides pitta bread and meat, fish is also a foodstuff for the barbarians.
 menu_pic=menu.png
 
 [idle]

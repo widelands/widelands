@@ -1,6 +1,6 @@
 [global]
 descname=_Fire Tongs
-help=_The fire tongs are the tool of the smelter, working in the Smelting works. Produced in the metalworks.
+help=_The fire tongs are the tool of the smelter, working in the smelting works. Produced in the metal works.
 menu_pic=menu.png
 
 [idle]
