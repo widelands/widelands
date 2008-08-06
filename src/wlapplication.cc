@@ -1320,6 +1320,13 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			s.players[number].tribe = tribe;
 	}
 
+	virtual void setPlayerName(uint8_t number, const std::string& name) {
+		if (number >= s.players.size())
+			return;
+
+		s.players[number].name = name;
+	}
+
 private:
 	GameSettings s;
 };

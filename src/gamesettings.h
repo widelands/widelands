@@ -79,9 +79,10 @@ public:
 	virtual bool canLaunch() = 0;
 
 	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers) = 0;
-	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) = 0;
+	virtual void setPlayerState (uint8_t number, PlayerSettings::State state) = 0;
 	virtual void nextPlayerState(uint8_t number) = 0;
-	virtual void setPlayerTribe(uint8_t number, const std::string& tribe) = 0;
+	virtual void setPlayerTribe (uint8_t number, const std::string& tribe) = 0;
+	virtual void setPlayerName  (uint8_t number, const std::string& name) = 0;
 };
 
 

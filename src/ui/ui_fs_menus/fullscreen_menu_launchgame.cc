@@ -28,7 +28,9 @@
 #include "instances.h"
 #include "player.h"
 #include "map.h"
+#include "map_loader.h"
 #include "playerdescrgroup.h"
+#include "profile.h"
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	(GameSettingsProvider * const settings, GameController * const ctrl)
@@ -87,7 +89,7 @@ void Fullscreen_Menu_LaunchGame::start()
 		select_map();
 
 		if (m_settings->settings().mapname.size() == 0)
-			back_clicked();
+			end_modal(0);
 	}
 
 	refresh();
@@ -120,7 +122,15 @@ void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider * const chat)
  */
 void Fullscreen_Menu_LaunchGame::back_clicked()
 {
-	end_modal(0);
+	// the following behaviour might look strange at first view, but for the
+	// user it seems as if the launchgame-menu is a child of mapselect and not
+	// the other way around - just end_modal(0); will be seen as bug from
+	// user point of view, so we reopen the mapselect-menu.
+	m_settings->setMap("","",0);
+	select_map();
+	if (m_settings->settings().mapname.size() == 0)
+		end_modal(0);
+	refresh();
 }
 
 
@@ -145,11 +155,13 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	m_select_map.set_visible(m_settings->canChangeMap());
 	m_select_map.set_enabled(m_settings->canChangeMap());
 
+	if(m_settings->settings().scenario == true)
+		set_scenario_values();
+
 	// update the player description groups
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 		m_players[i]->refresh();
 }
-
 
 void Fullscreen_Menu_LaunchGame::select_map()
 {
@@ -169,4 +181,21 @@ void Fullscreen_Menu_LaunchGame::select_map()
 
 	MapData const & mapdata = *msm.get_map();
 	m_settings->setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+}
+
+void Fullscreen_Menu_LaunchGame::set_scenario_values()
+{
+	if (m_settings->settings().mapfilename.size() == 0)
+		throw wexception
+				("settings()->scenario was set to true, but no map is available");
+	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+	Widelands::Map_Loader * const ml =
+			map.get_correct_loader(m_settings->settings().mapfilename.c_str());
+	map.set_filename(m_settings->settings().mapfilename.c_str());
+	ml->preload_map(true);
+	uint8_t nrplayers = map.get_nrplayers();
+	for (uint32_t i = 0; i < nrplayers; ++i) {
+		m_settings->setPlayerName (i, map.get_scenario_player_name(i+1));
+		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i+1));
+	}
 }

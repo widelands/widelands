@@ -97,6 +97,12 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTribe(number, tribe);
 	}
 
+	virtual void setPlayerName(uint8_t number, const std::string& name) {
+		if (number >= h->settings().players.size())
+			return;
+		h->setPlayerName(number, name);
+	}
+
 private:
 	NetHost * h;
 };
@@ -518,6 +524,26 @@ void NetHost::setPlayerTribe(uint8_t number, const std::string& tribe)
 	}
 
 	player.tribe = tribe;
+
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
+}
+
+void NetHost::setPlayerName(uint8_t number, const std::string& name)
+{
+	if (number >= d->settings.players.size())
+		return;
+
+	PlayerSettings& player = d->settings.players[number];
+
+	if (player.name == name)
+		return;
+
+	player.name = name;
 
 	// Broadcast changes
 	SendPacket s;

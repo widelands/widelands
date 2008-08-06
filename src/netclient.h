@@ -67,9 +67,10 @@ struct NetClient :
 	virtual bool canLaunch();
 
 	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers);
-	virtual void setPlayerState(uint8_t number, PlayerSettings::State state);
+	virtual void setPlayerState (uint8_t number, PlayerSettings::State state);
 	virtual void nextPlayerState(uint8_t number);
-	virtual void setPlayerTribe(uint8_t number, const std::string& tribe);
+	virtual void setPlayerTribe (uint8_t number, const std::string& tribe);
+	virtual void setPlayerName  (uint8_t number, const std::string& name);
 
 	// ChatProvider interface
 	void send(const std::string& msg);

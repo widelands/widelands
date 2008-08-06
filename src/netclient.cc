@@ -261,6 +261,12 @@ void NetClient::setPlayerTribe(uint8_t number, const std::string& tribe)
 	s.send(d->sock);
 }
 
+void NetClient::setPlayerName(uint8_t number, const std::string& name)
+{
+	// until now the name is set before joining - if you allow a change in
+	// launchgame-menu, here properly should be a set_name function
+}
+
 uint32_t NetClient::realSpeed()
 {
 	return d->realspeed;

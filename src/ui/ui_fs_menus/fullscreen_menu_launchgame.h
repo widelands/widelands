@@ -48,6 +48,7 @@ private:
 	void select_map();
 	void back_clicked();
 	void start_clicked();
+	void set_scenario_values();
 
 
 	UI::Button<Fullscreen_Menu_LaunchGame> m_select_map, m_back, m_ok;
