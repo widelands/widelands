@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3240\n"
+"Project-Id-Version: Widelands svn3242\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-05 20:17+0000\n"
-"PO-Revision-Date: 2008-08-05 22:12+0100\n"
+"POT-Creation-Date: 2008-08-06 16:45+0000\n"
+"PO-Revision-Date: 2008-08-06 18:08+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -168,7 +168,7 @@ msgstr "Steinbruch"
 
 #: ../../../tribes/barbarians/buildings/ranger/conf:2
 msgid "Ranger's Hut"
-msgstr "Forsthaus"
+msgstr "Försterhütte"
 
 #: ../../../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"

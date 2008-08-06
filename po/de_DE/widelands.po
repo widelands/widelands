@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3240\n"
+"Project-Id-Version: Widelands svn3242\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-05 22:17+0200\n"
+"POT-Creation-Date: 2008-08-06 18:45+0200\n"
 "PO-Revision-Date: 2008-08-05 22:05+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -239,11 +239,11 @@ msgstr ""
 "\n"
 "Widelands versucht eine Speicherung durchzuführen, wenn ein Fehler auftrat. Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden und fortzusetzen.\n"
 
-#: ../../src/wlapplication.cc:1291 ../../src/nethost.cc:661
+#: ../../src/wlapplication.cc:1291 ../../src/nethost.cc:665
 msgid "Player"
 msgstr "Spieler"
 
-#: ../../src/wlapplication.cc:1357 ../../src/nethost.cc:296
+#: ../../src/wlapplication.cc:1357 ../../src/nethost.cc:294
 #: ../../src/netclient.cc:134
 msgid "Preparing game"
 msgstr "Bereite Spiel vor"
@@ -260,92 +260,92 @@ msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pa
 msgid "Loading..."
 msgstr "Laden..."
 
-#: ../../src/nethost.cc:227
+#: ../../src/nethost.cc:225
 msgid "Server has left the game."
 msgstr "Der Server hat das Spiel verlassen."
 
-#: ../../src/nethost.cc:284
+#: ../../src/nethost.cc:282
 msgid "The game has started just after you tried to connect."
 msgstr "Das Spiel wurde, kurz nachdem du dich verbinden wolltest, gestartet."
 
-#: ../../src/nethost.cc:326
+#: ../../src/nethost.cc:324
 msgid "Server has crashed and performed an emergency save."
 msgstr "Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
 
-#: ../../src/nethost.cc:453
+#: ../../src/nethost.cc:451
 msgid "Host has changed to a map that supports fewer players."
 msgstr "Der Gastgeber hat zu einer Karte gewechselt, die weniger Spieler unterstützt.."
 
-#: ../../src/nethost.cc:503
+#: ../../src/nethost.cc:501
 msgid "You were kicked by the host."
 msgstr "Du wurdest vom Gastgeber rausgeschmissen."
 
-#: ../../src/nethost.cc:602 ../../src/playerdescrgroup.cc:124
+#: ../../src/nethost.cc:606 ../../src/playerdescrgroup.cc:124
 msgid "Computer"
 msgstr "Computer"
 
-#: ../../src/nethost.cc:647
+#: ../../src/nethost.cc:651
 msgid "There are no open player slots left."
 msgstr "Alle Plätze für dieses Spiel sind bereits belegt."
 
-#: ../../src/nethost.cc:727
+#: ../../src/nethost.cc:731
 msgid "Client reports time to host that is running backwards."
 msgstr "Der Client hat dem Gastgeber eine Zeit genannt, die zurück läuft."
 
-#: ../../src/nethost.cc:729
+#: ../../src/nethost.cc:733
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Der Client simuliert ausserhalb der vom Server erlaubten Zeit."
 
-#: ../../src/nethost.cc:732
+#: ../../src/nethost.cc:736
 msgid "Client did not submit sync report in time."
 msgstr "Der Client hat der Synchronisationsreport nicht rechtzeitig gesendet."
 
-#: ../../src/nethost.cc:901
+#: ../../src/nethost.cc:905
 msgid "Client and host have become desynchronized."
 msgstr "Client und Server sind unsynchron geworden."
 
-#: ../../src/nethost.cc:940
+#: ../../src/nethost.cc:944
 msgid "The game has already started."
 msgstr "Das Spiel hat bereits begonnen."
 
-#: ../../src/nethost.cc:951
+#: ../../src/nethost.cc:955
 msgid "Connection to client lost."
 msgstr "Verbindung zum Client verloren."
 
-#: ../../src/nethost.cc:965
+#: ../../src/nethost.cc:969
 msgid "Client sent malformed commands: "
 msgstr "Der Client hat einen unverständlichen Befehl gesendet:"
 
-#: ../../src/nethost.cc:998
+#: ../../src/nethost.cc:1002
 msgid "Game is running already, but client has not connected fully"
 msgstr "Das Spiel läuft bereits, aber der Client ist noch nicht richtig verbunden."
 
-#: ../../src/nethost.cc:1002
+#: ../../src/nethost.cc:1006
 #, c-format
 msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
 msgstr "Der Erste vom Clienten gesendete Befehl ist %u stattdessen hätte HELLO kommen müssen. Höchstwahrscheinlich verwenden Server und Client inkompatible Versionen."
 
-#: ../../src/nethost.cc:1007
+#: ../../src/nethost.cc:1011
 msgid "Server uses a different protocol version."
 msgstr "Der Server verwendet eine andere Protokollversion"
 
-#: ../../src/nethost.cc:1032
+#: ../../src/nethost.cc:1036
 msgid "Client sent TIME command even though game is not running."
 msgstr "Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/nethost.cc:1039
+#: ../../src/nethost.cc:1043
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/nethost.cc:1048
+#: ../../src/nethost.cc:1052
 msgid "Client tries to sent a playercommand for a different player."
 msgstr "Der Client versucht einen Spielerbefehl für einen anderen Spieler zu senden."
 
-#: ../../src/nethost.cc:1055
+#: ../../src/nethost.cc:1059
 msgid "Client sent unexpected synchronization report."
 msgstr "Der Client hat einen unerwarteten Synchronisationsreport geschickt."
 
-#: ../../src/nethost.cc:1080
+#: ../../src/nethost.cc:1084
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
