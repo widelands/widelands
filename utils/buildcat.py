@@ -298,7 +298,7 @@ def do_header_check(filename, filehandle, lines):
 	# mismatch. Final \n is appended on each use, so don't append one here.
 	HEADERTEMPLATE=[
 		"# Widelands " + filename,
-		"# Copyright (C) " + HEADER_YEAR + " Widelands Development Team.",
+		"# Copyright (C) " + HEADER_YEAR + " Widelands Development Team",
 		"# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.",
 		"#",
 		"msgid \"\"",
