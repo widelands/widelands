@@ -23,6 +23,7 @@
 #include "gamesettings.h"
 #include "i18n.h"
 #include "player.h"
+#include "profile.h"
 #include "tribe.h"
 #include "wexception.h"
 
@@ -124,9 +125,16 @@ void PlayerDescriptionGroup::refresh()
 				title = _("Computer");
 			else
 				title = _("Human");
+			// get translated tribesname
+			std::string tribepath("tribes/" + player.tribe);
+			i18n::grab_textdomain(tribepath);
+			Profile prof((tribepath + "/conf").c_str());
+			Section & global = prof.get_safe_section("tribe");
+			std::string tribe(global.get_safe_string("name"));
+			i18n::release_textdomain();
 
 			d->btnPlayerType->set_title(title);
-			d->btnPlayerTribe->set_title(player.tribe);
+			d->btnPlayerTribe->set_title(tribe);
 			d->plr_name->set_text(player.name);
 
 			d->btnPlayerTribe->set_visible(true);

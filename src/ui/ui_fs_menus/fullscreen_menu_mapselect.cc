@@ -25,6 +25,7 @@
 #include "i18n.h"
 #include "layered_filesystem.h"
 #include "map.h"
+#include "profile.h"
 #include "widelands_map_loader.h"
 #include "s2map.h"
 #include "wexception.h"
@@ -129,6 +130,14 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 	if (map.width) {
 		char buf[256];
 
+		// get translated tribesname
+		std::string worldpath("worlds/" + map.world);
+		i18n::grab_textdomain(worldpath);
+		Profile prof((worldpath + "/conf").c_str());
+		Section & global = prof.get_safe_section("world");
+		std::string world(global.get_safe_string("name"));
+		i18n::release_textdomain();
+
 		m_name      .set_text(map.name);
 		m_author    .set_text(map.author);
 		sprintf(buf, "%-4ux%4u", map.width, map.height);
@@ -136,7 +145,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		sprintf(buf, "%i", map.nrplayers);
 		m_nr_players.set_text(buf);
 		m_descr     .set_text(map.description);
-		m_world     .set_text(map.world);
+		m_world     .set_text(world);
 	} else {
 		// Directory
 		m_name      .set_text("(directory)");
