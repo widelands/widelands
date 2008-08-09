@@ -181,6 +181,7 @@ struct WLApplication {
 	void mainmenu();
 	void mainmenu_singleplayer();
 	void mainmenu_multiplayer();
+	void mainmenu_editor();
 
 	bool new_game();
 	void replay();

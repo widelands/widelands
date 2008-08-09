@@ -23,6 +23,8 @@
 #include "editorinteractive.h"
 #include "font_handler.h"
 #include "fullscreen_menu_campaign_select.h"
+#include "fullscreen_menu_editor.h"
+#include "fullscreen_menu_editor_mapselect.h"
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
 #include "fullscreen_menu_launchgame.h"
@@ -278,7 +280,6 @@ void WLApplication::run()
 {
 	if (m_editor_commandline) {
 		g_sound_handler.start_music("ingame");
-		//  FIXME add the ability to load a map directly
 		Editor_Interactive::run_editor(m_editor_filename);
 	} else if (m_loadgame_filename.size()) {
 		Widelands::Game game;
@@ -1112,7 +1113,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_editor:
-				Editor_Interactive::run_editor(m_editor_filename);
+				mainmenu_editor();
 				break;
 			default:
 			case Fullscreen_Menu_Main::mm_exit:
@@ -1248,6 +1249,46 @@ void WLApplication::mainmenu_multiplayer()
 	}
 	default:
 		return;
+	}
+}
+
+void WLApplication::mainmenu_editor()
+{
+	for (bool done = false; not done;) {
+		int32_t code;
+		{
+			Fullscreen_Menu_Editor editor_menu;
+			code = editor_menu.run();
+		}
+
+		//  This is the code returned by UI::Panel::run() when the panel is dying.
+		//  Make sure that the program exits when the window manager says so.
+		assert(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code);
+
+		if (code == Fullscreen_Menu_Editor::Back) break;
+
+		switch (code) {
+			case Fullscreen_Menu_Editor::New_Map:
+				Editor_Interactive::run_editor(m_editor_filename);
+				done = true;
+				break;
+			case Fullscreen_Menu_Editor::Load_Map:
+				{
+					Fullscreen_Menu_Editor_MapSelect emsm;
+					int retval = emsm.run();
+					if (retval <= 0)
+						break;
+
+					std::string filename = emsm.get_map();
+					Editor_Interactive::run_editor(filename.c_str());
+				}
+				done = true;
+				break;
+
+			default:
+				assert(false);
+
+		}
 	}
 }
 
