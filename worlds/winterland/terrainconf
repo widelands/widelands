@@ -5,7 +5,7 @@ def_resources=water 5
 is=green
 
 [mountain1]
-resources=coal, iron, gold, granit 
+resources=coal, iron, gold, granit
 is=mountain
 
 [ice_flows]
@@ -16,8 +16,9 @@ fps=8
 is=water
 fps=8
 
-[strand]
+[ice]
 is=dry
+#### of course ice is not dry, but this disallows the users, to build on snow. only flags are allowed. ;-)
 
 [water]
 def_resources=fish 4
@@ -48,9 +49,8 @@ is=mountain
 resources=coal, iron, gold, granit
 is=mountain
 
-[ice]
+[strand]
 is=dry
-#### of course ice is not dry, but this disallows the users, to build on snow. only flags are allowed. ;-)
 
 [taiga]
 def_resources=water 10
