@@ -24,6 +24,8 @@
 #include <libintl.h>
 #include <stdlib.h>
 
+extern int _nl_msg_cat_cntr;
+
 namespace i18n {
 
 /// A stack of textdomains. On entering a new textdomain, the old one gets
@@ -98,8 +100,23 @@ void set_locale(char const * const name) {
 #endif
 
 #ifdef linux
+	// hopefully this gets gettext to run on all linux distributions - some like
+	// ubuntu are very problematic with setting language variables.
+	// If this doesn't solve the problem on your linux-distribution, here comes
+	// a quote from
+	// http://www.gnu.org/software/automake/manual/gettext/Locale-Environment-Variables.html
+	//
+	//   Some systems, unfortunately, set LC_ALL in /etc/profile or in similar
+	//   initialization files. As a user, you therefore have to unset this
+	//   variable if you want to set LANG and optionally some of the other LC_xxx
+	//   variables.
+
+	/* First set all variables */
 	setenv ("LANG",     name, 1);
 	setenv ("LANGUAGE", name, 1);
+	setenv ("LC_ALL",   name, 1);
+	/* Than make changes known.  */
+	++_nl_msg_cat_cntr;
 #endif
 
 	setlocale(LC_ALL, name); //  call to libintl
