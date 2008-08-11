@@ -145,6 +145,7 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
 	const Point bl = rc.bottom_left();
+	lock();
 	for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
 		uint8_t gr, gg, gb;
 		int16_t r, g, b;
@@ -159,6 +160,7 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 		clr = SDL_MapRGB(m_surface->format, r, g, b);
 		set_pixel(x, y, clr);
 	}
+	unlock();
 }
 
 
