@@ -1399,7 +1399,7 @@ bool WLApplication::new_game()
 		boost::scoped_ptr<GameController> ctrl
 				(GameController::createSinglePlayer(&game, true, 1));
 		try {
-			UI::ProgressWindow loaderUI("pics/progress.png");
+			UI::ProgressWindow loaderUI;
 			GameTips tips (loaderUI);
 
 			loaderUI.step(_("Preparing game"));

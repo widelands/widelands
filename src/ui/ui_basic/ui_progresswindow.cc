@@ -21,6 +21,8 @@
 
 #include "font_handler.h"
 #include "i18n.h"
+#include "layered_filesystem.h"
+#include <sys/time.h>
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
@@ -35,10 +37,7 @@ namespace UI {
 ProgressWindow::ProgressWindow(const std::string & background)
 	: m_xres(0), m_yres(0)
 {
-	if (background.size() > 0)
-		m_background = background;
-	else
-		m_background = "pics/progress.png";
+	set_background(background);
 	step(_("Preparing..."));
 }
 
@@ -112,7 +111,29 @@ void ProgressWindow::draw_background
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string & file_name) {
 	RenderTarget & rt = *g_gr->get_render_target();
-	m_background = file_name;
+	if (file_name.size() > 0) {
+		if(g_fs->FileExists(file_name))
+			m_background = file_name;
+		else {
+			// Maybe we should load a background for a specific world?
+			if (g_fs->IsDirectory("worlds/" + file_name)) {
+				filenameset_t files;
+				int32_t intbuf = g_fs->FindFiles
+						(("worlds/" + file_name + "/pics/"), ("loading_??.jpg"), &files);
+				intbuf = (intbuf == 0) ? -1 : time(0) % intbuf; // some randomness
+				if ((intbuf < 0) | (intbuf > 99))
+					m_background = "pics/progress.png";
+				else {
+					char buf[256];
+					snprintf(buf, sizeof(buf), "%02d.jpg", intbuf);
+					m_background = "worlds/" + file_name + "/pics/loading_" + buf;
+				}
+			} else
+				m_background = "pics/progress.png";
+		}
+	} else
+		m_background = "pics/progress.png";
+
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
 }

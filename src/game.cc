@@ -240,21 +240,20 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		UI::ProgressWindow loaderUI;
 		GameTips tips (loaderUI);
 
-		// Loading the locals for the campaign
+		loaderUI.step (_("Preloading a map"));
 		if (scenario) {
-			loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
-			i18n::Textdomain textdomain(mapname);
+			i18n::Textdomain textdomain(mapname); // load scenario textdomain
 			log("Loading the locals for scenario. file: %s.mo\n", mapname);
-			maploader->preload_map(scenario);
+			maploader->preload_map(true);
 		} else {
-			//  We are not loading a scenario, so no ingame texts to be translated.
-			loaderUI.step (_("Preloading a map"));
-			maploader->preload_map(scenario);
+			maploader->preload_map(false);
 		}
 
 		const std::string background = map().get_background();
 		if (background.size() > 0)
 			loaderUI.set_background(background);
+		else
+			loaderUI.set_background(map().get_world_name());
 		loaderUI.step (_("Loading a world"));
 		maploader->load_world();
 
@@ -313,6 +312,11 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 	Map_Loader* maploader = map().get_correct_loader(settings.mapfilename.c_str());
 	try {
 		maploader->preload_map(settings.scenario);
+		const std::string background = map().get_background();
+		if (background.size() > 0)
+			loaderUI.set_background(background);
+		else
+			loaderUI.set_background(map().get_world_name());
 
 		loaderUI.step(_("Configuring players"));
 		for (uint32_t i = 0; i < settings.players.size(); ++i) {
