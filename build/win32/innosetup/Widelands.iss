@@ -97,7 +97,7 @@ Source: ..\..\..\locale\*;    Excludes: .svn, Sconscript; DestDir: {app}\locale\
 Source: ..\..\..\maps\*;      Excludes: .svn, Sconscript; DestDir: {app}\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Maps"
 Source: ..\..\..\music\*;     Excludes: .svn, Sconscript; DestDir: {app}\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Music"
 Source: ..\..\..\pics\*;      Excludes: .svn, Sconscript; DestDir: {app}\pics\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\..\sound\*;     Excludes: .svn, Sconscript; DestDir: {app}\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\..\sound\*;     Excludes: .svn, Sconscript; DestDir: {app}\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Sound"
 Source: ..\..\..\tribes\*;    Excludes: .svn, Sconscript; DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\txts\*;      Excludes: .svn, Sconscript; DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\worlds\*;    Excludes: .svn, Sconscript; DestDir: {app}\worlds\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
@@ -135,6 +135,7 @@ Type: files; Name: {app}\stderr.txt
 [Components]
 Name: Widelands; Description: Widelands Core;             Flags: fixed checkablealone; Types: custom compact full
 Name: Music;     Description: Widelands Background Music;                              Types: full
+Name: Sound;     Description: Widelands Sound Effects;                                 Types: compact full
 Name: Maps;      Description: Widelands Maps;                                          Types: compact full
 
 [Registry]
