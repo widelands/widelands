@@ -42,7 +42,7 @@ struct Textdomain {
 	~Textdomain()                         {release_textdomain();}
 };
 
-void                set_locale(char const *);
+void                set_locale(std::string);
 std::string const & get_locale();
 };
 

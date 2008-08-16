@@ -333,7 +333,7 @@ void Options_Ctrl::save_options() {
 	m_opt_section->set_int("autosave",               opt.autosave * 60);
 	m_opt_section->set_int("maxfps",                 opt.maxfps);
 	WLApplication::get()->set_input_grab(opt.inputgrab);
-	i18n::set_locale(opt.language.c_str());
+	i18n::set_locale(opt.language);
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }

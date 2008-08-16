@@ -83,20 +83,24 @@ void release_textdomain() {
 /**
  * Set the locale to the given string
  */
-void set_locale(char const * const name) {
+void set_locale(std::string name) {
+	std::string lang(name);
+	if (lang.size() < 1)
+		lang = getenv("LANG");
+
 	// Somehow setlocale doesn't behave same on
 	// some systems.
 #ifdef __BEOS__
-	setenv ("LANG",   name, 1);
-	setenv ("LC_ALL", name, 1);
+	setenv ("LANG",   lang.c_str(), 1);
+	setenv ("LC_ALL", lang.c_str(), 1);
 #endif
 #ifdef __APPLE__
-	setenv ("LANGUAGE", name, 1);
-	setenv ("LC_ALL",   name, 1);
+	setenv ("LANGUAGE", lang.c_str(), 1);
+	setenv ("LC_ALL",   lang.c_str(), 1);
 #endif
 
 #ifdef _WIN32
-	putenv((std::string("LANG=") + name).c_str());
+	putenv((std::string("LANG=") + lang.c_str()).c_str());
 #endif
 
 #ifdef linux
@@ -112,15 +116,13 @@ void set_locale(char const * const name) {
 	//   variables.
 
 	/* First set all variables */
-	setenv ("LANG",     name, 1);
-	setenv ("LANGUAGE", name, 1);
-	setenv ("LC_ALL",   name, 1);
+	setenv ("LANG",     lang.c_str(), 1);
+	setenv ("LANGUAGE", (lang + ":" + lang.substr(0,2)).c_str(), 1);
 	/* Than make changes known.  */
 	++_nl_msg_cat_cntr;
 #endif
-
-	setlocale(LC_ALL, name); //  call to libintl
-	locale = name;
+	setlocale(LC_ALL, ""); //  call to libintl
+	locale = lang.c_str();
 
 	if (textdomains.size()) {
 		char const * const domain = textdomains.back().c_str();
