@@ -9,7 +9,7 @@ worker=gamekeeper
 program=work
 
 [work]
-0=sleep 60000
+0=sleep 52500
 1=worker release
 
 [buildcost]

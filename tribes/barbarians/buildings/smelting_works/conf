@@ -43,6 +43,7 @@ coal=8
 
 [buildcost]
 trunk=3
+blackwood=1
 raw_stone=1
 grout=1
 thatchreed=2

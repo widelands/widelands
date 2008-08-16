@@ -15,7 +15,7 @@ max_defense_level=0
 # initial values and per level increasements
 hp=100-130
 hp_incr_per_level=30
-attack=12-16
+attack=10-15
 attack_incr_per_level=3
 defense=5
 defense_incr_per_level=5

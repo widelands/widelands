@@ -25,7 +25,8 @@ water=6
 8=produce pittabread
 
 [buildcost]
-trunk=4
+trunk=2
+blackwood=2
 raw_stone=2
 thatchreed=2
 

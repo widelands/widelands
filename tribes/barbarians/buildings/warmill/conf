@@ -113,7 +113,8 @@ gold=8
 11=produce warriorsaxe
 
 [buildcost]
-trunk=2
+trunk=1
+blackwood=1
 raw_stone=2
 grout=1
 thatchreed=1

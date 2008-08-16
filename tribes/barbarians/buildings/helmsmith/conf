@@ -58,7 +58,8 @@ coal=8
 9=produce warhelmet
 
 [buildcost]
-trunk=4
+trunk=3
+blackwood=1
 raw_stone=2
 grout=2
 thatchreed=3

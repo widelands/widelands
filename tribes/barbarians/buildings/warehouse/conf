@@ -8,7 +8,8 @@ buildable=yes
 buildicon=warehouse_build.png
 
 [buildcost]
-trunk=5
+trunk=3
+blackwood=2
 raw_stone=2
 grout=3
 thatchreed=1

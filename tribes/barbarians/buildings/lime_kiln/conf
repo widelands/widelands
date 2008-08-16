@@ -28,6 +28,7 @@ coal=3
 [buildcost]
 trunk=4
 raw_stone=2
+blackwood=1
 
 [idle]
 pics=stonegrinder_i_??.png  # ???

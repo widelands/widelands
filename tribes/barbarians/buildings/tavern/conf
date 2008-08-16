@@ -22,7 +22,8 @@ meat=4
 4=produce ration
 
 [buildcost]
-trunk=5
+trunk=3
+blackwood=2
 raw_stone=1
 thatchreed=1
 

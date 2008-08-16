@@ -13,7 +13,7 @@ trunk=1
 planks=2
 
 [work]
-0=sleep 17000
+0=sleep 16000
 1=worker fish
 
 [idle]

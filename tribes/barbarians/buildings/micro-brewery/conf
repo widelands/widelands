@@ -23,7 +23,8 @@ wheat=8
 6=produce beer
 
 [buildcost]
-trunk=5
+trunk=3
+blackwood=2
 raw_stone=3
 thatchreed=2
 

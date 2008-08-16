@@ -29,7 +29,8 @@ program=harvest
 2=worker harvest
 
 [buildcost]
-trunk=5
+trunk=4
+blackwood=1
 raw_stone=3
 
 [idle]
