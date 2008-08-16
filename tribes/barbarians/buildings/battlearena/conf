@@ -28,7 +28,7 @@ max_level=1
 6=consume pittabread
 7=consume fish,meat
 8=consume strongbeer
-7=train evade 0 1
+9=train evade 0 1
 
 [upgrade_evade_1]
 0=check pittabread 2
