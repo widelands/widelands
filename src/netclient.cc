@@ -114,6 +114,7 @@ void NetClient::run ()
 	s.String(d->localplayername);
 	s.send(d->sock);
 
+	setScenario(false);//no scenario for multiplayer
 	{
 		Fullscreen_Menu_LaunchGame lgm(this, this);
 		lgm.setChatProvider(this);
@@ -213,6 +214,11 @@ std::string NetClient::getGameDescription()
 const GameSettings& NetClient::settings()
 {
 	return d->settings;
+}
+
+void NetClient::setScenario(bool set)
+{
+	d->settings.scenario = set;
 }
 
 bool NetClient::canChangeMap()

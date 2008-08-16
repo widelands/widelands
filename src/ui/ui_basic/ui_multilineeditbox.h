@@ -27,8 +27,8 @@ namespace UI {
 struct Scrollbar;
 
 /**
- * This behaves like a editbox, but looks like
- * a Multiline Textarea
+ * This behaves like an editbox, but looks like
+ * a multiline textarea
  *
  * Shift + del or Shift + backspace deletes all text
  */

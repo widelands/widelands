@@ -30,7 +30,7 @@
 
 namespace UI {
 /**
- * Initialize a edibox that supports multiline strings.
+ * Initialize an editbox that supports multiline strings.
 */
 Multiline_Editbox::Multiline_Editbox
 	(Panel * parent,
