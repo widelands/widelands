@@ -26,28 +26,31 @@
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 :
 Fullscreen_Menu_Base("singleplmenu.jpg"), // change this
-title(this, MENU_XRES/2, 120, _("Begin Network Game"), Align_HCenter),
+title(this, MENU_XRES/2, 60, _("Begin Network Game"), Align_HCenter),
+m_opengames(this, 50, 170, _("List of games in your local network:"), Align_Left),
+m_playername(this, 510, 170, _("Your nickname:"), Align_Left),
+m_hostname(this, 510, 255, _("Host to connect:"), Align_Left),
 joingame
 	(this,
-	 90, 220, 200, 26,
+	 510, 320, 200, 26,
 	 1,
 	 &Fullscreen_Menu_NetSetup::clicked_joingame, this,
-	 _("Join a Game")),
+	 _("Join this game")),
 hostgame
 	(this,
-	 90, 260, 200, 26,
+	 510, 365, 200, 26,
 	 1,
 	 &Fullscreen_Menu_NetSetup::clicked_hostgame, this,
-	 _("Host a New Game")),
+	 _("Host a new game")),
 back
 	(this,
-	 90, 340, 200, 26,
+	 510, 500, 200, 26,
 	 0,
 	 &Fullscreen_Menu_NetSetup::end_modal, this, CANCEL,
 	 _("Back")),
-hostname  (this, 310, 220, 200, 26, 2, 0),
-playername(this, 310, 260, 200, 26, 2, 0),
-opengames (this, 310, 300, 390, 180)
+playername(this, 510, 200, 200, 26, 2, 0),
+hostname  (this, 510, 285, 200, 26, 2, 0),
+opengames (this, 50, 200, 450, 326)
 {
 	Section *s = g_options.pull_section("global");//for playername
 
@@ -55,9 +58,9 @@ opengames (this, 310, 300, 390, 180)
 	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::change_hostname);
 	playername.setText  (s->get_string("nickname", (_("nobody"))));
 	playername.changed.set(this, &Fullscreen_Menu_NetSetup::change_playername);
-	opengames .add_column(150, _("Host"));
-	opengames .add_column(150, _("Map"));
-	opengames .add_column (90, _("State"));
+	opengames .add_column(175, _("Host"));
+	opengames .add_column(175, _("Map"));
+	opengames .add_column (100, _("State"));
 	opengames .selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
 	opengames .double_clicked.set
 		(this, &Fullscreen_Menu_NetSetup::game_doubleclicked);
