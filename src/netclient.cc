@@ -114,6 +114,7 @@ void NetClient::run ()
 	s.String(d->localplayername);
 	s.send(d->sock);
 
+	d->settings.multiplayer = true;
 	setScenario(false);//no scenario for multiplayer
 	{
 		Fullscreen_Menu_LaunchGame lgm(this, this);

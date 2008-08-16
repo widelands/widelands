@@ -1224,31 +1224,33 @@ void WLApplication::mainmenu_multiplayer()
 #endif
 
 	Fullscreen_Menu_NetSetup ns;
+	bool inmenu = true;
+	while(inmenu == true) { // stay in menu until player clicks "back" button
+		switch (ns.run()) {
+		case Fullscreen_Menu_NetSetup::HOSTGAME: {
+			NetHost netgame(ns.get_playername());
+			netgame.run();
+			break;
+		}
+		case Fullscreen_Menu_NetSetup::JOINGAME: {
+			IPaddress peer;
 
-	switch (ns.run()) {
-	case Fullscreen_Menu_NetSetup::HOSTGAME: {
-		NetHost netgame(ns.get_playername());
-		netgame.run();
-		break;
-	}
-	case Fullscreen_Menu_NetSetup::JOINGAME: {
-		IPaddress peer;
+			uint32_t addr;
+			uint16_t port;
 
-		uint32_t addr;
-		uint16_t port;
+			if (not ns.get_host_address(addr, port))
+				throw wexception("Address of game server is no good");
 
-		if (not ns.get_host_address(addr, port))
-			throw wexception("Address of game server is no good");
+			peer.host=addr;
+			peer.port=port;
 
-		peer.host=addr;
-		peer.port=port;
-
-		NetClient netgame(&peer, ns.get_playername());
-		netgame.run();
-		break;
-	}
-	default:
-		return;
+			NetClient netgame(&peer, ns.get_playername());
+			netgame.run();
+			break;
+		}
+		default:
+			inmenu = false;
+		}
 	}
 }
 

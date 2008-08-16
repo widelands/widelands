@@ -122,15 +122,18 @@ void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider * const chat)
  */
 void Fullscreen_Menu_LaunchGame::back_clicked()
 {
-	// the following behaviour might look strange at first view, but for the
-	// user it seems as if the launchgame-menu is a child of mapselect and not
-	// the other way around - just end_modal(0); will be seen as bug from
-	// user point of view, so we reopen the mapselect-menu.
-	m_settings->setMap("","",0);
-	select_map();
-	if (m_settings->settings().mapname.size() == 0)
+	if (! m_settings->settings().multiplayer) {
+		// the following behaviour might look strange at first view, but for the
+		// user it seems as if the launchgame-menu is a child of mapselect and not
+		// the other way around - just end_modal(0); will be seen as bug from
+		// user point of view, so we reopen the mapselect-menu.
+		m_settings->setMap("","",0);
+		select_map();
+		if (m_settings->settings().mapname.size() == 0)
+			end_modal(0);
+		refresh();
+	} else
 		end_modal(0);
-	refresh();
 }
 
 
