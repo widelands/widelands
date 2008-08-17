@@ -1,12 +1,12 @@
 # Widelands po/sv_SE/worlds/greenland.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # Daniel Nylander <po@danielnylander.se>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3263\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-08-17 11:35+0000\n"
 "PO-Revision-Date: 2006-03-29 21:59+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 "X-Poedit-Language: swe\n"
 "X-Poedit-Country: swe\n"
 "X-Generator: KBabel 1.10.2\n"
+
+#: ../../../worlds/greenland/bobs/badger/conf:1
+msgid "Badger"
+msgstr ""
+
+#: ../../../worlds/greenland/bobs/brownbear/conf:1
+msgid "Brownbear"
+msgstr ""
 
 #: ../../../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -34,6 +42,10 @@ msgstr "Buske"
 msgid "Cactus"
 msgstr "Kaktus"
 
+#: ../../../worlds/greenland/bobs/chamois/conf:1
+msgid "Chamois"
+msgstr ""
+
 #: ../../../worlds/greenland/bobs/deadtree1/conf:1
 #: ../../../worlds/greenland/bobs/deadtree2/conf:1
 #: ../../../worlds/greenland/bobs/deadtree3/conf:1
@@ -49,6 +61,10 @@ msgstr "Hjort"
 msgid "Duck"
 msgstr "Anka"
 
+#: ../../../worlds/greenland/bobs/elk/conf:1
+msgid "Elk"
+msgstr ""
+
 #: ../../../worlds/greenland/bobs/fallentree/conf:2
 #, fuzzy
 msgid "Dead tree"
@@ -63,6 +79,14 @@ msgstr "Räv"
 #: ../../../worlds/greenland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Gräs"
+
+#: ../../../worlds/greenland/bobs/lynx/conf:1
+msgid "Lynx"
+msgstr ""
+
+#: ../../../worlds/greenland/bobs/marten/conf:1
+msgid "Marten"
+msgstr ""
 
 #: ../../../worlds/greenland/bobs/mushroom1/conf:1
 #: ../../../worlds/greenland/bobs/mushroom2/conf:1
@@ -121,6 +145,10 @@ msgstr "Stenar"
 #: ../../../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Trä"
+
+#: ../../../worlds/greenland/bobs/wisent/conf:1
+msgid "Wisent"
+msgstr ""
 
 #: ../../../worlds/greenland/bobs/wolf/conf:1
 msgid "Wolf"

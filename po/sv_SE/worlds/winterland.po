@@ -1,12 +1,12 @@
 # Widelands po/sv_SE/worlds/winterland.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # Daniel Nylander <po@danielnylander.se>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3263\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-08-17 11:35+0000\n"
 "PO-Revision-Date: 2006-07-02 01:20+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "X-Poedit-Language: swe\n"
 "X-Poedit-Country: swe\n"
 "X-Generator: KBabel 1.10.2\n"
+
+#: ../../../worlds/winterland/bobs/badger/conf:1
+msgid "Badger"
+msgstr ""
 
 #: ../../../worlds/winterland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -44,6 +48,10 @@ msgstr "Hjort"
 msgid "Duck"
 msgstr "Anka"
 
+#: ../../../worlds/winterland/bobs/elk/conf:1
+msgid "Elk"
+msgstr ""
+
 #: ../../../worlds/winterland/bobs/fox/conf:1
 msgid "Fox"
 msgstr "Räv"
@@ -53,6 +61,14 @@ msgstr "Räv"
 #: ../../../worlds/winterland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Gräs"
+
+#: ../../../worlds/winterland/bobs/lynx/conf:1
+msgid "Lynx"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/marten/conf:1
+msgid "Marten"
+msgstr ""
 
 #: ../../../worlds/winterland/bobs/mushroom1/conf:1
 #: ../../../worlds/winterland/bobs/mushroom2/conf:1
@@ -82,6 +98,10 @@ msgstr "Får"
 msgid "Skeleton"
 msgstr "Skelett"
 
+#: ../../../worlds/winterland/bobs/snowman/conf:1
+msgid "Snowman"
+msgstr ""
+
 #: ../../../worlds/winterland/bobs/sstones1/conf:1
 #: ../../../worlds/winterland/bobs/sstones2/conf:1
 #: ../../../worlds/winterland/bobs/sstones3/conf:1
@@ -101,6 +121,10 @@ msgstr "Stående stenar"
 msgid "Stones"
 msgstr "Stenar"
 
+#: ../../../worlds/winterland/bobs/track/conf:1
+msgid "Track"
+msgstr ""
+
 #: ../../../worlds/winterland/bobs/tree1/conf:4
 #: ../../../worlds/winterland/bobs/tree2/conf:4
 #: ../../../worlds/winterland/bobs/tree3/conf:4
@@ -111,6 +135,10 @@ msgstr "Stenar"
 #: ../../../worlds/winterland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Trä"
+
+#: ../../../worlds/winterland/bobs/wisent/conf:1
+msgid "Wisent"
+msgstr ""
 
 #: ../../../worlds/winterland/bobs/wolf/conf:1
 msgid "Wolf"
