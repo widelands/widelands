@@ -345,7 +345,7 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 /**
  * Initialize the savegame based on the given settings.
  */
-void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
+void Game::init_multiplayer_savegame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 	g_gr->flush(PicMod_Menu);
 
 	loaderUI.step(_("Preloading map"));
@@ -357,7 +357,7 @@ void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& sett
 				(g_fs->MakeSubFileSystem(settings.mapfilename.c_str()));
 		Game_Loader gl(*fs, this);
 		loaderUI.step(_("Loading..."));
-		gl.load_game();
+		gl.load_game(true);
 	} catch (...) {
 		throw;
 	}

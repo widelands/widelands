@@ -145,7 +145,7 @@ void NetClient::run ()
 		if(!d->settings.savegame) // new map
 			game.init(loaderUI, d->settings);
 		else // savegame
-			game.init_savegame(loaderUI, d->settings);
+			game.init_multiplayer_savegame(loaderUI, d->settings);
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = WLApplication::get()->get_time();
