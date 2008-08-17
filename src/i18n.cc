@@ -85,8 +85,6 @@ void release_textdomain() {
  */
 void set_locale(std::string name) {
 	std::string lang(name);
-	if (lang.size() < 1)
-		lang = getenv("LANG");
 
 	// Somehow setlocale doesn't behave same on
 	// some systems.
@@ -100,7 +98,7 @@ void set_locale(std::string name) {
 #endif
 
 #ifdef _WIN32
-	putenv((std::string("LANG=") + lang.c_str()).c_str());
+	putenv((std::string("LANG=") + lang).c_str());
 #endif
 
 #ifdef linux
@@ -115,10 +113,13 @@ void set_locale(std::string name) {
 	//   variable if you want to set LANG and optionally some of the other LC_xxx
 	//   variables.
 
-	/* First set all variables */
+	/* If lang is empty, fill it with $LANG */
+	if (lang.size() < 1)
+		lang = getenv("LANG");
+	/* Than set the variables */
 	setenv ("LANG",     lang.c_str(), 1);
 	setenv ("LANGUAGE", (lang + ":" + lang.substr(0,2)).c_str(), 1);
-	/* Than make changes known.  */
+	/* Finally make changes known.  */
 	++_nl_msg_cat_cntr;
 #endif
 	setlocale(LC_ALL, ""); //  call to libintl
