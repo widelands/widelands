@@ -1222,10 +1222,9 @@ void WLApplication::mainmenu_multiplayer()
 	if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0)
 		throw wexception("Initialisation of Wsock2-library failed");
 #endif
-
-	Fullscreen_Menu_NetSetup ns;
 	bool inmenu = true;
 	while(inmenu == true) { // stay in menu until player clicks "back" button
+		Fullscreen_Menu_NetSetup ns; // must be reinitalised, else graphics look strange.
 		switch (ns.run()) {
 		case Fullscreen_Menu_NetSetup::HOSTGAME: {
 			NetHost netgame(ns.get_playername());
@@ -1319,9 +1318,10 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		return s.mapfilename;
 	}
 
-	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers) {
+	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame) {
 		s.mapname = mapname;
 		s.mapfilename = mapfilename;
+		s.savegame = savegame;
 
 		uint32_t oldplayers = s.players.size();
 		s.players.resize(maxplayers);
@@ -1388,6 +1388,8 @@ bool WLApplication::new_game()
 	const int32_t code = lgm.run();
 	Widelands::Game game;
 
+	if (code > 2) // code > 2 is a multi player savegame.
+		throw wexception("Something went wrong! a savegmae was selected");
 	if (code <= 0)
 		return false;
 	if (code == 2) { // scenario

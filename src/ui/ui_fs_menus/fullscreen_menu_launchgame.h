@@ -32,7 +32,22 @@ class GameSettingsProvider;
 struct PlayerDescriptionGroup;
 
 /**
- * Fullscreen menu to select map and to set map options.
+ * Fullscreen menu for setting map and mapsettings for single and multi player
+ * games.
+ *
+ * The menu has a lot dynamic user-interfaces, that are only shown in specific
+ * cases:
+ *    UI::Button m_select_save - only shown in multiplayer for the host player.
+ *    UI::Button m_select_map  - only shown if the player has the right to
+ *                               change the map.
+ *    GameChatPanel            - only shown in multiplayer maps
+ *
+ * The return values of run() are:
+ *    0  - back was pressed
+ *    1  - normal single player
+ *    2  - scenario single player
+ *    3  - multi player savegame
+ *    4  - multi player scenario savegame <- not yet implemented
  */
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LaunchGame(GameSettingsProvider* settings, GameController* ctrl = 0);
@@ -46,18 +61,21 @@ struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 
 private:
 	void select_map();
+	void select_savegame();
 	void back_clicked();
 	void start_clicked();
 	void set_scenario_values();
 
 
-	UI::Button<Fullscreen_Menu_LaunchGame> m_select_map, m_back, m_ok;
+	UI::Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
+	UI::Button<Fullscreen_Menu_LaunchGame> m_back, m_ok;
 	UI::Textarea             m_title, m_mapname;
 	GameSettingsProvider   * m_settings;
 	GameController         * m_ctrl; // optional
 	GameChatPanel          * m_chat;
 	PlayerDescriptionGroup * m_players[MAX_PLAYERS];
 	bool                     m_is_scenario;
+	bool                     m_is_savegame;
 };
 
 

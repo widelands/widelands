@@ -37,7 +37,7 @@ struct Game_Loader {
 	Game_Loader(FileSystem &, Game* game);
 
 	int32_t preload_game(Game_Preload_Data_Packet *);
-	int32_t    load_game();
+	int32_t    load_game(bool multiplayer = false);
 
 private:
 	FileSystem & m_fs;

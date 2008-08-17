@@ -343,6 +343,28 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 
 
 /**
+ * Initialize the savegame based on the given settings.
+ */
+void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
+	g_gr->flush(PicMod_Menu);
+
+	loaderUI.step(_("Preloading map"));
+
+	assert(!get_map());
+	set_map(new Map);
+	try {
+		std::auto_ptr<FileSystem> const fs
+				(g_fs->MakeSubFileSystem(settings.mapfilename.c_str()));
+		Game_Loader gl(*fs, this);
+		loaderUI.step(_("Loading..."));
+		gl.load_game();
+	} catch (...) {
+		throw;
+	}
+}
+
+
+/**
  * Load a game
  * argument defines if this is a single player game (false)
  * or networked (true)

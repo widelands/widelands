@@ -51,7 +51,7 @@ int32_t Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
 /*
  * Load the complete file
  */
-int32_t Game_Loader::load_game() {
+int32_t Game_Loader::load_game(bool multiplayer) {
 
 	log("Game: Reading Preload Data ... ");
 	{Game_Preload_Data_Packet                     p; p.Read(m_fs, m_game, 0);}
@@ -83,9 +83,13 @@ int32_t Game_Loader::load_game() {
 	{Game_Cmd_Queue_Data_Packet                    p; p.Read(m_fs, m_game, mol);}
 	log(" done\n");
 
-	log("Game: Reading Interactive Player Data ... ");
-	{Game_Interactive_Player_Data_Packet           p; p.Read(m_fs, m_game, mol);}
-	log(" done\n");
+	// Only read and use interactive player data, if we load a singleplayer game.
+	// In multiplayer games every client needs to create a new interactive player.
+	if (!multiplayer) {
+		log("Game: Reading Interactive Player Data ... ");
+		{Game_Interactive_Player_Data_Packet           p; p.Read(m_fs, m_game, mol);}
+		log(" done\n");
+	}
 
 	return 0;
 }

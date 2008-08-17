@@ -151,6 +151,7 @@ enum {
 	 * of a map change. Payload is:
 	 * \li String: human readable mapname
 	 * \li String: map filename
+	 * \li bool:   is_savegame
 	 */
 	NETCMD_SETTING_MAP = 4,
 

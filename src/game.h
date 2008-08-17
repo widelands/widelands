@@ -94,6 +94,7 @@ struct Game : public Editor_Game_Base {
 	void set_write_replay(bool wr);
 	void save_syncstream(bool save);
 	void init(UI::ProgressWindow & loader_ui, const GameSettings& settings);
+	void init_savegame(UI::ProgressWindow & loader_ui, const GameSettings& settings);
 	bool run_splayer_map_direct(const char* mapname, bool scenario);
 	bool run (UI::ProgressWindow & loader_ui, bool = false);
 
@@ -103,7 +104,7 @@ struct Game : public Editor_Game_Base {
 	 * cancels the dialog. Otherwise returns the result of running the game.
 	 */
 	bool run_load_game
-		(const bool is_splayer, std::string filename = std::string());
+		(const bool multiplayer, std::string filename = std::string());
 
 	virtual void postload();
 	void think();

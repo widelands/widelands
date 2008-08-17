@@ -19,16 +19,21 @@
 
 #include "fullscreen_menu_launchgame.h"
 
+//#include "editor_game_base.h"
+#include "fullscreen_menu_loadgame.h"
 #include "fullscreen_menu_mapselect.h"
 #include "game.h"
 #include "gamechatpanel.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
+//#include "game_player_info_data_packet.h"
+//#include "game_loader.h"
 #include "i18n.h"
 #include "instances.h"
-#include "player.h"
+#include "layered_filesystem.h"
 #include "map.h"
 #include "map_loader.h"
+#include "player.h"
 #include "playerdescrgroup.h"
 #include "profile.h"
 
@@ -42,6 +47,14 @@ m_select_map
 	 1,
 	 &Fullscreen_Menu_LaunchGame::select_map, this,
 	 _("Select map"),
+	 std::string(),
+	 false),
+m_select_save
+	(this,
+	 550, 250, 200, 26,
+	 1,
+	 &Fullscreen_Menu_LaunchGame::select_savegame, this,
+	 _("Select Savegame"),
 	 std::string(),
 	 false),
 m_back
@@ -82,14 +95,16 @@ m_is_scenario(false)
 void Fullscreen_Menu_LaunchGame::start()
 {
 	if
-		(m_settings->settings().mapname.size() == 0
+		((m_settings->settings().mapname.size() == 0)
 		 &&
-		 m_settings->canChangeMap())
+		 m_settings->canChangeMap()
+		 &&
+		 (m_settings->settings().multiplayer == false)) // not in multiplayer
 	{
 		select_map();
 
 		if (m_settings->settings().mapname.size() == 0)
-			end_modal(0);
+			end_modal(0); // back was pressed
 	}
 
 	refresh();
@@ -142,21 +157,34 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
  */
 void Fullscreen_Menu_LaunchGame::start_clicked()
 {
-	if (m_settings->canLaunch())
-		end_modal(1 + m_is_scenario);
+	if (m_settings->canLaunch()) {
+		if (!m_is_savegame)
+			end_modal(1 + m_is_scenario);
+		else
+			end_modal(3 + m_is_scenario);
+	}
 }
 
 
+/**
+ * update the user interface and take care about the visibility of
+ * buttons and text.
+ */
 void Fullscreen_Menu_LaunchGame::refresh()
 {
 	GameSettings const & settings = m_settings->settings();
 
 	m_mapname.set_text
 		(settings.mapname.size() != 0 ? settings.mapname : _("(no map)"));
+	m_is_savegame = settings.savegame;
 
 	m_ok.set_enabled(m_settings->canLaunch());
 	m_select_map.set_visible(m_settings->canChangeMap());
 	m_select_map.set_enabled(m_settings->canChangeMap());
+	m_select_save.set_visible
+			(m_settings->settings().multiplayer & m_settings->canChangeMap());
+	m_select_save.set_enabled
+			(m_settings->settings().multiplayer & m_settings->canChangeMap());
 
 	if(m_settings->settings().scenario == true)
 		set_scenario_values();
@@ -166,6 +194,10 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		m_players[i]->refresh();
 }
 
+
+/**
+ * select a map and send all informations to the user interface.
+ */
 void Fullscreen_Menu_LaunchGame::select_map()
 {
 	if (!m_settings->canChangeMap())
@@ -176,16 +208,59 @@ void Fullscreen_Menu_LaunchGame::select_map()
 	msm.setScenarioSelectionVisible(!settings.multiplayer);
 	int code = msm.run();
 
-	if (code <= 0)
-		return;
+	if (code <= 0) {
+		// Set scenario = false, else the menu might crash when back is pressed.
+		m_settings->setScenario(false);
+		return;  // back was pressed
+	}
 
 	m_is_scenario = code == 2;
 	m_settings->setScenario(m_is_scenario);
 
 	MapData const & mapdata = *msm.get_map();
 	m_settings->setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+	m_is_savegame = false;
 }
 
+
+/**
+ * select a multi player savegame and send all informations
+ * to the user interface.
+ */
+void Fullscreen_Menu_LaunchGame::select_savegame()
+{
+	if (!m_settings->canChangeMap())
+		return;
+
+	Widelands::Game game; // The place all data is saved to.
+	Fullscreen_Menu_LoadGame lsgm(game);
+	int code = lsgm.run();
+
+	if (code <= 0)
+		return; // back was pressed
+
+	std::string file = lsgm.filename();
+	FileSystem *m_fs = g_fs->MakeSubFileSystem(file.c_str());
+
+	Profile prof;
+	prof.read("map/elemental", 0, *m_fs);
+	Section & s = prof.get_safe_section("global");
+	int8_t nr = s.get_safe_int("nr_players");
+/*
+	// initalise empty map, else playerinfo.Read() will fail.
+	game.set_map(new Widelands::Map);
+	Widelands::Game_Player_Info_Data_Packet playerinfo;
+	playerinfo.Read(*m_fs, &game, 0);
+*/
+	m_settings->setMap(file, file, nr, true);
+}
+
+
+/**
+ * if map was selected to be loaded as scenario, set all values like
+ * player names and player tribes and take care about visibility
+ * and usability of all the parts of the UI.
+ */
 void Fullscreen_Menu_LaunchGame::set_scenario_values()
 {
 	if (m_settings->settings().mapfilename.size() == 0)

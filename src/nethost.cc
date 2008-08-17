@@ -59,8 +59,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual bool canLaunch() {return h->canLaunch();}
 
-	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers) {
-		h->setMap(mapname, mapfilename, maxplayers);
+	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame = false) {
+		h->setMap(mapname, mapfilename, maxplayers, savegame);
 	}
 	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) {
 		if (number == 0 || number >= settings().players.size())
@@ -304,7 +304,10 @@ void NetHost::run()
 		Interactive_Player* ipl = new Interactive_Player(game, 1, false, true);
 		ipl->set_chat_provider(&d->chat);
 		game.set_iabase(ipl);
-		game.init(loaderUI, d->settings);
+		if(!d->settings.savegame) // new game
+			game.init(loaderUI, d->settings);
+		else // savegame
+			game.init_savegame(loaderUI, d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = WLApplication::get()->get_time();
@@ -319,7 +322,10 @@ void NetHost::run()
 		// wait mode when there are no clients
 		checkHungClients();
 		initComputerPlayers();
-		game.run(loaderUI);
+		if(!d->settings.savegame) // new game
+			game.run(loaderUI);
+		else // savegame
+			game.run(loaderUI, true);
 		clearComputerPlayers();
 	} catch (...) {
 		WLApplication::emergency_save(game);
@@ -445,10 +451,11 @@ bool NetHost::canLaunch()
 	return d->settings.mapname.size() != 0 && d->settings.players.size() >= 1;
 }
 
-void NetHost::setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers)
+void NetHost::setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame)
 {
 	d->settings.mapname = mapname;
 	d->settings.mapfilename = mapfilename;
+	d->settings.savegame = savegame;
 
 	uint32_t oldplayers = d->settings.players.size();
 
@@ -600,6 +607,7 @@ void NetHost::writeSettingMap(SendPacket& packet)
 {
 	packet.String(d->settings.mapname);
 	packet.String(d->settings.mapfilename);
+	packet.Unsigned8(d->settings.savegame ? 1 : 0);
 }
 
 void NetHost::writeSettingPlayer(SendPacket& packet, uint8_t number)

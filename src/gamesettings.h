@@ -46,8 +46,15 @@ struct GameSettings {
 	/// Name of the selected map
 	std::string mapname;
 	std::string mapfilename;
+
+	/// Is map a scenario
 	bool scenario;
+
+	/// Is this a multiplayer game
 	bool multiplayer;
+
+	/// Is a savegame selected for loading?
+	bool savegame;
 
 	/// List of tribes that players are allowed to choose
 	std::vector<std::string> tribes;
@@ -78,7 +85,7 @@ public:
 
 	virtual bool canLaunch() = 0;
 
-	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers) = 0;
+	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame = false) = 0;
 	virtual void setPlayerState (uint8_t number, PlayerSettings::State state) = 0;
 	virtual void nextPlayerState(uint8_t number) = 0;
 	virtual void setPlayerTribe (uint8_t number, const std::string& tribe) = 0;

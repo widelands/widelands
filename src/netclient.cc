@@ -142,13 +142,19 @@ void NetClient::run ()
 				(game, d->playernum+1, false, true);
 		game.set_iabase(ipl);
 		ipl->set_chat_provider(this);
-		game.init(loaderUI, d->settings);
+		if(!d->settings.savegame) // new map
+			game.init(loaderUI, d->settings);
+		else // savegame
+			game.init_savegame(loaderUI, d->settings);
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = WLApplication::get()->get_time();
 
 		d->modal = game.get_iabase();
-		game.run(loaderUI);
+		if(!d->settings.savegame) // new map
+			game.run(loaderUI);
+		else // savegame
+			game.run(loaderUI, true);
 		d->modal = 0;
 		d->game = 0;
 	} catch (...) {
@@ -242,7 +248,7 @@ bool NetClient::canLaunch()
 	return false;
 }
 
-void NetClient::setMap(const std::string&, const std::string&, uint32_t)
+void NetClient::setMap(const std::string&, const std::string&, uint32_t, bool)
 {
 	// client is not allowed to do this
 }
@@ -397,6 +403,7 @@ void NetClient::handle_packet(RecvPacket& packet)
 	case NETCMD_SETTING_MAP:
 		d->settings.mapname = packet.String();
 		d->settings.mapfilename = packet.String();
+		d->settings.savegame = packet.Unsigned8() == 1 ? true : false;
 		log("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
 		break;
 
