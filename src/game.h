@@ -94,8 +94,8 @@ struct Game : public Editor_Game_Base {
 	void set_write_replay(bool wr);
 	void save_syncstream(bool save);
 	void init(UI::ProgressWindow & loader_ui, const GameSettings& settings);
-	void init_multiplayer_savegame(UI::ProgressWindow & loader_ui, const GameSettings& settings);
-	bool run_splayer_map_direct(const char* mapname, bool scenario);
+	void init_savegame(UI::ProgressWindow & loader_ui, const GameSettings& settings);
+	bool run_splayer_scenario_direct(const char* mapname);
 	bool run (UI::ProgressWindow & loader_ui, bool = false);
 
 	/**

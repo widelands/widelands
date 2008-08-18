@@ -292,7 +292,7 @@ void WLApplication::run()
 	} else if (m_scenario_filename.size()) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_map_direct(m_scenario_filename.c_str(), true);
+			game.run_splayer_scenario_direct(m_scenario_filename.c_str());
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -1195,7 +1195,7 @@ void WLApplication::mainmenu_singleplayer()
 
 			try {
 				// Load selected campaign-map-file
-				if (game.run_splayer_map_direct(filename.c_str(), true))
+				if (game.run_splayer_scenario_direct(filename.c_str()))
 					done = true;
 			} catch (...) {
 				emergency_save(game);
@@ -1394,7 +1394,7 @@ bool WLApplication::new_game()
 		return false;
 	if (code == 2) { // scenario
 		try {
-			game.run_splayer_map_direct(sp.getMap().c_str(), true);
+			game.run_splayer_scenario_direct(sp.getMap().c_str());
 		} catch (...) {
 			emergency_save(game);
 			throw;

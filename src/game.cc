@@ -230,7 +230,7 @@ void Game::save_syncstream(bool save)
 }
 
 
-bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
+bool Game::run_splayer_scenario_direct(const char* mapname) {
 	assert(!get_map());
 
 	set_map(new Map);
@@ -241,14 +241,11 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		GameTips tips (loaderUI);
 
 		loaderUI.step (_("Preloading a map"));
-		if (scenario) {
+		{
 			i18n::Textdomain textdomain(mapname); // load scenario textdomain
 			log("Loading the locals for scenario. file: %s.mo\n", mapname);
 			maploader->preload_map(true);
-		} else {
-			maploader->preload_map(false);
 		}
-
 		const std::string background = map().get_background();
 		if (background.size() > 0)
 			loaderUI.set_background(background);
@@ -267,16 +264,15 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 				 map().get_scenario_player_name (p));
 		}
 
-		set_iabase(new Interactive_Player(*this, 1, scenario, false));
+		set_iabase(new Interactive_Player(*this, 1, true, false));
 
-		loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
+		loaderUI.step (_("Loading a map"));
 
 		// Reload campaign textdomain
-		if (scenario) {
+		{
 			i18n::Textdomain textdomain(mapname);
 			maploader->load_map_complete(this, true);
-		} else
-			maploader->load_map_complete(this, false);
+		}
 		delete maploader;
 		maploader = 0;
 
@@ -344,8 +340,11 @@ void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 
 /**
  * Initialize the savegame based on the given settings.
+ * At return the game is at the same state like a map loaded with Game::init()
+ * Only difference is, that players are already initialised.
+ * run(loaderUI, true) takes care about this difference.
  */
-void Game::init_multiplayer_savegame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
+void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 	g_gr->flush(PicMod_Menu);
 
 	loaderUI.step(_("Preloading map"));
@@ -357,7 +356,7 @@ void Game::init_multiplayer_savegame(UI::ProgressWindow & loaderUI, const GameSe
 				(g_fs->MakeSubFileSystem(settings.mapfilename.c_str()));
 		Game_Loader gl(*fs, this);
 		loaderUI.step(_("Loading..."));
-		gl.load_game(true);
+		gl.load_game(settings.multiplayer);
 	} catch (...) {
 		throw;
 	}
@@ -392,7 +391,7 @@ bool Game::run_load_game(bool multiplayer, std::string filename) {
 
 		Game_Loader gl(*fs, this);
 		loaderUI.step(_("Loading..."));
-		gl.load_game();
+		gl.load_game(multiplayer);
 	}
 
 	set_game_controller(GameController::createSinglePlayer(this, true, 1));

@@ -307,7 +307,7 @@ void NetHost::run()
 		if(!d->settings.savegame) // new game
 			game.init(loaderUI, d->settings);
 		else // savegame
-			game.init_multiplayer_savegame(loaderUI, d->settings);
+			game.init_savegame(loaderUI, d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = WLApplication::get()->get_time();
