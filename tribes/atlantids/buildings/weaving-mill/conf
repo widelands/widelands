@@ -8,17 +8,22 @@ worker=weaver
 program=work
 program=produce_spidercloth
 program=produce_tabard
+program=produce_golden_tabard
 output=spidercloth
 output=tabard
+output=golden_tabard
 
 [inputs]
-spideryarn=6
+spideryarn=8
 goldyarn=4
 
 [work]
 0=set +nostats
 1=call produce_spidercloth
 2=call produce_tabard
+3=call produce_spidercloth
+4=call produce_golden_tabard
+5=call produce_spidercloth
 
 [produce_spidercloth]
 0=set +catch
@@ -31,10 +36,17 @@ goldyarn=4
 0=set +catch
 1=sleep 40000
 2=check spideryarn
+3=consume spideryarn
+4=produce tabard
+
+[produce_golden_tabard]
+0=set +catch
+1=sleep 40000
+2=check spideryarn
 3=check goldyarn
 4=consume spideryarn
 5=consume goldyarn
-6=produce tabard
+6=produce golden_tabard
 
 [buildcost]
 trunk=3

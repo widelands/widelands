@@ -53,11 +53,13 @@ max_level=1
 
 [upgrade_hp_0]
 0=check smoked_fish,smoked_meat 2
-1=check_soldier hp 0 # Fails when aren't any soldier of level 0 hp
-2=sleep 30000
-3=check_soldier hp 0 # Because the soldier can be expulsed by the player
-4=consume smoked_fish,smoked_meat 2
-5=train hp 0 1
+1=check golden_tabard
+2=check_soldier hp 0 # Fails when aren't any soldier of level 0 hp
+3=sleep 30000
+4=check_soldier hp 0 # Because the soldier can be expulsed by the player
+5=consume smoked_fish,smoked_meat 2
+6=consume golden_tabard
+7=train hp 0 1
 
 [upgrade_evade_0]
 0=check bread
@@ -85,6 +87,7 @@ smoked_fish=6
 smoked_meat=6
 steel_shield=4
 advanced_shield=4
+golden_tabard=5
 
 
 [buildcost]
