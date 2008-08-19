@@ -145,6 +145,22 @@ void PlayerDescriptionGroup::refresh()
 
 
 /**
+ * Set player state to closed and disable checkbox, so the user can't
+ * change this state. This is useful for multi player savegames.
+ */
+void PlayerDescriptionGroup::enable_pdg(bool enable)
+{
+	const GameSettings& settings = d->settings->settings();
+
+	if (d->plnum >= settings.players.size())
+		return;
+
+	enable_player(enable);
+	d->btnEnablePlayer->set_enabled(enable);
+}
+
+
+/**
  * The checkbox to open/close a player position has been pressed.
  */
 void PlayerDescriptionGroup::enable_player(bool on)

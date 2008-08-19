@@ -130,7 +130,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 	if (map.width) {
 		char buf[256];
 
-		// get translated tribesname
+		// get translated worldsname
 		std::string worldpath("worlds/" + map.world);
 		i18n::grab_textdomain(worldpath);
 		Profile prof((worldpath + "/conf").c_str());

@@ -24,6 +24,9 @@
 
 #include "ui_button.h"
 #include "ui_textarea.h"
+#include "ui_multilinetextarea.h"
+
+#include <string>
 
 class ChatProvider;
 struct GameChatPanel;
@@ -65,15 +68,23 @@ private:
 	void back_clicked();
 	void start_clicked();
 	void set_scenario_values();
+	void load_previous_playerdata();
+	void enable_all_pdgs();
 
 
 	UI::Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
 	UI::Button<Fullscreen_Menu_LaunchGame> m_back, m_ok;
 	UI::Textarea             m_title, m_mapname;
+	UI::Multiline_Textarea   m_notes;
 	GameSettingsProvider   * m_settings;
 	GameController         * m_ctrl; // optional
 	GameChatPanel          * m_chat;
 	PlayerDescriptionGroup * m_players[MAX_PLAYERS];
+	std::string              m_filename;
+	std::string              m_filename_proof; // locale variable to check UI state
+	std::string              m_player_save_name[MAX_PLAYERS];
+	std::string              m_player_save_tribe[MAX_PLAYERS];
+	int8_t                   m_nr_players;
 	bool                     m_is_scenario;
 	bool                     m_is_savegame;
 };

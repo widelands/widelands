@@ -26,8 +26,6 @@
 #include "gamechatpanel.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
-//#include "game_player_info_data_packet.h"
-//#include "game_loader.h"
 #include "i18n.h"
 #include "instances.h"
 #include "layered_filesystem.h"
@@ -71,12 +69,13 @@ m_ok
 	 _("Start game"),
 	 std::string(),
 	 false),
-m_title      (this, MENU_XRES / 2,  80, _("Launch Game"), Align_HCenter),
-m_mapname    (this, 650,           180, std::string(),    Align_HCenter),
-m_settings   (settings),
-m_ctrl       (ctrl),
-m_chat       (0),
-m_is_scenario(false)
+m_title        (this, MENU_XRES / 2,  70, _("Launch Game"),      Align_HCenter),
+m_mapname      (this, 650,           180, std::string(),         Align_HCenter),
+m_notes        (this, 60, 110, 680, 60, ""),
+m_settings     (settings),
+m_ctrl         (ctrl),
+m_chat         (0),
+m_is_scenario  (false)
 {
 
 	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
@@ -85,6 +84,7 @@ m_is_scenario(false)
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 		m_players[i] =
 			new PlayerDescriptionGroup(this, 50, y += 30, settings, i);
+
 }
 
 
@@ -157,6 +157,8 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
  */
 void Fullscreen_Menu_LaunchGame::start_clicked()
 {
+	if(!g_fs->FileExists(m_filename))
+		throw wexception("Tried to start a game with a file you don't have.");
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
 			end_modal(1 + m_is_scenario);
@@ -177,6 +179,8 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	m_mapname.set_text
 		(settings.mapname.size() != 0 ? settings.mapname : _("(no map)"));
 	m_is_savegame = settings.savegame;
+	m_filename = settings.mapfilename;
+	m_nr_players = settings.players.size();
 
 	m_ok.set_enabled(m_settings->canLaunch());
 	m_select_map.set_visible(m_settings->canChangeMap());
@@ -189,9 +193,62 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	if(m_settings->settings().scenario == true)
 		set_scenario_values();
 
-	// update the player description groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-		m_players[i]->refresh();
+	// Print warnings and information between title and player desc. group
+	if (!g_fs->FileExists(m_filename)) {
+		m_notes.set_text
+				(_("WARNING!!! Host selected file \"")
+				+ m_filename
+				+ _("\" for this game, but you don't have it.")
+				+ _(" Please add it manually."));
+				for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+					m_players[i]->refresh();
+	} else {
+		if(!m_is_savegame) {
+			m_notes.set_text("");
+
+			// update the player description groups
+			for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+				m_players[i]->refresh();
+
+		} else { // Multi player savegame information starts here.
+
+			if (m_filename != m_filename_proof)
+				// load all playerdata from savegame
+				load_previous_playerdata();
+			std::string notetext = _("Original:");
+
+			char buf[32];
+			int8_t i = 1;
+
+			// Print information about last players
+			for(; i <= m_nr_players; ++i) {
+				snprintf(buf, sizeof(buf), "  [%i] ", i);
+				notetext += buf;
+
+				if (m_player_save_name[i-1].empty()) {
+					notetext += "--";
+					// set player description group disabled so
+					// noone can take this place
+					m_players[i-1]->enable_pdg(false);
+					continue;
+				}
+
+				// Refresh player description group of this player
+				m_players[i-1]->refresh();
+				notetext += m_player_save_name[i-1] + " (";
+				if (m_player_save_name[i-1].empty())
+					throw wexception("Player has a name but no tribe");
+				notetext += m_player_save_name[i-1] + ")";
+			}
+
+			// update remaining player description groups
+			for (; i <= MAX_PLAYERS; ++i)
+				m_players[i-1]->refresh();
+
+			// Finally set the notes
+			m_notes.set_text(notetext);
+		}
+	}
 }
 
 
@@ -220,6 +277,7 @@ void Fullscreen_Menu_LaunchGame::select_map()
 	MapData const & mapdata = *msm.get_map();
 	m_settings->setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
 	m_is_savegame = false;
+	enable_all_pdgs();
 }
 
 
@@ -239,20 +297,20 @@ void Fullscreen_Menu_LaunchGame::select_savegame()
 	if (code <= 0)
 		return; // back was pressed
 
-	std::string file = lsgm.filename();
-	FileSystem *m_fs = g_fs->MakeSubFileSystem(file.c_str());
+	m_filename = lsgm.filename();
 
+	// Read the needed data from file "elemental" of the used map.
+	FileSystem *m_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
 	Profile prof;
 	prof.read("map/elemental", 0, *m_fs);
 	Section & s = prof.get_safe_section("global");
-	int8_t nr = s.get_safe_int("nr_players");
-/*
-	// initalise empty map, else playerinfo.Read() will fail.
-	game.set_map(new Widelands::Map);
-	Widelands::Game_Player_Info_Data_Packet playerinfo;
-	playerinfo.Read(*m_fs, &game, 0);
-*/
-	m_settings->setMap(file, file, nr, true);
+
+	std::string mapname = _("(Save): ") + std::string(s.get_safe_string("name"));
+	m_nr_players = s.get_safe_int("nr_players");
+
+	m_settings->setMap(mapname, m_filename, m_nr_players, true);
+	m_is_savegame = true;
+	enable_all_pdgs();
 }
 
 
@@ -276,4 +334,50 @@ void Fullscreen_Menu_LaunchGame::set_scenario_values()
 		m_settings->setPlayerName (i, map.get_scenario_player_name(i+1));
 		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i+1));
 	}
+}
+
+/**
+ * load all playerdata from savegame
+ */
+void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
+{
+	FileSystem *m_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
+	Profile prof;
+	prof.read("map/player_names", 0, *m_fs);
+	std::string strbuf;
+	char buf[32];
+
+	int8_t i = 1;
+	for (; i <= m_nr_players; ++i) {
+		strbuf = "";
+		snprintf(buf, sizeof(buf), "player_%i", i);
+		Section & s = prof.get_safe_section(buf);
+		m_player_save_name [i-1] = s.get_string("name" );
+		m_player_save_tribe[i-1] = s.get_string("tribe");
+
+		if (m_player_save_tribe[i-1].empty())
+			continue; // if tribe is empty, the player does not exist
+
+		// get translated tribename
+		strbuf = "tribes/" + m_player_save_tribe[i-1];
+		i18n::grab_textdomain(strbuf);
+		strbuf += "/conf";
+		Profile tribe(strbuf.c_str());
+		Section & global = tribe.get_safe_section("tribe");
+		m_player_save_tribe[i-1] = global.get_safe_string("name");
+		i18n::release_textdomain();
+	}
+	m_filename_proof = m_filename;
+}
+
+
+/**
+ * enables all player description groups.
+ * This is a cleanup for the pdgs. Used f.e if user selects a map after a
+ * savegame was selected, so all free player positions are reopened.
+ */
+void Fullscreen_Menu_LaunchGame::enable_all_pdgs()
+{
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+		m_players[i]->enable_pdg(true);
 }
