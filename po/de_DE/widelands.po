@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3263\n"
+"Project-Id-Version: Widelands svn3270\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-17 13:35+0200\n"
-"PO-Revision-Date: 2008-08-17 13:38+0100\n"
+"POT-Creation-Date: 2008-08-19 16:47+0200\n"
+"PO-Revision-Date: 2008-08-19 16:53+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -242,26 +242,27 @@ msgstr ""
 "Widelands versucht eine Speicherung durchzuführen, wenn ein Fehler auftrat. Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden und fortzusetzen.\n"
 
 #: ../../src/wlapplication.cc:1334
-#: ../../src/nethost.cc:691
+#: ../../src/nethost.cc:699
 msgid "Player"
 msgstr "Spieler"
 
-#: ../../src/wlapplication.cc:1407
+#: ../../src/wlapplication.cc:1409
 #: ../../src/nethost.cc:300
 #: ../../src/netclient.cc:136
 msgid "Preparing game"
 msgstr "Bereite Spiel vor"
 
-#: ../../src/wlapplication.cc:1469
+#: ../../src/wlapplication.cc:1471
 msgid "End of replay"
 msgstr "Ende der Spielaufzeichnung"
 
-#: ../../src/wlapplication.cc:1471
+#: ../../src/wlapplication.cc:1473
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weitergucken."
 
-#: ../../src/wlapplication.cc:1523
-#: ../../src/game.cc:372
+#: ../../src/wlapplication.cc:1525
+#: ../../src/game.cc:358
+#: ../../src/game.cc:393
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -273,85 +274,85 @@ msgstr "Der Server hat das Spiel verlassen."
 msgid "The game has started just after you tried to connect."
 msgstr "Das Spiel wurde, kurz nachdem du dich verbinden wolltest, gestartet."
 
-#: ../../src/nethost.cc:330
+#: ../../src/nethost.cc:336
 msgid "Server has crashed and performed an emergency save."
 msgstr "Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
 
-#: ../../src/nethost.cc:457
+#: ../../src/nethost.cc:464
 msgid "Host has changed to a map that supports fewer players."
 msgstr "Der Gastgeber hat zu einer Karte gewechselt, die weniger Spieler unterstützt.."
 
-#: ../../src/nethost.cc:507
+#: ../../src/nethost.cc:514
 msgid "You were kicked by the host."
 msgstr "Du wurdest vom Gastgeber rausgeschmissen."
 
-#: ../../src/nethost.cc:632
+#: ../../src/nethost.cc:640
 #: ../../src/playerdescrgroup.cc:125
 msgid "Computer"
 msgstr "Computer"
 
-#: ../../src/nethost.cc:677
+#: ../../src/nethost.cc:685
 msgid "There are no open player slots left."
 msgstr "Alle Plätze für dieses Spiel sind bereits belegt."
 
-#: ../../src/nethost.cc:757
+#: ../../src/nethost.cc:765
 msgid "Client reports time to host that is running backwards."
 msgstr "Der Client hat dem Gastgeber eine Zeit genannt, die zurück läuft."
 
-#: ../../src/nethost.cc:759
+#: ../../src/nethost.cc:767
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Der Client simuliert ausserhalb der vom Server erlaubten Zeit."
 
-#: ../../src/nethost.cc:762
+#: ../../src/nethost.cc:770
 msgid "Client did not submit sync report in time."
 msgstr "Der Client hat der Synchronisationsreport nicht rechtzeitig gesendet."
 
-#: ../../src/nethost.cc:931
+#: ../../src/nethost.cc:939
 msgid "Client and host have become desynchronized."
 msgstr "Client und Server sind unsynchron geworden."
 
-#: ../../src/nethost.cc:970
+#: ../../src/nethost.cc:978
 msgid "The game has already started."
 msgstr "Das Spiel hat bereits begonnen."
 
-#: ../../src/nethost.cc:981
+#: ../../src/nethost.cc:989
 msgid "Connection to client lost."
 msgstr "Verbindung zum Client verloren."
 
-#: ../../src/nethost.cc:995
+#: ../../src/nethost.cc:1003
 msgid "Client sent malformed commands: "
 msgstr "Der Client hat einen unverständlichen Befehl gesendet:"
 
-#: ../../src/nethost.cc:1028
+#: ../../src/nethost.cc:1036
 msgid "Game is running already, but client has not connected fully"
 msgstr "Das Spiel läuft bereits, aber der Client ist noch nicht richtig verbunden."
 
-#: ../../src/nethost.cc:1032
+#: ../../src/nethost.cc:1040
 #, c-format
 msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
 msgstr "Der Erste vom Clienten gesendete Befehl ist %u stattdessen hätte HELLO kommen müssen. Höchstwahrscheinlich verwenden Server und Client inkompatible Versionen."
 
-#: ../../src/nethost.cc:1037
+#: ../../src/nethost.cc:1045
 msgid "Server uses a different protocol version."
 msgstr "Der Server verwendet eine andere Protokollversion"
 
-#: ../../src/nethost.cc:1062
+#: ../../src/nethost.cc:1070
 msgid "Client sent TIME command even though game is not running."
 msgstr "Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/nethost.cc:1069
+#: ../../src/nethost.cc:1077
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/nethost.cc:1078
+#: ../../src/nethost.cc:1086
 msgid "Client tries to sent a playercommand for a different player."
 msgstr "Der Client versucht einen Spielerbefehl für einen anderen Spieler zu senden."
 
-#: ../../src/nethost.cc:1085
+#: ../../src/nethost.cc:1093
 msgid "Client sent unexpected synchronization report."
 msgstr "Der Client hat einen unerwarteten Synchronisationsreport geschickt."
 
-#: ../../src/nethost.cc:1110
+#: ../../src/nethost.cc:1118
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
@@ -360,45 +361,45 @@ msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
 msgid "Client has left the game."
 msgstr "Der Client hat das Spiel verlassen."
 
-#: ../../src/netclient.cc:158
+#: ../../src/netclient.cc:164
 msgid "Client crashed and performed an emergency save."
 msgstr "Der Client ist abgestürzt und hat eine Notfallspeicherung durchgeführt."
 
-#: ../../src/netclient.cc:306
+#: ../../src/netclient.cc:312
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Der Server hat ein Spieler-Update für einen nicht existenten Spieler gesendet."
 
-#: ../../src/netclient.cc:376
+#: ../../src/netclient.cc:382
 #, c-format
 msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
 msgstr "Habe ein HELLO Paket vom Server erwartet, aber die Anweisung Nummer %u erhalten. Vielleicht verwendet der Server eine andere Widelands-Version?"
 
-#: ../../src/netclient.cc:382
+#: ../../src/netclient.cc:388
 msgid "Server uses a different protocol version"
 msgstr "Der Server benutzt eine andere Protokollversion"
 
-#: ../../src/netclient.cc:424
+#: ../../src/netclient.cc:431
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Ich habe unerwartet ein LAUNCH Befehl vom Server erhalten."
 
-#: ../../src/netclient.cc:441
+#: ../../src/netclient.cc:448
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr "Der Server hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/netclient.cc:452
+#: ../../src/netclient.cc:459
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "Der Server hat ein SYNCREQUEST gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/netclient.cc:473
+#: ../../src/netclient.cc:480
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr "Der Server eine unbekannte Anweisungen (Anweisung Nummer: %u) gesendet"
 
-#: ../../src/netclient.cc:502
+#: ../../src/netclient.cc:509
 msgid "Server sent malformed commands: "
 msgstr "Der Server hat unverständliche Anweisungen gesendet:"
 
-#: ../../src/netclient.cc:532
+#: ../../src/netclient.cc:539
 msgid " An automatic savegame will be created."
 msgstr " Eine automatische Spielsicherung wird durchgeführt."
 
@@ -424,32 +425,33 @@ msgstr "Schließen"
 msgid "Preloading a map"
 msgstr "Lese Teile der Karte"
 
-#: ../../src/game.cc:257
+#: ../../src/game.cc:254
 msgid "Loading a world"
 msgstr "Lade eine Welt"
 
-#: ../../src/game.cc:263
+#: ../../src/game.cc:260
 #, c-format
 msgid "Adding player %u"
 msgstr "Füge Spieler %u hinzu"
 
-#: ../../src/game.cc:272
+#: ../../src/game.cc:269
 msgid "Loading a map"
 msgstr "Lade eine Karte"
 
-#: ../../src/game.cc:307
+#: ../../src/game.cc:303
+#: ../../src/game.cc:350
 msgid "Preloading map"
 msgstr "Lade Teile der Karte vor"
 
-#: ../../src/game.cc:321
+#: ../../src/game.cc:317
 msgid "Configuring players"
 msgstr "Konfiguriere Spieler"
 
-#: ../../src/game.cc:334
+#: ../../src/game.cc:330
 msgid "Loading map"
 msgstr "Lade Karte"
 
-#: ../../src/game.cc:427
+#: ../../src/game.cc:448
 msgid "Creating player infrastructure"
 msgstr "Erstelle Infrastruktur eines Spielers"
 
@@ -1384,7 +1386,7 @@ msgstr "Systemstandard"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:37
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:53
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:52
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:63
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:50
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:40
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:64
@@ -1418,21 +1420,45 @@ msgstr "Spielstand laden"
 msgid "Campaigns"
 msgstr "Kampagnen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:44
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:47
 msgid "Select map"
 msgstr "Karte wählen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:58
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:55
+msgid "Select Savegame"
+msgstr "Speicherung wählen"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:69
 msgid "Start game"
 msgstr "Spiel starten"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:61
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:72
 msgid "Launch Game"
 msgstr "Starte Spiel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:155
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:181
 msgid "(no map)"
 msgstr "(keine Karte)"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:200
+msgid "WARNING!!! Host selected file \""
+msgstr "ACHTUNG!!! Der Gastgeber hat die Datei \""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:202
+msgid "\" for this game, but you don't have it."
+msgstr "\" für dieses Spiel ausgewählt. Diese ist bei dir nicht vorhanden."
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:203
+msgid " Please add it manually."
+msgstr " Bitte füge sie per Hand hinzu."
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:219
+msgid "Original:"
+msgstr "Original:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:309
+msgid "(Save): "
+msgstr "(Save): "
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:29
 msgid "Begin Network Game"

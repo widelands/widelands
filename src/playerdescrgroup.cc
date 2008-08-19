@@ -145,8 +145,9 @@ void PlayerDescriptionGroup::refresh()
 
 
 /**
- * Set player state to closed and disable checkbox, so the user can't
- * change this state. This is useful for multi player savegames.
+ * Enables/Disables a playerposition completely
+ * This is useful for multi player savegames, where specific player positions
+ * were not used in the saved game.
  */
 void PlayerDescriptionGroup::enable_pdg(bool enable)
 {
@@ -157,6 +158,9 @@ void PlayerDescriptionGroup::enable_pdg(bool enable)
 
 	enable_player(enable);
 	d->btnEnablePlayer->set_enabled(enable);
+	d->btnEnablePlayer->set_visible(enable);
+	d->btnPlayerType  ->set_enabled(enable);
+	d->btnPlayerType  ->set_visible(enable);
 }
 
 

@@ -16,7 +16,7 @@ plrclr3_b=198
 
 [tribe]
 author=_ The Widelands Development Team
-name=_ The Empire
+name=_ Empire
 descr=_ This is the culture of the roman Empire.
 bob_vision_range=2
 uiposition=20

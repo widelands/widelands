@@ -71,7 +71,7 @@ m_ok
 	 false),
 m_title        (this, MENU_XRES / 2,  70, _("Launch Game"),      Align_HCenter),
 m_mapname      (this, 650,           180, std::string(),         Align_HCenter),
-m_notes        (this, 60, 110, 680, 60, ""),
+m_notes        (this, 50, 110, 700, 60, ""),
 m_settings     (settings),
 m_ctrl         (ctrl),
 m_chat         (0),
@@ -89,6 +89,7 @@ m_is_scenario  (false)
 
 
 /**
+ * In singleplayer:
  * Select a map as a first step in launching a game, before
  * showing the actual setup menu.
  */
@@ -238,7 +239,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 				notetext += m_player_save_name[i-1] + " (";
 				if (m_player_save_name[i-1].empty())
 					throw wexception("Player has a name but no tribe");
-				notetext += m_player_save_name[i-1] + ")";
+				notetext += m_player_save_tribe[i-1] + ")";
 			}
 
 			// update remaining player description groups
