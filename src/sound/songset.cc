@@ -33,9 +33,7 @@ Songset::~Songset()
 {
 	m_songs.clear();
 
-	free(m_m);
-
-	if (m_rwops) SDL_FreeRW(m_rwops);
+	if (m_m) Mix_FreeMusic(m_m);
 }
 
 /** Append a song to the end of the songset
@@ -74,10 +72,8 @@ Mix_Music *Songset::get_song()
 	}
 
 	//first, close the previous song and remove it from memory
-	free(m_m);
-
-	if (m_rwops) {//  rwops might be 0
-		SDL_FreeRW(m_rwops);
+	if (m_m) {
+		Mix_FreeMusic(m_m);
 		m_fr.Close();
 	}
 
