@@ -28,6 +28,7 @@
 #include "editor_player_menu.h"
 #include "editor_tool_menu.h"
 #include "editor_toolsize_menu.h"
+#include "game_tips.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_base.h"
@@ -122,6 +123,7 @@ void Editor_Interactive::load(std::string const & filename) {
 	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
+	GameTips editortips (loader_ui, "txts/editortips");
 	{
 		std::string const old_world_name = map.get_world_name();
 		ml->preload_map(true);
@@ -526,6 +528,7 @@ void Editor_Interactive::run_editor(std::string const & filename)
 	editor.set_iabase(&eia); //TODO: get rid of this
 	{
 		UI::ProgressWindow loader_ui("pics/editor.jpg");
+		GameTips editortips (loader_ui, "txts/editortips");
 		g_gr->flush(PicMod_Menu);
 
 		{

@@ -744,10 +744,12 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 			log(msg);
 
 			Widelands::Coords starting_pos = m_map.get_starting_pos(p);
-			if (!starting_pos)
-				// TODO don't use wexception as this is not a "bug" in this case
-				throw wexception("Player %u has no starting point. Please try "
-						"to fix this in the widelands editor", p);
+			if (!starting_pos) {
+				// Do not throw exception, else map won't be loadable in editor
+				// Player initialisation will keep track about missing starting pos.
+				log("Has no starting position.\n");
+				continue;
+			}
 			Widelands::FCoords fpos = m_map.get_fcoords(starting_pos);
 
 			// WTF? can anyone tell me why get_caps() returns 39 for
@@ -755,10 +757,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 			// Below is a hack to make it work - but I didn't found the reason yet.
 			int32_t BIG = 39;
 			if (fpos.field->get_caps() != BIG) { //Widelands::BUILDCAPS_BIG) {
-
-				snprintf(msg, sizeof(msg),
-						"wrong size - trying to fix it:\n");
-				log(msg);
+				log("wrong size - trying to fix it:\n");
 				// Try to find a BUILDCAPS_BIG place near original start point
 				Widelands::FCoords tl = m_map.tl_n(fpos);
 				Widelands::FCoords  l = m_map .l_n(fpos);
@@ -856,10 +855,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 						log("   Starting position was successfully fixed "
 							"during 2nd try!\n");
 					} else {
-						// TODO don't use wexception as this is not a "bug" in this case
-						throw wexception("Player %u has invalid starting point, "
-								"that couldn't be fixed. Please try to fix it "
-								"manually in the editor.", p);
+						// Do not throw exception, else map won't be loadable in editor
+						// Player initialisation will keep track about wrong starting pos.
+						log("invalid starting point, that couldn't be fixed.\n");
+						log("   Please try to fix it manually in the editor.\n");
 					}
 				}
 			} else

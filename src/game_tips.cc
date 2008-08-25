@@ -32,7 +32,7 @@
 #define GAMETIPS_TEXTAREA_BORDER      2
 #define GAMETIPS_DEFAULT_PADDING      15
 
-GameTips::GameTips(UI::ProgressWindow & progressWindow)
+GameTips::GameTips(UI::ProgressWindow & progressWindow, std::string filename)
 :
 m_lastUpdated   (0),
 m_updateAfter   (0),
@@ -45,8 +45,6 @@ m_lastTip       (0)
 
 	// Skip, if no triggers saved
 	// Load the TrueType Font
-	std::string filename = "txts/gametips";
-
 	try {
 		Profile prof(filename.c_str());
 		if (Section * const s = prof.get_section("global")) {

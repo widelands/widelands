@@ -90,11 +90,13 @@ void Player::init(const bool place_headquarters) {
 		Coords starting_pos = map.get_starting_pos(m_plnum);
 
 		if (!starting_pos)
+			// TODO don't use wexception as this is not a "bug" in this case
 			throw wexception("Player %u has no starting point", m_plnum);
 
 		FCoords fpos = map.get_fcoords(starting_pos);
 
 		if ((fpos.field->get_caps() & BUILDCAPS_SIZEMASK) < BUILDCAPS_BIG)
+			// TODO don't use wexception as this is not a "bug" in this case
 			throw wexception("Starting point of player %u is too small", m_plnum);
 
 		Player_Area<Area<FCoords> > starting_area

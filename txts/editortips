@@ -1,0 +1,46 @@
+[global]
+background=pics/tips_bg.png
+width=400
+height=160
+padding-left=48
+padding-top=28
+padding-right=48
+padding-bottom=28
+background-color=dfd1ad
+text-color=21211b
+
+[Tip 1]
+text=_"You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
+sec=6
+
+[Tip 2]
+text=_"You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
+sec=7
+
+[Tip 3]
+text=_"Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
+sec=6
+
+[Tip 4]
+text=_"Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
+sec=7
+
+[Tip 5]
+text=_"Holding down ALT switches second alternative tool on (if it exists)."
+sec=6
+
+[Tip 6]
+text=_"The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
+sec=6
+
+[Tip 7]
+text=_"SPACE key behaves like in normal game. It switches buildhelp on or off."
+sec=6
+
+[Tip 8]
+text=_"The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
+sec=7
+
+[Tip 9]
+text=_"You can find a reference for all triggers and events in our wiki at widelands.org."
+sec=6
