@@ -1275,12 +1275,15 @@ void WLApplication::mainmenu_editor()
 				break;
 			case Fullscreen_Menu_Editor::Load_Map:
 				{
-					Fullscreen_Menu_Editor_MapSelect emsm;
-					int retval = emsm.run();
-					if (retval <= 0)
-						break;
+					std::string filename;
+					{
+						Fullscreen_Menu_Editor_MapSelect emsm;
+						int retval = emsm.run();
+						if (retval <= 0)
+							break;
 
-					std::string filename = emsm.get_map();
+						filename = emsm.get_map();
+					}
 					Editor_Interactive::run_editor(filename.c_str());
 				}
 				done = true;
