@@ -237,16 +237,16 @@ void Multiline_Editbox::draw(RenderTarget* dst)
 			 m_fontsize,
 			 m_fcolor,
 			 RGBColor(107, 87, 55),
-			 Point(Multiline_Editbox::get_halign(), 0 - m_textpos),
+			 Point(get_halign(), 0 - m_textpos),
 			 get_text().c_str(),
 			 m_align,
 			 get_eff_w(),
 			 m_cache_mode,
 			 &m_cache_id,
 			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1)); //  explicit cast is necessary to avoid a compiler warning
+		draw_scrollbar();
 		m_cache_mode = Widget_Cache_Use;
 	}
-	Multiline_Textarea::draw_scrollbar();
 }
 
 /**
