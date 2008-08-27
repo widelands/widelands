@@ -11,7 +11,7 @@ max_medics=0
 heal_increase_per_medic=0
 
 [buildcost]
-blackwood=3
+blackwood=2
 
 [idle]
 pics=sentry_i_??.png
