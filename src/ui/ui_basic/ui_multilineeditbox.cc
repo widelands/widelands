@@ -42,7 +42,7 @@ Multiline_Editbox::Multiline_Editbox
 	m_maxchars        (0xffff),
 	m_needs_update    (false)
 {
-	set_scrollmode(ScrollLog);
+	set_scrollmode(ScrollNormal);
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_think(false);
@@ -76,7 +76,7 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 		case SDLK_DELETE:
 			if (txt.size() and m_cur_pos < txt.size()) {
 				txt.erase(txt.begin() + m_cur_pos);
-				Multiline_Textarea::set_text(txt.c_str());
+				set_text(txt.c_str());
 			}
 			break;
 
@@ -197,10 +197,10 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 				txt.insert(m_cur_pos, 1, c);
 				++m_cur_pos;
 			}
-			Multiline_Textarea::set_text(txt.c_str());
+			set_text(txt.c_str());
 			break;
 		}
-		Multiline_Textarea::set_text(txt.c_str());
+		set_text(txt.c_str());
 		changed.call();
 		return true;
 	}
@@ -245,6 +245,10 @@ void Multiline_Editbox::draw(RenderTarget* dst)
 			 &m_cache_id,
 			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1)); //  explicit cast is necessary to avoid a compiler warning
 		draw_scrollbar();
+
+		uint32_t w; // just to run g_fh->get_size_from_cache
+		g_fh->get_size_from_cache(m_cache_id, w, m_textheight);
+
 		m_cache_mode = Widget_Cache_Use;
 	}
 }
@@ -253,10 +257,41 @@ void Multiline_Editbox::draw(RenderTarget* dst)
  * Set text function needs to take care of the current
  * position
  */
-void Multiline_Editbox::set_text(const char* str) {
-	m_cur_pos = strlen(str);
+void Multiline_Editbox::set_text(const char* str)
+{
+	CalcLinePos();
 
 	Multiline_Textarea::set_text(str);
-
 }
+
+/**
+ * Calculate the heigth position of the cursor and write it to m_textpos
+ * so the scrollbar can follow the cursor.
+ */
+void Multiline_Editbox::CalcLinePos()
+{
+	if (m_textheight < get_h()) {
+		m_textpos = 0;
+		return;
+	}
+
+	const char* str = get_text().c_str();
+	int32_t leng = strlen(str);
+	int32_t lbtt = 0; // linebreaks to top
+	int32_t lbtb = 0; // linebreaks to bottom
+
+	for (int32_t i = m_cur_pos; i >= 0; --i)
+		if(str[i] == '\n')
+			++lbtt;
+	for (int32_t i = m_cur_pos + 1; i <= leng; ++i)
+		if(str[i] == '\n')
+			++lbtb;
+
+	if((lbtt == 0) & (lbtb == 0))
+		m_textpos = 0;
+	else
+		// calculate as double, so it comes closer to the true value.
+		m_textpos = ((double)(m_textheight - get_h()))/(lbtb + lbtt) * lbtt;
+}
+
 };

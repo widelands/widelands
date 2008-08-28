@@ -68,13 +68,15 @@ struct Multiline_Textarea : public Panel {
 		set_text(m_text.c_str());
 	}
 
+	void set_color(RGBColor fg) {m_fcolor = fg;}
+
 	// Drawing and event handlers
 	void draw(RenderTarget *);
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 
 	const char *  get_font_name() {return m_fontname.c_str();}
-	int32_t      get_font_size() {return m_fontsize;}
+	int32_t       get_font_size() {return m_fontsize;}
 	RGBColor &    get_font_clr () {return m_fcolor;}
 
 private:
@@ -84,7 +86,7 @@ private:
 
 protected:
 	Align        m_align;
-	uint32_t         m_cache_id; ///picid of the whole textarea surface
+	uint32_t     m_cache_id; ///picid of the whole textarea surface
 
 	///set to Widget_Cache_Update if the whole textarea has to be rebuild
 	Widget_Cache m_cache_mode;
@@ -96,7 +98,7 @@ protected:
 	uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
 
 	int32_t get_m_textpos() const {return m_textpos;}
-	void draw_scrollbar();
+	void    draw_scrollbar();
 	int32_t get_halign();
 };
 };

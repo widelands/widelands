@@ -49,6 +49,7 @@ struct Multiline_Editbox : public Multiline_Textarea {
 	void set_text(char const *);
 
 private:
+	void CalcLinePos();
 	static const int32_t ms_darken_value = -20;
 	uint32_t m_cur_pos;
 	uint32_t m_char_pos;
