@@ -40,7 +40,8 @@ struct PlayerDescriptionGroup : public UI::Panel {
 	~PlayerDescriptionGroup();
 
 	void refresh();
-	void enable_pdg(bool enable = true);
+	void enable_pdg       (bool enable = true);
+	void show_tribe_button(bool show   = true);
 
 private:
 	void enable_player(bool on);

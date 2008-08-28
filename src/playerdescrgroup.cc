@@ -161,6 +161,21 @@ void PlayerDescriptionGroup::enable_pdg(bool enable)
 	d->btnEnablePlayer->set_visible(enable);
 	d->btnPlayerType  ->set_enabled(enable);
 	d->btnPlayerType  ->set_visible(enable);
+	d->btnPlayerTribe ->set_visible(enable);
+	d->btnPlayerTribe ->set_enabled(enable);
+	if(!enable)
+		d->plr_name->set_text(std::string());
+}
+
+
+/**
+ * Show/hide player's tribe button
+ * This is useful for multi player savegames, as the tribes can't be changed
+ */
+void PlayerDescriptionGroup::show_tribe_button(bool show)
+{
+	d->btnPlayerTribe ->set_visible(show);
+	d->btnPlayerTribe ->set_enabled(show);
 }
 
 

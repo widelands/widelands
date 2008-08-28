@@ -71,11 +71,12 @@ m_ok
 	 false),
 m_title        (this, MENU_XRES / 2,  70, _("Launch Game"),      Align_HCenter),
 m_mapname      (this, 650,           180, std::string(),         Align_HCenter),
-m_notes        (this, 50, 110, 700, 60, ""),
+m_notes        (this, 50, 110, 700, 60, std::string()),
 m_settings     (settings),
 m_ctrl         (ctrl),
 m_chat         (0),
-m_is_scenario  (false)
+m_is_scenario  (false),
+m_is_savegame  (false)
 {
 
 	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
@@ -201,8 +202,9 @@ void Fullscreen_Menu_LaunchGame::refresh()
 				+ m_filename
 				+ _("\" for this game, but you don't have it.")
 				+ _(" Please add it manually."));
-				for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-					m_players[i]->refresh();
+		for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+			m_players[i]->refresh();
+		m_notes.set_color(UI_FONT_CLR_WARNING);
 	} else {
 		if(!m_is_savegame) {
 			m_notes.set_text("");
@@ -236,6 +238,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 
 				// Refresh player description group of this player
 				m_players[i-1]->refresh();
+				m_players[i-1]->show_tribe_button(false);
 				notetext += m_player_save_name[i-1] + " (";
 				if (m_player_save_name[i-1].empty())
 					throw wexception("Player has a name but no tribe");
@@ -248,6 +251,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 
 			// Finally set the notes
 			m_notes.set_text(notetext);
+			m_notes.set_color(UI_FONT_CLR_FG);
 		}
 	}
 }
