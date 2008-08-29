@@ -92,8 +92,24 @@ int32_t RealFSImpl::FindFiles
 	if (hFile == -1)
 		return 0;
 
+	// Workaround: If pattern is a relative we need to fix the path
+	std::string m_root_save(m_root); // save orginal m_root
+	m_root = path;
+	std::string realpath = FS_CanonicalizeName(pattern);
+	m_root = m_root_save; // reset m_root
+	std::string temp;
+	uint32_t path_size = realpath.size();
+	for(uint32_t i = path_size-1; i > 0; --i) {
+		temp = realpath.at(i);
+		if (temp == "\\") {
+			// remove filename so only pure path is kept
+			realpath.replace(i, path_size - i, "");
+			break;
+		}
+	}
+
 	do {
-		results->insert(std::string(path)+'/'+c_file.name);
+		results->insert(realpath+'\\'+c_file.name);
 	} while (_findnext(hFile, &c_file) == 0);
 
 	_findclose(hFile);
