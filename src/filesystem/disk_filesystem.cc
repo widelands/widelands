@@ -107,13 +107,11 @@ int32_t RealFSImpl::FindFiles
 	int32_t i, count;
 	int32_t ofs;
 
-	if (path.size()) {
+	if (path.size())
 		buf = m_directory + '/' + path + '/' + pattern;
-		ofs = m_directory.length()+1;
-	} else {
+	else
 		buf = m_directory + '/' + pattern;
-		ofs = m_directory.length()+1;
-	}
+	ofs = m_directory.length()+1;
 
 	if (glob(buf.c_str(), 0, NULL, &gl))
 		return 0;

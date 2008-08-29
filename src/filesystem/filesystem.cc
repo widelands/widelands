@@ -276,7 +276,36 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
 
-#ifndef __WIN32__
+#ifdef __WIN32__
+	// remove all slashes with backslashes so following can work.
+	std::string fixedpath(path);
+	std::string temp;
+	uint32_t path_size = path.size();
+	for(uint32_t i = 0; i < path_size; ++i) {
+		temp = fixedpath.at(i);
+		if (temp == "/")
+			fixedpath.replace(i, 1, "\\");
+	}
+
+	bool absolute=pathIsAbsolute(fixedpath);
+
+	components=FS_Tokenize(fixedpath);
+
+	//tilde expansion
+	if (*components.begin()=="~") {
+		components.erase(components.begin());
+		std::vector<std::string> homecomponents;
+		char wlfilename[_MAX_PATH +1];
+		GetModuleFileName(NULL, wlfilename, _MAX_PATH);
+		// On win32 we use widelands dir. to save/load _all_ data
+		homecomponents=FS_Tokenize(wlfilename);
+		components.insert
+			(components.begin(), homecomponents.begin(), homecomponents.end());
+
+		absolute=true;
+	}
+#else
+
 	bool absolute=pathIsAbsolute(path);
 
 	components=FS_Tokenize(path);
@@ -284,7 +313,6 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	//tilde expansion
 	if (*components.begin()=="~") {
 		components.erase(components.begin());
-
 		std::vector<std::string> homecomponents;
 		homecomponents=FS_Tokenize(GetHomedir());
 		components.insert
@@ -292,6 +320,9 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 
 		absolute=true;
 	}
+
+#endif
+
 
 	//make relative paths absolute (so that "../../foo" can work)
 	if (!absolute) {
@@ -342,6 +373,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	}
 
 	std::string canonpath="";
+#ifndef __WIN32__
 	if (absolute)
 		canonpath="/";
 	else
@@ -349,33 +381,21 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 
 	for (i = components.begin(); i != components.end(); ++i)
 		canonpath+=*i+"/";
+#else
+	if (absolute)
+		canonpath="";
+	else
+		canonpath=".\\";
+
+	for (i = components.begin(); i != components.end(); ++i)
+		canonpath+=*i+"\\";
+#endif
 
 	canonpath.erase(canonpath.end() - 1); //remove trailing slash
 
-#else // ifndef __WIN32__
-	// Still a stupid workaround: some paths still might be relative,
-	// but this is acceptable on windows, as long as all data is stored
-	// in the working directory.
+	//debug info
+	//printf("canonpath = %s\n", canonpath.c_str());
 
-	bool absolute=false;
-	std::string canonpath;
-
-	//  Is a ":" at the second position? If yes, it is already absolute (like
-	//  "C:\...").
-	if (path[1] == ':')
-		absolute=true;
-
-	if (absolute == true) {
-		canonpath = path;
-
-	} else {
-		if (m_root.empty())
-			canonpath = getWorkingDirectory() + "\\" + path;
-		else
-			canonpath = m_root + "\\" + path;
-	}
-
-#endif // ifndef __WIN32__
 	return canonpath;
 }
 
