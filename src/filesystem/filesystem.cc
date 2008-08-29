@@ -54,8 +54,10 @@
 FileSystem::FileSystem()
 {
 #ifdef __WIN32__
-	//TODO: this probably needs to be overwritten later
-	m_root="C:";
+	// Make The directory widelands.exe lies in the root path.
+	char filename[_MAX_PATH +1];
+	GetModuleFileName(NULL, filename, _MAX_PATH);
+	m_root=filename;
 	m_filesep='\\';
 #else
 	m_root="/";
@@ -168,8 +170,13 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 std::string FileSystem::AbsolutePath(std::string const & path) const {
 	if (pathIsAbsolute(path))
 		return path;
-
+#ifndef __WIN32__
 	return getWorkingDirectory()+m_filesep+path;
+#else
+	char filename[_MAX_PATH +1];
+	GetModuleFileName(NULL, filename, _MAX_PATH);
+	return filename+m_filesep+path;
+#endif
 }
 
 /**
