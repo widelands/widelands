@@ -156,7 +156,11 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
+#ifndef __WIN32__
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind("/"));
+#else
+		m_parentdir = m_curdir.substr(0, m_curdir.rfind("\\"));
+#endif
 		m_list.add
 			(_("<parent>"),
 			 m_parentdir.c_str(),

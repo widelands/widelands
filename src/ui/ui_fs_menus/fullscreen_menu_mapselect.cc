@@ -148,7 +148,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		m_world     .set_text(world);
 	} else {
 		// Directory
-		m_name      .set_text("(directory)");
+		m_name      .set_text(_("(directory)"));
 		m_author    .set_text("");
 		m_size      .set_text("");
 		m_nr_players.set_text("");
@@ -194,8 +194,11 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	//about the absolute filesystem top!) we manually add ".."
 	if (m_curdir != m_basedir) {
 		MapData map;
+#ifndef __WIN32__
 		map.filename = m_curdir.substr(0, m_curdir.rfind("/"));
-
+#else
+		map.filename = m_curdir.substr(0, m_curdir.rfind("\\"));
+#endif
 		m_list.add
 			(_("<parent>"),
 			 map,
