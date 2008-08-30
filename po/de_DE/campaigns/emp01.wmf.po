@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3242\n"
+"Project-Id-Version: Widelands svn3287\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-06 16:45+0000\n"
+"POT-Creation-Date: 2008-08-30 20:17+0000\n"
 "PO-Revision-Date: 2008-08-06 19:19+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -25,8 +25,7 @@ msgstr "Imperiales Tutorial 1 - Die Strände von Malac' Mor"
 msgid "First mission of the Empire campaign"
 msgstr "Erste Mission der imperialen Kampagne"
 
-#: ../../../campaigns/emp01.wmf/event:8
-#: ../../../campaigns/emp01.wmf/event:23
+#: ../../../campaigns/emp01.wmf/event:8 ../../../campaigns/emp01.wmf/event:23
 #: ../../../campaigns/emp01.wmf/event:38
 msgid "Diary of Lutius"
 msgstr "Lutius' Tagebuch"
@@ -221,8 +220,9 @@ msgstr "* Baue einen Steinbruch im Süden um Steine und ab und an Marmor aus den
 
 #~ msgid "A visitor"
 #~ msgstr "Ein Besucher"
+
 #~ msgid "A Visitor"
 #~ msgstr "Ein Besucher"
+
 #~ msgid "Continue"
 #~ msgstr "Weiter"
-

@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3242\n"
+"Project-Id-Version: Widelands svn3287\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-06 16:45+0000\n"
-"PO-Revision-Date: 2008-08-06 09:59+0100\n"
-"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"POT-Creation-Date: 2008-08-30 20:17+0000\n"
+"PO-Revision-Date: 2008-08-30 22:11+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,12 +21,12 @@ msgstr "Thron seufzt..."
 
 #: ../../../campaigns/t01.wmf/event:12
 msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
-msgstr "\"Es ist schon Monate her und trotzdem verstecken wir uns immer noch in den dunklen Wäldern.<br> Meine Krieger jagen des Tags und liegen des Nachts wach - sie lauschen den Geräuschen der blutigen Schlacht, die von weit her zwischen den alten Bäumen widerhallt.\""
+msgstr " \"Es ist schon Monate her und trotzdem verstecken wir uns immer noch in den dunklen Wäldern.<br> Meine Krieger jagen des Tags und liegen des Nachts wach - sie lauschen den Geräuschen der blutigen Schlacht, die von weit her zwischen den alten Bäumen widerhallt.\""
 
 #: ../../../campaigns/t01.wmf/event:14 ../../../campaigns/t01.wmf/event:27
 #: ../../../campaigns/t01.wmf/event:40 ../../../campaigns/t01.wmf/event:53
 msgid "The story begins"
-msgstr "Die Geschichte nimmt ihren Anfang..."
+msgstr "Die Geschichte findet ihren Anfang..."
 
 #: ../../../campaigns/t01.wmf/event:19 ../../../campaigns/t01.wmf/event:32
 #: ../../../campaigns/t01.wmf/event:45 ../../../campaigns/t01.wmf/event:58
@@ -41,15 +41,15 @@ msgstr "OK"
 
 #: ../../../campaigns/t01.wmf/event:25
 msgid " \"We can see the raging flames that swallow Al'thunran, miles away, from here.<br> The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares.\" "
-msgstr "\"Nach wie vor können wir alle die gespenstisch aufschlagenden Flammen sehen, die Al'thunran, Meilen von hier entfernt, verschlucken.<br> Das rote Licht blitzt in der Dunkelheit und tanzt zum Rhythmus der Kriegstrommeln, die mich bis in meine Albträume verfolgen.\""
+msgstr " \"Nach wie vor können wir alle die gespenstisch aufschlagenden Flammen sehen, die Al'thunran, Meilen von hier entfernt, verschlucken.<br> Das rote Licht blitzt in der Dunkelheit und tanzt zum Rhythmus der Kriegstrommeln, die mich bis in meine Albträume verfolgen.\""
 
 #: ../../../campaigns/t01.wmf/event:38
 msgid " \"My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well.\" "
-msgstr "\"Meines Vaters Knochen liegen friedlich in der Erde, auf einem Hügel im Süden unseres Lagers. Er befreite uns von den sinnlosen Bluttaten, die einst zwischen uns entflammt waren.<br>Doch mein Vater ist tot und wie es scheint, ist mir zur Zeit nur ein guter Freund geblieben...<br>Boldreth, mein loyaler Mitstreiter und Freund, ist eine Quelle des Friedens und der Ruhe für mich. Er schafft es immer wieder, meine Moral zu stärken und motiviert gar meine wenigen wachen Krieger. Er zeigt ihnen täglich aufs Neue, dass sie nicht zu früh aufgeben mögen.<br>Betrachte ich seine Leistung, so ist er wahrscheinlich der einzige Grund dafür, dass nicht auch noch das Band zwischen uns wenigen Überbliebenen durch Gier und Unmut zerstört wird.\""
+msgstr " \"Meines Vaters Knochen liegen friedlich in der Erde, auf einem Hügel im Süden unseres Lagers. Er befreite uns von den sinnlosen Bluttaten, die einst zwischen uns entflammt waren.<br>Doch mein Vater ist tot und wie es scheint, ist mir zur Zeit nur ein guter Freund geblieben...<br>Boldreth, mein loyaler Mitstreiter und Freund, ist eine Quelle des Friedens und der Ruhe für mich. Er schafft es immer wieder, meine Moral zu stärken und motiviert gar meine wenigen wachen Krieger. Er zeigt ihnen täglich aufs Neue, dass sie nicht zu früh aufgeben mögen.<br>Betrachte ich seine Leistung, so ist er wahrscheinlich der einzige Grund dafür, dass nicht auch noch das Band zwischen uns wenigen Überbliebenen durch Gier und Unmut zerstört wird.\""
 
 #: ../../../campaigns/t01.wmf/event:51
 msgid " \"As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
-msgstr "Als ich noch jung war lehrte mich mein Vater, dass es eine Zeit zum Kämpfen und eine Zeit des Wartens gäbe. Er sagte mir, dass die Zeiten des Wartens dabei gar noch härter als die des Kämpfens seien. Denn in jenen müsse man ununterbrochen achtgeben, nicht in einen zu tiefen Schlaf zu fallen und nicht leichtgläubig dem Frieden zu trauen. Um so nicht vom Tod überrascht zu werden, bevor die richtige Zeit gekommen sei. <br>Und so ist auch für uns eine Zeit des Wartens angebrochen..."
+msgstr " \"Als ich noch jung war lehrte mich mein Vater, dass es eine Zeit zum Kämpfen und eine Zeit zum Warten gäbe. Er sagte mir, dass die Zeiten des Wartens meist noch härter als die des Kämpfens seien, denn in jenen müsse man ununterbrochen achtgeben, um weder in einen zu tiefen Schlaf zu fallen noch leichtgläubig dem Frieden zu trauen. Es sein gerade die Zeiten in denen der plötzliche Tod überaschent vor einem steht.<br>Und so ist nun auch für uns eine solche Zeit des Wartens angebrochen..."
 
 #: ../../../campaigns/t01.wmf/event:89
 msgid "An old man says..."

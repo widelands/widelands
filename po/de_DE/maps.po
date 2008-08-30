@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3242\n"
+"Project-Id-Version: Widelands svn3287\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-06 16:45+0000\n"
-"PO-Revision-Date: 2008-07-29 21:35+0100\n"
+"POT-Creation-Date: 2008-08-30 20:17+0000\n"
+"PO-Revision-Date: 2008-08-30 21:48+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr "(Tutorial) Barbaren - Das zweite Kaiserreich"
 
 #: ../../campaigns/cconfig:27
 msgid "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
-msgstr "Als Chat’Karuth starb, war er ein alter Mann, Vater von drei starken und tapferen Söhnen und Kriegsherr über eine Armee, die sich gegen eine jede Armee behaupten konnte, die sich gegen die alten Wälder wandten. Nach seiner glorreichen Regierung, überließ Chat’Karuth seinem ältesten Sohn den Thron in der Hoffnung, dass dieser ihn noch als Kriegsherr übertreffen würde. – Eine Entscheidung, die die beiden jüngeren Brüder unzufrieden ließ. Der alte Kriegsherr wusste das. Wie sein Vater im riet, verließ er die Hauptstadt von Al’thunran, um seine Regierung und seine Kräfte zwischen den alten Bäumen auf den Hügeln im Westen zu sammeln. Dort beerdigte er den Körper seines Vaters und schwor zu den Göttern und den Geistern, das er zurückkehren würde, um die Ordnung wieder herzustellen. Und während seine Brüder in blinder Wut gegen ihn und die wenigen hinterbliebenen Kräfte an den Grenzen von Al’thunran zogen, suchte er nach einer Möglichkeit für eine Wiedervereinigung um die vielen einzelnen Stämme endlich wieder unter einem Banner zu vereinen."
+msgstr "Als Chat’Karuth starb, war er ein alter Mann, Vater von drei starken und tapferen Söhnen und Kriegsherr über eine Armee, die sich gegen eine jede Armee behaupten konnte, die sich gegen die alten Wälder wandten. Nach seiner glorreichen Regierung, überließ Chat’Karuth seinem ältesten Sohn Thron die Regierung, in der Hoffnung, dass dieser ihn noch als Kriegsherr übertreffen würde. Doch diese Entscheidung ließ die die beiden jüngeren Brüder verbittern. Der alte Kriegsherr spürte diese Gefahr noch kurz vor seinem Tode und riet Thron die Hauptstadt von Al’thunran zu verlassen, um seine Regierung und seine Kräfte zwischen den alten Bäumen auf den Hügeln im Westen zu sammeln. Thron folgte dem Rat seines Vaters und nachdem er den Körper seines Vaters beerdigt hatte, schwor zu den Göttern und den Geistern, dass er zurückkehren würde, um die Ordnung wieder herzustellen. Seine Brüder zogen während dieser Zeit in blinder Wut gegen ihn und die wenigen hinterbliebenen Kräfte an den Grenzen von Al’thunran. Doch Thron suchte weiter nach einer Möglichkeit für eine Wiedervereinigung um die vielen einzelnen Stämme endlich wieder unter einem Banner zu vereinen."
 
 #: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
@@ -30,7 +30,7 @@ msgstr "Imperium - Die Monate im Exil"
 
 #: ../../campaigns/cconfig:33
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
-msgstr "Vor sechs Monaten, wurde Lutius - ein junger General des Imperiums - mit 150 Soldaten an die Grenze zwischen den nördlichen Wäldern geschickt. In diesem Gebiet, wo sich das Einflussgebiet der Barbaren und imperiale Grenzen schneiden, sollte er für die Sicherheit des Imperiums sorgen. Zu erst war alles ruhig, er sprach sogar mit einigen Kindern der Barbaren und träumte von einem friedlichen Miteinander mit diesem archaischen Volk. Schon bald fühlte er sich immer sicherer und seine Soldaten ließen immer mehr die Aufmerksamkeit von ihrem potentiellen Feind fallen. Das war ihr Fehler. In einer Nacht im März wurde seine unvorbereitete Truppe von 100 barbarischen Kriegern angegriffen und total aufgerieben. Nur mit dem puren Leben, konnten Lutius und eine kleine Gruppe seiner Soldaten entkommen."
+msgstr "Vor sechs Monaten, wurde Lutius - ein junger General des Imperiums - mit 150 Soldaten an die Grenze zwischen den nördlichen Wäldern geschickt. In diesem Gebiet, wo sich das Einflussgebiet der Barbaren und imperiale Grenzen schneiden, sollte er für die Sicherheit des Imperiums sorgen. Zu erst war alles ruhig. Er sprach sogar mit einigen Kindern der Barbaren und träumte von einem friedlichen Miteinander mit diesem archaischen Volk. Schon bald fühlte er sich immer sicherer und seine Soldaten ließen immer mehr die Aufmerksamkeit von ihrem potentiellen Feind fallen. Das war ihr Fehler. In einer Nacht im März wurde seine unvorbereitete Truppe von 100 barbarischen Kriegern angegriffen und total aufgerieben. Nur mit dem puren Leben, konnten Lutius und eine kleine Gruppe seiner Soldaten entkommen."
 
 #: ../../campaigns/cconfig:50
 msgid "Tutorial1 - Eyes in the Dark"
@@ -54,7 +54,7 @@ msgstr "Tutorial1 - Die Strände von Malac' Mor"
 
 #: ../../campaigns/cconfig:67
 msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
-msgstr "Nach dem er eine wichtige Schlacht gegen die Barbaren - die zum Verlust eines größeren Gebietes des Imperium führte - verloren hatte, verließ Lutius Fremil, um ein neues Leben zu beginnen. Doch sein Schicksal trieb sein Schiff in einen schweren Sturm, der diesem großen Schaden zufügte. Nur mit viel Glück konnte er sich und seine Leute an einen unbekannten Wüstenstrand retten."
+msgstr "Nachdem er eine wichtige Schlacht gegen die Barbaren - die zum Verlust eines größeren Gebietes des Imperium führte - verloren hatte, verließ Lutius die Hauptstadt Fremil, um ein neues Leben zu beginnen. Doch sein Schicksal trieb sein Schiff in einen schweren Sturm, der diesem großen Schaden zufügte. Nur mit viel Glück konnte er sich und seine Leute an einen unbekannten Wüstenstrand retten."
 
 #: ../../campaigns/cconfig:72
 msgid "Empire Tutorial2 - An outpost for exile"
@@ -62,7 +62,7 @@ msgstr "Tutorial2 - Ein Außenposten für das Exil"
 
 #: ../../campaigns/cconfig:74
 msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
-msgstr "Schließlich war das Schiff endlich repariert. Und so fuhren Lutius und seine Leute wieder los, um sich wieder auf die Suche nach einen Platz für ihren Neuanfang zu machen. Und so vergingen einige Tage auf See, bis sie schließlich eine grüne, mediterrane Insel erreichten, die dem Paradies sehr nahe kam."
+msgstr "Schließlich war das Schiff wieder fahrtauglich. Und so fuhren Lutius und seine Leute erneut auf hohe See, um sich wieder auf die Suche nach einen Platz für ihren Neuanfang zu machen. Und so vergingen einige Tage auf dem Meer, bis sie schließlich eine grüne, mediterrane Insel erreichten, die dem Paradies sehr nahe kam."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
