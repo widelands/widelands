@@ -54,10 +54,7 @@
 FileSystem::FileSystem()
 {
 #ifdef __WIN32__
-	// Make The directory widelands.exe lies in the root path.
-	char filename[_MAX_PATH +1];
-	GetModuleFileName(NULL, filename, _MAX_PATH);
-	m_root=filename;
+	m_root=getWorkingDirectory();
 	m_filesep='\\';
 #else
 	m_root="/";
@@ -170,23 +167,25 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 std::string FileSystem::AbsolutePath(std::string const & path) const {
 	if (pathIsAbsolute(path))
 		return path;
-#ifndef __WIN32__
 	return getWorkingDirectory()+m_filesep+path;
-#else
-	char filename[_MAX_PATH +1];
-	GetModuleFileName(NULL, filename, _MAX_PATH);
-	return filename+m_filesep+path;
-#endif
 }
 
 /**
  * \return The process' current working directory
  */
 std::string FileSystem::getWorkingDirectory() const {
+#ifndef __WIN32__
 	char cwd[PATH_MAX+1];
 	getcwd(cwd, PATH_MAX);
 
 	return std::string(cwd);
+#else
+	char filename[_MAX_PATH +1];
+	GetModuleFileName(NULL, filename, _MAX_PATH);
+	std::string exedir(filename);
+	exedir = exedir.substr(0, exedir.rfind("\\"));
+	return exedir;
+#endif
 }
 
 /**
@@ -295,10 +294,8 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	if (*components.begin()=="~") {
 		components.erase(components.begin());
 		std::vector<std::string> homecomponents;
-		char wlfilename[_MAX_PATH +1];
-		GetModuleFileName(NULL, wlfilename, _MAX_PATH);
 		// On win32 we use widelands dir. to save/load _all_ data
-		homecomponents=FS_Tokenize(wlfilename);
+		homecomponents=FS_Tokenize(getWorkingDirectory());
 		components.insert
 			(components.begin(), homecomponents.begin(), homecomponents.end());
 
