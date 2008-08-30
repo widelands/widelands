@@ -111,7 +111,7 @@ void Fullscreen_Menu_MapSelect::ok()
 	MapData const & mapdata = m_list.get_selected();
 
 	if (!mapdata.width) {
-		m_curdir = g_fs->FS_CanonicalizeName(mapdata.filename);
+		m_curdir = mapdata.filename;
 		fill_list();
 	} else
 		end_modal(1 + is_scenario());
@@ -194,10 +194,10 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	//about the absolute filesystem top!) we manually add ".."
 	if (m_curdir != m_basedir) {
 		MapData map;
-		map.filename = g_fs->FS_CanonicalizeName(m_curdir + "/..");
+		map.filename = m_curdir.substr(0, m_curdir.rfind("/"));
 
 		m_list.add
-			("<parent>",
+			(_("<parent>"),
 			 map,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 		++ndirs;

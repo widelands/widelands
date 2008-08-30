@@ -151,7 +151,7 @@ void Main_Menu_Load_Map::clicked_ok() {
 		 &&
 		 !WL_Map_Loader::is_widelands_map(filename))
 	{
-		m_curdir = g_fs->FS_CanonicalizeName(filename);
+		m_curdir = filename;
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
@@ -212,9 +212,9 @@ void Main_Menu_Load_Map::fill_list() {
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
-		m_parentdir = g_fs->FS_CanonicalizeName(m_curdir + "/..");
+		m_parentdir = m_curdir.substr(0, m_curdir.rfind("/"));
 		m_ls->add
-			("<parent>",
+			(_("<parent>"),
 			 m_parentdir.c_str(),
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 	}
