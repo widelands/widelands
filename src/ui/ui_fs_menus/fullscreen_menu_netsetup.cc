@@ -19,6 +19,7 @@
 
 #include "fullscreen_menu_netsetup.h"
 #include "constants.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "network.h"
 #include "profile.h"
@@ -48,8 +49,14 @@ back
 	 0,
 	 &Fullscreen_Menu_NetSetup::end_modal, this, CANCEL,
 	 _("Back")),
+loadlasthost
+	(this,
+	 684, 285, 26, 26,
+	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
+	 &Fullscreen_Menu_NetSetup::clicked_lasthost, this, _("Load previous host")),
 playername(this, 510, 200, 200, 26, 2, 0),
-hostname  (this, 510, 285, 200, 26, 2, 0),
+hostname  (this, 510, 285, 165, 26, 2, 0),
 opengames (this, 50, 200, 450, 326)
 {
 	Section *s = g_options.pull_section("global");//for playername
@@ -178,9 +185,19 @@ void Fullscreen_Menu_NetSetup::change_playername()
 }
 
 void Fullscreen_Menu_NetSetup::clicked_joingame() {
+	// Save selected host so users can reload it for reconnection.
+	Section *s = g_options.pull_section("global");
+	s->set_string("lasthost", hostname.text());
+
 	end_modal(JOINGAME);
 }
 
 void Fullscreen_Menu_NetSetup::clicked_hostgame() {
 	end_modal(HOSTGAME);
 }
+
+void Fullscreen_Menu_NetSetup::clicked_lasthost() {
+	Section *s = g_options.get_section("global");
+	hostname.setText(s->get_string("lasthost", ""));
+}
+

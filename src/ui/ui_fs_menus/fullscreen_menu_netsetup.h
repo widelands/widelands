@@ -67,6 +67,7 @@ private:
 	UI::Button<Fullscreen_Menu_NetSetup>        hostgame;
 	//UI::IDButton<Fullscreen_Menu_NetSetup, int32_t> playinternet;
 	UI::IDButton<Fullscreen_Menu_NetSetup, int32_t> back;
+	UI::Button<Fullscreen_Menu_NetSetup>        loadlasthost;
 	UI::EditBox                                 playername;
 	UI::EditBox                                 hostname;
 	UI::Table<const LAN_Open_Game * const>      opengames;
@@ -89,6 +90,7 @@ private:
 	void change_playername();
 	void clicked_joingame();
 	void clicked_hostgame();
+	void clicked_lasthost();
 };
 
 #endif
