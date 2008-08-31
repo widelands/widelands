@@ -24,6 +24,7 @@
 #include "game_tips.h"
 #include "i18n.h"
 #include "interactive_player.h"
+#include "layered_filesystem.h"
 #include "network_protocol.h"
 #include "network_system.h"
 #include "playercommand.h"
@@ -402,7 +403,7 @@ void NetClient::handle_packet(RecvPacket& packet)
 
 	case NETCMD_SETTING_MAP:
 		d->settings.mapname = packet.String();
-		d->settings.mapfilename = packet.String();
+		d->settings.mapfilename = g_fs->FileSystem::fixCrossFile(packet.String());
 		d->settings.savegame = packet.Unsigned8() == 1 ? true : false;
 		log("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
 		break;

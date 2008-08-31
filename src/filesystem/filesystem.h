@@ -101,6 +101,7 @@ struct FileSystem {
 	virtual std::string getBasename() = 0;
 
 	// basic path/filename manipulation
+	std::string fixCrossFile(std::string);
 	std::string getWorkingDirectory() const;
 	std::string getTempDirectory();
 	std::string FS_CanonicalizeName(std::string const & path) const;
