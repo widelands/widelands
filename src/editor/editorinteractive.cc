@@ -253,7 +253,12 @@ void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel)
 	const bool target_changed = tools.current().operates_on_triangles() ?
 		sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	Interactive_Base::set_sel_pos(sel);
-	if (target_changed and SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_LEFT))
+	int32_t mask = SDL_BUTTON_LMASK;
+#ifdef __APPLE__
+	// workaround for SDLs middle button emulation
+	mask |= SDL_BUTTON_MMASK;
+#endif
+	if (target_changed and SDL_GetMouseState(0, 0) & mask)
 		map_clicked();
 }
 

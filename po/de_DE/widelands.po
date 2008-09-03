@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3287\n"
+"Project-Id-Version: Widelands svn3295\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-30 22:17+0200\n"
-"PO-Revision-Date: 2008-08-30 22:01+0100\n"
+"POT-Creation-Date: 2008-09-03 20:50+0200\n"
+"PO-Revision-Date: 2008-09-03 20:50+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -244,7 +244,7 @@ msgid "Player"
 msgstr "Spieler"
 
 #: ../../src/wlapplication.cc:1413 ../../src/nethost.cc:300
-#: ../../src/netclient.cc:136
+#: ../../src/netclient.cc:137
 msgid "Preparing game"
 msgstr "Bereite Spiel vor"
 
@@ -350,49 +350,49 @@ msgstr "Der Client hat einen unerwarteten Synchronisationsreport geschickt."
 msgid "Client sent unknown command number %u"
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
 
-#: ../../src/netclient.cc:101
+#: ../../src/netclient.cc:102
 msgid "Client has left the game."
 msgstr "Der Client hat das Spiel verlassen."
 
-#: ../../src/netclient.cc:164
+#: ../../src/netclient.cc:165
 msgid "Client crashed and performed an emergency save."
 msgstr "Der Client ist abgestürzt und hat eine Notfallspeicherung durchgeführt."
 
-#: ../../src/netclient.cc:312
+#: ../../src/netclient.cc:313
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Der Server hat ein Spieler-Update für einen nicht existenten Spieler gesendet."
 
-#: ../../src/netclient.cc:382
+#: ../../src/netclient.cc:383
 #, c-format
 msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
 msgstr "Habe ein HELLO Paket vom Server erwartet, aber die Anweisung Nummer %u erhalten. Vielleicht verwendet der Server eine andere Widelands-Version?"
 
-#: ../../src/netclient.cc:388
+#: ../../src/netclient.cc:389
 msgid "Server uses a different protocol version"
 msgstr "Der Server benutzt eine andere Protokollversion"
 
-#: ../../src/netclient.cc:431
+#: ../../src/netclient.cc:432
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Ich habe unerwartet ein LAUNCH Befehl vom Server erhalten."
 
-#: ../../src/netclient.cc:448
+#: ../../src/netclient.cc:449
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr "Der Server hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/netclient.cc:459
+#: ../../src/netclient.cc:460
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "Der Server hat ein SYNCREQUEST gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/netclient.cc:480
+#: ../../src/netclient.cc:481
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr "Der Server eine unbekannte Anweisungen (Anweisung Nummer: %u) gesendet"
 
-#: ../../src/netclient.cc:509
+#: ../../src/netclient.cc:510
 msgid "Server sent malformed commands: "
 msgstr "Der Server hat unverständliche Anweisungen gesendet:"
 
-#: ../../src/netclient.cc:539
+#: ../../src/netclient.cc:540
 msgid " An automatic savegame will be created."
 msgstr " Eine automatische Spielsicherung wird durchgeführt."
 
@@ -1753,10 +1753,12 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:96
 #, c-format
 msgid ""
-"Size: %ix%i\n"
+"\n"
+" Size: %ix%i\n"
 " Author: "
 msgstr ""
-"Größe: %ix%i\n"
+"\n"
+" Größe: %ix%i\n"
 " Autor: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:99
@@ -1766,7 +1768,7 @@ msgid ""
 " Descr: "
 msgstr ""
 "\n"
-"Beschr: "
+" Beschr: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
@@ -1791,7 +1793,7 @@ msgid ""
 " Author: "
 msgstr ""
 "\n"
-"Autor: "
+" Autor: "
 
 #: ../../src/editor/ui_menus/trigger_null_option_menu.cc:47
 msgid "Null Trigger Options"

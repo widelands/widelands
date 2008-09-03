@@ -44,7 +44,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 		(&parent, 30, 30, 400, 200, _("Field Information"));
 	UI::Multiline_Textarea * const multiline_textarea =
 		new UI::Multiline_Textarea
-		(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
+		(w, 0, 0, w->get_inner_w(), w->get_inner_h());
 
 	Widelands::Field & f = map[center.node];
 
@@ -93,7 +93,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += map.get_name();
 	snprintf
 		(buf1, sizeof(buf1),
-		 _("Size: %ix%i\n Author: "), map.get_width(), map.get_height());
+		 _("\n Size: %ix%i\n Author: "), map.get_width(), map.get_height());
 	buf += buf1;
 	buf += map.get_author     ();
 	buf += _("\n Descr: ");
