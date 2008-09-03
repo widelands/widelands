@@ -18,8 +18,8 @@ planks=1
 
 [idle]
 pics=woodcutter_i_??.png
-hotspot=42 60
+hotspot=45 52
 
 [build]
 pics=woodcutter_i_??.png
-hotspot=42 60
+hotspot=45 52

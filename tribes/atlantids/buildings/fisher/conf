@@ -18,8 +18,8 @@ planks=2
 
 [idle]
 pics=fisher_i_??.png  # ???
-hotspot=48 55
+hotspot=45 55
 
 [build]
 pics=fisher_i_??.png  # ???
-hotspot=48 55
+hotspot=45 55
