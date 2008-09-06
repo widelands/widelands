@@ -1,0 +1,16 @@
+# Automatically created by Widelands 3246
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Spieler 1"
+tribe="barbarians"
+
+[player_2]
+name="Spieler 2"
+tribe="empire"
+
+[player_3]
+name="Spieler 3"
+tribe="atlantids"

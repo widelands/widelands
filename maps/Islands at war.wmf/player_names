@@ -1,0 +1,12 @@
+# Automatically created by Widelands svn3247
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Arminius"
+tribe="empire"
+
+[player_2]
+name="Kartk"
+tribe="barbarians"

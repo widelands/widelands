@@ -1,0 +1,11 @@
+# Automatically created by Widelands svn3247
+
+[global]
+packet_version="1"
+map_w="80"
+map_h="112"
+nr_players="2"
+world="desert"
+name="Islands at war"
+author="Tuxlands"
+descr="For centuries you lived peaceful together with the other tribe on the neighboured island. This peace seems to end now. - Your neighbour begins to expand."

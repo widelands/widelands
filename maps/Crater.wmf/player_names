@@ -1,0 +1,12 @@
+# Automatically created by Widelands 3252
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Spieler 1"
+tribe="barbarians"
+
+[player_2]
+name="Spieler 2"
+tribe="barbarians"

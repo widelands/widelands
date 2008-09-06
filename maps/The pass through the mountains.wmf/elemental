@@ -1,0 +1,17 @@
+# Automatically created by Widelands 3246
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="2"
+world="greenland"
+name="The pass through the mountains"
+author="Quappo"
+descr=""In this mountainous "
+       "region two princes "
+       "have settled. Now they "
+       "are expanding their "
+       "terretories unaware of "
+       "the fact that they are "
+       "not alone! ""

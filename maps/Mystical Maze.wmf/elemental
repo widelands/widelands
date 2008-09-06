@@ -1,0 +1,11 @@
+# Automatically created by Widelands svn3270
+
+[global]
+packet_version="1"
+map_w="160"
+map_h="160"
+nr_players="3"
+world="greenland"
+name="Mystical Maze"
+author="Tuxlands"
+descr="There are two big questions around: Who created this unbelievable big maze and what can be found inside?"

@@ -1,0 +1,17 @@
+# Automatically created by Widelands 3252
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="2"
+world="greenland"
+name="Crater"
+author="Tarrei"
+descr=""Long after a meteor "
+       "crashed into a couple "
+       "of mountains life "
+       "blossoms in the crater. "
+       "2 Tribes have a fight "
+       "now about the rich "
+       "resources.""

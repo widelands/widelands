@@ -1,0 +1,16 @@
+# Automatically created by Widelands svn3270
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Greno"
+tribe="barbarians"
+
+[player_2]
+name="Lanos"
+tribe="empire"
+
+[player_3]
+name="Xivier"
+tribe="atlantids"

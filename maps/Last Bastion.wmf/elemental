@@ -1,0 +1,11 @@
+# Automatically created by Widelands svn3281
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="2"
+world="winterland"
+name="Last Bastion"
+author="Another Barbarian"
+descr="Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
