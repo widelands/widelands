@@ -144,7 +144,7 @@ void NetClient::run ()
 		game.set_iabase(ipl);
 		ipl->set_chat_provider(this);
 		if(!d->settings.savegame) // new map
-			game.init(loaderUI, d->settings);
+			game.init_newgame(loaderUI, d->settings);
 		else // savegame
 			game.init_savegame(loaderUI, d->settings);
 		d->time.reset(game.get_gametime());

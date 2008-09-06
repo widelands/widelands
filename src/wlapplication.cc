@@ -28,6 +28,7 @@
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
 #include "fullscreen_menu_launchgame.h"
+#include "fullscreen_menu_loadgame.h"
 #include "fullscreen_menu_loadreplay.h"
 #include "fullscreen_menu_main.h"
 #include "fullscreen_menu_netsetup.h"
@@ -284,7 +285,7 @@ void WLApplication::run()
 	} else if (m_loadgame_filename.size()) {
 		Widelands::Game game;
 		try {
-			game.run_load_game(false, m_loadgame_filename.c_str());
+			game.run_load_game(m_loadgame_filename.c_str());
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -1160,53 +1161,19 @@ void WLApplication::mainmenu_singleplayer()
 
 		switch (code) {
 		case Fullscreen_Menu_SinglePlayer::New_Game:
-			new_game();
+			done = new_game();
 			break;
 		case Fullscreen_Menu_SinglePlayer::Load_Game: {
-			Widelands::Game game;
-			try {
-				if (game.run_load_game(true))
-					done = true;
-			} catch (...) {
-				emergency_save(game);
-				throw;
-			}
+			done = load_game();
 			break;
 		}
 		case Fullscreen_Menu_SinglePlayer::Campaign: {
-			Widelands::Game game;
-			std::string filename;
-			for (;;) { // Campaign UI - Loop
-				int32_t campaign;
-				{ //  First start UI for selecting the campaign
-					Fullscreen_Menu_CampaignSelect select_campaign;
-					if (select_campaign.run() > 0)
-						campaign = select_campaign.get_campaign();
-					else // Back was pressed
-						goto end_campaign;
-				}
-				// Than start UI for the selected campaign
-				Fullscreen_Menu_CampaignMapSelect select_campaignmap;
-				select_campaignmap.set_campaign(campaign);
-				if (select_campaignmap.run() > 0) {
-					filename = select_campaignmap.get_map();
-					break;
-				}
-			}
-
-			try {
-				// Load selected campaign-map-file
-				if (game.run_splayer_scenario_direct(filename.c_str()))
-					done = true;
-			} catch (...) {
-				emergency_save(game);
-				throw;
-			}
+			done = campaign_game();
 			break;
 		}
 		default:
 			assert(false);
-		} end_campaign:;
+		}
 	}
 
 }
@@ -1414,7 +1381,7 @@ bool WLApplication::new_game()
 
 			game.set_game_controller(ctrl.get());
 			game.set_iabase(new Interactive_Player(game, 1, false, false));
-			game.init(loaderUI, sp.settings());
+			game.init_newgame(loaderUI, sp.settings());
 			game.run(loaderUI);
 		} catch (...) {
 			emergency_save(game);
@@ -1422,6 +1389,76 @@ bool WLApplication::new_game()
 		}
 	}
 	return true;
+}
+
+
+/**
+ * Handle the "Load game" menu option:
+ * Configure a single player game, care about player position and run it.
+ *
+ * \return @c true if a game was loaded, @c false if the player pressed Back
+ * or aborted the game setup via some other means.
+ */
+bool WLApplication::load_game()
+{
+	Widelands::Game game;
+	std::string filename;
+
+	Fullscreen_Menu_LoadGame ssg(game);
+	if (ssg.run() > 0)
+		filename = ssg.filename();
+	else
+		return false;
+
+	try {
+		if (game.run_load_game(filename))
+			return true;
+	} catch (...) {
+		emergency_save(game);
+		throw;
+	}
+}
+
+
+/**
+ * Handle the "Campaign" menu option:
+ * Show campaign UI, let player select scenario and run it.
+ *
+ * \return @c true if a scenario was played, @c false if the player pressed Back
+ * or aborted the game setup via some other means.
+ */
+bool WLApplication::campaign_game()
+{
+	Widelands::Game game;
+	std::string filename;
+	for (;;) { // Campaign UI - Loop
+		int32_t campaign;
+		{ //  First start UI for selecting the campaign
+			Fullscreen_Menu_CampaignSelect select_campaign;
+			if (select_campaign.run() > 0)
+				campaign = select_campaign.get_campaign();
+			else {// Back was pressed
+				filename = "";
+				break;
+			}
+		}
+		// Than start UI for the selected campaign
+		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
+		select_campaignmap.set_campaign(campaign);
+		if (select_campaignmap.run() > 0) {
+			filename = select_campaignmap.get_map();
+			break;
+		}
+	}
+	try {
+		// Load selected campaign-map-file
+		if (!filename.empty())
+			return game.run_splayer_scenario_direct(filename.c_str());
+	} catch (...) {
+		emergency_save(game);
+		throw;
+	}
+	return false;
 }
 
 

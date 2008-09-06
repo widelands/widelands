@@ -27,9 +27,9 @@
 #include "interactive_player.h"
 #include "interactive_spectator.h"
 #include "fullscreen_menu_launchgame.h"
-#include "fullscreen_menu_loadgame.h"
 #include "game_loader.h"
 #include "game_tips.h"
+#include "game_preload_data_packet.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic.h"
@@ -297,7 +297,7 @@ bool Game::run_splayer_scenario_direct(const char* mapname) {
 /**
  * Initialize the game based on the given settings.
  */
-void Game::init(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
+void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
 	g_gr->flush(PicMod_Menu);
 
 	loaderUI.step(_("Preloading map"));
@@ -355,6 +355,12 @@ void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& sett
 		std::auto_ptr<FileSystem> const fs
 				(g_fs->MakeSubFileSystem(settings.mapfilename.c_str()));
 		Game_Loader gl(*fs, this);
+
+		Widelands::Game_Preload_Data_Packet gpdp;
+		gl.preload_game(&gpdp);
+		std::string background(gpdp.get_background());
+		loaderUI.set_background(background);
+
 		loaderUI.step(_("Loading..."));
 		gl.load_game(settings.multiplayer);
 	} catch (...) {
@@ -365,20 +371,15 @@ void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& sett
 
 /**
  * Load a game
- * argument defines if this is a single player game (false)
- * or networked (true)
+ * Returns false if the user cancels the dialog. Otherwise returns the result
+ * of running the game.
  */
-bool Game::run_load_game(bool multiplayer, std::string filename) {
-	if (filename.empty()) {
-		Fullscreen_Menu_LoadGame ssg(*this);
-		if (ssg.run() > 0)
-			filename = ssg.filename();
-		else
-			return false;
-	}
-
+bool Game::run_load_game(std::string filename) {
 	UI::ProgressWindow loaderUI;
 	GameTips tips (loaderUI);
+	int8_t player_nr;
+
+	loaderUI.step(_("Preloading map"));
 
 	// We have to create an empty map, otherwise nothing will load properly
 	set_map(new Map);
@@ -387,14 +388,21 @@ bool Game::run_load_game(bool multiplayer, std::string filename) {
 		std::auto_ptr<FileSystem> const fs
 			(g_fs->MakeSubFileSystem(filename.c_str()));
 
-		set_iabase(new Interactive_Player(*this, 1, !multiplayer, multiplayer)); // FIXME memory leak!!!
-
 		Game_Loader gl(*fs, this);
+
+		Widelands::Game_Preload_Data_Packet gpdp;
+		gl.preload_game(&gpdp);
+		std::string background(gpdp.get_background());
+		loaderUI.set_background(background);
+		player_nr = gpdp.get_player_nr();
+
+		set_iabase(new Interactive_Player(*this, player_nr, true, false));
+
 		loaderUI.step(_("Loading..."));
-		gl.load_game(multiplayer);
+		gl.load_game();
 	}
 
-	set_game_controller(GameController::createSinglePlayer(this, true, 1));
+	set_game_controller(GameController::createSinglePlayer(this, true, player_nr));
 	try {
 		bool ret = run(loaderUI, true);
 		delete m->ctrl;

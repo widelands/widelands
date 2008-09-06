@@ -184,6 +184,8 @@ struct WLApplication {
 	void mainmenu_editor();
 
 	bool new_game();
+	bool load_game();
+	bool campaign_game();
 	void replay();
 
 #ifdef DEBUG

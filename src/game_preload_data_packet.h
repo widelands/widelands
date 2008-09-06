@@ -38,11 +38,15 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 		throw (_wexception);
 
 	char const * get_mapname() {return m_mapname.c_str();}
+	std::string get_background() {return m_background;}
 	uint32_t get_gametime() {return m_gametime;}
+	uint32_t get_player_nr() {return m_player_nr;}
 
 private:
 	std::string m_mapname;
+	std::string m_background;
 	uint32_t m_gametime;
+	uint8_t m_player_nr;
 };
 
 };

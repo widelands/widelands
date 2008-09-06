@@ -93,18 +93,11 @@ struct Game : public Editor_Game_Base {
 	GameController* gameController();
 	void set_write_replay(bool wr);
 	void save_syncstream(bool save);
-	void init(UI::ProgressWindow & loader_ui, const GameSettings& settings);
+	void init_newgame(UI::ProgressWindow & loader_ui, const GameSettings& settings);
 	void init_savegame(UI::ProgressWindow & loader_ui, const GameSettings& settings);
 	bool run_splayer_scenario_direct(const char* mapname);
+	bool run_load_game (std::string filename);
 	bool run (UI::ProgressWindow & loader_ui, bool = false);
-
-	/**
-	 * Loads a game from filename and runs it. If filename is empty, a dialog is
-	 * shown that lets the user chose a file to load. Returns false if the user
-	 * cancels the dialog. Otherwise returns the result of running the game.
-	 */
-	bool run_load_game
-		(const bool multiplayer, std::string filename = std::string());
 
 	virtual void postload();
 	void think();

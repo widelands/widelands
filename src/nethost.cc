@@ -305,7 +305,7 @@ void NetHost::run()
 		ipl->set_chat_provider(&d->chat);
 		game.set_iabase(ipl);
 		if(!d->settings.savegame) // new game
-			game.init(loaderUI, d->settings);
+			game.init_newgame(loaderUI, d->settings);
 		else // savegame
 			game.init_savegame(loaderUI, d->settings);
 		d->pseudo_networktime = game.get_gametime();
