@@ -1,14 +1,14 @@
 # Widelands po/nl_NL/campaigns/t02.wmf.po
-# Copyright (C) 2008 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3109\n"
+"Project-Id-Version: Widelands svn3296\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-03-26 20:36+0000\n"
-"PO-Revision-Date: 2008-02-17 09:21+0100\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
+"POT-Creation-Date: 2008-09-06 10:01+0000\n"
+"PO-Revision-Date: 2008-08-11 23:23+0100\n"
+"Last-Translator: Pietertje <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,267 +16,357 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: Netherlands\n"
 
-#: ../../../campaigns/t02.wmf/event:87 ../../../campaigns/t02.wmf/event:354
-#: ../../../campaigns/t02.wmf/event:453 ../../../campaigns/t02.wmf/event:465
-msgid "Thron speaks..."
-msgstr "Thron spreekt..."
+#: ../../../campaigns/t02.wmf/event:88
+msgid "Thron shakes his head..."
+msgstr "Thron schudt zijn hoofd..."
 
-#: ../../../campaigns/t02.wmf/event:89
-msgid " \"The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees. The stories they tell about the deeds of our kin are sad to hear. I've spent nights laying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart.\" "
-msgstr " \"De oorlog gaat door. Meer en meer van onze broeders en zusters ontvluchten de wrede oorlog die woedt in in de hoofdstad tussen de bomen. De verhalen die ze vertellen over de daden van onze bloedverwanten zijn triest om aan te horen. Ik heb nachten wakker gelegen, rusteloos, vermoeider dan ik ooit dacht te kunnen zijn. Toch, als ik mijn ogen sluit, dan zie ik de vesting die mijn vader bouwde, verteerd worden door vlammen. De troon tussen de bomen, het symbool van eenheid en vrede tussen onze bloedverwanten, werd de wig die ons uit elkaar dreef.\" "
+#: ../../../campaigns/t02.wmf/event:90
+msgid " \"The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees.<br> The stories they tell about the deeds of our kin are sad to hear. I've spent nights laying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart.\" "
+msgstr " \"De oorlog gaat door. Meer en meer van onze broeders en zusters ontvluchten de wrede oorlog die woedt in in de hoofdstad tussen de bomen.<br> De verhalen die ze vertellen over de daden van onze bloedverwanten zijn triest om aan te horen. Ik heb nachten wakker gelegen, rusteloos, vermoeider dan ik ooit dacht te kunnen zijn. Toch, als ik mijn ogen sluit, dan zie ik de vesting die mijn vader bouwde, verteerd worden door vlammen. De troon tussen de bomen, het symbool van eenheid en vrede tussen onze bloedverwanten, werd de wig die ons uit elkaar dreef.\" "
 
-#: ../../../campaigns/t02.wmf/event:91
-msgid "The Story goes on..."
-msgstr "Het verhaal gaat verder..."
+#: ../../../campaigns/t02.wmf/event:92 ../../../campaigns/t02.wmf/event:103
+#: ../../../campaigns/t02.wmf/event:114
+msgid "The story continues"
+msgstr "Het verhaal gaat verder"
 
-#: ../../../campaigns/t02.wmf/event:93 ../../../campaigns/t02.wmf/event:103
-#: ../../../campaigns/t02.wmf/event:113 ../../../campaigns/t02.wmf/event:210
-#: ../../../campaigns/t02.wmf/event:222 ../../../campaigns/t02.wmf/event:234
-#: ../../../campaigns/t02.wmf/event:246 ../../../campaigns/t02.wmf/event:258
-#: ../../../campaigns/t02.wmf/event:271 ../../../campaigns/t02.wmf/event:283
-#: ../../../campaigns/t02.wmf/event:296 ../../../campaigns/t02.wmf/event:309
-#: ../../../campaigns/t02.wmf/event:322 ../../../campaigns/t02.wmf/event:334
-#: ../../../campaigns/t02.wmf/event:347 ../../../campaigns/t02.wmf/event:360
-#: ../../../campaigns/t02.wmf/event:373 ../../../campaigns/t02.wmf/event:386
-#: ../../../campaigns/t02.wmf/event:400 ../../../campaigns/t02.wmf/event:413
-#: ../../../campaigns/t02.wmf/event:426 ../../../campaigns/t02.wmf/event:439
-#: ../../../campaigns/t02.wmf/event:459 ../../../campaigns/t02.wmf/event:471
-#: ../../../campaigns/t02.wmf/event:538 ../../../campaigns/t02.wmf/event:1119
-msgid "Continue"
-msgstr "Ga verder"
+#: ../../../campaigns/t02.wmf/event:95 ../../../campaigns/t02.wmf/event:106
+#: ../../../campaigns/t02.wmf/event:117 ../../../campaigns/t02.wmf/event:214
+#: ../../../campaigns/t02.wmf/event:226 ../../../campaigns/t02.wmf/event:239
+#: ../../../campaigns/t02.wmf/event:251 ../../../campaigns/t02.wmf/event:263
+#: ../../../campaigns/t02.wmf/event:277 ../../../campaigns/t02.wmf/event:289
+#: ../../../campaigns/t02.wmf/event:302 ../../../campaigns/t02.wmf/event:315
+#: ../../../campaigns/t02.wmf/event:328 ../../../campaigns/t02.wmf/event:340
+#: ../../../campaigns/t02.wmf/event:353 ../../../campaigns/t02.wmf/event:367
+#: ../../../campaigns/t02.wmf/event:380 ../../../campaigns/t02.wmf/event:393
+#: ../../../campaigns/t02.wmf/event:407 ../../../campaigns/t02.wmf/event:420
+#: ../../../campaigns/t02.wmf/event:433 ../../../campaigns/t02.wmf/event:446
+#: ../../../campaigns/t02.wmf/event:467 ../../../campaigns/t02.wmf/event:480
+#: ../../../campaigns/t02.wmf/event:1129
+msgid "OK"
+msgstr "OK"
 
-#: ../../../campaigns/t02.wmf/event:99
-msgid " \"Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me? Rise against whoever threatens our very existance may it even be one of your blood or mind?\" "
-msgstr " \"Vandaag brachten mijn jagers mannen, vrouwen en kinderen mee, die zich hadden verstopt in de bossen in een poging om te ontsnappen aan de oorlog, haat en wraakzucht die woedt tussen de stammen als in vroeger tijden, toen we niets waren dan wilde beesten, gestuurd en gecontroleerd door instincten. Geen van mijn broers zal ooit de controle kijgen en houden over de houten troon. Geen van de stammen zal sterk genoeg zijn om de ander te onderwerpen. Er zal geen einde komen aan deze slachting, tenzij... is dit het? Wat mijn vader me zei? Sta op tegen eenieder die ons bestaan bedreigt, zelfs als dit een van je eigen vlees en bloed is?\" "
+#: ../../../campaigns/t02.wmf/event:101
+msgid " \"Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me?<br> Rise against whoever threatens our very existance may it even be one of your blood or mind?\" "
+msgstr " \"Vandaag brachten mijn jagers mannen, vrouwen en kinderen mee, die zich hadden verstopt in de bossen in een poging om te ontsnappen aan de oorlog, haat en wraakzucht die woedt tussen de stammen als in vroeger tijden, toen we niets waren dan wilde beesten, gestuurd en gecontroleerd door instincten. Geen van mijn broers zal ooit de controle krijgen en houden over de houten troon. Geen van de stammen zal sterk genoeg zijn om de ander te onderwerpen. Er zal geen einde komen aan deze slachting, tenzij... is dit het? Wat mijn vader me zei? <br> Sta op tegen eenieder die ons bestaan bedreigt, zelfs als dit een van je eigen vlees en bloed is?\" "
 
-#: ../../../campaigns/t02.wmf/event:101 ../../../campaigns/t02.wmf/event:111
-msgid "The Story continues..."
-msgstr "Het verhaal gaat verder..."
+#: ../../../campaigns/t02.wmf/event:112
+msgid " \"Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br> Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home...\" "
+msgstr " \"Boldreth lijkt meer en meer verscheurd naarmate de dagen verstrijken. De moed zinkt mijn maten in de schoenen als het koude seizoen nadert en we nog steeds wonen in niets meer dan hutten en barakken. Het was nooit mijn bedoeling om zo lang in de wildernis te blijven - maar ik had nooit verwacht dat mijn broers deze zinloze strijd zo lang zouden volhouden.<br> Misschien wordt het tijd om ons hier meer op ons gemak te voelen. Misschien wordt het tijd om degenen die nog leven en denken in eenheid, een nieuw thuis te bieden, ter vervanging van wat we verloren hebben? Totdat we terug kunnen keren naar de plek die we ooit ons thuis noemden...\" "
 
-#: ../../../campaigns/t02.wmf/event:109
-msgid " \"Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br>Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home...\" "
-msgstr " \"Boldreth lijkt meer en meer verscheurd naarmate de dagen verstrijken. De moed zinkt mijn maten in de schoenen als het koude seizoen nadert en we nog steeds wonen in niets meer dan hutten en barakken. Het was nooit mijn bedoeling om zo lang in de wildernis te blijven - maar ik had nooit verwacht dat mijn broers deze zinloze strijd zo lang zouden volhouden.<br>Misschien wordt het tijd om ons hier meer op ons gemak te voelen. Misschien wordt het tijd om degenen die nog leven en denken in eenheid, een nieuw thuis te bieden, ter vervanging van wat we verloren hebben? Totdat we terug kunnen keren naar de plek die we ooit ons thuis noemden...\" "
-
-#: ../../../campaigns/t02.wmf/event:204
+#: ../../../campaigns/t02.wmf/event:208
 msgid "Brave Boldreth steps aside you..."
 msgstr "Dappere Boldreth gaat naast je staan..."
 
-#: ../../../campaigns/t02.wmf/event:206
-msgid " \"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren fought on the battlefield, and our axes and swords have turned rusty over time.\"</p>"
-msgstr " \"Dus je wilt ons voorbereiden op een langer verblijd in deze bossen, Thron? Ik zie de wijsheid in deze actie, mijn hart verlangt echter een glorieuze terugkeer naar Al'thunran. We hebben te lang gewacht, terwijl onze broeders vochten op het slagveld, en onze bijlen en zwaarden zijn met de tijd roestig geworden.\"</p>"
+#: ../../../campaigns/t02.wmf/event:210
+msgid " \"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren fought on the battlefield, and our axes and swords have turned rusty over time.\" "
+msgstr " \"Dus je wilt ons voorbereiden op een langer verblijd in deze bossen, Thron? Ik zie de wijsheid in deze actie, mijn hart verlangt echter een glorieuze terugkeer naar Al'thunran. We hebben te lang gewacht, terwijl onze broeders vochten op het slagveld, en onze bijlen en zwaarden zijn met de tijd roestig geworden.\""
 
-#: ../../../campaigns/t02.wmf/event:208 ../../../campaigns/t02.wmf/event:220
-#: ../../../campaigns/t02.wmf/event:232 ../../../campaigns/t02.wmf/event:244
-#: ../../../campaigns/t02.wmf/event:256 ../../../campaigns/t02.wmf/event:269
-#: ../../../campaigns/t02.wmf/event:281 ../../../campaigns/t02.wmf/event:294
-#: ../../../campaigns/t02.wmf/event:307 ../../../campaigns/t02.wmf/event:332
-#: ../../../campaigns/t02.wmf/event:345 ../../../campaigns/t02.wmf/event:371
-#: ../../../campaigns/t02.wmf/event:384 ../../../campaigns/t02.wmf/event:398
-#: ../../../campaigns/t02.wmf/event:411 ../../../campaigns/t02.wmf/event:424
-#: ../../../campaigns/t02.wmf/event:437
-msgid "Advisor"
-msgstr "Adviseur"
+#: ../../../campaigns/t02.wmf/event:212 ../../../campaigns/t02.wmf/event:237
+#: ../../../campaigns/t02.wmf/event:275 ../../../campaigns/t02.wmf/event:287
+#: ../../../campaigns/t02.wmf/event:313 ../../../campaigns/t02.wmf/event:338
+#: ../../../campaigns/t02.wmf/event:378 ../../../campaigns/t02.wmf/event:405
+#: ../../../campaigns/t02.wmf/event:418
+msgid "Your loyal companion"
+msgstr "Je trouwe metgezel"
 
-#: ../../../campaigns/t02.wmf/event:216
-msgid "Khantrukh joins the both of you"
-msgstr "Khantrukh voegt zich bij jullie"
+#: ../../../campaigns/t02.wmf/event:220
+msgid "Khantrukh joins the both of you..."
+msgstr "Khantrukh voegt zich bij jullie..."
 
-#: ../../../campaigns/t02.wmf/event:218
-msgid " \"I beg your forgiveness, chieftain, but I have a grief concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools and it is only a matter of little time before they are all gone.\"</p>"
-msgstr " \"Vergiffenis, hoofdman, maar ik heb een diepe zorg te bespreken. De rotsen bij ons kamp verdwijnen rap onder het gereedschap van onze arbeiders en het is slechts een kwestie van weinig tijd voor ze volledig weg zijn.\"</p>"
+#: ../../../campaigns/t02.wmf/event:222
+msgid " \"I beg your forgiveness, chieftain, but I have a grief concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools and it is only a matter of little time before they are all gone.\" "
+msgstr " \"Vergiffenis, hoofdman, maar ik heb een diepe zorg te bespreken. De rotsen bij ons kamp slinken rap onder het gereedschap van onze arbeiders en het is slechts een kwestie van weinig tijd voor ze volledig weg zijn.\""
 
-#: ../../../campaigns/t02.wmf/event:228
-msgid "Boldreth jumps up."
-msgstr "Boldreth schiet overeind."
+#: ../../../campaigns/t02.wmf/event:224 ../../../campaigns/t02.wmf/event:249
+#: ../../../campaigns/t02.wmf/event:261 ../../../campaigns/t02.wmf/event:300
+#: ../../../campaigns/t02.wmf/event:326 ../../../campaigns/t02.wmf/event:351
+#: ../../../campaigns/t02.wmf/event:391 ../../../campaigns/t02.wmf/event:431
+#: ../../../campaigns/t02.wmf/event:444
+msgid "The advisor"
+msgstr "De adviseur"
 
-#: ../../../campaigns/t02.wmf/event:230
-msgid " \"While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?\" <br><br>--NEW OBJECTIVES--<br>- build military buildings (like Sentries and Strongholds) to expand your territory. Get to the rocks north-east from you and build a Quarry there.</p>"
-msgstr " \"Hoewel het zeker geen waardige taak is voor een strijder, is het in ieder geval iets om te doen! Thron, wat zeg je ervan als ik een paar van onze meest rusteloze strijders meeneem en wat dichter bij de grote berg van Kal'mavrath ga kijken - mogelijk vinden we meer grote stenen om de oude man een plezier te doen?\"<br><br>--NIEUWE DOELEN--<br>- Bouw militaire gebouwen (zoals wachtposten en burchten) om je territorium uit te breiden. Ga naar de rotsen in het noordoosten en bouw daar een steengroeve</p>"
+#: ../../../campaigns/t02.wmf/event:232
+msgid "Boldreth jumps up..."
+msgstr "Boldreth schiet overeind..."
 
-#: ../../../campaigns/t02.wmf/event:240
+#: ../../../campaigns/t02.wmf/event:234
+msgid " \"While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Hoewel het zeker geen waardige taak is voor een strijder, is het in ieder geval iets om te doen! Thron, wat zeg je ervan als ik een paar van onze meest rusteloze strijders meeneem en wat dichter bij de grote berg van Kal'mavrath ga kijken - mogelijk vinden we meer grote stenen om de oude man een plezier te doen?\"<br><br>-- NIEUW  DOEL --<br>"
+
+#: ../../../campaigns/t02.wmf/event:235
+msgid "* Build military buildings (like sentries and strongholds) to expand your territory.<br> Get to the rocks north-east from you and build a quarry there."
+msgstr "* Bouw militaire gebouwen (zoals wachtposten en burchten) om je territorium uit te breiden.<br> Ga naar de rotsen in het noordoosten en bouw daar een steengroeve."
+
+#: ../../../campaigns/t02.wmf/event:245
 msgid "Khantrukh grumbles..."
 msgstr "Khantrukh gromt..."
 
-#: ../../../campaigns/t02.wmf/event:242
-msgid " \"Old man? Disrespectful youth...\"</p>"
-msgstr "\"Oude man? Respectloze jeugd...\"</p>"
+#: ../../../campaigns/t02.wmf/event:247
+msgid " \"Old man? Disrespectful youth!\" "
+msgstr "\"Oude man? Respectloze jeugd...\""
 
-#: ../../../campaigns/t02.wmf/event:252
-msgid "Khantrukh nods satisfied."
-msgstr "Khanturkh knikt tevreden."
+#: ../../../campaigns/t02.wmf/event:257
+msgid "Khantrukh nods satisfied..."
+msgstr "Khanturkh knikt tevreden..."
 
-#: ../../../campaigns/t02.wmf/event:254
-msgid " \"At least. These rocks should last for a while.\"</p>"
-msgstr "\"Eindelijk. Deze stenen moeten een tijd meegaan.\"</p>"
+#: ../../../campaigns/t02.wmf/event:259
+msgid " \"At least. These rocks should last for a while.\" "
+msgstr "\"Eindelijk. Deze stenen moeten een tijd meegaan.\""
 
-#: ../../../campaigns/t02.wmf/event:265
+#: ../../../campaigns/t02.wmf/event:270
 msgid "Boldreth exclaims..."
 msgstr "Boldreth roept uit..."
 
-#: ../../../campaigns/t02.wmf/event:267
-msgid " \"Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!\"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
-msgstr " \"Zie daar eens! De grote berg van Kal'mavrath! Ik vraag me af welke schatten de natuur kan hebben verborgen achter zijn majestueuze flanken!<br>Dat is nu een kans voor de ouderen om zich ook eens nuttig te maken! Laten we enkele van degenen die de taal van de stenen spreken erheen zenden om de geheimen van de berg te ontrafelen!\"<br><br>--NIEUWE DOELEN--<br>- Als je op een vlag klikt, dan kun je een geologen naar deze vlag sturen. Als deze vlag in de bergen staat, zullen de geologen zoeken naar delfstoffen, elders naar water. Plaats een vlag op de flank van de berg in het oosten (op berg terrein, niet op de weide) en zend er een geoloog naartoe. Bouw dan een mijn voor elke delfstof hij ontdekt, de juiste mijn bij de juiste stof:<br>Zwart = steenkool<br>Rood - ijzererts<br>Geel - goud<br>Grijs - graniet<br>Mijnen kunnen enkel op bergterrein gebouwd worden. Geschikte locaties worden aangegeven met een lichtgrijze plek.</p>"
+#: ../../../campaigns/t02.wmf/event:272
+msgid " \"Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br> Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr "\"Kijk daar eens! De grote berg van Kal'mavrath! Ik vraag me af welke schatten natuur onder zijn machtige flanken verborgen heeft!<br> Dit is een kans voor onze ouderen om zich ook eens nuttig te maken! Laten we enkelen die de taal van de steen verstaan erheen sturen om de geheimen van de berg te ontrafelen!\"<br><br>-- NIEUW DOEL --<br>"
 
-#: ../../../campaigns/t02.wmf/event:277
+#: ../../../campaigns/t02.wmf/event:273
+#: ../../../campaigns/t02.wmf/objective:15
+msgid "* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow). When you click at implied flag you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed as hammer and pick."
+msgstr " * Bouw een kolen- en ijzermijn.<br> Plaats een vlag op de flank van de berg in het oosten (op bergterrein en niet op een bergweide). Als je op de genoemde vlag klikt, dan kun je er een geoloog heen sturen. Omdat de vlag op de berg staat, zal de geoloog naar ertsen zoeken, anders zal hij naar water zoeken. Bouw dan een mijn voor beide materialen die hij zal vinden, door de juiste mijn te kiezen:<br> Zwart - steenkool<br> Rood - ijzererts<br> Geel - goud<br> Grijs - graniet<Mijnen kunnen alleen gebouwd worden op bergterrein. Geschikte plekken voor mijnen worden getoond als hamer en houweel."
+
+#: ../../../campaigns/t02.wmf/event:283
 msgid "Boldreth laughs..."
 msgstr "Boldreth lacht..."
 
-#: ../../../campaigns/t02.wmf/event:279
-msgid " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for! It might even be enough to -\"</p>"
-msgstr " \"Bij de baard van Chat'Karuth, dit is geweldig! Probeer je eens voor te stellen wat we allemaal kunnen doen met deze steenkool en ijzererts! Het is misschien zelfs genoeg voor -\"</p>"
+#: ../../../campaigns/t02.wmf/event:285
+msgid " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for!<br> It might even be enough to...\" "
+msgstr " \"Bij de baard van Chat'Karuth, dit is geweldig! Probeer je eens voor te stellen wat we allemaal kunnen doen met deze steenkool en ijzererts! Het is misschien zelfs genoeg voor...\""
 
-#: ../../../campaigns/t02.wmf/event:290
+#: ../../../campaigns/t02.wmf/event:296
 msgid "Khantrukh interrupts..."
 msgstr "Khanturkh onderbreekt..."
 
-#: ../../../campaigns/t02.wmf/event:292
-msgid " \"While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not prove easy.\"</p>"
-msgstr " \"Hoewel het waar is, moeten we daar later naar kijken. Voorlopig zijn er andere hobbels op de weg. De mijnwerkers hebben meer voedsel nodig voor het werk in de hoge bergen in deze bittere kou, en het voorzien in deze voorraden kan wel eens lastig blijken.\"</p>"
+#: ../../../campaigns/t02.wmf/event:298
+msgid " \"While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy.\" "
+msgstr " \"Hoewel het waar is, moeten we daar later naar kijken. Voorlopig zijn er andere hobbels op de weg. De mijnwerkers hebben meer voedsel nodig voor het werk in de hoge bergen in deze bittere kou, en het voorzien in deze voorraden kan wel eens lastig blijken.\""
 
-#: ../../../campaigns/t02.wmf/event:302
+#: ../../../campaigns/t02.wmf/event:308
 msgid "Boldreth nods..."
 msgstr "Boldreth knikt..."
 
-#: ../../../campaigns/t02.wmf/event:304
-msgid " \"I have to give it to you, you are right here, old man.<br>There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!\"<br><br>"
-msgstr " \"Ik moet het je nageven, oude man, daar heb je gelijk in.<br>Er lijken behoorlijk wat dieren hier in het bos te zijn - we zouden er gewoon een aantal van kunnen vangen. En natuurlijk zouden de mensen een nieuwe kroeg toejuichen - hé, we kunnen hem zelfs 'De Trots van Thron' of zoiets kunnen noemen als je wilt!\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:310
+msgid " \"I have to give it to you, you are right here, old man.<br> There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Ik moet het je nageven, oude man, daar heb je gelijk in.<br> Er lijken behoorlijk wat dieren hier in het bos te zijn - we zouden er gewoon een aantal van kunnen vangen. En natuurlijk zouden de mensen een nieuwe kroeg toejuichen - hé, we kunnen hem zelfs 'Thron's Trots' of zoiets kunnen noemen als je wilt!\"<br><br>-- NIEUW DOEL --<br>"
 
-#: ../../../campaigns/t02.wmf/event:305
-msgid "--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>"
-msgstr "--NIEUWE DOELEN--<br>- Om te kunnen werken, hebben je mijnwerkers voedsel nodig. Een jager kan dieren vangen, terwijl een jachtopzichter voorkomt dat ze uitsterven. Het vlees wordt dan in de kroeg verwerkt tot lunches voor je mijnwerkers.<br>Dit is slechts het eerste voorbeeld van een grondstof die verwerkt moet worden in een tweedelijns gebouw - meer zullen volgen.<br> Bouw een jagershut, een jachtopzienershut en een kroeg.</p>"
+#: ../../../campaigns/t02.wmf/event:311
+msgid "* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners need food.<br> A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br> This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow."
+msgstr "* Bouw een jagershut, een jachtopzichtershut en een kroeg.<br> Om te kunnen werken, hebben je mijnwerkers voedsel nodig.<br> Een jager kan dieren vangen, terwijl een jachtopzichter voorkomt dat ze uitsterven. Het vlees wordt dan in de kroeg verwerkt tot lunches voor je mijnwerkers.<br> Dit is slechts het eerste voorbeeld van een grondstof die verwerkt moet worden in een tweedelijns gebouw - meer zullen volgen."
 
-#: ../../../campaigns/t02.wmf/event:315
-msgid "The elder laughs..."
-msgstr "De ouderling lacht..."
+#: ../../../campaigns/t02.wmf/event:321
+msgid "The elder jumps into the air..."
+msgstr "De ouderling springt in de lucht..."
 
-#: ../../../campaigns/t02.wmf/event:317
-msgid " \"Wisdom commands to seek variety. North of the great mountain is a big plane - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pittabread for a change...\"<br><br>"
-msgstr " \"Wijsheid gebiedt variatie. Ten noorden van de grote berg ligt een grote vlakte - Waarom zouden we de ruimte die Moeder Natuur ons schonk niet gebruiken en een boerderij bouwen? Ik zou een vers gebakken pitabrood ter afwisseling zeker waarderen...\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:323
+msgid " \"Wisdom commands to seek variety.<br> North of the great mountain is a big plane - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pitta bread for a change...\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Wijsheid gebiedt variatie.<br> Ten noorden van de grote berg ligt een grote vlakte - Waarom zouden we de ruimte die Moeder Natuur ons schonk niet gebruiken en een boerderij bouwen? Ik zou een vers gebakken pitabrood ter afwisseling zeker waarderen...\"<br><br>-- NIEUW DOEL --<br>"
 
-#: ../../../campaigns/t02.wmf/event:318
-msgid "--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source. Build a well, a farm and a bakery.</p>"
-msgstr "--NIEUWE DOELEN--<br>- Andere manieren om voedsel te produceren - verschillende soorten voedsel - zijn vissers en boerderijen. De tarwe van de laatste moet verwerkt worden met water in een bakkerij, voor het eetbaar wordt. Je kunt water verkrijgen door een put te bouwen op een plek waar je geologen een waterbron vinden. Bouw een put, een boerderij en een bakkerij.</p>"
+#: ../../../campaigns/t02.wmf/event:324
+#: ../../../campaigns/t02.wmf/objective:31
+msgid "* Build a well, a farm and a bakery.<br> Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source."
+msgstr "* Bouw een put, een boerderij en een bakkerij.<br> Andere manieren om voedsel te produceren - verschillende soorten voedsel - zijn vissers en boerderijen. De tarwe van de laatste moet verwerkt worden met water in een bakkerij voor het eetbaar wordt. Je kunt water verkrijgen door een put te bouwen op een plek waar je geologen een waterbron vinden."
 
-#: ../../../campaigns/t02.wmf/event:328
+#: ../../../campaigns/t02.wmf/event:334
 msgid "Boldreth cheers up..."
 msgstr "Boldreth wordt vrolijker..."
 
-#: ../../../campaigns/t02.wmf/event:330
-msgid " \"Our hunters are out in the forests, Thron. I promise you, before the sun sets today you will have a feast as magnificent as is right for the chieftain of all clans!\"</p>"
-msgstr " \"Onze jagers lopen daarbuiten in de bossen, Thron. Ik beloof je, dat voordat de zon vandaag ondergaat, je een feestmaaltijd zult krijgen dat hoort bij de leider van alle clans!\"</p>"
+#: ../../../campaigns/t02.wmf/event:336
+msgid " \"Our hunters are out in the forests, Thron.<br> I promise you, before the sun sets today you will have a magnificient meal which is suitable for the chieftain of all clans!\" "
+msgstr " \"Onze jagers lopen daarbuiten in de bossen, Thron.<br> Ik beloof je, voordat de zon vandaag ondergaat, zul je een feestmaaltijd krijgen dat hoort bij de leider van alle clans!\""
 
-#: ../../../campaigns/t02.wmf/event:341
+#: ../../../campaigns/t02.wmf/event:347
 msgid "Khantrukh gazes over the plains..."
 msgstr "Khantruks staart over de velden..."
 
-#: ../../../campaigns/t02.wmf/event:343
-msgid " \"Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread for our chieftain alone!\"</p>"
-msgstr " \"Is het niet schitterend, het uitzicht over de gouden velden, kalm groeiend, dansend op de wind? En ik geloof dat de bakker net onderweg is, met zijn heerlijkste brood, alleen voor onze leider\"</p>"
+#: ../../../campaigns/t02.wmf/event:349
+msgid " \"Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread for our chieftain alone!\" "
+msgstr " \"Is het niet schitterend, het uitzicht over de gouden velden, kalm groeiend, dansend op de wind? En ik geloof dat de bakker net onderweg is, met zijn heerlijkste brood, alleen voor onze leider\""
 
-#: ../../../campaigns/t02.wmf/event:356
-msgid " \"A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br>Maybe we actually are slowly creating a place here which we can... call home.\"</p>"
-msgstr " \"Gisteren is een kroeg geopend voor onze mensen. Hoewel ik nauwelijks zin heb iets te vieren, merkte ik hoeveel dit kleine beetje thuis betekende voor mijn volk. Hun gezang klonk tot diep in de nacht en ze waren de volgende dag in hoger sferen.<br>Misschien zijn we langzaam een plek aan het creëren die we... thuis kunnen noemen.\"</p>"
+#: ../../../campaigns/t02.wmf/event:360
+msgid "Thron recognizes..."
+msgstr "Thron herkent..."
 
-#: ../../../campaigns/t02.wmf/event:358
-msgid "A beautiful morning..."
-msgstr "Een prachtige ochtend..."
+#: ../../../campaigns/t02.wmf/event:362
+msgid " \"A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br> Maybe we actually are slowly creating a place here which we can... call home.\" "
+msgstr " \"Gisteren is een kroeg geopend voor onze mensen. Hoewel ik nauwelijks zin heb iets te vieren, merkte ik hoeveel dit kleine beetje thuis betekende voor mijn volk. Hun gezang klonk tot diep in de nacht en ze waren de volgende dag in hoger sferen.<br>Misschien zijn we langzaam een plek aan het creëren die we... thuis kunnen noemen.\""
 
-#: ../../../campaigns/t02.wmf/event:366
+#: ../../../campaigns/t02.wmf/event:364
+msgid "A beautiful morning"
+msgstr "Een prachtige ochtend"
+
+#: ../../../campaigns/t02.wmf/event:373
 msgid "Boldreth remarks..."
 msgstr "Boldreth merkt op..."
 
-#: ../../../campaigns/t02.wmf/event:368
-msgid " \"So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. We have the iron ore to be melt into steel ready to be forged into whatever we see fit and the coal to keep the smelter's ovens burning.\"<br><br>"
-msgstr " \"Nu we zowel de mijnen hebben als het voedsel om ze te onderhouden, zouden we wat de mijnwerkers bovenhalen moeten omzetten in een meer bruikbare staat. We moeten de ijzererts laten omsmelten tot staal om het laden smeden in wat we ook maar nodig denken te hebben en de steenkool om de hoogovens brandend te houden.\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:375
+msgid " \"So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. The iron ore has to be melt into iron, so it is ready to be forged into whatever we want. And we need the coal to keep the smelter's ovens burning.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Nu we zowel de mijnen hebben als het voedsel om ze te onderhouden, zouden we wat de mijnwerkers bovenhalen moeten omzetten in een meer bruikbare staat. We moeten de ijzererts laten omsmelten tot ijzer om het te laten smeden tot wat we maar willen. En we hebben de kolen nodig om de hoogovens brandend te houden.\"<br><br>-- NIEUW DOEL --<br>"
 
-#: ../../../campaigns/t02.wmf/event:369
-msgid "--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the coalearth from your coalmines must be refined into coal - for that, build a Coal Burner.</p>"
-msgstr "--NIEUWE DOELEN--<br>- De erts die je mijnwerkers bovenhalen is nog niet bruikbaar - het moet eerst worden omgesmolten tot ijzer. Bouw een hoogoven. Evenzo moet de koolaarde uit de kolenmijnen verwerkt tot steenkool - bouw daarvoor een kolenbrander.</p>"
+#: ../../../campaigns/t02.wmf/event:376
+msgid "* Build a smelting works. The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
+msgstr "* Bouw een hoogoven. De erts die je mijnwerkers bovenhalen is nog niet bruikbaar - het moet eerst worden omgesmolten tot ijzer."
 
-#: ../../../campaigns/t02.wmf/event:379
+#: ../../../campaigns/t02.wmf/event:386
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh spreekt..."
 
-#: ../../../campaigns/t02.wmf/event:381
-msgid " \"Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's roots, if we want more of its treasures!<br>Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them.\"<br><br>"
-msgstr " \"Onze mijnwerkers halen elke dag minder boven! We moeten dieper gaan, dichter bij de bron van de berg, als we meer van zijn schatten willen!<br>Natuurlijk is het koud en donker op zo'n diepte en willen slecht enkelen vrijwillig daar binnen gaan. We moeten deze moed belonen met grotere porties.\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:388
+msgid " \"Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's core, if we want more of its treasures!<br> Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Onze mijnwerkers halen elke dag minder boven! We moeten dieper gaan, dichter bij de bron van de berg, als we meer van zijn schatten willen!<br>Natuurlijk is het koud en donker op zo'n diepte en willen slecht enkelen vrijwillig daar binnen gaan. We moeten deze moed belonen met grotere porties.\"<br><br>-- NIEUW DOEL --<br>"
 
-#: ../../../campaigns/t02.wmf/event:382
-msgid "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
-msgstr "--NIEUWE DOELEN--<br>- Een gewone mijn kan slechts een derde van alle ondergrondse voorraden uitgraven. Dan moet deze verbeterd worden tot een diepe mijn om goed te blijven werken. Om een gebouw te verbeteren, klik je erop en dan op de juiste knop in het menu dat verschijnt.<br>Arbeiders doen ervaring op met succesvol werk. Met genoeg ervaring worden ze beter gekwalificeerd, wat nodig is voor verbeterde gebouwen. Verbeter geen gebouw voordat je genoeg gekwalificeerde arbeiders hebt om erin te werken! Zulke gebouwen stellen meestal hogere eisen dan het oorspronkelijke gebouw - zo hebben diepe mijnen porties nodig in plaats van hapjes. Je zult je kroeg moeten verbeteren tot een herberg om porties te kunnen produceren uit pitabrood EN een tweede soort voedsel (vlees of vis). Let erop dat het hebben van herbergen, kroegen niet overbodig maakt - normale mijnen hebben nog steeds hapjes nodig en geen porties. Je kunt natuurlijk alle mijnen gelijk verbeteren naar diepe mijnen = grotere mijnen werken sneller, kleinere hebben goedkoper voedsel nodig. Het is net waar je zelf voor kiest.<br>Verbeter de kolenmijn en de kroeg naar hun betere versies.</p>"
+#: ../../../campaigns/t02.wmf/event:389
+#: ../../../campaigns/t02.wmf/objective:46
+msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
+msgstr "* Verbeter de kolenmijn en de kroeg naar hun betere versies.<br>- Een gewone mijn kan slechts ongeveer een derde van alle ondergrondse voorraden uitgraven. Dan moet deze verbeterd worden tot een diepe mijn om goed te blijven werken. Om een gebouw te verbeteren, klik je erop en dan op de juiste knop in het menu dat verschijnt.<br> Arbeiders doen ervaring op met succesvol werk. Met genoeg ervaring worden ze beter gekwalificeerd, wat nodig is voor verbeterde gebouwen. Verbeter geen gebouw voordat je genoeg gekwalificeerde arbeiders hebt om erin te werken! Zulke gebouwen stellen meestal hogere eisen dan het oorspronkelijke gebouw - zo hebben diepe mijnen porties nodig in plaats van hapjes. Je zult je kroeg moeten verbeteren tot een herberg om porties te kunnen produceren uit pitabrood EN een tweede soort voedsel (vlees of vis). Let erop dat het hebben van herbergen, kroegen niet overbodig maakt - normale mijnen hebben nog steeds hapjes nodig in plaats porties. Je kunt natuurlijk alle mijnen gelijk verbeteren naar diepe mijnen - grotere mijnen werken sneller, kleinere hebben goedkoper voedsel nodig. Het is net waar je zelf voor kiest."
 
-#: ../../../campaigns/t02.wmf/event:393
+#: ../../../campaigns/t02.wmf/event:400
 msgid "Boldreth seems concerned..."
 msgstr "Boldreth lijkt bezorgd..."
 
-#: ../../../campaigns/t02.wmf/event:395
-msgid " \"As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even more not so in times as dangerous as ours! We need a woodhardener, and we need one now!\"<br><br>"
-msgstr " \"Ik heb net ontdekt dat onze voorraad rozenhout krimpt! We kunnen onze strijders niet in enkele bouwvallige hutten laten verblijven, en zeker niet in deze gevaarlijke tijden! We hebben houtverharders nodig, en wel nu!\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:402
+msgid " \"As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even more not so in times as dangerous as ours!<br> We need a wood hardener, and we need one now!\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Ik heb net ontdekt dat onze voorraad rozenhout krimpt! We kunnen onze strijders niet in enkele bouwvallige hutten laten verblijven, en zeker niet in deze gevaarlijke tijden!<br> We hebben een houtverharders nodig, en wel nu!\"<br><br>-- NIEUW DOEL --<br>"
 
-#: ../../../campaigns/t02.wmf/event:396
-msgid "--NEW OBJECTIVES--<br>- Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a Woodhardener first. Always remember to build a Woodhardener before you run out of blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
-msgstr "--NIEUWE DOELEN--<br>- Grotere en sterkere gebouwen - waaronder alle militaire gebouwen - hebben betere bouwmaterialen nodig. Ze kunnen niet met eenvoudige boomstammen gebouwd worden - het hout moet eerst worden verwerkt tot rozenhout door een houtverharder. Zorg er altijd voor een houtverharder te bouwen voor je voorraad rozehout op is, want je kunt niet uitbreiden zonder.<br>Bouw een houtverharder.</p>"
+#: ../../../campaigns/t02.wmf/event:403
+msgid "* Build a wood hardener.<br> Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, without it you cannot expand."
+msgstr "* Bouw een houtverharder.<br>- Grotere en sterkere gebouwen - waaronder alle militaire gebouwen - hebben betere bouwmaterialen nodig. Ze kunnen niet met eenvoudige boomstammen gebouwd worden - het hout moet eerst worden verwerkt tot rozenhout door een houtverharder. Zorg er altijd voor een houtverharder te bouwen voor je voorraad rozenhout op is, want je kunt niet uitbreiden zonder."
 
-#: ../../../campaigns/t02.wmf/event:406
+#: ../../../campaigns/t02.wmf/event:413
 msgid "Boldreth smiles..."
 msgstr "Boldreth glimlacht..."
 
-#: ../../../campaigns/t02.wmf/event:408
-msgid " \"Well, old friend, this should ensure that our fortifications do not break down with our foes first battle cry! Now we can expand safely!<br>Still, it could not hurt to assemble some grindstone for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!\"<br><br>"
-msgstr " \"Wel, oude vriend, we zouden er zeker van moeten kunnen zijn dat onze versterkingen niet instorten bij de eerste strijdkreet van onze vijanden! Nu kunnen we veilig uitbreiden!<br>Het kan echter geen kwaad om gemalen steen te verzamelen voor de rest van de campagne; op die manier kunnen, in geval van nood, een vesting te bouwen zoals de wereld nog niet gezien heeft!\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:415
+msgid " \"Well, old friend, this should ensure that our fortifications do not break down with our foes first battle cry! Now we can expand safely!<br> Still, it could not hurt to assemble some grout for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Wel, oude vriend, we zouden er zeker van moeten kunnen zijn dat onze versterkingen niet instorten bij de eerste strijdkreet van onze vijanden! Nu kunnen we veilig uitbreiden!<br> Het kan echter geen kwaad om specie te verzamelen voor de rest van de campagne; op die manier kunnen we, in geval van nood, een vesting bouwen zoals de wereld nog nooit gezien heeft!\"<br><br>-- NIEUW DOEL --<br>"
 
-#: ../../../campaigns/t02.wmf/event:409
-msgid "--NEW OBJECTIVES--<br>- Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a Stonegrinder. You can obtain water by building a Well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu.<br>Build a Stonegrinder and a Well.</p>"
-msgstr "--NIEUWE DOELEN--<br>- Betere gebouwen kunnen ook andere betere materialen nodig hebben dan rozenhout. Een daarvan is gemalen steen, dat gemaakt wordt met water en ruwe steen door een steenmaler. Je kunt water verkrijgen door een put te bouwen op een waterbron, die je geologen kunnen ontdekken als je ze naar een vlag stuurt die niet op een berg staat, door op deze vlag te klikken en dan op het geologensymbool in het menu dat verschijnt.<br>Bouw een steenmaler en een put.</p>"
+#: ../../../campaigns/t02.wmf/event:416
+msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking implied flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
+msgstr "* Bouw een kalkoven, een put en aan houtskoolbrander of kolenmijn.<br> Betere gebouwen kunnen andere verbeterd materiaal nodig hebben dan rozenhout. Een daarvan is specie, dat wordt gemaakt uit ruwe steen, water en kool door een kalkoven. Je kunt water verkrijgen door een put op een waterbron te bouwen, die je geologen kunnen ontdekken als je ze naar een vlag stuurt die niet op een berg staat, door op de genoemde vlag te klikken en in het volgende menu op het geologen-symbool. Kool kun je verkrijgen door een houtskoolbrander of kolenmijn te bouwen."
 
-#: ../../../campaigns/t02.wmf/event:419
+#: ../../../campaigns/t02.wmf/event:426
 msgid "Khantrukh steps in..."
 msgstr "Khantrukh komt erbij..."
 
-#: ../../../campaigns/t02.wmf/event:421
-msgid " \"Chieftain, this is a disgrace! It is well that we can produce grindstone for mighty fortifications and great buildings now - only, this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping onto my face! Now there is a problem we should do something about!\"<br><br>"
-msgstr " \"Leider, het is een schande! Het is leuk en aardig dat we nu steen kunnen malen voor machtige versterkingen en grootse gebouwen - alleen kan dit niet voorkomen dat onze daken gaan lekken! Misschien vinden de jongeren het leuk om nachten in de regen door te brengen, maar ik kan de slaap niet vinden met die druppels die op mijn neus vallen! Er is nu een probleen en daar moeten we nu iets aan doen!\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:428
+msgid " \"Chieftain, this is a disgrace! It is well that we can produce grout for mighty fortifications and great buildings now - only, this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping onto my face!<br> Now this is a problem we should do something about!\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Leider, het is een schande! Het is leuk en aardig dat we nu specie kunnen malen voor machtige versterkingen en grootse gebouwen - alleen kan dit niet voorkomen dat onze daken gaan lekken! Misschien vinden de jongeren het leuk om nachten in de regen door te brengen, maar ik kan de slaap niet vinden met die druppels die op mijn neus vallen!<br> Er is nu een probleem waar we iets aan moeten doen!\"<br><br>-- NIEUW DOEL --<br>"
 
-#: ../../../campaigns/t02.wmf/event:422
-msgid "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
-msgstr "--NIEUWE DOELEN--<br>- Het derde materiaal nodig voor verbeterde gebouwen is stro, om daken te dekken. Stro wordt geplant in een varenkwekerij.<br>Bouw een varenkwekerij.</p>"
+#: ../../../campaigns/t02.wmf/event:429
+#: ../../../campaigns/t02.wmf/objective:67
+msgid "* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. It is being planted by a fernery."
+msgstr "* Bouw een varenkwekerij.<br> Het derde materiaal nodig voor verbeterde gebouwen is stro, om daken te dekken. Stro wordt geplant in een varenkwekerij."
 
-#: ../../../campaigns/t02.wmf/event:433
+#: ../../../campaigns/t02.wmf/event:440
 msgid "Khantrukh seems reliefed..."
 msgstr "Khantrukh lijkt opgelucht..."
 
-#: ../../../campaigns/t02.wmf/event:435
-msgid " \"Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!\"</p>"
-msgstr " \"Fantastisch! Onze daken lekken niet meer en we hebben alles wat we nodig hebben voor, wel, eigenlijk elk monumentaal gebouw dat we willen!\"</p>"
+#: ../../../campaigns/t02.wmf/event:442
+msgid " \"Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!\" "
+msgstr " \"Fantastisch! Onze daken lekken niet meer en we hebben alles wat we nodig hebben voor, wel, eigenlijk elk monumentaal gebouw dat we willen!\""
 
-#: ../../../campaigns/t02.wmf/event:455
-msgid " \"One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?\"</p>"
-msgstr " \"Op een nacht, toen de maan helder scheen, klom ik naar de top van Kal'mavrath. Toen ik naar de horizon staarde, zag ik nog steeds grimmige lichtjes flakkeren in de verte. Het is ongelooflijk om te zien met welke passie mijn broeders de oorlog vechten. Ik vrees het moment dat we Al'thunran weer zullen zien - zal er iets anders over zijn dan as en vervallen ruïnes van onze ooit zo schitterende hoofdstad, als we daar aankomen?\"</p>"
+#: ../../../campaigns/t02.wmf/event:460 ../../../campaigns/t02.wmf/event:1122
+msgid "Thron speaks..."
+msgstr "Thron spreekt..."
 
-#: ../../../campaigns/t02.wmf/event:457
-msgid "One fullmoon night..."
-msgstr "Een nacht met volle maan..."
+#: ../../../campaigns/t02.wmf/event:462
+msgid " \"One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath.<br> When I gazed to the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?\" "
+msgstr " \"Op een nacht, toen de maan helder scheen, klom ik naar de top van Kal'mavrath.<br> Toen ik naar de horizon staarde, zag ik nog steeds grimmige lichtjes flakkeren in de verte. Het is ongelooflijk om te zien met welke passie mijn broeders de oorlog vechten. Ik vrees het moment dat we Al'thunran weer zullen zien - zal er iets anders over zijn dan as en vervallen ruïnes van onze ooit zo schitterende hoofdstad, als we daar aankomen?\""
 
-#: ../../../campaigns/t02.wmf/event:467
-msgid " \"The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore. I prayed it might get warmer again, as I prayed the war would finally come to an end.<br>So far, it does not seem either of my prayers was fulfilled.\"</p>"
-msgstr " \"De winter staat voor de deur. Velen van ons lijden onder de kou, maar we moeten volhouden. De dag dat we terugkeren kan niet ver meer zijn - mag niet ver meer zijn. Ik heb gebeden dat het weer warmer wordt, net zoals ik gebeden heb dat deze oorlog eindelijk tot een einde kwam.<br>Tot op heden, lijkt geen van mijn gebeden verhoord.\"</p>"
+#: ../../../campaigns/t02.wmf/event:464
+msgid "One fullmoon night"
+msgstr "Een nacht met volle maan"
 
-#: ../../../campaigns/t02.wmf/event:469
-msgid "Another cold day..."
-msgstr "Een andere koude dag..."
+#: ../../../campaigns/t02.wmf/event:473
+msgid "Thron looks worried..."
+msgstr "Thron kijkt bezorgd"
 
-#: ../../../campaigns/t02.wmf/event:532
-msgid "Victory!"
-msgstr "Gewonnen!"
+#: ../../../campaigns/t02.wmf/event:475
+msgid " \"The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore.<br> I prayed it might get warmer again, as I prayed the war would finally come to an end.<br> So far, it seems that none of either prayers was fulfilled.\"</p>"
+msgstr " \"De winter staat voor de deur. Velen van ons lijden onder de kou, maar we moeten volhouden. De dag dat we terugkeren kan niet ver meer zijn - mag niet ver meer zijn.<br> Ik heb gebeden dat het weer warmer wordt, net zoals ik gebeden heb dat deze oorlog eindelijk tot een einde kwam.<br>Tot op heden, lijkt geen van mijn gebeden verhoord.\"</p>"
 
-#: ../../../campaigns/t02.wmf/event:534
-msgid "Thron speaks:<br>\"The other day Boldreth talked me into accompanying him to the new inn. It would cheer me up, he said.<br>When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br>The news he brought were to change everything...\"<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.</p>"
-msgstr "Thron spreekt:<br>\"Laatst haalde Boldreth me over om met hem mee te gaan naar de nieuwe herberg. Het zou me opvrolijken, zei hij.<br>Toen ik rondkeek zag ik trouwe gezichten, die erop vertrouwden dat ik ze door deze donkere dagen kan leiden. Voor ik iets kan zeggen uit dankbaarheid of als aanmoediging, kwam een van mijn strijders binnenstormen. Hij was de laatste dagen in de bossen geweest en ik kon zien hoe uitgeput hij was.<br>Het nieuws dat hij bracht zou alles veranderen...\"<br><br>----------------------GEWONNEN!-----------------------<br><br>Je hebt deze missie voltooid. Je kunt verder spelen als je dat wilt, anders kun je verder naar de volgende missie.</p>"
+#: ../../../campaigns/t02.wmf/event:477
+msgid "Another cold day"
+msgstr "Alweer koude dag"
 
-#: ../../../campaigns/t02.wmf/event:536
-msgid "Mission Complete!"
-msgstr "Missie compleet!"
+#: ../../../campaigns/t02.wmf/event:541
+msgid " \"The other day Boldreth asked me to accompany him to the new inn. It would cheer me up, he said.<br> When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br> The news he brought changed everything...\"<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
+msgstr "\"Laatst haalde Boldreth me over om met hem mee te gaan naar de nieuwe herberg. Het zou me opvrolijken, zei hij.<br>Toen ik rondkeek zag ik trouwe gezichten, die erop vertrouwden dat ik ze door deze donkere dagen kan leiden. Voor ik iets kan zeggen uit dankbaarheid of als aanmoediging, kwam een van mijn strijders binnenstormen. Hij was deze laatste dagen in de bossen geweest en ik kon zien hoe uitgeput hij was. <br>Het nieuws dat hij bracht zou alles veranderen...\"<br><br>----------------------GEWONNEN!-----------------------<br><br>Je hebt deze missie voltooid. Je kunt verder spelen als je dat wilt, anders kun je verder naar de volgende missie.</p>"
 
-#: ../../../campaigns/t02.wmf/event:1116
+#: ../../../campaigns/t02.wmf/event:543
+msgid "Mission Complete"
+msgstr "Missie Voltooid"
+
+#: ../../../campaigns/t02.wmf/event:546
+msgid "Continue"
+msgstr "Ga verder"
+
+#: ../../../campaigns/t02.wmf/event:1124
+msgid " \"We found a village with friendly and productive people, impressed by our wealth, technology and strength.<br> They have decided to join us!\" "
+msgstr "\"We vonden een dorp met vriendelijke en productieve mensen, onder de indruk van onze weelde, technologie en kracht.<br> Ze hebben besloten zicht bij ons aan te sluiten!\""
+
+#: ../../../campaigns/t02.wmf/event:1126
 msgid "A friendly village joined us!"
 msgstr "Een vriendelijk dorp sluit zich bij ons aan!"
+
+#: ../../../campaigns/t02.wmf/objective:5
+msgid "Expand north-east and build a quarry"
+msgstr "Breid noordoostelijk uit en bouw een steengroeve"
+
+#: ../../../campaigns/t02.wmf/objective:7
+msgid "* Build military buildings (like sentries and strongholds) to expand your territory. Get to the rocks north-east from you and build a quarry there."
+msgstr "* Bouw militaire gebouwen (zoals wachtposten en burchten) om je territorium uit te breiden. Ga naar de rotsen in het noordoosten en bouw daar een steengroeve."
+
+#: ../../../campaigns/t02.wmf/objective:13
+msgid "Start building mines on a mountain"
+msgstr "Beginnen mijnen te bouwen op een berg"
+
+#: ../../../campaigns/t02.wmf/objective:21
+msgid "Provide your miners with food"
+msgstr "Voorzie je mijnwerkers van voedsel"
+
+#: ../../../campaigns/t02.wmf/objective:23
+msgid "* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br> This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow."
+msgstr "* Bouw een jagershut, een jachtopzichtershut en een kroeg.<br> Om te kunnen werken, hebben je mijnwerkers voedsel nodig. Een jager kan dieren vangen, terwijl een jachtopzichter voorkomt dat ze uitsterven. Het vlees wordt dan in de kroeg verwerkt tot lunches voor je mijnwerkers.<br> Dit is slechts het eerste voorbeeld van een grondstof die verwerkt moet worden in een tweedelijns gebouw - meer zullen volgen."
+
+#: ../../../campaigns/t02.wmf/objective:29
+msgid "Bake bread"
+msgstr "Bak brood"
+
+#: ../../../campaigns/t02.wmf/objective:37
+msgid "Refine your mined resources"
+msgstr "Verwerk je mijnmaterialen"
+
+#: ../../../campaigns/t02.wmf/objective:39
+msgid "* Build a smelting works.<br> The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
+msgstr "* Bouw een hoogoven.<br> De ijzererts die je mijnwerkers boven brengen is nog niet bruikbaar - het moet eerst worden omgesmolten tot ijzer."
+
+#: ../../../campaigns/t02.wmf/objective:53
+msgid "* Build a wood hardener.<br> Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, for without that you cannot expand."
+msgstr "* Bouw een houtverharder.<br> Grotere en sterkere gebouwen - waaronder alle militaire gebouwen - hebben betere bouwmaterialen nodig. Ze kunnen niet met eenvoudige boomstammen gebouwd worden - het hout moet eerst worden verwerkt tot rozenhout door een houtverharder. Zorg er altijd voor een houtverharder te bouwen voor je voorraad rozenhout op is, want je kunt niet uitbreiden zonder."
+
+#: ../../../campaigns/t02.wmf/objective:60
+msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
+msgstr "* Bouw een kalkoven, een put en een houtskoolbrander of kolenmijn.<br> Betere gebouwen kunnen ander materiaal nodig hebben dan rozenhout. Een daarvan is specie, dat wordt gemaakt uit ruwe steen, water en kolen door een kalkoven. Je kunt water verkrijgen door een put te bouwen op een waterbron die je geologen kunnen ontdekken als je ze naar een vlag stuurt die niet op een vlag staat en op de genoemde vlag te klikken en daarna op het geologen-symbool in het menu dat daarna verschijnt. Kool kan worden verkregen door een houtskoolbrander of kolenmijn te bouwen."
+
+#, fuzzy
+#~ msgid "* When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot."
+#~ msgstr " \"Zie daar eens! De grote berg van Kal'mavrath! Ik vraag me af welke schatten de natuur kan hebben verborgen achter zijn majestueuze flanken!<br>Dat is nu een kans voor de ouderen om zich ook eens nuttig te maken! Laten we enkele van degenen die de taal van de stenen spreken erheen zenden om de geheimen van de berg te ontrafelen!\"<br><br>--NIEUWE DOELEN--<br>- Als je op een vlag klikt, dan kun je een geologen naar deze vlag sturen. Als deze vlag in de bergen staat, zullen de geologen zoeken naar delfstoffen, elders naar water. Plaats een vlag op de flank van de berg in het oosten (op berg terrein, niet op de weide) en zend er een geoloog naartoe. Bouw dan een mijn voor elke delfstof hij ontdekt, de juiste mijn bij de juiste stof:<br>Zwart = steenkool<br>Rood - ijzererts<br>Geel - goud<br>Grijs - graniet<br>Mijnen kunnen enkel op bergterrein gebouwd worden. Geschikte locaties worden aangegeven met een lichtgrijze plek.</p>"
+
+#, fuzzy
+#~ msgid "* Build a smeltery and a charcoal burner. The iron ore your miners bring up is not usable yet - it has to be melted into iron first. Likewise, the pit coal from your coal mines must be refined into coal."
+#~ msgstr "--NIEUWE DOELEN--<br>- De erts die je mijnwerkers bovenhalen is nog niet bruikbaar - het moet eerst worden omgesmolten tot ijzer. Bouw een hoogoven. Evenzo moet de koolaarde uit de kolenmijnen worden verwerkt tot steenkool - bouw daarvoor een kolenbrander.</p>"
+
+#, fuzzy
+#~ msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly.<br> To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer."
+#~ msgstr "--NIEUWE DOELEN--<br>- Een gewone mijn kan slechts een derde van alle ondergrondse voorraden uitgraven. Dan moet deze verbeterd worden tot een diepe mijn om goed te blijven werken. Om een gebouw te verbeteren, klik je erop en dan op de juiste knop in het menu dat verschijnt.<br>Arbeiders doen ervaring op met succesvol werk. Met genoeg ervaring worden ze beter gekwalificeerd, wat nodig is voor verbeterde gebouwen. Verbeter geen gebouw voordat je genoeg gekwalificeerde arbeiders hebt om erin te werken! Zulke gebouwen stellen meestal hogere eisen dan het oorspronkelijke gebouw - zo hebben diepe mijnen porties nodig in plaats van hapjes. Je zult je kroeg moeten verbeteren tot een herberg om porties te kunnen produceren uit pitabrood EN een tweede soort voedsel (vlees of vis). Let erop dat het hebben van herbergen, kroegen niet overbodig maakt - normale mijnen hebben nog steeds hapjes nodig en geen porties. Je kunt natuurlijk alle mijnen gelijk verbeteren naar diepe mijnen = grotere mijnen werken sneller, kleinere hebben goedkoper voedsel nodig. Het is net waar je zelf voor kiest.<br>Verbeter de kolenmijn en de kroeg naar hun betere versies.</p>"
+
+#~ msgid "Victory!"
+#~ msgstr "Gewonnen!"
+
+#, fuzzy
+#~ msgid "* Build a Fernery.<br> The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery."
+#~ msgstr "--NIEUWE DOELEN--<br>- Het derde materiaal nodig voor verbeterde gebouwen is stro, om daken te dekken. Stro wordt geplant in een varenkwekerij.<br>Bouw een varenkwekerij.</p>"
+
+#~ msgid "The Story goes on..."
+#~ msgstr "Het verhaal gaat verder..."

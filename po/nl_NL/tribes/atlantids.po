@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3109\n"
+"Project-Id-Version: Widelands svn3296\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-03-26 20:36+0000\n"
-"PO-Revision-Date: 2008-03-26 20:50+0100\n"
+"POT-Creation-Date: 2008-09-06 10:01+0000\n"
+"PO-Revision-Date: 2008-08-21 21:45+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -126,6 +126,10 @@ msgstr "Rokerij"
 msgid "Spiderfarm"
 msgstr "Spinnenboerderij"
 
+#: ../../../tribes/atlantids/buildings/toolsmith/conf:2
+msgid "Toolsmith's Shop"
+msgstr "Werktuigsmid"
+
 #: ../../../tribes/atlantids/buildings/tower/conf:2
 msgid "Tower"
 msgstr "Toren"
@@ -133,6 +137,10 @@ msgstr "Toren"
 #: ../../../tribes/atlantids/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Magazijn"
+
+#: ../../../tribes/atlantids/buildings/weaponsmith/conf:2
+msgid "Weapon Smithy"
+msgstr "Wapensmid"
 
 #: ../../../tribes/atlantids/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -151,8 +159,8 @@ msgid "The Widelands Development Team"
 msgstr "Het Widelands Ontwikkelteam"
 
 #: ../../../tribes/atlantids/conf:19
-msgid "The Atlantids"
-msgstr "De Atlantiden"
+msgid "Atlanteans"
+msgstr "Atlantiërs"
 
 #: ../../../tribes/atlantids/conf:20
 msgid "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
@@ -213,14 +221,6 @@ msgstr "Kolen"
 #: ../../../tribes/atlantids/wares/coal/conf:3
 msgid "To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
 msgstr "Om het goede atlantidenstaal te maken is een heet vuur nodig, maar een houtvuur is niet heet genoeg - deze kool geeft de benodigde hitte."
-
-#: ../../../tribes/atlantids/wares/coalearth/conf:2
-msgid "Coalearth"
-msgstr "Koolaarde"
-
-#: ../../../tribes/atlantids/wares/coalearth/conf:3
-msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
-msgstr "Deze aarde wordt gevonden in de diepe kolenmijnen. Het moet worden verwerkt om echte steenkool te maken."
 
 #: ../../../tribes/atlantids/wares/corn/conf:2
 msgid "Corn"
@@ -285,6 +285,14 @@ msgstr "Goud"
 #: ../../../tribes/atlantids/wares/gold/conf:3
 msgid "Gold is one of the most valuable materials only important things are garnished with it."
 msgstr "Goud is één van de meest waardevolle materialen. Enkel belangrijke zaken worden hiermee versierd."
+
+#: ../../../tribes/atlantids/wares/golden_tabard/conf:2
+msgid "Golden Tabart"
+msgstr "Gouden Tabberd"
+
+#: ../../../tribes/atlantids/wares/golden_tabard/conf:3
+msgid "A special tabard for atlantian soldiers."
+msgstr "Een speciale tabberd voor atlantiërsoldaten."
 
 #: ../../../tribes/atlantids/wares/goldore/conf:2
 msgid "Goldore"
@@ -608,7 +616,6 @@ msgid "Cuts raw pieces of granit out of laying stones."
 msgstr "Houwt stukken graniet uit  gesteente."
 
 #: ../../../tribes/atlantids/workers/toolsmith/conf:2
-#: ../../../tribes/atlantids/buildings/toolsmith/conf:2
 msgid "Toolsmith"
 msgstr "Werktuigsmid"
 
@@ -617,7 +624,6 @@ msgid "Trainer"
 msgstr "Trainer"
 
 #: ../../../tribes/atlantids/workers/weaponsmith/conf:2
-#: ../../../tribes/atlantids/buildings/weaponsmith/conf:2
 msgid "Weaponsmith"
 msgstr "Wapensmid"
 
@@ -636,3 +642,9 @@ msgstr "Houthakker"
 #: ../../../tribes/atlantids/workers/woodcutter/conf:3
 msgid "Fells trees."
 msgstr "Kapt bomen."
+
+#~ msgid "Coalearth"
+#~ msgstr "Koolaarde"
+
+#~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
+#~ msgstr "Deze aarde wordt gevonden in de diepe kolenmijnen. Het moet worden verwerkt om echte steenkool te maken."

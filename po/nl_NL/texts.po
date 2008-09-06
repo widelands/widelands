@@ -1,13 +1,13 @@
 # Widelands po/nl_NL/texts.po
-# Copyright (C) 2008 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3109\n"
+"Project-Id-Version: Widelands svn3296\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-03-26 20:36+0000\n"
-"PO-Revision-Date: 2008-02-17 22:36+0100\n"
+"POT-Creation-Date: 2008-09-06 10:01+0000\n"
+"PO-Revision-Date: 2008-08-27 22:49+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
@@ -344,107 +344,131 @@ msgstr "Ouderlingen"
 msgid "Graphics"
 msgstr "Afbeeldingen"
 
-#: ../../txts/developers:24
-msgid "Homepage"
-msgstr "Homepage"
-
-#: ../../txts/developers:29
-msgid "Sound"
-msgstr "Geluid"
-
-#: ../../txts/developers:32
+#: ../../txts/developers:22 ../../txts/developers:34
 msgid "vacant"
 msgstr "vacant"
 
-#: ../../txts/developers:36
+#: ../../txts/developers:26
+msgid "Homepage"
+msgstr "Homepage"
+
+#: ../../txts/developers:31
+msgid "Sound"
+msgstr "Geluid"
+
+#: ../../txts/developers:38
 msgid "Translation"
 msgstr "Vertaling"
 
-#: ../../txts/developers:44
+#: ../../txts/developers:46
 msgid "Coders"
 msgstr "Programmeurs"
 
-#: ../../txts/developers:66
+#: ../../txts/developers:68
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:88
+#: ../../txts/developers:90
 msgid "Musicians"
 msgstr "Musici"
 
-#: ../../txts/developers:95
+#: ../../txts/developers:97
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
-#: ../../txts/developers:101
+#: ../../txts/developers:103
 msgid "Maps and Missions"
 msgstr "Kaarten en missies"
 
-#: ../../txts/developers:109
-msgid "Barbarian Campaign Story"
-msgstr "Campagneverhaal van de Barbaren"
+#: ../../txts/developers:112
+msgid "Campaign Story"
+msgstr "Campagneverhaal"
 
 #: ../../txts/developers:115
+msgid "Barbarian"
+msgstr "Barbaren"
+
+#: ../../txts/developers:119
+msgid "Empire"
+msgstr "Keizerrijk"
+
+#: ../../txts/developers:125
 msgid "Translators"
 msgstr "Vertalers"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:129
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:135
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../../txts/developers:131
+#: ../../txts/developers:141
 msgid "Finnish"
 msgstr "Fins"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:146
 msgid "French"
 msgstr "Frans"
 
-#: ../../txts/developers:142
+#: ../../txts/developers:152
 msgid "Galician"
 msgstr "Galicisch"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:157
 msgid "German"
 msgstr "Duits"
 
-#: ../../txts/developers:154
+#: ../../txts/developers:165
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
-#: ../../txts/developers:159
+#: ../../txts/developers:170
 msgid "Hungarian"
 msgstr "Hongaars"
 
-#: ../../txts/developers:164
+#: ../../txts/developers:175
 msgid "Polish"
 msgstr "Pools"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:181
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:186
 msgid "Spanish"
 msgstr "Spaans"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:191
 msgid "Slovak"
 msgstr "Slowaaks"
 
-#: ../../txts/developers:185
+#: ../../txts/developers:196
 msgid "Swedish"
 msgstr "Zweeds"
 
-#: ../../txts/developers:193
+#: ../../txts/developers:204
 msgid "Packagers"
 msgstr "Pakketmakers"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:208
+msgid "Linux Distributions"
+msgstr "Linux Distributies"
+
+#: ../../txts/developers:219
+msgid "Other Unix Distributions"
+msgstr "Andere Unix Distributies"
+
+#: ../../txts/developers:228
+msgid "Non Unix Distributions"
+msgstr "Niet-Unix Distributies"
+
+#: ../../txts/developers:237
+msgid "Wiki and Enduser-Documentation"
+msgstr "Wiki en Eindgebruikersdocumentatie"
+
+#: ../../txts/developers:248
 msgid "Other"
 msgstr "Overige"
 
@@ -528,6 +552,42 @@ msgstr "SHIFT (Vasthouden)   Selecteer eerste alternatieve gereedschap, zolang i
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT (Vasthouden)   Selecteer tweede alternatieve gereedschap, zolang ingedrukt"
 
+#: ../../txts/editortips:13
+msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
+msgstr "Je kunt algemene help en een korte leerbeschrijving vinden in onze wiki op www.widelands.org"
+
+#: ../../txts/editortips:17
+msgid "You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
+msgstr "Je kunt meerdere natuurlijke objecten (blobs) selecteren als je CTRL ingedrukt houdt tijdens de selectie. Als je dan op de kaart klikt, zal één van de geselecteerde objecten willekeurig geplaatst worden."
+
+#: ../../txts/editortips:21
+msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
+msgstr "Net als met natuurlijke objecten (blobs), kun je ook meerdere dieren of bodemtypes selecteren met CTRL + muisklik."
+
+#: ../../txts/editortips:25
+msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
+msgstr "Als je SHIFT ingedrukt houdt zet je het eerste alternatieve gereedschap aan. Meestal is deze het tegengestelde van het gebruikelijke gereedschap (zoals het verwijderen van een object in plaats van plaatsen)."
+
+#: ../../txts/editortips:29
+msgid "Holding down ALT switches second alternative tool on (if it exists)."
+msgstr "ALT ingedrukt houden zet het tweede alternatieve gereedschap aan (als deze bestaat)."
+
+#: ../../txts/editortips:33
+msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
+msgstr "De nummertoetsen (1-0) stellen je in staat om direct de grootte in te stellen van het geselecteerde gebied rond de muis."
+
+#: ../../txts/editortips:37
+msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
+msgstr "SPATIEBALK werkt net als tijdens het normale spel. Het zet de bouwhulp aan of uit."
+
+#: ../../txts/editortips:41
+msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
+msgstr "De gereedschappen voor gebeurtenissen, acties, gebeurtenisketens en doelen zijn nog steeds zwaar in ontwikkeling. Als je een vraag hebt of een probleem hebt ontdekt, ontmoet ons in de editorfora op www.widelands.org."
+
+#: ../../txts/editortips:45
+msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
+msgstr "Je kunt referentiemateriaal vinden voor alle acties en gebeurtenissen op widelands.org."
+
 #: ../../txts/gametips:13
 msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
 msgstr "Sommige gebouwen, zoals de wijngaarde, hebben een heel klein werkgebied. Als het gebouw volledig omringd is door bomen of wegen, zal de productie stoppen."
@@ -561,8 +621,8 @@ msgid "Always build a forester and a ranger's hut, so you will not run out of tr
 msgstr "Bouw altijd een boswachters- en houthakkershut, zodat je altijd bent voorzien van boomstammen en voedsel."
 
 #: ../../txts/gametips:45
-msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
-msgstr "Nog meer vragen? Bezoek ons op www.widelands.org. Daar zijn onze veelgestelde vragen (FAQ), de Wiki en natuurlijk de forums van onze gemeenschap."
+msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
+msgstr "Nog meer vragen? Onze veelgestelde vragen (FAQ's), de wiki en uiteraard onze gemeenschapsfora zijn te vinden op www.widelands.org."
 
 #: ../../txts/gametips:49
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."

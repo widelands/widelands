@@ -1,14 +1,14 @@
 # Widelands po/nl_NL/worlds/winterland.po
-# Copyright (C) 2008 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # Rob Snelders <programming@ertai.nl>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3109\n"
+"Project-Id-Version: Widelands svn3296\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-03-26 20:36+0000\n"
-"PO-Revision-Date: 2008-02-17 09:17+0100\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
+"POT-Creation-Date: 2008-09-06 10:01+0000\n"
+"PO-Revision-Date: 2008-08-11 23:37+0100\n"
+"Last-Translator: Pietertje <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,6 +95,10 @@ msgstr "Schaap"
 msgid "Skeleton"
 msgstr "Skelet"
 
+#: ../../../worlds/winterland/bobs/snowman/conf:1
+msgid "Snowman"
+msgstr "Sneeuwman"
+
 #: ../../../worlds/winterland/bobs/sstones6/conf:1
 #: ../../../worlds/winterland/bobs/sstones4/conf:1
 #: ../../../worlds/winterland/bobs/sstones7/conf:1
@@ -113,6 +117,10 @@ msgstr "Staande stenen"
 #: ../../../worlds/winterland/bobs/stones2/conf:1
 msgid "Stones"
 msgstr "Stenen"
+
+#: ../../../worlds/winterland/bobs/track/conf:1
+msgid "Track"
+msgstr "Pad"
 
 #: ../../../worlds/winterland/bobs/tree2/conf:4
 #: ../../../worlds/winterland/bobs/tree7/conf:4

@@ -1,12 +1,12 @@
 # Widelands po/nl_NL/worlds/desert.po
-# Copyright (C) 2008 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # Rob Snelders <programming@ertai.nl>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3109\n"
+"Project-Id-Version: Widelands svn3296\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-03-26 20:36+0000\n"
+"POT-Creation-Date: 2008-09-06 10:01+0000\n"
 "PO-Revision-Date: 2007-09-01 21:59+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
