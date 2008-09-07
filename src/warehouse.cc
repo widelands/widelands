@@ -710,7 +710,12 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 			}
 		}
 
-		ware = tribe.get_worker_descr(ware)->becomes();
+		if (can_create_worker(game,ware)){
+			// don't want to use an upgraded worker, so create new one.
+			create_worker(game,ware);
+		} else {
+			ware = tribe.get_worker_descr(ware)->becomes();
+		}
 	} while (ware != Ware_Index::Null());
 
 	throw wexception("Warehouse::launch_worker: Worker doesn't actually exist");
