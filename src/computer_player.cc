@@ -556,8 +556,8 @@ bool Computer_Player::construct_building ()
 					if (j->cnt_built+j->cnt_under_construction==0)
 						prio += 2;
 
-					// Pull type economy, build consumeres until 
-					// input resource usage is overbooked 2 to 1, 
+					// Pull type economy, build consumeres until
+					// input resource usage is overbooked 2 to 1,
 					// then throttle down.
 					for (uint32_t k = 0; k < j->inputs.size(); ++k) {
 						prio += 8 * wares[j->inputs[k]].producers;
@@ -565,15 +565,15 @@ bool Computer_Player::construct_building ()
 					}
 
 					// don't make more than one building, if supply line is broken.
-					if (!check_supply(*j) && 
+					if (!check_supply(*j) &&
 					    j->get_total_count() > 0)
 						prio -= 12;
 
-					// normalize by output count so that multipurpose 
+					// normalize by output count so that multipurpose
 					// buildings are not too good
 					int32_t output_prio=0;
 					for (uint32_t k = 0; k < j->outputs.size(); ++k) {
-						WareObserver & wo = wares[j->outputs[k]]; 
+						WareObserver & wo = wares[j->outputs[k]];
 						output_prio -= 12 * wo.producers;
 						output_prio +=  8 * wo.consumers;
 						output_prio +=  4 * wo.preciousness;
@@ -596,7 +596,7 @@ bool Computer_Player::construct_building ()
 						prio -= 6 * (j->cnt_built + j->cnt_under_construction);
 						prio += 4 * wares[j->production_hint].consumers;
 						prio += 2 * wares[j->production_hint].preciousness;
-						
+
 						// add bonus near buildings outputting hinted ware
 						if (bf->producers_nearby[j->production_hint] > 0)
 							++prio;
@@ -758,10 +758,10 @@ bool FindNodeUnowned::accept (const Map &, const FCoords fc) const
 }
 
 
-struct FindNodeWater 
+struct FindNodeWater
 {
 	bool accept(const Map & map, const FCoords& coord) const {
-		return 
+		return
 			(map.world().terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
 			(map.world().terrain_descr(coord.field->terrain_r()).get_is() & TERRAIN_WATER);
 	}
@@ -801,7 +801,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	FindNodeWater find_water;
 	map.find_fields(Area<FCoords>(field->coords, 4), &water_list, find_water);
 	field->water_nearby = water_list.size();
-	
+
 	FCoords fse;
 	map.get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
 
@@ -950,7 +950,7 @@ void Computer_Player::gain_building (Building* b)
 	BuildingObserver & bo = get_building_observer(b->name().c_str());
 
 	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
-		BuildingObserver &target_bo = 
+		BuildingObserver &target_bo =
 			get_building_observer
 				(dynamic_cast<const ConstructionSite &>(*b)
 				 .building().name().c_str());
@@ -979,7 +979,7 @@ void Computer_Player::lose_building (Building* b)
 	BuildingObserver & bo = get_building_observer(b->name().c_str());
 
 	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
-		BuildingObserver &target_bo = 
+		BuildingObserver &target_bo =
 			get_building_observer
 			(dynamic_cast<const ConstructionSite &>(*b)
 			 .building().name().c_str());
@@ -1298,6 +1298,11 @@ void Computer_Player::construct_roads ()
 	std::queue<int32_t> queue;
 	Map & map = game().map();
 
+	if( economies.size() < 2 ) {
+	  log("Computer_Player(%u): only one economy, no need for new roads\n",player_number);
+	  return;
+	}
+
 	for
 		(std::list<EconomyObserver *>::iterator i = economies.begin();
 		 i != economies.end();
@@ -1463,9 +1468,9 @@ bool Computer_Player::check_supply(BuildingObserver const &bo)
 		it != buildings.end();
 		++it)
 		{
-			if (it->cnt_built && 
+			if (it->cnt_built &&
 			    std::find(it->outputs.begin(), it->outputs.end(), bo.inputs[i]) != it->outputs.end() &&
-			    check_supply(*it)) 
+			    check_supply(*it))
 			{
 				++supplied;
 				break;
