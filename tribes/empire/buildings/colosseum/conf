@@ -9,14 +9,25 @@ worker=carrier
 max_soldiers=8
 train=evade
 program=Sleep
-program=upgrade_evade_1 # This is needed to run the scripts
+program=upgrade_evade_0 # This is needed to run the scripts
+program=upgrade_evade_1
 
 [Sleep]
 0=sleep 5000
 
 [evade]
-min_level=1
+min_level=0
 max_level=1
+
+[upgrade_evade_0]
+0=check bread
+1=check fish,meat
+2=check_soldier evade 0 # Fails when aren't any soldier of level 0 attack
+3=sleep 30000
+4=check_soldier evade 0 # Because the soldier can be expulsed by the player
+5=consume bread
+6=consume fish,meat
+7=train evade 0 1
 
 [upgrade_evade_1]
 0=check bread
