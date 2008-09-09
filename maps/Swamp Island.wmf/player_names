@@ -1,0 +1,16 @@
+# Automatically created by Widelands svn3300
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Spieler 1"
+tribe="barbarians"
+
+[player_2]
+name="Spieler 2"
+tribe="barbarians"
+
+[player_3]
+name="Spieler 3"
+tribe="barbarians"
