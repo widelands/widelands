@@ -1417,6 +1417,7 @@ bool WLApplication::load_game()
 		emergency_save(game);
 		throw;
 	}
+	return false; // keep compiler silent.
 }
 
 
