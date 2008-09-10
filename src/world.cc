@@ -161,6 +161,10 @@ World::World(std::string const & name) : m_basedir("worlds/" + name) {
 		parse_terrains();
 		parse_bobs();
 
+		// General bobs mainly for scenarios
+		m_basedir = "global";
+		parse_bobs();
+
 		g_fs->RemoveFileSystem(&fs);
 	} catch (std::exception const & e) {
 		// tag with world name

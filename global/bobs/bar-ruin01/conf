@@ -1,0 +1,7 @@
+[global]
+type="diminishing"
+stock=1
+descname =_ Ruin of a barbarian citadel
+size=big
+
+hotspot=64 53
