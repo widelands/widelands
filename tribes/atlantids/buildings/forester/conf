@@ -18,8 +18,8 @@ stone=1
 
 [idle]
 pics=forester_i_??.png  # ???
-hotspot=58 54
+hotspot=50 58
 
 [build]
 pics=forester_i_??.png  # ???
-hotspot=58 54
+hotspot=50 58

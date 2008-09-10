@@ -86,8 +86,8 @@ void Computer_Player::late_initialization ()
 	}
 
 	// Building hints for computer player
-	std::string stoneproducer = "lumberjack";
-	std::string trunkproducer = "forester";
+	std::string stoneproducer = "quarry";
+	std::string trunkproducer = "lumberjack";
 	std::string forester = "forester";
 	std::string fisher = "fisher";
 
