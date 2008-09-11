@@ -1,0 +1,6 @@
+[global]
+type="boring"
+descname =_ Debris
+size=small
+
+hotspot=35 35
