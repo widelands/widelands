@@ -11,13 +11,12 @@ from Distribute import *
 
 # Sanity checks
 EnsurePythonVersion(2, 3)
-EnsureSConsVersion(0, 97)
+EnsureSConsVersion(1, 0, 0)
 
 # Speedup. If you have problems with inconsistent or wrong builds, look here first
 SetOption('max_drift', 1)
 SetOption('implicit_cache', 1)
-SourceSignatures('MD5')
-#SourceSignatures('timestamp')
+Decider('MD5-timestamp')
 
 # write only *one* signature file in a place where we don't care
 SConsignFile('build/scons-signatures')
@@ -257,6 +256,7 @@ distcleanactions=[
 	Delete('utils/scons-README'),
 	Delete('utils/scons-local-0.96.1'),
 	Delete('utils/scons-local-0.97'),
+	Delete('utils/scons-local-1.0.1'),
 	Delete('utils/scons-time.py'),
 	Delete('utils/sconsign.py'),
 	Delete('utils/buildcat.pyc'),

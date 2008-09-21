@@ -8,6 +8,6 @@ distadd(env, 'utils/confgettext.py')
 distadd(env, 'utils/count-longlines.py')
 distadd(env, 'utils/detect_misused_tabs.sh')
 distadd(env, 'utils/replace.py')
-distadd(env, 'utils/scons-local-0.97.tar.gz')
+distadd(env, 'utils/scons-local-1.0.1.tar.gz')
 distadd(env, 'utils/tiki2widelands.py')
 

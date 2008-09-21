@@ -27,8 +27,8 @@ Make sure you have them all. If you encounter library versions that do not work,
 please tell us.
 
 For compiling, you will also need
-   - Python >= 2.4
-   - scons >= 0.97 (optional but recommended, see below)
+   - Python >= 2.3
+   - scons >= 1.0.0 (optional but recommended, see below)
 If you have a desparate need to use older Python versions then tell us. It'd be
 possible, but the inconvenience seems not to be worthwile so far.
 

@@ -5,7 +5,7 @@ Import('*')
 
 SRC=simpleglob("*.cc")
 
-srcenv=env.Copy()
+srcenv=env.Clone()
 
 srcenv.Append(CPPPATH=['#/src'])
 
