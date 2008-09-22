@@ -102,8 +102,10 @@ procedure Whitespace_Checker is
       Put_Line (": " & Message);
    end Put_Error;
 
-   procedure Read_Multiline_Comment; pragma Inline (Read_Multiline_Comment);
-   procedure Read_Multiline_Comment is begin
+   procedure Read_Multiline_Comment;
+   procedure Read_Multiline_Comment is
+      HT_Is_Allowed : Boolean := False;
+   begin
       --  When this is called, "/*" has just been read. Therefore current
       --  character is '*'. We change that to ' ' so that it does not think
       --  that the comment is over if it reads a '/' immediately.
@@ -113,10 +115,17 @@ procedure Whitespace_Checker is
          case Current_Character is
             when LF     =>
                Next_Line;
+               HT_Is_Allowed := True;
+            when HT     =>
+               if not HT_Is_Allowed then
+                  Put_Error ("indentation is only allowed at line begin");
+               end if;
+            when ' '    =>
+               null;
             when '/'    =>
                exit when Previous_Character = '*';
             when others =>
-               null;
+               HT_Is_Allowed := False;
          end case;
       end loop;
    end Read_Multiline_Comment;
@@ -294,6 +303,10 @@ procedure Whitespace_Checker is
                if Previous_Character = '/' then --  // comment
                   loop
                      Next_Character;
+                     if Current_Character = HT then
+                        Put_Error
+                          ("indentation is only allowed at line begin");
+                     end if;
                      exit Read_Code_Loop when Current_Character = LF;
                   end loop;
                end if;

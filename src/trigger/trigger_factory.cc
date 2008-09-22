@@ -54,7 +54,7 @@ Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 		 "changes triggers")
 	},
 	{
-		"ownership",          _("Own Area Trigger"),
+		"ownership",          _("Ownership Trigger"),
 		_
 		("Triggers when the the player owns at least the specified number of "
 		 "locations in the specified area. Unless it is a one-time trigger, it "

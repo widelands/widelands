@@ -245,7 +245,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			 _
 			 	("Can't remove player. It is referenced in some place. Remove "
 			 	 "all buildings, bobs, triggers and events that depend on this "
-			 	 "player and try again"),
+			 	 "player and try again."),
 			 UI::MessageBox::OK);
 		mmb.run();
 	}
@@ -277,7 +277,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 			 _
 			 	("Can't change player tribe. It is referenced in some place. "
 			 	 "Remove all buildings, bobs, triggers and events that depend on "
-			 	 "this tribe and try again"),
+			 	 "this tribe and try again."),
 			 UI::MessageBox::OK);
 		mmb.run();
 	}

@@ -185,7 +185,7 @@ std::string FileSystem::fixCrossFile(std::string path) {
 	std::string fixedpath(path);
 	std::string temp;
 	uint32_t path_size = path.size();
-	for(uint32_t i = 0; i < path_size; ++i) {
+	for (uint32_t i = 0; i < path_size; ++i) {
 		temp = fixedpath.at(i);
 		if (temp == crosssep)
 			fixedpath.replace(i, 1, fsep);
@@ -303,7 +303,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	std::string fixedpath(path);
 	std::string temp;
 	uint32_t path_size = path.size();
-	for(uint32_t i = 0; i < path_size; ++i) {
+	for (uint32_t i = 0; i < path_size; ++i) {
 		temp = fixedpath.at(i);
 		if (temp == "/")
 			fixedpath.replace(i, 1, "\\");

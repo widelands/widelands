@@ -54,8 +54,8 @@ struct Objective : public Named, public Referencer<Trigger> {
 
 	const std::string & visname() const throw ()  {return m_visname;}
 	const std::string & descr() const throw ()    {return m_descr;}
-	void set_visname(const std::string & new_name){m_visname = new_name;}
-	void set_descr(const std::string & new_descr) {m_descr = new_descr;}
+	void set_visname(std::string const & new_name)  {m_visname = new_name;}
+	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
 	bool get_is_visible()       const throw ()    {return m_is_visible;}
 	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
 

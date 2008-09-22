@@ -1191,7 +1191,7 @@ void WLApplication::mainmenu_multiplayer()
 		throw wexception("Initialisation of Wsock2-library failed");
 #endif
 	bool inmenu = true;
-	while(inmenu == true) { // stay in menu until player clicks "back" button
+	while (inmenu) { // stay in menu until player clicks "back" button
 		Fullscreen_Menu_NetSetup ns; // must be reinitalised, else graphics look strange.
 		switch (ns.run()) {
 		case Fullscreen_Menu_NetSetup::HOSTGAME: {
@@ -1273,7 +1273,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.multiplayer = false;
 	}
 
-	virtual void setScenario(bool set) { s.scenario = set; }
+	virtual void setScenario(bool const set) {s.scenario = set;}
 
 	virtual const GameSettings& settings() {return s;}
 

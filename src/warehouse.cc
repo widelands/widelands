@@ -710,9 +710,9 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 			}
 		}
 
-		if (can_create_worker(game,ware)){
+		if (can_create_worker(game, ware)) {
 			// don't want to use an upgraded worker, so create new one.
-			create_worker(game,ware);
+			create_worker(game, ware);
 		} else {
 			ware = tribe.get_worker_descr(ware)->becomes();
 		}

@@ -144,7 +144,7 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_Editor_MapSelect::double_clicked(uint32_t) { ok(); }
+void Fullscreen_Menu_Editor_MapSelect::double_clicked(uint32_t) {ok();}
 
 /**
  * fill the file list
@@ -211,4 +211,6 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		}
 	}
 
-	if (m_list.size()) m_list.select(0);}
+	if (m_list.size())
+		m_list.select(0);
+}

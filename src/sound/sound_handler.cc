@@ -681,7 +681,7 @@ void Sound_Handler::set_disable_music(bool disable)
 	if (m_lock_audio_disabling || m_disable_music == disable)
 		return;
 
-	if (disable==true) {
+	if (disable) {
 		stop_music();
 		m_disable_music = true;
 	} else {

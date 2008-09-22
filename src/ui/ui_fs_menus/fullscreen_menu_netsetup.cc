@@ -200,7 +200,7 @@ void Fullscreen_Menu_NetSetup::clicked_lasthost() {
 	Section *s = g_options.get_section("global");
 	std::string host = s->get_string("lasthost", "");
 	hostname.setText(host);
-	if(host != "")
+	if (host != "")
 		joingame.set_enabled(hostname.text().size());
 	opengames.select(opengames.no_selection_index());
 }

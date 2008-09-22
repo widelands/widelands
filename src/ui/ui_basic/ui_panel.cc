@@ -144,13 +144,12 @@ int32_t Panel::run()
 	{
 		Section *s = g_options.pull_section("global");
 		int32_t maxfps = s->get_int("maxfps", 25);
-		if(maxfps < 5)
+		if (maxfps < 5)
 			maxfps = 5;
-		minTime=(1000/maxfps);
+		minTime = 1000 / maxfps;
 	}
 
-	while (_running)
-	{
+	while (_running) {
 		startTime = SDL_GetTicks();
 
 		static InputCallback icb = {
@@ -190,10 +189,10 @@ int32_t Panel::run()
 		WLApplication::yield_double_game ();
 #endif
 #endif
-     // Wait until 1second/maxfps are over
-		diffTime = SDL_GetTicks()-startTime;
-		if(diffTime<minTime)
-			SDL_Delay(minTime-diffTime);
+		//  Wait until 1second/maxfps are over.
+		diffTime = SDL_GetTicks() - startTime;
+		if (diffTime < minTime)
+			SDL_Delay(minTime - diffTime);
 	}
 	g_gr->update_fullscreen();
 	end();

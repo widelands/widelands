@@ -577,7 +577,7 @@ template<typename T> static void draw_field_int
 	Surface const & rt_busy   = *g_gr->get_road_texture(Widelands::Road_Busy);
 
 	dst.lock();
-	
+
 	render_triangle<T> (dst, f_vert, br_vert, r_vert, f_r_texture);
 	render_triangle<T> (dst, f_vert, bl_vert, br_vert, f_d_texture);
 

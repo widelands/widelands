@@ -143,7 +143,7 @@ void NetClient::run ()
 				(game, d->playernum+1, false, true);
 		game.set_iabase(ipl);
 		ipl->set_chat_provider(this);
-		if(!d->settings.savegame) // new map
+		if (!d->settings.savegame) //  new map
 			game.init_newgame(loaderUI, d->settings);
 		else // savegame
 			game.init_savegame(loaderUI, d->settings);
@@ -152,7 +152,7 @@ void NetClient::run ()
 		d->lasttimestamp_realtime = WLApplication::get()->get_time();
 
 		d->modal = game.get_iabase();
-		if(!d->settings.savegame) // new map
+		if (!d->settings.savegame) //  new map
 			game.run(loaderUI);
 		else // savegame
 			game.run(loaderUI, true);

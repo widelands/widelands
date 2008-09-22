@@ -101,7 +101,7 @@ void Fullscreen_Menu_LaunchGame::start()
 		 &&
 		 m_settings->canChangeMap()
 		 &&
-		 (m_settings->settings().multiplayer == false)) // not in multiplayer
+		 not m_settings->settings().multiplayer)
 	{
 		select_map();
 
@@ -140,11 +140,11 @@ void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider * const chat)
 void Fullscreen_Menu_LaunchGame::back_clicked()
 {
 	if (! m_settings->settings().multiplayer) {
-		// the following behaviour might look strange at first view, but for the
-		// user it seems as if the launchgame-menu is a child of mapselect and not
-		// the other way around - just end_modal(0); will be seen as bug from
-		// user point of view, so we reopen the mapselect-menu.
-		m_settings->setMap("","",0);
+		//  The following behaviour might look strange at first view, but for the
+		//  user it seems as if the launchgame-menu is a child of mapselect and
+		//  not the other way around - just end_modal(0); will be seen as bug
+		//  from user point of view, so we reopen the mapselect-menu.
+		m_settings->setMap("", "", 0);
 		select_map();
 		if (m_settings->settings().mapname.size() == 0)
 			end_modal(0);
@@ -159,7 +159,7 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
  */
 void Fullscreen_Menu_LaunchGame::start_clicked()
 {
-	if(!g_fs->FileExists(m_filename))
+	if (!g_fs->FileExists(m_filename))
 		throw wexception("Tried to start a game with a file you don't have.");
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
@@ -192,21 +192,21 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	m_select_save.set_enabled
 			(m_settings->settings().multiplayer & m_settings->canChangeMap());
 
-	if(m_settings->settings().scenario == true)
+	if (m_settings->settings().scenario)
 		set_scenario_values();
 
 	// Print warnings and information between title and player desc. group
 	if (!g_fs->FileExists(m_filename)) {
 		m_notes.set_text
 				(_("WARNING!!! Host selected file \"")
-				+ m_filename
-				+ _("\" for this game, but you don't have it.")
-				+ _(" Please add it manually."));
+				 + m_filename
+				 + _("\" for this game, but you don't have it.")
+				 + _(" Please add it manually."));
 		for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 			m_players[i]->refresh();
 		m_notes.set_color(UI_FONT_CLR_WARNING);
 	} else {
-		if(!m_is_savegame) {
+		if (!m_is_savegame) {
 			m_notes.set_text("");
 
 			// update the player description groups
@@ -224,14 +224,14 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			int8_t i = 1;
 
 			// Print information about last players
-			for(; i <= m_nr_players; ++i) {
+			for (; i <= m_nr_players; ++i) {
 				snprintf(buf, sizeof(buf), "  [%i] ", i);
 				notetext += buf;
 
 				if (m_player_save_name[i-1].empty()) {
 					notetext += "--";
-					// set player description group disabled so
-					// noone can take this place
+					//  set player description group disabled so that no-one can
+					//  take this place
 					m_players[i-1]->enable_pdg(false);
 					continue;
 				}
@@ -258,7 +258,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 
 
 /**
- * select a map and send all informations to the user interface.
+ * Select a map and send all information to the user interface.
  */
 void Fullscreen_Menu_LaunchGame::select_map()
 {
@@ -287,8 +287,8 @@ void Fullscreen_Menu_LaunchGame::select_map()
 
 
 /**
- * select a multi player savegame and send all informations
- * to the user interface.
+ * Select a multi player savegame and send all information to the user
+ * interface.
  */
 void Fullscreen_Menu_LaunchGame::select_savegame()
 {
@@ -331,7 +331,7 @@ void Fullscreen_Menu_LaunchGame::set_scenario_values()
 				("settings()->scenario was set to true, but no map is available");
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
 	Widelands::Map_Loader * const ml =
-			map.get_correct_loader(m_settings->settings().mapfilename.c_str());
+		map.get_correct_loader(m_settings->settings().mapfilename.c_str());
 	map.set_filename(m_settings->settings().mapfilename.c_str());
 	ml->preload_map(true);
 	uint8_t nrplayers = map.get_nrplayers();
@@ -357,7 +357,7 @@ void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
 		strbuf = "";
 		snprintf(buf, sizeof(buf), "player_%i", i);
 		Section & s = prof.get_safe_section(buf);
-		m_player_save_name [i-1] = s.get_string("name" );
+		m_player_save_name [i-1] = s.get_string("name");
 		m_player_save_tribe[i-1] = s.get_string("tribe");
 
 		if (m_player_save_tribe[i-1].empty())

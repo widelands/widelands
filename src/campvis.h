@@ -25,14 +25,14 @@
 
 #include <stdint.h>
 
-struct Campaign_visiblity_save {
+struct Campaign_visibility_save {
 	std::string get_path();
-	void set_campaign_visiblity(std::string, bool);
-	void set_map_visiblity(std::string, bool);
+	void set_campaign_visibility(std::string const &, bool);
+	void set_map_visibility     (std::string const &, bool);
 
 private:
-	void make_campvis(std::string);
-	void update_campvis(std::string);
+	void make_campvis  (std::string const &);
+	void update_campvis(std::string const &);
 };
 
 

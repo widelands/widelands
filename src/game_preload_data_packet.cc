@@ -73,8 +73,8 @@ throw (_wexception)
 	s.set_string("mapname",        game->map().get_name());  // Name of map
 	s.set_int   ("player_nr",      game->get_ipl()->get_player_number()); // player that saved the game.
 
-	std::string bg(                game->map().get_background());
-	if(bg.empty())
+	std::string bg                (game->map().get_background());
+	if (bg.empty())
 		bg =                        game->map().get_world_name();
 	s.set_string("background",     bg);
 

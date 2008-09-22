@@ -215,14 +215,14 @@ m_label_minute
 	m_label_game_options.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 }
 
-void Fullscreen_Menu_Options::autosaveChange(int32_t arg) {
-	if(arg == plus)
-		m_asvalue++;
-	if(arg == minus)
-		m_asvalue--;
-	if(arg == plusTen)
+void Fullscreen_Menu_Options::autosaveChange(int32_t const arg) {
+	if (arg == plus)
+		++m_asvalue;
+	if (arg == minus)
+		--m_asvalue;
+	if (arg == plusTen)
 		m_asvalue += 10;
-	if(arg == minusTen)
+	if (arg == minusTen)
 		m_asvalue -= 10;
 	update_autosave();
 }
@@ -237,11 +237,11 @@ void Fullscreen_Menu_Options::update_autosave() {
 	m_value_autosave.set_text(text);
 }
 
-void Fullscreen_Menu_Options::maxFpsChange(int32_t arg) {
-	if(arg == plus)
-		m_maxfps++;
-	if(arg == minus)
-		m_maxfps--;
+void Fullscreen_Menu_Options::maxFpsChange(int32_t const arg) {
+	if (arg == plus)
+		++m_maxfps;
+	if (arg == minus)
+		--m_maxfps;
 	update_maxfps();
 }
 

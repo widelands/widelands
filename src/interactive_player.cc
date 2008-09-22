@@ -202,13 +202,13 @@ m_toggle_help
 
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	if(multiplayer == true) {
+	if (multiplayer) {
 		m->chatDisplay = new ChatDisplay(this, 10, 25, get_w()-10, get_h()-25);
 		m_toggle_chat.set_visible(false);
 		m_toggle_chat.set_enabled(false);
 	} else
 		m_toggle_chat.set_visible(false);
-	if(scenario == false)
+	if (not scenario)
 		m_toggle_objectives.set_visible(false);
 
 	m_toolbar.resize();

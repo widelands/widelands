@@ -137,15 +137,17 @@ void Map_View::stop_dragging() {
  * Right-release: disable dragging
  * Left-press:    field action window
  */
-bool Map_View::handle_mousepress( Uint8 btn, int32_t x, int32_t y) {
+bool Map_View::handle_mousepress
+	(Uint8 const btn, int32_t const x, int32_t const y)
+{
 #ifdef __APPLE__
-  // SDL does on Mac hardcoded middle mouse button emulation (alt+left).
-  // This interferes with the editor, which is using alt+left click for third
-  // tool.  So just handle middle mouse button like left one.
-        if (btn == SDL_BUTTON_MIDDLE)
-                btn = SDL_BUTTON_LEFT;
+	//  SDL does on Mac hardcoded middle mouse button emulation (alt+left).
+	//  This interferes with the editor, which is using alt+left click for third
+	//  tool.  So just handle middle mouse button like left one.
+	if (btn == SDL_BUTTON_MIDDLE)
+		btn = SDL_BUTTON_LEFT;
 #endif
-	if        (btn == SDL_BUTTON_LEFT)  {
+	if (btn == SDL_BUTTON_LEFT) {
 		track_sel(Point(x, y));
 
 		fieldclicked.call();

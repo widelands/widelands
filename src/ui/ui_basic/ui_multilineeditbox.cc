@@ -265,7 +265,7 @@ void Multiline_Editbox::set_text(const char* str)
 }
 
 /**
- * Calculate the heigth position of the cursor and write it to m_textpos
+ * Calculate the height position of the cursor and write it to m_textpos
  * so the scrollbar can follow the cursor.
  */
 void Multiline_Editbox::CalcLinePos()
@@ -281,17 +281,15 @@ void Multiline_Editbox::CalcLinePos()
 	int32_t lbtb = 0; // linebreaks to bottom
 
 	for (int32_t i = m_cur_pos; i >= 0; --i)
-		if(str[i] == '\n')
+		if (str[i] == '\n')
 			++lbtt;
 	for (int32_t i = m_cur_pos + 1; i <= leng; ++i)
-		if(str[i] == '\n')
+		if (str[i] == '\n')
 			++lbtb;
 
-	if((lbtt == 0) & (lbtb == 0))
-		m_textpos = 0;
-	else
-		// calculate as double, so it comes closer to the true value.
-		m_textpos = ((double)(m_textheight - get_h()))/(lbtb + lbtt) * lbtt;
+	m_textpos = //  Calculate as double, so it comes closer to the true value.
+		(lbtt == 0) & (lbtb == 0) ?
+		0 : (static_cast<double>(m_textheight - get_h()))/(lbtb + lbtt) * lbtt;
 }
 
 };

@@ -28,8 +28,9 @@
 
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
-	GameTips(UI::ProgressWindow & progressWindow,
-				std::string filename = "txts/gametips");
+	GameTips
+		(UI::ProgressWindow & progressWindow,
+		 std::string filename = "txts/gametips");
 	virtual ~GameTips();
 
 	virtual void update(bool repaint);

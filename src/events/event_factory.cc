@@ -82,7 +82,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	},
 	{
 		"reveal_objective",       _("Reveal objective"),
-		_("Reveal (or hide) an objective")
+		_("Reveal an objective")
 	},
 	{
 		"reveal_scenario",        _("Reveal scenario"),

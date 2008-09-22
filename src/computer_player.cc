@@ -565,8 +565,7 @@ bool Computer_Player::construct_building ()
 					}
 
 					// don't make more than one building, if supply line is broken.
-					if (!check_supply(*j) &&
-					    j->get_total_count() > 0)
+					if (!check_supply(*j) && j->get_total_count() > 0)
 						prio -= 12;
 
 					// normalize by output count so that multipurpose
@@ -603,11 +602,11 @@ bool Computer_Player::construct_building ()
 					}
 
 					int32_t iosum=0;
-					for(size_t k=0;k<j->inputs.size();k++)
+					for (size_t k = 0; k < j->inputs.size(); ++k)
 						if (bf->producers_nearby[j->inputs[k]]>0) ++iosum;
 						else if (bf->consumers_nearby[j->inputs[k]]>0) --iosum;
 					if (iosum < -2) iosum = -2;
-					for(size_t k=0;k<j->outputs.size();k++)
+					for (size_t k = 0; k < j->outputs.size(); ++k)
 						if (bf->consumers_nearby[j->outputs[k]]>0) ++iosum;
 					prio += 2*iosum;
 				}
@@ -621,7 +620,7 @@ bool Computer_Player::construct_building ()
 				int effect = bf->water_nearby - 12;
 				prio += effect > 0 ? static_cast<int>(sqrt(effect)) : effect;
 				// if same producers are nearby, then give some penalty
-				for(size_t k=0;k<j->outputs.size();k++)
+				for (size_t k = 0; k < j->outputs.size(); ++k)
 					if (bf->producers_nearby[j->outputs[k]]>0) prio-=3;
 			}
 
@@ -1298,9 +1297,11 @@ void Computer_Player::construct_roads ()
 	std::queue<int32_t> queue;
 	Map & map = game().map();
 
-	if( economies.size() < 2 ) {
-	  log("Computer_Player(%u): only one economy, no need for new roads\n",player_number);
-	  return;
+	if (economies.size() < 2) {
+		log
+			("Computer_Player(%u): only one economy, no need for new roads\n",
+			 player_number);
+		return;
 	}
 
 	for
@@ -1462,20 +1463,23 @@ void Computer_Player::construct_roads ()
 bool Computer_Player::check_supply(BuildingObserver const &bo)
 {
 	size_t supplied = 0;
-	for (size_t i=0;i<bo.inputs.size();++i)
-	{
-		for (std::list<BuildingObserver>::iterator it = buildings.begin();
-		it != buildings.end();
-		++it)
+	for (size_t i = 0; i < bo.inputs.size(); ++i)
+		for
+			(std::list<BuildingObserver>::iterator it = buildings.begin();
+			 it != buildings.end();
+			 ++it)
 		{
-			if (it->cnt_built &&
-			    std::find(it->outputs.begin(), it->outputs.end(), bo.inputs[i]) != it->outputs.end() &&
-			    check_supply(*it))
+			if
+				(it->cnt_built &&
+				 std::find(it->outputs.begin(), it->outputs.end(), bo.inputs[i])
+				 !=
+				 it->outputs.end()
+				 &&
+				 check_supply(*it))
 			{
 				++supplied;
 				break;
 			}
 		}
-	}
 	return supplied == bo.inputs.size();
 }

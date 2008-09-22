@@ -77,7 +77,7 @@ private:
 		uint8_t tree_consumers_nearby;
 		uint8_t stone_consumers_nearby;
 		uint8_t water_nearby;
-		
+
 		int16_t         military_influence;
 		std::vector<uint8_t> consumers_nearby;
 		std::vector<uint8_t> producers_nearby;

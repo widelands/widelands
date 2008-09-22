@@ -17,7 +17,7 @@ msgstr ""
 
 #: ../../src/ware_statistics_menu.cc:355
 msgid "Ware Statistics"
-msgstr "Varu statistik"
+msgstr "Varustatistik"
 
 #: ../../src/ware_statistics_menu.cc:427
 #: ../../src/general_statistics_menu.cc:197
@@ -81,7 +81,7 @@ msgstr "Inställningar"
 #: ../../src/interactive_player.cc:173
 #, fuzzy
 msgid "Statistics"
-msgstr "Varu statistik"
+msgstr "Statistik"
 
 #: ../../src/interactive_player.cc:175
 #: ../../src/editor/editorinteractive.cc:85
@@ -359,7 +359,7 @@ msgstr ""
 
 #: ../../src/watchwindow.cc:108 ../../src/fieldaction.cc:447
 msgid "Watch"
-msgstr "Iakta"
+msgstr "Iaktta"
 
 #: ../../src/watchwindow.cc:122
 msgid "Follow"
@@ -410,7 +410,7 @@ msgstr "Skapar spelarnas infrastruktur"
 #: ../../src/game_objectives_menu.cc:36
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:160
 msgid "Objectives Menu"
-msgstr "Mål"
+msgstr "Uppdragsmål"
 
 #: ../../src/map.cc:394
 msgid "No Name"
@@ -529,7 +529,7 @@ msgstr "Visa arbetare"
 
 #: ../../src/productionsite.cc:184
 msgid "(not occupied)"
-msgstr "(ej ockuperad)"
+msgstr "(obemannad)"
 
 #: ../../src/productionsite.cc:189
 #, c-format
@@ -664,7 +664,7 @@ msgstr "En fil med namnet "
 
 #: ../../src/game_main_menu_save_game.cc:218
 msgid " already exists. Overwrite?"
-msgstr " finns redan. Skriva över?"
+msgstr " finns redan. Skriv över?"
 
 #: ../../src/militarysite.cc:78 ../../src/warehouse.cc:306
 msgid " conquer"
@@ -686,7 +686,7 @@ msgstr[1] "%d soldater"
 
 #: ../../src/s2map.cc:226
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Bluebyte Settlers II Bana. Ingen kommentar angiven!"
+msgstr "Bluebyte Settlers II-bana. Ingen kommentar angiven!"
 
 #: ../../src/playerdescrgroup.cc:117
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:131
@@ -783,7 +783,7 @@ msgstr "Militär"
 
 #: ../../src/game_debug_ui.cc:271
 msgid "Debug Field"
-msgstr "Debugfält"
+msgstr "Avlusningsfält"
 
 #: ../../src/game_debug_ui.cc:320
 #, c-format
@@ -814,7 +814,7 @@ msgstr "Stoppa"
 #: ../../src/building_ui.cc:631
 #, c-format
 msgid "Enhance to %s"
-msgstr "Förbättra till %s"
+msgstr "Utöka till %s"
 
 #: ../../src/building_ui.cc:650
 msgid "Destroy"
@@ -826,11 +826,11 @@ msgstr "Visa arbetsområde"
 
 #: ../../src/building_ui.cc:672
 msgid "Debug"
-msgstr "Debugfält"
+msgstr "Avlusa"
 
 #: ../../src/building_ui.cc:795
 msgid "Hide workarea"
-msgstr "Göm arbetsfält"
+msgstr "Göm arbetsområde"
 
 #: ../../src/building_ui.cc:1094
 msgid "Worker Listing"
@@ -956,15 +956,15 @@ msgstr "%u%% byggt"
 
 #: ../../src/fieldaction.cc:241
 msgid "Build small buildings"
-msgstr "Bygg mindre byggnader"
+msgstr "Bygg små byggnader"
 
 #: ../../src/fieldaction.cc:242
 msgid "Build medium buildings"
-msgstr "Bygg normalstora byggnader"
+msgstr "Bygg mellanstora byggnader"
 
 #: ../../src/fieldaction.cc:243
 msgid "Build large buildings"
-msgstr "Bygg större byggnader"
+msgstr "Bygg stora byggnader"
 
 #: ../../src/fieldaction.cc:277
 msgid "Action"
@@ -1004,7 +1004,7 @@ msgstr "Växla byggnadsetikett"
 
 #: ../../src/fieldaction.cc:438
 msgid "Debug window"
-msgstr "Debugfält"
+msgstr "Avlusningsfönster"
 
 #: ../../src/fieldaction.cc:443 ../../src/fieldaction.cc:593
 msgid "Build roads"
@@ -1101,19 +1101,19 @@ msgstr "Denna händelsen centrerar spelarens vy på en särskilt plats"
 
 #: ../../src/events/event_factory.cc:80
 msgid "Reveal campaign"
-msgstr "Visa kampanj"
+msgstr "Avslöja kampanj"
 
 #: ../../src/events/event_factory.cc:81
 msgid "Reveal a campaign"
-msgstr "Visa en kampanj"
+msgstr "Avslöja en kampanj"
 
 #: ../../src/events/event_factory.cc:84
 msgid "Reveal objective"
-msgstr "Visa uppdragsmål"
+msgstr "Avslöja uppdragsmål"
 
 #: ../../src/events/event_factory.cc:85
-msgid "Reveal (or hide) an objective"
-msgstr "Visa (eller dölj) ett uppdragsmål"
+msgid "Reveal an objective"
+msgstr "Avslöja ett uppdragsmål"
 
 #: ../../src/events/event_factory.cc:88
 msgid "Reveal scenario"
@@ -1137,11 +1137,11 @@ msgstr "Sätt tom utlösare"
 
 #: ../../src/events/event_factory.cc:97
 msgid "Manually set a Null Trigger to a given value"
-msgstr "Sätt manuellt en Nollställa Utlösare till ett givet värde"
+msgstr "Sätt en tom utlösare till ett givet värde"
 
 #: ../../src/events/event_factory.cc:100
 msgid "Unhide area"
-msgstr "Visa area"
+msgstr "Visa område"
 
 #: ../../src/events/event_factory.cc:102
 msgid "Gives vision for a specified amount of time of all locations whithin an area to the player."
@@ -1172,8 +1172,8 @@ msgid "Never triggers by itself. It is useful to pass it to some event which cha
 msgstr "Denna utlösare ändrar aldrig sin egen status. Den kan vara bra att använda till händelser som ändrar utlösare"
 
 #: ../../src/trigger/trigger_factory.cc:57
-msgid "Own Area Trigger"
-msgstr "Egenområdesutlösare"
+msgid "Ownership Trigger"
+msgstr "Ägandeutlösare"
 
 #: ../../src/trigger/trigger_factory.cc:59
 msgid "Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
@@ -1253,7 +1253,7 @@ msgstr "Minska intervallet mellan autosparningar med 10"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:100
 msgid "General Options"
-msgstr "Alternativ"
+msgstr "Allmäna alternativ"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:102
 msgid "Fullscreen"
@@ -1285,11 +1285,11 @@ msgstr "Språk"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:116
 msgid "In-game Options"
-msgstr "I spel, alternativ"
+msgstr "Spelalternativ"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:119
 msgid "Use single Watchwindow Mode"
-msgstr "Använd ett Se-fönster"
+msgstr "Använd ett enda Se-fönster"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:122
 msgid "Start roadbuilding after placing flag"
@@ -1297,15 +1297,15 @@ msgstr "Börja vägbygge efter placering av flagga"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:125
 msgid "Show buildings area preview"
-msgstr "Visa effektiv area"
+msgstr "Förhandsvisa byggnads arbetsområde"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:128
 msgid "Snap windows only when overlapping"
-msgstr "Fäst endast fönster vid överlappning"
+msgstr "Fäst fönster vid fönster endast vid överlappning"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:131
 msgid "Dock windows to edges"
-msgstr "Fäst fönster på kanter"
+msgstr "Fäst fönster vid kanter"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:134
 msgid "Save game automatically every"
@@ -1353,7 +1353,7 @@ msgstr "Ladda spel"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:47
 msgid "Campaigns"
-msgstr "Kampanjer"
+msgstr "Fälttåg"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:44
 msgid "Select map"
@@ -1481,11 +1481,11 @@ msgstr "Beskr:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:39
 msgid "Select a campaign"
-msgstr "Välj en kampanj"
+msgstr "Välj ett fälttåg"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:41
 msgid "Campaign:"
-msgstr "Kampanj:"
+msgstr "Fälttåg:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:43
 msgid "Difficulty:"
@@ -1538,7 +1538,7 @@ msgstr "Se repris"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:57
 msgid "Editor"
-msgstr "Banediterare"
+msgstr "Redigerare"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu.cc:73
@@ -1560,7 +1560,7 @@ msgstr "(C) 2002-2008 av Widelands utvecklingslag"
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:28
 #, fuzzy
 msgid "Editor Menu"
-msgstr "Menyn Redigerare"
+msgstr "Redigerarmeny"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:35
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:50
@@ -1714,7 +1714,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/trigger_null_option_menu.cc:47
 msgid "Null Trigger Options"
-msgstr "Nollställ Utlösare Alternativ"
+msgstr "Alternativ för tom utlösare"
 
 #: ../../src/editor/ui_menus/trigger_null_option_menu.cc:69
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:179
@@ -1778,7 +1778,7 @@ msgstr "Registrerade utlösare"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:99
 msgid "New Event Chain"
-msgstr "Ny kedja"
+msgstr "Ny händelsekedja"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:108
 #: ../../src/editor/ui_menus/editor_event_menu.cc:139
@@ -1867,7 +1867,7 @@ msgstr "Område: "
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:44
 msgid "Resources Tools Options"
-msgstr "Resurs verktygs alternativ"
+msgstr "Resursverktygsalternativ"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
@@ -1881,7 +1881,7 @@ msgstr "Sätt värde"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:102
 msgid "Current Selection"
-msgstr "Nuvarande val"
+msgstr "Nuvarande urval"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:55
 msgid "Allowed Buildings"
@@ -1926,8 +1926,8 @@ msgstr "Skapa bana"
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:53
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:142
-msgid "Available Events: "
-msgstr "Tillgängliga händelser: "
+msgid "Available Event types: "
+msgstr "Tillgängliga händelsetyper: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:65
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:71
@@ -1952,19 +1952,19 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:100
 msgid "AND"
-msgstr ""
+msgstr "OCH"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:112
 msgid "OR"
-msgstr ""
+msgstr "ELLER"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:124
 msgid "XOR"
-msgstr ""
+msgstr "XELLER"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:136
 msgid "NOT"
-msgstr ""
+msgstr "¬"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:146
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:106
@@ -1980,8 +1980,8 @@ msgstr "Ta bort"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:183
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
-msgid "Available Triggers: "
-msgstr "Tillgängliga utlösare"
+msgid "Available Trigger types: "
+msgstr "Tillgängliga utlösartyper: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:281
 msgid "Syntax Error"
@@ -1994,7 +1994,7 @@ msgstr "Ditt villkor innehåller minst ett syntax fel. Var vänlig, rätta till 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:41
 #: ../../src/editor/ui_menus/editor_main_menu.cc:67
 msgid "Map Options"
-msgstr "Banans inställningar"
+msgstr "Baninställningar"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:62
 msgid "Nr Players:"
@@ -2042,11 +2042,11 @@ msgstr "Beskr: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:191
 msgid "unnamed"
-msgstr "okänd"
+msgstr "ej namngiven"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:349
 msgid " exists already. Overwrite?"
-msgstr " finns redan. Skriva över?"
+msgstr " finns redan. Skriv över?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:351
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:371
@@ -2077,7 +2077,7 @@ msgstr "Nuvarande storlek: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
-msgstr "Höjd brus alternativ"
+msgstr "Höjdbrusalternativ"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
 #, c-format
@@ -2128,12 +2128,12 @@ msgid "Player "
 msgstr "Spelare "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:246
-msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again"
-msgstr "Kan inte ta bort spelare. Spelaren är refererad på någon plats. Ta bort alla byggnader, bobs, utlösare och händelser som berör denna spelaren och försök igen"
+msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
+msgstr "Kan inte ta bort spelare. Någonting hänvisar till spelaren. Ta bort alla byggnader, bobs, utlösare och händelser som berör denna spelaren och försök igen."
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:278
-msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr "Kan inte ändra spelarens stam. Spelaren är refererad på någon plats. Ta bort alla byggnader, bobs, utlösare och händelser som berör denna spelaren och försök igen"
+msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again."
+msgstr "Kan inte ändra spelarens stam. Någonting hänvisar till spelaren. Ta bort alla byggnader, bobs, utlösare och händelser som berör denna spelaren och försök igen."
 
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:61
 msgid "New Variable"
@@ -2189,7 +2189,7 @@ msgstr "Ändra höjd"
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 #, fuzzy
 msgid "Noise height"
-msgstr "Höjd brus alternativ"
+msgstr "Höjdbrusalternativ"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 msgid "Immovable"
@@ -2262,7 +2262,7 @@ msgstr "Knappnamn: "
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:151
 msgid "Select Trigger: "
-msgstr "Välj utlösare"
+msgstr "Välj utlösare: "
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:172
 msgid "Current: "
@@ -2287,7 +2287,7 @@ msgstr "Nuvarande:"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:67
 msgid "Edit Objective"
-msgstr "Redigera Mål"
+msgstr "Redigera uppdragsmål"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:84
 msgid "Visible at Begin: "
@@ -2295,7 +2295,7 @@ msgstr "Synlig vid start: "
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:93
 msgid "Objective text: "
-msgstr "Mål: "
+msgstr "Uppdragsmålstext: "
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
 msgid "Visible"
@@ -2307,7 +2307,7 @@ msgstr "Utlösare: "
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:264
 msgid "Can't delete Objective, because it's trigger is in use by "
-msgstr "Kan inte ta bort Mål, målets utlösare används av "
+msgstr "Kan inte ta bort uppdragsmål. Dess utlösare används av "
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
 #, c-format

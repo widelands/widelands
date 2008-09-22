@@ -700,13 +700,15 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 				case BOB_SKELETON3:        bobname = "skeleton3"; break;
 
 				case BOB_CACTUS1:
-					if(!strcmp(m_map.get_world_name(), "winterland")){
-						bobname = "snowman";   break; }
-						bobname = "cactus1";   break;
+					bobname =
+						strcmp(m_map.get_world_name(), "winterland") ?
+						"cactus1" : "snowman";
+					break;
 				case BOB_CACTUS2:
-					if(!strcmp(m_map.get_world_name(), "winterland")){
-						bobname = "track";     break; }
-						bobname = "cactus2";   break;
+					bobname =
+						strcmp(m_map.get_world_name(), "winterland") ?
+						"cactus2" : "track";
+					break;
 
 				case BOB_BUSH1:            bobname = "bush1";     break;
 				case BOB_BUSH2:            bobname = "bush2";     break;
@@ -736,11 +738,12 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 
 		char msg[128];
 		const Widelands::Player_Number nr_players = m_map.get_nrplayers();
-		snprintf(msg, sizeof(msg),
-				"Checking starting position for all %i players:\n", nr_players);
+		snprintf
+			(msg, sizeof(msg),
+			 "Checking starting position for all %u players:\n", nr_players);
 		log(msg);
 		for (Widelands::Player_Number p = 1; p <= nr_players; ++p) {
-			snprintf(msg, sizeof(msg), "-> Player %i: ", p);
+			snprintf(msg, sizeof(msg), "-> Player %u: ", p);
 			log(msg);
 
 			Widelands::Coords starting_pos = m_map.get_starting_pos(p);
@@ -772,7 +775,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 					m_map.set_starting_pos(p, tl);
 					fixed=true;
 				}
-				if (!fixed & ( l.field->get_caps() == BIG)) {
+				if (!fixed & (l.field->get_caps() == BIG)) {
 					m_map.set_starting_pos(p,  l);
 					fixed=true;
 				}
@@ -784,7 +787,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 					m_map.set_starting_pos(p, br);
 					fixed=true;
 				}
-				if (!fixed & ( r.field->get_caps() == BIG)) {
+				if (!fixed &  (r.field->get_caps() == BIG)) {
 					m_map.set_starting_pos(p,  r);
 					fixed=true;
 				}
@@ -793,9 +796,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 					fixed=true;
 				}
 				// check whether starting position was fixed.
-				if(fixed == true) {
-					log("   Starting position was successfully fixed "
-						"during 1st try!\n");
+				if (fixed) {
+					log
+						("   Starting position was successfully fixed during 1st "
+						 "try!\n");
 				} else {
 					// Second try - with a circle of radius = 2 :
 						// the three points at the top of the circle
@@ -811,7 +815,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 						m_map.set_starting_pos(p, m_map.tr_n(tr));
 						fixed=true;
 					}
-						// the three points at the bottom of the circle
+					//  the three points at the bottom of the circle
 					if (!fixed & (m_map.bl_n(bl).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.bl_n(bl));
 						fixed=true;
@@ -824,36 +828,37 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 						m_map.set_starting_pos(p, m_map.br_n(br));
 						fixed=true;
 					}
-						// the three points at the left side of the circle
-					if (!fixed & (m_map .l_n(tl).field->get_caps() == BIG)) {
-						m_map.set_starting_pos(p, m_map .l_n(tl));
+					//  the three points at the left side of the circle
+					if (!fixed & (m_map. l_n(tl).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map. l_n(tl));
 						fixed=true;
 					}
-					if (!fixed & (m_map .l_n( l).field->get_caps() == BIG)) {
-						m_map.set_starting_pos(p, m_map .l_n( l));
+					if (!fixed & (m_map. l_n (l).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map. l_n (l));
 						fixed=true;
 					}
-					if (!fixed & (m_map .l_n(bl).field->get_caps() == BIG)) {
-						m_map.set_starting_pos(p, m_map .l_n(bl));
+					if (!fixed & (m_map. l_n(bl).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map. l_n(bl));
 						fixed=true;
 					}
-						// the three points at the right side of the circle
-					if (!fixed & (m_map .r_n(tr).field->get_caps() == BIG)) {
-						m_map.set_starting_pos(p, m_map .r_n(tr));
+					//  the three points at the right side of the circle
+					if (!fixed & (m_map. r_n(tr).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map. r_n(tr));
 						fixed=true;
 					}
-					if (!fixed & (m_map .r_n( r).field->get_caps() == BIG)) {
-						m_map.set_starting_pos(p, m_map .r_n( r));
+					if (!fixed & (m_map. r_n (r).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map. r_n (r));
 						fixed=true;
 					}
-					if (!fixed & (m_map .r_n(br).field->get_caps() == BIG)) {
-						m_map.set_starting_pos(p, m_map .r_n(br));
+					if (!fixed & (m_map. r_n(br).field->get_caps() == BIG)) {
+						m_map.set_starting_pos(p, m_map. r_n(br));
 						fixed=true;
 					}
 					// check whether starting position was fixed.
-					if(fixed == true) {
-						log("   Starting position was successfully fixed "
-							"during 2nd try!\n");
+					if (fixed) {
+						log
+							("   Starting position was successfully fixed during 2nd "
+							 "try!\n");
 					} else {
 						// Do not throw exception, else map won't be loadable in editor
 						// Player initialisation will keep track about wrong starting pos.

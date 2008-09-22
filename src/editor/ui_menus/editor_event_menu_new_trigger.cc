@@ -52,7 +52,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 
 	//  trigger List
 	new UI::Textarea
-		(this, spacing, offsy, _("Available Triggers: "), Align_Left);
+		(this, spacing, offsy, _("Available Trigger types: "), Align_Left);
 	m_trigger_type_list =
 		new UI::BaseListselect
 		(this,

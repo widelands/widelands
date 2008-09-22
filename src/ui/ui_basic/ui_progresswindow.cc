@@ -112,7 +112,7 @@ void ProgressWindow::draw_background
 void ProgressWindow::set_background(const std::string & file_name) {
 	RenderTarget & rt = *g_gr->get_render_target();
 	if (file_name.size() > 0) {
-		if(g_fs->FileExists(file_name))
+		if (g_fs->FileExists(file_name))
 			m_background = file_name;
 		else {
 			// Maybe we should load a background for a specific world?

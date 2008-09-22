@@ -163,7 +163,7 @@ void PlayerDescriptionGroup::enable_pdg(bool enable)
 	d->btnPlayerType  ->set_visible(enable);
 	d->btnPlayerTribe ->set_visible(enable);
 	d->btnPlayerTribe ->set_enabled(enable);
-	if(!enable)
+	if (!enable)
 		d->plr_name->set_text(std::string());
 }
 

@@ -50,7 +50,8 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
 	int32_t       posy    = offsy;
 
 	//  event List
-	new UI::Textarea(this, spacing, offsy, _("Available Events: "), Align_Left);
+	new UI::Textarea
+		(this, spacing, offsy, _("Available Event types: "), Align_Left);
 	m_event_type_list=new UI::BaseListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
 	m_event_type_list->selected.set
 		(this, &Editor_Event_Menu_New_Event::selected);

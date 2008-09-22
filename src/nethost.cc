@@ -304,7 +304,7 @@ void NetHost::run()
 		Interactive_Player* ipl = new Interactive_Player(game, 1, false, true);
 		ipl->set_chat_provider(&d->chat);
 		game.set_iabase(ipl);
-		if(!d->settings.savegame) // new game
+		if (!d->settings.savegame) //  new game
 			game.init_newgame(loaderUI, d->settings);
 		else // savegame
 			game.init_savegame(loaderUI, d->settings);
@@ -322,7 +322,7 @@ void NetHost::run()
 		// wait mode when there are no clients
 		checkHungClients();
 		initComputerPlayers();
-		if(!d->settings.savegame) // new game
+		if (!d->settings.savegame) //  new game
 			game.run(loaderUI);
 		else // savegame
 			game.run(loaderUI, true);
