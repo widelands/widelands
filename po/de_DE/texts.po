@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3287\n"
+"Project-Id-Version: Widelands svn3313\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-30 20:17+0000\n"
-"PO-Revision-Date: 2008-08-30 21:38+0100\n"
+"POT-Creation-Date: 2008-09-25 19:53+0000\n"
+"PO-Revision-Date: 2008-09-25 21:41+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -514,7 +514,7 @@ msgid "E        Toggles event menu"
 msgstr "E              Zeigt das Ereignismenü"
 
 #: ../../txts/editor_readme:27
-msgid "F        Toggle Fullscreen"
+msgid "F        Toggles fullscreen"
 msgstr "F              Schaltet den Vollbildmodus an/aus"
 
 #: ../../txts/editor_readme:29
@@ -534,90 +534,94 @@ msgid "T        Toggles tools menu"
 msgstr "T              Zeigt das Werkzeugmenü"
 
 #: ../../txts/editor_readme:37
+msgid "I        Activates information tool"
+msgstr "I        Aktiviert das Informations Werkzeug"
+
+#: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
 msgstr "CTRL+L   Karte laden"
 
-#: ../../txts/editor_readme:39
+#: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Karte speichern"
 
-#: ../../txts/editor_readme:41
+#: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
 msgstr "1-0          Ändert die Werkzeuggröße"
 
-#: ../../txts/editor_readme:43
+#: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr "SHIFT(gehalten)    Wählt das erste alternative Werkzeug aus"
 
-#: ../../txts/editor_readme:45
+#: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT(gehalten)     Wählt das zweite alternative Werkzeug aus"
 
-#: ../../txts/editortips:13 ../../txts/editortips~:13
+#: ../../txts/editortips:13
 msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
 msgstr "Allgemeine Hilfe für den Editor, sowie ein kurzes Tutorial können in unserem Wiki auf www.widelands.org gefunden werden."
 
-#: ../../txts/editortips:17 ../../txts/editortips~:17
+#: ../../txts/editortips:17
 msgid "You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
 msgstr "Du kannst mehrere Naturobjekte (Bobs) selektieren, wenn du bei der Auswahl mit der Maus STRG gedrückt hältst. Beim Setzen der Objekte wird dann zufällig eines der zuvor selektierten Objekte gewählt."
 
-#: ../../txts/editortips:21 ../../txts/editortips~:21
+#: ../../txts/editortips:21
 msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
 msgstr "Genau wie bei den Naturobjekten (Bobs) kannst du auch mehrere Tiere oder Bodentexturen mit STRG + Mausklick selektieren."
 
-#: ../../txts/editortips:25 ../../txts/editortips~:25
+#: ../../txts/editortips:25
 msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
 msgstr "Wenn du UMSCHALT gedrückt hältst wird das erste alternative Werkzeug aktiviert. Dieses Werkzeug ist in den meisten Fällen das genaue Gegenteil des eigentlichen Werkzeugs (z.B. Entfernen statt Setzen)."
 
-#: ../../txts/editortips:29 ../../txts/editortips~:29
+#: ../../txts/editortips:29
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
 msgstr "Wenn du ALT gedrückt hältst, wird das zweite alternative Werkzeug aktiviert (falls es existiert)."
 
-#: ../../txts/editortips:33 ../../txts/editortips~:33
+#: ../../txts/editortips:33
 msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
 msgstr "Die Zahlentasten (1 - 0) ermöglichen dir direkte die Größe der Flächenauswahl um den Mauszeiger zu setzen."
 
-#: ../../txts/editortips:37 ../../txts/editortips~:37
+#: ../../txts/editortips:37
 msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr "Die LEERTASTE verhält sich wie im normalen Spiel. Sie schaltet die Bauhilfe an oder aus."
 
-#: ../../txts/editortips:41 ../../txts/editortips~:41
+#: ../../txts/editortips:41
 msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
 msgstr "Die Werkzeuge für Ereignisse, Auslöser, Ereignisketten und Aufgaben werden zu Zeit noch sehr stark weiterentwickelt. Falls du Fragen hast oder einen Fehler entdeckt hast, ist das Editorforum auf www.widelands.org ein gute Anlaufpunkt für dich."
 
-#: ../../txts/editortips:45 ../../txts/editortips~:45
+#: ../../txts/editortips:45
 msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
 msgstr "In unserem Wiki auf www.widelands.org findest du auch eine Referenz für alle derzeit vorhandenen Auslöser und Ereignisse."
 
-#: ../../txts/gametips:13 ../../txts/gametips~:13
+#: ../../txts/gametips:13
 msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
 msgstr "Manche Gebäude (zum Beispiel Bauern- oder Weinhöfe) haben nur einen kleinen Arbeitsbereich. Diese Gebäude können nicht produzieren, wenn sie von Straßen und/oder Bäumen eingekreist sind."
 
-#: ../../txts/gametips:17 ../../txts/gametips~:17
+#: ../../txts/gametips:17
 msgid "Keep an eye on fisherman's huts; after fish resources are exhausted in the working area, production will stop."
 msgstr "Beobachte die Fischerhütten. Wenn die Fischressourcen schwinden, werden die Fischer aufhören zu arbeiten."
 
-#: ../../txts/gametips:21 ../../txts/gametips~:21
+#: ../../txts/gametips:21
 msgid "The building process will only start after a road is built to the construction site."
 msgstr "Erst wenn eine Straße die Baustelle erreicht, wird mit dem Bau begonnen."
 
-#: ../../txts/gametips:25 ../../txts/gametips~:25
+#: ../../txts/gametips:25
 msgid "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr "Sende erst einen Geologen zur Bodenerkundung aus, bevor du Minen oder Brunnen baust."
 
-#: ../../txts/gametips:29 ../../txts/gametips~:29
+#: ../../txts/gametips:29
 msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Barracks, etc."
 msgstr "Dein Territorium kannst du durch Errichten verschiedener Militärgebäude wie Baracken, Wachstuben oder Festungen erweitern."
 
-#: ../../txts/gametips:33 ../../txts/gametips~:33
+#: ../../txts/gametips:33
 msgid "Miners will only work if supplied with food."
 msgstr "Bergarbeiter arbeiten nur, wenn sie mit genügend Verpflegung versorgt werden."
 
-#: ../../txts/gametips:37 ../../txts/gametips~:37
+#: ../../txts/gametips:37
 msgid "Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares."
 msgstr "Teile deine Straßen, durch Flaggen, in viele kleine Teile auf. Das wird den Transport deiner Waren beschleunigen."
 
-#: ../../txts/gametips:41 ../../txts/gametips~:41
+#: ../../txts/gametips:41
 msgid "Always build a forester and a ranger's hut, so you will not run out of trunks and food."
 msgstr "Baue immer ein paar Försterhütten auf, damit du nie ohne Holz da stehst. Ein Wildhüter erhält den Wildbestand des Waldes."
 
@@ -625,10 +629,9 @@ msgstr "Baue immer ein paar Försterhütten auf, damit du nie ohne Holz da stehs
 msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
 msgstr "Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Community Foren."
 
-#: ../../txts/gametips:49 ../../txts/gametips~:49
+#: ../../txts/gametips:49
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
 msgstr "Benutze die Prioritätsknöpfe im Fenster der Gebäude, um die Anlieferung von speziellen Waren zu steuern."
 
-#: ../../txts/gametips~:45
-msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
-msgstr "Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Community Foren."
+#~ msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
+#~ msgstr "Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Community Foren."

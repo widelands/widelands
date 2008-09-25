@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3287\n"
+"Project-Id-Version: Widelands svn3313\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-30 20:17+0000\n"
-"PO-Revision-Date: 2008-08-19 16:56+0100\n"
+"POT-Creation-Date: 2008-09-25 19:53+0000\n"
+"PO-Revision-Date: 2008-09-25 22:00+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -165,7 +165,7 @@ msgstr "Das Widelands Entwickler Team"
 
 #: ../../../tribes/atlantids/conf:19
 msgid "Atlanteans"
-msgstr "Atlantaner"
+msgstr "Atlanter"
 
 #: ../../../tribes/atlantids/conf:20
 msgid "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
@@ -177,7 +177,7 @@ msgstr "Verbessertes Schild"
 
 #: ../../../tribes/atlantids/wares/advanced_shield/conf:3
 msgid "This shields are used by the best soldiers of the atlantids"
-msgstr "Diese Schilde werden nur von den besten Soldaten der Atlantaner benutzt."
+msgstr "Diese Schilde werden nur von den besten Soldaten der Atlanter benutzt."
 
 #: ../../../tribes/atlantids/wares/bakingtray/conf:2
 msgid "Bakingtray"
@@ -193,7 +193,7 @@ msgstr "Schwarzwurzel"
 
 #: ../../../tribes/atlantids/wares/blackroot/conf:3
 msgid "Blackroots are a special kind of roots. The Atlantids like their strong taste and use its flour for making bread."
-msgstr "Schwarzwurzeln sind eine spezielle Wurzelart. Die Atlantaner mögen den starken Geschmack und benutzen gemahlene Schwarzwurzeln beim backen ihrer Brote."
+msgstr "Schwarzwurzeln sind eine spezielle Wurzelart. Die Atlanter mögen den starken Geschmack und benutzen gemahlene Schwarzwurzeln beim backen ihrer Brote."
 
 #: ../../../tribes/atlantids/wares/blackrootflour/conf:2
 msgid "Blackrootflour"
@@ -233,7 +233,7 @@ msgstr "Mais"
 
 #: ../../../tribes/atlantids/wares/corn/conf:3
 msgid "This corn is the base of the fine cornflour, that every atlatian baker needs for a good bread."
-msgstr "Mais ist die Basis für Maismehl, was wiederum von jedem atlantaner Bäcker verwandt wird um Brot zu backen."
+msgstr "Mais ist die Basis für Maismehl, was wiederum von jedem atlanter Bäcker verwandt wird um Brot zu backen."
 
 #: ../../../tribes/atlantids/wares/cornflour/conf:2
 msgid "Cornflour"
@@ -241,7 +241,7 @@ msgstr "Maismehl"
 
 #: ../../../tribes/atlantids/wares/cornflour/conf:3
 msgid "Cornflour is produced out of corn and is one of three parts of the atlantian bread."
-msgstr "Maismehl wird aus Mais hergestellt und ist eine von drei Zutaten für das atlantanische Brot."
+msgstr "Maismehl wird aus Mais hergestellt und ist eine von drei Zutaten für das atlantische Brot."
 
 #: ../../../tribes/atlantids/wares/diamond/conf:2
 msgid "Diamond"
@@ -257,7 +257,7 @@ msgstr "Doppel-Dreizack"
 
 #: ../../../tribes/atlantids/wares/double_trident/conf:3
 msgid "Already one of the best tridents of the atlantids. Only used by very good fighters."
-msgstr "Bereits eine der besten und gefährlichsten Dreizack-Arten der Atlantaner. Wird nur von sehr guten Kämpfern benutzt."
+msgstr "Bereits eine der besten und gefährlichsten Dreizack-Arten der Atlanter. Wird nur von sehr guten Kämpfern benutzt."
 
 #: ../../../tribes/atlantids/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
@@ -273,7 +273,7 @@ msgstr "Fisch"
 
 #: ../../../tribes/atlantids/wares/fish/conf:3
 msgid "Fish is one of the biggest food-resources of the atlantids."
-msgstr "Fisch ist eine der größten Lebensmittelquellen der Atlantaner."
+msgstr "Fisch ist eine der größten Lebensmittelquellen der Atlanter."
 
 #: ../../../tribes/atlantids/wares/fishing_net/conf:2
 msgid "Fishing Net"
@@ -292,14 +292,12 @@ msgid "Gold is one of the most valuable materials only important things are garn
 msgstr "Gold ist eines der wertvollsten Materialen. Nur wichtige Sachen werden mit ihm geschmückt."
 
 #: ../../../tribes/atlantids/wares/golden_tabard/conf:2
-#, fuzzy
 msgid "Golden Tabart"
-msgstr "Wappenrock"
+msgstr "goldener Wappenrock"
 
 #: ../../../tribes/atlantids/wares/golden_tabard/conf:3
-#, fuzzy
 msgid "A special tabard for atlantian soldiers."
-msgstr "Dies ist die Grundwaffe für jeden atlantaner Soldaten."
+msgstr "Ein spezieller Wappenrock für atlanter Soldaten."
 
 #: ../../../tribes/atlantids/wares/goldore/conf:2
 msgid "Goldore"
@@ -331,7 +329,7 @@ msgstr "schwerer Doppel-Dreizack"
 
 #: ../../../tribes/atlantids/wares/heavy_double_trident/conf:3
 msgid "This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it."
-msgstr "Dies ist die absolut gefährlichste Waffe des atlantanischen Militärs. Nur die allerbesten Soldaten dürfen sie benutzen."
+msgstr "Dies ist die absolut gefährlichste Waffe des atlantischen Militärs. Nur die allerbesten Soldaten dürfen sie benutzen."
 
 #: ../../../tribes/atlantids/wares/hook_pole/conf:2
 msgid "Hook pole"
@@ -347,7 +345,7 @@ msgstr "Jagdbogen"
 
 #: ../../../tribes/atlantids/wares/hunting_bow/conf:3
 msgid "This bow is used by the atlantian hunter."
-msgstr "Dieser Bogen wird vom atlantanischen Jäger verwandt."
+msgstr "Dieser Bogen wird vom atlantischen Jäger verwandt."
 
 #: ../../../tribes/atlantids/wares/iron/conf:2
 msgid "Iron"
@@ -371,7 +369,7 @@ msgstr "Leichter Dreizack"
 
 #: ../../../tribes/atlantids/wares/light_trident/conf:3
 msgid "This is the basic weapon for atlantian soldiers"
-msgstr "Dies ist die Grundwaffe für jeden atlantaner Soldaten."
+msgstr "Dies ist die Grundwaffe für jeden atlanter Soldaten."
 
 #: ../../../tribes/atlantids/wares/long_trident/conf:2
 msgid "Long Trident"
@@ -379,7 +377,7 @@ msgstr "Langer Dreizack"
 
 #: ../../../tribes/atlantids/wares/long_trident/conf:3
 msgid "This is an advanced trident for more experienced soldiers."
-msgstr "Dies ist ein verbesserter Dreizack für die etwas erfahreneren Soldaten"
+msgstr "Dies ist ein verbesserter Dreizack für die etwas erfahreneren Soldaten."
 
 #: ../../../tribes/atlantids/wares/meat/conf:2
 msgid "Meat"
@@ -387,7 +385,7 @@ msgstr "Fleisch"
 
 #: ../../../tribes/atlantids/wares/meat/conf:3
 msgid "Meat is one food-ressource of the Atlantids."
-msgstr "Fleisch ist eine Nahrungsquelle der Atlantaner."
+msgstr "Fleisch ist eine Nahrungsquelle der Atlanter."
 
 #: ../../../tribes/atlantids/wares/milking_tongs/conf:2
 msgid "Milking Tongs"
@@ -419,7 +417,7 @@ msgstr "Bretter"
 
 #: ../../../tribes/atlantids/wares/planks/conf:3
 msgid "Planks are an important build material of the Atlantids."
-msgstr "Bretter sind ein wichtiges Baumaterial der Atlantaner"
+msgstr "Bretter sind ein wichtiges Baumaterial der Atlanter"
 
 #: ../../../tribes/atlantids/wares/saw/conf:2
 msgid "Saw"
@@ -451,7 +449,7 @@ msgstr "Räucherfisch"
 
 #: ../../../tribes/atlantids/wares/smoked_fish/conf:3
 msgid "This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
-msgstr "Dieser Fisch ist geräuchert - da die Atlantaner kein rohen Fisch mögen, ist dies ein beliebter Weg um den Fisch genießbar zu machen."
+msgstr "Dieser Fisch ist geräuchert - da die Atlanter kein rohen Fisch mögen, ist dies ein beliebter Weg um den Fisch genießbar zu machen."
 
 #: ../../../tribes/atlantids/wares/smoked_meat/conf:2
 msgid "Smoked meat"
@@ -459,7 +457,7 @@ msgstr "Räucherfleisch"
 
 #: ../../../tribes/atlantids/wares/smoked_meat/conf:3
 msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
-msgstr "Dieses Fleisch ist geräuchert - da die Atlantaner kein rohes Fleisch mögen, ist dies ein beliebter Weg um das Fleisch genießbar zu machen."
+msgstr "Dieses Fleisch ist geräuchert - da die Atlanter kein rohes Fleisch mögen, ist dies ein beliebter Weg um das Fleisch genießbar zu machen."
 
 #: ../../../tribes/atlantids/wares/spidercloth/conf:2
 msgid "Spidercloth"
@@ -499,7 +497,7 @@ msgstr "Stein"
 
 #: ../../../tribes/atlantids/wares/stone/conf:3
 msgid "Stone is one basic build ware of the Atlantids."
-msgstr "Steine gehören zu den Grundbaustoffen der Atlantaner"
+msgstr "Steine gehören zu den Grundbaustoffen der Atlanter."
 
 #: ../../../tribes/atlantids/wares/tabard/conf:2
 msgid "Tabart"
@@ -515,7 +513,7 @@ msgstr "Stamm"
 
 #: ../../../tribes/atlantids/wares/trunk/conf:3
 msgid "Trunks are the base for planks, which are used in nearly every building of the atlantids."
-msgstr "Stämme sind die Basis von Brettern, die in fast jedem Gebäude der Atlantaner verwendet werden."
+msgstr "Stämme sind die Basis von Brettern, die in fast jedem Gebäude der Atlanter verwendet werden."
 
 #: ../../../tribes/atlantids/wares/water/conf:2
 msgid "Water"
@@ -647,6 +645,6 @@ msgstr "Fällt Bäume"
 
 #~ msgid "Coalearth"
 #~ msgstr "Kohlenerde"
-
 #~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
 #~ msgstr "Diese Erde wird in den tiefen Kohleminen gefunden. Sie muss noch weiterverarbeitet werden um zu hochklassiger Kohle zu werden."
+

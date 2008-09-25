@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3295\n"
+"Project-Id-Version: Widelands svn3313\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-09-03 20:50+0200\n"
-"PO-Revision-Date: 2008-09-03 20:50+0100\n"
+"POT-Creation-Date: 2008-09-25 21:53+0200\n"
+"PO-Revision-Date: 2008-09-25 21:40+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -101,7 +101,7 @@ msgstr "Rohstoff-Information"
 msgid "Ware help"
 msgstr "Waren Hilfe"
 
-#: ../../src/wlapplication.cc:853
+#: ../../src/wlapplication.cc:854
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -111,11 +111,11 @@ msgstr ""
 "Entschuldigung, aber der Doppelstart läuft unter Windows nicht.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:856
+#: ../../src/wlapplication.cc:857
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double ist nicht möglich, dies ist kein Debug-Build!"
 
-#: ../../src/wlapplication.cc:947
+#: ../../src/wlapplication.cc:948
 #, c-format
 msgid ""
 "This is Widelands-%s\n"
@@ -124,7 +124,7 @@ msgstr ""
 "Dies ist Widelands-%s\n"
 "\n"
 
-#: ../../src/wlapplication.cc:949
+#: ../../src/wlapplication.cc:950
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -132,7 +132,7 @@ msgstr ""
 "Benutzung: widelands <Option0>=<Wert0> ... <OptionN>=<WertN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:950
+#: ../../src/wlapplication.cc:951
 msgid ""
 "Options:\n"
 "\n"
@@ -140,7 +140,7 @@ msgstr ""
 "Optionen:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:954
+#: ../../src/wlapplication.cc:955
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -160,7 +160,7 @@ msgstr ""
 " --coredump=[yes|no]  Erzeugt ein Speicherabbild bei Segmentfehlern.\n"
 "                      Schaltet den Mechanismus von SDL ab.\n"
 
-#: ../../src/wlapplication.cc:963
+#: ../../src/wlapplication.cc:964
 msgid ""
 " --nosound            Starts the game with sound disabled.\n"
 " --nozip              Do not save files as binary zip archives.\n"
@@ -187,7 +187,7 @@ msgstr ""
 "                      direkt.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:976
+#: ../../src/wlapplication.cc:977
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -197,11 +197,11 @@ msgstr ""
 "                      localhost Netz)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:980
+#: ../../src/wlapplication.cc:981
 msgid " --help               Show this help\n"
 msgstr " --help               Zeigt diese Hilfe\n"
 
-#: ../../src/wlapplication.cc:984
+#: ../../src/wlapplication.cc:985
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -215,11 +215,11 @@ msgstr ""
 "Wir wünschen Dir viel Spaß beim Spielen!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1124
+#: ../../src/wlapplication.cc:1125
 msgid "Unexpected error during the game"
 msgstr "Unerwarteter Fehler im Spielverlauf"
 
-#: ../../src/wlapplication.cc:1128
+#: ../../src/wlapplication.cc:1129
 msgid ""
 "\n"
 "\n"
@@ -229,7 +229,7 @@ msgstr ""
 "\n"
 "Bitte melde dieses Problem, um uns die Möglichkeit zu geben Widelands zu verbessern. Weitere Informationen findest du in der Standard-Ausgabe (stdout.txt unter Windows). Du benutzt Version "
 
-#: ../../src/wlapplication.cc:1134
+#: ../../src/wlapplication.cc:1135
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -239,24 +239,24 @@ msgstr ""
 "\n"
 "Widelands versucht eine Speicherung durchzuführen, wenn ein Fehler auftrat. Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden und fortzusetzen.\n"
 
-#: ../../src/wlapplication.cc:1338 ../../src/nethost.cc:699
+#: ../../src/wlapplication.cc:1305 ../../src/nethost.cc:699
 msgid "Player"
 msgstr "Spieler"
 
-#: ../../src/wlapplication.cc:1413 ../../src/nethost.cc:300
+#: ../../src/wlapplication.cc:1380 ../../src/nethost.cc:300
 #: ../../src/netclient.cc:137
 msgid "Preparing game"
 msgstr "Bereite Spiel vor"
 
-#: ../../src/wlapplication.cc:1475
+#: ../../src/wlapplication.cc:1513
 msgid "End of replay"
 msgstr "Ende der Spielaufzeichnung"
 
-#: ../../src/wlapplication.cc:1477
+#: ../../src/wlapplication.cc:1515
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weitergucken."
 
-#: ../../src/wlapplication.cc:1529 ../../src/game.cc:358 ../../src/game.cc:393
+#: ../../src/wlapplication.cc:1567 ../../src/game.cc:364 ../../src/game.cc:401
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -430,7 +430,7 @@ msgstr "Füge Spieler %u hinzu"
 msgid "Loading a map"
 msgstr "Lade eine Karte"
 
-#: ../../src/game.cc:303 ../../src/game.cc:350
+#: ../../src/game.cc:303 ../../src/game.cc:350 ../../src/game.cc:382
 msgid "Preloading map"
 msgstr "Lade Teile der Karte vor"
 
@@ -442,7 +442,7 @@ msgstr "Konfiguriere Spieler"
 msgid "Loading map"
 msgstr "Lade Karte"
 
-#: ../../src/game.cc:448
+#: ../../src/game.cc:456
 msgid "Creating player infrastructure"
 msgstr "Erstelle Infrastruktur eines Spielers"
 
@@ -660,7 +660,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:188
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:263
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:92
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:93
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:216
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:98
@@ -1150,8 +1150,8 @@ msgid "Reveal objective"
 msgstr "Decke Aufgabe auf"
 
 #: ../../src/events/event_factory.cc:85
-msgid "Reveal (or hide) an objective"
-msgstr "Decke eine Aufgabe auf oder verstecke sie"
+msgid "Reveal an objective"
+msgstr "Decke Aufgabe auf"
 
 #: ../../src/events/event_factory.cc:88
 msgid "Reveal scenario"
@@ -1210,7 +1210,7 @@ msgid "Never triggers by itself. It is useful to pass it to some event which cha
 msgstr "Dieser Auslöser ändert seinen Status nie von selbst. Das ist sinnvoll, wenn ein Ereignis erst nach einem anderen passieren soll."
 
 #: ../../src/trigger/trigger_factory.cc:57
-msgid "Own Area Trigger"
+msgid "Ownership Trigger"
 msgstr "Gebiets-Besitzer Auslöser"
 
 #: ../../src/trigger/trigger_factory.cc:59
@@ -1648,14 +1648,14 @@ msgid "Load Map"
 msgstr "Karte laden"
 
 #: ../../src/ui/ui_basic/ui_messagebox.cc:92
+#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
-#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "Yes"
 msgstr "Ja"
 
 #: ../../src/ui/ui_basic/ui_messagebox.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
-#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "No"
 msgstr "Nein"
 
@@ -1663,11 +1663,11 @@ msgstr "Nein"
 msgid "Preparing..."
 msgstr "Vorbereiten..."
 
-#: ../../src/editor/tools/editor_info_tool.cc:44
+#: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
 msgstr "Feldinformationen"
 
-#: ../../src/editor/tools/editor_info_tool.cc:56
+#: ../../src/editor/tools/editor_info_tool.cc:55
 #, c-format
 msgid ""
 "1) Node infos\n"
@@ -1680,39 +1680,39 @@ msgstr ""
 " Höhe: %u\n"
 " Caps: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:62
+#: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
 msgstr "klein"
 
-#: ../../src/editor/tools/editor_info_tool.cc:63
+#: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "medium"
 msgstr "mittel"
 
-#: ../../src/editor/tools/editor_info_tool.cc:64
+#: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
 msgstr "groß"
 
-#: ../../src/editor/tools/editor_info_tool.cc:66
+#: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " flag"
 msgstr " Flagge"
 
-#: ../../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " mine"
 msgstr " Mine"
 
-#: ../../src/editor/tools/editor_info_tool.cc:68
+#: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " port"
 msgstr " Hafen"
 
-#: ../../src/editor/tools/editor_info_tool.cc:69
+#: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " walk"
 msgstr " gehen"
 
-#: ../../src/editor/tools/editor_info_tool.cc:70
+#: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " swim"
 msgstr " schwimmen"
 
-#: ../../src/editor/tools/editor_info_tool.cc:74
+#: ../../src/editor/tools/editor_info_tool.cc:73
 #, c-format
 msgid ""
 "\n"
@@ -1725,7 +1725,7 @@ msgstr ""
 " Hat unbewegte Basis: %s\n"
 " Hat Natur: %s\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:80
+#: ../../src/editor/tools/editor_info_tool.cc:79
 msgid ""
 "2) Terrain Info\n"
 " Name: "
@@ -1733,7 +1733,7 @@ msgstr ""
 "2) Gebietsinfo\n"
 " Name: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:88
+#: ../../src/editor/tools/editor_info_tool.cc:87
 #, c-format
 msgid ""
 "\n"
@@ -1742,7 +1742,7 @@ msgstr ""
 "\n"
 " Texturnummer %i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:92
+#: ../../src/editor/tools/editor_info_tool.cc:91
 msgid ""
 "4) Map Info\n"
 " Name: "
@@ -1750,7 +1750,7 @@ msgstr ""
 "4) Karteninfo\n"
 " Name: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:96
+#: ../../src/editor/tools/editor_info_tool.cc:95
 #, c-format
 msgid ""
 "\n"
@@ -1761,8 +1761,8 @@ msgstr ""
 " Größe: %ix%i\n"
 " Autor: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:99
-#: ../../src/editor/tools/editor_info_tool.cc:110
+#: ../../src/editor/tools/editor_info_tool.cc:98
+#: ../../src/editor/tools/editor_info_tool.cc:109
 msgid ""
 "\n"
 " Descr: "
@@ -1770,7 +1770,7 @@ msgstr ""
 "\n"
 " Beschr: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:103
+#: ../../src/editor/tools/editor_info_tool.cc:102
 #, c-format
 msgid ""
 "\n"
@@ -1779,7 +1779,7 @@ msgstr ""
 "\n"
 " Anzahl der Spieler: %i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:106
+#: ../../src/editor/tools/editor_info_tool.cc:105
 msgid ""
 "5) World Info\n"
 " Name: "
@@ -1787,7 +1787,7 @@ msgstr ""
 "5) Weltinfo\n"
 " Name: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:108
+#: ../../src/editor/tools/editor_info_tool.cc:107
 msgid ""
 "\n"
 " Author: "
@@ -1802,7 +1802,7 @@ msgstr "Null-Auslöseroptionen"
 #: ../../src/editor/ui_menus/trigger_null_option_menu.cc:69
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:179
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:81
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:82
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:207
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:87
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:247
@@ -2007,12 +2007,11 @@ msgstr "Höhe: %u"
 msgid "Create Map"
 msgstr "Karte erstellen"
 
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:53
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:142
-msgid "Available Events: "
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:54
+msgid "Available Event types: "
 msgstr "Mögliche Ereignisse:"
 
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:65
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:66
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:71
 msgid "Description: "
 msgstr "Beschreibung: "
@@ -2062,7 +2061,6 @@ msgid "Delete"
 msgstr "Löschen"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:183
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
 msgid "Available Triggers: "
 msgstr "Mögliche Auslöser:"
 
@@ -2177,6 +2175,10 @@ msgstr "Maximum: %u"
 msgid "Set value: %u"
 msgstr "Wert setzen: %u"
 
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
+msgid "Available Trigger types: "
+msgstr "Mögliche Auslöser:"
+
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
 msgid "Height Tools Options"
 msgstr "Optionen: Höhenwerkzeug"
@@ -2210,11 +2212,11 @@ msgid "Player "
 msgstr "Spieler "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:246
-msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again"
+msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
 msgstr "Kann Spieler nicht löschen, der Spieler wird verwendet. Entferne alle Gebäude, Natur, Auslöser und Ereignisse, die mit diesem Spieler verknüpft sind, und versuche es nochmal."
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:278
-msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"
+msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again."
 msgstr "Kann Spieler-Stamm nicht ändern, der Stamm wird verwendet. Entferne alle Gebäude, Natur, Auslöser und Ereignisse, die mit diesem Stamm verknüpft sind, und versuche es nochmal."
 
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:61
@@ -2436,9 +2438,16 @@ msgstr "Bedingung"
 msgid "Up"
 msgstr "+"
 
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:142
+msgid "Available Events: "
+msgstr "Mögliche Ereignisse:"
+
 #: ../../src/objective.h:47
 msgid "no descr"
 msgstr "(Keine Beschreibung vorhanden.)"
+
+#~ msgid "Reveal (or hide) an objective"
+#~ msgstr "Decke eine Aufgabe auf oder verstecke sie"
 
 #~ msgid ""
 #~ " --nosound            Starts the game with sound disabled\n"
