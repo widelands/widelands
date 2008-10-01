@@ -73,6 +73,10 @@ private:
 	void parse_transform(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
 	void parse_remove(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
 	void parse_playFX(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
+	void parse_seed
+		(ImmovableAction                *,
+		 ProgramParser            const *,
+		 std::vector<std::string> const & cmd);
 
 private:
 	struct ParseMap {

@@ -152,6 +152,7 @@ private:
 	bool run_transform(Game* g, bool killable, const ImmovableAction& action);
 	bool run_remove(Game* g, bool killable, const ImmovableAction& action);
 	bool run_playFX(Game* g, bool killable, const ImmovableAction& action);
+	bool run_seed(Game *, bool killable, ImmovableAction const &);
 
 protected:
 	Coords                   m_position;

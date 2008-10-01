@@ -47,4 +47,30 @@ bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) throw () {
 	return m_phase;
 }
 
+template <>
+bool MapFringeRegion<Area<> >::advance(const Map & map) throw () {
+	switch (m_phase) {
+	case 0:
+		if (m_area.radius) {
+			m_remaining_in_phase = m_area.radius;
+			m_phase              = 6;
+		}
+		else
+			return false;
+	case 1: map.get_trn(m_area, &m_area); break;
+	case 2: map.get_tln(m_area, &m_area); break;
+	case 3: map. get_ln(m_area, &m_area); break;
+	case 4: map.get_bln(m_area, &m_area); break;
+	case 5: map.get_brn(m_area, &m_area); break;
+	case 6: map. get_rn(m_area, &m_area); break;
+	default:
+		assert(false);
+	}
+	if (--m_remaining_in_phase == 0) {
+		m_remaining_in_phase = m_area.radius;
+		--m_phase;
+	}
+	return m_phase;
+}
+
 };

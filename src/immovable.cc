@@ -26,6 +26,7 @@
 #include "immovable_program.h"
 #include "player.h"
 #include "map.h"
+#include "mapfringeregion.h"
 #include "profile.h"
 #include "rendertarget.h"
 #include "sound/sound_handler.h"
@@ -110,7 +111,7 @@ const ImmovableProgram::ParseMap ImmovableProgram::s_parsemap[] = {
 	{"transform", &ImmovableProgram::parse_transform},
 	{"remove",    &ImmovableProgram::parse_remove},
 	{"playFX",    &ImmovableProgram::parse_playFX},
-
+	{"seed",      &ImmovableProgram::parse_seed},
 	{0, 0}
 };
 
@@ -601,7 +602,8 @@ void Immovable::Loader::load(FileRead& fr)
 	imm.m_animstart = fr.Signed32();
 
 	//  program
-	imm.m_program = fr.Unsigned8() ? imm.descr().get_program(fr.CString()) : 0;
+	imm.m_program =
+		imm.descr().get_program(fr.Unsigned8() ? fr.CString() : "program");
 	imm.m_program_ptr = fr.Unsigned32();
 
 	if (!imm.m_program) {
@@ -633,6 +635,8 @@ void Immovable::Loader::load_finish()
 	BaseImmovable::Loader::load_finish();
 
 	upcast(Immovable, imm, get_object());
+	if (upcast(Game, game, &egbase()))
+		imm->schedule_act(game, 1);
 
 	egbase().inform_players_about_immovable
 			(Map::get_index(imm->m_position, egbase().map().get_width()),
@@ -737,9 +741,10 @@ void ImmovableProgram::parse_animation
 	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() != 3)
-		throw wexception("Syntax: animation [name] [duration]");
+		throw wexception("Syntax: animation <name> <duration>");
 
 	act->function = &Immovable::run_animation;
+
 	act->iparam1 = parser->descr->parse_animation(parser->directory, parser->prof, cmd[1]);
 	act->iparam2 = atoi(cmd[2].c_str());
 
@@ -760,9 +765,6 @@ bool Immovable::run_animation(Game* g, bool, const ImmovableAction & action)
 	return true;
 }
 
-/**
- * playFX \<name\>
-*/
 
 void ImmovableProgram::parse_playFX
 	(ImmovableAction                * act,
@@ -773,35 +775,34 @@ void ImmovableProgram::parse_playFX
 		throw wexception("Syntax: playFX <fxname> [priority]");
 
 	act->function = &Immovable::run_playFX;
+
 	act->sparam1 = cmd[1];
-	if (cmd.size()==2)
-		act->iparam1=127;
-	else
-		act->iparam1=atoi(cmd[2].c_str());
+
+	act->iparam1 = cmd.size() < 3 ? 127 : atoi(cmd[2].c_str());
 }
 
 /** Demand from the g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
-bool Immovable::run_playFX(Game *, bool, const ImmovableAction & action)
+bool Immovable::run_playFX(Game * game, bool, const ImmovableAction & action)
 {
 	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
 
-	m_program_ptr = (m_program_ptr+1) % m_program->get_size();
+	schedule_act(game, 1);
+	m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
 
 	return true;
 }
 
 
-/**
- * transform \<name of immovable\>
-*/
 void ImmovableProgram::parse_transform
 	(ImmovableAction                * act,
 	 ProgramParser            const *,
 	 std::vector<std::string> const & cmd)
 {
-	if (cmd.size() != 2)
-		throw wexception("Syntax: transform [bob name]");
+	if (cmd.size() < 2 or 3 < cmd.size())
+		throw wexception("Syntax: transform <immovable type> [probability]");
+
+	act->function = &Immovable::run_transform;
 
 	const std::vector<std::string> list(split_string(cmd[1], ":"));
 	if (list.size() == 1) {
@@ -812,32 +813,49 @@ void ImmovableProgram::parse_transform
 		act->sparam2 = list[0];
 	}
 
-	act->function = &Immovable::run_transform;
+	if (cmd.size() < 3)
+		act->iparam1 = 0;
+	else {
+		act->iparam1 = atoi(cmd[2].c_str());
+		if (act->iparam1 < 1 or 255 < act->iparam1)
+			throw wexception
+				("probability out of range (1, 255) \"%s\"", cmd[2].c_str());
+	}
 }
 
 bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& action)
 {
-	Coords c = m_position;
+	if
+		(action.iparam1 == 0
+		 or
+		 g->logic_rand() % 256 < static_cast<uint32_t>(action.iparam1))
+	{
+		Coords c = m_position;
 
-	if (!descr().get_owner_tribe() && (action.sparam2 != "world"))
-		throw wexception
-			("Should create tribe-immovable %s, but we are no tribe immovable!\n",
-			 action.sparam1.c_str());
+		if (!descr().get_owner_tribe() && (action.sparam2 != "world"))
+			throw wexception
+				("Should create tribe-immovable %s, but we are no tribe immovable!"
+				 "\n",
+				 action.sparam1.c_str());
 
-	if (!killable) { // we need to reschedule and remove self from act()
-		m_program_step = schedule_act(g, 1);
-		return true;
+		if (!killable) { //  we need to reschedule and remove self from act()
+			m_program_step = schedule_act(g, 1);
+			return true;
+		}
+
+
+		const Tribe_Descr* tribe=0;
+
+		if (action.sparam2 != "world")
+			tribe = descr().get_owner_tribe(); // Not a world bob?
+
+		remove(g);
+		//  Only use variables on the stack below this point!
+		g->create_immovable(c, action.sparam1, tribe);
+	} else {
+		schedule_act(g, 1);
+		m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
 	}
-
-
-	const Tribe_Descr* tribe=0;
-
-	if (action.sparam2 != "world")
-		tribe=descr().get_owner_tribe(); // Not a world bob?
-
-	remove(g);
-	// Only use variables on the stack below this point!
-	g->create_immovable(c, action.sparam1, tribe);
 	return true;
 }
 
@@ -850,23 +868,102 @@ void ImmovableProgram::parse_remove
 	 ProgramParser            const *,
 	 std::vector<std::string> const & cmd)
 {
-	if (cmd.size() != 1)
-		throw wexception("Syntax: remove");
+	if (cmd.size() < 1 or 2 < cmd.size())
+		throw wexception("Syntax: remove [probability]");
 
 	act->function = &Immovable::run_remove;
+
+	if (cmd.size() < 2)
+		act->iparam1 = 0;
+	else {
+		act->iparam1 = atoi(cmd[1].c_str());
+		if (act->iparam1 < 1 or 255 < act->iparam1)
+			throw wexception
+				("probability out of range (1, 255) \"%s\"", cmd[1].c_str());
+	}
 }
 
-bool Immovable::run_remove(Game* g, bool killable, const ImmovableAction &)
+bool Immovable::run_remove
+	(Game * g, bool const killable, ImmovableAction const & action)
 {
-	if (!killable) {
-		m_program_step = schedule_act(g, 1);
-		return true;
-	}
+	if
+		(action.iparam1 == 0
+		 or
+		 g->logic_rand() % 256 < static_cast<uint32_t>(action.iparam1))
+	{
+		if (!killable) {
+			m_program_step = schedule_act(g, 1);
+			return true;
+		}
 
-	remove(g);
+		remove(g);
+	} else {
+		schedule_act(g, 1);
+		m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
+	}
 	return true;
 }
 
+void ImmovableProgram::parse_seed
+	(ImmovableAction                * act,
+	 ProgramParser            const *,
+	 std::vector<std::string> const & cmd)
+{
+	if (cmd.size() != 3)
+		throw wexception
+			("Syntax: seed <immovable type> <probability of spreading one step "
+			 "away (1 .. 255)>");
+
+	act->function = &Immovable::run_seed;
+
+	std::vector<std::string> const list(split_string(cmd[1], ":"));
+	if (list.size() == 1) {
+		act->sparam1 = cmd[1];
+		act->sparam2 = "world";
+	} else {
+		act->sparam1 = list[1];
+		act->sparam2 = list[0];
+	}
+
+	long const probability = atoi(cmd[2].c_str());
+	if (probability < 1 or 255 < probability)
+		throw wexception
+			("probability out of range (1, 255) \"%s\"", cmd[2].c_str());
+	act->iparam1 = probability;
+}
+
+bool Immovable::run_seed(Game* g, bool, const ImmovableAction & action)
+{
+	Map const & map = g->map();
+	MapFringeRegion<> mr(map, Area<>(get_position(), 0));
+	uint32_t fringe_size = 0;
+	do {
+		mr.extend(map);
+		fringe_size += 6;
+		log
+			("Immovable::run_seed at (%i, %i) with probability %u/256: extended "
+			 "map region to radius %u, fringe_size %u location (%i, %i)\n",
+			 get_position().x, get_position().y,
+			 static_cast<uint32_t>(action.iparam1), mr.radius(), fringe_size,
+			 mr.location().x, mr.location().y);
+	} while (g->logic_rand() % 256 < static_cast<uint32_t>(action.iparam1));
+	for (uint32_t n = g->logic_rand() % fringe_size; n; --n)
+		mr.advance(map);
+	log
+		("Immovable::run_seed: seeding at (%i, %i)\n",
+		 mr.location().x, mr.location().y);
+	BaseImmovable * const imm = map.get_immovable(mr.location());
+	if (not imm or imm->get_size() == Widelands::BaseImmovable::NONE)
+		g->create_immovable
+			(mr.location(),
+			 action.sparam1,
+			 action.sparam2 == "world" ?
+			 0 : g->get_tribe(action.sparam2.c_str()));
+
+	m_program_step = schedule_act(g, 1);
+	m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
+	return true;
+}
 
 /*
 ==============================================================================
