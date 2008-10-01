@@ -940,25 +940,18 @@ bool Immovable::run_seed(Game* g, bool, const ImmovableAction & action)
 	do {
 		mr.extend(map);
 		fringe_size += 6;
-		log
-			("Immovable::run_seed at (%i, %i) with probability %u/256: extended "
-			 "map region to radius %u, fringe_size %u location (%i, %i)\n",
-			 get_position().x, get_position().y,
-			 static_cast<uint32_t>(action.iparam1), mr.radius(), fringe_size,
-			 mr.location().x, mr.location().y);
 	} while (g->logic_rand() % 256 < static_cast<uint32_t>(action.iparam1));
 	for (uint32_t n = g->logic_rand() % fringe_size; n; --n)
 		mr.advance(map);
-	log
-		("Immovable::run_seed: seeding at (%i, %i)\n",
-		 mr.location().x, mr.location().y);
-	BaseImmovable * const imm = map.get_immovable(mr.location());
-	if (not imm or imm->get_size() == Widelands::BaseImmovable::NONE)
-		g->create_immovable
-			(mr.location(),
-			 action.sparam1,
-			 action.sparam2 == "world" ?
-			 0 : g->get_tribe(action.sparam2.c_str()));
+	{
+		Field const & f = map[mr.location()];
+		if (not f.get_immovable() and f.get_caps() & MOVECAPS_WALK)
+			g->create_immovable
+				(mr.location(),
+				 action.sparam1,
+				 action.sparam2 == "world" ?
+				 0 : g->get_tribe(action.sparam2.c_str()));
+	}
 
 	m_program_step = schedule_act(g, 1);
 	m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
