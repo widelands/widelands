@@ -144,11 +144,14 @@ bool Map_View::handle_mousepress
 	//  SDL does on Mac hardcoded middle mouse button emulation (alt+left).
 	//  This interferes with the editor, which is using alt+left click for third
 	//  tool.  So just handle middle mouse button like left one.
-	if (btn == SDL_BUTTON_MIDDLE)
-		btn = SDL_BUTTON_LEFT;
-#endif
+	// TODO: this should be handled in a more general way someplace else
+    // What kind of stupid idea is it to code something like that hardcore in SDL
+    // Sometimes, people are funny....
+    if (btn == SDL_BUTTON_MIDDLE || btn == SDL_BUTTON_LEFT) {
+#else
 	if (btn == SDL_BUTTON_LEFT) {
-		track_sel(Point(x, y));
+#endif
+        track_sel(Point(x, y));
 
 		fieldclicked.call();
 	} else if (btn == SDL_BUTTON_RIGHT) {
