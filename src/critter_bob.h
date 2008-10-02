@@ -39,6 +39,7 @@ struct Critter_Bob_Descr : public Bob::Descr {
 	Bob * create_object() const;
 
 	bool is_swimming() const throw () {return m_swimming;}
+	uint32_t movecaps() const throw ();
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 	const std::string & descname() const throw () {return m_descname;}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descname().c_str();}
@@ -66,7 +67,6 @@ public:
 
 	char const * type_name() const throw () {return "critter";}
 	virtual Bob::Type get_bob_type() const throw () {return Bob::CRITTER;}
-	uint32_t get_movecaps() const throw ();
 
 	virtual void init_auto_task(Game* g);
 

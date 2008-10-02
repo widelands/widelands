@@ -67,8 +67,9 @@ enum FieldCaps {
 	/** can we build any building on this field?*/
 	BUILDCAPS_BUILDINGMASK = BUILDCAPS_SIZEMASK|BUILDCAPS_MINE|BUILDCAPS_PORT,
 
-	/** Can Map_Objects walk or swim here? Also used for Map_Object::get_movecaps()
-	 * If MOVECAPS_WALK, any walking being can walk to this field*/
+	/// Can Map_Objects walk or swim here? Also used for
+	/// Map_Object_Descr::movecaps. If MOVECAPS_WALK, any walking being can walk
+	/// to this field.
 	MOVECAPS_WALK = 32,
 
 	/// If MOVECAPS_SWIM, any swimming being (including ships) can go there.

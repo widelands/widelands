@@ -24,6 +24,8 @@
 #include "editor_game_base.h"
 #include "bob.h"
 
+using Widelands::Bob;
+
 /**
  * Choses an object to place randomly from all enabled
  * and places this on the current field
@@ -40,11 +42,15 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 		 	(map.get_fcoords(center.node), parent.get_sel_radius()));
 	if (get_nr_enabled()) {
 		do {
-			if (Widelands::Bob * const bob = mr.location().field->get_first_bob())
-				// There is already a bob. Remove it first
-				bob->remove(&editor);
-			editor.create_bob(mr.location(), get_random_enabled());
+			Bob::Descr const & descr =
+				*map.world().get_bob_descr(get_random_enabled());
+			if (mr.location().field->get_caps() & descr.movecaps()) {
+				if (Bob * const bob = mr.location().field->get_first_bob())
+					bob->remove(&editor); //  There is already a bob. Remove it.
+				descr.create(&editor, 0, mr.location());
+			}
 		} while (mr.advance(map));
 		return mr.radius() + 2;
-	} else return mr.radius();
+	} else
+		return mr.radius();
 }

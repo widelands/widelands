@@ -78,8 +78,6 @@ public:
 	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
 	const std::string & descname() const throw () {return descr().descname();}
 
-	virtual uint32_t get_movecaps() const throw ();
-
 	PlayerImmovable * get_location(Editor_Game_Base * egbase) {
 		return reinterpret_cast<PlayerImmovable *>(m_location.get(egbase));
 	}

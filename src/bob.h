@@ -196,7 +196,7 @@ struct Bob : public Map_Object {
 
 		virtual ~Descr() {};
 		const std::string & name() const throw () {return m_name;}
-		Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
+		Bob * create(Editor_Game_Base *, Player * owner, Coords) const;
 		bool is_world_bob() const {return not m_owner_tribe;}
 
 		const char* get_picture() const {return m_picture.c_str();}
@@ -213,6 +213,7 @@ struct Bob : public Map_Object {
 				 Profile *prof,
 				 Tribe_Descr* tribe);
 
+		virtual uint32_t movecaps() const throw () {return 0;}
 		uint32_t vision_range() const;
 
 	protected:
@@ -235,7 +236,6 @@ struct Bob : public Map_Object {
 	virtual int32_t get_type() const throw () {return BOB;}
 	virtual char const * type_name() const throw () {return "bob";}
 	virtual Type get_bob_type() const throw () = 0;
-	virtual uint32_t get_movecaps() const throw () {return 0;}
 	const std::string & name() const throw () {return descr().name();}
 
 	virtual void init(Editor_Game_Base*);

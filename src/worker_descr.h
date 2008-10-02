@@ -91,6 +91,7 @@ public:
 		(Editor_Game_Base &, Player &, PlayerImmovable &, const Coords) const;
 
 	typedef std::map<Worker_Descr *, std::string> becomes_map_t;
+	virtual uint32_t movecaps() const throw ();
 
 protected:
 	virtual void parse

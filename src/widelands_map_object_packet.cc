@@ -59,7 +59,7 @@ void Map_Object_Packet::Read
 
 		// Initial loading stage
 		for (;;)
-			switch (uint8_t header = fr.Unsigned8()) {
+			switch (uint8_t const header = fr.Unsigned8()) {
 			case 0:
 				return;
 			case Map_Object::header_Immovable:

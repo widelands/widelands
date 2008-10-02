@@ -98,6 +98,9 @@ const
 }
 
 
+uint32_t Worker_Descr::movecaps() const throw () {return MOVECAPS_WALK;}
+
+
 /**
  * Parse the worker data from configuration
  */

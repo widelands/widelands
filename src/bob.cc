@@ -97,12 +97,14 @@ void Bob::Descr::parse
 /**
  * Create a bob of this type
  */
-Bob *Bob::Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords)
+Bob * Bob::Descr::create
+	(Editor_Game_Base * const egbase, Player * const owner, Coords const coords)
+	const
 {
 	Bob *bob = create_object();
 	bob->set_owner(owner);
-	bob->set_position(gg, coords);
-	bob->init(gg);
+	bob->set_position(egbase, coords);
+	bob->init(egbase);
 
 	return bob;
 }
@@ -629,9 +631,9 @@ bool Bob::start_task_movepath
 	CheckStepAnd cstep;
 
 	if (forceonlast)
-		cstep.add(CheckStepWalkOn(get_movecaps(), true));
+		cstep.add(CheckStepWalkOn(descr().movecaps(), true));
 	else
-		cstep.add(CheckStepDefault(get_movecaps()));
+		cstep.add(CheckStepDefault(descr().movecaps()));
 	cstep.add(CheckStepBlocked(tracker));
 
 	if (game->map().findpath(m_position, dest, persist, path, cstep) < 0) {
@@ -942,7 +944,7 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 
 	// Move capability check
 	if (!force) {
-		CheckStepDefault cstep(get_movecaps());
+		CheckStepDefault cstep(descr().movecaps());
 
 		if (!cstep.allowed(&map, m_position, newf, dir, CheckStep::stepNormal))
 			return -1;

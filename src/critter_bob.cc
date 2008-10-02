@@ -228,6 +228,10 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 }
 
 
+uint32_t Critter_Bob_Descr::movecaps() const throw () {
+	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
+}
+
 
 /*
 ==============================================================================
@@ -247,9 +251,6 @@ Bob(critter_bob_descr)
 {}
 
 Critter_Bob::~Critter_Bob() {}
-
-uint32_t Critter_Bob::get_movecaps() const throw ()
-{return descr().is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;}
 
 
 /*

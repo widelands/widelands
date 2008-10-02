@@ -93,21 +93,19 @@ throw (_wexception)
 					else
 						imm.m_program = 0;
 					imm.m_program_ptr = fr.Unsigned32();
-					if (!imm.m_program) {
+					if (!imm.m_program)
 						imm.m_program_ptr = 0;
-					} else {
-						if (imm.m_program->get_size() <= imm.m_program_ptr) {
-							//  Try to not fail if the program of some immovable has
-							//  changed significantly. Note that in some cases, the
-							//  immovable may end up broken despite the fixup, but
-							//  there is not really anything we can do against that.
-							log
-								("Warning: Immovable '%s', size of program '%s' seems "
-								 "to have changed.\n",
-								 descr.name().c_str(),
-								 imm.m_program->get_name().c_str());
-							imm.m_program_ptr = 0;
-						}
+					else if (imm.m_program->get_size() <= imm.m_program_ptr) {
+						//  Try to not fail if the program of some immovable has
+						//  changed significantly. Note that in some cases, the
+						//  immovable may end up broken despite the fixup, but there
+						//  is not really anything we can do against that.
+						log
+							("Warning: Immovable '%s', size of program '%s' seems "
+							 "to have changed.\n",
+							 descr.name().c_str(),
+							 imm.m_program->get_name().c_str());
+						imm.m_program_ptr = 0;
 					}
 					imm.m_program_step = fr.Signed32();
 

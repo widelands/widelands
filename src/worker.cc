@@ -395,7 +395,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 		("  FindObject(%i, %i, %s)\n",
 		 action->iparam1, action->iparam2, action->sparam1.c_str());
 
-	CheckStepWalkOn cstep(get_movecaps(), false);
+	CheckStepWalkOn cstep(descr().movecaps(), false);
 
 	Map & map = g->map();
 	const Area<FCoords> area (map.get_fcoords(get_position()), action->iparam1);
@@ -502,7 +502,7 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 	Map & map = g->map();
 	World * const w = &map.world();
 
-	CheckStepDefault cstep(get_movecaps());
+	CheckStepDefault cstep(descr().movecaps());
 
 	Area<FCoords> area(map.get_fcoords(get_position()), action->iparam1);
 
@@ -889,12 +889,6 @@ void Worker::log_general_info(Editor_Game_Base* egbase)
 	molog("m_current_exp: %i\n", m_current_exp);
 
 	molog("m_supply: %p\n", m_supply);
-}
-
-
-uint32_t Worker::get_movecaps() const throw ()
-{
-	return MOVECAPS_WALK;
 }
 
 
@@ -2290,7 +2284,7 @@ void Worker::geologist_update(Game* g, State* state)
 
 		// Find a suitable field and walk towards it
 		std::vector<Coords> list;
-		CheckStepDefault cstep(get_movecaps());
+		CheckStepDefault cstep(descr().movecaps());
 		FindNodeAnd ffa;
 
 		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);

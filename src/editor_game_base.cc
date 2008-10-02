@@ -625,7 +625,7 @@ Bob * Editor_Game_Base::create_bob
 	(Coords const c,
 	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe)
 {
-	Bob::Descr & descr =
+	Bob::Descr const & descr =
 		*
 		(tribe ?
 		 tribe->get_bob_descr(idx)

@@ -43,10 +43,8 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 		 	(map.get_fcoords(center.node), radius));
 	do if
 		(not mr.location().field->get_immovable()
-		 or
-		 mr.location().field->get_immovable()->get_size()
-		 ==
-		 Widelands::BaseImmovable::NONE)
+		 and
+		 mr.location().field->get_caps() & Widelands::MOVECAPS_WALK)
 		egbase.create_immovable(mr.location(), get_random_enabled(), 0);
 	while (mr.advance(map));
 	return radius + 2;

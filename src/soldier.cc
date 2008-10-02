@@ -874,7 +874,7 @@ void Soldier::sendSpaceSignals(Game* g)
 		g->map().find_reachable_immovables_unique
 			(Area<FCoords>(get_position(), MaxProtectionRadius),
 			 &attackables,
-			 CheckStepWalkOn(get_movecaps(), false),
+			 CheckStepWalkOn(descr().movecaps(), false),
 			 FindImmovableAttackable());
 
 		for
