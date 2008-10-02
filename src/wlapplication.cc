@@ -1190,35 +1190,42 @@ void WLApplication::mainmenu_multiplayer()
 	if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0)
 		throw wexception("Initialisation of Wsock2-library failed");
 #endif
-	bool inmenu = true;
-	while (inmenu) { // stay in menu until player clicks "back" button
-		Fullscreen_Menu_NetSetup ns; // must be reinitalised, else graphics look strange.
-		switch (ns.run()) {
+	for (;;) { // stay in menu until player clicks "back" button
+		int32_t menu_result;
+		std::string playername;
+		uint32_t addr;
+		uint16_t port;
+		bool host_address;
+		{
+			Fullscreen_Menu_NetSetup ns; // must be reinitalised, else graphics look strange.
+			menu_result = ns.run();
+			playername = ns.get_playername();
+			host_address = ns.get_host_address(addr, port);
+		}
+		switch (menu_result) {
 		case Fullscreen_Menu_NetSetup::HOSTGAME: {
-			NetHost netgame(ns.get_playername());
+			NetHost netgame(playername);
 			netgame.run();
 			break;
 		}
 		case Fullscreen_Menu_NetSetup::JOINGAME: {
 			IPaddress peer;
 
-			uint32_t addr;
-			uint16_t port;
-
-			if (not ns.get_host_address(addr, port))
+			if (not host_address)
 				throw wexception("Address of game server is no good");
 
 			peer.host=addr;
 			peer.port=port;
 
-			NetClient netgame(&peer, ns.get_playername());
+			NetClient netgame(&peer, playername);
 			netgame.run();
 			break;
 		}
 		default:
-			inmenu = false;
+			goto end;
 		}
 	}
+end:;
 }
 
 void WLApplication::mainmenu_editor()
