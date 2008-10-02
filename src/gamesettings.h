@@ -43,6 +43,8 @@ struct PlayerSettings {
  * Think of it as the Model in MVC.
  */
 struct GameSettings {
+	GameSettings() : savegame(false) {}
+
 	/// Name of the selected map
 	std::string mapname;
 	std::string mapfilename;
