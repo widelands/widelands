@@ -59,13 +59,23 @@ void Map_Bob_Data_Packet::ReadBob
 			if (subtype != Bob::CRITTER)
 				throw wexception("world bob is not a critter!");
 
-			World const & world = egbase->map().world();
+			Map   const & map   = egbase->map();
+			World const & world = map.world();
 			int32_t const idx = world.get_bob(name);
 			if (idx == -1)
 				throw wexception
 					("world %s does not define bob type \"%s\"",
 					 world.get_name(), name);
-			ol->register_object<Bob>(serial, *egbase->create_bob(coords, idx));
+			Bob::Descr const & descr = *world.get_bob_descr(idx);
+			if (not (map[coords].get_caps() & descr.movecaps()))
+				log
+					("WARNING: Found a %s at (%i, %i), but it can not move "
+					 "there. Put it somewhere else instead. (Node has movecaps %u, "
+					 "bob type has movecaps %u.)\n",
+					 descr.name().c_str(), coords.x, coords.y,
+					 map[coords].get_caps() & (MOVECAPS_WALK | MOVECAPS_SWIM),
+					 descr.movecaps());
+			ol->register_object<Bob>(serial, *descr.create(egbase, 0, coords));
 		} else {
 			if (skip)
 				return; // We do no load player bobs when no scenario
@@ -116,6 +126,7 @@ throw (_wexception)
 	fr.Open(fs, "binary/bob");
 
 	Map* map = egbase->get_map();
+	map->recalc_whole_map(); //  for movecaps checks in ReadBob
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
