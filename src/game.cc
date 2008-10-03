@@ -236,6 +236,8 @@ bool Game::run_splayer_scenario_direct(const char* mapname) {
 	set_map(new Map);
 
 	Map_Loader* maploader = map().get_correct_loader(mapname);
+	if (not maploader)
+		throw wexception("could not load \"%s\"", mapname);
 	try {
 		UI::ProgressWindow loaderUI;
 		GameTips tips (loaderUI);
