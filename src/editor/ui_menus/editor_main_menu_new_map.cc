@@ -23,6 +23,7 @@
 #include "i18n.h"
 #include "editorinteractive.h"
 #include "map.h"
+#include "profile.h"
 #include "world.h"
 #include "editor_game_base.h"
 
@@ -176,10 +177,12 @@ void Main_Menu_New_Map::clicked_create_map() {
 		m_parent->change_world();
 	map.create_empty_map
 		(Widelands::MAP_DIMENSIONS[m_w], Widelands::MAP_DIMENSIONS[m_h],
-		 m_worlds[m_currentworld]);
+		 m_worlds[m_currentworld],
+		 _("No Name"),
+		 g_options.pull_section("global")->get_string("realname", _("Unknown")));
 
 	// Postload the world which provides all the immovables found on a map
-	map.get_world()->postload(&egbase);
+	map.world().postload(&egbase);
 
 	egbase.postload     ();
 	egbase.load_graphics(loader);

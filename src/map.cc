@@ -386,14 +386,18 @@ the given data
 ===========
 */
 void Map::create_empty_map
-	(uint32_t const w, uint32_t const h, std::string const & worldname)
+	(uint32_t const w, uint32_t const h,
+	 std::string const & worldname,
+	 char const * const name,
+	 char const * const author,
+	 char const * const description)
 {
 	set_world_name(worldname.c_str());
 	load_world();
 	set_size(w, h);
-	set_name       (_("No Name"));
-	set_author     (_("Unknown"));
-	set_description(_("no description defined"));
+	set_name       (name);
+	set_author     (author);
+	set_description(description);
 	set_nrplayers(1);
 	// Set first tribe found as the "basic" tribe
 	// <undefined> (as set before) is useless and will lead to a crash -> Widelands will search for tribe "<undefined>"
@@ -1100,7 +1104,7 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 
 	//  3) General buildability check: if a "robust" Map_Object is on this node
 	//  we cannot build anything on it. Exception: we can build flags on roads.
-	if (BaseImmovable * imm = get_immovable(f))
+	if (BaseImmovable * const imm = get_immovable(f))
 		if
 			(not dynamic_cast<Road const *>(imm)
 			 &&

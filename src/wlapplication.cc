@@ -631,11 +631,8 @@ void WLApplication::init_graphics
 	if (w == m_gfx_w && h == m_gfx_h && fullscreen == m_gfx_fullscreen)
 		return;
 
-	if (g_gr)
-	{
-		delete g_gr;
-		g_gr = 0;
-	}
+	delete g_gr;
+	g_gr = 0;
 
 	m_gfx_w = w;
 	m_gfx_h = h;

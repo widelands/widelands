@@ -65,17 +65,17 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 
 	m_ls =
 		new UI::Listselect<const char *>
-		(this,
-		 posx, posy,
-		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
+			(this,
+			 posx, posy,
+			 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
 	m_ls->selected.set(this, &Main_Menu_Save_Map::selected);
 	m_ls->double_clicked.set(this, &Main_Menu_Save_Map::double_clicked);
 	m_editbox =
 		new UI::EditBox
-		(this,
-		 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
-		 get_inner_w() / 2 - spacing, 20,
-		 1, 0);
+			(this,
+			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
+			 get_inner_w() / 2 - spacing, 20,
+			 1, 0);
 	m_editbox->changed.set(this, &Main_Menu_Save_Map::edit_box_changed);
 
 	posx = get_inner_w() / 2 + spacing;
@@ -124,9 +124,7 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 0,
 		 &Main_Menu_Save_Map::clicked_ok, this,
-		 _("OK"),
-		 std::string(),
-		 false);
+		 _("OK"));
 
 	new UI::Button<Main_Menu_Save_Map>
 		(this,
@@ -180,6 +178,19 @@ void Main_Menu_Save_Map::clicked_ok() {
 		m_mapfiles.clear();
 		fill_list();
 	} else { //  Ok, save this map
+		Widelands::Map & map = m_parent->egbase().map();
+		if (not strcmp(map.get_name(), _("No Name"))) {
+			std::string::size_type const filename_size = filename.size();
+			map.set_name
+				((4 <= filename_size
+				  and filename[filename_size - 1] == 'f'
+				  and filename[filename_size - 2] == 'm'
+				  and filename[filename_size - 3] == 'w'
+				  and filename[filename_size - 4] == '.'
+				  ?
+				  filename.substr(0, filename_size - 4) : filename)
+				 .c_str());
+		}
 		if
 			(save_map
 			 	(filename,
@@ -218,7 +229,6 @@ void Main_Menu_Save_Map::selected(uint32_t) {
 
 
 		m_editbox->setText(FileSystem::FS_Filename(name));
-		m_ok_btn->set_enabled(true);
 
 		m_name  ->set_text(map.get_name       ());
 		m_author->set_text(map.get_author     ());
@@ -238,8 +248,7 @@ void Main_Menu_Save_Map::selected(uint32_t) {
 		m_world    ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
-		m_editbox  ->setText("");
-		m_ok_btn   ->set_enabled(false);
+		m_editbox  ->setText(m_parent->egbase().map().get_name());
 	}
 }
 

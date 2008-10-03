@@ -159,7 +159,10 @@ struct Map {
 
 	void create_empty_map // for editor
 		(uint32_t w = 64, uint32_t h = 64,
-		 std::string const & worldname = "greenland");
+		 std::string const & worldname   =   "greenland",
+		 char        const * name        = _("No Name"),
+		 char        const * author      = _("Unknown"),
+		 char        const * description = _("no description defined"));
 
 	void load_graphics();
 	void recalc_whole_map();

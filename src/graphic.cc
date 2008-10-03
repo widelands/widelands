@@ -108,16 +108,14 @@ Graphic::~Graphic()
 	delete m_roadtextures;
 	delete m_rendertarget;
 
-	std::vector<Picture>::const_iterator const pictures_end = m_pictures.end();
-	for
-		(std::vector<Picture>::const_iterator it = m_pictures.begin();
-		 it != pictures_end;
-		 ++it)
-		if (it->module)
+	std::vector<Picture>::size_type const pictures_size = m_pictures.size();
+	for (std::vector<Picture>::size_type i = 0; i < pictures_size; ++i)
+		if (m_pictures[i].module)
 			log
-				("WARNING: picture with module %u has not been freed "
-				 "(u.{fname,rendertarget} = %p)\n",
-				 it->module, it->u.fname);
+				("WARNING: picture %zu with module = 0x%x has not been freed "
+				 "(u.{fname,rendertarget} = %p). Some code may try to free it "
+				 "later, which would cause undefined behaviour!!!\n",
+				 i, m_pictures[i].module, m_pictures[i].u.fname);
 }
 
 /**

@@ -35,6 +35,7 @@
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"
+#include "profile.h"
 #include "tribe.h"
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
@@ -541,7 +542,10 @@ void Editor_Interactive::run_editor(std::string const & filename)
 			editor.set_map(&map);
 			if (filename.empty()) {
 				loader_ui.step("Creating empty map...");
-				map.create_empty_map();
+				map.create_empty_map
+					(64, 64, "greenland", _("No Name"),
+					 g_options.pull_section("global")->get_string
+					 ("realname", _("Unknown")));
 				editor.load_graphics(loader_ui);
 			} else {
 				loader_ui.stepf("Loading map \"%s\"...", filename.c_str());

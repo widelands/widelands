@@ -72,8 +72,9 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 				//  set new overlay
 				picid =
 					g_gr->get_picture
-					(PicMod_Menu,
-					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
+						(PicMod_Menu,
+						 world.get_resource(m_cur_res)->get_editor_pic(amount)
+						 .c_str());
 				overlay_manager.register_overlay(mr.location(), picid, 4);
 				map.recalc_for_field_area
 					(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
