@@ -39,7 +39,7 @@ def detect_revision():
             if svn_revnum=='':
                 revstring='unofficial-svk%s' % (svk_revnum,)
             else:
-                revstring='unofficial-svk%s(=svn%s)' % (svk_revnum, svn_revnum)
+                revstring='unofficial-svk%s(>=svn%s)' % (svk_revnum, svn_revnum)
 
     is_git_workdir=os.system('git show >/dev/null 2>&1')==0
     if is_git_workdir:
