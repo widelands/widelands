@@ -20,6 +20,9 @@
 #ifndef WIDELANDS_H
 #define WIDELANDS_H
 
+#include "backtrace.h"
+#include "log.h"
+
 #include <cassert>
 #include <cstddef>
 #include <limits>
@@ -66,6 +69,8 @@ template <typename T> struct _Index {
 	explicit _Index(size_t  const I)
 		: i(static_cast<value_t>(I))
 	{
+		if (I >= std::numeric_limits<value_t>::max())
+			log("%s", get_backtrace().c_str());
 		assert(I < std::numeric_limits<value_t>::max());
 	}
 

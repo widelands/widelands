@@ -132,6 +132,7 @@ def parse_cli(env):
 	if env['build']=='debug':
 		env.debug=1
 		env.Append(CCFLAGS='-DNOPARACHUTE')
+		env.Append(LINKFLAGS='-rdynamic')
 
 	if env['build']=='profile':
 		env.debug=1
