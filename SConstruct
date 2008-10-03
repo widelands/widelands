@@ -144,11 +144,30 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 TARGET=parse_cli(env)
 BUILDDIR='build/'+TARGET+'-'+env['build']
 
+def configure_is_needed(targets):
+	"""Do we need to run autoconfiguration? If we're building the default target 
+	   (==no target given at commandline): yes. If we're _only_ building targets
+	   that don't need configuration: no."""
+
+	if targets==[]:
+		return True
+
+	NOCONFTARGETS=["clean", "dist", "distclean", "indent", "install", "longlines", "precommit", "uninst", "uninstall"]
+	def allowed(x): return x in NOCONFTARGETS
+
+	if filter(allowed, targets) == []:
+		return True
+	else:
+		return False
+
 if env.enable_configuration:
 	do_buildid(env)
+
 	print_build_info(env)
 	print #prettyprinting
-	do_configure(conf, env)
+
+	if configure_is_needed(BUILD_TARGETS):
+		do_configure(conf, env)
 
 env=conf.Finish()
 print # Pretty output
