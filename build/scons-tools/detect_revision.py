@@ -18,7 +18,8 @@ except ImportError:
 
 def detect_revision():
     revstring='UNKNOWN-VERSION'
-
+    
+    svn_revnum = ""
     if os.path.exists('.svn'):
         has_svn = os.system('svn >/dev/null 2>&1')==256
         if has_svn:
@@ -56,8 +57,12 @@ def detect_revision():
     
     if __has_bzr and not is_git_workdir:
         try:
-            revno = Branch().open(".").revno()
-            revstring = "unofficial-bzr-%s(svn%s)" % (revno,svn_revnum)
+            b = Branch().open(".")
+            revno, nick = b.revno(), b.nick
+            if svn_revnum=='':
+                revstring = "unofficial-bzr-%s-%s" % (nick,revno)
+            else:
+                revstring = "unofficial-bzr-%s-%s(svn%s)" % (nick,revno,svn_revnum)
         except NotBranchError:
             pass
 
