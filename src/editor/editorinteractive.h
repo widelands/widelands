@@ -48,7 +48,6 @@ struct Editor_Interactive : public Interactive_Base {
 
 private:
 	Editor_Interactive(Widelands::Editor_Game_Base &);
-	~Editor_Interactive();
 
 public:
 	void load(std::string const & filename);

@@ -108,9 +108,6 @@ m_toggle_objectives_menu
 	fieldclicked.set(this, &Editor_Interactive::map_clicked);
 }
 
-/// Restore default sel.
-Editor_Interactive::~Editor_Interactive() {unset_sel_picture();}
-
 
 void Editor_Interactive::load(std::string const & filename) {
 	assert(filename.size());
@@ -122,6 +119,8 @@ void Editor_Interactive::load(std::string const & filename) {
 	egbase().cleanup_for_load(true, false);
 
 	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
+	if (not ml)
+		throw wexception("could not load \"%s\"", filename.c_str());
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
 	GameTips editortips (loader_ui, "txts/editortips");
