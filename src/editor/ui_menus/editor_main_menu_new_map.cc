@@ -49,7 +49,8 @@ UI::Window
 	(parent,
 	 (parent->get_w() - 140) / 2, (parent->get_h() - 150) / 2, 140, 150,
 	 _("New Map")),
-m_parent(parent) //  FIXME redundant (base stores parent pointer)
+m_parent(parent), //  FIXME redundant (base stores parent pointer)
+m_currentworld(0)
 {
 	char buffer[250];
 	int32_t const offsx   =  5;
@@ -59,8 +60,9 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	int32_t const height  = 20;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
+	Widelands::Map const & map = parent->egbase().map();
 	{
-		Widelands::Extent const map_extent = parent->egbase().map().extent();
+		Widelands::Extent const map_extent = map.extent();
 		for (m_w = 0; Widelands::MAP_DIMENSIONS[m_w] < map_extent.w; ++m_w) {}
 		for (m_h = 0; Widelands::MAP_DIMENSIONS[m_h] < map_extent.h; ++m_h) {}
 	}
@@ -110,7 +112,8 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	Widelands::World::get_all_worlds(m_worlds);
 
 	assert(m_worlds.size());
-	m_currentworld = 0;
+	while (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
+		++m_currentworld;
 
 	m_world = new UI::IDButton<Main_Menu_New_Map, int32_t>
 		(this,

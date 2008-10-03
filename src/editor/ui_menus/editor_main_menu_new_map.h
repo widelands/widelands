@@ -43,7 +43,7 @@ private:
 	UI::Textarea * m_width, * m_height;
 	UI::IDButton<Main_Menu_New_Map, int32_t> * m_world;
 	int32_t m_w, m_h;
-	uint32_t m_currentworld;
+	std::vector<std::string>::size_type m_currentworld;
 	std::vector<std::string> m_worlds;
 
 	void button_clicked(int32_t);
