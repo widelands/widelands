@@ -54,23 +54,27 @@ def print_build_info(env):
 	print
 	print 'Platform:         ', env['PLATFORM']
 	print 'Build type:       ', env['build']
-	print 'Build ID:         ', env['build_id']
+	print 'Build ID:         ', get_build_id(env)
 
-def do_buildid(env):
+def get_build_id(env):
 	#This is just a default value, don't change it here in the code.
 	#Use the commandline option 'build_id' instead
 	if env['build_id']=='':
 	        env['build_id']=detect_revision()
 
-	build_id_file=open('src/build_id.cc', "w")
+	return env['build_id']
+
+def generate_buildid_file(env, target, source):
+	build_id_file=open(target[0].path, "w")
 
 	build_id_file.write("""#include "build_id.h"
 
 std::string build_id()
 {
-	return \""""+env['build_id']+"""\";
+	return \""""+source[0].get_contents()+"""\";
 }
 """)
+
 	build_id_file.close()
 
 ################################################################################

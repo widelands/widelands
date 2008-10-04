@@ -1,9 +1,11 @@
+import os
+
 Import('*')
 
 #TODO: find a way to remove the .orig files astyle leaves around. Probably in
 #      scons-tools/astyle.py
 
-SRC=simpleglob("*.cc")
+SRC=simpleglob("*.cc")+["build_id.cc"]
 
 srcenv=env.Clone()
 
@@ -46,6 +48,6 @@ indent=srcenv.astyle(source=srcenv['INDENTLIST'])
 env.Alias("indent", indent)
 
 binary=srcenv.Program(target='widelands', source=SRC+libs)
-copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', BUILDDIR+'/widelands'))
+copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', os.path.join(BUILDDIR, 'widelands')))
 
 Return('copybinary')

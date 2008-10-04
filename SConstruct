@@ -161,7 +161,8 @@ def configure_is_needed(targets):
 		return False
 
 if env.enable_configuration:
-	do_buildid(env)
+	# Generate build_id.cc - scons itself will decide whether a recompile is needed
+	Command(os.path.join(BUILDDIR, "build_id.cc"), [Value(get_build_id(env))], generate_buildid_file)
 
 	print_build_info(env)
 	print #prettyprinting
@@ -237,7 +238,7 @@ distadd(env, 'Makefile')
 distadd(env, 'SConstruct')
 distadd(env, 'build-widelands.sh')
 
-dist=env.DistPackage('widelands-'+env['build_id'], 'build-widelands.sh') # the second argument is a (neccessary) dummy
+dist=env.DistPackage('widelands-'+get_build_id(env), 'build-widelands.sh') # the second argument is a (neccessary) dummy
 Alias('dist', dist)
 AlwaysBuild(dist)
 
@@ -282,7 +283,7 @@ distcleanactions=[
 	Delete('utils/confgettext.pyc'),
 	Delete('tags'),
 	Delete('widelands'),
-	Delete('src/build_id.h'),
+	Delete('src/build_id.cc'),
 	Delete('src/config.h'),
 	Delete('locale/sv_SE'),
 	Delete('locale/de_DE'),
