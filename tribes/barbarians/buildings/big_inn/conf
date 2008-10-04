@@ -13,18 +13,17 @@ output=meal
 fish=4
 pittabread=4
 meat=4
-beer=4
 strongbeer=4
 
 
 [work]
 0=sleep 16000
 1=check pittabread
-2=check beer,strongbeer
-3=check fish,meat
+2=check fish,meat
+3=check strongbeer
 4=consume pittabread
 5=consume fish,meat
-6=consume beer,strongbeer
+6=consume strongbeer
 7=animation working 21000
 8=produce meal
 
