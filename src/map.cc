@@ -85,7 +85,9 @@ m_starting_pos   (0),
 m_fields         (0),
 m_overlay_manager(0),
 m_pathfieldmgr(new PathfieldManager)
-{}
+{
+	m_worldname[0] = '\0';
+}
 
 
 Map::~Map()
