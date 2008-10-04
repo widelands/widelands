@@ -152,7 +152,7 @@ def configure_is_needed(targets):
 	if targets==[]:
 		return True
 
-	NOCONFTARGETS=["clean", "dist", "distclean", "indent", "install", "longlines", "precommit", "uninst", "uninstall"]
+	NOCONFTARGETS=["clean", "dist", "distclean", "doc", "indent", "install", "longlines", "precommit", "uninst", "uninstall"]
 	def allowed(x): return x in NOCONFTARGETS
 
 	if filter(allowed, targets) == []:
