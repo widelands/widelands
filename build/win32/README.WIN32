@@ -1,4 +1,7 @@
-This subfolder contains the DevC++-project-file "Widelands.dev"
--> For coding and compiling widelands via Bloodshed's DevCpp (http://www.Bloodshed.net)
-and the InnoSetup-file "Widelands.iss"
--> For packing your compiled Widelands-version in an installable InnoSetup-file (http://www.jrsoftware.org)
+This directory holds tools and scripts for win32-system users.
+* you can run buildcat.sh in msys (with installed python) to compile
+  the gettext translation files
+* You can find a Makefile for mingw-gcc >= 4.1 in subdirectory "mingw"
+* You can find an InnoSetup-Script "Widelands.iss" for packing your 
+  compiled Widelands build in subdiretory "innosetup".
+  the needed software can be find at http://www.jrsoftware.org

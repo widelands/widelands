@@ -16,9 +16,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
+ 
+#include "wlversion.h"
 
 #include <windows.h> // included for version info constants
-#include "../../../src/build_id.h"
 
 A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "../WL.ico"
 
@@ -40,7 +41,7 @@ FILETYPE VFT_APP
 		 BLOCK "080904E4"
 		 {
 			 VALUE "CompanyName", "The Widelands Development Team"
-			 VALUE "FileVersion", build_id().c_str()
+			 VALUE "FileVersion", BUILD_ID
 			 VALUE "FileDescription", "Widelands - realtime strategy game"
 			 VALUE "InternalName", "WL"
 			 VALUE "LegalCopyright", "GPL v2"
@@ -48,7 +49,7 @@ FILETYPE VFT_APP
              VALUE "License", "Gnu GPL v2"
 			 VALUE "OriginalFilename", "widelands"
 			 VALUE "ProductName", "Widelands - an Open-Source realtime strategy game"
-			 VALUE "ProductVersion", build_id().c_str()
+			 VALUE "ProductVersion", BUILD_ID
 		 }
 	 }
   BLOCK "VarFileInfo"

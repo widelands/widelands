@@ -169,5 +169,10 @@ tags: $(SRC) $(HEADERS)
 win32tool:
 	@echo "===> Creating icon.o for win32"
 	@$(WINDRES) -i Widelands_win.rc --input-format=rc -o icon.o -O coff
+	@echo "===> Copying configuration files to \"src\""
 	@-rm -rf ../../../src/config.h
 	@cp -r ./config.h ../../../src
+	@-rm -rf ../../../src/build_id.cc
+	@cp -r ./build_id.cc ../../../src
+	@-rm -rf ../../../src/wlversion.h
+	@cp -r ./wlversion.h ../../../src

@@ -19,7 +19,8 @@
 
 #ifndef WIDELANDS_WIN_H
 #define WIDELANDS_WIN_H
-#include "../../../src/build_id.h"
+
+#include "wlversion.h"
 
 /* VERSION DEFINITIONS */
 #define VER_STRING	"0.0.0.13"
@@ -28,7 +29,7 @@
 #define VER_RELEASE	0
 #define VER_BUILD	13
 #define COMPANY_NAME	"The Widelands Development Team"
-#define FILE_VERSION	build_id().c_str()
+#define FILE_VERSION	BUILD_ID
 #define FILE_DESCRIPTION	"Widelands - realtime strategy game"
 #define INTERNAL_NAME	"WL"
 #define LEGAL_COPYRIGHT	"GPL v2"
@@ -36,6 +37,6 @@
 #define License	"Gnu GPL v2"
 #define ORIGINAL_FILENAME	"widelands"
 #define PRODUCT_NAME	"Widelands"
-#define PRODUCT_VERSION	build_id().c_str()
+#define PRODUCT_VERSION	BUILD_ID
 
 #endif /*WIDELANDS_WIN_H*/
