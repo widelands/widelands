@@ -286,6 +286,23 @@ int main()
 
 ################################################################################
 
+def configure_is_needed(targets):
+	"""Do we need to run autoconfiguration? If we're building the default target 
+	   (==no target given at commandline): yes. If we're _only_ building targets
+	   that don't need configuration: no."""
+
+	NOCONFTARGETS=["clean", "dist", "distclean", "doc", "indent", "install", "longlines", "precommit", "uninst", "uninstall"]
+	is_needed=False
+
+	if targets==[]:
+		is_needed=True
+
+	def allowed(x): return x in NOCONFTARGETS
+	if filter(allowed, targets) == []:
+		is_needed=True
+
+	return is_needed
+
 def do_configure_basic_compiling(config_h_file, conf, env):
 	print "Checking for a working C++ compiler ...",
 	if not conf.TryLink("""class c{}; int main(){class c the_class;}""", '.cc'):
