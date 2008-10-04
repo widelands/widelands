@@ -456,13 +456,16 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 	if (!png_ptr)
 		throw wexception("Graphic::save_png: Couldn't create png struct!");
 
-	// Set another write function
-	// This is potentially dangerouse because the flush function is internally called 
-    // by png_write_end(), this will crash on newer libpngs. See here
-    // https://bugs.freedesktop.org/show_bug.cgi?id=17212
-    //
-    // Simple solution is to define a dummy flush function which I did here.
-    png_set_write_fn(png_ptr, sw, &Graphic::m_png_write_function, &Graphic::m_png_flush_function);
+	//  Set another write function. This is potentially dangerouse because the
+	//  flush function is internally called by png_write_end(), this will crash
+	//  on newer libpngs. See here:
+	//     https://bugs.freedesktop.org/show_bug.cgi?id=17212
+	//
+	//  Simple solution is to define a dummy flush function which I did here.
+	png_set_write_fn
+		(png_ptr,
+		 sw,
+		 &Graphic::m_png_write_function, &Graphic::m_png_flush_function);
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 
@@ -512,7 +515,7 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 	}
 
 	// End write
-    png_write_end(png_ptr, info_ptr);
+	png_write_end(png_ptr, info_ptr);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
