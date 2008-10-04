@@ -1020,7 +1020,8 @@ void Profile::write
 {
 	FileWrite fw;
 
-	fw.Printf("# Automatically created by Widelands " BUILD_ID "\n");
+
+	fw.Printf((std::string("# Automatically created by Widelands ")+build_id()+"\n").c_str());
 
 	for
 		(Section_list::iterator s = m_sections.begin();

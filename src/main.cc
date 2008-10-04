@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 		"') in outermost handler!"<<endl<<
 		"The exception said: "<<e.what()<<endl<<endl<<
 		"This should not happen. Please file a bug report "<<
-		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
+		"on version: "<<build_id()<<"."<<endl<<endl<<
 		flush;
 		delete g_app;
 
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 		"') in outermost handler!"<<endl<<
 		"The exception said: "<<e.what()<<endl<<endl<<
 		"This should not happen. Please file a bug report "<<
-		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
+		"on version: "<<build_id()<<"."<<endl<<endl<<
 		flush;
 		delete g_app;
 
@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
 		cerr<<endl<<
 		"Caught unknown exception in outermost handler!"<<endl<<endl<<
 		"This should not happen. Please file a bug report "<<
-		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
+		"on version: "<<build_id()<<"."<<endl<<endl<<
 		flush;
 		delete g_app;
 

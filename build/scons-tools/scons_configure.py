@@ -62,15 +62,14 @@ def do_buildid(env):
 	if env['build_id']=='':
 	        env['build_id']=detect_revision()
 
-	build_id_file=open('src/build_id.h', "w")
+	build_id_file=open('src/build_id.cc', "w")
 
-	build_id_file.write("""
-#ifndef BUILD_ID_H
-#define BUILD_ID_H
+	build_id_file.write("""#include "build_id.h"
 
-#define BUILD_ID \""""+env['build_id']+"""\"
-
-#endif
+std::string build_id()
+{
+	return \""""+env['build_id']+"""\";
+}
 """)
 	build_id_file.close()
 

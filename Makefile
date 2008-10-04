@@ -220,7 +220,7 @@ $(OBJECT_DIR)/widelands: $(OBJ)
 
 -include $(DEP)
 
-$(OBJECT_DIR)/%.o: src/%.cc src/build_id.h src/config.h
+$(OBJECT_DIR)/%.o: src/%.cc src/config.h
 	@echo "===> CXX $<"
 	$(Q)$(CXX) -pipe $(CXXFLAGS) -MMD -MP -MF $@.d -c -o $@ $<
 	$(Q)sed -e 's@^\(.*\)\.o:@\1.d \1.o:@' $@.d > $(OBJECT_DIR)/$*.d
@@ -235,6 +235,6 @@ update up:
 src/config.h:
 	@cp src/config.h.default $@
 
-src/build_id.h:
-	sed -e "s/UNKNOWN/$(VERSION)/" src/build_id.h.default > $@
+src/build_id.cc:
+	sed -e "s/UNKNOWN/$(VERSION)/" src/build_id.cc.default > $@
 

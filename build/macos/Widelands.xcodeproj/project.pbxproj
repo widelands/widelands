@@ -1892,11 +1892,11 @@
 			);
 			name = "Create BUILDID";
 			outputPaths = (
-				"$(PROJECT_DIR)/../../src/build_id.h",
+				"$(PROJECT_DIR)/../../src/build_id.cc",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n# This script creates a valid build_id.h file. This is recreated on every compile, not like config.h\nPATH=$PATH:/opt/local/bin:/sw/bin/:/usr/local/bin\n\n\nBUILDID=`cd .. && ../build/scons-tools/detect_revision.py` \nSRCDIR=$PROJECT_DIR/../../src/\n\nif [ ! -f $SRCDIR/build_id.h ];\nthen\ncat > $SRCDIR/build_id.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef BUILD_ID_H\n#define BUILD_ID_H\n\n#define BUILD_ID \"$BUILDID\"\n\n#endif\n\nEOF\nfi";
+			shellScript = "#!/bin/sh\n\n# This script creates a valid build_id.cc file. This is recreated on every compile, not like config.h\nPATH=$PATH:/opt/local/bin:/sw/bin/:/usr/local/bin\n\n\nBUILDID=`cd .. && ../build/scons-tools/detect_revision.py` \nSRCDIR=$PROJECT_DIR/../../src/\n\nif [ ! -f $SRCDIR/build_id.cc ];\nthen\ncat > $SRCDIR/build_id.cc << EOF\n/*\n * Created by XCode on the fly\n */\n#include "build_id.h"\n\nstd::string build_id()\n{\nreturn \"$BUILDID\";\n}\n\nEOF\nfi";
 		};
 		BFF9FAA00AC1BB3600E1B7CB /* Create config.h */ = {
 			isa = PBXShellScriptBuildPhase;

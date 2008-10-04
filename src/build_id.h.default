@@ -1,7 +1,0 @@
-#ifndef BUILD_ID_H
-#define BUILD_ID_H
-
-#define BUILD_ID "UNKNOWN"
-
-#endif
-

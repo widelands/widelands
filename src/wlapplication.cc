@@ -941,8 +941,9 @@ void WLApplication::show_usage()
 {
 	i18n::grab_textdomain("widelands");// uses system standard language
 
+	//TODO: do away with the sprintf sillyness and use plain cout streaming
 	char buffer[80];
-	snprintf(buffer, sizeof(buffer), _("This is Widelands-%s\n\n"), BUILD_ID);
+	snprintf(buffer, sizeof(buffer), _("This is Widelands-%s\n\n"), build_id().c_str());
 	cout << buffer;
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
 	cout << _("Options:\n\n");
@@ -1126,7 +1127,7 @@ void WLApplication::mainmenu()
 					("\n\nPlease report this problem to help us improve Widelands. "
 					 "You will find related messages in the standard output "
 					 "(stdout.txt on Windows). You are using build ");
-			message += BUILD_ID;
+			message += build_id();
 			message +=
 				_
 					(". Please add this information to your report.\n\n"

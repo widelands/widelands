@@ -92,7 +92,7 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 
 	assert(sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4);
 
-	SDL_WM_SetCaption("Widelands " BUILD_ID, "Widelands");
+	SDL_WM_SetCaption((std::string("Widelands ")+build_id()).c_str(), "Widelands");
 
 	m_screen.set_sdl_surface(*sdlsurface);
 

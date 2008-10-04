@@ -76,7 +76,7 @@ exit
 version
 	(this,
 	 MENU_XRES - 25, MENU_YRES - 29,
-	 std::string(_("Version ")) + BUILD_ID, Align_Right),
+	 std::string(_("Version ")) + build_id(), Align_Right),
 copyright
 	(this,
 	 15, MENU_YRES - 29,
