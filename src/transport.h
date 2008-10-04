@@ -465,8 +465,8 @@ struct SupplyList {
 	void add_supply(Supply* supp);
 	void remove_supply(Supply* supp);
 
-	Ware_Index get_nrsupplies() const {return Ware_Index(m_supplies.size());}
-	Supply * get_supply(Ware_Index const idx) const {return m_supplies[idx];}
+	size_t get_nrsupplies() const {return m_supplies.size();}
+	Supply & operator[](size_t const idx) {return *m_supplies[idx];}
 
 private:
 	std::vector<Supply *> m_supplies;

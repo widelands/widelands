@@ -2721,11 +2721,8 @@ void Economy::add_supply(Supply * const supply)
 */
 bool Economy::have_supply(Supply * const supply)
 {
-	for
-		(Ware_Index i = Ware_Index::First();
-		 i < m_supplies.get_nrsupplies();
-		 ++i)
-		if (m_supplies.get_supply(i) == supply)
+	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
+		if (&m_supplies[i] == supply)
 			return true;
 
 	return false;
@@ -2844,13 +2841,8 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 	int32_t best_cost = -1;
 	Flag * const target_flag = req->get_target_flag();
 
-
-	for
-		(Ware_Index i = Ware_Index::First();
-		 i < m_supplies.get_nrsupplies();
-		 ++i)
-	{
-		Supply & supp = *m_supplies.get_supply(i);
+	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
+		Supply & supp = m_supplies[i];
 		Route* route;
 
 		// idle requests only get active supplies
@@ -3025,15 +3017,8 @@ void Economy::create_requested_workers(Game* g)
 				if (!w_desc->get_buildable())
 					continue;
 
-				for
-					(Ware_Index i = Ware_Index::First();
-					 i < m_supplies.get_nrsupplies();
-					 ++i)
-				{
-					Supply* supp = m_supplies.get_supply(i);
-
-					num_wares += supp->nr_supplies(g, req);
-				} // for (int32_t i = 0; i < m_worker_supplies)
+				for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
+					num_wares += m_supplies[i].nr_supplies(g, req);
 
 				// If there aren't enough supplies...
 				if (num_wares == 0) {
@@ -3152,9 +3137,7 @@ Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
  */
 void Cmd_Call_Economy_Balance::execute(Game* g)
 {
-	Flag* flag = m_flag.get(g);
-
-	if (flag)
+	if (Flag * const flag = m_flag.get(g))
 		flag->get_economy()->balance_requestsupply(m_timerid);
 }
 
