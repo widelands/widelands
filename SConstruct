@@ -37,19 +37,6 @@ def simpleglob(pattern='*', directory='.', recursive=False):
 
 	return entries
 
-######################################################### find $ROOT -name $GLOB
-#TODO: replace with simpleglob
-
-def find(root, glob):
-	files=[]
-	for file in os.listdir(root):
-		file=os.path.join(root, file)
-		if fnmatch.fnmatch(file, glob):
-			files.append(file)
-		if os.path.isdir(file):
-			files+=find(file, glob)
-	return files
-
 ########################### Create a phony target (not (yet) a feature of scons)
 
 # taken from scons' wiki
@@ -191,10 +178,10 @@ Default('tags')
 
 ################################################################## PNG shrinking
 
-# findfiles takes quite long, so don't execute it if it's unneccessary
+# finding files takes quite long, so don't execute it if it's unneccessary
 if ('shrink' in BUILD_TARGETS):
 	print "Assembling file list for image compactification..."
-	shrink=env.PNGShrink(find('.', '*.png'))
+	shrink=env.PNGShrink(simpleglob('*.png', '.', recursive=True))
 	Alias("shrink", shrink)
 
 ########################################################## Install and uninstall
