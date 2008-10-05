@@ -431,7 +431,7 @@ void Soldier::start_animation
 	(Editor_Game_Base * gg, char const * const animname, uint32_t const time)
 {
 	if (upcast(Game, game, gg))
-		start_task_idle (game, descr().get_rand_anim(animname), time);
+		return start_task_idle (game, descr().get_rand_anim(animname), time);
 }
 
 
@@ -638,8 +638,7 @@ void Soldier::defense_update(Game* g, State* state)
 			signal_handled();
 		} else {
 			molog("[defense] cancelled by signal '%s'\n", signal.c_str());
-			pop_task(g);
-			return;
+			return pop_task(g);
 		}
 	}
 
@@ -658,12 +657,10 @@ void Soldier::defense_update(Game* g, State* state)
 		return pop_task(g);
 	}
 
-	if (signal == "blocked") {
+	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
-		start_task_idle(g, get_animation("idle"), 5000);
-		return;
-	}
+		return start_task_idle(g, get_animation("idle"), 5000);
 
 	if (position == location) {
 		molog("[defense] returned home\n");
@@ -688,6 +685,7 @@ void Soldier::defense_update(Game* g, State* state)
 	start_task_movepath
 		(g, baseflag->get_position(), 0,
 		 descr().get_right_walk_anims(does_carry_ware()));
+	return;
 }
 
 void Soldier::defense_pop(Game* g, State*)
@@ -738,28 +736,23 @@ void Soldier::battle_update(Game* g, State*)
 	if (signal.size()) {
 		if (signal == "blocked") {
 			signal_handled();
-			start_task_idle(g, get_animation("idle"), 5000);
-			return;
+			return start_task_idle(g, get_animation("idle"), 5000);
 		} else if (signal == "location" || signal == "battle" || signal == "wakeup") {
 			signal_handled();
 		} else {
 			molog("[battle] interrupted by unexpected signal '%s'\n", signal.c_str());
-			pop_task(g);
-			return;
+			return pop_task(g);
 		}
 	}
 
 	if (!m_battle) {
 		molog("[battle] is over\n");
 		sendSpaceSignals(g);
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
-	if (!m_battle->getOpponent(this)) {
-		start_task_idle(g, get_animation("idle"), -1);
-		return;
-	}
+	if (!m_battle->getOpponent(this))
+		return start_task_idle(g, get_animation("idle"), -1);
 
 	if (stayHome()) {
 		if (this == m_battle->first()) {

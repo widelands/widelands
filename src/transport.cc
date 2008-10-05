@@ -1711,22 +1711,14 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 
 	*psuccess = true;
 
-	if (location == destination) {
-		tlog("location == destination\n");
+	if (location == destination)
 		return 0;
-	}
 
 	locflag = location->get_base_flag();
 	destflag = destination->get_base_flag();
 
-	if (locflag == destflag) {
-		tlog("location flag == destination flag\n");
-
-		if (locflag == location)
-			return destination;
-
-		return locflag;
-	}
+	if (locflag == destflag)
+		return locflag == location ? destination : locflag;
 
 	// Brute force: recalculate the best route every time
 	if (!locflag->get_economy()->find_route(locflag, destflag, &m_route, m_item))
@@ -1745,10 +1737,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 				(road->get_flag(Road::FlagEnd)
 				 ==
 				 m_route.get_flag(m_game, m_route.get_nrsteps() - 1))
-			{
-				tlog("trim end flag (road)\n");
 				m_route.truncate(m_route.get_nrsteps() - 1);
-			}
 
 	// Now decide where we want to go
 	if (dynamic_cast<Flag const *>(location)) {
@@ -1766,11 +1755,9 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 			return m_route.get_flag(m_game, 1);
 		}
 
-		tlog("move from flag to destination\n");
 		return destination;
 	}
 
-	tlog("move to first flag\n");
 	return m_route.get_flag(m_game, 0);
 }
 

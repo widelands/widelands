@@ -1136,19 +1136,15 @@ Ware_Index Worker::level(Game & game) {
  */
 void Worker::init_auto_task(Game * game) {
 	if (get_location(game)) {
-		if (get_economy()->get_nr_warehouses()) {
-			molog("init_auto_task: go warehouse\n");
-
-			start_task_gowarehouse(game);
-			return;
-		}
+		if (get_economy()->get_nr_warehouses())
+			return start_task_gowarehouse(game);
 
 		set_location(0);
 	}
 
 	molog("init_auto_task: become fugitive\n");
 
-	start_task_fugitive(game);
+	return start_task_fugitive(game);
 }
 
 
@@ -1289,8 +1285,7 @@ void Worker::transfer_update(Game * g, State * state) {
 				 "flag",
 				 get_serial());
 
-		molog("[transfer]: move from building to flag\n");
-		start_task_leavebuilding(g, true);
+		return start_task_leavebuilding(g, true);
 	} else if (upcast(Flag,     flag,     location)) {
 		if        (upcast(Building, nextbuild, nextstep)) { //  Flag to Building
 			if (nextbuild->get_base_flag() != location)
@@ -1299,9 +1294,11 @@ void Worker::transfer_update(Game * g, State * state) {
 					 "nowhere near",
 					 get_serial());
 
-			molog("[transfer]: move from flag to building\n");
-			start_task_move
-				(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
+			return
+				start_task_move
+					(g,
+					 WALK_NW, &descr().get_right_walk_anims(does_carry_ware()),
+					 true);
 		} else if (upcast(Flag,     nextflag,  nextstep)) { //  Flag to Flag
 			Road & road = *flag->get_road(nextflag);
 
@@ -1495,8 +1492,6 @@ void Worker::start_task_return(Game* g, bool dropitem)
 {
 	PlayerImmovable* location = get_location(g);
 
-	molog("start_task_return\n");
-
 	if (!location || location->get_type() != BUILDING)
 		throw wexception("MO(%u): start_task_return(): not owned by building", get_serial());
 
@@ -1514,7 +1509,6 @@ void Worker::return_update(Game* g, State* state)
 		return pop_task(g);
 	}
 
-	molog("[return]: Ignoring and blocking signal '%s'\n", signal.c_str());
 	signal_handled();
 
 	Building & location = dynamic_cast<Building &>(*get_location(g));
@@ -1531,16 +1525,12 @@ void Worker::return_update(Game* g, State* state)
 					WareInstance* item = fetch_carried_item(g);
 
 					if (item) {
-						molog("[return]: Drop item on flag\n");
-
 						flag->add_item(g, item);
 
 						set_animation(g, descr().get_animation("idle"));
 						return schedule_act(g, 20); // rest a while
 					}
 				}
-
-				molog("[return]: Move back into building\n");
 
 				return
 					start_task_move
@@ -1553,8 +1543,6 @@ void Worker::return_update(Game* g, State* state)
 	}
 
 	// Determine the building's flag and move to it
-
-	molog("[return]: Move to building's flag\n");
 
 	if
 		(not
@@ -1689,14 +1677,12 @@ void Worker::gowarehouse_update(Game* g, State* state)
 
 		state->transfer = 0;
 		pop_task(g);
-		start_task_transfer(g, t);
-		return;
+		return start_task_transfer(g, t);
 	}
 
 	if (!get_economy()->get_nr_warehouses()) {
 		molog("[gowarehouse]: No warehouse left in Economy\n");
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	// Idle until we are assigned a transfer.
@@ -1709,7 +1695,7 @@ void Worker::gowarehouse_update(Game* g, State* state)
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(this);
 
-	start_task_idle(g, get_animation("idle"), 1000);
+	return start_task_idle(g, get_animation("idle"), 1000);
 }
 
 void Worker::gowarehouse_signalimmediate(Game*, State*, const std::string& signal)
@@ -1755,8 +1741,7 @@ void Worker::dropoff_update(Game * g, State *)
 
 	if (signal.size()) {
 		molog("[dropoff]: Interrupted by signal '%s'\n", signal.c_str());
-		pop_task(g);
-		return;
+		return pop_task(g);
 	}
 
 	WareInstance* item = get_carried_item(g);
@@ -1775,10 +1760,7 @@ void Worker::dropoff_update(Game * g, State *)
 			if (start_task_waitforcapacity(g, flag))
 				return;
 
-			// Exit throttle
-			molog("[dropoff]: move from building to flag\n");
-			start_task_leavebuilding(g, false);
-			return;
+			return start_task_leavebuilding(g, false); //  exit throttle
 		}
 
 		// We're on the flag, drop the item and pause a little
@@ -1804,11 +1786,13 @@ void Worker::dropoff_update(Game * g, State *)
 	}
 
 	// We don't have the item any more, return home
-	if (location->get_type() == Map_Object::FLAG) {
-		start_task_move
-			(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
-		return;
-	}
+	if (location->get_type() == Map_Object::FLAG)
+		return
+			start_task_move
+				(g,
+				 WALK_NW,
+				 &descr().get_right_walk_anims(does_carry_ware()),
+				 true);
 
 	if (location->get_type() != Map_Object::BUILDING)
 		throw wexception("MO(%u): [dropoff]: not on building on return", get_serial());
@@ -1820,7 +1804,7 @@ void Worker::dropoff_update(Game * g, State *)
 
 	// Our parent task should know what to do
 	molog("[dropoff]: back in building\n");
-	pop_task(g);
+	return pop_task(g);
 }
 
 
@@ -1855,10 +1839,8 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 
 	// If we haven't got the item yet, walk onto the flag
 	if (!get_carried_item(g) && !state->ivar1) {
-		if (dynamic_cast<Building const *>(location)) {
-			molog("[fetchfromflag]: move from building to flag\n");
+		if (dynamic_cast<Building const *>(location))
 			return start_task_leavebuilding(g, false);
-		}
 
 		state->ivar1 = 1; // force return to building
 
@@ -1877,9 +1859,11 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	if (dynamic_cast<Flag const *>(location)) {
 		molog("[fetchfromflag]: return to building\n");
 
-		start_task_move
-			(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
-		return;
+		return
+			start_task_move
+				(g,
+				 WALK_NW,
+				 &descr().get_right_walk_anims(does_carry_ware()), true);
 	}
 
 	if (not dynamic_cast<Building const *>(location))
@@ -1900,7 +1884,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 		return;
 	}
 
-	pop_task(g); // assume our parent task knows what to do
+	return pop_task(g); // assume our parent task knows what to do
 }
 
 
@@ -1937,7 +1921,7 @@ bool Worker::start_task_waitforcapacity(Game* g, Flag* flag)
 }
 
 
-void Worker::waitforcapacity_update(Game * g, State * state)
+void Worker::waitforcapacity_update(Game * g, State *)
 {
 	std::string signal = get_signal();
 
@@ -2016,25 +2000,16 @@ void Worker::leavebuilding_update(Game* g, State* state)
 {
 	std::string signal = get_signal();
 
-	if (signal == "wakeup") {
-		molog("[leavebuilding]: Wake up\n");
+	if (signal == "wakeup")
 		signal_handled();
-	} else if (signal.size()) {
-		molog("[leavebuilding]: Interrupted by signal '%s'\n", signal.c_str());
+	else if (signal.size())
 		return pop_task(g);
-	}
 
 	if (upcast(Building, building, g->map().get_immovable(get_position()))) {
 		assert(building == state->objvar1.get(g));
 
-		if (!building->leave_check_and_wait(g, this)) {
-			molog("[leavebuilding]: Wait\n");
+		if (!building->leave_check_and_wait(g, this))
 			return skip_act();
-		}
-
-		molog
-			("[leavebuilding]: Leave (%s location)\n",
-			 state->ivar1 ? "change" : "stay in");
 
 		if (state->ivar1)
 			set_location(building->get_base_flag());
@@ -2072,8 +2047,6 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
 	molog("wakeup_leave_building called\n");
 
 	if (state && state->task == &taskLeavebuilding) {
-		molog("[leavebuilding]: wakeup\n");
-
 		if (state->objvar1.get(g) != building)
 			throw wexception("MO(%u): [waitleavebuilding]: buildings don't match", get_serial());
 

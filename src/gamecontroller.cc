@@ -22,6 +22,7 @@
 #include "computer_player.h"
 #include "game.h"
 #include "playercommand.h"
+#include "profile.h"
 #include "wlapplication.h"
 
 struct SinglePlayerGameController : public GameController {
@@ -53,7 +54,16 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game* game, bo
 {
 	m_lastframe = WLApplication::get()->get_time();
 	m_time = m_game.get_gametime();
-	m_speed = 1000;
+	{
+		int32_t const speed_of_new_game =
+			g_options.pull_section("global")->get_int("speed_of_new_game", 1000);
+		if (speed_of_new_game < 0)
+			throw wexception
+				("in config section [global]: seed_of_new_game = %i: must be "
+				 "non-negative",
+				 speed_of_new_game);
+		m_speed = speed_of_new_game;
+	}
 	m_player_cmdserial = 0;
 }
 

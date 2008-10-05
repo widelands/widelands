@@ -684,6 +684,7 @@ bool WLApplication::init_settings() {
 	s->get_int("border_snap_distance");
 	s->get_int("maxfps");
 	s->get_int("panel_snap_distance");
+	s->get_int("speed_of_new_game");
 	s->get_string("nickname");
 	s->get_string("lasthost");
 	// KLUDGE!

@@ -310,8 +310,7 @@ void Critter_Bob::program_update(Game* g, State* state)
 
 		if (state->ivar1 >= program.get_size()) {
 			molog("  End of program\n");
-			pop_task(g);
-			return;
+			return pop_task(g);
 		}
 
 		action = program.get_action(state->ivar1);

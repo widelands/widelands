@@ -199,10 +199,8 @@ void Carrier::deliver_to_building(Game * game, State * state)
 	BaseImmovable * const pos = game->map()[get_position()].get_immovable();
 
 	if (dynamic_cast<Flag const *>(pos))
-		pop_task(game); //  we are done
+		return pop_task(game); //  we are done
 	else if (upcast(Building, building, pos)) {
-		molog("[Carrier]: Arrived at building.\n");
-
 		// Drop all items addresed to this building
 		while (WareInstance * const item = get_carried_item(game)) {
 			// If the building has disappeared and immediately been replaced
@@ -214,8 +212,6 @@ void Carrier::deliver_to_building(Game * game, State * state)
 				fetch_carried_item(game);
 				item->set_location(game, building);
 				item->update      (game);
-
-				molog("[Carrier]: Delivered item inside building.\n");
 			} else {
 				molog("[Carrier]: Building switch from under us, return to road.\n");
 
@@ -229,16 +225,17 @@ void Carrier::deliver_to_building(Game * game, State * state)
 		}
 
 		// No more deliverable items. Walk out to the flag.
-		molog("[Carrier]: Move out of building.\n");
-		start_task_move
-			(game, WALK_SE, &descr().get_right_walk_anims(does_carry_ware()), true);
+		return
+			start_task_move
+				(game,
+				 WALK_SE,
+				 &descr().get_right_walk_anims(does_carry_ware()),
+				 true);
 	} else {
 		//  tough luck, the building has disappeared
 		molog("[Carrier]: Building disappeared while in building.\n");
 		set_location(0);
 	}
-
-	return;
 }
 
 
@@ -267,7 +264,7 @@ void Carrier::pickup_from_flag(Game* g, State* s)
 			schedule_act(g, 20);
 		} else {
 			molog("[Carrier]: Nothing suitable on flag.\n");
-			pop_task(g);
+			return pop_task(g);
 		}
 	}
 }
@@ -317,10 +314,8 @@ void Carrier::drop_item(Game* g, State* s)
 
 		set_animation(g, descr().get_animation("idle"));
 		schedule_act(g, 20);
-	} else {
-		molog("[Carrier]: back to idle.\n");
-		pop_task(g);
-	}
+	} else
+		return pop_task(g);
 }
 
 
@@ -334,10 +329,13 @@ void Carrier::drop_item(Game* g, State* s)
 void Carrier::enter_building(Game* g, State* s)
 {
 	if (!start_task_walktoflag(g, s->ivar1 ^ 1)) {
-		molog("[Carrier]: Move into building.\n");
-		start_task_move
-			(g, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
 		s->ivar1 = -1;
+		return
+			start_task_move
+				(g,
+				 WALK_NW,
+				 &descr().get_right_walk_anims(does_carry_ware()),
+				 true);
 	}
 }
 
@@ -560,10 +558,10 @@ bool Carrier::start_task_walktoflag(Game* g, int32_t flag, bool offset)
 
 	return
 		start_task_movepath
-		(g, g->map(),
-		 path,
-		 idx,
-		 descr().get_right_walk_anims(does_carry_ware()));
+			(g, g->map(),
+			 path,
+			 idx,
+			 descr().get_right_walk_anims(does_carry_ware()));
 }
 
 };

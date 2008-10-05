@@ -901,18 +901,12 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) {
 			const char * input_name = it->name.c_str();
 			if (Ware_Index id_w = tribe.ware_index(input_name)) {
 				if (m_supply->stock_wares(id_w) < it->amount) {
-					molog
-						(" %s: Need more %s for creation\n",
-						 &worker_name, input_name);
 					enought_wares = false;
 				}
 			} else {
 				input_name = it->name.c_str();
 				id_w = tribe.worker_index(input_name);
 				if (m_supply->stock_workers(id_w) < it->amount) {
-					molog
-						(" %s: Need more %s for creation\n",
-						 &worker_name, input_name);
 					enought_wares = false;
 				}
 			}
