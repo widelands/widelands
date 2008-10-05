@@ -66,13 +66,11 @@ def doinst(target, source, env):
 	tmpdir=tempfile.mkdtemp(prefix='widelands-inst.')
 
 	for (source, target, compress, filetype) in set(env['INSTFILES']):  #the set is there to ensure uniqueness
-		#print "Installing '%s' into '%s' as %s" % (source, target, compress)
-
 		sourcebase=os.path.basename(source)
 		sourcedir=os.path.dirname(source)
 		targetbase=os.path.basename(target)
 		targetdir=os.path.dirname(target)
-		
+
 		if compress:
 			try:
 				shutil.rmtree(tmpdir)
@@ -106,7 +104,7 @@ def doinst(target, source, env):
 		if filetype=='binary':
 			targetprefix=os.path.join(env['install_prefix'], env['bindir'], targetdir)
 		if filetype=='locale':
-			targetprefix=os.path.join(env['install_prefix'], env['localedir'], targetdir)
+			targetprefix=os.path.join(env['install_prefix'], env['localedir'])
 
 		if not os.path.exists(targetprefix):
 			os.makedirs(targetprefix, 0755)
