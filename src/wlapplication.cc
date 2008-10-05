@@ -94,7 +94,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("Widelands.app/Contents/Resources/"));
 #else
 		// first, try the data directory used in the last scons invocation
-		g_fs->AddFileSystem(FileSystem::Create(INSTALL_DATADIR)); //see config.h
+		g_fs->AddFileSystem(FileSystem::Create(std::string(INSTALL_PREFIX)+'/'+INSTALL_DATADIR)); //see config.h
 #endif
 	}
 	catch (FileNotFound_error e) {}
