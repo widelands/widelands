@@ -22,6 +22,7 @@
 #ifndef WIN32
 #ifndef APPLE
 #include <execinfo.h>
+#include <stdlib.h>
 #endif
 #endif
 
