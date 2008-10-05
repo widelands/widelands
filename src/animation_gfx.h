@@ -52,7 +52,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 private:
 	void encode(uint8_t plyr, const RGBColor*);
 
-	Frames * m_plrframes;
+	Frames m_plrframes[MAX_PLAYERS + 1];
 	Frames m_pcmasks;
 	EncodeData m_encodedata;
 	Point m_hotspot;

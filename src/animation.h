@@ -34,7 +34,7 @@ class Profile;
 class Section;
 
 struct EncodeData {
-	bool     hasplrclrs;
+	enum {No, Mask, Old} hasplrclrs;
 	RGBColor plrclr[4];
 
 	void clear();

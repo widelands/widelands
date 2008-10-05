@@ -37,7 +37,7 @@ Reset the EncodeData to defaults (no special colors)
 */
 void EncodeData::clear()
 {
-	hasplrclrs = false;
+	hasplrclrs = No;
 }
 
 
@@ -48,13 +48,12 @@ EncodeData::parse
 Parse color codes from section, the following keys are currently known:
 
 clrkey_[r, g, b]     color key
-shadowclr_[r, g, b]  color for shadow pixels
 ===============
 */
 void EncodeData::parse(Section & s)
 {
 	if (s.get_bool("playercolor", false))
-		hasplrclrs = true;
+		hasplrclrs = Mask;
 
 	// Read old-style player color codes
 	char key[] = "plrclr0_r";
@@ -69,7 +68,7 @@ void EncodeData::parse(Section & s)
 		plrclr[i] = RGBColor(r, g, b);
 	}
 
-	hasplrclrs = true;
+	hasplrclrs = Old;
 }
 
 
@@ -82,8 +81,8 @@ Add another encode data. Already existing color codes are overwritten
 */
 void EncodeData::add(const EncodeData *other)
 {
-	if (other->hasplrclrs) {
-		hasplrclrs = true;
+	if (other->hasplrclrs == Old) {
+		hasplrclrs = Old;
 		for (int32_t i = 0; i < 4; ++i)
 			plrclr[i] = other->plrclr[i];
 	}
@@ -145,17 +144,14 @@ uint32_t AnimationManager::get
 	 char       const *       picnametempl,
 	 EncodeData const * const encdefaults)
 {
-	uint32_t id;
-	AnimationData* ad;
 	m_animations.push_back(AnimationData());
-	id = m_animations.size();
-
-	ad = &m_animations[id-1];
-	ad->frametime = FRAME_LENGTH;
-	ad->hotspot.x = 0;
-	ad->hotspot.y = 0;
-	ad->encdata.clear();
-	ad->picnametempl = "";
+	uint32_t const id = m_animations.size();
+	AnimationData & ad = m_animations[id - 1];
+	ad.frametime = FRAME_LENGTH;
+	ad.hotspot.x = 0;
+	ad.hotspot.y = 0;
+	ad.encdata.clear();
+	ad.picnametempl = "";
 
 	// Determine picture name template
 
@@ -173,14 +169,14 @@ uint32_t AnimationManager::get
 		size_t const len = strlen(pictempl) - 4;
 		if (pictempl[len] == '.')
 			pictempl[len] = '\0'; // delete extension
-		ad->picnametempl = pictempl;
+		ad.picnametempl = pictempl;
 	}
 
 	// Read mapping from frame numbers to sound effect names and load effects
 	// will yield strange results if there is a different number of sfx_frame and sfx_name
 	int32_t framenum;
 	const char *fxname;
-	ad->sfx_cues[123456]="dummy";
+	ad.sfx_cues[123456] = "dummy";
 	while
 		(s.get_next_int("sfx_frame", &framenum)
 		 &&
@@ -188,22 +184,24 @@ uint32_t AnimationManager::get
 	{
 		//TODO: error handling
 		g_sound_handler.load_fx(directory, fxname);
-		ad->sfx_cues[framenum]=fxname;
+		ad.sfx_cues[framenum] = fxname;
 	}
 	//TODO: complain about mismatched number of sfx_name/sfx_frame
 
 	// Get descriptive data
 	if (encdefaults)
-		ad->encdata.add(encdefaults);
+		ad.encdata.add(encdefaults);
 
-	ad->encdata.parse(s);
+	ad.encdata.parse(s);
 
-	int32_t fps = s.get_int("fps");
+	int32_t const fps = s.get_int("fps");
+	if (fps < 0)
+		throw wexception("fps is %i, must be non-negative", fps);
 	if (fps > 0)
-		ad->frametime = 1000 / fps;
+		ad.frametime = 1000 / fps;
 
 	// TODO: Frames of varying size / hotspot?
-	ad->hotspot = s.get_Point("hotspot");
+	ad.hotspot = s.get_Point("hotspot");
 
 	return id;
 }

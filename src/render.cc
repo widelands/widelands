@@ -368,6 +368,7 @@ Load the animation
 static const uint32_t nextensions = 4;
 static const char extensions[nextensions][5] = {".bmp", ".png", ".gif", ".jpg"};
 AnimationGfx::AnimationGfx(const AnimationData* data)
+: m_hotspot(data->hotspot)
 {
 	m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
 	m_encodedata.plrclr[0]  = data->encdata.plrclr[0];
@@ -375,121 +376,147 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 	m_encodedata.plrclr[2]  = data->encdata.plrclr[2];
 	m_encodedata.plrclr[3]  = data->encdata.plrclr[3];
 
-	m_hotspot = data->hotspot;
-	m_plrframes = new std::vector<Surface*>[MAX_PLAYERS+1];
+	//  In the filename template, the last sequence of '?' characters (if any)
+	//  is replaced with a number, for example the template "idle_??" is
+	//  replaced with "idle_00". Then the code looks if there is a file with
+	//  that name + any extension in the list above. Assuming that it finds a
+	//  file, it increments the number so that the filename is "idle_01" and
+	//  looks for a file with that name + extension, and so on until it can not
+	//  find any file. Then it is assumed that there are no more frames in the
+	//  animation.
 
-	std::vector<Surface *> frames;
+	//  Allocate a buffer for the filename. It must be large enough to hold the
+	//  picture name template, the "_pc" (3 characters) part for playercolor
+	//  masks, the extension (4 characters including the dot) and the null
+	//  terminator. Copy the picture name template into the buffer.
+	char filename[256];
+	size_t const picnametempl_size = data->picnametempl.size();
+	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
+		throw wexception
+			("buffer too small (%u) for picture name temlplate of size %u\n",
+			 sizeof(filename), picnametempl_size);
+	strcpy(filename, data->picnametempl.c_str());
+
+	//  Find out where in the picture name template the number is. Search
+	//  backwards from the end.
+	char * const after_basename = filename + picnametempl_size;
+	char * last_digit = after_basename;
+	while (filename <= last_digit and *last_digit != '?')
+		--last_digit;
+	char * before_first_digit = last_digit;
+	while (filename <= before_first_digit and *before_first_digit == '?') {
+		*before_first_digit = '0';
+		--before_first_digit;
+	}
+
 	for (;;) {
-		//  create the base file name by reverse-scanning for '?' and replacing
-		char fnamebase[256];
-		snprintf(fnamebase, sizeof(fnamebase), "%s", data->picnametempl.c_str());
-
-		int32_t nr = frames.size();
-		char *p = fnamebase + strlen(fnamebase);
-		while (p > fnamebase) {
-			if (*--p != '?')
-				continue;
-
-			*p = '0' + (nr % 10);
-			nr = nr / 10;
-		}
-		if (nr) // cycled up to maximum possible frame number
-			break;
-
 		// Load the base image
-		uint32_t extnr;
-		for (extnr = 0; extnr < nextensions; ++extnr) {
-			char fname[256];
-			snprintf(fname, sizeof(fname), "%s%s", fnamebase, extensions[extnr]);
-
-			//  is the frame actually there?
-			if (not g_fs->FileExists(fname))
-				continue;
-
-			try {
-				SDL_Surface & bmp = *LoadImage(fname);
-
-				// Get a new AnimFrame
-				Surface & frame = *new Surface();
-				frames.push_back(&frame);
-				frame.set_sdl_surface(bmp);
-			}
-			catch (const std::exception & e) {
-				log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
-				continue;
-			}
-			break;
-		}
-		if (extnr == nextensions)
-			break;
-
-		// See if there's a player colour mask for this frame
-		if (m_encodedata.hasplrclrs) {
-			for (extnr = 0; extnr < nextensions; ++extnr) {
-				char fname[256];
-				snprintf(fname, sizeof(fname), "%s_pc%s", fnamebase, extensions[extnr]);
-
-				if (not g_fs->FileExists(fname))
-					continue;
-
+		for (size_t extnr = 0;;) {
+			strcpy(after_basename, extensions[extnr]);
+			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					SDL_Surface & bmp = *LoadImage(fname);
+					SDL_Surface & surface = *LoadImage(filename);
+					//  Get a new AnimFrame.
 					Surface & frame = *new Surface();
-					frame.set_sdl_surface(bmp);
-					m_pcmasks.push_back(&frame);
-					break;
+					m_plrframes[0].push_back(&frame);
+					frame.set_sdl_surface(surface);
+				} catch (std::exception const & e) {
+					throw wexception
+						("could not load animation frame %s: %s\n",
+						 filename, e.what());
 				}
-				catch (const std::exception & e) {
-					log("WARNING: Couldn't load animation pc frame %s: %s\n", fname, e.what());
-					continue;
+				//  Successfully loaded the frame.
+				break;  //  No need to look for files with other extensions.
+			} else if (++extnr == nextensions) //  Tried all extensions.
+				goto end;  //  This frame does not exist. No more frames in anim.
+		}
+
+		switch (m_encodedata.hasplrclrs) {
+		case EncodeData::Mask:
+			strcpy(after_basename, "_pc");
+			for (size_t extnr = 0;;) {
+				strcpy(after_basename + 3, extensions[extnr]);
+				if (g_fs->FileExists(filename)) {
+					try {
+						SDL_Surface & surface = *LoadImage(filename);
+						Surface & frame = *new Surface();
+						frame.set_sdl_surface(surface);
+						m_pcmasks.push_back(&frame);
+						break;
+					} catch (std::exception const & e) {
+						throw wexception
+							("error while reading \"%s\": %s", filename, e.what());
+					}
+				} else if (++extnr == nextensions) {
+					*after_basename = '\0'; //  cut off the extension
+					throw wexception("\"%s\" is missing", filename);
 				}
 			}
+			break;
+		case EncodeData::Old: {
+			Surface & origsurface = *m_plrframes[0].back();
+			Surface & newsurface = *new Surface();
+			newsurface.set_sdl_surface(*SDL_DisplayFormat(origsurface.m_surface));
 
-			if (extnr == nextensions) {
-				Surface & origsurface = *frames.back();
-				Surface & newsurface = *new Surface();
-				newsurface.set_sdl_surface(*SDL_DisplayFormat(origsurface.m_surface));
+			static const RGBColor whitecolors[4] = {
+				RGBColor(119, 119, 119),
+				RGBColor(166, 166, 166),
+				RGBColor(210, 210, 210),
+				RGBColor(255, 255, 255)
+			};
+			uint32_t white = RGBColor(255, 255, 255).map(newsurface.format());
+			uint32_t black = RGBColor(0, 0, 0).map(newsurface.format());
+			uint32_t plrclr[4];
+			uint32_t new_plrclr[4];
 
-				static const RGBColor whitecolors[4] = {
-					RGBColor(119, 119, 119),
-					RGBColor(166, 166, 166),
-					RGBColor(210, 210, 210),
-					RGBColor(255, 255, 255)
-				};
-				uint32_t white = RGBColor(255, 255, 255).map(newsurface.format());
-				uint32_t black = RGBColor(0, 0, 0).map(newsurface.format());
-				uint32_t plrclr[4];
-				uint32_t new_plrclr[4];
+			for (uint32_t i = 0; i < 4; ++i) {
+				plrclr[i] = m_encodedata.plrclr[i].map(origsurface.format());
+				new_plrclr[i] = whitecolors[i].map(origsurface.format());
+			}
 
-				for (uint32_t i = 0; i < 4; ++i) {
-					plrclr[i] = m_encodedata.plrclr[i].map(origsurface.format());
-					new_plrclr[i] = whitecolors[i].map(origsurface.format());
-				}
-
-				//  Walk the surface, replace all playercolors.
-				for (uint32_t y = 0; y < newsurface.get_h(); ++y) {
-					for (uint32_t x = 0; x < newsurface.get_w(); ++x) {
-						const uint32_t clr = origsurface.get_pixel(x, y);
-						newsurface.set_pixel(x, y, black);
-						for (uint32_t i = 0; i < 4; ++i) {
-							if (clr == plrclr[i]) {
-								origsurface.set_pixel(x, y, new_plrclr[i]);
-								newsurface.set_pixel(x, y, white);
-								break;
-							}
+			//  Walk the surface, replace all playercolors.
+			for (uint32_t y = 0; y < newsurface.get_h(); ++y) {
+				for (uint32_t x = 0; x < newsurface.get_w(); ++x) {
+					const uint32_t clr = origsurface.get_pixel(x, y);
+					newsurface.set_pixel(x, y, black);
+					for (uint32_t i = 0; i < 4; ++i) {
+						if (clr == plrclr[i]) {
+							origsurface.set_pixel(x, y, new_plrclr[i]);
+							newsurface.set_pixel(x, y, white);
+							break;
 						}
 					}
 				}
+			}
 
-				m_pcmasks.push_back(&newsurface);
+			m_pcmasks.push_back(&newsurface);
+			break;
+		}
+		case EncodeData::No:;
+		}
+
+		//  Increment the number in the filename.
+		for (char * digit_to_increment = last_digit;;) {
+			if (digit_to_increment == before_first_digit)
+				goto end; //  The number wrapped around to all zeros.
+			assert('0' <= *digit_to_increment);
+			assert        (*digit_to_increment <= '9');
+			if (*digit_to_increment == '9') {
+				*digit_to_increment = '0';
+				--digit_to_increment;
+			} else {
+				++*digit_to_increment;
+				break;
 			}
 		}
 	}
-
-	m_plrframes[0] = frames;
-
-	if (!frames.size())
+end:
+	if (m_plrframes[0].empty())
 		throw wexception("Animation %s has no frames", data->picnametempl.c_str());
+	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
+		throw wexception
+			("animation has %u frames but playercolor mask has only %u frames",
+			 m_plrframes[0].size(), m_pcmasks.size());
 }
 
 
@@ -507,12 +534,9 @@ AnimationGfx::~AnimationGfx()
 		for (uint32_t j = 0; j < frames.size(); ++j)
 			delete frames[j];
 	}
-	delete[] m_plrframes;
-	m_plrframes = 0;
 
 	for (uint32_t j = 0; j < m_pcmasks.size(); ++j)
 		delete m_pcmasks[j];
-	m_pcmasks.clear();
 }
 
 
