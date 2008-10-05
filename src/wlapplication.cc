@@ -941,10 +941,7 @@ void WLApplication::show_usage()
 {
 	i18n::grab_textdomain("widelands");// uses system standard language
 
-	//TODO: do away with the sprintf sillyness and use plain cout streaming
-	char buffer[80];
-	snprintf(buffer, sizeof(buffer), _("This is Widelands-%s\n\n"), build_id().c_str());
-	cout << buffer;
+	cout << _("This is Widelands-") << build_id() << "\n\n";
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
 	cout << _("Options:\n\n");
 	cout
