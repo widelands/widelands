@@ -9,8 +9,6 @@ SRC=simpleglob("*.cc")+["build_id.cc"]
 
 srcenv=env.Clone()
 
-srcenv.Append(CPPPATH=['#/src'])
-
 Export('srcenv')
 
 # Ordering is paramount in the SConscript calls!

@@ -143,6 +143,7 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 
 TARGET=parse_cli(env)
 BUILDDIR='build/'+TARGET+'-'+env['build']
+env.Append(CPPPATH=[os.path.join('#', BUILDDIR)])
 
 if env.enable_configuration:
 	# Generate build_id.cc - scons itself will decide whether a recompile is needed
@@ -151,8 +152,12 @@ if env.enable_configuration:
 	print_build_info(env)
 	print #prettyprinting
 
+	#TODO: can this be combined with the enclosing if block? Would make the logic easier to understand
 	if configure_is_needed(BUILD_TARGETS):
 		do_configure(conf, env)
+
+		# Generate config.h - scons itself will decide whether a recompile is needed
+		Command(os.path.join(BUILDDIR, "config.h"), [Value(generate_configh_content(env))], generate_configh_file)
 
 env=conf.Finish()
 print # Pretty output
@@ -267,8 +272,6 @@ distcleanactions=[
 	Delete('utils/confgettext.pyc'),
 	Delete('tags'),
 	Delete('widelands'),
-	Delete('src/build_id.cc'),
-	Delete('src/config.h'),
 	Delete('locale/sv_SE'),
 	Delete('locale/de_DE'),
 	Delete('locale/da_DK'),
