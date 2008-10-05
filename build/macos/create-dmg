@@ -1,0 +1,105 @@
+#!/bin/bash
+#
+# Creates a DMG disk image for Mac OS X. The Widelands native application
+# should be compiled before from the XCode project.
+#
+# Mac OS X 10.4 or higher is required.
+
+# The path to Widelands application
+APPLICATION=`dirname $0`/build/Release/Widelands.app
+
+# Temporary directories
+TMP_DIR="/tmp/wl_dmg"
+FILES_DIR="$TMP_DIR/files"
+MOUNT_DIR="$TMP_DIR/mount"
+
+####
+# Print the script usage
+####
+function print_usage() {
+	echo "Usage: `basename $0` svn | release <name>"
+	echo "  svn            Use SVN revision as name"
+	echo "  release <name> Use the specified name"
+}
+
+####
+# Collect all needed files into the DMG-source directory
+#
+# $1: Target directory
+# $2: Widelands application
+####
+function collect_files() {
+	
+	cp -r $2 $1
+#	ln -s /Applications $1/
+
+	cp `dirname $0`/widelands-disk.icns $1/.VolumeIcon.icns
+
+}
+
+####
+# Main
+####
+
+# Parse arguments
+if [ -z $1 ]; then
+	print_usage
+	exit 1
+elif [ $1 = svn ]; then
+	revision=`\`dirname $0\`/../../build/scons-tools/detect_revision.py`
+elif [ $1 = release ]; then
+	if [ -z $2 ]; then
+		print_usage
+		exit 1
+	else
+		 revision=$2
+	 fi
+else
+	print_usage
+	exit 1
+fi
+
+outfile=Widelands-$revision.dmg
+
+# Tests if the DMG already exists
+if [ -f $outfile ]; then
+	echo "File $outfile already exists"
+	echo "Overwrite not allowed (can be mounted)"
+	exit 1
+fi
+
+# Tests if the application is built
+if [ ! -d $APPLICATION ]; then
+	echo "Widelands application not found, is it built ?"
+	echo "Expected: $APPLICATION"
+	exit 1
+fi
+
+# Creates the source directory
+echo "Creating directory..."
+if [ -e $FILES_DIR ]; then
+	rm -r -f $FILES_DIR
+fi
+mkdir -p $FILES_DIR
+mkdir -p $MOUNT_DIR
+collect_files $FILES_DIR $APPLICATION
+
+# Creates the DMG file
+echo "Building a DMG image to $outfile..."
+rm -f $TMP_DIR/readwrite.dmg
+hdiutil create  \
+  -srcfolder $FILES_DIR \
+  -format UDRW \
+  -fs HFS+ \
+  -volname "Widelands $revision" \
+  $TMP_DIR/readwrite.dmg
+
+# Attach the image to set properties
+echo "Setting filesystem properties..."
+hdiutil attach $TMP_DIR/readwrite.dmg -readwrite -mountpoint $MOUNT_DIR -nobrowse
+/Developer/Tools/SetFile -a C $MOUNT_DIR
+hdiutil detach $MOUNT_DIR
+
+# Convert with zlib compression
+hdiutil convert $TMP_DIR/readwrite.dmg -format UDZO -o $outfile
+rm -f $TMP_DIR/readwrite.dmg
