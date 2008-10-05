@@ -10,6 +10,7 @@ def print_build_info(env):
 	print 'Platform:         ', env['PLATFORM']
 	print 'Build type:       ', env['build']
 	print 'Build ID:         ', get_build_id(env)
+	print
 
 def get_build_id(env):
 	#This is just a default value, don't change it here in the code.
@@ -34,8 +35,7 @@ std::string build_id()
 
 ################################################################################
 
-def parse_cli(env):
-	TARGET='native'
+def parse_cli(env, buildtargets):
         env.enable_configuration=True
 	env.debug=0
 	env.optimize=0
@@ -43,15 +43,34 @@ def parse_cli(env):
 	env.efence=0
 	env.profile=0
 
+	# Crosscompile config must be done before anything else!
+	#if env['cross']:
+	#	print 'Cross-compiling does not work yet!'
+	#	env.Exit(1)
+	#	#TARGET='i586-mingw32msvc'
+	#	#PREFIX='/usr/local/cross-tools'
+	#	#env['ENV']['PATH']=PREFIX+'/'+TARGET+'/bin:'+PREFIX+'/bin'+env['ENV']['PATH']
+	#	#env['CXX']=TARGET+'-g++'
+	#	### manually overwrite
+	#	###env['sdlconfig']=PREFIX+'/bin/'+TARGET+'-sdl_config'
+	#	#env['sdlconfig']=PREFIX+'/'+TARGET+'/bin/'+TARGET+'-sdl-config'
+	#else:
+	#	TARGET='native'
+	TARGET='native'
+
+	BUILDDIR='build/'+TARGET+'-'+env['build']
+
         if env.GetOption('clean'):
                 env.enable_configuration=False
-		return TARGET
+		return BUILDDIR
         if '-h' in sys.argv[1:]:
                 env.enable_configuration=False
-		return TARGET
+		return BUILDDIR
         if '-H' in sys.argv[1:]:
                 env.enable_configuration=False
-		return TARGET
+		return BUILDDIR
+
+	env.enable_configuration=configure_is_needed(buildtargets)
 
 	#This makes LIBPATH work correctly - I just don't know why :-(
 	#Obviously, env.LIBPATH must be forced to be a list instead of a string. Is this
@@ -115,20 +134,7 @@ def parse_cli(env):
 		env.Append(CCFLAGS='-DUSE_GGZ')
 		env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
 
-	#if env['cross']:
-	#	print 'Cross-compiling does not work yet!'
-	#	env.Exit(1)
-	#	#TARGET='i586-mingw32msvc'
-	#	#PREFIX='/usr/local/cross-tools'
-	#	#env['ENV']['PATH']=PREFIX+'/'+TARGET+'/bin:'+PREFIX+'/bin'+env['ENV']['PATH']
-	#	#env['CXX']=TARGET+'-g++'
-	#	### manually overwrite
-	#	###env['sdlconfig']=PREFIX+'/bin/'+TARGET+'-sdl_config'
-	#	#env['sdlconfig']=PREFIX+'/'+TARGET+'/bin/'+TARGET+'-sdl-config'
-	#else:
-	#	TARGET='native'
-
-	return TARGET
+	return BUILDDIR
 
 ################################################################################
 
@@ -246,7 +252,7 @@ def configure_is_needed(targets):
 	   (==no target given at commandline): yes. If we're _only_ building targets
 	   that don't need configuration: no."""
 
-	NOCONFTARGETS=["clean", "dist", "distclean", "doc", "indent", "install", "longlines", "precommit", "uninst", "uninstall"]
+	NOCONFTARGETS=["clean", "dist", "distclean", "indent", "install", "longlines", "precommit", "shrink" "uninst", "uninstall"]
 	is_needed=False
 
 	if targets==[]:
