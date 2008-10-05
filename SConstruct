@@ -25,14 +25,15 @@ SConsignFile('build/scons-signatures')
 print
 
 ########################################## simple glob that works across BUILDDIR
-#TODO: optional recursion
 
-def simpleglob(pattern='*', directory='.'):
+def simpleglob(pattern='*', directory='.', recursive=False):
         entries=[]
 
 	for entry in os.listdir(Dir(directory).srcnode().abspath):
 		if fnmatch.fnmatchcase(entry, pattern):
-			entries.append(entry)
+			entries.append(os.path.join(directory, entry))
+		if recursive and os.path.isdir(os.path.join(directory, entry)):
+                        entries+=(simpleglob(pattern, os.path.join(directory, entry), recursive))
 
 	return entries
 
@@ -184,7 +185,8 @@ if env['build']=='release':
 
 ########################################################################### tags
 
-Alias('tags', env.ctags(source=Glob('src/*.h', strings=True)+Glob('src/*.cc', strings=True), target='tags'))
+filelist=simpleglob('*.h', 'src', recursive=True)+simpleglob('*.cc', 'src', recursive=True)
+Alias('tags', env.ctags(source=filelist))
 Default('tags')
 
 ################################################################## PNG shrinking
