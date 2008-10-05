@@ -252,7 +252,7 @@ def configure_is_needed(targets):
 	   (==no target given at commandline): yes. If we're _only_ building targets
 	   that don't need configuration: no."""
 
-	NOCONFTARGETS=["clean", "dist", "distclean", "indent", "install", "longlines", "precommit", "shrink" "uninst", "uninstall"]
+	NOCONFTARGETS=["clean", "dist", "distclean", "indent", "install", "longlines", "precommit", "shrink", "tags", "uninst", "uninstall"]
 	is_needed=False
 
 	if targets==[]:

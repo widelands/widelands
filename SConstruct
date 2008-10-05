@@ -184,9 +184,7 @@ if env['build']=='release':
 
 ########################################################################### tags
 
-S=find('src', '*.h')
-S+=find('src', '*.cc')
-Alias('tags', env.ctags(source=S, target='tags'))
+Alias('tags', env.ctags(source=Glob('src/*.h', strings=True)+Glob('src/*.cc', strings=True), target='tags'))
 Default('tags')
 
 ################################################################## PNG shrinking
