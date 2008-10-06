@@ -18,8 +18,8 @@ stone=1
 
 [idle]
 pics=small_tower_i_??.png
-hotspot=38 60
+hotspot=50 83
 
 [build]
 pics=small_tower_i_??.png
-hotspot=38 60
+hotspot=50 83
