@@ -165,6 +165,7 @@ SConscript('tribes/SConscript')
 SConscript('txts/SConscript')
 SConscript('utils/SConscript')
 SConscript('worlds/SConscript')
+SConscript('global/SConscript')
 
 Default(thebinary)
 if env['build']=='release':
