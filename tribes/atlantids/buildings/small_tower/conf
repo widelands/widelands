@@ -19,7 +19,9 @@ stone=1
 [idle]
 pics=small_tower_i_??.png
 hotspot=41 63
+playercolor=true
 
 [build]
 pics=small_tower_i_??.png
 hotspot=41 63
+playercolor=true

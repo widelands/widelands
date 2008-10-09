@@ -17,8 +17,10 @@ stone=1
 
 [idle]
 pics=guardhouse_i_??.png
-hotspot=38 60
+hotspot=40 54
+playercolor=true
 
 [build]
 pics=guardhouse_i_??.png
-hotspot=38 60
+hotspot=40 54
+playercolor=true
