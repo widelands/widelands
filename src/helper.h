@@ -62,6 +62,7 @@ inline char * match
 			reached_end = true;
 			goto end;
 		}
+	reached_end = false;
 	*p = '\0'; //  terminate the word
 	++p; //  move past the terminator
 end:

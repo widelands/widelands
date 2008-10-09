@@ -574,9 +574,8 @@ once during initial load.
 */
 void Map::load_world()
 {
-	assert(!m_world);
-
-	m_world = new World(m_worldname);
+	if (!m_world)
+		m_world = new World(m_worldname);
 }
 
 /*

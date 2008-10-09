@@ -440,6 +440,9 @@ const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 		 ++it)
 		if ((*it)->name() == tribe) return **it;
 
+	if (not map().get_world())
+		map().load_world();
+	assert(map().get_world());
 	Tribe_Descr & result = *new Tribe_Descr(tribe, map().world());
 	m_tribes.push_back(&result);
 	return result;

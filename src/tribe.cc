@@ -46,6 +46,7 @@ namespace Widelands {
 Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 : m_name(tribename), m_world(the_world)
 {
+	assert(&the_world);
 	try {
 		char directory[256];
 

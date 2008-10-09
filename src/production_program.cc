@@ -543,6 +543,7 @@ ActMine::ActMine
 {
 	try {
 		World const & world = descr.tribe().world();
+		assert(&world);
 		bool reached_end;
 		m_resource = world.safe_resource_index(match(parameters, reached_end));
 
