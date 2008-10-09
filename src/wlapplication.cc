@@ -671,8 +671,7 @@ bool WLApplication::init_settings() {
 	m_gfx_fullscreen=s->get_bool("fullscreen", false);
 
 	// KLUDGE!
-	// Without this, xres, yres and workareapreview get dropped by
-	// check_used().
+	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
 	s->get_string("xres");
@@ -687,6 +686,7 @@ bool WLApplication::init_settings() {
 	s->get_int("speed_of_new_game");
 	s->get_string("nickname");
 	s->get_string("lasthost");
+	s->get_string("realname");
 	// KLUDGE!
 
 	return true;
