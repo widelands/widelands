@@ -209,7 +209,6 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 				(*this, enhancements_map, it->c_str(), &m_default_encdata);
 		} catch (std::exception &e) {
 			log("Building %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
-			throw;
 		} catch (...) {
 			log("Building %s failed: unknown exception (garbage directory?)\n", it->c_str());
 		}
