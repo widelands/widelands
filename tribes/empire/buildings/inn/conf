@@ -15,13 +15,11 @@ bread=6
 meat=6
 
 [work]
-0=sleep 15000
-1=check bread
-2=check fish,meat
-3=consume bread
-4=consume fish,meat
-5=animation working 20000
-6=produce meal
+return=skipped unless economy needs meal
+consume=bread fish,meat
+sleep=15000
+animate=working 20000
+produce=meal
 
 [buildcost]
 wood=2

@@ -7,9 +7,9 @@ buildicon=smokery_build.png
 worker=smoker
 output=smoked_meat
 output=smoked_fish
-program=work
 program=smoke_meat
 program=smoke_fish
+program=work
 
 [inputs]
 fish=4
@@ -17,29 +17,23 @@ meat=4
 trunk=8
 
 [work]
-0=set +nostats
-1=call smoke_meat
-2=call smoke_fish
+call=smoke_meat
+call=smoke_fish
+return=skipped
 
 [smoke_meat]
-0=set +catch
-1=sleep 15000
-2=check meat
-3=check trunk
-4=consume meat
-5=consume trunk
-6=animation working 15000
-7=produce smoked_meat
+return=skipped unless economy needs smoked_meat
+consume=meat trunk
+sleep=15000
+animate=working 15000
+produce=smoked_meat
 
 [smoke_fish]
-0=set +catch
-1=sleep 15000
-2=check fish
-3=check trunk
-4=consume fish
-5=consume trunk
-6=animation working 15000
-7=produce smoked_fish
+return=skipped unless economy needs smoked_fish
+consume=fish trunk
+sleep=15000
+animate=working 15000
+produce=smoked_fish
 
 [buildcost]
 trunk=1

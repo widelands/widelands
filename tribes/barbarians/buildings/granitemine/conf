@@ -13,13 +13,11 @@ stopable=yes
 ration=8
 
 [work]
-0=sleep 20000
-1=check ration
-2=consume ration
-3=animation working 20000
-4=mine granit 2 100 5
-5=produce raw_stone
-6=produce raw_stone
+consume=ration
+sleep=20000
+animate=working 20000
+mine=granit 2 100 5
+produce=raw_stone:2
 
 [buildcost]
 trunk=4

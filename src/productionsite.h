@@ -21,6 +21,8 @@
 #define PRODUCTIONSITE_H
 
 #include "building.h"
+#include "production_program.h"
+#include "program_result.h"
 #include "wexception.h"
 
 #include <map>
@@ -31,7 +33,6 @@
 
 namespace Widelands {
 
-struct Input;
 struct Item_Ware_Descr;
 struct ProductionProgram;
 class Soldier;
@@ -57,16 +58,17 @@ struct ProductionSite_Descr : public Building_Descr {
 		(const Tribe_Descr & tribe, const std::string & productionsite_name);
 	virtual ~ProductionSite_Descr();
 
-	virtual void parse(char const * directory, Profile *, EncodeData const *);
+	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
 	virtual Building * create_object() const;
 
 	std::vector<std::string> const & workers() const throw () {
 		return m_workers;
 	}
-	bool is_output(const std::string & warename) const throw ()
-	{return m_output.find(warename) != m_output.end();}
-	const std::set<std::string>* get_outputs() const {return &m_output;}
-	const std::vector<Input>* get_inputs() const {return &m_inputs;}
+	bool is_output(Ware_Index const i) const throw () {
+		return m_output.count(i);
+	}
+	std::map<Ware_Index, uint8_t> const & inputs() const {return m_inputs;}
+	std::set<Ware_Index>          const & output() const {return m_output;}
 	const ProductionProgram * get_program(const std::string &) const;
 	const ProgramMap & get_all_programs() const throw () {return m_programs;}
 
@@ -75,13 +77,24 @@ struct ProductionSite_Descr : public Building_Descr {
 
 private:
 	std::vector<std::string> m_workers; // name of worker type
-	std::vector<Input>    m_inputs;
-	std::set<std::string> m_output;      // output wares type names
+	std::map<Ware_Index, uint8_t> m_inputs;
+	std::set<Ware_Index>          m_output;
 	ProgramMap            m_programs;
 };
 
 class ProductionSite : public Building {
 	friend struct Map_Buildingdata_Data_Packet;
+	friend struct ActReturn;
+	friend struct ActCall;
+	friend struct ActWorker;
+	friend struct ActSleep;
+	friend struct ActAnimate;
+	friend struct ActConsume;
+	friend struct ActProduce;
+	friend struct ActMine;
+	friend struct ActCheck_Soldier;
+	friend struct ActTrain;
+	friend struct ActPlayFX;
 	MO_DESCR(ProductionSite_Descr);
 
 public:
@@ -106,8 +119,8 @@ public:
 
 	virtual void set_economy(Economy* e);
 
-	std::vector<WaresQueue*>* get_warequeues() {
-		return &m_input_queues;
+	std::vector<WaresQueue *> const & warequeues() const {
+		return m_input_queues;
 	}
 	std::vector<Worker*>* get_production_workers() {
 		return &m_workers;
@@ -133,14 +146,20 @@ protected:
 	 * Determine the next program to be run when the last program has finished.
 	 * The default implementation starts program "work".
 	 */
-	virtual void find_and_start_next_program(Game* g);
+	virtual void find_and_start_next_program(Game &);
 
 	State* get_current_program() {return m_program.size() ? &*m_program.rbegin() : 0;}
-	void program_act(Game* g);
-	void program_step(const uint32_t phase = 0);
-	void program_start(Game* g, std::string name);
-	virtual void program_end(Game* g, bool success);
-	void add_statistics_value(bool val);
+	void program_act(Game &);
+
+	/// \param phase can be used to pass a value on to the next step in the
+	/// program. For example if one step is a mine command, it can calculate
+	/// how long it should take to mine, given the particular circumstances,
+	/// and pass the result to the following animation command, to set the
+	/// duration.
+	void program_step(Game &, uint32_t delay = 10, uint32_t phase = 0);
+
+	void program_start(Game &, std::string const & program_name);
+	virtual void program_end(Game &, Program_Result);
 
 	void calc_statistics();
 	bool can_start_working() const throw ();
@@ -157,6 +176,7 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t                       m_program_time; ///< timer time
 	int32_t                      m_post_timer;    ///< Time to schedule after ends
 
+	ActProduce::Items        m_produced_items;
 	std::vector<WaresQueue*> m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
@@ -171,14 +191,15 @@ protected:  // TrainingSite must have access to this stuff
  * releasing some wares out of a building
 */
 struct Input {
-	Input(Item_Ware_Descr* ware, int32_t max) : m_ware(ware), m_max(max) {}
+	Input(Ware_Index const Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	{}
 	~Input() {}
 
-	const Item_Ware_Descr & ware_descr() const throw () {return *m_ware;}
-	uint32_t get_max() const throw () {return m_max;}
+	Ware_Index ware() const throw () {return m_ware;}
+	uint8_t     max() const throw () {return m_max;}
 
 private:
-	Item_Ware_Descr* m_ware;
+	Ware_Index m_ware;
 	int32_t m_max;
 };
 

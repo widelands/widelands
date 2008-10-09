@@ -9,8 +9,8 @@ output=trunk
 program=work
 
 [work]
-0=sleep 30000 # Barbarian lumberjack sleeps 25000
-1=worker chop
+sleep=30000 # Barbarian lumberjack sleeps 25000
+worker=chop
 
 
 [buildcost]

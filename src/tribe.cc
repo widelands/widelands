@@ -199,20 +199,46 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
+	Building_Descr::enhancements_map_t enhancements_map;
+
 	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
 		Building_Descr *descr = 0;
 
 		try {
 			descr = Building_Descr::create_from_dir
-				(*this, it->c_str(), &m_default_encdata);
+				(*this, enhancements_map, it->c_str(), &m_default_encdata);
 		} catch (std::exception &e) {
 			log("Building %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
+			throw;
 		} catch (...) {
 			log("Building %s failed: unknown exception (garbage directory?)\n", it->c_str());
 		}
 
 		if (descr)
 			m_buildings.add(descr);
+	}
+
+	//  Resolve inter-building-type dependencies.
+	Building_Descr::enhancements_map_t::const_iterator const
+		enhancements_map_end = enhancements_map.end();
+	for
+		(Building_Descr::enhancements_map_t::const_iterator jt =
+		 	enhancements_map.begin();
+		 jt != enhancements_map_end;
+		 ++jt)
+	{
+		std::set<std::string>::const_iterator const end = jt->second.end();
+		for
+			(std::set<std::string>::const_iterator it = jt->second.begin();
+			 it != end;
+			 ++it)
+			try {
+				jt->first->add_enhancement(safe_building_index(it->c_str()));
+			} catch (_wexception const & e) {
+				throw wexception
+					("building type %s enhancement: %s",
+					 jt->first->name().c_str(), e.what());
+			}
 	}
 
 	//  Calculate recursive workarea info. For each building, add info to
@@ -228,7 +254,7 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 			= get_building_descr(i)->m_recursive_workarea_info;
 		std::set<Building_Index> to_consider, considered;
 		to_consider.insert(i);
-		while (not to_consider.empty()) {
+		do {
 			std::set<Building_Index>::iterator const consider_now_iterator
 				= to_consider.begin();
 			Building_Index const consider_now = *consider_now_iterator;
@@ -237,26 +263,19 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 			to_consider.erase(consider_now_iterator);
 			considered.insert(consider_now);
 			{  //  Enhancements from the considered building
-				const std::vector<char*> & enhancements =
-					considered_building_descr.enhances_to();
-				const std::vector<char *>::const_iterator enhancements_end =
+				std::set<Building_Index> const & enhancements =
+					considered_building_descr.enhancements();
+				std::set<Building_Index>::const_iterator const enhancements_end =
 					enhancements.end();
 				for
-					(std::vector<char*>::const_iterator it = enhancements.begin();
+					(std::set<Building_Index>::const_iterator it =
+					 	enhancements.begin();
 					 it != enhancements_end;
 					 ++it)
-				{
-					const Building_Index index = m_buildings.get_index(*it);
-					if (not index) {
-						log
-							("        Warning: building %s (%u) does not exist\n",
-							 *it, index.value());
-					}
-					else if (considered.find(index) == considered.end())
+					if (considered.find(*it) == considered.end())
 						//  The building index has not been considered. Add it to
 						//  to_consider.
-						to_consider.insert(index);
-				}
+						to_consider.insert(*it);
 			}
 			{
 				//  Merge collected info.
@@ -277,9 +296,8 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 						collected_info[radius].insert(*di);
 				}
 			}
-		}
+		} while (not to_consider.empty());
 	}
-
 }
 
 
@@ -486,16 +504,16 @@ void Tribe_Descr::load_warehouse_with_start_wares
 
 			char * endp;
 			long int const hplvl      = strtol(list[0].c_str(), &endp, 0);
-			if (endp && *endp)
+			if (*endp)
 				throw wexception("Bad hp level '%s'", list[0].c_str());
 			long int const attacklvl  = strtol(list[1].c_str(), &endp, 0);
-			if (endp && *endp)
+			if (*endp)
 				throw wexception("Bad attack level '%s'", list[1].c_str());
 			long int const defenselvl = strtol(list[2].c_str(), &endp, 0);
-			if (endp && *endp)
+			if (*endp)
 				throw wexception("Bad defense level '%s'", list[2].c_str());
 			long int const evadelvl   = strtol(list[3].c_str(), &endp, 0);
-			if (endp && *endp)
+			if (*endp)
 				throw wexception("Bad evade level '%s'", list[3].c_str());
 
 			if (upcast(Game, game, &egbase))

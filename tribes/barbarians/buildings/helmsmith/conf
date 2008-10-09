@@ -9,10 +9,10 @@ output=helm
 output=mask
 output=warhelmet
 
-program=work
 program=produce_helm
 program=produce_mask
 program=produce_warhelmet
+program=work
 
 [inputs]
 iron=8
@@ -20,42 +20,32 @@ gold=8
 coal=8
 
 [work]
-0=set +nostats
-1=call produce_helm
-2=call produce_mask
-3=call produce_warhelmet
+call=produce_helm
+call=produce_mask
+call=produce_warhelmet
+sleep=20000
+return=skipped
 
 [produce_helm]
-0=set +catch
-1=sleep 32000
-2=check iron
-3=check coal
-4=consume iron
-5=consume coal
-6=animation working 35000
-7=produce helm
+return=skipped unless economy needs helm
+consume=coal iron
+sleep=32000
+animate=working 35000
+produce=helm
 
 [produce_mask]
-0=set +catch
-1=sleep 32000
-2=check iron 2
-3=check coal
-4=consume iron 2
-5=consume coal
-6=animation working 45000
-7=produce mask
+return=skipped unless economy needs mask
+consume=coal iron:2
+sleep=32000
+animate=working 45000
+produce=mask
 
 [produce_warhelmet]
-0=set +catch
-1=sleep 32000
-2=check iron 2
-3=check gold
-4=check coal
-5=consume iron 2
-6=consume gold
-7=consume coal
-8=animation working 55000
-9=produce warhelmet
+return=skipped unless economy needs warhelmet
+consume=coal gold iron:2
+sleep=32000
+animate=working 55000
+produce=warhelmet
 
 [buildcost]
 trunk=3

@@ -35,15 +35,8 @@ struct Item_Ware_Descr;
 struct Tribe_Descr;
 };
 
-struct WareCondition {
-	uint32_t amount;
-	bool     isGrouped;
-	uint32_t groupId;
-};
-
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
-	~EncyclopediaWindow();
 private:
 	Interactive_Player               & interactivePlayer;
 	UI::Listselect<Widelands::Ware_Index> wares;
@@ -51,15 +44,9 @@ private:
 	UI::Table     <intptr_t> condTable;
 	UI::Multiline_Textarea    descrTxt;
 	Widelands::Item_Ware_Descr const * selectedWare;
-	Widelands::Tribe_Descr     const * tribe;
 	void fillWares();
 	void wareSelected(uint32_t);
 	void prodSiteSelected(uint32_t);
-	void createCondTableEntry
-		(const uint32_t            index,
-		 const std::string   & wareName,
-		 const bool            consumed,
-		 const WareCondition & wareCondition);
 };
 
 #endif

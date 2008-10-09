@@ -8,18 +8,17 @@ worker=miner
 program=work
 output=coal
 stopable=yes
-enhances_to=deep_coalmine
+enhancement=deep_coalmine
 
 [inputs]
 ration=6
 
 [work]
-0=sleep 45000
-1=consume ration
-2=animation working 20000
-3=mine coal 2 33 5
-4=produce coal
-5=produce coal
+sleep=45000
+consume=ration
+animate=working 20000
+mine=coal 2 33 5
+produce=coal:2
 
 [buildcost]
 trunk=4

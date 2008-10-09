@@ -82,12 +82,11 @@ void Bob::Descr::parse
 
 	// Parse attributes
 	Section & global_s = prof->get_safe_section("global");
-	const char* string;
-	while (global_s.get_next_string("attrib", &string)) {
-		uint32_t attrib = get_attribute_id(string);
+	while (Section::Value const * val = global_s.get_next_val("attrib")) {
+		uint32_t const attrib = get_attribute_id(val->get_string());
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			throw wexception("Bad attribute '%s'", string);
+			throw wexception("Bad attribute '%s'", val->get_string());
 
 		add_attribute(attrib);
 	}

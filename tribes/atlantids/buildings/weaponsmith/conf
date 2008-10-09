@@ -13,12 +13,12 @@ output=steel_trident
 output=double_trident
 output=heavy_double_trident
 
-program=work
 program=produce_light_trident
 program=produce_long_trident
 program=produce_steel_trident
 program=produce_double_trident
 program=produce_heavy_double_trident
+program=work
 
 [inputs]
 iron=8
@@ -27,84 +27,59 @@ coal=8
 planks=8
 
 [work]
-0=set +nostats
-1=call produce_light_trident
-2=call produce_long_trident
-3=call produce_steel_trident
-4=call produce_double_trident
-5=call produce_heavy_double_trident
+call=produce_light_trident
+call=produce_long_trident
+call=produce_steel_trident
+call=produce_double_trident
+call=produce_heavy_double_trident
+return=skipped
 
 [produce_light_trident]
-0=set +catch
-1=sleep 20000
-2=check planks
-3=consume planks
-4=playFX ../../../../sound/smiths/smith 192
-5=animation working 30000
-6=playFX ../../../../sound/smiths/sharpening 192
-7=produce light_trident
+return=skipped unless economy needs light_trident
+consume=planks
+sleep=20000
+playFX=../../../../sound/smiths/smith 192
+animate=working 30000
+playFX=../../../../sound/smiths/sharpening 192
+produce=light_trident
 
 
 [produce_long_trident]
-0=set +catch
-1=sleep 32000
-2=check iron
-3=check coal
-4=check planks
-5=consume iron
-6=consume coal
-7=consume planks
-8=playFX ../../../../sound/smiths/smith 192
-9=animation working 45000
-10=playFX ../../../../sound/smiths/sharpening 192
-11=produce long_trident
+return=skipped unless economy needs long_trident
+consume=iron coal planks
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 45000
+playFX=../../../../sound/smiths/sharpening 192
+produce=long_trident
 
 
 [produce_steel_trident]
-0=set +catch
-1=sleep 32000
-2=check iron 2
-3=check coal
-4=check planks
-5=consume iron 2
-6=consume coal
-7=consume planks
-8=playFX ../../../../sound/smiths/smith 192
-9=animation working 45000
-10=playFX ../../../../sound/smiths/sharpening 192
-11=produce steel_trident
+return=skipped unless economy needs steel_trident
+consume=iron:2 coal planks
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 45000
+playFX=../../../../sound/smiths/sharpening 192
+produce=steel_trident
 
 [produce_double_trident]
-0=set +catch
-1=sleep 32000
-2=check iron
-3=check coal 2
-4=check planks
-5=check gold
-6=consume iron
-7=consume coal 2
-8=consume planks
-9=consume gold
-10=playFX ../../../../sound/smiths/smith 192
-11=animation working 45000
-12=playFX ../../../../sound/smiths/sharpening 192
-13=produce double_trident
+return=skipped unless economy needs double_trident
+consume=iron coal:2 planks gold
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 45000
+playFX=../../../../sound/smiths/sharpening 192
+produce=double_trident
 
 [produce_heavy_double_trident]
-0=set +catch
-1=sleep 32000
-2=check iron 2
-3=check coal 2
-4=check planks
-5=check gold
-6=consume iron 2
-7=consume coal 2
-8=consume planks
-9=consume gold
-10=playFX ../../../../sound/smiths/smith 192
-11=animation working 45000
-12=playFX ../../../../sound/smiths/sharpening 192
-13=produce heavy_double_trident
+return=skipped unless economy needs heavy_double_trident
+consume=iron:2 coal:2 planks gold
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 45000
+playFX=../../../../sound/smiths/sharpening 192
+produce=heavy_double_trident
 
 
 [buildcost]

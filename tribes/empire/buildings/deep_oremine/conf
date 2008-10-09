@@ -15,19 +15,14 @@ meal=6
 beer=6
 
 [work]
-0=sleep 43000
-1=check meal
-2=check beer
-3=consume meal
-4=consume beer
-5=animation working 18000
-6=mine iron 2 100 5
-7=produce ironore
-8=produce ironore
-9=animation working 18000
-10=mine iron 2 100 5
-11=produce ironore
-12=produce ironore
+sleep=43000
+consume=meal beer
+animate=working 18000
+mine=iron 2 100 5
+produce=ironore:2
+animate=working 18000
+mine=iron 2 100 5
+produce=ironore:2
 
 [buildcost]
 trunk=4

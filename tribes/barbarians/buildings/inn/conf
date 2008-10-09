@@ -4,7 +4,7 @@ type=production
 size=medium
 buildable=no
 enhanced_building=yes
-enhances_to=big_inn
+enhancement=big_inn
 buildicon=inn_build.png
 worker=innkeeper
 program=work
@@ -17,15 +17,11 @@ meat=4
 beer=4
 
 [work]
-0=sleep 15000
-1=check pittabread
-2=check fish,meat
-3=check beer
-4=consume pittabread
-5=consume fish,meat
-6=consume beer
-7=animation working 20000
-8=produce snack
+return=skipped unless economy needs snack
+consume=pittabread fish,meat beer
+sleep=15000
+animate=working 20000
+produce=snack
 
 [buildcost]
 trunk=2

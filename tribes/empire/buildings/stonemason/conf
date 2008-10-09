@@ -13,12 +13,12 @@ soundfx=../../../../sound/stonecutting/stonemason
 marble=6
 
 [work]
-0=sleep 50000
-1=check marble 2
-2=consume marble 2
-3=playFX ../../../../sound/stonecutting/stonemason 192
-4=animation working 32000
-5=produce marblecolumn
+return=skipped unless economy needs marblecolumn
+consume=marble:2
+sleep=50000
+playFX=../../../../sound/stonecutting/stonemason 192
+animate=working 32000
+produce=marblecolumn
 
 [buildcost]
 trunk=1

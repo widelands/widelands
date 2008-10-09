@@ -5,10 +5,10 @@ size=mine
 buildable=yes
 buildicon=crystalmine_build.png
 worker=miner,miner,miner
-program=work
 program=mine_stone
-program=mine_crystal
+program=mine_mountain_crystal
 program=mine_diamond
+program=work
 output=diamond
 output=mountain_crystal
 output=stone
@@ -20,62 +20,51 @@ smoked_fish=6
 smoked_meat=6
 
 [work]
-0=set +nostats
-1=call mine_stone
-2=call mine_crystal
-3=call mine_diamond
+call=mine_stone
+call=mine_mountain_crystal
+call=mine_diamond
+return=skipped
 
 [mine_stone]
-0=set +catch
-1=sleep 45000
-2=consume smoked_fish,smoked_meat 2
-3=consume bread 2
-4=animation working 20000
-5=mine granit 4 100 5
-6=produce stone
-7=produce stone
-8=animation working 20000
-9=mine granit 4 100 5
-10=produce stone
-11=produce stone
-12=animation working 20000
-13=mine granit 4 100 5
-14=produce stone
-15=mine granit 4 100 5
-16=produce mountain_crystal
+consume=smoked_fish,smoked_meat:2 bread:2
+sleep=45000
+animate=working 20000
+mine=granit 4 100 5
+produce=stone:2
+animate=working 20000
+mine=granit 4 100 5
+produce=stone:2
+animate=working 20000
+mine=granit 4 100 5
+produce=stone
+mine=granit 4 100 5
+produce=mountain_crystal
 
-[mine_crystal]
-0=set +catch
-1=sleep 45000
-2=consume smoked_fish,smoked_meat 2
-3=consume bread 2
-4=animation working 20000
-5=mine granit 4 100 5
-6=produce stone
-7=produce stone
-8=animation working 20000
-9=mine granit 4 100 5
-10=produce stone
-11=produce mountain_crystal
-12=animation working 20000
-13=mine granit 4 100 5
-14=produce mountain_crystal
-15=produce mountain_crystal
+[mine_mountain_crystal]
+consume=smoked_fish,smoked_meat:2 bread:2
+sleep=45000
+animate=working 20000
+mine=granit 4 100 5
+produce=stone:2
+animate=working 20000
+mine=granit 4 100 5
+produce=stone mountain_crystal
+animate=working 20000
+mine=granit 4 100 5
+produce=mountain_crystal:2
 
 [mine_diamond]
-0=set +catch
-1=sleep 45000
-2=consume smoked_fish,smoked_meat 2
-3=consume bread 2
-4=animation working 20000
-5=mine granit 4 100 5
-6=produce diamond
-7=animation working 20000
-8=mine granit 4 100 5
-9=produce diamond
-10=animation working 20000
-11=mine granit 4 100 5
-12=produce stone
+consume=smoked_fish,smoked_meat:2 bread:2
+sleep=45000
+animate=working 20000
+mine=granit 4 100 5
+produce=diamond
+animate=working 20000
+mine=granit 4 100 5
+produce=diamond
+animate=working 20000
+mine=granit 4 100 5
+produce=stone
 
 [buildcost]
 trunk=7

@@ -43,6 +43,7 @@
 #include "tribe.h"
 #include <vector>
 #include "warehouse.h"
+#include "warehousesupply.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
@@ -74,7 +75,7 @@ struct IdleWareSupply : public Supply {
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual bool is_active() const throw ();
 
-	virtual uint32_t nr_supplies(Game*, const Request*);
+	virtual uint32_t nr_supplies(Game *, Request const *) const;
 	virtual WareInstance & launch_item(Game * g, const Request*);
 	virtual Worker* launch_worker(Game* g, const Request*) __attribute__ ((noreturn));
 
@@ -137,7 +138,7 @@ bool IdleWareSupply::is_active()  const throw ()
 	return not m_ware->is_moving();
 }
 
-uint32_t IdleWareSupply::nr_supplies(Game*, const Request* req)
+uint32_t IdleWareSupply::nr_supplies(Game *, Request const * req) const
 {
 	if (req->get_type() == Request::WARE && req->get_index() == m_ware->descr_index())
 		return 1;
@@ -1884,14 +1885,15 @@ WaresQueue::~WaresQueue()
 /**
  * Initialize the queue. This also issues the first request, if necessary.
 */
-void WaresQueue::init(Ware_Index ware, const uint32_t size) {
+WaresQueue & WaresQueue::init(std::pair<Ware_Index, uint8_t> const i) {
 	assert(not m_ware);
 
-	m_ware = ware;
-	m_size = size;
+	m_ware = i.first;
+	m_size = i.second;
 	m_filled = 0;
 
 	update();
+	return *this;
 }
 
 /**
@@ -2722,6 +2724,18 @@ void Economy::remove_supply(Supply * const supply)
 {
 	m_supplies.remove_supply(supply);
 }
+
+
+bool Economy::needs_ware(Ware_Index const ware_type) const {
+	// FIXME this should really be much smarter
+	size_t const nr_supplies = m_supplies.get_nrsupplies();
+	for (size_t i = 0; i < nr_supplies; ++i)
+		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i]))
+			if (warehouse_supply->stock_wares(ware_type))
+				return false;
+	return true;
+}
+
 
 /**
  * Add e's flags to this economy.

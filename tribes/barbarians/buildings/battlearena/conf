@@ -12,35 +12,25 @@ program=upgrade_evade_0 # This is needed to run the scripts
 program=upgrade_evade_1
 
 [Sleep]
-0=sleep 5000
+sleep=5000
 
 [evade]
 min_level=0
 max_level=1
 
 [upgrade_evade_0]
-0=check pittabread
-1=check fish,meat
-2=check strongbeer
-3=check_soldier evade 0 # Fails when aren't any soldier of level 0 evade
-4=sleep 30000
-5=check_soldier evade 0 # Because the soldier can be expulsed by the player
-6=consume pittabread
-7=consume fish,meat
-8=consume strongbeer
-9=train evade 0 1
+check_soldier=evade 0 # Fails when aren't any soldier of level 0 evade
+sleep=30000
+check_soldier=evade 0 # Because the soldier can be expulsed by the player
+consume=pittabread fish,meat strongbeer
+train=evade 0 1
 
 [upgrade_evade_1]
-0=check pittabread 2
-1=check fish,meat
-2=check strongbeer
-3=check_soldier evade 1 # Fails when aren't any soldier of level 1 evade
-4=sleep 30000
-5=check_soldier evade 1 # Because the soldier can be expulsed by the player
-6=consume pittabread 2
-7=consume fish,meat
-8=consume strongbeer
-9=train evade 1 2
+check_soldier=evade 1 # Fails when aren't any soldier of level 1 evade
+sleep=30000
+check_soldier=evade 1 # Because the soldier can be expulsed by the player
+consume=pittabread:2 fish,meat strongbeer
+train=evade 1 2
 
 [inputs]
 pittabread=10

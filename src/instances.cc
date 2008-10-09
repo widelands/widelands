@@ -1,3 +1,5 @@
+#include "productionsite.h"
+#include "upcast.h"
 /*
  * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
@@ -230,8 +232,8 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
 /**
  * Add this animation for this map object under this name
  */
-bool Map_Object_Descr::is_animation_known(const char* name) {
-	std::map<std::string, uint32_t>::iterator i=m_anims.begin();
+bool Map_Object_Descr::is_animation_known(const char * const name) const {
+	std::map<std::string, uint32_t>::const_iterator i = m_anims.begin();
 	while (i!=m_anims.end()) {
 		if (i->first==name)
 			return true;

@@ -9,21 +9,20 @@ worker=chief-miner,miner
 program=work
 output=ironore
 stopable=yes
-enhances_to=deeper_oremine
+enhancement=deeper_oremine
 
 [inputs]
 snack=6
 
 [work]
-0=sleep 43000
-1=consume snack
-2=animation working 18000
-3=mine iron 2 66 5
-4=produce ironore
-5=animation working 18000
-6=mine iron 2 66 5
-7=produce ironore
-8=produce ironore
+sleep=43000
+consume=snack
+animate=working 18000
+mine=iron 2 66 5
+produce=ironore
+animate=working 18000
+mine=iron 2 66 5
+produce=ironore:1
 
 [buildcost]
 trunk=4

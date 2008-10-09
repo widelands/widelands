@@ -18,7 +18,7 @@ program=upgrade_hp_1
 program=upgrade_hp_2
 
 [Sleep]
-0=sleep 5000
+sleep=5000
 
 [attack]
 min_level=0
@@ -29,84 +29,60 @@ min_level=0
 max_level=2
 
 [upgrade_attack_0]
-0=check sharpaxe
-1=check meat,fish,pittabread 1
-2=check_soldier attack 0 # Fails when aren't any soldier of level 0 attack
-3=sleep 30000
-4=check_soldier attack 0 # Because the soldier can be expulsed by the player
-5=consume sharpaxe
-6=consume meat,fish,pittabread
-7=train attack 0 1
+check_soldier=attack 0 # Fails when aren't any soldier of level 0 attack
+sleep=30000
+check_soldier=attack 0 # Because the soldier can be expulsed by the player
+consume=sharpaxe fish,meat,pittabread
+train=attack 0 1
 
 [upgrade_attack_1]
-0=check broadaxe
-1=check meat,fish,pittabread 1
-2=check_soldier attack 1
-3=sleep 30000
-4=check_soldier attack 1
-5=consume broadaxe
-6=consume meat,fish,pittabread
-7=train attack 1 2
+check_soldier=attack 1
+sleep=30000
+check_soldier=attack 1
+consume=broadaxe fish,meat,pittabread
+train=attack 1 2
 
 [upgrade_attack_2]
-0=check bronzeaxe
-1=check meat,fish,pittabread 1
-2=check_soldier attack 2
-3=sleep 30000
-4=check_soldier attack 2
-5=consume bronzeaxe
-6=consume meat,fish,pittabread
-7=train attack 2 3
+check_soldier=attack 2
+sleep=30000
+check_soldier=attack 2
+consume=bronzeaxe fish,meat,pittabread
+train=attack 2 3
 
 [upgrade_attack_3]
-0=check battleaxe
-1=check meat,fish,pittabread 2
-2=check_soldier attack 3
-3=sleep 30000
-4=check_soldier attack 3
-5=consume battleaxe
-6=consume meat,fish,pittabread 2
-7=train attack 3 4
+check_soldier=attack 3
+sleep=30000
+check_soldier=attack 3
+consume=battleaxe fish,meat,pittabread:2
+train=attack 3 4
 
 [upgrade_attack_4]
-0=check warriorsaxe
-1=check meat,fish,pittabread 2
-2=check_soldier attack 4
-3=sleep 30000
-4=check_soldier attack 4
-5=consume warriorsaxe
-6=consume meat,fish,pittabread 2
-7=train attack 4 5
+check_soldier=attack 4
+sleep=30000
+check_soldier=attack 4
+consume=warriorsaxe fish,meat,pittabread:2
+train=attack 4 5
 
 [upgrade_hp_0]
-0=check helm
-1=check meat,fish,pittabread 1
-2=check_soldier hp 0
-3=sleep 30000
-4=check_soldier hp 0
-5=consume helm
-6=consume meat,fish,pittabread 1
-7=train hp 0 1
+check_soldier=hp 0
+sleep=30000
+check_soldier=hp 0
+consume=helm fish,meat,pittabread
+train=hp 0 1
 
 [upgrade_hp_1]
-0=check mask
-1=check meat,fish,pittabread 2
-2=check_soldier hp 1
-3=sleep 30000
-4=check_soldier hp 1
-5=consume mask
-6=consume meat,fish,pittabread 2
-7=train hp 1 2
+check_soldier=hp 1
+sleep=30000
+check_soldier=hp 1
+consume=mask fish,meat,pittabread:2
+train=hp 1 2
 
 [upgrade_hp_2]
-0=check warhelmet
-1=check meat,fish,pittabread 3
-2=check_soldier hp 2
-3=sleep 30000
-4=check_soldier hp 2
-5=consume warhelmet
-6=consume meat,fish,pittabread 3
-7=train hp 2 3
+check_soldier=hp 2
+sleep=30000
+check_soldier=hp 2
+consume=warhelmet fish,meat,pittabread:3
+train=hp 2 3
 
 [inputs]
 pittabread=10

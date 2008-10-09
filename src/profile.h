@@ -77,7 +77,8 @@ public:
 
 		int32_t get_int() const;
 		bool get_bool() const;
-		const char *get_string() const;
+		char const * get_string() const {return m_value;}
+		char       * get_string()       {return m_value;}
 		Point  get_Point () const;
 		Widelands::Coords get_Coords(Widelands::Extent) const;
 
@@ -150,7 +151,7 @@ public:
 
 	const char *get_next_int(const char *name, int32_t *value);
 	const char *get_next_bool(const char *name, bool *value);
-	const char *get_next_string(const char *name, const char **value);
+	const char *get_next_string(const char *name, char * * value);
 
 	void set_int
 		(char const * name, int32_t           value, bool duplicate = false);

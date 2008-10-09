@@ -12,10 +12,10 @@ output=water
 [inputs]
 
 [work]
-0=sleep 20000
-1=animation working 20000
-2=mine water 1 100 65
-3=produce water
+sleep=20000
+animate=working 20000
+mine=water 1 100 65
+produce=water
 
 [buildcost]
 trunk=4

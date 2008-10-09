@@ -13,8 +13,8 @@ planks=1
 stone=1
 
 [work]
-0=sleep 24000
-1=worker breed
+sleep=24000
+worker=breed
 
 [idle]
 pics=fish_breeder_i_??.png  # ???

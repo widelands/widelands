@@ -14,12 +14,12 @@ soundfx=../../../../sound/mill/mill_turning
 wheat=6
 
 [work]
-0=sleep 5000
-1=check wheat
-2=consume wheat
-3=playFX ../../../../sound/mill/mill_turning 240
-4=animation working 10000
-5=produce flour
+return=skipped unless economy needs flour
+consume=wheat
+sleep=5000
+playFX=../../../../sound/mill/mill_turning 240
+animate=working 10000
+produce=flour
 
 [buildcost]
 trunk=3

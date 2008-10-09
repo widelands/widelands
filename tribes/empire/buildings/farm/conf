@@ -8,25 +8,23 @@ buildicon=farm_build.png
 worker=farmer
 stopable=yes
 output=wheat
-program=work
 program=plant
 program=harvest
+program=work
 
 [work]
-0=set +nostats
-1=call plant
-2=call harvest
-3=playFX ../../../../sound/farm/farm_animal 192
+call=plant
+call=harvest
+playFX=../../../../sound/farm/farm_animal 192
+return=skipped
 
 [plant]
-0=set +catch
-1=sleep 20000
-2=worker plant
+sleep=20000
+worker=plant
 
 [harvest]
-0=set +catch
-1=sleep 5000
-2=worker harvest
+sleep=5000
+worker=harvest
 
 [buildcost]
 wood=2

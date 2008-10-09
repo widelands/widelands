@@ -9,20 +9,20 @@ worker=chief-miner,miner
 program=work
 output=goldstone
 stopable=yes
-enhances_to=deeper_goldmine
+enhancement=deeper_goldmine
 
 [inputs]
 snack=6
 
 [work]
-0=sleep 43000
-1=consume snack
-2=animation working 18000
-3=mine gold 2 66 5
-4=produce goldstone
-5=animation working 18000
-6=mine gold 2 66 5
-7=produce goldstone
+sleep=43000
+consume=snack
+animate=working 18000
+mine=gold 2 66 5
+produce=goldstone
+animate=working 18000
+mine=gold 2 66 5
+produce=goldstone
 
 [buildcost]
 trunk=4

@@ -153,11 +153,8 @@ void Worker_Descr::parse
 			 prof->get_section("walkload"),
 			 encdata);
 
-	{ // read the sound effects
-		char const * string;
-		while (global_s.get_next_string("soundfx", &string))
-			g_sound_handler.load_fx(directory, string);
-	}
+	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
+		g_sound_handler.load_fx(directory, v->get_string());
 
 	// Read the becomes and experience
 	if (char const * const becomes_name = global_s.get_string("becomes"))
@@ -173,19 +170,21 @@ void Worker_Descr::parse
 
 		char* endp;
 		m_min_experience = strtol(list[0].c_str(), &endp, 0);
-		if (endp && *endp)
+		if (*endp)
 			throw wexception("Parse error in experience string: %s is a bad value", list[0].c_str());
 		m_max_experience = strtol(list[1].c_str(), &endp, 0);
-		if (endp && *endp)
+		if (*endp)
 			throw wexception("Parse error in experience string: %s is a bad value", list[1].c_str());
 	}
 
 	// Read programs
-	char const * string;
-	while (global_s.get_next_string("program", &string)) {
-		WorkerProgram* prog = 0;
+	while (Section::Value const * const v = global_s.get_next_val("program")) {
+		std::string const program_name = v->get_string();
+		WorkerProgram * program = 0;
 
 		try {
+			if (m_programs.count(program_name))
+				throw wexception("this program has already been declared");
 			WorkerProgram::Parser parser;
 
 			parser.descr = this;
@@ -193,14 +192,14 @@ void Worker_Descr::parse
 			parser.prof = prof;
 			parser.encdata = encdata;
 
-			prog = new WorkerProgram(string);
-			prog->parse(this, &parser, string);
-			m_programs[prog->get_name()] = prog;
+			program = new WorkerProgram(program_name);
+			program->parse(this, &parser, program_name.c_str());
+			m_programs[program_name.c_str()] = program;
 		}
 
 		catch (std::exception& e) {
-			delete prog;
-			throw wexception("Parse error in program %s: %s", string, e.what());
+			delete program;
+			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
 }

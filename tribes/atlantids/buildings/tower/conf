@@ -10,7 +10,7 @@ conquers=9
 max_medics=2
 heal_increase_per_medic=3
 vision_range=17
-enhances_to=high_tower
+enhancement=high_tower
 
 [buildcost]
 trunk=2

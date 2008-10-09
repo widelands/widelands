@@ -163,24 +163,22 @@ void Computer_Player::late_initialization ()
 			bo.type = bld.get_ismine() ?
 				BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 
-			const std::vector<Input>::const_iterator inputs_end =
-				prod.get_inputs()->end();
+			std::map<Ware_Index, uint8_t>::const_iterator const inputs_end =
+				prod.inputs().end();
 			for
-				(std::vector<Input>::const_iterator it =
-				 prod.get_inputs()->begin();
+				(std::map<Ware_Index, uint8_t>::const_iterator it =
+				 	prod.inputs().begin();
 				 it != inputs_end;
 				 ++it)
-				bo.inputs.push_back
-					(tribe->safe_ware_index(it->ware_descr().name().c_str()).value());
+				bo.inputs.push_back(it->first.value());
 
-			const std::set<std::string>::const_iterator outputs_end =
-				prod.get_outputs()->end();
+			std::set<Ware_Index>::const_iterator const output_end =
+				prod.output().end();
 			for
-				(std::set<std::string>::const_iterator it =
-				 prod.get_outputs()->begin();
-				 it != outputs_end;
+				(std::set<Ware_Index>::const_iterator it = prod.output().begin();
+				 it != output_end;
 				 ++it)
-				bo.outputs.push_back(tribe->safe_ware_index(it->c_str()).value());
+				bo.outputs.push_back(it->value());
 
 			continue;
 		}

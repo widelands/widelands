@@ -10,8 +10,8 @@ program=work
 output=meat
 
 [work]
-0=sleep 35000
-1=worker hunt
+sleep=35000
+worker=hunt
 
 [buildcost]
 trunk=4

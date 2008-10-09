@@ -7,7 +7,7 @@ buildicon=tavern_build.png
 worker=innkeeper
 program=work
 output=ration
-enhances_to=inn
+enhancement=inn
 
 [inputs]
 fish=5
@@ -15,11 +15,10 @@ bread=5
 meat=5
 
 [work]
-0=sleep 14000
-1=check fish,bread,meat
-2=consume fish,bread,meat
-3=animation working 19000
-4=produce ration
+consume=bread,fish,meat
+sleep=14000
+animate=working 19000
+produce=ration
 
 [buildcost]
 wood=2

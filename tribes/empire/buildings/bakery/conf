@@ -14,13 +14,11 @@ flour=6
 water=6
 
 [work]
-0=sleep 15000
-1=check water
-2=check flour
-3=consume flour
-4=consume water
-5=animation working 15000
-6=produce bread
+return=skipped unless economy needs bread
+consume=flour water
+sleep=15000
+animate=working 15000
+produce=bread
 
 [buildcost]
 trunk=2

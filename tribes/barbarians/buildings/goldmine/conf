@@ -8,17 +8,17 @@ worker=miner
 program=work
 output=goldstone
 stopable=yes
-enhances_to=deep_goldmine
+enhancement=deep_goldmine
 
 [inputs]
 ration=6
 
 [work]
-0=sleep 45000
-1=consume ration
-2=animation working 20000
-3=mine gold 2 33 5
-4=produce goldstone
+sleep=45000
+consume=ration
+animate=working 20000
+mine=gold 2 33 5
+produce=goldstone
 
 [buildcost]
 trunk=4

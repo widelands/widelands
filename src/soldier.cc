@@ -89,14 +89,14 @@ void Soldier_Descr::parse
 			remove_spaces(*it);
 		char * endp;
 		m_min_hp= strtol(list[0].c_str(), &endp, 0);
-		if (endp and *endp)
+		if (*endp)
 			throw wexception
 				("Parse error in hp string: %s is a bad value", list[0].c_str());
 		if (0 == m_min_hp)
 			throw wexception
 				("Parse error in hp string: \"%s\" is not positive", list[0].c_str());
 		m_max_hp = strtol(list[1].c_str(), &endp, 0);
-		if (endp and *endp)
+		if (*endp)
 			throw wexception
 				("Parse error in hp string: %s is a bad value", list[1].c_str());
 		if (m_max_hp < m_min_hp)
@@ -120,12 +120,12 @@ void Soldier_Descr::parse
 			remove_spaces(*it);
 		char * endp;
 		m_min_attack= strtol(list[0].c_str(), &endp, 0);
-		if (endp and *endp)
+		if (*endp)
 			throw wexception
 				("Parse error in attack string: %s is a bad value",
 				 list[0].c_str());
 		m_max_attack = strtol(list[1].c_str(), &endp, 0);
-		if (endp and *endp)
+		if (*endp)
 			throw wexception
 				("Parse error in attack string: %s is a bad value",
 				 list[1].c_str());

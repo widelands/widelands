@@ -14,13 +14,13 @@ output=bronzeaxe
 output=battleaxe
 output=warriorsaxe
 enhanced_building=yes
-program=work
 program=produce_axe
 program=produce_sharpaxe
 program=produce_broadaxe
 program=produce_bronzeaxe
 program=produce_battleaxe
 program=produce_warriorsaxe
+program=work
 
 [inputs]
 iron=8
@@ -28,89 +28,67 @@ coal=8
 gold=8
 
 [work]
-0=set +nostats
-1=call produce_axe
-2=call produce_sharpaxe
-3=call produce_broadaxe
-4=call produce_bronzeaxe
-5=call produce_battleaxe
-6=call produce_warriorsaxe
+call=produce_axe
+call=produce_sharpaxe
+call=produce_broadaxe
+call=produce_bronzeaxe
+call=produce_battleaxe
+call=produce_warriorsaxe
+return=skipped
 
 [produce_axe]
-0=set +catch
-1=sleep 32000
-2=check coal
-3=check iron
-4=consume iron
-5=consume coal
-6=playFX ../../../../sound/smiths/smith 192
-7=animation working 25000
-8=playFX ../../../../sound/smiths/sharpening 192
-9=produce axe
+return=skipped unless economy needs axe
+consume=coal iron
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=axe
 
 [produce_sharpaxe]
-0=set +catch
-1=sleep 32000
-2=check coal
-3=check iron 2
-4=consume iron 2
-5=consume coal
-6=playFX ../../../../sound/smiths/smith 192
-7=animation working 25000
-8=playFX ../../../../sound/smiths/sharpening 192
-9=produce sharpaxe
+return=skipped unless economy needs sharpaxe
+consume=coal iron:2
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=sharpaxe
 
 [produce_broadaxe]
-0=set +catch
-1=sleep 32000
-2=check coal 2
-3=check iron 2
-4=consume iron 2
-5=consume coal 2
-6=playFX ../../../../sound/smiths/smith 192
-7=animation working 25000
-8=playFX ../../../../sound/smiths/sharpening 192
-9=produce broadaxe
+return=skipped unless economy needs broadaxe
+consume=coal:2 iron:2
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=broadaxe
 
 [produce_bronzeaxe]
-0=set +catch
-1=sleep 32000
-2=check coal 2
-3=check iron 2
-4=consume iron 2
-5=consume coal 2
-6=playFX ../../../../sound/smiths/smith 192
-7=animation working 25000
-8=playFX ../../../../sound/smiths/sharpening 192
-9=produce bronzeaxe
+return=skipped unless economy needs bronzeaxe
+consume=coal:2 iron:2
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=bronzeaxe
 
 [produce_battleaxe]
-0=set +catch
-1=sleep 32000
-2=check coal
-3=check iron 2
-4=check gold
-5=consume coal
-6=consume iron 2
-7=consume gold
-8=playFX ../../../../sound/smiths/smith 192
-9=animation working 25000
-10=playFX ../../../../sound/smiths/sharpening 192
-11=produce battleaxe
+return=skipped unless economy needs battleaxe
+consume=coal gold iron:2
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=battleaxe
 
 [produce_warriorsaxe]
-0=set +catch
-1=sleep 32000
-2=check coal 2
-3=check iron 2
-4=check gold 2
-5=consume coal 2
-6=consume iron 2
-7=consume gold 2
-8=playFX ../../../../sound/smiths/smith 192
-9=animation working 25000
-10=playFX ../../../../sound/smiths/sharpening 192
-11=produce warriorsaxe
+return=skipped unless economy needs warriorsaxe
+consume=coal:2 gold:2 iron:2
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=warriorsaxe
 
 [buildcost]
 trunk=1

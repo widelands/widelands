@@ -9,8 +9,8 @@ output=trunk
 program=work
 
 [work]
-0=sleep 25000 # sleeps shorter than any other tribes
-1=worker chop
+sleep=25000 # sleeps shorter than any other tribes
+worker=chop
 
 [buildcost]
 trunk=3

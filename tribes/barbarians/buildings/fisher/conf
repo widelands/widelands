@@ -12,8 +12,8 @@ program=work
 trunk=4
 
 [work]
-0=sleep 18000
-1=worker fish
+sleep=18000
+worker=fish
 
 [idle]
 pics=fisher_i_??.png  # ???

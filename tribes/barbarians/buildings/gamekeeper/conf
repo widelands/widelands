@@ -9,8 +9,8 @@ worker=gamekeeper
 program=work
 
 [work]
-0=sleep 52500
-1=worker release
+sleep=52500
+worker=release
 
 [buildcost]
 trunk=4

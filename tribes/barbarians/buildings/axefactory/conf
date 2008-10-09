@@ -11,58 +11,48 @@ output=axe
 output=sharpaxe
 output=broadaxe
 enhanced_building=yes
-enhances_to=warmill
-program=work
+enhancement=warmill
 program=produce_axe
 program=produce_sharpaxe
 program=produce_broadaxe
+program=work
 
 [inputs]
 iron=8
 coal=8
 
 [work]
-0=set +nostats
-1=call produce_axe
-2=call produce_sharpaxe
-3=call produce_broadaxe
+call=produce_axe
+call=produce_sharpaxe
+call=produce_broadaxe
+return=skipped
 
 [produce_axe]
-0=set +catch
-1=sleep 32000
-2=check coal
-3=check iron
-4=consume iron
-5=consume coal
-6=playFX ../../../../sound/smiths/smith 192
-7=animation working 25000
-8=playFX ../../../../sound/smiths/sharpening 192
-9=produce axe
+return=skipped unless economy needs axe
+consume=coal iron
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=axe
 
 [produce_sharpaxe]
-0=set +catch
-1=sleep 32000
-2=check coal
-3=check iron 2
-4=consume iron 2
-5=consume coal
-6=playFX ../../../../sound/smiths/smith 192
-7=animation working 25000
-8=playFX ../../../../sound/smiths/sharpening 192
-9=produce sharpaxe
+return=skipped unless economy needs sharpaxe
+consume=coal iron:2
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=sharpaxe
 
 [produce_broadaxe]
-0=set +catch
-1=sleep 32000
-2=check coal 2
-3=check iron 2
-4=consume iron 2
-5=consume coal 2
-6=playFX ../../../../sound/smiths/smith 192
-7=animation working 25000
-8=playFX ../../../../sound/smiths/sharpening 192
-9=produce broadaxe
-
+return=skipped unless economy needs broadaxe
+consume=coal:2 iron:2
+sleep=32000
+playFX=../../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../../sound/smiths/sharpening 192
+produce=broadaxe
 
 [buildcost]
 trunk=1

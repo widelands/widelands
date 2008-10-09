@@ -8,9 +8,9 @@ worker=smelter
 output=iron
 output=gold
 
-program=work
 program=smelt_iron
 program=smelt_gold
+program=work
 
 [inputs]
 ironore=8
@@ -18,29 +18,23 @@ goldstone=8
 coal=8
 
 [work]
-0=set +nostats
-1=call smelt_iron
-2=call smelt_gold
+call=smelt_iron
+call=smelt_gold
+return=skipped
 
 [smelt_iron]
-0=set +catch
-1=sleep 25000
-2=check ironore
-3=check coal
-4=consume ironore
-5=consume coal
-6=animation working 35000
-7=produce iron
+return=skipped unless economy needs iron
+consume=ironore coal
+sleep=25000
+animate=working 35000
+produce=iron
 
 [smelt_gold]
-0=set +catch
-1=sleep 25000
-2=check goldstone
-3=check coal
-4=consume goldstone
-5=consume coal
-6=animation working 35000
-7=produce gold
+return=skipped unless economy needs gold
+consume=goldstone coal
+sleep=25000
+animate=working 35000
+produce=gold
 
 [buildcost]
 trunk=1

@@ -12,11 +12,11 @@ output=blackwood
 trunk=8
 
 [work]
-0=sleep 43000
-1=check trunk 2
-2=consume trunk 2
-3=animation working 24000
-4=produce blackwood
+return=skipped unless economy needs blackwood
+consume=trunk:2
+sleep=43000
+animate=working 24000
+produce=blackwood
 
 [buildcost]
 trunk=3

@@ -62,7 +62,6 @@ struct Building_Descr : public Map_Object_Descr {
 		CostItem(const char* iname, int32_t iamount)
 			: name(iname), amount(iamount) {}
 	};
-	typedef std::vector<CostItem> BuildCost;
 
 	Building_Descr(const Tribe_Descr &, const std::string & name);
 	virtual ~Building_Descr();
@@ -73,7 +72,9 @@ struct Building_Descr : public Map_Object_Descr {
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return m_descname.c_str();}
 	bool get_buildable() const {return m_buildable;}
 	bool get_enhanced_building() const {return m_enhanced_building;}
-	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
+	std::map<Ware_Index, uint8_t> const & buildcost() const throw () {
+		return m_buildcost;
+	}
 	uint32_t get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
 	bool get_ismine() const {return m_mine;}
@@ -83,8 +84,13 @@ struct Building_Descr : public Map_Object_Descr {
 	const std::string & get_stop_icon() const throw () {return m_stop_icon;}
 	const std::string & get_continue_icon() const throw ()
 	{return m_continue_icon;}
-	const std::vector<char *> & enhances_to() const throw ()
-	{return m_enhances_to;}
+	std::set<Building_Index> const & enhancements() const throw () {
+		return m_enhancements;
+	}
+	void add_enhancement(Building_Index const i) {
+		assert(not m_enhancements.count(i));
+		m_enhancements.insert(i);
+	}
 
 	Building * create
 		(Editor_Game_Base &,
@@ -93,7 +99,9 @@ struct Building_Descr : public Map_Object_Descr {
 		 bool construct, bool fill = false,
 		 Building_Descr const * = 0)
 		const;
-	virtual void parse(char const * directory, Profile *, EncodeData const *);
+	typedef
+		std::map<Building_Descr *, std::set<std::string> > enhancements_map_t;
+	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
 	virtual void load_graphics();
 
 	virtual uint32_t get_conquers() const;
@@ -117,20 +125,19 @@ private:
 	const std::string   m_name;     // internal codename
 	std::string         m_descname; // descriptive name for GUI
 	bool         m_buildable;       // the player can build this himself
-	BuildCost    m_buildcost;
+	std::map<Ware_Index, uint8_t> m_buildcost;
 	uint32_t         m_buildicon;       // if buildable: picture in the build dialog
 	char*        m_buildicon_fname; // filename for this icon
 	int32_t          m_size;            // size of the building
 	bool         m_mine;
-	std::vector<char*> m_enhances_to;     // building to enhance to or 0
+	std::set<Building_Index> m_enhancements;
 	bool         m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints       m_hints; //  hints (knowledge) for computer players
 	uint32_t m_vision_range; // for migration, 0 is the default, meaning get_conquers() + 4
 
 public:
 	static Building_Descr* create_from_dir
-		(const Tribe_Descr &,
-		 const char * const directory,
+		(Tribe_Descr const &, enhancements_map_t &, char const * directory,
 		 const EncodeData * const encdata);
 };
 
@@ -214,8 +221,9 @@ public:
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
-	const std::vector<char *> & enhances_to() const throw ()
-	{return descr().enhances_to();}
+	std::set<Building_Index> const & enhancements() const throw () {
+		return descr().enhancements();
+	}
 
 	void log_general_info(Editor_Game_Base *);
 

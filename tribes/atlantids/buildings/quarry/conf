@@ -9,8 +9,8 @@ program=work
 worker=stonecutter
 
 [work]
-0=sleep 25000
-1=worker cut_stone
+sleep=25000
+worker=cut_stone
 
 [buildcost]
 trunk=2

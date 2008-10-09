@@ -175,7 +175,7 @@ uint32_t AnimationManager::get
 	// Read mapping from frame numbers to sound effect names and load effects
 	// will yield strange results if there is a different number of sfx_frame and sfx_name
 	int32_t framenum;
-	const char *fxname;
+	char * fxname;
 	ad.sfx_cues[123456] = "dummy";
 	while
 		(s.get_next_int("sfx_frame", &framenum)

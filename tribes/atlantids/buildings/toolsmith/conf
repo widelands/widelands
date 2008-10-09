@@ -17,7 +17,6 @@ output=pick
 output=saw
 output=scythe
 output=shovel
-program=work
 program=produce_bakingtray
 program=produce_bucket
 program=produce_fire_tongs
@@ -30,6 +29,7 @@ program=produce_pick
 program=produce_saw
 program=produce_scythe
 program=produce_shovel
+program=work
 
 [buildcost]
 trunk=1
@@ -43,137 +43,103 @@ trunk=6
 spidercloth=4
 
 [work]
-0=set +nostats
-1=call produce_bakingtray
-2=call produce_bucket
-3=call produce_fire_tongs
-4=call produce_fishing_net
-5=call produce_hammer
-6=call produce_hook_pole
-7=call produce_hunting_bow
-8=call produce_milking_tongs
-9=call produce_pick
-10=call produce_saw
-11=call produce_scythe
-12=call produce_shovel
+call=produce_bakingtray
+call=produce_bucket
+call=produce_fire_tongs
+call=produce_fishing_net
+call=produce_hammer
+call=produce_hook_pole
+call=produce_hunting_bow
+call=produce_milking_tongs
+call=produce_pick
+call=produce_saw
+call=produce_scythe
+call=produce_shovel
+return=skipped
 
 [produce_bakingtray]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce bakingtray
+return=skipped unless economy needs bakingtray
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=bakingtray
 
 [produce_bucket]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce bucket
+return=skipped unless economy needs bucket
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=bucket
 
 [produce_fire_tongs]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce fire_tongs
+return=skipped unless economy needs fire_tongs
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=fire_tongs
 
 [produce_fishing_net]
-0=set +catch
-1=sleep 32000
-2=check spidercloth 2
-3=consume spidercloth 2
-4=animation working 35000
-5=produce fishing_net
+return=skipped unless economy needs fishing_net
+consume=spidercloth:2
+sleep=32000
+animate=working 35000
+produce=fishing_net
 
 [produce_hammer]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce hammer
+return=skipped unless economy needs hammer
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=hammer
 
 [produce_hook_pole]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce hook_pole
+return=skipped unless economy needs hook_pole
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=hook_pole
 
 [produce_hunting_bow]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check spidercloth
-4=consume iron
-5=consume spidercloth
-6=animation working 35000
-7=produce hunting_bow
+return=skipped unless economy needs hunting_bow
+consume=trunk spidercloth
+sleep=32000
+animate=working 35000
+produce=hunting_bow
 
 [produce_milking_tongs]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce milking_tongs
+return=skipped unless economy needs milking_tongs
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=milking_tongs
 
 [produce_pick]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce pick
+return=skipped unless economy needs pick
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=pick
 
 [produce_saw]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce saw
+return=skipped unless economy needs saw
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=saw
 
 [produce_scythe]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce scythe
+return=skipped unless economy needs scythe
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=scythe
 
 [produce_shovel]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=animation working 35000
-7=produce shovel
+return=skipped unless economy needs shovel
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=shovel
 
 [idle]
 pics=toolsmith_i_??.png

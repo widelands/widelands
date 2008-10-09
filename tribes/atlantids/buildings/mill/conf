@@ -5,9 +5,9 @@ size=medium
 buildable=yes
 buildicon=mill_build.png
 worker=miller
-program=work
 program=produce_cornflour
 program=produce_blackrootflour
+program=work
 output=cornflour
 output=blackrootflour
 stopable=yes
@@ -22,25 +22,23 @@ corn=6
 blackroot=6
 
 [work]
-0=set +nostats
-1=call produce_cornflour
-2=call produce_blackrootflour
+call=produce_cornflour
+call=produce_blackrootflour
+return=skipped
 
 [produce_cornflour]
-0=set +catch
-1=sleep 3500
-2=check corn
-3=consume corn
-4=animation working 15000
-5=produce cornflour
+return=skipped unless economy needs cornflour
+consume=corn
+sleep=3500
+animate=working 15000
+produce=cornflour
 
 [produce_blackrootflour]
-0=set +catch
-1=sleep 3500
-2=check blackroot
-3=consume blackroot
-4=animation working 15000
-5=produce blackrootflour
+return=skipped unless economy needs blackrootflour
+consume=blackroot
+sleep=3500
+animate=working 15000
+produce=blackrootflour
 
 [idle]
 pics=mill_i_??.png

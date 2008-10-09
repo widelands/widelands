@@ -300,23 +300,19 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 	}
 
 
-	{ //  parse attributes
-		char const * string;
-		while (global_s.get_next_string("attrib", &string)) {
-			uint32_t attrib = get_attribute_id(string);
-			if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-				if (attrib != Map_Object::RESI)
-					throw wexception("Bad attribute '%s'", string);
-			add_attribute(attrib);
-		}
+	//  parse attributes
+	while (Section::Value const * const v = global_s.get_next_val("attrib")) {
+		uint32_t attrib = get_attribute_id(v->get_string());
+		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
+			if (attrib != Map_Object::RESI)
+				throw wexception("Bad attribute '%s'", v->get_string());
+		add_attribute(attrib);
 	}
 
 
-	{ //  parse the programs
-		char const * string;
-		while (global_s.get_next_string("program", &string))
-			parse_program(directory, prof, string);
-	}
+	//  parse the programs
+	while (Section::Value const * const v = global_s.get_next_val("program"))
+		parse_program(directory, prof, v->get_string());
 
 	if (m_programs.find("program") == m_programs.end()) {
 		if (prof->get_section("program")) {

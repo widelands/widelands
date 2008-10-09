@@ -34,7 +34,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		(const Tribe_Descr &, const std::string & militarysite_name);
 	virtual ~MilitarySite_Descr();
 
-	virtual void parse(char const * directory, Profile *, EncodeData const *);
+	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
 	virtual Building * create_object() const;
 
 	virtual bool is_only_production_site() const throw () {return false;}

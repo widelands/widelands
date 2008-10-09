@@ -52,7 +52,7 @@ struct ConstructionSite_Descr : public Building_Descr {
 	ConstructionSite_Descr
 		(const Tribe_Descr &, const std::string & constructionsite_name);
 
-	virtual void parse(char const * directory, Profile *, EncodeData const *);
+	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
 	virtual Building * create_object() const;
 };
 

@@ -55,6 +55,7 @@ class.
 #include <sys/types.h>
 
 using Widelands::Building;
+using Widelands::Building_Index;
 using Widelands::ConstructionSite;
 using Widelands::MilitarySite;
 using Widelands::ProductionSite;
@@ -608,23 +609,21 @@ void Building_Window::setup_capsbuttons()
 	}
 
 	if (m_capscache & 1 << Building::PCap_Enhancable) {
-		const std::vector<char *> & buildings = m_building->enhances_to();
+		std::set<Building_Index> const & enhancements =
+			m_building->enhancements();
 		Widelands::Tribe_Descr const & tribe = m_player->player().tribe();
-		const std::vector<char *>::const_iterator buildings_end = buildings.end();
+		std::set<Building_Index>::const_iterator const enhancements_end =
+			enhancements.end();
 		for
-			(std::vector<char *>::const_iterator it = buildings.begin();
-			 it != buildings_end;
+			(std::set<Building_Index>::const_iterator it = enhancements.begin();
+			 it != enhancements_end;
 			 ++it)
 		{
-			Widelands::Building_Index const id = tribe.building_index(*it);
-			if (not id)
-				throw wexception("Should enhance to unknown building: %s", *it);
-
-			if (not m_player->player().is_building_allowed(id))
+			if (not m_player->player().is_building_allowed(*it))
 				continue;
 
 			Widelands::Building_Descr const & building =
-				*tribe.get_building_descr(id);
+				*tribe.get_building_descr(*it);
 			char buffer[128];
 			snprintf
 				(buffer, sizeof(buffer),
@@ -634,7 +633,7 @@ void Building_Window::setup_capsbuttons()
 				 x, 0, 34, 34,
 				 4,
 				 building.get_buildicon(),
-				 &Building_Window::act_enhance, this, id, // Button id = building id
+				 &Building_Window::act_enhance, this, *it, //  button id = building id
 				 buffer);
 			x += 34;
 		}
@@ -1405,9 +1404,9 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
 	UI::Box* box = new UI::Box (parent, 0, 0, UI::Box::Vertical);
 
 	// Add the wares queue
-	std::vector<Widelands::WaresQueue*>* warequeues=ps->get_warequeues();
-	for (uint32_t i = 0; i < warequeues->size(); ++i) {
-		create_ware_queue_panel (box, ps, (*warequeues)[i]);
+	std::vector<Widelands::WaresQueue *> const & warequeues = ps->warequeues();
+	for (uint32_t i = 0; i < warequeues.size(); ++i) {
+		create_ware_queue_panel (box, ps, warequeues[i]);
 	}
 
 	box->add_space(8);

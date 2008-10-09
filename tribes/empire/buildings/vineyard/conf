@@ -7,24 +7,22 @@ buildicon=vineyard_build.png
 worker=vinefarmer
 stopable=yes
 output=grape
-program=work
 program=plantvine
 program=harvestvine
+program=work
 
 [work]
-0=set +nostats
-1=call plantvine
-2=call harvestvine
+call=plantvine
+call=harvestvine
+return=skipped
 
 [plantvine]
-0=set +catch
-1=sleep 20000
-2=worker plantvine
+sleep=20000
+worker=plantvine
 
 [harvestvine]
-0=set +catch
-1=sleep 5000
-2=worker harvestvine
+sleep=5000
+worker=harvestvine
 
 [buildcost]
 wood=2

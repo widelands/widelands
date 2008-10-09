@@ -207,7 +207,7 @@ void Edit_Variable_Window::clicked_ok() {
 		char * endp;
 		int32_t const ivar = strtol(m_value.text().c_str(), &endp, 0);
 
-		if (endp and *endp) {
+		if (*endp) {
 			char buffer[1024];
 			snprintf
 				(buffer, sizeof(buffer),

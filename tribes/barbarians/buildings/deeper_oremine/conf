@@ -14,19 +14,17 @@ stopable=yes
 meal=6
 
 [work]
-0=sleep 40000
-1=consume meal
-2=animation working 16000
-3=mine iron 2 100 10
-4=produce ironore
-5=animation working 16000
-6=mine iron 2 100 10
-7=produce ironore
-8=produce ironore
-9=animation working 16000
-10=mine iron 2 100 10
-11=produce ironore
-12=produce ironore
+consume=meal
+sleep=40000
+animate=working 16000
+mine=iron 2 100 10
+produce=ironore
+animate=working 16000
+mine=iron 2 100 10
+produce=ironore:2
+animate=working 16000
+mine=iron 2 100 10
+produce=ironore:2
 
 [buildcost]
 trunk=4

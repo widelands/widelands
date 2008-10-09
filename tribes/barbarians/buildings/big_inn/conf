@@ -17,15 +17,11 @@ strongbeer=4
 
 
 [work]
-0=sleep 16000
-1=check pittabread
-2=check fish,meat
-3=check strongbeer
-4=consume pittabread
-5=consume fish,meat
-6=consume strongbeer
-7=animation working 21000
-8=produce meal
+return=skipped unless economy needs meal
+consume=pittabread fish,meat strongbeer
+sleep=16000
+animate=working 21000
+produce=meal
 
 [buildcost]
 trunk=1

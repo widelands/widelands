@@ -433,7 +433,7 @@ struct Supply : public Trackable {
 	 * \return the number of items or workers that can be launched right
 	 * now for the thing requested by the given request
 	 */
-	virtual uint32_t nr_supplies(Game*, const Request*) = 0;
+	virtual uint32_t nr_supplies(Game *, Request const *) const = 0;
 
 	/**
 	 * Prepare an item to satisfy the given request. Note that the caller
@@ -466,6 +466,7 @@ struct SupplyList {
 	void remove_supply(Supply* supp);
 
 	size_t get_nrsupplies() const {return m_supplies.size();}
+	Supply const & operator[](size_t const idx) const {return *m_supplies[idx];}
 	Supply & operator[](size_t const idx) {return *m_supplies[idx];}
 
 private:
@@ -491,7 +492,7 @@ struct WaresQueue {
 	uint32_t get_filled          () const throw () {return m_filled;}
 	uint32_t get_consume_interval() const throw () {return m_consume_interval;}
 
-	void init(Ware_Index ware, uint32_t size);
+	WaresQueue & init(std::pair<Ware_Index, uint8_t>);
 	void cleanup();
 	void update();
 
@@ -575,6 +576,12 @@ struct Economy {
 	WareList::count_type stock_worker(Ware_Index const i) {
 		return m_workers.stock(i);
 	}
+
+	/// Whether the economy needs more of this ware type.
+	/// Productionsites may ask this before they produce, to avoid depleting a
+	/// ware type by overproducing another from it.
+	bool needs_ware(Ware_Index) const;
+
 	WareList const & get_wares  () {return m_wares;}
 	WareList const & get_workers() {return m_workers;}
 

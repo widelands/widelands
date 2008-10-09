@@ -83,8 +83,6 @@ Cleanup
 Building_Descr::~Building_Descr()
 {
 	free(m_buildicon_fname);
-	for (uint32_t i=0; i<m_enhances_to.size(); ++i)
-		free(m_enhances_to[i]);
 }
 
 /*
@@ -121,9 +119,10 @@ Parse the basic building settings from the given profile and directory
 ===============
 */
 void Building_Descr::parse
-	(char       const * const directory,
-	 Profile          * const prof,
-	 EncodeData const * const encdata)
+	(char         const * const directory,
+	 Profile            * const prof,
+	 enhancements_map_t &        enhancements_map,
+	 EncodeData   const * const encdata)
 {
 	char fname[256];
 
@@ -149,12 +148,21 @@ void Building_Descr::parse
 
 	// Parse build options
 	m_buildable = global_s.get_bool("buildable", true);
-	{
-		char const * string;
-		while (global_s.get_next_string("enhances_to", &string))
-			if (string)
-				m_enhances_to.push_back(strdup(string));
-	}
+	std::set<std::string> enhancement_names;
+	while
+		(Section::Value const * const v = global_s.get_next_val("enhancement"))
+		try {
+			std::string const target_name = v->get_string();
+			if (enhancement_names.count(target_name))
+				throw wexception("this has already been declared");
+			enhancement_names.insert(target_name);
+		} catch (_wexception const & e) {
+			throw wexception
+				("\"enhancements=%s\": %s", v->get_string(), e.what());
+		}
+	enhancements_map.insert
+		(std::pair<Building_Descr *, std::set<std::string> >
+		 	(this, enhancement_names));
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
@@ -181,7 +189,24 @@ void Building_Descr::parse
 		// Get costs
 		Section & buildcost_s = prof->get_safe_section("buildcost");
 		while (Section::Value const * const val = buildcost_s.get_next_val(0))
-			m_buildcost.push_back(CostItem(val->get_name(), val->get_int()));
+			try {
+				if (Ware_Index const idx = m_tribe.ware_index(val->get_name())) {
+					if (m_buildcost.count(idx))
+						throw wexception
+							("a buildcost item of this ware type has already been "
+							 "defined");
+					int32_t const value = val->get_int();
+					if (value < 1 or 255 < value)
+						throw wexception("count is out of range 1 .. 255");
+					m_buildcost.insert(std::pair<Ware_Index, uint8_t>(idx, value));
+				} else
+					throw wexception
+						("tribe does not define a ware type with this name");
+			} catch (_wexception const & e) {
+				throw wexception
+					("buildcost \"%s=%s\": %s",
+					 val->get_name(), val->get_string(), e.what());
+			}
 	}
 
 	if ((m_stopable = global_s.get_bool("stopable", m_stopable))) {
@@ -207,12 +232,8 @@ void Building_Descr::parse
 			add_animation("idle", g_anim.get(directory, idle_s, 0, encdata));
 	}
 
-	{
-		char const * string;
-		while (global_s.get_next_string("soundfx", &string))
-			if (string)
-				g_sound_handler.load_fx(directory, string);
-	}
+	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
+		g_sound_handler.load_fx(directory, v->get_string());
 
 	m_hints.parse (prof);
 
@@ -298,8 +319,9 @@ May return 0.
 ===============
 */
 Building_Descr* Building_Descr::create_from_dir
-	(Tribe_Descr const &       tribe,
-	 char        const * const directory,
+	(Tribe_Descr  const &       tribe,
+	 enhancements_map_t &       enhancements_map,
+	 char         const * const directory,
 	 EncodeData  const * const encdata)
 {
 	const char* name;
@@ -344,7 +366,7 @@ Building_Descr* Building_Descr::create_from_dir
 		else
 			throw wexception("Unknown building type '%s'", type);
 
-		descr->parse(directory, &prof, encdata);
+		descr->parse(directory, &prof, enhancements_map, encdata);
 	}
 	catch (std::exception &e) {
 		delete descr;
@@ -416,7 +438,7 @@ uint32_t Building::get_playercaps() const throw () {
 	if (descr().get_buildable() or descr().get_enhanced_building())
 		caps                                |= 1 << PCap_Bulldoze;
 	if (descr().get_stopable())       caps |= 1 << PCap_Stopable;
-	if (descr().enhances_to().size()) caps |= 1 << PCap_Enhancable;
+	if (descr().enhancements().size()) caps |= 1 << PCap_Enhancable;
 	return caps;
 }
 

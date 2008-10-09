@@ -125,10 +125,6 @@ bool Section::Value::get_bool() const
 	throw wexception("%s: '%s' is not a boolean value", get_name(), m_value);
 }
 
-const char *Section::Value::get_string() const
-{
-	return m_value;
-}
 
 Point Section::Value::get_Point() const
 {
@@ -564,7 +560,7 @@ const char *Section::get_next_bool(const char *name, bool *value)
  *
  * \return the name of the key, or 0 if none has been found
  */
-const char *Section::get_next_string(const char *name, const char **value)
+char const * Section::get_next_string(const char *name, char * * value)
 {
 	Value *v = get_next_val(name);
 	if (!v)

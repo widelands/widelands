@@ -10,11 +10,11 @@ output=armour
 output=chain_armour
 output=plate_armour
 
-program=work
 program=produce_helm
 program=produce_armour
 program=produce_chain_armour
 program=produce_plate_armour
+program=work
 
 [buildcost]
 trunk=2
@@ -29,59 +29,40 @@ coal=8
 cloth=8
 
 [work]
-0=set +nostats
-1=call produce_helm
-2=call produce_armour
-3=call produce_chain_armour
-4=call produce_plate_armour
+call=produce_helm
+call=produce_armour
+call=produce_chain_armour
+call=produce_plate_armour
+sleep=20000
+return=skipped
 
 [produce_helm]
-0=set +catch
-1=sleep 32000
-2=check iron
-3=check coal
-4=consume iron
-5=consume coal
-6=animation working 35000
-7=produce helm
+return=skipped unless economy needs helm
+consume=iron coal
+sleep=32000
+animate=working 35000
+produce=helm
 
 [produce_armour]
-0=set +catch
-1=sleep 32000
-2=check iron
-3=check coal
-4=check cloth
-5=consume iron
-6=consume coal
-7=consume cloth
-8=animation working 45000
-9=produce armour
+return=skipped unless economy needs armour
+consume=iron coal cloth
+sleep=32000
+animate=working 45000
+produce=armour
 
 [produce_chain_armour]
-0=set +catch
-1=sleep 32000
-2=check iron 2
-3=check coal
-4=check cloth
-5=consume iron 2
-6=consume coal
-7=consume cloth
-8=animation working 45000
-9=produce chain_armour
+return=skipped unless economy needs chain_armour
+consume=iron:2 coal cloth
+sleep=32000
+animate=working 45000
+produce=chain_armour
 
 [produce_plate_armour]
-0=set +catch
-1=sleep 32000
-2=check iron 2
-3=check coal 2
-4=check cloth
-5=check gold
-6=consume iron 2
-7=consume coal 2
-8=consume cloth
-9=consume gold
-10=animation working 45000
-11=produce plate_armour
+return=skipped unless economy needs plate_armour
+consume=iron:2 coal:2 cloth gold
+sleep=32000
+animate=working 45000
+produce=plate_armour
 
 [idle]
 pics=i_??.png  # ???

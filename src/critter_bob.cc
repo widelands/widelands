@@ -202,11 +202,12 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 		 prof->get_section("walk"),
 		 encdata);
 
-	char const * string;
-	while (global_s.get_next_string("program", &string)) {
+	while (Section::Value const * const v = global_s.get_next_val("program")) {
+		std::string const program_name = v->get_string();
 		Critter_BobProgram* prog = 0;
-
 		try {
+			if (m_programs.count(program_name))
+				throw wexception("this program has already been declared");
 			Critter_BobProgram::Parser parser;
 
 			parser.descr = this;
@@ -214,15 +215,13 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 			parser.prof = prof;
 			parser.encdata = encdata;
 
-			prog = new Critter_BobProgram(string);
-			prog->parse(&parser, string);
-			m_programs[prog->get_name()] = prog;
-		}
-		catch (std::exception& e)
-		{
+			prog = new Critter_BobProgram(v->get_string());
+			prog->parse(&parser, v->get_string());
+			m_programs[program_name] = prog;
+		} catch (std::exception const & e) {
 			delete prog;
-
-			throw wexception("Parse error in program %s: %s", string, e.what());
+			throw wexception
+				("Parse error in program %s: %s", v->get_string(), e.what());
 		}
 	}
 }

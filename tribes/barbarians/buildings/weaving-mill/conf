@@ -12,9 +12,10 @@ output=cloth
 flax=8
 
 [work]
-0=sleep 45000
-1=consume flax
-2=produce cloth
+# no need to check whether cloth is needed because it is only used here
+sleep=45000
+consume=flax
+produce=cloth
 
 [buildcost]
 trunk=5

@@ -60,13 +60,14 @@ Parse the additional information necessary for miltary buildings
 ===============
 */
 void MilitarySite_Descr::parse
-	(char       const * const directory,
-	 Profile          * const prof,
-	 EncodeData const * const encdata)
+	(char         const * const directory,
+	 Profile            * const prof,
+	 enhancements_map_t &        enhancements_map,
+	 EncodeData  const * const encdata)
 {
 	Section & global_s = prof->get_safe_section("global");
 
-	ProductionSite_Descr::parse(directory, prof, encdata);
+	ProductionSite_Descr::parse(directory, prof, enhancements_map, encdata);
 	m_stopable = false; //  Militarysites are not stopable.
 
 	m_conquer_radius      = global_s.get_safe_int("conquers");

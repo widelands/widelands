@@ -9,7 +9,7 @@ heal_per_second=2
 conquers=7
 max_medics=1
 heal_increase_per_medic=3
-enhances_to=barrier
+enhancement=barrier
 
 [buildcost]
 trunk=1

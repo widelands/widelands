@@ -173,6 +173,7 @@ struct World {
 	Resource_Descr * get_resource(const Resource_Index res) const throw ()
 		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
 	int32_t get_nr_resources() const {return m_resources.get_nitems();}
+	int32_t safe_resource_index(const char * const warename) const;
 
 private:
 	std::string m_basedir; //  base directory, where the main conf file resides

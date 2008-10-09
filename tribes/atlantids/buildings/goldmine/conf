@@ -15,19 +15,17 @@ smoked_fish=6
 smoked_meat=6
 
 [work]
-0=sleep 45000
-1=consume smoked_fish,smoked_meat 2
-2=consume bread 2
-3=animation working 20000
-4=mine gold 4 100 5
-5=produce goldore
-6=animation working 20000
-7=mine gold 4 100 5
-8=produce goldore
-9=animation working 20000
-10=mine gold 4 100 5
-11=produce goldore
-12=produce goldore
+consume=smoked_fish,smoked_meat:2 bread:2
+sleep=45000
+animate=working 20000
+mine=gold 4 100 5
+produce=goldore
+animate=working 20000
+mine=gold 4 100 5
+produce=goldore
+animate=working 20000
+mine=gold 4 100 5
+produce=goldore
 
 
 [buildcost]

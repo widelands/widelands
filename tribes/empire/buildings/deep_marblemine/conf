@@ -16,20 +16,14 @@ meal=6
 wine=6
 
 [work]
-0=sleep 43000
-1=check meal
-2=check wine
-3=consume meal
-4=consume wine
-5=animation working 18000
-6=mine granit 2 100 5
-7=produce marble
-8=produce marble
-9=animation working 18000
-10=mine granit 2 100 5
-11=produce marble
-12=produce stone
-13=produce stone
+sleep=43000
+consume=meal wine
+animate=working 18000
+mine=granit 2 100 5
+produce=marble:2
+animate=working 18000
+mine=granit 2 100 5
+produce=marble stone:2
 
 [buildcost]
 trunk=4

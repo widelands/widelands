@@ -5,54 +5,42 @@ size=mine
 buildable=yes
 buildicon=marblemine_build.png
 worker=miner
-program=work
 program=prog_marble
 program=prog_stone
+program=work
 output=marble
 output=stone
 stopable=yes
-enhances_to=deep_marblemine
+enhancement=deep_marblemine
 
 [inputs]
 ration=6
 wine=6
 
 [work]
-0=set +nostats
-1=call prog_marble
-2=call prog_stone
+call=prog_marble
+call=prog_stone
+return=skipped
 
 [prog_marble]
-0=set +catch
-1=sleep 20000
-2=check ration
-3=check wine
-4=consume ration
-5=consume wine
-6=animation working 20000
-7=mine granit 2 50 5
-8=produce marble
-9=produce marble
-10=animation working 20000
-11=mine granit 2 50 5
-12=produce marble
-13=produce stone
+sleep=20000
+consume=wine ration
+animate=working 20000
+mine=granit 2 50 5
+produce=marble:2
+animate=working 20000
+mine=granit 2 50 5
+produce=marble stone
 
 [prog_stone]
-0=set +catch
-1=sleep 20000
-2=check ration
-3=check wine
-4=consume ration
-5=consume wine
-6=animation working 20000
-7=mine granit 2 50 5
-8=produce stone
-9=produce marble
-10=animation working 20000
-11=mine granit 2 50 5
-12=produce stone
-13=produce stone
+sleep=20000
+consume=ration wine
+animate=working 20000
+mine=granit 2 50 5
+produce=stone marble
+animate=working 20000
+mine=granit 2 50 5
+produce=stone:2
 
 [buildcost]
 trunk=4

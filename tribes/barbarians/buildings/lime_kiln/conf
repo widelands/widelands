@@ -14,16 +14,11 @@ water=6
 coal=3
 
 [work]
-0=sleep 50000
-1=check raw_stone 2
-2=check water 2
-3=check coal
-4=consume raw_stone 2
-5=consume water 2
-6=consume coal
-7=animation working 32000
-8=produce grout
-9=produce grout
+return=skipped unless economy needs grout
+consume=coal raw_stone:2 water:2
+sleep=50000
+animate=working 32000
+produce=grout:2
 
 [buildcost]
 trunk=4

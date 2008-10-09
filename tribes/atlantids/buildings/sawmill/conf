@@ -14,12 +14,12 @@ soundfx=../../../../sound/sawmill/sawmill
 trunk=8
 
 [work]
-0=sleep 16500 # much faster than barbarians hardener
-1=check trunk 2
-2=consume trunk 2
-3=playFX ../../../../sound/sawmill/sawmill 192
-4=animation working 20000 # much more faster than barbarians hardener
-5=produce planks
+return=skipped unless economy needs planks
+consume=trunk:2
+sleep=16500 # much faster than barbarians hardener
+playFX=../../../../sound/sawmill/sawmill 192
+animate=working 20000 # much more faster than barbarians hardener
+produce=planks
 
 [buildcost]
 trunk=2

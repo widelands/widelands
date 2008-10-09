@@ -12,11 +12,11 @@ output=wine
 grape=8
 
 [work]
-0=sleep 30000
-1=check grape 2
-2=consume grape 2
-3=animation working 30000
-4=produce wine
+# grapes are only needed for wine, so no need th check if wine is needed
+sleep=30000
+consume=grape:2
+animate=working 30000
+produce=wine
 
 
 [buildcost]

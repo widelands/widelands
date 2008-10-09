@@ -6,30 +6,28 @@ buildable=yes
 buildicon=quarry_build.png
 output=stone
 output=marble
-program=work
 program=stone
 program=marble
+program=work
 worker=stonemason
 
 [work]
-0=set +nostats
-1=call stone
-2=call stone
-3=call stone
-4=call marble # 2 of 7 times it finds marble
-5=call stone
-6=call stone
-7=call marble # 2 of 7 times it finds marble
+call=stone
+call=stone
+call=stone
+call=marble # 2 of 7 times it finds marble
+call=stone
+call=stone
+call=marble # 2 of 7 times it finds marble
+return=skipped
 
 [stone]
-0=set +catch
-1=sleep 25000
-2=worker cut_stone
+sleep=25000
+worker=cut_stone
 
 [marble]
-0=set +catch
-1=sleep 25000
-2=worker cut_marble
+sleep=25000
+worker=cut_marble
 
 [buildcost]
 trunk=2

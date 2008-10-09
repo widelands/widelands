@@ -13,12 +13,12 @@ output=advanced_lance
 output=heavy_lance
 output=war_lance
 
-program=work
 program=produce_wood_lance
 program=produce_lance
 program=produce_advanced_lance
 program=produce_heavy_lance
 program=produce_war_lance
+program=work
 
 [inputs]
 iron=8
@@ -27,84 +27,57 @@ coal=8
 wood=8
 
 [work]
-0=set +nostats
-1=call produce_wood_lance
-2=call produce_lance
-3=call produce_advanced_lance
-4=call produce_heavy_lance
-5=call produce_war_lance
+call=produce_wood_lance
+call=produce_lance
+call=produce_advanced_lance
+call=produce_heavy_lance
+call=produce_war_lance
+return=skipped
 
 [produce_wood_lance]
-0=set +catch
-1=sleep 20000
-2=check wood
-3=consume wood
-4=playFX ../../../../smiths/smith 192
-5=animation working 30000
-6=playFX ../../../../smiths/sharpening 120
-7=produce wood_lance
-
+return=skipped unless economy needs wood_lance
+consume=wood
+sleep=20000
+playFX=../../../../smiths/smith 192
+animate=working 30000
+playFX=../../../../smiths/sharpening 120
+produce=wood_lance
 
 [produce_lance]
-0=set +catch
-1=sleep 32000
-2=check iron
-3=check coal
-4=check wood
-5=consume iron
-6=consume coal
-7=consume wood
-8=playFX ../../../../smiths/smith 192
-9=animation working 45000
-10=playFX ../../../../smiths/sharpening 120
-11=produce lance
-
+return=skipped unless economy needs lance
+consume=coal iron wood
+sleep=32000
+playFX=../../../../smiths/smith 192
+animate=working 45000
+playFX=../../../../smiths/sharpening 120
+produce=lance
 
 [produce_advanced_lance]
-0=set +catch
-1=sleep 32000
-2=check iron 2
-3=check coal
-4=check wood
-5=consume iron 2
-6=consume coal
-7=consume wood
-8=playFX ../../../../smiths/smith 192
-9=animation working 45000
-10=playFX ../../../../smiths/sharpening 120
-11=produce advanced_lance
+return=skipped unless economy needs advanced_lance
+consume=coal iron:2 wood
+sleep=32000
+playFX=../../../../smiths/smith 192
+animate=working 45000
+playFX=../../../../smiths/sharpening 120
+produce=advanced_lance
 
 [produce_heavy_lance]
-0=set +catch
-1=sleep 32000
-2=check iron
-3=check coal 2
-4=check wood
-5=check gold
-6=consume iron
-7=consume coal 2
-8=consume wood
-9=consume gold
-10=playFX ../../../../smiths/smith 192
-11=animation working 45000
-12=playFX ../../../../smiths/sharpening 120
-13=produce heavy_lance
+return=skipped unless economy needs war_lance
+consume=coal:2 gold iron wood
+sleep=32000
+playFX=../../../../smiths/smith 192
+animate=working 45000
+playFX=../../../../smiths/sharpening 120
+produce=heavy_lance
 
 [produce_war_lance]
-0=set +catch
-1=sleep 32000
-2=check iron 2
-3=check coal 2
-4=check wood
-5=check gold
-6=consume iron 2
-7=consume coal 2
-8=consume wood
-9=consume gold
-10=playFX ../../../../smiths/smith 192
-11=animation working 45000
-12=playFX ../../../../smiths/sharpening 120
-13=produce war_lance
+return=skipped unless economy needs war_lance
+consume=coal:2 gold iron:2 wood
+sleep=32000
+playFX=../../../../smiths/smith 192
+animate=working 45000
+playFX=../../../../smiths/sharpening 120
+produce=war_lance
 
 
 [buildcost]

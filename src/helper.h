@@ -23,10 +23,101 @@
 #include "wexception.h"
 
 #include <SDL_keyboard.h>
+
+#include <cassert>
+#include <cstring>
 #include <sstream>
 #include <string>
-#include <cstring>
 #include <vector>
+
+/// Matches the string that candidate points to against the string that
+/// template points to. Stops at when reaching a null character or the
+/// character terminator. If a match is found, candidate is moved beyond the
+/// matched part.
+///
+/// example:
+///    char const * candidate = "return   75";
+///    bool const result = match(candidate, "return");
+/// now candidate points to "   75" and result is true
+inline bool match(char * & candidate, char const * pattern) {
+	for (char * p = candidate;; ++p, ++pattern)
+		if (not *pattern) {
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			break;
+	return false;
+}
+
+
+/// Returns the word starting at the character that p points to and ending
+/// before the first terminator character. Replaces the terminator with null.
+inline char * match
+	(char * & p, bool & reached_end, char const terminator = ' ')
+{
+	assert(terminator);
+	char * const result = p;
+	for (;*p != terminator; ++p)
+		if (*p == '\0') {
+			reached_end = true;
+			goto end;
+		}
+	*p = '\0'; //  terminate the word
+	++p; //  move past the terminator
+end:
+	if (result < p)
+		return result;
+	throw wexception("expected word");
+}
+
+
+/// Skips a sequence of consecutive characters with the value c, starting at p.
+/// Returns whether any characters were skipped.
+inline bool skip(char * & p, char const c = ' ') {
+	char * t = p;
+	while (*t == c)
+		++t;
+	if (p < t) {
+		p = t;
+		return true;
+	} else
+		return false;
+}
+
+
+/// Skips a sequence of consecutive characters with the value c, starting at p.
+/// Throws _wexception if no characters were skipped.
+inline void force_skip(char * & p, char const c = ' ') {
+	char * t = p;
+	while (*t == c)
+		++t;
+	if (p < t)
+		p = t;
+	else
+		throw wexception("expected '%c' but found \"%s\"", c, p);
+}
+
+/// Combines match and force_skip.
+///
+/// example:
+///    char const * candidate = "return   75";
+///    bool const result = match_force_skip(candidate, "return");
+/// now candidate points to "75" and result is true
+///
+/// example:
+///   char const * candidate = "return75";
+///    bool const result = match_force_skip(candidate, "return");
+/// throws _wexception
+inline bool match_force_skip(char * & candidate, char const * pattern) {
+	for (char * p = candidate;; ++p, ++pattern)
+		if (not *pattern) {
+			force_skip(p);
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			break;
+	return false;
+}
 
 /**
  * Convert std::string to any sstream-compatible type

@@ -15,20 +15,14 @@ meal=6
 beer=6
 
 [work]
-0=sleep 42000
-1=check beer
-2=check meal
-3=consume meal
-4=consume beer
-5=animation working 18000
-6=mine coal 2 100 5
-7=produce coal
-8=produce coal
-9=animation working 18000
-10=mine coal 2 100 5
-11=produce coal
-12=produce coal
-13=produce coal
+sleep=42000
+consume=beer meal
+animate=working 18000
+mine=coal 2 100 5
+produce=coal:2
+animate=working 18000
+mine=coal 2 100 5
+produce=coal:3
 
 [buildcost]
 trunk=4

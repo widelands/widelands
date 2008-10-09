@@ -33,7 +33,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		(const Tribe_Descr &, const std::string & trainingsite_name);
 	virtual ~TrainingSite_Descr();
 
-	virtual void parse(const char *directory, Profile * prof, const EncodeData * encdata);
+	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
 	virtual Building * create_object() const;
 
 	uint32_t get_max_number_of_soldiers() const throw () {
@@ -147,15 +147,15 @@ public:
 
 protected:
 	virtual UI::Window *create_options_window(Interactive_Player * plr, UI::Window ** registry);
-	virtual void program_end(Game* g, bool success);
+	virtual void program_end(Game &, Program_Result);
 
 private:
 	void update_soldier_request();
 	static void request_soldier_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
-	void find_and_start_next_program(Game * g);
-	void start_upgrade(Game* g, Upgrade* upgrade);
+	void find_and_start_next_program(Game &);
+	void start_upgrade(Game &, Upgrade &);
 	void add_upgrade(tAttribute atr, const std::string& prefix);
 	void calc_upgrades();
 
@@ -182,8 +182,7 @@ private:
 	std::vector<Upgrade> m_upgrades;
 	Upgrade* m_current_upgrade;
 
-	/** Whether the last training program was finished successfully*/
-	bool m_success;
+	Program_Result m_result; /// The result of the last training program.
 };
 
 };

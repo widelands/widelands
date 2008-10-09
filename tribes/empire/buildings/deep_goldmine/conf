@@ -15,18 +15,14 @@ meal=6
 wine=6
 
 [work]
-0=sleep 43000
-1=check meal
-2=check wine
-3=consume meal
-4=consume wine
-5=animation working 18000
-6=mine gold 2 100 5
-7=produce goldstone
-8=animation working 18000
-9=mine gold 2 100 5
-10=produce goldstone
-11=produce goldstone
+sleep=43000
+consume=meal wine
+animate=working 18000
+mine=gold 2 100 5
+produce=goldstone
+animate=working 18000
+mine=gold 2 100 5
+produce=goldstone:2
 
 [buildcost]
 trunk=4

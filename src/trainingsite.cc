@@ -67,12 +67,16 @@ TrainingSite_Descr::~TrainingSite_Descr() {}
  *                   keycolor, shadow color). \sa EncodeData::parse()
  * \todo Is the encdata stuff still valid with the new transparent-png support?
  */
-void TrainingSite_Descr::parse(const char *directory, Profile * prof, const EncodeData * encdata)
+void TrainingSite_Descr::parse
+	(char         const * const directory,
+	 Profile            * const prof,
+	 enhancements_map_t &        enhancements_map,
+	 EncodeData   const * const encdata)
 {
 	assert(directory);
 	assert(prof);
 
-	ProductionSite_Descr::parse(directory, prof, encdata);
+	ProductionSite_Descr::parse(directory, prof, enhancements_map, encdata);
 	Section & sglobal = prof->get_safe_section("global");
 	//TODO: what if there is no global section? can this happen?
 
@@ -176,7 +180,7 @@ ProductionSite   (d),
 m_soldier_request(0),
 m_capacity       (descr().get_max_number_of_soldiers()),
 m_build_heros    (false),
-m_success        (false)
+m_result         (Failed)
 {
 	// Initialize this in the constructor so that loading code may
 	// overwrite priorities.
@@ -200,7 +204,7 @@ std::string TrainingSite::get_statistics_string()
 
 	if (state) {
 		return state->program->get_name();
-	} else if (m_success)
+	} else if (m_result == Completed)
 		return _("Resting");
 	else
 		return _("Not Working");
@@ -458,14 +462,14 @@ void TrainingSite::act(Game * g, uint32_t data)
 }
 
 
-void TrainingSite::program_end(Game* g, bool success)
+void TrainingSite::program_end(Game & game, Program_Result const result)
 {
-	m_success = success;
-	ProductionSite::program_end(g, success);
+	m_result = result;
+	ProductionSite::program_end(game, result);
 
 	if (m_current_upgrade) {
-		if (m_success) {
-			drop_unupgradable_soldiers(g);
+		if (m_result == Completed) {
+			drop_unupgradable_soldiers(&game);
 			m_current_upgrade->lastsuccess = true;
 		}
 		m_current_upgrade = 0;
@@ -480,7 +484,7 @@ void TrainingSite::program_end(Game* g, bool success)
  * start_upgrade will be called twice as often for UpgradeA.
  * If all priorities are zero, nothing will happen.
  */
-void TrainingSite::find_and_start_next_program(Game * g)
+void TrainingSite::find_and_start_next_program(Game & game)
 {
 	for (;;) {
 		uint32_t maxprio = 0;
@@ -489,8 +493,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 		for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
 			if (it->credit >= 10) {
 				it->credit -= 10;
-				start_upgrade(g, &*it);
-				return;
+				return start_upgrade(game, *it);
 			}
 
 			if (it->prio > maxprio)
@@ -499,10 +502,8 @@ void TrainingSite::find_and_start_next_program(Game * g)
 				maxcredit = it->credit;
 		}
 
-		if (maxprio == 0) {
-			program_start(g, "Sleep");
-			return;
-		}
+		if (maxprio == 0)
+			return program_start(game, "Sleep");
 
 		uint32_t multiplier = 1 + (10-maxcredit) / maxprio;
 
@@ -516,15 +517,15 @@ void TrainingSite::find_and_start_next_program(Game * g)
  * The prioritizer decided that the given type of upgrade should run.
  * Let's do our worst.
  */
-void TrainingSite::start_upgrade(Game* g, Upgrade* upgrade)
+void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 {
-	int32_t minlevel = upgrade->max;
-	int32_t maxlevel = upgrade->min;
+	int32_t minlevel = upgrade.max;
+	int32_t maxlevel = upgrade.min;
 
 	for (std::vector<Soldier*>::const_iterator it = m_soldiers.begin(); it != m_soldiers.end(); ++it) {
-		int32_t level = (*it)->get_level(upgrade->attribute);
+		int32_t level = (*it)->get_level(upgrade.attribute);
 
-		if (level > upgrade->max || level < upgrade->min)
+		if (level > upgrade.max || level < upgrade.min)
 			continue;
 		if (level < minlevel)
 			minlevel = level;
@@ -532,14 +533,12 @@ void TrainingSite::start_upgrade(Game* g, Upgrade* upgrade)
 			maxlevel = level;
 	}
 
-	if (minlevel > maxlevel) {
-		program_start(g, "Sleep");
-		return;
-	}
+	if (minlevel > maxlevel)
+		return program_start(game, "Sleep");
 
 	int32_t level;
 
-	if (upgrade->lastsuccess || upgrade->lastattempt < 0) {
+	if (upgrade.lastsuccess || upgrade.lastattempt < 0) {
 		// Start greedily on the first ever attempt, and restart greedily
 		// after a sucessful upgrade
 		if (m_build_heros)
@@ -551,23 +550,23 @@ void TrainingSite::start_upgrade(Game* g, Upgrade* upgrade)
 		// This happens e.g. when lots of low-level soldiers are present,
 		// but the prerequisites for improving them aren't.
 		if (m_build_heros) {
-			level = upgrade->lastattempt - 1;
+			level = upgrade.lastattempt - 1;
 			if (level < minlevel)
 				level = maxlevel;
 		} else {
-			level = upgrade->lastattempt + 1;
+			level = upgrade.lastattempt + 1;
 			if (level > maxlevel)
 				level = minlevel;
 		}
 	}
 
-	m_current_upgrade = upgrade;
-	upgrade->lastattempt = level;
-	upgrade->lastsuccess = false;
+	m_current_upgrade = &upgrade;
+	upgrade.lastattempt = level;
+	upgrade.lastsuccess = false;
 
 	char buf[200];
-	sprintf(buf, "%s%d", upgrade->prefix.c_str(), level);
-	program_start(g, buf);
+	sprintf(buf, "%s%d", upgrade.prefix.c_str(), level);
+	return program_start(game, buf);
 }
 
 TrainingSite::Upgrade* TrainingSite::get_upgrade(enum tAttribute atr)

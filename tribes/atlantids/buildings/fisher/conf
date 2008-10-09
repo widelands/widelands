@@ -13,8 +13,8 @@ trunk=1
 planks=2
 
 [work]
-0=sleep 16000
-1=worker fish
+sleep=16000
+worker=fish
 
 [idle]
 pics=fisher_i_??.png  # ???

@@ -133,7 +133,7 @@ public:
 	void start_task_program(Game* g, const std::string & programname);
 
 	void start_task_gowarehouse(Game* g);
-	void start_task_dropoff(Game* g, WareInstance* item);
+	void start_task_dropoff(Game &, WareInstance &);
 	void start_task_fetchfromflag(Game* g);
 
 	bool start_task_waitforcapacity(Game* g, Flag* flag);

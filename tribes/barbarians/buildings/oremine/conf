@@ -8,17 +8,17 @@ worker=miner
 program=work
 output=ironore
 stopable=yes
-enhances_to=deep_oremine
+enhancement=deep_oremine
 
 [inputs]
 ration=6
 
 [work]
-0=sleep 45000
-1=consume ration
-2=animation working 20000
-3=mine iron 2 33 5
-4=produce ironore
+sleep=45000
+consume=ration
+animate=working 20000
+mine=iron 2 33 5
+produce=ironore
 
 [buildcost]
 trunk=4

@@ -9,38 +9,34 @@ stopable=yes
 output=flax
 output=thatchreed
 
-program=work
 program=plantflax
 program=plantreed
 program=harvestflax
 program=harvestreed
+program=work
 
 [work]
-0=set +nostats
-1=call plantflax
-2=call harvestflax
-3=call plantreed
-4=call harvestreed
+call=plantflax
+call=harvestflax
+call=plantreed
+call=harvestreed
+return=skipped
 
 [plantflax]
-0=set +catch
-1=sleep 20000
-2=worker plantflax
+sleep=20000
+worker=plantflax
 
 [plantreed]
-0=set +catch
-1=sleep 20000
-2=worker plantreed
+sleep=20000
+worker=plantreed
 
 [harvestflax]
-0=set +catch
-1=sleep 5000
-2=worker harvestflax
+sleep=5000
+worker=harvestflax
 
 [harvestreed]
-0=set +catch
-1=sleep 5000
-2=worker harvestreed
+sleep=5000
+worker=harvestreed
 
 [buildcost]
 trunk=5

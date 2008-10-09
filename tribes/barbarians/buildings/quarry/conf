@@ -9,8 +9,8 @@ program=work
 output=raw_stone
 
 [work]
-0=sleep 25000
-1=worker cut
+sleep=25000
+worker=cut
 
 [buildcost]
 trunk=4

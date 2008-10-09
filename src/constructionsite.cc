@@ -62,11 +62,15 @@ Parse tribe-specific construction site data, such as graphics, worker type,
 etc...
 ===============
 */
-void ConstructionSite_Descr::parse(const char* directory, Profile* prof, const EncodeData* encdata)
+void ConstructionSite_Descr::parse
+	(char         const * directory,
+	 Profile            * prof,
+	 enhancements_map_t & enhancements_map,
+	 EncodeData const * encdata)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
 
-	Building_Descr::parse(directory, prof, encdata);
+	Building_Descr::parse(directory, prof, enhancements_map, encdata);
 
 	// TODO
 }
@@ -314,28 +318,24 @@ void ConstructionSite::init(Editor_Game_Base* g)
 	Building::init(g);
 
 	if (upcast(Game, game, g)) {
-		const Tribe_Descr & tribe = owner().tribe();
 		// TODO: figure out whether planing is necessary
 
 		// Initialize the wares queues
-		const Building_Descr::BuildCost & buildcost = m_building->get_buildcost();
-		const Building_Descr::BuildCost::size_type buildcost_size =
-			buildcost.size();
+		std::map<Ware_Index, uint8_t> const & buildcost =
+			m_building->buildcost();
+		size_t buildcost_size = buildcost.size();
 		m_wares.resize(buildcost_size);
-
-		for (Building_Descr::BuildCost::size_type i = 0; i < buildcost_size; ++i)
-		{
+		std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+		for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 			WaresQueue* wq = new WaresQueue(this);
 
 			m_wares[i] = wq;
 
 			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-			wq->init
-				(tribe.safe_ware_index(buildcost[i].name.c_str()),
-				 buildcost[i].amount);
+			wq->init(*it);
 
-			m_work_steps += buildcost[i].amount;
+			m_work_steps += it->second;
 		}
 
 		request_builder(game);

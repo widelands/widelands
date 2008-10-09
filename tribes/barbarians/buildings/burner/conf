@@ -12,11 +12,11 @@ program=work
 trunk=8
 
 [work]
-0=sleep 30000
-1=check trunk 6
-2=consume trunk 6
-3=animation working 90000 # charcoal fires are burning some days in real life
-4=produce coal
+return=skipped unless economy needs coal
+consume=trunk:6
+sleep=30000
+animate=working 90000 # charcoal fires are burning some days in real life
+produce=coal
 
 [buildcost]
 trunk=3

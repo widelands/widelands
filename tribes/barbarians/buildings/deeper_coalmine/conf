@@ -14,16 +14,13 @@ stopable=yes
 meal=6
 
 [work]
-0=sleep 40000
-1=consume meal
-2=animation working 16000
-3=mine coal 2 100 10
-4=produce coal
-5=produce coal
-6=mine coal 2 100 10
-7=produce coal
-8=produce coal
-9=produce coal
+sleep=40000
+consume=meal
+animate=working 16000
+mine=coal 2 100 10
+produce=coal:2
+mine=coal 2 100 10
+produce=coal:3
 
 [buildcost]
 trunk=4

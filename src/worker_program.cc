@@ -139,7 +139,7 @@ void WorkerProgram::parse_mine
 	char * endp;
 	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
 
-	if (endp && *endp)
+	if (*endp)
 		throw wexception("Bad area '%s'", cmd[2].c_str());
 }
 
@@ -166,7 +166,7 @@ void WorkerProgram::parse_breed
 	char * endp;
 	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
 
-	if (endp && *endp)
+	if (*endp)
 		throw wexception("Bad area '%s'", cmd[2].c_str());
 }
 
@@ -262,7 +262,7 @@ void WorkerProgram::parse_findobject
 			char* endp;
 
 			act->iparam1 = strtol(value.c_str(), &endp, 0);
-			if (endp && *endp)
+			if (*endp)
 				throw wexception("Bad findobject radius '%s'", value.c_str());
 
 		} else if (key == "attrib") {
@@ -339,7 +339,7 @@ void WorkerProgram::parse_findspace
 			char* endp;
 
 			act->iparam1 = strtol(value.c_str(), &endp, 0);
-			if (endp && *endp)
+			if (*endp)
 				throw wexception("Bad findspace radius '%s'", value.c_str());
 
 		} else if (key == "size") {
@@ -447,7 +447,7 @@ void WorkerProgram::parse_animation
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-	if (endp && *endp)
+	if (*endp)
 		throw wexception("Bad duration '%s'", cmd[2].c_str());
 
 	if (act->iparam2 <= 0)
@@ -557,11 +557,11 @@ void WorkerProgram::parse_geologist
 	act->function = &Worker::run_geologist;
 
 	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
-	if (endp && *endp)
+	if (*endp)
 		throw wexception("Bad repeat count '%s'", cmd[1].c_str());
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-	if (endp && *endp)
+	if (*endp)
 		throw wexception("Bad radius '%s'", cmd[2].c_str());
 
 	act->sparam1 = cmd[3];

@@ -52,7 +52,7 @@ struct Warehouse_Descr : public Building_Descr {
 
 	Warehouse_Descr(const Tribe_Descr & tribe, const std::string & name);
 
-	virtual void parse(char const * directory, Profile *, const EncodeData *);
+	virtual void parse(char const * directory, Profile *, enhancements_map_t &, const EncodeData *);
 	virtual Building * create_object() const;
 
 	int32_t get_subtype() const {return m_subtype;}

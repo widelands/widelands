@@ -62,11 +62,12 @@ struct Map_Object_Descr {
 	bool has_attribute(uint32_t) const throw ();
 	static uint32_t get_attribute_id(std::string const & name);
 
+	bool is_animation_known(const char * name) const;
+	void add_animation(const char * name, uint32_t anim);
+
 	protected:
 		void add_attribute(uint32_t attr);
 
-		void add_animation(const char* name, uint32_t anim);
-		bool is_animation_known(const char* name);
 
 
 	private:

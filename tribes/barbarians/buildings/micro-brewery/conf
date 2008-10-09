@@ -7,20 +7,18 @@ buildicon=micro-brewery_build.png
 worker=brewer
 program=work
 output=beer
-enhances_to=brewery
+enhancement=brewery
 
 [inputs]
 water=8
 wheat=8
 
 [work]
-0=sleep 30000
-1=check water
-2=check wheat
-3=consume water
-4=consume wheat
-5=animation working 30000
-6=produce beer
+return=skipped unless economy needs beer
+consume=water wheat
+sleep=30000
+animate=working 30000
+produce=beer
 
 [buildcost]
 trunk=3

@@ -54,7 +54,7 @@ struct WarehouseSupply : public Supply {
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual bool is_active() const throw ();
 
-	virtual uint32_t nr_supplies(Game*, const Request*);
+	virtual uint32_t nr_supplies(Game *, Request const *) const;
 	virtual WareInstance & launch_item(Game *, const Request*);
 	virtual Worker* launch_worker(Game* g, const Request*);
 

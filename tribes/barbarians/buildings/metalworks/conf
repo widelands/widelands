@@ -15,8 +15,7 @@ output=pick
 output=scythe
 output=shovel
 output=hunting_spear
-enhances_to=axefactory
-program=work
+enhancement=axefactory
 program=produce_bakingtray
 program=produce_fire_tongs
 program=produce_fishing_rod
@@ -26,121 +25,95 @@ program=produce_pick
 program=produce_scythe
 program=produce_shovel
 program=produce_hunting_spear
+program=work
 
 [inputs]
 iron=8
 trunk=8
 
 [work]
-0=set +nostats
-1=call produce_bakingtray
-2=call produce_fire_tongs
-3=call produce_fishing_rod
-4=call produce_hammer
-5=call produce_kitchen_tools
-6=call produce_pick
-7=call produce_scythe
-8=call produce_shovel
-9=call produce_hunting_spear
+call=produce_bakingtray
+call=produce_fire_tongs
+call=produce_fishing_rod
+call=produce_hammer
+call=produce_kitchen_tools
+call=produce_pick
+call=produce_scythe
+call=produce_shovel
+call=produce_hunting_spear
+return=skipped
 
 [produce_bakingtray]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce bakingtray
+return=skipped unless economy needs bakingtray
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=bakingtray
 
 [produce_fire_tongs]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce fire_tongs
+return=skipped unless economy needs fire_tongs
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=fire_tongs
 
 [produce_fishing_rod]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce fishing_rod
+return=skipped unless economy needs fishing_rod
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=fishing_rod
 
 [produce_hammer]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce hammer
+return=skipped unless economy needs hammer
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=hammer
 
 [produce_kitchen_tools]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce kitchen_tools
+return=skipped unless economy needs kitchen_tools
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=kitchen_tools
 
 [produce_pick]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce pick
+return=skipped unless economy needs pick
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=pick
 
 [produce_scythe]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce scythe
+return=skipped unless economy needs scythe
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=scythe
 
 [produce_shovel]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce shovel
+return=skipped unless economy needs shovel
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=shovel
 
 [produce_hunting_spear]
-0=set +catch
-1=sleep 32000
-2=check trunk
-3=check iron
-4=consume iron
-5=consume trunk
-6=playFX ../../../../sound/smiths/toolsmith 192
-7=animation working 35000
-8=produce hunting_spear
+return=skipped unless economy needs hunting_spear
+consume=iron trunk
+sleep=32000
+playFX=../../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=hunting_spear
 
 [buildcost]
 trunk=1

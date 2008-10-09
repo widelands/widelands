@@ -13,8 +13,8 @@ wood=1
 stone=1
 
 [work]
-0=sleep 11000
-1=worker plant
+sleep=11000
+worker=plant
 
 [idle]
 pics=forester_i_??.png  # ???

@@ -1725,13 +1725,10 @@ const Bob::Task Worker::taskDropoff = {
 /**
  * Walk to the building's flag, drop the given item, and walk back inside.
  */
-void Worker::start_task_dropoff(Game* g, WareInstance* item)
+void Worker::start_task_dropoff(Game & game, WareInstance & item)
 {
-	assert(item);
-
-	set_carried_item(g, item);
-
-	push_task(g, taskDropoff);
+	set_carried_item(&game, &item);
+	push_task(&game, taskDropoff);
 }
 
 

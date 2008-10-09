@@ -48,19 +48,19 @@ Parse a resource description section.
 */
 void Resource_Descr::parse(Section *s, std::string basedir)
 {
-	const char * string;
-
 	m_name = s->get_name();
 	m_descrname = s->get_string("name", s->get_name());
 	m_is_detectable = s->get_bool("detectable", true);
 
 	m_max_amount = s->get_safe_int("max_amount");
-	while (s->get_next_string("editor_pic", &string)) {
+	while (Section::Value const * const v = s->get_next_val("editor_pic")) {
 		Editor_Pic i;
 
-		const std::vector<std::string> args(split_string(string, " \t"));
+		std::vector<std::string> const args(split_string(v->get_string(), " \t"));
 		if (args.size() != 1 and args.size() != 2) {
-			log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
+			log
+				("Resource '%s' has bad editor_pic=%s\n",
+				 m_name.c_str(), v->get_string());
 			continue;
 		}
 
@@ -73,10 +73,10 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 
 			i.upperlimit = strtol(args[1].c_str(), &endp, 0);
 
-			if (endp && *endp) {
+			if (*endp) {
 				log
 					("Resource '%s' has bad editor_pic=%s\n",
-					 m_name.c_str(), string);
+					 m_name.c_str(), v->get_string());
 				continue;
 			}
 		}
@@ -361,6 +361,16 @@ void World::get_all_worlds(std::vector<std::string> & result) {
 		if (World::exists_world(world.c_str()))
 			result.push_back(world);
 	}
+}
+
+int32_t World::safe_resource_index(const char * const resourcename) const {
+	int32_t const result = get_resource(resourcename);
+
+	if (result == -1)
+		throw wexception
+			("world %s does not define resource type \"%s\"",
+			 get_name(), resourcename);
+	return result;
 }
 
 

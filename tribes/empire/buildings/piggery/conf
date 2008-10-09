@@ -14,14 +14,12 @@ wheat=7
 water=7
 
 [work]
-0=sleep 25000
-1=check wheat
-2=check water
-3=consume wheat
-4=consume water
-5=playFX soundfx=../../../../sound/farm/farm_animal 180
-6=animation working 30000
-7=produce meat
+sleep=25000
+return=skipped unless economy needs meat
+consume=water wheat
+playFX=soundfx=../../../../sound/farm/farm_animal 180
+animate=working 30000
+produce=meat
 
 [buildcost]
 trunk=2

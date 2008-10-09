@@ -212,7 +212,9 @@ Warehouse supplies are never active.
 bool WarehouseSupply::is_active() const throw () {return false;}
 
 
-uint32_t WarehouseSupply::nr_supplies(Game* game, const Request* req) {
+uint32_t WarehouseSupply::nr_supplies
+	(Game * const game, Request const * req) const
+{
 	if (req->get_type() == Request::WARE) {
 		return m_wares.stock(req->get_index());
 	} else {
@@ -280,11 +282,12 @@ Parse the additional warehouse settings from the given profile and directory
 ===============
 */
 void Warehouse_Descr::parse
-	(char       const * const directory,
-	 Profile          * const prof,
+	(char         const * const directory,
+	 Profile            * const prof,
+	 enhancements_map_t &       enhancements_map,
 	 EncodeData const * const encdata)
 {
-	Building_Descr::parse(directory, prof, encdata);
+	Building_Descr::parse(directory, prof, enhancements_map, encdata);
 
 	Section & global = prof->get_safe_section("global");
 	char const * const string = global.get_safe_string("subtype");
@@ -819,7 +822,7 @@ void Warehouse::do_launch_item(Game * game, WareInstance & item)
 		m_supply->remove_workers(carrierid, 1);
 
 	// Setup the carrier
-	worker.start_task_dropoff(game, &item);
+	worker.start_task_dropoff(*game, item);
 }
 
 

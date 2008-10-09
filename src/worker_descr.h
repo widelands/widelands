@@ -36,8 +36,6 @@ class Worker_Descr : public Bob::Descr
 	friend class Warehouse;
 	friend struct WorkerProgram;
 
-	typedef std::map<std::string, WorkerProgram*> ProgramMap;
-
 	struct CostItem {
 		std::string name;   // name of ware
 		uint32_t    amount;
@@ -92,6 +90,9 @@ public:
 
 	typedef std::map<Worker_Descr *, std::string> becomes_map_t;
 	virtual uint32_t movecaps() const throw ();
+
+	typedef std::map<std::string, WorkerProgram *> ProgramMap;
+	ProgramMap const & get_all_programs() const throw () {return m_programs;}
 
 protected:
 	virtual void parse
