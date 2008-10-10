@@ -53,7 +53,7 @@ throw (_wexception)
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			uint16_t const nr_terrains = fr.Unsigned16();
 
-			typedef std::map<const uint16_t, Terrain_Descr::Index> terrain_id_map;
+			typedef std::map<const uint16_t, Terrain_Index> terrain_id_map;
 			terrain_id_map smap;
 			for (uint16_t i = 0; i < nr_terrains; ++i) {
 				uint16_t                       const id   = fr.Unsigned16();
@@ -98,11 +98,11 @@ throw (_wexception)
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase->map();
 	const World & world = map.world();
-	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();
+	Terrain_Index const nr_terrains = world.get_nr_terrains();
 	fw.Unsigned16(nr_terrains);
 
-	std::map<const char * const, Terrain_Descr::Index> smap;
-	for (Terrain_Descr::Index i = 0; i < nr_terrains; ++i) {
+	std::map<const char * const, Terrain_Index> smap;
+	for (Terrain_Index i = 0; i < nr_terrains; ++i) {
 		const char * const name = world.get_ter(i).name().c_str();
 		smap[name] = i;
 		fw.Unsigned16(i);

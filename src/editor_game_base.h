@@ -28,7 +28,6 @@
 #include "player_area.h"
 
 #include <cassert>
-#include <map>
 #include <string>
 #include <cstring>
 #include <vector>

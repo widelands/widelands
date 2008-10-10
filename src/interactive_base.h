@@ -57,7 +57,6 @@ struct Interactive_Base : public Map_View {
 
 	static int32_t get_xres();
 	static int32_t get_yres();
-	bool m_auto_roadbuild_mode;
 	bool m_show_workarea_preview;
 
 	//  point of view for drawing
@@ -95,9 +94,6 @@ struct Interactive_Base : public Map_View {
 	void set_display_flag(uint32_t flag, bool on);
 
 	//  road building
-	void set_flag_to_connect(Widelands::Coords const location) {
-		m_flag_to_connect = location;
-	}
 	bool is_building_road() const {return m_buildroad;}
 	Widelands::CoordPath * get_build_road() {return m_buildroad;}
 	void start_build_road
@@ -170,7 +166,6 @@ protected:
 			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));
 	}
 	UI::Box           m_toolbar;
-	Widelands::Coords m_flag_to_connect;
 
 private:
 	void update_speedlabel();

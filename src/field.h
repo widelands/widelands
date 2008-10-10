@@ -115,9 +115,9 @@ struct Field {
 	typedef uint8_t Height;
 	typedef uint8_t Resource_Amount;
 
-	struct Terrains         {Terrain_Descr::Index  d : 4, r : 4;};
-	struct Resources        {Resource_Descr::Index d : 4, r : 4;};
-	struct Resource_Amounts {Resource_Amount       d : 4, r : 4;};
+	struct Terrains         {Terrain_Index   d : 4, r : 4;};
+	struct Resources        {Resource_Index  d : 4, r : 4;};
+	struct Resource_Amounts {Resource_Amount d : 4, r : 4;};
 
 private:
 	Height height;
@@ -175,15 +175,15 @@ public:
 	FieldCaps get_caps() const {return caps;}
 
 	Terrains             get_terrains() const throw () {return terrains;}
-	Terrain_Descr::Index terrain_d   () const throw () {return terrains.d;}
-	Terrain_Descr::Index terrain_r   () const throw () {return terrains.r;}
+	Terrain_Index terrain_d   () const throw () {return terrains.d;}
+	Terrain_Index terrain_r   () const throw () {return terrains.r;}
 	void set_terrains (const Terrains             i) throw () {terrains   = i;}
 	void set_terrain
-		(const TCoords<FCoords>::TriangleIndex t, const Terrain_Descr::Index i)
+		(const TCoords<FCoords>::TriangleIndex t, Terrain_Index const i)
 		throw ()
 	{(t == TCoords<FCoords>::D ? terrains.d : terrains.r) = i;}
-	void set_terrain_d(const Terrain_Descr::Index i) throw () {terrains.d = i;}
-	void set_terrain_r(const Terrain_Descr::Index i) throw () {terrains.r = i;}
+	void set_terrain_d(Terrain_Index const i) throw () {terrains.d = i;}
+	void set_terrain_r(Terrain_Index const i) throw () {terrains.r = i;}
 
 	Bob * get_first_bob() const throw () {return bobs;}
 	const BaseImmovable * get_immovable() const throw () {return immovable;}

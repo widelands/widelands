@@ -381,7 +381,7 @@ m_parent(&parent)
 	m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	//  all wares
-	Widelands::Item_Ware_Descr::Index cur_ware = 0;
+	Widelands::Ware_Index::value_t cur_ware = 0;
 	int32_t dposy    = 0;
 	pos.y += PLOT_HEIGHT+ 2 * spacing;
 	Widelands::Tribe_Descr const & tribe = parent.get_player()->tribe();

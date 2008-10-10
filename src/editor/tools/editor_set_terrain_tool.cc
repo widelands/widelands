@@ -45,7 +45,7 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl
 			 	 	 	(center.triangle.t)),
 			 	 radius));
 		do {
-			Widelands::Terrain_Descr::Index const new_terrain_index =
+			Widelands::Terrain_Index const new_terrain_index =
 				get_random_enabled();
 				max = std::max
 					(max, map.change_terrain(mr.location(), new_terrain_index));

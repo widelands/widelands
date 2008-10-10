@@ -54,7 +54,7 @@ private:
 /// Returns from the program.
 ///
 /// Parameter syntax:
-///    parameters         ::= return_value condition_part
+///    parameters         ::= return_value [condition_part]
 ///    return_value       ::= Failed | Completed | Skipped
 ///    Failed             ::= "failed"
 ///    Completed          ::= "completed"
@@ -67,8 +67,8 @@ private:
 ///    economy_needs      ::= "economy needs" ware_type
 /// Parameter semantics:
 ///    return_value:
-///       If return_value is "failed" or "completed", the productionsite's
-///       statistics is updated accordingly. If return_value is "skipped", the
+///       If return_value is Failed or Completed, the productionsite's
+///       statistics is updated accordingly. If return_value is Skipped, the
 ///       statistics are not affected.
 ///    condition:
 ///       A boolean condition that can be evaluated to true or false.
@@ -91,7 +91,7 @@ private:
 /// productionsite's statistics depending on the return value.
 ///
 /// Note: If the execution reaches the end of the program. the return value is
-/// implicitly set to "completed".
+/// implicitly set to Completed.
 struct ActReturn : public ProductionAction {
 	ActReturn(char * parameters, ProductionSite_Descr const &);
 	virtual void execute(Game &, ProductionSite &) const;
@@ -144,21 +144,24 @@ struct ProductionProgram;
 /// Calls a program of the productionsite.
 ///
 /// Parameter syntax:
-///    parameters ::= program [failure_handling_directive]
+///    parameters                 ::= program [failure_handling_directive]
 ///    failure_handling_directive ::= "on failure" failure_handling_method
-///    failure_handling_method ::= "fail" | "repeat" | "ignore"
+///    failure_handling_method    ::= Fail | Repeat | Ignore
+///    Fail                       ::= "fail"
+///    Repeat                     ::= "repeat"
+///    Ignore                     ::= "ignore"
 /// Parameter semantics:
 ///    program:
 ///       The name of a program defined in the productionsite.
 ///    failure_handling_method:
 ///       Specifies how to handle a failure of the called program.
-///       * If failure_handling_method is "fail", the command fails (with the
+///       * If failure_handling_method is Fail, the command fails (with the
 ///         same effect as executing "return=failed").
 ///       * If failure_handling_method is "repeat", the command is repeated.
 ///       * If failure_handling_method is "ignore", the failure is ignored
 ///         (the program is continued).
 ///    failure_handling_directive:
-///       If omitted, the value "ignore" is used for failure_handling_method.
+///       If omitted, the value Ignore is used for failure_handling_method.
 struct ActCall : public ProductionAction {
 	ActCall(char * parameters, ProductionSite_Descr const &);
 	virtual void execute(Game &, ProductionSite &) const;

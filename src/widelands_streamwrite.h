@@ -52,8 +52,8 @@ struct StreamWrite : public ::StreamWrite {
 inline void StreamWrite::Coords32(const Coords c) {
 	assert(static_cast<uint16_t>(c.x) < 0x8000 or c.x == -1);
 	assert(static_cast<uint16_t>(c.y) < 0x8000 or c.y == -1);
-	{const Uint16 x = Little16(c.x); Data(&x, 2);}
-	{const Uint16 y = Little16(c.y); Data(&y, 2);}
+	{uint16_t const x = Little16(c.x); Data(&x, 2);}
+	{uint16_t const y = Little16(c.y); Data(&y, 2);}
 }
 
 inline void StreamWrite::Area48(Area<Coords, uint16_t> const area) {

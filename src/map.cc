@@ -2060,7 +2060,7 @@ returns the radius of changes (which are always 2)
 ===========
 */
 int32_t Map::change_terrain
-	(TCoords<FCoords> const c, Terrain_Descr::Index const terrain)
+	(TCoords<FCoords> const c, Terrain_Index const terrain)
 {
 	c.field->set_terrain(c.t, terrain);
 	recalc_for_field_area(Area<FCoords>(c, 2));

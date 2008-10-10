@@ -36,11 +36,13 @@ struct Editor_Set_Resources_Tool : public Editor_Tool {
 
 	uint8_t get_set_to() const throw () {return m_set_to;}
 	void set_set_to(uint8_t const n) throw () {m_set_to = n;}
-	Widelands::Resource_Descr::Index get_cur_res() const throw () {return m_cur_res;}
-	void set_cur_res(const Widelands::Resource_Descr::Index res) throw () {m_cur_res = res;}
+	Widelands::Resource_Index get_cur_res() const throw () {return m_cur_res;}
+	void set_cur_res(Widelands::Resource_Index const res) throw () {
+		m_cur_res = res;
+	}
 
 private:
-	Widelands::Resource_Descr::Index m_cur_res;
+	Widelands::Resource_Index m_cur_res;
 	uint8_t               m_set_to;
 };
 

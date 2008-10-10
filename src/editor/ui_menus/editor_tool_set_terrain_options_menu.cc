@@ -34,8 +34,6 @@
 #include "ui_panel.h"
 #include "ui_checkbox.h"
 
-using Widelands::Terrain_Descr;
-
 Editor_Tool_Set_Terrain_Tool_Options_Menu::
 Editor_Tool_Set_Terrain_Tool_Options_Menu
 	(Editor_Interactive         & parent,
@@ -48,7 +46,7 @@ m_cur_selection(this, 0, 0, 0, 20, Align_Center),
 m_tool(tool)
 {
 	Widelands::World & world = parent.egbase().map().world();
-	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();
+	Widelands::Terrain_Index const nr_terrains = world.get_nr_terrains();
 	const uint32_t terrains_in_row = static_cast<uint32_t>
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
 
@@ -78,7 +76,7 @@ m_tool(tool)
 	uint32_t cur_x = 0;
 	Point pos(hmargin(), vmargin());
 	for (size_t checkfor = 0; checkfor < 6; ++checkfor)
-		for (Terrain_Descr::Index i  = 0; i < nr_terrains; ++i) {
+		for (Widelands::Terrain_Index i  = 0; i < nr_terrains; ++i) {
 
 			const uint8_t ter_is = world.get_ter(i).get_is();
 			if (ter_is != check[checkfor]) continue;
@@ -157,7 +155,7 @@ m_tool(tool)
 
 	std::string buf = _("Current:");
 	uint32_t j = m_tool.get_nr_enabled();
-	for (Terrain_Descr::Index i = 0; j; ++i)
+	for (Widelands::Terrain_Index i = 0; j; ++i)
 		if (m_tool.is_enabled(i)) {
 			buf += " ";
 			buf += world.get_ter(i).name();
@@ -212,7 +210,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 			dynamic_cast<Editor_Interactive &>(*get_parent())
 			.egbase().map().world();
 		uint32_t j = m_tool.get_nr_enabled();
-		for (Terrain_Descr::Index i = 0; j; ++i)
+		for (Widelands::Terrain_Index i = 0; j; ++i)
 			if (m_tool.is_enabled(i)) {
 				buf += " ";
 				buf += world.get_ter(i).name();

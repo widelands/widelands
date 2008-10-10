@@ -97,7 +97,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 	Map & map = *g->get_map();
 
 	//Make sure that the specified resource is available in this world
-	const Resource_Descr::Index res =
+	Resource_Index const res =
 		map.get_world()->get_resource(action->sparam1.c_str());
 	if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!!
 		throw wexception
@@ -200,7 +200,7 @@ bool Worker::run_breed(Game* g, State* state, const Action* action)
 	Map & map = *g->get_map();
 
 	//Make sure that the specified resource is available in this world
-	const Resource_Descr::Index res =
+	Resource_Index const res =
 		map.get_world()->get_resource(action->sparam1.c_str());
 	if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!!
 		throw wexception

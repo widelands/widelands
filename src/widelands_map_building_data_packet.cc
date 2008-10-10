@@ -60,67 +60,46 @@ throw (_wexception)
 			Map & map = egbase->map();
 			X_Coordinate const width  = map.get_width ();
 			Y_Coordinate const height = map.get_height();
-			Player_Area<Area<FCoords> > a;
-			for (a.y = 0; a.y < height; ++a.y) for (a.x = 0; a.x < width; ++a.x) {
-				if (fr.Unsigned8()) {
-					// Ok, now read all the additional data
-					a.player_number                        = fr.Unsigned8 ();
-					Serial       const serial              = fr.Unsigned32();
-					char const * const name                = fr.CString   ();
-					bool         const is_constructionsite = fr.Unsigned8 ();
+			FCoords c;
+			for (c.y = 0; c.y < height; ++c.y)
+				for (c.x = 0; c.x < width; ++c.x)
+					if (fr.Unsigned8()) {
+						Player_Number const p                   = fr.Unsigned8 ();
+						Serial        const serial              = fr.Unsigned32();
+						char  const * const name                = fr.CString   ();
+						bool          const is_constructionsite = fr.Unsigned8 ();
 
-					//  No building lives on more than one main place.
+						//  No building lives on more than one main place.
 
-					//  Get the tribe and the building index.
-					if
-						(Player * const player =
-						 egbase->get_safe_player(a.player_number))
-					{
-						Tribe_Descr const & tribe = player->tribe();
-						Building_Index const index = tribe.building_index(name);
-						if (not index)
-							throw wexception
-								("tribe %s does not define building type \"%s\"",
-								 tribe.name().c_str(), name);
+						//  Get the tribe and the building index.
+						if (Player * const player = egbase->get_safe_player(p)) {
+							Tribe_Descr const & tribe = player->tribe();
+							Building_Index const index = tribe.building_index(name);
+							if (not index)
+								throw wexception
+									("tribe %s does not define building type \"%s\"",
+									 tribe.name().c_str(), name);
 
-						//  Now, create this Building, take extra special care for
-						//  constructionsites. All data is read later.
-						Building & building =
-							ol->register_object<Building>
-								(serial,
-								 *
-								 (is_constructionsite ?
-								  egbase->warp_constructionsite
-								  	(a, a.player_number, index,
-								  	 Building_Index::Null())
-								  :
-								  egbase->warp_building(a, a.player_number, index)));
+							//  Now, create this Building, take extra special care for
+							//  constructionsites. All data is read later.
+							Building & building =
+								ol->register_object<Building>
+									(serial,
+									 *
+									 (is_constructionsite ?
+									  egbase->warp_constructionsite
+									  	(c, p, index, Building_Index::Null())
+									  :
+									  egbase->warp_building(c, p, index)));
 
-						if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
-							read_priorities (building, fr);
+							if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
+								read_priorities (building, fr);
 
-						//  Reference the players tribe if in editor.
-						iabase.reference_player_tribe(a.player_number, &tribe);
-
-						a.radius = building.get_conquers();
-						if (a.radius) { //  Add to map of military influence.
-							Player::Field * const player_fields = player->m_fields;
-							Field const & first_map_field = map[0];
-							a.field = &map[a];
-							MapRegion<Area<FCoords> > mr(map, a);
-							do
-								player_fields[mr.location().field - &first_map_field]
-								.military_influence
-								+=
-								egbase->map().calc_influence
-								(mr.location(), Area<>(a, a.radius));
-							while (mr.advance(map));
-						}
-					} else
-						throw wexception
-							("player %u does not exist", a.player_number);
-				}
-			}
+							//  Reference the players tribe if in editor.
+							iabase.reference_player_tribe(p, &tribe);
+						} else
+							throw wexception("player %u does not exist", p);
+					}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {

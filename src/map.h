@@ -337,7 +337,7 @@ struct Map {
 
 	//  change terrain of a triangle, recalculate buildcaps
 	int32_t change_terrain
-		(const TCoords<FCoords>, const Terrain_Descr::Index terrain);
+		(const TCoords<FCoords>, Terrain_Index const terrain);
 
 	Manager<Variable>   const & mvm() const {return m_mvm;}
 	Manager<Variable>         & mvm()       {return m_mvm;}

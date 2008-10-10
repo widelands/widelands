@@ -151,7 +151,7 @@ struct World {
 	Terrain_Descr & terrain_descr    (const Terrain_Descr  ::Index i) const
 		throw ()
 	{return *ters.get(i);}
-	const Terrain_Descr & get_ter(const Terrain_Descr::Index i) const
+	const Terrain_Descr & get_ter(Terrain_Index const i) const
 	{assert(i < ters.get_nitems()); return *ters.get(i);}
 	const Terrain_Descr * get_ter(const char * const name) const
 	{const int32_t i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}

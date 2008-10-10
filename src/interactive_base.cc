@@ -68,7 +68,6 @@ m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
 m_buildroad                   (false),
 m_road_build_player           (0),
 m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
-m_flag_to_connect             (Coords::Null()),
 m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 {
 	warpview.set(this, &Interactive_Player::mainview_move);
@@ -86,7 +85,6 @@ m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 			(get_xres(), get_yres(),
 			 s.get_int("depth", 16), s.get_bool("fullscreen", false));
 
-		m_auto_roadbuild_mode   = s.get_bool("auto_roadbuild_mode", true);
 		m_show_workarea_preview = s.get_bool("workareapreview", false);
 	}
 
@@ -271,16 +269,6 @@ void Interactive_Base::think()
 	//  The entire screen needs to be redrawn (unit movement, tile animation,
 	//  etc...)
 	g_gr->update_fullscreen();
-
-	if (m_flag_to_connect) {
-		Widelands::Field & field = egbase().map()[m_flag_to_connect];
-		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-			if (not flag->has_road() and not m_buildroad)
-				if (m_auto_roadbuild_mode)
-					start_build_road(m_flag_to_connect, field.get_owned_by());
-			m_flag_to_connect = Coords::Null();
-		}
-	}
 
 	update_speedlabel();
 

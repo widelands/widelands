@@ -25,13 +25,12 @@
 #include "editor_increase_resources_tool.h"
 #include "editor_set_resources_tool.h"
 #include "map.h"
+#include "widelands.h"
 #include "world.h"
 #include "graphic.h"
 #include "overlay_manager.h"
 
 #include <stdio.h>
-
-using Widelands::Resource_Descr;
 
 #define width  20
 #define height 20
@@ -103,11 +102,11 @@ m_cur_selection
 m_increase_tool(increase_tool)
 {
 	Widelands::World const & world = parent.egbase().map().world();
-	const Resource_Descr::Index nr_resources = world.get_nr_resources();
+	Widelands::Resource_Index const nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
 	uint32_t resource_pic_max_width = 0, resource_pic_max_height = 0;
-	for (Resource_Descr::Index i = 0; i < nr_resources; ++i) {
+	for (Widelands::Resource_Index i = 0; i < nr_resources; ++i) {
 		uint32_t w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture
@@ -132,7 +131,7 @@ m_increase_tool(increase_tool)
 	Point pos
 		(hmargin(), m_set_to_value.get_y() + m_set_to_value.get_h() + vspacing());
 	for
-		(Resource_Descr::Index i = 0;
+		(Widelands::Resource_Index i = 0;
 		 i < nr_resources;
 		 pos.x += resource_pic_max_width + hspacing(), ++cur_x, ++i)
 	{

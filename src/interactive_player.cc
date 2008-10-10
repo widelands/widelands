@@ -38,6 +38,7 @@
 #include "immovable.h"
 #include "chat.h"
 #include "player.h"
+#include "profile.h"
 #include "productionsite.h"
 #include "overlay_manager.h"
 #include "soldier.h"
@@ -57,16 +58,6 @@ using Widelands::Map;
 
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
-
-struct ChatDisplay : public UI::Panel {
-	ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
-
-	void setChatProvider(ChatProvider* chat);
-	virtual void draw(RenderTarget* dst);
-
-private:
-	ChatProvider* m_chat;
-};
 
 ChatDisplay::ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h)
 : UI::Panel(parent, x, y, w, h)
@@ -127,17 +118,6 @@ void ChatDisplay::draw(RenderTarget* dst)
 }
 
 
-struct Interactive_PlayerImpl {
-	ChatProvider* chat;
-	ChatDisplay* chatDisplay;
-
-	Interactive_PlayerImpl()
-		: chat(0), chatDisplay(0)
-	{
-	}
-};
-
-
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
 	(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t)
@@ -157,7 +137,12 @@ Initialize
 */
 Interactive_Player::Interactive_Player
 		(Widelands::Game & g, uint8_t const plyn, bool scenario, bool multiplayer)
-		: Interactive_Base(g), m(new Interactive_PlayerImpl), m_game(&g),
+:
+Interactive_Base (g),
+m_chatProvider   (0),
+m_chatDisplay    (0),
+m_game           (&g),
+m_flag_to_connect(Widelands::Coords::Null()),
 
 #define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
@@ -187,6 +172,9 @@ m_toggle_resources
 m_toggle_help
 	(INIT_BTN("menu_help",             toggle_help,         _("Ware help")))
 {
+	m_auto_roadbuild_mode =
+		g_options.pull_section("global")->get_bool("auto_roadbuild_mode", true);
+
 	m_toolbar.add(&m_toggle_chat,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_main_menu,    UI::Box::AlignLeft);
@@ -203,7 +191,8 @@ m_toggle_help
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	if (multiplayer) {
-		m->chatDisplay = new ChatDisplay(this, 10, 25, get_w()-10, get_h()-25);
+		m_chatDisplay =
+			new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
 		m_toggle_chat.set_visible(false);
 		m_toggle_chat.set_enabled(false);
 	} else
@@ -218,12 +207,6 @@ m_toggle_help
 }
 
 
-Interactive_Player::~Interactive_Player()
-{
-	delete m;
-	m = 0;
-}
-
 /*
 ===============
 Interactive_Player::start
@@ -234,6 +217,30 @@ Called just before the game starts, after postload, init and gfxload
 void Interactive_Player::start()
 {
 	postload();
+}
+
+void Interactive_Player::think()
+{
+	Interactive_Base::think();
+
+	if (m_flag_to_connect) {
+		Widelands::Field & field = egbase().map()[m_flag_to_connect];
+		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
+			if (not flag->has_road() and not is_building_road())
+				if (m_auto_roadbuild_mode) {
+					//  There might be a fieldaction window open, showing a button
+					//  for roadbuilding. If that dialog remains open so that the
+					//  button is clicked, we would enter roadbuilding mode while
+					//  we are already in roadbuilding mode from the call below.
+					//  That is not allowed. Therefore we must delete the
+					//  fieldaction window before entering roadbuilding mode here.
+					delete m_fieldaction.window;
+					m_fieldaction.window = 0;
+					start_build_road(m_flag_to_connect, field.get_owned_by());
+				}
+			m_flag_to_connect = Widelands::Coords::Null();
+		}
+	}
 }
 
 
@@ -264,8 +271,8 @@ void Interactive_Player::postload()
 void Interactive_Player::toggle_chat        () {
 	if (m_chat.window)
 		delete m_chat.window;
-	else if (m->chat)
-		new GameChatMenu(this, m_chat, *m->chat);
+	else if (m_chatProvider)
+		new GameChatMenu(this, m_chat, *m_chatProvider);
 }
 void Interactive_Player::toggle_options_menu() {
 	if (m_options.window)
@@ -307,8 +314,10 @@ Player has clicked on the given field; bring up the context menu.
 void Interactive_Player::field_action()
 {
 	Map const & map = egbase().map();
-
-	if (player().vision(Map::get_index(get_sel_pos().node, map.get_width()))) {
+#ifndef DEBUG
+	if (player().vision(Map::get_index(get_sel_pos().node, map.get_width())))
+#endif
+	{
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
 			if (building->owner().get_player_number() == get_player_number()) {
@@ -324,8 +333,8 @@ void Interactive_Player::field_action()
 
 void Interactive_Player::set_chat_provider(ChatProvider* chat)
 {
-	m->chat = chat;
-	m->chatDisplay->setChatProvider(chat);
+	m_chatProvider = chat;
+	m_chatDisplay->setChatProvider(chat);
 
 	m_toggle_chat.set_visible(chat);
 	m_toggle_chat.set_enabled(chat);
@@ -333,7 +342,7 @@ void Interactive_Player::set_chat_provider(ChatProvider* chat)
 
 ChatProvider* Interactive_Player::get_chat_provider()
 {
-	return m->chat;
+	return m_chatProvider;
 }
 
 
@@ -388,12 +397,12 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 		return true;
 
 	case SDLK_RETURN:
-		if (!m->chat)
+		if (!m_chatProvider)
 			break;
 
 		if (down) {
 			if (!m_chat.window)
-				new GameChatMenu(this, m_chat, *m->chat);
+				new GameChatMenu(this, m_chat, *m_chatProvider);
 
 			upcast(GameChatMenu, chatmenu, m_chat.window);
 			chatmenu->enter_chat_message();

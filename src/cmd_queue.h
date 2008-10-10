@@ -136,7 +136,14 @@ public:
 	Cmd_Queue(Game *g);
 	~Cmd_Queue();
 
+	/// Add a command to the queue.
+	///
+	/// The pointer passed to this object must point to a memory block allocated
+	/// with operator <b>new</b>, containing only the command. The command queue
+	/// will take ownership of the memory block and deallocate it with operator
+	/// <b>delete</b> when the command has been executed.
 	void enqueue (Command*);
+
 	int32_t run_queue (int32_t interval, int32_t* game_time_var);
 
 	void flush(); // delete all commands in the queue now

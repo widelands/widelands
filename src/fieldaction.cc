@@ -712,7 +712,8 @@ void FieldActionWindow::act_buildflag()
 	if (m_iabase->is_building_road())
 		m_iabase->finish_build_road();
 	else
-		m_iabase->set_flag_to_connect(m_field);
+		dynamic_cast<Interactive_Player &>(*m_iabase).set_flag_to_connect
+			(m_field);
 	okdialog();
 }
 
@@ -802,7 +803,8 @@ void FieldActionWindow::act_build(Widelands::Building_Index::value_t const idx)
 		 Widelands::Building_Index(idx));
 	m_iabase->reference_player_tribe
 		(m_plr->get_player_number(), &m_plr->tribe());
-	m_iabase->set_flag_to_connect(game.map().br_n(m_field));
+	dynamic_cast<Interactive_Player &>(*m_iabase).set_flag_to_connect
+		(game.map().br_n(m_field));
 	okdialog();
 }
 
