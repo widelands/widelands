@@ -368,6 +368,11 @@ ActConsume::ActConsume
 				char const terminator = *parameters;
 				*parameters = '\0';
 				Ware_Index const ware_index = tribe.safe_ware_index(ware);
+				if (not descr.is_input(ware_index))
+					throw wexception
+						("%s is not declared as an input (\"%s=<count>\" was not "
+						 "found in the [inputs] section)",
+						 ware, ware);
 				if
 					(group.first.size()
 					 and
@@ -522,7 +527,11 @@ ActProduce::ActProduce
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';
-			item.first = tribe.safe_ware_index(ware);
+			if (not descr.is_output(item.first = tribe.safe_ware_index(ware)))
+				throw wexception
+					("%s is not declared as an output (\"output=%s\" was not found "
+					 "in the [global] section)",
+					 ware, ware);
 		}
 	} catch (_wexception const & e) {
 		throw wexception("produce: %s", e.what());

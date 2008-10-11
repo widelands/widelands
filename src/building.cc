@@ -369,6 +369,7 @@ Building_Descr* Building_Descr::create_from_dir
 		descr->parse(directory, &prof, enhancements_map, encdata);
 	}
 	catch (std::exception &e) {
+		enhancements_map.erase(descr); //  Must remove the pointer from the map.
 		delete descr;
 		throw wexception("Error reading building %s: %s", name, e.what());
 	}

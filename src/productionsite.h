@@ -64,6 +64,9 @@ struct ProductionSite_Descr : public Building_Descr {
 	std::vector<std::string> const & workers() const throw () {
 		return m_workers;
 	}
+	bool is_input (Ware_Index const i) const throw () {
+		return m_inputs.count(i);
+	}
 	bool is_output(Ware_Index const i) const throw () {
 		return m_output.count(i);
 	}
