@@ -562,11 +562,15 @@ void Soldier::attack_update(Game* g, State* state)
 					 &descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 
-		molog("[attack] return home\n");
-		start_task_movepath
-			(g, baseflag->get_position(), 0,
-			 descr().get_right_walk_anims(does_carry_ware()));
-		return;
+		if
+			(start_task_movepath
+				(g, baseflag->get_position(), 0,
+				 descr().get_right_walk_anims(does_carry_ware())))
+			return;
+		else {
+			molog("[attack] failed to return home\n");
+			return pop_task(g);
+		}
 	}
 
 	if (enemy->get_owner() == get_owner()) {
@@ -584,11 +588,15 @@ void Soldier::attack_update(Game* g, State* state)
 	// At this point, we know that the enemy building still stands,
 	// and that we're outside in the plains.
 	if (imm != enemy->get_base_flag()) {
-		molog("[attack] move towards building flag\n");
-		start_task_movepath
-			(g, enemy->get_base_flag()->get_position(), 2,
-			 descr().get_right_walk_anims(does_carry_ware()));
-		return;
+		if
+			(start_task_movepath
+			 	(g, enemy->get_base_flag()->get_position(), 2,
+			 	 descr().get_right_walk_anims(does_carry_ware())))
+			return;
+		else {
+			molog("[attack] failed to move towards building flag\n");
+			return pop_task(g);
+		}
 	}
 
 	upcast(Attackable, attackable, enemy);
