@@ -49,10 +49,11 @@ bool ActReturn::Negation::evaluate(ProductionSite const & ps) const {
 
 
 ActReturn::Economy_Needs::Economy_Needs
-	(char const * parameters, Tribe_Descr const & tribe)
+	(char * & parameters, Tribe_Descr const & tribe)
 {
 	try {
-		ware_type = tribe.safe_ware_index(parameters);
+		bool reached_end;
+		ware_type = tribe.safe_ware_index(match(parameters, reached_end));
 	} catch (_wexception const & e) {
 		throw wexception("needs: %s", e.what());
 	}
@@ -73,8 +74,23 @@ bool ActReturn::Economy_Needs::evaluate(ProductionSite const & ps) const
 }
 
 
+bool ActReturn::Workers_Need_Experience::evaluate
+	(ProductionSite const & ps) const
+{
+	std::vector<Worker *> const & workers = ps.workers();
+	std::vector<Worker *>::const_iterator const workers_end = workers.end();
+	for
+		(std::vector<Worker *>::const_iterator it = workers.begin();
+		 it != workers_end;
+		 ++it)
+		if ((*it)->needs_experience())
+			return true;
+	return false;
+}
+
+
 ActReturn::Condition * create_economy_condition
-	(char * parameters, Tribe_Descr const & tribe)
+	(char * & parameters, Tribe_Descr const & tribe)
 {
 	try {
 		if (match_force_skip(parameters, "needs"))
@@ -88,17 +104,33 @@ ActReturn::Condition * create_economy_condition
 }
 
 
+ActReturn::Condition * create_workers_condition(char * & parameters) {
+	try {
+		if (match(parameters, "need experience"))
+			return new ActReturn::Workers_Need_Experience;
+		else
+			throw wexception
+				("expeted \"need experience\" but found \"%s\"", parameters);
+	} catch (_wexception const & e) {
+		throw wexception("workers: %s", e.what());
+	}
+}
+
+
 ActReturn::Condition * ActReturn::create_condition
-	(char * parameters, Tribe_Descr const & tribe)
+	(char * & parameters, Tribe_Descr const & tribe)
 {
 	try {
 		if      (match_force_skip(parameters, "not"))
 			return new ActReturn::Negation (parameters, tribe);
 		else if (match_force_skip(parameters, "economy"))
 			return create_economy_condition(parameters, tribe);
+		else if (match_force_skip(parameters, "workers"))
+			return create_workers_condition(parameters);
 		else
 			throw wexception
-				("expected {not|site|economy} but found \"%s\"", parameters);
+				("expected {\"not\"|\"economy\"|\"workers\"} but found \"%s\"",
+				 parameters);
 	} catch (_wexception const & e) {
 		throw wexception("invalid condition: %s", e.what());
 	}
@@ -124,29 +156,75 @@ ActReturn::ActReturn
 			 m_result, parameters);
 #endif
 		if (skip(parameters)) {
-			if      (match_force_skip(parameters, "when"))
-				m_condition = create_condition(parameters, descr.tribe());
-			else if (match_force_skip(parameters, "unless"))
-				m_condition = new Negation    (parameters, descr.tribe());
-			else
+			if      (match_force_skip(parameters, "when")) {
+				m_is_when = true;
+				for (;;) {
+					m_conditions.push_back
+						(create_condition(parameters, descr.tribe()));
+					if (*parameters) {
+						skip(parameters);
+						if (not match_force_skip(parameters, "and"))
+							throw wexception("expected \"or\" or end of input");
+					} else
+						break;
+				}
+			} else if (match_force_skip(parameters, "unless")) {
+				m_is_when = false;
+				for (;;) {
+					if (not *parameters)
+						throw wexception("expected condition at end of input");
+					m_conditions.push_back
+						(create_condition(parameters, descr.tribe()));
+					if (*parameters) {
+						skip(parameters);
+						if (not match_force_skip(parameters, "or"))
+							throw wexception("expected \"or\" or end of input");
+					} else
+						break;
+				}
+			} else
 				throw wexception
 					("expected {when|unless} but found \"%s\"", parameters);
 		} else if (*parameters)
 			throw wexception
 				("expected space or end of input but found \"%s\"", parameters);
 		else
-			m_condition = 0;
+			m_is_when = true;
 
 	} catch (_wexception const & e) {
 		throw wexception("return: %s", e.what());
 	}
 }
 
+ActReturn::~ActReturn() {
+	Conditions::const_iterator const conditions_end = m_conditions.end();
+	for
+		(Conditions::const_iterator it = m_conditions.begin();
+		 it != conditions_end;
+		 ++it)
+		delete *it;
+}
+
 void ActReturn::execute(Game & game, ProductionSite & ps) const {
-	if (not m_condition or m_condition->evaluate(ps))
-		return ps.program_end(game, m_result);
-	else
+	if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
+		Conditions::const_iterator const conditions_end = m_conditions.end();
+		for
+			(Conditions::const_iterator it = m_conditions.begin();
+			 it != conditions_end;
+			 ++it)
+			if (not (*it)->evaluate(ps)) //  A condition is false, return.
+				return ps.program_end(game, m_result);
 		return ps.program_step(game);
+	} else { //  "unless a or b or ..." (all conditions must be false)
+		Conditions::const_iterator const conditions_end = m_conditions.end();
+		for
+			(Conditions::const_iterator it = m_conditions.begin();
+			 it != conditions_end;
+			 ++it)
+			if ((*it)->evaluate(ps)) //  A condition is true, continue program.
+				return ps.program_step(game);
+		return ps.program_end(game, m_result);
+	}
 }
 
 

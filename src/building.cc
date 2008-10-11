@@ -347,8 +347,7 @@ Building_Descr* Building_Descr::create_from_dir
 	if (!g_fs->FileExists(fname))
 		return 0;
 
-	try
-	{
+	try {
 		Profile prof(fname, "global"); // section-less file
 		char const * const type =
 			prof.get_safe_section("global").get_safe_string("type");
@@ -367,13 +366,12 @@ Building_Descr* Building_Descr::create_from_dir
 			throw wexception("Unknown building type '%s'", type);
 
 		descr->parse(directory, &prof, enhancements_map, encdata);
-	}
-	catch (std::exception &e) {
+	} catch (std::exception const & e) {
 		enhancements_map.erase(descr); //  Must remove the pointer from the map.
 		delete descr;
 		throw wexception("Error reading building %s: %s", name, e.what());
-	}
-	catch (...) {
+	} catch (...) {
+		enhancements_map.erase(descr); //  Must remove the pointer from the map.
 		delete descr;
 		throw;
 	}

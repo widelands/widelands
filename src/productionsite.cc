@@ -218,12 +218,12 @@ std::string ProductionSite::get_statistics_string()
 void ProductionSite::fill(Game & game) {
 	Building::fill(game);
 	Tribe_Descr const & tribe = owner().tribe();
-	std::vector<std::string> const & workers = descr().workers();
-	std::vector<std::string>::const_iterator const workers_end =
-		workers.end();
+	std::vector<std::string> const & worker_types = descr().workers();
+	std::vector<std::string>::const_iterator const worker_types_end =
+		worker_types.end();
 	for
-		(std::vector<std::string>::const_iterator it = workers.begin();
-		 it != workers_end;
+		(std::vector<std::string>::const_iterator it = worker_types.begin();
+		 it != worker_types_end;
 		 ++it)
 	{
 		Worker & worker =
@@ -286,12 +286,13 @@ void ProductionSite::init(Editor_Game_Base* g)
 				 ++it)
 				(*it)->set_location(this);
 		} else {//  request workers
-			std::vector<std::string> const & workers = descr().workers();
-			std::vector<std::string>::const_iterator const workers_end =
-				workers.end();
+			std::vector<std::string> const & worker_types = descr().workers();
+			std::vector<std::string>::const_iterator const worker_types_end =
+				worker_types.end();
 			for
-				(std::vector<std::string>::const_iterator it = workers.begin();
-				 it != workers_end;
+				(std::vector<std::string>::const_iterator it =
+				 	worker_types.begin();
+				 it != worker_types_end;
 				 ++it)
 				request_worker(it->c_str());
 		}

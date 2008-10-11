@@ -59,11 +59,13 @@ private:
 ///    Failed             ::= "failed"
 ///    Completed          ::= "completed"
 ///    Skipped            ::= "skipped"
-///    condition_part     ::= conition_modifier condition
-///    condition_modifier ::= "when" | "unless"
-///    condition          ::= negation | economy_condition
+///    condition_part     ::= when_condition | unless_conition
+///    when_condition     ::= "when" condition {["and" condition]}
+///    unless_condition   ::= "unless" condition {["or" condition]}
+///    condition          ::= negation | economy_condition | workers_condition
 ///    negation           ::= "not" condition
 ///    economy_condition  ::= economy_needs
+///    workers_condition  ::= "need experience"
 ///    economy_needs      ::= "economy needs" ware_type
 /// Parameter semantics:
 ///    return_value:
@@ -94,6 +96,7 @@ private:
 /// implicitly set to Completed.
 struct ActReturn : public ProductionAction {
 	ActReturn(char * parameters, ProductionSite_Descr const &);
+	virtual ~ActReturn();
 	virtual void execute(Game &, ProductionSite &) const;
 
 	struct Condition {
@@ -101,7 +104,7 @@ struct ActReturn : public ProductionAction {
 		virtual bool evaluate(ProductionSite const &) const = 0;
 	};
 	static Condition * create_condition
-		(char * parameters, Tribe_Descr const &);
+		(char * & parameters, Tribe_Descr const &);
 	struct Negation : public Condition {
 		Negation
 			(char * parameters, Tribe_Descr const & tribe)
@@ -129,14 +132,22 @@ struct ActReturn : public ProductionAction {
 
 	/// Tests whether the economy needs a ware of type ware_type.
 	struct Economy_Needs : public Condition {
-		Economy_Needs(char const * parameters, Tribe_Descr const &);
+		Economy_Needs(char * & parameters, Tribe_Descr const &);
 		virtual bool evaluate(ProductionSite const &) const;
 	private:
 		Ware_Index ware_type;
 	};
 
+	/// Tests whether any of the workers at the site needs experience to become
+	/// upgraded.
+	struct Workers_Need_Experience : public Condition {
+		virtual bool evaluate(ProductionSite const &) const;
+	};
+
+	typedef std::vector<Condition *> Conditions;
 	Program_Result m_result;
-	Condition *    m_condition;
+	bool       m_is_when; //  otherwise it is "unless"
+	Conditions m_conditions;
 };
 
 struct ProductionProgram;

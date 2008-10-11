@@ -1163,7 +1163,7 @@ void ProductionSite_Window_ListWorkerWindow::think() {
 void ProductionSite_Window_ListWorkerWindow::fill_list() {
 	const uint32_t m_last_select = m_ls->selection_index();
 	m_ls->clear();
-	const std::vector<Widelands::Worker *> & workers = *m_ps->get_production_workers();
+	std::vector<Widelands::Worker *> const & workers = m_ps->workers();
 
 	for (uint32_t i = 0; i < workers.size(); ++i) {
 		Widelands::Worker & worker = *workers[i];

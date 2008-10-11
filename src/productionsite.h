@@ -125,9 +125,7 @@ public:
 	std::vector<WaresQueue *> const & warequeues() const {
 		return m_input_queues;
 	}
-	std::vector<Worker*>* get_production_workers() {
-		return &m_workers;
-	}
+	std::vector<Worker *> const & workers() const {return m_workers;}
 
 protected:
 	virtual UI::Window * create_options_window

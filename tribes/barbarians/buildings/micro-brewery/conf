@@ -14,7 +14,7 @@ water=8
 wheat=8
 
 [work]
-return=skipped unless economy needs beer
+return=skipped unless economy needs beer or workers need experience
 consume=water wheat
 sleep=30000
 animate=working 30000

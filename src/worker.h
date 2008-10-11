@@ -118,6 +118,7 @@ public:
 
 	int32_t get_needed_experience() const {return m_needed_exp;}
 	int32_t get_current_experience() const {return m_current_exp;}
+	bool needs_experience() const {return m_needed_exp != -1;}
 
 	// debug
 	void log_general_info(Editor_Game_Base*);
