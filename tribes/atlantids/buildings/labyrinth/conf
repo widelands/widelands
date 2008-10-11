@@ -85,11 +85,15 @@ mountain_crystal=2
 [idle]
 pics=labyrinth_i_??.png  # ???
 hotspot=82 88
+playercolor=true
 
 [working]
 pics=labyrinth_i_??.png  # ???
 hotspot=82 88
+playercolor=true
 
 [build]
 pics=labyrinth_i_??.png  # ???
 hotspot=82 88
+playercolor=true
+
