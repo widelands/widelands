@@ -408,6 +408,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 		*before_first_digit = '0';
 		--before_first_digit;
 	}
+	int width = 0, height;
 
 	for (;;) {
 		// Load the base image
@@ -416,6 +417,14 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
 					SDL_Surface & surface = *LoadImage(filename);
+					if (width == 0) { //  This is the first frame.
+						width  = surface.w;
+						height = surface.h;
+					} else if (width != surface.w or height != surface.h)
+						throw wexception
+							("wrong size: (%u, %u), should be (%u, %u) like the "
+							 "first frame",
+							 surface.w, surface.h, width, height);
 					//  Get a new AnimFrame.
 					Surface & frame = *new Surface();
 					m_plrframes[0].push_back(&frame);
@@ -439,6 +448,11 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 				if (g_fs->FileExists(filename)) {
 					try {
 						SDL_Surface & surface = *LoadImage(filename);
+						if (width != surface.w or height != surface.h)
+							throw wexception
+								("playercolor mask has wrong size: (%u, %u), should "
+								 "be (%u, %u) like the animation frame",
+								 surface.w, surface.h, width, height);
 						Surface & frame = *new Surface();
 						frame.set_sdl_surface(surface);
 						m_pcmasks.push_back(&frame);
