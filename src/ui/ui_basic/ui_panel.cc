@@ -206,7 +206,7 @@ int32_t Panel::run()
 /**
  * Cause run() to return as soon as possible, with the given return code
  */
-void Panel::end_modal(int32_t code)
+void Panel::end_modal(int32_t const code)
 {
 	_running = false;
 	_retcode = code;
@@ -273,7 +273,7 @@ void Panel::move_inside_parent() {}
 /**
  * Set the size of the inner area (total area minus border)
  */
-void Panel::set_inner_size(uint32_t nw, uint32_t nh)
+void Panel::set_inner_size(uint32_t const nw, uint32_t const nh)
 {
 	set_size(nw+_lborder+_rborder, nh+_tborder+_bborder);
 }
@@ -334,7 +334,7 @@ void Panel::move_to_top()
 /**
  * Makes the panel visible or invisible
  */
-void Panel::set_visible(bool on)
+void Panel::set_visible(bool const on)
 {
 	_flags &= ~pf_visible;
 	if (on)
@@ -544,7 +544,7 @@ bool Panel::handle_key(bool, SDL_keysym)
  *
  * \param yes rue if the panel should receive mouse events
  */
-void Panel::set_handle_mouse(bool yes)
+void Panel::set_handle_mouse(bool const yes)
 {
 	if (yes)
 		_flags |= pf_handle_mouse;
@@ -560,7 +560,7 @@ void Panel::set_handle_mouse(bool yes)
  *
  * \param grab true if the mouse should be grabbed
  */
-void Panel::grab_mouse(bool grab)
+void Panel::grab_mouse(bool const grab)
 {
 	if (grab) {
 		_g_mousegrab = this;
@@ -573,7 +573,7 @@ void Panel::grab_mouse(bool grab)
 /**
  * Set if this panel can receive the keyboard focus
 */
-void Panel::set_can_focus(bool yes)
+void Panel::set_can_focus(bool const yes)
 {
 
 	if (yes) _flags |= pf_can_focus;
@@ -610,7 +610,7 @@ void Panel::focus()
  *
  * \param yes true if the panel's think function should be called
  */
-void Panel::set_think(bool yes)
+void Panel::set_think(bool const yes)
 {
 	if (yes)
 		_flags |= pf_think;
@@ -733,7 +733,9 @@ void Panel::do_draw(RenderTarget* dst)
  * Starts the search with child (which should usually be set to _fchild) and
  * returns the first match.
  */
-inline Panel * Panel::child_at_mouse_cursor(int32_t x, int32_t y, Panel * child) {
+inline Panel * Panel::child_at_mouse_cursor
+	(int32_t const x, int32_t const y, Panel * child)
+{
 
 	for (; child; child = child->_next) {
 		if (!child->get_handle_mouse() || !child->get_visible())
@@ -758,7 +760,7 @@ inline Panel * Panel::child_at_mouse_cursor(int32_t x, int32_t y, Panel * child)
  * Propagate mouseleave events (e.g. for buttons that are inside a different
  * window)
  */
-void Panel::do_mousein(bool inside)
+void Panel::do_mousein(bool const inside)
 {
 	if (!inside && _mousein) {
 		_mousein->do_mousein(false);
@@ -797,7 +799,9 @@ bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 				return true;
 	return handle_mouserelease(btn, x, y);
 }
-bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
+bool Panel::do_mousemove
+	(Uint8 const state,
+	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
 	x -= _lborder;
 	y -= _tborder;
@@ -817,7 +821,7 @@ bool Panel::do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
  * Pass the key event to the focused child.
  * If it doesn't process the key, we'll see if we can use the event.
  */
-bool Panel::do_key(bool down, SDL_keysym code)
+bool Panel::do_key(bool const down, SDL_keysym const code)
 {
 	if (_focus) {
 		if (_focus->do_key(down, code))
@@ -842,7 +846,7 @@ bool Panel::get_key_state(const SDLKey key) const
  *
  * \return The panel which receives the mouse event
  */
-Panel *Panel::ui_trackmouse(int32_t *x, int32_t *y)
+Panel *Panel::ui_trackmouse(int32_t * const x, int32_t * const y)
 {
 	Panel *mousein;
 	Panel *rcv = 0;
@@ -895,7 +899,10 @@ void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
 */
-void Panel::ui_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+void Panel::ui_mousemove
+	(Uint8 const state,
+	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
+{
 	if (!xdiff && !ydiff)
 		return;
 
@@ -916,7 +923,7 @@ void Panel::ui_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff,
 /**
  * Input callback function. Pass the key event to the currently modal panel
  */
-void Panel::ui_key(bool down, SDL_keysym code)
+void Panel::ui_key(bool const down, SDL_keysym const code)
 {
 	_modal->do_key(down, code);
 }

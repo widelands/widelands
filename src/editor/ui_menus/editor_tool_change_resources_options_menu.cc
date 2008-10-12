@@ -101,6 +101,10 @@ m_cur_selection
 	(this, 0, 0, _("Current Selection"), Align_BottomCenter),
 m_increase_tool(increase_tool)
 {
+	m_change_by_increase.set_repeating(true);
+	m_change_by_decrease.set_repeating(true);
+	m_set_to_increase   .set_repeating(true);
+	m_set_to_decrease   .set_repeating(true);
 	Widelands::World const & world = parent.egbase().map().world();
 	Widelands::Resource_Index const nr_resources = world.get_nr_resources();
 
@@ -169,12 +173,10 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
 	int32_t set_to    = m_increase_tool.set_tool().get_set_to();
 
 	switch (n) {
-	case Change_By_Increase:
-		change_by += change_by < std::numeric_limits<int32_t>::max(); break;
-	case Change_By_Decrease: change_by -= 1 < change_by;         break;
-	case    Set_To_Increase:
-		set_to += set_to < std::numeric_limits<int32_t>::max();       break;
-	case    Set_To_Decrease: set_to    -= 0 < set_to;                break;
+	case Change_By_Increase: change_by += change_by < 63; break;
+	case Change_By_Decrease: change_by -= 1 < change_by;  break;
+	case    Set_To_Increase: set_to    += set_to    < 63; break;
+	case    Set_To_Decrease: set_to    -= 0 < set_to;     break;
 	default:
 		assert(false);
 	}

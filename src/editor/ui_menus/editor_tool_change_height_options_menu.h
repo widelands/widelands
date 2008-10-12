@@ -40,10 +40,10 @@ private:
 	UI::Button<Editor_Tool_Change_Height_Options_Menu>
 		m_change_by_increase, m_change_by_decrease;
 	UI::Textarea                  m_change_by_value;
-	UI::Textarea                  m_setto_label;
+	UI::Textarea                  m_set_to_label;
 	UI::Button<Editor_Tool_Change_Height_Options_Menu>
-		m_setto_increase,     m_setto_decrease;
-	UI::Textarea                  m_setto_value;
+		m_set_to_increase,     m_set_to_decrease;
+	UI::Textarea                  m_set_to_value;
 
 	void clicked_change_by_decrement();
 	void clicked_change_by_increment();

@@ -44,11 +44,13 @@ struct Basic_Button : public Panel {
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
 	void set_enabled(bool on);
+	void set_repeating(bool const on) {m_repeating = on;}
 	void set_draw_caret(bool draw_caret) {m_draw_caret = draw_caret;}
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
+	void think();
 
 	void handle_mousein(bool inside);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
@@ -61,7 +63,10 @@ private:
 	bool        m_highlighted;    //  mouse is over the button
 	bool        m_pressed;
 	bool        m_enabled;
+	bool        m_repeating;
 	bool        m_flat;
+
+	int32_t     m_time_nextact;
 
 	std::string m_title;          //  title string used when _mypic == 0
 
@@ -91,13 +96,13 @@ template <typename T> struct Button : public Basic_Button {
 		 const bool flat    = false)
 		:
 		Basic_Button
-		(parent,
-		 x, y, w, h,
-		 enabled, flat,
-		 background_pictute_id,
-		 0,
-		 title_text,
-		 tooltip_text),
+			(parent,
+			 x, y, w, h,
+			 enabled, flat,
+			 background_pictute_id,
+			 0,
+			 title_text,
+			 tooltip_text),
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this)
 	{}
@@ -113,13 +118,13 @@ template <typename T> struct Button : public Basic_Button {
 		 const bool flat    = false)
 		:
 		Basic_Button
-		(parent,
-		 x, y, w, h,
-		 enabled, flat,
-		 background_pictute_id,
-		 foreground_picture_id,
-		 std::string(),
-		 tooltip_text),
+			(parent,
+			 x, y, w, h,
+			 enabled, flat,
+			 background_pictute_id,
+			 foreground_picture_id,
+			 std::string(),
+			 tooltip_text),
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this)
 	{}

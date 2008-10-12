@@ -295,6 +295,27 @@ m_button_cancel
 	 &Trigger_Building_Option_Menu::end_modal, this, 0,
 	 _("Cancel"))
 {
+	m_decrement_player  .set_repeating(true);
+	m_increment_player  .set_repeating(true);
+	m_decrement_building.set_repeating(true);
+	m_increment_building.set_repeating(true);
+	m_decrement_count   .set_repeating(true);
+	m_increment_count   .set_repeating(true);
+	m_decrease_y_100    .set_repeating(true);
+	m_decrease_y_10     .set_repeating(true);
+	m_decrease_y_1      .set_repeating(true);
+	m_decrease_x_100    .set_repeating(true);
+	m_decrease_x_10     .set_repeating(true);
+	m_decrease_x_1      .set_repeating(true);
+	m_increase_x_1      .set_repeating(true);
+	m_increase_x_10     .set_repeating(true);
+	m_increase_x_100    .set_repeating(true);
+	m_increase_y_1      .set_repeating(true);
+	m_increase_y_10     .set_repeating(true);
+	m_increase_y_100    .set_repeating(true);
+	m_decrement_radius  .set_repeating(true);
+	m_increment_radius  .set_repeating(true);
+
 	if (m_player_area.player_number == 0)
 		m_player_area.player_number = 1;
 	assert(m_count);

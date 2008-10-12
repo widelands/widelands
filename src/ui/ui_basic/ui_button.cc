@@ -19,10 +19,13 @@
 
 #include "ui_button.h"
 
+#include "ui_constants.h"
+
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
 #include "constants.h"
+#include "wlapplication.h"
 
 namespace UI {
 
@@ -42,6 +45,7 @@ Basic_Button::Basic_Button
 	m_highlighted   (false),
 	m_pressed       (false),
 	m_enabled       (enabled),
+	m_repeating     (false),
 	m_flat          (flat),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
@@ -209,16 +213,34 @@ void Basic_Button::draw(RenderTarget* dst)
 	}
 }
 
+void Basic_Button::think()
+{
+	assert(m_repeating);
+	assert(m_pressed);
+	Panel::think();
+
+
+	if (m_highlighted) {
+		int32_t const time = WLApplication::get()->get_time();
+		if (m_time_nextact <= time) {
+			m_time_nextact += MOUSE_BUTTON_AUTOREPEAT_TICK; //  schedule next tick
+			if (m_time_nextact < time)
+				m_time_nextact = time;
+			play_click();
+			send_signal_clicked();
+			//  The button may not exist at this point (for example if the button
+			//  closed the dialog that it is part of). So member variables may no
+			//  longer be accessed.
+		}
+	}
+}
 
 /**
  * Update highlighted status
 */
-void Basic_Button::handle_mousein(bool inside)
+void Basic_Button::handle_mousein(bool const inside)
 {
-	if (inside && m_enabled)
-		m_highlighted = true;
-	else
-		m_highlighted = false;
+	m_highlighted = inside && m_enabled;
 	update(0, 0, get_w(), get_h());
 }
 
@@ -227,19 +249,28 @@ void Basic_Button::handle_mousein(bool inside)
  * Update the pressed status of the button
 */
 bool Basic_Button::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 
 	if (m_enabled) {
+		assert(m_highlighted);
 		grab_mouse(true);
 		m_pressed = true;
+		if (m_repeating) {
+			m_time_nextact =
+				WLApplication::get()->get_time() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
+			set_think(true);
+		}
 	}
 	update(0, 0, get_w(), get_h());
 
 	return true;
 }
 bool Basic_Button::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 
+	set_think(false);
 	if (m_pressed) {
 		m_pressed = false;
 		grab_mouse(false);

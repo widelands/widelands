@@ -33,9 +33,6 @@
 
 struct RenderTarget;
 
-#define BUTTON_EDGE_BRIGHT_FACTOR 60
-#define MOUSE_OVER_BRIGHT_FACTOR 15
-
 namespace UI {
 /**
  * Panel is a basic rectangular UI element.

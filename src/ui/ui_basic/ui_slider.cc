@@ -19,6 +19,8 @@
 
 #include "ui_slider.h"
 
+#include "ui_constants.h"
+
 namespace UI {
 
 /**

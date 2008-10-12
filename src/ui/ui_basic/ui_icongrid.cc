@@ -19,6 +19,8 @@
 
 #include "ui_icongrid.h"
 
+#include "ui_constants.h"
+
 #include "graphic.h"
 #include "rendertarget.h"
 #include "font_handler.h"

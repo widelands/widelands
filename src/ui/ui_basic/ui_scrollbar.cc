@@ -19,6 +19,8 @@
 
 #include "ui_scrollbar.h"
 
+#include "ui_constants.h"
+
 #include "graphic.h"
 #include "rendertarget.h"
 #include "wlapplication.h"
@@ -26,8 +28,6 @@
 #include <algorithm>
 
 namespace UI {
-#define SCROLLBAR_AUTOREPEAT_DELAY 200
-#define SCROLLBAR_AUTOREPEAT_TICK   50
 
 /*
 ==============================================================================
@@ -235,7 +235,7 @@ uint32_t Scrollbar::get_knob_size()
 
 
 /// Perform the action for clicking on the given area.
-void Scrollbar::action(Area area)
+void Scrollbar::action(Area const area)
 {
 	int32_t diff;
 	int32_t pos;
@@ -393,15 +393,16 @@ void Scrollbar::think()
 	if (m_pressed == None || m_pressed == Knob)
 		return;
 
-	if (WLApplication::get()->get_time() - m_time_nextact < 0)
+	int32_t const time = WLApplication::get()->get_time();
+	if (time < m_time_nextact)
 		return;
 
 	action(m_pressed);
 
 	// Schedule next tick
-	m_time_nextact += SCROLLBAR_AUTOREPEAT_TICK;
-	if (WLApplication::get()->get_time() - m_time_nextact >= 0)
-		m_time_nextact = WLApplication::get()->get_time();
+	m_time_nextact += MOUSE_BUTTON_AUTOREPEAT_TICK;
+	if (m_time_nextact < time)
+		m_time_nextact = time;
 }
 
 
@@ -416,9 +417,10 @@ bool Scrollbar::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 			if (m_pressed != Knob) {
 				action(m_pressed);
 				m_time_nextact =
-					WLApplication::get()->get_time() + SCROLLBAR_AUTOREPEAT_DELAY;
-			}
-			else m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
+					WLApplication::get()->get_time() +
+					MOUSE_BUTTON_AUTOREPEAT_DELAY;
+			} else
+				m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
 		}
 		result = true;
 		break;

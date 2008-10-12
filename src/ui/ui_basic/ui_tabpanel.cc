@@ -19,6 +19,8 @@
 
 #include "ui_tabpanel.h"
 
+#include "ui_constants.h"
+
 #include "graphic.h"
 #include "rendertarget.h"
 
