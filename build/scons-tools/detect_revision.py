@@ -6,7 +6,8 @@
 # For svk: must be in checkout's root path, will not work otherwise
 #          (but could be made to)
 
-import os
+import os,sys
+
 # Support for bzr local branches
 try:
     from bzrlib.branch import Branch
@@ -17,7 +18,13 @@ except ImportError:
     __has_bzr = False
 
 def detect_revision():
-    revstring='UNKNOWN-VERSION'
+    revstring='UNKNOWN-REVISION'
+
+    # All code below relies on linux-isms, don't even try on other systems for now
+    # TODO: find out how revision detection can be done cross platform instead of returning "UNKNOWN"
+    if not sys.platform in ['linux', 'linux2']:
+	    revstring='REVDETECT-UNIMPLEMENTED'
+	    return revstring
     
     svn_revnum = ""
     if os.path.exists('.svn'):
