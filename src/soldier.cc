@@ -564,8 +564,8 @@ void Soldier::attack_update(Game* g, State* state)
 
 		if
 			(start_task_movepath
-				(g, baseflag->get_position(), 0,
-				 descr().get_right_walk_anims(does_carry_ware())))
+			 	(g, baseflag->get_position(), 0,
+			 	 descr().get_right_walk_anims(does_carry_ware())))
 			return;
 		else {
 			molog("[attack] failed to return home\n");

@@ -208,7 +208,8 @@ private:
 		(UI::Box *,
 		 char const * picname,
 		 void (FieldActionWindow::*fn)(),
-		 std::string const & tooltip_text);
+		 std::string const & tooltip_text,
+		 bool repeating = false);
 	void okdialog();
 
 	Interactive_Base    *m_iabase;
@@ -465,7 +466,8 @@ void FieldActionWindow::add_buttons_attack ()
 					(attackbox,
 					 pic_attack_less,
 					 &FieldActionWindow::act_attack_less,
-					 _("Send less soldiers"));
+					 _("Send less soldiers"),
+					 true);
 
 				m_text_attackers =
 					new UI::Textarea(attackbox, 90, 0, "000/000", Align_Center);
@@ -475,7 +477,8 @@ void FieldActionWindow::add_buttons_attack ()
 					(attackbox,
 					 pic_attack_more,
 					 &FieldActionWindow::act_attack_more,
-					 _("Send more soldiers"));
+					 _("Send more soldiers"),
+					 true);
 
 				add_button
 					(attackbox,
@@ -615,16 +618,23 @@ uint32_t FieldActionWindow::add_tab
 FieldActionWindow::add_button
 ===============
 */
-void FieldActionWindow::add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)(), const std::string & tooltip_text)
+void FieldActionWindow::add_button
+	(UI::Box           * const box,
+	 char        const * const picname,
+	 void (FieldActionWindow::*fn)(),
+	 std::string const & tooltip_text,
+	 bool                const repeating)
 {
+	UI::Button<FieldActionWindow> & button =
+		*new UI::Button<FieldActionWindow>
+			(box,
+			 0, 0, 34, 34,
+			 2,
+			 g_gr->get_picture(PicMod_Game, picname),
+			 fn, this, tooltip_text);
+	button.set_repeating(repeating);
 	box->add
-		(new UI::Button<FieldActionWindow>
-		 	(box,
-		 	 0, 0, 34, 34,
-		 	 2,
-		 	 g_gr->get_picture(PicMod_Game, picname),
-		 	 fn, this, tooltip_text),
-		 UI::Box::AlignTop);
+		(&button, UI::Box::AlignTop);
 }
 
 /*
