@@ -116,8 +116,12 @@ void Basic_Button::set_enabled(bool on)
 	if (on)
 		m_enabled = true;
 	else {
+		if (m_pressed) {
+			m_pressed = false;
+			set_think(false);
+			grab_mouse(false);
+		}
 		m_enabled = false;
-		m_pressed = false;
 		m_highlighted = false;
 	}
 	update(0, 0, get_w(), get_h());

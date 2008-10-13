@@ -1490,11 +1490,17 @@ MilitarySite UI IMPLEMENTATION
 */
 
 struct MilitarySite_Window : public Building_Window {
-	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UI::Window** registry);
-	virtual ~MilitarySite_Window();
+	MilitarySite_Window
+		(Interactive_Player & parent,
+		 MilitarySite       &,
+		 UI::Window *       & registry);
 
 	MilitarySite * get_militarysite() {
 		return dynamic_cast<MilitarySite *>(get_building());
+	}
+
+	Interactive_Player & iaplayer() const {
+		return dynamic_cast<Interactive_Player &>(*get_parent());
 	}
 
 	virtual void think();
@@ -1504,11 +1510,16 @@ private:
 	void soldier_capacity_up () {act_change_soldier_capacity (1);}
 	void soldier_capacity_down() {act_change_soldier_capacity(-1);}
 
-	Widelands::Coords      m_ms_location;
-	Interactive_Player   * m_parent;
-	UI::Window *         * m_reg;
-	UI::Table<Soldier &> * m_table;
-	UI::Textarea         * m_capacity;
+	UI::Window *                  & m_reg;
+	Widelands::Coords               m_ms_location;
+	UI::Box                         m_vbox;
+	UI::Table<Soldier &>            m_table;
+	UI::Button<MilitarySite_Window> m_drop_button;
+	UI::Box                         m_bottom_box;
+	UI::Panel                       m_capsbuttons;
+	UI::Textarea                    m_capacity;
+	UI::Button<MilitarySite_Window> m_capacity_down;
+	UI::Button<MilitarySite_Window> m_capacity_up;
 };
 
 
@@ -1519,75 +1530,81 @@ MilitarySite_Window::MilitarySite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UI::Window** registry)
-	: Building_Window(parent, ps, registry)
+MilitarySite_Window::MilitarySite_Window
+	(Interactive_Player & parent,
+	 MilitarySite       & ms,
+	 UI::Window *       & registry)
+	:
+Building_Window(&parent, &ms, &registry),
+m_reg          (registry),
+m_ms_location  (ms.get_position()),
+m_vbox         (this, 5, 5, UI::Box::Vertical),
+m_table        (&m_vbox, 0, 0, 360, 200),
+m_drop_button
+	(&m_vbox,
+	 0, 0, 360, 32,
+	 4,
+	 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
+	 &MilitarySite_Window::drop_button_clicked, this),
+m_bottom_box   (&m_vbox, 0, 0, UI::Box::Horizontal),
+m_capsbuttons  (&m_bottom_box, 0, 34, 34 * 7, 34),
+m_capacity     (&m_bottom_box, 0, 0, _("Capacity"), Align_Right),
+m_capacity_down
+	(&m_bottom_box,
+	 0, 0, 24, 24,
+	 4,
+	 g_gr->get_picture(PicMod_Game, pic_down_train),
+	 &MilitarySite_Window::soldier_capacity_down, this),
+m_capacity_up
+	(&m_bottom_box,
+	 0, 0, 24, 24,
+	 4,
+	 g_gr->get_picture(PicMod_Game, pic_up_train),
+	 &MilitarySite_Window::soldier_capacity_up, this)
 {
-	m_parent=parent;
-	m_reg=registry;
-	m_ms_location=ps->get_position();
-
-	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
-
 	//  soldiers view
-	m_table=new UI::Table<Soldier &>(box, 0, 0, 360, 200);
-	m_table->add_column(100, _("Name"));
-	m_table->add_column (40, _("HP"));
-	m_table->add_column (40, _("AT"));
-	m_table->add_column (40, _("DE"));
-	m_table->add_column (40, _("EV"));
-	m_table->add_column(100, _("Level")); // enough space for scrollbar
+	m_table.add_column(100, _("Name"));
+	m_table.add_column (40, _("HP"));
+	m_table.add_column (40, _("AT"));
+	m_table.add_column (40, _("DE"));
+	m_table.add_column (40, _("EV"));
+	m_table.add_column(100, _("Level")); // enough space for scrollbar
+	m_vbox.add(&m_table, UI::Box::AlignCenter);
 
-	box->add(m_table, UI::Box::AlignCenter);
+	m_vbox.add_space(8);
 
 	// Add drop soldier button
-	box->add_space(8);
-	box->add
-		(new UI::Button<MilitarySite_Window>
-		 	(box,
-		 	 0, 0, 360, 32,
-		 	 4,
-		 	 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
-		 	 &MilitarySite_Window::drop_button_clicked, this),
-		 UI::Box::AlignLeft);
-	box->add_space(8);
+	m_vbox.add(&m_drop_button, UI::Box::AlignCenter);
 
-	UI::Panel* pan = new UI::Panel(box, 0, 34, Width + 134, 34);
+
+	//  Add the bottom row of buttons.
+
+	m_bottom_box.add_space(5);
 
 	// Add the caps button
-	create_capsbuttons(pan);
+	create_capsbuttons(&m_capsbuttons);
+	m_bottom_box.add(&m_capsbuttons, UI::Box::AlignLeft);
 
-	new UI::Textarea (pan, 104, 11, _("Capacity"), Align_Left);
 	// Capacity buttons
-	new UI::Button<MilitarySite_Window>
-		(pan,
-		 174, 4, 24, 24,
-		 4,
-		 g_gr->get_picture(PicMod_Game, pic_down_train),
-		 &MilitarySite_Window::soldier_capacity_down, this);
-	new UI::Button<MilitarySite_Window>
-		(pan,
-		 222, 4, 24, 24,
-		 4,
-		 g_gr->get_picture(PicMod_Game, pic_up_train),
-		 &MilitarySite_Window::soldier_capacity_up, this);
-	m_capacity =new UI::Textarea (pan, 204, 11, "XX", Align_Center);
+	m_bottom_box.add(&m_capacity,      UI::Box::AlignRight);
+	m_bottom_box.add_space(8);
+	m_bottom_box.add(&m_capacity_down, UI::Box::AlignRight);
+	m_bottom_box.add(&m_capacity_up,   UI::Box::AlignRight);
+	m_capacity_down.set_repeating(true);
+	m_capacity_up  .set_repeating(true);
 
-	box->add(pan, UI::Box::AlignLeft);
+	m_bottom_box.add_space(5);
 
+	fit_inner(&m_bottom_box);
 
-	fit_inner(box);
+	m_vbox.add_space(8);
+
+	m_vbox.add(&m_bottom_box, UI::Box::AlignCenter);
+
+	fit_inner(&m_vbox);
+
 	move_inside_parent();
 }
-
-
-/*
-===============
-MilitarySite_Window::~MilitarySite_Window
-
-Deinitialize, remove from registry
-===============
-*/
-MilitarySite_Window::~MilitarySite_Window() {}
 
 
 /*
@@ -1602,7 +1619,7 @@ void MilitarySite_Window::think()
 	Building_Window::think();
 
 	Widelands::BaseImmovable const * const base_immovable =
-		m_parent->egbase().map()[m_ms_location].get_immovable();
+		iaplayer().egbase().map()[m_ms_location].get_immovable();
 	if
 		(not dynamic_cast<const Building *>(base_immovable)
 		 or
@@ -1626,13 +1643,13 @@ void MilitarySite_Window::update() {
 	std::vector<Soldier *> soldiers = get_militarysite()->presentSoldiers();
 
 	char buf[200];
-	if (soldiers.size() < m_table->size())
-		m_table->clear();
+	if (soldiers.size() < m_table.size())
+		m_table.clear();
 
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		Soldier & s = *soldiers[i];
-		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
-		if (not er)                          er = &m_table->add(s);
+		UI::Table<Soldier &>::Entry_Record * er = m_table.find(s);
+		if (not er)                          er = &m_table.add(s);
 		const uint32_t hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
 		const uint32_t al = s.get_attack_level (), mal = s.get_max_attack_level ();
 		const uint32_t dl = s.get_defense_level(), mdl = s.get_max_defense_level();
@@ -1649,21 +1666,24 @@ void MilitarySite_Window::update() {
 		sprintf(buf, "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
 		er->set_string(5, buf);
 	}
-	m_table->sort();
+	m_table.sort();
 
-	std::string str;
-	sprintf
-		(buf,
-		 "%2d", dynamic_cast<MilitarySite&>(*get_building()).soldierCapacity());
-	str = static_cast<const char *>(buf);
-	m_capacity->set_text (str);
+	MilitarySite const & ms = dynamic_cast<MilitarySite &>(*get_building());
+	uint32_t const capacity     = ms.   soldierCapacity();
+	snprintf(buf, sizeof(buf), _("Capacity: %2d"), capacity);
+	m_capacity.set_text (buf);
+	uint32_t const capacity_min = ms.minSoldierCapacity();
+	m_drop_button.set_enabled
+		(m_table.has_selection() and capacity_min < m_table.size());
+	m_capacity_down.set_enabled(capacity_min < capacity);
+	m_capacity_up  .set_enabled(capacity < ms.maxSoldierCapacity());
 }
 
 void MilitarySite_Window::drop_button_clicked()
 {
-	assert(*m_reg== this);
-	if (m_table->selection_index() != m_table->no_selection_index())
-		act_drop_soldier(m_table->get_selected().get_serial());
+	assert(m_reg == this);
+	assert(m_table.has_selection());
+	act_drop_soldier(m_table.get_selected().get_serial());
 }
 
 /*
@@ -1675,7 +1695,7 @@ Create the production site information window.
 */
 UI::Window* MilitarySite::create_options_window(Interactive_Player* plr, UI::Window** registry)
 {
-	return new MilitarySite_Window(plr, this, registry);
+	return new MilitarySite_Window(*plr, *this, *registry);
 }
 
 /*
