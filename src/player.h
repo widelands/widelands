@@ -406,6 +406,11 @@ struct Player :
 	uint32_t findAttackSoldiers(Flag* flag, std::vector<Soldier*>* soldiers = 0);
 	void enemyflagaction(Flag* flag, int32_t action, int32_t param, int32_t param2, int32_t param3);
 
+	uint32_t casualties() const {return m_casualties;}
+	uint32_t kills     () const {return m_kills;}
+	void count_casualty() {++m_casualties;}
+	void count_kill    () {++m_kills;}
+
 	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {
 		assert(player_area.player_number == get_player_number());
 		see_area
@@ -463,6 +468,7 @@ private:
 	bool                   m_view_changed;
 	const Player_Number    m_plnum;
 	const Tribe_Descr&     m_tribe; // buildings, wares, workers, sciences
+	uint32_t               m_casualties, m_kills;
 	RGBColor               m_playercolor[4];
 
 	Field *               m_fields;

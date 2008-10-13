@@ -780,22 +780,25 @@ void Game::send_player_enemyflagaction
 void Game::sample_statistics()
 {
 	// Update general stats
-	std::vector< uint32_t > land_size; land_size.resize(map().get_nrplayers());
-	std::vector< uint32_t > nr_buildings; nr_buildings.resize(map().get_nrplayers());
-	std::vector< uint32_t > nr_kills; nr_kills.resize(map().get_nrplayers());
-	std::vector< uint32_t > miltary_strength; miltary_strength.resize(map().get_nrplayers());
-	std::vector< uint32_t > nr_workers; nr_workers.resize(map().get_nrplayers());
-	std::vector< uint32_t > nr_wares; nr_wares.resize(map().get_nrplayers());
-	std::vector< uint32_t > productivity; productivity.resize(map().get_nrplayers());
+	Player_Number const nr_plrs = map().get_nrplayers();
+	std::vector< uint32_t > land_size;        land_size       .resize(nr_plrs);
+	std::vector< uint32_t > nr_buildings;     nr_buildings    .resize(nr_plrs);
+	std::vector< uint32_t > nr_casualties;    nr_casualties   .resize(nr_plrs);
+	std::vector< uint32_t > nr_kills;         nr_kills        .resize(nr_plrs);
+	std::vector< uint32_t > miltary_strength; miltary_strength.resize(nr_plrs);
+	std::vector< uint32_t > nr_workers;       nr_workers      .resize(nr_plrs);
+	std::vector< uint32_t > nr_wares;         nr_wares        .resize(nr_plrs);
+	std::vector< uint32_t > productivity;     productivity    .resize(nr_plrs);
 
-	std::vector< uint32_t > nr_production_sites; nr_production_sites.resize(map().get_nrplayers());
+	std::vector< uint32_t > nr_production_sites;
+	nr_production_sites.resize(nr_plrs);
 
 	//  We walk the map, to gain all needed information.
 	Map const &  themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {
-		if (fc.field->get_owned_by())
-			++land_size[fc.field->get_owned_by() - 1];
+		if (Player_Number const owner = fc.field->get_owned_by())
+			++land_size[owner - 1];
 
 			// Get the immovable
 		if (upcast(Building, building, fc.field->get_immovable()))
@@ -819,9 +822,8 @@ void Game::sample_statistics()
 					s->get_level(atrTotal) + 1; //  So that level 0 also counts.
 	}
 
-	// Number of workers / wares
-	const Player_Number nr_players = map().get_nrplayers();
-	iterate_players_existing(p, nr_players, *this, plr) {
+	//  Number of workers / wares / casualties / kills.
+	iterate_players_existing(p, nr_plrs, *this, plr) {
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
@@ -847,6 +849,8 @@ void Game::sample_statistics()
 		}
 		nr_wares  [p - 1] = wastock;
 		nr_workers[p - 1] = wostock;
+		nr_casualties[p - 1] = plr->casualties();
+		nr_kills     [p - 1] = plr->kills     ();
 	}
 
 	// Now, divide the statistics
@@ -858,13 +862,14 @@ void Game::sample_statistics()
 	// Now, push this on the general statistics
 	m_general_stats.resize(map().get_nrplayers());
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
-		m_general_stats[i].land_size.push_back(land_size[i]);
-		m_general_stats[i].nr_buildings.push_back(nr_buildings[i]);
-		m_general_stats[i].nr_kills.push_back(nr_kills[i]);
+		m_general_stats[i].land_size       .push_back(land_size       [i]);
+		m_general_stats[i].nr_buildings    .push_back(nr_buildings    [i]);
+		m_general_stats[i].nr_casualties   .push_back(nr_casualties   [i]);
+		m_general_stats[i].nr_kills        .push_back(nr_kills        [i]);
 		m_general_stats[i].miltary_strength.push_back(miltary_strength[i]);
-		m_general_stats[i].nr_workers.push_back(nr_workers[i]);
-		m_general_stats[i].nr_wares.push_back(nr_wares[i]);
-		m_general_stats[i].productivity.push_back(productivity[i]);
+		m_general_stats[i].nr_workers      .push_back(nr_workers      [i]);
+		m_general_stats[i].nr_wares        .push_back(nr_wares        [i]);
+		m_general_stats[i].productivity    .push_back(productivity    [i]);
 	}
 }
 
@@ -876,14 +881,15 @@ void Game::sample_statistics()
  * \param version indicates the kind of statistics file, which may be
  *   0 - old style statistics (from the time when statistics were kept in
  *       Interactive_Player)
- *   1 - current version
+ *   1 - without casualties
+ *   2 - with casualties
  *
  * \todo Document parameter fr
  * \todo Would it make sense to not support the old style anymore?
  */
 void Game::ReadStatistics(FileRead& fr, uint32_t version)
 {
-	if (version == 0 || version == 1) {
+	if (version <= 2) {
 		if (version >= 1) {
 			m_last_stats_update = fr.Unsigned32();
 		}
@@ -899,6 +905,7 @@ void Game::ReadStatistics(FileRead& fr, uint32_t version)
 			m_general_stats[p - 1].nr_buildings    .resize(entries);
 			m_general_stats[p - 1].nr_wares        .resize(entries);
 			m_general_stats[p - 1].productivity    .resize(entries);
+			m_general_stats[p - 1].nr_casualties   .resize(entries);
 			m_general_stats[p - 1].nr_kills        .resize(entries);
 			m_general_stats[p - 1].miltary_strength.resize(entries);
 		}
@@ -911,6 +918,8 @@ void Game::ReadStatistics(FileRead& fr, uint32_t version)
 				m_general_stats[p - 1].nr_buildings    [j] = fr.Unsigned32();
 				m_general_stats[p - 1].nr_wares        [j] = fr.Unsigned32();
 				m_general_stats[p - 1].productivity    [j] = fr.Unsigned32();
+				m_general_stats[p - 1].nr_casualties   [j] =
+					version >= 2 ? fr.Unsigned32() : 0;
 				m_general_stats[p - 1].nr_kills        [j] = fr.Unsigned32();
 				m_general_stats[p - 1].miltary_strength[j] = fr.Unsigned32();
 			}
@@ -946,6 +955,7 @@ void Game::WriteStatistics(FileWrite& fw)
 			fw.Unsigned32(m_general_stats[p - 1].nr_buildings    [j]);
 			fw.Unsigned32(m_general_stats[p - 1].nr_wares        [j]);
 			fw.Unsigned32(m_general_stats[p - 1].productivity    [j]);
+			fw.Unsigned32(m_general_stats[p - 1].nr_casualties   [j]);
 			fw.Unsigned32(m_general_stats[p - 1].nr_kills        [j]);
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
 		}

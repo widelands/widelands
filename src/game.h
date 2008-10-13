@@ -69,6 +69,7 @@ struct Game : public Editor_Game_Base {
 		std::vector< uint32_t > nr_buildings;
 		std::vector< uint32_t > nr_wares;
 		std::vector< uint32_t > productivity;
+		std::vector< uint32_t > nr_casualties;
 		std::vector< uint32_t > nr_kills;
 		std::vector< uint32_t > miltary_strength;
 	};

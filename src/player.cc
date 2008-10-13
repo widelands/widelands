@@ -59,6 +59,8 @@ Player::Player
 	m_egbase            (the_egbase),
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),
+	m_casualties        (0),
+	m_kills             (0),
 	m_fields            (0),
 	m_allowed_buildings (tribe_descr.get_nrbuildings(), true),
 	m_current_statistics(tribe_descr.get_nrwares    ()),

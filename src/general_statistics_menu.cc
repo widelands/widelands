@@ -39,7 +39,7 @@
 using namespace Widelands;
 
 #define PLOT_HEIGHT 100
-#define NR_DIFFERENT_DATASETS 7
+#define NR_DIFFERENT_DATASETS 8
 
 enum {
 	ID_LANDSIZE =  0,
@@ -101,9 +101,11 @@ m_parent(&parent) //  FIXME redundant (base already stores parent pointer)
 		m_plot->register_plot_data
 			(i * NR_DIFFERENT_DATASETS + 4, &genstats[i].productivity,     color);
 		m_plot->register_plot_data
-			(i * NR_DIFFERENT_DATASETS + 5, &genstats[i].nr_kills,         color);
+			(i * NR_DIFFERENT_DATASETS + 5, &genstats[i].nr_casualties,    color);
 		m_plot->register_plot_data
-			(i * NR_DIFFERENT_DATASETS + 6, &genstats[i].miltary_strength, color);
+			(i * NR_DIFFERENT_DATASETS + 6, &genstats[i].nr_kills,         color);
+		m_plot->register_plot_data
+			(i * NR_DIFFERENT_DATASETS + 7, &genstats[i].miltary_strength, color);
 		if (game.get_player(i + 1)) // Show area plot
 			m_plot->show_plot(i * NR_DIFFERENT_DATASETS, 1);
 	}
@@ -135,7 +137,10 @@ m_parent(&parent) //  FIXME redundant (base already stores parent pointer)
 	pos.y += 25 + spacing + spacing;
 
 	m_radiogroup = new UI::Radiogroup();
-	button_size = (get_inner_w() - spacing * 8) / 7;
+	button_size =
+		(get_inner_w() - spacing * (NR_DIFFERENT_DATASETS + 1))
+		/
+		NR_DIFFERENT_DATASETS;
 	m_radiogroup->add_button
 		(this,
 		 pos,
@@ -165,6 +170,12 @@ m_parent(&parent) //  FIXME redundant (base already stores parent pointer)
 		 pos,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_productivity.png"),
 		 _("Productivity"));
+	pos.x += button_size + spacing;
+	m_radiogroup->add_button
+		(this,
+		 pos,
+		 g_gr->get_picture(PicMod_Game, "pics/genstats_casualties.png"),
+		 _("Casualties"));
 	pos.x += button_size + spacing;
 	m_radiogroup->add_button
 		(this,

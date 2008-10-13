@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 3
+#define CURRENT_PACKET_VERSION 4
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -60,7 +60,7 @@ throw (_wexception)
 						rgb[j] = RGBColor(r, g, b);
 					}
 
-					std::string name = fr.CString();
+					std::string const name = fr.CString();
 
 					game->add_player(plnum, tribe, name);
 					Player & player = game->player(plnum);
@@ -69,13 +69,18 @@ throw (_wexception)
 					for (uint32_t j = 0; j < 4; ++j)
 						player.m_playercolor[j] = rgb[j];
 
-					if (packet_version >= 2)
+					if (packet_version >= 2) {
 						player.ReadStatistics(fr, 0);
+						if (packet_version >= 4) {
+							player.m_casualties = fr.Unsigned32();
+							player.m_kills      = fr.Unsigned32();
+						}
+					}
 				}
 			}
 
 			if (packet_version >= 2)
-				game->ReadStatistics(fr, 1);
+				game->ReadStatistics(fr, packet_version >= 4 ? 2 : 1);
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -97,8 +102,7 @@ throw (_wexception)
 	const Player_Number nr_players = game->map().get_nrplayers();
 	fw.Unsigned16(nr_players);
 	iterate_players_existing_const(p, nr_players, *game, plr) {
-		// Player is in game
-		fw.Unsigned8(1);
+		fw.Unsigned8(1); // Player is in game.
 
 		fw.Unsigned8(plr->m_see_all);
 
@@ -120,7 +124,10 @@ throw (_wexception)
 		fw.CString(plr->m_name.c_str());
 
 		plr->WriteStatistics(fw);
-	} else fw.Unsigned8(0); //  Player is NOT in game.
+		fw.Unsigned32(plr->casualties());
+		fw.Unsigned32(plr->kills     ());
+	} else
+		fw.Unsigned8(0); //  Player is NOT in game.
 
 	game->WriteStatistics(fw);
 

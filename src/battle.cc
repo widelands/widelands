@@ -20,6 +20,7 @@
 #include "battle.h"
 
 #include "game.h"
+#include "player.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
@@ -137,6 +138,8 @@ void Battle::getBattleWork(Game* g, Soldier* soldier)
 {
 	if (soldier->get_current_hitpoints() < 1) {
 		molog("soldier %u has died\n", soldier->get_serial());
+		soldier                                  ->get_owner()->count_casualty();
+		(soldier == m_first ? m_second : m_first)->get_owner()->count_kill    ();
 		soldier->schedule_destroy(g);
 		destroy(g);
 		return;

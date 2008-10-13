@@ -60,13 +60,14 @@ private:
 ///    Completed          ::= "completed"
 ///    Skipped            ::= "skipped"
 ///    condition_part     ::= when_condition | unless_conition
-///    when_condition     ::= "when" condition {["and" condition]}
-///    unless_condition   ::= "unless" condition {["or" condition]}
+///    when_condition     ::= "when" condition {"and" condition}
+///    unless_condition   ::= "unless" condition {"or" condition}
 ///    condition          ::= negation | economy_condition | workers_condition
 ///    negation           ::= "not" condition
-///    economy_condition  ::= economy_needs
-///    workers_condition  ::= "need experience"
-///    economy_needs      ::= "economy needs" ware_type
+///    economy_condition  ::= "economy" economy_needs
+///    workers_condition  ::= "workers" workers_need_experience
+///    economy_needs      ::= "needs" ware_type
+///    workers_need_experience ::= "need experience"
 /// Parameter semantics:
 ///    return_value:
 ///       If return_value is Failed or Completed, the productionsite's
@@ -76,11 +77,10 @@ private:
 ///       A boolean condition that can be evaluated to true or false.
 ///    condition_part:
 ///       If omitted, the return is unconditional.
-///    condition_modifier:
-///       If condition_modifier is "when", the program returns if the
-///       condition evaluates to true (otherwise the program continues).
-///       If condition_modifier is "unless", the program returns if the
-///       condition evaluates to false (otherwise the program continues).
+///    when_condition:
+///       This will cause the program to return when all conditions are true.
+///    unless_condition:
+///       This will cause the program to return unless some condition is true.
 ///    ware_type:
 ///       The name of a ware type (defined in the tribe). A ware type may only
 ///       appear once in the command.
