@@ -20,10 +20,12 @@ except ImportError:
 def detect_revision():
     revstring='UNKNOWN-REVISION'
 
-    # All code below relies on linux-isms, don't even try on other systems for now
+    # All code below relies on posix-isms, don't even try on other systems for now
     # TODO: find out how revision detection can be done cross platform instead of returning "UNKNOWN"
-    if not sys.platform in ['linux', 'linux2']:
-	    revstring='REVDETECT-UNIMPLEMENTED'
+    if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
+	    pass
+    else:
+	    revstring='REVDETECT-BROKEN-PLEASE-REPORT-THIS'
 	    return revstring
     
     svn_revnum = ""
