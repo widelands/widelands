@@ -33,6 +33,7 @@ return=skipped unless economy needs gold
 consume=goldore coal
 sleep=25000
 animate=working 35000
+produce=gold
 
 [buildcost]
 trunk=1
