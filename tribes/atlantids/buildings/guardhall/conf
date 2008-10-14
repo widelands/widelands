@@ -18,8 +18,10 @@ diamond=1
 
 [idle]
 pics=guardhall_i_??.png
-hotspot=55 92
+hotspot=58 65
+playercolor=true
 
 [build]
 pics=guardhall_i_??.png
-hotspot=55 92
+hotspot=58 65
+playercolor=true
