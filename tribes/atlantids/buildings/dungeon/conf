@@ -69,12 +69,15 @@ trunk=4
 
 [idle]
 pics=dungeon_i_??.png  # ???
-hotspot=82 80
+hotspot=47 48
+playercolor=true
 
 [working]
 pics=dungeon_i_??.png  # ???
-hotspot=82 80
+hotspot=47 48
+playercolor=true
 
 [build]
 pics=dungeon_i_??.png  # ???
-hotspot=82 80
+hotspot=47 48
+playercolor=true
