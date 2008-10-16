@@ -25,6 +25,8 @@
 #include <climits>
 #include <cstdlib>
 
+#include <stdint.h>
+
 /**
  * This class allows for selection of more than just one
  * thing. Like more than one texture, more than one map object
@@ -54,9 +56,9 @@ struct MultiSelect {
 	int32_t get_random_enabled() const {
 		const int32_t rand_value =
 			static_cast<int32_t>
-			(static_cast<double>(get_nr_enabled())
-			 *
-			 rand() / (RAND_MAX + 1.0));
+				(static_cast<double>(get_nr_enabled())
+				 *
+				 rand() / (RAND_MAX + 1.0));
 		int32_t i = 0;
 		int32_t j = rand_value + 1;
 		while (j) {if (is_enabled(i)) --j; ++i;}
