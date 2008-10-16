@@ -334,7 +334,8 @@ uint32_t Graphic::get_picture
 	if (fname) {
 		pic.u.fname = strdup(fname);
 		m_picturemap[fname] = id;
-	} else pic.u.fname =  0;
+	} else
+		pic.u.fname =  0;
 
 	return id;
 }

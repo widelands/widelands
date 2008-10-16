@@ -50,7 +50,7 @@ struct Multiline_Textarea : public Panel {
 		 const bool always_show_scrollbar = false);
 	~Multiline_Textarea();
 
-	std::string get_text() const {return m_text;}
+	std::string const & get_text() const {return m_text;}
 	ScrollMode get_scrollmode() const {return m_scrollmode;}
 
 	void set_text(const std::string &text);

@@ -82,26 +82,6 @@ std::string FileSystem::AutoExtension
 	return filename;
 }
 
-/**
- * Strip the extension (if any) from the filename
- */
-const char *FileSystem::FS_StripExtension(char * const fname)
-{
-	char *p;
-	char *dot = 0;
-
-	for (p = fname; *p; ++p) {
-		if (*p == '/' || *p == '\\')
-			dot = 0;
-		else if (*p == '.')
-			dot = p;
-	}
-
-	if (dot)
-		*dot = 0;
-
-	return fname;
-}
 
 /**
  * Translate filename so that it is relative to basefile.
@@ -423,10 +403,27 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
  * Returns the filename of this path, everything after the last
  * / or \  (or the whole string)
  */
-char const * FileSystem::FS_Filename(char const * buf) {
-	for (size_t i = strlen(buf); i; --i)
-		if (buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
-	return buf;
+char const * FileSystem::FS_Filename(char const * p) {
+	for (char const * result = p;; ++p)
+		if      (*p == '\0')
+			return result;
+		else if (*p == '/' || *p == '\\')
+			result = p + 1;
+}
+
+char const * FileSystem::FS_Filename(char const * p, char const * & extension)
+{
+	extension = 0;
+	for (char const * result = p;; ++p)
+		if (*p == '\0') {
+			if (not extension)
+				extension = p;
+			return result;
+		} else if (*p =='/' || *p == '\\') {
+			extension = 0;
+			result = p + 1;
+		} else if (*p == '.')
+			extension = p;
 }
 
 /// Create a filesystem from a zipfile or a real directory

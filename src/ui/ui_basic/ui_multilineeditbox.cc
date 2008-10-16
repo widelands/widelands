@@ -69,8 +69,10 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 			g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
 		switch (code.sym) {
 		case SDLK_BACKSPACE:
-			if (txt.size() and m_cur_pos) --m_cur_pos;
-			else break;
+			if (txt.size() and m_cur_pos)
+				--m_cur_pos;
+			else
+				break;
 			//  fallthrough
 
 		case SDLK_DELETE:
@@ -180,13 +182,8 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				m_cur_pos = txt.size();
 			else
-				while (m_cur_pos < txt.size()) {
-					uint32_t const following_cur_pos = m_cur_pos + 1;
-					if (txt[following_cur_pos] == '\n')
-						break;
-					else
-						m_cur_pos = following_cur_pos;
-				}
+				while (m_cur_pos < txt.size() and txt[m_cur_pos] != '\n')
+					++m_cur_pos;
 			break;
 
 		case SDLK_RETURN:
@@ -275,15 +272,15 @@ void Multiline_Editbox::CalcLinePos()
 		return;
 	}
 
-	const char* str = get_text().c_str();
-	int32_t leng = strlen(str);
-	int32_t lbtt = 0; // linebreaks to top
-	int32_t lbtb = 0; // linebreaks to bottom
+	std::string const & str = get_text().c_str();
+	size_t leng = str.size();
+	uint32_t lbtt = 0; // linebreaks to top
+	uint32_t lbtb = 0; // linebreaks to bottom
 
-	for (int32_t i = m_cur_pos; i >= 0; --i)
+	for (size_t i = 0; i < m_cur_pos; ++i)
 		if (str[i] == '\n')
 			++lbtt;
-	for (int32_t i = m_cur_pos + 1; i <= leng; ++i)
+	for (size_t i = m_cur_pos; i < leng; ++i)
 		if (str[i] == '\n')
 			++lbtb;
 

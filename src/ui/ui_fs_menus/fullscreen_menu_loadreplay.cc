@@ -95,13 +95,13 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			Widelands::Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);
 
-			char* fname = strdup(FileSystem::FS_Filename(pname->c_str()));
-			FileSystem::FS_StripExtension(fname);
-			m_list.add(fname, *pname);
-			free(fname);
-		} catch (_wexception&) {
-			// we simply skip illegal entries
-		}
+			char const * extension, * fname =
+				FileSystem::FS_Filename(pname->c_str(), extension);
+			char fname_without_extension[extension - fname + 1];
+			for (char * p = fname_without_extension;; ++p, ++fname)
+				if (fname == extension) {*p = '\0'; break;} else *p = *fname;
+			m_list.add(fname_without_extension, *pname);
+		} catch (_wexception const &) {} //  we simply skip illegal entries
 	}
 
 	if (m_list.size())

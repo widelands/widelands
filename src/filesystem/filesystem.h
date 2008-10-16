@@ -107,12 +107,12 @@ struct FileSystem {
 	std::string FS_CanonicalizeName(std::string const & path) const;
 	static std::string AutoExtension
 		(std::string const & filename, std::string const & extension);
-	static const char *FS_StripExtension(char * const fname);
 	static const char *FS_RelativePath(char *buf, const int32_t buflen, const char *basefile, const char *filename);
 	bool pathIsAbsolute(std::string const & path) const;
 	std::string              AbsolutePath(std::string const & path) const;
 	std::vector<std::string> FS_Tokenize (std::string const & path) const;
 	static char const * FS_Filename(char const *);
+	static char const * FS_Filename(char const *, char const * & extension);
 	static std::string GetHomedir();
 
 protected:
