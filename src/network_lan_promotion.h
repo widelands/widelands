@@ -24,6 +24,8 @@
 
 #include <list>
 
+#include <sys/types.h>
+
 #define LAN_PROMOTION_PROTOCOL_VERSION 1
 
 #define LAN_GAME_CLOSED                0
