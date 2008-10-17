@@ -26,12 +26,15 @@ planks=2
 
 [idle]
 pics=spiderfarm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
 
 [build]
 pics=spiderfarm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
 
 [working]
 pics=spiderfarm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
