@@ -33,12 +33,15 @@ spidercloth=1
 
 [idle]
 pics=farm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
 
 [working]
 pics=farm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
 
 [build]
 pics=farm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
