@@ -31,12 +31,15 @@ trunk=4
 
 [idle]
 pics=blackroot_farm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
 
 [working]
 pics=blackroot_farm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
 
 [build]
 pics=blackroot_farm_i_??.png  # ???
-hotspot=66 92
+hotspot=87 75
+playercolor=true
