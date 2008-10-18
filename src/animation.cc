@@ -251,16 +251,15 @@ const AnimationData* AnimationManager::get_animation(uint32_t id) const
 */
 void AnimationManager::trigger_soundfx(uint32_t animation, uint32_t framenumber, uint32_t stereo_position)
 {
-	return;
-//temporarily disabled #fweber 30jan2006
-	assert(animation>0 && animation<=m_animations.size()); //animation must not be zero!
+	assert(animation); //  animation must not be zero!
+	assert(animation <= m_animations.size());
 
-	if (m_animations[animation-1].sfx_cues.count(framenumber)!=0) {
-		std::string fxname;
-
-		fxname=m_animations[animation-1].sfx_cues[framenumber];
-		g_sound_handler.play_fx(fxname, stereo_position);
-	}
+	std::map<uint32_t, std::string> const & sfx_cues =
+		m_animations[animation - 1].sfx_cues;
+	std::map<uint32_t, std::string>::const_iterator const sfx_cue =
+		sfx_cues.find(framenumber);
+	if (sfx_cue != sfx_cues.end())
+		g_sound_handler.play_fx(sfx_cue->second, stereo_position);
 }
 
 /*
