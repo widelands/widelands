@@ -800,7 +800,7 @@ void Game::sample_statistics()
 	nr_kills              .resize(nr_plrs);
 	nr_msites_lost        .resize(nr_plrs);
 	nr_msites_defeated    .resize(nr_plrs);
-   nr_civil_blds_lost    .resize(nr_plrs);
+	nr_civil_blds_lost    .resize(nr_plrs);
 	nr_civil_blds_defeated.resize(nr_plrs);
 	miltary_strength      .resize(nr_plrs);
 	nr_workers            .resize(nr_plrs);

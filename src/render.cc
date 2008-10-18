@@ -409,6 +409,13 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 		--before_first_digit;
 	}
 	int width = 0, height;
+#ifndef NDEBUG
+#define VALIDATE_ANIMATION_CROPPING
+#endif
+#ifdef VALIDATE_ANIMATION_CROPPING
+	bool data_in_x_min = false, data_in_x_max = false;
+	bool data_in_y_min = false, data_in_y_max = false;
+#endif
 
 	for (;;) {
 		// Load the base image
@@ -429,6 +436,56 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 					Surface & frame = *new Surface();
 					m_plrframes[0].push_back(&frame);
 					frame.set_sdl_surface(surface);
+#ifdef VALIDATE_ANIMATION_CROPPING
+					if (not data_in_x_min)
+						for (int y = 0; y < height; ++y) {
+							uint8_t r, g, b, a;
+							SDL_GetRGBA
+								(frame.get_pixel(0,         y),
+								 surface.format,
+								 &r, &g, &b, &a);
+							if (a) {
+								data_in_x_min = true;
+								break;
+							}
+						}
+					if (not data_in_x_max)
+						for (int y = 0; y < height; ++y) {
+							uint8_t r, g, b, a;
+							SDL_GetRGBA
+								(frame.get_pixel(width - 1, y),
+								 surface.format,
+								 &r, &g, &b, &a);
+							if (a) {
+								data_in_x_max = true;
+								break;
+							}
+						}
+					if (not data_in_y_min)
+						for (int x = 0; x < width; ++x) {
+							uint8_t r, g, b, a;
+							SDL_GetRGBA
+								(frame.get_pixel(x,         0),
+								 surface.format,
+								 &r, &g, &b, &a);
+							if (a) {
+								data_in_y_min = true;
+								break;
+							}
+						}
+					if (not data_in_y_max)
+						for (int x = 0; x < width; ++x) {
+							uint8_t r, g, b, a;
+							SDL_GetRGBA
+								(frame.get_pixel(x,         height - 1),
+								 surface.format,
+								 &r, &g, &b, &a);
+							if (a) {
+								data_in_y_max = true;
+								break;
+							}
+						}
+#endif
 				} catch (std::exception const & e) {
 					throw wexception
 						("could not load animation frame %s: %s\n",
@@ -531,6 +588,22 @@ end:
 		throw wexception
 			("animation has %u frames but playercolor mask has only %u frames",
 			 m_plrframes[0].size(), m_pcmasks.size());
+#ifdef VALIDATE_ANIMATION_CROPPING
+	if
+		(char const * const where =
+		 	not data_in_x_min ? "left column"  :
+		 	not data_in_x_max ? "right column" :
+		 	not data_in_y_min ? "top row"      :
+		 	not data_in_y_max ? "bottom row"   :
+		 	0)
+		log
+			("The animation %s is not properly cropped (the %s has only fully "
+			 "transparent pixels in each frame. Therefore the %s should be "
+			 "removed (and the hotspot adjusted accordingly). Otherwise "
+			 "rendering will be slowed down by needless painting of fully "
+			 "transparent pixels.\n",
+			 data->picnametempl.c_str(), where, where);
+#endif
 }
 
 
