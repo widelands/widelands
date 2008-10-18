@@ -34,10 +34,8 @@ namespace Widelands {
 struct Battle : public Map_Object {
 	typedef Map_Object_Descr Descr;
 
-	Battle();
-	~Battle();
-
-	static Battle* create(Game* g, Soldier* first, Soldier* second);
+	Battle(); //  for loading an existing battle from a savegame
+	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	char const * type_name() const throw () {return "battle";}
@@ -58,16 +56,16 @@ struct Battle : public Map_Object {
 	 * \param soldier must be one of the soldier involved in this battle
 	 * \return the other soldier
 	 */
-	Soldier* getOpponent(Soldier* soldier);
+	Soldier * opponent(Soldier &);
 
 	/**
 	 * Called by the battling soldiers once they've met on a common node
 	 * and are idle.
 	 */
-	void getBattleWork(Game* g, Soldier* soldier);
+	void getBattleWork(Game &, Soldier &);
 
 private:
-	void calculateTurn(Game* g);
+	void calculateTurn(Game &);
 
 	Soldier* m_first;
 	Soldier* m_second;

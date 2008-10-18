@@ -408,8 +408,16 @@ struct Player :
 
 	uint32_t casualties() const {return m_casualties;}
 	uint32_t kills     () const {return m_kills;}
+	uint32_t msites_lost        () const {return m_msites_lost;}
+	uint32_t msites_defeated    () const {return m_msites_defeated;}
+	uint32_t civil_blds_lost    () const {return m_civil_blds_lost;}
+	uint32_t civil_blds_defeated() const {return m_civil_blds_defeated;}
 	void count_casualty() {++m_casualties;}
 	void count_kill    () {++m_kills;}
+	void count_msite_lost        () {++m_msites_lost;}
+	void count_msite_defeated    () {++m_msites_defeated;}
+	void count_civil_bld_lost    () {++m_civil_blds_lost;}
+	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
 	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {
 		assert(player_area.player_number == get_player_number());
@@ -455,7 +463,7 @@ private:
 	/**
 	 * Called when a node becomes seen (not only the first time) before the
 	 * vision counter is incremented. Discovers the node and those of the 6
-	 * surrounding edges/triangles that are not seen fron another node.
+	 * surrounding edges/triangles that are not seen from another node.
 	 */
 	void discover_node(Map const &, Widelands::Field const &, FCoords, Field &)
 		throw ();
@@ -469,6 +477,8 @@ private:
 	const Player_Number    m_plnum;
 	const Tribe_Descr&     m_tribe; // buildings, wares, workers, sciences
 	uint32_t               m_casualties, m_kills;
+	uint32_t               m_msites_lost,     m_msites_defeated;
+	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
 	RGBColor               m_playercolor[4];
 
 	Field *               m_fields;

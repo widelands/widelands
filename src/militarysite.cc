@@ -250,14 +250,13 @@ void MilitarySite::update_soldier_request()
 
 	if (stationed < m_capacity) {
 		if (!m_soldier_request) {
-			Ware_Index soldierid = get_owner()->tribe().safe_worker_index("soldier");
-
-			m_soldier_request = new Request
-				(this,
-				 soldierid,
-				 &MilitarySite::request_soldier_callback,
-				 this,
-				 Request::WORKER);
+			m_soldier_request =
+				new Request
+					(this,
+					 owner().tribe().safe_worker_index("soldier"),
+					 &MilitarySite::request_soldier_callback,
+					 this,
+					 Request::WORKER);
 			m_soldier_request->set_requirements (m_soldier_requirements);
 		}
 
@@ -353,7 +352,7 @@ bool MilitarySite::get_building_work(Game* g, Worker* w, bool)
 			} else if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->getBattle()) {
 					soldier->startTaskDefense(g, stayhome);
-					Battle::create(g, soldier, opponent);
+					new Battle(*g, *soldier, *opponent);
 					return true;
 				}
 			} else
@@ -472,18 +471,21 @@ bool MilitarySite::canAttack()
 	return m_didconquer;
 }
 
-void MilitarySite::aggressor(Soldier* enemy)
+void MilitarySite::aggressor(Soldier & enemy)
 {
-	upcast(Game, g, &owner().egbase());
+	Game & game = dynamic_cast<Game &>(owner().egbase());
+	Map  & map  = game.map();
 	if
-		(enemy->get_owner() == get_owner() ||
-		 enemy->getBattle() ||
-		 g->map().calc_distance(enemy->get_position(), get_position()) >= get_conquers())
+		(enemy.get_owner() == &owner() ||
+		 enemy.getBattle() ||
+		 get_conquers()
+		 <=
+		 map.calc_distance(enemy.get_position(), get_position()))
 		return;
 
 	if
-		(g->map().find_bobs
-		 	(Area<FCoords>(g->map().get_fcoords(get_base_flag()->get_position()), 2),
+		(map.find_bobs
+		 	(Area<FCoords>(map.get_fcoords(get_base_flag()->get_position()), 2),
 		 	 0,
 		 	 FindBobEnemySoldier(&owner())))
 		return;
@@ -502,17 +504,17 @@ void MilitarySite::aggressor(Soldier* enemy)
 			if (!haveSoldierJob(*it)) {
 				SoldierJob sj;
 				sj.soldier = *it;
-				sj.enemy = enemy;
+				sj.enemy = &enemy;
 				sj.stayhome = false;
 				m_soldierjobs.push_back(sj);
-				(*it)->update_task_buildingwork(g);
+				(*it)->update_task_buildingwork(&game);
 				return;
 			}
 		}
 	}
 }
 
-bool MilitarySite::attack(Soldier* enemy)
+bool MilitarySite::attack(Soldier & enemy)
 {
 	upcast(Game, g, &owner().egbase());
 	std::vector<Soldier*> present = presentSoldiers();
@@ -542,7 +544,7 @@ bool MilitarySite::attack(Soldier* enemy)
 
 		SoldierJob sj;
 		sj.soldier = defender;
-		sj.enemy = enemy;
+		sj.enemy = &enemy;
 		sj.stayhome = true;
 		m_soldierjobs.push_back(sj);
 
@@ -550,7 +552,7 @@ bool MilitarySite::attack(Soldier* enemy)
 		return true;
 	} else {
 		//TODO: Conquer building
-		set_defeating_player(enemy->get_owner()->get_player_number());
+		set_defeating_player(enemy.get_owner()->get_player_number());
 		schedule_destroy(g);
 		return false;
 	}

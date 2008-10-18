@@ -182,7 +182,7 @@ protected:
 		 bool          conquer_guarded_location_by_superior_influence = false);
 
 private:
-	void cleanup_playerimmovables_area(Area<FCoords>);
+	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
 
 	int32_t m_gametime;
 	Player                   * m_players[MAX_PLAYERS];

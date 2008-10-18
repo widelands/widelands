@@ -512,6 +512,17 @@ Cleanup the building
 */
 void Building::cleanup(Editor_Game_Base* g)
 {
+	if (m_defeating_player) {
+		Player & defeating_player = g->player(m_defeating_player);
+		if (descr().get_conquers()) {
+			owner()         .count_msite_lost        ();
+			defeating_player.count_msite_defeated    ();
+		} else {
+			owner()         .count_civil_bld_lost    ();
+			defeating_player.count_civil_bld_defeated();
+		}
+	}
+
 	// Remove from flag
 	m_flag->detach_building(g);
 
@@ -681,7 +692,7 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
  *
  * \see Building::leave_check_and_wait()
  */
-void Building::leave_skip(Game* g, Worker* w)
+void Building::leave_skip(Game *, Worker * w)
 {
 	Leave_Queue::iterator it = std::find(m_leave_queue.begin(), m_leave_queue.end(), Object_Ptr(w));
 

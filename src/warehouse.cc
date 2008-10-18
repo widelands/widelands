@@ -614,9 +614,7 @@ Launch a carrier to fetch an item from our flag.
 */
 bool Warehouse::fetch_from_flag(Game* g)
 {
-	Ware_Index carrierid;
-
-	carrierid = get_owner()->tribe().safe_worker_index("carrier");
+	Ware_Index const carrierid = owner().tribe().safe_worker_index("carrier");
 
 	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
 		insert_workers(carrierid, 1);
@@ -733,10 +731,10 @@ appropriate ware to our warelist
 */
 void Warehouse::incorporate_worker(Game* g, Worker* w)
 {
-	assert(w->get_owner() == get_owner());
+	assert(w->get_owner() == &owner());
 
-	Ware_Index index = get_owner()->tribe().worker_index(w->name().c_str());
-	WareInstance* item = w->fetch_carried_item(g); // rescue an item
+	Ware_Index const index = owner().tribe().worker_index(w->name().c_str());
+	WareInstance * const item = w->fetch_carried_item(g); // rescue an item
 
 	//  We remove carriers, but we keep other workers around.
 	if (dynamic_cast<Carrier const *>(w)) {
@@ -876,7 +874,7 @@ Building * Warehouse_Descr::create_object() const
 Warehouse::can_create_worker
 ===============
 */
-bool Warehouse::can_create_worker(Game *, Ware_Index const worker) {
+bool Warehouse::can_create_worker(Game *, Ware_Index const worker) const {
 	if (not (worker < m_supply->get_workers().get_nrwareids()))
 		throw wexception
 			("Worker type %d doesn't exists! (max is %d)",
@@ -884,15 +882,11 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) {
 
 	const Tribe_Descr & tribe = owner().tribe();
 	if (Worker_Descr const * const w_desc = tribe.get_worker_descr(worker)) {
-		bool enought_wares;
-
 		// First watch if we can build it
 		if (!w_desc->get_buildable())
 			return false;
-		enought_wares = true;
 
 		// Now see if we have the resources
-		const char & worker_name = *w_desc->name().c_str();
 		const Worker_Descr::BuildCost & buildcost = w_desc->get_buildcost();
 		const Worker_Descr::BuildCost::const_iterator buildcost_end =
 			buildcost.end();
@@ -903,18 +897,15 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) {
 		{
 			const char * input_name = it->name.c_str();
 			if (Ware_Index id_w = tribe.ware_index(input_name)) {
-				if (m_supply->stock_wares(id_w) < it->amount) {
-					enought_wares = false;
-				}
+				if (m_supply->stock_wares(id_w) < it->amount)
+					return false;
 			} else {
-				input_name = it->name.c_str();
 				id_w = tribe.worker_index(input_name);
-				if (m_supply->stock_workers(id_w) < it->amount) {
-					enought_wares = false;
-				}
+				if (m_supply->stock_workers(id_w) < it->amount)
+					return false;
 			}
 		}
-		return enought_wares;
+		return true;
 	}
 	else
 		throw wexception
@@ -970,55 +961,56 @@ bool Warehouse::canAttack()
 	return get_conquers() > 0;
 }
 
-void Warehouse::aggressor(Soldier* enemy)
+void Warehouse::aggressor(Soldier & enemy)
 {
 	if (!get_conquers())
 		return;
 
-	upcast(Game, g, &owner().egbase());
+	Game & game = dynamic_cast<Game &>(owner().egbase());
+	Map  & map  = game.map();
 	if
-		(enemy->get_owner() == get_owner() ||
-		 enemy->getBattle() ||
-		 g->map().calc_distance(enemy->get_position(), get_position()) >= get_conquers())
+		(enemy.get_owner() == &owner() ||
+		 enemy.getBattle() ||
+		 get_conquers()
+		 <=
+		 map.calc_distance(enemy.get_position(), get_position()))
 		return;
 
 	if
-		(g->map().find_bobs
-		 (Area<FCoords>(g->map().get_fcoords(get_base_flag()->get_position()), 2),
-		  0,
-		  FindBobEnemySoldier(&owner())))
+		(game.map().find_bobs
+		 	(Area<FCoords>(map.get_fcoords(get_base_flag()->get_position()), 2),
+		 	 0,
+		 	 FindBobEnemySoldier(&owner())))
 		return;
 
-	Ware_Index soldier_index = owner().tribe().worker_index("soldier");
+	Ware_Index const soldier_index = owner().tribe().worker_index("soldier");
 	Requirements noreq;
 
-	if (!count_workers(g, soldier_index, noreq))
+	if (!count_workers(&game, soldier_index, noreq))
 		return;
 
-	Worker* w = launch_worker(g, soldier_index, noreq);
-	upcast(Soldier, defender, w);
-	assert(defender);
-	defender->startTaskDefense(g, false);
-	Battle::create(g, defender, enemy);
+	Soldier & defender =
+		dynamic_cast<Soldier &>(*launch_worker(&game, soldier_index, noreq));
+	defender.startTaskDefense(&game, false);
+	new Battle(game, defender, enemy);
 }
 
-bool Warehouse::attack(Soldier* enemy)
+bool Warehouse::attack(Soldier & enemy)
 {
-	upcast(Game, g, &owner().egbase());
+	Game & game = dynamic_cast<Game &>(owner().egbase());
 	Ware_Index soldier_index = owner().tribe().worker_index("soldier");
 	Requirements noreq;
 
-	if (count_workers(g, soldier_index, noreq)) {
-		Worker* w = launch_worker(g, soldier_index, noreq);
-		upcast(Soldier, defender, w);
-		assert(defender);
-		defender->startTaskDefense(g, true);
-		Battle::create(g, defender, enemy);
+	if (count_workers(&game, soldier_index, noreq)) {
+		Soldier & defender =
+			dynamic_cast<Soldier &>(*launch_worker(&game, soldier_index, noreq));
+		defender.startTaskDefense(&game, true);
+		new Battle(game, defender, enemy);
 		return true;
 	}
 
-	set_defeating_player(enemy->get_owner()->get_player_number());
-	schedule_destroy(g);
+	set_defeating_player(enemy.get_owner()->get_player_number());
+	schedule_destroy(&game);
 	return false;
 }
 

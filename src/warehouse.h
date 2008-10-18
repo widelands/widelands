@@ -99,13 +99,13 @@ public:
 	void do_launch_item(Game *, WareInstance &);
 	void incorporate_item(Game* g, WareInstance* item);
 
-	bool can_create_worker(Game *, Ware_Index);
+	bool can_create_worker(Game *, Ware_Index) const;
 	void     create_worker(Game *, Ware_Index);
 
 	// Begin Attackable implementation
 	virtual bool canAttack();
-	virtual void aggressor(Soldier* soldier);
-	virtual bool attack(Soldier* soldier);
+	virtual void aggressor(Soldier &);
+	virtual bool attack   (Soldier &);
 	// End Attackable implementation
 
 protected:

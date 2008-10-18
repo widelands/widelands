@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 4
+#define CURRENT_PACKET_VERSION 5
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -74,13 +74,23 @@ throw (_wexception)
 						if (packet_version >= 4) {
 							player.m_casualties = fr.Unsigned32();
 							player.m_kills      = fr.Unsigned32();
+							if (packet_version >= 5) {
+								player.m_msites_lost         = fr.Unsigned32();
+								player.m_msites_defeated     = fr.Unsigned32();
+								player.m_civil_blds_lost     = fr.Unsigned32();
+								player.m_civil_blds_defeated = fr.Unsigned32();
+							}
 						}
 					}
 				}
 			}
 
 			if (packet_version >= 2)
-				game->ReadStatistics(fr, packet_version >= 4 ? 2 : 1);
+				game->ReadStatistics
+					(fr,
+					 packet_version >= 5 ? 3 :
+					 packet_version == 4 ? 2 :
+					 1);
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -126,6 +136,10 @@ throw (_wexception)
 		plr->WriteStatistics(fw);
 		fw.Unsigned32(plr->casualties());
 		fw.Unsigned32(plr->kills     ());
+		fw.Unsigned32(plr->msites_lost        ());
+		fw.Unsigned32(plr->msites_defeated    ());
+		fw.Unsigned32(plr->civil_blds_lost    ());
+		fw.Unsigned32(plr->civil_blds_defeated());
 	} else
 		fw.Unsigned8(0); //  Player is NOT in game.
 

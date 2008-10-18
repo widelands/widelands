@@ -604,7 +604,7 @@ void Soldier::attack_update(Game* g, State* state)
 
 	molog("[attack] attacking target building\n");
 	//  give the enemy soldier some time to act
-	schedule_act(g, attackable->attack(this) ? 1000 : 10);
+	schedule_act(g, attackable->attack(*this) ? 1000 : 10);
 }
 
 void Soldier::attack_pop(Game* g, State*)
@@ -759,27 +759,28 @@ void Soldier::battle_update(Game* g, State*)
 		return pop_task(g);
 	}
 
-	if (!m_battle->getOpponent(this))
+	if (!m_battle->opponent(*this))
 		return start_task_idle(g, get_animation("idle"), -1);
 
 	if (stayHome()) {
 		if (this == m_battle->first()) {
 			molog("[battle] stayHome, so reverse roles\n");
-			Battle::create(g, m_battle->second(), m_battle->first());
+			new Battle(*g, *m_battle->second(), *m_battle->first());
 			skip_act(); // we will get a signal via setBattle()
 			return;
 		}
 	} else {
-		Soldier* opponent = m_battle->getOpponent(this);
+		Soldier & opponent = *m_battle->opponent(*this);
 
-		if (opponent->get_position() != get_position()) {
+		if (opponent.get_position() != get_position()) {
 			Map& map = g->map();
-			int dist = map.calc_distance(get_position(), opponent->get_position());
+			uint32_t const dist =
+				map.calc_distance(get_position(), opponent.get_position());
 
 			if (dist >= 2 || this == m_battle->first()) {
-				// Only make small steps at a time, so we can adjust to the opponent's
-				// change of position
-				Coords dest = opponent->get_position();
+				//  Only make small steps at a time, so we can adjust to the
+				//  opponent's change of position.
+				Coords dest = opponent.get_position();
 				if (upcast(Building, building, map[dest].get_immovable()))
 					dest = building->get_base_flag()->get_position();
 				start_task_movepath
@@ -791,7 +792,7 @@ void Soldier::battle_update(Game* g, State*)
 		}
 	}
 
-	m_battle->getBattleWork(g, this);
+	m_battle->getBattleWork(*g, *this);
 }
 
 void Soldier::battle_pop(Game* g, State*)
@@ -835,13 +836,15 @@ bool Soldier::checkFieldBlocked(Game* g, const FCoords& field, bool commit)
 	if
 		(soldiers.size() &&
 		 (!m_battle ||
-		  std::find(soldiers.begin(), soldiers.end(), m_battle->getOpponent(this)) == soldiers.end()))
+		  std::find(soldiers.begin(), soldiers.end(), m_battle->opponent(*this))
+		  ==
+		  soldiers.end()))
 	{
 		if (commit && soldiers.size() == 1) {
-			upcast(Soldier, soldier, soldiers[0]);
-			if (soldier->get_owner() != get_owner() && soldier->canBeChallenged()) {
+			Soldier & soldier = dynamic_cast<Soldier &>(*soldiers[0]);
+			if (soldier.get_owner() != get_owner() && soldier.canBeChallenged()) {
 				molog("[checkFieldBlocked] attacking a soldier\n");
-				Battle::create(g, this, soldier);
+				new Battle(*g, *this, soldier);
 			}
 		}
 		return true;
@@ -882,13 +885,11 @@ void Soldier::sendSpaceSignals(Game* g)
 			(std::vector<BaseImmovable*>::const_iterator it = attackables.begin();
 			 it != attackables.end();
 			 ++it)
-		{
-			upcast(PlayerImmovable, pimm, *it);
-			if (pimm->get_owner() != get_owner()) {
-				upcast(Attackable, att, *it);
-				att->aggressor(this);
-			}
-		}
+			if
+				(dynamic_cast<PlayerImmovable const &>(**it).get_owner()
+				 !=
+				 get_owner())
+				dynamic_cast<Attackable &>(**it).aggressor(*this);
 	}
 }
 

@@ -45,24 +45,21 @@ Battle::Battle ()
 	m_first_strikes(true)
 {}
 
-Battle::~Battle ()
-{
-}
-
-Battle* Battle::create(Game* g, Soldier* first, Soldier* second)
+Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
+	Map_Object     (&g_Battle_Descr),
+	m_first        (&First),
+	m_second       (&Second),
+	m_readyflags   (0),
+	m_first_strikes(true)
 {
 	{
-		StreamWrite& ss = g->syncstream();
+		StreamWrite & ss = game.syncstream();
 		ss.Unsigned32(0x00e111ba); // appears as ba111e00 in a hexdump
-		ss.Unsigned32(first->get_serial());
-		ss.Unsigned32(second->get_serial());
+		ss.Unsigned32(First .get_serial());
+		ss.Unsigned32(Second.get_serial());
 	}
 
-	Battle* battle = new Battle;
-	battle->m_first = first;
-	battle->m_second = second;
-	battle->init(g);
-	return battle;
+	init(&game);
 }
 
 
@@ -126,50 +123,46 @@ bool Battle::locked(Game* g)
 	return m_first->get_position() == m_second->get_position();
 }
 
-Soldier* Battle::getOpponent(Soldier* soldier)
+Soldier * Battle::opponent(Soldier & soldier)
 {
-	if (m_first == soldier)
-		return m_second;
-	assert(soldier == m_second);
-	return m_first;
+	assert(m_first == &soldier or m_second == &soldier);
+	return m_first == &soldier ? m_second : m_first;
 }
 
-void Battle::getBattleWork(Game* g, Soldier* soldier)
+void Battle::getBattleWork(Game & game, Soldier & soldier)
 {
-	if (soldier->get_current_hitpoints() < 1) {
-		molog("soldier %u has died\n", soldier->get_serial());
-		soldier                                  ->get_owner()->count_casualty();
-		(soldier == m_first ? m_second : m_first)->get_owner()->count_kill    ();
-		soldier->schedule_destroy(g);
-		destroy(g);
+	if (soldier.get_current_hitpoints() < 1) {
+		molog("soldier %u has died\n", soldier.get_serial());
+		soldier          . get_owner()->count_casualty();
+		opponent(soldier)->get_owner()->count_kill    ();
+		soldier.schedule_destroy(&game);
+		destroy(&game);
 		return;
 	}
 
-	if (!m_first || !m_second) {
-		soldier->skip_act();
-		return;
-	}
+	if (!m_first || !m_second)
+		return soldier.skip_act();
 
 	// So both soldiers are alive; are we ready to trade the next blow?
-	uint8_t thisflag = soldier == m_first ? 1 : 2;
+	uint8_t const thisflag = &soldier == m_first ? 1 : 2;
 
 	if ((m_readyflags | thisflag) != 3) {
-		soldier->start_task_idle(g, soldier->descr().get_animation("idle"), -1);
+		soldier.start_task_idle(&game, soldier.descr().get_animation("idle"), -1);
 		m_readyflags |= thisflag;
 		return;
 	}
 	if (m_readyflags != 3) {
 		m_readyflags |= thisflag;
-		calculateTurn(g);
-		getOpponent(soldier)->send_signal(g, "wakeup");
+		calculateTurn(game);
+		opponent(soldier)->send_signal(&game, "wakeup");
 	} else {
 		m_readyflags = 0;
 	}
 
-	soldier->start_task_idle(g, soldier->descr().get_animation("idle"), 1000);
+	soldier.start_task_idle(&game, soldier.descr().get_animation("idle"), 1000);
 }
 
-void Battle::calculateTurn(Game* g)
+void Battle::calculateTurn(Game & game)
 {
 	Soldier* attacker;
 	Soldier* defender;
@@ -184,11 +177,11 @@ void Battle::calculateTurn(Game* g)
 
 	m_first_strikes = !m_first_strikes;
 
-	uint32_t hit = g->logic_rand() % 100;
+	uint32_t const hit = game.logic_rand() % 100;
 	if (hit > defender->get_evade()) {
 		uint32_t attack =
 			attacker->get_min_attack() +
-			(g->logic_rand()
+			(game.logic_rand()
 			 %
 			 (attacker->get_max_attack() - attacker->get_min_attack() - 1));
 

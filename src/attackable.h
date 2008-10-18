@@ -53,7 +53,7 @@ struct Attackable {
 	 * This allows the building to send protective forces to intercept
 	 * the soldier.
 	 */
-	virtual void aggressor(Soldier* soldier) = 0;
+	virtual void aggressor(Soldier &) = 0;
 
 	/**
 	 * Called by a soldier who is standing on the building's flag
@@ -67,7 +67,7 @@ struct Attackable {
 	 * \return \c true if a soldier was launched in defense of the building,
 	 * or \c false if the building cannot defend itself any longer.
 	 */
-	virtual bool attack(Soldier* soldier) = 0;
+	virtual bool attack(Soldier &) = 0;
 
 protected:
 	virtual ~Attackable() {}

@@ -22,6 +22,9 @@
 
 #include "constants.h"
 
+#include "wui_plot_area.h"
+
+#include "ui_radiobutton.h"
 #include "ui_unique_window.h"
 
 struct Interactive_Player;
@@ -29,16 +32,13 @@ namespace UI {
 struct Checkbox;
 struct Radiogroup;
 };
-struct WUIPlot_Area;
 
 struct General_Statistics_Menu : public UI::UniqueWindow {
 	General_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
-	virtual ~General_Statistics_Menu();
 
 private:
-	Interactive_Player * m_parent;
-	WUIPlot_Area       * m_plot;
-	UI::Radiogroup     * m_radiogroup;
+	WUIPlot_Area         m_plot;
+	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
 	UI::Checkbox       * m_cbs[MAX_PLAYERS];
 

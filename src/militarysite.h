@@ -94,8 +94,8 @@ public:
 
 	// Begin implementation of Attackable
 	virtual bool canAttack();
-	virtual void aggressor(Soldier* soldier);
-	virtual bool attack(Soldier* soldier);
+	virtual void aggressor(Soldier &);
+	virtual bool attack   (Soldier &);
 	// End implementation of Attackable
 
 	/**

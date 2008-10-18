@@ -189,6 +189,7 @@ void Editor_Game_Base::unconquer_area
 	//  cleanup_playerimmovables_area, so that those new border locations are
 	//  covered.
 	++player_area.radius;
+	player_area.player_number = destroying_player;
 	cleanup_playerimmovables_area(player_area);
 }
 
@@ -325,7 +326,8 @@ void Editor_Game_Base::do_conquer_area
 				receive (NoteField(mr.location(), LOSE));
 				mr.location().field->set_owned_by (best_player);
 				inform_players_about_ownership(index, best_player);
-				if (best_player) receive (NoteField(mr.location(), GAIN));
+				if (best_player)
+					receive (NoteField(mr.location(), GAIN));
 			}
 		}
 	} while (mr.advance(map()));
@@ -344,7 +346,8 @@ Editor_Game_Base::cleanup_playerimmovables_area
 Make sure that buildings cannot exist outside their owner's territory.
 ===============
 */
-void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area)
+void Editor_Game_Base::cleanup_playerimmovables_area
+	(Player_Area<Area<FCoords> > const area)
 {
 	std::vector<ImmovableFound> immovables;
 	std::vector<PlayerImmovable*> burnlist;
@@ -370,7 +373,11 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area)
 			(std::vector<PlayerImmovable *>::const_iterator it = burnlist.begin();
 			 it != burnlist.end();
 			 ++it)
+		{
+			if (upcast(Building, building, *it))
+				building->set_defeating_player(area.player_number);
 			(*it)->schedule_destroy(game);
+		}
 	else
 		for
 			(std::vector<PlayerImmovable *>::const_iterator it = burnlist.begin();
