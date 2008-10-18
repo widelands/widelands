@@ -16,14 +16,17 @@ spidercloth=1
 
 [idle]
 pics=warehouse_i_??.png  # ???
-hotspot=60 72
+hotspot=60 64
+playercolor=true
 
 [build]
 pics=warehouse_i_??.png  # ???
-hotspot=60 72
+hotspot=60 64
+playercolor=true
 
 [working]
 pics=warehouse_i_??.png  # ???
 sfx_frame=1
 sfx_name=../../../../sound/spoken/warehouse-bringitin
-hotspot=60 72
+hotspot=60 64
+playercolor=true
