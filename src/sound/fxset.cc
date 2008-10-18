@@ -61,19 +61,15 @@ void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
 
 /** Get a sound effect from the fxset. \e Which variant of the fx is actually
  * given out is determined at random
- * \return  a pointer to the chosen effect; NULL if sound effects are
+ * \return  a pointer to the chosen effect; 0 if sound effects are
  * disabled or no fx is registered
  */
 Mix_Chunk *FXset::get_fx()
 {
-	int32_t fxnumber;
-
 	if (g_sound_handler.get_disable_fx() || m_fxs.empty())
-		return NULL;
-
-	fxnumber = g_sound_handler.m_rng.rand() % m_fxs.size();
+		return 0;
 
 	m_last_used = SDL_GetTicks();
 
-	return m_fxs.at(fxnumber);
+	return m_fxs.at(g_sound_handler.m_rng.rand() % m_fxs.size());
 }

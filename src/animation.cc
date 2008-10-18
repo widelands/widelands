@@ -176,7 +176,6 @@ uint32_t AnimationManager::get
 	// will yield strange results if there is a different number of sfx_frame and sfx_name
 	int32_t framenum;
 	char * fxname;
-	ad.sfx_cues[123456] = "dummy";
 	while
 		(s.get_next_int("sfx_frame", &framenum)
 		 &&
@@ -259,7 +258,7 @@ void AnimationManager::trigger_soundfx(uint32_t animation, uint32_t framenumber,
 	std::map<uint32_t, std::string>::const_iterator const sfx_cue =
 		sfx_cues.find(framenumber);
 	if (sfx_cue != sfx_cues.end())
-		g_sound_handler.play_fx(sfx_cue->second, stereo_position);
+		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
 }
 
 /*
