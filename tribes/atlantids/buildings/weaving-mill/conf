@@ -50,12 +50,15 @@ planks=2
 
 [idle]
 pics=weaving_mill_i_??.png  # ???
-hotspot=94 86
+hotspot=60 64
+playercolor=true
 
 [build]
 pics=weaving_mill_i_??.png  # ???
-hotspot=94 86
+hotspot=60 64
+playercolor=true
 
 [working]
 pics=weaving_mill_i_??.png  # ???
-hotspot=94 86
+hotspot=60 64
+playercolor=true
