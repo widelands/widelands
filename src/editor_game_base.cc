@@ -376,6 +376,9 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 		{
 			if (upcast(Building, building, *it))
 				building->set_defeating_player(area.player_number);
+			else if (upcast(Flag,     flag,     *it))
+				if (Building * const flag_building = flag->get_building())
+					flag_building->set_defeating_player(area.player_number);
 			(*it)->schedule_destroy(game);
 		}
 	else
