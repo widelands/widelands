@@ -18,8 +18,10 @@ planks=1
 
 [idle]
 pics=quarry_i_??.png  # ???
-hotspot=46 63
+hotspot=40 45
+playercolor=true
 
 [build]
 pics=quarry_i_??.png  # ???
-hotspot=46 63
+hotspot=40 45
+playercolor=true
