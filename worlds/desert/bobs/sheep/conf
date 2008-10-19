@@ -10,8 +10,7 @@ soundfx=../../../../sound/farm/sheep
 
 [idle]
 pics=sheep_??.png
-sfx_frame=0
-sfx_name=../../../../sound/farm/sheep
+sfx=0 ../../../../sound/farm/sheep
 hotspot=15 25
 fps=20
 

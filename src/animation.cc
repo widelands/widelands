@@ -25,6 +25,8 @@
 #include "sound/sound_handler.h"
 #include "wexception.h"
 
+#include "helper.h"
+
 #include <stdio.h>
 
 
@@ -173,19 +175,29 @@ uint32_t AnimationManager::get
 	}
 
 	// Read mapping from frame numbers to sound effect names and load effects
-	// will yield strange results if there is a different number of sfx_frame and sfx_name
-	int32_t framenum;
-	char * fxname;
-	while
-		(s.get_next_int("sfx_frame", &framenum)
-		 &&
-		 s.get_next_string("sfx_name", &fxname))
-	{
-		//TODO: error handling
-		g_sound_handler.load_fx(directory, fxname);
-		ad.sfx_cues[framenum] = fxname;
+	while (Section::Value * const v = s.get_next_val("sfx")) {
+		char * parameters = v->get_string(), * endp;
+		unsigned long long int const value = strtoull(parameters, &endp, 0);
+		uint32_t const frame_number = value;
+		try {
+			if (endp == parameters or frame_number != value)
+				throw wexception
+					("expected frame number but found \"%s\"", parameters);
+			parameters = endp;
+			force_skip(parameters);
+			g_sound_handler.load_fx(directory, parameters);
+			std::map<uint32_t, std::string>::const_iterator const it =
+				ad.sfx_cues.find(frame_number);
+			if (it != ad.sfx_cues.end())
+				throw wexception
+					("redefinition for frame %u to \"%s\" (previously defined to "
+					 "\"%s\")",
+					 frame_number, parameters, it->second.c_str());
+		} catch (_wexception const & e) {
+			throw wexception("sfx: %s", e.what());
+		}
+		ad.sfx_cues[frame_number] = parameters;
 	}
-	//TODO: complain about mismatched number of sfx_name/sfx_frame
 
 	// Get descriptive data
 	if (encdefaults)

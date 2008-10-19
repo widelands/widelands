@@ -5,8 +5,7 @@ soundfx=../../../../sound/animals/duck
 
 [idle]
 pics=duck_??.png
-sfx_frame=0
-sfx_name=../../../../sound/animals/duck
+sfx=0 ../../../../sound/animals/duck
 hotspot=5 10
 
 [walk]

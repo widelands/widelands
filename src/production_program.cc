@@ -467,14 +467,13 @@ ActConsume::ActConsume
 				case ':': {
 					++parameters;
 					char * endp;
-					long long int value = strtoll(parameters, &endp, 0);
-					if
-						((*endp and *endp != ' ') or
-						 value < 1 or std::numeric_limits<uint8_t>::max() < value)
+					unsigned long long int const value =
+						strtoull(parameters, &endp, 0);
+					count = value;
+					if ((*endp and *endp != ' ') or value < 1 or count != value)
 						throw wexception
 							("expected count but found \"%s\"", parameters);
 					parameters = endp;
-					count = value;
 					//  fallthrough
 				}
 				case '\0':
@@ -590,15 +589,16 @@ ActProduce::ActProduce
 					*parameters = '\0';
 					++parameters;
 					char * endp;
-					long long int value = strtoll(parameters, &endp, 0);
+					unsigned long long int const value =
+						strtoull(parameters, &endp, 0);
+					item.second = value;
 					if
 						((*endp and *endp != ' ')
 						 or
-						 value < 1 or std::numeric_limits<uint8_t>::max() < value)
+						 value < 1 or item.second != value)
 						throw wexception
 							("expected count but found \"%s\"", parameters);
 					parameters = endp;
-					item.second = value;
 					goto item_end;
 				}
 				}
@@ -636,35 +636,31 @@ ActMine::ActMine
 
 		{
 			char * endp;
-			long long int const value = strtoll(parameters, &endp, 0);
-			if (*endp != ' ' and value != static_cast<uint8_t>(value))
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			m_distance = value;
+			if (*endp != ' ' or m_distance != value)
 				throw wexception
 					("expected distance but found \"%s\"", parameters);
-			m_distance = value;
 			parameters = endp;
 		}
 
 		{
 			char * endp;
-			long long int const value = strtoll(parameters, &endp, 0);
-			if
-				(*endp != ' ' and
-				 (value < 1 or static_cast<uint8_t>(value) < value))
-				throw wexception
-					("expected percent but found \"%s\"", parameters);
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_max = value;
+			if (*endp != ' ' or value < 1 or 100 < value)
+				throw wexception
+					("expected percent but found \"%s\"", parameters);
 			parameters = endp;
 		}
 
 		{
 			char * endp;
-			long long int const value = strtoll(parameters, &endp, 0);
-			if
-				(*endp and
-				 (value < 1 or static_cast<uint8_t>(value) < value))
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			m_chance = value;
+			if (*endp or value < 1 or 100 < value)
 				throw wexception
 					("expected percent but found \"%s\"", parameters);
-			m_chance = value;
 		}
 
 		std::string description = descr.descname();
@@ -800,11 +796,11 @@ ActCheck_Soldier::ActCheck_Soldier
 				 parameters);
 
 		char * endp;
-		long long int value = strtoll(parameters, &endp, 0);
-		if (*endp or static_cast<uint8_t>(value) != value)
+		unsigned long long int const value = strtoull(parameters, &endp, 0);
+		level = value;
+		if (*endp or level != value)
 			throw wexception
 				("expected level but found \"%s\"", parameters);
-		level = value;
 	} catch (_wexception const & e) {
 		throw wexception("check_soldier: %s", e.what());
 	}
@@ -859,23 +855,21 @@ ActTrain::ActTrain(char * parameters, ProductionSite_Descr const &) {
 
 		{
 			char * endp;
-			long long int value = strtoll(parameters, &endp, 0);
-			if (*endp != ' ' or static_cast<uint8_t>(value) != value)
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			level = value;
+			if (*endp != ' ' or level != value)
 				throw wexception
 					("expected level but found \"%s\"", parameters);
-			level = value;
 			parameters = endp;
 		}
 
 		{
 			char * endp;
-			long long int value = strtoll(parameters, &endp, 0);
-			if
-				(*endp or static_cast<uint8_t>(value) != value or
-				 value <= level)
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			target_level = value;
+			if (*endp or target_level != value or target_level <= level)
 				throw wexception
 					("expected level > %u but found \"%s\"", level, parameters);
-			target_level = value;
 		}
 	} catch (_wexception const & e) {
 		throw wexception("train: %s", e.what());
@@ -940,11 +934,11 @@ ActPlayFX::ActPlayFX (char * parameters, ProductionSite_Descr const &) {
 
 		if (not reached_end) {
 			char * endp;
-			long long int value = strtoll(parameters, &endp, 0);
-			if (*endp)
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			priority = value;
+			if (*endp or priority != value)
 				throw wexception
 					("expected priority but found \"%s\"", parameters);
-			priority = value;
 		} else
 			priority = 127;
 	} catch (_wexception const & e) {

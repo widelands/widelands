@@ -24,6 +24,5 @@ hotspot=60 72
 
 [working]
 pics=warehouse_i_??.png  # ???
-sfx_frame=1
-sfx_name=../../../../sound/spoken/warehouse-bringitin
+sfx=1 ../../../../sound/spoken/warehouse-bringitin
 hotspot=60 72
