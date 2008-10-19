@@ -1,10 +1,13 @@
 descname=_Duck
 type="critter"
 swimming=1  # defaults to 0, is only in the water?
+soundfx=../../../../sound/animals/duck
 
 [idle]
+pics=duck_??.png
+sfx_frame=0
+sfx_name=../../../../sound/animals/duck
 hotspot=5 10
 
 [walk]
 hotspot=5 10
-
