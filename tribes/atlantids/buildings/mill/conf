@@ -42,13 +42,16 @@ produce=blackrootflour
 
 [idle]
 pics=mill_i_??.png
-hotspot=45 90
+hotspot=64 59
+playercolor=true
 
 [working]
-pics=mill_i_??.png # lets see the mill turn!
-hotspot=45 90
+pics=mill_b_??.png # lets see the mill turn!
+hotspot=64 59
+playercolor=true
 fps=25
 
 [build]
 pics=mill_i_??.png
-hotspot=45 90
+hotspot=64 59
+playercolor=true
