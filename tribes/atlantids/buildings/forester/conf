@@ -18,8 +18,8 @@ worker=plant
 
 [idle]
 pics=forester_i_??.png  # ???
-hotspot=50 58
+hotspot=37 44
 
 [build]
 pics=forester_i_??.png  # ???
-hotspot=50 58
+hotspot=37 44

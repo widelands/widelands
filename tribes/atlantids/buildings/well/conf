@@ -24,12 +24,15 @@ planks=1
 
 [idle]
 pics=well_i_??.png  # ???
-hotspot=55 60
+hotspot=38 47
+playercolor=true
 
 [working]
 pics=well_i_??.png  # ???
-hotspot=55 60
+hotspot=38 47
+playercolor=true
 
 [build]
 pics=well_i_??.png  # ???
-hotspot=55 60
+hotspot=38 47
+playercolor=true
