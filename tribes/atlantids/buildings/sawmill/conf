@@ -27,12 +27,16 @@ stone=3
 
 [idle]
 pics=sawmill_i_??.png  # ???
-hotspot=56 80
+hotspot=64 59
+playercolor=true
 
 [build]
 pics=sawmill_i_??.png  # ???
-hotspot=56 80
+hotspot=64 59
+playercolor=true
 
 [working]
-pics=sawmill_i_??.png  # ???
-hotspot=56 80
+pics=sawmill_b_??.png  # ???
+hotspot=64 59
+playercolor=true
+fps=25
