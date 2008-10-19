@@ -43,12 +43,16 @@ spidercloth=1
 
 [idle]
 pics=smokery_i_??.png  # ???
-hotspot=45 45
+hotspot=53 68
+playercolor=true
 
 [build]
 pics=smokery_i_??.png  # ???
-hotspot=45 45
+hotspot=53 68
+playercolor=true
 
 [working]
-pics=smokery_i_??.png  # ???
-hotspot=45 45
+pics=smokery_b_??.png  # ???
+hotspot=53 68
+playercolor=true
+fps=20
