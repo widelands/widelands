@@ -89,18 +89,34 @@ void Map_Object_Packet::Read
 }
 
 
+struct loader_sorter {
+	bool operator()
+		(Map_Object::Loader * const a, Map_Object::Loader * const b) const
+	{
+		assert
+			(a->get_object()->get_serial() != b->get_object()->get_serial());
+		return a->get_object()->get_serial() < b->get_object()->get_serial();
+	}
+};
 void Map_Object_Packet::LoadFinish() {
+	typedef std::set<Map_Object::Loader *, loader_sorter> LoaderSetSorted;
+	LoaderSetSorted loaders_sorted;
 	// load_pointer stage
 	for
 		(LoaderSet::const_iterator cit = loaders.begin();
 		 cit != loaders.end();
 		 ++cit)
+	{
 		(*cit)->load_pointers();
+		loaders_sorted.insert(*cit);
+	}
 
 	// load_finish stage
+	LoaderSetSorted::const_iterator const loaders_sorted_end =
+		loaders_sorted.end();
 	for
-		(LoaderSet::const_iterator cit = loaders.begin();
-		 cit != loaders.end();
+		(LoaderSetSorted::const_iterator cit = loaders_sorted.begin();
+		 cit != loaders_sorted_end;
 		 ++cit)
 	{
 		(*cit)->load_finish();
