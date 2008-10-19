@@ -19,8 +19,10 @@ stone=1
 
 [idle]
 pics=hunter_i_??.png
-hotspot=55 60
+hotspot=36 44
+playercolor=true
 
 [build]
 pics=hunter_i_??.png
-hotspot=55 60
+hotspot=36 44
+playercolor=true

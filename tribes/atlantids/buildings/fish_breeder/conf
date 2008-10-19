@@ -18,8 +18,10 @@ worker=breed
 
 [idle]
 pics=fish_breeder_i_??.png  # ???
-hotspot=50 65
+hotspot=34 42
+playercolor=true
 
 [build]
 pics=fish_breeder_i_??.png  # ???
-hotspot=50 65
+hotspot=34 42
+playercolor=true

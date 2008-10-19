@@ -18,8 +18,10 @@ worker=fish
 
 [idle]
 pics=fisher_i_??.png  # ???
-hotspot=45 55
+hotspot=42 49
+playercolor=yes
 
 [build]
 pics=fisher_i_??.png  # ???
-hotspot=45 55
+hotspot=42 49
+playercolor=yes
