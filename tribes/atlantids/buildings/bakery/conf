@@ -28,12 +28,16 @@ stone=3
 
 [idle]
 pics=bakery_i_??.png  # ???
-hotspot=55 55
+hotspot=55 68
+playercolor=true
 
 [working]
-pics=bakery_i_??.png  # ???
-hotspot=55 55
+pics=bakery_b_??.png  # ???
+hotspot=55 68
+playercolor=true
+fps=20
 
 [build]
 pics=bakery_i_??.png  # ???
-hotspot=55 55
+hotspot=55 68
+playercolor=true
