@@ -157,10 +157,10 @@ std::string FileSystem::AbsolutePath(std::string const & path) const {
  */
 std::string FileSystem::fixCrossFile(std::string path) {
 #ifdef __WIN32__
-	std::string crosssep("/");
+	// We simply make it absolut.
+	return FS_CanonicalizeName(path);
 #else
 	std::string crosssep("\\");
-#endif
 	std::string fsep = "" + m_filesep;
 	std::string fixedpath(path);
 	std::string temp;
@@ -171,6 +171,7 @@ std::string FileSystem::fixCrossFile(std::string path) {
 			fixedpath.replace(i, 1, fsep);
 	}
 	return fixedpath;
+#endif
 }
 
 /**
