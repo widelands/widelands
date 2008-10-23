@@ -160,15 +160,13 @@ std::string FileSystem::fixCrossFile(std::string path) {
 	// We simply make it absolut.
 	return FS_CanonicalizeName(path);
 #else
-	std::string crosssep("\\");
-	std::string fsep = "" + m_filesep;
 	std::string fixedpath(path);
 	std::string temp;
 	uint32_t path_size = path.size();
 	for (uint32_t i = 0; i < path_size; ++i) {
 		temp = fixedpath.at(i);
-		if (temp == crosssep)
-			fixedpath.replace(i, 1, fsep);
+		if (temp == "\\")
+			fixedpath.at(i) = m_filesep;
 	}
 	return fixedpath;
 #endif
