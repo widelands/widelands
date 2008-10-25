@@ -345,10 +345,10 @@ type=allow_building
 version=1
 building=vineyard
 
-[Enable Vintagery]
+[Enable Winery]
 type=allow_building
 version=1
-building=vintagery
+building=winery
 
 [Enable Mill]
 type=allow_building

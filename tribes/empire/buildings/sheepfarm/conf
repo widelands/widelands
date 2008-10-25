@@ -5,7 +5,7 @@ type=production
 size=big
 buildable=yes
 buildicon=sheepfarm_build.png
-worker=herdsman
+worker=shepherd
 program=work
 output=wool
 
