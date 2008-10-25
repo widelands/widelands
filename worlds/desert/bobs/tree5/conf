@@ -1,12 +1,17 @@
 [global]
 type="diminishing"
 stock=1
-descname =_Tree
-
+soundfx=../../../../sound/animals/bird5
+descname =_Palm
 size=normal
 attrib=tree
 program=fall
+hotspot=24 60
 
+[idle]
+pics=tree5_??.png
+sfx=0 ../../../../sound/animals/bird5
+ftp=10
 hotspot=24 60
 
 [fall]
