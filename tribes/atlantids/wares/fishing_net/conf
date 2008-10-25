@@ -1,9 +1,0 @@
-[global]
-descname=_"Fishing Net"
-help=_"The fishing net is used by the fisher and produced by the toolsmith."
-menu_pic=menu.png
-
-# A simple fishing net
-[idle]
-pics=idle.png
-hotspot=10 17

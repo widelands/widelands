@@ -1,8 +1,0 @@
-[global]
-descname=_"Pick"
-help=_"Picks are used by stonecutters and miners. It is produced by the toolsmith."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=6 11

@@ -1,9 +1,0 @@
-[global]
-descname=_"Hook pole"
-help=_"This hook pole is used by the smoker to hang up all the meat and fish to the top of the smoke-house. It is created by the toolsmith."
-menu_pic=menu.png
-
-# a pole with a hook
-[idle]
-pics=idle.png
-hotspot=10 17

@@ -1,8 +1,0 @@
-[global]
-descname=_"Golden Tabart"
-help=_"A special tabard for atlantian soldiers."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=7 11

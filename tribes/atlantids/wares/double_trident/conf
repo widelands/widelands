@@ -1,9 +1,0 @@
-[global]
-descname=_"Double Trident"
-help=_"Already one of the best tridents of the atlantids. Only used by very good fighters."
-menu_pic=menu.png
-
-# A simple double trident
-[idle]
-pics=idle.png
-hotspot=10 17

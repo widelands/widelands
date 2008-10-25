@@ -1,9 +1,0 @@
-[global]
-descname=_"Long Trident"
-help=_"This is an advanced trident for more experienced soldiers."
-menu_pic=menu.png
-
-# A simple, but long trident.
-[idle]
-pics=idle.png
-hotspot=10 17

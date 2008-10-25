@@ -1,9 +1,0 @@
-[global]
-descname=_"Diamond"
-help=_"This wonderful diamonds are used for some exclusive buildings and tools."
-menu_pic=menu.png
-
-# No description yet
-[idle]
-pics=idle.png
-hotspot=10 17

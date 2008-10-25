@@ -1,9 +1,0 @@
-[global]
-descname=_"Light trident"
-help=_"This is the basic weapon for atlantian soldiers"
-menu_pic=menu.png
-
-# A simple trident
-[idle]
-pics=idle.png
-hotspot=10 17

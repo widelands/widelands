@@ -1,9 +1,0 @@
-[global]
-descname=_"Heavy Double Trident"
-help=_"This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it."
-menu_pic=menu.png
-
-# A golden doubled trident
-[idle]
-pics=idle.png
-hotspot=10 17

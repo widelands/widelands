@@ -1,8 +1,0 @@
-[global]
-descname=_"Tabart"
-help=_"Every atlantian soldier has to wear the sign of his country on his or her breast."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=7 11
