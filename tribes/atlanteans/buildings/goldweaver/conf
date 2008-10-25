@@ -26,12 +26,15 @@ planks=1
 
 [idle]
 pics=goldweaver_i_??.png  # ???
-hotspot=55 60
+hotspot=34 68
+playercolor=true
 
 [working]
 pics=goldweaver_i_??.png  # ???
-hotspot=55 60
+hotspot=34 68
+playercolor=true
 
 [build]
 pics=goldweaver_i_??.png  # ???
-hotspot=55 60
+hotspot=34 68
+playercolor=true
