@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3427\n"
+"Project-Id-Version: Widelands svn3435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-20 17:38+0200\n"
-"PO-Revision-Date: 2008-10-20 18:30+0100\n"
+"POT-Creation-Date: 2008-10-25 14:47+0200\n"
+"PO-Revision-Date: 2008-10-25 14:49+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../../src/ware_statistics_menu.cc:355
+#: ../../src/game_main_menu.cc:54
 msgid "Ware Statistics"
 msgstr "Warenstatistik"
 
@@ -461,6 +462,7 @@ msgid "Player 1"
 msgstr "Spieler 1"
 
 #: ../../src/building_statistics_menu.cc:80
+#: ../../src/game_main_menu.cc:61
 msgid "Building Statistics"
 msgstr "Gebäudestatistik"
 
@@ -508,13 +510,13 @@ msgstr "In Bau"
 #: ../../src/building_statistics_menu.cc:127
 #: ../../src/building_statistics_menu.cc:145
 #: ../../src/building_statistics_menu.cc:163
-msgid "Snow previous"
+msgid "Show previous"
 msgstr "Zeige Vorigen"
 
 #: ../../src/building_statistics_menu.cc:136
 #: ../../src/building_statistics_menu.cc:154
 #: ../../src/building_statistics_menu.cc:172
-msgid "Snow next"
+msgid "Show next"
 msgstr "Zeige Nächsten"
 
 #: ../../src/waresdisplay.cc:42
@@ -591,7 +593,7 @@ msgstr "Lade Animationen: %d%% complete"
 
 #: ../../src/game_options_sound_menu.cc:27
 #: ../../src/game_options_menu.cc:82
-msgid "Sound options"
+msgid "Sound Options"
 msgstr "Klang Optionen"
 
 #: ../../src/game_options_sound_menu.cc:32
@@ -627,6 +629,7 @@ msgid " or "
 msgstr " oder"
 
 #: ../../src/game_main_menu_save_game.cc:62
+#: ../../src/game_options_menu.cc:91
 msgid "Save Game"
 msgstr "Spiel speichern"
 
@@ -774,12 +777,9 @@ msgstr "Lizenz"
 msgid "Authors"
 msgstr "Autoren"
 
-#: ../../src/game_options_menu.cc:91
-msgid "Save game"
-msgstr "Spiel speichern"
-
 #: ../../src/game_options_menu.cc:101
-msgid "Exit game"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:75
+msgid "Exit Game"
 msgstr "Spiel beenden"
 
 #: ../../src/editor_game_base.cc:573
@@ -793,6 +793,7 @@ msgid "Loading tribe: %s"
 msgstr "Lade Stamm: %s"
 
 #: ../../src/general_statistics_menu.cc:52
+#: ../../src/game_main_menu.cc:47
 msgid "General Statistics"
 msgstr "Allgemeine Statistiken"
 
@@ -1005,18 +1006,6 @@ msgstr "Chat-Menü"
 #: ../../src/editor/ui_menus/editor_main_menu.cc:42
 msgid "Main Menu"
 msgstr "Statistiken"
-
-#: ../../src/game_main_menu.cc:47
-msgid "General statistics"
-msgstr "Allgemeine Statistiken"
-
-#: ../../src/game_main_menu.cc:54
-msgid "Ware statistics"
-msgstr "Warenstatistik"
-
-#: ../../src/game_main_menu.cc:61
-msgid "Building statistics"
-msgstr "Gebäudestatistik"
 
 #: ../../src/constructionsite.cc:216
 #, c-format
@@ -1663,10 +1652,6 @@ msgstr "Editor"
 #: ../../src/editor/ui_menus/editor_main_menu.cc:73
 msgid "View Readme"
 msgstr "Zeige Liesmich"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:75
-msgid "Exit Game"
-msgstr "Spiel beenden"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:79
 msgid "Version "
@@ -2495,6 +2480,16 @@ msgstr "(Keine Beschreibung vorhanden.)"
 msgid "no description defined"
 msgstr "Keine Beschreibung vorhanden."
 
+#~ msgid "Save game"
+#~ msgstr "Spiel speichern"
+#~ msgid "Exit game"
+#~ msgstr "Spiel beenden"
+#~ msgid "General statistics"
+#~ msgstr "Allgemeine Statistiken"
+#~ msgid "Ware statistics"
+#~ msgstr "Warenstatistik"
+#~ msgid "Building statistics"
+#~ msgstr "Gebäudestatistik"
 #~ msgid "Needs Ware"
 #~ msgstr "Benötigt Ware"
 #~ msgid "Consumed"
