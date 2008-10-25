@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3287\n"
+"Project-Id-Version: Widelands svn3437\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-08-30 20:17+0000\n"
-"PO-Revision-Date: 2008-08-30 22:11+0100\n"
+"PO-Revision-Date: 2008-10-25 15:36+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -23,19 +23,29 @@ msgstr "Thron seufzt..."
 msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr " \"Es ist schon Monate her und trotzdem verstecken wir uns immer noch in den dunklen Wäldern.<br> Meine Krieger jagen des Tags und liegen des Nachts wach - sie lauschen den Geräuschen der blutigen Schlacht, die von weit her zwischen den alten Bäumen widerhallt.\""
 
-#: ../../../campaigns/t01.wmf/event:14 ../../../campaigns/t01.wmf/event:27
-#: ../../../campaigns/t01.wmf/event:40 ../../../campaigns/t01.wmf/event:53
+#: ../../../campaigns/t01.wmf/event:14
+#: ../../../campaigns/t01.wmf/event:27
+#: ../../../campaigns/t01.wmf/event:40
+#: ../../../campaigns/t01.wmf/event:53
 msgid "The story begins"
-msgstr "Die Geschichte findet ihren Anfang..."
+msgstr "Die Geschichte nimmt ihren Anfang..."
 
-#: ../../../campaigns/t01.wmf/event:19 ../../../campaigns/t01.wmf/event:32
-#: ../../../campaigns/t01.wmf/event:45 ../../../campaigns/t01.wmf/event:58
-#: ../../../campaigns/t01.wmf/event:97 ../../../campaigns/t01.wmf/event:113
-#: ../../../campaigns/t01.wmf/event:128 ../../../campaigns/t01.wmf/event:144
-#: ../../../campaigns/t01.wmf/event:159 ../../../campaigns/t01.wmf/event:175
-#: ../../../campaigns/t01.wmf/event:190 ../../../campaigns/t01.wmf/event:220
-#: ../../../campaigns/t01.wmf/event:235 ../../../campaigns/t01.wmf/event:250
-#: ../../../campaigns/t01.wmf/event:265 ../../../campaigns/t01.wmf/event:297
+#: ../../../campaigns/t01.wmf/event:19
+#: ../../../campaigns/t01.wmf/event:32
+#: ../../../campaigns/t01.wmf/event:45
+#: ../../../campaigns/t01.wmf/event:58
+#: ../../../campaigns/t01.wmf/event:97
+#: ../../../campaigns/t01.wmf/event:113
+#: ../../../campaigns/t01.wmf/event:128
+#: ../../../campaigns/t01.wmf/event:144
+#: ../../../campaigns/t01.wmf/event:159
+#: ../../../campaigns/t01.wmf/event:175
+#: ../../../campaigns/t01.wmf/event:190
+#: ../../../campaigns/t01.wmf/event:220
+#: ../../../campaigns/t01.wmf/event:235
+#: ../../../campaigns/t01.wmf/event:250
+#: ../../../campaigns/t01.wmf/event:265
+#: ../../../campaigns/t01.wmf/event:297
 msgid "OK"
 msgstr "OK"
 
@@ -71,7 +81,8 @@ msgstr "Khantrukh fährt fort..."
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br> We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr " \"Niemand außer den Göttern weiß, wie lange wir hier noch versteckt bleiben müssen. Die Krieger hoffen, dass wir irgendwann glorreich heimwärts marschieren, doch ich bin absolut sicher, dass dies nicht in nächster Zeit geschehen wird. Und die Tage werden längst schon kürzer und kälter...<br>Wir sollten uns besser schnell auf den Winter in diesen Landen vorbereiten. Ich denke im Osten unseres Quartiers gibt es einige Plätze auf denen wir eine Holzfällerhütte aufbauen könnten.\"<br><br>--NEUER AUFTRAG--<br>-"
 
-#: ../../../campaigns/t01.wmf/event:106 ../../../campaigns/t01.wmf/objective:7
+#: ../../../campaigns/t01.wmf/event:106
+#: ../../../campaigns/t01.wmf/objective:7
 msgid "* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr "* Drücke LEERTASTE um zu sehen, wo du bauen kannst.<br> Die roten Haussymbole zeigen dir, wo du kleine Gebäude - wie z.B. Holzfäller - bauen kannst.<br>"
 
@@ -79,9 +90,12 @@ msgstr "* Drücke LEERTASTE um zu sehen, wo du bauen kannst.<br> Die roten Hauss
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr "* Baue einen Holzfäller auf dem roten Haussymbol rechts neben deinem Hauptquartier indem du darauf klickst und die Holzfällerhütte auswählst.<br>"
 
-#: ../../../campaigns/t01.wmf/event:109 ../../../campaigns/t01.wmf/event:124
-#: ../../../campaigns/t01.wmf/event:140 ../../../campaigns/t01.wmf/event:155
-#: ../../../campaigns/t01.wmf/event:171 ../../../campaigns/t01.wmf/event:186
+#: ../../../campaigns/t01.wmf/event:109
+#: ../../../campaigns/t01.wmf/event:124
+#: ../../../campaigns/t01.wmf/event:140
+#: ../../../campaigns/t01.wmf/event:155
+#: ../../../campaigns/t01.wmf/event:171
+#: ../../../campaigns/t01.wmf/event:186
 msgid "The advisor"
 msgstr "Der Berater"
 
@@ -147,7 +161,8 @@ msgstr " \"Ich bin sicher, dass weder Du noch Deine Krieger den Wunsch haben, la
 msgid "* Build two quarries south-west of your headquarters."
 msgstr "* Baue 2 Steinbrüche südwestlich deines Hauptquartiers."
 
-#: ../../../campaigns/t01.wmf/event:211 ../../../campaigns/t01.wmf/event:226
+#: ../../../campaigns/t01.wmf/event:211
+#: ../../../campaigns/t01.wmf/event:226
 msgid "Thron speaks..."
 msgstr "Thron spricht..."
 
@@ -233,6 +248,6 @@ msgstr "Baue zwei Steinbrüche"
 
 #~ msgid "Another evening..."
 #~ msgstr "Eines Abends..."
-
 #~ msgid "Victory!"
 #~ msgstr "Sieg!"
+
