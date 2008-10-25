@@ -79,7 +79,7 @@ sound
 	 buttonw(1), 20,
 	 4,
 	 &GameOptionsMenu::clicked_sound, this,
-	 _("Sound options")),
+	 _("Sound Options")),
 save_game
 	(this,
 	 posx(0, 1),
@@ -88,7 +88,7 @@ save_game
 	 4,
 	 g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
 	 &GameOptionsMenu::clicked_save_game, this,
-	 _("Save game")),
+	 _("Save Game")),
 exit_game
 	(this,
 	 posx(0, 1),
@@ -98,7 +98,7 @@ exit_game
 	 4,
 	 g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
 	 &GameOptionsMenu::clicked_exit_game, this,
-	 _("Exit game"))
+	 _("Exit Game"))
 {
 	set_inner_size
 		(hmargin() + std::max(get_inner_w(), readme.get_w()) + hmargin(),

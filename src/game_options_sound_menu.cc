@@ -24,7 +24,7 @@
 GameOptionsSoundMenu::GameOptionsSoundMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(&plr, &registry, 160, 160, _("Sound options")),
+UI::UniqueWindow(&plr, &registry, 160, 160, _("Sound Options")),
 ingame_music(this, Point(hmargin(), vmargin())),
 ingame_music_label
 	(this,

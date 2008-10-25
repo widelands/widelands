@@ -124,7 +124,7 @@ m_last_building_index(0)
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
 		 &Building_Statistics_Menu::clicked_jump, this, Prev_Owned,
-		 _("Snow previous"),
+		 _("Show previous"),
 		 false);
 
 	m_btn[Next_Owned] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
@@ -133,7 +133,7 @@ m_last_building_index(0)
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
 		 &Building_Statistics_Menu::clicked_jump, this, Next_Owned,
-		 _("Snow next"),
+		 _("Show next"),
 		 false);
 
 	m_btn[Prev_Construction] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
@@ -142,7 +142,7 @@ m_last_building_index(0)
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
 		 &Building_Statistics_Menu::clicked_jump, this, Prev_Construction,
-		 _("Snow previous"),
+		 _("Show previous"),
 		 false);
 
 	m_btn[Next_Construction] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
@@ -151,7 +151,7 @@ m_last_building_index(0)
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
 		 &Building_Statistics_Menu::clicked_jump, this, Next_Construction,
-		 _("Snow next"),
+		 _("Show next"),
 		 false);
 
 	m_btn[Prev_Unproductive] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
@@ -160,7 +160,7 @@ m_last_building_index(0)
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
 		 &Building_Statistics_Menu::clicked_jump, this, Prev_Unproductive,
-		 _("Snow previous"),
+		 _("Show previous"),
 		 false);
 
 	m_btn[Next_Unproductive] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
@@ -169,7 +169,7 @@ m_last_building_index(0)
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
 		 &Building_Statistics_Menu::clicked_jump, this, Next_Unproductive,
-		 _("Snow next"),
+		 _("Show next"),
 		 false);
 }
 
