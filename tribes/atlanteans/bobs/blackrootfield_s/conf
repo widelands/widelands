@@ -1,0 +1,14 @@
+[global]
+type=immovable
+size=big
+program=program
+picture=blackrootfield_s_00.png
+
+[program]
+0=animation small 45000
+1=transform tribe:blackrootfield_m
+
+[small]
+pics=blackrootfield_s_??.png
+ftp=5
+hotspot=31 37

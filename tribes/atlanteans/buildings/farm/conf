@@ -1,0 +1,47 @@
+[global]
+descname=_"Farm"
+soundfx=../../../../sound/farm/farm_animal
+type=production
+size=big
+buildable=yes
+buildicon=farm_build.png
+worker=farmer
+stopable=yes
+output=corn
+program=plant
+program=harvest
+program=work
+
+[work]
+call=plant
+call=harvest
+playFX=../../../../sound/farm/farm_animal 192
+
+[plant]
+sleep=20000
+worker=plant
+
+[harvest]
+sleep=5000
+worker=harvest
+
+[buildcost]
+trunk=3
+stone=2
+planks=2
+spidercloth=1
+
+[idle]
+pics=farm_i_??.png  # ???
+hotspot=87 75
+playercolor=true
+
+[working]
+pics=farm_i_??.png  # ???
+hotspot=87 75
+playercolor=true
+
+[build]
+pics=farm_i_??.png  # ???
+hotspot=87 75
+playercolor=true

@@ -1,0 +1,29 @@
+[global]
+descname=_"Tower"
+type=military
+size=medium
+buildable=yes
+buildicon=tower_build.png
+max_soldiers=4
+heal_per_second=5
+conquers=9
+max_medics=2
+heal_increase_per_medic=3
+vision_range=17
+enhancement=high_tower
+
+[buildcost]
+trunk=2
+planks=3
+stone=4
+spidercloth=1
+
+[idle]
+pics=tower_i_??.png
+hotspot=55 90
+playercolor=true
+
+[build]
+pics=tower_i_??.png
+hotspot=55 90
+playercolor=true

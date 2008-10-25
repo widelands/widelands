@@ -1,0 +1,8 @@
+[global]
+descname=_"Smoked meat"
+help=_"This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
+menu_pic=menu.png
+
+[idle]
+pics=idle.png
+hotspot=10 17

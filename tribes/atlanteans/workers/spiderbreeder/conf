@@ -1,0 +1,21 @@
+[global]
+descname=_Spiderbreeder
+help=
+type=generic
+menu_pic=menu.png
+
+[buildcost]
+carrier=1
+milking_tongs=1
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=5 13
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=5 13

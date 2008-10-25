@@ -1,0 +1,23 @@
+[global]
+descname=_Builder
+help=Works at construction sites to create a new building.
+type=generic
+soundfx=../../../../sound/hammering/hammering
+menu_pic=builder_menu.png
+
+[buildcost]
+hammer=1
+carrier=1
+
+[idle]
+pics=idle_??.png
+sfx=0 ../../../../sound/hammering/hammering
+hotspot=5 13
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=5 13
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=5 13

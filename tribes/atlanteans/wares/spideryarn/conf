@@ -1,0 +1,8 @@
+[global]
+descname=_"Spideryarn"
+help=_"This yarn is produced by spiders, which are breed on spiderfarms."
+menu_pic=menu.png
+
+[idle]
+pics=idle.png
+hotspot=10 17

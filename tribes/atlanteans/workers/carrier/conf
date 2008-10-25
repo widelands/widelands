@@ -1,0 +1,56 @@
+[global]
+descname=_Carrier
+help=Carries items along your roads.
+type=carrier
+menu_pic=menu.png
+
+[buildcost]
+
+[idle]
+pics=idle_??.png
+hotspot=7 20
+plrclr0_r=2
+plrclr0_g=2
+plrclr0_b=74
+plrclr1_r=2
+plrclr1_g=2
+plrclr1_b=112
+plrclr2_r=2
+plrclr2_g=2
+plrclr2_b=149
+plrclr3_r=255
+plrclr3_g=0
+plrclr3_b=255
+fps=2
+
+[walk]
+hotspot=7 20
+plrclr0_r=2
+plrclr0_g=2
+plrclr0_b=74
+plrclr1_r=2
+plrclr1_g=2
+plrclr1_b=112
+plrclr2_r=2
+plrclr2_g=2
+plrclr2_b=149
+plrclr3_r=255
+plrclr3_g=0
+plrclr3_b=255
+fps=12
+
+[walkload]
+hotspot=7 20
+plrclr0_r=2
+plrclr0_g=2
+plrclr0_b=74
+plrclr1_r=2
+plrclr1_g=2
+plrclr1_b=112
+plrclr2_r=2
+plrclr2_g=2
+plrclr2_b=149
+plrclr3_r=255
+plrclr3_g=0
+plrclr3_b=255
+fps=12

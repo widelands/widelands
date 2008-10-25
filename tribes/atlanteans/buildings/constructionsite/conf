@@ -1,0 +1,12 @@
+# The constructionsite is a mess. Not nice and clean, but rather some
+# trunks laying around on piles, maybe some tools.
+
+[global]
+descname=_ Construction Site
+type=construction
+size=small   # dummy; overridden by building size
+buildable=no # counterintuitive, but correct: player can't build constructionsite
+
+[idle]
+pics=construction_i_??.png  # ???
+hotspot=5 5

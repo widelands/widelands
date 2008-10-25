@@ -1,0 +1,13 @@
+[global]
+type=immovable
+size=none
+program=program
+picture=ashes_00.png
+
+[program]
+0=animation idle 45000
+1=remove
+
+[idle]
+pics=ashes_??.png
+hotspot=40 39

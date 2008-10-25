@@ -1,0 +1,18 @@
+# Hints for the computer player
+
+[global]
+numofwares=5
+stoneproducer=quarry
+trunkproducer=woodcutter
+forester=forester
+fisher=fisher
+ware_n_0=trunk
+ware_p_0=6
+ware_n_1=stone
+ware_p_1=5
+ware_n_2=planks
+ware_p_2=4
+ware_n_3=mountain_crystal
+ware_p_3=3
+ware_n_4=diamond
+ware_p_4=3

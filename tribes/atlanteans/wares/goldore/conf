@@ -1,0 +1,8 @@
+[global]
+descname=_"Goldore"
+help=_"This is the yellow goldore."
+menu_pic=menu.png
+
+[idle]
+pics=idle.png
+hotspot=4 4

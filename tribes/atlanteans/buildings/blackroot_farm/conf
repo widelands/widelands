@@ -1,0 +1,45 @@
+[global]
+descname=_"Blackroot Farm"
+type=production
+size=big
+buildable=yes
+buildicon=blackroot_farm_build.png
+worker=blackroot_farmer
+stopable=yes
+output=blackroot
+program=plant
+program=harvest
+program=work
+
+[work]
+call=plant
+call=harvest
+return=skipped
+
+[plant]
+sleep=20000
+worker=plant
+
+[harvest]
+sleep=5000
+worker=harvest
+
+[buildcost]
+planks=3
+stone=2
+trunk=4
+
+[idle]
+pics=blackroot_farm_i_??.png  # ???
+hotspot=87 75
+playercolor=true
+
+[working]
+pics=blackroot_farm_i_??.png  # ???
+hotspot=87 75
+playercolor=true
+
+[build]
+pics=blackroot_farm_i_??.png  # ???
+hotspot=87 75
+playercolor=true

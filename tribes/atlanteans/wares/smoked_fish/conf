@@ -1,0 +1,8 @@
+[global]
+descname=_"Smoked fish"
+help=_"This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
+menu_pic=menu.png
+
+[idle]
+pics=idle.png
+hotspot=10 17

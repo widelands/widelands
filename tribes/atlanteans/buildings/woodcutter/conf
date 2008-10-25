@@ -1,0 +1,27 @@
+[global]
+descname=_"Woodcutter Hut"
+type=production
+size=small
+buildable=yes
+buildicon=woodcutter_build.png
+worker=woodcutter
+output=trunk
+program=work
+
+[work]
+sleep=30000 # Barbarian lumberjack sleeps 25000
+worker=harvest
+
+[buildcost]
+trunk=2
+planks=1
+
+[idle]
+pics=woodcutter_i_??.png
+hotspot=37 44
+playercolor=true
+
+[build]
+pics=woodcutter_i_??.png
+hotspot=37 44
+playercolor=true

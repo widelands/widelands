@@ -1,0 +1,38 @@
+[global]
+descname=_"Well"
+type=production
+size=small
+buildable=yes
+buildicon=well_build.png
+worker=carrier
+stopable=yes
+program=work
+output=water
+
+[inputs]
+
+[work]
+sleep=20000
+animate=working 20000
+mine=water 1 100 65
+produce=water
+
+[buildcost]
+trunk=2
+stone=1
+planks=1
+
+[idle]
+pics=well_i_??.png  # ???
+hotspot=38 47
+playercolor=true
+
+[working]
+pics=well_i_??.png  # ???
+hotspot=38 47
+playercolor=true
+
+[build]
+pics=well_i_??.png  # ???
+hotspot=38 47
+playercolor=true
