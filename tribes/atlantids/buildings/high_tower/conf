@@ -19,8 +19,10 @@ stone=2
 
 [idle]
 pics=high_tower_i_??.png
-hotspot=55 92
+hotspot=55 90
+playercolor=true
 
 [build]
 pics=high_tower_i_??.png
-hotspot=55 92
+hotspot=55 90
+playercolor=true

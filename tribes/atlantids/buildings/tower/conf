@@ -20,10 +20,10 @@ spidercloth=1
 
 [idle]
 pics=tower_i_??.png
-hotspot=55 90
+hotspot=55 70
 playercolor=true
 
 [build]
 pics=tower_i_??.png
-hotspot=55 90
+hotspot=55 70
 playercolor=true
