@@ -43,12 +43,15 @@ spidercloth=1
 
 [idle]
 pics=smelting_works_i_??.png  # ???
-hotspot=45 45
+hotspot=62 71
+playercolor=true
 
 [build]
 pics=smelting_works_i_??.png  # ???
-hotspot=45 45
+hotspot=62 71
+playercolor=true
 
 [working]
 pics=smelting_works_i_??.png  # ???
-hotspot=45 45
+hotspot=62 71
+playercolor=true
