@@ -25,12 +25,15 @@ planks=1
 
 [idle]
 pics=burner_i_??.png
-hotspot=54 54
+hotspot=55 68
+playercolor=true
 
 [build]
 pics=burner_i_??.png
-hotspot=54 54
+hotspot=55 68
+playercolor=true
 
 [working]
-pics=burner_i_??.png
-hotspot=54 54
+pics=burner_b_??.png
+hotspot=55 68
+playercolor=true
