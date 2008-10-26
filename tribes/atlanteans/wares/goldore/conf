@@ -1,6 +1,6 @@
 [global]
-descname=_"Goldore"
-help=_"This is the yellow goldore."
+descname=_"Gold Ore"
+help=_"This is the yellow gold ore."
 menu_pic=menu.png
 
 [idle]

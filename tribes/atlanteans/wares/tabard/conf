@@ -1,6 +1,6 @@
 [global]
-descname=_"Tabart"
-help=_"Every atlantian soldier has to wear the sign of his country on his or her breast."
+descname=_"Tabard"
+help=_"All atlantean soldiers have to wear the sign of their country on their breasts."
 menu_pic=menu.png
 
 [idle]

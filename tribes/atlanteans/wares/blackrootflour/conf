@@ -1,6 +1,6 @@
 [global]
-descname=_"Blackrootflour"
-help=_"Blackrootflour is produced out of blackroots and is one of three parts of the atlantian bread."
+descname=_"Blackroot Flour"
+help=_"Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
 menu_pic=menu.png
 
 [idle]

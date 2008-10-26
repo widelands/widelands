@@ -1,6 +1,6 @@
 [global]
-descname=_"Ironore"
-help=_"This is red ironore."
+descname=_"Iron Ore"
+help=_"This is red iron ore."
 menu_pic=menu.png
 
 [idle]
