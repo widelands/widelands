@@ -35,12 +35,15 @@ spidercloth=1
 
 [idle]
 pics=goldmine_i_??.png
-hotspot=66 76
+hotspot=51 55
+playercolor=true
 
 [working]
 pics=goldmine_i_??.png
-hotspot=66 76
+hotspot=51 55
+playercolor=true
 
 [build]
 pics=goldmine_i_??.png
-hotspot=66 76
+hotspot=51 55
+playercolor=true
