@@ -1,12 +1,12 @@
-# Widelands po/nl_NL/tribes/atlantids.po
+# Widelands po/nl_NL/tribes/atlanteans.po
 # Copyright (C) 2005-2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3296\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-09-06 10:01+0000\n"
+"POT-Creation-Date: 2008-10-26 17:36+0000\n"
 "PO-Revision-Date: 2008-08-21 21:45+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,632 +14,642 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../tribes/atlantids/buildings/bakery/conf:2
-msgid "Bakery"
-msgstr "Bakkerij"
-
-#: ../../../tribes/atlantids/buildings/blackroot_farm/conf:2
-msgid "Blackroot Farm"
-msgstr "Ereprijskwekerij"
-
-#: ../../../tribes/atlantids/buildings/burner/conf:2
-msgid "Charcoal Burner"
-msgstr "Houtskoolbrander"
-
-#: ../../../tribes/atlantids/buildings/castle/conf:2
-msgid "Castle"
-msgstr "Kasteel"
-
-#: ../../../tribes/atlantids/buildings/coalmine/conf:2
-msgid "Coal Mine"
-msgstr "Kolenmijn"
-
-#: ../../../tribes/atlantids/buildings/constructionsite/conf:5
-msgid "Construction Site"
-msgstr "Bouwplaats"
-
-#: ../../../tribes/atlantids/buildings/crystalmine/conf:2
-msgid "Crystal Mine"
-msgstr "Kristalmijn"
-
-#: ../../../tribes/atlantids/buildings/dungeon/conf:2
-msgid "Dungeon"
-msgstr "Kerker"
-
-#: ../../../tribes/atlantids/buildings/farm/conf:2
-msgid "Farm"
-msgstr "Boerderij"
-
-#: ../../../tribes/atlantids/buildings/fish_breeder/conf:2
-msgid "Fish Breeder Hut"
-msgstr "Viskwekershut"
-
-#: ../../../tribes/atlantids/buildings/fisher/conf:2
-msgid "Fisher Hut"
-msgstr "Vissershut"
-
-#: ../../../tribes/atlantids/buildings/forester/conf:2
-msgid "Forester Hut"
-msgstr "Boswachtershut"
-
-#: ../../../tribes/atlantids/buildings/goldmine/conf:2
-msgid "Gold Mine"
-msgstr "Goudmijn"
-
-#: ../../../tribes/atlantids/buildings/goldweaver/conf:2
-msgid "Goldweaver"
-msgstr "Goudwever"
-
-#: ../../../tribes/atlantids/buildings/guardhall/conf:2
-msgid "Guardhall"
-msgstr "Wachtlokaal"
-
-#: ../../../tribes/atlantids/buildings/guardhouse/conf:2
-msgid "Guardhouse"
-msgstr "Wachthuis"
-
-#: ../../../tribes/atlantids/buildings/headquarters/conf:2
-msgid "Headquarters"
-msgstr "Hoofdkwartier"
-
-#: ../../../tribes/atlantids/buildings/high_tower/conf:2
-msgid "High Tower"
-msgstr "Hoge Toren"
-
-#: ../../../tribes/atlantids/buildings/hunter/conf:2
-msgid "Hunter Hut"
-msgstr "Jagershut"
-
-#: ../../../tribes/atlantids/buildings/ironmine/conf:2
-msgid "Iron Mine"
-msgstr "IJzerertsmijn"
-
-#: ../../../tribes/atlantids/buildings/labyrinth/conf:2
-msgid "Labyrinth"
-msgstr "Labyrint"
-
-#: ../../../tribes/atlantids/buildings/mill/conf:2
-msgid "Mill"
-msgstr "Molen"
-
-#: ../../../tribes/atlantids/buildings/quarry/conf:2
-msgid "Quarry"
-msgstr "Steengroeve"
-
-#: ../../../tribes/atlantids/buildings/sawmill/conf:2
-msgid "Sawmill"
-msgstr "Houtzagerij"
-
-#: ../../../tribes/atlantids/buildings/small_tower/conf:2
-msgid "Small Tower"
-msgstr "Kleine Toren"
-
-#: ../../../tribes/atlantids/buildings/smelting_works/conf:2
-msgid "Smelting Works"
-msgstr "Hoogoven"
-
-#: ../../../tribes/atlantids/buildings/smokery/conf:2
-msgid "Smokery"
-msgstr "Rokerij"
-
-#: ../../../tribes/atlantids/buildings/spiderfarm/conf:2
-msgid "Spiderfarm"
-msgstr "Spinnenboerderij"
-
-#: ../../../tribes/atlantids/buildings/toolsmith/conf:2
-msgid "Toolsmith's Shop"
-msgstr "Werktuigsmid"
-
-#: ../../../tribes/atlantids/buildings/tower/conf:2
-msgid "Tower"
-msgstr "Toren"
-
-#: ../../../tribes/atlantids/buildings/warehouse/conf:2
-msgid "Warehouse"
-msgstr "Magazijn"
-
-#: ../../../tribes/atlantids/buildings/weaponsmith/conf:2
-msgid "Weapon Smithy"
-msgstr "Wapensmid"
-
-#: ../../../tribes/atlantids/buildings/weaving-mill/conf:2
-msgid "Weaving-Mill"
-msgstr "Weverij"
-
-#: ../../../tribes/atlantids/buildings/well/conf:2
-msgid "Well"
-msgstr "Put"
-
-#: ../../../tribes/atlantids/buildings/woodcutter/conf:2
-msgid "Woodcutter Hut"
-msgstr "Houthakkershut"
-
-#: ../../../tribes/atlantids/conf:18
-msgid "The Widelands Development Team"
-msgstr "Het Widelands Ontwikkelteam"
-
-#: ../../../tribes/atlantids/conf:19
-msgid "Atlanteans"
-msgstr "Atlantiërs"
-
-#: ../../../tribes/atlantids/conf:20
-msgid "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
-msgstr "Deze stam komt voor in de oudste verhalen. De dochters en zonen van Atlantis."
-
-#: ../../../tribes/atlantids/wares/advanced_shield/conf:2
-msgid "Advanced Shield"
-msgstr "Verbeterd Schild"
-
-#: ../../../tribes/atlantids/wares/advanced_shield/conf:3
-msgid "This shields are used by the best soldiers of the atlantids"
-msgstr "Deze schilden worden door de beste soldaten van de Atlantiden gebruikt."
-
-#: ../../../tribes/atlantids/wares/bakingtray/conf:2
-msgid "Bakingtray"
-msgstr "Baklade"
-
-#: ../../../tribes/atlantids/wares/bakingtray/conf:3
-msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-msgstr "De baklade is het gereedschap van de bakker, elke bakker moet er zelf één hebben. Deze wordt gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/blackroot/conf:2
-msgid "Blackroot"
-msgstr "Ereprijswortel"
-
-#: ../../../tribes/atlantids/wares/blackroot/conf:3
-msgid "Blackroots are a special kind of roots. The Atlantids like their strong taste and use its flour for making bread."
-msgstr "Ereprijswortels zijn een speciaal soort wortels. De Atlantiden houden van zijn sterke smaak en maken er bloem van om brood te bakken."
-
-#: ../../../tribes/atlantids/wares/blackrootflour/conf:2
-msgid "Blackrootflour"
-msgstr "Ereprijsbloem"
-
-#: ../../../tribes/atlantids/wares/blackrootflour/conf:3
-msgid "Blackrootflour is produced out of blackroots and is one of three parts of the atlantian bread."
-msgstr "Ereprijsbloem wordt gemaakt van de wortels van de ereprijs en is één van de drie ingrediënten van het atlantidenbrood."
-
-#: ../../../tribes/atlantids/wares/bread/conf:2
-msgid "Bread"
-msgstr "Brood"
-
-#: ../../../tribes/atlantids/wares/bread/conf:3
-msgid "This tasty bread is made out of corn- and blackrootflour and is one part of miners meal."
-msgstr "Dit smakelijke brood word gebakken van maïs- en ereprijsbloem en is een deel van een mijnwerkersmaaltijd."
-
-#: ../../../tribes/atlantids/wares/bucket/conf:2
-msgid "Buckets"
-msgstr "Emmers"
-
-#: ../../../tribes/atlantids/wares/bucket/conf:3
-msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr "Grote emmers voor de viskweker, geproduceerd door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/coal/conf:2
-msgid "Coal"
-msgstr "Kolen"
-
-#: ../../../tribes/atlantids/wares/coal/conf:3
-msgid "To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
-msgstr "Om het goede atlantidenstaal te maken is een heet vuur nodig, maar een houtvuur is niet heet genoeg - deze kool geeft de benodigde hitte."
-
-#: ../../../tribes/atlantids/wares/corn/conf:2
-msgid "Corn"
-msgstr "Maïs"
-
-#: ../../../tribes/atlantids/wares/corn/conf:3
-msgid "This corn is the base of the fine cornflour, that every atlatian baker needs for a good bread."
-msgstr "Deze maïs wordt gebruikt voor het fijne maïsbloem, dat elke antlantidenbakker nodig heeft voor een goed brood."
-
-#: ../../../tribes/atlantids/wares/cornflour/conf:2
-msgid "Cornflour"
-msgstr "Maïsbloem"
-
-#: ../../../tribes/atlantids/wares/cornflour/conf:3
-msgid "Cornflour is produced out of corn and is one of three parts of the atlantian bread."
-msgstr "Maïsbloem wordt gemaakt van maïs en is één van de drie ingrediënten van het altlantidenbrood."
-
-#: ../../../tribes/atlantids/wares/diamond/conf:2
-msgid "Diamond"
-msgstr "Diamant"
-
-#: ../../../tribes/atlantids/wares/diamond/conf:3
-msgid "This wonderful diamonds are used for some exclusive buildings and tools."
-msgstr "Deze prachtige diamanten worden gebruikt voor enkele exclusieve gebouwen en werktuigen."
-
-#: ../../../tribes/atlantids/wares/double_trident/conf:2
-msgid "Double Trident"
-msgstr "Dubbele drietand"
-
-#: ../../../tribes/atlantids/wares/double_trident/conf:3
-msgid "Already one of the best tridents of the atlantids. Only used by very good fighters."
-msgstr "Eén van de beste drietanden van de Atlantiden. Wordt alleen gebruikt door zeer goede strijders."
-
-#: ../../../tribes/atlantids/wares/fire_tongs/conf:2
-msgid "Fire Tongs"
-msgstr "Brandtang"
-
-#: ../../../tribes/atlantids/wares/fire_tongs/conf:3
-msgid "The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
-msgstr "De brandtang wordt gebruikt door de smelter in de hoogovens en wordt gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/fish/conf:2
-msgid "Fish"
-msgstr "Vis"
-
-#: ../../../tribes/atlantids/wares/fish/conf:3
-msgid "Fish is one of the biggest food-resources of the atlantids."
-msgstr "Vis is één van de grootste voedselbronnen van de Atlantiden."
-
-#: ../../../tribes/atlantids/wares/fishing_net/conf:2
-msgid "Fishing Net"
-msgstr "Visnet"
-
-#: ../../../tribes/atlantids/wares/fishing_net/conf:3
-msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr "Het visnet wordt gebruikt door de visser en gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/gold/conf:2
-msgid "Gold"
-msgstr "Goud"
-
-#: ../../../tribes/atlantids/wares/gold/conf:3
-msgid "Gold is one of the most valuable materials only important things are garnished with it."
-msgstr "Goud is één van de meest waardevolle materialen. Enkel belangrijke zaken worden hiermee versierd."
-
-#: ../../../tribes/atlantids/wares/golden_tabard/conf:2
-msgid "Golden Tabart"
-msgstr "Gouden Tabberd"
-
-#: ../../../tribes/atlantids/wares/golden_tabard/conf:3
-msgid "A special tabard for atlantian soldiers."
-msgstr "Een speciale tabberd voor atlantiërsoldaten."
-
-#: ../../../tribes/atlantids/wares/goldore/conf:2
-msgid "Goldore"
-msgstr "Gouderts"
-
-#: ../../../tribes/atlantids/wares/goldore/conf:3
-msgid "This is the yellow goldore."
-msgstr "Dit is de gele gouderts."
-
-#: ../../../tribes/atlantids/wares/goldyarn/conf:2
-msgid "Goldyarn"
-msgstr "Gouddraad"
-
-#: ../../../tribes/atlantids/wares/goldyarn/conf:3
-msgid "This yarn, made of gold, is used for weaving exclusive cloth."
-msgstr "Deze uit goud gemaakte draad wordt gebruikt om exclusieve stoffen te weven."
-
-#: ../../../tribes/atlantids/wares/hammer/conf:2
-msgid "Hammer"
-msgstr "Hamer"
-
-#: ../../../tribes/atlantids/wares/hammer/conf:3
-msgid "The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
-msgstr "De hamer is een noodzakelijk stuk gereedschap. Het wordt gebruikt door de geoloog, de bouwer en alle smeden. Zorg dat je er altijd een paar op voorraad hebt! Het wordt gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/heavy_double_trident/conf:2
-msgid "Heavy Double Trident"
-msgstr "Zware Dubbele Drietand"
-
-#: ../../../tribes/atlantids/wares/heavy_double_trident/conf:3
-msgid "This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it."
-msgstr "Dit is het gevaarlijkste wapen van het atlantidenleger. Alleen de allerbeste strijders kunnen ermee overweg."
-
-#: ../../../tribes/atlantids/wares/hook_pole/conf:2
-msgid "Hook pole"
-msgstr "Rookhaak"
-
-#: ../../../tribes/atlantids/wares/hook_pole/conf:3
-msgid "This hook pole is used by the smoker to hang up all the meat and fish to the top of the smoke-house. It is created by the toolsmith."
-msgstr "Deze rookhaak wordt gebruikt door de rokers om alle vlees en vis hoog op te hangen in het rookhuis. Hij wordt gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/hunting_bow/conf:2
-msgid "Hunting Bow"
-msgstr "Jachtboog"
-
-#: ../../../tribes/atlantids/wares/hunting_bow/conf:3
-msgid "This bow is used by the atlantian hunter."
-msgstr "Deze boog wordt gebruikt door de atlantidenjager."
-
-#: ../../../tribes/atlantids/wares/iron/conf:2
-msgid "Iron"
-msgstr "IJzer"
-
-#: ../../../tribes/atlantids/wares/iron/conf:3
-msgid "Weapons and Tools are made of iron."
-msgstr "Wapens en gereedsschap worden gemaakt van ijzer."
-
-#: ../../../tribes/atlantids/wares/ironore/conf:2
-msgid "Ironore"
-msgstr "IJzererts"
-
-#: ../../../tribes/atlantids/wares/ironore/conf:3
-msgid "This is red ironore."
-msgstr "Dit is rode ijzererts."
-
-#: ../../../tribes/atlantids/wares/light_trident/conf:2
-msgid "Light trident"
-msgstr "Lichte drietand"
-
-#: ../../../tribes/atlantids/wares/light_trident/conf:3
-msgid "This is the basic weapon for atlantian soldiers"
-msgstr "Dit is het standaardwapen voor atlantidensoldaten"
-
-#: ../../../tribes/atlantids/wares/long_trident/conf:2
-msgid "Long Trident"
-msgstr "Lange Drietand"
-
-#: ../../../tribes/atlantids/wares/long_trident/conf:3
-msgid "This is an advanced trident for more experienced soldiers."
-msgstr "Dit een verbeterde drietand voor ervaren strijders."
-
-#: ../../../tribes/atlantids/wares/meat/conf:2
-msgid "Meat"
-msgstr "Vlees"
-
-#: ../../../tribes/atlantids/wares/meat/conf:3
-msgid "Meat is one food-ressource of the Atlantids."
-msgstr "Vlees is een voedselbron voor de Atlantiden."
-
-#: ../../../tribes/atlantids/wares/milking_tongs/conf:2
-msgid "Milking Tongs"
-msgstr "Melktang"
-
-#: ../../../tribes/atlantids/wares/milking_tongs/conf:3
-msgid "Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
-msgstr "Melktangen worden gebruikt door de spinnenkweker om de spinnen te melken. Ze worden gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/mountain_crystal/conf:2
-msgid "Mountain Crystal"
-msgstr "Bergkristal"
-
-#: ../../../tribes/atlantids/wares/mountain_crystal/conf:3
-msgid "These transparent mountain crystals are used for some exclusive buildings and tools."
-msgstr "Deze doorzichtige bergkristallen worden gebruikt voor enkele exclusieve gebouwen en werktuigen."
-
-#: ../../../tribes/atlantids/wares/pick/conf:2
-msgid "Pick"
-msgstr "Punthouweel"
-
-#: ../../../tribes/atlantids/wares/pick/conf:3
-msgid "Picks are used by stonecutters and miners. It is produced by the toolsmith."
-msgstr "Punthouwelen worden gebruikt door steenhouwers en mijnwerkers. Ze worden gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/planks/conf:2
-msgid "Planks"
-msgstr "Planken"
-
-#: ../../../tribes/atlantids/wares/planks/conf:3
-msgid "Planks are an important build material of the Atlantids."
-msgstr "Planken zijn een belangrijk bouwmateriaal voor de Atlantiden."
-
-#: ../../../tribes/atlantids/wares/saw/conf:2
-msgid "Saw"
-msgstr "Zaag"
-
-#: ../../../tribes/atlantids/wares/saw/conf:3
-msgid "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith."
-msgstr "Zagen worden gebruikt door de zager, de houthakker en de werktuigsmid. Ze worden gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/scythe/conf:2
-msgid "Scythe"
-msgstr "Zeis"
-
-#: ../../../tribes/atlantids/wares/scythe/conf:3
-msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "De zeis is het gereedschap van de boeren. Het wordt gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/shovel/conf:2
-msgid "Shovel"
-msgstr "Schop"
-
-#: ../../../tribes/atlantids/wares/shovel/conf:3
-msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
-msgstr "Schoppen zijn nodig om goed met planten om te gaan. Daarom maken de boswachter en de ereprijskweker er gebruik van. Ze worden gemaakt door de werktuigsmid."
-
-#: ../../../tribes/atlantids/wares/smoked_fish/conf:2
-msgid "Smoked fish"
-msgstr "Gerookte vis"
-
-#: ../../../tribes/atlantids/wares/smoked_fish/conf:3
-msgid "This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
-msgstr "Dit is gerookte vis - Aangezien geen enkele Atlantide rauwe vis lekker vindt, is roken de meest gebruikte manier om het eetbaar te maken."
-
-#: ../../../tribes/atlantids/wares/smoked_meat/conf:2
-msgid "Smoked meat"
-msgstr "Gerookt vlees"
-
-#: ../../../tribes/atlantids/wares/smoked_meat/conf:3
-msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
-msgstr "Dit is gerookt vlees - Aangezien geen enkele Atlantide rauw vlees lekker vindt, is roken de meest gebruikte manier om het eetbaar te maken."
-
-#: ../../../tribes/atlantids/wares/spidercloth/conf:2
-msgid "Spidercloth"
-msgstr "Spinnendoek"
-
-#: ../../../tribes/atlantids/wares/spidercloth/conf:3
-msgid "Cloth made out of spideryarn."
-msgstr "Doek gemaakt uit spinnengaren."
-
-#: ../../../tribes/atlantids/wares/spideryarn/conf:2
-msgid "Spideryarn"
-msgstr "Spinnengaren"
-
-#: ../../../tribes/atlantids/wares/spideryarn/conf:3
-msgid "This yarn is produced by spiders, which are breed on spiderfarms."
-msgstr "Dit garen wordt gemaakt door spinnen die worden gekweekt op spinnenboerderijen."
-
-#: ../../../tribes/atlantids/wares/steel_shield/conf:2
-msgid "Steel Shield"
-msgstr "Stalen Schild"
-
-#: ../../../tribes/atlantids/wares/steel_shield/conf:3
-msgid "This steel shield is used by experienced soldiers"
-msgstr "Dit stalen schild wordt gebruikt door ervaren soldaten"
-
-#: ../../../tribes/atlantids/wares/steel_trident/conf:2
-msgid "Steel Trident"
-msgstr "Stalen Drietand"
-
-#: ../../../tribes/atlantids/wares/steel_trident/conf:3
-msgid "This is the medium trident - used by advanced soldiers."
-msgstr "Dit is de middelste drietand - gebruikt door gevorderde soldaten."
-
-#: ../../../tribes/atlantids/wares/stone/conf:2
-msgid "Stone"
-msgstr "Ruwe steen"
-
-#: ../../../tribes/atlantids/wares/stone/conf:3
-msgid "Stone is one basic build ware of the Atlantids."
-msgstr "Steen is een standaard bouwmateriaal van de Atlantiden."
-
-#: ../../../tribes/atlantids/wares/tabard/conf:2
-msgid "Tabart"
-msgstr "Tabberd"
-
-#: ../../../tribes/atlantids/wares/tabard/conf:3
-msgid "Every atlantian soldier has to wear the sign of his country on his or her breast."
-msgstr "Elke atlantidensoldaat moet het teken van zijn land op zijn of haar borst dragen."
-
-#: ../../../tribes/atlantids/wares/trunk/conf:2
-msgid "Trunk"
-msgstr "Boomstam"
-
-#: ../../../tribes/atlantids/wares/trunk/conf:3
-msgid "Trunks are the base for planks, which are used in nearly every building of the atlantids."
-msgstr "Boomstammen zijn de basis voor planken die worden gebruikt in praktisch elk gebouw van de Atlantiden."
-
-#: ../../../tribes/atlantids/wares/water/conf:2
-msgid "Water"
-msgstr "Water"
-
-#: ../../../tribes/atlantids/wares/water/conf:3
-msgid "Water is the most essential essence for life! This water is used in many places, for example to make bread."
-msgstr "Water is de meest noodzakelijk stof voor leven! Dit water wordt voor veel zaken gebruikt, zoals het bakken van brood."
-
-#: ../../../tribes/atlantids/workers/armoursmith/conf:2
-#: ../../../tribes/atlantids/buildings/armoursmith/conf:2
+#: ../../../tribes/atlanteans/buildings/armoursmith/conf:2
+#: ../../../tribes/atlanteans/workers/armoursmith/conf:2
 msgid "Armoursmith"
 msgstr "Harnassensmid"
 
-#: ../../../tribes/atlantids/workers/baker/conf:2
+#: ../../../tribes/atlanteans/buildings/bakery/conf:2
+msgid "Bakery"
+msgstr "Bakkerij"
+
+#: ../../../tribes/atlanteans/buildings/blackroot_farm/conf:2
+msgid "Blackroot Farm"
+msgstr "Ereprijskwekerij"
+
+#: ../../../tribes/atlanteans/buildings/burner/conf:2
+msgid "Charcoal Burner"
+msgstr "Houtskoolbrander"
+
+#: ../../../tribes/atlanteans/buildings/castle/conf:2
+msgid "Castle"
+msgstr "Kasteel"
+
+#: ../../../tribes/atlanteans/buildings/coalmine/conf:2
+msgid "Coal Mine"
+msgstr "Kolenmijn"
+
+#: ../../../tribes/atlanteans/buildings/constructionsite/conf:5
+msgid "Construction Site"
+msgstr "Bouwplaats"
+
+#: ../../../tribes/atlanteans/buildings/crystalmine/conf:2
+msgid "Crystal Mine"
+msgstr "Kristalmijn"
+
+#: ../../../tribes/atlanteans/buildings/dungeon/conf:2
+msgid "Dungeon"
+msgstr "Kerker"
+
+#: ../../../tribes/atlanteans/buildings/farm/conf:2
+msgid "Farm"
+msgstr "Boerderij"
+
+#: ../../../tribes/atlanteans/buildings/fish_breeder/conf:2
+msgid "Fish Breeder Hut"
+msgstr "Viskwekershut"
+
+#: ../../../tribes/atlanteans/buildings/fisher/conf:2
+msgid "Fisher Hut"
+msgstr "Vissershut"
+
+#: ../../../tribes/atlanteans/buildings/forester/conf:2
+msgid "Forester Hut"
+msgstr "Boswachtershut"
+
+#: ../../../tribes/atlanteans/buildings/goldmine/conf:2
+msgid "Gold Mine"
+msgstr "Goudmijn"
+
+#: ../../../tribes/atlanteans/buildings/goldweaver/conf:2
+msgid "Goldweaver"
+msgstr "Goudwever"
+
+#: ../../../tribes/atlanteans/buildings/guardhall/conf:2
+msgid "Guardhall"
+msgstr "Wachtlokaal"
+
+#: ../../../tribes/atlanteans/buildings/guardhouse/conf:2
+msgid "Guardhouse"
+msgstr "Wachthuis"
+
+#: ../../../tribes/atlanteans/buildings/headquarters/conf:2
+msgid "Headquarters"
+msgstr "Hoofdkwartier"
+
+#: ../../../tribes/atlanteans/buildings/high_tower/conf:2
+msgid "High Tower"
+msgstr "Hoge Toren"
+
+#: ../../../tribes/atlanteans/buildings/hunter/conf:2
+msgid "Hunter Hut"
+msgstr "Jagershut"
+
+#: ../../../tribes/atlanteans/buildings/ironmine/conf:2
+msgid "Iron Mine"
+msgstr "IJzerertsmijn"
+
+#: ../../../tribes/atlanteans/buildings/labyrinth/conf:2
+msgid "Labyrinth"
+msgstr "Labyrint"
+
+#: ../../../tribes/atlanteans/buildings/mill/conf:2
+msgid "Mill"
+msgstr "Molen"
+
+#: ../../../tribes/atlanteans/buildings/quarry/conf:2
+msgid "Quarry"
+msgstr "Steengroeve"
+
+#: ../../../tribes/atlanteans/buildings/sawmill/conf:2
+msgid "Sawmill"
+msgstr "Houtzagerij"
+
+#: ../../../tribes/atlanteans/buildings/small_tower/conf:2
+msgid "Small Tower"
+msgstr "Kleine Toren"
+
+#: ../../../tribes/atlanteans/buildings/smelting_works/conf:2
+msgid "Smelting Works"
+msgstr "Hoogoven"
+
+#: ../../../tribes/atlanteans/buildings/smokery/conf:2
+msgid "Smokery"
+msgstr "Rokerij"
+
+#: ../../../tribes/atlanteans/buildings/spiderfarm/conf:2
+msgid "Spiderfarm"
+msgstr "Spinnenboerderij"
+
+#: ../../../tribes/atlanteans/buildings/toolsmith/conf:2
+msgid "Toolsmith's Shop"
+msgstr "Werktuigsmid"
+
+#: ../../../tribes/atlanteans/buildings/tower/conf:2
+msgid "Tower"
+msgstr "Toren"
+
+#: ../../../tribes/atlanteans/buildings/warehouse/conf:2
+msgid "Warehouse"
+msgstr "Magazijn"
+
+#: ../../../tribes/atlanteans/buildings/weaponsmith/conf:2
+msgid "Weapon Smithy"
+msgstr "Wapensmid"
+
+#: ../../../tribes/atlanteans/buildings/weaving-mill/conf:2
+msgid "Weaving-Mill"
+msgstr "Weverij"
+
+#: ../../../tribes/atlanteans/buildings/well/conf:2
+msgid "Well"
+msgstr "Put"
+
+#: ../../../tribes/atlanteans/buildings/woodcutter/conf:2
+msgid "Woodcutter Hut"
+msgstr "Houthakkershut"
+
+#: ../../../tribes/atlanteans/conf:18
+msgid "The Widelands Development Team"
+msgstr "Het Widelands Ontwikkelteam"
+
+#: ../../../tribes/atlanteans/conf:19
+msgid "Atlanteans"
+msgstr "Atlantiërs"
+
+#: ../../../tribes/atlanteans/conf:20
+msgid "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
+msgstr "Deze stam komt voor in de oudste verhalen. De dochters en zonen van Atlantis."
+
+#: ../../../tribes/atlanteans/wares/advanced_shield/conf:2
+msgid "Advanced Shield"
+msgstr "Verbeterd Schild"
+
+#: ../../../tribes/atlanteans/wares/advanced_shield/conf:3
+msgid "This shields are used by the best soldiers of the atlantids"
+msgstr "Deze schilden worden door de beste soldaten van de Atlantiden gebruikt."
+
+#: ../../../tribes/atlanteans/wares/bakingtray/conf:2
+msgid "Bakingtray"
+msgstr "Baklade"
+
+#: ../../../tribes/atlanteans/wares/bakingtray/conf:3
+msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
+msgstr "De baklade is het gereedschap van de bakker, elke bakker moet er zelf één hebben. Deze wordt gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/blackroot/conf:2
+msgid "Blackroot"
+msgstr "Ereprijswortel"
+
+#: ../../../tribes/atlanteans/wares/blackroot/conf:3
+msgid "Blackroots are a special kind of roots. The Atlantids like their strong taste and use its flour for making bread."
+msgstr "Ereprijswortels zijn een speciaal soort wortels. De Atlantiden houden van zijn sterke smaak en maken er bloem van om brood te bakken."
+
+#: ../../../tribes/atlanteans/wares/blackrootflour/conf:2
+#, fuzzy
+msgid "Blackroot Flour"
+msgstr "Ereprijsbloem"
+
+#: ../../../tribes/atlanteans/wares/blackrootflour/conf:3
+#, fuzzy
+msgid "Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
+msgstr "Ereprijsbloem wordt gemaakt van de wortels van de ereprijs en is één van de drie ingrediënten van het atlantidenbrood."
+
+#: ../../../tribes/atlanteans/wares/bread/conf:2
+msgid "Bread"
+msgstr "Brood"
+
+#: ../../../tribes/atlanteans/wares/bread/conf:3
+msgid "This tasty bread is made out of corn- and blackrootflour and is one part of miners meal."
+msgstr "Dit smakelijke brood word gebakken van maïs- en ereprijsbloem en is een deel van een mijnwerkersmaaltijd."
+
+#: ../../../tribes/atlanteans/wares/bucket/conf:2
+msgid "Buckets"
+msgstr "Emmers"
+
+#: ../../../tribes/atlanteans/wares/bucket/conf:3
+msgid "Big buckets for the fish breeder - produced by the toolsmith."
+msgstr "Grote emmers voor de viskweker, geproduceerd door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/coal/conf:2
+msgid "Coal"
+msgstr "Kolen"
+
+#: ../../../tribes/atlanteans/wares/coal/conf:3
+msgid "To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
+msgstr "Om het goede atlantidenstaal te maken is een heet vuur nodig, maar een houtvuur is niet heet genoeg - deze kool geeft de benodigde hitte."
+
+#: ../../../tribes/atlanteans/wares/corn/conf:2
+msgid "Corn"
+msgstr "Maïs"
+
+#: ../../../tribes/atlanteans/wares/corn/conf:3
+msgid "This corn is the base of the fine cornflour, that every atlatian baker needs for a good bread."
+msgstr "Deze maïs wordt gebruikt voor het fijne maïsbloem, dat elke antlantidenbakker nodig heeft voor een goed brood."
+
+#: ../../../tribes/atlanteans/wares/cornflour/conf:2
+msgid "Cornflour"
+msgstr "Maïsbloem"
+
+#: ../../../tribes/atlanteans/wares/cornflour/conf:3
+msgid "Cornflour is produced out of corn and is one of three parts of the atlantian bread."
+msgstr "Maïsbloem wordt gemaakt van maïs en is één van de drie ingrediënten van het altlantidenbrood."
+
+#: ../../../tribes/atlanteans/wares/diamond/conf:2
+msgid "Diamond"
+msgstr "Diamant"
+
+#: ../../../tribes/atlanteans/wares/diamond/conf:3
+msgid "This wonderful diamonds are used for some exclusive buildings and tools."
+msgstr "Deze prachtige diamanten worden gebruikt voor enkele exclusieve gebouwen en werktuigen."
+
+#: ../../../tribes/atlanteans/wares/double_trident/conf:2
+msgid "Double Trident"
+msgstr "Dubbele drietand"
+
+#: ../../../tribes/atlanteans/wares/double_trident/conf:3
+msgid "Already one of the best tridents of the atlantids. Only used by very good fighters."
+msgstr "Eén van de beste drietanden van de Atlantiden. Wordt alleen gebruikt door zeer goede strijders."
+
+#: ../../../tribes/atlanteans/wares/fire_tongs/conf:2
+msgid "Fire Tongs"
+msgstr "Brandtang"
+
+#: ../../../tribes/atlanteans/wares/fire_tongs/conf:3
+msgid "The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
+msgstr "De brandtang wordt gebruikt door de smelter in de hoogovens en wordt gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/fish/conf:2
+msgid "Fish"
+msgstr "Vis"
+
+#: ../../../tribes/atlanteans/wares/fish/conf:3
+msgid "Fish is one of the biggest food-resources of the atlantids."
+msgstr "Vis is één van de grootste voedselbronnen van de Atlantiden."
+
+#: ../../../tribes/atlanteans/wares/fishing_net/conf:2
+msgid "Fishing Net"
+msgstr "Visnet"
+
+#: ../../../tribes/atlanteans/wares/fishing_net/conf:3
+msgid "The fishing net is used by the fisher and produced by the toolsmith."
+msgstr "Het visnet wordt gebruikt door de visser en gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/gold/conf:2
+msgid "Gold"
+msgstr "Goud"
+
+#: ../../../tribes/atlanteans/wares/gold/conf:3
+msgid "Gold is one of the most valuable materials only important things are garnished with it."
+msgstr "Goud is één van de meest waardevolle materialen. Enkel belangrijke zaken worden hiermee versierd."
+
+#: ../../../tribes/atlanteans/wares/golden_tabard/conf:2
+#, fuzzy
+msgid "Golden Tabard"
+msgstr "Gouden Tabberd"
+
+#: ../../../tribes/atlanteans/wares/golden_tabard/conf:3
+msgid "A special tabard for atlantian soldiers."
+msgstr "Een speciale tabberd voor atlantiërsoldaten."
+
+#: ../../../tribes/atlanteans/wares/goldore/conf:2
+#, fuzzy
+msgid "Gold Ore"
+msgstr "Gouderts"
+
+#: ../../../tribes/atlanteans/wares/goldore/conf:3
+#, fuzzy
+msgid "This is the yellow gold ore."
+msgstr "Dit is de gele gouderts."
+
+#: ../../../tribes/atlanteans/wares/goldyarn/conf:2
+#, fuzzy
+msgid "Gold Yarn"
+msgstr "Gouddraad"
+
+#: ../../../tribes/atlanteans/wares/goldyarn/conf:3
+msgid "This yarn, made of gold, is used for weaving exclusive cloth."
+msgstr "Deze uit goud gemaakte draad wordt gebruikt om exclusieve stoffen te weven."
+
+#: ../../../tribes/atlanteans/wares/hammer/conf:2
+msgid "Hammer"
+msgstr "Hamer"
+
+#: ../../../tribes/atlanteans/wares/hammer/conf:3
+msgid "The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
+msgstr "De hamer is een noodzakelijk stuk gereedschap. Het wordt gebruikt door de geoloog, de bouwer en alle smeden. Zorg dat je er altijd een paar op voorraad hebt! Het wordt gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/heavy_double_trident/conf:2
+msgid "Heavy Double Trident"
+msgstr "Zware Dubbele Drietand"
+
+#: ../../../tribes/atlanteans/wares/heavy_double_trident/conf:3
+msgid "This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it."
+msgstr "Dit is het gevaarlijkste wapen van het atlantidenleger. Alleen de allerbeste strijders kunnen ermee overweg."
+
+#: ../../../tribes/atlanteans/wares/hook_pole/conf:2
+msgid "Hook pole"
+msgstr "Rookhaak"
+
+#: ../../../tribes/atlanteans/wares/hook_pole/conf:3
+msgid "This hook pole is used by the smoker to hang up all the meat and fish to the top of the smoke-house. It is created by the toolsmith."
+msgstr "Deze rookhaak wordt gebruikt door de rokers om alle vlees en vis hoog op te hangen in het rookhuis. Hij wordt gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/hunting_bow/conf:2
+msgid "Hunting Bow"
+msgstr "Jachtboog"
+
+#: ../../../tribes/atlanteans/wares/hunting_bow/conf:3
+msgid "This bow is used by the atlantian hunter."
+msgstr "Deze boog wordt gebruikt door de atlantidenjager."
+
+#: ../../../tribes/atlanteans/wares/iron/conf:2
+msgid "Iron"
+msgstr "IJzer"
+
+#: ../../../tribes/atlanteans/wares/iron/conf:3
+msgid "Weapons and Tools are made of iron."
+msgstr "Wapens en gereedsschap worden gemaakt van ijzer."
+
+#: ../../../tribes/atlanteans/wares/ironore/conf:2
+#, fuzzy
+msgid "Iron Ore"
+msgstr "IJzererts"
+
+#: ../../../tribes/atlanteans/wares/ironore/conf:3
+#, fuzzy
+msgid "This is red iron ore."
+msgstr "Dit is rode ijzererts."
+
+#: ../../../tribes/atlanteans/wares/light_trident/conf:2
+msgid "Light trident"
+msgstr "Lichte drietand"
+
+#: ../../../tribes/atlanteans/wares/light_trident/conf:3
+msgid "This is the basic weapon for atlantian soldiers"
+msgstr "Dit is het standaardwapen voor atlantidensoldaten"
+
+#: ../../../tribes/atlanteans/wares/long_trident/conf:2
+msgid "Long Trident"
+msgstr "Lange Drietand"
+
+#: ../../../tribes/atlanteans/wares/long_trident/conf:3
+msgid "This is an advanced trident for more experienced soldiers."
+msgstr "Dit een verbeterde drietand voor ervaren strijders."
+
+#: ../../../tribes/atlanteans/wares/meat/conf:2
+msgid "Meat"
+msgstr "Vlees"
+
+#: ../../../tribes/atlanteans/wares/meat/conf:3
+msgid "Meat is one food-ressource of the Atlantids."
+msgstr "Vlees is een voedselbron voor de Atlantiden."
+
+#: ../../../tribes/atlanteans/wares/milking_tongs/conf:2
+msgid "Milking Tongs"
+msgstr "Melktang"
+
+#: ../../../tribes/atlanteans/wares/milking_tongs/conf:3
+msgid "Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
+msgstr "Melktangen worden gebruikt door de spinnenkweker om de spinnen te melken. Ze worden gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/mountain_crystal/conf:2
+msgid "Mountain Crystal"
+msgstr "Bergkristal"
+
+#: ../../../tribes/atlanteans/wares/mountain_crystal/conf:3
+msgid "These transparent mountain crystals are used for some exclusive buildings and tools."
+msgstr "Deze doorzichtige bergkristallen worden gebruikt voor enkele exclusieve gebouwen en werktuigen."
+
+#: ../../../tribes/atlanteans/wares/pick/conf:2
+msgid "Pick"
+msgstr "Punthouweel"
+
+#: ../../../tribes/atlanteans/wares/pick/conf:3
+msgid "Picks are used by stonecutters and miners. It is produced by the toolsmith."
+msgstr "Punthouwelen worden gebruikt door steenhouwers en mijnwerkers. Ze worden gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/planks/conf:2
+msgid "Planks"
+msgstr "Planken"
+
+#: ../../../tribes/atlanteans/wares/planks/conf:3
+msgid "Planks are an important build material of the Atlantids."
+msgstr "Planken zijn een belangrijk bouwmateriaal voor de Atlantiden."
+
+#: ../../../tribes/atlanteans/wares/saw/conf:2
+msgid "Saw"
+msgstr "Zaag"
+
+#: ../../../tribes/atlanteans/wares/saw/conf:3
+msgid "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith."
+msgstr "Zagen worden gebruikt door de zager, de houthakker en de werktuigsmid. Ze worden gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/scythe/conf:2
+msgid "Scythe"
+msgstr "Zeis"
+
+#: ../../../tribes/atlanteans/wares/scythe/conf:3
+msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr "De zeis is het gereedschap van de boeren. Het wordt gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/shovel/conf:2
+msgid "Shovel"
+msgstr "Schop"
+
+#: ../../../tribes/atlanteans/wares/shovel/conf:3
+msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
+msgstr "Schoppen zijn nodig om goed met planten om te gaan. Daarom maken de boswachter en de ereprijskweker er gebruik van. Ze worden gemaakt door de werktuigsmid."
+
+#: ../../../tribes/atlanteans/wares/smoked_fish/conf:2
+msgid "Smoked fish"
+msgstr "Gerookte vis"
+
+#: ../../../tribes/atlanteans/wares/smoked_fish/conf:3
+msgid "This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
+msgstr "Dit is gerookte vis - Aangezien geen enkele Atlantide rauwe vis lekker vindt, is roken de meest gebruikte manier om het eetbaar te maken."
+
+#: ../../../tribes/atlanteans/wares/smoked_meat/conf:2
+msgid "Smoked meat"
+msgstr "Gerookt vlees"
+
+#: ../../../tribes/atlanteans/wares/smoked_meat/conf:3
+msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
+msgstr "Dit is gerookt vlees - Aangezien geen enkele Atlantide rauw vlees lekker vindt, is roken de meest gebruikte manier om het eetbaar te maken."
+
+#: ../../../tribes/atlanteans/wares/spidercloth/conf:2
+msgid "Spidercloth"
+msgstr "Spinnendoek"
+
+#: ../../../tribes/atlanteans/wares/spidercloth/conf:3
+msgid "Cloth made out of spideryarn."
+msgstr "Doek gemaakt uit spinnengaren."
+
+#: ../../../tribes/atlanteans/wares/spideryarn/conf:2
+msgid "Spideryarn"
+msgstr "Spinnengaren"
+
+#: ../../../tribes/atlanteans/wares/spideryarn/conf:3
+msgid "This yarn is produced by spiders, which are breed on spiderfarms."
+msgstr "Dit garen wordt gemaakt door spinnen die worden gekweekt op spinnenboerderijen."
+
+#: ../../../tribes/atlanteans/wares/steel_shield/conf:2
+msgid "Steel Shield"
+msgstr "Stalen Schild"
+
+#: ../../../tribes/atlanteans/wares/steel_shield/conf:3
+msgid "This steel shield is used by experienced soldiers"
+msgstr "Dit stalen schild wordt gebruikt door ervaren soldaten"
+
+#: ../../../tribes/atlanteans/wares/steel_trident/conf:2
+msgid "Steel Trident"
+msgstr "Stalen Drietand"
+
+#: ../../../tribes/atlanteans/wares/steel_trident/conf:3
+msgid "This is the medium trident - used by advanced soldiers."
+msgstr "Dit is de middelste drietand - gebruikt door gevorderde soldaten."
+
+#: ../../../tribes/atlanteans/wares/stone/conf:2
+msgid "Stone"
+msgstr "Ruwe steen"
+
+#: ../../../tribes/atlanteans/wares/stone/conf:3
+msgid "Stone is one basic build ware of the Atlantids."
+msgstr "Steen is een standaard bouwmateriaal van de Atlantiden."
+
+#: ../../../tribes/atlanteans/wares/tabard/conf:2
+#, fuzzy
+msgid "Tabard"
+msgstr "Tabberd"
+
+#: ../../../tribes/atlanteans/wares/tabard/conf:3
+#, fuzzy
+msgid "All atlantean soldiers have to wear the sign of their country on their breasts."
+msgstr "Elke atlantidensoldaat moet het teken van zijn land op zijn of haar borst dragen."
+
+#: ../../../tribes/atlanteans/wares/trunk/conf:2
+msgid "Trunk"
+msgstr "Boomstam"
+
+#: ../../../tribes/atlanteans/wares/trunk/conf:3
+msgid "Trunks are the base for planks, which are used in nearly every building of the atlantids."
+msgstr "Boomstammen zijn de basis voor planken die worden gebruikt in praktisch elk gebouw van de Atlantiden."
+
+#: ../../../tribes/atlanteans/wares/water/conf:2
+msgid "Water"
+msgstr "Water"
+
+#: ../../../tribes/atlanteans/wares/water/conf:3
+msgid "Water is the most essential essence for life! This water is used in many places, for example to make bread."
+msgstr "Water is de meest noodzakelijk stof voor leven! Dit water wordt voor veel zaken gebruikt, zoals het bakken van brood."
+
+#: ../../../tribes/atlanteans/workers/baker/conf:2
 msgid "Baker"
 msgstr "Bakker"
 
-#: ../../../tribes/atlantids/workers/blackroot_farmer/conf:2
+#: ../../../tribes/atlanteans/workers/blackroot_farmer/conf:2
 msgid "Blackroot farmer"
 msgstr "Ereprijskweker"
 
-#: ../../../tribes/atlantids/workers/builder/conf:2
+#: ../../../tribes/atlanteans/workers/builder/conf:2
 msgid "Builder"
 msgstr "Bouwvakker"
 
-#: ../../../tribes/atlantids/workers/burner/conf:2
+#: ../../../tribes/atlanteans/workers/burner/conf:2
 msgid "Burner"
 msgstr "Brander"
 
-#: ../../../tribes/atlantids/workers/carrier/conf:2
+#: ../../../tribes/atlanteans/workers/carrier/conf:2
 msgid "Carrier"
 msgstr "Drager"
 
-#: ../../../tribes/atlantids/workers/farmer/conf:2
+#: ../../../tribes/atlanteans/workers/farmer/conf:2
 msgid "Farmer"
 msgstr "Boer"
 
-#: ../../../tribes/atlantids/workers/fish_breeder/conf:2
+#: ../../../tribes/atlanteans/workers/fish_breeder/conf:2
 msgid "Fish Breeder"
 msgstr "Viskweker"
 
-#: ../../../tribes/atlantids/workers/fish_breeder/conf:3
+#: ../../../tribes/atlanteans/workers/fish_breeder/conf:3
 msgid "Breeds fish"
 msgstr "Kweekt vis"
 
-#: ../../../tribes/atlantids/workers/fisher/conf:2
+#: ../../../tribes/atlanteans/workers/fisher/conf:2
 msgid "Fisher"
 msgstr "Visser"
 
-#: ../../../tribes/atlantids/workers/fisher/conf:3
+#: ../../../tribes/atlanteans/workers/fisher/conf:3
 msgid "The fisher fishes delicious fish."
 msgstr "De visser vangt heerlijke vis."
 
-#: ../../../tribes/atlantids/workers/forester/conf:2
+#: ../../../tribes/atlanteans/workers/forester/conf:2
 msgid "Forester"
 msgstr "Boswachter"
 
-#: ../../../tribes/atlantids/workers/forester/conf:3
+#: ../../../tribes/atlanteans/workers/forester/conf:3
 msgid "Plants trees."
 msgstr "Plant bomen."
 
-#: ../../../tribes/atlantids/workers/geologist/conf:2
+#: ../../../tribes/atlanteans/workers/geologist/conf:2
 msgid "Geologist"
 msgstr "Geoloog"
 
-#: ../../../tribes/atlantids/workers/hunter/conf:2
+#: ../../../tribes/atlanteans/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jager"
 
-#: ../../../tribes/atlantids/workers/miller/conf:2
+#: ../../../tribes/atlanteans/workers/miller/conf:2
 msgid "Miller"
 msgstr "Molenaar"
 
-#: ../../../tribes/atlantids/workers/miner/conf:2
+#: ../../../tribes/atlanteans/workers/miner/conf:2
 msgid "Miner"
 msgstr "Mijnwerker"
 
-#: ../../../tribes/atlantids/workers/sawyer/conf:2
+#: ../../../tribes/atlanteans/workers/sawyer/conf:2
 msgid "Sawyer"
 msgstr "Zager"
 
-#: ../../../tribes/atlantids/workers/smelter/conf:2
+#: ../../../tribes/atlanteans/workers/smelter/conf:2
 msgid "Smelter"
 msgstr "Smelter"
 
-#: ../../../tribes/atlantids/workers/smoker/conf:2
+#: ../../../tribes/atlanteans/workers/smoker/conf:2
 msgid "Smoker"
 msgstr "Roker"
 
-#: ../../../tribes/atlantids/workers/soldier/conf:2
+#: ../../../tribes/atlanteans/workers/soldier/conf:2
 msgid "Soldier"
 msgstr "Soldaat"
 
-#: ../../../tribes/atlantids/workers/spiderbreeder/conf:2
+#: ../../../tribes/atlanteans/workers/spiderbreeder/conf:2
 msgid "Spiderbreeder"
 msgstr "Spinnenkweker"
 
-#: ../../../tribes/atlantids/workers/stonecutter/conf:2
+#: ../../../tribes/atlanteans/workers/stonecutter/conf:2
 msgid "Stonecutter"
 msgstr "Steenhouwer"
 
-#: ../../../tribes/atlantids/workers/stonecutter/conf:3
+#: ../../../tribes/atlanteans/workers/stonecutter/conf:3
 msgid "Cuts raw pieces of granit out of laying stones."
 msgstr "Houwt stukken graniet uit  gesteente."
 
-#: ../../../tribes/atlantids/workers/toolsmith/conf:2
+#: ../../../tribes/atlanteans/workers/toolsmith/conf:2
 msgid "Toolsmith"
 msgstr "Werktuigsmid"
 
-#: ../../../tribes/atlantids/workers/trainer/conf:2
+#: ../../../tribes/atlanteans/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Trainer"
 
-#: ../../../tribes/atlantids/workers/weaponsmith/conf:2
+#: ../../../tribes/atlanteans/workers/weaponsmith/conf:2
 msgid "Weaponsmith"
 msgstr "Wapensmid"
 
-#: ../../../tribes/atlantids/workers/weaver/conf:2
+#: ../../../tribes/atlanteans/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Wever"
 
-#: ../../../tribes/atlantids/workers/weaver/conf:3
+#: ../../../tribes/atlanteans/workers/weaver/conf:3
 msgid "Produces cloth for buildings, ships and soldiers"
 msgstr "Produceert doek voor gebouwen, schepen en soldaten"
 
-#: ../../../tribes/atlantids/workers/woodcutter/conf:2
+#: ../../../tribes/atlanteans/workers/woodcutter/conf:2
 msgid "Woodcutter"
 msgstr "Houthakker"
 
-#: ../../../tribes/atlantids/workers/woodcutter/conf:3
+#: ../../../tribes/atlanteans/workers/woodcutter/conf:3
 msgid "Fells trees."
 msgstr "Kapt bomen."
 

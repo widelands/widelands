@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3435\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-25 12:47+0000\n"
-"PO-Revision-Date: 2008-09-25 22:00+0100\n"
+"POT-Creation-Date: 2008-10-26 17:40+0000\n"
+"PO-Revision-Date: 2008-10-26 18:27+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -196,11 +196,11 @@ msgid "Blackroots are a special kind of roots. The Atlantids like their strong t
 msgstr "Schwarzwurzeln sind eine spezielle Wurzelart. Die Atlanter mögen den starken Geschmack und benutzen gemahlene Schwarzwurzeln beim backen ihrer Brote."
 
 #: ../../../tribes/atlanteans/wares/blackrootflour/conf:2
-msgid "Blackrootflour"
+msgid "Blackroot Flour"
 msgstr "Schwarzwurzelmehl"
 
 #: ../../../tribes/atlanteans/wares/blackrootflour/conf:3
-msgid "Blackrootflour is produced out of blackroots and is one of three parts of the atlantian bread."
+msgid "Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
 msgstr "Schwarzwurzelmehl wird aus Schwarzwurzel hergestellt und ist eine von drei Zutaten des atlantanischen Brotes"
 
 #: ../../../tribes/atlanteans/wares/bread/conf:2
@@ -292,7 +292,7 @@ msgid "Gold is one of the most valuable materials only important things are garn
 msgstr "Gold ist eines der wertvollsten Materialen. Nur wichtige Sachen werden mit ihm geschmückt."
 
 #: ../../../tribes/atlanteans/wares/golden_tabard/conf:2
-msgid "Golden Tabart"
+msgid "Golden Tabard"
 msgstr "goldener Wappenrock"
 
 #: ../../../tribes/atlanteans/wares/golden_tabard/conf:3
@@ -300,15 +300,15 @@ msgid "A special tabard for atlantian soldiers."
 msgstr "Ein spezieller Wappenrock für atlanter Soldaten."
 
 #: ../../../tribes/atlanteans/wares/goldore/conf:2
-msgid "Goldore"
+msgid "Gold Ore"
 msgstr "Golderz"
 
 #: ../../../tribes/atlanteans/wares/goldore/conf:3
-msgid "This is the yellow goldore."
+msgid "This is the yellow gold ore."
 msgstr "Dies ist gelbes Golderz"
 
 #: ../../../tribes/atlanteans/wares/goldyarn/conf:2
-msgid "Goldyarn"
+msgid "Gold Yarn"
 msgstr "Goldgarn"
 
 #: ../../../tribes/atlanteans/wares/goldyarn/conf:3
@@ -356,12 +356,12 @@ msgid "Weapons and Tools are made of iron."
 msgstr "Waffen und Werkzeuge werden aus Eisen hergestellt."
 
 #: ../../../tribes/atlanteans/wares/ironore/conf:2
-msgid "Ironore"
+msgid "Iron Ore"
 msgstr "Eisenerz"
 
 #: ../../../tribes/atlanteans/wares/ironore/conf:3
-msgid "This is red ironore."
-msgstr "Dies ist rotes Eisenerz"
+msgid "This is red iron ore."
+msgstr "Dies ist rotes Eisenerz."
 
 #: ../../../tribes/atlanteans/wares/light_trident/conf:2
 msgid "Light trident"
@@ -500,11 +500,11 @@ msgid "Stone is one basic build ware of the Atlantids."
 msgstr "Steine gehören zu den Grundbaustoffen der Atlanter."
 
 #: ../../../tribes/atlanteans/wares/tabard/conf:2
-msgid "Tabart"
+msgid "Tabard"
 msgstr "Wappenrock"
 
 #: ../../../tribes/atlanteans/wares/tabard/conf:3
-msgid "Every atlantian soldier has to wear the sign of his country on his or her breast."
+msgid "All atlantean soldiers have to wear the sign of their country on their breasts."
 msgstr "Jeder atlantische Soldat muss das Zeichen seines Landes auf seiner Brust tragen."
 
 #: ../../../tribes/atlanteans/wares/trunk/conf:2

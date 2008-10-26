@@ -1,12 +1,12 @@
 # Widelands po/cs_CZ/worlds/blackland.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-10-26 17:45+0000\n"
 "PO-Revision-Date: 2006-06-27 13:49+0100\n"
 "Last-Translator: Prometheus <mmatej@yahoo.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -105,10 +105,10 @@ msgstr "Menhiry"
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../../../worlds/blackland/bobs/tree1/conf:4
-#: ../../../worlds/blackland/bobs/tree2/conf:4
-#: ../../../worlds/blackland/bobs/tree3/conf:4
-#: ../../../worlds/blackland/bobs/tree4/conf:4
+#: ../../../worlds/blackland/bobs/tree1/conf:5
+#: ../../../worlds/blackland/bobs/tree2/conf:5
+#: ../../../worlds/blackland/bobs/tree3/conf:5
+#: ../../../worlds/blackland/bobs/tree4/conf:5
 #: ../../../worlds/blackland/bobs/tree5/conf:4
 #: ../../../worlds/blackland/bobs/tree6/conf:4
 #: ../../../worlds/blackland/bobs/tree7/conf:4

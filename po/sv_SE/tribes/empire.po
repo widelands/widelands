@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3263\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-17 11:35+0000\n"
+"POT-Creation-Date: 2008-10-26 17:41+0000\n"
 "PO-Revision-Date: 2006-07-02 00:52+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -181,11 +181,6 @@ msgstr "Träningsläger"
 msgid "Vineyard"
 msgstr "Vinranksgård"
 
-#: ../../../tribes/empire/buildings/vintagery/conf:2
-#, fuzzy
-msgid "Winery"
-msgstr "Vin"
-
 #: ../../../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Lagerlokal"
@@ -204,12 +199,18 @@ msgstr "Klädesfabrik"
 msgid "Well"
 msgstr "Brunn"
 
+#: ../../../tribes/empire/buildings/winery/conf:2
+#, fuzzy
+msgid "Winery"
+msgstr "Vin"
+
 #: ../../../tribes/empire/conf:18
 msgid "The Widelands Development Team"
 msgstr "Widelands utvecklingslag"
 
 #: ../../../tribes/empire/conf:19
-msgid "The Empire"
+#, fuzzy
+msgid "Empire"
 msgstr "Imperiet"
 
 #: ../../../tribes/empire/conf:20
@@ -611,10 +612,6 @@ msgstr "Planterare"
 msgid "Geologist"
 msgstr "Geolog"
 
-#: ../../../tribes/empire/workers/herdsman/conf:2
-msgid "Shepherd"
-msgstr ""
-
 #: ../../../tribes/empire/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jägare"
@@ -642,6 +639,10 @@ msgstr "Gruvarbetare"
 #: ../../../tribes/empire/workers/pig-breeder/conf:2
 msgid "Pig Breeder"
 msgstr "Grisuppfödare"
+
+#: ../../../tribes/empire/workers/shepherd/conf:2
+msgid "Shepherd"
+msgstr ""
 
 #: ../../../tribes/empire/workers/smelter/conf:2
 msgid "Smelter"

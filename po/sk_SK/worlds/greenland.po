@@ -1,12 +1,12 @@
 # Widelands po/sk_SK/worlds/greenland.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-10-26 17:41+0000\n"
 "PO-Revision-Date: 2006-03-02 17:51+0100\n"
 "Last-Translator: Ike <ike@zoznam.sk>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -15,6 +15,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
+
+#: ../../../worlds/greenland/bobs/badger/conf:1
+msgid "Badger"
+msgstr ""
+
+#: ../../../worlds/greenland/bobs/brownbear/conf:1
+msgid "Brownbear"
+msgstr ""
 
 #: ../../../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -33,6 +41,10 @@ msgstr "Krík"
 msgid "Cactus"
 msgstr "Kaktus"
 
+#: ../../../worlds/greenland/bobs/chamois/conf:1
+msgid "Chamois"
+msgstr ""
+
 #: ../../../worlds/greenland/bobs/deadtree1/conf:1
 #: ../../../worlds/greenland/bobs/deadtree2/conf:1
 #: ../../../worlds/greenland/bobs/deadtree3/conf:1
@@ -48,6 +60,10 @@ msgstr "Jeleň"
 msgid "Duck"
 msgstr "Kačica"
 
+#: ../../../worlds/greenland/bobs/elk/conf:1
+msgid "Elk"
+msgstr ""
+
 #: ../../../worlds/greenland/bobs/fallentree/conf:2
 #, fuzzy
 msgid "Dead tree"
@@ -62,6 +78,14 @@ msgstr "Líška"
 #: ../../../worlds/greenland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Tráva"
+
+#: ../../../worlds/greenland/bobs/lynx/conf:1
+msgid "Lynx"
+msgstr ""
+
+#: ../../../worlds/greenland/bobs/marten/conf:1
+msgid "Marten"
+msgstr ""
 
 #: ../../../worlds/greenland/bobs/mushroom1/conf:1
 #: ../../../worlds/greenland/bobs/mushroom2/conf:1
@@ -110,16 +134,20 @@ msgstr "Stojace kamene"
 msgid "Stones"
 msgstr "Kamene"
 
-#: ../../../worlds/greenland/bobs/tree1/conf:4
-#: ../../../worlds/greenland/bobs/tree2/conf:4
-#: ../../../worlds/greenland/bobs/tree3/conf:4
-#: ../../../worlds/greenland/bobs/tree4/conf:4
-#: ../../../worlds/greenland/bobs/tree5/conf:4
-#: ../../../worlds/greenland/bobs/tree6/conf:4
+#: ../../../worlds/greenland/bobs/tree1/conf:5
+#: ../../../worlds/greenland/bobs/tree2/conf:5
+#: ../../../worlds/greenland/bobs/tree3/conf:5
+#: ../../../worlds/greenland/bobs/tree4/conf:5
+#: ../../../worlds/greenland/bobs/tree5/conf:5
+#: ../../../worlds/greenland/bobs/tree6/conf:5
 #: ../../../worlds/greenland/bobs/tree7/conf:4
 #: ../../../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Stromy"
+
+#: ../../../worlds/greenland/bobs/wisent/conf:1
+msgid "Wisent"
+msgstr ""
 
 #: ../../../worlds/greenland/bobs/wolf/conf:1
 msgid "Wolf"

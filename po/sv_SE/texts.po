@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3263\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-17 11:35+0000\n"
+"POT-Creation-Date: 2008-10-26 17:41+0000\n"
 "PO-Revision-Date: 2006-07-02 01:28+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -514,7 +514,8 @@ msgid "E        Toggles event menu"
 msgstr "E        Visa/dölj händelsemeny"
 
 #: ../../txts/editor_readme:27
-msgid "F        Toggle Fullscreen"
+#, fuzzy
+msgid "F        Toggles fullscreen"
 msgstr "F        Ändrar till/från fullskärm"
 
 #: ../../txts/editor_readme:29
@@ -534,24 +535,64 @@ msgid "T        Toggles tools menu"
 msgstr "T        Visa/dölj verktygsmeny"
 
 #: ../../txts/editor_readme:37
+msgid "I        Activates information tool"
+msgstr ""
+
+#: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
 msgstr "CTRL+L   Ladda bana"
 
-#: ../../txts/editor_readme:39
+#: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Spara bana"
 
-#: ../../txts/editor_readme:41
+#: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
 msgstr "1-0      Ändrar verktygens storlek"
 
-#: ../../txts/editor_readme:43
+#: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr "SHIFT    (Håll inne) Väljer det första alternativa verktyget"
 
-#: ../../txts/editor_readme:45
+#: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT      (Håll inne) Väljer det andra alternativa verktyget"
+
+#: ../../txts/editortips:13
+msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
+msgstr ""
+
+#: ../../txts/editortips:17
+msgid "You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
+msgstr ""
+
+#: ../../txts/editortips:21
+msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
+msgstr ""
+
+#: ../../txts/editortips:25
+msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
+msgstr ""
+
+#: ../../txts/editortips:29
+msgid "Holding down ALT switches second alternative tool on (if it exists)."
+msgstr ""
+
+#: ../../txts/editortips:33
+msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
+msgstr ""
+
+#: ../../txts/editortips:37
+msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
+msgstr ""
+
+#: ../../txts/editortips:41
+msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
+msgstr ""
+
+#: ../../txts/editortips:45
+msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
+msgstr ""
 
 #: ../../txts/gametips:13
 msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
@@ -586,7 +627,8 @@ msgid "Always build a forester and a ranger's hut, so you will not run out of tr
 msgstr "Bygg alltid skogsodlare och viltvårdare, so löper du ingen risk för att få slut på träd eller mat."
 
 #: ../../txts/gametips:45
-msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
+#, fuzzy
+msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
 msgstr "Har du frågor? Besök www.widelands.org. Där finns våra FAQs, Wiki och ett community forum."
 
 #: ../../txts/gametips:49

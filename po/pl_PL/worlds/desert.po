@@ -1,15 +1,15 @@
 # Widelands po/pl_PL/worlds/desert.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # Endrju <endrjux@gmail.com>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2006-12-01 21:02+0100\n"
-"Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
-"Language-Team: polish <pl@li.org>\n"
+"POT-Creation-Date: 2008-10-26 18:24+0000\n"
+"PO-Revision-Date: 2008-10-26 12:48+0100\n"
+"Last-Translator: Jacek Wolszczak <shutdownrunner@o2.pl>\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgstr "Martwe drzewo"
 
 #: ../../../worlds/desert/bobs/deer/conf:1
 msgid "Deer"
-msgstr "jeleń"
+msgstr "Jeleń"
 
 #: ../../../worlds/desert/bobs/duck/conf:1
 msgid "Duck"
@@ -49,7 +49,7 @@ msgstr "Kaczka"
 
 #: ../../../worlds/desert/bobs/fox/conf:1
 msgid "Fox"
-msgstr ""
+msgstr "Lis"
 
 #: ../../../worlds/desert/bobs/grass1/conf:1
 #: ../../../worlds/desert/bobs/grass2/conf:1
@@ -77,7 +77,7 @@ msgstr "Kamyk"
 #: ../../../worlds/desert/bobs/ruin4/conf:1
 #: ../../../worlds/desert/bobs/ruin5/conf:1
 msgid "ruins"
-msgstr "ruiny"
+msgstr "Ruiny"
 
 #: ../../../worlds/desert/bobs/sheep/conf:1
 msgid "Sheep"
@@ -112,15 +112,15 @@ msgstr "Stojące Kamienie"
 msgid "Stones"
 msgstr "Kamienie"
 
-#: ../../../worlds/desert/bobs/tree1/conf:4
+#: ../../../worlds/desert/bobs/tree1/conf:5
+#: ../../../worlds/desert/bobs/tree2/conf:5
+#: ../../../worlds/desert/bobs/tree3/conf:5
+#: ../../../worlds/desert/bobs/tree4/conf:5
+#: ../../../worlds/desert/bobs/tree5/conf:5
 msgid "Palm"
 msgstr "Palma"
 
-#: ../../../worlds/desert/bobs/tree2/conf:4
-#: ../../../worlds/desert/bobs/tree3/conf:4
-#: ../../../worlds/desert/bobs/tree4/conf:4
-#: ../../../worlds/desert/bobs/tree5/conf:4
-#: ../../../worlds/desert/bobs/tree6/conf:4
+#: ../../../worlds/desert/bobs/tree6/conf:5
 #: ../../../worlds/desert/bobs/tree7/conf:4
 #: ../../../worlds/desert/bobs/tree8/conf:4
 msgid "Tree"

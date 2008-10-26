@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3263\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-17 11:35+0000\n"
+"POT-Creation-Date: 2008-10-26 17:41+0000\n"
 "PO-Revision-Date: 2006-07-02 00:42+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -114,15 +114,15 @@ msgstr "Stående stenar"
 msgid "Stones"
 msgstr "Stenar"
 
-#: ../../../worlds/desert/bobs/tree1/conf:4
+#: ../../../worlds/desert/bobs/tree1/conf:5
+#: ../../../worlds/desert/bobs/tree2/conf:5
+#: ../../../worlds/desert/bobs/tree3/conf:5
+#: ../../../worlds/desert/bobs/tree4/conf:5
+#: ../../../worlds/desert/bobs/tree5/conf:5
 msgid "Palm"
 msgstr "Palm"
 
-#: ../../../worlds/desert/bobs/tree2/conf:4
-#: ../../../worlds/desert/bobs/tree3/conf:4
-#: ../../../worlds/desert/bobs/tree4/conf:4
-#: ../../../worlds/desert/bobs/tree5/conf:4
-#: ../../../worlds/desert/bobs/tree6/conf:4
+#: ../../../worlds/desert/bobs/tree6/conf:5
 #: ../../../worlds/desert/bobs/tree7/conf:4
 #: ../../../worlds/desert/bobs/tree8/conf:4
 msgid "Tree"

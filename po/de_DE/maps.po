@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3313\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-09-25 19:53+0000\n"
+"POT-Creation-Date: 2008-10-26 17:40+0000\n"
 "PO-Revision-Date: 2008-10-05 11:31+0100\n"
-"Last-Translator: \n"
+"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -311,4 +311,3 @@ msgstr "Das Tal der Wisente"
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr "Es scheint, als ob dieses magische Tal schon seit dem Anbeginn der Zeit von Wisenten bewohnt und beherrscht wurde. Als dein Volk an diesen Platz kam, warst du dir noch sicher, dass es hier mehr als genug Platz für ein friedliches Leben gibt, doch kann dein Volk auch wirklich friedlich mit euren Nachbarn zusammenleben?"
-

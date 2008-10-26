@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-10-26 17:34+0000\n"
 "PO-Revision-Date: 2007-06-13 20:25+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "X-Poedit-Language: Galician\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#: ../../../worlds/winterland/bobs/badger/conf:1
+msgid "Badger"
+msgstr ""
 
 #: ../../../worlds/winterland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -44,6 +48,10 @@ msgstr "Cervo"
 msgid "Duck"
 msgstr "Parrulo"
 
+#: ../../../worlds/winterland/bobs/elk/conf:1
+msgid "Elk"
+msgstr ""
+
 #: ../../../worlds/winterland/bobs/fox/conf:1
 msgid "Fox"
 msgstr "Raposo"
@@ -53,6 +61,14 @@ msgstr "Raposo"
 #: ../../../worlds/winterland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Herba"
+
+#: ../../../worlds/winterland/bobs/lynx/conf:1
+msgid "Lynx"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/marten/conf:1
+msgid "Marten"
+msgstr ""
 
 #: ../../../worlds/winterland/bobs/mushroom1/conf:1
 #: ../../../worlds/winterland/bobs/mushroom2/conf:1
@@ -82,6 +98,10 @@ msgstr "Ovella"
 msgid "Skeleton"
 msgstr "Esqueleto"
 
+#: ../../../worlds/winterland/bobs/snowman/conf:1
+msgid "Snowman"
+msgstr ""
+
 #: ../../../worlds/winterland/bobs/sstones1/conf:1
 #: ../../../worlds/winterland/bobs/sstones2/conf:1
 #: ../../../worlds/winterland/bobs/sstones3/conf:1
@@ -101,16 +121,24 @@ msgstr "Monolito"
 msgid "Stones"
 msgstr "Pedras"
 
-#: ../../../worlds/winterland/bobs/tree1/conf:4
-#: ../../../worlds/winterland/bobs/tree2/conf:4
-#: ../../../worlds/winterland/bobs/tree3/conf:4
-#: ../../../worlds/winterland/bobs/tree4/conf:4
+#: ../../../worlds/winterland/bobs/track/conf:1
+msgid "Track"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/tree1/conf:5
+#: ../../../worlds/winterland/bobs/tree2/conf:5
+#: ../../../worlds/winterland/bobs/tree3/conf:5
+#: ../../../worlds/winterland/bobs/tree4/conf:5
 #: ../../../worlds/winterland/bobs/tree5/conf:4
 #: ../../../worlds/winterland/bobs/tree6/conf:4
 #: ../../../worlds/winterland/bobs/tree7/conf:4
 #: ../../../worlds/winterland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Árbore"
+
+#: ../../../worlds/winterland/bobs/wisent/conf:1
+msgid "Wisent"
+msgstr ""
 
 #: ../../../worlds/winterland/bobs/wolf/conf:1
 msgid "Wolf"

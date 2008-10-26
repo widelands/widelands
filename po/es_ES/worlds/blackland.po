@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-10-26 17:33+0000\n"
 "PO-Revision-Date: 2007-02-08 18:55+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
@@ -106,10 +106,10 @@ msgstr "Monolito"
 msgid "Stones"
 msgstr "Piedras"
 
-#: ../../../worlds/blackland/bobs/tree1/conf:4
-#: ../../../worlds/blackland/bobs/tree2/conf:4
-#: ../../../worlds/blackland/bobs/tree3/conf:4
-#: ../../../worlds/blackland/bobs/tree4/conf:4
+#: ../../../worlds/blackland/bobs/tree1/conf:5
+#: ../../../worlds/blackland/bobs/tree2/conf:5
+#: ../../../worlds/blackland/bobs/tree3/conf:5
+#: ../../../worlds/blackland/bobs/tree4/conf:5
 #: ../../../worlds/blackland/bobs/tree5/conf:4
 #: ../../../worlds/blackland/bobs/tree6/conf:4
 #: ../../../worlds/blackland/bobs/tree7/conf:4

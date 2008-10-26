@@ -1,0 +1,645 @@
+# Widelands po/he_HE/tribes/atlanteans.po
+# Copyright (C) 2005-2008 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svn3445\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2008-10-26 17:35+0000\n"
+"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tribes/atlanteans/buildings/armoursmith/conf:2
+#: ../../../tribes/atlanteans/workers/armoursmith/conf:2
+msgid "Armoursmith"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/bakery/conf:2
+msgid "Bakery"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/blackroot_farm/conf:2
+msgid "Blackroot Farm"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/burner/conf:2
+msgid "Charcoal Burner"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/castle/conf:2
+msgid "Castle"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/coalmine/conf:2
+msgid "Coal Mine"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/constructionsite/conf:5
+msgid "Construction Site"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/crystalmine/conf:2
+msgid "Crystal Mine"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/dungeon/conf:2
+msgid "Dungeon"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/farm/conf:2
+msgid "Farm"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/fish_breeder/conf:2
+msgid "Fish Breeder Hut"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/fisher/conf:2
+msgid "Fisher Hut"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/forester/conf:2
+msgid "Forester Hut"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/goldmine/conf:2
+msgid "Gold Mine"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/goldweaver/conf:2
+msgid "Goldweaver"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/guardhall/conf:2
+msgid "Guardhall"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/guardhouse/conf:2
+msgid "Guardhouse"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/headquarters/conf:2
+msgid "Headquarters"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/high_tower/conf:2
+msgid "High Tower"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/hunter/conf:2
+msgid "Hunter Hut"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/ironmine/conf:2
+msgid "Iron Mine"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/labyrinth/conf:2
+msgid "Labyrinth"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/mill/conf:2
+msgid "Mill"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/quarry/conf:2
+msgid "Quarry"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/sawmill/conf:2
+msgid "Sawmill"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/small_tower/conf:2
+msgid "Small Tower"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/smelting_works/conf:2
+msgid "Smelting Works"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/smokery/conf:2
+msgid "Smokery"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/spiderfarm/conf:2
+msgid "Spiderfarm"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/toolsmith/conf:2
+msgid "Toolsmith's Shop"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/tower/conf:2
+msgid "Tower"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/warehouse/conf:2
+msgid "Warehouse"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/weaponsmith/conf:2
+msgid "Weapon Smithy"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/weaving-mill/conf:2
+msgid "Weaving-Mill"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/well/conf:2
+msgid "Well"
+msgstr ""
+
+#: ../../../tribes/atlanteans/buildings/woodcutter/conf:2
+msgid "Woodcutter Hut"
+msgstr ""
+
+#: ../../../tribes/atlanteans/conf:18
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../../../tribes/atlanteans/conf:19
+msgid "Atlanteans"
+msgstr ""
+
+#: ../../../tribes/atlanteans/conf:20
+msgid "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/advanced_shield/conf:2
+msgid "Advanced Shield"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/advanced_shield/conf:3
+msgid "This shields are used by the best soldiers of the atlantids"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/bakingtray/conf:2
+msgid "Bakingtray"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/bakingtray/conf:3
+msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/blackroot/conf:2
+msgid "Blackroot"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/blackroot/conf:3
+msgid "Blackroots are a special kind of roots. The Atlantids like their strong taste and use its flour for making bread."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/blackrootflour/conf:2
+msgid "Blackroot Flour"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/blackrootflour/conf:3
+msgid "Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/bread/conf:2
+msgid "Bread"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/bread/conf:3
+msgid "This tasty bread is made out of corn- and blackrootflour and is one part of miners meal."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/bucket/conf:2
+msgid "Buckets"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/bucket/conf:3
+msgid "Big buckets for the fish breeder - produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/coal/conf:2
+msgid "Coal"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/coal/conf:3
+msgid "To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/corn/conf:2
+msgid "Corn"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/corn/conf:3
+msgid "This corn is the base of the fine cornflour, that every atlatian baker needs for a good bread."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/cornflour/conf:2
+msgid "Cornflour"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/cornflour/conf:3
+msgid "Cornflour is produced out of corn and is one of three parts of the atlantian bread."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/diamond/conf:2
+msgid "Diamond"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/diamond/conf:3
+msgid "This wonderful diamonds are used for some exclusive buildings and tools."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/double_trident/conf:2
+msgid "Double Trident"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/double_trident/conf:3
+msgid "Already one of the best tridents of the atlantids. Only used by very good fighters."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/fire_tongs/conf:2
+msgid "Fire Tongs"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/fire_tongs/conf:3
+msgid "The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/fish/conf:2
+msgid "Fish"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/fish/conf:3
+msgid "Fish is one of the biggest food-resources of the atlantids."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/fishing_net/conf:2
+msgid "Fishing Net"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/fishing_net/conf:3
+msgid "The fishing net is used by the fisher and produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/gold/conf:2
+msgid "Gold"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/gold/conf:3
+msgid "Gold is one of the most valuable materials only important things are garnished with it."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/golden_tabard/conf:2
+msgid "Golden Tabard"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/golden_tabard/conf:3
+msgid "A special tabard for atlantian soldiers."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/goldore/conf:2
+msgid "Gold Ore"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/goldore/conf:3
+msgid "This is the yellow gold ore."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/goldyarn/conf:2
+msgid "Gold Yarn"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/goldyarn/conf:3
+msgid "This yarn, made of gold, is used for weaving exclusive cloth."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/hammer/conf:2
+msgid "Hammer"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/hammer/conf:3
+msgid "The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/heavy_double_trident/conf:2
+msgid "Heavy Double Trident"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/heavy_double_trident/conf:3
+msgid "This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/hook_pole/conf:2
+msgid "Hook pole"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/hook_pole/conf:3
+msgid "This hook pole is used by the smoker to hang up all the meat and fish to the top of the smoke-house. It is created by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/hunting_bow/conf:2
+msgid "Hunting Bow"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/hunting_bow/conf:3
+msgid "This bow is used by the atlantian hunter."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/iron/conf:2
+msgid "Iron"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/iron/conf:3
+msgid "Weapons and Tools are made of iron."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/ironore/conf:2
+msgid "Iron Ore"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/ironore/conf:3
+msgid "This is red iron ore."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/light_trident/conf:2
+msgid "Light trident"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/light_trident/conf:3
+msgid "This is the basic weapon for atlantian soldiers"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/long_trident/conf:2
+msgid "Long Trident"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/long_trident/conf:3
+msgid "This is an advanced trident for more experienced soldiers."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/meat/conf:2
+msgid "Meat"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/meat/conf:3
+msgid "Meat is one food-ressource of the Atlantids."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/milking_tongs/conf:2
+msgid "Milking Tongs"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/milking_tongs/conf:3
+msgid "Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/mountain_crystal/conf:2
+msgid "Mountain Crystal"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/mountain_crystal/conf:3
+msgid "These transparent mountain crystals are used for some exclusive buildings and tools."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/pick/conf:2
+msgid "Pick"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/pick/conf:3
+msgid "Picks are used by stonecutters and miners. It is produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/planks/conf:2
+msgid "Planks"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/planks/conf:3
+msgid "Planks are an important build material of the Atlantids."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/saw/conf:2
+msgid "Saw"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/saw/conf:3
+msgid "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/scythe/conf:2
+msgid "Scythe"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/scythe/conf:3
+msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/shovel/conf:2
+msgid "Shovel"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/shovel/conf:3
+msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/smoked_fish/conf:2
+msgid "Smoked fish"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/smoked_fish/conf:3
+msgid "This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/smoked_meat/conf:2
+msgid "Smoked meat"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/smoked_meat/conf:3
+msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/spidercloth/conf:2
+msgid "Spidercloth"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/spidercloth/conf:3
+msgid "Cloth made out of spideryarn."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/spideryarn/conf:2
+msgid "Spideryarn"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/spideryarn/conf:3
+msgid "This yarn is produced by spiders, which are breed on spiderfarms."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/steel_shield/conf:2
+msgid "Steel Shield"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/steel_shield/conf:3
+msgid "This steel shield is used by experienced soldiers"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/steel_trident/conf:2
+msgid "Steel Trident"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/steel_trident/conf:3
+msgid "This is the medium trident - used by advanced soldiers."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/stone/conf:2
+msgid "Stone"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/stone/conf:3
+msgid "Stone is one basic build ware of the Atlantids."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/tabard/conf:2
+msgid "Tabard"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/tabard/conf:3
+msgid "All atlantean soldiers have to wear the sign of their country on their breasts."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/trunk/conf:2
+msgid "Trunk"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/trunk/conf:3
+msgid "Trunks are the base for planks, which are used in nearly every building of the atlantids."
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/water/conf:2
+msgid "Water"
+msgstr ""
+
+#: ../../../tribes/atlanteans/wares/water/conf:3
+msgid "Water is the most essential essence for life! This water is used in many places, for example to make bread."
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/baker/conf:2
+msgid "Baker"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/blackroot_farmer/conf:2
+msgid "Blackroot farmer"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/builder/conf:2
+msgid "Builder"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/burner/conf:2
+msgid "Burner"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/carrier/conf:2
+msgid "Carrier"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/farmer/conf:2
+msgid "Farmer"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/fish_breeder/conf:2
+msgid "Fish Breeder"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/fish_breeder/conf:3
+msgid "Breeds fish"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/fisher/conf:2
+msgid "Fisher"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/fisher/conf:3
+msgid "The fisher fishes delicious fish."
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/forester/conf:2
+msgid "Forester"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/forester/conf:3
+msgid "Plants trees."
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/geologist/conf:2
+msgid "Geologist"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/hunter/conf:2
+msgid "Hunter"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/miller/conf:2
+msgid "Miller"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/miner/conf:2
+msgid "Miner"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/sawyer/conf:2
+msgid "Sawyer"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/smelter/conf:2
+msgid "Smelter"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/smoker/conf:2
+msgid "Smoker"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/soldier/conf:2
+msgid "Soldier"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/spiderbreeder/conf:2
+msgid "Spiderbreeder"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/stonecutter/conf:2
+msgid "Stonecutter"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/stonecutter/conf:3
+msgid "Cuts raw pieces of granit out of laying stones."
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/toolsmith/conf:2
+msgid "Toolsmith"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/trainer/conf:2
+msgid "Trainer"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/weaponsmith/conf:2
+msgid "Weaponsmith"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/weaver/conf:2
+msgid "Weaver"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/weaver/conf:3
+msgid "Produces cloth for buildings, ships and soldiers"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/woodcutter/conf:2
+msgid "Woodcutter"
+msgstr ""
+
+#: ../../../tribes/atlanteans/workers/woodcutter/conf:3
+msgid "Fells trees."
+msgstr ""
+

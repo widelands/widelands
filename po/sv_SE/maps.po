@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3263\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-17 11:35+0000\n"
+"POT-Creation-Date: 2008-10-26 17:41+0000\n"
 "PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,14 @@ msgstr "Kometön"
 msgid "A few miles in front of Gerion Coast lies a small unnamed island. Until now, you have not seen any reason, to ship there, but yesterday a big fireball came from the sky and touched down in it's middle. Is this a sign of the Gods? You believe it is and you hope, that your tribe will find the treasure of this island, before other tribes will follow."
 msgstr ""
 
+#: ../../maps/Crater.wmf/elemental:9
+msgid "Crater"
+msgstr ""
+
+#: ../../maps/Crater.wmf/elemental:11
+msgid "Long after a meteor crashed into a couple of mountains life blossoms in the crater. Two tribes are now fighting about the rich resources."
+msgstr ""
+
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
 msgstr "Torra floden"
@@ -126,6 +134,14 @@ msgstr "De fyra slotten"
 msgid "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
 msgstr "Väl beskyddade i sina mäktiga fästningar smider fyra makthungriga krigsherrar sina planer för att dominera dessa markerna..."
 
+#: ../../maps/Four Mountains.wmf/elemental:9
+msgid "Four Mountains"
+msgstr ""
+
+#: ../../maps/Four Mountains.wmf/elemental:11
+msgid "Each tribe is surrounded by four mighty mounains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional watersources. Hint 3: Each mountain contains only one resource."
+msgstr ""
+
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
 msgstr "Glaciärsjön"
@@ -150,12 +166,36 @@ msgstr "Mothugg"
 msgid "After an impact of an asteroid and the following harsh winter, three isles are connected by ice and stone, setting an end to the peaceful coexistence of three tribes."
 msgstr ""
 
+#: ../../maps/Islands at war.wmf/elemental:9
+msgid "Islands at war"
+msgstr ""
+
+#: ../../maps/Islands at war.wmf/elemental:11
+msgid "For centuries you lived peaceful together with the other tribe on the neighboured island. This peace seems to end now. - Your neighbour begins to expand."
+msgstr ""
+
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr "Stilla sjön"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
+msgstr ""
+
+#: ../../maps/Last Bastion.wmf/elemental:9
+msgid "Last Bastion"
+msgstr ""
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid "Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
+msgstr ""
+
+#: ../../maps/Mystical Maze.wmf/elemental:9
+msgid "Mystical Maze"
+msgstr ""
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid "There are two big questions around: Who created this unbelievable big maze and what can be found inside?"
 msgstr ""
 
 #: ../../maps/Plateau.wmf/elemental:7
@@ -166,6 +206,14 @@ msgstr "Den gröna platån"
 msgid "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
 msgstr ""
 
+#: ../../maps/Rendez-Vous.wmf/elemental:9
+msgid "Rendez-Vous"
+msgstr ""
+
+#: ../../maps/Rendez-Vous.wmf/elemental:11
+msgid "Only a small hill in the centre of the map connects these four competing tribes. Lead your army right away to this hill and build a giant stronghold as a sign of your superiority! Hint: In the centre is only space for one stronghold. Water can be found everywhere, so there is no need to send out geologists."
+msgstr ""
+
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
 msgstr "Flodernas land"
@@ -174,12 +222,37 @@ msgstr "Flodernas land"
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
 msgstr ""
 
+#: ../../maps/Swamp Island.wmf/elemental:9
+#, fuzzy
+msgid "Swamp Island"
+msgstr "Kometön"
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid "It smells like swamp, it looks like swamp and it is swamp. But it is the place you were born and you lived your whole life. If you don't want to loose it, defend it! "
+msgstr ""
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr ""
+
+#: ../../maps/The Far North.wmf/elemental:11
+msgid "Some say that impenetrable lands to the far north scared away even the most courageous settlers and the bravest of the brave warriors. Big and old forests, full of big and predatory game, cut across by wetlands and hills were shrouded in mystery. The ones who had managed to come back mentioned tremendous buildings, decorated with carvings and gold from majestic mountain ranges somewhere amongst the wilderness. Dozens of years after only some crumbly ruins remain of these good old times, covered with moss and trees. Their shapes give only an idea about the craftsmanship of ancient constructors. Nobody knows why they (have) disappeared. Nobody knows why. People say that now nothing is blocking the road to wealth. But many will die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
+msgstr ""
+
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
 msgstr "Oastriangeln"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
+msgstr ""
+
+#: ../../maps/The Thaw.wmf/elemental:9
+msgid "The Thaw"
+msgstr ""
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid "Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. While solstice they listened to the oracle and went on war. Only survivor will sacrifice his enemies treasures on the ancient altar, build there a splendid castle and gain goodwill and the respect of the Gods."
 msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
@@ -196,6 +269,22 @@ msgstr "Den långa vägen"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid "Another strange test by the Gods. To reach the other side, there seems to be no other way, than occupying the land of your enemies."
+msgstr ""
+
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr ""
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid "In this mountainous region two princes have settled. Now they are expanding their terretories unaware of the fact that they are not alone!"
+msgstr ""
+
+#: ../../maps/Three Warriors.wmf/elemental:9
+msgid "Three Warriors"
+msgstr ""
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus seems a fight inescapable! Hint: Water can be found around the lakes."
 msgstr ""
 
 #: ../../maps/Two frontiers.wmf/elemental:7

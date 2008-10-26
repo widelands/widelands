@@ -1,12 +1,12 @@
 # Widelands po/fi_FI/worlds/blackland.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-10-26 17:33+0000\n"
 "PO-Revision-Date: 2007-03-24 05:47+0200\n"
 "Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
@@ -106,10 +106,10 @@ msgstr ""
 msgid "Stones"
 msgstr "Kiviä"
 
-#: ../../../worlds/blackland/bobs/tree1/conf:4
-#: ../../../worlds/blackland/bobs/tree2/conf:4
-#: ../../../worlds/blackland/bobs/tree3/conf:4
-#: ../../../worlds/blackland/bobs/tree4/conf:4
+#: ../../../worlds/blackland/bobs/tree1/conf:5
+#: ../../../worlds/blackland/bobs/tree2/conf:5
+#: ../../../worlds/blackland/bobs/tree3/conf:5
+#: ../../../worlds/blackland/bobs/tree4/conf:5
 #: ../../../worlds/blackland/bobs/tree5/conf:4
 #: ../../../worlds/blackland/bobs/tree6/conf:4
 #: ../../../worlds/blackland/bobs/tree7/conf:4

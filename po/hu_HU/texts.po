@@ -1,12 +1,12 @@
 # Widelands po/hu_HU/texts.po
-# Copyright (C) 2008 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2988\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"POT-Creation-Date: 2008-10-26 17:49+0000\n"
 "PO-Revision-Date: 2008-03-07 20:45+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -350,107 +350,132 @@ msgstr "Vének"
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../../txts/developers:24
-msgid "Homepage"
-msgstr "Weblap"
-
-#: ../../txts/developers:29
-msgid "Sound"
-msgstr "Hang"
-
-#: ../../txts/developers:32
+#: ../../txts/developers:22 ../../txts/developers:34
 msgid "vacant"
 msgstr "üres"
 
-#: ../../txts/developers:36
+#: ../../txts/developers:26
+msgid "Homepage"
+msgstr "Weblap"
+
+#: ../../txts/developers:31
+msgid "Sound"
+msgstr "Hang"
+
+#: ../../txts/developers:38
 msgid "Translation"
 msgstr "Fordítás"
 
-#: ../../txts/developers:44
+#: ../../txts/developers:46
 msgid "Coders"
 msgstr "Programozók"
 
-#: ../../txts/developers:66
+#: ../../txts/developers:68
 msgid "Graphicians"
 msgstr "Grafikusok"
 
-#: ../../txts/developers:88
+#: ../../txts/developers:90
 msgid "Musicians"
 msgstr "Zenészek"
 
-#: ../../txts/developers:95
+#: ../../txts/developers:97
 msgid "Sound Effects"
 msgstr "Hangeffektusok"
 
-#: ../../txts/developers:101
+#: ../../txts/developers:103
 msgid "Maps and Missions"
 msgstr "Térképek és Hadjáratok"
 
-#: ../../txts/developers:109
-msgid "Barbarian Campaign Story"
+#: ../../txts/developers:112
+#, fuzzy
+msgid "Campaign Story"
 msgstr "Barbár hadjárat története"
 
 #: ../../txts/developers:115
+msgid "Barbarian"
+msgstr ""
+
+#: ../../txts/developers:119
+msgid "Empire"
+msgstr ""
+
+#: ../../txts/developers:125
 msgid "Translators"
 msgstr "Fordítók"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:129
 msgid "Czech"
 msgstr "Cseh"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:135
 msgid "Dutch"
 msgstr "Holland"
 
-#: ../../txts/developers:131
+#: ../../txts/developers:141
 msgid "Finnish"
 msgstr "Finn"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:146
 msgid "French"
 msgstr "Francia"
 
-#: ../../txts/developers:142
+#: ../../txts/developers:152
 msgid "Galician"
 msgstr "Galíciai"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:157
 msgid "German"
 msgstr "Német"
 
-#: ../../txts/developers:154
+#: ../../txts/developers:165
 msgid "Hebrew"
 msgstr "Zsidó"
 
-#: ../../txts/developers:159
+#: ../../txts/developers:170
 msgid "Hungarian"
 msgstr "Magyar"
 
-#: ../../txts/developers:164
+#: ../../txts/developers:175
 msgid "Polish"
 msgstr "Lengyel"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:181
 msgid "Russian"
 msgstr "Orosz"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:186
 msgid "Spanish"
 msgstr "Spanyol"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:191
 msgid "Slovak"
 msgstr "Szlovák"
 
-#: ../../txts/developers:185
+#: ../../txts/developers:196
 msgid "Swedish"
 msgstr "Svéd"
 
-#: ../../txts/developers:193
+#: ../../txts/developers:204
 msgid "Packagers"
 msgstr "Csomag készítők"
 
-#: ../../txts/developers:212
+#: ../../txts/developers:208
+msgid "Linux Distributions"
+msgstr ""
+
+#: ../../txts/developers:219
+msgid "Other Unix Distributions"
+msgstr ""
+
+#: ../../txts/developers:228
+msgid "Non Unix Distributions"
+msgstr ""
+
+#: ../../txts/developers:237
+msgid "Wiki and Enduser-Documentation"
+msgstr ""
+
+#: ../../txts/developers:248
 msgid "Other"
 msgstr "Más"
 
@@ -497,7 +522,8 @@ msgid "E        Toggles event menu"
 msgstr "E           Események beállításai"
 
 #: ../../txts/editor_readme:27
-msgid "F        Toggle Fullscreen"
+#, fuzzy
+msgid "F        Toggles fullscreen"
 msgstr "F           Teljes képernyő"
 
 #: ../../txts/editor_readme:29
@@ -517,24 +543,64 @@ msgid "T        Toggles tools menu"
 msgstr "T           Eszközök megjelenítése"
 
 #: ../../txts/editor_readme:37
+msgid "I        Activates information tool"
+msgstr ""
+
+#: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
 msgstr "CTRL+L   Térkép betöltése"
 
-#: ../../txts/editor_readme:39
+#: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Térkép mentése"
 
-#: ../../txts/editor_readme:41
+#: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
 msgstr "1-0         Megváltoztatja az eszköz méretét"
 
-#: ../../txts/editor_readme:43
+#: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr "SHIFT   Átvált az első alternatív eszközre"
 
-#: ../../txts/editor_readme:45
+#: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT       Átvált a második alternatív eszközre"
+
+#: ../../txts/editortips:13
+msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
+msgstr ""
+
+#: ../../txts/editortips:17
+msgid "You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
+msgstr ""
+
+#: ../../txts/editortips:21
+msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
+msgstr ""
+
+#: ../../txts/editortips:25
+msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
+msgstr ""
+
+#: ../../txts/editortips:29
+msgid "Holding down ALT switches second alternative tool on (if it exists)."
+msgstr ""
+
+#: ../../txts/editortips:33
+msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
+msgstr ""
+
+#: ../../txts/editortips:37
+msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
+msgstr ""
+
+#: ../../txts/editortips:41
+msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
+msgstr ""
+
+#: ../../txts/editortips:45
+msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
+msgstr ""
 
 #: ../../txts/gametips:13
 msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
@@ -569,7 +635,8 @@ msgid "Always build a forester and a ranger's hut, so you will not run out of tr
 msgstr "Mindig építs erdészt és vadászkunyhót, így biztosan nem fogsz ki a farönkökből és az élelemből."
 
 #: ../../txts/gametips:45
-msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
+#, fuzzy
+msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
 msgstr "További kérdéseid szívesen megválaszoljuk a www.widelands.org weblapon. Ott megtalálhatod a Gyakran Ismételt Kérdéseket, a wikit és persze a közösségi fórumot."
 
 #: ../../txts/gametips:49

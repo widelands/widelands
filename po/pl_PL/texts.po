@@ -1,15 +1,15 @@
 # Widelands po/pl_PL/texts.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2006-12-01 21:20+0100\n"
-"Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
-"Language-Team: polish <pl@li.org>\n"
+"POT-Creation-Date: 2008-10-26 18:24+0000\n"
+"PO-Revision-Date: 2008-10-26 15:52+0100\n"
+"Last-Translator: Jacek Wolszczak <shutdownrunner@o2.pl>\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -162,7 +162,7 @@ msgstr "4.    Poza przypadkami jednoznacznie dozwolonymi w niniejszej Licencji, 
 
 #: ../../txts/README:1
 msgid "README"
-msgstr "CZYTAJ-TO"
+msgstr "Pomoc do gry"
 
 #: ../../txts/README:5
 msgid "an open source strategy game"
@@ -193,267 +193,298 @@ msgid "Keyboard shortcuts (in-game)"
 msgstr "Skróty klawiaturowe (w grze)"
 
 #: ../../txts/README:40
-msgid "SPACE       Toggles build-help"
-msgstr "SPACJA       Otwiera okno pomocy budowania"
+msgid "SPACE       Toggle build-help"
+msgstr "SPACJA       Wyświetla miejsca pod budowę"
 
 #: ../../txts/README:42
 msgid "M               Toggle minimap"
-msgstr "M               otwiera minimapę"
+msgstr "M                   Otwiera okno minimapy"
 
 #: ../../txts/README:44
 msgid "C               Toggle census"
-msgstr "C              otwiera okno spisu ludności"
+msgstr "C                    Otwiera okno spisu ludności"
 
 #: ../../txts/README:46
 msgid "S               Toggle statistics"
-msgstr "S               otwiera okno statystyk"
+msgstr "S                   Otwiera okno statystyk"
 
 #: ../../txts/README:48
-msgid "F               Toggle Fullscreen"
-msgstr "F               przełącza tryb pełnoekranowy"
+msgid "O               Toggle objectives display"
+msgstr "O                   Otwiera okno z listą zadań do wykonania"
 
 #: ../../txts/README:50
-msgid "Home        Center main mapview on starting location"
-msgstr "Home        Centruje mapę na pozycji startowej"
+msgid "F               Toggle Fullscreen"
+msgstr "F                   Przełącza tryb pełnoekranowy"
 
-#: ../../txts/README:53
-msgid "PAGEUP         Increase gamespeed"
-msgstr "PAGEUP         zwiększa szybkość gry"
+#: ../../txts/README:52
+msgid "Home        Center main mapview on starting location"
+msgstr "Home           Centruje mapę na pozycji startowej"
 
 #: ../../txts/README:55
-msgid "PAGEDOWN    Decrease gamespeed"
-msgstr "PAGEDOWN    zmniejsza szybkość gry"
+msgid "PAGEUP         Increase gamespeed"
+msgstr "PAGEUP         Zwiększa szybkość gry"
 
-#: ../../txts/README:58
-msgid "F5           Reveals the entire map (only in debug-builds)"
-msgstr "F5           pokazuje całą mapę (Debug-builds)"
+#: ../../txts/README:57
+msgid "PAGEDOWN    Decrease gamespeed"
+msgstr "PAGEDOWN    Zmniejsza szybkość gry"
 
 #: ../../txts/README:60
-msgid "F10         Quit the game immediately"
-msgstr "F10         natychmiastowo kończy grę"
+msgid "F5           Reveals the entire map (only in debug-builds)"
+msgstr "F5               Pokazuje całą mapę (Tylko w przypadku wydań \"debug\")"
 
 #: ../../txts/README:62
+msgid "F10         Quit the game immediately"
+msgstr "F10             Natychmiastowo zakończenie gry"
+
+#: ../../txts/README:64
 msgid "F11         Take a screenshot"
-msgstr "F11         zapisuje zrzut ekranu"
+msgstr "F11             Zapisuje zrzut ekranu"
 
 #: ../../txts/README:67
+msgid "When finishing a road, if Ctrl is down, place flags along the road. Default is to place flags from end to start. If Shift is also down, place flags from start to end instead."
+msgstr ""
+
+#: ../../txts/README:72
 msgid "Online Help"
 msgstr "Pomoc on-line"
 
-#: ../../txts/README:71
+#: ../../txts/README:76
 msgid "If you need documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage. You can find an up to date online help at:"
-msgstr "Jeżeli potrzebujesz dokumentacji lub pomocy dla Widelands albo Edytora Widelands odwiedź naszą stronę internetową. Aktualną pomoc on-line znajdziesz pod adresem:"
+msgstr "Jeżeli potrzebujesz dokumentacji lub pomocy dla Widelands albo edytora Widelands odwiedź naszą stronę internetową. Aktualną pomoc on-line znajdziesz pod adresem:"
 
-#: ../../txts/README:79
+#: ../../txts/README:84
 msgid "Reporting Bugs"
 msgstr "Zgłaszanie błędów"
 
-#: ../../txts/README:83
-msgid "If you want to report bugs, please send your report to the mailing list, <widelands-public@list.sourceforge.net><br>To subscribe, visit the following page:"
-msgstr "Jeżeli chcesz zgłosić błąd, proszę wyślij swój raport na listę mailingową <widelands-public@list.sourceforge.net><br>Aby się zapisać odwiedź ta stronę:"
-
 #: ../../txts/README:88
-msgid "Please provide enough background information. Tell us:"
-msgstr "Proszę podaj nam jak najwięcej informacji. Napisz:"
-
-#: ../../txts/README:91
-msgid "- what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from SVN)"
-msgstr "- jakiej używasz wersji Widelands (np. numer buildu lub coś takiego<br>jeżeli to własna kompilacja z SVN)"
+msgid "If you want to report bugs, please send your report to the mailing list, <widelands-public@list.sourceforge.net><br>To subscribe, visit the following page:"
+msgstr "Aby zgłosić błąd, proszę wyślij swój raport na listę mailingową <widelands-public@list.sourceforge.net><br>Odwiedź tę stronę, aby się zapisać:"
 
 #: ../../txts/README:93
-msgid "- how to reproduce the bug"
-msgstr "- jak powstaje błąd"
+msgid "Please provide enough background information. Tell us:"
+msgstr "Podaj nam jak najwięcej szczegółów. Napisz:"
 
-#: ../../txts/README:95
+#: ../../txts/README:96
+msgid "- what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from SVN)"
+msgstr "- jakiej używasz wersji Widelands (np. numer buildu <br>lub informację czy jest to własna kompilacja z SVN)"
+
+#: ../../txts/README:98
+msgid "- how to reproduce the bug"
+msgstr "- jak wywołać błąd"
+
+#: ../../txts/README:100
 msgid "- which map you were playing"
 msgstr "- na jakiej grałeś mapie"
 
-#: ../../txts/README:97
+#: ../../txts/README:102
 msgid "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-game. For more explanation, see the section on Replays below."
-msgstr ""
-
-#: ../../txts/README:99
-msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
-msgstr "- wyślij nam skompresowany (zip, gzip, bzip2) plik sesji jeżeli to możliwe, chyba że błąd jest prosty do odtworzenia. W zasadzie, to dobry pomysł, żeby zawsze<br>zapisywać sesję w przypadku wystąpienia błędu. Więcej informacji poniżej:"
+msgstr "- prześlij nam skompresowaną (zip, gzip, bzip2) powtórkę, jeżeli w grze wystąpił błąd. Więcej informacji znajdziesz w dziale \"Powtórki\", w dalszej części tego dokumentu."
 
 #: ../../txts/README:104
-msgid "Replays</p>"
-msgstr ""
-
-#: ../../txts/README:107
-msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
-msgstr ""
+msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
+msgstr "- prześlij nam skompresowany (zip, gzip, bzip2) plik sesji, jeżeli to możliwe, chyba że błąd jest prosty do odtworzenia.<br> W zasadzie, to dobry pomysł, żeby zawsze<br>zapisywać sesję w przypadku wystąpienia błędu. Więcej informacji poniżej:"
 
 #: ../../txts/README:109
+msgid "Replays</p>"
+msgstr "Powtórki</p>"
+
+#: ../../txts/README:112
+msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
+msgstr "Widelands zapisuje każdą twoją rozgrywkę do dwóch plików. Jeden z nich, z rozszerzeniem ..wgf zawiera zapis stanu gry. Drugi (.wprl) zawiera listę poleceń wykonanych w czasie rozgrywki przez wszystkich graczy, takich jak: budowa dróg czy atak na wroga. Reszta plików określa czas rozpoczęcia rozgrywki."
+
+#: ../../txts/README:114
 msgid "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
-msgstr ""
+msgstr "Przy użyciu opcji \"Obejrzyj powtórkę\" można precyzyjnie odtworzyć przebieg rozgrywki. Należy jednak zauważyć, że drobne zmiany w plikach danych gry mogą spowodować, że staną się one niekompatybilne - zdezaktualizują się. Podobna sytuacja występuje w przypadku rozgrywek sieciowych. Jeśli gracze używają różnych wersji gry, może wystąpić błąd synchronizacji."
 
-#: ../../txts/README:111
-msgid "Replays are a very useful to tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
-msgstr ""
+#: ../../txts/README:116
+msgid "Replays are a very useful tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
+msgstr "Powtórki są bardzo użytecznym narzędziem do wykrywania błędów w logice gry, dlatego do wszystkich raportów o błędach dołączaj pliki powtórek. Zapisywane są one w katalogu ~/.widelands/replays (pod Linuksem) lub pod Windowsem w podkatalogu replays, znajdującym się w katalogu z grą."
 
-#: ../../txts/README:115
+#: ../../txts/README:120
 msgid "Creating a Session Record</p>"
 msgstr "Zapisywanie sesji</p>"
 
-#: ../../txts/README:118
+#: ../../txts/README:123
 msgid "Widelands can record all your keypresses and mouse movements to a file. It can then replay an entire session from starting the game to exiting it. This is really helpful for debugging problems."
 msgstr "Widelands może zapisać wszystkie klawisze jakie nacisnąłeś, oraz wszystkie ruchy myszki do pliku. Można wtedy odtworzyć cały przebieg gry, od jej początku do końca. Pliki takie są przydatne przy usuwaniu błędów."
 
-#: ../../txts/README:121
+#: ../../txts/README:126
 msgid "To create a session record, start the game with the --record parameter. On Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr "Aby zapiać taki plik sesji należy uruchomić grę z parametrem \"--record\". Na Linuksie wystarczy dodać to do linii komend, np. \"$ ./widelands --record=nazwapliku.rec\""
 
-#: ../../txts/README:124
+#: ../../txts/README:129
 msgid "On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like c:\\games\\widelands\\widelands.exe. Change this to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr "Na Windowsie powinieneś stworzyć skrót do widelands.exe (prawy klik na pliku \"widelands.exe\" i \"Utwórz skrót\") Następnie zmodyfikuj skrót (prawy klika na skrócie i \"Właściwości\"): pole polecenie może wyglądać mniej np tak: \"c:\\games\\widelands\\widelands.exe.\", zmień je na: \"\\games\\widelands\\widelands.exe --record=nazwapliku.rec\"."
 
-#: ../../txts/README:127
+#: ../../txts/README:132
 msgid "A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace --record with --playback."
 msgstr "Zostanie stworzony binarny plik \"nazwapliku.rec\". Aby go odtworzyć postępuj zgodnie z powyższymi instrukcjami ale zamiast parametru \"--record\" użyć \"--playback\"."
 
-#: ../../txts/README:130
+#: ../../txts/README:135
 msgid "Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr "Warto wspomnieć, że pliki z zapisem sesji są niezależne od platformy, ale ściśle powiązane z wersją programu. Sposób zapisywania i funkcje są zmieniane radykalnie z wersji na wersję. Pliki sesji nie są \"demami\" gry, ich celem jest ułatwienie wykrywania błędów."
 
 #: ../../txts/developers:1
 msgid "Development"
-msgstr "Rozwój"
+msgstr "Osoby związane z Widelands"
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Zespól rozwojowy Widelands"
 
 #: ../../txts/developers:9
 msgid "Chieftain"
-msgstr ""
+msgstr "Wódz"
 
 #: ../../txts/developers:15
 msgid "Elders"
-msgstr ""
+msgstr "Starszyzna"
 
 #: ../../txts/developers:19
 msgid "Graphics"
-msgstr ""
+msgstr "Grafika"
 
-#: ../../txts/developers:24
-msgid "Homepage"
-msgstr ""
-
-#: ../../txts/developers:29
-msgid "Sound"
-msgstr ""
-
-#: ../../txts/developers:32
+#: ../../txts/developers:22 ../../txts/developers:34
 msgid "vacant"
 msgstr ""
 
-#: ../../txts/developers:36
+#: ../../txts/developers:26
+msgid "Homepage"
+msgstr "Strona domowa"
+
+#: ../../txts/developers:31
+msgid "Sound"
+msgstr "Dźwięk"
+
+#: ../../txts/developers:38
 msgid "Translation"
-msgstr ""
+msgstr "Tłumaczenie"
 
-#: ../../txts/developers:44
+#: ../../txts/developers:46
 msgid "Coders"
-msgstr ""
+msgstr "Programiści"
 
-#: ../../txts/developers:66
+#: ../../txts/developers:68
 msgid "Graphicians"
-msgstr ""
+msgstr "Graficy"
 
-#: ../../txts/developers:88
+#: ../../txts/developers:90
 msgid "Musicians"
-msgstr ""
+msgstr "Muzycy"
 
-#: ../../txts/developers:95
+#: ../../txts/developers:97
 msgid "Sound Effects"
-msgstr ""
+msgstr "Efekty dźwiękowe"
 
-#: ../../txts/developers:101
+#: ../../txts/developers:103
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Mapy i misje"
 
-#: ../../txts/developers:109
-msgid "Barbarian Campaign Story"
-msgstr ""
+#: ../../txts/developers:112
+msgid "Campaign Story"
+msgstr "Scenariusz kampanii"
 
 #: ../../txts/developers:115
-msgid "Translators"
-msgstr ""
+msgid "Barbarian"
+msgstr "Barbarzyńcy"
 
 #: ../../txts/developers:119
-msgid "Czech"
-msgstr ""
+msgid "Empire"
+msgstr "Imperium"
 
 #: ../../txts/developers:125
+msgid "Translators"
+msgstr "Tłumacze"
+
+#: ../../txts/developers:129
+msgid "Czech"
+msgstr "Czeski"
+
+#: ../../txts/developers:135
 msgid "Dutch"
-msgstr ""
+msgstr "Holenderski"
 
-#: ../../txts/developers:131
+#: ../../txts/developers:141
 msgid "Finnish"
-msgstr ""
+msgstr "Fiński"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:146
 msgid "French"
-msgstr ""
+msgstr "Francuski"
 
-#: ../../txts/developers:142
+#: ../../txts/developers:152
 msgid "Galician"
-msgstr ""
+msgstr "Galicyjski"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:157
 msgid "German"
-msgstr ""
+msgstr "Niemiecki"
 
-#: ../../txts/developers:154
+#: ../../txts/developers:165
 msgid "Hebrew"
-msgstr ""
-
-#: ../../txts/developers:159
-msgid "Hungarian"
-msgstr ""
-
-#: ../../txts/developers:164
-msgid "Polish"
-msgstr ""
+msgstr "Hebrajski"
 
 #: ../../txts/developers:170
-msgid "Russian"
-msgstr ""
+msgid "Hungarian"
+msgstr "Węgierski"
 
 #: ../../txts/developers:175
+msgid "Polish"
+msgstr "Polski"
+
+#: ../../txts/developers:181
+msgid "Russian"
+msgstr "Rosyjski"
+
+#: ../../txts/developers:186
 msgid "Spanish"
-msgstr ""
+msgstr "Hiszpański"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:191
 msgid "Slovak"
-msgstr ""
+msgstr "Słowacki"
 
-#: ../../txts/developers:185
+#: ../../txts/developers:196
 msgid "Swedish"
-msgstr ""
+msgstr "Szwedzki"
 
-#: ../../txts/developers:193
+#: ../../txts/developers:204
 msgid "Packagers"
-msgstr ""
+msgstr "Opiekuni pakietów"
 
-#: ../../txts/developers:212
+#: ../../txts/developers:208
+msgid "Linux Distributions"
+msgstr "Dystrubucje linuksowe"
+
+#: ../../txts/developers:219
+msgid "Other Unix Distributions"
+msgstr "Inne dystrybucje uniksowe"
+
+#: ../../txts/developers:228
+msgid "Non Unix Distributions"
+msgstr "Dystrybucje nieuniksowe"
+
+#: ../../txts/developers:237
+msgid "Wiki and Enduser-Documentation"
+msgstr "Wiki i dokumentacja użytkownika"
+
+#: ../../txts/developers:248
 msgid "Other"
-msgstr ""
+msgstr "Inne"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr "CZYTAJ-TO dla Edytora Widelands"
+msgstr "Pomoc do edytora"
 
 #: ../../txts/editor_readme:4
 msgid "README for the Editor"
-msgstr "CZYTAJ-TO dla Edytora"
+msgstr "Pomoc do edytora"
 
 #: ../../txts/editor_readme:7 ../../txts/README:9
 msgid "Introduction"
 msgstr "Wstęp"
 
 #: ../../txts/editor_readme:10
-#, fuzzy
 msgid "This Editor is intended for players who'd like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
 msgstr "Edytor jest przeznaczony dla graczy, którzy chcą stworzyć własne mapy do gry.<br>Jak widać, Edytor jest we wczesnej fazie rozwoju, wraz ze jego polepszeniem, polepszy się też ta dokumentacja. Planowane jest też wydanie krótkiego samouczka."
 
@@ -467,7 +498,7 @@ msgstr ""
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
-msgstr "Skróty klawiaturowe"
+msgstr "Skróty klawiszowe"
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
@@ -482,7 +513,8 @@ msgid "E        Toggles event menu"
 msgstr "E        otwiera okno wydarzeń"
 
 #: ../../txts/editor_readme:27
-msgid "F        Toggle Fullscreen"
+#, fuzzy
+msgid "F        Toggles fullscreen"
 msgstr "F        przełącza tryb pełnoekranowy"
 
 #: ../../txts/editor_readme:29
@@ -502,24 +534,64 @@ msgid "T        Toggles tools menu"
 msgstr "T        otwiera okno narzędzi"
 
 #: ../../txts/editor_readme:37
+msgid "I        Activates information tool"
+msgstr "I       Aktywuje narzędzie informacyjne"
+
+#: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
 msgstr "CTRL+L   ładuje mapę"
 
-#: ../../txts/editor_readme:39
+#: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   zapisuje mapę"
 
-#: ../../txts/editor_readme:41
+#: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
 msgstr "1-0      zmienia rozmiar narzędzi"
 
-#: ../../txts/editor_readme:43
+#: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr "SHIFT    (przytrzymany) wybiera pierwsze alternatywne narzędzie dopóki jest trzymany"
 
-#: ../../txts/editor_readme:45
+#: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT      (przytrzymany) wybiera drugie alternatywne narzędzie dopóki jest trzymany"
+
+#: ../../txts/editortips:13
+msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
+msgstr ""
+
+#: ../../txts/editortips:17
+msgid "You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
+msgstr "Aby zaznaczyć kilka obiektów naturalnych (bob), należy w trakcie zaznaczania przytrzymać przycisk CTRL. Później należy kliknąć w mapę, aby umieścić losowo jeden z zaznaczonych obiektów"
+
+#: ../../txts/editortips:21
+msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
+msgstr "Podobnie, aby zaznaczyć kilka zwierzą lub tekstur terenu, należy przytrzymać przycisk CTRL i zaznaczać je po kolei."
+
+#: ../../txts/editortips:25
+msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
+msgstr ""
+
+#: ../../txts/editortips:29
+msgid "Holding down ALT switches second alternative tool on (if it exists)."
+msgstr "Przytrzymywanie ALT przełącza na alternatywne narządzie (jeśli istnieje)."
+
+#: ../../txts/editortips:33
+msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
+msgstr "Przyciski (1-0) pozwalają na szybką zmianę rozmiaru narzędzia."
+
+#: ../../txts/editortips:37
+msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
+msgstr ""
+
+#: ../../txts/editortips:41
+msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
+msgstr ""
+
+#: ../../txts/editortips:45
+msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
+msgstr ""
 
 #: ../../txts/gametips:13
 msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
@@ -535,7 +607,7 @@ msgstr ""
 
 #: ../../txts/gametips:25
 msgid "Be sure to send a geologist to survey sites before building a well or a mine."
-msgstr ""
+msgstr "Zanim zbudujesz kopalnię czy studnię, wyślij geologa do zbadania terenu."
 
 #: ../../txts/gametips:29
 msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Barracks, etc."
@@ -543,20 +615,20 @@ msgstr ""
 
 #: ../../txts/gametips:33
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Górnicy pracują tylko gdy mają co jeść."
 
 #: ../../txts/gametips:37
 msgid "Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares."
-msgstr ""
+msgstr "Dziel drogi na krótsze odcinki przy użyciu flag. W ten sposób przyspieszysz transport towarów."
 
 #: ../../txts/gametips:41
 msgid "Always build a forester and a ranger's hut, so you will not run out of trunks and food."
-msgstr ""
+msgstr "Zawsze buduj leśniczówkę i opiekuna zwierząt, żeby zapewnić sobie stałe dostawy belek i jedzenia."
 
 #: ../../txts/gametips:45
-msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
-msgstr ""
+msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
+msgstr "Jeszcze jakieś pytania? Na stronie www.widelands.org znajdziesz listę najczęstszych pytań, wiki oraz fora dyskusyjne naszej społeczności."
 
 #: ../../txts/gametips:49
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
-msgstr ""
+msgstr "Używaj przycisków priorytetu w oknie budynku, aby regulować dostawę określonego towaru."

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3296\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-09-06 10:01+0000\n"
+"POT-Creation-Date: 2008-10-26 17:36+0000\n"
 "PO-Revision-Date: 2008-08-27 22:49+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
@@ -513,7 +513,8 @@ msgid "E        Toggles event menu"
 msgstr "E        Schakel gebeurtenissenmenu aan/uit"
 
 #: ../../txts/editor_readme:27
-msgid "F        Toggle Fullscreen"
+#, fuzzy
+msgid "F        Toggles fullscreen"
 msgstr "F        Schakel volledig scherm aan/uit"
 
 #: ../../txts/editor_readme:29
@@ -533,22 +534,26 @@ msgid "T        Toggles tools menu"
 msgstr "T        Schakel gereedschap menu aan/uit"
 
 #: ../../txts/editor_readme:37
+msgid "I        Activates information tool"
+msgstr ""
+
+#: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
 msgstr "CTRL+L   Kaart laden"
 
-#: ../../txts/editor_readme:39
+#: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S    Kaart opslaan"
 
-#: ../../txts/editor_readme:41
+#: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
 msgstr "1-0      Grootte gereedschap aanpassen"
 
-#: ../../txts/editor_readme:43
+#: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr "SHIFT (Vasthouden)   Selecteer eerste alternatieve gereedschap, zolang ingedrukt"
 
-#: ../../txts/editor_readme:45
+#: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT (Vasthouden)   Selecteer tweede alternatieve gereedschap, zolang ingedrukt"
 

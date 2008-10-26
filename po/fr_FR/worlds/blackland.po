@@ -1,12 +1,12 @@
 # Widelands po/fr_FR/worlds/blackland.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # me <anubisnotdead@gmail.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-10-26 17:34+0000\n"
 "PO-Revision-Date: 2008-08-18 23:07+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -103,10 +103,10 @@ msgstr "Rochers"
 msgid "Stones"
 msgstr "Pierres"
 
-#: ../../../worlds/blackland/bobs/tree1/conf:4
-#: ../../../worlds/blackland/bobs/tree2/conf:4
-#: ../../../worlds/blackland/bobs/tree3/conf:4
-#: ../../../worlds/blackland/bobs/tree4/conf:4
+#: ../../../worlds/blackland/bobs/tree1/conf:5
+#: ../../../worlds/blackland/bobs/tree2/conf:5
+#: ../../../worlds/blackland/bobs/tree3/conf:5
+#: ../../../worlds/blackland/bobs/tree4/conf:5
 #: ../../../worlds/blackland/bobs/tree5/conf:4
 #: ../../../worlds/blackland/bobs/tree6/conf:4
 #: ../../../worlds/blackland/bobs/tree7/conf:4
@@ -149,4 +149,3 @@ msgstr "Eau"
 #: ../../../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Poisson"
-

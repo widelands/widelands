@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3296\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-09-06 10:01+0000\n"
+"POT-Creation-Date: 2008-10-26 17:36+0000\n"
 "PO-Revision-Date: 2008-08-21 21:43+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
@@ -150,6 +150,11 @@ msgstr "Schapenboerderij"
 msgid "Smelting Works"
 msgstr "Hoogoven"
 
+#: ../../../tribes/empire/buildings/stonemason/conf:2
+#: ../../../tribes/empire/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Steenhouwer"
+
 #: ../../../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr "Kroeg"
@@ -170,10 +175,6 @@ msgstr "Trainingskamp"
 msgid "Vineyard"
 msgstr "Wijngaarde"
 
-#: ../../../tribes/empire/buildings/vintagery/conf:2
-msgid "Winery"
-msgstr "Wijnmakerij"
-
 #: ../../../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Magazijn"
@@ -189,6 +190,10 @@ msgstr "Weverij"
 #: ../../../tribes/empire/buildings/well/conf:2
 msgid "Well"
 msgstr "Put"
+
+#: ../../../tribes/empire/buildings/winery/conf:2
+msgid "Winery"
+msgstr "Wijnmakerij"
 
 #: ../../../tribes/empire/conf:18
 msgid "The Widelands Development Team"
@@ -591,10 +596,6 @@ msgstr "Boswachter"
 msgid "Geologist"
 msgstr "Geoloog"
 
-#: ../../../tribes/empire/workers/herdsman/conf:2
-msgid "Shepherd"
-msgstr "Schaapsherder"
-
 #: ../../../tribes/empire/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jager"
@@ -623,6 +624,10 @@ msgstr "Mijnwerker"
 msgid "Pig Breeder"
 msgstr "Varkenshouder"
 
+#: ../../../tribes/empire/workers/shepherd/conf:2
+msgid "Shepherd"
+msgstr "Schaapsherder"
+
 #: ../../../tribes/empire/workers/smelter/conf:2
 msgid "Smelter"
 msgstr "Smelter"
@@ -630,11 +635,6 @@ msgstr "Smelter"
 #: ../../../tribes/empire/workers/soldier/conf:2
 msgid "Soldier"
 msgstr "Soldaat"
-
-#: ../../../tribes/empire/workers/stonemason/conf:2
-#: ../../../tribes/empire/buildings/stonemason/conf:2
-msgid "Stonemason"
-msgstr "Steenhouwer"
 
 #: ../../../tribes/empire/workers/toolsmith/conf:2
 msgid "Toolsmith"

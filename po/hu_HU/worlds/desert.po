@@ -1,12 +1,12 @@
 # Widelands po/hu_HU/worlds/desert.po
-# Copyright (C) 2008 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2988\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"POT-Creation-Date: 2008-10-26 17:49+0000\n"
 "PO-Revision-Date: 2007-07-01 18:10+0200\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -19,9 +19,9 @@ msgstr ""
 msgid "Bunny"
 msgstr "Nyuszi"
 
+#: ../../../worlds/desert/bobs/bush1/conf:1
 #: ../../../worlds/desert/bobs/bush4/conf:1
 #: ../../../worlds/desert/bobs/bush5/conf:1
-#: ../../../worlds/desert/bobs/bush1/conf:1
 msgid "Bush"
 msgstr "Bokor"
 
@@ -33,9 +33,9 @@ msgid "Cactus"
 msgstr "Kaktusz"
 
 #: ../../../worlds/desert/bobs/deadtree1/conf:1
+#: ../../../worlds/desert/bobs/deadtree2/conf:1
 #: ../../../worlds/desert/bobs/deadtree3/conf:1
 #: ../../../worlds/desert/bobs/deadtree4/conf:1
-#: ../../../worlds/desert/bobs/deadtree2/conf:1
 msgid "Dead Tree"
 msgstr "Elpusztult fa"
 
@@ -51,31 +51,31 @@ msgstr "Kacsa"
 msgid "Fox"
 msgstr "Róka"
 
+#: ../../../worlds/desert/bobs/grass1/conf:1
 #: ../../../worlds/desert/bobs/grass2/conf:1
 #: ../../../worlds/desert/bobs/grass3/conf:1
-#: ../../../worlds/desert/bobs/grass1/conf:1
 msgid "Grass"
 msgstr "Fű"
 
-#: ../../../worlds/desert/bobs/mushroom2/conf:1
 #: ../../../worlds/desert/bobs/mushroom1/conf:1
+#: ../../../worlds/desert/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Gomba"
 
-#: ../../../worlds/desert/bobs/pebble4/conf:1
-#: ../../../worlds/desert/bobs/pebble3/conf:1
-#: ../../../worlds/desert/bobs/pebble5/conf:1
-#: ../../../worlds/desert/bobs/pebble6/conf:1
 #: ../../../worlds/desert/bobs/pebble1/conf:1
 #: ../../../worlds/desert/bobs/pebble2/conf:1
+#: ../../../worlds/desert/bobs/pebble3/conf:1
+#: ../../../worlds/desert/bobs/pebble4/conf:1
+#: ../../../worlds/desert/bobs/pebble5/conf:1
+#: ../../../worlds/desert/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Kavics"
 
-#: ../../../worlds/desert/bobs/ruin3/conf:1
-#: ../../../worlds/desert/bobs/ruin5/conf:1
-#: ../../../worlds/desert/bobs/ruin2/conf:1
-#: ../../../worlds/desert/bobs/ruin4/conf:1
 #: ../../../worlds/desert/bobs/ruin1/conf:1
+#: ../../../worlds/desert/bobs/ruin2/conf:1
+#: ../../../worlds/desert/bobs/ruin3/conf:1
+#: ../../../worlds/desert/bobs/ruin4/conf:1
+#: ../../../worlds/desert/bobs/ruin5/conf:1
 msgid "ruins"
 msgstr "Rom"
 
@@ -83,9 +83,9 @@ msgstr "Rom"
 msgid "Sheep"
 msgstr "Bárány"
 
+#: ../../../worlds/desert/bobs/skeleton1/conf:1
 #: ../../../worlds/desert/bobs/skeleton2/conf:1
 #: ../../../worlds/desert/bobs/skeleton3/conf:1
-#: ../../../worlds/desert/bobs/skeleton1/conf:1
 msgid "Skeleton"
 msgstr "Csontváz"
 
@@ -93,36 +93,36 @@ msgstr "Csontváz"
 msgid "Shell"
 msgstr "Kagyló"
 
-#: ../../../worlds/desert/bobs/sstones5/conf:1
-#: ../../../worlds/desert/bobs/sstones7/conf:1
-#: ../../../worlds/desert/bobs/sstones4/conf:1
-#: ../../../worlds/desert/bobs/sstones6/conf:1
-#: ../../../worlds/desert/bobs/sstones2/conf:1
 #: ../../../worlds/desert/bobs/sstones1/conf:1
+#: ../../../worlds/desert/bobs/sstones2/conf:1
 #: ../../../worlds/desert/bobs/sstones3/conf:1
+#: ../../../worlds/desert/bobs/sstones4/conf:1
+#: ../../../worlds/desert/bobs/sstones5/conf:1
+#: ../../../worlds/desert/bobs/sstones6/conf:1
+#: ../../../worlds/desert/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Szikla"
 
-#: ../../../worlds/desert/bobs/stones4/conf:1
-#: ../../../worlds/desert/bobs/stones2/conf:1
-#: ../../../worlds/desert/bobs/stones5/conf:1
-#: ../../../worlds/desert/bobs/stones3/conf:1
 #: ../../../worlds/desert/bobs/stones1/conf:1
+#: ../../../worlds/desert/bobs/stones2/conf:1
+#: ../../../worlds/desert/bobs/stones3/conf:1
+#: ../../../worlds/desert/bobs/stones4/conf:1
+#: ../../../worlds/desert/bobs/stones5/conf:1
 #: ../../../worlds/desert/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Kő"
 
-#: ../../../worlds/desert/bobs/tree1/conf:4
+#: ../../../worlds/desert/bobs/tree1/conf:5
+#: ../../../worlds/desert/bobs/tree2/conf:5
+#: ../../../worlds/desert/bobs/tree3/conf:5
+#: ../../../worlds/desert/bobs/tree4/conf:5
+#: ../../../worlds/desert/bobs/tree5/conf:5
 msgid "Palm"
 msgstr "Páma"
 
-#: ../../../worlds/desert/bobs/tree3/conf:4
-#: ../../../worlds/desert/bobs/tree5/conf:4
-#: ../../../worlds/desert/bobs/tree6/conf:4
-#: ../../../worlds/desert/bobs/tree8/conf:4
+#: ../../../worlds/desert/bobs/tree6/conf:5
 #: ../../../worlds/desert/bobs/tree7/conf:4
-#: ../../../worlds/desert/bobs/tree2/conf:4
-#: ../../../worlds/desert/bobs/tree4/conf:4
+#: ../../../worlds/desert/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Fa"
 

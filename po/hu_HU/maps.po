@@ -1,12 +1,12 @@
 # Widelands po/hu_HU/maps.po
-# Copyright (C) 2008 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2988\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-03-07 19:50+0000\n"
+"POT-Creation-Date: 2008-10-26 17:49+0000\n"
 "PO-Revision-Date: 2008-03-07 20:49+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,51 +15,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../campaigns/cconfig:16
+#: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
 msgstr "(Oktató) Barbárok - A második birodalom"
 
-#: ../../campaigns/cconfig:19
+#: ../../campaigns/cconfig:27
 msgid "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
 msgstr ""
 
-#: ../../campaigns/cconfig:22
+#: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
 msgstr "Birodalom - A száműzöttség hónapjai"
 
-#: ../../campaigns/cconfig:25
+#: ../../campaigns/cconfig:33
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr ""
 
-#: ../../campaigns/cconfig:42
+#: ../../campaigns/cconfig:50
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Oktató 1 - Szemek a sötétben"
 
-#: ../../campaigns/cconfig:44
+#: ../../campaigns/cconfig:52
 msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
 msgstr "A Barbár bevezető hadjárat első küldetése. Ebben ab evezetőben megtanulhatod a játék működését és irányítását, bemutatja az egyszerű termelő épleteket (fa, kő, stb.)."
 
-#: ../../campaigns/cconfig:49
+#: ../../campaigns/cconfig:57
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Oktató 2 - A hely amit otthonnak hívunk"
 
-#: ../../campaigns/cconfig:51
+#: ../../campaigns/cconfig:59
 msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
 msgstr ""
 
-#: ../../campaigns/cconfig:58
+#: ../../campaigns/cconfig:65
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Birodalom oktató kampánya - Malac' Mor partjai"
 
-#: ../../campaigns/cconfig:60
+#: ../../campaigns/cconfig:67
 msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
 msgstr ""
 
-#: ../../campaigns/cconfig:65
+#: ../../campaigns/cconfig:72
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Birodalom oktató 2 - Száműzetés egy távoli előőrsre"
 
-#: ../../campaigns/cconfig:67
+#: ../../campaigns/cconfig:74
 msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
 msgstr ""
 
@@ -77,6 +77,14 @@ msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid "A few miles in front of Gerion Coast lies a small unnamed island. Until now, you have not seen any reason, to ship there, but yesterday a big fireball came from the sky and touched down in it's middle. Is this a sign of the Gods? You believe it is and you hope, that your tribe will find the treasure of this island, before other tribes will follow."
+msgstr ""
+
+#: ../../maps/Crater.wmf/elemental:9
+msgid "Crater"
+msgstr ""
+
+#: ../../maps/Crater.wmf/elemental:11
+msgid "Long after a meteor crashed into a couple of mountains life blossoms in the crater. Two tribes are now fighting about the rich resources."
 msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
@@ -116,7 +124,8 @@ msgid "Firegames"
 msgstr "Tüzeskedés"
 
 #: ../../maps/Firegames.wmf/elemental:9
-msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but noone knows, what might happen if you meet an opponent tribe?"
+#, fuzzy
+msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but no-one knows, what might happen if you meet an opponent tribe?"
 msgstr "Ez az istenek próbája vagy egy gonosz terv, te és a törzsed ezen szigeten ébred tűzzel és lávával körülvéve? Eddig úgy tűnt egyedül vagy, de senki sem tudja mi történik ha találkozol egy ellenséges törzzsel."
 
 #: ../../maps/Four Castles.wmf/elemental:7
@@ -126,6 +135,14 @@ msgstr "Négy kastély"
 #: ../../maps/Four Castles.wmf/elemental:9
 msgid "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
 msgstr "Jól védett mitikus erdeikben, a négy hatalom-éhes hadúr e földek teljes bekebelezését tervezgeti..."
+
+#: ../../maps/Four Mountains.wmf/elemental:9
+msgid "Four Mountains"
+msgstr ""
+
+#: ../../maps/Four Mountains.wmf/elemental:11
+msgid "Each tribe is surrounded by four mighty mounains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional watersources. Hint 3: Each mountain contains only one resource."
+msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -151,6 +168,14 @@ msgstr "Katasztrófa"
 msgid "After an impact of an asteroid and the following harsh winter, three isles are connected by ice and stone, setting an end to the peaceful coexistence of three tribes."
 msgstr "Egy aszteroid becsapódás és a kiméletlen tél után, három közeli szigetet kötött össze a jég és kő, ezzel végetvetve három törzs békés együttélésének."
 
+#: ../../maps/Islands at war.wmf/elemental:9
+msgid "Islands at war"
+msgstr ""
+
+#: ../../maps/Islands at war.wmf/elemental:11
+msgid "For centuries you lived peaceful together with the other tribe on the neighboured island. This peace seems to end now. - Your neighbour begins to expand."
+msgstr ""
+
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr "Nyugalom tava"
@@ -158,6 +183,22 @@ msgstr "Nyugalom tava"
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
 msgstr "Ez a folyó, a legősibb erdők mélyén, régóta ismert szépségéről és idillikus nyugalmáról. Azonban most e szent tó partjára két ellenséges törzs érkezett..."
+
+#: ../../maps/Last Bastion.wmf/elemental:9
+msgid "Last Bastion"
+msgstr ""
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid "Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
+msgstr ""
+
+#: ../../maps/Mystical Maze.wmf/elemental:9
+msgid "Mystical Maze"
+msgstr ""
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid "There are two big questions around: Who created this unbelievable big maze and what can be found inside?"
+msgstr ""
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
@@ -167,6 +208,14 @@ msgstr "A Zöld fennsík"
 msgid "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
 msgstr "Egy hatalmas hegyekkel zsúfolt szigeten állsz, ami felbecsülhetetlen és mitikus kincset rejt a közepén - A Zöld Fennsíkot, amit nehéz meghódítani, de könnyű elveszíteni. Ha meg akarod szerezni figyelj oda a többi klánra."
 
+#: ../../maps/Rendez-Vous.wmf/elemental:9
+msgid "Rendez-Vous"
+msgstr ""
+
+#: ../../maps/Rendez-Vous.wmf/elemental:11
+msgid "Only a small hill in the centre of the map connects these four competing tribes. Lead your army right away to this hill and build a giant stronghold as a sign of your superiority! Hint: In the centre is only space for one stronghold. Water can be found everywhere, so there is no need to send out geologists."
+msgstr ""
+
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
 msgstr "Folyamvidék"
@@ -175,6 +224,22 @@ msgstr "Folyamvidék"
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
 msgstr "Misztikus vidék, különböző tájakkal, amiket hatalmas folyók választanak el."
 
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr ""
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid "It smells like swamp, it looks like swamp and it is swamp. But it is the place you were born and you lived your whole life. If you don't want to loose it, defend it! "
+msgstr ""
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr ""
+
+#: ../../maps/The Far North.wmf/elemental:11
+msgid "Some say that impenetrable lands to the far north scared away even the most courageous settlers and the bravest of the brave warriors. Big and old forests, full of big and predatory game, cut across by wetlands and hills were shrouded in mystery. The ones who had managed to come back mentioned tremendous buildings, decorated with carvings and gold from majestic mountain ranges somewhere amongst the wilderness. Dozens of years after only some crumbly ruins remain of these good old times, covered with moss and trees. Their shapes give only an idea about the craftsmanship of ancient constructors. Nobody knows why they (have) disappeared. Nobody knows why. People say that now nothing is blocking the road to wealth. But many will die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
+msgstr ""
+
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
 msgstr "Az oázis háromszög"
@@ -182,6 +247,14 @@ msgstr "Az oázis háromszög"
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
 msgstr "Van valami misztikus, borongós atmoszféra itt a három Oázisnál, amit még senki sem talált meg. Talán te leszel az első, de légy elővigyázatos, mások is keresik!"
+
+#: ../../maps/The Thaw.wmf/elemental:9
+msgid "The Thaw"
+msgstr ""
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid "Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. While solstice they listened to the oracle and went on war. Only survivor will sacrifice his enemies treasures on the ancient altar, build there a splendid castle and gain goodwill and the respect of the Gods."
+msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
@@ -199,6 +272,22 @@ msgstr "A hosszú út"
 msgid "Another strange test by the Gods. To reach the other side, there seems to be no other way, than occupying the land of your enemies."
 msgstr "Az istenek egy újabb furcsa kísérlete. Hogy elérd a túloldalt nincs más választásod mint elfoglalni az ellenségeid földjét."
 
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr ""
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid "In this mountainous region two princes have settled. Now they are expanding their terretories unaware of the fact that they are not alone!"
+msgstr ""
+
+#: ../../maps/Three Warriors.wmf/elemental:9
+msgid "Three Warriors"
+msgstr ""
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus seems a fight inescapable! Hint: Water can be found around the lakes."
+msgstr ""
+
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "Két határ"
@@ -214,3 +303,11 @@ msgstr "A völgyek harca"
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr "Azt mondják, hogy még a napnak és a holdnak is meg kell találniuk az útjukat e hegyek között. SEGÍTSÉG: kiálló kövek jelölik az ércben gazdag földeket. Máshová ne is küldj geológust."
+
+#: ../../maps/Wisent Valley.wmf/elemental:9
+msgid "Wisent Valley"
+msgstr ""
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
+msgstr ""

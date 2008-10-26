@@ -1,18 +1,207 @@
 # Widelands po/fr_FR/tribes/barbarians.po
-# Copyright (C) 2008 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3131\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-08-17 14:38+0000\n"
+"POT-Creation-Date: 2008-10-26 17:34+0000\n"
 "PO-Revision-Date: 2008-08-18 23:07+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tribes/barbarians/bobs/deer/conf:1
+msgid "Deer"
+msgstr "Cerf"
+
+#: ../../../tribes/barbarians/bobs/wildboar/conf:1
+msgid "Wildboar"
+msgstr "Sanglier"
+
+#: ../../../tribes/barbarians/buildings/axefactory/conf:2
+msgid "Axefactory"
+msgstr "Fabrique de haches"
+
+#: ../../../tribes/barbarians/buildings/bakery/conf:2
+msgid "Bakery"
+msgstr "Boulangerie"
+
+#: ../../../tribes/barbarians/buildings/barrier/conf:2
+msgid "Barrier"
+msgstr "Barrière"
+
+#: ../../../tribes/barbarians/buildings/battlearena/conf:2
+msgid "Battle Arena"
+msgstr "Arène"
+
+#: ../../../tribes/barbarians/buildings/big_inn/conf:2
+msgid "Big Inn"
+msgstr "Grande auberge"
+
+#: ../../../tribes/barbarians/buildings/brewery/conf:2
+msgid "Brewery"
+msgstr "Brasserie"
+
+#: ../../../tribes/barbarians/buildings/burner/conf:2
+msgid "Charcoal Burner"
+msgstr "Charbonnière"
+
+#: ../../../tribes/barbarians/buildings/citadel/conf:2
+msgid "Citadel"
+msgstr "Citadelle"
+
+#: ../../../tribes/barbarians/buildings/coalmine/conf:2
+msgid "Coal mine"
+msgstr "Mine de charbon"
+
+#: ../../../tribes/barbarians/buildings/constructionsite/conf:5
+msgid "Construction Site"
+msgstr "Site de construction"
+
+#: ../../../tribes/barbarians/buildings/deep_coalmine/conf:2
+msgid "Deep Coal Mine"
+msgstr "Mine de charbon profonde"
+
+#: ../../../tribes/barbarians/buildings/deep_goldmine/conf:2
+msgid "Deep Gold Mine"
+msgstr "Mine d'or profonde"
+
+#: ../../../tribes/barbarians/buildings/deep_oremine/conf:2
+msgid "Deep Iron Ore Mine"
+msgstr "Mine de fer profonde"
+
+#: ../../../tribes/barbarians/buildings/deeper_coalmine/conf:2
+msgid "Deeper Coal Mine"
+msgstr "Mine de charbon très profonde"
+
+#: ../../../tribes/barbarians/buildings/deeper_goldmine/conf:2
+msgid "Deeper Gold Mine"
+msgstr "Mine d'or très profonde"
+
+#: ../../../tribes/barbarians/buildings/deeper_oremine/conf:2
+msgid "Deeper Iron Ore Mine"
+msgstr "Mine de fer très profonde"
+
+#: ../../../tribes/barbarians/buildings/donjon/conf:2
+msgid "Donjon"
+msgstr "Donjon"
+
+#: ../../../tribes/barbarians/buildings/farm/conf:2
+msgid "Farm"
+msgstr "Ferme"
+
+#: ../../../tribes/barbarians/buildings/fernery/conf:2
+msgid "Fernery"
+msgstr "Horticulteur"
+
+#: ../../../tribes/barbarians/buildings/fisher/conf:2
+msgid "Fisher's Hut"
+msgstr "Cabane de pêcheur"
+
+#: ../../../tribes/barbarians/buildings/fortress/conf:2
+msgid "Fortress"
+msgstr "Forteresse"
+
+#: ../../../tribes/barbarians/buildings/gamekeeper/conf:2
+msgid "Gamekeeper's Hut"
+msgstr "Cabane de garde-chasse"
+
+#: ../../../tribes/barbarians/buildings/goldmine/conf:2
+msgid "Gold Mine"
+msgstr "Mine d'or"
+
+#: ../../../tribes/barbarians/buildings/granitemine/conf:2
+msgid "Granite Mine"
+msgstr "Mine de granit"
+
+#: ../../../tribes/barbarians/buildings/hardener/conf:2
+msgid "Wood Hardener"
+msgstr "Durcisseur de bois"
+
+#: ../../../tribes/barbarians/buildings/headquarters/conf:6
+msgid "Headquarters"
+msgstr "Quartier général"
+
+#: ../../../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../../../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Forgeron de heaumes"
+
+#: ../../../tribes/barbarians/buildings/hunter/conf:2
+msgid "Hunter's Hut"
+msgstr "Cabane de chasseur"
+
+#: ../../../tribes/barbarians/buildings/inn/conf:2
+msgid "Inn"
+msgstr "Auberge"
+
+#: ../../../tribes/barbarians/buildings/lime_kiln/conf:2
+msgid "Lime Kiln"
+msgstr "Four à chaux"
+
+#: ../../../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack's Hut"
+msgstr "Cabane du bûcheron"
+
+#: ../../../tribes/barbarians/buildings/metalworks/conf:2
+msgid "Metalwork Shop"
+msgstr "Ferronerie"
+
+#: ../../../tribes/barbarians/buildings/micro-brewery/conf:2
+msgid "Micro Brewery"
+msgstr "Petite brasserie"
+
+#: ../../../tribes/barbarians/buildings/oremine/conf:2
+msgid "Iron Ore Mine"
+msgstr "Mine de fer"
+
+#: ../../../tribes/barbarians/buildings/quarry/conf:2
+msgid "Quarry"
+msgstr "Carrière"
+
+#: ../../../tribes/barbarians/buildings/ranger/conf:2
+msgid "Ranger's Hut"
+msgstr "Cabane de garde forestier"
+
+#: ../../../tribes/barbarians/buildings/sentry/conf:2
+msgid "Sentry"
+msgstr "Sentinelle"
+
+#: ../../../tribes/barbarians/buildings/smelting_works/conf:2
+msgid "Smelting Works"
+msgstr "Fonderie"
+
+#: ../../../tribes/barbarians/buildings/stronghold/conf:2
+msgid "Stronghold"
+msgstr "Place forte"
+
+#: ../../../tribes/barbarians/buildings/tavern/conf:2
+msgid "Tavern"
+msgstr "Taverne"
+
+#: ../../../tribes/barbarians/buildings/trainingscamp/conf:2
+msgid "Trainingscamp"
+msgstr "Camp d'entraînement"
+
+#: ../../../tribes/barbarians/buildings/warehouse/conf:2
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#: ../../../tribes/barbarians/buildings/warmill/conf:2
+msgid "War Mill"
+msgstr "Moulin de guerre"
+
+#: ../../../tribes/barbarians/buildings/weaving-mill/conf:2
+msgid "Weaving-Mill"
+msgstr "Atelier de tissage"
+
+#: ../../../tribes/barbarians/buildings/well/conf:2
+msgid "Well"
+msgstr "Puit"
 
 #: ../../../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
@@ -26,631 +215,441 @@ msgstr "Barbares"
 msgid "The mighty tribes of the east-lands!"
 msgstr "La puissante tribu des terres de l'est !"
 
-#: ../../../tribes/barbarians\bobs\deer\conf:1
-msgid "Deer"
-msgstr "Cerf"
-
-#: ../../../tribes/barbarians\bobs\wildboar\conf:1
-msgid "Wildboar"
-msgstr "Sanglier"
-
-#: ../../../tribes/barbarians\buildings\axefactory\conf:2
-msgid "Axefactory"
-msgstr "Fabrique de haches"
-
-#: ../../../tribes/barbarians\buildings\bakery\conf:2
-msgid "Bakery"
-msgstr "Boulangerie"
-
-#: ../../../tribes/barbarians\buildings\barrier\conf:2
-msgid "Barrier"
-msgstr "Barrière"
-
-#: ../../../tribes/barbarians\buildings\battlearena\conf:2
-msgid "Battle Arena"
-msgstr "Arène"
-
-#: ../../../tribes/barbarians\buildings\big_inn\conf:2
-msgid "Big Inn"
-msgstr "Grande auberge"
-
-#: ../../../tribes/barbarians\buildings\brewery\conf:2
-msgid "Brewery"
-msgstr "Brasserie"
-
-#: ../../../tribes/barbarians\buildings\burner\conf:2
-msgid "Charcoal Burner"
-msgstr "Charbonnière"
-
-#: ../../../tribes/barbarians\buildings\citadel\conf:2
-msgid "Citadel"
-msgstr "Citadelle"
-
-#: ../../../tribes/barbarians\buildings\coalmine\conf:2
-msgid "Coal mine"
-msgstr "Mine de charbon"
-
-#: ../../../tribes/barbarians\buildings\constructionsite\conf:5
-msgid "Construction Site"
-msgstr "Site de construction"
-
-#: ../../../tribes/barbarians\buildings\deep_coalmine\conf:2
-msgid "Deep Coal Mine"
-msgstr "Mine de charbon profonde"
-
-#: ../../../tribes/barbarians\buildings\deep_goldmine\conf:2
-msgid "Deep Gold Mine"
-msgstr "Mine d'or profonde"
-
-#: ../../../tribes/barbarians\buildings\deep_oremine\conf:2
-msgid "Deep Iron Ore Mine"
-msgstr "Mine de fer profonde"
-
-#: ../../../tribes/barbarians\buildings\deeper_coalmine\conf:2
-msgid "Deeper Coal Mine"
-msgstr "Mine de charbon très profonde"
-
-#: ../../../tribes/barbarians\buildings\deeper_goldmine\conf:2
-msgid "Deeper Gold Mine"
-msgstr "Mine d'or très profonde"
-
-#: ../../../tribes/barbarians\buildings\deeper_oremine\conf:2
-msgid "Deeper Iron Ore Mine"
-msgstr "Mine de fer très profonde"
-
-#: ../../../tribes/barbarians\buildings\donjon\conf:2
-msgid "Donjon"
-msgstr "Donjon"
-
-#: ../../../tribes/barbarians\buildings\farm\conf:2
-msgid "Farm"
-msgstr "Ferme"
-
-#: ../../../tribes/barbarians\buildings\fernery\conf:2
-msgid "Fernery"
-msgstr "Horticulteur"
-
-#: ../../../tribes/barbarians\buildings\fisher\conf:2
-msgid "Fisher's Hut"
-msgstr "Cabane de pêcheur"
-
-#: ../../../tribes/barbarians\buildings\fortress\conf:2
-msgid "Fortress"
-msgstr "Forteresse"
-
-#: ../../../tribes/barbarians\buildings\gamekeeper\conf:2
-msgid "Gamekeeper's Hut"
-msgstr "Cabane de garde-chasse"
-
-#: ../../../tribes/barbarians\buildings\goldmine\conf:2
-msgid "Gold Mine"
-msgstr "Mine d'or"
-
-#: ../../../tribes/barbarians\buildings\granitemine\conf:2
-msgid "Granite Mine"
-msgstr "Mine de granit"
-
-#: ../../../tribes/barbarians\buildings\hardener\conf:2
-msgid "Wood Hardener"
-msgstr "Durcisseur de bois"
-
-#: ../../../tribes/barbarians\buildings\headquarters\conf:6
-msgid "Headquarters"
-msgstr "Quartier général"
-
-#: ../../../tribes/barbarians\buildings\helmsmith\conf:2
-#: ../../../tribes/barbarians\workers\helmsmith\conf:2
-msgid "Helmsmith"
-msgstr "Forgeron de heaumes"
-
-#: ../../../tribes/barbarians\buildings\hunter\conf:2
-msgid "Hunter's Hut"
-msgstr "Cabane de chasseur"
-
-#: ../../../tribes/barbarians\buildings\inn\conf:2
-msgid "Inn"
-msgstr "Auberge"
-
-#: ../../../tribes/barbarians\buildings\lime_kiln\conf:2
-msgid "Lime Kiln"
-msgstr "Four à chaux"
-
-#: ../../../tribes/barbarians\buildings\lumberjack\conf:2
-msgid "Lumberjack's Hut"
-msgstr "Cabane du bûcheron"
-
-#: ../../../tribes/barbarians\buildings\metalworks\conf:2
-msgid "Metalwork Shop"
-msgstr "Ferronerie"
-
-#: ../../../tribes/barbarians\buildings\micro-brewery\conf:2
-msgid "Micro Brewery"
-msgstr "Petite brasserie"
-
-#: ../../../tribes/barbarians\buildings\oremine\conf:2
-msgid "Iron Ore Mine"
-msgstr "Mine de fer"
-
-#: ../../../tribes/barbarians\buildings\quarry\conf:2
-msgid "Quarry"
-msgstr "Carrière"
-
-#: ../../../tribes/barbarians\buildings\ranger\conf:2
-msgid "Ranger's Hut"
-msgstr "Cabane de garde forestier"
-
-#: ../../../tribes/barbarians\buildings\sentry\conf:2
-msgid "Sentry"
-msgstr "Sentinelle"
-
-#: ../../../tribes/barbarians\buildings\smelting_works\conf:2
-msgid "Smelting Works"
-msgstr "Fonderie"
-
-#: ../../../tribes/barbarians\buildings\stronghold\conf:2
-msgid "Stronghold"
-msgstr "Place forte"
-
-#: ../../../tribes/barbarians\buildings\tavern\conf:2
-msgid "Tavern"
-msgstr "Taverne"
-
-#: ../../../tribes/barbarians\buildings\trainingscamp\conf:2
-msgid "Trainingscamp"
-msgstr "Camp d'entraînement"
-
-#: ../../../tribes/barbarians\buildings\warehouse\conf:2
-msgid "Warehouse"
-msgstr "Entrepôt"
-
-#: ../../../tribes/barbarians\buildings\warmill\conf:2
-msgid "War Mill"
-msgstr "Moulin de guerre"
-
-#: ../../../tribes/barbarians\buildings\weaving-mill\conf:2
-msgid "Weaving-Mill"
-msgstr "Atelier de tissage"
-
-#: ../../../tribes/barbarians\buildings\well\conf:2
-msgid "Well"
-msgstr "Puit"
-
-#: ../../../tribes/barbarians\wares\axe\conf:2
+#: ../../../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
 msgstr "Hache"
 
-#: ../../../tribes/barbarians\wares\axe\conf:3
+#: ../../../tribes/barbarians/wares/axe/conf:3
 msgid "The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
 msgstr "La hache est l'outi etl l'arme de base des barbares. Tous les jeunes soldats sont équipés avec cette arme basique, mais le bûcheron utilise également le même modèle."
 
-#: ../../../tribes/barbarians\wares\bakingtray\conf:2
+#: ../../../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Peel"
 msgstr "Pelle à four"
 
-#: ../../../tribes/barbarians\wares\bakingtray\conf:3
+#: ../../../tribes/barbarians/wares/bakingtray/conf:3
 msgid "The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
 msgstr "La pelle à four est l'outil du boulanger. Chaque boulanger en a besoin d'une. Elle est produite à la ferronnerie comme tous les autres outils."
 
-#: ../../../tribes/barbarians\wares\battleaxe\conf:2
+#: ../../../tribes/barbarians/wares/battleaxe/conf:2
 msgid "Battle Axe"
 msgstr "Hache de bataille"
 
-#: ../../../tribes/barbarians\wares\battleaxe\conf:3
+#: ../../../tribes/barbarians/wares/battleaxe/conf:3
 msgid "This is the second most dangerous weapon, the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produce in the axe factory."
 msgstr "Ceci est la seconde arme la plus dangereuse que les barbares sont capables de produire. Seuls les guerriers entraînés sont capable de manier une telle arme. Elle est produite à la fabrique de haches."
 
-#: ../../../tribes/barbarians\wares\beer\conf:2
+#: ../../../tribes/barbarians/wares/beer/conf:2
 msgid "Beer"
 msgstr "Bière"
 
-#: ../../../tribes/barbarians\wares\beer\conf:3
+#: ../../../tribes/barbarians/wares/beer/conf:3
 msgid "Young warriors need some encouragement. This drink makes a man fearless and strong."
 msgstr "Les jeunes guerriers ont besoin de motivation. Cette boisson rend les hommes forts et courageux."
 
-#: ../../../tribes/barbarians\wares\blackwood\conf:2
+#: ../../../tribes/barbarians/wares/blackwood/conf:2
 msgid "Blackwood"
 msgstr "Bois dur"
 
-#: ../../../tribes/barbarians\wares\blackwood\conf:3
+#: ../../../tribes/barbarians/wares/blackwood/conf:3
 msgid "Fire-hardened wood, hard as iron and can not burn, used for military buildings."
 msgstr "Le bois durci au feu, aussi dur que le fer et ignifugé, est utilisé pour les bâtiments militaires."
 
-#: ../../../tribes/barbarians\wares\broadaxe\conf:2
+#: ../../../tribes/barbarians/wares/broadaxe/conf:2
 msgid "Broad Axe"
 msgstr "Grande hache"
 
-#: ../../../tribes/barbarians\wares\broadaxe\conf:3
+#: ../../../tribes/barbarians/wares/broadaxe/conf:3
 msgid "Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory."
 msgstr "Les guerriers avec une connaissance  fondamentale du combat obtiennent une grande hache. Elle est produite à la fabrique de haches."
 
-#: ../../../tribes/barbarians\wares\bronzeaxe\conf:2
+#: ../../../tribes/barbarians/wares/bronzeaxe/conf:2
 msgid "Bronze Axe"
 msgstr "Hache de bronze"
 
-#: ../../../tribes/barbarians\wares\bronzeaxe\conf:3
+#: ../../../tribes/barbarians/wares/bronzeaxe/conf:3
 msgid "The bronze axe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axe factory."
 msgstr "La hache de bronze est considérée comme difficile à manier : elle cause beaucoup de dommages, mais sa durée de vie n'est pas la meilleure. Seuls les guerriers chevronnés peuvent l'utiliser. Elle est produite à la fabrique de haches."
 
-#: ../../../tribes/barbarians\wares\cloth\conf:2
+#: ../../../tribes/barbarians/wares/cloth/conf:2
 msgid "Cloth"
 msgstr "Tissu"
 
-#: ../../../tribes/barbarians\wares\cloth\conf:3
+#: ../../../tribes/barbarians/wares/cloth/conf:3
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
 msgstr "Le tissu est nécessaire pour les navires barbares. Il est produit à partir du lin."
 
-#: ../../../tribes/barbarians\wares\coal\conf:2
+#: ../../../tribes/barbarians/wares/coal/conf:2
 msgid "Coal"
 msgstr "Charbon"
 
-#: ../../../tribes/barbarians\wares\coal\conf:3
+#: ../../../tribes/barbarians/wares/coal/conf:3
 msgid "The fires of the barbarians are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
 msgstr "Les feux des barbares sont habituellement alimentées avec du bois, mais parfois il ne chauffe pas assez. Dans ce cas, le charbon est utilisé."
 
-#: ../../../tribes/barbarians\wares\fire_tongs\conf:2
+#: ../../../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
 msgstr "Pinces"
 
-#: ../../../tribes/barbarians\wares\fire_tongs\conf:3
+#: ../../../tribes/barbarians/wares/fire_tongs/conf:3
 msgid "The fire tongs are the tool of the smelter, working in the smelting works. Produced in the metal works."
 msgstr "Les pinces sont l'outil du fondeur, qui travaille à la fonderie. Elles sont produites à la ferronnerie."
 
-#: ../../../tribes/barbarians\wares\fish\conf:2
+#: ../../../tribes/barbarians/wares/fish/conf:2
 msgid "Fish"
 msgstr "Poisson"
 
-#: ../../../tribes/barbarians\wares\fish\conf:3
+#: ../../../tribes/barbarians/wares/fish/conf:3
 msgid "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
 msgstr "En plus des miches de pain et de la viande, le poisson est également une source de nourriture pour les barbares."
 
-#: ../../../tribes/barbarians\wares\fishing_rod\conf:2
+#: ../../../tribes/barbarians/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
 msgstr "Canne à pêche"
 
-#: ../../../tribes/barbarians\wares\fishing_rod\conf:3
+#: ../../../tribes/barbarians/wares/fishing_rod/conf:3
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
 msgstr "Les cannes à pêche sont utilisées par les pêcheurs barbares pour attraper du poisson."
 
-#: ../../../tribes/barbarians\wares\flax\conf:2
+#: ../../../tribes/barbarians/wares/flax/conf:2
 msgid "Flax"
 msgstr "Lin"
 
-#: ../../../tribes/barbarians\wares\flax\conf:3
+#: ../../../tribes/barbarians/wares/flax/conf:3
 msgid "Flax is a beautiful flower, which are used to make cloth."
 msgstr "Le lin est une belle plante, utilisée pour fabriquer du tissu."
 
-#: ../../../tribes/barbarians\wares\gold\conf:2
+#: ../../../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
 msgstr "Or"
 
-#: ../../../tribes/barbarians\wares\gold\conf:3
+#: ../../../tribes/barbarians/wares/gold/conf:3
 msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
 msgstr "L'or est le plus précieux de tous les métaux ; seulement les choses très importantes en sont garnies. "
 
-#: ../../../tribes/barbarians\wares\goldstone\conf:2
+#: ../../../tribes/barbarians/wares/goldstone/conf:2
 msgid "Goldstone"
 msgstr "Pépite d'or"
 
-#: ../../../tribes/barbarians\wares\goldstone\conf:3
+#: ../../../tribes/barbarians/wares/goldstone/conf:3
 msgid "This is the yellow goldstone."
 msgstr "Ceci est la pépite d'or jaune."
 
-#: ../../../tribes/barbarians\wares\grout\conf:2
+#: ../../../tribes/barbarians/wares/grout/conf:2
 msgid "Grout"
 msgstr "Chaux"
 
-#: ../../../tribes/barbarians\wares\grout\conf:3
+#: ../../../tribes/barbarians/wares/grout/conf:3
 msgid "Raw stone can be enhanced to grout which delivers solid, non burning build material."
 msgstr "La pierre brute peut être transformée en chaux, qui fournit un matériau de construction solide et ignifugé."
 
-#: ../../../tribes/barbarians\wares\hammer\conf:2
+#: ../../../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
 msgstr "Marteau"
 
-#: ../../../tribes/barbarians\wares\hammer\conf:3
+#: ../../../tribes/barbarians/wares/hammer/conf:3
 msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the blacksmiths and the helmsmiths. Make sure you always got some in reserve! Build at the metal works."
 msgstr "Le marteau est un outil essentiel. Il est utilisé par le géologue, l'ouvrier et toutes les sortes de forgerons. Assurez-vous de toujours en avoir en réserve ! Il est produit à la feronnerie."
 
-#: ../../../tribes/barbarians\wares\helm\conf:2
+#: ../../../tribes/barbarians/wares/helm/conf:2
 msgid "Helmet"
 msgstr "Casque"
 
-#: ../../../tribes/barbarians\wares\helm\conf:3
+#: ../../../tribes/barbarians/wares/helm/conf:3
 msgid "Basic defence of a warrior"
 msgstr "Défense basique d'un guerrier "
 
-#: ../../../tribes/barbarians\wares\hunting_spear\conf:2
+#: ../../../tribes/barbarians/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
 msgstr "Lance de Chasseur"
 
-#: ../../../tribes/barbarians\wares\hunting_spear\conf:3
+#: ../../../tribes/barbarians/wares/hunting_spear/conf:3
 msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metal works."
 msgstr "Cette lance est suffisamment légère pour être projetée, mais suffisamment lourde pour tuer un animal d'un coup. Elle est uniquement utilisée par les chasseurs. Elle est produite à la ferronnerie."
 
-#: ../../../tribes/barbarians\wares\iron\conf:2
+#: ../../../tribes/barbarians/wares/iron/conf:2
 msgid "Iron"
 msgstr "Fer"
 
-#: ../../../tribes/barbarians\wares\iron\conf:3
+#: ../../../tribes/barbarians/wares/iron/conf:3
 msgid "Weapons and tools are made of iron."
 msgstr "Les armes et les outils sont fait en fer."
 
-#: ../../../tribes/barbarians\wares\ironore\conf:2
+#: ../../../tribes/barbarians/wares/ironore/conf:2
 msgid "Iron Ore"
 msgstr "Minerai de fer"
 
-#: ../../../tribes/barbarians\wares\ironore\conf:3
+#: ../../../tribes/barbarians/wares/ironore/conf:3
 msgid "This is the red iron ore."
 msgstr "Ceci est le minerai de fer rouge."
 
-#: ../../../tribes/barbarians\wares\kitchen_tools\conf:2
+#: ../../../tribes/barbarians/wares/kitchen_tools/conf:2
 msgid "Kitchen Tools"
 msgstr "Ustensiles de Cuisine"
 
-#: ../../../tribes/barbarians\wares\kitchen_tools\conf:3
+#: ../../../tribes/barbarians/wares/kitchen_tools/conf:3
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr "Comment préparer un repas, un casse-croûte ou une ration, s'il n'y a pas d'ustensiles de cuisine ?"
 
-#: ../../../tribes/barbarians\wares\mask\conf:2
+#: ../../../tribes/barbarians/wares/mask/conf:2
 msgid "Mask"
 msgstr "Masque"
 
-#: ../../../tribes/barbarians\wares\mask\conf:3
+#: ../../../tribes/barbarians/wares/mask/conf:3
 msgid "An enhanced version of the helmet."
 msgstr "Une version améliorée du casque."
 
-#: ../../../tribes/barbarians\wares\meal\conf:2
+#: ../../../tribes/barbarians/wares/meal/conf:2
 msgid "Meal"
 msgstr "Repas"
 
-#: ../../../tribes/barbarians\wares\meal\conf:3
+#: ../../../tribes/barbarians/wares/meal/conf:3
 msgid "A real meal which satisfies all miners needs"
 msgstr "Un vrai repas qui satisfait tous les besoins des mineurs"
 
-#: ../../../tribes/barbarians\wares\meat\conf:2
+#: ../../../tribes/barbarians/wares/meat/conf:2
 msgid "Meat"
 msgstr "Viande"
 
-#: ../../../tribes/barbarians\wares\meat\conf:3
+#: ../../../tribes/barbarians/wares/meat/conf:3
 msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
 msgstr "La viande contient beaucoup d'énergie. Elle est utilisée dans les auberges et les tavernes pour préparer les repas des mineurs et dans les camps d'entraînement afin de garder les soldats en forme."
 
-#: ../../../tribes/barbarians\wares\pick\conf:2
+#: ../../../tribes/barbarians/wares/pick/conf:2
 msgid "Pick"
 msgstr "Pioche"
 
-#: ../../../tribes/barbarians\wares\pick\conf:3
+#: ../../../tribes/barbarians/wares/pick/conf:3
 msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
 msgstr "Cette pioche est utilisée par les tailleurs de pierre et les mineurs. Elle est produite à la ferronnerie."
 
-#: ../../../tribes/barbarians\wares\pittabread\conf:2
+#: ../../../tribes/barbarians/wares/pittabread/conf:2
 msgid "Pitta Bread"
 msgstr "Miche de pain"
 
-#: ../../../tribes/barbarians\wares\pittabread\conf:3
+#: ../../../tribes/barbarians/wares/pittabread/conf:3
 msgid "The barbarian backers are best in making this flat and tasty pitta bread."
 msgstr "Les boulangers barbares sont les meilleurs pour faire ces plates miches de pain goûteuses."
 
-#: ../../../tribes/barbarians\wares\ration\conf:2
+#: ../../../tribes/barbarians/wares/ration/conf:2
 msgid "Ration"
 msgstr "Ration"
 
-#: ../../../tribes/barbarians\wares\ration\conf:3
+#: ../../../tribes/barbarians/wares/ration/conf:3
 msgid "A small bite to keep miners strong and working."
 msgstr "Un petit en cas pour redonner des forces aux mineurs. "
 
-#: ../../../tribes/barbarians\wares\raw_stone\conf:2
+#: ../../../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
 msgstr "Pierre"
 
-#: ../../../tribes/barbarians\wares\raw_stone\conf:3
+#: ../../../tribes/barbarians/wares/raw_stone/conf:3
 msgid "Raw Stones are the secondary build material of the barbarians."
 msgstr "Les pierres sont la deuxième ressource de construction des barbares."
 
-#: ../../../tribes/barbarians\wares\scythe\conf:2
+#: ../../../tribes/barbarians/wares/scythe/conf:2
 msgid "Scythe"
 msgstr "Faux"
 
-#: ../../../tribes/barbarians\wares\scythe\conf:3
+#: ../../../tribes/barbarians/wares/scythe/conf:3
 msgid "The scythe is the tool of the farmers. It is produced in the metal works."
 msgstr "La faux est l'outil des fermiers. Elle est produite à la ferronnerie."
 
-#: ../../../tribes/barbarians\wares\sharpaxe\conf:2
+#: ../../../tribes/barbarians/wares/sharpaxe/conf:2
 msgid "Sharp Axe"
 msgstr "Hache pointue"
 
-#: ../../../tribes/barbarians\wares\sharpaxe\conf:3
+#: ../../../tribes/barbarians/wares/sharpaxe/conf:3
 msgid "Real warriors consider the sharp axe the first real weapon, after being able to handle an ordinary axe, this weapon is tackled. It is heavier and sharper than the ordinary axe. Build in the axe factory."
 msgstr "Les vrais guerriers considèrent la hache pointue comme la première véritable arme, une fois qu'ils sont capables de manier la hache ordinaire, ils s'attaquent à celle-ci. Elle est plus lourde et plus aiguisée que la hache ordinaire. Elle est construite à la fabrique de haches."
 
-#: ../../../tribes/barbarians\wares\shovel\conf:2
+#: ../../../tribes/barbarians/wares/shovel/conf:2
 msgid "Shovel"
 msgstr "Pelle"
 
-#: ../../../tribes/barbarians\wares\shovel\conf:3
+#: ../../../tribes/barbarians/wares/shovel/conf:3
 msgid "The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Build at the metal works."
 msgstr "La pelle est nécessaire à la plantation. Elle est utilisée par l'horticulteur et le garde forestier. Elle est produite à la ferronnerie."
 
-#: ../../../tribes/barbarians\wares\snack\conf:2
+#: ../../../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
 msgstr "Casse-croûte"
 
-#: ../../../tribes/barbarians\wares\snack\conf:3
+#: ../../../tribes/barbarians/wares/snack/conf:3
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 msgstr "Un peu plus gros, pour les mineurs avancés qui veulent un gros morceau."
 
-#: ../../../tribes/barbarians\wares\strongbeer\conf:2
+#: ../../../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"
 msgstr "Bière corsée"
 
-#: ../../../tribes/barbarians\wares\strongbeer\conf:3
+#: ../../../tribes/barbarians/wares/strongbeer/conf:3
 msgid "Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale."
 msgstr "Seule cette bière est acceptable pour les guerriers vétérans. Certains disent que toute la puissance des barbares se trouve dans cette bière."
 
-#: ../../../tribes/barbarians\wares\thatchreed\conf:2
+#: ../../../tribes/barbarians/wares/thatchreed/conf:2
 msgid "Thatch Reed"
 msgstr "Chaume de roseau"
 
-#: ../../../tribes/barbarians\wares\thatchreed\conf:3
+#: ../../../tribes/barbarians/wares/thatchreed/conf:3
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
 msgstr "Le roseau de chaume est utilisé pour faire des toits imperméables."
 
-#: ../../../tribes/barbarians\wares\trunk\conf:2
+#: ../../../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
 msgstr "Tronc"
 
-#: ../../../tribes/barbarians\wares\trunk\conf:3
+#: ../../../tribes/barbarians/wares/trunk/conf:3
 msgid "Trunks are the primary build material of the barbarians."
 msgstr "Les troncs sont la permière ressource de construction des barbares."
 
-#: ../../../tribes/barbarians\wares\warhelmet\conf:2
+#: ../../../tribes/barbarians/wares/warhelmet/conf:2
 msgid "War Helmet"
 msgstr "Heaume"
 
-#: ../../../tribes/barbarians\wares\warhelmet\conf:3
+#: ../../../tribes/barbarians/wares/warhelmet/conf:3
 msgid "An enhanced mask for barbarian warriors."
 msgstr "Un masque amélioré, pour les guerriers barbares."
 
-#: ../../../tribes/barbarians\wares\warriorsaxe\conf:2
+#: ../../../tribes/barbarians/wares/warriorsaxe/conf:2
 msgid "Warriors Axe"
 msgstr "Hache de guerrier"
 
-#: ../../../tribes/barbarians\wares\warriorsaxe\conf:3
+#: ../../../tribes/barbarians/wares/warriorsaxe/conf:3
 msgid "The warriors axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerful axes. Build at the axe factory."
 msgstr "La hache de guerrier est la plus dangereuse de toutes les armes. Seuls quelques guerriers sont capables de manipuler ces gigantesques et puissantes haches. Elles sont faites à la fabrique de haches."
 
-#: ../../../tribes/barbarians\wares\water\conf:2
+#: ../../../tribes/barbarians/wares/water/conf:2
 msgid "Water"
 msgstr "Eau"
 
-#: ../../../tribes/barbarians\wares\water\conf:3
+#: ../../../tribes/barbarians/wares/water/conf:3
 msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to produce grout."
 msgstr "L'eau est l'essence même de la vie ! Cette eau est utilisée à beaucoup d'endroits, pour faire du pain, de la bière, ou de la chaux."
 
-#: ../../../tribes/barbarians\wares\wheat\conf:2
+#: ../../../tribes/barbarians/wares/wheat/conf:2
 msgid "Wheat"
 msgstr "Blé"
 
-#: ../../../tribes/barbarians\wares\wheat\conf:3
+#: ../../../tribes/barbarians/wares/wheat/conf:3
 msgid "Wheat is essential for surviving. Delicious pitta bread and strong ales can be made of this wheat."
 msgstr "Le blé est essentiel pour la survie, le bon pain et les bières fortes en sont tirées."
 
-#: ../../../tribes/barbarians\workers\baker\conf:2
+#: ../../../tribes/barbarians/workers/baker/conf:2
 msgid "Baker"
 msgstr "Boulanger"
 
-#: ../../../tribes/barbarians\workers\blacksmith\conf:2
+#: ../../../tribes/barbarians/workers/blacksmith/conf:2
 msgid "Blacksmith"
 msgstr "Forgeron"
 
-#: ../../../tribes/barbarians\workers\brewer\conf:2
+#: ../../../tribes/barbarians/workers/brewer/conf:2
 msgid "Brewer"
 msgstr "Brasseur"
 
-#: ../../../tribes/barbarians\workers\builder\conf:2
+#: ../../../tribes/barbarians/workers/builder/conf:2
 msgid "Builder"
 msgstr "Bâtisseur"
 
-#: ../../../tribes/barbarians\workers\burner\conf:2
+#: ../../../tribes/barbarians/workers/burner/conf:2
 msgid "Burner"
 msgstr "Brûleur"
 
-#: ../../../tribes/barbarians\workers\carrier\conf:2
+#: ../../../tribes/barbarians/workers/carrier/conf:2
 msgid "Carrier"
 msgstr "Porteur"
 
-#: ../../../tribes/barbarians\workers\chief-miner\conf:2
+#: ../../../tribes/barbarians/workers/chief-miner/conf:2
 msgid "Chief Miner"
 msgstr "Chef mineur"
 
-#: ../../../tribes/barbarians\workers\farmer\conf:2
+#: ../../../tribes/barbarians/workers/farmer/conf:2
 msgid "Farmer"
 msgstr "Fermier"
 
-#: ../../../tribes/barbarians\workers\ferner\conf:2
+#: ../../../tribes/barbarians/workers/ferner/conf:2
 msgid "Ferner"
 msgstr "Horticulteur"
 
-#: ../../../tribes/barbarians\workers\fisher\conf:2
+#: ../../../tribes/barbarians/workers/fisher/conf:2
 msgid "Fisher"
 msgstr "Pêcheur"
 
-#: ../../../tribes/barbarians\workers\gamekeeper\conf:2
+#: ../../../tribes/barbarians/workers/gamekeeper/conf:2
 msgid "Gamekeeper"
 msgstr "Garde chasse"
 
-#: ../../../tribes/barbarians\workers\geologist\conf:2
+#: ../../../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
 msgstr "Géologue"
 
-#: ../../../tribes/barbarians\workers\hunter\conf:2
+#: ../../../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Chasseur"
 
-#: ../../../tribes/barbarians\workers\innkeeper\conf:2
+#: ../../../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Aubergiste"
 
-#: ../../../tribes/barbarians\workers\lime-burner\conf:2
+#: ../../../tribes/barbarians/workers/lime-burner/conf:2
 msgid "Lime-Burner"
 msgstr "Brûleur de chaux"
 
-#: ../../../tribes/barbarians\workers\lumberjack\conf:2
+#: ../../../tribes/barbarians/workers/lumberjack/conf:2
 msgid "Lumberjack"
 msgstr "Bûcheron"
 
-#: ../../../tribes/barbarians\workers\master-blacksmith\conf:2
+#: ../../../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
 msgstr "Maître forgeron"
 
-#: ../../../tribes/barbarians\workers\master-brewer\conf:2
+#: ../../../tribes/barbarians/workers/master-brewer/conf:2
 msgid "Master Brewer"
 msgstr "Maître brasseur"
 
-#: ../../../tribes/barbarians\workers\master-miner\conf:2
+#: ../../../tribes/barbarians/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr "Maître mineur"
 
-#: ../../../tribes/barbarians\workers\miner\conf:2
+#: ../../../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
 msgstr "Mineur"
 
-#: ../../../tribes/barbarians\workers\ranger\conf:2
+#: ../../../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
 msgstr "Sylviculteur"
 
-#: ../../../tribes/barbarians\workers\smelter\conf:2
+#: ../../../tribes/barbarians/workers/smelter/conf:2
 msgid "Smelter"
 msgstr "Fondeur"
 
-#: ../../../tribes/barbarians\workers\soldier\conf:2
+#: ../../../tribes/barbarians/workers/soldier/conf:2
 msgid "Soldier"
 msgstr "Soldat"
 
-#: ../../../tribes/barbarians\workers\stonemason\conf:2
+#: ../../../tribes/barbarians/workers/stonemason/conf:2
 msgid "Stonemason"
 msgstr "Tailleur de pierres"
 
-#: ../../../tribes/barbarians\workers\trainer\conf:2
+#: ../../../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Entraîneur"
 
-#: ../../../tribes/barbarians\workers\weaver\conf:2
+#: ../../../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Tisserand"
 
 #~ msgid "Stonegrinder"
 #~ msgstr "Fabrique de chaux"
+
 #~ msgid "Bakingtray"
 #~ msgstr "Plaque de cuisson"
+
 #~ msgid "Coalearth"
 #~ msgstr "Terre charbonneuse"
-#~ msgid ""
-#~ "This earth is found in the deep coal mines. It needs to be enhanced to "
-#~ "get proper coal"
-#~ msgstr ""
-#~ "Cette terre est trouvée dans le mines de charbon profondes. Elle doit "
-#~ "être épurée pour fournir du charbon. "
+
+#~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
+#~ msgstr "Cette terre est trouvée dans le mines de charbon profondes. Elle doit être épurée pour fournir du charbon. "
+
 #~ msgid "Grindstone"
 #~ msgstr "Chaux"
-

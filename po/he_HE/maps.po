@@ -1,12 +1,12 @@
 # Widelands po/he_HE/maps.po
-# Copyright (C) 2007 Widelands Development Team.
+# Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"POT-Creation-Date: 2008-10-26 17:35+0000\n"
 "PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,83 +14,99 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../campaigns/cconfig:16
+#: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
 msgstr ""
 
-#: ../../campaigns/cconfig:19
+#: ../../campaigns/cconfig:27
 msgid "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
 msgstr ""
 
-#: ../../campaigns/cconfig:22
+#: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
 msgstr ""
 
-#: ../../campaigns/cconfig:25
+#: ../../campaigns/cconfig:33
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr ""
 
-#: ../../campaigns/cconfig:42
+#: ../../campaigns/cconfig:50
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr ""
 
-#: ../../campaigns/cconfig:44
+#: ../../campaigns/cconfig:52
 msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
 msgstr ""
 
-#: ../../campaigns/cconfig:49
+#: ../../campaigns/cconfig:57
 msgid "Tutorial2 - A Place to call Home"
 msgstr ""
 
-#: ../../campaigns/cconfig:51
+#: ../../campaigns/cconfig:59
 msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
 msgstr ""
 
-#: ../../campaigns/cconfig:58
+#: ../../campaigns/cconfig:65
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr ""
 
-#: ../../campaigns/cconfig:60
+#: ../../campaigns/cconfig:67
 msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
 msgstr ""
 
-#: ../../campaigns/cconfig:65
+#: ../../campaigns/cconfig:72
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr ""
 
-#: ../../campaigns/cconfig:67
+#: ../../campaigns/cconfig:74
 msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
 msgstr ""
 
-#: ../../maps/Checkmate.wmf/elemental:9
+#: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
 msgstr ""
 
-#: ../../maps/Checkmate.wmf/elemental:11
+#: ../../maps/Checkmate.wmf/elemental:9
 msgid "Whether just one of nature's strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
 msgstr ""
 
-#: ../../maps/Dry Riverbed.wmf/elemental:9
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr ""
+
+#: ../../maps/Comet Island.wmf/elemental:9
+msgid "A few miles in front of Gerion Coast lies a small unnamed island. Until now, you have not seen any reason, to ship there, but yesterday a big fireball came from the sky and touched down in it's middle. Is this a sign of the Gods? You believe it is and you hope, that your tribe will find the treasure of this island, before other tribes will follow."
+msgstr ""
+
+#: ../../maps/Crater.wmf/elemental:9
+msgid "Crater"
+msgstr ""
+
+#: ../../maps/Crater.wmf/elemental:11
+msgid "Long after a meteor crashed into a couple of mountains life blossoms in the crater. Two tribes are now fighting about the rich resources."
+msgstr ""
+
+#: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
 msgstr ""
 
-#: ../../maps/Dry Riverbed.wmf/elemental:11
+#: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
 msgstr ""
 
-#: ../../maps/Elven Forests.wmf/elemental:9
+#: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr ""
 
-#: ../../maps/Elven Forests.wmf/elemental:11
+#: ../../maps/Elven Forests.wmf/elemental:9
 msgid "The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
 msgstr ""
 
-#: ../../maps/Enemy in sight.wmf/elemental:9
+#: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
 msgstr ""
 
-#: ../../maps/Enemy in sight.wmf/elemental:11
+#: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr ""
 
@@ -102,98 +118,194 @@ msgstr ""
 msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
 
-#: ../../maps/Firegames.wmf/elemental:9
+#: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
 msgstr ""
 
-#: ../../maps/Firegames.wmf/elemental:11
-msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but noone knows, what might happen if you meet an opponent tribe?"
+#: ../../maps/Firegames.wmf/elemental:9
+msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but no-one knows, what might happen if you meet an opponent tribe?"
 msgstr ""
 
-#: ../../maps/Four Castles.wmf/elemental:9
+#: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
 msgstr ""
 
-#: ../../maps/Four Castles.wmf/elemental:11
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
 msgstr ""
 
-#: ../../maps/Glacier Lake.wmf/elemental:9
+#: ../../maps/Four Mountains.wmf/elemental:9
+msgid "Four Mountains"
+msgstr ""
+
+#: ../../maps/Four Mountains.wmf/elemental:11
+msgid "Each tribe is surrounded by four mighty mounains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional watersources. Hint 3: Each mountain contains only one resource."
+msgstr ""
+
+#: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
 msgstr ""
 
-#: ../../maps/Glacier Lake.wmf/elemental:11
+#: ../../maps/Glacier Lake.wmf/elemental:9
 msgid "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
 msgstr ""
 
-#: ../../maps/Golden Peninsula.wmf/elemental:9
+#: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
 msgstr ""
 
-#: ../../maps/Golden Peninsula.wmf/elemental:11
+#: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr ""
 
-#: ../../maps/Lake of tranquility.wmf/elemental:9
+#: ../../maps/Impact.wmf/elemental:7
+msgid "Impact"
+msgstr ""
+
+#: ../../maps/Impact.wmf/elemental:9
+msgid "After an impact of an asteroid and the following harsh winter, three isles are connected by ice and stone, setting an end to the peaceful coexistence of three tribes."
+msgstr ""
+
+#: ../../maps/Islands at war.wmf/elemental:9
+msgid "Islands at war"
+msgstr ""
+
+#: ../../maps/Islands at war.wmf/elemental:11
+msgid "For centuries you lived peaceful together with the other tribe on the neighboured island. This peace seems to end now. - Your neighbour begins to expand."
+msgstr ""
+
+#: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr ""
 
-#: ../../maps/Lake of tranquility.wmf/elemental:11
+#: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
 msgstr ""
 
-#: ../../maps/Plateau.wmf/elemental:9
+#: ../../maps/Last Bastion.wmf/elemental:9
+msgid "Last Bastion"
+msgstr ""
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid "Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
+msgstr ""
+
+#: ../../maps/Mystical Maze.wmf/elemental:9
+msgid "Mystical Maze"
+msgstr ""
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid "There are two big questions around: Who created this unbelievable big maze and what can be found inside?"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
 msgstr ""
 
-#: ../../maps/Plateau.wmf/elemental:11
+#: ../../maps/Plateau.wmf/elemental:9
 msgid "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
 msgstr ""
 
-#: ../../maps/Riverlands.wmf/elemental:9
+#: ../../maps/Rendez-Vous.wmf/elemental:9
+msgid "Rendez-Vous"
+msgstr ""
+
+#: ../../maps/Rendez-Vous.wmf/elemental:11
+msgid "Only a small hill in the centre of the map connects these four competing tribes. Lead your army right away to this hill and build a giant stronghold as a sign of your superiority! Hint: In the centre is only space for one stronghold. Water can be found everywhere, so there is no need to send out geologists."
+msgstr ""
+
+#: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
 msgstr ""
 
-#: ../../maps/Riverlands.wmf/elemental:11
+#: ../../maps/Riverlands.wmf/elemental:9
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
 msgstr ""
 
-#: ../../maps/The Oasis Triangle.wmf/elemental:9
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr ""
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid "It smells like swamp, it looks like swamp and it is swamp. But it is the place you were born and you lived your whole life. If you don't want to loose it, defend it! "
+msgstr ""
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr ""
+
+#: ../../maps/The Far North.wmf/elemental:11
+msgid "Some say that impenetrable lands to the far north scared away even the most courageous settlers and the bravest of the brave warriors. Big and old forests, full of big and predatory game, cut across by wetlands and hills were shrouded in mystery. The ones who had managed to come back mentioned tremendous buildings, decorated with carvings and gold from majestic mountain ranges somewhere amongst the wilderness. Dozens of years after only some crumbly ruins remain of these good old times, covered with moss and trees. Their shapes give only an idea about the craftsmanship of ancient constructors. Nobody knows why they (have) disappeared. Nobody knows why. People say that now nothing is blocking the road to wealth. But many will die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
+msgstr ""
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
 msgstr ""
 
-#: ../../maps/The Oasis Triangle.wmf/elemental:11
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
 msgstr ""
 
-#: ../../maps/The big lake.wmf/elemental:9
+#: ../../maps/The Thaw.wmf/elemental:9
+msgid "The Thaw"
+msgstr ""
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid "Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. While solstice they listened to the oracle and went on war. Only survivor will sacrifice his enemies treasures on the ancient altar, build there a splendid castle and gain goodwill and the respect of the Gods."
+msgstr ""
+
+#: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
 msgstr ""
 
-#: ../../maps/The big lake.wmf/elemental:11
+#: ../../maps/The big lake.wmf/elemental:9
 msgid "This island once came out of the deepest grounds of the sea. In those days, fire rose out of the salty seawater and brought ash, stones and earth to daylight. And the fire came nearer and nearer to the sun, while the mountain grew and grew. Until one day, when the whole firemountain exploded. Nowadays only this ring is left from that mighty firemountain. Do you think, that it is big enough for more than one tribe?"
 msgstr ""
 
-#: ../../maps/The long way.wmf/elemental:9
+#: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
 msgstr ""
 
-#: ../../maps/The long way.wmf/elemental:11
+#: ../../maps/The long way.wmf/elemental:9
 msgid "Another strange test by the Gods. To reach the other side, there seems to be no other way, than occupying the land of your enemies."
 msgstr ""
 
-#: ../../maps/Two frontiers.wmf/elemental:9
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr ""
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid "In this mountainous region two princes have settled. Now they are expanding their terretories unaware of the fact that they are not alone!"
+msgstr ""
+
+#: ../../maps/Three Warriors.wmf/elemental:9
+msgid "Three Warriors"
+msgstr ""
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus seems a fight inescapable! Hint: Water can be found around the lakes."
+msgstr ""
+
+#: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr ""
 
-#: ../../maps/Two frontiers.wmf/elemental:11
+#: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
 msgstr ""
 
-#: ../../maps/War of the Valleys.wmf/elemental:9
+#: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr ""
 
-#: ../../maps/War of the Valleys.wmf/elemental:11
+#: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
+msgstr ""
+
+#: ../../maps/Wisent Valley.wmf/elemental:9
+msgid "Wisent Valley"
+msgstr ""
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr ""
