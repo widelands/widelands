@@ -153,6 +153,9 @@ private:
 	void parse_workers  (char const * directory);
 	void parse_wares    (char const * wares);
 	void parse_bobs     (char const * directory);
+
+	Tribe_Descr & operator= (Tribe_Descr const &);
+	explicit Tribe_Descr    (Tribe_Descr const &);
 };
 
 };
