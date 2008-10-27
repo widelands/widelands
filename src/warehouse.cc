@@ -833,9 +833,8 @@ Swallow the item, adding it to out inventory.
 */
 void Warehouse::incorporate_item(Game* g, WareInstance* item)
 {
-	item->destroy(g);
-
 	m_supply->add_wares(item->descr_index(), 1);
+	return item->destroy(g);
 }
 
 
