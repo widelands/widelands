@@ -1,3 +1,131 @@
+build-13:
+- Count casualties/kills, military/civilian buildings lost/defeated and present
+  them in the general statistics menu (except for civilian buildings defeated,
+  which is omitted from the user interface).
+- Improved map options menu.
+- Implemented counting of casualties and kills and added this data to the
+  general statistics.
+- Improved progresswindow use and added new loading screens.
+- Added menu for editor to the mainmenu.
+- Improved save game dialog.
+- Improved mapselect and launchgame menu.
+- Improved ingame UI.
+- Implemented "/me" command for multiplayer chat.
+- Improved multiplayermenu.
+- Improved optionsmenu and added possibility to set autosave interval.
+- Implemented option for maximum FPS to smaller CPU-usage.
+- Improved editor new map dialog.
+- Made automatic roadbuilding mode after creation of non-connected flag optional.
+- Improved production program handling:
+	* Eliminated the need for line numbers in the programs.
+	* Fixed bug that the consume command required that all wares in a
+	  consume-group must be of the same type. For example the command
+	  "2=consume smoked_fish,smoked_meat 2" required 2 smoked_fish
+	  or 2 smoked_meat. Now it will also work if there is only one of each.
+	* Change the syntax of a consume-group to ware1[,ware2[,...]][:quantitiy]
+	  (for example "smoked_fish,smoked_meat:2").
+	* Extend the consume command to take any number of consume-groups (for
+	  example "smoked_fish,smoked_meat:2 bread:2"). This means that unless all
+	  consume-groups can be satisfied, nothing is consumed when the command fails.
+	  This will fix many bugs in the game data where programs had for example
+	  "2=consume smoked_fish,smoked_meat 2" and "3=consume bread 2". If there was
+	  not 2 bread, it would consume 2 smoked_fish or 2 smoked_meat and then fail.
+	* Get rid of the command check. It was only a work-around for the previously
+	  deficient command consume (and some programs forgot to use it).
+	* Implement the new command return. It can return from a program. There are
+	  3 different return values; Failed, Completed and Skipped. Only programs
+	  returning Failed and Completed will affect statistics. A program that
+	  reaches the end will be considered to have implicitly returned Completed.
+	  The return command can optionally take a condition. Currently only two
+	  conditions are supported; economy needs ware_type and workers need
+	  experience. The former will allow a program to have a command
+	  "return=skipped unless economy needs marblecolumn". It will prevent Game
+	  Over as a result of a production deadlock on marble when a user forgets to
+	  turn off a stonemason for a while. This fixes the huge problem with
+	  production deadlocks that hit every new player in their first games and
+	  every experienced player once in a while. The condition makes a query to
+	  the economy, which now simply checks if there are no warehouse supplies
+	  that supply the ware type. This can of course be made much smarter later.
+	  The latter is used in the barbarian micro-brewery to let it practice making
+	  beer until the brewer has become a master_brewer even if the economy does
+	  not need any beer.
+	* Extend the produce command to take any number of ware types with quantities.
+	* Fix the call command to validate that the called program exists. This
+	  requires changing declaration order in some data files (for example if
+	  "work" calls "seed", "program=seed" must come before "program=work" in the
+	  "global" section of the productionsite definition. (However the definition
+	  order of the programs does not matter.) This fixes the bug that a call
+	  command may fail at run-time because the called program does not exists.
+	* Extend the call command with an optional error handling specification
+	  (call=<program_name> [on failure {ignore|repeat|fail}]). It will make it
+	  possible to ignore a failure of a called program and continue the calling
+	  program, or repeat the failed program until it succeeds.
+	* Extend the sleep and animate commands. If no duration is given as the last
+	  parameter, the return value from a previous action is used for duration.
+	  This makes it possible to for example let the mining command calculate how
+	  long the following sleep/animation should last, depending on ore
+	  concentration and mining depth.
+	* Get rid of the set command and the associated catch and nostats flags.
+	* Fix the mine command to parse and validate its parameters at parse-time
+	  instead of at run-time. This fixes the bug that the game engine could fail
+	  with the message "Should mine resource <resource_type>, which doesn't exist
+	  in world. Tribe is not compatible with world!!" at run-time the first time
+	  a mining command is executed.
+	* Fix most other commands that had insufficient validation or did parsing at
+	  run-time (for example the consume command reparsed its wares at each execution).
+	* Optimize the parsing by eliminating needless string copying.
+- Rename the building property "enhance_to" to "enhancement" and validate that
+  the given building type exists.
+- Improved editor handling of bobs and animals, so they can not be placed on
+  invalid locations.
+- Implemented loading of savegames in multi player
+- Only allow attacking seen buildings.
+- Improved computer player behaviour.
+- Updated and cleaned up tribes economies.
+- Introduced automatic update of Campaign-list via campaign-menu.
+- Added global objects usable in every world.
+- Added 12 new maps (9 from map contest).
+- Added atlantean building graphics.
+- Added a lot of new sounds and integrated them in the game.
+- Rework of campaign missions.
+- Fix bugs in parsing of building types'sbuildcosts and inputs. Check that the
+  ware types exist and are not duplicated and that the quantities are within range.
+- Fix bug in parsing of productionsite types' outputs. Check that the ware types
+  exist and are not duplicated.
+- Fix bugs in parsing of productionsite types', critter_bob types' and worker
+  types' programs. If a program was declared twice, it was parsed twice and the
+  memory used to store the first instance was leaked.
+- Fixed bug #1792379 - little trees set with editor don't grow.
+- Fixed bug #1913902 - collosseum now trains evade 0 and 1.
+- Fixed bug that upgraded worker were used in buildings instead of training new
+  simple ones.
+- Fixed crossplatform network bug (win32 path on unix).
+- Fixed disk_filesystem handling on win32.
+- Fixed strange, unwanted behaviour of multilined editboxes.
+- Fixed loading of settlers 2 maps in widelands.
+- Fixed bug that caused segmentation fault when executing
+  ./widelands --editor=nonexistent_file.
+- Fixed bug that caused segmentation fault when executing
+  ./widelands --scenario=nonexistent_file.
+- Fixed bug that caused invalid use of uninitialized memory when an animation
+  configuration defined playercolor=true but a mask file was missing.
+- Fixed bug #1968196 - Scenario-maps aren't loaded as one.
+- Fixed bug #1900477 - Objectives description are not translated and objective
+  names are not included in PO templates.
+- Fixed hotspots of animals.
+- Fixed editor height tool dialogs.
+- Fixed language-settings-menu for Linux - now Widelands sets system-language
+  variable correctly.
+- Fixed bug that prevented releasing the last soldier from a trainingsite.
+- Fixed memory access errors in the game logic, causing segmentation fault or
+  any kind of strange undefined behaviour.
+- Fixed memory access error in save game dialog.
+- Fixed many memory access errors when trying to read missing sections in
+  configuration files.
+- Fixed bug that the computer player did not check if a planned large building
+  would be completely inside his borders.
+- Fixed bug that the empire wine bush lived forever, blocking the map.
+
 build-12:
 - New feature: Additional scenario event types and trigger types.
 - New feature: Flags are automatically placed when holding down Ctrl while building a road.

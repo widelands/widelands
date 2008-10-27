@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:40+0000\n"
-"PO-Revision-Date: 2008-09-25 21:41+0100\n"
+"POT-Creation-Date: 2008-10-27 07:38+0000\n"
+"PO-Revision-Date: 2008-10-27 08:39+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -326,150 +326,204 @@ msgid "Note that while recorded files are platform independent, they generally w
 msgstr "Beachte bitte, dass die aufgezeichneten Spiele auf Deinem System und Deiner Einstellung basieren und somit nicht auf jedem Rechner, mit jeder Version bzw. jedem Betriebssystem abgespielt werden können. Spielprotokolle sollten nicht als Demo benutzt werden, da Sie wahrscheinlich auf den meisten Systemen nicht funktionieren. Die Funktion der Spielprotokolle ist einzig und allein für die Fehlerbehebung erstellt worden."
 
 #: ../../txts/developers:1
+#: ../../txts/developers~:1
 msgid "Development"
 msgstr "Entwicklung"
 
 #: ../../txts/developers:3
+#: ../../txts/developers~:3
 msgid "Widelands Development Team"
 msgstr "Das Widelands Entwicklungsteam"
 
 #: ../../txts/developers:9
+#: ../../txts/developers~:9
 msgid "Chieftain"
 msgstr "Häuptling"
 
 #: ../../txts/developers:15
+#: ../../txts/developers~:15
 msgid "Elders"
 msgstr "Ältesten"
 
 #: ../../txts/developers:19
+#: ../../txts/developers:282
+#: ../../txts/developers~:19
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers:22 ../../txts/developers:34
+#: ../../txts/developers:22
+#: ../../txts/developers:29
+#: ../../txts/developers:36
+#: ../../txts/developers~:22
+#: ../../txts/developers~:29
+#: ../../txts/developers~:36
 msgid "vacant"
 msgstr "unbesetzt"
 
 #: ../../txts/developers:26
+#: ../../txts/developers:275
+#: ../../txts/developers~:26
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:31
+#: ../../txts/developers:33
+#: ../../txts/developers:288
+#: ../../txts/developers~:33
 msgid "Sound"
-msgstr "Musik & Geräusche"
+msgstr "Geräusche"
 
-#: ../../txts/developers:38
+#: ../../txts/developers:40
+#: ../../txts/developers:293
+#: ../../txts/developers~:40
 msgid "Translation"
-msgstr "Übersetzung"
-
-#: ../../txts/developers:46
-msgid "Coders"
 msgstr "Übersetzer"
 
-#: ../../txts/developers:68
+#: ../../txts/developers:48
+#: ../../txts/developers~:48
+msgid "Coders"
+msgstr "Programmierer"
+
+#: ../../txts/developers:72
+#: ../../txts/developers~:72
 msgid "Graphicians"
 msgstr "Grafiker"
 
-#: ../../txts/developers:90
+#: ../../txts/developers:96
+#: ../../txts/developers~:96
 msgid "Musicians"
 msgstr "Musiker"
 
-#: ../../txts/developers:97
+#: ../../txts/developers:103
+#: ../../txts/developers~:103
 msgid "Sound Effects"
 msgstr "Geräusche"
 
-#: ../../txts/developers:103
+#: ../../txts/developers:110
+#: ../../txts/developers~:110
 msgid "Maps and Missions"
 msgstr "Karten und Missionen"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:123
+#: ../../txts/developers~:123
 msgid "Campaign Story"
 msgstr "Kampagnen Hintergrund"
 
-#: ../../txts/developers:115
+#: ../../txts/developers:126
+#: ../../txts/developers~:126
 msgid "Barbarian"
 msgstr "Barbaren"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:131
+#: ../../txts/developers~:131
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:137
+#: ../../txts/developers~:137
 msgid "Translators"
 msgstr "Übersetzer"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:141
+#: ../../txts/developers~:141
 msgid "Czech"
 msgstr "Tschechisch"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:147
+#: ../../txts/developers~:147
+msgid "Dansk"
+msgstr "Dänisch"
+
+#: ../../txts/developers:152
+#: ../../txts/developers~:152
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:158
+#: ../../txts/developers~:158
 msgid "Finnish"
 msgstr "Finnisch"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:163
+#: ../../txts/developers~:163
 msgid "French"
 msgstr "Französisch"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:170
+#: ../../txts/developers~:170
 msgid "Galician"
 msgstr "Galizisch"
 
-#: ../../txts/developers:157
+#: ../../txts/developers:175
+#: ../../txts/developers~:175
 msgid "German"
 msgstr "Deutsch"
 
-#: ../../txts/developers:165
+#: ../../txts/developers:184
+#: ../../txts/developers~:184
 msgid "Hebrew"
 msgstr "Hebräisch"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:189
+#: ../../txts/developers~:189
 msgid "Hungarian"
 msgstr "Ungarisch"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:194
+#: ../../txts/developers~:194
 msgid "Polish"
 msgstr "Polnisch"
 
-#: ../../txts/developers:181
+#: ../../txts/developers:201
+#: ../../txts/developers~:201
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:186
-msgid "Spanish"
-msgstr "Spanisch"
-
-#: ../../txts/developers:191
+#: ../../txts/developers:206
+#: ../../txts/developers~:206
 msgid "Slovak"
 msgstr "Slovakisch"
 
-#: ../../txts/developers:196
+#: ../../txts/developers:211
+#: ../../txts/developers~:211
+msgid "Spanish"
+msgstr "Spanisch"
+
+#: ../../txts/developers:216
+#: ../../txts/developers~:216
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:224
+#: ../../txts/developers~:224
 msgid "Packagers"
 msgstr "Packer"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:228
+#: ../../txts/developers~:228
 msgid "Linux Distributions"
 msgstr "Linux Distributionen"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:239
+#: ../../txts/developers~:239
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributionen"
 
-#: ../../txts/developers:228
+#: ../../txts/developers:248
+#: ../../txts/developers~:248
 msgid "Non Unix Distributions"
 msgstr "Nicht Unix Distributionen"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:259
+#: ../../txts/developers~:257
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki und Endbenutzer-Dokumentation"
 
-#: ../../txts/developers:248
+#: ../../txts/developers:271
+msgid "Former elders"
+msgstr "Ehemalige Ältesten"
+
+#: ../../txts/developers:299
+#: ../../txts/developers~:268
 msgid "Other"
 msgstr "Andere"
 
@@ -481,7 +535,8 @@ msgstr "Lies Mich für den Widelands Editor"
 msgid "README for the Editor"
 msgstr "Lies Mich des Editors"
 
-#: ../../txts/editor_readme:7 ../../txts/README:9
+#: ../../txts/editor_readme:7
+#: ../../txts/README:9
 msgid "Introduction"
 msgstr "Einführung"
 
@@ -635,3 +690,4 @@ msgstr "Benutze die Prioritätsknöpfe im Fenster der Gebäude, um die Anlieferu
 
 #~ msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
 #~ msgstr "Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Community Foren."
+
