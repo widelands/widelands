@@ -753,7 +753,7 @@ void Cmd_DropSoldier::Write
 
 	// Now soldier serial
 	{
-		const Map_Object * const obj = egbase.objects().get_object(serial);
+		const Map_Object * const obj = egbase.objects().get_object(soldier);
 		assert(mos.is_object_known(obj));
 		fw.Unsigned16(mos.get_object_file_index(obj));
 	}
