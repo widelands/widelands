@@ -394,7 +394,11 @@ void Player::start_stop_building(PlayerImmovable* imm) {
 void Player::enhance_building
 	(Building * building, Building_Index const index_of_new_building)
 {
-	if (building->get_owner() == this) {
+	if
+		(building->get_owner() == this
+		 and
+		 building->descr().enhancements().count(index_of_new_building))
+	{
 		Building_Index const index_of_old_building =
 			tribe().building_index(building->name().c_str());
 		const Coords position = building->get_position();
