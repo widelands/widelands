@@ -591,7 +591,7 @@ void Cmd_SetWarePriority::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_O
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("enhance building: %s", e.what());
+		throw wexception("set ware priority: %s", e.what());
 	}
 }
 

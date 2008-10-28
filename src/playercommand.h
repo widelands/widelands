@@ -210,7 +210,7 @@ struct Cmd_SetWarePriority : public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_ENHANCEBUILDING;}
+	virtual int32_t get_id() {return QUEUE_CMD_SETWAREPRIORITY;}
 
 	Cmd_SetWarePriority(StreamRead &);
 
