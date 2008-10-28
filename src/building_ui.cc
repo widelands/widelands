@@ -1698,171 +1698,6 @@ UI::Window* MilitarySite::create_options_window(Interactive_Player* plr, UI::Win
 	return new MilitarySite_Window(*plr, *this, *registry);
 }
 
-/*
-====================
-	TrainingSite_Options_Window Implementation
-====================
-*/
-struct TrainingSite_Options_Window : public UI::Window {
-	TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps);
-	virtual ~TrainingSite_Options_Window();
-
-	TrainingSite * get_trainingsite() throw () {return m_trainingsite;}
-
-	void think();
-private:
-	struct PrioritySet {
-		Widelands::tAttribute attr;
-		UI::Textarea* priority;
-	};
-
-	void addPrioritySet(Widelands::tAttribute attr, const std::string& text);
-
-	void heros_clicked        () {get_trainingsite ()->switch_heros ();}
-	void up_clicked(uint32_t idx) {act_change_priority(m_priorities[idx].attr, 1);}
-	void down_clicked(uint32_t idx) {act_change_priority(m_priorities[idx].attr, -1);}
-
-	void act_change_priority (int32_t atr, int32_t how);
-
-	void update();
-
-	Widelands::Coords    m_ms_location;
-	Interactive_Player* m_parent;
-	UI::Window *       * m_reg;
-	UI::Textarea       * m_style_train;
-	std::vector<PrioritySet> m_priorities;
-	TrainingSite       * m_trainingsite;
-};
-
-TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps)
-	: UI::Window(parent, 0, 0, 320, 125, _("Training Options"))
-{
-
-	int32_t _bs = 22;
-	int32_t _cn = 20;
-	int32_t _cb = 100;
-
-	m_parent=parent;
-	m_trainingsite = ps;
-	m_ms_location=ps->get_position();
-
-	set_inner_size(250, _bs*9);
-	move_inside_parent();
-
-	// TODO: Put the capacity buttons here.
-
-	// Add switch training mode button
-	new UI::Button<TrainingSite_Options_Window>
-			(this,
-			 _cb, _bs, 105, _bs,
-			 4,
-			 0, // FIXME icon?
-			 &TrainingSite_Options_Window::heros_clicked, this);
-
-	new UI::Textarea(this, _cn - 15, _bs + 2, _("Training mode : "), Align_Left);
-	m_style_train = new UI::Textarea (this, _cb + 4, _bs+2, _("Balanced"), Align_Left);
-
-	// Add priority buttons for every attribute, if there is more than one
-	Widelands::TrainingSite_Descr const & ts_descr = ps->descr();
-	uint32_t atrcount = 0;
-	if (ts_descr.get_train_hp())
-		++atrcount;
-	if (ts_descr.get_train_attack())
-		++atrcount;
-	if (ts_descr.get_train_defense())
-		++atrcount;
-	if (ts_descr.get_train_evade())
-		++atrcount;
-	if (atrcount >= 2) {
-		if (ts_descr.get_train_hp())
-			addPrioritySet(atrHP, _("Hit points"));
-		if (ts_descr.get_train_attack())
-			addPrioritySet(atrAttack, _("Attack"));
-		if (ts_descr.get_train_defense())
-			addPrioritySet(atrDefense, _("Defense"));
-		if (ts_descr.get_train_evade())
-			addPrioritySet(atrEvade, _("Evade"));
-	}
-
-	center_to_parent();
-	move_to_top();
-}
-
-TrainingSite_Options_Window::~TrainingSite_Options_Window() {}
-
-void TrainingSite_Options_Window::addPrioritySet(Widelands::tAttribute attr, const std::string& text)
-{
-	int32_t _bs = 22;
-	int32_t _cb = 100;
-	int32_t _cn = 20;
-	int32_t y = (3+_bs)*(2+m_priorities.size());
-	PrioritySet set;
-
-	set.attr = attr;
-	set.priority = new UI::Textarea (this, _cb + 3 * _bs / 2, y+3, "XX", Align_Center);
-
-	new UI::IDButton<TrainingSite_Options_Window, uint32_t>
-		(this,
-		 _cb, y, _bs, _bs,
-		 4,
-		 g_gr->get_picture(PicMod_Game, pic_down_train),
-		 &TrainingSite_Options_Window::down_clicked, this, m_priorities.size());
-	new UI::IDButton<TrainingSite_Options_Window, uint32_t>
-		(this,
-		 _cb + 2 * _bs, y, _bs, _bs,
-		 4,
-		 g_gr->get_picture(PicMod_Game, pic_up_train),
-		 &TrainingSite_Options_Window::up_clicked, this, m_priorities.size());
-	new UI::Textarea (this, _cn, y+3, text, Align_Left);
-
-	m_priorities.push_back(set);
-}
-
-void TrainingSite_Options_Window::act_change_priority (int32_t atr, int32_t val) {
-
-	if
-		((atr == atrHP      ||
-		  atr == atrAttack  ||
-		  atr == atrDefense ||
-		  atr == atrEvade)
-		 and
-		 m_trainingsite)
-		m_parent->game().send_player_change_training_options
-			(m_trainingsite, atr, val);
-}
-
-void TrainingSite_Options_Window::think()
-{
-	//Building_Window::think();
-
-	Widelands::BaseImmovable const * const base_immovable =
-		m_parent->egbase().map()[m_ms_location].get_immovable();
-	if
-		(not dynamic_cast<const Building *>(base_immovable)
-		 or
-		 dynamic_cast<const ConstructionSite *>(base_immovable))
-	{
-		// The Site has been removed. Die quickly.
-		die();
-		return;
-	}
-	update();
-}
-
-void TrainingSite_Options_Window::update() {
-	TrainingSite *ts = get_trainingsite();
-
-	if (ts->get_build_heros())
-		m_style_train->set_text(_("Make heroes"));
-	else
-		m_style_train->set_text(_("Balanced army"));
-
-	for (uint32_t i = 0; i < m_priorities.size(); ++i) {
-		char buf[200];
-		sprintf(buf, "%2d", ts->get_pri(m_priorities[i].attr));
-		m_priorities[i].priority->set_text(buf);
-	}
-}
 
 /*
 ==============================================================================
@@ -1881,7 +1716,6 @@ struct TrainingSite_Window : public ProductionSite_Window {
 	}
 
 	virtual void think();
-	void options_button_clicked ();
 	void drop_button_clicked ();
 	void soldier_capacity_up () {act_change_soldier_capacity (1);}
 	void soldier_capacity_down() {act_change_soldier_capacity(-1);}
@@ -1968,15 +1802,6 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 
 	//  add TrainingSite options and capacity buttons
 	UI::Box * box = new UI::Box (sold_box, 0, 0, UI::Box::Horizontal);
-	box->add
-		(new UI::Button<TrainingSite_Window>
-		 	(box,
-		 	 32, 0, 32, 32,
-		 	 4,
-		 	 g_gr->get_picture(PicMod_Game, pic_train_options),
-		 	 &TrainingSite_Window::options_button_clicked, this),
-		 Align_Top);
-
 	box->add (new UI::Textarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
 	box->add
 		(new UI::Button<TrainingSite_Window>
@@ -2087,19 +1912,6 @@ void TrainingSite_Window::update() {
 	m_capacity->set_text (buffer);
 }
 
-/*
-==============
-TrainingSite_Window::options_button_clicked()
-
-Handle the click at options buttons. Launch a train specific options window.
-=============
-*/
-void TrainingSite_Window::options_button_clicked () {
-	assert(*m_reg==this);
-
-	*m_reg=new TrainingSite_Options_Window(m_parent, get_trainingsite());
-	die();
-}
 
 /*
 ==============
