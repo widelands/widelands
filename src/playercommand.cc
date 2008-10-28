@@ -715,19 +715,17 @@ void Cmd_DropSoldier::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_DROPSOLDIER_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			uint32_t const militarysite_serial = fr.Unsigned32();
+			uint32_t const milsite_serial = fr.Unsigned32();
 			try {
-				serial  = mol.get<Map_Object>(militarysite_serial).get_serial();
+				serial = mol.get<PlayerImmovable>(milsite_serial).get_serial();
 			} catch (_wexception const & e) {
-				throw wexception
-					("militarysite %u: %s", militarysite_serial, e.what());
+				throw wexception("militarysite %u: %s", milsite_serial, e.what());
 			}
 			uint32_t const soldier_serial = fr.Unsigned32();
 			try {
-				soldier = mol.get<Map_Object>(soldier_serial).get_serial();
+				soldier = mol.get<Soldier>        (soldier_serial).get_serial();
 			} catch (_wexception const & e) {
-				throw wexception
-					("soldier %u: %s",      soldier_serial,      e.what());
+				throw wexception("soldier %u: %s",      soldier_serial, e.what());
 			}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
@@ -755,7 +753,7 @@ void Cmd_DropSoldier::Write
 	{
 		const Map_Object * const obj = egbase.objects().get_object(soldier);
 		assert(mos.is_object_known(obj));
-		fw.Unsigned16(mos.get_object_file_index(obj));
+		fw.Unsigned32(mos.get_object_file_index(obj));
 	}
 
 }
