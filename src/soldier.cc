@@ -735,10 +735,6 @@ void Soldier::startTaskBattle(Game* g)
 
 void Soldier::battle_update(Game* g, State*)
 {
-	if (m_serial == 176 && g->get_gametime() == 1498183) {
-		printf("Huh\n");
-	}
-
 	std::string signal = get_signal();
 
 	if (signal.size()) {
