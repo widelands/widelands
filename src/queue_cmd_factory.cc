@@ -30,7 +30,9 @@
 
 namespace Widelands {
 
-GameLogicCommand* Queue_Cmd_Factory::create_correct_queue_command(uint32_t id) {
+GameLogicCommand * Queue_Cmd_Factory::create_correct_queue_command
+	(uint32_t const id)
+{
 	switch (id) {
 	case QUEUE_CMD_BUILD:                return new Cmd_Build               ();
 	case QUEUE_CMD_FLAG:                 return new Cmd_BuildFlag           ();
@@ -39,6 +41,7 @@ GameLogicCommand* Queue_Cmd_Factory::create_correct_queue_command(uint32_t id) {
 	case QUEUE_CMD_STOPBUILDING:         return new Cmd_StartStopBuilding   ();
 	case QUEUE_CMD_ENHANCEBUILDING:      return new Cmd_EnhanceBuilding     ();
 	case QUEUE_CMD_BULLDOZE:             return new Cmd_Bulldoze            ();
+	case QUEUE_CMD_ENEMYFLAGACTION:      return new Cmd_EnemyFlagAction     ();
 	case QUEUE_CMD_DESTROY_MAPOBJECT:    return new Cmd_Destroy_Map_Object  ();
 	case QUEUE_CMD_ACT:                  return new Cmd_Act                 ();
 	case QUEUE_CMD_CHECK_EVENTCHAIN:     return new Cmd_CheckEventChain     ();
