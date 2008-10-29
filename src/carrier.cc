@@ -84,7 +84,6 @@ void Carrier::road_update(Game* g, State* state)
 			return start_task_transport(g, m_acked_ware);
 		} else {
 			// Short delay before we move to pick up
-			molog("[road]: delay (acked for %i)\n", m_acked_ware);
 			state->ivar1 = 1;
 
 			set_animation(g, descr().get_animation("idle"));
@@ -308,8 +307,6 @@ void Carrier::drop_item(Game* g, State* s)
 
 	// Pick up new load, if any
 	if (other) {
-		molog("[transport]: return trip.\n");
-
 		set_carried_item(g, other);
 
 		set_animation(g, descr().get_animation("idle"));
@@ -391,7 +388,6 @@ bool Carrier::notify_ware(Game* g, int32_t flag)
 
 	// Check if we've already acked something
 	if (m_acked_ware >= 0) {
-		molog("notify_ware(%i): already acked %i\n", flag, m_acked_ware);
 		return false;
 	}
 
@@ -420,7 +416,6 @@ bool Carrier::notify_ware(Game* g, int32_t flag)
 	}
 
 	// Ack it if we haven't
-	molog("notify_ware(%i)\n", flag);
 	m_acked_ware = flag;
 
 	if (state->task == &taskRoad)
@@ -453,7 +448,7 @@ void Carrier::find_pending_item(Game* g)
 		 	(g, road.get_flag(Road::FlagStart)))
 		haveitembits |= 2;
 
-	// If both roads have an item, we pick the one closer to us
+	//  If both flags have an item, we pick the one closer to us.
 	if (haveitembits == 3)
 		haveitembits = (1 << find_closest_flag(g));
 
@@ -461,7 +456,6 @@ void Carrier::find_pending_item(Game* g)
 	if (haveitembits == 1) {
 		bool ok = false;
 
-		molog("find_pending_item: flag %i\n", 0);
 		m_acked_ware = 0;
 
 		ok =
@@ -476,7 +470,6 @@ void Carrier::find_pending_item(Game* g)
 	if (haveitembits == 2) {
 		bool ok = false;
 
-		molog("find_pending_item: flag %i\n", 1);
 		m_acked_ware = 1;
 
 		ok =

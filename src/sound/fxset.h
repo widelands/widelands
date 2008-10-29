@@ -72,7 +72,7 @@ protected:
 	 *
 	 * Value 255: always play; unconditional
 	 */
-	Uint8 m_priority;
+	uint8_t m_priority;
 };
 
 #endif

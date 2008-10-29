@@ -183,11 +183,11 @@ public:
 	void play_fx
 		(std::string const & fx_name,
 		 Widelands::Coords   map_position,
-		 uint32_t            priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+		 uint8_t             priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
 	void play_fx
 		(std::string const & fx_name,
 		 int32_t             stereo_position,
-		 uint32_t            priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+		 uint8_t             priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
 
 	void register_song
 		(std::string const & dir,
@@ -245,7 +245,7 @@ protected:
 	bool play_or_not
 		(std::string const & fx_name,
 		 int32_t             stereo_position,
-		 uint32_t            priority);
+		 uint8_t             priority);
 
 	/// Whether to disable background music
 	bool m_disable_music;

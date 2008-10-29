@@ -28,11 +28,7 @@
 /** Create an FXset and set it's \ref m_priority
  * \param[in] prio  The desired priority (optional)
  */
-FXset::FXset(Uint8 prio)
-{
-	m_priority = prio;
-	m_last_used = 0;
-}
+FXset::FXset(uint8_t const priority) : m_priority(priority), m_last_used(0) {}
 
 /// Delete all fxs to avoid memory leaks. This also frees the audio data.
 FXset::~FXset()
@@ -51,7 +47,7 @@ FXset::~FXset()
  * \param[in] fx    The sound fx to append
  * \param[in] prio  Set previous \ref m_priority to new value (optional)
  */
-void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
+void FXset::add_fx(Mix_Chunk * fx, uint8_t const prio)
 {
 	assert(fx);
 

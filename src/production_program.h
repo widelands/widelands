@@ -362,7 +362,7 @@ struct ActPlayFX : public ProductionAction {
 	virtual void execute(Game &, ProductionSite &) const;
 private:
 	std::string name;
-	int32_t     priority;
+	uint8_t     priority;
 };
 
 

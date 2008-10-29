@@ -423,7 +423,7 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 bool Sound_Handler::play_or_not
 	(std::string const &       fx_name,
 	 int32_t             const stereo_pos,
-	 uint32_t            const priority)
+	 uint8_t             const priority)
 {
 	bool allow_multiple=false; //convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
@@ -500,7 +500,7 @@ bool Sound_Handler::play_or_not
 void Sound_Handler::play_fx
 	(std::string const &       fx_name,
 	 Widelands::Coords   const map_position,
-	 uint32_t            const priority)
+	 uint8_t             const priority)
 {play_fx(fx_name, stereo_position(map_position), priority);}
 
 /** \overload
@@ -513,7 +513,7 @@ void Sound_Handler::play_fx
 void Sound_Handler::play_fx
 	(std::string const &       fx_name,
 	 int32_t             const stereo_pos,
-	 uint32_t            const priority)
+	 uint8_t             const priority)
 {
 	assert(stereo_pos >= -1);
 	assert(stereo_pos <= 254);
