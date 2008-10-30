@@ -898,11 +898,14 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) const {
 			if (Ware_Index id_w = tribe.ware_index(input_name)) {
 				if (m_supply->stock_wares(id_w) < it->amount)
 					return false;
-			} else {
-				id_w = tribe.worker_index(input_name);
+			} else if ((id_w = tribe.worker_index(input_name))) {
 				if (m_supply->stock_workers(id_w) < it->amount)
 					return false;
-			}
+			} else
+				throw wexception
+					("worker type %s needs \"%s\" to be built but that is neither "
+					 "a ware type nor a worker type defined in the tribe %s",
+					 w_desc->descname().c_str(), input_name, tribe.name().c_str());
 		}
 		return true;
 	}
@@ -946,8 +949,6 @@ void Warehouse::create_worker(Game * game, Ware_Index const worker) {
 
 		incorporate_worker
 			(game, &w_desc->create(*game, owner(), *this, m_position));
-
-		molog (" We have created a(n) %s\n", w_desc->name().c_str());
 
 	} else
 		throw wexception
