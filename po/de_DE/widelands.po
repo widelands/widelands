@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3463\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 18:40+0100\n"
+"POT-Creation-Date: 2008-11-01 21:23+0100\n"
 "PO-Revision-Date: 2008-10-25 14:49+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -471,7 +471,7 @@ msgid "Jump to unproductive: "
 msgstr "Springe zum Unproduktivsten:"
 
 #: ../../src/building_statistics_menu.cc:111 ../../src/building_ui.cc:1566
-#: ../../src/building_ui.cc:1951
+#: ../../src/building_ui.cc:1785
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:161
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:164
@@ -898,27 +898,27 @@ msgstr "Kleinste Priorität"
 msgid "Show worker listing"
 msgstr "Zeige Arbeiterliste"
 
-#: ../../src/building_ui.cc:1551 ../../src/building_ui.cc:1980
+#: ../../src/building_ui.cc:1551 ../../src/building_ui.cc:1805
 msgid "Capacity"
 msgstr "Kapazität"
 
-#: ../../src/building_ui.cc:1567 ../../src/building_ui.cc:1952
+#: ../../src/building_ui.cc:1567 ../../src/building_ui.cc:1786
 msgid "HP"
 msgstr "LP"
 
-#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1953
+#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1787
 msgid "AT"
 msgstr "AT"
 
-#: ../../src/building_ui.cc:1569 ../../src/building_ui.cc:1954
+#: ../../src/building_ui.cc:1569 ../../src/building_ui.cc:1788
 msgid "DE"
 msgstr "PA"
 
-#: ../../src/building_ui.cc:1570 ../../src/building_ui.cc:1955
+#: ../../src/building_ui.cc:1570 ../../src/building_ui.cc:1789
 msgid "EV"
 msgstr "AU"
 
-#: ../../src/building_ui.cc:1571 ../../src/building_ui.cc:1956
+#: ../../src/building_ui.cc:1571 ../../src/building_ui.cc:1790
 msgid "Level"
 msgstr "Level"
 
@@ -927,43 +927,7 @@ msgstr "Level"
 msgid "Capacity: %2d"
 msgstr "Kapazität: %2d"
 
-#: ../../src/building_ui.cc:1738
-msgid "Training Options"
-msgstr "Trainingsoptionen"
-
-#: ../../src/building_ui.cc:1762
-msgid "Training mode : "
-msgstr "Trainingsmodus:"
-
-#: ../../src/building_ui.cc:1763
-msgid "Balanced"
-msgstr "Ausgeglichen"
-
-#: ../../src/building_ui.cc:1778
-msgid "Hit points"
-msgstr "Lebenspunkte"
-
-#: ../../src/building_ui.cc:1780 ../../src/fieldaction.cc:494
-msgid "Attack"
-msgstr "Attacke"
-
-#: ../../src/building_ui.cc:1782
-msgid "Defense"
-msgstr "Verteidigung"
-
-#: ../../src/building_ui.cc:1784
-msgid "Evade"
-msgstr "Ausweichen"
-
-#: ../../src/building_ui.cc:1856
-msgid "Make heroes"
-msgstr "Erstelle Helden"
-
-#: ../../src/building_ui.cc:1858
-msgid "Balanced army"
-msgstr "Ausgeglichene Armee"
-
-#: ../../src/building_ui.cc:1990
+#: ../../src/building_ui.cc:1815
 msgid "xx"
 msgstr "xx"
 
@@ -1048,6 +1012,10 @@ msgstr "Sende mehr Soldaten"
 #: ../../src/fieldaction.cc:487
 msgid "Start attack"
 msgstr "Angriff starten"
+
+#: ../../src/fieldaction.cc:494
+msgid "Attack"
+msgstr "Attacke"
 
 #: ../../src/fieldaction.cc:570
 msgid "Build mines"
@@ -2447,6 +2415,30 @@ msgstr "(Keine Beschreibung vorhanden.)"
 #: ../../src/map.h:165
 msgid "no description defined"
 msgstr "Keine Beschreibung vorhanden."
+
+#~ msgid "Training Options"
+#~ msgstr "Trainingsoptionen"
+
+#~ msgid "Training mode : "
+#~ msgstr "Trainingsmodus:"
+
+#~ msgid "Balanced"
+#~ msgstr "Ausgeglichen"
+
+#~ msgid "Hit points"
+#~ msgstr "Lebenspunkte"
+
+#~ msgid "Defense"
+#~ msgstr "Verteidigung"
+
+#~ msgid "Evade"
+#~ msgstr "Ausweichen"
+
+#~ msgid "Make heroes"
+#~ msgstr "Erstelle Helden"
+
+#~ msgid "Balanced army"
+#~ msgstr "Ausgeglichene Armee"
 
 #~ msgid "Save game"
 #~ msgstr "Spiel speichern"

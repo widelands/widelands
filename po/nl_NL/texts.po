@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3463\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:36+0000\n"
-"PO-Revision-Date: 2008-08-27 22:49+0100\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
+"POT-Creation-Date: 2008-11-01 20:23+0000\n"
+"PO-Revision-Date: 2008-11-01 21:21+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -324,151 +324,165 @@ msgstr "Een binair bestand genaamd bestandsnaam.rec zal worden aangemaakt. Om he
 msgid "Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr "Let erop dat, hoewel de opnamebestanden platformonafhankelijk zijn, ze in het algemeen niet uitgewisseld kunnen worden tussen verschillende versies van Widelands, omdat de gebruikersinterface en de volgorde waarin achterliggende functies worden aangeroepen, kunnen verschillen per versie. Sessieopnames zijn ook niet bedoeld als demo's, maar zijn voornamelijk bedoeld als debug gereedschap om bugs op te sporen."
 
-#: ../../txts/developers:1
+#: ../../txts/developers:1 ../../txts/developers~:1
 msgid "Development"
 msgstr "Ontwikkeling"
 
-#: ../../txts/developers:3
+#: ../../txts/developers:3 ../../txts/developers~:3
 msgid "Widelands Development Team"
 msgstr "Het Widelands Ontwikkelteam"
 
-#: ../../txts/developers:9
+#: ../../txts/developers:9 ../../txts/developers~:9
 msgid "Chieftain"
 msgstr "Leider"
 
-#: ../../txts/developers:15
+#: ../../txts/developers:15 ../../txts/developers~:15
 msgid "Elders"
 msgstr "Ouderlingen"
 
-#: ../../txts/developers:19
+#: ../../txts/developers:19 ../../txts/developers:282
+#: ../../txts/developers~:19
 msgid "Graphics"
 msgstr "Afbeeldingen"
 
-#: ../../txts/developers:22 ../../txts/developers:34
+#: ../../txts/developers:22 ../../txts/developers:29 ../../txts/developers:36
+#: ../../txts/developers~:22 ../../txts/developers~:29
+#: ../../txts/developers~:36
 msgid "vacant"
 msgstr "vacant"
 
-#: ../../txts/developers:26
+#: ../../txts/developers:26 ../../txts/developers:275
+#: ../../txts/developers~:26
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:31
+#: ../../txts/developers:33 ../../txts/developers:288
+#: ../../txts/developers~:33
 msgid "Sound"
 msgstr "Geluid"
 
-#: ../../txts/developers:38
+#: ../../txts/developers:40 ../../txts/developers:293
+#: ../../txts/developers~:40
 msgid "Translation"
 msgstr "Vertaling"
 
-#: ../../txts/developers:46
+#: ../../txts/developers:48 ../../txts/developers~:48
 msgid "Coders"
 msgstr "Programmeurs"
 
-#: ../../txts/developers:68
+#: ../../txts/developers:72 ../../txts/developers~:72
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:90
+#: ../../txts/developers:96 ../../txts/developers~:96
 msgid "Musicians"
 msgstr "Musici"
 
-#: ../../txts/developers:97
+#: ../../txts/developers:103 ../../txts/developers~:103
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
-#: ../../txts/developers:103
+#: ../../txts/developers:110 ../../txts/developers~:110
 msgid "Maps and Missions"
 msgstr "Kaarten en missies"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:123 ../../txts/developers~:123
 msgid "Campaign Story"
 msgstr "Campagneverhaal"
 
-#: ../../txts/developers:115
+#: ../../txts/developers:126 ../../txts/developers~:126
 msgid "Barbarian"
 msgstr "Barbaren"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:131 ../../txts/developers~:131
 msgid "Empire"
 msgstr "Keizerrijk"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:137 ../../txts/developers~:137
 msgid "Translators"
 msgstr "Vertalers"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:141 ../../txts/developers~:141
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:147 ../../txts/developers~:147
+msgid "Dansk"
+msgstr ""
+
+#: ../../txts/developers:152 ../../txts/developers~:152
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:158 ../../txts/developers~:158
 msgid "Finnish"
 msgstr "Fins"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:163 ../../txts/developers~:163
 msgid "French"
 msgstr "Frans"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:170 ../../txts/developers~:170
 msgid "Galician"
 msgstr "Galicisch"
 
-#: ../../txts/developers:157
+#: ../../txts/developers:175 ../../txts/developers~:175
 msgid "German"
 msgstr "Duits"
 
-#: ../../txts/developers:165
+#: ../../txts/developers:184 ../../txts/developers~:184
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:189 ../../txts/developers~:189
 msgid "Hungarian"
 msgstr "Hongaars"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:194 ../../txts/developers~:194
 msgid "Polish"
 msgstr "Pools"
 
-#: ../../txts/developers:181
+#: ../../txts/developers:201 ../../txts/developers~:201
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:186
-msgid "Spanish"
-msgstr "Spaans"
-
-#: ../../txts/developers:191
+#: ../../txts/developers:206 ../../txts/developers~:206
 msgid "Slovak"
 msgstr "Slowaaks"
 
-#: ../../txts/developers:196
+#: ../../txts/developers:211 ../../txts/developers~:211
+msgid "Spanish"
+msgstr "Spaans"
+
+#: ../../txts/developers:216 ../../txts/developers~:216
 msgid "Swedish"
 msgstr "Zweeds"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:224 ../../txts/developers~:224
 msgid "Packagers"
 msgstr "Pakketmakers"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:228 ../../txts/developers~:228
 msgid "Linux Distributions"
 msgstr "Linux Distributies"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:239 ../../txts/developers~:239
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributies"
 
-#: ../../txts/developers:228
+#: ../../txts/developers:248 ../../txts/developers~:248
 msgid "Non Unix Distributions"
 msgstr "Niet-Unix Distributies"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:259 ../../txts/developers~:257
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki en Eindgebruikersdocumentatie"
 
-#: ../../txts/developers:248
+#: ../../txts/developers:271
+msgid "Former elders"
+msgstr ""
+
+#: ../../txts/developers:299 ../../txts/developers~:268
 msgid "Other"
 msgstr "Overige"
 
@@ -513,7 +527,6 @@ msgid "E        Toggles event menu"
 msgstr "E        Schakel gebeurtenissenmenu aan/uit"
 
 #: ../../txts/editor_readme:27
-#, fuzzy
 msgid "F        Toggles fullscreen"
 msgstr "F        Schakel volledig scherm aan/uit"
 

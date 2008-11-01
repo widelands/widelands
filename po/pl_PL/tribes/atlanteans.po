@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3463\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 18:24+0000\n"
+"POT-Creation-Date: 2008-11-01 20:14+0000\n"
 "PO-Revision-Date: 2008-10-26 12:44+0100\n"
 "Last-Translator: Jacek Wolszczak <shutdownrunner@o2.pl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -403,14 +403,6 @@ msgstr "Szczypce do dojenia"
 msgid "Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
 msgstr "Szczypce używane przez hodowców pająków do ich dojenia. Produkowane przez rzemieślnika."
 
-#: ../../../tribes/atlanteans/wares/mountain_crystal/conf:2
-msgid "Mountain Crystal"
-msgstr "Górski kryształ"
-
-#: ../../../tribes/atlanteans/wares/mountain_crystal/conf:3
-msgid "These transparent mountain crystals are used for some exclusive buildings and tools."
-msgstr "Te przezroczyste górskie kryształy używane są do budowy wyjątkowych budowli oraz narzędzi."
-
 #: ../../../tribes/atlanteans/wares/pick/conf:2
 msgid "Pick"
 msgstr "Kilof"
@@ -426,6 +418,16 @@ msgstr "Deski"
 #: ../../../tribes/atlanteans/wares/planks/conf:3
 msgid "Planks are an important build material of the Atlantids."
 msgstr "Deski są dla Atlantów ważnym budulcem."
+
+#: ../../../tribes/atlanteans/wares/quartz/conf:2
+#, fuzzy
+msgid "Quartz"
+msgstr "Kamieniołom"
+
+#: ../../../tribes/atlanteans/wares/quartz/conf:3
+#, fuzzy
+msgid "These transparent quartz' are used for some exclusive buildings and tools."
+msgstr "Te przezroczyste górskie kryształy używane są do budowy wyjątkowych budowli oraz narzędzi."
 
 #: ../../../tribes/atlanteans/wares/saw/conf:2
 msgid "Saw"
@@ -652,3 +654,6 @@ msgstr "Drwal"
 #: ../../../tribes/atlanteans/workers/woodcutter/conf:3
 msgid "Fells trees."
 msgstr "Ścina drzewa."
+
+#~ msgid "Mountain Crystal"
+#~ msgstr "Górski kryształ"

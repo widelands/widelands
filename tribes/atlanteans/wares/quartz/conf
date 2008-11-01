@@ -1,6 +1,6 @@
 [global]
-descname=_"Mountain Crystal"
-help=_"These transparent mountain crystals are used for some exclusive buildings and tools."
+descname=_"Quartz"
+help=_"These transparent quartz' are used for some exclusive buildings and tools."
 menu_pic=menu.png
 
 [idle]
