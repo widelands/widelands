@@ -157,6 +157,8 @@ void Building_Descr::parse
 				throw wexception("this has already been declared");
 			if (target_name ==  name())
 				throw wexception("enhancement to same type");
+			if (target_name == "constructionsite")
+				throw wexception("enhancement to special type constructionsite");
 			enhancement_names.insert(target_name);
 		} catch (_wexception const & e) {
 			throw wexception
