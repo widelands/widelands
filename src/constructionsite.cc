@@ -241,7 +241,9 @@ uint32_t ConstructionSite::get_built_per64k()
 			thisstep = CONSTRUCTIONSITE_STEP_TIME;
 	}
 	thisstep = (thisstep << 16) / CONSTRUCTIONSITE_STEP_TIME;
-	uint32_t total = (thisstep + (m_work_completed << 16)) / m_work_steps;
+	uint32_t total = (thisstep + (m_work_completed << 16));
+	if (m_work_steps)
+		total /= m_work_steps;
 
 	assert(total <= (1 << 16));
 
@@ -481,13 +483,15 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 		return true;
 	}
 
+	if (not m_work_steps) //  Happens for building without buildcost.
+		schedule_destroy(g); //  Complete the building immediately.
+
 	// Check if one step has completed
 	if (m_working) {
 		if (static_cast<int32_t>(g->get_gametime() - m_work_steptime) < 0) {
 			w->start_task_idle(g, w->get_animation("idle"), m_work_steptime - g->get_gametime());
 			return true;
 		} else {
-			molog("ConstructionSite::check_work: step %i completed\n", m_work_completed);
 			//TODO(fweber): cause "construction sounds" to be played - perhaps dependent on kind of construction?
 
 			++m_work_completed;
@@ -587,16 +591,24 @@ void ConstructionSite::draw
 		completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 	}
 
-	const uint32_t anim = building().get_animation("build");
+	uint32_t anim;
+	try {
+		anim = building().get_animation("build");
+	} catch (Map_Object_Descr::Animation_Nonexistent) {
+		anim = building().get_animation("idle");
+	}
 	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
-	uint32_t const anim_pic = completedtime * nr_frames / totaltime;
+	uint32_t const anim_pic =
+		totaltime ? completedtime * nr_frames / totaltime : 0;
 	// Redefine tanim
 	tanim = anim_pic * FRAME_LENGTH;
 
 	uint32_t w, h;
 	g_gr->get_animation_size(anim, tanim, w, h);
 
-	uint32_t lines = h * completedtime * nr_frames / totaltime;
+	uint32_t lines = h * completedtime * nr_frames;
+	if (totaltime)
+		lines /= totaltime;
 	assert(h * anim_pic <= lines);
 	lines -= h * anim_pic; //  This won't work if pictures have various sizes.
 
