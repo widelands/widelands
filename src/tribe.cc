@@ -233,7 +233,24 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 			 it != end;
 			 ++it)
 			try {
-				jt->first->add_enhancement(safe_building_index(it->c_str()));
+				Building_Descr & b = *jt->first;
+				Building_Index const enhancement_index =
+					safe_building_index(it->c_str());
+				Building_Descr const & enhancement =
+					*get_building_descr(enhancement_index);
+				if (b.get_ismine() != enhancement.get_ismine())
+					throw wexception
+						("mine mismatch for %s (building type is %smine but "
+						 "enhancement is %smine)",
+						 it->c_str(),
+						 b          .get_ismine() ? "" : "not ",
+						 enhancement.get_ismine() ? "" : "not ");
+				if (b.get_size() != enhancement.get_size())
+					throw wexception
+						("size mismatch for %s (building type has size %u but "
+						 "enhancement has size %u)",
+						 it->c_str(), b.get_size(), enhancement.get_size());
+				b.add_enhancement(enhancement_index);
 			} catch (_wexception const & e) {
 				throw wexception
 					("building type %s enhancement: %s",
