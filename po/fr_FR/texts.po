@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:34+0000\n"
-"PO-Revision-Date: 2008-08-18 23:04+0100\n"
+"POT-Creation-Date: 2008-10-31 22:21+0000\n"
+"PO-Revision-Date: 2008-11-01 01:27+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
@@ -339,134 +339,148 @@ msgid "Elders"
 msgstr "Sages"
 
 #: ../../txts/developers:19
+#: ../../txts/developers:282
 msgid "Graphics"
 msgstr "Graphismes"
 
-#: ../../txts/developers:22 ../../txts/developers:34
+#: ../../txts/developers:22
+#: ../../txts/developers:29
+#: ../../txts/developers:36
 msgid "vacant"
 msgstr "inoccupé"
 
 #: ../../txts/developers:26
+#: ../../txts/developers:275
 msgid "Homepage"
 msgstr "Page d'accueil"
 
-#: ../../txts/developers:31
+#: ../../txts/developers:33
+#: ../../txts/developers:288
 msgid "Sound"
 msgstr "Son"
 
-#: ../../txts/developers:38
+#: ../../txts/developers:40
+#: ../../txts/developers:293
 msgid "Translation"
 msgstr "Traduction"
 
-#: ../../txts/developers:46
+#: ../../txts/developers:48
 msgid "Coders"
 msgstr "Développeurs"
 
-#: ../../txts/developers:68
+#: ../../txts/developers:72
 msgid "Graphicians"
 msgstr "Graphistes"
 
-#: ../../txts/developers:90
+#: ../../txts/developers:96
 msgid "Musicians"
 msgstr "Musiciens"
 
-#: ../../txts/developers:97
+#: ../../txts/developers:103
 msgid "Sound Effects"
 msgstr "Effets sonores"
 
-#: ../../txts/developers:103
+#: ../../txts/developers:110
 msgid "Maps and Missions"
 msgstr "Cartes et missions"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:123
 msgid "Campaign Story"
 msgstr "Histoire de la campagne"
 
-#: ../../txts/developers:115
+#: ../../txts/developers:126
 msgid "Barbarian"
 msgstr "Barbare"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:131
 msgid "Empire"
 msgstr "Empire"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:137
 msgid "Translators"
 msgstr "Traducteurs"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:141
 msgid "Czech"
-msgstr "Tchèques"
+msgstr "Tchèque"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:147
+msgid "Dansk"
+msgstr "Danois"
+
+#: ../../txts/developers:152
 msgid "Dutch"
 msgstr "Néerlandais"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:158
 msgid "Finnish"
 msgstr "Finnois"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:163
 msgid "French"
 msgstr "Français"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:170
 msgid "Galician"
 msgstr "Galicien"
 
-#: ../../txts/developers:157
+#: ../../txts/developers:175
 msgid "German"
 msgstr "Allemand"
 
-#: ../../txts/developers:165
+#: ../../txts/developers:184
 msgid "Hebrew"
-msgstr "Hébreux"
+msgstr "Hébreu"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:189
 msgid "Hungarian"
 msgstr "Hongrois"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:194
 msgid "Polish"
 msgstr "Polonais"
 
-#: ../../txts/developers:181
+#: ../../txts/developers:201
 msgid "Russian"
 msgstr "Russe"
 
-#: ../../txts/developers:186
-msgid "Spanish"
-msgstr "Espagnol"
-
-#: ../../txts/developers:191
+#: ../../txts/developers:206
 msgid "Slovak"
 msgstr "Slovaque"
 
-#: ../../txts/developers:196
+#: ../../txts/developers:211
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: ../../txts/developers:216
 msgid "Swedish"
 msgstr "Suédois"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:224
 msgid "Packagers"
 msgstr "Paqueteurs"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:228
 msgid "Linux Distributions"
 msgstr "Les distributions Linux"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:239
 msgid "Other Unix Distributions"
 msgstr "Les autres distributions Unix"
 
-#: ../../txts/developers:228
+#: ../../txts/developers:248
 msgid "Non Unix Distributions"
 msgstr "Les distributions non Unix"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:259
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki et documentation de l'utilisateur final"
 
-#: ../../txts/developers:248
+#: ../../txts/developers:271
+msgid "Former elders"
+msgstr "Les membres fondateurs"
+
+#: ../../txts/developers:299
 msgid "Other"
 msgstr "Autres"
 
@@ -478,7 +492,8 @@ msgstr "LISEZ-MOI de l'Editeur de Widelands"
 msgid "README for the Editor"
 msgstr "LISEZ-MOI de l'Editeur"
 
-#: ../../txts/editor_readme:7 ../../txts/README:9
+#: ../../txts/editor_readme:7
+#: ../../txts/README:9
 msgid "Introduction"
 msgstr "Introduction"
 
@@ -511,9 +526,8 @@ msgid "E        Toggles event menu"
 msgstr "E        Afficher/Masquer le menu Evénements"
 
 #: ../../txts/editor_readme:27
-#, fuzzy
 msgid "F        Toggles fullscreen"
-msgstr "F        Basculer en Plein Ecran"
+msgstr "F        Bascule le plein écran"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
@@ -533,7 +547,7 @@ msgstr "T        Afficher/Masquer le menu outils"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr ""
+msgstr "I        Active l'outil d'information"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -557,39 +571,39 @@ msgstr "ALT      (Maintenir) Sélectionne le second outil de rechange tant que l
 
 #: ../../txts/editortips:13
 msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
-msgstr ""
+msgstr "Vous pouvez trouvez l'aide générale pour l'éditeur ainsi qu'un petit tutoriel dans notre wiki sur www.widelands.org"
 
 #: ../../txts/editortips:17
 msgid "You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
-msgstr ""
+msgstr "Vous pouvez sélectionner plusieurs objets naturels (bobs) si vous maintenez la touche CTRL appuyée durant la sélection. Si cliquez alors sur la carte, un des objets sélectionnés sera placé aléatoirement."
 
 #: ../../txts/editortips:21
 msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
-msgstr ""
+msgstr "Comme avec les objets naturels (bobs), vous pouvez aussi sélectionner plusieurs animaux ou textures de sol avec CTRL + click gauche."
 
 #: ../../txts/editortips:25
 msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
-msgstr ""
+msgstr "Maintenir la touche MAJ appuyée bascule sur le premier outil. Cet outil est, dans la plupart des cas, l'opposé de l'outil normal (par exemple suppression d'un objet au lieu d'en placer un)."
 
 #: ../../txts/editortips:29
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Maintenir la touche MAJ appuyée bascule sur le deuxième outil (s'il existe)."
 
 #: ../../txts/editortips:33
 msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
-msgstr ""
+msgstr "Les touches numériques (1 - 0) vous autorisent à choisir directement la taille de l'aire sélectionnée autour de votre souris."
 
 #: ../../txts/editortips:37
 msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
-msgstr ""
+msgstr "La touche ESPACE se comporte comme dans le jeu normal. Elle bascule l'affichage de l'aide à la construction."
 
 #: ../../txts/editortips:41
 msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
-msgstr ""
+msgstr "Les outils pour les événements, les déclencheurs, les chaînes d'événements et les objectifs sont encore en plein développement. Si vous avez une question ou que vous avez trouvez un problème, rencontrez nous dans les forums de l'éditeur sur www.widelands.org"
 
 #: ../../txts/editortips:45
 msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
-msgstr ""
+msgstr "Vous pouvez trouvez une référence pour tous les déclencheurs et les événements dans notre wiki à widelands.org."
 
 #: ../../txts/gametips:13
 msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
@@ -624,10 +638,10 @@ msgid "Always build a forester and a ranger's hut, so you will not run out of tr
 msgstr "Construisez toujours une cabane de sylviculteur et une cabane de garde forestier pour ne pas manquer de troncs et de viande."
 
 #: ../../txts/gametips:45
-#, fuzzy
 msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
-msgstr "Des questions? Venez nous rendre visite sur www.widelands.org. Vous y trouverez nos FAQs, le wiki et bien sûr le forum de la communauté."
+msgstr "D'autres questions? Nos FAQs, le wiki et bien sûr les forums de notre communauté se trouvent sur www.widelands.org."
 
 #: ../../txts/gametips:49
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
 msgstr "Utilisez les boutons de priorité dans les fenêtres des bâtiments pour ajuster la livraison de biens spécifiques."
+

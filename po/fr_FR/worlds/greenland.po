@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-10-26 17:34+0000\n"
-"PO-Revision-Date: 2008-08-18 23:08+0100\n"
+"PO-Revision-Date: 2008-11-01 18:28+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,6 @@ msgid "Elk"
 msgstr "Élan"
 
 #: ../../../worlds/greenland/bobs/fallentree/conf:2
-#, fuzzy
 msgid "Dead tree"
 msgstr "Arbre mort"
 
@@ -186,3 +185,4 @@ msgstr "Eau"
 #: ../../../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Poisson"
+
