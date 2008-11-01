@@ -6,11 +6,11 @@ buildable=yes
 buildicon=crystalmine_build.png
 worker=miner,miner,miner
 program=mine_stone
-program=mine_mountain_crystal
+program=mine_quartz
 program=mine_diamond
 program=work
 output=diamond
-output=mountain_crystal
+output=quartz
 output=stone
 stopable=yes
 
@@ -21,7 +21,7 @@ smoked_meat=6
 
 [work]
 call=mine_stone
-call=mine_mountain_crystal
+call=mine_quartz
 call=mine_diamond
 return=skipped
 
@@ -38,9 +38,9 @@ animate=working 20000
 mine=granit 4 100 5
 produce=stone
 mine=granit 4 100 5
-produce=mountain_crystal
+produce=quartz
 
-[mine_mountain_crystal]
+[mine_quartz]
 consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
 animate=working 20000
@@ -48,10 +48,10 @@ mine=granit 4 100 5
 produce=stone:2
 animate=working 20000
 mine=granit 4 100 5
-produce=stone mountain_crystal
+produce=stone quartz
 animate=working 20000
 mine=granit 4 100 5
-produce=mountain_crystal:2
+produce=quartz:2
 
 [mine_diamond]
 consume=smoked_fish,smoked_meat:2 bread:2

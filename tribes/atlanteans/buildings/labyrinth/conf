@@ -80,7 +80,7 @@ stone=4
 planks=5
 spidercloth=5
 diamond=2
-mountain_crystal=2
+quartz=2
 
 [idle]
 pics=labyrinth_i_??.png  # ???

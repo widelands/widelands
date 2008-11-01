@@ -16,7 +16,7 @@ stone=7
 trunk=5
 spidercloth=2
 diamond=1
-mountain_crystal=1
+quartz=1
 
 [idle]
 pics=castle_i_??.png

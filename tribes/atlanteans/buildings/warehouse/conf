@@ -11,7 +11,7 @@ buildicon=warehouse_build.png
 trunk=2
 planks=2
 stone=2
-mountain_crystal=1
+quartz=1
 spidercloth=1
 
 [idle]

@@ -87,7 +87,7 @@ trunk=2
 stone=2
 planks=2
 spidercloth=1
-mountain_crystal=1
+quartz=1
 
 [idle]
 pics=weaponsmith_i_??.png  # ???

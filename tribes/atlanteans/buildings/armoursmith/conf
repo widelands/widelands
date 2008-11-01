@@ -15,7 +15,7 @@ program=work
 trunk=2
 stone=2
 planks=2
-mountain_crystal=1
+quartz=1
 
 [inputs]
 iron=8
