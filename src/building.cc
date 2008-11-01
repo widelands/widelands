@@ -155,6 +155,8 @@ void Building_Descr::parse
 			std::string const target_name = v->get_string();
 			if (enhancement_names.count(target_name))
 				throw wexception("this has already been declared");
+			if (target_name ==  name())
+				throw wexception("enhancement to same type");
 			enhancement_names.insert(target_name);
 		} catch (_wexception const & e) {
 			throw wexception
