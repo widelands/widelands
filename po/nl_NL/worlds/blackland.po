@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3448\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:36+0000\n"
+"POT-Creation-Date: 2008-10-27 19:26+0000\n"
 "PO-Revision-Date: 2007-09-01 21:55+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"
@@ -19,10 +19,10 @@ msgid "Bunny"
 msgstr "Konijn"
 
 #: ../../../worlds/blackland/bobs/bush1/conf:1
-#: ../../../worlds/blackland/bobs/bush2/conf:1
-#: ../../../worlds/blackland/bobs/bush3/conf:1
-#: ../../../worlds/blackland/bobs/bush4/conf:1
 #: ../../../worlds/blackland/bobs/bush5/conf:1
+#: ../../../worlds/blackland/bobs/bush2/conf:1
+#: ../../../worlds/blackland/bobs/bush4/conf:1
+#: ../../../worlds/blackland/bobs/bush3/conf:1
 msgid "Bush"
 msgstr "Struik"
 
@@ -31,10 +31,10 @@ msgstr "Struik"
 msgid "Cactus"
 msgstr "Cactus"
 
-#: ../../../worlds/blackland/bobs/deadtree1/conf:1
-#: ../../../worlds/blackland/bobs/deadtree2/conf:1
 #: ../../../worlds/blackland/bobs/deadtree3/conf:1
 #: ../../../worlds/blackland/bobs/deadtree4/conf:1
+#: ../../../worlds/blackland/bobs/deadtree1/conf:1
+#: ../../../worlds/blackland/bobs/deadtree2/conf:1
 msgid "Dead Tree"
 msgstr "Dode boom"
 
@@ -50,8 +50,8 @@ msgstr "Eend"
 msgid "Fox"
 msgstr "Vos"
 
-#: ../../../worlds/blackland/bobs/grass1/conf:1
 #: ../../../worlds/blackland/bobs/grass2/conf:1
+#: ../../../worlds/blackland/bobs/grass1/conf:1
 #: ../../../worlds/blackland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Gras"
@@ -61,12 +61,12 @@ msgstr "Gras"
 msgid "Mushroom"
 msgstr "Champignons"
 
-#: ../../../worlds/blackland/bobs/pebble1/conf:1
 #: ../../../worlds/blackland/bobs/pebble2/conf:1
-#: ../../../worlds/blackland/bobs/pebble3/conf:1
-#: ../../../worlds/blackland/bobs/pebble4/conf:1
 #: ../../../worlds/blackland/bobs/pebble5/conf:1
 #: ../../../worlds/blackland/bobs/pebble6/conf:1
+#: ../../../worlds/blackland/bobs/pebble3/conf:1
+#: ../../../worlds/blackland/bobs/pebble4/conf:1
+#: ../../../worlds/blackland/bobs/pebble1/conf:1
 msgid "Pebble"
 msgstr "Kiezelsteen"
 
@@ -79,38 +79,38 @@ msgid "Sheep"
 msgstr "Schaap"
 
 #: ../../../worlds/blackland/bobs/skeleton1/conf:1
-#: ../../../worlds/blackland/bobs/skeleton2/conf:1
 #: ../../../worlds/blackland/bobs/skeleton3/conf:1
+#: ../../../worlds/blackland/bobs/skeleton2/conf:1
 msgid "Skeleton"
 msgstr "Skelet"
 
+#: ../../../worlds/blackland/bobs/sstones6/conf:1
+#: ../../../worlds/blackland/bobs/sstones4/conf:1
+#: ../../../worlds/blackland/bobs/sstones7/conf:1
+#: ../../../worlds/blackland/bobs/sstones3/conf:1
+#: ../../../worlds/blackland/bobs/sstones5/conf:1
 #: ../../../worlds/blackland/bobs/sstones1/conf:1
 #: ../../../worlds/blackland/bobs/sstones2/conf:1
-#: ../../../worlds/blackland/bobs/sstones3/conf:1
-#: ../../../worlds/blackland/bobs/sstones4/conf:1
-#: ../../../worlds/blackland/bobs/sstones5/conf:1
-#: ../../../worlds/blackland/bobs/sstones6/conf:1
-#: ../../../worlds/blackland/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Staande stenen"
 
 #: ../../../worlds/blackland/bobs/stones1/conf:1
-#: ../../../worlds/blackland/bobs/stones2/conf:1
 #: ../../../worlds/blackland/bobs/stones3/conf:1
-#: ../../../worlds/blackland/bobs/stones4/conf:1
 #: ../../../worlds/blackland/bobs/stones5/conf:1
 #: ../../../worlds/blackland/bobs/stones6/conf:1
+#: ../../../worlds/blackland/bobs/stones4/conf:1
+#: ../../../worlds/blackland/bobs/stones2/conf:1
 msgid "Stones"
 msgstr "Stenen"
 
-#: ../../../worlds/blackland/bobs/tree1/conf:5
 #: ../../../worlds/blackland/bobs/tree2/conf:5
-#: ../../../worlds/blackland/bobs/tree3/conf:5
-#: ../../../worlds/blackland/bobs/tree4/conf:5
-#: ../../../worlds/blackland/bobs/tree5/conf:4
-#: ../../../worlds/blackland/bobs/tree6/conf:4
 #: ../../../worlds/blackland/bobs/tree7/conf:4
 #: ../../../worlds/blackland/bobs/tree8/conf:4
+#: ../../../worlds/blackland/bobs/tree6/conf:4
+#: ../../../worlds/blackland/bobs/tree1/conf:5
+#: ../../../worlds/blackland/bobs/tree5/conf:4
+#: ../../../worlds/blackland/bobs/tree3/conf:5
+#: ../../../worlds/blackland/bobs/tree4/conf:5
 msgid "Tree"
 msgstr "Boom"
 

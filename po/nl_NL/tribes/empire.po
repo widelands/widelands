@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3448\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:36+0000\n"
+"POT-Creation-Date: 2008-10-27 19:26+0000\n"
 "PO-Revision-Date: 2008-08-21 21:43+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
@@ -149,11 +149,6 @@ msgstr "Schapenboerderij"
 #: ../../../tribes/empire/buildings/smelting_works/conf:2
 msgid "Smelting Works"
 msgstr "Hoogoven"
-
-#: ../../../tribes/empire/buildings/stonemason/conf:2
-#: ../../../tribes/empire/workers/stonemason/conf:2
-msgid "Stonemason"
-msgstr "Steenhouwer"
 
 #: ../../../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
@@ -635,6 +630,11 @@ msgstr "Smelter"
 #: ../../../tribes/empire/workers/soldier/conf:2
 msgid "Soldier"
 msgstr "Soldaat"
+
+#: ../../../tribes/empire/workers/stonemason/conf:2
+#: ../../../tribes/empire/buildings/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Steenhouwer"
 
 #: ../../../tribes/empire/workers/toolsmith/conf:2
 msgid "Toolsmith"
