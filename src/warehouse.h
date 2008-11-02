@@ -81,6 +81,8 @@ public:
 	virtual void act(Game *g, uint32_t data);
 
 	virtual void set_economy(Economy *e);
+	virtual int32_t get_priority(int32_t type, Ware_Index ware_index, bool adjust = true) const;
+	void set_needed(Ware_Index, int value = 1);
 
 	const WareList &get_wares() const;
 	const WareList &get_workers() const;
@@ -121,6 +123,8 @@ private:
 	std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
 	int32_t                 m_next_carrier_spawn; //  time of next carrier growth
 	int32_t                 m_next_military_act; // time of next military action
+
+	std::vector<size_t> m_target_supply;//how many do we want to store in this building
 };
 
 };

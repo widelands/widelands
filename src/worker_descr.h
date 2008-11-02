@@ -45,6 +45,7 @@ class Worker_Descr : public Bob::Descr
 		{}
 	};
 
+public:
 	typedef std::vector<CostItem> BuildCost;
 
 public:

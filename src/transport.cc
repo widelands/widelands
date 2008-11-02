@@ -2731,7 +2731,7 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
 	size_t const nr_supplies = m_supplies.get_nrsupplies();
 	for (size_t i = 0; i < nr_supplies; ++i)
 		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i]))
-			if (warehouse_supply->stock_wares(ware_type))
+			if (warehouse_supply->stock_wares(ware_type) && (m_warehouses[i]->get_priority(Request::WARE,ware_type) > 100))
 				return false;
 	return true;
 }
@@ -2847,8 +2847,18 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 		Route* route;
 
 		// idle requests only get active supplies
-		if (req->is_idle() and not supp.is_active())
-			continue;
+		if (req->is_idle() and not supp.is_active()){
+			/* unless the warehouse REALLY needs the supply */
+			if (req->get_priority(0) > 100){ // 100 is the 'real idle' priority
+				//check if the supply is at current target
+				if (target_flag == (&supp)->get_position(g)->get_base_flag()) {
+					//assert(false);
+					continue;
+				}
+			} else if (not supp.is_active()) {
+				continue;
+			}
+		}
 
 		// Check requirements
 		if (!supp.nr_supplies(g, req))
@@ -3023,15 +3033,28 @@ void Economy::create_requested_workers(Game* g)
 
 				// If there aren't enough supplies...
 				if (num_wares == 0) {
-
+					bool created_worker = false;
 					uint32_t n_wh = 0;
 					while (n_wh < get_nr_warehouses()) {
 						if (m_warehouses[n_wh]->can_create_worker(g, index)) {
 							m_warehouses[n_wh]->create_worker(g, index);
+							created_worker = true;
 							//break;
 						} // if (m_warehouses[n_wh]
 						++n_wh;
 					} // while (n_wh < get_nr_warehouses())
+					if (! created_worker){
+						Warehouse* nearest = m_warehouses[0];//fix to nearest warehouse
+						const Worker_Descr::BuildCost & buildcost = w_desc->get_buildcost();
+						const Worker_Descr::BuildCost::const_iterator buildcost_end =	buildcost.end();
+						for (Worker_Descr::BuildCost::const_iterator bc_it = buildcost.begin(); bc_it != buildcost.end(); ++bc_it){
+							const char * input_name = bc_it->name.c_str();
+							if (Ware_Index w_id = get_owner()->tribe().ware_index(input_name)){
+								nearest->set_needed(w_id,bc_it->amount);
+							}
+						}
+
+					}
 				} // if (num_wares == 0)
 			} // if (req->is_open())
 		} // for (RequestList::iterator

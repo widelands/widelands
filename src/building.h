@@ -214,7 +214,7 @@ public:
 	virtual void set_stop(bool stop);
 
 	int32_t get_base_priority() const {return m_priority;}
-	int32_t get_priority(int32_t type, Ware_Index ware_index, bool adjust = true) const;
+	virtual int32_t get_priority(int32_t type, Ware_Index ware_index, bool adjust = true) const;
 	void set_priority(int32_t new_priority);
 	void set_priority(int32_t type, Ware_Index ware_index, int32_t new_priority);
 

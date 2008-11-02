@@ -232,7 +232,7 @@ int32_t Request::get_required_time()
 		get_base_required_time(&m_economy->owner().egbase(), m_transfers.size());
 }
 
-#define MAX_IDLE_PRIORITY           100
+//#define MAX_IDLE_PRIORITY           100
 #define PRIORITY_MAX_COST         50000
 #define COST_WEIGHT_IN_PRIORITY       1
 #define WAITTIME_WEIGHT_IN_PRIORITY   2
@@ -242,6 +242,36 @@ int32_t Request::get_required_time()
  */
 int32_t Request::get_priority (int32_t cost)
 {
+	int MAX_IDLE_PRIORITY = 100;
+	bool is_construction_site = false;
+	int32_t modifier = DEFAULT_PRIORITY;
+
+	/* determine the type of building */
+	const Building * const building =
+		dynamic_cast<const Building *>(get_target());
+
+	if (0x0 != building) {
+		//log("Tex: %s %i %i\n", building->get_name(), building->get_building_type(), building->get_type());
+		//assert(building->get_building_type() != Building::WAREHOUSE);
+		if (building->get_stop())
+			return -1;
+
+		modifier = building->get_priority(get_type(), get_index());
+		switch (building->get_building_type()){
+			case Building::CONSTRUCTIONSITE:
+				is_construction_site = true;
+				break;
+			case Building::WAREHOUSE:
+				/* warehouses can determine max idle priority*/
+				MAX_IDLE_PRIORITY = modifier;
+				// assert(false);
+				break;
+			default:
+				break;
+		}
+	}
+
+
 	if (is_idle()) {
 		// idle requests are prioritized only by cost
 		int32_t weighted_cost = cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST;
@@ -250,19 +280,9 @@ int32_t Request::get_priority (int32_t cost)
 			0 : MAX_IDLE_PRIORITY - weighted_cost;
 	}
 
-	int32_t modifier = DEFAULT_PRIORITY;
-	bool is_construction_site = false;
-	const Building * const building =
-		dynamic_cast<const Building *>(get_target());
 
-	if (0x0 != building) {
-		if (building->get_stop())
-			return -1;
 
-		modifier = building->get_priority(get_type(), get_index());
-		is_construction_site =
-			Building::CONSTRUCTIONSITE == building->get_type();
-	}
+
 
 	Editor_Game_Base& g = m_economy->owner().egbase();
 

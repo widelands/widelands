@@ -44,7 +44,6 @@ namespace Widelands {
 
 static const int32_t CARRIER_SPAWN_INTERVAL = 2500;
 
-
 WarehouseSupply::~WarehouseSupply()
 {
 	if (m_economy)
@@ -345,6 +344,26 @@ Warehouse::~Warehouse()
 	delete m_supply;
 }
 
+/*
+Warehouse::get_priority
+warehouses determine how badly they want a certain ware 
+*/
+int32_t Warehouse::get_priority(int32_t type, Ware_Index ware_index, bool adjust) const {
+	int MAX_IDLE_PRIORITY = 100;
+	if (type == Request::WARE){
+		if (m_target_supply[ware_index] > 0){
+			MAX_IDLE_PRIORITY = 500000;
+		}
+	}
+	return MAX_IDLE_PRIORITY;
+}
+
+void Warehouse::set_needed(Ware_Index ware_index, int value){
+	//assert (value >= m_supply->stock_wares(ware_index));
+	if (value > m_supply->stock_wares(ware_index)){
+		m_target_supply[ware_index] = value - m_supply->stock_wares(ware_index);
+	}
+}
 
 /*
 ===============
@@ -385,6 +404,7 @@ void Warehouse::init(Editor_Game_Base* gg)
 		m_next_carrier_spawn = schedule_act(game, CARRIER_SPAWN_INTERVAL);
 		m_next_military_act  = schedule_act(game, 1000);
 	}
+	m_target_supply.resize(m_requests.size());
 
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
@@ -556,7 +576,11 @@ Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
-
+	if (m_target_supply[id] > count){
+		m_target_supply[id] -= count;
+	} else {
+		m_target_supply[id] = 0;
+	}
 	m_supply->add_wares(id, count);
 }
 
@@ -571,7 +595,9 @@ Magically destroy wares.
 void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
-
+	if (m_target_supply[id] > 0){
+		m_target_supply[id] += 1;
+	}
 	m_supply->remove_wares(id, count);
 }
 
