@@ -97,7 +97,7 @@ build-13:
   memory used to store the first instance was leaked.
 - Fixed bugs with drop-soldier commands: If such a command was given and then the
   game was saved before the command was executed (because the game was paused), the
-  command was saved incorrectly. And even if the savegame would have had a such a
+  command was saved incorrectly. And even if the savegame would have had such a
   command correctly saved, the loading code would not have recognized it.
 - Removed the trainingsite options window. The "Make heros" button was suspected of
   being able to cause desync in network games.
