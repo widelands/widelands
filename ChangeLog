@@ -88,13 +88,38 @@ build-13:
 - Added atlantean building graphics.
 - Added a lot of new sounds and integrated them in the game.
 - Rework of campaign missions.
-- Fix bugs in parsing of building types'sbuildcosts and inputs. Check that the
+- Fix bugs in parsing of building types's buildcosts and inputs. Check that the
   ware types exist and are not duplicated and that the quantities are within range.
 - Fix bug in parsing of productionsite types' outputs. Check that the ware types
   exist and are not duplicated.
 - Fix bugs in parsing of productionsite types', critter_bob types' and worker
   types' programs. If a program was declared twice, it was parsed twice and the
   memory used to store the first instance was leaked.
+- Fixed bugs with drop-soldier commands: If such a command was given and then the
+  game was saved before the command was executed (because the game was paused), the
+  command was saved incorrectly. And even if the savegame whould have had a such a
+  command correctly saved, the loading code would not have recognized it.
+- Removed the trainingsite options window. The "Make heros" button was suspected of
+  being able to cause desync in network games.
+- Fixed bugs that attack, change-soldier-capacity and set-ware-priority commands were
+  not recognized when encountered in savegames.
+- Fixed bug that set-ware-priority commands were saved as enhance-building commands.
+- Change game rule: Forbid upgrading any building to any type of building. Only allow
+  upgrading to one of the defined enhancements. This is the behaviour that was
+  intended and that the user interface obeys. Now also the game logic enforces it.
+  This prevents users from circumventing the user interface and do arbitrary building
+  upgrades, which other players may consider cheating in a network game.
+- Fix program crash (or worse) when a worker type was declared to have an ingredient
+  that had not been defined.
+- Forbid declaring that a building can be enhanced to its own type or the special
+  type constructionsite.
+- Do not let the constructionsite crash the game if a building type did not define
+  a build animation. Use the idle animation instead.
+- Do not crash because of division by 0 when building a building without buildcost.
+- When building a building without buildcost, complete it immediately instead of
+  never.
+- Check for mine and size mismatch when parsing building enhancement definitions.
+  This prevents crashes at run-time.
 - Fixed bug #1792379 - little trees set with editor don't grow.
 - Fixed bug #1913902 - collosseum now trains evade 0 and 1.
 - Fixed bug that upgraded worker were used in buildings instead of training new
