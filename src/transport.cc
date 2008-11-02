@@ -2731,7 +2731,7 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
 	size_t const nr_supplies = m_supplies.get_nrsupplies();
 	for (size_t i = 0; i < nr_supplies; ++i)
 		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i]))
-			if (warehouse_supply->stock_wares(ware_type) && (m_warehouses.at(i)->get_priority(Request::WARE,ware_type) > 100))
+			if (warehouse_supply->stock_wares(ware_type))
 				return false;
 	return true;
 }
