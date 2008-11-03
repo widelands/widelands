@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:40+0000\n"
+"POT-Creation-Date: 2008-11-03 13:17+0000\n"
 "PO-Revision-Date: 2008-10-25 15:36+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -49,7 +49,7 @@ msgstr " \"Meines Vaters Knochen liegen friedlich in der Erde, auf einem Hügel 
 
 #: ../../../campaigns/t01.wmf/event:51
 msgid " \"As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
-msgstr " \"Als ich noch jung war lehrte mich mein Vater, dass es eine Zeit zum Kämpfen und eine Zeit zum Warten gäbe. Er sagte mir, dass die Zeiten des Wartens meist noch härter als die des Kämpfens seien, denn in jenen müsse man ununterbrochen achtgeben, um weder in einen zu tiefen Schlaf zu fallen noch leichtgläubig dem Frieden zu trauen. Es sein gerade die Zeiten in denen der plötzliche Tod überaschent vor einem steht.<br>Und so ist nun auch für uns eine solche Zeit des Wartens angebrochen..."
+msgstr " \"Als ich noch jung war lehrte mich mein Vater, dass es eine Zeit zum Kämpfen und eine Zeit zum Warten gäbe. Er sagte mir, dass die Zeiten des Wartens meist noch härter als die des Kämpfens seien, denn in jenen müsse man ununterbrochen achtgeben, um weder in einen zu tiefen Schlaf zu fallen noch leichtgläubig dem Frieden zu trauen. Es sein gerade die Zeiten in denen der plötzliche Tod überraschend vor einem steht.<br>Und so ist nun auch für uns eine solche Zeit des Wartens angebrochen..."
 
 #: ../../../campaigns/t01.wmf/event:89
 msgid "An old man says..."
@@ -69,7 +69,7 @@ msgstr "Khantrukh fährt fort..."
 
 #: ../../../campaigns/t01.wmf/event:105
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br> We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
-msgstr " \"Niemand außer den Göttern weiß, wie lange wir hier noch versteckt bleiben müssen. Die Krieger hoffen, dass wir irgendwann glorreich heimwärts marschieren, doch ich bin absolut sicher, dass dies nicht in nächster Zeit geschehen wird. Und die Tage werden längst schon kürzer und kälter...<br>Wir sollten uns besser schnell auf den Winter in diesen Landen vorbereiten. Ich denke im Osten unseres Quartiers gibt es einige Plätze auf denen wir eine Holzfällerhütte aufbauen könnten.\"<br><br>--NEUER AUFTRAG--<br>-"
+msgstr " \"Niemand außer den Göttern weiß, wie lange wir hier noch versteckt bleiben müssen. Die Krieger hoffen, dass wir irgendwann glorreich heimwärts marschieren, doch ich bin absolut sicher, dass dies nicht in nächster Zeit geschehen wird. Und die Tage werden längst schon kürzer und kälter...<br>Wir sollten uns besser schnell auf den Winter in diesen Landen vorbereiten. Ich denke im Osten unseres Quartiers gibt es einige Plätze auf denen wir eine Holzfällerhütte aufbauen könnten.\"<br><br>--NEUER AUFTRAG--<br> "
 
 #: ../../../campaigns/t01.wmf/event:106 ../../../campaigns/t01.wmf/objective:7
 msgid "* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a lumberjack's hut - may be built.<br>"
@@ -91,11 +91,11 @@ msgstr "Der Alte merkt an..."
 
 #: ../../../campaigns/t01.wmf/event:121
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Es scheint offensichtlich, dass es zu schwer für unsere Leute wird, müßten sie die ganze Strecke bis zum Holzfäller durch die Wildnis laufen. Wir sollten einen Pfad zwischen unserem Hauptquartier und dem Holzfäller anlegen. Und logisch, dass die Männer einen möglichst kurzen und ebenen Weg bevorzugen werden. Das Holz wird auch dann schwer genug sein.\"<br><br>--NEUER AUFTRAG--<br>- "
+msgstr " \"Es scheint offensichtlich, dass es zu schwer für unsere Leute wird, müssten sie die ganze Strecke bis zum Holzfäller durch die Wildnis laufen. Wir sollten einen Pfad zwischen unserem Hauptquartier und dem Holzfäller anlegen. Und logisch, dass die Männer einen möglichst kurzen und ebenen Weg bevorzugen werden. Das Holz wird auch dann schwer genug sein.\"<br><br>--NEUER AUFTRAG--<br>- "
 
 #: ../../../campaigns/t01.wmf/event:122
 msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You are expected to connect it to another flag with a road.<br> If you click on a flag little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of those symbols to build the first step of the road to it. New symbols will appear to show you where the next step can go, and so on. But you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
-msgstr "Baue eine Straße zwischen Deinem Hauptquartier und dem Holzfäller.<br> Wenn du eine Holzfällerhütte gebaut hast, wird ihr auch direkt eine Flagge zugeordnet. Du musst diese Flagge zu einer anderen Flagge mit einer Straße verbinden. Wenn du auf eine Flagge klickst, erscheinen kleine Symbole die dir zeigen, in welche Richtungen du die Straße bauen kannst. Die Farbe zeigen an, wie steil die Straße wird. Grün heisst flach, rot ist sehr steil. Je höher die Steigung ist, desto schwieriger wird es für deine Träger. Du kannst auf jedes der Symbole klicken, um ein Stück Straße in diese Richtung zu bauen. Neue Symbole erscheinen, in welche Richtung es weitergehen kann, usw. Du kannst aber auch direkt weiter weg klicken, um ein größeres Stück Straße auf einmal zu bauen. Klicke auf die Flagge deines Hauptquartiers um die Straße zu vervollständigen."
+msgstr "Baue eine Straße zwischen Deinem Hauptquartier und dem Holzfäller.<br> Wenn du eine Holzfällerhütte gebaut hast, wird ihr auch direkt eine Flagge zugeordnet. Du musst diese Flagge zu einer anderen Flagge mit einer Straße verbinden. Wenn du auf eine Flagge klickst, erscheinen kleine Symbole die dir zeigen, in welche Richtungen du die Straße bauen kannst. Die Farbe zeigen an, wie steil die Straße wird. Grün heißt flach, rot ist sehr steil. Je höher die Steigung ist, desto schwieriger wird es für deine Träger. Du kannst auf jedes der Symbole klicken, um ein Stück Straße in diese Richtung zu bauen. Neue Symbole erscheinen, in welche Richtung es weitergehen kann, usw. Du kannst aber auch direkt weiter weg klicken, um ein größeres Stück Straße auf einmal zu bauen. Klicke auf die Flagge deines Hauptquartiers um die Straße zu vervollständigen."
 
 #: ../../../campaigns/t01.wmf/event:135
 msgid "Khantrukh remembers..."
@@ -115,11 +115,11 @@ msgstr "Khantrukh schaut zum Himmel..."
 
 #: ../../../campaigns/t01.wmf/event:152
 msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Die nördlichen Winde zeigen uns, dass der kommende Winter lang und hart werden wird. Ein Holzfäller allein wird nicht genug sein, um den Bedarf unserer Leute zu decken. Südlich unseres neuen Straßenabschnitts warten noch so viele Bäume auf unsere Axthiebe!\"<br><br>--NEUER AUFTRAG--<br>"
+msgstr " \"Die nördlichen Winde zeigen uns, dass der kommende Winter lang und hart werden wird. Ein Holzfäller allein wird nicht genug sein, um den Bedarf unserer Leute zu decken. Südlich unseres neuen Straßenabschnitts warten noch so viele Bäume auf unsere Axthiebe!\"<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/t01.wmf/event:153
 msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-msgstr "* Setze eine Holzfällerhütte direkt südlich der Flagge die du auf den Weg setzt. Verbinde diese Flagge mit der neuen Holzfällerhütte danach. Tipp: Anstelle eine Straße Stück für Stück zu bauen, kannst du auch direkt auf das Ziel klicken um den Weg komplett zu bauen."
+msgstr "* Setze eine Holzfällerhütte direkt südlich der Flagge, die du auf den Weg setzt. Verbinde danach diese Flagge mit der neuen Holzfällerhütte. Tipp: Anstelle eine Straße Stück für Stück zu bauen, kannst du auch direkt auf das Ziel klicken, um den Weg komplett zu bauen."
 
 #: ../../../campaigns/t01.wmf/event:166
 msgid "Khantrukh nods..."
@@ -127,7 +127,7 @@ msgstr "Khantrukh nickt..."
 
 #: ../../../campaigns/t01.wmf/event:168
 msgid " \"Of course, if we intended to build a bigger settlement much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Die zweite Holzfällerhütte ist errichtet. Und solange wir nicht beabsichtigen eine größere Siedlung zu bauen, sollten diese zwei sicher reichen.<br>Was mir zur Zeit viel wichtiger scheint, ist, dass wir uns an unsere Wurzeln erinnern, denn diese Wälder wurden uns von unseren Urahnen anvertraut. Wir sollten sie immer respektieren und pflegen. Was wir nehmen, müssen wir auch wieder geben.<br>Um also die gefällten Bäume zu ersetzen, sollten wir ein Försterhütte in der Nähe des Holzfällers bauen.<br><br>-- NEUER AUFTRAG  --<br>"
+msgstr " \"Die zweite Holzfällerhütte ist errichtet. Und solange wir nicht beabsichtigen eine größere Siedlung zu bauen, sollten diese zwei sicher reichen.<br>Was mir zur Zeit viel wichtiger scheint, ist, dass wir uns an unsere Wurzeln erinnern, denn diese Wälder wurden uns von unseren Urahnen anvertraut. Wir sollten sie immer respektieren und pflegen. Was wir nehmen, müssen wir auch wieder geben.<br>Um also die gefällten Bäume zu ersetzen, sollten wir ein Försterhütte in der Nähe des Holzfällers bauen.<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/t01.wmf/event:169
 #: ../../../campaigns/t01.wmf/objective:26
@@ -201,7 +201,7 @@ msgstr "Mission erfüllt"
 
 #: ../../../campaigns/t01.wmf/objective:5
 msgid "Build a lumberjack's hut"
-msgstr "Baue einen Holzfällerhütte"
+msgstr "Baue eine Holzfällerhütte"
 
 #: ../../../campaigns/t01.wmf/objective:8
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
@@ -221,7 +221,7 @@ msgstr "* Setze eine Flagge in die Mitte des Weges.<br>Es gibt ein Flaggensymbol
 
 #: ../../../campaigns/t01.wmf/objective:18
 msgid "* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-msgstr "* Setze eine Holzfällerhütte direkt südlich der Flagge die du auf den Weg setzt. Verbinde diese Flagge mit der neuen Holzfällerhütte danach. Tipp: Anstelle eine Straße Stück für Stück zu bauen, kannst du auch direkt auf das Ziel klicken um den Weg komplett zu bauen."
+msgstr "* Setze eine Holzfällerhütte direkt südlich der Flagge, die du auf den Weg setzt. Verbinde danach diese Flagge mit der neuen Holzfällerhütte. Tipp: Anstelle eine Straße Stück für Stück zu bauen, kannst du auch direkt auf das Ziel klicken um den Weg komplett zu bauen."
 
 #: ../../../campaigns/t01.wmf/objective:24
 msgid "Build a ranger's hut"

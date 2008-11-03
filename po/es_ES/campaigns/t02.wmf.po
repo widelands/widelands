@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:33+0000\n"
+"POT-Creation-Date: 2008-11-03 13:17+0000\n"
 "PO-Revision-Date: 2007-02-08 18:55+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
@@ -247,7 +247,7 @@ msgid " \"Our miners are digging up less and less by day! We have to go deeper, 
 msgstr "\"¡Nuestros mineros cavan menos cada día! ¡Debemos llegar más hondo, hasta las raíces de la montaña, si queremos más de sus tesoros!<br>Por supuesto, está oscuro y hace frío a esas profundidades, y sólo unos pocos bajarán voluntariamente allí. Debemos recompensar su valor con raciones mayores.\"<br><br>"
 
 #: ../../../campaigns/t02.wmf/event:389
-#: ../../../campaigns/t02.wmf/objective:46
+#: ../../../campaigns/t02.wmf/objective:47
 #, fuzzy
 msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
 msgstr "<p>Una mina normal sólo puede extraer alrededor de un tercio de los recursos disponibles. Para poder seguir produciendo debe ser mejorada a mina profunda. Para mejorar un edificio, pulsa sobre él y selecciona el botón adecuado en el menú.<br>Los trabajadores ganan experiencia con el trabajo, convirtiéndose en trabajadores más avanzados con el tiempo, lo que los habilita para trabajar en edificios más avanzados. ¡No mejores un edificio antes de tener trabajadores del nivel suficiente disponibles! Estos edificios habitualmente demandan más recursos que los básicos - por ejemplo, las minas profundas necesitan raciones, en lugar de bocadillos. Esto implica que debes mejorar tu taberna a una posada, para poder producir raciones a partir del pan Y un segundo tipo de comida (carne o pescado). Ten en cuenta que la existencia de posadas no deja las tabernas obsoletas, ya que las minas normales siguen necesitando sus bocadillos. Por supuesto, también puedes mejorar todas las minas simultáneamente: cuanto más avanzada sea la mina, más rápido trabajará, cuanto más pequeña, menos recursos necesita. Queda a tu elección.<br>Mejora la mina de carbón y la taberna a sus versiones respectivas.</p>"
@@ -290,7 +290,7 @@ msgid " \"Chieftain, this is a disgrace! It is well that we can produce grout fo
 msgstr "\"¡Señor, es una desgracia! Es bueno que podamos disponer de bloques para fabricar edificios robustos, pero ¡esto no evita que nuestros techos tengan goteras! Quizá los jóvenes disfruten de pasar las noches bajo la lluvia, ¡pero yo no puedo descansar con esas goteras sobre mi cara! ¡Este es un problema que debemos resolver!\"<br><br>"
 
 #: ../../../campaigns/t02.wmf/event:429
-#: ../../../campaigns/t02.wmf/objective:67
+#: ../../../campaigns/t02.wmf/objective:71
 #, fuzzy
 msgid "* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. It is being planted by a fernery."
 msgstr "<p>El tercer material necesario para mejorar tus edificios es la paja, para cubrir sus techos. Puedes obtenerla en las plantaciones.<br>Construye una plantación.</p>"
@@ -388,15 +388,31 @@ msgstr ""
 msgid "* Build a smelting works.<br> The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
 msgstr ""
 
+#: ../../../campaigns/t02.wmf/objective:45
+msgid "Enhance Buildings"
+msgstr ""
+
 #: ../../../campaigns/t02.wmf/objective:53
+msgid "Build a wood hardener"
+msgstr ""
+
+#: ../../../campaigns/t02.wmf/objective:55
 #, fuzzy
 msgid "* Build a wood hardener.<br> Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, for without that you cannot expand."
 msgstr "<p>Mejores y más grandes edificios - incluyendo todos los militares - necesitan mejores materiales de construcción. No se pueden edificar con simples troncos: la madera debe ser convertida en vigas en una carpintería. Recuerda siempre construir una antes de acabar tus reservas de vigas, porque sin ellas no podrás expandirte.<br>Construye una carpintería."
 
-#: ../../../campaigns/t02.wmf/objective:60
+#: ../../../campaigns/t02.wmf/objective:61
+msgid "Build a lime kiln and coal economy"
+msgstr ""
+
+#: ../../../campaigns/t02.wmf/objective:63
 #, fuzzy
 msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr "<p>Mejores edificios pueden necesitar materiales especiales aparte de las vigas. Uno de ellos son los bloques, que se fabrican con piedra en bruto y agua en el molino. Puedes obtener agua construyendo un pozo cerca de una fuente de agua, que tus Geólogos pueden descubrir si los envías a una bandera que no esté en terreno montañoso, y seleccionando el símbolo de Geólogo en su menú.<br>Construye un molino y un pozo.</p>"
+
+#: ../../../campaigns/t02.wmf/objective:69
+msgid "Build a fernery"
+msgstr ""
 
 #~ msgid "The Story goes on..."
 #~ msgstr "La historia continúa..."

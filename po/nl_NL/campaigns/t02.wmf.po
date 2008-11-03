@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3448\n"
+"Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-27 19:26+0000\n"
+"POT-Creation-Date: 2008-11-03 13:17+0000\n"
 "PO-Revision-Date: 2008-08-11 23:23+0100\n"
 "Last-Translator: Pietertje <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
@@ -216,7 +216,7 @@ msgid " \"Our miners are digging up less and less by day! We have to go deeper, 
 msgstr " \"Onze mijnwerkers halen elke dag minder boven! We moeten dieper gaan, dichter bij de bron van de berg, als we meer van zijn schatten willen!<br>Natuurlijk is het koud en donker op zo'n diepte en willen slecht enkelen vrijwillig daar binnen gaan. We moeten deze moed belonen met grotere porties.\"<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/t02.wmf/event:389
-#: ../../../campaigns/t02.wmf/objective:46
+#: ../../../campaigns/t02.wmf/objective:47
 msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
 msgstr "* Verbeter de kolenmijn en de kroeg naar hun betere versies.<br>- Een gewone mijn kan slechts ongeveer een derde van alle ondergrondse voorraden uitgraven. Dan moet deze verbeterd worden tot een diepe mijn om goed te blijven werken. Om een gebouw te verbeteren, klik je erop en dan op de juiste knop in het menu dat verschijnt.<br> Arbeiders doen ervaring op met succesvol werk. Met genoeg ervaring worden ze beter gekwalificeerd, wat nodig is voor verbeterde gebouwen. Verbeter geen gebouw voordat je genoeg gekwalificeerde arbeiders hebt om erin te werken! Zulke gebouwen stellen meestal hogere eisen dan het oorspronkelijke gebouw - zo hebben diepe mijnen porties nodig in plaats van hapjes. Je zult je kroeg moeten verbeteren tot een herberg om porties te kunnen produceren uit pitabrood EN een tweede soort voedsel (vlees of vis). Let erop dat het hebben van herbergen, kroegen niet overbodig maakt - normale mijnen hebben nog steeds hapjes nodig in plaats porties. Je kunt natuurlijk alle mijnen gelijk verbeteren naar diepe mijnen - grotere mijnen werken sneller, kleinere hebben goedkoper voedsel nodig. Het is net waar je zelf voor kiest."
 
@@ -253,7 +253,7 @@ msgid " \"Chieftain, this is a disgrace! It is well that we can produce grout fo
 msgstr " \"Leider, het is een schande! Het is leuk en aardig dat we nu specie kunnen malen voor machtige versterkingen en grootse gebouwen - alleen kan dit niet voorkomen dat onze daken gaan lekken! Misschien vinden de jongeren het leuk om nachten in de regen door te brengen, maar ik kan de slaap niet vinden met die druppels die op mijn neus vallen!<br> Er is nu een probleem waar we iets aan moeten doen!\"<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/t02.wmf/event:429
-#: ../../../campaigns/t02.wmf/objective:67
+#: ../../../campaigns/t02.wmf/objective:71
 msgid "* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. It is being planted by a fernery."
 msgstr "* Bouw een varenkwekerij.<br> Het derde materiaal nodig voor verbeterde gebouwen is stro, om daken te dekken. Stro wordt geplant in een varenkwekerij."
 
@@ -341,13 +341,29 @@ msgstr "Verwerk je mijnmaterialen"
 msgid "* Build a smelting works.<br> The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
 msgstr "* Bouw een hoogoven.<br> De ijzererts die je mijnwerkers boven brengen is nog niet bruikbaar - het moet eerst worden omgesmolten tot ijzer."
 
+#: ../../../campaigns/t02.wmf/objective:45
+msgid "Enhance Buildings"
+msgstr ""
+
 #: ../../../campaigns/t02.wmf/objective:53
+msgid "Build a wood hardener"
+msgstr ""
+
+#: ../../../campaigns/t02.wmf/objective:55
 msgid "* Build a wood hardener.<br> Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, for without that you cannot expand."
 msgstr "* Bouw een houtverharder.<br> Grotere en sterkere gebouwen - waaronder alle militaire gebouwen - hebben betere bouwmaterialen nodig. Ze kunnen niet met eenvoudige boomstammen gebouwd worden - het hout moet eerst worden verwerkt tot rozenhout door een houtverharder. Zorg er altijd voor een houtverharder te bouwen voor je voorraad rozenhout op is, want je kunt niet uitbreiden zonder."
 
-#: ../../../campaigns/t02.wmf/objective:60
+#: ../../../campaigns/t02.wmf/objective:61
+msgid "Build a lime kiln and coal economy"
+msgstr ""
+
+#: ../../../campaigns/t02.wmf/objective:63
 msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr "* Bouw een kalkoven, een put en een houtskoolbrander of kolenmijn.<br> Betere gebouwen kunnen ander materiaal nodig hebben dan rozenhout. Een daarvan is specie, dat wordt gemaakt uit ruwe steen, water en kolen door een kalkoven. Je kunt water verkrijgen door een put te bouwen op een waterbron die je geologen kunnen ontdekken als je ze naar een vlag stuurt die niet op een vlag staat en op de genoemde vlag te klikken en daarna op het geologen-symbool in het menu dat daarna verschijnt. Kool kan worden verkregen door een houtskoolbrander of kolenmijn te bouwen."
+
+#: ../../../campaigns/t02.wmf/objective:69
+msgid "Build a fernery"
+msgstr ""
 
 #, fuzzy
 #~ msgid "* When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot."

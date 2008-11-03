@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:33+0000\n"
-"PO-Revision-Date: 2007-02-08 18:55+0100\n"
-"Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
+"POT-Creation-Date: 2008-11-03 13:17+0000\n"
+"PO-Revision-Date: 2008-11-03 14:13+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,6 @@ msgid " \"Finally! This island seems to be made for us, it is a gift from the Go
 msgstr "¡Al fin!<br>Esta isla parece hecha para nosotros, es un regalo de los Dioses para mi y mi gente.<br>Hasta hoy, sólo hemos visto una pequeña parte de esta isla, pero esta parte ya ilumina mi mente, como si hubiéramos encontrado un tesoro incalculable, una tierra paradisíaca.<br>En esta isla empezaremos nuestra nueva vida, construiremos una avanzadilla hacia nuestro exilio, que quizás se convierta en un nuevo y hermoso hogar para todos nosotros."
 
 #: ../../../campaigns/emp02.wmf/event:14
-#, fuzzy
 msgid "A new island"
 msgstr "Nuevas islas"
 
@@ -253,7 +252,6 @@ msgid "Build a quarry"
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/objective:23
-#, fuzzy
 msgid "Protect your colony"
 msgstr "Piedra para la colonia"
 
@@ -288,7 +286,7 @@ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a
 msgstr "* Construye edificios militares mayores, como una avanzadilla, una muralla o una torre en tu frontera oriental."
 
 #: ../../../campaigns/emp02.wmf/objective:63
-msgid "Destroy the babarian tribe"
+msgid "Destroy the barbarian tribe"
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/objective:66

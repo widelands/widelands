@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:40+0000\n"
-"PO-Revision-Date: 2008-08-05 23:23+0100\n"
-"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"POT-Creation-Date: 2008-11-03 13:17+0000\n"
+"PO-Revision-Date: 2008-11-03 14:09+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -215,7 +215,7 @@ msgid " \"Our miners are digging up less and less by day! We have to go deeper, 
 msgstr " \"Die Erzadern die unsere Bergarbeiter abtragen, werden schwächer, daher schlage ich vor, dass wir tiefer in den Berg vorstoßen, damit unser Rohstoffstrom nicht so schnell wieder versiegt.<br>Andererseits ist es in diesen tieferen Minen dunkler und kälter als in den einfachen Minen, die unsere Bergarbeiter gewohnt sind, daher sollten wir einen jeden Bergarbeiter, der in einer solchen tiefen Mine arbeitet mit größeren Rationen belohnen.\"<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/t02.wmf/event:389
-#: ../../../campaigns/t02.wmf/objective:46
+#: ../../../campaigns/t02.wmf/objective:47
 msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
 msgstr "* Baue die Kohlemine zu einer tiefen Mine und eine Taverne zu einem Wirtshaus aus.<br> Ein normales Bergwerk kann nur ungefähr ein Drittel aller im Berg liegenden Resourcen abbauen. Dennoch kann man an weitere Rohstoffe kommen, in dem man die Mine zu einer tiefen Mine ausbaut. Um ein Gebäude auszubauen, musst Du es anklicken und dann den entsprechende Knopf im erscheinenden Menü auswählen.<br>Bergarbeiter gewinnen Erfahrung durch erfolgreiche Arbeit. Mit ausreichender Erfahrung werden sie zu einem Bergwerkschef, der notwendig ist, um tiefe Minen zu betreiben. Daher solltest Du nie ein Gebäude ausbauen, bevor Du nicht genug erfahrene Arbeiter hast!<br>Auf der anderen Seite haben die Arbeiter der ausgebauten Gebäude grössere Ansprüche, als die des grundlegenden Gebäudes - zum Beispiel benötigen die Arbeiter von tiefen Minen Rationen anstelle von Snacks. Um Rationen aus Fladenbrot UND einer zweiten Zutat (Fleisch oder Fische) zu produzieren, musst Du Deine Tavern zu einem Wirtshaus ausbauen lassen.  Doch bedenke, dass die Wirtshäuser die Tavernen nicht ersetzen - normale Bergwerke brauchen immernoch Snacks, nicht etwa Rationen.  Natürlich könntest Du gleich alle Bergwerke ausbauen lassen, doch bedenke, dass ausgebaute Bergwerke zwar schneller arbeiten, dafür aber teureres Essen benötigen. Die Entscheidung liegt also bei Dir."
 
@@ -252,7 +252,7 @@ msgid " \"Chieftain, this is a disgrace! It is well that we can produce grout fo
 msgstr " \"Es ist wirklich unglaublich! Nun könnten wir soviele Steine produzieren, dass wir problemlos eine Festung errichten könnten. Und dennoch tropft mir fast jede Nacht das Regenwasser ins Gesicht! Ich weiß ja nicht - vielleicht finden die jungen Leute es ja interessant, die Nächte im Regen zu verbringen. Doch ich kriege einfach kein Auge zu! Ich denke, dass wir wirklich etwas dagegen unternehmen sollten!\"<br><br>-- NEUER AUFTRAG --<br> "
 
 #: ../../../campaigns/t02.wmf/event:429
-#: ../../../campaigns/t02.wmf/objective:67
+#: ../../../campaigns/t02.wmf/objective:71
 msgid "* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. It is being planted by a fernery."
 msgstr "* Baue einen Reet- und Flachshof.<br> Das dritte Material welches für größere und bessere Gebäude gebraucht wird, ist, welche wir vor allem für unsere Dächer verwenden. Reet wird von dem Reet- und Flachshof produziert."
 
@@ -340,13 +340,29 @@ msgstr "Veredle deine Erze"
 msgid "* Build a smelting works.<br> The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
 msgstr "* Baue einen Hochofen. <br> Die Erze, welche Deine Bergarbeiter aus den Felsen schlagen, können nicht direkt verarbeitet werden. Vorher müssen die Metalle in einem Hochofen verhüttet werden."
 
+#: ../../../campaigns/t02.wmf/objective:45
+msgid "Enhance Buildings"
+msgstr "Ausbau von Gebäuden"
+
 #: ../../../campaigns/t02.wmf/objective:53
+msgid "Build a wood hardener"
+msgstr "Baue einen Holzhärter"
+
+#: ../../../campaigns/t02.wmf/objective:55
 msgid "* Build a wood hardener.<br> Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, for without that you cannot expand."
 msgstr "* Baue einen Holzhärter.<br>- Bessere und größere Gebäude - wie auch alle militärischen Gebäude - benötigen bessere Baumaterialien, denn diese bestehen nicht nur aus Baumstämmen und Felsen, sondern vor allem aus Hartholz, welches von einem Holzhärter produziert werden kann. Da Hartholz unabkömmlich ist ist es wichtig, immer zuerst ein Holzhärter zu bauen, bevor Du Dein letztes Hartholz aufbrauchst. Denn ohne Hartholz kannst Du nur wenige Gebäude bauen und nicht mehr expandieren."
 
-#: ../../../campaigns/t02.wmf/objective:60
+#: ../../../campaigns/t02.wmf/objective:61
+msgid "Build a lime kiln and coal economy"
+msgstr "Baue einen Kalkbrenner und Kohlewirtschaft"
+
+#: ../../../campaigns/t02.wmf/objective:63
 msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr "* Baue eine Kalkbrennerei, einen Brunnen und eine Köhlerei oder eine Kohlenmine.<br> Baumstämme, Felsen und Hartholz sind nur ein Teil der Materialien, die man für bessere Gebäude braucht. Ein weiteres wichtiges Material ist Mörtel. Mörtel kann in einer Kalkbrennerei aus Felsen und Wasser hergestellt werden. Um  an das dabei benötigte Wasser zu kommen, solltest Du einen Geologen nach Wasser suchen lassen und dann, dort wo er Wasser entdeckt hat, einen Brunnen errichten.  Schicke einen Geologen auf die Suche nach Wasser, in dem Du auf eine Deiner Flaggen klickst, die auf Grasland oder Steppe steht. Wähle anschließend das Geologen-Symbol aus. Kohle erhält man durch eine Köhlerei oder aus einer Kohlemine."
+
+#: ../../../campaigns/t02.wmf/objective:69
+msgid "Build a fernery"
+msgstr "Baue eine Farnerei"
 
 #~ msgid "Expand your territory north-east"
 #~ msgstr "Erweitere dein Territorium in Richtung Nordosten"

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:49+0000\n"
+"POT-Creation-Date: 2008-11-03 13:17+0000\n"
 "PO-Revision-Date: 2008-03-07 20:23+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -266,7 +266,7 @@ msgid " \"Our miners are digging up less and less by day! We have to go deeper, 
 msgstr "\"A bányászaink napról napra kevesebbet tudnak kitermelni! Mélyebbre kell mennünk, hogy ki tudjuk termelni a hegy kincseit.<br>Természetesen, olyna mélyen sötét és hideg van és csak néhány vállalkozó hajlandó olyan mélyre menni. Ezt a bátorságot nagyobb választékkal kellene jutalmaznunk.\"<br><br>"
 
 #: ../../../campaigns/t02.wmf/event:389
-#: ../../../campaigns/t02.wmf/objective:46
+#: ../../../campaigns/t02.wmf/objective:47
 #, fuzzy
 msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
 msgstr "--ÚJ FELADATOK--<br>- A normális bánya csak egyharmadát tudja kitermelni az ásványkincseknek amik a föld mélyén rejtőznek. Tovább kell fejleszteni mély bányává, hogy tovább tudjon működni. Hogy továbbfejlessz egy épületet kattints a megfelelő gombra a megjelenő ablakban.<br>A munkások tapasztalatot szereznek munkájuk során. Megfelelő tapasztalattal jobb munkásokká válnak, akik tudják működtetni a fejletebb épületeket is. Ne fejlessz tovább épületeket mielőtt nincs megfelelő tapasztalattal rendelkező munkásod, és az épület ellátásához szükséges infrastruktúra! Ezeknek az épületeknek gyakran magasabb igényeik vannak - például a mélyebb bányának élelmiszerre van szüksége, uzsonna helyett. Tovább kell fejlesztened a kocsmát vendéglővé, hogy a pittakenyérből élelmiszert készítsenek ÉS egy másik fajta ételt (húst vagy halat). Megjegyzés: a vendéglő nem teszi elavulttá a kocsmákat, mert a kisebb bányáknak továbbrais uzsonnára van szükségük. Természetesen az össze bányát továbbfejlesztheted egyszerre - a nagyobb bányák egy kicsit gyorsabban termelnek, de a kisebb bányáknak olcsóbb élelem kell. Rajtad áll melyiket váalsztod.<br> Fejleszd tovább a Szénbányát és a kocsmát, hogy minkét épületből a jobb legyen.</p>"
@@ -309,7 +309,7 @@ msgid " \"Chieftain, this is a disgrace! It is well that we can produce grout fo
 msgstr "\"Törzsfőnök, ez szégyen! Nagyszerű, hogy faragott köveket készítünk a legendás erődítményeinkhez és hatalmas épületeinkhez, de a tetőink lyukasak! Talán a fiatalabbakat nem zavarja, hogy az éjszakájukat az esőben töltik, de én nem tudok aludni ha esőcseppek hullanak az arcomra! Ezzel a problémával sürgősen csinálni kell valamit!\"<br><br>"
 
 #: ../../../campaigns/t02.wmf/event:429
-#: ../../../campaigns/t02.wmf/objective:67
+#: ../../../campaigns/t02.wmf/objective:71
 #, fuzzy
 msgid "* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. It is being planted by a fernery."
 msgstr "--ÚJ FELADATOK--<br>-A harmadik építőanyagot, ami a nagy épületekhez szükséges, a tetők fedésére használják. Nádattermel a nádtermelő.<br>Építs egy nádtermelőt.</p>"
@@ -410,15 +410,31 @@ msgstr ""
 msgid "* Build a smelting works.<br> The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
 msgstr ""
 
+#: ../../../campaigns/t02.wmf/objective:45
+msgid "Enhance Buildings"
+msgstr ""
+
 #: ../../../campaigns/t02.wmf/objective:53
+msgid "Build a wood hardener"
+msgstr ""
+
+#: ../../../campaigns/t02.wmf/objective:55
 #, fuzzy
 msgid "* Build a wood hardener.<br> Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, for without that you cannot expand."
 msgstr "--ÚJ FELADATOK--<br>- Nagyobb és jobb épületek, beleértve minden katonai épületet, jobb építőanyagokat igényel. Nem épülhetnek egyszerű rönkökből, a fát fel kell dolgozni a fűrészmalomban, hogy gerendát kapjunk. Mindig építs fűrészmalmot mielőtt kifogysz a gerendákból, nélkülök nem tudsz tovább terjeszkedni.<br>Építs egy Fűrészmalmot.</p>"
 
-#: ../../../campaigns/t02.wmf/objective:60
+#: ../../../campaigns/t02.wmf/objective:61
+msgid "Build a lime kiln and coal economy"
+msgstr ""
+
+#: ../../../campaigns/t02.wmf/objective:63
 #, fuzzy
 msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr "--ÚJ FELADATOK--<br>-Nagyobb épületek gerendát és jobb építőanyagot igényelnek. Mint a faragott kő, ami vízből és nyers kőből készül. Vizet a kútból nyerhetsz. Természetesen vízforráshoz kell építeni, amit a geológusok segítenek megtalálni. Kattints egy zászlóra ami nem hegyen van, aztán a geológus ikonra a felbukkanó ablakban.<br>Építs egy Kőfaragót és egy Kutat.</p>"
+
+#: ../../../campaigns/t02.wmf/objective:69
+msgid "Build a fernery"
+msgstr ""
 
 #~ msgid "The Story goes on..."
 #~ msgstr "A történet folytatódik..."

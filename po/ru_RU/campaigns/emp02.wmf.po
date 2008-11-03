@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:40+0000\n"
+"POT-Creation-Date: 2008-11-03 13:17+0000\n"
 "PO-Revision-Date: 2007-03-14 02:06+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -288,7 +288,7 @@ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a
 msgstr "* Постройте большие военные здания, вроде форпоста или башни на восточной границе."
 
 #: ../../../campaigns/emp02.wmf/objective:63
-msgid "Destroy the babarian tribe"
+msgid "Destroy the barbarian tribe"
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/objective:66

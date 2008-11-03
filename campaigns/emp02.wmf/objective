@@ -60,7 +60,7 @@ visible=false
 trigger=Bigger military building complete
 
 [Remove the barbarians]
-name=_"Destroy the babarian tribe"
+name=_"Destroy the barbarian tribe"
 descr=_""<rt><p>"
 _"* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
 _"* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
