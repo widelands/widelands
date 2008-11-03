@@ -83,6 +83,7 @@ build-13:
 - Improved computer player behaviour.
 - Updated and cleaned up tribes economies.
 - Introduced automatic update of Campaign-list via campaign-menu.
+- Added a new in game song.
 - Added global objects usable in every world.
 - Added 12 new maps (9 from map contest).
 - Added atlantean building graphics.
