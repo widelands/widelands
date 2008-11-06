@@ -3,7 +3,7 @@ descname=_Builder
 help=Works at construction sites to create a new building.
 type=generic
 soundfx=../../../../sound/hammering/hammering
-menu_pic=builder_menu.png
+menu_pic=menu.png
 
 [buildcost]
 hammer=1
