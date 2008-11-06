@@ -12,7 +12,7 @@ output=wine
 grape=8
 
 [work]
-# grapes are only needed for wine, so no need th check if wine is needed
+# grapes are only needed for wine, so no need to check if wine is needed
 sleep=30000
 consume=grape:2
 animate=working 30000
