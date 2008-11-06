@@ -115,7 +115,8 @@ void set_locale(std::string name) {
 
 	/* If lang is empty, fill it with $LANG */
 	if (lang.size() < 1)
-		lang = getenv("LANG");
+		if (char const * const l = getenv("LANG"))
+			lang = l;
 	/* Than set the variables */
 	setenv ("LANG",     lang.c_str(), 1);
 	setenv ("LANGUAGE", (lang + ":" + lang.substr(0, 2)).c_str(), 1);
