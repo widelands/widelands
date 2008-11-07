@@ -91,12 +91,16 @@ quartz=1
 
 [idle]
 pics=weaponsmith_i_??.png  # ???
-hotspot=55 80
+hotspot=66 61
+playercolor=true
 
 [build]
 pics=weaponsmith_i_??.png  # ???
-hotspot=55 80
+hotspot=66 61
+playercolor=true
 
 [working]
 pics=weaponsmith_i_??.png  # ???
-hotspot=55 80
+hotspot=66 61
+playercolor=true
+

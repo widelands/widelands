@@ -143,12 +143,15 @@ produce=shovel
 
 [idle]
 pics=toolsmith_i_??.png
-hotspot=63 63
+hotspot=61 60
+playercolor=true
 
 [build]
 pics=toolsmith_i_??.png
-hotspot=63 63
+hotspot=61 60
+playercolor=true
 
 [working]
 pics=toolsmith_i_??.png
-hotspot=63 63
+hotspot=61 60
+playercolor=true
