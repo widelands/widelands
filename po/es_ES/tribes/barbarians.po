@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:33+0000\n"
+"POT-Creation-Date: 2008-11-07 19:56+0000\n"
 "PO-Revision-Date: 2007-02-08 18:55+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
@@ -133,8 +133,8 @@ msgid "Headquarters"
 msgstr "Cuartel general"
 
 #: ../../../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../../../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
+#, fuzzy
+msgid "Helmsmithy"
 msgstr "Planchista"
 
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
@@ -623,6 +623,10 @@ msgstr "Guardabosque"
 #: ../../../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
 msgstr "Geólogo"
+
+#: ../../../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Planchista"
 
 #: ../../../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"

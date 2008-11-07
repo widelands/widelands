@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:40+0000\n"
-"PO-Revision-Date: 2008-08-06 18:08+0100\n"
+"POT-Creation-Date: 2008-11-07 19:56+0000\n"
+"PO-Revision-Date: 2008-11-07 21:02+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -130,8 +130,7 @@ msgid "Headquarters"
 msgstr "Hauptquartier"
 
 #: ../../../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../../../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
+msgid "Helmsmithy"
 msgstr "Helmschmied"
 
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
@@ -586,6 +585,10 @@ msgstr "Wildhüter"
 msgid "Geologist"
 msgstr "Geologe"
 
+#: ../../../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Helmschmied"
+
 #: ../../../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jäger"
@@ -644,15 +647,12 @@ msgstr "Weber"
 
 #~ msgid "Stonegrinder"
 #~ msgstr "Steinschleifer"
-
 #~ msgid "Bakingtray"
 #~ msgstr "Backblech"
-
 #~ msgid "Grindstone"
 #~ msgstr "Mörtel"
-
 #~ msgid "Coalearth"
 #~ msgstr "Rohkohle"
-
 #~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
 #~ msgstr "Diese Rohkohle wird in tiefen Minen abgebaut und muss erst in einer Köhlerei weiterverarbeitet werden, um die volle Energie nutzbar zu machen."
+

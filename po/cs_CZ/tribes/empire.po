@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:45+0000\n"
+"POT-Creation-Date: 2008-11-07 19:56+0000\n"
 "PO-Revision-Date: 2007-05-05 00:47+0100\n"
 "Last-Translator: Matej Svrcek <matej@svrcek.org>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -159,8 +159,8 @@ msgid "Smelting Works"
 msgstr "Slévárna"
 
 #: ../../../tribes/empire/buildings/stonemason/conf:2
-#: ../../../tribes/empire/workers/stonemason/conf:2
-msgid "Stonemason"
+#, fuzzy
+msgid "Stonemason's House"
 msgstr "Kameník"
 
 #: ../../../tribes/empire/buildings/tavern/conf:2
@@ -677,6 +677,10 @@ msgstr "Slévač"
 #: ../../../tribes/empire/workers/soldier/conf:2
 msgid "Soldier"
 msgstr "Voják"
+
+#: ../../../tribes/empire/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Kameník"
 
 #: ../../../tribes/empire/workers/toolsmith/conf:2
 #, fuzzy

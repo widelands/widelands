@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:33+0000\n"
-"PO-Revision-Date: 2007-09-03 14:39+0200\n"
-"Last-Translator: Erik Soe Sorensen <eriksoe@daimi.au.dk>\n"
+"POT-Creation-Date: 2008-11-07 19:56+0000\n"
+"PO-Revision-Date: 2008-11-07 21:06+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -100,7 +100,6 @@ msgid "Fernery"
 msgstr "Rør- og hør-avler"
 
 #: ../../../tribes/barbarians/buildings/fisher/conf:2
-#, fuzzy
 msgid "Fisher's Hut"
 msgstr "Fiskerhytte"
 
@@ -109,7 +108,6 @@ msgid "Fortress"
 msgstr "Fort"
 
 #: ../../../tribes/barbarians/buildings/gamekeeper/conf:2
-#, fuzzy
 msgid "Gamekeeper's Hut"
 msgstr "Vildtforvalter"
 
@@ -122,7 +120,6 @@ msgid "Granite Mine"
 msgstr "Granitmine"
 
 #: ../../../tribes/barbarians/buildings/hardener/conf:2
-#, fuzzy
 msgid "Wood Hardener"
 msgstr "Træhærder"
 
@@ -131,12 +128,10 @@ msgid "Headquarters"
 msgstr "Hovedkvarter"
 
 #: ../../../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../../../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
+msgid "Helmsmithy"
 msgstr "Hjelmsmed"
 
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
-#, fuzzy
 msgid "Hunter's Hut"
 msgstr "Jægerhytte"
 
@@ -153,12 +148,10 @@ msgid "Lumberjack's Hut"
 msgstr "Skovhugger"
 
 #: ../../../tribes/barbarians/buildings/metalworks/conf:2
-#, fuzzy
 msgid "Metalwork Shop"
 msgstr "Smed"
 
 #: ../../../tribes/barbarians/buildings/micro-brewery/conf:2
-#, fuzzy
 msgid "Micro Brewery"
 msgstr "Mikrobryggeri"
 
@@ -171,7 +164,6 @@ msgid "Quarry"
 msgstr "Stenbrud"
 
 #: ../../../tribes/barbarians/buildings/ranger/conf:2
-#, fuzzy
 msgid "Ranger's Hut"
 msgstr "Forsthytte"
 
@@ -369,7 +361,6 @@ msgid "The hammer is an essential tool. It is needed by the geologist, the worke
 msgstr "Hammeren er et vigtigt værktøj, som benyttes af både Geologen, Byggeren, og smedene. Sørg for altid at have nogen i reserve!"
 
 #: ../../../tribes/barbarians/wares/helm/conf:2
-#, fuzzy
 msgid "Helmet"
 msgstr "Hjelm"
 
@@ -450,7 +441,6 @@ msgid "This pick is used by the stonemasons and the miners. It is produced in th
 msgstr "Hakken bruges af stenhuggerne og af minearbejderne."
 
 #: ../../../tribes/barbarians/wares/pittabread/conf:2
-#, fuzzy
 msgid "Pitta Bread"
 msgstr "Pitabrød"
 
@@ -622,6 +612,10 @@ msgstr "Vildtforvalter"
 msgid "Geologist"
 msgstr "Geolog"
 
+#: ../../../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Hjelmsmed"
+
 #: ../../../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jæger"
@@ -681,15 +675,12 @@ msgstr "Væver"
 
 #~ msgid "Stonegrinder"
 #~ msgstr "Stensliber"
-
 #~ msgid "Bakingtray"
 #~ msgstr "Brødspade"
-
 #~ msgid "Coalearth"
 #~ msgstr "Råkul"
-
 #~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
 #~ msgstr "Råkullet graves op i dybe miner. Det er endnu ikke klar til at blive brugt, men skal forarbejdes af en Kulsvier, før energien i det kan udnyttes fuldt ud."
-
 #~ msgid "Grindstone"
 #~ msgstr "Slibesten"
+

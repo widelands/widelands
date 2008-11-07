@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:35+0000\n"
+"POT-Creation-Date: 2008-11-07 19:56+0000\n"
 "PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,8 +127,7 @@ msgid "Headquarters"
 msgstr ""
 
 #: ../../../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../../../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
+msgid "Helmsmithy"
 msgstr ""
 
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
@@ -581,6 +580,10 @@ msgstr ""
 
 #: ../../../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
+msgstr ""
+
+#: ../../../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
 msgstr ""
 
 #: ../../../tribes/barbarians/workers/hunter/conf:2

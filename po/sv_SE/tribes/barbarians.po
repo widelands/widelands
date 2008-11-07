@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:41+0000\n"
+"POT-Creation-Date: 2008-11-07 19:56+0000\n"
 "PO-Revision-Date: 2006-11-28 19:34+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -130,8 +130,8 @@ msgid "Headquarters"
 msgstr "Huvudkvarter"
 
 #: ../../../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../../../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
+#, fuzzy
+msgid "Helmsmithy"
 msgstr "Hjälmsmed"
 
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
@@ -590,6 +590,10 @@ msgstr "Uppfödare"
 #: ../../../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
 msgstr "Geolog"
+
+#: ../../../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Hjälmsmed"
 
 #: ../../../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"

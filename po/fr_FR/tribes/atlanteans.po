@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-31 22:21+0000\n"
+"POT-Creation-Date: 2008-11-07 19:56+0000\n"
 "PO-Revision-Date: 2008-11-01 22:45+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../../tribes/atlanteans/buildings/armoursmith/conf:2
-#: ../../../tribes/atlanteans/workers/armoursmith/conf:2
-msgid "Armoursmith"
+#, fuzzy
+msgid "Armoursmithy"
 msgstr "Forgeron d'armures"
 
 #: ../../../tribes/atlanteans/buildings/bakery/conf:2
@@ -527,6 +527,10 @@ msgstr "Eau"
 msgid "Water is the most essential essence for life! This water is used in many places, for example to make bread."
 msgstr "L'eau est l'essence même de la vie ! Cette eau est utilisée à beaucoup d'endroits, pour faire du pain par exemple."
 
+#: ../../../tribes/atlanteans/workers/armoursmith/conf:2
+msgid "Armoursmith"
+msgstr "Forgeron d'armures"
+
 #: ../../../tribes/atlanteans/workers/baker/conf:2
 msgid "Baker"
 msgstr "Boulanger"
@@ -647,4 +651,3 @@ msgstr "Coupeur de bois"
 #: ../../../tribes/atlanteans/workers/woodcutter/conf:3
 msgid "Fells trees."
 msgstr "Arbres tombés"
-

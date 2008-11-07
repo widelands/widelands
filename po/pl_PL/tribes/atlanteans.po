@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3463\n"
+"Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-11-01 20:14+0000\n"
+"POT-Creation-Date: 2008-11-07 19:56+0000\n"
 "PO-Revision-Date: 2008-10-26 12:44+0100\n"
 "Last-Translator: Jacek Wolszczak <shutdownrunner@o2.pl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../../tribes/atlanteans/buildings/armoursmith/conf:2
-#: ../../../tribes/atlanteans/workers/armoursmith/conf:2
-msgid "Armoursmith"
+#, fuzzy
+msgid "Armoursmithy"
 msgstr "Płatnerz"
 
 #: ../../../tribes/atlanteans/buildings/bakery/conf:2
@@ -534,6 +534,10 @@ msgstr "Woda"
 #: ../../../tribes/atlanteans/wares/water/conf:3
 msgid "Water is the most essential essence for life! This water is used in many places, for example to make bread."
 msgstr "Woda to esencja życia! Jest używana do wielu rzeczy np. do pieczenia chleba."
+
+#: ../../../tribes/atlanteans/workers/armoursmith/conf:2
+msgid "Armoursmith"
+msgstr "Płatnerz"
 
 #: ../../../tribes/atlanteans/workers/baker/conf:2
 msgid "Baker"
