@@ -1244,7 +1244,7 @@ void Worker::transfer_update(Game * g, State * state) {
 
 		if (position != flag) {
 			if (position == flag->get_building()) {
-				Building* building = static_cast<Building*>(position);
+				Building* building = dynamic_cast<Building*>(position);
 				set_location(building);
 				location = building;
 			} else

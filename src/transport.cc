@@ -1703,8 +1703,8 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	Flag* destflag;
 
 	// Catch the simplest cases
-	if (location->get_economy() != destination->get_economy()) {
-		tlog("Economy mismatch -> fail\n");
+	if (not location or location->get_economy() != destination->get_economy()) {
+		tlog("no location or economy mismatch -> fail\n");
 
 		*psuccess = false;
 		return 0;
