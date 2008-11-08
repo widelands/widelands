@@ -19,7 +19,7 @@ steps=55
 type=building
 version=1
 point=15 11
-building=lumberjack
+building=lumberjacks_hut
 
 [Road Eastern Lumberjack East]
 type=road
@@ -37,7 +37,7 @@ steps=56
 type=building
 version=1
 point=12 13
-building=lumberjack
+building=lumberjacks_hut
 
 [Road Southern Lumberjack East]
 type=road
@@ -67,7 +67,7 @@ steps=112
 type=building
 version=1
 point=9 13
-building=ranger
+building=rangers_hut
 
 [Road Ranger East]
 type=road
@@ -139,12 +139,12 @@ building=granitemine
 [Enable Hunter]
 type=allow_building
 version=1
-building=hunter
+building=hunters_hut
 
 [Enable Gamekeeper]
 type=allow_building
 version=1
-building=gamekeeper
+building=gamekeepers_hut
 
 [Enable Tavern]
 type=allow_building
@@ -174,7 +174,7 @@ building=smelting_works
 [Enable Burner]
 type=allow_building
 version=1
-building=burner
+building=burners_house
 
 [Enable Inn]
 type=allow_building
@@ -818,7 +818,7 @@ steps=54
 type=building
 version=1
 point=56 10
-building=hunter
+building=hunters_hut
 
 [Village Hunter Road]
 type=road
@@ -830,7 +830,7 @@ steps=34
 type=building
 version=1
 point=56 12
-building=gamekeeper
+building=gamekeepers_hut
 
 [Village Gamekeeper Road 1]
 type=road
@@ -902,7 +902,7 @@ steps=34
 type=building
 version=1
 point=56 21
-building=lumberjack
+building=lumberjacks_hut
 
 [Village Northeastern Lumberjack Road]
 type=road
@@ -914,7 +914,7 @@ steps=45
 type=building
 version=1
 point=55 22
-building=lumberjack
+building=lumberjacks_hut
 
 [Village Middle Lumberjack Road]
 type=road
@@ -926,7 +926,7 @@ steps=44
 type=building
 version=1
 point=54 24
-building=lumberjack
+building=lumberjacks_hut
 
 [Village Southwestern Lumberjack Road]
 type=road
@@ -938,7 +938,7 @@ steps=34
 type=building
 version=1
 point=57 24
-building=ranger
+building=rangers_hut
 
 [Village Eastern Ranger Road]
 type=road
@@ -950,7 +950,7 @@ steps=45
 type=building
 version=1
 point=55 25
-building=ranger
+building=rangers_hut
 
 [Village Western Ranger Road]
 type=road

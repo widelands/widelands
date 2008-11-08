@@ -15,14 +15,14 @@ version=3
 point=16 17
 area=50
 count=3
-building=lumberjack
+building=lumberjacks_house
 
 [Forester complete]
 type=building
 version=3
 point=16 17
 area=50
-building=forester
+building=foresters_house
 
 [Sawmill complete]
 type=building
@@ -92,21 +92,21 @@ type=building
 version=3
 point=36 20
 area=80
-building=stonemason
+building=stonemasons_house
 
 [Toolsmith complete]
 type=building
 version=3
 point=36 20
 area=80
-building=toolsmith
+building=toolsmithy
 
 [Armoursmith complete]
 type=building
 version=3
 point=36 20
 area=80
-building=armoursmith
+building=armoursmithy
 
 [Smelter complete]
 type=building
@@ -120,14 +120,14 @@ type=building
 version=3
 point=36 20
 area=80
-building=burner
+building=burners_house
 
 [Weaponsmith complete]
 type=building
 version=3
 point=36 20
 area=80
-building=weaponsmith
+building=weaponsmithy
 
 [Mining infrastructure complete]
 type=null
@@ -146,14 +146,14 @@ type=building
 version=3
 point=36 20
 area=80
-building=fisher
+building=fishers_house
 
 [Hunter complete]
 type=building
 version=3
 point=36 20
 area=80
-building=hunter
+building=hunters_house
 
 [Piggery complete]
 type=building

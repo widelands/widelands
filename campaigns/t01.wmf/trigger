@@ -6,21 +6,21 @@ type=building
 version=3
 point=15 11
 area=2
-building=lumberjack
+building=lumberjacks_hut
 
 [Built Lumberjack 2]
 type=building
 version=3
 point=12 13
 area=2
-building=lumberjack
+building=lumberjacks_hut
 
 [Built Ranger]
 type=building
 version=3
 point=17 11
 area=2
-building=ranger
+building=rangers_hut
 
 [Built Quarries]
 type=building

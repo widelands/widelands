@@ -266,22 +266,22 @@ building=deep_oremine
 [Enable Stonemason]
 type=allow_building
 version=1
-building=stonemason
+building=stonemasons_house
 
 [Enable Toolsmith]
 type=allow_building
 version=1
-building=toolsmith
+building=toolsmithy
 
 [Enable Armoursmith]
 type=allow_building
 version=1
-building=armoursmith
+building=armoursmithy
 
 [Enable Weaponsmith]
 type=allow_building
 version=1
-building=weaponsmith
+building=weaponsmithy
 
 [Enable Smelter]
 type=allow_building
@@ -291,7 +291,7 @@ building=smelting_works
 [Enable Burner]
 type=allow_building
 version=1
-building=burner
+building=burners_house
 
 [Set Mining infrastructure-trigger]
 # Will be run, when all needed buildings are build up.
@@ -363,7 +363,7 @@ building=bakery
 [Enable Hunter]
 type=allow_building
 version=1
-building=hunter
+building=hunters_house
 
 [Enable Piggery]
 type=allow_building
@@ -383,7 +383,7 @@ building=inn
 [Enable Fisher]
 type=allow_building
 version=1
-building=fisher
+building=fishers_house
 
 [Show Barbarians 1]
 type=unhide_area

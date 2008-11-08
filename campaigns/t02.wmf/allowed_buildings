@@ -2,8 +2,8 @@
 packet_version=1
 
 [player_1]
-lumberjack=true
+lumberjacks_hut=true
 quarry=true
-ranger=true
+rangers_hut=true
 sentry=true
 stronghold=true

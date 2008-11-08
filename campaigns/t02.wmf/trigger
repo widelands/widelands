@@ -46,14 +46,14 @@ type=building
 version=3
 point=27 48
 area=100
-building=gamekeeper
+building=gamekeepers_hut
 
 [Built Hunter]
 type=building
 version=3
 point=27 48
 area=100
-building=hunter
+building=hunters_hut
 
 [Built Bakery]
 type=building
@@ -95,7 +95,7 @@ type=building
 version=3
 point=27 48
 area=100
-building=burner
+building=burners_house
 
 [Built Inn]
 type=building

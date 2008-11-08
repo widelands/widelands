@@ -25,7 +25,7 @@ type=building
 version=2
 point=5 3
 area=2
-building=lumberjack
+building=lumberjacks_house
 
 [Lumberjacks complete]
 type=building
@@ -33,7 +33,7 @@ version=2
 point=9 1
 area=10
 count=3
-building=lumberjack
+building=lumberjacks_house
 
 [Sawmill complete]
 type=building
@@ -50,7 +50,7 @@ type=building
 version=2
 point=5 3
 area=100
-building=forester
+building=foresters_house
 
 [Quarry complete]
 type=building

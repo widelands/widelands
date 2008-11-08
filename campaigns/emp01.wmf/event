@@ -71,7 +71,7 @@ building=barracks
 [Enable Lumberjack]
 type=allow_building
 version=1
-building=lumberjack
+building=lumberjacks_house
 
 [Saledus 1]
 type=message_box
@@ -180,7 +180,7 @@ objective=Build Forester
 [Enable Forester]
 type=allow_building
 version=1
-building=forester
+building=foresters_house
 
 [Set Sawmill and Lumberjacks complete]
 type=set_null_trigger
