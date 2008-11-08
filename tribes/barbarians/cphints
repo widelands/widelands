@@ -3,9 +3,9 @@
 [global]
 numofwares=20
 stoneproducer=quarry
-trunkproducer=lumberjack
-forester=ranger
-fisher=fisher
+trunkproducer=lumberjacks_hut
+forester=rangers_hut
+fisher=fishers_hut
 ware_n_0=trunk
 ware_p_0=6
 ware_n_1=raw_stone

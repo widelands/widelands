@@ -1,5 +1,5 @@
 [global]
-descname=_"Charcoal Burner"
+descname=_Charcoal Burner's House
 type=production
 size=medium
 buildable=yes
@@ -19,21 +19,18 @@ animate=working 90000 # charcoal fires are burning some days in real life
 produce=coal
 
 [buildcost]
-trunk=2
-stone=3
-planks=1
+trunk=3
+grout=2
+thatchreed=2
 
 [idle]
-pics=burner_i_??.png
-hotspot=55 68
-playercolor=true
+pics=burner_i_??.png  # ???
+hotspot=44 51
 
 [build]
-pics=burner_i_??.png
-hotspot=55 68
-playercolor=true
+pics=burner_i_??.png  # ???
+hotspot=44 51
 
 [working]
-pics=burner_b_??.png
-hotspot=55 68
-playercolor=true
+pics=burner_i_??.png  # ???
+hotspot=44 51

@@ -3,9 +3,9 @@
 [global]
 numofwares=5
 stoneproducer=quarry
-trunkproducer=woodcutter
-forester=forester
-fisher=fisher
+trunkproducer=woodcutters_house
+forester=foresters_house
+fisher=fishers_house
 ware_n_0=trunk
 ware_p_0=6
 ware_n_1=stone
