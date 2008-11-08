@@ -60,6 +60,16 @@ Request::Request
 	m_required_interval(0),
 	m_last_request_time(m_required_time)
 {
+	if (w == WARE   and target->get_owner()->tribe().get_nrwares  () <= index)
+		throw wexception
+			("creating ware request with index %u, but tribe has only %u "
+			 "ware types",
+			 index.value(), target->get_owner()->tribe().get_nrwares  ().value());
+	if (w == WORKER and target->get_owner()->tribe().get_nrworkers() <= index)
+		throw wexception
+			("creating worker request with index %u, but tribe has only %u "
+			 "worker types",
+			 index.value(), target->get_owner()->tribe().get_nrworkers().value());
 	if (m_economy)
 		m_economy->add_request(this);
 }
@@ -96,9 +106,27 @@ void Request::Read
 	uint16_t const version = fr->Unsigned16();
 	if (version >= REQUEST_SUPPORTED_VERSION) {
 		m_type              = static_cast<Type>(fr->Unsigned8());
-		m_index = Ware_Index(static_cast<Ware_Index::value_t>(fr->Unsigned32()));
+		if (m_type != WARE and m_type != WORKER)
+			throw wexception
+				("type is %u but must be %u (ware) or %u (worker)",
+				 m_type, WARE, WORKER);
+		{
+			uint32_t const index = fr->Unsigned32();
+			m_index = Ware_Index(static_cast<Ware_Index::value_t>(index));
+			Tribe_Descr const & tribe = m_target->get_owner()->tribe();
+			if (m_type == WARE and tribe.get_nrwares() <= m_index)
+				throw wexception
+					("ware index is %u but tribe has only %u ware types",
+					 index, tribe.get_nrwares().value());
+			if (m_type == WORKER and tribe.get_nrworkers() <= m_index)
+				throw wexception
+					("worker index is %u but tribe has only %u worker types",
+					 index, tribe.get_nrworkers().value());
+		}
 		m_idle              = fr->Unsigned8();
 		m_count             = fr->Unsigned32();
+		if (0 == m_count)
+			throw wexception("count is 0");
 		m_required_time     = fr->Unsigned32();
 		m_required_interval = fr->Unsigned32();
 
@@ -160,8 +188,15 @@ void Request::Write
 
 	//  Target and econmy should be set. Same is true for callback stuff.
 
+	assert(m_type == WARE or m_type == WORKER);
 	fw->Unsigned8(m_type);
 
+	assert
+		(m_type != WARE   or
+		 m_index < m_target->get_owner()->tribe().get_nrwares  ());
+	assert
+		(m_type != WORKER or
+		 m_index < m_target->get_owner()->tribe().get_nrworkers());
 	fw->Unsigned32(m_index.value());
 
 	fw->Unsigned8(m_idle);
@@ -226,7 +261,7 @@ int32_t Request::get_base_required_time(Editor_Game_Base* g, int32_t nr)
  * Can be in the past, indicating that we have been idling, waiting for the
  * ware.
 */
-int32_t Request::get_required_time()
+uint32_t Request::get_required_time()
 {
 	return
 		get_base_required_time(&m_economy->owner().egbase(), m_transfers.size());
@@ -367,7 +402,7 @@ void Request::set_count(int32_t count)
 	// Cancel unneeded transfers. This should be more clever about which
 	// transfers to cancel. Then again, this loop shouldn't execute during
 	// normal play anyway
-	while (m_count < static_cast<int32_t>(m_transfers.size()))
+	while (m_count < m_transfers.size())
 		cancel_transfer(m_transfers.size() - 1);
 
 	// Update the economy

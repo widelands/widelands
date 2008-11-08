@@ -346,7 +346,7 @@ Warehouse::~Warehouse()
 
 /*
 Warehouse::get_priority
-warehouses determine how badly they want a certain ware 
+warehouses determine how badly they want a certain ware
 */
 int32_t Warehouse::get_priority(int32_t type, Ware_Index ware_index, bool adjust) const {
 	int MAX_IDLE_PRIORITY = 100;

@@ -76,6 +76,9 @@ PlayerImmovable* IdleWorkerSupply::get_position(Game* g)
 
 uint32_t IdleWorkerSupply::nr_supplies(Game *, Request const * req) const
 {
+	assert
+		(req->get_type() != Request::WORKER or
+		 req->get_index() < m_worker->descr().tribe().get_nrworkers());
 	if
 		(req->get_type() == Request::WORKER &&
 		 m_worker->descr().can_act_as(req->get_index()) &&

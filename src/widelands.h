@@ -83,6 +83,7 @@ template <typename T> struct _Index {
 	bool operator==(_Index const other) const {return i == other.i;}
 	bool operator!=(_Index const other) const {return i != other.i;}
 	bool operator< (_Index const other) const {return i <  other.i;}
+	bool operator<= (_Index const other) const {return i <=  other.i;}
 
 	T operator++() {return T(++i);}
 	T operator--() {return T(--i);}

@@ -138,7 +138,7 @@ throw (_wexception)
 							road.m_carrier_request =
 								new Request
 									(&road,
-									 Ware_Index(),
+									 Ware_Index::First(),
 									 &Road::request_carrier_callback,
 									 &road,
 									 Request::WORKER);

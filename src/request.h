@@ -73,12 +73,12 @@ struct Request : public Trackable {
 	Ware_Index get_index() const {return m_index;}
 	int32_t get_type() const {return m_type;}
 	bool is_idle() const {return m_idle;}
-	int32_t get_count() const {return m_count;}
+	uint32_t get_count() const {return m_count;}
 	bool is_open() const
-	{return m_idle || m_count > static_cast<int32_t>(m_transfers.size());}
+	{return m_idle || m_count > m_transfers.size();}
 	Economy * get_economy() const throw () {return m_economy;}
-	int32_t get_required_time();
-	int32_t get_last_request_time() {return m_last_request_time;}
+	uint32_t get_required_time();
+	uint32_t get_last_request_time() {return m_last_request_time;}
 	int32_t get_priority(int32_t cost);
 
 	Flag * get_target_flag();
@@ -120,14 +120,14 @@ private:
 	Economy         * m_economy;
 	Ware_Index        m_index;             //  the index of the ware descr
 	bool              m_idle;
-	int32_t               m_count;             //  how many do we need in total
+	uint32_t          m_count;             //  how many do we need in total
 
 	callback_t        m_callbackfn;        //  called on request success
 	void            * m_callbackdata;
 
-	int32_t m_required_time; //  when do we need the first ware (can be in the past)
-	int32_t               m_required_interval; //  time between items
-	int32_t m_last_request_time;
+	uint32_t          m_required_time; //  when do we need the first ware (can be in the past)
+	uint32_t          m_required_interval; //  time between items
+	uint32_t          m_last_request_time;
 
 	TransferList      m_transfers;         //  maximum size is m_count
 

@@ -2082,7 +2082,7 @@ void WaresQueue::Read
 			m_request =
 				new Request
 					(m_owner,
-					 Ware_Index(),
+					 Ware_Index::First(),
 					 &WaresQueue::request_callback, this,
 					 Request::WORKER);
 			m_request->Read(fr, egbase, ol);

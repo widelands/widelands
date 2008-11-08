@@ -281,6 +281,7 @@ Worker_Descr * Worker_Descr::create_from_dir
 * check if worker can be substitute for a requested worker type
  */
 bool Worker_Descr::can_act_as(Ware_Index const index) const {
+	assert(index < tribe().get_nrworkers());
 	if (index == tribe().worker_index(name().c_str()))
 		return true;
 
