@@ -212,10 +212,11 @@ std::string FileSystem::getTempDirectory() {
 /// \todo Write homedir detection for non-getenv-systems
 std::string FileSystem::GetHomedir()
 {
-	std::string homedir("");
+	std::string homedir;
 
 #ifdef HAS_GETENV
-	homedir=getenv("HOME");
+	if (char const * const h = getenv("HOME"))
+		homedir = h;
 #endif
 
 	if (homedir.empty()) {

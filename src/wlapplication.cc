@@ -166,9 +166,10 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
 #ifndef __WIN32__
 	std::string path;
-	char *buf=getenv("HOME"); //do not use GetHomedir() to not accidentally create ./.widelands
 
-	if (buf) { // who knows, maybe the user's homeless
+	//  do not use GetHomedir() to not accidentally create ./.widelands
+	//  who knows, maybe the user is homeless
+	if (char const * const buf = getenv("HOME")) {
 		path = std::string(buf) + "/.widelands";
 		mkdir(path.c_str(), 0x1FF);
 		try {
