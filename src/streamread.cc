@@ -22,6 +22,8 @@
 #include "wexception.h"
 
 #include <cassert>
+#include <stdio.h>
+#include <stdarg.h>
 
 StreamRead::~StreamRead() {}
 
