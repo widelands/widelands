@@ -77,15 +77,15 @@ struct Request : public Trackable {
 	bool is_open() const
 	{return m_idle || m_count > m_transfers.size();}
 	Economy * get_economy() const throw () {return m_economy;}
-	uint32_t get_required_time();
-	uint32_t get_last_request_time() {return m_last_request_time;}
+	int32_t get_required_time();
+	int32_t get_last_request_time() {return m_last_request_time;}
 	int32_t get_priority(int32_t cost);
 
 	Flag * get_target_flag();
 
 	void set_economy(Economy* e);
 	void set_idle(bool idle);
-	void set_count(int32_t count);
+	void set_count(uint32_t);
 	void set_required_time(int32_t time);
 	void set_required_interval(int32_t interval);
 
@@ -106,7 +106,7 @@ struct Request : public Trackable {
 	const Requirements& get_requirements () const {return m_requirements;}
 
 private:
-	int32_t get_base_required_time(Editor_Game_Base* g, int32_t nr);
+	int32_t get_base_required_time(Editor_Game_Base *, uint32_t nr);
 public:
 	void cancel_transfer(uint32_t idx);
 private:
@@ -125,9 +125,9 @@ private:
 	callback_t        m_callbackfn;        //  called on request success
 	void            * m_callbackdata;
 
-	uint32_t          m_required_time; //  when do we need the first ware (can be in the past)
-	uint32_t          m_required_interval; //  time between items
-	uint32_t          m_last_request_time;
+	int32_t           m_required_time; //  when do we need the first ware (can be in the past)
+	int32_t           m_required_interval; //  time between items
+	int32_t           m_last_request_time;
 
 	TransferList      m_transfers;         //  maximum size is m_count
 

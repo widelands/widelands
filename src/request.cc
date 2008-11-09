@@ -239,9 +239,15 @@ Flag *Request::get_target_flag()
  * Return the point in time at which we want the item of the given number to
  * be delivered. nr is in the range [0..m_count[
 */
-int32_t Request::get_base_required_time(Editor_Game_Base* g, int32_t nr)
+int32_t Request::get_base_required_time
+	(Editor_Game_Base * g, uint32_t const nr)
 {
-	int32_t curtime = g->get_gametime();
+	if (m_count <= nr)
+		log
+			("Request::get_base_required_time: WARNING nr = %u but count is %u, "
+			 "which is not allowed according to the comment for this function\n",
+			 nr, m_count);
+	int32_t const curtime = g->get_gametime();
 
 	if (!nr || !m_required_interval)
 		return m_required_time;
@@ -250,6 +256,7 @@ int32_t Request::get_base_required_time(Editor_Game_Base* g, int32_t nr)
 		if (nr == 1)
 			return m_required_time + (curtime - m_required_time) / 2;
 
+		assert(2 <= nr);
 		return curtime + (nr-2) * m_required_interval;
 	}
 
@@ -261,7 +268,7 @@ int32_t Request::get_base_required_time(Editor_Game_Base* g, int32_t nr)
  * Can be in the past, indicating that we have been idling, waiting for the
  * ware.
 */
-uint32_t Request::get_required_time()
+int32_t Request::get_required_time()
 {
 	return
 		get_base_required_time(&m_economy->owner().egbase(), m_transfers.size());
@@ -393,7 +400,7 @@ void Request::set_idle(bool idle)
 /**
  * Change the number of wares we need.
 */
-void Request::set_count(int32_t count)
+void Request::set_count(uint32_t const count)
 {
 	bool wasopen = is_open();
 
