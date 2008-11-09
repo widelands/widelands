@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3489\n"
+"Project-Id-Version: Widelands svn3498\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-11-07 19:56+0000\n"
-"PO-Revision-Date: 2008-11-07 21:02+0100\n"
+"POT-Creation-Date: 2008-11-09 15:37+0000\n"
+"PO-Revision-Date: 2008-11-09 16:38+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -49,8 +49,8 @@ msgstr "Gaststätte"
 msgid "Brewery"
 msgstr "Brauerei"
 
-#: ../../../tribes/barbarians/buildings/burner/conf:2
-msgid "Charcoal Burner"
+#: ../../../tribes/barbarians/buildings/burners_house/conf:2
+msgid "Charcoal Burner's House"
 msgstr "Köhlerei"
 
 #: ../../../tribes/barbarians/buildings/citadel/conf:2
@@ -101,7 +101,7 @@ msgstr "Bauernhof"
 msgid "Fernery"
 msgstr "Reet- und Flachshof"
 
-#: ../../../tribes/barbarians/buildings/fisher/conf:2
+#: ../../../tribes/barbarians/buildings/fishers_hut/conf:2
 msgid "Fisher's Hut"
 msgstr "Fischerhütte"
 
@@ -109,7 +109,7 @@ msgstr "Fischerhütte"
 msgid "Fortress"
 msgstr "Festung"
 
-#: ../../../tribes/barbarians/buildings/gamekeeper/conf:2
+#: ../../../tribes/barbarians/buildings/gamekeepers_hut/conf:2
 msgid "Gamekeeper's Hut"
 msgstr "Wildhüterhütte"
 
@@ -129,11 +129,11 @@ msgstr "Holzhärter"
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../../../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../../../tribes/barbarians/buildings/helmsmithy/conf:2
 msgid "Helmsmithy"
 msgstr "Helmschmied"
 
-#: ../../../tribes/barbarians/buildings/hunter/conf:2
+#: ../../../tribes/barbarians/buildings/hunters_hut/conf:2
 msgid "Hunter's Hut"
 msgstr "Jagdhütte"
 
@@ -145,7 +145,7 @@ msgstr "Wirtshaus"
 msgid "Lime Kiln"
 msgstr "Kalkbrennerei"
 
-#: ../../../tribes/barbarians/buildings/lumberjack/conf:2
+#: ../../../tribes/barbarians/buildings/lumberjacks_hut/conf:2
 msgid "Lumberjack's Hut"
 msgstr "Holzfällerhütte"
 
@@ -165,7 +165,7 @@ msgstr "Eisenmine"
 msgid "Quarry"
 msgstr "Steinbruch"
 
-#: ../../../tribes/barbarians/buildings/ranger/conf:2
+#: ../../../tribes/barbarians/buildings/rangers_hut/conf:2
 msgid "Ranger's Hut"
 msgstr "Försterhütte"
 

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3489\n"
+"Project-Id-Version: Widelands svn3498\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-11-07 19:56+0000\n"
-"PO-Revision-Date: 2008-11-07 21:03+0100\n"
+"POT-Creation-Date: 2008-11-09 15:37+0000\n"
+"PO-Revision-Date: 2008-11-09 16:39+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Arena"
 msgstr "Arena"
 
-#: ../../../tribes/empire/buildings/armoursmith/conf:2
+#: ../../../tribes/empire/buildings/armoursmithy/conf:2
 msgid "Armour Smithy"
 msgstr "Rüstungsschmiede"
 
@@ -41,8 +41,8 @@ msgstr "Barriere"
 msgid "Brewery"
 msgstr "Brauerei"
 
-#: ../../../tribes/empire/buildings/burner/conf:2
-msgid "Charcoal Burner"
+#: ../../../tribes/empire/buildings/burners_house/conf:2
+msgid "Charcoal Burner's House"
 msgstr "Köhlerei"
 
 #: ../../../tribes/empire/buildings/castle/conf:2
@@ -81,11 +81,11 @@ msgstr "Tiefe Eisenmine"
 msgid "Farm"
 msgstr "Bauernhof"
 
-#: ../../../tribes/empire/buildings/fisher/conf:2
+#: ../../../tribes/empire/buildings/fishers_house/conf:2
 msgid "Fisher's House"
 msgstr "Fischerhaus"
 
-#: ../../../tribes/empire/buildings/forester/conf:2
+#: ../../../tribes/empire/buildings/foresters_house/conf:2
 msgid "Forester's House"
 msgstr "Forsthaus"
 
@@ -102,7 +102,7 @@ msgstr "Goldmine"
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../../../tribes/empire/buildings/hunter/conf:2
+#: ../../../tribes/empire/buildings/hunters_house/conf:2
 msgid "Hunter's House"
 msgstr "Jagdhaus"
 
@@ -110,7 +110,7 @@ msgstr "Jagdhaus"
 msgid "Inn"
 msgstr "Wirtshaus"
 
-#: ../../../tribes/empire/buildings/lumberjack/conf:2
+#: ../../../tribes/empire/buildings/lumberjacks_house/conf:2
 msgid "Lumberjack's House"
 msgstr "Holzfällerhaus"
 
@@ -154,7 +154,7 @@ msgstr "Schäferei"
 msgid "Smelting Works"
 msgstr "Hochofen"
 
-#: ../../../tribes/empire/buildings/stonemason/conf:2
+#: ../../../tribes/empire/buildings/stonemasons_house/conf:2
 msgid "Stonemason's House"
 msgstr "Steinmetz"
 
@@ -162,9 +162,9 @@ msgstr "Steinmetz"
 msgid "Tavern"
 msgstr "Taverne"
 
-#: ../../../tribes/empire/buildings/toolsmith/conf:2
-msgid "Toolsmith's Shop"
-msgstr "Werkzeugschmiede"
+#: ../../../tribes/empire/buildings/toolsmithy/conf:2
+msgid "Toolsmithy"
+msgstr "Werkzeugmacher"
 
 #: ../../../tribes/empire/buildings/tower/conf:2
 msgid "Tower"
@@ -182,7 +182,7 @@ msgstr "Weinhof"
 msgid "Warehouse"
 msgstr "Warenlager"
 
-#: ../../../tribes/empire/buildings/weaponsmith/conf:2
+#: ../../../tribes/empire/buildings/weaponsmithy/conf:2
 msgid "Weapon Smithy"
 msgstr "Waffenschmied"
 
@@ -663,6 +663,8 @@ msgstr "Waffenschmied"
 msgid "Weaver"
 msgstr "Weber"
 
+#~ msgid "Toolsmith's Shop"
+#~ msgstr "Werkzeugschmiede"
 #~ msgid "Vintagery"
 #~ msgstr "Winzerei"
 #~ msgid "Bakingtray"
