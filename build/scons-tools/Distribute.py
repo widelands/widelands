@@ -1,6 +1,6 @@
 import SCons
 from SCons.Script import *
-import os, shutil, glob, distutils.dir_util
+import os, shutil, glob,distutils.filelist
 import tempfile, tarfile
 from zipfile import *
 
@@ -116,7 +116,17 @@ def doinst(target, source, env):
 			else:
 				os.chmod(os.path.join(targetprefix, sourcebase), 0644)
 		elif os.path.isdir(source):
-			distutils.dir_util.copy_tree(source, os.path.join(targetprefix, targetbase))
+			
+			fl = distutils.filelist.findall(source)
+			for file in fl:
+				if '.svn' in file:
+					continue
+					
+				tlp = file.split(targetbase + "/")
+				dir = os.path.join(targetprefix,targetbase,os.path.dirname(tlp[1]))
+				if not os.path.exists(dir):
+					os.makedirs(dir,0755)
+				shutil.copyfile(file,os.path.join(dir,os.path.split(tlp[1])[1]))
 
 	shutil.rmtree(tmpdir)
 
