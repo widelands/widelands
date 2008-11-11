@@ -413,6 +413,8 @@ void BaseListselect::remove(const uint32_t i)
 	m_entry_records.erase(m_entry_records.begin() + i);
 	if (m_selection == i)
 		selected.call(m_selection = no_selection_index());
+	else if (i <  m_selection)
+		--m_selection;
 }
 
 /**
