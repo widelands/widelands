@@ -856,8 +856,10 @@ void Player::ReadStatistics(FileRead& fr, uint32_t version)
 		if (nr_wares > 0) {
 			if (nr_wares != tribe().get_nrwares().value())
 				throw wexception
-					("Statistics for %u has bad number of wares (%u != %u)",
-					 get_player_number(), nr_wares, tribe().get_nrwares().value());
+					("statistics for player %u (%s) has %u ware types (should be "
+					 "%u)",
+					 get_player_number(), tribe().name().c_str(),
+					 nr_wares, tribe().get_nrwares().value());
 
 			assert(m_ware_productions.size() == nr_wares);
 			assert(m_current_statistics.size() == nr_wares);
