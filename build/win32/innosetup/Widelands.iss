@@ -127,6 +127,10 @@ Name: {userdesktop}\{#Name} - Mapeditor;     Filename: {app}\{#ExeName}; Paramet
 [Run]
 Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent
 
+[InstallDelete]
+Type: filesandordirs; Name: {app}\tribes\*
+Type: filesandordirs; Name: {app}\worlds\*
+
 [UninstallDelete]
 Type: files; Name: {app}\{#UrlName}
 Type: files; Name: {app}\{#HelpName}
