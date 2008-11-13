@@ -4,18 +4,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3489\n"
+"Project-Id-Version: Widelands svn3500\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-11-07 19:56+0000\n"
-"PO-Revision-Date: 2008-11-01 22:45+0100\n"
-"Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
+"POT-Creation-Date: 2008-11-12 18:39+0000\n"
+"PO-Revision-Date: 2008-11-13 21:34+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../tribes/atlanteans/buildings/armoursmith/conf:2
-#, fuzzy
+#: ../../../tribes/atlanteans/buildings/armoursmithy/conf:2
 msgid "Armoursmithy"
 msgstr "Forgeron d'armures"
 
@@ -27,8 +26,8 @@ msgstr "Boulangerie"
 msgid "Blackroot Farm"
 msgstr "Ferme de racines noires"
 
-#: ../../../tribes/atlanteans/buildings/burner/conf:2
-msgid "Charcoal Burner"
+#: ../../../tribes/atlanteans/buildings/burners_house/conf:2
+msgid "Charcoal Burner's House"
 msgstr "Charbonnier"
 
 #: ../../../tribes/atlanteans/buildings/castle/conf:2
@@ -55,16 +54,16 @@ msgstr "Donjon"
 msgid "Farm"
 msgstr "Ferme"
 
-#: ../../../tribes/atlanteans/buildings/fish_breeder/conf:2
-msgid "Fish Breeder Hut"
+#: ../../../tribes/atlanteans/buildings/fish_breeders_house/conf:2
+msgid "Fish Breeder's House"
 msgstr "Construisez une cabane de pisciculteur"
 
-#: ../../../tribes/atlanteans/buildings/fisher/conf:2
-msgid "Fisher Hut"
+#: ../../../tribes/atlanteans/buildings/fishers_house/conf:2
+msgid "Fisher's House"
 msgstr "Cabane de pêcheur"
 
-#: ../../../tribes/atlanteans/buildings/forester/conf:2
-msgid "Forester Hut"
+#: ../../../tribes/atlanteans/buildings/foresters_house/conf:2
+msgid "Forester's House"
 msgstr "Cabane de sylviculteur"
 
 #: ../../../tribes/atlanteans/buildings/goldmine/conf:2
@@ -91,8 +90,8 @@ msgstr "Quartier Général"
 msgid "High Tower"
 msgstr "Tour haute"
 
-#: ../../../tribes/atlanteans/buildings/hunter/conf:2
-msgid "Hunter Hut"
+#: ../../../tribes/atlanteans/buildings/hunters_house/conf:2
+msgid "Hunter's House"
 msgstr "Cabane de chasseur"
 
 #: ../../../tribes/atlanteans/buildings/ironmine/conf:2
@@ -131,8 +130,8 @@ msgstr "Fumoir"
 msgid "Spiderfarm"
 msgstr "Ferme d'araignées"
 
-#: ../../../tribes/atlanteans/buildings/toolsmith/conf:2
-msgid "Toolsmith's Shop"
+#: ../../../tribes/atlanteans/buildings/toolsmithy/conf:2
+msgid "Toolsmithy"
 msgstr "Forgeron d'outils"
 
 #: ../../../tribes/atlanteans/buildings/tower/conf:2
@@ -143,7 +142,7 @@ msgstr "Tour"
 msgid "Warehouse"
 msgstr "Entrepôt"
 
-#: ../../../tribes/atlanteans/buildings/weaponsmith/conf:2
+#: ../../../tribes/atlanteans/buildings/weaponsmithy/conf:2
 msgid "Weapon Smithy"
 msgstr "Forgeron d'armes"
 
@@ -155,8 +154,8 @@ msgstr "Atelier de tissage"
 msgid "Well"
 msgstr "Puit"
 
-#: ../../../tribes/atlanteans/buildings/woodcutter/conf:2
-msgid "Woodcutter Hut"
+#: ../../../tribes/atlanteans/buildings/woodcutters_house/conf:2
+msgid "Woodcutter's House"
 msgstr "Cabane de coupeur de bois"
 
 #: ../../../tribes/atlanteans/conf:18
@@ -180,12 +179,10 @@ msgid "This shields are used by the best soldiers of the atlantids"
 msgstr "Ce bouclier est utilisé par les meilleurs soldats de l'Atlantide."
 
 #: ../../../tribes/atlanteans/wares/bakingtray/conf:2
-#, fuzzy
 msgid "Bakingtray"
 msgstr "Le plateau à four"
 
 #: ../../../tribes/atlanteans/wares/bakingtray/conf:3
-#, fuzzy
 msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
 msgstr "Le plateau à four est l'outil du boulanger. Chaque boulanger en a besoin d'une. Elle est produite par le forgeron d'outils."
 
@@ -390,12 +387,10 @@ msgid "Meat is one food-ressource of the Atlantids."
 msgstr "La viande est une ressource en nourriture de l'Atlantide."
 
 #: ../../../tribes/atlanteans/wares/milking_tongs/conf:2
-#, fuzzy
 msgid "Milking Tongs"
 msgstr "Pinces à traire"
 
 #: ../../../tribes/atlanteans/wares/milking_tongs/conf:3
-#, fuzzy
 msgid "Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
 msgstr "Les pinces à traire sont utilisées par l'éleveur d'araignées, pour traire les araignées. Elles sont produites par le forgeron d'outils."
 
@@ -620,7 +615,6 @@ msgid "Stonecutter"
 msgstr "Coupeur de pierres."
 
 #: ../../../tribes/atlanteans/workers/stonecutter/conf:3
-#, fuzzy
 msgid "Cuts raw pieces of granit out of laying stones."
 msgstr "Coupe des morceaux bruts de granit à partir de pierres."
 
@@ -651,3 +645,7 @@ msgstr "Coupeur de bois"
 #: ../../../tribes/atlanteans/workers/woodcutter/conf:3
 msgid "Fells trees."
 msgstr "Arbres tombés"
+
+#~ msgid "Toolsmith's Shop"
+#~ msgstr "Forgeron d'outils"
+
