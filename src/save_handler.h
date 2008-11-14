@@ -43,7 +43,7 @@ public:
 		 std::string const & filename,
 		 std::string       * error = 0);
 
-	static std::string get_base_dir() {return "ssave";}
+	static std::string get_base_dir() {return "save";}
 };
 
 #endif

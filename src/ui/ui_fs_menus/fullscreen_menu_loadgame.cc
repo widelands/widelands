@@ -108,7 +108,7 @@ void Fullscreen_Menu_LoadGame::double_clicked(uint32_t) {
  */
 void Fullscreen_Menu_LoadGame::fill_list() {
 	//  Fill it with all files we find.
-	g_fs->FindFiles("ssave", "*", &m_gamefiles, 1);
+	g_fs->FindFiles("save", "*", &m_gamefiles, 1);
 
 	Widelands::Game_Preload_Data_Packet gpdp;
 
