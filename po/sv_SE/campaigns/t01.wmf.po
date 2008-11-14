@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3509\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-10-26 17:41+0000\n"
-"PO-Revision-Date: 2006-07-02 01:11+0200\n"
+"PO-Revision-Date: 2008-11-14 21:42+0100\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -189,7 +189,7 @@ msgstr "Vid graven"
 
 #: ../../../campaigns/t01.wmf/event:241
 msgid "Thron says thoughtfully..."
-msgstr ""
+msgstr "Thron säger tankfullt..."
 
 #: ../../../campaigns/t01.wmf/event:243
 #, fuzzy
@@ -213,7 +213,7 @@ msgstr "Idag plockade mina krigare upp en gammal man, som vandrade sjuk och skad
 
 #: ../../../campaigns/t01.wmf/event:260
 msgid "The oath"
-msgstr ""
+msgstr "Eden"
 
 #: ../../../campaigns/t01.wmf/event:291
 #, fuzzy
@@ -226,7 +226,7 @@ msgstr "Uppdrag Slutfört"
 
 #: ../../../campaigns/t01.wmf/objective:5
 msgid "Build a lumberjack's hut"
-msgstr ""
+msgstr "Bygg en skogshuggarkoja"
 
 #: ../../../campaigns/t01.wmf/objective:8
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
@@ -253,29 +253,8 @@ msgstr " \"Nordanvinden berättar, att den kommande vinter kommer vara lång och
 
 #: ../../../campaigns/t01.wmf/objective:24
 msgid "Build a ranger's hut"
-msgstr ""
+msgstr "Bygg en skogvaktarkoja"
 
 #: ../../../campaigns/t01.wmf/objective:32
 msgid "Build two quarries"
-msgstr ""
-
-#~ msgid "Another evening..."
-#~ msgstr "En annan kväll..."
-
-#~ msgid "Victory!"
-#~ msgstr "Seger!"
-
-#~ msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-#~ msgstr " \"Självklart, skulle det vara för jobbigt för vårt folk att gå hela vägen genom vildmarken till skogshuggaren. Vi måste bygga en stig mellan vårt läger och skogshuggaren. Det är inte svårt att gissa att folket skulle uppkatta en så kort och jämn väg som möjligt - virket kommer vara tungt nog ändå.\"<br><br> --NYA MÅL--<br>- Bygg en väg mellan ditt huvudkvarter och skogshuggaren. Du gör det genom att klicka på flaggan vid ena byggnaden och sen väg-knappen. Runt flaggan kommer det upp symboler som visar hur brant lutning vägen har i en riktning. Desto brantare väg, desto svårare kommer det att bli för ditt folk att vandra på den. När du klickar på en symbol så bygger du en del av vägen och väljer sedan nästa riktning. Bygg en väg mellan flaggorna framför bägge byggnaderna. Försök att få en så kort och jämn väg som möjligt."
-
-#~ msgid "- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-#~ msgstr "- Där är en flaggsymbol mitt på vägen du just byggt. Genom att klicka på den och sedan på flaggknappen placerar du en flagga där, och därigenom fördelar du bördan mellan två transportörer. När mycket varor ska transporteras mellan två punkter, flertalet flaggor mellan dem gör att det går fortare, och där igenom förbättrar du din infrastruktur. Placera en flagga mitt på vägen.<br>- Bygg en skogshuggare direkt söderut om flaggan du som du ska sätta på vägen. Förbind flaggan med den nya skogshuggaren efteråt. Notera att i stället för att bygga en väg bit för bit, så kan du istället klicka direkt på destinationen för att bygga hela vägen i ett svep."
-
-#~ msgid "Order3"
-#~ msgstr "Uppdrag3"
-
-#~ msgid "Order5"
-#~ msgstr "Uppdrag5"
-
-#~ msgid "Order7"
-#~ msgstr "Uppdrag7"
+msgstr "Bygg två stenbrott"
