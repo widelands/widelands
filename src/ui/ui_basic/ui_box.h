@@ -42,7 +42,10 @@ struct Box : public Panel {
 		AlignBottom = 2,
 	};
 public:
-	Box(Panel* parent, int32_t x, int32_t y, uint32_t orientation);
+	Box(Panel* parent, int32_t x, int32_t y,
+			uint32_t orientation,
+			int32_t max_x = 0,//::Interactive_Base::get_xres(),
+			int32_t max_y = 0);//Interactive_Base::get_yres());
 
 	void resize();
 
@@ -55,6 +58,10 @@ public:
 private:
 	void get_item_size(uint32_t idx, int32_t* depth, int32_t* breadth);
 	void set_item_pos(uint32_t idx, int32_t pos);
+
+	//don't resize beyond this size
+	int32_t m_max_x;
+	int32_t m_max_y;
 
 private:
 	struct Item {

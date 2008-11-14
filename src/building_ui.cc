@@ -30,6 +30,7 @@ class.
 #include "game_debug_ui.h"
 #include "graphic.h"
 #include "i18n.h"
+#include "interactive_base.h"
 #include "interactive_player.h"
 #include "maphollowregion.h"
 #include "militarysite.h"
@@ -1401,7 +1402,7 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 UI::Box*
 ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite* ps)
 {
-	UI::Box* box = new UI::Box (parent, 0, 0, UI::Box::Vertical);
+	UI::Box* box = new UI::Box (parent, 0, 0, UI::Box::Vertical,Interactive_Base::get_xres()-80, Interactive_Base::get_yres() - 80);
 
 	// Add the wares queue
 	std::vector<Widelands::WaresQueue *> const & warequeues = ps->warequeues();
