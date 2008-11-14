@@ -4,26 +4,26 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3505\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:41+0000\n"
-"PO-Revision-Date: 2006-07-02 01:20+0200\n"
-"Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
-"Language-Team: swedish <sv@li.org>\n"
+"POT-Creation-Date: 2008-11-14 00:12+0000\n"
+"PO-Revision-Date: 2008-11-14 01:48+0100\n"
+"Last-Translator: Erik <esigra@gmail.com>\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: swe\n"
 "X-Poedit-Country: swe\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../../../worlds/winterland/bobs/badger/conf:1
 msgid "Badger"
-msgstr ""
+msgstr "Grävling"
 
 #: ../../../worlds/winterland/bobs/bunny/conf:1
 msgid "Bunny"
-msgstr "Kanin"
+msgstr "Hare"
 
 #: ../../../worlds/winterland/bobs/bush1/conf:1
 #: ../../../worlds/winterland/bobs/bush2/conf:1
@@ -46,11 +46,11 @@ msgstr "Hjort"
 
 #: ../../../worlds/winterland/bobs/duck/conf:1
 msgid "Duck"
-msgstr "Anka"
+msgstr "And"
 
 #: ../../../worlds/winterland/bobs/elk/conf:1
 msgid "Elk"
-msgstr ""
+msgstr "Älg"
 
 #: ../../../worlds/winterland/bobs/fox/conf:1
 msgid "Fox"
@@ -64,11 +64,11 @@ msgstr "Gräs"
 
 #: ../../../worlds/winterland/bobs/lynx/conf:1
 msgid "Lynx"
-msgstr ""
+msgstr "Lodjur"
 
 #: ../../../worlds/winterland/bobs/marten/conf:1
 msgid "Marten"
-msgstr ""
+msgstr "Mård"
 
 #: ../../../worlds/winterland/bobs/mushroom1/conf:1
 #: ../../../worlds/winterland/bobs/mushroom2/conf:1
@@ -100,7 +100,7 @@ msgstr "Skelett"
 
 #: ../../../worlds/winterland/bobs/snowman/conf:1
 msgid "Snowman"
-msgstr ""
+msgstr "Snögubbe"
 
 #: ../../../worlds/winterland/bobs/sstones1/conf:1
 #: ../../../worlds/winterland/bobs/sstones2/conf:1
@@ -110,7 +110,7 @@ msgstr ""
 #: ../../../worlds/winterland/bobs/sstones6/conf:1
 #: ../../../worlds/winterland/bobs/sstones7/conf:1
 msgid "Standing Stones"
-msgstr "Stående stenar"
+msgstr "Stenblock"
 
 #: ../../../worlds/winterland/bobs/stones1/conf:1
 #: ../../../worlds/winterland/bobs/stones2/conf:1
@@ -123,7 +123,7 @@ msgstr "Stenar"
 
 #: ../../../worlds/winterland/bobs/track/conf:1
 msgid "Track"
-msgstr ""
+msgstr "Spår"
 
 #: ../../../worlds/winterland/bobs/tree1/conf:5
 #: ../../../worlds/winterland/bobs/tree2/conf:5
@@ -134,15 +134,15 @@ msgstr ""
 #: ../../../worlds/winterland/bobs/tree7/conf:4
 #: ../../../worlds/winterland/bobs/tree8/conf:4
 msgid "Tree"
-msgstr "Trä"
+msgstr "Träd"
 
 #: ../../../worlds/winterland/bobs/wisent/conf:1
 msgid "Wisent"
-msgstr ""
+msgstr "Visent"
 
 #: ../../../worlds/winterland/bobs/wolf/conf:1
 msgid "Wolf"
-msgstr ""
+msgstr "Varg"
 
 #: ../../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
@@ -154,7 +154,7 @@ msgstr "Vinterland"
 
 #: ../../../worlds/winterland/conf:4
 msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
-msgstr "Etta är det vida, vita och kalla vinterlandet, där Nordmännen bor."
+msgstr "Detta är det vida, vita och kalla vinterlandet, där Nordmännen bor."
 
 #: ../../../worlds/winterland/resconf:4
 msgid "Coal"

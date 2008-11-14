@@ -4,22 +4,22 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3505\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:41+0000\n"
-"PO-Revision-Date: 2006-07-02 00:40+0200\n"
-"Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
-"Language-Team: swedish <sv@li.org>\n"
+"POT-Creation-Date: 2008-11-14 00:12+0000\n"
+"PO-Revision-Date: 2008-11-14 01:47+0100\n"
+"Last-Translator: Erik <esigra@gmail.com>\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: swe\n"
 "X-Poedit-Country: swe\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../../../worlds/blackland/bobs/bunny/conf:1
 msgid "Bunny"
-msgstr "Kanin"
+msgstr "Hare"
 
 #: ../../../worlds/blackland/bobs/bush1/conf:1
 #: ../../../worlds/blackland/bobs/bush2/conf:1
@@ -47,7 +47,7 @@ msgstr "Hjort"
 
 #: ../../../worlds/blackland/bobs/duck/conf:1
 msgid "Duck"
-msgstr "Anka"
+msgstr "And"
 
 #: ../../../worlds/blackland/bobs/fox/conf:1
 msgid "Fox"
@@ -95,7 +95,7 @@ msgstr "Skelett"
 #: ../../../worlds/blackland/bobs/sstones6/conf:1
 #: ../../../worlds/blackland/bobs/sstones7/conf:1
 msgid "Standing Stones"
-msgstr "Stående stenar"
+msgstr "Stenblock"
 
 #: ../../../worlds/blackland/bobs/stones1/conf:1
 #: ../../../worlds/blackland/bobs/stones2/conf:1
@@ -115,7 +115,7 @@ msgstr "Stenar"
 #: ../../../worlds/blackland/bobs/tree7/conf:4
 #: ../../../worlds/blackland/bobs/tree8/conf:4
 msgid "Tree"
-msgstr "Trä"
+msgstr "Träd"
 
 #: ../../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
@@ -127,7 +127,7 @@ msgstr "Svartland"
 
 #: ../../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr "Detta är de gråa, hemska och farliga Svartland"
+msgstr "Detta är de gråa, hemska och farliga svartlanden"
 
 #: ../../../worlds/blackland/resconf:4
 msgid "Coal"
@@ -143,7 +143,7 @@ msgstr "Järn"
 
 #: ../../../worlds/blackland/resconf:28
 msgid "Granit"
-msgstr "Sten"
+msgstr "Granit"
 
 #: ../../../worlds/blackland/resconf:36
 msgid "Water"

@@ -4,18 +4,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3489\n"
+"Project-Id-Version: Widelands svn3505\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-11-07 19:56+0000\n"
-"PO-Revision-Date: 2006-11-28 19:34+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
-"Language-Team: Swedish <sv@li.org>\n"
+"POT-Creation-Date: 2008-11-14 00:12+0000\n"
+"PO-Revision-Date: 2008-11-14 01:35+0100\n"
+"Last-Translator: Erik <esigra@gmail.com>\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: swe\n"
 "X-Poedit-Country: swe\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../../../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
@@ -49,9 +49,9 @@ msgstr "Stort Värdshus"
 msgid "Brewery"
 msgstr "Bryggeri"
 
-#: ../../../tribes/barbarians/buildings/burner/conf:2
-msgid "Charcoal Burner"
-msgstr "Träkolsbrännare"
+#: ../../../tribes/barbarians/buildings/burners_house/conf:2
+msgid "Charcoal Burner's House"
+msgstr "Kolarbostad"
 
 #: ../../../tribes/barbarians/buildings/citadel/conf:2
 msgid "Citadel"
@@ -95,23 +95,23 @@ msgstr "Kärntorn"
 
 #: ../../../tribes/barbarians/buildings/farm/conf:2
 msgid "Farm"
-msgstr "Bondgård"
+msgstr "Veteodling"
 
 #: ../../../tribes/barbarians/buildings/fernery/conf:2
 msgid "Fernery"
-msgstr "Ormbunksfarm"
+msgstr "Ormbunksodling"
 
-#: ../../../tribes/barbarians/buildings/fisher/conf:2
+#: ../../../tribes/barbarians/buildings/fishers_hut/conf:2
 msgid "Fisher's Hut"
-msgstr "Fiskarens stuga"
+msgstr "Fiskarkoja"
 
 #: ../../../tribes/barbarians/buildings/fortress/conf:2
 msgid "Fortress"
 msgstr "Fästning"
 
-#: ../../../tribes/barbarians/buildings/gamekeeper/conf:2
+#: ../../../tribes/barbarians/buildings/gamekeepers_hut/conf:2
 msgid "Gamekeeper's Hut"
-msgstr "Djuruppfödarens stuga"
+msgstr "Viltvårdarkoja"
 
 #: ../../../tribes/barbarians/buildings/goldmine/conf:2
 msgid "Gold Mine"
@@ -123,20 +123,19 @@ msgstr "Granitgruva"
 
 #: ../../../tribes/barbarians/buildings/hardener/conf:2
 msgid "Wood Hardener"
-msgstr "Trähärdare"
+msgstr "Trähärderi"
 
 #: ../../../tribes/barbarians/buildings/headquarters/conf:6
 msgid "Headquarters"
 msgstr "Huvudkvarter"
 
-#: ../../../tribes/barbarians/buildings/helmsmith/conf:2
-#, fuzzy
+#: ../../../tribes/barbarians/buildings/helmsmithy/conf:2
 msgid "Helmsmithy"
-msgstr "Hjälmsmed"
+msgstr "Hjälmsmedja"
 
-#: ../../../tribes/barbarians/buildings/hunter/conf:2
+#: ../../../tribes/barbarians/buildings/hunters_hut/conf:2
 msgid "Hunter's Hut"
-msgstr "Jägarens stuga"
+msgstr "Jägarkoja"
 
 #: ../../../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
@@ -146,19 +145,17 @@ msgstr "Värdshus"
 msgid "Lime Kiln"
 msgstr "Kalkbränneri"
 
-#: ../../../tribes/barbarians/buildings/lumberjack/conf:2
+#: ../../../tribes/barbarians/buildings/lumberjacks_hut/conf:2
 msgid "Lumberjack's Hut"
-msgstr "Skogshuggarens stuga"
+msgstr "Skogshuggarkoja"
 
 #: ../../../tribes/barbarians/buildings/metalworks/conf:2
-#, fuzzy
 msgid "Metalwork Shop"
-msgstr "Industri"
+msgstr "Verktygssmedja"
 
 #: ../../../tribes/barbarians/buildings/micro-brewery/conf:2
-#, fuzzy
 msgid "Micro Brewery"
-msgstr "Litet bryggeri"
+msgstr "Bryggstuga"
 
 #: ../../../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
@@ -166,11 +163,11 @@ msgstr "Järnmalmsgruva"
 
 #: ../../../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
-msgstr "Stenhuggare"
+msgstr "Stenbrott"
 
-#: ../../../tribes/barbarians/buildings/ranger/conf:2
+#: ../../../tribes/barbarians/buildings/rangers_hut/conf:2
 msgid "Ranger's Hut"
-msgstr "Skogsplanterare"
+msgstr "Skogvaktarkoja"
 
 #: ../../../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
@@ -178,7 +175,7 @@ msgstr "Vaktpost"
 
 #: ../../../tribes/barbarians/buildings/smelting_works/conf:2
 msgid "Smelting Works"
-msgstr "Metallförädlare"
+msgstr "Smältverk"
 
 #: ../../../tribes/barbarians/buildings/stronghold/conf:2
 msgid "Stronghold"
@@ -186,7 +183,7 @@ msgstr "Litet fort"
 
 #: ../../../tribes/barbarians/buildings/tavern/conf:2
 msgid "Tavern"
-msgstr "Pub"
+msgstr "Gatukök"
 
 #: ../../../tribes/barbarians/buildings/trainingscamp/conf:2
 msgid "Trainingscamp"
@@ -194,7 +191,7 @@ msgstr "Träningsläger"
 
 #: ../../../tribes/barbarians/buildings/warehouse/conf:2
 msgid "Warehouse"
-msgstr "Lagerlokal"
+msgstr "Härbre"
 
 #: ../../../tribes/barbarians/buildings/warmill/conf:2
 msgid "War Mill"
@@ -202,7 +199,7 @@ msgstr "Vapenindustri"
 
 #: ../../../tribes/barbarians/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
-msgstr "Klädesfabrik"
+msgstr "Väveri"
 
 #: ../../../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
@@ -214,7 +211,7 @@ msgstr "Widelands utvecklingslag"
 
 #: ../../../tribes/barbarians/conf:19
 msgid "Barbarians"
-msgstr "Barbarer"
+msgstr "Barbarerna"
 
 #: ../../../tribes/barbarians/conf:20
 msgid "The mighty tribes of the east-lands!"
@@ -230,7 +227,7 @@ msgstr ""
 
 #: ../../../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Peel"
-msgstr ""
+msgstr "Bakspade"
 
 #: ../../../tribes/barbarians/wares/bakingtray/conf:3
 msgid "The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
@@ -282,7 +279,7 @@ msgstr "Kläder"
 
 #: ../../../tribes/barbarians/wares/cloth/conf:3
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-msgstr ""
+msgstr "Tyg"
 
 #: ../../../tribes/barbarians/wares/coal/conf:2
 msgid "Coal"
@@ -294,7 +291,7 @@ msgstr ""
 
 #: ../../../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
-msgstr "Eldtänger"
+msgstr "Eldtång"
 
 #: ../../../tribes/barbarians/wares/fire_tongs/conf:3
 msgid "The fire tongs are the tool of the smelter, working in the smelting works. Produced in the metal works."
@@ -342,7 +339,7 @@ msgstr ""
 
 #: ../../../tribes/barbarians/wares/grout/conf:2
 msgid "Grout"
-msgstr ""
+msgstr "Murbruk"
 
 #: ../../../tribes/barbarians/wares/grout/conf:3
 msgid "Raw stone can be enhanced to grout which delivers solid, non burning build material."
@@ -357,7 +354,6 @@ msgid "The hammer is an essential tool. It is needed by the geologist, the worke
 msgstr ""
 
 #: ../../../tribes/barbarians/wares/helm/conf:2
-#, fuzzy
 msgid "Helmet"
 msgstr "Hjälm"
 
@@ -382,7 +378,6 @@ msgid "Weapons and tools are made of iron."
 msgstr ""
 
 #: ../../../tribes/barbarians/wares/ironore/conf:2
-#, fuzzy
 msgid "Iron Ore"
 msgstr "Järnmalm"
 
@@ -424,14 +419,13 @@ msgstr ""
 
 #: ../../../tribes/barbarians/wares/pick/conf:2
 msgid "Pick"
-msgstr "Korpyxa"
+msgstr "Korp"
 
 #: ../../../tribes/barbarians/wares/pick/conf:3
 msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
 msgstr ""
 
 #: ../../../tribes/barbarians/wares/pittabread/conf:2
-#, fuzzy
 msgid "Pitta Bread"
 msgstr "Pitabröd"
 
@@ -501,7 +495,7 @@ msgstr "Vassrör"
 
 #: ../../../tribes/barbarians/wares/thatchreed/conf:3
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
-msgstr ""
+msgstr "Vassrör används för att göra vattentäta tak till byggnader."
 
 #: ../../../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
@@ -509,7 +503,7 @@ msgstr "Stock"
 
 #: ../../../tribes/barbarians/wares/trunk/conf:3
 msgid "Trunks are the primary build material of the barbarians."
-msgstr ""
+msgstr "Stockar är barbarernas huvudsakliga byggnadsmaterial."
 
 #: ../../../tribes/barbarians/wares/warhelmet/conf:2
 msgid "War Helmet"
@@ -561,11 +555,11 @@ msgstr "Byggare"
 
 #: ../../../tribes/barbarians/workers/burner/conf:2
 msgid "Burner"
-msgstr "Brännare"
+msgstr "Kolare"
 
 #: ../../../tribes/barbarians/workers/carrier/conf:2
 msgid "Carrier"
-msgstr "Transportör"
+msgstr "Bärare"
 
 #: ../../../tribes/barbarians/workers/chief-miner/conf:2
 msgid "Chief Miner"
@@ -573,11 +567,11 @@ msgstr "Gruvledare"
 
 #: ../../../tribes/barbarians/workers/farmer/conf:2
 msgid "Farmer"
-msgstr "Bonde"
+msgstr "Jordbrukare"
 
 #: ../../../tribes/barbarians/workers/ferner/conf:2
 msgid "Ferner"
-msgstr "Ormbunke bonde"
+msgstr "Ormbunksodlare"
 
 #: ../../../tribes/barbarians/workers/fisher/conf:2
 msgid "Fisher"
@@ -585,7 +579,7 @@ msgstr "Fiskare"
 
 #: ../../../tribes/barbarians/workers/gamekeeper/conf:2
 msgid "Gamekeeper"
-msgstr "Uppfödare"
+msgstr "Viltvårdare"
 
 #: ../../../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
@@ -601,12 +595,11 @@ msgstr "Jägare"
 
 #: ../../../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
-msgstr "Servitör"
+msgstr "Krögare"
 
 #: ../../../tribes/barbarians/workers/lime-burner/conf:2
-#, fuzzy
 msgid "Lime-Burner"
-msgstr "Brännare"
+msgstr "Kalkbrännare"
 
 #: ../../../tribes/barbarians/workers/lumberjack/conf:2
 msgid "Lumberjack"
@@ -614,11 +607,11 @@ msgstr "Skogshuggare"
 
 #: ../../../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
-msgstr "Storsmed"
+msgstr "Mästersmed"
 
 #: ../../../tribes/barbarians/workers/master-brewer/conf:2
 msgid "Master Brewer"
-msgstr "Storbryggare"
+msgstr "Mästerbryggare"
 
 #: ../../../tribes/barbarians/workers/master-miner/conf:2
 msgid "Master Miner"
@@ -630,11 +623,11 @@ msgstr "Gruvarbetare"
 
 #: ../../../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
-msgstr "Planterare"
+msgstr "Skogvaktare"
 
 #: ../../../tribes/barbarians/workers/smelter/conf:2
 msgid "Smelter"
-msgstr "Förädlare"
+msgstr "Smältare"
 
 #: ../../../tribes/barbarians/workers/soldier/conf:2
 msgid "Soldier"
@@ -650,16 +643,4 @@ msgstr "Tränare"
 
 #: ../../../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
-msgstr "Skräddare"
-
-#~ msgid "Stonegrinder"
-#~ msgstr "Stenkross"
-
-#~ msgid "Bakingtray"
-#~ msgstr "Bakspade"
-
-#~ msgid "Grindstone"
-#~ msgstr "Cement"
-
-#~ msgid "Coalearth"
-#~ msgstr "Kolmalm"
+msgstr "Vävare"

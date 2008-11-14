@@ -4,30 +4,30 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3505\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:41+0000\n"
-"PO-Revision-Date: 2006-03-29 21:59+0200\n"
-"Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
-"Language-Team: Swedish <sv@li.org>\n"
+"POT-Creation-Date: 2008-11-14 00:12+0000\n"
+"PO-Revision-Date: 2008-11-14 01:48+0100\n"
+"Last-Translator: Erik <esigra@gmail.com>\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: swe\n"
 "X-Poedit-Country: swe\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../../../worlds/greenland/bobs/badger/conf:1
 msgid "Badger"
-msgstr ""
+msgstr "Grävling"
 
 #: ../../../worlds/greenland/bobs/brownbear/conf:1
 msgid "Brownbear"
-msgstr ""
+msgstr "Brunbjörn"
 
 #: ../../../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
-msgstr "Kanin"
+msgstr "Hare"
 
 #: ../../../worlds/greenland/bobs/bush1/conf:1
 #: ../../../worlds/greenland/bobs/bush2/conf:1
@@ -44,7 +44,7 @@ msgstr "Kaktus"
 
 #: ../../../worlds/greenland/bobs/chamois/conf:1
 msgid "Chamois"
-msgstr ""
+msgstr "Gems"
 
 #: ../../../worlds/greenland/bobs/deadtree1/conf:1
 #: ../../../worlds/greenland/bobs/deadtree2/conf:1
@@ -59,11 +59,11 @@ msgstr "Hjort"
 
 #: ../../../worlds/greenland/bobs/duck/conf:1
 msgid "Duck"
-msgstr "Anka"
+msgstr "And"
 
 #: ../../../worlds/greenland/bobs/elk/conf:1
 msgid "Elk"
-msgstr ""
+msgstr "Älg"
 
 #: ../../../worlds/greenland/bobs/fallentree/conf:2
 #, fuzzy
@@ -82,11 +82,11 @@ msgstr "Gräs"
 
 #: ../../../worlds/greenland/bobs/lynx/conf:1
 msgid "Lynx"
-msgstr ""
+msgstr "Lodjur"
 
 #: ../../../worlds/greenland/bobs/marten/conf:1
 msgid "Marten"
-msgstr ""
+msgstr "Mård"
 
 #: ../../../worlds/greenland/bobs/mushroom1/conf:1
 #: ../../../worlds/greenland/bobs/mushroom2/conf:1
@@ -124,7 +124,7 @@ msgstr "Skelett"
 #: ../../../worlds/greenland/bobs/sstones6/conf:1
 #: ../../../worlds/greenland/bobs/sstones7/conf:1
 msgid "Standing Stones"
-msgstr "Stående stenar"
+msgstr "Stenblock"
 
 #: ../../../worlds/greenland/bobs/stones1/conf:1
 #: ../../../worlds/greenland/bobs/stones2/conf:1
@@ -144,15 +144,15 @@ msgstr "Stenar"
 #: ../../../worlds/greenland/bobs/tree7/conf:4
 #: ../../../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
-msgstr "Trä"
+msgstr "Träd"
 
 #: ../../../worlds/greenland/bobs/wisent/conf:1
 msgid "Wisent"
-msgstr ""
+msgstr "Visent"
 
 #: ../../../worlds/greenland/bobs/wolf/conf:1
 msgid "Wolf"
-msgstr ""
+msgstr "Varg"
 
 #: ../../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -180,7 +180,7 @@ msgstr "Järn"
 
 #: ../../../worlds/greenland/resconf:28
 msgid "Granit"
-msgstr "Sten"
+msgstr "Granit"
 
 #: ../../../worlds/greenland/resconf:36
 msgid "Water"
