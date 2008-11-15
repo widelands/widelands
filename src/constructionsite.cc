@@ -401,10 +401,7 @@ bool ConstructionSite::burn_on_destroy()
 	if (m_work_completed >= m_work_steps)
 		return false; // completed, so don't burn
 
-	if (m_work_completed)
-		return true;
-
-	return false;
+	return m_work_completed or m_prev_building;
 }
 
 
