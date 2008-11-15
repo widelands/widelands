@@ -175,6 +175,8 @@ struct FieldActionWindow : public UI::UniqueWindow {
 		 UI::UniqueWindow::Registry * registry);
 	~FieldActionWindow();
 
+	virtual void think();
+
 	void init();
 	void add_buttons_auto();
 	void add_buttons_build(int32_t buildcaps);
@@ -312,6 +314,12 @@ FieldActionWindow::~FieldActionWindow()
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	m_iabase->set_sel_freeze(false);
 	delete m_text_attackers;
+}
+
+
+void FieldActionWindow::think() {
+	if (m_plr->vision(m_field.field - &m_iabase->egbase().map()[0]) <= 1)
+		die();
 }
 
 
