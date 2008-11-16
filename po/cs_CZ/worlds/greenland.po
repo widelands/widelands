@@ -7,22 +7,23 @@ msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-10-26 17:45+0000\n"
-"PO-Revision-Date: 2006-06-27 13:54+0100\n"
-"Last-Translator: Prometheus <mmatej@yahoo.com>\n"
+"PO-Revision-Date: 2008-11-09 00:23+0100\n"
+"Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../../worlds/greenland/bobs/badger/conf:1
 msgid "Badger"
-msgstr ""
+msgstr "Jezevec"
 
 #: ../../../worlds/greenland/bobs/brownbear/conf:1
 msgid "Brownbear"
-msgstr ""
+msgstr "Medvěd"
 
 #: ../../../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -43,7 +44,7 @@ msgstr "Kaktus"
 
 #: ../../../worlds/greenland/bobs/chamois/conf:1
 msgid "Chamois"
-msgstr ""
+msgstr "Kamzík"
 
 #: ../../../worlds/greenland/bobs/deadtree1/conf:1
 #: ../../../worlds/greenland/bobs/deadtree2/conf:1
@@ -62,10 +63,9 @@ msgstr "Kachna"
 
 #: ../../../worlds/greenland/bobs/elk/conf:1
 msgid "Elk"
-msgstr ""
+msgstr "Los"
 
 #: ../../../worlds/greenland/bobs/fallentree/conf:2
-#, fuzzy
 msgid "Dead tree"
 msgstr "Uschlý strom"
 
@@ -81,11 +81,11 @@ msgstr "Tráva"
 
 #: ../../../worlds/greenland/bobs/lynx/conf:1
 msgid "Lynx"
-msgstr ""
+msgstr "Rys"
 
 #: ../../../worlds/greenland/bobs/marten/conf:1
 msgid "Marten"
-msgstr ""
+msgstr "Kuna"
 
 #: ../../../worlds/greenland/bobs/mushroom1/conf:1
 #: ../../../worlds/greenland/bobs/mushroom2/conf:1
@@ -147,11 +147,11 @@ msgstr "Stromy"
 
 #: ../../../worlds/greenland/bobs/wisent/conf:1
 msgid "Wisent"
-msgstr ""
+msgstr "Zubr"
 
 #: ../../../worlds/greenland/bobs/wolf/conf:1
 msgid "Wolf"
-msgstr ""
+msgstr "Vlk"
 
 #: ../../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -188,3 +188,4 @@ msgstr "Voda"
 #: ../../../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Ryba"
+

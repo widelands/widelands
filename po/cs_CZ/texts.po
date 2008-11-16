@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-10-26 17:45+0000\n"
-"PO-Revision-Date: 2007-01-11 13:46+0100\n"
-"Last-Translator: Martin Večeřa <ja@marvec.org>\n"
+"PO-Revision-Date: 2008-11-09 02:04+0100\n"
+"Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Martin Večeřa <ja@marvec.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -187,14 +187,13 @@ msgstr "Stav"
 
 #: ../../txts/README:31
 msgid "Widelands is now on the step of being playable, but to become more playable volunteers are needed. Your contributions (yes, I'm talking to you) are required, especially in the area of graphics, to make Widelands a better game."
-msgstr "Widelands je nený hratelnou hrou, ale aby se stala ještě lepší je potřeba dalších dobrovolníků. Vaše nabídky (ano, mluvím k Vám) jsou vítány. Obzvláště v oblasti grafiky by bylo dobré Widelands ještě vylepšit."
+msgstr "Widelands je nyní hratelnou hrou, ale aby se stala ještě lepší je potřeba dalších dobrovolníků. Vaše nabídky (ano, mluvím k Vám) jsou vítány. Obzvláště v oblasti grafiky by bylo dobré Widelands ještě vylepšit."
 
 #: ../../txts/README:36
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Klávesové zkratky (během hry)"
 
 #: ../../txts/README:40
-#, fuzzy
 msgid "SPACE       Toggle build-help"
 msgstr "Mezera      Přepíná nápovědu k výstavbě"
 
@@ -211,7 +210,6 @@ msgid "S               Toggle statistics"
 msgstr "S               Přepíná zobrazení statistiky"
 
 #: ../../txts/README:48
-#, fuzzy
 msgid "O               Toggle objectives display"
 msgstr "C               Přepíná zobrazení popisků"
 
@@ -245,7 +243,7 @@ msgstr "F11         Uloží snímek obrazovky"
 
 #: ../../txts/README:67
 msgid "When finishing a road, if Ctrl is down, place flags along the road. Default is to place flags from end to start. If Shift is also down, place flags from start to end instead."
-msgstr ""
+msgstr "Pokud dokončíte cestu a pokud držíte Ctrl, umístí se na cestu vlajky. Výchozí je umístit vlajky od konce k začátku. Pokud je stisknutý také Shift, vlajky se umístí od začátku ke konci."
 
 #: ../../txts/README:72
 msgid "Online Help"
@@ -281,7 +279,7 @@ msgstr "- jakou mapu jste hrál(a)"
 
 #: ../../txts/README:102
 msgid "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-game. For more explanation, see the section on Replays below."
-msgstr ""
+msgstr "- pošlete nám komprimovaný (zip, gzip, bzip2) záznam, pokud objevíte chybu ve hře. Pro více informací si přečtěte sekci o záznamech níže."
 
 #: ../../txts/README:104
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
@@ -289,19 +287,19 @@ msgstr "- pošlete nám komprimovaný (zip, gzip, bzip2) záznam sezení, pokud 
 
 #: ../../txts/README:109
 msgid "Replays</p>"
-msgstr ""
+msgstr "Přehrávání</p>"
 
 #: ../../txts/README:112
 msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands zaznamená každou hru do dvou souborů. Jeden má příponu a .wrpl.wgf a obsahuje výchozí uloženou hru. Druhý soubor má pouze přílohu .wrpl a obsahuje všechny povely vydané všemi hráči, jako např. postavení cesty nebo útok na nepřítele. Zbytek názvu určuje počáteční čas hry."
 
 #: ../../txts/README:114
 msgid "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
-msgstr ""
+msgstr "Použitím volby Přehrávání v hlavní nabídce bude přesně rekonstruována dříve odehraná hra, aby bylo možné ji znovu sledovat. Přesto i malá změna v datových souborech nebo programu Widelands může způsobit, že záznam nebude kompatibilní nebo bude mít chybnou synchronizaci. Toto je obdobné jaku u síťových her, kdy dochází k desynchronizaci, pokud má jeden z hráčů jinou verzi hry než ostatní."
 
 #: ../../txts/README:116
 msgid "Replays are a very useful tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
-msgstr ""
+msgstr "Záznamy jsou velmi užitečný nástroj pro odhalování chyb v logice herního kódu, takže žádáme o připojení záznamu ke každé nahlášené chybě. Záznamy jsou soubory uložené v adresáři ~/.widelands/replays vašeho home na Linuxu, nebo ve složce replays ve vaší instalaci Widelands na Windows."
 
 #: ../../txts/README:120
 msgid "Creating a Session Record</p>"
@@ -333,147 +331,148 @@ msgstr "Vývoj"
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Vývojový tým Widelands"
 
 #: ../../txts/developers:9
 msgid "Chieftain"
-msgstr ""
+msgstr "Náčelník"
 
 #: ../../txts/developers:15
 msgid "Elders"
-msgstr ""
+msgstr "Rada starších"
 
 #: ../../txts/developers:19
 msgid "Graphics"
-msgstr ""
+msgstr "Grafika"
 
-#: ../../txts/developers:22 ../../txts/developers:34
+#: ../../txts/developers:22
+#: ../../txts/developers:34
 msgid "vacant"
-msgstr ""
+msgstr "volné"
 
 #: ../../txts/developers:26
 msgid "Homepage"
-msgstr ""
+msgstr "Domovská stránka"
 
 #: ../../txts/developers:31
 msgid "Sound"
-msgstr ""
+msgstr "Zvuk"
 
 #: ../../txts/developers:38
 msgid "Translation"
-msgstr ""
+msgstr "Překlad"
 
 #: ../../txts/developers:46
 msgid "Coders"
-msgstr ""
+msgstr "Programátoři"
 
 #: ../../txts/developers:68
 msgid "Graphicians"
-msgstr ""
+msgstr "Grafici"
 
 #: ../../txts/developers:90
 msgid "Musicians"
-msgstr ""
+msgstr "Hudebníci"
 
 #: ../../txts/developers:97
 msgid "Sound Effects"
-msgstr ""
+msgstr "Zvukové efekty"
 
 #: ../../txts/developers:103
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Mapy a mise"
 
 #: ../../txts/developers:112
 msgid "Campaign Story"
-msgstr ""
+msgstr "Kampaně"
 
 #: ../../txts/developers:115
 msgid "Barbarian"
-msgstr ""
+msgstr "Barbaři"
 
 #: ../../txts/developers:119
 msgid "Empire"
-msgstr ""
+msgstr "Císařství"
 
 #: ../../txts/developers:125
 msgid "Translators"
-msgstr ""
+msgstr "Překladatelé"
 
 #: ../../txts/developers:129
 msgid "Czech"
-msgstr ""
+msgstr "Čeština"
 
 #: ../../txts/developers:135
 msgid "Dutch"
-msgstr ""
+msgstr "Holandština"
 
 #: ../../txts/developers:141
 msgid "Finnish"
-msgstr ""
+msgstr "Finština"
 
 #: ../../txts/developers:146
 msgid "French"
-msgstr ""
+msgstr "Francouzština"
 
 #: ../../txts/developers:152
 msgid "Galician"
-msgstr ""
+msgstr "Galicijština"
 
 #: ../../txts/developers:157
 msgid "German"
-msgstr ""
+msgstr "Němčina"
 
 #: ../../txts/developers:165
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebrejština"
 
 #: ../../txts/developers:170
 msgid "Hungarian"
-msgstr ""
+msgstr "Maďarština"
 
 #: ../../txts/developers:175
 msgid "Polish"
-msgstr ""
+msgstr "Polština"
 
 #: ../../txts/developers:181
 msgid "Russian"
-msgstr ""
+msgstr "Ruština"
 
 #: ../../txts/developers:186
 msgid "Spanish"
-msgstr ""
+msgstr "Španělština"
 
 #: ../../txts/developers:191
 msgid "Slovak"
-msgstr ""
+msgstr "Slovenština"
 
 #: ../../txts/developers:196
 msgid "Swedish"
-msgstr ""
+msgstr "Švédština"
 
 #: ../../txts/developers:204
 msgid "Packagers"
-msgstr ""
+msgstr "Baliči"
 
 #: ../../txts/developers:208
 msgid "Linux Distributions"
-msgstr ""
+msgstr "Linuxové distribuce"
 
 #: ../../txts/developers:219
 msgid "Other Unix Distributions"
-msgstr ""
+msgstr "Další linuxové distribuce"
 
 #: ../../txts/developers:228
 msgid "Non Unix Distributions"
-msgstr ""
+msgstr "Nelinuxové distribuce"
 
 #: ../../txts/developers:237
 msgid "Wiki and Enduser-Documentation"
-msgstr ""
+msgstr "Wiki a uživatelská dokumentace"
 
 #: ../../txts/developers:248
 msgid "Other"
-msgstr ""
+msgstr "Další"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
@@ -483,22 +482,22 @@ msgstr "Soubor README k Editoru Widelands"
 msgid "README for the Editor"
 msgstr "Soubor README k Editoru"
 
-#: ../../txts/editor_readme:7 ../../txts/README:9
+#: ../../txts/editor_readme:7
+#: ../../txts/README:9
 msgid "Introduction"
 msgstr "Úvod"
 
 #: ../../txts/editor_readme:10
-#, fuzzy
 msgid "This Editor is intended for players who'd like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
 msgstr "Tento Editor je určen pro hráče, kteří si chtějí navrhnout svoje vlastní mapy pro Widelands.<br>Jak můžete vidět, na Editoru se stále usilovně pracuje. Jak bude docházet k jeho vylepšování, bude se rozrůstat i tento text. Pravděpodobně bude také obsahovat také ukázku použití."
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
-msgstr ""
+msgstr "Prosím podívejte se do uživatelského manuálu v naší wiki na: "
 
 #: ../../txts/editor_readme:14
 msgid "Those pages might be more complete and up to date than this file. And there you further can find a short tutorial about building a map."
-msgstr ""
+msgstr "Stránky mohou být podrobnější a aktuálnější než tento soubor. A také tam lze najít krátký návod jak vytvořit mapu."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -517,7 +516,6 @@ msgid "E        Toggles event menu"
 msgstr "E        Přepíná nabídku událostí"
 
 #: ../../txts/editor_readme:27
-#, fuzzy
 msgid "F        Toggles fullscreen"
 msgstr "F        Přepíná celoobrazovkový režim"
 
@@ -539,7 +537,7 @@ msgstr "T        Přepíná nabídku nástrojů"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr ""
+msgstr "I        Aktivuje informační nástroj"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -563,76 +561,77 @@ msgstr "Alt      Při podržení vybere druhý alternativní nástroj"
 
 #: ../../txts/editortips:13
 msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
-msgstr ""
+msgstr "Obecnou nápovědu k editoru, stejně jako krátké návody můžete najít v naší wiki na www.widelands.org"
 
 #: ../../txts/editortips:17
 msgid "You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
-msgstr ""
+msgstr "Pokud držíte CRTL, můžete označit více přírodních objektů (bobů). Pokud potom kliknete na mapu, bude na mapu umístěn jeden náhodně vybraný objekt z označených."
 
 #: ../../txts/editortips:21
 msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
-msgstr ""
+msgstr "Stejně jako přírodní objekty (boby), můžete pomocí CTRL+ kliknutí myši označit více zvířat nebo pozemních textur."
 
 #: ../../txts/editortips:25
 msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
-msgstr ""
+msgstr "Držení klávesy SHIFT aktivuje první alternativní nástroj. Tento nástroj je ve většině případů úplně jiný, než základní nástroj (např. odstranění objektu, místo jeho umístění)."
 
 #: ../../txts/editortips:29
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Držení klávesy ALT aktivuje druhý alternativní nástroj (pokud existuje)."
 
 #: ../../txts/editortips:33
 msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
-msgstr ""
+msgstr "Pomocí numerických kláves (1 - 0) můžeš přímo nastavit velikost vybraného území pod kurzorem myši."
 
 #: ../../txts/editortips:37
 msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
-msgstr ""
+msgstr "Klávesa SPACE funguje jako v normální hře. Zapíná a vypíná nápovědu k výstavbě."
 
 #: ../../txts/editortips:41
 msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
-msgstr ""
+msgstr "Nástroje pro edálosti, spouště, řetězce událostí a úkoly stále podléhají masivnímu vývoji. Pokud máte otázky, nebo jste objevil(a) problém, obraťte se na nás na fóru www.widelands.org"
 
 #: ../../txts/editortips:45
 msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
-msgstr ""
+msgstr "Nápovědu ke všem spouštím a událostem najdete v naší wiki na widelands.org."
 
 #: ../../txts/gametips:13
 msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Některé budovy, jako například vinohrad, mají velmi malou pracovní oblast. Pokud je budova obklopena stromy nebo cestami, výroba se zastaví."
 
 #: ../../txts/gametips:17
 msgid "Keep an eye on fisherman's huts; after fish resources are exhausted in the working area, production will stop."
-msgstr ""
+msgstr "Sleduj produktivitu rybáře; poté, co jsou ryby v oblasti vyčerpány, produkce se zastaví."
 
 #: ../../txts/gametips:21
 msgid "The building process will only start after a road is built to the construction site."
-msgstr ""
+msgstr "Stavba začne teprve poté, až bude ke staveništi postavena cesta."
 
 #: ../../txts/gametips:25
 msgid "Be sure to send a geologist to survey sites before building a well or a mine."
-msgstr ""
+msgstr "Předtím, než postavíš důl nebo studnu, určitě pošli na vyhlédnuté místo geologa."
 
 #: ../../txts/gametips:29
 msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Barracks, etc."
-msgstr ""
+msgstr "Své území můžeš rozšiřovat stavěním vojenských budov - hlásek, pevností, kasáren, atd."
 
 #: ../../txts/gametips:33
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Horníci pracují pouze pokud jsou zásobováni jídlem."
 
 #: ../../txts/gametips:37
 msgid "Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares."
-msgstr ""
+msgstr "Rozděl svoje cesty pomocí vlajek na kratší úseky. Zrychlí to přepravu zboží."
 
 #: ../../txts/gametips:41
 msgid "Always build a forester and a ranger's hut, so you will not run out of trunks and food."
-msgstr ""
+msgstr "Vždy postav chatu lesníka a lovce, abys nevyčerpal zásobu klád a jídla."
 
 #: ../../txts/gametips:45
 msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
-msgstr ""
+msgstr "Máte další otázky? Naše FAQ, wiki a samozřejmě komunitní forum najdete na www.widelands.org"
 
 #: ../../txts/gametips:49
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
-msgstr ""
+msgstr "Pro nastavení přepravy specifického zboží lze použít tlačítka priority v okně výstavby."
+

@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-10-26 18:45+0100\n"
-"PO-Revision-Date: 2006-02-08 16:33+0100\n"
-"Last-Translator: Prometheus <mmatej@yahoo.com>\n"
+"PO-Revision-Date: 2008-11-13 02:11+0100\n"
+"Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,9 +17,10 @@ msgstr ""
 "X-Poedit-Language: czech\n"
 "X-Poedit-Country: czech republic\n"
 
-#: ../../src/ware_statistics_menu.cc:355 ../../src/game_main_menu.cc:54
+#: ../../src/ware_statistics_menu.cc:355
+#: ../../src/game_main_menu.cc:54
 msgid "Ware Statistics"
-msgstr "Bojová statistika"
+msgstr "Statistika zboží"
 
 #: ../../src/ware_statistics_menu.cc:427
 #: ../../src/general_statistics_menu.cc:224
@@ -44,7 +45,7 @@ msgstr "2 h"
 #: ../../src/ware_statistics_menu.cc:465
 #: ../../src/general_statistics_menu.cc:262
 msgid "Help"
-msgstr ""
+msgstr "Nápověda"
 
 #: ../../src/ware_statistics_menu.cc:474
 #: ../../src/general_statistics_menu.cc:271
@@ -63,51 +64,46 @@ msgstr "16 h"
 
 #: ../../src/interactive_spectator.cc:44
 #: ../../src/editor/editorinteractive.cc:63
-#, fuzzy
 msgid "Menu"
-msgstr "Chat menu"
+msgstr "Nabídka"
 
-#: ../../src/interactive_spectator.cc:45 ../../src/interactive_player.cc:162
+#: ../../src/interactive_spectator.cc:45
+#: ../../src/interactive_player.cc:162
 #: ../../src/editor/editorinteractive.cc:72
-#, fuzzy
 msgid "Minimap"
-msgstr "Minimum"
+msgstr "Minimapa"
 
 #: ../../src/interactive_player.cc:154
-#, fuzzy
 msgid "Chat"
-msgstr "Chat menu"
+msgstr "Chat"
 
-#: ../../src/interactive_player.cc:156 ../../src/game_options_menu.cc:48
+#: ../../src/interactive_player.cc:156
+#: ../../src/game_options_menu.cc:48
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:51
 msgid "Options"
 msgstr "Volby"
 
 #: ../../src/interactive_player.cc:158
-#, fuzzy
 msgid "Statistics"
-msgstr "Bojová statistika"
+msgstr "Statistiky"
 
 #: ../../src/interactive_player.cc:160
 #: ../../src/editor/editorinteractive.cc:87
-#, fuzzy
 msgid "Objectives"
-msgstr "Menu cílů"
+msgstr "Cíle"
 
 #: ../../src/interactive_player.cc:164
 #: ../../src/editor/editorinteractive.cc:75
-#, fuzzy
 msgid "Buildhelp"
-msgstr "Verze"
+msgstr "Nápověda k výstavbě"
 
 #: ../../src/interactive_player.cc:170
-#, fuzzy
 msgid "Resource information"
-msgstr "Volby nástroje zdrojů"
+msgstr "Informace o zdrojích"
 
 #: ../../src/interactive_player.cc:173
 msgid "Ware help"
-msgstr ""
+msgstr "Nápověda ke zboží"
 
 #: ../../src/wlapplication.cc:852
 msgid ""
@@ -115,28 +111,33 @@ msgid ""
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Omlouváme se, na platformě WIN32 není povoleno ladění ve dvou instancích.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:855
 msgid "--double is disabled. This is not a debug build!"
-msgstr ""
+msgstr "--double je zakázáno. Toto není ladicí build!"
 
 #: ../../src/wlapplication.cc:945
-#, fuzzy
 msgid "This is Widelands-"
-msgstr "Widelands"
+msgstr "Toto jsou Widelands-"
 
 #: ../../src/wlapplication.cc:946
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Použití: widelands <přepínač0>=<hodnota0> ... <přepínačN>=<hodnotaN>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:947
-#, fuzzy
 msgid ""
 "Options:\n"
 "\n"
-msgstr "Volby"
+msgstr ""
+"Volby:\n"
+"\n"
 
 #: ../../src/wlapplication.cc:951
 msgid ""
@@ -149,6 +150,14 @@ msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL\n"
 msgstr ""
+" --<config-entry-name>=hodnota přepíše hodnotu v konfig. souboru\n"
+"\n"
+" --record=FILENAME    Zaznamená všechny události do souboru pro\n"
+"                      pozdější přehrání\n"
+" --playback=FILENAME  Přehraje záznam FIELNAME (viz. --record)\n"
+"\n"
+" --coredump=[yes|no]  Vygeneruje core dump při segfaults namísto\n"
+"                      použití SDL\n"
 
 #: ../../src/wlapplication.cc:960
 msgid ""
@@ -163,6 +172,16 @@ msgid ""
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 "\n"
 msgstr ""
+" --nosound            Spustí hru bez zvuku.\n"
+" --nozip              Neukládat jako binární archivy zip.\n"
+"\n"
+" --editor             Spustí přímo editor Widelands.\n"
+"                      Můžete přidat =FILENAME aby se do editoru\n"
+"                      přímo nahrála mapa FILENAME.\n"
+" --scenario=FILENAME  Přímo spustí mapu FILENAME jako mapu\n"
+"                      scénáře.\n"
+" --loadgame=FILENAME  Přímo nahraje uloženou hru FILENAME.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:973
 msgid ""
@@ -170,10 +189,13 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
+" --double             Spustí hru dvakrát (pro testování lokální\n"
+"                      sítě)\n"
+"\n"
 
 #: ../../src/wlapplication.cc:977
 msgid " --help               Show this help\n"
-msgstr ""
+msgstr " --help               Zobrazí tuto nápovědu\n"
 
 #: ../../src/wlapplication.cc:981
 msgid ""
@@ -183,10 +205,15 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
+"Chyby? Návrhy? Podívejte se na stránky projektu:\n"
+"        http://www.sourceforge.net/projects/widelands\n"
+"\n"
+"Doufáme, že se vám tato hra líbí!\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1121
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "Neočekávaná chyba v průběhu hry"
 
 #: ../../src/wlapplication.cc:1125
 msgid ""
@@ -194,6 +221,9 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build "
 msgstr ""
+"\n"
+"\n"
+"Prosím reportujte nám tento problém, abychom mohli Widelands dále zlepšovat. Další podrobnosti najdete ve standardním výstupu (stdout.txt na Windows). Používáte verzi "
 
 #: ../../src/wlapplication.cc:1131
 msgid ""
@@ -201,176 +231,184 @@ msgid ""
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
+". Prosím uveďte tuto informaci v hlášení chyby.\n"
+"\n"
+"Widelands se pokouší uložit hru, pokud při hře dojde k chybě. Často - ale bohužel ne vždy - je možné uloženou hru nahrát a pokračovat ve hraní.\n"
 
-#: ../../src/wlapplication.cc:1308 ../../src/nethost.cc:699
+#: ../../src/wlapplication.cc:1308
+#: ../../src/nethost.cc:699
 msgid "Player"
 msgstr "Hráč"
 
-#: ../../src/wlapplication.cc:1383 ../../src/nethost.cc:300
+#: ../../src/wlapplication.cc:1383
+#: ../../src/nethost.cc:300
 #: ../../src/netclient.cc:137
 msgid "Preparing game"
-msgstr ""
+msgstr "Připravuji hru"
 
 #: ../../src/wlapplication.cc:1516
 msgid "End of replay"
-msgstr ""
+msgstr "Konec záznamu"
 
 #: ../../src/wlapplication.cc:1518
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
-msgstr ""
+msgstr "Byl dosažen konec záznamu a hra byla pozastavena. Pokud chcete, můžete hru odpauzovat a pokračovat ve sledování."
 
-#: ../../src/wlapplication.cc:1570 ../../src/game.cc:366 ../../src/game.cc:403
+#: ../../src/wlapplication.cc:1570
+#: ../../src/game.cc:366
+#: ../../src/game.cc:403
 msgid "Loading..."
-msgstr ""
+msgstr "Nahrávání..."
 
 #: ../../src/nethost.cc:231
-#, fuzzy
 msgid "Server has left the game."
-msgstr "Uživatel %s opustil místnost %s !\n"
+msgstr "Server opustil hru."
 
 #: ../../src/nethost.cc:288
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "Hra začala hned poté, co jste se snažili připojit."
 
 #: ../../src/nethost.cc:336
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "Server havaroval a provedl nouzové uložení hry."
 
 #: ../../src/nethost.cc:464
 msgid "Host has changed to a map that supports fewer players."
-msgstr ""
+msgstr "Hostitel změnil mapu na jinou, která podporuje méně hráčů."
 
 #: ../../src/nethost.cc:514
 msgid "You were kicked by the host."
-msgstr ""
+msgstr "Byl jsi odpojen hostitelem."
 
-#: ../../src/nethost.cc:640 ../../src/playerdescrgroup.cc:125
+#: ../../src/nethost.cc:640
+#: ../../src/playerdescrgroup.cc:125
 msgid "Computer"
 msgstr "Počítač"
 
 #: ../../src/nethost.cc:685
 msgid "There are no open player slots left."
-msgstr ""
+msgstr "Nejsou žádné volné sloty pro hráče."
 
 #: ../../src/nethost.cc:765
 msgid "Client reports time to host that is running backwards."
-msgstr ""
+msgstr "Klient ohlásil hostiteli čas, který běží pozpátku."
 
 #: ../../src/nethost.cc:767
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr ""
+msgstr "Klient simuluje hru déle, než po čas povolený hostitelem."
 
 #: ../../src/nethost.cc:770
 msgid "Client did not submit sync report in time."
-msgstr ""
+msgstr "Klient neposlal synchronizační zprávu v limitu."
 
 #: ../../src/nethost.cc:939
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "Mezi klientem a hostitelel došlo k desynchronizaci."
 
 #: ../../src/nethost.cc:978
 msgid "The game has already started."
-msgstr ""
+msgstr "Hra již začala."
 
 #: ../../src/nethost.cc:989
 msgid "Connection to client lost."
-msgstr ""
+msgstr "Připojení ke klientovi bylo ztraceno."
 
 #: ../../src/nethost.cc:1003
 msgid "Client sent malformed commands: "
-msgstr ""
+msgstr "Klient poslal chybné příkazy: "
 
 #: ../../src/nethost.cc:1036
 msgid "Game is running already, but client has not connected fully"
-msgstr ""
+msgstr "Hra již běží, ale klient není zcela připojen"
 
 #: ../../src/nethost.cc:1040
 #, c-format
 msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
-msgstr ""
+msgstr "První příkaz poslaný klientem je %u namísto HELLO. Klient pravděpodobně používá nekompatibilní verzi."
 
 #: ../../src/nethost.cc:1045
 msgid "Server uses a different protocol version."
-msgstr ""
+msgstr "Server používá odlišnou verzi protokolu."
 
 #: ../../src/nethost.cc:1070
 msgid "Client sent TIME command even though game is not running."
-msgstr ""
+msgstr "Klient poslal příkaz TIME přestože hra neběží."
 
 #: ../../src/nethost.cc:1077
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
-msgstr ""
+msgstr "Klient poslal příkaz PLAYERCOMMAND přestože neběží žádná hra."
 
 #: ../../src/nethost.cc:1086
 msgid "Client tries to sent a playercommand for a different player."
-msgstr ""
+msgstr "Klient se pokouší odeslat příkaz za jiného hráče."
 
 #: ../../src/nethost.cc:1093
 msgid "Client sent unexpected synchronization report."
-msgstr ""
+msgstr "Klient poslal neočekávanou synchronizační zprávu."
 
 #: ../../src/nethost.cc:1118
 #, c-format
 msgid "Client sent unknown command number %u"
-msgstr ""
+msgstr "Klient poslal neznámý příkaz číslo %u"
 
 #: ../../src/netclient.cc:102
 msgid "Client has left the game."
-msgstr ""
+msgstr "Klient opustil hru."
 
 #: ../../src/netclient.cc:165
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "Klient havaroval a provedl nouzové uložení hry."
 
 #: ../../src/netclient.cc:313
 msgid "Server sent a player update for a player that does not exist."
-msgstr ""
+msgstr "Server poslal aktualizaci pro hráče který neexistuje."
 
 #: ../../src/netclient.cc:383
 #, c-format
 msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
-msgstr ""
+msgstr "Byl očekáván příkaz HELLO od serveru, ale přišel příkaz číslo %u. Možná na serveru běží rozdílná verze Widelands?"
 
 #: ../../src/netclient.cc:389
 msgid "Server uses a different protocol version"
-msgstr ""
+msgstr "Server používá jinou verzi protokolu"
 
 #: ../../src/netclient.cc:432
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
+msgstr "Přišel neočekávaný příkaz LAUNCH od serveru."
 
 #: ../../src/netclient.cc:449
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
-msgstr ""
+msgstr "Server poslal příkaz PLAYERCOMMAND přestože neběží žádná hra."
 
 #: ../../src/netclient.cc:460
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
+msgstr "Server poslal SYNCREQUEST přestože neběží žádná hra."
 
 #: ../../src/netclient.cc:481
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
-msgstr ""
+msgstr "Server poslal neznámý příkaz (příkaz číslo %u)"
 
 #: ../../src/netclient.cc:510
 msgid "Server sent malformed commands: "
-msgstr ""
+msgstr "Server poslal chybné příkazy: "
 
 #: ../../src/netclient.cc:540
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr "Hra bude automaticky uložena."
 
-#: ../../src/watchwindow.cc:108 ../../src/fieldaction.cc:448
+#: ../../src/watchwindow.cc:108
+#: ../../src/fieldaction.cc:448
 msgid "Watch"
 msgstr "Sledování"
 
 #: ../../src/watchwindow.cc:122
 msgid "Follow"
-msgstr ""
+msgstr "Následovat"
 
 #: ../../src/watchwindow.cc:129
 msgid "Center mainview on this"
-msgstr ""
+msgstr "Vycentrovat hlavní pohled"
 
 #: ../../src/watchwindow.cc:146
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:38
@@ -379,40 +417,38 @@ msgstr "Zavřít"
 
 #: ../../src/game.cc:245
 msgid "Preloading a map"
-msgstr ""
+msgstr "Přednahrání mapy"
 
 #: ../../src/game.cc:256
 msgid "Loading a world"
-msgstr ""
+msgstr "Nahrávání světa"
 
 #: ../../src/game.cc:262
-#, fuzzy, c-format
+#, c-format
 msgid "Adding player %u"
-msgstr "Hráč"
+msgstr "Přidání hráče %u"
 
 #: ../../src/game.cc:271
-#, fuzzy
 msgid "Loading a map"
-msgstr "Nahraj mapu"
+msgstr "Nahrávání mapy"
 
-#: ../../src/game.cc:305 ../../src/game.cc:352 ../../src/game.cc:384
-#, fuzzy
+#: ../../src/game.cc:305
+#: ../../src/game.cc:352
+#: ../../src/game.cc:384
 msgid "Preloading map"
-msgstr "Nahraj mapu"
+msgstr "Přednahrání mapy"
 
 #: ../../src/game.cc:319
 msgid "Configuring players"
-msgstr ""
+msgstr "Konfigurace hráčů"
 
 #: ../../src/game.cc:332
-#, fuzzy
 msgid "Loading map"
-msgstr "Nahraj mapu"
+msgstr "Nahrávání mapy"
 
 #: ../../src/game.cc:458
-#, fuzzy
 msgid "Creating player infrastructure"
-msgstr "Vytvoř adresář"
+msgstr "Vytváření infrastructury hráčů"
 
 #: ../../src/game_objectives_menu.cc:36
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:160
@@ -423,9 +459,10 @@ msgstr "Menu cílů"
 msgid "Player 1"
 msgstr "Hráč 1"
 
-#: ../../src/building_statistics_menu.cc:80 ../../src/game_main_menu.cc:61
+#: ../../src/building_statistics_menu.cc:80
+#: ../../src/game_main_menu.cc:61
 msgid "Building Statistics"
-msgstr "Statistika stavby"
+msgstr "Statistika budov"
 
 #: ../../src/building_statistics_menu.cc:90
 msgid "Total Productivity: "
@@ -443,7 +480,8 @@ msgstr "Ve výstavbě:"
 msgid "Jump to unproductive: "
 msgstr "Skok na neproduktivní:"
 
-#: ../../src/building_statistics_menu.cc:111 ../../src/building_ui.cc:1566
+#: ../../src/building_statistics_menu.cc:111
+#: ../../src/building_ui.cc:1566
 #: ../../src/building_ui.cc:1951
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:161
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
@@ -453,92 +491,90 @@ msgstr "Jméno"
 
 #: ../../src/building_statistics_menu.cc:112
 msgid "Size"
-msgstr "Velikost"
+msgstr "Vel."
 
 #: ../../src/building_statistics_menu.cc:113
 msgid "Prod"
-msgstr "Produkce"
+msgstr "Prod."
 
 #: ../../src/building_statistics_menu.cc:114
 msgid "Owned"
-msgstr "Vlastněno"
+msgstr "Vlastn."
 
 #: ../../src/building_statistics_menu.cc:115
 msgid "Build"
-msgstr "Verze"
+msgstr "Staví"
 
 #: ../../src/building_statistics_menu.cc:127
 #: ../../src/building_statistics_menu.cc:145
 #: ../../src/building_statistics_menu.cc:163
 msgid "Show previous"
-msgstr ""
+msgstr "Ukázat předchozí"
 
 #: ../../src/building_statistics_menu.cc:136
 #: ../../src/building_statistics_menu.cc:154
 #: ../../src/building_statistics_menu.cc:172
 msgid "Show next"
-msgstr ""
+msgstr "Ukázat následující"
 
-#: ../../src/waresdisplay.cc:42 ../../src/stock_menu.cc:32
+#: ../../src/waresdisplay.cc:42
+#: ../../src/stock_menu.cc:32
 #: ../../src/game_main_menu.cc:68
 msgid "Stock"
-msgstr "Zásoba"
+msgstr "Zásoby"
 
 #: ../../src/minimap.cc:135
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:69
 msgid "Map"
 msgstr "Mapa"
 
-#: ../../src/minimap.cc:144 ../../src/editor/ui_menus/editor_tool_menu.cc:66
-#, fuzzy
+#: ../../src/minimap.cc:144
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Terrain"
-msgstr "Výběr terénu"
+msgstr "Terén"
 
 #: ../../src/minimap.cc:151
-#, fuzzy
 msgid "Owner"
-msgstr "Vlastněno"
+msgstr "Vlastník"
 
 #: ../../src/minimap.cc:158
-#, fuzzy
 msgid "Flags"
-msgstr "vlajka"
+msgstr "Vlajky"
 
 #: ../../src/minimap.cc:165
-#, fuzzy
 msgid "Roads"
-msgstr "Připraven"
+msgstr "Cesty"
 
-#: ../../src/minimap.cc:172 ../../src/general_statistics_menu.cc:158
-#, fuzzy
+#: ../../src/minimap.cc:172
+#: ../../src/general_statistics_menu.cc:158
 msgid "Buildings"
-msgstr "Budova:"
+msgstr "Budovy"
 
-#: ../../src/item_ware_descr.cc:40 ../../src/worker_descr.cc:122
+#: ../../src/item_ware_descr.cc:40
+#: ../../src/worker_descr.cc:122
 msgid "Doh... someone forgot the help text!"
-msgstr "Zatr... někdo tu zapoměl na help!"
+msgstr "Zatr... někdo tu zapomněl na help!"
 
 #: ../../src/stock_menu.cc:71
 msgid "Show wares"
-msgstr ""
+msgstr "Ukázat zboží"
 
 #: ../../src/stock_menu.cc:76
 msgid "Show workers"
-msgstr ""
+msgstr "Ukázat pracovníky"
 
 #: ../../src/productionsite.cc:199
 msgid "(not occupied)"
-msgstr "(volný)"
+msgstr "(neobydleno)"
 
 #: ../../src/productionsite.cc:204
 #, c-format
 msgid "Waiting for %u workers!"
-msgstr ""
+msgstr "Čekám na %u pracovníků!"
 
 #: ../../src/productionsite.cc:212
-#, fuzzy
 msgid "(stopped)"
-msgstr "(volný)"
+msgstr "(zastaveno)"
 
 #: ../../src/productionsite.cc:257
 msgid "UP"
@@ -551,12 +587,12 @@ msgstr "Dolů"
 #: ../../src/graphic.cc:663
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr ""
+msgstr "Nahrávání animací: %d%% dokončeno"
 
-#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:82
-#, fuzzy
+#: ../../src/game_options_sound_menu.cc:27
+#: ../../src/game_options_menu.cc:82
 msgid "Sound Options"
-msgstr "Volby"
+msgstr "Volby zvuku"
 
 #: ../../src/game_options_sound_menu.cc:32
 msgid "Ingame Music"
@@ -567,39 +603,37 @@ msgid "Sound FX"
 msgstr "Zvuk"
 
 #: ../../src/game_options_sound_menu.cc:42
-#, fuzzy
 msgid "Ingame Music Volume"
-msgstr "Hudba"
+msgstr "Hlasitost hudby"
 
 #: ../../src/game_options_sound_menu.cc:56
-#, fuzzy
 msgid "Sound FX Volume"
-msgstr "Zvuk"
+msgstr "Hlasitost zvuku"
 
 #: ../../src/encyclopedia_window.cc:59
 msgid "Tribe ware encyclopedia"
-msgstr ""
+msgstr "Encyklopedie zboží klanu"
 
 #: ../../src/encyclopedia_window.cc:77
 msgid "Consumed ware type(s)"
-msgstr ""
+msgstr "Spotřebované typy zboží"
 
 #: ../../src/encyclopedia_window.cc:78
 msgid "Quantity"
-msgstr ""
+msgstr "Množství"
 
 #: ../../src/encyclopedia_window.cc:193
-#, fuzzy
 msgid " or "
-msgstr "přístav"
+msgstr "nebo"
 
-#: ../../src/game_main_menu_save_game.cc:62 ../../src/game_options_menu.cc:91
+#: ../../src/game_main_menu_save_game.cc:62
+#: ../../src/game_options_menu.cc:91
 msgid "Save Game"
 msgstr "Uložit hru"
 
 #: ../../src/game_main_menu_save_game.cc:66
 msgid "Map Name: "
-msgstr "Jméno many:"
+msgstr "Jméno mapy:"
 
 #: ../../src/game_main_menu_save_game.cc:70
 msgid "Game Time: "
@@ -642,7 +676,7 @@ msgstr "Zrušit"
 #: ../../src/game_main_menu_save_game.cc:139
 #, c-format
 msgid "%02ud%02uh%02u'%u\"%03u"
-msgstr ""
+msgstr "%02ud%02uh%02u'%u\"%03u"
 
 #: ../../src/game_main_menu_save_game.cc:200
 msgid ""
@@ -664,32 +698,32 @@ msgstr "Chyba při ukládání hry!!"
 #: ../../src/game_main_menu_save_game.cc:216
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:356
 msgid "A File with the name "
-msgstr "Soubor se jménem"
+msgstr "Soubor se jménem "
 
 #: ../../src/game_main_menu_save_game.cc:220
 msgid " already exists. Overwrite?"
-msgstr "už existuje. Přepsat?"
+msgstr " už existuje. Přepsat?"
 
-#: ../../src/militarysite.cc:79 ../../src/warehouse.cc:309
-#, fuzzy
+#: ../../src/militarysite.cc:79
+#: ../../src/warehouse.cc:309
 msgid " conquer"
-msgstr "Oblast výbojů"
+msgstr " dobýt"
 
 #: ../../src/militarysite.cc:141
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u voják"
+msgstr[1] "%u vojáci"
+msgstr[2] "%u vojáků"
 
 #: ../../src/militarysite.cc:146
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u(+%u) voják"
+msgstr[1] "%u(+%u) vojáci"
+msgstr[2] "%u(+%u) vojáků"
 
 #: ../../src/s2map.cc:226
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -715,7 +749,7 @@ msgstr "Nepracuje"
 #: ../../src/interactive_base.cc:196
 #, c-format
 msgid "%u.%ux"
-msgstr ""
+msgstr "%u.%ux"
 
 #: ../../src/interactive_base.cc:199
 msgid "PAUSE"
@@ -724,11 +758,11 @@ msgstr "Pauza"
 #: ../../src/interactive_base.cc:219
 #, c-format
 msgid "%s (%s)"
-msgstr ""
+msgstr "%s (%s)"
 
 #: ../../src/interactive_base.cc:224
 msgid "NO GAME CONTROLLER"
-msgstr ""
+msgstr "ŽÁDNÝ OVLADAČ HRY"
 
 #: ../../src/game_options_menu.cc:58
 msgid "README"
@@ -748,61 +782,60 @@ msgstr "Autoři"
 msgid "Exit Game"
 msgstr "Opusť hru"
 
-#: ../../src/editor_game_base.cc:573 ../../src/editor/editorinteractive.cc:134
+#: ../../src/editor_game_base.cc:573
+#: ../../src/editor/editorinteractive.cc:134
 msgid "Loading world data"
-msgstr ""
+msgstr "Nahrávání dat světa"
 
 #: ../../src/editor_game_base.cc:582
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "Nahrávání kmene: %s"
 
-#: ../../src/general_statistics_menu.cc:52 ../../src/game_main_menu.cc:47
+#: ../../src/general_statistics_menu.cc:52
+#: ../../src/game_main_menu.cc:47
 msgid "General Statistics"
 msgstr "Obecná statistika"
 
 #: ../../src/general_statistics_menu.cc:146
 msgid "Land"
-msgstr ""
+msgstr "Země"
 
 #: ../../src/general_statistics_menu.cc:152
-#, fuzzy
 msgid "Workers"
-msgstr "Seznam pracovníků"
+msgstr "Pracovníci"
 
 #: ../../src/general_statistics_menu.cc:164
 msgid "Wares"
-msgstr ""
+msgstr "Zboží"
 
 #: ../../src/general_statistics_menu.cc:170
-#, fuzzy
 msgid "Productivity"
-msgstr "Celková produktivita:"
+msgstr "Produktivita"
 
 #: ../../src/general_statistics_menu.cc:176
 msgid "Casualties"
-msgstr ""
+msgstr "Ztráty"
 
 #: ../../src/general_statistics_menu.cc:182
 msgid "Kills"
-msgstr ""
+msgstr "Zabití"
 
 #: ../../src/general_statistics_menu.cc:188
-#, fuzzy
 msgid "Military buildings lost"
-msgstr "Povolené budovy"
+msgstr "Ztracené vojenské budovy"
 
 #: ../../src/general_statistics_menu.cc:194
 msgid "Military buildings defeated"
-msgstr ""
+msgstr "Dobyté vojenské budovy"
 
 #: ../../src/general_statistics_menu.cc:200
 msgid "Civilian buildings lost"
-msgstr ""
+msgstr "Ztracené civilní budovy"
 
 #: ../../src/general_statistics_menu.cc:206
 msgid "Military"
-msgstr ""
+msgstr "Armáda"
 
 #: ../../src/game_debug_ui.cc:271
 msgid "Debug Field"
@@ -811,7 +844,7 @@ msgstr "Opravné políčko"
 #: ../../src/game_debug_ui.cc:320
 #, c-format
 msgid "%i, %i - height: %u\n"
-msgstr ""
+msgstr "%i, %i - výška: %u\n"
 
 #: ../../src/building_ui.cc:165
 msgid "Destroy building?"
@@ -819,45 +852,43 @@ msgstr "Zničit budovu?"
 
 #: ../../src/building_ui.cc:179
 msgid "Do you really want to destroy this "
-msgstr "Chceš opravdu zničit tuhle"
+msgstr "Chceš opravdu zničit tuhle "
 
 #: ../../src/building_ui.cc:181
 msgid "?"
-msgstr ""
-
-#: ../../src/building_ui.cc:607 ../../src/events/event_message_box.cc:49
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
-msgid "Continue"
-msgstr "Pokračuj"
+msgstr "?"
 
 #: ../../src/building_ui.cc:607
-#, fuzzy
+#: ../../src/events/event_message_box.cc:49
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
+msgid "Continue"
+msgstr "Pokračovat"
+
+#: ../../src/building_ui.cc:607
 msgid "Stop"
-msgstr "Zásoba"
+msgstr "Zastavit"
 
 #: ../../src/building_ui.cc:630
 #, c-format
 msgid "Enhance to %s"
-msgstr ""
+msgstr "Vylepšit na %s"
 
 #: ../../src/building_ui.cc:649
-#, fuzzy
 msgid "Destroy"
-msgstr "Popis"
+msgstr "Zničit"
 
-#: ../../src/building_ui.cc:660 ../../src/building_ui.cc:767
-#, fuzzy
+#: ../../src/building_ui.cc:660
+#: ../../src/building_ui.cc:767
 msgid "Show workarea"
-msgstr "Seznam pracovníků"
+msgstr "Zobrazit pracovní oblast"
 
 #: ../../src/building_ui.cc:671
-#, fuzzy
 msgid "Debug"
-msgstr "Opravné políčko"
+msgstr "Ladění"
 
 #: ../../src/building_ui.cc:794
 msgid "Hide workarea"
-msgstr ""
+msgstr "Skrýt pracovní oblast"
 
 #: ../../src/building_ui.cc:1093
 msgid "Worker Listing"
@@ -865,61 +896,66 @@ msgstr "Seznam pracovníků"
 
 #: ../../src/building_ui.cc:1113
 msgid "Type: "
-msgstr "Typ:"
+msgstr "Typ: "
 
 #: ../../src/building_ui.cc:1120
 msgid "Experience: "
-msgstr "Zkušenosti:"
+msgstr "Zkušenosti: "
 
 #: ../../src/building_ui.cc:1127
 msgid "Trying to become: "
-msgstr "Může se stát:"
+msgstr "Může se stát: "
 
 #: ../../src/building_ui.cc:1373
 msgid "Highest priority"
-msgstr ""
+msgstr "Nejvyšší priorita"
 
 #: ../../src/building_ui.cc:1382
 msgid "Normal priority"
-msgstr ""
+msgstr "Normální priorita"
 
 #: ../../src/building_ui.cc:1391
 msgid "Lowest priority"
-msgstr ""
+msgstr "Nejnižší priorita"
 
 #: ../../src/building_ui.cc:1425
-#, fuzzy
 msgid "Show worker listing"
 msgstr "Seznam pracovníků"
 
-#: ../../src/building_ui.cc:1551 ../../src/building_ui.cc:1980
+#: ../../src/building_ui.cc:1551
+#: ../../src/building_ui.cc:1980
 msgid "Capacity"
 msgstr "Kapacita"
 
-#: ../../src/building_ui.cc:1567 ../../src/building_ui.cc:1952
+#: ../../src/building_ui.cc:1567
+#: ../../src/building_ui.cc:1952
 msgid "HP"
 msgstr "HP"
 
-#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1953
+#: ../../src/building_ui.cc:1568
+#: ../../src/building_ui.cc:1953
 msgid "AT"
 msgstr "AT"
 
-#: ../../src/building_ui.cc:1569 ../../src/building_ui.cc:1954
+#: ../../src/building_ui.cc:1569
+#: ../../src/building_ui.cc:1954
 msgid "DE"
 msgstr "DE"
 
-#: ../../src/building_ui.cc:1570 ../../src/building_ui.cc:1955
+#: ../../src/building_ui.cc:1570
+#: ../../src/building_ui.cc:1955
 msgid "EV"
 msgstr "EV"
 
-#: ../../src/building_ui.cc:1571 ../../src/building_ui.cc:1956
+#: ../../src/building_ui.cc:1571
+#: ../../src/building_ui.cc:1956
 msgid "Level"
 msgstr "Úroveň"
 
 #: ../../src/building_ui.cc:1673
-#, fuzzy, c-format
+#, c-format
 msgid "Capacity: %2d"
-msgstr "Kapacita"
+msgstr "Kapacita: %2d"
 
 #: ../../src/building_ui.cc:1738
 msgid "Training Options"
@@ -927,18 +963,18 @@ msgstr "Možnosti tréninku"
 
 #: ../../src/building_ui.cc:1762
 msgid "Training mode : "
-msgstr "Tréninkový mód:"
+msgstr "Tréninkový mód: "
 
 #: ../../src/building_ui.cc:1763
 msgid "Balanced"
 msgstr "Vyrovnaný"
 
 #: ../../src/building_ui.cc:1778
-#, fuzzy
 msgid "Hit points"
 msgstr "HP - Zdraví"
 
-#: ../../src/building_ui.cc:1780 ../../src/fieldaction.cc:494
+#: ../../src/building_ui.cc:1780
+#: ../../src/fieldaction.cc:494
 msgid "Attack"
 msgstr "AT - Útok"
 
@@ -972,103 +1008,90 @@ msgid "Main Menu"
 msgstr "Hlavní menu"
 
 #: ../../src/constructionsite.cc:216
-#, fuzzy, c-format
+#, c-format
 msgid "%u%% built"
-msgstr "postaveno"
+msgstr "%u%% postaveno"
 
 #: ../../src/fieldaction.cc:242
-#, fuzzy
 msgid "Build small buildings"
-msgstr "Budova:"
+msgstr "Stavět malé budovy"
 
 #: ../../src/fieldaction.cc:243
-#, fuzzy
 msgid "Build medium buildings"
-msgstr "Povolené budovy"
+msgstr "Stavět střední budovy"
 
 #: ../../src/fieldaction.cc:244
-#, fuzzy
 msgid "Build large buildings"
-msgstr "Povolené budovy"
+msgstr "Stavět velké budovy"
 
 #: ../../src/fieldaction.cc:278
 msgid "Action"
 msgstr "Akce"
 
 #: ../../src/fieldaction.cc:378
-#, fuzzy
 msgid "Build road"
-msgstr "Verze"
+msgstr "Postavit cestu"
 
 #: ../../src/fieldaction.cc:386
-#, fuzzy
 msgid "Destroy this flag"
-msgstr "Zničit budovu?"
+msgstr "Zničit tuto vlajku?"
 
 #: ../../src/fieldaction.cc:393
 msgid "Send geologist to explore site"
-msgstr ""
+msgstr "Poslat geologa na průzkum"
 
 #: ../../src/fieldaction.cc:409
-#, fuzzy
 msgid "Put a flag"
-msgstr "vlajka"
+msgstr "Umístit vlajku"
 
 #: ../../src/fieldaction.cc:412
-#, fuzzy
 msgid "Destroy a road"
-msgstr "Popis"
+msgstr "Zničit cestu"
 
 #: ../../src/fieldaction.cc:429
 msgid "Watch field in a separate window"
-msgstr ""
+msgstr "Sledovat ve vlastním okně"
 
 #: ../../src/fieldaction.cc:434
-#, fuzzy
 msgid "Toggle building statistics display"
-msgstr "Statistika stavby"
+msgstr "Přepnout zobrazení statistiky budov"
 
 #: ../../src/fieldaction.cc:436
 msgid "Toggle building label display"
-msgstr ""
+msgstr "Přepnout zobrazení popisků budov"
 
 #: ../../src/fieldaction.cc:439
-#, fuzzy
 msgid "Debug window"
-msgstr "Opravné políčko"
+msgstr "Okno ladění"
 
-#: ../../src/fieldaction.cc:444 ../../src/fieldaction.cc:596
-#, fuzzy
+#: ../../src/fieldaction.cc:444
+#: ../../src/fieldaction.cc:596
 msgid "Build roads"
-msgstr "Verze"
+msgstr "Postavit cestu"
 
 #: ../../src/fieldaction.cc:469
 msgid "Send less soldiers"
-msgstr ""
+msgstr "Poslat méně vojáků"
 
 #: ../../src/fieldaction.cc:480
 msgid "Send more soldiers"
-msgstr ""
+msgstr "Poslat více vojáků"
 
 #: ../../src/fieldaction.cc:487
-#, fuzzy
 msgid "Start attack"
-msgstr "Začni hrát"
+msgstr "Zahájit útok"
 
 #: ../../src/fieldaction.cc:570
-#, fuzzy
 msgid "Build mines"
-msgstr "Budova:"
+msgstr "Postavit doly"
 
 #: ../../src/fieldaction.cc:588
-#, fuzzy
 msgid "Build flag"
-msgstr "Verze"
+msgstr "Postovit vlajku"
 
 #: ../../src/fieldaction.cc:592
-#, fuzzy
 msgid "Cancel road"
-msgstr "Zrušit"
+msgstr "Zrušit cestu"
 
 #: ../../src/events/event_message_box.cc:42
 msgid "No text defined"
@@ -1079,125 +1102,108 @@ msgid "Window Title"
 msgstr "Popis okna"
 
 #: ../../src/events/event_factory.cc:46
-#, fuzzy
 msgid "Allow building type"
-msgstr "Povol budovu:"
+msgstr "Povolit typ budovy"
 
 #: ../../src/events/event_factory.cc:48
 msgid "Allows (or forbids) the construction of a building type for a player"
-msgstr ""
+msgstr "Povolí (nebo zakáže) hráči budování určitého typu budovy"
 
 #: ../../src/events/event_factory.cc:51
-#, fuzzy
 msgid "Create building"
-msgstr "Zničit budovu?"
+msgstr "Vytvořit budovu"
 
 #: ../../src/events/event_factory.cc:52
 msgid "Create a building and optionally place workers in it"
-msgstr ""
+msgstr "Vytvořit budovu a volitelně do ní umístit pracovníky"
 
 #: ../../src/events/event_factory.cc:55
-#, fuzzy
 msgid "Conquer area"
-msgstr "Oblast výbojů"
+msgstr "Dobýt oblast"
 
 #: ../../src/events/event_factory.cc:57
 msgid "Gives ownership of all unowned locations whithin an area to the player"
-msgstr ""
+msgstr "Přiřadí hráči vlastnictví všech polí na území, které nikdo nevlastní"
 
 #: ../../src/events/event_factory.cc:61
-#, fuzzy
 msgid "Create flag"
-msgstr "Vytvoř mapu"
+msgstr "Vytvořit vlajku"
 
 #: ../../src/events/event_factory.cc:62
-#, fuzzy
 msgid "Create a flag"
-msgstr "vlajka"
+msgstr "Vytvořit vlajku"
 
 #: ../../src/events/event_factory.cc:65
-#, fuzzy
 msgid "Create immovable"
-msgstr "má pevnou základnu"
+msgstr "Vytvořit pevný bod"
 
 #: ../../src/events/event_factory.cc:66
-#, fuzzy
 msgid "Create an immovable"
-msgstr "má pevnou základnu"
+msgstr "Vytvořit pevný bod"
 
 #: ../../src/events/event_factory.cc:69
-#, fuzzy
 msgid "Show message box"
-msgstr "Zobrazit zprávy jako překryv:"
+msgstr "Zobrazit zprávy jako překryv"
 
 #: ../../src/events/event_factory.cc:71
 msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
-msgstr ""
+msgstr "Tato událost zobrazí zprávu. Uřivatel může vybrat mezi modální a nemodální a může přidat obrázek. Ke každému tlačítku mohou být přiřazeny události, čili se dá použít jako rozhodovací dialog."
 
 #: ../../src/events/event_factory.cc:76
-#, fuzzy
 msgid "Move view"
-msgstr "Posuň pohled"
+msgstr "Posunout pohled"
 
 #: ../../src/events/event_factory.cc:77
 msgid "This Event centers the Players View on a certain location"
-msgstr ""
+msgstr "Tato událost vycentruje hráčův pohled na určité místo"
 
 #: ../../src/events/event_factory.cc:80
-#, fuzzy
 msgid "Reveal campaign"
-msgstr "Vyber mapu"
+msgstr "Odhalit kampaň"
 
 #: ../../src/events/event_factory.cc:81
-#, fuzzy
 msgid "Reveal a campaign"
-msgstr "Vyber mapu"
+msgstr "Odhalit kampaň"
 
 #: ../../src/events/event_factory.cc:84
-#, fuzzy
 msgid "Reveal objective"
-msgstr "Menu cílů"
+msgstr "Odhalit cíl"
 
 #: ../../src/events/event_factory.cc:85
 msgid "Reveal an objective"
-msgstr ""
+msgstr "Odhalit cíl"
 
 #: ../../src/events/event_factory.cc:88
-#, fuzzy
 msgid "Reveal scenario"
-msgstr "Další scénář"
+msgstr "Odhalit scénář"
 
 #: ../../src/events/event_factory.cc:89
-#, fuzzy
 msgid "Reveal a scenario"
-msgstr "Další scénář"
+msgstr "Odhalit scénář"
 
 #: ../../src/events/event_factory.cc:92
-#, fuzzy
 msgid "Create road"
-msgstr "Vytvoř mapu"
+msgstr "Vytvořit cestu"
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create a road and optionally place a carrier on it"
-msgstr ""
+msgstr "Vytvořit cestu a volitelně na ni umístit nosiče"
 
 #: ../../src/events/event_factory.cc:96
-#, fuzzy
 msgid "Set null trigger"
-msgstr "Nastav Nul Trigger"
+msgstr "Nastavit nulovou spoušť"
 
 #: ../../src/events/event_factory.cc:97
 msgid "Manually set a Null Trigger to a given value"
-msgstr ""
+msgstr "Ručně nastavit nulovou spoušť na určitou hodnotu"
 
 #: ../../src/events/event_factory.cc:100
-#, fuzzy
 msgid "Unhide area"
-msgstr "Odkryj oblast"
+msgstr "Odkrýt oblast"
 
 #: ../../src/events/event_factory.cc:102
 msgid "Gives vision for a specified amount of time of all locations whithin an area to the player."
-msgstr ""
+msgstr "Umožní hráči zobrazení všech polí na daném území po určitý čas"
 
 #: ../../src/trigger/trigger_factory.cc:39
 msgid "Building Trigger"
@@ -1205,15 +1211,15 @@ msgstr "Stavební spoušť"
 
 #: ../../src/trigger/trigger_factory.cc:41
 msgid "Triggers when the player has the specified number of buildings of the specified type in the specified area."
-msgstr ""
+msgstr "Spustí se, pokud má hráč v určené oblasti určený počet budov daného typu."
 
 #: ../../src/trigger/trigger_factory.cc:45
 msgid "Military influence Trigger"
-msgstr ""
+msgstr "Spoušť vojenského vlivu"
 
 #: ../../src/trigger/trigger_factory.cc:47
 msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
-msgstr ""
+msgstr "Spustí se, pokud má hráč v určené oblasti nějaký (nebo největší) vojenský vliv nad určeným počtem polí."
 
 #: ../../src/trigger/trigger_factory.cc:51
 msgid "Null Trigger"
@@ -1221,16 +1227,15 @@ msgstr "Nulová spoušť"
 
 #: ../../src/trigger/trigger_factory.cc:53
 msgid "Never triggers by itself. It is useful to pass it to some event which changes triggers"
-msgstr ""
+msgstr "Nikdy se sám nespustí. Je užitečné předat jej nějaké události, která mění spouště"
 
 #: ../../src/trigger/trigger_factory.cc:57
-#, fuzzy
 msgid "Ownership Trigger"
-msgstr "Nová spoušť"
+msgstr "Spoušť vlastnictví"
 
 #: ../../src/trigger/trigger_factory.cc:59
 msgid "Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
-msgstr ""
+msgstr "Spustí se, pokud hráč vlastní nejméně určený počet polí ve vymezeném území. V případě, že se nejedná o one-time spoušť, se při nesplnění podmínek zase přepne do nenastaveného stavu."
 
 #: ../../src/trigger/trigger_factory.cc:64
 msgid "Time Trigger"
@@ -1238,39 +1243,33 @@ msgstr "Časová spoušť"
 
 #: ../../src/trigger/trigger_factory.cc:66
 msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
-msgstr ""
+msgstr "Tato spoušť počká stanovený čas, než se aktivuje. Může být nastavena aby se po aktivaci spoustila znovu a vyvolala opakovanou událost."
 
 #: ../../src/trigger/trigger_factory.cc:71
-#, fuzzy
 msgid "Vision Trigger"
-msgstr "Stavební spoušť"
+msgstr "Spoušť výhledu"
 
 #: ../../src/trigger/trigger_factory.cc:73
 msgid "Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
-msgstr ""
+msgstr "Spustí se, pokud hráč vidí (nebo viděl) nejméně určený počet polí ve vymezeném území. V případě, že se nejedná o one-time spoušť, se při nesplnění podmínek zase přepne do nenastaveného stavu."
 
 #: ../../src/editor/editorinteractive.cc:66
-#, fuzzy
 msgid "Tool"
-msgstr "Menu nástroje"
+msgstr "Nástroj"
 
 #: ../../src/editor/editorinteractive.cc:69
-#, fuzzy
 msgid "Toolsize"
-msgstr "Menu velikosti nástroje"
+msgstr "Velikost nástroje"
 
 #: ../../src/editor/editorinteractive.cc:78
-#, fuzzy
 msgid "Players"
-msgstr "Hráči:"
+msgstr "Hráči"
 
 #: ../../src/editor/editorinteractive.cc:81
-#, fuzzy
 msgid "Events"
-msgstr "Události:"
+msgstr "Události"
 
 #: ../../src/editor/editorinteractive.cc:84
-#, fuzzy
 msgid "Variables"
 msgstr "Proměnné"
 
@@ -1294,7 +1293,7 @@ msgstr "Beze jména"
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:185
 #: ../../src/map.h:164
 msgid "Unknown"
-msgstr "neznámý"
+msgstr "Neznámý"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:51
 msgid "Apply"
@@ -1302,27 +1301,27 @@ msgstr "Použij"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
 msgid "Increase maximum FPS"
-msgstr ""
+msgstr "Zvýšit maximální FPS"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
 msgid "Decrease maximum FPS"
-msgstr ""
+msgstr "Snížit maximální FPS"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
 msgid "Increase autosave interval"
-msgstr ""
+msgstr "Prodloužit interval automatického ukládání"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:82
 msgid "Decrease autosave interval"
-msgstr ""
+msgstr "Zkrátit interval automatického ukládání"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:90
 msgid "Increase autosave interval at 10"
-msgstr ""
+msgstr "Prodloužit interval automatického ukládání o 10"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:98
 msgid "Decrease autosave interval at 10"
-msgstr ""
+msgstr "Zkrátit interval automatického ukládání o 10"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:100
 msgid "General Options"
@@ -1345,9 +1344,8 @@ msgid "Enable Sound"
 msgstr "Povol zvuk"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:109
-#, fuzzy
 msgid "Maximum FPS:"
-msgstr "Maximum"
+msgstr "Maximální FPS:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:112
 msgid "In-game resolution"
@@ -1363,32 +1361,31 @@ msgstr "Volby hry"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:119
 msgid "Use single Watchwindow Mode"
-msgstr "Použij mód jediného hlídacího okna"
+msgstr "Použít mód jediného hlídacího okna"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:122
 msgid "Start roadbuilding after placing flag"
-msgstr ""
+msgstr "Začít budovat cestu po umístění vlajky"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:125
 msgid "Show buildings area preview"
-msgstr "Zobraz náhled oblasti budov"
+msgstr "Zobrazit náhled oblasti budov"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:128
 msgid "Snap windows only when overlapping"
-msgstr "Přilož okna pouze při překryvu"
+msgstr "Přiložit okna pouze při překryvu"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:131
 msgid "Dock windows to edges"
-msgstr "Přikládej okna k okrajům"
+msgstr "Přikládat okna k okrajům"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:134
 msgid "Save game automatically every"
-msgstr ""
+msgstr "Uložit hru automaticky každých"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:138
-#, fuzzy
 msgid "min."
-msgstr "důl"
+msgstr "min."
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:206
 msgid "System default language"
@@ -1411,36 +1408,32 @@ msgid "Back"
 msgstr "Zpět"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:45
-#, fuzzy
 msgid "Choose a replay!"
-msgstr "Vyber uloženou hru!"
+msgstr "Vyber záznam hry!"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:28
 msgid "Single Player Menu"
 msgstr "Menu jednoho hráče"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:35
-#, fuzzy
 msgid "New Game"
-msgstr "Uložit hru"
+msgstr "Nová hra"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:41
 msgid "Load Game"
 msgstr "Nahrej hru"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:47
-#, fuzzy
 msgid "Campaigns"
-msgstr "Úvodní příběh"
+msgstr "Kampaně"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:47
 msgid "Select map"
 msgstr "Vyber mapu"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:55
-#, fuzzy
 msgid "Select Savegame"
-msgstr "Uložit hru"
+msgstr "Vyber uloženou hru"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:69
 msgid "Start game"
@@ -1456,24 +1449,23 @@ msgstr "(žádná mapa)"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:201
 msgid "WARNING!!! Host selected file \""
-msgstr ""
+msgstr "VAROVÁNÍ!!! Hostitel zvolil pro tuto hru soubor \""
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:203
 msgid "\" for this game, but you don't have it."
-msgstr ""
+msgstr "\" , který nemáte."
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:204
 msgid " Please add it manually."
-msgstr ""
+msgstr "Prosím přidejte ho ručně."
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:221
 msgid "Original:"
-msgstr ""
+msgstr "Originál:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:313
-#, fuzzy
 msgid "(Save): "
-msgstr "Ulož mapu"
+msgstr "(Uložit): "
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:30
 msgid "Begin Network Game"
@@ -1481,29 +1473,27 @@ msgstr "Začni síťovou hru"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:31
 msgid "List of games in your local network:"
-msgstr ""
+msgstr "Seznam her na tvé lokální síti:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
 msgid "Your nickname:"
-msgstr ""
+msgstr "Tvoje přezdívka:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:33
 msgid "Host to connect:"
-msgstr ""
+msgstr "Připojit se k hostiteli:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
-#, fuzzy
 msgid "Join this game"
-msgstr "Připoj se ke hře"
+msgstr "Připojit se ke hře"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:45
-#, fuzzy
 msgid "Host a new game"
-msgstr "Hostuj novou hru"
+msgstr "Hostovat novou hru"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:57
 msgid "Load previous host"
-msgstr ""
+msgstr "Nahrát předchozího hostitele"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:66
 msgid "nobody"
@@ -1588,33 +1578,29 @@ msgid "Descr:"
 msgstr "Popis:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:151
-#, fuzzy
 msgid "(directory)"
-msgstr "Vytvoř adresář"
+msgstr "(adresář)"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:203
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:165
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:221
 msgid "<parent>"
-msgstr ""
+msgstr "<nadřízený>"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:39
-#, fuzzy
 msgid "Select a campaign"
-msgstr "Vyber mapu"
+msgstr "Vyber kampaň"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:41
-#, fuzzy
 msgid "Campaign:"
-msgstr "Úvodní příběh"
+msgstr "Kampaň:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:43
 msgid "Difficulty:"
-msgstr ""
+msgstr "Obtížnost:"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:45
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:227
-#, fuzzy
 msgid "Description:"
 msgstr "Popis:"
 
@@ -1627,24 +1613,24 @@ msgstr "Popis:"
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:303
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:365
 msgid "[No value found]"
-msgstr ""
+msgstr "[Hodnota nenalezena]"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:81
 msgid "Easy living"
-msgstr ""
+msgstr "Snadný život"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:82
 msgid "Be vigilant"
-msgstr ""
+msgstr "Buď ostražitý"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:83
 msgid "Hard struggle"
-msgstr ""
+msgstr "Tvrdý souboj"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:127
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:307
 msgid "[Invalid entry]"
-msgstr ""
+msgstr "[Chybný záznam]"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:33
 msgid "Single Player"
@@ -1656,7 +1642,7 @@ msgstr "Síťová hra"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:45
 msgid "Watch Replay"
-msgstr ""
+msgstr "Sledovat záznam"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:57
 msgid "Editor"
@@ -1665,20 +1651,19 @@ msgstr "Editor"
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu.cc:73
 msgid "View Readme"
-msgstr "Zobraz Cťimě"
+msgstr "Zobraz Čtimě"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:79
 msgid "Version "
-msgstr ""
+msgstr "Verze"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:83
 msgid "(C) 2002-2008 by the Widelands Development Team"
 msgstr "(C) 2002-2008 Vývojový tým Widelands"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:28
-#, fuzzy
 msgid "Editor Menu"
-msgstr "Editor"
+msgstr "Nabídka editoru"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:35
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:51
@@ -1696,17 +1681,17 @@ msgstr "Nahraj mapu"
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 #: ../../src/ui/ui_basic/ui_messagebox.cc:99
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: ../../src/ui/ui_basic/ui_progresswindow.cc:41
 msgid "Preparing..."
-msgstr ""
+msgstr "Příprava"
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
@@ -1720,6 +1705,10 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
+"1) Info o uzlu\n"
+" Souřadnice: (%i, %i)\n"
+" Výška: %u\n"
+" Caps: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
@@ -1735,23 +1724,23 @@ msgstr "velká"
 
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " flag"
-msgstr "vlajka"
+msgstr " vlajka"
 
 #: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " mine"
-msgstr "důl"
+msgstr " důl"
 
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " port"
-msgstr "přístav"
+msgstr " přístav"
 
 #: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " walk"
-msgstr "chůze"
+msgstr " chůze"
 
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " swim"
-msgstr "plavání"
+msgstr " plavání"
 
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #, c-format
@@ -1761,27 +1750,35 @@ msgid ""
 " Has base immovable: %s\n"
 " Has bobs: %s\n"
 msgstr ""
+"\n"
+" Vlastněno %i\n"
+" Má pevnou základnu: %s\n"
+" Má boby: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:79
-#, fuzzy
 msgid ""
 "2) Terrain Info\n"
 " Name: "
-msgstr "2) Informace o terénu napravo\n"
+msgstr ""
+"2) Informace o terénu\n"
+" Název: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:87
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Texture Number: %i\n"
-msgstr "Číslo textury"
+msgstr ""
+"\n"
+"Číslo textury: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
-#, fuzzy
 msgid ""
 "4) Map Info\n"
 " Name: "
-msgstr "4) Informace o mapě"
+msgstr ""
+"4) Informace o mapě\n"
+" Název: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
 #, c-format
@@ -1790,35 +1787,43 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
+"\n"
+" Velikost: %ix%i\n"
+" Autor: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:109
-#, fuzzy
 msgid ""
 "\n"
 " Descr: "
-msgstr "Popis:"
+msgstr ""
+"\n"
+" Popis: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Number of Players: %i\n"
-msgstr "Počet hráčů"
+msgstr ""
+"\n"
+" Počet hráčů: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:105
-#, fuzzy
 msgid ""
 "5) World Info\n"
 " Name: "
-msgstr "5) Informace o světě"
+msgstr ""
+"5) Informace o světě\n"
+" Název: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:107
-#, fuzzy
 msgid ""
 "\n"
 " Author: "
-msgstr "Autor:"
+msgstr ""
+"\n"
+" Autor: "
 
 #: ../../src/editor/ui_menus/trigger_null_option_menu.cc:47
 msgid "Null Trigger Options"
@@ -1846,7 +1851,7 @@ msgstr "Ok"
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:271
 #, c-format
 msgid "There is another trigger registered with the name \"%s\". Choose another name."
-msgstr ""
+msgstr "S názvem \"%s\" je již definována jiná spoušť. Zvolte jiný název."
 
 #: ../../src/editor/ui_menus/trigger_null_option_menu.cc:117
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:225
@@ -1857,7 +1862,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:533
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:276
 msgid "Name in use"
-msgstr ""
+msgstr "Jméno je používáno"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
@@ -1932,9 +1937,9 @@ msgstr "Nelze smazat spoušť. Užívá ji"
 #: ../../src/editor/ui_menus/editor_event_menu.cc:350
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:107
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:235
-#, fuzzy, c-format
+#, c-format
 msgid "Unnamed%u"
-msgstr "Nepojmenovaný"
+msgstr "Nepojmenovaný %u"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:357
 msgid "Unnamed"
@@ -1957,7 +1962,7 @@ msgstr "Současná pozice:"
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:246
 #, c-format
 msgid "There is another event registered with the name \"%s\". Choose another name."
-msgstr ""
+msgstr "S názvem \"%s\" je již definována jiná událost. Zvolte jiný název."
 
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
 msgid "Unhide Area Event Options"
@@ -1979,7 +1984,6 @@ msgstr "Volby nástrojů zdrojů"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:47
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
-#, fuzzy
 msgid "In-/Decrease Value"
 msgstr "Zvýšit/snížit hodnotu"
 
@@ -1997,48 +2001,45 @@ msgid "Allowed Buildings"
 msgstr "Povolené budovy"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:60
-#, fuzzy
 msgid "Allowed Buildings:"
 msgstr "Povolené budovy:"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
-#, fuzzy
 msgid "Forbidden Buildings:"
 msgstr "Zakázané budovy:"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:84
 msgid "Forbid"
-msgstr ""
+msgstr "Zakázat"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:93
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:145
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "Allow"
-msgstr ""
+msgstr "Povolit"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:163
-#, fuzzy, c-format
+#, c-format
 msgid "Width: %u"
-msgstr "Šíře"
+msgstr "Šířka: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:92
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:167
-#, fuzzy, c-format
+#, c-format
 msgid "Height: %u"
-msgstr "Výška"
+msgstr "Výška: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:132
 msgid "Create Map"
 msgstr "Vytvoř mapu"
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:54
-#, fuzzy
 msgid "Available Event types: "
-msgstr "Dostupné události:"
+msgstr "Dostupné typy událostí: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:66
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:71
@@ -2055,33 +2056,32 @@ msgstr "Podmínka spouště"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:76
 msgid "("
-msgstr ""
+msgstr "("
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:88
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:100
 msgid "AND"
-msgstr ""
+msgstr "AND"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:112
 msgid "OR"
-msgstr ""
+msgstr "OR"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:124
 msgid "XOR"
-msgstr ""
+msgstr "XOR"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:136
 msgid "NOT"
-msgstr ""
+msgstr "NOT"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:146
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:106
-#, fuzzy
 msgid "Insert"
-msgstr "<nenastaveno>"
+msgstr "Vložit"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:156
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:267
@@ -2092,7 +2092,7 @@ msgstr "Smazat"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:183
 msgid "Available Triggers: "
-msgstr "Dostupné spouště:"
+msgstr "Dostupné spouště: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:281
 msgid "Syntax Error"
@@ -2124,32 +2124,32 @@ msgstr "Ulož mapu"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:69
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:55
 msgid "Name: "
-msgstr "Jméno:"
+msgstr "Jméno: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:88
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:76
 msgid "Author: "
-msgstr "Autor:"
+msgstr "Autor: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:93
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
 msgid "Size: "
-msgstr "Velikost:"
+msgstr "Velikost: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:98
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:88
 msgid "World: "
-msgstr "Svět:"
+msgstr "Svět: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:95
 msgid "Players: "
-msgstr "Hráči:"
+msgstr "Hráči: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
 msgid "Descr: "
-msgstr "Popis:"
+msgstr "Popis: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:202
 msgid "unnamed"
@@ -2157,7 +2157,7 @@ msgstr "nepojmenovaný"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:358
 msgid " exists already. Overwrite?"
-msgstr "už existuje. Přepsat?"
+msgstr " už existuje. Přepsat?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:360
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
@@ -2172,7 +2172,7 @@ msgid ""
 "Reason given:\n"
 msgstr ""
 "Chyba při ukládání mapy!\n"
-"Uložyný soubor mapy může být poškozen!\n"
+"Uložený soubor mapy může být poškozen!\n"
 "\n"
 "Důvod:\n"
 
@@ -2182,34 +2182,32 @@ msgstr "Menu velikosti nástroje"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:60
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:70
-#, fuzzy, c-format
+#, c-format
 msgid "Current Size: %u"
-msgstr "Současná velikost"
+msgstr "Současná velikost: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
-#, fuzzy
 msgid "Noise Height Options"
 msgstr "Volby výšky zvuků"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum: %u"
-msgstr "Minimum"
+msgstr "Minimum: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum: %u"
-msgstr "Maximum"
+msgstr "Maximum: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:137
-#, fuzzy, c-format
+#, c-format
 msgid "Set value: %u"
-msgstr "Nastavit hodnotu"
+msgstr "Nastavit hodnotu: %u"
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
-#, fuzzy
 msgid "Available Trigger types: "
-msgstr "Dostupné spouště:"
+msgstr "Dostupné typy spouští: "
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
 msgid "Height Tools Options"
@@ -2220,22 +2218,20 @@ msgid "Conquer Area Event Options"
 msgstr "Volby události oblasti výbojů"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:44
-#, fuzzy
 msgid "Immovable Bobs Menu"
-msgstr "Menu pevných bobů"
+msgstr "Nabídka pevných bobů"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:41
 msgid "Player Options"
 msgstr "Volby hráče"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:48
-#, fuzzy
 msgid "Add player"
-msgstr "Hráč"
+msgstr "Přidat hráče"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:56
 msgid "Remove last player"
-msgstr ""
+msgstr "Odebrat posledního hráče"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:68
 msgid "Number of Players"
@@ -2246,12 +2242,10 @@ msgid "Player "
 msgstr "Hráč"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:246
-#, fuzzy
 msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
 msgstr "Nejde odstranit hráč - je někde vázán. Odstraň všechny budovy, boby, spouště a události, které s ním souvisejí a zkus akci opakovat."
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:278
-#, fuzzy
 msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again."
 msgstr "Nejde změnit klan hráče - je někde vázán. Odstraň všechny budovy, boby, spouště a události, které souvisejí s klanem a zkus akci opakovat."
 
@@ -2277,9 +2271,9 @@ msgid "Value"
 msgstr "Hodnota"
 
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:214
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is not a valid integer!"
-msgstr "není platný integer!"
+msgstr "\"%s\" není platný integer!"
 
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:216
 msgid "Parse error!"
@@ -2296,46 +2290,43 @@ msgstr "Nový"
 
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:272
 msgid "Variable"
-msgstr "Proměnné"
+msgstr "Proměnná"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:45
 msgid "Tool Menu"
 msgstr "Menu nástroje"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:64
-#, fuzzy
 msgid "Change height"
-msgstr "výška:"
+msgstr "Změnit výšku"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
-#, fuzzy
 msgid "Noise height"
-msgstr "Volby výšky zvuků"
+msgstr "Výška zvuků"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
-#, fuzzy
 msgid "Immovable"
-msgstr "Menu pevných bobů"
+msgstr "Pevné boby"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Bob"
-msgstr ""
+msgstr "Bob"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 msgid "Resource"
-msgstr ""
+msgstr "Zdroj"
 
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:45
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
-#, fuzzy, c-format
+#, c-format
 msgid "Player: %u"
-msgstr "Hráč:"
+msgstr "Hráč: %u"
 
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:55
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
-#, fuzzy, c-format
+#, c-format
 msgid "Building: %s"
-msgstr "Budova:"
+msgstr "Budova: %s"
 
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:67
 msgid "Allow Building Event Options"
@@ -2343,11 +2334,11 @@ msgstr "Povol volby událostí staveb"
 
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:119
 msgid "Allow Building: "
-msgstr "Povol budovu:"
+msgstr "Povol budovu: "
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
 msgid "Message Box Event Options"
-msgstr "Volby události okna zprávy:"
+msgstr "Volby události okna zprávy"
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:56
 msgid "Button 1"
@@ -2363,7 +2354,7 @@ msgstr "Tlačítko 3"
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:77
 msgid "Is Modal: "
-msgstr "Je modální:"
+msgstr "Je modální: "
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:86
 msgid "Window Title:"
@@ -2403,7 +2394,6 @@ msgstr "Výběr terénu"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:208
-#, fuzzy
 msgid "Current:"
 msgstr "Současný:"
 
@@ -2417,7 +2407,7 @@ msgstr "Viditelné na počátku:"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:93
 msgid "Objective text: "
-msgstr "Text cíle:"
+msgstr "Text cíle: "
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
 msgid "Visible"
@@ -2425,26 +2415,26 @@ msgstr "Viditelné"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:203
 msgid "Trigger: "
-msgstr "Spoušť:"
+msgstr "Spoušť: "
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:264
 msgid "Can't delete Objective, because it's trigger is in use by "
 msgstr "Nelze smazat cíl, protože související spoušť je užívána "
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
-#, fuzzy, c-format
+#, c-format
 msgid "How many: %u"
-msgstr "Počet:"
+msgstr "Počet: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
 #, c-format
 msgid "(X, Y): (%i, %i)"
-msgstr ""
+msgstr "(X, Y): (%i, %i)"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:87
-#, fuzzy, c-format
+#, c-format
 msgid "Radius: %u"
-msgstr "Maximum"
+msgstr "Poloměr: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:99
 msgid "Building Trigger Options"
@@ -2468,7 +2458,7 @@ msgstr "Opakuje se několikrát"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:71
 msgid "Events: "
-msgstr "Události:"
+msgstr "Události: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:87
 msgid "Conditional"
@@ -2476,11 +2466,11 @@ msgstr "Podmínka"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:128
 msgid "Up"
-msgstr ""
+msgstr "Nahoru"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:142
 msgid "Available Events: "
-msgstr "Dostupné události:"
+msgstr "Dostupné události: "
 
 #: ../../src/objective.h:47
 msgid "no descr"
@@ -2488,83 +2478,62 @@ msgstr "bez popisu"
 
 #: ../../src/map.h:165
 msgid "no description defined"
-msgstr "nepopsaný"
+msgstr "popis není definovaný"
 
 #~ msgid "The Room %s is currently not logged in or unknown to the server.\n"
 #~ msgstr "Místnost %s není v současnosti zaznamenaná nebo ji server nenalezl.\n"
-
 #~ msgid "<undefined>"
 #~ msgstr "<nedefinovaný>"
-
 #~ msgid "Message: "
 #~ msgstr "Zpráva:"
-
 #~ msgid ""
 #~ "Game Loading Error!\n"
 #~ "Reason given:\n"
 #~ msgstr ""
 #~ "Chyba při otevírání hry!\n"
 #~ "Důvod:\n"
-
 #~ msgid "Load Game Error!!"
 #~ msgstr "Chyba otevírání hry!!"
 
 #, fuzzy
 #~ msgid "Initializing a network game"
 #~ msgstr "Začíná síťová hra"
-
 #~ msgid "The User %s is currently not logged in or unknown to the server.\n"
 #~ msgstr "Uživatel %s není v současnosti zaznamenán nebo jej server nenalezl.\n"
-
 #~ msgid "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"
 #~ msgstr "Server způsobil chybu připojení. Váš protokol (%i.%02i) je zastaralý, Server používá %i.%02i\n"
-
 #~ msgid "Server is full!\n"
 #~ msgstr "Server je plný!\n"
-
 #~ msgid "This server doesn't serve widelands!\n"
 #~ msgstr "Tento server neposkytuje Widelands!\n"
-
 #~ msgid "!! CRITICAL ERROR !!"
 #~ msgstr "!! Kritická chyba !!"
-
 #~ msgid "Exit"
 #~ msgstr "Exit"
-
 #~ msgid "!! Continue execution !!"
 #~ msgstr "!! Pokračuj v běhu !!"
-
 #~ msgid "Crash"
 #~ msgstr "Havárie"
-
 #~ msgid "Widelands"
 #~ msgstr "Widelands"
 
 #, fuzzy
 #~ msgid "Consumed"
 #~ msgstr "Zavřené"
-
 #~ msgid "Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"
 #~ msgstr "Server odpověděl nesprávně na packet zprávy. Měl poslat %i ale poslal %i. Ignoruji to."
-
 #~ msgid "Player 2"
 #~ msgstr "Hráč 2"
-
 #~ msgid "Player 3"
 #~ msgstr "Hráč 3"
-
 #~ msgid "Player 4"
 #~ msgstr "Hráč 5"
-
 #~ msgid "Player 5"
 #~ msgstr "Hráč 5"
-
 #~ msgid "Player 6"
 #~ msgstr "Hráč 6"
-
 #~ msgid "Player 7"
 #~ msgstr "Hráč 7"
-
 #~ msgid "Player 8"
 #~ msgstr "Hráč 8"
 
@@ -2575,22 +2544,16 @@ msgstr "nepopsaný"
 #, fuzzy
 #~ msgid "Exit game"
 #~ msgstr "Opusť hru"
-
 #~ msgid "I have no name"
 #~ msgstr "Nemám jméno"
-
 #~ msgid "Starting network game"
 #~ msgstr "Začíná síťová hra"
-
 #~ msgid "Status"
 #~ msgstr "Status"
-
 #~ msgid "Waiting"
 #~ msgstr "Čeká"
-
 #~ msgid "Ready"
 #~ msgstr "Připraven"
-
 #~ msgid "Send"
 #~ msgstr "Odeslat"
 
@@ -2605,86 +2568,60 @@ msgstr "nepopsaný"
 #, fuzzy
 #~ msgid "Building statistics"
 #~ msgstr "Statistika stavby"
-
 #~ msgid "Allow Building"
 #~ msgstr "Povol stavbu"
-
 #~ msgid "Message Box"
 #~ msgstr "Zpráva"
-
 #~ msgid "<unset>"
 #~ msgstr "<nenastaveno>"
-
 #~ msgid "Lobby"
 #~ msgstr "Lobby"
-
 #~ msgid "User %s is using \"%s\" in room \"%s\"\n"
 #~ msgstr "Uživatel %s užívá \"%s\" v pokoji \"%s\"\n"
-
 #~ msgid "User %s has entered the room %s !\n"
 #~ msgstr "Uživatel %s vešel do místnosti %s !\n"
-
 #~ msgid "Critical Connection Error!"
 #~ msgstr "Kritická chyba spojení!"
-
 #~ msgid "Server disconnected unexpectedly!"
 #~ msgstr "Server se nečekaně odpojil!"
-
 #~ msgid "Internet Options"
 #~ msgstr "Volby internetu"
-
 #~ msgid "Run Game"
 #~ msgstr "Začni hru"
-
 #~ msgid "Play in Internet"
 #~ msgstr "Hrej na internetu"
-
 #~ msgid "LAN games"
 #~ msgstr "LAN hry"
-
 #~ msgid "GGZ games"
 #~ msgstr "GGZ hry"
-
 #~ msgid "1) Field Infos"
 #~ msgstr "1) Informace o polích"
-
 #~ msgid "Coordinates"
 #~ msgstr "Souřadnice"
-
 #~ msgid " Caps: "
 #~ msgstr "Kapacity:"
-
 #~ msgid "Owned by"
 #~ msgstr "Vlastněno"
 
 #, fuzzy
 #~ msgid "Has bobs"
 #~ msgstr "má boby"
-
 #~ msgid "Has resources: Yes"
 #~ msgstr "má zdroje: Ano"
-
 #~ msgid "amount of"
 #~ msgstr "počet"
-
 #~ msgid " Has resources: No\n"
 #~ msgstr "má zdroje: Ne\n"
-
 #~ msgid "Start resources amount"
 #~ msgstr "Množství zdrojů na začátku"
-
 #~ msgid " Roads: TODO!\n"
 #~ msgstr "Cesty: k dohotovení!\n"
-
 #~ msgid "Author"
 #~ msgstr "Autor"
-
 #~ msgid "Descr"
 #~ msgstr "Popis"
-
 #~ msgid " TODO: more information (number of resources, number of terrains...)"
 #~ msgstr "K dopracování: více informací (množství zdrojů, počet terénů...)"
-
 #~ msgid " TODO -- More information (Number of bobs/number of wares...)\n"
 #~ msgstr "K dopracování -- Více informací (počet bobů/počet zboži...)\n"
 
@@ -2695,56 +2632,42 @@ msgstr "nepopsaný"
 #, fuzzy
 #~ msgid "Allow/forbid buildidngs"
 #~ msgstr "Povolené budovy"
-
 #~ msgid "Headquarters"
 #~ msgstr "Základna:"
-
 #~ msgid "<invalid player tribe>"
 #~ msgstr "<neplatný klan hráče>"
-
 #~ msgid "Optional Objective: "
 #~ msgstr "Alternativní cíl:"
-
 #~ msgid "Optional"
 #~ msgstr "Nepovinné"
-
 #~ msgid "Usage: "
 #~ msgstr "Vytížení:"
-
 #~ msgid "3) Down Terrain Info\n"
 #~ msgstr "3) Informace o terénu dole\n"
-
 #~ msgid "Tutorial Campaign: A new Kingdom"
 #~ msgstr "Úvodní příběh: Nové království"
-
 #~ msgid "Mission 1: Eyes in the Darkness - Game Basics"
 #~ msgstr "Mise 1: Oči v temnotách - Základy hry"
-
 #~ msgid "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
 #~ msgstr "Mise 2: Místo pro domov - doly, výboje, pokročilá výroba"
 
 #, fuzzy
 #~ msgid "Empire Tutorial Campaign"
 #~ msgstr "Úvodní příběh"
-
 #~ msgid "Testtext"
 #~ msgstr "Testtext"
-
 #~ msgid "Current Size"
 #~ msgstr "Současná velikost"
-
 #~ msgid "Choose Terrain Menu"
 #~ msgstr "Menu výběru terénů"
-
 #~ msgid "Height Tool Options"
 #~ msgstr "Volby výškového nástroje"
 
 #, fuzzy
 #~ msgid "Noise Height Tool Options"
 #~ msgstr "Volby nástroje výšky rušení"
-
 #~ msgid "New Map Options"
 #~ msgstr "Volby nové mapy"
-
 #~ msgid "Edit Trigger Conditional Menu"
 #~ msgstr "Menu editace podmínky spouště"
+
