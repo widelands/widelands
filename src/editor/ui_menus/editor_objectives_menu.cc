@@ -199,12 +199,11 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 
 	posx += 60 + spacing;
 
-	new UI::Textarea
-		(this, posx, get_inner_h() - 30, 80, 20, _("Trigger: "), Align_CenterLeft);
-	posx += 45 + spacing;
 	m_trigger =
 		new UI::Textarea
-		(this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
+			(this,
+			 posx, get_inner_h() - 20, 0, 0,
+			 std::string(), Align_CenterLeft);
 
 	Manager<Objective> & mom = m_parent->egbase().map().mom();
 	Manager<Objective>::Index const nr_objectives = mom.size();
@@ -252,37 +251,47 @@ void Editor_Objectives_Menu::clicked_edit() {
 	Edit_Objective_Window evw(m_parent, m_table.get_selected_record());
 	if (evw.run()) {
 		m_table.sort();
-		m_trigger->set_text(m_table.get_selected().get_trigger()->name());
+		m_trigger->set_text
+			(_("Trigger: ") + m_table.get_selected().get_trigger()->name());
 	}
 }
 
 void Editor_Objectives_Menu::clicked_del() {
-	Objective & obj = m_table.get_selected();
-
-	if (not obj.get_trigger()->referencers().empty()) {
-		std::string str =
-			_("Can't delete Objective, because it's trigger is in use by ");
-		Trigger::Referencers const & referencers =
-			obj.get_trigger()->referencers();
-		Trigger::Referencers::const_iterator i = referencers.begin();
-		while (i != referencers.end()) {
-			str += i->first->identifier();
-			str += "; ";
-		}
-		str.erase(str.end() - 2, str.end());
-		UI::MessageBox mmb
-			(m_parent, _("Error!"), str.c_str(), UI::MessageBox::OK);
-		mmb.run();
-		return;
-	}
-
 	Widelands::Map & map = m_parent->egbase().map();
-	map.mtm().remove(*obj.get_trigger());
-	map.mom().remove(obj);
-	m_table.remove_selected();
-
+	Trigger * trigger;
+	{
+		Objective & obj = m_table.get_selected();
+		m_table.remove_selected();
+		trigger = obj.get_trigger();
+		map.mom().remove(obj);
+	}
 	m_edit_button  ->set_enabled(false);
 	m_delete_button->set_enabled(false);
+	m_trigger      ->set_text   (std::string());
+
+	//  Now the objective itself is removed. If its former trigger is no longer
+	//  referenced by anything, remove it as well. Otherwise inform the user.
+	Trigger::Referencers const & referencers = trigger->referencers();
+	if (referencers.size()) {
+		std::string str =
+			_
+				("The objective was deleted, but not its trigger, because it is "
+				 "still referenced by:\n");
+		for
+			(struct {
+			 	Trigger::Referencers::const_iterator       current;
+			 	Trigger::Referencers::const_iterator const end;
+			 } i = {referencers.begin(), referencers.end()};;)
+		{
+			str += i.current->first->identifier();
+			if (++i.current == i.end)
+				break;
+			str += '\n';
+		}
+		UI::MessageBox mmb(m_parent, _("Note"), str.c_str(), UI::MessageBox::OK);
+		mmb.run();
+	} else
+		map.mtm().remove(*trigger);
 }
 
 
@@ -294,7 +303,7 @@ void Editor_Objectives_Menu::table_selected(uint32_t n) {
 	m_delete_button->set_enabled(true);
 
 	//  Baad stuff will happen, if trigger got deleted.
-	m_trigger->set_text(m_table[n].get_trigger()->name());
+	m_trigger->set_text(_("Trigger: ") + m_table[n].get_trigger()->name());
 }
 
 /**
