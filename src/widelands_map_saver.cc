@@ -171,6 +171,10 @@ void Map_Saver::save() throw (_wexception) {
 	{Map_Ware_Data_Packet                    p; p.Write(m_fs, m_egbase, m_mos);}
 	log("done!\n ");
 
+	log("Writing Area Watchers Data ... ");
+	{Map_Players_AreaWatchers_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
+	log("done!\n ");
+
 	log("Writing Map Objects ... ");
 	{Map_Object_Packet                       p; p.Write(m_fs, m_egbase, m_mos);}
 	log("done!\n ");
@@ -214,10 +218,6 @@ void Map_Saver::save() throw (_wexception) {
 
 	log("Writing Seen-Fields Data ... ");
 	{Map_Seen_Fields_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
-	log("done!\n ");
-
-	log("Writing Area Watchers Data ... ");
-	{Map_Players_AreaWatchers_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
 	log("done!\n ");
 
 	log("Writing Players Unseen Data ... ");

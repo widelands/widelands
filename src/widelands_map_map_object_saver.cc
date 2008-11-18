@@ -86,6 +86,7 @@ Serial Map_Map_Object_Saver::register_object(Map_Object const * const obj) {
 	assert(!rec->registered);
 
 	switch (obj->get_type()) {
+	case Map_Object::AREAWATCHER:                                 break;
 	case Map_Object::FLAG:             ++m_nr_flags;              break;
 	case Map_Object::ROAD:             ++m_nr_roads;              break;
 	case Map_Object::BUILDING:         ++m_nr_buildings;          break;
