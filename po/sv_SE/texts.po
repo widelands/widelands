@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3509\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-11-14 00:12+0000\n"
-"PO-Revision-Date: 2008-11-14 21:45+0100\n"
+"PO-Revision-Date: 2008-11-18 02:02+0100\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -632,7 +632,7 @@ msgstr "Förkorta sträckorna för dina bärare genom att sätta ut flaggor. Det
 
 #: ../../txts/gametips:41
 msgid "Always build a forester and a ranger's hut, so you will not run out of trunks and food."
-msgstr "Bygg alltid skogsodlare och viltvårdare, so löper du ingen risk för att få slut på träd eller mat."
+msgstr "Bygg alltid skogvaktarkoja och viltvårdarkoja, så löper du ingen risk för att få slut på träd eller mat."
 
 #: ../../txts/gametips:45
 #, fuzzy
