@@ -704,8 +704,13 @@ void WLApplication::shutdown_settings()
 	// To be proper, release our textdomain
 	i18n::release_textdomain();
 
-	// overwrite the old config file
-	g_options.write("config", true);
+	try { //  overwrite the old config file
+		g_options.write("config", true);
+	} catch (std::exception const & e) {
+		log("WARNING: could not save configuration: %s\n", e.what());
+	} catch (...)                      {
+		log("WARNING: could not save configuration");
+	}
 
 	assert(journal);
 	delete journal;
