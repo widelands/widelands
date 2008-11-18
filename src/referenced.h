@@ -27,6 +27,8 @@
 #include <cassert>
 #include <map>
 
+#include <stdint.h>
+
 template<typename Subtype> struct Referenced {
 	typedef std::map<Referencer<Subtype> const *, uint32_t> Referencers;
 	Referencers const & referencers() const throw () {return m_referencers;}

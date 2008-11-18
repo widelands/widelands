@@ -23,6 +23,7 @@
 #include "wexception.h"
 
 #include <sys/stat.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /**

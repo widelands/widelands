@@ -28,6 +28,8 @@
 #include <stdexcept>
 #include <vector>
 
+#include <stdint.h>
+
 typedef std::set<std::string> filenameset_t;
 
 class StreamRead;

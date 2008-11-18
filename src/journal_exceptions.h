@@ -22,6 +22,8 @@
 
 #include <stdexcept>
 
+#include <stdint.h>
+
 /**
  * Thrown for IO-errors occurring with a journal file (unable to open file for any
  * reason, out of space, etc.) that a) are unrecoverable and b) have already been

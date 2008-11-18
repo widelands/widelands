@@ -28,6 +28,8 @@
 #include <cstring>
 #include <vector>
 
+#include <stdint.h>
+
 namespace Widelands {
 
 struct Event;

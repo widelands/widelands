@@ -20,9 +20,12 @@
 #ifndef PATHFIELD_H
 #define PATHFIELD_H
 
-#include <vector>
 #include <boost/scoped_array.hpp>
 #include <boost/shared_ptr.hpp>
+
+#include <vector>
+
+#include <stdint.h>
 
 namespace Widelands {
 

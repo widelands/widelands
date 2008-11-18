@@ -32,11 +32,12 @@
 #include "zip_filesystem.h"
 
 #include <cassert>
-#include <string>
-#include <cstring>
-#include <vector>
 #include <climits>
+#include <cstdio>
 #include <cstdlib>
+#include <cstring>
+#include <string>
+#include <vector>
 
 #include <errno.h>
 #ifdef _WIN32

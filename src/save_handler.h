@@ -23,6 +23,8 @@
 #include <string>
 #include <cstring>
 
+#include <stdint.h>
+
 namespace Widelands {struct Game;};
 
 // default autosave interval in minutes

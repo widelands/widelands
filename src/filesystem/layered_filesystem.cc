@@ -21,6 +21,8 @@
 
 #include "wexception.h"
 
+#include <cstdio>
+
 LayeredFileSystem *g_fs;
 
 
