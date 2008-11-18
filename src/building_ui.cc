@@ -30,7 +30,6 @@ class.
 #include "game_debug_ui.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "interactive_base.h"
 #include "interactive_player.h"
 #include "maphollowregion.h"
 #include "militarysite.h"
@@ -163,7 +162,8 @@ confirm building destruction when the building's base flag is removed.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, Widelands::PlayerImmovable* todestroy)
-	: UI::Window(parent, 0, 0, 160, 90, _("Destroy building?"))
+	:
+	UI::Window(parent, 0, 0, 200, 120, _("Destroy building?"))
 {
 	std::string text;
 
@@ -180,18 +180,18 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, W
 	text = _("Do you really want to destroy this ");
 	text += building->descname();
 	text += _("?");
-	new UI::Textarea(this, 0, 0, 160, 44, text, Align_Center, true);
+	new UI::Textarea(this, 0, 0, 200, 74, text, Align_Center, true);
 
 	new UI::Button<BulldozeConfirm>
 		(this,
-		 6, 50, 60, 34,
+		 6, 80, 80, 34,
 		 4,
 		 g_gr->get_picture(PicMod_Game, pic_ok),
 		 &BulldozeConfirm::bulldoze, this);
 
 	(new UI::Button<BulldozeConfirm>
 	 	(this,
-	 	 94, 50, 60, 34,
+	 	 114, 80, 80, 34,
 	 	 4,
 	 	 g_gr->get_picture(PicMod_Game, pic_cancel),
 	 	 &BulldozeConfirm::die, this))
