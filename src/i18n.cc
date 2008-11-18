@@ -18,6 +18,7 @@
  */
 
 #include "i18n.h"
+#include "log.h"
 
 #include "config.h"
 
@@ -67,6 +68,10 @@ void grab_textdomain(std::string const & domain) {
  * See grab_textdomain()
  */
 void release_textdomain() {
+	if (textdomains.empty()) {
+		log("ERROR: trying to pop textdomain from empty stack");
+		return;
+	}
 	textdomains.pop_back();
 
 	//don't try to get the previous TD when the very first one ('widelands')
