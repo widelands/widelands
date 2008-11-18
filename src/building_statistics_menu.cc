@@ -444,13 +444,13 @@ void Building_Statistics_Menu::update() {
 		te->set_string(Columns::Prod, buffer);
 
 		//  number of this buildings
-		snprintf(buffer, sizeof(buffer), "%i", nr_owned);
+		snprintf(buffer, sizeof(buffer), "%3i", nr_owned); // space-pad for sort
 		te->set_string(Columns::Owned, buffer);
 		if (is_selected)
 			m_owned.set_text(buffer);
 
 		//  number of currently builds
-		snprintf(buffer, sizeof(buffer), "%i", nr_build);
+		snprintf(buffer, sizeof(buffer), "%3i", nr_build); // space-pad for sort
 		te->set_string(Columns::Build, buffer);
 		if (is_selected)
 			m_in_build.set_text(buffer);
