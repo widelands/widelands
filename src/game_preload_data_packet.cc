@@ -71,6 +71,7 @@ throw (_wexception)
 	//  save some kind of header.
 	s.set_int   ("gametime",       game->get_gametime());
 	s.set_string("mapname",        game->map().get_name());  // Name of map
+	assert(game->get_ipl());
 	s.set_int   ("player_nr",      game->get_ipl()->get_player_number()); // player that saved the game.
 
 	std::string bg                (game->map().get_background());
