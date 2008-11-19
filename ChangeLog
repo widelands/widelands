@@ -150,7 +150,8 @@ build-13:
   configuration files.
 - Fixed bug that the computer player did not check if a planned large building
   would be completely inside his borders.
-- Fixed bug that the empire wine bush lived forever, blocking the map.
+- Fixed bugs that the empire wine bush and barbarian flax and reed lived
+  forever, blocking the map.
 - Fixed bug that it was possible to cheat when destroying an enhanceable
   building by first ordering and upgrade and then immediately ordering the
   destruction of the enhancement-constructionsite. This avoided the burning
