@@ -41,7 +41,7 @@ Interactive_Base(*g),
  &Interactive_Spectator::callback, this,                                      \
  tooltip                                                                      \
 
-m_exit          (INIT_BTN("menu_exit_game",      exit_btn,       _("Menu"))),
+m_exit          (INIT_BTN("menu_exit_game",      exit_btn, _("Exit Replay"))),
 m_toggle_minimap(INIT_BTN("menu_toggle_minimap", toggle_minimap, _("Minimap")))
 {
 	m_toolbar.add(&m_exit,           UI::Box::AlignLeft);
