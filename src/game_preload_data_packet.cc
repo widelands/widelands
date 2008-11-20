@@ -66,18 +66,22 @@ throw (_wexception)
 	Profile prof;
 	Section & s = *prof.create_section("global");
 
-	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
+	Interactive_Player const * const ipl = game->get_ipl();
+
+	s.set_int   ("packet_version", ipl ? CURRENT_PACKET_VERSION : 1);
 
 	//  save some kind of header.
 	s.set_int   ("gametime",       game->get_gametime());
-	s.set_string("mapname",        game->map().get_name());  // Name of map
-	assert(game->get_ipl());
-	s.set_int   ("player_nr",      game->get_ipl()->get_player_number()); // player that saved the game.
+	Map const & map = game->map();
+	s.set_string("mapname",        map.get_name());  // Name of map
+	if (ipl) {
+		s.set_int   ("player_nr",   ipl->get_player_number()); // player that saved the game.
 
-	std::string bg                (game->map().get_background());
-	if (bg.empty())
-		bg =                        game->map().get_world_name();
-	s.set_string("background",     bg);
+		std::string bg             (map.get_background());
+		if (bg.empty())
+			bg =                     map.get_world_name();
+		s.set_string("background",  bg);
+	}
 
 
 	prof.write("preload", false, fs);
