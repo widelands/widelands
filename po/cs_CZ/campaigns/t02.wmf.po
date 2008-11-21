@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-11-03 13:17+0000\n"
-"PO-Revision-Date: 2008-11-08 04:57+0100\n"
+"PO-Revision-Date: 2008-11-18 21:30+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr "Statečný Boldreth se postavil k tvému boku..."
 
 #: ../../../campaigns/t02.wmf/event:210
 msgid " \"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren fought on the battlefield, and our axes and swords have turned rusty over time.\" "
-msgstr " \"Takže Ty nás chceš připravit na delší pobyt v těchto lesích, Throne? No, vidím v Tvých činech moudro, přesto mé srdce nepřestává toužit po spanilém návratu do Al'thunran. Příliš dlouho čekáme v nečinnosti, zatímco naši bratři se bijí na bojišti a naše sekery a meče se pokryly rzí času.\""
+msgstr " \"Takže nás chceš připravit na delší pobyt v těchto lesích, Throne? No, vidím v Tvých činech moudrost, přesto mé srdce nepřestává toužit po spanilém návratu do Al'thunran. Příliš dlouho čekáme v nečinnosti, zatímco naši bratři se bijí na bojišti a naše sekery a meče se pokryly rzí času.\""
 
 #: ../../../campaigns/t02.wmf/event:212
 #: ../../../campaigns/t02.wmf/event:237
@@ -112,11 +112,11 @@ msgstr "Boldreth vyskočí..."
 
 #: ../../../campaigns/t02.wmf/event:234
 msgid " \"While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Určitě to není úkol hodný bojovníka, přesto něco musíme učinit! Throne, nech mě vzít několik našich bojovníků, těch, které nejvíce ničí nečinnost a vyrazit směrem k hoře Kal'mavrath - možná dokonce najdeme nějaké kamení, které by potěšilo starého muže?\" <br><br>-- Nový úkol --<br>"
+msgstr " \"Přestože to není úkol hodný bojovníka, aspoň je to něco, čím se můžeme zabavit! Throne, nech mě vzít několik našich bojovníků, těch, které nejvíce ničí nečinnost a vyrazit směrem k hoře Kal'mavrath - možná dokonce najdeme nějaké kamení, které by potěšilo starého muže?\" <br><br>-- Nový úkol --<br>"
 
 #: ../../../campaigns/t02.wmf/event:235
 msgid "* Build military buildings (like sentries and strongholds) to expand your territory.<br> Get to the rocks north-east from you and build a quarry there."
-msgstr "* Postav vojenské budovy (jako hlásky a tvrze) a rozšiř své území. <br> Postup ke skalám na severovýchodě a postav tam lom."
+msgstr "* Postav vojenské budovy (jako hlásky a opevnění) a rozšiř své území. <br> Postup ke skalám na severovýchodě a postav tam lom."
 
 #: ../../../campaigns/t02.wmf/event:245
 msgid "Khantrukh grumbles..."
@@ -132,7 +132,7 @@ msgstr "Khantrukh spokojeně kývne..."
 
 #: ../../../campaigns/t02.wmf/event:259
 msgid " \"At least. These rocks should last for a while.\" "
-msgstr " \"No konečně. Tyhle skály by měli na chvíli stačit.\""
+msgstr " \"No konečně. Tyhle skály by měly na chvíli stačit.\""
 
 #: ../../../campaigns/t02.wmf/event:270
 msgid "Boldreth exclaims..."
@@ -145,7 +145,7 @@ msgstr " \"To je ale pohled! Majestátní hora Kal'mavrath! Zajímalo by mě, ja
 #: ../../../campaigns/t02.wmf/event:273
 #: ../../../campaigns/t02.wmf/objective:15
 msgid "* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow). When you click at implied flag you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed as hammer and pick."
-msgstr "* Postav uhelný důl a důl na železnou rudu<br> Umísti vlajku na horské stráni na východě (na terénu hory, ne horské louce). Když klikneš na vlajku, můžeš k ní vyslat geologa. Jestliže je vlajka na hoře, bude geolog hledat v hoře rudy a uhlí, jinak bude hledat vodu. Postav pak důl na každou surovinu, kterou objeví, správný důl pro správnou surovinu:<br>černá - kamenné uhlí<br>červená - železná ruda<br>žlutá - zlato<br>šedá - žula<br>Doly mohou být postaveny jedině na horském terénu. Místo vhodnépro důl je označeno kladivem a krumpáčem."
+msgstr "* Postav uhelný důl a důl na železnou rudu<br> Umísti vlajku na horské stráni na východě (na terénu hory, ne horské louce). Když klikneš na vlajku, můžeš k ní vyslat geologa. Jestliže je vlajka na hoře, bude geolog hledat v hoře rudy a uhlí, jinak bude hledat vodu. Postav pak důl na každou surovinu, kterou objeví, správný důl pro správnou surovinu:<br>černá - uhlí<br>červená - železná ruda<br>žlutá - zlato<br>šedá - žula<br>Doly mohou být postaveny jedině na horském terénu. Místo vhodné pro důl je označeno kladivem a krumpáčem."
 
 #: ../../../campaigns/t02.wmf/event:283
 msgid "Boldreth laughs..."
@@ -161,7 +161,7 @@ msgstr "Do řeči vstoupí Khantrukh ..."
 
 #: ../../../campaigns/t02.wmf/event:298
 msgid " \"While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy.\" "
-msgstr " \"To je všechno pravda, ale zamyslíme se nad tím později, když teď budeme mít jiné starosti. Horníci budou určitě požadovat větší příděly za práci vysoko v horách, ještě teď, když se ochlazuje. Dodat jim zásoby nemusí být až tak snadné.\""
+msgstr " \"To je všechno pravda, ale zamyslíme se nad tím později, když teď budeme mít jiné starosti. Horníci budou určitě požadovat větší příděly za práci vysoko v horách, zvláště teď, když se ochlazuje. A dodat jim zásoby nemusí být až tak snadné.\""
 
 #: ../../../campaigns/t02.wmf/event:308
 msgid "Boldreth nods..."
@@ -169,7 +169,7 @@ msgstr "Boldreth přikyvuje..."
 
 #: ../../../campaigns/t02.wmf/event:310
 msgid " \"I have to give it to you, you are right here, old man.<br> There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"To ti musím nechat, v tomhle máš pravdu, starochu.<br>Vypadá to, že tu po lesích běhá dost zvěře - můžeme zkusit jich pár ulovit. A potom, každý určitě přivítá novou kuchyň - hele, co jí tak říkat 'Thronova chlouba', jak by se ti to líbilo, co?\"<br><br>-- Nový úkol --<br>"
+msgstr " \"Musím přiznat, že v tomhle máš pravdu, staříku.<br>Vypadá to, že tu po lesích běhá dost zvěře - můžeme jich zkusit pár ulovit. A potom, každý určitě přivítá novou kuchyň - hele, co jí tak říkat 'Thronova chlouba', jak by se ti to líbilo, co?\"<br><br>-- Nový úkol --<br>"
 
 #: ../../../campaigns/t02.wmf/event:311
 msgid "* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners need food.<br> A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br> This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow."
@@ -202,7 +202,7 @@ msgstr "Khantrukh se zahledí do dálky nad pláněmi..."
 
 #: ../../../campaigns/t02.wmf/event:349
 msgid " \"Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread for our chieftain alone!\" "
-msgstr " \"Není to nádhera? Pohled přes zlaté lány, klasy poklidně se vlnící a tančící ve větru? A myslím, že pekař tu bude co nevidět, s nejvybranějším chlebem jen pro našeho velitele!\""
+msgstr " \"Není to nádhera? Pohled přes zlaté lány, klasy poklidně se vlnící a tančící ve větru? A myslím, že pekař tu bude co nevidět, s nejchutnějšími chlebovými plackami jen pro našeho velitele!\""
 
 #: ../../../campaigns/t02.wmf/event:360
 msgid "Thron recognizes..."
@@ -222,7 +222,7 @@ msgstr "Boldreth k tomu poznamená..."
 
 #: ../../../campaigns/t02.wmf/event:375
 msgid " \"So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. The iron ore has to be melt into iron, so it is ready to be forged into whatever we want. And we need the coal to keep the smelter's ovens burning.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"No a tak teď, když máme doly i jídlo na jejich vydržování, je načase převést to, co pro nás naši stateční horníci získali do užitečnějšího stavu. Máme dost železné rudy, ze které vytavíme železo a vykujeme z něj cokoli budeme považovat za vhodné. Potřebujeme uhlí, aby dostatečně vyhřálo slévárenské pece.\"<br><br>-- Nový úkol --<br> "
+msgstr " \"No a tak teď, když máme doly i jídlo na jejich vydržování, je načase převést do užitečnějšího stavu to, co pro nás naši stateční horníci získali. Máme dost železné rudy, ze které vytavíme železo a vykujeme z něj cokoli budeme považovat za vhodné. Potřebujeme uhlí, aby dostatečně vyhřálo slévárenské pece.\"<br><br>-- Nový úkol --<br> "
 
 #: ../../../campaigns/t02.wmf/event:376
 msgid "* Build a smelting works. The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
@@ -263,7 +263,7 @@ msgstr " \"Tak, příteli, tohle nám zaručí, že se naše opevnění nezřít
 
 #: ../../../campaigns/t02.wmf/event:416
 msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking implied flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
-msgstr "* Postav vápenku, studnu a milíř nebo uhelný důl.<br> Lepší budovy mohou vyžadovat kromě tvrzeného dřeva i další materiály. Jedním z nich je malta, která se vyrábí ve vápence z kamene, vody a uhlí. Vodu lze získat ze studny u vodního zdroje, který označí geolog, když jej pošleš k vlajce, která není na horském terénu. Stačí kliknout na vlajku a v menu které se objeví vybrat symbol geologa. Uhlí lze získat z milíře nebo z uhelného dolu."
+msgstr "* Postav vápenku, studnu a uhlíře nebo uhelný důl.<br> Lepší budovy mohou vyžadovat kromě tvrzeného dřeva i další materiály. Jedním z nich je malta, která se vyrábí ve vápence z kamene, vody a uhlí. Vodu lze získat ze studny u vodního zdroje, který označí geolog, když jej pošleš k vlajce, která není na horském terénu. Stačí kliknout na vlajku a v menu které se objeví vybrat symbol geologa. Uhlí lze získat od uhlíře nebo z uhelného dolu."
 
 #: ../../../campaigns/t02.wmf/event:426
 msgid "Khantrukh steps in..."
@@ -313,7 +313,7 @@ msgstr "Další studený den"
 
 #: ../../../campaigns/t02.wmf/event:541
 msgid " \"The other day Boldreth asked me to accompany him to the new inn. It would cheer me up, he said.<br> When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br> The news he brought changed everything...\"<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
-msgstr "\"Jednoho dne mě Boldreth přemluvil, abych jej doprovodil do nové hospody. Povzbudí mě to, sliboval.<br> Když jsem se rozhlédl, uviděl jsem věrné tváře, věřící, že já je dokážu provést těmito temnými dny. Avšak předtím než jsem mohl vyslovit slova vděčnosti a povzbuzení, vběhl do hospody jeden z mých bojovníků. Byl v těchto dnech daleko v lesích a bylo poznat, jak zmožený se cítil.<br>Zpráva, kterou přinášel, změnila vše...\"<br><br>---------------------- Vítězství! -----------------------<br><br> Splnil jsi tuto misi. Můžeš pokračovat ve hře, nebo se přesunout do další mise.</p>"
+msgstr "\"Jednoho dne mě Boldreth přemluvil, abych jej doprovodil do nové hospody. Povzbudí mě to, sliboval.<br> Když jsem se rozhlédl, uviděl jsem věrné tváře, věřící, že já je dokážu provést těmito temnými dny. Avšak předtím než jsem mohl vyslovit slova vděčnosti a povzbuzení, vběhl do hospody jeden z mých bojovníků. Byl v těchto dnech daleko v lesích a bylo poznat, jak zmožený se cítil.<br>Zpráva, kterou přinášel, změnila vše...\"<br><br>-------------------- VÍTĚZSTVÍ! --------------------<br><br> Splnil jsi tuto misi. Můžeš pokračovat ve hře, nebo se přesunout do další mise.</p>"
 
 #: ../../../campaigns/t02.wmf/event:543
 msgid "Mission Complete"
@@ -337,7 +337,7 @@ msgstr "Rozšiř území na severovýchod a postav lom"
 
 #: ../../../campaigns/t02.wmf/objective:7
 msgid "* Build military buildings (like sentries and strongholds) to expand your territory. Get to the rocks north-east from you and build a quarry there."
-msgstr "* Postav vojenské budovy (jako hlásky a tvrze) a rozšiř své území. Postup ke skalám na severovýchodě a postav tam lom."
+msgstr "* Postav vojenské budovy (jako hlásky a opevnění) a rozšiř své území. Postup ke skalám na severovýchodě a postav tam lom."
 
 #: ../../../campaigns/t02.wmf/objective:13
 msgid "Start building mines on a mountain"
@@ -381,7 +381,7 @@ msgstr "Postav vápenku a budovu na uhlí"
 
 #: ../../../campaigns/t02.wmf/objective:63
 msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
-msgstr "* Postav vápenku, studnu a milíř nebo uhelný důl.<br> Lepší budovy mohou vyžadovat kromě tvrzeného dřeva i další materiály. Jedním z nich je malta, která se vyrábí ve vápence z kamene, vody a uhlí. Vodu lze získat ze studny u vodního zdroje, který označí geolog, když jej pošleš k vlajce, která není na horském terénu. Stačí kliknout na vlajku a v menu které se objeví vybrat symbol geologa. Uhlí lze získat z milíře nebo z uhelného dolu."
+msgstr "* Postav vápenku, studnu a uhlíře nebo uhelný důl.<br> Lepší budovy mohou vyžadovat kromě tvrzeného dřeva i další materiály. Jedním z nich je malta, která se vyrábí ve vápence z kamene, vody a uhlí. Vodu lze získat ze studny u vodního zdroje, který označí geolog, když jej pošleš k vlajce, která není na horském terénu. Stačí kliknout na vlajku a v menu které se objeví vybrat symbol geologa. Uhlí lze získat od uhlíře nebo z uhelného dolu."
 
 #: ../../../campaigns/t02.wmf/objective:69
 msgid "Build a fernery"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-10-26 17:45+0000\n"
-"PO-Revision-Date: 2008-11-08 02:58+0100\n"
+"PO-Revision-Date: 2008-11-18 21:36+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -171,7 +171,7 @@ msgstr "Krok kupředu"
 
 #: ../../../campaigns/emp01.wmf/event:234
 msgid " \"Today I got the message that our ship is completely repaired. At the moment my people loading everything onto our newly repaired ship, hoping it will serve us better than last time.<br> Tonight will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br> I still wonder if we will ever see Fremil again.<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.\" "
-msgstr " \"Dnes jsem dostal zprávu, že naše loď je úplně opravena. Mojí lidé právě nakládají všechno, co máme, na novou loď. Doufají, že nás ochrání lépe, než posledně.<br> Tahle noc může bude naší poslední na tomto ostrově. Zítra ráno ostrov opustíme a budeme opět hledat nové místo pro náš exil.<br> Pořád musím myslet na to, jestli ještě někdy spatřím Fremil.\"<br><br>---------------------- VÍTĚZSTVÍ! -----------------------<br><br> Splnil jsi tuto misi. Jestli chceš, můžeš pokračovat v hraní, nebo se přesuň k další misi."
+msgstr " \"Dnes jsem dostal zprávu, že naše loď je úplně opravena. Mojí lidé právě nakládají všechno, co máme, na novou loď. Doufají, že nás ochrání lépe, než posledně.<br> Tahle noc může bude naší poslední na tomto ostrově. Zítra ráno ostrov opustíme a budeme opět hledat nové místo pro náš exil.<br> Pořád musím myslet na to, jestli ještě někdy spatřím Fremil.\"<br><br>-------------------- VÍTĚZSTVÍ! --------------------<br><br> Splnil jsi tuto misi. Jestli chceš, můžeš pokračovat v hraní, nebo se přesuň k další misi."
 
 #: ../../../campaigns/emp01.wmf/event:236
 msgid "Mission Complete"

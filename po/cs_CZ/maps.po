@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-10-26 17:45+0000\n"
-"PO-Revision-Date: 2008-11-12 23:37+0100\n"
+"PO-Revision-Date: 2008-11-18 11:00+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -311,5 +311,5 @@ msgstr "Zubří údolí"
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
-msgstr "Toto magiské údolí bylo od počátku času obydleno zubry. Když sem tvůj kmen přišel, byli si jisti, že nabízí spoustu místa pro mírumilovný život. Ale může tvůj kmen žít v míru s ostatními sousedy?"
+msgstr "Toto magické údolí bylo od počátku času obydleno zubry. Když sem tvůj kmen přišel, byli si jisti, že nabízí spoustu místa pro mírumilovný život. Ale může tvůj kmen žít v míru s ostatními sousedy?"
 

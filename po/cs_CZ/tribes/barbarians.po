@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-11-07 19:56+0000\n"
-"PO-Revision-Date: 2008-11-08 00:35+0100\n"
+"PO-Revision-Date: 2008-11-18 17:10+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -48,8 +48,8 @@ msgstr "Hostinec"
 msgid "Brewery"
 msgstr "Pivovar"
 
-#: ../../../tribes/barbarians/buildings/burner/conf:2
-msgid "Charcoal Burner"
+#: ../../../tribes/barbarians/buildings/burners_house/conf:2
+msgid "Charcoal Burner's House"
 msgstr "Uhlíř"
 
 #: ../../../tribes/barbarians/buildings/citadel/conf:2
@@ -100,7 +100,7 @@ msgstr "Statek"
 msgid "Fernery"
 msgstr "Kapradiny"
 
-#: ../../../tribes/barbarians/buildings/fisher/conf:2
+#: ../../../tribes/barbarians/buildings/fishers_hut/conf:2
 msgid "Fisher's Hut"
 msgstr "Rybář"
 
@@ -108,7 +108,7 @@ msgstr "Rybář"
 msgid "Fortress"
 msgstr "Pevnost"
 
-#: ../../../tribes/barbarians/buildings/gamekeeper/conf:2
+#: ../../../tribes/barbarians/buildings/gamekeepers_hut/conf:2
 msgid "Gamekeeper's Hut"
 msgstr "Hajný"
 
@@ -128,11 +128,11 @@ msgstr "Tesař"
 msgid "Headquarters"
 msgstr "Základna"
 
-#: ../../../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../../../tribes/barbarians/buildings/helmsmithy/conf:2
 msgid "Helmsmithy"
 msgstr "Zbrojíř"
 
-#: ../../../tribes/barbarians/buildings/hunter/conf:2
+#: ../../../tribes/barbarians/buildings/hunters_hut/conf:2
 msgid "Hunter's Hut"
 msgstr "Lovec"
 
@@ -144,7 +144,7 @@ msgstr "Hospoda"
 msgid "Lime Kiln"
 msgstr "Vápenka"
 
-#: ../../../tribes/barbarians/buildings/lumberjack/conf:2
+#: ../../../tribes/barbarians/buildings/lumberjacks_hut/conf:2
 msgid "Lumberjack's Hut"
 msgstr "Dřevorubec"
 
@@ -164,7 +164,7 @@ msgstr "Železorudný důl"
 msgid "Quarry"
 msgstr "Lom"
 
-#: ../../../tribes/barbarians/buildings/ranger/conf:2
+#: ../../../tribes/barbarians/buildings/rangers_hut/conf:2
 msgid "Ranger's Hut"
 msgstr "Lesník"
 
@@ -310,7 +310,7 @@ msgstr "Prut"
 
 #: ../../../tribes/barbarians/wares/fishing_rod/conf:3
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-msgstr "Rybářské pruty používají rybáři k chytání ryb. Vyrábí jej tesaři."
+msgstr "Rybářské pruty používají rybáři k chytání ryb."
 
 #: ../../../tribes/barbarians/wares/flax/conf:2
 msgid "Flax"
@@ -342,7 +342,7 @@ msgstr "Malta"
 
 #: ../../../tribes/barbarians/wares/grout/conf:3
 msgid "Raw stone can be enhanced to grout which delivers solid, non burning build material."
-msgstr "Neopracovaný kámen lze zpracovat na maltu, která je pevným a nehořlavým stavebním materiálem."
+msgstr "Kámen lze zpracovat na maltu, která je pevným a nehořlavým stavebním materiálem."
 
 #: ../../../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -418,7 +418,7 @@ msgstr "Maso obsahuje spoustu energie. Používá se v kuchyních a hospodách p
 
 #: ../../../tribes/barbarians/wares/pick/conf:2
 msgid "Pick"
-msgstr "Páčidlo"
+msgstr "Krumpáč"
 
 #: ../../../tribes/barbarians/wares/pick/conf:3
 msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
@@ -442,11 +442,11 @@ msgstr "Malý zákusek, co udrží horníky plné síly a při práci."
 
 #: ../../../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
-msgstr "Neopracovaný kámen"
+msgstr "Kámen"
 
 #: ../../../tribes/barbarians/wares/raw_stone/conf:3
 msgid "Raw Stones are the secondary build material of the barbarians."
-msgstr "Neopracované kameny jsou druhým nejvýznamějším stavebním materiálem barbarů."
+msgstr "Kameny jsou druhým nejvýznamnějším stavebním materiálem barbarů."
 
 #: ../../../tribes/barbarians/wares/scythe/conf:2
 msgid "Scythe"

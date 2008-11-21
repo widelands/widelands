@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3445\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-10-26 18:45+0100\n"
-"PO-Revision-Date: 2008-11-13 02:11+0100\n"
+"PO-Revision-Date: 2008-11-19 14:06+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -624,7 +624,7 @@ msgstr "Množství"
 
 #: ../../src/encyclopedia_window.cc:193
 msgid " or "
-msgstr "nebo"
+msgstr " nebo "
 
 #: ../../src/game_main_menu_save_game.cc:62
 #: ../../src/game_options_menu.cc:91
@@ -633,11 +633,11 @@ msgstr "Uložit hru"
 
 #: ../../src/game_main_menu_save_game.cc:66
 msgid "Map Name: "
-msgstr "Jméno mapy:"
+msgstr "Jméno mapy: "
 
 #: ../../src/game_main_menu_save_game.cc:70
 msgid "Game Time: "
-msgstr "Herní čas:"
+msgstr "Herní čas: "
 
 #: ../../src/game_main_menu_save_game.cc:78
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:41
@@ -852,7 +852,7 @@ msgstr "Zničit budovu?"
 
 #: ../../src/building_ui.cc:179
 msgid "Do you really want to destroy this "
-msgstr "Chceš opravdu zničit tuhle "
+msgstr "Chceš opravdu zničit "
 
 #: ../../src/building_ui.cc:181
 msgid "?"
@@ -900,7 +900,7 @@ msgstr "Typ: "
 
 #: ../../src/building_ui.cc:1120
 msgid "Experience: "
-msgstr "Zkušenosti: "
+msgstr "Zkušenosti:  "
 
 #: ../../src/building_ui.cc:1127
 msgid "Trying to become: "

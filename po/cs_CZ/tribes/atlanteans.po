@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-11-07 19:56+0000\n"
-"PO-Revision-Date: 2008-11-08 00:45+0100\n"
+"PO-Revision-Date: 2008-11-18 18:12+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Markus7cz <markus7cz@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../../tribes/atlanteans/buildings/armoursmith/conf:2
+#: ../../../tribes/atlanteans/buildings/armoursmithy/conf:2
 msgid "Armoursmithy"
 msgstr "Platnéřství"
 
@@ -29,9 +29,9 @@ msgstr "Pekárna"
 msgid "Blackroot Farm"
 msgstr "Pěstírna koření"
 
-#: ../../../tribes/atlanteans/buildings/burner/conf:2
-msgid "Charcoal Burner"
-msgstr "Milíř"
+#: ../../../tribes/atlanteans/buildings/burners_house/conf:2
+msgid "Charcoal Burner's House"
+msgstr "Uhlíř"
 
 #: ../../../tribes/atlanteans/buildings/castle/conf:2
 msgid "Castle"
@@ -57,16 +57,16 @@ msgstr "Kobka"
 msgid "Farm"
 msgstr "Statek"
 
-#: ../../../tribes/atlanteans/buildings/fish_breeder/conf:2
-msgid "Fish Breeder Hut"
+#: ../../../tribes/atlanteans/buildings/fish_breeders_house/conf:2
+msgid "Fish Breeder's House"
 msgstr "Porybný"
 
-#: ../../../tribes/atlanteans/buildings/fisher/conf:2
-msgid "Fisher Hut"
+#: ../../../tribes/atlanteans/buildings/fishers_house/conf:2
+msgid "Fisher's House"
 msgstr "Rybář"
 
-#: ../../../tribes/atlanteans/buildings/forester/conf:2
-msgid "Forester Hut"
+#: ../../../tribes/atlanteans/buildings/foresters_house/conf:2
+msgid "Forester's House"
 msgstr "Lesník"
 
 #: ../../../tribes/atlanteans/buildings/goldmine/conf:2
@@ -93,8 +93,8 @@ msgstr "Velitelství"
 msgid "High Tower"
 msgstr "Vysoká věž"
 
-#: ../../../tribes/atlanteans/buildings/hunter/conf:2
-msgid "Hunter Hut"
+#: ../../../tribes/atlanteans/buildings/hunters_house/conf:2
+msgid "Hunter's House"
 msgstr "Lovec"
 
 #: ../../../tribes/atlanteans/buildings/ironmine/conf:2
@@ -133,9 +133,9 @@ msgstr "Udírna"
 msgid "Spiderfarm"
 msgstr "Pavoučí farma"
 
-#: ../../../tribes/atlanteans/buildings/toolsmith/conf:2
-msgid "Toolsmith's Shop"
-msgstr "Nástrojárna"
+#: ../../../tribes/atlanteans/buildings/toolsmithy/conf:2
+msgid "Toolsmithy"
+msgstr "Dílna"
 
 #: ../../../tribes/atlanteans/buildings/tower/conf:2
 msgid "Tower"
@@ -145,7 +145,7 @@ msgstr "Věž"
 msgid "Warehouse"
 msgstr "Sklad"
 
-#: ../../../tribes/atlanteans/buildings/weaponsmith/conf:2
+#: ../../../tribes/atlanteans/buildings/weaponsmithy/conf:2
 msgid "Weapon Smithy"
 msgstr "Zbrojířství"
 
@@ -157,8 +157,8 @@ msgstr "Tkalcovna"
 msgid "Well"
 msgstr "Studna"
 
-#: ../../../tribes/atlanteans/buildings/woodcutter/conf:2
-msgid "Woodcutter Hut"
+#: ../../../tribes/atlanteans/buildings/woodcutters_house/conf:2
+msgid "Woodcutter's House"
 msgstr "Dřevorubec"
 
 #: ../../../tribes/atlanteans/conf:18
@@ -187,7 +187,7 @@ msgstr "Pekáč"
 
 #: ../../../tribes/atlanteans/wares/bakingtray/conf:3
 msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-msgstr "Pekáč je nářadí pro pekaře, každý pekař potřebuje svůj vlastní. Vyrábí se u nástrojaře."
+msgstr "Pekáč je nářadí pro pekaře, každý pekař potřebuje svůj vlastní. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/blackroot/conf:2
 msgid "Blackroot"
@@ -195,7 +195,7 @@ msgstr "Rozrazil"
 
 #: ../../../tribes/atlanteans/wares/blackroot/conf:3
 msgid "Blackroots are a special kind of roots. The Atlantids like their strong taste and use its flour for making bread."
-msgstr "Atlantiďané milují silnou chuť drceného kořene rozrazilu a proto jej používají jako koření pro přípravu chleba."
+msgstr "Atlantiďané milují silnou chuť drceného rozrazilu a proto jej používají jako koření pro přípravu chleba."
 
 #: ../../../tribes/atlanteans/wares/blackrootflour/conf:2
 msgid "Blackroot Flour"
@@ -219,7 +219,7 @@ msgstr "Kýble"
 
 #: ../../../tribes/atlanteans/wares/bucket/conf:3
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr "Velké kýble pro porybného - vyrábí je nástrojář."
+msgstr "Velké kýble pro porybného - vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/coal/conf:2
 msgid "Coal"
@@ -227,7 +227,7 @@ msgstr "Uhlí"
 
 #: ../../../tribes/atlanteans/wares/coal/conf:3
 msgid "To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
-msgstr "K výrobě kvalitní atlantidské ocele je potřeba silný oheň. Oheň ze dřeva nění dost výhřevný - proto se musí použít uhlí."
+msgstr "K výrobě kvalitní atlantidské ocele je potřeba silný oheň. Oheň ze dřeva není dost výhřevný - proto se musí použít uhlí."
 
 #: ../../../tribes/atlanteans/wares/corn/conf:2
 msgid "Corn"
@@ -267,7 +267,7 @@ msgstr "Žárové kleště"
 
 #: ../../../tribes/atlanteans/wares/fire_tongs/conf:3
 msgid "The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
-msgstr "Žárové kleště jsou nástroj slévačů, kteří pracují ve slévárnách. Vyrábí se u nástrojaře."
+msgstr "Žárové kleště jsou nástroj slévačů, kteří pracují ve slévárnách. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/fish/conf:2
 msgid "Fish"
@@ -283,7 +283,7 @@ msgstr "Rabářská síť"
 
 #: ../../../tribes/atlanteans/wares/fishing_net/conf:3
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr "Rabářskou síť používají rybáři. Vyrábí je nástrojář."
+msgstr "Rybářskou síť používají rybáři. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/gold/conf:2
 msgid "Gold"
@@ -323,7 +323,7 @@ msgstr "Kladivo"
 
 #: ../../../tribes/atlanteans/wares/hammer/conf:3
 msgid "The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
-msgstr "Kladivo je naprosto nezbytný nástroj. Používá jej geolog, dělník, stavař, nástrojář a kovář. Dej si pozor, ať jich máš vždy aspoň pár rezervních! Vyrábí jej nástrojář."
+msgstr "Kladivo je naprosto nezbytný nástroj. Používá jej geolog, dělník, stavař, nástrojář a kovář. Dej si pozor, ať jich máš vždy aspoň pár rezervních! Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/heavy_double_trident/conf:2
 msgid "Heavy Double Trident"
@@ -339,7 +339,7 @@ msgstr "Tyč s háky"
 
 #: ../../../tribes/atlanteans/wares/hook_pole/conf:3
 msgid "This hook pole is used by the smoker to hang up all the meat and fish to the top of the smoke-house. It is created by the toolsmith."
-msgstr "Tyč s háky používá uzenář na rozvěšení masa a ryb v udírně. Vyrábí se v nástrojárně."
+msgstr "Tyč s háky používá uzenář na rozvěšení masa a ryb v udírně. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/hunting_bow/conf:2
 msgid "Hunting Bow"
@@ -395,7 +395,7 @@ msgstr "Pavoučí kleště"
 
 #: ../../../tribes/atlanteans/wares/milking_tongs/conf:3
 msgid "Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
-msgstr "Pavoučí kleště používá chovatel pavouků na záskávání pavoučích vláken. Vyrábí se v nástrojárně."
+msgstr "Pavoučí kleště používá chovatel pavouků na získávání pavoučích vláken. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/pick/conf:2
 msgid "Pick"
@@ -403,7 +403,7 @@ msgstr "Krumpáč"
 
 #: ../../../tribes/atlanteans/wares/pick/conf:3
 msgid "Picks are used by stonecutters and miners. It is produced by the toolsmith."
-msgstr "Krumpáč používají kameníci a horníci. Vyrábí se v nástrojárně."
+msgstr "Krumpáč používají kameníci a horníci. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/planks/conf:2
 msgid "Planks"
@@ -427,7 +427,7 @@ msgstr "Pila"
 
 #: ../../../tribes/atlanteans/wares/saw/conf:3
 msgid "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith."
-msgstr "Pily používají dřevorubci, nástrojáři a pracovníci na pile. Vyrábí je nástrojář."
+msgstr "Pily používají dřevorubci, nástrojáři a pracovníci na pile. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/scythe/conf:2
 msgid "Scythe"
@@ -435,7 +435,7 @@ msgstr "Kosa"
 
 #: ../../../tribes/atlanteans/wares/scythe/conf:3
 msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "Kosa je nástroj sedláků. Vyrábí se u nástrojaře."
+msgstr "Kosa je nástroj sedláků. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/shovel/conf:2
 msgid "Shovel"
@@ -443,7 +443,7 @@ msgstr "Lopata"
 
 #: ../../../tribes/atlanteans/wares/shovel/conf:3
 msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
-msgstr "Lopata se používá pro obdělávání rostlin, takže ji používají lesník a pěstitel koření. Vyrábí se v nástrojárně."
+msgstr "Lopata se používá pro obdělávání rostlin, takže ji používají lesník a pěstitel koření. Vyrábí se v dílně."
 
 #: ../../../tribes/atlanteans/wares/smoked_fish/conf:2
 msgid "Smoked fish"
@@ -459,7 +459,7 @@ msgstr "Uzené maso"
 
 #: ../../../tribes/atlanteans/wares/smoked_meat/conf:3
 msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
-msgstr "Toto je uzené maso - protože žádný atlantiďan nemá rád syrové maso, uzení je běžné způsob jeho přípravy ke konzumaci."
+msgstr "Toto je uzené maso - protože žádný atlantiďan nemá rád syrové maso, uzení je běžný způsob jeho přípravy ke konzumaci."
 
 #: ../../../tribes/atlanteans/wares/spidercloth/conf:2
 msgid "Spidercloth"
@@ -623,7 +623,7 @@ msgstr "Rozřezává kamení na žulové bloky."
 
 #: ../../../tribes/atlanteans/workers/toolsmith/conf:2
 msgid "Toolsmith"
-msgstr "Nástrojař"
+msgstr "Nástrojář"
 
 #: ../../../tribes/atlanteans/workers/trainer/conf:2
 msgid "Trainer"

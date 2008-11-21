@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3489\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-11-07 19:56+0000\n"
-"PO-Revision-Date: 2008-11-08 02:24+0100\n"
+"PO-Revision-Date: 2008-11-18 18:42+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "Arena"
 msgstr "Aréna"
 
-#: ../../../tribes/empire/buildings/armoursmith/conf:2
+#: ../../../tribes/empire/buildings/armoursmithy/conf:2
 msgid "Armour Smithy"
 msgstr "Platnéřství"
 
@@ -40,9 +40,9 @@ msgstr "Hradba"
 msgid "Brewery"
 msgstr "Pivovar"
 
-#: ../../../tribes/empire/buildings/burner/conf:2
-msgid "Charcoal Burner"
-msgstr "Milíř"
+#: ../../../tribes/empire/buildings/burners_house/conf:2
+msgid "Charcoal Burner's House"
+msgstr "Uhlíř"
 
 #: ../../../tribes/empire/buildings/castle/conf:2
 msgid "Castle"
@@ -80,11 +80,11 @@ msgstr "Hlubinný železorudný důl"
 msgid "Farm"
 msgstr "Statek"
 
-#: ../../../tribes/empire/buildings/fisher/conf:2
+#: ../../../tribes/empire/buildings/fishers_house/conf:2
 msgid "Fisher's House"
 msgstr "Rybář"
 
-#: ../../../tribes/empire/buildings/forester/conf:2
+#: ../../../tribes/empire/buildings/foresters_house/conf:2
 msgid "Forester's House"
 msgstr "Lesník"
 
@@ -100,7 +100,7 @@ msgstr "Zlatý důl"
 msgid "Headquarters"
 msgstr "Základna"
 
-#: ../../../tribes/empire/buildings/hunter/conf:2
+#: ../../../tribes/empire/buildings/hunters_house/conf:2
 msgid "Hunter's House"
 msgstr "Lovec"
 
@@ -108,7 +108,7 @@ msgstr "Lovec"
 msgid "Inn"
 msgstr "Hospoda"
 
-#: ../../../tribes/empire/buildings/lumberjack/conf:2
+#: ../../../tribes/empire/buildings/lumberjacks_house/conf:2
 msgid "Lumberjack's House"
 msgstr "Dřevorubec"
 
@@ -152,7 +152,7 @@ msgstr "Ovčinec"
 msgid "Smelting Works"
 msgstr "Slévárna"
 
-#: ../../../tribes/empire/buildings/stonemason/conf:2
+#: ../../../tribes/empire/buildings/stonemasons_house/conf:2
 msgid "Stonemason's House"
 msgstr "Kameník"
 
@@ -160,9 +160,9 @@ msgstr "Kameník"
 msgid "Tavern"
 msgstr "Hostinec"
 
-#: ../../../tribes/empire/buildings/toolsmith/conf:2
-msgid "Toolsmith's Shop"
-msgstr "Tesařství"
+#: ../../../tribes/empire/buildings/toolsmithy/conf:2
+msgid "Toolsmithy"
+msgstr "Dílna"
 
 #: ../../../tribes/empire/buildings/tower/conf:2
 msgid "Tower"
@@ -180,7 +180,7 @@ msgstr "Vinohrad"
 msgid "Warehouse"
 msgstr "Sklad"
 
-#: ../../../tribes/empire/buildings/weaponsmith/conf:2
+#: ../../../tribes/empire/buildings/weaponsmithy/conf:2
 msgid "Weapon Smithy"
 msgstr "Zbrojířství"
 
@@ -230,7 +230,7 @@ msgstr "Sekera"
 
 #: ../../../tribes/empire/wares/axe/conf:3
 msgid "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "Sekera je nástroj dřevorubce. Vyrobit ji umí tesař."
+msgstr "Sekera je nástroj dřevorubce. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/bakingtray/conf:2
 msgid "Peel"
@@ -238,7 +238,7 @@ msgstr "Sázecí lopata"
 
 #: ../../../tribes/empire/wares/bakingtray/conf:3
 msgid "The peel is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-msgstr "Sázecí lopata je nástroj pekaře, každý potřebuje jednu svou. Vyrobit ji umí tesař."
+msgstr "Sázecí lopata je nástroj pekaře, každý potřebuje jednu svou. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/basket/conf:2
 msgid "Basket"
@@ -246,7 +246,7 @@ msgstr "Koš"
 
 #: ../../../tribes/empire/wares/basket/conf:3
 msgid "This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith."
-msgstr "Koš potřebuje vinař pro sklízení vinné révy. Vyrobit jej umí tesař."
+msgstr "Koš potřebuje pěstitel révy pro sklízení hroznů. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/beer/conf:2
 msgid "Beer"
@@ -294,7 +294,7 @@ msgstr "Žárové kleště"
 
 #: ../../../tribes/empire/wares/fire_tongs/conf:3
 msgid "The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith."
-msgstr "Žárové kleště jsou nástroj slévače, kteří pracují ve slévárnách. Vyrábí je tesař."
+msgstr "Žárové kleště jsou nástroj slévače, kteří pracují ve slévárnách. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/fish/conf:2
 msgid "Fish"
@@ -310,7 +310,7 @@ msgstr "Prut"
 
 #: ../../../tribes/empire/wares/fishing_rod/conf:3
 msgid "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
-msgstr "Rybářské pruty používají rybáři k chytání ryb. Vyrábí je tesař."
+msgstr "Rybářské pruty používají rybáři k chytání ryb. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/flour/conf:2
 msgid "Flour"
@@ -350,7 +350,7 @@ msgstr "Kladivo"
 
 #: ../../../tribes/empire/wares/hammer/conf:3
 msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the armour- and weaponsmith. Make sure you always got some in reserve! It is produced by the toolsmith."
-msgstr "Kladivo je naprosto nezbytný nástroj. Používá jej geolog, dělník, tesař a oba kováři. Dej si pozor, ať jich máš vždy aspoň pár rezervních! Vyrábí jej tesaři."
+msgstr "Kladivo je naprosto nezbytný nástroj. Používá jej geolog, dělník, nástrojář, zbrojíř a platnéř. Dej si pozor, ať jich máš vždy aspoň pár rezervních! Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/heavy_lance/conf:2
 msgid "Heavy Lance"
@@ -446,7 +446,7 @@ msgstr "Krumpáč"
 
 #: ../../../tribes/empire/wares/pick/conf:3
 msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
-msgstr "Tento krumpáč používají kameníci a horníci. Umí jej vyrobit tesař."
+msgstr "Tento krumpáč používají kameníci a horníci. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/plate_armour/conf:2
 msgid "Plate-Armour"
@@ -470,7 +470,7 @@ msgstr "Pila"
 
 #: ../../../tribes/empire/wares/saw/conf:3
 msgid "This saw is needed by the sawyer to create all the useful tools. It is produced by the toolsmith."
-msgstr "Tuto pilu používají tesaři pro výrobu užetečných nářadí. Umí ji vyrobit tesař."
+msgstr "Tuto pilu používají nástrojáři pro výrobu užetečných nářadí. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/scythe/conf:2
 msgid "Scythe"
@@ -478,7 +478,7 @@ msgstr "Kosa"
 
 #: ../../../tribes/empire/wares/scythe/conf:3
 msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "Kosa je nástroj farmáře. Umí ji vyrobit tesař."
+msgstr "Kosa je nástroj farmáře. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/shovel/conf:2
 msgid "Shovel"
@@ -486,7 +486,7 @@ msgstr "Lopata"
 
 #: ../../../tribes/empire/wares/shovel/conf:3
 msgid "The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith."
-msgstr "Lopata se používá pro obdělávání rostlin. Používá ji lesník a vyrobit ji umí tesař."
+msgstr "Lopata se používá pro obdělávání rostlin. Používá ji lesník. Vyrábí se v dílně."
 
 #: ../../../tribes/empire/wares/stone/conf:2
 msgid "Stones"
@@ -511,7 +511,7 @@ msgstr "Válečné kopí"
 
 #: ../../../tribes/empire/wares/war_lance/conf:3
 msgid "This is the best and sharpest weapon, the Empire weaponsmith creates for their warriors."
-msgstr "Toto je nejlepší a nejostřejší zbraň, kterou císařský kovář vyrábí pro vojáky."
+msgstr "Toto je nejlepší a nejostřejší zbraň, kterou císařský zbrojíř vyrábí pro vojáky."
 
 #: ../../../tribes/empire/wares/water/conf:2
 msgid "Water"
@@ -643,7 +643,7 @@ msgstr "Kameník"
 
 #: ../../../tribes/empire/workers/toolsmith/conf:2
 msgid "Toolsmith"
-msgstr "Tesař"
+msgstr "Nástrojář"
 
 #: ../../../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
@@ -651,7 +651,7 @@ msgstr "Cvičitel"
 
 #: ../../../tribes/empire/workers/vinefarmer/conf:2
 msgid "Vine Farmer"
-msgstr "Pěstitel vína"
+msgstr "Pěstitel révy"
 
 #: ../../../tribes/empire/workers/weaponsmith/conf:2
 msgid "Weaponsmith"

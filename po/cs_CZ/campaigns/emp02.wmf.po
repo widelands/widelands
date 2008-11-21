@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn3473\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2008-11-03 13:17+0000\n"
-"PO-Revision-Date: 2008-11-08 04:56+0100\n"
+"PO-Revision-Date: 2008-11-19 14:03+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -125,11 +125,11 @@ msgstr "Saledus je ohromen"
 
 #: ../../../campaigns/emp02.wmf/event:232
 msgid " \"By the Gods, this is an unbelievable stroke of fortune. There are two more mountains and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal burners), smelting works, toolsmith's shops, armour and weapon smithies.<br> But for all these bigger buildings we need better and more elegant building materials. So, let's build<br> a stonemason, who cuts columns from marble.<br> After all, now we can begin living as we did in Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"U bohů, máme neuvěřitelné štěstí. Kousek odsud jsou další dvě hory a zdá se, že v jedné jsou velké zásoby uhlí, zatímco druhá ukrývá bohatství v podobě železné rudy. Okamžitě bychom měli začít budovat železnorudný a uhelný důl (nebo alespoň milíře), slévárny, tesaře, zbrojíře a platnéře.<br> Ale na všechny tyto velké budovy budeme potřebovat kvalitnější a elegantnejší stavební materiály.<br> Například takový kameník může vyrobit z mramoru sloupy.<br> Že bychom konečně začali žít důstojně, tak jako kdysi ve Fremilu?\"<br><br>-- Nový úkol --<br> "
+msgstr " \"U bohů, máme neuvěřitelné štěstí. Kousek odsud jsou další dvě hory a zdá se, že v jedné jsou velké zásoby uhlí, zatímco druhá ukrývá bohatství v podobě železné rudy. Okamžitě bychom měli začít budovat železnorudný a uhelný důl (nebo alespoň uhlíře), slévárny, tesaře, zbrojíře a platnéře.<br> Ale na všechny tyto velké budovy budeme potřebovat kvalitnější a elegantnejší stavební materiály.<br> Například takový kameník může vyrobit z mramoru sloupy.<br> Že bychom konečně začali žít důstojně, tak jako kdysi ve Fremilu?\"<br><br>-- Nový úkol --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:233
 msgid "* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr "* Postav kameníka a potom kompletní infrastrukturu pro těžbu a výrobu (uhelný důl a/nebo milíř,<br> železnorudný důl, tesařství, zbrojířství, platnéřství a slévárnu)."
+msgstr "* Postav kameníka a potom kompletní infrastrukturu pro těžbu a výrobu (uhelný důl a/nebo uhlíře,<br> železnorudný důl, tesařství, zbrojířství, platnéřství a slévárnu)."
 
 #: ../../../campaigns/emp02.wmf/event:235
 msgid "Further mountains"
@@ -153,7 +153,7 @@ msgstr "Jídlo pro horníky"
 
 #: ../../../campaigns/emp02.wmf/event:413
 msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern strands,<br> I got a shock. There was one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings, as soon as possible.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"U všech bohů! Stalo se něco strašného. Zdá se, že stojíme před další zkouškou - a vypadá to, že Saledovy obavy z nalezené lodi nebyly plané.<br> Dnes, když jsem se procházel po východních plážích, jsem zažil šok.<br> Narazil jsem na jeden z nenáviděných, odporných barbarských kmenů, se kterými už jsme měli tolik starostí a problémů.<br> Nejdříve jsem byl tak naivní a doufal jsem v přátelský přístup, ale hned jak mě jeden z nich uviděl, rozběhli se ke mně a zaútočili vrhacími oštěpy.<br> Díky bohům, že jsem byl schopen jim uniknut a skrýt se do doby, než jsem se odvážil pod příkrovem noci vrátil zpět do naší kolonie.<br> Každopédně musíme postavit silnější vojenské budovy, okamžitě jak to jen bude možné.\"<br><br>-- Nový úkol --<br> "
+msgstr " \"U všech bohů! Stalo se něco strašného. Zdá se, že stojíme před další zkouškou - a vypadá to, že Saledovy obavy z nalezené lodi nebyly plané.<br> Dnes, když jsem se procházel po východních plážích, jsem zažil šok.<br> Narazil jsem na jeden z nenáviděných, odporných barbarských kmenů, se kterými už jsme měli tolik starostí a problémů.<br> Nejdříve jsem byl tak naivní a doufal jsem v přátelský přístup, ale hned jak mě jeden z nich uviděl, rozběhli se ke mně a zaútočili vrhacími oštěpy.<br> Díky bohům, že jsem byl schopen jim uniknut a skrýt se do doby, než jsem se odvážil pod příkrovem noci vrátil zpět do naší kolonie.<br> Každopádně musíme postavit silnější vojenské budovy, okamžitě jak to jen bude možné.\"<br><br>-- Nový úkol --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:414
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory build a tower."
@@ -182,7 +182,7 @@ msgstr "Rozkaz k útoku"
 
 #: ../../../campaigns/emp02.wmf/event:480
 msgid " \"Today is a proud day. We fought for our new home and rose victorious.<br> There are still a few barbarians hiding on our island, but I am sure that we will find them soon.<br> Every barbarian, who doesn't attack us, will be put in a boat with the other peaceful ones and will be sent back to their country.\"<br><br>--------------------- VICTORY! ----------------------"
-msgstr " \"Dnes je slavný den. Bojovali jsme o svůj nový domov a zvítězili jsme.<br> Několik barbarů se na našem ostrově stále ještě skrývá, ale jsem si jist, že je brzy najdeme.<br> Každého barbara, který na nás nebude útočit, posadíme na loď a společně s ostatními je odešleme zpět do jejích rodné země.\"<br><br>--------------------- VÍTĚZSTVÍ! ----------------------<br>"
+msgstr " \"Dnes je slavný den. Bojovali jsme o svůj nový domov a zvítězili jsme.<br> Několik barbarů se na našem ostrově stále ještě skrývá, ale jsem si jist, že je brzy najdeme.<br> Každého barbara, který na nás nebude útočit, posadíme na loď a společně s ostatními je odešleme zpět do jejích rodné země.\"<br><br>-------------------- VÍTĚZSTVÍ! --------------------"
 
 #: ../../../campaigns/emp02.wmf/event:482
 msgid "Victory"
@@ -202,7 +202,7 @@ msgstr "OK"
 
 #: ../../../campaigns/emp02.wmf/event:507
 msgid " \"Today a pigeon landed on our island.<br> It brought a message which fills me with dark thoughts and brings back my fears.<br> The message was addressed to me, begging me to come back to Fremil.<br> It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe I was forbidden from attacking.<br> For me, it is clear what I must do...<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.\" "
-msgstr " \"Dnes na náš ostrov přilétl holub.<br> Přinesl zprávy, které mou mysl opět naplnily temnými myšlenkami a obavami.<br> Zpráva byla adresována mně, a prosila mne, abych se vrátil do Fremilu.<br> Císařství vstoupilo do války s barbary. Kmen barbarů, na který mi před časem bylo zakázáno zaútočit, nyní sám zaútočil ze severu.<br> Stále jsem občanem císařství a je mi zcela jasné, co je mou povinností...\" <br><br> Splnil jsi tuto misi. Jestli chceš, můžeš pokračovat v hraní, nebo se přesuň k další misi."
+msgstr " \"Dnes na náš ostrov přilétl holub.<br> Přinesl zprávy, které mou mysl opět naplnily temnými myšlenkami a obavami.<br> Zpráva byla adresována mně a prosila mne, abych se vrátil do Fremilu.<br> Císařství vstoupilo do války s barbary. Kmen barbarů, na který mi před časem bylo zakázáno zaútočit, nyní sám zaútočil ze severu.<br> Stále jsem občanem císařství a je mi zcela jasné, co je mou povinností...\" <br><br> Splnil jsi tuto misi. Jestli chceš, můžeš pokračovat v hraní nebo se přesuň k další misi."
 
 #: ../../../campaigns/emp02.wmf/event:509
 msgid "A Message"
@@ -246,7 +246,7 @@ msgstr "Postav kameníka a těžařskou infrastrukturu"
 
 #: ../../../campaigns/emp02.wmf/objective:41
 msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr "* Postav kameníka a potom kompletní infrastrukturu pro těžbu a výrobu (uhelný důl a/nebo milíř,<br> železnorudný důl, tesařství, zbrojířství, platnéřství a slévárnu)."
+msgstr "* Postav kameníka a potom kompletní infrastrukturu pro těžbu a výrobu (uhelný důl a/nebo uhlíře,<br> železnorudný důl, tesařství, zbrojířství, platnéřství a slévárnu)."
 
 #: ../../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
