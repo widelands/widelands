@@ -2,7 +2,7 @@
 descname=_ Gamekeeper's Hut
 type=production
 size=small
-help=The Gamekeeper makes sure that the natural population of animals never drops to low.
+help=The Gamekeeper makes sure that the natural population of animals never drops too low.
 buildable=yes
 buildicon=gamekeeper_build.png
 worker=gamekeeper
