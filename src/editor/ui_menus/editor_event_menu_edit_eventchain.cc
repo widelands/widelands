@@ -155,7 +155,7 @@ m_event_chain(chain)
 	}
 	m_available_events->sort();
 
-	pos = Point(get_inner_h() - 30, get_inner_w() / 2 - 80 - spacing);
+	pos = Point(get_inner_w() / 2 - 80 - spacing, get_inner_h() - 30);
 
 	new UI::Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
