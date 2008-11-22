@@ -35,7 +35,7 @@ namespace UI {
 Basic_Button::Basic_Button
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const bool enabled, const bool flat,
+	 const bool _enabled, const bool flat,
 	 const uint32_t background_picture_id,
 	 const uint32_t foreground_picture_id,
 	 const std::string & title_text,
@@ -44,7 +44,7 @@ Basic_Button::Basic_Button
 	Panel           (parent, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
-	m_enabled       (enabled),
+	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
 	m_title         (title_text),
