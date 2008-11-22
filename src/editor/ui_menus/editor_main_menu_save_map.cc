@@ -68,8 +68,8 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 			(this,
 			 posx, posy,
 			 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
-	m_ls->selected.set(this, &Main_Menu_Save_Map::selected);
-	m_ls->double_clicked.set(this, &Main_Menu_Save_Map::double_clicked);
+	m_ls->clicked       .set(this, &Main_Menu_Save_Map::       clicked_item);
+	m_ls->double_clicked.set(this, &Main_Menu_Save_Map::double_clicked_item);
 	m_editbox =
 		new UI::EditBox
 			(this,
@@ -164,6 +164,7 @@ called when the ok button has been clicked
 ===========
 */
 void Main_Menu_Save_Map::clicked_ok() {
+	assert(m_ok_btn->enabled());
 	std::string filename = m_editbox->text();
 
 	if (filename == "") //  Maybe a directory is selected.
@@ -217,7 +218,7 @@ void Main_Menu_Save_Map::clicked_make_directory() {
 /*
  * called when a item is selected
  */
-void Main_Menu_Save_Map::selected(uint32_t) {
+void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
 	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
@@ -251,12 +252,16 @@ void Main_Menu_Save_Map::selected(uint32_t) {
 		m_size     ->set_text("");
 		m_editbox  ->setText(m_parent->egbase().map().get_name());
 	}
+	edit_box_changed();
 }
 
 /*
  * An Item has been doubleclicked
  */
-void Main_Menu_Save_Map::double_clicked(uint32_t) {clicked_ok();}
+void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
+	assert(m_ok_btn->enabled());
+	clicked_ok();
+}
 
 /*
  * fill the file list

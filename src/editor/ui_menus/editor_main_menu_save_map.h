@@ -43,8 +43,8 @@ struct Main_Menu_Save_Map : public UI::Window {
 private:
 	void clicked_ok            ();
 	void clicked_make_directory();
-	void selected      (uint32_t);
-	void double_clicked(uint32_t);
+	void        clicked_item(uint32_t);
+	void double_clicked_item(uint32_t);
 	void edit_box_changed();
 
 	void fill_list();

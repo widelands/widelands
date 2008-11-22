@@ -45,6 +45,7 @@ struct BaseListselect : public Panel {
 	~BaseListselect();
 
 	Signal1<uint32_t> selected;
+	Signal1<uint32_t> clicked;
 	Signal1<uint32_t> double_clicked;
 
 	void clear();

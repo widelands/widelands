@@ -43,6 +43,7 @@ struct Basic_Button : public Panel {
 	void set_pic(uint32_t picid);
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
+	bool enabled() const {return m_enabled;}
 	void set_enabled(bool on);
 	void set_repeating(bool const on) {m_repeating = on;}
 	void set_draw_caret(bool draw_caret) {m_draw_caret = draw_caret;}
@@ -92,13 +93,13 @@ template <typename T> struct Button : public Basic_Button {
 		 T * const callback_argument_this,
 		 const std::string & title_text,
 		 const std::string & tooltip_text = std::string(),
-		 const bool enabled = true,
+		 const bool _enabled = true,
 		 const bool flat    = false)
 		:
 		Basic_Button
 			(parent,
 			 x, y, w, h,
-			 enabled, flat,
+			 _enabled, flat,
 			 background_pictute_id,
 			 0,
 			 title_text,
@@ -114,13 +115,13 @@ template <typename T> struct Button : public Basic_Button {
 		 void (T:: * callback_function)(),
 		 T * const callback_argument_this,
 		 const std::string & tooltip_text = std::string(),
-		 const bool enabled = true,
+		 const bool _enabled = true,
 		 const bool flat    = false)
 		:
 		Basic_Button
 			(parent,
 			 x, y, w, h,
-			 enabled, flat,
+			 _enabled, flat,
 			 background_pictute_id,
 			 foreground_picture_id,
 			 std::string(),
@@ -153,13 +154,13 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		 const ID callback_argument_id,
 		 const std::string & title_text,
 		 const std::string & tooltip_text = std::string(),
-		 const bool enabled = true,
+		 const bool _enabled = true,
 		 const bool flat    = false)
 		:
 		Basic_Button
 		(parent,
 		 x, y, w, h,
-		 enabled, flat,
+		 _enabled, flat,
 		 background_pictute_id,
 		 0,
 		 title_text,
@@ -177,13 +178,13 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		 T * const callback_argument_this,
 		 const ID callback_argument_id,
 		 const std::string & tooltip_text = std::string(),
-		 const bool enabled = true,
+		 const bool _enabled = true,
 		 const bool flat    = false)
 		:
 		Basic_Button
 		(parent,
 		 x, y, w, h,
-		 enabled, flat,
+		 _enabled, flat,
 		 background_pictute_id,
 		 foreground_picture_id,
 		 std::string(),
