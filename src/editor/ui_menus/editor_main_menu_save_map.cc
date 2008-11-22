@@ -145,6 +145,7 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 	m_curdir  = "maps";
 
 	fill_list();
+	edit_box_changed();
 
 	center_to_parent();
 	move_to_top();
@@ -321,7 +322,7 @@ void Main_Menu_Save_Map::fill_list() {
  * The editbox was changed. Enable ok button
  */
 void Main_Menu_Save_Map::edit_box_changed() {
-	m_ok_btn->set_enabled(true);
+	m_ok_btn->set_enabled(m_editbox->text().size());
 }
 
 /*
