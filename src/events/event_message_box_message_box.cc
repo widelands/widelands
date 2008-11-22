@@ -129,6 +129,9 @@ void Message_Box_Event_Message_Box::clicked(int32_t i) {
 	} else {
 		//  One of the buttons has been pressed
 		if (Widelands::Trigger_Null * const t = m_trigger[i]) {
+			//  FIXME This is totally broken. Here the click directly affects the
+			//  FIXME game state, whitout passing the command queue. This fails
+			//  FIXME horribly with replays or network games. (bug #2326416)
 			t->set_trigger_manually(true);
 			t->check_set_conditions(*m_game); // forcefully update this trigger
 		}
