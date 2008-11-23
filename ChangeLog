@@ -156,6 +156,7 @@ build-13:
   building by first ordering and upgrade and then immediately ordering the
   destruction of the enhancement-constructionsite. This avoided the burning
   phase, which made the space available immediately.
+- Fixed bug that replay was stopped before all commands had been executed.
 
 build-12:
 - New feature: Additional scenario event types and trigger types.
