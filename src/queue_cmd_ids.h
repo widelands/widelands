@@ -58,5 +58,6 @@
 #define QUEUE_CMD_NETCHECKSYNC         250
 #define QUEUE_CMD_REPLAYSYNCWRITE      251
 #define QUEUE_CMD_REPLAYSYNCREAD       252
+#define QUEUE_CMD_REPLAYEND            253
 
 #endif

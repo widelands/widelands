@@ -1480,7 +1480,6 @@ struct ReplayGameController : public GameController {
 		: m_game(game)
 	{
 		m_game.set_game_controller(this);
-		m_endofgame = false;
 		m_lastframe = WLApplication::get()->get_time();
 		m_time = m_game.get_gametime();
 		m_speed = 1000;
@@ -1490,9 +1489,22 @@ struct ReplayGameController : public GameController {
 		m_replayreader.reset(new Widelands::ReplayReader(m_game, filename));
 	}
 
-	~ReplayGameController()
-	{
-	}
+	struct Cmd_ReplayEnd : public Widelands::Command {
+		Cmd_ReplayEnd (int32_t const duetime) : Widelands::Command(duetime) {}
+		virtual void execute (Widelands::Game * game) {
+			game->gameController()->setDesiredSpeed(0);
+			UI::MessageBox mmb
+				(game->get_iabase(),
+				 _("End of replay"),
+				 _
+				 	("The end of the replay has been reached and the game has "
+				 	 "been paused. You may unpause the game and continue watching "
+				 	 "if you want to."),
+				 UI::MessageBox::OK);
+			mmb.run();
+		}
+		virtual int32_t get_id() {return QUEUE_CMD_REPLAYEND;}
+	};
 
 	void think() {
 		int32_t curtime = WLApplication::get()->get_time();
@@ -1509,27 +1521,17 @@ struct ReplayGameController : public GameController {
 
 		m_time = m_game.get_gametime() + frametime;
 
-		for (;;) {
-			Widelands::Command* cmd = m_replayreader->GetNextCommand(m_time);
-			if (!cmd)
-				break;
+		if (m_replayreader) {
+			while
+				(Widelands::Command * const cmd =
+				 	m_replayreader->GetNextCommand(m_time))
+				m_game.enqueue_command(cmd);
 
-			m_game.enqueue_command(cmd);
-		}
-
-		if (m_replayreader->EndOfReplay() && !m_endofgame) {
-			m_speed = 0;
-			m_time = m_game.get_gametime();
-			UI::MessageBox mmb
-				(m_game.get_iabase(),
-				 _("End of replay"),
-				 _
-				 	("The end of the replay has been reached and the game has "
-				 	 "been paused. You may unpause the game and continue watching "
-				 	 "if you want to."),
-				 UI::MessageBox::OK);
-			mmb.run();
-			m_endofgame = true;
+			if (m_replayreader->EndOfReplay()) {
+				m_replayreader.reset(0);
+				m_game.enqueue_command
+					(new Cmd_ReplayEnd(m_time = m_game.get_gametime()));
+			}
 		}
 	}
 
@@ -1550,7 +1552,6 @@ struct ReplayGameController : public GameController {
 private:
 	Widelands::Game& m_game;
 	boost::scoped_ptr<Widelands::ReplayReader> m_replayreader;
-	bool m_endofgame; ///< used to show the end-of-replay message box only once
 	int32_t m_lastframe;
 	int32_t m_time;
 	uint32_t m_speed;
