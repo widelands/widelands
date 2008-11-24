@@ -1,0 +1,17 @@
+type="critter" #graphics: Toralf Bethke
+swimming=0
+attrib=eatable
+program=remove
+
+[remove]
+0=remove
+
+[idle]
+hotspot=16 19
+pics=marten_idle_se_??.png
+fps=20
+
+[walk]
+hotspot=16 19
+dirpics=marten_walk_!!_??.png
+fps=20

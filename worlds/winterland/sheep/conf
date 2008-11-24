@@ -1,0 +1,18 @@
+type="critter"
+swimming=0  # defaults to 0, is only in the water?
+attrib=eatable
+program=remove
+soundfx=../../../sound/farm/sheep
+
+[remove]
+0=remove
+
+[idle]
+pics=sheep_??.png
+sfx=0 ../../../sound/farm/sheep
+hotspot=15 25
+fps=20
+
+[walk]
+hotspot=15 25
+fps=20

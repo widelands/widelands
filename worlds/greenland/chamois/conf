@@ -1,0 +1,17 @@
+type="critter" #graphics: Toralf Bethke
+swimming=0
+attrib=eatable
+program=remove
+
+[remove]
+0=remove
+
+[idle]
+hotspot=15 22
+pics=chamois_idle_sw_??.png
+fps=20
+
+[walk]
+hotspot=15 22
+dirpics=chamois_walk_!!_??.png
+fps=20

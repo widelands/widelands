@@ -1,0 +1,13 @@
+type="critter"
+swimming=0  # defaults to 0, is only in the water?
+attrib=eatable
+program=remove
+
+[remove]
+0=remove
+
+[idle]
+hotspot=5 9
+
+[walk]
+hotspot=5 9

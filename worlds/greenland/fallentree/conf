@@ -1,0 +1,13 @@
+[global]
+hotspot=3 31
+program=program
+
+[program]
+0=animation dead 30000
+1=remove
+
+[dead]
+pics=fallentree_??.png
+ftp=8
+hotspot=3 31
+

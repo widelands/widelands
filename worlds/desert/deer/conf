@@ -1,0 +1,16 @@
+type="critter"
+swimming=0  # defaults to 0, is only in the water?
+attrib=eatable
+program=remove
+
+[remove]
+0=remove
+
+[idle]
+hotspot=15 25
+pics=deer_idle_se_??.png
+fps=20
+
+[walk]
+hotspot=15 25
+fps=20

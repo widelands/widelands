@@ -1,0 +1,12 @@
+[global]
+type="diminishing"
+stock=1
+
+size=normal
+attrib=tree
+program=fall
+
+hotspot=24 60
+
+[fall]
+0=remove
