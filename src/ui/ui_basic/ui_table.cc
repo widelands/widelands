@@ -171,14 +171,14 @@ void Table<void *>::clear()
 /**
  * Redraw the table
 */
-void Table<void *>::draw(RenderTarget * dst)
+void Table<void *>::draw(RenderTarget & dst)
 {
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx * lineheight - m_scrollpos + HEADER_HEIGHT;
 
-	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		if (y >= get_h())
@@ -188,7 +188,7 @@ void Table<void *>::draw(RenderTarget * dst)
 
 		if (idx == m_selection) {
 			assert(2 <= get_eff_w());
-			dst->brighten_rect
+			dst.brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
 		}
@@ -218,10 +218,10 @@ void Table<void *>::draw(RenderTarget * dst)
 					 /
 					 2);
 			if (entry_picture != -1)
-				dst->blit(point, entry_picture);
+				dst.blit(point, entry_picture);
 			else
 				g_fh->draw_string
-					(*dst,
+					(dst,
 					 UI_FONT_SMALL,
 					 col,
 					 RGBColor(107, 87, 55),

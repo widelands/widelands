@@ -223,13 +223,13 @@ bool Multiline_Editbox::handle_mouserelease(const Uint8, int32_t, int32_t)
 /**
  * Redraw the Editbox
 */
-void Multiline_Editbox::draw(RenderTarget* dst)
+void Multiline_Editbox::draw(RenderTarget & dst)
 {
 	//  make the whole area a bit darker
-	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 	if (get_text().size()) {
 		g_fh->draw_string
-			(*dst,
+			(dst,
 			 m_fontname,
 			 m_fontsize,
 			 m_fcolor,

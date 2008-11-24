@@ -39,7 +39,7 @@ struct Multiline_Editbox : public Multiline_Textarea {
 
 	Signal changed;
 
-	void draw(RenderTarget *);
+	void draw(RenderTarget &);
 	void set_maximum_chars(int32_t n) {m_maxchars=n;}
 	int32_t get_maximum_chars() {return m_maxchars;}
 

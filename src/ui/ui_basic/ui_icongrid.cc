@@ -129,7 +129,7 @@ void Icon_Grid::set_selectbox_color(RGBColor clr)
 /**
  * Draw the building symbols
 */
-void Icon_Grid::draw(RenderTarget* dst)
+void Icon_Grid::draw(RenderTarget & dst)
 {
 	int32_t x, y;
 	bool highlight = false;
@@ -137,7 +137,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 	// First of all, draw the highlight
 	if (m_highlight >= 0 && (m_clicked < 0 || m_clicked == m_highlight)) {
 		get_cell_position(m_highlight, &x, &y);
-		dst->brighten_rect
+		dst.brighten_rect
 			(Rect(Point(x, y), m_cell_width, m_cell_height),
 			 MOUSE_OVER_BRIGHT_FACTOR);
 		highlight = true;
@@ -152,7 +152,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 
-		dst->blit
+		dst.blit
 			(Point(x + (m_cell_width - w) / 2, y + (m_cell_height - h) / 2),
 			 picid);
 
@@ -179,7 +179,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 	{
 		if (m_selected >= 0) {
 			get_cell_position(m_selected, &x, &y);
-			dst->draw_rect
+			dst.draw_rect
 				(Rect(Point(x, y), m_cell_width, m_cell_height), m_selectbox_color);
 		}
 	}
@@ -191,7 +191,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 		if (w > get_inner_w())
 			set_inner_size(w, get_inner_h());
 		g_fh->draw_string
-			(*dst,
+			(dst,
 			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
 			 Point(1, get_h() - m_font_height + 10),
 			 m_items[m_highlight].descr.c_str());

@@ -40,7 +40,7 @@ struct ChatDisplay : public UI::Panel {
 	ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	void setChatProvider(ChatProvider *);
-	virtual void draw(RenderTarget *);
+	virtual void draw(RenderTarget &);
 
 private:
 	ChatProvider * m_chat;

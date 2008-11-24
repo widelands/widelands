@@ -162,7 +162,7 @@ void Window::center_to_parent()
 /**
  * Redraw the window frame and background
 */
-void Window::draw_border(RenderTarget* dst)
+void Window::draw_border(RenderTarget & dst)
 {
 	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
 	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
@@ -175,7 +175,7 @@ void Window::draw_border(RenderTarget* dst)
 	{//  Top border.
 		int32_t pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
 
-		dst->blitrect //  top left corner
+		dst.blitrect //  top left corner
 			(Point(0, 0),
 			 m_pic_top,
 			 Rect(Point(hidden_width_left, 0), pos, TP_B_PIXMAP_THICKNESS));
@@ -183,7 +183,7 @@ void Window::draw_border(RenderTarget* dst)
 		//  top bar
 		compile_assert(0 <= HZ_B_CORNER_PIXMAP_LEN);
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst->blitrect
+			dst.blitrect
 			(Point(pos, 0),
 			 m_pic_top,
 			 Rect
@@ -193,7 +193,7 @@ void Window::draw_border(RenderTarget* dst)
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 		assert(0 <= HZ_B_TOTAL_PIXMAP_LEN - width);
-		dst->blitrect
+		dst.blitrect
 			(Point(pos, 0),
 			 m_pic_top,
 			 Rect
@@ -204,7 +204,7 @@ void Window::draw_border(RenderTarget* dst)
 	// draw the title if we have one
 	if (m_title.length())
 		g_fh->draw_string
-			(*dst,
+			(dst,
 			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
 			 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
 			 m_title.c_str(), Align_Center);
@@ -216,7 +216,7 @@ void Window::draw_border(RenderTarget* dst)
 		if (not _docked_left) {
 
 			compile_assert(0 <= VT_B_PIXMAP_THICKNESS);
-			dst->blitrect // left top thingy
+			dst.blitrect // left top thingy
 				(Point(0, TP_B_PIXMAP_THICKNESS),
 				 m_pic_lborder,
 				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
@@ -226,7 +226,7 @@ void Window::draw_border(RenderTarget* dst)
 			//  left bar
 			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
-				dst->blitrect
+				dst.blitrect
 				(Point(0, pos),
 				 m_pic_lborder,
 				 Rect
@@ -236,7 +236,7 @@ void Window::draw_border(RenderTarget* dst)
 			//  odd pixels of left bar and left bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
-			dst->blitrect
+			dst.blitrect
 				(Point(0, pos),
 				 m_pic_lborder,
 				 Rect
@@ -245,7 +245,7 @@ void Window::draw_border(RenderTarget* dst)
 		}
 
 
-		dst->tile //  background
+		dst.tile //  background
 			(Rect
 			 	(Point
 			 	 	(_docked_left ? 0 : VT_B_PIXMAP_THICKNESS,
@@ -256,7 +256,7 @@ void Window::draw_border(RenderTarget* dst)
 		if (not _docked_right) {
 			const int32_t right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
 
-			dst->blitrect// right top thingy
+			dst.blitrect // right top thingy
 				(Point(right_border_x, TP_B_PIXMAP_THICKNESS),
 				 m_pic_rborder,
 				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
@@ -266,7 +266,7 @@ void Window::draw_border(RenderTarget* dst)
 			//  right bar
 			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
-				dst->blitrect
+				dst.blitrect
 				(Point(right_border_x, pos),
 				 m_pic_rborder,
 				 Rect
@@ -275,7 +275,7 @@ void Window::draw_border(RenderTarget* dst)
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
-			dst->blitrect
+			dst.blitrect
 				(Point(right_border_x, pos),
 				 m_pic_rborder,
 				 Rect
@@ -285,14 +285,14 @@ void Window::draw_border(RenderTarget* dst)
 		if (not _docked_bottom) {
 			int32_t pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
 
-			dst->blitrect //  bottom left corner
+			dst.blitrect //  bottom left corner
 				(Point(0, get_h() - BT_B_PIXMAP_THICKNESS),
 				 m_pic_bottom,
 				 Rect(Point(hidden_width_left, 0), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-				dst->blitrect
+				dst.blitrect
 				(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
 				 m_pic_bottom,
 				 Rect
@@ -301,7 +301,7 @@ void Window::draw_border(RenderTarget* dst)
 
 			// odd pixels of bottom bar and bottom right corner
 			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
-			dst->blitrect
+			dst.blitrect
 				(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
 				 m_pic_bottom,
 				 Rect

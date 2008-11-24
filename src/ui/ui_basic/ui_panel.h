@@ -119,9 +119,9 @@ struct Panel : public Object {
 	bool get_visible() const {return (_flags & pf_visible) ? true : false;}
 	void set_visible(bool on);
 
-	virtual void draw(RenderTarget* dst);
-	virtual void draw_border(RenderTarget* dst);
-	virtual void draw_overlay(RenderTarget & dst);
+	virtual void draw        (RenderTarget &);
+	virtual void draw_border (RenderTarget &);
+	virtual void draw_overlay(RenderTarget &);
 	void update(int32_t x, int32_t y, int32_t w, int32_t h);
 	void update();
 	void update_inner(int32_t x, int32_t y, int32_t w, int32_t h);
@@ -180,7 +180,7 @@ protected:
 private:
 	void check_child_death();
 
-	void do_draw(RenderTarget* dst);
+	void do_draw(RenderTarget &);
 	void do_think();
 
 	Panel * child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel * child);
@@ -210,7 +210,7 @@ private:
 
 	char * _tooltip;
 
-	void draw_tooltip(RenderTarget* dst, Panel *lowest);
+	void draw_tooltip(RenderTarget &, Panel & lowest);
 
 public:
 	void set_tooltip(const char * const);

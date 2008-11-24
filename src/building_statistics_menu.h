@@ -38,7 +38,7 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 	virtual ~Building_Statistics_Menu();
 
 	void think();
-	void draw(RenderTarget *);
+	void draw(RenderTarget &);
 
 private:
 	Interactive_Player & iaplayer() const;

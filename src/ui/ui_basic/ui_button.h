@@ -50,7 +50,7 @@ struct Basic_Button : public Panel {
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 	void think();
 
 	void handle_mousein(bool inside);

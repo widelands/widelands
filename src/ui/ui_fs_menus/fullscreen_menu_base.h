@@ -33,7 +33,7 @@
 struct Fullscreen_Menu_Base : public UI::Panel {
 	Fullscreen_Menu_Base(const char *bgpic);
 
-	virtual void draw(RenderTarget* dst);
+	virtual void draw(RenderTarget &);
 
 private:
 	uint32_t m_pic_background;

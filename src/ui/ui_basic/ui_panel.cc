@@ -165,17 +165,18 @@ int32_t Panel::run()
 		do_think();
 
 		if (g_gr->need_update()) {
-			RenderTarget* rt = g_gr->get_render_target();
+			RenderTarget & rt = *g_gr->get_render_target();
 
 			forefather->do_draw(rt);
 
-			rt->blit(app->get_mouse_position() - Point(3, 7), s_default_cursor);
+			rt.blit(app->get_mouse_position() - Point(3, 7), s_default_cursor);
 
 			if (Panel *lowest = _mousein)
 			{
 				while (lowest->_mousein)
 					lowest = lowest->_mousein;
-				if (lowest->tooltip()) draw_tooltip(rt, lowest);
+				if (lowest->tooltip())
+					draw_tooltip(rt, *lowest);
 			}
 
 			g_gr->refresh();
@@ -347,12 +348,12 @@ void Panel::set_visible(bool const on)
  * Redraw the panel. Note that all drawing coordinates are relative to the
  * inner area: you cannot overwrite the panel border in this function.
  */
-void Panel::draw(RenderTarget *) {}
+void Panel::draw(RenderTarget &) {}
 
 /**
  * Redraw the panel border.
  */
-void Panel::draw_border(RenderTarget *) {}
+void Panel::draw_border(RenderTarget &) {}
 
 
 /**
@@ -670,7 +671,7 @@ void Panel::check_child_death()
  *
  * \param dst RenderTarget for the parent Panel
 */
-void Panel::do_draw(RenderTarget* dst)
+void Panel::do_draw(RenderTarget & dst)
 {
 	if (!get_visible())
 		return;
@@ -680,24 +681,24 @@ void Panel::do_draw(RenderTarget* dst)
 		Rect outerrc;
 		Point outerofs;
 
-		if (dst->enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs)) {
+		if (dst.enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs)) {
 			draw_border(dst);
 
 			Rect innerwindow
 				(Point(_lborder, _tborder),
 				 _w - (_lborder + _rborder), _h - (_tborder + _bborder));
 
-			if (dst->enter_window(innerwindow, 0, 0)) {
+			if (dst.enter_window(innerwindow, 0, 0)) {
 				draw(dst);
 
 				// draw back to front
 				for (Panel *child = _lchild; child; child = child->_prev)
 					child->do_draw(dst);
 
-				draw_overlay(*dst);
+				draw_overlay(dst);
 			}
 
-			dst->set_window(outerrc, outerofs);
+			dst.set_window(outerrc, outerofs);
 		}
 	}
 	/*
@@ -723,7 +724,7 @@ void Panel::do_draw(RenderTarget* dst)
 		}
 
 		// now just blit from the cache
-		dst->blit(_x, _y, _cache);
+		dst.blit(_x, _y, _cache);
 	}
 	*/
 }
@@ -941,10 +942,10 @@ void Panel::set_tooltip(const char * const text) {
 /**
  * Draw the tooltip.
  */
-void Panel::draw_tooltip(RenderTarget* dst, Panel *lowest)
+void Panel::draw_tooltip(RenderTarget & dst, Panel & lowest)
 {
 	int32_t tip_width, tip_height;
-	g_fh->get_size(UI_FONT_TOOLTIP, lowest->tooltip(), &tip_width, &tip_height, 0);
+	g_fh->get_size(UI_FONT_TOOLTIP, lowest.tooltip(), &tip_width, &tip_height, 0);
 	tip_width += 4;
 	tip_height += 4;
 	assert(0 <= tip_width);
@@ -958,14 +959,14 @@ void Panel::draw_tooltip(RenderTarget* dst, Panel *lowest)
 	if (screen_botton_left.x < tooltip_bottom_left.x) r.x -=  4 + r.w;
 	if (screen_botton_left.y < tooltip_bottom_left.y) r.y -= 35 + r.h;
 
-	dst->fill_rect(r, RGBColor(230, 200, 50));
-	dst->draw_rect(r, RGBColor(0, 0, 0));
+	dst.fill_rect(r, RGBColor(230, 200, 50));
+	dst.draw_rect(r, RGBColor(0, 0, 0));
 	g_fh->draw_string
-		(*dst,
+		(dst,
 		 UI_FONT_TOOLTIP,
 		 UI_FONT_TOOLTIP_CLR,
 		 r + Point(2, 2),
-		 lowest->tooltip(),
+		 lowest.tooltip(),
 		 Align_Left, -1,
 		 Widget_Cache_None,
 		 0, -1, false);

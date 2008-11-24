@@ -198,13 +198,13 @@ void Building_Statistics_Menu::think() {
  *
  * Draw this window
  */
-void Building_Statistics_Menu::draw(RenderTarget* dst) {
+void Building_Statistics_Menu::draw(RenderTarget & dst) {
 	Widelands::Player const & player = iaplayer().player();
 	if (m_anim)
-		dst->drawanim
+		dst.drawanim
 			(FLAG_POINT - Point(TRIANGLE_WIDTH / 2, TRIANGLE_HEIGHT),
 			 m_anim, 0, &player);
-	dst->drawanim
+	dst.drawanim
 		(FLAG_POINT, player.tribe().get_flag_anim(), 0, &player);
 
 	// Draw all the panels etc. above the background

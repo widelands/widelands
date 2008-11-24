@@ -284,10 +284,10 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 }
 
 
-void EditBox::draw(RenderTarget* dst)
+void EditBox::draw(RenderTarget & dst)
 {
 	// Draw the background
-	dst->tile
+	dst.tile
 		(Rect(Point(0, 0), get_w(), get_h()),
 		 m->background,
 		 Point(get_x(), get_y()));
@@ -297,23 +297,23 @@ void EditBox::draw(RenderTarget* dst)
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst->brighten_rect
+		dst.brighten_rect
 			(Rect(Point(0, get_h() - 2), get_w(), 2),
 			 BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst->brighten_rect
+		dst.brighten_rect
 			(Rect(Point(get_w() - 2, 0), 2, get_h() - 2),
 			 BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst->fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
-		dst->fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
+		dst.fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
+		dst.fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
 		// left edge
-		dst->fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
-		dst->fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
+		dst.fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
+		dst.fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
 	}
 
 	if (has_focus())
-		dst->brighten_rect
+		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	Point pos(4, get_h() >> 1);
@@ -330,7 +330,7 @@ void EditBox::draw(RenderTarget* dst)
 	}
 
 	g_fh->draw_string
-		(*dst,
+		(dst,
 		 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
 		 pos,
 		 m->text,

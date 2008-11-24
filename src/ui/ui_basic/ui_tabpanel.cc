@@ -145,7 +145,7 @@ void Tab_Panel::activate(uint32_t idx)
 /**
  * Draw the buttons and the tab
 */
-void Tab_Panel::draw(RenderTarget* dst)
+void Tab_Panel::draw(RenderTarget & dst)
 {
 	uint32_t idx;
 	int32_t x;
@@ -153,11 +153,11 @@ void Tab_Panel::draw(RenderTarget* dst)
 	// draw the background
 	compile_assert(2 < TP_BUTTON_WIDTH);
 	compile_assert(4 < TP_BUTTON_HEIGHT);
-	dst->tile
+	dst.tile
 		(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
 		 m_pic_background, Point(get_x(), get_y()));
 	assert(TP_BUTTON_HEIGHT - 2 <= get_h());
-	dst->tile
+	dst.tile
 		(Rect
 		 	(Point(0, TP_BUTTON_HEIGHT - 2),
 		 	 get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
@@ -168,7 +168,7 @@ void Tab_Panel::draw(RenderTarget* dst)
 	// draw the buttons
 	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
 		if (m_highlight == static_cast<int32_t>(idx))
-			dst->brighten_rect
+			dst.brighten_rect
 				(Rect(Point(x, 0), TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT),
 				 MOUSE_OVER_BRIGHT_FACTOR);
 
@@ -176,42 +176,42 @@ void Tab_Panel::draw(RenderTarget* dst)
 		uint32_t cpw, cph;
 		g_gr->get_picture_size(m_tabs[idx].picid, cpw, cph);
 
-		dst->blit
+		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw)/2, (TP_BUTTON_HEIGHT - cph) / 2),
 			 m_tabs[idx].picid);
 
 		// Draw top part of border
 		RGBColor black(0, 0, 0);
 
-		dst->brighten_rect
+		dst.brighten_rect
 			(Rect(Point(x, 0), TP_BUTTON_WIDTH, 2), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst->brighten_rect
+		dst.brighten_rect
 			(Rect(Point(x, 2), 2, TP_BUTTON_HEIGHT - 4),
 			 BUTTON_EDGE_BRIGHT_FACTOR);
-		dst->fill_rect
+		dst.fill_rect
 			(Rect(Point(x + TP_BUTTON_WIDTH - 2, 2), 1, TP_BUTTON_HEIGHT - 4),
 			 black);
-		dst->fill_rect
+		dst.fill_rect
 			(Rect(Point(x + TP_BUTTON_WIDTH - 1, 1), 1, TP_BUTTON_HEIGHT - 3),
 			 black);
 
 		// Draw bottom part
 		if (m_active != idx)
-			dst->brighten_rect
+			dst.brighten_rect
 				(Rect(Point(x, TP_BUTTON_HEIGHT - 2), TP_BUTTON_WIDTH, 2),
 				 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 		else {
-			dst->brighten_rect
+			dst.brighten_rect
 				(Rect(Point(x, TP_BUTTON_HEIGHT - 2), 2, 2),
 				 BUTTON_EDGE_BRIGHT_FACTOR);
 
-			dst->brighten_rect
+			dst.brighten_rect
 				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 2), 2, 2),
 				 BUTTON_EDGE_BRIGHT_FACTOR);
-			dst->fill_rect
+			dst.fill_rect
 				(Rect(Point(x + TP_BUTTON_WIDTH - 1, TP_BUTTON_HEIGHT - 2), 1, 1),
 				 black);
-			dst->fill_rect
+			dst.fill_rect
 				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 1), 2, 1),
 				 black);
 		}
@@ -219,7 +219,7 @@ void Tab_Panel::draw(RenderTarget* dst)
 
 	// draw the remaining separator
 	assert(x <= get_w());
-	dst->brighten_rect
+	dst.brighten_rect
 		(Rect(Point(x, TP_BUTTON_HEIGHT - 2), get_w() - x, 2),
 		 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 }

@@ -67,7 +67,7 @@ void Progress_Bar::set_total(uint32_t total)
 /**
  * Draw the progressbar.
 */
-void Progress_Bar::draw(RenderTarget* dst)
+void Progress_Bar::draw(RenderTarget & dst)
 {
 	assert(0 < get_w());
 	assert(0 < get_h());
@@ -88,16 +88,16 @@ void Progress_Bar::draw(RenderTarget* dst)
 		const uint32_t w = static_cast<uint32_t>(get_w() * fraction);
 		assert(w <= static_cast<uint32_t>(get_w()));
 
-		dst->fill_rect(Rect(Point(0, 0), w, get_h()), color);
-		dst->fill_rect
+		dst.fill_rect(Rect(Point(0, 0), w, get_h()), color);
+		dst.fill_rect
 			(Rect(Point(w, 0), get_w() - w, get_h()), RGBColor(0, 0, 0));
 	}
 	else
 	{
 		const uint32_t h = static_cast<uint32_t>(get_h() * (1.0 - fraction));
 
-		dst->fill_rect(Rect(Point(0, 0), get_w(), h), RGBColor(0, 0, 0));
-		dst->fill_rect(Rect(Point(0, h), get_w(), get_h() - h), color);
+		dst.fill_rect(Rect(Point(0, 0), get_w(), h), RGBColor(0, 0, 0));
+		dst.fill_rect(Rect(Point(0, h), get_w(), get_h() - h), color);
 	}
 
 	// Print the state in percent
@@ -107,7 +107,7 @@ void Progress_Bar::draw(RenderTarget* dst)
 		(buffer, sizeof(buffer), "%u%%", static_cast<uint32_t>(fraction * 100));
 
 	g_fh->draw_string
-		(*dst,
+		(dst,
 		 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
 		 Point(get_w() / 2, get_h() / 2),
 		 buffer,

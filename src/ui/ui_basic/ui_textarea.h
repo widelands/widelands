@@ -59,7 +59,7 @@ struct Textarea : public Panel {
 	void set_align(Align);
 
 	// Drawing and event handlers
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 
 	void set_font(std::string const & name, int32_t size, RGBColor fg) {
 		m_fontname = name;

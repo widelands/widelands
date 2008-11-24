@@ -294,14 +294,14 @@ uint32_t BaseListselect::get_eff_w() const throw ()
 /**
 Redraw the listselect box
 */
-void BaseListselect::draw(RenderTarget* dst)
+void BaseListselect::draw(RenderTarget & dst)
 {
 	// draw text lines
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx*lineheight - m_scrollpos;
 
-	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		if (y >= get_h())
@@ -312,7 +312,7 @@ void BaseListselect::draw(RenderTarget* dst)
 		if (idx == m_selection) {
 			assert(2 <= get_eff_w());
 			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
-			dst->brighten_rect
+			dst.brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
 		}
@@ -334,7 +334,7 @@ void BaseListselect::draw(RenderTarget* dst)
 
 		// Horizontal center the string
 		g_fh->draw_string
-			(*dst,
+			(dst,
 			 UI_FONT_SMALL,
 			 col,
 			 RGBColor(107, 87, 55),
@@ -349,7 +349,7 @@ void BaseListselect::draw(RenderTarget* dst)
 		if (er.picid != -1) {
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
-			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
 		}
 		y += lineheight;
 		++idx;

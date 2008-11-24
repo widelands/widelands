@@ -115,7 +115,7 @@ WaresDisplay::draw
 Draw the wares.
 ===============
 */
-void WaresDisplay::draw(RenderTarget* dst)
+void WaresDisplay::draw(RenderTarget & dst)
 {
 	Point p(2, 2);
 
@@ -139,7 +139,7 @@ void WaresDisplay::draw(RenderTarget* dst)
 			 ++i)
 			totalstock += m_warelists[i]->stock(id);
 
-		draw_ware(*dst, p, id, totalstock, is_worker);
+		draw_ware(dst, p, id, totalstock, is_worker);
 
 		if ((totid + 1) % WaresPerRow) {p.x += WARE_MENU_PIC_WIDTH + 3;}
 		else {p.x = 2; p.y += WARE_MENU_PIC_HEIGHT + 8 + 3;}

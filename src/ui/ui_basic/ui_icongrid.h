@@ -65,7 +65,7 @@ struct Icon_Grid : public Panel {
 	void set_selectbox_color(RGBColor clr);
 
 protected:
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 
 	int32_t index_for_point(int32_t x, int32_t y);
 	void get_cell_position(int32_t idx, int32_t* px, int32_t* py);

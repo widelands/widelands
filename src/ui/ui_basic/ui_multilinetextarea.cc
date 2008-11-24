@@ -119,13 +119,13 @@ void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 /**
  * Redraw the textarea
 */
-void Multiline_Textarea::draw(RenderTarget* dst)
+void Multiline_Textarea::draw(RenderTarget & dst)
 {
 	if (m_text.length()) {
 		//  Let the font handler worry about all the complicated stuff..
 		if (is_richtext(m_text))
 			g_fh->draw_richtext
-				(*dst,
+				(dst,
 				 RGBColor(107, 87, 55),
 				 Point(get_halign(), 0 - m_textpos),
 				 m_text,
@@ -133,7 +133,7 @@ void Multiline_Textarea::draw(RenderTarget* dst)
 				 m_cache_mode, &m_cache_id);
 		else
 			g_fh->draw_string
-				(*dst,
+				(dst,
 				 m_fontname,
 				 m_fontsize,
 				 m_fcolor, RGBColor(107, 87, 55),

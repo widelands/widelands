@@ -86,10 +86,10 @@ WUIPlot_Area::~WUIPlot_Area() {}
 /*
  * Draw this. This is the main function
  */
-void WUIPlot_Area::draw(RenderTarget* dst) {
+void WUIPlot_Area::draw(RenderTarget & dst) {
 
 	// first, tile the background
-	dst->tile
+	dst.tile
 		(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
 		 g_gr->get_picture(PicMod_Game, BG_PIC), Point(0, 0));
 
@@ -102,21 +102,21 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
 	// Draw coordinate system
 	// X Axis
-	dst->draw_line
+	dst.draw_line
 		(spacing,                        get_inner_h() - space_at_bottom,
 		 get_inner_w() - space_at_right, get_inner_h() - space_at_bottom,
 		 LINE_COLOR);
 	// Arrow
-	dst->draw_line
+	dst.draw_line
 		(spacing,     get_inner_h() - space_at_bottom,
 		 spacing + 5, get_inner_h() - space_at_bottom - 3,
 		 LINE_COLOR);
-	dst->draw_line
+	dst.draw_line
 		(spacing,     get_inner_h() - space_at_bottom,
 		 spacing + 5, get_inner_h() - space_at_bottom + 3,
 		 LINE_COLOR);
 	//  Y Axis
-	dst->draw_line
+	dst.draw_line
 		(get_inner_w() - space_at_right, spacing,
 		 get_inner_w() - space_at_right,
 		 get_inner_h() - space_at_bottom,
@@ -128,7 +128,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 	float posx = get_inner_w() - space_at_right;
 	char buffer[200];
 	for (int32_t i = 0; i <= how_many_ticks[m_time]; ++i) {
-		dst->draw_line
+		dst.draw_line
 			(static_cast<int32_t>(posx), get_inner_h() - space_at_bottom,
 			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
 			 LINE_COLOR);
@@ -140,7 +140,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 		int32_t w, h;
 		g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
 		g_fh->draw_string
-			(*dst,
+			(dst,
 			 UI_FONT_SMALL,
 			 RGBColor(255, 0, 0), RGBColor(255, 255, 255),
 			 Point
@@ -152,11 +152,11 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 	}
 
 	//  draw yticks, one at full, one at half
-	dst->draw_line
+	dst.draw_line
 		(get_inner_w() - space_at_right,    spacing,
 		 get_inner_w() - space_at_right -3, spacing,
 		 LINE_COLOR);
-	dst->draw_line
+	dst.draw_line
 		(get_inner_w() - space_at_right,
 		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
 		 get_inner_w() - space_at_right - 3,
@@ -204,7 +204,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 	int32_t w, h;
 	g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
 	g_fh->draw_string
-		(*dst,
+		(dst,
 		 UI_FONT_SMALL,
 		 RGBColor(120, 255, 0), RGBColor(255, 255, 255),
 		 Point(get_inner_w() - space_at_right - w - 2, spacing),
@@ -263,7 +263,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 						(static_cast<float>(max) / static_cast<float>(value));
 					cury -= static_cast<int32_t>(length_y);
 				}
-				dst->draw_line(lx, ly, curx, cury, color);
+				dst.draw_line(lx, ly, curx, cury, color);
 
 				posx -= sub;
 

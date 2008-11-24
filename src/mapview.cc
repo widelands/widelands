@@ -79,7 +79,7 @@ map the user can see. we spend a lot of time
 in this function
 ===============
 */
-void Map_View::draw(RenderTarget* dst)
+void Map_View::draw(RenderTarget & dst)
 {
 	Widelands::Editor_Game_Base & egbase = intbase().egbase();
 
@@ -96,11 +96,10 @@ void Map_View::draw(RenderTarget* dst)
 
 	egbase.map().overlay_manager().load_graphics();
 
-	if (upcast(Interactive_Player const, interactive_player, &intbase())) {
-		dst->rendermap(egbase,  interactive_player->player(), m_viewpoint);
-	} else {
-		dst->rendermap(egbase, m_viewpoint);
-	}
+	if (upcast(Interactive_Player const, interactive_player, &intbase()))
+		dst.rendermap(egbase, interactive_player->player(), m_viewpoint);
+	else
+		dst.rendermap(egbase, m_viewpoint);
 
 	m_complete_redraw_needed = false;
 }

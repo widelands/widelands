@@ -47,7 +47,7 @@ public:
 	void set_total(uint32_t total);
 
 protected:
-	virtual void draw(RenderTarget* dst);
+	virtual void draw(RenderTarget &);
 
 private:
 	uint32_t m_orientation;

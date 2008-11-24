@@ -60,7 +60,7 @@ struct EditBox : public Panel {
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_keysym);
 
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 
 private:
 	boost::scoped_ptr<EditBoxImpl> m;

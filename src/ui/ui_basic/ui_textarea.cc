@@ -100,11 +100,11 @@ void Textarea::set_align(const Align align) {
 /**
  * Redraw the Textarea
  */
-void Textarea::draw(RenderTarget* dst)
+void Textarea::draw(RenderTarget & dst)
 {
 	if (m_text.length())
 		g_fh->draw_string
-			(*dst,
+			(dst,
 			 m_fontname, m_fontsize, m_fcolor, UI_FONT_CLR_BG,
 			 Point
 			 	(m_align & Align_HCenter ?

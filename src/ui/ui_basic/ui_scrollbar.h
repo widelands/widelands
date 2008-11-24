@@ -72,7 +72,7 @@ private:
 
 	void draw_button(RenderTarget &, Area, Rect);
 	void draw_area  (RenderTarget &, Area, Rect);
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 	void think();
 
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);

@@ -49,7 +49,7 @@ struct Map_View : public UI::Panel {
 	bool is_dragging() const {return m_dragging;}
 
 	// Drawing
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 
 	// Event handling
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);

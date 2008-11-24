@@ -301,7 +301,7 @@ static const RGBColor colors[] = {
 struct WSM_Checkbox : public UI::Checkbox {
 	WSM_Checkbox(UI::Panel *, Point, int32_t id, uint32_t picid, RGBColor);
 
-	virtual void draw(RenderTarget *t);
+	virtual void draw(RenderTarget &);
 
 private:
 	int32_t  m_pic;
@@ -326,18 +326,18 @@ m_color     (color)
 /*
  * draw
  */
-void WSM_Checkbox::draw(RenderTarget* dst) {
+void WSM_Checkbox::draw(RenderTarget & dst) {
 	//  First, draw normal.
 	UI::Checkbox::draw(dst);
 
 	//  Now, draw a small box with the color.
 	assert(1 <= get_inner_w());
 	compile_assert(2 <= COLOR_BOX_HEIGHT);
-	dst->fill_rect
+	dst.fill_rect
 		(Rect(Point(1, 1), get_inner_w() - 1, COLOR_BOX_HEIGHT - 2), m_color);
 
 	//  and the item
-	dst->blit
+	dst.blit
 		(Point((get_inner_w() - WARE_MENU_PIC_WIDTH) / 2, COLOR_BOX_HEIGHT),
 		 m_pic);
 }

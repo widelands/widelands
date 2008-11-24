@@ -290,7 +290,7 @@ public:
 	~WaresQueueDisplay();
 
 	virtual void think();
-	virtual void draw(RenderTarget* dst);
+	virtual void draw(RenderTarget &);
 
 private:
 	void recalc_size();
@@ -394,7 +394,7 @@ WaresQueueDisplay::draw
 Render the current WaresQueue state.
 ===============
 */
-void WaresQueueDisplay::draw(RenderTarget* dst)
+void WaresQueueDisplay::draw(RenderTarget & dst)
 {
 	if (!m_display_size)
 		return;
@@ -405,9 +405,9 @@ void WaresQueueDisplay::draw(RenderTarget* dst)
 	uint32_t nr_empty_to_draw = m_display_size - nr_wares_to_draw;
 	Point point(Border, Border);
 	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth)
-		dst->blit(point, m_icon);
+		dst.blit(point, m_icon);
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth)
-		dst->blit(point, m_pic_background);
+		dst.blit(point, m_pic_background);
 }
 
 
@@ -437,7 +437,7 @@ struct Building_Window : public UI::Window {
 	Interactive_Player* get_player() {return m_player;}
 	Building* get_building() {return m_building;}
 
-	virtual void draw(RenderTarget* dst);
+	virtual void draw(RenderTarget &);
 	virtual void think();
 
 	UI::Panel* create_capsbuttons(UI::Panel* parent);
@@ -527,11 +527,11 @@ Building_Window::draw
 Draw a picture of the building in the background.
 ===============
 */
-void Building_Window::draw(RenderTarget* dst)
+void Building_Window::draw(RenderTarget & dst)
 {
 	uint32_t anim = get_building()->get_ui_anim();
 
-	dst->drawanim(Point(get_inner_w() / 2, get_inner_h() / 2), anim, 0, 0);
+	dst.drawanim(Point(get_inner_w() / 2, get_inner_h() / 2), anim, 0, 0);
 
 	// Draw all the panels etc. above the background
 	UI::Window::draw(dst);

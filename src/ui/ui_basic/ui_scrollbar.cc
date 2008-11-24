@@ -318,7 +318,7 @@ void Scrollbar::draw_area(RenderTarget & dst, const Area area, const Rect r) {
 /**
  * Draw the scrollbar.
 */
-void Scrollbar::draw(RenderTarget* dst)
+void Scrollbar::draw(RenderTarget & dst)
 {
 	uint32_t knobpos = get_knob_pos();
 	uint32_t knobsize = get_knob_size();
@@ -330,24 +330,24 @@ void Scrollbar::draw(RenderTarget* dst)
 	{
 		if (static_cast<int32_t>(2*Size + knobsize) > get_w()) {
 			// Our owner obviously allocated too little space - draw something stupid
-			draw_button(*dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
+			draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
 			return;
 		}
 
-		draw_button(*dst, Minus, Rect(Point(0, 0), Size, get_h()));
-		draw_button(*dst, Plus, Rect(Point(get_w() - Size, 0), Size, get_h()));
+		draw_button(dst, Minus, Rect(Point(0, 0), Size, get_h()));
+		draw_button(dst, Plus, Rect(Point(get_w() - Size, 0), Size, get_h()));
 		draw_button
-			(*dst, Knob, Rect(Point(knobpos - knobsize / 2, 0), knobsize, get_h()));
+			(dst, Knob, Rect(Point(knobpos - knobsize / 2, 0), knobsize, get_h()));
 
 		assert(Size + knobsize/2 <= knobpos);
 		draw_area
-			(*dst,
+			(dst,
 			 MinusPage,
 			 Rect(Point(Size, 0), knobpos - Size - knobsize/2, get_h()));
 		assert(0 <= get_w());
 		assert(knobpos + knobsize/2 + Size <= static_cast<uint32_t>(get_w()));
 		draw_area
-			(*dst,
+			(dst,
 			 PlusPage,
 			 Rect
 			 	(Point(knobpos + knobsize / 2, 0),
@@ -357,24 +357,24 @@ void Scrollbar::draw(RenderTarget* dst)
 	{
 		if (static_cast<int32_t>(2*Size + knobsize) > get_h()) {
 			// Our owner obviously allocated too little space - draw something stupid
-			draw_button(*dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
+			draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
 			return;
 		}
 
-		draw_button(*dst, Minus, Rect(Point(0, 0), get_w(), Size));
-		draw_button(*dst, Plus, Rect(Point(0, get_h() - Size), get_w(), Size));
+		draw_button(dst, Minus, Rect(Point(0, 0), get_w(), Size));
+		draw_button(dst, Plus, Rect(Point(0, get_h() - Size), get_w(), Size));
 		draw_button
-			(*dst, Knob, Rect(Point(0, knobpos - knobsize / 2), get_w(), knobsize));
+			(dst, Knob, Rect(Point(0, knobpos - knobsize / 2), get_w(), knobsize));
 
 		assert(Size + knobsize/2 <= knobpos);
 		draw_area
-			(*dst,
+			(dst,
 			 MinusPage,
 			 Rect(Point(0, Size), get_w(), knobpos - Size - knobsize/2));
 		assert(0 <= get_h());
 		assert(knobpos + knobsize/2 + Size <= static_cast<uint32_t>(get_h()));
 		draw_area
-			(*dst,
+			(dst,
 			 PlusPage,
 			 Rect
 			 	(Point(0, knobpos + knobsize / 2),

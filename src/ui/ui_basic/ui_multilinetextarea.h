@@ -71,7 +71,7 @@ struct Multiline_Textarea : public Panel {
 	void set_color(RGBColor fg) {m_fcolor = fg;}
 
 	// Drawing and event handlers
-	void draw(RenderTarget *);
+	void draw(RenderTarget &);
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 

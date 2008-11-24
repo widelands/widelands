@@ -58,7 +58,7 @@ struct Window : public Panel {
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
-	void draw_border(RenderTarget* dst);
+	void draw_border(RenderTarget &);
 
 	void think();
 

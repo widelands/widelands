@@ -57,7 +57,7 @@ struct Statebox : public Panel {
 	}
 
 	// Drawing and event handlers
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 
 	void handle_mousein(bool inside);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);

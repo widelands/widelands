@@ -63,7 +63,7 @@ public:
 	void remove_all_warelists();
 
 protected:
-	virtual void draw(RenderTarget* dst);
+	virtual void draw(RenderTarget &);
 	virtual void draw_ware
 		(RenderTarget &,
 		 Point,

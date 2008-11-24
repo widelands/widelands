@@ -76,7 +76,7 @@ struct Displayed {
 	int32_t h;
 };
 
-void ChatDisplay::draw(RenderTarget* dst)
+void ChatDisplay::draw(RenderTarget & dst)
 {
 	if (!m_chat)
 		return;
@@ -109,7 +109,7 @@ void ChatDisplay::draw(RenderTarget* dst)
 		 ++it)
 	{
 		g_fh->draw_string
-			(*dst,
+			(dst,
 			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
 			 Point(0, get_inner_h() -55 -y),
 			 it->text,

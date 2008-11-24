@@ -113,10 +113,10 @@ private:
 			m_increase_temporary.set_repeating(true);
 		}
 
-		virtual void draw(RenderTarget * dst) {
-			dst->blit(Point(0, 0), m_descr.icon());
+		virtual void draw(RenderTarget & dst) {
+			dst.blit(Point(0, 0), m_descr.icon());
 			g_fh->draw_string
-				(*dst,
+				(dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,
 				 Point(26, 12),
 				 m_descr.descname().c_str(),
@@ -127,7 +127,7 @@ private:
 			char buffer[32];
 			sprintf(buffer, "%u", tq.permanent);
 			g_fh->draw_string
-				(*dst,
+				(dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,
 				 Point(188, 12),
 				 buffer,
@@ -135,7 +135,7 @@ private:
 				 -1);
 			sprintf(buffer, "%u", tq.temporary);
 			g_fh->draw_string
-				(*dst,
+				(dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,
 				 Point(278, 12),
 				 buffer,

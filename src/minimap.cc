@@ -67,9 +67,9 @@ MiniMapView::draw
 Redraw the view of the map
 ===============
 */
-void MiniMap::View::draw(RenderTarget* dst)
+void MiniMap::View::draw(RenderTarget & dst)
 {
-	dst->renderminimap
+	dst.renderminimap
 		(m_iabase.egbase(),
 		 m_iabase.get_player(),
 		 Point(m_viewx - get_w() / 2, m_viewy - get_h() / 2),

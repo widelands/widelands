@@ -98,44 +98,45 @@ Slider::Slider
  * \param w The cursor width.
  * \param h The cursor height.
  */
-void
-Slider::draw_cursor(RenderTarget* dst, int32_t x, int32_t y, int32_t w, int32_t h)
+void Slider::draw_cursor
+	(RenderTarget & dst,
+	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 {
 
 	RGBColor black(0, 0, 0);
 
-	dst->tile //  background
+	dst.tile //  background
 		(Rect(Point(x, y), w, h), m_pic_background, Point(get_x(), get_y()));
 
 	if (m_highlighted)
-		dst->brighten_rect(Rect(Point(x, y), w, h), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Rect(Point(x, y), w, h), MOUSE_OVER_BRIGHT_FACTOR);
 
 	if (m_pressed) { //  draw border
-		dst->brighten_rect //  bottom edge
+		dst.brighten_rect //  bottom edge
 			(Rect(Point(x, y + h - 2), w,     2), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst->brighten_rect //  right edge
+		dst.brighten_rect //  right edge
 			(Rect(Point(x + w - 2, y), 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  top edge
-		dst->fill_rect(Rect(Point(x, y),     w - 1, 1), black);
-		dst->fill_rect(Rect(Point(x, y + 1), w - 2, 1), black);
+		dst.fill_rect(Rect(Point(x, y),     w - 1, 1), black);
+		dst.fill_rect(Rect(Point(x, y + 1), w - 2, 1), black);
 
 		//  left edge
-		dst->fill_rect(Rect(Point(x,     y), 1, h - 1), black);
-		dst->fill_rect(Rect(Point(x + 1, y), 1, h - 2), black);
+		dst.fill_rect(Rect(Point(x,     y), 1, h - 1), black);
+		dst.fill_rect(Rect(Point(x + 1, y), 1, h - 2), black);
 	} else {
-		dst->brighten_rect //  top edge
+		dst.brighten_rect //  top edge
 			(Rect(Point(x, y),     w,     2), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst->brighten_rect //  left edge
+		dst.brighten_rect //  left edge
 			(Rect(Point(x, y + 2), 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  bottom edge
-		dst->fill_rect(Rect(Point(x + 2, y + h - 2), w - 2, 1), black);
-		dst->fill_rect(Rect(Point(x + 1, y + h - 1), w - 1, 1), black);
+		dst.fill_rect(Rect(Point(x + 2, y + h - 2), w - 2, 1), black);
+		dst.fill_rect(Rect(Point(x + 1, y + h - 1), w - 1, 1), black);
 
 		//  right edge
-		dst->fill_rect(Rect(Point(x + w - 2, y + 2), 1, h - 2), black);
-		dst->fill_rect(Rect(Point(x + w - 1, y + 1), 1, h - 1), black);
+		dst.fill_rect(Rect(Point(x + w - 2, y + 2), 1, h - 2), black);
+		dst.fill_rect(Rect(Point(x + w - 1, y + 1), 1, h - 1), black);
 	}
 
 }
@@ -297,25 +298,25 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
  *
  * \param dst The graphic destination.
  */
-void HorizontalSlider::draw(RenderTarget * dst) {
+void HorizontalSlider::draw(RenderTarget & dst) {
 	RGBColor black(0, 0, 0);
 
-	dst->brighten_rect //  bottom edge
+	dst.brighten_rect //  bottom edge
 		(Rect(Point(get_x_gap(), get_h() / 2), get_bar_size(), 2),
 		 BUTTON_EDGE_BRIGHT_FACTOR);
-	dst->brighten_rect //  right edge
+	dst.brighten_rect //  right edge
 		(Rect(Point(get_x_gap() + get_bar_size() - 2, get_y_gap()), 2, 2),
 		 BUTTON_EDGE_BRIGHT_FACTOR);
 
 	//  top edge
-	dst->fill_rect
+	dst.fill_rect
 		(Rect(Point(get_x_gap(), get_y_gap()),     get_bar_size() - 1, 1), black);
-	dst->fill_rect
+	dst.fill_rect
 		(Rect(Point(get_x_gap(), get_y_gap() + 1), get_bar_size() - 2, 1), black);
 
 	//  left edge
-	dst->fill_rect(Rect(Point(get_x_gap(),     get_y_gap()), 1, 4), black);
-	dst->fill_rect(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, 3), black);
+	dst.fill_rect(Rect(Point(get_x_gap(),     get_y_gap()), 1, 4), black);
+	dst.fill_rect(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, 3), black);
 
 	draw_cursor(dst, m_cursor_pos, 0, m_cursor_size, get_h());
 }
@@ -369,25 +370,25 @@ bool HorizontalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) 
  *
  * \param dst The graphic destination.
  */
-void VerticalSlider::draw(RenderTarget * dst) {
+void VerticalSlider::draw(RenderTarget & dst) {
 	RGBColor black(0, 0, 0);
 
-	dst->brighten_rect //  right edge
+	dst.brighten_rect //  right edge
 		(Rect(Point(get_w() / 2, get_y_gap()), 2, get_bar_size()),
 		 BUTTON_EDGE_BRIGHT_FACTOR);
-	dst->brighten_rect //  bottom edge
+	dst.brighten_rect //  bottom edge
 		(Rect(Point(get_x_gap(), get_y_gap() + get_bar_size() - 2), 2, 2),
 		 BUTTON_EDGE_BRIGHT_FACTOR);
 
 	//  left edge
-	dst->fill_rect
+	dst.fill_rect
 		(Rect(Point(get_x_gap(),     get_y_gap()), 1, get_bar_size() - 1), black);
-	dst->fill_rect
+	dst.fill_rect
 		(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, get_bar_size() - 2), black);
 
 	//  top edge
-	dst->fill_rect(Rect(Point(get_x_gap(), get_y_gap()),     4, 1), black);
-	dst->fill_rect(Rect(Point(get_x_gap(), get_y_gap() + 1), 3, 1), black);
+	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap()),     4, 1), black);
+	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap() + 1), 3, 1), black);
 
 	draw_cursor(dst, 0, m_cursor_pos, get_w(), m_cursor_size);
 }

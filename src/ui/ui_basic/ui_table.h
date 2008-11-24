@@ -110,7 +110,7 @@ template<typename Entry> struct Table {
 	uint32_t get_eff_w     () const throw ();
 
 	// Drawing and event handling
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 };
@@ -212,7 +212,7 @@ public:
 	uint32_t get_eff_w     () const throw () {return get_w();}
 
 	// Drawing and event handling
-	void draw(RenderTarget* dst);
+	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 

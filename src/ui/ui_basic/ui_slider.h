@@ -59,7 +59,8 @@ protected:
 	int32_t get_x_gap()    const {return m_x_gap;}
 	int32_t get_y_gap()    const {return m_y_gap;}
 	int32_t get_bar_size() const {return m_bar_size;}
-	void draw_cursor(RenderTarget * dst, int32_t x, int32_t y, int32_t w, int32_t h);
+	void draw_cursor
+		(RenderTarget &, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	//  mouse events
 	bool handle_mouserelease(Uint8 btn, int32_t, int32_t);
@@ -124,7 +125,7 @@ struct HorizontalSlider : public Slider {
 	{}
 
 protected:
-	void draw(RenderTarget * dst);
+	void draw(RenderTarget & dst);
 	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 };
@@ -158,7 +159,7 @@ struct VerticalSlider : public Slider {
 	{}
 
 protected:
-	void draw(RenderTarget * dst);
+	void draw(RenderTarget & dst);
 	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 };

@@ -101,27 +101,27 @@ void Statebox::set_state(bool const on) {
 /**
  * Redraw the entire checkbox
 */
-void Statebox::draw(RenderTarget* dst)
+void Statebox::draw(RenderTarget & dst)
 {
 	if (m_flags & Has_Custom_Picture) {
 		// center picture
 		uint32_t w, h;
 		g_gr->get_picture_size(m_pic_graphics, w, h);
 
-		dst->blit
+		dst.blit
 			(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2),
 			 m_pic_graphics);
 
 		if (m_flags & Is_Checked)
-			dst->draw_rect
+			dst.draw_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(229, 116,   2));
 		else if (m_flags & Is_Highlighted)
-			dst->draw_rect
+			dst.draw_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
 	} else {
 		compile_assert(0 <= STATEBOX_WIDTH);
 		compile_assert(0 <= STATEBOX_HEIGHT);
-		dst->blitrect
+		dst.blitrect
 			(Point(0, 0),
 			 m_pic_graphics,
 			 Rect
@@ -129,7 +129,7 @@ void Statebox::draw(RenderTarget* dst)
 			 	 STATEBOX_WIDTH, STATEBOX_HEIGHT));
 
 		if (m_flags & Is_Highlighted)
-			dst->draw_rect
+			dst.draw_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
 	}
 }
