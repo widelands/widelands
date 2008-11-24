@@ -78,7 +78,14 @@ struct StreamWrite {
 	void String(std::string const & str) {
 		Data(str.c_str(), str.size() + 1);
 	}
-	void CString(const char * const x) {Data(x, strlen(x) + 1);}
+
+	//  Write strings with    null terminator.
+	void CString(char        const * const x) {Data(x,         strlen(x) + 1);}
+	void CString(std::string const &       x) {Data(x.c_str(), x.size()  + 1);}
+
+	//  Write strings without null terminator.
+	void Text   (char        const * const x) {Data(x,         strlen(x));}
+	void Text   (std::string const &       x) {Data(x.c_str(), x.size());}
 
 private:
 	StreamWrite & operator=(StreamWrite const &);

@@ -105,7 +105,7 @@ void Textarea::draw(RenderTarget* dst)
 	if (m_text.length())
 		g_fh->draw_string
 			(*dst,
-			 m_fontname, m_fontsize, m_fcolor, RGBColor(107, 87, 55),
+			 m_fontname, m_fontsize, m_fcolor, UI_FONT_CLR_BG,
 			 Point
 			 	(m_align & Align_HCenter ?
 			 	 get_w() / 2 : m_align & Align_Right  ? get_w() : 0,

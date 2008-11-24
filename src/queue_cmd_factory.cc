@@ -45,6 +45,8 @@ GameLogicCommand * Queue_Cmd_Factory::create_correct_queue_command
 	case QUEUE_CMD_CHANGESOLDIERCAPACITY:return new Cmd_ChangeSoldierCapacity();
 	case QUEUE_CMD_ENEMYFLAGACTION:      return new Cmd_EnemyFlagAction     ();
 	case QUEUE_CMD_SETWAREPRIORITY:      return new Cmd_SetWarePriority     ();
+	case QUEUE_CMD_SETTARGETQUANTITY:    return new Cmd_SetTargetQuantity    ();
+	case QUEUE_CMD_RESETTARGETQUANTITY:  return new Cmd_ResetTargetQuantity  ();
 	case QUEUE_CMD_DESTROY_MAPOBJECT:    return new Cmd_Destroy_Map_Object  ();
 	case QUEUE_CMD_ACT:                  return new Cmd_Act                 ();
 	case QUEUE_CMD_CHECK_EVENTCHAIN:     return new Cmd_CheckEventChain     ();

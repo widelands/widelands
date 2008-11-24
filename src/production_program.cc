@@ -54,6 +54,7 @@ ActReturn::Economy_Needs::Economy_Needs
 	try {
 		bool reached_end;
 		ware_type = tribe.safe_ware_index(match(parameters, reached_end));
+		tribe.get_ware_descr(ware_type)->set_has_demand_check();
 	} catch (_wexception const & e) {
 		throw wexception("needs: %s", e.what());
 	}

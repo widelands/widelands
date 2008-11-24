@@ -224,6 +224,75 @@ private:
 	int32_t m_priority;
 };
 
+
+struct Cmd_ChangeTargetQuantity : public PlayerCommand {
+	Cmd_ChangeTargetQuantity() : PlayerCommand() {} //  For savegame loading.
+	Cmd_ChangeTargetQuantity
+		(int32_t duetime, Player_Number sender,
+		 uint32_t economy, Ware_Index index);
+
+	//  Write/Read these commands to/from a file (for savegames).
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	Cmd_ChangeTargetQuantity(StreamRead &);
+
+	virtual void serialize (StreamWrite &);
+
+protected:
+	uint32_t   economy  () const {return m_economy;}
+	Ware_Index ware_type() const {return m_ware_type;}
+
+private:
+	uint32_t   m_economy;
+	Ware_Index m_ware_type;
+};
+
+
+struct Cmd_SetTargetQuantity : public Cmd_ChangeTargetQuantity {
+	Cmd_SetTargetQuantity() : Cmd_ChangeTargetQuantity() {}
+	Cmd_SetTargetQuantity
+		(int32_t duetime, Player_Number sender,
+		 uint32_t economy, Ware_Index index,
+		 uint32_t permanent, uint32_t temporary);
+
+	//  Write/Read these commands to/from a file (for savegames).
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual int32_t get_id() {return QUEUE_CMD_SETTARGETQUANTITY;}
+
+	Cmd_SetTargetQuantity(StreamRead &);
+
+	virtual void execute (Game *);
+	virtual void serialize (StreamWrite &);
+
+private:
+	uint32_t m_permanent, m_temporary;
+};
+
+struct Cmd_ResetTargetQuantity : public Cmd_ChangeTargetQuantity {
+	Cmd_ResetTargetQuantity() : Cmd_ChangeTargetQuantity() {}
+	Cmd_ResetTargetQuantity
+		(int32_t duetime, Player_Number sender,
+		 uint32_t economy, Ware_Index index);
+
+	//  Write/Read these commands to/from a file (for savegames).
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual int32_t get_id() {return QUEUE_CMD_RESETTARGETQUANTITY;}
+
+	Cmd_ResetTargetQuantity(StreamRead &);
+
+	virtual void execute (Game *);
+	virtual void serialize (StreamWrite &);
+
+private:
+	uint32_t m_economy;
+	Ware_Index m_ware_type;
+};
+
 struct Cmd_ChangeTrainingOptions : public PlayerCommand {
 	Cmd_ChangeTrainingOptions() : PlayerCommand() {} // For savegame loading
 	Cmd_ChangeTrainingOptions(int32_t t, int32_t p, Building* b, int32_t at, int32_t val):PlayerCommand(t, p)

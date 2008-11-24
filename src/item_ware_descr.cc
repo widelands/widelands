@@ -45,6 +45,9 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 		 "%s/%s", directory, global.get_string("menu_pic", buffer));
 	m_icon_fname = buffer;
 
+	m_default_target_quantity =
+		global.get_positive
+			("default_target_quantity", std::numeric_limits<uint32_t>::max());
 	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle")));
 }
 

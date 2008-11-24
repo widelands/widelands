@@ -27,6 +27,7 @@
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "streamwrite.h"
+#include "tribe.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
@@ -50,7 +51,9 @@ enum {
 	PLCMD_DROPSOLDIER,
 	PLCMD_CHANGESOLDIERCAPACITY,
 	PLCMD_ENEMYFLAGACTION,
-	PLCMD_SETWAREPRIORITY
+	PLCMD_SETWAREPRIORITY,
+	PLCMD_SETTARGETQUANTITY,
+	PLCMD_RESETTARGETQUANTITY
 };
 
 /*** class PlayerCommand ***/
@@ -72,6 +75,8 @@ PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_STARTSTOPBUILDING:     return new Cmd_StartStopBuilding    (des);
 	case PLCMD_ENHANCEBUILDING:       return new Cmd_EnhanceBuilding      (des);
 	case PLCMD_SETWAREPRIORITY:       return new Cmd_SetWarePriority      (des);
+	case PLCMD_SETTARGETQUANTITY:     return new Cmd_SetTargetQuantity    (des);
+	case PLCMD_RESETTARGETQUANTITY:   return new Cmd_ResetTargetQuantity  (des);
 	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
 	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
 	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
@@ -612,6 +617,179 @@ void Cmd_SetWarePriority::serialize(StreamWrite& ser)
 	ser.Unsigned8(m_type);
 	ser.Signed32(m_index.value());
 	ser.Signed32(m_priority);
+}
+
+
+Cmd_ChangeTargetQuantity::Cmd_ChangeTargetQuantity
+	(int32_t const duetime, Player_Number const _sender,
+	 size_t const _economy, Ware_Index const _ware_type)
+	:
+	PlayerCommand(duetime, _sender),
+	m_economy (_economy), m_ware_type(_ware_type)
+{}
+
+void Cmd_ChangeTargetQuantity::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	PlayerCommand::Write(fw, egbase, mos);
+	fw.Unsigned32(economy());
+	fw.CString
+		(egbase.player(get_sender()).tribe().get_ware_descr(ware_type())->name());
+}
+
+void Cmd_ChangeTargetQuantity::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		PlayerCommand::Read(fr, egbase, mol);
+		m_economy   = fr.Unsigned32();
+		m_ware_type =
+			egbase.player(get_sender()).tribe().ware_index(fr.CString());
+	} catch (_wexception const & e) {
+		throw wexception("change target quantity: %s", e.what());
+	}
+}
+
+Cmd_ChangeTargetQuantity::Cmd_ChangeTargetQuantity(StreamRead & des)
+	:
+	PlayerCommand(0, des.Unsigned8()),
+	m_economy    (des.Unsigned32()),
+	m_ware_type  (des.Unsigned8())
+{}
+
+void Cmd_ChangeTargetQuantity::serialize(StreamWrite & ser)
+{
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned32(economy());
+	ser.Unsigned8 (ware_type().value());
+}
+
+
+Cmd_SetTargetQuantity::Cmd_SetTargetQuantity
+	(int32_t const duetime, Player_Number const _sender,
+	 size_t const _economy,
+	 Ware_Index const _ware_type,
+	 uint32_t const _permanent, uint32_t const _temporary)
+	:
+	Cmd_ChangeTargetQuantity(duetime, _sender, _economy, _ware_type),
+	m_permanent(_permanent), m_temporary(_temporary)
+{}
+
+void Cmd_SetTargetQuantity::execute(Game * game)
+{
+	Player & player = game->player(get_sender());
+	if
+		(economy  () < player.get_nr_economies() and
+		 ware_type() < player.tribe().get_nrwares())
+	{
+		Economy::Target_Quantity & tq =
+			player.get_economy_by_number(economy())->m_target_quantities
+				[ware_type().value()];
+		tq.permanent     = m_permanent;
+		tq.temporary     = m_temporary;
+		tq.last_modified = get_duetime();
+	}
+}
+
+#define PLAYER_CMD_SETTARGETQUANTITY_VERSION 1
+
+void Cmd_SetTargetQuantity::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	fw.Unsigned16(PLAYER_CMD_SETTARGETQUANTITY_VERSION);
+	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
+	fw.Unsigned32(m_permanent);
+	fw.Unsigned32(m_temporary);
+}
+
+void Cmd_SetTargetQuantity::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_SETTARGETQUANTITY_VERSION) {
+			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
+			m_permanent = fr.Unsigned32();
+			m_temporary = fr.Unsigned32();
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("set target quantity: %s", e.what());
+	}
+}
+
+Cmd_SetTargetQuantity::Cmd_SetTargetQuantity(StreamRead & des)
+	:
+	Cmd_ChangeTargetQuantity(des),
+	m_permanent             (des.Unsigned32()),
+	m_temporary             (des.Unsigned32())
+{}
+
+void Cmd_SetTargetQuantity::serialize(StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_SETTARGETQUANTITY);
+	Cmd_ChangeTargetQuantity::serialize(ser);
+	ser.Unsigned32(m_permanent);
+	ser.Unsigned32(m_temporary);
+}
+
+
+Cmd_ResetTargetQuantity::Cmd_ResetTargetQuantity
+	(int32_t const duetime, Player_Number const _sender,
+	 size_t const _economy,
+	 Ware_Index const _ware_type)
+	:
+	Cmd_ChangeTargetQuantity(duetime, _sender, _economy, _ware_type)
+{}
+
+void Cmd_ResetTargetQuantity::execute(Game * game)
+{
+	Player & player = game->player(get_sender());
+	Tribe_Descr const & tribe = player.tribe();
+	if
+		(economy  () < player.get_nr_economies() and
+		 ware_type() < tribe.get_nrwares())
+	{
+		Economy::Target_Quantity & tq =
+			player.get_economy_by_number(economy())->m_target_quantities
+				[ware_type().value()];
+		tq.temporary = tq.permanent =
+			tribe.get_ware_descr(ware_type())->default_target_quantity();
+		tq.last_modified = 0;
+	}
+}
+
+#define PLAYER_CMD_RESETTARGETQUANTITY_VERSION 1
+
+void Cmd_ResetTargetQuantity::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	fw.Unsigned16(PLAYER_CMD_SETTARGETQUANTITY_VERSION);
+	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
+}
+
+void Cmd_ResetTargetQuantity::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_RESETTARGETQUANTITY_VERSION) {
+			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
+		} else
+			throw wexception("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw wexception("set target quantity: %s", e.what());
+	}
+}
+
+Cmd_ResetTargetQuantity::Cmd_ResetTargetQuantity(StreamRead & des)
+	: Cmd_ChangeTargetQuantity(des)
+{}
+
+void Cmd_ResetTargetQuantity::serialize(StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_RESETTARGETQUANTITY);
+	Cmd_ChangeTargetQuantity::serialize(ser);
 }
 
 

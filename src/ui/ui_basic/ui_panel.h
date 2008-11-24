@@ -105,9 +105,13 @@ struct Panel : public Object {
 	int32_t get_inner_h() const {return _h-(_tborder+_bborder);}
 
 	const Panel * get_next_sibling () const {return _next;}
+	Panel       * get_next_sibling ()       {return _next;}
 	const Panel * get_prev_sibling () const {return _prev;}
+	Panel       * get_prev_sibling ()       {return _prev;}
 	const Panel * get_first_child  () const {return _fchild;}
+	Panel       * get_first_child  ()       {return _fchild;}
 	const Panel * get_last_child   () const {return _lchild;}
+	Panel       * get_last_child   ()       {return _lchild;}
 
 	void move_to_top();
 

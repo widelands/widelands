@@ -188,6 +188,7 @@ struct FieldActionWindow : public UI::UniqueWindow {
 	void act_show_statistics();
 	void act_debug();
 	void act_buildflag();
+	void act_configure_economy();
 	void act_ripflag();
 	void act_buildroad();
 	void act_abort_buildroad();
@@ -392,6 +393,12 @@ void FieldActionWindow::add_buttons_auto()
 				 ||
 				 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag, _("Destroy this flag"));
+
+			add_button
+				(buildbox,
+				 "pics/genstats_nrwares.png",
+				 &FieldActionWindow::act_configure_economy,
+				 _("Configure economy"));
 
 			if (dynamic_cast<const Game *>(&m_iabase->egbase()))
 				add_button
@@ -734,6 +741,14 @@ void FieldActionWindow::act_buildflag()
 			(m_field);
 	okdialog();
 }
+
+
+void FieldActionWindow::act_configure_economy()
+{
+	if (upcast(Widelands::Flag const, flag, m_field.field->get_immovable()))
+		flag->get_economy()->show_options_window();
+}
+
 
 /*
 ===============

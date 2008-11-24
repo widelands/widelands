@@ -67,6 +67,24 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	/// \return ware's localized descriptive text
 	const char * get_helptext() const throw () {return m_helptext.c_str();}
 
+	/// How much of the ware type that an economy should store in warehouses.
+	/// The special value std::numeric_limits<uint32_t>::max() means that the
+	/// the target quantity of this ware type will never be checked and should
+	/// not be configurable.
+	uint32_t default_target_quantity() const {return m_default_target_quantity;}
+
+	bool has_demand_check() const {
+		return default_target_quantity() != std::numeric_limits<uint32_t>::max();
+	}
+
+	/// Called when a demand check for this ware type is encountered during
+	/// parsing. If there was no default target quantity set in the ware type's
+	/// configuration, set the default value 1.
+	void set_has_demand_check() {
+		if (m_default_target_quantity == std::numeric_limits<uint32_t>::max())
+			m_default_target_quantity = 1;
+	}
+
 	virtual void load_graphics();
 	static Item_Ware_Descr* create_from_dir(const char*, const char*);
 
@@ -76,6 +94,7 @@ private:
 	std::string m_name;       ///< Ware's unique name into tribe
 	std::string m_descname;   ///< Short localized name
 	std::string m_helptext;   ///< Long descriptive text
+	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture
 	uint32_t    m_icon;       ///< Index of ware's picture in picture stack
 };

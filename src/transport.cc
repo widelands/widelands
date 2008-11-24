@@ -2111,10 +2111,22 @@ m_rebuilding(false),
 m_request_timerid(0),
 mpf_cycle(0)
 {
+	Tribe_Descr const & tribe = player->tribe();
+	Ware_Index const nr_wares = tribe.get_nrwares();
 	m_workers.set_nrwares(player->tribe().get_nrworkers());
-	m_wares.set_nrwares(player->tribe().get_nrwares());
+	m_wares.set_nrwares(nr_wares);
 
 	player->add_economy(this);
+
+	m_target_quantities = new Target_Quantity[nr_wares.value()];
+	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+		Target_Quantity tq;
+		tq.temporary = tq.permanent =
+			tribe.get_ware_descr(i)->default_target_quantity();
+		tq.last_modified = 0;
+		m_target_quantities[i.value()] = tq;
+	}
+
 }
 
 Economy::~Economy()
@@ -2129,6 +2141,8 @@ Economy::~Economy()
 		log("Warning: Economy still has flags left on destruction\n");
 	if (m_warehouses.size())
 		log("Warning: Economy still has warehouses left on destruction\n");
+
+	delete[] m_target_quantities;
 }
 
 
@@ -2593,9 +2607,15 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
 */
 void Economy::remove_wares(Ware_Index const id, uint32_t const count)
 {
+	assert(id < m_owner->tribe().get_nrwares());
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
 
 	m_wares.remove(id, count);
+
+	Target_Quantity & tq = m_target_quantities[id.value()];
+	tq.temporary =
+		tq.temporary <= tq.permanent + count ?
+		tq.permanent : tq.temporary - count;
 
 	// TODO: remove from global player inventory?
 }
@@ -2727,12 +2747,15 @@ void Economy::remove_supply(Supply * const supply)
 
 
 bool Economy::needs_ware(Ware_Index const ware_type) const {
-	// FIXME this should really be much smarter
 	size_t const nr_supplies = m_supplies.get_nrsupplies();
+	uint32_t const t = target_quantity(ware_type).temporary;
+	uint32_t quantity = 0;
 	for (size_t i = 0; i < nr_supplies; ++i)
-		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i]))
-			if (warehouse_supply->stock_wares(ware_type))
+		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i])) {
+			quantity += warehouse_supply->stock_wares(ware_type);
+			if (t <= quantity)
 				return false;
+		}
 	return true;
 }
 
@@ -2745,6 +2768,28 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
 */
 void Economy::do_merge(Economy *e)
 {
+	for (Ware_Index::value_t i = m_owner->tribe().get_nrwares().value(); i;) {
+		--i;
+		Target_Quantity other_tq = e->m_target_quantities[i];
+		Target_Quantity & this_tq = m_target_quantities[i];
+		if (this_tq.last_modified < other_tq.last_modified)
+			this_tq = other_tq;
+	}
+
+	//  If the options window for e is open, but not the one for *this, the user
+	//  should still have an options window after the merge. Create an options
+	//  window for *this where the options window for e is, to give the user
+	//  some continuity.
+	if
+		(e->m_optionswindow_registry.window and
+		 not m_optionswindow_registry.window)
+	{
+		m_optionswindow_registry.x = e->m_optionswindow_registry.x;
+		m_optionswindow_registry.x = e->m_optionswindow_registry.x;
+		show_options_window();
+	}
+
+
 	m_rebuilding = true;
 
 	// Be careful around here. The last e->remove_flag() will cause the other
@@ -2771,6 +2816,11 @@ void Economy::do_merge(Economy *e)
 void Economy::do_split(Flag *f)
 {
 	Economy *e = new Economy(m_owner);
+
+	for (Ware_Index::value_t i = m_owner->tribe().get_nrwares().value(); i;) {
+		--i;
+		e->m_target_quantities[i] = m_target_quantities[i];
+	}
 
 	m_rebuilding = true;
 	e->m_rebuilding = true;
@@ -3121,14 +3171,34 @@ void Economy::balance_requestsupply(uint32_t timerid)
 	}
 }
 
-#define CURRENT_ECONOMY_VERSION 1
+#define CURRENT_ECONOMY_VERSION 2
 
 void Economy::Read(FileRead& fr, Game*, Map_Map_Object_Loader*)
 {
 	uint16_t version = fr.Unsigned16();
 
 	try {
-		if (version == CURRENT_ECONOMY_VERSION) {
+		if (1 <= version and version <= CURRENT_ECONOMY_VERSION) {
+			if (2 <= version)
+				try {
+					Tribe_Descr const & tribe = owner().tribe();
+					while (Time const last_modified = fr.Unsigned32()) {
+						char const * const ware_type_name = fr.CString();
+						Ware_Index const ware_type =
+							tribe.ware_index(ware_type_name);
+						if (not ware_type)
+							throw wexception
+								("\"%s\" is not a ware type defined in tribe %s",
+								 ware_type_name, tribe.name().c_str());
+						Target_Quantity & tq =
+							m_target_quantities[ware_type.value()];
+						tq.permanent         = fr.Unsigned32();
+						tq.temporary         = fr.Unsigned32();
+						tq.last_modified     = last_modified;
+					}
+				} catch (_wexception const & e) {
+					throw wexception("target quantities: %s", e.what());
+				}
 			m_request_timerid = fr.Unsigned32();
 		} else {
 			throw wexception("unknown version %u", version);
@@ -3141,6 +3211,18 @@ void Economy::Read(FileRead& fr, Game*, Map_Map_Object_Loader*)
 void Economy::Write(FileWrite& fw, Game*, Map_Map_Object_Saver*)
 {
 	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
+	Tribe_Descr const & tribe = owner().tribe();
+	for (Ware_Index i = tribe.get_nrwares(); i.value();) {
+		--i;
+		Target_Quantity const & tq = m_target_quantities[i.value()];
+		if (Time const last_modified = tq.last_modified) {
+			fw.Unsigned32(last_modified);
+			fw.CString(tribe.get_ware_descr(i)->name());
+			fw.Unsigned32(tq.permanent);
+			fw.Unsigned32(tq.temporary);
+		}
+	}
+	fw.Unsigned32(0); //  terminator
 	fw.Unsigned32(m_request_timerid);
 }
 
