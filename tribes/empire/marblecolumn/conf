@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building.
+
+[idle]
+pics=idle.png
+hotspot=8 11

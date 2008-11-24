@@ -1,0 +1,19 @@
+[global]
+type=military
+size=medium
+max_soldiers=5
+heal_per_second=3
+conquers=8
+max_medics=2
+heal_increase_per_medic=3
+enhanced_building=yes
+
+[buildcost]
+trunk=2
+wood=2
+stone=2
+marble=1
+
+[idle]
+pics=barrier_i_??.png
+hotspot=55 80

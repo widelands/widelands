@@ -1,0 +1,19 @@
+[global]
+type=production
+size=small
+worker=fisher
+output=fish
+program=work
+
+[buildcost]
+trunk=1
+wood=1
+stone=1
+
+[work]
+sleep=17000
+worker=fish
+
+[idle]
+pics=fisher_i_??.png  # ???
+hotspot=50 65

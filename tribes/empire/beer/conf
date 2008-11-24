@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Young soldiers and miners need some encouragement. This drink makes a man fearless and strong.
+
+[idle]
+pics=idle.png
+hotspot=7 15

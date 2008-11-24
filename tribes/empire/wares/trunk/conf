@@ -1,8 +1,0 @@
-[global]
-descname=_Trunk
-help=_Trunks are one important build material of the Empire.
-menu_pic=trunk_menu.png
-
-[idle]
-pics=trunk_idle.png
-hotspot=7 11

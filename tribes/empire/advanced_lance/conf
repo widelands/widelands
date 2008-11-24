@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_This is an advanced lance, with steel top.
+
+[idle]
+pics=idle.png
+hotspot=8 11

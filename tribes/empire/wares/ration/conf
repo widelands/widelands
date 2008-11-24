@@ -1,8 +1,0 @@
-[global]
-descname=_Ration
-help=_A small bite to keep miners strong and working.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 14

@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns.
+
+[idle]
+pics=idle.png
+hotspot=5 12

@@ -1,8 +1,0 @@
-[global]
-descname=_Flour
-help=_Flour is produced out of wheat and is needed for the tasty Empire bread.
-menu_pic=flour_menu.png
-
-[idle]
-pics=flour_idle.png
-hotspot=7 15

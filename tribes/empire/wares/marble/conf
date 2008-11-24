@@ -1,8 +1,0 @@
-[global]
-descname=_Marble
-help=_Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=5 12

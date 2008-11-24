@@ -1,8 +1,0 @@
-[global]
-descname=_Fish
-help=_Besides bread and meat, fish is also a foodstuff for the Empire.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 11

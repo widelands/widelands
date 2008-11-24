@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Wool is the hair of sheeps. Weaving mills use it to make cloth.
+
+[idle]
+pics=idle.png
+hotspot=8 18

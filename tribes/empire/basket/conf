@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith.
+
+[idle]
+pics=idle.png
+hotspot=8 11

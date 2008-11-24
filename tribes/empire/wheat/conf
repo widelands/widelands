@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Wheat is essential for surviving. Delicious bread and ales can be made of this wheat.
+
+[idle]
+pics=wheat_idle.png
+hotspot=4 12

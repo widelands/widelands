@@ -1,8 +1,0 @@
-[global]
-descname=_Shovel
-help=_The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=6 10

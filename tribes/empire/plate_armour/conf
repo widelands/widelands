@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_The strongest armour existing for the Empire soldiers.
+
+[idle]
+pics=idle.png
+hotspot=8 11

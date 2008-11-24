@@ -1,8 +1,0 @@
-[global]
-descname=_Grape
-help=_These grapes are the basic for tasty wine.
-menu_pic=grape_menu.png
-
-[idle]
-pics=grape_idle.png
-hotspot=7 15

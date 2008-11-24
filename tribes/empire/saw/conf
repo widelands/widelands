@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_This saw is needed by the sawyer to create all the useful tools. It is produced by the toolsmith.
+
+[idle]
+pics=idle.png
+hotspot=8 11

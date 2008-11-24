@@ -1,0 +1,19 @@
+[global]
+type=production
+size=small
+worker=lumberjack
+output=trunk
+program=work
+
+[work]
+sleep=30000 # Barbarian lumberjack sleeps 25000
+worker=chop
+
+
+[buildcost]
+trunk=2
+wood=1
+
+[idle]
+pics=lumberjack_i_??.png
+hotspot=42 60

@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Gold is the most valuable of all metals; only very important things are garnished with it.
+
+[idle]
+pics=idle.png
+hotspot=8 15

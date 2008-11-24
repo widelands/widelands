@@ -1,0 +1,29 @@
+[global]
+type=production
+size=medium
+worker=burner
+output=coal
+program=work
+
+[inputs]
+trunk=8
+
+[work]
+return=skipped unless economy needs coal
+consume=trunk:6
+sleep=30000
+animate=working 90000 # charcoal fires are burning some days in real life
+produce=coal
+
+[buildcost]
+trunk=2
+stone=2
+marble=2
+
+[idle]
+pics=burner_i_??.png  # ???
+hotspot=54 54
+
+[working]
+pics=burner_i_??.png  # ???
+hotspot=54 54

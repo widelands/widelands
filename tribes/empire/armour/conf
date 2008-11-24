@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Basic armour for Empire soldiers.
+
+[idle]
+pics=idle.png
+hotspot=8 11

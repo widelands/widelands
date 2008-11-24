@@ -1,0 +1,36 @@
+[global]
+type=production
+size=mine
+worker=miner
+program=work
+output=goldstone
+stopable=yes
+enhancement=deep_goldmine
+
+[inputs]
+ration=6
+wine=6
+
+[work]
+sleep=45000
+consume=ration wine
+animate=working 20000
+mine=gold 2 50 5
+produce=goldstone
+animate=working 20000
+mine=gold 2 50 5
+produce=goldstone
+
+[buildcost]
+trunk=4
+wood=2
+
+[idle]
+pics=goldmine_i_??.png
+hotspot=49 49
+
+[working]
+pics=goldmine_w_??.png
+hotspot=49 49
+fps=10
+

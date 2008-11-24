@@ -1,8 +1,0 @@
-[global]
-descname=_Fire Tongs
-help=_The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 11

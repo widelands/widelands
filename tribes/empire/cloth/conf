@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool.
+
+[idle]
+pics=idle.png
+hotspot=6 5

@@ -1,0 +1,20 @@
+[global]
+type=military
+size=big
+max_soldiers=8
+heal_per_second=3
+conquers=11
+max_medics=3
+heal_increase_per_medic=3
+enhancement=castle
+
+[buildcost]
+wood=5
+trunk=2
+stone=8
+marble=2
+marblecolumn=2
+
+[idle]
+pics=fortress_i_??.png
+hotspot=90 106

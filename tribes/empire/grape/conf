@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_These grapes are the basic for tasty wine.
+
+[idle]
+pics=grape_idle.png
+hotspot=7 15

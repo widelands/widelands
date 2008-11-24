@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Basic defence of a warrior
+
+[idle]
+pics=idle.png
+hotspot=8 11

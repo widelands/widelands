@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Trunks are one important build material of the Empire.
+
+[idle]
+pics=trunk_idle.png
+hotspot=7 11

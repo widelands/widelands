@@ -1,0 +1,19 @@
+[global]
+type=military
+size=medium
+max_soldiers=3
+heal_per_second=2
+conquers=7
+max_medics=1
+heal_increase_per_medic=3
+enhancement=barrier
+
+[buildcost]
+trunk=1
+wood=1
+stone=1
+marble=1
+
+[idle]
+pics=outpost_i_??.png
+hotspot=60 80

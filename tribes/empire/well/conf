@@ -1,0 +1,28 @@
+[global]
+type=production
+size=small
+worker=carrier
+stopable=yes
+program=work
+output=water
+
+[inputs]
+
+[work]
+sleep=20000
+animate=working 20000
+mine=water 1 100 65
+produce=water
+
+[buildcost]
+trunk=2
+stone=1
+marble=1
+
+[idle]
+pics=well_i_??.png  # ???
+hotspot=55 60
+
+[working]
+pics=well_i_??.png  # ???
+hotspot=55 60

@@ -1,8 +1,0 @@
-[global]
-descname=_Goldstone
-help=_This is the yellow goldstone.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=4 4

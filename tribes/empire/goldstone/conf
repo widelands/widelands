@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_This is the yellow goldstone.
+
+[idle]
+pics=idle.png
+hotspot=4 4

@@ -1,8 +1,0 @@
-[global]
-descname=_Hunting Spear
-help=_This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=7 9

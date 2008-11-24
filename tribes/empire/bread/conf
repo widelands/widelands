@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_The backers of the Empire make really tasty bread.
+
+[idle]
+pics=bread_idle.png
+hotspot=7 15

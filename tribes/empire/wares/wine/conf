@@ -1,8 +1,0 @@
-[global]
-descname=_ Wine
-help=_This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=7 14

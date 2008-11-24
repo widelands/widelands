@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Weapons and tools are made of iron.
+
+[idle]
+pics=idle.png
+hotspot=8 15

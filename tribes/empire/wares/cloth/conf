@@ -1,8 +1,0 @@
-[global]
-descname=_Cloth
-help=_Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=6 5

@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_This is the best and sharpest weapon, the Empire weaponsmith creates for their warriors.
+
+[idle]
+pics=idle.png
+hotspot=8 11

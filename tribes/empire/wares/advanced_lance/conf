@@ -1,8 +1,0 @@
-[global]
-descname=_Advanced Lance
-help=_This is an advanced lance, with steel top.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 11

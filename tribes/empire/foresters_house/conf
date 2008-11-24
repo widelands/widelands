@@ -1,0 +1,18 @@
+[global]
+type=production
+size=small
+worker=forester
+program=work
+
+[buildcost]
+trunk=1
+wood=1
+stone=1
+
+[work]
+sleep=11000
+worker=plant
+
+[idle]
+pics=forester_i_??.png  # ???
+hotspot=58 54

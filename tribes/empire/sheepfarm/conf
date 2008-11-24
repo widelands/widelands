@@ -1,0 +1,32 @@
+[global]
+soundfx=../../../sound/farm/sheep
+type=production
+size=big
+worker=shepherd
+program=work
+output=wool
+
+[inputs]
+wheat=7
+water=7
+
+[work]
+sleep=25000
+return=skipped unless economy needs wool
+consume=water wheat
+playFX=../../../sound/farm/sheep 192
+animate=working 30000
+produce=wool
+
+[buildcost]
+trunk=2
+stone=2
+wood=2
+
+[idle]
+pics=sheepfarm_i_??.png  # ???
+hotspot=82 95
+
+[working]
+pics=sheepfarm_i_??.png  # ???
+hotspot=82 95

@@ -1,0 +1,31 @@
+[global]
+type=production
+size=medium
+worker=innkeeper
+program=work
+output=ration
+enhancement=inn
+
+[inputs]
+fish=5
+bread=5
+meat=5
+
+[work]
+consume=bread,fish,meat
+sleep=14000
+animate=working 19000
+produce=ration
+
+[buildcost]
+wood=2
+stone=2
+marble=1
+
+[idle]
+pics=tavern_i_??.png  # ???
+hotspot=54 73
+
+[working]
+pics=tavern_i_??.png  # ???
+hotspot=54 73

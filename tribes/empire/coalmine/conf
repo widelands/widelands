@@ -1,0 +1,35 @@
+[global]
+type=production
+size=mine
+worker=miner
+program=work
+output=coal
+stopable=yes
+enhancement=deep_coalmine
+
+[inputs]
+ration=6
+beer=6
+
+[work]
+sleep=45000
+consume=beer ration
+animate=working 20000
+mine=coal 2 50 5
+produce=coal:2
+animate=working 20000
+mine=coal 2 50 5
+produce=coal
+
+[buildcost]
+trunk=4
+wood=2
+
+[idle]
+pics=coalmine_i_??.png
+hotspot=49 49
+
+[working]
+pics=coalmine_w_??.png
+hotspot=49 49
+fps=10

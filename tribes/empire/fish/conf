@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Besides bread and meat, fish is also a foodstuff for the Empire.
+
+[idle]
+pics=idle.png
+hotspot=8 11

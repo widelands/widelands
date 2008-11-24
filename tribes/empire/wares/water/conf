@@ -1,8 +1,0 @@
-[global]
-descname=_Water
-help=_Water is the most essential essence for life! This water is used in many places, be it to make bread or beer.
-menu_pic=water_menu.png
-
-[idle]
-pics=water_idle.png
-hotspot=4 8

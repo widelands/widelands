@@ -1,0 +1,28 @@
+[global]
+type=production
+size=big
+worker=weaver
+program=work
+output=cloth
+
+[inputs]
+wool=8
+
+[work]
+# no need to check if cloth is needed because wool is only used here
+sleep=40000
+consume=wool
+produce=cloth
+
+[buildcost]
+trunk=3
+stone=4
+marble=1
+
+[idle]
+pics=weaving_mill_i_??.png  # ???
+hotspot=84 76
+
+[working]
+pics=weaving_mill_i_??.png  # ???
+hotspot=84 76
