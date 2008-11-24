@@ -42,10 +42,11 @@ struct Box : public Panel {
 		AlignBottom = 2,
 	};
 public:
-	Box(Panel* parent, int32_t x, int32_t y,
-			uint32_t orientation,
-			int32_t max_x = 0,//::Interactive_Base::get_xres(),
-			int32_t max_y = 0);//Interactive_Base::get_yres());
+	Box
+		(Panel * parent,
+		 int32_t x, int32_t y,
+		 uint32_t orientation,
+		 int32_t max_x = 0, int32_t max_y = 0);
 
 	void resize();
 

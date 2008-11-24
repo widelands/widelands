@@ -376,7 +376,7 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 		m_last_selection  = m_selection;
 		m_last_click_time = time;
 		play_click();
-		
+
 		if (m_selection != no_selection_index())
 			clicked.call(m_selection);
 

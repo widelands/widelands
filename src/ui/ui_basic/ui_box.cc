@@ -27,18 +27,20 @@ namespace UI {
 /**
  * Initialize an empty box
 */
-Box::Box(Panel* parent, int32_t x, int32_t y, uint32_t orientation,int32_t max_x, int32_t max_y)
-	: Panel(parent, x, y, 0, 0), m_orientation(orientation),
-	m_max_x(max_x),m_max_y(max_y)
-{
-	//in case no boundries are giving never grow larger than the screen size
-	if (!m_max_x){
-		m_max_x = Interactive_Base::get_xres();
-	}
-	if (!m_max_y) {
-		m_max_y = Interactive_Base::get_yres();
-	}
-}
+Box::Box
+	(Panel * const parent,
+	 int32_t const x, int32_t const y,
+	 uint32_t const orientation,
+	 int32_t const max_x, int32_t const max_y)
+	:
+	Panel        (parent, x, y, 0, 0),
+
+	//  In case no boundries are given, never grow larger than the screen size.
+	m_max_x      (max_x ? max_x : Interactive_Base::get_xres()),
+	m_max_y      (max_y ? max_y : Interactive_Base::get_yres()),
+
+	m_orientation(orientation)
+{}
 
 
 /**
@@ -64,11 +66,10 @@ void Box::resize()
 			maxbreadth = breadth;
 	}
 
-	if (m_orientation == Horizontal){
-		set_size(std::min(totaldepth,m_max_x),std::min( maxbreadth,m_max_y));
-	} else {
-		set_size(std::min(maxbreadth,m_max_x),std::min( totaldepth,m_max_y));
-	}
+	if (m_orientation == Horizontal)
+		set_size(std::min(totaldepth, m_max_x), std::min(maxbreadth, m_max_y));
+	else
+		set_size(std::min(maxbreadth, m_max_x), std::min(totaldepth, m_max_y));
 
 	// Position the children
 	totaldepth = 0;

@@ -403,8 +403,7 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 			dynamic_cast<GameChatMenu &>(*m_chat.window).enter_chat_message();
 			return true;
 
-#ifdef DEBUG
-	// Only in debug builds
+#ifdef DEBUG //  only in debug builds
 		case SDLK_F5:
 			player().set_see_all(not player().see_all());
 			return true;
