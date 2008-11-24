@@ -20,8 +20,7 @@
 #ifndef INTERACTIVE_PLAYER_H
 #define INTERACTIVE_PLAYER_H
 
-#include "game.h"
-#include "interactive_base.h"
+#include "interactive_gamebase.h"
 
 #include "ui_button.h"
 #include "ui_textarea.h"
@@ -54,22 +53,7 @@ private:
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-struct Interactive_Player : public Interactive_Base {
-	struct Game_Main_Menu_Windows {
-		UI::UniqueWindow::Registry loadgame;
-		UI::UniqueWindow::Registry savegame;
-		UI::UniqueWindow::Registry readme;
-		UI::UniqueWindow::Registry keys;
-		UI::UniqueWindow::Registry authors;
-		UI::UniqueWindow::Registry license;
-		UI::UniqueWindow::Registry sound_options;
-
-		UI::UniqueWindow::Registry building_stats;
-		UI::UniqueWindow::Registry general_stats;
-		UI::UniqueWindow::Registry ware_stats;
-		UI::UniqueWindow::Registry stock;
-	};
-
+struct Interactive_Player : public Interactive_GameBase {
 	Interactive_Player(Widelands::Game &, Widelands::Player_Number, bool, bool);
 
 	void start();
@@ -86,13 +70,13 @@ struct Interactive_Player : public Interactive_Base {
 
 	bool handle_key(bool down, SDL_keysym);
 
-	Widelands::Game * get_game() const {return m_game;}
-	Widelands::Game & game() const {return *m_game;}
 	Widelands::Player_Number get_player_number() const {return m_player_number;}
-	Widelands::Player & player() const throw () {return m_game->player(m_player_number);}
+	Widelands::Player & player() const throw () {
+		return game().player(m_player_number);
+	}
 	Widelands::Player * get_player() const throw () {
-		assert(m_game);
-		return m_game->get_player(m_player_number);
+		assert(&game());
+		return game().get_player(m_player_number);
 	}
 
 	// for savegames
@@ -114,7 +98,6 @@ struct Interactive_Player : public Interactive_Base {
 private:
 	ChatProvider           * m_chatProvider;
 	ChatDisplay            * m_chatDisplay;
-	Widelands::Game        * m_game;
 	Widelands::Player_Number m_player_number;
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;
@@ -135,7 +118,6 @@ private:
 	UI::UniqueWindow::Registry m_objectives;
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_encyclopedia;
-	Game_Main_Menu_Windows  m_mainm_windows;
 };
 
 

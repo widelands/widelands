@@ -19,7 +19,8 @@
 
 #include "interactive_spectator.h"
 
-#include "game.h"
+#include "game_main_menu_save_game.h"
+#include "gamecontroller.h"
 #include "graphic.h"
 #include "i18n.h"
 
@@ -33,7 +34,7 @@
  */
 Interactive_Spectator::Interactive_Spectator(Widelands::Game * const g)
 :
-Interactive_Base(*g),
+Interactive_GameBase(*g),
 
 #define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
@@ -42,9 +43,11 @@ Interactive_Base(*g),
  tooltip                                                                      \
 
 m_exit          (INIT_BTN("menu_exit_game",      exit_btn, _("Exit Replay"))),
+m_save          (INIT_BTN("menu_save_game",      save_btn, _("Save Game"))),
 m_toggle_minimap(INIT_BTN("menu_toggle_minimap", toggle_minimap, _("Minimap")))
 {
 	m_toolbar.add(&m_exit,           UI::Box::AlignLeft);
+	m_toolbar.add(&m_save,           UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap, UI::Box::AlignLeft);
 	m_toolbar.resize();
 	adjust_toolbar_position();
@@ -53,23 +56,6 @@ m_toggle_minimap(INIT_BTN("menu_toggle_minimap", toggle_minimap, _("Minimap")))
 	fieldclicked.set(this, &Interactive_Spectator::field_action);
 
 	set_display_flag(dfSpeed, true);
-}
-
-
-/**
- * Cleanup all structures.
- */
-Interactive_Spectator::~Interactive_Spectator()
-{
-}
-
-
-/**
- * \return a pointer to the running \ref Game instance.
- */
-Widelands::Game * Interactive_Spectator::get_game()
-{
-	return static_cast<Widelands::Game *>(&egbase());
 }
 
 
@@ -99,13 +85,20 @@ void Interactive_Spectator::start()
 }
 
 
-/**
- * Bring up or close the main menu.
- * Right now, this is kind of misleading since it just stops playback.
- */
 void Interactive_Spectator::exit_btn()
 {
 	end_modal(0);
+}
+
+
+void Interactive_Spectator::save_btn()
+{
+	if (m_mainm_windows.savegame.window)
+		delete m_mainm_windows.savegame.window;
+	else {
+		game().gameController()->setDesiredSpeed(0);
+		new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
+	}
 }
 
 
@@ -121,31 +114,32 @@ void Interactive_Spectator::field_action() {}
  */
 bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 {
-	switch (code.sym) {
-	case SDLK_m:
-		if (down)
+	if (down)
+		switch (code.sym) {
+		case SDLK_m:
 			toggle_minimap();
-		return true;
+			return true;
 
-	case SDLK_c:
-		if (down)
+		case SDLK_c:
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-		return true;
+			return true;
 
-	case SDLK_s:
-		if (down)
-			set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-		return true;
+		case SDLK_s:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				game().gameController()->setDesiredSpeed(0);
+				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
+			} else
+				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			return true;
 
-	case SDLK_f:
-		if (down)
+		case SDLK_f:
 			g_gr->toggle_fullscreen();
-		return true;
+			return true;
 
-	default:
-		break;
-	}
+		default:
+			break;
+		}
 
-	return Interactive_Base::handle_key(down, code);
+	return Interactive_GameBase::handle_key(down, code);
 }
 

@@ -27,17 +27,17 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 
-struct Interactive_Player;
+struct Interactive_GameBase;
 
 struct SaveWarnMessageBox;
 struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 	friend struct SaveWarnMessageBox;
 	Game_Main_Menu_Save_Game
-		(Interactive_Player * plr, UI::UniqueWindow::Registry * registry);
+		(Interactive_GameBase &, UI::UniqueWindow::Registry & registry);
 	virtual ~Game_Main_Menu_Save_Game();
 
 private:
-	Interactive_Player & iaplayer();
+	Interactive_GameBase & igbase();
 	void clicked_ok    ();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);

@@ -294,7 +294,6 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 	bool handled = Interactive_Base::handle_key(down, code);
 
 	if (down)
-	{
 		// only on down events
 		switch (code.sym) {
 		// Sel radius
@@ -372,8 +371,7 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 			break;
 
 		case SDLK_f:
-			if (down)
-				g_gr->toggle_fullscreen();
+			g_gr->toggle_fullscreen();
 			handled=true;
 			break;
 
@@ -418,9 +416,7 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 			break;
 
 		}
-	}
 	else
-	{
 		// key up events
 		switch (code.sym) {
 		case SDLK_LSHIFT:
@@ -435,7 +431,6 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 		default:
 			break;
 		}
-	}
 
 	return handled;
 }

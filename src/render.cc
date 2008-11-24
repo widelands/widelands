@@ -410,7 +410,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 	}
 	int width = 0, height;
 #ifndef NDEBUG
-#define VALIDATE_ANIMATION_CROPPING
+	//#define VALIDATE_ANIMATION_CROPPING
 #endif
 #ifdef VALIDATE_ANIMATION_CROPPING
 	bool data_in_x_min = false, data_in_x_max = false;

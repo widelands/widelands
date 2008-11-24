@@ -22,7 +22,7 @@
 
 #include "ui_button.h"
 
-#include "interactive_base.h"
+#include "interactive_gamebase.h"
 #include <SDL_keyboard.h>
 
 namespace Widelands {struct Game;};
@@ -35,23 +35,23 @@ namespace Widelands {struct Game;};
  *
  * This class provides the UI, runs the game logic, etc.
  */
-struct Interactive_Spectator : public Interactive_Base {
+struct Interactive_Spectator : public Interactive_GameBase {
 	Interactive_Spectator(Widelands::Game *);
-	~Interactive_Spectator();
 
 	void start();
 
-	Widelands::Game * get_game();
 	Widelands::Player * get_player() const throw ();
 
 	bool handle_key(bool down, SDL_keysym);
 
 private:
 	void exit_btn();
+	void save_btn();
 	void field_action();
 
 private:
 	UI::Button<Interactive_Spectator> m_exit;
+	UI::Button<Interactive_Spectator> m_save;
 	UI::Button<Interactive_Spectator> m_toggle_minimap;
 };
 

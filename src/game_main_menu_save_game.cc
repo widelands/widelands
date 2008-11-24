@@ -30,8 +30,8 @@
 #include "layered_filesystem.h"
 #include "profile.h"
 
-Interactive_Player & Game_Main_Menu_Save_Game::iaplayer() {
-	return dynamic_cast<Interactive_Player &>(*get_parent());
+Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
+	return dynamic_cast<Interactive_GameBase &>(*get_parent());
 }
 
 /*
@@ -41,7 +41,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 Create all the buttons etc...
 ===============
 */
-Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UI::UniqueWindow::Registry* registry)
+Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
+	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
 :
 #define WINDOW_WIDTH                                                        440
 #define WINDOW_HEIGHT                                                       440
@@ -59,7 +60,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
 #define OK_Y                              (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 UI::UniqueWindow
-	(parent, registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
+	(&parent, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
 m_editbox(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT, 1, 0),
 m_name_label
@@ -111,7 +112,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	std::string const & name = m_ls.get_selected();
 
 	std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-	Widelands::Game_Loader gl(*fs, iaplayer().get_game());
+	Widelands::Game_Loader gl(*fs, igbase().get_game());
 	Widelands::Game_Preload_Data_Packet gpdp;
 	gl.preload_game(&gpdp); // This has worked before, no problem
 
@@ -165,7 +166,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 
 		try {
 			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-			Widelands::Game_Loader gl(*fs, iaplayer().get_game());
+			Widelands::Game_Loader gl(*fs, igbase().get_game());
 			gl.preload_game(&gpdp);
 			char const * extension, * fname =
 				FileSystem::FS_Filename(name, extension);
@@ -189,9 +190,9 @@ void Game_Main_Menu_Save_Game::edit_box_changed() {
 
 
 static void dosave
-	(Interactive_Player & iaplayer, std::string const & complete_filename)
+	(Interactive_GameBase & igbase, std::string const & complete_filename)
 {
-	Widelands::Game & game = iaplayer.game();
+	Widelands::Game & game = igbase.game();
 
 	std::string error;
 	if (!game.get_save_handler()->save_game(game, complete_filename, &error)) {
@@ -201,7 +202,7 @@ static void dosave
 			 "Reason given:\n");
 		s += error;
 		UI::MessageBox mbox
-			(&iaplayer, _("Save Game Error!!"), s, UI::MessageBox::OK);
+			(&igbase, _("Save Game Error!!"), s, UI::MessageBox::OK);
 		mbox.run();
 	}
 }
@@ -230,7 +231,7 @@ struct SaveWarnMessageBox : public UI::MessageBox {
 	void pressedYes()
 	{
 		g_fs->Unlink(m_filename);
-		dosave(menu_save_game().iaplayer(), m_filename);
+		dosave(menu_save_game().igbase(), m_filename);
 		menu_save_game().die();
 	}
 
@@ -250,14 +251,14 @@ called when the ok button has been clicked
 */
 void Game_Main_Menu_Save_Game::clicked_ok() {
 	std::string const complete_filename =
-		iaplayer().game().get_save_handler()->create_file_name
+		igbase().game().get_save_handler()->create_file_name
 			(m_curdir, m_editbox.text());
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->FileExists(complete_filename)) {
 		new SaveWarnMessageBox(*this, complete_filename);
 	} else {
-		dosave(iaplayer(), complete_filename);
+		dosave(igbase(), complete_filename);
 		die();
 	}
 }

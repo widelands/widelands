@@ -51,8 +51,7 @@ struct Interactive_Base : public Map_View {
 	Interactive_Base(Widelands::Editor_Game_Base &);
 	virtual ~Interactive_Base();
 
-	Widelands::Editor_Game_Base const & egbase() const {return m_egbase;}
-	Widelands::Editor_Game_Base       & egbase()       {return m_egbase;}
+	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
 	virtual void reference_player_tribe(const int32_t, const void * const) {}
 
 	static int32_t get_xres();

@@ -29,6 +29,7 @@
 #include "game_loader.h"
 #include "game_main_menu.h"
 #include "game_chat_menu.h"
+#include "game_main_menu_save_game.h"
 #include "game_objectives_menu.h"
 #include "game_options_menu.h"
 #include "graphic.h"
@@ -138,10 +139,9 @@ Initialize
 Interactive_Player::Interactive_Player
 		(Widelands::Game & g, uint8_t const plyn, bool scenario, bool multiplayer)
 :
-Interactive_Base (g),
+Interactive_GameBase(g),
 m_chatProvider   (0),
 m_chatDisplay    (0),
-m_game           (&g),
 m_flag_to_connect(Widelands::Coords::Null()),
 
 #define INIT_BTN(picture, callback, tooltip)                                  \
@@ -360,68 +360,61 @@ ChatProvider* Interactive_Player::get_chat_provider()
 */
 bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 {
-	switch (code.sym) {
-	case SDLK_SPACE:
-		if (down)
+	if (down)
+		switch (code.sym) {
+		case SDLK_SPACE:
 			toggle_buildhelp();
-		return true;
+			return true;
 
-	case SDLK_m:
-		if (down)
+		case SDLK_m:
 			toggle_minimap();
-		return true;
+			return true;
 
-	case SDLK_o:
-		if (down)
+		case SDLK_o:
 			toggle_objectives();
-		return true;
+			return true;
 
-	case SDLK_c:
-		if (down)
+		case SDLK_c:
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-		return true;
+			return true;
 
-	case SDLK_s:
-		if (down)
-			set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-		return true;
+		case SDLK_s:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
+				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
+			else
+				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			return true;
 
-	case SDLK_f:
-		if (down)
+		case SDLK_f:
 			g_gr->toggle_fullscreen();
-		return true;
+			return true;
 
-	case SDLK_HOME:
-		if (down)
-			move_view_to(m_game->map().get_starting_pos(m_player_number));
-		return true;
+		case SDLK_HOME:
+			move_view_to(game().map().get_starting_pos(m_player_number));
+			return true;
 
-	case SDLK_RETURN:
-		if (!m_chatProvider)
-			break;
+		case SDLK_RETURN:
+			if (!m_chatProvider)
+				break;
 
-		if (down) {
 			if (!m_chat.window)
 				new GameChatMenu(this, m_chat, *m_chatProvider);
 
-			upcast(GameChatMenu, chatmenu, m_chat.window);
-			chatmenu->enter_chat_message();
-		}
-		return true;
+			dynamic_cast<GameChatMenu &>(*m_chat.window).enter_chat_message();
+			return true;
 
 #ifdef DEBUG
 	// Only in debug builds
-	case SDLK_F5:
-		if (down)
+		case SDLK_F5:
 			player().set_see_all(not player().see_all());
-		return true;
+			return true;
 #endif
 
-	default:
-		break;
-	}
+		default:
+			break;
+		}
 
-	return Interactive_Base::handle_key(down, code);
+	return Interactive_GameBase::handle_key(down, code);
 }
 
 /**
