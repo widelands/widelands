@@ -38,6 +38,7 @@
 
 #include "log.h"
 
+#include "container_iterate.h"
 #include "upcast.h"
 
 namespace Widelands {
@@ -266,29 +267,15 @@ Initialize with sane defaults
 ===============
 */
 Warehouse_Descr::Warehouse_Descr
-	(Tribe_Descr const & tribe_descr, std::string const & warehouse_name)
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 :
-Building_Descr(tribe_descr, warehouse_name),
+	Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
 m_subtype     (Subtype_Normal),
 m_conquers    (0)
-{}
-
-/*
-===============
-Warehouse_Descr::parse
-
-Parse the additional warehouse settings from the given profile and directory
-===============
-*/
-void Warehouse_Descr::parse
-	(char         const * const directory,
-	 Profile            * const prof,
-	 enhancements_map_t &       enhancements_map,
-	 EncodeData const * const encdata)
 {
-	Building_Descr::parse(directory, prof, enhancements_map, encdata);
-
-	Section & global = prof->get_safe_section("global");
+	Section & global = prof.get_safe_section("global");
 	char const * const string = global.get_safe_string("subtype");
 	if (!strcasecmp(string, "HQ")) {
 		m_subtype = Subtype_HQ;
@@ -349,20 +336,14 @@ Warehouse::get_priority
 warehouses determine how badly they want a certain ware
 */
 int32_t Warehouse::get_priority(int32_t type, Ware_Index ware_index, bool adjust) const {
-	int MAX_IDLE_PRIORITY = 100;
-	if (type == Request::WARE){
-		if (m_target_supply[ware_index] > 0){
-			MAX_IDLE_PRIORITY = 500000;
-		}
-	}
-	return MAX_IDLE_PRIORITY;
+	return
+		type == Request::WARE and m_target_supply[ware_index] > 0 ? 500000 : 100;
 }
 
-void Warehouse::set_needed(Ware_Index ware_index, int value){
+void Warehouse::set_needed(Ware_Index const ware_index, int const value) {
 	//assert (value >= m_supply->stock_wares(ware_index));
-	if (value > m_supply->stock_wares(ware_index)){
+	if (value > m_supply->stock_wares(ware_index))
 		m_target_supply[ware_index] = value - m_supply->stock_wares(ware_index);
-	}
 }
 
 /*
@@ -576,11 +557,10 @@ Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
-	if (m_target_supply[id] > count){
+	if (m_target_supply[id] > count)
 		m_target_supply[id] -= count;
-	} else {
+	else
 		m_target_supply[id] = 0;
-	}
 	m_supply->add_wares(id, count);
 }
 
@@ -595,9 +575,8 @@ Magically destroy wares.
 void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
-	if (m_target_supply[id] > 0){
+	if (m_target_supply[id] > 0)
 		m_target_supply[id] += 1;
-	}
 	m_supply->remove_wares(id, count);
 }
 
@@ -908,30 +887,25 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) const {
 	const Tribe_Descr & tribe = owner().tribe();
 	if (Worker_Descr const * const w_desc = tribe.get_worker_descr(worker)) {
 		// First watch if we can build it
-		if (!w_desc->get_buildable())
+		if (!w_desc->buildable())
 			return false;
 
 		// Now see if we have the resources
-		const Worker_Descr::BuildCost & buildcost = w_desc->get_buildcost();
-		const Worker_Descr::BuildCost::const_iterator buildcost_end =
-			buildcost.end();
-		for
-			(Worker_Descr::BuildCost::const_iterator it = buildcost.begin();
-			 it != buildcost.end();
-			 ++it)
-		{
-			const char * input_name = it->name.c_str();
+		Worker_Descr::Buildcost const & buildcost = w_desc->buildcost();
+		container_iterate_const(Worker_Descr::Buildcost, buildcost, it) {
+			std::string const & input_name = it.current->first;
 			if (Ware_Index id_w = tribe.ware_index(input_name)) {
-				if (m_supply->stock_wares(id_w) < it->amount)
+				if (m_supply->stock_wares  (id_w) < it.current->second)
 					return false;
 			} else if ((id_w = tribe.worker_index(input_name))) {
-				if (m_supply->stock_workers(id_w) < it->amount)
+				if (m_supply->stock_workers(id_w) < it.current->second)
 					return false;
 			} else
 				throw wexception
 					("worker type %s needs \"%s\" to be built but that is neither "
 					 "a ware type nor a worker type defined in the tribe %s",
-					 w_desc->descname().c_str(), input_name, tribe.name().c_str());
+					 w_desc->descname().c_str(), input_name.c_str(),
+					 tribe.name().c_str());
 		}
 		return true;
 	}
@@ -940,45 +914,22 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) const {
 			("Can not create worker of desired type : %d", worker.value());
 }
 
-/*
-=============
-Warehouse::create_worker
-+=============
-*/
+
 void Warehouse::create_worker(Game * game, Ware_Index const worker) {
-	if (!can_create_worker (game, worker))
-		throw wexception
-			("Warehouse::create_worker WE CANN'T CREATE A %u WORKER",
-			 worker.value());
+	assert(can_create_worker (game, worker));
 
 	const Tribe_Descr & tribe = owner().tribe();
-	if (const Worker_Descr * const w_desc = tribe.get_worker_descr(worker)) {
-		const Worker_Descr::BuildCost & buildcost = w_desc->get_buildcost();
-		const Worker_Descr::BuildCost::const_iterator buildcost_end =
-			buildcost.end();
-		for
-			(Worker_Descr::BuildCost::const_iterator it = buildcost.begin();
-			 it != buildcost.end();
-			 ++it)
-		{
-			const char & material_name = *it->name.c_str();
-			if (Ware_Index const id_ware   = tribe.ware_index  (&material_name))
-				remove_wares  (id_ware,   it->amount);
-			else if
-				(Ware_Index const id_worker = tribe.worker_index(&material_name))
-				remove_workers(id_worker, it->amount);
-			else
-				throw wexception
-					("tribe %s does not define worker or ware type \"%s\"",
-					 tribe.name().c_str(), &material_name);
-		}
+	Worker_Descr const & w_desc = *tribe.get_worker_descr(worker);
+	Worker_Descr::Buildcost const & buildcost = w_desc.buildcost();
+	container_iterate_const(Worker_Descr::Buildcost, buildcost, i) {
+		std::string const & input = i.current->first;
+		if (Ware_Index const id_ware = tribe.ware_index(input))
+			remove_wares  (id_ware,                        i.current->second);
+		else
+			remove_workers(tribe.safe_worker_index(input), i.current->second);
+	}
 
-		incorporate_worker
-			(game, &w_desc->create(*game, owner(), *this, m_position));
-
-	} else
-		throw wexception
-			("Can not create worker of desired type : %d", worker.value());
+	incorporate_worker(game, &w_desc.create(*game, owner(), *this, m_position));
 }
 
 

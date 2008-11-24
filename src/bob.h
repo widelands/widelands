@@ -21,6 +21,7 @@
 #define BOB_H
 
 #include "animation.h"
+#include "writeHTML.h"
 
 #include <cassert>
 
@@ -188,14 +189,12 @@ struct Bob : public Map_Object {
 	struct Descr: public Map_Object_Descr {
 		friend struct Map_Bobdata_Data_Packet;
 
-		Descr(const Tribe_Descr * const tribe, const std::string & bob_name)
-			: m_name(bob_name), m_owner_tribe(tribe)
-		{
-			m_default_encodedata.clear();
-		}
+		Descr
+			(char const * name, char const * descname,
+			 std::string const & directory, Profile &, Section & global_s,
+			 Tribe_Descr const *, EncodeData const *);
 
 		virtual ~Descr() {};
-		const std::string & name() const throw () {return m_name;}
 		Bob * create(Editor_Game_Base *, Player * owner, Coords) const;
 		bool is_world_bob() const {return not m_owner_tribe;}
 
@@ -207,22 +206,12 @@ struct Bob : public Map_Object {
 			return m_owner_tribe;
 		}
 
-		static Descr *create_from_dir
-				(const char *name,
-				 const char *directory,
-				 Profile *prof,
-				 Tribe_Descr* tribe);
-
 		virtual uint32_t movecaps() const throw () {return 0;}
 		uint32_t vision_range() const;
 
 	protected:
 		virtual Bob * create_object() const = 0;
-		virtual void parse
-				(const char *directory, Profile *prof,
-				 const EncodeData *encdata);
 
-		const std::string   m_name;
 		std::string         m_picture;
 		EncodeData          m_default_encodedata;
 		const Tribe_Descr * const m_owner_tribe; //  0 if world bob

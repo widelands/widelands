@@ -90,7 +90,7 @@ void EncyclopediaWindow::fillWares() {
 	Ware_Index const nr_wares = tribe.get_nrwares();
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i);
-		wares.add(ware.descname().c_str(), i, ware.get_icon());
+		wares.add(ware.descname().c_str(), i, ware.icon());
 	}
 }
 
@@ -98,7 +98,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 	Tribe_Descr const & tribe = interactivePlayer.get_player()->tribe();
 	selectedWare = tribe.get_ware_descr(wares.get_selected());
 
-	descrTxt.set_text(selectedWare->get_helptext());
+	descrTxt.set_text(selectedWare->helptext());
 
 	prodSites.clear();
 	condTable.clear();
@@ -132,10 +132,10 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	condTable.clear();
 	Tribe_Descr const & tribe = interactivePlayer.get_player()->tribe();
 
-	const ProductionSite_Descr::ProgramMap & program_map =
+	ProductionSite_Descr::Programs const & programs =
 		static_cast<const ProductionSite_Descr &>
 			(*tribe.get_building_descr(prodSites.get_selected()))
-		.get_all_programs();
+		.programs();
 
 	//  FIXME This needs reworking. A program can indeed produce iron even if
 	//  FIXME the program name is not any of produce_iron, smelt_iron, prog_iron
@@ -146,23 +146,23 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	//  Only shows information from the first program that has a name indicating
 	//  that it produces the considered ware type.
 	std::map<std::string, ProductionProgram*>::const_iterator programIt =
-		program_map.find(std::string("produce_") + selectedWare->name());
+		programs.find(std::string("produce_") + selectedWare->name());
 
-	if (programIt == program_map.end())
-		programIt =
-			program_map.find(std::string("smelt_") + selectedWare->name());
+	if (programIt == programs.end())
+		programIt = programs.find(std::string("smelt_")  + selectedWare->name());
 
-	if (programIt == program_map.end())
-		programIt = program_map.find(std::string("prog_") + selectedWare->name());
+	if (programIt == programs.end())
+		programIt = programs.find(std::string("prog_")   + selectedWare->name());
 
-	if (programIt == program_map.end())
-		programIt = program_map.find(std::string("mine_") + selectedWare->name());
+	if (programIt == programs.end())
+		programIt = programs.find(std::string("mine_")   + selectedWare->name());
 
-	if (programIt == program_map.end()) programIt = program_map.find("work");
+	if (programIt == programs.end())
+		programIt = programs.find("work");
 
-	if (programIt != program_map.end()) {
+	if (programIt != programs.end()) {
 		std::vector<ProductionAction *> const & actions =
-			programIt->second->get_all_actions();
+			programIt->second->actions();
 
 		const std::vector<ProductionAction *>::const_iterator actions_end =
 			actions.end();
@@ -205,7 +205,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					UI::Table<intptr_t>::Entry_Record & tableEntry =
 						condTable.add(0);
 					tableEntry.set_picture
-						(0, tribe.get_ware_descr(*ware_types.begin())->get_icon());
+						(0, tribe.get_ware_descr(*ware_types.begin())->icon());
 					tableEntry.set_string (1, ware_type_names);
 					tableEntry.set_string (2, amount_string);
 					condTable.set_sort_column(1);

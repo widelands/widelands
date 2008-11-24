@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,32 @@
  *
  */
 
-#ifndef COMPUTER_PLAYER_HINTS_H
-#define COMPUTER_PLAYER_HINTS_H
+#ifndef HTML_REFERENCERS_H
+#define HTML_REFERENCERS_H
 
-class Profile;
+#include "writeHTML.h"
 
-struct BuildingHints {
-	BuildingHints ();
+#ifdef WRITE_GAME_DATA_AS_HTML
 
-	void parse (Profile &);
+#include "widelands.h"
 
-	const char * get_need_map_resource() const throw ()
-	{return need_map_resource;}
+#include <map>
+#include <set>
+#include <string>
 
-private:
-	char * need_map_resource;
+struct HTMLReferences {
+	enum Role {Input, Output, Madeof, Become, Employ, End};
+	std::set<std::string> const & operator[] (size_t const i) const {
+		assert(i < End);
+		return references[i];
+	}
+	std::set<std::string>       & operator[] (size_t const i)       {
+		assert(i < End);
+		return references[i];
+	}
+	std::set<std::string> references[End]; /// indexed by Referencing_Role
 };
+
+#endif
 
 #endif

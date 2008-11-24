@@ -23,8 +23,11 @@
 #include "computer_player_hints.h"
 #include "immovable.h"
 #include "workarea_info.h"
+#include "writeHTML.h"
 
 #include "widelands.h"
+
+#include "filewrite.h"
 
 #include <string>
 #include <cstring>
@@ -53,28 +56,15 @@ class Building;
 struct Building_Descr : public Map_Object_Descr {
 	friend struct Map_Buildingdata_Data_Packet;
 
-	typedef Building_Index::value_t Index;
+	Building_Descr
+		(char const * _name, char const * _descname,
+		 std::string const & directory, Profile &, Section & global_s,
+		 Tribe_Descr const &, EncodeData const *);
 
-	struct CostItem {
-		std::string name;   // name of ware
-		int32_t         amount; // amount
-
-		CostItem(const char* iname, int32_t iamount)
-			: name(iname), amount(iamount) {}
-	};
-
-	Building_Descr(const Tribe_Descr &, const std::string & name);
-	virtual ~Building_Descr();
-
-	const std::string & name    () const throw () {return m_name;}
-	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
-	const std::string & descname() const throw () {return m_descname;}
-	__attribute__ ((deprecated)) const char * get_descname() const throw () {return m_descname.c_str();}
-	bool get_buildable() const {return m_buildable;}
+	bool buildable() const {return m_buildable;}
 	bool get_enhanced_building() const {return m_enhanced_building;}
-	std::map<Ware_Index, uint8_t> const & buildcost() const throw () {
-		return m_buildcost;
-	}
+	typedef std::map<Ware_Index, uint8_t> Buildcost;
+	Buildcost const & buildcost() const throw () {return m_buildcost;}
 	uint32_t get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
 	bool get_ismine() const {return m_mine;}
@@ -84,9 +74,8 @@ struct Building_Descr : public Map_Object_Descr {
 	const std::string & get_stop_icon() const throw () {return m_stop_icon;}
 	const std::string & get_continue_icon() const throw ()
 	{return m_continue_icon;}
-	std::set<Building_Index> const & enhancements() const throw () {
-		return m_enhancements;
-	}
+	typedef std::set<Building_Index> Enhancements;
+	Enhancements const & enhancements() const throw () {return m_enhancements;}
 	void add_enhancement(Building_Index const i) {
 		assert(not m_enhancements.count(i));
 		m_enhancements.insert(i);
@@ -99,9 +88,9 @@ struct Building_Descr : public Map_Object_Descr {
 		 bool construct, bool fill = false,
 		 Building_Descr const * = 0)
 		const;
-	typedef
-		std::map<Building_Descr *, std::set<std::string> > enhancements_map_t;
-	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
+#ifdef WRITE_GAME_DATA_AS_HTML
+	void writeHTML(::FileWrite &) const;
+#endif
 	virtual void load_graphics();
 
 	virtual uint32_t get_conquers() const;
@@ -109,7 +98,7 @@ struct Building_Descr : public Map_Object_Descr {
 
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &m_tribe;}
-	Workarea_Info m_workarea_info, m_recursive_workarea_info;
+	Workarea_Info m_workarea_info;
 
 	const BuildingHints & hints() const throw () {return m_hints;}
 
@@ -122,23 +111,16 @@ protected:
 
 private:
 	const Tribe_Descr & m_tribe;
-	const std::string   m_name;     // internal codename
-	std::string         m_descname; // descriptive name for GUI
 	bool         m_buildable;       // the player can build this himself
-	std::map<Ware_Index, uint8_t> m_buildcost;
+	Buildcost m_buildcost;
 	uint32_t         m_buildicon;       // if buildable: picture in the build dialog
-	char*        m_buildicon_fname; // filename for this icon
+	std::string         m_buildicon_fname; // filename for this icon
 	int32_t          m_size;            // size of the building
 	bool         m_mine;
-	std::set<Building_Index> m_enhancements;
+	Enhancements m_enhancements;
 	bool         m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints       m_hints; //  hints (knowledge) for computer players
 	uint32_t m_vision_range; // for migration, 0 is the default, meaning get_conquers() + 4
-
-public:
-	static Building_Descr* create_from_dir
-		(Tribe_Descr const &, enhancements_map_t &, char const * directory,
-		 const EncodeData * const encdata);
 };
 
 

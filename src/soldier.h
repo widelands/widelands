@@ -36,7 +36,10 @@ struct Battle;
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
 struct Soldier_Descr : public Worker_Descr {
-	Soldier_Descr(const Tribe_Descr &, const std::string & soldier_name);
+	Soldier_Descr
+		(char const * const _name, char const * const _descname,
+		 std::string const & directory, Profile &, Section & global_s,
+		 Tribe_Descr const &, EncodeData const *);
 
 	virtual Worker_Type get_worker_type() const {return SOLDIER;}
 
@@ -71,10 +74,12 @@ struct Soldier_Descr : public Worker_Descr {
 
 
 	uint32_t get_rand_anim(const char * const name) const;
+#ifdef WRITE_GAME_DATA_AS_HTML
+	void writeHTMLSoldier(::FileWrite &) const;
+#endif
+
 protected:
 	virtual Bob * create_object() const;
-	virtual void parse
-		(char const * dir, Profile *, becomes_map_t &, EncodeData const *);
 
 	//  start values
 	uint32_t m_min_hp;

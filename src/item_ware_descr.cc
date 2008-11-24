@@ -24,31 +24,20 @@
 
 namespace Widelands {
 
-/**
- * Loads a ware from conf stored in a given directory
- *
- * \param directory directory to read conffile from
- * \param prof
- */
-void Item_Ware_Descr::parse(const char *directory, Profile *prof)
+Item_Ware_Descr::Item_Ware_Descr
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s)
+	:
+	Map_Object_Descr(_name, _descname),
+	m_helptext
+		(global_s.get_string("help", _("Doh... someone forgot the help text!"))),
+	m_icon_fname(directory + "/menu.png"),
+	m_icon(0)
 {
-	char buffer[256];
-	Section & global = prof->get_safe_section("global");
-
-	m_descname = global.get_string("descname", name().c_str());
-	m_helptext = global.get_string
-		("help", _("Doh... someone forgot the help text!"));
-
-	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
-	snprintf
-		(buffer, sizeof(buffer),
-		 "%s/%s", directory, global.get_string("menu_pic", buffer));
-	m_icon_fname = buffer;
-
 	m_default_target_quantity =
-		global.get_positive
+		global_s.get_positive
 			("default_target_quantity", std::numeric_limits<uint32_t>::max());
-	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle")));
+	add_animation("idle", g_anim.get(directory, prof.get_safe_section("idle")));
 }
 
 
@@ -58,35 +47,6 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 void Item_Ware_Descr::load_graphics()
 {
 	m_icon = g_gr->get_picture(PicMod_Game, m_icon_fname.c_str());
-}
-
-
-/**
- * Creates a new Item_Ware_Descr from data found in the given directory.
- *
- * \param name name of the Item_Ware_Descr to create
- * \param dir directory to read data from
- * \return newly created structure.
- * \throw all exceptions happened during process
- */
-Item_Ware_Descr * Item_Ware_Descr::create_from_dir
-	(char const * const name, char const * const dir)
-{
-	Item_Ware_Descr* descr = new Item_Ware_Descr(name);
-
-	try {
-		char fname[256];
-		snprintf(fname, sizeof(fname), "%s/conf", dir);
-
-		Profile prof(fname);
-		descr->parse(dir, &prof);
-	}
-	catch (...) {
-		delete descr;
-		throw;
-	}
-
-	return descr;
 }
 
 };

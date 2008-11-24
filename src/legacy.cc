@@ -26,7 +26,8 @@ namespace Widelands {
 
 namespace Legacy {
 
-Map_Object_Descr g_FakeAttackController_Descr;
+Map_Object_Descr g_FakeAttackController_Descr
+	("attack_controller", "Attack controller");
 
 struct FakeAttackController : public BaseImmovable {
 	FakeAttackController() : BaseImmovable(g_FakeAttackController_Descr) {}
@@ -99,7 +100,7 @@ Map_Object::Loader* loadAttackController(Editor_Game_Base *egbase, Map_Map_Objec
 }
 
 
-Map_Object_Descr g_FakeBattle_Descr;
+Map_Object_Descr g_FakeBattle_Descr("battle", "Battle");
 
 struct FakeBattle : public BaseImmovable {
 	FakeBattle() : BaseImmovable(g_FakeBattle_Descr) {}

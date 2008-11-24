@@ -234,9 +234,8 @@ ActCall::ActCall(char * parameters, ProductionSite_Descr const & descr) {
 		bool reached_end;
 		{
 			char const * const program_name = match(parameters, reached_end);
-			ProductionSite_Descr::ProgramMap const & programs =
-				descr.get_all_programs();
-			ProductionSite_Descr::ProgramMap::const_iterator const it =
+			ProductionSite_Descr::Programs const & programs = descr.programs();
+			ProductionSite_Descr::Programs::const_iterator const it =
 				programs.find(program_name);
 			if (it == programs.end())
 				throw wexception
@@ -668,7 +667,7 @@ ActMine::ActMine
 		description            += ' ';
 		description            += production_program_name;
 		description            += " mine ";
-		description            += world.get_resource(m_resource)->descrname();
+		description            += world.get_resource(m_resource)->descname();
 		descr.m_workarea_info[m_distance].insert(description);
 	} catch (_wexception const & e) {
 		throw wexception("mine: %s", e.what());
@@ -724,10 +723,6 @@ void ActMine::execute(Game & game, ProductionSite & ps) const {
 	if (not totalres)
 		digged_percentage = 100;
 
-	ps.molog
-		("  Mine has already digged %i percent (%i/%i)!\n",
-		 digged_percentage, totalres, totalstart);
-
 	if (digged_percentage < m_max) {
 		//  mine can produce normally
 		if (totalres == 0)
@@ -762,7 +757,6 @@ void ActMine::execute(Game & game, ProductionSite & ps) const {
 		if (pick >= 0)
 			return ps.program_end(game, Failed);
 
-		ps.molog("  Mined one item\n");
 	} else {
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
@@ -966,12 +960,12 @@ Parse a program. The building is parsed completely (hopefully).
 */
 void ProductionProgram::parse
 	(std::string    const & directory,
-	 Profile              * const prof,
+	 Profile              & prof,
 	 std::string    const & name,
 	 ProductionSite_Descr * const building,
 	 EncodeData     const * const encdata)
 {
-	Section & program_s = prof->get_safe_section(name.c_str());
+	Section & program_s = prof.get_safe_section(name.c_str());
 	while (Section::Value * const v = program_s.get_next_val(0)) {
 		ProductionAction * action;
 		if      (not strcmp(v->get_name(), "return"))
@@ -981,9 +975,7 @@ void ProductionProgram::parse
 		else if (not strcmp(v->get_name(), "sleep"))
 			action = new ActSleep (v->get_string(),  *building);
 		else if (not strcmp(v->get_name(), "animate"))
-			action =
-				new ActAnimate
-					(v->get_string(), *building, directory, *prof, encdata);
+			action = new ActAnimate(v->get_string(), *building, directory, prof, encdata);
 		else if (not strcmp(v->get_name(), "consume"))
 			action = new ActConsume(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "produce"))

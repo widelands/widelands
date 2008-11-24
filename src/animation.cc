@@ -319,9 +319,9 @@ are used.
 ===============
 */
 void DirAnimations::parse
-	(Widelands::Map_Object_Descr * const b,
-	 char                  const * const directory,
-	 Profile                     * const prof,
+	(Widelands::Map_Object_Descr &       b,
+	 std::string           const &       directory,
+	 Profile                     &       prof,
 	 char                  const * const sectnametempl,
 	 Section                     * const defaults,
 	 EncodeData            const * const encdefaults)
@@ -360,7 +360,7 @@ void DirAnimations::parse
 
 		std::string const anim_name = sectname;
 
-		Section * s = prof->get_section(sectname);
+		Section * s = prof.get_section(sectname);
 		if (!s) {
 			if (!defaults)
 				throw wexception("Section [%s] missing and no default supplied", sectname);
@@ -368,7 +368,7 @@ void DirAnimations::parse
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir-1]);
-		m_animations[dir - 1] = g_anim.get(directory, *s, sectname, encdefaults);
-		b->add_animation(anim_name.c_str(), m_animations[dir-1]);
+		m_animations[dir - 1] = g_anim.get(directory.c_str(), *s, sectname, encdefaults);
+		b.add_animation(anim_name.c_str(), m_animations[dir - 1]);
 	}
 }

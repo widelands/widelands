@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-Battle::Descr g_Battle_Descr;
+Battle::Descr g_Battle_Descr("battle", "Battle");
 
 
 Battle::Battle ()
@@ -129,6 +129,8 @@ Soldier * Battle::opponent(Soldier & soldier)
 	return m_first == &soldier ? m_second : m_first;
 }
 
+//  FIXME Couldn't this code be simplified tremendously by doing all scheduling
+//  FIXME for one soldier and letting the other sleep until the battle is over?
 void Battle::getBattleWork(Game & game, Soldier & soldier)
 {
 	if (soldier.get_current_hitpoints() < 1) {
@@ -144,21 +146,61 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		return soldier.skip_act();
 
 	// So both soldiers are alive; are we ready to trade the next blow?
+	//
+	//  This code choses one of 3 codepaths, depending on 2 variables;
+	//  m_readyflags and thisflag. m_readyflags is 1 if only the first soldier
+	//  is ready, 2 if only the second soldier is ready and 3 if both soldiers
+	//  are ready. But ready to do what? Attack? Defend? Rest?
+	//
+	//  m_readyflags  :  thisflag  :  m_readyflags | thisflag  : codepath
+	//             0  :         1  :                        1  :        a
+	//             0  :         2  :                        2  :        a
+	//             1  :         1  :                        1  :        a
+	//             1  :         2  :                        3  :        b
+	//             2  :         1  :                        1  :        a
+	//             2  :         2  :                        3  :        b
+	//             3  :         1  :                        3  :        c
+	//             3  :         2  :                        3  :        c
+	//
+	//  * If the soldier that this function is called for was not ready before:
+	//      * he becomes ready hereby, and
+	//      * if the other soldier was ready before, it is time to let one hurt
+	//        the other.
+	//  * If both soldiers are already ready when this function is called, they
+	//    both become non-ready and the soldier that this function was called
+	//    for sleeps. When he wakes up, this function is called for him again.
+	//    He then becomes ready and wakes up his opponent. Then this function is
+	//    called for him, he becomes ready and it is time again to let one hurt
+	//    the other.
+
 	uint8_t const thisflag = &soldier == m_first ? 1 : 2;
 
-	if ((m_readyflags | thisflag) != 3) {
-		soldier.start_task_idle(&game, soldier.descr().get_animation("idle"), -1);
-		m_readyflags |= thisflag;
-		return;
-	}
-	if (m_readyflags != 3) {
-		m_readyflags |= thisflag;
+	if ((m_readyflags | thisflag) != 3) {                         //  codepath a
+		//  My opponent is not ready to defend. Idle until he wakes me up.
+		assert(m_readyflags == 0 or m_readyflags == thisflag);
+		m_readyflags |= thisflag; //  FIXME simplify to a plain assignment
+		assert(m_readyflags == thisflag);
+		return
+			soldier.start_task_idle
+				(&game, soldier.descr().get_animation("idle"), -1);
+	} else if (m_readyflags != 3) {                               //  codepath b
+		//  Only one of us was ready before and the other becomes ready now.
+		//  Time for one of us to hurt the other. Which one is on turn is decided
+		//  by calculateTurn.
+		assert
+			((m_readyflags == 1 and thisflag == 2) or
+			 (m_readyflags == 2 and thisflag == 1));
+		m_readyflags |= thisflag; //  FIXME simplify to a plain assignment (3)
+		assert(m_readyflags == 3);
 		calculateTurn(game);
 		opponent(soldier)->send_signal(&game, "wakeup");
-	} else {
+	} else {                                                      //  codepath c
+		//  Both of us were already ready. That means that we already fought and
+		//  it is time to rest.
 		m_readyflags = 0;
 	}
 
+	//  common to codepaths b and c
 	soldier.start_task_idle(&game, soldier.descr().get_animation("idle"), 1000);
 }
 

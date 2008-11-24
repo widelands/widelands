@@ -59,6 +59,9 @@ class Worker : public Bob {
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
+#ifdef WRITE_GAME_DATA_AS_HTML
+		void writeHTML(::FileWrite &, Worker_Descr const &) const;
+#endif
 	};
 
 
@@ -72,7 +75,7 @@ public:
 	virtual Bob::Type get_bob_type() const throw () {return Bob::WORKER;}
 
 	uint32_t get_animation(const char * const str) const {return descr().get_animation(str);}
-	uint32_t get_menu_pic() const throw () {return descr().get_menu_pic();}
+	uint32_t icon() const throw () {return descr().icon();}
 	Ware_Index becomes() const throw () {return descr().becomes();}
 	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}
 	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
@@ -194,7 +197,6 @@ private:
 	bool run_setbobdescription(Game* g, State* state, const Action* act);
 	bool run_findobject(Game* g, State* state, const Action* act);
 	bool run_findspace(Game* g, State* state, const Action* act);
-	bool run_findresource(Game* g, State* state, const Action* act);
 	bool run_walk(Game* g, State* state, const Action* act);
 	bool run_animation(Game* g, State* state, const Action* act);
 	bool run_return(Game* g, State* state, const Action* act);

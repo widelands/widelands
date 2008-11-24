@@ -149,8 +149,9 @@ void Map_Object_Packet::Write
 
 		if (!obj->has_new_save_support())
 			throw wexception
-				("MO(%u) without new style save support not saved explicitly",
-				 obj->get_serial());
+				("MO(%u of type %s) without new style save support not saved "
+				 "explicitly",
+				 obj->get_serial(), obj->descr().descname().c_str());
 
 		os->register_object(obj);
 		obj->save(egbase, os, fw);

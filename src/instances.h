@@ -44,12 +44,16 @@ struct Map_Map_Object_Loader;
 struct Map_Object_Descr {
 	friend class ::DirAnimations;
 	typedef uint8_t Index;
-	Map_Object_Descr() {}
+	Map_Object_Descr(char const * const _name, char const * const _descname)
+		: m_name(_name), m_descname(_descname)
+	{}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
+	std::string const &     name() const throw () {return m_name;}
+	std::string const & descname() const throw () {return m_descname;}
 	struct Animation_Nonexistent {};
-	uint32_t get_animation(const char * const name) const {
-		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(name);
+	uint32_t get_animation(char const * const anim) const {
+		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
 		if (it == m_anims.end()) throw Animation_Nonexistent();
 		return it->second;
 	}
@@ -76,6 +80,8 @@ struct Map_Object_Descr {
 		Map_Object_Descr & operator=(Map_Object_Descr const &);
 		explicit Map_Object_Descr   (Map_Object_Descr const &);
 
+	std::string const m_name;
+	std::string const m_descname;       ///< Descriptive name
 		std::vector<uint32_t>           m_attributes;
 		std::map<std::string, uint32_t>  m_anims;
 		static uint32_t                 s_dyn_attribhigh; ///< highest attribute ID used

@@ -52,13 +52,16 @@ struct WaresQueue;
  */
 struct ProductionSite_Descr : public Building_Descr {
 	friend struct ProductionProgram; // To add animations
-	typedef std::map<std::string, ProductionProgram*> ProgramMap;
 
 	ProductionSite_Descr
-		(const Tribe_Descr & tribe, const std::string & productionsite_name);
+		(char const * name, char const * descname,
+		 std::string const & directory, Profile &, Section & global_s,
+		 Tribe_Descr const &, EncodeData const *);
 	virtual ~ProductionSite_Descr();
 
-	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
+#ifdef WRITE_GAME_DATA_AS_HTML
+	void writeHTMLProduction(::FileWrite &) const;
+#endif
 	virtual Building * create_object() const;
 
 	std::vector<std::string> const & workers() const throw () {
@@ -70,19 +73,22 @@ struct ProductionSite_Descr : public Building_Descr {
 	bool is_output(Ware_Index const i) const throw () {
 		return m_output.count(i);
 	}
-	std::map<Ware_Index, uint8_t> const & inputs() const {return m_inputs;}
-	std::set<Ware_Index>          const & output() const {return m_output;}
+	typedef std::map<Ware_Index, uint8_t>              Inputs;
+	Inputs   const & inputs  () const throw () {return m_inputs;}
+	typedef std::set<Ware_Index>                       Output;
+	Output   const & output  () const throw () {return m_output;}
 	const ProductionProgram * get_program(const std::string &) const;
-	const ProgramMap & get_all_programs() const throw () {return m_programs;}
+	typedef std::map<std::string, ProductionProgram *> Programs;
+	Programs const & programs() const throw () {return m_programs;}
 
 	virtual bool is_only_production_site() const throw () {return true;}
 
 
 private:
 	std::vector<std::string> m_workers; // name of worker type
-	std::map<Ware_Index, uint8_t> m_inputs;
-	std::set<Ware_Index>          m_output;
-	ProgramMap            m_programs;
+	Inputs   m_inputs;
+	Output   m_output;
+	Programs m_programs;
 };
 
 class ProductionSite : public Building {

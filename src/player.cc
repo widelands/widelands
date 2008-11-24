@@ -321,7 +321,7 @@ void Player::build(Coords c, Building_Index idx)
 		return;
 	descr = tribe().get_building_descr(idx);
 
-	if (!descr->get_buildable())
+	if (!descr->buildable())
 		return;
 
 

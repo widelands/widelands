@@ -27,6 +27,9 @@
 #include "immovable.h"
 #include "item_ware_descr.h"
 #include "worker.h"
+#include "HTMLReferences.h"
+
+#include "filewrite.h"
 
 #include <map>
 #include <vector>
@@ -84,17 +87,25 @@ struct Tribe_Descr {
 	Worker_Descr * get_worker_descr(Ware_Index const index) const {
 		return m_workers.get(index);
 	}
+	Ware_Index worker_index(std::string const & workername) const {
+		return m_workers.get_index(workername);
+	}
 	Ware_Index worker_index(char const * const workername) const {
 		return m_workers.get_index(workername);
 	}
 	Ware_Index get_nrwares() const {return m_wares.get_nitems();}
+	Ware_Index safe_ware_index(std::string const & warename) const;
 	Ware_Index safe_ware_index(const char * const warename) const;
+	Ware_Index ware_index(std::string const & warename) const {
+		return m_wares.get_index(warename);
+	}
 	Ware_Index ware_index(char const * const warename) const {
 		return m_wares.get_index(warename);
 	}
 	Item_Ware_Descr* get_ware_descr(Ware_Index const index) const {
 		return m_wares.get(index);
 	}
+	Ware_Index safe_worker_index(std::string const & workername) const;
 	Ware_Index safe_worker_index(const char * const workername) const;
 	Building_Index get_nrbuildings() const {
 		return m_buildings.get_nitems();
@@ -102,6 +113,9 @@ struct Tribe_Descr {
 	Building_Index safe_building_index(const char *name) const;
 	Building_Descr * get_building_descr(Building_Index const index) const {
 		return m_buildings.get(index);
+	}
+	Building_Index building_index(std::string const & buildingname) const {
+		return m_buildings.get_index(buildingname);
 	}
 	Building_Index building_index(char const * const buildingname) const {
 		return m_buildings.get_index(buildingname);
@@ -127,6 +141,20 @@ struct Tribe_Descr {
 	void load_warehouse_with_start_wares
 		(Editor_Game_Base &, Warehouse &) const;
 
+#ifdef WRITE_GAME_DATA_AS_HTML
+	void referenceBuilding
+		(::FileWrite &, std::string const &, HTMLReferences::Role,
+		 Building_Index)
+		const;
+	void referenceWorker
+		(::FileWrite &, std::string const &, HTMLReferences::Role,
+		 Ware_Index,     uint8_t multiplicity = 1)
+		const;
+	void referenceWare
+		(::FileWrite &, std::string const &, HTMLReferences::Role,
+		 Ware_Index,     uint8_t multiplicity = 1)
+		const;
+#endif
 
 private:
 	const std::string m_name;
@@ -148,11 +176,15 @@ private:
 
 	EncodeData m_default_encdata;
 
-	void parse_root_conf(char const * directory);
-	void parse_buildings(char const * directory);
-	void parse_workers  (char const * directory);
-	void parse_wares    (char const * wares);
-	void parse_bobs     (char const * directory);
+#ifdef WRITE_GAME_DATA_AS_HTML
+	void writeHTMLBuildings(std::string const & directory);
+	void writeHTMLWorkers  (std::string const & directory);
+	void writeHTMLWares    (std::string const & directory);
+	void writeHTMLBobs     (std::string const & directory);
+	HTMLReferences * m_ware_references;
+	HTMLReferences * m_worker_references;
+	HTMLReferences * m_building_references;
+#endif
 
 	Tribe_Descr & operator= (Tribe_Descr const &);
 	explicit Tribe_Descr    (Tribe_Descr const &);

@@ -299,7 +299,7 @@ int32_t Request::get_priority (int32_t cost)
 			return -1;
 
 		modifier = building->get_priority(get_type(), get_index());
-		switch (building->get_building_type()){
+		switch (building->get_building_type()) {
 			case Building::CONSTRUCTIONSITE:
 				is_construction_site = true;
 				break;
@@ -344,15 +344,6 @@ int32_t Request::get_priority (int32_t cost)
 		 distance  * COST_WEIGHT_IN_PRIORITY)
 		* modifier
 		+ MAX_IDLE_PRIORITY;
-
-	log
-		("PRIORITY: %d (%s, gt=%d, last=%d, cost=%d, *%d)",
-		 priority,
-		 0x0 != building ? building->name().c_str() : "",
-		 g.get_gametime(),
-		 get_last_request_time(),
-		 cost,
-		 modifier);
 
 	if (priority <= MAX_IDLE_PRIORITY)
 		return MAX_IDLE_PRIORITY + 1; // make sure idle request are lower
@@ -459,8 +450,6 @@ void Request::start_transfer(Game* g, Supply* supp)
 		{
 			// Begin the transfer of a soldier or worker.
 			// launch_worker() creates or starts the worker
-			log("Request: start soldier or worker transfer for %i\n", get_index().value());
-
 			Worker* s = supp->launch_worker(g, this);
 			ss.Unsigned32(s->get_serial());
 			t = new Transfer(g, this, s);
@@ -515,9 +504,6 @@ void Request::transfer_finish(Game *g, Transfer* t)
 	// therefore we musn't access member variables behind this
 	// point
 	(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
-
-
-	log ("<<Transfer::has_finished()\n");
 }
 
 /**

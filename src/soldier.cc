@@ -59,21 +59,12 @@ Soldier_Descr::~Soldier_Descr
 ===============
 */
 Soldier_Descr::Soldier_Descr
-	(Tribe_Descr const & tribe_descr, std::string const & soldier_name)
-: Worker_Descr(tribe_descr, soldier_name)
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
+	: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
 {
 	add_attribute(Map_Object::SOLDIER);
-}
-
-
-void Soldier_Descr::parse
-	(char       const * directory,
-	 Profile          * prof,
-	 becomes_map_t    & becomes_map,
-	 EncodeData const * encdata)
-{
-	Worker_Descr::parse(directory, prof, becomes_map, encdata);
-	Section & global_s = prof->get_safe_section("global");
 
 	{ //  hitpoints
 		const char * const hp = global_s.get_safe_string("hp");
@@ -736,6 +727,9 @@ void Soldier::startTaskBattle(Game* g)
 void Soldier::battle_update(Game* g, State*)
 {
 	std::string signal = get_signal();
+	molog
+		("[battle] update for player %u's soldier: signal = \"%s\"\n",
+		 get_owner()->get_player_number(), signal.c_str());
 
 	if (signal.size()) {
 		if (signal == "blocked") {
@@ -755,8 +749,10 @@ void Soldier::battle_update(Game* g, State*)
 		return pop_task(g);
 	}
 
-	if (!m_battle->opponent(*this))
+	if (!m_battle->opponent(*this)) {
+		molog("[battle] no opponent, starting task idle\n");
 		return start_task_idle(g, get_animation("idle"), -1);
+	}
 
 	if (stayHome()) {
 		if (this == m_battle->first()) {
@@ -783,6 +779,9 @@ void Soldier::battle_update(Game* g, State*)
 					(g, dest, 0,
 					 descr().get_right_walk_anims(does_carry_ware()),
 					 false, (dist+3)/4);
+				molog
+					("player %u's soldier started task_movepath\n",
+					 get_owner()->get_player_number());
 				return;
 			}
 		}

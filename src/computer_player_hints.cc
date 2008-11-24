@@ -27,9 +27,9 @@
 BuildingHints::BuildingHints () : need_map_resource(0) {}
 
 
-void BuildingHints::parse (Profile* prof)
+void BuildingHints::parse (Profile & prof)
 {
-	if (Section * const hints = prof->get_section("aihints"))
+	if (Section * const hints = prof.get_section("aihints"))
 		if (char const * const s = hints->get_string("need_map_resource"))
 			need_map_resource = strdup(s);
 }

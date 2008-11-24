@@ -28,20 +28,17 @@
 #include "interactive_base.h"
 #include "layered_filesystem.h"
 #include "map.h"
-#include "militarysite.h"
 #include "player.h"
-#include "productionsite.h"
 #include "profile.h"
 #include "rendertarget.h"
 #include "request.h"
 #include "sound/sound_handler.h"
-#include "trainingsite.h"
 #include "transport.h"
 #include "tribe.h"
-#include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
 
+#include "container_iterate.h"
 #include "upcast.h"
 
 #include <stdio.h>
@@ -59,31 +56,140 @@ Initialize with sane defaults
 ===============
 */
 Building_Descr::Building_Descr
-	(Tribe_Descr const & tribe_descr, std::string const & building_name)
-:
-m_stopable       (false),
-m_tribe          (tribe_descr),
-m_name           (building_name),
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const & _descr, EncodeData const * const encdata)
+	:
+	Map_Object_Descr(_name, _descname),
+	m_tribe         (_descr),
 m_buildable      (true),
 m_buildicon      (0),
-m_buildicon_fname(0),
 m_size           (BaseImmovable::SMALL),
 m_mine           (false),
 m_vision_range   (0)
-{}
-
-
-/*
-===============
-Building_Descr::~Building_Descr
-
-Cleanup
-===============
-*/
-Building_Descr::~Building_Descr()
 {
-	free(m_buildicon_fname);
+	{
+		char const * const string = global_s.get_safe_string("size");
+		if      (!strcasecmp(string, "small"))
+			m_size = BaseImmovable::SMALL;
+		else if (!strcasecmp(string, "medium"))
+			m_size = BaseImmovable::MEDIUM;
+		else if (!strcasecmp(string, "big"))
+			m_size = BaseImmovable::BIG;
+		else if (!strcasecmp(string, "mine")) {
+			m_size = BaseImmovable::SMALL;
+			m_mine = true;
+		} else
+			throw wexception
+				("Section [global], unknown size '%s'. Valid values are small, "
+				 "medium, big, mine",
+				 string);
+	}
+
+	// Parse build options
+	m_buildable = global_s.get_bool("buildable", true);
+	while
+		(Section::Value const * const v = global_s.get_next_val("enhancement"))
+		try {
+			std::string const target_name = v->get_string();
+			if (target_name == name())
+				throw wexception("enhancement to same type");
+			if (target_name == "constructionsite")
+				throw wexception("enhancement to special type constructionsite");
+			if (Building_Index const en_i = tribe().building_index(target_name)) {
+				if (enhancements().count(en_i))
+					throw wexception("this has already been declared");
+				m_enhancements.insert(en_i);
+
+				//  Merge the enhancements workarea info into this building's
+				//  workarea info.
+				Building_Descr const & enhancement =
+					*tribe().get_building_descr(en_i);
+				container_iterate_const
+					(Workarea_Info, enhancement.m_workarea_info, j)
+				{
+					std::set<std::string> & r = m_workarea_info[j.current->first];
+					container_iterate_const
+						(std::set<std::string>, j.current->second, i)
+						r.insert(*i.current);
+				}
+			} else
+				throw wexception
+					("\"%s\" has not beed defined as a building type (wrong "
+					 "declaration order?)",
+					 target_name.c_str());
+		} catch (_wexception const & e) {
+			throw wexception
+				("\"enhancements=%s\": %s", v->get_string(), e.what());
+		}
+	m_enhanced_building = global_s.get_bool("enhanced_building", false);
+	if (m_buildable || m_enhanced_building) {
+		//  get build icon
+		m_buildicon_fname  = directory;
+		m_buildicon_fname += "/menu.png";
+
+		//  build animation
+		if (Section * const build_s = prof.get_section("build")) {
+			if (build_s->get_int("fps", -1) != -1)
+				throw wexception("fps defined for build animation!");
+			if (!is_animation_known("build"))
+				add_animation("build", g_anim.get(directory.c_str(), *build_s, 0, encdata));
+		}
+
+		// Get costs
+		Section & buildcost_s = prof.get_safe_section("buildcost");
+		while (Section::Value const * const val = buildcost_s.get_next_val(0))
+			try {
+				if (Ware_Index const idx = m_tribe.ware_index(val->get_name())) {
+					if (m_buildcost.count(idx))
+						throw wexception
+							("a buildcost item of this ware type has already been "
+							 "defined");
+					int32_t const value = val->get_int();
+					if (value < 1 or 255 < value)
+						throw wexception("count is out of range 1 .. 255");
+					m_buildcost.insert(std::pair<Ware_Index, uint8_t>(idx, value));
+				} else
+					throw wexception
+						("tribe does not define a ware type with this name");
+			} catch (_wexception const & e) {
+				throw wexception
+					("[buildcost] \"%s=%s\": %s",
+					 val->get_name(), val->get_string(), e.what());
+			}
+	}
+
+	if ((m_stopable = global_s.get_bool("stopable", true))) {
+		if (global_s.get_string("stopicon")) {
+			m_stop_icon = directory;
+			m_stop_icon+="/";
+			m_stop_icon += global_s.get_string("stopicon");
+		}
+		else
+			m_stop_icon = "pics/stop.png";
+		if (global_s.get_string("continueicon")) {
+			m_continue_icon = directory;
+			m_continue_icon+="/";
+			m_continue_icon += global_s.get_string("continueicon");
+		}
+		else
+			m_continue_icon = "pics/continue.png";
+	}
+
+	{ //  parse basic animation data
+		Section & idle_s = prof.get_safe_section("idle");
+		if (!is_animation_known("idle"))
+			add_animation("idle", g_anim.get(directory.c_str(), idle_s, 0, encdata));
+	}
+
+	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
+		g_sound_handler.load_fx(directory, v->get_string());
+
+	m_hints.parse (prof);
+
+	m_vision_range = global_s.get_int("vision_range");
 }
+
 
 /*
 ===============
@@ -111,138 +217,6 @@ Building* Building_Descr::create
 	return b;
 }
 
-/*
-===============
-Building_Descr::parse
-
-Parse the basic building settings from the given profile and directory
-===============
-*/
-void Building_Descr::parse
-	(char         const * const directory,
-	 Profile            * const prof,
-	 enhancements_map_t &        enhancements_map,
-	 EncodeData   const * const encdata)
-{
-	char fname[256];
-
-	Section & global_s = prof->get_safe_section("global");
-	m_descname = global_s.get_safe_string("descname");
-	{
-		char const * const string = global_s.get_safe_string("size");
-		if      (!strcasecmp(string, "small"))
-			m_size = BaseImmovable::SMALL;
-		else if (!strcasecmp(string, "medium"))
-			m_size = BaseImmovable::MEDIUM;
-		else if (!strcasecmp(string, "big"))
-			m_size = BaseImmovable::BIG;
-		else if (!strcasecmp(string, "mine")) {
-			m_size = BaseImmovable::SMALL;
-			m_mine = true;
-		} else
-			throw wexception
-				("Section [global], unknown size '%s'. Valid values are small, "
-				 "medium, big, mine",
-				 string);
-	}
-
-	// Parse build options
-	m_buildable = global_s.get_bool("buildable", true);
-	std::set<std::string> enhancement_names;
-	while
-		(Section::Value const * const v = global_s.get_next_val("enhancement"))
-		try {
-			std::string const target_name = v->get_string();
-			if (enhancement_names.count(target_name))
-				throw wexception("this has already been declared");
-			if (target_name ==  name())
-				throw wexception("enhancement to same type");
-			if (target_name == "constructionsite")
-				throw wexception("enhancement to special type constructionsite");
-			enhancement_names.insert(target_name);
-		} catch (_wexception const & e) {
-			throw wexception
-				("\"enhancements=%s\": %s", v->get_string(), e.what());
-		}
-	enhancements_map.insert
-		(std::pair<Building_Descr *, std::set<std::string> >
-		 	(this, enhancement_names));
-	m_enhanced_building = global_s.get_bool("enhanced_building", false);
-	if (m_buildable || m_enhanced_building) {
-		//  get build icon
-		snprintf
-			(fname, sizeof(fname),
-			 "%s/%s",
-			 directory,
-			 global_s.get_string("buildicon", (m_name + "_build.png").c_str()));
-
-		//  Prevent memory leak in case someone would try to call parse twice.
-		assert(not m_buildicon_fname);
-		m_buildicon_fname = strdup(fname);
-
-		//  build animation
-		if (Section * const build_s = prof->get_section("build")) {
-			if (build_s->get_int("fps", -1) != -1)
-				throw wexception("fps defined for build animation!");
-			if (!is_animation_known("build"))
-				add_animation
-					("build", g_anim.get(directory, *build_s, 0, encdata));
-		} else
-			throw wexception("Missing build animation");
-
-		// Get costs
-		Section & buildcost_s = prof->get_safe_section("buildcost");
-		while (Section::Value const * const val = buildcost_s.get_next_val(0))
-			try {
-				if (Ware_Index const idx = m_tribe.ware_index(val->get_name())) {
-					if (m_buildcost.count(idx))
-						throw wexception
-							("a buildcost item of this ware type has already been "
-							 "defined");
-					int32_t const value = val->get_int();
-					if (value < 1 or 255 < value)
-						throw wexception("count is out of range 1 .. 255");
-					m_buildcost.insert(std::pair<Ware_Index, uint8_t>(idx, value));
-				} else
-					throw wexception
-						("tribe does not define a ware type with this name");
-			} catch (_wexception const & e) {
-				throw wexception
-					("buildcost \"%s=%s\": %s",
-					 val->get_name(), val->get_string(), e.what());
-			}
-	}
-
-	if ((m_stopable = global_s.get_bool("stopable", m_stopable))) {
-		if (global_s.get_string("stopicon")) {
-			m_stop_icon = directory;
-			m_stop_icon+="/";
-			m_stop_icon += global_s.get_string("stopicon");
-		}
-		else
-			m_stop_icon = "pics/stop.png";
-		if (global_s.get_string("continueicon")) {
-			m_continue_icon = directory;
-			m_continue_icon+="/";
-			m_continue_icon += global_s.get_string("continueicon");
-		}
-		else
-			m_continue_icon = "pics/continue.png";
-	}
-
-	{ //  parse basic animation data
-		Section & idle_s = prof->get_safe_section("idle");
-		if (!is_animation_known("idle"))
-			add_animation("idle", g_anim.get(directory, idle_s, 0, encdata));
-	}
-
-	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
-		g_sound_handler.load_fx(directory, v->get_string());
-
-	m_hints.parse (prof);
-
-	m_vision_range = global_s.get_int("vision_range");
-}
 
 /**
  * Normal buildings don't conquer anything, do this returns 0 by default.
@@ -277,9 +251,8 @@ Called whenever building graphics need to be loaded.
 */
 void Building_Descr::load_graphics()
 {
-	if (m_buildicon_fname)
-		m_buildicon =
-			g_gr->get_picture(PicMod_Game, m_buildicon_fname);
+	if (m_buildicon_fname.size())
+		m_buildicon = g_gr->get_picture(PicMod_Game, m_buildicon_fname.c_str());
 }
 
 /*
@@ -309,78 +282,6 @@ Building * Building_Descr::create_constructionsite
 	} else
 		throw wexception
 			("Tribe %s has no constructionsite", m_tribe.name().c_str());
-}
-
-
-/*
-===============
-Building_Descr::create_from_dir
-
-Open the appropriate configuration file and check if a building description
-is there.
-
-May return 0.
-===============
-*/
-Building_Descr* Building_Descr::create_from_dir
-	(Tribe_Descr  const &       tribe,
-	 enhancements_map_t &       enhancements_map,
-	 char         const * const directory,
-	 EncodeData  const * const encdata)
-{
-	const char* name;
-
-	// name = last element of path
-	const char* slash = strrchr(directory, '/');
-	const char* backslash = strrchr(directory, '\\');
-
-	if (backslash && (!slash || backslash > slash))
-		slash = backslash;
-
-	if (slash)
-		name = slash+1;
-	else
-		name = directory;
-
-	// Open the config file
-	Building_Descr* descr = 0;
-	char fname[256];
-
-	snprintf(fname, sizeof(fname), "%s/conf", directory);
-
-	if (!g_fs->FileExists(fname))
-		return 0;
-
-	try {
-		Profile prof(fname, "global"); // section-less file
-		char const * const type =
-			prof.get_safe_section("global").get_safe_string("type");
-
-		if (!strcasecmp(type, "warehouse"))
-			descr = new Warehouse_Descr(tribe, name);
-		else if (!strcasecmp(type, "production"))
-			descr = new ProductionSite_Descr(tribe, name);
-		else if (!strcasecmp(type, "construction"))
-			descr = new ConstructionSite_Descr(tribe, name);
-		else if (!strcasecmp(type, "military"))
-			descr = new MilitarySite_Descr(tribe, name);
-		else if (!strcasecmp(type, "training"))
-			descr = new TrainingSite_Descr(tribe, name);
-		else
-			throw wexception("Unknown building type '%s'", type);
-
-		descr->parse(directory, &prof, enhancements_map, encdata);
-	} catch (std::exception const & e) {
-		enhancements_map.erase(descr); //  Must remove the pointer from the map.
-		delete descr;
-		throw wexception("Error reading building %s: %s", name, e.what());
-	} catch (...) {
-		enhancements_map.erase(descr); //  Must remove the pointer from the map.
-		delete descr;
-		throw;
-	}
-
-	return descr;
 }
 
 
@@ -438,7 +339,7 @@ By default, all buildable buildings can be bulldozed.
 */
 uint32_t Building::get_playercaps() const throw () {
 	uint32_t caps = 0;
-	if (descr().get_buildable() or descr().get_enhanced_building())
+	if (descr().buildable() or descr().get_enhanced_building())
 		caps                                |= 1 << PCap_Bulldoze;
 	if (descr().get_stopable())       caps |= 1 << PCap_Stopable;
 	if (descr().enhancements().size()) caps |= 1 << PCap_Enhancable;

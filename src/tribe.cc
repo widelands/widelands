@@ -19,19 +19,28 @@
 
 #include "tribe.h"
 
+#include "carrier.h"
+#include "constructionsite.h"
+#include "critter_bob.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "helper.h"
 #include "i18n.h"
+#include "immovable.h"
 #include "layered_filesystem.h"
+#include "militarysite.h"
 #include "profile.h"
 #include "soldier.h"
+#include "trainingsite.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
 #include "widelands_fileread.h"
 #include "world.h"
 
+#include "disk_filesystem.h"
+
+#include "container_iterate.h"
 #include "upcast.h"
 
 #include <iostream>
@@ -48,20 +57,159 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 {
 	assert(&the_world);
 	try {
-		char directory[256];
+		std::string path = "tribes/";
+		path            += tribename;
+		path            += '/';
+		std::string::size_type const base_path_size = path.size();
 
 		//  Grab the localization textdomain.
-		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());
-		i18n::Textdomain textdomain(directory);
-
-		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());
+		i18n::Textdomain textdomain(path);
 
 		m_default_encdata.clear();
-		parse_wares    (directory);
-		parse_workers  (directory);
-		parse_buildings(directory);
-		parse_bobs     (directory);
-		parse_root_conf(directory);
+
+		path += "conf";
+		Profile root_conf(path.c_str());
+		path.resize(base_path_size);
+
+		{
+			std::set<std::string> descnames; //  To enforce descname uniqueness.
+
+			Section & section = root_conf.get_safe_section("map object types");
+			while (Section::Value const * const v = section.get_next_val(0)) {
+				char const * const     _name = v->get_name  ();
+				char const * const _descname = v->get_string();
+				if (descnames.count(_descname))
+					throw wexception
+						("descname \"%s\" is already used", v->get_string());
+				descnames.insert(v->get_string());
+				path += _name;
+				path += "/conf";
+				try {
+					Profile prof(path.c_str(), "global");
+					path.resize(path.size() - strlen("conf"));
+					Section & global_s = prof.get_safe_section("global");
+					char const * const type = global_s.get_safe_string("type");
+					if      (not strcasecmp(type, "critter"))
+						m_bobs.add
+							(new Critter_Bob_Descr
+							 	(_name, _descname, path, prof, global_s, this, &m_default_encdata));
+					else if (not strcasecmp(type, "ware"))
+						m_wares.add
+							(new Item_Ware_Descr
+							 	(_name, _descname, path, prof, global_s));
+					else if (not strcasecmp(type, "generic"))
+						m_workers.add
+							(new Worker_Descr
+							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+					else if (not strcasecmp(type, "carrier"))
+						m_workers.add
+							(new Carrier::Descr
+							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+					else if (not strcasecmp(type, "soldier"))
+						m_workers.add
+							(new Soldier_Descr
+							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+					else if (not strcasecmp(type, "production"))
+						m_buildings.add
+							(new ProductionSite_Descr
+							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+					else if (not strcasecmp(type, "military"))
+						m_buildings.add
+							(new MilitarySite_Descr
+							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+					else if (not strcasecmp(type, "training"))
+						m_buildings.add
+							(new TrainingSite_Descr
+							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+					else if (not strcasecmp(type, "warehouse"))
+						m_buildings.add
+							(new Warehouse_Descr
+							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+					else if (not strcasecmp(type, "construction"))
+						m_buildings.add
+							(new ConstructionSite_Descr
+							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+					else
+						m_immovables.add
+							(new Immovable_Descr
+							 	(_name, _descname, path, prof, global_s, this));
+				} catch (std::exception const & e) {
+					throw wexception("%s=\"%s\": %s", _name, _descname, e.what());
+				}
+				path.resize(base_path_size);
+			}
+		}
+
+		try {
+			{
+				Section & tribe_s = root_conf.get_safe_section("tribe");
+				tribe_s.get_string("author");
+				tribe_s.get_string("name"); // descriptive name
+				tribe_s.get_string("descr"); // long description
+				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
+			}
+
+			if (Section * const defaults_s = root_conf.get_section("defaults"))
+				m_default_encdata.parse(*defaults_s);
+
+			m_anim_frontier =
+				g_anim.get(path, root_conf.get_safe_section("frontier"), 0, &m_default_encdata);
+			m_anim_flag     =
+				g_anim.get(path, root_conf.get_safe_section("flag"),     0, &m_default_encdata);
+
+			try { //  FIXME eliminate
+				Section & swa_s = root_conf.get_safe_section("startwares");
+				while (Section::Value const * const value = swa_s.get_next_val(0))
+				{
+					if (not m_wares.exists(value->get_name()))
+						throw wexception
+							("In section [startwares], ware %s is not known!",
+							 value->get_name());
+					m_startwares[value->get_name()] = value->get_int();
+				}
+			} catch (_wexception const & e) {
+				throw wexception("section [startwares]: %s", e.what());
+			}
+
+			try { //  FIXME eliminate
+				Section & swo_s = root_conf.get_safe_section("startworkers");
+				while (Section::Value const * const value = swo_s.get_next_val(0))
+				{
+					if (strcmp(value->get_name(), "soldier")) { // Ignore soldiers
+						if (not m_workers.exists(value->get_name()))
+							throw wexception
+								("\"%s\" is not known!",
+								 value->get_name());
+						m_startworkers[value->get_name()] = value->get_int();
+					} else
+						throw wexception
+							("\"soldier\" not allowed here, should be in "
+							 "[startsoldiers]");
+				}
+			} catch (_wexception const & e) {
+				throw wexception("section [startworkers]: %s", e.what());
+			}
+
+			{ //  FIXME eliminate
+				Section & sso_s = root_conf.get_safe_section("startsoldiers");
+				while (Section::Value const * const value = sso_s.get_next_val(0))
+				//  NOTE no check here; we do not know about max levels and so on
+					m_startsoldiers[value->get_name()] = value->get_int();
+			}
+		} catch (std::exception const & e) {
+			throw wexception("root conf: %s", e.what());
+		}
+#ifdef WRITE_GAME_DATA_AS_HTML
+		m_ware_references     = new HTMLReferences[get_nrwares    ().value()];
+		m_worker_references   = new HTMLReferences[get_nrworkers  ().value()];
+		m_building_references = new HTMLReferences[get_nrbuildings().value()];
+		writeHTMLBuildings(path);
+		writeHTMLWorkers  (path);
+		writeHTMLWares    (path);
+		delete[] m_building_references;
+		delete[] m_worker_references;
+		delete[] m_ware_references;
+#endif
 	}
 	catch (std::exception &e)
 	{throw wexception("Error loading tribe %s: %s", tribename.c_str(), e.what());}
@@ -101,383 +249,6 @@ void Tribe_Descr::load_graphics()
 		m_buildings.get(i)->load_graphics();
 }
 
-
-//
-// down here: private read functions for loading
-//
-
-/*
-===============
-Tribe_Descr::parse_root_conf
-
-Read and process the main conf file
-===============
-*/
-void Tribe_Descr::parse_root_conf(const char *directory)
-{
-	char fname[256];
-
-	snprintf(fname, sizeof(fname), "%s/conf", directory);
-
-	try
-	{
-		Profile prof(fname);
-
-		{
-			Section & tribe_s = prof.get_safe_section("tribe");
-			tribe_s.get_string("author");
-			tribe_s.get_string("name"); // descriptive name
-			tribe_s.get_string("descr"); // long description
-			m_bob_vision_range = tribe_s.get_int("bob_vision_range");
-		}
-
-		if (Section * const defaults_s = prof.get_section("defaults"))
-			m_default_encdata.parse(*defaults_s);
-
-		m_anim_frontier =
-			g_anim.get
-				(directory,
-				 prof.get_safe_section("frontier"),
-				 0,
-				 &m_default_encdata);
-
-		m_anim_flag =
-			g_anim.get
-				(directory,
-				 prof.get_safe_section("flag"),
-				 0,
-				 &m_default_encdata);
-
-		{
-			Section & swa_s = prof.get_safe_section("startwares");
-			while (Section::Value const * const value = swa_s.get_next_val(0)) {
-				if (not m_wares.exists(value->get_name()))
-					throw wexception
-						("In section [startwares], ware %s is not know!",
-						 value->get_name());
-				m_startwares[value->get_name()] = value->get_int();
-			}
-		}
-
-		{
-			Section & swo_s = prof.get_safe_section("startworkers");
-			while (Section::Value const * const value = swo_s.get_next_val(0)) {
-				if (strcmp(value->get_name(), "soldier")) { // Ignore soldiers here
-					if (not m_workers.exists(value->get_name()))
-						throw wexception
-							("In section [startworkers], worker %s is not know!",
-							 value->get_name());
-					m_startworkers[value->get_name()] = value->get_int();
-				}
-			}
-		}
-
-		{
-			Section & sso_s = prof.get_safe_section("startsoldiers");
-			while (Section::Value const * const value = sso_s.get_next_val(0))
-				//  NOTE no check here; we do not know about max levels and so on
-				m_startsoldiers[value->get_name()] = value->get_int();
-		}
-	} catch (const std::exception & e) {
-		throw wexception("%s: %s", fname, e.what());
-	}
-}
-
-
-/*
-===============
-Tribe_Descr::parse_buildings
-
-Read all the building descriptions
-===============
-*/
-void Tribe_Descr::parse_buildings(const char *rootdir)
-{
-	char subdir[256];
-	filenameset_t dirs;
-
-	snprintf(subdir, sizeof(subdir), "%s/buildings", rootdir);
-
-	g_fs->FindFiles(subdir, "*", &dirs);
-
-	Building_Descr::enhancements_map_t enhancements_map;
-
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
-		Building_Descr *descr = 0;
-
-		try {
-			descr = Building_Descr::create_from_dir
-				(*this, enhancements_map, it->c_str(), &m_default_encdata);
-		} catch (std::exception &e) {
-			log("Building %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
-		} catch (...) {
-			log("Building %s failed: unknown exception (garbage directory?)\n", it->c_str());
-		}
-
-		if (descr)
-			m_buildings.add(descr);
-	}
-
-	//  Resolve inter-building-type dependencies.
-	Building_Descr::enhancements_map_t::const_iterator const
-		enhancements_map_end = enhancements_map.end();
-	for
-		(Building_Descr::enhancements_map_t::const_iterator jt =
-		 	enhancements_map.begin();
-		 jt != enhancements_map_end;
-		 ++jt)
-	{
-		std::set<std::string>::const_iterator const end = jt->second.end();
-		for
-			(std::set<std::string>::const_iterator it = jt->second.begin();
-			 it != end;
-			 ++it)
-			try {
-				Building_Descr & b = *jt->first;
-				Building_Index const enhancement_index =
-					safe_building_index(it->c_str());
-				Building_Descr const & enhancement =
-					*get_building_descr(enhancement_index);
-				if (b.get_ismine() != enhancement.get_ismine())
-					throw wexception
-						("mine mismatch for %s (building type is %smine but "
-						 "enhancement is %smine)",
-						 it->c_str(),
-						 b          .get_ismine() ? "" : "not ",
-						 enhancement.get_ismine() ? "" : "not ");
-				if (b.get_size() != enhancement.get_size())
-					throw wexception
-						("size mismatch for %s (building type has size %u but "
-						 "enhancement has size %u)",
-						 it->c_str(), b.get_size(), enhancement.get_size());
-				b.add_enhancement(enhancement_index);
-			} catch (_wexception const & e) {
-				throw wexception
-					("building type %s enhancement: %s",
-					 jt->first->name().c_str(), e.what());
-			}
-	}
-
-	//  Calculate recursive workarea info. For each building, add info to
-	//  m_recursive_workarea_info from every building that can be reached through
-	//  at least 1 sequence of enhancement operations (including the empty
-	//  sequence).
-	for
-		(Building_Index i = Building_Index::First();
-		 i < m_buildings.get_nitems();
-		 ++i)
-	{
-		Workarea_Info & collected_info
-			= get_building_descr(i)->m_recursive_workarea_info;
-		std::set<Building_Index> to_consider, considered;
-		to_consider.insert(i);
-		do {
-			std::set<Building_Index>::iterator const consider_now_iterator
-				= to_consider.begin();
-			Building_Index const consider_now = *consider_now_iterator;
-			const Building_Descr & considered_building_descr
-				= *get_building_descr(consider_now);
-			to_consider.erase(consider_now_iterator);
-			considered.insert(consider_now);
-			{  //  Enhancements from the considered building
-				std::set<Building_Index> const & enhancements =
-					considered_building_descr.enhancements();
-				std::set<Building_Index>::const_iterator const enhancements_end =
-					enhancements.end();
-				for
-					(std::set<Building_Index>::const_iterator it =
-					 	enhancements.begin();
-					 it != enhancements_end;
-					 ++it)
-					if (considered.find(*it) == considered.end())
-						//  The building index has not been considered. Add it to
-						//  to_consider.
-						to_consider.insert(*it);
-			}
-			{
-				//  Merge collected info.
-				const Workarea_Info & ci = considered_building_descr.m_workarea_info;
-				const Workarea_Info::const_iterator ci_end = ci.end();
-				for
-					(Workarea_Info::const_iterator it = ci.begin();
-					 it != ci_end;
-					 ++it)
-				{
-					const int32_t radius = it->first;
-					const std::set<std::string> & descriptions = it->second;
-					for
-						(std::set<std::string>::const_iterator di =
-						 descriptions.begin();
-						 di != descriptions.end();
-						 ++di)
-						collected_info[radius].insert(*di);
-				}
-			}
-		} while (not to_consider.empty());
-	}
-}
-
-
-/*
-===============
-Tribe_Descr::parse_workers
-
-Read all worker descriptions
-===============
-*/
-void Tribe_Descr::parse_workers(const char *directory)
-{
-	filenameset_t dirs;
-	{
-		char subdir[256];
-		snprintf(subdir, sizeof(subdir), "%s/workers", directory);
-		g_fs->FindFiles(subdir, "*", &dirs);
-	}
-	Worker_Descr::becomes_map_t becomes_map;
-
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
-		Worker_Descr *descr = 0;
-
-		try {
-			descr =
-				Worker_Descr::create_from_dir
-				(*this, becomes_map, it->c_str(), &m_default_encdata);
-		} catch (std::exception &e) {
-			log("Worker %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
-		} catch (...) {
-			log("Worker %s failed: unknown exception (garbage directory?)\n", it->c_str());
-		}
-
-		if (descr)
-			m_workers.add(descr);
-	}
-
-	//  Resolve inter-worker-type dependencies.
-	Worker_Descr::becomes_map_t::const_iterator const becomes_map_end =
-		becomes_map.end();
-	for
-		(Worker_Descr::becomes_map_t::const_iterator it = becomes_map.begin();
-		 it != becomes_map_end;
-		 ++it)
-		if (not (it->first->m_becomes = worker_index(it->second.c_str())))
-			throw wexception
-				("worker type %s becomes nonexistent worker type \"%s\"",
-				 it->first->name().c_str(), it->second.c_str());
-}
-
-/*
-===============
-Tribe_Descr::parse_wares
-
-Parse the wares belonging to this tribe, adding it to the games warelist. This is delayed until the game starts,
-and is called by the Game class
-===============
-*/
-void Tribe_Descr::parse_wares(const char* directory)
-{
-	char subdir[256];
-	filenameset_t dirs;
-
-	snprintf(subdir, sizeof(subdir), "%s/wares", directory);
-
-	g_fs->FindFiles(subdir, "*", &dirs);
-
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
-		char fname[256];
-
-		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
-
-		if (!g_fs->FileExists(fname))
-			continue;
-
-		const char *warename;
-		const char *slash = strrchr(it->c_str(), '/');
-		const char *backslash = strrchr(it->c_str(), '\\');
-
-		if (backslash && (!slash || backslash > slash))
-			slash = backslash;
-
-		if (slash)
-			warename = slash+1;
-		else
-			warename = it->c_str();
-
-		if (m_wares.exists(warename))
-			log("Ware %s is already known in world init\n", it->c_str());
-
-		Item_Ware_Descr* descr = 0;
-
-		try
-		{
-			descr = Item_Ware_Descr::create_from_dir(warename, it->c_str());
-		}
-		catch (std::exception& e)
-		{
-			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
-		}
-		catch (...)
-		{
-			cerr << it->c_str() << ": Unknown exception" << endl;
-		}
-
-		if (descr)
-			m_wares.add(descr);
-	}
-}
-
-/*
- * Parse the player bobs (animations, immovables, critters)
- */
-void Tribe_Descr::parse_bobs(const char* directory) {
-	char subdir[256];
-	filenameset_t dirs;
-
-	snprintf(subdir, sizeof(subdir), "%s/bobs", directory);
-
-	g_fs->FindFiles(subdir, "*", &dirs);
-
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
-		char fname[256];
-
-		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
-
-		if (!g_fs->FileExists(fname))
-			continue;
-
-		const char *dirname;
-		const char *slash = strrchr(it->c_str(), '/');
-		const char *backslash = strrchr(it->c_str(), '\\');
-
-		if (backslash && (!slash || backslash > slash))
-			slash = backslash;
-
-		if (slash)
-			dirname = slash+1;
-		else
-			dirname = it->c_str();
-
-		try
-		{
-			Profile prof(fname, "global"); // section-less file
-			if
-				(strcasecmp
-				 	(prof.get_safe_section("global").get_safe_string("type"),
-				 	 "critter"))
-			{
-				Immovable_Descr * const descr = new Immovable_Descr(this, dirname);
-				descr->parse(it->c_str(), &prof);
-				m_immovables.add(descr);
-			} else
-				m_bobs.add
-					(Bob::Descr::create_from_dir
-					 	(dirname, it->c_str(), &prof, this));
-		} catch (std::exception &e) {
-			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
-		} catch (...) {
-			cerr << it->c_str() << ": unknown exception (garbage directory?)" << endl;
-		}
-	}
-}
 
 /*
 ===========
@@ -665,27 +436,42 @@ uint32_t Tribe_Descr::get_resource_indicator
 /*
  * Return the given ware or die trying
  */
+Ware_Index Tribe_Descr::safe_ware_index(std::string const & warename) const {
+	if (Ware_Index const result = ware_index(warename))
+		return result;
+	else
+		throw wexception
+			("tribe %s does not define ware type \"%s\"",
+			 name().c_str(), warename.c_str());
+}
 Ware_Index Tribe_Descr::safe_ware_index(const char * const warename) const {
-	Ware_Index const result = ware_index(warename);
-
-	if (not result)
+	if (Ware_Index const result = ware_index(warename))
+		return result;
+	else
 		throw wexception
 			("tribe %s does not define ware type \"%s\"",
 			 name().c_str(), warename);
-	return result;
 }
 
 /*
  * Return the given worker or die trying
  */
+Ware_Index Tribe_Descr::safe_worker_index(std::string const & workername) const
+{
+	if (Ware_Index const result = worker_index(workername))
+		return result;
+	else
+		throw wexception
+			("tribe %s does not define worker type \"%s\"",
+			 name().c_str(), workername.c_str());
+}
 Ware_Index Tribe_Descr::safe_worker_index(const char * const workername) const {
-	Ware_Index const result = worker_index(workername);
-
-	if (not result)
+	if (Ware_Index const result = worker_index(workername))
+		return result;
+	else
 		throw wexception
 			("tribe %s does not define worker type \"%s\"",
 			 name().c_str(), workername);
-	return result;
 }
 
 /*

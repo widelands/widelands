@@ -81,14 +81,4 @@ int main(int argc, char* argv[])
 
 		return 1;
 	}
-	catch (...) {
-		cerr<<endl<<
-		"Caught unknown exception in outermost handler!"<<endl<<endl<<
-		"This should not happen. Please file a bug report "<<
-		"on version: "<<build_id()<<"."<<endl<<endl<<
-		flush;
-		delete g_app;
-
-		return 1;
-	}
 }

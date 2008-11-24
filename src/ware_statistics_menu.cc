@@ -396,7 +396,7 @@ m_parent(&parent)
 				*tribe.get_ware_descr(Widelands::Ware_Index(cur_ware));
 			WSM_Checkbox & cb =
 				*new WSM_Checkbox
-					(this, pos, cur_ware, ware.get_icon(), colors[cur_ware]);
+					(this, pos, cur_ware, ware.icon(), colors[cur_ware]);
 			cb.set_tooltip(ware.descname().c_str());
 			cb.changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
 			pos.x += cb.get_w() + spacing;

@@ -77,22 +77,23 @@ struct ImmovableAction;
 struct Immovable_Descr : public Map_Object_Descr {
 	friend struct Map_Immovabledata_Data_Packet; // For writing (get_program)
 
-	typedef std::map<std::string, ImmovableProgram*> ProgramMap;
+	typedef std::map<std::string, ImmovableProgram*> Programs;
 
 	Immovable_Descr
-		(const Tribe_Descr * const, const std::string & immovable_name);
+		(char const * name, char const * descname,
+		 std::string const & directory, Profile &, Section & global_s,
+		 Tribe_Descr const * const);
 	~Immovable_Descr();
 
-	const std::string & name() const throw () {return m_name;}
-	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
 	int32_t get_size() const throw () {return m_size;}
 	const char* get_picture() const {return m_picture.c_str();}
 	const ImmovableProgram* get_program(std::string programname) const;
 	const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
 
-	void parse(const char *directory, Profile *s);
-	void parse_program(std::string directory, Profile* prof, std::string programname);
-	uint32_t parse_animation(std::string directory, Profile* prof, std::string name);
+	void parse_program
+		(std::string const & directory, Profile &, std::string const & name);
+	uint32_t parse_animation
+		(std::string const & directory, Profile &, std::string const & name);
 	void parse_playFX(std::string directory, Profile* prof, std::string name);
 	Immovable & create(Editor_Game_Base &, Coords) const;
 
@@ -100,11 +101,10 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 protected:
 	std::string m_picture;
-	const std::string         m_name;
 	int32_t           m_size;
 	EncodeData    m_default_encodedata;
 
-	ProgramMap    m_programs;
+	Programs    m_programs;
 	/**
 	 * the tribe to which this Immovable_Descr belongs or 0 if it is a world immovable
 	 */

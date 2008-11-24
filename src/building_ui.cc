@@ -331,7 +331,7 @@ m_display_size(0)
 		*queue->get_owner()->tribe().get_ware_descr(m_queue->get_ware());
 	set_tooltip(ware.descname().c_str());
 
-	m_icon = ware.get_icon();
+	m_icon = ware.icon();
 	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
 
 	recalc_size();
@@ -651,7 +651,7 @@ void Building_Window::setup_capsbuttons()
 		x += 34;
 	}
 
-	if (m_building->descr().m_recursive_workarea_info.size()) {
+	if (m_building->descr().m_workarea_info.size()) {
 		m_toggle_workarea = new UI::Button<Building_Window>
 			(m_capsbuttons,
 			 x, 0, 34, 34,
@@ -771,7 +771,7 @@ void Building_Window::toggle_workarea() {
 		Widelands::HollowArea<> hollow_area
 			(Widelands::Area<>(m_building->get_position(), 0), 0);
 		const Workarea_Info & workarea_info =
-			m_building->descr().m_recursive_workarea_info;
+			m_building->descr().m_workarea_info;
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(Workarea_Info::size_type i =
@@ -1168,7 +1168,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list() {
 
 	for (uint32_t i = 0; i < workers.size(); ++i) {
 		Widelands::Worker & worker = *workers[i];
-		m_ls->add(worker.descname().c_str(), &worker, worker.get_menu_pic());
+		m_ls->add(worker.descname().c_str(), &worker, worker.icon());
 	}
 	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
 	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);

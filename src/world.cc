@@ -20,6 +20,7 @@
 #include "world.h"
 
 #include "constants.h"
+#include "critter_bob.h"
 #include "graphic.h"
 #include "helper.h"
 #include "i18n.h"
@@ -49,7 +50,7 @@ Parse a resource description section.
 void Resource_Descr::parse(Section *s, std::string basedir)
 {
 	m_name = s->get_name();
-	m_descrname = s->get_string("name", s->get_name());
+	m_descname = s->get_string("name", s->get_name());
 	m_is_detectable = s->get_bool("detectable", true);
 
 	m_max_amount = s->get_safe_int("max_amount");
@@ -149,21 +150,31 @@ World
 =============================================================================
 */
 
-World::World(std::string const & name) : m_basedir("worlds/" + name) {
+World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 	try {
 		i18n::Textdomain textdomain(m_basedir);
 
 		FileSystem & fs = *g_fs->MakeSubFileSystem(m_basedir);
 		g_fs->AddFileSystem(&fs);
 
-		parse_root_conf(name.c_str());
-		parse_resources();
-		parse_terrains();
-		parse_bobs();
+		{
+			Profile root_conf((m_basedir + "conf").c_str());
+			parse_root_conf(name, root_conf);
+			parse_resources();
+			parse_terrains();
+			log("Parsing world bobs...\n");
+			parse_bobs(m_basedir, root_conf);
+			root_conf.check_used();
+		}
+		m_basedir.resize(m_basedir.size() - strlen("bobs/"));
 
-		// General bobs mainly for scenarios
-		m_basedir = "global";
-		parse_bobs();
+		{ //  General bobs mainly for scenarios
+			Profile global_root_conf("global/conf");
+			std::string global_dir = "global/bobs/";
+			log("Parsing global bobs in world...\n");
+			parse_bobs(global_dir, global_root_conf);
+			global_root_conf.check_used();
+		}
 
 		g_fs->RemoveFileSystem(&fs);
 	} catch (std::exception const & e) {
@@ -211,28 +222,15 @@ void World::load_graphics()
 /**
  * Read the <world-directory>/conf
  */
-void World::parse_root_conf(const char *name)
+void World::parse_root_conf(std::string const & name, Profile & root_conf)
 {
-	char fname[256];
-
-	snprintf(fname, sizeof(fname), "%s/conf", m_basedir.c_str());
-
-	try
-	{
-		Profile prof(fname);
-		Section & s = prof.get_safe_section("world");
-		snprintf
-			(hd.name,   sizeof(hd.name),   "%s", s.get_string     ("name", name));
-		snprintf
-			(hd.author, sizeof(hd.author), "%s", s.get_safe_string("author"));
-		snprintf
-			(hd.descr,  sizeof(hd.descr),  "%s", s.get_safe_string("descr"));
-
-		prof.check_used();
-	}
-	catch (std::exception &e) {
-		throw wexception("%s: %s", fname, e.what());
-	}
+	Section & s = root_conf.get_safe_section("world");
+	snprintf
+		(hd.name,   sizeof(hd.name),   "%s", s.get_string("name", name.c_str()));
+	snprintf
+		(hd.author, sizeof(hd.author), "%s", s.get_safe_string("author"));
+	snprintf
+		(hd.descr,  sizeof(hd.descr),  "%s", s.get_safe_string("descr"));
 }
 
 void World::parse_resources()
@@ -279,55 +277,31 @@ void World::parse_terrains()
 	}
 }
 
-void World::parse_bobs()
-{
-	char subdir[256];
-	filenameset_t dirs;
-
-	snprintf(subdir, sizeof(subdir), "%s/bobs", m_basedir.c_str());
-
-	g_fs->FindFiles(subdir, "*", &dirs);
-
-	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); ++it) {
-		char fname[256];
-
-		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
-
-		if (!g_fs->FileExists(fname))
-			continue;
-
-		const char *name;
-		const char *slash = strrchr(it->c_str(), '/');
-		const char *backslash = strrchr(it->c_str(), '\\');
-
-		if (backslash && (!slash || backslash > slash))
-			slash = backslash;
-
-		if (slash)
-			name = slash+1;
-		else
-			name = it->c_str();
-
-		try
-		{
-			Profile prof(fname, "global"); // section-less file
-			char const * const type =
-				prof.get_safe_section("global").get_safe_string("type");
-
-			if (!strcasecmp(type, "critter")) {
-				Bob::Descr *descr;
-				descr = Bob::Descr::create_from_dir(name, it->c_str(), &prof, 0);
-				bobs.add(descr);
-			} else {
-				Immovable_Descr * const descr = new Immovable_Descr(0, name);
-				descr->parse(it->c_str(), &prof);
-				immovables.add(descr);
-			}
-		} catch (std::exception &e) {
-			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
-		} catch (...) {
-			cerr << it->c_str() << ": unknown exception (garbage directory?)" << endl;
+void World::parse_bobs(std::string & directory, Profile & root_conf) {
+	std::string::size_type const directory_size = directory.size();
+	Section & section = root_conf.get_safe_section("bobs");
+	while (Section::Value const * const v = section.get_next_val(0)) {
+		char const * const _name     = v->get_name  ();
+		char const * const _descname = v->get_string();
+		directory += _name;
+		directory += "/conf";
+		try {
+			Profile prof(directory.c_str(), "global"); // section-less file
+			directory.resize(directory.size() - strlen("conf"));
+			Section & global_s = prof.get_safe_section("global");
+			if (not strcasecmp(global_s.get_string("type", ""), "critter"))
+				bobs      .add
+					(new Critter_Bob_Descr
+					 	(_name, _descname, directory, prof, global_s, 0));
+			else
+				immovables.add
+					(new Immovable_Descr
+					 	(_name, _descname, directory, prof, global_s, 0));
+		} catch (std::exception const & e) {
+			throw wexception
+				("%s=%s: %s", v->get_name(), v->get_string(), e.what());
 		}
+		directory.resize(directory_size);
 	}
 }
 

@@ -50,29 +50,12 @@ ConstructionSite_Descr::ConstructionSite_Descr
 ===============
 */
 ConstructionSite_Descr::ConstructionSite_Descr
-	(Tribe_Descr const & tribe_descr, std::string const & building_name)
-:
-Building_Descr(tribe_descr, building_name)
-{}
-
-
-/*
-===============
-Parse tribe-specific construction site data, such as graphics, worker type,
-etc...
-===============
-*/
-void ConstructionSite_Descr::parse
-	(char         const * directory,
-	 Profile            * prof,
-	 enhancements_map_t & enhancements_map,
-	 EncodeData const * encdata)
+	(char const * const _name, char const * const _descname,
+	 std::string  const& directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
+	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
-
-	Building_Descr::parse(directory, prof, enhancements_map, encdata);
-
-	// TODO
 }
 
 
@@ -275,9 +258,6 @@ void ConstructionSite::set_previous_building
 	assert(!m_prev_building);
 
 	m_prev_building = previous_building_descr;
-
-	if (not m_prev_building->get_animation("build"))
-		throw wexception("Trying to enhance a non buildable building!");
 }
 
 /*
@@ -620,7 +600,12 @@ void ConstructionSite::draw
 	else if (m_prev_building) {
 		//  Is the first building, but there was another building here before,
 		//  get its last build picture and draw it instead.
-		const uint32_t a = m_prev_building->get_animation("build");
+		uint32_t a;
+		try {
+			a = m_prev_building->get_animation("build");
+		} catch (Map_Object_Descr::Animation_Nonexistent) {
+			a = m_prev_building->get_animation("idle");
+		}
 		dst.drawanim
 			(pos,
 			 a,

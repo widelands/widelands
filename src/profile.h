@@ -245,6 +245,10 @@ public:
 	Section *get_next_section(const char *name);
 
 	Section *create_section(const char *name, bool duplicate = false);
+
+private:
+	Profile & operator= (Profile const &);
+	explicit Profile    (Profile const &);
 };
 
 #endif

@@ -30,10 +30,10 @@ namespace Widelands {
 
 struct TrainingSite_Descr : public ProductionSite_Descr {
 	TrainingSite_Descr
-		(const Tribe_Descr &, const std::string & trainingsite_name);
-	virtual ~TrainingSite_Descr();
+		(char const * name, char const * descname,
+		 std::string const & directory, Profile &, Section & global_s,
+		 Tribe_Descr const & tribe, EncodeData const *);
 
-	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
 	virtual Building * create_object() const;
 
 	uint32_t get_max_number_of_soldiers() const throw () {

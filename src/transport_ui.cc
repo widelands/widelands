@@ -114,7 +114,7 @@ private:
 		}
 
 		virtual void draw(RenderTarget * dst) {
-			dst->blit(Point(0, 0), m_descr.get_icon());
+			dst->blit(Point(0, 0), m_descr.icon());
 			g_fh->draw_string
 				(*dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,

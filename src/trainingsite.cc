@@ -39,10 +39,12 @@
 namespace Widelands {
 
 TrainingSite_Descr::TrainingSite_Descr
-	(Tribe_Descr const & tribe_descr, std::string const & trainingsite_name)
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 :
-ProductionSite_Descr(tribe_descr, trainingsite_name),
-m_num_soldiers      (0),
+	ProductionSite_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
+m_num_soldiers      (global_s.get_safe_int("max_soldiers")),
 m_train_hp          (false),
 m_train_attack      (false),
 m_train_defense     (false),
@@ -55,36 +57,9 @@ m_max_hp            (0),
 m_max_attack        (0),
 m_max_defense       (0),
 m_max_evade         (0)
-{}
-
-TrainingSite_Descr::~TrainingSite_Descr() {}
-
-/**
- * Parse the additional information necessary for miltary buildings
- * \param directory  where to find the description file
- * \param prof       the configuration profile to read
- * \param encdata    defaults for building animations' color codes (e.g.
- *                   keycolor, shadow color). \sa EncodeData::parse()
- * \todo Is the encdata stuff still valid with the new transparent-png support?
- */
-void TrainingSite_Descr::parse
-	(char         const * const directory,
-	 Profile            * const prof,
-	 enhancements_map_t &        enhancements_map,
-	 EncodeData   const * const encdata)
 {
-	assert(directory);
-	assert(prof);
-
-	ProductionSite_Descr::parse(directory, prof, enhancements_map, encdata);
-	Section & sglobal = prof->get_safe_section("global");
-	//TODO: what if there is no global section? can this happen?
-
-	m_stopable = true; // (defaults to false)
-	m_num_soldiers = sglobal.get_safe_int("max_soldiers");
-
 	const std::vector<std::string> str_list
-		(split_string(sglobal.get_safe_string("train"), ","));
+		(split_string(global_s.get_safe_string("train"), ","));
 	const std::vector<std::string>::const_iterator str_list_end = str_list.end();
 	for
 		(std::vector<std::string>::const_iterator it = str_list.begin();
@@ -100,22 +75,22 @@ void TrainingSite_Descr::parse
 
 	// Read the range of levels that can update this building
 	if (m_train_hp) {
-		Section & sect = prof->get_safe_section("hp");
+		Section & sect = prof.get_safe_section("hp");
 		m_min_hp = sect.get_safe_int("min_level");
 		m_max_hp = sect.get_safe_int("max_level");
 	}
 	if (m_train_attack) {
-		Section & sect = prof->get_safe_section("attack");
+		Section & sect = prof.get_safe_section("attack");
 		m_min_attack = sect.get_safe_int("min_level");
 		m_max_attack = sect.get_safe_int("max_level");
 	}
 	if (m_train_defense) {
-		Section & sect = prof->get_safe_section("defense");
+		Section & sect = prof.get_safe_section("defense");
 		m_min_defense = sect.get_safe_int("min_level");
 		m_max_defense = sect.get_safe_int("max_level");
 	}
 	if (m_train_evade) {
-		Section & sect = prof->get_safe_section("evade");
+		Section & sect = prof.get_safe_section("evade");
 		m_min_evade = sect.get_safe_int("min_level");
 		m_max_evade = sect.get_safe_int("max_level");
 	}

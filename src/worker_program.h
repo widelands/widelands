@@ -24,6 +24,7 @@
 #include "bob.h"
 #include "workarea_info.h"
 #include "worker.h"
+#include "writeHTML.h"
 
 namespace Widelands {
 
@@ -48,7 +49,9 @@ struct WorkerProgram : public BobProgramBase {
 	virtual ~WorkerProgram() {}
 
 	std::string get_name() const {return m_name;}
-	int32_t get_size() const {return m_actions.size();}
+	typedef std::vector<Worker::Action> Actions;
+	Actions::size_type get_size() const {return m_actions.size();}
+	Actions const & actions() const {return m_actions;}
 	const Worker::Action* get_action(int32_t idx) const {
 		assert(idx >= 0);
 		assert(static_cast<uint32_t>(idx) < m_actions.size());
@@ -57,6 +60,9 @@ struct WorkerProgram : public BobProgramBase {
 
 	void parse(Worker_Descr *, Parser *, std::string name);
 	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
+#ifdef WRITE_GAME_DATA_AS_HTML
+	void writeHTML(::FileWrite &, Worker_Descr const &) const;
+#endif
 
 private:
 	Workarea_Info m_workarea_info;
@@ -152,7 +158,7 @@ private:
 		 const std::vector<std::string> & cmd);
 
 	const std::string                 m_name;
-	std::vector<Worker::Action> m_actions;
+	Actions           m_actions;
 	static ParseMap       const s_parsemap[];
 };
 

@@ -53,35 +53,11 @@ ProductionSite BUILDING
 */
 
 ProductionSite_Descr::ProductionSite_Descr
-	(Tribe_Descr const & tribe_descr, std::string const & productionsite_name)
-	: Building_Descr(tribe_descr, productionsite_name)
-{}
-
-ProductionSite_Descr::~ProductionSite_Descr()
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
+	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
 {
-	while (m_programs.size()) {
-		delete m_programs.begin()->second;
-		m_programs.erase(m_programs.begin());
-	}
-}
-
-
-/**
- * Parse the additional information necessary for production buildings
- */
-void ProductionSite_Descr::parse
-	(char         const * const directory,
-	 Profile            * const prof,
-	 enhancements_map_t &      enhancements_map,
-	 EncodeData const * const encdata)
-{
-	Section & global_s = prof->get_safe_section("global");
-
-	// Stopabple defaults to true for Production sites
-	m_stopable = true;
-
-	Building_Descr::parse(directory, prof, enhancements_map, encdata);
-
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
@@ -97,7 +73,7 @@ void ProductionSite_Descr::parse
 			throw wexception("output \"%s\": %s", op->get_string(), e.what());
 		}
 
-	if (Section * const s = prof->get_section("inputs"))
+	if (Section * const s = prof.get_section("inputs"))
 		while (Section::Value const * const val = s->get_next_val(0))
 			try {
 				if (Ware_Index const idx = tribe().ware_index(val->get_name())) {
@@ -120,8 +96,8 @@ void ProductionSite_Descr::parse
 	// Are we only a production site?
 	// If not, we might not have a worker
 	std::string workerstr =
-		is_only_production_site() ?
-		global_s.get_safe_string("worker") : global_s.get_string("worker", "");
+		strcmp(global_s.get_safe_string("type"), "production") ?
+		global_s.get_string("worker", "") : global_s.get_safe_string("worker");
 
 	std::vector<std::string> workernames(split_string(workerstr, ","));
 	std::vector<std::string>::const_iterator const workernames_end =
@@ -149,6 +125,14 @@ void ProductionSite_Descr::parse
 	}
 }
 
+ProductionSite_Descr::~ProductionSite_Descr()
+{
+	while (m_programs.size()) {
+		delete m_programs.begin()->second;
+		m_programs.erase(m_programs.begin());
+	}
+}
+
 
 /**
  * Get the program of the given name.
@@ -156,7 +140,7 @@ void ProductionSite_Descr::parse
 const ProductionProgram * ProductionSite_Descr::get_program
 	(std::string const & program_name) const
 {
-	const ProgramMap::const_iterator it = m_programs.find(program_name);
+	Programs::const_iterator const it = programs().find(program_name);
 	if (it == m_programs.end())
 		throw wexception
 			("%s has no program '%s'", name().c_str(), program_name.c_str());
@@ -573,8 +557,6 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 
 	// Default actions first
 	if (WareInstance * const item = w->fetch_carried_item(g)) {
-
-		molog("ProductionSite::get_building_work: start dropoff\n");
 
 		w->start_task_dropoff(*g, *item);
 		return true;

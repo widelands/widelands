@@ -20,10 +20,18 @@
 #ifndef ITEM_WARE_DESCR_H
 #define ITEM_WARE_DESCR_H
 
+#include "instances.h"
+#include "writeHTML.h"
+
+#include "filewrite.h"
+
 #include <string>
 #include <cstring>
 
 #include <stdint.h>
+
+struct Profile;
+struct Section;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
@@ -49,23 +57,17 @@ namespace Widelands {
 */
 struct Item_Ware_Descr : public Map_Object_Descr {
 	typedef Ware_Index::value_t Index;
-	Item_Ware_Descr(const std::string & ware_name)
-		: m_name(ware_name), m_icon(0)
-	{}
+	Item_Ware_Descr
+		(char const * const name, char const * const descname,
+		 std::string const & directory, Profile &, Section & global_s);
 
 	virtual ~Item_Ware_Descr() {};
 
 	/// \return index to ware's icon inside picture stack
-	uint32_t get_icon() const throw () {return m_icon;}
-
-	/// \return ware's unique name
-	const std::string & name() const throw () {return m_name;}
-
-	/// \return ware's localized short name
-	const std::string & descname() const throw () {return m_descname;}
+	uint32_t icon() const throw () {return m_icon;}
 
 	/// \return ware's localized descriptive text
-	const char * get_helptext() const throw () {return m_helptext.c_str();}
+	std::string const & helptext() const throw () {return m_helptext;}
 
 	/// How much of the ware type that an economy should store in warehouses.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
@@ -86,13 +88,11 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	}
 
 	virtual void load_graphics();
-	static Item_Ware_Descr* create_from_dir(const char*, const char*);
+#ifdef WRITE_GAME_DATA_AS_HTML
+	void writeHTML(::FileWrite &) const;
+#endif
 
 private:
-	void parse(const char *directory, Profile *prof);
-
-	std::string m_name;       ///< Ware's unique name into tribe
-	std::string m_descname;   ///< Short localized name
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture

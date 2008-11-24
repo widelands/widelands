@@ -26,6 +26,8 @@
 #include "profile.h"
 #include "wexception.h"
 
+#include "container_iterate.h"
+
 #include <stdio.h>
 
 namespace Widelands {
@@ -149,19 +151,49 @@ bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 */
 
 Critter_Bob_Descr::Critter_Bob_Descr
-	(Tribe_Descr const * const tribe_descr,
-	 std::string const &       critter_bob_name)
-: Bob::Descr(tribe_descr, critter_bob_name), m_swimming(0)
-{}
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const * const _tribe, EncodeData const * const encdata)
+	:
+	Bob::Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
+	m_swimming(global_s.get_bool("swimming", false))
+{
+	m_walk_anims.parse
+		(*this,
+		 directory,
+		 prof,
+		 (name() + "_walk_??").c_str(),
+		 prof.get_section("walk"),
+		 encdata);
+
+	while (Section::Value const * const v = global_s.get_next_val("program")) {
+		std::string const program_name = v->get_string();
+		Critter_BobProgram* prog = 0;
+		try {
+			if (m_programs.count(program_name))
+				throw wexception("this program has already been declared");
+			Critter_BobProgram::Parser parser;
+
+			parser.descr = this;
+			parser.directory = directory;
+			parser.prof = &prof;
+			parser.encdata = encdata;
+
+			prog = new Critter_BobProgram(v->get_string());
+			prog->parse(&parser, v->get_string());
+			m_programs[program_name] = prog;
+		} catch (std::exception const & e) {
+			delete prog;
+			throw wexception
+				("Parse error in program %s: %s", v->get_string(), e.what());
+		}
+	}
+}
 
 
 Critter_Bob_Descr::~Critter_Bob_Descr() {
-	const ProgramMap::const_iterator programs_end = m_programs.end();
-	for
-		(ProgramMap::const_iterator it = m_programs.begin();
-		 it != programs_end;
-		 ++it)
-		delete it->second;
+	container_iterate_const(Programs, m_programs, i)
+		delete i.current->second;
 }
 
 
@@ -175,55 +207,11 @@ Get a program from the workers description.
 const Critter_BobProgram* Critter_Bob_Descr::get_program
 	(std::string const & programname) const
 {
-	const ProgramMap::const_iterator it = m_programs.find(programname);
+	Programs::const_iterator const it = m_programs.find(programname);
 	if (it == m_programs.end())
 		throw wexception
 			("%s has no program '%s'", name().c_str(), programname.c_str());
 	return it->second;
-}
-
-
-void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
-{
-	Bob::Descr::parse(directory, prof, encdata);
-
-	Section & global_s = prof->get_safe_section("global");
-
-	m_swimming = global_s.get_bool("swimming", false);
-
-	// Pretty name
-	m_descname = global_s.get_safe_string("descname");
-
-	m_walk_anims.parse
-		(this,
-		 directory,
-		 prof,
-		 (m_name + "_walk_??").c_str(),
-		 prof->get_section("walk"),
-		 encdata);
-
-	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string const program_name = v->get_string();
-		Critter_BobProgram* prog = 0;
-		try {
-			if (m_programs.count(program_name))
-				throw wexception("this program has already been declared");
-			Critter_BobProgram::Parser parser;
-
-			parser.descr = this;
-			parser.directory = directory;
-			parser.prof = prof;
-			parser.encdata = encdata;
-
-			prog = new Critter_BobProgram(v->get_string());
-			prog->parse(&parser, v->get_string());
-			m_programs[program_name] = prog;
-		} catch (std::exception const & e) {
-			delete prog;
-			throw wexception
-				("Parse error in program %s: %s", v->get_string(), e.what());
-		}
-	}
 }
 
 
@@ -307,10 +295,8 @@ void Critter_Bob::program_update(Game* g, State* state)
 		Critter_BobProgram const & program =
 			dynamic_cast<Critter_BobProgram const &>(*state->program);
 
-		if (state->ivar1 >= program.get_size()) {
-			molog("  End of program\n");
+		if (state->ivar1 >= program.get_size())
 			return pop_task(g);
-		}
 
 		action = program.get_action(state->ivar1);
 

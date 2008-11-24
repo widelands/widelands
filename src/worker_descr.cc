@@ -33,21 +33,117 @@
 namespace Widelands {
 
 Worker_Descr::Worker_Descr
-	(Tribe_Descr const & tribe_descr, std::string const & worker_name)
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 	:
-	Bob::Descr        (&tribe_descr, worker_name),
-	m_menu_pic_fname  (0),
-	m_menu_pic        (0)
+	Bob::Descr(_name, _descname, directory, prof, global_s, &_tribe, encdata),
+	m_helptext
+		(global_s.get_string("help", _("Doh... someone forgot the help text!"))),
+	m_icon_fname(directory + "/menu.png"),
+	m_icon(0),
+	m_becomes (Ware_Index::Null())
 {
 	add_attribute(Map_Object::WORKER);
+
+	if (Section * const s = prof.get_section("buildcost"))
+		while (Section::Value const * const val = s->get_next_val(0))
+			try {
+				std::string const input = val->get_name();
+				if (m_buildcost.count(input))
+					throw wexception
+						("a buildcost item of this ware type has already been "
+						 "defined");
+				if (not (tribe().ware_index(input) or tribe().worker_index(input)))
+					throw wexception
+						("\"%s\" has not beed defined as a ware/worker type (wrong "
+						 "declaration order?)",
+						 input.c_str());
+				int32_t const value = val->get_int();
+				uint8_t const count = value;
+				if (count != value)
+					throw wexception("count is out of range 1 .. 255");
+				m_buildcost.insert(std::pair<std::string, uint8_t>(input, value));
+			} catch (_wexception const & e) {
+				throw wexception
+					("[buildcost] \"%s=%s\": %s",
+					 val->get_name(), val->get_string(), e.what());
+			}
+
+	// Read the walking animations
+	m_walk_anims.parse
+		(*this, directory, prof, "walk_??", prof.get_section("walk"), encdata);
+
+	//  Soldiers have no walkload.
+	if (strcmp(global_s.get_safe_string("type"), "soldier"))
+		m_walkload_anims.parse
+			(*this,
+			 directory,
+			 prof,
+			 "walkload_??",
+			 prof.get_section("walkload"),
+			 encdata);
+
+	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
+		g_sound_handler.load_fx(directory, v->get_string());
+
+	// Read the becomes and experience
+	if (char const * const becomes_name = global_s.get_string("becomes"))
+		m_becomes = tribe().safe_worker_index(becomes_name);
+	std::string const exp = global_s.get_string("experience", "");
+	m_min_experience=m_max_experience=-1;
+	if (exp.size()) {
+		std::vector<std::string> list(split_string(exp, "-"));
+		if (list.size()!=2)
+			throw wexception
+				("Parse error in experience string: \"%s\" (must be \"min-max\")",
+				 exp.c_str());
+		remove_spaces(list[0]);
+		remove_spaces(list[1]);
+
+		char * endp;
+		m_min_experience = strtol(list[0].c_str(), &endp, 0);
+		if (*endp)
+			throw wexception
+				("Parse error in experience string: %s is a bad value",
+				 list[0].c_str());
+		m_max_experience = strtol(list[1].c_str(), &endp, 0);
+		if (*endp)
+			throw wexception
+				("Parse error in experience string: %s is a bad value",
+				 list[1].c_str());
+	}
+
+	// Read programs
+	while (Section::Value const * const v = global_s.get_next_val("program")) {
+		std::string const program_name = v->get_string();
+		WorkerProgram * program = 0;
+
+		try {
+			if (m_programs.count(program_name))
+				throw wexception("this program has already been declared");
+			WorkerProgram::Parser parser;
+
+			parser.descr = this;
+			parser.directory = directory;
+			parser.prof = &prof;
+			parser.encdata = encdata;
+
+			program = new WorkerProgram(program_name);
+			program->parse(this, &parser, program_name.c_str());
+			m_programs[program_name.c_str()] = program;
+		}
+
+		catch (std::exception& e) {
+			delete program;
+			throw wexception("program %s: %s", program_name.c_str(), e.what());
+		}
+	}
 }
 
 
 Worker_Descr::~Worker_Descr()
 {
-	if (m_menu_pic_fname)
-		free(m_menu_pic_fname);
-
 	while (m_programs.size()) {
 		delete m_programs.begin()->second;
 		m_programs.erase(m_programs.begin());
@@ -60,7 +156,7 @@ Worker_Descr::~Worker_Descr()
  */
 void Worker_Descr::load_graphics()
 {
-	m_menu_pic = g_gr->get_picture(PicMod_Game,  m_menu_pic_fname);
+	m_icon = g_gr->get_picture(PicMod_Game, m_icon_fname.c_str());
 }
 
 
@@ -69,7 +165,7 @@ void Worker_Descr::load_graphics()
  */
 const WorkerProgram* Worker_Descr::get_program(std::string programname) const
 {
-	ProgramMap::const_iterator it = m_programs.find(programname);
+	Programs::const_iterator it = m_programs.find(programname);
 
 	if (it == m_programs.end())
 		throw wexception
@@ -102,178 +198,11 @@ uint32_t Worker_Descr::movecaps() const throw () {return MOVECAPS_WALK;}
 
 
 /**
- * Parse the worker data from configuration
- */
-void Worker_Descr::parse
-	(char const       * const directory,
-	 Profile          * const prof,
-	 becomes_map_t    &       becomes_map,
-	 EncodeData const * const encdata)
-{
-	char buffer[256];
-	char fname[256];
-
-	Bob::Descr::parse(directory, prof, encdata);
-
-	Section & global_s = prof->get_safe_section("global");
-
-	m_descname = global_s.get_string("descname", name().c_str());
-	m_helptext =
-		global_s.get_string("help", _("Doh... someone forgot the help text!"));
-
-	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
-	snprintf
-		(fname, sizeof(fname),
-		 "%s/%s", directory, global_s.get_string("menu_pic", buffer));
-	m_menu_pic_fname = strdup(fname);
-
-	// Read the costs of building
-	if
-		((m_buildable =
-		  	global_s.get_bool
-		  		("buildable",
-		  		 get_worker_type() != CARRIER and get_worker_type() != SOLDIER)))
-	{
-		// Get the buildcost
-		Section & s = prof->get_safe_section("buildcost");
-		while (Section::Value const * const val = s.get_next_val(0))
-			m_buildcost.push_back (CostItem(val->get_name(), val->get_int()));
-	}
-
-	// Read the walking animations
-	m_walk_anims.parse
-		(this, directory, prof, "walk_??", prof->get_section("walk"), encdata);
-
-	if (get_worker_type() != SOLDIER) // Soldier have no walkload
-		m_walkload_anims.parse
-			(this,
-			 directory,
-			 prof,
-			 "walkload_??",
-			 prof->get_section("walkload"),
-			 encdata);
-
-	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
-		g_sound_handler.load_fx(directory, v->get_string());
-
-	// Read the becomes and experience
-	if (char const * const becomes_name = global_s.get_string("becomes"))
-		becomes_map[this] = becomes_name;
-	std::string const exp = global_s.get_string("experience", "");
-	m_min_experience=m_max_experience=-1;
-	if (exp.size()) {
-		std::vector<std::string> list(split_string(exp, "-"));
-		if (list.size()!=2)
-			throw wexception("Parse error in experience string: \"%s\" (must be \"min-max\")", exp.c_str());
-		remove_spaces(list[0]);
-		remove_spaces(list[1]);
-
-		char* endp;
-		m_min_experience = strtol(list[0].c_str(), &endp, 0);
-		if (*endp)
-			throw wexception("Parse error in experience string: %s is a bad value", list[0].c_str());
-		m_max_experience = strtol(list[1].c_str(), &endp, 0);
-		if (*endp)
-			throw wexception("Parse error in experience string: %s is a bad value", list[1].c_str());
-	}
-
-	// Read programs
-	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string const program_name = v->get_string();
-		WorkerProgram * program = 0;
-
-		try {
-			if (m_programs.count(program_name))
-				throw wexception("this program has already been declared");
-			WorkerProgram::Parser parser;
-
-			parser.descr = this;
-			parser.directory = directory;
-			parser.prof = prof;
-			parser.encdata = encdata;
-
-			program = new WorkerProgram(program_name);
-			program->parse(this, &parser, program_name.c_str());
-			m_programs[program_name.c_str()] = program;
-		}
-
-		catch (std::exception& e) {
-			delete program;
-			throw wexception("program %s: %s", program_name.c_str(), e.what());
-		}
-	}
-}
-
-/**
  * Create a generic worker of this type.
  */
 Bob * Worker_Descr::create_object() const
 {
 	return new Worker(*this);
-}
-
-
-/**
- * Automatically create the appropriate Worker_Descr type from the given
- * config data.
- * \note May return 0.
- */
-Worker_Descr * Worker_Descr::create_from_dir
-	(Tribe_Descr const &       tribe,
-	 becomes_map_t     &       becomes_map,
-	 char        const * const directory,
-	 EncodeData  const * const encdata)
-{
-	const char *name;
-
-	// name = last element of path
-	const char *slash = strrchr(directory, '/');
-	const char *backslash = strrchr(directory, '\\');
-
-	if (backslash && (!slash || backslash > slash))
-		slash = backslash;
-
-	if (slash)
-		name = slash+1;
-	else
-		name = directory;
-
-	// Open the config file
-	Worker_Descr *descr = 0;
-	char fname[256];
-
-	snprintf(fname, sizeof(fname), "%s/conf", directory);
-
-	if (!g_fs->FileExists(fname))
-		return 0;
-
-	try
-	{
-		Profile prof(fname);
-		char const * const type =
-			prof.get_safe_section("global").get_safe_string("type");
-
-		if (!strcasecmp(type, "generic"))
-			descr = new Worker_Descr(tribe, name);
-		else if (!strcasecmp(type, "carrier"))
-			descr = new Carrier::Descr(tribe, name);
-		else if (!strcasecmp(type, "soldier"))
-			descr = new Soldier_Descr(tribe, name);
-		else
-			throw wexception("Unknown worker type '%s' [supported: carrier, soldier]", type);
-
-		descr->parse(directory, &prof, becomes_map, encdata);
-	}
-	catch (std::exception &e) {
-		delete descr;
-		throw wexception("Error reading worker %s: %s", name, e.what());
-	}
-	catch (...) {
-		delete descr;
-		throw;
-	}
-
-	return descr;
 }
 
 

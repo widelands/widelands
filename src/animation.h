@@ -69,6 +69,14 @@ struct AnimationManager {
 
 	void flush();
 	uint32_t get
+		(std::string const & directory,
+		 Section           & s,
+		 char       const * picnametempl = 0,
+		 EncodeData  const * encdata = 0)
+	{
+		return get(directory.c_str(), s, picnametempl, encdata);
+	}
+	uint32_t get
 		(char       const * directory,
 		 Section          &,
 		 char       const * picnametempl = 0,
@@ -99,12 +107,12 @@ struct DirAnimations {
 	~DirAnimations();
 
 	void parse
-		(Widelands::Map_Object_Descr * const,
-		 const char                  * const directory,
-		 Profile                     * const,
-		 const char                  * const sectnametempl,
-		 Section                     * const defaults = 0,
-		 const EncodeData            * const encdefaults = 0);
+		(Widelands::Map_Object_Descr &,
+		 std::string           const & directory,
+		 Profile                     &,
+		 char                  const * sectnametempl,
+		 Section                     * defaults    = 0,
+		 EncodeData            const * encdefaults = 0);
 
 	uint32_t get_animation(const int32_t dir) const throw ()
 	{return m_animations[dir - 1];}

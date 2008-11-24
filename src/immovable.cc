@@ -134,15 +134,16 @@ void ImmovableProgram::add_action(const ImmovableAction& act)
 /**
  * Actually parse a program
 */
-void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Profile* prof)
+void ImmovableProgram::parse
+	(Immovable_Descr & descr, std::string const & directory, Profile & prof)
 {
 	ProgramParser p;
-	Section & s = prof->get_safe_section(m_name.c_str());
+	Section & s = prof.get_safe_section(m_name.c_str());
 	uint32_t line=0;
 
-	p.descr = descr;
+	p.descr = &descr;
 	p.directory = directory;
-	p.prof = prof;
+	p.prof = &prof;
 
 	for (line = 0;; ++line) {
 		try
@@ -193,7 +194,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 		log("WARNING: %s: [%s] is empty, using default\n", directory.c_str(), m_name.c_str());
 
 		act.function = &Immovable::run_animation;
-		act.iparam1 = descr->parse_animation(directory, prof, "idle");
+		act.iparam1 = descr.parse_animation(directory, prof, "idle");
 		act.iparam2 = -1;
 
 		m_actions.push_back(act);
@@ -210,45 +211,6 @@ Immovable_Descr IMPLEMENTATION
 */
 
 /**
- * Initialize with sane defaults
-*/
-Immovable_Descr::Immovable_Descr
-	(Tribe_Descr const * const owner_tribe, std::string const & immovable_name)
-:
-m_name(immovable_name), m_size(BaseImmovable::NONE), m_owner_tribe(owner_tribe)
-{m_default_encodedata.clear();}
-
-
-/**
- * Cleanup
-*/
-Immovable_Descr::~Immovable_Descr()
-{
-	while (m_programs.size()) {
-		delete m_programs.begin()->second;
-		m_programs.erase(m_programs.begin());
-	}
-}
-
-
-/**
- * Find the program of the given name.
-*/
-const ImmovableProgram* Immovable_Descr::get_program
-	(std::string programname) const
-{
-	ProgramMap::const_iterator it = m_programs.find(programname);
-
-	if (it == m_programs.end())
-		throw wexception
-			("Immovable %s has no program '%s'",
-			 name().c_str(), programname.c_str());
-
-	return it->second;
-}
-
-
-/**
  * Parse an immovable from its conf file.
  *
  * Section [global]:
@@ -263,19 +225,20 @@ const ImmovableProgram* Immovable_Descr::get_program
  * Default:
  * 0=animation idle -1
 */
-void Immovable_Descr::parse(const char *directory, Profile *prof)
+Immovable_Descr::Immovable_Descr
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const * const owner_tribe)
+:
+	Map_Object_Descr(_name, _descname),
+	m_picture
+		(directory
+		 +
+		 global_s.get_string("picture", (name() + "_00.png").c_str())),
+	m_size          (BaseImmovable::NONE),
+	m_owner_tribe   (owner_tribe)
 {
-	Section & global_s = prof->get_safe_section("global");
-	char buffer [256];
-	char picname[256];
-
-	// Global options
-	snprintf(buffer, sizeof(buffer), "%s_00.png", m_name.c_str());
-	snprintf
-		(picname, sizeof(picname),
-		 "%s/%s", directory, global_s.get_string("picture", buffer));
-	m_picture = picname;
-
+	m_default_encodedata.clear();
 	m_default_encodedata.parse(global_s);
 
 	if (char const * const string = global_s.get_string("size", 0)) {
@@ -315,11 +278,11 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 		parse_program(directory, prof, v->get_string());
 
 	if (m_programs.find("program") == m_programs.end()) {
-		if (prof->get_section("program")) {
+		if (prof.get_section("program")) {
 			log
 				("WARNING: %s: obsolete implicit [program] section; use "
 				 "program=program in [global]\n",
-				 directory);
+				 directory.c_str());
 			parse_program(directory, prof, "program");
 		}
 		else
@@ -339,11 +302,41 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 
 
 /**
+ * Cleanup
+*/
+Immovable_Descr::~Immovable_Descr()
+{
+	while (m_programs.size()) {
+		delete m_programs.begin()->second;
+		m_programs.erase(m_programs.begin());
+	}
+}
+
+
+/**
+ * Find the program of the given name.
+*/
+const ImmovableProgram* Immovable_Descr::get_program
+	(std::string programname) const
+{
+	Programs::const_iterator it = m_programs.find(programname);
+
+	if (it == m_programs.end())
+		throw wexception
+			("Immovable %s has no program '%s'",
+			 name().c_str(), programname.c_str());
+
+	return it->second;
+}
+
+
+/**
  * Parse a program.
 */
 void Immovable_Descr::parse_program
-		(std::string directory, Profile* prof,
-		 std::string programname)
+	(std::string const & directory,
+	 Profile           & prof,
+	 std::string const & programname)
 {
 	ImmovableProgram* prog = 0;
 
@@ -353,7 +346,7 @@ void Immovable_Descr::parse_program
 	try
 	{
 		prog = new ImmovableProgram(programname);
-		prog->parse(this, directory, prof);
+		prog->parse(*this, directory, prof);
 		m_programs[programname] = prog;
 	}
 	catch (...)
@@ -369,24 +362,26 @@ void Immovable_Descr::parse_program
  * Parse the animation of the given name.
 */
 uint32_t Immovable_Descr::parse_animation
-		(std::string directory, Profile* s, std::string animation_name)
+	(std::string const & directory,
+	 Profile           & prof,
+	 std::string const & animation_name)
 {
 	// Load the animation
-	Section * anim = s->get_section(animation_name.c_str());
+	Section * anim = prof.get_section(animation_name.c_str());
 	char picname[256];
 	uint32_t animid=0;
 
 	snprintf
 		(picname, sizeof(picname),
 		 "%s_%s_??.png",
-		 m_name.c_str(),
+		 name().c_str(),
 		 animation_name.c_str());
 
 	// kind of obscure, this is still needed for backwards compatibility
 	if (animation_name == "idle" and not anim) {
-		anim = s->get_section("global");
+		anim = prof.get_section("global");
 
-		snprintf(picname, sizeof(picname), "%s_??.png", m_name.c_str());
+		snprintf(picname, sizeof(picname), "%s_??.png", name().c_str());
 	}
 
 	if (!anim) {
@@ -741,7 +736,8 @@ void ImmovableProgram::parse_animation
 
 	act->function = &Immovable::run_animation;
 
-	act->iparam1 = parser->descr->parse_animation(parser->directory, parser->prof, cmd[1]);
+	act->iparam1 =
+		parser->descr->parse_animation(parser->directory, *parser->prof, cmd[1]);
 	act->iparam2 = atoi(cmd[2].c_str());
 
 	if (act->iparam2 == 0 || act->iparam2 < -1)

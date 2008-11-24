@@ -138,7 +138,7 @@ void Computer_Player::late_initialization ()
 		bo.cnt_under_construction = 0;
 		bo.production_hint        = -1;
 
-		bo.is_buildable           = bld.get_buildable();
+		bo.is_buildable           = bld.buildable();
 
 		bo.need_trees             = building_name == trunkproducer;
 		bo.need_stones            = building_name == stoneproducer;
@@ -335,7 +335,6 @@ void Computer_Player::think ()
 	// now build something if possible
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
-		printf("Computer_Player: Time to build.\n");
 		if (construct_building()) {
 			//inhibit_road_building = gametime + 2500;
 			//Inhibiting roadbuilding is not a good idea, it causes
@@ -690,15 +689,10 @@ bool Computer_Player::construct_building ()
 
 void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 {
-	log
-		("ComputerPlayer(%d): checking %s\n",
-		 player_number,
-		 site.bo->desc->name().c_str());
-
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
 
-	const Workarea_Info & workarea_info = site.bo->desc->m_recursive_workarea_info;
+	Workarea_Info const & workarea_info = site.bo->desc->m_workarea_info;
 	for
 		(Workarea_Info::const_iterator it = workarea_info.begin();
 		 it != workarea_info.end();

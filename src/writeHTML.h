@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,6 @@
  *
  */
 
-#ifndef COMPUTER_PLAYER_HINTS_H
-#define COMPUTER_PLAYER_HINTS_H
-
-class Profile;
-
-struct BuildingHints {
-	BuildingHints ();
-
-	void parse (Profile &);
-
-	const char * get_need_map_resource() const throw ()
-	{return need_map_resource;}
-
-private:
-	char * need_map_resource;
-};
-
+#ifndef WRITE_GAME_DATA_AS_HTML
+#define WRITE_GAME_DATA_AS_HTML
 #endif

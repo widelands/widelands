@@ -539,9 +539,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		//  allowed buildings. The rules are different in editor and game:
 		//  enhanced buildings _are_ buildable in the editor
 		if (dynamic_cast<const Game *>(&m_iabase->egbase())) {
-			if (!descr.get_buildable() || !m_plr->is_building_allowed(id))
+			if (!descr.buildable() || !m_plr->is_building_allowed(id))
 				continue;
-		} else if (!descr.get_buildable() && !descr.get_enhanced_building())
+		} else if (!descr.buildable() && !descr.get_enhanced_building())
 			continue;
 
 		// Figure out if we can build it here, and in which tab it belongs
@@ -875,11 +875,11 @@ void FieldActionWindow::building_icon_mouse_in
 		Widelands::HollowArea<> hollow_area(Widelands::Area<>(m_field, 0), 0);
 		const Workarea_Info & workarea_info =
 			m_plr->tribe().get_building_descr(Widelands::Building_Index(idx))
-			->m_recursive_workarea_info;
+			->m_workarea_info;
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(Workarea_Info::size_type i =
-			 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
+			 	std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
 			 i;
 			 ++it)
 		{

@@ -66,7 +66,7 @@ public:
 	const ImmovableAction& get_action(uint32_t idx) const {assert(idx < m_actions.size()); return m_actions[idx];}
 
 	void add_action(const ImmovableAction& act);
-	void parse(Immovable_Descr* descr, std::string directory, Profile* prof);
+	void parse(Immovable_Descr &, std::string const & directory, Profile &);
 
 private:
 	void parse_animation(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);

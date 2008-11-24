@@ -50,9 +50,10 @@ The ConstructionSite's idling animation is the basic construction site marker.
 */
 struct ConstructionSite_Descr : public Building_Descr {
 	ConstructionSite_Descr
-		(const Tribe_Descr &, const std::string & constructionsite_name);
+		(char const * name, char const * descname,
+		 std::string const & directory, Profile &, Section & global_s,
+		 Tribe_Descr const & tribe, EncodeData const *);
 
-	virtual void parse(char const * directory, Profile *, enhancements_map_t &, EncodeData const *);
 	virtual Building * create_object() const;
 };
 

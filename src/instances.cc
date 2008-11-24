@@ -232,22 +232,28 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
 /**
  * Add this animation for this map object under this name
  */
-bool Map_Object_Descr::is_animation_known(const char * const name) const {
+bool Map_Object_Descr::is_animation_known(char const * const animname) const {
 	std::map<std::string, uint32_t>::const_iterator i = m_anims.begin();
 	while (i!=m_anims.end()) {
-		if (i->first==name)
+		if (i->first == animname)
 			return true;
 		++i;
 	}
 	return false;
 }
 
-void Map_Object_Descr::add_animation(const char* name, uint32_t anim) {
-	std::string use_name=name;
+void Map_Object_Descr::add_animation
+	(char const * const animname, uint32_t const anim)
+{
+	std::string use_name = animname;
 	std::map<std::string, uint32_t>::iterator i=m_anims.begin();
 
 	while (i!=m_anims.end()) {
-		assert(i->first!=name);
+#ifndef NDEBUG
+		if (i->first == animname)
+			throw wexception
+				("adding already existing animation \"%s\"", animname);
+#endif
 		++i;
 	}
 	m_anims.insert(std::pair<std::string, uint32_t>(use_name, anim));

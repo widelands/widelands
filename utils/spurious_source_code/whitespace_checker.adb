@@ -151,7 +151,7 @@ procedure Whitespace_Checker is
          case Previous_Character is
             when '(' | '[' =>
                case Current_Character is
-                  when HT | ' ' | '#' | ':' | '?' | '%' | ',' =>
+                  when HT | ' ' | '#' | '?' | '%' | ',' =>
                      Put_Error
                        ('"' & Previous_Character & Current_Character &
                         """ is not allowed");
@@ -201,7 +201,7 @@ procedure Whitespace_Checker is
                Next_Brace_Level := Next_Brace_Level + 1;
             when '}'       =>
                case Previous_Character is
-                  when ',' | ' ' | '?' =>
+                  when ',' | '?' =>
                      Put_Error
                        ("""" & Previous_Character & Current_Character &
                         """ not allowed");
@@ -328,9 +328,11 @@ procedure Whitespace_Checker is
    end Read_Code;
 
    Indentation_Increase_Allowed : Indentation_Level := 0;
+   Space_In_Leading_Whitespace  : Boolean;
 begin
    Open (The_File, In_File, Argument (1));
    while not End_Of_File (The_File) loop
+      Space_In_Leading_Whitespace := False;
       declare
          Current_Leading_Whitespace_Index : Leading_Whitespace_Index := 0;
          Indentation_Increase             : Indentation_Level        := 0;
@@ -367,6 +369,7 @@ begin
                         "previous line");
                   end if;
                when ' '    =>
+                  Space_In_Leading_Whitespace := True;
                   if
                     Current_Leading_Whitespace_Index
                     =
@@ -474,6 +477,8 @@ begin
                   end if;
                end loop;
                if
+                 Space_In_Leading_Whitespace
+                 and then
                  0 < Next_Leading_Whitespace_Index
                  and then
                  Leading_Whitespace (Next_Leading_Whitespace_Index - 1)
@@ -483,9 +488,8 @@ begin
                  Initial_Next_Brace_Level < Next_Brace_Level
                then
                   Put_Error
-                    ("opening brace at line with leading alignment or "  &
-                     "parentheses must be matched by a closing brace on " &
-                     "the same line");
+                    ("opening brace at line with leading alignment must be "  &
+                     "matched by a closing brace on the same line");
                end if;
             end;
 

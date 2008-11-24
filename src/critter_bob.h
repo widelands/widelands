@@ -32,27 +32,26 @@ class Critter_BobProgram;
 //
 struct Critter_Bob_Descr : public Bob::Descr {
 	Critter_Bob_Descr
-		(const Tribe_Descr * const, const std::string & critter_bob_name);
+		(char const * name, char const * descname,
+		 std::string const & directory, Profile &, Section & global_s,
+		 Tribe_Descr const *, EncodeData const * = 0);
 	virtual ~Critter_Bob_Descr();
 
-	virtual void parse(char const * directory, Profile *, EncodeData const *);
 	Bob * create_object() const;
 
 	bool is_swimming() const throw () {return m_swimming;}
 	uint32_t movecaps() const throw ();
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
-	const std::string & descname() const throw () {return m_descname;}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descname().c_str();}
 
 	Critter_BobProgram const * get_program
 		(std::string const & programname) const;
 
 private:
-	std::string   m_descname;
 	DirAnimations m_walk_anims;
 	bool          m_swimming;
-	typedef std::map<std::string, Critter_BobProgram *> ProgramMap;
-	ProgramMap    m_programs;
+	typedef std::map<std::string, Critter_BobProgram *> Programs;
+	Programs    m_programs;
 };
 
 class Critter_Bob : public Bob {

@@ -51,6 +51,7 @@
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
+#include "container_iterate.h"
 #include "upcast.h"
 
 #include <cstdarg>
@@ -59,7 +60,7 @@
 
 namespace Widelands {
 
-Map_Object_Descr g_flag_descr;
+Map_Object_Descr g_flag_descr("flag", "Flag");
 
 
 /**
@@ -1070,7 +1071,7 @@ Road IMPLEMENTATION
 */
 
 // dummy instance because Map_Object needs a description
-Map_Object_Descr g_road_descr;
+Map_Object_Descr g_road_descr("road", "Road");
 
 /**
  * Most of the actual work is done in init.
@@ -2897,9 +2898,9 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 		Route* route;
 
 		// idle requests only get active supplies
-		if (req->is_idle() and not supp.is_active()){
+		if (req->is_idle() and not supp.is_active()) {
 			/* unless the warehouse REALLY needs the supply */
-			if (req->get_priority(0) > 100){ // 100 is the 'real idle' priority
+			if (req->get_priority(0) > 100) { //  100 is the 'real idle' priority
 				//check if the supply is at current target
 				if (target_flag == (&supp)->get_position(g)->get_base_flag()) {
 					//assert(false);
@@ -3066,6 +3067,7 @@ void Economy::create_requested_workers(Game* g)
 		Find the request of workers that can not be supplied
 	*/
 	if (get_nr_warehouses() > 0) {
+		Tribe_Descr const & tribe = owner().tribe();
 		for (RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
 			Request* req = *it;
 
@@ -3075,7 +3077,7 @@ void Economy::create_requested_workers(Game* g)
 				Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
 
 				// Ignore it if is a worker that cann't be buildable
-				if (!w_desc->get_buildable())
+				if (!w_desc->buildable())
 					continue;
 
 				for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
@@ -3093,17 +3095,14 @@ void Economy::create_requested_workers(Game* g)
 						} // if (m_warehouses[n_wh]
 						++n_wh;
 					} // while (n_wh < get_nr_warehouses())
-					if (! created_worker){
+					if (! created_worker) {
 						Warehouse* nearest = m_warehouses[0];//fix to nearest warehouse
-						const Worker_Descr::BuildCost & buildcost = w_desc->get_buildcost();
-						const Worker_Descr::BuildCost::const_iterator buildcost_end =	buildcost.end();
-						for (Worker_Descr::BuildCost::const_iterator bc_it = buildcost.begin(); bc_it != buildcost.end(); ++bc_it){
-							const char * input_name = bc_it->name.c_str();
-							if (Ware_Index w_id = get_owner()->tribe().ware_index(input_name)){
-								nearest->set_needed(w_id,bc_it->amount);
-							}
-						}
-
+						Worker_Descr::Buildcost const & cost = w_desc->buildcost();
+						container_iterate_const(Worker_Descr::Buildcost, cost, bc_it)
+							if
+								(Ware_Index const w_id =
+								 	tribe.ware_index(bc_it.current->first.c_str()))
+								nearest->set_needed(w_id, bc_it.current->second);
 					}
 				} // if (num_wares == 0)
 			} // if (req->is_open())

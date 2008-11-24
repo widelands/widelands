@@ -51,37 +51,30 @@ uint32_t Bob::Descr::vision_range() const
 }
 
 
-/**
- * Parse additional information from the config file
- */
-void Bob::Descr::parse
-	(char const       * const directory,
-	 Profile          * const prof,
-	 EncodeData const * const encdata)
+Bob::Descr::Descr
+	(char const * const _name, char const * const _descname,
+	 std::string const & directory, Profile & prof, Section & global_s,
+	 Tribe_Descr const * const tribe, EncodeData const * encdata)
+	:
+	Map_Object_Descr(_name, _descname),
+	m_owner_tribe(tribe)
 {
-	char buffer [256];
-	char picname[256];
+	m_default_encodedata.clear();
 
 	{ //  global options
-		Section & idle_s = prof->get_safe_section("idle");
-
-		snprintf(buffer, sizeof(buffer), "%s_00.png", m_name.c_str());
-		snprintf
-			(picname, sizeof(picname),
-			 "%s/%s", directory, idle_s.get_string("picture", buffer));
-
-		m_picture = picname;
+		Section & idle_s = prof.get_safe_section("idle");
+		m_picture  = directory;
+		m_picture += idle_s.get_string("picture", (name() + "_00.png").c_str());
 
 		m_default_encodedata.parse(idle_s);
 
 		add_animation
 			("idle",
 			 g_anim.get
-			 	(directory, idle_s, (m_name + "_??.png").c_str(), encdata));
+			 	(directory, idle_s, (name() + "_??.png").c_str(), encdata));
 	}
 
 	// Parse attributes
-	Section & global_s = prof->get_safe_section("global");
 	while (Section::Value const * val = global_s.get_next_val("attrib")) {
 		uint32_t const attrib = get_attribute_id(val->get_string());
 
@@ -104,42 +97,6 @@ Bob * Bob::Descr::create
 	bob->set_owner(owner);
 	bob->set_position(egbase, coords);
 	bob->init(egbase);
-
-	return bob;
-}
-
-
-/**
- * Master factory to read a bob from the given directory and create the
- * appropriate description class.
- */
-Bob::Descr * Bob::Descr::create_from_dir
-	(char const  * const name,
-	 char const  * const directory,
-	 Profile     * const prof,
-	 Tribe_Descr * const tribe)
-{
-	Bob::Descr *bob = 0;
-
-	try {
-		char const * const type =
-			prof->get_safe_section("global").get_safe_string("type");
-
-		if (!strcasecmp(type, "critter"))
-			bob = new Critter_Bob_Descr(tribe, name);
-		else
-			throw wexception("Unsupported bob type '%s'", type);
-
-		bob->parse(directory, prof, 0);
-	}
-	catch (std::exception &e) {
-		delete bob;
-		throw wexception("Error reading bob %s: %s", directory, e.what());
-	}
-	catch (...) {
-		delete bob;
-		throw;
-	}
 
 	return bob;
 }

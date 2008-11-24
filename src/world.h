@@ -51,9 +51,7 @@ struct Resource_Descr {
 	void parse(Section* s, std::string);
 
 	const std::string & name     () const throw () {return m_name;}
-	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
-	const std::string & descrname() const throw () {return m_descrname;}
-	__attribute__ ((deprecated)) const char * get_descrname() const throw () {return m_descrname.c_str();}
+	std::string const & descname() const throw () {return m_descname;}
 
 	bool is_detectable() const throw () {return m_is_detectable;}
 	int32_t get_max_amount() const throw () {return m_max_amount;}
@@ -73,8 +71,11 @@ private:
 	bool                    m_is_detectable;
 	int32_t                 m_max_amount;
 	std::string             m_name;
-	std::string             m_descrname;
+	std::string             m_descname;
 	std::vector<Editor_Pic> m_editor_pics;
+
+	Resource_Descr & operator= (Resource_Descr const &);
+	explicit Resource_Descr    (Resource_Descr const &);
 };
 
 struct Terrain_Descr {
@@ -119,6 +120,9 @@ private:
 	int8_t            m_default_resources;
 	int32_t           m_default_amount;
 	uint32_t          m_texture; //  renderer's texture
+
+	Terrain_Descr & operator= (Terrain_Descr const &);
+	explicit Terrain_Descr    (Terrain_Descr const &);
 };
 
 /** class World
@@ -174,6 +178,7 @@ struct World {
 		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
 	int32_t get_nr_resources() const {return m_resources.get_nitems();}
 	int32_t safe_resource_index(const char * const warename) const;
+	std::string const & basedir() const {return m_basedir;}
 
 private:
 	std::string m_basedir; //  base directory, where the main conf file resides
@@ -184,10 +189,13 @@ private:
 	Descr_Maintainer<Terrain_Descr>   ters;
 	Descr_Maintainer<Resource_Descr>  m_resources;
 
-	void parse_root_conf(char const * name);
+	void parse_root_conf(std::string const & name, Profile & root_conf);
 	void parse_resources();
 	void parse_terrains ();
-	void parse_bobs     ();
+	void parse_bobs     (std::string & directory, Profile & root_conf);
+
+	World & operator= (World const &);
+	explicit World    (World const &);
 };
 
 };

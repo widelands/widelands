@@ -42,33 +42,20 @@
 namespace Widelands {
 
 MilitarySite_Descr::MilitarySite_Descr
-	(Tribe_Descr const & tribe_descr, std::string const & militarysite_name)
+	(char        const * const _name,
+	 char        const * const _descname,
+	 std::string const & directory, Profile & prof,  Section & global_s,
+	 Tribe_Descr const & _tribe, EncodeData  const * const encdata)
 :
-ProductionSite_Descr (tribe_descr, militarysite_name),
+	ProductionSite_Descr (_name, _descname, directory, prof, global_s, _tribe, encdata),
 m_conquer_radius     (0),
 m_num_soldiers       (0),
 m_num_medics         (0),
 m_heal_per_second    (0),
 m_heal_incr_per_medic(0)
-{}
-
-MilitarySite_Descr::~MilitarySite_Descr() {}
-
-/**
-===============
-Parse the additional information necessary for miltary buildings
-===============
-*/
-void MilitarySite_Descr::parse
-	(char         const * const directory,
-	 Profile            * const prof,
-	 enhancements_map_t &        enhancements_map,
-	 EncodeData  const * const encdata)
 {
-	Section & global_s = prof->get_safe_section("global");
-
-	ProductionSite_Descr::parse(directory, prof, enhancements_map, encdata);
-	m_stopable = false; //  Militarysites are not stopable.
+	if (global_s.get_val("stopable"))
+		throw wexception("key stopable is not allowed for militarysite");
 
 	m_conquer_radius      = global_s.get_safe_int("conquers");
 	m_num_soldiers        = global_s.get_safe_int("max_soldiers");

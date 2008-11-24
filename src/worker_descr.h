@@ -36,19 +36,9 @@ class Worker_Descr : public Bob::Descr
 	friend class Warehouse;
 	friend struct WorkerProgram;
 
-	struct CostItem {
-		std::string name;   // name of ware
-		uint32_t    amount;
-
-		CostItem(const char* iname, int32_t iamount)
-			: name(iname), amount(iamount)
-		{}
-	};
-
 public:
-	typedef std::vector<CostItem> BuildCost;
+	typedef std::map<std::string, uint8_t> Buildcost;
 
-public:
 	typedef Ware_Index::value_t Index;
 	enum Worker_Type {
 		NORMAL = 0,
@@ -56,22 +46,24 @@ public:
 		SOLDIER,
 	};
 
-	Worker_Descr(const Tribe_Descr &, const std::string & name);
+	Worker_Descr
+		(char const * const name, char const * const descname,
+		 std::string const & directory, Profile &,  Section & global_s,
+		 Tribe_Descr const &, EncodeData const *);
 	virtual ~Worker_Descr();
 
 	virtual Bob * create_object() const;
 
 	virtual void load_graphics();
 
-	bool              get_buildable() const throw () {return m_buildable;}
-	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
+	bool              buildable() const throw () {return buildcost().size();}
+	Buildcost const & buildcost() const throw () {return m_buildcost;}
 
 	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
 	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
-	const std::string & descname() const throw () {return m_descname;}
-	std::string get_helptext() const {return m_helptext;}
+	std::string helptext() const {return m_helptext;}
 
-	uint32_t get_menu_pic() const throw () {return m_menu_pic;}
+	uint32_t icon() const throw () {return m_icon;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 	const DirAnimations & get_right_walk_anims(const bool carries_ware)
 		const throw ()
@@ -92,30 +84,24 @@ public:
 	typedef std::map<Worker_Descr *, std::string> becomes_map_t;
 	virtual uint32_t movecaps() const throw ();
 
-	typedef std::map<std::string, WorkerProgram *> ProgramMap;
-	ProgramMap const & get_all_programs() const throw () {return m_programs;}
+	typedef std::map<std::string, WorkerProgram *> Programs;
+	Programs const & programs() const throw () {return m_programs;}
 
 protected:
-	virtual void parse
-		(char const * dir, Profile *, becomes_map_t &, const EncodeData *);
-	static Worker_Descr * create_from_dir
-		(Tribe_Descr const &,
-		 becomes_map_t     &,
-		 char        const * directory,
-		 EncodeData  const *);
+#ifdef WRITE_GAME_DATA_AS_HTML
+	void writeHTML(::FileWrite &) const;
+#endif
 
-	std::string   m_descname;       ///< Descriptive name
 	std::string   m_helptext;       ///< Short (tooltip-like) help text
-	char        * m_menu_pic_fname; ///< Filename of worker's icon
-	uint32_t          m_menu_pic;       ///< Pointer to icon into picture stack
+	std::string const m_icon_fname; ///< Filename of worker's icon
+	uint32_t          m_icon;       ///< Pointer to icon into picture stack
 	DirAnimations m_walk_anims;
 	DirAnimations m_walkload_anims;
-	bool          m_buildable;
-	BuildCost     m_buildcost;      ///< What and how much we need to build this worker
+	Buildcost     m_buildcost;      ///< What and how much we need to build this worker
 	int32_t           m_max_experience;
 	int32_t           m_min_experience;
 	Ware_Index    m_becomes;       /// Type that this type can become (or Null).
-	ProgramMap    m_programs;
+	Programs    m_programs;
 };
 
 };

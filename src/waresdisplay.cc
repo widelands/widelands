@@ -173,9 +173,9 @@ void WaresDisplay::draw_ware
 	dst.blit
 		(pos,
 		 is_worker ?
-		 m_tribe.get_worker_descr(id)->get_menu_pic()
+		 m_tribe.get_worker_descr(id)->icon()
 		 :
-		 m_tribe.get_ware_descr(id)->get_icon());
+		 m_tribe.get_ware_descr  (id)->icon());
 	dst.fill_rect
 		(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
 		 RGBColor(0, 0, 0));
