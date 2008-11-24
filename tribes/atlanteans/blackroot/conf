@@ -1,0 +1,9 @@
+[global]
+type=ware
+help=_"Blackroots are a special kind of roots. The Atlantids like their strong taste and use its flour for making bread."
+
+# No description yet
+
+[idle]
+pics=idle.png
+hotspot=10 17

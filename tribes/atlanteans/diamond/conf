@@ -1,0 +1,8 @@
+[global]
+type=ware
+help=_"This wonderful diamonds are used for some exclusive buildings and tools."
+
+# No description yet
+[idle]
+pics=idle.png
+hotspot=10 17

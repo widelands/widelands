@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"Fish is one of the biggest food-resources of the atlantids."
+
+[idle]
+pics=idle.png
+hotspot=8 11

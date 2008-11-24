@@ -1,8 +1,0 @@
-[global]
-descname=_"Tabard"
-help=_"All atlantean soldiers have to wear the sign of their country on their breasts."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=7 11

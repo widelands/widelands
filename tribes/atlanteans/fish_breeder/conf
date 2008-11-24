@@ -1,0 +1,34 @@
+[global]
+help=_"Breeds fish"
+type=generic
+program=breed
+
+[buildcost]
+carrier=1
+bucket=1
+
+[breed]
+0=findspace size:any radius:7 breed resource:fish
+1=walk coords
+2=animation freeing 3000 # Play a freeing animation
+3=breed fish 1
+4=return
+
+[idle]
+pics=freeing_??.png
+hotspot=12 25
+
+[freeing]
+pics=freeing_??.png
+hotspot=12 25
+fps=20
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=12 25
+fps=20
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=12 25
+fps=20

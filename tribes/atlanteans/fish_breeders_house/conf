@@ -1,0 +1,19 @@
+[global]
+type=production
+size=small
+worker=fish_breeder
+program=work
+
+[buildcost]
+trunk=1
+planks=1
+stone=1
+
+[work]
+sleep=24000
+worker=breed
+
+[idle]
+pics=fish_breeder_i_??.png  # ???
+hotspot=34 42
+playercolor=true

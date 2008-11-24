@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"This is red iron ore."
+
+[idle]
+pics=idle.png
+hotspot=4 4

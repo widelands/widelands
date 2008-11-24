@@ -1,0 +1,18 @@
+[global]
+help=_"Produces cloth for buildings, ships and soldiers"
+type=generic
+
+[buildcost]
+carrier=1
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=5 13
+
+[walkload]
+dirpics=walkload_!!_??.png
+hotspot=5 13

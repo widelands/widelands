@@ -1,8 +1,0 @@
-[global]
-descname=_"Spidercloth"
-help=_"Cloth made out of spideryarn."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=10 17

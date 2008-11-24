@@ -1,0 +1,8 @@
+[global]
+type=ware
+help=_"This shields are used by the best soldiers of the atlantids"
+
+# A golden shield with the sign of the atlantids
+[idle]
+pics=idle.png
+hotspot=10 17

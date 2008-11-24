@@ -1,0 +1,95 @@
+[global]
+soundfx=../../../sound/smiths/smith
+soundfx=../../../sound/smith/sharpening
+type=production
+size=medium
+worker=weaponsmith
+output=light_trident
+output=long_trident
+output=steel_trident
+output=double_trident
+output=heavy_double_trident
+
+program=produce_light_trident
+program=produce_long_trident
+program=produce_steel_trident
+program=produce_double_trident
+program=produce_heavy_double_trident
+program=work
+
+[inputs]
+iron=8
+gold=8
+coal=8
+planks=8
+
+[work]
+call=produce_light_trident
+call=produce_long_trident
+call=produce_steel_trident
+call=produce_double_trident
+call=produce_heavy_double_trident
+return=skipped
+
+[produce_light_trident]
+return=skipped unless economy needs light_trident
+consume=planks
+sleep=20000
+playFX=../../../sound/smiths/smith 192
+animate=working 30000
+playFX=../../../sound/smiths/sharpening 192
+produce=light_trident
+
+
+[produce_long_trident]
+return=skipped unless economy needs long_trident
+consume=iron coal planks
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 45000
+playFX=../../../sound/smiths/sharpening 192
+produce=long_trident
+
+
+[produce_steel_trident]
+return=skipped unless economy needs steel_trident
+consume=iron:2 coal planks
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 45000
+playFX=../../../sound/smiths/sharpening 192
+produce=steel_trident
+
+[produce_double_trident]
+return=skipped unless economy needs double_trident
+consume=iron coal:2 planks gold
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 45000
+playFX=../../../sound/smiths/sharpening 192
+produce=double_trident
+
+[produce_heavy_double_trident]
+return=skipped unless economy needs heavy_double_trident
+consume=iron:2 coal:2 planks gold
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 45000
+playFX=../../../sound/smiths/sharpening 192
+produce=heavy_double_trident
+
+
+[buildcost]
+trunk=2
+stone=2
+planks=2
+spidercloth=1
+mountain_crystal=1
+
+[idle]
+pics=weaponsmith_i_??.png  # ???
+hotspot=55 80
+
+[working]
+pics=weaponsmith_i_??.png  # ???
+hotspot=55 80

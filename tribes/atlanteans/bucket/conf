@@ -1,0 +1,8 @@
+[global]
+type=ware
+help=_"Big buckets for the fish breeder - produced by the toolsmith."
+
+# Two big buckets
+[idle]
+pics=idle.png
+hotspot=10 17

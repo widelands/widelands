@@ -1,0 +1,20 @@
+[global]
+type=production
+size=small
+help="The Hunter brings fresh, raw meat to the atlantids"
+worker=hunter
+program=work
+
+[work]
+sleep=35000
+worker=hunt
+
+[buildcost]
+trunk=1
+planks=1
+stone=1
+
+[idle]
+pics=hunter_i_??.png
+hotspot=36 44
+playercolor=true

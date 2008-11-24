@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"This bow is used by the atlantian hunter."
+
+[idle]
+pics=idle.png
+hotspot=10 17

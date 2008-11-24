@@ -1,0 +1,39 @@
+[global]
+help=_"The fisher fishes delicious fish."
+type=generic
+program=fish
+soundfx=../../../sound/fisher/fisher_throw_net
+soundfx=../../../sound/fisher/fisher_pull_net
+
+[buildcost]
+carrier=1
+fishing_net=1
+
+[fish]
+0=findspace size:any radius:7 resource:fish
+1=walk coords
+2=playFX ../../../sound/fisher/fisher_throw_net 192
+3=mine fish 1
+4=animation idle 3000 # Play a fishing animation
+5=playFX ../../../sound/fisher/fisher_pull_net 192
+6=createitem fish
+7=return
+
+[idle]
+pics=fishing_??.png
+hotspot=12 25
+
+[fishing]
+pics=fishing_??.png
+hotspot=12 25
+fps=20
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=12 25
+fps=20
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=12 25
+fps=20

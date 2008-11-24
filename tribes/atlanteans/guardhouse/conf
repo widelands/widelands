@@ -1,0 +1,18 @@
+[global]
+type=military
+size=small
+heal_per_second=1 # very low -> smallest building
+conquers=6
+max_soldiers=2
+max_medics=0
+heal_increase_per_medic=0
+
+[buildcost]
+trunk=1
+planks=1
+stone=1
+
+[idle]
+pics=guardhouse_i_??.png
+hotspot=35 42
+playercolor=true

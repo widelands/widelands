@@ -1,8 +1,0 @@
-[global]
-descname=_"Saw"
-help=_"Saws are needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 11

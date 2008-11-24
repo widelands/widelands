@@ -1,8 +1,0 @@
-[global]
-descname=_"Gold"
-help=_"Gold is one of the most valuable materials only important things are garnished with it."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 15

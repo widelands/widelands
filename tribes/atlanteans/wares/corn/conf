@@ -1,9 +1,0 @@
-[global]
-descname=_"Corn"
-help=_"This corn is the base of the fine cornflour, that every atlatian baker needs for a good bread."
-menu_pic=menu.png
-
-# Simply corn
-[idle]
-pics=idle.png
-hotspot=10 17

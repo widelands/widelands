@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"Stone is one basic build ware of the Atlantids."
+
+[idle]
+pics=idle.png
+hotspot=7 9

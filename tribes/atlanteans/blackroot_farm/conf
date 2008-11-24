@@ -1,0 +1,32 @@
+[global]
+type=production
+size=big
+worker=blackroot_farmer
+stopable=yes
+output=blackroot
+program=plant
+program=harvest
+program=work
+
+[work]
+call=plant
+call=harvest
+return=skipped
+
+[plant]
+sleep=20000
+worker=plant
+
+[harvest]
+sleep=5000
+worker=harvest
+
+[buildcost]
+planks=3
+stone=2
+trunk=4
+
+[idle]
+pics=blackroot_farm_i_??.png  # ???
+hotspot=87 75
+playercolor=true

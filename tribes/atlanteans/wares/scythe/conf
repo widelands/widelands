@@ -1,8 +1,0 @@
-[global]
-descname=_"Scythe"
-help=_"The Scythe is the tool of the farmers. It is produced by the toolsmith."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=6 6

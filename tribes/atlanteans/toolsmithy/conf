@@ -1,0 +1,147 @@
+[global]
+type=production
+size=medium
+worker=toolsmith
+output=bakingtray
+output=bucket
+output=fire_tongs
+output=fishing_net
+output=hammer
+output=hook_pole
+output=hunting_bow
+output=milking_tongs
+output=pick
+output=saw
+output=scythe
+output=shovel
+program=produce_bakingtray
+program=produce_bucket
+program=produce_fire_tongs
+program=produce_fishing_net
+program=produce_hammer
+program=produce_hook_pole
+program=produce_hunting_bow
+program=produce_milking_tongs
+program=produce_pick
+program=produce_saw
+program=produce_scythe
+program=produce_shovel
+program=work
+
+[buildcost]
+trunk=1
+stone=2
+planks=2
+spidercloth=1
+
+[inputs]
+iron=6
+trunk=6
+spidercloth=4
+
+[work]
+call=produce_bakingtray
+call=produce_bucket
+call=produce_fire_tongs
+call=produce_fishing_net
+call=produce_hammer
+call=produce_hook_pole
+call=produce_hunting_bow
+call=produce_milking_tongs
+call=produce_pick
+call=produce_saw
+call=produce_scythe
+call=produce_shovel
+return=skipped
+
+[produce_bakingtray]
+return=skipped unless economy needs bakingtray
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=bakingtray
+
+[produce_bucket]
+return=skipped unless economy needs bucket
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=bucket
+
+[produce_fire_tongs]
+return=skipped unless economy needs fire_tongs
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=fire_tongs
+
+[produce_fishing_net]
+return=skipped unless economy needs fishing_net
+consume=spidercloth:2
+sleep=32000
+animate=working 35000
+produce=fishing_net
+
+[produce_hammer]
+return=skipped unless economy needs hammer
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=hammer
+
+[produce_hook_pole]
+return=skipped unless economy needs hook_pole
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=hook_pole
+
+[produce_hunting_bow]
+return=skipped unless economy needs hunting_bow
+consume=trunk spidercloth
+sleep=32000
+animate=working 35000
+produce=hunting_bow
+
+[produce_milking_tongs]
+return=skipped unless economy needs milking_tongs
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=milking_tongs
+
+[produce_pick]
+return=skipped unless economy needs pick
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=pick
+
+[produce_saw]
+return=skipped unless economy needs saw
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=saw
+
+[produce_scythe]
+return=skipped unless economy needs scythe
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=scythe
+
+[produce_shovel]
+return=skipped unless economy needs shovel
+consume=iron trunk
+sleep=32000
+animate=working 35000
+produce=shovel
+
+[idle]
+pics=toolsmith_i_??.png
+hotspot=63 63
+
+[working]
+pics=toolsmith_i_??.png
+hotspot=63 63

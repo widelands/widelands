@@ -1,0 +1,8 @@
+[global]
+type=ware
+help=_"Already one of the best tridents of the atlantids. Only used by very good fighters."
+
+# A simple double trident
+[idle]
+pics=idle.png
+hotspot=10 17

@@ -1,0 +1,41 @@
+[global]
+type=production
+size=mine
+worker=miner,miner,miner
+program=work
+output=goldore
+stopable=yes
+
+[inputs]
+bread=6
+smoked_fish=6
+smoked_meat=6
+
+[work]
+consume=smoked_fish,smoked_meat:2 bread:2
+sleep=45000
+animate=working 20000
+mine=gold 4 100 5
+produce=goldore
+animate=working 20000
+mine=gold 4 100 5
+produce=goldore
+animate=working 20000
+mine=gold 4 100 5
+produce=goldore
+
+
+[buildcost]
+trunk=7
+planks=4
+spidercloth=1
+
+[idle]
+pics=goldmine_i_??.png
+hotspot=51 55
+playercolor=true
+
+[working]
+pics=goldmine_i_??.png
+hotspot=51 55
+playercolor=true

@@ -1,0 +1,79 @@
+[global]
+type=production
+size=mine
+worker=miner,miner,miner
+program=mine_stone
+program=mine_mountain_crystal
+program=mine_diamond
+program=work
+output=diamond
+output=mountain_crystal
+output=stone
+stopable=yes
+
+[inputs]
+bread=6
+smoked_fish=6
+smoked_meat=6
+
+[work]
+call=mine_stone
+call=mine_mountain_crystal
+call=mine_diamond
+return=skipped
+
+[mine_stone]
+consume=smoked_fish,smoked_meat:2 bread:2
+sleep=45000
+animate=working 20000
+mine=granit 4 100 5
+produce=stone:2
+animate=working 20000
+mine=granit 4 100 5
+produce=stone:2
+animate=working 20000
+mine=granit 4 100 5
+produce=stone
+mine=granit 4 100 5
+produce=mountain_crystal
+
+[mine_mountain_crystal]
+consume=smoked_fish,smoked_meat:2 bread:2
+sleep=45000
+animate=working 20000
+mine=granit 4 100 5
+produce=stone:2
+animate=working 20000
+mine=granit 4 100 5
+produce=stone mountain_crystal
+animate=working 20000
+mine=granit 4 100 5
+produce=mountain_crystal:2
+
+[mine_diamond]
+consume=smoked_fish,smoked_meat:2 bread:2
+sleep=45000
+animate=working 20000
+mine=granit 4 100 5
+produce=diamond
+animate=working 20000
+mine=granit 4 100 5
+produce=diamond
+animate=working 20000
+mine=granit 4 100 5
+produce=stone
+
+[buildcost]
+trunk=7
+planks=4
+spidercloth=1
+
+[idle]
+pics=crystalmine_i_??.png
+hotspot=51 55
+playercolor=true
+
+[working]
+pics=crystalmine_i_??.png
+hotspot=51 55
+playercolor=true

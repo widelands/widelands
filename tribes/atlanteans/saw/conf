@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"Saws are needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith."
+
+[idle]
+pics=idle.png
+hotspot=8 11

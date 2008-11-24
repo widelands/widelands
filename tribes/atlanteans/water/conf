@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"Water is the most essential essence for life! This water is used in many places, for example to make bread."
+
+[idle]
+pics=idle.png
+hotspot=4 8

@@ -1,0 +1,8 @@
+[global]
+type=ware
+help=_"This is an advanced trident for more experienced soldiers."
+
+# A simple, but long trident.
+[idle]
+pics=idle.png
+hotspot=10 17

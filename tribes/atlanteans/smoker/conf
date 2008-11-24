@@ -1,0 +1,19 @@
+[global]
+help=
+type=generic
+
+[buildcost]
+carrier=1
+hook_pole=1
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=5 13
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=5 13

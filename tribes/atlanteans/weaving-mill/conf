@@ -1,0 +1,56 @@
+[global]
+type=production
+size=big
+worker=weaver
+program=produce_spidercloth
+program=produce_tabard
+program=produce_golden_tabard
+program=work
+output=spidercloth
+output=tabard
+output=golden_tabard
+
+[inputs]
+spideryarn=8
+goldyarn=4
+
+[work]
+call=produce_spidercloth
+call=produce_tabard
+call=produce_spidercloth
+call=produce_golden_tabard
+call=produce_spidercloth
+return=skipped
+
+[produce_spidercloth]
+return=skipped unless economy needs spidercloth
+consume=spideryarn
+sleep=40000
+produce=spidercloth
+
+[produce_tabard]
+return=skipped unless economy needs tabard
+consume=spideryarn
+sleep=40000
+produce=tabard
+
+[produce_golden_tabard]
+return=skipped unless economy needs golden_tabard
+consume=spideryarn goldyarn
+sleep=40000
+produce=golden_tabard
+
+[buildcost]
+trunk=3
+stone=4
+planks=2
+
+[idle]
+pics=weaving_mill_i_??.png  # ???
+hotspot=60 64
+playercolor=true
+
+[working]
+pics=weaving_mill_i_??.png  # ???
+hotspot=60 64
+playercolor=true

@@ -1,8 +1,0 @@
-[global]
-descname=_"Hammer"
-help=_"The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=6 10

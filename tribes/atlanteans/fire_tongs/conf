@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
+
+[idle]
+pics=idle.png
+hotspot=8 11

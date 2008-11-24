@@ -1,8 +1,0 @@
-[global]
-descname=_"Steel Trident"
-help=_"This is the medium trident - used by advanced soldiers."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=10 17

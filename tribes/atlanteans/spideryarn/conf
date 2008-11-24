@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"This yarn is produced by spiders, which are breed on spiderfarms."
+
+[idle]
+pics=idle.png
+hotspot=10 17

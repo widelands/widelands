@@ -1,8 +1,0 @@
-[global]
-descname=_"Bakingtray"
-help=_"The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 11

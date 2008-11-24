@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"This is the yellow gold ore."
+
+[idle]
+pics=idle.png
+hotspot=4 4

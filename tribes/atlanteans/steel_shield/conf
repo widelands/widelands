@@ -1,0 +1,8 @@
+[global]
+type=ware
+help=_"This steel shield is used by experienced soldiers"
+
+# A shield with the sign of the atlantids on it.
+[idle]
+pics=idle.png
+hotspot=10 17

@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"Planks are an important build material of the Atlantids."
+
+[idle]
+pics=idle.png
+hotspot=10 17

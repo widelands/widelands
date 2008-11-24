@@ -1,0 +1,8 @@
+[global]
+type=ware
+help=_"The fishing net is used by the fisher and produced by the toolsmith."
+
+# A simple fishing net
+[idle]
+pics=idle.png
+hotspot=10 17

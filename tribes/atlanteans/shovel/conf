@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
+
+[idle]
+pics=idle.png
+hotspot=6 10

@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_"A special tabard for atlantian soldiers."
+
+[idle]
+pics=idle.png
+hotspot=7 11
