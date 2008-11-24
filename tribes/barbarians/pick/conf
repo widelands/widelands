@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_This pick is used by the stonemasons and the miners. It is produced in the metal works.
+
+[idle]
+pics=idle.png
+hotspot=6 11

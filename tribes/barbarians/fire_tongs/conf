@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_The fire tongs are the tool of the smelter, working in the smelting works. Produced in the metal works.
+
+[idle]
+pics=idle.png
+hotspot=8 11

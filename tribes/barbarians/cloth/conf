@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Cloth is needed for barbarian ships. It is produced out of flax.
+
+[idle]
+pics=idle.png
+hotspot=6 5

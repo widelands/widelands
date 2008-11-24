@@ -1,0 +1,10 @@
+[global]
+type=ware
+help=_Trunks are the primary build material of the barbarians.
+
+# Barbarian trunks are made of black wood from the black forrests
+# they come from.
+
+[idle]
+pics=trunk_idle.png
+hotspot=7 11

@@ -1,0 +1,22 @@
+[global]
+type=production
+size=small
+help=The Gamekeeper makes sure that the natural population of animals never drops too low.
+worker=gamekeeper
+program=work
+
+[work]
+sleep=52500
+worker=release
+
+[buildcost]
+trunk=4
+raw_stone=1
+
+[idle]
+pics=gamekeeper_i_??.png
+hotspot=49 45
+
+[build]
+pics=gamekeeper_i_??.png
+hotspot=49 45

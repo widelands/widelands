@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_This is the second most dangerous weapon, the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produce in the axe factory.
+
+[idle]
+pics=idle.png
+hotspot=9 11

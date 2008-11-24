@@ -1,0 +1,48 @@
+[global]
+help=Discovers resources for mining
+type=generic
+program=expedition
+program=search
+soundfx=../../../sound/hammering/geologist_hammer
+
+[buildcost]
+carrier=1
+hammer=1
+
+# Expedition is the main program
+# The specialized geologist command walks the geologist around his starting
+# location, executing the search program from time to time.
+[expedition]
+0=geologist 15 5 search
+
+# Search program, executed when we have found a place to hack on
+[search]
+0=animation hacking 5000
+1=animation idle 2000
+2=playFX ../../../sound/hammering/geologist_hammer 192
+3=animation hacking 3000
+4=geologist-find
+
+[idle]
+pics=idle_??.png
+hotspot=11 22
+fps=10
+playercolor=true
+
+[hacking]
+pics=hacking_??.png
+hotspot=12 18
+fps=10
+playercolor=true
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=10 21
+fps=10
+playercolor=true
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=10 21
+fps=10
+playercolor=true

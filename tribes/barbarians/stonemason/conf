@@ -1,0 +1,43 @@
+[global]
+soundfx=../../../sound/stonecutting/stonecutter
+help=Cuts raw pieces of granit out of laying stones.
+type=generic
+program=cut
+
+[buildcost]
+pick=1
+carrier=1
+
+[cut]
+0=findobject attrib:stone radius:6
+1=walk object
+2=playFX ../../../sound/stonecutting/stonecutter 192
+3=animation hacking 10000
+4=object shrink
+5=createitem raw_stone
+6=return
+
+[idle]
+pics=idle_??.png
+hotspot=10 23
+fps=10
+playercolor=true
+
+[hacking]
+pics=hacking_??.png
+hotspot=19 16
+fps=10
+playercolor=true
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=11 21
+fps=10
+playercolor=true
+
+[walkload]
+dirpics=walkload_!!_??.png
+hotspot=9 21
+fps=10
+playercolor=true
+

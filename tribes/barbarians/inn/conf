@@ -1,0 +1,35 @@
+[global]
+type=production
+size=medium
+buildable=no
+enhanced_building=yes
+enhancement=big_inn
+worker=innkeeper
+program=work
+output=snack
+
+[inputs]
+fish=4
+pittabread=4
+meat=4
+beer=4
+
+[work]
+return=skipped unless economy needs snack
+consume=pittabread fish,meat beer
+sleep=15000
+animate=working 20000
+produce=snack
+
+[buildcost]
+trunk=2
+grout=2
+thatchreed=1
+
+[idle]
+pics=inn_i_??.png  # ???
+hotspot=48 59
+
+[working]
+pics=inn_i_??.png  # ???
+hotspot=48 59

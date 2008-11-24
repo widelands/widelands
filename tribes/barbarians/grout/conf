@@ -1,0 +1,10 @@
+[global]
+type=ware
+help=_Raw stone can be enhanced to grout which delivers solid, non burning build material.
+
+# Grout is something between a pulver and a liquid, it is
+# carried in wooden boxes and has a dark greyish color.
+
+[idle]
+pics=idle.png
+hotspot=5 12

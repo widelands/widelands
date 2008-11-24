@@ -1,8 +1,0 @@
-[global]
-descname=_Strong Beer
-help=_Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=7 14

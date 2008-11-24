@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Besides pitta bread and meat, fish is also a foodstuff for the barbarians.
+
+[idle]
+pics=idle.png
+hotspot=8 11

@@ -1,0 +1,21 @@
+[global]
+type=production
+size=small
+worker=stonemason
+program=work
+output=raw_stone
+
+[work]
+sleep=25000
+worker=cut
+
+[buildcost]
+trunk=4
+
+[idle]
+pics=b_quarry_i_??.png  # ???
+hotspot=47 45
+
+[build]
+pics=b_quarry_b_??.png  # ???
+hotspot=48 43

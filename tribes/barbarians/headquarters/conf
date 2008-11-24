@@ -1,0 +1,16 @@
+# The Headquarters of the barbarians is from the apperance a stable military
+# Building, fortified base and some towers made of black wood. Some flags
+# in the player colors may be present
+
+[global]
+# soundfx=../../../sound/spoken/warehouse-bringitin
+type=warehouse
+size=big
+buildable=no
+subtype=HQ
+conquers=9
+
+[idle]
+pics=hq_i_??.png
+# sfx=0 ../../../sound/spoken/warehouse-bringitin
+hotspot=83 113

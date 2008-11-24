@@ -1,0 +1,35 @@
+[global]
+type=production
+size=mine
+buildable=no
+enhanced_building=yes
+worker=chief-miner,miner
+program=work
+output=goldstone
+stopable=yes
+enhancement=deeper_goldmine
+
+[inputs]
+snack=6
+
+[work]
+sleep=43000
+consume=snack
+animate=working 18000
+mine=gold 2 66 5
+produce=goldstone
+animate=working 18000
+mine=gold 2 66 5
+produce=goldstone
+
+[buildcost]
+trunk=4
+raw_stone=2
+
+[idle]
+pics=deep_goldmine_i_??.png
+hotspot=25 38
+
+[working]
+pics=deep_goldmine_i_??.png
+hotspot=25 38

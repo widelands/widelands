@@ -1,0 +1,9 @@
+[global]
+type=ware
+help=_Thatch reed is used to make the roofs of buildings waterproof.
+
+# Reed is growing near by watersides.
+
+[idle]
+pics=idle.png
+hotspot=8 18

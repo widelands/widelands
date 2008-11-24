@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Build at the metal works.
+
+[idle]
+pics=idle.png
+hotspot=6 10

@@ -1,8 +1,0 @@
-[global]
-descname=_Broad Axe
-help=_Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 11

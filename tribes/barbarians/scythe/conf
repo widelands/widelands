@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_The scythe is the tool of the farmers. It is produced in the metal works.
+
+[idle]
+pics=idle.png
+hotspot=6 6

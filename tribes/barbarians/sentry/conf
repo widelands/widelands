@@ -1,0 +1,15 @@
+[global]
+type=military
+size=small
+heal_per_second=2
+conquers=6
+max_soldiers=2
+max_medics=0
+heal_increase_per_medic=0
+
+[buildcost]
+blackwood=2
+
+[idle]
+pics=sentry_i_??.png
+hotspot=42 36

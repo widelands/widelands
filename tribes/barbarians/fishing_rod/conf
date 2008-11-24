@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Fishing rods are needed by barbarian fishers, to catch fish.
+
+[idle]
+pics=idle.png
+hotspot=8 11

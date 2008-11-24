@@ -1,0 +1,28 @@
+[global]
+type=production
+size=medium
+worker=lumberjack # like lumberjack
+program=work
+output=blackwood
+
+[inputs]
+trunk=8
+
+[work]
+return=skipped unless economy needs blackwood
+consume=trunk:2
+sleep=43000
+animate=working 24000
+produce=blackwood
+
+[buildcost]
+trunk=3
+raw_stone=1
+
+[idle]
+pics=hardener_i_??.png  # ???
+hotspot=41 52
+
+[working]
+pics=hardener_i_??.png  # ???
+hotspot=41 52

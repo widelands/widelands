@@ -1,0 +1,51 @@
+[global]
+type=training
+size=big
+worker=carrier
+max_soldiers=8
+train=evade
+program=Sleep
+program=upgrade_evade_0 # This is needed to run the scripts
+program=upgrade_evade_1
+
+[Sleep]
+sleep=5000
+
+[evade]
+min_level=0
+max_level=1
+
+[upgrade_evade_0]
+check_soldier=evade 0 # Fails when aren't any soldier of level 0 evade
+sleep=30000
+check_soldier=evade 0 # Because the soldier can be expulsed by the player
+consume=pittabread fish,meat strongbeer
+train=evade 0 1
+
+[upgrade_evade_1]
+check_soldier=evade 1 # Fails when aren't any soldier of level 1 evade
+sleep=30000
+check_soldier=evade 1 # Because the soldier can be expulsed by the player
+consume=pittabread:2 fish,meat strongbeer
+train=evade 1 2
+
+[inputs]
+pittabread=10
+fish=6
+meat=6
+strongbeer=6
+
+[buildcost]
+trunk=6
+raw_stone=4
+grout=6
+gold=4
+thatchreed=3
+
+[idle]
+pics=battlearena_i_??.png  # ???
+hotspot=80 77
+
+[working]
+pics=battlearena_i_??.png  # ???
+hotspot=80 77

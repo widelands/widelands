@@ -1,0 +1,48 @@
+[global]
+type=production
+size=medium
+worker=smelter
+output=iron
+output=gold
+program=smelt_iron
+program=smelt_gold
+program=work
+
+[inputs]
+ironore=8
+goldstone=8
+coal=8
+
+[work]
+call=smelt_iron
+call=smelt_gold
+return=skipped
+
+[smelt_iron]
+return=skipped unless economy needs iron
+consume=coal ironore
+sleep=32000
+animate=working 35000
+produce=iron
+
+[smelt_gold]
+return=skipped unless economy needs gold
+consume=coal goldstone
+sleep=32000
+animate=working 35000
+produce=gold
+
+[buildcost]
+trunk=3
+blackwood=1
+raw_stone=1
+grout=1
+thatchreed=2
+
+[idle]
+pics=smelting_works_i_??.png  # ???
+hotspot=50 53
+
+[working]
+pics=smelting_works_i_??.png  # ???
+hotspot=50 53

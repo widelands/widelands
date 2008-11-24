@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_A real meal which satisfies all miners needs
+
+[idle]
+pics=idle.png
+hotspot=7 15

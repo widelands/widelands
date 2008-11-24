@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_An enhanced version of the helmet.
+
+[idle]
+pics=idle.png
+hotspot=8 11

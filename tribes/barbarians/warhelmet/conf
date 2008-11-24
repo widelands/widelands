@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_An enhanced mask for barbarian warriors.
+
+[idle]
+pics=idle.png
+hotspot=8 11

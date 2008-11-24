@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_The barbarian backers are best in making this flat and tasty pitta bread.
+
+[idle]
+pics=bread_idle.png
+hotspot=7 15

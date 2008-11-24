@@ -1,0 +1,15 @@
+[global]
+help=Produces the finest ales to keep warriors strong and happy in training
+type=generic
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=5 13
+
+[walkload]
+dirpics=walkload_!!_??.png
+hotspot=5 13

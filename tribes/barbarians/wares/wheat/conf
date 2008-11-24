@@ -1,8 +1,0 @@
-[global]
-descname=_Wheat
-help=_Wheat is essential for surviving. Delicious pitta bread and strong ales can be made of this wheat.
-menu_pic=wheat_menu.png
-
-[idle]
-pics=wheat_idle.png
-hotspot=4 12

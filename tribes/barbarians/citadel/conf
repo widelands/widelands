@@ -1,0 +1,20 @@
+[global]
+type=military
+size=big
+buildable=no
+max_soldiers=12
+heal_per_second=4
+conquers=12
+max_medics=4
+heal_increase_per_medic=3
+enhanced_building=yes
+
+[buildcost]
+blackwood=9
+trunk=5
+raw_stone=4
+grout=2
+
+[idle]
+pics=citadel_i_??.png
+hotspot=81 90

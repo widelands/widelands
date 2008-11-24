@@ -1,0 +1,21 @@
+[global]
+help=Works deep in the mines to produce coal,iron or gold.
+type=generic
+experience=18-21
+becomes=chief-miner
+
+[buildcost]
+carrier=1
+pick=1
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=5 13
+
+[walkload]
+dirpics=walkload_!!_??.png
+hotspot=5 13

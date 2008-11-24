@@ -1,0 +1,18 @@
+[global]
+help=Baker
+type=generic
+
+[buildcost]
+bakingtray=1
+carrier=1
+
+[idle]
+pics=idle_??.png
+hotspot=5 13
+
+[walk]
+hotspot=5 13
+fps=20
+
+[walkload]
+hotspot=5 13

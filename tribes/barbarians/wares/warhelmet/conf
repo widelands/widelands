@@ -1,8 +1,0 @@
-[global]
-descname=_War Helmet
-help=_An enhanced mask for barbarian warriors.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 11

@@ -1,0 +1,68 @@
+[global]
+soundfx=../../../sound/smiths/smith
+soundfx=../../../sound/smiths/sharpening
+type=production
+size=medium
+buildable=no
+worker=blacksmith
+output=axe
+output=sharpaxe
+output=broadaxe
+enhanced_building=yes
+enhancement=warmill
+program=produce_axe
+program=produce_sharpaxe
+program=produce_broadaxe
+program=work
+
+[inputs]
+iron=8
+coal=8
+
+[work]
+call=produce_axe
+call=produce_sharpaxe
+call=produce_broadaxe
+return=skipped
+
+[produce_axe]
+return=skipped unless economy needs axe
+consume=coal iron
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../sound/smiths/sharpening 192
+produce=axe
+
+[produce_sharpaxe]
+return=skipped unless economy needs sharpaxe
+consume=coal iron:2
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../sound/smiths/sharpening 192
+produce=sharpaxe
+
+[produce_broadaxe]
+return=skipped unless economy needs broadaxe
+consume=coal:2 iron:2
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../sound/smiths/sharpening 192
+produce=broadaxe
+
+[buildcost]
+trunk=1
+blackwood=1
+raw_stone=2
+grout=1
+thatchreed=1
+
+[idle]
+pics=axefactory_i_??.png  # ???
+hotspot=42 55
+
+[working]
+pics=axefactory_i_??.png  # ???
+hotspot=42 55

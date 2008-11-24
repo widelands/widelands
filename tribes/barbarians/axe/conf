@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model.
+
+[idle]
+pics=idle.png
+hotspot=9 11

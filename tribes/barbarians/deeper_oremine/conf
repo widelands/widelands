@@ -1,0 +1,37 @@
+[global]
+type=production
+size=mine
+buildable=no
+enhanced_building=yes
+worker=master-miner,chief-miner,miner
+program=work
+output=ironore
+stopable=yes
+
+[inputs]
+meal=6
+
+[work]
+consume=meal
+sleep=40000
+animate=working 16000
+mine=iron 2 100 10
+produce=ironore
+animate=working 16000
+mine=iron 2 100 10
+produce=ironore:2
+animate=working 16000
+mine=iron 2 100 10
+produce=ironore:2
+
+[buildcost]
+trunk=4
+raw_stone=2
+
+[idle]
+pics=deeper_oremine_i_??.png
+hotspot=45 45
+
+[working]
+pics=deeper_oremine_i_??.png
+hotspot=45 45

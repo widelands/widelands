@@ -1,0 +1,32 @@
+[global]
+type=production
+size=medium
+worker=brewer
+program=work
+output=beer
+enhancement=brewery
+
+[inputs]
+water=8
+wheat=8
+
+[work]
+return=skipped unless economy needs beer or workers need experience
+consume=water wheat
+sleep=30000
+animate=working 30000
+produce=beer
+
+[buildcost]
+trunk=3
+blackwood=2
+raw_stone=3
+thatchreed=2
+
+[idle]
+pics=micro-brewery_i_??.png  # ???
+hotspot=42 52
+
+[working]
+pics=micro-brewery_i_??.png  # ???
+hotspot=42 52

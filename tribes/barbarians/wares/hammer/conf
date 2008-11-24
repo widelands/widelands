@@ -1,8 +1,0 @@
-[global]
-descname=_Hammer
-help=_The hammer is an essential tool. It is needed by the geologist, the worker, the blacksmiths and the helmsmiths. Make sure you always got some in reserve! Build at the metal works.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=6 10

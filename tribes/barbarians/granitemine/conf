@@ -1,0 +1,29 @@
+[global]
+type=production
+size=mine
+worker=miner
+program=work
+output=raw_stone
+stopable=yes
+
+[inputs]
+ration=8
+
+[work]
+consume=ration
+sleep=20000
+animate=working 20000
+mine=granit 2 100 5
+produce=raw_stone:2
+
+[buildcost]
+trunk=4
+raw_stone=2
+
+[idle]
+pics=i_??.png
+hotspot=44 48
+
+[working]
+pics=i_??.png
+hotspot=44 48

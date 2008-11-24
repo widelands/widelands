@@ -1,0 +1,33 @@
+[global]
+type=production
+size=medium
+worker=innkeeper
+program=work
+output=ration
+enhancement=inn
+
+[inputs]
+fish=4
+pittabread=4
+meat=4
+
+[work]
+return=skipped unless economy needs ration
+consume=fish,pittabread,meat
+sleep=14000
+animate=working 19000
+produce=ration
+
+[buildcost]
+trunk=3
+blackwood=2
+raw_stone=1
+thatchreed=1
+
+[idle]
+pics=tavern_i_??.png  # ???
+hotspot=32 56
+
+[working]
+pics=tavern_i_??.png  # ???
+hotspot=32 56

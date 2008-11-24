@@ -1,0 +1,110 @@
+[global]
+type=training
+size=big
+worker=trainer
+max_soldiers=12
+train=attack,hp
+program=Sleep
+program=upgrade_attack_0 # This is needed to run the scripts
+program=upgrade_attack_1
+program=upgrade_attack_2
+program=upgrade_attack_3
+program=upgrade_attack_4
+program=upgrade_hp_0
+program=upgrade_hp_1
+program=upgrade_hp_2
+
+[Sleep]
+sleep=5000
+
+[attack]
+min_level=0
+max_level=4
+
+[hp]
+min_level=0
+max_level=2
+
+[upgrade_attack_0]
+check_soldier=attack 0 # Fails when aren't any soldier of level 0 attack
+sleep=30000
+check_soldier=attack 0 # Because the soldier can be expulsed by the player
+consume=sharpaxe fish,meat,pittabread
+train=attack 0 1
+
+[upgrade_attack_1]
+check_soldier=attack 1
+sleep=30000
+check_soldier=attack 1
+consume=broadaxe fish,meat,pittabread
+train=attack 1 2
+
+[upgrade_attack_2]
+check_soldier=attack 2
+sleep=30000
+check_soldier=attack 2
+consume=bronzeaxe fish,meat,pittabread
+train=attack 2 3
+
+[upgrade_attack_3]
+check_soldier=attack 3
+sleep=30000
+check_soldier=attack 3
+consume=battleaxe fish,meat,pittabread:2
+train=attack 3 4
+
+[upgrade_attack_4]
+check_soldier=attack 4
+sleep=30000
+check_soldier=attack 4
+consume=warriorsaxe fish,meat,pittabread:2
+train=attack 4 5
+
+[upgrade_hp_0]
+check_soldier=hp 0
+sleep=30000
+check_soldier=hp 0
+consume=helm fish,meat,pittabread
+train=hp 0 1
+
+[upgrade_hp_1]
+check_soldier=hp 1
+sleep=30000
+check_soldier=hp 1
+consume=mask fish,meat,pittabread:2
+train=hp 1 2
+
+[upgrade_hp_2]
+check_soldier=hp 2
+sleep=30000
+check_soldier=hp 2
+consume=warhelmet fish,meat,pittabread:3
+train=hp 2 3
+
+[inputs]
+pittabread=10
+fish=6
+meat=6
+sharpaxe=2
+broadaxe=2
+bronzeaxe=2
+battleaxe=2
+warriorsaxe=2
+helm=2
+mask=2
+warhelmet=2
+
+[buildcost]
+trunk=6
+raw_stone=4
+grout=6
+gold=4
+thatchreed=3
+
+[idle]
+pics=trainingscamp_i_??.png  # ???
+hotspot=77 76
+
+[working]
+pics=trainingscamp_i_??.png  # ???
+hotspot=77 76

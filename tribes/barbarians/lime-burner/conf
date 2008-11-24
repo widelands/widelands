@@ -1,0 +1,24 @@
+[global]
+help=burns lime in the lime kilm
+type=generic
+
+[buildcost]
+carrier=1
+
+[idle]
+pics=idle_??.png
+hotspot=6 21
+fps=1
+playercolor=true
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=8 21
+fps=10
+playercolor=true
+
+[walkload]
+dirpics=walkload_!!_??.png
+hotspot=9 22
+fps=10
+playercolor=true

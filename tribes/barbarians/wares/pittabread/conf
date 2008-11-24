@@ -1,8 +1,0 @@
-[global]
-descname=_Pitta Bread
-help=_The barbarian backers are best in making this flat and tasty pitta bread.
-menu_pic=bread_menu.png
-
-[idle]
-pics=bread_idle.png
-hotspot=7 15

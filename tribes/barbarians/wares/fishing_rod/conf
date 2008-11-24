@@ -1,8 +1,0 @@
-[global]
-descname=_Fishing Rod
-help=_Fishing rods are needed by barbarian fishers, to catch fish.
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=8 11

@@ -1,0 +1,7 @@
+[global]
+type=ware
+help=_Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory.
+
+[idle]
+pics=idle.png
+hotspot=8 11

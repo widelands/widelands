@@ -1,0 +1,32 @@
+[global]
+type=production
+size=medium
+buildable=no
+enhanced_building=yes
+worker=master-brewer,brewer
+program=work
+output=strongbeer
+
+[inputs]
+water=8
+wheat=8
+
+[work]
+return=skipped unless economy needs strongbeer
+consume=water wheat
+sleep=30000
+animate=working 30000
+produce=strongbeer
+
+[buildcost]
+trunk=3
+raw_stone=1
+thatchreed=1
+
+[idle]
+pics=brewery_i_??.png  # ???
+hotspot=58 56
+
+[working]
+pics=brewery_i_??.png  # ???
+hotspot=58 56

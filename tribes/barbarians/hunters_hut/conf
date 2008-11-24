@@ -1,0 +1,19 @@
+[global]
+type=production
+size=small
+help=The Hunter brings good meat to the colonists
+worker=hunter
+program=work
+output=meat
+
+[work]
+sleep=35000
+worker=hunt
+
+[buildcost]
+trunk=4
+raw_stone=1
+
+[idle]
+pics=hunter_i_??.png
+hotspot=48 43

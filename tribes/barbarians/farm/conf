@@ -1,0 +1,33 @@
+[global]
+soundfx=../../../sound/farm/farm_animal
+type=production
+size=big
+output=wheat
+worker=farmer
+stopable=yes
+program=plant
+program=harvest
+program=work
+
+[work]
+call=plant
+call=harvest
+playFX=../../../sound/farm/farm_animal 192
+return=skipped
+
+[plant]
+sleep=20000
+worker=plant
+
+[harvest]
+sleep=5000
+worker=harvest
+
+[buildcost]
+trunk=4
+blackwood=1
+raw_stone=3
+
+[idle]
+pics=farm_i_??.png  # ???
+hotspot=68 68
