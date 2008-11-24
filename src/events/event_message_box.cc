@@ -27,7 +27,7 @@
 #include "i18n.h"
 #include "map.h"
 #include "profile.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger_time.h"
 #include "wexception.h"
 
 #include "upcast.h"
@@ -71,7 +71,7 @@ void Event_Message_Box::set_nr_buttons(int32_t i) {
 
 
 void Event_Message_Box::set_button_trigger
-	(uint8_t button_number, Trigger_Null * const new_trigger)
+	(uint8_t button_number, Trigger_Time * const new_trigger)
 {
 	assert(button_number < get_nr_buttons());
 	Trigger * const old_trigger = m_buttons[button_number].trigger;
@@ -81,7 +81,7 @@ void Event_Message_Box::set_button_trigger
 		m_buttons[button_number].trigger = new_trigger;
 	}
 }
-Trigger_Null* Event_Message_Box::get_button_trigger(int32_t i) {
+Trigger_Time * Event_Message_Box::get_button_trigger(int32_t const i) {
 	assert(i<get_nr_buttons());
 	return m_buttons[i].trigger;
 }
@@ -140,7 +140,7 @@ void Event_Message_Box::Read(Section & s, Editor_Game_Base & egbase) {
 
 				key [9] = '_'; //  Enable the tail of the key string.
 				if (char const * const trigger_name = s.get_string(key)) {
-					if (upcast(Trigger_Null, trigger, mtm[trigger_name])) {
+					if (upcast(Trigger_Time, trigger, mtm[trigger_name])) {
 						if (not m_is_modal)
 							throw wexception
 								("is not modal although %s=%s", key, trigger_name);

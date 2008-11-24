@@ -24,45 +24,42 @@
 #include "profile.h"
 #include "wexception.h"
 
-#define TRIGGER_VERSION 1
+#define TRIGGER_VERSION 2
 
 namespace Widelands {
 
-Trigger_Time::Trigger_Time(char const * const Name, bool const set)
-	: Trigger(Name, set), m_wait_time(60), m_last_start_time(0)
-	// defaults to one minute
+Trigger_Time::Trigger_Time(char const * const _name, bool const set)
+	: Trigger(_name, set), m_time(Never())
 {}
 
 
 void Trigger_Time::Read(Section & s, Editor_Game_Base &) {
 	try {
-		int32_t const packet_version= s.get_safe_int("version");
-		if (packet_version == TRIGGER_VERSION) {
-			m_wait_time       = s.get_safe_int("wait_time");
-			m_last_start_time = s.get_safe_int("last_start_time");
-		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+		uint32_t const packet_version = s.get_natural("version", 2);
+		if (packet_version == 1)
+			m_time = s.get_safe_natural("wait_time") * 1000;
+		else if (1 < packet_version and packet_version <= TRIGGER_VERSION)
+			m_time = s.get_natural("time", Never());
+		else
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (std::exception const & e) {
 		throw wexception("(time): %s", e.what());
 	}
 }
 
 void Trigger_Time::Write(Section & s, Editor_Game_Base const &) const {
-	s.set_string("type",            "time");
-	s.set_int   ("version",         TRIGGER_VERSION);
-	s.set_int   ("wait_time",       m_wait_time);
-	s.set_int   ("last_start_time", m_last_start_time);
+	s.set_string("type",    "time");
+	s.set_int   ("version", TRIGGER_VERSION);
+	if (m_time != Never())
+		s.set_int("time",    m_time);
 }
 
 /**
  * Check if trigger conditions are done
  */
 void Trigger_Time::check_set_conditions(Game const & game) {
-	if ((game.get_gametime() - m_last_start_time) / 1000 < m_wait_time)
-		return;
-
-	// Time has come. Set us
-	set_trigger(true);
+	if (m_time != Never() and m_time <= game.get_gametime()) //  FIXME simplify this when Time is unsigned
+		set_trigger(true);
 }
 
 /**
@@ -72,7 +69,7 @@ void Trigger_Time::reset_trigger       (Game const & game) {
 	// save new start time
 	// NOTE: if it took a while for an event to note us,
 	// this time the trigger wasn't counting
-	m_last_start_time = game.get_gametime();
+	m_time = Never();
 
 	set_trigger(false);
 }

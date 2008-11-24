@@ -76,6 +76,8 @@ public:
 		void mark_used();
 
 		int32_t get_int() const;
+		uint32_t get_natural () const;
+		uint32_t get_positive() const;
 		bool get_bool() const;
 		char const * get_string() const {return m_value;}
 		char       * get_string()       {return m_value;}
@@ -114,6 +116,12 @@ public:
 	int32_t                  get_int
 		(char             const * name,
 		 int32_t                  def = 0);
+	uint32_t                 get_natural
+		(char             const * name,
+		 uint32_t                 def = 0);
+	uint32_t                 get_positive
+		(char             const * name,
+		 uint32_t                 def = 1);
 	bool                     get_bool
 		(char             const * name,
 		 bool                     def = false);
@@ -130,6 +138,10 @@ public:
 
 	int32_t                   get_safe_int
 		(const char * name);
+	uint32_t                  get_safe_natural
+		(char const * name);
+	uint32_t                  get_safe_positive
+		(char const * name);
 	bool                      get_safe_bool
 		(const char * name);
 	const char *              get_safe_string

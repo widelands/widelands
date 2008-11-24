@@ -79,7 +79,7 @@ private:
 	UI::Textarea           * m_current_trigger_ta;
 	UI::Listselect<void *> * m_buttons_ls;
 
-	std::vector<int32_t> m_null_triggers;
+	std::vector<int32_t> m_button_triggers;
 };
 
 #endif

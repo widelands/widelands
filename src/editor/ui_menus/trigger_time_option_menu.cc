@@ -56,15 +56,15 @@ m_trigger (trigger)
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
 
-	int32_t wait_time = trigger.get_wait_time();
-	m_values[0] = wait_time / 3600 /   10; //  hours
-	m_values[1] = wait_time / 3600 %   10;
-	wait_time  -= wait_time / 3600 * 3600;
-	m_values[2] = wait_time /   60 /   10; //  minutes
-	m_values[3] = wait_time /   60 %   10;
-	wait_time  -= wait_time /   60 *   60;
-	m_values[4] = wait_time        /   10; //  seconds
-	m_values[5] = wait_time        %   10;
+	Widelands::Time time = trigger.time();
+	m_values[0] = time / 3600 /   10; //  hours
+	m_values[1] = time / 3600 %   10;
+	time       -= time / 3600 * 3600;
+	m_values[2] = time /   60 /   10; //  minutes
+	m_values[3] = time /   60 %   10;
+	time       -= time /   60 *   60;
+	m_values[4] = time        /   10; //  seconds
+	m_values[5] = time        %   10;
 
 	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
 	m_name = new UI::EditBox
@@ -252,7 +252,7 @@ bool Trigger_Time_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t
 
 
 void Trigger_Time_Option_Menu::clicked_ok() {
-	m_trigger.set_wait_time
+	m_trigger.set_time
 		((m_values[0] * 10 + m_values[1]) * 3600
 		 +
 		 (m_values[2] * 10 + m_values[3]) * 60

@@ -17,7 +17,7 @@
  *
  */
 
-#include "event_set_null_trigger.h"
+#include "event_set_timer.h"
 
 #include "editor_game_base.h"
 #include "filesystem.h"
@@ -26,7 +26,7 @@
 #include "interactive_base.h"
 #include "map.h"
 #include "profile.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger_time.h"
 #include "wexception.h"
 
 #include "upcast.h"
@@ -35,52 +35,50 @@
 
 namespace Widelands {
 
-Event_Set_Null_Trigger::Event_Set_Null_Trigger
+Event_Set_Timer::Event_Set_Timer
 	(char const * const Name, State const S)
-	: Event(Name, S), m_trigger(0), m_setto(true)
+	: Event(Name, S), m_trigger(0)
 {}
 
 
 
-Event_Set_Null_Trigger::~Event_Set_Null_Trigger() {
+Event_Set_Timer::~Event_Set_Timer() {
 	set_trigger(0);
 }
 
 
-void Event_Set_Null_Trigger::Read(Section & s, Editor_Game_Base & egbase) {
+void Event_Set_Timer::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
-		const int32_t event_version = s.get_safe_int("version");
+		uint32_t const event_version = s.get_safe_positive("version");
 		if (event_version == EVENT_VERSION) {
 			char const * const trigger_name = s.get_safe_string("trigger");
-			if (upcast(Trigger_Null, trig, egbase.map().mtm()[trigger_name])) {
-			// Bit Hackish, hopefully the user paid attention
+			if (upcast(Trigger_Time, trig, egbase.map().mtm()[trigger_name]))
 				set_trigger(trig);
-				m_setto = s.get_bool("setto", true);
-			} else
+			else
 				throw wexception
-					("trigger refers to \"%s\", " "which is not a null trigger",
-					 trigger_name);
+					("trigger \"%s\": not a time trigger", trigger_name);
+			m_duration = s.get_natural("duration", 0);
 		} else
 			throw wexception("unknown/unhandled version %u", event_version);
 	} catch (_wexception const & e) {
-		throw wexception("(set null trigger): %s", e.what());
+		throw wexception("(set_timer): %s", e.what());
 	}
 }
 
-void Event_Set_Null_Trigger::Write(Section & s, Editor_Game_Base &) const {
+void Event_Set_Timer::Write(Section & s, Editor_Game_Base &) const {
 	assert(m_trigger);
-	s.set_string ("type",    "set_null_trigger");
-	s.set_int    ("version", EVENT_VERSION);
-	s.set_string ("trigger", m_trigger->name());
-	if (not m_setto)
-		s.set_bool("setto",   false);
+	s.set_string ("type",     "set_timer");
+	s.set_int    ("version",  EVENT_VERSION);
+	s.set_string ("trigger",  m_trigger->name());
+	if (m_duration)
+		s.set_int ("duration", m_duration);
 }
 
 
-Event::State Event_Set_Null_Trigger::run(Game* game) {
+Event::State Event_Set_Timer::run(Game * game) {
 	assert(m_trigger);
 
-	m_trigger->set_trigger_manually(m_setto);
+	m_trigger->set_time(game->get_gametime() + m_duration);
 	m_trigger->check_set_conditions(*game); // forcefully update this trigger
 
 	return m_state = DONE;

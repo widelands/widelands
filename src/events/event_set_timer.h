@@ -17,26 +17,25 @@
  *
  */
 
-#ifndef EVENT_SET_NULL_TRIGGER_H
-#define EVENT_SET_NULL_TRIGGER_H
+#ifndef EVENT_SET_TIMER_H
+#define EVENT_SET_TIMER_H
 
 #include "event.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger_time.h"
+#include "widelands.h"
 
 namespace Widelands {
 
 struct Editor_Game_Base;
 
 /**
- * This event is able to set a null trigger to a certain state
+ * This event is able to set a time trigger to trigger after a certain time
  */
-struct Event_Set_Null_Trigger : public Event, public Referencer<Trigger> {
-	Event_Set_Null_Trigger(char const * name, State);
-	~Event_Set_Null_Trigger();
+struct Event_Set_Timer : public Event, public Referencer<Trigger> {
+	Event_Set_Timer(char const * name, State);
+	~Event_Set_Timer();
 
-	std::string identifier() const {
-		return "Event (set null trigger): " + name();
-	}
+	std::string identifier() const {return "Event (set timer): " + name();}
 
 	int32_t option_menu(Editor_Interactive &);
 
@@ -45,18 +44,18 @@ struct Event_Set_Null_Trigger : public Event, public Referencer<Trigger> {
 	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
-	void set_trigger(Trigger_Null * const new_trigger) {
+	void set_trigger(Trigger_Time * const new_trigger) {
 		if (new_trigger != m_trigger) {
 			if   (m_trigger) Referencer<Trigger>::unreference  (*m_trigger);
 			if (new_trigger) Referencer<Trigger>::  reference(*new_trigger);
 			m_trigger = new_trigger;
 		}
 	}
-	Trigger_Null * get_trigger() const {return m_trigger;}
+	Trigger_Time * get_trigger() const {return m_trigger;}
 
 private:
-	Trigger_Null * m_trigger;
-	bool           m_setto;
+	Trigger_Time * m_trigger;
+	Duration       m_duration;
 };
 
 };

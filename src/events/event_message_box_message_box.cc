@@ -24,7 +24,7 @@
 #include "graphic.h"
 #include "editorinteractive.h"
 #include "constants.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger_time.h"
 
 #include "ui_button.h"
 #include "ui_multilinetextarea.h"
@@ -128,11 +128,11 @@ void Message_Box_Event_Message_Box::clicked(int32_t i) {
 		}
 	} else {
 		//  One of the buttons has been pressed
-		if (Widelands::Trigger_Null * const t = m_trigger[i]) {
+		if (Widelands::Trigger_Time * const t = m_trigger[i]) {
 			//  FIXME This is totally broken. Here the click directly affects the
 			//  FIXME game state, whitout passing the command queue. This fails
 			//  FIXME horribly with replays or network games. (bug #2326416)
-			t->set_trigger_manually(true);
+			t->set_time(0);
 			t->check_set_conditions(*m_game); // forcefully update this trigger
 		}
 		clicked(-1);

@@ -23,7 +23,7 @@
 #include "filesystem.h"
 #include "map.h"
 #include "profile.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger_time.h"
 
 namespace Widelands {
 

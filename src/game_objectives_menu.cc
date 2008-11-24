@@ -21,7 +21,7 @@
 
 #include "interactive_player.h"
 #include "player.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger_time.h"
 
 
 inline Interactive_Player & GameObjectivesMenu::iaplayer() const {

@@ -21,6 +21,7 @@
 #define TRIGGER_TIME_H
 
 #include "trigger.h"
+#include "widelands.h"
 
 namespace Widelands {
 
@@ -29,7 +30,7 @@ namespace Widelands {
  * or see trigger.h
  */
 struct Trigger_Time : public Trigger {
-	Trigger_Time(char const * Name, bool set);
+	Trigger_Time(char const * name, bool set = false);
 
 	int32_t option_menu(Editor_Interactive &);
 
@@ -39,13 +40,11 @@ struct Trigger_Time : public Trigger {
 	void Read (Section &, Editor_Game_Base       &);
 	void Write(Section &, Editor_Game_Base const &) const;
 
-	void set_wait_time      (int32_t i) {m_wait_time       = i;}
-	void set_last_start_time(int32_t i) {m_last_start_time = i;}
-	int32_t get_wait_time() const {return m_wait_time;}
+	void set_time(Time const t) {m_time = t;}
+	Time time() const {return m_time;}
 
 private:
-	uint32_t m_wait_time; // in seconds
-	uint32_t m_last_start_time;
+	Time m_time;
 };
 
 };

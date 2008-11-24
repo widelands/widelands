@@ -113,6 +113,26 @@ int32_t Section::Value::get_int() const
 }
 
 
+uint32_t Section::Value::get_natural() const
+{
+	char * endp;
+	long long int i = strtoll(m_value, &endp, 0);
+	if (*endp or i < 0)
+		throw wexception("%s: '%s' is not natural", get_name(), m_value);
+	return i;
+}
+
+
+uint32_t Section::Value::get_positive() const
+{
+	char * endp;
+	long long int i = strtoll(m_value, &endp, 0);
+	if (*endp or i < 1)
+		throw wexception("%s: '%s' is not positive", get_name(), m_value);
+	return i;
+}
+
+
 bool Section::Value::get_bool() const
 {
 	for (int32_t i = 0; i < TRUE_WORDS; ++i)
@@ -315,6 +335,26 @@ int32_t Section::get_safe_int(const char *name)
 }
 
 
+/// Return the natural value of the given key or throw an exception.
+uint32_t Section::get_safe_natural(char const * const name)
+{
+	if (Value * const v = get_val(name))
+		return v->get_natural();
+	else
+		throw wexception("[%s]: missing natural key '%s'", get_name(), name);
+}
+
+
+/// Return the positive value of the given key or throw an exception.
+uint32_t Section::get_safe_positive(char const * const name)
+{
+	if (Value * const v = get_val(name))
+		return v->get_positive();
+	else
+		throw wexception("[%s]: missing positive key '%s'", get_name(), name);
+}
+
+
 /** Section::get_safe_bool(const char *name)
  *
  * Return the boolean value of the given key or throw an exception if a
@@ -448,6 +488,36 @@ int32_t Section::get_int(const char *name, int32_t def)
 		m_profile->error("%s", e.what());
 		return def;
 	}
+}
+
+
+uint32_t Section::get_natural(char const * const name, uint32_t const def)
+{
+	if (Value * const v = get_val(name))
+		try {
+			return v->get_natural();
+		} catch (std::exception &e) {
+			m_profile->error("%s", e.what());
+			return def;
+		}
+	else
+		return def;
+
+}
+
+
+uint32_t Section::get_positive(char const * const name, uint32_t const def)
+{
+	if (Value * const v = get_val(name))
+		try {
+			return v->get_natural();
+		} catch (std::exception &e) {
+			m_profile->error("%s", e.what());
+			return def;
+		}
+	else
+		return def;
+
 }
 
 

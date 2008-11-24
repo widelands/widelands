@@ -29,7 +29,7 @@ namespace UI {struct Panel;};
 namespace Widelands {
 
 struct Trigger;
-struct Trigger_Null;
+struct Trigger_Time;
 struct Editor_Game_Base;
 
 /**
@@ -60,8 +60,8 @@ struct Event_Message_Box : public Event, public Referencer<Trigger> {
 	void set_dimensions(int32_t w, int32_t h) {m_width = w; m_height = h;}
 	int32_t get_w() const {return m_width;}
 	int32_t get_h() const {return m_height;}
-	void set_button_trigger(uint8_t button_number, Trigger_Null *);
-	Trigger_Null * get_button_trigger(int32_t);
+	void set_button_trigger(uint8_t button_number, Trigger_Time *);
+	Trigger_Time * get_button_trigger(int32_t);
 	void set_button_name(int32_t, std::string);
 	char const * get_button_name(int32_t);
 	void set_nr_buttons(int32_t);
@@ -77,7 +77,7 @@ struct Event_Message_Box : public Event, public Referencer<Trigger> {
 private:
 	struct Button_Descr {
 		std::string    name;
-		Trigger_Null * trigger;
+		Trigger_Time * trigger;
 	};
 
 	std::string m_text;

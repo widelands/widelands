@@ -24,7 +24,7 @@
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "map.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger_time.h"
 
 #include "ui_button.h"
 #include "ui_checkbox.h"
@@ -193,13 +193,13 @@ m_event   (event)
 	Manager<Widelands::Trigger> const & mtm = parent.egbase().map().mtm();
 	Manager<Widelands::Trigger>::Index const nr_triggs = mtm.size();
 	for (Manager<Widelands::Trigger>::Index i = 0; i < nr_triggs; ++i) {
-		if (dynamic_cast<Widelands::Trigger_Null const *>(&mtm[i]))
-			m_null_triggers.push_back(i);
+		if (dynamic_cast<Widelands::Trigger_Time const *>(&mtm[i]))
+			m_button_triggers.push_back(i);
 	}
 
 	for (int32_t i = 0; i < m_event.get_nr_buttons(); ++i) {
 		m_buttons[i].name = m_event.get_button_name(i);
-		for (size_t j = 0; j < m_null_triggers.size(); ++j) {
+		for (size_t j = 0; j < m_button_triggers.size(); ++j) {
 			//  Get this trigger's index.
 			int32_t foundidx = -1;
 			for (Manager<Widelands::Trigger>::Index x = 0; x < nr_triggs; ++x)
@@ -208,7 +208,7 @@ m_event   (event)
 					break;
 				}
 
-			if (foundidx == m_null_triggers[j])
+			if (foundidx == m_button_triggers[j])
 				m_buttons[i].trigger=j;
 		}
 	}
@@ -268,8 +268,8 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 			 m_buttons[b].trigger == -1 ?
 			 0
 			 :
-			 dynamic_cast<Widelands::Trigger_Null *>
-			 	(&mtm[m_null_triggers[m_buttons[b].trigger]]));
+			 dynamic_cast<Widelands::Trigger_Time *>
+			 	(&mtm[m_button_triggers[m_buttons[b].trigger]]));
 	}
 	end_modal(1);
 }
@@ -294,7 +294,7 @@ void Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase() {
 void Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease() {
 	--m_buttons[m_ls_selected].trigger;
 	if (m_buttons[m_ls_selected].trigger < -1)
-		m_buttons[m_ls_selected].trigger = m_null_triggers.size() - 1;
+		m_buttons[m_ls_selected].trigger = m_button_triggers.size() - 1;
 	update();
 }
 
@@ -304,7 +304,7 @@ void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
 	if
 		(m_buttons[m_ls_selected].trigger
 		 >=
-		 static_cast<int32_t>(m_null_triggers.size()))
+		 static_cast<int32_t>(m_button_triggers.size()))
 		m_buttons[m_ls_selected].trigger = -1;
 	update();
 }
@@ -317,7 +317,7 @@ void Event_Message_Box_Option_Menu::update() {
 	if (m_ls_selected >= m_nr_buttons)
 		m_buttons_ls->select(0);
 
-	if (!m_null_triggers.size()) //  No triggers, no other buttons.
+	if (!m_button_triggers.size()) //  No triggers, no other buttons.
 		m_nr_buttons = 1;
 
 	m_buttons_ls->clear();
@@ -334,13 +334,14 @@ void Event_Message_Box_Option_Menu::update() {
 
 	m_button_name->setText(m_buttons[m_ls_selected].name);
 
-	if (m_nr_buttons && m_null_triggers.size()) {
+	if (m_nr_buttons && m_button_triggers.size()) {
 		m_current_trigger_ta->set_text
 			(m_buttons[m_ls_selected].trigger == -1 ?
 			 "none"
 			 :
 			 eia().egbase().map().mtm()
-			 [m_null_triggers[m_buttons[m_ls_selected].trigger]].name());
+			 	[m_button_triggers[m_buttons[m_ls_selected].trigger]]
+			 .name());
 	} else {
 		m_current_trigger_ta->set_text("---");
 		m_buttons[0].trigger=-1;

@@ -23,7 +23,7 @@
 #include "i18n.h"
 #include "map.h"
 #include "trigger/trigger.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger_time.h"
 
 #include "ui_button.h"
 #include "ui_checkbox.h"
@@ -239,8 +239,8 @@ void Editor_Objectives_Menu::clicked_new() {
 	Objective & objective = *new Objective;
 	objective.set_name(buffer);
 	mom.register_new(objective);
-	//  create a null trigger for this
-	Widelands::Trigger_Null & trigger = *new Widelands::Trigger_Null(buffer);
+	//  create a timer for this
+	Widelands::Trigger_Time & trigger = *new Widelands::Trigger_Time(buffer);
 	objective.set_trigger(&trigger);
 	mtm.register_new(trigger);
 	insert_objective(objective);

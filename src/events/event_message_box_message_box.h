@@ -27,7 +27,7 @@
 namespace Widelands {
 struct Event_Message_Box;
 struct Game;
-struct Trigger_Null;
+struct Trigger_Time;
 };
 
 struct Message_Box_Event_Message_Box : public UI::Window {
@@ -41,7 +41,7 @@ private:
 	Widelands::Game                      * m_game;
 	void clicked(int32_t);
 	bool                                   m_is_modal;
-	std::vector<Widelands::Trigger_Null *> m_trigger;
+	std::vector<Widelands::Trigger_Time *> m_trigger;
 };
 
 #endif

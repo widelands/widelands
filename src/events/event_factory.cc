@@ -21,17 +21,17 @@
 
 #include "event_allow_building.h"
 #include "event_building.h"
+#include "event_conquer_area.h"
 #include "event_flag.h"
 #include "event_immovable.h"
-#include "event_conquer_area.h"
 #include "event_message_box.h"
 #include "event_move_view.h"
 #include "event_road.h"
 #include "event_unhide_area.h"
-#include "event_set_null_trigger.h"
 #include "event_reveal_campaign.h"
 #include "event_reveal_objective.h"
 #include "event_reveal_scenario.h"
+#include "event_set_timer.h"
 #include "wexception.h"
 
 #include "i18n.h"
@@ -45,7 +45,8 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	{
 		"allow_building",         _("Allow building type"),
 		_
-		("Allows (or forbids) the construction of a building type for a player")
+			("Allows (or forbids) the construction of a building type for a "
+			 "player.")
 	},
 	{
 		"building",               _("Create building"),
@@ -54,53 +55,53 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	{
 		"conquer_area",           _("Conquer area"),
 		_
-		("Gives ownership of all unowned locations whithin an area to the "
-		 "player")
+			("Gives ownership of all unowned locations whithin an area to the "
+			 "player.")
 	},
 	{
 		"flag",                   _("Create flag"),
-		_("Create a flag")
+		_("Create a flag.")
 	},
 	{
 		"immovable",              _("Create immovable"),
-		_("Create an immovable")
+		_("Create an immovable.")
 	},
 	{
 		"message_box",            _("Show message box"),
 		_
-		("This Event shows a messagebox. The user can choose to make it "
-		 "modal/non-modal and to add a picture. Events can be assigned to each "
-		 "button to use this as a Choose Dialog for the user")
+			("Show a message box. It can be modal or and have a picture. An "
+			 "events can be assigned to each button to give the user chose the "
+			 "course of the game.")
 	},
 	{
 		"move_view",              _("Move view"),
-		_("This Event centers the Players View on a certain location")
+		_("Center the player's view on a certain location.")
 	},
 	{
 		"reveal_campaign",        _("Reveal campaign"),
-		_("Reveal a campaign")
+		_("Reveal a campaign.")
 	},
 	{
 		"reveal_objective",       _("Reveal objective"),
-		_("Reveal an objective")
+		_("Reveal an objective.")
 	},
 	{
 		"reveal_scenario",        _("Reveal scenario"),
-		_("Reveal a scenario")
+		_("Reveal a scenario.")
 	},
 	{
 		"road",                   _("Create road"),
 		_("Create a road and optionally place a carrier on it")
 	},
 	{
-		"set_null_trigger",       _("Set null trigger"),
-		_("Manually set a Null Trigger to a given value")
+		"set_timer",        _("Set timer"),
+		_("Set a timer to trigger after a certain duration.")
 	},
 	{
 		"unhide_area",            _("Unhide area"),
 		_
-		("Gives vision for a specified amount of time of all locations whithin "
-		 "an area to the player.")
+			("Gives vision for a specified amount of time of all locations "
+			 "whithin an area to the player.")
 	},
 };
 
@@ -127,7 +128,7 @@ Event & create
 	case  8: return *new Event_Reveal_Objective(name, state);
 	case  9: return *new Event_Reveal_Scenario (name, state);
 	case 10: return *new Event_Road            (name, state);
-	case 11: return *new Event_Set_Null_Trigger(name, state);
+	case 11: return *new Event_Set_Timer       (name, state);
 	case 12: return *new Event_Unhide_Area     (name, state);
 	default:
 		assert(false);
@@ -146,6 +147,8 @@ Event & create
 		type_name = "reveal_scenario";
 	if (not strcmp(type_name, "set_campaign_visiblity"))
 		type_name = "reveal_campaign";
+	if (not strcmp(type_name, "set_null_trigger"))
+		type_name = "set_timer";
 
 	size_t i = 0;
 	while (strcmp(type_name, EVENT_TYPE_DESCRIPTIONS[i].id))

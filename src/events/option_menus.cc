@@ -37,7 +37,7 @@
 #include "event_reveal_objective.h"
 #include "event_reveal_scenario.h"
 #include "event_road.h"
-#include "event_set_null_trigger.h"
+#include "event_set_timer.h"
 #include "event_unhide_area.h"
 
 namespace Widelands {
@@ -72,7 +72,7 @@ int32_t Event_Reveal_Scenario           ::option_menu(Editor_Interactive &)
 int32_t Event_Road                      ::option_menu(Editor_Interactive &)
 {return 0;}
 
-int32_t Event_Set_Null_Trigger          ::option_menu(Editor_Interactive &)
+int32_t Event_Set_Timer                 ::option_menu(Editor_Interactive &)
 {return 0;}
 
 int32_t Event_Move_View                 ::option_menu(Editor_Interactive & eia)
