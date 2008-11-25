@@ -49,7 +49,7 @@ private:
 	struct BaseCapsule {
 		virtual ~BaseCapsule() {}
 
-		virtual bool check(Map_Object* obj) const = 0;
+		virtual bool check(Map_Object const * const obj) const = 0;
 		virtual void write(FileWrite*, Editor_Game_Base*, Map_Map_Object_Saver*) const = 0;
 		virtual const RequirementsStorage& storage() const = 0;
 	};
@@ -58,7 +58,7 @@ private:
 	struct Capsule : public BaseCapsule {
 		Capsule(const T& _m) : m(_m) {}
 
-		bool check(Map_Object* obj) const {
+		bool check(Map_Object const * const obj) const {
 			return m.check(obj);
 		}
 
@@ -83,7 +83,7 @@ public:
 	/**
 	 * \return \c true if the object satisfies the requirements.
 	 */
-	bool check(Map_Object* obj) const;
+	bool check(Map_Object const *) const;
 
 	// For Save/Load Games
 	void Read(FileRead *, Editor_Game_Base *, Map_Map_Object_Loader *);
@@ -132,10 +132,9 @@ private:
  * is met. Defaults to \c false if no sub-requirement is added.
  */
 struct RequireOr {
-public:
 	void add(const Requirements& req);
 
-	bool check(Map_Object* obj) const;
+	bool check(Map_Object const *) const;
 	void write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
 
 	static const RequirementsStorage storage;
@@ -150,10 +149,9 @@ private:
  * Defaults to \c true if no sub-requirement is added.
  */
 struct RequireAnd {
-public:
 	void add(const Requirements& req);
 
-	bool check(Map_Object* obj) const;
+	bool check(Map_Object const *) const;
 	void write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
 
 	static const RequirementsStorage storage;
@@ -167,11 +165,10 @@ private:
  * Require that a \ref tAttribute lies in the given, inclusive, range.
  */
 struct RequireAttribute {
-public:
 	RequireAttribute(tAttribute _at, int32_t _min, int32_t _max)
 		: at(_at), min(_min), max(_max) {}
 
-	bool check(Map_Object* obj) const;
+	bool check(Map_Object const *) const;
 	void write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
 
 	static const RequirementsStorage storage;

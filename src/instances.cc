@@ -1,5 +1,3 @@
-#include "productionsite.h"
-#include "upcast.h"
 /*
  * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *

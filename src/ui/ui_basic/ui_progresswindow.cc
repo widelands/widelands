@@ -22,6 +22,7 @@
 #include "font_handler.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
+
 #include <sys/time.h>
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
@@ -43,14 +44,8 @@ ProgressWindow::ProgressWindow(const std::string & background)
 
 ProgressWindow::~ProgressWindow() {
 	const VisualizationArray & visualizations = m_visualizations;
-	const VisualizationArray::const_iterator visualizations_end =
-		visualizations.end();
-	for
-		(VisualizationArray::iterator it = m_visualizations.begin();
-		 it != visualizations_end;
-		 ++it)
-		// inform visualizations
-		(*it)->stop();
+	container_iterate_const(VisualizationArray, visualizations, i)
+		(*i.current)->stop(); //  inform visualizations
 }
 
 void ProgressWindow::draw_background
@@ -157,16 +152,10 @@ void ProgressWindow::step(const std::string & description) {
 	update(repaint);
 }
 
-void ProgressWindow::update(bool repaint) {
+void ProgressWindow::update(bool const repaint) {
 	VisualizationArray & visualizations = m_visualizations;
-	const VisualizationArray::const_iterator visualizations_end =
-		visualizations.end();
-	for
-		(VisualizationArray::iterator it = visualizations.begin();
-		 it != visualizations_end;
-		 ++it)
-			// let visualizations do their work
-			(*it)->update(repaint);
+	container_iterate_const(VisualizationArray, visualizations, i)
+		(*i.current)->update(repaint); //  let visualizations do their work
 
 	g_gr->refresh(false);
 }
@@ -192,14 +181,9 @@ void ProgressWindow::add_visualization(IProgressVisualization * const instance)
 
 void ProgressWindow::remove_visualization(IProgressVisualization * instance) {
 	VisualizationArray & visualizations = m_visualizations;
-	const VisualizationArray::const_iterator visualizations_end =
-		visualizations.end();
-	for
-		(VisualizationArray::iterator it = visualizations.begin();
-		 it != visualizations_end;
-		 ++it)
-		if (*it == instance) {
-			m_visualizations.erase (it);
+	container_iterate(VisualizationArray, visualizations, i)
+		if (*i.current == instance) {
+			m_visualizations.erase (i.current);
 			break;
 		}
 }

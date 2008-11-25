@@ -23,8 +23,17 @@
 #define container_iterate_const(type, container, i)                           \
    for                                                                        \
       (struct {                                                               \
-          type::const_iterator       current;                                  \
-          type::const_iterator const end;                                      \
+          type::const_iterator       current;                                 \
+          type::const_iterator const end;                                     \
+       } i = {(container).begin(), (container).end()};                        \
+       i.current != i.end;                                                    \
+       ++i.current)                                                           \
+
+#define container_iterate(type, container, i)                                 \
+   for                                                                        \
+      (struct {                                                               \
+          type::iterator             current;                                 \
+          type::const_iterator const end;                                     \
        } i = {(container).begin(), (container).end()};                        \
        i.current != i.end;                                                    \
        ++i.current)                                                           \

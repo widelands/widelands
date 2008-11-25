@@ -613,31 +613,24 @@ void Building_Window::setup_capsbuttons()
 		std::set<Building_Index> const & enhancements =
 			m_building->enhancements();
 		Widelands::Tribe_Descr const & tribe = m_player->player().tribe();
-		std::set<Building_Index>::const_iterator const enhancements_end =
-			enhancements.end();
-		for
-			(std::set<Building_Index>::const_iterator it = enhancements.begin();
-			 it != enhancements_end;
-			 ++it)
-		{
-			if (not m_player->player().is_building_allowed(*it))
-				continue;
-
-			Widelands::Building_Descr const & building =
-				*tribe.get_building_descr(*it);
-			char buffer[128];
-			snprintf
-				(buffer, sizeof(buffer),
-				 _("Enhance to %s"), building.descname().c_str());
-			new UI::IDButton<Building_Window, Widelands::Building_Index>
-				(m_capsbuttons,
-				 x, 0, 34, 34,
-				 4,
-				 building.get_buildicon(),
-				 &Building_Window::act_enhance, this, *it, //  button id = building id
-				 buffer);
-			x += 34;
-		}
+		container_iterate_const(std::set<Building_Index>, enhancements, i)
+			if (m_player->player().is_building_allowed(*i.current)) {
+				Widelands::Building_Descr const & building =
+					*tribe.get_building_descr(*i.current);
+				char buffer[128];
+				snprintf
+					(buffer, sizeof(buffer),
+					 _("Enhance to %s"), building.descname().c_str());
+				new UI::IDButton<Building_Window, Widelands::Building_Index>
+					(m_capsbuttons,
+					 x, 0, 34, 34,
+					 4,
+					 building.get_buildicon(),
+					 &Building_Window::act_enhance, this,
+					 *i.current, //  button id = building id
+					 buffer);
+				x += 34;
+			}
 	}
 
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {

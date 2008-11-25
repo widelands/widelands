@@ -420,15 +420,8 @@ void Player::enhance_building
 		// However, they are no longer associated with the building as
 		// workers of that buiding, which is why they will leave for a
 		// warehouse.
-		const std::vector<Worker *>::const_iterator workers_end = workers.end();
-		for
-			(std::vector<Worker *>::const_iterator it = workers.begin();
-			 it != workers_end;
-			 ++it)
-		{
-			Worker & worker = **it;
-			worker.set_location(building);
-		}
+		container_iterate_const(std::vector<Worker *>, workers, i)
+			(*i.current)->set_location(building);
 	}
 }
 
@@ -493,13 +486,9 @@ void Player::remove_economy(Economy* eco) {
 }
 
 bool Player::has_economy(Economy * const economy) const throw () {
-	const std::vector<Economy *>::const_iterator economies_end =
-		m_economies.end();
-	for
-		(std::vector<Economy *>::const_iterator it = m_economies.begin();
-		 it != economies_end;
-		 ++it)
-		if (*it == economy) return true;
+	container_iterate_const(std::vector<Economy *>, m_economies, i)
+		if (*i.current == economy)
+			return true;
 	return false;
 }
 

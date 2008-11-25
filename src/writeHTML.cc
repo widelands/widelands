@@ -30,7 +30,6 @@
 #include "disk_filesystem.h"
 #include "i18n.h"
 
-#include "container_iterate.h"
 #include "upcast.h"
 
 void writeCrossReferences(FileWrite & fw, HTMLReferences const & references) {

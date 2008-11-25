@@ -236,13 +236,8 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 
 	text = word_wrap_text(font, text, wrap);
 	const std::vector<std::string> lines(split_string(text, "\n"));
-	const std::vector<std::string>::const_iterator lines_end = lines.end();
-	for
-		(std::vector<std::string>::const_iterator it = lines.begin();
-		 it != lines_end;
-		 ++it)
-	{
-		const std::string line(it->empty() ? " " : *it);
+	container_iterate_const(std::vector<std::string>, lines, j) {
+		std::string const line(j.current->empty() ? " " : *j.current);
 
 		// render this block in a SDL Surface
 		if
@@ -856,13 +851,8 @@ void Font_Handler::get_size
 	*w = 0;
 	*h = 0;
 	const std::vector<std::string> lines(split_string(text, "\n"));
-	const std::vector<std::string>::const_iterator lines_end = lines.end();
-	for
-		(std::vector<std::string>::const_iterator it = lines.begin();
-		 it != lines_end;
-		 ++it)
-	{
-		const std::string line(it->empty() ? " " : *it);
+	container_iterate_const(std::vector<std::string>, lines, i) {
+		std::string const line(i.current->empty() ? " " : *i.current);
 
 		int32_t line_w, line_h;
 		TTF_SizeUTF8(&font, line.c_str(), &line_w, &line_h);

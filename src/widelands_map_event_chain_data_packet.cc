@@ -194,19 +194,13 @@ throw (_wexception)
 			e.m_trigconditional->get_infix_tokenlist(toklist);
 			assert(toklist.size() < 99); //  because we write 2 decimal digits
 			char key[] = "conditional_element_00\0data"; //  tailed string
-			TriggerConditional::token_vector::const_iterator const toklist_end =
-				toklist.end();
-			for
-				(TriggerConditional::token_vector::const_iterator it =
-				 toklist.begin();
-				 it != toklist_end;
-				 ++it)
+			container_iterate_const(TriggerConditional::token_vector, toklist, j)
 			{
 				s.set_string
-					(key, TriggerConditional_Factory::operators[it->token]);
-				if (it->token == TriggerConditional_Factory::TRIGGER) {
+					(key, TriggerConditional_Factory::operators[j.current->token]);
+				if (j.current->token == TriggerConditional_Factory::TRIGGER) {
 					key[22] = '_'; //  Enable the "_data" tail of the key string.
-					s.set_string(key, it->data->name());
+					s.set_string(key, j.current->data->name());
 					key[22] = '\0'; //  Cut off the tail again.
 				}
 
@@ -221,15 +215,8 @@ throw (_wexception)
 			EventChain::event_vector const & events = e.m_events;
 			assert(events.size() < 99); //  becase we write 2 decimal digits
 			char key[] = "event_00";
-			EventChain::event_vector::const_iterator const events_end =
-				events.end();
-			e.m_events.size();
-			for
-				(EventChain::event_vector::const_iterator it = events.begin();
-				 it != events_end;
-				 ++it)
-			{
-				s.set_string(key, (*it)->name());
+			container_iterate_const(EventChain::event_vector, events, i) {
+				s.set_string(key, (*i.current)->name());
 
 				//  Increment the number in the key string.
 				if (key[7] == '9') {key[7] = '0'; ++key[6];} else ++key[7];

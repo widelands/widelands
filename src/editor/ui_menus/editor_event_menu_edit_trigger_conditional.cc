@@ -218,15 +218,9 @@ m_event_chain(chain)
 	if (cond) { //  add conditional
 		TriggerConditional::token_vector tokens;
 		cond->get_infix_tokenlist(tokens);
-		TriggerConditional::token_vector::const_iterator const tokens_end =
-			tokens.end();
-		for
-			(TriggerConditional::token_vector::const_iterator it = tokens.begin();
-			 it != tokens_end;
-			 ++it)
-		{
+		container_iterate_const(TriggerConditional::token_vector, tokens, i) {
 			Widelands::TriggerConditional_Factory::Token & t =
-				*new Widelands::TriggerConditional_Factory::Token(*it);
+				*new Widelands::TriggerConditional_Factory::Token(*i.current);
 			assert(t.token <= Widelands::TriggerConditional_Factory::TRIGGER);
 			m_construction->add
 				(t.token == Widelands::TriggerConditional_Factory::TRIGGER ?

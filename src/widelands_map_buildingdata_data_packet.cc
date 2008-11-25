@@ -93,23 +93,19 @@ throw (_wexception)
 					{
 						Building::Leave_Queue & leave_queue = building.m_leave_queue;
 						leave_queue.resize(fr.Unsigned16());
-						Building::Leave_Queue::const_iterator const leave_queue_end =
-							leave_queue.end();
-						for
-							(Building::Leave_Queue::iterator it = leave_queue.begin();
-							 it != leave_queue_end;
-							 ++it)
+						container_iterate(Building::Leave_Queue, leave_queue, i)
 							if (uint32_t const leaver_serial = fr.Unsigned32())
 								try {
-									*it = &ol->get<Map_Object>(leaver_serial);
+									*i.current = &ol->get<Map_Object>(leaver_serial);
 								} catch (_wexception const & e) {
 									throw wexception
 										("leave queue item #%lu (%u): %s",
-										 static_cast<long int>(it - leave_queue.begin()),
+										 static_cast<long int>
+										 	(i.current - leave_queue.begin()),
 										 leaver_serial, e.what());
 								}
-						else
-							*it = 0;
+							else
+								*i.current = 0;
 					}
 
 					building.m_leave_time = fr.Unsigned32();
@@ -636,16 +632,10 @@ throw (_wexception)
 
 			{
 				const Building::Leave_Queue & leave_queue = building->m_leave_queue;
-				const Building::Leave_Queue::const_iterator leave_queue_end =
-					leave_queue.end();
 				fw.Unsigned16(leave_queue.size());
-				for
-					(Building::Leave_Queue::const_iterator jt = leave_queue.begin();
-					 jt != leave_queue_end;
-					 ++jt)
-				{
-					assert(os->is_object_known(jt->get(egbase)));
-					fw.Unsigned32(os->get_object_file_index(jt->get(egbase)));
+				container_iterate_const(Building::Leave_Queue, leave_queue, j) {
+					assert(os->is_object_known(j.current->get(egbase)));
+					fw.Unsigned32(os->get_object_file_index(j.current->get(egbase)));
 				}
 			}
 			fw.Unsigned32(building->m_leave_time);
@@ -764,19 +754,14 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	//  Incorporated workers, write sorted after file-serial.
 	fw.Unsigned16(warehouse.m_incorporated_workers.size());
 	std::map<uint32_t, const Worker *> workermap;
-	const std::vector<Object_Ptr>::const_iterator iw_end =
-		warehouse.m_incorporated_workers.end();
-	for
-		(std::vector<Object_Ptr>::const_iterator it =
-		 warehouse.m_incorporated_workers.begin();
-		 it != iw_end;
-		 ++it)
+	container_iterate_const
+		(std::vector<Object_Ptr>, warehouse.m_incorporated_workers, i)
 	{
-		assert(os->is_object_known(it->get(egbase)));
+		assert(os->is_object_known(i.current->get(egbase)));
 		workermap.insert
 			(std::pair<uint32_t, const Worker *>
-			 	(os->get_object_file_index(it->get(egbase)),
-			 	 static_cast<const Worker *>(it->get(egbase))));
+			 	(os->get_object_file_index(i.current->get(egbase)),
+			 	 dynamic_cast<Worker const *>(i.current->get(egbase))));
 	}
 
 	for

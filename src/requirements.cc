@@ -21,14 +21,13 @@
 
 #include "instances.h"
 
+#include "container_iterate.h"
 
 namespace Widelands {
 
-bool Requirements::check(Map_Object* obj) const
+bool Requirements::check(Map_Object const * const obj) const
 {
-	if (!m)
-		return true;
-	return m->check(obj);
+	return !m or m->check(obj);
 }
 
 #define REQUIREMENTS_VERSION 3
@@ -149,7 +148,7 @@ void RequireOr::add(const Requirements& req)
 	m.push_back(req);
 }
 
-bool RequireOr::check(Map_Object* obj) const
+bool RequireOr::check(Map_Object const * const obj) const
 {
 	for
 		(std::vector<Requirements>::const_iterator it = m.begin();
@@ -195,13 +194,10 @@ void RequireAnd::add(const Requirements& req)
 	m.push_back(req);
 }
 
-bool RequireAnd::check(Map_Object* obj) const
+bool RequireAnd::check(Map_Object const * const obj) const
 {
-	for
-		(std::vector<Requirements>::const_iterator it = m.begin();
-		 it != m.end();
-		 ++it)
-		if (!it->check(obj))
+	container_iterate_const(std::vector<Requirements>, m, i)
+		if (!i.current->check(obj))
 			return false;
 
 	return true;
@@ -236,9 +232,9 @@ static Requirements readAnd(FileRead* fr, Editor_Game_Base* egbase, Map_Map_Obje
 const RequirementsStorage RequireAnd::storage(requirementIdAnd, readAnd);
 
 
-bool RequireAttribute::check(Map_Object* obj) const
+bool RequireAttribute::check(Map_Object const * const obj) const
 {
-	int32_t value = obj->get_tattribute(at);
+	int32_t const value = obj->get_tattribute(at);
 
 	return value >= min && value <= max;
 }

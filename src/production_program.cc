@@ -79,12 +79,8 @@ bool ActReturn::Workers_Need_Experience::evaluate
 	(ProductionSite const & ps) const
 {
 	std::vector<Worker *> const & workers = ps.workers();
-	std::vector<Worker *>::const_iterator const workers_end = workers.end();
-	for
-		(std::vector<Worker *>::const_iterator it = workers.begin();
-		 it != workers_end;
-		 ++it)
-		if ((*it)->needs_experience())
+	container_iterate_const(std::vector<Worker *>, workers, i)
+		if ((*i.current)->needs_experience())
 			return true;
 	return false;
 }
@@ -198,32 +194,20 @@ ActReturn::ActReturn
 }
 
 ActReturn::~ActReturn() {
-	Conditions::const_iterator const conditions_end = m_conditions.end();
-	for
-		(Conditions::const_iterator it = m_conditions.begin();
-		 it != conditions_end;
-		 ++it)
-		delete *it;
+	container_iterate_const(Conditions, m_conditions, i)
+		delete *i.current;
 }
 
 void ActReturn::execute(Game & game, ProductionSite & ps) const {
 	if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
-		Conditions::const_iterator const conditions_end = m_conditions.end();
-		for
-			(Conditions::const_iterator it = m_conditions.begin();
-			 it != conditions_end;
-			 ++it)
-			if (not (*it)->evaluate(ps)) //  A condition is false, return.
-				return ps.program_end(game, m_result);
+		container_iterate_const(Conditions, m_conditions, i)
+			if (not (*i.current)->evaluate(ps)) //  A condition is false,
+				return ps.program_end(game, m_result); //  end program.
 		return ps.program_step(game);
 	} else { //  "unless a or b or ..." (all conditions must be false)
-		Conditions::const_iterator const conditions_end = m_conditions.end();
-		for
-			(Conditions::const_iterator it = m_conditions.begin();
-			 it != conditions_end;
-			 ++it)
-			if ((*it)->evaluate(ps)) //  A condition is true, continue program.
-				return ps.program_step(game);
+		container_iterate_const(Conditions, m_conditions, i)
+			if ((*i.current)->evaluate(ps)) //  A condition is true,
+				return ps.program_step(game); //  continue program.
 		return ps.program_end(game, m_result);
 	}
 }
@@ -317,31 +301,18 @@ ActWorker::ActWorker
 		const Workarea_Info & worker_workarea_info
 			= tribe.get_worker_descr(tribe.safe_worker_index(main_worker_name))
 			->get_program(m_program)->get_workarea_info();
-
-		const Workarea_Info::const_iterator worker_workarea_info_end =
-			worker_workarea_info.end();
 		Workarea_Info & building_workarea_info = descr.m_workarea_info;
-		for
-			(Workarea_Info::const_iterator it = worker_workarea_info.begin();
-			 it != worker_workarea_info_end;
-			 ++it)
-		{
+		container_iterate_const(Workarea_Info, worker_workarea_info, i) {
 			std::set<std::string> & building_radius_infos =
-				building_workarea_info[it->first];
-			const std::set<std::string> & descriptions = it->second;
-			const std::set<std::string>::const_iterator descriptions_end =
-				descriptions.end();
-			for
-				(std::set<std::string>::const_iterator de = descriptions.begin();
-				 de != descriptions_end;
-				 ++de)
-			{
+				building_workarea_info[i.current->first];
+			std::set<std::string> const & descriptions = i.current->second;
+			container_iterate_const(std::set<std::string>, descriptions, de) {
 				std::string description = descr.descname();
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
 				description += main_worker_name;
-				description += *de;
+				description += *de.current;
 				building_radius_infos.insert(description);
 			}
 		}

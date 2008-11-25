@@ -38,8 +38,9 @@
 #include "player.h"
 #include "profile.h"
 #include "transport.h"
-#include "upcast.h"
 #include "wlapplication.h"
+
+#include "upcast.h"
 
 using Widelands::Area;
 using Widelands::CoordPath;
@@ -614,13 +615,8 @@ bool Interactive_Base::append_build_road(Coords const field) {
 			Widelands::CheckStepLimited cstep;
 			{
 				std::vector<Coords> const & road_cp = m_buildroad->get_coords();
-				std::vector<Coords>::const_iterator const road_cp_end =
-					road_cp.end();
-				for
-					(std::vector<Coords>::const_iterator it = road_cp.begin();
-					 it != road_cp_end;
-					 ++it)
-					cstep.add_allowed_location(*it);
+				container_iterate_const(std::vector<Coords>, road_cp, i)
+					cstep.add_allowed_location(*i.current);
 			}
 			map.findpath
 				(m_buildroad->get_start(), field, 0, path, cstep, Map::fpBidiCost);

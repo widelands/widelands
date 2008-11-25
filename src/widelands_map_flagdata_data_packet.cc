@@ -252,15 +252,9 @@ void Map_Flagdata_Data_Packet::Write
 
 		//  worker waiting for capacity
 		const std::vector<OPtr<Worker> > & capacity_wait = flag->m_capacity_wait;
-		const std::vector<OPtr<Worker> >::const_iterator capacity_wait_end =
-			capacity_wait.end();
 		fw.Unsigned16(capacity_wait.size());
-		for
-			(std::vector<OPtr<Worker> >::const_iterator it = capacity_wait.begin();
-			 it != capacity_wait_end;
-			 ++it)
-		{
-			const Worker * const obj = it->get(egbase);
+		container_iterate_const(std::vector<OPtr<Worker> >, capacity_wait, i) {
+			Worker const * const obj = i.current->get(egbase);
 			// This is a very crude hack to support old and broken savegames,
 			// where workers weren't correctly removed from the capacity wait queue.
 			// See bug #1919495.
@@ -272,21 +266,16 @@ void Map_Flagdata_Data_Packet::Write
 			}
 		}
 		const std::list<Flag::FlagJob> & flag_jobs = flag->m_flag_jobs;
-		const std::list<Flag::FlagJob>::const_iterator flag_jobs_end =
-			flag_jobs.end();
 		fw.Unsigned16(flag_jobs.size());
-		for
-			(std::list<Flag::FlagJob>::const_iterator it = flag_jobs.begin();
-			 it != flag_jobs_end;
-			 ++it)
-		{
-			if (it->request) {
+		container_iterate_const(std::list<Flag::FlagJob>, flag_jobs, i) {
+			if (i.current->request) {
 				fw.Unsigned8(1);
-				it->request->Write(&fw, egbase, os);
-			} else fw.Unsigned8(0);
+				i.current->request->Write(&fw, egbase, os);
+			} else
+				fw.Unsigned8(0);
 
 
-			fw.String(it->program);
+			fw.String(i.current->program);
 		}
 
 		os->mark_object_as_saved(flag);

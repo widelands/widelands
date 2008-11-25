@@ -28,6 +28,8 @@
 #include "filewrite.h"
 #include "log.h"
 
+#include "container_iterate.h"
+
 #include <cassert>
 #include <cstring>
 #include <set>
@@ -427,14 +429,8 @@ Holds a series of actions to perform for production.
 struct ProductionProgram {
 	ProductionProgram(const std::string & name);
 	~ProductionProgram() {
-		std::vector<ProductionAction *>::const_iterator const actions_end =
-			m_actions.end();
-		for
-			(std::vector<ProductionAction *>::const_iterator it =
-			 m_actions.begin();
-			 it != actions_end;
-			 ++it)
-			delete *it;
+		container_iterate_const(std::vector<ProductionAction *>, m_actions, i)
+			delete *i.current;
 	}
 
 	std::string const & get_name() const {return m_name;}

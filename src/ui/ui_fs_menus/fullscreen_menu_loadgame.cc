@@ -113,13 +113,8 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 	Widelands::Game_Preload_Data_Packet gpdp;
 
 	const filenameset_t & gamefiles = m_gamefiles;
-	const filenameset_t::const_iterator gamefiles_end = gamefiles.end();
-	for
-		(filenameset_t::const_iterator pname = gamefiles.begin();
-		 pname != gamefiles.end();
-		 ++pname)
-	{
-		const char * const name = pname->c_str();
+	container_iterate_const(filenameset_t, gamefiles, i) {
+		char const * const name = i.current->c_str();
 
 		try {
 			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
@@ -135,5 +130,6 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		} catch (_wexception const &) {} //  we simply skip illegal entries
 	}
 
-	if (list.size()) list.select(0);
+	if (list.size())
+		list.select(0);
 }

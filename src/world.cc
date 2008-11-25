@@ -387,9 +387,9 @@ m_texture           (0)
 	std::string str1 = s->get_string("resources", "");
 	if (str1 != "") {
 		int32_t nres = 1;
-		const std::string::const_iterator str1_end = str1.end();
-		for (std::string::const_iterator it = str1.begin(); it != str1_end; ++it)
-			if (*it == ',') ++nres;
+		container_iterate_const(std::string, str1, i)
+			if (*i.current == ',')
+				++nres;
 
 		m_nr_valid_resources =nres;
 		m_valid_resources    = new uint8_t[nres];

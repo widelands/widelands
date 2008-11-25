@@ -211,54 +211,29 @@ void Graphic::flush(uint8_t const module) {
 	assert(not (module & ~(PicMod_UI | PicMod_Menu | PicMod_Game)));
 	// Flush pictures
 
-	{
-		std::vector<Picture>::const_iterator const pictures_end =
-			m_pictures.end();
-		for
-			(std::vector<Picture>::iterator picture = m_pictures.begin();
-			 picture != pictures_end;
-			 ++picture)
-		{
-			if (!picture->module) {
-				assert(0 == picture->surface);
-				assert(0 == picture->u.fname);
-				continue;
-			}
-
-			// unmask the modules that should be flushed
-			if (! (picture->module &= ~module)) {
+	container_iterate(std::vector<Picture>, m_pictures, i) {
+		if        (!  i.current->module)             {
+			assert(0 == i.current->surface);
+			assert(0 == i.current->u.fname);
+		} else if (! (i.current->module &= ~module)) {
+			//  Unmasked the modules that should be flushed.
 			// Once the picture is no longer in any mods, free it.
-				delete picture->surface; picture->surface = 0;
-				if (picture->u.fname) {
-					m_picturemap.erase(picture->u.fname);
-					free(picture->u.fname); picture->u.fname = 0;
-				}
+			delete i.current->surface; i.current->surface = 0;
+			if (i.current->u.fname) {
+				m_picturemap.erase(i.current->u.fname);
+				free(i.current->u.fname); i.current->u.fname = 0;
 			}
 		}
 	}
 
 	// Flush game items
 	if (!module || module & PicMod_Game) {
-		{
-			std::vector<Texture *>::const_iterator const maptextures_end =
-				m_maptextures.end();
-			for
-				(std::vector<Texture *>::iterator it = m_maptextures.begin();
-				 it != maptextures_end;
-				 ++it)
-			delete *it;
-		}
+		container_iterate_const(std::vector<Texture *>, m_maptextures, i)
+			delete *i.current;
 		m_maptextures.clear();
 
-		{
-			std::vector<AnimationGfx *>::const_iterator const animations_end =
-				m_animations.end();
-			for
-				(std::vector<AnimationGfx *>::iterator it = m_animations.begin();
-				 it != animations_end;
-				 ++it)
-			delete *it;
-		}
+		container_iterate_const(std::vector<AnimationGfx *>, m_animations, i)
+			delete *i.current;
 		m_animations.clear();
 
 		delete m_roadtextures;

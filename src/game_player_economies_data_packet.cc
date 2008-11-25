@@ -61,13 +61,7 @@ throw (_wexception)
 					}
 
 					Player::economy_vector ecos(nr_economies);
-					Player::economy_vector::const_iterator const ecos_end =
-						ecos.end();
-					for
-						(Player::economy_vector::iterator it = ecos.begin();
-						 it != ecos_end;
-						 ++it)
-					{
+					container_iterate(Player::economy_vector, ecos, i)
 						if
 							(upcast
 							 	(Flag const,
@@ -78,14 +72,12 @@ throw (_wexception)
 							 	  map[fr.Map_Index32(max_index)])
 							 	 .get_immovable()))
 						{
-							*it = flag->get_economy();
+							*i.current = flag->get_economy();
 							if (packet_version >= 3)
 								flag->get_economy()->Read(fr, game, mol);
-						}
-						else
+						} else
 							throw wexception
 								("there is no flag at the specified location");
-					}
 				} catch (_wexception const & e) {
 					throw wexception("player %u: %s", p, e.what());
 				}
@@ -112,18 +104,12 @@ throw (_wexception)
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, *game, player) {
 		Player::economy_vector const & economies = player->m_economies;
-		Player::economy_vector::const_iterator const economies_end =
-			economies.end();
-		for
-			(Player::economy_vector::const_iterator it = economies.begin();
-			 it != economies_end;
-			 ++it)
-		{
+		container_iterate_const(Player::economy_vector, economies, i) {
 			// Walk the map so that we find a representant.
 			for (Field const * field = &field_0;; ++field) {
 				assert(field < &map[map.max_index()]); //  should never reach end
 				if (upcast(Flag const, flag, field->get_immovable())) {
-					if (flag->get_economy() == *it) {
+					if (flag->get_economy() == *i.current) {
 						fw.Map_Index32(field - &field_0);
 						flag->get_economy()->Write(fw, game, mos);
 						break;

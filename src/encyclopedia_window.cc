@@ -164,32 +164,22 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 		std::vector<ProductionAction *> const & actions =
 			programIt->second->actions();
 
-		const std::vector<ProductionAction *>::const_iterator actions_end =
-			actions.end();
-		for
-			(std::vector<ProductionAction *>::const_iterator it = actions.begin();
-			 it != actions_end;
-			 ++it)
-			if (upcast(ActConsume const, action, *it)) {
+		container_iterate_const(std::vector<ProductionAction *>, actions, i)
+			if (upcast(ActConsume const, action, *i.current)) {
 				ActConsume::Groups const & groups = action->groups();
-				ActConsume::Groups::const_iterator const groups_end =
-					groups.end();
-				for
-					(ActConsume::Groups::const_iterator jt = groups.begin();
-					 jt != groups_end;
-					 ++jt)
-				{
-					std::set<Ware_Index> const & ware_types = jt->first;
+				container_iterate_const(ActConsume::Groups, groups, j) {
+					std::set<Ware_Index> const & ware_types = j.current->first;
 					assert(ware_types.size());
 					std::string ware_type_names;
-					std::set<Ware_Index>::const_iterator const ware_types_end =
-						ware_types.end();
 					for
-						(std::set<Ware_Index>::const_iterator kt =
-						 	ware_types.begin();;)
+						(struct {
+						 	std::set<Ware_Index>::const_iterator       current;
+						 	std::set<Ware_Index>::const_iterator const end;
+						 } k = {ware_types.begin(), ware_types.end()};;)
 					{
-						ware_type_names += tribe.get_ware_descr(*kt)->descname();
-						if (++kt == ware_types_end)
+						ware_type_names +=
+							tribe.get_ware_descr(*k.current)->descname();
+						if (++k.current == k.end)
 							break;
 						ware_type_names += _(" or ");
 					}
@@ -197,9 +187,11 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.
 					compile_assert
-						(std::numeric_limits<typeof(jt->second)>::max() <= 999);
+						(std::numeric_limits<typeof(j.current->second)>::max()
+						 <=
+						 999);
 					char amount_string[4]; //  Space for 3 digits + terminator.
-					sprintf(amount_string, "%u", jt->second);
+					sprintf(amount_string, "%u", j.current->second);
 
 					//  picture only of first ware type in group
 					UI::Table<intptr_t>::Entry_Record & tableEntry =

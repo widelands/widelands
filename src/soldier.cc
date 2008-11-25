@@ -72,12 +72,8 @@ Soldier_Descr::Soldier_Descr
 		if (list.size() != 2)
 			throw wexception
 				("Parse error in hp string: \"%s\" (must be \"min-max\")", hp);
-		const std::vector<std::string>::const_iterator list_end = list.end();
-		for
-			(std::vector<std::string>::iterator it = list.begin();
-			 it != list_end;
-			 ++it)
-			remove_spaces(*it);
+		container_iterate(std::vector<std::string>, list, i)
+			remove_spaces(*i.current);
 		char * endp;
 		m_min_hp= strtol(list[0].c_str(), &endp, 0);
 		if (*endp)
@@ -103,12 +99,8 @@ Soldier_Descr::Soldier_Descr
 			throw wexception
 				("Parse error in attack string: \"%s\" (must be \"min-max\")",
 				 attack);
-		const std::vector<std::string>::const_iterator list_end = list.end();
-		for
-			(std::vector<std::string>::iterator it = list.begin();
-			 it != list_end;
-			 ++it)
-			remove_spaces(*it);
+		container_iterate(std::vector<std::string>, list, i)
+			remove_spaces(*i.current);
 		char * endp;
 		m_min_attack= strtol(list[0].c_str(), &endp, 0);
 		if (*endp)

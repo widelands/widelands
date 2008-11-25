@@ -51,7 +51,6 @@
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
-#include "container_iterate.h"
 #include "upcast.h"
 
 #include <cstdarg>

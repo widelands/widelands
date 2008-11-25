@@ -109,15 +109,9 @@ throw (_wexception)
 		FileWrite fw;
 		fw.Unsigned16(CURRENT_PACKET_VERSION);
 		const Player::AreaWatchers & areawatchers = player->areawatchers();
-		const Player::AreaWatchers::const_iterator areawatchers_end =
-			areawatchers.end();
-		for
-			(Player::AreaWatchers::const_iterator it = areawatchers.begin();
-			 it != areawatchers_end;
-			 ++it)
-		{
+		container_iterate_const(Player::AreaWatchers, areawatchers, i) {
 			const AreaWatcher & areawatcher =
-				dynamic_cast<const AreaWatcher &>(*it->get(egbase));
+				dynamic_cast<AreaWatcher const &>(*i.current->get(egbase));
 			fw.Unsigned32(os->register_object(&areawatcher));
 			fw.Area48    (areawatcher);
 			os->mark_object_as_saved(&areawatcher);

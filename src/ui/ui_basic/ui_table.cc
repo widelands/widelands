@@ -62,13 +62,8 @@ Table<void *>::Table
 */
 Table<void *>::~Table()
 {
-	const Entry_Record_vector::const_iterator entry_records_end =
-		m_entry_records.end();
-	for
-		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
-		 it != entry_records_end;
-		 ++it)
-		delete *it;
+	container_iterate_const(Entry_Record_vector, m_entry_records, i)
+		delete *i.current;
 }
 
 #define HEADER_HEIGHT 15
@@ -81,9 +76,8 @@ void Table<void *>::add_column
 	assert(size() == 0);
 
 	uint32_t complete_width = 0;
-	const Columns::const_iterator columns_end = m_columns.end();
-	for (Columns::const_iterator it = m_columns.begin(); it != columns_end; ++it)
-		complete_width += it->width;
+	container_iterate_const(Columns, m_columns, i)
+		complete_width += i.current->width;
 
 	{
 		Column const c = {
@@ -120,12 +114,9 @@ Table<void *>::Entry_Record * Table<void *>::find
 	(const void * const entry) const
 	throw ()
 {
-	const Entry_Record_vector::const_iterator entries_end = m_entry_records.end();
-	for
-		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
-		 it != entries_end;
-		 ++it)
-		if ((*it)->entry() == entry) return *it;
+	container_iterate_const(Entry_Record_vector, m_entry_records, i)
+		if ((*i.current)->entry() == entry)
+			return *i.current;
 
 	return 0;
 }
@@ -151,13 +142,8 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 */
 void Table<void *>::clear()
 {
-	const Entry_Record_vector::const_iterator entry_records_end =
-		m_entry_records.end();
-	for
-		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
-		 it != entry_records_end;
-		 ++it)
-		delete *it;
+	container_iterate_const(Entry_Record_vector, m_entry_records, i)
+		delete *i.current;
 	m_entry_records.clear();
 
 	if (m_scrollbar)

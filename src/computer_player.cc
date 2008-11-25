@@ -163,22 +163,13 @@ void Computer_Player::late_initialization ()
 			bo.type = bld.get_ismine() ?
 				BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 
-			std::map<Ware_Index, uint8_t>::const_iterator const inputs_end =
-				prod.inputs().end();
-			for
-				(std::map<Ware_Index, uint8_t>::const_iterator it =
-				 	prod.inputs().begin();
-				 it != inputs_end;
-				 ++it)
-				bo.inputs.push_back(it->first.value());
+			container_iterate_const
+				(ProductionSite_Descr::Inputs, prod.inputs(), j)
+				bo.inputs.push_back(j.current->first.value());
 
-			std::set<Ware_Index>::const_iterator const output_end =
-				prod.output().end();
-			for
-				(std::set<Ware_Index>::const_iterator it = prod.output().begin();
-				 it != output_end;
-				 ++it)
-				bo.outputs.push_back(it->value());
+			container_iterate_const
+				(ProductionSite_Descr::Output, prod.output(), j)
+				bo.outputs.push_back(j.current->     value());
 
 			continue;
 		}
@@ -1045,15 +1036,11 @@ bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 	// then choose the one closest to the originating flag
 	int32_t closest_distance = std::numeric_limits<int32_t>::max();
 	Coords closest;
-	std::vector<Coords>::const_iterator reachable_end = reachable.end();
-	for
-		(std::vector<Coords>::const_iterator it = reachable.begin();
-		 it != reachable_end;
-		 ++it)
-	{
-		const int32_t distance = map.calc_distance(flag->get_position(), *it);
+	container_iterate_const(std::vector<Coords>, reachable, i) {
+		int32_t const distance =
+			map.calc_distance(flag->get_position(), *i.current);
 		if (distance < closest_distance) {
-			closest = *it;
+			closest = *i.current;
 			closest_distance = distance;
 		}
 	}

@@ -340,15 +340,10 @@ void Map::cleanup() {
 		for (Manager<Trigger>::Index e_idx = 0; e_idx < nr_events; ++e_idx) {
 			Trigger const & event = mtm()[e_idx];
 			Trigger::Referencers const referencers =event.referencers();
-			Trigger::Referencers::const_iterator const referencers_end =
-				referencers.end();
-			for
-				(Trigger::Referencers::const_iterator it = referencers.begin();
-				 it != referencers_end;
-				 ++it)
+			container_iterate_const(Trigger::Referencers, referencers, i)
 				log
 					("ERROR: event %s is still referenced by %s\n",
-					 event.name().c_str(), it->first->identifier().c_str());
+					 event.name().c_str(), i.current->first->identifier().c_str());
 		}
 	}
 	mtm().remove_unreferenced();
@@ -357,15 +352,11 @@ void Map::cleanup() {
 		for (Manager<Trigger>::Index t_idx = 0; t_idx < nr_triggers; ++t_idx) {
 			Trigger const & trigger = mtm()[t_idx];
 			Trigger::Referencers const referencers =trigger.referencers();
-			Trigger::Referencers::const_iterator const referencers_end =
-				referencers.end();
-			for
-				(Trigger::Referencers::const_iterator it = referencers.begin();
-				 it != referencers_end;
-				 ++it)
+			container_iterate_const(Trigger::Referencers, referencers, i)
 				log
 					("ERROR: trigger %s is still referenced by %s\n",
-					 trigger.name().c_str(), it->first->identifier().c_str());
+					 trigger.name().c_str(),
+					 i.current->first->identifier().c_str());
 		}
 	}
 

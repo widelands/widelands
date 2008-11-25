@@ -84,13 +84,8 @@ BaseListselect::~BaseListselect()
  * Remove all entries from the listselect
 */
 void BaseListselect::clear() {
-	const Entry_Record_vector::const_iterator entry_records_end =
-		m_entry_records.end();
-	for
-		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
-		 it != entry_records_end;
-		 ++it)
-		free(*it);
+	container_iterate_const(Entry_Record_vector, m_entry_records, i)
+		free(*i.current);
 	m_entry_records.clear();
 
 	m_scrollbar.set_steps(1);

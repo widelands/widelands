@@ -102,25 +102,15 @@ void Map_Object_Packet::LoadFinish() {
 	typedef std::set<Map_Object::Loader *, loader_sorter> LoaderSetSorted;
 	LoaderSetSorted loaders_sorted;
 	// load_pointer stage
-	for
-		(LoaderSet::const_iterator cit = loaders.begin();
-		 cit != loaders.end();
-		 ++cit)
-	{
-		(*cit)->load_pointers();
-		loaders_sorted.insert(*cit);
+	container_iterate_const(LoaderSet, loaders, i) {
+		(*i.current)->load_pointers();
+		loaders_sorted.insert(*i.current);
 	}
 
 	// load_finish stage
-	LoaderSetSorted::const_iterator const loaders_sorted_end =
-		loaders_sorted.end();
-	for
-		(LoaderSetSorted::const_iterator cit = loaders_sorted.begin();
-		 cit != loaders_sorted_end;
-		 ++cit)
-	{
-		(*cit)->load_finish();
-		(*cit)->mol().mark_object_as_loaded((*cit)->get_object());
+	container_iterate_const(LoaderSetSorted, loaders_sorted, i) {
+		(*i.current)->load_finish();
+		(*i.current)->mol().mark_object_as_loaded((*i.current)->get_object());
 	}
 }
 

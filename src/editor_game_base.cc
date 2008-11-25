@@ -129,12 +129,8 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 	delete m_map;
 
-	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
-	for
-		(Tribe_Vector::const_iterator it = m_tribes.begin();
-		 it != tribes_end;
-		 ++it)
-		delete *it;
+	container_iterate_const(Tribe_Vector, m_tribes, i)
+		delete *i.current;
 }
 
 void Editor_Game_Base::think()
@@ -443,12 +439,9 @@ Player * Editor_Game_Base::add_player
 const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 	(std::string const & tribe)
 {
-	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
-	for
-		(Tribe_Vector::const_iterator it = m_tribes.begin();
-		 it != tribes_end;
-		 ++it)
-		if ((*it)->name() == tribe) return **it;
+	container_iterate_const(Tribe_Vector, m_tribes, i)
+		if ((*i.current)->name() == tribe)
+			return **i.current;
 
 	if (not map().get_world())
 		map().load_world();
@@ -463,13 +456,9 @@ const Tribe_Descr & Editor_Game_Base::manually_load_tribe
  */
 const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 {
-	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
-	for
-		(Tribe_Vector::const_iterator it = m_tribes.begin();
-		 it != tribes_end;
-		 ++it)
-		if (not strcmp((*it)->name().c_str(), tribe))
-			return *it;
+	container_iterate_const(Tribe_Vector, m_tribes, i)
+		if (not strcmp((*i.current)->name().c_str(), tribe))
+			return *i.current;
 	return 0;
 }
 
@@ -573,14 +562,9 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui) {
 	loader_ui.step(_("Loading world data"));
 	m_map->load_graphics(); // especially loads world data
 
-	const Tribe_Vector::const_iterator tribes_end = m_tribes.end();
-	for
-		(std::vector<Tribe_Descr*>::const_iterator it = m_tribes.begin();
-		 it != tribes_end;
-		 ++it)
-	{
-		loader_ui.stepf(_("Loading tribe: %s"), (*it)->name().c_str());
-		(*it)->load_graphics();
+	container_iterate_const(Tribe_Vector, m_tribes, i) {
+		loader_ui.stepf(_("Loading tribe: %s"), (*i.current)->name().c_str());
+		(*i.current)->load_graphics();
 	}
 
 	// TODO: load player graphics? (maybe)

@@ -30,10 +30,10 @@
 #include "log.h"
 
 #include <cstdarg>
+#include <cstring>
 #include <cctype>
 #include <limits>
 #include <string>
-#include <cstring>
 
 #include <stdio.h>
 
@@ -241,15 +241,12 @@ void Section::mark_used()
  */
 void Section::check_used()
 {
-	const Value_list::const_iterator values_end = m_values.end();
-	for
-		(Value_list::const_iterator it = m_values.begin(); it != values_end; ++it)
-		if (not it->is_used())
+	container_iterate_const(Value_list, m_values, i)
+		if (not i.current->is_used())
 			m_profile->error
 				("Section [%s], key '%s' not used (did you spell the name "
 				 "correctly?)",
-				 get_name(),
-				 it->get_name());
+				 get_name(), i.current->get_name());
 }
 
 /** Section::get_val(const char *name)

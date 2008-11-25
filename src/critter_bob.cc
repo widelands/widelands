@@ -26,8 +26,6 @@
 #include "profile.h"
 #include "wexception.h"
 
-#include "container_iterate.h"
-
 #include <stdio.h>
 
 namespace Widelands {

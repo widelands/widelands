@@ -20,6 +20,8 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
+#include "container_iterate.h"
+
 #include <cassert>
 #include <vector>
 
@@ -44,12 +46,8 @@ template<typename T> struct Manager {
 
 	/// Removes all items.
 	void remove_all() {
-		typename container::const_iterator const items_end = items.end();
-		for
-			(typename container::const_iterator it = items.begin();
-			 it != items_end;
-			 ++it)
-			delete *it;
+		container_iterate_const(typename container, items, i)
+			delete *i.current;
 		items.clear();
 	}
 
@@ -57,11 +55,10 @@ template<typename T> struct Manager {
 	///
 	/// \Throws Nonexistent if there is no such item.
 	void remove(T & item) {
-		typename container::const_iterator const items_end = items.end();
-		for (typename container::iterator i = items.begin(); i != items_end; ++i)
-			if (*i == &item) {
+		container_iterate(typename container, items, i)
+			if (*i.current == &item) {
 				delete &item;
-				*i = *(items_end - 1);
+				*i.current = *(i.end - 1);
 				items.pop_back();
 				return;
 			}
@@ -72,28 +69,20 @@ template<typename T> struct Manager {
 	///
 	/// \Throws Nonexistent if there is no such item.
 	void remove(char const * const name) {
-		typename container::const_iterator const items_end = items.end();
-		for
-			(typename container::iterator it = items.begin();
-			 it != items_end;
-			 ++it)
-			if (not strcmp((*it)->name().c_str(), name)) {
-				delete *it;
-				*it = *(items_end - 1);
+		container_iterate(typename container, items, i)
+			if (not strcmp((*i.current)->name().c_str(), name)) {
+				delete *i.current;
+				*i.current = *(i.end - 1);
 				items.pop_back();
 				return;
 			}
 		throw Nonexistent();
 	}
 	void remove(std::string const & name) {
-		typename container::const_iterator const items_end = items.end();
-		for
-			(typename container::iterator it = items.begin();
-			 it != items_end;
-			 ++it)
-			if (name == (*it)->name()) {
-				delete *it;
-				*it = *(items_end - 1);
+		container_iterate(typename container, items, i)
+			if (name == (*i.current)->name()) {
+				delete *i.current;
+				*i.current = *(i.end - 1);
 				items.pop_back();
 				return;
 			}
@@ -126,43 +115,27 @@ template<typename T> struct Manager {
 		return *items[i];
 	}
 	T const * operator[](char const * const name) const {
-		typename container::const_iterator const items_end = items.end();
-		for
-			(typename container::const_iterator it = items.begin();
-			 it != items_end;
-			 ++it)
-			if (not strcmp((*it)->name().c_str(), name))
-				return *it;
+		container_iterate_const(typename container, items, i)
+			if (not strcmp((*i.current)->name().c_str(), name))
+				return *i.current;
 		return 0;
 	}
 	T       * operator[](char const * const name)       {
-		typename container::const_iterator const items_end = items.end();
-		for
-			(typename container::const_iterator it = items.begin();
-			 it != items_end;
-			 ++it)
-			if (not strcmp((*it)->name().c_str(), name))
-				return *it;
+		container_iterate_const(typename container, items, i)
+			if (not strcmp((*i.current)->name().c_str(), name))
+				return *i.current;
 		return 0;
 	}
 	T const * operator[](std::string const & name) const {
-		typename container::const_iterator const items_end = items.end();
-		for
-			(typename container::const_iterator it = items.begin();
-			 it != items_end;
-			 ++it)
-			if (name == (*it)->name())
-				return *it;
+		container_iterate_const(typename container, items, i)
+			if (name == (*i.current)->name())
+				return *i.current;
 		return 0;
 	}
 	T       * operator[](std::string const & name)       {
-		typename container::const_iterator const items_end = items.end();
-		for
-			(typename container::const_iterator it = items.begin();
-			 it != items_end;
-			 ++it)
-			if (name == (*it)->name())
-				return *it;
+		container_iterate_const(typename container, items, i)
+			if (name == (*i.current)->name())
+				return *i.current;
 		return 0;
 	}
 

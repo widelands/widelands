@@ -23,6 +23,8 @@
 #include "instances.h"
 #include "wexception.h"
 
+#include "container_iterate.h"
+
 namespace Widelands {
 
 Map_Map_Object_Saver::Map_Map_Object_Saver() :
@@ -127,12 +129,8 @@ void Map_Map_Object_Saver::mark_object_as_saved(Map_Object const * const obj) {
  */
 uint32_t Map_Map_Object_Saver::get_nr_unsaved_objects() const throw () {
 	uint32_t result = 0;
-	Map_Object_Map::const_iterator const objects_end = m_objects.end();
-	for
-		(Map_Object_Map::const_iterator it = m_objects.begin();
-		 it != objects_end;
-		 ++it)
-		if (!it->second.saved)
+	container_iterate_const(Map_Object_Map, m_objects, i)
+		if (!i.current->second.saved)
 			++result;
 	return result;
 }

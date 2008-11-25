@@ -68,19 +68,8 @@ m_current_songset     ("")
 /// themselves.
 Sound_Handler::~Sound_Handler()
 {
-	{
-		const FXset_map::const_iterator fxs_end = m_fxs.end();
-		for (FXset_map::const_iterator it = m_fxs.begin(); it != fxs_end; ++it)
-			delete it->second;
-	}
-	{
-		const Songset_map::const_iterator songs_end = m_songs.end();
-		for
-			(Songset_map::const_iterator it = m_songs.begin();
-			 it != songs_end;
-			 ++it)
-			delete it->second;
-	}
+	container_iterate_const  (FXset_map, m_fxs,   i) delete i.current->second;
+	container_iterate_const(Songset_map, m_songs, i) delete i.current->second;
 }
 
 /** The real initialization for Sound_Handler.

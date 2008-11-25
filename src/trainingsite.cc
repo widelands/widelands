@@ -60,18 +60,14 @@ m_max_evade         (0)
 {
 	const std::vector<std::string> str_list
 		(split_string(global_s.get_safe_string("train"), ","));
-	const std::vector<std::string>::const_iterator str_list_end = str_list.end();
-	for
-		(std::vector<std::string>::const_iterator it = str_list.begin();
-		 it != str_list_end;
-		 ++it)
-		if      (*it == "hp")      m_train_hp      = true;
-		else if (*it == "attack")  m_train_attack  = true;
-		else if (*it == "defense") m_train_defense = true;
-		else if (*it == "evade")   m_train_evade   = true;
+	container_iterate_const(std::vector<std::string>, str_list, i)
+		if      (*i.current == "hp")      m_train_hp      = true;
+		else if (*i.current == "attack")  m_train_attack  = true;
+		else if (*i.current == "defense") m_train_defense = true;
+		else if (*i.current == "evade")   m_train_evade   = true;
 		else
 			throw wexception
-				("Attribute %s isn't known as a valid attribute", it->c_str());
+				("\"%s\" is not known as a valid attribute", i.current->c_str());
 
 	// Read the range of levels that can update this building
 	if (m_train_hp) {

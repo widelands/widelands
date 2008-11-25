@@ -2069,15 +2069,11 @@ void Worker::fugitive_update(Game* g, State* state)
 
 		molog("[fugitive]: found a flag connected to warehouse(s)\n");
 
-		std::vector<ImmovableFound>::const_iterator flags_end = flags.end();
-		for
-			(std::vector<ImmovableFound>::const_iterator it = flags.begin();
-			 it != flags_end;
-			 ++it)
-		{
-			Flag & flag = dynamic_cast<Flag &>(*it->object);
+		container_iterate_const(std::vector<ImmovableFound>, flags, i) {
+			Flag & flag = dynamic_cast<Flag &>(*i.current->object);
 
-			int32_t const dist = map.calc_distance(get_position(), it->coords);
+			int32_t const dist =
+				map.calc_distance(get_position(), i.current->coords);
 
 			if (!best || dist < bestdist) {
 				best = &flag;

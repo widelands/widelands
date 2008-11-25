@@ -40,7 +40,6 @@
 
 #include "disk_filesystem.h"
 
-#include "container_iterate.h"
 #include "upcast.h"
 
 #include <iostream>
@@ -259,62 +258,44 @@ the conf files
 void Tribe_Descr::load_warehouse_with_start_wares
 	(Editor_Game_Base & egbase, Warehouse & wh) const
 {
-	typedef starting_resources_map::const_iterator smit;
-	{
-		const smit startwares_end = m_startwares.end();
-		for (smit it = m_startwares.begin(); it != startwares_end; ++it)
-			wh.insert_wares
-			(safe_ware_index(it->first.c_str()), it->second);
-	}
-	{
-		const smit startworkers_end = m_startworkers.end();
-		for
-			(smit it = m_startworkers.begin();
-			 it != startworkers_end;
-			 ++it)
-			wh.insert_workers
-				(safe_worker_index(it->first.c_str()), it->second);
-	}
-	{
-		const smit startsoldiers_end = m_startsoldiers.end();
-		for
-			(smit it = m_startsoldiers.begin();
-			 it != startsoldiers_end;
-			 ++it)
-		{
-			const std::vector<std::string> list(split_string(it->first, "/"));
+	container_iterate_const(starting_resources_map, m_startwares,    j)
+		wh.insert_wares
+			(safe_ware_index  (j.current->first.c_str()), j.current->second);
+	container_iterate_const(starting_resources_map, m_startworkers,  j)
+		wh.insert_workers
+			(safe_worker_index(j.current->first.c_str()), j.current->second);
+	container_iterate_const(starting_resources_map, m_startsoldiers, j) {
+		std::vector<std::string> const list(split_string(j.current->first, "/"));
 
-			if (list.size() != 4)
-				throw wexception
-					("Error in tribe (%s), startsoldier %s is not valid!",
-					 name().c_str(),
-					 it->first.c_str());
+		if (list.size() != 4)
+			throw wexception
+				("Error in tribe (%s), startsoldier %s is not valid!",
+				 name().c_str(), j.current->first.c_str());
 
-			char * endp;
-			long int const hplvl      = strtol(list[0].c_str(), &endp, 0);
-			if (*endp)
-				throw wexception("Bad hp level '%s'", list[0].c_str());
-			long int const attacklvl  = strtol(list[1].c_str(), &endp, 0);
-			if (*endp)
-				throw wexception("Bad attack level '%s'", list[1].c_str());
-			long int const defenselvl = strtol(list[2].c_str(), &endp, 0);
-			if (*endp)
-				throw wexception("Bad defense level '%s'", list[2].c_str());
-			long int const evadelvl   = strtol(list[3].c_str(), &endp, 0);
-			if (*endp)
-				throw wexception("Bad evade level '%s'", list[3].c_str());
+		char * endp;
+		long int const hplvl      = strtol(list[0].c_str(), &endp, 0);
+		if (*endp)
+			throw wexception("Bad hp level '%s'", list[0].c_str());
+		long int const attacklvl  = strtol(list[1].c_str(), &endp, 0);
+		if (*endp)
+			throw wexception("Bad attack level '%s'", list[1].c_str());
+		long int const defenselvl = strtol(list[2].c_str(), &endp, 0);
+		if (*endp)
+			throw wexception("Bad defense level '%s'", list[2].c_str());
+		long int const evadelvl   = strtol(list[3].c_str(), &endp, 0);
+		if (*endp)
+			throw wexception("Bad evade level '%s'", list[3].c_str());
 
-			if (upcast(Game, game, &egbase))
-				for (int32_t i = 0; i < it->second; ++i) {
-					Soldier & soldier = static_cast<Soldier &>
-						(dynamic_cast<Soldier_Descr const *>
-						 	(get_worker_descr(worker_index("soldier")))
-						 ->create(*game, wh.owner(), wh, wh.get_position()));
-					soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
-					wh.incorporate_worker(game, &soldier);
-				}
-			//  TODO what to do in editor
-		}
+		if (upcast(Game, game, &egbase))
+			for (int32_t i = 0; i < j.current->second; ++i) {
+				Soldier & soldier =
+					static_cast<Soldier &>
+						(dynamic_cast<Soldier_Descr const &>
+						 	(*get_worker_descr(worker_index("soldier")))
+						 .create(*game, wh.owner(), wh, wh.get_position()));
+				soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
+				wh.incorporate_worker(game, &soldier);
+			}
 	}
 }
 

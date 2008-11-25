@@ -38,7 +38,6 @@
 
 #include "log.h"
 
-#include "container_iterate.h"
 #include "upcast.h"
 
 namespace Widelands {
@@ -647,20 +646,12 @@ uint32_t Warehouse::count_workers(Game* g, Ware_Index ware, const Requirements& 
 
 	// NOTE: This code lies about the tAttributes of non-instantiated workers.
 
-	std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
-		m_incorporated_workers.end();
-	for
-		(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
-		 it != incorporated_workers_end;
-		 ++it)
-	{
-		Map_Object* w = it->get(g);
-		if (w && std::find(subs.begin(), subs.end(), &w->descr()) != subs.end()) {
-			// This is one of the workers in our sum
-			if (!req.check(w))
-				--sum;
-		}
-	}
+	container_iterate_const(std::vector<Object_Ptr>, m_incorporated_workers, i)
+		if (Map_Object const * const w = i.current->get(g))
+			if (std::find(subs.begin(), subs.end(), &w->descr()) != subs.end())
+				//  This is one of the workers in our sum.
+				if (!req.check(w))
+					--sum;
 
 	return sum;
 }
@@ -683,28 +674,20 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 
 			//  look if we got one of those in stock
 			const std::string & workername = workerdescr.name();
-			std::vector<Object_Ptr>::const_iterator const incorporated_workers_end =
-				m_incorporated_workers.end();
-			for
-				(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
-				 it != incorporated_workers_end;
-				 ++it)
-			{
-				if (upcast(Worker, worker, it->get(game))) {
+			container_iterate(std::vector<Object_Ptr>, m_incorporated_workers, i)
+				if (upcast(Worker, worker, i.current->get(game)))
 					if (worker->name() == workername) {
 						--unincorporated;
 
 						if (req.check(worker)) {
 							worker->reset_tasks(game);  //  forget everything you did
 							worker->set_location(this); //  back in a economy
-							m_incorporated_workers.erase(it);
+							m_incorporated_workers.erase(i.current);
 
 							m_supply->remove_workers(ware, 1);
 							return worker;
 						}
 					}
-				}
-			}
 
 			assert(unincorporated <= m_supply->stock_workers(ware));
 

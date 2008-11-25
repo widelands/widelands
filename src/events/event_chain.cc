@@ -70,9 +70,8 @@ EventChain::State EventChain::run(Game* g) {
  */
 void EventChain::clear_events() {
 	event_vector & evs = m_events;
-	event_vector::const_iterator const evs_end = evs.end();
-	for (event_vector::const_iterator it = evs.begin(); it != evs_end; ++it)
-		(*it)->unreference(*this);
+	container_iterate_const(event_vector, evs, i)
+		(*i.current)->unreference(*this);
 
 	evs.clear();
 }

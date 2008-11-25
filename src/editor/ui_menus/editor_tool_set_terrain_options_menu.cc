@@ -166,12 +166,8 @@ m_tool(tool)
 
 
 Editor_Tool_Set_Terrain_Tool_Options_Menu::~Editor_Tool_Set_Terrain_Tool_Options_Menu()  {
-	const std::vector<uint32_t>::const_iterator surfaces_end = m_surfaces.end();
-	for
-		(std::vector<uint32_t>::const_iterator it = m_surfaces.begin();
-		 it != surfaces_end;
-		 ++it)
-		g_gr->free_surface(*it);
+	container_iterate_const(std::vector<uint32_t>, m_surfaces, i)
+		g_gr->free_surface(*i.current);
 }
 
 

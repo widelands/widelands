@@ -38,7 +38,6 @@
 #include "wexception.h"
 #include "worker.h"
 
-#include "container_iterate.h"
 #include "upcast.h"
 
 #include <stdio.h>

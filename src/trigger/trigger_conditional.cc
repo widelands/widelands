@@ -26,6 +26,8 @@
 
 #include "log.h"
 
+#include "container_iterate.h"
+
 namespace Widelands {
 
 const char * const TriggerConditional_Factory::operators[] =
@@ -41,11 +43,11 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 	std::vector<Token> tempstack;
 	std::vector<Token> postfix;
 
-	const std::vector<Token>::const_iterator vec_end = vec.end();
-	for
-		(std::vector<Token>::const_iterator it = vec.begin(); it != vec_end; ++it)
-		switch (const TokenNames token = it->token) {
-		case LPAREN: tempstack.push_back(*it); break;
+	container_iterate_const(std::vector<Token>, vec, i)
+		switch (TokenNames const token = i.current->token) {
+		case LPAREN:
+			tempstack.push_back(*i.current);
+			break;
 		case RPAREN: // append everything to our postfix notation
 			for (;;) {
 				if (!tempstack.size()) { // Mismatched parathesis
@@ -59,7 +61,9 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 			}
 			tempstack.pop_back(); // Pop the last left paranthesis
 			break;
-		case TRIGGER: postfix.push_back(*it); break;
+		case TRIGGER:
+			postfix.push_back(*i.current);
+			break;
 		case NOT: case AND: case OR: case XOR:
 			compile_assert(NOT < AND); //  Ensure proper operator precedence.
 			compile_assert(AND < OR);  //
@@ -69,7 +73,7 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 				postfix.push_back(tempstack.back());
 				tempstack.pop_back();
 			}
-			tempstack.push_back(*it);
+			tempstack.push_back(*i.current);
 			break;
 		default:
 			assert(false);
@@ -99,12 +103,8 @@ TriggerConditional & TriggerConditional_Factory::create_from_postfix
 	(EventChain & evchain, std::vector<Token> const & vec)
 {
 	std::vector<TriggerConditional *> stk;
-	const std::vector<Token>::const_iterator vec_end = vec.end();
-	for
-		(std::vector<Token>::const_iterator it = vec.begin();
-		 it != vec_end;
-		 ++it)
-		switch (const TokenNames token = it->token) {
+	container_iterate_const(std::vector<Token>, vec, i)
+		switch (TokenNames const token = i.current->token) {
 		case NOT: {
 			assert(stk.size());
 			TriggerConditional * & back = stk.back();
@@ -122,7 +122,7 @@ TriggerConditional & TriggerConditional_Factory::create_from_postfix
 			break;
 		}
 		case TRIGGER: {
-			Trigger & trigger = *it->data;
+			Trigger & trigger = *i.current->data;
 			trigger.reference(evchain);
 			stk.push_back(new TriggerConditional_Var (trigger));
 			break;

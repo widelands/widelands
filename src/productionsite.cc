@@ -100,13 +100,8 @@ ProductionSite_Descr::ProductionSite_Descr
 		global_s.get_string("worker", "") : global_s.get_safe_string("worker");
 
 	std::vector<std::string> workernames(split_string(workerstr, ","));
-	std::vector<std::string>::const_iterator const workernames_end =
-		workernames.end();
-	for
-		(std::vector<std::string>::iterator it = workernames.begin();
-		 it != workernames_end;
-		 ++it)
-		m_workers.push_back(*it);
+	container_iterate_const(std::vector<std::string>, workernames, i)
+		m_workers.push_back(*i.current);
 
 	// Get programs
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
@@ -203,16 +198,10 @@ void ProductionSite::fill(Game & game) {
 	Building::fill(game);
 	Tribe_Descr const & tribe = owner().tribe();
 	std::vector<std::string> const & worker_types = descr().workers();
-	std::vector<std::string>::const_iterator const worker_types_end =
-		worker_types.end();
-	for
-		(std::vector<std::string>::const_iterator it = worker_types.begin();
-		 it != worker_types_end;
-		 ++it)
-	{
+	container_iterate_const(std::vector<std::string>, worker_types, i) {
 		Worker & worker =
-			tribe.get_worker_descr(tribe.worker_index(it->c_str()))->create
-			(game, owner(), *get_base_flag(), get_position());
+			tribe.get_worker_descr(tribe.worker_index(i.current->c_str()))->create
+				(game, owner(), *get_base_flag(), get_position());
 		worker.start_task_buildingwork(&game);
 		m_workers.push_back(&worker);
 	}
@@ -262,35 +251,19 @@ void ProductionSite::init(Editor_Game_Base* g)
 	if (upcast(Game, game, g)) {
 
 		if (m_workers.size()) {
-			std::vector<Worker *>::const_iterator const workers_end =
-				m_workers.end();
-			for
-				(std::vector<Worker *>::const_iterator it = m_workers.begin();
-				 it != workers_end;
-				 ++it)
-				(*it)->set_location(this);
+			container_iterate_const(std::vector<Worker *>, m_workers, i)
+				(*i.current)->set_location(this);
 		} else {//  request workers
 			std::vector<std::string> const & worker_types = descr().workers();
-			std::vector<std::string>::const_iterator const worker_types_end =
-				worker_types.end();
-			for
-				(std::vector<std::string>::const_iterator it =
-				 	worker_types.begin();
-				 it != worker_types_end;
-				 ++it)
-				request_worker(it->c_str());
+			container_iterate_const(std::vector<std::string>, worker_types, i)
+				request_worker(i.current->c_str());
 		}
 
 		// Init input ware queues
-		std::map<Ware_Index, uint8_t> const & inputs = descr().inputs();
-		std::map<Ware_Index, uint8_t>::const_iterator const inputs_end =
-			inputs.end();
+		ProductionSite_Descr::Inputs const & inputs = descr().inputs();
 		m_input_queues.reserve(inputs.size());
-		for
-			(std::map<Ware_Index, uint8_t>::const_iterator it = inputs.begin();
-			 it != inputs_end;
-			 ++it)
-			m_input_queues.push_back(&(new WaresQueue(this))->init(*it));
+		container_iterate_const(ProductionSite_Descr::Inputs, inputs, i)
+			m_input_queues.push_back(&(new WaresQueue(this))->init(*i.current));
 	}
 }
 
@@ -307,25 +280,13 @@ void ProductionSite::set_economy(Economy* e)
 	}
 
 	Building::set_economy(e);
-	{
-		std::vector<Request *>::const_iterator m_worker_requests_end =
-			m_worker_requests.end();
-		for
-			(std::vector<Request *>::const_iterator it = m_worker_requests.begin();
-			 it != m_worker_requests_end;
-			 ++it)
-			if (*it) (*it)->set_economy(e);
-	}
+	container_iterate_const(std::vector<Request *>, m_worker_requests, i)
+		if (Request * const r = *i.current)
+			r->set_economy(e);
 
-	if (e) {
-		std::vector<WaresQueue *>::const_iterator m_input_queues_end =
-			m_input_queues.end();
-		for
-			(std::vector<WaresQueue *>::const_iterator it = m_input_queues.begin();
-			 it != m_input_queues_end;
-			 ++it)
-			(*it)->add_to_economy(e);
-	}
+	if (e)
+		container_iterate_const(std::vector<WaresQueue *>, m_input_queues, i)
+			(*i.current)->add_to_economy(e);
 }
 
 /**
