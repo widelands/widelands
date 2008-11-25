@@ -1,8 +1,8 @@
 [global]
 type=ware
-help=_These shields are used by the best soldiers of the atlantids
+help=_These shields are used by the best soldiers of the Atlanteans.
 
-# A golden shield with the sign of the atlantids
+# A golden shield with the sign of the Atlanteans
 [idle]
 pics=idle.png
 hotspot=10 17

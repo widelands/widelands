@@ -1,6 +1,6 @@
 [global]
 type=ware
-help=_"Fish is one of the biggest food-resources of the atlantids."
+help=_Fish is one of the biggest food-resources of the Atlanteans.
 
 [idle]
 pics=idle.png

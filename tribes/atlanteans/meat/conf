@@ -1,6 +1,6 @@
 [global]
 type=ware
-help=_"Meat is one food-ressource of the Atlantids."
+help=_Meat is one food-ressource of the Atlanteans.
 
 [idle]
 pics=idle.png

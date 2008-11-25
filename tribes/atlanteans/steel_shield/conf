@@ -1,8 +1,8 @@
 [global]
 type=ware
-help=_"This steel shield is used by experienced soldiers"
+help=_This steel shield is used by experienced soldiers.
 
-# A shield with the sign of the atlantids on it.
+# A shield with the sign of the Atlanteans on it.
 [idle]
 pics=idle.png
 hotspot=10 17

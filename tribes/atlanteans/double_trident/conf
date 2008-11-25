@@ -1,6 +1,6 @@
 [global]
 type=ware
-help=_"Already one of the best tridents of the atlantids. Only used by very good fighters."
+help=_Already one of the best tridents of the Atlanteans. Only used by very good fighters.
 
 # A simple double trident
 [idle]

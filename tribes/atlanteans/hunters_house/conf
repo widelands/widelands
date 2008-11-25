@@ -1,7 +1,7 @@
 [global]
 type=production
 size=small
-help="The Hunter brings fresh, raw meat to the atlantids"
+help=_The Hunter brings fresh, raw meat to the Atlanteans.
 worker=hunter
 program=work
 

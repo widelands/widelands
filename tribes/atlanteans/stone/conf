@@ -1,6 +1,6 @@
 [global]
 type=ware
-help=_"Stone is one basic build ware of the Atlantids."
+help=_Stone is one basic build ware type of the Atlanteans.
 
 [idle]
 pics=idle.png

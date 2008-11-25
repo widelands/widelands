@@ -1,6 +1,6 @@
 [global]
 type=ware
-help=_"Planks are an important build material of the Atlantids."
+help=_Planks are an important build material of the Atlanteans.
 
 [idle]
 pics=idle.png

@@ -1,6 +1,6 @@
 [global]
 type=ware
-help=_"Trunks are the base for planks, which are used in nearly every building of the atlantids."
+help=_Trunks are the base for planks, which are used in nearly every building of the Atlanteans.
 
 [idle]
 pics=idle.png
