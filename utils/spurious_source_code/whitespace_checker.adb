@@ -141,6 +141,8 @@ procedure Whitespace_Checker is
       end loop;
    end Read_Macro;
 
+   Previous_Line_Ended_With_Comment : Boolean := False;
+
    --  Reads code after line begin. Returns the depth parentheses increase
    --  (should be negative) when a newline is encountered.
    function Read_Code return Integer;
@@ -301,6 +303,7 @@ procedure Whitespace_Checker is
                end if;
             when '/'       =>
                if Previous_Character = '/' then --  // comment
+                  Previous_Line_Ended_With_Comment := True;
                   loop
                      Next_Character;
                      if Current_Character = HT then
@@ -495,7 +498,12 @@ begin
 
             case Previous_Character is
                when ',' | ';' | '}' =>
-                  Indentation_Increase_Allowed :=  0;
+                  if Previous_Line_Ended_With_Comment then
+                     Previous_Line_Ended_With_Comment := False;
+                     Indentation_Increase_Allowed := 1;
+                  else
+                     Indentation_Increase_Allowed := 0;
+                  end if;
                when others          =>
                   Indentation_Increase_Allowed :=  1;
             end case;
