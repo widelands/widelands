@@ -1,7 +1,0 @@
-[global]
-type=ware
-help=_"These transparent mountain crystals are used for some exclusive buildings and tools."
-
-[idle]
-pics=idle.png
-hotspot=10 17

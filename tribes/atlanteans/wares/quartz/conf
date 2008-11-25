@@ -1,8 +1,0 @@
-[global]
-descname=_"Quartz"
-help=_"These transparent quartz' are used for some exclusive buildings and tools."
-menu_pic=menu.png
-
-[idle]
-pics=idle.png
-hotspot=10 17
