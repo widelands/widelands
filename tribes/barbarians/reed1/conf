@@ -14,5 +14,5 @@ program=harvest
 0=remove
 
 [idle]
-pics=field1_??.bmp
+pics=field1_??.png
 hotspot=15 18
