@@ -177,6 +177,10 @@ filelist=simpleglob('*.h', 'src', recursive=True)+simpleglob('*.cc', 'src', recu
 Alias('tags', env.ctags(source=filelist))
 Default('tags')
 
+################################################################ C++ style-check
+
+env.Execute('utils/spurious_source_code/detect')
+
 ################################################################## PNG shrinking
 
 # finding files takes quite long, so don't execute it if it's unneccessary
