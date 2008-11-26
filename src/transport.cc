@@ -3182,17 +3182,34 @@ void Economy::Read(FileRead& fr, Game*, Map_Map_Object_Loader*)
 					Tribe_Descr const & tribe = owner().tribe();
 					while (Time const last_modified = fr.Unsigned32()) {
 						char const * const ware_type_name = fr.CString();
+						uint32_t const permanent = fr.Unsigned32();
+						uint32_t const temporary = fr.Unsigned32();
 						Ware_Index const ware_type =
 							tribe.ware_index(ware_type_name);
 						if (not ware_type)
-							throw wexception
-								("\"%s\" is not a ware type defined in tribe %s",
+							log
+								("WARNING: target quantity configured for \"%s\", "
+								 "which is not a ware type defined in tribe %s, "
+								 "ignoring\n",
 								 ware_type_name, tribe.name().c_str());
-						Target_Quantity & tq =
-							m_target_quantities[ware_type.value()];
-						tq.permanent         = fr.Unsigned32();
-						tq.temporary         = fr.Unsigned32();
-						tq.last_modified     = last_modified;
+						else if
+							(tribe.get_ware_descr(ware_type)->default_target_quantity()
+							 ==
+							 std::numeric_limits<uint32_t>::max())
+							log
+								("WARNING: target quantity configured for %s, which "
+								 "should not have target quantity, ignoring\n",
+								 ware_type_name);
+						else {
+							Target_Quantity & tq =
+								m_target_quantities[ware_type.value()];
+							if (tq.last_modified)
+								throw wexception
+									("duplicated entry for %s", ware_type_name);
+							tq.permanent         = permanent;
+							tq.temporary         = temporary;
+							tq.last_modified     = last_modified;
+						}
 					}
 				} catch (_wexception const & e) {
 					throw wexception("target quantities: %s", e.what());
