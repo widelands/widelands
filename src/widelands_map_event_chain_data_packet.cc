@@ -213,10 +213,10 @@ throw (_wexception)
 
 		{ //  Events
 			EventChain::event_vector const & events = e.m_events;
-			assert(events.size() < 99); //  becase we write 2 decimal digits
+			assert(events.size() < 99); //  because we write 2 decimal digits
 			char key[] = "event_00";
-			container_iterate_const(EventChain::event_vector, events, i) {
-				s.set_string(key, (*i.current)->name());
+			container_iterate_const(EventChain::event_vector, events, j) {
+				s.set_string(key, (*j.current)->name());
 
 				//  Increment the number in the key string.
 				if (key[7] == '9') {key[7] = '0'; ++key[6];} else ++key[7];
