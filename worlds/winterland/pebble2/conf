@@ -1,2 +1,4 @@
-hotspot=8 9
+picture=idle.png
 
+[idle]
+hotspot=8 9

@@ -1,2 +1,4 @@
-hotspot=5 5
+picture=idle.png
 
+[idle]
+hotspot=5 5

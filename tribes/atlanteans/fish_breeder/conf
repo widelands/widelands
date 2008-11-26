@@ -1,5 +1,4 @@
-[global]
-help=_"Breeds fish"
+help=_Breeds fish.
 type=generic
 program=breed
 

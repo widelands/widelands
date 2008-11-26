@@ -1,5 +1,4 @@
-[global]
-help=Discovers resources for mining
+help=_Discovers resources for mining.
 type=generic
 program=expedition
 program=search

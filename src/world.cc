@@ -289,14 +289,18 @@ void World::parse_bobs(std::string & directory, Profile & root_conf) {
 			Profile prof(directory.c_str(), "global"); // section-less file
 			directory.resize(directory.size() - strlen("conf"));
 			Section & global_s = prof.get_safe_section("global");
-			if (not strcasecmp(global_s.get_string("type", ""), "critter"))
-				bobs      .add
-					(new Critter_Bob_Descr
-					 	(_name, _descname, directory, prof, global_s, 0));
-			else
+			if (char const * const type = global_s.get_string("type")) {
+				if (not strcasecmp(type, "critter"))
+					bobs      .add
+						(new Critter_Bob_Descr
+						 	(_name, _descname, directory, prof, global_s, 0));
+						else
+							throw wexception("unknown map object type");
+			} else
 				immovables.add
 					(new Immovable_Descr
 					 	(_name, _descname, directory, prof, global_s, 0));
+			prof.check_used();
 		} catch (std::exception const & e) {
 			throw wexception
 				("%s=%s: %s", v->get_name(), v->get_string(), e.what());

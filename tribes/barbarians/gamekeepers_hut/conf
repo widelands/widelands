@@ -1,7 +1,5 @@
-[global]
 type=production
 size=small
-help=The Gamekeeper makes sure that the natural population of animals never drops too low.
 worker=gamekeeper
 program=work
 

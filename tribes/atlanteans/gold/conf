@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"Gold is one of the most valuable materials only important things are garnished with it."
+help=_Gold is one of the most valuable materials only important things are garnished with it.
 
 [idle]
 pics=idle.png

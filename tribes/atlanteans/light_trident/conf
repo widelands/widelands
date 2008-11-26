@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This is the basic weapon for atlantian soldiers"
+help=_This is the basic weapon for atlantian soldiers.
 
 # A simple trident
 [idle]

@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it."
+help=_This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it.
 
 # A golden doubled trident
 [idle]

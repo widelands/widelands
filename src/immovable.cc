@@ -231,35 +231,22 @@ Immovable_Descr::Immovable_Descr
 	 Tribe_Descr const * const owner_tribe)
 :
 	Map_Object_Descr(_name, _descname),
-	m_picture
-		(directory
-		 +
-		 global_s.get_string("picture", (name() + "_00.png").c_str())),
+	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
 	m_default_encodedata.clear();
 	m_default_encodedata.parse(global_s);
 
-	if (char const * const string = global_s.get_string("size", 0)) {
-		if (!strcasecmp(string, "volatile") || !strcasecmp(string, "none"))
-		{
-			m_size = BaseImmovable::NONE;
-		}
-		else if (!strcasecmp(string, "small"))
-		{
+	if (char const * const string = global_s.get_string("size")) {
+		if      (!strcasecmp(string, "small"))
 			m_size = BaseImmovable::SMALL;
-		}
-		else if (!strcasecmp(string, "normal") || !strcasecmp(string, "medium"))
-		{
+		else if (!strcasecmp(string, "medium"))
 			m_size = BaseImmovable::MEDIUM;
-		}
 		else if (!strcasecmp(string, "big"))
-		{
 			m_size = BaseImmovable::BIG;
-		}
 		else
-			throw wexception("Unknown size '%s'. Possible values: none, small, medium, big", string);
+			throw wexception("size=\"%s\": expected {small|medium|big}", string);
 	}
 
 
@@ -367,36 +354,18 @@ uint32_t Immovable_Descr::parse_animation
 	 std::string const & animation_name)
 {
 	// Load the animation
-	Section * anim = prof.get_section(animation_name.c_str());
+	Section & anim = prof.get_safe_section(animation_name.c_str());
 	char picname[256];
 	uint32_t animid=0;
 
-	snprintf
-		(picname, sizeof(picname),
-		 "%s_%s_??.png",
-		 name().c_str(),
-		 animation_name.c_str());
-
-	// kind of obscure, this is still needed for backwards compatibility
-	if (animation_name == "idle" and not anim) {
-		anim = prof.get_section("global");
-
-		snprintf(picname, sizeof(picname), "%s_??.png", name().c_str());
-	}
-
-	if (!anim) {
-		log
-			("%s: Animation %s not defined.\n",
-			 directory.c_str(),
-			 animation_name.c_str());
-		return 0;
-	}
+	snprintf(picname, sizeof(picname), "%s.png", animation_name.c_str());
 
 	if (not is_animation_known(animation_name.c_str())) {
 		animid =
-			g_anim.get(directory.c_str(), *anim, picname, &m_default_encodedata);
+			g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
 		add_animation(animation_name.c_str(), animid);
-	} else animid = get_animation(animation_name.c_str());
+	} else
+		animid = get_animation(animation_name.c_str());
 
 	return animid;
 }

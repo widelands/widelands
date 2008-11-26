@@ -161,12 +161,12 @@ uint32_t AnimationManager::get
 		picnametempl = pics;
 	else if (!picnametempl) {
 		char templbuf[256];
-		snprintf(templbuf, sizeof(templbuf), "%s_??.png", s.get_name());
+		snprintf(templbuf, sizeof(templbuf), "%s.png", s.get_name());
 		picnametempl = templbuf;
 	}
 	{
 		char pictempl[256];
-		snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
+		snprintf(pictempl, sizeof(pictempl), "%s%s", directory, picnametempl);
 		assert(4 <= strlen(pictempl));
 		size_t const len = strlen(pictempl) - 4;
 		if (pictempl[len] == '.')

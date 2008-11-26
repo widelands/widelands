@@ -1,5 +1,3 @@
-[global]
-help=
 type=production
 size=medium
 worker=toolsmith # like Toolsmith's Workshop

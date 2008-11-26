@@ -38,8 +38,7 @@ Worker_Descr::Worker_Descr
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 	:
 	Bob::Descr(_name, _descname, directory, prof, global_s, &_tribe, encdata),
-	m_helptext
-		(global_s.get_string("help", _("Doh... someone forgot the help text!"))),
+	m_helptext(global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
 	m_icon(0),
 	m_becomes (Ware_Index::Null())

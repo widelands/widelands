@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This yarn is produced by spiders, which are breed on spiderfarms."
+help=_This yarn is produced by spiders, which are bred on spiderfarms.
 
 [idle]
 pics=idle.png

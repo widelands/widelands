@@ -1,4 +1,3 @@
-[global]
 type=production
 size=medium
 worker=brewer # same as brewery

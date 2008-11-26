@@ -1,8 +1,4 @@
-[global]
-type="diminishing"
-stock=1
-
-size=normal
+size=medium
 attrib=grown_wine
 program=program
 program=harvestwine

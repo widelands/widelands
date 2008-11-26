@@ -1,4 +1,3 @@
-[global]
 type=training
 size=big
 enhancement=colosseum
@@ -35,9 +34,5 @@ wood=5
 marblecolumn=2
 
 [idle]
-pics=arena_i_??.png  # ???
-hotspot=82 98
-
-[working]
 pics=arena_i_??.png  # ???
 hotspot=82 98

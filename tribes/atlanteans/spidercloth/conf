@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"Cloth made out of spideryarn."
+help=_Cloth made out of spideryarn.
 
 [idle]
 pics=idle.png

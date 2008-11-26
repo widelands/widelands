@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
+help=_This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable.
 
 [idle]
 pics=idle.png

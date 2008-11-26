@@ -1,6 +1,5 @@
-[global]
 soundfx=../../../sound/farm/scythe
-help=plants fields.
+help=_Plants fields.
 type=generic
 program=plant
 program=harvest

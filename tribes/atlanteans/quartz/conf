@@ -1,7 +1,5 @@
-[global]
 type=ware
-help=_"These transparent quartz' are used for some exclusive buildings and tools."
-menu_pic=menu.png
+help=_These transparent quartz' are used for some exclusive buildings and tools.
 
 [idle]
 pics=idle.png

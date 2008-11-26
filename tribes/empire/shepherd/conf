@@ -1,5 +1,4 @@
-[global]
-help=Keeping sheeps
+help=_Keeping sheeps.
 type=generic
 
 [buildcost]

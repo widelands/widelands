@@ -1,5 +1,4 @@
-[global]
-help=Grows flax and thatch reed
+help=_Grows flax and thatch reed.
 type=generic
 program=plantflax
 program=plantreed

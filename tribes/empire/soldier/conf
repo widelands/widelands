@@ -1,5 +1,4 @@
-[global]
-help=Defend and Conquer!
+help=_Defend and Conquer!
 type=soldier
 
 
@@ -32,7 +31,6 @@ attack_level_1_pic=attack_level1.png
 attack_level_2_pic=attack_level2.png
 attack_level_3_pic=attack_level3.png
 attack_level_4_pic=attack_level4.png
-attack_level_5_pic=attack_level5.png
 defense_level_0_pic=defense_level0.png
 
 # SOLDIER SPECIFIC STUFF ENDS HERE

@@ -1,5 +1,4 @@
-[global]
-help=Cuts raw pieces of granit and marble out of laying stones.
+help=_Cuts raw pieces of granit and marble out of laying stones.
 type=generic
 program=cut_stone
 program=cut_marble

@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_The barbarian backers are best in making this flat and tasty pitta bread.
+help=_The barbarian bakers are best in making this flat and tasty pitta bread.
 
 [idle]
 pics=bread_idle.png

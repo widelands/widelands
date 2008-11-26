@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"Picks are used by stonecutters and miners. It is produced by the toolsmith."
+help=_Picks are used by stonecutters and miners. It is produced by the toolsmith.
 
 [idle]
 pics=idle.png

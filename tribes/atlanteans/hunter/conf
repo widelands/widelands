@@ -1,5 +1,4 @@
-[global]
-help=Kills animals.
+help=_The Hunter brings fresh, raw meat to the Atlanteans.
 type=generic
 program=hunt
 

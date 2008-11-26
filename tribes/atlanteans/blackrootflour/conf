@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
+help=_Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread.
 
 [idle]
 pics=idle.png

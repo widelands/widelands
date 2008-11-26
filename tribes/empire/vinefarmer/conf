@@ -1,5 +1,4 @@
-[global]
-help=Grows Wine
+help=_Grows wine.
 type=generic
 program=plantvine
 program=harvestvine

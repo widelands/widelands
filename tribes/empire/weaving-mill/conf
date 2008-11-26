@@ -1,4 +1,3 @@
-[global]
 type=production
 size=big
 worker=weaver
@@ -20,9 +19,5 @@ stone=4
 marble=1
 
 [idle]
-pics=weaving_mill_i_??.png  # ???
-hotspot=84 76
-
-[working]
 pics=weaving_mill_i_??.png  # ???
 hotspot=84 76

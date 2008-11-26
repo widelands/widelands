@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This is the medium trident - used by advanced soldiers."
+help=_This is the medium trident - used by advanced soldiers.
 
 [idle]
 pics=idle.png

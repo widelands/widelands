@@ -1,5 +1,4 @@
-[global]
-help=Fells trees.
+help=_Fells trees.
 type=generic
 program=chop
 soundfx=../../../sound/spoken/timber

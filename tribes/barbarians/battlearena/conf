@@ -1,4 +1,3 @@
-[global]
 type=training
 size=big
 worker=carrier
@@ -43,9 +42,5 @@ gold=4
 thatchreed=3
 
 [idle]
-pics=battlearena_i_??.png  # ???
-hotspot=80 77
-
-[working]
 pics=battlearena_i_??.png  # ???
 hotspot=80 77

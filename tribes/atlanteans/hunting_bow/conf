@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This bow is used by the atlantian hunter."
+help=_This bow is used by the atlantian hunter.
 
 [idle]
 pics=idle.png

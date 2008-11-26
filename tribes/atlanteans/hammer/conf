@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
+help=_The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith.
 
 [idle]
 pics=idle.png

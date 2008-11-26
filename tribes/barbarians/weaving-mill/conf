@@ -1,4 +1,3 @@
-[global]
 type=production
 size=big
 worker=weaver
@@ -10,7 +9,7 @@ flax=8
 
 [work]
 # no need to check whether cloth is needed because it is only used here
-sleep=45000
+animate=working 45000
 consume=flax
 produce=cloth
 
@@ -20,13 +19,13 @@ raw_stone=2
 thatchreed=2
 
 [idle]
-pics=i_??.png  # ???
+pics=i_??.png
 hotspot=36 78
 
 [build]
-pics=b_??.png  # ???
+pics=b_??.png
 hotspot=36 78
 
 [working]
-pics=w_??.png  # ???
+pics=w_??.png
 hotspot=36 78

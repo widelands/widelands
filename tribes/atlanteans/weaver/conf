@@ -1,5 +1,4 @@
-[global]
-help=_"Produces cloth for buildings, ships and soldiers"
+help=_Produces cloth for buildings, ships and soldiers.
 type=generic
 
 [buildcost]

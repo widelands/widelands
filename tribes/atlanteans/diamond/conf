@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This wonderful diamonds are used for some exclusive buildings and tools."
+help=_This wonderful diamonds are used for some exclusive buildings and tools.
 
 # No description yet
 [idle]

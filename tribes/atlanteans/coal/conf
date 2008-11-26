@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
+help=_To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat.
 
 [idle]
 pics=idle.png

@@ -111,7 +111,7 @@ public:
 	bool is_used() const;
 	void mark_used();
 
-	void check_used();
+	void check_used() const;
 
 	int32_t                  get_int
 		(char             const * name,
@@ -228,7 +228,7 @@ public:
 	~Profile();
 
 	void error(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
-	void check_used();
+	void check_used() const;
 
 	void read
 		(const char * const filename,

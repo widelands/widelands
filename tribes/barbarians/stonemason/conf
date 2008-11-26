@@ -1,6 +1,5 @@
-[global]
 soundfx=../../../sound/stonecutting/stonecutter
-help=Cuts raw pieces of granit out of laying stones.
+help=_Cuts raw pieces of granit out of laying stones.
 type=generic
 program=cut
 
@@ -40,4 +39,3 @@ dirpics=walkload_!!_??.png
 hotspot=9 21
 fps=10
 playercolor=true
-

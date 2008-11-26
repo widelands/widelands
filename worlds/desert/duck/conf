@@ -1,6 +1,6 @@
-type="critter"
+type=critter
 swimming=1  # defaults to 0, is only in the water?
-soundfx=../../../sound/animals/duck
+picture=duck_00.png
 
 [idle]
 pics=duck_??.png

@@ -1,11 +1,10 @@
-[global]
-type="diminishing"
-stock=1
-
-size=normal
+size=medium
 attrib=tree
 program=fall
+picture=idle_0.png
 
+[idle]
+pics=idle_?.png
 hotspot=24 60
 
 [fall]

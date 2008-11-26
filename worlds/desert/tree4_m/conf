@@ -1,6 +1,4 @@
-[global]
-type=immovable
-size=normal
+size=medium
 program=program
 picture=s3tree4_00.png
 
@@ -10,5 +8,5 @@ picture=s3tree4_00.png
 
 [medium]
 pics=s3tree4_??.png
-ftp=8
+fps=8
 hotspot=18 48

@@ -1,6 +1,5 @@
-[global]
-hotspot=3 31
 program=program
+picture=fallentree_00.png
 
 [program]
 0=animation dead 30000
@@ -8,6 +7,5 @@ program=program
 
 [dead]
 pics=fallentree_??.png
-ftp=8
+fps=8
 hotspot=3 31
-

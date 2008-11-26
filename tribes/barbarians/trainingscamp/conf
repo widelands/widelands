@@ -1,4 +1,3 @@
-[global]
 type=training
 size=big
 worker=trainer
@@ -102,9 +101,5 @@ gold=4
 thatchreed=3
 
 [idle]
-pics=trainingscamp_i_??.png  # ???
-hotspot=77 76
-
-[working]
 pics=trainingscamp_i_??.png  # ???
 hotspot=77 76

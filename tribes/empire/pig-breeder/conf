@@ -1,5 +1,4 @@
-[global]
-help=breeds pigs
+help=_Breeds pigs.
 type=generic
 
 [buildcost]

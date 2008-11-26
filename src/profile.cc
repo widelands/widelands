@@ -239,7 +239,7 @@ void Section::mark_used()
  *
  * Print a warning for every unused value.
  */
-void Section::check_used()
+void Section::check_used() const
 {
 	container_iterate_const(Value_list, m_values, i)
 		if (not i.current->is_used())
@@ -792,18 +792,15 @@ void Profile::error(const char *fmt, ...) const
  *
  * Signal an error if a section or key hasn't been used.
  */
-void Profile::check_used()
+void Profile::check_used() const
 {
-	for
-		(Section_list::iterator s = m_sections.begin();
-		 s != m_sections.end();
-		 ++s)
-	{
-		if (!s->is_used())
-			error("Section [%s] not used (did you spell the name correctly?)", s->get_name());
+	container_iterate_const(Section_list, m_sections, i)
+		if (!i.current->is_used())
+			error
+				("Section [%s] not used (did you spell the name correctly?)",
+				 i.current->get_name());
 		else
-			s->check_used();
-	}
+			i.current->check_used();
 }
 
 /** Profile::get_section(const char *name)
@@ -1072,6 +1069,10 @@ void Profile::read
 	catch (std::exception &e) {
 		error("%s:%u: %s", filename, linenr, e.what());
 	}
+
+	//  Make sure that the requested global section exists, even if it is empty.
+	if (global_section and not get_section(global_section))
+		create_section(global_section, true);
 }
 
 /**

@@ -87,51 +87,57 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 					Profile prof(path.c_str(), "global");
 					path.resize(path.size() - strlen("conf"));
 					Section & global_s = prof.get_safe_section("global");
-					char const * const type = global_s.get_safe_string("type");
-					if      (not strcasecmp(type, "critter"))
-						m_bobs.add
-							(new Critter_Bob_Descr
-							 	(_name, _descname, path, prof, global_s, this, &m_default_encdata));
-					else if (not strcasecmp(type, "ware"))
-						m_wares.add
-							(new Item_Ware_Descr
-							 	(_name, _descname, path, prof, global_s));
-					else if (not strcasecmp(type, "generic"))
-						m_workers.add
-							(new Worker_Descr
-							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-					else if (not strcasecmp(type, "carrier"))
-						m_workers.add
-							(new Carrier::Descr
-							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-					else if (not strcasecmp(type, "soldier"))
-						m_workers.add
-							(new Soldier_Descr
-							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-					else if (not strcasecmp(type, "production"))
-						m_buildings.add
-							(new ProductionSite_Descr
-							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-					else if (not strcasecmp(type, "military"))
-						m_buildings.add
-							(new MilitarySite_Descr
-							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-					else if (not strcasecmp(type, "training"))
-						m_buildings.add
-							(new TrainingSite_Descr
-							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-					else if (not strcasecmp(type, "warehouse"))
-						m_buildings.add
-							(new Warehouse_Descr
-							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-					else if (not strcasecmp(type, "construction"))
-						m_buildings.add
-							(new ConstructionSite_Descr
-							 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-					else
+					if (char const * const type = global_s.get_string("type")) {
+						//  Compares are sorted by frequence:
+						//    grep ^type= {global,tribes,worlds}/*/*/conf|grep -v .svn|sed "s@.*type=\([^# ]*\).*@type=\1@"|sort|uniq -c|sort -gr
+						//  But for even better performance, gperf should be used.
+						if      (not strcasecmp(type, "ware"))
+							m_wares.add
+								(new Item_Ware_Descr
+								 	(_name, _descname, path, prof, global_s));
+						else if (not strcasecmp(type, "production"))
+							m_buildings.add
+								(new ProductionSite_Descr
+								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+						else if (not strcasecmp(type, "generic"))
+							m_workers.add
+								(new Worker_Descr
+								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+						else if (not strcasecmp(type, "critter"))
+							m_bobs.add
+								(new Critter_Bob_Descr
+								 	(_name, _descname, path, prof, global_s, this, &m_default_encdata));
+						else if (not strcasecmp(type, "military"))
+							m_buildings.add
+								(new MilitarySite_Descr
+								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+						else if (not strcasecmp(type, "training"))
+							m_buildings.add
+								(new TrainingSite_Descr
+								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+						else if (not strcasecmp(type, "warehouse"))
+							m_buildings.add
+								(new Warehouse_Descr
+								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+						else if (not strcasecmp(type, "carrier"))
+							m_workers.add
+								(new Carrier::Descr
+								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+						else if (not strcasecmp(type, "construction"))
+							m_buildings.add
+								(new ConstructionSite_Descr
+								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+						else if (not strcasecmp(type, "soldier"))
+							m_workers.add
+								(new Soldier_Descr
+								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+						else
+							throw wexception("unknown map object type");
+					} else
 						m_immovables.add
 							(new Immovable_Descr
 							 	(_name, _descname, path, prof, global_s, this));
+					prof.check_used();
 				} catch (std::exception const & e) {
 					throw wexception("%s=\"%s\": %s", _name, _descname, e.what());
 				}

@@ -1,7 +1,5 @@
-[global]
-help=Defend and Conquer!
+help=_Defend and Conquer!
 type=soldier
-
 
 # SOLDIER SPECIFIC STUFF STARTS HERE
 max_hp_level=3
@@ -47,4 +45,3 @@ hotspot=5 13
 [walk]
 hotspot=5 13
 fps=20
-

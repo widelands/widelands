@@ -1,5 +1,4 @@
-[global]
-help=Kills animals.
+help=_The Hunter brings good meat to the colonists.
 type=generic
 program=hunt
 

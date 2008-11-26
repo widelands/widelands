@@ -1,4 +1,3 @@
-[global]
 type=production
 size=mine
 worker=miner
@@ -33,4 +32,3 @@ hotspot=49 49
 pics=goldmine_w_??.png
 hotspot=49 49
 fps=10
-

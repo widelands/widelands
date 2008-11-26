@@ -1,5 +1,3 @@
-[global]
-type=immovable
 size=big
 program=program
 picture=field0s_00.png
@@ -10,5 +8,5 @@ picture=field0s_00.png
 
 [small]
 pics=field0s_??.png
-ftp=5
+fps=5
 hotspot=15 18

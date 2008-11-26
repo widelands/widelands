@@ -1,4 +1,3 @@
-[global]
 type=production
 size=big
 worker=weaver
@@ -46,11 +45,6 @@ stone=4
 planks=2
 
 [idle]
-pics=weaving_mill_i_??.png  # ???
-hotspot=60 64
-playercolor=true
-
-[working]
 pics=weaving_mill_i_??.png  # ???
 hotspot=60 64
 playercolor=true

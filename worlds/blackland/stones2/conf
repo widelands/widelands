@@ -1,12 +1,10 @@
-type="diminishing"
-ends_in="stones5"
-
 size=big
 attrib=stone
 program=shrink
+picture=idle.png
 
+[idle]
 hotspot=25 73
-picture=stones2_00.png
 
 [shrink]
 0=transform stones1

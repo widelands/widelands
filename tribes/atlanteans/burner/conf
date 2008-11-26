@@ -1,5 +1,4 @@
-[global]
-help=Burns coals
+help=_Burns coal.
 type=generic
 
 [buildcost]

@@ -1,4 +1,4 @@
-type="critter"
+type=critter
 swimming=0  # defaults to 0, is only in the water?
 attrib=eatable
 program=remove
@@ -14,4 +14,3 @@ fps=20
 [walk]
 hotspot=25 30
 fps=20
-

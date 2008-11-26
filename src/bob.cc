@@ -57,21 +57,18 @@ Bob::Descr::Descr
 	 Tribe_Descr const * const tribe, EncodeData const * encdata)
 	:
 	Map_Object_Descr(_name, _descname),
+	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_owner_tribe(tribe)
 {
 	m_default_encodedata.clear();
 
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
-		m_picture  = directory;
-		m_picture += idle_s.get_string("picture", (name() + "_00.png").c_str());
 
 		m_default_encodedata.parse(idle_s);
 
 		add_animation
-			("idle",
-			 g_anim.get
-			 	(directory, idle_s, (name() + "_??.png").c_str(), encdata));
+			("idle", g_anim.get (directory, idle_s, "idle.png", encdata));
 	}
 
 	// Parse attributes

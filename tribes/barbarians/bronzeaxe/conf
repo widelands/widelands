@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"The bronze axe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axe factory."
+help=_The bronze axe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axe factory.
 
 [idle]
 pics=idle.png

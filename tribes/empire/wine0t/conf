@@ -1,6 +1,4 @@
-[global]
-type=immovable
-size=normal
+size=medium
 program=program
 picture=wine0t_00.png
 
@@ -10,5 +8,5 @@ picture=wine0t_00.png
 
 [tiny]
 pics=wine0t_??.png
-ftp=5
+fps=5
 hotspot=15 18

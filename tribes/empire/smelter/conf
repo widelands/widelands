@@ -1,5 +1,4 @@
-[global]
-help=Smelts iron
+help=_Smelts iron.
 type=generic
 
 [buildcost]

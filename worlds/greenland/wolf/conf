@@ -1,4 +1,4 @@
-type="critter" #graphics: Toralf Bethke
+type=critter #graphics: Toralf Bethke
 swimming=0
 attrib=eatable
 program=remove
@@ -15,4 +15,3 @@ fps=10
 hotspot=20 20
 dirpics=wolf_walk_!!_??.png
 fps=20
-

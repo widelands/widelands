@@ -1,4 +1,3 @@
-[global]
 type=training
 size=big
 worker=trainer
@@ -105,8 +104,4 @@ cloth=2
 
 [idle]
 pics=trainingscamp_i_??.png  # ???
-hotspot=82 105
-
-[working]
-pics=trainingscamp_i_??.png # should be changed to working animation, as soon as it exists
 hotspot=82 105

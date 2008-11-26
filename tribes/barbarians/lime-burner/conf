@@ -1,5 +1,4 @@
-[global]
-help=burns lime in the lime kilm
+help=_Burns lime in the lime kilm.
 type=generic
 
 [buildcost]

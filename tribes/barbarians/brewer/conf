@@ -1,5 +1,4 @@
-[global]
-help=Produces the finest ales to keep warriors strong and happy in training
+help=_Produces the finest ales to keep warriors strong and happy in training.
 type=generic
 experience=18-21
 becomes=master-brewer

@@ -1,5 +1,4 @@
-[global]
-help=Gets fish out of the sea
+help=_Gets fish out of the sea.
 type=generic
 program=fish
 soundfx=../../../sound/fisher/fisher_throw_net

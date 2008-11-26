@@ -1,7 +1,5 @@
-[global]
 type=production
 size=small
-help=The Hunter brings good meat to the colonists
 worker=hunter
 program=work
 output=meat

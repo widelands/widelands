@@ -1,5 +1,3 @@
-[global]
-type=immovable
 size=big
 program=program
 picture=blackrootfield_t_00.png
@@ -10,5 +8,5 @@ picture=blackrootfield_t_00.png
 
 [tiny]
 pics=blackrootfield_t_??.png
-ftp=5
+fps=5
 hotspot=31 37

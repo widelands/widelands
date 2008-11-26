@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
+help=_This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable.
 
 [idle]
 pics=idle.png

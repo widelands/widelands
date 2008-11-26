@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"Cornflour is produced out of corn and is one of three parts of the atlantian bread."
+help=_Cornflour is produced out of corn and is one of three parts of the atlantian bread.
 
 [idle]
 pics=idle.png

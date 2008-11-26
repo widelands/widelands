@@ -1,7 +1,4 @@
-[global]
-type="diminishing"
-stock=1
-size=normal
+size=medium
 attrib=grown_reed
 program=program
 program=harvest

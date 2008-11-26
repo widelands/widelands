@@ -2,7 +2,6 @@
 # Building, fortified base and some towers made of black wood. Some flags
 # in the player colors may be present
 
-[global]
 # soundfx=../../../sound/spoken/warehouse-bringitin
 type=warehouse
 size=big

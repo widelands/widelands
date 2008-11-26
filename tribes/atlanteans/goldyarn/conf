@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"This yarn, made of gold, is used for weaving exclusive cloth."
+help=_This yarn, made of gold, is used for weaving exclusive cloth.
 
 # Goldyarn
 [idle]

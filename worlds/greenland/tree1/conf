@@ -1,16 +1,12 @@
-[global]
-type="diminishing"
-stock=1
-soundfx=../../../sound/animals/bird1
-size=normal
+size=medium
 attrib=tree
 program=fall
-hotspot=24 60
+picture=idle_0.png
 
 [idle]
-pics=tree1_??.png
+pics=idle_?.png
 sfx=0 ../../../sound/animals/bird1
-ftp=10
+fps=10
 hotspot=24 60
 
 [fall]
@@ -19,5 +15,5 @@ hotspot=24 60
 
 [falling]
 pics=f_tree1_??.png
-ftp=10
+fps=10
 hotspot=24 60

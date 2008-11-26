@@ -1,5 +1,3 @@
-[global]
-type=immovable
 size=big
 program=program
 picture=cornfield_m_00.png
@@ -10,5 +8,5 @@ picture=cornfield_m_00.png
 
 [midd]
 pics=cornfield_m_??.png
-ftp=5
+fps=5
 hotspot=35 45

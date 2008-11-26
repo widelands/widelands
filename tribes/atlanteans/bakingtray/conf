@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
+help=_The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith.
 
 [idle]
 pics=idle.png

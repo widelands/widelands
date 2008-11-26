@@ -1,4 +1,4 @@
-type="critter"
+type=critter
 swimming=0  # defaults to 0, is only in the water?
 attrib=eatable
 program=remove
@@ -7,6 +7,7 @@ program=remove
 0=remove
 
 [idle]
+pics=menu.png
 hotspot=5 9
 
 [walk]

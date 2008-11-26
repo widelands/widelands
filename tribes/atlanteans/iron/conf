@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_"Weapons and Tools are made of iron."
+help=_Weapons and Tools are made of iron.
 
 [idle]
 pics=idle.png

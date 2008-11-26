@@ -29,8 +29,7 @@ Item_Ware_Descr::Item_Ware_Descr
 	 std::string const & directory, Profile & prof, Section & global_s)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_helptext
-		(global_s.get_string("help", _("Doh... someone forgot the help text!"))),
+	m_helptext      (global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
 	m_icon(0)
 {

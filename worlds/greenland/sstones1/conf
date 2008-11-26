@@ -1,6 +1,6 @@
 size=small
+picture=idle_0.png
 
 [idle]
-pics=sstones1_??.png
+pics=idle_?.png
 hotspot=7 63
-

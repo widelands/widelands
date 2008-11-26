@@ -1,5 +1,4 @@
-[global]
-help=Plants trees.
+help=_Plants trees.
 type=generic
 program=plant
 

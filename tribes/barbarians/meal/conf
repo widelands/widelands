@@ -1,6 +1,5 @@
-[global]
 type=ware
-help=_A real meal which satisfies all miners needs
+help=_A real meal which satisfies all miners needs.
 
 [idle]
 pics=idle.png

@@ -1,5 +1,4 @@
-[global]
-help=Carries items along your roads.
+help=_Carries items along your roads.
 type=carrier
 
 [buildcost]

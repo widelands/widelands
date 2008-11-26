@@ -1,5 +1,4 @@
-[global]
-help=Produces cloth for ship and soldiers
+help=_Produces cloth for ships and soldiers.
 type=generic
 
 [buildcost]
