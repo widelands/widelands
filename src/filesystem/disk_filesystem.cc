@@ -289,7 +289,20 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
 	if (FileExists(dirname)) {
 		if (IsDirectory(dirname)) return; // ok, dir is already there
 	}
-	MakeDirectory(dirname);
+	try {
+		MakeDirectory(dirname);
+	} catch (const CannotCreateDirectory& e) {
+		// need more work to do it right
+		// itterate through all possible directories
+		size_t it = 0;
+		while (it != dirname.size() && it != std::string::npos){
+			it = dirname.find('/',it);
+			EnsureDirectoryExists(dirname.substr(0,it));
+			++it //make sure we don't keep finding the same directories
+		}
+	} catch (_wexception const & e) {
+		throw wexception ("RealFSImpl::EnsureDirectory");//,e.what());
+	}
 }
 
 /**
@@ -316,7 +329,7 @@ void RealFSImpl::MakeDirectory(std::string const & dirname) {
 #endif
 		 ==
 		 -1)
-		throw wexception
+		throw CannotCreateDirectory
 			("Couldn't create directory %s: %s",
 			 dirname.c_str(), strerror(errno));
 }

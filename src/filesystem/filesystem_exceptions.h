@@ -85,4 +85,16 @@ struct FileAccessDenied_error : public File_error {
 	{}
 };
 
+/**
+ * The directory cannot be created 
+ */
+
+struct DirectoryCannotCreate_error : public File_error {
+       explicit DirectoryCannotCreate_error 
+       (const std::string & thrower,
+	const std::string & dirname,
+	const std::string & message = "cannot create directory")
+	 throw() : File_error(thrower,dirname,message)
+  {}
+};
 #endif
