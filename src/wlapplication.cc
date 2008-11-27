@@ -42,6 +42,7 @@
 #include "interactive_player.h"
 #include "interactive_spectator.h"
 #include "journal.h"
+#include "disk_filesystem.h"
 #include "layered_filesystem.h"
 #include "map.h"
 #include "netclient.h"

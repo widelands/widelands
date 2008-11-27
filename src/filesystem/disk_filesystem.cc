@@ -19,6 +19,7 @@
 
 #include "disk_filesystem.h"
 
+#include "filesystem_exceptions.h"
 #include "wexception.h"
 #include "zip_filesystem.h"
 
@@ -291,14 +292,14 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
 	}
 	try {
 		MakeDirectory(dirname);
-	} catch (const CannotCreateDirectory& e) {
+	} catch (const DirectoryCannotCreate_error& e) {
 		// need more work to do it right
 		// itterate through all possible directories
 		size_t it = 0;
 		while (it != dirname.size() && it != std::string::npos){
 			it = dirname.find('/',it);
 			EnsureDirectoryExists(dirname.substr(0,it));
-			++it //make sure we don't keep finding the same directories
+			++it; //make sure we don't keep finding the same directories
 		}
 	} catch (_wexception const & e) {
 		throw wexception ("RealFSImpl::EnsureDirectory");//,e.what());
@@ -329,7 +330,7 @@ void RealFSImpl::MakeDirectory(std::string const & dirname) {
 #endif
 		 ==
 		 -1)
-		throw CannotCreateDirectory
+		throw DirectoryCannotCreate_error
 			("Couldn't create directory %s: %s",
 			 dirname.c_str(), strerror(errno));
 }
