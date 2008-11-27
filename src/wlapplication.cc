@@ -165,13 +165,12 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	// finally, the user's config directory
 	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
 #ifndef __WIN32__
-	std::string path;
+	std::string path = FileSystem::GetHomedir();
 
-	//  do not use GetHomedir() to not accidentally create ./.widelands
-	//  who knows, maybe the user is homeless
-	if (char const * const buf = getenv("HOME")) {
-		path = std::string(buf) + "/.widelands";
-		mkdir(path.c_str(), 0x1FF);
+	//If we don't have a home directory don't do anything
+	if (path.size()) {
+		path += "/.widelands";
+		RealFSImpl("").EnsureDirectoryExists(path);
 		try {
 			g_fs->AddFileSystem(FileSystem::Create(path.c_str()));
 		}
