@@ -1,4 +1,4 @@
-does/*
+/*
  * Copyright (C) 2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
