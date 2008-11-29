@@ -1,4 +1,4 @@
-/*
+does/*
  * Copyright (C) 2004, 2007-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
@@ -622,7 +622,7 @@ void Cmd_SetWarePriority::serialize(StreamWrite& ser)
 
 Cmd_ChangeTargetQuantity::Cmd_ChangeTargetQuantity
 	(int32_t const duetime, Player_Number const _sender,
-	 size_t const _economy, Ware_Index const _ware_type)
+	 uint32_t const _economy, Ware_Index const _ware_type)
 	:
 	PlayerCommand(duetime, _sender),
 	m_economy (_economy), m_ware_type(_ware_type)
@@ -667,7 +667,7 @@ void Cmd_ChangeTargetQuantity::serialize(StreamWrite & ser)
 
 Cmd_SetTargetQuantity::Cmd_SetTargetQuantity
 	(int32_t const duetime, Player_Number const _sender,
-	 size_t const _economy,
+	 uint32_t const _economy,
 	 Ware_Index const _ware_type,
 	 uint32_t const _permanent, uint32_t const _temporary)
 	:
@@ -736,7 +736,7 @@ void Cmd_SetTargetQuantity::serialize(StreamWrite & ser)
 
 Cmd_ResetTargetQuantity::Cmd_ResetTargetQuantity
 	(int32_t const duetime, Player_Number const _sender,
-	 size_t const _economy,
+	 uint32_t const _economy,
 	 Ware_Index const _ware_type)
 	:
 	Cmd_ChangeTargetQuantity(duetime, _sender, _economy, _ware_type)
