@@ -823,6 +823,15 @@ void Player::receive(const NoteField& note)
 	NoteSender<NoteField>::send(note);
 }
 
+void Player::setAI(const std::string & ai)
+{
+	m_ai = ai;
+}
+
+const std::string & Player::getAI() const
+{
+	return m_ai;
+}
 
 /**
  * Read statistics data from a file.

@@ -21,6 +21,7 @@
 
 #include "computer_player.h"
 #include "game.h"
+#include "player.h"
 #include "playercommand.h"
 #include "profile.h"
 #include "wlapplication.h"
@@ -93,13 +94,15 @@ void SinglePlayerGameController::think()
 	if (m_useai && m_game.is_loaded()) {
 		const Widelands::Player_Number nr_players = m_game.map().get_nrplayers();
 		iterate_players_existing(p, nr_players, m_game, plr) {
-			if (p != m_local) {
-				if (p > m_computerplayers.size())
-					m_computerplayers.resize(p);
-				if (!m_computerplayers[p-1])
-					m_computerplayers[p-1] = new Computer_Player(m_game, p);
-				m_computerplayers[p-1]->think();
+			if (p == m_local)
+				continue;
+
+			if (p > m_computerplayers.size())
+				m_computerplayers.resize(p);
+			if (!m_computerplayers[p-1]) {
+				m_computerplayers[p-1] = Computer_Player::getImplementation(plr->getAI())->instantiate(m_game, p);
 			}
+			m_computerplayers[p-1]->think();
 		}
 	}
 }

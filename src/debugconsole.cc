@@ -98,7 +98,7 @@ struct Console : public ChatProvider, public Handler {
 		cm.msg = msg;
 		messages.push_back(cm);
 
-		log("*** %s\n", msg.data());
+		log("*** %s\n", msg.c_str());
 
 		// Arbitrary choice of backlog size
 		if (messages.size() > 1000)

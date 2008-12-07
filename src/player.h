@@ -457,6 +457,9 @@ struct Player :
 	void receive(const NoteImmovable& note);
 	void receive(const NoteField& note);
 
+	void setAI(const std::string & ai);
+	const std::string & getAI() const;
+
 private:
 	void update_building_statistics(Building* building, losegain_t lg);
 
@@ -485,6 +488,7 @@ private:
 	std::vector<bool>     m_allowed_buildings;
 	economy_vector        m_economies;
 	std::string           m_name; // Player name
+	std::string           m_ai; /**< Name of preferred AI implementation */
 
 	std::vector<uint32_t> m_current_statistics;
 	std::vector< std::vector<uint32_t> > m_ware_productions;

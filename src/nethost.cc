@@ -97,6 +97,10 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTribe(number, tribe);
 	}
 
+	virtual void setPlayerAI(uint8_t, const std::string&) {
+		// not implemented
+	}
+
 	virtual void setPlayerName(uint8_t number, const std::string& name) {
 		if (number >= h->settings().players.size())
 			return;
@@ -254,6 +258,13 @@ void NetHost::clearComputerPlayers()
 	d->computerplayers.clear();
 }
 
+void NetHost::initComputerPlayer(Widelands::Player_Number p)
+{
+	std::string ainame = d->game->get_player(p)->getAI();
+	Computer_Player * ai = Computer_Player::getImplementation(ainame)->instantiate(*d->game, p);
+	d->computerplayers.push_back(ai);
+}
+
 void NetHost::initComputerPlayers()
 {
 	const Widelands::Player_Number nr_players = d->game->map().get_nrplayers();
@@ -267,7 +278,7 @@ void NetHost::initComputerPlayers()
 				break;
 
 		if (client >= d->clients.size())
-			d->computerplayers.push_back(new Computer_Player(*d->game, p));
+			initComputerPlayer(p);
 	}
 }
 
@@ -1144,7 +1155,7 @@ void NetHost::disconnectPlayer(uint8_t number, const std::string& reason, bool s
 	}
 
 	if (needai && d->game)
-		d->computerplayers.push_back(new Computer_Player(*d->game, number+1));
+		initComputerPlayer(number+1);
 }
 
 void NetHost::disconnectClient(uint32_t number, const std::string& reason,  bool sendreason)

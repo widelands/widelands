@@ -327,6 +327,7 @@ void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& setti
 
 			add_player(i + 1, playersettings.tribe, playersettings.name);
 			get_player(i+1)->init(false);
+			get_player(i+1)->setAI(playersettings.ai);
 		}
 
 		loaderUI.step(_("Loading map"));

@@ -121,9 +121,12 @@ void PlayerDescriptionGroup::refresh()
 		} else {
 			std::string title;
 
-			if (player.state == PlayerSettings::stateComputer)
-				title = _("Computer");
-			else
+			if (player.state == PlayerSettings::stateComputer) {
+				if (player.ai.size() == 0)
+					title = _("Computer");
+				else
+					title = _("AI: ") + player.ai;
+			} else
 				title = _("Human");
 			// get translated tribesname
 			std::string tribepath("tribes/" + player.tribe);

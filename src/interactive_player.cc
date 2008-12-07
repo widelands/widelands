@@ -452,7 +452,7 @@ void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string>& args)
 		return;
 	}
 
-	int n = atoi(args[1].data());
+	int n = atoi(args[1].c_str());
 	if (n < 1 || n > MAX_PLAYERS || !game().get_player(n)) {
 		DebugConsole::write(str(format("Player #%1% does not exist.") % n));
 		return;

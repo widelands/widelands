@@ -20,6 +20,7 @@
 #ifndef NETHOST_H
 #define NETHOST_H
 
+#include "widelands.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "network.h"
@@ -72,6 +73,7 @@ private:
 	void syncreport();
 
 	void clearComputerPlayers();
+	void initComputerPlayer(Widelands::Player_Number p);
 	void initComputerPlayers();
 
 	void handle_packet(uint32_t i, RecvPacket& r);

@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 5
+#define CURRENT_PACKET_VERSION 6
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -65,6 +65,9 @@ throw (_wexception)
 					game->add_player(plnum, tribe, name);
 					Player & player = game->player(plnum);
 					player.set_see_all(see_all);
+
+					if (packet_version >= 6)
+						player.setAI(fr.CString());
 
 					for (uint32_t j = 0; j < 4; ++j)
 						player.m_playercolor[j] = rgb[j];
@@ -132,6 +135,7 @@ throw (_wexception)
 		// Economies are in a packet after map loading
 
 		fw.CString(plr->m_name.c_str());
+		fw.CString(plr->m_ai.c_str());
 
 		plr->WriteStatistics(fw);
 		fw.Unsigned32(plr->casualties());

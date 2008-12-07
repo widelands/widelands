@@ -259,6 +259,11 @@ void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
 	// client is not allowed to do this
 }
 
+void NetClient::setPlayerAI(uint8_t number, const std::string& ai)
+{
+	// client is not allowed to do this
+}
+
 void NetClient::nextPlayerState(uint8_t)
 {
 	// client is not allowed to do this

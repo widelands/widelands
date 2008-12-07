@@ -34,6 +34,7 @@ struct PlayerSettings {
 	State state;
 	std::string name;
 	std::string tribe;
+	std::string ai; /**< Preferred AI provider for this player */
 };
 
 /**
@@ -89,6 +90,7 @@ public:
 
 	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame = false) = 0;
 	virtual void setPlayerState (uint8_t number, PlayerSettings::State state) = 0;
+	virtual void setPlayerAI    (uint8_t number, const std::string& ai) = 0;
 	virtual void nextPlayerState(uint8_t number) = 0;
 	virtual void setPlayerTribe (uint8_t number, const std::string& tribe) = 0;
 	virtual void setPlayerName  (uint8_t number, const std::string& name) = 0;

@@ -20,6 +20,7 @@
 #include "wlapplication.h"
 
 #include "build_id.h"
+#include "computer_player.h"
 #include "editorinteractive.h"
 #include "font_handler.h"
 #include "fullscreen_menu_campaign_select.h"
@@ -1328,14 +1329,31 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 		s.players[number].state = state;
 	}
+	virtual void setPlayerAI(uint8_t number, const std::string& ai) {
+		if (number >= s.players.size())
+			return;
+
+		s.players[number].ai = ai;
+	}
 	virtual void nextPlayerState(uint8_t number) {
 		if (number == 0 || number >= s.players.size())
 			return;
 
-		if (s.players[number].state == PlayerSettings::stateComputer)
-			s.players[number].state = PlayerSettings::stateClosed;
-		else
-			s.players[number].state = PlayerSettings::stateComputer;
+		const Computer_Player::ImplementationVector& impls =
+			Computer_Player::getImplementations();
+		if (impls.size() > 1) {
+			Computer_Player::ImplementationVector::const_iterator it = impls.begin();
+			do {
+				it++;
+				if ((*(it-1))->name == s.players[number].ai)
+					break;
+			} while (it != impls.end());
+			if (it == impls.end())
+				it = impls.begin();
+			s.players[number].ai = (*it)->name;
+		}
+
+		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
 	virtual void setPlayerTribe(uint8_t number, const std::string& tribe) {
