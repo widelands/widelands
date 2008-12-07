@@ -26,7 +26,13 @@
 struct Interactive_Base;
 
 struct MiniMap : public UI::UniqueWindow {
-	MiniMap(Interactive_Base & parent, UI::UniqueWindow::Registry *);
+	struct Registry : public UI::UniqueWindow::Registry {
+		int8_t flags; /**< Combination of \ref Layers flags */
+
+		Registry() : flags(Terrn | Owner | Flags | Roads | Bldns) {}
+	};
+
+	MiniMap(Interactive_Base & parent, Registry *);
 
 	UI::Signal2<int32_t, int32_t> warpview;
 
@@ -49,7 +55,7 @@ private:
 	 */
 	struct View : public UI::Panel {
 		View
-			(UI::Panel & parent,
+			(UI::Panel & parent, int8_t * flags,
 			 int32_t x, int32_t y, uint32_t w, uint32_t h,
 			 Interactive_Base &);
 
@@ -65,7 +71,7 @@ private:
 		int32_t                m_viewx, m_viewy;
 		uint32_t               m_pic_map_spot;
 	public:
-		int8_t flags;
+		int8_t * m_flags;
 	};
 
 	uint32_t number_of_buttons_per_row() const throw ();
@@ -79,7 +85,6 @@ private:
 	UI::IDButton<MiniMap, Layers> button_flags;
 	UI::IDButton<MiniMap, Layers> button_roads;
 	UI::IDButton<MiniMap, Layers> button_bldns;
-	int8_t     m_flags;
 };
 
 #endif

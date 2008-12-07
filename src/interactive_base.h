@@ -20,6 +20,8 @@
 #ifndef INTERACTIVE_BASE_H
 #define INTERACTIVE_BASE_H
 
+#include <boost/scoped_ptr.hpp>
+
 #include "editor_game_base.h"
 #include "map.h"
 #include "mapview.h"
@@ -32,7 +34,8 @@
 #include <SDL_keysym.h>
 
 namespace Widelands {struct CoordPath;};
-class MiniMap;
+
+struct InteractiveBaseInternals;
 
 /**
  * This is used to represent the code that Interactive_Player and
@@ -110,7 +113,7 @@ private:
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
 
-	MiniMap * m_mm;
+	boost::scoped_ptr<InteractiveBaseInternals> m;
 	Widelands::Editor_Game_Base & m_egbase;
 	struct Sel_Data {
 		Sel_Data
@@ -145,8 +148,6 @@ private:
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
-
-	UI::UniqueWindow::Registry m_minimap;
 
 protected:
 	void toggle_minimap();

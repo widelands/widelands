@@ -30,7 +30,7 @@
 
 
 MiniMap::View::View
-	(UI::Panel & parent,
+	(UI::Panel & parent, int8_t * flags,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 Interactive_Base & iabase)
 :
@@ -39,7 +39,7 @@ m_iabase      (iabase),
 m_viewx       (0),
 m_viewy       (0),
 m_pic_map_spot(g_gr->get_picture(PicMod_Game, "pics/map_spot.png")),
-flags         (MiniMap::Terrn)
+m_flags       (flags)
 {
 	Widelands::Map const & map = iabase.egbase().map();
 	set_size(w ? w : map.get_width(), h ? h : map.get_height());
@@ -73,7 +73,7 @@ void MiniMap::View::draw(RenderTarget & dst)
 		(m_iabase.egbase(),
 		 m_iabase.get_player(),
 		 Point(m_viewx - get_w() / 2, m_viewy - get_h() / 2),
-		 flags);
+		 *m_flags);
 }
 
 
@@ -130,10 +130,10 @@ inline uint32_t MiniMap::but_w() const throw ()
 {return m_view.get_w() / number_of_buttons_per_row();}
 inline uint32_t MiniMap::but_h() const throw () {return 20;}
 MiniMap::MiniMap
-	(Interactive_Base & iabase, UI::UniqueWindow::Registry * registry)
+	(Interactive_Base & iabase, Registry * registry)
 :
 UI::UniqueWindow(&iabase, registry, 0, 0, _("Map")),
-m_view(*this, 0, 0, 0, 0, iabase),
+m_view(*this, &registry->flags, 0, 0, 0, 0, iabase),
 
 button_terrn
 	(this,
@@ -178,4 +178,4 @@ button_bldns
 }
 
 
-void MiniMap::toggle(Layers button) {m_view.flags ^= button;}
+void MiniMap::toggle(Layers button) {*m_view.m_flags ^= button;}

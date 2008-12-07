@@ -51,10 +51,17 @@ using Widelands::Map;
 using Widelands::Map_Object;
 using Widelands::TCoords;
 
+struct InteractiveBaseInternals {
+	MiniMap* mm;
+	MiniMap::Registry minimap;
+
+	InteractiveBaseInternals() : mm(0) {}
+};
+
 Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
 :
 Map_View(0, 0, 0, get_xres(), get_yres(), *this),
-m_mm                          (0),
+m(new InteractiveBaseInternals),
 m_egbase                      (the_egbase),
 #ifdef DEBUG //  not in releases
 m_display_flags               (dfDebug),
@@ -327,7 +334,7 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
  */
 void Interactive_Base::mainview_move(int32_t x, int32_t y)
 {
-	if (m_minimap.window) {
+	if (m->minimap.window) {
 		const Map & map = egbase().map();
 		const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
 		const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
@@ -338,7 +345,7 @@ void Interactive_Base::mainview_move(int32_t x, int32_t y)
 		if (y >= maxy) y -= maxy;
 
 
-		m_mm->set_view_pos(x, y);
+		m->mm->set_view_pos(x, y);
 	}
 }
 
@@ -374,7 +381,7 @@ void Interactive_Base::move_view_to(const Coords c)
 	int32_t x = c.x * TRIANGLE_WIDTH;
 	int32_t y = c.y * TRIANGLE_HEIGHT;
 
-	if (m_minimap.window) m_mm->set_view_pos(x, y);
+	if (m->minimap.window) m->mm->set_view_pos(x, y);
 
 	minimap_warp(x, y);
 }
@@ -389,7 +396,7 @@ Center the mainview on the given position (in pixels)
 */
 void Interactive_Base::move_view_to_point(Point pos)
 {
-	if (m_minimap.window) m_mm->set_view_pos(pos.x, pos.y);
+	if (m->minimap.window) m->mm->set_view_pos(pos.x, pos.y);
 
 	set_viewpoint(pos - Point(get_w() / 2, get_h() / 2));
 }
@@ -403,12 +410,12 @@ Open the minimap or close it if it's open
 ===========
 */
 void Interactive_Base::toggle_minimap() {
-	if (m_minimap.window) {
-		delete m_minimap.window;
+	if (m->minimap.window) {
+		delete m->minimap.window;
 	}
 	else {
-		m_mm = new MiniMap(*this, &m_minimap);
-		m_mm->warpview.set(this, &Interactive_Base::minimap_warp);
+		m->mm = new MiniMap(*this, &m->minimap);
+		m->mm->warpview.set(this, &Interactive_Base::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with
 		const Point p = get_viewpoint();
@@ -423,8 +430,8 @@ void Interactive_Base::toggle_minimap() {
  */
 void Interactive_Base::hide_minimap()
 {
-	if (m_minimap.window)
-		delete m_minimap.window;
+	if (m->minimap.window)
+		delete m->minimap.window;
 }
 
 

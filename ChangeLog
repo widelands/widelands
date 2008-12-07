@@ -1,3 +1,6 @@
+since build-13:
+- MiniMap remembers which details to show during a game
+
 build-13:
 - Count casualties/kills, military/civilian buildings lost/defeated and present
   them in the general statistics menu (except for civilian buildings defeated,
