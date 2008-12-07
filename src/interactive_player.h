@@ -20,6 +20,7 @@
 #ifndef INTERACTIVE_PLAYER_H
 #define INTERACTIVE_PLAYER_H
 
+#include "debugconsole.h"
 #include "interactive_gamebase.h"
 
 #include "ui_button.h"
@@ -53,7 +54,7 @@ private:
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-struct Interactive_Player : public Interactive_GameBase {
+struct Interactive_Player : public Interactive_GameBase, public DebugConsole::Handler {
 	Interactive_Player(Widelands::Game &, Widelands::Player_Number, bool, bool);
 
 	void start();
@@ -96,6 +97,8 @@ struct Interactive_Player : public Interactive_GameBase {
 	}
 
 private:
+	void cmdSwitchPlayer(const std::vector<std::string>& args);
+
 	ChatProvider           * m_chatProvider;
 	ChatDisplay            * m_chatDisplay;
 	Widelands::Player_Number m_player_number;
@@ -118,6 +121,7 @@ private:
 	UI::UniqueWindow::Registry m_objectives;
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_encyclopedia;
+	UI::UniqueWindow::Registry m_debugconsole;
 };
 
 

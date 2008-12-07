@@ -47,22 +47,22 @@ m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 	if (get_usedefaultpos())
 		center_to_parent();
 
-	close_on_send = false;
+	m_close_on_send = false;
 
 	m_chat.sent.set(this, &GameChatMenu::acknowledge);
 	m_chat.aborted.set(this, &GameChatMenu::acknowledge);
 }
 
 
-void GameChatMenu::enter_chat_message()
+void GameChatMenu::enter_chat_message(bool close_on_send)
 {
 	m_chat.focusEdit();
-	close_on_send = true;
+	m_close_on_send = close_on_send;
 }
 
 
 void GameChatMenu::acknowledge()
 {
-	if (close_on_send)
+	if (m_close_on_send)
 		die();
 }

@@ -19,10 +19,14 @@
 
 #include "interactive_player.h"
 
+#include <boost/bind.hpp>
+#include <boost/format.hpp>
+
 #include "building.h"
 #include "building_statistics_menu.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
+#include "debugconsole.h"
 #include "encyclopedia_window.h"
 #include "fieldaction.h"
 #include "font_handler.h"
@@ -56,6 +60,7 @@
 
 using Widelands::Building;
 using Widelands::Map;
+using boost::format;
 
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
@@ -204,6 +209,8 @@ m_toggle_help
 	adjust_toolbar_position();
 
 	set_display_flag(dfSpeed, true);
+
+	addCommand("switchplayer", boost::bind(&Interactive_Player::cmdSwitchPlayer, this, _1));
 }
 
 
@@ -403,6 +410,13 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 			dynamic_cast<GameChatMenu &>(*m_chat.window).enter_chat_message();
 			return true;
 
+		case SDLK_F6:
+			if (get_display_flag(dfDebug)) {
+				new GameChatMenu
+					(this, m_debugconsole, *DebugConsole::getChatProvider());
+				dynamic_cast<GameChatMenu &>(*m_debugconsole.window).enter_chat_message(false);
+			}
+			return true;
 #ifdef DEBUG //  only in debug builds
 		case SDLK_F5:
 			player().set_see_all(not player().see_all());
@@ -430,3 +444,20 @@ void Interactive_Player::set_player_number(uint32_t n) {
  * while a game is currently playing.
  */
 void Interactive_Player::cleanup_for_load() {}
+
+void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string>& args)
+{
+	if (args.size() != 2) {
+		DebugConsole::write("Usage: switchplayer <nr>");
+		return;
+	}
+
+	int n = atoi(args[1].data());
+	if (n < 1 || n > MAX_PLAYERS || !game().get_player(n)) {
+		DebugConsole::write(str(format("Player #%1% does not exist.") % n));
+		return;
+	}
+
+	DebugConsole::write(str(format("Switching from #%1% to #%2%.") % static_cast<int>(m_player_number) % n));
+	m_player_number = n;
+}
