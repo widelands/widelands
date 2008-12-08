@@ -152,7 +152,7 @@ void Multiline_Textarea::draw_scrollbar() {
 		bool setbottom = false;
 
 		if (m_scrollmode == ScrollLog) {
-			if (m_scrollbar.get_pos() >= m_scrollbar.get_steps()-1)
+			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps()-1)
 				setbottom = true;
 		}
 
@@ -164,7 +164,7 @@ void Multiline_Textarea::draw_scrollbar() {
 			m_textpos = m_textheight - get_h();
 
 		m_scrollbar.set_steps(m_textheight - get_h());
-		m_scrollbar.set_pos(m_textpos);
+		m_scrollbar.set_scrollpos(m_textpos);
 	}
 }
 

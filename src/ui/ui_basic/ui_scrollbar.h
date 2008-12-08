@@ -51,12 +51,12 @@ public:
 	void set_steps(int32_t steps);
 	void set_singlestepsize(uint32_t singlestepsize);
 	void set_pagesize(int32_t pagesize);
-	void set_pos(int32_t pos);
+	void set_scrollpos(int32_t pos);
 
 	uint32_t get_steps() const;
 	uint32_t get_singlestepsize() const {return m_singlestepsize;}
 	uint32_t get_pagesize() const {return m_pagesize;}
-	uint32_t get_pos() const {return m_pos;}
+	uint32_t get_scrollpos() const {return m_pos;}
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 

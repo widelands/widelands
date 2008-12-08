@@ -80,7 +80,7 @@ void Scrollbar::set_steps(int32_t steps)
 	if (steps < 1)
 		steps = 1;
 
-	if (m_pos >= static_cast<uint32_t>(steps)) set_pos(steps - 1);
+	if (m_pos >= static_cast<uint32_t>(steps)) set_scrollpos(steps - 1);
 
 	m_steps = steps;
 
@@ -126,7 +126,7 @@ void Scrollbar::set_pagesize(int32_t pagesize)
  *
  * \param pos the new position, which will be snapped to the range [0, get_steps()-1]
  */
-void Scrollbar::set_pos(int32_t pos)
+void Scrollbar::set_scrollpos(int32_t pos)
 {
 	if (pos < 0)
 		pos = 0;
@@ -209,7 +209,7 @@ void Scrollbar::set_knob_pos(int32_t pos)
 	pos -= Size + knobsize/2;
 
 	pos = (pos * static_cast<int32_t>(m_steps)) / extent;
-	set_pos(pos);
+	set_scrollpos(pos);
 }
 
 
@@ -250,7 +250,7 @@ void Scrollbar::action(Area const area)
 	}
 
 	pos = static_cast<int32_t>(m_pos) + diff;
-	set_pos(pos);
+	set_scrollpos(pos);
 }
 
 
