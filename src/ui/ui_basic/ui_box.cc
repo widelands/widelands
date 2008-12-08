@@ -19,8 +19,11 @@
 
 #include "ui_box.h"
 
-#include "interactive_base.h"
+#include "graphic.h"
 #include "wexception.h"
+
+#include "ui_scrollbar.h"
+
 #include <algorithm>
 
 namespace UI {
@@ -35,28 +38,44 @@ Box::Box
 	:
 	Panel        (parent, x, y, 0, 0),
 
-	//  In case no boundries are given, never grow larger than the screen size.
-	m_max_x      (max_x ? max_x : Interactive_Base::get_xres()),
-	m_max_y      (max_y ? max_y : Interactive_Base::get_yres()),
+	m_max_x      (max_x ? max_x : g_gr->get_xres()),
+	m_max_y      (max_y ? max_y : g_gr->get_yres()),
 
+	m_scrolling(false),
+	m_scrollbar(0),
 	m_orientation(orientation)
 {}
+
+/**
+ * Enable or disable the creation of a scrollbar if the maximum
+ * depth is exceeded.
+ *
+ * Scrollbars are only created for the direction in which boxes
+ * are added, e.g. if the box has a \ref Vertical orientation,
+ * only a vertical scrollbar may be added.
+ */
+void Box::set_scrolling(bool scroll)
+{
+	if (scroll == m_scrolling)
+		return;
+
+	m_scrolling = scroll;
+	resize();
+}
 
 
 /**
  * Adjust all the children and the box's size.
-*/
+ */
 void Box::resize()
 {
-	uint32_t idx;
 	int32_t totaldepth;
 	int32_t maxbreadth;
 
-	// Adjust out size
 	totaldepth = 0;
 	maxbreadth = 0;
 
-	for (idx = 0; idx < m_items.size(); ++idx) {
+	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		int32_t depth, breadth;
 
 		get_item_size(idx, &depth, &breadth);
@@ -66,22 +85,84 @@ void Box::resize()
 			maxbreadth = breadth;
 	}
 
-	if (m_orientation == Horizontal)
+	bool needscrollbar = false;
+	if (m_orientation == Horizontal) {
+		if (totaldepth > m_max_x && m_scrolling) {
+			maxbreadth += Scrollbar::Size;
+			needscrollbar = true;
+		}
 		set_size(std::min(totaldepth, m_max_x), std::min(maxbreadth, m_max_y));
-	else
+	} else {
+		if (totaldepth > m_max_y && m_scrolling) {
+			maxbreadth += Scrollbar::Size;
+			needscrollbar = true;
+		}
 		set_size(std::min(maxbreadth, m_max_x), std::min(totaldepth, m_max_y));
+	}
 
-	// Position the children
-	totaldepth = 0;
+	if (!needscrollbar) {
+		if (m_scrollbar) {
+			delete m_scrollbar;
+			m_scrollbar = 0;
+		}
+	} else {
+		int32_t sb_x, sb_y, sb_w, sb_h;
+		int32_t pagesize;
+		if (m_orientation == Horizontal) {
+			sb_x = 0;
+			sb_y = get_h() - Scrollbar::Size;
+			sb_w = get_w();
+			sb_h = Scrollbar::Size;
+			pagesize = get_w() - Scrollbar::Size;
+		} else {
+			sb_x = get_w() - Scrollbar::Size;
+			sb_y = 0;
+			sb_w = Scrollbar::Size;
+			sb_h = get_h();
+			pagesize = get_h() - Scrollbar::Size;
+		}
+		if (!m_scrollbar) {
+			m_scrollbar = new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, m_orientation == Horizontal);
+			m_scrollbar->moved.set(this, &Box::scrollbar_moved);
+		} else {
+			m_scrollbar->set_pos(Point(sb_x, sb_y));
+			m_scrollbar->set_size(sb_w, sb_h);
+		}
 
-	for (idx = 0; idx < m_items.size(); ++idx) {
+		m_scrollbar->set_steps(totaldepth-pagesize);
+		m_scrollbar->set_singlestepsize(Scrollbar::Size);
+		m_scrollbar->set_pagesize(pagesize);
+	}
+
+	update_positions();
+}
+
+
+/**
+ * Update the position of all children, possibly as a reaction
+ * to scrollbar movement.
+ */
+void Box::update_positions()
+{
+	uint32_t totaldepth = 0;
+	int32_t scrollpos = m_scrollbar ? m_scrollbar->get_scrollpos() : 0;
+
+	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		int32_t depth;
 
 		get_item_size(idx, &depth, 0);
-		set_item_pos(idx, totaldepth);
+		set_item_pos(idx, totaldepth-scrollpos);
 
 		totaldepth += depth;
 	}
+}
+
+/**
+ * Callback for scrollbar movement.
+ */
+void Box::scrollbar_moved(int32_t)
+{
+	update_positions();
 }
 
 

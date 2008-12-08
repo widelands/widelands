@@ -40,7 +40,7 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 		UI::UniqueWindow
 			(&parent, &_economy.m_optionswindow_registry, 0, 0,
 			 _("Target quantities")),
-		m_box     (this, 0, 0, UI::Box::Vertical),
+		m_box     (this, 0, 0, UI::Box::Vertical, g_gr->get_xres()-80, g_gr->get_yres()-80),
 		m_economy (_economy)
 	{
 		Widelands::Tribe_Descr const & tribe = parent.player().tribe();
@@ -50,6 +50,7 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 			if (descr.has_demand_check())
 				m_box.add(new Ware_Type_Box(m_box, i, descr), UI::Box::AlignTop);
 		}
+		m_box.set_scrolling(true);
 		fit_inner(&m_box);
 	}
 

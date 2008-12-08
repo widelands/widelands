@@ -25,6 +25,9 @@
 #include <vector>
 
 namespace UI {
+
+struct Scrollbar;
+
 /**
  * A layouting panel that holds a number of child panels.
  * The Panels you add to the Box must be children of the Box.
@@ -48,6 +51,7 @@ public:
 		 uint32_t orientation,
 		 int32_t max_x = 0, int32_t max_y = 0);
 
+	void set_scrolling(bool scroll);
 	void resize();
 
 	int32_t get_nritems() const {return m_items.size();}
@@ -59,6 +63,8 @@ public:
 private:
 	void get_item_size(uint32_t idx, int32_t* depth, int32_t* breadth);
 	void set_item_pos(uint32_t idx, int32_t pos);
+	void update_positions();
+	void scrollbar_moved(int32_t);
 
 	//don't resize beyond this size
 	int32_t m_max_x;
@@ -82,7 +88,9 @@ private:
 		} u;
 	};
 
-	uint32_t              m_orientation;
+	bool m_scrolling;
+	Scrollbar * m_scrollbar;
+	uint32_t m_orientation;
 
 	std::vector<Item> m_items;
 };
