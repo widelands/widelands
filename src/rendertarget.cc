@@ -103,22 +103,17 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
  */
 bool RenderTarget::enter_window(const Rect& rc, Rect* previous, Point* prevofs)
 {
-	Point newofs(0, 0);
 	Rect newrect = rc;
 
 	if (clip(newrect)) {
-
-		// Apply the changes
-
 		if (previous)
 			*previous = m_rect;
-
 		if (prevofs)
 			*prevofs = m_offset;
 
+		// Apply the changes
+		m_offset = rc - (newrect - m_rect - m_offset);
 		m_rect = newrect;
-
-		m_offset = newofs;
 
 		return true;
 	} else return false;
