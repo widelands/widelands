@@ -44,8 +44,8 @@
 #include <cstring>
 #include <typeinfo>
 
-#define WINDOW_WIDTH  std::min(600, Interactive_Base::get_xres() - 40)
-#define WINDOW_HEIGHT std::min(550, Interactive_Base::get_yres() - 40)
+#define WINDOW_WIDTH  std::min(600, g_gr->get_xres() - 40)
+#define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
 
 #define WARE_PICTURE_COLUMN_WIDTH 32
 #define QUANTITY_COLUMN_WIDTH 64

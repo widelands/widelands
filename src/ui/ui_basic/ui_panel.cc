@@ -955,9 +955,9 @@ void Panel::draw_tooltip(RenderTarget & dst, Panel & lowest)
 		(wlapplication.get_mouse_position() + Point(2, 32),
 		 tip_width, tip_height);
 	const Point tooltip_bottom_left = r.bottom_left();
-	const Point screen_botton_left(g_gr->get_xres(), g_gr->get_yres());
-	if (screen_botton_left.x < tooltip_bottom_left.x) r.x -=  4 + r.w;
-	if (screen_botton_left.y < tooltip_bottom_left.y) r.y -= 35 + r.h;
+	const Point screen_bottom_left(g_gr->get_xres(), g_gr->get_yres());
+	if (screen_bottom_left.x < tooltip_bottom_left.x) r.x -=  4 + r.w;
+	if (screen_bottom_left.y < tooltip_bottom_left.y) r.y -= 35 + r.h;
 
 	dst.fill_rect(r, RGBColor(230, 200, 50));
 	dst.draw_rect(r, RGBColor(0, 0, 0));

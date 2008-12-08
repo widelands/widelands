@@ -1400,8 +1400,8 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
 			(parent,
 			 0, 0,
 			 UI::Box::Vertical,
-			 Interactive_Base::get_xres() - 80,
-			 Interactive_Base::get_yres() - 80);
+			 g_gr->get_xres() - 80,
+			 g_gr->get_yres() - 80);
 
 	// Add the wares queue
 	std::vector<Widelands::WaresQueue *> const & warequeues = ps->warequeues();

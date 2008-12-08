@@ -170,19 +170,22 @@ void Interactive_Base::unset_sel_picture() {
 }
 
 
-/*
-===============
-Interactive_Base::get_xres [static]
-Interactive_Base::get_yres [static]
-
-Retrieve in-game resolution from g_options.
-===============
-*/
+/**
+ * Retrieves the configured in-game resolution.
+ *
+ * \note For most purposes, you should use \ref Graphic::get_xres instead.
+ */
 int32_t Interactive_Base::get_xres()
 {
 	return g_options.pull_section("global")->get_int("xres", 640);
 }
 
+
+/**
+ * Retrieves the configured in-game resolution.
+ *
+ * \note For most purposes, you should use \ref Graphic::get_yres instead.
+ */
 int32_t Interactive_Base::get_yres()
 {
 	return g_options.pull_section("global")->get_int("yres", 480);

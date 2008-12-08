@@ -57,8 +57,6 @@ struct Interactive_Base : public Map_View {
 	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
 	virtual void reference_player_tribe(const int32_t, const void * const) {}
 
-	static int32_t get_xres();
-	static int32_t get_yres();
 	bool m_show_workarea_preview;
 
 	//  point of view for drawing
@@ -110,6 +108,9 @@ struct Interactive_Base : public Map_View {
 	virtual void cleanup_for_load() {};
 
 private:
+	static int32_t get_xres();
+	static int32_t get_yres();
+
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
 
