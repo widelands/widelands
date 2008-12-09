@@ -39,39 +39,68 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 :
 Fullscreen_Menu_Base("launchgamemenu.jpg"),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butw
+	(m_xres*0.25),
+m_buth
+	(m_yres*0.045),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Buttons
 m_select_map
 	(this,
-	 550, 210, 200, 26,
+	 m_xres*0.7, m_yres*0.35, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_LaunchGame::select_map, this,
-	 _("Select map"),
-	 std::string(),
-	 false),
+	 _("Select map"), std::string(), false, false,
+	 m_fn, m_fs),
 m_select_save
 	(this,
-	 550, 250, 200, 26,
+	 m_xres*0.7, m_yres*0.4, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_LaunchGame::select_savegame, this,
-	 _("Select Savegame"),
-	 std::string(),
-	 false),
+	 _("Select Savegame"), std::string(), false, false,
+	 m_fn, m_fs),
 m_back
 	(this,
-	 550, 450, 200, 26,
+	 m_xres*0.7, m_yres*0.85, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_LaunchGame::back_clicked, this,
-	 _("Back")),
+	 _("Back"), std::string(), true, false,
+	 m_fn, m_fs),
 m_ok
 	(this,
-	 550, 480, 200, 26,
+	 m_xres*0.7, m_yres*0.9, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_LaunchGame::start_clicked, this,
-	 _("Start game"),
+	 _("Start game"), std::string(), false, false,
+	 m_fn, m_fs),
+
+// Text labels
+m_title
+	(this,
+	 m_xres/2, m_yres*0.1,
+	 _("Launch Game"),
+	 Align_HCenter),
+m_mapname
+	(this,
+	 (m_xres*0.7)+(m_butw/2), m_yres*0.3,
 	 std::string(),
-	 false),
-m_title        (this, MENU_XRES / 2,  70, _("Launch Game"),      Align_HCenter),
-m_mapname      (this, 650,           180, std::string(),         Align_HCenter),
-m_notes        (this, 50, 110, 700, 60, std::string()),
+	 Align_HCenter),
+m_notes
+	(this,
+	 m_xres*0.06, m_yres*0.18, m_xres*0.88, m_yres*0.1,
+	 std::string()),
+
+// Variables and objects used in the menu
 m_settings     (settings),
 m_ctrl         (ctrl),
 m_chat         (0),
@@ -79,12 +108,18 @@ m_is_scenario  (false),
 m_is_savegame  (false)
 {
 
-	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
-	uint32_t y = 150;
+	uint32_t y = m_yres*0.25;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 		m_players[i] =
-			new PlayerDescriptionGroup(this, 50, y += 30, settings, i);
+			new PlayerDescriptionGroup
+				(this,
+				 m_xres*0.06, y += m_buth, m_xres*0.6, m_yres*0.034,
+				 settings, i,
+				 m_fn, m_fs);
 
 }
 
@@ -130,7 +165,8 @@ void Fullscreen_Menu_LaunchGame::think()
 void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider * const chat)
 {
 	delete m_chat;
-	m_chat = chat ? new GameChatPanel(this, 50, 420, 480, 160, *chat) : 0;
+	m_chat = chat ? new GameChatPanel
+		(this, m_xres*0.06, m_yres*0.7, m_xres*0.6, m_yres*0.27, *chat) : 0;
 }
 
 
@@ -144,7 +180,7 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
 		//  user it seems as if the launchgame-menu is a child of mapselect and
 		//  not the other way around - just end_modal(0); will be seen as bug
 		//  from user point of view, so we reopen the mapselect-menu.
-		m_settings->setMap("", "", 0);
+		m_settings->setMap(std::string(), std::string(), 0);
 		select_map();
 		if (m_settings->settings().mapname.size() == 0)
 			end_modal(0);
@@ -207,7 +243,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		m_notes.set_color(UI_FONT_CLR_WARNING);
 	} else {
 		if (!m_is_savegame) {
-			m_notes.set_text("");
+			m_notes.set_text(std::string());
 
 			// update the player description groups
 			for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
@@ -305,9 +341,9 @@ void Fullscreen_Menu_LaunchGame::select_savegame()
 	m_filename = lsgm.filename();
 
 	// Read the needed data from file "elemental" of the used map.
-	FileSystem *m_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
+	FileSystem *l_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
 	Profile prof;
-	prof.read("map/elemental", 0, *m_fs);
+	prof.read("map/elemental", 0, *l_fs);
 	Section & s = prof.get_safe_section("global");
 
 	std::string mapname = _("(Save): ") + std::string(s.get_safe_string("name"));
@@ -346,15 +382,15 @@ void Fullscreen_Menu_LaunchGame::set_scenario_values()
  */
 void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
 {
-	FileSystem *m_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
+	FileSystem *l_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
 	Profile prof;
-	prof.read("map/player_names", 0, *m_fs);
+	prof.read("map/player_names", 0, *l_fs);
 	std::string strbuf;
 	char buf[32];
 
 	int8_t i = 1;
 	for (; i <= m_nr_players; ++i) {
-		strbuf = "";
+		strbuf = std::string();
 		snprintf(buf, sizeof(buf), "player_%i", i);
 		Section & s = prof.get_safe_section(buf);
 		m_player_save_name [i-1] = s.get_string("name");

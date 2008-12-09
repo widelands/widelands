@@ -61,6 +61,14 @@ struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	const std::string& get_playername();
 
 private:
+	uint32_t                                    m_xres;
+	uint32_t                                    m_yres;
+	uint32_t                                    m_butx;
+	uint32_t                                    m_butw;
+	uint32_t                                    m_buth;
+	uint32_t                                    m_lisw;
+	uint32_t                                    m_fs;
+	std::string                                 m_fn;
 	UI::Textarea                                title, m_opengames;
 	UI::Textarea                                m_playername, m_hostname;
 	UI::Button<Fullscreen_Menu_NetSetup>        joingame;

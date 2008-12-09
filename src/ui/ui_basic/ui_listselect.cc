@@ -47,15 +47,17 @@ m_scrollpos     (0),
 m_selection     (no_selection_index()),
 m_last_click_time(-10000),
 m_last_selection(no_selection_index()),
-m_show_check(show_check)
+m_show_check(show_check),
+m_fontname(UI_FONT_NAME),
+m_fontsize(UI_FONT_SIZE_SMALL)
 {
 	set_think(false);
 
 	set_align(align);
 
 	m_scrollbar.moved.set(this, &BaseListselect::set_scrollpos);
-	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(UI_FONT_SMALL));
-	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_SMALL));
+	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(m_fontname, m_fontsize));
+	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(m_fontname, m_fontsize));
 	m_scrollbar.set_steps(1);
 
 	if (show_check) {
@@ -119,12 +121,12 @@ void BaseListselect::add
 
 	uint32_t entry_height = 0;
 	if (picid==-1) {
-		entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
+		entry_height=g_fh->get_fontheight(m_fontname, m_fontsize);
 	} else {
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
-		entry_height = (h >= g_fh->get_fontheight(UI_FONT_SMALL))
-			? h : g_fh->get_fontheight(UI_FONT_SMALL);
+		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
+			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
 		if (m_max_pic_width < w)
 			m_max_pic_width = w;
 	}
@@ -330,13 +332,13 @@ void BaseListselect::draw(RenderTarget & dst)
 		// Horizontal center the string
 		g_fh->draw_string
 			(dst,
-			 UI_FONT_SMALL,
+			 m_fontname, m_fontsize,
 			 col,
 			 RGBColor(107, 87, 55),
 			 Point
 			 	(x,
 			 	 y +
-			 	 (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
+			 	 (get_lineheight() - g_fh->get_fontheight(m_fontname, m_fontsize)) / 2),
 			 er.name, m_align,
 			 -1);
 

@@ -44,31 +44,41 @@ struct PlayerDescriptionGroupImpl {
 
 PlayerDescriptionGroup::PlayerDescriptionGroup
 	(UI::Panel            * const parent,
-	 int32_t const x, int32_t const y,
+	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 GameSettingsProvider * const settings,
-	 uint32_t               const plnum)
+	 uint32_t               const plnum,
+	 std::string const fname, uint32_t const fsize)
 :
-UI::Panel(parent, x, y, 450, 20),
+UI::Panel(parent, x, y, w, h),
 d(new PlayerDescriptionGroupImpl)
 {
 	d->settings = settings;
 	d->plnum = plnum;
 
-	d->plr_name = new UI::Textarea(this, 0, 0, 100, 20, std::string(), Align_Left);
-	d->btnEnablePlayer = new UI::Checkbox(this, Point(88, 0));
-	d->btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
+	d->plr_name = new UI::Textarea
+		(this, 0, 0, w*0.22, h, std::string(), Align_Left);
+	d->plr_name->set_font(fname, fsize, UI_FONT_CLR_FG);
+	d->btnEnablePlayer = new UI::Checkbox(this, Point(w*0.2, 0));
+	d->btnEnablePlayer->changedto.set
+		(this, &PlayerDescriptionGroup::enable_player);
 	d->btnPlayerType = new UI::Button<PlayerDescriptionGroup>
 		(this,
-		 116, 0, 120, 20,
+		 w*0.256, 0, w*0.265, h,
 		 1,
 		 &PlayerDescriptionGroup::toggle_playertype, this,
-		 "");
+		 "",
+		 std::string(),
+		 true, false,
+		 fname, fsize);
 	d->btnPlayerTribe = new UI::Button<PlayerDescriptionGroup>
 		(this,
-		 244, 0, 120, 20,
+		 w*0.54, 0, w*0.265, h,
 		 1,
 		 &PlayerDescriptionGroup::toggle_playertribe, this,
-		 "");
+		 "",
+		 std::string(),
+		 true, false,
+		 fname, fsize);
 
 	refresh();
 }

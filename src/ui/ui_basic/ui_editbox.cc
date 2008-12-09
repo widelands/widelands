@@ -57,6 +57,9 @@ EditBox::EditBox
 	 Align _align)
 	:
 	Panel(parent, x, y, w, h),
+	m_fontname(UI_FONT_NAME),
+	m_fontsize(UI_FONT_SIZE_SMALL),
+	m_fontcolor(UI_FONT_CLR_FG),
 	m(new EditBoxImpl)
 {
 	set_think(false);
@@ -331,7 +334,7 @@ void EditBox::draw(RenderTarget & dst)
 
 	g_fh->draw_string
 		(dst,
-		 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+		 m_fontname, m_fontsize, m_fontcolor, UI_FONT_CLR_BG,
 		 pos,
 		 m->text,
 		 align(),

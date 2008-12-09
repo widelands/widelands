@@ -20,6 +20,7 @@
 #ifndef UI_BUTTON_H
 #define UI_BUTTON_H
 
+#include "constants.h"
 #include "ui_panel.h"
 #include "ui_signal.h"
 
@@ -37,7 +38,9 @@ struct Basic_Button : public Panel {
 		 const uint32_t background_pictute_id,
 		 const uint32_t foreground_picture_id,
 		 const std::string & title_text,
-		 const std::string & tooltip_text);
+		 const std::string & tooltip_text,
+		 const std::string & fontname = UI_FONT_NAME,
+		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL);
 	~Basic_Button();
 
 	void set_pic(uint32_t picid);
@@ -47,6 +50,10 @@ struct Basic_Button : public Panel {
 	void set_enabled(bool on);
 	void set_repeating(bool const on) {m_repeating = on;}
 	void set_draw_caret(bool draw_caret) {m_draw_caret = draw_caret;}
+	void set_font(std::string const & name, int32_t size) {
+		m_fontname = name;
+		m_fontsize = size;
+	}
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
@@ -74,6 +81,8 @@ private:
 	uint32_t        m_pic_background; //  background texture (picture ID)
 	uint32_t        m_pic_custom;     //  custom icon on the button
 	uint32_t        m_pic_custom_disabled;
+	std::string     m_fontname;
+	uint32_t        m_fontsize;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"
 	bool        m_draw_caret;
@@ -94,7 +103,9 @@ template <typename T> struct Button : public Basic_Button {
 		 const std::string & title_text,
 		 const std::string & tooltip_text = std::string(),
 		 const bool _enabled = true,
-		 const bool flat    = false)
+		 const bool flat    = false,
+		 const std::string & fontname = UI_FONT_NAME,
+		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Basic_Button
 			(parent,
@@ -103,7 +114,9 @@ template <typename T> struct Button : public Basic_Button {
 			 background_pictute_id,
 			 0,
 			 title_text,
-			 tooltip_text),
+			 tooltip_text,
+			 fontname,
+			 fontsize),
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this)
 	{}
@@ -116,7 +129,9 @@ template <typename T> struct Button : public Basic_Button {
 		 T * const callback_argument_this,
 		 const std::string & tooltip_text = std::string(),
 		 const bool _enabled = true,
-		 const bool flat    = false)
+		 const bool flat    = false,
+		 const std::string & fontname = UI_FONT_NAME,
+		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Basic_Button
 			(parent,
@@ -125,7 +140,9 @@ template <typename T> struct Button : public Basic_Button {
 			 background_pictute_id,
 			 foreground_picture_id,
 			 std::string(),
-			 tooltip_text),
+			 tooltip_text,
+			 fontname,
+			 fontsize),
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this)
 	{}
@@ -155,7 +172,9 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		 const std::string & title_text,
 		 const std::string & tooltip_text = std::string(),
 		 const bool _enabled = true,
-		 const bool flat    = false)
+		 const bool flat    = false,
+		 const std::string & fontname = UI_FONT_NAME,
+		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Basic_Button
 		(parent,
@@ -164,7 +183,9 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		 background_pictute_id,
 		 0,
 		 title_text,
-		 tooltip_text),
+		 tooltip_text,
+		 fontname,
+		 fontsize),
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this),
 		_callback_argument_id  (callback_argument_id)
@@ -179,7 +200,9 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		 const ID callback_argument_id,
 		 const std::string & tooltip_text = std::string(),
 		 const bool _enabled = true,
-		 const bool flat    = false)
+		 const bool flat    = false,
+		 const std::string & fontname = UI_FONT_NAME,
+		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Basic_Button
 		(parent,
@@ -188,7 +211,9 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		 background_pictute_id,
 		 foreground_picture_id,
 		 std::string(),
-		 tooltip_text),
+		 tooltip_text,
+		 fontname,
+		 fontsize),
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this),
 		_callback_argument_id  (callback_argument_id)

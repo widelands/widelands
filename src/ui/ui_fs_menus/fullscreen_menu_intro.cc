@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,21 @@
 
 #include "fullscreen_menu_intro.h"
 
+#include "i18n.h"
+
 
 Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
-	: Fullscreen_Menu_Base("splash.jpg")
-{}
+	: Fullscreen_Menu_Base("splash.jpg"),
+
+// Text area
+m_message
+	(this,
+	 gr_x()/2, gr_y()*0.95,
+	 _("Press a key or click to continue ..."),
+	 Align_HCenter)
+{
+	m_message.set_font(ui_fn(), fs_small()*1.2, RGBColor(192, 192, 128));
+}
 
 bool Fullscreen_Menu_Intro::handle_mousepress(const Uint8, int32_t, int32_t) {
 	end_modal(0);

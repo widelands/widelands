@@ -25,60 +25,91 @@
 Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 :
 Fullscreen_Menu_Base("mainmenu.jpg"),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butx
+	(m_xres*0.325),
+m_butw
+	(m_xres*0.35),
+m_buth
+	(m_yres*0.0475),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Buttons
 singleplayer
 	(this,
-	 100, 140, 220, 26,
+	 m_butx, m_yres*0.24, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_singleplayer,
-	 _("Single Player")),
+	 _("Single Player"), std::string(), true, false,
+	 m_fn, m_fs),
 multiplayer
 	(this,
-	 100, 180, 220, 26,
+	 m_butx, m_yres*0.305, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_multiplayer,
-	 _("Multi Player")),
+	 _("Multi Player"), std::string(), true, false,
+	 m_fn, m_fs),
 replay
 	(this,
-	 100, 220, 220, 26,
+	 m_butx, m_yres*0.37, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_replay,
-	 _("Watch Replay")),
+	 _("Watch Replay"), std::string(), true, false,
+	 m_fn, m_fs),
 options
 	(this,
-	 100, 260, 220, 26,
+	 m_butx, m_yres*0.435, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_options,
-	 _("Options")),
+	 _("Options"), std::string(), true, false,
+	 m_fn, m_fs),
 editor
 	(this,
-	 100, 300, 220, 26,
+	 m_butx, m_yres*0.5, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_editor,
-	 _("Editor")),
+	 _("Editor"), std::string(), true, false,
+	 m_fn, m_fs),
 readme
 	(this,
-	 100, 340, 220, 26,
+	 m_butx, m_yres*0.565, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_readme,
-	 _("View Readme")),
+	 _("View Readme"), std::string(), true, false,
+	 m_fn, m_fs),
 license
 	(this,
-	 100, 380, 220, 26,
+	 m_butx, m_yres*0.63, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_license,
-	 _("License")),
+	 _("License"), std::string(), true, false,
+	 m_fn, m_fs),
 exit
 	(this,
-	 100, 440, 220, 26,
+	 m_butx, m_yres*0.75, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_exit,
-	 _("Exit Game")),
+	 _("Exit Game"), std::string(), true, false,
+	 m_fn, m_fs),
+
+// Textlabels
 version
 	(this,
-	 MENU_XRES - 25, MENU_YRES - 29,
+	 m_xres - 10, m_yres - 24,
 	 std::string(_("Version ")) + build_id(), Align_Right),
 copyright
 	(this,
-	 15, MENU_YRES - 29,
+	 10, m_yres - 24,
 	 _("(C) 2002-2008 by the Widelands Development Team"), Align_TopLeft)
-{}
+{
+	version.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	copyright.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+}

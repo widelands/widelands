@@ -31,35 +31,60 @@
 
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
-game(g),
-back
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butw
+	(m_xres*0.25),
+m_buth
+	(m_yres*0.045),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// "Data holder" for the savegame information
+m_game(g),
+
+// Buttons
+m_back
 	(this,
-	 570, 505, 200, 26,
+	 m_xres*0.71, m_yres*0.85, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_LoadGame::end_modal, this, 0,
-	 _("Back")),
+	 _("Back"), std::string(), true, false,
+	 m_fn, m_fs),
 m_ok
 	(this,
-	 570, 535, 200, 26,
+	 m_xres*0.71, m_yres*0.9, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_LoadGame::clicked_ok, this,
-	 _("OK"),
-	 std::string(),
-	 false),
-list(this, 15, 205, 455, 365),
+	 _("OK"), std::string(), false, false,
+	 m_fn, m_fs),
 
-title(this, MENU_XRES / 2, 90, _("Choose saved game!"), Align_HCenter),
+// Replay list
+m_list(this, m_xres*0.0188, m_yres*0.3417, m_xres*0.5688, m_yres*0.6083),
 
-// Info fields
-label_mapname (this, 560, 205, _("Map Name:"), Align_Right),
-tamapname     (this, 570, 205, ""),
-label_gametime(this, 560, 225, _("Gametime:"), Align_Right),
-tagametime    (this, 570, 225, "")
+// Text areas
+m_title(this, m_xres/2, m_yres*0.15, _("Choose saved game!"), Align_HCenter),
+
+m_label_mapname (this, m_xres*0.7,  m_yres*0.34,  _("Map Name:"), Align_Right),
+m_tamapname     (this, m_xres*0.71, m_yres*0.34,  std::string()),
+m_label_gametime(this, m_xres*0.7,  m_yres*0.375, _("Gametime:"), Align_Right),
+m_tagametime    (this, m_xres*0.71, m_yres*0.375, std::string())
 
 {
-	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	list.selected.set(this, &Fullscreen_Menu_LoadGame::map_selected);
-	list.double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
+	m_title         .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_mapname .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_tamapname     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_gametime.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_tagametime    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_list          .set_font(m_fn, m_fs);
+	m_list.selected.set(this, &Fullscreen_Menu_LoadGame::map_selected);
+	m_list.double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
 	fill_list();
 }
 
@@ -67,19 +92,19 @@ Fullscreen_Menu_LoadGame::~Fullscreen_Menu_LoadGame() {}
 
 void Fullscreen_Menu_LoadGame::clicked_ok()
 {
-	m_filename = list.get_selected();
+	m_filename = m_list.get_selected();
 	end_modal(1);
 }
 
 void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
-	if (const char * const name = list.get_selected()) {
+	if (const char * const name = m_list.get_selected()) {
 		std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-		Widelands::Game_Loader gl(*fs, &game);
+		Widelands::Game_Loader gl(*fs, &m_game);
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(&gpdp); // This has worked before, no problem
 
 		m_ok.set_enabled(true);
-		tamapname.set_text(gpdp.get_mapname());
+		m_tamapname.set_text(gpdp.get_mapname());
 
 		char buf[200];
 		uint32_t gametime = gpdp.get_gametime();
@@ -89,10 +114,10 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 		int32_t minutes = gametime / 60000;
 
 		sprintf(buf, "%02i:%02i", hours, minutes);
-		tagametime.set_text(buf);
+		m_tagametime.set_text(buf);
 	} else {
-		tamapname .set_text("");
-		tagametime.set_text("");
+		m_tamapname .set_text(std::string());
+		m_tagametime.set_text(std::string());
 	}
 }
 
@@ -118,7 +143,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 
 		try {
 			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-			Widelands::Game_Loader gl(*fs, &game);
+			Widelands::Game_Loader gl(*fs, &m_game);
 			gl.preload_game(&gpdp);
 
 			char const * extension, * fname =
@@ -126,10 +151,10 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 			char fname_without_extension[extension - fname + 1];
 			for (char * p = fname_without_extension;; ++p, ++fname)
 				if (fname == extension) {*p = '\0'; break;} else *p = *fname;
-			list.add(fname_without_extension, name);
+			m_list.add(fname_without_extension, name);
 		} catch (_wexception const &) {} //  we simply skip illegal entries
 	}
 
-	if (list.size())
-		list.select(0);
+	if (m_list.size())
+		m_list.select(0);
 }

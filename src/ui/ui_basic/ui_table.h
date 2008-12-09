@@ -169,6 +169,11 @@ public:
 	bool  get_sort_descending() const throw () {return m_sort_descending;}
 	void set_sort_descending(const bool descending) throw ()
 	{m_sort_descending = descending;}
+	void set_font(std::string const & fontname, int32_t fontsize) {
+		m_fontname = fontname;
+		m_fontsize = fontsize;
+		m_headerheight = fontsize*1.2;
+	}
 
 	void sort
 		(uint32_t Begin = 0,
@@ -228,14 +233,17 @@ private:
 	static const int32_t ms_darken_value=-20;
 	static const int32_t DOUBLE_CLICK_INTERVAL=500; // half a second //  FIXME such values should not be defined separately for a particular widget type. They should be defined in one place for the whole UI or even better, a variable that is read from system settings (.kde/share/config/kdeglobals:DoubleClickInterval=...)
 
-	Columns m_columns;
-	uint32_t                m_max_pic_width;
+	Columns            m_columns;
+	uint32_t           m_max_pic_width;
+	std::string        m_fontname;
+	uint32_t           m_fontsize;
+	uint32_t           m_headerheight;
 	int32_t            m_lineheight;
 	Scrollbar        * m_scrollbar;
-	int32_t                m_scrollpos; //  in pixels
+	int32_t            m_scrollpos; //  in pixels
 	uint32_t           m_selection;
 	int32_t            m_last_click_time;
-	uint32_t                  m_last_selection;  // for double clicks
+	uint32_t           m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;
 

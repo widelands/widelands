@@ -50,18 +50,25 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	void fill_list     ();
 
 private:
-	Widelands::Game &                               game;
-	UI::IDButton<Fullscreen_Menu_LoadGame, int32_t> back;
-	UI::Button<Fullscreen_Menu_LoadGame>        m_ok;
-	UI::Listselect<const char *>                list;
-	UI::Textarea                                title;
-	UI::Textarea                                label_mapname;
-	UI::Textarea                                tamapname;
-	UI::Textarea                                label_gametime;
-	UI::Textarea                                tagametime;
-	std::string m_filename;
+	uint32_t    m_xres;
+	uint32_t    m_yres;
+	uint32_t    m_butw;
+	uint32_t    m_buth;
+	uint32_t    m_fs;
+	std::string m_fn;
 
-	filenameset_t                               m_gamefiles;
+	Widelands::Game &                               m_game;
+	UI::IDButton<Fullscreen_Menu_LoadGame, int32_t> m_back;
+	UI::Button<Fullscreen_Menu_LoadGame>            m_ok;
+	UI::Listselect<const char *>                    m_list;
+	UI::Textarea                                    m_title;
+	UI::Textarea                                    m_label_mapname;
+	UI::Textarea                                    m_tamapname;
+	UI::Textarea                                    m_label_gametime;
+	UI::Textarea                                    m_tagametime;
+	std::string                                     m_filename;
+
+	filenameset_t                                   m_gamefiles;
 
 };
 

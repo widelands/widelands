@@ -27,51 +27,100 @@
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 :
 Fullscreen_Menu_Base("singleplmenu.jpg"), // change this
-title(this, MENU_XRES/2, 60, _("Begin Network Game"), Align_HCenter),
-m_opengames(this, 50, 170, _("List of games in your local network:"), Align_Left),
-m_playername(this, 510, 170, _("Your nickname:"), Align_Left),
-m_hostname(this, 510, 255, _("Host to connect:"), Align_Left),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butx
+	(m_xres*0.325),
+m_butw
+	(m_xres*0.25),
+m_buth
+	(m_yres*0.0475),
+m_lisw
+	(m_xres*0.5625),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Text labels
+title
+	(this,
+	 m_xres/2, m_yres*0.1,
+	 _("Begin Network Game"), Align_HCenter),
+m_opengames
+	(this,
+	 m_xres*0.06, m_yres*0.27,
+	 _("List of games in your local network:"), Align_Left),
+m_playername
+	(this,
+	 m_xres*0.64, m_yres*0.27,
+	 _("Your nickname:"), Align_Left),
+m_hostname
+	(this,
+	 m_xres*0.64, m_yres*0.425,
+	 _("Host to connect:"), Align_Left),
+
+// Buttons
 joingame
 	(this,
-	 510, 320, 200, 26,
+	 m_xres*0.64, m_yres*0.5333, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_NetSetup::clicked_joingame, this,
-	 _("Join this game")),
+	 _("Join this game"), std::string(), true, false,
+	 m_fn, m_fs),
 hostgame
 	(this,
-	 510, 365, 200, 26,
+	 m_xres*0.64, m_yres*0.6083, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_NetSetup::clicked_hostgame, this,
-	 _("Host a new game")),
+	 _("Host a new game"), std::string(), true, false,
+	 m_fn, m_fs),
 back
 	(this,
-	 510, 500, 200, 26,
+	 m_xres*0.64, m_yres*0.8333, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_NetSetup::end_modal, this, CANCEL,
-	 _("Back")),
+	 _("Back"), std::string(), true, false,
+	 m_fn, m_fs),
 loadlasthost
 	(this,
-	 684, 285, 26, 26,
+	 m_xres*0.855, m_yres*0.475, m_buth, m_buth,
 	 1,
 	 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
-	 &Fullscreen_Menu_NetSetup::clicked_lasthost, this, _("Load previous host")),
-playername(this, 510, 200, 200, 26, 2, 0),
-hostname  (this, 510, 285, 165, 26, 2, 0),
-opengames (this, 50, 200, 450, 326)
+	 &Fullscreen_Menu_NetSetup::clicked_lasthost, this,
+	  _("Load previous host"), true, false,
+	 m_fn, m_fs),
+
+// Edit boxes
+playername(this, m_xres*0.64, m_yres*0.3333, m_butw,        m_buth, 2, 0),
+hostname  (this, m_xres*0.64, m_yres*0.475,  m_xres*0.2125, m_buth, 2, 0),
+
+// List
+opengames (this, m_xres*0.06, m_yres*0.3333, m_lisw, m_yres*0.5433)
 {
 	Section *s = g_options.pull_section("global");//for playername
 
-	title     .set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::change_hostname);
-	playername.setText  (s->get_string("nickname", (_("nobody"))));
-	playername.changed.set(this, &Fullscreen_Menu_NetSetup::change_playername);
-	opengames .add_column(175, _("Host"));
-	opengames .add_column(175, _("Map"));
-	opengames .add_column (100, _("State"));
-	opengames .selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
-	opengames .double_clicked.set
+	title       .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_playername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_hostname  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	hostname    .changed.set(this, &Fullscreen_Menu_NetSetup::change_hostname);
+	hostname    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	playername  .setText  (s->get_string("nickname", (_("nobody"))));
+	playername  .changed.set(this, &Fullscreen_Menu_NetSetup::change_playername);
+	playername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	opengames   .set_font(m_fn, m_fs);
+	opengames   .add_column(m_lisw*0.4, _("Host"));
+	opengames   .add_column(m_lisw*0.4, _("Map"));
+	opengames   .add_column(m_lisw*0.2, _("State"));
+	opengames   .selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
+	opengames   .double_clicked.set
 		(this, &Fullscreen_Menu_NetSetup::game_doubleclicked);
-	discovery .set_callback (discovery_callback, this);
+	discovery   .set_callback (discovery_callback, this);
 
 	joingame.set_enabled(false);
 }

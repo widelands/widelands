@@ -21,6 +21,7 @@
 #define FULLSCREEN_MENU_BASE_H
 
 #include "ui_panel.h"
+#include <string>
 
 #define MENU_XRES 800 ///< Fullscreen Menu Width
 #define MENU_YRES 600 ///< Fullscreen Menu Height
@@ -32,11 +33,27 @@
  */
 struct Fullscreen_Menu_Base : public UI::Panel {
 	Fullscreen_Menu_Base(const char *bgpic);
+	~Fullscreen_Menu_Base();
 
 	virtual void draw(RenderTarget &);
 
+public:
+///\return the x/y value of current set resolution
+uint32_t gr_x();
+uint32_t gr_y();
+
+///\return the size for texts fitting to current resolution
+uint32_t fs_small();
+uint32_t fs_big();
+
+///\return the current set UI font
+std::string ui_fn();
+
 private:
+	uint32_t m_xres;
+	uint32_t m_yres;
 	uint32_t m_pic_background;
+	uint32_t m_res_background;
 };
 
 

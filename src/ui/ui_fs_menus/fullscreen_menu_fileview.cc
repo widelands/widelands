@@ -28,14 +28,27 @@
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(const std::string & filename)
 :
 Fullscreen_Menu_Base("fileviewmenu.jpg"),
-title               (this, 50, 50, std::string(), Align_Left),
-textview            (this, 30, 170, 735, 330),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+
+// Title
+title (this, m_xres*0.06, m_yres*0.1, std::string(), Align_Left),
+
+// Multi lined text label
+textview (this, m_xres*0.0375, m_yres*0.283, m_xres*0.919, m_yres*0.55),
+
+// Button
 close_button
 	(this,
-	 300, 545, 200, 26,
+	 m_xres*0.375, m_yres*0.9, m_xres*0.25, m_yres*0.045,
 	 0,
 	 &Fullscreen_Menu_TextView::end_modal, this, 0,
-	 _("Close"))
+	 _("Close"), std::string(), true, false,
+	 ui_fn(), fs_small())
 {
 	{
 		i18n::Textdomain textdomain("texts");
@@ -47,8 +60,8 @@ close_button
 		textview.set_text(section.get_safe_string("text"));
 	}
 
-	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	title.set_pos(Point((get_inner_w() - title.get_w()) / 2, 100));
+	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	title.set_pos(Point((get_inner_w() - title.get_w()) / 2, m_yres*0.167));
 
 	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 }

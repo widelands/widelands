@@ -35,6 +35,11 @@ struct Fullscreen_Menu_Editor : public Fullscreen_Menu_Base {
 	enum {Back = dying_code, New_Map, Load_Map};
 
 private:
+	uint32_t                                      m_xres;
+	uint32_t                                      m_yres;
+	uint32_t                                      m_butw;
+	uint32_t                                      m_buth;
+	uint32_t                                      m_butx;
 	UI::Textarea                                  title;
 	UI::IDButton<Fullscreen_Menu_Editor, int32_t> new_map;
 	UI::IDButton<Fullscreen_Menu_Editor, int32_t> load_map;

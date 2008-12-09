@@ -43,7 +43,10 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	m_max_pic_width   (0),
-	m_lineheight      (g_fh->get_fontheight(UI_FONT_SMALL)),
+	m_fontname        (UI_FONT_NAME),
+	m_fontsize        (UI_FONT_SIZE_SMALL),
+	m_headerheight    (15),
+	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),
 	m_scrollbar       (0),
 	m_scrollpos       (0),
 	m_selection       (no_selection_index()),
@@ -51,7 +54,6 @@ Table<void *>::Table
 	m_last_selection  (no_selection_index()),
 	m_sort_column     (0),
 	m_sort_descending (descending)
-
 {
 	set_think(false);
 }
@@ -66,7 +68,6 @@ Table<void *>::~Table()
 		delete *i.current;
 }
 
-#define HEADER_HEIGHT 15
 /// Add a new column to this table.
 void Table<void *>::add_column
 	(uint32_t const width, std::string const & title, Align const alignment)
@@ -84,10 +85,10 @@ void Table<void *>::add_column
 			title.size() ?
 			new IDButton<Table, Columns::size_type>
 			(this,
-			 complete_width, 0, width, HEADER_HEIGHT,
+			 complete_width, 0, width, m_headerheight,
 			 3,
 			 &Table::header_button_clicked, this, m_columns.size(),
-			 title)
+			 title, "", true, false, m_fontname, m_fontsize)
 			:
 			0,
 			width,
@@ -99,12 +100,12 @@ void Table<void *>::add_column
 		m_scrollbar =
 			new Scrollbar
 			(get_parent(),
-			 get_x() + get_w() - 24, get_y() + HEADER_HEIGHT,
-			 24,                     get_h() - HEADER_HEIGHT,
+			 get_x() + get_w() - 24, get_y() + m_headerheight,
+			 24,                     get_h() - m_headerheight,
 			 false);
 		m_scrollbar->moved.set(this, &Table::set_scrollpos);
 		m_scrollbar->set_steps(1);
-		uint32_t lineheight = g_fh->get_fontheight(UI_FONT_SMALL);
+		uint32_t lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
 		m_scrollbar->set_singlestepsize(lineheight);
 		m_scrollbar->set_pagesize(get_h() - lineheight);
 	}
@@ -162,7 +163,7 @@ void Table<void *>::draw(RenderTarget & dst)
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
-	int32_t y = 1 + idx * lineheight - m_scrollpos + HEADER_HEIGHT;
+	int32_t y = 1 + idx * lineheight - m_scrollpos + m_headerheight;
 
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
@@ -188,7 +189,7 @@ void Table<void *>::draw(RenderTarget & dst)
 
 			int32_t             const entry_picture = er.get_picture(i);
 			std::string const &       entry_string  = er.get_string (i);
-			uint32_t w = 0, h = g_fh->get_fontheight(UI_FONT_SMALL);
+			uint32_t w = 0, h = g_fh->get_fontheight(m_fontname, m_fontsize);
 			if (entry_picture != -1)
 				g_gr->get_picture_size(entry_picture, w, h);
 			Point point =
@@ -208,7 +209,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			else
 				g_fh->draw_string
 					(dst,
-					 UI_FONT_SMALL,
+					 m_fontname, m_fontsize,
 					 col,
 					 RGBColor(107, 87, 55),
 					 point,
@@ -241,7 +242,7 @@ bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
 		m_last_selection  = m_selection;
 		m_last_click_time = time;
 
-		y = (y + m_scrollpos - HEADER_HEIGHT) / get_lineheight();
+		y = (y + m_scrollpos - m_headerheight) / get_lineheight();
 		if (static_cast<size_t>(y) < m_entry_records.size()) select(y);
 
 		if //  check if doubleclicked
@@ -282,7 +283,7 @@ void Table<void *>::select(const uint32_t i)
 Table<void *>::Entry_Record & Table<void *>::add
 	(void * const entry, const bool do_select)
 {
-	int32_t entry_height = g_fh->get_fontheight(UI_FONT_SMALL);
+	int32_t entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	if (entry_height > m_lineheight)
 		m_lineheight = entry_height;
 
@@ -293,7 +294,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 	m_scrollbar->set_steps
 		(m_entry_records.size() * get_lineheight()
 		 -
-		 (get_h() - HEADER_HEIGHT - 2));
+		 (get_h() - m_headerheight - 2));
 
 	if (do_select)
 		select(m_entry_records.size() - 1);

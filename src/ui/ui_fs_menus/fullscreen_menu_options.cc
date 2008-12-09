@@ -37,119 +37,226 @@
 Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt)
 :
 Fullscreen_Menu_Base("optionsmenu.jpg"),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_vbutw
+	(m_yres*0.0333),
+m_butw
+	(m_xres*0.25),
+m_buth
+	(m_yres*0.045),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Buttons
 m_cancel
 	(this,
-	 410, 570, 190, 24,
+	 m_xres*0.5125, m_yres*0.95, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_Options::end_modal, this, om_cancel,
-	 _("Cancel")),
+	 _("Cancel"), std::string(), true, false,
+	 m_fn, m_fs),
 m_apply
 	(this,
-	 200, 570, 190, 24,
+	 m_xres*0.25,   m_yres*0.95, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
-	 _("Apply")),
+	 _("Apply"), std::string(), true, false,
+	 m_fn, m_fs),
 m_fps_plus
 	(this,
-	 MENU_XRES / 2 + 35, 230, 20, 20,
+	 m_xres*0.5438, m_yres*0.3833, m_vbutw, m_vbutw,
 	 1,
 	 &Fullscreen_Menu_Options::maxFpsChange, this, plus,
-	 "+",
-	 _("Increase maximum FPS"),
-	 true),
+	 "+", _("Increase maximum FPS"), true, false,
+	 m_fn, m_fs),
 m_fps_minus
 	(this,
-	 MENU_XRES / 2 + 95, 230, 20, 20,
+	 m_xres*0.6188, m_yres*0.3833, m_vbutw, m_vbutw,
 	 1,
 	 &Fullscreen_Menu_Options::maxFpsChange, this, minus,
-	 "-",
-	 _("Decrease maximum FPS"),
-	 true),
+	 "-", _("Decrease maximum FPS"), true, false,
+	 m_fn, m_fs),
 m_autosave_plus
 	(this,
-	 MENU_XRES / 2 + 35, 490, 20, 20,
+	 m_xres*0.5438, m_yres*0.8167, m_vbutw, m_vbutw,
 	 1,
 	 &Fullscreen_Menu_Options::autosaveChange, this, plus,
-	 "+",
-	 _("Increase autosave interval"),
-	 true),
+	 "+", _("Increase autosave interval"), true, false,
+	 m_fn, m_fs),
 m_autosave_minus
 	(this,
-	 MENU_XRES / 2 + 130, 490, 20, 20,
+	 m_xres*0.6625, m_yres*0.8167, m_vbutw, m_vbutw,
 	 1,
 	 &Fullscreen_Menu_Options::autosaveChange, this, minus,
-	 "-",
-	 _("Decrease autosave interval"),
-	 true),
+	 "-", _("Decrease autosave interval"), true, false,
+	 m_fn, m_fs),
 m_autosave_tenplus
 	(this,
-	 MENU_XRES / 2 + 5, 490, 25, 20,
+	 m_xres*0.5063, m_yres*0.8167, m_vbutw*1.25, m_vbutw,
 	 1,
 	 &Fullscreen_Menu_Options::autosaveChange, this, plusTen,
-	 "++",
-	 _("Increase autosave interval at 10"),
-	 true),
+	 "++", _("Increase autosave interval at 10"), true, false,
+	 m_fn, m_fs),
 m_autosave_tenminus
 	(this,
-	 MENU_XRES / 2 + 155, 490, 25, 20,
+	 m_xres*0.6938, m_yres*0.8167, m_vbutw*1.25, m_vbutw,
 	 1,
 	 &Fullscreen_Menu_Options::autosaveChange, this, minusTen,
-	 "--",
-	 _("Decrease autosave interval at 10"),
-	 true),
-m_title(this, MENU_XRES / 2, 20, _("General Options"), Align_HCenter),
-m_fullscreen                        (this, Point(285, 100)),
-m_label_fullscreen(this, 315, 110, _("Fullscreen"), Align_VCenter),
-m_inputgrab                         (this, Point(285, 130)),
-m_label_inputgrab(this, 315, 140, _("Grab Input"), Align_VCenter),
-m_music                             (this, Point(285, 160)),
-m_label_music(this, 315, 170, _("Enable Music"), Align_VCenter),
-m_fx                                (this, Point(285, 190)),
-m_label_fx(this, 315, 200, _("Enable Sound"), Align_VCenter),
-m_label_maxfps(this, 285, 240, _("Maximum FPS:"), Align_VCenter),
-m_value_maxfps(this, MENU_XRES / 2 + 85, 227, "25", Align_Right),
-m_reslist(this, 80, 100, 190, 170, Align_Left, true),
-m_label_resolution(this, 85, 85, _("In-game resolution"), Align_VCenter),
-m_label_language(this, MENU_XRES / 2 + 135, 85, _("Language"), Align_VCenter),
-m_language_list(this, MENU_XRES / 2 + 125, 100, 210, 170, Align_Left, true),
+	 "--", _("Decrease autosave interval at 10"), true, false,
+	 m_fn, m_fs),
+
+// Title
+m_title
+	(this,
+	 m_xres / 2, m_yres*0.025,
+	 _("General Options"), Align_HCenter),
+
+// First options block 'general options'
+m_fullscreen (this, Point(m_xres*0.3563, m_yres*0.1667)),
+m_label_fullscreen
+	(this,
+	 m_xres*0.3938, m_yres*0.1833,
+	 _("Fullscreen"), Align_VCenter),
+
+m_inputgrab (this, Point(m_xres*0.3563, m_yres*0.2167)),
+m_label_inputgrab
+	(this,
+	 m_xres*0.3938, m_yres*0.2333,
+	 _("Grab Input"), Align_VCenter),
+
+m_music (this, Point(m_xres*0.3563, m_yres*0.2667)),
+m_label_music
+	(this,
+	 m_xres*0.3938, m_yres*0.2833,
+	 _("Enable Music"), Align_VCenter),
+
+m_fx (this, Point(m_xres*0.3563, m_yres*0.3167)),
+m_label_fx
+	(this,
+	 m_xres*0.3938, m_yres*0.3333,
+	 _("Enable Sound"), Align_VCenter),
+
+m_label_maxfps
+	(this,
+	 m_xres*0.3563, m_yres*0.4,
+	 _("Maximum FPS:"), Align_VCenter),
+m_value_maxfps
+	(this,
+	 m_xres*0.6063, m_yres*0.3783,
+	 "25", Align_Right),
+
+m_reslist
+	(this,
+	 m_xres*0.1, m_yres*0.1667,
+	 m_xres*0.2375, m_yres*0.2833,
+	 Align_Left, true),
+m_label_resolution
+	(this,
+	 m_xres*0.1063, m_yres*0.1417,
+	 _("In-game resolution"), Align_VCenter),
+
+m_label_language
+	(this,
+	 m_xres*0.665, m_yres*0.1417,
+	 _("Language"), Align_VCenter),
+m_language_list
+	(this,
+	 m_xres*0.6563, m_yres*0.1667,
+	 m_xres*0.2625, m_yres*0.2833,
+	 Align_Left, true),
+
+// Title 2
 m_label_game_options
-	(this, MENU_XRES / 2, 300, _("In-game Options"), Align_HCenter),
-m_single_watchwin                   (this, Point(76, 350)),
+	(this,
+	 m_xres / 2, m_yres*0.5,
+	 _("In-game Options"), Align_HCenter),
+
+// Second options block 'In-game options'
+m_single_watchwin (this, Point(m_xres*0.095, m_yres*0.5833)),
 m_label_single_watchwin
-	(this, 105, 360, _("Use single Watchwindow Mode"), Align_VCenter),
-m_auto_roadbuild_mode               (this, Point(76, 378)),
+	(this,
+	 m_xres*0.1313, m_yres*0.6,
+	 _("Use single Watchwindow Mode"), Align_VCenter),
+
+m_auto_roadbuild_mode (this, Point(m_xres*0.095, m_yres*0.63)),
 m_label_auto_roadbuild_mode
-	(this, 105, 388, _("Start roadbuilding after placing flag"), Align_VCenter),
-m_show_workarea_preview             (this, Point(76, 406)),
+	(this,
+	 m_xres*0.1313, m_yres*0.6467,
+	 _("Start roadbuilding after placing flag"), Align_VCenter),
+
+m_show_workarea_preview (this, Point(m_xres*0.095, m_yres*0.6767)),
 m_label_show_workarea_preview
-	(this, 105, 416, _("Show buildings area preview"), Align_VCenter),
-m_snap_windows_only_when_overlapping(this, Point(76, 434)),
+	(this,
+	 m_xres*0.1313, m_yres*0.6933,
+	 _("Show buildings area preview"), Align_VCenter),
+
+m_snap_windows_only_when_overlapping (this, Point(m_xres*0.095, m_yres*0.7233)),
 m_label_snap_windows_only_when_overlapping
-	(this, 105, 444, _("Snap windows only when overlapping"), Align_VCenter),
-m_dock_windows_to_edges             (this, Point(76, 462)),
+	(this,
+	 m_xres*0.1313, m_yres*0.74,
+	 _("Snap windows only when overlapping"), Align_VCenter),
+
+m_dock_windows_to_edges (this, Point(m_xres*0.095, m_yres*0.77)),
 m_label_dock_windows_to_edges
-	(this, 105, 472, _("Dock windows to edges"), Align_VCenter),
-m_autosave                          (this, Point(76, 490)),
+	(this,
+	 m_xres*0.1313, m_yres*0.7867,
+	 _("Dock windows to edges"), Align_VCenter),
+
+m_autosave (this, Point(m_xres*0.095, m_yres*0.8167)),
 m_label_autosave
-	(this, 105, 500, _("Save game automatically every"), Align_VCenter),
+	(this,
+	 m_xres*0.1313, m_yres*0.8333,
+	 _("Save game automatically every"), Align_VCenter),
 m_value_autosave
-	(this, MENU_XRES / 2 + 87, 487, "15", Align_Right),
+	(this,
+	 m_xres*0.6088, m_yres*0.8117,
+	 "15", Align_Right),
 m_label_minute
-	(this, MENU_XRES / 2 + 90, 500, _("min."), Align_VCenter)
+	(this,
+	 m_xres*0.6125, m_yres*0.8333,
+	 _("min."), Align_VCenter)
 {
-	m_title     .set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	m_fullscreen.set_state(opt.fullscreen);
-	m_inputgrab .set_state(opt.inputgrab);
-	m_music     .set_state(opt.music);
-	m_music     .set_enabled(not g_sound_handler.m_lock_audio_disabling);
-	m_fx        .set_state(opt.fx);
-	m_fx        .set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_fullscreen.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_fullscreen      .set_state(opt.fullscreen);
+	m_label_inputgrab .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_inputgrab       .set_state(opt.inputgrab);
+	m_label_music     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_music           .set_state(opt.music);
+	m_music           .set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_label_fx        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_fx              .set_state(opt.fx);
+	m_fx              .set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_label_maxfps    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_value_maxfps    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_resolution.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_reslist         .set_font(m_fn, m_fs);
+	m_label_language  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_language_list   .set_font(m_fn, m_fs);
+
+	m_label_game_options.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_single_watchwin      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_single_watchwin                   .set_state(opt.single_watchwin);
+	m_label_auto_roadbuild_mode  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_auto_roadbuild_mode               .set_state(opt.auto_roadbuild_mode);
+	m_label_show_workarea_preview.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_show_workarea_preview             .set_state(opt.show_warea);
+	m_label_snap_windows_only_when_overlapping.set_font
+		(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_snap_windows_only_when_overlapping.set_state
 		(opt.snap_windows_only_when_overlapping);
+	m_label_dock_windows_to_edges.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
+	m_label_autosave             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_value_autosave             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_minute               .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_autosave                          .set_state(opt.autosave > 0);
 	m_autosave.changed.set(this, &Fullscreen_Menu_Options::update_autosave);
 	m_asvalue = opt.autosave / 60;
@@ -210,9 +317,6 @@ m_label_minute
 			 available_languages[i].abbrev,
 			 -1, //  FIXME this should be a flag
 			 available_languages[i].abbrev == opt.language);
-
-
-	m_label_game_options.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 }
 
 void Fullscreen_Menu_Options::autosaveChange(int32_t const arg) {

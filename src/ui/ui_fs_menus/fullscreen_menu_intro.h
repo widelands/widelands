@@ -21,6 +21,7 @@
 #define FULLSCREEN_MENU_INTRO_H
 
 #include "fullscreen_menu_base.h"
+#include "ui_textarea.h"
 
 /**
  * Fullscreen Menu with Splash Screen (at the moment).
@@ -34,6 +35,8 @@ protected:
 	virtual bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	virtual bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_keysym);
+private:
+	UI::Textarea m_message;
 };
 
 #endif

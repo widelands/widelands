@@ -36,26 +36,59 @@
  */
 Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
-title (this, MENU_XRES / 2, 90, _("Select a campaign"), Align_HCenter),
-list(this, 15, 205, 455, 365),
-label_campname   (this, 480, 205, _("Campaign:")),
-tacampname       (this, 490, 225, ""),
-label_difficulty (this, 480, 255, _("Difficulty:")),
-tadifficulty     (this, 490, 275, ""),
-label_campdescr  (this, 480, 305, _("Description:")),
-tacampdescr      (this, 490, 330, 290, 190, ""),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butw
+	(m_xres*0.25),
+m_buth
+	(m_yres*0.045),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Text labels
+title (this, m_xres/2, m_yres*0.18, _("Select a campaign"), Align_HCenter),
+label_campname   (this, m_xres*0.6,  m_yres*0.34, _("Campaign:")),
+tacampname       (this, m_xres*0.61, m_yres*0.375, ""),
+label_difficulty (this, m_xres*0.6,  m_yres*0.425, _("Difficulty:")),
+tadifficulty     (this, m_xres*0.61, m_yres*0.46, ""),
+label_campdescr  (this, m_xres*0.6,  m_yres*0.51, _("Description:")),
+tacampdescr      (this, m_xres*0.61, m_yres*0.55, m_xres*0.36, m_yres*0.28, ""),
+
+// Buttons
 b_ok
-	(this, 490, 540, 142, 26, 2,
+	(this,
+	 m_xres*0.71, m_yres*0.9, m_butw, m_buth,
+	 2,
 	 &Fullscreen_Menu_CampaignSelect::clicked_ok, this,
-	 _("OK"), std::string(), false),
+	 _("OK"), std::string(), false, false,
+	 m_fn, m_fs),
 back
-	(this, 637, 540, 143, 26, 2,
+	(this,
+	 m_xres*0.71, m_yres*0.85, m_butw, m_buth,
+	 2,
 	 &Fullscreen_Menu_CampaignSelect::end_modal, this, 0,
-	 _("Back"))
+	 _("Back"), std::string(), true, false,
+	 m_fn, m_fs),
+
+// Campaign list
+m_list(this, m_xres*0.0188, m_yres*0.3417, m_xres*0.5688, m_yres*0.6083)
 {
-	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	list.selected.set(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
-	list.double_clicked.set(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
+	title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	label_campname  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	tacampname      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	label_difficulty.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	tadifficulty    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	label_campdescr .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	tacampdescr     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_list.set_font(m_fn, m_fs);
+	m_list.selected.set(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
+	m_list.double_clicked.set(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
 	fill_list();
 }
 
@@ -88,7 +121,7 @@ static char const * const dif_descriptions[] = {
  */
 void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 {
-	if (list.get_selected()) { //gets false, if the selected entry has no value.
+	if (m_list.get_selected()) { //gets false, if the selected entry has no value.
 		campaign=i;
 
 		// enable OK button
@@ -190,7 +223,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 				dif = 0;
 			difficulty = dif_picture_filenames[dif];
 
-			list.add
+			m_list.add
 				(s.get_string(cname, _("[No value found]")),
 				 s.get_string(csection),
 				 g_gr->get_picture(PicMod_Game, difficulty.c_str()));
@@ -202,8 +235,8 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 		// increase csection
 		sprintf(csection, "campsect%i", i);
 	} // while (s->get_string(csection))
-	if (list.size())
-		list.select(0);
+	if (m_list.size())
+		m_list.select(0);
 }
 
 
@@ -218,26 +251,59 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
  */
 Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
-title(this, MENU_XRES / 2, 90, _("Choose your map!"), Align_HCenter),
-list(this, 15, 205, 455, 365),
-label_mapname   (this, 480, 205, _("Name:")),
-tamapname       (this, 490, 225, ""),
-label_author    (this, 480, 255, _("Author:")),
-taauthor        (this, 490, 275, ""),
-label_mapdescr  (this, 480, 305, _("Description:")),
-tamapdescr      (this, 490, 330, 290, 190, ""),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butw
+	(m_xres*0.25),
+m_buth
+	(m_yres*0.045),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Text labels
+title(this, m_xres/2, m_yres*0.18, _("Choose your map!"), Align_HCenter),
+label_mapname   (this, m_xres*0.6,  m_yres*0.34, _("Name:")),
+tamapname       (this, m_xres*0.61, m_yres*0.375, ""),
+label_author    (this, m_xres*0.6,  m_yres*0.425, _("Author:")),
+taauthor        (this, m_xres*0.61, m_yres*0.46, ""),
+label_mapdescr  (this, m_xres*0.6,  m_yres*0.51, _("Description:")),
+tamapdescr      (this, m_xres*0.61, m_yres*0.55, m_xres*0.36, m_yres*0.28, ""),
+
+// Buttons
 b_ok
-	(this, 490, 540, 142, 26, 2,
+	(this,
+	 m_xres*0.71, m_yres*0.9, m_butw, m_buth,
+	 2,
 	 &Fullscreen_Menu_CampaignMapSelect::clicked_ok, this,
-	 _("OK"), std::string(), false),
+	 _("OK"), std::string(), false, false,
+	 m_fn, m_fs),
 back
-	(this, 637, 540, 143, 26, 2,
+	(this,
+	 m_xres*0.71, m_yres*0.85, m_butw, m_buth,
+	 2,
 	 &Fullscreen_Menu_CampaignMapSelect::end_modal, this, 0,
-	 _("Back"))
+	 _("Back"), std::string(), true, false,
+	 m_fn, m_fs),
+
+// Campaign map list
+m_list(this, m_xres*0.0188, m_yres*0.3417, m_xres*0.5688, m_yres*0.6083)
 {
-	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
-	list.double_clicked.set(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
+	title         .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	label_mapname .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	tamapname     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	label_author  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	taauthor      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	label_mapdescr.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	tamapdescr    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_list.set_font(m_fn, m_fs);
+	m_list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
+	m_list.double_clicked.set(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
 }
 
 
@@ -266,7 +332,7 @@ void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
  * an entry of the maplist got selected.
  */
 void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t const i) {
-	if (list.get_selected()) { //gets false, if the selected entry has no value.
+	if (m_list.get_selected()) { //gets false, if the selected entry has no value.
 		// Load maps textdomain to translate the strings from cconfig
 		i18n::grab_textdomain("maps");
 
@@ -361,7 +427,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 	// Add all visible entries to the list.
 	while (Section * const s = prof.get_section(mapsection.c_str())) {
 		if (c.get_bool(mapsection.c_str())) {
-			list.add
+			m_list.add
 				(s->get_string("name", _("[No value found]")),
 				 s->get_string("path"),
 				 g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
@@ -374,6 +440,6 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 		sprintf(number, "%02i", i);
 		mapsection += number;
 	}
-	if (list.size())
-		list.select(0);
+	if (m_list.size())
+		m_list.select(0);
 }

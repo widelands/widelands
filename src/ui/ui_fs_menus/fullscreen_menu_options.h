@@ -81,6 +81,13 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	};
 
 private:
+	uint32_t                          m_xres;
+	uint32_t                          m_yres;
+	uint32_t                          m_vbutw;
+	uint32_t                          m_butw;
+	uint32_t                          m_buth;
+	uint32_t                          m_fs;
+	std::string                       m_fn;
 	UI::IDButton<Fullscreen_Menu_Options, int32_t>
 		m_cancel, m_apply, m_fps_plus, m_fps_minus, m_autosave_plus,
 		m_autosave_minus, m_autosave_tenplus, m_autosave_tenminus;

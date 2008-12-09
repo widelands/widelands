@@ -62,6 +62,10 @@ struct BaseListselect : public Panel {
 
 	void set_entry_color(uint32_t, RGBColor) throw ();
 	void set_align(Align);
+	void set_font(std::string const & fontname, int32_t fontsize) {
+		m_fontname = fontname;
+		m_fontsize = fontsize;
+	}
 
 	uint32_t size() const throw ()
 	{
@@ -129,6 +133,9 @@ private:
 	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
 	int32_t m_check_picid;
+
+	std::string m_fontname;
+	uint32_t    m_fontsize;
 };
 
 template<typename Entry>

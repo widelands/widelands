@@ -30,23 +30,47 @@
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay()
 :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butw
+	(m_xres*0.25),
+m_buth
+	(m_yres*0.045),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Buttons
 m_back
 	(this,
-	 570, 505, 200, 26, 0,
+	 m_xres*0.71, m_yres*0.85, m_butw, m_buth,
+	 0,
 	 &Fullscreen_Menu_LoadReplay::end_modal, this, 0,
-	 _("Back")),
+	 _("Back"), std::string(), true, false,
+	 m_fn, m_fs),
 m_ok
-	(this, 570, 535, 200, 26, 2,
+	(this,
+	 m_xres*0.71, m_yres*0.9, m_butw, m_buth,
+	 2,
 	 &Fullscreen_Menu_LoadReplay::clicked_ok, this,
-	 _("OK"),
-	 std::string(),
-	 false),
-m_list(this, 15, 205, 455, 365),
-m_title(this, MENU_XRES / 2, 90, _("Choose a replay!"), Align_HCenter)
+	 _("OK"), std::string(), false, false,
+	 m_fn, m_fs),
+
+// Replay list
+m_list(this, m_xres*0.0188, m_yres*0.3417, m_xres*0.5688, m_yres*0.6083),
+
+// Text area
+m_title(this, m_xres/2, m_yres*0.15, _("Choose a replay!"), Align_HCenter)
 {
-	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	m_list.selected.set(this, &Fullscreen_Menu_LoadReplay::replay_selected);
-	m_list.double_clicked.set(this, &Fullscreen_Menu_LoadReplay::double_clicked);
+	m_title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_list .set_font(m_fn, m_fs);
+	m_list .selected.set(this, &Fullscreen_Menu_LoadReplay::replay_selected);
+	m_list .double_clicked.set(this, &Fullscreen_Menu_LoadReplay::double_clicked);
 	fill_list();
 }
 

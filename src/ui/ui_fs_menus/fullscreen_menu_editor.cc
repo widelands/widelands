@@ -25,24 +25,41 @@
 Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 Fullscreen_Menu_Base("singleplmenu.jpg"),
 
-title(this, MENU_XRES/2, 130, _("Editor Menu"), Align_HCenter),
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butw
+	(m_xres*0.35),
+m_buth
+	(m_yres*0.0475),
+m_butx
+	((m_xres-m_butw)/2),
 
+// Title
+title(this, m_xres/2, m_yres*0.075, _("Editor Menu"), Align_HCenter),
+
+// Buttons
 new_map
 	(this,
-	 90, 220, 200, 26,
+	 m_butx, m_yres*0.24, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_Editor::end_modal, this, New_Map,
-	 _("New Map")),
+	 _("New Map"), std::string(), true, false,
+	 ui_fn(), fs_small()),
 load_map
 	(this,
-	 90, 260, 200, 26,
+	 m_butx, m_yres*0.305, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_Editor::end_modal, this, Load_Map,
-	 _("Load Map")),
+	 _("Load Map"), std::string(), true, false,
+	 ui_fn(), fs_small()),
 back
 	(this,
-	 90, 400, 200, 26,
+	 m_butx, m_yres*0.75, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_Editor::end_modal, this, Back,
-	 _("Back"))
-{title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);}
+	 _("Back"), std::string(), true, false,
+	 ui_fn(), fs_small())
+{title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);}

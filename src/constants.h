@@ -39,16 +39,21 @@
 /// \name Fonts
 /// Font constants, defined including size
 //@{
-#define UI_FONT_NAME "FreeSerif.ttf"
-#define UI_FONT_SIZE_BIG 22
-#define UI_FONT_SIZE_SMALL 14
-#define UI_FONT_SIZE_ULTRASMALL 10
-#define UI_FONT_BIG UI_FONT_NAME, UI_FONT_SIZE_BIG
-#define UI_FONT_SMALL UI_FONT_NAME, UI_FONT_SIZE_SMALL
-#define UI_FONT_ULTRASMALL UI_FONT_NAME, UI_FONT_SIZE_ULTRASMALL
+#define UI_FONT_NAME_SERIF      "FreeSerif.ttf"
+#define UI_FONT_NAME_SANS       "FreeSans.ttf"
+#define UI_FONT_NAME_WIDELANDS  "Widelands/Widelands.ttf"
 
-#define UI_FONT_TOOLTIP UI_FONT_SMALL
-#define PROSA_FONT "FreeSerif.ttf", 18
+#define UI_FONT_NAME            UI_FONT_NAME_SERIF
+#define UI_FONT_SIZE_BIG        22
+#define UI_FONT_SIZE_SMALL      14
+#define UI_FONT_SIZE_ULTRASMALL 10
+
+#define UI_FONT_BIG             UI_FONT_NAME, UI_FONT_SIZE_BIG
+#define UI_FONT_SMALL           UI_FONT_NAME, UI_FONT_SIZE_SMALL
+#define UI_FONT_ULTRASMALL      UI_FONT_NAME, UI_FONT_SIZE_ULTRASMALL
+
+#define UI_FONT_TOOLTIP         UI_FONT_SMALL
+#define PROSA_FONT              UI_FONT_NAME_SERIF, 18
 //@}
 
 /// \name Font colors
@@ -60,6 +65,7 @@
 #define UI_FONT_CLR_BG       RGBColor(107,  87,  55)
 #define UI_FONT_CLR_DISABLED RGBColor(127, 127, 127)
 #define UI_FONT_CLR_WARNING  RGBColor(255,  22,  22)
+
 /// Prosa font color
 #define PROSA_FONT_CLR_FG    RGBColor(255, 255,   0)
 
@@ -73,9 +79,9 @@
  * backgrounds.
  */
 //@{
-#define UI_FONT_BIG_CLR UI_FONT_CLR_FG, UI_FONT_CLR_BG
+#define UI_FONT_BIG_CLR     UI_FONT_CLR_FG, UI_FONT_CLR_BG
 /// small is used for ultrasmall, too
-#define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, UI_FONT_CLR_BG
+#define UI_FONT_SMALL_CLR   UI_FONT_CLR_FG, UI_FONT_CLR_BG
 #define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0), RGBColor(63, 52, 34)
 //@}
 

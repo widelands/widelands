@@ -45,8 +45,14 @@ struct Fullscreen_Menu_CampaignSelect : public Fullscreen_Menu_Base {
 	int32_t get_campaign();
 
 private:
+	uint32_t    m_xres;
+	uint32_t    m_yres;
+	uint32_t    m_butw;
+	uint32_t    m_buth;
+	uint32_t    m_fs;
+	std::string m_fn;
+
 	UI::Textarea                                      title;
-	UI::Listselect<const char *>                      list;
 	UI::Textarea                                      label_campname;
 	UI::Textarea                                      tacampname;
 	UI::Textarea                                      label_difficulty;
@@ -55,8 +61,9 @@ private:
 	UI::Multiline_Textarea                            tacampdescr;
 	UI::Button<Fullscreen_Menu_CampaignSelect>        b_ok;
 	UI::IDButton<Fullscreen_Menu_CampaignSelect, int32_t> back;
+	UI::Listselect<const char *>                      m_list;
 // Variables used for exchange between the two Campaign UIs and Game::run_campaign
-	int32_t                                               campaign;
+	int32_t                                           campaign;
 };
 /*
  * UI 2 - Selection of a map
@@ -73,8 +80,14 @@ struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 	void set_campaign(uint32_t);
 
 private:
+	uint32_t    m_xres;
+	uint32_t    m_yres;
+	uint32_t    m_butw;
+	uint32_t    m_buth;
+	uint32_t    m_fs;
+	std::string m_fn;
+
 	UI::Textarea                                         title;
-	UI::Listselect<const char *>                         list;
 	UI::Textarea                                         label_mapname;
 	UI::Textarea                                         tamapname;
 	UI::Textarea                                         label_author;
@@ -83,7 +96,8 @@ private:
 	UI::Multiline_Textarea                               tamapdescr;
 	UI::Button<Fullscreen_Menu_CampaignMapSelect>        b_ok;
 	UI::IDButton<Fullscreen_Menu_CampaignMapSelect, int32_t> back;
-	int32_t                                                  campaign;
+	UI::Listselect<const char *>                         m_list;
+	int32_t                                              campaign;
 	std::string                                          campmapfile;
 
 };

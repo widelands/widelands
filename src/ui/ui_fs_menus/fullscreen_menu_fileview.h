@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,9 @@ protected:
 	void set_text(const std::string & text);
 
 private:
+	uint32_t m_xres;
+	uint32_t m_yres;
+
 	UI::Textarea                                title;
 	UI::Multiline_Textarea                      textview;
 	UI::IDButton<Fullscreen_Menu_TextView, int32_t> close_button;

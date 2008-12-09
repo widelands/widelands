@@ -24,7 +24,6 @@
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
-#include "constants.h"
 #include "wlapplication.h"
 
 namespace UI {
@@ -39,7 +38,9 @@ Basic_Button::Basic_Button
 	 const uint32_t background_picture_id,
 	 const uint32_t foreground_picture_id,
 	 const std::string & title_text,
-	 const std::string & tooltip_text)
+	 const std::string & tooltip_text,
+	 const std::string & fontname,
+	 const uint32_t      fontsize)
 	:
 	Panel           (parent, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
@@ -51,6 +52,8 @@ Basic_Button::Basic_Button
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
+	m_fontname      (fontname),
+	m_fontsize      (fontsize),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
@@ -158,7 +161,8 @@ void Basic_Button::draw(RenderTarget & dst)
 	} else if (m_title.length()) { //  otherwise draw title string centered
 		g_fh->draw_string
 			(dst,
-			 UI_FONT_SMALL,
+			 m_fontname,
+			 m_fontsize,
 			 m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED, UI_FONT_CLR_BG,
 			 Point(get_w() >> 1, get_h() >> 1),
 			 m_title.c_str(),

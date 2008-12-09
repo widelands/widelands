@@ -20,7 +20,10 @@
 #ifndef PLAYERDESCRGROUP_H
 #define PLAYERDESCRGROUP_H
 
+#include "constants.h"
 #include "ui_panel.h"
+
+#include <string>
 
 class GameSettingsProvider;
 
@@ -34,9 +37,10 @@ struct PlayerDescriptionGroupImpl;
 struct PlayerDescriptionGroup : public UI::Panel {
 	PlayerDescriptionGroup
 		(UI::Panel * parent,
-		 int32_t x, int32_t y,
+		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
-		 uint32_t plnum);
+		 uint32_t plnum,
+		 std::string fname = UI_FONT_NAME, uint32_t fsize = UI_FONT_SIZE_SMALL);
 	~PlayerDescriptionGroup();
 
 	void refresh();

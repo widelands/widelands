@@ -43,6 +43,13 @@ struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
 	void fill_list();
 
 private:
+	uint32_t    m_xres;
+	uint32_t    m_yres;
+	uint32_t    m_butw;
+	uint32_t    m_buth;
+	uint32_t    m_fs;
+	std::string m_fn;
+
 	UI::IDButton<Fullscreen_Menu_LoadReplay, int32_t> m_back;
 	UI::Button<Fullscreen_Menu_LoadReplay> m_ok;
 	UI::Listselect<std::string> m_list;

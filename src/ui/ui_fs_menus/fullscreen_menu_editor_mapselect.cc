@@ -39,37 +39,100 @@ using Widelands::WL_Map_Loader;
 Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect()
 :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
-m_title(this, MENU_XRES / 2, 110, _("Choose your map!"), Align_HCenter),
-m_label_name      (this, 560, 205, _("Name:"),    Align_Right),
-m_name            (this, 570, 205, ""),
-m_label_author    (this, 560, 225, _("Author:"),  Align_Right),
-m_author          (this, 570, 225, ""),
-m_label_size      (this, 560, 245, _("Size:"),    Align_Right),
-m_size            (this, 570, 245, ""),
-m_label_world     (this, 560, 265, _("World:"),   Align_Right),
-m_world           (this, 570, 265, ""),
-m_label_nr_players(this, 560, 285, _("Players:"), Align_Right),
-m_nr_players      (this, 570, 285, ""),
-m_label_descr     (this, 560, 305, _("Descr:"),   Align_Right),
-m_descr           (this, 570, 305, 200, 190, ""),
+
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butw
+	(m_xres*0.25),
+m_buth
+	(m_yres*0.045),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Text labels
+m_title
+	(this,
+	 m_xres / 2, m_yres*0.18,
+	 _("Choose your map!"),
+	 Align_HCenter),
+m_label_name
+	(this,
+	 m_xres*0.7, m_yres*0.34,
+	 _("Name:"),
+	 Align_Right),
+m_name (this, m_xres*0.71, m_yres*0.34, std::string()),
+m_label_author
+	(this,
+	 m_xres*0.7, m_yres*0.375,
+	 _("Author:"),
+	 Align_Right),
+m_author (this, m_xres*0.71, m_yres*0.375, std::string()),
+m_label_size
+	(this,
+	 m_xres*0.7, m_yres*0.41,
+	 _("Size:"),
+	 Align_Right),
+m_size (this, m_xres*0.71, m_yres*0.41, std::string()),
+m_label_world
+	(this,
+	 m_xres*0.7, m_yres*0.445,
+	 _("World:"),
+	 Align_Right),
+m_world (this, m_xres*0.71, m_yres*0.445, std::string()),
+m_label_nr_players
+	(this,
+	 m_xres*0.7, m_yres*0.48,
+	 _("Players:"),
+	 Align_Right),
+m_nr_players (this, m_xres*0.71, m_yres*0.48, std::string()),
+m_label_descr
+	(this,
+	 m_xres*0.7, m_yres*0.515,
+	 _("Descr:"),
+	 Align_Right),
+m_descr (this, m_xres*0.71, m_yres*0.52, m_xres*0.25, m_yres*0.315, std::string()),
+
+// Buttons
 m_back
 	(this,
-	 570, 505, 200, 26,
+	 m_xres*0.71, m_yres*0.85, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_Editor_MapSelect::end_modal, this, 0,
-	 _("Back")),
+	 _("Back"), std::string(), true, false,
+	 m_fn, m_fs),
 m_ok
 	(this,
-	 570, 535, 200, 26,
+	 m_xres*0.71, m_yres*0.9, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_Editor_MapSelect::ok, this,
-	 _("OK"),
-	 std::string(),
-	 false),
-m_list(this, 15, 205, 455, 365),
+	 _("OK"), std::string(), false, false,
+	 m_fn, m_fs),
+
+// Map list
+m_list(this, m_xres*0.0188, m_yres*0.3417, m_xres*0.5688, m_yres*0.6083),
+
+// Runtime variables
 m_curdir("maps"), m_basedir("maps")
 {
-	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_name      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_name            .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_author    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_author          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_size      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_size            .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_world     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_world           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_nr_players.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_nr_players      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_descr     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_descr           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_list            .set_font(m_fn, m_fs);
 
 	m_list.selected.set(this, &Fullscreen_Menu_Editor_MapSelect::map_selected);
 	m_list.double_clicked.set(this, &Fullscreen_Menu_Editor_MapSelect::double_clicked);
@@ -132,12 +195,12 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
 		m_size      .set_text(buf);
 	} else {
-		m_name      .set_text("");
-		m_author    .set_text("");
-		m_descr     .set_text("");
-		m_world     .set_text("");
-		m_nr_players.set_text("");
-		m_size      .set_text("");
+		m_name      .set_text(std::string());
+		m_author    .set_text(std::string());
+		m_descr     .set_text(std::string());
+		m_world     .set_text(std::string());
+		m_nr_players.set_text(std::string());
+		m_size      .set_text(std::string());
 	}
 }
 

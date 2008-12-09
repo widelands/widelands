@@ -25,30 +25,55 @@
 Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer() :
 Fullscreen_Menu_Base("singleplmenu.jpg"),
 
-title(this, MENU_XRES/2, 130, _("Single Player Menu"), Align_HCenter),
+// Values for alignment and size
+m_xres
+	(gr_x()),
+m_yres
+	(gr_y()),
+m_butw
+	(m_xres*0.35),
+m_buth
+	(m_yres*0.0475),
+m_butx
+	((m_xres-m_butw)/2),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
 
+// Title
+title
+	(this,
+	 m_xres/2, m_yres*0.075,
+	 _("Single Player Menu"), Align_HCenter),
+
+// Buttons
 new_game
 	(this,
-	 90, 220, 200, 26,
+	 m_butx, m_yres*0.24, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_SinglePlayer::end_modal, this, New_Game,
-	 _("New Game")),
-load_game
-	(this,
-	 90, 260, 200, 26,
-	 1,
-	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Load_Game,
-	 _("Load Game")),
+	 _("New Game"), std::string(), true, false,
+	 m_fn, m_fs),
 campaign
 	(this,
-	 90, 300, 200, 26,
+	 m_butx, m_yres*0.305, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Campaign,
-	 _("Campaigns")),
+	 _("Campaigns"), std::string(), true, false,
+	 m_fn, m_fs),
+load_game
+	(this,
+	 m_butx, m_yres*0.435, m_butw, m_buth,
+	 1,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Load_Game,
+	 _("Load Game"), std::string(), true, false,
+	 m_fn, m_fs),
 back
 	(this,
-	 90, 400, 200, 26,
+	 m_butx, m_yres*0.75, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Back,
-	 _("Back"))
-{title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);}
+	 _("Back"), std::string(), true, false,
+	 m_fn, m_fs)
+{title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);}

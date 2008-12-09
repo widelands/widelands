@@ -47,8 +47,8 @@ struct PlayerDescriptionGroup;
  *
  * The return values of run() are:
  *    0  - back was pressed
- *    1  - normal single player
- *    2  - scenario single player
+ *    1  - normal game (either single or multi player)
+ *    2  - scenario game (at the moment only single player)
  *    3  - multi player savegame
  *    4  - multi player scenario savegame <- not yet implemented
  */
@@ -71,6 +71,12 @@ private:
 	void load_previous_playerdata();
 	void enable_all_pdgs();
 
+	uint32_t    m_xres;
+	uint32_t    m_yres;
+	uint32_t    m_butw;
+	uint32_t    m_buth;
+	uint32_t    m_fs;
+	std::string m_fn;
 
 	UI::Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
 	UI::Button<Fullscreen_Menu_LaunchGame> m_back, m_ok;

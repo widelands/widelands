@@ -39,6 +39,13 @@ private:
 	void double_clicked(uint32_t);
 	void fill_list();
 
+	uint32_t    m_xres;
+	uint32_t    m_yres;
+	uint32_t    m_butw;
+	uint32_t    m_buth;
+	uint32_t    m_fs;
+	std::string m_fn;
+
 	UI::Textarea    m_title,            m_label_name,       m_name;
 	UI::Textarea    m_label_author,     m_author,           m_label_size;
 	UI::Textarea    m_size,             m_label_world,      m_world;

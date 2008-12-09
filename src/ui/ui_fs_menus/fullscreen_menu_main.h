@@ -42,6 +42,13 @@ struct Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
 		mm_exit
 	};
 private:
+	uint32_t                                    m_xres;
+	uint32_t                                    m_yres;
+	uint32_t                                    m_butx;
+	uint32_t                                    m_butw;
+	uint32_t                                    m_buth;
+	uint32_t                                    m_fs;
+	std::string                                 m_fn;
 	UI::IDButton<Fullscreen_Menu_Main, int32_t> singleplayer;
 	UI::IDButton<Fullscreen_Menu_Main, int32_t> multiplayer;
 	UI::IDButton<Fullscreen_Menu_Main, int32_t> replay;
