@@ -44,7 +44,7 @@ CXX:=g++
 endif
 
 TARGET:=native
-VERSION:=build11
+VERSION:=build14
 
 WINDRES = windres.exe
 icon.o: Widelands_win.rc
@@ -139,7 +139,7 @@ dist:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=../../../src ../../../src/ui/ui_fs_menus ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/filesystem ../../../src/events ../../../src/sound ../../../src/trigger
+SUBDIRS=../../../src ../../../src/ai ../../../src/ui/ui_fs_menus ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/filesystem ../../../src/events ../../../src/sound ../../../src/trigger
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))

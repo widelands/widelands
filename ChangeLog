@@ -1,5 +1,16 @@
 since build-13:
-- MiniMap remembers which details to show during a game
+- Improvements of full screen menu UI:
+	* Make fullscreen menus dynamic resizable. Now the menus use the same resolution as the whole game. Still the resolution must be safed in the config, so it's not yet possible to resize via mouse. 
+	* Clean up menu design, make some menus more straight and intuitive and follow the same alignment in similiar menus. 
+	* Add note to intro screen, so players aren't confused anymore, whether widelands is still loading. 
+	* Improve some UI widgets to allow the use of different font and textsize. 
+	* Improve, add and reorder font design templates in constants.h 
+	* Introduce config option and commandline argument "ui_font_style". This option allows the user, to use a different font in the fullscreen menus, which can be quite important if the resolution is very low and the serif font is nearly unreadable. Until now only "sans" and "serif" are supported with a fallback to UI_FONT_NAME (which currently is the serif font), if the given option is invalid. In future it should be possible to use "ui_font_style=<path/to/TTF-Font>" to use any font as ui font. 
+- Mini map remembers flags during the game.
+- Implemented generation of browsable HTML from game data.
+- Made it possible to define a default target quantity for a ware type and set target quantities in the game.
+- Made Ctrl+S bring up the save game dialog in both gameplay and replay. Added save button in replay watcher. 
+- Fixed Trigger_Time (and replaced Trigger_Null with it).
 
 build-13:
 - Count casualties/kills, military/civilian buildings lost/defeated and present
