@@ -692,7 +692,7 @@ bool WLApplication::init_settings() {
 	s->get_string("nickname");
 	s->get_string("lasthost");
 	s->get_string("realname");
-	s->get_string("ui_font_style");
+	s->get_string("ui_font");
 	// KLUDGE!
 
 	return true;

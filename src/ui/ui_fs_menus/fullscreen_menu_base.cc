@@ -19,7 +19,9 @@
 
 #include "fullscreen_menu_base.h"
 
+#include "filesystem.h"
 #include "graphic.h"
+#include "log.h"
 #include "profile.h"
 #include "rendertarget.h"
 #include "wlapplication.h"
@@ -95,7 +97,18 @@ uint32_t Fullscreen_Menu_Base::fs_big() {
 
 std::string Fullscreen_Menu_Base::ui_fn() {
 	Section *s = g_options.pull_section("global");
-	std::string style(s->get_string("ui_font_style", UI_FONT_NAME));
-	return (style == "sans") ? UI_FONT_NAME_SANS : UI_FONT_NAME_SERIF;
+	std::string style(s->get_string("ui_font", UI_FONT_NAME_SERIF));
+	if (style == "sans")
+		return UI_FONT_NAME_SANS;
+	if (style == "serif")
+		return UI_FONT_NAME_SERIF;
+	std::string temp(g_fs->FS_CanonicalizeName("fonts/" + style));
+	if (g_fs->FileExists(temp))
+		return style;
+	temp =  "Could not find font file \"" + temp;
+	temp += "\n Make sure the path is given relative to Widelands font ";
+	temp += "directory. Widelands will use standard font.\n";
+	log(temp.c_str());
+	return UI_FONT_NAME;
 }
 
