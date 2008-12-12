@@ -58,11 +58,13 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 	try {
 		std::string path = "tribes/";
 		path            += tribename;
+
+		// Grab the localization textdomain.
+		// 'path' must be without final /
+		i18n::Textdomain textdomain(path);
+
 		path            += '/';
 		std::string::size_type const base_path_size = path.size();
-
-		//  Grab the localization textdomain.
-		i18n::Textdomain textdomain(path);
 
 		m_default_encdata.clear();
 
