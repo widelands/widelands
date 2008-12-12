@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3463\n"
+"Project-Id-Version: Widelands svn3580\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-11-01 21:23+0100\n"
-"PO-Revision-Date: 2008-10-25 14:49+0100\n"
+"POT-Creation-Date: 2008-12-12 21:18+0100\n"
+"PO-Revision-Date: 2008-12-12 21:57+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Plural-Forms: nplurals=2 plural=(n!=1)\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../src/ware_statistics_menu.cc:355 ../../src/game_main_menu.cc:54
+#: ../../src/ware_statistics_menu.cc:355
+#: ../../src/game_main_menu.cc:54
 msgid "Ware Statistics"
 msgstr "Warenstatistik"
 
@@ -60,48 +61,55 @@ msgstr "8 Std"
 msgid "16 h"
 msgstr "16 Std"
 
-#: ../../src/interactive_spectator.cc:44
-#: ../../src/editor/editorinteractive.cc:63
-msgid "Menu"
-msgstr "Menü"
+#: ../../src/interactive_spectator.cc:45
+msgid "Exit Replay"
+msgstr "Aufnahme beenden"
 
-#: ../../src/interactive_spectator.cc:45 ../../src/interactive_player.cc:162
+#: ../../src/interactive_spectator.cc:46
+#: ../../src/game_main_menu_save_game.cc:63
+#: ../../src/game_options_menu.cc:91
+msgid "Save Game"
+msgstr "Spiel speichern"
+
+#: ../../src/interactive_spectator.cc:47
+#: ../../src/interactive_player.cc:167
 #: ../../src/editor/editorinteractive.cc:72
 msgid "Minimap"
 msgstr "Minikarte"
 
-#: ../../src/interactive_player.cc:154
+#: ../../src/interactive_player.cc:159
 msgid "Chat"
 msgstr "Chat"
 
-#: ../../src/interactive_player.cc:156 ../../src/game_options_menu.cc:48
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:51
+#: ../../src/interactive_player.cc:161
+#: ../../src/game_options_menu.cc:48
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:72
 msgid "Options"
 msgstr "Optionen"
 
-#: ../../src/interactive_player.cc:158
+#: ../../src/interactive_player.cc:163
 msgid "Statistics"
 msgstr "Statistik"
 
-#: ../../src/interactive_player.cc:160
+#: ../../src/interactive_player.cc:165
 #: ../../src/editor/editorinteractive.cc:87
 msgid "Objectives"
 msgstr "Aufgaben"
 
-#: ../../src/interactive_player.cc:164
+#: ../../src/interactive_player.cc:169
 #: ../../src/editor/editorinteractive.cc:75
 msgid "Buildhelp"
 msgstr "Bauhilfe"
 
-#: ../../src/interactive_player.cc:170
+#: ../../src/interactive_player.cc:175
 msgid "Resource information"
 msgstr "Rohstoff-Information"
 
-#: ../../src/interactive_player.cc:173
+#: ../../src/interactive_player.cc:178
 msgid "Ware help"
 msgstr "Waren Hilfe"
 
-#: ../../src/wlapplication.cc:852
+#: ../../src/wlapplication.cc:863
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -111,15 +119,15 @@ msgstr ""
 "Entschuldigung, aber der Doppelstart läuft unter Windows nicht.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:855
+#: ../../src/wlapplication.cc:866
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double ist nicht möglich, dies ist kein Debug-Build!"
 
-#: ../../src/wlapplication.cc:945
+#: ../../src/wlapplication.cc:956
 msgid "This is Widelands-"
 msgstr "Dies ist Widelands-"
 
-#: ../../src/wlapplication.cc:946
+#: ../../src/wlapplication.cc:957
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -127,7 +135,7 @@ msgstr ""
 "Benutzung: widelands <Option0>=<Wert0> ... <OptionN>=<WertN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:947
+#: ../../src/wlapplication.cc:958
 msgid ""
 "Options:\n"
 "\n"
@@ -135,7 +143,7 @@ msgstr ""
 "Optionen:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:951
+#: ../../src/wlapplication.cc:962
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -155,7 +163,7 @@ msgstr ""
 " --coredump=[yes|no]  Erzeugt ein Speicherabbild bei Segmentfehlern.\n"
 "                      Schaltet den Mechanismus von SDL ab.\n"
 
-#: ../../src/wlapplication.cc:960
+#: ../../src/wlapplication.cc:971
 msgid ""
 " --nosound            Starts the game with sound disabled.\n"
 " --nozip              Do not save files as binary zip archives.\n"
@@ -182,7 +190,7 @@ msgstr ""
 "                      direkt.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:973
+#: ../../src/wlapplication.cc:984
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -192,11 +200,11 @@ msgstr ""
 "                      localhost Netz)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:977
+#: ../../src/wlapplication.cc:988
 msgid " --help               Show this help\n"
 msgstr " --help               Zeigt diese Hilfe\n"
 
-#: ../../src/wlapplication.cc:981
+#: ../../src/wlapplication.cc:992
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -210,11 +218,11 @@ msgstr ""
 "Wir wünschen Dir viel Spaß beim Spielen!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1121
+#: ../../src/wlapplication.cc:1132
 msgid "Unexpected error during the game"
 msgstr "Unerwarteter Fehler im Spielverlauf"
 
-#: ../../src/wlapplication.cc:1125
+#: ../../src/wlapplication.cc:1136
 msgid ""
 "\n"
 "\n"
@@ -224,7 +232,7 @@ msgstr ""
 "\n"
 "Bitte melde dieses Problem, um uns die Möglichkeit zu geben Widelands zu verbessern. Weitere Informationen findest du in der Standard-Ausgabe (stdout.txt unter Windows). Du benutzt Version "
 
-#: ../../src/wlapplication.cc:1131
+#: ../../src/wlapplication.cc:1142
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -234,113 +242,118 @@ msgstr ""
 "\n"
 "Widelands versucht eine Speicherung durchzuführen, wenn ein Fehler auftrat. Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden und fortzusetzen.\n"
 
-#: ../../src/wlapplication.cc:1308 ../../src/nethost.cc:699
+#: ../../src/wlapplication.cc:1319
+#: ../../src/nethost.cc:710
 msgid "Player"
 msgstr "Spieler"
 
-#: ../../src/wlapplication.cc:1383 ../../src/nethost.cc:300
+#: ../../src/wlapplication.cc:1411
+#: ../../src/nethost.cc:311
 #: ../../src/netclient.cc:137
 msgid "Preparing game"
 msgstr "Bereite Spiel vor"
 
-#: ../../src/wlapplication.cc:1516
+#: ../../src/wlapplication.cc:1517
 msgid "End of replay"
 msgstr "Ende der Spielaufzeichnung"
 
-#: ../../src/wlapplication.cc:1518
+#: ../../src/wlapplication.cc:1519
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weitergucken."
 
-#: ../../src/wlapplication.cc:1570 ../../src/game.cc:366 ../../src/game.cc:403
+#: ../../src/wlapplication.cc:1599
+#: ../../src/game.cc:367
+#: ../../src/game.cc:404
 msgid "Loading..."
 msgstr "Laden..."
 
-#: ../../src/nethost.cc:231
+#: ../../src/nethost.cc:235
 msgid "Server has left the game."
 msgstr "Der Server hat das Spiel verlassen."
 
-#: ../../src/nethost.cc:288
+#: ../../src/nethost.cc:299
 msgid "The game has started just after you tried to connect."
 msgstr "Das Spiel wurde, kurz nachdem du dich verbinden wolltest, gestartet."
 
-#: ../../src/nethost.cc:336
+#: ../../src/nethost.cc:347
 msgid "Server has crashed and performed an emergency save."
 msgstr "Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
 
-#: ../../src/nethost.cc:464
+#: ../../src/nethost.cc:475
 msgid "Host has changed to a map that supports fewer players."
 msgstr "Der Gastgeber hat zu einer Karte gewechselt, die weniger Spieler unterstützt.."
 
-#: ../../src/nethost.cc:514
+#: ../../src/nethost.cc:525
 msgid "You were kicked by the host."
 msgstr "Du wurdest vom Gastgeber rausgeschmissen."
 
-#: ../../src/nethost.cc:640 ../../src/playerdescrgroup.cc:125
+#: ../../src/nethost.cc:651
+#: ../../src/playerdescrgroup.cc:136
 msgid "Computer"
 msgstr "Computer"
 
-#: ../../src/nethost.cc:685
+#: ../../src/nethost.cc:696
 msgid "There are no open player slots left."
 msgstr "Alle Plätze für dieses Spiel sind bereits belegt."
 
-#: ../../src/nethost.cc:765
+#: ../../src/nethost.cc:776
 msgid "Client reports time to host that is running backwards."
 msgstr "Der Client hat dem Gastgeber eine Zeit genannt, die zurück läuft."
 
-#: ../../src/nethost.cc:767
+#: ../../src/nethost.cc:778
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Der Client simuliert ausserhalb der vom Server erlaubten Zeit."
 
-#: ../../src/nethost.cc:770
+#: ../../src/nethost.cc:781
 msgid "Client did not submit sync report in time."
 msgstr "Der Client hat der Synchronisationsreport nicht rechtzeitig gesendet."
 
-#: ../../src/nethost.cc:939
+#: ../../src/nethost.cc:950
 msgid "Client and host have become desynchronized."
 msgstr "Client und Server sind unsynchron geworden."
 
-#: ../../src/nethost.cc:978
+#: ../../src/nethost.cc:989
 msgid "The game has already started."
 msgstr "Das Spiel hat bereits begonnen."
 
-#: ../../src/nethost.cc:989
+#: ../../src/nethost.cc:1000
 msgid "Connection to client lost."
 msgstr "Verbindung zum Client verloren."
 
-#: ../../src/nethost.cc:1003
+#: ../../src/nethost.cc:1014
 msgid "Client sent malformed commands: "
 msgstr "Der Client hat einen unverständlichen Befehl gesendet:"
 
-#: ../../src/nethost.cc:1036
+#: ../../src/nethost.cc:1047
 msgid "Game is running already, but client has not connected fully"
 msgstr "Das Spiel läuft bereits, aber der Client ist noch nicht richtig verbunden."
 
-#: ../../src/nethost.cc:1040
+#: ../../src/nethost.cc:1051
 #, c-format
 msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
 msgstr "Der Erste vom Clienten gesendete Befehl ist %u stattdessen hätte HELLO kommen müssen. Höchstwahrscheinlich verwenden Server und Client inkompatible Versionen."
 
-#: ../../src/nethost.cc:1045
+#: ../../src/nethost.cc:1056
 msgid "Server uses a different protocol version."
 msgstr "Der Server verwendet eine andere Protokollversion"
 
-#: ../../src/nethost.cc:1070
+#: ../../src/nethost.cc:1081
 msgid "Client sent TIME command even though game is not running."
 msgstr "Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/nethost.cc:1077
+#: ../../src/nethost.cc:1088
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/nethost.cc:1086
+#: ../../src/nethost.cc:1097
 msgid "Client tries to sent a playercommand for a different player."
 msgstr "Der Client versucht einen Spielerbefehl für einen anderen Spieler zu senden."
 
-#: ../../src/nethost.cc:1093
+#: ../../src/nethost.cc:1104
 msgid "Client sent unexpected synchronization report."
 msgstr "Der Client hat einen unerwarteten Synchronisationsreport geschickt."
 
-#: ../../src/nethost.cc:1118
+#: ../../src/nethost.cc:1129
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
@@ -353,45 +366,46 @@ msgstr "Der Client hat das Spiel verlassen."
 msgid "Client crashed and performed an emergency save."
 msgstr "Der Client ist abgestürzt und hat eine Notfallspeicherung durchgeführt."
 
-#: ../../src/netclient.cc:313
+#: ../../src/netclient.cc:318
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Der Server hat ein Spieler-Update für einen nicht existenten Spieler gesendet."
 
-#: ../../src/netclient.cc:383
+#: ../../src/netclient.cc:388
 #, c-format
 msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
 msgstr "Habe ein HELLO Paket vom Server erwartet, aber die Anweisung Nummer %u erhalten. Vielleicht verwendet der Server eine andere Widelands-Version?"
 
-#: ../../src/netclient.cc:389
+#: ../../src/netclient.cc:394
 msgid "Server uses a different protocol version"
 msgstr "Der Server benutzt eine andere Protokollversion"
 
-#: ../../src/netclient.cc:432
+#: ../../src/netclient.cc:437
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Ich habe unerwartet ein LAUNCH Befehl vom Server erhalten."
 
-#: ../../src/netclient.cc:449
+#: ../../src/netclient.cc:454
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr "Der Server hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/netclient.cc:460
+#: ../../src/netclient.cc:465
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "Der Server hat ein SYNCREQUEST gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/netclient.cc:481
+#: ../../src/netclient.cc:486
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr "Der Server eine unbekannte Anweisungen (Anweisung Nummer: %u) gesendet"
 
-#: ../../src/netclient.cc:510
+#: ../../src/netclient.cc:515
 msgid "Server sent malformed commands: "
 msgstr "Der Server hat unverständliche Anweisungen gesendet:"
 
-#: ../../src/netclient.cc:540
+#: ../../src/netclient.cc:545
 msgid " An automatic savegame will be created."
 msgstr " Eine automatische Spielsicherung wird durchgeführt."
 
-#: ../../src/watchwindow.cc:108 ../../src/fieldaction.cc:448
+#: ../../src/watchwindow.cc:108
+#: ../../src/fieldaction.cc:463
 msgid "Watch"
 msgstr "Beobachten"
 
@@ -404,7 +418,7 @@ msgid "Center mainview on this"
 msgstr "Zentriere Hauptfenster hierauf"
 
 #: ../../src/watchwindow.cc:146
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:38
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:50
 msgid "Close"
 msgstr "Schließen"
 
@@ -425,7 +439,9 @@ msgstr "Füge Spieler %u hinzu"
 msgid "Loading a map"
 msgstr "Lade eine Karte"
 
-#: ../../src/game.cc:305 ../../src/game.cc:352 ../../src/game.cc:384
+#: ../../src/game.cc:305
+#: ../../src/game.cc:353
+#: ../../src/game.cc:385
 msgid "Preloading map"
 msgstr "Lade Teile der Karte vor"
 
@@ -433,11 +449,11 @@ msgstr "Lade Teile der Karte vor"
 msgid "Configuring players"
 msgstr "Konfiguriere Spieler"
 
-#: ../../src/game.cc:332
+#: ../../src/game.cc:333
 msgid "Loading map"
 msgstr "Lade Karte"
 
-#: ../../src/game.cc:458
+#: ../../src/game.cc:459
 msgid "Creating player infrastructure"
 msgstr "Erstelle Infrastruktur eines Spielers"
 
@@ -446,11 +462,12 @@ msgstr "Erstelle Infrastruktur eines Spielers"
 msgid "Objectives Menu"
 msgstr "Aufgaben"
 
-#: ../../src/map.cc:409
+#: ../../src/map.cc:400
 msgid "Player 1"
 msgstr "Spieler 1"
 
-#: ../../src/building_statistics_menu.cc:80 ../../src/game_main_menu.cc:61
+#: ../../src/building_statistics_menu.cc:80
+#: ../../src/game_main_menu.cc:61
 msgid "Building Statistics"
 msgstr "Gebäudestatistik"
 
@@ -470,8 +487,12 @@ msgstr "In Bau:"
 msgid "Jump to unproductive: "
 msgstr "Springe zum Unproduktivsten:"
 
-#: ../../src/building_statistics_menu.cc:111 ../../src/building_ui.cc:1566
+#: ../../src/building_statistics_menu.cc:111
+#: ../../src/building_ui.cc:1566
 #: ../../src/building_ui.cc:1785
+#: ../../src/writeHTML.cc:268
+#: ../../src/writeHTML.cc:511
+#: ../../src/writeHTML.cc:1231
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:161
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:164
@@ -479,6 +500,7 @@ msgid "Name"
 msgstr "Name"
 
 #: ../../src/building_statistics_menu.cc:112
+#: ../../src/writeHTML.cc:270
 msgid "Size"
 msgstr "Größe"
 
@@ -506,17 +528,19 @@ msgstr "Zeige Vorigen"
 msgid "Show next"
 msgstr "Zeige Nächsten"
 
-#: ../../src/waresdisplay.cc:42 ../../src/stock_menu.cc:32
+#: ../../src/waresdisplay.cc:42
+#: ../../src/stock_menu.cc:32
 #: ../../src/game_main_menu.cc:68
 msgid "Stock"
 msgstr "Lager"
 
 #: ../../src/minimap.cc:135
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:69
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:118
 msgid "Map"
 msgstr "Karte"
 
-#: ../../src/minimap.cc:144 ../../src/editor/ui_menus/editor_tool_menu.cc:66
+#: ../../src/minimap.cc:144
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Terrain"
 msgstr "Gelände"
 
@@ -532,13 +556,10 @@ msgstr "Flaggen"
 msgid "Roads"
 msgstr "Straßen"
 
-#: ../../src/minimap.cc:172 ../../src/general_statistics_menu.cc:158
+#: ../../src/minimap.cc:172
+#: ../../src/general_statistics_menu.cc:158
 msgid "Buildings"
 msgstr "Gebäude"
-
-#: ../../src/item_ware_descr.cc:40 ../../src/worker_descr.cc:122
-msgid "Doh... someone forgot the help text!"
-msgstr "Och neeee! Jemand hat den Hilfstext vergessen!"
 
 #: ../../src/stock_menu.cc:71
 msgid "Show wares"
@@ -548,33 +569,34 @@ msgstr "Zeige Waren"
 msgid "Show workers"
 msgstr "Zeige Arbeiter"
 
-#: ../../src/productionsite.cc:199
+#: ../../src/productionsite.cc:178
 msgid "(not occupied)"
 msgstr "(nicht besetzt)"
 
-#: ../../src/productionsite.cc:204
+#: ../../src/productionsite.cc:183
 #, c-format
 msgid "Waiting for %u workers!"
 msgstr "Warte auf %u Arbeiter!"
 
-#: ../../src/productionsite.cc:212
+#: ../../src/productionsite.cc:191
 msgid "(stopped)"
 msgstr "(gestoppt)"
 
-#: ../../src/productionsite.cc:257
+#: ../../src/productionsite.cc:230
 msgid "UP"
 msgstr "+"
 
-#: ../../src/productionsite.cc:257
+#: ../../src/productionsite.cc:230
 msgid "DOWN"
 msgstr "-"
 
-#: ../../src/graphic.cc:663
+#: ../../src/graphic.cc:638
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Lade Animationen: %d%% complete"
 
-#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:82
+#: ../../src/game_options_sound_menu.cc:27
+#: ../../src/game_options_menu.cc:82
 msgid "Sound Options"
 msgstr "Klang Optionen"
 
@@ -594,41 +616,37 @@ msgstr "Musik Lautstärke"
 msgid "Sound FX Volume"
 msgstr "Geräusch-Lautstärke"
 
-#: ../../src/encyclopedia_window.cc:59
+#: ../../src/encyclopedia_window.cc:60
 msgid "Tribe ware encyclopedia"
 msgstr "Warenlexikon des Stammes"
 
-#: ../../src/encyclopedia_window.cc:77
+#: ../../src/encyclopedia_window.cc:78
 msgid "Consumed ware type(s)"
 msgstr "Verbrauchte Warenart(en)"
 
-#: ../../src/encyclopedia_window.cc:78
+#: ../../src/encyclopedia_window.cc:79
 msgid "Quantity"
 msgstr "Anzahl"
 
-#: ../../src/encyclopedia_window.cc:193
+#: ../../src/encyclopedia_window.cc:184
 msgid " or "
 msgstr " oder"
 
-#: ../../src/game_main_menu_save_game.cc:62 ../../src/game_options_menu.cc:91
-msgid "Save Game"
-msgstr "Spiel speichern"
-
-#: ../../src/game_main_menu_save_game.cc:66
+#: ../../src/game_main_menu_save_game.cc:67
 msgid "Map Name: "
 msgstr "Kartenname:"
 
-#: ../../src/game_main_menu_save_game.cc:70
+#: ../../src/game_main_menu_save_game.cc:71
 msgid "Game Time: "
 msgstr "Spielzeit:"
 
-#: ../../src/game_main_menu_save_game.cc:78
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:41
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:46
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:70
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:50
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:232
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:66
+#: ../../src/game_main_menu_save_game.cc:79
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:61
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:65
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:120
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:69
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:284
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:113
 #: ../../src/ui/ui_basic/ui_messagebox.cc:85
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:127
@@ -636,9 +654,8 @@ msgstr "Spielzeit:"
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/game_main_menu_save_game.cc:86
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:45
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:78
+#: ../../src/game_main_menu_save_game.cc:87
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:188
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:263
@@ -656,12 +673,12 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../../src/game_main_menu_save_game.cc:139
+#: ../../src/game_main_menu_save_game.cc:140
 #, c-format
 msgid "%02ud%02uh%02u'%u\"%03u"
 msgstr "%02ud%02uh%02u'%u\"%03u"
 
-#: ../../src/game_main_menu_save_game.cc:200
+#: ../../src/game_main_menu_save_game.cc:201
 msgid ""
 "Game Saving Error!\n"
 "Saved Game-File may be corrupt!\n"
@@ -673,32 +690,33 @@ msgstr ""
 "beschädigt!\n"
 "Grund:\n"
 
-#: ../../src/game_main_menu_save_game.cc:204
-#: ../../src/game_main_menu_save_game.cc:215
+#: ../../src/game_main_menu_save_game.cc:205
+#: ../../src/game_main_menu_save_game.cc:216
 msgid "Save Game Error!!"
 msgstr "Speicherfehler!"
 
-#: ../../src/game_main_menu_save_game.cc:216
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:356
+#: ../../src/game_main_menu_save_game.cc:217
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:362
 msgid "A File with the name "
 msgstr "Eine Datei mit dem Namen "
 
-#: ../../src/game_main_menu_save_game.cc:220
+#: ../../src/game_main_menu_save_game.cc:221
 msgid " already exists. Overwrite?"
 msgstr " existiert bereits - überschreiben? "
 
-#: ../../src/militarysite.cc:79 ../../src/warehouse.cc:309
+#: ../../src/militarysite.cc:66
+#: ../../src/warehouse.cc:294
 msgid " conquer"
 msgstr " erobern"
 
-#: ../../src/militarysite.cc:141
+#: ../../src/militarysite.cc:128
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u Soldat"
 msgstr[1] "%u Soldaten"
 
-#: ../../src/militarysite.cc:146
+#: ../../src/militarysite.cc:133
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
@@ -709,38 +727,42 @@ msgstr[1] "%u(+%u) Soldaten"
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar definiert!"
 
-#: ../../src/playerdescrgroup.cc:117
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:138
+#: ../../src/playerdescrgroup.cc:127
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:187
 msgid "Open"
 msgstr "Geöffnet"
 
-#: ../../src/playerdescrgroup.cc:127
+#: ../../src/playerdescrgroup.cc:138
+msgid "AI: "
+msgstr "KI: "
+
+#: ../../src/playerdescrgroup.cc:140
 msgid "Human"
 msgstr "Mensch"
 
-#: ../../src/trainingsite.cc:208
+#: ../../src/trainingsite.cc:179
 msgid "Resting"
 msgstr "Warten"
 
-#: ../../src/trainingsite.cc:210
+#: ../../src/trainingsite.cc:181
 msgid "Not Working"
 msgstr "Arbeitet nicht"
 
-#: ../../src/interactive_base.cc:196
+#: ../../src/interactive_base.cc:207
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/interactive_base.cc:199
+#: ../../src/interactive_base.cc:210
 msgid "PAUSE"
 msgstr "PAUSE"
 
-#: ../../src/interactive_base.cc:219
+#: ../../src/interactive_base.cc:230
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/interactive_base.cc:224
+#: ../../src/interactive_base.cc:235
 msgid "NO GAME CONTROLLER"
 msgstr "KEIN KONTROLLGERÄT"
 
@@ -749,7 +771,7 @@ msgid "README"
 msgstr "Liesmich"
 
 #: ../../src/game_options_menu.cc:66
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:69
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:93
 msgid "License"
 msgstr "Lizenz"
 
@@ -758,20 +780,22 @@ msgid "Authors"
 msgstr "Autoren"
 
 #: ../../src/game_options_menu.cc:101
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:75
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:100
 msgid "Exit Game"
 msgstr "Spiel beenden"
 
-#: ../../src/editor_game_base.cc:573 ../../src/editor/editorinteractive.cc:134
+#: ../../src/editor_game_base.cc:562
+#: ../../src/editor/editorinteractive.cc:134
 msgid "Loading world data"
 msgstr "Lade Weltdaten"
 
-#: ../../src/editor_game_base.cc:582
+#: ../../src/editor_game_base.cc:566
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Lade Stamm: %s"
 
-#: ../../src/general_statistics_menu.cc:52 ../../src/game_main_menu.cc:47
+#: ../../src/general_statistics_menu.cc:52
+#: ../../src/game_main_menu.cc:47
 msgid "General Statistics"
 msgstr "Allgemeine Statistiken"
 
@@ -780,6 +804,7 @@ msgid "Land"
 msgstr "Land"
 
 #: ../../src/general_statistics_menu.cc:152
+#: ../../src/writeHTML.cc:730
 msgid "Workers"
 msgstr "Arbeiter"
 
@@ -824,73 +849,77 @@ msgstr "Felddebugging"
 msgid "%i, %i - height: %u\n"
 msgstr "%i, %i - Höhe: %u\n"
 
-#: ../../src/building_ui.cc:165
+#: ../../src/building_ui.cc:166
 msgid "Destroy building?"
 msgstr "Gebäude zerstören?"
 
-#: ../../src/building_ui.cc:179
+#: ../../src/building_ui.cc:180
 msgid "Do you really want to destroy this "
 msgstr "Gebäude "
 
-#: ../../src/building_ui.cc:181
+#: ../../src/building_ui.cc:182
 msgid "?"
 msgstr " zerstören?"
 
-#: ../../src/building_ui.cc:607 ../../src/events/event_message_box.cc:49
+#: ../../src/building_ui.cc:608
+#: ../../src/events/event_message_box.cc:49
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
 msgid "Continue"
 msgstr "Weiter"
 
-#: ../../src/building_ui.cc:607
+#: ../../src/building_ui.cc:608
+#: ../../src/writeHTML.cc:277
+#: ../../src/writeHTML.cc:402
 msgid "Stop"
 msgstr "Stopp"
 
-#: ../../src/building_ui.cc:630
+#: ../../src/building_ui.cc:623
 #, c-format
 msgid "Enhance to %s"
 msgstr "Erweitern zu %s"
 
-#: ../../src/building_ui.cc:649
+#: ../../src/building_ui.cc:643
 msgid "Destroy"
 msgstr "Zerstören"
 
-#: ../../src/building_ui.cc:660 ../../src/building_ui.cc:767
+#: ../../src/building_ui.cc:654
+#: ../../src/building_ui.cc:761
 msgid "Show workarea"
 msgstr "Zeige Arbeitsbereich"
 
-#: ../../src/building_ui.cc:671
+#: ../../src/building_ui.cc:665
 msgid "Debug"
 msgstr "Debug"
 
-#: ../../src/building_ui.cc:794
+#: ../../src/building_ui.cc:788
 msgid "Hide workarea"
 msgstr "Verstecke Arbeitsbereich"
 
-#: ../../src/building_ui.cc:1093
+#: ../../src/building_ui.cc:1087
 msgid "Worker Listing"
 msgstr "Arbeiterliste"
 
-#: ../../src/building_ui.cc:1113
+#: ../../src/building_ui.cc:1107
 msgid "Type: "
 msgstr "Typ:"
 
-#: ../../src/building_ui.cc:1120
+#: ../../src/building_ui.cc:1114
 msgid "Experience: "
 msgstr "Erfahrung:"
 
-#: ../../src/building_ui.cc:1127
+#: ../../src/building_ui.cc:1121
 msgid "Trying to become: "
 msgstr "Wird ausgebildet zu:"
 
-#: ../../src/building_ui.cc:1373
+#: ../../src/building_ui.cc:1367
 msgid "Highest priority"
 msgstr "Höchste Priorität"
 
-#: ../../src/building_ui.cc:1382
+#: ../../src/building_ui.cc:1376
 msgid "Normal priority"
 msgstr "Normale Priorität"
 
-#: ../../src/building_ui.cc:1391
+#: ../../src/building_ui.cc:1385
 msgid "Lowest priority"
 msgstr "Kleinste Priorität"
 
@@ -898,27 +927,33 @@ msgstr "Kleinste Priorität"
 msgid "Show worker listing"
 msgstr "Zeige Arbeiterliste"
 
-#: ../../src/building_ui.cc:1551 ../../src/building_ui.cc:1805
+#: ../../src/building_ui.cc:1551
+#: ../../src/building_ui.cc:1805
 msgid "Capacity"
 msgstr "Kapazität"
 
-#: ../../src/building_ui.cc:1567 ../../src/building_ui.cc:1786
+#: ../../src/building_ui.cc:1567
+#: ../../src/building_ui.cc:1786
 msgid "HP"
 msgstr "LP"
 
-#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1787
+#: ../../src/building_ui.cc:1568
+#: ../../src/building_ui.cc:1787
 msgid "AT"
 msgstr "AT"
 
-#: ../../src/building_ui.cc:1569 ../../src/building_ui.cc:1788
+#: ../../src/building_ui.cc:1569
+#: ../../src/building_ui.cc:1788
 msgid "DE"
 msgstr "PA"
 
-#: ../../src/building_ui.cc:1570 ../../src/building_ui.cc:1789
+#: ../../src/building_ui.cc:1570
+#: ../../src/building_ui.cc:1789
 msgid "EV"
 msgstr "AU"
 
-#: ../../src/building_ui.cc:1571 ../../src/building_ui.cc:1790
+#: ../../src/building_ui.cc:1571
+#: ../../src/building_ui.cc:1790
 msgid "Level"
 msgstr "Level"
 
@@ -940,94 +975,540 @@ msgstr "Chat-Menü"
 msgid "Main Menu"
 msgstr "Statistiken"
 
-#: ../../src/constructionsite.cc:216
+#: ../../src/constructionsite.cc:199
 #, c-format
 msgid "%u%% built"
 msgstr "%u%% gebaut"
 
-#: ../../src/fieldaction.cc:242
+#: ../../src/fieldaction.cc:245
 msgid "Build small buildings"
 msgstr "Baue kleine Gebäude"
 
-#: ../../src/fieldaction.cc:243
+#: ../../src/fieldaction.cc:246
 msgid "Build medium buildings"
 msgstr "Baue mittlere Gebäude"
 
-#: ../../src/fieldaction.cc:244
+#: ../../src/fieldaction.cc:247
 msgid "Build large buildings"
 msgstr "Baue große Gebäude"
 
-#: ../../src/fieldaction.cc:278
+#: ../../src/fieldaction.cc:281
 msgid "Action"
 msgstr "Aktion"
 
-#: ../../src/fieldaction.cc:378
+#: ../../src/fieldaction.cc:387
 msgid "Build road"
 msgstr "Baue Wege"
 
-#: ../../src/fieldaction.cc:386
+#: ../../src/fieldaction.cc:395
 msgid "Destroy this flag"
 msgstr "Flagge abreißen"
 
-#: ../../src/fieldaction.cc:393
+#: ../../src/fieldaction.cc:401
+msgid "Configure economy"
+msgstr "Wirtschaftseinstellungen"
+
+#: ../../src/fieldaction.cc:408
 msgid "Send geologist to explore site"
 msgstr "Sende einen Geologen, um die Fläche zu untersuchen"
 
-#: ../../src/fieldaction.cc:409
+#: ../../src/fieldaction.cc:424
 msgid "Put a flag"
 msgstr "Flagge setzen"
 
-#: ../../src/fieldaction.cc:412
+#: ../../src/fieldaction.cc:427
 msgid "Destroy a road"
 msgstr "Weg zerstören"
 
-#: ../../src/fieldaction.cc:429
+#: ../../src/fieldaction.cc:444
 msgid "Watch field in a separate window"
 msgstr "Zeige das Feld in einem seperaten Fenster"
 
-#: ../../src/fieldaction.cc:434
+#: ../../src/fieldaction.cc:449
 msgid "Toggle building statistics display"
 msgstr "Schalte Gebäudestatistik an/aus"
 
-#: ../../src/fieldaction.cc:436
+#: ../../src/fieldaction.cc:451
 msgid "Toggle building label display"
 msgstr "Schalte Gebäudenamen ein/aus"
 
-#: ../../src/fieldaction.cc:439
+#: ../../src/fieldaction.cc:454
 msgid "Debug window"
 msgstr "Debug-Fenster"
 
-#: ../../src/fieldaction.cc:444 ../../src/fieldaction.cc:596
+#: ../../src/fieldaction.cc:459
+#: ../../src/fieldaction.cc:611
 msgid "Build roads"
 msgstr "Baue Wege"
 
-#: ../../src/fieldaction.cc:469
+#: ../../src/fieldaction.cc:484
 msgid "Send less soldiers"
 msgstr "Sende weniger Soldaten"
 
-#: ../../src/fieldaction.cc:480
+#: ../../src/fieldaction.cc:495
 msgid "Send more soldiers"
 msgstr "Sende mehr Soldaten"
 
-#: ../../src/fieldaction.cc:487
+#: ../../src/fieldaction.cc:502
 msgid "Start attack"
 msgstr "Angriff starten"
 
-#: ../../src/fieldaction.cc:494
+#: ../../src/fieldaction.cc:509
 msgid "Attack"
 msgstr "Attacke"
 
-#: ../../src/fieldaction.cc:570
+#: ../../src/fieldaction.cc:585
 msgid "Build mines"
 msgstr "Baue Minen"
 
-#: ../../src/fieldaction.cc:588
+#: ../../src/fieldaction.cc:603
 msgid "Build flag"
 msgstr "Setze Flagge"
 
-#: ../../src/fieldaction.cc:592
+#: ../../src/fieldaction.cc:607
 msgid "Cancel road"
 msgstr "Straße Abbrechen"
+
+#: ../../src/transport_ui.cc:42
+msgid "Target quantities"
+msgstr "Zielwerte"
+
+#: ../../src/transport_ui.cc:88
+msgid "Decrease permanent target quantity"
+msgstr "Setze permanenten Zielwert herab"
+
+#: ../../src/transport_ui.cc:94
+msgid "Increase permanent target quantity"
+msgstr "Erhöhe permanenten Zielwert"
+
+#: ../../src/transport_ui.cc:99
+msgid "Decrease temporary target quantity"
+msgstr "Setze temporären Zielwert herab"
+
+#: ../../src/transport_ui.cc:104
+msgid "Increase temporary target quantity"
+msgstr "Erhöhe temporären Zielwert"
+
+#: ../../src/transport_ui.cc:108
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: ../../src/transport_ui.cc:109
+msgid "Reset target quantity to default value"
+msgstr "Setze Zielwert auf Standard zurück"
+
+#: ../../src/writeHTML.cc:38
+msgid "Requesters"
+msgstr "Anforderer"
+
+#: ../../src/writeHTML.cc:53
+msgid "Providers"
+msgstr "Zubringer"
+
+#: ../../src/writeHTML.cc:68
+msgid "Successors"
+msgstr "Nachfolger"
+
+#: ../../src/writeHTML.cc:83
+msgid "Predecessors"
+msgstr "Vorgänger"
+
+#: ../../src/writeHTML.cc:98
+msgid "Employers"
+msgstr "Arbeiter"
+
+#: ../../src/writeHTML.cc:255
+#: ../../src/writeHTML.cc:261
+msgid "Building types"
+msgstr "Gebäudeart"
+
+#: ../../src/writeHTML.cc:266
+#: ../../src/writeHTML.cc:509
+#: ../../src/writeHTML.cc:1229
+msgid "Icon"
+msgstr "Bild"
+
+#: ../../src/writeHTML.cc:272
+#: ../../src/writeHTML.cc:513
+msgid "Buildable"
+msgstr "Baubar"
+
+#: ../../src/writeHTML.cc:274
+msgid "Enhanced"
+msgstr "Erweitert"
+
+#: ../../src/writeHTML.cc:279
+msgid "Conquer<br/>range"
+msgstr "Eroberungs-<br/>gebiet"
+
+#: ../../src/writeHTML.cc:281
+#: ../../src/writeHTML.cc:515
+msgid "Vision<br/>range"
+msgstr "Sichtfeld"
+
+#: ../../src/writeHTML.cc:306
+#: ../../src/writeHTML.cc:365
+msgid "Mine"
+msgstr "Bergwerk"
+
+#: ../../src/writeHTML.cc:310
+#: ../../src/writeHTML.cc:381
+msgid "Small"
+msgstr "Klein"
+
+#: ../../src/writeHTML.cc:314
+#: ../../src/writeHTML.cc:375
+msgid "Medium"
+msgstr "Mittel"
+
+#: ../../src/writeHTML.cc:319
+#: ../../src/writeHTML.cc:370
+msgid "Big"
+msgstr "Groß"
+
+#: ../../src/writeHTML.cc:323
+#: ../../src/writeHTML.cc:326
+#: ../../src/writeHTML.cc:329
+#: ../../src/writeHTML.cc:543
+#: ../../src/ui/ui_basic/ui_messagebox.cc:92
+#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:76
+msgid "Yes"
+msgstr "Ja"
+
+#: ../../src/writeHTML.cc:323
+#: ../../src/writeHTML.cc:326
+#: ../../src/writeHTML.cc:329
+#: ../../src/writeHTML.cc:543
+#: ../../src/ui/ui_basic/ui_messagebox.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:76
+msgid "No"
+msgstr "Nein"
+
+#: ../../src/writeHTML.cc:367
+msgid "Is mine."
+msgstr "Ist Bergwerk."
+
+#: ../../src/writeHTML.cc:372
+msgid "Is big."
+msgstr "ist groß."
+
+#: ../../src/writeHTML.cc:377
+msgid "Is medium."
+msgstr "ist mittel."
+
+#: ../../src/writeHTML.cc:383
+msgid "Is small."
+msgstr "ist klein."
+
+#: ../../src/writeHTML.cc:390
+msgid "Is not buildable."
+msgstr "Ist nicht baubar."
+
+#: ../../src/writeHTML.cc:397
+msgid "Is enhanced."
+msgstr "Ist erweitert"
+
+#: ../../src/writeHTML.cc:404
+msgid "Is stopable."
+msgstr "Ist stopbar"
+
+#: ../../src/writeHTML.cc:411
+#, c-format
+msgid "Conquer range is %u."
+msgstr "Eroberungsgebiet ist %u."
+
+#: ../../src/writeHTML.cc:419
+#: ../../src/writeHTML.cc:606
+#, c-format
+msgid "Vision range is %u."
+msgstr "Sichtfeld ist %u."
+
+#: ../../src/writeHTML.cc:427
+#: ../../src/writeHTML.cc:612
+msgid "Build cost"
+msgstr "Baukosten"
+
+#: ../../src/writeHTML.cc:437
+msgid "'s constructionsite"
+msgstr "s Baustelle"
+
+#: ../../src/writeHTML.cc:448
+msgid "Enhancements"
+msgstr "Erweiterungen"
+
+#: ../../src/writeHTML.cc:458
+msgid "'s enhancement"
+msgstr "s Erweiterung"
+
+#: ../../src/writeHTML.cc:498
+#: ../../src/writeHTML.cc:504
+msgid "Worker types"
+msgstr "Arbeiterart"
+
+#: ../../src/writeHTML.cc:517
+msgid "Minimum<br/>needed<br/>experience"
+msgstr "Kleinste<br/>erforderliche<br/>Erfahrung"
+
+#: ../../src/writeHTML.cc:519
+msgid "Maximum<br/>needed<br/>experience"
+msgstr "Größte<br/>erforderliche<br/>Erfahrung"
+
+#: ../../src/writeHTML.cc:521
+msgid "Becomes"
+msgstr "Wird zu"
+
+#: ../../src/writeHTML.cc:622
+#: ../../src/writeHTML.cc:632
+msgid "'s creation"
+msgstr "s Produkt"
+
+#: ../../src/writeHTML.cc:647
+#, c-format
+msgid "Needs experience from working between %u and %u times to become"
+msgstr "Braucht Erfahrung von %u bis %u mal Arbeiten. Wird dann befördert zu"
+
+#: ../../src/writeHTML.cc:655
+msgid "'s promotion"
+msgstr "s Beförderung"
+
+#: ../../src/writeHTML.cc:665
+#: ../../src/writeHTML.cc:792
+msgid "Programs"
+msgstr "Programme"
+
+#: ../../src/writeHTML.cc:702
+#: ../../src/writeHTML.cc:1108
+msgid "mine"
+msgstr "Baue ab"
+
+#: ../../src/writeHTML.cc:703
+msgid "breed"
+msgstr "Züchte"
+
+#: ../../src/writeHTML.cc:704
+msgid "createitem"
+msgstr "Erstelle Einheit"
+
+#: ../../src/writeHTML.cc:705
+msgid "setdescription"
+msgstr "Setze Beschreibung"
+
+#: ../../src/writeHTML.cc:706
+msgid "setbobdescription"
+msgstr "Setze Objekt Beschreibung"
+
+#: ../../src/writeHTML.cc:707
+msgid "findobject"
+msgstr "Finde Objekt"
+
+#: ../../src/writeHTML.cc:708
+msgid "findspace"
+msgstr "Finde Platz"
+
+#: ../../src/writeHTML.cc:709
+msgid "walk"
+msgstr "Gehe"
+
+#: ../../src/writeHTML.cc:710
+msgid "animation"
+msgstr "Animation"
+
+#: ../../src/writeHTML.cc:711
+#: ../../src/writeHTML.cc:832
+msgid "return"
+msgstr "Gebe zurück"
+
+#: ../../src/writeHTML.cc:712
+msgid "object"
+msgstr "Objekt"
+
+#: ../../src/writeHTML.cc:713
+msgid "plant"
+msgstr "Pflanze"
+
+#: ../../src/writeHTML.cc:714
+msgid "create_bob"
+msgstr "Erstelle Bob  "
+
+#: ../../src/writeHTML.cc:715
+msgid "removeobject"
+msgstr "Entferne Objekt"
+
+#: ../../src/writeHTML.cc:716
+msgid "geologist"
+msgstr "Prüfe Gestein"
+
+#: ../../src/writeHTML.cc:717
+msgid "geologist_find"
+msgstr "Finde Gestein"
+
+#: ../../src/writeHTML.cc:718
+#: ../../src/writeHTML.cc:1183
+msgid "playFX"
+msgstr "Spiele Sound"
+
+#: ../../src/writeHTML.cc:719
+msgid "UNKNOWN"
+msgstr "UNBEKANNT"
+
+#: ../../src/writeHTML.cc:726
+msgid "Production"
+msgstr "Produktion"
+
+#: ../../src/writeHTML.cc:739
+msgid "'s employee"
+msgstr "s Arbeiter"
+
+#: ../../src/writeHTML.cc:749
+msgid "Inputs"
+msgstr "Zufuhr"
+
+#: ../../src/writeHTML.cc:759
+msgid "'s input"
+msgstr "s Zufuhr"
+
+#: ../../src/writeHTML.cc:771
+msgid "Output"
+msgstr "Ertrag"
+
+#: ../../src/writeHTML.cc:781
+msgid "'s output"
+msgstr "s Ertrag"
+
+#: ../../src/writeHTML.cc:830
+msgid "Documentation for program command return"
+msgstr "Dokumentation für das Programmkommando Gebe zurück"
+
+#: ../../src/writeHTML.cc:836
+msgid "failed"
+msgstr "missglückt"
+
+#: ../../src/writeHTML.cc:837
+msgid "completed"
+msgstr "beendet"
+
+#: ../../src/writeHTML.cc:838
+msgid "skipped"
+msgstr "übersprungen"
+
+#: ../../src/writeHTML.cc:896
+msgid "workers of this site"
+msgstr "Arbeiter dieser Stelle"
+
+#: ../../src/writeHTML.cc:910
+msgid "Documentation for program command call"
+msgstr "Dokumentation für das Programmkommando Rufe"
+
+#: ../../src/writeHTML.cc:912
+msgid "call"
+msgstr "Rufe"
+
+#: ../../src/writeHTML.cc:918
+#, c-format
+msgid "site's program %s"
+msgstr "Programm der Stelle %s"
+
+#: ../../src/writeHTML.cc:939
+msgid "Documentation for program command worker"
+msgstr "Dokumentation für das Programmkommando Arbeiter"
+
+#: ../../src/writeHTML.cc:941
+msgid "worker"
+msgstr "Arbeiter"
+
+#: ../../src/writeHTML.cc:952
+#, c-format
+msgid "%s's program %s"
+msgstr "%ss Programm %s"
+
+#: ../../src/writeHTML.cc:969
+msgid "Documentation for program command sleep"
+msgstr "Dokumentation für das Programmkommando Schlafe"
+
+#: ../../src/writeHTML.cc:971
+msgid "sleep"
+msgstr "Schlafe"
+
+#: ../../src/writeHTML.cc:977
+#: ../../src/writeHTML.cc:997
+#, c-format
+msgid " %u.%03u s"
+msgstr " %u.%03u s"
+
+#: ../../src/writeHTML.cc:989
+msgid "Documentation for program command animate"
+msgstr "Dokumentation für das Programmkommando Animiere"
+
+#: ../../src/writeHTML.cc:991
+msgid "animate"
+msgstr "Animiere"
+
+#: ../../src/writeHTML.cc:1010
+msgid "Documentation for program command consume"
+msgstr "Dokumentation für das Programmkommando Konsumiere"
+
+#: ../../src/writeHTML.cc:1012
+msgid "consume"
+msgstr "Verbrauche"
+
+#: ../../src/writeHTML.cc:1061
+msgid "Documentation for program command produce"
+msgstr "Dokumentation für das Programmkommando Produziere"
+
+#: ../../src/writeHTML.cc:1063
+msgid "produce"
+msgstr "Produziere"
+
+#: ../../src/writeHTML.cc:1106
+msgid "Documentation for program command mine"
+msgstr "Dokumentation für das Programmkommando Baue ab"
+
+#: ../../src/writeHTML.cc:1133
+msgid "Documentation for program command check_soldier"
+msgstr "Dokumentation für das Programmkommando Überprüfe Soldat"
+
+#: ../../src/writeHTML.cc:1135
+msgid "check soldier"
+msgstr "überprüfe Soldat"
+
+#: ../../src/writeHTML.cc:1141
+#: ../../src/writeHTML.cc:1165
+msgid "hp"
+msgstr "LP"
+
+#: ../../src/writeHTML.cc:1142
+#: ../../src/writeHTML.cc:1166
+msgid "attack"
+msgstr "Attacke"
+
+#: ../../src/writeHTML.cc:1143
+#: ../../src/writeHTML.cc:1167
+msgid "defense"
+msgstr "Verteidigung"
+
+#: ../../src/writeHTML.cc:1144
+#: ../../src/writeHTML.cc:1168
+msgid "evade"
+msgstr "Ausweichen"
+
+#: ../../src/writeHTML.cc:1157
+msgid "Documentation for program command train"
+msgstr "Dokumentation für das Programmkommando Trainiere"
+
+#: ../../src/writeHTML.cc:1159
+msgid "train"
+msgstr "Trainiere"
+
+#: ../../src/writeHTML.cc:1181
+msgid "Documentation for program command playFX"
+msgstr "Dokumentation für das Programmkommando Spiele Sound"
+
+#: ../../src/writeHTML.cc:1218
+#: ../../src/writeHTML.cc:1224
+msgid "Ware types"
+msgstr "Warenarten"
 
 #: ../../src/events/event_message_box.cc:42
 msgid "No text defined"
@@ -1042,152 +1523,148 @@ msgid "Allow building type"
 msgstr "Erlaube Gebäudetyp"
 
 #: ../../src/events/event_factory.cc:48
-msgid "Allows (or forbids) the construction of a building type for a player"
+msgid "Allows (or forbids) the construction of a building type for a player."
 msgstr "Erlaubt (oder verbietet) einem Spieler das Errichten eines Gebäudetyps."
 
-#: ../../src/events/event_factory.cc:51
+#: ../../src/events/event_factory.cc:52
 msgid "Create building"
 msgstr "Erstelle Gebäude"
 
-#: ../../src/events/event_factory.cc:52
+#: ../../src/events/event_factory.cc:53
 msgid "Create a building and optionally place workers in it"
 msgstr "Erstelle ein Gebäude und setze zusätzlich auch ein Arbeiter hinein."
 
-#: ../../src/events/event_factory.cc:55
+#: ../../src/events/event_factory.cc:56
 msgid "Conquer area"
 msgstr "Erobere Gebiet"
 
-#: ../../src/events/event_factory.cc:57
-msgid "Gives ownership of all unowned locations whithin an area to the player"
+#: ../../src/events/event_factory.cc:58
+msgid "Gives ownership of all unowned locations whithin an area to the player."
 msgstr "Gibt dem Spieler die Kontrolle über ein Gebiet, falls es von niemanden sonst kontrolliert wird."
 
-#: ../../src/events/event_factory.cc:61
+#: ../../src/events/event_factory.cc:62
 msgid "Create flag"
 msgstr "Flagge setzen"
 
-#: ../../src/events/event_factory.cc:62
-msgid "Create a flag"
-msgstr "Setze eine Flagge"
+#: ../../src/events/event_factory.cc:63
+msgid "Create a flag."
+msgstr "Setze eine Flagge."
 
-#: ../../src/events/event_factory.cc:65
+#: ../../src/events/event_factory.cc:66
 msgid "Create immovable"
 msgstr "Erstelle unbewegten Gegenstand"
 
-#: ../../src/events/event_factory.cc:66
-msgid "Create an immovable"
-msgstr "Erstelle einen unbewegten Gegenstand"
+#: ../../src/events/event_factory.cc:67
+msgid "Create an immovable."
+msgstr "Erstelle einen unbewegten Gegenstand."
 
-#: ../../src/events/event_factory.cc:69
+#: ../../src/events/event_factory.cc:70
 msgid "Show message box"
 msgstr "Zeige Nachrichten Fenster"
 
-#: ../../src/events/event_factory.cc:71
-msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
+#: ../../src/events/event_factory.cc:72
+msgid "Show a message box. It can be modal or and have a picture. An events can be assigned to each button to give the user chose the course of the game."
 msgstr "Dieses Ereignis zeigt ein Nachrichtenfenster, welches fest oder veränderbar sein kann. Das Fenster kann aus Text, Bildern und Knöpfen zusammengesetzt werden, wobei jedem Knopf ein bestimmtes Ereignis zugewiesen werden kann."
 
-#: ../../src/events/event_factory.cc:76
+#: ../../src/events/event_factory.cc:77
 msgid "Move view"
 msgstr "Bewege Blick"
 
-#: ../../src/events/event_factory.cc:77
-msgid "This Event centers the Players View on a certain location"
-msgstr "Dieses Ereignis zentriert den Blick des Spielers auf ein bestimmtes Feld."
+#: ../../src/events/event_factory.cc:78
+msgid "Center the player's view on a certain location."
+msgstr "Zentriere den Blick des Spielers auf ein bestimmtes Feld."
 
-#: ../../src/events/event_factory.cc:80
+#: ../../src/events/event_factory.cc:81
 msgid "Reveal campaign"
 msgstr "Decke Kampagne auf"
 
-#: ../../src/events/event_factory.cc:81
-msgid "Reveal a campaign"
-msgstr "Decke Kampagne auf"
+#: ../../src/events/event_factory.cc:82
+msgid "Reveal a campaign."
+msgstr "Decke Kampagne auf."
 
-#: ../../src/events/event_factory.cc:84
+#: ../../src/events/event_factory.cc:85
 msgid "Reveal objective"
 msgstr "Decke Aufgabe auf"
 
-#: ../../src/events/event_factory.cc:85
-msgid "Reveal an objective"
-msgstr "Decke Aufgabe auf"
+#: ../../src/events/event_factory.cc:86
+msgid "Reveal an objective."
+msgstr "Decke Aufgabe auf."
 
-#: ../../src/events/event_factory.cc:88
+#: ../../src/events/event_factory.cc:89
 msgid "Reveal scenario"
 msgstr "Decke Szenario auf"
 
-#: ../../src/events/event_factory.cc:89
-msgid "Reveal a scenario"
-msgstr "Decke Szenario auf"
+#: ../../src/events/event_factory.cc:90
+msgid "Reveal a scenario."
+msgstr "Decke Szenario auf."
 
-#: ../../src/events/event_factory.cc:92
+#: ../../src/events/event_factory.cc:93
 msgid "Create road"
 msgstr "Straße bauen"
 
-#: ../../src/events/event_factory.cc:93
+#: ../../src/events/event_factory.cc:94
 msgid "Create a road and optionally place a carrier on it"
 msgstr "Erstelle eine Straße und stelle zusätzlich noch einen Träger darauf."
 
-#: ../../src/events/event_factory.cc:96
-msgid "Set null trigger"
-msgstr "Setze Null-Auslöser"
-
 #: ../../src/events/event_factory.cc:97
-msgid "Manually set a Null Trigger to a given value"
-msgstr "Setze eine Null Trigger manuell auf einen Wert"
+msgid "Set timer"
+msgstr "Setze Zeit-Auslöser"
 
-#: ../../src/events/event_factory.cc:100
+#: ../../src/events/event_factory.cc:98
+msgid "Set a timer to trigger after a certain duration."
+msgstr "Setze einen Zeit Auslöser nach einer bestimmten Zeit."
+
+#: ../../src/events/event_factory.cc:101
 msgid "Unhide area"
 msgstr "Zeige Gebiet"
 
-#: ../../src/events/event_factory.cc:102
+#: ../../src/events/event_factory.cc:103
 msgid "Gives vision for a specified amount of time of all locations whithin an area to the player."
 msgstr "Gibt dem Spieler für eine bestimmte Zeit die Sicht auf alle Dinge in einem bestimmten Gebiet."
 
-#: ../../src/trigger/trigger_factory.cc:39
+#: ../../src/trigger/trigger_factory.cc:38
 msgid "Building Trigger"
 msgstr "Gebäude-Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:41
+#: ../../src/trigger/trigger_factory.cc:40
 msgid "Triggers when the player has the specified number of buildings of the specified type in the specified area."
 msgstr "Löst aus, wenn der Spieler eine bestimmte Anzahl eines Gebäudes in dem angegebenen Gebiet besitzt."
 
-#: ../../src/trigger/trigger_factory.cc:45
+#: ../../src/trigger/trigger_factory.cc:44
 msgid "Military influence Trigger"
 msgstr "Militär-Einfluss-Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:47
+#: ../../src/trigger/trigger_factory.cc:46
 msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
 msgstr "Löst aus, wenn der Spieler einen bestimmte (oder den höchsten) militärischen Einfluss in dem angegebenen Gebiet besitzt."
 
-#: ../../src/trigger/trigger_factory.cc:51
-msgid "Null Trigger"
-msgstr "Null-Auslöser"
-
-#: ../../src/trigger/trigger_factory.cc:53
-msgid "Never triggers by itself. It is useful to pass it to some event which changes triggers"
-msgstr "Dieser Auslöser ändert seinen Status nie von selbst. Das ist sinnvoll, wenn ein Ereignis erst nach einem anderen passieren soll."
-
-#: ../../src/trigger/trigger_factory.cc:57
+#: ../../src/trigger/trigger_factory.cc:50
 msgid "Ownership Trigger"
 msgstr "Gebiets-Besitzer Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:59
+#: ../../src/trigger/trigger_factory.cc:52
 msgid "Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
 msgstr "Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem ausgewählten Gebiet besitzt. Falls es kein einfacher Auslöser ist, wird der Auslöser wieder zurückgesetzt, sobald der Spieler wieder zuwenig Land besitzt."
 
-#: ../../src/trigger/trigger_factory.cc:64
+#: ../../src/trigger/trigger_factory.cc:57
 msgid "Time Trigger"
 msgstr "Zeit-Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:66
-msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
-msgstr "Dieser Auslöser wartet eine bestimmte Zeit bevor er auslöst. Er kann so eingestellt werden, dass er sich immer wieder neu startet, nachdem die gewartete Zeit abgelaufen ist. Ereignisse können so wiederholt werden."
+#: ../../src/trigger/trigger_factory.cc:59
+msgid "Triggers at a certain time. The time can be set to a value in ms. If the trigger has no time is set, a time can be set for it with an event."
+msgstr "Löst nach einer bestimmten Zeit aus. Die Zeit kann in einem Wert in ms gesetzt werden. Wenn der Auslöser keine Zeitdauer gegeben hat, kann eine Dauer über ein Ereignis gegeben werden."
 
-#: ../../src/trigger/trigger_factory.cc:71
+#: ../../src/trigger/trigger_factory.cc:64
 msgid "Vision Trigger"
 msgstr "Sicht-Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:73
+#: ../../src/trigger/trigger_factory.cc:66
 msgid "Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
 msgstr "Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem ausgewählten Gebiet sieht (oder gesehen hat). Falls es kein einfacher Auslöser ist, wird der Auslöser wieder zurückgesetzt, sobald die Bedingung nicht mehr zutrifft."
+
+#: ../../src/editor/editorinteractive.cc:63
+msgid "Menu"
+msgstr "Menü"
 
 #: ../../src/editor/editorinteractive.cc:66
 msgid "Tool"
@@ -1217,263 +1694,266 @@ msgstr "Karte nicht gespeichert"
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Die Karte ist nicht gespeichert! Willst du den Editor wirklich beenden?"
 
-#: ../../src/editor/editorinteractive.cc:545
+#: ../../src/editor/editorinteractive.cc:540
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:184
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:184
 #: ../../src/map.h:163
 msgid "No Name"
 msgstr "Kein Name"
 
-#: ../../src/editor/editorinteractive.cc:547
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:140
+#: ../../src/editor/editorinteractive.cc:542
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:189
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:185
 #: ../../src/map.h:164
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:51
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_intro.cc:32
+msgid "Press a key or click to continue ..."
+msgstr "Drücke einen Knopf oder benutze die Maus um fortzufahren ..."
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:70
 msgid "Apply"
 msgstr "Übernehmen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:77
 msgid "Increase maximum FPS"
 msgstr "Vergrössere max.FPS"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:84
 msgid "Decrease maximum FPS"
 msgstr "Verkleinere max.FPS"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:91
 msgid "Increase autosave interval"
 msgstr "Vergrößere das Autosave-Intervall"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:82
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:98
 msgid "Decrease autosave interval"
 msgstr "Verkleinere das Autosave-Intervall"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:90
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:105
 msgid "Increase autosave interval at 10"
 msgstr "Vergrößere das Autosave-Intervall um 10"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:98
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:112
 msgid "Decrease autosave interval at 10"
 msgstr "Verkleinere das Autosave-Intervall um 10"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:100
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:119
 msgid "General Options"
 msgstr "Allgemeine Optionen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:102
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:126
 msgid "Fullscreen"
 msgstr "Vollbild"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:104
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:132
 msgid "Grab Input"
 msgstr "Feste Maus"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:106
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:138
 msgid "Enable Music"
 msgstr "Musik"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:108
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:144
 msgid "Enable Sound"
 msgstr "Geräusche"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:109
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:149
 msgid "Maximum FPS:"
 msgstr "Maximum FPS:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:112
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:163
 msgid "In-game resolution"
 msgstr "Grafikauflösung im Spiel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:113
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:168
 msgid "Language"
 msgstr "Sprache"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:116
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:179
 msgid "In-game Options"
 msgstr "Spieloptionen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:119
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:186
 msgid "Use single Watchwindow Mode"
 msgstr "Benutze ein Beobachtungsfenster"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:122
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:192
 msgid "Start roadbuilding after placing flag"
 msgstr "Beginne mit dem Wegbau nach dem Flaggensetzen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:125
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:198
 msgid "Show buildings area preview"
 msgstr "Zeige Vorschau des Einflussbereichs der Gebäude"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:128
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:204
 msgid "Snap windows only when overlapping"
 msgstr "Fenster nur andocken, wenn sie sich überlappen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:131
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:210
 msgid "Dock windows to edges"
 msgstr "Fenster an den Rand andockbar"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:134
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:216
 msgid "Save game automatically every"
 msgstr "Speichere das Spiel automatisch alle"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:138
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:224
 msgid "min."
 msgstr "min."
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:206
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:313
 msgid "System default language"
 msgstr "Systemstandard"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:37
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:53
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:63
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:51
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:40
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:64
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:54
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:236
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:47
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:60
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:54
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:77
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:77
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:58
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:113
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:76
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:291
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:63
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:106
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:81
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:178
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:117
 msgid "Back"
 msgstr "Zurück"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:45
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:68
 msgid "Choose a replay!"
 msgstr "Wähle eine Aufnahme!"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:28
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:48
 msgid "Single Player Menu"
 msgstr "Einzelspielermenü"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:35
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:56
 msgid "New Game"
 msgstr "Neues Spiel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:41
-msgid "Load Game"
-msgstr "Spielstand laden"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:47
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:63
 msgid "Campaigns"
 msgstr "Kampagnen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:47
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:70
+msgid "Load Game"
+msgstr "Spielstand laden"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:63
 msgid "Select map"
 msgstr "Karte wählen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:55
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:70
 msgid "Select Savegame"
 msgstr "Speicherung wählen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:69
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:84
 msgid "Start game"
 msgstr "Spiel starten"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:72
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:91
 msgid "Launch Game"
 msgstr "Starte Spiel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:182
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:218
 msgid "(no map)"
 msgstr "(keine Karte)"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:201
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:237
 msgid "WARNING!!! Host selected file \""
 msgstr "ACHTUNG!!! Der Gastgeber hat die Datei \""
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:203
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:239
 msgid "\" for this game, but you don't have it."
 msgstr "\" für dieses Spiel ausgewählt. Diese ist bei dir nicht vorhanden."
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:204
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:240
 msgid " Please add it manually."
 msgstr " Bitte füge sie per Hand hinzu."
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:221
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:257
 msgid "Original:"
 msgstr "Original:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:313
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:349
 msgid "(Save): "
 msgstr "(Save): "
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:30
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:53
 msgid "Begin Network Game"
 msgstr "Beginne ein Netzwerkspiel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:31
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:57
 msgid "List of games in your local network:"
 msgstr "Liste der Spiele im lokalen Netzwerk:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:61
 msgid "Your nickname:"
 msgstr "Dein Spitzname:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:33
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:65
 msgid "Host to connect:"
 msgstr "IP/Name des Gastgebers:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:73
 msgid "Join this game"
 msgstr "Nimm an diesem Spiel teil"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:45
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:80
 msgid "Host a new game"
 msgstr "Eröffne ein neues Spiel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:57
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:95
 msgid "Load previous host"
 msgstr "Lade letzten Gastgeber"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:66
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:113
 msgid "nobody"
 msgstr "Niemand"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:68
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:117
 msgid "Host"
 msgstr "Host"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:70
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:119
 msgid "State"
 msgstr "Status"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:188
 msgid "Closed"
 msgstr "Geschlossen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:51
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:72
 msgid "Choose saved game!"
 msgstr "Wähle ein gespeichertes Spiel!"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:54
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:74
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:54
 msgid "Map Name:"
 msgstr "Karte:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:56
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:76
 msgid "Gametime:"
 msgstr "Spielzeit:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:44
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:221
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:42
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:63
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:270
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:61
 msgid "Choose your map!"
 msgstr "Wähle deine Karte!"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:46
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:68
 msgid "Load Map as scenario: "
 msgstr "Lade die Karte als Szenario: "
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:47
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:223
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:43
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:56
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:73
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:271
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:66
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:57
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:60
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
@@ -1484,148 +1964,136 @@ msgstr "Lade die Karte als Szenario: "
 msgid "Name:"
 msgstr "Name:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:49
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:225
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:45
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:79
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:273
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:72
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:75
 msgid "Author:"
 msgstr "Autor:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:51
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:47
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:85
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:78
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:58
 msgid "Size:"
 msgstr "Größe:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:53
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:49
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:91
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:68
 msgid "World:"
 msgstr "Welt:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:55
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:51
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:97
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:90
 msgid "Players:"
 msgstr "Spieler:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:57
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:53
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:103
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:96
 msgid "Descr:"
 msgstr "Beschr:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:151
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:217
 msgid "(directory)"
 msgstr "(Ordner)"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:203
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:165
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:269
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:228
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:221
 msgid "<parent>"
 msgstr "<--"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:39
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:55
 msgid "Select a campaign"
 msgstr "Wähle eine Kampagne"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:41
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:56
 msgid "Campaign:"
 msgstr "Kampagnen:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:43
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:58
 msgid "Difficulty:"
 msgstr "Schwierigkeit:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:45
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:227
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:60
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:275
 msgid "Description:"
 msgstr "Beschreibung: "
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:80
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:121
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:123
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:194
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:301
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:302
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:303
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:365
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:113
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:154
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:156
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:227
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:367
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:368
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:369
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:431
 msgid "[No value found]"
 msgstr "[Kein Wert gefunden]"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:81
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:114
 msgid "Easy living"
 msgstr "Leichtes Spiel"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:82
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:115
 msgid "Be vigilant"
 msgstr "Sei Achtsam"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:83
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:116
 msgid "Hard struggle"
 msgstr "Harter Kampf"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:127
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:307
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:160
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:373
 msgid "[Invalid entry]"
 msgstr "[Fehlerhafter Eintrag]"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:33
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:51
 msgid "Single Player"
 msgstr "Einzelspieler"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:39
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:58
 msgid "Multi Player"
 msgstr "Mehrspieler"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:45
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:65
 msgid "Watch Replay"
 msgstr "Aufnahme abspielen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:57
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:79
 msgid "Editor"
 msgstr "Editor"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu.cc:73
 msgid "View Readme"
 msgstr "Zeige Liesmich"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:79
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:107
 msgid "Version "
 msgstr "Version "
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:83
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:111
 msgid "(C) 2002-2008 by the Widelands Development Team"
 msgstr "(C) 2002-2008 Widelands Entwicklungsteam"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:28
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:41
 msgid "Editor Menu"
 msgstr "Editor Menü"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:35
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:49
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:51
 #: ../../src/editor/ui_menus/editor_main_menu.cc:49
 msgid "New Map"
 msgstr "Neue Karte"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:41
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:51
 #: ../../src/editor/ui_menus/editor_main_menu.cc:55
 msgid "Load Map"
 msgstr "Karte laden"
 
-#: ../../src/ui/ui_basic/ui_messagebox.cc:92
-#: ../../src/editor/tools/editor_info_tool.cc:75
-#: ../../src/editor/tools/editor_info_tool.cc:76
-msgid "Yes"
-msgstr "Ja"
-
-#: ../../src/ui/ui_basic/ui_messagebox.cc:99
-#: ../../src/editor/tools/editor_info_tool.cc:75
-#: ../../src/editor/tools/editor_info_tool.cc:76
-msgid "No"
-msgstr "Nein"
-
-#: ../../src/ui/ui_basic/ui_progresswindow.cc:41
+#: ../../src/ui/ui_basic/ui_progresswindow.cc:42
 msgid "Preparing..."
 msgstr "Vorbereiten..."
 
@@ -1761,45 +2229,6 @@ msgstr ""
 "\n"
 " Autor: "
 
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:47
-msgid "Null Trigger Options"
-msgstr "Null-Auslöseroptionen"
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:69
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:179
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:82
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:207
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:87
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:247
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:172
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:128
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:184
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:109
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:289
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:224
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:165
-msgid "Ok"
-msgstr "Ok"
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:112
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:528
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:271
-#, c-format
-msgid "There is another trigger registered with the name \"%s\". Choose another name."
-msgstr "Es gibt einen anderen registrierten Auslöser mit dem Namen \"%s\". Wähle einen anderen Namen."
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:117
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:225
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:300
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:295
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:195
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:251
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:533
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:276
-msgid "Name in use"
-msgstr "Name wird benutzt"
-
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
 msgid "Make Directory"
@@ -1862,7 +2291,6 @@ msgstr "Kann das Ereignis nicht löschen. Es wird genutzt von"
 #: ../../src/editor/ui_menus/editor_event_menu.cc:326
 #: ../../src/editor/ui_menus/editor_player_menu.cc:244
 #: ../../src/editor/ui_menus/editor_player_menu.cc:276
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:274
 msgid "Error!"
 msgstr "Fehler!"
 
@@ -1872,7 +2300,7 @@ msgstr "Kann den Auslöser nicht löschen. Er wird genutzt von"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:350
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:107
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:235
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:234
 #, c-format
 msgid "Unnamed%u"
 msgstr "Namenlos%u"
@@ -1891,6 +2319,22 @@ msgstr "Kartenbewegungsereignisoptionen"
 msgid "Current position: "
 msgstr "Derzeitige Position: "
 
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:179
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:82
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:207
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:87
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:247
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:172
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:128
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:184
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:109
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:289
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:224
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:165
+msgid "Ok"
+msgstr "Ok"
+
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:220
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:295
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:290
@@ -1899,6 +2343,16 @@ msgstr "Derzeitige Position: "
 #, c-format
 msgid "There is another event registered with the name \"%s\". Choose another name."
 msgstr "Es gibt einen anderes registriertes Ereignis mit dem Namen \"%s\". Wähle einen anderen Namen."
+
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:225
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:300
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:295
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:195
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:251
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:533
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:276
+msgid "Name in use"
+msgstr "Name wird benutzt"
 
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
 msgid "Unhide Area Event Options"
@@ -2030,11 +2484,11 @@ msgstr "Löschen"
 msgid "Available Triggers: "
 msgstr "Mögliche Auslöser:"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:281
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:275
 msgid "Syntax Error"
 msgstr "Syntaxfehler"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:283
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:277
 msgid "Your conditional contains at least one syntax error. Please correct!\n"
 msgstr "Deine Bedingung hat mindestens einen Syntaxfehler. Bitte beheben!\n"
 
@@ -2087,20 +2541,20 @@ msgstr "Spieler: "
 msgid "Descr: "
 msgstr "Beschr: "
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:202
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:204
 msgid "unnamed"
 msgstr "Namenlos"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:358
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:364
 msgid " exists already. Overwrite?"
 msgstr " existiert bereits. Überschreiben?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:360
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:366
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:386
 msgid "Save Map Error!!"
 msgstr "Speicherfehler!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 msgid ""
 "Map Saving Error!\n"
 "Saved Map-File may be corrupt!\n"
@@ -2329,7 +2783,7 @@ msgid "Terrain Select"
 msgstr "Geländeform"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:208
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:204
 msgid "Current:"
 msgstr "Zur Zeit:"
 
@@ -2349,13 +2803,18 @@ msgstr "Text zur Aufgabe: "
 msgid "Visible"
 msgstr "Sichtbar"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:203
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:255
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:306
 msgid "Trigger: "
 msgstr "Auslöser: "
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:264
-msgid "Can't delete Objective, because it's trigger is in use by "
-msgstr "Kann die Aufgabe nicht löschen, da sein Auslöser genutzt wird von "
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:278
+msgid "The objective was deleted, but not its trigger, because it is still referenced by:\n"
+msgstr "Die Aufgabe wurde gelöscht, sein Auslöser wurde allerdings beibehalten, weil er immer noch verwendet wird von:\n"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:291
+msgid "Note"
+msgstr "Notiz"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
 #, c-format
@@ -2375,6 +2834,12 @@ msgstr "Radius: %u"
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:99
 msgid "Building Trigger Options"
 msgstr "Gebäude-Auslöserioptionen"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:528
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:271
+#, c-format
+msgid "There is another trigger registered with the name \"%s\". Choose another name."
+msgstr "Es gibt einen anderen registrierten Auslöser mit dem Namen \"%s\". Wähle einen anderen Namen."
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:48
 msgid "Trigger Option Menu"
@@ -2416,57 +2881,48 @@ msgstr "(Keine Beschreibung vorhanden.)"
 msgid "no description defined"
 msgstr "Keine Beschreibung vorhanden."
 
+#~ msgid "Doh... someone forgot the help text!"
+#~ msgstr "Och neeee! Jemand hat den Hilfstext vergessen!"
+#~ msgid "Manually set a Null Trigger to a given value"
+#~ msgstr "Setze eine Null Trigger manuell auf einen Wert"
+#~ msgid "Null Trigger"
+#~ msgstr "Null-Auslöser"
+#~ msgid "Never triggers by itself. It is useful to pass it to some event which changes triggers"
+#~ msgstr "Dieser Auslöser ändert seinen Status nie von selbst. Das ist sinnvoll, wenn ein Ereignis erst nach einem anderen passieren soll."
+#~ msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
+#~ msgstr "Dieser Auslöser wartet eine bestimmte Zeit bevor er auslöst. Er kann so eingestellt werden, dass er sich immer wieder neu startet, nachdem die gewartete Zeit abgelaufen ist. Ereignisse können so wiederholt werden."
+#~ msgid "Null Trigger Options"
+#~ msgstr "Null-Auslöseroptionen"
+#~ msgid "Can't delete Objective, because it's trigger is in use by "
+#~ msgstr "Kann die Aufgabe nicht löschen, da sein Auslöser genutzt wird von "
 #~ msgid "Training Options"
 #~ msgstr "Trainingsoptionen"
-
 #~ msgid "Training mode : "
 #~ msgstr "Trainingsmodus:"
-
 #~ msgid "Balanced"
 #~ msgstr "Ausgeglichen"
-
 #~ msgid "Hit points"
 #~ msgstr "Lebenspunkte"
-
-#~ msgid "Defense"
-#~ msgstr "Verteidigung"
-
-#~ msgid "Evade"
-#~ msgstr "Ausweichen"
-
 #~ msgid "Make heroes"
 #~ msgstr "Erstelle Helden"
-
 #~ msgid "Balanced army"
 #~ msgstr "Ausgeglichene Armee"
-
 #~ msgid "Save game"
 #~ msgstr "Spiel speichern"
-
 #~ msgid "Exit game"
 #~ msgstr "Spiel beenden"
-
 #~ msgid "General statistics"
 #~ msgstr "Allgemeine Statistiken"
-
 #~ msgid "Ware statistics"
 #~ msgstr "Warenstatistik"
-
 #~ msgid "Building statistics"
 #~ msgstr "Gebäudestatistik"
-
 #~ msgid "Needs Ware"
 #~ msgstr "Benötigt Ware"
-
-#~ msgid "Consumed"
-#~ msgstr "Verbraucht"
-
 #~ msgid "Group"
 #~ msgstr "Gruppe"
-
 #~ msgid "Reveal (or hide) an objective"
 #~ msgstr "Decke eine Aufgabe auf oder verstecke sie"
-
 #~ msgid ""
 #~ " --nosound            Starts the game with sound disabled\n"
 #~ " --nozip              Do not save files as binary zip archives.\n"
@@ -2479,68 +2935,48 @@ msgstr "Keine Beschreibung vorhanden."
 #~ "\n"
 #~ " --editor             Startet direkt den Widelands Karten Editor.\n"
 #~ "\n"
-
 #~ msgid "Higher maximum FPS"
 #~ msgstr "Erhöhe max.FPS"
-
 #~ msgid "Autosave game every %d minute"
 #~ msgid_plural "Autosave game every %d minutes"
 #~ msgstr[0] "Speichere das Spiel automatisch einmal pro Minute"
 #~ msgstr[1] "Speichere das Spiel automatisch jede %d. Minute"
-
 #~ msgid "Most aggressive attack"
 #~ msgstr "Agressivste Attacke"
-
 #~ msgid "Cautious attack"
 #~ msgstr "Schwächste Attacke"
-
 #~ msgid " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
 #~ msgstr " --ggz                Started das Spiel als GGZ Gaming Zone Klienten (nicht benutzen!)"
-
 #~ msgid "The Room %s is currently not logged in or unknown to the server.\n"
 #~ msgstr "Der Raum %s ist zur Zeit nicht online oder dem Server unbekannt.\n"
-
 #~ msgid "The User %s is currently not logged in or unknown to the server.\n"
 #~ msgstr "Der Benutzer %s ist zur Zeit nicht online oder dem Server unbekannt.\n"
-
 #~ msgid "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"
 #~ msgstr "Server gab einen Verbindungsfehler zurück. Dein Protokoll (%i.%02i) ist zu alt, der Server benutzt %i.%02i\n"
-
 #~ msgid "Server is full!\n"
 #~ msgstr "Server ist voll!\n"
-
 #~ msgid "This server doesn't serve widelands!\n"
 #~ msgstr "Auf diesen Server läuft Widelands nicht!\n"
-
 #~ msgid "Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"
 #~ msgstr "Ungültige Antwort vom Server auf ein Chat-Nachricht-Paket erhalten. Statt %i wurde %i gesendet, Antwort ignoriert."
-
 #~ msgid "LAN games"
 #~ msgstr "Spiele im LAN"
-
 #~ msgid "GGZ games"
 #~ msgstr "GGZ-Spiele"
-
 #~ msgid "Internet Options"
 #~ msgstr "Internetoptionen"
-
 #~ msgid "Run Game"
 #~ msgstr "Spiel spielen"
-
 #~ msgid "Lobby"
 #~ msgstr "Warteraum"
-
 #~ msgid "User %s is using \"%s\" in room \"%s\"\n"
 #~ msgstr "Benutzer %s benutzt \"%s\" im Raum \"%s\"\n"
-
 #~ msgid "User %s has entered the room %s !\n"
 #~ msgstr "Benutzer %s hat den Raum %s betreten!\n"
-
 #~ msgid "User %s has left the room %s !\n"
 #~ msgstr "Benutzer %s hat den Raum %s verlassen!\n"
-
 #~ msgid "Critical Connection Error!"
 #~ msgstr "Kritischer Verbindungsfehler!"
-
 #~ msgid "Server disconnected unexpectedly!"
 #~ msgstr "Unerwartet vom Server getrennt!"
+
