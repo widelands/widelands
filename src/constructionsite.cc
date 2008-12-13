@@ -358,13 +358,8 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		Building * const bld =
 			m_building->create(*g, owner(), m_position, false);
 		bld->set_stop(get_stop());
-		// Walk the builder home safely
-		Worker* builder = m_builder.get(g);
-		if (builder) {
+		if (Worker * const builder = m_builder.get(g))
 			builder->reset_tasks(dynamic_cast<Game *>(g));
-			builder->set_location(bld);
-			builder->start_task_gowarehouse(dynamic_cast<Game *>(g));
-		}
 	}
 }
 
