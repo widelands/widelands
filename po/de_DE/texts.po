@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3580\n"
+"Project-Id-Version: Widelands svn3583\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-12-12 20:18+0000\n"
+"POT-Creation-Date: 2008-12-13 13:23+0000\n"
 "PO-Revision-Date: 2008-12-12 21:20+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -345,29 +345,23 @@ msgstr "Häuptling"
 msgid "Elders"
 msgstr "Ältesten"
 
-#: ../../txts/developers:19
-#: ../../txts/developers:285
+#: ../../txts/developers:19 ../../txts/developers:285
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers:22
-#: ../../txts/developers:29
-#: ../../txts/developers:36
+#: ../../txts/developers:22 ../../txts/developers:29 ../../txts/developers:36
 msgid "vacant"
 msgstr "unbesetzt"
 
-#: ../../txts/developers:26
-#: ../../txts/developers:278
+#: ../../txts/developers:26 ../../txts/developers:278
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:33
-#: ../../txts/developers:291
+#: ../../txts/developers:33 ../../txts/developers:291
 msgid "Sound"
 msgstr "Geräusche"
 
-#: ../../txts/developers:40
-#: ../../txts/developers:296
+#: ../../txts/developers:40 ../../txts/developers:296
 msgid "Translation"
 msgstr "Übersetzer"
 
@@ -499,8 +493,7 @@ msgstr "Lies Mich für den Widelands Editor"
 msgid "README for the Editor"
 msgstr "Lies Mich des Editors"
 
-#: ../../txts/editor_readme:7
-#: ../../txts/README:9
+#: ../../txts/editor_readme:7 ../../txts/README:9
 msgid "Introduction"
 msgstr "Einführung"
 
@@ -654,4 +647,3 @@ msgstr "Benutze die Prioritätsknöpfe im Fenster der Gebäude, um die Anlieferu
 
 #~ msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
 #~ msgstr "Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Community Foren."
-
