@@ -71,16 +71,6 @@ template <typename Base> struct basic_FileWrite : public Base {
 	void SetPos(const Pos pos) throw () {filepos = pos;}
 
 	/**
-	 * Reserve size bytes at the current file position for filling in later. It
-	 * will only advance the reading position, not increase the buffer size. That
-	 * is done when writing if necessary.
-	 *
-	 * Returns the position of the first reserved byte.
-	 */
-	Pos Reserve(const size_t size) throw ()
-	{const Pos result = filepos; filepos += size; return result;}
-
-	/**
 	 * Write data at the given location. If pos is NoPos(), write at the
 	 * file pointer and advance the file pointer.
 	 */
