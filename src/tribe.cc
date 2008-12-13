@@ -79,9 +79,9 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 			while (Section::Value const * const v = section.get_next_val(0)) {
 				char const * const     _name = v->get_name  ();
 				char const * const _descname = v->get_string();
-				if (descnames.count(_descname))
+				if (descnames.count(_name))
 					throw wexception
-						("descname \"%s\" is already used", v->get_string());
+						("object name \"%s\" is already used", v->get_string());
 				descnames.insert(v->get_string());
 				path += _name;
 				path += "/conf";
