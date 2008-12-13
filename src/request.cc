@@ -89,8 +89,7 @@ Request::~Request()
 }
 
 // Modified to allow Requirements and SoldierRequests
-#define REQUEST_VERSION            3
-#define REQUEST_SUPPORTED_VERSION  2
+#define REQUEST_VERSION 4
 
 /**
  * Read this request from a file
@@ -103,79 +102,96 @@ Request::~Request()
 void Request::Read
 	(FileRead * fr, Editor_Game_Base * egbase, Map_Map_Object_Loader * mol)
 {
-	uint16_t const version = fr->Unsigned16();
-	if (version >= REQUEST_SUPPORTED_VERSION) {
-		m_type              = static_cast<Type>(fr->Unsigned8());
-		if (m_type != WARE and m_type != WORKER)
-			throw wexception
-				("type is %u but must be %u (ware) or %u (worker)",
-				 m_type, WARE, WORKER);
-		{
-			uint32_t const index = fr->Unsigned32();
-			m_index = Ware_Index(static_cast<Ware_Index::value_t>(index));
-			Tribe_Descr const & tribe = m_target->get_owner()->tribe();
-			if (m_type == WARE and tribe.get_nrwares() <= m_index)
-				throw wexception
-					("ware index is %u but tribe has only %u ware types",
-					 index, tribe.get_nrwares().value());
-			if (m_type == WORKER and tribe.get_nrworkers() <= m_index)
-				throw wexception
-					("worker index is %u but tribe has only %u worker types",
-					 index, tribe.get_nrworkers().value());
-		}
-		m_idle              = fr->Unsigned8();
-		m_count             = fr->Unsigned32();
-		if (0 == m_count)
-			throw wexception("count is 0");
-		m_required_time     = fr->Unsigned32();
-		m_required_interval = fr->Unsigned32();
-
-		if (version == REQUEST_VERSION)
-			m_last_request_time = fr->Unsigned32();
-
-		assert(!m_transfers.size());
-
-		const uint16_t nr_transfers = fr->Unsigned16();
-		for (uint16_t i = 0; i < nr_transfers; ++i) {
-			uint8_t const what_is = fr->Unsigned8();
-			if (what_is != WARE and what_is != WORKER and what_is != 2)
-				throw wexception
-					("Request::Read: while reading transfer %u: type is %u but "
-					 "must be one of {%u (WARE), %u (WORKER), %u (SOLDIER)}",
-					 i, what_is, WARE, WORKER, 2);
-			uint32_t const reg = fr->Unsigned32();
-			if (upcast(Game, game, egbase)) {
-				if (not mol->is_object_known(reg))
+	try {
+		uint16_t const version = fr->Unsigned16();
+		if (2 <= version and version <= REQUEST_VERSION) {
+			Tribe_Descr const & tribe = m_target->owner().tribe();
+			if (version <= 3) {
+				//  Unfortunately, old versions wrote the index. The only thing to
+				//  do is to assume that the index refers to the same ware type and
+				//  hope for the best.
+				log
+					("WARNING: a request is stored with an old broken version. But "
+					 "this might work.\n");
+				m_type = static_cast<Type>(fr->Unsigned8());
+				if (m_type != WARE and m_type != WORKER)
 					throw wexception
-						("Request::Read: while reading %s transfer %u: %u is not "
-						 "known",
-						 what_is == WARE   ? "ware"   :
-						 what_is == WORKER ? "worker" :
-						 "soldier",
-						 i, reg);
-				Transfer * const trans =
-					what_is == WARE ?
-					new Transfer
-					(game,
-					 this,
-					 &mol->get<WareInstance>(reg))
-					:
-					new Transfer
-					(game,
-					 this,
-					 &mol->get<Worker>(reg));
-				trans->set_idle(fr->Unsigned8());
-				m_transfers.push_back(trans);
-
-				if (fr->Unsigned8())
-					m_requirements.Read (fr, egbase, mol);
+						("type is %u but must be %u (ware) or %u (worker)",
+						 m_type, WARE, WORKER);
+				uint32_t const index = fr->Unsigned32();
+				m_index = Ware_Index(static_cast<Ware_Index::value_t>(index));
+				if (m_type == WARE and tribe.get_nrwares() <= m_index)
+					throw wexception
+						("ware index is %u but tribe has only %u ware types",
+						 index, tribe.get_nrwares().value());
+				if (m_type == WORKER and tribe.get_nrworkers() <= m_index)
+					throw wexception
+						("worker index is %u but tribe has only %u worker types",
+						 index, tribe.get_nrworkers().value());
+			} else {
+				char const * const type_name = fr->CString();
+				if (Ware_Index const wai = tribe.ware_index(type_name)) {
+					m_type = WARE;
+					m_index = wai;
+				} else if (Ware_Index const woi = tribe.worker_index(type_name)) {
+					m_type = WORKER;
+					m_index = woi;
+				} else
+					throw wexception("request for unknown type \"%s\"", type_name);
 			}
-		}
+			m_idle              = fr->Unsigned8();
+			m_count             = fr->Unsigned32();
+			if (0 == m_count)
+				throw wexception("count is 0");
+			m_required_time     = fr->Unsigned32();
+			m_required_interval = fr->Unsigned32();
 
-		if (!is_open() && m_economy)
-			m_economy->remove_request(this);
-	} else
-		throw wexception("Unknown request version %i in file!", version);
+			if (3 <= version)
+				m_last_request_time = fr->Unsigned32();
+
+			assert(!m_transfers.size());
+
+			uint16_t const nr_transfers = fr->Unsigned16();
+			for (uint16_t i = 0; i < nr_transfers; ++i)
+				try {
+					uint8_t const what_is = fr->Unsigned8();
+					if (what_is != WARE and what_is != WORKER and what_is != 2)
+						throw wexception
+							("type is %u but must be one of {%u (WARE), %u (WORKER), "
+							 "%u (SOLDIER)}",
+							 what_is, WARE, WORKER, 2);
+					uint32_t const reg = fr->Unsigned32();
+					if (upcast(Game, game, egbase)) {
+						if (not mol->is_object_known(reg))
+							throw wexception("%u is not known", reg);
+						Transfer * const trans =
+							what_is == WARE ?
+							new Transfer
+								(game,
+								 this,
+								 &mol->get<WareInstance>(reg))
+							:
+							new Transfer
+								(game,
+								 this,
+								 &mol->get<Worker>(reg));
+						trans->set_idle(fr->Unsigned8());
+						m_transfers.push_back(trans);
+
+						if (fr->Unsigned8())
+							m_requirements.Read (fr, egbase, mol);
+					}
+				} catch (_wexception const & e) {
+					throw wexception("transfer %u: %s", i, e.what());
+				}
+
+			if (!is_open() && m_economy)
+				m_economy->remove_request(this);
+		} else
+			throw wexception("unknown/unhandled version %u", version);
+	} catch (_wexception const & e) {
+		throw wexception("request: %s", e.what());
+	}
 }
 
 /**
@@ -190,15 +206,13 @@ void Request::Write
 	//  Target and econmy should be set. Same is true for callback stuff.
 
 	assert(m_type == WARE or m_type == WORKER);
-	fw->Unsigned8(m_type);
-
-	assert
-		(m_type != WARE   or
-		 m_index < m_target->get_owner()->tribe().get_nrwares  ());
-	assert
-		(m_type != WORKER or
-		 m_index < m_target->get_owner()->tribe().get_nrworkers());
-	fw->Unsigned32(m_index.value());
+	Tribe_Descr const & tribe = m_target->owner().tribe();
+	assert(m_type != WARE   or m_index < tribe.get_nrwares  ());
+	assert(m_type != WORKER or m_index < tribe.get_nrworkers());
+	fw->CString
+		(m_type == WARE                          ?
+		 tribe.get_ware_descr  (m_index)->name() :
+		 tribe.get_worker_descr(m_index)->name());
 
 	fw->Unsigned8(m_idle);
 
