@@ -73,16 +73,16 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 		path.resize(base_path_size);
 
 		{
-			std::set<std::string> descnames; //  To enforce descname uniqueness.
+			std::set<std::string> names; //  To enforce name uniqueness.
 
 			Section & section = root_conf.get_safe_section("map object types");
 			while (Section::Value const * const v = section.get_next_val()) {
 				char const * const     _name = v->get_name  ();
 				char const * const _descname = v->get_string();
-				if (descnames.count(_name))
+				if (names.count(_name))
 					throw wexception
-						("object name \"%s\" is already used", v->get_string());
-				descnames.insert(v->get_string());
+						("object name \"%s\" is already used", _name);
+				names.insert(_name);
 				path += _name;
 				path += "/conf";
 				try {
