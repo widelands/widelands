@@ -215,12 +215,11 @@ void Tribe_Descr::referenceWare
 struct orderer {
 	bool operator () (std::string const * const a, std::string const * const b)
 	{
-		assert(*a != *b);
 		return *a < *b;
 	}
 };
 #define ORDERED(index_type)                                                   \
-   typedef std::map<std::string const *, index_type, orderer> Ordered;        \
+   typedef std::multimap<std::string const *, index_type, orderer> Ordered;   \
    Ordered ordered;                                                           \
 
 void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
