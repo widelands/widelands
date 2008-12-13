@@ -157,10 +157,10 @@ uint32_t AnimationManager::get
 
 	// Determine picture name template
 
+	char templbuf[256];
 	if (char const * const pics = s.get_string("pics"))
 		picnametempl = pics;
 	else if (!picnametempl) {
-		char templbuf[256];
 		snprintf(templbuf, sizeof(templbuf), "%s.png", s.get_name());
 		picnametempl = templbuf;
 	}
@@ -171,7 +171,7 @@ uint32_t AnimationManager::get
 		size_t const len = strlen(pictempl) - 4;
 		if (pictempl[len] == '.')
 			pictempl[len] = '\0'; // delete extension
-		ad.picnametempl = pictempl;
+		ad.picnametempl = strdup(pictempl); //  FIXME assumably memory leak
 	}
 
 	// Read mapping from frame numbers to sound effect names and load effects
