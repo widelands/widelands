@@ -94,7 +94,7 @@ struct Request : public Trackable {
 	void start_transfer(Game *g, Supply* supp);
 
 
-	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
+	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *) const;
 	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
 	Worker * get_transfer_worker();
 

@@ -3,8 +3,8 @@ program=program
 picture=fire_burn_00.png
 
 [program]
-0=animation burn 30000
-1=transform tribe:ashes
+animate=burn 30000
+transform=ashes
 
 [burn]
 pics=fire_burn_??.png

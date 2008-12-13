@@ -1,7 +1,9 @@
 type=production
 size=small
-worker=ranger
 program=work
+
+[working positions]
+ranger=1
 
 [buildcost]
 trunk=4

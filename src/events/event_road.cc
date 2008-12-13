@@ -31,8 +31,8 @@ namespace Widelands {
 
 void Event_Road::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
-		int32_t const packet_version = s.get_safe_int("version");
-		if (1 <= packet_version and packet_version == EVENT_VERSION) {
+		uint32_t const packet_version = s.get_safe_positive("version");
+		if (packet_version == EVENT_VERSION) {
 			Map & map = egbase.map();
 			m_path = s.get_safe_Coords("point", map.extent());
 			char const * const steps = s.get_safe_string("steps");
@@ -72,7 +72,7 @@ void Event_Road::Read(Section & s, Editor_Game_Base & egbase) {
 			m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
 			m_fill   = s.get_bool         ("fill",                        true);
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
 		throw wexception("(road): %s", e.what());
 	}

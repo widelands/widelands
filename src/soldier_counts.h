@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,37 +17,15 @@
  *
  */
 
-#ifndef GAME_SAVER_H
-#define GAME_SAVER_H
+#ifndef SOLDIER_TYPES_H
+#define SOLDIER_TYPES_H
 
-#include "wexception.h"
+#include "widelands.h"
 
-struct FileSystem;
+#include <map>
 
 namespace Widelands {
-
-struct Game;
-
-/**
- * This class writes a complete state
- * of a game out to a file. The world in ONE file
- *
- * This might eventually evolve into the same kind of saving/loading
- * structure as was used for the map stuff - but currently, there's
- * so little to save, that everything is done by this class
- */
-
-struct Game_Saver {
-	Game_Saver(FileSystem &, Game* game);
-	~Game_Saver();
-
-	void save() throw (_wexception);
-
-private:
-	FileSystem & m_fs;
-	Game       * m_game;
-};
-
-};
+typedef std::map<Soldier_Strength, uint32_t> Soldier_Counts;
+}
 
 #endif

@@ -46,7 +46,7 @@ Worker_Descr::Worker_Descr
 	add_attribute(Map_Object::WORKER);
 
 	if (Section * const s = prof.get_section("buildcost"))
-		while (Section::Value const * const val = s->get_next_val(0))
+		while (Section::Value const * const val = s->get_next_val())
 			try {
 				std::string const input = val->get_name();
 				if (m_buildcost.count(input))

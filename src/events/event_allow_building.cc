@@ -48,15 +48,15 @@ Event_Allow_Building::Event_Allow_Building
 
 void Event_Allow_Building::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
-		int32_t const packet_version = s.get_safe_int("version");
-		if (1 <= packet_version and packet_version <= EVENT_VERSION) {
+		uint32_t const packet_version = s.get_safe_positive("version");
+		if (packet_version <= EVENT_VERSION) {
 			m_player   =
 				s.get_Player_Number("player", egbase.map().get_nrplayers(), 1);
 			egbase.get_iabase()->reference_player_tribe(m_player, this);
 			m_building = s.get_safe_Building_Index("building", egbase, m_player);
 			m_allow    = s.get_bool("allow", true);
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (std::exception const & e) {
 		throw wexception("(allow building): %s", e.what());
 	}

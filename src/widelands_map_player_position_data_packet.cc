@@ -42,8 +42,8 @@ throw (_wexception)
 	Section & s = prof.get_safe_section("global");
 
 	try {
-		int32_t const packet_version = s.get_safe_int("packet_version");
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		uint32_t const packet_version = s.get_safe_positive("packet_version");
+		if (packet_version <= CURRENT_PACKET_VERSION) {
 			//  Read all the positions
 			//  This could bring trouble if one player position/ is not set (this
 			//  is possible in the editor), is also -1, -1.

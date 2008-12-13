@@ -1,5 +1,14 @@
+#  Maple
+#
+#  Characteristics suitable to model:
+#    * Spreading: medium
+#    * Seeding:   medium
+#    * Growth:    medium
+#    * Longevity: medium
+
 size=medium
 attrib=tree
+program=program
 program=fall
 picture=idle_0.png
 
@@ -9,5 +18,10 @@ sfx=0 ../../../sound/animals/bird4
 fps=10
 hotspot=24 60
 
+[program]
+animate=idle 60000
+transform=deadtree4 39
+seed=tree4_t 126
+
 [fall]
-0=remove
+remove=

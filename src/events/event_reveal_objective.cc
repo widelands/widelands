@@ -34,15 +34,15 @@ namespace Widelands {
 
 void Event_Reveal_Objective::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
-		int32_t const packet_version = s.get_safe_int("version");
-		if (1 <= packet_version and packet_version <= EVENT_VERSION) {
+		uint32_t const packet_version = s.get_safe_positive("version");
+		if (packet_version <= EVENT_VERSION) {
 			char const * const objective_name = s.get_safe_string("objective");
 			if (Objective * const obj = egbase.map().mom()[objective_name])
 				set_objective(obj);
 			else
 				throw wexception("objective \"%s\" does not exist", objective_name);
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (std::exception const & e) {
 		throw wexception
 			("Event (Reveal Objective) %s: %s", name().c_str(), e.what());

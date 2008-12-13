@@ -47,7 +47,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 GameSettingsProvider * const settings,
 	 uint32_t               const plnum,
-	 std::string const fname, uint32_t const fsize)
+	 std::string const & fname, uint32_t const fsize)
 :
 UI::Panel(parent, x, y, w, h),
 d(new PlayerDescriptionGroupImpl)

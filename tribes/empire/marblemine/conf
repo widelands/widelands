@@ -1,6 +1,5 @@
 type=production
 size=mine
-worker=miner
 program=prog_marble
 program=prog_stone
 program=work
@@ -8,6 +7,9 @@ output=marble
 output=stone
 stopable=yes
 enhancement=deep_marblemine
+
+[working positions]
+miner=1
 
 [inputs]
 ration=6

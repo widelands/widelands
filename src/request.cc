@@ -183,6 +183,7 @@ void Request::Read
  */
 void Request::Write
 	(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * mos)
+	const
 {
 	fw->Unsigned16(REQUEST_VERSION);
 

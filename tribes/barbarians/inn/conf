@@ -3,9 +3,11 @@ size=medium
 buildable=no
 enhanced_building=yes
 enhancement=big_inn
-worker=innkeeper
 program=work
 output=snack
+
+[working positions]
+innkeeper=1
 
 [inputs]
 fish=4

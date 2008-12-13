@@ -4,11 +4,11 @@ program=program
 program=harvest
 
 [program]
-0=animation idle 500000
-1=remove
+animate=idle 500000
+remove=
 
 [harvest]
-0=transform tribe:cornfield_harvested
+transform=cornfield_harvested
 
 [idle]
 pics=cornfield_b_??.png

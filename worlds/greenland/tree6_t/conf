@@ -1,11 +1,11 @@
-
 size=medium
 program=program
 picture=s1tree6_00.png
 
 [program]
-0=animation tiny 38000
-1=transform tree6_s
+animate=tiny 66000
+remove=35
+transform=tree6_s
 
 [tiny]
 pics=s1tree6_??.png

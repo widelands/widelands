@@ -4,11 +4,11 @@ program=program
 program=harvestwine
 
 [program]
-0=animation idle 500000
-1=remove
+animate=idle 500000
+remove=
 
 [harvestwine]
-0=remove
+remove=
 
 [idle]
 pics=wine1_??.png

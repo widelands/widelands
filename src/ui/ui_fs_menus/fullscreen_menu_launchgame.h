@@ -28,10 +28,10 @@
 
 #include <string>
 
-class ChatProvider;
+struct ChatProvider;
 struct GameChatPanel;
-class GameController;
-class GameSettingsProvider;
+struct GameController;
+struct GameSettingsProvider;
 struct PlayerDescriptionGroup;
 
 /**

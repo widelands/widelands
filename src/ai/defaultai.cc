@@ -169,8 +169,7 @@ void DefaultAI::late_initialization ()
 			bo.type = bld.get_ismine() ?
 				BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 
-			container_iterate_const
-				(ProductionSite_Descr::Inputs, prod.inputs(), j)
+			container_iterate_const(Ware_Types, prod.inputs(), j)
 				bo.inputs.push_back(j.current->first.value());
 
 			container_iterate_const
@@ -711,7 +710,7 @@ void DefaultAI::check_productionsite (ProductionSiteObserver& site)
 		log
 			("ComputerPlayer(%d): out of resources, destructing\n",
 			 get_player_number());
-		game().send_player_bulldoze (site.site);
+		game().send_player_bulldoze (*site.site);
 		return;
 	}
 
@@ -729,7 +728,7 @@ void DefaultAI::check_productionsite (ProductionSiteObserver& site)
 		log
 			("ComputerPlayer(%d): out of resources, destructing\n",
 			 get_player_number());
-		game().send_player_bulldoze (site.site);
+		game().send_player_bulldoze (*site.site);
 		return;
 	}
 }
@@ -770,7 +769,7 @@ void DefaultAI::update_buildable_field (BuildableField* field)
 	const int32_t tree_attr=Map_Object_Descr::get_attribute_id("tree");
 	const int32_t stone_attr=Map_Object_Descr::get_attribute_id("stone");
 
-	map.find_immovables (Area<FCoords>(field->coords, 8), &immovables);
+	map.find_immovables (Area<FCoords>(field->coords, 10), &immovables); //  FIXME magic number
 
 	field->reachable=false;
 	field->preferred=false;

@@ -1,6 +1,5 @@
 type=training
 size=big
-worker=carrier
 max_soldiers=8
 train=defense,hp,evade
 program=Sleep
@@ -9,6 +8,9 @@ program=upgrade_defense_1
 program=upgrade_hp_0
 program=upgrade_evade_0
 program=upgrade_evade_1
+
+[working positions]
+carrier=1
 
 [Sleep]
 sleep=5000

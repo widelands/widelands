@@ -110,7 +110,7 @@ public:
 
 	/// This should be called whenever the worker has done work that he gains
 	/// experience from. It may cause him to change his type so that he becomes
-	/// overqualified for his current Worker_Position and needs to be replaced.
+	/// overqualified for his current working position and can be replaced.
 	/// If so, his old Ware_Index is returned so that the calling code can
 	/// request a new worker of his old type. Otherwise Ware_Index::Null is
 	/// returned.

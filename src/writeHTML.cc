@@ -731,15 +731,16 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 		fw.Text
 			("</h3>\n"
 			 "<ul>\n");
-		container_iterate_const(std::vector<std::string>, workers(), i) {
+		container_iterate_const(Ware_Types, working_positions(), i) {
 			fw.Text("<li><a name=\"worker_");
 			tribe().referenceWorker
 				(fw,
-				 name() + "/index.html#worker_" + i.current->c_str()              +
+				 name() + "/index.html#worker_"                                   +
+				 tribe().get_worker_descr(i.current->first)->name()               +
 				 "\" title=\"" + descname() + _("'s employee")                    +
 				 "\"><img src=\"../" + name() + "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Employ,
-				 tribe().worker_index(i.current->c_str()));
+				 i.current->first, i.current->second);
 			fw.Text("</a></li>\n");
 		}
 		fw.Text("</ul>\n");
@@ -750,7 +751,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 			fw.Text
 				("</h3>\n"
 				 "<ul>\n");
-			container_iterate_const(Inputs, inputs(), i) {
+			container_iterate_const(Ware_Types, inputs(), i) {
 				fw.Text("<li><a name=\"input_");
 				tribe().referenceWare
 					(fw,
@@ -801,9 +802,9 @@ void ProductionProgram::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	fw.Text("<h4 id=\"program_");
-	fw.Text(get_name());
+	fw.Text(name());
 	fw.Text("\">");
-	fw.Text(get_name());
+	fw.Text(name());
 	fw.Text
 		("</h4>\n"
 		 "<ol>\n");
@@ -812,7 +813,7 @@ void ProductionProgram::writeHTML
 		char buffer[256];
 		snprintf
 			(buffer, sizeof(buffer),
-			 "<li id=\"program_%s:%u\">", get_name().c_str(), ++line_number);
+			 "<li id=\"program_%s:%u\">", name().c_str(), ++line_number);
 		fw.Text(buffer);
 		(*i.current)->writeHTML(fw, site);
 		fw.Text("</li>\n");
@@ -821,7 +822,7 @@ void ProductionProgram::writeHTML
 }
 
 
-void ActReturn::writeHTML
+void ProductionProgram::ActReturn::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	fw.Text
@@ -860,7 +861,7 @@ void ActReturn::writeHTML
 }
 
 
-void ActReturn::Negation::writeHTML
+void ProductionProgram::ActReturn::Negation::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	fw.Text("<span class=\"keyword\">&not;</span> ");
@@ -868,7 +869,7 @@ void ActReturn::Negation::writeHTML
 }
 
 
-void ActReturn::Economy_Needs::writeHTML
+void ProductionProgram::ActReturn::Economy_Needs::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	Item_Ware_Descr const & ware = *site.tribe().get_ware_descr(ware_type);
@@ -889,7 +890,7 @@ void ActReturn::Economy_Needs::writeHTML
 }
 
 
-void ActReturn::Workers_Need_Experience::writeHTML
+void ProductionProgram::ActReturn::Workers_Need_Experience::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text("<a href=\"#workers\" title=\"");
@@ -901,9 +902,10 @@ void ActReturn::Workers_Need_Experience::writeHTML
 }
 
 
-void ActCall::writeHTML(::FileWrite & fw, ProductionSite_Descr const &) const
+void ProductionProgram::ActCall::writeHTML
+	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
-	std::string const & program_name = m_program->get_name();
+	std::string const & program_name = m_program->name();
 	fw.Text
 		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
 		 "Productionsite_Program_Reference#call\" title=\"");
@@ -930,7 +932,7 @@ void ActCall::writeHTML(::FileWrite & fw, ProductionSite_Descr const &) const
 }
 
 
-void ActWorker::writeHTML
+void ProductionProgram::ActWorker::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	fw.Text
@@ -940,20 +942,17 @@ void ActWorker::writeHTML
 	fw.Text("\">");
 	fw.Text(_("worker"));
 	fw.Text("</a> <a href=\"../");
-	std::string const & main_worker_type_name = site.workers().at(0);
-	fw.Text(main_worker_type_name);
+	Worker_Descr const & worker_descr =
+		*site.tribe().get_worker_descr(site.working_positions().at(0).first);
+	fw.Text(worker_descr.descname());
 	fw.Text("/index.html#program_");
 	fw.Text(m_program);
 	fw.Text("\" title=\"");
-	Tribe_Descr const & tribe = site.tribe();
 	char buffer[64];
 	snprintf
 		(buffer, sizeof(buffer),
 		 _("%s's program %s"),
-		 tribe.get_worker_descr
-		 	(tribe.worker_index(main_worker_type_name.c_str()))
-		 ->descname().c_str(),
-		 m_program.c_str());
+		 worker_descr.descname().c_str(), m_program.c_str());
 	fw.Text(buffer);
 	fw.Text("\">");
 	fw.Text(m_program);
@@ -961,7 +960,8 @@ void ActWorker::writeHTML
 }
 
 
-void ActSleep::writeHTML(::FileWrite & fw, ProductionSite_Descr const &) const
+void ProductionProgram::ActSleep::writeHTML
+	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text
 		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
@@ -980,7 +980,7 @@ void ActSleep::writeHTML(::FileWrite & fw, ProductionSite_Descr const &) const
 }
 
 
-void ActAnimate::writeHTML
+void ProductionProgram::ActAnimate::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text
@@ -1000,7 +1000,7 @@ void ActAnimate::writeHTML
 }
 
 
-void ActConsume::writeHTML
+void ProductionProgram::ActConsume::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	Tribe_Descr const & tribe = site.tribe();
@@ -1051,7 +1051,7 @@ void ActConsume::writeHTML
 }
 
 
-void ActProduce::writeHTML
+void ProductionProgram::ActProduce::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	Tribe_Descr const & tribe = site.tribe();
@@ -1092,7 +1092,7 @@ void ActProduce::writeHTML
 }
 
 
-void ActMine::writeHTML
+void ProductionProgram::ActMine::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	World          const & world             = site.tribe().world();
@@ -1124,7 +1124,7 @@ void ActMine::writeHTML
 }
 
 
-void ActCheck_Soldier::writeHTML
+void ProductionProgram::ActCheck_Soldier::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text
@@ -1148,7 +1148,7 @@ void ActCheck_Soldier::writeHTML
 }
 
 
-void ActTrain::writeHTML
+void ProductionProgram::ActTrain::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text
@@ -1172,7 +1172,7 @@ void ActTrain::writeHTML
 }
 
 
-void ActPlayFX::writeHTML
+void ProductionProgram::ActPlayFX::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text

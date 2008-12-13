@@ -3,8 +3,8 @@ program=program
 picture=field0m_00.png
 
 [program]
-0=animation midd 50000
-1=transform tribe:field1
+animate=midd 50000
+transform=field1
 
 [midd]
 pics=field0m_??.png

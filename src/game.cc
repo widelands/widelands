@@ -280,7 +280,7 @@ bool Game::run_splayer_scenario_direct(const char* mapname) {
 
 		set_game_controller(GameController::createSinglePlayer(this, true, 1));
 		try {
-			bool ret = run(loaderUI);
+			bool ret = run(loaderUI, NewScenario);
 			delete m->ctrl;
 			m->ctrl = 0;
 			return ret;
@@ -326,7 +326,6 @@ void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& setti
 				continue;
 
 			add_player(i + 1, playersettings.tribe, playersettings.name);
-			get_player(i+1)->init(false);
 			get_player(i+1)->setAI(playersettings.ai);
 		}
 
@@ -407,7 +406,7 @@ bool Game::run_load_game(std::string filename) {
 
 	set_game_controller(GameController::createSinglePlayer(this, true, player_nr));
 	try {
-		bool ret = run(loaderUI, true);
+		bool const ret = run(loaderUI, Loaded);
 		delete m->ctrl;
 		m->ctrl = 0;
 		return ret;
@@ -452,17 +451,22 @@ void Game::postload()
  *
  * \return true if a game actually took place, false otherwise
  */
-bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
+bool Game::run
+	(UI::ProgressWindow & loader_ui, Start_Game_Type const start_game_type)
+{
 	postload();
 
-	if (not is_savegame) {
-		std::string step_description = _("Creating player infrastructure");
-		// Prepare the players (i.e. place HQs)
-		const Player_Number nr_players = map().get_nrplayers();
-		iterate_players_existing(p, nr_players, *this, plr) {
-			step_description += ".";
-			loader_ui.step(step_description);
-			plr->init(true);
+	if (start_game_type != Loaded) {
+		Player_Number const nr_players = map().get_nrplayers();
+		if (start_game_type == NewNonScenario) {
+			std::string step_description = _("Creating player infrastructure");
+			// Prepare the players (i.e. place HQs)
+			iterate_players_existing(p, nr_players, *this, plr) {
+				step_description += ".";
+				loader_ui.step(step_description);
+				plr->create_default_infrastructure();
+
+			}
 		}
 
 		if (get_ipl())
@@ -669,9 +673,11 @@ void Game::enqueue_command (Command * const cmd)
 }
 
 // we might want to make these inlines:
-void Game::send_player_bulldoze (PlayerImmovable* pi)
+void Game::send_player_bulldoze (PlayerImmovable & pi, bool const recurse)
 {
-	send_player_command (new Cmd_Bulldoze(get_gametime(), pi->get_owner()->get_player_number(), pi));
+	send_player_command
+		(new Cmd_Bulldoze
+		 	(get_gametime(), pi.owner().get_player_number(), pi, recurse));
 }
 
 void Game::send_player_build (int32_t pid, const Coords& coords, Building_Index id)

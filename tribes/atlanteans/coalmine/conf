@@ -1,9 +1,11 @@
 type=production
 size=mine
-worker=miner,miner,miner
 program=work
 output=coal
 stopable=yes
+
+[working positions]
+miner=3
 
 [inputs]
 bread=6

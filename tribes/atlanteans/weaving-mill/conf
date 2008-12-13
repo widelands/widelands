@@ -1,6 +1,5 @@
 type=production
 size=big
-worker=weaver
 program=produce_spidercloth
 program=produce_tabard
 program=produce_golden_tabard
@@ -8,6 +7,9 @@ program=work
 output=spidercloth
 output=tabard
 output=golden_tabard
+
+[working positions]
+weaver=1
 
 [inputs]
 spideryarn=8

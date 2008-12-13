@@ -161,13 +161,16 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 		programIt = programs.find("work");
 
 	if (programIt != programs.end()) {
-		std::vector<ProductionAction *> const & actions =
+		ProductionProgram::Actions const & actions =
 			programIt->second->actions();
 
-		container_iterate_const(std::vector<ProductionAction *>, actions, i)
-			if (upcast(ActConsume const, action, *i.current)) {
-				ActConsume::Groups const & groups = action->groups();
-				container_iterate_const(ActConsume::Groups, groups, j) {
+		container_iterate_const(ProductionProgram::Actions, actions, i)
+			if (upcast(ProductionProgram::ActConsume const, action, *i.current)) {
+				ProductionProgram::ActConsume::Groups const & groups =
+					action->groups();
+				container_iterate_const
+					(ProductionProgram::ActConsume::Groups, groups, j)
+				{
 					std::set<Ware_Index> const & ware_types = j.current->first;
 					assert(ware_types.size());
 					std::string ware_type_names;

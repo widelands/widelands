@@ -1,6 +1,5 @@
 type=production
 size=medium
-worker=armoursmith
 output=helm
 output=armour
 output=chain_armour
@@ -11,6 +10,9 @@ program=produce_armour
 program=produce_chain_armour
 program=produce_plate_armour
 program=work
+
+[working positions]
+armoursmith=1
 
 [buildcost]
 trunk=2

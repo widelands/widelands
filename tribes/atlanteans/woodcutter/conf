@@ -8,7 +8,7 @@ carrier=1
 saw=1
 
 [harvest]
-0=findobject attrib:tree radius:8
+0=findobject attrib:tree radius:10
 1=walk object
 2=playFX ../../../sound/sawmill/sawmill 230
 3=animation sawing 10000

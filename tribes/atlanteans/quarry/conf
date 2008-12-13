@@ -2,7 +2,9 @@ type=production
 size=small
 output=stone
 program=work
-worker=stonecutter
+
+[working positions]
+stonecutter=1
 
 [work]
 sleep=25000

@@ -1,9 +1,11 @@
 type=production
 size=small
-worker=carrier
 stopable=yes
 program=work
 output=goldyarn
+
+[working positions]
+carrier=1
 
 [inputs]
 gold=5

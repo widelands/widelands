@@ -3,8 +3,8 @@ program=program
 picture=cornfield_s_00.png
 
 [program]
-0=animation small 45000
-1=transform tribe:cornfield_m
+animate=small 45000
+transform=cornfield_m
 
 [small]
 pics=cornfield_s_??.png

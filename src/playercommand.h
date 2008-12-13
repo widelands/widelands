@@ -59,9 +59,12 @@ private:
 
 struct Cmd_Bulldoze:public PlayerCommand {
 	Cmd_Bulldoze() : PlayerCommand() {} // For savegame loading
-	Cmd_Bulldoze (int32_t const t, int32_t const p, PlayerImmovable* pi)
-		: PlayerCommand(t, p)
-	{serial=pi->get_serial();}
+	Cmd_Bulldoze
+		(int32_t const t, int32_t const p,
+		 PlayerImmovable & pi,
+		 bool const _recurse = false)
+		: PlayerCommand(t, p), serial(pi.get_serial()), recurse(_recurse)
+	{}
 
 	Cmd_Bulldoze (StreamRead &);
 
@@ -75,6 +78,7 @@ struct Cmd_Bulldoze:public PlayerCommand {
 
 private:
 	Serial serial;
+	bool   recurse;
 };
 
 struct Cmd_Build:public PlayerCommand {

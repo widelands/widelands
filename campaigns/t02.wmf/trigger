@@ -1,6 +1,10 @@
 [global]
 packet_version=2
 
+[Begin]
+type=time
+time=0
+
 [Built Quarry]
 type=building
 version=3

@@ -1,6 +1,5 @@
 type=production
 size=medium
-worker=toolsmith
 output=bakingtray
 output=bucket
 output=fire_tongs
@@ -26,6 +25,9 @@ program=produce_saw
 program=produce_scythe
 program=produce_shovel
 program=work
+
+[working positions]
+toolsmith=1
 
 [buildcost]
 trunk=1

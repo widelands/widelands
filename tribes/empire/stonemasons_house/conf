@@ -1,9 +1,11 @@
 type=production
 size=medium
-worker=stonemason # like quary
 program=work
 output=marblecolumn
 soundfx=../../../sound/stonecutting/stonemason
+
+[working positions] #  like quarry
+stonemason=1
 
 [inputs]
 marble=6

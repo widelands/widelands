@@ -23,6 +23,7 @@
 #include "building.h"
 #include "production_program.h"
 #include "program_result.h"
+#include "ware_types.h"
 #include "wexception.h"
 
 #include <map>
@@ -64,17 +65,19 @@ struct ProductionSite_Descr : public Building_Descr {
 #endif
 	virtual Building * create_object() const;
 
-	std::vector<std::string> const & workers() const throw () {
-		return m_workers;
+	uint32_t nr_working_positions() const {
+		uint32_t result = 0;
+		container_iterate_const(Ware_Types, working_positions(), i)
+			result += i.current->second;
+		return result;
 	}
-	bool is_input (Ware_Index const i) const throw () {
-		return m_inputs.count(i);
+	Ware_Types const & working_positions() const throw () {
+		return m_working_positions;
 	}
 	bool is_output(Ware_Index const i) const throw () {
 		return m_output.count(i);
 	}
-	typedef std::map<Ware_Index, uint8_t>              Inputs;
-	Inputs   const & inputs  () const throw () {return m_inputs;}
+	Ware_Types const & inputs() const throw () {return m_inputs;}
 	typedef std::set<Ware_Index>                       Output;
 	Output   const & output  () const throw () {return m_output;}
 	const ProductionProgram * get_program(const std::string &) const;
@@ -85,34 +88,50 @@ struct ProductionSite_Descr : public Building_Descr {
 
 
 private:
-	std::vector<std::string> m_workers; // name of worker type
-	Inputs   m_inputs;
+	Ware_Types m_working_positions;
+	Ware_Types m_inputs;
 	Output   m_output;
 	Programs m_programs;
 };
 
 class ProductionSite : public Building {
 	friend struct Map_Buildingdata_Data_Packet;
-	friend struct ActReturn;
-	friend struct ActCall;
-	friend struct ActWorker;
-	friend struct ActSleep;
-	friend struct ActAnimate;
-	friend struct ActConsume;
-	friend struct ActProduce;
-	friend struct ActMine;
-	friend struct ActCheck_Soldier;
-	friend struct ActTrain;
-	friend struct ActPlayFX;
+	friend struct ProductionProgram::ActReturn;
+	friend struct ProductionProgram::ActCall;
+	friend struct ProductionProgram::ActWorker;
+	friend struct ProductionProgram::ActSleep;
+	friend struct ProductionProgram::ActAnimate;
+	friend struct ProductionProgram::ActConsume;
+	friend struct ProductionProgram::ActProduce;
+	friend struct ProductionProgram::ActMine;
+	friend struct ProductionProgram::ActCheck_Soldier;
+	friend struct ProductionProgram::ActTrain;
+	friend struct ProductionProgram::ActPlayFX;
 	MO_DESCR(ProductionSite_Descr);
 
 public:
 	ProductionSite(const ProductionSite_Descr & descr);
+	~ProductionSite();
+
+	struct Working_Position {
+		Working_Position(Request * const wr = 0, Worker * const w = 0)
+			: worker_request(wr), worker(w)
+		{}
+		Request * worker_request;
+		Worker  * worker;
+	};
+
+	Working_Position const * working_positions() const {
+		return m_working_positions;
+	}
 
 	virtual std::string get_statistics_string();
 	int8_t get_statistics_percent() {return m_last_stat_percent;}
 
-	void fill(Game &);
+	void prefill
+		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
+	void postfill
+		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 
 	virtual int32_t get_building_type() const throw ()
 	{return Building::PRODUCTIONSITE;}
@@ -131,7 +150,7 @@ public:
 	std::vector<WaresQueue *> const & warequeues() const {
 		return m_input_queues;
 	}
-	std::vector<Worker *> const & workers() const {return m_workers;}
+	std::vector<Worker *> const & workers() const;
 
 protected:
 	virtual UI::Window * create_options_window
@@ -145,7 +164,7 @@ protected:
 		uint32_t flags; ///< pfXXX flags
 	};
 
-	void request_worker(const char * const worker_name);
+	Request & request_worker(Ware_Index);
 	static void request_worker_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
@@ -170,11 +189,11 @@ protected:
 
 	void calc_statistics();
 	bool can_start_working() const throw ();
+	void try_start_working(Game &);
 	void set_post_timer (int32_t t) {m_post_timer = t;}
 
 protected:  // TrainingSite must have access to this stuff
-	std::vector<Request*> m_worker_requests;
-	std::vector<Worker *> m_workers;
+	Working_Position                   * m_working_positions;
 
 	int32_t m_fetchfromflag; ///< Number of items to fetch from flag
 
@@ -183,7 +202,7 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t                       m_program_time; ///< timer time
 	int32_t                      m_post_timer;    ///< Time to schedule after ends
 
-	ActProduce::Items        m_produced_items;
+	ProductionProgram::ActProduce::Items m_produced_items;
 	std::vector<WaresQueue*> m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;

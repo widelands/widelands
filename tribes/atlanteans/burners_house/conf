@@ -1,8 +1,10 @@
 type=production
 size=medium
-worker=burner
 output=coal
 program=work
+
+[working positions]
+burner=1
 
 [inputs]
 trunk=8

@@ -767,7 +767,8 @@ void FieldActionWindow::act_ripflag()
 				show_bulldoze_confirm(m_iabase, building, flag);
 		} else {
 			if (upcast(Game, game, &egbase))
-				game->send_player_bulldoze (flag);
+				game->send_player_bulldoze
+					(*flag, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
 			else // Editor
 				flag->remove(&egbase);
 			m_iabase->need_complete_redraw();
@@ -813,9 +814,10 @@ void FieldActionWindow::act_removeroad()
 	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_field))) {
 		if (upcast(Game, game, &egbase))
-			game->send_player_bulldoze(road);
+			game->send_player_bulldoze
+				(*road, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
 		else
-			road->owner().bulldoze(road);
+			road->owner().bulldoze(*road);
 	}
 	m_iabase->need_complete_redraw();
 	okdialog();

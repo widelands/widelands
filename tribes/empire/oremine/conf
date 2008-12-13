@@ -1,10 +1,12 @@
 type=production
 size=mine
-worker=miner
 program=work
 output=ironore
 stopable=yes
 enhancement=deep_oremine
+
+[working positions]
+miner=1
 
 [inputs]
 ration=6

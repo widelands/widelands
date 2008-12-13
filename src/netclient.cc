@@ -152,10 +152,10 @@ void NetClient::run ()
 		d->lasttimestamp_realtime = WLApplication::get()->get_time();
 
 		d->modal = game.get_iabase();
-		if (!d->settings.savegame) //  new map
-			game.run(loaderUI);
-		else // savegame
-			game.run(loaderUI, true);
+		game.run
+			(loaderUI,
+			 d->settings.savegame ?
+			 Widelands::Game::Loaded : Widelands::Game::NewNonScenario);
 		d->modal = 0;
 		d->game = 0;
 	} catch (...) {

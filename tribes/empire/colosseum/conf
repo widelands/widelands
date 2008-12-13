@@ -2,12 +2,14 @@ type=training
 size=big
 buildable=no
 enhanced_building=yes
-worker=carrier
 max_soldiers=8
 train=evade
 program=Sleep
 program=upgrade_evade_0 # This is needed to run the scripts
 program=upgrade_evade_1
+
+[working positions]
+carrier=1
 
 [Sleep]
 sleep=5000

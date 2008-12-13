@@ -1,11 +1,13 @@
 type=production
 size=medium
-worker=smelter
 output=iron
 output=gold
 program=smelt_iron
 program=smelt_gold
 program=work
+
+[working positions]
+smelter=1
 
 [inputs]
 ironore=8

@@ -673,6 +673,26 @@ Road *Flag::get_road(Flag *flag)
 	return 0;
 }
 
+
+bool Flag::is_dead_end() const {
+	if (get_building())
+		return false;
+	Flag const * first_other_flag = 0;
+	for (uint8_t road_id = 6; road_id; --road_id)
+		if (Road * const road = get_road(road_id)) {
+			Flag & start = *road->get_flag(Road::FlagStart);
+			Flag & other =
+				this == &start ? *road->get_flag(Road::FlagEnd) : start;
+			if (first_other_flag) {
+				if (&other != first_other_flag)
+					return false;
+			} else
+				first_other_flag = &other;
+		}
+	return true;
+}
+
+
 /**
  * Returns true if the flag can hold more items.
 */

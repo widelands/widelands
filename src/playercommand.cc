@@ -122,15 +122,15 @@ void PlayerCommand::Read
 /*** class Cmd_Bulldoze ***/
 
 Cmd_Bulldoze::Cmd_Bulldoze (StreamRead & des) :
-PlayerCommand (0, des.Unsigned8())
-{
-	serial = des.Unsigned32();
-}
+	PlayerCommand (0, des.Unsigned8()),
+	serial        (des.Unsigned32()),
+	recurse       (des.Unsigned8())
+{}
 
 void Cmd_Bulldoze::execute (Game* g)
 {
 	if (upcast(PlayerImmovable, pimm, g->objects().get_object(serial)))
-		g->get_player(get_sender())->bulldoze(pimm);
+		g->get_player(get_sender())->bulldoze(*pimm, recurse);
 }
 
 void Cmd_Bulldoze::serialize (StreamWrite & ser)
@@ -138,18 +138,23 @@ void Cmd_Bulldoze::serialize (StreamWrite & ser)
 	ser.Unsigned8 (PLCMD_BULLDOZE);
 	ser.Unsigned8 (get_sender());
 	ser.Unsigned32(serial);
+	ser.Unsigned8 (recurse);
 }
-#define PLAYER_CMD_BULLDOZE_VERSION 1
+#define PLAYER_CMD_BULLDOZE_VERSION 2
 void Cmd_Bulldoze::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == PLAYER_CMD_BULLDOZE_VERSION) {
+		if
+			(1 <= packet_version and
+			 packet_version <= PLAYER_CMD_BULLDOZE_VERSION)
+		{
 			PlayerCommand::Read(fr, egbase, mol);
 			Serial const pimm_serial = fr.Unsigned32();
 			try {
 				serial = mol.get<Map_Object>(pimm_serial).get_serial();
+				recurse = 2 <= packet_version ? fr.Unsigned8() : false;
 			} catch (_wexception const & e) {
 				throw wexception("map object %u: %s", pimm_serial, e.what());
 			}
@@ -170,6 +175,7 @@ void Cmd_Bulldoze::Write
 	const Map_Object * const obj = egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
+	fw.Unsigned8(recurse);
 }
 
 /*** class Cmd_Build ***/

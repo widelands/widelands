@@ -32,7 +32,7 @@ struct Interactive_Base;
 struct Game_Main_Menu_Load_Game;
 struct WLApplication;
 struct GameSettings;
-class GameController;
+struct GameController;
 
 namespace Widelands {
 
@@ -102,7 +102,8 @@ struct Game : public Editor_Game_Base {
 	void init_savegame(UI::ProgressWindow & loader_ui, const GameSettings& settings);
 	bool run_splayer_scenario_direct(const char* mapname);
 	bool run_load_game (std::string filename);
-	bool run (UI::ProgressWindow & loader_ui, bool = false);
+	enum Start_Game_Type {NewScenario, NewNonScenario, Loaded};
+	bool run(UI::ProgressWindow & loader_ui, Start_Game_Type);
 
 	virtual void postload();
 	void think();
@@ -138,7 +139,7 @@ struct Game : public Editor_Game_Base {
 
 	void send_player_command (Widelands::PlayerCommand *);
 
-	void send_player_bulldoze (PlayerImmovable*);
+	void send_player_bulldoze (PlayerImmovable &, bool recurse = false);
 	void send_player_build (int32_t, const Coords&, Building_Index);
 	void send_player_build_flag (int32_t, const Coords&);
 	void send_player_build_road (int32_t, Path &);

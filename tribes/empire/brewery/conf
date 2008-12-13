@@ -1,8 +1,10 @@
 type=production
 size=medium
-worker=brewer
 program=work
 output=beer
+
+[working positions]
+brewer=1
 
 [inputs]
 water=7

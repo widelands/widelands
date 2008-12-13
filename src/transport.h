@@ -178,12 +178,14 @@ public:
 			m_roads[0] or m_roads[1] or m_roads[2] or
 			m_roads[3] or m_roads[4] or m_roads[5];
 	}
-	Road *get_road(int32_t dir) {return m_roads[dir-1];}
+	Road * get_road(uint8_t const dir) const {return m_roads[dir - 1];}
 	void attach_road(int32_t dir, Road *road);
 	void detach_road(int32_t dir);
 
 	void get_neighbours(Neighbour_list *neighbours);
 	Road *get_road(Flag *flag);
+
+	bool is_dead_end() const;
 
 	bool has_capacity();
 	void wait_for_capacity(Game* g, Worker* bob);

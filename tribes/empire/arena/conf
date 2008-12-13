@@ -1,11 +1,13 @@
 type=training
 size=big
 enhancement=colosseum
-worker=carrier
 max_soldiers=8
 train=evade
 program=Sleep
 program=upgrade_evade_0 # This is needed to run the scripts
+
+[working positions]
+carrier=1
 
 [Sleep]
 sleep=5000

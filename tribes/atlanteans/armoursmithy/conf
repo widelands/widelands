@@ -1,11 +1,13 @@
 type=production
 size=medium
-worker=armoursmith
 output=advanced_shield
 output=steel_shield
 program=produce_s_shield
 program=produce_a_shield
 program=work
+
+[working positions]
+armoursmith=1
 
 [buildcost]
 trunk=2

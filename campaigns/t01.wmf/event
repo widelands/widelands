@@ -3,6 +3,19 @@
 [global]
 packet_version=2
 
+[Headquarters]
+type=building
+version=2
+building=headquarters
+point=12 10
+trunk=80
+builder=10
+carrier=40
+lumberjack=3
+miner=4
+ranger=1
+stonemason=2
+
 [Briefing Msg 1]
 type=message_box
 version=2

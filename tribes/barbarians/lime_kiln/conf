@@ -1,8 +1,10 @@
 type=production
 size=medium
-worker=lime-burner
 program=work
 output=grout
+
+[working positions]
+lime-burner=1
 
 [inputs]
 raw_stone=6

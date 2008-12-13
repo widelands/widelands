@@ -1,5 +1,14 @@
+#  Oak
+#
+#  Characteristics suitable to model:
+#    * Spreading: medium
+#    * Seeding:   low
+#    * Growth:    slow
+#    * Longevity: long
+
 size=medium
 attrib=tree
+program=program
 program=fall
 picture=idle_0.png
 
@@ -9,9 +18,14 @@ sfx=0 ../../../sound/animals/bird2
 fps=10
 hotspot=24 60
 
+[program]
+animate=idle 100000
+transform=deadtree2 25
+seed=tree2_t 126
+
 [fall]
-0=animation falling 1200
-1=transform fallentree
+animate=falling 1200
+transform=fallentree
 
 [falling]
 pics=f_tree2_??.png

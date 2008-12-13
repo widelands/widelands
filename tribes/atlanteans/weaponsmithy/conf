@@ -2,7 +2,6 @@ soundfx=../../../sound/smiths/smith
 soundfx=../../../sound/smith/sharpening
 type=production
 size=medium
-worker=weaponsmith
 output=light_trident
 output=long_trident
 output=steel_trident
@@ -15,6 +14,9 @@ program=produce_steel_trident
 program=produce_double_trident
 program=produce_heavy_double_trident
 program=work
+
+[working positions]
+weaponsmith=1
 
 [inputs]
 iron=8

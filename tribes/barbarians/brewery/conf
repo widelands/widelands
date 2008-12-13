@@ -2,9 +2,12 @@ type=production
 size=medium
 buildable=no
 enhanced_building=yes
-worker=master-brewer,brewer
 program=work
 output=strongbeer
+
+[working positions]
+master-brewer=1
+brewer=1
 
 [inputs]
 water=8

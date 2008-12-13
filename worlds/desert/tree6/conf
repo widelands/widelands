@@ -1,5 +1,14 @@
+#  Beech
+#
+#  Characteristics suitable to model:
+#    * Spreading: medium
+#    * Seeding:   low
+#    * Growth:    medium
+#    * Longevity: medium
+
 size=medium
 attrib=tree
+program=program
 program=fall
 picture=idle_0.png
 
@@ -9,5 +18,10 @@ sfx=0 ../../../sound/animals/bird6
 fps=10
 hotspot=24 60
 
+[program]
+animate=idle 77000
+transform=deadtree2 33
+seed=tree6_t 90
+
 [fall]
-0=remove
+remove=

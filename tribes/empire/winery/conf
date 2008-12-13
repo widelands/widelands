@@ -1,8 +1,10 @@
 type=production
 size=medium
-worker=brewer # same as brewery
 program=work
 output=wine
+
+[working positions] #  like brewery
+brewer=1
 
 [inputs]
 grape=8

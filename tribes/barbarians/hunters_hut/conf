@@ -1,8 +1,10 @@
 type=production
 size=small
-worker=hunter
 program=work
 output=meat
+
+[working positions]
+hunter=1
 
 [work]
 sleep=35000

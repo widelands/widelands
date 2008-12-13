@@ -31,8 +31,8 @@ namespace Widelands {
 
 void Event_Move_View::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
-		int32_t const packet_version = s.get_safe_int("version");
-		if (1 <= packet_version and packet_version <= EVENT_VERSION) {
+		uint32_t const packet_version = s.get_safe_positive("version");
+		if (packet_version <= EVENT_VERSION) {
 			Map const & map = egbase.map();
 			Extent const extent = map.extent();
 			m_location =
@@ -48,7 +48,7 @@ void Event_Move_View::Read(Section & s, Editor_Game_Base & egbase) {
 					("illegal coordinates (%i, %i)", m_location.x, m_location.y);
 			m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
 		throw wexception("(move view): %s", e.what());
 	}

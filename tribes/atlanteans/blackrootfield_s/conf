@@ -3,8 +3,8 @@ program=program
 picture=blackrootfield_s_00.png
 
 [program]
-0=animation small 45000
-1=transform tribe:blackrootfield_m
+animate=small 45000
+transform=blackrootfield_m
 
 [small]
 pics=blackrootfield_s_??.png

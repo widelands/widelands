@@ -1,5 +1,17 @@
+#  Aspen
+#  Grows in clonal colonies. Spreading by means of root suckers. New stems
+#  appear up to 30-40 m away. A stem can live for 40-150 years. Spreading about
+#  1 m per year. Fast growing (source: Wikipedia)
+#
+#  Characteristics suitable to model:
+#    * Spreading: short
+#    * Seeding:   high
+#    * Growth:    fast
+#    * Longevity: short
+
 size=medium
 attrib=tree
+program=program
 program=fall
 picture=idle_0.png
 
@@ -9,9 +21,14 @@ sfx=0 ../../../sound/animals/bird1
 fps=10
 hotspot=24 60
 
+[program]
+animate=idle 30500
+transform=deadtree2 32
+seed=tree1_t 70
+
 [fall]
-0=animation falling 1200
-1=transform fallentree
+animate=falling 1200
+transform=fallentree
 
 [falling]
 pics=f_tree1_??.png

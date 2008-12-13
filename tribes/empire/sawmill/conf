@@ -1,9 +1,11 @@
 type=production
 size=medium
-worker=toolsmith # like Toolsmith's Workshop
 program=work
 output=wood
 soundfx=../../../sound/sawmill/sawmill
+
+[working positions] #  like toolsmithy
+toolsmith=1
 
 [inputs]
 trunk=8

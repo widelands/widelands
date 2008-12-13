@@ -236,10 +236,12 @@ void BulldozeConfirm::bulldoze()
 
 	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
 		if (upcast(Widelands::Game, game, egbase)) {
-			game->send_player_bulldoze (todestroy);
+			game->send_player_bulldoze
+				(*todestroy,
+				 get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
 			m_iabase->need_complete_redraw();
 		} else {// Editor
-			todestroy->get_owner()->bulldoze(todestroy);
+			todestroy->get_owner()->bulldoze(*todestroy);
 			m_iabase->need_complete_redraw();
 		}
 	}
@@ -1075,7 +1077,7 @@ private:
 	Widelands::Coords                     m_ps_location;
 	ProductionSite                      * m_ps;
 	Interactive_Player                  * m_parent;
-	UI::Listselect<Widelands::Worker *> * m_ls;
+	UI::Listselect<Widelands::Worker const *> * m_ls;
 	UI::Textarea * m_type, * m_experience, * m_becomes;
 };
 
@@ -1098,7 +1100,7 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 
 	// listselect
 	m_ls =
-		new UI::Listselect<Widelands::Worker*>
+		new UI::Listselect<Widelands::Worker const *>
 		(this,
 		 posx, posy,
 		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy);
@@ -1157,12 +1159,18 @@ void ProductionSite_Window_ListWorkerWindow::think() {
 void ProductionSite_Window_ListWorkerWindow::fill_list() {
 	const uint32_t m_last_select = m_ls->selection_index();
 	m_ls->clear();
-	std::vector<Widelands::Worker *> const & workers = m_ps->workers();
 
-	for (uint32_t i = 0; i < workers.size(); ++i) {
-		Widelands::Worker & worker = *workers[i];
-		m_ls->add(worker.descname().c_str(), &worker, worker.icon());
-	}
+	uint32_t const nr_working_positions = m_ps->descr().nr_working_positions();
+	for (uint32_t i = 0; i < nr_working_positions; ++i)
+		if
+			(Widelands::Worker const * const worker =
+			 	m_ps->working_positions()[i].worker)
+			m_ls->add(worker->descname().c_str(), worker, worker->icon());
+		else
+			m_ls->add
+				(m_ps->working_positions()[i].worker_request->is_open() ?
+				 _("(vacant)") : _("(coming)"),
+				 0);
 	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
 	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);
 
@@ -1174,7 +1182,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list() {
  */
 void ProductionSite_Window_ListWorkerWindow::update()
 {
-	if (m_ls->has_selection()) {
+	if (m_ls->has_selection() and m_ls->get_selected()) {
 		Widelands::Worker      const & worker = *m_ls->get_selected();
 		Widelands::Tribe_Descr const & tribe  = worker.tribe();
 
@@ -1202,6 +1210,11 @@ void ProductionSite_Window_ListWorkerWindow::update()
 			m_experience->set_text("---");
 			m_becomes->set_text("---");
 		}
+	} else {
+		m_type      ->set_text("---");
+		m_becomes   ->set_text("---");
+		m_experience->set_text("---");
+		m_becomes   ->set_text("---");
 	}
 }
 

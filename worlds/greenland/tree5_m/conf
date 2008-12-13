@@ -3,8 +3,12 @@ program=program
 picture=s3tree5_00.png
 
 [program]
-0=animation medium 50000
-1=transform tree5
+animate=medium 27500
+remove=10
+seed=tree5_t 200
+animate=medium 27500
+remove=10
+transform=tree5
 
 [medium]
 pics=s3tree5_??.png

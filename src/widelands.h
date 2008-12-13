@@ -118,6 +118,27 @@ DEFINE_INDEX(Ware_Index)
 
 typedef uint8_t Direction;
 
+struct Soldier_Strength {
+	uint8_t hp, attack, defense, evade;
+	bool operator== (Soldier_Strength const other) const {
+		return
+			hp      == other.hp      and
+			attack  == other.attack  and
+			defense == other.defense and
+			evade   == other.evade;
+	}
+	bool operator<  (Soldier_Strength const other) const {
+		return
+			hp      <  other.hp or
+			(hp      == other.hp and
+			 (attack  <  other.attack or
+			  (attack  == other.attack and
+			   (defense <  other.defense or
+			    (defense == other.defense and
+			     evade    <  other.evade)))));
+	}
 };
+
+}
 
 #endif

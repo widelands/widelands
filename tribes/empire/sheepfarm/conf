@@ -1,9 +1,11 @@
 soundfx=../../../sound/farm/sheep
 type=production
 size=big
-worker=shepherd
 program=work
 output=wool
+
+[working positions]
+shepherd=1
 
 [inputs]
 wheat=7

@@ -1,7 +1,6 @@
 soundfx=../../../sound/smiths/toolsmith
 type=production
 size=medium
-worker=toolsmith
 output=axe
 output=bakingtray
 output=fire_tongs
@@ -27,6 +26,9 @@ program=produce_basket
 program=produce_saw
 program=produce_axe
 program=work
+
+[working positions]
+toolsmith=1
 
 [buildcost]
 trunk=1

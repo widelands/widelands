@@ -1,6 +1,5 @@
 type=production
 size=mine
-worker=miner,miner,miner
 program=mine_stone
 program=mine_quartz
 program=mine_diamond
@@ -9,6 +8,9 @@ output=diamond
 output=quartz
 output=stone
 stopable=yes
+
+[working positions]
+miner=3
 
 [inputs]
 bread=6

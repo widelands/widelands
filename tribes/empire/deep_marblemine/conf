@@ -2,11 +2,14 @@ type=production
 size=mine
 buildable=no
 enhanced_building=yes
-worker=master-miner,miner
 program=work
 output=marble
 output=stone
 stopable=yes
+
+[working positions]
+master-miner=1
+miner=1
 
 [inputs]
 meal=6

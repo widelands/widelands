@@ -3,8 +3,8 @@ program=program
 picture=wine0t_00.png
 
 [program]
-0=animation tiny 22000
-1=transform tribe:wine0s
+animate=tiny 22000
+transform=wine0s
 
 [tiny]
 pics=wine0t_??.png

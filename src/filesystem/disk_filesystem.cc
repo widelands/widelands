@@ -296,9 +296,9 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
 		// need more work to do it right
 		// itterate through all possible directories
 		size_t it = 0;
-		while (it != dirname.size() && it != std::string::npos){
-			it = dirname.find('/',it);
-			EnsureDirectoryExists(dirname.substr(0,it));
+		while (it != dirname.size() && it != std::string::npos) {
+			it = dirname.find('/', it);
+			EnsureDirectoryExists(dirname.substr(0, it));
 			++it; //make sure we don't keep finding the same directories
 		}
 	} catch (_wexception const & e) {

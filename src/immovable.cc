@@ -105,100 +105,33 @@ ImmovableProgram IMPLEMENTATION
 ==============================================================================
 */
 
-/// Command name -> parser function mapping
-const ImmovableProgram::ParseMap ImmovableProgram::s_parsemap[] = {
-	{"animation", &ImmovableProgram::parse_animation},
-	{"transform", &ImmovableProgram::parse_transform},
-	{"remove",    &ImmovableProgram::parse_remove},
-	{"playFX",    &ImmovableProgram::parse_playFX},
-	{"seed",      &ImmovableProgram::parse_seed},
-	{0, 0}
-};
 
-
-ImmovableProgram::ImmovableProgram(std::string name)
+ImmovableProgram::ImmovableProgram
+	(std::string    const & directory,
+	 Profile              & prof,
+	 std::string    const & _name,
+	 Immovable_Descr      & immovable)
+	: m_name(_name)
 {
-	m_name = name;
-}
-
-
-/**
- * Append the given action
-*/
-void ImmovableProgram::add_action(const ImmovableAction& act)
-{
-	m_actions.push_back(act);
-}
-
-
-/**
- * Actually parse a program
-*/
-void ImmovableProgram::parse
-	(Immovable_Descr & descr, std::string const & directory, Profile & prof)
-{
-	ProgramParser p;
-	Section & s = prof.get_safe_section(m_name.c_str());
-	uint32_t line=0;
-
-	p.descr = &descr;
-	p.directory = directory;
-	p.prof = &prof;
-
-	for (line = 0;; ++line) {
-		try
-		{
-			ImmovableAction action;
-			char buffer[256];
-			const char* string;
-			uint32_t mapidx;
-
-			snprintf(buffer, sizeof(buffer), "%i", line);
-			string = s.get_string(buffer, 0);
-
-			if (!string)
-				break;
-
-			const std::vector<std::string> command
-				(split_string(string, " \t\r\n"));
-			if (!command.size())
-				continue;
-
-			for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
-				if (command[0] == s_parsemap[mapidx].name)
-					break;
-
-			if (!s_parsemap[mapidx].name)
-				throw wexception("Unknown instruction '%s'", command[0].c_str());
-
-			(this->*s_parsemap[mapidx].function)(&action, &p, command);
-
-			m_actions.push_back(action);
-		}
-		catch (std::exception& e)
-		{
-			log("WARNING: %s:%s:%i: %s\n", directory.c_str(), m_name.c_str(), line, e.what());
-		}
+	Section & program_s = prof.get_safe_section(_name.c_str());
+	while (Section::Value * const v = program_s.get_next_val()) {
+		Action * action;
+		if      (not strcmp(v->get_name(), "animate"))
+			action = new ActAnimate  (v->get_string(), immovable, directory, prof);
+		else if (not strcmp(v->get_name(), "transform"))
+			action = new ActTransform(v->get_string(), immovable);
+		else if (not strcmp(v->get_name(), "remove"))
+			action = new ActRemove   (v->get_string(), immovable);
+		else if (not strcmp(v->get_name(), "seed"))
+			action = new ActSeed     (v->get_string(), immovable);
+		else if (not strcmp(v->get_name(), "playFX"))
+			action = new ActPlayFX   (v->get_string(), immovable);
+		else
+			throw wexception("unknown command \"%s\"", v->get_name());
+		m_actions.push_back(action);
 	}
-
-	if (s.get_num_values() != m_actions.size())
-		log
-			("WARNING: %s:%s: program line numbers appear to be wrong\n",
-			 directory.c_str(), m_name.c_str());
-
-	// Fallback (default) program
-	if (!m_actions.size())
-	{
-		ImmovableAction act;
-
-		log("WARNING: %s: [%s] is empty, using default\n", directory.c_str(), m_name.c_str());
-
-		act.function = &Immovable::run_animation;
-		act.iparam1 = descr.parse_animation(directory, prof, "idle");
-		act.iparam2 = -1;
-
-		m_actions.push_back(act);
-	}
+	if (m_actions.empty())
+		throw wexception("no actions");
 }
 
 
@@ -261,29 +194,27 @@ Immovable_Descr::Immovable_Descr
 
 
 	//  parse the programs
-	while (Section::Value const * const v = global_s.get_next_val("program"))
-		parse_program(directory, prof, v->get_string());
-
-	if (m_programs.find("program") == m_programs.end()) {
-		if (prof.get_section("program")) {
-			log
-				("WARNING: %s: obsolete implicit [program] section; use "
-				 "program=program in [global]\n",
-				 directory.c_str());
-			parse_program(directory, prof, "program");
+	while (Section::Value const * const v = global_s.get_next_val("program")) {
+		std::string const program_name = v->get_string();
+		ImmovableProgram * program = 0;
+		try {
+			if (m_programs.count(program_name))
+				throw wexception("this program has already been declared");
+			m_programs[program_name.c_str()] =
+				new ImmovableProgram(directory, prof, program_name, *this);
+		} catch (std::exception const & e) {
+			delete program;
+			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
-		else
-		{
-			ImmovableProgram* prog = new ImmovableProgram("program");
-			ImmovableAction act;
+	}
 
-			act.function = &Immovable::run_animation;
-			act.iparam1 = parse_animation(directory, prof, "idle");
-			act.iparam2 = -1;
-			prog->add_action(act);
-
-			m_programs["program"] = prog;
-		}
+	if (m_programs.find("program") == m_programs.end()) { //  default program
+		char parameters[] = "idle";
+		m_programs["program"] =
+			new ImmovableProgram
+				("program",
+				 new ImmovableProgram::ActAnimate
+				 	(parameters, *this, directory, prof));
 	}
 }
 
@@ -314,60 +245,6 @@ const ImmovableProgram* Immovable_Descr::get_program
 			 name().c_str(), programname.c_str());
 
 	return it->second;
-}
-
-
-/**
- * Parse a program.
-*/
-void Immovable_Descr::parse_program
-	(std::string const & directory,
-	 Profile           & prof,
-	 std::string const & programname)
-{
-	ImmovableProgram* prog = 0;
-
-	if (m_programs.find(programname) != m_programs.end())
-		throw wexception("Duplicate program '%s'", programname.c_str());
-
-	try
-	{
-		prog = new ImmovableProgram(programname);
-		prog->parse(*this, directory, prof);
-		m_programs[programname] = prog;
-	}
-	catch (...)
-	{
-		delete prog;
-
-		throw;
-	}
-}
-
-
-/**
- * Parse the animation of the given name.
-*/
-uint32_t Immovable_Descr::parse_animation
-	(std::string const & directory,
-	 Profile           & prof,
-	 std::string const & animation_name)
-{
-	// Load the animation
-	Section & anim = prof.get_safe_section(animation_name.c_str());
-	char picname[256];
-	uint32_t animid=0;
-
-	snprintf(picname, sizeof(picname), "%s.png", animation_name.c_str());
-
-	if (not is_animation_known(animation_name.c_str())) {
-		animid =
-			g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
-		add_animation(animation_name.c_str(), animid);
-	} else
-		animid = get_animation(animation_name.c_str());
-
-	return animid;
 }
 
 
@@ -421,6 +298,19 @@ bool Immovable::get_passable() const throw ()
 std::string const & Immovable::name() const throw () {return descr().name();}
 
 
+void Immovable::start_animation
+	(Editor_Game_Base const & egbase, uint32_t const anim)
+{
+	m_anim      = anim;
+	m_animstart = egbase.get_gametime();
+}
+
+
+void Immovable::increment_program_pointer() {
+	m_program_ptr = (m_program_ptr + 1) % m_program->size();
+}
+
+
 /**
  * Actually initialize the immovable.
 */
@@ -430,7 +320,16 @@ void Immovable::init(Editor_Game_Base *g)
 
 	set_position(g, m_position);
 
-	set_program_animation(g);
+	//  Set animation data according to current program state.
+	ImmovableProgram const * prog = m_program;
+	if (!prog)
+		prog = descr().get_program("program");
+	if
+		(upcast
+		 	(ImmovableProgram::ActAnimate const,
+		 	 act_animate,
+		 	 &(*prog)[m_program_ptr]))
+		start_animation(*g, act_animate->animation());
 
 	if (upcast(Game, game, g))
 		switch_program(game, "program");
@@ -449,69 +348,29 @@ void Immovable::cleanup(Editor_Game_Base *g)
 
 
 /**
- * Set animation data according to current program state.
-*/
-void Immovable::set_program_animation(Editor_Game_Base* g)
-{
-	const ImmovableProgram* prog = m_program;
-
-	if (!prog)
-		prog = descr().get_program("program");
-
-	const ImmovableAction& action = prog->get_action(m_program_ptr);
-
-	if (action.function == &Immovable::run_animation) {
-		m_anim = action.iparam1;
-		m_animstart = g->get_gametime();
-	}
-}
-
-
-/**
  * Switch the currently running program.
 */
 void Immovable::switch_program(Game* g, std::string programname)
 {
 	m_program = descr().get_program(programname);
 	m_program_ptr = 0;
-
-	run_program(g, false);
+	m_program_step = 0;
+	schedule_act(g, 1);
 }
 
 
 /**
  * Run program timer.
 */
-void Immovable::act(Game *g, uint32_t data)
+void Immovable::act(Game * game, uint32_t const data)
 {
-	BaseImmovable::act(g, data);
+	BaseImmovable::act(game, data);
 
-	if (g->get_gametime() - m_program_step >= 0)
-		run_program(g, true); // This might delete itself!
+	if (m_program_step <= game->get_gametime())
+		//  Might delete itself!
+		(*m_program)[m_program_ptr].execute(*game, *this);
 }
 
-
-/**
- * Execute the next step(s) in the program until we need to schedule_act().
- * If killable is true, the immovable could kill itself in this function.
-*/
-void Immovable::run_program(Game* g, bool killable)
-{
-	uint32_t origptr = m_program_ptr; // avoid infinite loops
-
-	do
-	{
-		const ImmovableAction& action = m_program->get_action(m_program_ptr);
-
-		if ((this->*action.function)(g, killable, action))
-			return;
-	}
-	while (origptr != m_program_ptr);
-
-	molog
-		("WARNING: %s has infinite loop in program %s\n",
-		 descr().name().c_str(), m_program->get_name().c_str());
-}
 
 /**
  * Draw the immovable at the given position.
@@ -569,7 +428,7 @@ void Immovable::Loader::load(FileRead& fr)
 	if (!imm.m_program) {
 		imm.m_program_ptr = 0;
 	} else {
-		if (imm.m_program_ptr >= imm.m_program->get_size()) {
+		if (imm.m_program_ptr >= imm.m_program->size()) {
 			// Try to not fail if the program of some immovable has changed
 			// significantly.
 			// Note that in some cases, the immovable may end up broken despite
@@ -577,7 +436,7 @@ void Immovable::Loader::load(FileRead& fr)
 			log
 				("Warning: Immovable '%s', size of program '%s' seems to have "
 				 "changed.\n",
-				 imm.descr().name().c_str(), imm.m_program->get_name().c_str());
+				 imm.descr().name().c_str(), imm.m_program->name().c_str());
 			imm.m_program_ptr = 0;
 		}
 	}
@@ -630,7 +489,7 @@ void Immovable::save
 	// Program Stuff
 	if (m_program) {
 		fw.Unsigned8(1);
-		fw.String(m_program->get_name());
+		fw.String(m_program->name());
 	} else {
 		fw.Unsigned8(0);
 	}
@@ -692,231 +551,241 @@ Map_Object::Loader* Immovable::load
 }
 
 
-/**
- * animation \<name\> \<duration\>
-*/
-void ImmovableProgram::parse_animation
-	(ImmovableAction                * act,
-	 ProgramParser            const * parser,
-	 std::vector<std::string> const & cmd)
+ImmovableProgram::Action::~Action() {}
+
+
+ImmovableProgram::ActAnimate::ActAnimate
+	(char * parameters, Immovable_Descr & descr,
+	 std::string const & directory, Profile & prof)
 {
-	if (cmd.size() != 3)
-		throw wexception("Syntax: animation <name> <duration>");
-
-	act->function = &Immovable::run_animation;
-
-	act->iparam1 =
-		parser->descr->parse_animation(parser->directory, *parser->prof, cmd[1]);
-	act->iparam2 = atoi(cmd[2].c_str());
-
-	if (act->iparam2 == 0 || act->iparam2 < -1)
-		throw wexception("duration out of range (-1, 1..+inf) '%s'", cmd[2].c_str());
+	try {
+		bool reached_end;
+		char * const animation_name = match(parameters, reached_end);
+		if (descr.is_animation_known(animation_name))
+			m_id = descr.get_animation(animation_name);
+		else {
+			m_id =
+				g_anim.get
+					(directory.c_str(), prof.get_safe_section(animation_name), 0, &descr.get_default_encodedata());
+			descr.add_animation(animation_name, m_id);
+		}
+		if (not reached_end) { //  The next parameter is the duration.
+			char * endp;
+			long int const value = strtol(parameters, &endp, 0);
+			if (*endp or value <= 0)
+				throw wexception
+					("expected duration in ms but found \"%s\"", parameters);
+			m_duration = value;
+		} else
+			m_duration = 0; //  forever
+	} catch (_wexception const & e) {
+		throw wexception("animate: %s", e.what());
+	}
 }
 
-bool Immovable::run_animation(Game* g, bool, const ImmovableAction & action)
+void ImmovableProgram::ActAnimate::execute
+	(Game & game, Immovable & immovable) const
 {
-	m_anim = action.iparam1;
-	m_animstart = g->get_gametime();
-
-	if (action.iparam2 > 0)
-		m_program_step = schedule_act(g, action.iparam2);
-
-	m_program_ptr = (m_program_ptr+1) % m_program->get_size();
-
-	return true;
+	immovable.start_animation(game, m_id);
+	immovable.program_step(game, m_duration);
 }
 
 
-void ImmovableProgram::parse_playFX
-	(ImmovableAction                * act,
-	 ProgramParser            const *,
-	 std::vector<std::string> const & cmd)
+ImmovableProgram::ActPlayFX::ActPlayFX
+	(char * parameters, Immovable_Descr const &)
 {
-	if (cmd.size()<2 || cmd.size()>3)
-		throw wexception("Syntax: playFX <fxname> [priority]");
+	try {
+		bool reached_end;
+		name = match(parameters, reached_end);
 
-	act->function = &Immovable::run_playFX;
-
-	act->sparam1 = cmd[1];
-
-	act->iparam1 = cmd.size() < 3 ? 127 : atoi(cmd[2].c_str());
+		if (not reached_end) {
+			char * endp;
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			priority = value;
+			if (*endp or priority != value)
+				throw wexception
+					("expected priority but found \"%s\"", parameters);
+		} else
+			priority = 127;
+	} catch (_wexception const & e) {
+		throw wexception("playFX: %s", e.what());
+	}
 }
 
 /** Demand from the g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
-bool Immovable::run_playFX(Game * game, bool, const ImmovableAction & action)
+void ImmovableProgram::ActPlayFX::execute
+	(Game & game, Immovable & immovable) const
 {
-	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
-
-	schedule_act(game, 1);
-	m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
-
-	return true;
+	g_sound_handler.play_fx(name, immovable.get_position(), priority);
+	immovable.program_step(game);
 }
 
 
-void ImmovableProgram::parse_transform
-	(ImmovableAction                * act,
-	 ProgramParser            const *,
-	 std::vector<std::string> const & cmd)
+ImmovableProgram::ActTransform::ActTransform
+	(char * parameters, Immovable_Descr & descr)
 {
-	if (cmd.size() < 2 or 3 < cmd.size())
-		throw wexception("Syntax: transform <immovable type> [probability]");
-
-	act->function = &Immovable::run_transform;
-
-	const std::vector<std::string> list(split_string(cmd[1], ":"));
-	if (list.size() == 1) {
-		act->sparam1 = cmd[1];
-		act->sparam2 = "world";
-	} else {
-		act->sparam1 = list[1];
-		act->sparam2 = list[0];
-	}
-
-	if (cmd.size() < 3)
-		act->iparam1 = 0;
-	else {
-		act->iparam1 = atoi(cmd[2].c_str());
-		if (act->iparam1 < 1 or 255 < act->iparam1)
-			throw wexception
-				("probability out of range (1, 255) \"%s\"", cmd[2].c_str());
+	try {
+		tribe = true;
+		probability = 0;
+		for (char * p = parameters;;)
+			switch (*p) {
+			case ':': {
+				*p = '\0';
+				++p;
+				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
+				if (not owner_tribe)
+					throw wexception
+						("immovable type not in tribe but target type has scope "
+						 "(\"%s\")",
+						 parameters);
+				else if (strcmp(parameters, "world"))
+					throw wexception
+						("scope \"%s\" given for tartget type (must be \"world\")",
+						 parameters);
+				tribe = false;
+				parameters = p;
+				break;
+			}
+			case ' ': {
+				*p = '\0';
+				++p;
+				char * endp;
+				long int const value = strtol(p, &endp, 0);
+				if (*endp or value < 1 or 254 < value)
+					throw wexception
+						("expected probability in range [1, 254] but found \"%s\"",
+						 p);
+				probability = value;
+			//  fallthrough
+			}
+			case '\0':
+				goto end;
+			default:
+				++p;
+			}
+	end:
+		type_name = parameters;
+	} catch (_wexception const & e) {
+		throw wexception("transform: %s", e.what());
 	}
 }
 
-bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& action)
+void ImmovableProgram::ActTransform::execute
+	(Game & game, Immovable & immovable) const
 {
-	if
-		(action.iparam1 == 0
-		 or
-		 g->logic_rand() % 256 < static_cast<uint32_t>(action.iparam1))
-	{
-		Coords c = m_position;
-
-		if (!descr().get_owner_tribe() && (action.sparam2 != "world"))
-			throw wexception
-				("Should create tribe-immovable %s, but we are no tribe immovable!"
-				 "\n",
-				 action.sparam1.c_str());
-
-		if (!killable) { //  we need to reschedule and remove self from act()
-			m_program_step = schedule_act(g, 1);
-			return true;
-		}
-
-
-		const Tribe_Descr* tribe=0;
-
-		if (action.sparam2 != "world")
-			tribe = descr().get_owner_tribe(); // Not a world bob?
-
-		remove(g);
-		//  Only use variables on the stack below this point!
-		g->create_immovable(c, action.sparam1, tribe);
-	} else {
-		schedule_act(g, 1);
-		m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
-	}
-	return true;
+	if (probability == 0 or game.logic_rand() % 256 < probability) {
+		Coords const c = immovable.get_position();
+		Tribe_Descr const * const owner_tribe =
+			tribe ? immovable.descr().get_owner_tribe() : 0;
+		immovable.remove(&game); //  Now immovable is a dangling reference!
+		game.create_immovable(c, type_name, owner_tribe);
+	} else
+		immovable.program_step(game);
 }
 
 
 /**
  * remove
 */
-void ImmovableProgram::parse_remove
-	(ImmovableAction                * act,
-	 ProgramParser            const *,
-	 std::vector<std::string> const & cmd)
+ImmovableProgram::ActRemove::ActRemove(char * parameters, Immovable_Descr &)
 {
-	if (cmd.size() < 1 or 2 < cmd.size())
-		throw wexception("Syntax: remove [probability]");
-
-	act->function = &Immovable::run_remove;
-
-	if (cmd.size() < 2)
-		act->iparam1 = 0;
-	else {
-		act->iparam1 = atoi(cmd[1].c_str());
-		if (act->iparam1 < 1 or 255 < act->iparam1)
-			throw wexception
-				("probability out of range (1, 255) \"%s\"", cmd[1].c_str());
+	try {
+		if (*parameters) {
+			char * endp;
+			long int const value = strtol(parameters, &endp, 0);
+			if (*endp or value < 1 or 254 < value)
+				throw wexception
+					("expected probability in range [1, 254] but found \"%s\"",
+					 parameters);
+			probability = value;
+		} else
+			probability = 0;
+	} catch (_wexception const & e) {
+		throw wexception("remove: %s", e.what());
 	}
 }
 
-bool Immovable::run_remove
-	(Game * g, bool const killable, ImmovableAction const & action)
+void ImmovableProgram::ActRemove::execute
+	(Game & game, Immovable & immovable) const
 {
-	if
-		(action.iparam1 == 0
-		 or
-		 g->logic_rand() % 256 < static_cast<uint32_t>(action.iparam1))
-	{
-		if (!killable) {
-			m_program_step = schedule_act(g, 1);
-			return true;
-		}
-
-		remove(g);
-	} else {
-		schedule_act(g, 1);
-		m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
-	}
-	return true;
+	if (probability == 0 or game.logic_rand() % 256 < probability)
+		immovable.remove(&game); //  Now immovable is a dangling reference!
+	else
+		immovable.program_step(game);
 }
 
-void ImmovableProgram::parse_seed
-	(ImmovableAction                * act,
-	 ProgramParser            const *,
-	 std::vector<std::string> const & cmd)
+
+ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 {
-	if (cmd.size() != 3)
-		throw wexception
-			("Syntax: seed <immovable type> <probability of spreading one step "
-			 "away (1 .. 255)>");
-
-	act->function = &Immovable::run_seed;
-
-	std::vector<std::string> const list(split_string(cmd[1], ":"));
-	if (list.size() == 1) {
-		act->sparam1 = cmd[1];
-		act->sparam2 = "world";
-	} else {
-		act->sparam1 = list[1];
-		act->sparam2 = list[0];
+	try {
+		tribe = true;
+		probability = 0;
+		for (char * p = parameters;;)
+			switch (*p) {
+			case ':': {
+				*p = '\0';
+				++p;
+				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
+				if (not owner_tribe)
+					throw wexception
+						("immovable type not in tribe but target type has scope "
+						 "(\"%s\")",
+						 parameters);
+				else if (strcmp(parameters, "world"))
+					throw wexception
+						("scope \"%s\" given for tartget type (must be \"world\")",
+						 parameters);
+				tribe = false;
+				parameters = p;
+				break;
+			}
+			case ' ': {
+				*p = '\0';
+				++p;
+				char * endp;
+				long int const value = strtol(p, &endp, 0);
+				if (*endp or value < 1 or 254 < value)
+					throw wexception
+						("expected probability in range [1, 254] but found \"%s\"",
+						 p);
+				probability = value;
+			//  fallthrough
+			}
+			case '\0':
+				goto end;
+			default:
+				++p;
+			}
+	end:
+		type_name = parameters;
+	} catch (_wexception const & e) {
+		throw wexception("seed: %s", e.what());
 	}
-
-	long const probability = atoi(cmd[2].c_str());
-	if (probability < 1 or 255 < probability)
-		throw wexception
-			("probability out of range (1, 255) \"%s\"", cmd[2].c_str());
-	act->iparam1 = probability;
 }
 
-bool Immovable::run_seed(Game* g, bool, const ImmovableAction & action)
+void ImmovableProgram::ActSeed::execute
+	(Game & game, Immovable & immovable) const
 {
-	Map const & map = g->map();
-	MapFringeRegion<> mr(map, Area<>(get_position(), 0));
+	Map const & map = game.map();
+	MapFringeRegion<> mr(map, Area<>(immovable.get_position(), 0));
 	uint32_t fringe_size = 0;
 	do {
 		mr.extend(map);
 		fringe_size += 6;
-	} while (g->logic_rand() % 256 < static_cast<uint32_t>(action.iparam1));
-	for (uint32_t n = g->logic_rand() % fringe_size; n; --n)
+	} while (game.logic_rand() % 256 < probability);
+	for (uint32_t n = game.logic_rand() % fringe_size; n; --n)
 		mr.advance(map);
 	{
 		Field const & f = map[mr.location()];
 		if (not f.get_immovable() and f.get_caps() & MOVECAPS_WALK)
-			g->create_immovable
+			game.create_immovable
 				(mr.location(),
-				 action.sparam1,
-				 action.sparam2 == "world" ?
-				 0 : g->get_tribe(action.sparam2.c_str()));
+				 type_name,
+				 tribe ? immovable.descr().get_owner_tribe() : 0);
 	}
 
-	m_program_step = schedule_act(g, 1);
-	m_program_ptr = (m_program_ptr + 1) % m_program->get_size();
-	return true;
+	immovable.program_step(game);
 }
 
 /*

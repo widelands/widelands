@@ -2,11 +2,14 @@ type=production
 size=mine
 buildable=no
 enhanced_building=yes
-worker=chief-miner,miner
 program=work
 output=coal
 stopable=yes
 enhancement=deeper_coalmine
+
+[working positions]
+chief-miner=1
+miner=1
 
 [inputs]
 snack=6

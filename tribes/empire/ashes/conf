@@ -2,8 +2,8 @@ program=program
 picture=ashes_00.png
 
 [program]
-0=animation idle 45000
-1=remove
+animate=idle 45000
+remove=
 
 [idle]
 pics=ashes_??.png

@@ -137,7 +137,7 @@ m_vision_range   (0)
 
 		// Get costs
 		Section & buildcost_s = prof.get_safe_section("buildcost");
-		while (Section::Value const * const val = buildcost_s.get_next_val(0))
+		while (Section::Value const * const val = buildcost_s.get_next_val())
 			try {
 				if (Ware_Index const idx = m_tribe.ware_index(val->get_name())) {
 					if (m_buildcost.count(idx))
@@ -202,25 +202,27 @@ Building* Building_Descr::create
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
-	 bool                   const fill,
+	 uint32_t       const * const ware_counts,
+	 uint32_t       const * const worker_counts,
+	 Soldier_Counts const * const soldier_counts,
 	 Building_Descr const * const old)
 	const
 {
 	Building* b = construct ? create_constructionsite(old) : create_object();
 	b->m_position = pos;
 	b->set_owner(&owner);
-	if (fill)
-		b->fill(dynamic_cast<Game &>(egbase));
+	b->prefill(dynamic_cast<Game &>(egbase), ware_counts, worker_counts, soldier_counts);
 	b->init(&egbase);
+	b->postfill(dynamic_cast<Game &>(egbase), ware_counts, worker_counts, soldier_counts);
 
 	return b;
 }
 
 
 /**
- * Normal buildings don't conquer anything, do this returns 0 by default.
+ * Normal buildings don't conquer anything, so this returns 0 by default.
  *
- * \return the radius (in number of fields) of the conquered area.
+ * \return the radius of the conquered area.
  */
 uint32_t Building_Descr::get_conquers() const
 {
@@ -527,7 +529,12 @@ std::string Building::get_statistics_string()
 }
 
 
-void Building::fill(Game &) {}
+void Building::prefill
+	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
+{}
+void Building::postfill
+	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
+{}
 
 
 /*

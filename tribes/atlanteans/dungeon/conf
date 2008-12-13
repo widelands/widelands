@@ -1,7 +1,6 @@
 type=training
 size=medium
 enhanced_building=yes
-worker=trainer
 max_soldiers=8
 train=attack
 program=Sleep
@@ -9,6 +8,9 @@ program=upgrade_attack_0
 program=upgrade_attack_1
 program=upgrade_attack_2
 program=upgrade_attack_3
+
+[working positions]
+trainer=1
 
 [Sleep]
 sleep=5000

@@ -7,4 +7,4 @@ picture=idle.png
 hotspot=25 73
 
 [shrink]
-0=transform stones3
+transform=stones3

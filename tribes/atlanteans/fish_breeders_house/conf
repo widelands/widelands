@@ -1,7 +1,9 @@
 type=production
 size=small
-worker=fish_breeder
 program=work
+
+[working positions]
+fish_breeder=1
 
 [buildcost]
 trunk=1

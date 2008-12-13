@@ -1413,7 +1413,7 @@ bool WLApplication::new_game()
 			game.set_game_controller(ctrl.get());
 			game.set_iabase(new Interactive_Player(game, 1, false, false));
 			game.init_newgame(loaderUI, sp.settings());
-			game.run(loaderUI);
+			game.run(loaderUI, Widelands::Game::NewNonScenario);
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -1602,7 +1602,7 @@ void WLApplication::replay()
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, fname);
 
-		game.run(loaderUI, true);
+		game.run(loaderUI, Widelands::Game::Loaded);
 	} catch (...) {
 		emergency_save(game);
 		throw;

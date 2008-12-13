@@ -75,8 +75,7 @@ struct GameSettings {
  *
  * Think of it as a mix of Model and Controller in MVC.
  */
-class GameSettingsProvider {
-public:
+struct GameSettingsProvider {
 	virtual ~GameSettingsProvider() {}
 
 	virtual const GameSettings& settings() = 0;

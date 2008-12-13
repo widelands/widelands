@@ -3,6 +3,15 @@
 [global]
 packet_version=2
 
+[Begin]
+repeating=false
+conditional_element_00=trigger
+conditional_element_00_data=Begin
+event_00=Headquarters 1
+event_01=Headquarters 2
+current_event=0
+state=init
+
 [Beginning]
 repeating=false
 conditional_element_00=trigger

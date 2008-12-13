@@ -1,9 +1,11 @@
 type=production
 size=medium
-worker=sawyer
 program=work
 output=planks
 soundfx=../../../sound/sawmill/sawmill
+
+[working positions]
+sawyer=1
 
 [inputs]
 trunk=8

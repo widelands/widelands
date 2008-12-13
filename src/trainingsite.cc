@@ -174,7 +174,7 @@ std::string TrainingSite::get_statistics_string()
 	state = get_current_program(); //may also be NULL if there is no current program
 
 	if (state) {
-		return state->program->get_name();
+		return state->program->name();
 	} else if (m_result == Completed)
 		return _("Resting");
 	else

@@ -1,8 +1,10 @@
 type=production
 size=big
-worker=weaver
 program=work
 output=cloth
+
+[working positions]
+weaver=1
 
 [inputs]
 flax=8

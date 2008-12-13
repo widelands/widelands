@@ -1,9 +1,11 @@
 type=production
 size=mine
-worker=miner
 program=work
 output=raw_stone
 stopable=yes
+
+[working positions]
+miner=1
 
 [inputs]
 ration=8

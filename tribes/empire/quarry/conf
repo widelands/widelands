@@ -5,7 +5,9 @@ output=marble
 program=stone
 program=marble
 program=work
-worker=stonemason
+
+[working positions]
+stonemason=1
 
 [work]
 call=stone

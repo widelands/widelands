@@ -39,12 +39,12 @@ Trigger_Military_Influence::~Trigger_Military_Influence() {}
 
 void Trigger_Military_Influence::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
-		int32_t const packet_version = s.get_safe_int("version");
-		if (1 <= packet_version and packet_version <= PACKET_VERSION) {
+		uint32_t const packet_version = s.get_safe_positive("version");
+		if (packet_version <= PACKET_VERSION) {
 			Trigger_Player_Area::Read(s, egbase);
 			require_highest = s.get_bool("require_highest", false);
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (std::exception const & e) {
 		throw wexception("(military influence): %s", e.what());
 	}

@@ -1,8 +1,8 @@
 program=disappear
 
 [disappear]
-0=animation idle 50000
-1=remove
+animate=idle 50000
+remove=
 
 [idle]
 pics=field2_??.bmp

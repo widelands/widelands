@@ -1,8 +1,10 @@
 type=production
 size=small
-worker=stonemason
 program=work
 output=raw_stone
+
+[working positions]
+stonemason=1
 
 [work]
 sleep=25000

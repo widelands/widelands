@@ -1,9 +1,10 @@
 type=production
 size=medium
-worker=lumberjack # like lumberjack
 program=work
 output=blackwood
 
+[working positions] #  like lumberjack
+lumberjack=1
 [inputs]
 trunk=8
 

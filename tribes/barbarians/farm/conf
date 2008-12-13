@@ -2,11 +2,13 @@ soundfx=../../../sound/farm/farm_animal
 type=production
 size=big
 output=wheat
-worker=farmer
 stopable=yes
 program=plant
 program=harvest
 program=work
+
+[working positions]
+farmer=1
 
 [work]
 call=plant

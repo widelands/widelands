@@ -252,8 +252,16 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				warehouse.insert_workers(id, fr.Unsigned16());
 			}
 
+			//  FIXME The reason for this code is probably that the constructor of
+			//  FIXME Warehouse requests things. That makes sense when a Warehouse
+			//  FIXME is created in the game, but definitely not when only
+			//  FIXME allocating a Warehouse to later fill it with information
+			//  FIXME from a savegame. Therefore this code here undoes what the
+			//  FIXME constructor just did. There should really be different
+			//  FIXME constructors for those cases.
 			for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i)
 				delete warehouse.m_requests[i];
+
 			warehouse.m_requests.resize(fr.Unsigned16());
 			for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i) {
 				Request & req =
@@ -409,39 +417,101 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			//  FIXME information from a savegame. Therefore this code here undoes
 			//  FIXME what the constructor just did. There should really be
 			//  FIXME different constructors for those cases.
-			for (uint16_t i = 0; i < productionsite.m_worker_requests.size(); ++i)
-				delete productionsite.m_worker_requests[i];
-
-			{
-				uint16_t const nr_requests = fr.Unsigned16();
-				productionsite.m_worker_requests.resize(nr_requests);
-				for (uint16_t i = 0; i < nr_requests; ++i) {
-					Request & req =
-						*new Request
-							(&productionsite,
-							 Ware_Index::First(),
-							 ProductionSite::request_worker_callback, &productionsite,
-							 Request::WORKER);
-					req.Read(&fr, egbase, ol);
-					productionsite.m_worker_requests[i] = &req;
-				}
+			for (uint32_t i = productionsite.descr().nr_working_positions(); i;) {
+				delete productionsite.m_working_positions[--i].worker_request;
+				productionsite.m_working_positions[i].worker_request = 0;
 			}
 
-			assert(productionsite.m_workers.empty());
-			{
-				uint16_t const nr_workers = fr.Unsigned16();
-				productionsite.m_workers.resize(nr_workers);
-				for (uint16_t i = 0; i < nr_workers; ++i) {
-					uint32_t const worker_serial = fr.Unsigned32();
-					try {
-						productionsite.m_workers[i] =
-							&ol->get<Worker>(worker_serial);
-					} catch (_wexception const & e) {
+			ProductionSite::Working_Position & wp_begin =
+				*productionsite.m_working_positions;
+			ProductionSite_Descr const & descr = productionsite.descr();
+			Ware_Types const & working_positions = descr.working_positions();
+
+			uint16_t nr_worker_requests = fr.Unsigned16();
+			for (uint16_t i = nr_worker_requests; i; --i) {
+				Request & req =
+					*new Request
+						(&productionsite,
+						 Ware_Index::First(),
+						 ProductionSite::request_worker_callback, &productionsite,
+						 Request::WORKER);
+				req.Read(&fr, egbase, ol);
+				Ware_Index const worker_index = req.get_index();
+
+				//  Find a working position that matches this request.
+				ProductionSite::Working_Position * wp = &wp_begin;
+				for
+					(struct {
+					 	Ware_Types::const_iterator       current;
+					 	Ware_Types::const_iterator const end;
+					 } j = {working_positions.begin(), working_positions.end()};;
+					 ++j.current)
+				{
+					if (j.current == j.end)
 						throw wexception
-							("worker #%u (%u): %s", i, worker_serial, e.what());
-					}
+							("site has request for %s, for which there is no working "
+							 "position",
+							 productionsite.owner().tribe()
+							 .get_worker_descr(req.get_index())->name().c_str());
+					uint32_t count = j.current->second;
+					assert(count);
+					if (worker_index == j.current->first) {
+						while (wp->worker_request)
+							if (--count)
+								++wp;
+							else
+								throw wexception
+									("request for %s does not match any free working "
+									 "position",
+									 productionsite.owner().tribe()
+									 .get_worker_descr(req.get_index())->name().c_str
+									 	());
+						break;
+					} else
+						wp += count;
 				}
+				wp->worker_request = &req;
 			}
+
+			uint16_t nr_workers = fr.Unsigned16();
+			for (uint16_t i = nr_workers; i; --i) {
+				Worker & worker = ol->get<Worker>(fr.Unsigned32());
+				Worker_Descr const & worker_descr = worker.descr();
+
+				//  Find a working position that matches this worker.
+				ProductionSite::Working_Position * wp = &wp_begin;
+				for
+					(struct {
+					 	Ware_Types::const_iterator       current;
+					 	Ware_Types::const_iterator const end;
+					 } j = {working_positions.begin(), working_positions.end()};;
+					 ++j.current)
+				{
+					if (j.current == j.end)
+						throw wexception
+							("site has %s, for which there is no working position",
+							 worker_descr.name().c_str());
+					uint32_t count = j.current->second;
+					assert(count);
+					if (worker_descr.can_act_as(j.current->first)) {
+						while (wp->worker or wp->worker_request)
+							if (--count)
+								++wp;
+							else
+								throw wexception
+									("%s does not match any free working position",
+									 worker_descr.name().c_str());
+						break;
+					} else
+						wp += count;
+				}
+				wp->worker = &worker;
+			}
+
+			if (nr_worker_requests + nr_workers < descr.nr_working_positions())
+				throw wexception
+					("number of worker requests and workers are fewer than the "
+					 "number of working positions");
 
 			//  items from flags
 			productionsite.m_fetchfromflag = fr.Signed32();
@@ -478,7 +548,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("militarysite: %s", e.what());
+		throw wexception("productionsite (%s): %s", productionsite.descname().c_str(), e.what());
 	}
 }
 
@@ -809,19 +879,30 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 {
 	fw.Unsigned16(CURRENT_PRODUCTIONSITE_PACKET_VERSION);
 
-	const uint16_t worker_requests_size =
-		productionsite.m_worker_requests.size();
-	fw.Unsigned16(worker_requests_size);
-	for (uint16_t i = 0; i < productionsite.m_worker_requests.size(); ++i)
-		productionsite.m_worker_requests[i]->Write(&fw, egbase, os);
+	uint32_t const nr_working_positions =
+		productionsite.descr().nr_working_positions();
+	ProductionSite::Working_Position const & begin =
+		productionsite.m_working_positions[0];
+	ProductionSite::Working_Position const & end =
+		(&begin)[nr_working_positions];
+	uint32_t nr_workers = 0;
+	for (ProductionSite::Working_Position const * i = &begin; i < &end; ++i)
+		nr_workers += i->worker ? 1 : 0;
+
+	//  worker requests
+	fw.Unsigned16(nr_working_positions - nr_workers);
+	for (ProductionSite::Working_Position const * i = &begin; i < &end; ++i)
+		if (Request const * const r = i->worker_request)
+			r->Write(&fw, egbase, os);
 
 	//  workers
-	const uint16_t workers_size = productionsite.m_workers.size();
-	fw.Unsigned16(workers_size);
-	for (uint16_t i = 0; i < workers_size; ++i) {
-		assert(os->is_object_known(productionsite.m_workers[i]));
-		fw.Unsigned32(os->get_object_file_index(productionsite.m_workers[i]));
-	}
+	fw.Unsigned16(nr_workers);
+	for (ProductionSite::Working_Position const * i = &begin; i < &end; ++i)
+		if (Worker const * const w = i->worker) {
+			assert(not i->worker_request);
+			assert(os->is_object_known(w));
+			fw.Unsigned32(os->get_object_file_index(w));
+		}
 
 	fw.Signed32(productionsite.m_fetchfromflag);
 
@@ -829,7 +910,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	const uint16_t program_size = productionsite.m_program.size();
 	fw.Unsigned16(program_size);
 	for (uint16_t i = 0; i < program_size; ++i) {
-		fw.String(productionsite.m_program[i].program->get_name());
+		fw.String(productionsite.m_program[i].program->name());
 		fw.  Signed32(productionsite.m_program[i].ip);
 		fw.  Signed32(productionsite.m_program[i].phase);
 		fw.Unsigned32(productionsite.m_program[i].flags);

@@ -1,9 +1,11 @@
 type=production
 size=medium
-worker=innkeeper
 program=work
 output=ration
 enhancement=inn
+
+[working positions]
+innkeeper=1
 
 [inputs]
 fish=5

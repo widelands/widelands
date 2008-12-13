@@ -330,6 +330,55 @@ Warehouse::~Warehouse()
 	delete m_supply;
 }
 
+
+void Warehouse::prefill
+	(Game                &       game,
+	 uint32_t      const *       ware_types,
+	 uint32_t      const *       worker_types,
+	 Soldier_Counts const * const soldier_counts)
+{}
+void Warehouse::postfill
+	(Game                &       game,
+	 uint32_t      const *       ware_types,
+	 uint32_t      const *       worker_types,
+	 Soldier_Counts const * const soldier_counts)
+{
+	Building::postfill(game, ware_types, worker_types, soldier_counts);
+	Tribe_Descr const & tribe = owner().tribe();
+	if (ware_types)
+		for
+			(struct {Ware_Index i; Ware_Index const nr_ware_types;} i =
+			 	{Ware_Index::First(), tribe.get_nrwares  ()};
+			 i.i < i.nr_ware_types;
+			 ++i.i, ++ware_types)
+			if (uint32_t const count = *ware_types)
+				insert_wares  (i.i, count);
+	if (worker_types)
+		for
+			(struct {Ware_Index i; Ware_Index const nr_worker_types;} i =
+			 	{Ware_Index::First(), tribe.get_nrworkers()};
+			 i.i < i.nr_worker_types;
+			 ++i.i, ++worker_types)
+			if (uint32_t const count = *worker_types)
+				insert_workers(i.i, count);
+	if (soldier_counts) {
+		Soldier_Descr const & soldier_descr =
+			dynamic_cast<Soldier_Descr const &>
+				(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
+			Soldier_Strength const ss = i.current->first;
+			for (uint32_t j = i.current->second; j; --j) {
+				Soldier & soldier =
+					static_cast<Soldier &>
+						(soldier_descr.create(game, owner(), *this, get_position()));
+				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
+				incorporate_worker(&game, &soldier);
+			}
+		}
+	}
+}
+
+
 /*
 Warehouse::get_priority
 warehouses determine how badly they want a certain ware
@@ -393,6 +442,13 @@ void Warehouse::init(Editor_Game_Base* gg)
 	Map & map = gg->map();
 	player.see_area
 		(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+
+	if (uint32_t const conquer_radius = get_conquers())
+		gg->conquer_area
+			(Player_Area<Area<FCoords> >
+			 	(owner().get_player_number(),
+			 	 Area<FCoords>
+			 	 	(gg->map().get_fcoords(get_position()), conquer_radius)));
 }
 
 

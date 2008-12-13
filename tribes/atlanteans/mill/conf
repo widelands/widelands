@@ -1,12 +1,14 @@
 type=production
 size=medium
-worker=miller
 program=produce_cornflour
 program=produce_blackrootflour
 program=work
 output=cornflour
 output=blackrootflour
 stopable=yes
+
+[working positions]
+miller=1
 
 [buildcost]
 trunk=3

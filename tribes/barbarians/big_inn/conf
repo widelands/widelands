@@ -2,9 +2,11 @@ type=production
 size=medium
 buildable=no
 enhanced_building=yes
-worker=innkeeper,innkeeper
 program=work
 output=meal
+
+[working positions]
+innkeeper=2
 
 [inputs]
 fish=4

@@ -22,9 +22,10 @@
 
 #include "computer_player_hints.h"
 #include "immovable.h"
+#include "soldier_counts.h"
 #include "workarea_info.h"
 #include "writeHTML.h"
-
+#include "ware_types.h"
 #include "widelands.h"
 
 #include "filewrite.h"
@@ -85,7 +86,10 @@ struct Building_Descr : public Map_Object_Descr {
 		(Editor_Game_Base &,
 		 Player &,
 		 Coords,
-		 bool construct, bool fill = false,
+		 bool                   construct,
+		 uint32_t       const * ware_counts   = 0,
+		 uint32_t       const * worker_counts = 0,
+		 Soldier_Counts  const * soldier_counts = 0,
 		 Building_Descr const * = 0)
 		const;
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -170,9 +174,18 @@ public:
 	virtual const std::string & census_string() const throw ();
 	virtual std::string get_statistics_string();
 
-	/// Fills the building with everything that it would normally request
+	/// Fills the building with things that it would normally request
 	/// (wares/workers/soldiers).
-	virtual void fill(Game &);
+	virtual void prefill
+		(Game &,
+		 uint32_t       const * ware_counts,
+		 uint32_t       const * worker_counts,
+		 Soldier_Counts const * worker_types);
+	virtual void postfill
+		(Game &,
+		 uint32_t       const * ware_counts,
+		 uint32_t       const * worker_counts,
+		 Soldier_Counts const * worker_types);
 
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base*);

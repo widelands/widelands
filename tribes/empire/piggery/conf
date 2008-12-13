@@ -1,9 +1,11 @@
 soundfx=../../../sound/farm/farm_animal
 type=production
 size=big
-worker=pig-breeder
 program=work
 output=meat
+
+[working positions]
+pig-breeder=1
 
 [inputs]
 wheat=7

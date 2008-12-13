@@ -20,9 +20,11 @@
 #ifndef EVENT_BUILDING_H
 #define EVENT_BUILDING_H
 
-#include "widelands.h"
 #include "event.h"
+#include "soldier_counts.h"
 #include "widelands_geometry.h"
+
+#include <vector>
 
 struct Event_Building_Option_Menu;
 
@@ -30,9 +32,14 @@ namespace Widelands {
 
 struct Event_Building : Event {
 	friend struct ::Event_Building_Option_Menu;
-	Event_Building(char const * Name, State const S)
-		: Event(Name, S), m_location(Coords::Null()), m_player(1), m_fill(true)
+	Event_Building(char const * Name, State const S) :
+		Event          (Name, S),
+		m_location     (Coords::Null()),
+		m_player       (1),
+		m_ware_counts  (0),
+		m_worker_counts(0)
 	{}
+	~Event_Building();
 
 	int32_t option_menu(Editor_Interactive &);
 
@@ -45,7 +52,9 @@ private:
 	Coords         m_location;
 	Player_Number  m_player;
 	Building_Index m_building;
-	bool           m_fill;
+	uint32_t     * m_ware_counts;
+	uint32_t     * m_worker_counts;
+	Soldier_Counts  m_soldier_counts;
 };
 
 };

@@ -82,46 +82,30 @@ Player::~Player() {
 }
 
 
-/*
-===============
-Player::init
-
-Prepare the player for in-game action
-===============
-*/
-void Player::init(const bool place_headquarters) {
+void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
-	if (place_headquarters) {
-		const Tribe_Descr & trdesc = m_tribe;
-		Coords starting_pos = map.get_starting_pos(m_plnum);
+	Tribe_Descr const & trdesc = m_tribe;
+	Coords starting_pos = map.get_starting_pos(m_plnum);
 
-		if (!starting_pos)
-			// TODO don't use wexception as this is not a "bug" in this case
-			throw wexception("Player %u has no starting point", m_plnum);
+	if (!starting_pos)
+		// TODO don't use wexception as this is not a "bug" in this case
+		throw wexception("Player %u has no starting point", m_plnum);
 
-		FCoords fpos = map.get_fcoords(starting_pos);
+	FCoords fpos = map.get_fcoords(starting_pos);
 
-		if ((fpos.field->get_caps() & BUILDCAPS_SIZEMASK) < BUILDCAPS_BIG)
-			// TODO don't use wexception as this is not a "bug" in this case
-			throw wexception("Starting point of player %u is too small", m_plnum);
+	if ((fpos.field->get_caps() & BUILDCAPS_SIZEMASK) < BUILDCAPS_BIG)
+		// TODO don't use wexception as this is not a "bug" in this case
+		throw wexception("Starting point of player %u is too small", m_plnum);
 
-		Player_Area<Area<FCoords> > starting_area
-			(m_plnum,
-			 Area<FCoords>(fpos, 0));
+	Player_Area<Area<FCoords> > starting_area(m_plnum, Area<FCoords>(fpos, 0));
 
-		//try {
-			Warehouse & headquarter = dynamic_cast<Warehouse &>
-				(*egbase().warp_building
-				 	(starting_area,
-				 	 starting_area.player_number,
-				 	 trdesc.building_index("headquarters")));
-			starting_area.radius = headquarter.get_conquers();
-			egbase().conquer_area(starting_area);
-			trdesc.load_warehouse_with_start_wares(egbase(), headquarter);
-		//} catch (const Descr_Maintainer<Building_Descr>::Nonexistent) {
-			//throw wexception("Tribe %s lacks headquarters", tribe.get_name());
-		//}
-	}
+	Warehouse & headquarter = dynamic_cast<Warehouse &>
+		(*egbase().warp_building
+		 	(starting_area,
+		 	 starting_area.player_number,
+		 	 trdesc.building_index("headquarters")));
+	starting_area.radius = headquarter.get_conquers();
+	trdesc.load_warehouse_with_start_wares(egbase(), headquarter);
 }
 
 
@@ -274,7 +258,11 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 
 
 void Player::force_building
-	(Coords const location, Building_Index const idx, bool const fill)
+	(Coords                const location,
+	 Building_Index        const idx,
+	 uint32_t      const *       ware_counts,
+	 uint32_t      const *       worker_counts,
+	 Soldier_Counts const &       soldier_counts)
 {
 	Map & map = egbase().map();
 	FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -300,7 +288,9 @@ void Player::force_building
 				immovable->remove(&egbase());
 		}
 	}
-	descr.create(egbase(), *this, c[0], false, fill);
+	descr.create
+		(egbase(), *this, c[0], false,
+		 ware_counts, worker_counts, &soldier_counts);
 }
 
 
@@ -352,32 +342,73 @@ Player::bulldoze
 Bulldoze the given road, flag or building.
 ===============
 */
-void Player::bulldoze(PlayerImmovable* imm)
+void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 {
 	// General security check
-	if (imm->get_owner() != this)
+	if (imm.get_owner() != this)
 		return;
 
 	// Extended security check
-	if (upcast(Building, building, imm)) {
+	if (upcast(Building, building, &imm)) {
 		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
 			return;
-	} else if (upcast(Flag, flag, imm)) {
-		if (Building * const flagbuilding = flag->get_building())
-		if (!(flagbuilding->get_playercaps() & (1 << Building::PCap_Bulldoze))) {
-			log
-				("Player trying to rip flag (%u) with undestroyable building "
-				 "(%u)\n",
-				 flag->get_serial(), flagbuilding->get_serial());
+		if (recurse) {
+			Flag & flag = *building->get_base_flag();
+			building->destroy(&egbase());
+			//  Now imm and building are dangling reference/pointer! Do not use!
+			if (flag.is_dead_end())
+				dynamic_cast<Game &>(egbase()).send_player_bulldoze(flag, true);
 			return;
 		}
-	} else if (dynamic_cast<Road *>(imm)); // no additional check
-	else
+	} else if (upcast(Flag, flag, &imm)) {
+		if (Building * const flagbuilding = flag->get_building())
+			if
+				(!
+				 (flagbuilding->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+			{
+				log
+					("Player trying to rip flag (%u) with undestroyable building "
+					 "(%u)\n",
+					 flag->get_serial(), flagbuilding->get_serial());
+				return;
+			}
+		if (recurse)
+			for (uint8_t primary_road_id = 6; primary_road_id; --primary_road_id)
+				if (Road * const primary_road = flag->get_road(primary_road_id)) {
+					Flag & primary_start = *primary_road->get_flag(Road::FlagStart);
+					Flag & primary_other =
+						flag == &primary_start ?
+						*primary_road->get_flag(Road::FlagEnd) : primary_start;
+					primary_road->destroy(&egbase());
+					log
+						("destroying road from (%i, %i) going in dir %u\n",
+						 flag->get_position().x, flag->get_position().y,
+						 primary_road_id);
+					//  The primary road is gone. Now see if the flag at the other
+					//  end of it is a dead-end.
+					if (primary_other.is_dead_end())
+						dynamic_cast<Game &>(egbase()).send_player_bulldoze
+							(primary_other, true);
+				}
+	} else if (upcast(Road, road, &imm)) {
+		if (recurse) {
+			Flag & start = *road->get_flag(Road::FlagStart);
+			Flag & end   = *road->get_flag(Road::FlagEnd);
+			while (Road * const r = start.get_road(&end)) //  destroy every road
+				r->destroy(&egbase()); //  between start and end, not just selected
+			//  Now imm and road are dangling reference/pointer! Do not use!
+			if (start.is_dead_end())
+				dynamic_cast<Game &>(egbase()).send_player_bulldoze(start, true);
+			if (end  .is_dead_end())
+				dynamic_cast<Game &>(egbase()).send_player_bulldoze(end,   true);
+			return;
+		}
+	} else
 		throw wexception
-			("Player::bulldoze(%u): bad immovable type", imm->get_serial());
+			("Player::bulldoze(%u): bad immovable type", imm.get_serial());
 
 	// Now destroy it
-	imm->destroy(&egbase());
+	imm.destroy(&egbase());
 }
 
 void Player::start_stop_building(PlayerImmovable* imm) {

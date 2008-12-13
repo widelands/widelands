@@ -1,11 +1,13 @@
 type=production
 size=medium
-worker=vinefarmer
 stopable=yes
 output=grape
 program=plantvine
 program=harvestvine
 program=work
+
+[working positions]
+vinefarmer=1
 
 [work]
 call=plantvine

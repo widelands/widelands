@@ -39,8 +39,7 @@ class PlayerCommand;
  * vs. multiplayer vs. replay issues and have a \ref GameController
  * handle all that.
  */
-class GameController {
-public:
+struct GameController {
 	virtual ~GameController() {}
 
 	virtual void think() = 0;

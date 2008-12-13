@@ -1,5 +1,14 @@
+#  Birch
+#
+#  Characteristics suitable to model:
+#    * Spreading: far
+#    * Seeding:   high
+#    * Growth:    fast
+#    * Longevity: short
+
 size=medium
 attrib=tree
+program=program
 program=fall
 picture=idle_0.png
 
@@ -7,5 +16,10 @@ picture=idle_0.png
 pics=idle_?.png
 hotspot=24 60
 
+[program]
+animate=idle 22000
+transform=deadtree2 50
+seed=tree5_t 180
+
 [fall]
-0=remove
+remove=

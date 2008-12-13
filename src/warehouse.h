@@ -75,6 +75,11 @@ public:
 	Warehouse(const Warehouse_Descr &);
 	virtual ~Warehouse();
 
+	void prefill
+		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
+	void postfill
+		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
+
 	virtual int32_t get_building_type() const throw () {return Building::WAREHOUSE;}
 	char const * type_name() const throw () {return "warehouse";}
 	virtual void init(Editor_Game_Base *g);

@@ -91,7 +91,7 @@ struct Player :
 	const std::string & get_name() const throw () {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
 
-	void init(bool place_headquarters);
+	void create_default_infrastructure();
 
 	FieldCaps get_buildcaps(FCoords) const;
 
@@ -380,9 +380,14 @@ struct Player :
 	void   build_flag(Coords);       /// Build a flag if it is allowed.
 	void   force_road(Path const &, bool create_carrier = false);
 	void   build_road(Path const &); /// Build a road if it is allowed.
-	void force_building(Coords, Building_Index, bool fill);
+	void force_building
+		(Coords,
+		 Building_Index,
+		 uint32_t      const * ware_counts,
+		 uint32_t      const * worker_counts,
+		 Soldier_Counts const & soldier_counts);
 	void build(Coords c, Building_Index idx);
-	void bulldoze(PlayerImmovable* imm);
+	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag* flag, int32_t action);
 	void start_stop_building(PlayerImmovable* imm);
 	void enhance_building

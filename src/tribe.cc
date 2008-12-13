@@ -76,7 +76,7 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 			std::set<std::string> descnames; //  To enforce descname uniqueness.
 
 			Section & section = root_conf.get_safe_section("map object types");
-			while (Section::Value const * const v = section.get_next_val(0)) {
+			while (Section::Value const * const v = section.get_next_val()) {
 				char const * const     _name = v->get_name  ();
 				char const * const _descname = v->get_string();
 				if (descnames.count(_name))
@@ -166,7 +166,7 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 
 			try { //  FIXME eliminate
 				Section & swa_s = root_conf.get_safe_section("startwares");
-				while (Section::Value const * const value = swa_s.get_next_val(0))
+				while (Section::Value const * const value = swa_s.get_next_val())
 				{
 					if (not m_wares.exists(value->get_name()))
 						throw wexception
@@ -180,7 +180,7 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 
 			try { //  FIXME eliminate
 				Section & swo_s = root_conf.get_safe_section("startworkers");
-				while (Section::Value const * const value = swo_s.get_next_val(0))
+				while (Section::Value const * const value = swo_s.get_next_val())
 				{
 					if (strcmp(value->get_name(), "soldier")) { // Ignore soldiers
 						if (not m_workers.exists(value->get_name()))
@@ -199,7 +199,7 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 
 			{ //  FIXME eliminate
 				Section & sso_s = root_conf.get_safe_section("startsoldiers");
-				while (Section::Value const * const value = sso_s.get_next_val(0))
+				while (Section::Value const * const value = sso_s.get_next_val())
 				//  NOTE no check here; we do not know about max levels and so on
 					m_startsoldiers[value->get_name()] = value->get_int();
 			}

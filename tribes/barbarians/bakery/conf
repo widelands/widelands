@@ -1,9 +1,11 @@
 type=production
 size=medium
-worker=baker
 program=work
 output=pittabread
 stopable=yes
+
+[working positions]
+baker=1
 
 [inputs]
 wheat=6

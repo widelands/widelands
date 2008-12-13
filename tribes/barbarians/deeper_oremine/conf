@@ -2,10 +2,14 @@ type=production
 size=mine
 buildable=no
 enhanced_building=yes
-worker=master-miner,chief-miner,miner
 program=work
 output=ironore
 stopable=yes
+
+[working positions]
+master-miner=1
+chief-miner=1
+miner=1
 
 [inputs]
 meal=6

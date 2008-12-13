@@ -3,8 +3,8 @@ program=program
 picture=field0t_00.png
 
 [program]
-0=animation tiny 30000
-1=transform tribe:field0s
+animate=tiny 30000
+transform=field0s
 
 [tiny]
 pics=field0t_??.png

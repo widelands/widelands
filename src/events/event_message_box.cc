@@ -98,8 +98,8 @@ const char* Event_Message_Box::get_button_name(int32_t i) {
 void Event_Message_Box::Read(Section & s, Editor_Game_Base & egbase) {
 	m_buttons.clear();
 	try {
-		int32_t const packet_version = s.get_safe_int("version");
-		if (1 <= packet_version and packet_version <= EVENT_VERSION) {
+		uint32_t const packet_version = s.get_safe_positive("version");
+		if (packet_version <= EVENT_VERSION) {
 			set_name        (s.get_name());
 			set_text        (s.get_safe_string("text"));
 			set_window_title(s.get_safe_string("window_title"));
@@ -159,7 +159,7 @@ void Event_Message_Box::Read(Section & s, Editor_Game_Base & egbase) {
 				if (key[8] == '9') {key[8] = '0'; ++key[7];} else ++key[8];
 			}
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (std::exception const & e) {
 		throw wexception
 			("(message box): %s", e.what());

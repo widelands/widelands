@@ -1,8 +1,10 @@
 type=production
 size=small
-worker=lumberjack
 output=trunk
 program=work
+
+[working positions]
+lumberjack=1
 
 [work]
 sleep=30000 # Barbarian lumberjack sleeps 25000

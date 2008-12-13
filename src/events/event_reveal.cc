@@ -29,11 +29,11 @@ namespace Widelands {
 
 void Event_Reveal::Read(Section & s, Editor_Game_Base &) {
 	try {
-		int32_t const packet_version = s.get_safe_int("version");
-		if (1 <= packet_version and packet_version <= EVENT_VERSION)
+		uint32_t const packet_version = s.get_safe_positive("version");
+		if (packet_version <= EVENT_VERSION)
 			reveal = s.get_safe_string("entry");
 		else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (std::exception const & e) {
 		throw wexception("(reveal): %s", e.what());
 	}

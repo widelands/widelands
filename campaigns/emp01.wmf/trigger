@@ -1,6 +1,10 @@
 [global]
 packet_version=1
 
+[Begin]
+type=time
+time=0
+
 [Start Trigger]
 type=time
 version=1

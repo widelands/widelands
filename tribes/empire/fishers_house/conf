@@ -1,8 +1,10 @@
 type=production
 size=small
-worker=fisher
 output=fish
 program=work
+
+[working positions]
+fisher=1
 
 [buildcost]
 trunk=1

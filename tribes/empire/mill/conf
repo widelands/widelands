@@ -1,10 +1,12 @@
 type=production
 size=medium
-worker=miller
 program=work
 output=flour
 stopable=yes
 soundfx=../../../sound/mill/mill_turning
+
+[working positions]
+miller=1
 
 [inputs]
 wheat=6

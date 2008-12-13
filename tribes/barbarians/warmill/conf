@@ -3,7 +3,6 @@ soundfx=../../../sound/smiths/sharpening
 type=production
 size=medium
 buildable=no
-worker=master-blacksmith,blacksmith
 output=axe
 output=sharpaxe
 output=broadaxe
@@ -18,6 +17,10 @@ program=produce_bronzeaxe
 program=produce_battleaxe
 program=produce_warriorsaxe
 program=work
+
+[working positions]
+master-blacksmith=1
+blacksmith=1
 
 [inputs]
 iron=8

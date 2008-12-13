@@ -1,7 +1,9 @@
 type=production
 size=small
-worker=forester
 program=work
+
+[working positions]
+forester=1
 
 [buildcost]
 trunk=1

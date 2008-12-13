@@ -1,5 +1,14 @@
+#  Spruce
+#
+#  Characteristics suitable to model:
+#    * Spreading: far
+#    * Seeding:   high
+#    * Growth:    medium
+#    * Longevity: short
+
 size=medium
 attrib=tree
+program=program
 program=fall
 picture=idle_0.png
 
@@ -9,5 +18,10 @@ sfx=0 ../../../sound/animals/bird3
 fps=10
 hotspot=24 60
 
+[program]
+animate=idle 55000
+transform=deadtree3 36
+seed=tree3_t 160
+
 [fall]
-0=remove
+remove=

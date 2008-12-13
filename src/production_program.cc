@@ -36,19 +36,21 @@
 
 namespace Widelands {
 
-ProductionAction::~ProductionAction() {}
+ProductionProgram::Action::~Action() {}
 
-ActReturn::Condition::~Condition() {}
+ProductionProgram::ActReturn::Condition::~Condition() {}
 
-ActReturn::Negation::~Negation() {
+ProductionProgram::ActReturn::Negation::~Negation() {
 	delete operand;
 }
-bool ActReturn::Negation::evaluate(ProductionSite const & ps) const {
+bool ProductionProgram::ActReturn::Negation::evaluate
+	(ProductionSite const & ps) const
+{
 	return not operand->evaluate(ps);
 }
 
 
-ActReturn::Economy_Needs::Economy_Needs
+ProductionProgram::ActReturn::Economy_Needs::Economy_Needs
 	(char * & parameters, Tribe_Descr const & tribe)
 {
 	try {
@@ -59,7 +61,8 @@ ActReturn::Economy_Needs::Economy_Needs
 		throw wexception("needs: %s", e.what());
 	}
 }
-bool ActReturn::Economy_Needs::evaluate(ProductionSite const & ps) const
+bool ProductionProgram::ActReturn::Economy_Needs::evaluate
+	(ProductionSite const & ps) const
 {
 #if 0
 	log
@@ -75,23 +78,24 @@ bool ActReturn::Economy_Needs::evaluate(ProductionSite const & ps) const
 }
 
 
-bool ActReturn::Workers_Need_Experience::evaluate
+bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 	(ProductionSite const & ps) const
 {
-	std::vector<Worker *> const & workers = ps.workers();
-	container_iterate_const(std::vector<Worker *>, workers, i)
-		if ((*i.current)->needs_experience())
+	ProductionSite::Working_Position const * const wp = ps.m_working_positions;
+	for (uint32_t i = ps.descr().nr_working_positions(); i;)
+		if (wp[--i].worker->needs_experience())
 			return true;
 	return false;
 }
 
 
-ActReturn::Condition * create_economy_condition
+ProductionProgram::ActReturn::Condition * create_economy_condition
 	(char * & parameters, Tribe_Descr const & tribe)
 {
 	try {
 		if (match_force_skip(parameters, "needs"))
-			return new ActReturn::Economy_Needs(parameters, tribe);
+			return
+				new ProductionProgram::ActReturn::Economy_Needs(parameters, tribe);
 		else
 			throw wexception
 				("expeted needs but found \"%s\"", parameters);
@@ -101,10 +105,12 @@ ActReturn::Condition * create_economy_condition
 }
 
 
-ActReturn::Condition * create_workers_condition(char * & parameters) {
+ProductionProgram::ActReturn::Condition * create_workers_condition
+	(char * & parameters)
+{
 	try {
 		if (match(parameters, "need experience"))
-			return new ActReturn::Workers_Need_Experience;
+			return new ProductionProgram::ActReturn::Workers_Need_Experience;
 		else
 			throw wexception
 				("expeted \"need experience\" but found \"%s\"", parameters);
@@ -114,7 +120,8 @@ ActReturn::Condition * create_workers_condition(char * & parameters) {
 }
 
 
-ActReturn::Condition * ActReturn::create_condition
+ProductionProgram::ActReturn::Condition *
+	ProductionProgram::ActReturn::create_condition
 	(char * & parameters, Tribe_Descr const & tribe)
 {
 	try {
@@ -134,7 +141,7 @@ ActReturn::Condition * ActReturn::create_condition
 }
 
 
-ActReturn::ActReturn
+ProductionProgram::ActReturn::ActReturn
 	(char * parameters, ProductionSite_Descr const & descr)
 {
 	try {
@@ -193,12 +200,14 @@ ActReturn::ActReturn
 	}
 }
 
-ActReturn::~ActReturn() {
+ProductionProgram::ActReturn::~ActReturn() {
 	container_iterate_const(Conditions, m_conditions, i)
 		delete *i.current;
 }
 
-void ActReturn::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActReturn::execute
+	(Game & game, ProductionSite & ps) const
+{
 	if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
 		container_iterate_const(Conditions, m_conditions, i)
 			if (not (*i.current)->evaluate(ps)) //  A condition is false,
@@ -213,7 +222,9 @@ void ActReturn::execute(Game & game, ProductionSite & ps) const {
 }
 
 
-ActCall::ActCall(char * parameters, ProductionSite_Descr const & descr) {
+ProductionProgram::ActCall::ActCall
+	(char * parameters, ProductionSite_Descr const & descr)
+{
 	try {
 		bool reached_end;
 		{
@@ -256,11 +267,13 @@ ActCall::ActCall(char * parameters, ProductionSite_Descr const & descr) {
 	}
 }
 
-void ActCall::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActCall::execute
+	(Game & game, ProductionSite & ps) const
+{
 	switch (ps.get_current_program()->phase) {
 	case None: // The program has not yet been called.
 		//ps.molog("%s  Call %s\n", ps.descname().c_str(), m_program->get_name().c_str());
-		return ps.program_start(game, m_program->get_name());
+		return ps.program_start(game, m_program->name());
 	case Completed:
 	case Skipped:
 		return ps.program_step(game);
@@ -284,7 +297,7 @@ void ActCall::execute(Game & game, ProductionSite & ps) const {
 }
 
 
-ActWorker::ActWorker
+ProductionProgram::ActWorker::ActWorker
 	(char * parameters, ProductionSite_Descr & descr,
 	 const std::string & production_program_name)
 {
@@ -293,14 +306,13 @@ ActWorker::ActWorker
 
 		//  Quote form "void ProductionSite::program_act(Game &)":
 		//  "Always main worker is doing stuff"
-		char const * const main_worker_name = descr.workers()[0].c_str();
-		const Tribe_Descr & tribe = descr.tribe();
+		Worker_Descr const & main_worker_descr =
+			*descr.tribe().get_worker_descr(descr.working_positions()[0].first);
 
 		//  This will fail unless the main worker has a program with the given
 		//  name, so it also validates the parameter.
-		const Workarea_Info & worker_workarea_info
-			= tribe.get_worker_descr(tribe.safe_worker_index(main_worker_name))
-			->get_program(m_program)->get_workarea_info();
+		Workarea_Info const & worker_workarea_info =
+			main_worker_descr.get_program(m_program)->get_workarea_info();
 		Workarea_Info & building_workarea_info = descr.m_workarea_info;
 		container_iterate_const(Workarea_Info, worker_workarea_info, i) {
 			std::set<std::string> & building_radius_infos =
@@ -311,7 +323,7 @@ ActWorker::ActWorker
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
-				description += main_worker_name;
+				description += main_worker_descr.name();
 				description += *de.current;
 				building_radius_infos.insert(description);
 			}
@@ -321,24 +333,27 @@ ActWorker::ActWorker
 	}
 }
 
-void ActWorker::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActWorker::execute
+	(Game & game, ProductionSite & ps) const
+{
 	//ps.molog("  Worker(%s)\n", m_program.c_str());
 
 	// Always main worker is doing stuff
-	ps.m_workers[0]->update_task_buildingwork(&game);
+	ps.m_working_positions[0].worker->update_task_buildingwork(&game);
 }
 
 
-ActSleep::ActSleep(char * parameters, ProductionSite_Descr const &)
+ProductionProgram::ActSleep::ActSleep
+	(char * parameters, ProductionSite_Descr const &)
 {
 	try {
 		if (*parameters) {
 			char * endp;
-			long int const value = strtol(parameters, &endp, 0);
-			if (*endp or value <= 0)
+			long long int const value = strtoll(parameters, &endp, 0);
+			m_duration = value;
+			if (*endp or value <= 0 or m_duration != value)
 				throw wexception
 					("expected duration in ms but found \"%s\"", parameters);
-			m_duration = value;
 		} else
 			m_duration = 0; //  Get duration from the result of a previous action.
 	} catch (_wexception const & e) {
@@ -346,37 +361,40 @@ ActSleep::ActSleep(char * parameters, ProductionSite_Descr const &)
 	}
 }
 
-void ActSleep::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActSleep::execute
+	(Game & game, ProductionSite & ps) const
+{
 	return
 		ps.program_step
 			(game, m_duration ? m_duration : ps.get_current_program()->phase);
 }
 
 
-ActAnimate::ActAnimate
+ProductionProgram::ActAnimate::ActAnimate
 	(char * parameters, ProductionSite_Descr & descr,
 	 std::string const & directory, Profile & prof,
 	 EncodeData const * const encdata)
 {
 	try {
 		bool reached_end;
-		char * const animation = match(parameters, reached_end);
-		if (not strcmp(animation, "idle"))
+		char * const animation_name = match(parameters, reached_end);
+		if (not strcmp(animation_name, "idle"))
 			throw wexception("Idle animation is default, no calling senseful!");
-		if (descr.is_animation_known(animation))
-			m_id = descr.get_animation(animation);
+		if (descr.is_animation_known(animation_name))
+			m_id = descr.get_animation(animation_name);
 		else {
-			Section & s = prof.get_safe_section(animation);
-			m_id = g_anim.get(directory.c_str(), s, 0, encdata);
-			descr.add_animation(animation, m_id);
+			m_id =
+				g_anim.get
+					(directory.c_str(), prof.get_safe_section(animation_name), 0, encdata);
+			descr.add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.
 			char * endp;
-			long int const value = strtol(parameters, &endp, 0);
-			if (*endp or value <= 0)
+			long long int const value = strtoll(parameters, &endp, 0);
+			m_duration = value;
+			if (*endp or value <= 0 or m_duration != value)
 				throw wexception
 					("expected duration in ms but found \"%s\"", parameters);
-			m_duration = value;
 		} else
 			m_duration = 0; //  Get duration from the result of a previous action.
 	} catch (_wexception const & e) {
@@ -384,7 +402,9 @@ ActAnimate::ActAnimate
 	}
 }
 
-void ActAnimate::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActAnimate::execute
+	(Game & game, ProductionSite & ps) const
+{
 	ps.start_animation(&game, m_id);
 	return
 		ps.program_step
@@ -392,7 +412,7 @@ void ActAnimate::execute(Game & game, ProductionSite & ps) const {
 }
 
 
-ActConsume::ActConsume
+ProductionProgram::ActConsume::ActConsume
 	(char * parameters, ProductionSite_Descr const & descr)
 {
 	try {
@@ -417,11 +437,20 @@ ActConsume::ActConsume
 				char const terminator = *parameters;
 				*parameters = '\0';
 				Ware_Index const ware_index = tribe.safe_ware_index(ware);
-				if (not descr.is_input(ware_index))
-					throw wexception
-						("%s is not declared as an input (\"%s=<count>\" was not "
-						 "found in the [inputs] section)",
-						 ware, ware);
+				Ware_Types const & inputs = descr.inputs();
+				for
+					(struct {
+					 	Ware_Types::const_iterator       current;
+					 	Ware_Types::const_iterator const end;
+					 } i = {inputs.begin(), inputs.end()};;
+					 ++i.current)
+					if (i.current == i.end)
+						throw wexception
+							("%s is not declared as an input (\"%s=<count>\" was not "
+							 "found in the [inputs] section)",
+							 ware, ware);
+					else if (i.current->first == ware_index)
+						break;
 				if
 					(group.first.size()
 					 and
@@ -468,7 +497,9 @@ ActConsume::ActConsume
 	}
 }
 
-void ActConsume::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActConsume::execute
+	(Game & game, ProductionSite & ps) const
+{
 	std::vector<WaresQueue *> const warequeues = ps.warequeues();
 	size_t const nr_warequeues = warequeues.size();
 	uint8_t consumption_quantities[nr_warequeues];
@@ -540,7 +571,7 @@ void ActConsume::execute(Game & game, ProductionSite & ps) const {
 }
 
 
-ActProduce::ActProduce
+ProductionProgram::ActProduce::ActProduce
 	(char * parameters, ProductionSite_Descr const & descr)
 {
 	try {
@@ -587,15 +618,17 @@ ActProduce::ActProduce
 	}
 }
 
-void ActProduce::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActProduce::execute
+	(Game & game, ProductionSite & ps) const
+{
 	//ps.molog("  Produce\n");
 	assert(ps.m_produced_items.empty());
 	ps.m_produced_items = m_items;
-	ps.m_workers[0]->update_task_buildingwork(&game);
+	ps.m_working_positions[0].worker->update_task_buildingwork(&game);
 }
 
 
-ActMine::ActMine
+ProductionProgram::ActMine::ActMine
 	(char * parameters, ProductionSite_Descr & descr,
 	 const std::string & production_program_name)
 {
@@ -645,7 +678,9 @@ ActMine::ActMine
 	}
 }
 
-void ActMine::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActMine::execute
+	(Game & game, ProductionSite & ps) const
+{
 	Map & map = game.map();
 
 	//ps.molog("  Mine '%s'", map.world().get_resource(m_resource)->get_name());
@@ -744,7 +779,7 @@ void ActMine::execute(Game & game, ProductionSite & ps) const {
 }
 
 
-ActCheck_Soldier::ActCheck_Soldier
+ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
 	(char * parameters, ProductionSite_Descr const &)
 {
 	try {
@@ -772,7 +807,9 @@ ActCheck_Soldier::ActCheck_Soldier
 	}
 }
 
-void ActCheck_Soldier::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActCheck_Soldier::execute
+	(Game & game, ProductionSite & ps) const
+{
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
 	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
@@ -804,7 +841,9 @@ void ActCheck_Soldier::execute(Game & game, ProductionSite & ps) const {
 }
 
 
-ActTrain::ActTrain(char * parameters, ProductionSite_Descr const &) {
+ProductionProgram::ActTrain::ActTrain
+	(char * parameters, ProductionSite_Descr const &)
+{
 	try {
 		if      (match_force_skip(parameters, "hp"))
 			attribute = atrHP;
@@ -842,7 +881,9 @@ ActTrain::ActTrain(char * parameters, ProductionSite_Descr const &) {
 	}
 }
 
-void ActTrain::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActTrain::execute
+	(Game & game, ProductionSite & ps) const
+{
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
 	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end =
@@ -893,7 +934,9 @@ void ActTrain::execute(Game & game, ProductionSite & ps) const {
 
 
 //TODO: check if fx exists, load fx, lots of other checks for aprameter correctness
-ActPlayFX::ActPlayFX (char * parameters, ProductionSite_Descr const &) {
+ProductionProgram::ActPlayFX::ActPlayFX
+	(char * parameters, ProductionSite_Descr const &)
+{
 	try {
 		bool reached_end;
 		name = match(parameters, reached_end);
@@ -912,33 +955,25 @@ ActPlayFX::ActPlayFX (char * parameters, ProductionSite_Descr const &) {
 	}
 }
 
-void ActPlayFX::execute(Game & game, ProductionSite & ps) const {
+void ProductionProgram::ActPlayFX::execute
+	(Game & game, ProductionSite & ps) const
+{
 	g_sound_handler.play_fx(name, ps.m_position, priority);
 	return ps.program_step(game);
 }
 
 
-ProductionProgram::ProductionProgram(const std::string & name) :
-	m_name(name)
-{}
-
-/*
-===============
-ProductionProgram::parse
-
-Parse a program. The building is parsed completely (hopefully).
-===============
-*/
-void ProductionProgram::parse
+ProductionProgram::ProductionProgram
 	(std::string    const & directory,
 	 Profile              & prof,
-	 std::string    const & name,
+	 std::string    const & _name,
 	 ProductionSite_Descr * const building,
 	 EncodeData     const * const encdata)
+	: m_name(_name)
 {
-	Section & program_s = prof.get_safe_section(name.c_str());
-	while (Section::Value * const v = program_s.get_next_val(0)) {
-		ProductionAction * action;
+	Section & program_s = prof.get_safe_section(_name.c_str());
+	while (Section::Value * const v = program_s.get_next_val()) {
+		ProductionProgram::Action * action;
 		if      (not strcmp(v->get_name(), "return"))
 			action = new ActReturn(v->get_string(),  *building);
 		else if (not strcmp(v->get_name(), "call"))
@@ -952,9 +987,9 @@ void ProductionProgram::parse
 		else if (not strcmp(v->get_name(), "produce"))
 			action = new ActProduce(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "worker"))
-			action = new ActWorker (v->get_string(), *building, name);
+			action = new ActWorker (v->get_string(), *building, _name);
 		else if (not strcmp(v->get_name(), "mine"))
-			action = new ActMine   (v->get_string(), *building, name);
+			action = new ActMine   (v->get_string(), *building, _name);
 		else if (not strcmp(v->get_name(), "check_soldier"))
 			action = new ActCheck_Soldier(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "train"))
@@ -965,6 +1000,8 @@ void ProductionProgram::parse
 			throw wexception("unknown command \"%s\"", v->get_name());
 		m_actions.push_back(action);
 	}
+	if (m_actions.empty())
+		throw wexception("no actions");
 }
 
 };

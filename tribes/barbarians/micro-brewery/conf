@@ -1,9 +1,11 @@
 type=production
 size=medium
-worker=brewer
 program=work
 output=beer
 enhancement=brewery
+
+[working positions]
+brewer=1
 
 [inputs]
 water=8

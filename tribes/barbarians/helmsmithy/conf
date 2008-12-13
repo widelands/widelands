@@ -1,6 +1,5 @@
 type=production
 size=big
-worker=helmsmith
 output=helm
 output=mask
 output=warhelmet
@@ -9,6 +8,9 @@ program=produce_helm
 program=produce_mask
 program=produce_warhelmet
 program=work
+
+[working positions]
+helmsmith=1
 
 [inputs]
 iron=8

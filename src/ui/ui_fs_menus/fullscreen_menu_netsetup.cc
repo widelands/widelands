@@ -92,7 +92,7 @@ loadlasthost
 	 1,
 	 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
 	 &Fullscreen_Menu_NetSetup::clicked_lasthost, this,
-	  _("Load previous host"), true, false,
+	 _("Load previous host"), true, false,
 	 m_fn, m_fs),
 
 // Edit boxes

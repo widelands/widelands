@@ -51,9 +51,9 @@ throw (_wexception)
 	prof.read("trigger", 0, fs);
 
 	try {
-		int32_t const packet_version =
-			prof.get_safe_section("global").get_safe_int("packet_version");
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		uint32_t const packet_version =
+			prof.get_safe_section("global").get_safe_positive("packet_version");
+		if (packet_version <= CURRENT_PACKET_VERSION) {
 			Manager<Trigger> & mtm = egbase->map().mtm();
 			while (Section * const s = prof.get_next_section(0)) {
 				char const * const name = s->get_name();
@@ -73,7 +73,7 @@ throw (_wexception)
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
 		throw wexception("Triggers: %s", e.what());
 	}

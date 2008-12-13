@@ -280,7 +280,7 @@ void World::parse_terrains()
 void World::parse_bobs(std::string & directory, Profile & root_conf) {
 	std::string::size_type const directory_size = directory.size();
 	Section & section = root_conf.get_safe_section("bobs");
-	while (Section::Value const * const v = section.get_next_val(0)) {
+	while (Section::Value const * const v = section.get_next_val()) {
 		char const * const _name     = v->get_name  ();
 		char const * const _descname = v->get_string();
 		directory += _name;
@@ -303,7 +303,7 @@ void World::parse_bobs(std::string & directory, Profile & root_conf) {
 			prof.check_used();
 		} catch (std::exception const & e) {
 			throw wexception
-				("%s=%s: %s", v->get_name(), v->get_string(), e.what());
+				("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 		}
 		directory.resize(directory_size);
 	}

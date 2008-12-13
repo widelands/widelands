@@ -90,11 +90,6 @@ struct Immovable_Descr : public Map_Object_Descr {
 	const ImmovableProgram* get_program(std::string programname) const;
 	const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
 
-	void parse_program
-		(std::string const & directory, Profile &, std::string const & name);
-	uint32_t parse_animation
-		(std::string const & directory, Profile &, std::string const & name);
-	void parse_playFX(std::string directory, Profile* prof, std::string name);
 	Immovable & create(Editor_Game_Base &, Coords) const;
 
 	const Tribe_Descr* get_owner_tribe() const throw () {return m_owner_tribe;}
@@ -129,7 +124,13 @@ public:
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 	std::string const & name() const throw ();
-	__attribute__ ((deprecated)) std::string get_name() const {return name();}
+	void start_animation(Editor_Game_Base const &, uint32_t anim);
+
+	void program_step(Game & game, uint32_t const delay = 1) {
+		if (delay)
+			m_program_step = schedule_act(&game, delay);
+		increment_program_pointer();
+	}
 
 	void init(Editor_Game_Base *g);
 	void cleanup(Editor_Game_Base *g);
@@ -142,17 +143,6 @@ public:
 
 	const Tribe_Descr * get_owner_tribe() const throw ()
 	{return descr().get_owner_tribe();}
-
-protected:
-	void set_program_animation(Editor_Game_Base* g);
-	void run_program(Game* g, bool killable);
-
-private:
-	bool run_animation(Game* g, bool killable, const ImmovableAction& action);
-	bool run_transform(Game* g, bool killable, const ImmovableAction& action);
-	bool run_remove(Game* g, bool killable, const ImmovableAction& action);
-	bool run_playFX(Game* g, bool killable, const ImmovableAction& action);
-	bool run_seed(Game *, bool killable, ImmovableAction const &);
 
 protected:
 	Coords                   m_position;
@@ -180,6 +170,9 @@ public:
 	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
 	static Map_Object::Loader * load
 		(Editor_Game_Base *, Map_Map_Object_Loader *, FileRead &);
+
+private:
+	void increment_program_pointer();
 };
 
 

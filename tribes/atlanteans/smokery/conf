@@ -1,11 +1,13 @@
 type=production
 size=medium
-worker=smoker
 output=smoked_meat
 output=smoked_fish
 program=smoke_meat
 program=smoke_fish
 program=work
+
+[working positions]
+smoker=1
 
 [inputs]
 fish=4

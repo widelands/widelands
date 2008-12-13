@@ -605,9 +605,10 @@ Building * Editor_Game_Base::warp_constructionsite
 	Tribe_Descr const & tribe = plr.tribe();
 	return
 		tribe.get_building_descr(idx)->create
-		(*this, plr, c,
-		 true, false,
-		 old_id ? tribe.get_building_descr(old_id) : 0);
+			(*this, plr, c,
+			 true,
+			 0, 0, 0,
+			 old_id ? tribe.get_building_descr(old_id) : 0);
 }
 
 

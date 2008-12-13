@@ -3,7 +3,6 @@ soundfx=../../../sound/smiths/sharpening
 type=production
 size=medium
 buildable=no
-worker=blacksmith
 output=axe
 output=sharpaxe
 output=broadaxe
@@ -13,6 +12,9 @@ program=produce_axe
 program=produce_sharpaxe
 program=produce_broadaxe
 program=work
+
+[working positions]
+blacksmith=1
 
 [inputs]
 iron=8

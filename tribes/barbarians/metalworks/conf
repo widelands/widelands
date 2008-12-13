@@ -1,7 +1,6 @@
 soundfx=../../../sound/smiths/toolsmith
 type=production
 size=medium
-worker=blacksmith
 output=bakingtray
 output=fire_tongs
 output=fishing_rod
@@ -22,6 +21,9 @@ program=produce_scythe
 program=produce_shovel
 program=produce_hunting_spear
 program=work
+
+[working positions]
+blacksmith=1
 
 [inputs]
 iron=8

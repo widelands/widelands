@@ -1,7 +1,9 @@
 type=production
 size=small
-worker=hunter
 program=work
+
+[working positions]
+hunter=1
 
 [work]
 sleep=35000

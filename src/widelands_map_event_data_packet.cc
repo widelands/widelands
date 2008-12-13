@@ -50,9 +50,9 @@ throw (_wexception)
 	prof.read("event", 0, fs);
 
 	try {
-		int32_t const packet_version =
-			prof.get_safe_section("global").get_safe_int("packet_version");
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		uint32_t const packet_version =
+			prof.get_safe_section("global").get_safe_positive("packet_version");
+		if (packet_version <= CURRENT_PACKET_VERSION) {
 			Manager<Event> & mem = egbase->map().mem();
 			while (Section * const s = prof.get_next_section(0)) {
 				char const * const name = s->get_name();

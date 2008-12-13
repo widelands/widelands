@@ -3,8 +3,9 @@ program=program
 picture=s2tree7_00.png
 
 [program]
-0=animation small 42000
-1=transform tree7_m
+animate=small 55000
+remove=34
+transform=tree7_m
 
 [small]
 pics=s2tree7_??.png

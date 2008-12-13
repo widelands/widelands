@@ -3,8 +3,9 @@ program=program
 picture=s3tree2_00.png
 
 [program]
-0=animation medium 50000
-1=transform tree2
+animate=medium 130000
+remove=40
+transform=tree2
 
 [medium]
 pics=s3tree2_??.png

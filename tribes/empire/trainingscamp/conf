@@ -1,6 +1,5 @@
 type=training
 size=big
-worker=trainer
 max_soldiers=12
 train=attack,hp
 program=Sleep
@@ -12,6 +11,9 @@ program=upgrade_hp_0
 program=upgrade_hp_1
 program=upgrade_hp_2
 program=upgrade_hp_3
+
+[working positions]
+trainer=1
 
 [Sleep]
 sleep=5000

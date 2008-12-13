@@ -2,8 +2,8 @@ program=program
 picture=fallentree_00.png
 
 [program]
-0=animation dead 30000
-1=remove
+animate=dead 30000
+remove=
 
 [dead]
 pics=fallentree_??.png

@@ -26,7 +26,7 @@
 #include "ui_multilinetextarea.h"
 
 
-class ChatProvider;
+struct ChatProvider;
 
 /**
  * Provides a panel that contains chat message scrollbar and a chat message

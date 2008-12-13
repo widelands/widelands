@@ -1,5 +1,14 @@
+#  Rowan
+#
+#  Characteristics suitable to model:
+#    * Spreading: far
+#    * Seeding:   medium
+#    * Growth:    medium
+#    * Longevity: medium
+
 size=medium
 attrib=tree
+program=program
 program=fall
 picture=idle_0.png
 
@@ -7,5 +16,10 @@ picture=idle_0.png
 pics=idle_?.png
 hotspot=24 60
 
+[program]
+animate=idle 33000
+transform=deadtree4 48
+seed=tree8_t 200
+
 [fall]
-0=remove
+remove=

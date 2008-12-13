@@ -2,7 +2,6 @@ soundfx=../../../../smiths/smith
 soundfx=../../../../smiths/sharpening
 type=production
 size=big
-worker=weaponsmith
 output=wood_lance
 output=lance
 output=advanced_lance
@@ -15,6 +14,9 @@ program=produce_advanced_lance
 program=produce_heavy_lance
 program=produce_war_lance
 program=work
+
+[working positions]
+weaponsmith=1
 
 [inputs]
 iron=8

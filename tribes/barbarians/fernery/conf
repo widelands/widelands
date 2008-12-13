@@ -1,6 +1,5 @@
 type=production
 size=medium
-worker=ferner
 stopable=yes
 output=flax
 output=thatchreed
@@ -10,6 +9,9 @@ program=plantreed
 program=harvestflax
 program=harvestreed
 program=work
+
+[working positions]
+ferner=1
 
 [work]
 call=plantflax

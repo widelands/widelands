@@ -1,11 +1,13 @@
 type=production
 size=big
-worker=blackroot_farmer
 stopable=yes
 output=blackroot
 program=plant
 program=harvest
 program=work
+
+[working positions]
+blackroot_farmer=1
 
 [work]
 call=plant

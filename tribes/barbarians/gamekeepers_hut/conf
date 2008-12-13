@@ -1,7 +1,9 @@
 type=production
 size=small
-worker=gamekeeper
 program=work
+
+[working positions]
+gamekeeper=1
 
 [work]
 sleep=52500

@@ -1,8 +1,10 @@
 type=production
 size=big
-worker=spiderbreeder
 program=work
 output=spideryarn
+
+[working positions]
+spiderbreeder=1
 
 [inputs]
 corn=7
