@@ -35,7 +35,7 @@ struct Immovable_Descr;
 };
 
 extern class Profile g_options;
-class FileSystem;
+struct FileSystem;
 
 /**
  * Represents one section inside the .ini-style file, basically as a list of
@@ -103,7 +103,7 @@ public:
 	Section & operator=(const Section &);
 
 	Value *get_val(const char *name);
-	Value *get_next_val(const char *name);
+	Value *get_next_val(char const * name = 0);
 	uint32_t get_num_values() const {return m_values.size();}
 
 	const char *get_name() const;
@@ -131,6 +131,9 @@ public:
 	Point                    get_Point
 		(char             const * name,
 		 Point                    def = Point (0, 0));
+	Widelands::Coords        get_Coords
+		(char             const * name, Widelands::Extent,
+		 Widelands::Coords        def);
 	Widelands::Player_Number get_Player_Number
 		(char             const * name,
 		 Widelands::Player_Number nr_players,

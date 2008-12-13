@@ -507,7 +507,7 @@ uint32_t Section::get_positive(char const * const name, uint32_t const def)
 {
 	if (Value * const v = get_val(name))
 		try {
-			return v->get_natural();
+			return v->get_positive();
 		} catch (std::exception &e) {
 			m_profile->error("%s", e.what());
 			return def;
@@ -561,6 +561,15 @@ const char *Section::get_string(const char *name, const char *def)
 
 Point Section::get_Point(const char * const name, const Point def)
 {const Value * const v = get_val(name); return v ? v->get_Point() : def;}
+
+
+Widelands::Coords Section::get_Coords
+	(char const * const name, Widelands::Extent const extent,
+	 Widelands::Coords const def)
+{
+	Value const * const v = get_val(name);
+	return v ? v->get_Coords(extent) : def;
+}
 
 
 Widelands::Player_Number Section::get_Player_Number
