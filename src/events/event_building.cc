@@ -130,7 +130,10 @@ void Event_Building::Read(Section & s, Editor_Game_Base & egbase) {
 							uint8_t const nr_ware_types = inputs.size();
 							m_ware_counts = new uint32_t[nr_ware_types];
 							if (packet_version == 1)
-								bzero(m_ware_counts, nr_ware_types * sizeof(uint32_t));
+								memset
+									(m_ware_counts,
+									 '\0',
+									 nr_ware_types * sizeof(uint32_t));
 							else
 								for
 									(struct {
