@@ -142,12 +142,6 @@ version=1
 wait_time=2
 last_start_time=0
 
-[Game Started]
-type=time
-version=1
-wait_time=0
-last_start_time=0
-
 [Mission Mines]
 type=null
 
