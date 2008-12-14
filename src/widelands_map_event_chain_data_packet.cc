@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 3
 
 
 void Map_EventChain_Data_Packet::Read
@@ -121,7 +121,8 @@ throw (_wexception)
 							 	(event_chain, toklist));
 					}
 
-					{ //  Events
+					//  Events
+					if (packet_version <= 2) {
 						char key[] = "event_00";
 						while (char const * const evname = s->get_string(key)) {
 							if (Event * const event = mem[evname])
@@ -142,7 +143,16 @@ throw (_wexception)
 							} else
 								++key[7];
 						}
-					}
+					} else
+						while
+							(Section::Value const * const v =
+							 	s->get_next_val("event"))
+							if (Event * const event = mem[v->get_string()])
+								event_chain.add_event(event);
+							else
+								throw wexception
+									("event=%s\": event \"%s\" does not exist",
+									 v->get_string(), v->get_string());
 
 					event_chain.m_curevent = s->get_safe_int("current_event");
 
@@ -166,6 +176,7 @@ throw (_wexception)
 			}
 		else
 			throw wexception("unknown/unhandled version %u", packet_version);
+		prof.check_used();
 	} catch (std::exception const & e) {
 		throw wexception("EventChains: %s", e.what());
 	}
@@ -213,14 +224,8 @@ throw (_wexception)
 
 		{ //  Events
 			EventChain::event_vector const & events = e.m_events;
-			assert(events.size() < 99); //  because we write 2 decimal digits
-			char key[] = "event_00";
-			container_iterate_const(EventChain::event_vector, events, j) {
-				s.set_string(key, (*j.current)->name());
-
-				//  Increment the number in the key string.
-				if (key[7] == '9') {key[7] = '0'; ++key[6];} else ++key[7];
-			}
+			container_iterate_const(EventChain::event_vector, events, j)
+				s.set_string("event", (*j.current)->name(), true);
 		}
 
 		s.set_int("current_event", e.m_curevent);
