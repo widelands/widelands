@@ -17,7 +17,7 @@ wool=8
 work=_Work
 
 [work]
-# no need to check if cloth is needed because wool is only used here
+return=skipped unless economy needs cloth
 sleep=40000
 consume=wool
 produce=cloth
