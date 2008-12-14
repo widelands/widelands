@@ -46,7 +46,9 @@ void Event_Building::Read(Section & s, Editor_Game_Base & egbase) {
 					("point", map.extent(), map.get_starting_pos(m_player));
 			egbase.get_iabase()->reference_player_tribe(m_player, this);
 			m_building = s.get_safe_Building_Index("building", egbase, m_player);
-			Tribe_Descr    const & tribe = egbase.player(m_player).tribe();
+			Tribe_Descr const & tribe =
+				egbase.manually_load_tribe
+					(map.get_scenario_player_tribe(m_player));
 			Building_Descr const & descr = *tribe.get_building_descr(m_building);
 			if (dynamic_cast<Warehouse_Descr const *>(&descr)) {
 				{ //  wares
