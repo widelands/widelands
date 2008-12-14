@@ -1,18 +1,20 @@
 type=production
 size=small
 output=stone
-program=work
-
-[working positions]
-stonecutter=1
-
-[work]
-sleep=25000
-worker=cut_stone
 
 [buildcost]
 trunk=2
 planks=1
+
+[working positions]
+stonecutter=1
+
+[programs]
+work=_Work
+
+[work]
+sleep=25000
+worker=cut_stone
 
 [idle]
 pics=quarry_i_??.png  # ???

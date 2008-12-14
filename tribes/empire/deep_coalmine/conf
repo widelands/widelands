@@ -2,9 +2,12 @@ type=production
 size=mine
 buildable=no
 enhanced_building=yes
-program=work
 output=coal
 stopable=yes
+
+[buildcost]
+trunk=4
+wood=2
 
 [working positions]
 master-miner=1
@@ -13,6 +16,9 @@ miner=1
 [inputs]
 meal=6
 beer=6
+
+[programs]
+work=_Work
 
 [work]
 sleep=42000
@@ -23,10 +29,6 @@ produce=coal:2
 animate=working 18000
 mine=coal 2 100 5
 produce=coal:3
-
-[buildcost]
-trunk=4
-wood=2
 
 [idle]
 pics=deep_coalmine_i_??.png

@@ -2,9 +2,12 @@ type=production
 size=medium
 output=iron
 output=gold
-program=smelt_iron
-program=smelt_gold
-program=work
+
+[buildcost]
+trunk=1
+stone=4
+planks=1
+spidercloth=1
 
 [working positions]
 smelter=1
@@ -14,10 +17,10 @@ ironore=8
 goldore=8
 coal=8
 
-[work]
-call=smelt_iron
-call=smelt_gold
-return=skipped
+[programs]
+smelt_iron=_Smelt iron
+smelt_gold=_Smelt gold
+work=_Work
 
 [smelt_iron]
 return=skipped unless economy needs iron
@@ -33,11 +36,10 @@ sleep=25000
 animate=working 35000
 produce=gold
 
-[buildcost]
-trunk=1
-stone=4
-planks=1
-spidercloth=1
+[work]
+call=smelt_iron
+call=smelt_gold
+return=skipped
 
 [idle]
 pics=smelting_works_i_??.png  # ???

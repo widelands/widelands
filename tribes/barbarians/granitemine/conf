@@ -1,8 +1,11 @@
 type=production
 size=mine
-program=work
 output=raw_stone
 stopable=yes
+
+[buildcost]
+trunk=4
+raw_stone=2
 
 [working positions]
 miner=1
@@ -10,16 +13,15 @@ miner=1
 [inputs]
 ration=8
 
+[programs]
+work=_Work
+
 [work]
 consume=ration
 sleep=20000
 animate=working 20000
 mine=granit 2 100 5
 produce=raw_stone:2
-
-[buildcost]
-trunk=4
-raw_stone=2
 
 [idle]
 pics=i_??.png

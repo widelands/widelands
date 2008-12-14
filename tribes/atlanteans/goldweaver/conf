@@ -1,8 +1,12 @@
 type=production
 size=small
 stopable=yes
-program=work
 output=goldyarn
+
+[buildcost]
+trunk=2
+stone=1
+planks=1
 
 [working positions]
 carrier=1
@@ -10,17 +14,15 @@ carrier=1
 [inputs]
 gold=5
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs goldyarn
 consume=gold
 sleep=15000
 animate=working 25000
 produce=goldyarn
-
-[buildcost]
-trunk=2
-stone=1
-planks=1
 
 [idle]
 pics=goldweaver_i_??.png  # ???

@@ -8,12 +8,12 @@ output=steel_trident
 output=double_trident
 output=heavy_double_trident
 
-program=produce_light_trident
-program=produce_long_trident
-program=produce_steel_trident
-program=produce_double_trident
-program=produce_heavy_double_trident
-program=work
+[buildcost]
+trunk=2
+stone=2
+planks=2
+spidercloth=1
+quartz=1
 
 [working positions]
 weaponsmith=1
@@ -24,13 +24,13 @@ gold=8
 coal=8
 planks=8
 
-[work]
-call=produce_light_trident
-call=produce_long_trident
-call=produce_steel_trident
-call=produce_double_trident
-call=produce_heavy_double_trident
-return=skipped
+[programs]
+produce_light_trident=_Produce light trident
+produce_long_trident=_Produce long trident
+produce_steel_trident=_Produce steel trident
+produce_double_trident=_Produce double trident
+produce_heavy_double_trident=_Produce heavy double trident
+work=_Work
 
 [produce_light_trident]
 return=skipped unless economy needs light_trident
@@ -41,7 +41,6 @@ animate=working 30000
 playFX=../../../sound/smiths/sharpening 192
 produce=light_trident
 
-
 [produce_long_trident]
 return=skipped unless economy needs long_trident
 consume=iron coal planks
@@ -50,7 +49,6 @@ playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 192
 produce=long_trident
-
 
 [produce_steel_trident]
 return=skipped unless economy needs steel_trident
@@ -79,13 +77,13 @@ animate=working 45000
 playFX=../../../sound/smiths/sharpening 192
 produce=heavy_double_trident
 
-
-[buildcost]
-trunk=2
-stone=2
-planks=2
-spidercloth=1
-quartz=1
+[work]
+call=produce_light_trident
+call=produce_long_trident
+call=produce_steel_trident
+call=produce_double_trident
+call=produce_heavy_double_trident
+return=skipped
 
 [idle]
 pics=weaponsmith_i_??.png  # ???

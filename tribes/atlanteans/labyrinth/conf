@@ -2,18 +2,25 @@ type=training
 size=big
 max_soldiers=8
 train=defense,hp,evade
-program=Sleep
-program=upgrade_defense_0 # This is needed to run the scripts
-program=upgrade_defense_1
-program=upgrade_hp_0
-program=upgrade_evade_0
-program=upgrade_evade_1
+
+[buildcost]
+trunk=3
+stone=4
+planks=5
+spidercloth=5
+diamond=2
+quartz=2
 
 [working positions]
 carrier=1
 
-[Sleep]
-sleep=5000
+[inputs]
+bread=10
+smoked_fish=6
+smoked_meat=6
+steel_shield=4
+advanced_shield=4
+golden_tabard=5
 
 [defense]
 min_level=0
@@ -26,6 +33,17 @@ max_level=0
 [evade]
 min_level=0
 max_level=1
+
+[programs]
+sleep=_Sleep
+upgrade_defense_0=_Upgrade defense 0 # This is needed to run the scripts
+upgrade_defense_1=_Upgrade defense 1
+upgrade_hp_0=_Upgrade hitpoints 0
+upgrade_evade_0=_Upgrade evade 0
+upgrade_evade_1=_Upgrade evade 1
+
+[sleep]
+sleep=5000
 
 [upgrade_defense_0]
 check_soldier=defense 0 # Fails when aren't any soldier of level 0 defense
@@ -62,23 +80,6 @@ check_soldier=evade 1 # Because the soldier can be expulsed by the player
 consume=bread
 consume=smoked_fish,smoked_meat:2
 train=evade 1 2
-
-[inputs]
-bread=10
-smoked_fish=6
-smoked_meat=6
-steel_shield=4
-advanced_shield=4
-golden_tabard=5
-
-
-[buildcost]
-trunk=3
-stone=4
-planks=5
-spidercloth=5
-diamond=2
-quartz=2
 
 [idle]
 pics=labyrinth_i_??.png  # ???

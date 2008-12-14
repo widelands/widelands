@@ -1,8 +1,12 @@
 type=production
 size=medium
-program=work
 output=bread
 stopable=yes
+
+[buildcost]
+trunk=2
+planks=2
+stone=3
 
 [working positions]
 baker=1
@@ -12,17 +16,15 @@ blackrootflour=4
 cornflour=4
 water=8
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs bread
 consume=water:2 blackrootflour cornflour
 sleep=35000
 animate=working 30000
 produce=bread:2
-
-[buildcost]
-trunk=2
-planks=2
-stone=3
 
 [idle]
 pics=bakery_i_??.png  # ???

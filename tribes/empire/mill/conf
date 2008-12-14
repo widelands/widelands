@@ -1,15 +1,22 @@
 type=production
 size=medium
-program=work
 output=flour
 stopable=yes
 soundfx=../../../sound/mill/mill_turning
+
+[buildcost]
+trunk=3
+stone=3
+marble=1
 
 [working positions]
 miller=1
 
 [inputs]
 wheat=6
+
+[programs]
+work=_Work
 
 [work]
 return=skipped unless economy needs flour
@@ -18,11 +25,6 @@ sleep=5000
 playFX=../../../sound/mill/mill_turning 240
 animate=working 10000
 produce=flour
-
-[buildcost]
-trunk=3
-stone=3
-marble=1
 
 [idle]
 pics=mill_i_??.png  # ???

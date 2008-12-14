@@ -5,20 +5,14 @@ output=armour
 output=chain_armour
 output=plate_armour
 
-program=produce_helm
-program=produce_armour
-program=produce_chain_armour
-program=produce_plate_armour
-program=work
-
-[working positions]
-armoursmith=1
-
 [buildcost]
 trunk=2
 stone=2
 marble=2
 marblecolumn=3
+
+[working positions]
+armoursmith=1
 
 [inputs]
 iron=8
@@ -26,13 +20,12 @@ gold=8
 coal=8
 cloth=8
 
-[work]
-call=produce_helm
-call=produce_armour
-call=produce_chain_armour
-call=produce_plate_armour
-sleep=20000
-return=skipped
+[programs]
+produce_helm=_Produce helm
+produce_armour=_Produce armour
+produce_chain_armour=_Produce chain armour
+produce_plate_armour=_Produce plate armour
+work=_Work
 
 [produce_helm]
 return=skipped unless economy needs helm
@@ -61,6 +54,14 @@ consume=iron:2 coal:2 cloth gold
 sleep=32000
 animate=working 45000
 produce=plate_armour
+
+[work]
+call=produce_helm
+call=produce_armour
+call=produce_chain_armour
+call=produce_plate_armour
+sleep=20000
+return=skipped
 
 [idle]
 pics=i_??.png  # ???

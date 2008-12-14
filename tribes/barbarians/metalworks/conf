@@ -11,16 +11,13 @@ output=scythe
 output=shovel
 output=hunting_spear
 enhancement=axefactory
-program=produce_bakingtray
-program=produce_fire_tongs
-program=produce_fishing_rod
-program=produce_hammer
-program=produce_kitchen_tools
-program=produce_pick
-program=produce_scythe
-program=produce_shovel
-program=produce_hunting_spear
-program=work
+
+[buildcost]
+trunk=1
+blackwood=1
+raw_stone=2
+grout=1
+thatchreed=1
 
 [working positions]
 blacksmith=1
@@ -29,17 +26,17 @@ blacksmith=1
 iron=8
 trunk=8
 
-[work]
-call=produce_bakingtray
-call=produce_fire_tongs
-call=produce_fishing_rod
-call=produce_hammer
-call=produce_kitchen_tools
-call=produce_pick
-call=produce_scythe
-call=produce_shovel
-call=produce_hunting_spear
-return=skipped
+[programs]
+produce_bakingtray=_Produce bakingtray
+produce_fire_tongs=_Produce fire tongs
+produce_fishing_rod=_Produce fishing rod
+produce_hammer=_Produce hammer
+produce_kitchen_tools=_Produce kitchen tools
+produce_pick=_Produce pick
+produce_scythe=_Produce scythe
+produce_shovel=_Produce showel
+produce_hunting_spear=_Produce hunting spear
+work=_Work
 
 [produce_bakingtray]
 return=skipped unless economy needs bakingtray
@@ -113,12 +110,17 @@ playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=hunting_spear
 
-[buildcost]
-trunk=1
-blackwood=1
-raw_stone=2
-grout=1
-thatchreed=1
+[work]
+call=produce_bakingtray
+call=produce_fire_tongs
+call=produce_fishing_rod
+call=produce_hammer
+call=produce_kitchen_tools
+call=produce_pick
+call=produce_scythe
+call=produce_shovel
+call=produce_hunting_spear
+return=skipped
 
 [idle]
 pics=metalworks_i_??.png

@@ -1,7 +1,12 @@
 type=production
 size=medium
-program=work
 output=wine
+
+[buildcost]
+wood=1
+stone=1
+marble=2
+marblecolumn=1
 
 [working positions] #  like brewery
 brewer=1
@@ -9,19 +14,15 @@ brewer=1
 [inputs]
 grape=8
 
+[programs]
+work=_Work
+
 [work]
 # grapes are only needed for wine, so no need to check if wine is needed
 sleep=30000
 consume=grape:2
 animate=working 30000
 produce=wine
-
-
-[buildcost]
-wood=1
-stone=1
-marble=2
-marblecolumn=1
 
 [idle]
 pics=vintagery_i_??.png  # ???

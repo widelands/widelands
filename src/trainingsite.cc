@@ -174,7 +174,7 @@ std::string TrainingSite::get_statistics_string()
 	state = get_current_program(); //may also be NULL if there is no current program
 
 	if (state) {
-		return state->program->name();
+		return state->program->descname();
 	} else if (m_result == Completed)
 		return _("Resting");
 	else
@@ -474,7 +474,7 @@ void TrainingSite::find_and_start_next_program(Game & game)
 		}
 
 		if (maxprio == 0)
-			return program_start(game, "Sleep");
+			return program_start(game, "sleep");
 
 		uint32_t multiplier = 1 + (10-maxcredit) / maxprio;
 
@@ -505,7 +505,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	}
 
 	if (minlevel > maxlevel)
-		return program_start(game, "Sleep");
+		return program_start(game, "sleep");
 
 	int32_t level;
 

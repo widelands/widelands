@@ -8,12 +8,11 @@ output=advanced_lance
 output=heavy_lance
 output=war_lance
 
-program=produce_wood_lance
-program=produce_lance
-program=produce_advanced_lance
-program=produce_heavy_lance
-program=produce_war_lance
-program=work
+[buildcost]
+trunk=2
+stone=2
+marble=2
+marblecolumn=3
 
 [working positions]
 weaponsmith=1
@@ -24,13 +23,13 @@ gold=8
 coal=8
 wood=8
 
-[work]
-call=produce_wood_lance
-call=produce_lance
-call=produce_advanced_lance
-call=produce_heavy_lance
-call=produce_war_lance
-return=skipped
+[programs]
+produce_wood_lance=_Produce wood lance
+produce_lance=_Produce lance
+produce_advanced_lance=_Produce advanced lance
+produce_heavy_lance=_Produce heavy lance
+produce_war_lance=Produce war lance
+work=_Work
 
 [produce_wood_lance]
 return=skipped unless economy needs wood_lance
@@ -77,12 +76,13 @@ animate=working 45000
 playFX=../../../smiths/sharpening 120
 produce=war_lance
 
-
-[buildcost]
-trunk=2
-stone=2
-marble=2
-marblecolumn=3
+[work]
+call=produce_wood_lance
+call=produce_lance
+call=produce_advanced_lance
+call=produce_heavy_lance
+call=produce_war_lance
+return=skipped
 
 [idle]
 pics=weaponsmith_i_??.png  # ???

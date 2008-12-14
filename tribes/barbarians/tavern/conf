@@ -1,8 +1,13 @@
 type=production
 size=medium
-program=work
 output=ration
 enhancement=inn
+
+[buildcost]
+trunk=3
+blackwood=2
+raw_stone=1
+thatchreed=1
 
 [working positions]
 innkeeper=1
@@ -12,18 +17,15 @@ fish=4
 pittabread=4
 meat=4
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs ration
 consume=fish,pittabread,meat
 sleep=14000
 animate=working 19000
 produce=ration
-
-[buildcost]
-trunk=3
-blackwood=2
-raw_stone=1
-thatchreed=1
 
 [idle]
 pics=tavern_i_??.png  # ???

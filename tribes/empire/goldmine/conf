@@ -1,9 +1,12 @@
 type=production
 size=mine
-program=work
 output=goldstone
 stopable=yes
 enhancement=deep_goldmine
+
+[buildcost]
+trunk=4
+wood=2
 
 [working positions]
 miner=1
@@ -11,6 +14,9 @@ miner=1
 [inputs]
 ration=6
 wine=6
+
+[programs]
+work=_Work
 
 [work]
 sleep=45000
@@ -21,10 +27,6 @@ produce=goldstone
 animate=working 20000
 mine=gold 2 50 5
 produce=goldstone
-
-[buildcost]
-trunk=4
-wood=2
 
 [idle]
 pics=goldmine_i_??.png

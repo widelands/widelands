@@ -1,14 +1,20 @@
 type=production
 size=medium
-program=work
 output=planks
 soundfx=../../../sound/sawmill/sawmill
+
+[buildcost]
+trunk=2
+stone=3
 
 [working positions]
 sawyer=1
 
 [inputs]
 trunk=8
+
+[programs]
+work=_Work
 
 [work]
 return=skipped unless economy needs planks
@@ -17,10 +23,6 @@ sleep=16500 # much faster than barbarians hardener
 playFX=../../../sound/sawmill/sawmill 192
 animate=working 20000 # much more faster than barbarians hardener
 produce=planks
-
-[buildcost]
-trunk=2
-stone=3
 
 [idle]
 pics=sawmill_i_??.png  # ???

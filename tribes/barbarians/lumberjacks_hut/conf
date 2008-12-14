@@ -1,17 +1,19 @@
 type=production
 size=small
 output=trunk
-program=work
+
+[buildcost]
+trunk=3
 
 [working positions]
 lumberjack=1
 
+[programs]
+work=_Work
+
 [work]
 sleep=25000 # sleeps shorter than any other tribes
 worker=chop
-
-[buildcost]
-trunk=3
 
 [idle]
 pics=lumberjack_i_??.png

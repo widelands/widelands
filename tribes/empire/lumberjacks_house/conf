@@ -1,19 +1,20 @@
 type=production
 size=small
 output=trunk
-program=work
-
-[working positions]
-lumberjack=1
-
-[work]
-sleep=30000 # Barbarian lumberjack sleeps 25000
-worker=chop
-
 
 [buildcost]
 trunk=2
 wood=1
+
+[working positions]
+lumberjack=1
+
+[programs]
+work=_Work
+
+[work]
+sleep=30000 # Barbarian lumberjack sleeps 25000
+worker=chop
 
 [idle]
 pics=lumberjack_i_??.png

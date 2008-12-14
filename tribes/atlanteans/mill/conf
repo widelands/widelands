@@ -1,28 +1,25 @@
 type=production
 size=medium
-program=produce_cornflour
-program=produce_blackrootflour
-program=work
 output=cornflour
 output=blackrootflour
 stopable=yes
-
-[working positions]
-miller=1
 
 [buildcost]
 trunk=3
 stone=3
 planks=2
 
+[working positions]
+miller=1
+
 [inputs]
 corn=6
 blackroot=6
 
-[work]
-call=produce_cornflour
-call=produce_blackrootflour
-return=skipped
+[programs]
+produce_cornflour=_Produce cornflour
+produce_blackrootflour=_Produce blackrootflour
+work=_Work
 
 [produce_cornflour]
 return=skipped unless economy needs cornflour
@@ -37,6 +34,11 @@ consume=blackroot
 sleep=3500
 animate=working 15000
 produce=blackrootflour
+
+[work]
+call=produce_cornflour
+call=produce_blackrootflour
+return=skipped
 
 [idle]
 pics=mill_i_??.png

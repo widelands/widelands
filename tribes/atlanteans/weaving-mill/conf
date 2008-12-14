@@ -1,12 +1,13 @@
 type=production
 size=big
-program=produce_spidercloth
-program=produce_tabard
-program=produce_golden_tabard
-program=work
 output=spidercloth
 output=tabard
 output=golden_tabard
+
+[buildcost]
+trunk=3
+stone=4
+planks=2
 
 [working positions]
 weaver=1
@@ -15,13 +16,11 @@ weaver=1
 spideryarn=8
 goldyarn=4
 
-[work]
-call=produce_spidercloth
-call=produce_tabard
-call=produce_spidercloth
-call=produce_golden_tabard
-call=produce_spidercloth
-return=skipped
+[programs]
+produce_spidercloth=_Produce spidercloth
+produce_tabard=_Produce tabard
+produce_golden_tabard=_Produce golden tabard
+work=_Work
 
 [produce_spidercloth]
 return=skipped unless economy needs spidercloth
@@ -41,10 +40,13 @@ consume=spideryarn goldyarn
 sleep=40000
 produce=golden_tabard
 
-[buildcost]
-trunk=3
-stone=4
-planks=2
+[work]
+call=produce_spidercloth
+call=produce_tabard
+call=produce_spidercloth
+call=produce_golden_tabard
+call=produce_spidercloth
+return=skipped
 
 [idle]
 pics=weaving_mill_i_??.png  # ???

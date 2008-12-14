@@ -8,10 +8,13 @@ output=sharpaxe
 output=broadaxe
 enhanced_building=yes
 enhancement=warmill
-program=produce_axe
-program=produce_sharpaxe
-program=produce_broadaxe
-program=work
+
+[buildcost]
+trunk=1
+blackwood=1
+raw_stone=2
+grout=1
+thatchreed=1
 
 [working positions]
 blacksmith=1
@@ -20,11 +23,11 @@ blacksmith=1
 iron=8
 coal=8
 
-[work]
-call=produce_axe
-call=produce_sharpaxe
-call=produce_broadaxe
-return=skipped
+[programs]
+produce_axe=_Produce axe
+produce_sharpaxe=_Produce sharpaxe
+produce_broadaxe=_Produce broadaxe
+work=_Work
 
 [produce_axe]
 return=skipped unless economy needs axe
@@ -53,12 +56,11 @@ animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
 produce=broadaxe
 
-[buildcost]
-trunk=1
-blackwood=1
-raw_stone=2
-grout=1
-thatchreed=1
+[work]
+call=produce_axe
+call=produce_sharpaxe
+call=produce_broadaxe
+return=skipped
 
 [idle]
 pics=axefactory_i_??.png  # ???

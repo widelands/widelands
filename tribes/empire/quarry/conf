@@ -2,34 +2,36 @@ type=production
 size=small
 output=stone
 output=marble
-program=stone
-program=marble
-program=work
-
-[working positions]
-stonemason=1
-
-[work]
-call=stone
-call=stone
-call=stone
-call=marble # 2 of 7 times it finds marble
-call=stone
-call=stone
-call=marble # 2 of 7 times it finds marble
-return=skipped
-
-[stone]
-sleep=25000
-worker=cut_stone
-
-[marble]
-sleep=25000
-worker=cut_marble
 
 [buildcost]
 trunk=2
 wood=1
+
+[working positions]
+stonemason=1
+
+[programs]
+mine_stone=_Mine stone
+mine_marble=_Mine marble
+work=_Work
+
+[mine_stone]
+sleep=25000
+worker=cut_stone
+
+[mine_marble]
+sleep=25000
+worker=cut_marble
+
+[work]
+call=mine_stone
+call=mine_stone
+call=mine_stone
+call=mine_marble # 2 of 7 times it finds marble
+call=mine_stone
+call=mine_stone
+call=mine_marble # 2 of 7 times it finds marble
+return=skipped
 
 [idle]
 pics=quarry_i_??.png  # ???

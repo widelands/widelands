@@ -3,31 +3,33 @@ type=production
 size=big
 output=wheat
 stopable=yes
-program=plant
-program=harvest
-program=work
-
-[working positions]
-farmer=1
-
-[work]
-call=plant
-call=harvest
-playFX=../../../sound/farm/farm_animal 192
-return=skipped
-
-[plant]
-sleep=20000
-worker=plant
-
-[harvest]
-sleep=5000
-worker=harvest
 
 [buildcost]
 trunk=4
 blackwood=1
 raw_stone=3
+
+[working positions]
+farmer=1
+
+[programs]
+plant_weath=_Plant weath
+harvest_weath=_Harvest weath
+work=_Work
+
+[plant_weath]
+sleep=20000
+worker=plant
+
+[harvest_weath]
+sleep=5000
+worker=harvest
+
+[work]
+call=plant_weath
+call=harvest_weath
+playFX=../../../sound/farm/farm_animal 192
+return=skipped
 
 [idle]
 pics=farm_i_??.png  # ???

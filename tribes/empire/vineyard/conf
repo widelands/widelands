@@ -2,31 +2,33 @@ type=production
 size=medium
 stopable=yes
 output=grape
-program=plantvine
-program=harvestvine
-program=work
-
-[working positions]
-vinefarmer=1
-
-[work]
-call=plantvine
-call=harvestvine
-return=skipped
-
-[plantvine]
-sleep=20000
-worker=plantvine
-
-[harvestvine]
-sleep=5000
-worker=harvestvine
 
 [buildcost]
 wood=2
 stone=1
 marble=2
 marblecolumn=2
+
+[working positions]
+vinefarmer=1
+
+[programs]
+plant_vine=_Plant vine
+harvest_vine=_Harvest wine
+work=_Work
+
+[plant_vine]
+sleep=20000
+worker=plantvine
+
+[harvest_vine]
+sleep=5000
+worker=harvestvine
+
+[work]
+call=plant_vine
+call=harvest_vine
+return=skipped
 
 [idle]
 pics=vineyard_i_??.png  # ???

@@ -966,10 +966,11 @@ void ProductionProgram::ActPlayFX::execute
 ProductionProgram::ProductionProgram
 	(std::string    const & directory,
 	 Profile              & prof,
-	 std::string    const & _name,
+	 std::string    const &       _name,
+	 char           const * const _descname,
 	 ProductionSite_Descr * const building,
 	 EncodeData     const * const encdata)
-	: m_name(_name)
+	: m_name(_name), m_descname(_descname)
 {
 	Section & program_s = prof.get_safe_section(_name.c_str());
 	while (Section::Value * const v = program_s.get_next_val()) {

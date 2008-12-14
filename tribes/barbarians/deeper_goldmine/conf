@@ -2,9 +2,12 @@ type=production
 size=mine
 buildable=no
 enhanced_building=yes
-program=work
 output=goldstone
 stopable=yes
+
+[buildcost]
+trunk=4
+raw_stone=2
 
 [working positions]
 master-miner=1
@@ -13,6 +16,9 @@ miner=1
 
 [inputs]
 meal=6
+
+[programs]
+work=_Work
 
 [work]
 sleep=40000
@@ -23,10 +29,6 @@ produce=goldstone
 animate=working 18000
 mine=gold 2 100 10
 produce=goldstone:2
-
-[buildcost]
-trunk=4
-raw_stone=2
 
 [idle]
 pics=deeper_goldmine_i_??.png

@@ -12,22 +12,6 @@ output=pick
 output=saw
 output=scythe
 output=shovel
-program=produce_bakingtray
-program=produce_bucket
-program=produce_fire_tongs
-program=produce_fishing_net
-program=produce_hammer
-program=produce_hook_pole
-program=produce_hunting_bow
-program=produce_milking_tongs
-program=produce_pick
-program=produce_saw
-program=produce_scythe
-program=produce_shovel
-program=work
-
-[working positions]
-toolsmith=1
 
 [buildcost]
 trunk=1
@@ -35,25 +19,28 @@ stone=2
 planks=2
 spidercloth=1
 
+[working positions]
+toolsmith=1
+
 [inputs]
 iron=6
 trunk=6
 spidercloth=4
 
-[work]
-call=produce_bakingtray
-call=produce_bucket
-call=produce_fire_tongs
-call=produce_fishing_net
-call=produce_hammer
-call=produce_hook_pole
-call=produce_hunting_bow
-call=produce_milking_tongs
-call=produce_pick
-call=produce_saw
-call=produce_scythe
-call=produce_shovel
-return=skipped
+[programs]
+produce_bakingtray=_Produce bakingtray
+produce_bucket=_Produce bucket
+produce_fire_tongs=_Produce fire tongs
+produce_fishing_net=_Produce fishing net
+produce_hammer=_Produce hammer
+produce_hook_pole=_Produce hook pole
+produce_hunting_bow=_Produce bow
+produce_milking_tongs=_Produce milking tongs
+produce_pick=_Produce pick
+produce_saw=_Produce saw
+produce_scythe=_Produce scythe
+produce_shovel=_Produce shovel
+work=_Work
 
 [produce_bakingtray]
 return=skipped unless economy needs bakingtray
@@ -138,6 +125,21 @@ consume=iron trunk
 sleep=32000
 animate=working 35000
 produce=shovel
+
+[work]
+call=produce_bakingtray
+call=produce_bucket
+call=produce_fire_tongs
+call=produce_fishing_net
+call=produce_hammer
+call=produce_hook_pole
+call=produce_hunting_bow
+call=produce_milking_tongs
+call=produce_pick
+call=produce_saw
+call=produce_scythe
+call=produce_shovel
+return=skipped
 
 [idle]
 pics=toolsmith_i_??.png

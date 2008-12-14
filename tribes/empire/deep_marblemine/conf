@@ -2,10 +2,13 @@ type=production
 size=mine
 buildable=no
 enhanced_building=yes
-program=work
 output=marble
 output=stone
 stopable=yes
+
+[buildcost]
+trunk=4
+wood=2
 
 [working positions]
 master-miner=1
@@ -14,6 +17,9 @@ miner=1
 [inputs]
 meal=6
 wine=6
+
+[programs]
+work=_Work
 
 [work]
 sleep=43000
@@ -24,10 +30,6 @@ produce=marble:2
 animate=working 18000
 mine=granit 2 100 5
 produce=marble stone:2
-
-[buildcost]
-trunk=4
-wood=2
 
 [idle]
 pics=deep_marblemine_i_??.png

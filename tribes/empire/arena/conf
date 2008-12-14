@@ -3,18 +3,20 @@ size=big
 enhancement=colosseum
 max_soldiers=8
 train=evade
-program=Sleep
-program=upgrade_evade_0 # This is needed to run the scripts
 
 [working positions]
 carrier=1
 
-[Sleep]
-sleep=5000
-
 [evade]
 min_level=0
 max_level=0
+
+[programs]
+sleep=_Sleep
+upgrade_evade_0=_Upgrade evade 0 # This is needed to run the scripts
+
+[sleep]
+sleep=5000
 
 [upgrade_evade_0]
 check_soldier=evade 0 # Fails when aren't any soldier of level 0 attack

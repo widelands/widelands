@@ -1,8 +1,13 @@
 type=production
 size=medium
-program=work
 output=beer
 enhancement=brewery
+
+[buildcost]
+trunk=3
+blackwood=2
+raw_stone=3
+thatchreed=2
 
 [working positions]
 brewer=1
@@ -11,18 +16,15 @@ brewer=1
 water=8
 wheat=8
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs beer or workers need experience
 consume=water wheat
 sleep=30000
 animate=working 30000
 produce=beer
-
-[buildcost]
-trunk=3
-blackwood=2
-raw_stone=3
-thatchreed=2
 
 [idle]
 pics=micro-brewery_i_??.png  # ???

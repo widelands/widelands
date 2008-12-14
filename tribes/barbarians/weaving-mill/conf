@@ -1,7 +1,11 @@
 type=production
 size=big
-program=work
 output=cloth
+
+[buildcost]
+trunk=5
+raw_stone=2
+thatchreed=2
 
 [working positions]
 weaver=1
@@ -9,16 +13,14 @@ weaver=1
 [inputs]
 flax=8
 
+[programs]
+work=_Work
+
 [work]
 # no need to check whether cloth is needed because it is only used here
 animate=working 45000
 consume=flax
 produce=cloth
-
-[buildcost]
-trunk=5
-raw_stone=2
-thatchreed=2
 
 [idle]
 pics=i_??.png

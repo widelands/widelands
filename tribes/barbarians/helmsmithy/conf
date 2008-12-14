@@ -4,10 +4,12 @@ output=helm
 output=mask
 output=warhelmet
 
-program=produce_helm
-program=produce_mask
-program=produce_warhelmet
-program=work
+[buildcost]
+trunk=3
+blackwood=1
+raw_stone=2
+grout=2
+thatchreed=3
 
 [working positions]
 helmsmith=1
@@ -17,12 +19,11 @@ iron=8
 gold=8
 coal=8
 
-[work]
-call=produce_helm
-call=produce_mask
-call=produce_warhelmet
-sleep=20000
-return=skipped
+[programs]
+produce_helm=_Produce helm
+produce_mask=_Produce mask
+produce_warhelmet=_Produce warhelmet
+work=_Work
 
 [produce_helm]
 return=skipped unless economy needs helm
@@ -45,12 +46,12 @@ sleep=32000
 animate=working 55000
 produce=warhelmet
 
-[buildcost]
-trunk=3
-blackwood=1
-raw_stone=2
-grout=2
-thatchreed=3
+[work]
+call=produce_helm
+call=produce_mask
+call=produce_warhelmet
+sleep=20000
+return=skipped
 
 [idle]
 pics=helmsmith_i_??.png  # ???

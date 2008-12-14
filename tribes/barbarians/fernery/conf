@@ -4,41 +4,42 @@ stopable=yes
 output=flax
 output=thatchreed
 
-program=plantflax
-program=plantreed
-program=harvestflax
-program=harvestreed
-program=work
+[buildcost]
+trunk=5
+raw_stone=2
 
 [working positions]
 ferner=1
 
-[work]
-call=plantflax
-call=harvestflax
-call=plantreed
-call=harvestreed
-return=skipped
+[programs]
+plant_flax=_Plant flax
+plant_reed=_Plant reed
+harvest_flax=_Harvest flax
+harvest_reed=_Harvest reed
+work=_Work
 
-[plantflax]
+[plant_flax]
 sleep=20000
 worker=plantflax
 
-[plantreed]
+[plant_reed]
 sleep=20000
 worker=plantreed
 
-[harvestflax]
+[harvest_flax]
 sleep=5000
 worker=harvestflax
 
-[harvestreed]
+[harvest_reed]
 sleep=5000
 worker=harvestreed
 
-[buildcost]
-trunk=5
-raw_stone=2
+[work]
+call=plant_flax
+call=harvest_flax
+call=plant_reed
+call=harvest_reed
+return=skipped
 
 [idle]
 pics=fernery_i_??.png  # ???

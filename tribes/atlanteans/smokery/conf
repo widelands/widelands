@@ -2,9 +2,12 @@ type=production
 size=medium
 output=smoked_meat
 output=smoked_fish
-program=smoke_meat
-program=smoke_fish
-program=work
+
+[buildcost]
+trunk=1
+stone=4
+planks=1
+spidercloth=1
 
 [working positions]
 smoker=1
@@ -14,10 +17,10 @@ fish=4
 meat=4
 trunk=8
 
-[work]
-call=smoke_meat
-call=smoke_fish
-return=skipped
+[programs]
+smoke_meat=_Smoke meat
+smoke_fish=_Smoke fish
+work=_Work
 
 [smoke_meat]
 return=skipped unless economy needs smoked_meat
@@ -33,11 +36,10 @@ sleep=15000
 animate=working 15000
 produce=smoked_fish
 
-[buildcost]
-trunk=1
-stone=4
-planks=1
-spidercloth=1
+[work]
+call=smoke_meat
+call=smoke_fish
+return=skipped
 
 [idle]
 pics=smokery_i_??.png  # ???

@@ -2,30 +2,32 @@ type=production
 size=big
 stopable=yes
 output=blackroot
-program=plant
-program=harvest
-program=work
-
-[working positions]
-blackroot_farmer=1
-
-[work]
-call=plant
-call=harvest
-return=skipped
-
-[plant]
-sleep=20000
-worker=plant
-
-[harvest]
-sleep=5000
-worker=harvest
 
 [buildcost]
 planks=3
 stone=2
 trunk=4
+
+[working positions]
+blackroot_farmer=1
+
+[programs]
+plant_blackroot=_Plant blackroot
+harvest_blackroot=_Harvest backroot
+work=_Work
+
+[plant_blackroot]
+sleep=20000
+worker=plant
+
+[harvest_blackroot]
+sleep=5000
+worker=harvest
+
+[work]
+call=plant_blackroot
+call=harvest_blackroot
+return=skipped
 
 [idle]
 pics=blackroot_farm_i_??.png  # ???

@@ -1,8 +1,13 @@
 type=production
 size=medium
-program=work
 output=pittabread
 stopable=yes
+
+[buildcost]
+trunk=2
+blackwood=2
+raw_stone=2
+thatchreed=2
 
 [working positions]
 baker=1
@@ -10,6 +15,9 @@ baker=1
 [inputs]
 wheat=6
 water=6
+
+[programs]
+work=_Work
 
 [work]
 sleep=20000
@@ -19,12 +27,6 @@ animate=working 20000
 produce=pittabread
 animate=working 20000
 produce=pittabread
-
-[buildcost]
-trunk=2
-blackwood=2
-raw_stone=2
-thatchreed=2
 
 [idle]
 pics=bakery_i_??.png  # ???

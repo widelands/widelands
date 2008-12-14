@@ -1,8 +1,12 @@
 soundfx=../../../sound/farm/farm_animal
 type=production
 size=big
-program=work
 output=meat
+
+[buildcost]
+trunk=2
+stone=2
+marblecolumn=2
 
 [working positions]
 pig-breeder=1
@@ -11,6 +15,9 @@ pig-breeder=1
 wheat=7
 water=7
 
+[programs]
+work=_Work
+
 [work]
 sleep=25000
 return=skipped unless economy needs meat
@@ -18,11 +25,6 @@ consume=water wheat
 playFX=../../../sound/farm/farm_animal 180
 animate=working 30000
 produce=meat
-
-[buildcost]
-trunk=2
-stone=2
-marblecolumn=2
 
 [idle]
 pics=piggery_i_??.png  # ???

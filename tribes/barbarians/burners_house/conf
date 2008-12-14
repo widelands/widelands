@@ -1,7 +1,11 @@
 type=production
 size=medium
 output=coal
-program=work
+
+[buildcost]
+trunk=3
+grout=2
+thatchreed=2
 
 [working positions]
 burner=1
@@ -9,17 +13,15 @@ burner=1
 [inputs]
 trunk=8
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs coal
 consume=trunk:6
 sleep=30000
 animate=working 90000 # charcoal fires are burning some days in real life
 produce=coal
-
-[buildcost]
-trunk=3
-grout=2
-thatchreed=2
 
 [idle]
 pics=burner_i_??.png  # ???

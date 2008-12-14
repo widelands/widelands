@@ -1,7 +1,11 @@
 type=production
 size=medium
-program=work
 output=grout
+
+[buildcost]
+trunk=4
+raw_stone=2
+blackwood=1
 
 [working positions]
 lime-burner=1
@@ -11,17 +15,15 @@ raw_stone=6
 water=6
 coal=3
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs grout
 consume=coal raw_stone:2 water:2
 sleep=50000
 animate=working 32000
 produce=grout:2
-
-[buildcost]
-trunk=4
-raw_stone=2
-blackwood=1
 
 [idle]
 pics=stonegrinder_i_??.png  # ???

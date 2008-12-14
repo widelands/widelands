@@ -3,8 +3,12 @@ size=medium
 buildable=no
 enhanced_building=yes
 enhancement=big_inn
-program=work
 output=snack
+
+[buildcost]
+trunk=2
+grout=2
+thatchreed=1
 
 [working positions]
 innkeeper=1
@@ -15,17 +19,15 @@ pittabread=4
 meat=4
 beer=4
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs snack
 consume=pittabread fish,meat beer
 sleep=15000
 animate=working 20000
 produce=snack
-
-[buildcost]
-trunk=2
-grout=2
-thatchreed=1
 
 [idle]
 pics=inn_i_??.png  # ???

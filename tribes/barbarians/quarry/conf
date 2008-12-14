@@ -1,17 +1,19 @@
 type=production
 size=small
-program=work
 output=raw_stone
+
+[buildcost]
+trunk=4
 
 [working positions]
 stonemason=1
 
+[programs]
+work=_Work
+
 [work]
 sleep=25000
 worker=cut
-
-[buildcost]
-trunk=4
 
 [idle]
 pics=b_quarry_i_??.png  # ???

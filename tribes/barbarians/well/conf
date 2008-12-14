@@ -1,22 +1,22 @@
 type=production
 size=small
 stopable=yes
-program=work
 output=water
+
+[buildcost]
+trunk=4
 
 [working positions]
 carrier=1
 
-[inputs]
+[programs]
+work=_Work
 
 [work]
 sleep=20000
 animate=working 20000
 mine=water 1 100 65
 produce=water
-
-[buildcost]
-trunk=4
 
 [idle]
 pics=well_i_??.png  # ???

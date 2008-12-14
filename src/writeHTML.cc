@@ -803,7 +803,7 @@ void ProductionProgram::writeHTML
 	fw.Text("<h4 id=\"program_");
 	fw.Text(name());
 	fw.Text("\">");
-	fw.Text(name());
+	fw.Text(descname());
 	fw.Text
 		("</h4>\n"
 		 "<ol>\n");
@@ -904,7 +904,7 @@ void ProductionProgram::ActReturn::Workers_Need_Experience::writeHTML
 void ProductionProgram::ActCall::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
-	std::string const & program_name = m_program->name();
+	std::string const & program_descname = m_program->descname();
 	fw.Text
 		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
 		 "Productionsite_Program_Reference#call\" title=\"");
@@ -912,14 +912,15 @@ void ProductionProgram::ActCall::writeHTML
 	fw.Text("\">");
 	fw.Text(_("call"));
 	fw.Text("</a> <a href=\"#program_");
-	fw.Text(program_name);
+	fw.Text(m_program->name());
 	fw.Text("\" title=\"");
 	char buffer[64];
 	snprintf
-		(buffer, sizeof(buffer), _("site's program %s"), program_name.c_str());
+		(buffer, sizeof(buffer),
+		 _("site's program %s"), program_descname.c_str());
 	fw.Text(buffer);
 	fw.Text("\">");
-	fw.Text(program_name);
+	fw.Text(program_descname);
 	fw.Text("</a>");
 	if (m_failure_handling_method != Ignore) {
 		fw.Text

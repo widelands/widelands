@@ -3,31 +3,33 @@ type=production
 size=big
 stopable=yes
 output=corn
-program=plant
-program=harvest
-program=work
-
-[working positions]
-farmer=1
-
-[work]
-call=plant
-call=harvest
-playFX=../../../sound/farm/farm_animal 192
-
-[plant]
-sleep=20000
-worker=plant
-
-[harvest]
-sleep=5000
-worker=harvest
 
 [buildcost]
 trunk=3
 stone=2
 planks=2
 spidercloth=1
+
+[working positions]
+farmer=1
+
+[programs]
+plant_corn=_Plant corn
+harvest_corn=_Harvest corn
+work=_Work
+
+[plant_corn]
+sleep=20000
+worker=plant
+
+[harvest_corn]
+sleep=5000
+worker=harvest
+
+[work]
+call=plant_corn
+call=harvest_corn
+playFX=../../../sound/farm/farm_animal 192
 
 [idle]
 pics=farm_i_??.png  # ???

@@ -445,6 +445,7 @@ struct ProductionProgram {
 		(std::string    const & directory,
 		 Profile              &,
 		 std::string    const & name,
+		 char           const * descname,
 		 ProductionSite_Descr *,
 		 EncodeData     const *);
 	~ProductionProgram() {
@@ -453,6 +454,7 @@ struct ProductionProgram {
 	}
 
 	std::string const & name() const {return m_name;}
+	std::string const & descname() const {return m_descname;}
 	int32_t get_size() const {return m_actions.size();}
 	Action const & operator[](size_t const idx) const {
 		assert(idx < m_actions.size());
@@ -468,6 +470,7 @@ struct ProductionProgram {
 
 private:
 	std::string m_name;
+	std::string m_descname;
 	Actions     m_actions;
 };
 

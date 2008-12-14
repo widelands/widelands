@@ -1,14 +1,16 @@
 type=production
 size=small
-program=work
-
-[working positions]
-fish_breeder=1
 
 [buildcost]
 trunk=1
 planks=1
 stone=1
+
+[working positions]
+fish_breeder=1
+
+[programs]
+work=_Work
 
 [work]
 sleep=24000

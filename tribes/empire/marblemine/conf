@@ -1,12 +1,13 @@
 type=production
 size=mine
-program=prog_marble
-program=prog_stone
-program=work
 output=marble
 output=stone
 stopable=yes
 enhancement=deep_marblemine
+
+[buildcost]
+trunk=4
+wood=2
 
 [working positions]
 miner=1
@@ -15,12 +16,12 @@ miner=1
 ration=6
 wine=6
 
-[work]
-call=prog_marble
-call=prog_stone
-return=skipped
+[programs]
+mine_marble=_Mine marble
+mine_stone=_MIne stone
+work=_Work
 
-[prog_marble]
+[mine_marble]
 sleep=20000
 consume=wine ration
 animate=working 20000
@@ -30,7 +31,7 @@ animate=working 20000
 mine=granit 2 50 5
 produce=marble stone
 
-[prog_stone]
+[mine_stone]
 sleep=20000
 consume=ration wine
 animate=working 20000
@@ -40,9 +41,10 @@ animate=working 20000
 mine=granit 2 50 5
 produce=stone:2
 
-[buildcost]
-trunk=4
-wood=2
+[work]
+call=mine_marble
+call=mine_stone
+return=skipped
 
 [idle]
 pics=marblemine_i_??.png

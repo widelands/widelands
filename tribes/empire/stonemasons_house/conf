@@ -1,14 +1,22 @@
 type=production
 size=medium
-program=work
 output=marblecolumn
 soundfx=../../../sound/stonecutting/stonemason
+
+[buildcost]
+trunk=1
+wood=1
+stone=1
+marble=3 # someone who works on marble should like marble
 
 [working positions] #  like quarry
 stonemason=1
 
 [inputs]
 marble=6
+
+[programs]
+work=_Work
 
 [work]
 return=skipped unless economy needs marblecolumn
@@ -17,12 +25,6 @@ sleep=50000
 playFX=../../../sound/stonecutting/stonemason 192
 animate=working 32000
 produce=marblecolumn
-
-[buildcost]
-trunk=1
-wood=1
-stone=1
-marble=3 # someone who works on marble should like marble
 
 [idle]
 pics=stonemason_i_??.png  # ???

@@ -3,21 +3,41 @@ size=medium
 enhanced_building=yes
 max_soldiers=8
 train=attack
-program=Sleep
-program=upgrade_attack_0
-program=upgrade_attack_1
-program=upgrade_attack_2
-program=upgrade_attack_3
+
+[buildcost]
+planks=2
+stone=4
+diamond=2
+quartz=2
+spidercloth=2
+gold=2
+trunk=4
 
 [working positions]
 trainer=1
 
-[Sleep]
-sleep=5000
+[inputs]
+bread=10
+smoked_fish=6
+smoked_meat=6
+long_trident=4
+steel_trident=4
+double_trident=4
+heavy_double_trident=4
 
 [attack]
 min_level=0
 max_level=3
+
+[programs]
+sleep=_Sleep
+upgrade_attack_0=_Upgrade attack 0
+upgrade_attack_1=_Upgrade attack 1
+upgrade_attack_2=_Upgrade attack 2
+upgrade_attack_3=_Upgrade attack 3
+
+[sleep]
+sleep=5000
 
 [upgrade_attack_0]
 check_soldier=attack 0
@@ -46,24 +66,6 @@ sleep=30000
 check_soldier=attack 3
 consume=bread smoked_fish,smoked_meat heavy_double_trident
 train=attack 3 4
-
-[inputs]
-bread=10
-smoked_fish=6
-smoked_meat=6
-long_trident=4
-steel_trident=4
-double_trident=4
-heavy_double_trident=4
-
-[buildcost]
-planks=2
-stone=4
-diamond=2
-quartz=2
-spidercloth=2
-gold=2
-trunk=4
 
 [idle]
 pics=dungeon_i_??.png  # ???

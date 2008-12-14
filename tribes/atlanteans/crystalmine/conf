@@ -1,13 +1,14 @@
 type=production
 size=mine
-program=mine_stone
-program=mine_quartz
-program=mine_diamond
-program=work
 output=diamond
 output=quartz
 output=stone
 stopable=yes
+
+[buildcost]
+trunk=7
+planks=4
+spidercloth=1
 
 [working positions]
 miner=3
@@ -17,11 +18,11 @@ bread=6
 smoked_fish=6
 smoked_meat=6
 
-[work]
-call=mine_stone
-call=mine_quartz
-call=mine_diamond
-return=skipped
+[programs]
+mine_stone=_Mine stone
+mine_quartz=_Mine quartz
+mine_diamond=_Mine diamond
+work=_Work
 
 [mine_stone]
 consume=smoked_fish,smoked_meat:2 bread:2
@@ -64,10 +65,11 @@ animate=working 20000
 mine=granit 4 100 5
 produce=stone
 
-[buildcost]
-trunk=7
-planks=4
-spidercloth=1
+[work]
+call=mine_stone
+call=mine_quartz
+call=mine_diamond
+return=skipped
 
 [idle]
 pics=crystalmine_i_??.png

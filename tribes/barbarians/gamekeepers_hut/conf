@@ -1,17 +1,19 @@
 type=production
 size=small
-program=work
-
-[working positions]
-gamekeeper=1
-
-[work]
-sleep=52500
-worker=release
 
 [buildcost]
 trunk=4
 raw_stone=1
+
+[working positions]
+gamekeeper=1
+
+[programs]
+work=_Work
+
+[work]
+sleep=52500
+worker=release
 
 [idle]
 pics=gamekeeper_i_??.png

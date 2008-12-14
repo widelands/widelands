@@ -1,14 +1,21 @@
 type=production
 size=medium
-program=work
 output=wood
 soundfx=../../../sound/sawmill/sawmill
+
+[buildcost]
+trunk=2
+stone=1
+wood=1
 
 [working positions] #  like toolsmithy
 toolsmith=1
 
 [inputs]
 trunk=8
+
+[programs]
+work=_Work
 
 [work]
 return=skipped unless economy needs wood
@@ -17,11 +24,6 @@ sleep=16500 # much faster than barbarians hardener
 playFX=../../../sound/sawmill/sawmill 180
 animate=working 20000 # much more faster than barbarians hardener
 produce=wood
-
-[buildcost]
-trunk=2
-stone=1
-wood=1
 
 [idle]
 pics=sawmill_i_??.png  # ???

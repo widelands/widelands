@@ -120,16 +120,18 @@ ProductionSite_Descr::ProductionSite_Descr
 		throw wexception("no working positions although only productionsite");
 
 	// Get programs
-	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string const program_name = v->get_string();
-		ProductionProgram * program = 0;
+	if
+		(Section * const programs_s =
+		 	prof.get_section("programs"))
+	while (Section::Value const * const v = programs_s->get_next_val()) {
+		std::string const program_name = v->get_name();
 		try {
 			if (m_programs.count(program_name))
 				throw wexception("this program has already been declared");
-			m_programs[program_name.c_str()] =
-				new ProductionProgram(directory, prof, program_name, this, encdata);
+			m_programs[program_name] =
+				new ProductionProgram
+					(directory, prof, program_name, v->get_string(), this, encdata);
 		} catch (std::exception const & e) {
-			delete program;
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}

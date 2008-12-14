@@ -2,8 +2,12 @@ type=production
 size=medium
 buildable=no
 enhanced_building=yes
-program=work
 output=strongbeer
+
+[buildcost]
+trunk=3
+raw_stone=1
+thatchreed=1
 
 [working positions]
 master-brewer=1
@@ -13,17 +17,15 @@ brewer=1
 water=8
 wheat=8
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs strongbeer
 consume=water wheat
 sleep=30000
 animate=working 30000
 produce=strongbeer
-
-[buildcost]
-trunk=3
-raw_stone=1
-thatchreed=1
 
 [idle]
 pics=brewery_i_??.png  # ???

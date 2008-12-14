@@ -1,18 +1,20 @@
 type=production
 size=small
-program=work
-
-[working positions]
-hunter=1
-
-[work]
-sleep=35000
-worker=hunt
 
 [buildcost]
 trunk=1
 planks=1
 stone=1
+
+[working positions]
+hunter=1
+
+[programs]
+work=_Work
+
+[work]
+sleep=35000
+worker=hunt
 
 [idle]
 pics=hunter_i_??.png

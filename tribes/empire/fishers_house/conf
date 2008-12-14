@@ -1,15 +1,17 @@
 type=production
 size=small
 output=fish
-program=work
-
-[working positions]
-fisher=1
 
 [buildcost]
 trunk=1
 wood=1
 stone=1
+
+[working positions]
+fisher=1
+
+[programs]
+work=_Work
 
 [work]
 sleep=17000

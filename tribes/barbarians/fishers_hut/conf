@@ -1,13 +1,15 @@
 type=production
 size=small
 output=fish
-program=work
+
+[buildcost]
+trunk=4
 
 [working positions]
 fisher=1
 
-[buildcost]
-trunk=4
+[programs]
+work=_Work
 
 [work]
 sleep=18000

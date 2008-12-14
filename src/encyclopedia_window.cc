@@ -152,7 +152,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 		programIt = programs.find(std::string("smelt_")  + selectedWare->name());
 
 	if (programIt == programs.end())
-		programIt = programs.find(std::string("prog_")   + selectedWare->name());
+		programIt = programs.find(std::string("smoke_")  + selectedWare->name());
 
 	if (programIt == programs.end())
 		programIt = programs.find(std::string("mine_")   + selectedWare->name());

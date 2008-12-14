@@ -2,21 +2,31 @@ type=training
 size=big
 max_soldiers=12
 train=attack,hp
-program=Sleep
-program=upgrade_attack_0 # This is needed to run the scripts
-program=upgrade_attack_1
-program=upgrade_attack_2
-program=upgrade_attack_3
-program=upgrade_hp_0
-program=upgrade_hp_1
-program=upgrade_hp_2
-program=upgrade_hp_3
+
+[buildcost]
+trunk=2
+stone=5
+wood=4
+marble=5
+gold=4
+marblecolumn=3
+cloth=2
 
 [working positions]
 trainer=1
 
-[Sleep]
-sleep=5000
+[inputs]
+bread=10
+fish=6
+meat=6
+lance=2
+advanced_lance=2
+heavy_lance=2
+war_lance=2
+helm=2
+armour=2
+chain_armour=2
+plate_armour=2
 
 [attack]
 min_level=0
@@ -25,6 +35,20 @@ max_level=3
 [hp]
 min_level=0
 max_level=3
+
+[programs]
+sleep=_Sleep
+upgrade_attack_0=_Upgrade attack 0 # This is needed to run the scripts
+upgrade_attack_1=_Upgrade attack 1
+upgrade_attack_2=_Upgrade attack 2
+upgrade_attack_3=_Upgrade attack 3
+upgrade_hp_0=_Upgrade hitpoints 0
+upgrade_hp_1=_Upgrade hitpoints 1
+upgrade_hp_2=_Upgrade hitpoints 2
+upgrade_hp_3=_Upgrade hitpoints 3
+
+[sleep]
+sleep=5000
 
 [upgrade_attack_0]
 check_soldier=attack 0 # Fails when aren't any soldier of level 0 attack
@@ -81,28 +105,6 @@ sleep=30000
 check_soldier=hp 3
 consume=plate_armour bread,fish,meat:4
 train=hp 3 4
-
-[inputs]
-bread=10
-fish=6
-meat=6
-lance=2
-advanced_lance=2
-heavy_lance=2
-war_lance=2
-helm=2
-armour=2
-chain_armour=2
-plate_armour=2
-
-[buildcost]
-trunk=2
-stone=5
-wood=4
-marble=5
-gold=4
-marblecolumn=3
-cloth=2
 
 [idle]
 pics=trainingscamp_i_??.png  # ???

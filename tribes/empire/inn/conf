@@ -2,8 +2,12 @@ type=production
 size=medium
 buildable=no
 enhanced_building=yes
-program=work
 output=meal
+
+[buildcost]
+wood=2
+marble=2
+marblecolumn=1
 
 [working positions]
 innkeeper=1
@@ -13,17 +17,15 @@ fish=6
 bread=6
 meat=6
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs meal
 consume=bread fish,meat
 sleep=15000
 animate=working 20000
 produce=meal
-
-[buildcost]
-wood=2
-marble=2
-marblecolumn=1
 
 [idle]
 pics=inn_i_??.png  # ???

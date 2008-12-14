@@ -1,12 +1,14 @@
 type=production
 size=small
-program=work
+
+[buildcost]
+trunk=4
 
 [working positions]
 ranger=1
 
-[buildcost]
-trunk=4
+[programs]
+work=_Work
 
 [work]
 sleep=16000

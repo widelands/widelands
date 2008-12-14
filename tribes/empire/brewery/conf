@@ -1,7 +1,11 @@
 type=production
 size=medium
-program=work
 output=beer
+
+[buildcost]
+trunk=1
+wood=2
+stone=2
 
 [working positions]
 brewer=1
@@ -10,17 +14,15 @@ brewer=1
 water=7
 wheat=7
 
+[programs]
+work=_Work
+
 [work]
 return=skipped unless economy needs beer
 consume=water wheat
 sleep=30000
 animate=working 30000
 produce=beer
-
-[buildcost]
-trunk=1
-wood=2
-stone=2
 
 [idle]
 pics=brewery_i_??.png  # ???
