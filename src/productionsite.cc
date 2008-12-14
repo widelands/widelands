@@ -347,6 +347,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
 		delete m_working_positions[i].worker_request;
+		m_working_positions[i].worker_request = 0;
 		Worker * const w = m_working_positions[i].worker;
 
 		//  Ensure we do not re-request the worker when remove_worker is called.
