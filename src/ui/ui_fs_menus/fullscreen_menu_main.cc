@@ -103,12 +103,12 @@ exit
 // Textlabels
 version
 	(this,
-	 m_xres - 10, m_yres - 24,
-	 std::string(_("Version ")) + build_id(), Align_Right),
+	 m_xres, m_yres,
+	 std::string(_("Version ")) + build_id(),              Align_BottomRight),
 copyright
 	(this,
-	 10, m_yres - 24,
-	 _("(C) 2002-2008 by the Widelands Development Team"), Align_TopLeft)
+	 0, m_yres,
+	 _("(C) 2002-2008 by the Widelands Development Team"), Align_BottomLeft)
 {
 	version.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	copyright.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
