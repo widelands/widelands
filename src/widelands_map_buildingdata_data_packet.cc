@@ -489,21 +489,21 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				{
 					if (j.current == j.end)
 						throw wexception
-							("site has %s, for which there is no working position",
+							("site has %s, for which there is no free working "
+							 "position",
 							 worker_descr.name().c_str());
 					uint32_t count = j.current->second;
 					assert(count);
 					if (worker_descr.can_act_as(j.current->first)) {
-						while (wp->worker or wp->worker_request)
-							if (--count)
-								++wp;
-							else
-								throw wexception
-									("%s does not match any free working position",
-									 worker_descr.name().c_str());
+						while (wp->worker or wp->worker_request) {
+							++wp;
+							if (not --count)
+								goto end_working_position;
+						}
 						break;
 					} else
 						wp += count;
+				end_working_position:;
 				}
 				wp->worker = &worker;
 			}
