@@ -432,7 +432,7 @@ Widelands::Building_Index Section::get_safe_Building_Index
 {
 	Widelands::Tribe_Descr const & tribe =
 		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(player).c_str());
+			(egbase.map().get_scenario_player_tribe(player));
 	char const * const b = get_safe_string(name);
 	if (Widelands::Building_Index const idx = tribe.building_index(b))
 		return idx;
@@ -450,7 +450,7 @@ Widelands::Building_Descr const & Section::get_safe_Building_Type
 {
 	Widelands::Tribe_Descr const & tribe =
 		egbase.manually_load_tribe
-		(egbase.map().get_scenario_player_tribe(player).c_str());
+			(egbase.map().get_scenario_player_tribe(player));
 	char const * const b = get_safe_string(name);
 	if
 		(Widelands::Building_Descr const * const result =
@@ -587,26 +587,6 @@ Widelands::Player_Number Section::get_Player_Number
 }
 
 
-/** Section::get_next_int(const char *name, int32_t *value)
- *
- * Retrieve the next unused key with the given name as an integer.
- *
- * Args: name   name of the key, can be 0 to find all unused keys
- *       value  value of the key is stored here
- *
- * Returns: the name of the key, or 0 if none has been found
- */
-const char *Section::get_next_int(const char *name, int32_t *value)
-{
-	if (Value const * const v = get_next_val(name)) {
-		if (value)
-			*value = v->get_int();
-		return v->get_name();
-	} else
-		return 0;
-}
-
-
 /** Section::get_next_bool(const char *name, int32_t *value)
  *
  * Retrieve the next unused key with the given name as a boolean value.
@@ -624,26 +604,6 @@ const char *Section::get_next_bool(const char *name, bool *value)
 
 	if (value)
 		*value = v->get_bool();
-	return v->get_name();
-}
-
-/** Section::get_next_string(const char *name, int32_t *value)
- *
- * Retrieve the next unused key with the given name.
- *
- * \param name   name of the key, can be 0 to find all unused keys
- * \param value  value of the key is stored here
- *
- * \return the name of the key, or 0 if none has been found
- */
-char const * Section::get_next_string(const char *name, char * * value)
-{
-	Value *v = get_next_val(name);
-	if (!v)
-		return 0;
-
-	if (value)
-		*value = v->get_string();
 	return v->get_name();
 }
 
@@ -725,7 +685,7 @@ void Section::set_Building_Index
 	create_val
 		(name,
 		 egbase.manually_load_tribe
-		 	(egbase.map().get_scenario_player_tribe(player).c_str())
+		 	(egbase.map().get_scenario_player_tribe(player))
 		 .get_building_descr(value)->name().c_str(),
 		 duplicate)
 		->mark_used();

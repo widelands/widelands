@@ -426,11 +426,11 @@ Player * Editor_Game_Base::add_player
 		p
 		=
 		new Player
-		(*this,
-		 player_number,
-		 manually_load_tribe(tribe.c_str()),
-		 name,
-		 g_playercolors[player_number - 1]);
+			(*this,
+			 player_number,
+			 manually_load_tribe(tribe),
+			 name,
+			 g_playercolors[player_number - 1]);
 }
 
 /*

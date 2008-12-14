@@ -551,7 +551,7 @@ void Editor_Interactive::run_editor(std::string const & filename)
 			std::vector<std::string> tribenames;
 			Widelands::Tribe_Descr::get_all_tribenames(tribenames);
 			container_iterate_const(std::vector<std::string>, tribenames, i)
-				editor.manually_load_tribe(i.current->c_str());
+				editor.manually_load_tribe(*i.current);
 		}
 
 		eia.select_tool(eia.tools.increase_height, Editor_Tool::First);

@@ -164,9 +164,7 @@ public:
 		(char const * name,
 		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
 
-	const char *get_next_int(const char *name, int32_t *value);
 	const char *get_next_bool(const char *name, bool *value);
-	const char *get_next_string(const char *name, char * * value);
 
 	void set_int
 		(char const * name, int32_t           value, bool duplicate = false);
