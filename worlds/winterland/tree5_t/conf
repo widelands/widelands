@@ -3,7 +3,7 @@ program=program
 picture=s1tree5_00.png
 
 [program]
-animate=tiny 40000
+animate=tiny 80000
 remove=32
 transform=tree5_s
 

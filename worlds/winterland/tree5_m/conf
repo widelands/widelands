@@ -3,10 +3,10 @@ program=program
 picture=s3tree5_00.png
 
 [program]
-animate=medium 27500
+animate=medium 55000
 remove=10
 seed=tree5_t 200
-animate=medium 27500
+animate=medium 55000
 remove=10
 transform=tree5
 

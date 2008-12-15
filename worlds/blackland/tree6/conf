@@ -17,7 +17,7 @@ pics=idle_?.png
 hotspot=24 60
 
 [program]
-animate=idle 77000
+animate=idle 154000
 transform=deadtree2 33
 seed=tree6_t 90
 
