@@ -299,22 +299,6 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 
 			warehouse.m_next_carrier_spawn = fr.Unsigned32();
 
-			if ((warehouse.get_conquers())) { //  headquarter
-				//  Add to map of military influence.
-				Map const & map = egbase->map();
-				Area<FCoords> a
-					(map.get_fcoords(warehouse.get_position()),
-					 warehouse.get_conquers());
-				Field const & first_map_field = map[0];
-				Player::Field * const player_fields = warehouse.owner().m_fields;
-				MapRegion<Area<FCoords> > mr(map, a);
-				do
-					player_fields[mr.location().field - &first_map_field]
-					.military_influence
-						+= map.calc_influence(mr.location(), Area<>(a, a.radius));
-				while (mr.advance(map));
-			}
-
 			log("Read warehouse stuff for %p\n", &warehouse);
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
