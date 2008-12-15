@@ -6,7 +6,7 @@
 #    * Growth:    slow
 #    * Longevity: long
 
-size=medium
+size=small
 attrib=tree
 program=program
 program=fall
