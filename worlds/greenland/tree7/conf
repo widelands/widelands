@@ -5,6 +5,7 @@
 #    * Seeding:   medium
 #    * Growth:    medium
 #    * Longevity: medium
+#    * Thrives better than others on: steppe
 
 size=small
 attrib=tree
@@ -12,13 +13,27 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+steppe=     200
+berg1=        7
+strand=       7
+wiese1=     150
+wiese2=     255
+wiese3=     255
+berg2=        7
+berg3=        7
+berg4=        7
+steppe_kahl=  7
+wiese4=     255
+bergwiese=  100
+
 [idle]
 pics=idle_?.png
 hotspot=24 60
 
 [program]
 animate=idle 110000
-transform=deadtree3 34
+transform=deadtree3 23
 seed=tree7_t 120
 
 [fall]

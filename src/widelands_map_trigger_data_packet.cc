@@ -74,6 +74,7 @@ throw (_wexception)
 			}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
+		prof.check_used();
 	} catch (_wexception const & e) {
 		throw wexception("Triggers: %s", e.what());
 	}

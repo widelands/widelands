@@ -30,6 +30,7 @@ namespace Widelands {
 
 struct Economy;
 class Flag;
+struct Map;
 struct Tribe_Descr;
 class Worker;
 
@@ -82,7 +83,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 	Immovable_Descr
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const * const);
+		 World const & world, Tribe_Descr const * const);
 	~Immovable_Descr();
 
 	int32_t get_size() const throw () {return m_size;}
@@ -94,6 +95,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	const Tribe_Descr* get_owner_tribe() const throw () {return m_owner_tribe;}
 
+	/// How well the terrain around f suits an immovable of this type.
+	uint32_t terrain_suitability(FCoords, Map const &) const;
+
 protected:
 	std::string m_picture;
 	int32_t           m_size;
@@ -104,6 +108,8 @@ protected:
 	 * the tribe to which this Immovable_Descr belongs or 0 if it is a world immovable
 	 */
 	const Tribe_Descr * const m_owner_tribe;
+private:
+	uint8_t m_terrain_affinity[16];
 };
 
 class Immovable : public BaseImmovable {

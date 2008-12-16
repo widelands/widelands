@@ -299,7 +299,7 @@ void World::parse_bobs(std::string & directory, Profile & root_conf) {
 			} else
 				immovables.add
 					(new Immovable_Descr
-					 	(_name, _descname, directory, prof, global_s, 0));
+					 	(_name, _descname, directory, prof, global_s, *this, 0));
 			prof.check_used();
 		} catch (std::exception const & e) {
 			throw wexception

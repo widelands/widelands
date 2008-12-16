@@ -2198,13 +2198,14 @@ Military_Influence Map::calc_influence
 {
 	const X_Coordinate w = get_width();
 	const Y_Coordinate h = get_height();
-	Military_Influence influence = std::max
-		(std::min
-		 	(std::min(abs(a.x - area.x), abs(a.x - area.x + w)),
-		 	 abs(a.x - area.x - w)),
-		 std::min
-		 	(std::min(abs(a.y - area.y), abs(a.y - area.y + h)),
-		 	 abs(a.y - area.y - h)));
+	Military_Influence influence =
+		std::max
+			(std::min
+			 	(std::min(abs(a.x - area.x), abs(a.x - area.x + w)),
+			 	 abs(a.x - area.x - w)),
+			 std::min
+			 	(std::min(abs(a.y - area.y), abs(a.y - area.y + h)),
+			 	 abs(a.y - area.y - h)));
 
 	if (influence > area.radius) influence = 0;
 	else if (influence == 0) influence = MAX_RADIUS;

@@ -1,16 +1,31 @@
-#  Maple
+#  Alder
 #
 #  Characteristics suitable to model:
 #    * Spreading: medium
 #    * Seeding:   medium
 #    * Growth:    medium
 #    * Longevity: medium
+#    * Thrives better than others on: sumpf
 
 size=small
 attrib=tree
 program=program
 program=fall
 picture=idle_0.png
+
+[terrain affinity]
+steppe=     3
+berg1=      3
+sumpf=    255
+strand=    10
+wiese1=    56
+wiese2=    84
+wiese3=    84
+berg2=      7
+berg3=      7
+berg4=      7
+wiese4=    84
+bergwiese= 36
 
 [idle]
 pics=idle_?.png
@@ -19,8 +34,8 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 120000
-transform=deadtree4 39
+animate=idle 12000
+transform=deadtree4 5
 seed=tree4_t 126
 
 [fall]

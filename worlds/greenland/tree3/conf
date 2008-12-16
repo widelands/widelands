@@ -5,12 +5,26 @@
 #    * Seeding:   high
 #    * Growth:    medium
 #    * Longevity: short
+#    * Thrives better than others on: berg?, wiese1, bergwiese
 
 size=small
 attrib=tree
 program=program
 program=fall
 picture=idle_0.png
+
+[terrain affinity]
+steppe=     3
+berg1=     14
+strand=    14
+wiese1=   220
+wiese2=   255
+wiese3=   255
+berg2=     14
+berg3=     14
+berg4=     14
+wiese4=   255
+bergwiese=170
 
 [idle]
 pics=idle_?.png
@@ -20,7 +34,7 @@ hotspot=24 60
 
 [program]
 animate=idle 110000
-transform=deadtree3 36
+transform=deadtree3 24
 seed=tree3_t 160
 
 [fall]

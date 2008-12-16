@@ -2,13 +2,27 @@ size=small
 program=program
 picture=s3tree8_00.png
 
+[terrain affinity]
+steppe=     198
+berg1=        7
+strand=      10
+wiese1=     150
+wiese2=     255
+wiese3=     255
+berg2=        7
+berg3=        7
+berg4=        7
+steppe_kahl=  7
+wiese4=     255
+bergwiese=  100
+
 [program]
 animate=medium 66000
-remove=10
+remove=7
 seed=tree8_t 200
 animate=medium 66000
 remove=10
-transform=tree8
+grow=tree8
 
 [medium]
 pics=s3tree8_??.png

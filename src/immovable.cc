@@ -120,6 +120,8 @@ ImmovableProgram::ImmovableProgram
 			action = new ActAnimate  (v->get_string(), immovable, directory, prof);
 		else if (not strcmp(v->get_name(), "transform"))
 			action = new ActTransform(v->get_string(), immovable);
+		else if (not strcmp(v->get_name(), "grow"))
+			action = new ActGrow(v->get_string(), immovable);
 		else if (not strcmp(v->get_name(), "remove"))
 			action = new ActRemove   (v->get_string(), immovable);
 		else if (not strcmp(v->get_name(), "seed"))
@@ -161,7 +163,7 @@ Immovable_Descr IMPLEMENTATION
 Immovable_Descr::Immovable_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const owner_tribe)
+	 World const & world, Tribe_Descr const * const owner_tribe)
 :
 	Map_Object_Descr(_name, _descname),
 	m_picture       (directory + global_s.get_string("picture", "menu.png")),
@@ -216,6 +218,36 @@ Immovable_Descr::Immovable_Descr
 				 new ImmovableProgram::ActAnimate
 				 	(parameters, *this, directory, prof));
 	}
+
+	uint8_t * it = m_terrain_affinity;
+	memset(it, 0, sizeof(m_terrain_affinity));
+	if
+		(Section * const terrain_affinity_s =
+		 	prof.get_section("terrain affinity"))
+	{
+		memset(it, 0, sizeof(m_terrain_affinity));
+		for
+			(struct {Terrain_Index current; Terrain_Index const nr_terrains;} i =
+			 	{0, world.get_nr_terrains()};
+			 i.current < i.nr_terrains;
+			 ++i.current, ++it)
+		{
+			char const * const terrain_type_name =
+				world.get_ter(i.current).name().c_str();
+			try {
+				uint32_t const value =
+					terrain_affinity_s->get_natural(terrain_type_name, 0);
+				if ((*it = value) != value)
+					throw wexception("expected 0 .. 255 but found %u", value);
+			} catch (_wexception const & e) {
+				throw wexception
+					("[terrain affinity] %s: %s", terrain_type_name, e.what());
+			}
+		}
+		if (owner_tribe) //  Tribe immovables may have entries for other worlds.
+			while (terrain_affinity_s->get_next_val()->get_positive()) {}
+	} else
+		memset(it, 255, sizeof(m_terrain_affinity));
 }
 
 
@@ -356,6 +388,31 @@ void Immovable::switch_program(Game* g, std::string programname)
 	m_program_ptr = 0;
 	m_program_step = 0;
 	schedule_act(g, 1);
+}
+
+
+uint32_t Immovable_Descr::terrain_suitability
+	(FCoords const f, Map const & map) const
+{
+	World const & world = map.world();
+	uint8_t nr_terrain_types = world.get_nr_terrains();
+	uint32_t result = 0;
+	uint8_t nr_triangles[nr_terrain_types];
+	memset(nr_triangles, 0, nr_terrain_types);
+
+	//  Neighbours
+	FCoords const tr = map.tr_n(f);
+	FCoords const tl = map.tl_n(f);
+	FCoords const  l = map. l_n(f);
+
+	result += m_terrain_affinity[tr.field->terrain_d()];
+	result += m_terrain_affinity[tl.field->terrain_r()];
+	result += m_terrain_affinity[tl.field->terrain_d()];
+	result += m_terrain_affinity [l.field->terrain_r()];
+	result += m_terrain_affinity [f.field->terrain_d()];
+	result += m_terrain_affinity [f.field->terrain_r()];
+
+	return result;
 }
 
 
@@ -685,6 +742,58 @@ void ImmovableProgram::ActTransform::execute
 }
 
 
+ImmovableProgram::ActGrow::ActGrow
+	(char * parameters, Immovable_Descr & descr)
+{
+	try {
+		tribe = true;
+		for (char * p = parameters;;)
+			switch (*p) {
+			case ':': {
+				*p = '\0';
+				++p;
+				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
+				if (not owner_tribe)
+					throw wexception
+						("immovable type not in tribe but target type has scope "
+						 "(\"%s\")",
+						 parameters);
+				else if (strcmp(parameters, "world"))
+					throw wexception
+						("scope \"%s\" given for tartget type (must be \"world\")",
+						 parameters);
+				tribe = false;
+				parameters = p;
+				break;
+			}
+			case '\0':
+				goto end;
+			default:
+				++p;
+			}
+	end:
+		type_name = parameters;
+	} catch (_wexception const & e) {
+		throw wexception("grow: %s", e.what());
+	}
+}
+
+void ImmovableProgram::ActGrow::execute
+	(Game & game, Immovable & immovable) const
+{
+	Map             const & map   = game     .map  ();
+	Immovable_Descr const & descr = immovable.descr();
+	FCoords const f = map.get_fcoords(immovable.get_position());
+	if (game.logic_rand() % (6 * 255) < descr.terrain_suitability(f, map)) {
+		Tribe_Descr const * const owner_tribe =
+			tribe ? immovable.descr().get_owner_tribe() : 0;
+		immovable.remove(&game); //  Now immovable is a dangling reference!
+		game.create_immovable(f, type_name, owner_tribe);
+	} else
+		immovable.program_step(game);
+}
+
+
 /**
  * remove
 */
@@ -767,18 +876,27 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 void ImmovableProgram::ActSeed::execute
 	(Game & game, Immovable & immovable) const
 {
+	Immovable_Descr const & descr = immovable.descr();
 	Map const & map = game.map();
-	MapFringeRegion<> mr(map, Area<>(immovable.get_position(), 0));
-	uint32_t fringe_size = 0;
-	do {
-		mr.extend(map);
-		fringe_size += 6;
-	} while (game.logic_rand() % 256 < probability);
-	for (uint32_t n = game.logic_rand() % fringe_size; n; --n)
-		mr.advance(map);
+	if
+		(game.logic_rand() % (6 * 256)
+		 <
+		 descr.terrain_suitability
+		 	(map.get_fcoords(immovable.get_position()), map))
 	{
-		Field const & f = map[mr.location()];
-		if (not f.get_immovable() and f.get_caps() & MOVECAPS_WALK)
+		MapFringeRegion<> mr(map, Area<>(immovable.get_position(), 0));
+		uint32_t fringe_size = 0;
+		do {
+			mr.extend(map);
+			fringe_size += 6;
+		} while (game.logic_rand() % 256 < probability);
+		for (uint32_t n = game.logic_rand() % fringe_size; n; --n)
+			mr.advance(map);
+		FCoords const f = map.get_fcoords(mr.location());
+		if
+			(not f.field->get_immovable()        and
+			 f.field->get_caps() & MOVECAPS_WALK and
+			 game.logic_rand() % (6 * 256) < descr.terrain_suitability(f, map))
 			game.create_immovable
 				(mr.location(),
 				 type_name,

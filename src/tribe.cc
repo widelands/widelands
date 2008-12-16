@@ -138,7 +138,8 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 					} else
 						m_immovables.add
 							(new Immovable_Descr
-							 	(_name, _descname, path, prof, global_s, this));
+							 	(_name, _descname, path, prof, global_s,
+							 	 the_world, this));
 					prof.check_used();
 				} catch (std::exception const & e) {
 					throw wexception("%s=\"%s\": %s", _name, _descname, e.what());

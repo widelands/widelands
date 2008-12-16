@@ -8,12 +8,26 @@
 #    * Seeding:   high
 #    * Growth:    fast
 #    * Longevity: short
+#    * Thrives better than others on: wiese4
 
 size=small
 attrib=tree
 program=program
 program=fall
 picture=idle_0.png
+
+[terrain affinity]
+steppe=    100
+berg1=       7
+strand=      3
+wiese1=    100
+wiese2=    200
+wiese3=    200
+berg2=       7
+berg3=       7
+berg4=       7
+wiese4=    255
+bergwiese=  50
 
 [idle]
 pics=idle_?.png
@@ -22,8 +36,8 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 6100
-transform=deadtree2 32
+animate=idle 61000
+transform=deadtree2 15
 seed=tree1_t 70
 
 [fall]

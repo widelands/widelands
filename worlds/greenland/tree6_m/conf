@@ -2,10 +2,23 @@ size=small
 program=program
 picture=s3tree6_00.png
 
+[terrain affinity]
+steppe=    120
+berg1=       7
+strand=      3
+wiese1=    120
+wiese2=    255
+wiese3=    200
+berg2=       7
+berg3=       7
+berg4=       7
+wiese4=    200
+bergwiese=  50
+
 [program]
 animate=medium 132000
 remove=19
-transform=tree6
+grow=tree6
 
 [medium]
 pics=s3tree6_??.png

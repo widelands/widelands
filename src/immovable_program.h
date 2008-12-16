@@ -80,6 +80,16 @@ struct ImmovableProgram {
 		uint8_t     probability;
 	};
 
+	/// Like ActTransform but the probability is determined by the suitability.
+	struct ActGrow : public Action {
+		ActGrow
+			(char * parameters, Immovable_Descr &);
+		virtual void execute(Game &, Immovable &) const;
+	private:
+		std::string type_name;
+		bool        tribe;
+	};
+
 	struct ActRemove : public Action {
 		ActRemove(char * parameters, Immovable_Descr &);
 		virtual void execute(Game &, Immovable &) const;
