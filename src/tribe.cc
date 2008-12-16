@@ -208,15 +208,17 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 			throw wexception("root conf: %s", e.what());
 		}
 #ifdef WRITE_GAME_DATA_AS_HTML
-		m_ware_references     = new HTMLReferences[get_nrwares    ().value()];
-		m_worker_references   = new HTMLReferences[get_nrworkers  ().value()];
-		m_building_references = new HTMLReferences[get_nrbuildings().value()];
-		writeHTMLBuildings(path);
-		writeHTMLWorkers  (path);
-		writeHTMLWares    (path);
-		delete[] m_building_references;
-		delete[] m_worker_references;
-		delete[] m_ware_references;
+		if (g_options.pull_section("global")->get_bool("write_HTML", false)) {
+			m_ware_references     = new HTMLReferences[get_nrwares    ().value()];
+			m_worker_references   = new HTMLReferences[get_nrworkers  ().value()];
+			m_building_references = new HTMLReferences[get_nrbuildings().value()];
+			writeHTMLBuildings(path);
+			writeHTMLWorkers  (path);
+			writeHTMLWares    (path);
+			delete[] m_building_references;
+			delete[] m_worker_references;
+			delete[] m_ware_references;
+		}
 #endif
 	}
 	catch (std::exception &e)
