@@ -31,12 +31,12 @@ struct Event_Reveal_Objective : public Event {
 	Event_Reveal_Objective(char const * const Name, State const S)
 	: Event(Name, S), m_objective(0)
 	{}
+	Event_Reveal_Objective(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_objective(Objective * objective) {m_objective = objective;}
@@ -46,6 +46,6 @@ private:
 	Objective * m_objective;
 };
 
-};
+}
 
 #endif

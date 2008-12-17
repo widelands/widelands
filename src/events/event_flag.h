@@ -33,12 +33,12 @@ struct Event_Flag : Event {
 	Event_Flag(char const * const Name, State const S)
 		: Event(Name, S), m_location(Coords::Null()), m_player(1)
 	{}
+	Event_Flag(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 private:

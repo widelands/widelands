@@ -33,6 +33,7 @@ struct Event_Conquer_Area : public Event_Player_Area {
 		:
 		Event_Player_Area(Name, S)
 	{}
+	Event_Conquer_Area(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 

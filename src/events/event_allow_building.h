@@ -36,12 +36,12 @@ struct Editor_Game_Base;
 struct Event_Allow_Building : public Event {
 	friend struct ::Event_Allow_Building_Option_Menu;
 	Event_Allow_Building(char const * name, State);
+	Event_Allow_Building(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_allow(bool t) {m_allow = t;}

@@ -48,10 +48,11 @@ Event::State Event_Unhide_Area::run(Game* game) {
 	return m_state = DONE;
 }
 
-void Event_Unhide_Area::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Unhide_Area::Event_Unhide_Area(Section & s, Editor_Game_Base & egbase)
+	: Event_Player_Area(s, egbase)
+{
 	try {
-		Event_Player_Area::Read(s, egbase);
-		duration = s.get_int("duration", 0);
+		duration = s.get_positive("duration", 0);
 	} catch (std::exception const & e) {
 		throw wexception("(unhide area): %s", e.what());
 	}

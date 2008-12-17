@@ -33,6 +33,7 @@ struct Editor_Game_Base;
  */
 struct Event_Set_Timer : public Event, public Referencer<Trigger> {
 	Event_Set_Timer(char const * name, State);
+	Event_Set_Timer(Section &, Editor_Game_Base &);
 	~Event_Set_Timer();
 
 	std::string identifier() const {return "Event (set timer): " + name();}
@@ -41,7 +42,6 @@ struct Event_Set_Timer : public Event, public Referencer<Trigger> {
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_trigger(Trigger_Time * const new_trigger) {

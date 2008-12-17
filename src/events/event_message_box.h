@@ -37,6 +37,7 @@ struct Editor_Game_Base;
  */
 struct Event_Message_Box : public Event, public Referencer<Trigger> {
 	Event_Message_Box(char const * const Name, State);
+	Event_Message_Box(Section &, Editor_Game_Base &);
 	~Event_Message_Box();
 
 	std::string identifier() const {return "Event (message box): " + name();}
@@ -45,7 +46,6 @@ struct Event_Message_Box : public Event, public Referencer<Trigger> {
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_text(const char * str) {m_text = str;}

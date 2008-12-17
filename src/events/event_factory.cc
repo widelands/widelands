@@ -32,6 +32,8 @@
 #include "event_reveal_objective.h"
 #include "event_reveal_scenario.h"
 #include "event_set_timer.h"
+#include "profile.h"
+
 #include "wexception.h"
 
 #include "i18n.h"
@@ -109,7 +111,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 Event & create(size_t const id) {
 	return
 		create
-		(id, i18n::translate(EVENT_TYPE_DESCRIPTIONS[id].name), Event::INIT);
+			(id, i18n::translate(EVENT_TYPE_DESCRIPTIONS[id].name), Event::INIT);
 }
 
 
@@ -136,9 +138,8 @@ Event & create
 }
 
 
-Event & create
-	(const char * type_name, char const * const name, Event::State const state)
-{
+Event & create(Section & s, Editor_Game_Base & egbase) {
+	char const * type_name = s.get_safe_string("type");
 
 	//  Handle old names.
 	if (not strcmp(type_name, "unhide_objective"))
@@ -154,7 +155,23 @@ Event & create
 	while (strcmp(type_name, EVENT_TYPE_DESCRIPTIONS[i].id))
 		if (++i == nr_event_types())
 			throw wexception("invalid type \"%s\"", type_name);
-	return create(i, name, state);
+	switch (i) {
+	case  0: return *new Event_Allow_Building  (s, egbase);
+	case  1: return *new Event_Building        (s, egbase);
+	case  2: return *new Event_Conquer_Area    (s, egbase);
+	case  3: return *new Event_Flag            (s, egbase);
+	case  4: return *new Event_Immovable       (s, egbase);
+	case  5: return *new Event_Message_Box     (s, egbase);
+	case  6: return *new Event_Move_View       (s, egbase);
+	case  7: return *new Event_Reveal_Campaign (s, egbase);
+	case  8: return *new Event_Reveal_Objective(s, egbase);
+	case  9: return *new Event_Reveal_Scenario (s, egbase);
+	case 10: return *new Event_Road            (s, egbase);
+	case 11: return *new Event_Set_Timer       (s, egbase);
+	case 12: return *new Event_Unhide_Area     (s, egbase);
+	default:
+		assert(false);
+	}
 }
 
 
@@ -168,6 +185,6 @@ size_t nr_event_types() {
 	return sizeof(EVENT_TYPE_DESCRIPTIONS) / sizeof(*EVENT_TYPE_DESCRIPTIONS);
 }
 
-};
+}
 
-};
+}

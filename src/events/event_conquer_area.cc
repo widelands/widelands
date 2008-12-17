@@ -26,6 +26,11 @@
 
 namespace Widelands {
 
+Event_Conquer_Area::Event_Conquer_Area(Section & s, Editor_Game_Base & egbase)
+	: Event_Player_Area(s, egbase)
+{}
+
+
 Event::State Event_Conquer_Area::run(Game* game) {
 	assert(m_player_area);
 	assert(0 < m_player_area.player_number);

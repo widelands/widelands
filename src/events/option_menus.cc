@@ -81,4 +81,4 @@ int32_t Event_Move_View                 ::option_menu(Editor_Interactive & eia)
 int32_t Event_Unhide_Area               ::option_menu(Editor_Interactive & eia)
 {Event_Unhide_Area_Option_Menu                  m(eia, *this); return m.run();}
 
-};
+}

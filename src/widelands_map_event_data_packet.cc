@@ -54,35 +54,16 @@ throw (_wexception)
 			prof.get_safe_section("global").get_safe_positive("packet_version");
 		if (packet_version <= CURRENT_PACKET_VERSION) {
 			Manager<Event> & mem = egbase->map().mem();
-			while (Section * const s = prof.get_next_section(0)) {
-				char const * const name = s->get_name();
+			while (Section * const s = prof.get_next_section(0))
 				try {
-					char const * const state_name = s->get_string("state", "init");
-					Event::State state;
-					if      (not strcmp(state_name, "init"))
-						state = Event::INIT;
-					else if (not strcmp(state_name, "running"))
-						state = Event::RUNNING;
-					else if (not strcmp(state_name, "done"))
-						state = Event::DONE;
-					else
-						throw wexception
-							("illegal state \"%s\" (must be one of {init, running, "
-							 "done})",
-							 state_name);
-					Event & event =
-						Event_Factory::create
-						(s->get_safe_string("type"), name, state);
 					try {
-						mem.register_new(event);
+						mem.register_new(Event_Factory::create(*s, *egbase));
 					} catch (Manager<Event>::Already_Exists) {
 						throw wexception("duplicated");
 					}
-					event.Read(*s, *egbase);
 				} catch (std::exception const & e) {
-					throw wexception("%s: %s", name, e.what());
+					throw wexception("%s: %s", s->get_name(), e.what());
 				}
-			}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 		prof.check_used();

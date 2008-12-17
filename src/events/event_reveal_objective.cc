@@ -32,7 +32,10 @@
 
 namespace Widelands {
 
-void Event_Reveal_Objective::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Reveal_Objective::Event_Reveal_Objective
+	(Section & s, Editor_Game_Base & egbase)
+	: Event(s), m_objective(0)
+{
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= EVENT_VERSION) {

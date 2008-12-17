@@ -95,7 +95,9 @@ const char* Event_Message_Box::get_button_name(int32_t i) {
 }
 
 
-void Event_Message_Box::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Message_Box::Event_Message_Box(Section & s, Editor_Game_Base & egbase)
+	: Event(s)
+{
 	m_buttons.clear();
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");

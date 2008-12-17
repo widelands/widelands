@@ -24,6 +24,11 @@
 
 namespace Widelands {
 
+Event_Reveal_Campaign::Event_Reveal_Campaign
+	(Section & s, Editor_Game_Base & egbase)
+	: Event_Reveal(s, egbase)
+{}
+
 void Event_Reveal_Campaign::Write(Section & s, Editor_Game_Base & egbase) const
 {
 	s.set_string("type",    "reveal_campaign");

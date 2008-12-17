@@ -32,12 +32,12 @@ struct Event_Road : Event {
 	Event_Road(char const * const Name, State const S) :
 		Event(Name, S), m_player(1), m_fill(true)
 	{}
+	Event_Road(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 private:

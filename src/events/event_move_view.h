@@ -32,12 +32,12 @@ struct Event_Move_View : public Event {
 	Event_Move_View(char const * Name, State const S)
 		: Event(Name, S), m_location(Coords::Null()), m_player(1)
 	{}
+	Event_Move_View(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_location(Coords const c) {m_location = c;}

@@ -29,7 +29,9 @@
 
 namespace Widelands {
 
-void Event_Move_View::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Move_View::Event_Move_View(Section & s, Editor_Game_Base & egbase)
+	: Event (s)
+{
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= EVENT_VERSION) {

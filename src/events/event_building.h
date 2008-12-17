@@ -30,6 +30,8 @@ struct Event_Building_Option_Menu;
 
 namespace Widelands {
 
+struct Tribe_Descr;
+
 struct Event_Building : Event {
 	friend struct ::Event_Building_Option_Menu;
 	Event_Building(char const * Name, State const S) :
@@ -39,13 +41,15 @@ struct Event_Building : Event {
 		m_ware_counts  (0),
 		m_worker_counts(0)
 	{}
+	Event_Building
+		(Section &, Editor_Game_Base &,
+		 Tribe_Descr const * = 0, Building_Index = Building_Index::Null());
 	~Event_Building();
 
 	int32_t option_menu(Editor_Interactive &);
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 private:

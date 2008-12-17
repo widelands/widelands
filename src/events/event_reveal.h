@@ -28,8 +28,8 @@ struct Event_Reveal : public Event {
 	Event_Reveal(char const * Name, State const S)
 		: Event(Name, S)
 	{}
+	Event_Reveal(Section &, Editor_Game_Base &);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 protected:

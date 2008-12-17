@@ -28,6 +28,7 @@ struct Event_Reveal_Campaign : public Event_Reveal {
 	Event_Reveal_Campaign(char const * Name, State const S)
 		: Event_Reveal(Name, S)
 	{}
+	Event_Reveal_Campaign(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 

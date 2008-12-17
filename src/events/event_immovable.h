@@ -32,12 +32,12 @@ struct Event_Immovable : Event {
 	Event_Immovable(char const * const Name, State const S)
 		: Event(Name, S), m_location(Coords::Null()), m_immovable_type(0)
 	{}
+	Event_Immovable(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 
 	State run(Game *);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 private:

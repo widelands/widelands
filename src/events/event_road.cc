@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-void Event_Road::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Road::Event_Road(Section & s, Editor_Game_Base & egbase) : Event(s) {
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version == EVENT_VERSION) {

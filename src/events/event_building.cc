@@ -35,33 +35,41 @@
 
 namespace Widelands {
 
-void Event_Building::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Building::Event_Building
+	(Section & s, Editor_Game_Base & egbase,
+	 Tribe_Descr const * tribe, Building_Index building)
+	: Event(s), m_ware_counts(0), m_worker_counts(0)
+{
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= EVENT_VERSION) {
-			Map const & map = egbase.map();
-			m_player   = s.get_Player_Number("player", map.get_nrplayers(), 1);
-			m_location =
-				s.get_Coords
-					("point", map.extent(), map.get_starting_pos(m_player));
-			egbase.get_iabase()->reference_player_tribe(m_player, this);
-			Tribe_Descr const & tribe =
-				egbase.manually_load_tribe
-					(map.get_scenario_player_tribe(m_player));
-			m_building = tribe.safe_building_index(s.get_safe_string("building"));
-			Building_Descr const & descr = *tribe.get_building_descr(m_building);
+			if (not tribe) {
+				Map const & map = egbase.map();
+				m_player   = s.get_Player_Number("player", map.get_nrplayers(), 1);
+				m_location =
+					s.get_Coords
+						("point", map.extent(), map.get_starting_pos(m_player));
+				egbase.get_iabase()->reference_player_tribe(m_player, this);
+				tribe =
+					&egbase.manually_load_tribe
+						(map.get_scenario_player_tribe(m_player));
+				building =
+					tribe->safe_building_index(s.get_safe_string("building"));
+			}
+			m_building = building;
+			Building_Descr const & descr = *tribe->get_building_descr(building);
 			if (dynamic_cast<Warehouse_Descr const *>(&descr)) {
 				{ //  wares
-					Ware_Index const nr_ware_types = tribe.get_nrwares();
+					Ware_Index const nr_ware_types = tribe->get_nrwares();
 					assert(not m_ware_counts);
 					m_ware_counts = new uint32_t[nr_ware_types.value()];
 					for (Ware_Index i = Ware_Index::First(); i < nr_ware_types; ++i)
 						m_ware_counts[i.value()] =
 							s.get_positive
-								(tribe.get_ware_descr(i)->name().c_str(), 0);
+								(tribe->get_ware_descr(i)->name().c_str(), 0);
 				}
 				{ //  workers
-					Ware_Index const nr_worker_types = tribe.get_nrworkers();
+					Ware_Index const nr_worker_types = tribe->get_nrworkers();
 					assert(not m_worker_counts);
 					m_worker_counts = new uint32_t[nr_worker_types.value()];
 					for
@@ -70,11 +78,11 @@ void Event_Building::Read(Section & s, Editor_Game_Base & egbase) {
 						 ++i)
 						m_worker_counts[i.value()] =
 							s.get_positive
-								(tribe.get_worker_descr(i)->name().c_str(), 0);
+								(tribe->get_worker_descr(i)->name().c_str(), 0);
 				}
 				Soldier_Descr const & soldier_descr =  //  soldiers
 					dynamic_cast<Soldier_Descr const &>
-						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+						(*tribe->get_worker_descr(tribe->worker_index("soldier")));
 				uint32_t const max_hp_level      =
 					soldier_descr.get_max_hp_level     ();
 				uint32_t const max_attack_level  =
@@ -146,7 +154,7 @@ void Event_Building::Read(Section & s, Editor_Game_Base & egbase) {
 									 ++i.i, ++i.it)
 								{
 									char const * const wname =
-										tribe.get_ware_descr(i.it->first)->name().c_str
+										tribe->get_ware_descr(i.it->first)->name().c_str
 											();
 									uint32_t     const count = s.get_positive(wname, 0);
 									uint32_t     const max   = i.it->second;
@@ -171,7 +179,8 @@ void Event_Building::Read(Section & s, Editor_Game_Base & egbase) {
 								 ++i.i, ++i.it)
 							{
 								char const * const wname =
-									tribe.get_worker_descr(i.it->first)->name().c_str();
+									tribe->get_worker_descr(i.it->first)->name().c_str
+										();
 								uint32_t     const max   = i.it->second;
 								uint32_t     const count =
 									fill ? max : s.get_positive(wname, 0);
@@ -190,8 +199,8 @@ void Event_Building::Read(Section & s, Editor_Game_Base & egbase) {
 						uint32_t soldier_count = 0;
 						Soldier_Descr const & soldier_descr =
 							dynamic_cast<Soldier_Descr const &>
-								(*tribe.get_worker_descr
-								 	(tribe.worker_index("soldier")));
+								(*tribe->get_worker_descr
+								 	(tribe->worker_index("soldier")));
 						uint32_t const max_hp_level      =
 							soldier_descr.get_max_hp_level     ();
 						uint32_t const max_attack_level  =

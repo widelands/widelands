@@ -46,9 +46,8 @@ Event & create(size_t, char const * name, Event::State state);
 
 /// Creates an event of the type with the given type name.
 ///
-/// \Throws _wexception if there is no event type with the given name.
-Event & create
-	(char const * type_name, char const * name, Event::State);
+/// \Throws _wexception if there is no event type with the found name.
+Event & create(Section &, Editor_Game_Base &);
 
 struct Type_Descr {
 	char const * const id;       /// The identifier that is written to files.

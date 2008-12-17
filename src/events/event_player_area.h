@@ -25,7 +25,7 @@
 
 namespace Widelands {
 
-///  Abstract base for events involving a player and an area.
+/// Abstract base for events involving a player and an area.
 struct Event_Player_Area : public Event {
 	Event_Player_Area
 		(char const * const Name, State const S,
@@ -33,8 +33,8 @@ struct Event_Player_Area : public Event {
 		 Player_Area<>(1, Area<>(Coords(0, 0), 0)))
 		: Event(Name, S), m_player_area(player_area)
 	{}
+	Event_Player_Area(Section &, Editor_Game_Base &);
 
-	void Read (Section &, Editor_Game_Base &);
 	void Write(Section &, Editor_Game_Base &) const;
 
 protected:

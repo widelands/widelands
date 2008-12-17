@@ -41,13 +41,9 @@ Event_Set_Timer::Event_Set_Timer
 {}
 
 
-
-Event_Set_Timer::~Event_Set_Timer() {
-	set_trigger(0);
-}
-
-
-void Event_Set_Timer::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Set_Timer::Event_Set_Timer(Section & s, Editor_Game_Base & egbase)
+	: Event(s), m_trigger(0)
+{
 	try {
 		uint32_t const event_version = s.get_safe_positive("version");
 		if (event_version == EVENT_VERSION) {
@@ -64,6 +60,12 @@ void Event_Set_Timer::Read(Section & s, Editor_Game_Base & egbase) {
 		throw wexception("(set_timer): %s", e.what());
 	}
 }
+
+
+Event_Set_Timer::~Event_Set_Timer() {
+	set_trigger(0);
+}
+
 
 void Event_Set_Timer::Write(Section & s, Editor_Game_Base &) const {
 	assert(m_trigger);

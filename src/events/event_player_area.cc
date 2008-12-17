@@ -30,9 +30,11 @@
 
 namespace Widelands {
 
-void Event_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Player_Area::Event_Player_Area(Section & s, Editor_Game_Base & egbase)
+	: Event(s)
+{
 	try {
-		int32_t const event_version = s.get_safe_int("version");
+		uint32_t const event_version = s.get_safe_positive("version");
 		if (1 <= event_version and event_version <= EVENT_VERSION) {
 			Map const & map = egbase.map();
 			Extent const extent = map.extent();
@@ -53,7 +55,7 @@ void Event_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
 					("illegal coordinates (%i, %i)",
 					 m_player_area.x, m_player_area.y);
 		} else
-			throw wexception("unknown/unhandled version %i", event_version);
+			throw wexception("unknown/unhandled version %u", event_version);
 	} catch (std::exception const & e) {
 		throw wexception("(player area): %s", e.what());
 	}

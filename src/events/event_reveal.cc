@@ -27,7 +27,7 @@
 
 namespace Widelands {
 
-void Event_Reveal::Read(Section & s, Editor_Game_Base &) {
+Event_Reveal::Event_Reveal(Section & s, Editor_Game_Base &) : Event(s) {
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= EVENT_VERSION)

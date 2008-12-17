@@ -27,16 +27,18 @@
 
 namespace Widelands {
 
-void Event_Immovable::Read(Section & s, Editor_Game_Base & egbase) {
+Event_Immovable::Event_Immovable(Section & s, Editor_Game_Base & egbase)
+	: Event(s)
+{
 	try {
-		int32_t const packet_version = s.get_safe_int("version");
+		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version == EVENT_VERSION) {
 			Map const & map = egbase.map();
 			m_location = s.get_safe_Coords  ("point",  map.extent());
 			m_immovable_type =
 				&s.get_safe_Immovable_Type("tribe", "name", egbase);
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
 		throw wexception("(flag): %s", e.what());
 	}

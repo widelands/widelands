@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,26 +17,25 @@
  *
  */
 
-#ifndef EVENT_REVEAL_SCENARIO_H
-#define EVENT_REVEAL_SCENARIO_H
+#include "event.h"
+#include "profile.h"
 
-#include "event_reveal.h"
+#include "wexception.h"
 
 namespace Widelands {
 
-struct Event_Reveal_Scenario : public Event_Reveal {
-	Event_Reveal_Scenario(char const * Name, State const S)
-		: Event_Reveal(Name, S)
-	{}
-	Event_Reveal_Scenario(Section &, Editor_Game_Base &);
+Event::Event(Section & s) : Named(s.get_name()) {
+	char const * const state_name = s.get_string("state", "init");
+	if      (not strcmp(state_name, "init"))
+		m_state = Event::INIT;
+	else if (not strcmp(state_name, "running"))
+		m_state = Event::RUNNING;
+	else if (not strcmp(state_name, "done"))
+		m_state = Event::DONE;
+	else
+		throw wexception
+			("illegal state \"%s\" (must be one of {init, running, done})",
+			 state_name);
+}
 
-	int32_t option_menu(Editor_Interactive &);
-
-	State run(Game*);
-
-	void Write(Section &, Editor_Game_Base &) const;
-};
-
-};
-
-#endif
+}
