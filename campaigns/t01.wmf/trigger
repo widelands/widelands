@@ -38,7 +38,6 @@ building=quarry
 type=time
 version=1
 wait_time=2
-last_start_time=0
 
 [Order3]
 type=null
@@ -53,28 +52,23 @@ type=null
 type=time
 version=1
 wait_time=75
-last_start_time=0
 
 [Story Timer 2]
 type=time
 version=1
 wait_time=160
-last_start_time=0
 
 [Story Timer 3]
 type=time
 version=1
 wait_time=260
-last_start_time=0
 
 [Story Timer 4]
 type=time
 version=1
 wait_time=365
-last_start_time=0
 
 [Wait]
 type=time
 version=1
 wait_time=5
-last_start_time=0

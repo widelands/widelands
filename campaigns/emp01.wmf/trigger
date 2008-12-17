@@ -9,13 +9,11 @@ time=0
 type=time
 version=1
 wait_time=0
-last_start_time=0
 
 [Message Barracks]
 type=time
 version=1
 wait_time=10
-last_start_time=0
 
 [Barracks complete]
 type=building

@@ -140,7 +140,6 @@ building=fernery
 type=time
 version=1
 wait_time=2
-last_start_time=0
 
 [Mission Mines]
 type=null
@@ -170,13 +169,11 @@ type=null
 type=time
 version=1
 wait_time=600
-last_start_time=0
 
 [Story Timer 2]
 type=time
 version=1
 wait_time=180
-last_start_time=0
 
 [Saw Village From North]
 type=vision
