@@ -38,10 +38,6 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-m_xres
-	(gr_x()),
-m_yres
-	(gr_y()),
 m_butw
 	(m_xres / 4),
 m_buth
@@ -52,7 +48,8 @@ m_fn
 	(ui_fn()),
 
 // Text labels
-title (this, m_xres/2, m_yres * 9 / 50, _("Select a campaign"), Align_HCenter),
+title
+	(this, m_xres / 2, m_yres * 9 / 50, _("Select a campaign"), Align_HCenter),
 label_campname   (this, m_xres * 3 / 5,  m_yres * 17 / 50, _("Campaign:")),
 tacampname       (this, m_xres * 61 / 100, m_yres * 3 / 8, ""),
 label_difficulty (this, m_xres * 3 / 5,  m_yres * 17 / 40, _("Difficulty:")),
@@ -267,7 +264,7 @@ m_fn
 	(ui_fn()),
 
 // Text labels
-title(this, m_xres/2, m_yres * 9 / 50, _("Choose your map!"), Align_HCenter),
+title(this, m_xres / 2, m_yres * 9 / 50, _("Choose your map!"), Align_HCenter),
 label_mapname   (this, m_xres * 3 / 5,  m_yres * 17 / 50, _("Name:")),
 tamapname       (this, m_xres * 61 / 100, m_yres * 3 / 8, ""),
 label_author    (this, m_xres * 3 / 5,  m_yres * 17 / 40, _("Author:")),

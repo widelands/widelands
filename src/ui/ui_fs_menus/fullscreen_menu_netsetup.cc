@@ -29,10 +29,6 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 Fullscreen_Menu_Base("singleplmenu.jpg"), // change this
 
 // Values for alignment and size
-m_xres
-	(gr_x()),
-m_yres
-	(gr_y()),
 m_butx
 	(m_xres * 13 / 40),
 m_butw
@@ -49,7 +45,7 @@ m_fn
 // Text labels
 title
 	(this,
-	 m_xres/2, m_yres / 10,
+	 m_xres / 2, m_yres / 10,
 	 _("Begin Network Game"), Align_HCenter),
 m_opengames
 	(this,

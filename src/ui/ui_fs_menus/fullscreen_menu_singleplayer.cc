@@ -26,10 +26,6 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer() :
 Fullscreen_Menu_Base("singleplmenu.jpg"),
 
 // Values for alignment and size
-m_xres
-	(gr_x()),
-m_yres
-	(gr_y()),
 m_butw
 	(m_xres * 7 / 20),
 m_buth
@@ -44,7 +40,7 @@ m_fn
 // Title
 title
 	(this,
-	 m_xres/2, m_yres * 3 / 40,
+	 m_xres / 2, m_yres * 3 / 40,
 	 _("Single Player Menu"), Align_HCenter),
 
 // Buttons

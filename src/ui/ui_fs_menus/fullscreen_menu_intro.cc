@@ -28,11 +28,11 @@ Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 // Text area
 m_message
 	(this,
-	 gr_x()/2, gr_y() * 19 / 20,
+	 gr_x() / 2, gr_y() * 19 / 20,
 	 _("Press a key or click to continue ..."),
 	 Align_HCenter)
 {
-	m_message.set_font(ui_fn(), fs_small()*1.2, RGBColor(192, 192, 128));
+	m_message.set_font(ui_fn(), fs_small() * 6 / 5, RGBColor(192, 192, 128));
 }
 
 bool Fullscreen_Menu_Intro::handle_mousepress(const Uint8, int32_t, int32_t) {

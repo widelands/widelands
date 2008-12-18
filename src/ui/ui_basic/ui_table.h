@@ -172,7 +172,7 @@ public:
 	void set_font(std::string const & fontname, int32_t fontsize) {
 		m_fontname = fontname;
 		m_fontsize = fontsize;
-		m_headerheight = fontsize*1.2;
+		m_headerheight = fontsize * 6 / 5;
 	}
 
 	void sort

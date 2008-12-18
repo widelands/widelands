@@ -71,8 +71,6 @@ private:
 	void load_previous_playerdata();
 	void enable_all_pdgs();
 
-	uint32_t    m_xres;
-	uint32_t    m_yres;
 	uint32_t    m_butw;
 	uint32_t    m_buth;
 	uint32_t    m_fs;

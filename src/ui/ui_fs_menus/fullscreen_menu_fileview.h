@@ -42,9 +42,6 @@ protected:
 	void set_text(const std::string & text);
 
 private:
-	uint32_t m_xres;
-	uint32_t m_yres;
-
 	UI::Textarea                                title;
 	UI::Multiline_Textarea                      textview;
 	UI::IDButton<Fullscreen_Menu_TextView, int32_t> close_button;

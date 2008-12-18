@@ -27,10 +27,6 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 Fullscreen_Menu_Base("mainmenu.jpg"),
 
 // Values for alignment and size
-m_xres
-	(gr_x()),
-m_yres
-	(gr_y()),
 m_butx
 	(m_xres * 13 / 40),
 m_butw

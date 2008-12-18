@@ -35,8 +35,6 @@ struct Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
 	enum {Back = dying_code, New_Game, Campaign, Load_Game};
 
 private:
-	uint32_t                                            m_xres;
-	uint32_t                                            m_yres;
 	uint32_t                                            m_butw;
 	uint32_t                                            m_buth;
 	uint32_t                                            m_butx;

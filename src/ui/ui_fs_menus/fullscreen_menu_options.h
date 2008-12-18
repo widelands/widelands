@@ -81,8 +81,6 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	};
 
 private:
-	uint32_t                          m_xres;
-	uint32_t                          m_yres;
 	uint32_t                          m_vbutw;
 	uint32_t                          m_butw;
 	uint32_t                          m_buth;

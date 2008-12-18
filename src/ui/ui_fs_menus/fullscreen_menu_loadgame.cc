@@ -33,10 +33,6 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-m_xres
-	(gr_x()),
-m_yres
-	(gr_y()),
 m_butw
 	(m_xres / 4),
 m_buth

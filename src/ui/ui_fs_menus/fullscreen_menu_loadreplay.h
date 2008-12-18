@@ -43,8 +43,6 @@ struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
 	void fill_list();
 
 private:
-	uint32_t    m_xres;
-	uint32_t    m_yres;
 	uint32_t    m_butw;
 	uint32_t    m_buth;
 	uint32_t    m_fs;

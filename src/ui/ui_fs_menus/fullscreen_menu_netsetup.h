@@ -61,8 +61,6 @@ struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	const std::string& get_playername();
 
 private:
-	uint32_t                                    m_xres;
-	uint32_t                                    m_yres;
 	uint32_t                                    m_butx;
 	uint32_t                                    m_butw;
 	uint32_t                                    m_buth;

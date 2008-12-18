@@ -29,12 +29,6 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(const std::string & filename)
 :
 Fullscreen_Menu_Base("fileviewmenu.jpg"),
 
-// Values for alignment and size
-m_xres
-	(gr_x()),
-m_yres
-	(gr_y()),
-
 // Title
 title (this, m_xres * 3 / 50, m_yres / 10, std::string(), Align_Left),
 

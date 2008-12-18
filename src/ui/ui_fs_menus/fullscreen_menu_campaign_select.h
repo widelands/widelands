@@ -45,8 +45,6 @@ struct Fullscreen_Menu_CampaignSelect : public Fullscreen_Menu_Base {
 	int32_t get_campaign();
 
 private:
-	uint32_t    m_xres;
-	uint32_t    m_yres;
 	uint32_t    m_butw;
 	uint32_t    m_buth;
 	uint32_t    m_fs;

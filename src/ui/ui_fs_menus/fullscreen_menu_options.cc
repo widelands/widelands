@@ -39,10 +39,6 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 Fullscreen_Menu_Base("optionsmenu.jpg"),
 
 // Values for alignment and size
-m_xres
-	(gr_x()),
-m_yres
-	(gr_y()),
 m_vbutw
 	(m_yres * 333 / 10000),
 m_butw

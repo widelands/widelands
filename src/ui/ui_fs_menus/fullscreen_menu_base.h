@@ -49,9 +49,10 @@ uint32_t fs_big();
 ///\return the current set UI font
 std::string ui_fn();
 
-private:
+protected:
 	uint32_t m_xres;
 	uint32_t m_yres;
+private:
 	uint32_t m_pic_background;
 	uint32_t m_res_background;
 };
