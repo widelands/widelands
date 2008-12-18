@@ -71,7 +71,7 @@ b_ok
 back
 	(this,
 	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-	 2,
+	 0,
 	 &Fullscreen_Menu_CampaignSelect::end_modal, this, 0,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
@@ -289,7 +289,7 @@ b_ok
 back
 	(this,
 	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-	 2,
+	 0,
 	 &Fullscreen_Menu_CampaignMapSelect::end_modal, this, 0,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
