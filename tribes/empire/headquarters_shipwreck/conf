@@ -1,0 +1,10 @@
+# soundfx=../../../sound/spoken/warehouse-bringitin
+type=warehouse
+size=big
+buildable=no
+subtype=HQ
+conquers=9
+
+[idle]
+# sfx=0 ../../../sound/spoken/warehouse-bringitin
+hotspot=95 110
