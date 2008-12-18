@@ -28,7 +28,7 @@ Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 // Text area
 m_message
 	(this,
-	 gr_x()/2, gr_y()*0.95,
+	 gr_x()/2, gr_y() * 19 / 20,
 	 _("Press a key or click to continue ..."),
 	 Align_HCenter)
 {

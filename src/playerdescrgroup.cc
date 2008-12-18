@@ -56,14 +56,14 @@ d(new PlayerDescriptionGroupImpl)
 	d->plnum = plnum;
 
 	d->plr_name = new UI::Textarea
-		(this, 0, 0, w*0.22, h, std::string(), Align_Left);
+		(this, 0, 0, w * 11 / 50, h, std::string(), Align_Left);
 	d->plr_name->set_font(fname, fsize, UI_FONT_CLR_FG);
-	d->btnEnablePlayer = new UI::Checkbox(this, Point(w*0.2, 0));
+	d->btnEnablePlayer = new UI::Checkbox(this, Point(w / 5, 0));
 	d->btnEnablePlayer->changedto.set
 		(this, &PlayerDescriptionGroup::enable_player);
 	d->btnPlayerType = new UI::Button<PlayerDescriptionGroup>
 		(this,
-		 w*0.256, 0, w*0.265, h,
+		 w * 32 / 125, 0, w * 53 / 200, h,
 		 1,
 		 &PlayerDescriptionGroup::toggle_playertype, this,
 		 "",
@@ -72,7 +72,7 @@ d(new PlayerDescriptionGroupImpl)
 		 fname, fsize);
 	d->btnPlayerTribe = new UI::Button<PlayerDescriptionGroup>
 		(this,
-		 w*0.54, 0, w*0.265, h,
+		 w * 27 / 50, 0, w * 53 / 200, h,
 		 1,
 		 &PlayerDescriptionGroup::toggle_playertribe, this,
 		 "",

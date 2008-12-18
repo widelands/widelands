@@ -46,9 +46,9 @@ m_xres
 m_yres
 	(gr_y()),
 m_butw
-	(m_xres*0.25),
+	(m_xres / 4),
 m_buth
-	(m_yres*0.045),
+	(m_yres * 9 / 200),
 m_fs
 	(fs_small()),
 m_fn
@@ -57,28 +57,28 @@ m_fn
 // Buttons
 m_select_map
 	(this,
-	 m_xres*0.7, m_yres*0.35, m_butw, m_buth,
+	 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_LaunchGame::select_map, this,
 	 _("Select map"), std::string(), false, false,
 	 m_fn, m_fs),
 m_select_save
 	(this,
-	 m_xres*0.7, m_yres*0.4, m_butw, m_buth,
+	 m_xres * 7 / 10, m_yres * 2 / 5, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_LaunchGame::select_savegame, this,
 	 _("Select Savegame"), std::string(), false, false,
 	 m_fn, m_fs),
 m_back
 	(this,
-	 m_xres*0.7, m_yres*0.85, m_butw, m_buth,
+	 m_xres * 7 / 10, m_yres * 17 / 20, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_LaunchGame::back_clicked, this,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 m_ok
 	(this,
-	 m_xres*0.7, m_yres*0.9, m_butw, m_buth,
+	 m_xres * 7 / 10, m_yres * 9 / 10, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_LaunchGame::start_clicked, this,
 	 _("Start game"), std::string(), false, false,
@@ -87,17 +87,17 @@ m_ok
 // Text labels
 m_title
 	(this,
-	 m_xres/2, m_yres*0.1,
+	 m_xres / 2, m_yres / 10,
 	 _("Launch Game"),
 	 Align_HCenter),
 m_mapname
 	(this,
-	 (m_xres*0.7)+(m_butw/2), m_yres*0.3,
+	 m_xres * 7 / 10 + m_butw / 2, m_yres * 3 / 10,
 	 std::string(),
 	 Align_HCenter),
 m_notes
 	(this,
-	 m_xres*0.06, m_yres*0.18, m_xres*0.88, m_yres*0.1,
+	 m_xres * 3 / 5, m_yres * 9 / 50, m_xres * 22 / 25, m_yres / 10,
 	 std::string()),
 
 // Variables and objects used in the menu
@@ -112,12 +112,12 @@ m_is_savegame  (false)
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
-	uint32_t y = m_yres*0.25;
+	uint32_t y = m_yres / 4;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,
-				 m_xres*0.06, y += m_buth, m_xres*0.6, m_yres*0.034,
+				 m_xres * 3 / 50, y += m_buth, m_xres * 3 / 5, m_yres * 17 / 500,
 				 settings, i,
 				 m_fn, m_fs);
 
@@ -165,8 +165,14 @@ void Fullscreen_Menu_LaunchGame::think()
 void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider * const chat)
 {
 	delete m_chat;
-	m_chat = chat ? new GameChatPanel
-		(this, m_xres*0.06, m_yres*0.7, m_xres*0.6, m_yres*0.27, *chat) : 0;
+	m_chat =
+		chat ?
+		new GameChatPanel
+			(this,
+			 m_xres * 3 / 50, m_yres * 7 / 10, m_xres * 3 / 5, m_yres * 27 / 100,
+			 *chat)
+		:
+		0;
 }
 
 

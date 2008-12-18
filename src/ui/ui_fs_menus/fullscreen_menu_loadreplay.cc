@@ -37,9 +37,9 @@ m_xres
 m_yres
 	(gr_y()),
 m_butw
-	(m_xres*0.25),
+	(m_xres / 4),
 m_buth
-	(m_yres*0.045),
+	(m_yres * 9 / 299),
 m_fs
 	(fs_small()),
 m_fn
@@ -48,24 +48,28 @@ m_fn
 // Buttons
 m_back
 	(this,
-	 m_xres*0.71, m_yres*0.85, m_butw, m_buth,
+	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_LoadReplay::end_modal, this, 0,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 m_ok
 	(this,
-	 m_xres*0.71, m_yres*0.9, m_butw, m_buth,
+	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_LoadReplay::clicked_ok, this,
 	 _("OK"), std::string(), false, false,
 	 m_fn, m_fs),
 
 // Replay list
-m_list(this, m_xres*0.0188, m_yres*0.3417, m_xres*0.5688, m_yres*0.6083),
+m_list
+	(this,
+	 m_xres *  47 / 2500, m_yres * 3417 / 10000,
+	 m_xres * 711 / 1250, m_yres * 6083 / 10000),
 
 // Text area
-m_title(this, m_xres/2, m_yres*0.15, _("Choose a replay!"), Align_HCenter)
+m_title
+	(this, m_xres / 2, m_yres * 3 / 20, _("Choose a replay!"), Align_HCenter)
 {
 	m_title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_list .set_font(m_fn, m_fs);

@@ -32,11 +32,11 @@ m_xres
 m_yres
 	(gr_y()),
 m_butx
-	(m_xres*0.325),
+	(m_xres * 13 / 40),
 m_butw
-	(m_xres*0.35),
+	(m_xres * 7 / 20),
 m_buth
-	(m_yres*0.0475),
+	(m_yres * 19 / 400),
 m_fs
 	(fs_small()),
 m_fn
@@ -45,56 +45,56 @@ m_fn
 // Buttons
 singleplayer
 	(this,
-	 m_butx, m_yres*0.24, m_butw, m_buth,
+	 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_singleplayer,
 	 _("Single Player"), std::string(), true, false,
 	 m_fn, m_fs),
 multiplayer
 	(this,
-	 m_butx, m_yres*0.305, m_butw, m_buth,
+	 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_multiplayer,
 	 _("Multi Player"), std::string(), true, false,
 	 m_fn, m_fs),
 replay
 	(this,
-	 m_butx, m_yres*0.37, m_butw, m_buth,
+	 m_butx, m_yres * 37 / 100, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_replay,
 	 _("Watch Replay"), std::string(), true, false,
 	 m_fn, m_fs),
 options
 	(this,
-	 m_butx, m_yres*0.435, m_butw, m_buth,
+	 m_butx, m_yres * 87 / 200, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_options,
 	 _("Options"), std::string(), true, false,
 	 m_fn, m_fs),
 editor
 	(this,
-	 m_butx, m_yres*0.5, m_butw, m_buth,
+	 m_butx, m_yres / 2, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_editor,
 	 _("Editor"), std::string(), true, false,
 	 m_fn, m_fs),
 readme
 	(this,
-	 m_butx, m_yres*0.565, m_butw, m_buth,
+	 m_butx, m_yres * 113 / 200, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_readme,
 	 _("View Readme"), std::string(), true, false,
 	 m_fn, m_fs),
 license
 	(this,
-	 m_butx, m_yres*0.63, m_butw, m_buth,
+	 m_butx, m_yres * 63 / 100, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_license,
 	 _("License"), std::string(), true, false,
 	 m_fn, m_fs),
 exit
 	(this,
-	 m_butx, m_yres*0.75, m_butw, m_buth,
+	 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 	 3,
 	 &Fullscreen_Menu_Main::end_modal, this, mm_exit,
 	 _("Exit Game"), std::string(), true, false,

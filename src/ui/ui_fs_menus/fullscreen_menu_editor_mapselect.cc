@@ -46,9 +46,9 @@ m_xres
 m_yres
 	(gr_y()),
 m_butw
-	(m_xres*0.25),
+	(m_xres / 4),
 m_buth
-	(m_yres*0.045),
+	(m_yres * 9 / 200),
 m_fs
 	(fs_small()),
 m_fn
@@ -57,64 +57,64 @@ m_fn
 // Text labels
 m_title
 	(this,
-	 m_xres / 2, m_yres*0.18,
+	 m_xres / 2, m_yres * 9 / 50,
 	 _("Choose your map!"),
 	 Align_HCenter),
 m_label_name
 	(this,
-	 m_xres*0.7, m_yres*0.34,
+	 m_xres * 7 / 10, m_yres * 17 / 50,
 	 _("Name:"),
 	 Align_Right),
-m_name (this, m_xres*0.71, m_yres*0.34, std::string()),
+m_name (this, m_xres * 71 / 100, m_yres * 17 / 50, std::string()),
 m_label_author
 	(this,
-	 m_xres*0.7, m_yres*0.375,
+	 m_xres * 7 / 10, m_yres * 3 / 8,
 	 _("Author:"),
 	 Align_Right),
-m_author (this, m_xres*0.71, m_yres*0.375, std::string()),
+m_author (this, m_xres * 71 / 100, m_yres * 3 / 8, std::string()),
 m_label_size
 	(this,
-	 m_xres*0.7, m_yres*0.41,
+	 m_xres * 7 / 10, m_yres * 41 / 100,
 	 _("Size:"),
 	 Align_Right),
-m_size (this, m_xres*0.71, m_yres*0.41, std::string()),
+m_size (this, m_xres * 71 / 100, m_yres * 41 / 100, std::string()),
 m_label_world
 	(this,
-	 m_xres*0.7, m_yres*0.445,
+	 m_xres * 7 / 10, m_yres * 89 / 200,
 	 _("World:"),
 	 Align_Right),
-m_world (this, m_xres*0.71, m_yres*0.445, std::string()),
+m_world (this, m_xres * 71 / 100, m_yres * 89 / 200, std::string()),
 m_label_nr_players
 	(this,
-	 m_xres*0.7, m_yres*0.48,
+	 m_xres * 7 / 10, m_yres * 12 / 25,
 	 _("Players:"),
 	 Align_Right),
-m_nr_players (this, m_xres*0.71, m_yres*0.48, std::string()),
+m_nr_players (this, m_xres * 71 / 100, m_yres * 12 / 25, std::string()),
 m_label_descr
 	(this,
-	 m_xres*0.7, m_yres*0.515,
+	 m_xres * 7 / 10, m_yres * 103 / 200,
 	 _("Descr:"),
 	 Align_Right),
-m_descr (this, m_xres*0.71, m_yres*0.52, m_xres*0.25, m_yres*0.315, std::string()),
+m_descr (this, m_xres * 71 / 100, m_yres * 13 / 25, m_xres / 4, m_yres * 63 / 200, std::string()),
 
 // Buttons
 m_back
 	(this,
-	 m_xres*0.71, m_yres*0.85, m_butw, m_buth,
+	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_Editor_MapSelect::end_modal, this, 0,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 m_ok
 	(this,
-	 m_xres*0.71, m_yres*0.9, m_butw, m_buth,
+	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_Editor_MapSelect::ok, this,
 	 _("OK"), std::string(), false, false,
 	 m_fn, m_fs),
 
 // Map list
-m_list(this, m_xres*0.0188, m_yres*0.3417, m_xres*0.5688, m_yres*0.6083),
+m_list(this, m_xres * 47 / 2500, m_yres * 3417 / 10000, m_xres * 711 / 1250, m_yres * 6083 / 10000),
 
 // Runtime variables
 m_curdir("maps"), m_basedir("maps")

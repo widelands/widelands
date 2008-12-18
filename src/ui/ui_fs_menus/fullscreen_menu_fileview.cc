@@ -36,15 +36,18 @@ m_yres
 	(gr_y()),
 
 // Title
-title (this, m_xres*0.06, m_yres*0.1, std::string(), Align_Left),
+title (this, m_xres * 3 / 50, m_yres / 10, std::string(), Align_Left),
 
 // Multi lined text label
-textview (this, m_xres*0.0375, m_yres*0.283, m_xres*0.919, m_yres*0.55),
+textview
+	(this,
+	 m_xres *   3 /   80, m_yres * 283 / 1000,
+	 m_xres * 919 / 1000, m_yres *  11 /   20),
 
 // Button
 close_button
 	(this,
-	 m_xres*0.375, m_yres*0.9, m_xres*0.25, m_yres*0.045,
+	 m_xres * 3 / 8, m_yres * 9 / 10, m_xres / 4, m_yres * 9 / 200,
 	 0,
 	 &Fullscreen_Menu_TextView::end_modal, this, 0,
 	 _("Close"), std::string(), true, false,
@@ -61,7 +64,8 @@ close_button
 	}
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
-	title.set_pos(Point((get_inner_w() - title.get_w()) / 2, m_yres*0.167));
+	title.set_pos
+		(Point((get_inner_w() - title.get_w()) / 2, m_yres * 167 / 1000));
 
 	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 }

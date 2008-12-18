@@ -31,33 +31,33 @@ m_xres
 m_yres
 	(gr_y()),
 m_butw
-	(m_xres*0.35),
+	(m_xres * 7 / 20),
 m_buth
-	(m_yres*0.0475),
+	(m_yres * 19 / 400),
 m_butx
 	((m_xres-m_butw)/2),
 
 // Title
-title(this, m_xres/2, m_yres*0.075, _("Editor Menu"), Align_HCenter),
+title(this, m_xres / 2, m_yres * 3 / 40, _("Editor Menu"), Align_HCenter),
 
 // Buttons
 new_map
 	(this,
-	 m_butx, m_yres*0.24, m_butw, m_buth,
+	 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_Editor::end_modal, this, New_Map,
 	 _("New Map"), std::string(), true, false,
 	 ui_fn(), fs_small()),
 load_map
 	(this,
-	 m_butx, m_yres*0.305, m_butw, m_buth,
+	 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_Editor::end_modal, this, Load_Map,
 	 _("Load Map"), std::string(), true, false,
 	 ui_fn(), fs_small()),
 back
 	(this,
-	 m_butx, m_yres*0.75, m_butw, m_buth,
+	 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_Editor::end_modal, this, Back,
 	 _("Back"), std::string(), true, false,
