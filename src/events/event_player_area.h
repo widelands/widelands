@@ -37,6 +37,8 @@ struct Event_Player_Area : public Event {
 
 	void Write(Section &, Editor_Game_Base &) const;
 
+	void set_player(Player_Number);
+	void set_position(Coords);
 protected:
 	Player_Area<> m_player_area;
 };

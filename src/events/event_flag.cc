@@ -51,6 +51,12 @@ void Event_Flag::Write(Section & s, Editor_Game_Base &) const {
 }
 
 
+void Event_Flag::set_player(Player_Number const p) {m_player = p;}
+
+
+void Event_Flag::set_position(Coords const c) {m_location = c;}
+
+
 Event::State Event_Flag::run(Game * game) {
 	game->player(m_player).force_flag(game->map().get_fcoords(m_location));
 	return m_state = DONE;

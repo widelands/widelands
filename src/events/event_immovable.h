@@ -36,6 +36,7 @@ struct Event_Immovable : Event {
 
 	int32_t option_menu(Editor_Interactive &);
 
+	void set_position(Coords);
 	State run(Game *);
 
 	void Write(Section &, Editor_Game_Base &) const;

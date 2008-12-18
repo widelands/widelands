@@ -38,4 +38,11 @@ Event::Event(Section & s) : Named(s.get_name()) {
 			 state_name);
 }
 
+
+void Event::set_player(Player_Number) {}
+
+
+void Event::set_position(Coords) {}
+
+
 }

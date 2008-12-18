@@ -64,6 +64,13 @@ void Event_Move_View::Write(Section & s, Editor_Game_Base &) const {
 		s.set_int ("player",  m_player);
 }
 
+
+void Event_Move_View::set_player(Player_Number const p) {m_player = p;}
+
+
+void Event_Move_View::set_position(Coords const c) {m_location = c;}
+
+
 /**
  * Check if trigger conditions are done
  */

@@ -71,4 +71,15 @@ void Event_Player_Area::Write(Section & s, Editor_Game_Base &) const {
 		s.set_int("player",  m_player_area.player_number);
 }
 
-};
+
+void Event_Player_Area::set_player(Player_Number const p) {
+	m_player_area.player_number = p;
+}
+
+
+void Event_Player_Area::set_position(Coords const c) {
+	m_player_area.x = c.x;
+	m_player_area.y = c.y;
+}
+
+}

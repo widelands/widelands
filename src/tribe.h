@@ -72,7 +72,7 @@ struct Tribe_Descr {
 		ERR_WRONGVERSION
 	};
 
-	Tribe_Descr(const std::string & tribename, const World &);
+	Tribe_Descr(std::string const & name, Editor_Game_Base &);
 
 	//  Static function to check for tribes.
 	static bool exists_tribe(const std::string & name, TribeBasicInfo* info = 0);
@@ -138,8 +138,13 @@ struct Tribe_Descr {
 		void postload(Editor_Game_Base*);
 		void load_graphics();
 
-	void load_warehouse_with_start_wares
-		(Editor_Game_Base &, Warehouse &) const;
+	struct Initialization {
+		std::string          name;
+		std::string          descname;
+		std::vector<Event *> events;
+	};
+	typedef std::vector<Initialization> Initializations;
+	Initialization const & initialization(std::string const &) const;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void referenceBuilding
@@ -169,10 +174,7 @@ private:
 	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
 	Descr_Maintainer<Bob::Descr>      m_bobs;  // The player critters
 
-	typedef std::map<std::string, int32_t> starting_resources_map;
-	starting_resources_map m_startwares;
-	starting_resources_map m_startworkers;
-	starting_resources_map m_startsoldiers;
+	Initializations m_initializations;
 
 	EncodeData m_default_encdata;
 

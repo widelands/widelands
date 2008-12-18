@@ -22,6 +22,7 @@
 #include "checkstep.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
+#include "event.h"
 #include "findimmovable.h"
 #include "log.h"
 #include "game.h"
@@ -84,28 +85,23 @@ Player::~Player() {
 
 void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
-	Tribe_Descr const & trdesc = m_tribe;
-	Coords starting_pos = map.get_starting_pos(m_plnum);
+	if (Coords const starting_pos = map.get_starting_pos(m_plnum)) {
+		FCoords fpos = map.get_fcoords(starting_pos);
 
-	if (!starting_pos)
+		Tribe_Descr::Initialization const & initialization =
+			tribe().initialization("headquarters_medium");
+		Game & game = dynamic_cast<Game &>(egbase());
+		container_iterate_const(std::vector<Event *>, initialization.events, i) {
+			Event & event = **i.current;
+			event.set_player(get_player_number());
+			event.set_position(starting_pos);
+			event.run(&game);
+		}
+
+	} else
 		// TODO don't use wexception as this is not a "bug" in this case
 		throw wexception("Player %u has no starting point", m_plnum);
 
-	FCoords fpos = map.get_fcoords(starting_pos);
-
-	if ((fpos.field->get_caps() & BUILDCAPS_SIZEMASK) < BUILDCAPS_BIG)
-		// TODO don't use wexception as this is not a "bug" in this case
-		throw wexception("Starting point of player %u is too small", m_plnum);
-
-	Player_Area<Area<FCoords> > starting_area(m_plnum, Area<FCoords>(fpos, 0));
-
-	Warehouse & headquarter = dynamic_cast<Warehouse &>
-		(*egbase().warp_building
-		 	(starting_area,
-		 	 starting_area.player_number,
-		 	 trdesc.building_index("headquarters")));
-	starting_area.radius = headquarter.get_conquers();
-	trdesc.load_warehouse_with_start_wares(egbase(), headquarter);
 }
 
 

@@ -52,6 +52,9 @@ void Event_Immovable::Write(Section & s, Editor_Game_Base &) const {
 }
 
 
+void Event_Immovable::set_position(Coords const c) {m_location = c;}
+
+
 Event::State Event_Immovable::run(Game * game) {
 	Map const & map = game->map();
 	if (BaseImmovable * const immovable = map[m_location].get_immovable())

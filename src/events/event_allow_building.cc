@@ -47,16 +47,22 @@ Event_Allow_Building::Event_Allow_Building
 
 
 Event_Allow_Building::Event_Allow_Building
-	(Section & s, Editor_Game_Base & egbase)
+	(Section & s, Editor_Game_Base & egbase, Tribe_Descr const * tribe)
 	: Event(s)
 {
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= EVENT_VERSION) {
-			m_player   =
-				s.get_Player_Number("player", egbase.map().get_nrplayers(), 1);
-			egbase.get_iabase()->reference_player_tribe(m_player, this);
-			m_building = s.get_safe_Building_Index("building", egbase, m_player);
+			if (not tribe) {
+				Map const & map = egbase.map();
+				m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
+				egbase.get_iabase()->reference_player_tribe(m_player, this);
+				tribe =
+					&egbase.manually_load_tribe
+						(map.get_scenario_player_tribe(m_player));
+			}
+			m_building =
+				tribe->safe_building_index(s.get_safe_string("building"));
 			m_allow    = s.get_bool("allow", true);
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
@@ -75,6 +81,9 @@ void Event_Allow_Building::Write(Section & s, Editor_Game_Base & egbase) const
 	if (not m_allow)
 		s.set_bool       ("allow",    false);
 }
+
+
+void Event_Allow_Building::set_player(Player_Number const p) {m_player = p;}
 
 
 Event::State Event_Allow_Building::run(Game* game) {

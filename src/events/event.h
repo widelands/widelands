@@ -22,6 +22,8 @@
 
 #include "named.h"
 #include "referenced.h"
+#include "widelands.h"
+#include "widelands_geometry.h"
 
 #include <map>
 #include <string>
@@ -57,6 +59,8 @@ struct Event : public Named, public Referenced<Event> {
 
 	virtual void Write(Section &, Editor_Game_Base &) const = 0;
 
+	virtual void set_player(Player_Number);
+	virtual void set_position(Coords);
 	virtual State run(Game *) = 0;
 
 	State state() const {return m_state;}

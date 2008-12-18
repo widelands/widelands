@@ -29,6 +29,7 @@ struct Event_Allow_Building_Option_Menu;
 namespace Widelands {
 
 struct Editor_Game_Base;
+struct Tribe_Descr;
 
 /**
  * Allows/denies the player to build a certain building
@@ -36,10 +37,12 @@ struct Editor_Game_Base;
 struct Event_Allow_Building : public Event {
 	friend struct ::Event_Allow_Building_Option_Menu;
 	Event_Allow_Building(char const * name, State);
-	Event_Allow_Building(Section &, Editor_Game_Base &);
+	Event_Allow_Building
+		(Section &, Editor_Game_Base &, Tribe_Descr const * = 0);
 
 	int32_t option_menu(Editor_Interactive &);
 
+	void set_player(Player_Number);
 	State run(Game *);
 
 	void Write(Section &, Editor_Game_Base &) const;

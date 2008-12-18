@@ -341,10 +341,8 @@ void Building_Statistics_Menu::update() {
 		 ++i)
 	{
 		Widelands::Building_Descr const & building = *tribe.get_building_descr(i);
-		{
-			const std::string & name = building.name();
-			if (name == "constructionsite" or name == "headquarters") continue;
-		}
+		if (not (building.buildable() or building.get_enhanced_building()))
+			continue;
 
 		std::vector<Widelands::Player::Building_Stats> const & vec =
 			iaplayer().get_player()->get_building_statistics(i);

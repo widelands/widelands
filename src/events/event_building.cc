@@ -46,9 +46,7 @@ Event_Building::Event_Building
 			if (not tribe) {
 				Map const & map = egbase.map();
 				m_player   = s.get_Player_Number("player", map.get_nrplayers(), 1);
-				m_location =
-					s.get_Coords
-						("point", map.extent(), map.get_starting_pos(m_player));
+				m_location = s.get_safe_Coords("point", map.extent());
 				egbase.get_iabase()->reference_player_tribe(m_player, this);
 				tribe =
 					&egbase.manually_load_tribe
@@ -336,6 +334,12 @@ void Event_Building::Write(Section & s, Editor_Game_Base & egbase) const
 		s.set_int(buffer, i.current->second);
 	}
 }
+
+
+void Event_Building::set_player(Player_Number const p) {m_player = p;}
+
+
+void Event_Building::set_position(Coords const c) {m_location = c;}
 
 
 Event::State Event_Building::run(Game * game) {

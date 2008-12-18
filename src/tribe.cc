@@ -23,6 +23,10 @@
 #include "constructionsite.h"
 #include "critter_bob.h"
 #include "editor_game_base.h"
+#include "event_allow_building.h"
+#include "event_building.h"
+#include "event_conquer_area.h"
+#include "event_unhide_area.h"
 #include "game.h"
 #include "helper.h"
 #include "i18n.h"
@@ -51,10 +55,11 @@ namespace Widelands {
 //
 // Tribe_Descr class
 //
-Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
-: m_name(tribename), m_world(the_world)
+Tribe_Descr::Tribe_Descr
+	(std::string const & tribename, Editor_Game_Base & egbase)
+	: m_name(tribename), m_world(egbase.map().world())
 {
-	assert(&the_world);
+	assert(&m_world);
 	try {
 		std::string path = "tribes/";
 		path            += tribename;
@@ -139,7 +144,7 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 						m_immovables.add
 							(new Immovable_Descr
 							 	(_name, _descname, path, prof, global_s,
-							 	 the_world, this));
+							 	 m_world, this));
 					prof.check_used();
 				} catch (std::exception const & e) {
 					throw wexception("%s=\"%s\": %s", _name, _descname, e.what());
@@ -165,45 +170,69 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 			m_anim_flag     =
 				g_anim.get(path, root_conf.get_safe_section("flag"),     0, &m_default_encdata);
 
-			try { //  FIXME eliminate
-				Section & swa_s = root_conf.get_safe_section("startwares");
-				while (Section::Value const * const value = swa_s.get_next_val())
-				{
-					if (not m_wares.exists(value->get_name()))
+			if
+				(Section * const inits_s =
+				 	root_conf.get_section("initializations"))
+				while (Section::Value const * const v = inits_s->get_next_val()) {
+					m_initializations.resize(m_initializations.size() + 1);
+					Initialization & init = m_initializations.back();
+					init.    name = v->get_name  ();
+					init.descname = v->get_string();
+					try {
+						for
+							(Initialization const * i = &m_initializations.front();
+							 i < &init;
+							 ++i)
+							if (i->name == init.name)
+								throw wexception("duplicated");
+						path += init.name;
+						Profile init_prof(path.c_str());
+						path.resize(base_path_size);
+						while
+							(Section * const event_s = init_prof.get_next_section())
+						{
+							char const * const event_name = event_s->get_name();
+							Event * event;
+							if      (event_s->get_string("type"))
+								throw wexception("type key is not allowed");
+							else if   (event_s->get_string("player"))
+								throw wexception("player key is not allowed");
+							else if   (event_s->get_string("point"))
+								throw wexception("point key is not allowed");
+							else if   (not strcmp(event_name, "allow_building")) {
+								event_s->set_int("version", 2);
+								event =
+									new Event_Allow_Building(*event_s, egbase, this);
+							} else if
+								(Building_Index const building =
+								 	building_index(event_name))
+							{
+								event_s->set_int("version", 2);
+								event =
+									new Event_Building
+										(*event_s, egbase, this, building);
+							}
+							else if   (not strcmp(event_name, "conquer_area"))   {
+								event_s->set_int("version", 2);
+								event_s->set_string("point", "0 0");
+								event = new Event_Conquer_Area(*event_s, egbase);
+							} else if (not strcmp(event_name, "unhide_area"))    {
+								event_s->set_int("version", 2);
+								event_s->set_string("point", "0 0");
+								event = new Event_Unhide_Area(*event_s, egbase);
+							} else
+								throw wexception
+									("\"%s\" is invalid as player initialization event "
+									 "type for this tribe",
+									 event_name);
+							init.events.push_back(event);
+						}
+					} catch (_wexception const & e) {
 						throw wexception
-							("In section [startwares], ware %s is not known!",
-							 value->get_name());
-					m_startwares[value->get_name()] = value->get_int();
+							("[initializations] \"%s=%s\": %s",
+							 init.name.c_str(), v->get_string(), e.what());
+					}
 				}
-			} catch (_wexception const & e) {
-				throw wexception("section [startwares]: %s", e.what());
-			}
-
-			try { //  FIXME eliminate
-				Section & swo_s = root_conf.get_safe_section("startworkers");
-				while (Section::Value const * const value = swo_s.get_next_val())
-				{
-					if (strcmp(value->get_name(), "soldier")) { // Ignore soldiers
-						if (not m_workers.exists(value->get_name()))
-							throw wexception
-								("\"%s\" is not known!",
-								 value->get_name());
-						m_startworkers[value->get_name()] = value->get_int();
-					} else
-						throw wexception
-							("\"soldier\" not allowed here, should be in "
-							 "[startsoldiers]");
-				}
-			} catch (_wexception const & e) {
-				throw wexception("section [startworkers]: %s", e.what());
-			}
-
-			{ //  FIXME eliminate
-				Section & sso_s = root_conf.get_safe_section("startsoldiers");
-				while (Section::Value const * const value = sso_s.get_next_val())
-				//  NOTE no check here; we do not know about max levels and so on
-					m_startsoldiers[value->get_name()] = value->get_int();
-			}
 		} catch (std::exception const & e) {
 			throw wexception("root conf: %s", e.what());
 		}
@@ -260,54 +289,13 @@ void Tribe_Descr::load_graphics()
 }
 
 
-/*
-===========
-This loads a warehouse with the given start wares as defined in
-the conf files
-===========
-*/
-void Tribe_Descr::load_warehouse_with_start_wares
-	(Editor_Game_Base & egbase, Warehouse & wh) const
+Tribe_Descr::Initialization const & Tribe_Descr::initialization
+	(std::string const & init_name) const
 {
-	container_iterate_const(starting_resources_map, m_startwares,    j)
-		wh.insert_wares
-			(safe_ware_index  (j.current->first.c_str()), j.current->second);
-	container_iterate_const(starting_resources_map, m_startworkers,  j)
-		wh.insert_workers
-			(safe_worker_index(j.current->first.c_str()), j.current->second);
-	container_iterate_const(starting_resources_map, m_startsoldiers, j) {
-		std::vector<std::string> const list(split_string(j.current->first, "/"));
-
-		if (list.size() != 4)
-			throw wexception
-				("Error in tribe (%s), startsoldier %s is not valid!",
-				 name().c_str(), j.current->first.c_str());
-
-		char * endp;
-		long int const hplvl      = strtol(list[0].c_str(), &endp, 0);
-		if (*endp)
-			throw wexception("Bad hp level '%s'", list[0].c_str());
-		long int const attacklvl  = strtol(list[1].c_str(), &endp, 0);
-		if (*endp)
-			throw wexception("Bad attack level '%s'", list[1].c_str());
-		long int const defenselvl = strtol(list[2].c_str(), &endp, 0);
-		if (*endp)
-			throw wexception("Bad defense level '%s'", list[2].c_str());
-		long int const evadelvl   = strtol(list[3].c_str(), &endp, 0);
-		if (*endp)
-			throw wexception("Bad evade level '%s'", list[3].c_str());
-
-		if (upcast(Game, game, &egbase))
-			for (int32_t i = 0; i < j.current->second; ++i) {
-				Soldier & soldier =
-					static_cast<Soldier &>
-						(dynamic_cast<Soldier_Descr const &>
-						 	(*get_worker_descr(worker_index("soldier")))
-						 .create(*game, wh.owner(), wh, wh.get_position()));
-				soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
-				wh.incorporate_worker(game, &soldier);
-			}
-	}
+	container_iterate_const(Initializations, m_initializations, i)
+		if (i.current->name == init_name)
+			return *i.current;
+	throw std::logic_error("no such initialization");
 }
 
 

@@ -36,6 +36,8 @@ struct Event_Move_View : public Event {
 
 	int32_t option_menu(Editor_Interactive &);
 
+	void set_player(Player_Number);
+	void set_position(Coords);
 	State run(Game *);
 
 	void Write(Section &, Editor_Game_Base &) const;

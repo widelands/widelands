@@ -106,22 +106,21 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 	bool found = false;
 
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i)
-		if (upcast(ProductionSite_Descr const, de, tribe.get_building_descr(i)))
-		{
+	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
+		Building_Descr const & descr = *tribe.get_building_descr(i);
+		if (upcast(ProductionSite_Descr const, de, &descr)) {
 
 			const char * const name = de->name().c_str();
 			if
-				(strcmp(name, "constructionsite") and strcmp(name, "headquarters")
+				((descr.buildable() or descr.get_enhanced_building())
 				 and
-				 de->output().find(wares.get_selected())
-				 !=
-				 de->output().end())
+				 de->output().count(wares.get_selected()))
 			{
 				prodSites.add(de->descname().c_str(), i, de->get_buildicon());
 				found = true;
 			}
 		}
+	}
 	if (found)
 		prodSites.select(0);
 
