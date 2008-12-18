@@ -644,7 +644,8 @@ void ImmovableProgram::ActAnimate::execute
 	(Game & game, Immovable & immovable) const
 {
 	immovable.start_animation(game, m_id);
-	immovable.program_step(game, m_duration);
+	immovable.program_step
+		(game, m_duration + game.logic_rand() % (m_duration / 10 + 1));
 }
 
 
