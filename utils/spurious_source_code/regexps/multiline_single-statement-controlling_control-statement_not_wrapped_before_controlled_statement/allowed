@@ -9,3 +9,4 @@
 if (condition) do_something();
 if (c) throw wexception("Something went wrong.");
 if (c)
+	("calculated value for (%i, %i)",
