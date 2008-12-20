@@ -63,6 +63,7 @@ struct NetClient :
 	virtual bool canChangeMap();
 	virtual bool canChangePlayerState(uint8_t number);
 	virtual bool canChangePlayerTribe(uint8_t number);
+	virtual bool canChangePlayerInit (uint8_t number);
 
 	virtual bool canLaunch();
 
@@ -71,6 +72,7 @@ struct NetClient :
 	virtual void setPlayerAI    (uint8_t number, const std::string& ai);
 	virtual void nextPlayerState(uint8_t number);
 	virtual void setPlayerTribe (uint8_t number, const std::string& tribe);
+	virtual void setPlayerInit  (uint8_t number, uint8_t index);
 	virtual void setPlayerName  (uint8_t number, const std::string& name);
 
 	// ChatProvider interface

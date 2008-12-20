@@ -78,6 +78,7 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	void remove_player(Player_Number);
 	Player * add_player
 		(Player_Number,
+		 uint8_t             initialization_index,
 		 const std::string & tribe,
 		 const std::string & name);
 	Player * get_player(const int32_t n) const {

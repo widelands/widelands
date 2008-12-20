@@ -52,6 +52,7 @@ private:
 	void enable_player(bool on);
 	void toggle_playertype();
 	void toggle_playertribe();
+	void toggle_playerinit();
 
 	PlayerDescriptionGroupImpl* d;
 };

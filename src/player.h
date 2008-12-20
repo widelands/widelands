@@ -74,6 +74,7 @@ struct Player :
 	Player
 		(Editor_Game_Base &,
 		 Player_Number,
+		 uint8_t initialization_index,
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
 		 const uint8_t * playercolor);
@@ -479,8 +480,9 @@ private:
 private:
 	AreaWatchers           m_areawatchers;
 
+	Editor_Game_Base     & m_egbase;
+	uint8_t                m_initialization_index;
 	bool m_see_all;
-	Editor_Game_Base&      m_egbase;
 	bool                   m_view_changed;
 	const Player_Number    m_plnum;
 	const Tribe_Descr&     m_tribe; // buildings, wares, workers, sciences

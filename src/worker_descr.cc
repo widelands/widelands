@@ -180,13 +180,13 @@ const WorkerProgram* Worker_Descr::get_program(std::string programname) const
 Worker & Worker_Descr::create
 	(Editor_Game_Base &       egbase,
 	 Player           &       owner,
-	 PlayerImmovable  &       location,
+	 PlayerImmovable  * const location,
 	 Coords             const coords)
 const
 {
 	Worker & worker = dynamic_cast<Worker &>(*create_object());
 	worker.set_owner(&owner);
-	worker.set_location(&location);
+	worker.set_location(location);
 	worker.set_position(&egbase, coords);
 	worker.init(&egbase);
 	return worker;

@@ -69,6 +69,9 @@ public:
 	MilitarySite(MilitarySite_Descr const &);
 	virtual ~MilitarySite();
 
+	void prefill
+		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
+
 	virtual int32_t get_building_type() const throw ()
 	{return Building::MILITARYSITE;}
 	char const * type_name() const throw () {return "militarysite";}

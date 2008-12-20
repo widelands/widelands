@@ -30,6 +30,7 @@
 #include "HTMLReferences.h"
 
 #include "filewrite.h"
+#include "TribeBasicInfo.h"
 
 #include <map>
 #include <vector>
@@ -43,20 +44,6 @@ struct Resource_Descr;
 class Worker_Descr;
 class Warehouse;
 struct World;
-
-
-/**
- * Stores basic information about the tribe that is determined
- * only from the conf file.
- */
-struct TribeBasicInfo {
-	std::string name;
-
-	/**
-	 * Relative position of this tribe in a list of tribes.
-	 */
-	int32_t uiposition;
-};
 
 /*
 Tribes
@@ -77,6 +64,7 @@ struct Tribe_Descr {
 	//  Static function to check for tribes.
 	static bool exists_tribe(const std::string & name, TribeBasicInfo* info = 0);
 	static void get_all_tribenames(std::vector<std::string> &);
+	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
 
 
 	const std::string & name() const throw () {return m_name;}
@@ -144,7 +132,10 @@ struct Tribe_Descr {
 		std::vector<Event *> events;
 	};
 	typedef std::vector<Initialization> Initializations;
-	Initialization const & initialization(std::string const &) const;
+	Initialization const & initialization(uint8_t const index) const {
+		assert(index < m_initializations.size());
+		return m_initializations[index];
+	}
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void referenceBuilding

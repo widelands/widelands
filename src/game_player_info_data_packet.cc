@@ -62,7 +62,7 @@ throw (_wexception)
 
 					std::string const name = fr.CString();
 
-					game->add_player(plnum, tribe, name);
+					game->add_player(plnum, 0, tribe, name);
 					Player & player = game->player(plnum);
 					player.set_see_all(see_all);
 

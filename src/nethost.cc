@@ -56,6 +56,12 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			return false;
 		return settings().players[number].state == PlayerSettings::stateComputer;
 	}
+	virtual bool canChangePlayerInit(uint8_t const number) {
+		log
+			("HostGameSettingsProvider::canChangePlayerInit(%u) returning %u\n",
+			 number, !!(number < settings().players.size()));
+		return number < settings().players.size();
+	}
 
 	virtual bool canLaunch() {return h->canLaunch();}
 
@@ -95,6 +101,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 		if (number == 0 || settings().players[number].state == PlayerSettings::stateComputer)
 			h->setPlayerTribe(number, tribe);
+	}
+
+	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
+		if (number >= h->settings().players.size())
+			return;
+
+		h->setPlayerInit(number, index);
 	}
 
 	virtual void setPlayerAI(uint8_t, const std::string&) {
@@ -223,7 +236,7 @@ NetHost::NetHost (const std::string& playername)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	Widelands::Tribe_Descr::get_all_tribenames(d->settings.tribes);
+	Widelands::Tribe_Descr::get_all_tribe_infos(d->settings.tribes);
 	setMultiplayerGameSettings();
 }
 
@@ -480,7 +493,8 @@ void NetHost::setMap(const std::string& mapname, const std::string& mapfilename,
 	while (oldplayers < maxplayers) {
 		PlayerSettings& player = d->settings.players[oldplayers];
 		player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateOpen;
-		player.tribe = d->settings.tribes[0];
+		player.tribe                = d->settings.tribes[0].name;
+		player.initialization_index = 0;
 		if (oldplayers == 0)
 			player.name = d->localplayername;
 		++oldplayers;
@@ -536,20 +550,56 @@ void NetHost::setPlayerTribe(uint8_t number, const std::string& tribe)
 	if (player.tribe == tribe)
 		return;
 
-	if (std::find(d->settings.tribes.begin(), d->settings.tribes.end(), tribe) == d->settings.tribes.end()) {
-		log("Player %u attempted to change to tribe %s; not a valid tribe\n", number, tribe.c_str());
-		return;
-	}
+	container_iterate_const(std::vector<TribeBasicInfo>, d->settings.tribes, i)
+		if (i.current->name == player.tribe) {
+			player.tribe = tribe;
+			if (i.current->initializations.size() <= player.initialization_index)
+				player.initialization_index = 0;
 
-	player.tribe = tribe;
-
-	// Broadcast changes
-	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_PLAYER);
-	s.Unsigned8(number);
-	writeSettingPlayer(s, number);
-	broadcast(s);
+			//  broadcast changes
+			SendPacket s;
+			s.Unsigned8(NETCMD_SETTING_PLAYER);
+			s.Unsigned8(number);
+			writeSettingPlayer(s, number);
+			broadcast(s);
+			return;
+		}
+	log
+		("Player %u attempted to change to tribe %s; not a valid tribe\n",
+		 number, tribe.c_str());
 }
+
+void NetHost::setPlayerInit(uint8_t const number, uint8_t const index)
+{
+	if (number >= d->settings.players.size())
+		return;
+
+	PlayerSettings & player = d->settings.players[number];
+
+	if (player.initialization_index == index)
+		return;
+
+	container_iterate_const(std::vector<TribeBasicInfo>, d->settings.tribes, i)
+		if (i.current->name == player.tribe) {
+			if (index < i.current->initializations.size()) {
+				player.initialization_index = index;
+
+				//  broadcast changes
+				SendPacket s;
+				s.Unsigned8(NETCMD_SETTING_PLAYER);
+				s.Unsigned8(number);
+				writeSettingPlayer(s, number);
+				broadcast(s);
+				return;
+			} else
+				log
+					("Attempted to change to out-of-range initialization index %u "
+					 "for player %u.\n", index, number);
+			return;
+		}
+	assert(false);
+}
+
 
 void NetHost::setPlayerName(uint8_t number, const std::string& name)
 {
@@ -627,6 +677,7 @@ void NetHost::writeSettingPlayer(SendPacket& packet, uint8_t number)
 	packet.Unsigned8(static_cast<uint8_t>(player.state));
 	packet.String(player.name);
 	packet.String(player.tribe);
+	packet.Unsigned8(player.initialization_index);
 }
 
 
@@ -736,8 +787,12 @@ void NetHost::welcomeClient(uint32_t number, const std::string& playername)
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_TRIBES);
 	s.Unsigned8(d->settings.tribes.size());
-	for (uint8_t i = 0; i < d->settings.tribes.size(); ++i)
-		s.String(d->settings.tribes[i]);
+	for (uint8_t i = 0; i < d->settings.tribes.size(); ++i) {
+		s.String(d->settings.tribes[i].name);
+		s.Unsigned8(d->settings.tribes[i].initializations.size());
+		for (uint8_t j = 0; j < d->settings.tribes[i].initializations.size(); ++j)
+			s.String(d->settings.tribes[i].initializations[j].first);
+	}
 	s.send(client.sock);
 
 	s.reset();

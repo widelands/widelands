@@ -370,7 +370,7 @@ void Warehouse::postfill
 			for (uint32_t j = i.current->second; j; --j) {
 				Soldier & soldier =
 					static_cast<Soldier &>
-						(soldier_descr.create(game, owner(), *this, get_position()));
+						(soldier_descr.create(game, owner(), this, get_position()));
 				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
 				incorporate_worker(&game, &soldier);
 			}
@@ -751,7 +751,7 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 				// Create a new one
 				// NOTE: This code lies about the tAttributes of the new worker
 				m_supply->remove_workers(ware, 1);
-				return &workerdescr.create(*game, owner(), *this, m_position);
+				return &workerdescr.create(*game, owner(), this, m_position);
 			}
 		}
 
@@ -857,7 +857,7 @@ void Warehouse::do_launch_item(Game * game, WareInstance & item)
 	Ware_Index const carrierid = tribe.worker_index("carrier");
 	const Worker_Descr & workerdescr = *tribe.get_worker_descr(carrierid);
 
-	Worker & worker = workerdescr.create(*game, owner(), *this, m_position);
+	Worker & worker = workerdescr.create(*game, owner(), this, m_position);
 
 	// Yup, this is cheating.
 	if (m_supply->stock_workers(carrierid))
@@ -968,7 +968,7 @@ void Warehouse::create_worker(Game * game, Ware_Index const worker) {
 			remove_workers(tribe.safe_worker_index(input), i.current->second);
 	}
 
-	incorporate_worker(game, &w_desc.create(*game, owner(), *this, m_position));
+	incorporate_worker(game, &w_desc.create(*game, owner(), this, m_position));
 }
 
 

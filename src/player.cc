@@ -52,12 +52,14 @@ extern Map_Object_Descr g_road_descr;
 Player::Player
 	(Editor_Game_Base  & the_egbase,
 	 Player_Number         const plnum,
+	 uint8_t               const initialization_index,
 	 Tribe_Descr   const &       tribe_descr,
 	 std::string   const &       name,
 	 uint8_t       const * const playercolor)
 	:
+	m_egbase              (the_egbase),
+	m_initialization_index(initialization_index),
 	m_see_all           (false),
-	m_egbase            (the_egbase),
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),
 	m_casualties        (0),
@@ -89,7 +91,7 @@ void Player::create_default_infrastructure() {
 		FCoords fpos = map.get_fcoords(starting_pos);
 
 		Tribe_Descr::Initialization const & initialization =
-			tribe().initialization("headquarters_medium");
+			tribe().initialization(m_initialization_index);
 		Game & game = dynamic_cast<Game &>(egbase());
 		container_iterate_const(std::vector<Event *>, initialization.events, i) {
 			Event & event = **i.current;

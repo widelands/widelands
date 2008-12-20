@@ -144,11 +144,48 @@ std::string MilitarySite::get_statistics_string()
 }
 
 
+void MilitarySite::prefill
+	(Game                 &       game,
+	 uint32_t       const *       ware_counts,
+	 uint32_t       const *       worker_counts,
+	 Soldier_Counts const * const soldier_counts)
+{
+	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
+	if (soldier_counts and soldier_counts->size()) {
+		Tribe_Descr const & tribe = owner().tribe();
+		Soldier_Descr const & soldier_descr =
+			dynamic_cast<Soldier_Descr const &>
+				(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
+			Soldier_Strength const ss = i.current->first;
+			for (uint32_t j = i.current->second; j; --j) {
+				Soldier & soldier =
+					static_cast<Soldier &>
+						(soldier_descr.create(game, owner(), 0, get_position()));
+				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
+				Building::add_worker(&soldier);
+				log
+					("MilitarySite::prefill: added soldier (economy = %p)\n",
+					 soldier.get_economy());
+			}
+		}
+		conquer_area(game);
+	}
+}
+
+
 void MilitarySite::init(Editor_Game_Base* g)
 {
 	ProductionSite::init(g);
 
 	if (upcast(Game, game, g)) {
+		std::vector<Worker *> const & ws = get_workers();
+		container_iterate_const(std::vector<Worker *>, ws, i)
+			if (upcast(Soldier, soldier, *i.current)) {
+				soldier->set_location_initially(*this);
+				assert(not soldier->get_state()); //  Should be newly created. FIXME savegames???
+				soldier->start_task_buildingwork(game);
+			}
 		update_soldier_request();
 
 		// Schedule the first healing
@@ -367,18 +404,10 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 	std::vector<Soldier*> soldiers;
 
 	const std::vector<Worker*>& w = get_workers();
-	for
-		(std::vector<Worker*>::const_iterator it = w.begin();
-		 it != w.end();
-		 ++it)
-	{
-		if (upcast(Soldier, soldier, *it)) {
+	container_iterate_const(std::vector<Worker*>, w, i)
+		if (upcast(Soldier, soldier, *i.current))
 			if (isPresent(soldier))
-			{
 				soldiers.push_back(soldier);
-			}
-		}
-	}
 
 	return soldiers;
 }
@@ -388,14 +417,9 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 	std::vector<Soldier*> soldiers;
 
 	const std::vector<Worker*>& w = get_workers();
-	for
-		(std::vector<Worker*>::const_iterator it = w.begin();
-		 it != w.end();
-		 ++it)
-	{
-		if (upcast(Soldier, soldier, *it))
+	container_iterate_const(std::vector<Worker*>, w, i)
+		if (upcast(Soldier, soldier, *i.current))
 			soldiers.push_back(soldier);
-	}
 
 	return soldiers;
 }

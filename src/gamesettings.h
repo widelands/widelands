@@ -20,6 +20,8 @@
 #ifndef GAMESETTINGS_H
 #define GAMESETTINGS_H
 
+#include "tribe.h"
+
 #include <string>
 #include <vector>
 
@@ -32,6 +34,7 @@ struct PlayerSettings {
 	};
 
 	State state;
+	uint8_t     initialization_index;
 	std::string name;
 	std::string tribe;
 	std::string ai; /**< Preferred AI provider for this player */
@@ -60,7 +63,7 @@ struct GameSettings {
 	bool savegame;
 
 	/// List of tribes that players are allowed to choose
-	std::vector<std::string> tribes;
+	std::vector<TribeBasicInfo> tribes;
 
 	/// Player configuration, with 0-based indices for players
 	std::vector<PlayerSettings> players;
@@ -84,6 +87,7 @@ struct GameSettingsProvider {
 	virtual bool canChangeMap() = 0;
 	virtual bool canChangePlayerState(uint8_t number) = 0;
 	virtual bool canChangePlayerTribe(uint8_t number) = 0;
+	virtual bool canChangePlayerInit (uint8_t number) = 0;
 
 	virtual bool canLaunch() = 0;
 
@@ -92,6 +96,7 @@ struct GameSettingsProvider {
 	virtual void setPlayerAI    (uint8_t number, const std::string& ai) = 0;
 	virtual void nextPlayerState(uint8_t number) = 0;
 	virtual void setPlayerTribe (uint8_t number, const std::string& tribe) = 0;
+	virtual void setPlayerInit  (uint8_t number, uint8_t index) = 0;
 	virtual void setPlayerName  (uint8_t number, const std::string& name) = 0;
 };
 

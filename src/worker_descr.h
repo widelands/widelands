@@ -79,7 +79,7 @@ public:
 	bool can_act_as(Ware_Index) const;
 
 	Worker & create
-		(Editor_Game_Base &, Player &, PlayerImmovable &, const Coords) const;
+		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
 
 	typedef std::map<Worker_Descr *, std::string> becomes_map_t;
 	virtual uint32_t movecaps() const throw ();

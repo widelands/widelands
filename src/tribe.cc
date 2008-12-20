@@ -289,16 +289,6 @@ void Tribe_Descr::load_graphics()
 }
 
 
-Tribe_Descr::Initialization const & Tribe_Descr::initialization
-	(std::string const & init_name) const
-{
-	container_iterate_const(Initializations, m_initializations, i)
-		if (i.current->name == init_name)
-			return *i.current;
-	throw std::logic_error("no such initialization");
-}
-
-
 /*
  * does this tribe exist?
  */
@@ -314,6 +304,11 @@ bool Tribe_Descr::exists_tribe(const std::string & name, TribeBasicInfo* info) {
 			info->name = name;
 			info->uiposition =
 				prof.get_safe_section("tribe").get_int("uiposition", 0);
+			Section & inits_s = prof.get_safe_section("initializations");
+			while (Section::Value const * const v = inits_s.get_next_val())
+				info->initializations.push_back
+					(TribeBasicInfo::Initialization
+					 	(v->get_name(), v->get_string()));
 		}
 
 		return true;
@@ -343,21 +338,36 @@ void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
 		 pname != m_tribes.end();
 		 ++pname)
 	{
-		const std::string name = pname->substr(7);
 		TribeBasicInfo info;
-		if (Tribe_Descr::exists_tribe(name, &info))
+		if (Tribe_Descr::exists_tribe(pname->substr(7), &info))
 			tribes.push_back(info);
 	}
 
 	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
-	for
-		(std::vector<TribeBasicInfo>::const_iterator it = tribes.begin();
-		 it != tribes.end();
-		 ++it)
-	{
-		target.push_back(it->name);
-	}
+	container_iterate_const(std::vector<TribeBasicInfo>, tribes, i)
+		target.push_back(i.current->name);
 }
+
+
+void Tribe_Descr::get_all_tribe_infos(std::vector<TribeBasicInfo> & tribes) {
+	assert(tribes.empty());
+
+	//  get all tribes
+	filenameset_t m_tribes;
+	g_fs->FindFiles("tribes", "*", &m_tribes);
+	for
+		(filenameset_t::iterator pname = m_tribes.begin();
+		 pname != m_tribes.end();
+		 ++pname)
+	{
+		TribeBasicInfo info;
+		if (Tribe_Descr::exists_tribe(pname->substr(7), &info))
+			tribes.push_back(info);
+	}
+
+	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
+}
+
 
 /*
 ==============

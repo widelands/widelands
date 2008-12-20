@@ -1149,7 +1149,7 @@ void Road::create
 		Carrier & carrier =
 			dynamic_cast<Carrier &>
 				(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
-				 	(egbase, owner, start, idle_position));
+				 	(egbase, owner, &start, idle_position));
 		carrier.start_task_road(dynamic_cast<Game*>(&egbase));
 		road.m_carrier = &carrier;
 	}

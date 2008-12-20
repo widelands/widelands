@@ -244,6 +244,11 @@ bool NetClient::canChangePlayerTribe(uint8_t number)
 	return number == d->playernum;
 }
 
+bool NetClient::canChangePlayerInit(uint8_t number)
+{
+	return false;
+}
+
 bool NetClient::canLaunch()
 {
 	return false;
@@ -278,6 +283,11 @@ void NetClient::setPlayerTribe(uint8_t number, const std::string& tribe)
 	s.Unsigned8(NETCMD_SETTING_CHANGETRIBE);
 	s.String(tribe);
 	s.send(d->sock);
+}
+
+void NetClient::setPlayerInit(uint8_t, uint8_t)
+{
+	//  client is not allowed to do this
 }
 
 void NetClient::setPlayerName(uint8_t number, const std::string& name)
@@ -321,6 +331,7 @@ void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
 	player.name = packet.String();
 	player.tribe = packet.String();
+	player.initialization_index = packet.Unsigned8();
 
 	if (number == d->playernum)
 		d->localplayername = player.name;
@@ -414,10 +425,17 @@ void NetClient::handle_packet(RecvPacket& packet)
 		break;
 
 	case NETCMD_SETTING_TRIBES: {
-		uint8_t count = packet.Unsigned8();
 		d->settings.tribes.clear();
-		for (uint8_t i = 0; i < count; ++i)
-			d->settings.tribes.push_back(packet.String());
+		for (uint8_t i = packet.Unsigned8(); i; --i) {
+			TribeBasicInfo info;
+			info.name = packet.String();
+			for (uint8_t j = packet.Unsigned8(); j; --j) {
+				std::string const name = packet.String();
+				info.initializations.push_back
+					(TribeBasicInfo::Initialization(name, name));
+			}
+			d->settings.tribes.push_back(info);
+		}
 		break;
 	}
 

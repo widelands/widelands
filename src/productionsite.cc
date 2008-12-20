@@ -239,8 +239,7 @@ void ProductionSite::prefill
 			wp += i.current->second - nr_workers;
 			Worker_Descr const & wdes = *tribe.get_worker_descr(i.current->first);
 			while (nr_workers--) {
-				Worker & worker =
-					wdes.create(game, owner(), *get_base_flag(), get_position());
+				Worker & worker = wdes.create(game, owner(), 0, get_position());
 				worker.start_task_idle(&game, 0, -1);
 				wp->worker = &worker;
 				++wp;
@@ -249,9 +248,6 @@ void ProductionSite::prefill
 		}
 	}
 }
-void ProductionSite::postfill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
 
 
 /**

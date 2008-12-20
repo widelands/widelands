@@ -1282,7 +1282,7 @@ void WLApplication::mainmenu_editor()
 // The user can change everything, except that they are themselves human.
 struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	SinglePlayerGameSettingsProvider() {
-		Widelands::Tribe_Descr::get_all_tribenames(s.tribes);
+		Widelands::Tribe_Descr::get_all_tribe_infos(s.tribes);
 		s.scenario = false;
 		s.multiplayer = false;
 	}
@@ -1294,6 +1294,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t number) {return (!s.scenario & (number != 0));}
 	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
+	virtual bool canChangePlayerInit (uint8_t) {return true;}
 
 	virtual bool canLaunch() {
 		return s.mapname.size() != 0 && s.players.size() >= 1;
@@ -1314,7 +1315,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		while (oldplayers < maxplayers) {
 			PlayerSettings& player = s.players[oldplayers];
 			player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateComputer;
-			player.tribe = s.tribes[0];
+			player.tribe                = s.tribes.at(0).name;
+			player.initialization_index = 0;
 			char buf[200];
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers+1);
 			player.name = buf;
@@ -1361,8 +1363,28 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		if (number >= s.players.size())
 			return;
 
-		if (std::find(s.tribes.begin(), s.tribes.end(), tribe) != s.tribes.end())
-			s.players[number].tribe = tribe;
+		PlayerSettings & player = s.players[number];
+		container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)
+			if (i.current->name == player.tribe) {
+				s.players[number].tribe = tribe;
+				if
+					(i.current->initializations.size()
+					 <=
+					 player.initialization_index)
+					player.initialization_index = 0;
+			}
+	}
+	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
+		if (number >= s.players.size())
+			return;
+
+		container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)
+			if (i.current->name == s.players[number].tribe) {
+				if (index < i.current->initializations.size())
+					s.players[number].initialization_index = index;
+				return;
+			}
+		assert(false);
 	}
 
 	virtual void setPlayerName(uint8_t number, const std::string& name) {

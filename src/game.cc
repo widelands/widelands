@@ -262,6 +262,7 @@ bool Game::run_splayer_scenario_direct(const char* mapname) {
 			loaderUI.stepf (_("Adding player %u"), p);
 			add_player
 				(p,
+				 0,
 				 map().get_scenario_player_tribe(p),
 				 map().get_scenario_player_name (p));
 		}
@@ -325,7 +326,11 @@ void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& setti
 				 playersettings.state == PlayerSettings::stateOpen)
 				continue;
 
-			add_player(i + 1, playersettings.tribe, playersettings.name);
+			add_player
+				(i + 1,
+				 playersettings.initialization_index,
+				 playersettings.tribe,
+				 playersettings.name);
 			get_player(i+1)->setAI(playersettings.ai);
 		}
 

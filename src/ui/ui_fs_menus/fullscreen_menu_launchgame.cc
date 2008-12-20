@@ -113,7 +113,7 @@ m_is_savegame  (false)
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,
-				 m_xres * 3 / 50, y += m_buth, m_xres * 3 / 5, m_yres * 17 / 500,
+				 m_xres / 25, y += m_buth, m_xres * 16 / 25, m_yres * 17 / 500,
 				 settings, i,
 				 m_fn, m_fs);
 
