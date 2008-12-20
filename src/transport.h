@@ -490,15 +490,17 @@ struct WaresQueue {
 	typedef void (callback_t)
 		(Game *, WaresQueue *, Ware_Index ware, void * data);
 
-	WaresQueue(PlayerImmovable* bld);
-	~WaresQueue();
+	WaresQueue(PlayerImmovable &, Ware_Index, uint8_t size, uint8_t filled = 0);
+
+#ifndef NDEBUG
+	~WaresQueue() {assert(not m_ware);}
+#endif
 
 	Ware_Index get_ware() const {return m_ware;}
 	uint32_t get_size            () const throw () {return m_size;}
 	uint32_t get_filled          () const throw () {return m_filled;}
 	uint32_t get_consume_interval() const throw () {return m_consume_interval;}
 
-	WaresQueue & init(std::pair<Ware_Index, uint8_t>);
 	void cleanup();
 	void update();
 
@@ -511,7 +513,7 @@ struct WaresQueue {
 	void set_filled          (uint32_t) throw ();
 	void set_consume_interval(uint32_t) throw ();
 
-	Player * get_owner() const throw () {return m_owner->get_owner();}
+	Player & owner() const throw () {return m_owner.owner();}
 
 	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *);
 	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
@@ -520,7 +522,7 @@ private:
 	static void request_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
-	PlayerImmovable * m_owner;
+	PlayerImmovable & m_owner;
 	Ware_Index        m_ware;    ///< ware ID
 	uint32_t m_size;             ///< number of items that fit into the queue
 	uint32_t m_filled;           ///< number of items that are currently in the queue

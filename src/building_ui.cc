@@ -330,7 +330,7 @@ m_cache_filled(queue->get_filled()),
 m_display_size(0)
 {
 	const Widelands::Item_Ware_Descr & ware =
-		*queue->get_owner()->tribe().get_ware_descr(m_queue->get_ware());
+		*queue->owner().tribe().get_ware_descr(m_queue->get_ware());
 	set_tooltip(ware.descname().c_str());
 
 	m_icon = ware.icon();

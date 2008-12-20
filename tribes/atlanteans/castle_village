@@ -16,26 +16,20 @@ ironore=5
 quartz=9
 stone=50
 spideryarn=9
-trunk=20
+trunk=13
 
 #  redefined materials
-coal=12
-gold=4
 goldyarn=6
-iron=8
 planks=45
 spidercloth=5
 
 #  food
 blackroot=5
 blackrootflour=12
-bread=8
 corn=5
 cornflour=12
 fish=3
 meat=3
-smoked_fish=6
-smoked_meat=6
 water=12
 
 #  tools
@@ -77,6 +71,9 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+bread=4
+smoked_fish=3
+smoked_meat=3
 carrier=1
 0/0/0/0=8
 
@@ -86,6 +83,9 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+bread=4
+smoked_fish=3
+smoked_meat=3
 trainer=1
 0/0/0/0=8
 
@@ -95,6 +95,8 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+coal=4
+gold=4
 armoursmith=1
 
 
@@ -103,6 +105,7 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+trunk=6
 toolsmith=1
 
 
@@ -111,6 +114,8 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+coal=8
+iron=8
 weaponsmith=1
 
 
@@ -119,4 +124,5 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+trunk=1
 sawyer=1

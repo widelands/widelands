@@ -221,16 +221,31 @@ std::string ProductionSite::get_statistics_string()
 
 void ProductionSite::prefill
 	(Game                 &       game,
-	 uint32_t       const *       ware_counts,
+	 uint32_t       const * const ware_counts,
 	 uint32_t       const *       worker_counts,
 	 Soldier_Counts const * const soldier_counts)
 {
 	Building::prefill(game, ware_counts, worker_counts, soldier_counts);
-	Tribe_Descr const & tribe = owner().tribe();
-	if (ware_counts) {
-		//  FIXME filling productionsite's input queues not yet implemented
+	{ //  init input ware queues
+		Ware_Types const & inputs = descr().inputs();
+		m_input_queues.resize(inputs.size());
+		for
+			(struct {
+			 	Ware_Types::const_iterator       current;
+			 	Ware_Types::const_iterator const end;
+			 	uint8_t                          i;
+			 } i = {inputs.begin(), inputs.end(), 0};
+			 i.current < i.end;
+			 ++i.current, ++i.i)
+			m_input_queues[i.i] =
+				new WaresQueue
+					(*this,
+					 i.current->first,
+					 i.current->second,
+					 ware_counts ? ware_counts[i.i] : 0);
 	}
 	if (worker_counts) {
+		Tribe_Descr const & tribe = owner().tribe();
 		Working_Position * wp = m_working_positions;
 		Ware_Types const & descr_working_positions = descr().working_positions();
 		container_iterate_const(Ware_Types, descr_working_positions, i) {
@@ -291,26 +306,24 @@ void ProductionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	if (upcast(Game, game, g)) {
-		//  Request missing workers.
-		Working_Position * wp = m_working_positions;
-		container_iterate_const(Ware_Types, descr().working_positions(), i) {
-			Ware_Index const worker_index = i.current->first;
-			for (uint32_t j = i.current->second; j; --j, ++wp)
-				if (Worker * const worker = wp->worker)
-					worker->set_location(this);
-				else
-					wp->worker_request = &request_worker(worker_index);
-		}
+	Game & game = dynamic_cast<Game &>(*g);
 
-		// Init input ware queues
-		Ware_Types const & inputs = descr().inputs();
-		m_input_queues.reserve(inputs.size());
-		container_iterate_const(Ware_Types, inputs, i)
-			m_input_queues.push_back(&(new WaresQueue(this))->init(*i.current));
+	//  Request missing wares.
+	container_iterate_const(std::vector<WaresQueue *>, m_input_queues, i)
+		(*i.current)->update();
 
-		try_start_working(*game);
+	//  Request missing workers.
+	Working_Position * wp = m_working_positions;
+	container_iterate_const(Ware_Types, descr().working_positions(), i) {
+		Ware_Index const worker_index = i.current->first;
+		for (uint32_t j = i.current->second; j; --j, ++wp)
+			if (Worker * const worker = wp->worker)
+				worker->set_location(this);
+			else
+				wp->worker_request = &request_worker(worker_index);
 	}
+
+	try_start_working(game);
 }
 
 /**

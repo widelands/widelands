@@ -15,28 +15,23 @@ axe=6
 bakingtray=2
 blackwood=32
 cloth=5
-coal=12
+coal=1
 fire_tongs=2
-fish=6
 fishing_rod=2
-gold=4
 grout=12
 hammer=11
 hunting_spear=2
-iron=12
 ironore=5
 kitchen_tools=4
 meal=4
-meat=6
 pick=14
-pittabread=8
 ration=12
-raw_stone=40
+raw_stone=34
 scythe=6
 shovel=4
 snack=3
 thatchreed=24
-trunk=80
+trunk=79
 
 #  workers
 brewer=1
@@ -59,6 +54,9 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+pittabread=8
+fish=6
+meat=6
 carrier=1
 0/0/0/0=8
 
@@ -77,6 +75,8 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+iron=4
+gold=4
 helmsmith=1
 
 
@@ -85,6 +85,7 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+iron=8
 blacksmith=1
 
 
@@ -93,6 +94,7 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+coal=8
 blacksmith=1
 
 
@@ -101,6 +103,7 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+trunk=1
 lumberjack=1
 
 
@@ -109,4 +112,6 @@ required_suitability=1
 sufficient_suitability=1
 distance=20
 
+raw_stone=6
+coal=3
 lime-burner=1

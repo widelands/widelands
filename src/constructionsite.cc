@@ -142,7 +142,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 			 static_cast<long unsigned int>(m_wares.size()));
 		molog
 			("* Owner: %i (player nr)\n",
-			 m_wares[i]->get_owner()->get_player_number());
+			 m_wares[i]->owner().get_player_number());
 		molog("* Ware: %u (index)\n", m_wares[i]->get_ware().value());
 		molog("* Size: %i\n", m_wares[i]->get_size());
 		molog("* Filled: %i\n", m_wares[i]->get_filled());
@@ -305,17 +305,16 @@ void ConstructionSite::init(Editor_Game_Base* g)
 		// Initialize the wares queues
 		std::map<Ware_Index, uint8_t> const & buildcost =
 			m_building->buildcost();
-		size_t buildcost_size = buildcost.size();
+		size_t const buildcost_size = buildcost.size();
 		m_wares.resize(buildcost_size);
 		std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
 		for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-			WaresQueue* wq = new WaresQueue(this);
+			WaresQueue & wq =
+				*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
 
-			m_wares[i] = wq;
-
-			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
-			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-			wq->init(*it);
+			wq.set_callback(&ConstructionSite::wares_queue_callback, this);
+			wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
+			wq.update();
 
 			m_work_steps += it->second;
 		}

@@ -1882,39 +1882,22 @@ WaresQueue IMPLEMENTATION
 /**
  * Pre-initialize a WaresQueue
 */
-WaresQueue::WaresQueue(PlayerImmovable* bld)
+WaresQueue::WaresQueue
+	(PlayerImmovable &       _owner,
+	 Ware_Index        const _ware,
+	 uint8_t           const _size,
+	 uint8_t           const _filled)
 	:
-	m_owner           (bld),
-	m_ware            (Ware_Index::Null()),
-	m_size            (0),
-	m_filled          (0),
+	m_owner           (_owner),
+	m_ware            (_ware),
+	m_size            (_size),
+	m_filled          (_filled),
 	m_consume_interval(0),
 	m_request         (0),
 	m_callback_fn     (0),
 	m_callback_data   (0)
 {}
 
-/**
- * cleanup() must be called!
-*/
-WaresQueue::~WaresQueue()
-{
-	assert(not m_ware);
-}
-
-/**
- * Initialize the queue. This also issues the first request, if necessary.
-*/
-WaresQueue & WaresQueue::init(std::pair<Ware_Index, uint8_t> const i) {
-	assert(not m_ware);
-
-	m_ware = i.first;
-	m_size = i.second;
-	m_filled = 0;
-
-	update();
-	return *this;
-}
 
 /**
  * Clear the queue appropriately.
@@ -1922,8 +1905,8 @@ WaresQueue & WaresQueue::init(std::pair<Ware_Index, uint8_t> const i) {
 void WaresQueue::cleanup() {
 	assert(m_ware);
 
-	if (m_filled)
-		m_owner->get_economy()->remove_wares(m_ware, m_filled);
+	if (uint8_t const count = m_filled)
+		m_owner.get_economy()->remove_wares(m_ware, count);
 
 	m_filled = 0;
 	m_size = 0;
@@ -1941,7 +1924,7 @@ void WaresQueue::update() {
 	assert(m_ware);
 
 	if (m_filled > m_size) {
-		m_owner->get_economy()->remove_wares(m_ware, m_filled - m_size);
+		m_owner.get_economy()->remove_wares(m_ware, m_filled - m_size);
 		m_filled = m_size;
 	}
 
@@ -1950,7 +1933,7 @@ void WaresQueue::update() {
 		if (!m_request)
 			m_request =
 				new Request
-					(m_owner,
+					(&m_owner,
 					 m_ware,
 					 &WaresQueue::request_callback, this,
 					 Request::WARE);
@@ -2047,9 +2030,9 @@ void WaresQueue::set_size(const uint32_t size) throw ()
  */
 void WaresQueue::set_filled(const uint32_t filled) throw () {
 	if (filled > m_filled)
-		m_owner->get_economy()->add_wares(m_ware, filled - m_filled);
+		m_owner.get_economy()->add_wares(m_ware, filled - m_filled);
 	else if (filled < m_filled)
-		m_owner->get_economy()->remove_wares(m_ware, m_filled - filled);
+		m_owner.get_economy()->remove_wares(m_ware, m_filled - filled);
 
 	m_filled = filled;
 }
@@ -2075,7 +2058,7 @@ void WaresQueue::Write
 
 	//  Owner and callback is not saved, but this should be obvious on load.
 	fw->CString
-		(m_owner->get_owner()->tribe().get_ware_descr(m_ware)->name().c_str());
+		(owner().tribe().get_ware_descr(m_ware)->name().c_str());
 	fw->Signed32(m_size);
 	fw->Signed32(m_filled);
 	fw->Signed32(m_consume_interval);
@@ -2092,7 +2075,7 @@ void WaresQueue::Read
 {
 	const uint16_t packet_version = fr->Unsigned16();
 	if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
-		m_ware = m_owner->get_owner()->tribe().ware_index(fr->CString());
+		m_ware = owner().tribe().ware_index(fr->CString());
 		m_size = fr->Signed32();
 		m_filled = fr->Signed32();
 		m_consume_interval = fr->Signed32();
@@ -2101,7 +2084,7 @@ void WaresQueue::Read
 		if (request) {
 			m_request =
 				new Request
-					(m_owner,
+					(&m_owner,
 					 Ware_Index::First(),
 					 &WaresQueue::request_callback, this,
 					 Request::WORKER);
@@ -2111,7 +2094,7 @@ void WaresQueue::Read
 		}
 
 		//  Now Economy stuff. We have to add our filled items to the economy.
-		add_to_economy(m_owner->get_economy());
+		add_to_economy(m_owner.get_economy());
 	} else
 		throw wexception
 			("WaresQueue::Read: Unknown WaresQueueVersion %u!", packet_version);
