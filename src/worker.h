@@ -86,6 +86,18 @@ public:
 	}
 	Economy * get_economy() const throw () {return m_economy;}
 
+	/// Sets the location of the worker initially. It may not have a previous
+	/// location. Does not add the worker to the list the locations set of
+	/// workers (it should be there already). The worker must already be in the
+	/// same economy as the location.
+	void set_location_initially(PlayerImmovable & location) {
+		assert(not m_location.is_set());
+		assert(location.get_serial());
+		assert(m_economy);
+		assert(m_economy == location.get_economy());
+		m_location = &location;
+	}
+
 	void set_location(PlayerImmovable *location);
 	void set_economy(Economy *economy);
 
