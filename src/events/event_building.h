@@ -37,6 +37,10 @@ struct Event_Building : Event {
 	Event_Building(char const * Name, State const S) :
 		Event          (Name, S),
 		m_location     (Coords::Null()),
+		m_required_suitability  (std::numeric_limits<int32_t>::min()),
+		m_sufficient_suitability(std::numeric_limits<int32_t>::max()),
+		m_distance_min          (0),
+		m_distance_max          (0),
 		m_player       (1),
 		m_ware_counts  (0),
 		m_worker_counts(0)
@@ -56,6 +60,8 @@ struct Event_Building : Event {
 
 private:
 	Coords         m_location;
+	int32_t        m_required_suitability, m_sufficient_suitability;
+	uint8_t        m_distance_min, m_distance_max;
 	Player_Number  m_player;
 	Building_Index m_building;
 	uint32_t     * m_ware_counts;
