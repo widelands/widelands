@@ -219,6 +219,10 @@ Building* Building_Descr::create
 }
 
 
+int32_t Building_Descr::suitability(Map const &, FCoords const fc) const {
+	return m_size <= (fc.field->get_caps() & Widelands::BUILDCAPS_SIZEMASK);
+}
+
 /**
  * Normal buildings don't conquer anything, so this returns 0 by default.
  *

@@ -104,6 +104,7 @@ struct Building_Descr : public Map_Object_Descr {
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &m_tribe;}
 	Workarea_Info m_workarea_info;
 
+	virtual int32_t suitability(Map const &, FCoords) const;
 	const BuildingHints & hints() const throw () {return m_hints;}
 
 protected:
