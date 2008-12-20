@@ -23,7 +23,6 @@
 #include "editor_increase_height_tool.h"
 #include "editor_increase_resources_tool.h"
 #include "editor_info_tool.h"
-#include "editor_make_infrastructure_tool.h"
 #include "editor_noise_height_tool.h"
 #include "editor_place_immovable_tool.h"
 #include "editor_place_bob_tool.h"
@@ -93,7 +92,6 @@ public:
 		Editor_Decrease_Resources_Tool  decrease_resources;
 		Editor_Set_Resources_Tool       set_resources;
 		Editor_Increase_Resources_Tool  increase_resources;
-		Editor_Make_Infrastructure_Tool make_infrastructure;
 	} tools;
 
 	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
