@@ -519,7 +519,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 							("error while reading \"%s\": %s", filename, e.what());
 					}
 				} else if (++extnr == nextensions) {
-					*after_basename = '\0'; //  cut off the extension
+					after_basename[3] = '\0'; //  cut off the extension
 					throw wexception("\"%s\" is missing", filename);
 				}
 			}
