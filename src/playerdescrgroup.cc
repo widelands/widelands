@@ -119,7 +119,6 @@ void PlayerDescriptionGroup::refresh()
 	bool stateaccess = d->settings->canChangePlayerState(d->plnum);
 	bool tribeaccess = d->settings->canChangePlayerTribe(d->plnum);
 	bool const initaccess  = d->settings->canChangePlayerInit(d->plnum);
-	log("PlayerDescriptionGroup::refresh: initaccess = %u\n", initaccess);
 
 	d->btnEnablePlayer->set_enabled(stateaccess);
 
@@ -185,7 +184,6 @@ void PlayerDescriptionGroup::refresh()
 			d->btnPlayerInit ->set_visible(true);
 			d->btnPlayerTribe->set_enabled(tribeaccess);
 			d->btnPlayerInit ->set_enabled(initaccess);
-			log("called btnPlayerInit(%u)\n", initaccess);
 		}
 	}
 }

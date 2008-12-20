@@ -182,6 +182,35 @@ std::string TrainingSite::get_statistics_string()
 }
 
 
+void TrainingSite::prefill
+	(Game                 &       game,
+	 uint32_t       const *       ware_counts,
+	 uint32_t       const *       worker_counts,
+	 Soldier_Counts const * const soldier_counts)
+{
+	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
+	if (soldier_counts and soldier_counts->size()) {
+		Tribe_Descr const & tribe = owner().tribe();
+		Soldier_Descr const & soldier_descr =
+			dynamic_cast<Soldier_Descr const &>
+				(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
+			Soldier_Strength const ss = i.current->first;
+			for (uint32_t j = i.current->second; j; --j) {
+				Soldier & soldier =
+					static_cast<Soldier &>
+						(soldier_descr.create(game, owner(), 0, get_position()));
+				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
+				Building::add_worker(&soldier);
+				m_soldiers.push_back(&soldier);
+				log
+					("TrainingSite::prefill: added soldier (economy = %p)\n",
+					 soldier.get_economy());
+			}
+		}
+	}
+}
+
 /**
  * Setup the building and request soldiers
  */
@@ -190,6 +219,12 @@ void TrainingSite::init(Editor_Game_Base * g)
 	assert(g);
 
 	ProductionSite::init(g);
+	Game & game = dynamic_cast<Game &>(*g);
+	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
+		(*i.current)->set_location_initially(*this);
+		assert(not (*i.current)->get_state()); //  Should be newly created.
+		(*i.current)->start_task_idle(&game, 0, -1);
+	}
 	update_soldier_request();
 }
 

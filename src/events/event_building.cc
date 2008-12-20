@@ -424,11 +424,6 @@ Event::State Event_Building::run(Game * game) {
 	do {
 		do {
 			int32_t const suitability = descr.suitability(map, mr.location());
-			log
-				("calculated suitability %i for (%i, %i) (best is %i, with %u "
-				 "locations\n",
-				 suitability, mr.location().x, mr.location().y,
-				 best_suitability, best_positions.size());
 			if (best_suitability < suitability) {
 				best_positions.clear();
 				best_suitability = suitability;

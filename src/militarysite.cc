@@ -177,21 +177,19 @@ void MilitarySite::prefill
 void MilitarySite::init(Editor_Game_Base* g)
 {
 	ProductionSite::init(g);
+	Game & game = dynamic_cast<Game &>(*g);
+	std::vector<Worker *> const & ws = get_workers();
+	container_iterate_const(std::vector<Worker *>, ws, i)
+		if (upcast(Soldier, soldier, *i.current)) {
+			soldier->set_location_initially(*this);
+			assert(not soldier->get_state()); //  Should be newly created.
+			soldier->start_task_buildingwork(&game);
+		}
+	update_soldier_request();
 
-	if (upcast(Game, game, g)) {
-		std::vector<Worker *> const & ws = get_workers();
-		container_iterate_const(std::vector<Worker *>, ws, i)
-			if (upcast(Soldier, soldier, *i.current)) {
-				soldier->set_location_initially(*this);
-				assert(not soldier->get_state()); //  Should be newly created. FIXME savegames???
-				soldier->start_task_buildingwork(game);
-			}
-		update_soldier_request();
-
-		// Schedule the first healing
-		m_nexthealtime = g->get_gametime()+1000;
-		schedule_act(game, 1000);
-	}
+	//  schedule the first healing
+	m_nexthealtime = game.get_gametime() + 1000;
+	schedule_act(&game, 1000);
 }
 
 

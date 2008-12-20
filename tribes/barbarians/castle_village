@@ -51,7 +51,7 @@ ranger=1
 stonemason=2
 
 #  soldiers
-0/0/0/0=17
+0/0/0/0=13
 
 
 [battlearena]
@@ -69,7 +69,7 @@ sufficient_suitability=1
 distance=20
 
 trainer=1
-0/0/0/0=8
+0/0/0/0=12
 
 
 [helmsmithy]
