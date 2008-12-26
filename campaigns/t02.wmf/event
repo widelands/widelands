@@ -59,9 +59,10 @@ steps=55
 
 [Build Eastern Lumberjack]
 type=building
-version=1
+version=2
 point=15 11
 building=lumberjacks_hut
+lumberjack=1
 
 [Road Eastern Lumberjack East]
 type=road
@@ -77,9 +78,10 @@ steps=56
 
 [Build Southern Lumberjack]
 type=building
-version=1
+version=2
 point=12 13
 building=lumberjacks_hut
+lumberjack=1
 
 [Road Southern Lumberjack East]
 type=road
@@ -95,9 +97,10 @@ steps=45
 
 [Build Quarry]
 type=building
-version=1
+version=2
 point=8 12
 building=quarry
+stonemason=1
 
 [Road Quarry]
 type=road
@@ -107,9 +110,10 @@ steps=112
 
 [Build Ranger]
 type=building
-version=1
+version=2
 point=9 13
 building=rangers_hut
+ranger=1
 
 [Road Ranger East]
 type=road
@@ -846,9 +850,10 @@ name=field2
 
 [Village Northern Sentry]
 type=building
-version=1
+version=2
 point=57 9
 building=sentry
+0/0/0/0=2
 
 [Village Northern Sentry Road]
 type=road
@@ -858,9 +863,10 @@ steps=54
 
 [Village Hunter]
 type=building
-version=1
+version=2
 point=56 10
 building=hunters_hut
+hunter=1
 
 [Village Hunter Road]
 type=road
@@ -870,9 +876,10 @@ steps=34
 
 [Village Gamekeeper]
 type=building
-version=1
+version=2
 point=56 12
 building=gamekeepers_hut
+gamekeeper=1
 
 [Village Gamekeeper Road 1]
 type=road
@@ -900,9 +907,10 @@ steps=45
 
 [Village Northern Farm]
 type=building
-version=1
+version=2
 point=56 16
 building=farm
+farmer=1
 
 [Village Northern Farm Road 1]
 type=road
@@ -918,9 +926,10 @@ steps=44
 
 [Village Northern Well]
 type=building
-version=1
+version=2
 point=54 18
 building=well
+carrier=1
 
 [Village Northern Well Road]
 type=road
@@ -930,9 +939,12 @@ steps=432
 
 [Village Northern Bakery]
 type=building
-version=1
+version=2
 point=55 20
 building=bakery
+baker=1
+wheat=6
+water=6
 
 [Village Northern Bakery Road]
 type=road
@@ -942,9 +954,10 @@ steps=34
 
 [Village Northeastern Lumberjack]
 type=building
-version=1
+version=2
 point=56 21
 building=lumberjacks_hut
+lumberjack=1
 
 [Village Northeastern Lumberjack Road]
 type=road
@@ -954,9 +967,10 @@ steps=45
 
 [Village Middle Lumberjack]
 type=building
-version=1
+version=2
 point=55 22
 building=lumberjacks_hut
+lumberjack=1
 
 [Village Middle Lumberjack Road]
 type=road
@@ -966,9 +980,10 @@ steps=44
 
 [Village Southwestern Lumberjack]
 type=building
-version=1
+version=2
 point=54 24
 building=lumberjacks_hut
+lumberjack=1
 
 [Village Southwestern Lumberjack Road]
 type=road
@@ -978,9 +993,10 @@ steps=34
 
 [Village Eastern Ranger]
 type=building
-version=1
+version=2
 point=57 24
 building=rangers_hut
+ranger=1
 
 [Village Eastern Ranger Road]
 type=road
@@ -990,9 +1006,10 @@ steps=45
 
 [Village Western Ranger]
 type=building
-version=1
+version=2
 point=55 25
 building=rangers_hut
+ranger=1
 
 [Village Western Ranger Road]
 type=road
@@ -1002,9 +1019,11 @@ steps=45
 
 [Village Hardener]
 type=building
-version=1
+version=2
 point=54 26
 building=hardener
+lumberjack=1
+trunk=8
 
 [Village Hardener Road]
 type=road
@@ -1014,7 +1033,7 @@ steps=44
 
 [Village Warehouse]
 type=building
-version=1
+version=2
 point=53 28
 building=warehouse
 
@@ -1026,9 +1045,12 @@ steps=44
 
 [Village Inn]
 type=building
-version=1
+version=2
 point=55 28
 building=inn
+innkeeper=1
+pittabread=4
+meat=4
 
 [Village Inn Road]
 type=road
@@ -1038,9 +1060,12 @@ steps=55
 
 [Village Tavern]
 type=building
-version=1
+version=2
 point=57 28
 building=tavern
+innkeeper=1
+pittabread=4
+meat=4
 
 [Village Tavern Road]
 type=road
@@ -1050,9 +1075,10 @@ steps=55
 
 [Village Middle Well]
 type=building
-version=1
+version=2
 point=52 30
 building=well
+carrier=1
 
 [Village Middle Well Road 1]
 type=road
@@ -1068,9 +1094,10 @@ steps=334
 
 [Village Southern Farm]
 type=building
-version=1
+version=2
 point=54 33
 building=farm
+farmer=1
 
 [Village Southern Farm Road]
 type=road
@@ -1080,9 +1107,12 @@ steps=44
 
 [Village Southern Bakery]
 type=building
-version=1
+version=2
 point=51 35
 building=bakery
+baker=1
+wheat=6
+water=6
 
 [Village Southern Bakery Road]
 type=road
@@ -1092,7 +1122,7 @@ steps=22
 
 [Village Southern Well]
 type=building
-version=1
+version=2
 point=52 37
 building=well
 
@@ -1104,9 +1134,10 @@ steps=11
 
 [Village Southern Sentry]
 type=building
-version=1
+version=2
 point=52 39
 building=sentry
+0/0/0/0=2
 
 [Village Southern Sentry Road]
 type=road
@@ -1140,12 +1171,14 @@ area=1
 [Village Adjust Eastern Border 5]
 type=conquer_area
 version=2
-point=57 33
+point=56 33
+area=1
 
 [Village Adjust Western Border 1]
 type=conquer_area
 version=2
-point=53 16
+point=54 16
+area=1
 
 [Village Adjust Western Border 2]
 type=conquer_area
