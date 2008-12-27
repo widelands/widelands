@@ -228,8 +228,35 @@ and might be consumed..
 ===============
 */
 void Editor_Game_Base::conquer_area_no_building
-	(Player_Area<Area<FCoords> > const player_area)
-{do_conquer_area(player_area, true);}
+	(Player_Area<Area<FCoords> > player_area)
+{
+	assert(0 <= player_area.x);
+	assert(player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert(player_area.y < map().get_height());
+	Field const & first_field = map()[0];
+	assert(&first_field <= player_area.field);
+	assert(player_area.field < &first_field + map().max_index());
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
+	MapRegion<Area<FCoords> > mr(map(), player_area);
+	do {
+		Player_Number const owner = mr.location().field->get_owned_by();
+		if (owner != player_area.player_number) {
+			if (owner)
+				receive(NoteField(mr.location(), LOSE));
+			mr.location().field->set_owned_by(player_area.player_number);
+			inform_players_about_ownership
+				(mr.location().field - &first_field, player_area.player_number);
+			receive (NoteField(mr.location(), GAIN));
+		}
+	} while (mr.advance(map()));
+
+	//  This must reach one step beyond the conquered area to adjust the borders
+	//  of neighbour players.
+	++player_area.radius;
+	map().recalc_for_field_area(player_area);
+}
 
 
 /**
