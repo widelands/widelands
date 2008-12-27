@@ -185,8 +185,11 @@ Flag & Player::force_flag(FCoords const c) {
 	do if (upcast(Flag, flag, mr.location().field->get_immovable()))
 		flag->remove(&egbase()); //  Remove all flags that are too close.
 	while (mr.advance(map));
-	egbase().conquer_area //  Make sure that the player owns the area around.
+
+	//  Make sure that the player owns the area around.
+	egbase().conquer_area_no_building
 		(Player_Area<Area<FCoords> >(get_player_number(), Area<FCoords>(c, 1)));
+
 	return *Flag::create(&egbase(), this, c);
 }
 
@@ -242,9 +245,12 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 	for (Path::Step_Vector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
-		egbase().conquer_area
+
+		//  Make sure that the player owns the area around.
+		egbase().conquer_area_no_building
 			(Player_Area<Area<FCoords> >
 			 	(get_player_number(), Area<FCoords>(c, 1)));
+
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
 			assert(immovable != &end);
@@ -279,9 +285,12 @@ void Player::force_building
 			map.get_ln (c[0], &c[3]);
 		}
 		for (size_t i = 0; i < nr_locations; ++i) {
-			egbase().conquer_area
+
+			//  Make sure that the player owns the area around.
+			egbase().conquer_area_no_building
 				(Player_Area<Area<FCoords> >
 				 	(get_player_number(), Area<FCoords>(c[i], 1)));
+
 			if (BaseImmovable * const immovable = c[i].field->get_immovable())
 				immovable->remove(&egbase());
 		}
