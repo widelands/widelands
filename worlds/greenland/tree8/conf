@@ -14,7 +14,7 @@ program=fall
 picture=idle_0.png
 
 [terrain affinity]
-steppe=     198
+steppe=     196
 berg1=        7
 strand=      10
 wiese1=     150

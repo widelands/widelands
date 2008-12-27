@@ -640,12 +640,19 @@ ImmovableProgram::ActAnimate::ActAnimate
 	}
 }
 
+
+/// Use convolutuion to make the animation time a random variable with binomial
+/// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute
 	(Game & game, Immovable & immovable) const
 {
 	immovable.start_animation(game, m_id);
 	immovable.program_step
-		(game, m_duration + game.logic_rand() % (m_duration / 10 + 1));
+		(game,
+		 m_duration ?
+		 1 + game.logic_rand() % m_duration + game.logic_rand() % m_duration
+		 :
+		 0);
 }
 
 

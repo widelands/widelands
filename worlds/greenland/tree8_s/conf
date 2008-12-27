@@ -3,7 +3,7 @@ program=program
 picture=s2tree8_00.png
 
 [terrain affinity]
-steppe=     198
+steppe=     196
 berg1=        7
 strand=      10
 wiese1=     150
