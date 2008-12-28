@@ -64,7 +64,7 @@ d(new PlayerDescriptionGroupImpl)
 		(this, &PlayerDescriptionGroup::enable_player);
 	d->btnPlayerType = new UI::Button<PlayerDescriptionGroup>
 		(this,
-		 w * 29 / 125, 0, w * 38 / 200, h,
+		 w * 29 / 125, 0, w * 19 / 100, h,
 		 1,
 		 &PlayerDescriptionGroup::toggle_playertype, this,
 		 "",
@@ -73,7 +73,7 @@ d(new PlayerDescriptionGroupImpl)
 		 fname, fsize);
 	d->btnPlayerTribe = new UI::Button<PlayerDescriptionGroup>
 		(this,
-		 w * 43 / 100, 0, w * 48 / 200, h,
+		 w * 43 / 100, 0, w * 6 / 25, h,
 		 1,
 		 &PlayerDescriptionGroup::toggle_playertribe, this,
 		 "",
@@ -82,7 +82,7 @@ d(new PlayerDescriptionGroupImpl)
 		 fname, fsize);
 	d->btnPlayerInit = new UI::Button<PlayerDescriptionGroup>
 		(this,
-		 w * 135 / 200, 0, w * 64 / 200, h,
+		 w * 27 / 40, 0, w * 8 / 25, h,
 		 1,
 		 &PlayerDescriptionGroup::toggle_playerinit, this,
 		 "",
