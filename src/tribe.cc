@@ -249,9 +249,9 @@ Tribe_Descr::Tribe_Descr
 			delete[] m_ware_references;
 		}
 #endif
+	} catch (std::exception const & e) {
+		throw wexception("tribe %s: %s", tribename.c_str(), e.what());
 	}
-	catch (std::exception &e)
-	{throw wexception("Error loading tribe %s: %s", tribename.c_str(), e.what());}
 }
 
 
@@ -299,17 +299,22 @@ bool Tribe_Descr::exists_tribe(const std::string & name, TribeBasicInfo* info) {
 
 	FileRead f;
 	if (f.TryOpen(*g_fs, buf.c_str())) {
-		if (info) {
-			Profile prof(buf.c_str());
-			info->name = name;
-			info->uiposition =
-				prof.get_safe_section("tribe").get_int("uiposition", 0);
-			Section & inits_s = prof.get_safe_section("initializations");
-			while (Section::Value const * const v = inits_s.get_next_val())
-				info->initializations.push_back
-					(TribeBasicInfo::Initialization
-					 	(v->get_name(), v->get_string()));
-		}
+		if (info)
+			try {
+				Profile prof(buf.c_str());
+				info->name = name;
+				info->uiposition =
+					prof.get_safe_section("tribe").get_int("uiposition", 0);
+				Section & inits_s = prof.get_safe_section("initializations");
+				while (Section::Value const * const v = inits_s.get_next_val())
+					info->initializations.push_back
+						(TribeBasicInfo::Initialization
+						 	(v->get_name(), v->get_string()));
+			} catch (_wexception const & e) {
+				throw wexception
+					("reading basic info for tribe \"%s\": %s",
+					 name.c_str(), e.what());
+			}
 
 		return true;
 	}
