@@ -103,7 +103,7 @@ void Main_Menu_Map_Options::update() {
 	m_name  ->setText(map.get_name());
 	sprintf(buf, "%i", map.get_nrplayers());
 	m_nrplayers->set_text(buf);
-	m_world->set_text(Widelands::World::World(map.get_world_name()).get_name());
+	m_world ->set_text(map.world().get_name());
 	m_descr ->set_text(map.get_description());
 }
 
