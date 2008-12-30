@@ -1676,7 +1676,7 @@ void MilitarySite_Window::update() {
 		er->set_string(3, buf);
 		sprintf(buf, "%i / %i", el, mel);
 		er->set_string(4, buf);
-		sprintf(buf, "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
+		sprintf(buf, "%2i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
 		er->set_string(5, buf);
 	}
 	m_table.sort();
