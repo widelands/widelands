@@ -1863,7 +1863,7 @@ Make sure the window is redrawn when necessary.
 */
 void TrainingSite_Window::think()
 {
-	Building_Window::think();
+	ProductionSite_Window::think();
 
 	Widelands::BaseImmovable const * const base_immovable =
 		m_parent->egbase().map()[m_ms_location].get_immovable();
