@@ -322,8 +322,8 @@ def do_configure_libraries(conf, env):
 	else:
 		env.ParseConfig(env['sdlconfig']+' --libs --cflags')
 
-	if not (conf.CheckBoostVersion('1.33')):
-		print 'Boost version >= 1.33 needed. Make sure Boost development packages are installed.'
+	if not (conf.CheckBoostVersion('1.35')):
+		print 'Boost version >= 1.35 needed (boost bug #1278). Make sure Boost development packages are installed.'
 		env.Exit(1)
 
 	env.HAS_PARAGUI=False
