@@ -87,7 +87,6 @@ static const char* pic_tab_military = "pics/menu_tab_military.png";
 static const char* pic_tab_training = "pics/menu_tab_training.png";
 static const char* pic_up_train = "pics/menu_up_train.png";
 static const char* pic_down_train = "pics/menu_down_train.png";
-static const char* pic_train_options = "pics/menu_train_options.png";
 static const char* pic_drop_soldier = "pics/menu_drop_soldier.png";
 
 /*
@@ -1655,7 +1654,6 @@ Update the listselect, maybe there are new soldiers
 void MilitarySite_Window::update() {
 	std::vector<Soldier *> soldiers = get_militarysite()->presentSoldiers();
 
-	char buf[200];
 	if (soldiers.size() < m_table.size())
 		m_table.clear();
 
@@ -1667,24 +1665,26 @@ void MilitarySite_Window::update() {
 		const uint32_t al = s.get_attack_level (), mal = s.get_max_attack_level ();
 		const uint32_t dl = s.get_defense_level(), mdl = s.get_max_defense_level();
 		const uint32_t el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
-		er->set_string(0, s.name().c_str());
-		sprintf(buf, "%i / %i", hl, mhl);
-		er->set_string(1, buf);
-		sprintf(buf, "%i / %i", al, mal);
-		er->set_string(2, buf);
-		sprintf(buf, "%i / %i", dl, mdl);
-		er->set_string(3, buf);
-		sprintf(buf, "%i / %i", el, mel);
-		er->set_string(4, buf);
-		sprintf(buf, "%2i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
-		er->set_string(5, buf);
+		er->set_string(0, s.descname().c_str());
+		char buffer[sizeof("4294967295 / 4294967295")];
+		sprintf(buffer,  "%u / %u", hl,                mhl);
+		er->set_string(1, buffer);
+		sprintf(buffer,  "%u / %u",      al,                 mal);
+		er->set_string(2, buffer);
+		sprintf(buffer,  "%u / %u",           dl,                  mdl);
+		er->set_string(3, buffer);
+		sprintf(buffer,  "%u / %u",                el,                   mel);
+		er->set_string(4, buffer);
+		sprintf(buffer, "%2u / %u", hl + al + dl + el, mhl + mal + mdl + mel);
+		er->set_string(5, buffer);
 	}
 	m_table.sort();
 
 	MilitarySite const & ms = dynamic_cast<MilitarySite &>(*get_building());
 	uint32_t const capacity     = ms.   soldierCapacity();
-	snprintf(buf, sizeof(buf), _("Capacity: %2d"), capacity);
-	m_capacity.set_text (buf);
+	char buffer[200];
+	snprintf(buffer, sizeof(buffer), _("Capacity: %2u"), capacity);
+	m_capacity.set_text (buffer);
 	uint32_t const capacity_min = ms.minSoldierCapacity();
 	m_drop_button.set_enabled
 		(m_table.has_selection() and capacity_min < m_table.size());
@@ -1890,7 +1890,6 @@ FIXME What if a soldier have been removed and another added? This needs review.
 void TrainingSite_Window::update() {
 	std::vector<Soldier*> soldiers = get_trainingsite()->presentSoldiers();
 
-	char buffer[200];
 	if (soldiers.size() != m_table->size())
 		m_table->clear();
 
@@ -1902,25 +1901,25 @@ void TrainingSite_Window::update() {
 		const uint32_t al = s.get_attack_level (), mal = s.get_max_attack_level ();
 		const uint32_t dl = s.get_defense_level(), mdl = s.get_max_defense_level();
 		const uint32_t el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
-		er->set_string(0, s.name().c_str());
-		snprintf(buffer, sizeof(buffer), "%i / %i", hl, mhl);
+		er->set_string(0, s.descname().c_str());
+		char buffer[sizeof("4294967295 / 4294967295")];
+		sprintf(buffer,  "%u / %u", hl,                mhl);
 		er->set_string(1, buffer);
-		snprintf(buffer, sizeof(buffer), "%i / %i", al, mal);
+		sprintf(buffer,  "%u / %u",      al,                 mal);
 		er->set_string(2, buffer);
-		snprintf(buffer, sizeof(buffer), "%i / %i", dl, mdl);
+		sprintf(buffer,  "%u / %u",           dl,                  mdl);
 		er->set_string(3, buffer);
-		snprintf(buffer, sizeof(buffer), "%i / %i", el, mel);
+		sprintf(buffer,  "%u / %u",                el,                   mel);
 		er->set_string(4, buffer);
-		snprintf
-			(buffer, sizeof(buffer),
-			 "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
+		sprintf(buffer, "%2u / %u", hl + al + dl + el, mhl + mal + mdl + mel);
 		er->set_string(5, buffer);
 	}
 	m_table->sort();
 
-	snprintf
-		(buffer, sizeof(buffer),
-		 "%2d",
+	char buffer[sizeof("4294967295")];
+	sprintf
+		(buffer,
+		 "%2u",
 		 dynamic_cast<const TrainingSite &>(*get_building()).soldierCapacity());
 	m_capacity->set_text (buffer);
 }
