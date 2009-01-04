@@ -434,7 +434,7 @@ msgstr "Annuler"
 #: ..\..\src\game_main_menu_save_game.cc:139
 #, c-format
 msgid "%02ud%02uh%02u'%u\"%03u"
-msgstr "%02ud%02uh%02u'%u\"%03u"
+msgstr "%02uj%02uh%02u'%u\"%03u"
 
 #: ..\..\src\game_main_menu_save_game.cc:200
 msgid ""
