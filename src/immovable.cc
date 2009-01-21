@@ -239,13 +239,26 @@ Immovable_Descr::Immovable_Descr
 					terrain_affinity_s->get_natural(terrain_type_name, 0);
 				if ((*it = value) != value)
 					throw wexception("expected 0 .. 255 but found %u", value);
+				if (terrain_affinity_s->get_next_val(terrain_type_name))
+					throw wexception("duplicated");
 			} catch (_wexception const & e) {
 				throw wexception
 					("[terrain affinity] %s: %s", terrain_type_name, e.what());
 			}
 		}
 		if (owner_tribe) //  Tribe immovables may have entries for other worlds.
-			while (terrain_affinity_s->get_next_val()->get_positive()) {}
+			while (Section::Value * const v = terrain_affinity_s->get_next_val())
+				try {
+					uint32_t const value = v->get_natural();
+					if ((*it = value) != value)
+						throw wexception("expected 0 .. 255 but found %u", value);
+					if (terrain_affinity_s->get_next_val(v->get_name()))
+						throw wexception("duplicated");
+				} catch (_wexception const & e) {
+					throw wexception
+						("[terrain affinity] \"%s\" (not in current world): %s",
+						 v->get_name(), e.what());
+				}
 	} else
 		memset(it, 255, sizeof(m_terrain_affinity));
 }
@@ -730,6 +743,8 @@ ImmovableProgram::ActTransform::ActTransform
 				++p;
 			}
 	end:
+		if (not strcmp(parameters, descr.name().c_str()))
+			throw wexception("illegal transformation to the same type");
 		type_name = parameters;
 	} catch (_wexception const & e) {
 		throw wexception("transform: %s", e.what());
