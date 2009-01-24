@@ -91,6 +91,227 @@ Request::~Request()
 // Modified to allow Requirements and SoldierRequests
 #define REQUEST_VERSION 4
 
+//  These tables are needed for compatibility with requests written in version
+//  <= 3.
+static char const * old_barbarian_ware_types[] = {
+	"axe",
+	"bakingtray",
+	"battleaxe",
+	"beer",
+	"blackwood",
+	"broadaxe",
+	"bronzeaxe",
+	"cloth",
+	"coal",
+	"fire_tongs",
+	"fish",
+	"fishing_rod",
+	"flax",
+	"gold",
+	"goldstone",
+	"grout",
+	"hammer",
+	"helm",
+	"hunting_spear",
+	"iron",
+	"ironore",
+	"kitchen_tools",
+	"mask",
+	"meal",
+	"meat",
+	"pick",
+	"pittabread",
+	"ration",
+	"raw_stone",
+	"scythe",
+	"sharpaxe",
+	"shovel",
+	"snack",
+	"strongbeer",
+	"thatchreed",
+	"trunk",
+	"warhelmet",
+	"warriorsaxe",
+	"water",
+	"wheat"
+};
+static char const * old_barbarian_worker_types[] = {
+	"baker",
+	"blacksmith",
+	"brewer",
+	"builder",
+	"burner",
+	"carrier",
+	"chief-miner",
+	"farmer",
+	"ferner",
+	"fisher",
+	"gamekeeper",
+	"geologist",
+	"helmsmith",
+	"hunter",
+	"innkeeper",
+	"lime-burner",
+	"lumberjack",
+	"master-blacksmith",
+	"master-brewer",
+	"master-miner",
+	"miner",
+	"ranger",
+	"smelter",
+	"soldier",
+	"stonemason",
+	"trainer",
+	"weaver"
+};
+static char const * old_empire_ware_types[] = {
+	"advanced_lance",
+	"armour",
+	"axe",
+	"bakingtray",
+	"basket",
+	"beer",
+	"bread",
+	"chain_armour",
+	"cloth",
+	"coal",
+	"fire_tongs",
+	"fish",
+	"fishing_rod",
+	"flour",
+	"gold",
+	"goldstone",
+	"grape",
+	"hammer",
+	"heavy_lance",
+	"helm",
+	"hunting_spear",
+	"iron",
+	"ironore",
+	"kitchen_tools",
+	"lance",
+	"marble",
+	"marblecolumn",
+	"meal",
+	"meat",
+	"pick",
+	"plate_armour",
+	"ration",
+	"saw",
+	"scythe",
+	"shovel",
+	"stone",
+	"trunk",
+	"war_lance",
+	"water",
+	"wheat",
+	"wine",
+	"wood",
+	"wood_lance",
+	"wool",
+};
+static char const * old_empire_worker_types[] = {
+	"armoursmith",
+	"baker",
+	"brewer",
+	"builder",
+	"burner",
+	"carrier",
+	"farmer",
+	"fisher",
+	"forester",
+	"geologist",
+	"hunter",
+	"innkeeper",
+	"lumberjack",
+	"master-miner",
+	"miller",
+	"miner",
+	"pig-breeder",
+	"shepherd",
+	"smelter",
+	"soldier",
+	"stonemason",
+	"toolsmith",
+	"trainer",
+	"weaponsmith",
+	"weaver",
+	"vinefarmer"
+};
+static char const * old_atlantean_ware_types[] = {
+	"advanced_shield",
+	"bakingtray",
+	"blackroot",
+	"blackrootflour",
+	"bread",
+	"bucket",
+	"coal",
+	"corn",
+	"cornflour",
+	"diamond",
+	"double_trident",
+	"fire_tongs",
+	"fish",
+	"fishing_net",
+	"gold",
+	"golden_tabard",
+	"goldore",
+	"goldyarn",
+	"hammer",
+	"heavy_double_trident",
+	"hook_pole",
+	"hunting_bow",
+	"iron",
+	"ironore",
+	"light_trident",
+	"long_trident",
+	"meat",
+	"milking_tongs",
+	"pick",
+	"planks",
+	"quartz",
+	"saw",
+	"scythe",
+	"shovel",
+	"smoked_fish",
+	"smoked_meat",
+	"spidercloth",
+	"spideryarn",
+	"steel_shield",
+	"steel_trident",
+	"stone",
+	"tabard",
+	"trunk",
+	"water"
+};
+static char const * old_atlantean_worker_types[] = {
+	"armoursmith",
+	"baker",
+	"blackroot_farmer",
+	"builder",
+	"burner",
+	"carrier",
+	"farmer",
+	"fish_breeder",
+	"fisher",
+	"forester",
+	"geologist",
+	"hunter",
+	"miller",
+	"miner",
+	"sawyer",
+	"smelter",
+	"smoker",
+	"soldier",
+	"spiderbreeder",
+	"stonecutter",
+	"toolsmith",
+	"trainer",
+	"weaponsmith",
+	"weaver",
+	"woodcutter"
+};
+
 /**
  * Read this request from a file
  *
@@ -107,27 +328,138 @@ void Request::Read
 		if (2 <= version and version <= REQUEST_VERSION) {
 			Tribe_Descr const & tribe = m_target->owner().tribe();
 			if (version <= 3) {
-				//  Unfortunately, old versions wrote the index. The only thing to
-				//  do is to assume that the index refers to the same ware type and
-				//  hope for the best.
-				log
-					("WARNING: a request is stored with an old broken version. But "
-					 "this might work.\n");
+				//  Unfortunately, old versions wrote the index. The best thing
+				//  that we can do with that is to look it up in a table.
 				m_type = static_cast<Type>(fr->Unsigned8());
 				if (m_type != WARE and m_type != WORKER)
 					throw wexception
 						("type is %u but must be %u (ware) or %u (worker)",
 						 m_type, WARE, WORKER);
 				uint32_t const index = fr->Unsigned32();
-				m_index = Ware_Index(static_cast<Ware_Index::value_t>(index));
-				if (m_type == WARE and tribe.get_nrwares() <= m_index)
+				if        (tribe.name() == "barbarians") {
+					if (m_type == WARE) {
+						if
+							(sizeof  (old_barbarian_ware_types)
+							 /
+							 sizeof (*old_barbarian_ware_types)
+							 <=
+							 index)
+							throw wexception
+								("could not interpret barbarian ware index %u",
+								 index);
+						log
+							("WARNING: Interpreting a request saved in an old broken "
+							 "format: A barbarian %s has a request for a ware of "
+							 "type %u. This is interpreted as %s.\n",
+							 m_target->descr().descname().c_str(),
+							 index, old_barbarian_ware_types[index]);
+						m_index =
+							tribe.safe_ware_index
+								(old_barbarian_ware_types  [index]);
+					} else {
+						if
+							(sizeof  (old_barbarian_worker_types)
+							 /
+							 sizeof (*old_barbarian_worker_types)
+							 <=
+							 index)
+							throw wexception
+								("could not interpret barbarian worker index %u",
+								 index);
+						log
+							("WARNING: Interpreting a request saved in an old broken "
+							 "format: A barbarian %s has a request for a worker of "
+							 "type %u. This is interpreted as %s.\n",
+							 m_target->descr().descname().c_str(),
+							 index, old_barbarian_worker_types[index]);
+						m_index =
+							tribe.safe_worker_index
+								(old_barbarian_worker_types[index]);
+					}
+				} else if (tribe.name() == "empire")     {
+					if (m_type == WARE) {
+						if
+							(sizeof  (old_empire_ware_types)
+							 /
+							 sizeof (*old_empire_ware_types)
+							 <=
+							 index)
+							throw wexception
+								("could not interpret empire ware index %u",
+								 index);
+						log
+							("WARNING: Interpreting a request saved in an old broken "
+							 "format: An empire %s has a request for a ware of "
+							 "type %u. This is interpreted as %s.\n",
+							 m_target->descr().descname().c_str(),
+							 index, old_empire_ware_types[index]);
+						m_index =
+							tribe.safe_ware_index
+								(old_empire_ware_types     [index]);
+					} else {
+						if
+							(sizeof  (old_empire_worker_types)
+							 /
+							 sizeof (*old_empire_worker_types)
+							 <=
+							 index)
+							throw wexception
+								("could not interpret empire worker index %u",
+								 index);
+						log
+							("WARNING: Interpreting a request saved in an old broken "
+							 "format: An empire %s has a request for a ware of "
+							 "type %u. This is interpreted as %s.\n",
+							 m_target->descr().descname().c_str(),
+							 index, old_empire_worker_types[index]);
+						m_index =
+							tribe.safe_worker_index
+								(old_empire_worker_types   [index]);
+					}
+				} else if (tribe.name() == "atlanteans") {
+					if (m_type == WARE) {
+						if
+							(sizeof  (old_atlantean_ware_types)
+							 /
+							 sizeof (*old_atlantean_ware_types)
+							 <=
+							 index)
+							throw wexception
+								("could not interpret atlantean ware index %u",
+								 index);
+						log
+							("WARNING: Interpreting a request saved in an old broken "
+							 "format: An atlantean %s has a request for a ware of "
+							 "type %u. This is interpreted as %s.\n",
+							 m_target->descr().descname().c_str(),
+							 index, old_atlantean_ware_types[index]);
+						m_index =
+							tribe.safe_ware_index
+								(old_atlantean_ware_types  [index]);
+					} else {
+						if
+							(sizeof  (old_atlantean_worker_types)
+							 /
+							 sizeof (*old_atlantean_worker_types)
+							 <=
+							 index)
+							throw wexception
+								("could not interpret atlantean worker index %u",
+								 index);
+						log
+							("WARNING: Interpreting a request saved in an old broken "
+							 "format: An atlantean %s has a request for a ware of "
+							 "type %u. This is interpreted as %s.\n",
+							 m_target->descr().descname().c_str(),
+							 index, old_atlantean_worker_types[index]);
+						m_index =
+							tribe.safe_worker_index
+								(old_atlantean_worker_types[index]);
+					}
+				} else
 					throw wexception
-						("ware index is %u but tribe has only %u ware types",
-						 index, tribe.get_nrwares().value());
-				if (m_type == WORKER and tribe.get_nrworkers() <= m_index)
-					throw wexception
-						("worker index is %u but tribe has only %u worker types",
-						 index, tribe.get_nrworkers().value());
+						("no backwards compatibility support for tribe %s",
+						 tribe.name().c_str());
 			} else {
 				char const * const type_name = fr->CString();
 				if (Ware_Index const wai = tribe.ware_index(type_name)) {
