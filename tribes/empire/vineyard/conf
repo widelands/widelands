@@ -14,14 +14,24 @@ vinefarmer=1
 
 [programs]
 plant_vine=_Plant vine
+plantvine=Plant vine (only for compatibility with old savegames (build13))
 harvest_vine=_Harvest wine
+harvestvine=Harvest wine (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_vine]
 sleep=20000
 worker=plantvine
 
+[plantvine]
+sleep=20000
+worker=plantvine
+
 [harvest_vine]
+sleep=5000
+worker=harvestvine
+
+[harvestvine]
 sleep=5000
 worker=harvestvine
 

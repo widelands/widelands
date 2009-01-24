@@ -15,14 +15,24 @@ farmer=1
 
 [programs]
 plant_corn=_Plant corn
+plant=Plant corn (only for compatibility with old savegames (build13))
 harvest_corn=_Harvest corn
+harvest=Harvest corn (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_corn]
 sleep=20000
 worker=plant
 
+[plant]
+sleep=20000
+worker=plant
+
 [harvest_corn]
+sleep=5000
+worker=harvest
+
+[harvest]
 sleep=5000
 worker=harvest
 

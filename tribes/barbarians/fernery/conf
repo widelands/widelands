@@ -13,12 +13,20 @@ ferner=1
 
 [programs]
 plant_flax=_Plant flax
+plantflax=Plant flax (only for compatibility with savegames (build13))
 plant_reed=_Plant reed
+plantreed=Plant reed (only for compatibility with savegames (build13))
 harvest_flax=_Harvest flax
+harvestflax=Harvest flax (only for compatibility with old savegames (build13))
 harvest_reed=_Harvest reed
+harvestreed=Harvest reed (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_flax]
+sleep=20000
+worker=plantflax
+
+[plantflax]
 sleep=20000
 worker=plantflax
 
@@ -26,11 +34,23 @@ worker=plantflax
 sleep=20000
 worker=plantreed
 
+[plantreed]
+sleep=20000
+worker=plantreed
+
 [harvest_flax]
 sleep=5000
 worker=harvestflax
 
+[harvestflax]
+sleep=5000
+worker=harvestflax
+
 [harvest_reed]
+sleep=5000
+worker=harvestreed
+
+[harvestreed]
 sleep=5000
 worker=harvestreed
 
