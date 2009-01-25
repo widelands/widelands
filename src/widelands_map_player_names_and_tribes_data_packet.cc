@@ -88,7 +88,7 @@ throw (_wexception)
 {
 	Profile prof;
 
-	prof.create_section("global")->set_int
+	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	Map const & map = egbase->map();
@@ -97,7 +97,7 @@ throw (_wexception)
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		Section & s = *prof.create_section(buffer);
+		Section & s = prof.create_section(buffer);
 		s.set_string("name",  map.get_scenario_player_name (p));
 		s.set_string("tribe", map.get_scenario_player_tribe(p));
 	}

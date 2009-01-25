@@ -70,10 +70,9 @@ void Campaign_visibility_save::make_campvis(std::string const & savepath)
 {
 	// Only prepare campvis-file -> data will be written via update_campvis
 	Profile campvis(savepath.c_str());
-	Section *vis;
-	vis=campvis.pull_section("global");
-	vis=campvis.pull_section("campaigns");
-	vis=campvis.pull_section("campmaps");
+	campvis.pull_section("global");
+	campvis.pull_section("campaigns");
+	campvis.pull_section("campmaps");
 	campvis.write(savepath.c_str(), true);
 
 	update_campvis(savepath);
@@ -99,31 +98,31 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 	Section & cconf_s = cconfig.get_safe_section("global");
 	Profile campvisr(savepath.c_str());
 	Profile campvisw(savepath.c_str());
-	Section *vis;
 
 	// Write down global section
-	vis = campvisw.pull_section("global");
-	vis->set_int("version", cconf_s.get_int("version"), 1);
+	campvisw.pull_section("global").set_int
+		("version", cconf_s.get_int("version", 1));
 
 	// Write down visibility of campaigns
 	Section & campv_s = campvisr.get_safe_section("campaigns");
-	vis = campvisw.pull_section("campaigns");
-	sprintf(cvisible, "campvisi%i", i);
-	sprintf(csection, "campsect%i", i);
-	while (cconf_s.get_string(csection)) {
-		vis->set_bool
-			(csection,
-			 cconf_s.get_bool(cvisible) || campv_s.get_bool(csection),
-			 false);
-
-		++i;
+	{
+		Section & vis = campvisw.pull_section("campaigns");
 		sprintf(cvisible, "campvisi%i", i);
 		sprintf(csection, "campsect%i", i);
+		while (cconf_s.get_string(csection)) {
+			vis.set_bool
+				(csection,
+				 cconf_s.get_bool(cvisible) || campv_s.get_bool(csection));
+
+			++i;
+			sprintf(cvisible, "campvisi%i", i);
+			sprintf(csection, "campsect%i", i);
+		}
 	}
 
 	// Write down visibility of campaign maps
 	campv_s = campvisr.get_safe_section("campmaps");
-	vis = campvisw.pull_section("campmaps");
+	Section & vis = campvisw.pull_section("campmaps");
 	i = 0;
 
 	sprintf(csection, "campsect%i", i);
@@ -135,10 +134,9 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 		cms += number;
 
 		while (Section * const s = cconfig.get_section(cms.c_str())) {
-			vis->set_bool
+			vis.set_bool
 				(cms.c_str(),
-				 s->get_bool("visible") || campv_s.get_bool(cms.c_str()),
-				 false);
+				 s->get_bool("visible") || campv_s.get_bool(cms.c_str()));
 
 			++imap;
 			cms = mapsection;
@@ -165,10 +163,8 @@ void Campaign_visibility_save::set_campaign_visibility
 {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());
-	Section *vis;
 
-	vis=campvis.pull_section("campaigns");
-	vis->set_bool(entry.c_str(), visible);
+	campvis.pull_section("campaigns").set_bool(entry.c_str(), visible);
 
 	campvis.write(savepath.c_str(), false);
 }
@@ -185,10 +181,8 @@ void Campaign_visibility_save::set_map_visibility
 {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());
-	Section *vis;
 
-	vis=campvis.pull_section("campmaps");
-	vis->set_bool(entry.c_str(), visible);
+	campvis.pull_section("campmaps").set_bool(entry.c_str(), visible);
 
 	campvis.write(savepath.c_str(), false);
 }

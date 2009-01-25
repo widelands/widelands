@@ -1,5 +1,4 @@
 help=_Smelts iron.
-type=generic
 
 [buildcost]
 carrier=1

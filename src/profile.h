@@ -55,10 +55,9 @@ struct FileSystem;
  * retrieve any unused key. Value::used is used to determine which key is next.
  * The value of the key is stored in the second parameter.
  */
-class Section {
+struct Section {
 	friend class Profile;
 
-public:
 	struct Value {
 		bool   m_used;
 		char * m_name;
@@ -89,18 +88,15 @@ public:
 
 	typedef std::vector<Value> Value_list;
 
-private:
-	Profile  * m_profile;
-	bool       m_used;
-	char     * m_section_name;
-	Value_list m_values;
-
-public:
 	Section(Profile * const, const char * const name);
 	Section(const Section &);
 	~Section();
 
 	Section & operator=(const Section &);
+
+	/// \returns whether a value with the given name exists.
+	/// Does not mark the value as used.
+	bool has_val(char const * name) const;
 
 	Value *get_val(const char *name);
 	Value *get_next_val(char const * name = 0);
@@ -167,34 +163,48 @@ public:
 	const char *get_next_bool(const char *name, bool *value);
 
 	void set_int
-		(char const * name, int32_t           value, bool duplicate = false);
+		(char const *       name, int32_t                   value);
 	void set_bool
-		(char const * name, bool              value, bool duplicate = false);
-	void set_string
-		(char const * name, char      const * value, bool duplicate = false);
-	void set_string
-		(char        const * const name,
-		 std::string const &       value,
-		 bool                const duplicate = false)
+		(char const * const name, bool                const value)
 	{
-		set_string(name, value.c_str(), duplicate);
+		set_string(name, value ? "true" : "false");
+	}
+	void set_string
+		(char const *       name, char        const *       value);
+	void set_string_duplicate
+		(char const *       name, char        const *       value);
+	void set_string
+		(char const * const name, std::string const &       value)
+	{
+		set_string(name, value.c_str());
+	}
+	void set_string_duplicate
+		(char const * const name, std::string const &       value)
+	{
+		set_string_duplicate(name, value.c_str());
 	}
 	void set_Coords
-		(char const * name, Widelands::Coords value, bool duplicate = false);
+		(char const * name, Widelands::Coords value);
 	void set_Immovable_Type
 		(char const * tribe, char const * name,
 		 Widelands::Immovable_Descr const &);
 	void set_Building_Index
 		(char const * name,
 		 Widelands::Building_Index value,
-		 Widelands::Editor_Game_Base &, Widelands::Player_Number,
-		 bool duplicate = false);
-	void set_Building_Type
-		(char const * name,
-		 Widelands::Building_Descr const &,
-		 bool duplicate = false);
+		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
 
-	Value *create_val(const char *name, const char *value, bool duplicate = false);
+	/// If a Value with this name already exists, update it with the given
+	/// value. Otherwise create a new Value with the given name and value.
+	Value & create_val          (char const * name, char const * value);
+
+	/// Create a new Value with the given name and value.
+	Value & create_val_duplicate(char const * name, char const * value);
+
+private:
+	Profile  * m_profile;
+	bool       m_used;
+	char     * m_section_name;
+	Value_list m_values;
 };
 
 /**
@@ -211,13 +221,7 @@ public:
  * Returns the next unused section of the given name, or 0 if all sections
  * have been used. name can be 0 to retrieve any remaining sections.
  */
-class Profile {
-	typedef std::vector<Section> Section_list;
-
-	Section_list m_sections;
-	int32_t m_error_level;
-
-public:
+struct Profile {
 	enum {
 		err_ignore = 0,
 		err_log,
@@ -242,12 +246,22 @@ public:
 
 	Section *get_section(const char *name);
 	Section & get_safe_section(char const *);
-	Section *pull_section(const char *name);
+	Section & pull_section(char const * name);
 	Section * get_next_section(char const * name = 0);
 
-	Section *create_section(const char *name, bool duplicate = false);
+	/// If a section with the given name already exists, return a reference to
+	/// it. Otherwise create a new section with the given name and return a
+	/// reference to it.
+	Section & create_section          (char const * name);
+
+	/// Create a new section with the given name and return a reference to it.
+	Section & create_section_duplicate(char const * name);
 
 private:
+	std::string m_filename;
+	typedef std::vector<Section> Section_list;
+	Section_list m_sections;
+	int32_t m_error_level;
 	Profile & operator= (Profile const &);
 	explicit Profile    (Profile const &);
 };

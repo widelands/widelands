@@ -120,7 +120,7 @@ void Main_Menu_Map_Options::changed(int32_t const id) {
 		m_parent->egbase().map().set_name(m_name->text().c_str());
 	} else if (id == 1) {
 		m_parent->egbase().map().set_author(m_author->text().c_str());
-		g_options.pull_section("global")->set_string
+		g_options.pull_section("global").set_string
 			("realname", m_author->text());
 	}
 	update();

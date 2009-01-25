@@ -1,5 +1,4 @@
 help=_Produces beer or wine.
-type=generic
 
 [buildcost]
 carrier=1

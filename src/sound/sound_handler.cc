@@ -130,30 +130,19 @@ void Sound_Handler::shutdown()
  */
 void Sound_Handler::read_config()
 {
-	Section *s;
-
-	s = g_options.pull_section("global");
-
-	//if there is no config, just ignore future attempts to make us work
-	//TODO: really? shouldn't is just be the write-back that gets disabled?
-	if (!s) {
-		m_nosound = true;
-		set_disable_music(true);
-		set_disable_fx(true);
-		return;
-	}
+	Section & s = g_options.pull_section("global");
 
 	if (m_nosound) {
 		set_disable_music(true);
 		set_disable_fx(true);
 	} else {
-		set_disable_music(s->get_bool("disable_music", false));
-		set_disable_fx   (s->get_bool("disable_fx",    false));
-		m_music_volume = s->get_int("music_volume", DEFAULT_MUSIC_VOLUME);
-		m_fx_volume    = s->get_int("fx_volume",    DEFAULT_FX_VOLUME);
+		set_disable_music(s.get_bool("disable_music",      false));
+		set_disable_fx   (s.get_bool("disable_fx",         false));
+		m_music_volume =  s.get_int ("music_volume",       DEFAULT_MUSIC_VOLUME);
+		m_fx_volume    =  s.get_int ("fx_volume",          DEFAULT_FX_VOLUME);
 	}
 
-	m_random_order = s->get_bool("sound_random_order", true);
+	m_random_order    =  s.get_bool("sound_random_order", true);
 
 	register_song("music", "intro");
 	register_song("music", "menu");
@@ -665,7 +654,7 @@ int32_t  Sound_Handler::get_fx_volume    () const throw () {return m_fx_volume;}
  * Also, the new value is written back to the config file right away. It might
  * get lost otherwise.
  */
-void Sound_Handler::set_disable_music(bool disable)
+void Sound_Handler::set_disable_music(bool const disable)
 {
 	if (m_lock_audio_disabling || m_disable_music == disable)
 		return;
@@ -678,21 +667,21 @@ void Sound_Handler::set_disable_music(bool disable)
 		start_music(m_current_songset);
 	}
 
-	g_options.pull_section("global")->set_bool("disable_music", disable, false);
+	g_options.pull_section("global").set_bool("disable_music", disable);
 }
 
 /** Normal set_* function
  * Also, the new value is written back to the config file right away. It might
  * get lost otherwise.
 */
-void Sound_Handler::set_disable_fx(bool disable)
+void Sound_Handler::set_disable_fx(bool const disable)
 {
 	if (m_lock_audio_disabling)
 		return;
 
 	m_disable_fx = disable;
 
-	g_options.pull_section("global")->set_bool("disable_fx", disable, false);
+	g_options.pull_section("global").set_bool("disable_fx", disable);
 }
 
 /**
@@ -706,7 +695,7 @@ void Sound_Handler::set_music_volume(int32_t volume) {
 	if (not m_lock_audio_disabling) {
 		m_music_volume = volume;
 		Mix_VolumeMusic(volume);
-		g_options.pull_section("global")->set_int("music_volume", volume, false);
+		g_options.pull_section("global").set_int("music_volume", volume);
 	}
 }
 
@@ -721,7 +710,7 @@ void Sound_Handler::set_fx_volume(int32_t volume) {
 	if (not m_lock_audio_disabling) {
 		m_fx_volume = volume;
 		Mix_Volume(-1, volume);
-		g_options.pull_section("global")->set_int("fx_volume", volume, false);
+		g_options.pull_section("global").set_int("fx_volume", volume);
 	}
 }
 

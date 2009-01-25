@@ -1,5 +1,4 @@
 # soundfx=../../../sound/spoken/warehouse-bringitin
-type=warehouse
 size=big
 buildable=no
 subtype=HQ

@@ -1,5 +1,4 @@
 help=_Breeds fish.
-type=generic
 program=breed
 
 [buildcost]

@@ -79,7 +79,7 @@ void Map_Player_Position_Data_Packet::Write
 throw (_wexception)
 {
 	Profile prof;
-	Section & s = *prof.create_section("global");
+	Section & s = prof.create_section("global");
 
 	s.set_int("packet_version", CURRENT_PACKET_VERSION);
 

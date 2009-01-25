@@ -1,4 +1,3 @@
-type=training
 size=big
 max_soldiers=8
 train=defense,hp,evade

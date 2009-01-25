@@ -1,5 +1,4 @@
 help=_The Gamekeeper makes sure that the natural population of animals never drops too low.
-type=generic
 program=release
 
 [buildcost]

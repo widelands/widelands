@@ -1,5 +1,4 @@
-type=critter
-swimming=1  # defaults to 0, is only in the water?
+swimming=1
 picture=duck_00.png
 
 [idle]

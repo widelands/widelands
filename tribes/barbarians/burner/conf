@@ -1,5 +1,4 @@
 help=_Burns coal.
-type=generic
 
 [buildcost]
 carrier=1

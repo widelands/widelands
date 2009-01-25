@@ -381,11 +381,10 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 /**
  * Handles communication between window class and options
  */
-Options_Ctrl::Options_Ctrl(Section* s) {
-	m_opt_dialog = new Fullscreen_Menu_Options(options_struct(s));
-	m_opt_section = s;
-	int32_t code = m_opt_dialog->run();
-	if (code == Fullscreen_Menu_Options::om_ok)
+Options_Ctrl::Options_Ctrl(Section & s)
+: m_opt_dialog(new Fullscreen_Menu_Options(options_struct(s))), m_opt_section(s)
+{
+	if (m_opt_dialog->run() == Fullscreen_Menu_Options::om_ok)
 		save_options();
 }
 
@@ -393,46 +392,46 @@ Options_Ctrl::~Options_Ctrl() {
 	delete m_opt_dialog;
 }
 
-Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
+Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section & s) {
 	Options_Struct opt;
-	opt.xres                  =  s->get_int ("xres",                    640);
-	opt.yres                  =  s->get_int ("yres",                    480);
-	opt.depth                 =  s->get_int ("depth",                    16);
-	opt.inputgrab             =  s->get_bool("inputgrab",             false);
-	opt.fullscreen            =  s->get_bool("fullscreen",            false);
-	opt.single_watchwin       =  s->get_bool("single_watchwin",       false);
-	opt.auto_roadbuild_mode   =  s->get_bool("auto_roadbuild_mode",    true);
-	opt.show_warea            =  s->get_bool("workareapreview",       false);
+	opt.xres                  =  s.get_int ("xres",                    640);
+	opt.yres                  =  s.get_int ("yres",                    480);
+	opt.depth                 =  s.get_int ("depth",                    16);
+	opt.inputgrab             =  s.get_bool("inputgrab",             false);
+	opt.fullscreen            =  s.get_bool("fullscreen",            false);
+	opt.single_watchwin       =  s.get_bool("single_watchwin",       false);
+	opt.auto_roadbuild_mode   =  s.get_bool("auto_roadbuild_mode",    true);
+	opt.show_warea            =  s.get_bool("workareapreview",       false);
 	opt.snap_windows_only_when_overlapping
-		= s->get_bool("snap_windows_only_when_overlapping", false);
-	opt.dock_windows_to_edges =  s->get_bool("dock_windows_to_edges", false);
-	opt.language              =  s->get_string("language", "");
-	opt.music                 = !s->get_bool("disable_music", false);
-	opt.fx                    = !s->get_bool("disable_fx", false);
-	opt.autosave = s->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-	opt.maxfps                =  s->get_int("maxfps", 25);
+		= s.get_bool("snap_windows_only_when_overlapping", false);
+	opt.dock_windows_to_edges =  s.get_bool("dock_windows_to_edges", false);
+	opt.language              =  s.get_string("language", "");
+	opt.music                 = !s.get_bool("disable_music", false);
+	opt.fx                    = !s.get_bool("disable_fx", false);
+	opt.autosave = s.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.maxfps                =  s.get_int("maxfps", 25);
 	return opt;
 }
 
 void Options_Ctrl::save_options() {
 	Options_Ctrl::Options_Struct opt = m_opt_dialog->get_values();
-	m_opt_section->set_int ("xres",                  opt.xres);
-	m_opt_section->set_int ("yres",                  opt.yres);
-	m_opt_section->set_bool("fullscreen",            opt.fullscreen);
-	m_opt_section->set_bool("inputgrab",             opt.inputgrab);
-	m_opt_section->set_bool("single_watchwin",       opt.single_watchwin);
-	m_opt_section->set_bool("auto_roadbuild_mode",   opt.auto_roadbuild_mode);
-	m_opt_section->set_bool("workareapreview",       opt.show_warea);
-	m_opt_section->set_bool
+	m_opt_section.set_int ("xres",                  opt.xres);
+	m_opt_section.set_int ("yres",                  opt.yres);
+	m_opt_section.set_bool("fullscreen",            opt.fullscreen);
+	m_opt_section.set_bool("inputgrab",             opt.inputgrab);
+	m_opt_section.set_bool("single_watchwin",       opt.single_watchwin);
+	m_opt_section.set_bool("auto_roadbuild_mode",   opt.auto_roadbuild_mode);
+	m_opt_section.set_bool("workareapreview",       opt.show_warea);
+	m_opt_section.set_bool
 		("snap_windows_only_when_overlapping",
 		 opt.snap_windows_only_when_overlapping);
-	m_opt_section->set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
-	m_opt_section->set_int ("depth",                 opt.depth);
-	m_opt_section->set_bool("disable_music",        !opt.music);
-	m_opt_section->set_bool("disable_fx",           !opt.fx);
-	m_opt_section->set_string("language",            opt.language);
-	m_opt_section->set_int("autosave",               opt.autosave * 60);
-	m_opt_section->set_int("maxfps",                 opt.maxfps);
+	m_opt_section.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
+	m_opt_section.set_int ("depth",                 opt.depth);
+	m_opt_section.set_bool("disable_music",        !opt.music);
+	m_opt_section.set_bool("disable_fx",           !opt.fx);
+	m_opt_section.set_string("language",            opt.language);
+	m_opt_section.set_int("autosave",               opt.autosave * 60);
+	m_opt_section.set_int("maxfps",                 opt.maxfps);
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
 	g_sound_handler.set_disable_music(!opt.music);

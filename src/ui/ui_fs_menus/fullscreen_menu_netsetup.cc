@@ -101,7 +101,7 @@ hostname
 opengames
 	(this, m_xres * 3 / 50, m_yres * 3333 / 10000, m_lisw, m_yres * 5433 / 10000)
 {
-	Section *s = g_options.pull_section("global");//for playername
+	Section & s = g_options.pull_section("global");//for playername
 
 	title       .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -109,7 +109,7 @@ opengames
 	m_hostname  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	hostname    .changed.set(this, &Fullscreen_Menu_NetSetup::change_hostname);
 	hostname    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	playername  .setText  (s->get_string("nickname", (_("nobody"))));
+	playername  .setText  (s.get_string("nickname", (_("nobody"))));
 	playername  .changed.set(this, &Fullscreen_Menu_NetSetup::change_playername);
 	playername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	opengames   .set_font(m_fn, m_fs);
@@ -228,14 +228,12 @@ void Fullscreen_Menu_NetSetup::change_hostname()
 
 void Fullscreen_Menu_NetSetup::change_playername()
 {
-	Section *s = g_options.pull_section("global");
-	s->set_string("nickname", playername.text());
+	g_options.pull_section("global").set_string("nickname", playername.text());
 }
 
 void Fullscreen_Menu_NetSetup::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
-	Section *s = g_options.pull_section("global");
-	s->set_string("lasthost", hostname.text());
+	g_options.pull_section("global").set_string("lasthost", hostname.text());
 
 	end_modal(JOINGAME);
 }

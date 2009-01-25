@@ -57,7 +57,7 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game* game, bo
 	m_time = m_game.get_gametime();
 	{
 		int32_t const speed_of_new_game =
-			g_options.pull_section("global")->get_int("speed_of_new_game", 1000);
+			g_options.pull_section("global").get_int("speed_of_new_game", 1000);
 		if (speed_of_new_game < 0)
 			throw wexception
 				("in config section [global]: speed_of_new_game = %i: must be "

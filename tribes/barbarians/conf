@@ -32,9 +32,8 @@ pics=pics/flag_??.png
 hotspot=7 39
 fps=8
 
-[map object types]
+[immovable types]
 ashes=_Ashes
-deer=_Deer
 destroyed_building=_Destroyed building
 field0=_Field medium
 field0s=_Field small
@@ -59,7 +58,12 @@ resi_iron1=_Resource indicator iron little
 resi_iron2=_Resource indicator iron much
 resi_none=_Resource indicator no resource
 resi_water1=_Resource indicator water
+
+[critter bob types]
+deer=_Deer
 wildboar=_Wildboar
+
+[ware types]
 axe=_Axe
 bakingtray=_Peel
 battleaxe=_Battle Axe
@@ -100,7 +104,14 @@ warhelmet=_War Helmet
 warriorsaxe=_Warriors Axe
 water=_Water
 wheat=_Wheat
+
+[carrier types]
 carrier=_Carrier
+
+[soldier types]
+soldier=_Soldier
+
+[worker types]
 baker=_Baker
 master-blacksmith=_Master Blacksmith
 blacksmith=_Blacksmith
@@ -123,37 +134,50 @@ lumberjack=_Lumberjack
 miner=_Miner
 ranger=_Ranger
 smelter=_Smelter
-soldier=_Soldier
 stonemason=_Stonemason
 trainer=_Trainer
 weaver=_Weaver
+
+[constructionsite types]
+constructionsite=_Construction Site
+
+[trainingsite types]
+battlearena=_Battle Arena
+trainingscamp=_Trainingscamp
+
+[militarysite types]
+barrier=_Barrier
+citadel=_Citadel
+donjon=_Donjon
+fortress=_Fortress
+sentry=_Sentry
+stronghold=_Stronghold
+
+[warehouse types]
+headquarters=_Headquarters
+warehouse=_Warehouse
+
+[productionsite types]
 warmill=_War Mill
 axefactory=_Axefactory
 bakery=_Bakery
-barrier=_Barrier
-battlearena=_Battle Arena
 big_inn=_Big Inn
 brewery=_Brewery
 burners_house=_Charcoal Burner's House
-citadel=_Citadel
 deeper_coalmine=_Deeper Coal Mine
 deep_coalmine=_Deep Coal Mine
 coalmine=_Coal mine
-constructionsite=_Construction Site
 deeper_goldmine=_Deeper Gold Mine
 deeper_oremine=_Deeper Iron Ore Mine
 deep_goldmine=_Deep Gold Mine
 deep_oremine=_Deep Iron Ore Mine
-donjon=_Donjon
 farm=_Farm
 fernery=_Fernery
 fishers_hut=_Fisher's Hut
-fortress=_Fortress
 gamekeepers_hut=_Gamekeeper's Hut
 goldmine=_Gold Mine
 granitemine=_Granite Mine
 hardener=_Wood Hardener
-headquarters=_Headquarters
 helmsmithy=_Helmsmithy
 hunters_hut=_Hunter's Hut
 inn=_Inn
@@ -164,12 +188,8 @@ micro-brewery=_Micro Brewery
 oremine=_Iron Ore Mine
 quarry=_Quarry
 rangers_hut=_Ranger's Hut
-sentry=_Sentry
 smelting_works=_Smelting Works
-stronghold=_Stronghold
 tavern=_Tavern
-trainingscamp=_Trainingscamp
-warehouse=_Warehouse
 weaving-mill=_Weaving-Mill
 well=_Well
 

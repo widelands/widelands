@@ -86,14 +86,14 @@ void Map_Objective_Data_Packet::Write
 throw (_wexception)
 {
 	Profile prof;
-	prof.create_section("global")->set_int
+	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	Manager<Objective> const & mom = egbase->map().mom();
 	Manager<Objective>::Index const nr_objectives = mom.size();
 	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i) {
 		Objective const & objective = mom[i];
-		Section & s = *prof.create_section(objective.name().c_str());
+		Section & s = prof.create_section(objective.name().c_str());
 		s.set_string("name",     objective.visname());
 		s.set_string("descr",    objective.descr());
 		s.set_bool  ("visible",  objective.get_is_visible());

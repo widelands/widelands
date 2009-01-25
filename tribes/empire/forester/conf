@@ -1,5 +1,4 @@
 help=_Plants trees.
-type=generic
 program=plant
 
 [buildcost]

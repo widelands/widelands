@@ -1,5 +1,4 @@
 help=_Gets fish out of the sea.
-type=generic
 program=fish
 soundfx=../../../sound/fisher/fisher_throw_net
 soundfx=../../../sound/fisher/fisher_pull_net

@@ -1,5 +1,4 @@
 soundfx=../../../sound/farm/farm_animal
-type=production
 size=big
 stopable=yes
 output=corn

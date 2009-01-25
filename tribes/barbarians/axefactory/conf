@@ -1,6 +1,5 @@
 soundfx=../../../sound/smiths/smith
 soundfx=../../../sound/smiths/sharpening
-type=production
 size=medium
 buildable=no
 output=axe

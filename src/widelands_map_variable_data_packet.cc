@@ -89,7 +89,7 @@ void Map_Variable_Data_Packet::Write
 throw (_wexception)
 {
 	Profile prof;
-	prof.create_section("global")->set_int
+	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	//  Now, all positions in order, first x, then y.
@@ -97,7 +97,7 @@ throw (_wexception)
 	Manager<Variable>::Index const nr_variables = mvm.size();
 	for (Manager<Variable>::Index i = 0; i < nr_variables; ++i) {
 		Variable const & variable = mvm[i];
-		Section & s = *prof.create_section(variable.name().c_str());
+		Section & s = prof.create_section(variable.name().c_str());
 		s.set_bool("delete_protected", variable.is_delete_protected());
 		if        (upcast(Variable_Int    const, ivar, &variable)) {
 			s.set_string("type", "int");

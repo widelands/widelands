@@ -113,11 +113,8 @@ ProductionSite_Descr::ProductionSite_Descr
 				throw wexception
 					("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
-	if
-		(not strcmp(global_s.get_safe_string("type"), "production")
-		 and
-		 working_positions().empty())
-		throw wexception("no working positions although only productionsite");
+	if (working_positions().empty() and not global_s.has_val("max_soldiers"))
+		throw wexception("no working/soldier positions");
 
 	// Get programs
 	if

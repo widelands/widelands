@@ -651,48 +651,47 @@ void WLApplication::init_graphics
  * parameters sensible default values
  */
 bool WLApplication::init_settings() {
-	Section *s=0;
 
 	//create a journal so that handle_commandline_parameters can open the journal files
 	journal=new Journal();
 
 	//read in the configuration file
 	g_options.read("config", "global");
-	s=g_options.pull_section("global");
+	Section & s = g_options.pull_section("global");
 
 	// Set Locale and grab default domain
-	i18n::set_locale(s->get_string("language", i18n::get_locale().c_str()));
+	i18n::set_locale(s.get_string("language", i18n::get_locale().c_str()));
 	i18n::grab_textdomain("widelands");
 
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
 
-	set_input_grab(s->get_bool("inputgrab", false));
-	set_mouse_swap(s->get_bool("swapmouse", false));
+	set_input_grab(s.get_bool("inputgrab", false));
+	set_mouse_swap(s.get_bool("swapmouse", false));
 
-	m_gfx_fullscreen=s->get_bool("fullscreen", false);
+	m_gfx_fullscreen = s.get_bool("fullscreen", false);
 
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
-	s->get_int("xres");
-	s->get_int("yres");
-	s->get_int("border_snap_distance");
-	s->get_int("maxfps");
-	s->get_int("panel_snap_distance");
-	s->get_int("speed_of_new_game");
-	s->get_int("autosave");
-	s->get_bool("single_watchwin");
-	s->get_bool("auto_roadbuild_mode");
-	s->get_bool("workareapreview");
-	s->get_bool("nozip");
-	s->get_bool("snap_windows_only_when_overlapping");
-	s->get_bool("dock_windows_to_edges");
-	s->get_string("nickname");
-	s->get_string("lasthost");
-	s->get_string("realname");
-	s->get_string("ui_font");
+	s.get_int("xres");
+	s.get_int("yres");
+	s.get_int("border_snap_distance");
+	s.get_int("maxfps");
+	s.get_int("panel_snap_distance");
+	s.get_int("speed_of_new_game");
+	s.get_int("autosave");
+	s.get_bool("single_watchwin");
+	s.get_bool("auto_roadbuild_mode");
+	s.get_bool("workareapreview");
+	s.get_bool("nozip");
+	s.get_bool("snap_windows_only_when_overlapping");
+	s.get_bool("dock_windows_to_edges");
+	s.get_string("nickname");
+	s.get_string("lasthost");
+	s.get_string("realname");
+	s.get_string("ui_font");
 	// KLUDGE!
 
 	return true;
@@ -728,10 +727,10 @@ void WLApplication::shutdown_settings()
  */
 bool WLApplication::init_hardware() {
 	Uint32 sdl_flags=0;
-	Section *s = g_options.pull_section("global");
+	Section & s = g_options.pull_section("global");
 
 	//Start the SDL core
-	if (s->get_bool("coredump", false))
+	if (s.get_bool("coredump", false))
 		sdl_flags=SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE;
 	else
 		sdl_flags=SDL_INIT_VIDEO;
@@ -758,11 +757,11 @@ bool WLApplication::init_hardware() {
 	uint32_t yres = 600;
 	if (m_loadgame_filename.size() or m_scenario_filename.size()) {
 		// main menu will not be shown, so set in-game resolution
-		xres = s->get_int("xres", xres);
-		yres = s->get_int("yres", yres);
+		xres = s.get_int("xres", xres);
+		yres = s.get_int("yres", yres);
 	}
 
-	init_graphics(xres, yres, s->get_int("depth", 16), m_gfx_fullscreen);
+	init_graphics(xres, yres, s.get_int("depth", 16), m_gfx_fullscreen);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -851,7 +850,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("nozip")>0) {
-		g_options.pull_section("global")->create_val("nozip", "true");
+		g_options.pull_section("global").create_val("nozip", "true");
 		m_commandline.erase("nozip");
 	}
 
@@ -941,8 +940,8 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		//TODO: barf here on unknown option; the list of known options
 		//TODO: needs to be centralized
 
-		g_options.pull_section("global")->create_val
-		(it->first.c_str(), it->second.c_str());
+		g_options.pull_section("global").create_val
+			(it->first.c_str(), it->second.c_str());
 	}
 }
 
@@ -1107,7 +1106,7 @@ void WLApplication::mainmenu()
 				replay();
 				break;
 			case Fullscreen_Menu_Main::mm_options: {
-				Section *s = g_options.pull_section("global");
+				Section & s = g_options.pull_section("global");
 				Options_Ctrl om(s);
 				break;
 			}

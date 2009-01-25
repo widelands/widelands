@@ -87,14 +87,14 @@ throw (_wexception)
 {
 
 	Profile prof;
-	prof.create_section("global")->set_int
+	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	Manager<Trigger> const & mtm = egbase->map().mtm();
 	Manager<Trigger>::Index const nr_triggers = mtm.size();
 	for (Manager<Trigger>::Index i = 0; i < nr_triggers; ++i) {
 		const Trigger & trigger = mtm[i];
-		Section & s = *prof.create_section(trigger.name().c_str());
+		Section & s = prof.create_section(trigger.name().c_str());
 		if (trigger.is_set())
 			s.set_bool("set", true);
 		trigger.Write(s, *egbase);

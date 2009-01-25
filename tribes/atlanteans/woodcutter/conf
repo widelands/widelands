@@ -1,5 +1,4 @@
 help=_Fells trees.
-type=generic
 program=harvest
 soundfx=../../../sound/sawmill/sawmill
 

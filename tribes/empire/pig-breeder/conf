@@ -1,5 +1,4 @@
 help=_Breeds pigs.
-type=generic
 
 [buildcost]
 carrier=1

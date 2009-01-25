@@ -1,5 +1,4 @@
 help=_Cuts raw pieces of granit out of laying stones.
-type=generic
 program=cut_stone
 soundfx=../../../sound/stonecutting/stonecutter
 

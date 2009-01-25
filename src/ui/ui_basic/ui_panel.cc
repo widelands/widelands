@@ -142,8 +142,7 @@ int32_t Panel::run()
 	uint32_t diffTime;
 	uint32_t minTime;
 	{
-		Section *s = g_options.pull_section("global");
-		int32_t maxfps = s->get_int("maxfps", 25);
+		int32_t maxfps = g_options.pull_section("global").get_int("maxfps", 25);
 		if (maxfps < 5)
 			maxfps = 5;
 		minTime = 1000 / maxfps;

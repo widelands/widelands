@@ -1,5 +1,3 @@
-type=generic
-
 [idle]
 pics=idle_??.png
 hotspot=5 13

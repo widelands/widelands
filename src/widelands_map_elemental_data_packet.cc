@@ -73,7 +73,7 @@ throw (_wexception)
 {
 
 	Profile prof;
-	Section & s = *prof.create_section("global");
+	Section & s = prof.create_section("global");
 
 	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
 	Map const & map = egbase->map();

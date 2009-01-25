@@ -80,14 +80,14 @@ void Map_Event_Data_Packet::Write
 throw (_wexception)
 {
 	Profile prof;
-	prof.create_section("global")->set_int
+	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	Manager<Event> const & mem = egbase->map().mem();
 	Manager<Event>::Index const nr_events = mem.size();
 	for (Manager<Event>::Index i = 0; i < nr_events; ++i) {
 		Event const & e = mem[i];
-		Section & s = *prof.create_section(e.name().c_str());
+		Section & s = prof.create_section(e.name().c_str());
 		switch (e.m_state) {
 		case Event::INIT:                                      break;
 		case Event::RUNNING: s.set_string("state", "running"); break;

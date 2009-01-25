@@ -178,7 +178,7 @@ m_toggle_help
 	(INIT_BTN("menu_help",             toggle_help,         _("Ware help")))
 {
 	m_auto_roadbuild_mode =
-		g_options.pull_section("global")->get_bool("auto_roadbuild_mode", true);
+		g_options.pull_section("global").get_bool("auto_roadbuild_mode", true);
 
 	m_toolbar.add(&m_toggle_chat,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);

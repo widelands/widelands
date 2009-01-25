@@ -25,6 +25,7 @@
 #include "helper.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
+#include "parse_map_object_types.h"
 #include "profile.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
@@ -277,36 +278,21 @@ void World::parse_terrains()
 	}
 }
 
-void World::parse_bobs(std::string & directory, Profile & root_conf) {
-	std::string::size_type const directory_size = directory.size();
-	Section & section = root_conf.get_safe_section("bobs");
-	while (Section::Value const * const v = section.get_next_val()) {
-		char const * const _name     = v->get_name  ();
-		char const * const _descname = v->get_string();
-		directory += _name;
-		directory += "/conf";
-		try {
-			Profile prof(directory.c_str(), "global"); // section-less file
-			directory.resize(directory.size() - strlen("conf"));
-			Section & global_s = prof.get_safe_section("global");
-			if (char const * const type = global_s.get_string("type")) {
-				if (not strcasecmp(type, "critter"))
-					bobs      .add
-						(new Critter_Bob_Descr
-						 	(_name, _descname, directory, prof, global_s, 0));
-						else
-							throw wexception("unknown map object type");
-			} else
-				immovables.add
-					(new Immovable_Descr
-					 	(_name, _descname, directory, prof, global_s, *this, 0));
-			prof.check_used();
-		} catch (std::exception const & e) {
-			throw wexception
-				("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
-		}
-		directory.resize(directory_size);
-	}
+void World::parse_bobs(std::string & path, Profile & root_conf) {
+	std::string::size_type const base_path_size = path.size();
+	std::set<std::string> names; //  To enforce name uniqueness.
+
+	PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
+		immovables.add
+			(new Immovable_Descr
+			 	(_name, _descname, path, prof, global_s, *this, 0));
+	PARSE_MAP_OBJECT_TYPES_END;
+
+	PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
+		bobs      .add
+			(new Critter_Bob_Descr
+			 	(_name, _descname, path, prof, global_s, 0));
+	PARSE_MAP_OBJECT_TYPES_END;
 }
 
 /**

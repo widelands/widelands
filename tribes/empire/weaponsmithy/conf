@@ -1,6 +1,5 @@
 soundfx=../../../../smiths/smith
 soundfx=../../../../smiths/sharpening
-type=production
 size=big
 output=wood_lance
 output=lance

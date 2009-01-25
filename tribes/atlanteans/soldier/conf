@@ -1,8 +1,4 @@
 help=_Defend and Conquer!
-type=soldier
-
-
-# SOLDIER SPECIFIC STUFF STARTS HERE
 max_hp_level=1
 max_evade_level=2
 max_attack_level=4

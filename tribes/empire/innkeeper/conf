@@ -1,5 +1,4 @@
 help=_Produces food for miners.
-type=generic
 
 [buildcost]
 carrier=1

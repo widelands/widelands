@@ -1,5 +1,4 @@
 help=_Works deep in the mines to produce coal, iron or gold.
-type=generic
 experience=25-32
 becomes=master-miner
 

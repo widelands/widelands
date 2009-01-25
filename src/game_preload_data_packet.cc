@@ -64,7 +64,7 @@ throw (_wexception)
 {
 
 	Profile prof;
-	Section & s = *prof.create_section("global");
+	Section & s = prof.create_section("global");
 
 	Interactive_Player const * const ipl = game->get_ipl();
 

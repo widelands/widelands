@@ -332,10 +332,7 @@ Warehouse::~Warehouse()
 
 
 void Warehouse::prefill
-	(Game                &       game,
-	 uint32_t      const *       ware_types,
-	 uint32_t      const *       worker_types,
-	 Soldier_Counts const * const soldier_counts)
+	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
 {}
 void Warehouse::postfill
 	(Game                &       game,

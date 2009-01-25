@@ -3,8 +3,7 @@ author=_The Widelands Development Team
 name=_Desert
 descr=_"This is the wide and sandy country of the bedouins"
 
-[bobs]
-bunny=_Bunny
+[immovable types]
 bush1=_Bush
 bush4=_Bush
 bush5=_Bush
@@ -16,9 +15,6 @@ deadtree1=_Dead Tree
 deadtree2=_Dead Tree
 deadtree3=_Dead Tree
 deadtree4=_Dead Tree
-deer=_Deer
-duck=_Duck
-fox=_Fox
 grass1=_Grass
 grass2=_Grass
 grass3=_Grass
@@ -35,7 +31,6 @@ ruin2=_ruins
 ruin3=_ruins
 ruin4=_ruins
 ruin5=_ruins
-sheep=_Sheep
 skeleton1=_Skeleton
 skeleton2=_Skeleton
 skeleton3=_Skeleton
@@ -85,3 +80,10 @@ tree8=_Rowan
 tree8_m=_Rowan medium
 tree8_s=_Rowan small
 tree8_t=_Rowan tiny
+
+[critter bob types]
+bunny=_Bunny
+deer=_Deer
+duck=_Duck
+fox=_Fox
+sheep=_Sheep

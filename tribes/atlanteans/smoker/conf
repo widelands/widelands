@@ -1,5 +1,3 @@
-type=generic
-
 [buildcost]
 carrier=1
 hook_pole=1

@@ -74,7 +74,7 @@ Worker_Descr::Worker_Descr
 		(*this, directory, prof, "walk_??", prof.get_section("walk"), encdata);
 
 	//  Soldiers have no walkload.
-	if (strcmp(global_s.get_safe_string("type"), "soldier"))
+	if (not global_s.has_val("max_hp_level"))
 		m_walkload_anims.parse
 			(*this,
 			 directory,

@@ -1,5 +1,4 @@
 help=_Keeping sheeps.
-type=generic
 
 [buildcost]
 carrier=1

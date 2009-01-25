@@ -32,7 +32,7 @@ pics=pics/flag_??.png
 hotspot=7 39
 fps=8
 
-[map object types]
+[immovable types]
 ashes=_Ashes
 field0=_Field medium
 field0s=_Field small
@@ -54,6 +54,8 @@ wine0=_Wine medium
 wine0s=_Wine small
 wine0t=_Wine tiny
 wine1=_Wine ripe
+
+[ware types]
 advanced_lance=_Advanced Lance
 armour=_Armour
 axe=_Axe
@@ -98,7 +100,14 @@ wine=_Wine
 wood=_Wood
 wood_lance=_Wood Lance
 wool=_Wool
+
+[carrier types]
 carrier=_Carrier
+
+[soldier types]
+soldier=_Soldier
+
+[worker types]
 armoursmith=_Armoursmith
 baker=_Baker
 brewer=_Brewer
@@ -117,43 +126,55 @@ miner=_Miner
 pig-breeder=_Pig Breeder
 shepherd=_Shepherd
 smelter=_Smelter
-soldier=_Soldier
 stonemason=_Stonemason
 toolsmith=_Toolsmith
 trainer=_Trainer
 weaponsmith=_Weaponsmith
 weaver=_Weaver
 vinefarmer=_Vine Farmer
+
+[constructionsite types]
+constructionsite=_Construction Site
+
+[trainingsite types]
 colosseum=_Colosseum
 arena=_Arena
-armoursmithy=_Armour Smithy
-bakery=_Bakery
+trainingscamp=_Trainingscamp
+
+[militarysite types]
 sentry=_Sentry
 barracks=_Barracks
 barrier=_Barrier
+castle=_Castle
+fortress=_Fortress
+outpost=_Outpost
+tower=_Tower
+
+[warehouse types]
+headquarters=_Headquarters
+headquarters_shipwreck=_Headquarters shipwreck
+warehouse=_Warehouse
+
+[productionsite types]
+armoursmithy=_Armour Smithy
+bakery=_Bakery
 brewery=_Brewery
 burners_house=_Charcoal Burner
-castle=_Castle
 deep_coalmine=_Deep Coal Mine
 coalmine=_Coal Mine
-constructionsite=_Construction Site
 deep_goldmine=_Deep Gold Mine
 deep_marblemine=_Deep Marble Mine
 deep_oremine=_Deep Iron Ore Mine
 farm=_Farm
 fishers_house=_Fisher's House
 foresters_house=_Forester's House
-fortress=_Fortress
 goldmine=_Gold Mine
-headquarters=_Headquarters
-headquarters_shipwreck=_Headquarters shipwreck
 hunters_house=_Hunter's House
 inn=_Inn
 lumberjacks_house=_Lumberjack's House
 marblemine=_Marble Mine
 mill=_Mill
 oremine=_Iron Ore Mine
-outpost=_Outpost
 piggery=_Piggery
 quarry=_Quarry
 sawmill=_Sawmill
@@ -162,9 +183,6 @@ smelting_works=_Smelting Works
 stonemasons_house=_Stonemason's House
 tavern=_Tavern
 toolsmithy=_Toolsmithy
-tower=_Tower
-trainingscamp=_Trainingscamp
-warehouse=_Warehouse
 weaponsmithy=_Weapon Smithy
 weaving-mill=_Weaving Mill
 well=_Well

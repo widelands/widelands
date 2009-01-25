@@ -3,7 +3,6 @@
 # in the player colors may be present
 
 # soundfx=../../../sound/spoken/warehouse-bringitin
-type=warehouse
 size=big
 buildable=no
 subtype=HQ

@@ -249,6 +249,15 @@ void Section::check_used() const
 				 get_name(), i.current->get_name());
 }
 
+
+bool Section::has_val(char const * const name) const
+{
+	container_iterate_const(Value_list, m_values, i)
+		if (not strcasecmp(i.current->get_name(), name))
+			return true;
+	return false;
+}
+
 /** Section::get_val(const char *name)
  *
  * Returns the Value associated with the given keyname.
@@ -259,12 +268,11 @@ void Section::check_used() const
  */
 Section::Value *Section::get_val(const char *name)
 {
-	for (Value_list::iterator v = m_values.begin(); v != m_values.end(); ++v) {
-		if (!strcasecmp(v->get_name(), name)) {
-			v->mark_used();
-			return &*v;
+	container_iterate(Value_list, m_values, i)
+		if (!strcasecmp(i.current->get_name(), name)) {
+			i.current->mark_used();
+			return &*i.current;
 		}
-	}
 
 	return 0;
 }
@@ -279,43 +287,33 @@ Section::Value *Section::get_val(const char *name)
  */
 Section::Value *Section::get_next_val(const char *name)
 {
-	for (Value_list::iterator v = m_values.begin(); v != m_values.end(); ++v) {
-		if (v->is_used())
-			continue;
-		if (!name || !strcasecmp(v->get_name(), name)) {
-			v->mark_used();
-			return &*v;
-		}
-	}
+	container_iterate(Value_list, m_values, i)
+		if (not i.current->is_used())
+			if (!name || !strcasecmp(i.current->get_name(), name)) {
+				i.current->mark_used();
+				return &*i.current;
+			}
 
 	return 0;
 }
 
-/** Section::create_val(const char *name, const char *value, bool duplicate = false)
- *
- * Set the given key. If duplicate is false, an old key with the given name is
- * replaced if possible.
- *
- * Unlike the set_*() class functions, it doesn't mark the key as used.
- */
-Section::Value *Section::create_val(const char *name, const char *value, bool duplicate)
+Section::Value & Section::create_val
+	(char const * const name, char const * const value)
 {
-	if (!duplicate) {
-		for
-			(Value_list::iterator old = m_values.begin();
-			 old != m_values.end();
-			 ++old)
-		{
-			if (!strcasecmp(old->get_name(), name)) {
-				old->set_string(value);
-				return &*old;
-			}
+	container_iterate(Value_list, m_values, i)
+		if (!strcasecmp(i.current->get_name(), name)) {
+			i.current->set_string(value);
+			return *i.current;
 		}
-	}
+	return create_val_duplicate(name, value);
+}
 
+Section::Value & Section::create_val_duplicate
+	(char const * const name, char const * const value)
+{
 	Value v(name, value);
 	m_values.push_back(v);
-	return &m_values.back();
+	return m_values.back();
 }
 
 /** Section::get_safe_int(const char *name)
@@ -614,38 +612,23 @@ const char *Section::get_next_bool(const char *name, bool *value)
  * If duplicate is true, a duplicate key will be created if the key already
  * exists.
  */
-void Section::set_int(const char *name, int32_t value, bool duplicate)
+void Section::set_int(char const * const name, int32_t const value)
 {
-	char buffer[32];
-
-	snprintf(buffer, sizeof(buffer), "%i", value);
-	create_val(name, buffer, duplicate)->mark_used();
+	char buffer[sizeof("-2147483649")];
+	sprintf(buffer, "%i", value);
+	set_string(name, buffer);
 }
 
 
-/** Section::set_bool(const char *name, bool value, bool duplicate = false)
- *
- * Modifies/Creates the given key.
- * If duplicate is true, a duplicate key will be created if the key already
- * exists.
- */
-void Section::set_bool(const char *name, bool value, bool duplicate)
+void Section::set_string(char const * const name, char const * string)
 {
-	const char *string;
-
-	string = value ? "true" : "false";
-	create_val(name, string, duplicate)->mark_used();
+	create_val(name, string).mark_used();
 }
 
-/** Section::set_string(const char *name, const char *string, bool duplicate = false)
- *
- * Modifies/Creates the given key.
- * If duplicate is true, a duplicate key will be created if the key already
- * exists.
- */
-void Section::set_string(const char *name, const char *string, bool duplicate)
+void Section::set_string_duplicate
+	(char const * const name, char const * const string)
 {
-	create_val(name, string, duplicate)->mark_used();
+	create_val_duplicate(name, string).mark_used();
 }
 
 /** Section::set_Coords(const char * const name, const Coords value, const bool duplicate = false)
@@ -655,13 +638,11 @@ void Section::set_string(const char *name, const char *string, bool duplicate)
  * exists.
  */
 void Section::set_Coords
-	(char const * const name, Widelands::Coords const value,
-	 bool const duplicate)
+	(char const * const name, Widelands::Coords const value)
 {
-	char buffer[64];
-
-	snprintf(buffer, sizeof(buffer), "%i %i", value.x, value.y);
-	create_val(name, buffer, duplicate)->mark_used();
+	char buffer[sizeof("-32769 -32769")];
+	sprintf(buffer, "%i %i", value.x, value.y);
+	set_string(name, buffer);
 }
 
 
@@ -670,8 +651,8 @@ void Section::set_Immovable_Type
 	 Widelands::Immovable_Descr const & descr)
 {
 	if (Widelands::Tribe_Descr const * const tridescr = descr.get_owner_tribe())
-		create_val(tribe, tridescr->name().c_str(), false)->mark_used();
-	create_val   (name,     descr. name().c_str(), false)->mark_used();
+		set_string(tribe, tridescr->name());
+	set_string   (name,     descr. name());
 }
 
 
@@ -679,25 +660,13 @@ void Section::set_Building_Index
 	(char const                  * const name,
 	 Widelands::Building_Index     const value,
 	 Widelands::Editor_Game_Base &       egbase,
-	 Widelands::Player_Number      const player,
-	 bool                          const duplicate)
+	 Widelands::Player_Number      const player)
 {
-	create_val
+	set_string
 		(name,
 		 egbase.manually_load_tribe
 		 	(egbase.map().get_scenario_player_tribe(player))
-		 .get_building_descr(value)->name().c_str(),
-		 duplicate)
-		->mark_used();
-}
-
-
-void Section::set_Building_Type
-	(char                      const * const name,
-	 Widelands::Building_Descr const &       value,
-	 bool                              const duplicate)
-{
-	create_val(name, value.name().c_str(), duplicate)->mark_used();
+		 .get_building_descr(value)->name());
 }
 
 
@@ -724,9 +693,12 @@ Profile::Profile(int32_t error_level)
  * If global_section is not null, keys outside of sections are put into a section
  * of that name.
  */
-Profile::Profile(const char* filename, const char *global_section, int32_t error_level)
+Profile::Profile
+(char const * const filename,
+ char const * const global_section,
+ int32_t      const error_level)
+: m_filename(filename), m_error_level(error_level)
 {
-	m_error_level = error_level;
 	read(filename, global_section);
 }
 
@@ -753,8 +725,10 @@ void Profile::error(const char *fmt, ...) const
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (m_error_level == err_log) log("%s\n", buffer);
-	else throw wexception("%s", buffer);
+	if (m_error_level == err_log)
+		log("[%s] %s\n", m_filename.c_str(), buffer);
+	else
+		throw wexception("[%s] %s", m_filename.c_str(), buffer);
 }
 
 /** Profile::check_used()
@@ -782,16 +756,11 @@ void Profile::check_used() const
  */
 Section *Profile::get_section(const char *name)
 {
-	for
-		(Section_list::iterator s = m_sections.begin();
-		 s != m_sections.end();
-		 ++s)
-	{
-		if (!strcasecmp(s->get_name(), name)) {
-			s->mark_used();
-			return &*s;
+	container_iterate(Section_list, m_sections, i)
+		if (!strcasecmp(i.current->get_name(), name)) {
+			i.current->mark_used();
+			return &*i.current;
 		}
-	}
 
 	return 0;
 }
@@ -805,7 +774,8 @@ Section & Profile::get_safe_section(char const * const name)
 	if (Section * const s = get_section(name))
 		return *s;
 	else
-		throw wexception("Section [%s] not found", name);
+		throw wexception
+			("in \"%s\" section [%s] not found", m_filename.c_str(), name);
 }
 
 /** Profile::pull_section(const char *name)
@@ -814,10 +784,10 @@ Section & Profile::get_safe_section(char const * const name)
  * If the section doesn't exist, it is created.
  * Similar to create_section(), but the section is marked as used.
  */
-Section *Profile::pull_section(const char *name)
+Section & Profile::pull_section(char const * const name)
 {
-	Section *s = create_section(name);
-	s->mark_used();
+	Section & s = create_section(name);
+	s.mark_used();
 	return s;
 }
 
@@ -831,44 +801,32 @@ Section *Profile::pull_section(const char *name)
  */
 Section *Profile::get_next_section(const char *name)
 {
-	for
-		(Section_list::iterator s = m_sections.begin();
-		 s != m_sections.end();
-		 ++s)
-	{
-		if (s->is_used())
-			continue;
-		if (!name || !strcasecmp(s->get_name(), name)) {
-			s->mark_used();
-			return &*s;
-		}
-	}
+	container_iterate(Section_list, m_sections, i)
+		if (not i.current->is_used())
+			if (!name || !strcasecmp(i.current->get_name(), name)) {
+				i.current->mark_used();
+				return &*i.current;
+			}
 
 	return 0;
 }
 
-/** Profile::create_section(const char *name, bool duplicate = false)
- *
- * Create a section of the given name.
- * If duplicate is true, a duplicate section may be created. Otherwise, a
- * pointer to an existing section is returned.
- */
-Section *Profile::create_section(const char *name, bool duplicate)
-{
-	if (!duplicate) {
-		for
-			(Section_list::iterator s = m_sections.begin();
-			 s != m_sections.end();
-			 ++s)
-		{
-			if (!strcasecmp(s->get_name(), name))
-				return &*s;
-		}
-	}
 
-	m_sections.push_back(Section(this, name));
-	return &m_sections.back();
+Section & Profile::create_section          (char const * const name)
+{
+	container_iterate(Section_list, m_sections, i)
+		if (!strcasecmp(i.current->get_name(), name))
+			return *i.current;
+	return create_section_duplicate(name);
 }
+
+
+Section & Profile::create_section_duplicate(char const * const name)
+{
+	m_sections.push_back(Section(this, name));
+	return m_sections.back();
+}
+
 
 inline char *skipwhite(char *p)
 {
@@ -942,7 +900,7 @@ void Profile::read
 			if (p[0] == '[') {
 				++p;
 				setEndAt(p, ']');
-				s = create_section(p, true); // may create duplicate
+				s = &create_section_duplicate(p);
 			} else {
 				char* tail = 0;
 				translate_line = false;
@@ -1012,7 +970,7 @@ void Profile::read
 					// ready to insert
 					if (!s) {
 						if (global_section)
-							s = create_section(global_section, true);
+							s = &create_section_duplicate(global_section);
 						else
 							throw wexception("key %s outside section", p);
 					}
@@ -1022,7 +980,7 @@ void Profile::read
 					else
 						data += tail;
 					if (s && ! reading_multiline) { // error() may or may not throw
-						s->create_val(key, data.c_str(), true);
+						s->create_val_duplicate(key, data.c_str());
 						data.clear();
 					}
 				} else
@@ -1041,7 +999,7 @@ void Profile::read
 
 	//  Make sure that the requested global section exists, even if it is empty.
 	if (global_section and not get_section(global_section))
-		create_section(global_section, true);
+		create_section_duplicate(global_section);
 }
 
 /**
@@ -1056,28 +1014,20 @@ void Profile::write
 
 	fw.Printf((std::string("# Automatically created by Widelands ")+build_id()+"\n").c_str());
 
-	for
-		(Section_list::iterator s = m_sections.begin();
-		 s != m_sections.end();
-		 ++s)
-	{
-		if (used_only && !s->is_used())
+	container_iterate_const(Section_list, m_sections, s) {
+		if (used_only && !s.current->is_used())
 			continue;
 
-		fw.Printf("\n[%s]\n", s->get_name());
+		fw.Printf("\n[%s]\n", s.current->get_name());
 
-		for
-			(Section::Value_list::iterator v = s->m_values.begin();
-			 v != s->m_values.end();
-			 ++v)
-		{
-			if (used_only && !v->is_used())
+		container_iterate_const(Section::Value_list, s.current->m_values, v) {
+			if (used_only && !v.current->is_used())
 				continue;
 
-			const char* str = v->get_string();
+			char const * const str = v.current->get_string();
 
 			if (strlen(str)>=1) {
-				uint32_t spaces = strlen(v->get_name());
+				uint32_t spaces = strlen(v.current->get_name());
 				bool multiline = false;
 
 				for (uint32_t i = 0; i < strlen(str); ++i) {
@@ -1114,9 +1064,9 @@ void Profile::write
 					// End of multilined text.
 					tempstr += '"';
 
-				fw.Printf("%s=\"%s\"\n", v->get_name(), tempstr.c_str());
+				fw.Printf("%s=\"%s\"\n", v.current->get_name(), tempstr.c_str());
 			} else
-				fw.Printf("%s=\n", v->get_name());
+				fw.Printf("%s=\n", v.current->get_name());
 		}
 	}
 

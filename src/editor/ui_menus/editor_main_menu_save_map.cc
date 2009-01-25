@@ -196,7 +196,7 @@ void Main_Menu_Save_Map::clicked_ok() {
 		if
 			(save_map
 			 	(filename,
-			 	 ! g_options.pull_section("global")->get_bool("nozip", false)))
+			 	 ! g_options.pull_section("global").get_bool("nozip", false)))
 			die();
 	}
 }

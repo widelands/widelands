@@ -538,8 +538,8 @@ void Editor_Interactive::run_editor(std::string const & filename)
 				loader_ui.step("Creating empty map...");
 				map.create_empty_map
 					(64, 64, "greenland", _("No Name"),
-					 g_options.pull_section("global")->get_string
-					 ("realname", _("Unknown")));
+					 g_options.pull_section("global").get_string
+					 	("realname", _("Unknown")));
 				editor.load_graphics(loader_ui);
 			} else {
 				loader_ui.stepf("Loading map \"%s\"...", filename.c_str());

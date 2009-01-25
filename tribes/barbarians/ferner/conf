@@ -1,5 +1,4 @@
 help=_Grows flax and thatch reed.
-type=generic
 program=plantflax
 program=plantreed
 program=harvestflax

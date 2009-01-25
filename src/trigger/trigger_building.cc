@@ -65,7 +65,7 @@ void Trigger_Building::Write
 	s.set_string       ("type",     "building");
 	s.set_int          ("version",  PACKET_VERSION);
 	Trigger_Player_Area::Write(s, egbase);
-	s.set_Building_Type("building", *m_building_type);
+	s.set_string("building", m_building_type->name());
 }
 
 /**

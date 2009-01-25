@@ -190,14 +190,14 @@ void Map_EventChain_Data_Packet::Write
 throw (_wexception)
 {
 	Profile prof;
-	prof.create_section("global")->set_int
+	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	Manager<EventChain> const & mcm = egbase->map().mcm();
 	Manager<EventChain>::Index const nr_eventchains = mcm.size();
 	for (Manager<EventChain>::Index i = 0; i < nr_eventchains; ++i) {
 		EventChain const & e = mcm[i];
-		Section & s = *prof.create_section(e.name().c_str());
+		Section & s = prof.create_section(e.name().c_str());
 		s.set_bool("repeating", e.m_repeating);
 
 		{ //  TriggerConditional
@@ -225,7 +225,7 @@ throw (_wexception)
 		{ //  Events
 			EventChain::event_vector const & events = e.m_events;
 			container_iterate_const(EventChain::event_vector, events, j)
-				s.set_string("event", (*j.current)->name(), true);
+				s.set_string_duplicate("event", (*j.current)->name());
 		}
 
 		s.set_int("current_event", e.m_curevent);

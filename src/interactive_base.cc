@@ -81,7 +81,7 @@ m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 	warpview.set(this, &Interactive_Player::mainview_move);
 
 	{
-		Section & s = *g_options.pull_section("global");
+		Section & s = g_options.pull_section("global");
 		set_border_snap_distance(s.get_int("border_snap_distance", 0));
 		set_panel_snap_distance (s.get_int("panel_snap_distance", 10));
 		set_snap_windows_only_when_overlapping
@@ -177,7 +177,7 @@ void Interactive_Base::unset_sel_picture() {
  */
 int32_t Interactive_Base::get_xres()
 {
-	return g_options.pull_section("global")->get_int("xres", 640);
+	return g_options.pull_section("global").get_int("xres", 640);
 }
 
 
@@ -188,7 +188,7 @@ int32_t Interactive_Base::get_xres()
  */
 int32_t Interactive_Base::get_yres()
 {
-	return g_options.pull_section("global")->get_int("yres", 480);
+	return g_options.pull_section("global").get_int("yres", 480);
 }
 
 

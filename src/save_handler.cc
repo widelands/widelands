@@ -36,7 +36,9 @@ using Widelands::Game_Saver;
 void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	initialize(realtime);
 
-	int32_t autosaveInterval = g_options.pull_section("global")->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
+	int32_t const autosaveInterval =
+		g_options.pull_section("global").get_int
+			("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
 	if (autosaveInterval <= 0)
 		return; // no autosave requested
 
@@ -124,7 +126,7 @@ bool SaveHandler::save_game
 	 std::string       * const error)
 {
 	bool const binary =
-		!g_options.pull_section("global")->get_bool("nozip", false);
+		!g_options.pull_section("global").get_bool("nozip", false);
 	// Make sure that the base directory exists
 	g_fs->EnsureDirectoryExists(get_base_dir());
 

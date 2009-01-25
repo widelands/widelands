@@ -32,7 +32,7 @@ pics=pics/flag_??.png
 hotspot=7 39
 fps=6
 
-[map object types]
+[immovable types]
 ashes=_Ashes
 blackrootfield_b=_Blackrootfield
 blackrootfield_harvested=_Blackrootfield harvested
@@ -55,6 +55,8 @@ resi_iron1=_Resource indicator iron little
 resi_iron2=_Resource indicator iron much
 resi_none=_Resource indicator no resource
 resi_water1=_Resource indicator water
+
+[ware types]
 advanced_shield=_Advanced Shield
 bakingtray=_Bakingtray
 blackrootflour=_Blackroot Flour
@@ -99,7 +101,14 @@ stone=_Stone
 tabard=_Tabard
 trunk=_Trunk
 water=_Water
+
+[carrier types]
 carrier=_Carrier
+
+[soldier types]
+soldier=_Soldier
+
+[worker types]
 armoursmith=_Armoursmith
 baker=_Baker
 blackroot_farmer=_Blackroot farmer
@@ -116,7 +125,6 @@ miner=_Miner
 sawyer=_Sawyer
 smelter=_Smelter
 smoker=_Smoker
-soldier=_Soldier
 spiderbreeder=_Spiderbreeder
 stonecutter=_Stonecutter
 toolsmith=_Toolsmith
@@ -124,38 +132,48 @@ trainer=_Trainer
 weaponsmith=_Weaponsmith
 weaver=_Weaver
 woodcutter=_Woodcutter
+
+[constructionsite types]
+constructionsite=_Construction Site
+
+[trainingsite types]
+dungeon=_Dungeon
+labyrinth=_Labyrinth
+
+[militarysite types]
+castle=_Castle
+guardhall=_Guardhall
+guardhouse=_Guardhouse
+high_tower=_High Tower
+small_tower=_Small Tower
+tower=_Tower
+
+[warehouse types]
+headquarters=_Headquarters
+warehouse=_Warehouse
+
+[productionsite types]
 armoursmithy=_Armoursmithy
 bakery=_Bakery
 blackroot_farm=_Blackroot Farm
 burners_house=_Charcoal Burner's House
-castle=_Castle
 coalmine=_Coal Mine
-constructionsite=_Construction Site
 crystalmine=_Crystal Mine
-dungeon=_Dungeon
 farm=_Farm
 fish_breeders_house=_Fish Breeder's House
 fishers_house=_Fisher's House
 foresters_house=_Forester's House
 goldmine=_Gold Mine
 goldweaver=_Goldweaver
-guardhall=_Guardhall
-guardhouse=_Guardhouse
-headquarters=_Headquarters
-high_tower=_High Tower
 hunters_house=_Hunter's House
 ironmine=_Iron Mine
-labyrinth=_Labyrinth
 mill=_Mill
 quarry=_Quarry
 sawmill=_Sawmill
-small_tower=_Small Tower
 smelting_works=_Smelting Works
 smokery=_Smokery
 spiderfarm=_Spiderfarm
 toolsmithy=_Toolsmithy
-tower=_Tower
-warehouse=_Warehouse
 weaponsmithy=_Weapon Smithy
 weaving-mill=_Weaving-Mill
 well=_Well

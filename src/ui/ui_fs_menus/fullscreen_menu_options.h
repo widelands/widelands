@@ -55,13 +55,13 @@ struct Options_Ctrl {
 		uint32_t maxfps;
 	};
 
-	Options_Ctrl(Section *);
+	Options_Ctrl(Section &);
 	~Options_Ctrl();
-	Options_Ctrl::Options_Struct options_struct(Section *);
+	Options_Ctrl::Options_Struct options_struct(Section &);
 	void save_options();
 private:
 	Fullscreen_Menu_Options *m_opt_dialog;
-	Section *m_opt_section;
+	Section & m_opt_section;
 };
 
 /**

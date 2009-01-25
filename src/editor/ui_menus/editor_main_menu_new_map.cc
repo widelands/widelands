@@ -182,7 +182,7 @@ void Main_Menu_New_Map::clicked_create_map() {
 		(Widelands::MAP_DIMENSIONS[m_w], Widelands::MAP_DIMENSIONS[m_h],
 		 m_worlds[m_currentworld],
 		 _("No Name"),
-		 g_options.pull_section("global")->get_string("realname", _("Unknown")));
+		 g_options.pull_section("global").get_string("realname", _("Unknown")));
 
 	// Postload the world which provides all the immovables found on a map
 	map.world().postload(&egbase);

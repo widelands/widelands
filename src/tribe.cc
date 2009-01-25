@@ -33,6 +33,7 @@
 #include "immovable.h"
 #include "layered_filesystem.h"
 #include "militarysite.h"
+#include "parse_map_object_types.h"
 #include "profile.h"
 #include "soldier.h"
 #include "trainingsite.h"
@@ -80,77 +81,70 @@ Tribe_Descr::Tribe_Descr
 		{
 			std::set<std::string> names; //  To enforce name uniqueness.
 
-			Section & section = root_conf.get_safe_section("map object types");
-			while (Section::Value const * const v = section.get_next_val()) {
-				char const * const     _name = v->get_name  ();
-				char const * const _descname = v->get_string();
-				if (names.count(_name))
-					throw wexception
-						("object name \"%s\" is already used", _name);
-				names.insert(_name);
-				path += _name;
-				path += "/conf";
-				try {
-					Profile prof(path.c_str(), "global");
-					path.resize(path.size() - strlen("conf"));
-					Section & global_s = prof.get_safe_section("global");
-					if (char const * const type = global_s.get_string("type")) {
-						//  Compares are sorted by frequence:
-						//    grep ^type= {global,tribes,worlds}/*/*/conf|grep -v .svn|sed "s@.*type=\([^# ]*\).*@type=\1@"|sort|uniq -c|sort -gr
-						//  But for even better performance, gperf should be used.
-						if      (not strcasecmp(type, "ware"))
-							m_wares.add
-								(new Item_Ware_Descr
-								 	(_name, _descname, path, prof, global_s));
-						else if (not strcasecmp(type, "production"))
-							m_buildings.add
-								(new ProductionSite_Descr
-								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-						else if (not strcasecmp(type, "generic"))
-							m_workers.add
-								(new Worker_Descr
-								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-						else if (not strcasecmp(type, "critter"))
-							m_bobs.add
-								(new Critter_Bob_Descr
-								 	(_name, _descname, path, prof, global_s, this, &m_default_encdata));
-						else if (not strcasecmp(type, "military"))
-							m_buildings.add
-								(new MilitarySite_Descr
-								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-						else if (not strcasecmp(type, "training"))
-							m_buildings.add
-								(new TrainingSite_Descr
-								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-						else if (not strcasecmp(type, "warehouse"))
-							m_buildings.add
-								(new Warehouse_Descr
-								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-						else if (not strcasecmp(type, "carrier"))
-							m_workers.add
-								(new Carrier::Descr
-								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-						else if (not strcasecmp(type, "construction"))
-							m_buildings.add
-								(new ConstructionSite_Descr
-								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-						else if (not strcasecmp(type, "soldier"))
-							m_workers.add
-								(new Soldier_Descr
-								 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
-						else
-							throw wexception("unknown map object type");
-					} else
-						m_immovables.add
-							(new Immovable_Descr
-							 	(_name, _descname, path, prof, global_s,
-							 	 m_world, this));
-					prof.check_used();
-				} catch (std::exception const & e) {
-					throw wexception("%s=\"%s\": %s", _name, _descname, e.what());
-				}
-				path.resize(base_path_size);
-			}
+			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
+				m_immovables.add
+				(new Immovable_Descr
+				 	(_name, _descname, path, prof, global_s, m_world, this));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
+				m_bobs.add
+					(new Critter_Bob_Descr
+					 	(_name, _descname, path, prof, global_s,  this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
+				m_wares.add
+					(new Item_Ware_Descr
+					 	(_name, _descname, path, prof, global_s));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("carrier")
+				m_workers.add
+					(new Carrier::Descr
+					 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("soldier")
+				m_workers.add
+					(new Soldier_Descr
+					 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("worker")
+				m_workers.add
+					(new Worker_Descr
+					 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END
+			PARSE_MAP_OBJECT_TYPES_BEGIN("constructionsite")
+				m_buildings.add
+					(new ConstructionSite_Descr
+					 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
+				m_buildings.add
+					(new MilitarySite_Descr
+					 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("trainingsite")
+				m_buildings.add
+					(new TrainingSite_Descr
+					 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
+				m_buildings.add
+					(new Warehouse_Descr
+					 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
+				m_buildings.add
+					(new ProductionSite_Descr
+					 	(_name, _descname, path, prof, global_s, *this, &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
 		}
 
 		try {
@@ -237,7 +231,7 @@ Tribe_Descr::Tribe_Descr
 			throw wexception("root conf: %s", e.what());
 		}
 #ifdef WRITE_GAME_DATA_AS_HTML
-		if (g_options.pull_section("global")->get_bool("write_HTML", false)) {
+		if (g_options.pull_section("global").get_bool("write_HTML", false)) {
 			m_ware_references     = new HTMLReferences[get_nrwares    ().value()];
 			m_worker_references   = new HTMLReferences[get_nrworkers  ().value()];
 			m_building_references = new HTMLReferences[get_nrbuildings().value()];

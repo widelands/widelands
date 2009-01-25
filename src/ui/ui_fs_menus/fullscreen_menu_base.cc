@@ -48,10 +48,12 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 	m_xres(gr_x()), m_yres(gr_y())
 {
 
-	Section *s = g_options.pull_section("global");
+	Section & s = g_options.pull_section("global");
 
 	WLApplication::get()->init_graphics
-			(m_xres, m_yres, s->get_int("depth", 16), s->get_bool("fullscreen", false));
+		(m_xres, m_yres,
+		 s.get_int("depth", 16),
+		 s.get_bool("fullscreen", false));
 
 	// Load background graphics
 	char buffer[256];
@@ -76,13 +78,11 @@ void Fullscreen_Menu_Base::draw(RenderTarget & dst) {
 
 
 uint32_t Fullscreen_Menu_Base::gr_x() {
-	Section *s = g_options.pull_section("global");
-	return s->get_int("xres", MENU_XRES);
+	return g_options.pull_section("global").get_int("xres", MENU_XRES);
 }
 
 uint32_t Fullscreen_Menu_Base::gr_y() {
-	Section *s = g_options.pull_section("global");
-	return s->get_int("yres", MENU_XRES);
+	return g_options.pull_section("global").get_int("yres", MENU_XRES);
 }
 
 
@@ -95,8 +95,9 @@ uint32_t Fullscreen_Menu_Base::fs_big() {
 }
 
 std::string Fullscreen_Menu_Base::ui_fn() {
-	Section *s = g_options.pull_section("global");
-	std::string style(s->get_string("ui_font", UI_FONT_NAME_SERIF));
+	std::string style
+		(g_options.pull_section("global").get_string
+		 	("ui_font", UI_FONT_NAME_SERIF));
 	if (style == "sans")
 		return UI_FONT_NAME_SANS;
 	if (style == "serif")

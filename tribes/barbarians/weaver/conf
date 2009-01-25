@@ -1,5 +1,4 @@
 help=_Produces cloth for ships and soldiers.
-type=generic
 
 [buildcost]
 carrier=1

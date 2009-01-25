@@ -1,5 +1,4 @@
 help=_Discovers resources for mining.
-type=generic
 program=expedition
 program=search
 soundfx=../../../sound/hammering/geologist_hammer

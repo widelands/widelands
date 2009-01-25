@@ -102,7 +102,7 @@ void Map_Extradata_Data_Packet::Write
 throw (_wexception)
 {
 	Profile prof;
-	prof.create_section("global")->set_int
+	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	//  Nothing more. All pics in the dir pic are loaded as pictures.

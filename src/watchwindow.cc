@@ -399,9 +399,8 @@ Open a watch window.
 void show_watch_window
 	(Interactive_Player & parent, Widelands::Coords const coords)
 {
-	Section *s = g_options.pull_section("global");
 	WatchWindow* win;
-	if (s->get_bool("single_watchwin", false)) {
+	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
 		if (g_watch_window != NULL)
 			g_watch_window->add_view(coords);
 		else

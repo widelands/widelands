@@ -1,4 +1,3 @@
-type=military
 size=medium
 max_soldiers=3
 heal_per_second=2

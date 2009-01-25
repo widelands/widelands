@@ -1,5 +1,4 @@
 help=_Grows wine.
-type=generic
 program=plantvine
 program=harvestvine
 

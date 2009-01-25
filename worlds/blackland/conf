@@ -3,8 +3,7 @@ author=_The Widelands Development Team
 name=_Blackland
 descr=_"These are the grey, horrible and dangerous blacklands"
 
-[bobs]
-bunny=_Bunny
+[immovable types]
 bush1=_Bush
 bush2=_Bush
 bush3=_Bush
@@ -16,9 +15,6 @@ deadtree1=_Dead Tree
 deadtree2=_Dead Tree
 deadtree3=_Dead Tree
 deadtree4=_Dead Tree
-deer=_Deer
-duck=_Duck
-fox=_Fox
 grass1=_Grass
 grass2=_Grass
 grass3=_Grass
@@ -30,8 +26,6 @@ pebble3=_Pebble
 pebble4=_Pebble
 pebble5=_Pebble
 pebble6=_Pebble
-reindeer=_Reindeer
-sheep=_Sheep
 skeleton1=_Skeleton
 skeleton2=_Skeleton
 skeleton3=_Skeleton
@@ -80,3 +74,11 @@ tree8=_Rowan
 tree8_m=_Rowan medium
 tree8_s=_Rowan small
 tree8_t=_Rowan tiny
+
+[critter bob types]
+bunny=_Bunny
+deer=_Deer
+duck=_Duck
+fox=_Fox
+reindeer=_Reindeer
+sheep=_Sheep

@@ -3,9 +3,7 @@ author=_The Widelands Development Team
 name=_Winterland
 descr=_"These are the white, wide and frosty winterlands, in which the Northmen dwell."
 
-[bobs]
-badger=_Badger
-bunny=_Bunny
+[immovable types]
 bush1=_Bush
 bush2=_Bush
 bush3=_Bush
@@ -15,14 +13,9 @@ deadtree1=_Dead Tree
 deadtree2=_Dead Tree
 deadtree3=_Dead Tree
 deadtree4=_Dead Tree
-deer=_Deer
-duck=_Duck
-elk=_Elk
-fox=_Fox
 grass1=_Grass
 grass2=_Grass
 grass3=_Grass
-lynx=_Lynx
 marten=_Marten
 mushroom1=_Mushroom
 mushroom2=_Mushroom
@@ -32,8 +25,6 @@ pebble3=_Pebble
 pebble4=_Pebble
 pebble5=_Pebble
 pebble6=_Pebble
-reindeer=_Reindeer
-sheep=_Sheep
 skeleton1=_Skeleton
 skeleton2=_Skeleton
 skeleton3=_Skeleton
@@ -84,5 +75,16 @@ tree8=_Rowan
 tree8_m=_Rowan medium
 tree8_s=_Rowan small
 tree8_t=_Rowan tiny
+
+[critter bob types]
+badger=_Badger
+bunny=_Bunny
+deer=_Deer
+duck=_Duck
+elk=_Elk
+fox=_Fox
+lynx=_Lynx
+reindeer=_Reindeer
+sheep=_Sheep
 wisent=_Wisent
 wolf=_Wolf

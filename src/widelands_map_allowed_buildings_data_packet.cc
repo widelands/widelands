@@ -99,15 +99,15 @@ void Map_Allowed_Buildings_Data_Packet::Write
 throw (_wexception)
 {
 	Profile prof;
-	prof.create_section("global")
-		->set_int("packet_version", CURRENT_PACKET_VERSION);
+	prof.create_section("global").set_int
+		("packet_version", CURRENT_PACKET_VERSION);
 
 	const Player_Number nr_players = egbase->map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, *egbase, player) {
 		const Tribe_Descr & tribe = player->tribe();
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		Section & section = *prof.create_section(buffer);
+		Section & section = prof.create_section(buffer);
 
 		//  Write for all buildings if it is enabled.
 		Building_Index const nr_buildings = tribe.get_nrbuildings();

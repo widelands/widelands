@@ -1,5 +1,4 @@
-type=critter #graphics: Toralf Bethke
-swimming=0
+#graphics: Toralf Bethke
 attrib=eatable
 program=remove
 

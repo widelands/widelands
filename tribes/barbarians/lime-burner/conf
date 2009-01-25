@@ -1,5 +1,4 @@
 help=_Burns lime in the lime kilm.
-type=generic
 
 [buildcost]
 carrier=1
