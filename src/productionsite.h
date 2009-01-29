@@ -111,7 +111,7 @@ class ProductionSite : public Building {
 
 public:
 	ProductionSite(const ProductionSite_Descr & descr);
-	~ProductionSite();
+	virtual ~ProductionSite();
 
 	struct Working_Position {
 		Working_Position(Request * const wr = 0, Worker * const w = 0)
