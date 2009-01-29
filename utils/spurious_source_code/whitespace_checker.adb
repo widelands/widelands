@@ -385,6 +385,10 @@ begin
                         'Img                                            &
                         " but only" & Next_Leading_Whitespace_Index'Img &
                         " leading whitespace characters are allowed");
+                     Leading_Whitespace (Current_Leading_Whitespace_Index)
+                       := Space;
+                     Next_Leading_Whitespace_Index
+                       := Next_Leading_Whitespace_Index + 1;
                   elsif
                     Leading_Whitespace (Current_Leading_Whitespace_Index) = Tab
                   then
