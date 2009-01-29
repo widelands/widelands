@@ -271,7 +271,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 
 		f = fopen(tempfile, "w+");
 
-		if (tempfile == NULL) {
+		if (f == NULL) {
 			log("Could not open %s for writing! Cannot load music.", tempfile);
 			return NULL;
 		}
