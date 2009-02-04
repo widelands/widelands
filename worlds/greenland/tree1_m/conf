@@ -19,7 +19,7 @@ bergwiese=  50
 animate=medium 264000
 remove=30
 seed=tree1_t 60
-animate=medium 264000
+animate=medium 132000
 remove=20
 grow=tree1
 
