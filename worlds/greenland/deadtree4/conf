@@ -5,5 +5,5 @@ picture=idle.png
 hotspot=23 61
 
 [program]
-animate=idle 20000
+animate=idle 40000
 remove=18

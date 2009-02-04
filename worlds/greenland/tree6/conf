@@ -33,7 +33,7 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 154000
+animate=idle 308000
 transform=deadtree2 20
 seed=tree6_t 90
 

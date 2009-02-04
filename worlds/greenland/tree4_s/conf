@@ -17,7 +17,7 @@ wiese4=    84
 bergwiese= 56
 
 [program]
-animate=small 92400
+animate=small 184800
 remove=19
 grow=tree4_m
 
