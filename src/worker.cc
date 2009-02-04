@@ -384,41 +384,47 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 	CheckStepWalkOn cstep(descr().movecaps(), false);
 
 	Map & map = g->map();
-	const Area<FCoords> area (map.get_fcoords(get_position()), action->iparam1);
-	if (action->sparam1 == "immovable") {
-		std::vector<ImmovableFound> list;
-		if (action->iparam2 < 0)
-			map.find_reachable_immovables
-				(area, &list, cstep);
-		else
-			map.find_reachable_immovables
-				(area, &list, cstep, FindImmovableAttribute(action->iparam2));
+	Area<FCoords> area (map.get_fcoords(get_position()), 0);
+	if (action->sparam1 == "immovable")
+		for (;; ++area.radius) {
+			if (action->iparam1 < area.radius) {
+				send_signal(g, "fail"); // no object found, cannot run program
+				pop_task(g);
+				return true;
+			}
+			std::vector<ImmovableFound> list;
+			if (action->iparam2 < 0)
+				map.find_reachable_immovables
+					(area, &list, cstep);
+			else
+				map.find_reachable_immovables
+					(area, &list, cstep, FindImmovableAttribute(action->iparam2));
 
-		if (!list.size()) {
-			send_signal(g, "fail"); // no object found, cannot run program
-			pop_task(g);
-			return true;
+			if (list.size()) {
+				state->objvar1 = list[g->logic_rand() % list.size()].object;
+				break;
+			}
 		}
+	else
+		for (;; ++area.radius) {
+			if (action->iparam1 < area.radius) {
+				send_signal(g, "fail"); // no object found, cannot run program
+				pop_task(g);
+				return true;
+			}
+			std::vector<Bob*> list;
+			if (action->iparam2 < 0)
+				map.find_reachable_bobs
+					(area, &list, cstep);
+			else
+				map.find_reachable_bobs
+					(area, &list, cstep, FindBobAttribute(action->iparam2));
 
-		int32_t sel = g->logic_rand() % list.size();
-		state->objvar1 = list[sel].object;
-	} else {
-		std::vector<Bob*> list;
-		if (action->iparam2 < 0)
-			map.find_reachable_bobs
-				(area, &list, cstep);
-		else
-			map.find_reachable_bobs
-				(area, &list, cstep, FindBobAttribute(action->iparam2));
-
-		if (!list.size()) {
-			send_signal(g, "fail"); // no object found, cannot run program
-			pop_task(g);
-			return true;
+			if (list.size()) {
+				state->objvar1 = list[g->logic_rand() % list.size()];
+				break;
+			}
 		}
-		int32_t sel = g->logic_rand() % list.size();
-		state->objvar1 = list[sel];
-	}
 
 	++state->ivar1;
 	schedule_act(g, 10);
