@@ -950,7 +950,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
  */
 void WLApplication::show_usage()
 {
-	i18n::grab_textdomain("widelands");// uses system standard language
+	i18n::Textdomain textdomain("widelands");// uses system standard language
 
 	cout << _("This is Widelands-") << build_id() << "\n\n";
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
@@ -963,18 +963,61 @@ void WLApplication::show_usage()
 			 "                      later playback\n"
 			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
 			 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-			 "                      of using the SDL\n");
-	cout
+			 "                      of using the SDL\n"
+			 " --language=[de_DE|sv_SE|...]\n"
+			 "                      The locale to use.\n"
+			 "\n")
 		<<
 		_
-			(" --nosound            Starts the game with sound disabled.\n"
-			 " --nozip              Do not save files as binary zip archives.\n\n"
+			("Sound options:\n"
+			 " --nosound            Starts the game with sound disabled.\n"
+			 " --disable_fx         Disable sound effects.\n"
+			 " --disable_music      Disable music.\n"
+			 "\n"
+			 " --nozip              Do not save files as binary zip archives.\n"
+			 "\n"
 			 " --editor             Directly starts the Widelands editor.\n"
 			 "                      You can add a =FILENAME to directly load\n"
 			 "                      the map FILENAME in editor.\n"
 			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			 "                      map.\n"
-			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n\n");
+			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
+			 " --speed_of_new_game  The speed that the new game will run at\n"
+			 "                      when started, with factor 1000 (0 is pause,\n"
+			 "                      1000 is normal speed).\n"
+			 " --auto_roadbuild_mode=[yes|no]\n"
+			 "                      Whether to enter roadbuilding mode\n"
+			 "                      automatically after placing a flag that is\n"
+			 "                      not connected to a road.\n"
+			 " --write_HTML=[yes|no]\n"
+			 "                      Write HTML-helpfiles for parsed game data.\n"
+			 "\n"
+			 "Graphic options:\n"
+			 " --fullscreen=[yes|no]\n"
+			 "                      Whether to use the whole display for the\n"
+			 "                      game screen.\n"
+			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
+			 " --xres=[...]         Width of the window in pixel.\n"
+			 " --yres=[...]         Height of the window in pixel.\n"
+			 "\n"
+			 "Options for the internal window manager:\n"
+			 " --border_snap_distance=[0 ...]\n"
+			 "                      Move a window to the edge of the screen\n"
+			 "                      when the edge of the window comes within\n"
+			 "                      this distance from the edge of the screen.\n"
+			 " --dock_windows_to_edges=[yes|no]\n"
+			 "                      Eliminate a window's border towards the\n"
+			 "                      edge of the screen when the edge of the\n"
+			 "                      window is next to the edge of the screen.\n"
+			 " --panel_snap_distance=[0 ...]\n"
+			 "                      Move a window to the edge of the panel when\n"
+			 "                      the edge of the window comes within this\n"
+			 "                      distance from the edge of the panel.\n"
+			 " --snap_windows_only_when_overlapping=[yes|no]\n"
+			 "                      Only move a window to the edge of a panel\n"
+			 "                      if the window is overlapping with the\n"
+			 "                      panel.\n"
+			 "\n");
 #ifdef DEBUG
 #ifndef __WIN32__
 	cout
@@ -991,8 +1034,6 @@ void WLApplication::show_usage()
 			("Bug reports? Suggestions? Check out the project website:\n"
 			 "        http://www.sourceforge.net/projects/widelands\n\n"
 			 "Hope you enjoy this game!\n\n");
-
-	i18n::release_textdomain();
 }
 
 #ifdef DEBUG
