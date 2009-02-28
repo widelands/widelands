@@ -208,18 +208,17 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 			okid.call(m->id);
 			return true;
 
-		case SDLK_BACKSPACE:
-			if (m->caret > 0) {
-				--m->caret;
-				m->text.erase(m->text.begin() + m->caret);
-				changed.call();
-				changedid.call(m->id);
-				update();
-			}
-			return true;
-
 		case SDLK_DELETE:
 			if (m->caret < m->text.size()) {
+				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
+				// now handle it like Backspace
+			} else
+				return true;
+
+		case SDLK_BACKSPACE:
+			if (m->caret > 0) {
+				while ((m->text[--m->caret] & 0xc0) == 0x80)
+					m->text.erase(m->text.begin() + m->caret);
 				m->text.erase(m->text.begin() + m->caret);
 				changed.call();
 				changedid.call(m->id);
@@ -229,7 +228,7 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 
 		case SDLK_LEFT:
 			if (m->caret > 0) {
-				--m->caret;
+				while ((m->text[--m->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m->caret;; m->caret = new_caret)
 						if (0 == new_caret or isspace(m->text[--new_caret]))
@@ -240,7 +239,7 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 
 		case SDLK_RIGHT:
 			if (m->caret < m->text.size()) {
-				++m->caret;
+				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m->caret;; ++new_caret)
 						if
@@ -272,8 +271,16 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 		default:
 			if (is_printable(code)) {
 				if (m->text.size() < m->maxLength) {
-					m->text.insert(m->text.begin() + m->caret, code.unicode);
-					++m->caret;
+					if (code.unicode < 0x80)         // 1 byte char
+						m->text.insert(m->text.begin() + m->caret++, 1, code.unicode);
+					else if (code.unicode < 0x800) { // 2 byte char
+						m->text.insert(m->text.begin() + m->caret++, (((code.unicode & 0x7c0) >> 6) | 0xc0));
+						m->text.insert(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
+					} else {                         // 3 byte char
+						m->text.insert(m->text.begin() + m->caret++, (((code.unicode & 0xf000) >> 12) | 0xe0));
+						m->text.insert(m->text.begin() + m->caret++, (((code.unicode & 0xfc0) >> 6) | 0x80));
+						m->text.insert(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
+					}
 					changed.call();
 					changedid.call(m->id);
 					update();
