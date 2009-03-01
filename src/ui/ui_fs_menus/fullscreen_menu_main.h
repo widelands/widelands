@@ -47,6 +47,7 @@ private:
 	uint32_t                                    m_buth;
 	uint32_t                                    m_fs;
 	std::string                                 m_fn;
+	std::string                                 wlcr;
 	UI::IDButton<Fullscreen_Menu_Main, int32_t> singleplayer;
 	UI::IDButton<Fullscreen_Menu_Main, int32_t> multiplayer;
 	UI::IDButton<Fullscreen_Menu_Main, int32_t> replay;

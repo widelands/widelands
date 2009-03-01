@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@
 #include "player.h"
 #include "profile.h"
 #include "tribe.h"
+#include "warning.h"
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
 
@@ -120,7 +121,9 @@ void Editor_Interactive::load(std::string const & filename) {
 
 	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 	if (not ml)
-		throw wexception("could not load \"%s\"", filename.c_str());
+		throw warning(_("Unsupported format"),
+		             (_("Widelands could not load the file \"") + filename +
+		              _("\". The file format seems to be incompatible.")).c_str());
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
 	GameTips editortips (loader_ui, "txts/editortips");

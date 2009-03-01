@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3583\n"
+"Project-Id-Version: Widelands svn3662\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-12-13 13:23+0000\n"
+"POT-Creation-Date: 2009-03-01 11:50+0000\n"
 "PO-Revision-Date: 2008-12-13 13:57+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -114,425 +114,435 @@ msgstr "Ressourcen Anzeige für keine Ressource"
 msgid "Resource indicator water"
 msgstr "Ressourcen Anzeige für Wasser"
 
-#: ../../../tribes/atlanteans/conf:58
+#: ../../../tribes/atlanteans/conf:60
 msgid "Advanced Shield"
 msgstr "Verbessertes Schild"
 
-#: ../../../tribes/atlanteans/conf:59
+#: ../../../tribes/atlanteans/conf:61
 msgid "Bakingtray"
 msgstr "Backblech"
 
-#: ../../../tribes/atlanteans/conf:60
+#: ../../../tribes/atlanteans/conf:62
 msgid "Blackroot Flour"
 msgstr "Schwarzwurzelmehl"
 
-#: ../../../tribes/atlanteans/conf:61
+#: ../../../tribes/atlanteans/conf:63
 msgid "Blackroot"
 msgstr "Schwarzwurzel"
 
-#: ../../../tribes/atlanteans/conf:62
+#: ../../../tribes/atlanteans/conf:64
 msgid "Bread"
 msgstr "Brot"
 
-#: ../../../tribes/atlanteans/conf:63
+#: ../../../tribes/atlanteans/conf:65
 msgid "Buckets"
 msgstr "Eimer"
 
-#: ../../../tribes/atlanteans/conf:64
+#: ../../../tribes/atlanteans/conf:66
 msgid "Coal"
 msgstr "Kohle"
 
-#: ../../../tribes/atlanteans/conf:65
+#: ../../../tribes/atlanteans/conf:67
 msgid "Cornflour"
 msgstr "Maismehl"
 
-#: ../../../tribes/atlanteans/conf:66
+#: ../../../tribes/atlanteans/conf:68
 msgid "Corn"
 msgstr "Mais"
 
-#: ../../../tribes/atlanteans/conf:67
+#: ../../../tribes/atlanteans/conf:69
 msgid "Diamond"
 msgstr "Diamant"
 
-#: ../../../tribes/atlanteans/conf:68
+#: ../../../tribes/atlanteans/conf:70
 msgid "Double Trident"
 msgstr "Doppel-Dreizack"
 
-#: ../../../tribes/atlanteans/conf:69
+#: ../../../tribes/atlanteans/conf:71
 msgid "Fire Tongs"
 msgstr "Feuerzange"
 
-#: ../../../tribes/atlanteans/conf:70
+#: ../../../tribes/atlanteans/conf:72
 msgid "Fishing Net"
 msgstr "Fischernetz"
 
-#: ../../../tribes/atlanteans/conf:71
+#: ../../../tribes/atlanteans/conf:73
 msgid "Fish"
 msgstr "Fisch"
 
-#: ../../../tribes/atlanteans/conf:72
+#: ../../../tribes/atlanteans/conf:74
 msgid "Golden Tabard"
 msgstr "goldener Wappenrock"
 
-#: ../../../tribes/atlanteans/conf:73
+#: ../../../tribes/atlanteans/conf:75
 msgid "Gold Ore"
 msgstr "Golderz"
 
-#: ../../../tribes/atlanteans/conf:74
+#: ../../../tribes/atlanteans/conf:76
 msgid "Gold"
 msgstr "Gold"
 
-#: ../../../tribes/atlanteans/conf:75
+#: ../../../tribes/atlanteans/conf:77
 msgid "Gold Yarn"
 msgstr "Goldgarn"
 
-#: ../../../tribes/atlanteans/conf:76
+#: ../../../tribes/atlanteans/conf:78
 msgid "Hammer"
 msgstr "Hammer"
 
-#: ../../../tribes/atlanteans/conf:77
+#: ../../../tribes/atlanteans/conf:79
 msgid "Heavy Double Trident"
 msgstr "schwerer Doppel-Dreizack"
 
-#: ../../../tribes/atlanteans/conf:78
+#: ../../../tribes/atlanteans/conf:80
 msgid "Hook pole"
 msgstr "Hakenstange"
 
-#: ../../../tribes/atlanteans/conf:79
+#: ../../../tribes/atlanteans/conf:81
 msgid "Hunting Bow"
 msgstr "Jagdbogen"
 
-#: ../../../tribes/atlanteans/conf:80
+#: ../../../tribes/atlanteans/conf:82
 msgid "Iron Ore"
 msgstr "Eisenerz"
 
-#: ../../../tribes/atlanteans/conf:81
+#: ../../../tribes/atlanteans/conf:83
 msgid "Iron"
 msgstr "Eisen"
 
-#: ../../../tribes/atlanteans/conf:82
+#: ../../../tribes/atlanteans/conf:84
 msgid "Light trident"
 msgstr "Leichter Dreizack"
 
-#: ../../../tribes/atlanteans/conf:83
+#: ../../../tribes/atlanteans/conf:85
 msgid "Long Trident"
 msgstr "Langer Dreizack"
 
-#: ../../../tribes/atlanteans/conf:84
+#: ../../../tribes/atlanteans/conf:86
 msgid "Meat"
 msgstr "Fleisch"
 
-#: ../../../tribes/atlanteans/conf:85
+#: ../../../tribes/atlanteans/conf:87
 msgid "Milking Tongs"
 msgstr "Melkzange"
 
-#: ../../../tribes/atlanteans/conf:86
+#: ../../../tribes/atlanteans/conf:88
 msgid "Quartz"
 msgstr "Bergkristall"
 
-#: ../../../tribes/atlanteans/conf:87
+#: ../../../tribes/atlanteans/conf:89
 msgid "Pick"
 msgstr "Spitzhacke"
 
-#: ../../../tribes/atlanteans/conf:88
+#: ../../../tribes/atlanteans/conf:90
 msgid "Planks"
 msgstr "Bretter"
 
-#: ../../../tribes/atlanteans/conf:89
+#: ../../../tribes/atlanteans/conf:91
 msgid "Saw"
 msgstr "Säge"
 
-#: ../../../tribes/atlanteans/conf:90
+#: ../../../tribes/atlanteans/conf:92
 msgid "Scythe"
 msgstr "Sense"
 
-#: ../../../tribes/atlanteans/conf:91
+#: ../../../tribes/atlanteans/conf:93
 msgid "Shovel"
 msgstr "Schaufel"
 
-#: ../../../tribes/atlanteans/conf:92
+#: ../../../tribes/atlanteans/conf:94
 msgid "Smoked fish"
 msgstr "Räucherfisch"
 
-#: ../../../tribes/atlanteans/conf:93
+#: ../../../tribes/atlanteans/conf:95
 msgid "Smoked meat"
 msgstr "Räucherfleisch"
 
-#: ../../../tribes/atlanteans/conf:94
+#: ../../../tribes/atlanteans/conf:96
 msgid "Spidercloth"
 msgstr "Spinnenstoff"
 
-#: ../../../tribes/atlanteans/conf:95
+#: ../../../tribes/atlanteans/conf:97
 msgid "Spideryarn"
 msgstr "Spinnengarn"
 
-#: ../../../tribes/atlanteans/conf:96
+#: ../../../tribes/atlanteans/conf:98
 msgid "Steel Shield"
 msgstr "Stahlschild"
 
-#: ../../../tribes/atlanteans/conf:97
+#: ../../../tribes/atlanteans/conf:99
 msgid "Steel Trident"
 msgstr "Stahl-Dreizack"
 
-#: ../../../tribes/atlanteans/conf:98
+#: ../../../tribes/atlanteans/conf:100
 msgid "Stone"
 msgstr "Stein"
 
-#: ../../../tribes/atlanteans/conf:99
+#: ../../../tribes/atlanteans/conf:101
 msgid "Tabard"
 msgstr "Wappenrock"
 
-#: ../../../tribes/atlanteans/conf:100
+#: ../../../tribes/atlanteans/conf:102
 msgid "Trunk"
 msgstr "Stamm"
 
-#: ../../../tribes/atlanteans/conf:101
+#: ../../../tribes/atlanteans/conf:103
 msgid "Water"
 msgstr "Wasser"
 
-#: ../../../tribes/atlanteans/conf:102
+#: ../../../tribes/atlanteans/conf:106
 msgid "Carrier"
 msgstr "Träger"
 
-#: ../../../tribes/atlanteans/conf:103
-msgid "Armoursmith"
-msgstr "Rüstungsschmied"
-
-#: ../../../tribes/atlanteans/conf:104
-msgid "Baker"
-msgstr "Bäcker"
-
-#: ../../../tribes/atlanteans/conf:105
-msgid "Blackroot farmer"
-msgstr "Schwarzwurzel-Bauer"
-
-#: ../../../tribes/atlanteans/conf:106
-msgid "Builder"
-msgstr "Bauarbeiter"
-
-#: ../../../tribes/atlanteans/conf:107
-msgid "Burner"
-msgstr "Brenner"
-
-#: ../../../tribes/atlanteans/conf:108
-msgid "Farmer"
-msgstr "Bauer"
-
 #: ../../../tribes/atlanteans/conf:109
-msgid "Fish Breeder"
-msgstr "Fischzüchter"
-
-#: ../../../tribes/atlanteans/conf:110
-msgid "Fisher"
-msgstr "Fischer"
-
-#: ../../../tribes/atlanteans/conf:111
-msgid "Forester"
-msgstr "Förster"
-
-#: ../../../tribes/atlanteans/conf:112
-msgid "Geologist"
-msgstr "Gelehrter"
-
-#: ../../../tribes/atlanteans/conf:113
-msgid "Hunter"
-msgstr "Jäger"
-
-#: ../../../tribes/atlanteans/conf:114
-msgid "Miller"
-msgstr "Müller"
-
-#: ../../../tribes/atlanteans/conf:115
-msgid "Miner"
-msgstr "Bergarbeiter"
-
-#: ../../../tribes/atlanteans/conf:116
-msgid "Sawyer"
-msgstr "Säger"
-
-#: ../../../tribes/atlanteans/conf:117
-msgid "Smelter"
-msgstr "Schmelzer"
-
-#: ../../../tribes/atlanteans/conf:118
-msgid "Smoker"
-msgstr "Räucherer"
-
-#: ../../../tribes/atlanteans/conf:119
 msgid "Soldier"
 msgstr "Soldat"
 
+#: ../../../tribes/atlanteans/conf:112
+msgid "Armoursmith"
+msgstr "Rüstungsschmied"
+
+#: ../../../tribes/atlanteans/conf:113
+msgid "Baker"
+msgstr "Bäcker"
+
+#: ../../../tribes/atlanteans/conf:114
+msgid "Blackroot farmer"
+msgstr "Schwarzwurzel-Bauer"
+
+#: ../../../tribes/atlanteans/conf:115
+msgid "Builder"
+msgstr "Bauarbeiter"
+
+#: ../../../tribes/atlanteans/conf:116
+msgid "Burner"
+msgstr "Brenner"
+
+#: ../../../tribes/atlanteans/conf:117
+msgid "Farmer"
+msgstr "Bauer"
+
+#: ../../../tribes/atlanteans/conf:118
+msgid "Fish Breeder"
+msgstr "Fischzüchter"
+
+#: ../../../tribes/atlanteans/conf:119
+msgid "Fisher"
+msgstr "Fischer"
+
 #: ../../../tribes/atlanteans/conf:120
+msgid "Forester"
+msgstr "Förster"
+
+#: ../../../tribes/atlanteans/conf:121
+msgid "Geologist"
+msgstr "Gelehrter"
+
+#: ../../../tribes/atlanteans/conf:122
+msgid "Hunter"
+msgstr "Jäger"
+
+#: ../../../tribes/atlanteans/conf:123
+msgid "Miller"
+msgstr "Müller"
+
+#: ../../../tribes/atlanteans/conf:124
+msgid "Miner"
+msgstr "Bergarbeiter"
+
+#: ../../../tribes/atlanteans/conf:125
+msgid "Sawyer"
+msgstr "Säger"
+
+#: ../../../tribes/atlanteans/conf:126
+msgid "Smelter"
+msgstr "Schmelzer"
+
+#: ../../../tribes/atlanteans/conf:127
+msgid "Smoker"
+msgstr "Räucherer"
+
+#: ../../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
 msgstr "Spinnenzüchter"
 
-#: ../../../tribes/atlanteans/conf:121
+#: ../../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
 msgstr "Steinmetz"
 
-#: ../../../tribes/atlanteans/conf:122
+#: ../../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
 msgstr "Werkzeugmacher"
 
-#: ../../../tribes/atlanteans/conf:123
+#: ../../../tribes/atlanteans/conf:131
 msgid "Trainer"
 msgstr "Trainer"
 
-#: ../../../tribes/atlanteans/conf:124
+#: ../../../tribes/atlanteans/conf:132
 msgid "Weaponsmith"
 msgstr "Waffenschmied"
 
-#: ../../../tribes/atlanteans/conf:125
+#: ../../../tribes/atlanteans/conf:133
 msgid "Weaver"
 msgstr "Weber"
 
-#: ../../../tribes/atlanteans/conf:126
+#: ../../../tribes/atlanteans/conf:134
 msgid "Woodcutter"
 msgstr "Holzfäller"
 
-#: ../../../tribes/atlanteans/conf:127
-msgid "Armoursmithy"
-msgstr "Rüstungsschmied"
-
-#: ../../../tribes/atlanteans/conf:128
-msgid "Bakery"
-msgstr "Bäckerei"
-
-#: ../../../tribes/atlanteans/conf:129
-msgid "Blackroot Farm"
-msgstr "Schwarzwurzel-Farm"
-
-#: ../../../tribes/atlanteans/conf:130
-msgid "Charcoal Burner's House"
-msgstr "Köhlerei"
-
-#: ../../../tribes/atlanteans/conf:131
-msgid "Castle"
-msgstr "Burg"
-
-#: ../../../tribes/atlanteans/conf:132
-msgid "Coal Mine"
-msgstr "Kohlemine"
-
-#: ../../../tribes/atlanteans/conf:133
+#: ../../../tribes/atlanteans/conf:137
 msgid "Construction Site"
 msgstr "Baustelle"
 
-#: ../../../tribes/atlanteans/conf:134
-msgid "Crystal Mine"
-msgstr "Kristallmine"
-
-#: ../../../tribes/atlanteans/conf:135
+#: ../../../tribes/atlanteans/conf:140
 msgid "Dungeon"
 msgstr "Verlies"
 
-#: ../../../tribes/atlanteans/conf:136
-msgid "Farm"
-msgstr "Bauernhof"
-
-#: ../../../tribes/atlanteans/conf:137
-msgid "Fish Breeder's House"
-msgstr "Fischzüchterhütte"
-
-#: ../../../tribes/atlanteans/conf:138
-msgid "Fisher's House"
-msgstr "Fischerhütte"
-
-#: ../../../tribes/atlanteans/conf:139
-msgid "Forester's House"
-msgstr "Försterhütte"
-
-#: ../../../tribes/atlanteans/conf:140
-msgid "Gold Mine"
-msgstr "Goldmine"
-
 #: ../../../tribes/atlanteans/conf:141
-msgid "Goldweaver"
-msgstr "Goldweber"
-
-#: ../../../tribes/atlanteans/conf:142
-msgid "Guardhall"
-msgstr "Wächterhalle"
-
-#: ../../../tribes/atlanteans/conf:143
-msgid "Guardhouse"
-msgstr "Wachhaus"
-
-#: ../../../tribes/atlanteans/conf:144
-msgid "Headquarters"
-msgstr "Hauptquartier"
-
-#: ../../../tribes/atlanteans/conf:145
-msgid "High Tower"
-msgstr "Bergfried"
-
-#: ../../../tribes/atlanteans/conf:146
-msgid "Hunter's House"
-msgstr "Jägerhütte"
-
-#: ../../../tribes/atlanteans/conf:147
-msgid "Iron Mine"
-msgstr "Eisenmine"
-
-#: ../../../tribes/atlanteans/conf:148
 msgid "Labyrinth"
 msgstr "Labyrinth"
 
-#: ../../../tribes/atlanteans/conf:149
-msgid "Mill"
-msgstr "Mühle"
+#: ../../../tribes/atlanteans/conf:144
+msgid "Castle"
+msgstr "Burg"
 
-#: ../../../tribes/atlanteans/conf:150
-msgid "Quarry"
-msgstr "Steinbruch"
+#: ../../../tribes/atlanteans/conf:145
+msgid "Guardhall"
+msgstr "Wächterhalle"
 
-#: ../../../tribes/atlanteans/conf:151
-msgid "Sawmill"
-msgstr "Sägewerk"
+#: ../../../tribes/atlanteans/conf:146
+msgid "Guardhouse"
+msgstr "Wachhaus"
 
-#: ../../../tribes/atlanteans/conf:152
+#: ../../../tribes/atlanteans/conf:147
+msgid "High Tower"
+msgstr "Bergfried"
+
+#: ../../../tribes/atlanteans/conf:148
 msgid "Small Tower"
 msgstr "Spähturm"
 
-#: ../../../tribes/atlanteans/conf:153
-msgid "Smelting Works"
-msgstr "Hochofen"
-
-#: ../../../tribes/atlanteans/conf:154
-msgid "Smokery"
-msgstr "Räucherei"
-
-#: ../../../tribes/atlanteans/conf:155
-msgid "Spiderfarm"
-msgstr "Spinnenfarm"
-
-#: ../../../tribes/atlanteans/conf:156
-msgid "Toolsmithy"
-msgstr "Werkzeugmacher"
-
-#: ../../../tribes/atlanteans/conf:157
+#: ../../../tribes/atlanteans/conf:149
 msgid "Tower"
 msgstr "Wachturm"
 
-#: ../../../tribes/atlanteans/conf:158
+#: ../../../tribes/atlanteans/conf:152
+msgid "Headquarters"
+msgstr "Hauptquartier"
+
+#: ../../../tribes/atlanteans/conf:153
 msgid "Warehouse"
 msgstr "Lagerhaus"
 
+#: ../../../tribes/atlanteans/conf:156
+msgid "Armoursmithy"
+msgstr "Rüstungsschmied"
+
+#: ../../../tribes/atlanteans/conf:157
+msgid "Bakery"
+msgstr "Bäckerei"
+
+#: ../../../tribes/atlanteans/conf:158
+msgid "Blackroot Farm"
+msgstr "Schwarzwurzel-Farm"
+
 #: ../../../tribes/atlanteans/conf:159
+msgid "Charcoal Burner's House"
+msgstr "Köhlerei"
+
+#: ../../../tribes/atlanteans/conf:160
+msgid "Coal Mine"
+msgstr "Kohlemine"
+
+#: ../../../tribes/atlanteans/conf:161
+msgid "Crystal Mine"
+msgstr "Kristallmine"
+
+#: ../../../tribes/atlanteans/conf:162
+msgid "Farm"
+msgstr "Bauernhof"
+
+#: ../../../tribes/atlanteans/conf:163
+msgid "Fish Breeder's House"
+msgstr "Fischzüchterhütte"
+
+#: ../../../tribes/atlanteans/conf:164
+msgid "Fisher's House"
+msgstr "Fischerhütte"
+
+#: ../../../tribes/atlanteans/conf:165
+msgid "Forester's House"
+msgstr "Försterhütte"
+
+#: ../../../tribes/atlanteans/conf:166
+msgid "Gold Mine"
+msgstr "Goldmine"
+
+#: ../../../tribes/atlanteans/conf:167
+msgid "Goldweaver"
+msgstr "Goldweber"
+
+#: ../../../tribes/atlanteans/conf:168
+msgid "Hunter's House"
+msgstr "Jägerhütte"
+
+#: ../../../tribes/atlanteans/conf:169
+msgid "Iron Mine"
+msgstr "Eisenmine"
+
+#: ../../../tribes/atlanteans/conf:170
+msgid "Mill"
+msgstr "Mühle"
+
+#: ../../../tribes/atlanteans/conf:171
+msgid "Quarry"
+msgstr "Steinbruch"
+
+#: ../../../tribes/atlanteans/conf:172
+msgid "Sawmill"
+msgstr "Sägewerk"
+
+#: ../../../tribes/atlanteans/conf:173
+msgid "Smelting Works"
+msgstr "Hochofen"
+
+#: ../../../tribes/atlanteans/conf:174
+msgid "Smokery"
+msgstr "Räucherei"
+
+#: ../../../tribes/atlanteans/conf:175
+msgid "Spiderfarm"
+msgstr "Spinnenfarm"
+
+#: ../../../tribes/atlanteans/conf:176
+msgid "Toolsmithy"
+msgstr "Werkzeugmacher"
+
+#: ../../../tribes/atlanteans/conf:177
 msgid "Weapon Smithy"
 msgstr "Waffenschmied"
 
-#: ../../../tribes/atlanteans/conf:160
+#: ../../../tribes/atlanteans/conf:178
 msgid "Weaving-Mill"
 msgstr "Weberei"
 
-#: ../../../tribes/atlanteans/conf:161
+#: ../../../tribes/atlanteans/conf:179
 msgid "Well"
 msgstr "Brunnen"
 
-#: ../../../tribes/atlanteans/conf:162
+#: ../../../tribes/atlanteans/conf:180
 msgid "Woodcutter's House"
 msgstr "Holzfällerhütte"
+
+#: ../../../tribes/atlanteans/conf:183
+#, fuzzy
+msgid "Headquarters medium"
+msgstr "norm. Hauptquartier"
+
+#: ../../../tribes/atlanteans/conf:184
+#, fuzzy
+msgid "Castle village"
+msgstr "Burg Dorf"
 
 #~ msgid "This shields are used by the best soldiers of the atlantids"
 #~ msgstr "Diese Schilde werden nur von den besten Soldaten der Atlanter benutzt."

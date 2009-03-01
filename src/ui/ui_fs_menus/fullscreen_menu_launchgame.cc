@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "player.h"
 #include "playerdescrgroup.h"
 #include "profile.h"
+#include "warning.h"
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	(GameSettingsProvider * const settings, GameController * const ctrl)
@@ -93,7 +94,7 @@ m_mapname
 	 Align_HCenter),
 m_notes
 	(this,
-	 m_xres * 3 / 5, m_yres * 9 / 50, m_xres * 22 / 25, m_yres / 10,
+	 m_xres * 2 / 25, m_yres * 9 / 50, m_xres * 21 / 25, m_yres / 10,
 	 std::string()),
 
 // Variables and objects used in the menu
@@ -198,7 +199,13 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
 void Fullscreen_Menu_LaunchGame::start_clicked()
 {
 	if (!g_fs->FileExists(m_filename))
-		throw wexception("Tried to start a game with a file you don't have.");
+		throw warning(_("File not found"),
+		             (_("Widelands tried to start a game with a file that could "
+		                "not be found at given path.\nThe file was: ")
+		                + m_filename + "\n"
+		                + _("If this happens in a network game, the host might "
+		                "have selected a file you do not have. In that case you "
+		                "should ask the host to send you the file.")).c_str());
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
 			end_modal(1 + m_is_scenario);

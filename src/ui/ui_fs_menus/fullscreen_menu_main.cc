@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@ m_fs
 	(fs_small()),
 m_fn
 	(ui_fn()),
+wlcr(WLCR),
 
 // Buttons
 singleplayer
@@ -100,11 +101,12 @@ exit
 version
 	(this,
 	 m_xres, m_yres,
-	 std::string(_("Version ")) + build_id(),              Align_BottomRight),
+	 std::string(_("Version ")) + build_id(), Align_BottomRight),
 copyright
 	(this,
 	 0, m_yres,
-	 _("(C) 2002-2008 by the Widelands Development Team"), Align_BottomLeft)
+	 (wlcr + _("by the Widelands Development Team")).c_str(),
+	 Align_BottomLeft)
 {
 	version.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	copyright.set_font(m_fn, m_fs, UI_FONT_CLR_FG);

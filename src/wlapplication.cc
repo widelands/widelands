@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,6 +54,7 @@
 #include "tribe.h"
 #include "ui_messagebox.h"
 #include "ui_progresswindow.h"
+#include "warning.h"
 #include "wexception.h"
 
 #include "log.h"
@@ -1168,6 +1169,10 @@ void WLApplication::mainmenu()
 			case Fullscreen_Menu_Main::mm_exit:
 				return;
 			}
+		} catch (warning& e) {
+			messagetitle = "Warning: ";
+			messagetitle += e.title();
+			message = e.what();
 		} catch (const std::exception& e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
@@ -1184,6 +1189,7 @@ void WLApplication::mainmenu()
 					 "during the game. It is often - though not always - possible "
 					 "to load it and continue playing.\n");
 		}
+
 	}
 }
 
@@ -1259,7 +1265,8 @@ void WLApplication::mainmenu_multiplayer()
 			IPaddress peer;
 
 			if (not host_address)
-				throw wexception("Address of game server is no good");
+				throw warning("Invalid Adress",
+				             _("The address of the game server is invalid"));
 
 			peer.host=addr;
 			peer.port=port;
@@ -1453,7 +1460,7 @@ bool WLApplication::new_game()
 	Widelands::Game game;
 
 	if (code > 2) // code > 2 is a multi player savegame.
-		throw wexception("Something went wrong! a savegmae was selected");
+		throw wexception("Something went wrong! a savegame was selected");
 	if (code <= 0)
 		return false;
 	if (code == 2) { // scenario

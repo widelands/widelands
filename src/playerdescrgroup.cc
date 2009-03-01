@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->plr_name = new UI::Textarea
 		(this, 0, 0, w * 11 / 50, h, std::string(), Align_Left);
 	d->plr_name->set_font(fname, fsize, UI_FONT_CLR_FG);
-	d->btnEnablePlayer = new UI::Checkbox(this, Point(w / 5, 0));
+	d->btnEnablePlayer = new UI::Checkbox(this, Point(w * 29 / 125 - 23, 0));
 	d->btnEnablePlayer->changedto.set
 		(this, &PlayerDescriptionGroup::enable_player);
 	d->btnPlayerType = new UI::Button<PlayerDescriptionGroup>

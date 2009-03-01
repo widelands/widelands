@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3583\n"
+"Project-Id-Version: Widelands svn3662\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-12-13 13:23+0000\n"
+"POT-Creation-Date: 2009-03-01 11:50+0000\n"
 "PO-Revision-Date: 2008-12-13 14:10+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -113,466 +113,482 @@ msgstr "frisch gesäte Weinrebe"
 msgid "Wine ripe"
 msgstr "reife Weinrebe"
 
-#: ../../../tribes/empire/conf:57
+#: ../../../tribes/empire/conf:59
 msgid "Advanced Lance"
 msgstr "Verbesserte Lanze"
 
-#: ../../../tribes/empire/conf:58
+#: ../../../tribes/empire/conf:60
 msgid "Armour"
 msgstr "Harnisch"
 
-#: ../../../tribes/empire/conf:59
+#: ../../../tribes/empire/conf:61
 msgid "Axe"
 msgstr "Axt"
 
-#: ../../../tribes/empire/conf:60
+#: ../../../tribes/empire/conf:62
 msgid "Peel"
 msgstr "Brotschieber"
 
-#: ../../../tribes/empire/conf:61
+#: ../../../tribes/empire/conf:63
 msgid "Basket"
 msgstr "Korb"
 
-#: ../../../tribes/empire/conf:62
+#: ../../../tribes/empire/conf:64
 msgid "Beer"
 msgstr "Bier"
 
-#: ../../../tribes/empire/conf:63
+#: ../../../tribes/empire/conf:65
 msgid "Bread"
 msgstr "Brot"
 
-#: ../../../tribes/empire/conf:64
+#: ../../../tribes/empire/conf:66
 msgid "Chain-Armour"
 msgstr "Kettenharnisch"
 
-#: ../../../tribes/empire/conf:65
+#: ../../../tribes/empire/conf:67
 msgid "Cloth"
 msgstr "Stoff"
 
-#: ../../../tribes/empire/conf:66
+#: ../../../tribes/empire/conf:68
 msgid "Coal"
 msgstr "Kohle"
 
-#: ../../../tribes/empire/conf:67
+#: ../../../tribes/empire/conf:69
 msgid "Fire Tongs"
 msgstr "Feuerzange"
 
-#: ../../../tribes/empire/conf:68
+#: ../../../tribes/empire/conf:70
 msgid "Fish"
 msgstr "Fisch"
 
-#: ../../../tribes/empire/conf:69
+#: ../../../tribes/empire/conf:71
 msgid "Fishing Rod"
 msgstr "Angel"
 
-#: ../../../tribes/empire/conf:70
+#: ../../../tribes/empire/conf:72
 msgid "Flour"
 msgstr "Mehl"
 
-#: ../../../tribes/empire/conf:71
+#: ../../../tribes/empire/conf:73
 msgid "Gold"
 msgstr "Gold"
 
-#: ../../../tribes/empire/conf:72
+#: ../../../tribes/empire/conf:74
 msgid "Goldstone"
 msgstr "Golderz"
 
-#: ../../../tribes/empire/conf:73
+#: ../../../tribes/empire/conf:75
 msgid "Grape"
 msgstr "Weintrauben"
 
-#: ../../../tribes/empire/conf:74
+#: ../../../tribes/empire/conf:76
 msgid "Hammer"
 msgstr "Hammer"
 
-#: ../../../tribes/empire/conf:75
+#: ../../../tribes/empire/conf:77
 msgid "Heavy Lance"
 msgstr "Schwere Lanze"
 
-#: ../../../tribes/empire/conf:76
+#: ../../../tribes/empire/conf:78
 msgid "Helmet"
 msgstr "Helm"
 
-#: ../../../tribes/empire/conf:77
+#: ../../../tribes/empire/conf:79
 msgid "Hunting Spear"
 msgstr "Jagdspeer"
 
-#: ../../../tribes/empire/conf:78
+#: ../../../tribes/empire/conf:80
 msgid "Iron"
 msgstr "Eisen"
 
-#: ../../../tribes/empire/conf:79
+#: ../../../tribes/empire/conf:81
 msgid "Iron Ore"
 msgstr "Eisenerz"
 
-#: ../../../tribes/empire/conf:80
+#: ../../../tribes/empire/conf:82
 msgid "Kitchen Tools"
 msgstr "Küchengerät"
 
-#: ../../../tribes/empire/conf:81
+#: ../../../tribes/empire/conf:83
 msgid "Lance"
 msgstr "Lanze"
 
-#: ../../../tribes/empire/conf:82
+#: ../../../tribes/empire/conf:84
 msgid "Marble Column"
 msgstr "Marmorsäulen"
 
-#: ../../../tribes/empire/conf:83
+#: ../../../tribes/empire/conf:85
 msgid "Marble"
 msgstr "Marmor"
 
-#: ../../../tribes/empire/conf:84
+#: ../../../tribes/empire/conf:86
 msgid "Meal"
 msgstr "Mahlzeit"
 
-#: ../../../tribes/empire/conf:85
+#: ../../../tribes/empire/conf:87
 msgid "Meat"
 msgstr "Fleisch"
 
-#: ../../../tribes/empire/conf:86
+#: ../../../tribes/empire/conf:88
 msgid "Pick"
 msgstr "Spitzhacke"
 
-#: ../../../tribes/empire/conf:87
+#: ../../../tribes/empire/conf:89
 msgid "Plate-Armour"
 msgstr "Plattenharnisch"
 
-#: ../../../tribes/empire/conf:88
+#: ../../../tribes/empire/conf:90
 msgid "Ration"
 msgstr "Ration"
 
-#: ../../../tribes/empire/conf:89
+#: ../../../tribes/empire/conf:91
 msgid "Saw"
 msgstr "Säge"
 
-#: ../../../tribes/empire/conf:90
+#: ../../../tribes/empire/conf:92
 msgid "Scythe"
 msgstr "Sense"
 
-#: ../../../tribes/empire/conf:91
+#: ../../../tribes/empire/conf:93
 msgid "Shovel"
 msgstr "Schaufel"
 
-#: ../../../tribes/empire/conf:92
+#: ../../../tribes/empire/conf:94
 msgid "Stones"
 msgstr "Steine"
 
-#: ../../../tribes/empire/conf:93
+#: ../../../tribes/empire/conf:95
 msgid "Trunk"
 msgstr "Stamm"
 
-#: ../../../tribes/empire/conf:94
+#: ../../../tribes/empire/conf:96
 msgid "War-Lance"
 msgstr "Kriegslanze"
 
-#: ../../../tribes/empire/conf:95
+#: ../../../tribes/empire/conf:97
 msgid "Water"
 msgstr "Wasser"
 
-#: ../../../tribes/empire/conf:96
+#: ../../../tribes/empire/conf:98
 msgid "Wheat"
 msgstr "Weizen"
 
-#: ../../../tribes/empire/conf:97
+#: ../../../tribes/empire/conf:99
 msgid "Wine"
 msgstr "Wein"
 
-#: ../../../tribes/empire/conf:98
+#: ../../../tribes/empire/conf:100
 msgid "Wood"
 msgstr "Holz"
 
-#: ../../../tribes/empire/conf:99
+#: ../../../tribes/empire/conf:101
 msgid "Wood Lance"
 msgstr "Holzlanze"
 
-#: ../../../tribes/empire/conf:100
+#: ../../../tribes/empire/conf:102
 msgid "Wool"
 msgstr "Wolle"
 
-#: ../../../tribes/empire/conf:101
+#: ../../../tribes/empire/conf:105
 msgid "Carrier"
 msgstr "Träger"
 
-#: ../../../tribes/empire/conf:102
-msgid "Armoursmith"
-msgstr "Rüstungsschmied"
-
-#: ../../../tribes/empire/conf:103
-msgid "Baker"
-msgstr "Bäcker"
-
-#: ../../../tribes/empire/conf:104
-msgid "Brewer"
-msgstr "Brauer"
-
-#: ../../../tribes/empire/conf:105
-msgid "Builder"
-msgstr "Baumeister"
-
-#: ../../../tribes/empire/conf:106
-msgid "Burner"
-msgstr "Brenner"
-
-#: ../../../tribes/empire/conf:107
-msgid "Farmer"
-msgstr "Bauer"
-
 #: ../../../tribes/empire/conf:108
-msgid "Fisher"
-msgstr "Fischer"
-
-#: ../../../tribes/empire/conf:109
-msgid "Forester"
-msgstr "Förster"
-
-#: ../../../tribes/empire/conf:110
-msgid "Geologist"
-msgstr "Geologe"
-
-#: ../../../tribes/empire/conf:111
-msgid "Hunter"
-msgstr "Jäger"
-
-#: ../../../tribes/empire/conf:112
-msgid "Innkeeper"
-msgstr "Wirt"
-
-#: ../../../tribes/empire/conf:113
-msgid "Lumberjack"
-msgstr "Holzfäller"
-
-#: ../../../tribes/empire/conf:114
-msgid "Master Miner"
-msgstr "Bergwerksmeister"
-
-#: ../../../tribes/empire/conf:115
-msgid "Miller"
-msgstr "Müller"
-
-#: ../../../tribes/empire/conf:116
-msgid "Miner"
-msgstr "Bergmann"
-
-#: ../../../tribes/empire/conf:117
-msgid "Pig Breeder"
-msgstr "Schweinezüchter"
-
-#: ../../../tribes/empire/conf:118
-msgid "Shepherd"
-msgstr "Schäfer"
-
-#: ../../../tribes/empire/conf:119
-msgid "Smelter"
-msgstr "Hüttenarbeiter"
-
-#: ../../../tribes/empire/conf:120
 msgid "Soldier"
 msgstr "Soldat"
 
+#: ../../../tribes/empire/conf:111
+msgid "Armoursmith"
+msgstr "Rüstungsschmied"
+
+#: ../../../tribes/empire/conf:112
+msgid "Baker"
+msgstr "Bäcker"
+
+#: ../../../tribes/empire/conf:113
+msgid "Brewer"
+msgstr "Brauer"
+
+#: ../../../tribes/empire/conf:114
+msgid "Builder"
+msgstr "Baumeister"
+
+#: ../../../tribes/empire/conf:115
+msgid "Burner"
+msgstr "Brenner"
+
+#: ../../../tribes/empire/conf:116
+msgid "Farmer"
+msgstr "Bauer"
+
+#: ../../../tribes/empire/conf:117
+msgid "Fisher"
+msgstr "Fischer"
+
+#: ../../../tribes/empire/conf:118
+msgid "Forester"
+msgstr "Förster"
+
+#: ../../../tribes/empire/conf:119
+msgid "Geologist"
+msgstr "Geologe"
+
+#: ../../../tribes/empire/conf:120
+msgid "Hunter"
+msgstr "Jäger"
+
 #: ../../../tribes/empire/conf:121
+msgid "Innkeeper"
+msgstr "Wirt"
+
+#: ../../../tribes/empire/conf:122
+msgid "Lumberjack"
+msgstr "Holzfäller"
+
+#: ../../../tribes/empire/conf:123
+msgid "Master Miner"
+msgstr "Bergwerksmeister"
+
+#: ../../../tribes/empire/conf:124
+msgid "Miller"
+msgstr "Müller"
+
+#: ../../../tribes/empire/conf:125
+msgid "Miner"
+msgstr "Bergmann"
+
+#: ../../../tribes/empire/conf:126
+msgid "Pig Breeder"
+msgstr "Schweinezüchter"
+
+#: ../../../tribes/empire/conf:127
+msgid "Shepherd"
+msgstr "Schäfer"
+
+#: ../../../tribes/empire/conf:128
+msgid "Smelter"
+msgstr "Hüttenarbeiter"
+
+#: ../../../tribes/empire/conf:129
 msgid "Stonemason"
 msgstr "Steinmetz"
 
-#: ../../../tribes/empire/conf:122
+#: ../../../tribes/empire/conf:130
 msgid "Toolsmith"
 msgstr "Werkzeugmacher"
 
-#: ../../../tribes/empire/conf:123
+#: ../../../tribes/empire/conf:131
 msgid "Trainer"
 msgstr "Trainer"
 
-#: ../../../tribes/empire/conf:124
-msgid "Weaponsmithy"
+#: ../../../tribes/empire/conf:132
+#, fuzzy
+msgid "Weaponsmith"
 msgstr "Waffenschmiede"
 
-#: ../../../tribes/empire/conf:125
+#: ../../../tribes/empire/conf:133
 msgid "Weaver"
 msgstr "Weber"
 
-#: ../../../tribes/empire/conf:126
+#: ../../../tribes/empire/conf:134
 msgid "Vine Farmer"
 msgstr "Weinbauer"
 
-#: ../../../tribes/empire/conf:127
-msgid "Colosseum"
-msgstr "Kolosseum"
-
-#: ../../../tribes/empire/conf:128
-msgid "Arena"
-msgstr "Arena"
-
-#: ../../../tribes/empire/conf:129
-msgid "Armour Smithy"
-msgstr "Rüstungsschmiede"
-
-#: ../../../tribes/empire/conf:130
-msgid "Bakery"
-msgstr "Bäckerei"
-
-#: ../../../tribes/empire/conf:131
-msgid "Sentry"
-msgstr "Wachposten"
-
-#: ../../../tribes/empire/conf:132
-msgid "Barracks"
-msgstr "Baracke"
-
-#: ../../../tribes/empire/conf:133
-msgid "Barrier"
-msgstr "Barriere"
-
-#: ../../../tribes/empire/conf:134
-msgid "Brewery"
-msgstr "Brauerei"
-
-#: ../../../tribes/empire/conf:135
-msgid "Charcoal Burner"
-msgstr "Köhlerei"
-
-#: ../../../tribes/empire/conf:136
-msgid "Castle"
-msgstr "Burg"
-
 #: ../../../tribes/empire/conf:137
-msgid "Deep Coal Mine"
-msgstr "Tiefe Kohlenmine"
-
-#: ../../../tribes/empire/conf:138
-msgid "Coal Mine"
-msgstr "Kohlenmine"
-
-#: ../../../tribes/empire/conf:139
 msgid "Construction Site"
 msgstr "Baustelle"
 
 #: ../../../tribes/empire/conf:140
-msgid "Deep Gold Mine"
-msgstr "Tiefe Goldmine"
+msgid "Colosseum"
+msgstr "Kolosseum"
 
 #: ../../../tribes/empire/conf:141
-msgid "Deep Marble Mine"
-msgstr "Tiefe Marmormine"
+msgid "Arena"
+msgstr "Arena"
 
 #: ../../../tribes/empire/conf:142
-msgid "Deep Iron Ore Mine"
-msgstr "Tiefe Eisenmine"
-
-#: ../../../tribes/empire/conf:143
-msgid "Farm"
-msgstr "Bauernhof"
-
-#: ../../../tribes/empire/conf:144
-msgid "Fisher's House"
-msgstr "Fischerhaus"
-
-#: ../../../tribes/empire/conf:145
-msgid "Forester's House"
-msgstr "Forsthaus"
-
-#: ../../../tribes/empire/conf:146
-msgid "Fortress"
-msgstr "Festung"
-
-# XXX ??
-#: ../../../tribes/empire/conf:147
-msgid "Gold Mine"
-msgstr "Goldmine"
-
-#: ../../../tribes/empire/conf:148
-msgid "Headquarters"
-msgstr "Hauptquartier"
-
-#: ../../../tribes/empire/conf:149
-msgid "Hunter's House"
-msgstr "Jagdhaus"
-
-#: ../../../tribes/empire/conf:150
-msgid "Inn"
-msgstr "Wirtshaus"
-
-#: ../../../tribes/empire/conf:151
-msgid "Lumberjack's House"
-msgstr "Holzfällerhaus"
-
-#: ../../../tribes/empire/conf:152
-msgid "Marble Mine"
-msgstr "Marmormine"
-
-#: ../../../tribes/empire/conf:153
-msgid "Mill"
-msgstr "Mühle"
-
-#: ../../../tribes/empire/conf:154
-msgid "Iron Ore Mine"
-msgstr "Eisenmine"
-
-#: ../../../tribes/empire/conf:155
-msgid "Outpost"
-msgstr "Außenposten"
-
-#: ../../../tribes/empire/conf:156
-msgid "Piggery"
-msgstr "Schweinezucht"
-
-#: ../../../tribes/empire/conf:157
-msgid "Quarry"
-msgstr "Steinbruch"
-
-#: ../../../tribes/empire/conf:158
-msgid "Sawmill"
-msgstr "Sägewerk"
-
-#: ../../../tribes/empire/conf:159
-msgid "Sheepfarm"
-msgstr "Schäferei"
-
-#: ../../../tribes/empire/conf:160
-msgid "Smelting Works"
-msgstr "Hochofen"
-
-#: ../../../tribes/empire/conf:161
-msgid "Stonemason's House"
-msgstr "Steinmetz"
-
-#: ../../../tribes/empire/conf:162
-msgid "Tavern"
-msgstr "Taverne"
-
-#: ../../../tribes/empire/conf:163
-msgid "Toolsmithy"
-msgstr "Werkzeugmacher"
-
-#: ../../../tribes/empire/conf:164
-msgid "Tower"
-msgstr "Turm"
-
-#: ../../../tribes/empire/conf:165
 msgid "Trainingscamp"
 msgstr "Trainingslager"
 
-#: ../../../tribes/empire/conf:166
+#: ../../../tribes/empire/conf:145
+msgid "Sentry"
+msgstr "Wachposten"
+
+#: ../../../tribes/empire/conf:146
+msgid "Barracks"
+msgstr "Baracke"
+
+#: ../../../tribes/empire/conf:147
+msgid "Barrier"
+msgstr "Barriere"
+
+#: ../../../tribes/empire/conf:148
+msgid "Castle"
+msgstr "Burg"
+
+#: ../../../tribes/empire/conf:149
+msgid "Fortress"
+msgstr "Festung"
+
+#: ../../../tribes/empire/conf:150
+msgid "Outpost"
+msgstr "Außenposten"
+
+#: ../../../tribes/empire/conf:151
+msgid "Tower"
+msgstr "Turm"
+
+#: ../../../tribes/empire/conf:154
+msgid "Headquarters"
+msgstr "Hauptquartier"
+
+#: ../../../tribes/empire/conf:155
+#, fuzzy
+msgid "Headquarters shipwreck"
+msgstr "Hauptquartier"
+
+#: ../../../tribes/empire/conf:156
 msgid "Warehouse"
 msgstr "Warenlager"
 
+#: ../../../tribes/empire/conf:159
+msgid "Armour Smithy"
+msgstr "Rüstungsschmiede"
+
+#: ../../../tribes/empire/conf:160
+msgid "Bakery"
+msgstr "Bäckerei"
+
+#: ../../../tribes/empire/conf:161
+msgid "Brewery"
+msgstr "Brauerei"
+
+#: ../../../tribes/empire/conf:162
+msgid "Charcoal Burner"
+msgstr "Köhlerei"
+
+#: ../../../tribes/empire/conf:163
+msgid "Deep Coal Mine"
+msgstr "Tiefe Kohlenmine"
+
+#: ../../../tribes/empire/conf:164
+msgid "Coal Mine"
+msgstr "Kohlenmine"
+
+#: ../../../tribes/empire/conf:165
+msgid "Deep Gold Mine"
+msgstr "Tiefe Goldmine"
+
+#: ../../../tribes/empire/conf:166
+msgid "Deep Marble Mine"
+msgstr "Tiefe Marmormine"
+
 #: ../../../tribes/empire/conf:167
+msgid "Deep Iron Ore Mine"
+msgstr "Tiefe Eisenmine"
+
+#: ../../../tribes/empire/conf:168
+msgid "Farm"
+msgstr "Bauernhof"
+
+#: ../../../tribes/empire/conf:169
+msgid "Fisher's House"
+msgstr "Fischerhaus"
+
+#: ../../../tribes/empire/conf:170
+msgid "Forester's House"
+msgstr "Forsthaus"
+
+# XXX ??
+#: ../../../tribes/empire/conf:171
+msgid "Gold Mine"
+msgstr "Goldmine"
+
+#: ../../../tribes/empire/conf:172
+msgid "Hunter's House"
+msgstr "Jagdhaus"
+
+#: ../../../tribes/empire/conf:173
+msgid "Inn"
+msgstr "Wirtshaus"
+
+#: ../../../tribes/empire/conf:174
+msgid "Lumberjack's House"
+msgstr "Holzfällerhaus"
+
+#: ../../../tribes/empire/conf:175
+msgid "Marble Mine"
+msgstr "Marmormine"
+
+#: ../../../tribes/empire/conf:176
+msgid "Mill"
+msgstr "Mühle"
+
+#: ../../../tribes/empire/conf:177
+msgid "Iron Ore Mine"
+msgstr "Eisenmine"
+
+#: ../../../tribes/empire/conf:178
+msgid "Piggery"
+msgstr "Schweinezucht"
+
+#: ../../../tribes/empire/conf:179
+msgid "Quarry"
+msgstr "Steinbruch"
+
+#: ../../../tribes/empire/conf:180
+msgid "Sawmill"
+msgstr "Sägewerk"
+
+#: ../../../tribes/empire/conf:181
+msgid "Sheepfarm"
+msgstr "Schäferei"
+
+#: ../../../tribes/empire/conf:182
+msgid "Smelting Works"
+msgstr "Hochofen"
+
+#: ../../../tribes/empire/conf:183
+msgid "Stonemason's House"
+msgstr "Steinmetz"
+
+#: ../../../tribes/empire/conf:184
+msgid "Tavern"
+msgstr "Taverne"
+
+#: ../../../tribes/empire/conf:185
+msgid "Toolsmithy"
+msgstr "Werkzeugmacher"
+
+#: ../../../tribes/empire/conf:186
 msgid "Weapon Smithy"
 msgstr "Waffenschmied"
 
-#: ../../../tribes/empire/conf:168
+#: ../../../tribes/empire/conf:187
 msgid "Weaving Mill"
 msgstr "Weberei"
 
-#: ../../../tribes/empire/conf:169
+#: ../../../tribes/empire/conf:188
 msgid "Well"
 msgstr "Brunnen"
 
-#: ../../../tribes/empire/conf:170
+#: ../../../tribes/empire/conf:189
 msgid "Winery"
 msgstr "Weinkellerei"
 
-#: ../../../tribes/empire/conf:171
+#: ../../../tribes/empire/conf:190
 msgid "Vineyard"
 msgstr "Weinhof"
+
+#: ../../../tribes/empire/conf:193
+#, fuzzy
+msgid "Headquarters medium"
+msgstr "norm. Hauptquartier"
+
+#: ../../../tribes/empire/conf:194
+#, fuzzy
+msgid "Castle village"
+msgstr "Burg Dorf"
 
 #~ msgid "This is an advanced lance, with steel top."
 #~ msgstr "Diese verbesserte Lanze besitzt eine Stahlspitze."

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3583\n"
+"Project-Id-Version: Widelands svn3662\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-12-13 13:23+0000\n"
+"POT-Creation-Date: 2009-03-01 11:50+0000\n"
 "PO-Revision-Date: 2008-12-13 14:18+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -27,231 +27,231 @@ msgstr "Winterland"
 msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
 msgstr "Dies ist das weiße, weite und frostige Winterland, in dem die Nordmänner hausen."
 
-#: ../../../worlds/winterland/conf:7
-msgid "Badger"
-msgstr "Dachs"
-
-#: ../../../worlds/winterland/conf:8
-msgid "Bunny"
-msgstr "Hase"
-
+#: ../../../worlds/winterland/conf:7 ../../../worlds/winterland/conf:8
 #: ../../../worlds/winterland/conf:9 ../../../worlds/winterland/conf:10
-#: ../../../worlds/winterland/conf:11 ../../../worlds/winterland/conf:12
-#: ../../../worlds/winterland/conf:13
+#: ../../../worlds/winterland/conf:11
 msgid "Bush"
 msgstr "Busch"
 
+#: ../../../worlds/winterland/conf:12 ../../../worlds/winterland/conf:13
 #: ../../../worlds/winterland/conf:14 ../../../worlds/winterland/conf:15
-#: ../../../worlds/winterland/conf:16 ../../../worlds/winterland/conf:17
 msgid "Dead Tree"
 msgstr "Toter Baum"
 
+#: ../../../worlds/winterland/conf:16 ../../../worlds/winterland/conf:17
 #: ../../../worlds/winterland/conf:18
-msgid "Deer"
-msgstr "Hirsch"
-
-#: ../../../worlds/winterland/conf:19
-msgid "Duck"
-msgstr "Ente"
-
-#: ../../../worlds/winterland/conf:20
-msgid "Elk"
-msgstr "Elch"
-
-#: ../../../worlds/winterland/conf:21
-msgid "Fox"
-msgstr "Fuchs"
-
-#: ../../../worlds/winterland/conf:22 ../../../worlds/winterland/conf:23
-#: ../../../worlds/winterland/conf:24
 msgid "Grass"
 msgstr "Gras"
 
-#: ../../../worlds/winterland/conf:25
-msgid "Lynx"
-msgstr "Luchs"
-
-#: ../../../worlds/winterland/conf:26
-msgid "Marten"
-msgstr "Mader"
-
-#: ../../../worlds/winterland/conf:27 ../../../worlds/winterland/conf:28
+#: ../../../worlds/winterland/conf:19 ../../../worlds/winterland/conf:20
 msgid "Mushroom"
 msgstr "Pilz"
 
-#: ../../../worlds/winterland/conf:29 ../../../worlds/winterland/conf:30
-#: ../../../worlds/winterland/conf:31 ../../../worlds/winterland/conf:32
-#: ../../../worlds/winterland/conf:33 ../../../worlds/winterland/conf:34
+#: ../../../worlds/winterland/conf:21 ../../../worlds/winterland/conf:22
+#: ../../../worlds/winterland/conf:23 ../../../worlds/winterland/conf:24
+#: ../../../worlds/winterland/conf:25 ../../../worlds/winterland/conf:26
 msgid "Pebble"
 msgstr "Kieselsteine"
 
-#: ../../../worlds/winterland/conf:35
-msgid "Reindeer"
-msgstr "Rentier"
-
-#: ../../../worlds/winterland/conf:36
-msgid "Sheep"
-msgstr "Schaf"
-
-#: ../../../worlds/winterland/conf:37 ../../../worlds/winterland/conf:38
-#: ../../../worlds/winterland/conf:39
+#: ../../../worlds/winterland/conf:27 ../../../worlds/winterland/conf:28
+#: ../../../worlds/winterland/conf:29
 msgid "Skeleton"
 msgstr "Skelett"
 
-#: ../../../worlds/winterland/conf:40
+#: ../../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "Schneemann"
 
-#: ../../../worlds/winterland/conf:41 ../../../worlds/winterland/conf:42
-#: ../../../worlds/winterland/conf:43 ../../../worlds/winterland/conf:44
-#: ../../../worlds/winterland/conf:45 ../../../worlds/winterland/conf:46
-#: ../../../worlds/winterland/conf:47
+#: ../../../worlds/winterland/conf:31 ../../../worlds/winterland/conf:32
+#: ../../../worlds/winterland/conf:33 ../../../worlds/winterland/conf:34
+#: ../../../worlds/winterland/conf:35 ../../../worlds/winterland/conf:36
+#: ../../../worlds/winterland/conf:37
 msgid "Standing Stones"
 msgstr "Obelisk"
 
-#: ../../../worlds/winterland/conf:48 ../../../worlds/winterland/conf:49
-#: ../../../worlds/winterland/conf:50 ../../../worlds/winterland/conf:51
-#: ../../../worlds/winterland/conf:52 ../../../worlds/winterland/conf:53
+#: ../../../worlds/winterland/conf:38 ../../../worlds/winterland/conf:39
+#: ../../../worlds/winterland/conf:40 ../../../worlds/winterland/conf:41
+#: ../../../worlds/winterland/conf:42 ../../../worlds/winterland/conf:43
 msgid "Stones"
 msgstr "Steine"
 
-#: ../../../worlds/winterland/conf:54
+#: ../../../worlds/winterland/conf:44
 msgid "Track"
 msgstr "Spur"
 
-#: ../../../worlds/winterland/conf:55
+#: ../../../worlds/winterland/conf:45
 msgid "Aspen"
 msgstr "Espe"
 
-#: ../../../worlds/winterland/conf:56
+#: ../../../worlds/winterland/conf:46
 msgid "Aspen medium"
 msgstr "mittelhohe Espe"
 
-#: ../../../worlds/winterland/conf:57
+#: ../../../worlds/winterland/conf:47
 msgid "Aspen small"
 msgstr "kleine Espe"
 
-#: ../../../worlds/winterland/conf:58
+#: ../../../worlds/winterland/conf:48
 msgid "Aspen tiny"
 msgstr "junge Espe"
 
-#: ../../../worlds/winterland/conf:59
+#: ../../../worlds/winterland/conf:49
 msgid "Oak"
 msgstr "Eiche"
 
-#: ../../../worlds/winterland/conf:60
+#: ../../../worlds/winterland/conf:50
 msgid "Oak medium"
 msgstr "mittelhohe Eiche"
 
-#: ../../../worlds/winterland/conf:61
+#: ../../../worlds/winterland/conf:51
 msgid "Oak small"
 msgstr "kleine Eiche"
 
-#: ../../../worlds/winterland/conf:62
+#: ../../../worlds/winterland/conf:52
 msgid "Oak tiny"
 msgstr "junge Eiche"
 
-#: ../../../worlds/winterland/conf:63
+#: ../../../worlds/winterland/conf:53
 msgid "Spruce"
 msgstr "Fichte"
 
-#: ../../../worlds/winterland/conf:64
+#: ../../../worlds/winterland/conf:54
 msgid "Spruce medium"
 msgstr "mittelhohe Fichte"
 
-#: ../../../worlds/winterland/conf:65
+#: ../../../worlds/winterland/conf:55
 msgid "Spruce small"
 msgstr "kleine Fichte"
 
-#: ../../../worlds/winterland/conf:66
+#: ../../../worlds/winterland/conf:56
 msgid "Spruce tiny"
 msgstr "junge Fichte"
 
-#: ../../../worlds/winterland/conf:67
+#: ../../../worlds/winterland/conf:57
 msgid "Maple"
 msgstr "Ahorn"
 
-#: ../../../worlds/winterland/conf:68
+#: ../../../worlds/winterland/conf:58
 msgid "Maple medium"
 msgstr "mittelhoher Ahorn "
 
-#: ../../../worlds/winterland/conf:69
+#: ../../../worlds/winterland/conf:59
 msgid "Maple small"
 msgstr "kleiner Ahorn"
 
-#: ../../../worlds/winterland/conf:70
+#: ../../../worlds/winterland/conf:60
 msgid "Maple tiny"
 msgstr "junger Ahorn"
 
-#: ../../../worlds/winterland/conf:71
+#: ../../../worlds/winterland/conf:61
 msgid "Birch"
 msgstr "Birke"
 
-#: ../../../worlds/winterland/conf:72
+#: ../../../worlds/winterland/conf:62
 msgid "Birch medium"
 msgstr "mittelhohe Birke"
 
-#: ../../../worlds/winterland/conf:73
+#: ../../../worlds/winterland/conf:63
 msgid "Birch small"
 msgstr "kleine Birke"
 
-#: ../../../worlds/winterland/conf:74
+#: ../../../worlds/winterland/conf:64
 msgid "Birch tiny"
 msgstr "junge Birke"
 
-#: ../../../worlds/winterland/conf:75
+#: ../../../worlds/winterland/conf:65
 msgid "Beech"
 msgstr "Buche"
 
-#: ../../../worlds/winterland/conf:76
+#: ../../../worlds/winterland/conf:66
 msgid "Beech medium"
 msgstr "mittelhohe Buche"
 
-#: ../../../worlds/winterland/conf:77
+#: ../../../worlds/winterland/conf:67
 msgid "Beech small"
 msgstr "kleine Buche"
 
-#: ../../../worlds/winterland/conf:78
+#: ../../../worlds/winterland/conf:68
 msgid "Beech tiny"
 msgstr "junge Buche"
 
-#: ../../../worlds/winterland/conf:79
+#: ../../../worlds/winterland/conf:69
 msgid "Larch"
 msgstr "Lärche"
 
-#: ../../../worlds/winterland/conf:80
+#: ../../../worlds/winterland/conf:70
 msgid "Larch medium"
 msgstr "mittelhohe Lärche"
 
-#: ../../../worlds/winterland/conf:81
+#: ../../../worlds/winterland/conf:71
 msgid "Larch small"
 msgstr "kleine Lärche"
 
-#: ../../../worlds/winterland/conf:82
+#: ../../../worlds/winterland/conf:72
 msgid "Larch tiny"
 msgstr "junge Lärche"
 
-#: ../../../worlds/winterland/conf:83
+#: ../../../worlds/winterland/conf:73
 msgid "Rowan"
 msgstr "Eberesche"
 
-#: ../../../worlds/winterland/conf:84
+#: ../../../worlds/winterland/conf:74
 msgid "Rowan medium"
 msgstr "mittelhohe Eberesche"
 
-#: ../../../worlds/winterland/conf:85
+#: ../../../worlds/winterland/conf:75
 msgid "Rowan small"
 msgstr "kleine Eberesche"
 
-#: ../../../worlds/winterland/conf:86
+#: ../../../worlds/winterland/conf:76
 msgid "Rowan tiny"
 msgstr "junge Eberesche"
 
+#: ../../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Dachs"
+
+#: ../../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Hase"
+
+#: ../../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Hirsch"
+
+#: ../../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "Ente"
+
+#: ../../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Elch"
+
+#: ../../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Fuchs"
+
+#: ../../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Luchs"
+
+#: ../../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Mader"
+
 #: ../../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Rentier"
+
+#: ../../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "Schaf"
+
+#: ../../../worlds/winterland/conf:89
 msgid "Wisent"
 msgstr "Wisent"
 
-#: ../../../worlds/winterland/conf:88
+#: ../../../worlds/winterland/conf:90
 msgid "Wolf"
 msgstr "Wolf"
 

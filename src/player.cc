@@ -24,6 +24,7 @@
 #include "constructionsite.h"
 #include "event.h"
 #include "findimmovable.h"
+#include "i18n.h"
 #include "log.h"
 #include "game.h"
 #include "militarysite.h"
@@ -34,6 +35,7 @@
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"
+#include "warning.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
@@ -100,9 +102,14 @@ void Player::create_default_infrastructure() {
 			event.run(&game);
 		}
 
-	} else
-		// TODO don't use wexception as this is not a "bug" in this case
-		throw wexception("Player %u has no starting point", m_plnum);
+	} else {
+		std::string em = _("Widelands could not start the game, as player ");
+		em += m_plnum;
+		em += _(" has no starting point.\nYou can manually add a starting point "
+		        "with Widelands Editor, to fix this problem.");
+
+		throw warning(_("Missing starting point"), em.c_str());
+	}
 
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,7 @@
 
 #include "helper.h"
 
-#include "wexception.h"
-
 #include <cstdarg>
-
-//TODO: move wexception code into it's own file
 
 /**
  * split a string by whitespace
@@ -54,37 +50,6 @@ void remove_spaces(std::string & s) {
 		 s[s.size() - 1] == '\t' or
 		 s[s.size() - 1] == '\n')
 		s.erase(s.size() - 1, 1);
-}
-
-
-/*
-==============================================================================
-
-class _wexception implementation
-
-==============================================================================
-*/
-#undef wexception
-_wexception::_wexception(const char* file, uint32_t line, const char *fmt, ...)
-throw ()
-{
-	char buffer[512];
-	{
-		va_list va;
-		va_start(va, fmt);
-		vsnprintf(buffer, sizeof(buffer), fmt, va);
-		va_end(va);
-	}
-	std::ostringstream ost;
-	ost << '[' << file << ':' << line << "] " << buffer;
-	m_what = ost.str();
-}
-
-_wexception::~_wexception() throw () {}
-
-const char *_wexception::what() const throw ()
-{
-	return m_what.c_str();
 }
 
 /**
