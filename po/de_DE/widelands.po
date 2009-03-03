@@ -48,7 +48,7 @@ msgstr "Vorgänger"
 
 #: ../../src/writeHTML.cc:98
 msgid "Employers"
-msgstr "Arbeiter"
+msgstr "Arbeitsgeber"
 
 #: ../../src/writeHTML.cc:254 ../../src/writeHTML.cc:260
 msgid "Building types"
@@ -135,15 +135,15 @@ msgstr "Ist Bergwerk."
 
 #: ../../src/writeHTML.cc:371
 msgid "Is big."
-msgstr "ist groß."
+msgstr "Ist groß."
 
 #: ../../src/writeHTML.cc:376
 msgid "Is medium."
-msgstr "ist mittel."
+msgstr "Ist mittel."
 
 #: ../../src/writeHTML.cc:382
 msgid "Is small."
-msgstr "ist klein."
+msgstr "Ist klein."
 
 #: ../../src/writeHTML.cc:389
 msgid "Is not buildable."
@@ -151,11 +151,11 @@ msgstr "Ist nicht baubar."
 
 #: ../../src/writeHTML.cc:396
 msgid "Is enhanced."
-msgstr "Ist erweitert"
+msgstr "Ist erweitert."
 
 #: ../../src/writeHTML.cc:403
 msgid "Is stopable."
-msgstr "Ist stopbar"
+msgstr "Ist stopbar."
 
 #: ../../src/writeHTML.cc:410
 #, c-format
