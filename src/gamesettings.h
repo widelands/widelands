@@ -49,6 +49,9 @@ struct PlayerSettings {
 struct GameSettings {
 	GameSettings() : savegame(false) {}
 
+	/// Number of player position
+	int32_t playernum;
+
 	/// Name of the selected map
 	std::string mapname;
 	std::string mapfilename;
@@ -98,6 +101,8 @@ struct GameSettingsProvider {
 	virtual void setPlayerTribe (uint8_t number, const std::string& tribe) = 0;
 	virtual void setPlayerInit  (uint8_t number, uint8_t index) = 0;
 	virtual void setPlayerName  (uint8_t number, const std::string& name) = 0;
+	virtual void setPlayer      (uint8_t number, PlayerSettings ps) = 0;
+	virtual void setPlayerNumber(uint8_t number) = 0;
 };
 
 

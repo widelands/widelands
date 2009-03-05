@@ -55,7 +55,6 @@ d(new PlayerDescriptionGroupImpl)
 {
 	d->settings = settings;
 	d->plnum = plnum;
-
 	d->plr_name = new UI::Textarea
 		(this, 0, 0, w * 11 / 50, h, std::string(), Align_Left);
 	d->plr_name->set_font(fname, fsize, UI_FONT_CLR_FG);

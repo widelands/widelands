@@ -26,6 +26,7 @@
 #include "gamechatpanel.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "instances.h"
 #include "layered_filesystem.h"
@@ -110,14 +111,24 @@ m_is_savegame  (false)
 	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	uint32_t y = m_yres / 4;
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+	char posIco[42];
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
+		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
+		m_pos[i] =
+			new UI::IDButton<Fullscreen_Menu_LaunchGame, uint8_t>
+				(this,
+				 m_xres / 100, y += m_buth, m_yres * 17 / 500, m_yres * 17 / 500,
+				 1,
+				 g_gr->get_picture(PicMod_Game, posIco),
+				 &Fullscreen_Menu_LaunchGame::switch_to_position, this, i,
+				 _("Change to this position"), false);
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,
-				 m_xres / 25, y += m_buth, m_xres * 16 / 25, m_yres * 17 / 500,
+				 m_xres / 25, y, m_xres * 16 / 25, m_yres * 17 / 500,
 				 settings, i,
 				 m_fn, m_fs);
-
+	}
 }
 
 
@@ -239,6 +250,19 @@ void Fullscreen_Menu_LaunchGame::refresh()
 
 	if (m_settings->settings().scenario)
 		set_scenario_values();
+
+	// "Choose Position" Buttons in frond of PDG
+	for (int32_t i = 0; i < m_nr_players; ++i) {
+		m_pos[i]->set_visible(true);
+		const PlayerSettings& player = m_settings->settings().players[i];
+		if ((player.state == PlayerSettings::stateOpen)
+			| (player.state == PlayerSettings::stateComputer))
+			m_pos[i]->set_enabled(true);
+		else
+			m_pos[i]->set_enabled(false);
+	}
+	for (uint32_t i = m_nr_players; i < MAX_PLAYERS; ++i)
+	  m_pos[i]->set_visible(false);
 
 	// Print warnings and information between title and player desc. group
 	if (!g_fs->FileExists(m_filename)) {
@@ -383,6 +407,24 @@ void Fullscreen_Menu_LaunchGame::set_scenario_values()
 	for (uint32_t i = 0; i < nrplayers; ++i) {
 		m_settings->setPlayerName (i, map.get_scenario_player_name(i+1));
 		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i+1));
+	}
+}
+
+/**
+ * Called when a position-button was clicked.
+ */
+void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
+{
+	GameSettings settings = m_settings->settings();
+
+	PlayerSettings position = settings.players[pos];
+	PlayerSettings player   = settings.players[settings.playernum];
+	if ((pos < m_nr_players) & ((position.state == PlayerSettings::stateOpen)
+		| (position.state == PlayerSettings::stateComputer))) {
+		const PlayerSettings oldOnPos = position;
+		m_settings->setPlayer(pos, player);
+		m_settings->setPlayer(settings.playernum, oldOnPos);
+		m_settings->setPlayerNumber(pos);
 	}
 }
 

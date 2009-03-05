@@ -68,6 +68,7 @@ private:
 	void back_clicked();
 	void start_clicked();
 	void set_scenario_values();
+	void switch_to_position(uint8_t);
 	void load_previous_playerdata();
 	void enable_all_pdgs();
 
@@ -76,8 +77,9 @@ private:
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
-	UI::Button<Fullscreen_Menu_LaunchGame> m_back, m_ok;
+	UI::Button  <Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
+	UI::Button  <Fullscreen_Menu_LaunchGame> m_back, m_ok;
+	UI::IDButton<Fullscreen_Menu_LaunchGame, uint8_t> * m_pos[MAX_PLAYERS];
 	UI::Textarea             m_title, m_mapname;
 	UI::Multiline_Textarea   m_notes;
 	GameSettingsProvider   * m_settings;

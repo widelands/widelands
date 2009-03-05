@@ -120,6 +120,14 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerName(number, name);
 	}
 
+	virtual void setPlayer(uint8_t number, PlayerSettings ps) {
+		//\TODO implement the handling
+	}
+
+	virtual void setPlayerNumber(uint8_t number) {
+		//\TODO implement the handling
+	}
+
 private:
 	NetHost * h;
 };
@@ -619,6 +627,17 @@ void NetHost::setPlayerName(uint8_t number, const std::string& name)
 	s.Unsigned8(number);
 	writeSettingPlayer(s, number);
 	broadcast(s);
+}
+
+
+void NetHost::setPlayer(uint8_t number, PlayerSettings ps)
+{
+	//\TODO handle player positionchanges
+}
+
+void NetHost::setPlayerNumber(uint8_t number)
+{
+	//\TODO handle this
 }
 
 void NetHost::setMultiplayerGameSettings()

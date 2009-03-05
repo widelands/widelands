@@ -296,6 +296,16 @@ void NetClient::setPlayerName(uint8_t number, const std::string& name)
 	// launchgame-menu, here properly should be a set_name function
 }
 
+void NetClient::setPlayer(uint8_t number, PlayerSettings ps)
+{
+	//\TODO tell the host that player would like to change the position.
+}
+
+void NetClient::setPlayerNumber(uint8_t number)
+{
+	//\TODO implement the handling
+}
+
 uint32_t NetClient::realSpeed()
 {
 	return d->realspeed;

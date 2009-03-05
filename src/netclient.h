@@ -74,6 +74,8 @@ struct NetClient :
 	virtual void setPlayerTribe (uint8_t number, const std::string& tribe);
 	virtual void setPlayerInit  (uint8_t number, uint8_t index);
 	virtual void setPlayerName  (uint8_t number, const std::string& name);
+	virtual void setPlayer      (uint8_t number, PlayerSettings ps);
+	virtual void setPlayerNumber(uint8_t number);
 
 	// ChatProvider interface
 	void send(const std::string& msg);

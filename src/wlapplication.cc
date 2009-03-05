@@ -1332,6 +1332,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		Widelands::Tribe_Descr::get_all_tribe_infos(s.tribes);
 		s.scenario = false;
 		s.multiplayer = false;
+		s.playernum = 0;
 	}
 
 	virtual void setScenario(bool const set) {s.scenario = set;}
@@ -1441,6 +1442,20 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].name = name;
 	}
 
+	virtual void setPlayer(uint8_t number, PlayerSettings ps) {
+		if (number >= s.players.size())
+			return;
+
+		s.players[number] = ps;
+	}
+
+	virtual void setPlayerNumber(uint8_t number) {
+		if (number >= s.players.size())
+			return;
+
+		s.playernum = number;
+	}
+
 private:
 	GameSettings s;
 };
@@ -1471,8 +1486,9 @@ bool WLApplication::new_game()
 			throw;
 		}
 	} else { // normal singleplayer
+		uint8_t pn = sp.settings().playernum + 1;
 		boost::scoped_ptr<GameController> ctrl
-				(GameController::createSinglePlayer(&game, true, 1));
+				(GameController::createSinglePlayer(&game, true, pn));
 		try {
 			UI::ProgressWindow loaderUI;
 			GameTips tips (loaderUI);
@@ -1480,7 +1496,7 @@ bool WLApplication::new_game()
 			loaderUI.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_iabase(new Interactive_Player(game, 1, false, false));
+			game.set_iabase(new Interactive_Player(game, pn , false, false));
 			game.init_newgame(loaderUI, sp.settings());
 			game.run(loaderUI, Widelands::Game::NewNonScenario);
 		} catch (...) {
