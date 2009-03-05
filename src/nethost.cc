@@ -48,9 +48,11 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual const GameSettings& settings() {return h->settings();}
 
 	virtual bool canChangeMap() {return true;}
-	virtual bool canChangePlayerState(uint8_t number) {return number != 0;}
+	virtual bool canChangePlayerState(uint8_t number) {
+		return number != settings().playernum;
+	}
 	virtual bool canChangePlayerTribe(uint8_t number) {
-		if (number == 0)
+		if (number == settings().playernum)
 			return true;
 		if (number >= settings().players.size())
 			return false;
@@ -69,13 +71,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setMap(mapname, mapfilename, maxplayers, savegame);
 	}
 	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) {
-		if (number == 0 || number >= settings().players.size())
+		if (number == settings().playernum || number >= settings().players.size())
 			return;
 
 		h->setPlayerState(number, state);
 	}
 	virtual void nextPlayerState(uint8_t number) {
-		if (number == 0 || number >= settings().players.size())
+		if (number == settings().playernum || number >= settings().players.size())
 			return;
 
 		PlayerSettings::State newstate = PlayerSettings::stateClosed;
@@ -121,11 +123,15 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setPlayer(uint8_t number, PlayerSettings ps) {
-		//\TODO implement the handling
+		if (number >= h->settings().players.size())
+			return;
+		h->setPlayer(number, ps);
 	}
 
 	virtual void setPlayerNumber(uint8_t number) {
-		//\TODO implement the handling
+		if (number >= h->settings().players.size())
+			return;
+		h->setPlayerNumber(number);
 	}
 
 private:
@@ -246,6 +252,7 @@ NetHost::NetHost (const std::string& playername)
 
 	Widelands::Tribe_Descr::get_all_tribe_infos(d->settings.tribes);
 	setMultiplayerGameSettings();
+	d->settings.playernum = 0;
 }
 
 NetHost::~NetHost ()
@@ -290,7 +297,7 @@ void NetHost::initComputerPlayers()
 {
 	const Widelands::Player_Number nr_players = d->game->map().get_nrplayers();
 	iterate_players_existing(p, nr_players, *d->game, plr) {
-		if (p == 1)
+		if (p == d->settings.playernum + 1)
 			continue;
 
 		uint32_t client;
@@ -331,9 +338,10 @@ void NetHost::run()
 
 		loaderUI.step(_("Preparing game"));
 
+		uint8_t pn = d->settings.playernum + 1;
 		d->game = &game;
 		game.set_game_controller(this);
-		Interactive_Player* ipl = new Interactive_Player(game, 1, false, true);
+		Interactive_Player* ipl = new Interactive_Player(game, pn, false, true);
 		ipl->set_chat_provider(&d->chat);
 		game.set_iabase(ipl);
 		if (!d->settings.savegame) //  new game
@@ -632,12 +640,26 @@ void NetHost::setPlayerName(uint8_t number, const std::string& name)
 
 void NetHost::setPlayer(uint8_t number, PlayerSettings ps)
 {
-	//\TODO handle player positionchanges
+	if (number >= d->settings.players.size())
+		return;
+
+	PlayerSettings& player = d->settings.players[number];
+	player = ps;
+
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
 }
 
 void NetHost::setPlayerNumber(uint8_t number)
 {
-	//\TODO handle this
+	if (number >= d->settings.players.size())
+		return;
+
+	d->settings.playernum = number;
 }
 
 void NetHost::setMultiplayerGameSettings()

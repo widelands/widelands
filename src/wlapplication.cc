@@ -1340,7 +1340,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual const GameSettings& settings() {return s;}
 
 	virtual bool canChangeMap() {return true;}
-	virtual bool canChangePlayerState(uint8_t number) {return (!s.scenario & (number != 0));}
+	virtual bool canChangePlayerState(uint8_t number) {return (!s.scenario & (number != s.playernum));}
 	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
 	virtual bool canChangePlayerInit (uint8_t) {return true;}
 
@@ -1496,7 +1496,7 @@ bool WLApplication::new_game()
 			loaderUI.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_iabase(new Interactive_Player(game, pn , false, false));
+			game.set_iabase(new Interactive_Player(game, pn, false, false));
 			game.init_newgame(loaderUI, sp.settings());
 			game.run(loaderUI, Widelands::Game::NewNonScenario);
 		} catch (...) {

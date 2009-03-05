@@ -58,11 +58,11 @@ struct NetHost : public GameController, private SyncCallback {
 	bool canLaunch();
 	void setScenario(bool);//no scenario for multiplayer
 	void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame = false);
-	void setPlayerState(uint8_t number, PlayerSettings::State state);
-	void setPlayerTribe(uint8_t number, const std::string& tribe);
-	void setPlayerInit (uint8_t number, uint8_t index);
-	void setPlayerName (uint8_t number, const std::string& name);
-	void setPlayer     (uint8_t number, PlayerSettings ps);
+	void setPlayerState (uint8_t number, PlayerSettings::State state);
+	void setPlayerTribe (uint8_t number, const std::string& tribe);
+	void setPlayerInit  (uint8_t number, uint8_t index);
+	void setPlayerName  (uint8_t number, const std::string& name);
+	void setPlayer      (uint8_t number, PlayerSettings ps);
 	void setPlayerNumber(uint8_t number);
 	void setMultiplayerGameSettings();//just visible stuff for the select mapmenu
 

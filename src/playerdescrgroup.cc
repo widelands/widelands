@@ -215,13 +215,15 @@ void PlayerDescriptionGroup::enable_pdg(bool enable)
 
 
 /**
- * Show/hide player's tribe button
+ * Show/hide player's tribe and init buttons
  * This is useful for multi player savegames, as the tribes can't be changed
  */
 void PlayerDescriptionGroup::show_tribe_button(bool show)
 {
 	d->btnPlayerTribe ->set_visible(show);
 	d->btnPlayerTribe ->set_enabled(show);
+	d->btnPlayerInit  ->set_visible(show);
+	d->btnPlayerInit  ->set_enabled(show);
 }
 
 
