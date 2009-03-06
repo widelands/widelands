@@ -121,7 +121,7 @@ m_is_savegame  (false)
 				 1,
 				 g_gr->get_picture(PicMod_Game, posIco),
 				 &Fullscreen_Menu_LaunchGame::switch_to_position, this, i,
-				 _("Change to this position"), false);
+				 _("Switch to position"), false);
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,

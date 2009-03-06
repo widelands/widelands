@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 6,
+	NETWORK_PROTOCOL_VERSION = 7,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -249,6 +249,26 @@ enum {
 	 * If no such command is received, then the tribe is not changed.
 	 */
 	NETCMD_SETTING_CHANGETRIBE = 17,
+
+	/**
+	 * During game setup, this is sent by the client to request a change
+	 * to a different starting position. Payload is
+	 * \li Unsigned8: number of the starting point
+	 *
+	 * The client must not assume that the host will accept this request.
+	 * The host may or may not send a \ref NETCMD_SETTING_ALLPLAYERS or
+	 * \ref NETCMD_SETTING_PLAYER command reflecting the changed position.
+	 * If no such command is received, the position is not changed.
+	 */
+	NETCMD_SETTING_CHANGEPOSITION = 18,
+
+	/**
+	 * During game setup, this is sent by the host to a specific player.
+	 * It is the answer on NETCMD_SETTING_CHANGETRIBE, if the player
+	 * starting position was successfully changed. Payload is
+	 * \li Unsigned8: new playernumber
+	 */
+	NETCMD_SET_PLAYERNUMBER = 19,
 
 	/**
 	 * Sent by the client to reply to a \ref NETCMD_SYNCREQUEST command,

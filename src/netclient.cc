@@ -89,6 +89,7 @@ NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);
 
 	d->playernum = -1;
+	d->settings.playernum = -1;
 	d->localplayername = playername;
 	d->modal = 0;
 	d->game = 0;
@@ -186,6 +187,10 @@ void NetClient::think()
 			if (curtime - d->lasttimestamp_realtime > CLIENT_TIMESTAMP_INTERVAL)
 				sendTime();
 		}
+	} else {
+		// Just syncing so both are the same. This is only needed,
+		// because the launchgamemenu needs d->settings.playernum.
+		d->settings.playernum = d->playernum;
 	}
 }
 
@@ -296,14 +301,26 @@ void NetClient::setPlayerName(uint8_t number, const std::string& name)
 	// launchgame-menu, here properly should be a set_name function
 }
 
-void NetClient::setPlayer(uint8_t number, PlayerSettings ps)
+void NetClient::setPlayer(uint8_t number, PlayerSettings)
 {
-	//\TODO tell the host that player would like to change the position.
+	// launchgamemenu sends two requests to setPlayer to switch the both
+	// positions, but as clientside does not do the changes itself, we just
+	// take the number of the position the player wants to change to and
+	// send it to the host
+	if (number == d->playernum)
+		return;
+
+	// Send request
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_CHANGEPOSITION);
+	s.Unsigned8(number);
+	s.send(d->sock);
 }
 
-void NetClient::setPlayerNumber(uint8_t number)
+void NetClient::setPlayerNumber(uint8_t)
 {
-	//\TODO implement the handling
+	//Do nothing - the host will give us an update, if the playernumber was
+	//finally changed.
 }
 
 uint32_t NetClient::realSpeed()
@@ -460,6 +477,12 @@ void NetClient::handle_packet(RecvPacket& packet)
 		recvOnePlayer(player, packet);
 		break;
 	}
+	case NETCMD_SET_PLAYERNUMBER: {
+		uint8_t number = packet.Unsigned8();
+		d->playernum = number;
+		break;
+	}
+
 	case NETCMD_LAUNCH: {
 		if (!d->modal || d->game)
 			throw DisconnectException(_("Unexpectedly received LAUNCH command from server."));

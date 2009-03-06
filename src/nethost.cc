@@ -1171,6 +1171,29 @@ void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 		}
 		break;
 
+	case NETCMD_SETTING_CHANGEPOSITION:
+		if (!d->game) {
+			int8_t pos = r.Unsigned8();
+			PlayerSettings position = d->settings.players[pos];
+			PlayerSettings player   = d->settings.players[client.playernum];
+			int8_t maxplayers = d->settings.players.size();
+			if ((pos < maxplayers) & ((position.state == PlayerSettings::stateOpen)
+				| (position.state == PlayerSettings::stateComputer))) {
+				const PlayerSettings oldOnPos = position;
+				setPlayer(pos, player);
+				setPlayer(client.playernum, oldOnPos);
+				log("[Host] client %i switched to position %i.\n", i, pos);
+
+				client.playernum = pos;
+
+				SendPacket s;
+				s.Unsigned8(NETCMD_SET_PLAYERNUMBER);
+				s.Unsigned8(pos);
+				s.send(client.sock);
+			}
+		}
+		break;
+
 	case NETCMD_TIME:
 		if (!d->game)
 			throw DisconnectException
