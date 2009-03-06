@@ -233,7 +233,7 @@ build-10:
 - Addition of few new maps
 - Addition of two new Empire-campaign-maps
 - Addition of three new ingame music-tracks
-- A lot of localisation-bugs were fixed and new strings for translation were added.
+- A lot of localization-bugs were fixed and new strings for translation were added.
 - Widelands now supports 14 languages (cs_CZ, de_DE, en_EN, es_ES, fi_FI, fr_FR, gl_ES , he_HE, hu_HU, nl_NL, pl_PL, ru_RU, sk_SK, sv_SE)
 - New feature: Mouse-over-hover-help
 - New feature: Tribe ware encyclopedia
@@ -250,10 +250,10 @@ build-10:
 
 build-9half:
 - Updated Campaign Missions
-- Added proper localisation support (language selectable in options menu)
+- Added proper localization support (language selectable in options menu)
 - Font renderer now renders multiple newlines correctly and in richtext
   accepts <br> as newline
-- added localisation patch by Josef + beginning of localisation
+- added localization patch by Josef + beginning of localization
 - f now triggers fullscreen ingame
 - added new maps from winterwind
 - implemented new trigger system. This invalidates every scenario, campaign and map.
