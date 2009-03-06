@@ -271,7 +271,7 @@ build-9half:
 
 build-9:
 - Chat for multiplayer
-- Global Stock, Menue structure reworked
+- Global Stock, Menu structure reworked
 - General statistics menu
 - Building statistics menu
 - Ware Statistics Menu
@@ -286,11 +286,11 @@ build-9:
   * new Option Dialog
   * UIListselect can have now a selection-indicator
   * WatchWindow functionality is user selectable
-- Windows can be minimized (middle mouse or CTRL+left mouse)
+- Windows can be minimized (middle mouse or Ctrl+left mouse)
 - fixed crash when using 32-bit fullscreen mode under win32
 
 build-8:
-- some ui ergonomics (new mapselect dialog,
+- some UI ergonomics (new mapselect dialog,
   double click function in listselects)
 - resources and default resources support
 - loading/saving of maps
