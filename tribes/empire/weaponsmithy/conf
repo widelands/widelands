@@ -58,7 +58,7 @@ playFX=../../../smiths/sharpening 120
 produce=advanced_lance
 
 [produce_heavy_lance]
-return=skipped unless economy needs war_lance
+return=skipped unless economy needs heavy_lance
 consume=coal:2 gold iron wood
 sleep=32000
 playFX=../../../smiths/smith 192
