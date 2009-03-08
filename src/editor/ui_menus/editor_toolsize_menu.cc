@@ -30,6 +30,12 @@ inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
 }
 
 
+inline static void update_label_size(UI::Textarea & ta, uint32_t const val) {
+	char buffer[250];
+	snprintf(buffer, sizeof(buffer), _("Current Size: %u"), val + 1);
+	ta.set_text(buffer);
+}
+
 /**
  * Create all the buttons etc...
 */
@@ -54,22 +60,13 @@ m_decrease
 	 std::string(),
 	 0 < parent->get_sel_radius())
 {
-	char buffer[250];
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("Current Size: %u"), parent->get_sel_radius() + 1);
-	m_textarea.set_text(buffer);
+	update_label_size(m_textarea, parent->get_sel_radius());
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 
-inline static void update_label_size(UI::Textarea & ta, uint32_t const val) {
-	char buffer[250];
-	snprintf(buffer, sizeof(buffer), _("Current Size: %u"), val + 1);
-	ta.set_text(buffer);
-}
 void Editor_Toolsize_Menu::decrease_radius() {
 	assert(0 < eia().get_sel_radius());
 	uint32_t const val = eia().get_sel_radius() - 1;
