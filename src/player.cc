@@ -105,8 +105,11 @@ void Player::create_default_infrastructure() {
 	} else {
 		std::string em = _("Widelands could not start the game, as player ");
 		em += m_plnum;
-		em += _(" has no starting point.\nYou can manually add a starting point "
-		        "with Widelands Editor, to fix this problem.");
+		em +=
+			_
+				(" has no starting point.\n"
+				 "You can manually add a starting point with Widelands Editor, to "
+				 "fix this problem.");
 
 		throw warning(_("Missing starting point"), em.c_str());
 	}

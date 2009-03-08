@@ -31,6 +31,7 @@ struct Editor_Interactive;
 /// The tool size window/menu.
 struct Editor_Toolsize_Menu : public UI::UniqueWindow {
 	Editor_Toolsize_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
+	void update(uint32_t);
 
 private:
 	Editor_Interactive & eia();

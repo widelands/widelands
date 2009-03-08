@@ -1177,8 +1177,11 @@ void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 			PlayerSettings position = d->settings.players[pos];
 			PlayerSettings player   = d->settings.players[client.playernum];
 			int8_t maxplayers = d->settings.players.size();
-			if ((pos < maxplayers) & ((position.state == PlayerSettings::stateOpen)
-				| (position.state == PlayerSettings::stateComputer))) {
+			if
+				((pos < maxplayers) &
+				 ((position.state == PlayerSettings::stateOpen) |
+				  (position.state == PlayerSettings::stateComputer)))
+			{
 				const PlayerSettings oldOnPos = position;
 				setPlayer(pos, player);
 				setPlayer(client.playernum, oldOnPos);

@@ -30,12 +30,6 @@ inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
 }
 
 
-inline static void update_label_size(UI::Textarea & ta, uint32_t const val) {
-	char buffer[250];
-	snprintf(buffer, sizeof(buffer), _("Current Size: %u"), val + 1);
-	ta.set_text(buffer);
-}
-
 /**
  * Create all the buttons etc...
 */
@@ -60,26 +54,30 @@ m_decrease
 	 std::string(),
 	 0 < parent->get_sel_radius())
 {
-	update_label_size(m_textarea, parent->get_sel_radius());
+	m_increase.set_repeating(true);
+	m_decrease.set_repeating(true);
+	update(parent->get_sel_radius());
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 
+void Editor_Toolsize_Menu::update(uint32_t const val) {
+	eia().set_sel_radius(val);
+	m_decrease.set_enabled(0 < val);
+	m_increase.set_enabled    (val < MAX_TOOL_AREA);
+	char buffer[250];
+	snprintf(buffer, sizeof(buffer), _("Current Size: %u"), val + 1);
+	m_textarea.set_text(buffer);
+}
+
+
 void Editor_Toolsize_Menu::decrease_radius() {
 	assert(0 < eia().get_sel_radius());
-	uint32_t const val = eia().get_sel_radius() - 1;
-	m_decrease.set_enabled(0 < val);
-	m_increase.set_enabled(true);
-	eia().set_sel_radius(val);
-	update_label_size(m_textarea, val);
+	update(eia().get_sel_radius() - 1);
 }
 void Editor_Toolsize_Menu::increase_radius() {
 	assert(eia().get_sel_radius() < MAX_TOOL_AREA);
-	uint32_t const val = eia().get_sel_radius() + 1;
-	m_decrease.set_enabled(true);
-	m_increase.set_enabled(val < MAX_TOOL_AREA);
-	eia().set_sel_radius(val);
-	update_label_size(m_textarea, val);
+	update(eia().get_sel_radius() + 1);
 }

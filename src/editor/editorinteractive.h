@@ -57,6 +57,7 @@ public:
 
 	void map_clicked();
 	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
+	void set_sel_radius_and_update_menu(uint32_t);
 
 	//  gets called when a keyboard event occurs
 	bool handle_key(bool down, SDL_keysym);

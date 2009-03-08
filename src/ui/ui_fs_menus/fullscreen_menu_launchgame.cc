@@ -210,13 +210,18 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
 void Fullscreen_Menu_LaunchGame::start_clicked()
 {
 	if (!g_fs->FileExists(m_filename))
-		throw warning(_("File not found"),
-		             (_("Widelands tried to start a game with a file that could "
-		                "not be found at given path.\nThe file was: ")
-		                + m_filename + "\n"
-		                + _("If this happens in a network game, the host might "
-		                "have selected a file you do not have. In that case you "
-		                "should ask the host to send you the file.")).c_str());
+		throw warning
+			(_("File not found"),
+			 (_
+			  	("Widelands tried to start a game with a file that could not be "
+			  	 "found at given path.\nThe file was: ")
+			  + m_filename + "\n"
+			  +
+			  _
+			  	("If this happens in a network game, the host might have selected "
+			  	 "a file that you do not have. In that case you should ask the "
+			  	 "host to send you the file."))
+			 .c_str());
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
 			end_modal(1 + m_is_scenario);
@@ -255,14 +260,15 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	for (int32_t i = 0; i < m_nr_players; ++i) {
 		m_pos[i]->set_visible(true);
 		const PlayerSettings& player = m_settings->settings().players[i];
-		if ((player.state == PlayerSettings::stateOpen)
-			| (player.state == PlayerSettings::stateComputer))
+		if
+			((player.state == PlayerSettings::stateOpen) |
+			 (player.state == PlayerSettings::stateComputer))
 			m_pos[i]->set_enabled(true);
 		else
 			m_pos[i]->set_enabled(false);
 	}
 	for (uint32_t i = m_nr_players; i < MAX_PLAYERS; ++i)
-	  m_pos[i]->set_visible(false);
+		m_pos[i]->set_visible(false);
 
 	// Print warnings and information between title and player desc. group
 	if (!g_fs->FileExists(m_filename)) {
@@ -419,8 +425,11 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
 
 	PlayerSettings position = settings.players[pos];
 	PlayerSettings player   = settings.players[settings.playernum];
-	if ((pos < m_nr_players) & ((position.state == PlayerSettings::stateOpen)
-		| (position.state == PlayerSettings::stateComputer))) {
+	if
+		((pos < m_nr_players) &
+		 ((position.state == PlayerSettings::stateOpen) |
+		  (position.state == PlayerSettings::stateComputer)))
+	{
 		const PlayerSettings oldOnPos = position;
 		m_settings->setPlayer(pos, player);
 		m_settings->setPlayer(settings.playernum, oldOnPos);

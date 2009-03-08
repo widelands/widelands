@@ -1265,8 +1265,9 @@ void WLApplication::mainmenu_multiplayer()
 			IPaddress peer;
 
 			if (not host_address)
-				throw warning("Invalid Adress",
-				             _("The address of the game server is invalid"));
+				throw warning
+					("Invalid Adress",
+					 _("The address of the game server is invalid"));
 
 			peer.host=addr;
 			peer.port=port;

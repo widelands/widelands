@@ -121,9 +121,11 @@ void Editor_Interactive::load(std::string const & filename) {
 
 	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 	if (not ml)
-		throw warning(_("Unsupported format"),
-		             (_("Widelands could not load the file \"") + filename +
-		              _("\". The file format seems to be incompatible.")).c_str());
+		throw warning
+			(_("Unsupported format"),
+			 (_("Widelands could not load the file \"") + filename +
+			  _("\". The file format seems to be incompatible."))
+			 .c_str());
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
 	GameTips editortips (loader_ui, "txts/editortips");
@@ -292,6 +294,14 @@ void Editor_Interactive::toolsize_menu_btn() {
 }
 
 
+void Editor_Interactive::set_sel_radius_and_update_menu(uint32_t const val) {
+	if (UI::UniqueWindow * const w = m_toolsizemenu.window)
+		dynamic_cast<Editor_Toolsize_Menu &>(*w).update(val);
+	else
+		set_sel_radius(val);
+}
+
+
 bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 {
 	bool handled = Interactive_Base::handle_key(down, code);
@@ -301,43 +311,43 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 		switch (code.sym) {
 		// Sel radius
 		case SDLK_1:
-			set_sel_radius (0);
+			set_sel_radius_and_update_menu (0);
 			handled=true;
 			break;
 		case SDLK_2:
-			set_sel_radius (1);
+			set_sel_radius_and_update_menu (1);
 			handled=true;
 			break;
 		case SDLK_3:
-			set_sel_radius (2);
+			set_sel_radius_and_update_menu (2);
 			handled=true;
 			break;
 		case SDLK_4:
-			set_sel_radius (3);
+			set_sel_radius_and_update_menu (3);
 			handled=true;
 			break;
 		case SDLK_5:
-			set_sel_radius (4);
+			set_sel_radius_and_update_menu (4);
 			handled=true;
 			break;
 		case SDLK_6:
-			set_sel_radius (5);
+			set_sel_radius_and_update_menu (5);
 			handled=true;
 			break;
 		case SDLK_7:
-			set_sel_radius (6);
+			set_sel_radius_and_update_menu (6);
 			handled=true;
 			break;
 		case SDLK_8:
-			set_sel_radius (7);
+			set_sel_radius_and_update_menu (7);
 			handled=true;
 			break;
 		case SDLK_9:
-			set_sel_radius (8);
+			set_sel_radius_and_update_menu (8);
 			handled=true;
 			break;
 		case SDLK_0:
-			set_sel_radius (9);
+			set_sel_radius_and_update_menu (9);
 			handled=true;
 			break;
 
