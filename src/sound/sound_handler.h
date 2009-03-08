@@ -147,7 +147,7 @@ extern class Sound_Handler g_sound_handler;
  *
  * The solution is to work asynchronously, which is doable, as we already use a
  * callback to tell us when the audio is \e completely finished. So in
- * stop_music() (or change_music() ) we just start the fadeout. The
+ * stop_music() (or change_music()) we just start the fadeout. The
  * callback then tells us when the audio has actually stopped and we can start
  * the next music. To differentiate between the two states we can just take a
  * peek with Mix_MusicPlaying() if there is music running. To make sure that

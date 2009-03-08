@@ -302,7 +302,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
 			++it; //make sure we don't keep finding the same directories
 		}
 	} catch (_wexception const & e) {
-		throw wexception ("RealFSImpl::EnsureDirectory");//,e.what());
+		throw wexception ("RealFSImpl::EnsureDirectory");//, e.what());
 	}
 }
 

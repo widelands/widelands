@@ -163,10 +163,10 @@ Widelands::Coords Section::Value::get_Coords
 	long int const x = strtol(endp, &endp, 0);
 	long int const y = strtol(endp, &endp, 0);
 
-	// Check of consistence should NOT be at x,y < 0 as (-1,-1) is used for not
-	// set starting positions in the editor. So check whether x,y < -1 so the
-	// editor can load incomplete maps. For games the starting positions will
-	// be checked in player initalisation ( Player::init(const bool) ) anyway.
+	//  Check of consistence should NOT be at x, y < 0 as (-1, -1) is used for
+	//  not set starting positions in the editor. So check whether x, y < -1 so
+	//  the editor can load incomplete maps. For games the starting positions
+	//  will be checked in player initalisation anyway.
 	if (x < -1 or extent.w <= x or y < -1 or extent.h <= y or *endp)
 		throw wexception
 			("%s: \"%s\" is not a Coords on a map with size (%u, %u)",

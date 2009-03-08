@@ -5,3 +5,4 @@ namespace A {struct B;};}
 // {a|b}c
 char a[][3] = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}}
 "{a, b, c}"
+"\"})"

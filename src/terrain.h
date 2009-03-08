@@ -232,8 +232,8 @@ template<typename T> static void render_triangle
 	// Calculate d(b)/d(x) etc. as fixed point variables.
 	// Remember that we assume d(tx)/d(x) == 1 and d(tx)/d(y) == 0.
 
-	// lA*(p2-p1) + lB*(p3-p1) = (1,0)
-	// mA*(p2-p1) + mB*(p3-p1) = (0,1)
+	//  lA * (p2 - p1) + lB * (p3 - p1) = (1, 0)
+	//  mA * (p2 - p1) + mB * (p3 - p1) = (0, 1)
 	int32_t det = (p2.x-p1.x)*(p3.y-p1.y) - (p2.y-p1.y)*(p3.x-p1.x);
 	int32_t lA = ITOFIX(p3.y-p1.y)/det;
 	int32_t lB = -ITOFIX(p2.y-p1.y)/det;
