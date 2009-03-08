@@ -28,11 +28,7 @@
 struct Editor_Interactive;
 
 
-/**
- * This class is the tool selection window/menu.
- * Here, you can select the tool you wish to use the next time
-*/
-
+/// The tool size window/menu.
 struct Editor_Toolsize_Menu : public UI::UniqueWindow {
 	Editor_Toolsize_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
 
