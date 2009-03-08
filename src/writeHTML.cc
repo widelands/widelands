@@ -579,7 +579,52 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 }
 
 
-void Soldier_Descr::writeHTMLSoldier(::FileWrite &) const {
+void Soldier_Descr::writeHTMLSoldier(::FileWrite & fw) const {
+	char buffer[256];
+	fw.Text("<h2 id=\"combat_properties\">");
+	fw.Text(_("Combat Properties"));
+	fw.Text
+		("</h2>\n"
+		 "<p>");
+	snprintf
+		(buffer, sizeof(buffer),
+		 _
+		 	("Hitpoints is between %u and %u, plus %u for each level above 0 "
+		 	 "(maximum level is %u)."),
+		 m_min_hp,      m_max_hp,      m_hp_incr,      m_max_hp_level);
+	fw.Text(buffer);
+	fw.Text
+		("</p>\n"
+		 "<p>");
+	snprintf
+		(buffer, sizeof(buffer),
+		 _
+		 	("Attack is between %u and %u, plus %u for each level above 0 "
+		 	 "(maximum level is %u)."),
+		 m_min_attack,  m_max_attack,  m_attack_incr,  m_max_attack_level);
+	fw.Text(buffer);
+	fw.Text
+		("</p>\n"
+		 "<p>");
+	snprintf
+		(buffer, sizeof(buffer),
+		 _
+		 	("Defense is %u, plus %u for each level above 0 "
+		 	 "(maximum level is %u)."),
+		 m_defense,                    m_defense_incr, m_max_defense_level);
+	fw.Text(buffer);
+	fw.Text
+		("</p>\n"
+		 "<p>");
+	snprintf
+		(buffer, sizeof(buffer),
+		 _
+		 	("Evade is %u, plus %u for each level above 0 "
+		 	 "(maximum level is %u)."),
+		 m_evade,                      m_evade_incr,   m_max_evade_level);
+	fw.Text(buffer);
+	fw.Text
+		("</p>\n");
 }
 
 
