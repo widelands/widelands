@@ -23,15 +23,15 @@
 
 ;Version String
 #define Name "Widelands"
-#define VerName "Widelands Build13"
-#define VerNumber "0.13.1.1"
-#define Copyright "Widelands Development Team 2001-2008"
-#define SetupFileName "Widelands-Build13-win32"
+#define VerName "Widelands Build14"
+#define VerNumber "0.14.1.1"
+#define Copyright "Widelands Development Team 2001-2009"
+#define SetupFileName "Widelands-Build14-win32"
 
 ;General String
 #define Publisher "Widelands Development Team"
 #define URL "http://www.widelands.org"
-#define HelpURL "http://xoops.widelands.org/modules/mediawiki/wiki/Main_Page"
+#define HelpURL "http://wl.widelands.org/wiki/MainPage/"
 #define ExeName "widelands.exe"
 #define UrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"

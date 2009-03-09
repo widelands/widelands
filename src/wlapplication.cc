@@ -781,7 +781,7 @@ void WLApplication::shutdown_hardware()
 
 	if (g_gr) {
 		cout<<"WARNING: Hardware shutting down although graphics system"
-		<<" ist still alive!"<<endl;
+		<<" is still alive!"<<endl;
 	}
 	init_graphics(0, 0, 0, false);
 
@@ -1170,7 +1170,7 @@ void WLApplication::mainmenu()
 				return;
 			}
 		} catch (warning& e) {
-			messagetitle = "Warning: ";
+			messagetitle = _("Warning: ");
 			messagetitle += e.title();
 			message = e.what();
 		} catch (const std::exception& e) {
