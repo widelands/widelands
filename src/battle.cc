@@ -302,7 +302,7 @@ void Battle::save
 Map_Object::Loader* Battle::load
 	(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
-	Loader* loader = new Loader;
+	std::auto_ptr<Loader> loader(new Loader);
 
 	try {
 		// Header has been peeled away by caller
@@ -314,14 +314,10 @@ Map_Object::Loader* Battle::load
 		loader->init(egbase, mol, new Battle);
 		loader->load(fr);
 	} catch (const std::exception & e) {
-		delete loader;
 		throw wexception("Loading Battle: %s", e.what());
-	} catch (...) {
-		delete loader;
-		throw;
 	}
 
-	return loader;
+	return loader.release();
 }
 
 };
