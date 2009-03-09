@@ -15,7 +15,7 @@ wiese4=   255
 bergwiese=150
 
 [program]
-animate=tiny 160000
+animate=tiny 42000
 remove=32
 grow=tree5_s
 

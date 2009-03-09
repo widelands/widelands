@@ -17,10 +17,10 @@ wiese4=     255
 bergwiese=  100
 
 [program]
-animate=medium 132000
+animate=medium 55000
 remove=7
 seed=tree8_t 200
-animate=medium 132000
+animate=medium 30000
 remove=10
 grow=tree8
 
