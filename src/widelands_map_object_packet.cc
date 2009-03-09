@@ -83,8 +83,6 @@ void Map_Object_Packet::Read
 			}
 	} catch (const std::exception & e) {
 		throw wexception("map objects: %s", e.what());
-	} catch (...) {
-		throw;
 	}
 }
 
