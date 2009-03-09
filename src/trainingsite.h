@@ -47,6 +47,10 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_min_level(tAttribute) const;
 	int32_t get_max_level(tAttribute) const;
 private:
+	//  FIXME These variables should be per soldier type. They should be in a
+	//  FIXME struct and there should be a vector, indexed by Soldier_Index,
+	//  FIXME with that struct structs as element type.
+
 	/** Maximum number of soldiers for a training site*/
 	uint32_t m_num_soldiers;
 	/** Whether this site can train hitpoints*/

@@ -44,7 +44,11 @@ TrainingSite_Descr::TrainingSite_Descr
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 :
 	ProductionSite_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
-m_num_soldiers      (global_s.get_safe_int("max_soldiers")),
+
+	//  FIXME This is currently hardcoded for "soldier" but should allow any
+	//  FIXME soldier type name.
+	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
+
 m_train_hp          (false),
 m_train_attack      (false),
 m_train_defense     (false),
@@ -58,37 +62,30 @@ m_max_attack        (0),
 m_max_defense       (0),
 m_max_evade         (0)
 {
-	const std::vector<std::string> str_list
-		(split_string(global_s.get_safe_string("train"), ","));
-	container_iterate_const(std::vector<std::string>, str_list, i)
-		if      (*i.current == "hp")      m_train_hp      = true;
-		else if (*i.current == "attack")  m_train_attack  = true;
-		else if (*i.current == "defense") m_train_defense = true;
-		else if (*i.current == "evade")   m_train_evade   = true;
-		else
-			throw wexception
-				("\"%s\" is not known as a valid attribute", i.current->c_str());
-
 	// Read the range of levels that can update this building
-	if (m_train_hp) {
-		Section & sect = prof.get_safe_section("hp");
-		m_min_hp = sect.get_safe_int("min_level");
-		m_max_hp = sect.get_safe_int("max_level");
+	//  FIXME This is currently hardcoded to "soldier" but it should search for
+	//  FIXME sections starting with the name of each soldier type.
+	//  FIXME These sections also seem redundant. Eliminate them (having the
+	//  FIXME programs should be enough).
+	if (Section * const s = prof.get_section("soldier hp")) {
+		m_train_hp      = true;
+		m_min_hp        = s->get_safe_int("min_level");
+		m_max_hp        = s->get_safe_int("max_level");
 	}
-	if (m_train_attack) {
-		Section & sect = prof.get_safe_section("attack");
-		m_min_attack = sect.get_safe_int("min_level");
-		m_max_attack = sect.get_safe_int("max_level");
+	if (Section * const s = prof.get_section("soldier attack")) {
+		m_train_attack  = true;
+		m_min_attack    = s->get_safe_int("min_level");
+		m_max_attack    = s->get_safe_int("max_level");
 	}
-	if (m_train_defense) {
-		Section & sect = prof.get_safe_section("defense");
-		m_min_defense = sect.get_safe_int("min_level");
-		m_max_defense = sect.get_safe_int("max_level");
+	if (Section * const s = prof.get_section("soldier defense")) {
+		m_train_defense = true;
+		m_min_defense   = s->get_safe_int("min_level");
+		m_max_defense   = s->get_safe_int("max_level");
 	}
-	if (m_train_evade) {
-		Section & sect = prof.get_safe_section("evade");
-		m_min_evade = sect.get_safe_int("min_level");
-		m_max_evade = sect.get_safe_int("max_level");
+	if (Section * const s = prof.get_section("soldier evade")) {
+		m_train_evade   = true;
+		m_min_evade     = s->get_safe_int("min_level");
+		m_max_evade     = s->get_safe_int("max_level");
 	}
 }
 
@@ -638,14 +635,16 @@ void TrainingSite::add_upgrade(tAttribute atr, const std::string& prefix)
 void TrainingSite::calc_upgrades() {
 	assert(m_upgrades.size() == 0);
 
+	//  FIXME This is currently hardcoded for "soldier" but it should allow any
+	//  FIXME soldier type name.
 	if (descr().get_train_hp())
-		add_upgrade(atrHP, "upgrade_hp_");
+		add_upgrade(atrHP, "upgrade_soldier_hp_");
 	if (descr().get_train_attack())
-		add_upgrade(atrAttack, "upgrade_attack_");
+		add_upgrade(atrAttack, "upgrade_soldier_attack_");
 	if (descr().get_train_defense())
-		add_upgrade(atrDefense, "upgrade_defense_");
+		add_upgrade(atrDefense, "upgrade_soldier_defense_");
 	if (descr().get_train_evade())
-		add_upgrade(atrEvade, "upgrade_evade_");
+		add_upgrade(atrEvade, "upgrade_soldier_evade_");
 }
 
 };

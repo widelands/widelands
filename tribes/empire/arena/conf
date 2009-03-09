@@ -1,28 +1,35 @@
 size=big
 enhancement=colosseum
-max_soldiers=8
-train=evade
+soldier_capacity=8
 
 [working positions]
 carrier=1
 
-[evade]
+[soldier evade]
 min_level=0
 max_level=0
 
 [programs]
 sleep=_Sleep
-upgrade_evade_0=_Upgrade evade 0 # This is needed to run the scripts
+upgrade_soldier_evade_0=_Upgrade soldier evade 0
+upgrade_evade_0=_Upgrade soldier evade 0 (only for compatibility with old savegames (build13))
 
 [sleep]
 sleep=5000
 
-[upgrade_evade_0]
-check_soldier=evade 0 # Fails when aren't any soldier of level 0 attack
+[upgrade_soldier_evade_0]
+check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 attack
 sleep=30000
-check_soldier=evade 0 # Because the soldier can be expulsed by the player
+check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
 consume=bread fish,meat
-train=evade 0 1
+train=soldier evade 0 1
+
+[upgrade_evade_0]
+check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 attack
+sleep=30000
+check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
+consume=bread fish,meat
+train=soldier evade 0 1
 
 [inputs]
 bread=10

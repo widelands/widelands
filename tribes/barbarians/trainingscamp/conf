@@ -1,6 +1,5 @@
 size=big
-max_soldiers=12
-train=attack,hp
+soldier_capacity=12
 
 [buildcost]
 trunk=6
@@ -25,83 +24,147 @@ helm=2
 mask=2
 warhelmet=2
 
-[attack]
+[soldier attack]
 min_level=0
 max_level=4
 
-[hp]
+[soldier hp]
 min_level=0
 max_level=2
 
 [programs]
 sleep=_Sleep
-upgrade_attack_0=_Upgrade attack 0 # This is needed to run the scripts
-upgrade_attack_1=_Upgrade attack 1
-upgrade_attack_2=_Upgrade attack 2
-upgrade_attack_3=_Upgrade attack 3
-upgrade_attack_4=_Upgrade attack 4
-upgrade_hp_0=_Upgrade hitpoints 0
-upgrade_hp_1=_Upgrade hitpoints 1
-upgrade_hp_2=_Upgrade hitpoints 2
+upgrade_soldier_attack_0=_Upgrade soldier attack 0
+upgrade_attack_0=_Upgrade soldier attack 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_attack_1=_Upgrade soldier attack 1
+upgrade_attack_1=_Upgrade soldier attack 1 (only for compatibility with old savegames (build13))
+upgrade_soldier_attack_2=_Upgrade soldier attack 2
+upgrade_attack_2=_Upgrade soldier attack 2 (only for compatibility with old savegames (build13))
+upgrade_soldier_attack_3=_Upgrade soldier attack 3
+upgrade_attack_3=_Upgrade soldier attack 3 (only for compatibility with old savegames (build13))
+upgrade_soldier_attack_4=_Upgrade soldier attack 4
+upgrade_attack_4=_Upgrade soldier attack 4 (only for compatibility with old savegames (build13))
+upgrade_soldier_hp_0=_Upgrade soldier hitpoints 0
+upgrade_hp_0=_Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_hp_1=_Upgrade soldier hitpoints 1
+upgrade_hp_1=_Upgrade soldier hitpoints 1 (only for compatibility with old savegames (build13))
+upgrade_soldier_hp_2=_Upgrade soldier hitpoints 2
+upgrade_hp_2=_Upgrade soldier hitpoints 2 (only for compatibility with old savegames (build13))
 
 [sleep]
 sleep=5000
 
-[upgrade_attack_0]
-check_soldier=attack 0 # Fails when aren't any soldier of level 0 attack
+[upgrade_soldier_attack_0]
+check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
 sleep=30000
-check_soldier=attack 0 # Because the soldier can be expulsed by the player
+check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
 consume=sharpaxe fish,meat,pittabread
-train=attack 0 1
+train=soldier attack 0 1
+
+[upgrade_attack_0]
+check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
+sleep=30000
+check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
+consume=sharpaxe fish,meat,pittabread
+train=soldier attack 0 1
+
+[upgrade_soldier_attack_1]
+check_soldier=soldier attack 1
+sleep=30000
+check_soldier=soldier attack 1
+consume=broadaxe fish,meat,pittabread
+train=soldier attack 1 2
 
 [upgrade_attack_1]
-check_soldier=attack 1
+check_soldier=soldier attack 1
 sleep=30000
-check_soldier=attack 1
+check_soldier=soldier attack 1
 consume=broadaxe fish,meat,pittabread
-train=attack 1 2
+train=soldier attack 1 2
+
+[upgrade_soldier_attack_2]
+check_soldier=soldier attack 2
+sleep=30000
+check_soldier=soldier attack 2
+consume=bronzeaxe fish,meat,pittabread
+train=soldier attack 2 3
 
 [upgrade_attack_2]
-check_soldier=attack 2
+check_soldier=soldier attack 2
 sleep=30000
-check_soldier=attack 2
+check_soldier=soldier attack 2
 consume=bronzeaxe fish,meat,pittabread
-train=attack 2 3
+train=soldier attack 2 3
+
+[upgrade_soldier_attack_3]
+check_soldier=soldier attack 3
+sleep=30000
+check_soldier=soldier attack 3
+consume=battleaxe fish,meat,pittabread:2
+train=soldier attack 3 4
 
 [upgrade_attack_3]
-check_soldier=attack 3
+check_soldier=soldier attack 3
 sleep=30000
-check_soldier=attack 3
+check_soldier=soldier attack 3
 consume=battleaxe fish,meat,pittabread:2
-train=attack 3 4
+train=soldier attack 3 4
+
+[upgrade_soldier_attack_4]
+check_soldier=soldier attack 4
+sleep=30000
+check_soldier=soldier attack 4
+consume=warriorsaxe fish,meat,pittabread:2
+train=soldier attack 4 5
 
 [upgrade_attack_4]
-check_soldier=attack 4
+check_soldier=soldier attack 4
 sleep=30000
-check_soldier=attack 4
+check_soldier=soldier attack 4
 consume=warriorsaxe fish,meat,pittabread:2
-train=attack 4 5
+train=soldier attack 4 5
+
+[upgrade_soldier_hp_0]
+check_soldier=soldier hp 0
+sleep=30000
+check_soldier=soldier hp 0
+consume=helm fish,meat,pittabread
+train=soldier hp 0 1
 
 [upgrade_hp_0]
-check_soldier=hp 0
+check_soldier=soldier hp 0
 sleep=30000
-check_soldier=hp 0
+check_soldier=soldier hp 0
 consume=helm fish,meat,pittabread
-train=hp 0 1
+train=soldier hp 0 1
+
+[upgrade_soldier_hp_1]
+check_soldier=soldier hp 1
+sleep=30000
+check_soldier=soldier hp 1
+consume=mask fish,meat,pittabread:2
+train=soldier hp 1 2
 
 [upgrade_hp_1]
-check_soldier=hp 1
+check_soldier=soldier hp 1
 sleep=30000
-check_soldier=hp 1
+check_soldier=soldier hp 1
 consume=mask fish,meat,pittabread:2
-train=hp 1 2
+train=soldier hp 1 2
+
+[upgrade_soldier_hp_2]
+check_soldier=soldier hp 2
+sleep=30000
+check_soldier=soldier hp 2
+consume=warhelmet fish,meat,pittabread:3
+train=soldier hp 2 3
 
 [upgrade_hp_2]
-check_soldier=hp 2
+check_soldier=soldier hp 2
 sleep=30000
-check_soldier=hp 2
+check_soldier=soldier hp 2
 consume=warhelmet fish,meat,pittabread:3
-train=hp 2 3
+train=soldier hp 2 3
 
 [idle]
 pics=trainingscamp_i_??.png  # ???

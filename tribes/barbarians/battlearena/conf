@@ -1,6 +1,5 @@
 size=big
-max_soldiers=8
-train=evade
+soldier_capacity=8
 
 [buildcost]
 trunk=6
@@ -18,31 +17,47 @@ fish=6
 meat=6
 strongbeer=6
 
-[evade]
+[soldier evade]
 min_level=0
 max_level=1
 
 [programs]
 sleep=_Sleep
-upgrade_evade_0=_Upgrade evade 0 # This is needed to run the scripts
-upgrade_evade_1=_Upgrade evade 1
+upgrade_soldier_evade_0=_Upgrade soldier evade 0
+upgrade_evade_0=_Upgrade soldier evade 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_evade_1=_Upgrade soldier evade 1
+upgrade_evade_1=_Upgrade soldier evade 1 (only for compatibility with old savegames (build13))
 
 [sleep]
 sleep=5000
 
-[upgrade_evade_0]
-check_soldier=evade 0 # Fails when aren't any soldier of level 0 evade
+[upgrade_soldier_evade_0]
+check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
 sleep=30000
-check_soldier=evade 0 # Because the soldier can be expulsed by the player
+check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
 consume=pittabread fish,meat strongbeer
-train=evade 0 1
+train=soldier evade 0 1
+
+[upgrade_evade_0]
+check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
+sleep=30000
+check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
+consume=pittabread fish,meat strongbeer
+train=soldier evade 0 1
+
+[upgrade_soldier_evade_1]
+check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
+sleep=30000
+check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
+consume=pittabread:2 fish,meat strongbeer
+train=soldier evade 1 2
 
 [upgrade_evade_1]
-check_soldier=evade 1 # Fails when aren't any soldier of level 1 evade
+check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
 sleep=30000
-check_soldier=evade 1 # Because the soldier can be expulsed by the player
+check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
 consume=pittabread:2 fish,meat strongbeer
-train=evade 1 2
+train=soldier evade 1 2
 
 [idle]
 pics=battlearena_i_??.png  # ???

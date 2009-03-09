@@ -1,7 +1,6 @@
 size=medium
 enhanced_building=yes
-max_soldiers=8
-train=attack
+soldier_capacity=8
 
 [buildcost]
 planks=2
@@ -24,47 +23,79 @@ steel_trident=4
 double_trident=4
 heavy_double_trident=4
 
-[attack]
+[soldier attack]
 min_level=0
 max_level=3
 
 [programs]
 sleep=_Sleep
-upgrade_attack_0=_Upgrade attack 0
-upgrade_attack_1=_Upgrade attack 1
-upgrade_attack_2=_Upgrade attack 2
-upgrade_attack_3=_Upgrade attack 3
+upgrade_soldier_attack_0=_Upgrade soldier attack 0
+upgrade_attack_0=_Upgrade soldier attack 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_attack_1=_Upgrade soldier attack 1
+upgrade_attack_1=_Upgrade soldier attack 1 (only for compatibility with old savegames (build13))
+upgrade_soldier_attack_2=_Upgrade soldier attack 2
+upgrade_attack_2=_Upgrade soldier attack 2 (only for compatibility with old savegames (build13))
+upgrade_soldier_attack_3=_Upgrade soldier attack 3
+upgrade_attack_3=_Upgrade soldier attack 3 (only for compatibility with old savegames (build13))
 
 [sleep]
 sleep=5000
 
-[upgrade_attack_0]
-check_soldier=attack 0
+[upgrade_soldier_attack_0]
+check_soldier=soldier attack 0
 sleep=30000
-check_soldier=attack 0
+check_soldier=soldier attack 0
 consume=bread smoked_fish,smoked_meat long_trident
-train=attack 0 1
+train=soldier attack 0 1
+
+[upgrade_attack_0]
+check_soldier=soldier attack 0
+sleep=30000
+check_soldier=soldier attack 0
+consume=bread smoked_fish,smoked_meat long_trident
+train=soldier attack 0 1
+
+[upgrade_soldier_attack_1]
+check_soldier=soldier attack 1
+sleep=30000
+check_soldier=soldier attack 1
+consume=bread smoked_fish,smoked_meat steel_trident
+train=soldier attack 1 2
 
 [upgrade_attack_1]
-check_soldier=attack 1
+check_soldier=soldier attack 1
 sleep=30000
-check_soldier=attack 1
+check_soldier=soldier attack 1
 consume=bread smoked_fish,smoked_meat steel_trident
-train=attack 1 2
+train=soldier attack 1 2
+
+[upgrade_soldier_attack_2]
+check_soldier=soldier attack 2
+sleep=30000
+check_soldier=soldier attack 2
+consume=bread smoked_fish,smoked_meat double_trident
+train=soldier attack 2 3
 
 [upgrade_attack_2]
-check_soldier=attack 2
+check_soldier=soldier attack 2
 sleep=30000
-check_soldier=attack 2
+check_soldier=soldier attack 2
 consume=bread smoked_fish,smoked_meat double_trident
-train=attack 2 3
+train=soldier attack 2 3
+
+[upgrade_soldier_attack_3]
+check_soldier=soldier attack 3
+sleep=30000
+check_soldier=soldier attack 3
+consume=bread smoked_fish,smoked_meat heavy_double_trident
+train=soldier attack 3 4
 
 [upgrade_attack_3]
-check_soldier=attack 3
+check_soldier=soldier attack 3
 sleep=30000
-check_soldier=attack 3
+check_soldier=soldier attack 3
 consume=bread smoked_fish,smoked_meat heavy_double_trident
-train=attack 3 4
+train=soldier attack 3 4
 
 [idle]
 pics=dungeon_i_??.png  # ???

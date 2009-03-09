@@ -1,6 +1,5 @@
 size=big
-max_soldiers=8
-train=defense,hp,evade
+soldier_capacity=8
 
 [buildcost]
 trunk=3
@@ -21,64 +20,105 @@ steel_shield=4
 advanced_shield=4
 golden_tabard=5
 
-[defense]
+[soldier defense]
 min_level=0
 max_level=1
 
-[hp]
+[soldier hp]
 min_level=0
 max_level=0
 
-[evade]
+[soldier evade]
 min_level=0
 max_level=1
 
 [programs]
 sleep=_Sleep
-upgrade_defense_0=_Upgrade defense 0 # This is needed to run the scripts
-upgrade_defense_1=_Upgrade defense 1
-upgrade_hp_0=_Upgrade hitpoints 0
-upgrade_evade_0=_Upgrade evade 0
-upgrade_evade_1=_Upgrade evade 1
+upgrade_soldier_defense_0=_Upgrade soldier defense 0
+upgrade_defense_0=_Upgrade soldier defense 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_defense_1=_Upgrade soldier defense 1
+upgrade_defense_1=_Upgrade soldier defense 1 (only for compatibility with old savegames (build13))
+upgrade_soldier_hp_0=_Upgrade soldier hitpoints 0
+upgrade_hp_0=_Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_evade_0=_Upgrade soldier evade 0
+upgrade_evade_0=_Upgrade soldier evade 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_evade_1=_Upgrade soldier evade 1
+upgrade_evade_1=_Upgrade soldier evade 1 (only for compatibility with old savegames (build13))
 
 [sleep]
 sleep=5000
 
-[upgrade_defense_0]
-check_soldier=defense 0 # Fails when aren't any soldier of level 0 defense
+[upgrade_soldier_defense_0]
+check_soldier=soldier defense 0 # Fails when aren't any soldier of level 0 defense
 sleep=30000
-check_soldier=defense 0 # Because the soldier can be expulsed by the player
+check_soldier=soldier defense 0 # Because the soldier can be expulsed by the player
 consume=bread smoked_fish,smoked_meat steel_shield
-train=defense 0 1
+train=soldier defense 0 1
+
+[upgrade_defense_0]
+check_soldier=soldier defense 0 # Fails when aren't any soldier of level 0 defense
+sleep=30000
+check_soldier=soldier defense 0 # Because the soldier can be expulsed by the player
+consume=bread smoked_fish,smoked_meat steel_shield
+train=soldier defense 0 1
+
+[upgrade_soldier_defense_1]
+check_soldier=soldier defense 1 # Fails when aren't any soldier of level 1 defense
+sleep=30000
+check_soldier=soldier defense 1 # Because the soldier can be expulsed by the player
+consume=bread smoked_fish,smoked_meat advanced_shield
+train=soldier defense 1 2
 
 [upgrade_defense_1]
-check_soldier=defense 1 # Fails when aren't any soldier of level 1 defense
+check_soldier=soldier defense 1 # Fails when aren't any soldier of level 1 defense
 sleep=30000
-check_soldier=defense 1 # Because the soldier can be expulsed by the player
+check_soldier=soldier defense 1 # Because the soldier can be expulsed by the player
 consume=bread smoked_fish,smoked_meat advanced_shield
-train=defense 1 2
+train=soldier defense 1 2
+
+[upgrade_soldier_hp_0]
+check_soldier=soldier hp 0 # Fails when aren't any soldier of level 0 hp
+sleep=30000
+check_soldier=soldier hp 0 # Because the soldier can be expulsed by the player
+consume=smoked_fish,smoked_meat:2 golden_tabard
+train=soldier hp 0 1
 
 [upgrade_hp_0]
-check_soldier=hp 0 # Fails when aren't any soldier of level 0 hp
+check_soldier=soldier hp 0 # Fails when aren't any soldier of level 0 hp
 sleep=30000
-check_soldier=hp 0 # Because the soldier can be expulsed by the player
+check_soldier=soldier hp 0 # Because the soldier can be expulsed by the player
 consume=smoked_fish,smoked_meat:2 golden_tabard
-train=hp 0 1
+train=soldier hp 0 1
+
+[upgrade_soldier_evade_0]
+check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
+sleep=30000
+check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
+consume=bread smoked_fish,smoked_meat:2
+train=soldier evade 0 1
 
 [upgrade_evade_0]
-check_soldier=evade 0 # Fails when aren't any soldier of level 0 evade
+check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
 sleep=30000
-check_soldier=evade 0 # Because the soldier can be expulsed by the player
+check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
 consume=bread smoked_fish,smoked_meat:2
-train=evade 0 1
+train=soldier evade 0 1
 
-[upgrade_evade_1]
-check_soldier=evade 1 # Fails when aren't any soldier of level 1 evade
+[upgrade_soldier_evade_1]
+check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
 sleep=30000
-check_soldier=evade 1 # Because the soldier can be expulsed by the player
+check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
 consume=bread
 consume=smoked_fish,smoked_meat:2
-train=evade 1 2
+train=soldier evade 1 2
+
+[upgrade_evade_1]
+check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
+sleep=30000
+check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
+consume=bread
+consume=smoked_fish,smoked_meat:2
+train=soldier evade 1 2
 
 [idle]
 pics=labyrinth_i_??.png  # ???

@@ -782,6 +782,11 @@ void ProductionProgram::ActMine::execute
 ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
 	(char * parameters, ProductionSite_Descr const &)
 {
+	//  FIXME This is currently hardcoded for "soldier", but should allow any
+	//  FIXME soldier type name.
+	if (not match_force_skip(parameters, "soldier"))
+		throw wexception
+			("expected name of soldier type, but found \"%s\"", parameters);
 	try {
 		if      (match_force_skip(parameters, "hp"))
 			attribute = atrHP;
@@ -844,6 +849,11 @@ void ProductionProgram::ActCheck_Soldier::execute
 ProductionProgram::ActTrain::ActTrain
 	(char * parameters, ProductionSite_Descr const &)
 {
+	//  FIXME This is currently hardcoded for "soldier", but should allow any
+	//  FIXME soldier type name.
+	if (not match_force_skip(parameters, "soldier"))
+		throw wexception
+			("expected name of soldier type, but found \"%s\"", parameters);
 	try {
 		if      (match_force_skip(parameters, "hp"))
 			attribute = atrHP;
