@@ -122,10 +122,11 @@ void Editor_Interactive::load(std::string const & filename) {
 	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 	if (not ml)
 		throw warning
-			(_("Unsupported format"),
-			 (_("Widelands could not load the file \"") + filename +
-			  _("\". The file format seems to be incompatible."))
-			 .c_str());
+			(_("Unsupported format "),
+			 _
+			 	("Widelands could not load the file \"%s\". The file format seems "
+			 	 "to be incompatible."),
+			 filename.c_str());
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
 	GameTips editortips (loader_ui, "txts/editortips");

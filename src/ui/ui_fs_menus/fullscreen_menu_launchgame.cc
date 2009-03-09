@@ -212,16 +212,14 @@ void Fullscreen_Menu_LaunchGame::start_clicked()
 	if (!g_fs->FileExists(m_filename))
 		throw warning
 			(_("File not found"),
-			 (_
-			  	("Widelands tried to start a game with a file that could not be "
-			  	 "found at given path.\nThe file was: ")
-			  + m_filename + "\n"
-			  +
-			  _
-			  	("If this happens in a network game, the host might have selected "
-			  	 "a file that you do not have. In that case you should ask the "
-			  	 "host to send you the file."))
-			 .c_str());
+			 _
+			 	("Widelands  tried to start a game with a file that could not be "
+			 	 "found at given path.\n"
+			 	 "The file was: %s\n"
+			 	 "If this happens in a network game, the host might have selected "
+			 	 "a file that you do not have. In that case you should ask the "
+			 	 "host to send you the file."),
+			 m_filename.c_str());
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
 			end_modal(1 + m_is_scenario);
