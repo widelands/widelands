@@ -53,10 +53,17 @@ const char *_wexception::what() const throw ()
 /*
  * class warning implementation
  */
-warning::warning(const char *et, const char *em, ...) throw ()
+warning::warning(char const * const et, char const * const em, ...) throw () :
+	m_title(et)
 {
-	m_title = et;
-	m_what = em;
+	char buffer[512];
+	{
+		va_list va;
+		va_start(va, em);
+		vsnprintf(buffer, sizeof(buffer), em, va);
+		va_end(va);
+	}
+	m_what = buffer;
 }
 
 warning::~warning() throw () {}

@@ -862,7 +862,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 					} else {
 						// Do not throw exception, else map won't be loadable in editor
 						// Player initialisation will keep track about wrong starting pos.
-						log("invalid starting point, that couldn't be fixed.\n");
+						log("invalid starting position, that couldn't be fixed.\n");
 						log("   Please try to fix it manually in the editor.\n");
 					}
 				}

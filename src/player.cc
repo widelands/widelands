@@ -90,8 +90,6 @@ Player::~Player() {
 void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
 	if (Coords const starting_pos = map.get_starting_pos(m_plnum)) {
-		FCoords fpos = map.get_fcoords(starting_pos);
-
 		Tribe_Descr::Initialization const & initialization =
 			tribe().initialization(m_initialization_index);
 		Game & game = dynamic_cast<Game &>(egbase());
@@ -101,19 +99,15 @@ void Player::create_default_infrastructure() {
 			event.set_position(starting_pos);
 			event.run(&game);
 		}
-
-	} else {
-		std::string em = _("Widelands could not start the game, as player ");
-		em += m_plnum;
-		em +=
-			_
-				(" has no starting point.\n"
-				 "You can manually add a starting point with Widelands Editor, to "
-				 "fix this problem.");
-
-		throw warning(_("Missing starting point"), em.c_str());
-	}
-
+	} else
+		throw warning
+			(_("Missing starting position"),
+			 _
+			 	("Widelands could not start the game, because player %u has no "
+			 	 "starting position.\n"
+			 	 "You can manually add a starting position with Widelands Editor, "
+			 	 "to fix this problem."),
+			 m_plnum);
 }
 
 
