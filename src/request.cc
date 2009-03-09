@@ -790,32 +790,20 @@ void Request::start_transfer(Game* g, Supply* supp)
 	ss.Unsigned32(get_target()->get_serial());
 	ss.Unsigned32(supp->get_position(g)->get_serial());
 
-	Transfer* t = 0;
-	try
-	{
-		if (get_type() == WORKER)
-		{
-			// Begin the transfer of a soldier or worker.
-			// launch_worker() creates or starts the worker
-			Worker* s = supp->launch_worker(g, this);
-			ss.Unsigned32(s->get_serial());
-			t = new Transfer(g, this, s);
-		}
-		else
-		{
-			// Begin the transfer of an item. The item itself is passive.
-			// launch_item() ensures the WareInstance is transported out of the warehouse
-			// Once it's on the flag, the flag code will decide what to do with it.
-			WareInstance & item = supp->launch_item(g, this);
-			ss.Unsigned32(item.get_serial());
-			t = new Transfer(g, this, &item);
-		}
-	}
-	catch (...)
-	{
-		delete t;
-
-		throw;
+	Transfer * t = 0;
+	if (get_type() == WORKER) {
+		//  Begin the transfer of a soldier or worker.
+		//  launch_worker() creates or starts the worker
+		Worker* s = supp->launch_worker(g, this);
+		ss.Unsigned32(s->get_serial());
+		t = new Transfer(g, this, s);
+	} else {
+		//  Begin the transfer of an item. The item itself is passive.
+		//  launch_item() ensures the WareInstance is transported out of the warehouse
+		//  Once it's on the flag, the flag code will decide what to do with it.
+		WareInstance & item = supp->launch_item(g, this);
+		ss.Unsigned32(item.get_serial());
+		t = new Transfer(g, this, &item);
 	}
 
 	t->set_idle(m_idle);
