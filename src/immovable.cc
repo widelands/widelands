@@ -571,7 +571,7 @@ void Immovable::save
 Map_Object::Loader* Immovable::load
 	(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
-	Loader* loader = new Loader;
+	std::auto_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller
@@ -610,14 +610,10 @@ Map_Object::Loader* Immovable::load
 		loader->init(egbase, mol, imm);
 		loader->load(fr);
 	} catch (const std::exception & e) {
-		delete loader;
 		throw wexception("Loading Immovable: %s", e.what());
-	} catch (...) {
-		delete loader;
-		throw;
 	}
 
-	return loader;
+	return loader.release();
 }
 
 

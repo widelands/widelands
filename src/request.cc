@@ -790,7 +790,7 @@ void Request::start_transfer(Game* g, Supply* supp)
 	ss.Unsigned32(get_target()->get_serial());
 	ss.Unsigned32(supp->get_position(g)->get_serial());
 
-	Transfer * t = 0;
+	Transfer * t;
 	if (get_type() == WORKER) {
 		//  Begin the transfer of a soldier or worker.
 		//  launch_worker() creates or starts the worker

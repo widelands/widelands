@@ -869,15 +869,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 			} else
 				log("OK\n");
 		}
-	}
-	catch (...)
-	{
-		if (section)
-			free(section);
-		if (bobs)
-			free(bobs);
-		if (buildings)
-			free(buildings);
+	} catch (...) {
+		free(section);
+		free(bobs);
+		free(buildings);
 		throw;
 	}
 

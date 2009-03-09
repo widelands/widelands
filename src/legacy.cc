@@ -79,7 +79,8 @@ struct FakeAttackController : public BaseImmovable {
 
 Map_Object::Loader* loadAttackController(Editor_Game_Base *egbase, Map_Map_Object_Loader *mol, FileRead & fr)
 {
-	FakeAttackController::Loader* loader = new FakeAttackController::Loader;
+	std::auto_ptr<FakeAttackController::Loader> loader
+		(new FakeAttackController::Loader);
 
 	try {
 		uint8_t const version = fr.Unsigned8();
@@ -89,14 +90,10 @@ Map_Object::Loader* loadAttackController(Editor_Game_Base *egbase, Map_Map_Objec
 		loader->init(egbase, mol, new FakeAttackController);
 		loader->load(fr);
 	} catch (const std::exception& e) {
-		delete loader;
 		throw wexception("Loading legacy AttackController: %s", e.what());
-	} catch (...) {
-		delete loader;
-		throw;
 	}
 
-	return loader;
+	return loader.release();
 }
 
 
@@ -129,7 +126,7 @@ struct FakeBattle : public BaseImmovable {
 
 Map_Object::Loader* loadBattle(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
-	FakeBattle::Loader* loader = new FakeBattle::Loader;
+	std::auto_ptr<FakeBattle::Loader> loader(new FakeBattle::Loader);
 
 	try {
 		// Header has been peeled away by caller
@@ -140,14 +137,10 @@ Map_Object::Loader* loadBattle(Editor_Game_Base * egbase, Map_Map_Object_Loader 
 		loader->init(egbase, mol, new FakeBattle);
 		loader->load(fr);
 	} catch (const std::exception & e) {
-		delete loader;
 		throw wexception("Loading legacy Battle: %s", e.what());
-	} catch (...) {
-		delete loader;
-		throw;
 	}
 
-	return loader;
+	return loader.release();
 }
 
 }
