@@ -235,63 +235,57 @@ bool Game::run_splayer_scenario_direct(const char* mapname) {
 
 	set_map(new Map);
 
-	Map_Loader* maploader = map().get_correct_loader(mapname);
-	if (not maploader)
+	std::auto_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
+	if (not maploader.get())
 		throw wexception("could not load \"%s\"", mapname);
+	UI::ProgressWindow loaderUI;
+	GameTips tips (loaderUI);
+
+	loaderUI.step (_("Preloading a map"));
+	{
+		i18n::Textdomain textdomain(mapname); // load scenario textdomain
+		log("Loading the locals for scenario. file: %s.mo\n", mapname);
+		maploader->preload_map(true);
+	}
+	std::string const background = map().get_background();
+	if (background.size() > 0)
+		loaderUI.set_background(background);
+	else
+		loaderUI.set_background(map().get_world_name());
+	loaderUI.step (_("Loading a world"));
+	maploader->load_world();
+
+	// We have to create the players here.
+	Player_Number const nr_players = map().get_nrplayers();
+	iterate_player_numbers(p, nr_players) {
+		loaderUI.stepf (_("Adding player %u"), p);
+		add_player
+			(p,
+			 0,
+			 map().get_scenario_player_tribe(p),
+			 map().get_scenario_player_name (p));
+	}
+
+	set_iabase(new Interactive_Player(*this, 1, true, false));
+
+	loaderUI.step (_("Loading a map"));
+
+	// Reload campaign textdomain
+	{
+		i18n::Textdomain textdomain(mapname);
+		maploader->load_map_complete(this, true);
+	}
+	maploader.reset();
+
+	set_game_controller(GameController::createSinglePlayer(this, true, 1));
 	try {
-		UI::ProgressWindow loaderUI;
-		GameTips tips (loaderUI);
-
-		loaderUI.step (_("Preloading a map"));
-		{
-			i18n::Textdomain textdomain(mapname); // load scenario textdomain
-			log("Loading the locals for scenario. file: %s.mo\n", mapname);
-			maploader->preload_map(true);
-		}
-		const std::string background = map().get_background();
-		if (background.size() > 0)
-			loaderUI.set_background(background);
-		else
-			loaderUI.set_background(map().get_world_name());
-		loaderUI.step (_("Loading a world"));
-		maploader->load_world();
-
-		// We have to create the players here.
-		const Player_Number nr_players = map().get_nrplayers();
-		iterate_player_numbers(p, nr_players) {
-			loaderUI.stepf (_("Adding player %u"), p);
-			add_player
-				(p,
-				 0,
-				 map().get_scenario_player_tribe(p),
-				 map().get_scenario_player_name (p));
-		}
-
-		set_iabase(new Interactive_Player(*this, 1, true, false));
-
-		loaderUI.step (_("Loading a map"));
-
-		// Reload campaign textdomain
-		{
-			i18n::Textdomain textdomain(mapname);
-			maploader->load_map_complete(this, true);
-		}
-		delete maploader;
-		maploader = 0;
-
-		set_game_controller(GameController::createSinglePlayer(this, true, 1));
-		try {
-			bool ret = run(loaderUI, NewScenario);
-			delete m->ctrl;
-			m->ctrl = 0;
-			return ret;
-		} catch (...) {
-			delete m->ctrl;
-			m->ctrl = 0;
-			throw;
-		}
+		bool ret = run(loaderUI, NewScenario);
+		delete m->ctrl;
+		m->ctrl = 0;
+		return ret;
 	} catch (...) {
-		delete maploader;
+		delete m->ctrl;
+		m->ctrl = 0;
 		throw;
 	}
 }
@@ -308,40 +302,34 @@ void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& setti
 	assert(!get_map());
 	set_map(new Map);
 
-	Map_Loader* maploader = map().get_correct_loader(settings.mapfilename.c_str());
-	try {
-		maploader->preload_map(settings.scenario);
-		const std::string background = map().get_background();
-		if (background.size() > 0)
-			loaderUI.set_background(background);
-		else
-			loaderUI.set_background(map().get_world_name());
+	std::auto_ptr<Map_Loader> maploader
+		(map().get_correct_loader(settings.mapfilename.c_str()));
+	maploader->preload_map(settings.scenario);
+	std::string const background = map().get_background();
+	if (background.size() > 0)
+		loaderUI.set_background(background);
+	else
+		loaderUI.set_background(map().get_world_name());
 
-		loaderUI.step(_("Configuring players"));
-		for (uint32_t i = 0; i < settings.players.size(); ++i) {
-			PlayerSettings const & playersettings = settings.players[i];
+	loaderUI.step(_("Configuring players"));
+	for (uint32_t i = 0; i < settings.players.size(); ++i) {
+		PlayerSettings const & playersettings = settings.players[i];
 
-			if
-				(playersettings.state == PlayerSettings::stateClosed ||
-				 playersettings.state == PlayerSettings::stateOpen)
-				continue;
+		if
+			(playersettings.state == PlayerSettings::stateClosed ||
+			 playersettings.state == PlayerSettings::stateOpen)
+			continue;
 
-			add_player
-				(i + 1,
-				 playersettings.initialization_index,
-				 playersettings.tribe,
-				 playersettings.name);
-			get_player(i+1)->setAI(playersettings.ai);
-		}
-
-		loaderUI.step(_("Loading map"));
-		maploader->load_map_complete(this, settings.scenario);
-		delete maploader;
-		maploader = 0;
-	} catch (...) {
-		delete maploader;
-		throw;
+		add_player
+			(i + 1,
+			 playersettings.initialization_index,
+			 playersettings.tribe,
+			 playersettings.name);
+		get_player(i+1)->setAI(playersettings.ai);
 	}
+
+	loaderUI.step(_("Loading map"));
+	maploader->load_map_complete(this, settings.scenario);
 }
 
 
