@@ -1,0 +1,11 @@
+# Automatically created by Widelands svn3680
+
+[global]
+packet_version="1"
+map_w="224"
+map_h="224"
+nr_players="6"
+world="greenland"
+name=_"Twinkling Waves"
+author="Nasenbaer"
+descr=_"Many beautiful, green islands await the ones brave enough to pass the thousand waves, twinkling in the sun."
