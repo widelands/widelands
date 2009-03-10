@@ -167,7 +167,6 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 			parse_bobs(m_basedir, root_conf);
 			root_conf.check_used();
 		}
-		m_basedir.resize(m_basedir.size() - strlen("bobs/"));
 
 		{ //  General bobs mainly for scenarios
 			Profile global_root_conf("global/conf");
