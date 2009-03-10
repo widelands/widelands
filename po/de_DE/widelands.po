@@ -251,7 +251,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:667
 #: ../../src/writeHTML.cc:677
 msgid "'s creation"
-msgstr "s Produkt"
+msgstr "s Schöpfung"
 
 #: ../../src/writeHTML.cc:691
 #, c-format
