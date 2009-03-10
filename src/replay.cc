@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,7 +87,7 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 	{
 		std::auto_ptr<FileSystem> const fs
 			(g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX));
-		Game_Loader gl(*fs, &game);
+		Game_Loader gl(*fs, game);
 		gl.load_game();
 	}
 
@@ -112,7 +112,7 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 		if (version != REPLAY_VERSION)
 			throw wexception("unknown/unhandled version %u", version);
 
-		game.get_rng()->ReadState(*m_cmdlog);
+		game.rng().ReadState(*m_cmdlog);
 	}
 	catch (...) {
 		delete m_cmdlog;
@@ -241,7 +241,7 @@ ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
 	{
 		std::auto_ptr<FileSystem> const fs
 			(g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX));
-		Game_Loader gl(*fs, &game);
+		Game_Loader gl(*fs, game);
 		game.cleanup_for_load(true, true);
 		gl.load_game();
 		game.postload();
@@ -256,7 +256,7 @@ ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
 	m_cmdlog->Unsigned8(REPLAY_VERSION);
 
-	game.get_rng()->WriteState(*m_cmdlog);
+	game.rng().WriteState(*m_cmdlog);
 }
 
 

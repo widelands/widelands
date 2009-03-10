@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,7 @@ struct Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_MapSelect();
 
 	bool is_scenario();
-	const MapData* get_map() const;
+	MapData const * get_map() const;
 	void setScenarioSelectionVisible(bool);
 
 private:

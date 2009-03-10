@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -262,26 +262,26 @@ m_label_minute
 	update_maxfps();
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
-	SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
-	fmt->BitsPerPixel = 16;
+	SDL_PixelFormat & fmt = *SDL_GetVideoInfo()->vfmt;
+	fmt.BitsPerPixel = 16;
 	if
 		(SDL_Rect const * const * const modes =
-		 SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
+		 	SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
 		for (uint32_t i = 0; modes[i]; ++i)
 			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
 				res const this_res = {modes[i]->w, modes[i]->h, 16};
 			if
 				(not m_resolutions.size()
 				 or
-				 this_res.xres != m_resolutions[m_resolutions.size()-1].xres
+				 this_res.xres != m_resolutions[m_resolutions.size() - 1].xres
 				 or
-				 this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
+				 this_res.yres != m_resolutions[m_resolutions.size() - 1].yres)
 				m_resolutions.push_back(this_res);
 			}
-	fmt->BitsPerPixel = 32;
+	fmt.BitsPerPixel = 32;
 	if
 		(SDL_Rect const * const * const modes =
-		 SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
+		 	SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
 		for (uint32_t i = 0; modes[i]; ++i)
 			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
 				res const this_res = {modes[i]->w, modes[i]->h, 32};
@@ -294,7 +294,7 @@ m_label_minute
 					m_resolutions.push_back(this_res);
 			}
 
-	bool did_select_a_res=false;
+	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", m_resolutions[i].xres, m_resolutions[i].yres, m_resolutions[i].depth);
@@ -302,7 +302,7 @@ m_label_minute
 			m_resolutions[i].xres  == opt.xres and
 			m_resolutions[i].yres  == opt.yres and
 			m_resolutions[i].depth == opt.depth;
-		did_select_a_res|=selected;
+		did_select_a_res |= selected;
 		m_reslist.add(buf, 0, -1, selected);
 	}
 	if (not did_select_a_res) m_reslist.select(m_reslist.size() - 1);

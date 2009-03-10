@@ -127,7 +127,7 @@ class Cmd_Queue {
 	};
 
 public:
-	Cmd_Queue(Game *g);
+	Cmd_Queue(Game &);
 	~Cmd_Queue();
 
 	/// Add a command to the queue.
@@ -143,7 +143,7 @@ public:
 	void flush(); // delete all commands in the queue now
 
 private:
-	Game *                       m_game;
+	Game                       & m_game;
 	std::priority_queue<cmditem> m_cmds;
 	uint32_t                     nextserial;
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,12 +53,12 @@ struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	 * \return \c true if a valid server has been chosen. If \c false is
 	 * returned, the values of \p addr and \p port are undefined.
 	 */
-	bool get_host_address (uint32_t& addr, uint16_t& port);
+	bool get_host_address (uint32_t & addr, uint16_t & port);
 
 	/**
 	 * \return the name chosen by the player
 	 */
-	const std::string& get_playername();
+	std::string const & get_playername();
 
 private:
 	uint32_t                                    m_butx;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ Game_Map_Data_Packet::~Game_Map_Data_Packet() {
 
 
 void Game_Map_Data_Packet::Read
-	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	if (not fs.FileExists("map") or not fs.IsDirectory("map"))
@@ -44,7 +44,7 @@ throw (_wexception)
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;
 
-	m_wml = new WL_Map_Loader(*fs.MakeSubFileSystem("map"), &game->map());
+	m_wml = new WL_Map_Loader(*fs.MakeSubFileSystem("map"), &game.map());
 
 	m_wml->preload_map(true);
 	m_wml->load_world();
@@ -62,7 +62,7 @@ void Game_Map_Data_Packet::Read_Complete(Game & game) {
 
 
 void Game_Map_Data_Packet::Write
-	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 

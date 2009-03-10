@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -265,7 +265,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 					 	(PicMod_Game,
 					 	 dynamic_cast<WL_Map_Loader const *>(m_ml) ?
 					 	 "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (_wexception&) {} //  we simply skip illegal entries
+			} catch (_wexception const &) {} //  we simply skip illegal entries
 			delete m_ml;
 		}
 	}

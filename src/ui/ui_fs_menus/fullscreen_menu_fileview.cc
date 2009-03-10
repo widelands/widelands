@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,15 +74,18 @@ Fullscreen_Menu_FileView::Fullscreen_Menu_FileView(const std::string & filename)
 
 struct FileViewWindow : public UI::UniqueWindow {
 	FileViewWindow
-		(UI::Panel * parent,
-		 UI::UniqueWindow::Registry * reg,
-		 std::string filename);
+		(UI::Panel                  & parent,
+		 UI::UniqueWindow::Registry & reg,
+		 std::string          const & filename);
 private:
 	UI::Multiline_Textarea textview;
 };
 
-FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename)
-: UI::UniqueWindow(parent, reg, 0, 0, ""), textview(this, 0, 0, 560, 240)
+FileViewWindow::FileViewWindow
+	(UI::Panel                  & parent,
+	 UI::UniqueWindow::Registry & reg,
+	 std::string          const & filename)
+: UI::UniqueWindow(&parent, &reg, 0, 0, ""), textview(this, 0, 0, 560, 240)
 {
 	i18n::grab_textdomain("texts");
 
@@ -105,7 +108,10 @@ FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* re
 /**
  * Display the contents of a text file in a scrollable window.
 */
-void fileview_window(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename)
+void fileview_window
+	(UI::Panel                  & parent,
+	 UI::UniqueWindow::Registry & reg,
+	 std::string          const & filename)
 {
 	new FileViewWindow(parent, reg, filename);
 }

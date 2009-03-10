@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@ namespace Widelands {
 
 
 void Game_Game_Class_Data_Packet::Read
-	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	FileRead fr;
@@ -38,7 +38,7 @@ throw (_wexception)
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version <= CURRENT_PACKET_VERSION) {
 			fr.Signed16(); // This used to be game speed
-			game->m_gametime = fr.Unsigned32();
+			game.m_gametime = fr.Unsigned32();
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -50,7 +50,7 @@ throw (_wexception)
  * Write Function
  */
 void Game_Game_Class_Data_Packet::Write
-	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -70,7 +70,7 @@ throw (_wexception)
 
 	// EDITOR GAME CLASS
 	// Write gametime
-	fw.Unsigned32(game->m_gametime);
+	fw.Unsigned32(game.m_gametime);
 
 	// We do not care for players, since they were set
 	// on game initialization to match Map::scenario_player_[names|tribes]

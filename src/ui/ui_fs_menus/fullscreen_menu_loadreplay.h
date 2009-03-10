@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LoadReplay();
 	~Fullscreen_Menu_LoadReplay();
 
-	const std::string& filename() {return m_filename;}
+	std::string const & filename() {return m_filename;}
 
 	void clicked_ok();
 	void replay_selected(uint32_t);

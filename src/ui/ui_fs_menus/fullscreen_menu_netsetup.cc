@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,7 +101,7 @@ hostname
 opengames
 	(this, m_xres * 3 / 50, m_yres * 3333 / 10000, m_lisw, m_yres * 5433 / 10000)
 {
-	Section & s = g_options.pull_section("global");//for playername
+	Section & s = g_options.pull_section("global"); //  for playername
 
 	title       .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -131,9 +131,10 @@ void Fullscreen_Menu_NetSetup::think ()
 	discovery.run();
 }
 
-bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
+bool Fullscreen_Menu_NetSetup::get_host_address
+	(uint32_t & addr, uint16_t & port)
 {
-	const std::string& host = hostname.text();
+	std::string const & host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
 	for (uint32_t i = 0; i < opengames_size; ++i) {
@@ -146,17 +147,15 @@ bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
 		}
 	}
 
-	hostent* he=gethostbyname(host.c_str());
-	if (he==0)
+	if (hostent * const he = gethostbyname(host.c_str())) {
+		addr = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
+		port = htons(WIDELANDS_PORT);
+		return true;
+	} else
 		return false;
-
-	addr = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-	port=htons(WIDELANDS_PORT);
-
-	return true;
 }
 
-const std::string& Fullscreen_Menu_NetSetup::get_playername()
+std::string const & Fullscreen_Menu_NetSetup::get_playername()
 {
 	return playername.text();
 }
@@ -202,7 +201,10 @@ void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game * game)
 		update_game_info(*er, game->info);
 }
 
-void Fullscreen_Menu_NetSetup::discovery_callback (int32_t type, const LAN_Open_Game* game, void* userdata)
+void Fullscreen_Menu_NetSetup::discovery_callback
+	(int32_t               const type,
+	 LAN_Open_Game const * const game,
+	 void                * const userdata)
 {
 	switch (type) {
 	case LAN_Game_Finder::GameOpened:

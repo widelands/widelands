@@ -37,11 +37,7 @@ namespace Widelands {
 //
 // class Cmd_Queue
 //
-Cmd_Queue::Cmd_Queue(Game *g)
-{
-	m_game = g;
-	nextserial = 0;
-}
+Cmd_Queue::Cmd_Queue(Game & game) : m_game(game), nextserial(0) {}
 
 Cmd_Queue::~Cmd_Queue()
 {
@@ -113,14 +109,14 @@ int32_t Cmd_Queue::run_queue(int32_t interval, int32_t* game_time_var)
 		*game_time_var = c->get_duetime();
 
 		if (dynamic_cast<GameLogicCommand*>(c)) {
-			StreamWrite& ss(m_game->syncstream());
+			StreamWrite & ss = m_game.syncstream();
 			static uint8_t const tag[] = {0xde, 0xad, 0x00};
 			ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
 			ss.Unsigned32(c->get_duetime());
 			ss.Unsigned32(c->get_id());
 		}
 
-		c->execute (m_game);
+		c->execute (&m_game);
 
 		delete c;
 	}

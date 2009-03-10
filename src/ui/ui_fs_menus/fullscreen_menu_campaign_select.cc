@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,7 +119,7 @@ static char const * const dif_descriptions[] = {
 void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 {
 	if (m_list.get_selected()) { //gets false, if the selected entry has no value.
-		campaign=i;
+		campaign = i;
 
 		// enable OK button
 		b_ok.set_enabled(true);

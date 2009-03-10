@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ class GameLogicCommand;
  * from the queue command file ids
  */
 struct Queue_Cmd_Factory {
-	static GameLogicCommand* create_correct_queue_command(uint32_t id);
+	static GameLogicCommand & create_correct_queue_command(uint32_t id);
 };
 
 };

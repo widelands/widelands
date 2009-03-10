@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -139,7 +139,7 @@ bool SaveHandler::save_game
 	}
 
 	bool ret = true;
-	Game_Saver gs(*fs, &game);
+	Game_Saver gs(*fs, game);
 	try {
 		gs.save();
 	} catch (std::exception& exe) {

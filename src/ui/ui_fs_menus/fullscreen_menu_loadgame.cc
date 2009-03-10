@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,9 +96,9 @@ void Fullscreen_Menu_LoadGame::clicked_ok()
 void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 	if (const char * const name = m_list.get_selected()) {
 		std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-		Widelands::Game_Loader gl(*fs, &m_game);
+		Widelands::Game_Loader gl(*fs, m_game);
 		Widelands::Game_Preload_Data_Packet gpdp;
-		gl.preload_game(&gpdp); // This has worked before, no problem
+		gl.preload_game(gpdp); //  This has worked before, no problem
 
 		m_ok.set_enabled(true);
 		m_tamapname.set_text(gpdp.get_mapname());
@@ -140,8 +140,8 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 
 		try {
 			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-			Widelands::Game_Loader gl(*fs, &m_game);
-			gl.preload_game(&gpdp);
+			Widelands::Game_Loader gl(*fs, m_game);
+			gl.preload_game(gpdp);
 
 			char const * extension, * fname =
 				FileSystem::FS_Filename(name, extension);

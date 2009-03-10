@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,9 +53,9 @@ struct PlayerDescriptionGroup;
  *    4  - multi player scenario savegame <- not yet implemented
  */
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchGame(GameSettingsProvider* settings, GameController* ctrl = 0);
+	Fullscreen_Menu_LaunchGame(GameSettingsProvider *, GameController * = 0);
 
-	void setChatProvider(ChatProvider* chat);
+	void setChatProvider(ChatProvider *);
 
 	void start();
 	void think();

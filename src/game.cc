@@ -160,10 +160,10 @@ struct GameInternals {
 
 
 Game::Game() :
-m(new GameInternals(this)),
-m_state   (gs_notrunning),
-cmdqueue  (this),
-m_replaywriter(0)
+	m                  (new GameInternals(this)),
+	m_state            (gs_notrunning),
+	m_cmdqueue         (*this),
+	m_replaywriter     (0)
 {
 	m->ctrl = 0;
 	m->writereplay = true;
@@ -349,10 +349,10 @@ void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& sett
 	try {
 		std::auto_ptr<FileSystem> const fs
 				(g_fs->MakeSubFileSystem(settings.mapfilename.c_str()));
-		Game_Loader gl(*fs, this);
+		Game_Loader gl(*fs, *this);
 
 		Widelands::Game_Preload_Data_Packet gpdp;
-		gl.preload_game(&gpdp);
+		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 
@@ -382,11 +382,10 @@ bool Game::run_load_game(std::string filename) {
 	{
 		std::auto_ptr<FileSystem> const fs
 			(g_fs->MakeSubFileSystem(filename.c_str()));
-
-		Game_Loader gl(*fs, this);
+		Game_Loader gl(*fs, *this);
 
 		Widelands::Game_Preload_Data_Packet gpdp;
-		gl.preload_game(&gpdp);
+		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
@@ -556,7 +555,7 @@ void Game::think()
 
 		int32_t frametime = m->ctrl->getFrametime();
 
-		cmdqueue.run_queue(frametime, get_game_time_pointer());
+		cmdqueue().run_queue(frametime, get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
 
@@ -584,7 +583,7 @@ void Game::cleanup_for_load
 		 ++it)
 		delete *it;
 	m_tribes.clear();
-	get_cmdqueue()->flush();
+	cmdqueue().flush();
 
 	// Statistics
 	m_last_stats_update = 0;
@@ -632,9 +631,9 @@ md5_checksum Game::get_sync_hash() const
  */
 uint32_t Game::logic_rand()
 {
-	uint32_t r = rng.rand();
-	syncstream().Unsigned32(r);
-	return r;
+	uint32_t const result = rng().rand();
+	syncstream().Unsigned32(result);
+	return result;
 }
 
 
@@ -662,7 +661,7 @@ void Game::enqueue_command (Command * const cmd)
 		if (upcast(PlayerCommand, plcmd, cmd))
 			m_replaywriter->SendPlayerCommand(plcmd);
 
-	cmdqueue.enqueue(cmd);
+	cmdqueue().enqueue(cmd);
 }
 
 // we might want to make these inlines:

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,9 +29,9 @@ namespace Widelands {
  * player number and so on
  */
 struct Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
-	void Read (FileSystem &, Game *, Map_Map_Object_Loader * = 0)
+	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	void Write(FileSystem &, Game *, Map_Map_Object_Saver  * = 0)
+	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = 0)
 		throw (_wexception);
 };
 

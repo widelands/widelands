@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,12 +36,12 @@ struct Game_Map_Data_Packet : public Game_Data_Packet {
 
 
 	/// Ensures that the world gets loaded but does not much more.
-	void Read (FileSystem &, Game *, Map_Map_Object_Loader * = 0)
+	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = 0)
 		throw (_wexception);
 
 	void Read_Complete(Game &); ///  Loads the rest of the map.
 
-	void Write(FileSystem &, Game *, Map_Map_Object_Saver  * = 0)
+	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = 0)
 		throw (_wexception);
 
 	Map_Map_Object_Saver  * get_map_object_saver () {return m_mos;}

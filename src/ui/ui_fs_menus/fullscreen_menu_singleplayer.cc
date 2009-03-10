@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ m_butw
 m_buth
 	(m_yres * 19 / 400),
 m_butx
-	((m_xres-m_butw)/2),
+	((m_xres - m_butw) / 2),
 m_fs
 	(fs_small()),
 m_fn

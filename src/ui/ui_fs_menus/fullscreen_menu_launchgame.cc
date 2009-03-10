@@ -257,7 +257,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	// "Choose Position" Buttons in frond of PDG
 	for (int32_t i = 0; i < m_nr_players; ++i) {
 		m_pos[i]->set_visible(true);
-		const PlayerSettings& player = m_settings->settings().players[i];
+		PlayerSettings const & player = m_settings->settings().players[i];
 		if
 			((player.state == PlayerSettings::stateOpen) |
 			 (player.state == PlayerSettings::stateComputer))
@@ -301,26 +301,26 @@ void Fullscreen_Menu_LaunchGame::refresh()
 				snprintf(buf, sizeof(buf), "  [%i] ", i);
 				notetext += buf;
 
-				if (m_player_save_name[i-1].empty()) {
+				if (m_player_save_name[i - 1].empty()) {
 					notetext += "--";
 					//  set player description group disabled so that no-one can
 					//  take this place
-					m_players[i-1]->enable_pdg(false);
+					m_players[i - 1]->enable_pdg(false);
 					continue;
 				}
 
 				// Refresh player description group of this player
-				m_players[i-1]->refresh();
-				m_players[i-1]->show_tribe_button(false);
-				notetext += m_player_save_name[i-1] + " (";
-				if (m_player_save_name[i-1].empty())
+				m_players[i - 1]->refresh();
+				m_players[i - 1]->show_tribe_button(false);
+				notetext += m_player_save_name[i - 1] + " (";
+				if (m_player_save_name[i - 1].empty())
 					throw wexception("Player has a name but no tribe");
-				notetext += m_player_save_tribe[i-1] + ")";
+				notetext += m_player_save_tribe[i - 1] + ")";
 			}
 
 			// update remaining player description groups
 			for (; i <= MAX_PLAYERS; ++i)
-				m_players[i-1]->refresh();
+				m_players[i - 1]->refresh();
 
 			// Finally set the notes
 			m_notes.set_text(notetext);
@@ -407,10 +407,10 @@ void Fullscreen_Menu_LaunchGame::set_scenario_values()
 		map.get_correct_loader(m_settings->settings().mapfilename.c_str());
 	map.set_filename(m_settings->settings().mapfilename.c_str());
 	ml->preload_map(true);
-	uint8_t nrplayers = map.get_nrplayers();
-	for (uint32_t i = 0; i < nrplayers; ++i) {
-		m_settings->setPlayerName (i, map.get_scenario_player_name(i+1));
-		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i+1));
+	Widelands::Player_Number const nrplayers = map.get_nrplayers();
+	for (uint8_t i = 0; i < nrplayers; ++i) {
+		m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));
+		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i + 1));
 	}
 }
 
@@ -451,19 +451,19 @@ void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
 		strbuf = std::string();
 		snprintf(buf, sizeof(buf), "player_%i", i);
 		Section & s = prof.get_safe_section(buf);
-		m_player_save_name [i-1] = s.get_string("name");
-		m_player_save_tribe[i-1] = s.get_string("tribe");
+		m_player_save_name [i - 1] = s.get_string("name");
+		m_player_save_tribe[i - 1] = s.get_string("tribe");
 
-		if (m_player_save_tribe[i-1].empty())
+		if (m_player_save_tribe[i - 1].empty())
 			continue; // if tribe is empty, the player does not exist
 
 		// get translated tribename
-		strbuf = "tribes/" + m_player_save_tribe[i-1];
+		strbuf = "tribes/" + m_player_save_tribe[i - 1];
 		i18n::grab_textdomain(strbuf);
 		strbuf += "/conf";
 		Profile tribe(strbuf.c_str());
 		Section & global = tribe.get_safe_section("tribe");
-		m_player_save_tribe[i-1] = global.get_safe_string("name");
+		m_player_save_tribe[i - 1] = global.get_safe_string("name");
 		i18n::release_textdomain();
 	}
 	m_filename_proof = m_filename;

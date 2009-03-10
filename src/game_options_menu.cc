@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,14 +108,17 @@ exit_game
 }
 
 
-void GameOptionsMenu::clicked_readme()
-{fileview_window(&m_player, &m_windows.readme,  "txts/README");}
+void GameOptionsMenu::clicked_readme() {
+	fileview_window(m_player, m_windows.readme,  "txts/README");
+}
 
-void GameOptionsMenu::clicked_license()
-{fileview_window(&m_player, &m_windows.license, "txts/COPYING");}
+void GameOptionsMenu::clicked_license() {
+	fileview_window(m_player, m_windows.license, "txts/COPYING");
+}
 
-void GameOptionsMenu::clicked_authors()
-{fileview_window(&m_player, &m_windows.authors, "txts/developers");}
+void GameOptionsMenu::clicked_authors() {
+	fileview_window(m_player, m_windows.authors, "txts/developers");
+}
 
 void GameOptionsMenu::clicked_sound() {
 	if (m_windows.sound_options.window) delete m_windows.sound_options.window;

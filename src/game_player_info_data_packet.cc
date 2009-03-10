@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ namespace Widelands {
 
 
 void Game_Player_Info_Data_Packet::Read
-	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	FileRead fr;
@@ -43,7 +43,7 @@ throw (_wexception)
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			uint32_t const max_players = fr.Unsigned16();
 			for (uint32_t i = 1; i <= max_players; ++i) {
-				game->remove_player(i);
+				game.remove_player(i);
 				if (fr.Unsigned8()) {
 					bool    const see_all = fr.Unsigned8();
 					if (packet_version <= 2)
@@ -62,8 +62,8 @@ throw (_wexception)
 
 					std::string const name = fr.CString();
 
-					game->add_player(plnum, 0, tribe, name);
-					Player & player = game->player(plnum);
+					game.add_player(plnum, 0, tribe, name);
+					Player & player = game.player(plnum);
 					player.set_see_all(see_all);
 
 					if (packet_version >= 6)
@@ -89,7 +89,7 @@ throw (_wexception)
 			}
 
 			if (packet_version >= 2)
-				game->ReadStatistics
+				game.ReadStatistics
 					(fr,
 					 packet_version >= 5 ? 3 :
 					 packet_version == 4 ? 2 :
@@ -103,7 +103,7 @@ throw (_wexception)
 
 
 void Game_Player_Info_Data_Packet::Write
-	(FileSystem & fs, Game* game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver *)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -112,9 +112,9 @@ throw (_wexception)
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	// Number of (potential) players
-	const Player_Number nr_players = game->map().get_nrplayers();
+	Player_Number const nr_players = game.map().get_nrplayers();
 	fw.Unsigned16(nr_players);
-	iterate_players_existing_const(p, nr_players, *game, plr) {
+	iterate_players_existing_const(p, nr_players, game, plr) {
 		fw.Unsigned8(1); // Player is in game.
 
 		fw.Unsigned8(plr->m_see_all);
@@ -147,7 +147,7 @@ throw (_wexception)
 	} else
 		fw.Unsigned8(0); //  Player is NOT in game.
 
-	game->WriteStatistics(fw);
+	game.WriteStatistics(fw);
 
 	fw.Write(fs, "binary/player_info");
 }

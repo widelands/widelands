@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ namespace Widelands {
 
 
 void Game_Interactive_Player_Data_Packet::Read
-	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	FileRead fr;
@@ -43,15 +43,15 @@ throw (_wexception)
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
 			Player_Number const player_number =
-				fr.Player_Number8(game->map().get_nrplayers());
+				fr.Player_Number8(game.map().get_nrplayers());
 			int32_t       const x             = fr.Unsigned16();
 			int32_t       const y             = fr.Unsigned16();
 			uint32_t      const display_flags = fr.Unsigned32();
 
 			if (packet_version == 1)
-				game->m_last_stats_update = fr.Unsigned32();
+				game.m_last_stats_update = fr.Unsigned32();
 
-			if (Interactive_Player* plr = game->get_ipl()) {
+			if (Interactive_Player * const plr = game.get_ipl()) {
 				plr->set_player_number(player_number);
 
 				plr->set_viewpoint(Point(x, y));
@@ -63,7 +63,7 @@ throw (_wexception)
 
 				if (packet_version == 1) {
 					plr->get_player()->ReadStatistics(fr, 0);
-					game->ReadStatistics(fr, 0);
+					game.ReadStatistics(fr, 0);
 				}
 			}
 		} else
@@ -77,7 +77,7 @@ throw (_wexception)
  * Write Function
  */
 void Game_Interactive_Player_Data_Packet::Write
-	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -85,7 +85,7 @@ throw (_wexception)
 	// Now packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Interactive_Player* plr = game->get_ipl();
+	Interactive_Player * const plr = game.get_ipl();
 
 	// Player number
 	fw.Unsigned8(plr ? plr->get_player_number() : 1);

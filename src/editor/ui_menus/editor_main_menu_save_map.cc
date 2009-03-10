@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -372,7 +372,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	FileSystem & fs =
 		*g_fs->CreateSubFileSystem
 		(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
-	Widelands::Map_Saver wms(fs, &m_parent->egbase());
+	Widelands::Map_Saver wms(fs, m_parent->egbase());
 	try {
 		wms.save();
 		m_parent->set_need_save(false);

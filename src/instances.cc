@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -367,7 +367,7 @@ void Map_Object::destroy(Editor_Game_Base* g)
  */
 void Map_Object::schedule_destroy(Game *g)
 {
-	g->get_cmdqueue()->enqueue (new Cmd_Destroy_Map_Object(g->get_gametime(), this));
+	g->cmdqueue().enqueue (new Cmd_Destroy_Map_Object(g->get_gametime(), this));
 }
 
 /**
@@ -414,7 +414,7 @@ uint32_t Map_Object::schedule_act(Game* g, uint32_t tdelta, uint32_t data)
 	if (tdelta < Forever()) {
 		uint32_t const time = g->get_gametime() + tdelta;
 
-		g->get_cmdqueue()->enqueue (new Cmd_Act(time, this, data));
+		g->cmdqueue().enqueue (new Cmd_Act(time, this, data));
 
 		return time;
 	} else

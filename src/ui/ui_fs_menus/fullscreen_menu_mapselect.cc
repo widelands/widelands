@@ -1,5 +1,5 @@
 /*
-*Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
 *This program is free software; you can redistribute it and/or
 *modify it under the terms of the GNU General Public License
@@ -164,7 +164,7 @@ void Fullscreen_Menu_MapSelect::setScenarioSelectionVisible(bool vis)
 	m_label_load_map_as_scenario.set_visible(vis);
 }
 
-const MapData* Fullscreen_Menu_MapSelect::get_map() const
+MapData const * Fullscreen_Menu_MapSelect::get_map() const
 {
 	return m_list.has_selection() ? &m_list.get_selected() : 0;
 }
@@ -252,7 +252,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	filenameset_t files;
 	g_fs->FindFiles(m_curdir, "*", &files);
 
-	int32_t ndirs=0;
+	int32_t ndirs = 0;
 
 	//If we are not at the top of the map directory hierarchy (we're not talking
 	//about the absolute filesystem top!) we manually add ".."
@@ -276,7 +276,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		 pname != files.end();
 		 ++pname)
 	{
-		const char*const name = pname->c_str();
+		char const * const name = pname->c_str();
 		if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
 		if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
 		if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for esthetic reasons
@@ -301,9 +301,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			 pname != files.end();
 			 ++pname)
 		{
-			const char *name = pname->c_str();
+			char const * const name = pname->c_str();
 
-			Widelands::Map_Loader*const ml = map.get_correct_loader(name);
+			Widelands::Map_Loader *const ml = map.get_correct_loader(name);
 			if (!ml)
 				continue;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,12 +33,12 @@ namespace Widelands {
 
 
 void Game_Player_Economies_Data_Packet::Read
-	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const mol)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const mol)
 throw (_wexception)
 {
 	FileRead fr;
 
-	Map   const &       map        = game->map();
+	Map   const &       map        = game.map();
 	Map_Index     const max_index  = map.max_index();
 	Extent        const extent     = map.extent();
 	Player_Number const nr_players = map.get_nrplayers();
@@ -47,7 +47,7 @@ throw (_wexception)
 		fr.Open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-			iterate_players_existing(p, nr_players, *game, player)
+			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::economy_vector & economies = player->m_economies;
 					uint16_t const nr_economies = economies.size();
@@ -92,17 +92,17 @@ throw (_wexception)
  * Write Function
  */
 void Game_Player_Economies_Data_Packet::Write
-	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const mos)
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const mos)
 throw (_wexception)
 {
 	FileWrite fw;
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Map const & map = game->map();
+	Map const & map = game.map();
 	Field const & field_0 = map[0];
 	Player_Number const nr_players = map.get_nrplayers();
-	iterate_players_existing_const(p, nr_players, *game, player) {
+	iterate_players_existing_const(p, nr_players, game, player) {
 		Player::economy_vector const & economies = player->m_economies;
 		container_iterate_const(Player::economy_vector, economies, i) {
 			// Walk the map so that we find a representant.

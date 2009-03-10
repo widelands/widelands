@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,10 +40,10 @@ saved game file. it is an abstract base class
 */
 struct Game_Data_Packet {
 	virtual ~Game_Data_Packet() {}
-	virtual void Read(FileSystem &, Game *, Map_Map_Object_Loader * = 0)
+	virtual void Read (FileSystem &, Game &, Map_Map_Object_Loader * = 0)
 		throw (_wexception)
 		= 0;
-	virtual void Write(FileSystem &, Game *, Map_Map_Object_Saver * = 0)
+	virtual void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = 0)
 		throw (_wexception)
 		= 0;
 };

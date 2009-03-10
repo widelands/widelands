@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1016,7 +1016,7 @@ WareInstance* Worker::fetch_carried_item(Game* g)
  */
 void Worker::schedule_incorporate(Game* g)
 {
-	g->get_cmdqueue()->enqueue (new Cmd_Incorporate(g->get_gametime(), this));
+	g->cmdqueue().enqueue (new Cmd_Incorporate(g->get_gametime(), this));
 	skip_act();
 }
 

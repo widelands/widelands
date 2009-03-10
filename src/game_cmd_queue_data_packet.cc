@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ namespace Widelands {
 
 
 void Game_Cmd_Queue_Data_Packet::Read
-	(FileSystem & fs, Game * game, Map_Map_Object_Loader * const ol)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	FileRead fr;
@@ -41,21 +41,20 @@ throw (_wexception)
 		fr.Open(fs, "binary/cmd_queue");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version) {
-			Cmd_Queue* cmdq=game->get_cmdqueue();
+			Cmd_Queue & cmdq = game.cmdqueue();
 
 			// nothing to be done for m_game
 
 			// Next serial
-			cmdq->nextserial=fr.Unsigned32();
+			cmdq.nextserial = fr.Unsigned32();
 
 			// Erase all currently pending commands in the queue
-			while (!cmdq->m_cmds.empty())
-				cmdq->m_cmds.pop();
+			while (!cmdq.m_cmds.empty())
+				cmdq.m_cmds.pop();
 
 			if (packet_version == CURRENT_PACKET_VERSION)
-			{
 				for (;;) {
-					uint32_t packet_id = fr.Unsigned16();
+					uint32_t const packet_id = fr.Unsigned16();
 
 					if (!packet_id)
 						break;
@@ -64,33 +63,32 @@ throw (_wexception)
 					item.category = fr.Signed32();
 					item.serial = fr.Unsigned32();
 
-					GameLogicCommand* cmd =
+					GameLogicCommand & cmd =
 						Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-					cmd->Read(fr, *game, *ol);
+					cmd.Read(fr, game, *ol);
 
-					item.cmd=cmd;
+					item.cmd = &cmd;
 
-					cmdq->m_cmds.push(item);
+					cmdq.m_cmds.push(item);
 				}
-			}
-			else
-			{
+			else {
 				// Old-style (version 1) command list
-				uint32_t ncmds=fr.Unsigned16();
+				uint32_t const ncmds = fr.Unsigned16();
 
-				uint32_t i=0;
-				while (i<ncmds) {
+				uint32_t i = 0;
+				while (i < ncmds) {
 					Cmd_Queue::cmditem item;
 					item.category = Cmd_Queue::cat_gamelogic;
 					item.serial = fr.Unsigned32();
 
-					uint32_t packet_id=fr.Unsigned16();
-					GameLogicCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-					cmd->Read(fr, *game, *ol);
+					uint32_t const packet_id = fr.Unsigned16();
+					GameLogicCommand & cmd =
+						Queue_Cmd_Factory::create_correct_queue_command(packet_id);
+					cmd.Read(fr, game, *ol);
 
-					item.cmd=cmd;
+					item.cmd = &cmd;
 
-					cmdq->m_cmds.push(item);
+					cmdq.m_cmds.push(item);
 					++i;
 				}
 			}
@@ -103,7 +101,7 @@ throw (_wexception)
 
 
 void Game_Cmd_Queue_Data_Packet::Write
-	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -111,24 +109,23 @@ throw (_wexception)
 	// Now packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Cmd_Queue* cmdq=game->get_cmdqueue();
+	Cmd_Queue const & cmdq = game.cmdqueue();
 
 	// nothing to be done for m_game
 
 	// Next serial
-	fw.Unsigned32(cmdq->nextserial);
+	fw.Unsigned32(cmdq.nextserial);
 
 	// Write all commands
-	std::priority_queue<Cmd_Queue::cmditem> p;
 
 	// Make a copy, so we can pop stuff
-	p=cmdq->m_cmds;
+	std::priority_queue<Cmd_Queue::cmditem> p = cmdq.m_cmds;
 
-	assert(p.top().serial==cmdq->m_cmds.top().serial);
-	assert(p.top().cmd==cmdq->m_cmds.top().cmd);
+	assert(p.top().serial == cmdq.m_cmds.top().serial);
+	assert(p.top().cmd    == cmdq.m_cmds.top().cmd);
 
 	while (p.size()) {
-		const Cmd_Queue::cmditem& it = p.top();
+		Cmd_Queue::cmditem const & it = p.top();
 
 		if (upcast(GameLogicCommand, cmd, it.cmd)) {
 			// The id (aka command type)
@@ -141,7 +138,7 @@ throw (_wexception)
 			fw.Unsigned32(it.serial);
 
 			// Now the command itself
-			cmd->Write(fw, *game, *os);
+			cmd->Write(fw, game, *os);
 		}
 
 		// DONE: next command

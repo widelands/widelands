@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -2874,7 +2874,7 @@ void Economy::do_split(Flag *f)
 void Economy::start_request_timer(int32_t delta)
 {
 	if (upcast(Game, game, &m_owner->egbase()))
-		game->get_cmdqueue()->enqueue
+		game->cmdqueue().enqueue
 			(new Cmd_Call_Economy_Balance
 			 	(game->get_gametime() + delta,
 			 	 this,
@@ -3176,7 +3176,7 @@ void Economy::balance_requestsupply(uint32_t timerid)
 
 #define CURRENT_ECONOMY_VERSION 2
 
-void Economy::Read(FileRead& fr, Game*, Map_Map_Object_Loader*)
+void Economy::Read(FileRead & fr, Game &, Map_Map_Object_Loader *)
 {
 	uint16_t version = fr.Unsigned16();
 
@@ -3228,7 +3228,7 @@ void Economy::Read(FileRead& fr, Game*, Map_Map_Object_Loader*)
 	}
 }
 
-void Economy::Write(FileWrite& fw, Game*, Map_Map_Object_Saver*)
+void Economy::Write(FileWrite & fw, Game &, Map_Map_Object_Saver *)
 {
 	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
 	Tribe_Descr const & tribe = owner().tribe();

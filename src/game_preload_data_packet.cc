@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ namespace Widelands {
 
 
 void Game_Preload_Data_Packet::Read
-	(FileSystem & fs, Game *, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game &, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	Profile prof;
@@ -59,20 +59,20 @@ throw (_wexception)
 
 
 void Game_Preload_Data_Packet::Write
-	(FileSystem & fs, Game * game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 
 	Profile prof;
 	Section & s = prof.create_section("global");
 
-	Interactive_Player const * const ipl = game->get_ipl();
+	Interactive_Player const * const ipl = game.get_ipl();
 
 	s.set_int   ("packet_version", ipl ? CURRENT_PACKET_VERSION : 1);
 
 	//  save some kind of header.
-	s.set_int   ("gametime",       game->get_gametime());
-	Map const & map = game->map();
+	s.set_int   ("gametime",       game.get_gametime());
+	Map const & map = game.map();
 	s.set_string("mapname",        map.get_name());  // Name of map
 	if (ipl) {
 		s.set_int   ("player_nr",   ipl->get_player_number()); // player that saved the game.

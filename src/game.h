@@ -121,15 +121,17 @@ struct Game : public Editor_Game_Base {
 		(const bool flush_graphics = true, const bool flush_animations = true);
 
 	// in-game logic
-	Cmd_Queue * get_cmdqueue() {return &cmdqueue;}
-	RNG* get_rng() {return &rng;}
+	Cmd_Queue const & cmdqueue() const {return m_cmdqueue;}
+	Cmd_Queue       & cmdqueue()       {return m_cmdqueue;}
+	RNG       const & rng     () const {return m_rng;}
+	RNG             & rng     ()       {return m_rng;}
 
 	uint32_t logic_rand();
 
 	/// Generate a random location within radius from location.
 	Coords random_location(Coords location, uint8_t radius);
 
-	void logic_rand_seed (const uint32_t seed) {rng.seed (seed);}
+	void logic_rand_seed (uint32_t const seed) {rng().seed (seed);}
 
 	StreamWrite& syncstream();
 	md5_checksum get_sync_hash() const;
@@ -174,9 +176,9 @@ private:
 
 	int32_t                            m_state;
 
-	RNG                            rng;
+	RNG                  m_rng;
 
-	Cmd_Queue                      cmdqueue;
+	Cmd_Queue            m_cmdqueue;
 
 	SaveHandler                    m_savehandler;
 
