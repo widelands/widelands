@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -131,9 +131,8 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 				m_cur_pos =
 					begin_of_next_line + m_cur_pos - begin_of_line
 					>
-					end_of_next_line
-					?
-					end_of_next_line : begin_of_next_line+m_cur_pos-begin_of_line;
+					end_of_next_line ? end_of_next_line :
+					begin_of_next_line + m_cur_pos - begin_of_line;
 			}
 			break;
 
@@ -159,9 +158,8 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 				m_cur_pos =
 					begin_of_lastline + (m_cur_pos - begin_of_line)
 					>
-					end_of_last_line
-					?
-					end_of_last_line : begin_of_lastline+(m_cur_pos-begin_of_line);
+					end_of_last_line ? end_of_last_line :
+					begin_of_lastline + (m_cur_pos - begin_of_line);
 			}
 			break;
 
@@ -254,7 +252,7 @@ void Multiline_Editbox::draw(RenderTarget & dst)
  * Set text function needs to take care of the current
  * position
  */
-void Multiline_Editbox::set_text(const char* str)
+void Multiline_Editbox::set_text(char const * const str)
 {
 	CalcLinePos();
 
@@ -286,7 +284,7 @@ void Multiline_Editbox::CalcLinePos()
 
 	m_textpos = //  Calculate as double, so it comes closer to the true value.
 		(lbtt == 0) & (lbtb == 0) ?
-		0 : (static_cast<double>(m_textheight - get_h()))/(lbtb + lbtt) * lbtt;
+		0 : (static_cast<double>(m_textheight - get_h())) / (lbtb + lbtt) * lbtt;
 }
 
 };

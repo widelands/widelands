@@ -852,7 +852,7 @@ ConstructionSite_Window::ConstructionSite_Window
 	// Add the caps button
 	box->add(create_capsbuttons(box), UI::Box::AlignCenter);
 
-	fit_inner(box);
+	fit_inner(*box);
 	move_inside_parent();
 }
 
@@ -1317,7 +1317,7 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 	UI::Box * prod_box = 0;
 	if (ps->get_building_type() == Building::PRODUCTIONSITE) {
 		prod_box = create_production_box (this, ps);
-		fit_inner(prod_box);
+		fit_inner(*prod_box);
 		move_inside_parent();
 	}
 }
@@ -1605,13 +1605,13 @@ m_capacity_up
 
 	m_bottom_box.add_space(5);
 
-	fit_inner(&m_bottom_box);
+	fit_inner(m_bottom_box);
 
 	m_vbox.add_space(8);
 
 	m_vbox.add(&m_bottom_box, UI::Box::AlignCenter);
 
-	fit_inner(&m_vbox);
+	fit_inner(m_vbox);
 
 	move_inside_parent();
 }
@@ -1776,7 +1776,7 @@ TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSit
 	add_tab(pic_tab_military, train_box);
 
 	m_tabpanel->resize();
-	fit_inner (m_tabpanel);
+	fit_inner (*m_tabpanel);
 }
 
 

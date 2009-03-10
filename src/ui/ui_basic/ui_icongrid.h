@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,11 @@ struct Icon_Grid : public Panel {
 		Grid_Persistant = 2,
 	};
 
-	Icon_Grid(Panel* parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, uint32_t flags, int32_t cols);
+	Icon_Grid
+		(Panel  * parent,
+		 int32_t x, int32_t y, int32_t cellw, int32_t cellh,
+		 uint32_t flags,
+		 int32_t  cols);
 
 	Signal1<int32_t> clicked;
 	Signal1<int32_t> mouseout;
@@ -56,8 +60,11 @@ struct Icon_Grid : public Panel {
 	bool is_persistant() const {return m_flags & Grid_Persistant;}
 	uint32_t get_orientation() const {return m_flags & Grid_Orientation_Mask;}
 
-	int32_t add(uint32_t picid, void* data, std::string descr = std::string());
-	void* get_data(int32_t idx);
+	int32_t add
+		(uint32_t            picid,
+		 void              * data,
+		 std::string const & descr = std::string());
+	void * get_data(int32_t idx);
 
 	void set_selection(int32_t idx);
 	int32_t get_selection() const {return m_selected;}
@@ -68,7 +75,7 @@ protected:
 	void draw(RenderTarget &);
 
 	int32_t index_for_point(int32_t x, int32_t y);
-	void get_cell_position(int32_t idx, int32_t* px, int32_t* py);
+	void get_cell_position(int32_t idx, uint32_t & px, uint32_t & py);
 	void update_for_index(int32_t idx);
 
 	void handle_mousein(bool inside);

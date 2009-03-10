@@ -145,7 +145,7 @@ extern unzFile ZEXPORT unzOpen OF((const char *path));
 */
 
 extern unzFile ZEXPORT unzOpen2 OF
-	((const char * path, zlib_filefunc_def* pzlib_filefunc_def));
+	((char const * path, zlib_filefunc_def * pzlib_filefunc_def));
 /*
    Open a Zip file, like unzOpen, but provide a set of file low level API
       for read/write the zip file (see ioapi.h)

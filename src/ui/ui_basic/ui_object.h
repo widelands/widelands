@@ -35,8 +35,8 @@ struct Object {
 	virtual ~Object() {}
 
 private:
-	Object & operator=(Object const &);
-	explicit Object   (Object const &);
+	Object & operator= (Object const &);
+	explicit Object    (Object const &);
 };
 };
 

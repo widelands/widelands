@@ -32,7 +32,7 @@ struct File_error : public std::runtime_error {
 		 const std::string & message = "problem with file/directory")
 	throw ()
 		:
-		std::runtime_error(thrower+": "+message+": "+filename),
+		std::runtime_error(thrower + ": " + message + ": " + filename),
 		m_thrower         (thrower),
 		m_filename        (filename),
 		m_message         (message)

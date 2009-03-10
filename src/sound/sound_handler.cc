@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2008 by the Widelands Development Team
+ * Copyright (C) 2005-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -106,7 +106,7 @@ void Sound_Handler::init()
 
 		set_disable_music(true);
 		set_disable_fx(true);
-		m_lock_audio_disabling=true;
+		m_lock_audio_disabling = true;
 		return;
 	} else {
 		Mix_HookMusicFinished(Sound_Handler::music_finished_callback);
@@ -367,22 +367,18 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	//screen x, y (without clipping applied, might well be invisible)
 	int32_t sx, sy;
 	//x, y resolutions of game window
-	int32_t xres, yres;
 	Widelands::FCoords fposition;
-	Point vp;
-	Interactive_Base *ia;
 
 	assert(m_the_game);
 	assert(position);
 
-	ia = m_the_game->get_iabase();
-	assert(ia);
-	vp = ia->get_viewpoint();
+	Interactive_Base const & ibase = *m_the_game->get_iabase();
+	Point const vp = ibase.get_viewpoint();
 
-	xres = ia->get_xres();
-	yres = ia->get_yres();
+	int32_t const xres = ibase.get_xres();
+	int32_t const yres = ibase.get_yres();
 
-	MapviewPixelFunctions::get_pix(*m_the_game->get_map(), position, sx, sy);
+	MapviewPixelFunctions::get_pix(m_the_game->map(), position, sx, sy);
 	sx -= vp.x;
 	sy -= vp.y;
 
@@ -403,12 +399,14 @@ bool Sound_Handler::play_or_not
 	 int32_t             const stereo_pos,
 	 uint8_t             const priority)
 {
-	bool allow_multiple=false; //convenience for easier code reading
+	bool allow_multiple = false; //  convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
 	float probability; //weighted total of all influences
 
 	//probability that this fx gets played; initially set according to priority
-	probability=(priority%PRIO_ALLOW_MULTIPLE)/128.0; //float division! not integer
+
+	//  float division! not integer
+	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0;
 
 	//TODO: what to do with fx that happen offscreen?
 	//TODO: reduce volume? reduce priority? other?
@@ -418,16 +416,16 @@ bool Sound_Handler::play_or_not
 
 	//TODO: check for a free channel
 
-	if (priority==PRIO_ALWAYS_PLAY) {
+	if (priority == PRIO_ALWAYS_PLAY) {
 		//TODO: if there is no free channel, kill a running fx and complain
 		return true;
 	}
 
-	if (priority>=PRIO_ALLOW_MULTIPLE)
-		allow_multiple=true;
+	if (priority >= PRIO_ALLOW_MULTIPLE)
+		allow_multiple = true;
 
 	//find out if an fx called fx_name is already running
-	bool already_running=false;
+	bool already_running = false;
 	const std::map<uint32_t, std::string>::const_iterator active_fx_end =
 		m_active_fx.end();
 	for
@@ -437,7 +435,7 @@ bool Sound_Handler::play_or_not
 		 ++it)
 	{
 		if (it->second == fx_name) {
-			already_running=true;
+			already_running = true;
 			break;
 		}
 	}
@@ -449,23 +447,26 @@ bool Sound_Handler::play_or_not
 	//TODO: high general frequency reduces weighted priority
 	//TODO: deal with "coupled" effects like throw_net and retrieve_net
 
-	uint32_t ticks_since_last_play=SDL_GetTicks()-m_fxs[fx_name]->m_last_used;
+	uint32_t const ticks_since_last_play =
+		SDL_GetTicks() - m_fxs[fx_name]->m_last_used;
 
-	if (ticks_since_last_play>SLIDING_WINDOW_SIZE) { //reward an fx for being silent
-		evaluation=1; //arbitrary value; 0->no change, 1->probability=1
-		probability=1-((1-probability)*(1-evaluation)); //"decrease improbability"
+	//  reward an fx for being silent
+	if (ticks_since_last_play > SLIDING_WINDOW_SIZE) {
+		evaluation = 1; //  arbitrary value; 0 -> no change, 1 -> probability = 1
+
+		//  "decrease improbability"
+		probability = 1 - ((1 - probability) * (1 - evaluation));
 	} else { //penalize an fx for playing in short succession
-		evaluation= static_cast<float>(ticks_since_last_play)/SLIDING_WINDOW_SIZE;
-		probability*=evaluation; //decrease probability
+		evaluation =
+			static_cast<float>(ticks_since_last_play) / SLIDING_WINDOW_SIZE;
+		probability *= evaluation; //  decrease probability
 	}
 
 	//printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX %s ticks: %i ev: %f prob: %f\n", fx_name.c_str(), ticks_since_last_play, evaluation, probability);
 
 	//finally: the decision
-	if ((m_rng.rand()%255)/255.0 <= probability) //float division! not integer
-		return true;
-	else
-		return false;
+	//  float division! not integer
+	return (m_rng.rand() % 255) / 255.0 <= probability;
 }
 
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s)
@@ -746,7 +747,7 @@ void Sound_Handler::fx_finished_callback(int32_t channel)
 {
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
-	assert(channel>=0);
+	assert(0 <= channel);
 	g_sound_handler.handle_channel_finished(static_cast<uint32_t>(channel));
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,7 +111,7 @@ private:
 	void set_scrollpos(int32_t);
 
 private:
-	static const int32_t ms_darken_value=-20;
+	static const int32_t ms_darken_value = -20;
 
 	struct Entry_Record {
 		uint32_t m_entry;
@@ -156,15 +156,15 @@ struct Listselect : public BaseListselect {
 		 const bool select_this = false)
 	{
 		m_entry_cache.push_back(value);
-		BaseListselect::add(name, m_entry_cache.size()-1, picid, select_this);
+		BaseListselect::add(name, m_entry_cache.size() - 1, picid, select_this);
 	}
 
-	const Entry& operator[](const uint32_t i) const throw ()
+	Entry const & operator[](uint32_t const i) const throw ()
 	{
 		return m_entry_cache[BaseListselect::operator[](i)];
 	}
 
-	const Entry& get_selected() const
+	Entry const & get_selected() const
 	{
 		return m_entry_cache[BaseListselect::get_selected()];
 	}
@@ -181,8 +181,8 @@ private:
  * internally.
  */
 template<typename Entry>
-struct Listselect<Entry&> : public Listselect<Entry*> {
-	typedef Listselect<Entry*> Base;
+struct Listselect<Entry &> : public Listselect<Entry *> {
+	typedef Listselect<Entry *> Base;
 
 	Listselect
 		(Panel * parent,
@@ -195,19 +195,19 @@ struct Listselect<Entry&> : public Listselect<Entry*> {
 
 	void add
 		(const char * const name,
-		 Entry& value,
+		 Entry      &       value,
 		 const int32_t picid = -1,
 		 const bool select_this = false)
 	{
 		Base::add(name, &value, picid, select_this);
 	}
 
-	Entry& operator[](const uint32_t i) const throw ()
+	Entry & operator[](uint32_t const i) const throw ()
 	{
 		return *Base::operator[](i);
 	}
 
-	Entry& get_selected() const
+	Entry & get_selected() const
 	{
 		return *Base::get_selected();
 	}

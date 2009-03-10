@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007, 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,14 +38,17 @@ UniqueWindow::Registry::~Registry() {delete window;}
 /**
  * Register, position according to the registry information.
 */
-UniqueWindow::UniqueWindow(Panel* parent, UniqueWindow::Registry* reg, int32_t w, int32_t h, std::string title)
-	: Window(parent, 0, 0, w, h, title.c_str())
+UniqueWindow::UniqueWindow
+	(Panel                  * const parent,
+	 UniqueWindow::Registry * const reg,
+	 int32_t const w, int32_t const h,
+	 std::string      const & title)
+	:
+	Window         (parent, 0, 0, w, h, title.c_str()),
+	m_registry     (reg),
+	m_usedefaultpos(true)
 {
-	m_registry = reg;
-	m_usedefaultpos = true;
-
-	if (m_registry)
-	{
+	if (m_registry) {
 		delete m_registry->window;
 
 		m_registry->window = this;

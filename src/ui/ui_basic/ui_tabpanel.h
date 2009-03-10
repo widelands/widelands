@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ namespace UI {
  * The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
 */
 struct Tab_Panel : public Panel {
-	Tab_Panel(Panel* parent, int32_t x, int32_t y, uint32_t background);
+	Tab_Panel(Panel * parent, int32_t x, int32_t y, uint32_t background);
 
 	void resize();
 
@@ -43,7 +43,9 @@ struct Tab_Panel : public Panel {
 	bool get_snapparent() const {return m_snapparent;}
 
 	uint32_t add
-		(uint32_t picid, Panel* panel, const std::string & tooltip = std::string());
+		(uint32_t            picid,
+		 Panel             * panel,
+		 std::string const & tooltip = std::string());
 
 	void activate(uint32_t idx);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -103,7 +103,7 @@ int32_t ZipFilesystem::FindFiles
 		std::string filename = FS_Filename(complete_filename.c_str());
 		std::string filepath =
 			complete_filename.substr
-			(0, complete_filename.size()- filename.size());
+				(0, complete_filename.size() - filename.size());
 
 		//  FIXME Something strange is going on with regard to the leading slash!
 		//  FIXME This is just an ugly workaround and does not solve the real
@@ -189,7 +189,7 @@ FileSystem * ZipFilesystem::MakeSubFileSystem(std::string const & path) {
 
 	m_Close();
 
-	ZipFilesystem* newfs = new ZipFilesystem(m_zipfilename);
+	ZipFilesystem * const newfs = new ZipFilesystem(m_zipfilename);
 	newfs->m_basename = m_basename + '/' + path;
 
 	return newfs;
@@ -215,7 +215,7 @@ FileSystem * ZipFilesystem::CreateSubFileSystem
 
 	m_Close();
 
-	ZipFilesystem* newfs = new ZipFilesystem(*this);
+	ZipFilesystem * const newfs = new ZipFilesystem(*this);
 	newfs->m_basename = m_basename + '/' + path;
 
 	return newfs;

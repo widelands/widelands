@@ -86,7 +86,7 @@ EditBox::~EditBox()
 /**
  * \return the current text entered in the edit box
  */
-const std::string& EditBox::text() const
+std::string const & EditBox::text() const
 {
 	return m->text;
 }
@@ -98,7 +98,7 @@ const std::string& EditBox::text() const
  * The text is truncated if it is longer than the maximum length set by
  * \ref setMaxLength().
  */
-void EditBox::setText(const std::string& t)
+void EditBox::setText(std::string const & t)
 {
 	if (t == m->text)
 		return;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,19 +56,18 @@ public:
 
 	int32_t get_nritems() const {return m_items.size();}
 
-	void add(Panel* panel, uint32_t align);
+	void add(Panel * panel, uint32_t align);
 	void add_space(uint32_t space);
 	bool is_snap_target() const {return true;}
 
 private:
-	void get_item_size(uint32_t idx, int32_t* depth, int32_t* breadth);
+	void get_item_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);
 	void set_item_pos(uint32_t idx, int32_t pos);
 	void update_positions();
 	void scrollbar_moved(int32_t);
 
 	//don't resize beyond this size
-	int32_t m_max_x;
-	int32_t m_max_y;
+	uint32_t m_max_x, m_max_y;
 
 private:
 	struct Item {

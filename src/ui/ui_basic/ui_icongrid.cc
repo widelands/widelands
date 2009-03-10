@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,29 +30,31 @@ namespace UI {
 /**
  * Initialize the grid
 */
-Icon_Grid::Icon_Grid(Panel* parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, uint32_t flags, int32_t cols)
-	: Panel(parent, x, y, 0, 0)
-{
-	m_flags = flags;
-	m_columns = cols;
-
-	m_cell_width = cellw;
-	m_cell_height = cellh;
-
-	m_highlight = -1;
-	m_clicked = -1;
-	m_selected = -1;
-	m_font_height = 0;
-
-	m_selectbox_color = RGBColor(255, 255, 0);
-}
+Icon_Grid::Icon_Grid
+	(Panel  * const parent,
+	 int32_t const x, int32_t const y, int32_t const cellw, int32_t const cellh,
+	 uint32_t const flags,
+	 int32_t  const cols)
+	:
+	Panel            (parent, x, y, 0, 0),
+	m_flags          (flags),
+	m_columns        (cols),
+	m_highlight      (-1),
+	m_clicked        (-1),
+	m_selected       (-1),
+	m_cell_width     (cellw),
+	m_cell_height    (cellh),
+	m_font_height    (0),
+	m_selectbox_color(255, 255, 0)
+{}
 
 
 /**
  * Add a new icon to the list and resize appropriately.
  * Returns the index of the newly added icon.
 */
-int32_t Icon_Grid::add(uint32_t picid, void* data, std::string descr)
+int32_t Icon_Grid::add
+	(uint32_t const picid, void * const data, std::string const & descr)
 {
 	Item it;
 
@@ -93,7 +95,7 @@ int32_t Icon_Grid::add(uint32_t picid, void* data, std::string descr)
 /**
  * Returns the user-defined data of the icon with the given index.
 */
-void* Icon_Grid::get_data(int32_t idx)
+void * Icon_Grid::get_data(int32_t const idx)
 {
 	assert(static_cast<uint32_t>(idx) < m_items.size());
 
@@ -131,12 +133,12 @@ void Icon_Grid::set_selectbox_color(RGBColor clr)
 */
 void Icon_Grid::draw(RenderTarget & dst)
 {
-	int32_t x, y;
 	bool highlight = false;
 
 	// First of all, draw the highlight
 	if (m_highlight >= 0 && (m_clicked < 0 || m_clicked == m_highlight)) {
-		get_cell_position(m_highlight, &x, &y);
+		uint32_t x, y;
+		get_cell_position(m_highlight, x, y);
 		dst.brighten_rect
 			(Rect(Point(x, y), m_cell_width, m_cell_height),
 			 MOUSE_OVER_BRIGHT_FACTOR);
@@ -144,8 +146,7 @@ void Icon_Grid::draw(RenderTarget & dst)
 	}
 
 	// Draw the symbols
-	x = 0;
-	y = 0;
+	uint32_t x = 0, y = 0;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		const uint32_t picid = m_items[idx].picid;
@@ -159,7 +160,7 @@ void Icon_Grid::draw(RenderTarget & dst)
 		if (get_orientation() == Grid_Horizontal)
 		{
 			x += m_cell_width;
-			if (!((idx+1) % m_columns)) {
+			if (!((idx + 1) % m_columns)) {
 				x = 0;
 				y += m_cell_height;
 			}
@@ -167,7 +168,7 @@ void Icon_Grid::draw(RenderTarget & dst)
 		else
 		{
 			y += m_cell_height;
-			if (!((idx+1) % m_columns)) {
+			if (!((idx + 1) % m_columns)) {
 				y = 0;
 				x += m_cell_width;
 			}
@@ -178,7 +179,7 @@ void Icon_Grid::draw(RenderTarget & dst)
 	if (is_persistant())
 	{
 		if (m_selected >= 0) {
-			get_cell_position(m_selected, &x, &y);
+			get_cell_position(m_selected, x, y);
 			dst.draw_rect
 				(Rect(Point(x, y), m_cell_width, m_cell_height), m_selectbox_color);
 		}
@@ -226,17 +227,15 @@ int32_t Icon_Grid::index_for_point(int32_t x, int32_t y)
 /**
  * Calculate the upper left corner of the cell with the given index.
 */
-void Icon_Grid::get_cell_position(int32_t idx, int32_t* px, int32_t* py)
+void Icon_Grid::get_cell_position
+	(int32_t const idx, uint32_t & px, uint32_t & py)
 {
-	if (get_orientation() == Grid_Horizontal)
-	{
-		*px = (idx % m_columns) * m_cell_width;
-		*py = (idx / m_columns) * m_cell_height;
-	}
-	else
-	{
-		*px = (idx / m_columns) * m_cell_width;
-		*py = (idx % m_columns) * m_cell_height;
+	if (get_orientation() == Grid_Horizontal) {
+		px = (idx % m_columns) * m_cell_width;
+		py = (idx / m_columns) * m_cell_height;
+	} else {
+		px = (idx / m_columns) * m_cell_width;
+		py = (idx % m_columns) * m_cell_height;
 	}
 }
 
@@ -244,12 +243,11 @@ void Icon_Grid::get_cell_position(int32_t idx, int32_t* px, int32_t* py)
 /**
  * Issue an update() call for the cell with the given idx.
 */
-void Icon_Grid::update_for_index(int32_t idx)
+void Icon_Grid::update_for_index(int32_t const idx)
 {
 	if (static_cast<size_t>(idx) < m_items.size()) {
-		int32_t x, y;
-
-		get_cell_position(idx, &x, &y);
+		uint32_t x, y;
+		get_cell_position(idx, x, y);
 		update(x, y, m_cell_width, m_cell_height);
 	}
 }

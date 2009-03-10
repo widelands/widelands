@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,16 +69,13 @@ void Box::set_scrolling(bool scroll)
  */
 void Box::resize()
 {
-	int32_t totaldepth;
-	int32_t maxbreadth;
 
-	totaldepth = 0;
-	maxbreadth = 0;
+	uint32_t totaldepth = 0;
+	uint32_t maxbreadth = 0;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		int32_t depth, breadth;
-
-		get_item_size(idx, &depth, &breadth);
+		uint32_t depth, breadth;
+		get_item_size(idx, depth, breadth);
 
 		totaldepth += depth;
 		if (breadth > maxbreadth)
@@ -129,7 +126,7 @@ void Box::resize()
 			m_scrollbar->set_size(sb_w, sb_h);
 		}
 
-		m_scrollbar->set_steps(totaldepth-pagesize);
+		m_scrollbar->set_steps(totaldepth - pagesize);
 		m_scrollbar->set_singlestepsize(Scrollbar::Size);
 		m_scrollbar->set_pagesize(pagesize);
 	}
@@ -148,10 +145,9 @@ void Box::update_positions()
 	int32_t scrollpos = m_scrollbar ? m_scrollbar->get_scrollpos() : 0;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		int32_t depth;
-
-		get_item_size(idx, &depth, 0);
-		set_item_pos(idx, totaldepth-scrollpos);
+		uint32_t depth, breadth;
+		get_item_size(idx, depth, breadth);
+		set_item_pos(idx, totaldepth - scrollpos);
 
 		totaldepth += depth;
 	}
@@ -169,7 +165,7 @@ void Box::scrollbar_moved(int32_t)
 /**
  * Add a new panel to be controlled by this box
 */
-void Box::add(Panel* panel, uint32_t align)
+void Box::add(Panel * const panel, uint32_t const align)
 {
 	Item it;
 
@@ -203,12 +199,12 @@ void Box::add_space(uint32_t space)
  * Retrieve the given item's size. depth is the size of the item along the
  * orientation axis, breadth is the size perpendicular to the orientation axis.
 */
-void Box::get_item_size(uint32_t idx, int32_t* pdepth, int32_t* pbreadth)
+void Box::get_item_size
+	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)
 {
 	assert(idx < m_items.size());
 
-	const Item& it = m_items[idx];
-	int32_t depth, breadth;
+	Item const & it = m_items[idx];
 
 	switch (it.type) {
 	case Item::ItemPanel:
@@ -229,11 +225,6 @@ void Box::get_item_size(uint32_t idx, int32_t* pdepth, int32_t* pbreadth)
 	default:
 		throw wexception("Box::get_item_size: bad type %u", it.type);
 	}
-
-	if (pdepth)
-		*pdepth   = depth;
-	if (pbreadth)
-		*pbreadth = breadth;
 }
 
 
@@ -246,7 +237,7 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 {
 	assert(idx < m_items.size());
 
-	const Item& it = m_items[idx];
+	Item const & it = m_items[idx];
 
 	switch (it.type) {
 	case Item::ItemPanel: {

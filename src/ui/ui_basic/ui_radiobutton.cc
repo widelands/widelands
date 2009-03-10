@@ -61,7 +61,7 @@ Radiobutton::Radiobutton
  */
 Radiobutton::~Radiobutton()
 {
-	for (Radiobutton **pp = &m_group.m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
+	for (Radiobutton * * pp = &m_group.m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
 		if (*pp == this) {
 			*pp = m_nextbtn;
 			break;

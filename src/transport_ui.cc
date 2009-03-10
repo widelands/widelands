@@ -51,7 +51,7 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 				m_box.add(new Ware_Type_Box(m_box, i, descr), UI::Box::AlignTop);
 		}
 		m_box.set_scrolling(true);
-		fit_inner(&m_box);
+		fit_inner(m_box);
 	}
 
 	virtual void think() {

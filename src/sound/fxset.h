@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006, 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,11 +41,9 @@ class Sound_Handler;
  * The fact that an FXset really contains several different effects is hidden
  * from the outside
  */
-class FXset
-{
+struct FXset {
 	friend class Sound_Handler;
-public:
-	FXset(Uint8 prio = PRIO_MEDIUM);
+	FXset(uint8_t priority = PRIO_MEDIUM);
 	~FXset();
 
 	void add_fx(Mix_Chunk * fx, Uint8 prio = PRIO_MEDIUM);
@@ -54,7 +52,7 @@ public:
 
 protected:
 	/// The collection of sound effects
-	std::vector<Mix_Chunk*> m_fxs;
+	std::vector<Mix_Chunk *> m_fxs;
 
 	/** When the effect was played the last time (milliseconds since SDL
 	 * initialization). Set via SDL_GetTicks()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,10 @@
 
 #include "ui_table.h"
 
-#include "constants.h"
 #include "graphic.h"
 #include "rendertarget.h"
 #include "ui_button.h"
+#include "ui_constants.h"
 #include "ui_scrollbar.h"
 #include "wlapplication.h"
 
@@ -341,8 +341,8 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 			if (eri->get_string(m_sort_column) > erj->get_string(m_sort_column)) {
 				if      (m_selection == i) m_selection = j;
 				else if (m_selection == j) m_selection = i;
-				m_entry_records[i]=erj;
-				m_entry_records[j]=eri;
+				m_entry_records[i] = erj;
+				m_entry_records[j] = eri;
 			}
 		}
 	else
@@ -352,8 +352,8 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 			if (eri->get_string(m_sort_column) < erj->get_string(m_sort_column)) {
 				if      (m_selection == i) m_selection = j;
 				else if (m_selection == j) m_selection = i;
-				m_entry_records[i]=erj;
-				m_entry_records[j]=eri;
+				m_entry_records[i] = erj;
+				m_entry_records[j] = eri;
 			}
 		}
 }
@@ -368,7 +368,7 @@ void Table<void *>::Entry_Record::set_picture
 {
 	assert(column < m_data.size());
 
-	m_data[column].d_picture= picid;
+	m_data[column].d_picture = picid;
 	m_data[column].d_string = str;
 }
 void Table<void *>::Entry_Record::set_string

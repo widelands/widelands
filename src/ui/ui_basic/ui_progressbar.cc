@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2007, 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,14 +31,16 @@ namespace UI {
 /**
  * Initialize the progress bar.
 */
-Progress_Bar::Progress_Bar(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation)
-	: Panel(parent, x, y, w, h)
-{
-	m_orientation = orientation;
-
-	m_state = 0;
-	m_total = 100;
-}
+Progress_Bar::Progress_Bar
+	(Panel * const parent,
+	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+	 uint32_t const orientation)
+	:
+	Panel        (parent, x, y, w, h),
+	m_orientation(orientation),
+	m_state      (0),
+	m_total      (100)
+{}
 
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,12 +35,16 @@ namespace UI {
 /**
  * Initialize an empty Tab_Panel
 */
-Tab_Panel::Tab_Panel(Panel* parent, int32_t x, int32_t y, uint32_t background)
-	: Panel(parent, x, y, 0, 0)
+Tab_Panel::Tab_Panel
+	(Panel * const parent,
+	 int32_t const x, int32_t const y,
+	 uint32_t const background)
+	:
+	Panel       (parent, x, y, 0, 0),
+	m_active    (0),
+	m_snapparent(false),
+	m_highlight (-1)
 {
-	m_active = 0;
-	m_snapparent = false;
-
 	switch (background) {
 	default:
 	case 0:
@@ -53,7 +57,6 @@ Tab_Panel::Tab_Panel(Panel* parent, int32_t x, int32_t y, uint32_t background)
 		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.png"); break;
 	}
 
-	m_highlight = -1;
 }
 
 
@@ -73,7 +76,7 @@ void Tab_Panel::resize()
 
 	// size of contents
 	if (m_active < m_tabs.size()) {
-		Panel* panel = m_tabs[m_active].panel;
+		Panel * const panel = m_tabs[m_active].panel;
 
 		if (panel->get_w() > w)
 			w = panel->get_w();
@@ -104,7 +107,10 @@ void Tab_Panel::set_snapparent(bool snapparent)
 /**
  * Add a new tab
 */
-uint32_t Tab_Panel::add(uint32_t picid, Panel* panel, const std::string & tooltip_text)
+uint32_t Tab_Panel::add
+	(uint32_t            const picid,
+	 Panel             * const panel,
+	 std::string const &       tooltip_text)
 {
 	assert(panel);
 	assert(panel->get_parent() == this);
@@ -177,7 +183,7 @@ void Tab_Panel::draw(RenderTarget & dst)
 		g_gr->get_picture_size(m_tabs[idx].picid, cpw, cph);
 
 		dst.blit
-			(Point(x + (TP_BUTTON_WIDTH - cpw)/2, (TP_BUTTON_HEIGHT - cph) / 2),
+			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
 			 m_tabs[idx].picid);
 
 		// Draw top part of border
@@ -264,9 +270,12 @@ bool Tab_Panel::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int
 			set_tooltip(t);
 		}
 		if (m_highlight >= 0)
-			update(m_highlight*TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
+			update
+				(m_highlight * TP_BUTTON_WIDTH, 0,
+				 TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
 		if (hl >= 0)
-			update(hl*TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
+			update
+				(hl * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
 
 		m_highlight = hl;
 	}

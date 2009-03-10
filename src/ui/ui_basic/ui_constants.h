@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,5 +24,6 @@
 #define MOUSE_OVER_BRIGHT_FACTOR 15
 #define MOUSE_BUTTON_AUTOREPEAT_DELAY 250
 #define MOUSE_BUTTON_AUTOREPEAT_TICK   50
+#define DOUBLE_CLICK_INTERVAL         500
 
 #endif

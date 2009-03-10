@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ void Songset::add_song(std::string const & filename) {
  * \return  a pointer to the chosen song; 0 if none was found, music is disabled
  *          or an error occurred
  */
-Mix_Music *Songset::get_song()
+Mix_Music * Songset::get_song()
 {
 	int32_t songnumber;
 	std::string filename;
@@ -80,7 +80,8 @@ Mix_Music *Songset::get_song()
 	//then open the new song
 	if (m_fr.TryOpen(*g_fs, filename.c_str()))
 		m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize());
-	else return 0;
+	else
+		return 0;
 
 	//TODO: review the #ifdef'ed blocks
 
@@ -101,10 +102,10 @@ Mix_Music *Songset::get_song()
 	// This solution is terribly slow, but we hope that there are only
 	// a few sound musics around
 	char tempfilebuf[256] = "/tmp/wl_tempmusic.XXXXXXXX";
-	char* tempfile = tempfilebuf;
+	char * tempfile = tempfilebuf;
 	tempfile = mktemp(tempfilebuf);
 
-	FILE* f = fopen(tempfile, "w");
+	FILE * const f = fopen(tempfile, "w");
 	fwrite(m_fr.Data(0), m_fr.GetSize(), 1, f);
 	fclose(f);
 
@@ -114,12 +115,10 @@ Mix_Music *Songset::get_song()
 #endif // __WIN32__
 #endif // NEW_SDL_MIXER == 1
 
-	if (m_m) {
-		log(("Sound_Handler: loaded song \""+filename+"\"\n").c_str());
-	} else {
-		log
-			(("Sound_Handler: loading song \"" + filename + "\" failed!\n")
-			 .c_str());
+	if (m_m)
+		log("Sound_Handler: loaded song \"%s\"\n", filename.c_str());
+	else {
+		log("Sound_Handler: loading song \"%s\" failed!\n", filename.c_str());
 		log("Sound_Handler: %s\n", Mix_GetError());
 	}
 

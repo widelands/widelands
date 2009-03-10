@@ -105,7 +105,7 @@ typedef struct
 	uLong       external_fa;    /* external file attributes        4 bytes */
 } zip_fileinfo;
 
-typedef const char* zipcharpc;
+typedef char const * zipcharpc;
 
 
 #define APPEND_STATUS_CREATE        (0)
@@ -207,7 +207,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3 OF
 
 
 extern int32_t ZEXPORT zipWriteInFileInZip OF
-	((zipFile file, const void* buf, unsigned len));
+	((zipFile file, void const * buf, unsigned len));
 /*
   Write data in the zipfile
 */
@@ -225,7 +225,7 @@ extern int32_t ZEXPORT zipCloseFileInZipRaw OF
   uncompressed_size and crc32 are value for the uncompressed size
 */
 
-extern int32_t ZEXPORT zipClose OF((zipFile file, const char* global_comment));
+extern int32_t ZEXPORT zipClose OF((zipFile file, char const * global_comment));
 /*
   Close the zipfile
 */

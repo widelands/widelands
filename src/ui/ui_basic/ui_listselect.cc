@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,10 +66,8 @@ m_fontsize(UI_FONT_SIZE_SMALL)
 		g_gr->get_picture_size(m_check_picid, m_max_pic_width, pic_h);
 		if (pic_h > m_lineheight) m_lineheight = pic_h;
 	}
-	else {
-		m_max_pic_width=0;
-	}
-
+	else
+		m_max_pic_width = 0;
 }
 
 
@@ -120,9 +118,9 @@ void BaseListselect::add
 	strcpy(er.name, name);
 
 	uint32_t entry_height = 0;
-	if (picid==-1) {
-		entry_height=g_fh->get_fontheight(m_fontname, m_fontsize);
-	} else {
+	if (picid == -1)
+		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
+	else {
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
@@ -131,7 +129,8 @@ void BaseListselect::add
 			m_max_pic_width = w;
 	}
 
-	if (entry_height>m_lineheight) m_lineheight=entry_height;
+	if (entry_height > m_lineheight)
+		m_lineheight = entry_height;
 
 	m_entry_records.push_back(&er);
 
@@ -179,8 +178,8 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 			if (strcmp(eri->name, erj->name) > 0)  {
 				if      (m_selection == i) m_selection = j;
 				else if (m_selection == j) m_selection = i;
-				m_entry_records[i]=erj;
-				m_entry_records[j]=eri;
+				m_entry_records[i] = erj;
+				m_entry_records[j] = eri;
 			}
 		}
 }
@@ -296,7 +295,7 @@ void BaseListselect::draw(RenderTarget & dst)
 	// draw text lines
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
-	int32_t y = 1 + idx*lineheight - m_scrollpos;
+	int32_t y = 1 + idx * lineheight - m_scrollpos;
 
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
@@ -314,18 +313,13 @@ void BaseListselect::draw(RenderTarget & dst)
 				 -ms_darken_value);
 		}
 
-		int32_t x;
-		if (m_align & Align_Right)
-			x = get_eff_w() - 1;
-		else if (m_align & Align_HCenter)
-			x = get_eff_w()>>1;
-		else {
+		int32_t const x =
+			m_align & Align_Right   ? get_eff_w() -      1 :
+			m_align & Align_HCenter ? get_eff_w() >>     1 :
+
 			// Pictures are always left aligned, leave some space here
-			if (m_max_pic_width)
-				x= m_max_pic_width + 10;
-			else
-			x=1;
-		}
+			m_max_pic_width         ? m_max_pic_width + 10 :
+			1;
 
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
@@ -383,7 +377,7 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 
 
 		if //  check if doubleclicked
-			(time-real_last_click_time < DOUBLE_CLICK_INTERVAL
+			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
 			 and
 			 m_last_selection == m_selection
 			 and
@@ -424,7 +418,7 @@ void BaseListselect::remove(const uint32_t i)
  */
 void BaseListselect::remove(const char * const str)
 {
-	for (uint32_t i=0; i<m_entry_records.size(); ++i) {
+	for (uint32_t i = 0; i < m_entry_records.size(); ++i) {
 		if (!strcmp(m_entry_records[i]->name, str)) {
 			remove(i);
 			return;

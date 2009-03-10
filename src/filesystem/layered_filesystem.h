@@ -77,9 +77,9 @@ struct LayeredFileSystem : public FileSystem {
 	virtual std::string getBasename() {return std::string();};
 
 private:
-	typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;
+	typedef std::vector<FileSystem *>::reverse_iterator FileSystem_rit;
 
-	std::vector<FileSystem*> m_filesystems;
+	std::vector<FileSystem *> m_filesystems;
 };
 
 /// Access all game data files etc. through this FileSystem

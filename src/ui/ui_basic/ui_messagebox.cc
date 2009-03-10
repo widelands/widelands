@@ -31,7 +31,7 @@ namespace UI {
 
 
 struct MessageBoxImpl {
-	Multiline_Textarea* textarea;
+	Multiline_Textarea * textarea;
 	MessageBox::MB_Type type;
 };
 
@@ -61,10 +61,10 @@ MessageBox::MessageBox
 
 	g_fh->get_size(font, fontsize, text, &width, &height, maxwidth);
 	// stupid heuristic to avoid excessively long lines
-	if (height < 2*fontsize)
-		g_fh->get_size(font, fontsize, text, &width, &height, maxwidth/2);
+	if (height < 2 * fontsize)
+		g_fh->get_size(font, fontsize, text, &width, &height, maxwidth / 2);
 
-	width += 10+2*d->textarea->scrollbar_w();
+	width += 10 + 2 * d->textarea->scrollbar_w();
 	if (width < 100)
 		width = 100;
 	height += 50;
@@ -74,7 +74,7 @@ MessageBox::MessageBox
 	set_inner_size(width, height);
 	set_pos(Point((outerwidth - get_w()) / 2, (outerheight - get_h()) / 2));
 
-	d->textarea->set_size(width-10, height-50);
+	d->textarea->set_size(width - 10, height - 50);
 
 	if (type == OK) {
 		new Button<MessageBox>

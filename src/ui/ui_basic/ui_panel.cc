@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009§ by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,7 +119,7 @@ void Panel::free_children() {while (_fchild) delete _fchild;}
  */
 int32_t Panel::run()
 {
-	WLApplication *app=WLApplication::get();
+	WLApplication * const app = WLApplication::get();
 	Panel *prevmodal = _modal;
 	_modal = this;
 	_g_mousegrab = 0; // good ol' paranoia
@@ -170,10 +170,9 @@ int32_t Panel::run()
 
 			rt.blit(app->get_mouse_position() - Point(3, 7), s_default_cursor);
 
-			if (Panel *lowest = _mousein)
-			{
-				while (lowest->_mousein)
-					lowest = lowest->_mousein;
+			if (Panel * lowest = _mousein) {
+				while (Panel * const mousein = lowest->_mousein)
+					lowest = mousein;
 				if (lowest->tooltip())
 					draw_tooltip(rt, *lowest);
 			}
@@ -275,17 +274,17 @@ void Panel::move_inside_parent() {}
  */
 void Panel::set_inner_size(uint32_t const nw, uint32_t const nh)
 {
-	set_size(nw+_lborder+_rborder, nh+_tborder+_bborder);
+	set_size(nw + _lborder + _rborder, nh + _tborder + _bborder);
 }
 
 
 /**
  * Resize so that we match the size of the inner panel.
  */
-void Panel::fit_inner(Panel* inner)
+void Panel::fit_inner(Panel & inner)
 {
-	set_inner_size(inner->get_w(), inner->get_h());
-	inner->set_pos(Point(0, 0));
+	set_inner_size(inner.get_w(), inner.get_h());
+	inner.set_pos(Point(0, 0));
 }
 
 
@@ -376,13 +375,13 @@ void Panel::update(int32_t x, int32_t y, int32_t w, int32_t h)
 	_needdraw = true;
 
 	if (_parent) {
-		_parent->update_inner(x+_x, y+_y, w, h);
+		_parent->update_inner(x + _x, y + _y, w, h);
 	} else {
 		if (x < 0) {
 			w += x;
 			x = 0;
 		}
-		if (x+w > g_gr->get_xres())
+		if (x + w > g_gr->get_xres())
 			w = g_gr->get_xres() - x;
 		if (w <= 0)
 			return;
@@ -391,7 +390,7 @@ void Panel::update(int32_t x, int32_t y, int32_t w, int32_t h)
 			h += y;
 			y = 0;
 		}
-		if (y+h > g_gr->get_yres())
+		if (y + h > g_gr->get_yres())
 			h = g_gr->get_yres() - y;
 		if (h <= 0)
 			return;
@@ -417,7 +416,7 @@ void Panel::update()
  */
 void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
 {
-	update(x-_lborder, y-_tborder, w, h);
+	update(x - _lborder, y - _tborder, w, h);
 }
 
 /**
@@ -691,7 +690,7 @@ void Panel::do_draw(RenderTarget & dst)
 				draw(dst);
 
 				// draw back to front
-				for (Panel *child = _lchild; child; child = child->_prev)
+				for (Panel * child = _lchild; child; child = child->_prev)
 					child->do_draw(dst);
 
 				draw_overlay(dst);
@@ -910,7 +909,7 @@ void Panel::ui_mousemove
 	uint32_t w, h;
 	g_gr->get_picture_size(s_default_cursor, w, h);
 
-	g_gr->update_rectangle(x-xdiff, y-ydiff, w, h);
+	g_gr->update_rectangle(x - xdiff, y - ydiff, w, h);
 	g_gr->update_rectangle(x, y, w, h);
 
 	p = ui_trackmouse(&x, &y);

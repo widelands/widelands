@@ -273,7 +273,7 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 	m_value =
 		static_cast<int32_t>
 			(rint
-			 	(static_cast<double>((m_max_value-m_min_value) * m_cursor_pos)
+			 	(static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
 			 	 /
 			 	 get_bar_size()));
 
@@ -346,7 +346,7 @@ bool HorizontalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) 
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 
-	if (x >= m_cursor_pos and x <= m_cursor_pos+m_cursor_size) {
+	if (x >= m_cursor_pos and x <= m_cursor_pos + m_cursor_size) {
 		//  click on cursor
 		cursor_pressed(x);
 		return true;
@@ -417,7 +417,7 @@ bool VerticalSlider::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t
 bool VerticalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	if (y >= m_cursor_pos  and  y <= m_cursor_pos+m_cursor_size) {
+	if (y >= m_cursor_pos and y <= m_cursor_pos + m_cursor_size) {
 		//  click on cursor
 		cursor_pressed(y);
 		return true;

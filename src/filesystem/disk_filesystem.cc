@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,10 +45,10 @@ RealFSImpl::RealFSImpl(std::string const & Directory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
 #ifdef __WIN32__
-	m_root=Directory;
+	m_root = Directory;
 #else
 	m_root = "";
-	m_root=FS_CanonicalizeName(Directory);
+	m_root = FS_CanonicalizeName(Directory);
 #endif
 }
 
@@ -105,7 +105,7 @@ int32_t RealFSImpl::FindFiles
 	}
 
 	do {
-		results->insert(realpath+'\\'+c_file.name);
+		results->insert(realpath + '\\' + c_file.name);
 	} while (_findnext(hFile, &c_file) == 0);
 
 	_findclose(hFile);
@@ -123,7 +123,7 @@ int32_t RealFSImpl::FindFiles
 		buf = m_directory + '/' + path + '/' + pattern;
 	else
 		buf = m_directory + '/' + pattern;
-	ofs = m_directory.length()+1;
+	ofs = m_directory.length() + 1;
 
 	if (glob(buf.c_str(), 0, NULL, &gl))
 		return 0;
@@ -188,7 +188,7 @@ FileSystem * RealFSImpl::MakeSubFileSystem(std::string const & path) {
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem* RealFSImpl::CreateSubFileSystem
+FileSystem * RealFSImpl::CreateSubFileSystem
 	(std::string const & path, Type const fs)
 {
 	if (FileExists(path))
@@ -198,15 +198,13 @@ FileSystem* RealFSImpl::CreateSubFileSystem
 
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(path);
+	fullname = FS_CanonicalizeName(path);
 
 	if (fs == FileSystem::DIR) {
 		EnsureDirectoryExists(path);
 		return new RealFSImpl(fullname);
-	} else {
-		FileSystem* s =  new ZipFilesystem(fullname);
-		return s;
-	}
+	} else
+		return new ZipFilesystem(fullname);
 }
 
 /**
@@ -231,7 +229,7 @@ void RealFSImpl::m_unlink_file(std::string const & file) {
 
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(file);
+	fullname = FS_CanonicalizeName(file);
 
 #ifndef __WIN32__
 	unlink(fullname.c_str());
@@ -274,7 +272,7 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
 	// so no error checking here
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(file);
+	fullname = FS_CanonicalizeName(file);
 #ifndef __WIN32__
 	rmdir(fullname.c_str());
 #else
@@ -292,7 +290,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
 	}
 	try {
 		MakeDirectory(dirname);
-	} catch (const DirectoryCannotCreate_error& e) {
+	} catch (DirectoryCannotCreate_error const & e) {
 		// need more work to do it right
 		// itterate through all possible directories
 		size_t it = 0;
@@ -302,7 +300,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
 			++it; //make sure we don't keep finding the same directories
 		}
 	} catch (_wexception const & e) {
-		throw wexception ("RealFSImpl::EnsureDirectory");//, e.what());
+		throw wexception ("RealFSImpl::EnsureDirectory"); //, e.what());
 	}
 }
 
@@ -342,8 +340,8 @@ void RealFSImpl::MakeDirectory(std::string const & dirname) {
 void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	const std::string fullname = FS_CanonicalizeName(fname);
 
-	FILE *file=0;
-	void *data=0;
+	FILE * file = 0;
+	void * data = 0;
 
 	try
 	{
@@ -388,9 +386,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		length = size;
 
 		return data;
-	}
-	catch (...)
-	{
+	} catch (...) {
 		if (file)
 			fclose(file);
 		if (data) {
@@ -410,7 +406,7 @@ void RealFSImpl::Write
 {
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(fname);
+	fullname = FS_CanonicalizeName(fname);
 
 	FILE * const f = fopen(fullname.c_str(), "wb");
 	if (!f)
@@ -454,8 +450,7 @@ struct RealFSStreamRead : public StreamRead {
 		fclose(m_file);
 	}
 
-	size_t Data(void* const data, const size_t bufsize)
-	{
+	size_t Data(void * const data, size_t const bufsize) {
 		return fread(data, 1, bufsize, m_file);
 	}
 
@@ -465,7 +460,7 @@ struct RealFSStreamRead : public StreamRead {
 	}
 
 private:
-	FILE* m_file;
+	FILE * m_file;
 };
 
 };
@@ -511,7 +506,7 @@ struct RealFSStreamWrite : public StreamWrite {
 
 private:
 	std::string m_filename;
-	FILE* m_file;
+	FILE * m_file;
 };
 
 };

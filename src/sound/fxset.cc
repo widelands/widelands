@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006, 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 /** Create an FXset and set it's \ref m_priority
  * \param[in] prio  The desired priority (optional)
  */
-FXset::FXset(uint8_t const priority) : m_priority(priority), m_last_used(0) {}
+FXset::FXset(uint8_t const priority) : m_last_used(0), m_priority(priority) {}
 
 /// Delete all fxs to avoid memory leaks. This also frees the audio data.
 FXset::~FXset()

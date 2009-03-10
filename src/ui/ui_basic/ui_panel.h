@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,7 +93,7 @@ struct Panel : public Object {
 	bool get_dock_windows_to_edges() const {return _flags & pf_dock_windows_to_edges;}
 	void set_dock_windows_to_edges(const bool on = true);
 	void set_inner_size(uint32_t nw, uint32_t nh);
-	void fit_inner(Panel* inner);
+	void fit_inner(Panel & inner);
 	void set_border(uint32_t l, uint32_t r, uint32_t t, uint32_t b);
 
 	uint32_t get_lborder() const {return _lborder;}
@@ -101,8 +101,8 @@ struct Panel : public Object {
 	uint32_t get_tborder() const {return _tborder;}
 	uint32_t get_bborder() const {return _bborder;}
 
-	int32_t get_inner_w() const {return _w-(_lborder+_rborder);}
-	int32_t get_inner_h() const {return _h-(_tborder+_bborder);}
+	int32_t get_inner_w() const {return _w - (_lborder + _rborder);}
+	int32_t get_inner_h() const {return _h - (_tborder + _bborder);}
 
 	const Panel * get_next_sibling () const {return _next;}
 	Panel       * get_next_sibling ()       {return _next;}

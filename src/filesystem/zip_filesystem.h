@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,8 @@ struct ZipFilesystem : public FileSystem {
 		(std::string const & dirname, Type);
 	virtual void Unlink(std::string const & filename)
 		__attribute__ ((noreturn));
-	virtual void Rename(const std::string&, const std::string&) __attribute__ ((noreturn));
+	virtual void Rename(std::string const &, std::string const &)
+		__attribute__ ((noreturn));
 
 public:
 	static FileSystem * CreateFromDirectory(std::string const & directory);

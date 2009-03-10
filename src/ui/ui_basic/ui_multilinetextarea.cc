@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,10 +151,9 @@ void Multiline_Textarea::draw_scrollbar() {
 	if (m_cache_mode != Widget_Cache_Use) {
 		bool setbottom = false;
 
-		if (m_scrollmode == ScrollLog) {
-			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps()-1)
+		if (m_scrollmode == ScrollLog)
+			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
 				setbottom = true;
-		}
 
 		uint32_t m_width = 0;
 		if (m_cache_id)

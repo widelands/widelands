@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006, 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,12 +39,15 @@ struct Progress_Bar : public Panel {
 	};
 
 public:
-	Progress_Bar(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation);
+	Progress_Bar
+		(Panel * parent,
+		 int32_t x, int32_t y, int32_t w, int32_t h,
+		 uint32_t orientation);
 
-	uint32_t get_state() {return m_state;}
-	void set_state(uint32_t state);
-	uint32_t get_total() {return m_total;}
-	void set_total(uint32_t total);
+	uint32_t get_state() const {return m_state;}
+	void set_state(uint32_t);
+	uint32_t get_total() const {return m_total;}
+	void set_total(uint32_t);
 
 protected:
 	virtual void draw(RenderTarget &);

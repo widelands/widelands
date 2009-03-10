@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ struct RealFSImpl : public FileSystem {
 	virtual FileSystem * CreateSubFileSystem
 		(std::string const & dirname, Type);
 	virtual void Unlink(std::string const & file);
-	virtual void Rename(const std::string&, const std::string&);
+	virtual void Rename(std::string const &, std::string const &);
 
 	virtual std::string getBasename() {return m_directory;};
 

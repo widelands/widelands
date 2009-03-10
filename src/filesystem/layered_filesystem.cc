@@ -95,9 +95,9 @@ int32_t LayeredFileSystem::FindFiles
 	 filenameset_t     * const results,
 	 uint32_t                  depth)
 {
-	uint32_t i=0;
-	if (depth==0)
-		depth=10000; // Wow, if you have so many filesystem you're my hero
+	uint32_t i = 0;
+	if (depth == 0)
+		depth = 10000; //  Wow, if you have so many filesystem you're my hero
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();

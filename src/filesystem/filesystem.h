@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,7 +93,7 @@ struct FileSystem {
 	virtual FileSystem * CreateSubFileSystem
 		(std::string const & dirname, const Type) = 0;
 	virtual void Unlink(std::string const &) = 0;
-	virtual void Rename(const std::string&, const std::string&) = 0;
+	virtual void Rename(std::string const &, std::string const &) = 0;
 
 	static FileSystem *Create(std::string const & root)
 	throw (FileType_error, FileNotFound_error, FileAccessDenied_error);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "ui_window.h"
 
-#include "constants.h"
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
@@ -148,14 +147,12 @@ void Window::move_inside_parent() {
 */
 void Window::center_to_parent()
 {
-	Panel* parent = get_parent();
-
-	assert(parent);
+	Panel & parent = *get_parent();
 
 	set_pos
 		(Point
-		 	((parent->get_inner_w() - get_w()) / 2,
-		 	 (parent->get_inner_h() - get_h()) / 2));
+		 	((parent.get_inner_w() - get_w()) / 2,
+		 	 (parent.get_inner_h() - get_h()) / 2));
 }
 
 
@@ -172,7 +169,7 @@ void Window::draw_border(RenderTarget & dst)
 	const int32_t hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN + hidden_width_right;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
 
-	{//  Top border.
+	{ //  Top border.
 		int32_t pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
 
 		dst.blitrect //  top left corner
@@ -482,7 +479,7 @@ bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int3
 				nearest_snap_distance_y = std::min(nearest_snap_distance_y, psnap);
 			}
 
-			{//  Snap to other Panels.
+			{ //  Snap to other Panels.
 				const bool SOWO = parent->get_snap_windows_only_when_overlapping();
 				const int32_t right = left + w, bot = top + h;
 

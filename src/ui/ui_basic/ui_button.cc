@@ -147,7 +147,7 @@ void Basic_Button::draw(RenderTarget & dst)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
-	if (m_pic_custom) {// if we got a picture, draw it centered
+	if (m_pic_custom) { //  if we got a picture, draw it centered
 		uint32_t cpw, cph;
 		g_gr->get_picture_size(m_pic_custom, cpw, cph);
 

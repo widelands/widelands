@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2009 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct Multiline_Editbox : public Multiline_Textarea {
 	Signal changed;
 
 	void draw(RenderTarget &);
-	void set_maximum_chars(int32_t n) {m_maxchars=n;}
+	void set_maximum_chars(int32_t const n) {m_maxchars = n;}
 	int32_t get_maximum_chars() {return m_maxchars;}
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);

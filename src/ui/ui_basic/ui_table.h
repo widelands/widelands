@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -230,8 +230,7 @@ private:
 		Align                                 alignment;
 	};
 
-	static const int32_t ms_darken_value=-20;
-	static const int32_t DOUBLE_CLICK_INTERVAL=500; // half a second //  FIXME such values should not be defined separately for a particular widget type. They should be defined in one place for the whole UI or even better, a variable that is read from system settings (.kde/share/config/kdeglobals:DoubleClickInterval=...)
+	static const int32_t ms_darken_value = -20;
 
 	Columns            m_columns;
 	uint32_t           m_max_pic_width;

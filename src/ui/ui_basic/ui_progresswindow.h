@@ -56,7 +56,7 @@ struct ProgressWindow {
 	void stepf(const std::string & format, ...);
 
 private:
-	typedef std::vector<IProgressVisualization*> VisualizationArray;
+	typedef std::vector<IProgressVisualization *> VisualizationArray;
 	uint32_t  m_xres;
 	uint32_t  m_yres;
 	Point m_label_center;

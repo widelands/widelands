@@ -49,8 +49,8 @@ struct EditBox : public Panel {
 	Signal cancel;
 	Signal1<int32_t> cancelid;
 
-	const std::string& text() const;
-	void setText(const std::string& t);
+	std::string const & text() const;
+	void setText(std::string const &);
 	uint32_t maxLength() const;
 	void setMaxLength(uint32_t n);
 	Align align() const;

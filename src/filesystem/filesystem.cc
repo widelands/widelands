@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,11 +55,11 @@
 FileSystem::FileSystem()
 {
 #ifdef __WIN32__
-	m_root=getWorkingDirectory();
-	m_filesep='\\';
+	m_root = getWorkingDirectory();
+	m_filesep = '\\';
 #else
-	m_root="/";
-	m_filesep='/';
+	m_root = "/";
+	m_filesep = '/';
 #endif
 }
 
@@ -72,13 +72,11 @@ FileSystem::FileSystem()
 std::string FileSystem::AutoExtension
 	(std::string const & filename, std::string const & extension)
 {
-	const SSS_T suffix_length=extension.size()+1;
-	const SSS_T startpos=filename.size()-suffix_length;
+	std::string::size_type const suffix_length = extension.size() + 1;
+	std::string::size_type const startpos = filename.size() - suffix_length;
 
-	if (filename.substr(startpos, suffix_length) != "."+extension)
-	{
-		return filename+"."+extension;
-	}
+	if (filename.substr(startpos, suffix_length) != "." + extension)
+		return filename + "." + extension;
 
 	return filename;
 }
@@ -101,10 +99,9 @@ const char *FileSystem::FS_RelativePath(char *buf, const int32_t buflen, const c
 
 	// find the end of the basefile name
 	endbase = 0;
-	for (p = basefile; *p; ++p) {
+	for (p = basefile; *p; ++p)
 		if (*p == '/' || *p == '\\')
-			endbase = p-basefile+1;
-	}
+			endbase = p - basefile + 1;
 
 	if (!endbase) { // no path in basefile
 		snprintf(buf, buflen, "%s", filename);
@@ -130,7 +127,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 	if (path_size == root_size)
 		return path == m_root;
 
-	if (path.substr(0, m_root.size())!=m_root)
+	if (path.substr(0, m_root.size()) != m_root)
 		return false;
 
 	assert(root_size < path_size); //  Otherwise an invalid read happens below.
@@ -148,7 +145,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 std::string FileSystem::AbsolutePath(std::string const & path) const {
 	if (pathIsAbsolute(path))
 		return path;
-	return getWorkingDirectory()+m_filesep+path;
+	return getWorkingDirectory() + m_filesep + path;
 }
 
 /**
@@ -178,12 +175,12 @@ std::string FileSystem::fixCrossFile(std::string path) {
  */
 std::string FileSystem::getWorkingDirectory() const {
 #ifndef __WIN32__
-	char cwd[PATH_MAX+1];
+	char cwd[PATH_MAX + 1];
 	getcwd(cwd, PATH_MAX);
 
 	return std::string(cwd);
 #else
-	char filename[_MAX_PATH +1];
+	char filename[_MAX_PATH + 1];
 	GetModuleFileName(NULL, filename, _MAX_PATH);
 	std::string exedir(filename);
 	exedir = exedir.substr(0, exedir.rfind("\\"));
@@ -199,9 +196,9 @@ std::string FileSystem::getTempDirectory() {
 	const char *tmpdir;
 
 #ifdef __WIN32__
-	tmpdir=".";
+	tmpdir = ".";
 #else
-	tmpdir="/tmp";
+	tmpdir = "/tmp";
 #endif
 
 	if (!FileExists(tmpdir))
@@ -228,7 +225,7 @@ std::string FileSystem::GetHomedir()
 		//TODO: is it really a good idea to set homedir to "." then ??
 
 		printf("Instead of your home directory, '.' will be used.\n\n");
-		homedir=".";
+		homedir = ".";
 	}
 
 	return homedir;
@@ -250,18 +247,18 @@ std::vector<std::string> FileSystem::FS_Tokenize
 	SSS_T pos2; //next filesep character
 
 	//extract the first path component
-	if (path.find(m_filesep)==0) //is this an absolute path?
-		pos=1;
+	if (path.find(m_filesep) == 0) //is this an absolute path?
+		pos = 1;
 	else //relative path
-		pos=0;
-	pos2=path.find(m_filesep, pos);
+		pos = 0;
+	pos2 = path.find(m_filesep, pos);
 	//'current' token is now between pos and pos2
 
 	//split path into it's components
-	while (pos2!=std::string::npos) {
-		components.push_back(path.substr(pos, pos2-pos));
-		pos=pos2+1;
-		pos2=path.find(m_filesep, pos);
+	while (pos2 != std::string::npos) {
+		components.push_back(path.substr(pos, pos2 - pos));
+		pos = pos2 + 1;
+		pos2 = path.find(m_filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
@@ -290,36 +287,36 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 			fixedpath.replace(i, 1, "\\");
 	}
 
-	bool absolute=pathIsAbsolute(fixedpath);
+	bool const absolute = pathIsAbsolute(fixedpath);
 
-	components=FS_Tokenize(fixedpath);
+	components = FS_Tokenize(fixedpath);
 
 	//tilde expansion
-	if (*components.begin()=="~") {
+	if (*components.begin() == "~") {
 		components.erase(components.begin());
 		std::vector<std::string> homecomponents;
 		// On win32 we use widelands dir. to save/load _all_ data
-		homecomponents=FS_Tokenize(getWorkingDirectory());
+		homecomponents = FS_Tokenize(getWorkingDirectory());
 		components.insert
 			(components.begin(), homecomponents.begin(), homecomponents.end());
 
-		absolute=true;
+		absolute = true;
 	}
 #else
 
-	bool absolute=pathIsAbsolute(path);
+	bool absolute = pathIsAbsolute(path);
 
-	components=FS_Tokenize(path);
+	components = FS_Tokenize(path);
 
 	//tilde expansion
-	if (*components.begin()=="~") {
+	if (*components.begin() == "~") {
 		components.erase(components.begin());
 		std::vector<std::string> homecomponents;
-		homecomponents=FS_Tokenize(GetHomedir());
+		homecomponents = FS_Tokenize(GetHomedir());
 		components.insert
 			(components.begin(), homecomponents.begin(), homecomponents.end());
 
-		absolute=true;
+		absolute = true;
 	}
 
 #endif
@@ -329,30 +326,31 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	if (!absolute) {
 		std::vector<std::string> cwdcomponents;
 
-		if (m_root.empty())
-			cwdcomponents=FS_Tokenize(getWorkingDirectory());
-		else
-			cwdcomponents=FS_Tokenize(m_root);
+		cwdcomponents =
+			FS_Tokenize
+				(m_root.empty() ? getWorkingDirectory() : m_root);
 
 		components.insert
 			(components.begin(), cwdcomponents.begin(), cwdcomponents.end());
-		absolute=true;
+		absolute = true;
 	}
 
 	//clean up the path
-	for (i=components.begin(); i!=components.end();) {
+	for (i = components.begin(); i != components.end();) {
 		bool erase = false;
 		bool erase_prev = false;
 
 		//remove empty components ("foo/bar//baz/")
-		if (i->empty()) erase = true;
+		if (i->empty())
+			erase = true;
 
 		//remove single dot
-		if (*i==".") erase = true;
+		if (*i == ".")
+			erase = true;
 
 		//remove double dot and the preceding component (if any)
-		if (*i=="..") {
-			if (i!=components.begin())
+		if (*i == "..") {
+			if (i != components.begin())
 				erase_prev = true;
 			erase = true;
 		}
@@ -360,7 +358,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 		std::vector<std::string>::iterator nexti = i;
 
 		if (erase_prev && erase) {
-			components.erase(i-1, i+1);
+			components.erase(i - 1, i + 1);
 			i = components.begin();
 			continue;
 		}
@@ -373,23 +371,17 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 		++i;
 	}
 
-	std::string canonpath="";
+	std::string canonpath = "";
 #ifndef __WIN32__
-	if (absolute)
-		canonpath="/";
-	else
-		canonpath="./";
+	canonpath = absolute ? "/" : "./";
 
 	for (i = components.begin(); i != components.end(); ++i)
-		canonpath+=*i+"/";
+		canonpath += *i + "/";
 #else
-	if (absolute)
-		canonpath="";
-	else
-		canonpath=".\\";
+	canonpath = absolute ? "" : ".\\";
 
 	for (i = components.begin(); i != components.end(); ++i)
-		canonpath+=*i+"\\";
+		canonpath += *i + "\\";
 #endif
 
 	canonpath.erase(canonpath.end() - 1); //remove trailing slash
@@ -420,7 +412,7 @@ char const * FileSystem::FS_Filename(char const * p, char const * & extension)
 			if (not extension)
 				extension = p;
 			return result;
-		} else if (*p =='/' || *p == '\\') {
+		} else if (*p == '/' || *p == '\\') {
 			extension = 0;
 			result = p + 1;
 		} else if (*p == '.')
@@ -454,9 +446,8 @@ throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 		{
 			throw FileNotFound_error("FileSystem::Create", root);
 		}
-		if (errno==EACCES) {
+		if (errno == EACCES)
 			throw FileAccessDenied_error("FileSystem::Create", root);
-		}
 	}
 
 	if (S_ISDIR(statinfo.st_mode)) {
