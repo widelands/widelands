@@ -92,7 +92,7 @@ public:
 	virtual uint32_t maxSoldierCapacity() const throw ();
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
-	virtual void dropSoldier(Soldier* soldier);
+	virtual void dropSoldier(Soldier &);
 	// End implementation of SoldierControl
 
 	// Begin implementation of Attackable
@@ -105,7 +105,7 @@ public:
 	 * Launch the given soldier on an attack towards the given
 	 * target building.
 	 */
-	void sendAttacker(Soldier* soldier, Building* target);
+	void sendAttacker(Soldier &, Building &);
 
 	/// This methods are helper for use at configure this site.
 	void set_requirements (const Requirements&);
@@ -121,12 +121,12 @@ protected:
 		(Interactive_Player * plr, UI::Window * * registry);
 
 private:
-	bool isPresent(Soldier* soldier) const;
+	bool isPresent(Soldier &) const;
 	static void request_soldier_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
 	Map_Object* popSoldierJob(Soldier* soldier, bool* stayhome = 0);
-	bool haveSoldierJob(Soldier* soldier);
+	bool haveSoldierJob(Soldier &);
 
 private:
 	Requirements m_soldier_requirements;

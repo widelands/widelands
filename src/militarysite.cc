@@ -389,12 +389,12 @@ bool MilitarySite::get_building_work(Game* g, Worker* w, bool)
 /**
  * \return \c true if the soldier is currently present and idle in the building.
  */
-bool MilitarySite::isPresent(Soldier* soldier) const
+bool MilitarySite::isPresent(Soldier & soldier) const
 {
 	return
-		soldier->get_location(&owner().egbase()) == this &&
-		soldier->get_state() == soldier->get_state(&Worker::taskBuildingwork) &&
-		soldier->get_position() == get_position();
+		soldier.get_location(&owner().egbase()) == this                     &&
+		soldier.get_state() == soldier.get_state(&Worker::taskBuildingwork) &&
+		soldier.get_position() == get_position();
 }
 
 std::vector<Soldier *> MilitarySite::presentSoldiers() const
@@ -404,7 +404,7 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 	const std::vector<Worker*>& w = get_workers();
 	container_iterate_const(std::vector<Worker*>, w, i)
 		if (upcast(Soldier, soldier, *i.current))
-			if (isPresent(soldier))
+			if (isPresent(*soldier))
 				soldiers.push_back(soldier);
 
 	return soldiers;
@@ -441,15 +441,14 @@ void MilitarySite::setSoldierCapacity(uint32_t const capacity) {
 	update_soldier_request();
 }
 
-void MilitarySite::dropSoldier(Soldier* soldier)
+void MilitarySite::dropSoldier(Soldier & soldier)
 {
-	upcast(Game, g, &owner().egbase());
-	assert(g);
+	Game & game = dynamic_cast<Game &>(owner().egbase());
 
 	if (!isPresent(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
 		// by network delay or a client has bugs.
-		molog("MilitarySite::dropSoldier(%u): not present\n", soldier->get_serial());
+		molog("MilitarySite::dropSoldier(%u): not present\n", soldier.serial());
 		return;
 	}
 	if (presentSoldiers().size() <= 1) {
@@ -457,8 +456,8 @@ void MilitarySite::dropSoldier(Soldier* soldier)
 		return;
 	}
 
-	soldier->reset_tasks(g);
-	soldier->start_task_leavebuilding(g, true);
+	soldier.reset_tasks(&game);
+	soldier.start_task_leavebuilding(&game, true);
 
 	update_soldier_request();
 }
@@ -510,7 +509,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 			 it != present.end();
 			 ++it)
 		{
-			if (!haveSoldierJob(*it)) {
+			if (!haveSoldierJob(**it)) {
 				SoldierJob sj;
 				sj.soldier = *it;
 				sj.enemy = &enemy;
@@ -588,37 +587,28 @@ void MilitarySite::clear_requirements ()
 	m_soldier_requirements = Requirements();
 }
 
-void MilitarySite::sendAttacker(Soldier* soldier, Building* target)
+void MilitarySite::sendAttacker(Soldier & soldier, Building & target)
 {
 	assert(isPresent(soldier));
-	assert(target);
-
-	upcast(Game, g, &owner().egbase());
-	assert(g);
 
 	if (haveSoldierJob(soldier))
 		return;
 
 	SoldierJob sj;
-	sj.soldier = soldier;
-	sj.enemy = target;
+	sj.soldier  = &soldier;
+	sj.enemy    = &target;
 	sj.stayhome = false;
 	m_soldierjobs.push_back(sj);
 
-	soldier->update_task_buildingwork(g);
+	soldier.update_task_buildingwork(&dynamic_cast<Game &>(owner().egbase()));
 }
 
 
-bool MilitarySite::haveSoldierJob(Soldier* soldier)
+bool MilitarySite::haveSoldierJob(Soldier & soldier)
 {
-	for
-		(std::vector<SoldierJob>::iterator it = m_soldierjobs.begin();
-		 it != m_soldierjobs.end();
-		 ++it)
-	{
-		if (it->soldier == soldier)
+	container_iterate_const(std::vector<SoldierJob>, m_soldierjobs, i)
+		if (i.current->soldier == &soldier)
 			return true;
-	}
 
 	return false;
 }

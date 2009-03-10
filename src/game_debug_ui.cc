@@ -174,7 +174,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	char buffer[128];
 
 
-	m_serial = obj.get_serial();
+	m_serial = obj.serial();
 	snprintf(buffer, sizeof(buffer), "%u", m_serial);
 	set_title(buffer);
 
@@ -389,7 +389,7 @@ void FieldDebugWindow::think()
 	{
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%s (%u)", imm->name().c_str(), imm->get_serial());
+			 "%s (%u)", imm->name().c_str(), imm->serial());
 		m_ui_immovable.set_title(buffer);
 		m_ui_immovable.set_enabled(true);
 	} else {
@@ -410,8 +410,8 @@ void FieldDebugWindow::think()
 	{
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%s (%u)", (*it)->name().c_str(), (*it)->get_serial());
-		m_ui_bobs.add(buffer, (*it)->get_serial());
+			 "%s (%u)", (*it)->name().c_str(), (*it)->serial());
+		m_ui_bobs.add(buffer, (*it)->serial());
 	}
 }
 

@@ -568,7 +568,7 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 		else
 			throw wexception
 				("MO(%u): [actWalk]: bad object type = %i",
-				 get_serial(), obj->get_type());
+				 serial(), obj->get_type());
 
 		max_steps=1; // Only take one step, then rethink (object may have moved)
 		forceonlast = true;
@@ -579,7 +579,7 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 		break;
 	}
 	default:
-		throw wexception("MO(%u): [actWalk]: bad action->iparam1 = %i", get_serial(), action->iparam1);
+		throw wexception("MO(%u): [actWalk]: bad action->iparam1 = %i", serial(), action->iparam1);
 	}
 
 	// If we've already reached our destination, that's cool
@@ -671,11 +671,11 @@ bool Worker::run_object(Game* g, State* state, const Action* action)
 		} else
 			throw wexception
 				("MO(%i): [actObject]: bab bob type = %i",
-				 get_serial(), bob->get_bob_type());
+				 serial(), bob->get_bob_type());
 	} else
 		throw wexception
 			("MO(%u): [actObject]: bad object type = %i",
-			 get_serial(), obj->get_type());
+			 serial(), obj->get_type());
 
 	++state->ivar1;
 	schedule_act(g, 10);
@@ -1249,7 +1249,7 @@ void Worker::transfer_update(Game * g, State * state) {
 			throw wexception
 				("MO(%u): [transfer]: in building, nextstep is not building's "
 				 "flag",
-				 get_serial());
+				 serial());
 
 		return start_task_leavebuilding(g, true);
 	} else if (upcast(Flag,     flag,     location)) {
@@ -1258,7 +1258,7 @@ void Worker::transfer_update(Game * g, State * state) {
 				throw wexception
 					("MO(%u): [transfer]: next step is building, but we are "
 					 "nowhere near",
-					 get_serial());
+					 serial());
 
 			return
 				start_task_move
@@ -1283,16 +1283,16 @@ void Worker::transfer_update(Game * g, State * state) {
 				 road->get_flag(Road::FlagEnd)   != location)
 				throw wexception
 					("MO(%u): [transfer]: nextstep is road, but we are nowhere near",
-					 get_serial());
+					 serial());
 
-			molog("[transfer]: set location to road %u\n", road->get_serial());
+			molog("[transfer]: set location to road %u\n", road->serial());
 			set_location(road);
 			set_animation(g, descr().get_animation("idle"));
 			schedule_act(g, 10); //  wait a little
 		} else
 			throw wexception
 				("MO(%u): [transfer]: flag to bad nextstep %u",
-				 get_serial(), nextstep->get_serial());
+				 serial(), nextstep->serial());
 	} else if (upcast(Road,     road,     location)) {
 		// Road to Flag
 		if (nextstep->get_type() == FLAG) {
@@ -1317,13 +1317,13 @@ void Worker::transfer_update(Game * g, State * state) {
 				{
 					molog
 						("[transfer]: from road %u to flag %u nextstep %u\n",
-						 get_serial(), road->get_serial(), nextstep->get_serial());
+						 serial(), road->serial(), nextstep->serial());
 					return;
 				}
 			} else if (nextstep != map[get_position()].get_immovable())
 				throw wexception
 					("MO(%u): [transfer]: road to flag, but flag is nowhere near",
-					 get_serial());
+					 serial());
 
 			set_location(dynamic_cast<Flag *>(nextstep));
 			set_animation(g, descr().get_animation("idle"));
@@ -1331,11 +1331,11 @@ void Worker::transfer_update(Game * g, State * state) {
 		} else
 			throw wexception
 				("MO(%u): [transfer]: from road to bad nextstep %u",
-				 get_serial(), nextstep->get_serial());
+				 serial(), nextstep->serial());
 	} else
 		throw wexception
 			("MO(%u): location %u has bad type",
-			 get_serial(), location->get_serial());
+			 serial(), location->serial());
 }
 
 
@@ -1449,7 +1449,7 @@ void Worker::start_task_return(Game* g, bool dropitem)
 	PlayerImmovable* location = get_location(g);
 
 	if (!location || location->get_type() != BUILDING)
-		throw wexception("MO(%u): start_task_return(): not owned by building", get_serial());
+		throw wexception("MO(%u): start_task_return(): not owned by building", serial());
 
 	push_task(g, taskReturn);
 	get_state()->ivar1 = dropitem ? 1 : 0;
@@ -1725,7 +1725,7 @@ void Worker::dropoff_update(Game * g, State *)
 			return;
 		}
 
-		throw wexception("MO(%u): [dropoff]: not on building or on flag - fishy", get_serial());
+		throw wexception("MO(%u): [dropoff]: not on building or on flag - fishy", serial());
 	}
 
 	// We don't have the item any more, return home
@@ -1738,7 +1738,7 @@ void Worker::dropoff_update(Game * g, State *)
 				 true);
 
 	if (location->get_type() != Map_Object::BUILDING)
-		throw wexception("MO(%u): [dropoff]: not on building on return", get_serial());
+		throw wexception("MO(%u): [dropoff]: not on building on return", serial());
 
 	if (dynamic_cast<Warehouse const *>(location)) {
 		schedule_incorporate(g);
@@ -1809,7 +1809,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	}
 
 	if (not dynamic_cast<Building const *>(location))
-		throw wexception("MO(%u): [fetchfromflag]: building disappeared", get_serial());
+		throw wexception("MO(%u): [fetchfromflag]: building disappeared", serial());
 
 	assert(location == &owner);
 
@@ -1897,7 +1897,7 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 
 		if (state->objvar1.get(g) != flag)
 			throw wexception
-				("MO(%u): wakeup_flag_capacity: Flags don't match.", get_serial());
+				("MO(%u): wakeup_flag_capacity: Flags don't match.", serial());
 
 		send_signal(g, "wakeup");
 		return true;
@@ -1988,7 +1988,7 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
 
 	if (state && state->task == &taskLeavebuilding) {
 		if (state->objvar1.get(g) != building)
-			throw wexception("MO(%u): [waitleavebuilding]: buildings don't match", get_serial());
+			throw wexception("MO(%u): [waitleavebuilding]: buildings don't match", serial());
 
 		send_signal(g, "wakeup");
 		return true;

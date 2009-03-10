@@ -146,7 +146,7 @@ public:
 	virtual uint32_t maxSoldierCapacity() const throw ();
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
-	virtual void dropSoldier(Soldier* soldier);
+	virtual void dropSoldier(Soldier &);
 	// End implementation of SoldierControl
 
 	int32_t get_pri(enum tAttribute atr);

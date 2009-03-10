@@ -22,7 +22,7 @@
 
 
 #include "cmd_queue.h"
-#include "building.h"
+#include "trainingsite.h"
 #include "transport.h"
 
 namespace Widelands {
@@ -63,7 +63,7 @@ struct Cmd_Bulldoze:public PlayerCommand {
 		(int32_t const t, int32_t const p,
 		 PlayerImmovable & pi,
 		 bool const _recurse = false)
-		: PlayerCommand(t, p), serial(pi.get_serial()), recurse(_recurse)
+		: PlayerCommand(t, p), serial(pi.serial()), recurse(_recurse)
 	{}
 
 	Cmd_Bulldoze (StreamRead &);
@@ -144,8 +144,9 @@ private:
 
 struct Cmd_FlagAction:public PlayerCommand {
 	Cmd_FlagAction() : PlayerCommand() {} // For savegame loading
-	Cmd_FlagAction (int32_t t, int32_t p, Flag* f, int32_t a):PlayerCommand(t, p)
-	{serial=f->get_serial(); action=a;}
+	Cmd_FlagAction (int32_t const t, int32_t const p, Flag const & f) :
+		PlayerCommand(t, p), serial(f.serial())
+	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
@@ -160,13 +161,13 @@ struct Cmd_FlagAction:public PlayerCommand {
 
 private:
 	Serial serial;
-	int32_t action;
 };
 
 struct Cmd_StartStopBuilding : public PlayerCommand {
 	Cmd_StartStopBuilding() : PlayerCommand() {} // For savegame loading
-	Cmd_StartStopBuilding (int32_t t, int32_t p, Building* b):PlayerCommand(t, p)
-	{serial=b->get_serial();}
+	Cmd_StartStopBuilding (int32_t const t, Player_Number const p, Building & b)
+		: PlayerCommand(t, p), serial(b.serial())
+	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
@@ -184,8 +185,13 @@ private:
 
 struct Cmd_EnhanceBuilding:public PlayerCommand {
 	Cmd_EnhanceBuilding() : PlayerCommand() {} // For savegame loading
-	Cmd_EnhanceBuilding (int32_t t, int32_t p, Building* b, Building_Index i):PlayerCommand(t, p)
-	{serial=b->get_serial(); id=i;}
+	Cmd_EnhanceBuilding
+		(int32_t        const t,
+		 int32_t        const p,
+		 Building     &       b,
+		 Building_Index const i)
+		: PlayerCommand(t, p), serial(b.serial()), id(i)
+	{}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
@@ -299,8 +305,14 @@ private:
 
 struct Cmd_ChangeTrainingOptions : public PlayerCommand {
 	Cmd_ChangeTrainingOptions() : PlayerCommand() {} // For savegame loading
-	Cmd_ChangeTrainingOptions(int32_t t, int32_t p, Building* b, int32_t at, int32_t val):PlayerCommand(t, p)
-	{serial=b->get_serial(); attribute=at; value=val;}
+	Cmd_ChangeTrainingOptions
+		(int32_t    const t,
+		 Player_Number  const p,
+		 TrainingSite &       ts,
+		 int32_t    const at,
+		 int32_t    const val)
+		: PlayerCommand(t, p), serial(ts.serial()), attribute(at), value(val)
+	{}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
@@ -321,8 +333,13 @@ private:
 
 struct Cmd_DropSoldier : public PlayerCommand {
 	Cmd_DropSoldier () : PlayerCommand() {} //  for savegames
-	Cmd_DropSoldier(int32_t t, int32_t p, Building* b, int32_t _soldier):PlayerCommand(t, p)
-	{serial=b->get_serial(); soldier=_soldier;}
+	Cmd_DropSoldier
+		(int32_t    const t,
+		 int32_t    const p,
+		 Building &       b,
+		 int32_t    const _soldier)
+		: PlayerCommand(t, p), serial(b.serial()), soldier(_soldier)
+	{}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
@@ -342,8 +359,10 @@ private:
 
 struct Cmd_ChangeSoldierCapacity : public PlayerCommand {
 	Cmd_ChangeSoldierCapacity () : PlayerCommand() {} //  for savegames
-	Cmd_ChangeSoldierCapacity (int32_t t, int32_t p, Building* b, int32_t i):PlayerCommand(t, p)
-	{serial=b->get_serial(); val=i;}
+	Cmd_ChangeSoldierCapacity
+		(int32_t const t, int32_t const p, Building & b, int32_t const i)
+		: PlayerCommand(t, p), serial(b.serial()), val(i)
+	{}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
@@ -367,14 +386,9 @@ struct Cmd_EnemyFlagAction : public PlayerCommand {
 	Cmd_EnemyFlagAction
 		(int32_t      const t,
 		 int32_t      const p,
-		 Flag const * const f,
-		 int32_t      const a,
-		 int32_t      const at,
-		 int32_t      const num,
-		 int32_t      const ty)
-		:
-		PlayerCommand(t, p),
-		serial(f->get_serial()), action(a), attacker(at), number(num), type(ty)
+		 Flag const &       f,
+		 uint32_t     const num)
+		: PlayerCommand(t, p), serial(f.serial()), number(num)
 	{}
 
 	// Write these commands to a file (for savegames)
@@ -390,10 +404,7 @@ struct Cmd_EnemyFlagAction : public PlayerCommand {
 
 private:
 	Serial        serial;
-	uint8_t       action;
-	Player_Number attacker;
 	uint8_t       number;
-	uint8_t       type;
 };
 
 };

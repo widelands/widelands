@@ -153,7 +153,7 @@ void Cmd_Bulldoze::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			Serial const pimm_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<Map_Object>(pimm_serial).get_serial();
+				serial = mol.get<Map_Object>(pimm_serial).serial();
 				recurse = 2 <= packet_version ? fr.Unsigned8() : false;
 			} catch (_wexception const & e) {
 				throw wexception("map object %u: %s", pimm_serial, e.what());
@@ -368,23 +368,23 @@ void Cmd_BuildRoad::Write
 Cmd_FlagAction::Cmd_FlagAction (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	action = des.Unsigned8 ();
+	des         .Unsigned8 ();
 	serial = des.Unsigned32();
 }
 
 void Cmd_FlagAction::execute (Game* g)
 {
-	Player* player = g->get_player(get_sender());
+	Player & player = g->player(get_sender());
 	if (upcast(Flag, flag, g->objects().get_object(serial)))
-		if (flag->get_owner() == player)
-			player->flagaction (flag, action);
+		if (&flag->owner() == &player)
+			player.flagaction (*flag);
 }
 
 void Cmd_FlagAction::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_FLAGACTION);
 	ser.Unsigned8 (get_sender());
-	ser.Unsigned8 (action);
+	ser.Unsigned8 (0);
 	ser.Unsigned32(serial);
 }
 
@@ -396,10 +396,10 @@ void Cmd_FlagAction::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_FLAGACTION_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			action                     = fr.Unsigned8 ();
+			fr                             .Unsigned8 ();
 			uint32_t const flag_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<Map_Object>(flag_serial).get_serial();
+				serial = mol.get<Map_Object>(flag_serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception("flag %u: %s", flag_serial, e.what());
 			}
@@ -417,7 +417,7 @@ void Cmd_FlagAction::Write
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 	// Now action
-	fw.Unsigned8 (action);
+	fw.Unsigned8 (0);
 
 	// Now serial
 	const Map_Object * const obj = egbase.objects().get_object(serial);
@@ -455,7 +455,7 @@ void Cmd_StartStopBuilding::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			uint32_t const building_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<Map_Object>(building_serial).get_serial();
+				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception("building %u: %s", building_serial, e.what());
 			}
@@ -512,7 +512,7 @@ void Cmd_EnhanceBuilding::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			uint32_t const building_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<Map_Object>(building_serial).get_serial();
+				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception("building %u: %s", building_serial, e.what());
 			}
@@ -550,7 +550,7 @@ Cmd_SetWarePriority::Cmd_SetWarePriority
 	 int32_t type, Ware_Index index, int32_t priority)
 	: PlayerCommand(duetime, _sender)
 {
-	m_serial = imm->get_serial();
+	m_serial = imm->serial();
 	m_type = type;
 	m_index = index;
 	m_priority = priority;
@@ -591,7 +591,7 @@ void Cmd_SetWarePriority::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_O
 			PlayerCommand::Read(fr, egbase, mol);
 			uint32_t const serial = fr.Unsigned32();
 			try {
-				m_serial = mol.get<Map_Object>(serial).get_serial();
+				m_serial = mol.get<Map_Object>(serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception("site %u: %s", serial, e.what());
 			}
@@ -836,7 +836,7 @@ void Cmd_ChangeTrainingOptions::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			uint32_t const trainingsite_serial = fr.Unsigned32();
 			try {
-				serial    = mol.get<Map_Object>(trainingsite_serial).get_serial();
+				serial    = mol.get<Map_Object>(trainingsite_serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception
 					("trainingsite %u: %s", trainingsite_serial, e.what());
@@ -880,7 +880,7 @@ void Cmd_DropSoldier::execute (Game* g)
 {
 	if (upcast(PlayerImmovable, player_imm, g->objects().get_object(serial)))
 		if (upcast(Soldier, s, g->objects().get_object(soldier)))
-			g->player(get_sender()).drop_soldier(player_imm, s);
+			g->player(get_sender()).drop_soldier(*player_imm, *s);
 }
 
 void Cmd_DropSoldier::serialize (StreamWrite & ser)
@@ -901,13 +901,13 @@ void Cmd_DropSoldier::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			uint32_t const milsite_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<PlayerImmovable>(milsite_serial).get_serial();
+				serial  = mol.get<PlayerImmovable>(milsite_serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception("militarysite %u: %s", milsite_serial, e.what());
 			}
 			uint32_t const soldier_serial = fr.Unsigned32();
 			try {
-				soldier = mol.get<Soldier>        (soldier_serial).get_serial();
+				soldier = mol.get<Soldier>        (soldier_serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception("soldier %u: %s",      soldier_serial, e.what());
 			}
@@ -978,7 +978,7 @@ void Cmd_ChangeSoldierCapacity::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			uint32_t const militarysite_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<Map_Object>(militarysite_serial).get_serial();
+				serial = mol.get<Map_Object>(militarysite_serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception
 					("militarysite %u: %s", militarysite_serial, e.what());
@@ -1014,38 +1014,36 @@ void Cmd_ChangeSoldierCapacity::Write
 Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	action   = des.Unsigned8 ();
+	des         .Unsigned8 ();
 	serial   = des.Unsigned32();
-	attacker = des.Unsigned8 ();
+	des         .Unsigned8 ();
 	number   = des.Unsigned8 ();
-	type     = des.Unsigned8 ();
+	des         .Unsigned8 ();
 }
 
 void Cmd_EnemyFlagAction::execute (Game* g)
 {
-	Player* player = g->get_player(get_sender());
+	Player & player = *g->get_player(get_sender());
 	Map_Object* obj = g->objects().get_object(serial);
 	PlayerImmovable* imm = static_cast<PlayerImmovable*>(obj);
 
-	Player* real_player = g->get_player(attacker);
-
 	log
-		("player(%d)    imm->get_owner (%d)   real_player (%d)\n",
-		 player->get_player_number(),
-		 imm->get_owner()->get_player_number(),
-		 real_player->get_player_number());
+		("player(%u)    imm->owner (%d) number = %u\n",
+		 player.get_player_number(),
+		 imm->owner().get_player_number(),
+		 number);
 
 	if (upcast(Flag, flag, obj)) {
 		if (Building const * const building = flag->get_building())
 			if
-				(imm->get_owner() != real_player
+				(imm->get_owner() != &player
 				 and
 				 1
 				 <
-				 real_player->vision
+				 player.vision
 				 	(Map::get_index
 				 	 	(building->get_position(), g->map().get_width())))
-			real_player->enemyflagaction (flag, action, attacker, number, type);
+				player.enemyflagaction (*flag, get_sender(), number);
 	} else
 		log ("Cmd_EnemyFlagAction Player invalid or not seeing target.\n");
 }
@@ -1053,11 +1051,11 @@ void Cmd_EnemyFlagAction::execute (Game* g)
 void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_ENEMYFLAGACTION);
 	ser.Unsigned8 (get_sender());
-	ser.Unsigned8 (action);
+	ser.Unsigned8 (1);
 	ser.Unsigned32(serial);
-	ser.Unsigned8 (attacker);
+	ser.Unsigned8 (get_sender());
 	ser.Unsigned8 (number);
-	ser.Unsigned8 (type);
+	ser.Unsigned8 (0);
 }
 #define PLAYER_CMD_ENEMYFLAGACTION_VERSION 2
 void Cmd_EnemyFlagAction::Read
@@ -1067,16 +1065,16 @@ void Cmd_EnemyFlagAction::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			action   = fr.Unsigned8 ();
+			fr           .Unsigned8 ();
 			uint32_t const flag_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<Map_Object>(flag_serial).get_serial();
+				serial = mol.get<Map_Object>(flag_serial).serial();
 			} catch (_wexception const & e) {
 				throw wexception("flag %u: %s", flag_serial, e.what());
 			}
-			attacker = fr.Unsigned8 ();
+			fr           .Unsigned8 ();
 			number   = fr.Unsigned8 ();
-			type     = fr.Unsigned8 ();
+			fr           .Unsigned8 ();
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -1092,7 +1090,7 @@ void Cmd_EnemyFlagAction::Write
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 	// Now action
-	fw.Unsigned8 (action);
+	fw.Unsigned8 (0);
 
 	// Now serial
 	const Map_Object * const obj = egbase.objects().get_object(serial);
@@ -1100,9 +1098,9 @@ void Cmd_EnemyFlagAction::Write
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now param
-	fw.Unsigned8 (attacker);
+	fw.Unsigned8 (get_sender());
 	fw.Unsigned8 (number);
-	fw.Unsigned8 (type);
+	fw.Unsigned8 (0);
 }
 
 };

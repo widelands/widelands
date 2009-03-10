@@ -41,7 +41,7 @@ namespace Widelands {
 Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int32_t t, Map_Object* o)
 	: GameLogicCommand(t)
 {
-	obj_serial = o->get_serial();
+	obj_serial = o->serial();
 }
 
 void Cmd_Destroy_Map_Object::execute(Game* g)
@@ -64,7 +64,7 @@ void Cmd_Destroy_Map_Object::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			if (Serial const serial = fr.Unsigned32())
 				try {
-					obj_serial = mol.get<Map_Object>(serial).get_serial();
+					obj_serial = mol.get<Map_Object>(serial).serial();
 				} catch (_wexception const & e) {
 					throw wexception("%u: %s", serial, e.what());
 				}
@@ -97,7 +97,7 @@ void Cmd_Destroy_Map_Object::Write
 
 Cmd_Act::Cmd_Act(int32_t t, Map_Object* o, int32_t a) : GameLogicCommand(t)
 {
-	obj_serial = o->get_serial();
+	obj_serial = o->serial();
 	arg = a;
 }
 
@@ -122,7 +122,7 @@ void Cmd_Act::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			if (Serial const object_serial = fr.Unsigned32())
 				try {
-					obj_serial = mol.get<Map_Object>(object_serial).get_serial();
+					obj_serial = mol.get<Map_Object>(object_serial).serial();
 				} catch (_wexception const & e) {
 					throw wexception("object %u: %s", object_serial, e.what());
 				}

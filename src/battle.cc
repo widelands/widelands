@@ -55,8 +55,8 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	{
 		StreamWrite & ss = game.syncstream();
 		ss.Unsigned32(0x00e111ba); // appears as ba111e00 in a hexdump
-		ss.Unsigned32(First .get_serial());
-		ss.Unsigned32(Second.get_serial());
+		ss.Unsigned32(First .serial());
+		ss.Unsigned32(Second.serial());
 	}
 
 	init(&game);
@@ -134,7 +134,7 @@ Soldier * Battle::opponent(Soldier & soldier)
 void Battle::getBattleWork(Game & game, Soldier & soldier)
 {
 	if (soldier.get_current_hitpoints() < 1) {
-		molog("soldier %u has died\n", soldier.get_serial());
+		molog("soldier %u has died\n", soldier.serial());
 		soldier          . get_owner()->count_casualty();
 		opponent(soldier)->get_owner()->count_kill    ();
 		soldier.schedule_destroy(&game);

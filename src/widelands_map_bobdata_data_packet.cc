@@ -479,7 +479,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
 		throw wexception
-			("worker %p (%u): %s", worker, worker->get_serial(), e.what());
+			("worker %p (%u): %s", worker, worker->serial(), e.what());
 	}
 }
 

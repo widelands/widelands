@@ -787,22 +787,22 @@ void Request::start_transfer(Game* g, Supply* supp)
 
 	::StreamWrite & ss = g->syncstream();
 	ss.Unsigned32(0x01decafa); // appears as facade01 in sync stream
-	ss.Unsigned32(get_target()->get_serial());
-	ss.Unsigned32(supp->get_position(g)->get_serial());
+	ss.Unsigned32(get_target()->serial());
+	ss.Unsigned32(supp->get_position(g)->serial());
 
 	Transfer * t;
 	if (get_type() == WORKER) {
 		//  Begin the transfer of a soldier or worker.
 		//  launch_worker() creates or starts the worker
 		Worker* s = supp->launch_worker(g, this);
-		ss.Unsigned32(s->get_serial());
+		ss.Unsigned32(s->serial());
 		t = new Transfer(g, this, s);
 	} else {
 		//  Begin the transfer of an item. The item itself is passive.
 		//  launch_item() ensures the WareInstance is transported out of the warehouse
 		//  Once it's on the flag, the flag code will decide what to do with it.
 		WareInstance & item = supp->launch_item(g, this);
-		ss.Unsigned32(item.get_serial());
+		ss.Unsigned32(item.serial());
 		t = new Transfer(g, this, &item);
 	}
 

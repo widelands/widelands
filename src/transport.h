@@ -200,7 +200,8 @@ public:
 
 	void remove_item(Editor_Game_Base* g, WareInstance* item);
 
-	void add_flag_job(Game* g, Ware_Index workerware, std::string programname);
+	void add_flag_job
+		(Game &, Ware_Index workerware, std::string const & programname);
 
 protected:
 	virtual void init(Editor_Game_Base*);

@@ -122,7 +122,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 		molog("* m_prev_building (name): %s\n", m_prev_building->name().c_str());
 
 	molog("m_builder_request: %p\n", m_builder_request);
-	molog("m_builder: %u\n", m_builder.get_serial());
+	molog("m_builder: %u\n", m_builder.serial());
 
 	molog("m_fetchfromflag: %i\n", m_fetchfromflag);
 

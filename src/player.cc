@@ -380,7 +380,7 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 				log
 					("Player trying to rip flag (%u) with undestroyable building "
 					 "(%u)\n",
-					 flag->get_serial(), flagbuilding->get_serial());
+					 flag->serial(), flagbuilding->serial());
 				return;
 			}
 		if (recurse)
@@ -416,7 +416,7 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 		}
 	} else
 		throw wexception
-			("Player::bulldoze(%u): bad immovable type", imm.get_serial());
+			("Player::bulldoze(%u): bad immovable type", imm.serial());
 
 	// Now destroy it
 	imm.destroy(&egbase());
@@ -470,28 +470,15 @@ void Player::enhance_building
 
 /*
 ===============
-Player::flagaction
-
 Perform an action on the given flag.
 ===============
 */
-void Player::flagaction(Flag* flag, int32_t action)
+void Player::flagaction(Flag & flag)
 {
 	if (upcast(Game, game, &egbase()))
-		if (flag->get_owner() == this) {// Additional security check.
-		switch (action) {
-		case FLAGACTION_GEOLOGIST:
-			//try {
-				flag->add_flag_job
-					(game, tribe().worker_index("geologist"), "expedition");
-			/*} catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
-				log("Tribe defines no geologist\n");
-			} */
-			break;
-		default:
-			log("Player sent bad flagaction = %i\n", action);
-		}
-		}
+		if (&flag.owner() == this) //  Additional security check.
+			flag.add_flag_job
+				(*game, tribe().worker_index("geologist"), "expedition");
 }
 
 /*
@@ -575,12 +562,12 @@ Player::drop_soldier
 Forces the drop of given soldier at given house
 ===========
 */
-void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
-	if (imm->get_owner() != this)
+void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
+	if (&imm.owner() != this)
 		return;
-	if (soldier->get_worker_type() != Worker_Descr::SOLDIER)
+	if (soldier.get_worker_type() != Worker_Descr::SOLDIER)
 		return;
-	if (upcast(SoldierControl, ctrl, imm))
+	if (upcast(SoldierControl, ctrl, &imm))
 		ctrl->dropSoldier(soldier);
 }
 
@@ -594,7 +581,8 @@ void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
  *
  * \todo Perform a meaningful sort on the soldiers array.
  */
-uint32_t Player::findAttackSoldiers(Flag* flag, std::vector<Soldier*>* soldiers)
+uint32_t Player::findAttackSoldiers
+	(Flag & flag, std::vector<Soldier *> * soldiers, uint32_t nr_wanted)
 {
 	uint32_t count = 0;
 
@@ -605,26 +593,30 @@ uint32_t Player::findAttackSoldiers(Flag* flag, std::vector<Soldier*>* soldiers)
 	std::vector<BaseImmovable*> immovables;
 
 	map.find_reachable_immovables_unique
-		(Area<FCoords>(map.get_fcoords(flag->get_position()), 25),
+		(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
 		 &immovables,
 		 CheckStepWalkOn(MOVECAPS_WALK, false),
 		 FindImmovablePlayerMilitarySite(this));
 
-	if (!immovables.size())
+	if (immovables.empty())
 		return 0;
 
-	for
-		(std::vector<BaseImmovable*>::const_iterator it = immovables.begin();
-		 it != immovables.end();
-		 ++it)
-	{
-		upcast(MilitarySite, ms, *it);
-		std::vector<Soldier*> present = ms->presentSoldiers();
-
-		if (present.size() > 1) {
+	container_iterate_const(std::vector<BaseImmovable *>, immovables, i) {
+		MilitarySite const & ms = dynamic_cast<MilitarySite &>(**i.current);
+		std::vector<Soldier *> const present = ms.presentSoldiers();
+		uint32_t const nr_staying = ms.minSoldierCapacity();
+		uint32_t const nr_present = present.size();
+		if (nr_staying < nr_present) {
+			uint32_t const nr_taken =
+				std::min(nr_wanted, nr_present - nr_staying);
 			if (soldiers)
-				soldiers->insert(soldiers->end(), present.begin()+1, present.end());
-			count += present.size() - 1;
+				soldiers->insert
+					(soldiers->end(),
+					 present.begin(), present.begin() + nr_taken);
+			count     += nr_taken;
+			nr_wanted -= nr_taken;
+			if (not nr_wanted)
+				break;
 		}
 	}
 
@@ -636,7 +628,8 @@ uint32_t Player::findAttackSoldiers(Flag* flag, std::vector<Soldier*>* soldiers)
  * \todo Clean this mess up. The only action we really have right now is
  * to attack, so pretending we have more types is pointless.
  */
-void Player::enemyflagaction(Flag* flag, int32_t action, int32_t attacker, int32_t num, int32_t)
+void Player::enemyflagaction
+	(Flag & flag, Player_Number const attacker, uint32_t const count)
 {
 	upcast(Game, game, &egbase());
 	assert(game);
@@ -645,35 +638,28 @@ void Player::enemyflagaction(Flag* flag, int32_t action, int32_t attacker, int32
 		log("Player (%d) is not the sender of an attack (%d)\n", attacker, get_player_number());
 		return;
 	}
-	if (action != ENEMYFLAGACTION_ATTACK) {
-		log("enemyflagaction: unsupported action\n");
-		return;
-	}
-	if (num <= 0) {
-		log("enemyflagaction: num == %i\n", num);
+	if (count == 0) {
+		log("enemyflagaction: count == %i\n", count);
 		return;
 	}
 
-	if (flag->get_owner() == this)
-		return;
-	Building* building = flag->get_building();
-	if (!building)
-		return;
-
-	upcast(Attackable, attackable, building);
-	if (!attackable || !attackable->canAttack())
-		return;
-
-	std::vector<Soldier*> attackers;
-	findAttackSoldiers(flag, &attackers);
-
-	num = std::min(static_cast<int32_t>(attackers.size()), num);
-	for (int32_t i = 0; i < num; ++i) {
-		Soldier* soldier = attackers[i];
-		upcast(MilitarySite, ms, soldier->get_location(&egbase()));
-
-		ms->sendAttacker(soldier, building);
-	}
+	if (&flag.owner() != this)
+		if (Building * const building = flag.get_building())
+			if (upcast(Attackable, attackable, building))
+				if (attackable->canAttack()) {
+					std::vector<Soldier *> attackers;
+					findAttackSoldiers(flag, &attackers, count);
+					assert(attackers.size() <= count);
+					std::vector<Soldier *>::const_iterator const attackers_end =
+						attackers.end();
+					for
+						(std::vector<Soldier *>::const_iterator it =
+						 	attackers.begin();
+						 it != attackers_end;
+						 ++it)
+						dynamic_cast<MilitarySite &>(*(*it)->get_location(&egbase()))
+							.sendAttacker(**it, *building);
+				}
 }
 
 

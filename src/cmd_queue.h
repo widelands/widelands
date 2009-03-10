@@ -45,12 +45,6 @@ struct Map_Map_Object_Loader;
 #define SENDER_CMDQUEUE 100   // The Cmdqueue sends itself some action request
 
 
-enum {
-	FLAGACTION_GEOLOGIST   =  0, //  call a geologist
-
-
-	ENEMYFLAGACTION_ATTACK = 10,   // Performs an attack
-};
 // ---------------------- END    OF CMDS ----------------------------------
 
 //

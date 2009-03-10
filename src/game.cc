@@ -689,30 +689,28 @@ void Game::send_player_build_road (int32_t pid, Path & path)
 	send_player_command (new Cmd_BuildRoad(get_gametime(), pid, path));
 }
 
-void Game::send_player_flagaction (Flag* flag, int32_t action)
+void Game::send_player_flagaction (Flag & flag)
 {
 	send_player_command
 		(new Cmd_FlagAction
-		 	(get_gametime(),
-		 	 flag->get_owner()->get_player_number(),
-		 	 flag,
-		 	 action));
+		 	(get_gametime(), flag.owner().get_player_number(), flag));
 }
 
-void Game::send_player_start_stop_building (Building* b)
+void Game::send_player_start_stop_building (Building & building)
 {
 	send_player_command
 		(new Cmd_StartStopBuilding
-		 	(get_gametime(), b->get_owner()->get_player_number(), b));
+		 	(get_gametime(), building.owner().get_player_number(), building));
 }
 
-void Game::send_player_enhance_building (Building* b, Building_Index id)
+void Game::send_player_enhance_building
+	(Building & building, Building_Index const id)
 {
 	assert(id);
 
 	send_player_command
 		(new Cmd_EnhanceBuilding
-		 	(get_gametime(), b->get_owner()->get_player_number(), b, id));
+		 	(get_gametime(), building.owner().get_player_number(), building, id));
 }
 
 void Game::send_player_set_ware_priority
@@ -723,54 +721,45 @@ void Game::send_player_set_ware_priority
 		 (get_gametime(), imm->get_owner()->get_player_number(), imm, type, index, prio));
 }
 
-void Game::send_player_change_training_options(Building* b, int32_t atr, int32_t val)
+void Game::send_player_change_training_options
+	(TrainingSite & ts, int32_t const atr, int32_t const val)
 {
 	send_player_command
 		(new Cmd_ChangeTrainingOptions
-		 	(get_gametime(), b->get_owner()->get_player_number(), b, atr, val));
+		 	(get_gametime(), ts.owner().get_player_number(), ts, atr, val));
 }
 
-void Game::send_player_drop_soldier (Building* b, int32_t ser)
+void Game::send_player_drop_soldier (Building & b, int32_t const ser)
 {
 	assert(ser != -1);
 	send_player_command
 		(new Cmd_DropSoldier
-		 	(get_gametime(), b->get_owner()->get_player_number(), b, ser));
+		 	(get_gametime(), b.owner().get_player_number(), b, ser));
 }
 
-void Game::send_player_change_soldier_capacity (Building* b, int32_t val)
+void Game::send_player_change_soldier_capacity
+	(Building & b, int32_t const val)
 {
 	send_player_command
 		(new Cmd_ChangeSoldierCapacity
-		 	(get_gametime(),
-		 	 b->get_owner()->get_player_number(),
-		 	 b,
-		 	 val));
+		 	(get_gametime(), b.owner().get_player_number(), b, val));
 }
 
 /////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction
-	(Flag  const * const flag,
-	 int32_t       const action,
+	(Flag  const &       flag,
 	 Player_Number const who_attacks,
-	 int32_t       const num_soldiers,
-	 int32_t       const type)
+	 uint32_t      const num_soldiers)
 {
 	if
 		(1
 		 <
 		 player(who_attacks).vision
 		 	(Map::get_index
-		 	 	(flag->get_building()->get_position(), map().get_width())))
+		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
 			(new Cmd_EnemyFlagAction
-			 	(get_gametime(),
-			 	 who_attacks,
-			 	 flag,
-			 	 action,
-			 	 who_attacks,
-			 	 num_soldiers,
-			 	 type));
+			 	(get_gametime(), who_attacks, flag, num_soldiers));
 }
 
 

@@ -51,7 +51,7 @@ WarehouseSupply::~WarehouseSupply()
 		log
 			("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
 			 "an economy",
-			 m_warehouse->get_serial());
+			 m_warehouse->serial());
 		set_economy(0);
 	}
 
@@ -817,7 +817,7 @@ void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Work
 	while
 		(i != m_incorporated_workers.end()
 		 &&
-		 w->get_serial() <= dynamic_cast<Worker &>(*i->get(g)).get_serial())
+		 w->serial() <= dynamic_cast<Worker &>(*i->get(g)).serial())
 		++i;
 
 	m_incorporated_workers.insert(i, w);

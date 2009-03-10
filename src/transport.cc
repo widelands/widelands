@@ -155,7 +155,7 @@ WareInstance & IdleWareSupply::launch_item(Game *, const Request* req) {
 	if (req->get_index() != m_ware->descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
-			 m_ware->get_serial(),
+			 m_ware->serial(),
 			 m_ware->descr_index().value(),
 			 req->get_index().value());
 
@@ -352,7 +352,7 @@ void WareInstance::update(Game * game)
 
 		if (upcast(Building, building, location)) {
 			if (nextstep != location->get_base_flag())
-				throw wexception("MO(%u): ware: move from building to non-baseflag", get_serial());
+				throw wexception("MO(%u): ware: move from building to non-baseflag", serial());
 
 			// There are some situations where we might end up in a warehouse as
 			// part of a requested route, and we need to move out of it again, e.g.:
@@ -367,7 +367,7 @@ void WareInstance::update(Game * game)
 			throw wexception
 				("MO(%u): ware: can't move from building %u to %u (not a "
 				 "warehouse)",
-				 get_serial(), location->get_serial(), nextstep->get_serial());
+				 serial(), location->serial(), nextstep->serial());
 
 		} else if (upcast(Flag, flag, location)) {
 			flag->call_carrier
@@ -853,7 +853,7 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 
 	throw wexception
 		("MO(%u): Flag::remove_item: item %u not on flag",
-		 get_serial(), item->get_serial());
+		 serial(), item->serial());
 }
 
 /**
@@ -903,7 +903,7 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	// Deal with the building case
 	if (nextstep == get_building())
 	{
-		molog("Flag::call_carrier(%u): Tell building to fetch this item\n", item->get_serial());
+		molog("Flag::call_carrier(%u): Tell building to fetch this item\n", item->serial());
 
 		if (!get_building()->fetch_from_flag(g)) {
 			pi->item->cancel_moving();
@@ -1041,7 +1041,9 @@ void Flag::destroy(Editor_Game_Base* g)
  * Add a new flag job to request the worker with the given ID, and to execute
  * the given program once it's completed.
 */
-void Flag::add_flag_job(Game *, Ware_Index workerware, std::string programname) {
+void Flag::add_flag_job
+	(Game &, Ware_Index const workerware, std::string const & programname)
+{
 	FlagJob j;
 
 	j.request =
@@ -1505,7 +1507,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 			}
 		}
 
-		molog("Split: check %u -> idx %i\n", w->get_serial(), idx);
+		molog("Split: check %u -> idx %i\n", w->serial(), idx);
 
 		if (idx < 0)
 		{
@@ -1814,10 +1816,10 @@ void Transfer::tlog(const char* fmt, ...)
 
 	if (m_worker) {
 		id = 'W';
-		serial = m_worker->get_serial();
+		serial = m_worker->serial();
 	} else if (m_item) {
 		id = 'I';
-		serial = m_item->get_serial();
+		serial = m_item->serial();
 	} else {
 		id = '?';
 		serial = 0;
@@ -3001,7 +3003,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 			::StreamWrite & ss = g->syncstream();
 			ss.Unsigned8 (req->get_type  ());
 			ss.Unsigned8 (req->get_index ().value());
-			ss.Unsigned32(req->get_target()->get_serial());
+			ss.Unsigned32(req->get_target()->serial());
 		}
 
 		Ware_Index ware_index = req->get_index();
@@ -3048,9 +3050,9 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 
 		log
 			("REQ: %u (%i, %s) <- %u (ware %i), priority %i\n",
-			 req->get_target()->get_serial(),
+			 req->get_target()->serial(),
 			 req->get_required_time(), req->describe().c_str(),
-			 supp->get_position(g)->get_serial(), rsp.ware.value(), rsp.priority);
+			 supp->get_position(g)->serial(), rsp.ware.value(), rsp.priority);
 
 		s->queue.push(rsp);
 	}
@@ -3150,8 +3152,8 @@ void Economy::balance_requestsupply(uint32_t timerid)
 
 			log
 				("HANDLE: %u -> %u, ware %i, priority %i\n",
-				 rsp.request->get_target()->get_serial(),
-				 rsp.supply->get_position(game)->get_serial(),
+				 rsp.request->get_target()->serial(),
+				 rsp.supply->get_position(game)->serial(),
 				 rsp.ware.value(),
 				 rsp.priority);
 

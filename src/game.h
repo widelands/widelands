@@ -39,6 +39,7 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
+struct TrainingSite;
 
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
@@ -143,19 +144,15 @@ struct Game : public Editor_Game_Base {
 	void send_player_build (int32_t, const Coords&, Building_Index);
 	void send_player_build_flag (int32_t, const Coords&);
 	void send_player_build_road (int32_t, Path &);
-	void send_player_flagaction (Flag*, int32_t);
-	void send_player_start_stop_building (Building*);
-	void send_player_enhance_building (Building*, Building_Index);
+	void send_player_flagaction (Flag &);
+	void send_player_start_stop_building (Building &);
+	void send_player_enhance_building (Building &, Building_Index);
 	void send_player_set_ware_priority (PlayerImmovable*, int32_t type, Ware_Index index, int32_t prio);
-	void send_player_change_training_options(Building*, int32_t, int32_t);
-	void send_player_drop_soldier(Building*, int32_t);
-	void send_player_change_soldier_capacity(Building*, int32_t);
+	void send_player_change_training_options(TrainingSite &, int32_t, int32_t);
+	void send_player_drop_soldier(Building &, int32_t);
+	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
-		(const Flag * const,
-		 const int32_t action,
-		 const Player_Number,
-		 const int32_t num_soldiers,
-		 const int32_t type);
+		(Flag const &, Player_Number, uint32_t count);
 
 	Interactive_Player* get_ipl();
 

@@ -190,7 +190,7 @@ public:
 	virtual int32_t get_type() const throw () = 0;
 	virtual char const * type_name() const throw () {return "map object";}
 
-	Serial get_serial() const {return m_serial;}
+	Serial serial() const {return m_serial;}
 
 	/**
 	 * Attributes are fixed boolean properties of an object.
@@ -386,7 +386,7 @@ struct Object_Ptr {
 	bool operator==(const Object_Ptr other) const throw ()
 	{return m_serial == other.m_serial;}
 
-	uint32_t get_serial() const {return m_serial;}
+	uint32_t serial() const {return m_serial;}
 
 private:
 	uint32_t m_serial;
@@ -421,7 +421,7 @@ struct OPtr {
 
 	bool operator==(const OPtr<T>& other) const {return m == other.m;}
 
-	Serial get_serial() const {return m.get_serial();}
+	Serial serial() const {return m.serial();}
 
 private:
 	Object_Ptr m;

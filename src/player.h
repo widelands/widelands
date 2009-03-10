@@ -389,7 +389,7 @@ struct Player :
 		 Soldier_Counts const & soldier_counts);
 	void build(Coords c, Building_Index idx);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
-	void flagaction(Flag* flag, int32_t action);
+	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable* imm);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
@@ -406,11 +406,14 @@ struct Player :
 	uint32_t get_nr_economies() const {return m_economies.size();}
 
 	// Military stuff
-	void drop_soldier(PlayerImmovable* imm, Soldier* worker);
+	void drop_soldier(PlayerImmovable &, Soldier &);
 	void change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val);
 
-	uint32_t findAttackSoldiers(Flag* flag, std::vector<Soldier*>* soldiers = 0);
-	void enemyflagaction(Flag* flag, int32_t action, int32_t param, int32_t param2, int32_t param3);
+	uint32_t findAttackSoldiers
+		(Flag                   &,
+		 std::vector<Soldier *> * soldiers = 0,
+		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
+	void enemyflagaction(Flag &, Player_Number attacker, uint32_t count);
 
 	uint32_t casualties() const {return m_casualties;}
 	uint32_t kills     () const {return m_kills;}

@@ -95,7 +95,7 @@ struct SoldierControl {
 	 * \note This has no effect if the soldier is currently involved in a battle
 	 * or otherwise blocked from leaving the building.
 	 */
-	virtual void dropSoldier(Soldier*) = 0;
+	virtual void dropSoldier(Soldier &) = 0;
 
 protected:
 	virtual ~SoldierControl() {}

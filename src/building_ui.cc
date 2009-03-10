@@ -689,7 +689,7 @@ void Building_Window::act_bulldoze()
 
 void Building_Window::act_start_stop() {
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Stopable))
-		m_player->game().send_player_start_stop_building (m_building);
+		m_player->game().send_player_start_stop_building (*m_building);
 
 	die();
 }
@@ -707,7 +707,7 @@ void Building_Window::act_enhance(Widelands::Building_Index const id)
 		(m_building
 		 &&
 		 m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
-		m_player->game().send_player_enhance_building (m_building, id);
+		m_player->game().send_player_enhance_building (*m_building, id);
 
 	die();
 }
@@ -721,13 +721,11 @@ Callback for bulldozing request
 */
 void Building_Window::act_drop_soldier(uint32_t serial) {
 	if (m_building && (serial > 0))
-		m_player->game().send_player_drop_soldier (m_building, serial);
+		m_player->game().send_player_drop_soldier (*m_building, serial);
 }
 
 /*
 ===============
-Building_Window::act_change_soldier_capacity
-
 Do a modification at soldier capacity on military and training sites.
 TODO: Check that building is a military or a training site.
 ===============
@@ -735,7 +733,7 @@ TODO: Check that building is a military or a training site.
 void Building_Window::act_change_soldier_capacity(int32_t value)
 {
 	if (m_building)
-		m_player->game().send_player_change_soldier_capacity (m_building, value);
+		m_player->game().send_player_change_soldier_capacity (*m_building, value);
 
 }
 
@@ -1696,7 +1694,7 @@ void MilitarySite_Window::drop_button_clicked()
 {
 	assert(m_reg == this);
 	assert(m_table.has_selection());
-	act_drop_soldier(m_table.get_selected().get_serial());
+	act_drop_soldier(m_table.get_selected().serial());
 }
 
 /*
@@ -1937,7 +1935,7 @@ void TrainingSite_Window::drop_button_clicked()
 {
 	assert(*m_reg == this);
 	if (m_table->selection_index() != m_table->no_selection_index())
-		act_drop_soldier(m_table->get_selected().get_serial());
+		act_drop_soldier(m_table->get_selected().serial());
 }
 
 /*

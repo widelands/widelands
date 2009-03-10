@@ -935,7 +935,7 @@ void FieldActionWindow::act_geologist()
 {
 	Game & game = dynamic_cast<Game &>(m_iabase->egbase());
 	if (upcast(Widelands::Flag, flag, game.map().get_immovable(m_field)))
-		game.send_player_flagaction (flag, Widelands::FLAGACTION_GEOLOGIST);
+		game.send_player_flagaction (*flag);
 
 	okdialog();
 }
@@ -950,16 +950,13 @@ void FieldActionWindow::act_attack ()
 {
 	Game & game = dynamic_cast<Game &>(m_iabase->egbase());
 
-	if (upcast(Building, b, game.map().get_immovable(m_field)))
-		if (upcast(Widelands::Flag const, flag, b->get_base_flag()))
-			if (m_attackers > 0)
-				game.send_player_enemyflagaction
-					(flag,
-					 Widelands::ENEMYFLAGACTION_ATTACK,
-					 dynamic_cast<Interactive_Player const &>(*m_iabase)
-					 .get_player_number(),
-					 m_attackers,       //  number of soldiers
-					 m_attackers_type); //  type of soldiers
+	if (upcast(Building, building, game.map().get_immovable(m_field)))
+		if (m_attackers > 0)
+			game.send_player_enemyflagaction
+				(*building->get_base_flag(),
+				 dynamic_cast<Interactive_Player const &>(*m_iabase)
+				 .get_player_number(),
+				 m_attackers); //  number of soldiers
 
 	okdialog();
 }
@@ -977,7 +974,7 @@ void FieldActionWindow::act_attack_more() {
 uint32_t FieldActionWindow::get_max_attackers() {
 	upcast(Building, building, m_map->get_immovable(m_field));
 	if (building && building->get_owner() != m_plr)
-		return m_plr->findAttackSoldiers(building->get_base_flag());
+		return m_plr->findAttackSoldiers(*building->get_base_flag());
 	return 0;
 }
 

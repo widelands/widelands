@@ -92,7 +92,7 @@ public:
 	/// as the location.
 	void set_location_initially(PlayerImmovable & location) {
 		assert(not m_location.is_set());
-		assert(location.get_serial());
+		assert(location.serial());
 		assert(m_economy);
 		assert(m_economy == location.get_economy());
 		m_location = &location;

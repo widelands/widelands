@@ -330,7 +330,7 @@ void TrainingSite::update_soldier_request() {
 		m_soldier_request = 0;
 
 		while (m_soldiers.size() > m_capacity)
-			dropSoldier(m_soldiers[m_soldiers.size()-1]);
+			dropSoldier(*m_soldiers[m_soldiers.size() - 1]);
 	}
 }
 
@@ -406,12 +406,12 @@ void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
  * \note This is called from player commands, so we need to verify that the soldier
  * is actually stationed here, without breaking anything if he isn't.
  */
-void TrainingSite::dropSoldier(Soldier* soldier)
+void TrainingSite::dropSoldier(Soldier & soldier)
 {
-	upcast(Game, g, &owner().egbase());
-	assert(g);
+	Game & game = dynamic_cast<Game &>(owner().egbase());
 
-	std::vector<Soldier*>::iterator it = std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
+	std::vector<Soldier *>::iterator it =
+		std::find(m_soldiers.begin(), m_soldiers.end(), &soldier);
 	if (it == m_soldiers.end()) {
 		molog("TrainingSite::dropSoldier: soldier not in training site");
 		return;
@@ -419,11 +419,11 @@ void TrainingSite::dropSoldier(Soldier* soldier)
 
 	m_soldiers.erase(it);
 
-	soldier->reset_tasks(g);
-	soldier->start_task_leavebuilding(g, true);
+	soldier.reset_tasks(&game);
+	soldier.start_task_leavebuilding(&game, true);
 
 	// Schedule, so that we can call new soldiers on next act()
-	schedule_act(g, 100);
+	schedule_act(&game, 100);
 }
 
 
@@ -448,8 +448,8 @@ void TrainingSite::drop_unupgradable_soldiers(Game *)
 
 	// Drop soldiers only now, so that changes in the soldiers array don't
 	// mess things up
-	for (std::vector<Soldier*>::iterator it = droplist.begin(); it != droplist.end(); ++it)
-		dropSoldier(*it);
+	container_iterate_const(std::vector<Soldier *>, droplist, i)
+		dropSoldier(**i.current);
 }
 
 /**

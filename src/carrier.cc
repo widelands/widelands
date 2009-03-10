@@ -364,7 +364,7 @@ bool Carrier::swap_or_wait(Game *g, State* s)
 		if (!flag.ack_pending_item(g, &otherflag))
 			throw wexception
 				("MO(%u): transport: overload exchange: flag %u is fucked up",
-				 get_serial(), flag.get_serial());
+				 serial(), flag.serial());
 
 		m_acked_ware = s->ivar1 ^ 1;
 		return false;
@@ -510,7 +510,7 @@ int32_t Carrier::find_closest_flag(Game* g)
 			throw wexception
 				("MO(%u): Carrier::find_closest_flag: not on road, not on "
 				 "building",
-				 get_serial());
+				 serial());
 	}
 
 	// Calculate the paths and their associated costs

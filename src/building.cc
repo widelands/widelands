@@ -556,7 +556,7 @@ bool Building::get_building_work(Game *, Worker * w, bool)
 {
 	throw wexception
 		("MO(%u): get_building_work() for unknown worker %u",
-		 get_serial(), w->get_serial());
+		 serial(), w->serial());
 }
 
 

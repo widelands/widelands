@@ -194,10 +194,10 @@ void Bob::act(Game* g, uint32_t data)
 
 		if (!m_stack.size())
 			throw wexception
-				("MO(%u): init_auto_task() failed to set a task", get_serial());
+				("MO(%u): init_auto_task() failed to set a task", serial());
 		if (!m_actscheduled)
 			throw wexception
-				("MO(%u): init_auto_task() failed to schedule something", get_serial());
+				("MO(%u): init_auto_task() failed to schedule something", serial());
 
 		return;
 	}
@@ -222,8 +222,7 @@ void Bob::do_act(Game* g)
 
 	if (!m_actscheduled)
 		throw wexception
-			("MO(%u): update[%s] failed to act",
-			 get_serial(), task.name);
+			("MO(%u): update[%s] failed to act", serial(), task.name);
 
 	m_in_act = false;
 }
@@ -658,7 +657,7 @@ bool Bob::start_task_movepath
 
 	if (curidx == -1)
 		throw wexception
-			("MO(%u): start_task_movepath(index): not on path", get_serial());
+			("MO(%u): start_task_movepath(index): not on path", serial());
 
 	if (curidx != index) {
 		if (curidx < index) {
@@ -994,7 +993,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	// randomly generated movements.
 	if (upcast(Game, game, g)) {
 		StreamWrite& ss = game->syncstream();
-		ss.Unsigned32(get_serial());
+		ss.Unsigned32(serial());
 		ss.Signed16(coords.x);
 		ss.Signed16(coords.y);
 	}

@@ -92,8 +92,8 @@ struct loader_sorter {
 		(Map_Object::Loader * const a, Map_Object::Loader * const b) const
 	{
 		assert
-			(a->get_object()->get_serial() != b->get_object()->get_serial());
-		return a->get_object()->get_serial() < b->get_object()->get_serial();
+			(a->get_object()->serial() != b->get_object()->serial());
+		return a->get_object()->serial() < b->get_object()->serial();
 	}
 };
 void Map_Object_Packet::LoadFinish() {
@@ -139,7 +139,7 @@ void Map_Object_Packet::Write
 			throw wexception
 				("MO(%u of type %s) without new style save support not saved "
 				 "explicitly",
-				 obj->get_serial(), obj->descr().descname().c_str());
+				 obj->serial(), obj->descr().descname().c_str());
 
 		os->register_object(obj);
 		obj->save(egbase, os, fw);
