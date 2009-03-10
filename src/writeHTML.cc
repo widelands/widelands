@@ -869,9 +869,9 @@ void ProductionProgram::writeHTML
 void ProductionProgram::ActReturn::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#return\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#return\" title=\"");
 	fw.Text(_("Documentation for program command return"));
 	fw.Text("\">");
 	fw.Text(_("return"));
@@ -950,9 +950,9 @@ void ProductionProgram::ActCall::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	std::string const & program_descname = m_program->descname();
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#call\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#call\" title=\"");
 	fw.Text(_("Documentation for program command call"));
 	fw.Text("\">");
 	fw.Text(_("call"));
@@ -980,9 +980,9 @@ void ProductionProgram::ActCall::writeHTML
 void ProductionProgram::ActWorker::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#worker\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#worker\" title=\"");
 	fw.Text(_("Documentation for program command worker"));
 	fw.Text("\">");
 	fw.Text(_("worker"));
@@ -1008,9 +1008,9 @@ void ProductionProgram::ActWorker::writeHTML
 void ProductionProgram::ActSleep::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#sleep\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#sleep\" title=\"");
 	fw.Text(_("Documentation for program command sleep"));
 	fw.Text("\">");
 	fw.Text(_("sleep"));
@@ -1028,9 +1028,9 @@ void ProductionProgram::ActSleep::writeHTML
 void ProductionProgram::ActAnimate::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#animate\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#animate\" title=\"");
 	fw.Text(_("Documentation for program command animate"));
 	fw.Text("\">");
 	fw.Text(_("animate"));
@@ -1049,9 +1049,9 @@ void ProductionProgram::ActConsume::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	Tribe_Descr const & tribe = site.tribe();
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#consume\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#consume\" title=\"");
 	fw.Text(_("Documentation for program command consume"));
 	fw.Text("\">");
 	fw.Text(_("consume"));
@@ -1100,9 +1100,9 @@ void ProductionProgram::ActProduce::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	Tribe_Descr const & tribe = site.tribe();
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#produce\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#produce\" title=\"");
 	fw.Text(_("Documentation for program command produce"));
 	fw.Text("\">");
 	fw.Text(_("produce"));
@@ -1145,9 +1145,9 @@ void ProductionProgram::ActMine::writeHTML
 	std::string    const & world_basedir     = world.basedir();
 	std::string    const & resource_name     = resource.    name();
 	std::string    const & resource_descname = resource.descname();
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#mine\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#mine\" title=\"");
 	fw.Text(_("Documentation for program command mine"));
 	fw.Text("\">");
 	fw.Text(_("mine"));
@@ -1172,9 +1172,9 @@ void ProductionProgram::ActMine::writeHTML
 void ProductionProgram::ActCheck_Soldier::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#check_soldier\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#check_soldier\" title=\"");
 	fw.Text(_("Documentation for program command check_soldier"));
 	fw.Text("\">");
 	fw.Text(_("check soldier"));
@@ -1196,9 +1196,9 @@ void ProductionProgram::ActCheck_Soldier::writeHTML
 void ProductionProgram::ActTrain::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#train\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#train\" title=\"");
 	fw.Text(_("Documentation for program command train"));
 	fw.Text("\">");
 	fw.Text(_("train"));
@@ -1220,9 +1220,9 @@ void ProductionProgram::ActTrain::writeHTML
 void ProductionProgram::ActPlayFX::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
-	fw.Text
-		("<a href=\"http://xoops.widelands.org/modules/mediawiki/index.php/"
-		 "Productionsite_Program_Reference#playFX\" title=\"");
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text("#playFX\" title=\"");
 	fw.Text(_("Documentation for program command playFX"));
 	fw.Text("\">");
 	fw.Text(_("playFX"));
