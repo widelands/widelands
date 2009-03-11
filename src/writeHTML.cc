@@ -127,7 +127,7 @@ void Tribe_Descr::referenceBuilding
 	fw.Text(building_name);
 	fw.Text("\" href=\"../");
 	fw.Text(building_name);
-	fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+	fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 	fw.Text(building_descname);
 	fw.Text("\"><img src=\"../");
 	fw.Text(building_name);
@@ -151,7 +151,7 @@ void Tribe_Descr::referenceWorker
 	fw.Text(worker_name);
 	fw.Text("\" href=\"../");
 	fw.Text(worker_name);
-	fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+	fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 	fw.Text(worker_descname);
 	fw.Text("\">");
 	for (; multiplicity; --multiplicity) {
@@ -178,7 +178,7 @@ void Tribe_Descr::referenceWare
 	fw.Text(ware_name);
 	fw.Text("\" href=\"../");
 	fw.Text(ware_name);
-	fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+	fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 	fw.Text(ware_descname);
 	fw.Text("\">");
 	for (; multiplicity; --multiplicity) {
@@ -208,7 +208,7 @@ void Tribe_Descr::referenceWare
    "</html>\n"                                                                \
 
 #define HTML_SCRIPT_SORTTABLE                                                 \
-	"<script src=\"../../doc/sorttable.js\" type=\"text/javascript\"/>\n"      \
+   "<script src=\"../../doc/sorttable.js\" type=\"text/javascript\"/>\n"      \
 
 //  A container to keep the types ordered by descname for the table of
 // contents.
@@ -227,8 +227,8 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 	assert(*directory.rbegin() == '/');
 	ORDERED(Building_Index);
 
-	//  Write an index.html in each building type's directory and add the
-	//  building type to ordered for the table of contents.
+	//  Write an index_<locale>.xhtml in each building type's directory and add
+	//  the building type to ordered for the table of contents.
 	for //  Must iterate backwards for cross-referencing to work.
 		(Building_Index i = m_buildings.get_nitems();
 		 Building_Index::First() < i;)
@@ -239,13 +239,13 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 		writeCrossReferences(fw, m_building_references[i.value()]);
 		fw.Text(HTML_FILE_END);
 		RealFSImpl fs(directory + building_descr.name());
-		fw.Write(fs, ("index_" + i18n::get_locale() + ".html").c_str());
+		fw.Write(fs, ("index_" + i18n::get_locale() + ".xhtml").c_str());
 		ordered.insert
 			(std::pair<std::string const *, Building_Index>
 			 	(&building_descr.descname(), i));
 	}
 
-	//  Write the table of contents to building_types.html.
+	//  Write the table of contents to building_types.xhtml.
 	::FileWrite fw;
 	fw.Text
 		(HTML_FILE_BEGIN
@@ -288,13 +288,13 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 		std::string const & building_descname = building_descr.descname();
 		fw.Text("<tr><td><a href=\"");
 		fw.Text(building_name);
-		fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 		fw.Text(building_descname);
 		fw.Text("\"><img src=\"");
 		fw.Text(building_name);
 		fw.Text("/menu.png\" alt=\"\"/></a></td><td><a href=\"");
 		fw.Text(building_name);
-		fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 		fw.Text(building_descname);
 		fw.Text("\">");
 		fw.Text(building_descname);
@@ -340,7 +340,7 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 		 "</table>\n"
 		 HTML_FILE_END);
 	RealFSImpl buildings_toc_fs(directory);
-	fw.Write(buildings_toc_fs, _("building_types.html"));
+	fw.Write(buildings_toc_fs, _("building_types.xhtml"));
 }
 
 
@@ -431,7 +431,7 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 			fw.Text("<li><a name=\"buildcost_");
 			tribe().referenceWare
 				(fw,
-				 name() + "/index_" + i18n::get_locale() + ".html#buildcost_"     +
+				 name() + "/index_" + i18n::get_locale() + ".xhtml#buildcost_"    +
 				 tribe().get_ware_descr(j.current->first)->name() + "\" title=\"" +
 				 descname() + _("'s constructionsite") + "\"><img src=\"../"      +
 				 name() + "/menu.png\" alt=\"" + descname(),
@@ -452,7 +452,7 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 			fw.Text("<li><a name=\"enhancement_");
 			tribe().referenceBuilding
 				(fw,
-				 name() + "/index_" + i18n::get_locale() + ".html#enhancement_"   +
+				 name() + "/index_" + i18n::get_locale() + ".xhtml#enhancement_"  +
 				 tribe().get_building_descr(*i.current)->name() + "\" title=\""   +
 				 descname() + _("'s enhancement") + "\"><img src=\"../" + name()  +
 				 "/menu.png\" alt=\"" + descname(),
@@ -473,8 +473,8 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 	assert(*directory.rbegin() == '/');
 	ORDERED(Ware_Index);
 
-	//  Write an index.html in each worker type's directory and add the worker
-	//  type to ordered for the table of contents.
+	//  Write an index_<locale>.xhtml in each worker type's directory and add
+	//  the worker type to ordered for the table of contents.
 	for (Ware_Index i = m_workers.get_nitems(); Ware_Index::First() < i;) {
 		Worker_Descr const & worker_descr = *get_worker_descr(--i);
 		::FileWrite fw;
@@ -482,13 +482,13 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 		writeCrossReferences(fw, m_worker_references[i.value()]);
 		fw.Text(HTML_FILE_END);
 		RealFSImpl fs(directory + worker_descr.name());
-		fw.Write(fs, ("index_" + i18n::get_locale() + ".html").c_str());
+		fw.Write(fs, ("index_" + i18n::get_locale() + ".xhtml").c_str());
 		ordered.insert
 			(std::pair<std::string const *, Ware_Index>
 			 	(&worker_descr.descname(), i));
 	}
 
-	//  Write the table of contents to worker_types.html.
+	//  Write the table of contents to worker_types.xhtml.
 	::FileWrite fw;
 	fw.Text
 		(HTML_FILE_BEGIN
@@ -527,13 +527,13 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 		std::string const & worker_descname = worker_descr.descname();
 		fw.Text("<tr><td><a href=\"");
 		fw.Text(worker_name);
-		fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 		fw.Text(worker_descname);
 		fw.Text("\"><img src=\"");
 		fw.Text(worker_name);
 		fw.Text("/menu.png\" alt=\"\"/></a></td><td><a href=\"");
 		fw.Text(worker_name);
-		fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 		fw.Text(worker_descname);
 		fw.Text("\">");
 		fw.Text(worker_descname);
@@ -559,7 +559,7 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 			fw.Text(becomes_descname);
 			fw.Text("\"><a href=\"");
 			fw.Text(becomes_name);
-			fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+			fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 			fw.Text(becomes_descname);
 			fw.Text("\"><img src=\"");
 			fw.Text(becomes_name);
@@ -575,7 +575,7 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 		 "</table>\n"
 		 HTML_FILE_END);
 	RealFSImpl workers_toc_fs(directory);
-	fw.Write(workers_toc_fs, _("worker_types.html"));
+	fw.Write(workers_toc_fs, _("worker_types.xhtml"));
 }
 
 
@@ -662,7 +662,7 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 			if (Ware_Index const wi = tribe().ware_index(j.current->first))
 				tribe().referenceWare
 					(fw,
-					 name() + "/index_" + i18n::get_locale() + ".html#buildcost_"  +
+					 name() + "/index_" + i18n::get_locale() + ".xhtml#buildcost_" +
 					 j.current->first + "\" title=\"" + descname()                 +
 					 _("'s creation") + "\"><img src=\"../" + name()               +
 					 "/menu.png\" alt=\"" + descname(),
@@ -672,7 +672,7 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 			else
 				tribe().referenceWorker
 					(fw,
-					 name() + "/index_" + i18n::get_locale() + ".html#buildcost_"  +
+					 name() + "/index_" + i18n::get_locale() + ".xhtml#buildcost_" +
 					 j.current->first + "\" title=\"" + descname()                 +
 					 _("'s creation") + "\"><img src=\"../" + name()               +
 					 "/menu.png\" alt=\"" + descname(),
@@ -694,7 +694,7 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 		fw.Text(" <a name=\"becomes_");
 		tribe().referenceWorker
 			(fw,
-			 name() + "/index_" + i18n::get_locale() + ".html#becomes_"          +
+			 name() + "/index_" + i18n::get_locale() + ".xhtml#becomes_"         +
 			 tribe().get_worker_descr(becomes())->name() + "\" title=\""         +
 			 descname() + _("'s promotion") + "\"><img src=\"../" + name()       +
 			 "/menu.png\" alt=\"" + descname(),
@@ -779,7 +779,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 			fw.Text("<li><a name=\"worker_");
 			tribe().referenceWorker
 				(fw,
-				 name() + "/index_" + i18n::get_locale() + ".html#worker_"        +
+				 name() + "/index_" + i18n::get_locale() + ".xhtml#worker_"       +
 				 tribe().get_worker_descr(i.current->first)->name()               +
 				 "\" title=\"" + descname() + _("'s employee")                    +
 				 "\"><img src=\"../" + name() + "/menu.png\" alt=\"" + descname(),
@@ -799,7 +799,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 				fw.Text("<li><a name=\"input_");
 				tribe().referenceWare
 					(fw,
-					 name() + "/index_" + i18n::get_locale() + ".html#input_"      +
+					 name() + "/index_" + i18n::get_locale() + ".xhtml#input_"     +
 					 tribe().get_ware_descr(i.current->first)->name().c_str()      +
 					 "\" title=\"" + descname() + _("'s input")                    +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
@@ -821,7 +821,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 				fw.Text("<li><a name=\"output_");
 				tribe().referenceWare
 					(fw,
-					 name() + "/index_" + i18n::get_locale() + ".html#output_"     +
+					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
 					 tribe().get_ware_descr(*i.current)->name().c_str()            +
 					 "\" title=\"" + descname() + _("'s output")                   +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
@@ -870,7 +870,7 @@ void ProductionProgram::ActReturn::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#return\" title=\"");
 	fw.Text(_("Documentation for program command return"));
 	fw.Text("\">");
@@ -924,7 +924,7 @@ void ProductionProgram::ActReturn::Economy_Needs::writeHTML
 		 "<span class=\"keyword\">needs</span> "
 		 "<a href=\"../");
 	fw.Text(ware_name);
-	fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+	fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 	fw.Text(ware_descname);
 	fw.Text("\"><img src=\"../");
 	fw.Text(ware_name);
@@ -951,7 +951,7 @@ void ProductionProgram::ActCall::writeHTML
 {
 	std::string const & program_descname = m_program->descname();
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#call\" title=\"");
 	fw.Text(_("Documentation for program command call"));
 	fw.Text("\">");
@@ -981,7 +981,7 @@ void ProductionProgram::ActWorker::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#worker\" title=\"");
 	fw.Text(_("Documentation for program command worker"));
 	fw.Text("\">");
@@ -990,7 +990,7 @@ void ProductionProgram::ActWorker::writeHTML
 	Worker_Descr const & worker_descr =
 		*site.tribe().get_worker_descr(site.working_positions().at(0).first);
 	fw.Text(worker_descr.descname());
-	fw.Text("/index_" + i18n::get_locale() + ".html#program_");
+	fw.Text("/index_" + i18n::get_locale() + ".xhtml#program_");
 	fw.Text(m_program);
 	fw.Text("\" title=\"");
 	char buffer[64];
@@ -1009,7 +1009,7 @@ void ProductionProgram::ActSleep::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#sleep\" title=\"");
 	fw.Text(_("Documentation for program command sleep"));
 	fw.Text("\">");
@@ -1029,7 +1029,7 @@ void ProductionProgram::ActAnimate::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#animate\" title=\"");
 	fw.Text(_("Documentation for program command animate"));
 	fw.Text("\">");
@@ -1050,7 +1050,7 @@ void ProductionProgram::ActConsume::writeHTML
 {
 	Tribe_Descr const & tribe = site.tribe();
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#consume\" title=\"");
 	fw.Text(_("Documentation for program command consume"));
 	fw.Text("\">");
@@ -1073,7 +1073,7 @@ void ProductionProgram::ActConsume::writeHTML
 			std::string const & ware_descname = ware.descname();
 			fw.Text("<a href=\"../");
 			fw.Text(ware_name);
-			fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+			fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 			fw.Text(ware_descname);
 			fw.Text("\"><img src=\"../");
 			fw.Text(ware_name);
@@ -1101,7 +1101,7 @@ void ProductionProgram::ActProduce::writeHTML
 {
 	Tribe_Descr const & tribe = site.tribe();
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#produce\" title=\"");
 	fw.Text(_("Documentation for program command produce"));
 	fw.Text("\">");
@@ -1118,7 +1118,7 @@ void ProductionProgram::ActProduce::writeHTML
 		std::string const & ware_descname = ware.descname();
 		fw.Text("<a href=\"../");
 		fw.Text(ware_name);
-		fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 		fw.Text(ware_descname);
 		fw.Text("\"><img src=\"../");
 		fw.Text(ware_name);
@@ -1146,14 +1146,14 @@ void ProductionProgram::ActMine::writeHTML
 	std::string    const & resource_name     = resource.    name();
 	std::string    const & resource_descname = resource.descname();
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#mine\" title=\"");
 	fw.Text(_("Documentation for program command mine"));
 	fw.Text("\">");
 	fw.Text(_("mine"));
 	fw.Text("</a> <a href=\"../../../");
 	fw.Text(world_basedir);
-	fw.Text("index_" + i18n::get_locale() + ".html#resource_");
+	fw.Text("index_" + i18n::get_locale() + ".xhtml#resource_");
 	fw.Text(resource_name);
 	fw.Text("\" title=\"");
 	fw.Text(resource_descname);
@@ -1173,7 +1173,7 @@ void ProductionProgram::ActCheck_Soldier::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#check_soldier\" title=\"");
 	fw.Text(_("Documentation for program command check_soldier"));
 	fw.Text("\">");
@@ -1197,7 +1197,7 @@ void ProductionProgram::ActTrain::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#train\" title=\"");
 	fw.Text(_("Documentation for program command train"));
 	fw.Text("\">");
@@ -1221,7 +1221,7 @@ void ProductionProgram::ActPlayFX::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
 {
 	fw.Text("<a href=\"../../../doc/");
-	fw.Text(_("productionsite_program_reference.html"));
+	fw.Text(_("productionsite_program_reference.xhtml"));
 	fw.Text("#playFX\" title=\"");
 	fw.Text(_("Documentation for program command playFX"));
 	fw.Text("\">");
@@ -1239,8 +1239,8 @@ void Tribe_Descr::writeHTMLWares(std::string const & directory) {
 	assert(*directory.rbegin() == '/');
 	ORDERED(Ware_Index);
 
-	//  Write an index.html in each ware type's directory and add the ware type
-	//  to ordered for the table of contents.
+	//  Write an index_<locale>.xhtml in each ware type's directory and add the
+	//  ware type to ordered for the table of contents.
 	for (Ware_Index i = m_wares.get_nitems(); Ware_Index::First() < i;) {
 		Item_Ware_Descr const & ware_descr = *get_ware_descr(--i);
 		::FileWrite fw;
@@ -1248,13 +1248,13 @@ void Tribe_Descr::writeHTMLWares(std::string const & directory) {
 		writeCrossReferences(fw, m_ware_references[i.value()]);
 		fw.Text(HTML_FILE_END);
 		RealFSImpl fs(directory + ware_descr.name());
-		fw.Write(fs, ("index_" + i18n::get_locale() + ".html").c_str());
+		fw.Write(fs, ("index_" + i18n::get_locale() + ".xhtml").c_str());
 		ordered.insert
 			(std::pair<std::string const *, Ware_Index>
 			 	(&ware_descr.descname(), i));
 	}
 
-	//  Write the table of contents to ware_types.html.
+	//  Write the table of contents to ware_types.xhtml.
 	::FileWrite fw;
 	fw.Text
 		(HTML_FILE_BEGIN
@@ -1283,13 +1283,13 @@ void Tribe_Descr::writeHTMLWares(std::string const & directory) {
 		std::string const & ware_descname = ware_descr.descname();
 		fw.Text("<tr><td><a href=\"");
 		fw.Text(ware_name);
-		fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 		fw.Text(ware_descname);
 		fw.Text("\"><img src=\"");
 		fw.Text(ware_name);
 		fw.Text("/menu.png\" alt=\"\"/></a></td><td><a href=\"");
 		fw.Text(ware_name);
-		fw.Text("/index_" + i18n::get_locale() + ".html\" title=\"");
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 		fw.Text(ware_descname);
 		fw.Text("\">");
 		fw.Text(ware_descname);
@@ -1300,7 +1300,7 @@ void Tribe_Descr::writeHTMLWares(std::string const & directory) {
 		 "</table>\n"
 		 HTML_FILE_END);
 	RealFSImpl wares_toc_fs(directory);
-	fw.Write(wares_toc_fs, _("ware_types.html"));
+	fw.Write(wares_toc_fs, _("ware_types.xhtml"));
 }
 
 
