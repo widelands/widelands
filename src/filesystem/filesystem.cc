@@ -287,7 +287,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 			fixedpath.replace(i, 1, "\\");
 	}
 
-	bool const absolute = pathIsAbsolute(fixedpath);
+	bool absolute = pathIsAbsolute(fixedpath);
 
 	components = FS_Tokenize(fixedpath);
 
