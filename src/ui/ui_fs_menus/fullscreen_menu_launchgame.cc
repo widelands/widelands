@@ -353,7 +353,10 @@ void Fullscreen_Menu_LaunchGame::select_map()
 	m_settings->setScenario(m_is_scenario);
 
 	MapData const & mapdata = *msm.get_map();
-	m_settings->setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+	m_nr_players = mapdata.nrplayers;
+
+	safe_place_for_host(m_nr_players);
+	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
 	m_is_savegame = false;
 	enable_all_pdgs();
 }
@@ -386,6 +389,7 @@ void Fullscreen_Menu_LaunchGame::select_savegame()
 	std::string mapname = _("(Save): ") + std::string(s.get_safe_string("name"));
 	m_nr_players = s.get_safe_int("nr_players");
 
+	safe_place_for_host(m_nr_players);
 	m_settings->setMap(mapname, m_filename, m_nr_players, true);
 	m_is_savegame = true;
 	enable_all_pdgs();
@@ -472,11 +476,49 @@ void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
 
 /**
  * enables all player description groups.
- * This is a cleanup for the pdgs. Used f.e if user selects a map after a
+ * This is a cleanup for the pdgs. Used f.e. if user selects a map after a
  * savegame was selected, so all free player positions are reopened.
  */
 void Fullscreen_Menu_LaunchGame::enable_all_pdgs()
 {
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 		m_players[i]->enable_pdg(true);
+}
+
+
+/**
+ * Bandaid to avoid segfaults, if the host changes a map with less playerpos-
+ * itions while being on a later invalid position.
+ * Better solution would be a lobby.
+ */
+void Fullscreen_Menu_LaunchGame::safe_place_for_host(uint8_t newplayernumber)
+{
+	GameSettings settings = m_settings->settings();
+
+	// Check whether the host would still keep a valid position and return if yes.
+	if (settings.playernum < newplayernumber)
+		return;
+
+	// Check if a still valid place is open.
+	for (uint8_t i = 0; i < newplayernumber; ++i) {
+		PlayerSettings position = settings.players[i];
+		if (position.state == PlayerSettings::stateOpen) {
+			switch_to_position(i);
+			return;
+		}
+	}
+
+	// Check if a still valid place is given to a computer.
+	for (uint8_t i = 0; i < newplayernumber; ++i) {
+		PlayerSettings position = settings.players[i];
+		if (position.state == PlayerSettings::stateComputer) {
+			switch_to_position(i);
+			return;
+		}
+	}
+
+	// Kick player 1 and take the position
+	m_settings->setPlayerState(0, PlayerSettings::stateClosed);
+	m_settings->setPlayerState(0, PlayerSettings::stateOpen);
+	switch_to_position(0);
 }

@@ -71,6 +71,7 @@ private:
 	void switch_to_position(uint8_t);
 	void load_previous_playerdata();
 	void enable_all_pdgs();
+	void safe_place_for_host(uint8_t);
 
 	uint32_t    m_butw;
 	uint32_t    m_buth;
