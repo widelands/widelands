@@ -28,6 +28,7 @@
 #include "network_protocol.h"
 #include "network_system.h"
 #include "playercommand.h"
+#include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
 
@@ -83,7 +84,12 @@ NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == 0)
-		throw wexception("[Client] SDLNet_TCP_Open failed: %s", SDLNet_GetError());
+		throw warning
+			(_("Could not establish connection to host"),
+			 _
+			 	("Widelands could not establish a connection to the given adress.\n"
+				 "Either no Widelands server was running at the supposed port or\n"
+				 "the server shut down as you tried to connect."));
 
 	d->sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);

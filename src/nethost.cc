@@ -71,7 +71,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setMap(mapname, mapfilename, maxplayers, savegame);
 	}
 	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) {
-		if (number == settings().playernum || number >= settings().players.size())
+		if (number >= settings().players.size())
 			return;
 
 		h->setPlayerState(number, state);
@@ -101,7 +101,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (number >= h->settings().players.size())
 			return;
 
-		if (number == 0 || settings().players[number].state == PlayerSettings::stateComputer)
+		if (number == settings().playernum || settings().players[number].state == PlayerSettings::stateComputer)
 			h->setPlayerTribe(number, tribe);
 	}
 
