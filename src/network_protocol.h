@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 7,
+	NETWORK_PROTOCOL_VERSION = 8,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -81,7 +81,7 @@ enum {
 	 * If the host accepts, it replies with a HELLO command with the following
 	 * payload:
 	 * \li Unsigned8: protocol version
-	 * \li Unsigned8: 0-based player number for the client
+	 * \li Unsigned32: 0-based user number for the client
 	 *
 	 * \note The host may override the client's chosen name in a subsequent
 	 * \ref NETCMD_SETTING_ALLPLAYERS or \ref NETCMD_SETTING_PLAYER packet.
@@ -180,6 +180,22 @@ enum {
 	NETCMD_SETTING_PLAYER = 7,
 
 	/**
+	 * During game setup, this command contains complete information about all
+	 * users.
+	 *
+	 * \see NetClient::handle_network
+	 */
+	NETCMD_SETTING_ALLUSERS = 8,
+
+	/**
+	 * During game setup, this command updates the information associated to
+	 * one user.
+	 *
+	 * \see NetClient::handle_network
+	 */
+	NETCMD_SETTING_USER = 9,
+
+	/**
 	 * Sent by the host with no payload. The client must reply with a
 	 * \ref NETCMD_PONG command.
 	 */
@@ -266,7 +282,7 @@ enum {
 	 * During game setup, this is sent by the host to a specific player.
 	 * It is the answer on NETCMD_SETTING_CHANGETRIBE, if the player
 	 * starting position was successfully changed. Payload is
-	 * \li Unsigned8: new playernumber
+	 * \li Signed32: new playernumber
 	 */
 	NETCMD_SET_PLAYERNUMBER = 19,
 

@@ -25,6 +25,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_multilinetextarea.h"
+#include "ui_listselect.h"
 
 #include <string>
 
@@ -81,8 +82,9 @@ private:
 	UI::Button  <Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
 	UI::Button  <Fullscreen_Menu_LaunchGame> m_back, m_ok;
 	UI::IDButton<Fullscreen_Menu_LaunchGame, uint8_t> * m_pos[MAX_PLAYERS];
-	UI::Textarea             m_title, m_mapname;
+	UI::Textarea             m_title, m_mapname, m_lobby;
 	UI::Multiline_Textarea   m_notes;
+	UI::BaseListselect     * m_lobby_list;
 	GameSettingsProvider   * m_settings;
 	GameController         * m_ctrl; // optional
 	GameChatPanel          * m_chat;

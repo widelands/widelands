@@ -62,21 +62,21 @@ m_select_map
 	 m_fn, m_fs),
 m_select_save
 	(this,
-	 m_xres * 7 / 10, m_yres * 2 / 5, m_butw, m_buth,
+	 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_LaunchGame::select_savegame, this,
 	 _("Select Savegame"), std::string(), false, false,
 	 m_fn, m_fs),
 m_back
 	(this,
-	 m_xres * 7 / 10, m_yres * 17 / 20, m_butw, m_buth,
+	 m_xres * 7 / 10, m_yres * 9 / 20, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_LaunchGame::back_clicked, this,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 m_ok
 	(this,
-	 m_xres * 7 / 10, m_yres * 9 / 10, m_butw, m_buth,
+	 m_xres * 7 / 10, m_yres * 1 / 2, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_LaunchGame::start_clicked, this,
 	 _("Start game"), std::string(), false, false,
@@ -93,6 +93,11 @@ m_mapname
 	 m_xres * 7 / 10 + m_butw / 2, m_yres * 3 / 10,
 	 std::string(),
 	 Align_HCenter),
+m_lobby
+	(this,
+	 m_xres * 7 / 10, m_yres * 11 / 20,
+	 std::string(),
+	 Align_Left),
 m_notes
 	(this,
 	 m_xres * 2 / 25, m_yres * 9 / 50, m_xres * 21 / 25, m_yres / 10,
@@ -108,6 +113,7 @@ m_is_savegame  (false)
 
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_lobby  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	uint32_t y = m_yres / 4;
@@ -128,6 +134,13 @@ m_is_savegame  (false)
 				 m_xres / 25, y, m_xres * 16 / 25, m_yres * 17 / 500,
 				 settings, i,
 				 m_fn, m_fs);
+	}
+
+	if (m_settings->settings().multiplayer) {
+		m_lobby_list =
+			new UI::BaseListselect
+				(this, m_xres * 7 / 10, m_yres * 6 / 10, m_butw, m_yres * 7 / 20);
+		m_lobby.set_text(_("Lobby:"));
 	}
 }
 
@@ -177,7 +190,7 @@ void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider * const chat)
 		chat ?
 		new GameChatPanel
 			(this,
-			 m_xres * 3 / 50, m_yres * 7 / 10, m_xres * 3 / 5, m_yres * 27 / 100,
+			 m_xres * 5 / 100, m_yres * 13 / 20, m_xres * 25 / 40, m_yres * 3 / 10,
 			 *chat)
 		:
 		0;
@@ -247,20 +260,22 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	m_select_map.set_visible(m_settings->canChangeMap());
 	m_select_map.set_enabled(m_settings->canChangeMap());
 	m_select_save.set_visible
-			(m_settings->settings().multiplayer & m_settings->canChangeMap());
+			(settings.multiplayer & m_settings->canChangeMap());
 	m_select_save.set_enabled
-			(m_settings->settings().multiplayer & m_settings->canChangeMap());
+			(settings.multiplayer & m_settings->canChangeMap());
 
-	if (m_settings->settings().scenario)
+	if (settings.scenario)
 		set_scenario_values();
 
 	// "Choose Position" Buttons in frond of PDG
 	for (int32_t i = 0; i < m_nr_players; ++i) {
 		m_pos[i]->set_visible(true);
-		PlayerSettings const & player = m_settings->settings().players[i];
+		PlayerSettings const & player = settings.players[i];
 		if
 			((player.state == PlayerSettings::stateOpen) |
-			 (player.state == PlayerSettings::stateComputer))
+			 ((player.state == PlayerSettings::stateComputer) &
+			 !settings.multiplayer) |
+			 ((settings.playernum == i) & settings.multiplayer))
 			m_pos[i]->set_enabled(true);
 		else
 			m_pos[i]->set_enabled(false);
@@ -325,6 +340,15 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			// Finally set the notes
 			m_notes.set_text(notetext);
 			m_notes.set_color(UI_FONT_CLR_FG);
+		}
+	}
+
+	// Care about Multiplayer clients, lobby and players
+	if (settings.multiplayer) {
+		m_lobby_list->clear();
+		for (uint32_t i = 0; i < settings.users.size(); ++i) {
+			if (settings.users[i].position == -1)
+				m_lobby_list->add(settings.users[i].name.c_str(), 0);
 		}
 	}
 }
@@ -425,12 +449,35 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
 {
 	GameSettings settings = m_settings->settings();
 
+	// Check if pos == current player position, if yes send player to lobby
+	// This is only possible in multiplayer games.
+	if ((settings.playernum == pos) & settings.multiplayer) {
+		m_settings->setPlayerState(pos, PlayerSettings::stateOpen);
+		m_settings->setPlayerNumber(-1);
+		return;
+	}
+
+	// Check if current player position == -1, if yes we just assign the player
+	// to the position. This is only possible in multiplayer games.
+	if (settings.playernum == -1) {
+		if (!settings.multiplayer)
+			throw wexception("Player position = -1 in non multiplayer game");
+		PlayerSettings position = settings.players[pos];
+		if ((pos < m_nr_players) & (position.state == PlayerSettings::stateOpen)) {
+			m_settings->setPlayerState(pos, PlayerSettings::stateHuman);
+			m_settings->setPlayerNumber(pos);
+			m_settings->setPlayerName(pos, settings.users[settings.usernum].name);
+		}
+		return;
+	}
+
 	PlayerSettings position = settings.players[pos];
 	PlayerSettings player   = settings.players[settings.playernum];
 	if
 		((pos < m_nr_players) &
 		 ((position.state == PlayerSettings::stateOpen) |
-		  (position.state == PlayerSettings::stateComputer)))
+		  ((position.state == PlayerSettings::stateComputer) &
+		  !settings.multiplayer)))
 	{
 		const PlayerSettings oldOnPos = position;
 		m_settings->setPlayer(pos, player);
@@ -487,31 +534,21 @@ void Fullscreen_Menu_LaunchGame::enable_all_pdgs()
 
 
 /**
- * Bandaid to avoid segfaults, if the host changes a map with less playerpos-
- * itions while being on a later invalid position.
- * Better solution would be a lobby.
+ * Check to avoid segfaults, if the player changes a map with less player
+ * positions while being on a later invalid position.
  */
 void Fullscreen_Menu_LaunchGame::safe_place_for_host(uint8_t newplayernumber)
 {
 	GameSettings settings = m_settings->settings();
 
 	// Check whether the host would still keep a valid position and return if yes.
-	if (settings.playernum < newplayernumber)
+	if ((settings.playernum < newplayernumber) | settings.multiplayer)
 		return;
 
 	// Check if a still valid place is open.
 	for (uint8_t i = 0; i < newplayernumber; ++i) {
 		PlayerSettings position = settings.players[i];
 		if (position.state == PlayerSettings::stateOpen) {
-			switch_to_position(i);
-			return;
-		}
-	}
-
-	// Check if a still valid place is given to a computer.
-	for (uint8_t i = 0; i < newplayernumber; ++i) {
-		PlayerSettings position = settings.players[i];
-		if (position.state == PlayerSettings::stateComputer) {
 			switch_to_position(i);
 			return;
 		}

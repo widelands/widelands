@@ -38,7 +38,7 @@
 
 struct NetClientImpl {
 	GameSettings settings;
-	int32_t playernum; // is -1 until we are assigned our number, then it's 0-based
+	int32_t playernum; // is -1 as long as not assigned to a position (else 0-based)
 	std::string localplayername;
 
 	/// The socket that connects us to the host
@@ -94,8 +94,10 @@ NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
 	d->sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);
 
-	d->playernum = -1;
-	d->settings.playernum = -1;
+	d->playernum = -2;          // -2 == not connected
+	d->settings.playernum = -2; // ""
+	d->settings.usernum = -2; // ""
+	d->settings.users.resize(MAX_PLAYERS * 3 / 2);// allow some add. spectators
 	d->localplayername = playername;
 	d->modal = 0;
 	d->game = 0;
@@ -255,7 +257,7 @@ bool NetClient::canChangePlayerTribe(uint8_t number)
 	return number == d->playernum;
 }
 
-bool NetClient::canChangePlayerInit(uint8_t number)
+bool NetClient::canChangePlayerInit(uint8_t)
 {
 	return false;
 }
@@ -275,7 +277,7 @@ void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
 	// client is not allowed to do this
 }
 
-void NetClient::setPlayerAI(uint8_t number, const std::string& ai)
+void NetClient::setPlayerAI(uint8_t, const std::string&)
 {
 	// client is not allowed to do this
 }
@@ -301,32 +303,28 @@ void NetClient::setPlayerInit(uint8_t, uint8_t)
 	//  client is not allowed to do this
 }
 
-void NetClient::setPlayerName(uint8_t number, const std::string& name)
+void NetClient::setPlayerName(uint8_t, const std::string&)
 {
 	// until now the name is set before joining - if you allow a change in
 	// launchgame-menu, here properly should be a set_name function
 }
 
-void NetClient::setPlayer(uint8_t number, PlayerSettings)
+void NetClient::setPlayer(uint8_t, PlayerSettings)
 {
-	// launchgamemenu sends two requests to setPlayer to switch the both
-	// positions, but as clientside does not do the changes itself, we just
-	// take the number of the position the player wants to change to and
-	// send it to the host
+	// do nothing here - the request for a positionchange is send in
+	// setPlayerNumber(int32_t) to the host.
+}
+
+void NetClient::setPlayerNumber(int32_t number)
+{
 	if (number == d->playernum)
 		return;
 
 	// Send request
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGEPOSITION);
-	s.Unsigned8(number);
+	s.Signed32(number);
 	s.send(d->sock);
-}
-
-void NetClient::setPlayerNumber(uint8_t)
-{
-	//Do nothing - the host will give us an update, if the playernumber was
-	//finally changed.
 }
 
 uint32_t NetClient::realSpeed()
@@ -358,7 +356,8 @@ void NetClient::setDesiredSpeed(uint32_t speed)
 void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 {
 	if (number >= d->settings.players.size())
-		throw DisconnectException(_("Server sent a player update for a player that does not exist."));
+		throw DisconnectException
+			(_("Server sent a player update for a player that does not exist."));
 
 	PlayerSettings& player = d->settings.players[number];
 	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
@@ -368,6 +367,21 @@ void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 
 	if (number == d->playernum)
 		d->localplayername = player.name;
+}
+
+void NetClient::recvOneUser(uint32_t number, Widelands::StreamRead& packet)
+{
+	if (number >= d->settings.users.size())
+		throw DisconnectException
+			(_("Server sent an user update for a user that does not exist."));
+
+	d->settings.users[number].name = packet.String();
+	d->settings.users[number].position = packet.Signed32();
+	if (number == d->settings.usernum) {
+		d->localplayername = d->settings.users[number].name;
+		d->settings.playernum = d->settings.users[number].position;
+		d->playernum = d->settings.users[number].position;
+	}
 }
 
 void NetClient::send(const std::string& msg)
@@ -425,7 +439,7 @@ void NetClient::handle_packet(RecvPacket& packet)
 		return;
 	}
 
-	if (d->playernum == -1) {
+	if (d->playernum == -2) {
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
 				(_
@@ -436,7 +450,8 @@ void NetClient::handle_packet(RecvPacket& packet)
 		uint8_t version = packet.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
 			throw DisconnectException(_("Server uses a different protocol version"));
-		d->playernum = packet.Unsigned8();
+		d->settings.usernum = packet.Unsigned32();
+		d->playernum = -1;
 		return;
 	}
 
@@ -483,9 +498,22 @@ void NetClient::handle_packet(RecvPacket& packet)
 		recvOnePlayer(player, packet);
 		break;
 	}
+	case NETCMD_SETTING_ALLUSERS: {
+		d->settings.users.resize(packet.Unsigned8());
+		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+			recvOneUser(i, packet);
+		break;
+	}
+	case NETCMD_SETTING_USER: {
+		uint32_t user = packet.Unsigned32();
+		recvOneUser(user, packet);
+		break;
+	}
 	case NETCMD_SET_PLAYERNUMBER: {
-		uint8_t number = packet.Unsigned8();
+		int32_t number = packet.Signed32();
 		d->playernum = number;
+		d->settings.users[d->settings.usernum].position = number;
+		d->settings.playernum = number;
 		break;
 	}
 

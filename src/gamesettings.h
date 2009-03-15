@@ -40,6 +40,11 @@ struct PlayerSettings {
 	std::string ai; /**< Preferred AI provider for this player */
 };
 
+struct UserSettings {
+	int32_t     position; // -1 if in lobby
+	std::string name;
+};
+
 /**
  * Holds all settings about a game that can be configured before the
  * game actually starts.
@@ -51,6 +56,8 @@ struct GameSettings {
 
 	/// Number of player position
 	int32_t playernum;
+	/// Number of users entry
+	uint32_t usernum;
 
 	/// Name of the selected map
 	std::string mapname;
@@ -70,6 +77,9 @@ struct GameSettings {
 
 	/// Player configuration, with 0-based indices for players
 	std::vector<PlayerSettings> players;
+
+	/// Users connected to the game (0-based indices) - only used in multiplayer
+	std::vector<UserSettings> users;
 };
 
 
@@ -102,7 +112,7 @@ struct GameSettingsProvider {
 	virtual void setPlayerInit  (uint8_t number, uint8_t index) = 0;
 	virtual void setPlayerName  (uint8_t number, const std::string& name) = 0;
 	virtual void setPlayer      (uint8_t number, PlayerSettings ps) = 0;
-	virtual void setPlayerNumber(uint8_t number) = 0;
+	virtual void setPlayerNumber(int32_t number) = 0;
 };
 
 

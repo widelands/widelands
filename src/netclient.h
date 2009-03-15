@@ -75,7 +75,7 @@ struct NetClient :
 	virtual void setPlayerInit  (uint8_t number, uint8_t index);
 	virtual void setPlayerName  (uint8_t number, const std::string& name);
 	virtual void setPlayer      (uint8_t number, PlayerSettings ps);
-	virtual void setPlayerNumber(uint8_t number);
+	virtual void setPlayerNumber(int32_t number);
 
 	// ChatProvider interface
 	void send(const std::string& msg);
@@ -88,6 +88,7 @@ private:
 	void handle_network ();
 	void sendTime();
 	void recvOnePlayer(uint8_t number, Widelands::StreamRead& packet);
+	void recvOneUser(uint32_t number, Widelands::StreamRead& packet);
 	void disconnect (const std::string& reason, bool sendreason = true, bool showmsg = true);
 
 	NetClientImpl* d;

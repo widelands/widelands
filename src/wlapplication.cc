@@ -1450,7 +1450,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number] = ps;
 	}
 
-	virtual void setPlayerNumber(uint8_t number) {
+	virtual void setPlayerNumber(int32_t number) {
 		if (number >= s.players.size())
 			return;
 

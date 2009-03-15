@@ -58,12 +58,12 @@ struct NetHost : public GameController, private SyncCallback {
 	bool canLaunch();
 	void setScenario(bool);//no scenario for multiplayer
 	void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame = false);
-	void setPlayerState (uint8_t number, PlayerSettings::State state);
+	void setPlayerState (uint8_t number, PlayerSettings::State state, bool host = false);
 	void setPlayerTribe (uint8_t number, const std::string& tribe);
 	void setPlayerInit  (uint8_t number, uint8_t index);
 	void setPlayerName  (uint8_t number, const std::string& name);
 	void setPlayer      (uint8_t number, PlayerSettings ps);
-	void setPlayerNumber(uint8_t number);
+	void setPlayerNumber(int32_t number);
 	void setMultiplayerGameSettings();//just visible stuff for the select mapmenu
 
 	// Chat-related stuff
@@ -87,7 +87,7 @@ private:
 	void updateNetworkSpeed();
 
 	std::string getComputerPlayerName(uint32_t playernum);
-	bool havePlayerName(const std::string& name, int32_t ignoreplayer = -1);
+	bool haveUserName(const std::string& name, int32_t ignoreplayer = -1);
 	void welcomeClient(uint32_t number, const std::string& playername);
 	void committedNetworkTime(int32_t time);
 	void recvClientTime(uint32_t number, int32_t time);
@@ -96,6 +96,8 @@ private:
 	void writeSettingMap(SendPacket& packet);
 	void writeSettingPlayer(SendPacket& packet, uint8_t number);
 	void writeSettingAllPlayers(SendPacket& packet);
+	void writeSettingUser(SendPacket& packet, uint32_t number);
+	void writeSettingAllUsers(SendPacket& packet);
 
 	void disconnectPlayer(uint8_t number, const std::string& reason, bool sendreason = true);
 	void disconnectClient(uint32_t number, const std::string& reason, bool sendreason = true);
