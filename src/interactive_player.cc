@@ -145,8 +145,6 @@ Interactive_Player::Interactive_Player
 		(Widelands::Game & g, uint8_t const plyn, bool scenario, bool multiplayer)
 :
 Interactive_GameBase(g),
-m_chatProvider   (0),
-m_chatDisplay    (0),
 m_flag_to_connect(Widelands::Coords::Null()),
 
 #define INIT_BTN(picture, callback, tooltip)                                  \
@@ -248,6 +246,8 @@ void Interactive_Player::think()
 			m_flag_to_connect = Widelands::Coords::Null();
 		}
 	}
+	m_toggle_chat.set_visible(chatenabled);
+	m_toggle_chat.set_enabled(chatenabled);
 }
 
 
@@ -336,22 +336,6 @@ void Interactive_Player::field_action()
 		show_field_action(this, get_player(), &m_fieldaction);
 	}
 }
-
-
-void Interactive_Player::set_chat_provider(ChatProvider* chat)
-{
-	m_chatProvider = chat;
-	m_chatDisplay->setChatProvider(chat);
-
-	m_toggle_chat.set_visible(chat);
-	m_toggle_chat.set_enabled(chat);
-}
-
-ChatProvider* Interactive_Player::get_chat_provider()
-{
-	return m_chatProvider;
-}
-
 
 /**
  * Global in-game keypresses:

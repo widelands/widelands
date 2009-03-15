@@ -30,13 +30,12 @@ namespace Widelands {struct Game;};
 /**
  * This class shows a game for somebody who is only a spectator.
  *
- * Right now, it is used for replays, but we should be able to
- * adapt it to implement spectators of network games.
+ * It is used for replays and network games.
  *
  * This class provides the UI, runs the game logic, etc.
  */
 struct Interactive_Spectator : public Interactive_GameBase {
-	Interactive_Spectator(Widelands::Game *);
+	Interactive_Spectator(Widelands::Game *, bool multiplayer = false);
 
 	void start();
 
@@ -45,14 +44,18 @@ struct Interactive_Spectator : public Interactive_GameBase {
 	bool handle_key(bool down, SDL_keysym);
 
 private:
+	void toggle_chat();
 	void exit_btn();
 	void save_btn();
 	void field_action();
 
 private:
+	UI::Button<Interactive_Spectator> m_toggle_chat;
 	UI::Button<Interactive_Spectator> m_exit;
 	UI::Button<Interactive_Spectator> m_save;
 	UI::Button<Interactive_Spectator> m_toggle_minimap;
+
+	UI::UniqueWindow::Registry m_chat;
 };
 
 

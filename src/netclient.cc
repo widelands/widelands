@@ -24,6 +24,7 @@
 #include "game_tips.h"
 #include "i18n.h"
 #include "interactive_player.h"
+#include "interactive_spectator.h"
 #include "layered_filesystem.h"
 #include "network_protocol.h"
 #include "network_system.h"
@@ -147,11 +148,14 @@ void NetClient::run ()
 
 		d->game = &game;
 		game.set_game_controller(this);
-
-		Interactive_Player* ipl = new Interactive_Player
-				(game, d->playernum+1, false, true);
-		game.set_iabase(ipl);
-		ipl->set_chat_provider(this);
+		uint8_t pn = d->playernum + 1;
+		Interactive_GameBase* igb;
+		if (pn > 0)
+			igb = new Interactive_Player(game, pn, false, true);
+		else
+			igb = new Interactive_Spectator(d->game, true);
+		game.set_iabase(igb);
+		igb->set_chat_provider(this);
 		if (!d->settings.savegame) //  new map
 			game.init_newgame(loaderUI, d->settings);
 		else // savegame

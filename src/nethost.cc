@@ -26,6 +26,7 @@
 #include "game_tips.h"
 #include "i18n.h"
 #include "interactive_player.h"
+#include "interactive_spectator.h"
 #include "network_lan_promotion.h"
 #include "network_protocol.h"
 #include "network_system.h"
@@ -344,9 +345,13 @@ void NetHost::run()
 		uint8_t pn = d->settings.playernum + 1;
 		d->game = &game;
 		game.set_game_controller(this);
-		Interactive_Player* ipl = new Interactive_Player(game, pn, false, true);
-		ipl->set_chat_provider(&d->chat);
-		game.set_iabase(ipl);
+		Interactive_GameBase* igb;
+		if (pn > 0)
+			igb = new Interactive_Player(game, pn, false, true);
+		else
+			igb = new Interactive_Spectator(d->game, true);
+		igb->set_chat_provider(&d->chat);
+		game.set_iabase(igb);
 		if (!d->settings.savegame) //  new game
 			game.init_newgame(loaderUI, d->settings);
 		else // savegame
@@ -494,8 +499,7 @@ const GameSettings& NetHost::settings()
 
 bool NetHost::canLaunch()
 {
-	return d->settings.mapname.size() != 0 && d->settings.players.size() >= 1 &&
-	       d->settings.users[0].position != -1; // this might be changed as soon as spectators are allowed.
+	return d->settings.mapname.size() != 0 && d->settings.players.size() >= 1;
 }
 
 void NetHost::setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame)

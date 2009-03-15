@@ -19,6 +19,8 @@
 
 #include "interactive_spectator.h"
 
+#include "chat.h"
+#include "game_chat_menu.h"
 #include "game_main_menu_save_game.h"
 #include "gamecontroller.h"
 #include "graphic.h"
@@ -32,7 +34,8 @@
 /**
  * Setup the replay UI for the given game.
  */
-Interactive_Spectator::Interactive_Spectator(Widelands::Game * const g)
+Interactive_Spectator::Interactive_Spectator
+		(Widelands::Game * const g, bool multiplayer)
 :
 Interactive_GameBase(*g),
 
@@ -42,13 +45,26 @@ Interactive_GameBase(*g),
  &Interactive_Spectator::callback, this,                                      \
  tooltip                                                                      \
 
+m_toggle_chat   (INIT_BTN("menu_chat",           toggle_chat, _("Chat"))),
 m_exit          (INIT_BTN("menu_exit_game",      exit_btn, _("Exit Replay"))),
 m_save          (INIT_BTN("menu_save_game",      save_btn, _("Save Game"))),
 m_toggle_minimap(INIT_BTN("menu_toggle_minimap", toggle_minimap, _("Minimap")))
 {
+	m_toolbar.add(&m_toggle_chat,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_exit,           UI::Box::AlignLeft);
 	m_toolbar.add(&m_save,           UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap, UI::Box::AlignLeft);
+
+	// TODO : instead of making unneeded buttons invisible after generation,
+	// they should not at all be generated. -> implement more dynamic toolbar UI
+	if (multiplayer) {
+		m_chatDisplay =
+			new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
+		m_toggle_chat.set_visible(true);
+		m_toggle_chat.set_enabled(true);
+	} else
+		m_toggle_chat.set_visible(false);
+
 	m_toolbar.resize();
 	adjust_toolbar_position();
 
@@ -82,6 +98,16 @@ void Interactive_Spectator::start()
 
 	// Recalc whole map for changed owner stuff
 	map.recalc_whole_map();
+}
+
+
+// Toolbar button callback functions.
+void Interactive_Spectator::toggle_chat()
+{
+	if (m_chat.window)
+		delete m_chat.window;
+	else if (m_chatProvider)
+		new GameChatMenu(this, m_chat, *m_chatProvider);
 }
 
 
@@ -134,6 +160,16 @@ bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 
 		case SDLK_f:
 			g_gr->toggle_fullscreen();
+			return true;
+
+		case SDLK_RETURN:
+			if (!m_chatProvider)
+				break;
+
+			if (!m_chat.window)
+				new GameChatMenu(this, m_chat, *m_chatProvider);
+
+			dynamic_cast<GameChatMenu &>(*m_chat.window).enter_chat_message();
 			return true;
 
 		default:

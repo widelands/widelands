@@ -35,18 +35,6 @@ struct Multiline_Textarea;
 struct Textarea;
 };
 
-struct ChatProvider;
-
-struct ChatDisplay : public UI::Panel {
-	ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
-
-	void setChatProvider(ChatProvider *);
-	virtual void draw(RenderTarget &);
-
-private:
-	ChatProvider * m_chat;
-};
-
 
 /**
  * This is the interactive player. this one is
@@ -88,10 +76,6 @@ struct Interactive_Player : public Interactive_GameBase, public DebugConsole::Ha
 	void think();
 	void postload();
 
-	// Chat messages
-	void set_chat_provider(ChatProvider* chat);
-	ChatProvider* get_chat_provider();
-
 	void set_flag_to_connect(Widelands::Coords const location) {
 		m_flag_to_connect = location;
 	}
@@ -99,8 +83,6 @@ struct Interactive_Player : public Interactive_GameBase, public DebugConsole::Ha
 private:
 	void cmdSwitchPlayer(const std::vector<std::string>& args);
 
-	ChatProvider           * m_chatProvider;
-	ChatDisplay            * m_chatDisplay;
 	Widelands::Player_Number m_player_number;
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;

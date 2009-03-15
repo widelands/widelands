@@ -23,6 +23,18 @@
 #include "interactive_base.h"
 #include "game.h"
 
+struct ChatProvider;
+
+struct ChatDisplay : public UI::Panel {
+	ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
+
+	void setChatProvider(ChatProvider *);
+	virtual void draw(RenderTarget &);
+
+private:
+	ChatProvider * m_chat;
+};
+
 struct Interactive_GameBase : public Interactive_Base {
 	struct Game_Main_Menu_Windows {
 		UI::UniqueWindow::Registry loadgame;
@@ -42,8 +54,15 @@ struct Interactive_GameBase : public Interactive_Base {
 	Interactive_GameBase(Widelands::Game & _game) : Interactive_Base(_game) {}
 	Widelands::Game * get_game() const;
 	Widelands::Game &     game() const;
+
+	// Chat messages
+	void set_chat_provider(ChatProvider* chat);
+	ChatProvider* get_chat_provider();
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
+	ChatProvider           * m_chatProvider;
+	ChatDisplay            * m_chatDisplay;
+	bool                   chatenabled;
 };
 
 #endif
