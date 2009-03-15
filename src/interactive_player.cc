@@ -175,6 +175,8 @@ m_toggle_resources
 m_toggle_help
 	(INIT_BTN("menu_help",             toggle_help,         _("Ware help")))
 {
+	chatenabled = false; // is set to true by set_chat_provider()
+
 	m_auto_roadbuild_mode =
 		g_options.pull_section("global").get_bool("auto_roadbuild_mode", true);
 
@@ -385,7 +387,7 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 			return true;
 
 		case SDLK_RETURN:
-			if (!m_chatProvider)
+			if (!m_chatProvider | !chatenabled)
 				break;
 
 			if (!m_chat.window)

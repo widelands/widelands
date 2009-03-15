@@ -45,11 +45,13 @@ Interactive_GameBase(*g),
  &Interactive_Spectator::callback, this,                                      \
  tooltip                                                                      \
 
-m_toggle_chat   (INIT_BTN("menu_chat",           toggle_chat, _("Chat"))),
-m_exit          (INIT_BTN("menu_exit_game",      exit_btn, _("Exit Replay"))),
-m_save          (INIT_BTN("menu_save_game",      save_btn, _("Save Game"))),
+m_toggle_chat   (INIT_BTN("menu_chat", toggle_chat,   _("Chat"))),
+m_exit          (INIT_BTN("menu_exit_game", exit_btn, _("Exit Spectator Mode"))),
+m_save          (INIT_BTN("menu_save_game", save_btn, _("Save Game"))),
 m_toggle_minimap(INIT_BTN("menu_toggle_minimap", toggle_minimap, _("Minimap")))
 {
+	chatenabled = multiplayer;
+
 	m_toolbar.add(&m_toggle_chat,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_exit,           UI::Box::AlignLeft);
 	m_toolbar.add(&m_save,           UI::Box::AlignLeft);
@@ -163,7 +165,7 @@ bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 			return true;
 
 		case SDLK_RETURN:
-			if (!m_chatProvider)
+			if (!m_chatProvider | !chatenabled)
 				break;
 
 			if (!m_chat.window)
