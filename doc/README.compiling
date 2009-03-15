@@ -16,7 +16,7 @@ for Widelands makes direct use of them:
    - SDL_net
    - SDL_ttf >= 2.0.0
    - SDL_gfx
-   - boost >= 1.33
+   - boost >= 1.35
    - gettext (look at FAQ if you have problems with -lintl)
    - libpng
    - zlib
