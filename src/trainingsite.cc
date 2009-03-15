@@ -357,13 +357,6 @@ void TrainingSite::request_soldier_callback
 	// bind the worker into this house, hide him on the map
 	s->start_task_idle(g, 0, -1);
 
-	g->conquer_area
-		(Player_Area<Area<FCoords> >
-		 	(tsite->owner().get_player_number(),
-		 	 Area<FCoords>
-		 	 	(g->map().get_fcoords(tsite->get_position()),
-		 	 	 tsite->descr().get_conquers())));
-
 	tsite->update_soldier_request();
 }
 
