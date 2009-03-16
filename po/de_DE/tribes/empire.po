@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3662\n"
+"Project-Id-Version: Widelands svn3707\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-01 11:50+0000\n"
-"PO-Revision-Date: 2008-12-13 14:10+0100\n"
+"POT-Creation-Date: 2009-03-16 11:53+0000\n"
+"PO-Revision-Date: 2009-03-16 12:52+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -382,9 +382,8 @@ msgid "Trainer"
 msgstr "Trainer"
 
 #: ../../../tribes/empire/conf:132
-#, fuzzy
 msgid "Weaponsmith"
-msgstr "Waffenschmiede"
+msgstr "Waffenschmied"
 
 #: ../../../tribes/empire/conf:133
 msgid "Weaver"
@@ -443,9 +442,8 @@ msgid "Headquarters"
 msgstr "Hauptquartier"
 
 #: ../../../tribes/empire/conf:155
-#, fuzzy
 msgid "Headquarters shipwreck"
-msgstr "Hauptquartier"
+msgstr "Schiffswrack Hauptquartier"
 
 #: ../../../tribes/empire/conf:156
 msgid "Warehouse"
@@ -581,12 +579,10 @@ msgid "Vineyard"
 msgstr "Weinhof"
 
 #: ../../../tribes/empire/conf:193
-#, fuzzy
 msgid "Headquarters medium"
 msgstr "norm. Hauptquartier"
 
 #: ../../../tribes/empire/conf:194
-#, fuzzy
 msgid "Castle village"
 msgstr "Burg Dorf"
 
