@@ -486,7 +486,7 @@ int32_t NetHost::getFrametime()
 std::string NetHost::getGameDescription()
 {
 char buf[200];
-	snprintf(buf, sizeof(buf), "network player %u (host)",
+	snprintf(buf, sizeof(buf), "network player %i (host)",
 	         d->settings.users[0].position);
 	return buf;
 }
@@ -1080,7 +1080,7 @@ void NetHost::checkSyncReports()
 		return;
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
-		if (d->clients[i].playernum != -1 && !d->clients[i].syncreport_arrived)
+		if (d->clients[i].playernum != -2 && !d->clients[i].syncreport_arrived)
 			return;
 	}
 

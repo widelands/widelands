@@ -152,7 +152,7 @@ void NetClient::run ()
 		if (pn > 0)
 			igb = new Interactive_Player(game, pn, false, true);
 		else
-			igb = new Interactive_Spectator(d->game, true);
+			igb = new Interactive_Spectator(&game, true);
 		game.set_iabase(igb);
 		igb->set_chat_provider(this);
 		if (!d->settings.savegame) //  new map
@@ -231,7 +231,7 @@ int32_t NetClient::getFrametime()
 std::string NetClient::getGameDescription()
 {
 	char buf[200];
-	snprintf(buf, sizeof(buf), "network player %u", d->playernum);
+	snprintf(buf, sizeof(buf), "network player %i", d->playernum);
 	return buf;
 }
 
