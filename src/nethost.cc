@@ -1302,12 +1302,15 @@ void NetHost::handle_packet(uint32_t i, RecvPacket& r)
 		int32_t time = r.Signed32();
 		Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
 		log
-			("[Host] client %i (%i) sent player command for %i, time = %i\n",
-			 i, client.playernum, plcmd->get_sender(), time);
+			("[Host] client %i (%i) sent player command %i for %i, time = %i\n",
+			 i, client.playernum, plcmd->get_id(), plcmd->get_sender(), time);
 		recvClientTime(i, time);
 		if (plcmd->get_sender() != client.playernum+1)
 			throw DisconnectException
-				(_("Client tries to sent a playercommand for a different player."));
+				(_
+				 	("Client %i (%i) sent a playercommand (%i) for a different "
+				 	 "player (%i)."),
+				 i, client.playernum, plcmd->get_id(), plcmd->get_sender());
 		sendPlayerCommand(plcmd);
 	} break;
 
