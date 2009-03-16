@@ -252,11 +252,10 @@ NetHost::NetHost (const std::string& playername)
 	setMultiplayerGameSettings();
 	d->settings.playernum = -1;
 	d->settings.usernum = 0;
-	d->settings.users.resize(MAX_PLAYERS * 3 / 2);// allow some add. spectators
-	d->settings.users[0].name = playername;
-	d->settings.users[0].position = -1;
-	for (uint32_t i = 1; i < d->settings.users.size(); ++i)
-		d->settings.users[i].position = -2;
+	UserSettings hostuser;
+	hostuser.name = playername;
+	hostuser.position = -1;
+	d->settings.users.push_back(hostuser);
 }
 
 NetHost::~NetHost ()
@@ -848,15 +847,9 @@ void NetHost::welcomeClient(uint32_t number, const std::string& playername)
 
 	// The client gets its own initial data set.
 	client.playernum = -1;
-	uint32_t usernum;
-	for (usernum = 0; usernum < d->settings.users.size(); ++usernum)
-		if (d->settings.users[usernum].position == -2)
-			break;
-	if (usernum >= d->settings.users.size()) {
-		disconnectClient(number, _("There are no open user slots left."));
-		return;
-	}
-	client.usernum = usernum;
+	client.usernum = d->settings.users.size();
+	UserSettings newuser;
+	d->settings.users.push_back(newuser);
 
 	// Assign the player a name, preferably the name chosen by the client
 	std::string effective_name = playername;
@@ -864,24 +857,24 @@ void NetHost::welcomeClient(uint32_t number, const std::string& playername)
 	if (effective_name.size() == 0)
 		effective_name = _("Player");
 
-	if (haveUserName(effective_name, usernum)) {
+	if (haveUserName(effective_name, client.usernum)) {
 		uint32_t i = 2;
 		do {
 			char buf[32];
 			snprintf(buf, sizeof(buf), " %u", i++);
 			effective_name = playername + buf;
-		} while (haveUserName(effective_name, usernum));
+		} while (haveUserName(effective_name, client.usernum));
 	}
 
-	d->settings.users[usernum].name = effective_name;
-	d->settings.users[usernum].position = -1;
+	d->settings.users[client.usernum].name = effective_name;
+	d->settings.users[client.usernum].position = -1;
 
-	log("[Host]: client %u: welcome to usernum %u\n", number, usernum);
+	log("[Host]: client %u: welcome to usernum %u\n", number, client.usernum);
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_HELLO);
 	s.Unsigned8(NETWORK_PROTOCOL_VERSION);
-	s.Unsigned32(usernum);
+	s.Unsigned32(client.usernum);
 	s.send(client.sock);
 
 	s.reset();
@@ -913,8 +906,8 @@ void NetHost::welcomeClient(uint32_t number, const std::string& playername)
 	// Broadcast new information about the player to everybody
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_USER);
-	s.Unsigned32(usernum);
-	writeSettingUser(s, usernum);
+	s.Unsigned32(client.usernum);
+	writeSettingUser(s, client.usernum);
 	broadcast(s);
 
 	sendSystemChat(_("%s has joined the game"), effective_name.c_str());
@@ -1146,12 +1139,19 @@ void NetHost::handle_network ()
 		peer.playernum = -2;
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
-		d->clients.push_back (peer);
+		d->clients.push_back(peer);
 
 		// Now we wait for the client to say Hi in the right language,
 		// unless the game has already started
-		if (d->game)
+		if (d->game) {
+			// the following lines are needed to avoid segfaults in disconnectClient
+			UserSettings newuser;
+			newuser.name = _("New User"); // shown in later disconnect msg.
+			d->clients[d->clients.size()-1].usernum = d->settings.users.size();
+			d->settings.users.push_back(newuser);
+
 			disconnectClient(d->clients.size()-1, _("The game has already started."));
+		}
 	}
 
 	// Check if we hear anything from our clients
@@ -1365,7 +1365,7 @@ void NetHost::disconnectPlayer(uint8_t number, const std::string& reason, bool s
 		initComputerPlayer(number+1);
 }
 
-void NetHost::disconnectClient(uint32_t number, const std::string& reason,  bool sendreason)
+void NetHost::disconnectClient(uint32_t number, const std::string& reason, bool sendreason)
 {
 	assert(number < d->clients.size());
 

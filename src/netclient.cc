@@ -98,7 +98,6 @@ NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
 	d->playernum = -2;          // -2 == not connected
 	d->settings.playernum = -2; // ""
 	d->settings.usernum = -2; // ""
-	d->settings.users.resize(MAX_PLAYERS * 3 / 2);// allow some add. spectators
 	d->localplayername = playername;
 	d->modal = 0;
 	d->game = 0;
@@ -375,9 +374,15 @@ void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 
 void NetClient::recvOneUser(uint32_t number, Widelands::StreamRead& packet)
 {
-	if (number >= d->settings.users.size())
+	if (number > d->settings.users.size())
 		throw DisconnectException
 			(_("Server sent an user update for a user that does not exist."));
+
+	// This might happen, if a users connects after the game starts.
+	if (number == d->settings.users.size()) {
+		UserSettings newuser;
+		d->settings.users.push_back(newuser);
+	}
 
 	d->settings.users[number].name = packet.String();
 	d->settings.users[number].position = packet.Signed32();
