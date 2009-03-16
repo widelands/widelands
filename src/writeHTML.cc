@@ -1014,12 +1014,12 @@ void ProductionProgram::ActSleep::writeHTML
 	fw.Text(_("Documentation for program command sleep"));
 	fw.Text("\">");
 	fw.Text(_("sleep"));
-	fw.Text("</a>");
+	fw.Text("</a> ");
 	if (m_duration) {
 		char buffer[32];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _(" %u.%03u s"), m_duration / 1000, m_duration % 1000);
+			 _("%u.%03u s"), m_duration / 1000, m_duration % 1000);
 		fw.Text(buffer);
 	}
 }
@@ -1034,12 +1034,12 @@ void ProductionProgram::ActAnimate::writeHTML
 	fw.Text(_("Documentation for program command animate"));
 	fw.Text("\">");
 	fw.Text(_("animate"));
-	fw.Text("</a>");
+	fw.Text("</a> ");
 	if (m_duration) {
 		char buffer[32];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _(" %u.%03u s"), m_duration / 1000, m_duration % 1000);
+			 _("%u.%03u s"), m_duration / 1000, m_duration % 1000);
 		fw.Text(buffer);
 	}
 }
@@ -1055,7 +1055,7 @@ void ProductionProgram::ActConsume::writeHTML
 	fw.Text(_("Documentation for program command consume"));
 	fw.Text("\">");
 	fw.Text(_("consume"));
-	fw.Text("</a>");
+	fw.Text("</a> ");
 	for
 		(struct {
 		 	Groups::const_iterator       current;
@@ -1106,7 +1106,7 @@ void ProductionProgram::ActProduce::writeHTML
 	fw.Text(_("Documentation for program command produce"));
 	fw.Text("\">");
 	fw.Text(_("produce"));
-	fw.Text("</a>");
+	fw.Text("</a> ");
 	for
 		(struct {
 		 	Items::const_iterator       current;
