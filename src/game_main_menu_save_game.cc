@@ -26,7 +26,7 @@
 #include "game_preload_data_packet.h"
 #include "game_saver.h"
 #include "i18n.h"
-#include "interactive_player.h"
+#include "interactive_gamebase.h"
 #include "layered_filesystem.h"
 #include "profile.h"
 

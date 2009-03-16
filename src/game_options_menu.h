@@ -20,7 +20,7 @@
 #ifndef GAME_OPTIONS_MENU_H
 #define GAME_OPTIONS_MENU_H
 
-#include "interactive_player.h"
+#include "interactive_gamebase.h"
 
 #include "ui_button.h"
 #include "ui_textarea.h"
@@ -29,13 +29,13 @@
 // The GameOptionsMenu is a rather dumb window with lots of buttons
 struct GameOptionsMenu : public UI::UniqueWindow {
 	GameOptionsMenu
-		(Interactive_Player &,
+		(Interactive_GameBase &,
 		 UI::UniqueWindow::Registry &,
-		 Interactive_Player::Game_Main_Menu_Windows &);
+		 Interactive_GameBase::Game_Main_Menu_Windows &);
 
 private:
-	Interactive_Player                         & m_player;
-	Interactive_Player::Game_Main_Menu_Windows & m_windows;
+	Interactive_GameBase                         & m_gb;
+	Interactive_GameBase::Game_Main_Menu_Windows & m_windows;
 	UI::Button<GameOptionsMenu> readme;
 	UI::Button<GameOptionsMenu> license;
 	UI::Button<GameOptionsMenu> authors;

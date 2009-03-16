@@ -22,7 +22,9 @@
 #include "chat.h"
 #include "game_chat_menu.h"
 #include "game_main_menu_save_game.h"
+#include "game_options_menu.h"
 #include "gamecontroller.h"
+#include "general_statistics_menu.h"
 #include "graphic.h"
 #include "i18n.h"
 
@@ -46,26 +48,40 @@ Interactive_GameBase(*g),
  tooltip                                                                      \
 
 m_toggle_chat   (INIT_BTN("menu_chat", toggle_chat,   _("Chat"))),
-m_exit          (INIT_BTN("menu_exit_game", exit_btn, _("Exit Spectator Mode"))),
+m_exit          (INIT_BTN("menu_exit_game", exit_btn, _("Exit Replay"))),
 m_save          (INIT_BTN("menu_save_game", save_btn, _("Save Game"))),
+m_toggle_options_menu
+	(INIT_BTN("menu_options_menu", toggle_options_menu, _("Options"))),
+m_toggle_statistics
+	(INIT_BTN("menu_general_stats", toggle_statistics,  _("Statistics"))),
 m_toggle_minimap(INIT_BTN("menu_toggle_minimap", toggle_minimap, _("Minimap")))
 {
 	chatenabled = multiplayer;
 
-	m_toolbar.add(&m_toggle_chat,    UI::Box::AlignLeft);
-	m_toolbar.add(&m_exit,           UI::Box::AlignLeft);
-	m_toolbar.add(&m_save,           UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_minimap, UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
+	if (!multiplayer) {
+		m_toolbar.add(&m_exit,                UI::Box::AlignLeft);
+		m_toolbar.add(&m_save,                UI::Box::AlignLeft);
+	} else
+		m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	if (multiplayer) {
 		m_chatDisplay =
 			new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
-		m_toggle_chat.set_visible(true);
-		m_toggle_chat.set_enabled(true);
-	} else
+		m_exit.set_visible(false);
+		m_exit.set_enabled(false);
+		m_save.set_visible(false);
+		m_save.set_enabled(false);
+	} else {
 		m_toggle_chat.set_visible(false);
+		m_toggle_chat.set_enabled(false);
+		m_toggle_options_menu.set_visible(false);
+		m_toggle_options_menu.set_enabled(false);
+	}
 
 	m_toolbar.resize();
 	adjust_toolbar_position();
@@ -115,18 +131,40 @@ void Interactive_Spectator::toggle_chat()
 
 void Interactive_Spectator::exit_btn()
 {
+	if (chatenabled) // == multiplayer
+		return;
 	end_modal(0);
 }
 
 
 void Interactive_Spectator::save_btn()
 {
+	if (chatenabled) // == multiplayer
+		return;
 	if (m_mainm_windows.savegame.window)
 		delete m_mainm_windows.savegame.window;
 	else {
 		game().gameController()->setDesiredSpeed(0);
 		new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
 	}
+}
+
+
+void Interactive_Spectator::toggle_options_menu() {
+	if (!chatenabled) // == !multiplayer
+		return;
+	if (m_options.window)
+		delete m_options.window;
+	else
+		new GameOptionsMenu(*this, m_options, m_mainm_windows);
+}
+
+
+void Interactive_Spectator::toggle_statistics() {
+	if (m_mainm_windows.general_stats.window)
+		delete m_mainm_windows.general_stats.window;
+	else
+		new General_Statistics_Menu(*this, m_mainm_windows.general_stats);
 }
 
 

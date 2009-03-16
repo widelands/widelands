@@ -156,15 +156,15 @@ m_flag_to_connect(Widelands::Coords::Null()),
 m_toggle_chat
 	(INIT_BTN("menu_chat",             toggle_chat,         _("Chat"))),
 m_toggle_options_menu
-	(INIT_BTN("menu_options_menu",     toggle_options_menu, _("Options"))),
-m_toggle_main_menu
-	(INIT_BTN("menu_toggle_menu",      toggle_main_menu,    _("Statistics"))),
+	(INIT_BTN("menu_options_menu",     toggle_options_menu,    _("Options"))),
+m_toggle_statistics_menu
+	(INIT_BTN("menu_toggle_menu",      toggle_statistics_menu, _("Statistics"))),
 m_toggle_objectives
-	(INIT_BTN("menu_objectives",       toggle_objectives,   _("Objectives"))),
+	(INIT_BTN("menu_objectives",       toggle_objectives,      _("Objectives"))),
 m_toggle_minimap
-	(INIT_BTN("menu_toggle_minimap",   toggle_minimap,      _("Minimap"))),
+	(INIT_BTN("menu_toggle_minimap",   toggle_minimap,         _("Minimap"))),
 m_toggle_buildhelp
-	(INIT_BTN("menu_toggle_buildhelp", toggle_buildhelp,    _("Buildhelp"))),
+	(INIT_BTN("menu_toggle_buildhelp", toggle_buildhelp,       _("Buildhelp"))),
 #if 0
 m_toggle_resources
 	(INIT_BTN
@@ -180,14 +180,14 @@ m_toggle_help
 	m_auto_roadbuild_mode =
 		g_options.pull_section("global").get_bool("auto_roadbuild_mode", true);
 
-	m_toolbar.add(&m_toggle_chat,         UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_main_menu,    UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_minimap,      UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_buildhelp,    UI::Box::AlignLeft);
-	//m_toolbar.add(&m_toggle_resources,    UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_help,         UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_objectives,   UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
+	//m_toolbar.add(&m_toggle_resources,       UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
 
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::field_action);
@@ -277,7 +277,7 @@ void Interactive_Player::postload()
 
 
 //  Toolbar button callback functions.
-void Interactive_Player::toggle_chat        () {
+void Interactive_Player::toggle_chat() {
 	if (m_chat.window)
 		delete m_chat.window;
 	else if (m_chatProvider)
@@ -289,19 +289,19 @@ void Interactive_Player::toggle_options_menu() {
 	else
 		new GameOptionsMenu(*this, m_options, m_mainm_windows);
 }
-void Interactive_Player::toggle_main_menu   () {
-	if (m_mainmenu.window)
-		delete m_mainmenu.window;
+void Interactive_Player::toggle_statistics_menu() {
+	if (m_statisticsmenu.window)
+		delete m_statisticsmenu.window;
 	else
-		new GameMainMenu(*this, m_mainmenu, m_mainm_windows);
+		new GameMainMenu(*this, m_statisticsmenu, m_mainm_windows);
 }
-void Interactive_Player::toggle_objectives  () {
+void Interactive_Player::toggle_objectives() {
 	if (m_objectives.window)
 		delete m_objectives.window;
 	else
 		new GameObjectivesMenu(*this, m_objectives);
 }
-void Interactive_Player::toggle_buildhelp   () {
+void Interactive_Player::toggle_buildhelp() {
 	egbase().map().overlay_manager().toggle_buildhelp();
 }
 void Interactive_Player::toggle_resources   () {

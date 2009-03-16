@@ -47,7 +47,7 @@ Create all the buttons etc...
 ===============
 */
 General_Statistics_Menu::General_Statistics_Menu
-	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&parent, &registry, 440, 400, _("General Statistics")),
 m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
@@ -316,7 +316,7 @@ void General_Statistics_Menu::cb_changed_to(int32_t const id, bool const what)
  */
 void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
-		dynamic_cast<Interactive_Player &>(*get_parent()).game()
+		dynamic_cast<Interactive_GameBase &>(*get_parent()).game()
 		.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {

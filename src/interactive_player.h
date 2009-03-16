@@ -47,7 +47,7 @@ struct Interactive_Player : public Interactive_GameBase, public DebugConsole::Ha
 
 	void start();
 
-	void toggle_main_menu ();
+	void toggle_statistics_menu();
 	void toggle_chat        ();
 	void toggle_options_menu();
 	void toggle_objectives();
@@ -89,7 +89,7 @@ private:
 
 	UI::Button<Interactive_Player> m_toggle_chat;
 	UI::Button<Interactive_Player> m_toggle_options_menu;
-	UI::Button<Interactive_Player> m_toggle_main_menu;
+	UI::Button<Interactive_Player> m_toggle_statistics_menu;
 	UI::Button<Interactive_Player> m_toggle_objectives;
 	UI::Button<Interactive_Player> m_toggle_minimap;
 	UI::Button<Interactive_Player> m_toggle_buildhelp;
@@ -99,7 +99,7 @@ private:
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;
-	UI::UniqueWindow::Registry m_mainmenu;
+	UI::UniqueWindow::Registry m_statisticsmenu;
 	UI::UniqueWindow::Registry m_objectives;
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_encyclopedia;

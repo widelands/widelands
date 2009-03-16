@@ -19,34 +19,29 @@
 
 #include "game_options_menu.h"
 
-#include "building_statistics_menu.h"
 #include "fullscreen_menu_fileview.h"
 #include "game_options_menu.h"
 #include "game_options_sound_menu.h"
 #include "game_main_menu_save_game.h"
-#include "general_statistics_menu.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
 #include "sound/sound_handler.h"
-#include "stock_menu.h"
-#include "ware_statistics_menu.h"
 
 
 GameOptionsMenu::GameOptionsMenu
-	(Interactive_Player                         & plr,
-	 UI::UniqueWindow::Registry                 & registry,
-	 Interactive_Player::Game_Main_Menu_Windows & windows)
+	(Interactive_GameBase                         & gb,
+	 UI::UniqueWindow::Registry                   & registry,
+	 Interactive_GameBase::Game_Main_Menu_Windows & windows)
 :
 UI::UniqueWindow
-	(&plr, &registry,
+	(&gb, &registry,
 	 102,
 	 vmargin()
 	 + 4 * (20 + vspacing()) + 2 * vgap() +
 	 35 + vspacing() + 35 +
 	 vmargin(),
 	 _("Options")),
-m_player(plr),
+m_gb(gb),
 m_windows(windows),
 readme
 	(this,
@@ -109,25 +104,25 @@ exit_game
 
 
 void GameOptionsMenu::clicked_readme() {
-	fileview_window(m_player, m_windows.readme,  "txts/README");
+	fileview_window(m_gb, m_windows.readme,  "txts/README");
 }
 
 void GameOptionsMenu::clicked_license() {
-	fileview_window(m_player, m_windows.license, "txts/COPYING");
+	fileview_window(m_gb, m_windows.license, "txts/COPYING");
 }
 
 void GameOptionsMenu::clicked_authors() {
-	fileview_window(m_player, m_windows.authors, "txts/developers");
+	fileview_window(m_gb, m_windows.authors, "txts/developers");
 }
 
 void GameOptionsMenu::clicked_sound() {
 	if (m_windows.sound_options.window) delete m_windows.sound_options.window;
-	else new GameOptionsSoundMenu(m_player, m_windows.sound_options);
+	else new GameOptionsSoundMenu(m_gb, m_windows.sound_options);
 }
 
 void GameOptionsMenu::clicked_save_game() {
-	new Game_Main_Menu_Save_Game(m_player, m_windows.savegame);
+	new Game_Main_Menu_Save_Game(m_gb, m_windows.savegame);
 	die();
 }
 
-void GameOptionsMenu::clicked_exit_game() {m_player.end_modal(0);}
+void GameOptionsMenu::clicked_exit_game() {m_gb.end_modal(0);}

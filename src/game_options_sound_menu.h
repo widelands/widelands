@@ -19,7 +19,7 @@
 #ifndef GAME_OPTIONS_SOUND_MENU_H
 #define GAME_OPTIONS_SOUND_MENU_H
 
-#include "interactive_player.h"
+#include "interactive_gamebase.h"
 
 #include "ui_unique_window.h"
 #include "ui_textarea.h"
@@ -30,7 +30,7 @@
  * A window with all sound options.
  */
 struct GameOptionsSoundMenu : public UI::UniqueWindow {
-	GameOptionsSoundMenu(Interactive_Player &, UI::UniqueWindow::Registry &);
+	GameOptionsSoundMenu(Interactive_GameBase &, UI::UniqueWindow::Registry &);
 
 private:
 	UI::Checkbox         ingame_music;

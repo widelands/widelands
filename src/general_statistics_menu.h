@@ -27,14 +27,14 @@
 #include "ui_radiobutton.h"
 #include "ui_unique_window.h"
 
-struct Interactive_Player;
+struct Interactive_GameBase;
 namespace UI {
 struct Checkbox;
 struct Radiogroup;
 };
 
 struct General_Statistics_Menu : public UI::UniqueWindow {
-	General_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
+	General_Statistics_Menu(Interactive_GameBase &, UI::UniqueWindow::Registry &);
 
 private:
 	WUIPlot_Area         m_plot;

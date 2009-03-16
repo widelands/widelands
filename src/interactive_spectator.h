@@ -45,6 +45,8 @@ struct Interactive_Spectator : public Interactive_GameBase {
 
 private:
 	void toggle_chat();
+	void toggle_options_menu();
+	void toggle_statistics();
 	void exit_btn();
 	void save_btn();
 	void field_action();
@@ -53,9 +55,13 @@ private:
 	UI::Button<Interactive_Spectator> m_toggle_chat;
 	UI::Button<Interactive_Spectator> m_exit;
 	UI::Button<Interactive_Spectator> m_save;
+	UI::Button<Interactive_Spectator> m_toggle_options_menu;
+	UI::Button<Interactive_Spectator> m_toggle_statistics;
 	UI::Button<Interactive_Spectator> m_toggle_minimap;
 
+
 	UI::UniqueWindow::Registry m_chat;
+	UI::UniqueWindow::Registry m_options;
 };
 
 

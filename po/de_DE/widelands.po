@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3707\n"
+"Project-Id-Version: Widelands svn3708\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-16 12:53+0100\n"
-"PO-Revision-Date: 2009-03-16 12:49+0100\n"
+"POT-Creation-Date: 2009-03-16 16:04+0100\n"
+"PO-Revision-Date: 2009-03-16 15:25+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -614,7 +614,7 @@ msgstr "Verluste"
 
 #: ../../src/general_statistics_menu.cc:182
 msgid "Kills"
-msgstr "Verluste"
+msgstr "Siege"
 
 #: ../../src/general_statistics_menu.cc:188
 msgid "Military buildings lost"
@@ -686,16 +686,17 @@ msgid_plural "%u(+%u) soldiers"
 msgstr[0] "%u(+%u) Soldat"
 msgstr[1] "%u(+%u) Soldaten"
 
-#: ../../src/interactive_player.cc:157 ../../src/interactive_spectator.cc:48
+#: ../../src/interactive_player.cc:157 ../../src/interactive_spectator.cc:50
 msgid "Chat"
 msgstr "Chat"
 
-#: ../../src/interactive_player.cc:159 ../../src/game_options_menu.cc:48
+#: ../../src/interactive_player.cc:159 ../../src/interactive_spectator.cc:54
+#: ../../src/game_options_menu.cc:43
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:69
 msgid "Options"
 msgstr "Optionen"
 
-#: ../../src/interactive_player.cc:161
+#: ../../src/interactive_player.cc:161 ../../src/interactive_spectator.cc:56
 msgid "Statistics"
 msgstr "Statistik"
 
@@ -704,7 +705,7 @@ msgstr "Statistik"
 msgid "Objectives"
 msgstr "Aufgaben"
 
-#: ../../src/interactive_player.cc:165 ../../src/interactive_spectator.cc:51
+#: ../../src/interactive_player.cc:165 ../../src/interactive_spectator.cc:57
 #: ../../src/editor/editorinteractive.cc:73
 msgid "Minimap"
 msgstr "Minikarte"
@@ -1358,12 +1359,12 @@ msgstr "Zeige Arbeiter"
 msgid "Chat Menu"
 msgstr "Chat-Menü"
 
-#: ../../src/interactive_spectator.cc:49
-msgid "Exit Spectator Mode"
-msgstr "Beende Zuschauermodus"
+#: ../../src/interactive_spectator.cc:51
+msgid "Exit Replay"
+msgstr "Aufnahme beenden"
 
-#: ../../src/interactive_spectator.cc:50
-#: ../../src/game_main_menu_save_game.cc:63 ../../src/game_options_menu.cc:91
+#: ../../src/interactive_spectator.cc:52
+#: ../../src/game_main_menu_save_game.cc:63 ../../src/game_options_menu.cc:86
 msgid "Save Game"
 msgstr "Spiel speichern"
 
@@ -1371,7 +1372,7 @@ msgstr "Spiel speichern"
 msgid "Player 1"
 msgstr "Spieler 1"
 
-#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:82
+#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:77
 msgid "Sound Options"
 msgstr "Klang Optionen"
 
@@ -1511,20 +1512,20 @@ msgstr "Zeige Vorigen"
 msgid "Show next"
 msgstr "Zeige Nächsten"
 
-#: ../../src/game_options_menu.cc:58
+#: ../../src/game_options_menu.cc:53
 msgid "README"
 msgstr "Liesmich"
 
-#: ../../src/game_options_menu.cc:66
+#: ../../src/game_options_menu.cc:61
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:90
 msgid "License"
 msgstr "Lizenz"
 
-#: ../../src/game_options_menu.cc:74
+#: ../../src/game_options_menu.cc:69
 msgid "Authors"
 msgstr "Autoren"
 
-#: ../../src/game_options_menu.cc:101
+#: ../../src/game_options_menu.cc:96
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:97
 msgid "Exit Game"
 msgstr "Spiel beenden"
@@ -3042,14 +3043,14 @@ msgstr "(Keine Beschreibung vorhanden.)"
 msgid "no description defined"
 msgstr "Keine Beschreibung vorhanden."
 
+#~ msgid "Exit Spectator Mode"
+#~ msgstr "Beende Zuschauermodus"
+
 #~ msgid "You were kicked by the host."
 #~ msgstr "Du wurdest vom Gastgeber rausgeschmissen."
 
 #~ msgid "There are no open player slots left."
 #~ msgstr "Alle Plätze für dieses Spiel sind bereits belegt."
-
-#~ msgid "Exit Replay"
-#~ msgstr "Aufnahme beenden"
 
 #~ msgid "Widelands could not start the game, as player "
 #~ msgstr "Widelands konnte das Spiel nicht starten, da der Spieler "
