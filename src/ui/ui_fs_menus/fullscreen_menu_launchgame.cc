@@ -274,7 +274,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		if
 			((player.state == PlayerSettings::stateOpen) |
 			 ((player.state == PlayerSettings::stateComputer) &
-			 !settings.multiplayer) |
+			  !settings.multiplayer) |
 			 ((settings.playernum == i) & settings.multiplayer))
 			m_pos[i]->set_enabled(true);
 		else
@@ -477,7 +477,7 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
 		((pos < m_nr_players) &
 		 ((position.state == PlayerSettings::stateOpen) |
 		  ((position.state == PlayerSettings::stateComputer) &
-		  !settings.multiplayer)))
+		   !settings.multiplayer)))
 	{
 		const PlayerSettings oldOnPos = position;
 		m_settings->setPlayer(pos, player);

@@ -88,9 +88,10 @@ NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
 		throw warning
 			(_("Could not establish connection to host"),
 			 _
-			 	("Widelands could not establish a connection to the given adress.\n"
-				 "Either no Widelands server was running at the supposed port or\n"
-				 "the server shut down as you tried to connect."));
+			 	("Widelands could not establish a connection to the given "
+			 	 "adress.\n"
+			 	 "Either no Widelands server was running at the supposed port or\n"
+			 	 "the server shut down as you tried to connect."));
 
 	d->sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);

@@ -485,9 +485,10 @@ int32_t NetHost::getFrametime()
 
 std::string NetHost::getGameDescription()
 {
-char buf[200];
-	snprintf(buf, sizeof(buf), "network player %i (host)",
-	         d->settings.users[0].position);
+	char buf[200];
+	snprintf
+		(buf, sizeof(buf),
+		 "network player %i (host)", d->settings.users[0].position);
 	return buf;
 }
 
@@ -560,7 +561,7 @@ void NetHost::setPlayerState(uint8_t number, PlayerSettings::State state, bool h
 			if (host) // did host player send the user to lobby?
 				sendSystemChat
 					(_("Host sent player %s to the lobby!"),
-					   d->settings.users[i].name.c_str());
+					 d->settings.users[i].name.c_str());
 
 			// for local settings
 			uint32_t j = 0;
