@@ -108,16 +108,14 @@ train=soldier evade 0 1
 check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
 sleep=30000
 check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
-consume=bread
-consume=smoked_fish,smoked_meat:2
+consume=bread smoked_fish,smoked_meat:2
 train=soldier evade 1 2
 
 [upgrade_evade_1]
 check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
 sleep=30000
 check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
-consume=bread
-consume=smoked_fish,smoked_meat:2
+consume=bread smoked_fish,smoked_meat:2
 train=soldier evade 1 2
 
 [idle]
