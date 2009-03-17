@@ -1373,7 +1373,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		}
 	}
 	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) {
-		if (number == 0 || number >= s.players.size())
+		if (number == s.playernum || number >= s.players.size())
 			return;
 
 		if (state == PlayerSettings::stateOpen)
@@ -1388,7 +1388,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].ai = ai;
 	}
 	virtual void nextPlayerState(uint8_t number) {
-		if (number == 0 || number >= s.players.size())
+		if (number == s.playernum || number >= s.players.size())
 			return;
 
 		const Computer_Player::ImplementationVector& impls =
