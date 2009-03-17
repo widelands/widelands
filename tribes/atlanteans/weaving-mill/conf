@@ -42,9 +42,7 @@ produce=golden_tabard
 [work]
 call=produce_spidercloth
 call=produce_tabard
-call=produce_spidercloth
 call=produce_golden_tabard
-call=produce_spidercloth
 return=skipped
 
 [idle]

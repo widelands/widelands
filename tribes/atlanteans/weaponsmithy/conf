@@ -33,7 +33,7 @@ work=_Work
 
 [produce_light_trident]
 return=skipped unless economy needs light_trident
-consume=planks
+consume=iron planks
 sleep=20000
 playFX=../../../sound/smiths/smith 192
 animate=working 30000
