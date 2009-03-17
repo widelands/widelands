@@ -730,7 +730,7 @@ Do a modification at soldier capacity on military and training sites.
 TODO: Check that building is a military or a training site.
 ===============
 */
-void Building_Window::act_change_soldier_capacity(int32_t value)
+void Building_Window::act_change_soldier_capacity(int32_t const value)
 {
 	if (m_building)
 		m_player->game().send_player_change_soldier_capacity (*m_building, value);
@@ -739,14 +739,14 @@ void Building_Window::act_change_soldier_capacity(int32_t value)
 
 /*
 ===============
-Building_Window::act_debug
-
 Callback for debug window
 ===============
 */
 void Building_Window::act_debug()
 {
-	show_mapobject_debug(*m_player, *m_building);
+	show_field_debug
+		(*m_player,
+		 m_player->game().map().get_fcoords(m_building->get_position()));
 }
 
 
